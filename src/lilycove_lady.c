@@ -29,18 +29,198 @@ static u8 sub_818E258(const u8 *);
 
 extern const u8 gUnknown_085EEB7E[]; // Lady$
 
-extern const u16 gUnknown_0860B074[5];
-extern const u16 gUnknown_0860B07E[3];
-extern const u16 *const gUnknown_0860B1A4[16];
-extern const u16 gUnknown_0860B1E4[16];
-extern const u16 gUnknown_0860B204[16];
-extern const u8 *const gUnknown_0860B224[];
-extern const u16 *const gUnknown_0860B2EC[6];
-extern const u16 gUnknown_0860B304[6];
-extern const u8 *const gUnknown_0860B310[5];
-extern const u8 *const gUnknown_0860B324[5];
-extern const u8 *const gUnknown_0860B338[5];
-extern const u16 gUnknown_0860B34C[5];
+static const u16 gUnknown_0860B074[] = {
+        0x62, 0xcb, 0xdc, 0xcc, 0xd1
+};
+static const u16 gUnknown_0860B07E[] = {
+        0x1a, 0x14, 0x0a
+};
+
+static const u16 Unknown_0860B084[] = {
+        0x101b, 0x1623, 0x1812, 0x102c, 0x020e, 0x0c03, 0x1a0b, 0x0210, 0x020d
+};
+
+static const u16 Unknown_0860B096[] = {
+        0x101b, 0x1013, 0x1020, 0x1a0f, 0x020c, 0x0c03, 0x0211, 0x0203, 0x0400
+};
+
+static const u16 Unknown_0860B0A8[] = {
+        0x0e0f, 0x1018, 0x020e, 0x0204, 0x0c03, 0xffff, 0x0212, 0x0451, 0x0463
+};
+
+static const u16 Unknown_0860B0BA[] = {
+        0x101b, 0x100b, 0x0e0d, 0x141a, 0x181d, 0x0c03, 0x141e, 0x1a26, 0x1823
+};
+
+static const u16 Unknown_0860B0CC[] = {
+        0x101b, 0x181d, 0x1018, 0x0a02, 0x2014, 0x0c03, 0x0208, 0x1824, 0x181c
+};
+
+static const u16 Unknown_0860B0DE[] = {
+        0x101b, 0x1000, 0x1c19, 0x265d, 0x0c03, 0xffff, 0x0447, 0x045d, 0x042c
+};
+
+static const u16 Unknown_0860B0F0[] = {
+        0x101b, 0x1034, 0x1e11, 0x100b, 0x1a08, 0x0c03, 0x044b, 0x0446, 0x040a
+};
+
+static const u16 Unknown_0860B102[] = {
+        0x101b, 0x1000, 0x274f, 0x0626, 0x0c03, 0xffff, 0x0442, 0x0411, 0x0450
+};
+
+static const u16 Unknown_0860B114[] = {
+        0x101b, 0x1000, 0x1c19, 0x043c, 0x0c03, 0xffff, 0x0421, 0x0464, 0x0435
+};
+
+static const u16 Unknown_0860B126[] = {
+        0x101b, 0x1203, 0x1030, 0x0207, 0x0c03, 0xffff, 0x0210, 0x020e, 0x020d
+};
+
+static const u16 Unknown_0860B138[] = {
+        0x101b, 0x1623, 0x0a05, 0x020e, 0x0c03, 0xffff, 0x1a25, 0x181a, 0x181b
+};
+
+static const u16 Unknown_0860B14A[] = {
+        0x101b, 0x1823, 0x1603, 0x0a02, 0x1812, 0x0c03, 0x1a15, 0x1a23, 0x181b
+};
+
+static const u16 Unknown_0860B15C[] = {
+        0x1020, 0x020e, 0x1010, 0x1043, 0x1e0f, 0x0c03, 0x181c, 0x1a24, 0x1816
+};
+
+static const u16 Unknown_0860B16E[] = {
+        0x0446, 0x100b, 0x0620, 0x061c, 0x101b, 0x0c03, 0x0420, 0x0426, 0xffff
+};
+
+static const u16 Unknown_0860B180[] = {
+        0x0400, 0x100b, 0x0639, 0x061c, 0x101b, 0x0c03, 0x040e, 0x0410, 0xffff
+};
+
+static const u16 Unknown_0860B192[] = {
+        0x041f, 0x100b, 0x0639, 0x061c, 0x101b, 0x0c03, 0x0445, 0x0400, 0xffff
+};
+
+static const u16 *const gUnknown_0860B1A4[] = {
+        Unknown_0860B084,
+        Unknown_0860B096,
+        Unknown_0860B0A8,
+        Unknown_0860B0BA,
+        Unknown_0860B0CC,
+        Unknown_0860B0DE,
+        Unknown_0860B0F0,
+        Unknown_0860B102,
+        Unknown_0860B114,
+        Unknown_0860B126,
+        Unknown_0860B138,
+        Unknown_0860B14A,
+        Unknown_0860B15C,
+        Unknown_0860B16E,
+        Unknown_0860B180,
+        Unknown_0860B192
+};
+
+static const u16 gUnknown_0860B1E4[] = {
+        0x0210, 0x0400, 0x0212, 0x1a26, 0x0208, 0x045d, 0x040a, 0x0411, 0x0464, 0x020e, 0x1a25, 0x181b, 0x1a24, 0x0420, 0x0410, 0x0400
+};
+
+static const u16 gUnknown_0860B204[] = {
+        0x007b, 0x007f, 0x0081, 0x0023, 0x0023, 0x0023, 0x00a5, 0x00a7, 0x00a6, 0x000b, 0x012f, 0x006b, 0x006d, 0x0044, 0x0044, 0x000c
+};
+
+extern const u8 gUnknown_085EEB83[];
+extern const u8 gUnknown_085EEB8C[];
+extern const u8 gUnknown_085EEB95[];
+extern const u8 gUnknown_085EEB9E[];
+extern const u8 gUnknown_085EEBA4[];
+extern const u8 gUnknown_085EEBAB[];
+
+static const u8 *const gUnknown_0860B224[] = {
+        gUnknown_085EEB83,
+        gUnknown_085EEB8C,
+        gUnknown_085EEB95,
+        gUnknown_085EEB9E,
+        gUnknown_085EEBA4,
+        gUnknown_085EEBAB
+};
+
+static const u16 Unknown_0860B23C[] = {
+        0x0056, 0x0053, 0x0054, 0x000e, 0x0012, 0x000f, 0x00a7, 0x0011, 0x0010, 0x0018, 0x0019, 0x001e, 0x0000
+};
+
+static const u16 Unknown_0860B256[] = {
+        0x0051, 0x006a, 0x006b, 0x00cc, 0x00c2, 0x002f, 0x0067, 0x0068, 0x0087, 0x0089, 0x008b, 0x009d, 0x00a0, 0x00a5, 0x0004, 0x0002, 0x0000
+};
+
+static const u16 Unknown_0860B278[] = {
+        0x0021, 0x000d, 0x001a, 0x001b, 0x001c, 0x00cc, 0x00ca, 0x0026, 0x0086, 0x0096, 0x0097, 0x009a, 0x00a2, 0x00a6, 0x0000
+};
+
+static const u16 Unknown_0860B296[] = {
+        0x0020, 0x004d, 0x004b, 0x004c, 0x0027, 0x0028, 0x0029, 0x002a, 0x002b, 0x006e, 0x005d, 0x006c, 0x006d, 0x006a, 0x006b, 0x00d6, 0x00bc, 0x00b3, 0x000b, 0x000c, 0x0000
+};
+
+static const u16 Unknown_0860B2C0[] = {
+        0x001f, 0x0013, 0x0014, 0x004a, 0x004e, 0x0049, 0x00a5, 0x00c8, 0x0067, 0x006f, 0x0000
+};
+
+static const u16 Unknown_0860B2D6[] = {
+        0x00b7, 0x00d3, 0x00d2, 0x00d8, 0x009e, 0x00a6, 0x00ab, 0x00aa, 0x006c, 0x006d, 0x0000
+};
+
+static const u16 *const gUnknown_0860B2EC[] = {
+        Unknown_0860B23C,
+        Unknown_0860B256,
+        Unknown_0860B278,
+        Unknown_0860B296,
+        Unknown_0860B2C0,
+        Unknown_0860B2D6
+};
+
+static const u16 gUnknown_0860B304[] = {
+        0x0b, 0x6e, 0x40, 0x6f, 0x44, 0x47
+};
+
+extern const u8 gUnknown_085EEB2B[];
+extern const u8 gUnknown_085EEB34[];
+extern const u8 gUnknown_085EEB3A[];
+extern const u8 gUnknown_085EEB41[];
+extern const u8 gUnknown_085EEB4A[];
+extern const u8 gUnknown_085EEB51[];
+extern const u8 gUnknown_085EEB5A[];
+extern const u8 gUnknown_085EEB61[];
+extern const u8 gUnknown_085EEB6A[];
+extern const u8 gUnknown_085EEB74[];
+extern const u8 gUnknown_085EADA4[];
+extern const u8 gUnknown_085EADB5[];
+extern const u8 gUnknown_085EADC4[];
+extern const u8 gUnknown_085EADD5[];
+extern const u8 gUnknown_085EADE7[];
+
+static const u8 *const gUnknown_0860B310[] = {
+        gUnknown_085EEB2B,
+        gUnknown_085EEB34,
+        gUnknown_085EEB3A,
+        gUnknown_085EEB41,
+        gUnknown_085EEB4A
+};
+static const u8 *const gUnknown_0860B324[] = {
+        gUnknown_085EEB51,
+        gUnknown_085EEB5A,
+        gUnknown_085EEB61,
+        gUnknown_085EEB6A,
+        gUnknown_085EEB74
+};
+static const u8 *const gUnknown_0860B338[] = {
+        gUnknown_085EADA4,
+        gUnknown_085EADB5,
+        gUnknown_085EADC4,
+        gUnknown_085EADD5,
+        gUnknown_085EADE7
+};
+
+static const u16 gUnknown_0860B34C[] = {
+        0x0120, 0x013b, 0x011e, 0x013d, 0x0019
+};
 
 static EWRAM_DATA struct LilycoveLadyFavour *gUnknown_0203CD64 = NULL;
 static EWRAM_DATA struct LilycoveLadyQuiz *gUnknown_0203CD68 = NULL;

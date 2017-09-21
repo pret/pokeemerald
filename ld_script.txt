@@ -380,7 +380,7 @@ SECTIONS {
         data/battle_controller_recorded_opponent.o(.rodata);
         data/battle_controller_recorded_player.o(.rodata);
         data/data_emerald.o(.rodata.deleteme);
-        data/lilycove_lady.o(.rodata);
+        src/lilycove_lady.o(.rodata);
         data/data_emerald.o(.rodata);
         data/battle_controller_player_partner.o(.rodata);
         data/data_emerald2.o(.rodata);
