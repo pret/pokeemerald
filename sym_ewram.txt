@@ -1763,15 +1763,7 @@ gUnknown_0203CCE8: @ 203CCE8
 	.space 0x4
 
     .include "src/battle_dome_cards.o"
-
-gUnknown_0203CD64: @ 203CD64
-	.space 0x4
-
-gUnknown_0203CD68: @ 203CD68
-	.space 0x4
-
-gUnknown_0203CD6C: @ 203CD6C
-	.space 0x4
+    .include "src/lilycove_lady.o"
 
 gUnknown_0203CD70: @ 203CD70
 	.space 0x4

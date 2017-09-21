@@ -28,5 +28,6 @@ void strange_npc_table_clear(void);
 const struct MapHeader *get_mapheader_by_bank_and_number(u8, u8);
 void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 void sub_8086230(void);
+void c2_exit_to_overworld_2_switch(void);
 
 #endif //GUARD_ROM4_H

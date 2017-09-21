@@ -1,43 +1,11 @@
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
+    @ This section was decompiled in battle_dome_cards.
+    @ On its merge, this section should be deleted.
+    @ This section contains three objects and accounts for 28 bytes.
+
 	.section .rodata
-
-gUnknown_0860B074:: @ 860B074
-	.incbin "baserom.gba", 0x60b074, 0xa
-
-gUnknown_0860B07E:: @ 860B07E
-	.incbin "baserom.gba", 0x60b07e, 0x126
-
-gUnknown_0860B1A4:: @ 860B1A4
-	.incbin "baserom.gba", 0x60b1a4, 0x40
-
-gUnknown_0860B1E4:: @ 860B1E4
-	.incbin "baserom.gba", 0x60b1e4, 0x20
-
-gUnknown_0860B204:: @ 860B204
-	.incbin "baserom.gba", 0x60b204, 0x20
-
-gUnknown_0860B224:: @ 860B224
-	.incbin "baserom.gba", 0x60b224, 0xc8
-
-gUnknown_0860B2EC:: @ 860B2EC
-	.incbin "baserom.gba", 0x60b2ec, 0x18
-
-gUnknown_0860B304:: @ 860B304
-	.incbin "baserom.gba", 0x60b304, 0xc
-
-gUnknown_0860B310:: @ 860B310
-	.incbin "baserom.gba", 0x60b310, 0x14
-
-gUnknown_0860B324:: @ 860B324
-	.incbin "baserom.gba", 0x60b324, 0x14
-
-gUnknown_0860B338:: @ 860B338
-	.incbin "baserom.gba", 0x60b338, 0x14
-
-gUnknown_0860B34C:: @ 860B34C
-	.incbin "baserom.gba", 0x60b34c, 0xc
 
 gUnknown_0860B358:: @ 860B358
 	.incbin "baserom.gba", 0x60b358, 0x1630
