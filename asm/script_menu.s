@@ -724,7 +724,7 @@ _080E23AC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E23D4
-	ldr r0, =gUnknown_085EB18B
+	ldr r0, =gText_HallOfFame
 	adds r1, r5, 0
 	bl display_text_and_get_width
 	adds r5, r0, 0
@@ -751,7 +751,7 @@ _080E23D4:
 	adds r0, r6, 0
 	movs r1, 0
 	bl SetStandardWindowBorderStyle
-	ldr r2, =gUnknown_085EB18B
+	ldr r2, =gText_HallOfFame
 	movs r0, 0x21
 	str r0, [sp]
 	movs r5, 0xFF
@@ -762,7 +762,7 @@ _080E23D4:
 	movs r1, 0x1
 	adds r3, r7, 0
 	bl PrintTextOnWindow
-	ldr r2, =gUnknown_085EB198
+	ldr r2, =gText_LogOff
 	movs r0, 0x31
 	str r0, [sp]
 	str r5, [sp, 0x4]
@@ -786,7 +786,7 @@ _080E2448:
 	adds r0, r6, 0
 	movs r1, 0
 	bl SetStandardWindowBorderStyle
-	ldr r2, =gUnknown_085EB198
+	ldr r2, =gText_LogOff
 	movs r0, 0x21
 	str r0, [sp]
 	movs r0, 0xFF
@@ -803,7 +803,7 @@ _080E247A:
 	lsrs r1, r0, 24
 	cmp r1, 0
 	beq _080E24B0
-	ldr r2, =gUnknown_085EB176
+	ldr r2, =gText_LanettesPC
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0xFF
@@ -817,7 +817,7 @@ _080E247A:
 	b _080E24C6
 	.pool
 _080E24B0:
-	ldr r2, =gUnknown_085EB169
+	ldr r2, =gText_SomeonesPC
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0xFF
@@ -829,7 +829,7 @@ _080E24B0:
 	bl PrintTextOnWindow
 _080E24C6:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EB183
+	ldr r1, =gText_PlayersPC
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r6, 0
@@ -1677,7 +1677,7 @@ CreateStartMenu: @ 80E2BAC
 	adds r0, r4, 0
 	movs r1, 0
 	bl SetStandardWindowBorderStyle
-	ldr r2, =gUnknown_085EB25C
+	ldr r2, =gText_MenuOptionPokedex
 	movs r0, 0x9
 	str r0, [sp]
 	movs r5, 0xFF
@@ -1688,7 +1688,7 @@ CreateStartMenu: @ 80E2BAC
 	movs r1, 0x1
 	movs r3, 0x8
 	bl PrintTextOnWindow
-	ldr r2, =gUnknown_085EB264
+	ldr r2, =gText_MenuOptionPokemon
 	movs r0, 0x19
 	str r0, [sp]
 	str r5, [sp, 0x4]
@@ -1697,7 +1697,7 @@ CreateStartMenu: @ 80E2BAC
 	movs r1, 0x1
 	movs r3, 0x8
 	bl PrintTextOnWindow
-	ldr r2, =gUnknown_085EB26C
+	ldr r2, =gText_MenuOptionBag
 	movs r0, 0x29
 	str r0, [sp]
 	str r5, [sp, 0x4]
@@ -1706,7 +1706,7 @@ CreateStartMenu: @ 80E2BAC
 	movs r1, 0x1
 	movs r3, 0x8
 	bl PrintTextOnWindow
-	ldr r2, =gUnknown_085EB270
+	ldr r2, =gText_MenuOptionPokenav
 	movs r0, 0x39
 	str r0, [sp]
 	str r5, [sp, 0x4]
@@ -1725,7 +1725,7 @@ CreateStartMenu: @ 80E2BAC
 	movs r1, 0x1
 	movs r3, 0x8
 	bl PrintTextOnWindow
-	ldr r2, =gUnknown_085EB279
+	ldr r2, =gText_MenuOptionSave
 	movs r0, 0x59
 	str r0, [sp]
 	str r5, [sp, 0x4]
@@ -1734,7 +1734,7 @@ CreateStartMenu: @ 80E2BAC
 	movs r1, 0x1
 	movs r3, 0x8
 	bl PrintTextOnWindow
-	ldr r2, =gUnknown_085EB27E
+	ldr r2, =gText_MenuOptionOption
 	movs r0, 0x69
 	str r0, [sp]
 	str r5, [sp, 0x4]
@@ -1743,7 +1743,7 @@ CreateStartMenu: @ 80E2BAC
 	movs r1, 0x1
 	movs r3, 0x8
 	bl PrintTextOnWindow
-	ldr r2, =gUnknown_085EB285
+	ldr r2, =gText_MenuOptionExit
 	movs r0, 0x79
 	str r0, [sp]
 	str r5, [sp, 0x4]

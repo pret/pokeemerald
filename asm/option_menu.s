@@ -906,7 +906,7 @@ sub_80BAC38: @ 80BAC38
 	adds r1, r0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r4, =gUnknown_085EE5D4
+	ldr r4, =gText_TextSpeedSlow
 	mov r0, sp
 	ldrb r3, [r0]
 	adds r0, r4, 0
@@ -917,14 +917,14 @@ sub_80BAC38: @ 80BAC38
 	movs r2, 0
 	bl GetStringWidth
 	adds r4, r0, 0
-	ldr r0, =gUnknown_085EE5DF
+	ldr r0, =gText_TextSpeedMid
 	mov r8, r0
 	movs r0, 0x1
 	mov r1, r8
 	movs r2, 0
 	bl GetStringWidth
 	adds r5, r0, 0
-	ldr r6, =gUnknown_085EE5E9
+	ldr r6, =gText_TextSpeedFast
 	movs r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0
@@ -1000,13 +1000,13 @@ sub_80BAD08: @ 80BAD08
 	adds r1, r0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =gUnknown_085EE5F4
+	ldr r0, =gText_BattleSceneOn
 	mov r1, sp
 	ldrb r3, [r1]
 	movs r1, 0x68
 	movs r2, 0x10
 	bl sub_80BAB68
-	ldr r4, =gUnknown_085EE5FD
+	ldr r4, =gText_BattleSceneOff
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0xC6
@@ -1061,13 +1061,13 @@ sub_80BAD84: @ 80BAD84
 	adds r1, r0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =gUnknown_085EE607
+	ldr r0, =gText_BattleStyleShift
 	mov r1, sp
 	ldrb r3, [r1]
 	movs r1, 0x68
 	movs r2, 0x20
 	bl sub_80BAB68
-	ldr r4, =gUnknown_085EE613
+	ldr r4, =gText_BattleStyleSet
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0xC6
@@ -1125,13 +1125,13 @@ sub_80BAE08: @ 80BAE08
 	adds r1, r0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =gUnknown_085EE61D
+	ldr r0, =gText_SoundMono
 	mov r1, sp
 	ldrb r3, [r1]
 	movs r1, 0x68
 	movs r2, 0x30
 	bl sub_80BAB68
-	ldr r4, =gUnknown_085EE628
+	ldr r4, =gText_SoundStereo
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0xC6
@@ -1243,9 +1243,9 @@ sub_80BAF0C: @ 80BAF0C
 	adds r0, r1
 	lsrs r6, r0, 24
 	movs r5, 0
-	ldr r1, =gUnknown_085EE640
+	ldr r1, =gText_FrameTypeNumber
 	ldrb r0, [r1]
-	ldr r7, =gUnknown_085EE635
+	ldr r7, =gText_FrameType
 	cmp r0, 0xFF
 	beq _080BAF44
 	adds r2, r1, 0
@@ -1394,7 +1394,7 @@ sub_80BB028: @ 80BB028
 	adds r1, r0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r4, =gUnknown_085EE647
+	ldr r4, =gText_ButtonTypeNormal
 	mov r0, sp
 	ldrb r3, [r0]
 	adds r0, r4, 0
@@ -1406,14 +1406,14 @@ sub_80BB028: @ 80BB028
 	movs r2, 0
 	bl GetStringWidth
 	adds r4, r0, 0
-	ldr r0, =gUnknown_085EE654
+	ldr r0, =gText_ButtonTypeLR
 	mov r8, r0
 	movs r0, 0x1
 	mov r1, r8
 	movs r2, 0
 	bl GetStringWidth
 	adds r5, r0, 0
-	ldr r6, =gUnknown_085EE65D
+	ldr r6, =gText_ButtonTypeLEqualsA
 	movs r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0
@@ -1461,7 +1461,7 @@ sub_80BB0D0: @ 80BB0D0
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EE589
+	ldr r2, =gText_Option
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0xFF

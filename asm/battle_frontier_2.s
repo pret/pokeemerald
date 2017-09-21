@@ -2398,7 +2398,7 @@ sub_819B9B4: @ 819B9B4
 	movs r0, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EEBB2
+	ldr r2, =gText_RentalPkmn2
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -2481,20 +2481,20 @@ sub_819BA64: @ 819BA64
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0x1
 	bne _0819BA88
-	ldr r2, =gUnknown_085EEBC1
+	ldr r2, =gText_SelectFirstPkmn
 	b _0819BA9C
 	.pool
 _0819BA88:
 	cmp r0, 0x2
 	bne _0819BA94
-	ldr r2, =gUnknown_085EEBDB
+	ldr r2, =gText_SelectSecondPkmn
 	b _0819BA9C
 	.pool
 _0819BA94:
-	ldr r2, =gUnknown_085EEC2D
+	ldr r2, =gText_TheseThreePkmnOkay
 	cmp r0, 0x3
 	bne _0819BA9C
-	ldr r2, =gUnknown_085EEBF6
+	ldr r2, =gText_SelectThirdPkmn
 _0819BA9C:
 	movs r0, 0x5
 	str r0, [sp]
@@ -2521,7 +2521,7 @@ sub_819BAC8: @ 819BAC8
 	movs r0, 0x2
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EEC50
+	ldr r2, =gText_CantSelectSamePkmn
 	movs r0, 0x5
 	str r0, [sp]
 	movs r0, 0
@@ -2560,7 +2560,7 @@ sub_819BAFC: @ 819BAFC
 	str r4, [sp]
 	movs r6, 0
 	str r6, [sp, 0x4]
-	ldr r0, =gUnknown_085EEC15
+	ldr r0, =gText_Summary
 	str r0, [sp, 0x8]
 	movs r0, 0x3
 	movs r1, 0x1
@@ -2571,7 +2571,7 @@ sub_819BAFC: @ 819BAFC
 	beq _0819BB60
 	str r4, [sp]
 	str r6, [sp, 0x4]
-	ldr r0, =gUnknown_085EEC24
+	ldr r0, =gText_Deselect
 	str r0, [sp, 0x8]
 	movs r0, 0x3
 	movs r1, 0x1
@@ -2583,7 +2583,7 @@ sub_819BAFC: @ 819BAFC
 _0819BB60:
 	str r4, [sp]
 	str r5, [sp, 0x4]
-	ldr r0, =gUnknown_085EEC10
+	ldr r0, =gText_Rent
 	str r0, [sp, 0x8]
 	movs r0, 0x3
 	movs r1, 0x1
@@ -2595,7 +2595,7 @@ _0819BB74:
 	str r0, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_085EEC1D
+	ldr r0, =gText_Others2
 	str r0, [sp, 0x8]
 	movs r0, 0x3
 	movs r1, 0x1
@@ -2625,7 +2625,7 @@ sub_819BBA8: @ 819BBA8
 	str r5, [sp]
 	movs r4, 0
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085EEC49
+	ldr r0, =gText_Yes2
 	str r0, [sp, 0x8]
 	movs r0, 0x4
 	movs r1, 0x1
@@ -2634,7 +2634,7 @@ sub_819BBA8: @ 819BBA8
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085EEC4D
+	ldr r0, =gText_No2
 	str r0, [sp, 0x8]
 	movs r0, 0x4
 	movs r1, 0x1
@@ -4584,7 +4584,7 @@ sub_819CC24: @ 819CC24
 	ldrsh r5, [r4, r0]
 	cmp r5, 0
 	bne _0819CC5A
-	ldr r0, =gUnknown_085EECBB
+	ldr r0, =gText_QuitSwapping
 	bl sub_819EBEC
 	ldr r0, =gUnknown_03001284
 	ldr r0, [r0]
@@ -4670,7 +4670,7 @@ sub_819CCD4: @ 819CCD4
 	adds r1, 0x30
 	movs r2, 0x1
 	bl sub_819F2B4
-	ldr r0, =gUnknown_085EECF0
+	ldr r0, =gText_AcceptThisPkmn
 	bl sub_819EBEC
 	ldr r0, [r4]
 	adds r0, 0x20
@@ -6176,12 +6176,12 @@ _0819D948:
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0
 	bne _0819D964
-	ldr r0, =gUnknown_085EEC73
+	ldr r0, =gText_SelectPkmnToSwap
 	bl sub_819EBEC
 	b _0819D96A
 	.pool
 _0819D964:
-	ldr r0, =gUnknown_085EEC8B
+	ldr r0, =gText_SelectPkmnToAccept
 	bl sub_819EBEC
 _0819D96A:
 	ldr r0, =gUnknown_03001284
@@ -6765,7 +6765,7 @@ _0819DF02:
 	b _0819E006
 	.pool
 _0819DF10:
-	ldr r0, =gUnknown_085EEC73
+	ldr r0, =gText_SelectPkmnToSwap
 	bl sub_819EBEC
 	movs r0, 0x2
 	bl PutWindowTilemap
@@ -8272,7 +8272,7 @@ sub_819EB18: @ 819EB18
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EEC66
+	ldr r2, =gText_PkmnSwap
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -8402,7 +8402,7 @@ sub_819EC20: @ 819EC20
 	str r5, [sp]
 	movs r4, 0
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085EECAA
+	ldr r0, =gText_Summary2
 	str r0, [sp, 0x8]
 	movs r0, 0x3
 	movs r1, 0x1
@@ -8411,7 +8411,7 @@ sub_819EC20: @ 819EC20
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085EECA5
+	ldr r0, =gText_Swap
 	str r0, [sp, 0x8]
 	movs r0, 0x3
 	movs r1, 0x1
@@ -8420,7 +8420,7 @@ sub_819EC20: @ 819EC20
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085EECB2
+	ldr r0, =gText_Rechoose
 	str r0, [sp, 0x8]
 	movs r0, 0x3
 	movs r1, 0x1
@@ -8450,7 +8450,7 @@ sub_819EC94: @ 819EC94
 	str r5, [sp]
 	movs r4, 0
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085EECCA
+	ldr r0, =gText_Yes3
 	str r0, [sp, 0x8]
 	movs r0, 0x4
 	movs r1, 0x1
@@ -8459,7 +8459,7 @@ sub_819EC94: @ 819EC94
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085EECCE
+	ldr r0, =gText_No3
 	str r0, [sp, 0x8]
 	movs r0, 0x4
 	movs r1, 0x1
@@ -8523,12 +8523,12 @@ sub_819ED34: @ 819ED34
 	beq _0819ED56
 	cmp r0, 0x1
 	bne _0819ED60
-	ldr r0, =gUnknown_085EECD1
+	ldr r0, =gText_PkmnForSwap
 	movs r1, 0
 	movs r2, 0x5
 	bl sub_819ECF0
 _0819ED56:
-	ldr r0, =gUnknown_085EECDD
+	ldr r0, =gText_Cancel3
 	movs r1, 0x18
 	movs r2, 0x5
 	bl sub_819ECF0
@@ -8554,12 +8554,12 @@ sub_819ED78: @ 819ED78
 	beq _0819ED9A
 	cmp r0, 0x1
 	bne _0819EDA4
-	ldr r0, =gUnknown_085EECD1
+	ldr r0, =gText_PkmnForSwap
 	movs r1, 0x8
 	movs r2, 0x3
 	bl sub_819ECF0
 _0819ED9A:
-	ldr r0, =gUnknown_085EECDD
+	ldr r0, =gText_Cancel3
 	movs r1, 0x20
 	movs r2, 0x3
 	bl sub_819ECF0
@@ -8588,14 +8588,14 @@ _0819EDCC:
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0x1
 	bne _0819EDF6
-	ldr r0, =gUnknown_085EECD1
+	ldr r0, =gText_PkmnForSwap
 	movs r1, 0x8
 	movs r2, 0x3
 	bl sub_819ECF0
 	b _0819EDF6
 	.pool
 _0819EDEC:
-	ldr r0, =gUnknown_085EECDD
+	ldr r0, =gText_Cancel3
 	movs r1, 0x20
 	movs r2, 0x3
 	bl sub_819ECF0
@@ -9401,7 +9401,7 @@ _0819F4C8:
 	.4byte _0819F548
 	.4byte _0819F568
 _0819F4DC:
-	ldr r0, =gUnknown_085EED0A
+	ldr r0, =gText_SamePkmnInPartyAlready
 	bl sub_819EBEC
 	ldr r0, =gUnknown_03001284
 	ldr r0, [r0]
@@ -9446,7 +9446,7 @@ _0819F52C:
 	bl CopyWindowToVram
 	b _0819F54E
 _0819F548:
-	ldr r0, =gUnknown_085EEC8B
+	ldr r0, =gText_SelectPkmnToAccept
 	bl sub_819EBEC
 _0819F54E:
 	ldr r0, =gTasks
@@ -11469,9 +11469,9 @@ _081A0528:
 	movs r0, 0x12
 	mov r10, r0
 	movs r6, 0x8
-	ldr r0, =gUnknown_085EAEB1
+	ldr r0, =gText_Lv50
 	str r0, [sp, 0xC]
-	ldr r0, =gUnknown_085EAEB8
+	ldr r0, =gText_OpenLevel
 	str r0, [sp, 0x10]
 	b _081A0652
 	.pool
@@ -11580,9 +11580,9 @@ _081A061C:
 	movs r0, 0x12
 	mov r10, r0
 	movs r6, 0x8
-	ldr r0, =gUnknown_085ED193
+	ldr r0, =gText_Give
 	str r0, [sp, 0xC]
-	ldr r0, =gUnknown_085ED198
+	ldr r0, =gText_NoNeed
 	str r0, [sp, 0x10]
 	b _081A0652
 	.pool
@@ -11590,9 +11590,9 @@ _081A0634:
 	movs r1, 0x14
 	mov r10, r1
 	movs r6, 0x8
-	ldr r0, =gUnknown_085EAE62
+	ldr r0, =gText_Yes
 	str r0, [sp, 0xC]
-	ldr r0, =gUnknown_085EAE66
+	ldr r0, =gText_No
 	str r0, [sp, 0x10]
 	b _081A0652
 	.pool
@@ -12950,11 +12950,11 @@ _081A1140:
 	ands r0, r1
 	cmp r0, 0x1
 	bne _081A115C
-	ldr r1, =gUnknown_085EAEB1
+	ldr r1, =gText_Lv50
 	b _081A1174
 	.pool
 _081A115C:
-	ldr r1, =gUnknown_085EAEB8
+	ldr r1, =gText_OpenLevel
 	b _081A1174
 	.pool
 _081A1164:
@@ -14386,7 +14386,7 @@ _081A1D24:
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE302
+	ldr r1, =gText_WinStreak
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	mov r1, r10
@@ -14434,7 +14434,7 @@ sub_81A1D78: @ 81A1D78
 	adds r4, r0
 	adds r4, r1
 	ldrh r1, [r4]
-	ldr r0, =gUnknown_085EE319
+	ldr r0, =gText_Record
 	str r5, [sp]
 	bl sub_81A1CD8
 	add sp, 0x4
@@ -14545,7 +14545,7 @@ _081A1E66:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081A1E88
-	ldr r0, =gUnknown_085EE311
+	ldr r0, =gText_Current
 	str r7, [sp]
 	adds r1, r4, 0
 	mov r2, r8
@@ -14554,7 +14554,7 @@ _081A1E66:
 	b _081A1E96
 	.pool
 _081A1E88:
-	ldr r0, =gUnknown_085EE320
+	ldr r0, =gText_Prev
 	str r7, [sp]
 	adds r1, r4, 0
 	mov r2, r8
@@ -14593,7 +14593,7 @@ sub_81A1EA8: @ 81A1EA8
 	cmp r7, 0
 	bne _081A1EF0
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EE158
+	ldr r1, =gText_SingleBattleRoomResults
 	bl StringExpandPlaceholders
 	b _081A1F28
 	.pool
@@ -14601,7 +14601,7 @@ _081A1EF0:
 	cmp r7, 0x1
 	bne _081A1F08
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EE178
+	ldr r1, =gText_DoubleBattleRoomResults
 	bl StringExpandPlaceholders
 	b _081A1F28
 	.pool
@@ -14609,13 +14609,13 @@ _081A1F08:
 	cmp r7, 0x2
 	bne _081A1F20
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EE198
+	ldr r1, =gText_MultiBattleRoomResults
 	bl StringExpandPlaceholders
 	b _081A1F28
 	.pool
 _081A1F20:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EE1B7
+	ldr r1, =gText_LinkMultiBattleRoomResults
 	bl StringExpandPlaceholders
 _081A1F28:
 	ldr r0, =gStringVar4
@@ -14623,7 +14623,7 @@ _081A1F28:
 	bl sub_81A1C4C
 	ldr r6, =gUnknown_0203AB74
 	ldrb r0, [r6]
-	ldr r2, =gUnknown_085EE2F2
+	ldr r2, =gText_Lv502
 	movs r1, 0x31
 	mov r8, r1
 	str r1, [sp]
@@ -14635,7 +14635,7 @@ _081A1F28:
 	movs r3, 0x10
 	bl PrintTextOnWindow
 	ldrb r0, [r6]
-	ldr r2, =gUnknown_085EE2F9
+	ldr r2, =gText_OpenLv
 	movs r1, 0x61
 	mov r9, r1
 	str r1, [sp]
@@ -14830,8 +14830,8 @@ _081A20E6:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081A210C
-	ldr r0, =gUnknown_085EE311
-	ldr r1, =gUnknown_085EE338
+	ldr r0, =gText_Current
+	ldr r1, =gText_ClearStreak
 	str r7, [sp]
 	str r4, [sp, 0x4]
 	mov r2, r8
@@ -14840,8 +14840,8 @@ _081A20E6:
 	b _081A211C
 	.pool
 _081A210C:
-	ldr r0, =gUnknown_085EE320
-	ldr r1, =gUnknown_085EE338
+	ldr r0, =gText_Prev
+	ldr r1, =gText_ClearStreak
 	str r7, [sp]
 	str r4, [sp, 0x4]
 	mov r2, r8
@@ -14881,13 +14881,13 @@ sub_81A2134: @ 81A2134
 	cmp r7, 0
 	bne _081A217C
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EE1DB
+	ldr r1, =gText_SingleBattleTourneyResults
 	bl StringExpandPlaceholders
 	b _081A2184
 	.pool
 _081A217C:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EE1FE
+	ldr r1, =gText_DoubleBattleTourneyResults
 	bl StringExpandPlaceholders
 _081A2184:
 	ldr r0, =gStringVar4
@@ -14895,7 +14895,7 @@ _081A2184:
 	bl sub_81A1C4C
 	ldr r1, =gUnknown_0203AB74
 	ldrb r0, [r1]
-	ldr r2, =gUnknown_085EE2F2
+	ldr r2, =gText_Lv502
 	movs r6, 0x21
 	str r6, [sp]
 	movs r5, 0xFF
@@ -14907,7 +14907,7 @@ _081A2184:
 	bl PrintTextOnWindow
 	ldr r1, =gUnknown_0203AB74
 	ldrb r0, [r1]
-	ldr r2, =gUnknown_085EE2F9
+	ldr r2, =gText_OpenLv
 	movs r1, 0x61
 	str r1, [sp]
 	str r5, [sp, 0x4]
@@ -14935,13 +14935,13 @@ _081A2184:
 	str r0, [sp]
 	movs r0, 0x31
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_085EE319
-	ldr r1, =gUnknown_085EE338
+	ldr r0, =gText_Record
+	ldr r1, =gText_ClearStreak
 	movs r3, 0x40
 	bl sub_81A2008
-	ldr r1, =gUnknown_085EE332
+	ldr r1, =gText_Total
 	mov r10, r1
-	ldr r0, =gUnknown_085EE349
+	ldr r0, =gText_Championships
 	mov r8, r0
 	ldr r0, [r4]
 	ldr r1, =0x00000d1c
@@ -14972,8 +14972,8 @@ _081A2184:
 	str r0, [sp]
 	movs r0, 0x71
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_085EE319
-	ldr r1, =gUnknown_085EE338
+	ldr r0, =gText_Record
+	ldr r1, =gText_ClearStreak
 	movs r3, 0x40
 	bl sub_81A2008
 	ldr r0, [r4]
@@ -15052,7 +15052,7 @@ _081A2304:
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE302
+	ldr r1, =gText_WinStreak
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	mov r1, r10
@@ -15100,7 +15100,7 @@ sub_81A2358: @ 81A2358
 	adds r4, r0
 	adds r4, r1
 	ldrh r1, [r4]
-	ldr r0, =gUnknown_085EE319
+	ldr r0, =gText_Record
 	str r5, [sp]
 	bl sub_81A22B8
 	add sp, 0x4
@@ -15186,7 +15186,7 @@ _081A241E:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081A2440
-	ldr r0, =gUnknown_085EE311
+	ldr r0, =gText_Current
 	str r7, [sp]
 	adds r1, r4, 0
 	mov r2, r8
@@ -15195,7 +15195,7 @@ _081A241E:
 	b _081A244E
 	.pool
 _081A2440:
-	ldr r0, =gUnknown_085EE320
+	ldr r0, =gText_Prev
 	str r7, [sp]
 	adds r1, r4, 0
 	mov r2, r8
@@ -15234,13 +15234,13 @@ sub_81A2460: @ 81A2460
 	cmp r7, 0
 	bne _081A24A8
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EE221
+	ldr r1, =gText_SingleBattleHallResults
 	bl StringExpandPlaceholders
 	b _081A24B0
 	.pool
 _081A24A8:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EE241
+	ldr r1, =gText_DoubleBattleHallResults
 	bl StringExpandPlaceholders
 _081A24B0:
 	ldr r0, =gStringVar4
@@ -15248,7 +15248,7 @@ _081A24B0:
 	bl sub_81A1C4C
 	ldr r6, =gUnknown_0203AB74
 	ldrb r0, [r6]
-	ldr r2, =gUnknown_085EE2F2
+	ldr r2, =gText_Lv502
 	movs r1, 0x31
 	mov r8, r1
 	str r1, [sp]
@@ -15260,7 +15260,7 @@ _081A24B0:
 	movs r3, 0x10
 	bl PrintTextOnWindow
 	ldrb r0, [r6]
-	ldr r2, =gUnknown_085EE2F9
+	ldr r2, =gText_OpenLv
 	movs r1, 0x61
 	mov r9, r1
 	str r1, [sp]
@@ -15434,8 +15434,8 @@ _081A264C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081A2674
-	ldr r0, =gUnknown_085EE311
-	ldr r1, =gUnknown_085EE35B
+	ldr r0, =gText_Current
+	ldr r1, =gText_RoomsCleared
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	adds r2, r7, 0
@@ -15444,8 +15444,8 @@ _081A264C:
 	b _081A2684
 	.pool
 _081A2674:
-	ldr r0, =gUnknown_085EE320
-	ldr r1, =gUnknown_085EE35B
+	ldr r0, =gText_Prev
+	ldr r1, =gText_RoomsCleared
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	adds r2, r7, 0
@@ -15480,14 +15480,14 @@ sub_81A2698: @ 81A2698
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE261
+	ldr r1, =gText_BattleChoiceResults
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_81A1C4C
 	ldrb r0, [r6]
-	ldr r2, =gUnknown_085EE2F2
+	ldr r2, =gText_Lv502
 	movs r1, 0x21
 	str r1, [sp]
 	movs r5, 0xFF
@@ -15498,7 +15498,7 @@ sub_81A2698: @ 81A2698
 	movs r3, 0x8
 	bl PrintTextOnWindow
 	ldrb r0, [r6]
-	ldr r2, =gUnknown_085EE2F9
+	ldr r2, =gText_OpenLv
 	movs r1, 0x61
 	str r1, [sp]
 	str r5, [sp, 0x4]
@@ -15513,9 +15513,9 @@ sub_81A2698: @ 81A2698
 	movs r2, 0x72
 	movs r3, 0x21
 	bl sub_81A2618
-	ldr r0, =gUnknown_085EE319
+	ldr r0, =gText_Record
 	mov r10, r0
-	ldr r7, =gUnknown_085EE35B
+	ldr r7, =gText_RoomsCleared
 	ldr r5, =gSaveBlock2Ptr
 	ldr r0, [r5]
 	ldr r1, =0x00000e08
@@ -15529,9 +15529,9 @@ sub_81A2698: @ 81A2698
 	adds r1, r7, 0
 	movs r3, 0x40
 	bl sub_81A258C
-	ldr r0, =gUnknown_085EE332
+	ldr r0, =gText_Total
 	mov r8, r0
-	ldr r1, =gUnknown_085EE36D
+	ldr r1, =gText_TimesCleared
 	mov r9, r1
 	ldr r0, [r5]
 	ldr r1, =0x00000e0c
@@ -15633,7 +15633,7 @@ _081A2834:
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE381
+	ldr r1, =gText_KOsInARow
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	mov r1, r10
@@ -15678,7 +15678,7 @@ sub_81A2888: @ 81A2888
 	adds r1, r2
 	adds r1, r0
 	ldrh r1, [r1]
-	ldr r0, =gUnknown_085EE319
+	ldr r0, =gText_Record
 	str r3, [sp]
 	adds r2, r4, 0
 	adds r3, r5, 0
@@ -15743,7 +15743,7 @@ _081A2928:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081A2948
-	ldr r0, =gUnknown_085EE311
+	ldr r0, =gText_Current
 	str r6, [sp]
 	adds r1, r5, 0
 	adds r2, r7, 0
@@ -15752,7 +15752,7 @@ _081A2928:
 	b _081A2956
 	.pool
 _081A2948:
-	ldr r0, =gUnknown_085EE320
+	ldr r0, =gText_Prev
 	str r6, [sp]
 	adds r1, r5, 0
 	adds r2, r7, 0
@@ -15785,14 +15785,14 @@ sub_81A2968: @ 81A2968
 	movs r0, 0xA
 	bl sub_81A1C90
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE27C
+	ldr r1, =gText_SetKOTourneyResults
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl sub_81A1C4C
 	ldrb r0, [r5]
-	ldr r2, =gUnknown_085EE2F2
+	ldr r2, =gText_Lv502
 	movs r1, 0x31
 	str r1, [sp]
 	movs r6, 0xFF
@@ -15803,7 +15803,7 @@ sub_81A2968: @ 81A2968
 	movs r3, 0x10
 	bl PrintTextOnWindow
 	ldrb r0, [r5]
-	ldr r2, =gUnknown_085EE2F9
+	ldr r2, =gText_OpenLv
 	movs r1, 0x61
 	str r1, [sp]
 	str r6, [sp, 0x4]
@@ -15896,7 +15896,7 @@ _081A2A80:
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE302
+	ldr r1, =gText_WinStreak
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	mov r1, r10
@@ -15915,7 +15915,7 @@ _081A2A80:
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085EE392
+	ldr r1, =gText_TimesVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	mov r1, r10
@@ -15973,7 +15973,7 @@ sub_81A2B04: @ 81A2B04
 	adds r2, r0
 	adds r2, r1
 	ldrh r2, [r2]
-	ldr r0, =gUnknown_085EE319
+	ldr r0, =gText_Record
 	str r3, [sp]
 	str r4, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -16102,7 +16102,7 @@ _081A2C3E:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081A2C68
-	ldr r0, =gUnknown_085EE311
+	ldr r0, =gText_Current
 	mov r1, r8
 	str r1, [sp]
 	mov r1, r9
@@ -16116,7 +16116,7 @@ _081A2C3E:
 	b _081A2C80
 	.pool
 _081A2C68:
-	ldr r0, =gUnknown_085EE320
+	ldr r0, =gText_Prev
 	mov r1, r8
 	str r1, [sp]
 	mov r1, r9
@@ -16160,13 +16160,13 @@ sub_81A2C94: @ 81A2C94
 	cmp r7, 0
 	bne _081A2CD8
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EE298
+	ldr r1, =gText_BattleSwapSingleResults
 	bl StringExpandPlaceholders
 	b _081A2CE0
 	.pool
 _081A2CD8:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EE2B8
+	ldr r1, =gText_BattleSwapDoubleResults
 	bl StringExpandPlaceholders
 _081A2CE0:
 	ldr r0, =gStringVar4
@@ -16175,7 +16175,7 @@ _081A2CE0:
 	ldr r0, =gUnknown_0203AB74
 	mov r8, r0
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_085EE2F2
+	ldr r2, =gText_Lv502
 	movs r6, 0x21
 	str r6, [sp]
 	movs r5, 0xFF
@@ -16187,7 +16187,7 @@ _081A2CE0:
 	bl PrintTextOnWindow
 	mov r1, r8
 	ldrb r0, [r1]
-	ldr r2, =gUnknown_085EE326
+	ldr r2, =gText_RentalSwap
 	str r6, [sp]
 	str r5, [sp, 0x4]
 	str r4, [sp, 0x8]
@@ -16196,7 +16196,7 @@ _081A2CE0:
 	bl PrintTextOnWindow
 	mov r1, r8
 	ldrb r0, [r1]
-	ldr r2, =gUnknown_085EE2F9
+	ldr r2, =gText_OpenLv
 	movs r1, 0x61
 	str r1, [sp]
 	str r5, [sp, 0x4]
@@ -16301,7 +16301,7 @@ _081A2E00:
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE39C
+	ldr r1, =gText_FloorsCleared
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	mov r1, r10
@@ -16346,7 +16346,7 @@ sub_81A2E54: @ 81A2E54
 	adds r1, r2
 	adds r1, r0
 	ldrh r1, [r1]
-	ldr r0, =gUnknown_085EE319
+	ldr r0, =gText_Record
 	str r3, [sp]
 	adds r2, r4, 0
 	adds r3, r5, 0
@@ -16413,7 +16413,7 @@ _081A2EF8:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081A2F18
-	ldr r0, =gUnknown_085EE311
+	ldr r0, =gText_Current
 	str r6, [sp]
 	adds r1, r5, 0
 	adds r2, r7, 0
@@ -16422,7 +16422,7 @@ _081A2EF8:
 	b _081A2F26
 	.pool
 _081A2F18:
-	ldr r0, =gUnknown_085EE320
+	ldr r0, =gText_Prev
 	str r6, [sp]
 	adds r1, r5, 0
 	adds r2, r7, 0
@@ -16453,14 +16453,14 @@ sub_81A2F38: @ 81A2F38
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE2D8
+	ldr r1, =gText_BattleQuestResults
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl sub_81A1C4C
 	ldrb r0, [r5]
-	ldr r2, =gUnknown_085EE2F2
+	ldr r2, =gText_Lv502
 	movs r1, 0x31
 	str r1, [sp]
 	movs r6, 0xFF
@@ -16471,7 +16471,7 @@ sub_81A2F38: @ 81A2F38
 	movs r3, 0x8
 	bl PrintTextOnWindow
 	ldrb r0, [r5]
-	ldr r2, =gUnknown_085EE2F9
+	ldr r2, =gText_OpenLv
 	movs r1, 0x61
 	str r1, [sp]
 	str r6, [sp, 0x4]
@@ -16532,7 +16532,7 @@ sub_81A2FF8: @ 81A2FF8
 	bl FillWindowPixelBuffer
 	ldr r0, =gStringVar4
 	mov r9, r0
-	ldr r1, =gUnknown_085EDF86
+	ldr r1, =gText_LinkContestResults
 	bl StringExpandPlaceholders
 	movs r0, 0x1
 	mov r1, r9
@@ -16550,7 +16550,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	mov r2, r9
 	bl PrintTextOnWindow
-	ldr r7, =gUnknown_085EDFA0
+	ldr r7, =gText_1st
 	movs r0, 0x1
 	adds r1, r7, 0
 	movs r2, 0x26
@@ -16568,7 +16568,7 @@ sub_81A2FF8: @ 81A2FF8
 	movs r1, 0x1
 	adds r2, r7, 0
 	bl PrintTextOnWindow
-	ldr r7, =gUnknown_085EDFA4
+	ldr r7, =gText_2nd
 	movs r0, 0x1
 	adds r1, r7, 0
 	movs r2, 0x26
@@ -16585,7 +16585,7 @@ sub_81A2FF8: @ 81A2FF8
 	movs r1, 0x1
 	adds r2, r7, 0
 	bl PrintTextOnWindow
-	ldr r7, =gUnknown_085EDFA8
+	ldr r7, =gText_3rd
 	movs r0, 0x1
 	adds r1, r7, 0
 	movs r2, 0x26
@@ -16602,7 +16602,7 @@ sub_81A2FF8: @ 81A2FF8
 	movs r1, 0x1
 	adds r2, r7, 0
 	bl PrintTextOnWindow
-	ldr r7, =gUnknown_085EDFAC
+	ldr r7, =gText_4th
 	movs r0, 0x1
 	adds r1, r7, 0
 	movs r2, 0x26
@@ -16620,7 +16620,7 @@ sub_81A2FF8: @ 81A2FF8
 	adds r2, r7, 0
 	bl PrintTextOnWindow
 	ldrb r0, [r4]
-	ldr r2, =gUnknown_085EB0E8
+	ldr r2, =gText_Cool
 	movs r1, 0x29
 	str r1, [sp]
 	str r6, [sp, 0x4]
@@ -16629,7 +16629,7 @@ sub_81A2FF8: @ 81A2FF8
 	movs r3, 0x6
 	bl PrintTextOnWindow
 	ldrb r0, [r4]
-	ldr r2, =gUnknown_085EB0ED
+	ldr r2, =gText_Beauty
 	movs r1, 0x39
 	str r1, [sp]
 	str r6, [sp, 0x4]
@@ -16638,7 +16638,7 @@ sub_81A2FF8: @ 81A2FF8
 	movs r3, 0x6
 	bl PrintTextOnWindow
 	ldrb r0, [r4]
-	ldr r2, =gUnknown_085EB0F4
+	ldr r2, =gText_Cute
 	movs r1, 0x49
 	str r1, [sp]
 	str r6, [sp, 0x4]
@@ -16647,7 +16647,7 @@ sub_81A2FF8: @ 81A2FF8
 	movs r3, 0x6
 	bl PrintTextOnWindow
 	ldrb r0, [r4]
-	ldr r2, =gUnknown_085EB0F9
+	ldr r2, =gText_Smart
 	movs r1, 0x59
 	str r1, [sp]
 	str r6, [sp, 0x4]
@@ -16656,7 +16656,7 @@ sub_81A2FF8: @ 81A2FF8
 	movs r3, 0x6
 	bl PrintTextOnWindow
 	ldrb r0, [r4]
-	ldr r2, =gUnknown_085EB0FF
+	ldr r2, =gText_Tough
 	movs r1, 0x69
 	str r1, [sp]
 	str r6, [sp, 0x4]
@@ -18104,7 +18104,7 @@ _081A3E38:
 	cmp r5, r4
 	bne _081A3E50
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB79
+	ldr r1, =gText_SpaceAndSpace
 	bl StringAppend
 	b _081A3EC8
 	.pool
@@ -18112,7 +18112,7 @@ _081A3E50:
 	cmp r5, r4
 	ble _081A3EC8
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB7F
+	ldr r1, =gText_CommaSpace
 	bl StringAppend
 	b _081A3EC8
 	.pool
@@ -18120,17 +18120,17 @@ _081A3E68:
 	cmp r4, r5
 	bne _081A3E80
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB79
+	ldr r1, =gText_SpaceAndSpace
 	bl StringAppend
 	b _081A3E88
 	.pool
 _081A3E80:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB7F
+	ldr r1, =gText_CommaSpace
 	bl StringAppend
 _081A3E88:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB86
+	ldr r1, =gText_NewLine
 	bl StringAppend
 	b _081A3EC8
 	.pool
@@ -18138,17 +18138,17 @@ _081A3EA0:
 	cmp r4, r5
 	bne _081A3EB8
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB79
+	ldr r1, =gText_SpaceAndSpace
 	bl StringAppend
 	b _081A3EC0
 	.pool
 _081A3EB8:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB7F
+	ldr r1, =gText_CommaSpace
 	bl StringAppend
 _081A3EC0:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB84
+	ldr r1, =gText_ScrollTextUp
 	bl StringAppend
 _081A3EC8:
 	ldr r0, =gStringVar1
@@ -18495,10 +18495,10 @@ _081A416A:
 	cmp r4, 0
 	bne _081A41A4
 	ldr r4, =gStringVar1
-	ldr r1, =gUnknown_085CCB82
+	ldr r1, =gText_Space2
 	adds r0, r4, 0
 	bl StringAppend
-	ldr r1, =gUnknown_085CCB88
+	ldr r1, =gText_Are
 	adds r0, r4, 0
 	bl StringAppend
 	b _081A4202
@@ -18509,17 +18509,17 @@ _081A41A4:
 	cmp r0, 0
 	beq _081A41C0
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB84
+	ldr r1, =gText_ScrollTextUp
 	bl StringAppend
 	b _081A41C8
 	.pool
 _081A41C0:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB82
+	ldr r1, =gText_Space2
 	bl StringAppend
 _081A41C8:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB8C
+	ldr r1, =gText_Are2
 	bl StringAppend
 	b _081A4202
 	.pool
@@ -18966,7 +18966,7 @@ sub_81A4594: @ 81A4594
 	ldrb r5, [r1]
 	lsls r4, r0, 1
 	adds r4, r0
-	ldr r1, =gUnknown_085EE424
+	ldr r1, =gText_1Dot
 	adds r4, r1
 	mov r1, r8
 	lsls r3, r1, 27
@@ -19076,7 +19076,7 @@ sub_81A4684: @ 81A4684
 	ldrb r0, [r1]
 	lsls r2, r6, 1
 	adds r2, r6
-	ldr r1, =gUnknown_085EE424
+	ldr r1, =gText_1Dot
 	adds r2, r1
 	lsls r3, r7, 27
 	lsrs r3, 24
@@ -20577,30 +20577,30 @@ _081A5328:
 	movs r0, 0x1
 	negs r0, r0
 	strb r0, [r1, 0x1]
-	ldr r0, =gUnknown_085CCDB2
+	ldr r0, =gText_JapaneseHonorific
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r4, =gDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0xF
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDB5
+	ldr r0, =gText_Vs
 	movs r1, 0x10
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDB8
+	ldr r0, =gText_RivalBuffer
 	bl StrCpyDecodeToDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0x11
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDBB
+	ldr r0, =gText_Mind
 	movs r1, 0x12
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDC0
+	ldr r0, =gText_Skill
 	movs r1, 0x13
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDC6
+	ldr r0, =gText_Body
 	movs r1, 0x14
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDCB
+	ldr r0, =gText_Judgement
 	bl StrCpyDecodeToDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0x15
@@ -20684,7 +20684,7 @@ _081A544C:
 _081A5464:
 	movs r3, 0x1
 	bl sub_81A5558
-	ldr r0, =gUnknown_085CCDCB
+	ldr r0, =gText_Judgement
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x15

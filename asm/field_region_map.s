@@ -157,7 +157,7 @@ _08170300:
 	movs r2, 0x27
 	movs r3, 0xD
 	bl SetWindowBorderStyle
-	ldr r5, =gUnknown_085EE8F1
+	ldr r5, =gText_Hoenn
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x38

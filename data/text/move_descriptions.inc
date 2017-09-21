@@ -1,3 +1,6 @@
+gNullMoveDescription:: @ 86181C0
+    .string "$"
+
 gPoundMoveDescription:: @ 86181C1
 	.string "Pounds the foe with\nforelegs or tail.$"
 

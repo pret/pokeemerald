@@ -1064,23 +1064,23 @@ sub_8135DAC: @ 8135DAC
 	movs r0, 0
 	adds r1, r4, 0
 	bl sub_8135D7C
-	ldr r1, =gUnknown_085E931D
+	ldr r1, =gText_Spicy
 	movs r0, 0x2
 	movs r2, 0
 	bl sub_8135D7C
-	ldr r1, =gUnknown_085E9323
+	ldr r1, =gText_Dry
 	movs r0, 0x3
 	movs r2, 0
 	bl sub_8135D7C
-	ldr r1, =gUnknown_085E9327
+	ldr r1, =gText_Sweet
 	movs r0, 0x4
 	movs r2, 0
 	bl sub_8135D7C
-	ldr r1, =gUnknown_085E932D
+	ldr r1, =gText_Bitter
 	movs r0, 0x5
 	movs r2, 0
 	bl sub_8135D7C
-	ldr r1, =gUnknown_085E9334
+	ldr r1, =gText_Sour
 	movs r0, 0x6
 	movs r2, 0
 	bl sub_8135D7C
@@ -1148,7 +1148,7 @@ _08135E7C:
 	adds r4, r7
 	ldr r0, [r5]
 	adds r0, r4
-	ldr r1, =gUnknown_085E9344
+	ldr r1, =gText_StowCase
 	bl StringCopy
 	ldr r1, [r5]
 	lsls r2, r6, 3
@@ -1231,7 +1231,7 @@ sub_8135F04: @ 8135F04
 	movs r2, 0
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085E934F
+	ldr r1, =gText_LvVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	pop {r4-r6}
@@ -2598,7 +2598,7 @@ sub_8136AB4: @ 8136AB4
 	ldr r1, [r1]
 	bl StringCopy
 	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085E9353
+	ldr r1, =gText_ThrowAwayVar1
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	bl sav2_get_text_speed
@@ -2654,7 +2654,7 @@ sub_8136B78: @ 8136B78
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085E9367
+	ldr r1, =gText_Var1ThrownAway
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	bl sav2_get_text_speed
@@ -4796,14 +4796,14 @@ sub_8137D5C: @ 8137D5C
 	movs r2, 0
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085EB5EE
+	ldr r1, =gText_SpaceTimes
 	adds r0, r4, 0
 	bl StringAppend
 	b _08137D90
 	.pool
 _08137D88:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB5CF
+	ldr r1, =gText_99TimesPlus
 	bl StringCopy
 _08137D90:
 	ldr r0, =0x00000e0f
@@ -4833,14 +4833,14 @@ _08137D90:
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085EB5E5
+	ldr r1, =gText_SpaceSeconds
 	adds r0, r4, 0
 	bl StringAppend
 	b _08137DF8
 	.pool
 _08137DF0:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085EB5DA
+	ldr r1, =gText_1MinutePlus
 	bl StringCopy
 _08137DF8:
 	movs r4, 0
@@ -6425,13 +6425,13 @@ sub_8138B10: @ 8138B10
 	cmp r0, 0
 	bne _08138B34
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB5F9
+	ldr r1, =gText_BigGuy
 	bl StringCopy
 	b _08138B3C
 	.pool
 _08138B34:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB601
+	ldr r1, =gText_BigGirl
 	bl StringCopy
 _08138B3C:
 	pop {r0}
@@ -6448,13 +6448,13 @@ sub_8138B48: @ 8138B48
 	cmp r0, 0
 	bne _08138B6C
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB60E
+	ldr r1, =gText_Daughter
 	bl StringCopy
 	b _08138B74
 	.pool
 _08138B6C:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB60A
+	ldr r1, =gText_Son
 	bl StringCopy
 _08138B74:
 	pop {r0}
@@ -8511,7 +8511,7 @@ sub_8139B60: @ 8139B60
 	ldrb r0, [r5]
 	movs r1, 0
 	bl SetStandardWindowBorderStyle
-	ldr r4, =gUnknown_085EB6A5
+	ldr r4, =gText_ElevatorNowOn
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x40
@@ -10131,7 +10131,7 @@ sub_813A8FC: @ 813A8FC
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085EB6AD
+	ldr r1, =gText_BP
 	bl StringCopy
 	movs r0, 0x1
 	add r1, sp, 0xC
@@ -12650,37 +12650,37 @@ _0813BE58:
 	.4byte _0813BEC0
 _0813BE70:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD14
+	ldr r1, =gText_Steven
 	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BE84:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD1B
+	ldr r1, =gText_Brawly
 	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BE98:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD22
+	ldr r1, =gText_Winona
 	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BEAC:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD29
+	ldr r1, =gText_Phoebe
 	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BEC0:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD30
+	ldr r1, =gText_Glacia
 	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BED4:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD0C
+	ldr r1, =gText_Wallace
 	bl StringCopy
 	b _0813BF04
 	.pool

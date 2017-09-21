@@ -511,7 +511,7 @@ sub_8178090: @ 8178090
 	movs r0, 0x3
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
-	ldr r4, =gUnknown_085E926B
+	ldr r4, =gText_BerryTag
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x40
@@ -573,7 +573,7 @@ sub_8178110: @ 8178110
 	adds r1, r6, 0
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9263
+	ldr r1, =gText_UnkF908Var1Var2
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -602,7 +602,7 @@ sub_8178174: @ 8178174
 	ldrb r0, [r0]
 	bl GetBerryInfo
 	adds r4, r0, 0
-	ldr r2, =gUnknown_085E9225
+	ldr r2, =gText_SizeSlash
 	movs r7, 0x1
 	str r7, [sp]
 	movs r0, 0xFF
@@ -652,7 +652,7 @@ _081781C8:
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9233
+	ldr r1, =gText_Var1DotVar2
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	str r7, [sp]
@@ -694,7 +694,7 @@ itemid_copy_name: @ 8178250
 	ldrb r0, [r0]
 	bl GetBerryInfo
 	adds r6, r0, 0
-	ldr r2, =gUnknown_085E922C
+	ldr r2, =gText_FirmSlash
 	movs r5, 0x11
 	str r5, [sp]
 	movs r0, 0xFF

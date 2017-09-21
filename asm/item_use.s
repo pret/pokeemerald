@@ -2510,7 +2510,7 @@ ItemUseInBattle_StatIncrease: @ 80FE4B8
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE518
-	ldr r2, =gUnknown_085E96F6
+	ldr r2, =gText_WontHaveEffect
 	ldr r3, =bag_menu_inits_lists_menu
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -2518,7 +2518,7 @@ ItemUseInBattle_StatIncrease: @ 80FE4B8
 	b _080FE53C
 	.pool
 _080FE518:
-	ldr r1, =gUnknown_085E96F6
+	ldr r1, =gText_WontHaveEffect
 	ldr r2, =sub_81C6714
 	adds r0, r4, 0
 	bl DisplayItemMessageInBattlePyramid

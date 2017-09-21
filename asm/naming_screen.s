@@ -4033,7 +4033,7 @@ sub_80E4EF0: @ 80E4EF0
 	str r1, [sp]
 	movs r1, 0
 	str r1, [sp, 0x4]
-	ldr r1, =gUnknown_085EEAF6
+	ldr r1, =gText_MoveOkBack
 	str r1, [sp, 0x8]
 	movs r1, 0
 	movs r2, 0x2

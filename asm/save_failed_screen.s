@@ -268,7 +268,7 @@ _08178FF8:
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl CopyWindowToVram
-	ldr r0, =gUnknown_085EC816
+	ldr r0, =gText_SaveFailedCheckingBackup
 	movs r1, 0x1
 	movs r2, 0
 	bl sub_8178F44
@@ -340,7 +340,7 @@ _0817929C:
 	ldrb r0, [r4]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_085EC917
+	ldr r0, =gText_CheckCompleted
 	movs r1, 0x1
 	movs r2, 0
 	bl sub_8178F44
@@ -353,7 +353,7 @@ _0817929C:
 	ldrb r0, [r4]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_085EC816
+	ldr r0, =gText_SaveFailedCheckingBackup
 	movs r1, 0x1
 	movs r2, 0
 	bl sub_8178F44
@@ -373,7 +373,7 @@ _081792EC:
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_085EC86F
+	ldr r0, =gText_BackupMemoryDamaged
 	b _08179330
 	.pool
 _0817931C:
@@ -385,7 +385,7 @@ _0817931C:
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _08179370
-	ldr r0, =gUnknown_085EC94F
+	ldr r0, =gText_SaveCompleteGameCannotContinue
 _08179330:
 	movs r1, 0x1
 	movs r2, 0
@@ -397,7 +397,7 @@ _08179348:
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_085EC86F
+	ldr r0, =gText_BackupMemoryDamaged
 	movs r1, 0x1
 	movs r2, 0
 	bl sub_8178F44
@@ -406,7 +406,7 @@ _08179348:
 	b _08179380
 	.pool
 _08179370:
-	ldr r0, =gUnknown_085EC9A2
+	ldr r0, =gText_SaveCompletePressA
 	movs r1, 0x1
 	movs r2, 0
 	bl sub_8178F44
@@ -436,7 +436,7 @@ sub_8179390: @ 8179390
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_085EC8D4
+	ldr r0, =gText_GamePlayCannotBeContinued
 	movs r1, 0x1
 	movs r2, 0
 	bl sub_8178F44

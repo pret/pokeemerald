@@ -1250,7 +1250,7 @@ RedrawMenuCursor: @ 8198448
 	bl FillWindowPixelRect
 	ldrb r0, [r5, 0x5]
 	ldrb r1, [r5, 0x6]
-	ldr r2, =gUnknown_085EE498
+	ldr r2, =gText_SelectorArrow3
 	ldrb r3, [r5]
 	ldrb r4, [r5, 0x8]
 	mov r6, r8
@@ -2139,7 +2139,7 @@ sub_8198AF8: @ 8198AF8
 	adds r2, r4, 0
 	adds r3, r5, 0
 	bl SetWindowBorderStyle
-	ldr r0, =gUnknown_085EE491
+	ldr r0, =gText_YesNo
 	str r0, [sp, 0xC]
 	add r1, sp, 0xC
 	ldrb r0, [r7]
@@ -2877,7 +2877,7 @@ sub_8199060: @ 8199060
 	lsrs r3, 24
 	ldrb r0, [r5, 0x5]
 	ldrb r1, [r5, 0x6]
-	ldr r2, =gUnknown_085EE498
+	ldr r2, =gText_SelectorArrow3
 	str r3, [sp]
 	movs r3, 0
 	str r3, [sp, 0x4]
@@ -3668,7 +3668,7 @@ CreateYesNoMenu: @ 81996C0
 	adds r2, r4, 0
 	adds r3, r5, 0
 	bl SetWindowBorderStyle
-	ldr r0, =gUnknown_085EE491
+	ldr r0, =gText_YesNo
 	str r0, [sp]
 	mov r1, sp
 	mov r2, r8

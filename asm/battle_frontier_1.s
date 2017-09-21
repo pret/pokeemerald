@@ -1802,7 +1802,7 @@ _0818F974:
 sub_818F9B0: @ 818F9B0
 	push {lr}
 	ldr r0, =gStringVar1
-	ldr r2, =gUnknown_085CCD20
+	ldr r2, =gRoundsStringTable
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	ldr r3, =0x00000cb2
@@ -1821,7 +1821,7 @@ sub_818F9B0: @ 818F9B0
 sub_818F9E0: @ 818F9E0
 	push {lr}
 	ldr r0, =gStringVar1
-	ldr r2, =gUnknown_085CCD20
+	ldr r2, =gRoundsStringTable
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	ldr r3, =0x00000cb2
@@ -10605,7 +10605,7 @@ _081944FC:
 	movs r2, 0
 	movs r1, 0x2
 	strb r1, [r0, 0x5]
-	ldr r0, =gUnknown_085CCCEE
+	ldr r0, =gText_BattleTourney
 	str r0, [sp, 0x4]
 	add r0, sp, 0x4
 	strb r1, [r0, 0x4]

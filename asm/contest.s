@@ -1579,7 +1579,7 @@ _080D84B8:
 	cmp r0, 0
 	beq _080D853C
 	add r0, sp, 0x4
-	ldr r1, =gUnknown_085ED1A0
+	ldr r1, =gText_ColorLightShadowDarkGrey
 	b _080D8566
 	.pool
 _080D853C:
@@ -1603,7 +1603,7 @@ _080D853C:
 	cmp r0, 0x3
 	beq _080D856C
 	add r0, sp, 0x4
-	ldr r1, =gUnknown_085ED1A7
+	ldr r1, =gText_ColorBlue
 _080D8566:
 	bl StringCopy
 	adds r5, r0, 0
@@ -6407,7 +6407,7 @@ sub_80DAED4: @ 80DAED4
 	lsls r4, r1, 24
 	lsrs r4, 24
 	ldr r0, =gDisplayedStringBattle
-	ldr r1, =gUnknown_085ED1AB
+	ldr r1, =gText_ColorTransparent
 	bl StringCopy
 	adds r1, r0, 0
 	subs r0, r1, 0x1
@@ -15507,7 +15507,7 @@ _080DF784:
 	mov r9, r0
 _080DF7AE:
 	add r0, sp, 0x4
-	ldr r1, =gUnknown_085ED1B2
+	ldr r1, =gText_CDot
 	bl StringCopy
 	adds r5, r0, 0
 	ldr r0, =gUnknown_02039F26
@@ -15604,7 +15604,7 @@ _080DF874:
 	mov r10, r1
 _080DF884:
 	add r0, sp, 0x4
-	ldr r1, =gUnknown_085ED1B5
+	ldr r1, =gText_BDot
 	bl StringCopy
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]

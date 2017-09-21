@@ -782,7 +782,7 @@ sub_8153E1C: @ 8153E1C
 	adds r4, r0, 0
 	bl EnableResetRTC
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085ECAD8
+	ldr r1, =gText_InGameClockUsable
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
