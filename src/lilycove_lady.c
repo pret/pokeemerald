@@ -17,16 +17,15 @@
 #include "easy_chat.h"
 #include "lilycove_lady.h"
 
-void SetLilycoveQuizLady(void);
-void SetLilycoveFavourLady(void);
-void SetLilycoveContestLady(void);
-void sub_818E004(void);
-void sub_818DBC4(void);
-void sub_818E674(void);
-bool32 sub_811F8D8(u16);
-u8 sub_818E13C(void);
-bool8 sub_818E1F4(void);
-u8 sub_818E258(const u8 *);
+static void SetLilycoveQuizLady(void);
+static void SetLilycoveFavourLady(void);
+static void SetLilycoveContestLady(void);
+static void sub_818E004(void);
+static void sub_818DBC4(void);
+static void sub_818E674(void);
+static u8 sub_818E13C(void);
+static bool8 sub_818E1F4(void);
+static u8 sub_818E258(const u8 *);
 
 extern const u8 gUnknown_085EEB7E[8];
 extern const u16 gUnknown_0860B074[5];
@@ -42,9 +41,9 @@ extern const u8 *const gUnknown_0860B324[5];
 extern const u8 *const gUnknown_0860B338[5];
 extern const u16 gUnknown_0860B34C[5];
 
-EWRAM_DATA struct LilycoveLadyFavour *gUnknown_0203CD64 = NULL;
-EWRAM_DATA struct LilycoveLadyQuiz *gUnknown_0203CD68 = NULL;
-EWRAM_DATA struct LilycoveLadyContest *gUnknown_0203CD6C = NULL;
+static EWRAM_DATA struct LilycoveLadyFavour *gUnknown_0203CD64 = NULL;
+static EWRAM_DATA struct LilycoveLadyQuiz *gUnknown_0203CD68 = NULL;
+static EWRAM_DATA struct LilycoveLadyContest *gUnknown_0203CD6C = NULL;
 
 extern EWRAM_DATA u16 gScriptItemId;
 
@@ -131,7 +130,7 @@ void sub_818DAEC(void)
     gScriptResult = GetLilycoveLadyId();
 }
 
-u8 sub_818DB04(const u16 *data)
+static u8 sub_818DB04(const u16 *data)
 {
     u8 len;
 
@@ -139,7 +138,7 @@ u8 sub_818DB04(const u16 *data)
     return len;
 }
 
-void sub_818DB20(void)
+static void sub_818DB20(void)
 {
     u8 size;
     u8 idx;
@@ -150,7 +149,7 @@ void sub_818DB20(void)
     gUnknown_0203CD64->unk_010 = gUnknown_0860B2EC[gUnknown_0203CD64->unk_00c][idx];
 }
 
-void SetLilycoveFavourLady(void)
+static void SetLilycoveFavourLady(void)
 {
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
     gUnknown_0203CD64->id = LILYCOVE_LADY_FAVOUR;
@@ -163,7 +162,7 @@ void SetLilycoveFavourLady(void)
     sub_818DB20();
 }
 
-void sub_818DBC4(void)
+static void sub_818DBC4(void)
 {
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
     gUnknown_0203CD64->id = LILYCOVE_LADY_FAVOUR;
@@ -187,7 +186,7 @@ u8 sub_818DBE8(void)
     }
 }
 
-const u8 *sub_818DC1C(u8 idx)
+static const u8 *sub_818DC1C(u8 idx)
 {
     return gUnknown_0860B224[idx];
 }
@@ -210,7 +209,7 @@ bool8 sub_818DC60(void)
     return FALSE;
 }
 
-void sub_818DCAC(u8 *dest, u16 itemId)
+static void sub_818DCAC(u8 *dest, u16 itemId)
 {
     StringCopy(dest, ItemId_GetItem(itemId)->name);
 }
@@ -221,7 +220,7 @@ void sub_818DCC8(void)
     sub_818DCAC(gStringVar2, gUnknown_0203CD64->itemId);
 }
 
-void sub_818DCF4(const u8 *src, u8 *dest)
+static void sub_818DCF4(const u8 *src, u8 *dest)
 {
     memset(dest, 0xFF, 8);
     StringCopy7(dest, src);
@@ -245,7 +244,7 @@ void sub_818DD78(void)
     sub_81AAC50();
 }
 
-bool8 sub_818DD84(u16 itemId)
+static bool8 sub_818DD84(u16 itemId)
 {
     u8 len;
     u8 i;
@@ -291,7 +290,7 @@ bool8 sub_818DE5C(void)
     return checkval < 5 ? FALSE : TRUE;
 }
 
-void sub_818DE88(u16 itemId)
+static void sub_818DE88(u16 itemId)
 {
     sub_818DCAC(gStringVar2, itemId);
 }
@@ -318,7 +317,7 @@ void sub_818DEF4(void)
     EnableBothScriptContexts();
 }
 
-void sub_818DF00(void)
+static void sub_818DF00(void)
 {
     u8 v0;
     u8 i;
@@ -334,7 +333,7 @@ void sub_818DF00(void)
     gUnknown_0203CD68->playerName[0] = EOS;
 }
 
-void SetLilycoveQuizLady(void)
+static void SetLilycoveQuizLady(void)
 {
     u8 i;
 
@@ -358,7 +357,7 @@ void SetLilycoveQuizLady(void)
     sub_818DF00();
 }
 
-void sub_818E004(void)
+static void sub_818E004(void)
 {
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
     gUnknown_0203CD68->id = LILYCOVE_LADY_QUIZ;
@@ -427,7 +426,7 @@ u8 sub_818E06C(void)
 }
 
 #ifdef NONMATCHING
-u8 sub_818E13C(void)
+static u8 sub_818E13C(void)
 {
     u8 retval;
     u8 len;
@@ -461,7 +460,7 @@ u8 sub_818E13C(void)
     return retval;
 }
 #else
-__attribute__((naked)) u8 sub_818E13C(void)
+__attribute__((naked)) static u8 sub_818E13C(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmovs r7, 0x1\n"
@@ -540,7 +539,7 @@ __attribute__((naked)) u8 sub_818E13C(void)
 }
 #endif
 
-u8 sub_818E1F4(void)
+static u8 sub_818E1F4(void)
 {
     bool8 response;
     u8 i;
@@ -558,7 +557,7 @@ u8 sub_818E1F4(void)
     return response;
 }
 
-u8 sub_818E258(const u8 *str)
+static u8 sub_818E258(const u8 *str)
 {
     u8 len;
     const u8 *ptr;
@@ -722,7 +721,7 @@ void sub_818E570(const struct LilycoveLadyQuiz *quiz)
     }
 }
 
-void sub_818E604(void)
+static void sub_818E604(void)
 {
     gUnknown_0203CD6C->playerName[0] = EOS;
     gUnknown_0203CD6C->fave_pkblk = 0;
@@ -731,7 +730,7 @@ void sub_818E604(void)
     gUnknown_0203CD6C->category = Random() % 5;
 }
 
-void SetLilycoveContestLady(void)
+static void SetLilycoveContestLady(void)
 {
     gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
     gUnknown_0203CD6C->id = LILYCOVE_LADY_CONTEST;
@@ -740,7 +739,7 @@ void SetLilycoveContestLady(void)
     gUnknown_0203CD6C->language = gGameLanguage;
 }
 
-void sub_818E674(void)
+static void sub_818E674(void)
 {
     gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
     gUnknown_0203CD6C->id = LILYCOVE_LADY_CONTEST;
@@ -751,7 +750,7 @@ void sub_818E674(void)
     }
 }
 
-void sub_818E6B0(u8 sheen)
+static void sub_818E6B0(u8 sheen)
 {
     gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
     if (gUnknown_0203CD6C->max_sheen <= sheen)
@@ -821,7 +820,7 @@ bool8 sub_818E704(struct Pokeblock *pokeblock)
     return response;
 }
 
-void sub_818E794(u8 *dest1, u8 *dest2)
+static void sub_818E794(u8 *dest1, u8 *dest2)
 {
     gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
     StringCopy(dest1, gUnknown_0860B324[gUnknown_0203CD6C->category]);
