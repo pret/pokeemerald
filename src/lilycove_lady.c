@@ -4,6 +4,8 @@
 
 #include "global.h"
 #include "main.h"
+#include "rom4.h"
+#include "rom6.h"
 #include "event_data.h"
 #include "script.h"
 #include "rng.h"
@@ -38,6 +40,7 @@ extern const u16 gUnknown_0860B304[6];
 extern const u8 *const gUnknown_0860B310[5];
 extern const u8 *const gUnknown_0860B324[5];
 extern const u8 *const gUnknown_0860B338[5];
+extern const u16 gUnknown_0860B34C[5];
 
 EWRAM_DATA struct LilycoveLadyFavour *gUnknown_0203CD64 = NULL;
 EWRAM_DATA struct LilycoveLadyQuiz *gUnknown_0203CD68 = NULL;
@@ -864,4 +867,55 @@ u8 sub_818E880(void)
     {
         return 0;
     }
+}
+
+bool8 sub_818E8B4(void)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (gUnknown_0203CD6C->phase == 1)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_818E8E0(void)
+{
+    bool8 response;
+
+    response = FALSE;
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (gUnknown_0203CD6C->fave_pkblk >= 5 || gUnknown_0203CD6C->other_pkblk >= 5)
+    {
+        response = TRUE;
+    }
+    return response;
+}
+
+void sub_818E914(void)
+{
+    sub_818E794(gStringVar2, gStringVar1);
+}
+
+void sub_818E92C(void)
+{
+    sub_81357FC(3, c2_exit_to_overworld_2_switch);
+}
+
+void sub_818E940(void)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    gUnknown_0203CD6C->phase = 1;
+}
+
+void sub_818E960(void)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    gSpecialVar_0x8005 = gUnknown_0860B34C[gUnknown_0203CD6C->category];
+}
+
+u8 sub_818E990(void)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    return gUnknown_0203CD6C->category;
 }
