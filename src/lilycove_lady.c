@@ -756,3 +756,61 @@ void sub_818E6B0(u8 sheen)
         gUnknown_0203CD6C->language = gGameLanguage;
     }
 }
+
+bool8 sub_818E704(struct Pokeblock *pokeblock)
+{
+    u8 sheen;
+    bool8 response;
+
+    sheen = 0;
+    response = FALSE;
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    switch (gUnknown_0203CD6C->category)
+    {
+        case 0:
+            if (pokeblock->spicy != 0)
+            {
+                sheen = pokeblock->spicy;
+                response = TRUE;
+            }
+            break;
+        case 1:
+            if (pokeblock->dry != 0)
+            {
+                sheen = pokeblock->dry;
+                response = TRUE;
+            }
+            break;
+        case 2:
+            if (pokeblock->sweet != 0)
+            {
+                sheen = pokeblock->sweet;
+                response = TRUE;
+            }
+            break;
+        case 3:
+            if (pokeblock->bitter != 0)
+            {
+                sheen = pokeblock->bitter;
+                response = TRUE;
+            }
+            break;
+        case 4:
+            if (pokeblock->sour != 0)
+            {
+                sheen = pokeblock->sour;
+                response = TRUE;
+            }
+            break;
+    }
+    if (response == TRUE)
+    {
+        sub_818E6B0(sheen);
+        gUnknown_0203CD6C->fave_pkblk ++;
+    }
+    else
+    {
+        gUnknown_0203CD6C->other_pkblk ++;
+    }
+    return response;
+}
