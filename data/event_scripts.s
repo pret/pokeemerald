@@ -181,7 +181,149 @@ gUnknown_08272604:: @ 8272604
 	.incbin "baserom.gba", 0x272604, 0x6b
 
 gUnknown_0827266F:: @ 827266F
-	.incbin "baserom.gba", 0x27266f, 0x1044
+	.string "Which PC should be accessed?$"
+
+	.string "Accessed SOMEONE’S PC.$"
+
+	.string "POKéMON Storage System opened.$"
+
+	.string "Accessed {PLAYER}’s PC.$"
+
+	.string "Accessed LANETTE’s PC.$"
+
+	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to rest your POKéMON?$"
+
+	.string "Okay, I’ll take your POKéMON\nfor a few seconds.$"
+
+	.string "Thank you for waiting.\pWe’ve restored your POKéMON\nto full health.$"
+
+	.string "We hope to see you again!$"
+
+	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to…$"
+
+	.string "Th-that card…\nCould it be… The GOLD CARD?!\pOh, the gold color is brilliant!\nThe four stars seem to sparkle!\pI’ve seen several TRAINERS with\na SILVER CARD before, but, {PLAYER},\lyou’re the first TRAINER I’ve ever\lseen with a GOLD CARD!\pOkay, {PLAYER}, please allow me\nthe honor of resting your POKéMON!$"
+
+	.string "I’m delighted to see you, {PLAYER}!\nYou want the usual, am I right?$"
+
+	.string "Okay, I’ll take your POKéMON\nfor a few seconds.$"
+
+	.string "Thank you for waiting.$"
+
+	.string "We hope to see you again!$"
+
+	.string "Welcome!\pHow may I serve you?$"
+
+	.string "Please come again!$"
+
+	.string "{PLAYER}{STRING 5}, welcome!\pWhat can I do for you?$"
+
+	.string "Obtained the {STR_VAR_2}!$"
+
+	.string "The BAG is full…$"
+
+	.string "{PLAYER} put away the {STR_VAR_2}\nin the {STR_VAR_3} POCKET.$"
+
+	.string "{PLAYER} found one {STR_VAR_2}!$"
+
+	.string "Too bad!\nThe BAG is full…$"
+
+	.string "{PLAYER} put away the {STR_VAR_2}\nin the BAG.$"
+
+	.string "Obtained the {STR_VAR_2}!$"
+
+	.string "Too bad! There’s no room left for\nanother {STR_VAR_2}…$"
+
+	.string "The {STR_VAR_2} was transferred\nto the PC.$"
+
+	.string "“Selected items for your convenience!”\nPOKéMON MART$"
+
+	.string "“Rejuvenate your tired partners!”\nPOKéMON CENTER$"
+
+	.string "{STR_VAR_1} might like this program.\n… … … … … … … … … … … … … … … …\pBetter get going!$"
+
+	.string "Welcome to LILYCOVE DEPARTMENT STORE.\pWhich floor would you like?$"
+
+	.string "The sandstorm is vicious.\nIt’s impossible to keep going.$"
+
+	.string "An item in the BAG can be\nregistered to SELECT for easy use.$"
+
+	.string "There’s an e-mail from POKéMON TRAINER\nSCHOOL.\p… … … … … …\pA POKéMON may learn up to four moves.\pA TRAINER’s expertise is tested on the\nmove sets chosen for POKéMON.\p… … … … … …$"
+
+	.string "{PLAYER} booted up the PC.$"
+
+	.string "The link was canceled.$"
+
+	.string "Want to give a nickname to\nthe {STR_VAR_2} you received?$"
+
+	.string "{PLAYER} is out of usable\nPOKéMON!\p{PLAYER} whited out!$"
+
+	.string "Registered {STR_VAR_1} {STR_VAR_2}\nin the POKéNAV.$"
+
+	.string "Do you know the TM SECRET POWER?\pOur group, we love the TM SECRET\nPOWER.\pOne of our members will give it to you.\nCome back and show me if you get it.\pWe’ll accept you as a member and sell\nyou good stuff in secrecy.$"
+
+	.string "Your POKéMON may be infected with\nPOKéRUS.\pLittle is known about the POKéRUS\nexcept that they are microscopic life-\lforms that attach to POKéMON.\pWhile infected, POKéMON are said to\ngrow exceptionally well.$"
+
+	.string "The water is dyed a deep blue…\nWould you like to SURF?$"
+
+	.string "{STR_VAR_1} used SURF!$"
+
+	.string "It sounded as if a door opened\nsomewhere far away.$"
+
+	.string "There is a big hole in the wall.$"
+
+	.string "I’m terribly sorry.\nThe POKéMON WIRELESS CLUB is\lundergoing adjustments now.$"
+
+	.string "It appears to be undergoing\nadjustments…$"
+
+	.string "I’m terribly sorry. The TRADE CENTER\nis undergoing inspections.$"
+
+	.string "I’m terribly sorry. The RECORD CORNER\nis under preparation.$"
+
+	.string "{PLAYER} handed over the\n{STR_VAR_1}.$"
+
+	.string "Thank you for accessing the\nMYSTERY GIFT System.$"
+
+	.string "{PLAYER} found one {STR_VAR_1}\n{STR_VAR_2}!$"
+
+	.string "The weird tree doesn’t like the\nWAILMER PAIL!\pThe weird tree attacked!$"
+
+	.string "The {STR_VAR_1} flew away!$"
+
+gText_PkmnTransferredSomeonesPC:: @ 8273216
+	.string "{STR_VAR_2} was transferred to\nSOMEONE’S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”$"
+
+gText_PkmnTransferredLanettesPC:: @ 8273256
+	.string "{STR_VAR_2} was transferred to\nLANETTE’S PC.\pIt was placed in \nBOX “{STR_VAR_1}.”$"
+
+gText_PkmnBoxSomeonesPCFull:: @ 8273296
+	.string "BOX “{STR_VAR_3}” on\nSOMEONE’S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
+
+gText_PkmnBoxLanettesPCFull:: @ 82732D9
+	.string "BOX “{STR_VAR_3}” on\nLANETTE’S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
+
+	.string "There’s no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan’t accept any more!$"
+
+	.string "Do you want to give a nickname to\nthis {STR_VAR_1}?$"
+
+	.string "There is a questionnaire.\nWould you like to fill it out?$"
+
+	.string "Thank you for taking the time to\nfill out our questionnaire.\pYour feedback will be used for\nfuture reference.$"
+
+	.string "Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY GIFT.\pFrom now on, you should be\nreceiving MYSTERY GIFTS!$"
+
+	.string "Once you save your game, you can\naccess the MYSTERY GIFT.$"
+
+	.string "Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY EVENT.$"
+
+	.string "Once you save your game, you can\naccess the MYSTERY EVENT.$"
+
+	.string "Thank you for using the MYSTERY\nEVENT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.$"
+
+	.string "It appears to be for use at\nthe LILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
+
+	.string "The massive downpour appears to\nhave stopped…$"
+
+	.string "The intense sunshine appears to\nhave subsided…$"
 
 gUnknown_082736B3:: @ 82736B3
 	.incbin "baserom.gba", 0x2736b3, 0x9

@@ -55,7 +55,7 @@ sub_80B23B0: @ 80B23B0
 	movs r1, 0
 	bl SetStandardWindowBorderStyle
 	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085EE667
+	ldr r1, =gText_XPLink
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1

@@ -45,8 +45,8 @@ static const u8 sGiftRibbonsMonDataIds[] =
     MON_DATA_GIFT_RIBBON_7
 };
 
-extern const u8 gOtherText_DecimalPoint[];
-extern const u8 gOtherText_Marco[];
+extern const u8 gText_DecimalPoint[];
+extern const u8 gText_Marco[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 
 #define CM_PER_INCH 2.54
@@ -103,7 +103,7 @@ static void FormatMonSizeRecord(u8 *string, u32 size)
 #endif
 
     string = ConvertIntToDecimalStringN(string, size / 10, 0, 8);
-    string = StringAppend(string, gOtherText_DecimalPoint);
+    string = StringAppend(string, gText_DecimalPoint);
     ConvertIntToDecimalStringN(string, size % 10, 0, 1);
 }
 
@@ -152,7 +152,7 @@ static void GetMonSizeRecordInfo(u16 species, u16 *sizeRecord)
     FormatMonSizeRecord(gStringVar3, size);
     StringCopy(gStringVar1, gSpeciesNames[species]);
     if (*sizeRecord == DEFAULT_MAX_SIZE)
-        StringCopy(gStringVar2, gOtherText_Marco);
+        StringCopy(gStringVar2, gText_Marco);
     else
         StringCopy(gStringVar2, gSaveBlock2Ptr->playerName);
 }

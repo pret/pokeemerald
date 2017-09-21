@@ -18,5 +18,6 @@ void SaveSerializedGame(void);
 void LoadSerializedGame(void);
 void LoadPlayerBag(void);
 void SavePlayerBag(void);
+void SetSaveBlocksPointers(u16);
 
 #endif // GUARD_LOAD_SAVE_H

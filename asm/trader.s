@@ -87,7 +87,7 @@ sub_8133A78: @ 8133A78
 	ldr r0, [r0]
 	str r0, [sp, 0xC]
 	str r1, [sp, 0x10]
-	ldr r1, =gUnknown_085EB7EA
+	ldr r1, =gText_Exit
 	movs r0, 0x1
 	movs r2, 0
 	bl GetStringWidth
@@ -193,7 +193,7 @@ _08133B94:
 	cmp r5, 0x3
 	bls _08133B3C
 	ldrb r0, [r7, 0x6]
-	ldr r2, =gUnknown_085EB7EA
+	ldr r2, =gText_Exit
 	lsls r1, r5, 4
 	adds r1, 0x1
 	lsls r1, 24

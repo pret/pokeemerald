@@ -217,7 +217,7 @@ SECTIONS {
         asm/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
         asm/intro.o(.text);
-        asm/reset_save_heap.o(.text);
+        src/reset_save_heap.o(.text);
         asm/field_region_map.o(.text);
         asm/battle_anim_8170478.o(.text);
         asm/hall_of_fame.o(.text);
@@ -239,8 +239,8 @@ SECTIONS {
         asm/recorded_battle.o(.text);
         asm/battle_controller_recorded_opponent.o(.text);
         asm/battle_controller_recorded_player.o(.text);
-        asm/battle_dome_cards.o(.text);
-        asm/lilycove_lady.o(.text);
+        src/battle_dome_cards.o(.text);
+        src/lilycove_lady.o(.text);
         asm/battle_frontier_1.o(.text);
         asm/new_menu_helpers.o(.text);
         asm/menu.o(.text);
@@ -378,6 +378,8 @@ SECTIONS {
         data/data_860A4AC.o(.rodata);
         data/battle_controller_recorded_opponent.o(.rodata);
         data/battle_controller_recorded_player.o(.rodata);
+        src/battle_dome_cards.o(.rodata);
+        src/lilycove_lady.o(.rodata);
         data/data_emerald.o(.rodata);
         data/battle_controller_player_partner.o(.rodata);
         data/data_emerald2pre1.o(.rodata);

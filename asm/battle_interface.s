@@ -3760,7 +3760,7 @@ sub_80741E8: @ 80741E8
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r5, =gDisplayedStringBattle
-	ldr r1, =gUnknown_085ED228
+	ldr r1, =gText_HighlightDarkGrey
 	adds r0, r5, 0
 	bl StringCopy
 	adds r0, r4, 0
@@ -3802,15 +3802,15 @@ _0807424A:
 	beq _08074268
 	cmp r6, 0xFE
 	beq _08074270
-	ldr r1, =gUnknown_085ED238
+	ldr r1, =gText_DynColor2
 	b _08074272
 	.pool
 _08074268:
-	ldr r1, =gUnknown_085ED22E
+	ldr r1, =gText_DynColor2Male
 	b _08074272
 	.pool
 _08074270:
-	ldr r1, =gUnknown_085ED233
+	ldr r1, =gText_DynColor1Female
 _08074272:
 	adds r0, r5, 0
 	bl StringCopy
@@ -4375,7 +4375,7 @@ sub_8074770: @ 8074770
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_085CCB2C
+	ldr r0, =gText_SafariBalls
 	add r1, sp, 0x4
 	str r1, [sp]
 	movs r1, 0
@@ -4419,7 +4419,7 @@ sub_80747D8: @ 80747D8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gUnknown_085CCB3C
+	ldr r1, =gText_SafariBallLeft
 	add r0, sp, 0x4
 	bl StringCopy
 	ldr r1, =gNumSafariBalls
