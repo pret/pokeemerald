@@ -259,7 +259,7 @@ SECTIONS {
         asm/battle_controller_player_partner.o(.text);
         asm/fldeff_groundshake.o(.text);
         asm/fossil_specials.o(.text);
-        asm/berry_fix_program.o(.text);
+        src/berry_fix_program.o(.text);
         asm/pokemon_summary_screen.o(.text);
         asm/pokenav.o(.text);
         asm/rayquaza_scene.o(.text);
@@ -382,6 +382,8 @@ SECTIONS {
         src/lilycove_lady.o(.rodata);
         data/data_emerald.o(.rodata);
         data/battle_controller_player_partner.o(.rodata);
+        data/data_emerald2pre1.o(.rodata);
+        src/berry_fix_program.o(.rodata);
         data/data_emerald2.o(.rodata);
         data/fonts.o(.rodata);
         data/mystery_event_msg.o(.rodata);

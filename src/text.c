@@ -2779,7 +2779,7 @@ _08005D6E:\n\
 	bx r1");
 }
 
-u32 GetStringWidthFixedWidthFont(u8 *str, u8 fontId, u8 letterSpacing)
+u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
 {
     int i;
     u8 width;
@@ -2788,7 +2788,7 @@ u32 GetStringWidthFixedWidthFont(u8 *str, u8 fontId, u8 letterSpacing)
     u8 line;
     int strPos;
     u8 lineWidths[8];
-    u8 *strLocal;
+    const u8 *strLocal;
 
     for (i = 0; i < 8; i++)
     {
@@ -2883,7 +2883,7 @@ u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32)
     return 0;
 }
 
-s32 GetStringWidth(u8 fontId, u8 *str, s16 letterSpacing)
+u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
     bool8 isJapanese;
     int minGlyphWidth;

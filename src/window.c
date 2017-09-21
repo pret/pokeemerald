@@ -35,7 +35,7 @@ static void nullsub_8(void)
 
 }
 
-bool16 InitWindows(struct WindowTemplate *templates)
+bool16 InitWindows(const struct WindowTemplate *templates)
 {
     int i;
     void *bgTilemapBuffer;

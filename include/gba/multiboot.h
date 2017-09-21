@@ -8,19 +8,19 @@
 
 struct MultiBootParam
 {
-    u32 system_work[5];
-    u8 handshake_data;
-    u8 padding;
-    u16 handshake_timeout;
-    u8 probe_count;
-    u8 client_data[MULTIBOOT_NCHILD];
-    u8 palette_data;
-    u8 response_bit;
-    u8 client_bit;
-    u8 reserved1;
-    u8 *boot_srcp;
-    u8 *boot_endp;
-    u8 *masterp;
+    u32 system_work[5]; // 00
+    u8 handshake_data;  // 14
+    u8 padding;         // 15
+    u16 handshake_timeout; // 16
+    u8 probe_count; // 18
+    u8 client_data[MULTIBOOT_NCHILD]; // 19
+    u8 palette_data; // 1c
+    u8 response_bit; // 1d
+    u8 client_bit; // 1e
+    u8 reserved1; // 1f
+    const u8 *boot_srcp; // 20
+    const u8 *boot_endp; // 24
+    const u8 *masterp;
     u8 *reserved2[MULTIBOOT_NCHILD];
     u32 system_work2[4];
     u8 sendflag;

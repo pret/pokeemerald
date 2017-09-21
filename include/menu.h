@@ -15,4 +15,6 @@ struct MenuAction2
     void (*func)(u8);
 };
 
+void box_print(u8, u8, u8, u8, const void *, s8, const u8 *);
+
 #endif // GUARD_MENU_H

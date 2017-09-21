@@ -30,7 +30,7 @@ struct Window
     u8 *tileData;
 };
 
-bool16 InitWindows(struct WindowTemplate *templates);
+bool16 InitWindows(const struct WindowTemplate *templates);
 u16 AddWindow(const struct WindowTemplate *template);
 int AddWindowWithoutTileMap(struct WindowTemplate *template);
 void RemoveWindow(u8 windowId);
