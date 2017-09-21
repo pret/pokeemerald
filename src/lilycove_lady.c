@@ -26,17 +26,18 @@ u8 sub_818E13C(void);
 bool8 sub_818E1F4(void);
 u8 sub_818E258(const u8 *);
 
+extern const u8 gUnknown_085EEB7E[8];
 extern const u16 gUnknown_0860B074[5];
 extern const u16 gUnknown_0860B07E[3];
-extern const u8 *const gUnknown_0860B224[];
-extern const u16 *const gUnknown_0860B2EC[6];
-extern const u16 gUnknown_0860B304[6];
 extern const u16 *const gUnknown_0860B1A4[16];
 extern const u16 gUnknown_0860B1E4[16];
 extern const u16 gUnknown_0860B204[16];
-extern const u8 gUnknown_085EEB7E[8];
-extern const u8 *const gUnknown_0860B324[5];
+extern const u8 *const gUnknown_0860B224[];
+extern const u16 *const gUnknown_0860B2EC[6];
+extern const u16 gUnknown_0860B304[6];
 extern const u8 *const gUnknown_0860B310[5];
+extern const u8 *const gUnknown_0860B324[5];
+extern const u8 *const gUnknown_0860B338[5];
 
 EWRAM_DATA struct LilycoveLadyFavour *gUnknown_0203CD64 = NULL;
 EWRAM_DATA struct LilycoveLadyQuiz *gUnknown_0203CD68 = NULL;
@@ -822,4 +823,45 @@ void sub_818E794(u8 *dest1, u8 *dest2)
     gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
     StringCopy(dest1, gUnknown_0860B324[gUnknown_0203CD6C->category]);
     StringCopy10(dest2, gUnknown_0860B310[gUnknown_0203CD6C->category]);
+}
+
+void sub_818E7E0(u8 *dest1, u8 *dest2)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    *dest1 = gUnknown_0203CD6C->category;
+    StringCopy(dest2, gUnknown_0860B310[gUnknown_0203CD6C->category]);
+}
+
+void sub_818E81C(u8 *dest)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    StringCopy(dest, gUnknown_0203CD6C->playerName);
+}
+
+void sub_818E848(u8 *dest)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    *dest = gUnknown_0203CD6C->language;
+}
+
+void sub_818E868(u8 *dest, u8 category)
+{
+    StringCopy(dest, gUnknown_0860B338[category]);
+}
+
+u8 sub_818E880(void)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (gUnknown_0203CD6C->fave_pkblk >= 5)
+    {
+        return 1;
+    }
+    else if (gUnknown_0203CD6C->fave_pkblk == 0)
+    {
+        return 2;
+    }
+    else
+    {
+        return 0;
+    }
 }
