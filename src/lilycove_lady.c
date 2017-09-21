@@ -27,7 +27,8 @@ static u8 sub_818E13C(void);
 static bool8 sub_818E1F4(void);
 static u8 sub_818E258(const u8 *);
 
-extern const u8 gUnknown_085EEB7E[8];
+extern const u8 gUnknown_085EEB7E[]; // Lady$
+
 extern const u16 gUnknown_0860B074[5];
 extern const u16 gUnknown_0860B07E[3];
 extern const u16 *const gUnknown_0860B1A4[16];

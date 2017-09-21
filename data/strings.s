@@ -1246,10 +1246,20 @@ gUnknown_085EAD30:: @ 85EAD30
 	.string "Types of CONTESTS$"
 	.string "Ranks$"
 	.string "Judging$"
+
+gUnknown_085EADA4::
 	.string "COOLNESS CONTEST$"
+
+gUnknown_085EADB5::
 	.string "BEAUTY CONTEST$"
+
+gUnknown_085EADC4::
 	.string "CUTENESS CONTEST$"
+
+gUnknown_085EADD5::
 	.string "SMARTNESS CONTEST$"
+
+gUnknown_085EADE7::
 	.string "TOUGHNESS CONTEST$"
 	.string "DECORATION$"
 	.string "PACK UP$"
@@ -2967,24 +2977,56 @@ gUnknown_085EEAF6:: @ 85EEAF6
 
 gUnknown_085EEB0B:: @ 85EEB0B
 	.string "A call can’t be made from here.$"
+
+gUnknown_085EEB2B::
 	.string "HANDSOME$"
+
+gUnknown_085EEB34::
 	.string "VINNY$"
+
+gUnknown_085EEB3A::
 	.string "MOREME$"
+
+gUnknown_085EEB41::
 	.string "IRONHARD$"
+
+gUnknown_085EEB4A::
 	.string "MUSCLE$"
+
+gUnknown_085EEB51::
 	.string "coolness$"
+
+gUnknown_085EEB5A::
 	.string "beauty$"
+
+gUnknown_085EEB61::
 	.string "cuteness$"
+
+gUnknown_085EEB6A::
 	.string "smartness$"
+
+gUnknown_085EEB74::
 	.string "toughness$"
 
 gUnknown_085EEB7E:: @ 85EEB7E
 	.string "Lady$"
+
+gUnknown_085EEB83::
 	.string "slippery$"
+
+gUnknown_085EEB8C::
 	.string "roundish$"
+
+gUnknown_085EEB95::
 	.string "wham-ish$"
+
+gUnknown_085EEB9E::
 	.string "shiny$"
+
+gUnknown_085EEBA4::
 	.string "sticky$"
+
+gUnknown_085EEBAB::
 	.string "pointy$"
 
 gUnknown_085EEBB2:: @ 85EEBB2
