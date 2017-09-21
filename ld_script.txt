@@ -239,7 +239,7 @@ SECTIONS {
         asm/recorded_battle.o(.text);
         asm/battle_controller_recorded_opponent.o(.text);
         asm/battle_controller_recorded_player.o(.text);
-        asm/battle_dome_cards.o(.text);
+        src/battle_dome_cards.o(.text);
         asm/lilycove_lady.o(.text);
         asm/battle_frontier_1.o(.text);
         asm/new_menu_helpers.o(.text);
@@ -378,6 +378,7 @@ SECTIONS {
         data/data_860A4AC.o(.rodata);
         data/battle_controller_recorded_opponent.o(.rodata);
         data/battle_controller_recorded_player.o(.rodata);
+        src/battle_dome_cards.o(.rodata);
         data/data_emerald.o(.rodata);
         data/battle_controller_player_partner.o(.rodata);
         data/data_emerald2.o(.rodata);
