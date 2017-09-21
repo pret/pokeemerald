@@ -5,36 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818E794
-sub_818E794: @ 818E794
-	push {r4,r5,lr}
-	adds r5, r1, 0
-	ldr r4, =gUnknown_0203CD6C
-	ldr r1, =gSaveBlock1Ptr
-	ldr r1, [r1]
-	ldr r2, =0x00003b58
-	adds r1, r2
-	str r1, [r4]
-	ldr r2, =gUnknown_0860B324
-	ldrb r1, [r1, 0xD]
-	lsls r1, 2
-	adds r1, r2
-	ldr r1, [r1]
-	bl StringCopy
-	ldr r1, =gUnknown_0860B310
-	ldr r0, [r4]
-	ldrb r0, [r0, 0xD]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl StringCopy10
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818E794
-
 	thumb_func_start sub_818E7E0
 sub_818E7E0: @ 818E7E0
 	push {r4,lr}

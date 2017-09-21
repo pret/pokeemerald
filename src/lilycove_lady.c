@@ -35,6 +35,8 @@ extern const u16 *const gUnknown_0860B1A4[16];
 extern const u16 gUnknown_0860B1E4[16];
 extern const u16 gUnknown_0860B204[16];
 extern const u8 gUnknown_085EEB7E[8];
+extern const u8 *const gUnknown_0860B324[5];
+extern const u8 *const gUnknown_0860B310[5];
 
 EWRAM_DATA struct LilycoveLadyFavour *gUnknown_0203CD64 = NULL;
 EWRAM_DATA struct LilycoveLadyQuiz *gUnknown_0203CD68 = NULL;
@@ -813,4 +815,11 @@ bool8 sub_818E704(struct Pokeblock *pokeblock)
         gUnknown_0203CD6C->other_pkblk ++;
     }
     return response;
+}
+
+void sub_818E794(u8 *dest1, u8 *dest2)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    StringCopy(dest1, gUnknown_0860B324[gUnknown_0203CD6C->category]);
+    StringCopy10(dest2, gUnknown_0860B310[gUnknown_0203CD6C->category]);
 }
