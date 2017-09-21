@@ -92,7 +92,10 @@ void sub_81C0A8C(u8 taskId, s8 a);
 void sub_81C48F0();
 void sub_81C0E48(u8 taskId);
 void sub_81C0704(u8 taskId);
-
+s8 sub_81C09B4(s8 a);
+s8 sub_81C08F8(s8 a);
+void sub_81C4204(u8 a, u8 b);
+void sub_81C20F0(u8 taskId);
 
 u8 sub_81BFB10();
 u8 sub_81B1250();
@@ -165,7 +168,8 @@ struct unkSummaryStruct{
     u8 unk40C8;
     u8 unk_filler2[0xA];
     u8 unk40D3;
-    u8 unk_filler5[0x1B];
+    u8 unk40D4;
+    u8 unk_filler5[0x1A];
     u8 unk40EF;
     s16 unk40F0;
     u8 unk_filler4[6];
@@ -688,20 +692,23 @@ void sub_81C0510(u8 taskId)
     }
 }
 
-/* void sub_81C0604(u8 taskId, s8 a)
+#ifdef NONMATCHING
+void sub_81C0604(u8 taskId, s8 a)
 {
-    s8 r4;
     s8 r4_2;
+    int r4;
+    
+    
     if (gUnknown_0203CF1C->unk40C3 == 0)
     {
         if (gUnknown_0203CF1C->unk40BD == 1)
         {
             if(gUnknown_0203CF1C->unk40C0 != 0)
             {
-                r4 = 2 * (a != 2);
+                r4 = (a ^ 1) ? 2 : 0;
             }
             else if (a == 1)
-                r4 = 1;
+                r4 = a;
             else
                 r4 = 3;
         r4_2 = sub_80D214C(gUnknown_0203CF1C->unk0, gUnknown_0203CF1C->unk40BE, gUnknown_0203CF1C->unk40BF, r4);
@@ -726,5 +733,206 @@ void sub_81C0510(u8 taskId)
             gTasks[taskId].data[0] = 0;
             gTasks[taskId].func = sub_81C0704;
         }
+    }
+}
+#else
+__attribute__((naked))
+void sub_81C0604(u8 taskId, s8 a)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+	lsls r0, 24\n\
+	lsrs r7, r0, 24\n\
+	lsls r1, 24\n\
+	lsrs r5, r1, 24\n\
+	adds r4, r5, 0\n\
+	ldr r1, =gUnknown_0203CF1C\n\
+	ldr r3, [r1]\n\
+	ldr r2, =0x000040c3\n\
+	adds r0, r3, r2\n\
+	ldrb r0, [r0]\n\
+	adds r6, r1, 0\n\
+	cmp r0, 0\n\
+	bne _081C06EE\n\
+	ldr r1, =0x000040bd\n\
+	adds r0, r3, r1\n\
+	ldrb r2, [r0]\n\
+	cmp r2, 0x1\n\
+	bne _081C0678\n\
+	adds r1, 0x3\n\
+	adds r0, r3, r1\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _081C0654\n\
+	lsls r1, r5, 24\n\
+	asrs r1, 24\n\
+	movs r4, 0x2\n\
+	eors r1, r2\n\
+	negs r0, r1\n\
+	orrs r0, r1\n\
+	asrs r0, 31\n\
+	ands r4, r0\n\
+	b _081C065C\n\
+	.pool\n\
+_081C0654:\n\
+	movs r4, 0x3\n\
+	cmp r5, 0x1\n\
+	bne _081C065C\n\
+	movs r4, 0x1\n\
+_081C065C:\n\
+	ldr r2, [r6]\n\
+	ldr r0, [r2]\n\
+	ldr r3, =0x000040be\n\
+	adds r1, r2, r3\n\
+	ldrb r1, [r1]\n\
+	adds r3, 0x1\n\
+	adds r2, r3\n\
+	ldrb r2, [r2]\n\
+	adds r3, r4, 0\n\
+	bl sub_80D214C\n\
+	b _081C0696\n\
+	.pool\n\
+_081C0678:\n\
+	bl sub_81B1250\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	cmp r0, 0x1\n\
+	bne _081C068E\n\
+	lsls r0, r5, 24\n\
+	asrs r0, 24\n\
+	bl sub_81C09B4\n\
+	b _081C0696\n\
+_081C068E:\n\
+	lsls r0, r4, 24\n\
+	asrs r0, 24\n\
+	bl sub_81C08F8\n\
+_081C0696:\n\
+	lsls r0, 24\n\
+	lsrs r4, r0, 24\n\
+	lsls r0, r4, 24\n\
+	asrs r0, 24\n\
+	movs r1, 0x1\n\
+	negs r1, r1\n\
+	cmp r0, r1\n\
+	beq _081C06EE\n\
+	movs r0, 0x5\n\
+	bl PlaySE\n\
+	ldr r5, =gUnknown_0203CF1C\n\
+	ldr r0, [r5]\n\
+	adds r0, 0x77\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _081C06D4\n\
+	movs r0, 0x2\n\
+	movs r1, 0x1\n\
+	bl sub_81C4204\n\
+	movs r0, 0xD\n\
+	bl ClearWindowTilemap\n\
+	movs r0, 0\n\
+	bl schedule_bg_copy_tilemap_to_vram\n\
+	movs r0, 0\n\
+	movs r1, 0x2\n\
+	bl sub_81C2074\n\
+_081C06D4:\n\
+	ldr r0, [r5]\n\
+	ldr r1, =0x000040be\n\
+	adds r0, r1\n\
+	movs r2, 0\n\
+	strb r4, [r0]\n\
+	ldr r1, =gTasks\n\
+	lsls r0, r7, 2\n\
+	adds r0, r7\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	strh r2, [r0, 0x8]\n\
+	ldr r1, =sub_81C0704\n\
+	str r1, [r0]\n\
+_081C06EE:\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+	.syntax divided\n");
+}
+#endif
+
+/* void sub_81C0704(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    
+    switch (data[0])
+    {
+        case 0:
+            StopCryAndClearCrySongs();
+            data[0]++;
+            break;
+        case 1:
+            sub_81C4898();
+            DestroySpriteAndFreeResources(&gSprites[gUnknown_0203CF1C->unk40D3]);
+            data[0]++;
+            break;
+        case 2:
+            DestroySpriteAndFreeResources(&gSprites[gUnknown_0203CF1C->unk40D4]);
+            data[0]++;
+            break;
+        case 3:
+            sub_81C0098(&gUnknown_0203CF1C->currentPoke);
+            gUnknown_0203CF1C->unk40F0 = 0;
+            data[0]++;
+            break;
+        case 4:
+            if (sub_81C00F0(&gUnknown_0203CF1C->currentPoke))
+                data[0]++;
+            break;
+        case 5:
+            sub_81C49E0(&gUnknown_0203CF1C->currentPoke);
+            data[0]++;
+            break;
+        case 6:
+            sub_81C4A08(&gUnknown_0203CF1C->currentPoke);
+            data[0]++;
+            break;
+        case 7:
+            if (gUnknown_0203CF1C->summary.unk7)
+                sub_81C2074(10, -2);
+            sub_81C2228(&gUnknown_0203CF1C->currentPoke);
+            data[1] = 0;
+            data[0]++;
+            break;
+        case 8:
+            gUnknown_0203CF1C->unk40D3 = sub_81C45F4(&gUnknown_0203CF1C->currentPoke, &data[1]);
+            if (gUnknown_0203CF1C->unk40D3 != 0xFF)
+            {
+                gSprites[gUnknown_0203CF1C->unk40D3].data2 = 1;
+                sub_81C0E24();
+                data[1] = 0;
+                data[0]++;
+            }
+            break;
+        case 9:
+            sub_81C4280();
+            data[0]++;
+            break;
+        case 10:
+            sub_81C25E8();
+            data[0]++;
+            break;
+        case 11:
+            sub_81C2D9C(gUnknown_0203CF1C->unk40C0);
+            sub_81C2524();
+            data[0]++;
+            break;
+        case 12:
+            gSprites[gUnknown_0203CF1C->unk40D3].data2 = 0;
+            data[0]++;
+            break;
+        case 13:
+            if (sub_81221EC() == 0 && FuncIsActiveTask(sub_81C20F0) == 0)
+            {
+                TaskFunc *func;
+                data[0] = 0;
+                func = &gTasks[taskId].func; 
+                *func = sub_81C0510;
+            }
     }
 } */
