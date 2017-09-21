@@ -860,7 +860,7 @@ sub_8159A94: @ 8159A94
 	adds r0, r1
 	ldr r1, =sub_8159A54
 	str r1, [r0]
-	ldr r0, =gUnknown_085CCA54
+	ldr r0, =gText_SafariZoneMenu
 	movs r1, 0x2
 	bl battle_show_message_maybe
 	movs r4, 0
@@ -878,7 +878,7 @@ _08159AAE:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_8059CB4
-	ldr r0, =gUnknown_085CCA04
+	ldr r0, =gText_WhatWillPkmnDo2
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1

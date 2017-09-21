@@ -2800,7 +2800,7 @@ _08070FCC:
 	adds r0, r7, 0
 	mov r1, sp
 	bl StringCopy
-	ldr r4, =gUnknown_085EF881
+	ldr r4, =gText_NewLine2
 	adds r0, r7, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -2810,7 +2810,7 @@ _08070FCC:
 	adds r0, r7, 0
 	adds r1, r4, 0
 	bl StringAppend
-	ldr r1, =gUnknown_085EF883
+	ldr r1, =gText_Exit4
 	adds r0, r7, 0
 	bl StringAppend
 	add sp, 0x28
@@ -2834,7 +2834,7 @@ sub_8071038: @ 8071038
 	movs r5, 0
 _08071046:
 	adds r0, r4, 0
-	ldr r1, =gUnknown_085EF888
+	ldr r1, =gText_Lv
 	bl StringAppend
 	movs r0, 0x8C
 	adds r2, r5, 0
@@ -2856,7 +2856,7 @@ _08071046:
 	mov r1, sp
 	bl StringAppend
 	adds r0, r4, 0
-	ldr r1, =gUnknown_085EF881
+	ldr r1, =gText_NewLine2
 	bl StringAppend
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -2971,7 +2971,7 @@ sub_8071148: @ 8071148
 	mov r8, r3
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, =gUnknown_085EF888
+	ldr r1, =gText_Lv
 	mov r0, sp
 	bl StringCopy
 	movs r0, 0x8C

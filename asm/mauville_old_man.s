@@ -1400,7 +1400,7 @@ _08120BB0:
 	movs r2, 0x8
 	bl memset
 	mov r0, sp
-	ldr r1, =gUnknown_085EDFB0
+	ldr r1, =gText_Friend
 	bl StringCopy
 	adds r0, r5, 0
 	mov r1, sp
@@ -2218,7 +2218,7 @@ sub_8121178: @ 8121178
 sub_81211EC: @ 81211EC
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r1, =gUnknown_085EB7EA
+	ldr r1, =gText_Exit
 	movs r0, 0x1
 	movs r2, 0
 	bl GetStringWidth
@@ -2309,7 +2309,7 @@ _08121272:
 _081212AA:
 	ldr r5, =gUnknown_0203A130
 	ldrb r0, [r5]
-	ldr r2, =gUnknown_085EB7EA
+	ldr r2, =gText_Exit
 	lsls r1, r4, 4
 	adds r1, 0x1
 	lsls r1, 24

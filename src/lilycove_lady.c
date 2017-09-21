@@ -27,7 +27,7 @@ static u8 sub_818E13C(void);
 static bool8 sub_818E1F4(void);
 static u8 sub_818E258(const u8 *);
 
-extern const u8 gUnknown_085EEB7E[]; // Lady$
+extern const u8 gText_Lady2[];
 
 static const u16 gUnknown_0860B074[] = {
         0x62, 0xcb, 0xdc, 0xcc, 0xd1
@@ -617,7 +617,7 @@ static u8 sub_818E13C(void)
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
     if (gUnknown_0203CD68->playerName[0] == EOS)
     {
-        StringCopy7(gStringVar1, gUnknown_085EEB7E);
+        StringCopy7(gStringVar1, gText_Lady2);
         retval = 0;
     }
     else
@@ -655,7 +655,7 @@ __attribute__((naked)) static u8 sub_818E13C(void)
                     "\tcmp r0, 0xFF\n"
                     "\tbne _0818E174\n"
                     "\tldr r0, =gStringVar1\n"
-                    "\tldr r1, =gUnknown_085EEB7E\n"
+                    "\tldr r1, =gText_Lady2\n"
                     "\tbl StringCopy7\n"
                     "\tmovs r7, 0\n"
                     "\tb _0818E1DC\n"

@@ -5,17 +5,6 @@
     @ On its merge, this section should be deleted.
     @ This section contains three objects and accounts for 28 bytes.
 
-    .section .rodata.deleteme
-
-gUnknown_0860B058:: @ 860B058
-	.incbin "baserom.gba", 0x60b058, 0xc
-
-gUnknown_0860B064:: @ 860B064
-	.incbin "baserom.gba", 0x60b064, 0x8
-
-gUnknown_0860B06C:: @ 860B06C
-	.incbin "baserom.gba", 0x60b06c, 0x8
-
 	.section .rodata
 
 gUnknown_0860B358:: @ 860B358

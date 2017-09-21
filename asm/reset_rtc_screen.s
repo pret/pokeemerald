@@ -414,7 +414,7 @@ sub_809EBC4: @ 809EBC4
 	adds r1, r4, 0
 	bl StringCopy
 	adds r7, r0, 0
-	ldr r1, =gUnknown_085EE68A
+	ldr r1, =gText_Day
 	bl StringCopy
 	adds r7, r0, 0
 	adds r0, r4, 0
@@ -426,7 +426,7 @@ sub_809EBC4: @ 809EBC4
 	adds r1, r4, 0
 	bl StringCopy
 	adds r7, r0, 0
-	ldr r5, =gUnknown_085EE68E
+	ldr r5, =gText_Colon3
 	adds r1, r5, 0
 	bl StringCopy
 	adds r7, r0, 0
@@ -514,7 +514,7 @@ sub_809ECB4: @ 809ECB4
 	movs r2, 0x1
 	mov r3, r9
 	bl sub_809EBC4
-	ldr r2, =gUnknown_085EE690
+	ldr r2, =gText_Confirm2
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -1011,7 +1011,7 @@ _0809F11C:
 	movs r1, 0
 	movs r3, 0xE
 	bl SetWindowBorderStyle
-	ldr r2, =gUnknown_085ECA0D
+	ldr r2, =gText_PresentTime
 	movs r0, 0x1
 	str r0, [sp]
 	movs r4, 0xFF
@@ -1033,7 +1033,7 @@ _0809F11C:
 	movs r1, 0
 	movs r2, 0x11
 	bl sub_809EBC4
-	ldr r2, =gUnknown_085ECA22
+	ldr r2, =gText_PreviousTime
 	movs r0, 0x21
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -1062,7 +1062,7 @@ _0809F11C:
 	movs r1, 0
 	movs r2, 0x31
 	bl sub_809EBC4
-	ldr r0, =gUnknown_085EC9EC
+	ldr r0, =gText_ResetRTCConfirmCancel
 	bl sub_809F0C0
 	movs r0, 0
 	movs r1, 0x2
@@ -1161,7 +1161,7 @@ _0809F276:
 	cmp r0, 0x2
 	bne _0809F29C
 _0809F282:
-	ldr r0, =gUnknown_085ECAA7
+	ldr r0, =gText_NoSaveFileCantSetTime
 	bl sub_809F0C0
 	movs r0, 0x5
 	strh r0, [r5]
@@ -1193,7 +1193,7 @@ _0809F2CA:
 	movs r0, 0
 	movs r1, 0
 	bl sub_8198070
-	ldr r0, =gUnknown_085ECA38
+	ldr r0, =gText_PleaseResetTime
 	bl sub_809F0C0
 	ldr r2, =gLocalTime
 	ldr r0, =gSaveBlock2Ptr
@@ -1261,7 +1261,7 @@ _0809F340:
 	ldrh r1, [r4]
 	bl VarSet
 	bl DisableResetRTC
-	ldr r0, =gUnknown_085ECA4F
+	ldr r0, =gText_ClockHasBeenReset
 	bl sub_809F0C0
 	movs r0, 0x4
 	strh r0, [r5]
@@ -1274,14 +1274,14 @@ _0809F398:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809F3B8
-	ldr r0, =gUnknown_085ECA8A
+	ldr r0, =gText_SaveCompleted
 	bl sub_809F0C0
 	movs r0, 0x49
 	bl PlaySE
 	b _0809F3C4
 	.pool
 _0809F3B8:
-	ldr r0, =gUnknown_085ECA9A
+	ldr r0, =gText_SaveFailed
 	bl sub_809F0C0
 	movs r0, 0x16
 	bl PlaySE

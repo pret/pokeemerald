@@ -1886,7 +1886,7 @@ sub_8035C4C: @ 8035C4C
 	ldrb r2, [r0]
 	cmp r2, 0x3
 	bne _08035C68
-	ldr r0, =gUnknown_085CCBAD
+	ldr r0, =gText_Draw
 	movs r1, 0x15
 	bl battle_show_message_maybe
 	b _08035D68
@@ -1962,10 +1962,10 @@ _08035CE2:
 	cmp r0, 0
 	beq _08035D36
 _08035CFC:
-	ldr r0, =gUnknown_085CCB9E
+	ldr r0, =gText_Win
 	movs r1, 0x17
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCBA5
+	ldr r0, =gText_Loss
 	movs r1, 0x16
 	bl battle_show_message_maybe
 	b _08035D68
@@ -1983,19 +1983,19 @@ _08035D20:
 	cmp r0, 0
 	beq _08035D58
 _08035D36:
-	ldr r0, =gUnknown_085CCB9E
+	ldr r0, =gText_Win
 	movs r1, 0x16
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCBA5
+	ldr r0, =gText_Loss
 	movs r1, 0x17
 	bl battle_show_message_maybe
 	b _08035D68
 	.pool
 _08035D58:
-	ldr r0, =gUnknown_085CCB9E
+	ldr r0, =gText_Win
 	movs r1, 0x17
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCBA5
+	ldr r0, =gText_Loss
 	movs r1, 0x16
 	bl battle_show_message_maybe
 _08035D68:

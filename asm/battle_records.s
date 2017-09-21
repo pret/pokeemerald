@@ -488,7 +488,7 @@ sub_813C2F4: @ 813C2F4
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EF6A1
+	ldr r1, =gText_TotalRecordWLD
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
@@ -672,7 +672,7 @@ sub_813C4BC: @ 813C4BC
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
 	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085EF68D
+	ldr r1, =gText_PlayersBattleResults
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
@@ -697,7 +697,7 @@ sub_813C4BC: @ 813C4BC
 	mov r9, r1
 	add r0, r9
 	bl sub_813C2F4
-	ldr r1, =gUnknown_085EF6BD
+	ldr r1, =gText_WinLoseDraw
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	ldrb r0, [r6]

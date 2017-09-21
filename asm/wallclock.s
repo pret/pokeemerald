@@ -353,7 +353,7 @@ Cb2_StartWallClock: @ 81349F4
 	movs r0, 0x5A
 	strh r0, [r1, 0x30]
 	bl sub_813498C
-	ldr r2, =gUnknown_085EFAE0
+	ldr r2, =gText_Confirm3
 	movs r0, 0x1
 	str r0, [sp]
 	mov r1, r8
@@ -500,7 +500,7 @@ _08134BA4:
 	ldrh r0, [r0, 0xC]
 	strh r0, [r1, 0x30]
 	bl sub_813498C
-	ldr r2, =gUnknown_085EFAE8
+	ldr r2, =gText_Cancel4
 	movs r0, 0x1
 	str r0, [sp]
 	mov r1, r9
@@ -683,7 +683,7 @@ sub_8134DC4: @ 8134DC4
 	adds r2, r5, 0
 	movs r3, 0xD
 	bl SetWindowBorderStyle
-	ldr r2, =gUnknown_085EFAC6
+	ldr r2, =gText_IsThisTheCorrectTime
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0

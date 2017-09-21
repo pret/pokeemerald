@@ -53,7 +53,7 @@ _081D9A44:
 	bl sub_80D2578
 	cmp r0, 0
 	beq _081D9A5C
-	ldr r0, =gUnknown_085EE49A
+	ldr r0, =gText_Peekaboo
 	bl sub_80D255C
 	b _081D9A68
 	.pool

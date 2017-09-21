@@ -221,7 +221,7 @@ sub_81616C0: @ 81616C0
 	ldr r1, =gStringVar1
 	bl GetMonNickname
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9C17
+	ldr r1, =gText_PkmnHPRestoredByVar2
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -318,7 +318,7 @@ sub_81617B8: @ 81617B8
 	lsrs r4, 24
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_085E9712
+	ldr r0, =gText_CantBeUsedOnPkmn
 	movs r1, 0
 	bl sub_81B1B5C
 	movs r0, 0x2
