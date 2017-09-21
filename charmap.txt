@@ -440,12 +440,14 @@ GREEN = 06
 LIGHT_GREEN = 07
 BLUE = 08
 LIGHT_BLUE = 09
-BORDER_COLOR1 = 0A @ white
-BORDER_COLOR2 = 0B @ white with a tinge of green
-BORDER_COLOR3 = 0C @ white 2
-BORDER_COLOR4 = 0D @ aquamarine
-BORDER_COLOR5 = 0E @ blue-green
-BORDER_COLOR6 = 0F @ cerulean
+@ these next colors can be set to anything arbitrary at runtime
+@ usually though they'll have the textbox border colors as described below
+DYNAMIC_COLOR1 = 0A @ white
+DYNAMIC_COLOR2 = 0B @ white with a tinge of green
+DYNAMIC_COLOR3 = 0C @ white 2
+DYNAMIC_COLOR4 = 0D @ aquamarine
+DYNAMIC_COLOR5 = 0E @ blue-green
+DYNAMIC_COLOR6 = 0F @ cerulean
 
 @ sound and music
 

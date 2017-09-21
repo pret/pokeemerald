@@ -6860,7 +6860,7 @@ sub_81CA770: @ 81CA770
 	movs r0, 0x2
 	bl sub_81C763C
 	adds r5, r0, 0
-	ldr r6, =gUnknown_085EBD4A
+	ldr r6, =gText_NoRibbonWinners
 	movs r2, 0x1
 	negs r2, r2
 	movs r0, 0x1
@@ -7928,7 +7928,7 @@ sub_81CAF78: @ 81CAF78
 	lsls r0, 24
 	cmp r0, 0
 	bne _081CAFA4
-	ldr r0, =gUnknown_085EEB0B
+	ldr r0, =gText_CallCantBeMadeHere
 	b _081CAFCE
 	.pool
 _081CAFA4:
@@ -9748,7 +9748,7 @@ sub_81CBDF4: @ 81CBDF4
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =gUnknown_085EBE5F
+	ldr r1, =gText_NumberRegistered
 	movs r2, 0
 	bl sub_81CBE88
 	pop {r0}
@@ -9784,7 +9784,7 @@ sub_81CBE38: @ 81CBE38
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =gUnknown_085EBE6E
+	ldr r1, =gText_NumberOfBattles
 	movs r2, 0x2
 	bl sub_81CBE88
 	pop {r0}
@@ -9900,7 +9900,7 @@ sub_81CBEF8: @ 81CBEF8
 	bl GetMapName
 	b _081CBF24
 _081CBF1C:
-	ldr r1, =gUnknown_085EC00F
+	ldr r1, =gText_Unknown
 	add r0, sp, 0xC
 	bl StringCopy
 _081CBF24:
@@ -10168,7 +10168,7 @@ sub_81CC11C: @ 81CC11C
 	push {lr}
 	sub sp, 0xC
 	ldrb r0, [r0, 0x14]
-	ldr r2, =gUnknown_085EBF95
+	ldr r2, =gText_TrainerCloseBy
 	movs r1, 0x1
 	str r1, [sp]
 	str r1, [sp, 0x4]
@@ -13128,7 +13128,7 @@ _081CD862:
 	adds r0, r4, r5
 	ldr r1, =0x00006325
 	adds r0, r1
-	ldr r1, =gUnknown_085EBFCE
+	ldr r1, =gText_InParty
 	b _081CD8F4
 	.pool
 _081CD8E4:
@@ -14829,7 +14829,7 @@ sub_81CE738: @ 81CE738
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085EBFD7
+	ldr r1, =gText_Number2
 	bl StringCopy
 	pop {r1}
 	bx r1
@@ -14957,7 +14957,7 @@ _081CE80C:
 	strb r0, [r1, 0x4]
 	mov r5, sp
 	adds r5, 0x11
-	ldr r1, =gUnknown_085EBFD7
+	ldr r1, =gText_Number2
 	adds r0, r5, 0
 	bl StringCopy
 	ldr r0, =0x00001821
@@ -16949,7 +16949,7 @@ sub_81CF7F4: @ 81CF7F4
 	movs r0, 0xFF
 	strb r0, [r4]
 	ldr r5, =gStringVar2
-	ldr r1, =gUnknown_085EC029
+	ldr r1, =gText_NumberF700
 	adds r0, r5, 0
 	bl sub_81AFC28
 	mov r1, r8
@@ -19859,7 +19859,7 @@ sub_81D0E84: @ 81D0E84
 	adds r1, r4, 0
 	bl sub_81AFC0C
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EC030
+	ldr r1, =gText_RibbonsF700
 	adds r0, r4, 0
 	bl sub_81AFC28
 	ldrb r0, [r5, 0xA]
@@ -23412,7 +23412,7 @@ sub_81D28FC: @ 81D28FC
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r5, =gUnknown_085EFA31
+	ldr r5, =gText_BattleMoves2
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x80
@@ -23431,7 +23431,7 @@ sub_81D28FC: @ 81D28FC
 	movs r1, 0x1
 	adds r2, r5, 0
 	bl PrintTextOnWindow
-	ldr r5, =gUnknown_085EFA52
+	ldr r5, =gText_PPSlash
 	movs r1, 0x29
 	mov r10, r1
 	str r1, [sp]
@@ -23443,7 +23443,7 @@ sub_81D28FC: @ 81D28FC
 	adds r2, r5, 0
 	movs r3, 0x4
 	bl PrintTextOnWindow
-	ldr r5, =gUnknown_085EFA56
+	ldr r5, =gText_PowerSlash
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x6A
@@ -23460,7 +23460,7 @@ sub_81D28FC: @ 81D28FC
 	movs r1, 0x1
 	adds r2, r5, 0
 	bl PrintTextOnWindow
-	ldr r5, =gUnknown_085EFA5D
+	ldr r5, =gText_AccuracySlash
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x6A
@@ -23508,7 +23508,7 @@ _081D29C4:
 	adds r2, r5, 0
 	movs r3, 0x4
 	bl PrintTextOnWindow
-	ldr r1, =gUnknown_085EFA52
+	ldr r1, =gText_PPSlash
 	movs r0, 0x1
 	movs r2, 0
 	bl GetStringWidth
@@ -23616,7 +23616,7 @@ sub_81D2ACC: @ 81D2ACC
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r5, =gUnknown_085EFA3E
+	ldr r5, =gText_ContestMoves2
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x80
@@ -23632,7 +23632,7 @@ sub_81D2ACC: @ 81D2ACC
 	movs r1, 0x1
 	adds r2, r5, 0
 	bl PrintTextOnWindow
-	ldr r5, =gUnknown_085EFA67
+	ldr r5, =gText_Appeal2
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x5C
@@ -23648,7 +23648,7 @@ sub_81D2ACC: @ 81D2ACC
 	movs r1, 0x1
 	adds r2, r5, 0
 	bl PrintTextOnWindow
-	ldr r5, =gUnknown_085EFA6E
+	ldr r5, =gText_Jam2
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x5C
@@ -24157,7 +24157,7 @@ _081D2EFC:
 	cmp r7, 0xE
 	bne _081D2F2C
 	adds r0, r5, 0x5
-	ldr r1, =gUnknown_085EBFCE
+	ldr r1, =gText_InParty
 	b _081D2F3A
 	.pool
 _081D2F2C:
@@ -25214,10 +25214,10 @@ _081D36CA:
 	adds r4, 0xC
 	movs r1, 0
 	ldrsh r0, [r4, r1]
-	ldr r1, =gUnknown_085EEA76
+	ldr r1, =gText_Dash
 	cmp r0, 0
 	blt _081D3704
-	ldr r1, =gUnknown_085EEA73
+	ldr r1, =gText_UnkCtrlF904
 _081D3704:
 	adds r0, r6, 0
 	bl StringCopy
@@ -29757,7 +29757,7 @@ sub_81D5C8C: @ 81D5C8C
 	movs r0, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r5, =gUnknown_085EF88A
+	ldr r5, =gText_TimeBoard
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0xD0
@@ -29842,9 +29842,9 @@ _081D5CD6:
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	mov r0, r9
-	ldr r1, =gUnknown_085EF895
+	ldr r1, =gText_TimeCleared
 	bl StringCopy
-	ldr r1, =gUnknown_085EF8A3
+	ldr r1, =gText_XMinYDotZSec
 	bl StringExpandPlaceholders
 	movs r0, 0x1
 	mov r1, r9

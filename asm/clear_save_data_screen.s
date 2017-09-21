@@ -33,7 +33,7 @@ sub_817ACE4: @ 817ACE4
 	movs r2, 0x2
 	movs r3, 0xE
 	bl SetWindowBorderStyle
-	ldr r2, =gUnknown_085EFA8F
+	ldr r2, =gText_ClearAllSaveData
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -87,7 +87,7 @@ _0817AD68:
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EFAAA
+	ldr r2, =gText_ClearingData
 	movs r0, 0x1
 	str r0, [sp]
 	str r4, [sp, 0x4]

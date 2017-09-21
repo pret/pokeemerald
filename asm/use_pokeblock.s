@@ -1196,7 +1196,7 @@ sub_8166D44: @ 8166D44
 	bl GetMonData
 	add r0, sp, 0xC
 	bl StringGetEnd10
-	ldr r1, =gUnknown_085EC7A0
+	ldr r1, =gText_GetsAPokeBlockQuestion
 	add r0, sp, 0xC
 	bl StringAppend
 	ldr r4, =gStringVar4
@@ -1426,7 +1426,7 @@ sub_8166F50: @ 8166F50
 	movs r1, 0x97
 	movs r2, 0xE
 	bl sub_8098858
-	ldr r2, =gUnknown_085EC800
+	ldr r2, =gText_WontEatAnymore
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -1503,13 +1503,13 @@ _08166FEC:
 	ldr r1, [r0]
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =gUnknown_085EC7E1
+	ldr r1, =gText_WasEnhanced
 	adds r0, r4, 0
 	bl StringAppend
 	b _08167018
 	.pool
 _08167010:
-	ldr r1, =gUnknown_085EC7EF
+	ldr r1, =gText_NothingChanged
 	adds r0, r4, 0
 	bl StringCopy
 _08167018:
@@ -2895,7 +2895,7 @@ sub_8167BA0: @ 8167BA0
 	ldr r0, [r7]
 	ldr r6, =0x0000804a
 	adds r0, r6
-	ldr r1, =gUnknown_085EBF8D
+	ldr r1, =gText_NatureSlash
 	bl StringCopy
 	ldr r1, =gNatureNamePointers
 	lsls r4, 2

@@ -3296,7 +3296,7 @@ sub_811BB40: @ 811BB40
 	ldrb r0, [r0]
 	cmp r0, 0x4
 	bne _0811BB5C
-	ldr r0, =gUnknown_085EC3B4
+	ldr r0, =gText_StopGivingPkmnMail
 	b _0811BB7A
 	.pool
 _0811BB5C:
@@ -3306,13 +3306,13 @@ _0811BB5C:
 	bgt _0811BB78
 	cmp r0, 0xF
 	blt _0811BB78
-	ldr r0, =gUnknown_085EC706
+	ldr r0, =gText_LikeToQuitQuiz
 	str r0, [r2]
-	ldr r0, =gUnknown_085EC727
+	ldr r0, =gText_ChallengeQuestionMark
 	b _0811BB7E
 	.pool
 _0811BB78:
-	ldr r0, =gUnknown_085EC3A6
+	ldr r0, =gText_QuitEditing
 _0811BB7A:
 	str r0, [r2]
 	movs r0, 0
@@ -3325,9 +3325,9 @@ _0811BB7E:
 
 	thumb_func_start sub_811BB88
 sub_811BB88: @ 811BB88
-	ldr r2, =gUnknown_085EC410
+	ldr r2, =gText_AllTextBeingEditedWill
 	str r2, [r0]
-	ldr r0, =gUnknown_085EC42F
+	ldr r0, =gText_BeDeletedThatOkay
 	str r0, [r1]
 	bx lr
 	.pool
@@ -3711,11 +3711,11 @@ sub_811BDF0: @ 811BDF0
 	b _0811BE3C
 	.pool
 _0811BE34:
-	ldr r1, =gUnknown_085EC6B2
+	ldr r1, =gText_Lady
 	movs r0, 0
 	bl sub_81AFC0C
 _0811BE3C:
-	ldr r1, =gUnknown_085EC6A8
+	ldr r1, =gText_F700sQuiz
 	adds r0, r6, 0
 	bl sub_81AFC28
 	add sp, 0x20
@@ -6054,35 +6054,35 @@ _0811D16A:
 	bl sub_811BB88
 	b _0811D1BC
 _0811D174:
-	ldr r0, =gUnknown_085EC743
+	ldr r0, =gText_CreateAQuiz
 	str r0, [sp, 0xC]
 	b _0811D1BC
 	.pool
 _0811D180:
-	ldr r0, =gUnknown_085EC752
+	ldr r0, =gText_SelectTheAnswer
 	str r0, [sp, 0xC]
 	b _0811D1BC
 	.pool
 _0811D18C:
-	ldr r0, =gUnknown_085EC4C9
+	ldr r0, =gText_OnlyOnePhrase
 	str r0, [sp, 0xC]
-	ldr r0, =gUnknown_085EC4E9
+	ldr r0, =gText_OriginalSongWillBeUsed
 	b _0811D1BA
 	.pool
 _0811D19C:
-	ldr r0, =gUnknown_085EC765
+	ldr r0, =gText_LyricsCantBeDeleted
 	str r0, [sp, 0xC]
 	b _0811D1BC
 	.pool
 _0811D1A8:
-	ldr r0, =gUnknown_085EC520
+	ldr r0, =gText_CombineTwoWordsOrPhrases
 	str r0, [sp, 0xC]
 	b _0811D1BC
 	.pool
 _0811D1B4:
-	ldr r0, =gUnknown_085EC672
+	ldr r0, =gText_YouCannotQuitHere
 	str r0, [sp, 0xC]
-	ldr r0, =gUnknown_085EC688
+	ldr r0, =gText_SectionMustBeCompleted
 _0811D1BA:
 	str r0, [sp, 0x10]
 _0811D1BC:
@@ -9442,7 +9442,7 @@ CopyEasyChatWord: @ 811EBBC
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811EBD8
-	ldr r1, =gUnknown_085EEA42
+	ldr r1, =gText_ThreeQuestionMarks
 	b _0811EBEA
 	.pool
 _0811EBD8:
@@ -9693,7 +9693,7 @@ _0811ED94:
 	b _0811EDB2
 	.pool
 _0811EDB0:
-	ldr r0, =gUnknown_085EEA42
+	ldr r0, =gText_ThreeQuestionMarks
 _0811EDB2:
 	bl StringLength
 	lsls r0, 16

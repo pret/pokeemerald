@@ -377,7 +377,7 @@ _081609A8:
 	ldr r1, =0xffff0000
 	cmp r0, r1
 	beq _08160A04
-	ldr r0, =gUnknown_085EF8E4
+	ldr r0, =gText_PkmnLearnedMove4
 	bl sub_816084C
 	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x1
@@ -471,7 +471,7 @@ _08160AAA:
 	b _08160E88
 	.pool
 _08160AB8:
-	ldr r0, =gUnknown_085EF8F3
+	ldr r0, =gText_PkmnTryingToLearnMove
 	bl sub_816084C
 	ldr r0, =gUnknown_0203BC34
 	ldr r1, [r0]
@@ -498,7 +498,7 @@ _08160AEC:
 	asrs r1, r0, 24
 	cmp r1, 0
 	bne _08160B10
-	ldr r0, =gUnknown_085EFA10
+	ldr r0, =gText_WhichMoveToForget2
 	bl sub_816084C
 	ldr r0, =gUnknown_0203BC34
 	ldr r1, [r0]
@@ -528,7 +528,7 @@ _08160B2C:
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r0, =gUnknown_085EF960
+	ldr r0, =gText_StopTryingToTeachMove
 	bl sub_816084C
 	ldr r0, =gUnknown_0203BC34
 	ldr r1, [r0]
@@ -819,7 +819,7 @@ _08160D6C:
 	adds r1, r6
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r0, =gUnknown_085EF979
+	ldr r0, =gText_12AndPoof
 	bl sub_816084C
 	ldr r1, [r7]
 	movs r0, 0x1E
@@ -834,7 +834,7 @@ _08160E0C:
 	lsls r0, 16
 	cmp r0, 0
 	bne _08160E8A
-	ldr r0, =gUnknown_085EF9A6
+	ldr r0, =gText_PkmnForgotMoveAndLearnedNew
 	bl sub_816084C
 	ldr r0, =gUnknown_0203BC34
 	ldr r1, [r0]
@@ -946,7 +946,7 @@ _08160EF0:
 	cmp r5, 0
 	bne _08160F38
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EF8C2
+	ldr r1, =gText_TeachWhichMoveToPkmn
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x3
@@ -1042,7 +1042,7 @@ _08160FE4:
 	movs r0, 0xC
 	strb r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EF9E6
+	ldr r1, =gText_GiveUpTeachingNewMove
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -1063,7 +1063,7 @@ _08161010:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EF8DA
+	ldr r1, =gText_TeachX
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -1100,7 +1100,7 @@ sub_8161074: @ 8161074
 	cmp r5, 0
 	bne _081610A6
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EF8C2
+	ldr r1, =gText_TeachWhichMoveToPkmn
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x3

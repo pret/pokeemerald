@@ -105,7 +105,7 @@ _080E5258:
 	cmp r0, 0
 	bgt _080E5258
 _080E5264:
-	ldr r1, =gUnknown_085E969C
+	ldr r1, =gText_PokedollarVar1
 	adds r0, r2, 0
 	bl StringExpandPlaceholders
 	ldr r2, =gStringVar4

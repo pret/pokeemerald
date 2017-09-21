@@ -971,7 +971,7 @@ _08071C24:
 	ldr r1, =gStringVar1
 	bl pokemon_get_nick
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085ED5A5
+	ldr r1, =gText_PkmnHatchedFromEgg
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r0, [r5]
@@ -1023,7 +1023,7 @@ _08071CA4:
 	ldr r1, =gStringVar1
 	bl pokemon_get_nick
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085ED5BE
+	ldr r1, =gText_NameHatchedPkmn
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r0, [r5]

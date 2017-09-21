@@ -9004,7 +9004,7 @@ _0807C0F8:
 	.pool
 _0807C120:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE942
+	ldr r1, =gText_XWillBeSentToY
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -9070,7 +9070,7 @@ _0807C178:
 	adds r0, 0x1
 	strh r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE959
+	ldr r1, =gText_ByeByeVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -10471,7 +10471,7 @@ _0807CDDC:
 	movs r0, 0
 	bl SetGpuReg
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE966
+	ldr r1, =gText_XSentOverY
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -10542,7 +10542,7 @@ _0807CE70:
 	movs r5, 0
 	strh r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE977
+	ldr r1, =gText_TakeGoodCareOfX
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -11066,7 +11066,7 @@ _0807D4D4:
 	.pool
 _0807D4FC:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE942
+	ldr r1, =gText_XWillBeSentToY
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -11132,7 +11132,7 @@ _0807D554:
 	adds r0, 0x1
 	strh r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE959
+	ldr r1, =gText_ByeByeVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -12576,7 +12576,7 @@ _0807E228:
 	movs r0, 0
 	bl SetGpuReg
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE966
+	ldr r1, =gText_XSentOverY
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -12647,7 +12647,7 @@ _0807E2BC:
 	movs r5, 0
 	strh r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE977
+	ldr r1, =gText_TakeGoodCareOfX
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -13751,7 +13751,7 @@ _0807ED10:
 	adds r0, 0x1
 	strb r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EF6D2
+	ldr r1, =gText_CommunicationStandby5
 	b _0807EDA6
 	.pool
 _0807ED2C:
@@ -14634,7 +14634,7 @@ _0807F4C0:
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EF6D2
+	ldr r1, =gText_CommunicationStandby5
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0

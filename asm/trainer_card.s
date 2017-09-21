@@ -410,7 +410,7 @@ _080C2A2C:
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_81973C4
-	ldr r2, =gUnknown_085ED042
+	ldr r2, =gText_WaitingTrainerFinishReading
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0xFF
@@ -1714,7 +1714,7 @@ sub_80C3548: @ 80C3548
 sub_80C3574: @ 80C3574
 	push {r4,r5,lr}
 	sub sp, 0x2C
-	ldr r1, =gUnknown_085ECF71
+	ldr r1, =gText_TrainerCardName
 	add r0, sp, 0xC
 	bl StringCopy
 	adds r5, r0, 0
@@ -1775,7 +1775,7 @@ _080C35FA:
 sub_80C3608: @ 80C3608
 	push {r4,lr}
 	sub sp, 0x2C
-	ldr r1, =gUnknown_085ECF78
+	ldr r1, =gText_TrainerCardIDNo
 	add r0, sp, 0xC
 	bl StringCopy
 	ldr r4, =gUnknown_02039CE8
@@ -1842,7 +1842,7 @@ sub_80C3684: @ 80C3684
 	movs r0, 0x1
 	negs r0, r0
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_085ECF7E
+	ldr r0, =gText_TrainerCardMoney
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -1857,7 +1857,7 @@ _080C36C4:
 	movs r0, 0x1
 	negs r0, r0
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_085ECF7E
+	ldr r0, =gText_TrainerCardMoney
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -1876,7 +1876,7 @@ _080C36DE:
 	movs r3, 0x6
 	bl ConvertIntToDecimalStringN
 	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085E969C
+	ldr r1, =gText_PokedollarVar1
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	ldr r0, [r4]
@@ -1958,7 +1958,7 @@ sub_80C378C: @ 80C378C
 	movs r0, 0x1
 	negs r0, r0
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_085ECF86
+	ldr r0, =gText_TrainerCardPokedex
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -1973,7 +1973,7 @@ _080C37DC:
 	movs r0, 0x1
 	negs r0, r0
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_085ECF86
+	ldr r0, =gText_TrainerCardPokedex
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -1992,7 +1992,7 @@ _080C37F6:
 	movs r2, 0
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085ECF8E
+	ldr r1, =gText_EmptyString6
 	bl StringCopy
 	ldr r0, [r4]
 	ldr r1, =0x0000052b
@@ -2054,7 +2054,7 @@ sub_80C3880: @ 80C3880
 	movs r0, 0x1
 	negs r0, r0
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_085ECF99
+	ldr r0, =gText_TrainerCardTime
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -2069,7 +2069,7 @@ _080C38C8:
 	movs r0, 0x1
 	negs r0, r0
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_085ECF99
+	ldr r0, =gText_TrainerCardTime
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -2105,7 +2105,7 @@ _080C391C:
 	bls _080C3922
 	movs r6, 0x3B
 _080C3922:
-	ldr r1, =gUnknown_085ECF8F
+	ldr r1, =gText_Colon2
 	movs r0, 0x1
 	movs r2, 0
 	bl GetStringWidth
@@ -2172,7 +2172,7 @@ _080C395C:
 	ldr r0, [r0]
 	str r0, [sp]
 	str r5, [sp, 0x4]
-	ldr r0, =gUnknown_085ECF8F
+	ldr r0, =gText_Colon2
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -2331,7 +2331,7 @@ sub_80C3AF0: @ 80C3AF0
 	bl StringCopy
 	ldr r0, [r4]
 	adds r0, 0x4D
-	ldr r1, =gUnknown_085ECFA6
+	ldr r1, =gText_Var1sTrainerCard
 	bl StringExpandPlaceholders
 _080C3B30:
 	pop {r4}
@@ -2512,7 +2512,7 @@ sub_80C3CCC: @ 80C3CCC
 	ldrb r0, [r2, 0xB]
 	cmp r0, 0
 	beq _080C3CE4
-	ldr r1, =gUnknown_085ECFB8
+	ldr r1, =gText_HallOfFameDebut
 	adds r2, 0x93
 	ldr r3, =gUnknown_0856FB0F
 	movs r0, 0
@@ -2585,7 +2585,7 @@ sub_80C3D60: @ 80C3D60
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085ECFED
+	ldr r1, =gText_WinsLosses
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r1, [r5]
@@ -2631,7 +2631,7 @@ sub_80C3DF0: @ 80C3DF0
 	ldrb r0, [r2, 0x10]
 	cmp r0, 0
 	beq _080C3E0A
-	ldr r1, =gUnknown_085ED010
+	ldr r1, =gText_PokemonTrades
 	ldr r0, =0x00000237
 	adds r2, r0
 	ldr r3, =gUnknown_0856FB0F
@@ -2685,7 +2685,7 @@ sub_80C3E58: @ 80C3E58
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080C3E80
-	ldr r1, =gUnknown_085ED036
+	ldr r1, =gText_BerryCrush
 	ldr r0, =0x000002c3
 	adds r2, r0
 	ldr r3, =gUnknown_0856FB0F
@@ -2738,7 +2738,7 @@ sub_80C3ED4: @ 80C3ED4
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080C3EFC
-	ldr r1, =gUnknown_085ED01F
+	ldr r1, =gText_UnionTradesAndBattles
 	ldr r0, =0x0000034f
 	adds r2, r0
 	ldr r3, =gUnknown_0856FB0F
@@ -2773,7 +2773,7 @@ sub_80C3F14: @ 80C3F14
 	ldr r0, [r4]
 	ldr r1, =0x00000395
 	adds r0, r1
-	ldr r1, =gUnknown_085ED096
+	ldr r1, =gText_Var1DarkGreyShadowLightGrey
 	bl StringExpandPlaceholders
 _080C3F46:
 	pop {r4}
@@ -2797,7 +2797,7 @@ sub_80C3F64: @ 80C3F64
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080C3F8C
-	ldr r1, =gUnknown_085ED085
+	ldr r1, =gText_PokeblocksWithFriends
 	ldr r0, =0x00000395
 	adds r2, r0
 	ldr r3, =gUnknown_0856FB0F
@@ -2852,7 +2852,7 @@ sub_80C3FE0: @ 80C3FE0
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080C4008
-	ldr r1, =gUnknown_085ED09F
+	ldr r1, =gText_WonContestsWFriends
 	ldr r0, =0x000003db
 	adds r2, r0
 	ldr r3, =gUnknown_0856FB0F
@@ -2902,7 +2902,7 @@ _080C4044:
 	ldr r0, [r4]
 	ldr r1, =0x00000421
 	adds r0, r1
-	ldr r1, =gUnknown_085ED0E0
+	ldr r1, =gText_WSlashStraightSlash
 	bl StringExpandPlaceholders
 	b _080C40B6
 	.pool
@@ -2920,7 +2920,7 @@ _080C4094:
 	ldr r0, [r4]
 	ldr r1, =0x00000421
 	adds r0, r1
-	ldr r1, =gUnknown_085ED0C8
+	ldr r1, =gText_Var1DarkLightGreyBP
 	bl StringExpandPlaceholders
 _080C40B6:
 	pop {r4}
@@ -2949,7 +2949,7 @@ _080C40F0:
 	ldrb r0, [r2, 0xD]
 	cmp r0, 0
 	beq _080C412C
-	ldr r1, =gUnknown_085ED0D3
+	ldr r1, =gText_BattleTower
 	ldr r0, =0x00000421
 	adds r2, r0
 	ldr r3, =gUnknown_0856FB0C
@@ -2963,7 +2963,7 @@ _080C4114:
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080C412C
-	ldr r1, =gUnknown_085ED0B6
+	ldr r1, =gText_BattlePtsWon
 	ldr r0, =0x00000421
 	adds r2, r0
 	ldr r3, =gUnknown_0856FB0F
@@ -6346,7 +6346,7 @@ _080C5DC2:
 	lsrs r4, r0, 24
 	cmp r4, 0x4
 	bls _080C5DC2
-	ldr r4, =gUnknown_085ED8FF
+	ldr r4, =gText_SymbolsEarned
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x60
@@ -6362,7 +6362,7 @@ _080C5DC2:
 	movs r1, 0x1
 	movs r3, 0x5
 	bl box_print
-	ldr r4, =gUnknown_085ED90E
+	ldr r4, =gText_BattleRecord
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x60
@@ -6380,7 +6380,7 @@ _080C5DC2:
 	str r6, [sp]
 	mov r0, r8
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_085ED91C
+	ldr r0, =gText_BattlePoints
 	str r0, [sp, 0x8]
 	movs r0, 0x2
 	movs r1, 0x8

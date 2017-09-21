@@ -115,7 +115,7 @@ sub_8178A40: @ 8178A40
 	movs r5, 0x1
 	cmp r4, 0
 	bne _08178A54
-	ldr r1, =gUnknown_085EE80A
+	ldr r1, =gText_EventSafelyLoaded
 	bl StringCopy
 	movs r5, 0
 _08178A54:
@@ -125,7 +125,7 @@ _08178A54:
 _08178A5A:
 	cmp r4, 0x1
 	bne _08178A66
-	ldr r1, =gUnknown_085EE827
+	ldr r1, =gText_LoadErrorEndingSession
 	adds r0, r6, 0
 	bl StringCopy
 _08178A66:
@@ -204,7 +204,7 @@ _08178B12:
 	beq _08178B20
 	b _08178E58
 _08178B20:
-	ldr r1, =gUnknown_085EE765
+	ldr r1, =gText_LinkStandby2
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -256,7 +256,7 @@ _08178B8E:
 _08178B98:
 	movs r0, 0x15
 	bl PlaySE
-	ldr r1, =gUnknown_085EE788
+	ldr r1, =gText_PressAToLoadEvent
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -301,7 +301,7 @@ _08178BDC:
 	movs r2, 0x1
 	movs r3, 0xD
 	bl SetWindowBorderStyle
-	ldr r1, =gUnknown_085EE7BF
+	ldr r1, =gText_LoadingEvent
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -373,7 +373,7 @@ _08178CAC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08178CCC
-	ldr r1, =gUnknown_085EE7CE
+	ldr r1, =gText_DontRemoveCableTurnOff
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0

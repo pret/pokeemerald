@@ -4995,7 +4995,7 @@ _08039470:
 	beq _0803947E
 	b _0803975E
 _0803947E:
-	ldr r0, =gUnknown_085CD28F
+	ldr r0, =gText_RecordBattleToPass
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleCommunication
@@ -5018,7 +5018,7 @@ _080394AC:
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl sub_8056A3C
-	ldr r0, =gUnknown_085CCABB
+	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
 	bl battle_show_message_maybe
 	ldr r4, =gBattleCommunication
@@ -5213,7 +5213,7 @@ _08039678:
 	bne _080396A0
 	movs r0, 0x37
 	bl PlaySE
-	ldr r0, =gUnknown_085CD2CB
+	ldr r0, =gText_BattleRecordedOnPass
 _08039686:
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
@@ -9235,7 +9235,7 @@ _0803B7EA:
 	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	strb r1, [r0]
-	ldr r0, =gUnknown_085CC23E
+	ldr r0, =gText_EmptyString3
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleMainFunc
@@ -9506,7 +9506,7 @@ _0803BAB2:
 	ldr r4, =gNoOfAllBanks
 	ldr r0, =gAbsentBankFlags
 	mov r12, r0
-	ldr r1, =gUnknown_085CC23E
+	ldr r1, =gText_EmptyString3
 	mov r9, r1
 	ldrb r0, [r4]
 	cmp r2, r0
