@@ -733,3 +733,26 @@ void SetLilycoveContestLady(void)
     sub_818E604();
     gUnknown_0203CD6C->language = gGameLanguage;
 }
+
+void sub_818E674(void)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    gUnknown_0203CD6C->id = LILYCOVE_LADY_CONTEST;
+    gUnknown_0203CD6C->phase = 0;
+    if (gUnknown_0203CD6C->fave_pkblk == 5 || gUnknown_0203CD6C->other_pkblk == 5)
+    {
+        sub_818E604();
+    }
+}
+
+void sub_818E6B0(u8 sheen)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    if (gUnknown_0203CD6C->max_sheen <= sheen)
+    {
+        gUnknown_0203CD6C->max_sheen = sheen;
+        memset(gUnknown_0203CD6C->playerName, EOS, sizeof(gUnknown_0203CD6C->playerName));
+        memcpy(gUnknown_0203CD6C->playerName, gSaveBlock2Ptr->playerName, sizeof(gUnknown_0203CD6C->playerName));
+        gUnknown_0203CD6C->language = gGameLanguage;
+    }
+}
