@@ -380,7 +380,17 @@ SECTIONS {
         data/battle_controller_recorded_player.o(.rodata);
         src/battle_dome_cards.o(.rodata);
         src/lilycove_lady.o(.rodata);
-        data/data_emerald.o(.rodata);
+        data/battle_frontier_1.o(.rodata);
+        data/new_menu_helpers.o(.rodata);
+        data/battle_frontier_2.o(.rodata);
+        data/item_menu.o(.rodata);
+        data/menu_indicators.o(.rodata);
+        data/save_location.o(.rodata);
+        data/item_icon.o(.rodata);
+        data/party_menu.o(.rodata);
+        data/battle_tent.o(.rodata);
+        data/unk_text_util_2.o(.rodata);
+        data/unk_81BAD84.o(.rodata);
         data/battle_controller_player_partner.o(.rodata);
         data/data_emerald2pre1.o(.rodata);
         src/berry_fix_program.o(.rodata);
