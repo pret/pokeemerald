@@ -475,13 +475,13 @@ gWishFutureKnock: @ 20243D0
 gUnknown_020243FC: @ 20243FC
 	.space 0x2
 
-gUnknown_020243FE: @ 20243FE
+gSentPokesToOpponent: @ 20243FE
 	.space 0x2
 
 gDynamicBasePower: @ 2024400
 	.space 0x2
 
-gUnknown_02024402: @ 2024402
+gExpShareExp: @ 2024402
 	.space 0x2
 
 gEnigmaBerries: @ 2024404

@@ -183,8 +183,8 @@ _080570D0:
 	.pool
 	thumb_func_end sub_8057028
 
-	thumb_func_start sub_80570F4
-sub_80570F4: @ 80570F4
+	thumb_func_start AdjustFriendshipOnBattleFaint
+AdjustFriendshipOnBattleFaint: @ 80570F4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -285,7 +285,7 @@ _080571CE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80570F4
+	thumb_func_end AdjustFriendshipOnBattleFaint
 
 	thumb_func_start sub_80571DC
 sub_80571DC: @ 80571DC
@@ -414,7 +414,7 @@ _0805729A:
 	ldr r1, =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	bl b_movescr_stack_push_cursor
+	bl BattleScriptPushCursor
 	movs r0, 0x1
 	mov r2, r10
 	strb r0, [r2, 0x5]
@@ -474,7 +474,7 @@ _08057354:
 	ldr r1, =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	bl b_movescr_stack_push_cursor
+	bl BattleScriptPushCursor
 	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
@@ -523,7 +523,7 @@ _080573D4:
 	negs r1, r1
 	ands r0, r1
 	str r0, [r4]
-	bl b_movescr_stack_push_cursor
+	bl BattleScriptPushCursor
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =BattleScript_MoveUsedUnfroze
 	str r0, [r1]

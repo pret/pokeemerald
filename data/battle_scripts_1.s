@@ -33,10 +33,10 @@ gUnknown_082D9EFB:: @ 82D9EFB
 gUnknown_082D9F1C:: @ 82D9F1C
 	.incbin "baserom.gba", 0x2d9f1c, 0x88e
 
-gUnknown_082DA7AA:: @ 82DA7AA
+BattleScript_FaintAttacker:: @ 82DA7AA
 	.incbin "baserom.gba", 0x2da7aa, 0xd
 
-gUnknown_082DA7B7:: @ 82DA7B7
+BattleScript_FaintTarget:: @ 82DA7B7
 	.incbin "baserom.gba", 0x2da7b7, 0xd
 
 gUnknown_082DA7C4:: @ 82DA7C4
@@ -93,7 +93,7 @@ gUnknown_082DAB15:: @ 82DAB15
 BattleScript_Pausex20:: @ 82DABB9
 	.incbin "baserom.gba", 0x2dabb9, 0x4
 
-gUnknown_082DABBD:: @ 82DABBD
+BattleScript_LevelUp:: @ 82DABBD
 	.incbin "baserom.gba", 0x2dabbd, 0x6f
 
 gUnknown_082DAC2C:: @ 82DAC2C
@@ -156,7 +156,7 @@ gUnknown_082DAE2A:: @ 82DAE2A
 BattleScript_EncoredNoMore:: @ 82DAE37
 	.incbin "baserom.gba", 0x2dae37, 0x7
 
-gUnknown_082DAE3E:: @ 82DAE3E
+BattleScript_DestinyBondTakesLife:: @ 82DAE3E
 	.incbin "baserom.gba", 0x2dae3e, 0x1b
 
 gUnknown_082DAE59:: @ 82DAE59
@@ -237,7 +237,7 @@ gUnknown_082DB181:: @ 82DB181
 gUnknown_082DB185:: @ 82DB185
 	.incbin "baserom.gba", 0x2db185, 0x8
 
-gUnknown_082DB18D:: @ 82DB18D
+BattleScript_GrudgeTakesPp:: @ 82DB18D
 	.incbin "baserom.gba", 0x2db18d, 0x7
 
 BattleScript_MagicCoatBounce:: @ 82DB194
@@ -411,7 +411,7 @@ BattleScript_SoundproofProtected:: @ 82DB61F
 gUnknown_082DB62F:: @ 82DB62F
 	.incbin "baserom.gba", 0x2db62f, 0x10
 
-gUnknown_082DB63F:: @ 82DB63F
+BattleScript_StickyHoldOnKnockOff:: @ 82DB63F
 	.incbin "baserom.gba", 0x2db63f, 0xe
 
 BattleScript_ColorChangeActivates:: @ 82DB64D

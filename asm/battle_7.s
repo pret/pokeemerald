@@ -2937,8 +2937,8 @@ _0805EA5A:
 	bx r0
 	thumb_func_end sub_805E990
 
-	thumb_func_start sub_805EA60
-sub_805EA60: @ 805EA60
+	thumb_func_start BattleMusicStop
+BattleMusicStop: @ 805EA60
 	push {r4-r6,lr}
 	movs r0, 0
 	bl GetBankByPlayerAI
@@ -2977,7 +2977,7 @@ _0805EAA2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805EA60
+	thumb_func_end BattleMusicStop
 
 	thumb_func_start sub_805EAB4
 sub_805EAB4: @ 805EAB4

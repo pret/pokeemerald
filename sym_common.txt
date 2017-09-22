@@ -218,7 +218,7 @@ gUnknown_03005D3A: @ 3005D3A
 gUnknown_03005D46: @ 3005D46
 	.space 0xE
 
-gUnknown_03005D54: @ 3005D54
+gLeveledUpInBattle: @ 3005D54
 	.space 0xC
 
 gBattleBankFunc: @ 3005D60

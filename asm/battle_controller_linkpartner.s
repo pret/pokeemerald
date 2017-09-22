@@ -4874,7 +4874,7 @@ sub_814D9D8: @ 814D9D8
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0814DA14
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1

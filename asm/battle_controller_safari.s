@@ -1161,7 +1161,7 @@ dp01t_34_6_move_anim_start_t3: @ 8159CC4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08159D00
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1

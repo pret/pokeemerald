@@ -4150,7 +4150,7 @@ sub_816A840: @ 816A840
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0816A87C
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1

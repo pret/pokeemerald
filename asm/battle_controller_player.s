@@ -8913,7 +8913,7 @@ _0805C3BC:
 sub_805C3EC: @ 805C3EC
 	push {lr}
 	sub sp, 0x4
-	bl sub_805EA60
+	bl BattleMusicStop
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -9595,7 +9595,7 @@ sub_805C9B0: @ 805C9B0
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805C9EC
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1

@@ -218,13 +218,23 @@
 #define TYPE_MUL_NORMAL             10
 #define TYPE_MUL_SUPER_EFFECTIVE    20
 
-#define BS_GET_TARGET           0
-#define BS_GET_ATTACKER         1
-#define BS_GET_EFFECT_BANK      2
-#define BS_GET_SCRIPTING_BANK   10
-#define BS_GET_OPPONENT1        12
-#define BS_GET_PLAYER2          13
-#define BS_GET_OPPONENT2        14
+#define BS_GET_TARGET                   0
+#define BS_GET_ATTACKER                 1
+#define BS_GET_EFFECT_BANK              2
+#define BS_GET_ATTACKER_SIDE            8 // for atk1E_jumpifability
+#define BS_GET_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
+#define BS_GET_SCRIPTING_BANK           10
+#define BS_GET_OPPONENT1                12
+#define BS_GET_PLAYER2                  13
+#define BS_GET_OPPONENT2                14
+
+// for battle script commands
+#define CMP_EQUAL               0x0
+#define CMP_NOT_EQUAL           0x1
+#define CMP_GREATER_THAN        0x2
+#define CMP_LESS_THAN           0x3
+#define CMP_COMMON_BITS         0x4
+#define CMP_NO_COMMON_BITS      0x5
 
 struct Trainer
 {
@@ -422,13 +432,23 @@ struct BattleCallbacksStack
     u8 size;
 };
 
+struct StatsArray
+{
+    u16 hp;
+    u16 atk;
+    u16 def;
+    u16 spd;
+    u16 spAtk;
+    u16 spDef;
+};
+
 struct BattleResources
 {
     struct SecretBaseRecord* secretBase;
     struct UnknownFlags *flags;
     struct BattleScriptsStack* battleScriptsStack;
     struct BattleCallbacksStack* battleCallbackStack;
-    void* statsBeforeLvlUp;
+    struct StatsArray* statsBeforeLvlUp;
     struct AI_ThinkingStruct *ai;
     struct BattleHistory *battleHistory;
     struct BattleScriptsStack *AI_ScriptsStack;
@@ -438,6 +458,7 @@ extern struct BattleResources* gBattleResources;
 
 #define BATTLESCRIPTS_STACK     (gBattleResources->battleScriptsStack)
 #define BATTLE_CALLBACKS_STACK  (gBattleResources->battleCallbackStack)
+#define BATTLE_LVLUP_STATS      (gBattleResources->statsBeforeLvlUp)
 
 struct BattleResults
 {
@@ -536,14 +557,10 @@ struct BattleStruct
     u8 field_4D;
     u8 field_4E;
     u8 field_4F;
-    u8 field_50;
-    u8 field_51;
+    u16 expValue;
     u8 field_52;
-    u8 field_53;
-    u8 field_54;
-    u8 field_55;
-    u8 field_56;
-    u8 field_57;
+    u8 sentInPokes;
+    u8 field_54[4];
     u8 field_58;
     u8 field_59;
     u8 field_5A;
@@ -642,6 +659,11 @@ struct BattleStruct
     u8 field_1A1;
     u8 filler1A2;
     u8 atkCancellerTracker;
+    u8 field_1A4[240];
+    u8 field_294[4];
+    u8 field_298[8];
+    u8 field_2A0;
+    u8 field_2A1;
 };
 
 extern struct BattleStruct* gBattleStruct;
@@ -677,6 +699,20 @@ extern struct BattleStruct* gBattleStruct;
 #define MOVE_EFFECT_CHARGING            0xC
 #define MOVE_EFFECT_WRAP                0xD
 #define MOVE_EFFECT_RECOIL_25           0xE
+#define MOVE_EFFECT_ATK_PLUS_1          0xF
+#define MOVE_EFFECT_DEF_PLUS_1          0x10
+#define MOVE_EFFECT_SPD_PLUS_1          0x11
+#define MOVE_EFFECT_SP_ATK_PLUS_1       0x12
+#define MOVE_EFFECT_SP_DEF_PLUS_1       0x13
+#define MOVE_EFFECT_ACC_PLUS_1          0x14
+#define MOVE_EFFECT_EVS_PLUS_1          0x15
+#define MOVE_EFFECT_ATK_MINUS_1         0x16
+#define MOVE_EFFECT_DEF_MINUS_1         0x17
+#define MOVE_EFFECT_SPD_MINUS_1         0x18
+#define MOVE_EFFECT_SP_ATK_MINUS_1      0x19
+#define MOVE_EFFECT_SP_DEF_MINUS_1      0x1A
+#define MOVE_EFFECT_ACC_MINUS_1         0x1B
+#define MOVE_EFFECT_EVS_MINUS_1         0x1C
 #define MOVE_EFFECT_RECHARGE            0x1D
 #define MOVE_EFFECT_RAGE                0x1E
 #define MOVE_EFFECT_STEAL_ITEM          0x1F
@@ -687,10 +723,73 @@ extern struct BattleStruct* gBattleStruct;
 #define MOVE_EFFECT_REMOVE_PARALYSIS    0x24
 #define MOVE_EFFECT_ATK_DEF_DOWN        0x25
 #define MOVE_EFFECT_RECOIL_33_PARALYSIS 0x26
+#define MOVE_EFFECT_ATK_PLUS_2          0x27
+#define MOVE_EFFECT_DEF_PLUS_2          0x28
+#define MOVE_EFFECT_SPD_PLUS_2          0x29
+#define MOVE_EFFECT_SP_ATK_PLUS_2       0x2A
+#define MOVE_EFFECT_SP_DEF_PLUS_2       0x2B
+#define MOVE_EFFECT_ACC_PLUS_2          0x2C
+#define MOVE_EFFECT_EVS_PLUS_2          0x2D
+#define MOVE_EFFECT_ATK_MINUS_2         0x2E
+#define MOVE_EFFECT_DEF_MINUS_2         0x2F
+#define MOVE_EFFECT_SPD_MINUS_2         0x30
+#define MOVE_EFFECT_SP_ATK_MINUS_2      0x31
+#define MOVE_EFFECT_SP_DEF_MINUS_2      0x32
+#define MOVE_EFFECT_ACC_MINUS_2         0x33
+#define MOVE_EFFECT_EVS_MINUS_2         0x34
 #define MOVE_EFFECT_THRASH              0x35
 #define MOVE_EFFECT_KNOCK_OFF           0x36
+#define MOVE_EFFECT_NOTHING_37          0x37
+#define MOVE_EFFECT_NOTHING_38          0x38
+#define MOVE_EFFECT_NOTHING_39          0x39
+#define MOVE_EFFECT_NOTHING_3A          0x3A
 #define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
+#define MOVE_EFFECT_NOTHING_3C          0x3C
+#define MOVE_EFFECT_NOTHING_3D          0x3D
+#define MOVE_EFFECT_NOTHING_3E          0x3E
+#define MOVE_EFFECT_NOTHING_3F          0x3F
 #define MOVE_EFFECT_AFFECTS_USER        0x40
+#define MOVE_EFFECT_CERTAIN             0x80
+
+// battle animations ids
+
+#define B_ANIM_CASTFORM_CHANGE      0x0
+#define B_ANIM_STATS_CHANGE         0x1
+#define B_ANIM_SUBSTITUTE_FADE      0x2
+#define B_ANIM_SUBSTITUTE_APPEAR    0x3
+#define B_ANIM_x4                   0x4
+#define B_ANIM_ITEM_KNOCKOFF        0x5
+#define B_ANIM_TURN_TRAP            0x6
+#define B_ANIM_ITEM_EFFECT          0x7
+#define B_ANIM_SMOKEBALL_ESCAPE     0x8
+#define B_ANIM_HANGED_ON            0x9
+#define B_ANIM_RAIN_CONTINUES       0xA
+#define B_ANIM_SUN_CONTINUES        0xB
+#define B_ANIM_SANDSTORM_CONTINUES  0xC
+#define B_ANIM_HAIL_CONTINUES       0xD
+#define B_ANIM_LEECH_SEED_DRAIN     0xE
+#define B_ANIM_MON_HIT              0xF
+#define B_ANIM_ITEM_STEAL           0x10
+#define B_ANIM_SNATCH_MOVE          0x11
+#define B_ANIM_FUTURE_SIGHT_HIT     0x12
+#define B_ANIM_x13                  0x13
+#define B_ANIM_x14                  0x14
+#define B_ANIM_INGRAIN_HEAL         0x15
+#define B_ANIM_WISH_HEAL            0x16
+#define B_ANIM_x17                  0x17
+#define B_ANIM_x18                  0x18
+#define B_ANIM_x19                  0x19
+#define B_ANIM_x1A                  0x1A
+#define B_ANIM_x1B                  0x1B
+#define B_ANIM_x1C                  0x1C
+#define B_ANIM_x1D                  0x1D
+
+#define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
+#define GET_STAT_BUFF_VALUE(n)((n & 0xF0) >> 4)     // 0x10, 0x20, 0x40
+#define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
+
+#define SET_STAT_BUFF_ID(n)((n & 0xF))
+#define SET_STAT_BUFF_VALUE(n)(((s8)(((s8)(n) << 4)) & 0xF0))
 
 struct BattleScripting
 {
@@ -718,6 +817,8 @@ struct BattleScripting
     u8 animTurn;
     u8 animTargetsHit;
     u8 statChanger;
+    u8 field_1B;
+    u8 atk23_state;
 };
 
 extern struct BattleScripting gBattleScripting;
@@ -729,10 +830,12 @@ void CancelMultiTurnMoves(u8 bank);
 void PressurePPLose(u8 bankAtk, u8 bankDef, u16 move);
 void PrepareStringBattle(u16 stringId, u8 bank);
 u8 GetBattleBank(u8 caseId);
+void UndoEffectsAfterFainting(void);
 
 // battle_3
-void b_movescr_stack_push(const u8* bsPtr);
-void b_movescr_stack_push_cursor(void);
+void BattleScriptPush(const u8* bsPtr);
+void BattleScriptPushCursor(void);
+void BattleScriptPop(void);
 u8 sub_803FB4C(void);  // msg, can't select a move
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 bool8 AreAllMovesUnusable(void);
@@ -759,6 +862,13 @@ void AI_CalcDmg(u8 bankAtk, u8 bankDef);
 u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
 u8 AI_TypeCalc(u16 move, u16 species, u8 ability);
 u8 BankGetTurnOrder(u8 bank);
+
+// battle_5
+void AdjustFriendshipOnBattleFaint(u8 bank);
+
+// battle 7
+void BattleMusicStop(void);
+void sub_805E990(struct Pokemon* mon, u8 bank);
 
 // rom_80A5C6C
 u8 GetBankSide(u8 bank);

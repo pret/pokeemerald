@@ -5565,7 +5565,7 @@ sub_806743C: @ 806743C
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08067478
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1

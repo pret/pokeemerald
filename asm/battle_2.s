@@ -6513,7 +6513,7 @@ _0803A0AE:
 	ldr r5, =gPauseCounterBattle
 	ldr r6, =gBattleMoveDamage
 	ldr r7, =gUnknown_020243FC
-	ldr r0, =gUnknown_03005D54
+	ldr r0, =gLeveledUpInBattle
 	mov r8, r0
 	ldr r1, =gAbsentBankFlags
 	mov r9, r1
@@ -7256,8 +7256,8 @@ _0803A6B4:
 	.pool
 	thumb_func_end sub_803A284
 
-	thumb_func_start sub_803A75C
-sub_803A75C: @ 803A75C
+	thumb_func_start UndoEffectsAfterFainting
+UndoEffectsAfterFainting: @ 803A75C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7786,7 +7786,7 @@ _0803AB6C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_803A75C
+	thumb_func_end UndoEffectsAfterFainting
 
 	thumb_func_start bc_8012FAC
 bc_8012FAC: @ 803ABC0
@@ -12891,7 +12891,7 @@ _0803D920:
 	ands r2, r0
 	cmp r2, 0
 	beq _0803D95C
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DAA87
 	str r0, [r1]
@@ -12912,7 +12912,7 @@ _0803D95C:
 	beq _0803D968
 	b _0803DA9E
 _0803D968:
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DA92D
 	str r0, [r1]
@@ -13371,7 +13371,7 @@ sub_803DE40: @ 803DE40
 	cmp r0, 0
 	bne _0803DE86
 	bl ResetSpriteData
-	ldr r0, =gUnknown_03005D54
+	ldr r0, =gLeveledUpInBattle
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0803DE62
@@ -13409,7 +13409,7 @@ _0803DEA2:
 	thumb_func_start bc_evolution_cutscene
 bc_evolution_cutscene: @ 803DEB4
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_03005D54
+	ldr r0, =gLeveledUpInBattle
 	ldrb r1, [r0]
 	adds r3, r0, 0
 	cmp r1, 0
@@ -13454,7 +13454,7 @@ _0803DEC2:
 	.pool
 _0803DF20:
 	adds r6, 0x1
-	ldr r3, =gUnknown_03005D54
+	ldr r3, =gLeveledUpInBattle
 	cmp r6, 0x5
 	ble _0803DEC2
 	ldrb r0, [r3]
@@ -16323,7 +16323,7 @@ PrepareStringBattle: @ 803F964
 sub_803F988: @ 803F988
 	push {r4-r6,lr}
 	movs r3, 0
-	ldr r0, =gUnknown_020243FE
+	ldr r0, =gSentPokesToOpponent
 	strb r3, [r0]
 	strb r3, [r0, 0x1]
 	movs r1, 0
@@ -16351,7 +16351,7 @@ _0803F9B6:
 	ldrb r0, [r2]
 	cmp r1, r0
 	bge _0803F9D6
-	ldr r5, =gUnknown_020243FE
+	ldr r5, =gSentPokesToOpponent
 	movs r4, 0x2
 _0803F9C4:
 	adds r0, r1, 0
@@ -16389,7 +16389,7 @@ sub_803F9EC: @ 803F9EC
 	lsls r0, 24
 	lsrs r0, 25
 	mov r12, r0
-	ldr r1, =gUnknown_020243FE
+	ldr r1, =gSentPokesToOpponent
 	adds r0, r1
 	strb r4, [r0]
 	adds r5, r4, 0
@@ -16453,7 +16453,7 @@ _0803FA8C:
 	ldrb r0, [r5]
 	cmp r3, r0
 	bge _0803FAC2
-	ldr r0, =gUnknown_020243FE
+	ldr r0, =gSentPokesToOpponent
 	mov r12, r0
 	movs r7, 0x2
 	ldr r6, =gBitTable

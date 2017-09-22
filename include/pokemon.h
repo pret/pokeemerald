@@ -620,6 +620,9 @@ bool8 IsPokeSpriteNotFlipped(u16 species);
 bool8 IsMonShiny(struct Pokemon *mon);
 bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 
+void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
+bool8 IsTradedMon(struct Pokemon *mon);
+
 #include "sprite.h"
 
 void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
