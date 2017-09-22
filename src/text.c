@@ -32,11 +32,7 @@ u8 gUnknown_03002FB0[0x20];
 u8 gUnknown_03002FD0[0x20];
 u8 gUnknown_03002FF0[0x20];
 u8 gGlyphDimensions[0x2];
-struct {
-    u8 flag_0:1;
-    u8 flag_1:1;
-    u8 flag_2:1;
-} gTextFlags;
+TextFlags gTextFlags;
 
 const u8 gFontHalfRowOffsets[] = {
 	0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
@@ -1973,7 +1969,7 @@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
     }
 }
 
-bool8 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
+bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 {
     bool8 result = FALSE;
     if (gTextFlags.flag_2 != 0)
@@ -1992,9 +1988,9 @@ bool8 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
     return result;
 }
 
-bool8 TextPrinterWait(struct TextPrinter *textPrinter)
+bool16 TextPrinterWait(struct TextPrinter *textPrinter)
 {
-    bool8 result = FALSE;
+    bool16 result = FALSE;
     if (gTextFlags.flag_2 != 0)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
