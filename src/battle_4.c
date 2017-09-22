@@ -4271,48 +4271,49 @@ void atk47_setgraphicalstatchangevalues(void)
 
 void atk48_playstatchangeanimation(void)
 {
-    s32 currStat = 0;
+    u32 currStat = 0;
     s16 statAnimId = 0;
-    s32 checkingStatAnimId = 0;
+    s16 checkingStatAnimId = 0;
     s32 changeableStats = 0;
     u32 statsToCheck = 0;
 
-    gActiveBank = GetBattleBank(BSScriptRead8(gBattlescriptCurrInstr + 1));
-    statsToCheck = BSScriptRead8(gBattlescriptCurrInstr + 2);
+    gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
+    statsToCheck = gBattlescriptCurrInstr[2];
 
-    if (gBattlescriptCurrInstr[3] & 1) // goes down
+    if (gBattlescriptCurrInstr[3] & ATK48_STAT_NEGATIVE) // goes down
     {
-        for (checkingStatAnimId = (gBattlescriptCurrInstr[3] & 0x2) ? 0x2D : 0x15;
-            statsToCheck != 0;
-            statsToCheck >>= 1, checkingStatAnimId += 1, currStat++)
+        checkingStatAnimId = (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO) ? 0x2D : 0x15;
+        while (statsToCheck != 0)
         {
-            if (!(statsToCheck & 1))
-                continue;
-            if (!(gBattlescriptCurrInstr[3] & 8))
+            if (statsToCheck & 1)
             {
-                if (gBattleMons[gActiveBank].statStages[currStat] > 0)
+                if (!(gBattlescriptCurrInstr[3] & ATK48_LOWER_FAIL_CHECK))
                 {
-                    statAnimId = checkingStatAnimId;
-                    changeableStats++;
+                    if (gBattleMons[gActiveBank].statStages[currStat] > 0)
+                    {
+                        statAnimId = checkingStatAnimId;
+                        changeableStats++;
+                    }
+                }
+                else if (!gSideTimers[GET_BANK_SIDE(gActiveBank)].mistTimer
+                        && gBattleMons[gActiveBank].ability != ABILITY_CLEAR_BODY
+                        && gBattleMons[gActiveBank].ability != ABILITY_WHITE_SMOKE
+                        && !(gBattleMons[gActiveBank].ability == ABILITY_KEEN_EYE && currStat == STAT_STAGE_ACC)
+                        && !(gBattleMons[gActiveBank].ability == ABILITY_HYPER_CUTTER && currStat == STAT_STAGE_ATK))
+                {
+                    if (gBattleMons[gActiveBank].statStages[currStat] > 0)
+                    {
+                        statAnimId = checkingStatAnimId;
+                        changeableStats++;
+                    }
                 }
             }
-            else if (!gSideTimers[GET_BANK_SIDE(gActiveBank)].mistTimer
-                    && gBattleMons[gActiveBank].ability != ABILITY_CLEAR_BODY
-                    && gBattleMons[gActiveBank].ability != ABILITY_WHITE_SMOKE
-                    && !(gBattleMons[gActiveBank].ability == ABILITY_KEEN_EYE && currStat == STAT_STAGE_ACC)
-                    && !(gBattleMons[gActiveBank].ability == ABILITY_HYPER_CUTTER && currStat == STAT_STAGE_ATK))
-            {
-                if (gBattleMons[gActiveBank].statStages[currStat] > 0)
-                {
-                    statAnimId = checkingStatAnimId;
-                    changeableStats++;
-                }
-            }
+            statsToCheck >>= 1, checkingStatAnimId++, currStat++;
         }
 
         if (changeableStats > 1) // more than one stat, so the color is gray
         {
-            if (gBattlescriptCurrInstr[3] & 2)
+            if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
                 statAnimId = 0x3A;
             else
                 statAnimId = 0x39;
@@ -4320,27 +4321,27 @@ void atk48_playstatchangeanimation(void)
     }
     else // goes up
     {
-        for (checkingStatAnimId = (gBattlescriptCurrInstr[3] & 0x2) ? 0x26 : 0xE;
-            statsToCheck != 0;
-            statsToCheck >>= 1, checkingStatAnimId += 1, currStat++)
+        checkingStatAnimId = (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO) ? 0x26 : 0xE;
+        while (statsToCheck != 0)
         {
             if (statsToCheck & 1 && gBattleMons[gActiveBank].statStages[currStat] < 0xC)
             {
                 statAnimId = checkingStatAnimId;
                 changeableStats++;
             }
+            statsToCheck >>= 1, checkingStatAnimId += 1, currStat++;
         }
 
         if (changeableStats > 1) // more than one stat, so the color is gray
         {
-            if (gBattlescriptCurrInstr[3] & 2)
+            if (gBattlescriptCurrInstr[3] & ATK48_STAT_BY_TWO)
                 statAnimId = 0x38;
             else
                 statAnimId = 0x37;
         }
     }
 
-    if (gBattlescriptCurrInstr[3] & 4 && changeableStats < 2)
+    if (gBattlescriptCurrInstr[3] & ATK48_BIT_x4 && changeableStats < 2)
     {
         gBattlescriptCurrInstr += 4;
     }
@@ -4348,7 +4349,7 @@ void atk48_playstatchangeanimation(void)
     {
         EmitBattleAnimation(0, B_ANIM_STATS_CHANGE, statAnimId);
         MarkBufferBankForExecution(gActiveBank);
-        if (gBattlescriptCurrInstr[3] & 4 && changeableStats > 1)
+        if (gBattlescriptCurrInstr[3] & ATK48_BIT_x4 && changeableStats > 1)
             gBattleScripting.field_1B = 1;
         gBattlescriptCurrInstr += 4;
     }

@@ -784,6 +784,11 @@ extern struct BattleStruct* gBattleStruct;
 #define B_ANIM_x1C                  0x1C
 #define B_ANIM_x1D                  0x1D
 
+#define ATK48_STAT_NEGATIVE         0x1
+#define ATK48_STAT_BY_TWO           0x2
+#define ATK48_BIT_x4                0x4
+#define ATK48_LOWER_FAIL_CHECK      0x8
+
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE(n)((n & 0xF0) >> 4)     // 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
