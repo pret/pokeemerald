@@ -99,6 +99,8 @@ s8 sub_81C08F8(s8 a);
 void sub_81C4204(u8 a, u8 b);
 void sub_81C20F0(u8 taskId);
 u8 sub_81C0A50(struct Pokemon* mon);
+void sub_81C49E0();
+void sub_81C0E24();
 
 u8 sub_81BFB10();
 u8 sub_81B1250();
@@ -702,298 +704,73 @@ void sub_81C0604(u8 taskId, s8 a)
     }
 }
 
-#ifdef NONMATCHING
 void sub_81C0704(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    
+
     switch (data[0])
     {
-        case 0:
-            StopCryAndClearCrySongs();
-            data[0]++;
-            break;
-        case 1:
-            sub_81C4898();
-            DestroySpriteAndFreeResources(&gSprites[gUnknown_0203CF1C->unk40D3]);
-            data[0]++;
-            break;
-        case 2:
-            DestroySpriteAndFreeResources(&gSprites[gUnknown_0203CF1C->unk40D4]);
-            data[0]++;
-            break;
-        case 3:
-            sub_81C0098(&gUnknown_0203CF1C->currentPoke);
-            gUnknown_0203CF1C->unk40F0 = 0;
-            data[0]++;
-            break;
-        case 4:
-            if (sub_81C00F0(&gUnknown_0203CF1C->currentPoke))
-                data[0]++;
-            break;
-        case 5:
-            sub_81C49E0(&gUnknown_0203CF1C->currentPoke);
-            data[0]++;
-            break;
-        case 6:
-            sub_81C4A08(&gUnknown_0203CF1C->currentPoke);
-            data[0]++;
-            break;
-        case 7:
-            if (gUnknown_0203CF1C->summary.unk7)
-                sub_81C2074(10, -2);
-            sub_81C2228(&gUnknown_0203CF1C->currentPoke);
-            data[1] = 0;
-            data[0]++;
-            break;
-        case 8:
-            gUnknown_0203CF1C->unk40D3 = sub_81C45F4(&gUnknown_0203CF1C->currentPoke, &data[1]);
-            if (gUnknown_0203CF1C->unk40D3 != 0xFF)
-            {
-                gSprites[gUnknown_0203CF1C->unk40D3].data2 = 1;
-                sub_81C0E24();
-                data[1] = 0;
-                data[0]++;
-            }
-            break;
-        case 9:
-            sub_81C4280();
-            data[0]++;
-            break;
-        case 10:
-            sub_81C25E8();
-            data[0]++;
-            break;
-        case 11:
-            sub_81C2D9C(gUnknown_0203CF1C->unk40C0);
-            sub_81C2524();
-            data[0]++;
-            break;
-        case 12:
-            gSprites[gUnknown_0203CF1C->unk40D3].data2 = 0;
-            data[0]++;
-            break;
-        case 13:
-            if (sub_81221EC() == 0 && FuncIsActiveTask(sub_81C20F0) == 0)
-            {
-                TaskFunc *func;
-                data[0] = 0;
-                func = &gTasks[taskId].func; 
-                *func = sub_81C0510;
-            }
+    case 0:
+        StopCryAndClearCrySongs();
+        break;
+    case 1:
+        sub_81C4898();
+        DestroySpriteAndFreeResources(&gSprites[gUnknown_0203CF1C->unk40D3]);
+        break;
+    case 2:
+        DestroySpriteAndFreeResources(&gSprites[gUnknown_0203CF1C->unk40D4]);
+        break;
+    case 3:
+        sub_81C0098(&gUnknown_0203CF1C->currentPoke);
+        gUnknown_0203CF1C->unk40F0 = 0;
+        break;
+    case 4:
+        if (sub_81C00F0(&gUnknown_0203CF1C->currentPoke) == 0)
+            return;
+        break;
+    case 5:
+        sub_81C49E0(&gUnknown_0203CF1C->currentPoke);
+        break;
+    case 6:
+        sub_81C4A08(&gUnknown_0203CF1C->currentPoke);
+        break;
+    case 7:
+        if (gUnknown_0203CF1C->summary.unk7)
+            sub_81C2074(10, -2);
+        sub_81C2228(&gUnknown_0203CF1C->currentPoke);
+        data[1] = 0;
+        break;
+    case 8:
+        gUnknown_0203CF1C->unk40D3 = sub_81C45F4(&gUnknown_0203CF1C->currentPoke, &data[1]);
+        if (gUnknown_0203CF1C->unk40D3 == 0xFF)
+            return;
+        gSprites[gUnknown_0203CF1C->unk40D3].data2 = 1;
+        sub_81C0E24();
+        data[1] = 0;
+        break;
+    case 9:
+        sub_81C4280();
+        break;
+    case 10:
+        sub_81C25E8();
+        break;
+    case 11:
+        sub_81C2D9C(gUnknown_0203CF1C->unk40C0);
+        sub_81C2524();
+        break;
+    case 12:
+        gSprites[gUnknown_0203CF1C->unk40D3].data2 = 0;
+        break;
+    default:
+        if (sub_81221EC() == 0 && FuncIsActiveTask(sub_81C20F0) == 0)
+        {
+            data[0] = 0;
+            gTasks[taskId].func = sub_81C0510;
+        }
+        return;
     }
+    data[0]++;
 }
-#else
-__attribute__((naked))
-void sub_81C0704(u8 taskId)
-{
-    asm(".syntax unified\n\
-        push {r4-r6,lr}\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	lsls r1, r0, 2\n\
-	adds r1, r0\n\
-	lsls r4, r1, 3\n\
-	ldr r6, =gTasks + 0x8\n\
-	adds r5, r4, r6\n\
-	movs r1, 0\n\
-	ldrsh r0, [r5, r1]\n\
-	cmp r0, 0xC\n\
-	bls _081C071E\n\
-	b _081C08BC\n\
-_081C071E:\n\
-	lsls r0, 2\n\
-	ldr r1, =_081C0730\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
-_081C0730:\n\
-	.4byte _081C0764\n\
-	.4byte _081C076A\n\
-	.4byte _081C0780\n\
-	.4byte _081C07A8\n\
-	.4byte _081C07C8\n\
-	.4byte _081C07E0\n\
-	.4byte _081C07F0\n\
-	.4byte _081C0800\n\
-	.4byte _081C0828\n\
-	.4byte _081C086C\n\
-	.4byte _081C0872\n\
-	.4byte _081C0878\n\
-	.4byte _081C0894\n\
-_081C0764:\n\
-	bl StopCryAndClearCrySongs\n\
-	b _081C08EC\n\
-_081C076A:\n\
-	bl sub_81C4898\n\
-	ldr r0, =gUnknown_0203CF1C\n\
-	ldr r0, [r0]\n\
-	ldr r1, =0x000040d3\n\
-	b _081C0786\n\
-	.pool\n\
-_081C0780:\n\
-	ldr r0, =gUnknown_0203CF1C\n\
-	ldr r0, [r0]\n\
-	ldr r1, =0x000040d4\n\
-_081C0786:\n\
-	adds r0, r1\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	ldr r1, =gSprites\n\
-	adds r0, r1\n\
-	bl DestroySpriteAndFreeResources\n\
-	b _081C08EC\n\
-	.pool\n\
-_081C07A8:\n\
-	ldr r4, =gUnknown_0203CF1C\n\
-	ldr r0, [r4]\n\
-	adds r0, 0xC\n\
-	bl sub_81C0098\n\
-	ldr r0, [r4]\n\
-	ldr r1, =0x000040f0\n\
-	adds r0, r1\n\
-	movs r1, 0\n\
-	strh r1, [r0]\n\
-	b _081C08EC\n\
-	.pool\n\
-_081C07C8:\n\
-	ldr r0, =gUnknown_0203CF1C\n\
-	ldr r0, [r0]\n\
-	adds r0, 0xC\n\
-	bl sub_81C00F0\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _081C07DA\n\
-	b _081C08F2\n\
-_081C07DA:\n\
-	b _081C08EC\n\
-	.pool\n\
-_081C07E0:\n\
-	ldr r0, =gUnknown_0203CF1C\n\
-	ldr r0, [r0]\n\
-	adds r0, 0xC\n\
-	bl sub_81C49E0\n\
-	b _081C08EC\n\
-	.pool\n\
-_081C07F0:\n\
-	ldr r0, =gUnknown_0203CF1C\n\
-	ldr r0, [r0]\n\
-	adds r0, 0xC\n\
-	bl sub_81C4A08\n\
-	b _081C08EC\n\
-	.pool\n\
-_081C0800:\n\
-	ldr r4, =gUnknown_0203CF1C\n\
-	ldr r0, [r4]\n\
-	adds r0, 0x77\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _081C0816\n\
-	movs r1, 0x2\n\
-	negs r1, r1\n\
-	movs r0, 0xA\n\
-	bl sub_81C2074\n\
-_081C0816:\n\
-	ldr r0, [r4]\n\
-	adds r0, 0xC\n\
-	bl sub_81C2228\n\
-	movs r0, 0\n\
-	strh r0, [r5, 0x2]\n\
-	b _081C08EC\n\
-	.pool\n\
-_081C0828:\n\
-	ldr r4, =gUnknown_0203CF1C\n\
-	ldr r0, [r4]\n\
-	adds r0, 0xC\n\
-	adds r1, r5, 0x2\n\
-	bl sub_81C45F4\n\
-	ldr r1, [r4]\n\
-	ldr r2, =0x000040d3\n\
-	adds r1, r2\n\
-	strb r0, [r1]\n\
-	ldr r0, [r4]\n\
-	adds r1, r0, r2\n\
-	ldrb r0, [r1]\n\
-	cmp r0, 0xFF\n\
-	beq _081C08F2\n\
-	ldr r2, =gSprites\n\
-	adds r1, r0, 0\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r2\n\
-	movs r1, 0x1\n\
-	strh r1, [r0, 0x32]\n\
-	bl sub_81C0E24\n\
-	movs r0, 0\n\
-	strh r0, [r5, 0x2]\n\
-	b _081C08EC\n\
-	.pool\n\
-_081C086C:\n\
-	bl sub_81C4280\n\
-	b _081C08EC\n\
-_081C0872:\n\
-	bl sub_81C25E8\n\
-	b _081C08EC\n\
-_081C0878:\n\
-	ldr r0, =gUnknown_0203CF1C\n\
-	ldr r0, [r0]\n\
-	ldr r1, =0x000040c0\n\
-	adds r0, r1\n\
-	ldrb r0, [r0]\n\
-	bl sub_81C2D9C\n\
-	bl sub_81C2524\n\
-	b _081C08EC\n\
-	.pool\n\
-_081C0894:\n\
-	ldr r2, =gSprites\n\
-	ldr r0, =gUnknown_0203CF1C\n\
-	ldr r0, [r0]\n\
-	ldr r1, =0x000040d3\n\
-	adds r0, r1\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 4\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r2\n\
-	movs r1, 0\n\
-	strh r1, [r0, 0x32]\n\
-	b _081C08EC\n\
-	.pool\n\
-_081C08BC:\n\
-	bl sub_81221EC\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _081C08F2\n\
-	ldr r0, =sub_81C20F0\n\
-	bl FuncIsActiveTask\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0\n\
-	bne _081C08F2\n\
-	strh r0, [r5]\n\
-	adds r0, r6, 0\n\
-	subs r0, 0x8\n\
-	adds r0, r4, r0\n\
-	ldr r1, =sub_81C0510\n\
-	str r1, [r0]\n\
-	b _081C08F2\n\
-	.pool\n\
-_081C08EC:\n\
-	ldrh r0, [r5]\n\
-	adds r0, 0x1\n\
-	strh r0, [r5]\n\
-_081C08F2:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.syntax divided\n");
-}
-#endif
 
 #ifdef NONMATCHING
 s8 sub_81C08F8(s8 a)
