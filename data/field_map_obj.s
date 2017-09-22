@@ -1268,16 +1268,16 @@ gUnknown_0850DC50:: @ 850DC50
 .4byte gUnknown_0850DF08
 .4byte gUnknown_0850DF14
 .4byte gUnknown_0850DF20
-.4byte 0x850E854    @ FIX ME: ADD LABEL
-.4byte 0x850E85C    @ FIX ME: ADD LABEL
+.4byte gUnknown_0850E854
+.4byte gUnknown_0850E85C
 .4byte gUnknown_0850E3A0
 .4byte gUnknown_0850E3AC
 .4byte gUnknown_0850E5C4
 .4byte gUnknown_0850E5CC
 .4byte gUnknown_0850E5D4
 .4byte gUnknown_0850E468
-.4byte 0x850E864    @ FIX ME: ADD LABEL
-.4byte 0x850E870    @ FIX ME: ADD LABEL
+.4byte gUnknown_0850E864
+.4byte gUnknown_0850E870
 
 gUnknown_0850DEC8:: @ 850DEC8
 	.4byte sub_8093950
