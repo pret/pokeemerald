@@ -5,8 +5,9 @@
 #include "sound.h"
 
 extern const u8 gUnknown_08616124[];
+extern const u16 gFont6BrailleGlyphs[];
 
-void DecompressGlyphFont6(u16);
+static void DecompressGlyphFont6(u16);
 
 u16 Font6Func(struct TextPrinter *textPrinter)
 {
@@ -197,4 +198,22 @@ u16 Font6Func(struct TextPrinter *textPrinter)
             return 3;
     }
     return 1;
+}
+
+static void DecompressGlyphFont6(u16 glyph)
+{
+    const u16 *glyphs;
+
+    glyphs = gFont6BrailleGlyphs + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
+    DecompressGlyphTile(glyphs, (u16 *)gUnknown_03002F90);
+    DecompressGlyphTile(glyphs + 0x8, (u16 *)(gUnknown_03002F90 + 0x20));
+    DecompressGlyphTile(glyphs + 0x80, (u16 *)(gUnknown_03002F90 + 0x40));
+    DecompressGlyphTile(glyphs + 0x88, (u16 *)(gUnknown_03002F90 + 0x60));
+    gUnknown_03002F90[0x80] = 0x10;
+    gUnknown_03002F90[0x81] = 0x10;
+}
+
+u8 GetGlyphWidthFont6(void)
+{
+    return 0x10;
 }

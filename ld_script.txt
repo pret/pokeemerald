@@ -254,7 +254,6 @@ SECTIONS {
         asm/party_menu.o(.text);
         asm/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
-        asm/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
         asm/unk_81BAD84.o(.text);
         asm/battle_controller_player_partner.o(.text);
