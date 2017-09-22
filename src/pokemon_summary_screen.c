@@ -6,6 +6,7 @@
 #include "malloc.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -16,6 +17,7 @@ extern struct unkSummaryStruct* gUnknown_0203CF1C;
 extern struct BgTemplate gUnknown_0861CBB4;
 extern u8 gUnknown_0203CF20;
 extern struct MusicPlayerInfo gMPlay_BGM;
+extern s8 gUnknown_0861CC1C[];
 
 extern void sub_806F2AC(u8 a, u8 b);
 void sub_81C488C(u8 a);
@@ -80,7 +82,7 @@ void sub_81C1DA4(u8 a, u8 b);
 void sub_81C1EFC(u8 a, u8 b, u8 c);
 void sub_81C240C(u16 a);
 void sub_81C2194(void* a, u8 b, u8 c);
-void sub_81C2074(u8 a, u8 b);
+void sub_81C2074(u16 a, s16 b);
 void sub_81C2524();
 void sub_81C2228(struct Pokemon* poke);
 void sub_81C0484(u8 taskId);
@@ -96,6 +98,7 @@ s8 sub_81C09B4(s8 a);
 s8 sub_81C08F8(s8 a);
 void sub_81C4204(u8 a, u8 b);
 void sub_81C20F0(u8 taskId);
+u8 sub_81C0A50(struct Pokemon* mon);
 
 u8 sub_81BFB10();
 u8 sub_81B1250();
@@ -105,7 +108,7 @@ union unkUnion{
     struct BoxPokemon boxMons[6];
 };
 
-u8 sub_80D214C(union unkUnion* a, u8 b, u8 c, int d);
+u8 sub_80D214C(union unkUnion* a, u8 b, u8 c, u8 d);
 
 struct pokeSummary{
     u16 species; // 0x0
@@ -462,62 +465,19 @@ u8 sub_81BFEB0()
     return 0;
 }
 
-#ifdef NONMATCHING
 void sub_81C0098(struct Pokemon* poke)
 {
     if (gUnknown_0203CF1C->unk40BD == 0)
     {
-        struct Pokemon* src = &gUnknown_0203CF1C->unk0->mons[gUnknown_0203CF1C->unk40BE];
-        *poke = *src;
+        struct Pokemon *pokeMons = gUnknown_0203CF1C->unk0->mons;
+        *poke = pokeMons[gUnknown_0203CF1C->unk40BE];
     }
     else
-        sub_8069004(&gUnknown_0203CF1C->unk0->boxMons[gUnknown_0203CF1C->unk40BE], poke);
+    {
+        struct BoxPokemon *boxMons = gUnknown_0203CF1C->unk0->boxMons;
+        sub_8069004(&boxMons[gUnknown_0203CF1C->unk40BE], poke);
+    }
 }
-#else
-__attribute__((naked))
-void sub_81C0098(struct Pokemon* poke)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-	adds r3, r0, 0\n\
-	ldr r0, =gUnknown_0203CF1C\n\
-	ldr r1, [r0]\n\
-	ldr r2, =0x000040bd\n\
-	adds r0, r1, r2\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _081C00D0\n\
-	ldr r2, [r1]\n\
-	ldr r4, =0x000040be\n\
-	adds r0, r1, r4\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x64\n\
-	muls r1, r0\n\
-	adds r1, r2\n\
-	adds r0, r3, 0\n\
-	movs r2, 0x64\n\
-	bl memcpy\n\
-	b _081C00E6\n\
-	.pool\n\
-_081C00D0:\n\
-	ldr r0, [r1]\n\
-	ldr r2, =0x000040be\n\
-	adds r1, r2\n\
-	ldrb r2, [r1]\n\
-	lsls r1, r2, 2\n\
-	adds r1, r2\n\
-	lsls r1, 4\n\
-	adds r0, r1\n\
-	adds r1, r3, 0\n\
-	bl sub_8069004\n\
-_081C00E6:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-	.syntax divided\n");
-}
-#endif
 
 u8 sub_81C00F0(struct Pokemon* a)
 {
@@ -692,36 +652,42 @@ void sub_81C0510(u8 taskId)
     }
 }
 
-#ifdef NONMATCHING
 void sub_81C0604(u8 taskId, s8 a)
 {
     s8 r4_2;
-    int r4;
-    
-    
+
     if (gUnknown_0203CF1C->unk40C3 == 0)
     {
         if (gUnknown_0203CF1C->unk40BD == 1)
         {
-            if(gUnknown_0203CF1C->unk40C0 != 0)
+            if (gUnknown_0203CF1C->unk40C0 != 0)
             {
-                r4 = (a ^ 1) ? 2 : 0;
+                if (a == 1)
+                    a = 0;
+                else
+                    a = 2;
             }
-            else if (a == 1)
-                r4 = a;
             else
-                r4 = 3;
-        r4_2 = sub_80D214C(gUnknown_0203CF1C->unk0, gUnknown_0203CF1C->unk40BE, gUnknown_0203CF1C->unk40BF, r4);
+            {
+                if (a == 1)
+                    a = 1;
+                else
+                    a = 3;
+            }
+            r4_2 = sub_80D214C(gUnknown_0203CF1C->unk0, gUnknown_0203CF1C->unk40BE, gUnknown_0203CF1C->unk40BF, a);
         }
         else if (sub_81B1250() == 1)
         {
             r4_2 = sub_81C09B4(a);
         }
         else
+        {
             r4_2 = sub_81C08F8(a);
+        }
+
         if (r4_2 != -1)
         {
-            PlaySE(5);
+            PlaySE(SE_SELECT);
             if (gUnknown_0203CF1C->summary.unk7 != 0)
             {
                 sub_81C4204(2, 1);
@@ -735,128 +701,9 @@ void sub_81C0604(u8 taskId, s8 a)
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_81C0604(u8 taskId, s8 a)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	lsls r1, 24\n\
-	lsrs r5, r1, 24\n\
-	adds r4, r5, 0\n\
-	ldr r1, =gUnknown_0203CF1C\n\
-	ldr r3, [r1]\n\
-	ldr r2, =0x000040c3\n\
-	adds r0, r3, r2\n\
-	ldrb r0, [r0]\n\
-	adds r6, r1, 0\n\
-	cmp r0, 0\n\
-	bne _081C06EE\n\
-	ldr r1, =0x000040bd\n\
-	adds r0, r3, r1\n\
-	ldrb r2, [r0]\n\
-	cmp r2, 0x1\n\
-	bne _081C0678\n\
-	adds r1, 0x3\n\
-	adds r0, r3, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _081C0654\n\
-	lsls r1, r5, 24\n\
-	asrs r1, 24\n\
-	movs r4, 0x2\n\
-	eors r1, r2\n\
-	negs r0, r1\n\
-	orrs r0, r1\n\
-	asrs r0, 31\n\
-	ands r4, r0\n\
-	b _081C065C\n\
-	.pool\n\
-_081C0654:\n\
-	movs r4, 0x3\n\
-	cmp r5, 0x1\n\
-	bne _081C065C\n\
-	movs r4, 0x1\n\
-_081C065C:\n\
-	ldr r2, [r6]\n\
-	ldr r0, [r2]\n\
-	ldr r3, =0x000040be\n\
-	adds r1, r2, r3\n\
-	ldrb r1, [r1]\n\
-	adds r3, 0x1\n\
-	adds r2, r3\n\
-	ldrb r2, [r2]\n\
-	adds r3, r4, 0\n\
-	bl sub_80D214C\n\
-	b _081C0696\n\
-	.pool\n\
-_081C0678:\n\
-	bl sub_81B1250\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _081C068E\n\
-	lsls r0, r5, 24\n\
-	asrs r0, 24\n\
-	bl sub_81C09B4\n\
-	b _081C0696\n\
-_081C068E:\n\
-	lsls r0, r4, 24\n\
-	asrs r0, 24\n\
-	bl sub_81C08F8\n\
-_081C0696:\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	lsls r0, r4, 24\n\
-	asrs r0, 24\n\
-	movs r1, 0x1\n\
-	negs r1, r1\n\
-	cmp r0, r1\n\
-	beq _081C06EE\n\
-	movs r0, 0x5\n\
-	bl PlaySE\n\
-	ldr r5, =gUnknown_0203CF1C\n\
-	ldr r0, [r5]\n\
-	adds r0, 0x77\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _081C06D4\n\
-	movs r0, 0x2\n\
-	movs r1, 0x1\n\
-	bl sub_81C4204\n\
-	movs r0, 0xD\n\
-	bl ClearWindowTilemap\n\
-	movs r0, 0\n\
-	bl schedule_bg_copy_tilemap_to_vram\n\
-	movs r0, 0\n\
-	movs r1, 0x2\n\
-	bl sub_81C2074\n\
-_081C06D4:\n\
-	ldr r0, [r5]\n\
-	ldr r1, =0x000040be\n\
-	adds r0, r1\n\
-	movs r2, 0\n\
-	strb r4, [r0]\n\
-	ldr r1, =gTasks\n\
-	lsls r0, r7, 2\n\
-	adds r0, r7\n\
-	lsls r0, 3\n\
-	adds r0, r1\n\
-	strh r2, [r0, 0x8]\n\
-	ldr r1, =sub_81C0704\n\
-	str r1, [r0]\n\
-_081C06EE:\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-	.syntax divided\n");
-}
-#endif
 
-/* void sub_81C0704(u8 taskId)
+#ifdef NONMATCHING
+void sub_81C0704(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     
@@ -935,4 +782,388 @@ _081C06EE:\n\
                 *func = sub_81C0510;
             }
     }
-} */
+}
+#else
+__attribute__((naked))
+void sub_81C0704(u8 taskId)
+{
+    asm(".syntax unified\n\
+        push {r4-r6,lr}\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	lsls r1, r0, 2\n\
+	adds r1, r0\n\
+	lsls r4, r1, 3\n\
+	ldr r6, =gTasks + 0x8\n\
+	adds r5, r4, r6\n\
+	movs r1, 0\n\
+	ldrsh r0, [r5, r1]\n\
+	cmp r0, 0xC\n\
+	bls _081C071E\n\
+	b _081C08BC\n\
+_081C071E:\n\
+	lsls r0, 2\n\
+	ldr r1, =_081C0730\n\
+	adds r0, r1\n\
+	ldr r0, [r0]\n\
+	mov pc, r0\n\
+	.pool\n\
+	.align 2, 0\n\
+_081C0730:\n\
+	.4byte _081C0764\n\
+	.4byte _081C076A\n\
+	.4byte _081C0780\n\
+	.4byte _081C07A8\n\
+	.4byte _081C07C8\n\
+	.4byte _081C07E0\n\
+	.4byte _081C07F0\n\
+	.4byte _081C0800\n\
+	.4byte _081C0828\n\
+	.4byte _081C086C\n\
+	.4byte _081C0872\n\
+	.4byte _081C0878\n\
+	.4byte _081C0894\n\
+_081C0764:\n\
+	bl StopCryAndClearCrySongs\n\
+	b _081C08EC\n\
+_081C076A:\n\
+	bl sub_81C4898\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r0, [r0]\n\
+	ldr r1, =0x000040d3\n\
+	b _081C0786\n\
+	.pool\n\
+_081C0780:\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r0, [r0]\n\
+	ldr r1, =0x000040d4\n\
+_081C0786:\n\
+	adds r0, r1\n\
+	ldrb r1, [r0]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	ldr r1, =gSprites\n\
+	adds r0, r1\n\
+	bl DestroySpriteAndFreeResources\n\
+	b _081C08EC\n\
+	.pool\n\
+_081C07A8:\n\
+	ldr r4, =gUnknown_0203CF1C\n\
+	ldr r0, [r4]\n\
+	adds r0, 0xC\n\
+	bl sub_81C0098\n\
+	ldr r0, [r4]\n\
+	ldr r1, =0x000040f0\n\
+	adds r0, r1\n\
+	movs r1, 0\n\
+	strh r1, [r0]\n\
+	b _081C08EC\n\
+	.pool\n\
+_081C07C8:\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r0, [r0]\n\
+	adds r0, 0xC\n\
+	bl sub_81C00F0\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	bne _081C07DA\n\
+	b _081C08F2\n\
+_081C07DA:\n\
+	b _081C08EC\n\
+	.pool\n\
+_081C07E0:\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r0, [r0]\n\
+	adds r0, 0xC\n\
+	bl sub_81C49E0\n\
+	b _081C08EC\n\
+	.pool\n\
+_081C07F0:\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r0, [r0]\n\
+	adds r0, 0xC\n\
+	bl sub_81C4A08\n\
+	b _081C08EC\n\
+	.pool\n\
+_081C0800:\n\
+	ldr r4, =gUnknown_0203CF1C\n\
+	ldr r0, [r4]\n\
+	adds r0, 0x77\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _081C0816\n\
+	movs r1, 0x2\n\
+	negs r1, r1\n\
+	movs r0, 0xA\n\
+	bl sub_81C2074\n\
+_081C0816:\n\
+	ldr r0, [r4]\n\
+	adds r0, 0xC\n\
+	bl sub_81C2228\n\
+	movs r0, 0\n\
+	strh r0, [r5, 0x2]\n\
+	b _081C08EC\n\
+	.pool\n\
+_081C0828:\n\
+	ldr r4, =gUnknown_0203CF1C\n\
+	ldr r0, [r4]\n\
+	adds r0, 0xC\n\
+	adds r1, r5, 0x2\n\
+	bl sub_81C45F4\n\
+	ldr r1, [r4]\n\
+	ldr r2, =0x000040d3\n\
+	adds r1, r2\n\
+	strb r0, [r1]\n\
+	ldr r0, [r4]\n\
+	adds r1, r0, r2\n\
+	ldrb r0, [r1]\n\
+	cmp r0, 0xFF\n\
+	beq _081C08F2\n\
+	ldr r2, =gSprites\n\
+	adds r1, r0, 0\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r2\n\
+	movs r1, 0x1\n\
+	strh r1, [r0, 0x32]\n\
+	bl sub_81C0E24\n\
+	movs r0, 0\n\
+	strh r0, [r5, 0x2]\n\
+	b _081C08EC\n\
+	.pool\n\
+_081C086C:\n\
+	bl sub_81C4280\n\
+	b _081C08EC\n\
+_081C0872:\n\
+	bl sub_81C25E8\n\
+	b _081C08EC\n\
+_081C0878:\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r0, [r0]\n\
+	ldr r1, =0x000040c0\n\
+	adds r0, r1\n\
+	ldrb r0, [r0]\n\
+	bl sub_81C2D9C\n\
+	bl sub_81C2524\n\
+	b _081C08EC\n\
+	.pool\n\
+_081C0894:\n\
+	ldr r2, =gSprites\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r0, [r0]\n\
+	ldr r1, =0x000040d3\n\
+	adds r0, r1\n\
+	ldrb r1, [r0]\n\
+	lsls r0, r1, 4\n\
+	adds r0, r1\n\
+	lsls r0, 2\n\
+	adds r0, r2\n\
+	movs r1, 0\n\
+	strh r1, [r0, 0x32]\n\
+	b _081C08EC\n\
+	.pool\n\
+_081C08BC:\n\
+	bl sub_81221EC\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	bne _081C08F2\n\
+	ldr r0, =sub_81C20F0\n\
+	bl FuncIsActiveTask\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	cmp r0, 0\n\
+	bne _081C08F2\n\
+	strh r0, [r5]\n\
+	adds r0, r6, 0\n\
+	subs r0, 0x8\n\
+	adds r0, r4, r0\n\
+	ldr r1, =sub_81C0510\n\
+	str r1, [r0]\n\
+	b _081C08F2\n\
+	.pool\n\
+_081C08EC:\n\
+	ldrh r0, [r5]\n\
+	adds r0, 0x1\n\
+	strh r0, [r5]\n\
+_081C08F2:\n\
+	pop {r4-r6}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.syntax divided\n");
+}
+#endif
+
+#ifdef NONMATCHING
+s8 sub_81C08F8(s8 a)
+{
+    union unkUnion* r7 = gUnknown_0203CF1C->unk0;
+    if (gUnknown_0203CF1C->unk40C0 == 0)
+    {
+        if (a != -1 || gUnknown_0203CF1C->unk40BE != 0)
+        {
+            if (a != 1 || gUnknown_0203CF1C->unk40BE < gUnknown_0203CF1C->unk40BF)
+            {
+                return gUnknown_0203CF1C->unk40BE + a;
+            }
+        }
+        return -1;
+    }
+    else
+    {
+        s8 r5r4 = gUnknown_0203CF1C->unk40BE;
+        while(1)
+        {
+            r5r4 += a;
+            if (r5r4 < 0 || r5r4 > gUnknown_0203CF1C->unk40BF)
+                return -1;
+            else if (GetMonData(&r7->mons[r5r4], MON_DATA_IS_EGG) == 0)
+                return r5r4;
+        }
+    }
+}
+#else
+__attribute__((naked))
+s8 sub_81C08F8(s8 a)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+	lsls r0, 24\n\
+	lsrs r4, r0, 24\n\
+	ldr r1, =gUnknown_0203CF1C\n\
+	ldr r2, [r1]\n\
+	ldr r7, [r2]\n\
+	ldr r3, =0x000040c0\n\
+	adds r0, r2, r3\n\
+	ldrb r0, [r0]\n\
+	adds r5, r1, 0\n\
+	cmp r0, 0\n\
+	bne _081C0960\n\
+	lsls r0, r4, 24\n\
+	asrs r3, r0, 24\n\
+	movs r1, 0x1\n\
+	negs r1, r1\n\
+	adds r6, r0, 0\n\
+	cmp r3, r1\n\
+	bne _081C0928\n\
+	ldr r1, =0x000040be\n\
+	adds r0, r2, r1\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _081C0988\n\
+_081C0928:\n\
+	asrs r0, r6, 24\n\
+	cmp r0, 0x1\n\
+	bne _081C0940\n\
+	ldr r0, [r5]\n\
+	ldr r2, =0x000040be\n\
+	adds r1, r0, r2\n\
+	ldr r3, =0x000040bf\n\
+	adds r0, r3\n\
+	ldrb r1, [r1]\n\
+	ldrb r0, [r0]\n\
+	cmp r1, r0\n\
+	bcs _081C0988\n\
+_081C0940:\n\
+	ldr r0, [r5]\n\
+	ldr r1, =0x000040be\n\
+	adds r0, r1\n\
+	ldrb r0, [r0]\n\
+	adds r0, r4\n\
+	lsls r0, 24\n\
+	asrs r0, 24\n\
+	b _081C09AE\n\
+	.pool\n\
+_081C0960:\n\
+	ldr r3, =0x000040be\n\
+	adds r0, r2, r3\n\
+	ldrb r5, [r0]\n\
+	lsls r6, r4, 24\n\
+_081C0968:\n\
+	lsls r0, r5, 24\n\
+	asrs r0, 24\n\
+	asrs r1, r6, 24\n\
+	adds r0, r1\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	asrs r4, r0, 24\n\
+	cmp r4, 0\n\
+	blt _081C0988\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r0, [r0]\n\
+	ldr r1, =0x000040bf\n\
+	adds r0, r1\n\
+	ldrb r0, [r0]\n\
+	cmp r4, r0\n\
+	ble _081C099C\n\
+_081C0988:\n\
+	movs r0, 0x1\n\
+	negs r0, r0\n\
+	b _081C09AE\n\
+	.pool\n\
+_081C099C:\n\
+	movs r0, 0x64\n\
+	muls r0, r4\n\
+	adds r0, r7, r0\n\
+	movs r1, 0x2D\n\
+	bl GetMonData\n\
+	cmp r0, 0\n\
+	bne _081C0968\n\
+	adds r0, r4, 0\n\
+_081C09AE:\n\
+	pop {r4-r7}\n\
+	pop {r1}\n\
+	bx r1\n\
+	.syntax divided\n");
+}
+#endif
+
+s8 sub_81C09B4(s8 a)
+{
+    union unkUnion* r8 = gUnknown_0203CF1C->unk0;
+    s8 r5 = 0;
+    u8 i = 0;
+    if (gUnknown_0861CC1C[0] != gUnknown_0203CF1C->unk40BE)
+    {
+        while(1)
+        {
+            i += 1;
+            if (i > 5)
+                break;
+            if (gUnknown_0861CC1C[i] == gUnknown_0203CF1C->unk40BE)
+            {
+                r5 = i;
+                break;
+            }
+        }
+    }
+    while(1)
+    {
+        int b;
+        s8* c = &gUnknown_0861CC1C[0];
+        r5 += a;
+        if ((u8)(r5) > 5)
+        {
+            return -1;
+        }
+        else
+        {
+            b = c[r5];
+            if (sub_81C0A50(&r8->mons[c[r5]]) == 1)
+                return b;
+        }
+    }
+}
+
+u8 sub_81C0A50(struct Pokemon* mon)
+{
+    if (GetMonData(mon, MON_DATA_SPECIES) == 0)
+    {
+        return 0;
+    }
+    else if (gUnknown_0203CF1C->unk40BE != 0 || GetMonData(mon, MON_DATA_IS_EGG) == 0)
+        return 1;
+    else
+        return 0;
+}
