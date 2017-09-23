@@ -22,7 +22,7 @@ walda_maybe: @ 81D99E4
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -70,7 +70,7 @@ _081D9A68:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 	ldr r0, =c2_exit_to_overworld_2_switch

@@ -30996,7 +30996,7 @@ _08056D0A:
 	movs r0, 0x2
 	adds r2, r6, 0
 	adds r3, r5, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	ldr r1, =gBattleCommunication
 	ldrb r0, [r1]
 	adds r0, 0x1

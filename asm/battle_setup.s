@@ -585,7 +585,7 @@ sub_80B0AF8: @ 80B0AF8
 _080B0B4C:
 	ldr r0, =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF6F0
 	str r0, [r1]
 _080B0B58:

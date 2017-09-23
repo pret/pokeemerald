@@ -17478,7 +17478,7 @@ sub_81B968C: @ 81B968C
 	str r0, [sp]
 	movs r0, 0x3
 	bl sub_81BF8EC
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 	add sp, 0x4

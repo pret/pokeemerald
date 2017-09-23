@@ -14195,7 +14195,7 @@ sub_807F110: @ 807F110
 	bne _0807F134
 	ldr r0, =sub_807B270
 	bl SetMainCallback2
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 	adds r0, r4, 0

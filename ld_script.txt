@@ -80,7 +80,7 @@ SECTIONS {
         src/util.o(.text);
         src/blend_palette.o(.text);
         asm/daycare.o(.text);
-        asm/egg_hatch.o(.text);
+        src/egg_hatch.o(.text);
         asm/battle_interface.o(.text);
         asm/smokescreen.o(.text);
         asm/pokeball.o(.text);
@@ -339,8 +339,10 @@ SECTIONS {
         src/trig.o(.rodata);
         src/util.o(.rodata);
         data/data3.o(.rodata);
+        src/egg_hatch.o(.rodata);
+        data/data3_a0_A.o(.rodata);
         data/field_map_obj.o(.rodata);
-        data/data3.o(.rodata_b);
+        data/data3_a0_B.o(.rodata);
         src/berry.o(.rodata);
         data/data3_a1.o(.rodata);
         src/pokemon_size_record.o(.rodata)
