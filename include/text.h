@@ -94,23 +94,25 @@ struct TextPrinterSubStruct
     u8 active;
 };
 
+struct TextSubPrinter {     // TODO: Better name
+    u8* current_text_offset;
+    u8 windowId;
+    u8 fontId;
+    u8 x;
+    u8 y;
+    u8 currentX;        // 0x8
+    u8 currentY;
+    u8 letterSpacing;
+    u8 lineSpacing;
+    u8 fontColor_l:4;   // 0xC
+    u8 fontColor_h:4;
+    u8 bgColor:4;
+    u8 shadowColor:4;
+};
+
 struct TextPrinter
 {
-    struct TextSubPrinter {     // TODO: Better name
-        u8* current_text_offset;
-        u8 windowId;
-        u8 fontId;
-        u8 x;
-        u8 y;
-        u8 currentX;        // 0x8
-        u8 currentY;
-        u8 letterSpacing;
-        u8 lineSpacing;
-        u8 fontColor_l:4;   // 0xC
-        u8 fontColor_h:4;
-        u8 bgColor:4;
-        u8 shadowColor:4;
-    } subPrinter;
+    struct TextSubPrinter subPrinter;
 
     void (*callback)(struct TextSubPrinter *, u16); // 0x10
 

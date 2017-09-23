@@ -1,9 +1,9 @@
 #include "global.h"
-#include "text.h"
 #include "main.h"
 #include "palette.h"
 #include "string_util.h"
 #include "window.h"
+#include "text.h"
 
 extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 extern void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height);
