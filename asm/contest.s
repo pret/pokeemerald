@@ -5582,7 +5582,7 @@ sub_80DA830: @ 80DA830
 	bne _080DA860
 	adds r0, r2, 0
 	bl DestroyTask
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_80DA874
 	str r1, [r0]
 	bl FreeAllWindowBuffers

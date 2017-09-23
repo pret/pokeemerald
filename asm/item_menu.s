@@ -5744,7 +5744,7 @@ unknown_ItemMenu_Show: @ 81ADE38
 	thumb_func_start bag_menu_leave_maybe_3
 bag_menu_leave_maybe_3: @ 81ADE6C
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_819FA50
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -5779,7 +5779,7 @@ unknown_ItemMenu_Give2: @ 81ADE8C
 	thumb_func_start bag_menu_leave_maybe_2
 bag_menu_leave_maybe_2: @ 81ADEBC
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_818DEF4
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -5810,7 +5810,7 @@ unknown_ItemMenu_Confirm2: @ 81ADEDC
 	thumb_func_start bag_menu_leave_maybe
 bag_menu_leave_maybe: @ 81ADF00
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_818E564
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch

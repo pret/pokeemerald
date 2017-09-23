@@ -2339,11 +2339,11 @@ gText_ByeBye:: @ 85ED44A
 	.string "My POKéMON and I help$"
 	.string "my father’s research.$"
 
-gText_PkmnHatchedFromEgg:: @ 85ED5A5
+gText_HatchedFromEgg:: @ 85ED5A5
 	.string "{STR_VAR_1} hatched from the EGG!$"
 
-gText_NameHatchedPkmn:: @ 85ED5BE
-	.string "Would you like to nickname the newly\nhatched {STR_VAR_1}?$"
+gText_NickHatchPrompt:: @ 85ED5BE
+    .string "Would you like to nickname the newly\nhatched {STR_VAR_1}?$"
 
 	.align 2
 gText_ReadyToBerryCrush:: @ 85ED5F0

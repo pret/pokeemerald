@@ -18,6 +18,14 @@ void memcpy(void *, const void *, size_t);
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
+// useful math macros
+
+// Converts a number to Q8.8 fixed-point format
+#define Q_8_8(n) ((s16)((n) * 256))
+
+// Converts a number to Q4.12 fixed-point format
+#define Q_4_12(n)  ((s16)((n) * 4096))
+
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
@@ -645,7 +653,8 @@ struct DaycareMon
     struct MailStruct mail;
     u8 OT_name[OT_NAME_LENGTH + 1];
     u8 monName[11];
-    u8 language;
+    u8 language_maybe : 4;
+    u8 unknown : 4;
     u32 stepsTaken;
 };
 
