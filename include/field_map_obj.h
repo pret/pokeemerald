@@ -4,6 +4,8 @@
 #define NUM_OBJECT_GRAPHICS_INFO 239
 #define SPRITE_VAR 240
 
+struct Sprite; // pika pls
+
 // Exported struct declarations
 
 enum SpinnerRunnerFollowPatterns {

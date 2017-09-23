@@ -56,7 +56,7 @@ gUnknown_0858E864:: @ 858E864
 gUnknown_0858E880:: @ 858E880
 	.incbin "baserom.gba", 0x58e880, 0x18
 
-gUnknown_0858E898:: @ 858E898
+gTruckCamera_HorizontalTable:: @ 858E898
 	.incbin "baserom.gba", 0x58e898, 0x13
 
 gUnknown_0858E8AB:: @ 858E8AB

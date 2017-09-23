@@ -3175,7 +3175,7 @@ CB2_NewGame: @ 8085EF8
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
 	ldr r1, =gUnknown_03005DAC
-	ldr r0, =sub_80FB4E0
+	ldr r0, =ExecuteTruckSequence
 	str r0, [r1]
 	ldr r1, =gUnknown_03005DB0
 	movs r0, 0

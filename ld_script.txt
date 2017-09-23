@@ -158,8 +158,7 @@ SECTIONS {
         asm/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
         asm/fldeff_80F9BCC.o(.text);
-        asm/truck_scene.o(.text);
-        asm/porthole.o(.text);
+        src/field_special_scene.o(.text);
         asm/rotating_gate.o(.text);
         src/safari_zone.o(.text);
         asm/contest_link_80FC4F4.o(.text);
