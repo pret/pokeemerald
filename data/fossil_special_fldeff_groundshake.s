@@ -3,7 +3,6 @@
 
 	.section .rodata
 
-
 gUnknown_08617274:: @ 8617274
 	.incbin "baserom.gba", 0x617274, 0x920
 
