@@ -4,8 +4,8 @@
 #include "text.h"
 #include "sound.h"
 
-extern const u8 gUnknown_08616124[];
-extern const u16 gFont6BrailleGlyphs[];
+static const u8 gUnknown_08616124[] = {1, 2, 4};
+static const u16 gFont6BrailleGlyphs[] = INCBIN_U16("data/graphics/fonts/font6.fwjpnfont");
 
 static void DecompressGlyphFont6(u16);
 
