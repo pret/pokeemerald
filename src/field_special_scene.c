@@ -74,7 +74,7 @@ void Task_Truck1(u8 taskId)
     zero = 0;
     sub_808E82C(3, mapNum, mapGroup, -3, box3);
 
-    if (SECONDS(500) == ++data[0]) // this will never run
+    if (++data[0] == SECONDS(500)) // this will never run
         data[0] = zero; // reset the timer if it gets stuck.
 
     cameraYpan = GetTruckCameraBobbingY(data[0]);
