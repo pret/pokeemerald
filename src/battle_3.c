@@ -186,7 +186,6 @@ extern void b_call_bc_move_exec(const u8 *);
 extern void BattleTurnPassed(void);
 extern void SetMoveEffect(bool8 primary, u8 certainArg);
 extern bool8 UproarWakeUpCheck(u8 bank);
-extern u8 sub_803F90C(u8 bank);
 extern void sub_803F9EC();
 extern bool8 sub_80423F4(u8 bank, u8, u8);
 extern u8 sub_806D864(u8);
@@ -848,7 +847,7 @@ u8 TurnBasedEffects(void)
                     {
                         gBankAttacker = gActiveBank;
                         gBattleMons[gActiveBank].status2 -= 0x10;  // uproar timer goes down
-                        if (sub_803F90C(gActiveBank))
+                        if (HasMoveFailed(gActiveBank))
                         {
                             CancelMultiTurnMoves(gActiveBank);
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
@@ -874,7 +873,7 @@ u8 TurnBasedEffects(void)
                 if (gBattleMons[gActiveBank].status2 & STATUS2_LOCK_CONFUSE)
                 {
                     gBattleMons[gActiveBank].status2 -= 0x400;
-                    if (sub_803F90C(gActiveBank))
+                    if (HasMoveFailed(gActiveBank))
                         CancelMultiTurnMoves(gActiveBank);
                     else if (!(gBattleMons[gActiveBank].status2 & STATUS2_LOCK_CONFUSE)
                      && (gBattleMons[gActiveBank].status2 & STATUS2_MULTIPLETURNS))

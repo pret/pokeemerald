@@ -3,7 +3,7 @@
 
 	.section script_data, "aw", %progbits
 
-gUnknown_082D86A8:: @ 82D86A8
+gBattleScriptsForMoveEffects:: @ 82D86A8
 	.incbin "baserom.gba", 0x2d86a8, 0x388
 
 gUnknown_082D8A30:: @ 82D8A30
@@ -138,7 +138,7 @@ gUnknown_082DADD8:: @ 82DADD8
 gUnknown_082DAE03:: @ 82DAE03
 	.incbin "baserom.gba", 0x2dae03, 0xa
 
-gUnknown_082DAE0D:: @ 82DAE0D
+BattleScript_RageIsBuilding:: @ 82DAE0D
 	.incbin "baserom.gba", 0x2dae0d, 0x7
 
 BattleScript_MoveUsedIsDisabled:: @ 82DAE14
@@ -279,7 +279,7 @@ BattleScript_MoveUsedIsFrozen:: @ 82DB26A
 BattleScript_MoveUsedUnfroze:: @ 82DB277
 	.incbin "baserom.gba", 0x2db277, 0xb
 
-gUnknown_082DB282:: @ 82DB282
+BattleScript_DefrostedViaFireMove:: @ 82DB282
 	.incbin "baserom.gba", 0x2db282, 0x9
 
 BattleScript_MoveUsedIsParalyzed:: @ 82DB28B

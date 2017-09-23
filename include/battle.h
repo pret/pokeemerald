@@ -619,14 +619,7 @@ struct BattleStruct
     u8 field_95;
     u8 field_96;
     u8 field_97;
-    u8 field_98;
-    u8 field_99;
-    u8 field_9A;
-    u8 field_9B;
-    u8 field_9C;
-    u8 field_9D;
-    u8 field_9E;
-    u8 field_9F;
+    u8 mirrorMoves[8]; // ask gamefreak why they declared it that way
     u8 field_A0;
     u8 field_A1;
     u8 field_A2;
@@ -647,14 +640,16 @@ struct BattleStruct
     u16 usedHeldItems[BATTLE_BANKS_COUNT];
     u8 field_C0[8];
     u16 choicedMove[BATTLE_BANKS_COUNT];
-    u16 field_D0[BATTLE_BANKS_COUNT];
+    u16 changedItems[BATTLE_BANKS_COUNT];
     u8 intimidateBank;
     u8 fillerD9[0xDA-0xD9];
     u8 field_DA;
     u8 turnSideTracker;
     u8 fillerDC[0xDF-0xDC];
     u8 field_DF;
-    u8 fillerE0[0x1A0-0xE0];
+    u8 mirrorMoveArrays[32];
+    u16 castformPalette[4][16];
+    u8 field_180[32];
     u8 field_1A0;
     u8 field_1A1;
     u8 filler1A2;
@@ -673,6 +668,14 @@ extern struct BattleStruct* gBattleStruct;
     u8* var2 = (u8*)((u32)(arrayId));                                           \
     var2 = (u32)(structPtr) + var2;                                             \
     var2[offsetof(struct structName, offsetField)] = value;                     \
+}
+
+// This is a leftover from R/S direct use of ewram addresses
+#define GET_CHANGED_ITEM_PTR_VIA_MEME_ACCESS(bank, varName)                                         \
+{                                                                                                   \
+    void** memes1 = (void**)(&gBattleStruct);                                                       \
+    void* memes2 = (void*)((u32)(bank * 2 + offsetof(struct BattleStruct, changedItems)));          \
+    varName = (u16*)(((void*)(*memes1) + (u32)(memes2)));                                           \
 }
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -836,6 +839,7 @@ void PressurePPLose(u8 bankAtk, u8 bankDef, u16 move);
 void PrepareStringBattle(u16 stringId, u8 bank);
 u8 GetBattleBank(u8 caseId);
 void UndoEffectsAfterFainting(void);
+bool8 HasMoveFailed(u8 bank);
 
 // battle_3
 void BattleScriptPush(const u8* bsPtr);

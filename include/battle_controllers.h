@@ -10,6 +10,7 @@ void EmitPrintStringPlayerOnly(u8 bufferId, u16 stringId);
 void EmitFaintAnimation(u8 bufferId);
 void EmitExpUpdate(u8 bufferId, u8 partyId, u16 expPoints);
 void EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument);
+void EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
 
 void MarkBufferBankForExecution(u8 bank);
 

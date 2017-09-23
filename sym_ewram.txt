@@ -334,7 +334,7 @@ gUnknown_020241E9: @ 20241E9
 gCurrentMove: @ 20241EA
 	.space 0x2
 
-gUnknown_020241EC: @ 20241EC
+gLastUsedMove: @ 20241EC
 	.space 0x2
 
 gRandomMove: @ 20241EE
@@ -391,7 +391,7 @@ gUnknown_02024220: @ 2024220
 gUnknown_02024230: @ 2024230
 	.space 0x10
 
-gUnknown_02024240: @ 2024240
+gUnknownMovesUsedByBanks: @ 2024240
 	.space 0x8
 
 gLastUsedMovesByBanks: @ 2024248

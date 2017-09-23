@@ -6357,7 +6357,7 @@ sub_8039F40: @ 8039F40
 	mov r12, r1
 	ldr r5, =gDisableStructs
 	movs r4, 0
-	ldr r7, =gUnknown_02024240
+	ldr r7, =gUnknownMovesUsedByBanks
 	ldr r6, =gLockedMoves
 _08039F70:
 	ldr r0, =gStatuses3
@@ -7073,7 +7073,7 @@ _0803A540:
 	mov r1, r9
 	ldrb r0, [r1]
 	lsls r0, 1
-	ldr r3, =gUnknown_02024240
+	ldr r3, =gUnknownMovesUsedByBanks
 	adds r0, r3
 	strh r4, [r0]
 	ldrb r0, [r1]
@@ -7584,7 +7584,7 @@ _0803A852:
 	strh r2, [r0]
 	ldrb r0, [r1]
 	lsls r0, 1
-	ldr r1, =gUnknown_02024240
+	ldr r1, =gUnknownMovesUsedByBanks
 	adds r0, r1
 	strh r2, [r0]
 	ldr r2, =gActiveBank
@@ -13706,7 +13706,7 @@ _0803E110:
 	ands r0, r1
 	strb r0, [r3]
 	ldr r2, =gCurrentMove
-	ldr r1, =gUnknown_020241EC
+	ldr r1, =gLastUsedMove
 	movs r0, 0xA5
 	strh r0, [r1]
 	strh r0, [r2]
@@ -13746,7 +13746,7 @@ _0803E1BC:
 	beq _0803E204
 _0803E1E2:
 	ldr r3, =gCurrentMove
-	ldr r2, =gUnknown_020241EC
+	ldr r2, =gLastUsedMove
 	ldr r1, =gLockedMoves
 	lsls r0, r4, 1
 	adds r0, r1
@@ -13776,7 +13776,7 @@ _0803E204:
 	cmp r1, r0
 	bne _0803E268
 	ldr r2, =gCurrentMove
-	ldr r0, =gUnknown_020241EC
+	ldr r0, =gLastUsedMove
 	strh r3, [r0]
 	strh r3, [r2]
 	ldrb r1, [r6]
@@ -13807,7 +13807,7 @@ _0803E268:
 	mov r0, r8
 	strb r2, [r0]
 	ldr r3, =gCurrentMove
-	ldr r2, =gUnknown_020241EC
+	ldr r2, =gLastUsedMove
 	ldrb r0, [r0]
 	lsls r0, 1
 	ldrb r1, [r6]
@@ -13869,7 +13869,7 @@ _0803E2DC:
 	cmp r3, r2
 	beq _0803E334
 	ldr r1, =gCurrentMove
-	ldr r0, =gUnknown_020241EC
+	ldr r0, =gLastUsedMove
 	strh r3, [r0]
 	strh r3, [r1]
 	ldrh r0, [r1]
@@ -13885,7 +13885,7 @@ _0803E316:
 	.pool
 _0803E334:
 	ldr r1, =gCurrentMove
-	ldr r0, =gUnknown_020241EC
+	ldr r0, =gLastUsedMove
 	strh r3, [r0]
 	strh r3, [r1]
 _0803E33C:
@@ -14086,7 +14086,7 @@ _0803E4E0:
 	b _0803E5E2
 _0803E4E8:
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EC
+	ldr r0, =gLastUsedMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -14218,7 +14218,7 @@ _0803E630:
 	cmp r0, 0
 	beq _0803E6E0
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EC
+	ldr r0, =gLastUsedMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -14406,7 +14406,7 @@ _0803E7EC:
 	.pool
 _0803E808:
 	ldr r4, =gBattlescriptCurrInstr
-	ldr r3, =gUnknown_082D86A8
+	ldr r3, =gBattleScriptsForMoveEffects
 	ldr r2, =gBattleMoves
 	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
@@ -16252,8 +16252,8 @@ CancelMultiTurnMoves: @ 803F8A0
 	.pool
 	thumb_func_end CancelMultiTurnMoves
 
-	thumb_func_start sub_803F90C
-sub_803F90C: @ 803F90C
+	thumb_func_start HasMoveFailed
+HasMoveFailed: @ 803F90C
 	push {lr}
 	lsls r0, 24
 	ldr r1, =gProtectStructs
@@ -16298,7 +16298,7 @@ _0803F95C:
 _0803F95E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_803F90C
+	thumb_func_end HasMoveFailed
 
 	thumb_func_start PrepareStringBattle
 PrepareStringBattle: @ 803F964

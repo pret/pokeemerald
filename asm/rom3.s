@@ -2596,7 +2596,7 @@ dp01_build_cmdbuf_x10_TODO: @ 8033BE4
 	ldr r4, =gCurrentMove
 	ldrh r0, [r4]
 	strh r0, [r2, 0x4]
-	ldr r0, =gUnknown_020241EC
+	ldr r0, =gLastUsedMove
 	ldrh r0, [r0]
 	mov r1, r12
 	strh r0, [r1, 0x2]
@@ -2711,7 +2711,7 @@ EmitPrintStringPlayerOnly: @ 8033CFC
 	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	strh r0, [r2, 0x4]
-	ldr r0, =gUnknown_020241EC
+	ldr r0, =gLastUsedMove
 	ldrh r0, [r0]
 	mov r1, r12
 	strh r0, [r1, 0x2]
@@ -3642,8 +3642,8 @@ dp01_build_cmdbuf_x32_32_32_32: @ 80343F4
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x32_32_32_32
 
-	thumb_func_start dp01_build_cmdbuf_x33_a_33_33
-dp01_build_cmdbuf_x33_a_33_33: @ 8034414
+	thumb_func_start EmitSpriteInvisibility
+EmitSpriteInvisibility: @ 8034414
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3659,7 +3659,7 @@ dp01_build_cmdbuf_x33_a_33_33: @ 8034414
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x33_a_33_33
+	thumb_func_end EmitSpriteInvisibility
 
 	thumb_func_start EmitBattleAnimation
 EmitBattleAnimation: @ 8034438
