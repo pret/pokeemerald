@@ -601,9 +601,9 @@ bool8 sub_806D7EC(void)
     return retVal;
 }
 
-bool8 sub_806D82C(u8 id)
+bool16 sub_806D82C(u8 id)
 {
-    bool8 retVal = FALSE;
+    bool16 retVal = FALSE;
     switch (gLinkPlayers[id].lp_field_18)
     {
     case 0:

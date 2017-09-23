@@ -623,6 +623,9 @@ bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 
 void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
 bool8 IsTradedMon(struct Pokemon *mon);
+void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
+s32 sub_806D864(u16 a1);
+bool16 sub_806D82C(u8 id);
 
 #include "sprite.h"
 

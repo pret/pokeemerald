@@ -188,8 +188,6 @@ extern void SetMoveEffect(bool8 primary, u8 certainArg);
 extern bool8 UproarWakeUpCheck(u8 bank);
 extern void sub_803F9EC();
 extern bool8 sub_80423F4(u8 bank, u8, u8);
-extern u8 sub_806D864(u8);
-extern u8 sub_806D82C(u8);
 extern u8 weather_get_current(void);
 extern void sub_803E08C(void);
 extern void bc_move_exec_returning(void);

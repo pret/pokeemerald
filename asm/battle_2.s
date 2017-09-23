@@ -6678,8 +6678,8 @@ _0803A1E4:
 	.pool
 	thumb_func_end sub_8039F40
 
-	thumb_func_start sub_803A284
-sub_803A284: @ 803A284
+	thumb_func_start SwitchInClearStructs
+SwitchInClearStructs: @ 803A284
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7254,7 +7254,7 @@ _0803A6B4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_803A284
+	thumb_func_end SwitchInClearStructs
 
 	thumb_func_start UndoEffectsAfterFainting
 UndoEffectsAfterFainting: @ 803A75C
@@ -7806,7 +7806,7 @@ _0803ABD4:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl dp01_build_cmdbuf_x00_a_b_0
+	bl EmitGetAttributes
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	ldrb r0, [r5]
@@ -8947,7 +8947,7 @@ _0803B5B2:
 	ldrb r1, [r0]
 	movs r0, 0
 	movs r2, 0
-	bl dp01_build_cmdbuf_x05_a_b_c
+	bl EmitSwitchInAnim
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _0803B5D4:
@@ -10488,7 +10488,7 @@ _0803C374:
 	str r0, [sp]
 	movs r0, 0
 	movs r2, 0x6
-	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	bl EmitChoosePokemon
 	b _0803C42E
 	.pool
 _0803C3B0:
@@ -10531,7 +10531,7 @@ _0803C3EE:
 	movs r1, 0
 _0803C400:
 	movs r3, 0
-	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	bl EmitChoosePokemon
 	b _0803C42E
 	.pool
 _0803C410:
@@ -10548,7 +10548,7 @@ _0803C410:
 	movs r1, 0
 	movs r2, 0x6
 	movs r3, 0
-	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	bl EmitChoosePokemon
 _0803C42E:
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -11287,14 +11287,14 @@ _0803CB3C:
 	movs r0, 0
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_8034464
+	bl EmitLinkStandbyMsg
 	b _0803CB66
 	.pool
 _0803CB5C:
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl sub_8034464
+	bl EmitLinkStandbyMsg
 _0803CB66:
 	ldr r4, =gActiveBank
 _0803CB68:

@@ -561,23 +561,9 @@ struct BattleStruct
     u8 field_52;
     u8 sentInPokes;
     u8 field_54[4];
-    u8 field_58;
-    u8 field_59;
-    u8 field_5A;
-    u8 field_5B;
+    u8 field_58[4];
     u8 field_5C[4];
-    u8 field_60;
-    u8 field_61;
-    u8 field_62;
-    u8 field_63;
-    u8 field_64;
-    u8 field_65;
-    u8 field_66;
-    u8 field_67;
-    u8 field_68;
-    u8 field_69;
-    u8 field_6A;
-    u8 field_6B;
+    u8 field_60[4][3];
     u8 field_6C;
     u8 field_6D;
     u8 field_6E;
@@ -792,6 +778,8 @@ extern struct BattleStruct* gBattleStruct;
 #define ATK48_BIT_x4                0x4
 #define ATK48_LOWER_FAIL_CHECK      0x8
 
+#define ATK4F_DONT_CHECK_STATUSES   0x80
+
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE(n)((n & 0xF0) >> 4)     // 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
@@ -840,6 +828,7 @@ void PrepareStringBattle(u16 stringId, u8 bank);
 u8 GetBattleBank(u8 caseId);
 void UndoEffectsAfterFainting(void);
 bool8 HasMoveFailed(u8 bank);
+void SwitchInClearStructs(void);
 
 // battle_3
 void BattleScriptPush(const u8* bsPtr);

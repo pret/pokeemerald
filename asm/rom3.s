@@ -2134,8 +2134,8 @@ _0803389C:
 	.pool
 	thumb_func_end sub_803375C
 
-	thumb_func_start dp01_build_cmdbuf_x00_a_b_0
-dp01_build_cmdbuf_x00_a_b_0: @ 80338B4
+	thumb_func_start EmitGetAttributes
+EmitGetAttributes: @ 80338B4
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2152,7 +2152,7 @@ dp01_build_cmdbuf_x00_a_b_0: @ 80338B4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x00_a_b_0
+	thumb_func_end EmitGetAttributes
 
 	thumb_func_start dp01_build_cmdbuf_x01_a_b_0
 dp01_build_cmdbuf_x01_a_b_0: @ 80338D8
@@ -2264,8 +2264,8 @@ dp01_build_cmdbuf_x04_4_4_4: @ 8033980
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x04_4_4_4
 
-	thumb_func_start dp01_build_cmdbuf_x05_a_b_c
-dp01_build_cmdbuf_x05_a_b_c: @ 80339A0
+	thumb_func_start EmitSwitchInAnim
+EmitSwitchInAnim: @ 80339A0
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2282,10 +2282,10 @@ dp01_build_cmdbuf_x05_a_b_c: @ 80339A0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x05_a_b_c
+	thumb_func_end EmitSwitchInAnim
 
-	thumb_func_start dp01_build_cmdbuf_x06_a
-dp01_build_cmdbuf_x06_a: @ 80339C4
+	thumb_func_start EmitReturnPokeToBall
+EmitReturnPokeToBall: @ 80339C4
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -2299,7 +2299,7 @@ dp01_build_cmdbuf_x06_a: @ 80339C4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x06_a
+	thumb_func_end EmitReturnPokeToBall
 
 	thumb_func_start dp01_build_cmdbuf_x07_7_7_7
 dp01_build_cmdbuf_x07_7_7_7: @ 80339E4
@@ -2888,8 +2888,8 @@ _08033E7E:
 	.pool
 	thumb_func_end sub_8033E6C
 
-	thumb_func_start dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
-dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f: @ 8033EA0
+	thumb_func_start EmitChoosePokemon
+EmitChoosePokemon: @ 8033EA0
 	push {r4-r6,lr}
 	ldr r6, [sp, 0x10]
 	lsls r0, 24
@@ -2918,7 +2918,7 @@ _08033EBA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	thumb_func_end EmitChoosePokemon
 
 	thumb_func_start dp01_build_cmdbuf_x17_17_17_17
 dp01_build_cmdbuf_x17_17_17_17: @ 8033EDC
@@ -3684,8 +3684,8 @@ EmitBattleAnimation: @ 8034438
 	.pool
 	thumb_func_end EmitBattleAnimation
 
-	thumb_func_start sub_8034464
-sub_8034464: @ 8034464
+	thumb_func_start EmitLinkStandbyMsg
+EmitLinkStandbyMsg: @ 8034464
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3716,7 +3716,7 @@ _08034490:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8034464
+	thumb_func_end EmitLinkStandbyMsg
 
 	thumb_func_start dp01_build_cmdbuf_x38_a
 dp01_build_cmdbuf_x38_a: @ 80344A8

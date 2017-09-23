@@ -17,6 +17,7 @@
 #include "songs.h"
 #include "text.h"
 #include "sound.h"
+#include "pokedex.h"
 
 // variables
 
@@ -94,6 +95,7 @@ extern const u8* const gBattleScriptsForMoveEffects[];
 
 // functions
 extern void sub_81A5718(u8 bank); // battle frontier 2
+extern void sub_81A56B4(void); // battle frontier 2
 
 // BattleScripts
 extern const u8 BattleScript_MoveEnd[];
@@ -4912,3 +4914,369 @@ void atk49_moveend(void)
         gBattlescriptCurrInstr += 3;
 }
 
+void atk4A_typecalc2(void)
+{
+    u8 flags = 0;
+    s32 i = 0;
+    u8 moveType = gBattleMoves[gCurrentMove].type;
+
+    if (gBattleMons[gBankTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    {
+        gLastUsedAbility = gBattleMons[gBankTarget].ability;
+        gBattleMoveFlags |= (MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED);
+        gUnknown_02024250[gBankTarget] = 0;
+        gBattleCommunication[6] = moveType;
+        RecordAbilityBattle(gBankTarget, gLastUsedAbility);
+    }
+    else
+    {
+        while (gTypeEffectiveness[i]!= TYPE_ENDTABLE)
+        {
+            if (gTypeEffectiveness[i] == TYPE_FORESIGHT)
+            {
+                if (gBattleMons[gBankTarget].status2 & STATUS2_FORESIGHT)
+                {
+                    break;
+                }
+                else
+                {
+                    i += 3;
+                    continue;
+                }
+            }
+
+            if (gTypeEffectiveness[i] == moveType)
+            {
+                // check type1
+                if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type1)
+                {
+                    if (gTypeEffectiveness[i + 2] == 0)
+                    {
+                        gBattleMoveFlags |= MOVESTATUS_NOTAFFECTED;
+                        break;
+                    }
+                    if (gTypeEffectiveness[i + 2] == 5)
+                    {
+                        flags |= MOVESTATUS_NOTVERYEFFECTIVE;
+                    }
+                    if (gTypeEffectiveness[i + 2] == 20)
+                    {
+                        flags |= MOVESTATUS_SUPEREFFECTIVE;
+                    }
+                }
+                // check type2
+                if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type2)
+                {
+                    if (gBattleMons[gBankTarget].type1 != gBattleMons[gBankTarget].type2
+                        && gTypeEffectiveness[i + 2] == 0)
+                    {
+                        gBattleMoveFlags |= MOVESTATUS_NOTAFFECTED;
+                        break;
+                    }
+                    if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type2
+                        && gBattleMons[gBankTarget].type1 != gBattleMons[gBankTarget].type2
+                        && gTypeEffectiveness[i + 2] == 5)
+                    {
+                        flags |= MOVESTATUS_NOTVERYEFFECTIVE;
+                    }
+                    if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type2
+                        && gBattleMons[gBankTarget].type1 != gBattleMons[gBankTarget].type2
+                        && gTypeEffectiveness[i + 2] == 20)
+                    {
+                        flags |= MOVESTATUS_SUPEREFFECTIVE;
+                    }
+                }
+            }
+            i += 3;
+        }
+    }
+
+    if (gBattleMons[gBankTarget].ability == ABILITY_WONDER_GUARD
+        && !(flags & MOVESTATUS_NOEFFECT)
+        && AttacksThisTurn(gBankAttacker, gCurrentMove) == 2
+        && (!(flags & MOVESTATUS_SUPEREFFECTIVE) || ((flags & (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)) == (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)))
+        && gBattleMoves[gCurrentMove].power)
+    {
+        gLastUsedAbility = ABILITY_WONDER_GUARD;
+        gBattleMoveFlags |= MOVESTATUS_MISSED;
+        gUnknown_02024250[gBankTarget] = 0;
+        gBattleCommunication[6] = 3;
+        RecordAbilityBattle(gBankTarget, gLastUsedAbility);
+    }
+    if (gBattleMoveFlags & MOVESTATUS_NOTAFFECTED)
+        gProtectStructs[gBankAttacker].notEffective = 1;
+
+    gBattlescriptCurrInstr++;
+}
+
+void atk4B_return_atk_to_ball(void)
+{
+    gActiveBank = gBankAttacker;
+    if (!(gHitMarker & HITMARKER_FAINTED(gActiveBank)))
+    {
+        EmitReturnPokeToBall(0, 0);
+        MarkBufferBankForExecution(gActiveBank);
+    }
+    gBattlescriptCurrInstr++;
+}
+
+void atk4C_copy_poke_data(void)
+{
+    if (gBattleExecBuffer)
+        return;
+
+    gActiveBank = GetBattleBank(BSScriptRead8(gBattlescriptCurrInstr + 1));
+
+    gBattlePartyID[gActiveBank] = *(gBattleStruct->field_5C + gActiveBank);
+
+    EmitGetAttributes(0, 0, gBitTable[gBattlePartyID[gActiveBank]]);
+    MarkBufferBankForExecution(gActiveBank);
+
+    gBattlescriptCurrInstr += 2;
+}
+
+void atk4D_switch_data_update(void)
+{
+    struct BattlePokemon oldData;
+    s32 i;
+    u8 *monData;
+
+    if (gBattleExecBuffer)
+        return;
+
+    gActiveBank = GetBattleBank(BSScriptRead8(gBattlescriptCurrInstr + 1));
+    oldData = gBattleMons[gActiveBank];
+    monData = (u8*)(&gBattleMons[gActiveBank]);
+
+    for (i = 0; i < sizeof(struct BattlePokemon); i++)
+    {
+        monData[i] = gBattleBufferB[gActiveBank][4 + i];
+    }
+
+    gBattleMons[gActiveBank].type1 = gBaseStats[gBattleMons[gActiveBank].species].type1;
+    gBattleMons[gActiveBank].type2 = gBaseStats[gBattleMons[gActiveBank].species].type2;
+    gBattleMons[gActiveBank].ability = GetAbilityBySpecies(gBattleMons[gActiveBank].species, gBattleMons[gActiveBank].altAbility);
+
+    // check knocked off item
+    i = GetBankSide(gActiveBank);
+    if (gWishFutureKnock.knockedOffPokes[i] & gBitTable[gBattlePartyID[gActiveBank]])
+    {
+        gBattleMons[gActiveBank].item = 0;
+    }
+
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
+    {
+        for (i = 0; i < 8; i++)
+        {
+            gBattleMons[gActiveBank].statStages[i] = oldData.statStages[i];
+        }
+        gBattleMons[gActiveBank].status2 = oldData.status2;
+    }
+
+    SwitchInClearStructs();
+
+    if (gBattleTypeFlags & BATTLE_TYPE_PALACE && gBattleMons[gActiveBank].maxHP / 2 >= gBattleMons[gActiveBank].hp
+        && gBattleMons[gActiveBank].hp != 0 && !(gBattleMons[gActiveBank].status1 & STATUS_SLEEP))
+    {
+        gBattleStruct->field_92 |= gBitTable[gActiveBank];
+    }
+
+    gBattleScripting.bank = gActiveBank;
+    gBattleTextBuff1[0] = PLACEHOLDER_BEGIN;
+    gBattleTextBuff1[1] = 7;
+    gBattleTextBuff1[2] = gActiveBank;
+    gBattleTextBuff1[3] = gBattlePartyID[gActiveBank];
+    gBattleTextBuff1[4] = EOS;
+
+    gBattlescriptCurrInstr += 2;
+}
+
+void atk4E_switchin_anim(void)
+{
+    if (gBattleExecBuffer)
+        return;
+
+    gActiveBank = GetBattleBank(BSScriptRead8(gBattlescriptCurrInstr + 1));
+
+    if (GetBankSide(gActiveBank) == SIDE_OPPONENT
+        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
+                                 | BATTLE_TYPE_EREADER_TRAINER
+                                 | BATTLE_TYPE_x2000000
+                                 | BATTLE_TYPE_x4000000
+                                 | BATTLE_TYPE_FRONTIER)))
+            HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBank].species), FLAG_SET_SEEN, gBattleMons[gActiveBank].personality);
+
+    gAbsentBankFlags &= ~(gBitTable[gActiveBank]);
+
+    EmitSwitchInAnim(0, gBattlePartyID[gActiveBank], gBattlescriptCurrInstr[2]);
+    MarkBufferBankForExecution(gActiveBank);
+
+    gBattlescriptCurrInstr += 3;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+        sub_81A56B4();
+}
+
+void atk4F_jump_if_cannot_switch(void)
+{
+    s32 val = 0;
+    s32 compareVar = 0;
+    struct Pokemon *party = NULL;
+    s32 r7 = 0;
+
+    gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1] & ~(ATK4F_DONT_CHECK_STATUSES));
+
+    if (!(gBattlescriptCurrInstr[1] & ATK4F_DONT_CHECK_STATUSES)
+        && ((gBattleMons[gActiveBank].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
+            || (gStatuses3[gActiveBank] & STATUS3_ROOTED)))
+    {
+        gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 2);
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+    {
+        #ifndef NONMATCHING
+            asm("":::"r5");
+        #endif // NONMATCHING
+        if (GetBankSide(gActiveBank) == SIDE_OPPONENT)
+            party = gEnemyParty;
+        else
+            party = gPlayerParty;
+
+        val = 0;
+        if (2 & gActiveBank)
+            val = 3;
+
+        for (compareVar = val + 3; val < compareVar; val++)
+        {
+            if (GetMonData(&party[val], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[val], MON_DATA_IS_EGG)
+             && GetMonData(&party[val], MON_DATA_HP) != 0
+             && gBattlePartyID[gActiveBank] != val)
+                break;
+        }
+
+        if (val == compareVar)
+            gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 2);
+        else
+            gBattlescriptCurrInstr += 6;
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_x800000)
+        {
+            if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+            {
+                party = gPlayerParty;
+
+                val = 0;
+                if (sub_806D82C(sub_806D864(gActiveBank)) == TRUE)
+                    val = 3;
+            }
+            else
+            {
+                party = gEnemyParty;
+
+                if (gActiveBank == 1)
+                    val = 0;
+                else
+                    val = 3;
+            }
+        }
+        else
+        {
+            if (GetBankSide(gActiveBank) == SIDE_OPPONENT)
+                party = gEnemyParty;
+            else
+                party = gPlayerParty;
+
+
+            val = 0;
+            if (sub_806D82C(sub_806D864(gActiveBank)) == TRUE)
+                val = 3;
+        }
+
+        for (compareVar = val + 3; val < compareVar; val++)
+        {
+            if (GetMonData(&party[val], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[val], MON_DATA_IS_EGG)
+             && GetMonData(&party[val], MON_DATA_HP) != 0
+             && gBattlePartyID[gActiveBank] != val)
+                break;
+        }
+
+        if (val == compareVar)
+            gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 2);
+        else
+            gBattlescriptCurrInstr += 6;
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetBankSide(gActiveBank) == SIDE_OPPONENT)
+    {
+        party = gEnemyParty;
+
+        val = 0;
+        if (gActiveBank == 3)
+            val = 3;
+
+        for (compareVar = val + 3; val < compareVar; val++)
+        {
+            if (GetMonData(&party[val], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[val], MON_DATA_IS_EGG)
+             && GetMonData(&party[val], MON_DATA_HP) != 0
+             && gBattlePartyID[gActiveBank] != val)
+                break;
+        }
+
+        if (val == compareVar)
+            gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 2);
+        else
+            gBattlescriptCurrInstr += 6;
+    }
+    else
+    {
+        if (GetBankSide(gActiveBank) == SIDE_OPPONENT)
+        {
+            r7 = GetBankByPlayerAI(1);
+
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                compareVar = GetBankByPlayerAI(3);
+            else
+                compareVar = r7;
+
+            party = gEnemyParty;
+        }
+        else
+        {
+            r7 = GetBankByPlayerAI(0);
+
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                compareVar = GetBankByPlayerAI(2);
+            else
+                compareVar = r7;
+
+            party = gPlayerParty;
+        }
+        for (val = 0; val < 6; val++)
+        {
+            if (GetMonData(&party[val], MON_DATA_HP) != 0
+             && GetMonData(&party[val], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[val], MON_DATA_IS_EGG)
+             && val != gBattlePartyID[r7] && val != gBattlePartyID[compareVar])
+                break;
+        }
+
+        if (val == 6)
+            gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 2);
+        else
+            gBattlescriptCurrInstr += 6;
+    }
+}
+
+void sub_804CF10(u8 arg0)
+{
+    *(gBattleStruct->field_58 + gActiveBank) = gBattlePartyID[gActiveBank];
+    *(gBattleStruct->field_5C + gActiveBank) = 6;
+    gBattleStruct->field_93 &= ~(gBitTable[gActiveBank]);
+
+    EmitChoosePokemon(0, 1, arg0, 0, gBattleStruct->field_60[gActiveBank]);
+    MarkBufferBankForExecution(gActiveBank);
+}
