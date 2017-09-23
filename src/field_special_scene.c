@@ -1,5 +1,6 @@
 #include "global.h"
 #include "task.h"
+#include "sprite.h"
 #include "field_map_obj.h"
 #include "songs.h"
 #include "sound.h"
@@ -8,7 +9,6 @@
 #include "vars.h"
 #include "event_data.h"
 #include "main.h"
-#include "sprite.h"
 
 #define SECONDS(value) ((signed) (60.0 * value + 0.5))
 
@@ -35,7 +35,7 @@ extern u8 gUnknown_0858E8AD[];
 
 void Task_Truck3(u8);
 
-s32 GetTruckCameraBobbingY(int a1)
+s16 GetTruckCameraBobbingY(int a1)
 {
     if (!(a1 % 120))
         return -1;
@@ -45,7 +45,7 @@ s32 GetTruckCameraBobbingY(int a1)
     return 0;
 }
 
-s32 GetTruckBoxMovement(int a1) // for the box movement?
+s16 GetTruckBoxMovement(int a1) // for the box movement?
 {
     if (!((a1 + 120) % 180))
         return -1;
@@ -74,7 +74,7 @@ void Task_Truck1(u8 taskId)
     zero = 0;
     sub_808E82C(3, mapNum, mapGroup, -3, box3);
 
-    if (++data[0] == SECONDS(500)) // this will never run
+    if (SECONDS(500) == ++data[0]) // this will never run
         data[0] = zero; // reset the timer if it gets stuck.
 
     cameraYpan = GetTruckCameraBobbingY(data[0]);
