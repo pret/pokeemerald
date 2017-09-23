@@ -718,7 +718,7 @@ sub_817A1C4: @ 817A1C4
 	cmp r0, 0
 	bne _0817A248
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E937F
+	ldr r1, =gText_Var1AteTheVar2
 	bl StringExpandPlaceholders
 	b _0817A268
 	.pool
@@ -726,13 +726,13 @@ _0817A248:
 	cmp r0, 0
 	ble _0817A260
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9390
+	ldr r1, =gText_Var1HappilyAteVar2
 	bl StringExpandPlaceholders
 	b _0817A268
 	.pool
 _0817A260:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E93A9
+	ldr r1, =gText_Var1DisdainfullyAteVar2
 	bl StringExpandPlaceholders
 _0817A268:
 	ldr r2, =gTextFlags

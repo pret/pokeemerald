@@ -691,7 +691,7 @@ _08121A8A:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08121AF0
-	ldr r1, =gUnknown_085EEA78
+	ldr r1, =gText_FromSpace
 	adds r0, r2, 0
 	bl StringCopy
 	ldr r0, [r4]
@@ -825,7 +825,7 @@ _08121BB8:
 	cmp r6, r0
 	bcc _08121B60
 _08121BCC:
-	ldr r1, =gUnknown_085EEA78
+	ldr r1, =gText_FromSpace
 	add r0, sp, 0xC
 	bl StringCopy
 	ldr r4, =gUnknown_0203A134

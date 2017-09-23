@@ -1245,7 +1245,7 @@ _08057F80:
 	ldrb r0, [r0]
 	movs r1, 0x1B
 	bl battle_menu_cursor_related_2
-	ldr r0, =gUnknown_085CCACA
+	ldr r0, =gText_BattleSwitchWhich
 	movs r1, 0xB
 	bl battle_show_message_maybe
 	ldr r1, =gBattleBankFunc
@@ -4377,7 +4377,7 @@ _08059AF4:
 sub_8059B18: @ 8059B18
 	push {r4,lr}
 	ldr r4, =gDisplayedStringBattle
-	ldr r1, =gUnknown_085CCA6F
+	ldr r1, =gText_MoveInterfacePP
 	adds r0, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
@@ -4449,7 +4449,7 @@ sub_8059BB0: @ 8059BB0
 	ldr r0, =gBattleBufferA + 4
 	adds r4, r0
 	ldr r6, =gDisplayedStringBattle
-	ldr r1, =gUnknown_085CCA73
+	ldr r1, =gText_MoveInterfaceType
 	adds r0, r6, 0
 	bl StringCopy
 	movs r1, 0xFC
@@ -4716,7 +4716,7 @@ b_link_standby_message: @ 8059DC0
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E16
 	strh r1, [r0]
-	ldr r0, =gUnknown_085CCA29
+	ldr r0, =gText_LinkStandby
 	movs r1, 0
 	bl battle_show_message_maybe
 _08059DE0:
@@ -8532,7 +8532,7 @@ dp01t_12_6_battle_menu: @ 805C044
 	ldr r1, =sub_805C004
 	str r1, [r0]
 	bl sub_817F2A8
-	ldr r0, =gUnknown_085CCA3A
+	ldr r0, =gText_BattleMenu
 	movs r1, 0x2
 	bl battle_show_message_maybe
 	movs r4, 0
@@ -8550,7 +8550,7 @@ _0805C062:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_8059CB4
-	ldr r0, =gUnknown_085CC9F3
+	ldr r0, =gText_WhatWillPkmnDo
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
@@ -8578,7 +8578,7 @@ sub_805C0B0: @ 805C0B0
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl sub_8056A3C
-	ldr r0, =gUnknown_085CCABB
+	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
 	bl battle_show_message_maybe
 	ldr r1, =gUnknown_03005D74

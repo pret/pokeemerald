@@ -9,8 +9,22 @@
 
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
+#define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
+
+#if defined (__APPLE__) || defined (__CYGWIN__)
+void memset(void *, int, size_t);
+void memcpy(void *, const void *, size_t);
+#endif // __APPLE__
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
+
+// useful math macros
+
+// Converts a number to Q8.8 fixed-point format
+#define Q_8_8(n) ((s16)((n) * 256))
+
+// Converts a number to Q4.12 fixed-point format
+#define Q_4_12(n)  ((s16)((n) * 4096))
 
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
@@ -656,6 +670,61 @@ struct DaycareData
 #define FLAGS_COUNT        300
 #define VARS_COUNT         256
 
+enum {
+    LILYCOVE_LADY_QUIZ,
+    LILYCOVE_LADY_FAVOUR,
+    LILYCOVE_LADY_CONTEST
+};
+
+struct LilycoveLadyQuiz
+{
+    /*0x000*/ u8 id;
+    /*0x001*/ u8 phase;
+    /*0x002*/ u16 unk_002[9];
+    /*0x014*/ u16 unk_014;
+    /*0x016*/ u16 unk_016;
+    /*0x018*/ u8 playerName[8];
+    /*0x020*/ u16 playerTrainerId[4];
+    /*0x028*/ u16 itemId;
+    /*0x02a*/ u8 unk_02a;
+    /*0x02b*/ u8 unk_02b;
+    /*0x02c*/ u8 unk_02c;
+    /*0x02d*/ u8 language;
+};
+
+struct LilycoveLadyFavour
+{
+    /*0x000*/ u8 id;
+    /*0x001*/ u8 phase;
+    /*0x002*/ u8 unk_002;
+    /*0x003*/ u8 unk_003;
+    /*0x004*/ u8 playerName[8];
+    /*0x00c*/ u8 unk_00c;
+    /*0x00e*/ u16 itemId;
+    /*0x010*/ u16 unk_010;
+    /*0x012*/ u8 language;
+};
+
+struct LilycoveLadyContest
+{
+    /*0x000*/ u8 id;
+    /*0x001*/ u8 phase;
+    /*0x002*/ u8 fave_pkblk;
+    /*0x003*/ u8 other_pkblk;
+    /*0x004*/ u8 playerName[8];
+    /*0x00c*/ u8 max_sheen;
+    /*0x00d*/ u8 category;
+    /*0x00e*/ u8 language;
+};
+
+typedef union // TODO
+{
+    struct LilycoveLadyQuiz quiz;
+    struct LilycoveLadyFavour favour;
+    struct LilycoveLadyContest contest;
+    u8 id;
+} LilycoveLady;
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -739,7 +808,8 @@ struct SaveBlock1
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[52];
-    /*0x3B58*/ u8 lilycoveLady[536]; // TODO: convert to a union
+    /*0x3B58*/ LilycoveLady lilycoveLady;
+    /*0x3B88*/ u8 filler_3B88[0x1E8];
     /*0x3D70*/ u8 babyPhrase[24]; // TODO: convert to a struct
     // sizeof: 0x3D88
 };
@@ -752,5 +822,7 @@ struct Bitmap           // TODO: Find a better spot for this
     u32 width:16;
     u32 height:16;
 };
+
+extern u8 gReservedSpritePaletteCount;
 
 #endif // GUARD_GLOBAL_H

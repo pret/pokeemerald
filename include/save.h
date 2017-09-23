@@ -1,6 +1,8 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
+extern u16 gSaveFileStatus;
+
 struct SaveSectionLocation
 {
     void *data;
@@ -88,5 +90,7 @@ u16 CalculateChecksum(void *, u16);
 //u8 unref_sub_8125FF0(u8 *data, u16 size);
 //u8 unref_sub_8126068(u8 sector, u8 *data, u32 size);
 //u8 unref_sub_8126080(u8 sector, u8 *data);
+u16 sub_815355C(void);
+u8 sub_81534D0(u8);
 
 #endif // GUARD_SAVE_H

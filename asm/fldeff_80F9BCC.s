@@ -480,13 +480,13 @@ sub_80F9F5C: @ 80F9F5C
 	thumb_func_start sub_80F9F78
 sub_80F9F78: @ 80F9F78
 	push {lr}
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x6
 	ands r0, r1
 	cmp r0, 0
 	beq _080F9FC0
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	ldr r0, [r1, 0x4]
 	cmp r0, 0x2
 	beq _080F9FAE
@@ -517,7 +517,7 @@ _080F9FB6:
 	movs r0, 0x18
 	b _080F9FFC
 _080F9FC0:
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	ldr r0, [r1, 0x4]
 	cmp r0, 0x2
 	beq _080F9FEA
@@ -643,7 +643,7 @@ _080FA0C4:
 sub_80FA0DC: @ 80FA0DC
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -692,7 +692,7 @@ sub_80FA13C: @ 80FA13C
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E600
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -701,7 +701,7 @@ sub_80FA13C: @ 80FA13C
 	ldrh r1, [r2, 0x2]
 	lsls r1, 23
 	lsrs r1, 23
-	ldr r4, =gUnknown_02038C08
+	ldr r4, =gFieldEffectSpawnParams
 	ldr r3, [r4, 0x14]
 	adds r1, r3
 	lsls r1, 16
@@ -778,7 +778,7 @@ sub_80FA1D8: @ 80FA1D8
 sub_80FA1E8: @ 80FA1E8
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -836,20 +836,20 @@ sub_80FA248: @ 80FA248
 	ands r2, r0
 	cmp r2, 0x96
 	bne _080FA26A
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	movs r0, 0
 	str r0, [r1, 0x1C]
 _080FA26A:
 	cmp r2, 0x9C
 	bne _080FA274
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	movs r0, 0x2
 	str r0, [r1, 0x1C]
 _080FA274:
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E618
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -858,7 +858,7 @@ _080FA274:
 	ldrh r1, [r2, 0x2]
 	lsls r1, 23
 	lsrs r1, 23
-	ldr r4, =gUnknown_02038C08
+	ldr r4, =gFieldEffectSpawnParams
 	ldr r3, [r4, 0x14]
 	adds r1, r3
 	lsls r1, 16
@@ -891,7 +891,7 @@ sub_80FA2D8: @ 80FA2D8
 	adds r4, r0, 0
 	movs r0, 0x9B
 	bl PlaySE
-	ldr r0, =gUnknown_02038C08
+	ldr r0, =gFieldEffectSpawnParams
 	ldr r1, [r0, 0x1C]
 	adds r2, r4, 0
 	adds r2, 0x2A
@@ -917,7 +917,7 @@ sub_80FA304: @ 80FA304
 	asrs r0, 16
 	cmp r0, 0x27
 	ble _080FA32E
-	ldr r0, =gUnknown_02038C08
+	ldr r0, =gFieldEffectSpawnParams
 	ldr r0, [r0, 0x1C]
 	cmp r0, 0
 	beq _080FA322
@@ -951,7 +951,7 @@ sub_80FA33C: @ 80FA33C
 sub_80FA34C: @ 80FA34C
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -1000,7 +1000,7 @@ sub_80FA3AC: @ 80FA3AC
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E630
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -1009,7 +1009,7 @@ sub_80FA3AC: @ 80FA3AC
 	ldrh r1, [r2, 0x2]
 	lsls r1, 23
 	lsrs r1, 23
-	ldr r4, =gUnknown_02038C08
+	ldr r4, =gFieldEffectSpawnParams
 	ldr r3, [r4, 0x14]
 	adds r1, r3
 	lsls r1, 16
@@ -1723,7 +1723,7 @@ sub_80FA9D0: @ 80FA9D0
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r3, =gMapObjects
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1807,7 +1807,7 @@ sub_80FAA7C: @ 80FAA7C
 	mov r0, sp
 	adds r1, r4, 0
 	bl GetXYCoordsOneStepInFrontOfPlayer
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	mov r0, sp
 	movs r2, 0
 	ldrsh r0, [r0, r2]
@@ -1835,7 +1835,7 @@ _080FAABC:
 _080FAAC6:
 	ldr r0, =gUnknown_0858E68C
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -1857,7 +1857,7 @@ _080FAAC6:
 _080FAAFC:
 	ldr r0, =gUnknown_0858E68C
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -1876,7 +1876,7 @@ _080FAAFC:
 _080FAB2C:
 	ldr r0, =gUnknown_0858E68C
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -1898,7 +1898,7 @@ _080FAB4C:
 _080FAB64:
 	ldr r0, =gUnknown_0858E68C
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -1930,7 +1930,7 @@ door_restore_tilemap: @ 80FABA4
 	adds r5, r0, 0
 	movs r0, 0x83
 	bl PlaySE
-	ldr r4, =gUnknown_02038C08
+	ldr r4, =gFieldEffectSpawnParams
 	ldr r0, [r4, 0x14]
 	ldr r1, [r4, 0x18]
 	subs r1, 0x1
@@ -1953,7 +1953,7 @@ _080FABDC:
 	lsls r2, 2
 	bl MapGridSetMetatileIdAt
 _080FABEA:
-	ldr r4, =gUnknown_02038C08
+	ldr r4, =gFieldEffectSpawnParams
 	ldr r0, [r4, 0x14]
 	ldr r1, [r4, 0x18]
 	ldr r2, =0x0000020a
@@ -1988,7 +1988,7 @@ sub_80FAC24: @ 80FAC24
 	strh r0, [r5, 0x2E]
 	b _080FAC54
 _080FAC38:
-	ldr r4, =gUnknown_02038C08
+	ldr r4, =gFieldEffectSpawnParams
 	ldr r0, [r4, 0x14]
 	ldr r1, [r4, 0x18]
 	ldr r2, =0x00000e8c
@@ -2061,7 +2061,7 @@ _080FACC2:
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085EA88B
+	ldr r1, =gText_Gold
 	bl StringCopy
 	ldr r1, =gScriptResult
 	movs r0, 0
@@ -2085,7 +2085,7 @@ _080FAD14:
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085EA890
+	ldr r1, =gText_Silver
 	bl StringCopy
 	ldr r1, =gScriptResult
 	movs r0, 0
@@ -2307,7 +2307,7 @@ sub_80FAEF0: @ 80FAEF0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2357,7 +2357,7 @@ sub_80FAF64: @ 80FAF64
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1

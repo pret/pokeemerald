@@ -1862,7 +1862,7 @@ _080A0710:
 	bl PrintTextOnWindow
 	movs r4, 0x11
 	ldrb r0, [r6]
-	ldr r2, =gUnknown_085EED26
+	ldr r2, =gText_SavingPlayer
 	str r4, [sp]
 	mov r1, r8
 	str r1, [sp, 0x4]
@@ -1887,7 +1887,7 @@ _080A0710:
 	bl sub_819A024
 	movs r4, 0x21
 	ldrb r0, [r6]
-	ldr r2, =gUnknown_085EED2D
+	ldr r2, =gText_SavingBadges
 	str r4, [sp]
 	mov r1, r8
 	str r1, [sp, 0x4]
@@ -1922,7 +1922,7 @@ _080A0710:
 	bne _080A0802
 	movs r4, 0x31
 	ldrb r0, [r6]
-	ldr r2, =gUnknown_085EED34
+	ldr r2, =gText_SavingPokedex
 	str r4, [sp]
 	mov r1, r8
 	str r1, [sp, 0x4]
@@ -1952,7 +1952,7 @@ _080A0710:
 _080A0802:
 	adds r4, 0x10
 	ldrb r0, [r6]
-	ldr r2, =gUnknown_085EED3C
+	ldr r2, =gText_SavingTime
 	lsls r4, 24
 	lsrs r4, 24
 	str r4, [sp]

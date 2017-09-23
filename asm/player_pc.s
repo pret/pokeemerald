@@ -309,7 +309,7 @@ sub_816B0A8: @ 816B0A8
 	lsls r0, 24
 	cmp r0, 0
 	bne _0816B0D8
-	ldr r1, =gUnknown_085EAC4B
+	ldr r1, =gText_NoMailHere
 	ldr r2, =sub_816B060
 	adds r0, r4, 0
 	bl DisplayItemMessageOnField
@@ -344,7 +344,7 @@ _0816B0D8:
 	b _0816B12A
 	.pool
 _0816B120:
-	ldr r1, =gUnknown_085EAC4B
+	ldr r1, =gText_NoMailHere
 	ldr r2, =sub_816B060
 	adds r0, r6, 0
 	bl DisplayItemMessageOnField
@@ -661,7 +661,7 @@ sub_816B398: @ 816B398
 _0816B3C4:
 	adds r0, r5, 0
 	bl sub_816B4DC
-	ldr r1, =gUnknown_085EABD1
+	ldr r1, =gText_NoItems
 	ldr r2, =task_pc_itemstorage
 	adds r0, r5, 0
 	bl DisplayItemMessageOnField
@@ -696,7 +696,7 @@ sub_816B3E4: @ 816B3E4
 _0816B410:
 	adds r0, r5, 0
 	bl sub_816B4DC
-	ldr r1, =gUnknown_085EABD1
+	ldr r1, =gText_NoItems
 	ldr r2, =task_pc_itemstorage
 	adds r0, r5, 0
 	bl DisplayItemMessageOnField
@@ -950,7 +950,7 @@ sub_816B5F8: @ 816B5F8
 	lsrs r4, 24
 	movs r0, 0x1
 	bl sub_81D1C84
-	ldr r6, =gUnknown_085EAB4E
+	ldr r6, =gText_Mailbox
 	movs r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0x40
@@ -1098,7 +1098,7 @@ sub_816B730: @ 816B730
 	movs r1, 0
 	bl sub_81DB554
 	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085EAC63
+	ldr r1, =gText_WhatToDoWithVar1sMail
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	ldr r2, =sub_816B7DC
@@ -1345,7 +1345,7 @@ sub_816B994: @ 816B994
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_085EAC8D
+	ldr r1, =gText_MessageWillBeLost
 	ldr r2, =sub_816B9B0
 	bl DisplayItemMessageOnField
 	pop {r0}
@@ -1432,14 +1432,14 @@ sub_816BA18: @ 816BA18
 	lsls r0, 24
 	cmp r0, 0
 	bne _0816BA68
-	ldr r1, =gUnknown_085EACB5
+	ldr r1, =gText_BagIsFull
 	ldr r2, =sub_816BBD4
 	adds r0, r6, 0
 	bl DisplayItemMessageOnField
 	b _0816BA9C
 	.pool
 _0816BA68:
-	ldr r1, =gUnknown_085EACC8
+	ldr r1, =gText_MailToBagMessageErased
 	ldr r2, =sub_816BBD4
 	adds r0, r6, 0
 	bl DisplayItemMessageOnField
@@ -2293,10 +2293,10 @@ _0816C16C:
 	bls _0816C16C
 	movs r1, 0x6
 	ldrsh r0, [r7, r1]
-	ldr r5, =gUnknown_085EAB71
+	ldr r5, =gText_TossItem
 	cmp r0, 0
 	bne _0816C186
-	ldr r5, =gUnknown_085EAB63
+	ldr r5, =gText_WithdrawItem
 _0816C186:
 	movs r0, 0x1
 	adds r1, r5, 0
@@ -2383,11 +2383,11 @@ _0816C26C:
 	b _0816C2BA
 	.pool
 _0816C274:
-	ldr r0, =gUnknown_085EAC09
+	ldr r0, =gText_WithdrawHowManyItems
 	b _0816C2BA
 	.pool
 _0816C27C:
-	ldr r0, =gUnknown_085EAC22
+	ldr r0, =gText_WithdrawXItems
 	b _0816C2BA
 	.pool
 _0816C284:
@@ -2399,7 +2399,7 @@ _0816C28C:
 	b _0816C2BA
 	.pool
 _0816C294:
-	ldr r0, =gUnknown_085EABE7
+	ldr r0, =gText_NoRoomInBag
 	b _0816C2BA
 	.pool
 _0816C29C:

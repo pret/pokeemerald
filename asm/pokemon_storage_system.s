@@ -586,7 +586,7 @@ _080C73F6:
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EBCAD
+	ldr r2, =gText_PartyFull
 	str r4, [sp]
 	movs r0, 0x2
 	str r0, [sp, 0x4]
@@ -609,7 +609,7 @@ _080C7428:
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EBC89
+	ldr r2, =gText_JustOnePkmn
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -1020,7 +1020,7 @@ _080C779E:
 	lsls r0, r5, 24
 	lsrs r0, 24
 	bl sav3_get_box_name
-	ldr r1, =gUnknown_085EBCC1
+	ldr r1, =gText_Box
 	bl StringCopy
 	adds r4, r5, 0x1
 	adds r1, r4, 0

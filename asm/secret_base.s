@@ -751,7 +751,7 @@ sub_80E90C8: @ 80E90C8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1576,7 +1576,7 @@ sub_80E9780: @ 80E9780
 	ldrb r1, [r0]
 	adds r0, r6, 0
 	bl ConvertInternationalString
-	ldr r1, =gUnknown_085EA72F
+	ldr r1, =gText_ApostropheSBase
 	adds r0, r6, 0
 	bl StringAppend
 	pop {r3}
@@ -2204,7 +2204,7 @@ sub_80E9C9C: @ 80E9C9C
 	b _080E9D1A
 	.pool
 _080E9D10:
-	ldr r1, =gUnknown_085EA785
+	ldr r1, =gText_NoRegistry
 	ldr r2, =task_pc_turn_off
 	adds r0, r6, 0
 	bl DisplayItemMessageOnField
@@ -2583,7 +2583,7 @@ sub_80E9FFC: @ 80E9FFC
 	ldrb r1, [r4, 0x8]
 	bl sub_80E9780
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EA737
+	ldr r1, =gText_OkayToDeleteFromRegistry
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r2, =sub_80EA06C
@@ -2683,7 +2683,7 @@ sub_80EA120: @ 80EA120
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_085EA762
+	ldr r1, =gText_RegisteredDataDeleted
 	ldr r2, =sub_80EA08C
 	bl DisplayItemMessageOnField
 	pop {r0}

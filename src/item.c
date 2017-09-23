@@ -8,9 +8,9 @@
 extern void ApplyNewEncyprtionKeyToHword(u16* hword, u32 newKey);
 extern bool8 InBattlePyramid(void);
 
-extern const u8 gOtherText_PokeBalls[];
-extern const u8 gOtherText_Berries[];
-extern const u8 gOtherText_Berry[];
+extern const u8 gText_PokeBalls[];
+extern const u8 gText_Berries[];
+extern const u8 gText_Berry[];
 extern const u8 gUnknown_085897E4[][28]; // not sure what this one is
 
 bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
@@ -92,7 +92,7 @@ void CopyItemNameHandlePlural(u16 itemId, u8 *string, u32 quantity)
         if (quantity < 2)
             StringCopy(string, ItemId_GetItem(ITEM_POKE_BALL)->name);
         else
-            StringCopy(string, gOtherText_PokeBalls);
+            StringCopy(string, gText_PokeBalls);
     }
     else
     {
@@ -109,9 +109,9 @@ void GetBerryCountString(u8* dst, const u8* berryName, u32 quantity)
     u8* txtPtr;
 
     if (quantity < 2)
-        berryString = gOtherText_Berry;
+        berryString = gText_Berry;
     else
-        berryString = gOtherText_Berries;
+        berryString = gText_Berries;
     txtPtr = StringCopy(dst, berryName);
     *txtPtr = CHAR_SPACE;
     StringCopy(txtPtr + 1, berryString);

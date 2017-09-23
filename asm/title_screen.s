@@ -1259,7 +1259,7 @@ c2_berry_program_update_screen_1: @ 80AAF28
 	cmp r0, 0
 	bne _080AAF3E
 	bl m4aMPlayAllStop
-	ldr r0, =sub_81BF384
+	ldr r0, =InitBerryFixProgram
 	bl SetMainCallback2
 _080AAF3E:
 	pop {r0}

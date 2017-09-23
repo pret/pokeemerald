@@ -3025,7 +3025,7 @@ _0804E084:
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl sub_8056A3C
-	ldr r0, =gUnknown_085CCABB
+	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
 	bl battle_show_message_maybe
 	ldr r1, =gBattleScripting
@@ -3389,7 +3389,7 @@ _0804E3E0:
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl sub_8056A3C
-	ldr r0, =gUnknown_085CCABB
+	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
 	bl battle_show_message_maybe
 	ldrb r0, [r5, 0x1F]
@@ -4313,7 +4313,7 @@ _0804EBD8:
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl sub_8056A3C
-	ldr r0, =gUnknown_085CCABB
+	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
 	bl battle_show_message_maybe
 	ldrb r0, [r5]
@@ -6150,7 +6150,7 @@ _0804FC32:
 	bl sub_81A5D44
 	b _0804FD70
 _0804FC38:
-	ldr r1, =gUnknown_085CD1C8
+	ldr r1, =gRefereeStringsTable
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
@@ -19066,7 +19066,7 @@ _08056C2C:
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl sub_8056A3C
-	ldr r0, =gUnknown_085CCABB
+	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
 	bl battle_show_message_maybe
 	ldr r1, =gBattleCommunication

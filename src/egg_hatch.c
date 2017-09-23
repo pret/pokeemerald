@@ -52,8 +52,8 @@ extern const u8 gUnknown_08C004E0[];
 extern const u16 gUnknown_08DD7300[]; // palette, gameboy advance
 extern const u32 gUnknown_08DD7360[]; // tileset gameboy advance
 extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
-extern const u8 gOtherText_HatchedFromEgg[];
-extern const u8 gOtherText_NickHatchPrompt[];
+extern const u8 gText_HatchedFromEgg[];
+extern const u8 gText_NickHatchPrompt[];
 
 extern u8* GetMonNick(struct Pokemon* mon, u8* dst);
 extern u8* GetBoxMonNick(struct BoxPokemon* boxMon, u8* dst);
@@ -640,7 +640,7 @@ static void CB2_EggHatch_1(void)
         break;
     case 5:
         GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar1);
-        StringExpandPlaceholders(gStringVar4, gOtherText_HatchedFromEgg);
+        StringExpandPlaceholders(gStringVar4, gText_HatchedFromEgg);
         EggHatchPrintMessage(sEggHatchData->windowId, gStringVar4, 0, 3, 0xFF);
         PlayFanfare(371);
         sEggHatchData->CB2_state++;
@@ -657,7 +657,7 @@ static void CB2_EggHatch_1(void)
         break;
     case 8:
         GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar1);
-        StringExpandPlaceholders(gStringVar4, gOtherText_NickHatchPrompt);
+        StringExpandPlaceholders(gStringVar4, gText_NickHatchPrompt);
         EggHatchPrintMessage(sEggHatchData->windowId, gStringVar4, 0, 2, 1);
         sEggHatchData->CB2_state++;
         break;

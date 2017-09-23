@@ -976,7 +976,7 @@ sub_812ACF4: @ 812ACF4
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
-	ldr r2, =gUnknown_085EF734
+	ldr r2, =gText_YouDontHaveThreeCoins
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -1544,7 +1544,7 @@ sub_812B158: @ 812B158
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
-	ldr r2, =gUnknown_085EF6E9
+	ldr r2, =gText_QuitTheGame
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -1634,7 +1634,7 @@ sub_812B214: @ 812B214
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
-	ldr r2, =gUnknown_085EF6F8
+	ldr r2, =gText_YouveGot9999Coins
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -1687,7 +1687,7 @@ sub_812B280: @ 812B280
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
-	ldr r2, =gUnknown_085EF710
+	ldr r2, =gText_YouveRunOutOfCoins
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -7209,7 +7209,7 @@ sub_812DD78: @ 812DD78
 	str r0, [sp]
 	movs r4, 0
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085EF750
+	ldr r0, =gText_ReelTimeHelp
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
