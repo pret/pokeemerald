@@ -1374,7 +1374,7 @@ void sub_806E994(void)
     gBattleTextBuff2[2] = gBankInMenu;
     gBattleTextBuff2[3] = pokemon_order_func(gBattlePartyID[gBankInMenu]);
     gBattleTextBuff2[4] = EOS;
-    StrCpyDecodeBattle(gText_PkmnsXPreventsSwitching, gStringVar4);
+     BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
 }
 
 struct PokeItem

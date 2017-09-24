@@ -703,7 +703,7 @@ _0814E6DE:
 StrCpyDecodeToDisplayedStringBattle: @ 814E6F0
 	push {lr}
 	ldr r1, =gDisplayedStringBattle
-	bl StrCpyDecodeBattle
+	bl  BattleStringExpandPlaceholders
 	pop {r1}
 	bx r1
 	.pool
@@ -763,8 +763,8 @@ _0814E75A:
 	bx r1
 	thumb_func_end AppendStatusString
 
-	thumb_func_start StrCpyDecodeBattle
-StrCpyDecodeBattle: @ 814E764
+	thumb_func_start  BattleStringExpandPlaceholders
+ BattleStringExpandPlaceholders: @ 814E764
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -904,7 +904,7 @@ _0814E8EE:
 	adds r0, r1, 0
 _0814E8F0:
 	adds r1, r4, 0
-	bl StrCpyDecodeBattleTextBuff
+	bl ExpandBattleTextBuffPlaceholders
 	bl _0814F5C0
 	.pool
 _0814E904:
@@ -2335,10 +2335,10 @@ _0814F62A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end StrCpyDecodeBattle
+	thumb_func_end  BattleStringExpandPlaceholders
 
-	thumb_func_start StrCpyDecodeBattleTextBuff
-StrCpyDecodeBattleTextBuff: @ 814F648
+	thumb_func_start ExpandBattleTextBuffPlaceholders
+ExpandBattleTextBuffPlaceholders: @ 814F648
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2652,7 +2652,7 @@ _0814F8EA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end StrCpyDecodeBattleTextBuff
+	thumb_func_end ExpandBattleTextBuffPlaceholders
 
 	thumb_func_start sub_814F8F8
 sub_814F8F8: @ 814F8F8
@@ -2773,8 +2773,8 @@ _0814F9E0:
 	.pool
 	thumb_func_end sub_814F950
 
-	thumb_func_start battle_show_message_maybe
-battle_show_message_maybe: @ 814F9EC
+	thumb_func_start sub_814F9EC
+sub_814F9EC: @ 814F9EC
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2987,7 +2987,7 @@ _0814FB9C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end battle_show_message_maybe
+	thumb_func_end sub_814F9EC
 
 	thumb_func_start sub_814FBAC
 sub_814FBAC: @ 814FBAC

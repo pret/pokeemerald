@@ -1399,7 +1399,7 @@ _080373E0:
 	str r0, [r2]
 	ldr r0, =sub_8039EF0
 	str r0, [r1]
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	bl SetMainCallback2
 	ldr r2, =gBattleTypeFlags
 	ldr r1, [r2]
@@ -1999,7 +1999,7 @@ _080379A0:
 	str r0, [r2]
 	ldr r0, =sub_8039EF0
 	str r0, [r1]
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	bl SetMainCallback2
 	ldr r2, =gBattleTypeFlags
 	ldr r1, [r2]
@@ -3130,7 +3130,7 @@ _080383BC:
 	str r0, [r2]
 	ldr r0, =sub_8039EF0
 	str r0, [r1]
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	bl SetMainCallback2
 	ldr r3, =gBattleTypeFlags
 	ldr r2, [r3]
@@ -3156,8 +3156,8 @@ _080383F8:
 	.pool
 	thumb_func_end sub_8037DF4
 
-	thumb_func_start sub_8038420
-sub_8038420: @ 8038420
+	thumb_func_start BattleMainCB2
+BattleMainCB2: @ 8038420
 	push {lr}
 	sub sp, 0x4
 	bl AnimateSprites
@@ -3203,7 +3203,7 @@ _08038482:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8038420
+	thumb_func_end BattleMainCB2
 
 	thumb_func_start sub_803849C
 sub_803849C: @ 803849C
@@ -4662,7 +4662,7 @@ _0803912C:
 	bl sub_800ADF8
 	ldr r0, =gUnknown_0824978D
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	b _08039172
 	.pool
 _0803914C:
@@ -4997,7 +4997,7 @@ _08039470:
 _0803947E:
 	ldr r0, =gText_RecordBattleToPass
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleCommunication
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -5020,11 +5020,11 @@ _080394AC:
 	bl sub_8056A3C
 	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r4, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
-	bl sub_8056B74
+	bl BattleCreateCursorAt
 	b _080396EA
 	.pool
 _080394D8:
@@ -5042,7 +5042,7 @@ _080394EC:
 	movs r0, 0x5
 	bl PlaySE
 	ldrb r0, [r4, 0x1]
-	bl sub_8056BAC
+	bl BattleDestroyCursorAt
 	movs r0, 0
 	b _0803951E
 	.pool
@@ -5059,11 +5059,11 @@ _08039510:
 	movs r0, 0x5
 	bl PlaySE
 	ldrb r0, [r4, 0x1]
-	bl sub_8056BAC
+	bl BattleDestroyCursorAt
 	movs r0, 0x1
 _0803951E:
 	strb r0, [r4, 0x1]
-	bl sub_8056B74
+	bl BattleCreateCursorAt
 	b _0803975E
 _08039526:
 	movs r5, 0x1
@@ -5130,7 +5130,7 @@ _0803958A:
 	bl sub_800ADF8
 	ldr r0, =gUnknown_0824978D
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 _080395B4:
 	ldr r1, =gBattleCommunication
 	ldrb r0, [r1]
@@ -5218,7 +5218,7 @@ _08039686:
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	movs r0, 0x80
 	strb r0, [r4, 0x1]
 	b _080396EA
@@ -5256,7 +5256,7 @@ _080396A8:
 	bl sub_800ADF8
 	ldr r0, =gUnknown_0824978D
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 _080396EA:
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -8280,7 +8280,7 @@ _0803AFFA:
 	movs r0, 0
 	mov r1, sp
 	movs r2, 0x80
-	bl dp01_build_cmdbuf_x30_TODO
+	bl EmitCmd48
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	movs r7, 0
@@ -8332,7 +8332,7 @@ _0803B072:
 	movs r0, 0
 	mov r1, sp
 	movs r2, 0x80
-	bl dp01_build_cmdbuf_x30_TODO
+	bl EmitCmd48
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	ldr r1, =gBattleMainFunc
@@ -9237,7 +9237,7 @@ _0803B7EA:
 	strb r1, [r0]
 	ldr r0, =gText_EmptyString3
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_803BE74
 	str r0, [r1]
@@ -9546,7 +9546,7 @@ _0803BAE6:
 	strb r1, [r0]
 	mov r0, r9
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_803BE74
 	str r0, [r1]
@@ -10140,7 +10140,7 @@ _0803C058:
 	adds r0, r4
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl sub_8184FBC
+	bl RecordedBattle_SetBankAction
 	ldr r1, =gUnknown_0202421C
 	ldrb r0, [r6]
 	adds r1, r0, r1
@@ -11067,12 +11067,12 @@ _0803C91C:
 	lsls r1, r0, 9
 	adds r1, r5
 	ldrb r1, [r1]
-	bl sub_8184FBC
+	bl RecordedBattle_SetBankAction
 	ldrb r0, [r6]
 	lsls r1, r0, 9
 	adds r1, r7
 	ldrb r1, [r1]
-	bl sub_8184FBC
+	bl RecordedBattle_SetBankAction
 _0803C942:
 	ldrb r0, [r6]
 	ldr r4, =gBattleStruct
@@ -11602,7 +11602,7 @@ sub_803CDF8: @ 803CDF8
 	lsls r1, r0, 9
 	adds r1, r2
 	ldrb r1, [r1]
-	bl sub_8184FBC
+	bl RecordedBattle_SetBankAction
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x42
@@ -13335,7 +13335,7 @@ _0803DDD2:
 	ldr r0, =sub_803DE40
 	str r0, [r1]
 	ldr r1, =gUnknown_030061E8
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	str r0, [r1]
 	b _0803DE2A
 	.pool
@@ -13476,7 +13476,7 @@ sub_803DF48: @ 803DF48
 	push {lr}
 	ldr r0, =gMain
 	ldr r1, [r0, 0x4]
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	cmp r1, r0
 	bne _0803DF5A
 	ldr r1, =gBattleMainFunc

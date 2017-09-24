@@ -299,7 +299,7 @@ sub_8168610: @ 8168610
 	push {lr}
 	ldr r0, =gMain
 	ldr r1, [r0, 0x4]
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	cmp r1, r0
 	bne _08168636
 	ldr r0, =gPaletteFade
@@ -3606,7 +3606,7 @@ sub_816A3B8: @ 816A3B8
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -3676,7 +3676,7 @@ dp01t_12_1_battle_menu: @ 816A470
 	str r1, [r0]
 	ldr r0, =gText_BattleMenu
 	movs r1, 0x2
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	movs r4, 0
 _0816A48A:
 	lsls r0, r4, 24
@@ -3696,7 +3696,7 @@ _0816A48A:
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	pop {r4}
 	pop {r0}
 	bx r0

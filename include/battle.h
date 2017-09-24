@@ -200,6 +200,7 @@
 #define REQUEST_HP_BATTLE 0x2A
 
 // array entries for battle communication
+#define CURSOR_POSITION     0x1
 #define MOVE_EFFECT_BYTE    0x3
 #define MULTISTRING_CHOOSER 0x5
 #define MSG_DISPLAY         0x7
@@ -236,6 +237,46 @@
 #define CMP_COMMON_BITS         0x4
 #define CMP_NO_COMMON_BITS      0x5
 
+struct TrainerMonNoItemDefaultMoves
+{
+    u16 species;
+    u8 lvl;
+    u16 evsValue;
+};
+
+struct TrainerMonItemDefaultMoves
+{
+    u16 species;
+    u8 lvl;
+    u16 evsValue;
+    u16 heldItem;
+};
+
+struct TrainerMonNoItemCustomMoves
+{
+    u16 species;
+    u8 lvl;
+    u16 evsValue;
+    u16 moves[4];
+};
+
+struct TrainerMonItemCustomMoves
+{
+    u16 species;
+    u8 lvl;
+    u16 evsValue;
+    u16 heldItem;
+    u16 moves[4];
+};
+
+union TrainerMonPtr
+{
+    struct TrainerMonNoItemDefaultMoves* NoItemDefaultMoves;
+    struct TrainerMonNoItemCustomMoves* NoItemCustomMoves;
+    struct TrainerMonItemDefaultMoves* ItemDefaultMoves;
+    struct TrainerMonItemCustomMoves* ItemCustomMoves;
+};
+
 struct Trainer
 {
     /*0x00*/ u8 partyFlags;
@@ -247,8 +288,11 @@ struct Trainer
     /*0x18*/ bool8 doubleBattle;
     /*0x1C*/ u32 aiFlags;
     /*0x20*/ u8 partySize;
-    /*0x24*/ void *party;
+    /*0x24*/ union TrainerMonPtr party;
 };
+
+#define PARTY_FLAG_CUSTOM_MOVES     0x1
+#define PARTY_FLAG_HAS_ITEM         0x2
 
 extern const struct Trainer gTrainers[];
 
@@ -289,7 +333,8 @@ struct DisableStruct
     /*0x16*/ u8 isFirstTurn;
     /*0x17*/ u8 unk17;
     /*0x18*/ u8 truantCounter : 1;
-    /*0x18*/ u8 unk18_a : 3;
+    /*0x18*/ u8 truantUnknownBit : 1;
+    /*0x18*/ u8 unk18_a_2 : 2;
     /*0x18*/ u8 unk18_b : 4;
     /*0x19*/ u8 rechargeCounter;
     /*0x1A*/ u8 unk1A[2];
@@ -464,7 +509,7 @@ struct BattleResults
 {
     u8 playerFaintCounter;    // 0x0
     u8 opponentFaintCounter;  // 0x1
-    u8 unk2;                  // 0x2
+    u8 playerSwitchesCounter; // 0x2
     u8 unk3;                  // 0x3
     u8 unk4;                  // 0x4
     u8 unk5_0:1;              // 0x5
@@ -664,6 +709,13 @@ extern struct BattleStruct* gBattleStruct;
     varName = (u16*)(((void*)(*memes1) + (u32)(memes2)));                                           \
 }
 
+#define GET_HP_SWITCHOUT_PTR_VIA_MEME_ACCESS(bank, varName)                                         \
+{                                                                                                   \
+    void** memes1 = (void**)(&gBattleStruct);                                                       \
+    void* memes2 = (void*)((u32)(bank * 2 + offsetof(struct BattleStruct, hpOnSwitchout)));         \
+    varName = (u16*)(((void*)(*memes1) + (u32)(memes2)));                                           \
+}
+
 #define GET_MOVE_TYPE(move, typeArg)                        \
 {                                                           \
     if (gBattleStruct->dynamicMoveType)                     \
@@ -815,6 +867,9 @@ struct BattleScripting
     u8 statChanger;
     u8 field_1B;
     u8 atk23_state;
+    u8 field_1D;
+    u8 field_1E;
+    u8 learnMoveState;
 };
 
 extern struct BattleScripting gBattleScripting;
@@ -829,6 +884,9 @@ u8 GetBattleBank(u8 caseId);
 void UndoEffectsAfterFainting(void);
 bool8 HasMoveFailed(u8 bank);
 void SwitchInClearStructs(void);
+void sub_803BDA0(u8 bank);
+void sub_803FA70(u8 bank);
+void BattleMainCB2(void);
 
 // battle_3
 void BattleScriptPush(const u8* bsPtr);
@@ -860,9 +918,12 @@ void AI_CalcDmg(u8 bankAtk, u8 bankDef);
 u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
 u8 AI_TypeCalc(u16 move, u16 species, u8 ability);
 u8 BankGetTurnOrder(u8 bank);
+void BattleDestroyCursorAt(u8 cursorPosition);
+void BattleCreateCursorAt(u8 cursorPosition);
 
 // battle_5
 void AdjustFriendshipOnBattleFaint(u8 bank);
+void sub_80571DC(u8 bank, u8 arg1);
 
 // battle 7
 void BattleMusicStop(void);

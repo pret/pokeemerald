@@ -10,8 +10,8 @@ nullsub_35: @ 80A92F4
 	bx lr
 	thumb_func_end nullsub_35
 
-	thumb_func_start sub_80A92F8
-sub_80A92F8: @ 80A92F8
+	thumb_func_start ReshowBattleScreenAfterMenu
+ReshowBattleScreenAfterMenu: @ 80A92F8
 	push {lr}
 	ldr r2, =gPaletteFade
 	ldrb r0, [r2, 0x8]
@@ -37,7 +37,7 @@ sub_80A92F8: @ 80A92F8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80A92F8
+	thumb_func_end ReshowBattleScreenAfterMenu
 
 	thumb_func_start c2_80777E8
 c2_80777E8: @ 80A933C
@@ -301,7 +301,7 @@ _080A95A4:
 	movs r0, 0x7F
 	ands r0, r1
 	strb r0, [r2, 0x8]
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	bl SetMainCallback2
 	bl sub_805EF14
 _080A95D2:

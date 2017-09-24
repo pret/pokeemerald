@@ -71,7 +71,9 @@
 #define EXT_CTRL_CODE_BEGIN 0xFC // extended control code
 #define PLACEHOLDER_BEGIN   0xFD // string placeholder
 #define CHAR_NEWLINE        0xFE
-#define EOS 0xFF // end of string
+#define EOS                 0xFF // end of string
+
+// battle placeholders are located in battle_message.h
 
 #define EXT_CTRL_CODE_JPN   0x15
 #define EXT_CTRL_CODE_ENG   0x16

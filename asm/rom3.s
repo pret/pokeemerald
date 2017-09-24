@@ -2319,8 +2319,8 @@ dp01_build_cmdbuf_x07_7_7_7: @ 80339E4
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x07_7_7_7
 
-	thumb_func_start dp01_build_cmdbuf_x08_8_8_8
-dp01_build_cmdbuf_x08_8_8_8: @ 8033A04
+	thumb_func_start EmitTrainerSlide
+EmitTrainerSlide: @ 8033A04
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2335,7 +2335,7 @@ dp01_build_cmdbuf_x08_8_8_8: @ 8033A04
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x08_8_8_8
+	thumb_func_end EmitTrainerSlide
 
 	thumb_func_start dp01_build_cmdbuf_x09_9_9_9
 dp01_build_cmdbuf_x09_9_9_9: @ 8033A24
@@ -3038,8 +3038,8 @@ dp01_build_cmdbuf_x1A_aaaa_bbbb: @ 8033F68
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x1A_aaaa_bbbb
 
-	thumb_func_start dp01_build_cmdbuf_x1B_aaaa_b
-dp01_build_cmdbuf_x1B_aaaa_b: @ 8033FBC
+	thumb_func_start EmitStatusAnimation
+EmitStatusAnimation: @ 8033FBC
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3067,7 +3067,7 @@ dp01_build_cmdbuf_x1B_aaaa_b: @ 8033FBC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x1B_aaaa_b
+	thumb_func_end EmitStatusAnimation
 
 	thumb_func_start dp01_build_cmdbuf_x1C_a
 dp01_build_cmdbuf_x1C_a: @ 8033FF8
@@ -3431,8 +3431,8 @@ dp01_build_cmdbuf_x28_28_28_28: @ 8034274
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x28_28_28_28
 
-	thumb_func_start dp01_build_cmdbuf_x29_29_29_29
-dp01_build_cmdbuf_x29_29_29_29: @ 8034294
+	thumb_func_start EmitHitAnimation
+EmitHitAnimation: @ 8034294
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3447,10 +3447,10 @@ dp01_build_cmdbuf_x29_29_29_29: @ 8034294
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x29_29_29_29
+	thumb_func_end EmitHitAnimation
 
-	thumb_func_start dp01_build_cmdbuf_x2A_2A_2A_2A
-dp01_build_cmdbuf_x2A_2A_2A_2A: @ 80342B4
+	thumb_func_start Emit_x2A
+Emit_x2A: @ 80342B4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3465,7 +3465,7 @@ dp01_build_cmdbuf_x2A_2A_2A_2A: @ 80342B4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x2A_2A_2A_2A
+	thumb_func_end Emit_x2A
 
 	thumb_func_start EmitEffectivenessSound
 EmitEffectivenessSound: @ 80342D4
@@ -3491,8 +3491,8 @@ EmitEffectivenessSound: @ 80342D4
 	.pool
 	thumb_func_end EmitEffectivenessSound
 
-	thumb_func_start sub_8034300
-sub_8034300: @ 8034300
+	thumb_func_start EmitPlaySound
+EmitPlaySound: @ 8034300
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3512,10 +3512,10 @@ sub_8034300: @ 8034300
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8034300
+	thumb_func_end EmitPlaySound
 
-	thumb_func_start dp01_build_cmdbuf_x2D_2D_2D_2D
-dp01_build_cmdbuf_x2D_2D_2D_2D: @ 803432C
+	thumb_func_start EmitFaintingCry
+EmitFaintingCry: @ 803432C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3530,7 +3530,7 @@ dp01_build_cmdbuf_x2D_2D_2D_2D: @ 803432C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x2D_2D_2D_2D
+	thumb_func_end EmitFaintingCry
 
 	thumb_func_start dp01_build_cmdbuf_x2E_a
 dp01_build_cmdbuf_x2E_a: @ 803434C
@@ -3567,8 +3567,8 @@ dp01_build_cmdbuf_x2F_2F_2F_2F: @ 803436C
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x2F_2F_2F_2F
 
-	thumb_func_start dp01_build_cmdbuf_x30_TODO
-dp01_build_cmdbuf_x30_TODO: @ 803438C
+	thumb_func_start EmitCmd48
+EmitCmd48: @ 803438C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3604,10 +3604,10 @@ _080343B4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x30_TODO
+	thumb_func_end EmitCmd48
 
-	thumb_func_start dp01_build_cmdbuf_x31_31_31_31
-dp01_build_cmdbuf_x31_31_31_31: @ 80343D4
+	thumb_func_start EmitCmd49
+EmitCmd49: @ 80343D4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3622,7 +3622,7 @@ dp01_build_cmdbuf_x31_31_31_31: @ 80343D4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x31_31_31_31
+	thumb_func_end EmitCmd49
 
 	thumb_func_start dp01_build_cmdbuf_x32_32_32_32
 dp01_build_cmdbuf_x32_32_32_32: @ 80343F4
@@ -3735,8 +3735,8 @@ dp01_build_cmdbuf_x38_a: @ 80344A8
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x38_a
 
-	thumb_func_start dp01_build_cmdbuf_x37_a
-dp01_build_cmdbuf_x37_a: @ 80344C8
+	thumb_func_start Emit_x37
+Emit_x37: @ 80344C8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 24
@@ -3770,6 +3770,6 @@ dp01_build_cmdbuf_x37_a: @ 80344C8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x37_a
+	thumb_func_end Emit_x37
 
 	.align 2, 0 @ Don't pad with nop.

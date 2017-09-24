@@ -209,7 +209,7 @@ gTypeEffectiveness:: @ 831ACE8
 	.include "data/text/type_names.inc"
 
 	.align 2
-gUnknown_0831AEB8:: @ 831AEB8
+gTrainerMoneyTable:: @ 831AEB8
 	.incbin "baserom.gba", 0x31aeb8, 0xe0
 
 @ 831AF98

@@ -20582,29 +20582,29 @@ _081A5328:
 	ldr r4, =gDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0xF
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Vs
 	movs r1, 0x10
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_RivalBuffer
 	bl StrCpyDecodeToDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0x11
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Mind
 	movs r1, 0x12
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Skill
 	movs r1, 0x13
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Body
 	movs r1, 0x14
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Judgement
 	bl StrCpyDecodeToDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	b _081A553E
 	.pool
 _081A53B4:
@@ -20688,7 +20688,7 @@ _081A5464:
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x15
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldrb r0, [r5]
 	adds r0, 0x1
 	strb r0, [r5]
