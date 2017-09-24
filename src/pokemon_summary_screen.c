@@ -78,8 +78,8 @@ void sub_81C0510(u8 taskId);
 void sub_81C171C(u8 taskId);
 void sub_8121E10();
 u8 sub_81B205C(struct Pokemon* a);
-void sub_81C1DA4(u8 a, u8 b);
-void sub_81C1EFC(u8 a, u8 b, u8 c);
+void sub_81C1DA4(u8 a, s16 b);
+void sub_81C1EFC(u8 a, s16 b, u16 c);
 void sub_81C240C(u16 a);
 void sub_81C2194(void* a, u8 b, u8 c);
 void sub_81C2074(u16 a, s16 b);
@@ -101,6 +101,26 @@ void sub_81C20F0(u8 taskId);
 u8 sub_81C0A50(struct Pokemon* mon);
 void sub_81C49E0();
 void sub_81C0E24();
+void sub_81C2C38();
+void sub_81C0B8C(u8 taskId);
+void sub_81C0CC4(u8 taskId);
+void sub_81C2DE4(u8 a);
+void sub_81C424C();
+void sub_81C0C68(u8 taskId);
+void sub_81C0D44(u8 taskId);
+void sub_81C22CC(struct Pokemon* mon);
+void sub_81C0F44(u8 taskId);
+void sub_81C3E9C(u16 a);
+void sub_81C3F44();
+void sub_81C44F0();
+void sub_81C4AF8(u8 a);
+void sub_81C1070(s16* a, s8 b, u8* c);
+void sub_81C11F4(u8 a);
+void sub_81C129C(u8 a);
+u8 sub_81C1040();
+
+
+void SetBgAttribute(u8 bg, u8 attributeId, u8 value);
 
 u8 sub_81BFB10();
 u8 sub_81B1250();
@@ -109,6 +129,8 @@ union unkUnion{
     struct Pokemon mons[6];
     struct BoxPokemon boxMons[6];
 };
+
+
 
 u8 sub_80D214C(union unkUnion* a, u8 b, u8 c, u8 d);
 
@@ -167,14 +189,23 @@ struct unkSummaryStruct{
     u8 unk40C1;
     u8 unk40C2;
     u8 unk40C3;
-    u16 unk40C4;
-    u8 unk40C6;
-    u8 unk_filler3;
+    union
+{
+    struct
+    {
+        u16 unk40C4;
+        u8 unk40C6;
+        u8 unkfiller3;
+    } fooFiller;
+    u32 loadThis;
+} unionThing;
     u8 unk40C8;
-    u8 unk_filler2[0xA];
+    u8 unk40C9;
+    u8 unk_filler2[0x9];
     u8 unk40D3;
     u8 unk40D4;
-    u8 unk_filler5[0x1A];
+    u8 unk40D5;
+    u8 unk_filler5[0x19];
     u8 unk40EF;
     s16 unk40F0;
     u8 unk_filler4[6];
@@ -222,7 +253,7 @@ void sub_81BF8EC(u8 a, void* b, u8 c, u8 d, void* e)
 void sub_81BFA38(void* a, u8 b, u8 c, void* d, u16 e)
 {
     sub_81BF8EC(3, a, b, c, d);
-    gUnknown_0203CF1C->unk40C4 = e;
+    gUnknown_0203CF1C->unionThing.fooFiller.unk40C4 = e;
 }
 
 void sub_81BFA80(u8 a, void* b, u8 c, u8 d, void* e)
@@ -563,7 +594,7 @@ void sub_81C0348()
     }
     else
     {
-        sub_81C240C(gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unk40C6]);
+        sub_81C240C(gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unionThing.fooFiller.unk40C6]);
         sub_81C2194(&gUnknown_0203CF1C->unkTilemap2, 3, 0);
         sub_81C2194(&gUnknown_0203CF1C->unkTilemap3, 1, 0);
         SetBgTilemapBuffer(1, &gUnknown_0203CF1C->unkTilemap3);
@@ -772,164 +803,58 @@ void sub_81C0704(u8 taskId)
     data[0]++;
 }
 
-#ifdef NONMATCHING
 s8 sub_81C08F8(s8 a)
 {
-    union unkUnion* r7 = gUnknown_0203CF1C->unk0;
+    struct Pokemon *mons = gUnknown_0203CF1C->unk0->mons;
+
     if (gUnknown_0203CF1C->unk40C0 == 0)
     {
-        if (a != -1 || gUnknown_0203CF1C->unk40BE != 0)
-        {
-            if (a != 1 || gUnknown_0203CF1C->unk40BE < gUnknown_0203CF1C->unk40BF)
-            {
-                return gUnknown_0203CF1C->unk40BE + a;
-            }
-        }
-        return -1;
+        if (a == -1 && gUnknown_0203CF1C->unk40BE == 0)
+            return -1;
+        if (a == 1 && gUnknown_0203CF1C->unk40BE >= gUnknown_0203CF1C->unk40BF)
+            return -1;
+        return gUnknown_0203CF1C->unk40BE + a;
     }
     else
     {
-        s8 r5r4 = gUnknown_0203CF1C->unk40BE;
-        while(1)
+        s8 index = gUnknown_0203CF1C->unk40BE;
+
+        do
         {
-            r5r4 += a;
-            if (r5r4 < 0 || r5r4 > gUnknown_0203CF1C->unk40BF)
+            index += a;
+            if (index < 0 || index > gUnknown_0203CF1C->unk40BF)
                 return -1;
-            else if (GetMonData(&r7->mons[r5r4], MON_DATA_IS_EGG) == 0)
-                return r5r4;
-        }
+        } while (GetMonData(&mons[index], MON_DATA_IS_EGG) != 0);
+        return index;
     }
 }
-#else
-__attribute__((naked))
-s8 sub_81C08F8(s8 a)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	ldr r1, =gUnknown_0203CF1C\n\
-	ldr r2, [r1]\n\
-	ldr r7, [r2]\n\
-	ldr r3, =0x000040c0\n\
-	adds r0, r2, r3\n\
-	ldrb r0, [r0]\n\
-	adds r5, r1, 0\n\
-	cmp r0, 0\n\
-	bne _081C0960\n\
-	lsls r0, r4, 24\n\
-	asrs r3, r0, 24\n\
-	movs r1, 0x1\n\
-	negs r1, r1\n\
-	adds r6, r0, 0\n\
-	cmp r3, r1\n\
-	bne _081C0928\n\
-	ldr r1, =0x000040be\n\
-	adds r0, r2, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _081C0988\n\
-_081C0928:\n\
-	asrs r0, r6, 24\n\
-	cmp r0, 0x1\n\
-	bne _081C0940\n\
-	ldr r0, [r5]\n\
-	ldr r2, =0x000040be\n\
-	adds r1, r0, r2\n\
-	ldr r3, =0x000040bf\n\
-	adds r0, r3\n\
-	ldrb r1, [r1]\n\
-	ldrb r0, [r0]\n\
-	cmp r1, r0\n\
-	bcs _081C0988\n\
-_081C0940:\n\
-	ldr r0, [r5]\n\
-	ldr r1, =0x000040be\n\
-	adds r0, r1\n\
-	ldrb r0, [r0]\n\
-	adds r0, r4\n\
-	lsls r0, 24\n\
-	asrs r0, 24\n\
-	b _081C09AE\n\
-	.pool\n\
-_081C0960:\n\
-	ldr r3, =0x000040be\n\
-	adds r0, r2, r3\n\
-	ldrb r5, [r0]\n\
-	lsls r6, r4, 24\n\
-_081C0968:\n\
-	lsls r0, r5, 24\n\
-	asrs r0, 24\n\
-	asrs r1, r6, 24\n\
-	adds r0, r1\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	asrs r4, r0, 24\n\
-	cmp r4, 0\n\
-	blt _081C0988\n\
-	ldr r0, =gUnknown_0203CF1C\n\
-	ldr r0, [r0]\n\
-	ldr r1, =0x000040bf\n\
-	adds r0, r1\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	ble _081C099C\n\
-_081C0988:\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	b _081C09AE\n\
-	.pool\n\
-_081C099C:\n\
-	movs r0, 0x64\n\
-	muls r0, r4\n\
-	adds r0, r7, r0\n\
-	movs r1, 0x2D\n\
-	bl GetMonData\n\
-	cmp r0, 0\n\
-	bne _081C0968\n\
-	adds r0, r4, 0\n\
-_081C09AE:\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.syntax divided\n");
-}
-#endif
 
 s8 sub_81C09B4(s8 a)
 {
-    union unkUnion* r8 = gUnknown_0203CF1C->unk0;
+    struct Pokemon *mons = gUnknown_0203CF1C->unk0->mons;
     s8 r5 = 0;
-    u8 i = 0;
-    if (gUnknown_0861CC1C[0] != gUnknown_0203CF1C->unk40BE)
+    u8 i;
+
+    for (i = 0; i < 6; i++)
     {
-        while(1)
+        if (gUnknown_0861CC1C[i] == gUnknown_0203CF1C->unk40BE)
         {
-            i += 1;
-            if (i > 5)
-                break;
-            if (gUnknown_0861CC1C[i] == gUnknown_0203CF1C->unk40BE)
-            {
-                r5 = i;
-                break;
-            }
+            r5 = i;
+            break;
         }
     }
-    while(1)
+
+    while (1)
     {
         int b;
         s8* c = &gUnknown_0861CC1C[0];
+
         r5 += a;
-        if ((u8)(r5) > 5)
-        {
+        if (r5 < 0 || r5 >= 6)
             return -1;
-        }
-        else
-        {
-            b = c[r5];
-            if (sub_81C0A50(&r8->mons[c[r5]]) == 1)
-                return b;
-        }
+        b = c[r5];
+        if (sub_81C0A50(&mons[b]) == 1)
+            return b;
     }
 }
 
@@ -944,3 +869,222 @@ u8 sub_81C0A50(struct Pokemon* mon)
     else
         return 0;
 }
+
+void sub_81C0A8C(u8 taskId, s8 b)
+{
+    struct pokeSummary *summary = &gUnknown_0203CF1C->summary;
+    s16 *data = gTasks[taskId].data;
+
+    if (summary->isEgg)
+        return;
+    if (b == -1 && gUnknown_0203CF1C->unk40C0 == gUnknown_0203CF1C->unk40C1)
+        return;
+    if (b == 1 && gUnknown_0203CF1C->unk40C0 == gUnknown_0203CF1C->unk40C2)
+        return;
+    PlaySE(SE_SELECT);
+    sub_81C2C38(gUnknown_0203CF1C->unk40C0);
+    gUnknown_0203CF1C->unk40C0 += b;
+    data[0] = 0;
+    if (b == 1)
+        SetTaskFuncWithFollowupFunc(taskId, sub_81C0B8C, gTasks[taskId].func);
+    else
+        SetTaskFuncWithFollowupFunc(taskId, sub_81C0CC4, gTasks[taskId].func);
+    sub_81C2DE4(gUnknown_0203CF1C->unk40C0);
+    sub_81C424C();
+}
+
+void sub_81C0B8C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (data[0] == 0)
+    {
+        if (gUnknown_0203CF1C->unk40C9 == 0)
+        {
+            data[1] = 1;
+            SetBgAttribute(1, 7, 1);
+            SetBgAttribute(2, 7, 2);
+            schedule_bg_copy_tilemap_to_vram(1);
+        }
+        else
+        {
+            data[1] = 2;
+            SetBgAttribute(2, 7, 1);
+            SetBgAttribute(1, 7, 2);
+            schedule_bg_copy_tilemap_to_vram(2);
+        }
+        ChangeBgX(data[1], 0, 0);
+        SetBgTilemapBuffer(data[1], (u8*)gUnknown_0203CF1C + ((gUnknown_0203CF1C->unk40C0 << 12) + 0xBC));
+        ShowBg(1);
+        ShowBg(2);
+    }
+    ChangeBgX(data[1], 0x2000, 1);
+    data[0] += 32;
+    if (data[0] > 0xFF)
+    {
+        gTasks[taskId].func = sub_81C0C68;
+    }
+}
+
+void sub_81C0C68(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    gUnknown_0203CF1C->unk40C9 ^= 1;
+    data[1] = 0;
+    data[0] = 0;
+    sub_81C1BA0();
+    sub_81C2AFC(gUnknown_0203CF1C->unk40C0);
+    sub_81C4280();
+    sub_81C0E24();
+    SwitchTaskToFollowupFunc(taskId);
+}
+
+void sub_81C0CC4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (data[0] == 0)
+    {
+        if (gUnknown_0203CF1C->unk40C9 == 0)
+            data[1] = 2;
+        else
+            data[1] = 1;
+        ChangeBgX(data[1], 0x10000, 0);
+    }
+    ChangeBgX(data[1], 0x2000, 2);
+    data[0] += 32;
+    if (data[0] > 0xFF)
+        gTasks[taskId].func = sub_81C0D44;
+}
+
+void sub_81C0D44(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (gUnknown_0203CF1C->unk40C9 == 0)
+    {
+        SetBgAttribute(1, 7, 1);
+        SetBgAttribute(2, 7, 2);
+        schedule_bg_copy_tilemap_to_vram(2);
+    }
+    else
+    {
+        SetBgAttribute(2, 7, 1);
+        SetBgAttribute(1, 7, 2);
+        schedule_bg_copy_tilemap_to_vram(1);
+    }
+    if (gUnknown_0203CF1C->unk40C0 > 1)
+    {
+        SetBgTilemapBuffer(data[1], (u8*)gUnknown_0203CF1C + ((gUnknown_0203CF1C->unk40C0 << 12) + 0xFFFFF0BC));
+        ChangeBgX(data[1], 0x10000, 0);
+    }
+    ShowBg(1);
+    ShowBg(2);
+    gUnknown_0203CF1C->unk40C9 ^= 1;
+    data[1] = 0;
+    data[0] = 0;
+    sub_81C1BA0();
+    sub_81C2AFC(gUnknown_0203CF1C->unk40C0);
+    sub_81C4280();
+    sub_81C0E24();
+    SwitchTaskToFollowupFunc(taskId);
+}
+
+void sub_81C0E24()
+{
+    if (gUnknown_0203CF1C->unk40C0 == 1)
+        sub_81C22CC(&gUnknown_0203CF1C->currentPoke);
+}
+
+void sub_81C0E48(u8 taskId)
+{
+    u16 move;
+    gUnknown_0203CF1C->unionThing.fooFiller.unk40C6 = 0;
+    move = gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unionThing.fooFiller.unk40C6];
+    ClearWindowTilemap(0x13);
+    if (gSprites[gUnknown_0203CF1C->unk40D5].invisible == 0)
+        ClearWindowTilemap(0xD);
+    sub_81C1DA4(9, -3);
+    sub_81C1EFC(9, -3, move);
+    if (gUnknown_0203CF1C->unk40C8 == 0)
+    {
+        ClearWindowTilemap(5);
+        PutWindowTilemap(6);
+    }
+    sub_81C2194(&gUnknown_0203CF1C->unkTilemap2, 3, 0);
+    sub_81C2194(&gUnknown_0203CF1C->unkTilemap3, 1, 0);
+    sub_81C3E9C(move);
+    sub_81C3F44();
+    sub_81C44F0();
+    schedule_bg_copy_tilemap_to_vram(0);
+    schedule_bg_copy_tilemap_to_vram(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+    sub_81C4AF8(8);
+    gTasks[taskId].func = sub_81C0F44;
+}
+
+void sub_81C0F44(u8 taskId)
+{
+    u8 id = taskId;
+    s16 *data = gTasks[taskId].data;
+    if (sub_81221EC() != 1)
+    {
+        if (gMain.newKeys & DPAD_UP)
+        {
+            data[0] = 4;
+            sub_81C1070(data, -1, &gUnknown_0203CF1C->unionThing.fooFiller.unk40C6);
+        }
+        else if (gMain.newKeys & DPAD_DOWN)
+        {
+            data[0] = 4;
+            sub_81C1070(data, 1, &gUnknown_0203CF1C->unionThing.fooFiller.unk40C6);
+        }
+        else if (gMain.newKeys & A_BUTTON)
+        {
+            if (gUnknown_0203CF1C->unk40C8 == 1 || ((int)(gUnknown_0203CF1C->unionThing.loadThis & 0xFFFFFF) == 0x40000))
+            {
+                PlaySE(SE_SELECT);
+                sub_81C11F4(taskId);
+            }
+            else if (sub_81C1040() == 1)
+            {
+                PlaySE(SE_SELECT);
+                sub_81C129C(taskId);
+            }
+            else
+                PlaySE(0x20);
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            sub_81C11F4(id);
+        }
+    }
+}
+
+u8 sub_81C1040()
+{
+    u8 i;
+    for (i = 1; i <= 3; i++)
+    {
+        if (gUnknown_0203CF1C->summary.moves[i] != 0)
+            return 1;
+    }
+    return 0;
+}
+
+/* void sub_81C1070(s16* a, s8 b, u8* c)
+{
+    s8 i;
+    s8 d = c*;
+    PlaySE(SE_SELECT);
+    i = 0;
+    while (i <= 3)
+    {
+        d += b
+        if (d > a[0])
+            d = 0;
+        else if (d < 0)
+            d = data[0];
+        if (d == 4)
+            break;
+        
+    }
+} */
