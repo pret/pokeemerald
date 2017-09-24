@@ -1,4 +1,5 @@
 *.exe
+*.lnk
 *.o
 *.i
 *.elf
