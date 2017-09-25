@@ -803,10 +803,7 @@ const struct Berry gBerries[] =
     },
 };
 
-const struct {
-    u8 unk0;
-    u16 unk1;
-} gUnknown_0858AB24[] = {
+const struct UnkStruct_0858AB24 gUnknown_0858AB24[] = {
     { 50,  20},
     { 50,  20},
     { 50,  20},

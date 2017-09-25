@@ -346,7 +346,14 @@ SECTIONS {
         data/data3_a0_B.o(.rodata);
         src/berry.o(.rodata);
         data/script_menu.o(.rodata);
-        data/data3_a1.o(.rodata);
+        data/naming_screen.o(.rodata);
+        data/money.o(.rodata);
+        data/contest_effect.o(.rodata);
+        data/record_mixing.o(.rodata);
+        data/secret_base.o(.rodata);
+        data/tv.o(.rodata);
+        data/contest_link_80F57C4.o(.rodata);
+        data/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         data/field_effect.o(.rodata);
         data/truck_scene_porthole.o(.rodata);
