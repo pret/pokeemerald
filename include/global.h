@@ -534,14 +534,14 @@ struct MailStruct
 
 struct UnkMauvilleOldManStruct
 {
-               u8 unk_2D94;
-               u8 unk_2D95;
-    /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
-    /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
-    /*0x2DAE*/ u8 playerName[8];
-    /*0x2DB6*/ u8 filler_2DB6[0x3];
-    /*0x2DB9*/ u8 playerTrainerId[4];
-               u8 unk_2DBD;
+               u8 unk_2E28;
+               u8 unk_2E29;
+    /*0x2E2A*/ u16 mauvilleOldMan_ecArray[6];
+    /*0x2E36*/ u16 mauvilleOldMan_ecArray2[6];
+    /*0x2E42*/ u8 playerName[8];
+    /*0x2E4A*/ u8 filler_2E4A[0x3];
+    /*0x2E4B*/ u8 playerTrainerId[4];
+               u8 unk_2E4F;
 }; /*size = 0x2C*/
 
 struct UnkMauvilleOldManStruct2
@@ -579,24 +579,24 @@ struct UnknownSaveStruct2ABC
 
 struct GabbyAndTyData
 {
-    /*2b10*/ u16 mon1;
-    /*2b12*/ u16 mon2;
-    /*2b14*/ u16 lastMove;
-    /*2b16*/ u16 quote;
-    /*2b18*/ u8 mapnum;
-    /*2b19*/ u8 battleNum;
-    /*2b1a*/ u8 valA_0:1;
-    /*2b1a*/ u8 valA_1:1;
-    /*2b1a*/ u8 valA_2:1;
-    /*2b1a*/ u8 valA_3:1;
-    /*2b1a*/ u8 valA_4:1;
-    /*2b1a*/ u8 valA_5:3;
-    /*2b1b*/ u8 valB_0:1;
-    /*2b1b*/ u8 valB_1:1;
-    /*2b1b*/ u8 valB_2:1;
-    /*2b1b*/ u8 valB_3:1;
-    /*2b1b*/ u8 valB_4:1;
-    /*2b1b*/ u8 valB_5:3;
+    /*2ba4*/ u16 mon1;
+    /*2ba6*/ u16 mon2;
+    /*2ba8*/ u16 lastMove;
+    /*2baa*/ u16 quote;
+    /*2bac*/ u8 mapnum;
+    /*2bad*/ u8 battleNum;
+    /*2bae*/ u8 valA_0:1;
+    /*2bae*/ u8 valA_1:1;
+    /*2bae*/ u8 valA_2:1;
+    /*2bae*/ u8 valA_3:1;
+    /*2bae*/ u8 valA_4:1;
+    /*2bae*/ u8 valA_5:3;
+    /*2baf*/ u8 valB_0:1;
+    /*2baf*/ u8 valB_1:1;
+    /*2baf*/ u8 valB_2:1;
+    /*2baf*/ u8 valB_3:1;
+    /*2baf*/ u8 valB_4:1;
+    /*2baf*/ u8 valB_5:3;
 };
 
 struct RecordMixing_UnknownStructSub
@@ -787,10 +787,10 @@ struct SaveBlock1
     /*0x????*/ u8 outbreakPokemonProbability;
     /*0x????*/ u16 outbreakUnk5;
     /*0x2BA4*/ struct GabbyAndTyData gabbyAndTyData;
-    /*0x????*/ u16 unk2B1C[6];
-    /*0x????*/ u16 unk2B28[6];
-    /*0x????*/ u16 unk2B34[6];
-    /*0x????*/ u16 unk2B3A[3];
+    /*0x2BB0*/ u16 unk2BB0[6];
+    /*0x2BBC*/ u16 unk2BBC[6];
+    /*0x2BC8*/ u16 unk2BC8[6];
+    /*0x2BD4*/ u16 unk2BD4[3];
     /*0x2BE0*/ struct MailStruct mail[16];
     /*0x2E20*/ u8 additionalPhrases[5]; // bitfield for 33 additional phrases in easy chat system
     /*0x2E25*/ u8 unk2E25[3]; // possibly padding?

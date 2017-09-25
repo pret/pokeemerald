@@ -8,6 +8,7 @@
 #include "main.h"
 #include "window.h"
 #include "palette.h"
+#include "event_data.h"
 #include "easy_chat.h"
 
 // Static type declarations
@@ -207,3 +208,76 @@ void sub_811A4D0(MainCallback callback)
     FreeAllWindowBuffers();
     SetMainCallback2(callback);
 }
+//
+//void easy_chat_input_maybe(void)
+//{
+//    u16 i;
+//    u16 *words;
+//    OldMan *oldMan;
+//    u8 sizeParam = 3;
+//    switch (gSpecialVar_0x8004)
+//    {
+//        case 0:
+//            words = gSaveBlock1Ptr->unk2BB0;
+//            break;
+//        case 1:
+//            words = gSaveBlock1Ptr->unk2BBC;
+//            break;
+//        case 2:
+//            words = gSaveBlock1Ptr->unk2BC8;
+//            break;
+//        case 3:
+//            words = gSaveBlock1Ptr->unk2BD4;
+//            break;
+//        case 4:
+//            words = gSaveBlock1Ptr->mail[gSpecialVar_0x8005].words;
+//            break;
+//        case 6:
+//            oldMan = &gSaveBlock1Ptr->oldMan;
+//            for (i=0; i<6; i++)
+//            {
+//                oldMan->oldMan1.mauvilleOldMan_ecArray2[i] = oldMan->oldMan1.mauvilleOldMan_ecArray[i];
+//            }
+//            words = oldMan->oldMan1.mauvilleOldMan_ecArray2;
+//            break;
+//        case 5:
+//            words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.var04;
+//            sizeParam = gSpecialVar_0x8006;
+//            break;
+//        case 7:
+//            words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.var1C[gSpecialVar_0x8006];
+//            sizeParam = 1;
+//            break;
+//        case 8:
+//            words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].recentHappenings.var02;
+//            sizeParam = 0;
+//            break;
+//        case 9:
+//            words = NULL;
+//            break;
+//        case 10:
+//            words = &gSaveBlock1Ptr->gabbyAndTyData.quote;
+//            *words = -1;
+//            sizeParam = 1;
+//            break;
+//        case 11:
+//            words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.var04[gSpecialVar_0x8006];
+//            sizeParam = 0;
+//            break;
+//        case 12:
+//            words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.var18;
+//            sizeParam = 1;
+//            break;
+//        case 13:
+//            words = (u16 *)gStringVar3;
+//            sub_811F88C(words, 2);
+//            break;
+//        case 14:
+//            words =
+//        default:
+//            return;
+//    }
+//    overworld_free_bg_tilemaps();
+//    sub_811A20C(gSpecialVar_0x8004, words, sub_80861B0, sizeParam);
+//}
+
