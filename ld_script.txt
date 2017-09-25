@@ -339,7 +339,7 @@ SECTIONS {
         data/data2c.o(.rodata);
         src/trig.o(.rodata);
         src/util.o(.rodata);
-        data/data3.o(.rodata);
+        data/daycare.o(.rodata);
         src/egg_hatch.o(.rodata);
         data/battle_7.o(.rodata);
         data/battle_interface.o(.rodata);
