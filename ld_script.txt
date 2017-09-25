@@ -345,6 +345,7 @@ SECTIONS {
         data/field_map_obj.o(.rodata);
         data/data3_a0_B.o(.rodata);
         src/berry.o(.rodata);
+        data/script_menu.o(.rodata);
         data/data3_a1.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         data/field_effect.o(.rodata);

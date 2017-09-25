@@ -686,139 +686,139 @@ gUnknown_0827E8DA:: @ 827E8DA
 gUnknown_0827EA0C:: @ 827EA0C
 	.incbin "baserom.gba", 0x27ea0c, 0x2b0
 
-gUnknown_0027ecbc:: @ 27ECBC
+gUnknown_0827ecbc:: @ 27ECBC
 	.incbin "baserom.gba", 0x27ecbc, 0x7
 
-gUnknown_0027ecc3:: @ 27ECC3
+gUnknown_0827ecc3:: @ 27ECC3
 	.incbin "baserom.gba", 0x27ecc3, 0xa
 
-gUnknown_0027eccd:: @ 27ECCD
+gUnknown_0827eccd:: @ 27ECCD
 	.incbin "baserom.gba", 0x27eccd, 0x8
 
-gUnknown_0027ecd5:: @ 27ECD5
+gUnknown_0827ecd5:: @ 27ECD5
 	.incbin "baserom.gba", 0x27ecd5, 0x8
 
-gUnknown_0027ecdd:: @ 27ECDD
+gUnknown_0827ecdd:: @ 27ECDD
 	.incbin "baserom.gba", 0x27ecdd, 0x6
 
-gUnknown_0027ece3:: @ 27ECE3
+gUnknown_0827ece3:: @ 27ECE3
 	.incbin "baserom.gba", 0x27ece3, 0x8
 
-gUnknown_0027eceb:: @ 27ECEB
+gUnknown_0827eceb:: @ 27ECEB
 	.incbin "baserom.gba", 0x27eceb, 0x7
 
-gUnknown_0027ecf2:: @ 27ECF2
+gUnknown_0827ecf2:: @ 27ECF2
 	.incbin "baserom.gba", 0x27ecf2, 0x6
 
-gUnknown_0027ecf8:: @ 27ECF8
+gUnknown_0827ecf8:: @ 27ECF8
 	.incbin "baserom.gba", 0x27ecf8, 0x8
 
-gUnknown_0027ed00:: @ 27ED00
+gUnknown_0827ed00:: @ 27ED00
 	.incbin "baserom.gba", 0x27ed00, 0x6
 
-gUnknown_0027ed06:: @ 27ED06
+gUnknown_0827ed06:: @ 27ED06
 	.incbin "baserom.gba", 0x27ed06, 0xa
 
-gUnknown_0027ed10:: @ 27ED10
+gUnknown_0827ed10:: @ 27ED10
 	.incbin "baserom.gba", 0x27ed10, 0x8
 
-gUnknown_0027ed18:: @ 27ED18
+gUnknown_0827ed18:: @ 27ED18
 	.incbin "baserom.gba", 0x27ed18, 0xa
 
-gUnknown_0027ed22:: @ 27ED22
+gUnknown_0827ed22:: @ 27ED22
 	.incbin "baserom.gba", 0x27ed22, 0xa
 
-gUnknown_0027ed2c:: @ 27ED2C
+gUnknown_0827ed2c:: @ 27ED2C
 	.incbin "baserom.gba", 0x27ed2c, 0xa
 
-gUnknown_0027ed36:: @ 27ED36
+gUnknown_0827ed36:: @ 27ED36
 	.incbin "baserom.gba", 0x27ed36, 0xa
 
-gUnknown_0027ed40:: @ 27ED40
+gUnknown_0827ed40:: @ 27ED40
 	.incbin "baserom.gba", 0x27ed40, 0x6
 
-gUnknown_0027ed46:: @ 27ED46
+gUnknown_0827ed46:: @ 27ED46
 	.incbin "baserom.gba", 0x27ed46, 0x9
 
-gUnknown_0027ed4f:: @ 27ED4F
+gUnknown_0827ed4f:: @ 27ED4F
 	.incbin "baserom.gba", 0x27ed4f, 0xa
 
-gUnknown_0027ed59:: @ 27ED59
+gUnknown_0827ed59:: @ 27ED59
 	.incbin "baserom.gba", 0x27ed59, 0xc
 
-gUnknown_0027ed65:: @ 27ED65
+gUnknown_0827ed65:: @ 27ED65
 	.incbin "baserom.gba", 0x27ed65, 0xb
 
-gUnknown_0027ed70:: @ 27ED70
+gUnknown_0827ed70:: @ 27ED70
 	.incbin "baserom.gba", 0x27ed70, 0x4
 
-gUnknown_0027ed74:: @ 27ED74
+gUnknown_0827ed74:: @ 27ED74
 	.incbin "baserom.gba", 0x27ed74, 0x4
 
-gUnknown_0027ed78:: @ 27ED78
+gUnknown_0827ed78:: @ 27ED78
 	.incbin "baserom.gba", 0x27ed78, 0x8
 
-gUnknown_0027ed80:: @ 27ED80
+gUnknown_0827ed80:: @ 27ED80
 	.incbin "baserom.gba", 0x27ed80, 0x15
 
-gUnknown_0027ed95:: @ 27ED95
+gUnknown_0827ed95:: @ 27ED95
 	.incbin "baserom.gba", 0x27ed95, 0x15
 
-gUnknown_0027edaa:: @ 27EDAA
+gUnknown_0827edaa:: @ 27EDAA
 	.incbin "baserom.gba", 0x27edaa, 0xb
 
-gUnknown_0027edb5:: @ 27EDB5
+gUnknown_0827edb5:: @ 27EDB5
 	.incbin "baserom.gba", 0x27edb5, 0x5
 
-gUnknown_0027edba:: @ 27EDBA
+gUnknown_0827edba:: @ 27EDBA
 	.incbin "baserom.gba", 0x27edba, 0x7
 
-gUnknown_0027edc1:: @ 27EDC1
+gUnknown_0827edc1:: @ 27EDC1
 	.incbin "baserom.gba", 0x27edc1, 0x8
 
-gUnknown_0027edc9:: @ 27EDC9
+gUnknown_0827edc9:: @ 27EDC9
 	.incbin "baserom.gba", 0x27edc9, 0xc
 
-gUnknown_0027edd5:: @ 27EDD5
+gUnknown_0827edd5:: @ 27EDD5
 	.incbin "baserom.gba", 0x27edd5, 0xf
 
-gUnknown_0027ede4:: @ 27EDE4
+gUnknown_0827ede4:: @ 27EDE4
 	.incbin "baserom.gba", 0x27ede4, 0xc
 
-gUnknown_0027edf0:: @ 27EDF0
+gUnknown_0827edf0:: @ 27EDF0
 	.incbin "baserom.gba", 0x27edf0, 0x5
 
-gUnknown_0027edf5:: @ 27EDF5
+gUnknown_0827edf5:: @ 27EDF5
 	.incbin "baserom.gba", 0x27edf5, 0x2
 
-gUnknown_0027edf7:: @ 27EDF7
+gUnknown_0827edf7:: @ 27EDF7
 	.incbin "baserom.gba", 0x27edf7, 0x2
 
-gUnknown_0027edf9:: @ 27EDF9
+gUnknown_0827edf9:: @ 27EDF9
 	.incbin "baserom.gba", 0x27edf9, 0x2
 
-gUnknown_0027edfb:: @ 27EDFB
+gUnknown_0827edfb:: @ 27EDFB
 	.incbin "baserom.gba", 0x27edfb, 0x2
 
-gUnknown_0027edfd:: @ 27EDFD
+gUnknown_0827edfd:: @ 27EDFD
 	.incbin "baserom.gba", 0x27edfd, 0x2
 
-gUnknown_0027edff:: @ 27EDFF
+gUnknown_0827edff:: @ 27EDFF
 	.incbin "baserom.gba", 0x27edff, 0x2
 
-gUnknown_0027ee01:: @ 27EE01
+gUnknown_0827ee01:: @ 27EE01
 	.incbin "baserom.gba", 0x27ee01, 0x2
 
-gUnknown_0027ee03:: @ 27EE03
+gUnknown_0827ee03:: @ 27EE03
 	.incbin "baserom.gba", 0x27ee03, 0x2
 
-gUnknown_0027ee05:: @ 27EE05
+gUnknown_0827ee05:: @ 27EE05
 	.incbin "baserom.gba", 0x27ee05, 0x2
 
-gUnknown_0027ee07:: @ 27EE07
+gUnknown_0827ee07:: @ 27EE07
 	.incbin "baserom.gba", 0x27ee07, 0x2
 
-gUnknown_0027ee09:: @ 27EE09
+gUnknown_0827ee09:: @ 27EE09
 	.incbin "baserom.gba", 0x27ee09, 0x2
 
 gUnknown_0827EE0B:: @ 827EE0B
