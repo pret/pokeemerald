@@ -29,5 +29,6 @@ const struct MapHeader *get_mapheader_by_bank_and_number(u8, u8);
 void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 void sub_8086230(void);
 void c2_exit_to_overworld_2_switch(void);
+bool32 is_c1_link_related_active(void);
 
 #endif //GUARD_ROM4_H

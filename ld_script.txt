@@ -166,6 +166,7 @@ SECTIONS {
         asm/item_use.o(.text);
         asm/battle_anim_80FE840.o(.text);
         asm/bike.o(.text);
+        src/easy_chat.o(.text);
         asm/easy_chat.o(.text);
         asm/mon_markings.o(.text);
         asm/mauville_old_man.o(.text);
