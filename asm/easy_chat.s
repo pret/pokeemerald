@@ -5,21 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_811A4D0
-sub_811A4D0: @ 811A4D0
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_811C13C
-	bl sub_811AA90
-	bl sub_811F2B8
-	bl FreeAllWindowBuffers
-	adds r0, r4, 0
-	bl SetMainCallback2
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_811A4D0
-
 	thumb_func_start easy_chat_input_maybe
 easy_chat_input_maybe: @ 811A4F0
 	push {r4,r5,lr}
