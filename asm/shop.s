@@ -657,7 +657,7 @@ BuyMenuSetListEntry: @ 80E0000
 	.pool
 _080E0020:
 	lsls r1, r4, 5
-	ldr r0, =gUnknown_085A5C09
+	ldr r0, =gDecorations + 1
 	adds r1, r0
 	adds r0, r5, 0
 	bl StringCopy
@@ -2106,7 +2106,7 @@ _080E0C28:
 _080E0C38:
 	ldr r0, =gStringVar1
 	lsls r1, r5, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	ldr r0, =gStringVar2
