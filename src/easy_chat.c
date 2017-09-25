@@ -14,7 +14,7 @@
 // Static RAM declarations
 static void sub_811A2C0(u8);
 static void sub_811A278(void);
-/*static*/ bool8 sub_811A428(u8);
+static bool8 sub_811A428(u8);
 static void sub_811A2FC(u8);
 /*static*/ u16 sub_811AAAC(void);
 /*static*/ bool32 sub_811A88C(u16);
@@ -22,6 +22,10 @@ static void sub_811A2FC(u8);
 /*static*/ bool8 sub_811C170(void);
 /*static*/ void sub_811A8A4(u16);
 /*static*/ void sub_811A4D0(u32);
+bool8 sub_811F28C(void);
+bool8 sub_811A95C(u8, u32, u8);
+bool8 sub_811BF8C(void);
+bool8 sub_811BFA4(void);
 
 // Static ROM declarations
 
@@ -138,4 +142,48 @@ static void sub_811A2FC(u8 taskId)
             }
             break;
     }
+}
+
+static bool8 sub_811A428(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    switch (data[0])
+    {
+        case 0:
+            SetVBlankCallback(NULL);
+            ResetSpriteData();
+            FreeAllSpritePalettes();
+            ResetPaletteFade();
+            break;
+        case 1:
+            if (!sub_811F28C())
+            {
+                sub_811A4D0(GetWordTaskArg(taskId, 0x04));
+            }
+            break;
+        case 2:
+            if (!sub_811A95C(data[1], GetWordTaskArg(taskId, 0x02), data[7]))
+            {
+                sub_811A4D0(GetWordTaskArg(taskId, 0x04));
+            }
+            break;
+        case 3:
+            if (!sub_811BF8C())
+            {
+                sub_811A4D0(GetWordTaskArg(taskId, 0x04));
+            }
+            break;
+        case 4:
+            if (sub_811BFA4())
+            {
+                return TRUE;
+            }
+            break;
+        default:
+            return FALSE;
+    }
+    data[0] ++;
+    return TRUE;
 }
