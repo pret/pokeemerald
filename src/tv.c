@@ -13,6 +13,8 @@
 #include "species.h"
 #include "moves.h"
 #include "battle.h"
+#include "items.h"
+#include "main.h"
 #include "tv.h"
 
 // Static type declarations
@@ -20,6 +22,7 @@
 // Static RAM declarations
 
 extern EWRAM_DATA u8 sTVShowState;
+extern s8 gUnknown_030060BC;
 
 // Static ROM declarations
 
@@ -37,6 +40,16 @@ static void SetTVMetatilesOnMap(int, int, u16);
 u8 FindAnyTVNewsOnTheAir(void);
 static bool8 IsTVShowInSearchOfTrainersAiring(void);
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
+
+void sub_80EED88(void);
+void sub_80ED718(void);
+void sub_80EC8FC(void);
+void sub_80EC8A4(void);
+bool8 sub_80EFB38(u16);
+s8 sub_80EFB08(TVShow *);
+bool8 sub_80EF46C(u8, u8);
+u32 sub_81DB604(const u8 *);
+void sub_80EC9E8(TVShow *);
 
 // .rodata
 
@@ -255,7 +268,7 @@ void GabbyAndTyBeforeInterview(void)
     {
         gSaveBlock1Ptr->gabbyAndTyData.valA_2 = FALSE;
     }
-    if (!gBattleResults.unk5_1)
+    if (!gBattleResults.usedMasterBall)
     {
         for (i = 0; i < 11; i ++)
         {
@@ -411,6 +424,72 @@ void InterviewAfter(void)
         case TVSHOW_CONTEST_LIVE_UPDATES:
             sub_80ECA38();
             break;
+    }
+}
+
+void PutPokemonTodayCaughtOnAir(void)
+{
+    u8 i;
+    u16 ct;
+    TVShow *show;
+    u32 language2;
+    u16 itemLastUsed;
+
+    ct = 0;
+    sub_80EED88();
+    sub_80ED718();
+    if (gBattleResults.caughtPoke == SPECIES_NONE)
+    {
+        sub_80EC8FC();
+    }
+    else
+    {
+        sub_80EC8A4();
+        if (!sub_80EFB38(-1) && StringCompare(gSpeciesNames[gBattleResults.caughtPoke], gBattleResults.caughtNick))
+        {
+            gUnknown_030060BC = sub_80EFB08(gSaveBlock1Ptr->tvShows);
+            if (gUnknown_030060BC != -1 && sub_80EF46C(TVSHOW_POKEMON_TODAY_CAUGHT, 0) != TRUE)
+            {
+                for (i = 0; i < 11; i ++)
+                {
+                    ct += gBattleResults.unk36[i];
+                }
+                if (ct != 0 || gBattleResults.usedMasterBall)
+                {
+                    ct = 0;
+                    show = &gSaveBlock1Ptr->tvShows[gUnknown_030060BC];
+                    show->pokemonToday.kind = TVSHOW_POKEMON_TODAY_CAUGHT;
+                    show->pokemonToday.active = FALSE;
+                    if (gBattleResults.usedMasterBall)
+                    {
+                        ct = 1;
+                        itemLastUsed = ITEM_MASTER_BALL;
+                    }
+                    else
+                    {
+                        for (i = 0; i < 11; i ++)
+                        {
+                            ct += gBattleResults.unk36[i];
+                        }
+                        if (ct > 0xFF)
+                        {
+                            ct = 0xFF;
+                        }
+                        itemLastUsed = gLastUsedItem;
+                    }
+                    show->pokemonToday.var12 = ct;
+                    show->pokemonToday.ball = itemLastUsed;
+                    StringCopy(show->pokemonToday.playerName, gSaveBlock2Ptr->playerName);
+                    StringCopy(show->pokemonToday.nickname, gBattleResults.caughtNick);
+                    language2 = sub_81DB604(show->pokemonToday.nickname);
+                    StripExtCtrlCodes(show->pokemonToday.nickname);
+                    show->pokemonToday.species = gBattleResults.caughtPoke;
+                    sub_80EC9E8(show);
+                    show->pokemonToday.language = gGameLanguage;
+                    show->pokemonToday.language2 = language2;
+                }
+            }
+        }
     }
 }
 

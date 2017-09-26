@@ -7,5 +7,6 @@
 
 // Exported ROM declarations
 void ClearTVShowData(void);
+void PutPokemonTodayCaughtOnAir(void);
 
 #endif //GUARD_TV_H

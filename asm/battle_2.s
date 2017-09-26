@@ -13310,7 +13310,7 @@ _0803DDA0:
 	cmp r0, r1
 	bcc _0803DD10
 _0803DDB2:
-	bl sub_80EC728
+	bl PutPokemonTodayCaughtOnAir
 _0803DDB6:
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]

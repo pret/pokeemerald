@@ -430,7 +430,7 @@ struct BattleResults
     u8 unk3;                  // 0x3
     u8 unk4;                  // 0x4
     u8 unk5_0:1;              // 0x5
-    u8 unk5_1:1;              // 0x5
+    u8 usedMasterBall:1;              // 0x5
     u16 poke1Species;         // 0x6
     u8 pokeString1[10];       // 0x8
     u8 unk12;
@@ -676,5 +676,6 @@ struct BattleSpritesGfx
 };
 
 extern struct BattleSpritesGfx* gBattleSpritesGfx;
+extern u16 gLastUsedItem;
 
 #endif // GUARD_BATTLE_H

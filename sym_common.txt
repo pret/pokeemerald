@@ -210,13 +210,7 @@ gBattleMainFunc: @ 3005D04
 	.space 0xC
 
 gBattleResults: @ 3005D10
-	.space 0x2A
-
-gUnknown_03005D3A: @ 3005D3A
-	.space 0xC
-
-gUnknown_03005D46: @ 3005D46
-	.space 0xE
+	.space 0x44
 
 gUnknown_03005D54: @ 3005D54
 	.space 0xC
@@ -393,7 +387,7 @@ gUnknown_030061EC: @ 30061EC
 	.space 0x4
 
     .include"save.o"
-    
+
     .space 0x8
 
 gRamSaveSectionLocations: @ 3006220
