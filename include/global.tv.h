@@ -165,7 +165,6 @@ typedef union TVShow // size = 0x24
         /*0x1C*/ u8 unk_1c;
         /*0x1D*/ u8 language;
         /*0x1E*/ u8 unk_1e;
-        // TODO: flesh this out
     } contestLiveUpdates;
 
     // TVSHOW_3_CHEERS_FOR_POKEBLOCKS
@@ -179,7 +178,14 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        // TODO: flesh this out
+        /*0x02*/ u16 unk_02;
+        /*0x04*/ u8 playerName[8];
+        /*0x0C*/ u8 linkOpponentName[8];
+        /*0x14*/ u16 unk_14;
+        /*0x16*/ u16 unk_16;
+        /*0x18*/ u8 battleType;
+        /*0x19*/ u8 language;
+        /*0x1A*/ u8 unk_1a;
     } battleUpdate;
 
     // TVSHOW_FAN_CLUB_SPECIAL

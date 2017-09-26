@@ -15,6 +15,7 @@
 #include "battle.h"
 #include "contest.h"
 #include "items.h"
+#include "link.h"
 #include "main.h"
 #include "tv.h"
 
@@ -45,8 +46,10 @@ void TakeTVShowInSearchOfTrainersOffTheAir(void);
 bool8 sub_80EFB38(u16);
 s8 sub_80EFB08(TVShow *);
 bool8 sub_80EF46C(u8, u8);
-void sub_80EC9E8(TVShow *);
+void tv_store_id_3x(TVShow *);
 void sub_80EF910(TVShow *, u8);
+s8 sub_80EFADC(TVShow *);
+void sub_80EF550(u8);
 
 // .rodata
 
@@ -396,7 +399,7 @@ void InterviewAfter(void)
     void TaskDummy5(void);
     void sub_80ECF5C(void);
     void sub_80ED164(void);
-    void sub_80ECA38(void);
+    static void InterviewAfter_ContestLiveUpdates(void);
 
     switch (gSpecialVar_0x8005)
     {
@@ -419,7 +422,7 @@ void InterviewAfter(void)
             sub_80ED164();
             break;
         case TVSHOW_CONTEST_LIVE_UPDATES:
-            sub_80ECA38();
+            InterviewAfter_ContestLiveUpdates();
             break;
     }
 }
@@ -485,7 +488,7 @@ void PutPokemonTodayCaughtOnAir(void)
                     language2 = sub_81DB604(show->pokemonToday.nickname);
                     StripExtCtrlCodes(show->pokemonToday.nickname);
                     show->pokemonToday.species = gBattleResults.caughtPoke;
-                    sub_80EC9E8(show);
+                    tv_store_id_3x(show);
                     show->pokemonToday.language = gGameLanguage;
                     show->pokemonToday.language2 = language2;
                 }
@@ -541,18 +544,18 @@ static void PutPokemonTodayFailedOnTheAir(void)
                 show->pokemonTodayFailed.var11 = gBattleOutcome;
                 show->pokemonTodayFailed.var12 = gMapHeader.regionMapSectionId;
                 StringCopy(show->pokemonTodayFailed.playerName, gSaveBlock2Ptr->playerName);
-                sub_80EC9E8(show);
+                tv_store_id_3x(show);
                 show->pokemonTodayFailed.language = gGameLanguage;
             }
         }
     }
 }
 
-void sub_80EC9E8(TVShow *show)
+void tv_store_id_3x(TVShow *show)
 {
     u32 id;
 
-    id = sub_80F0020();
+    id = player_id_to_dword();
     show->common.srcTrainerId2Lo = id;
     show->common.srcTrainerId2Hi = id >> 8;
     show->common.srcTrainerIdLo = id;
@@ -561,18 +564,18 @@ void sub_80EC9E8(TVShow *show)
     show->common.trainerIdHi = id >> 8;
 }
 
-void sub_80ECA10(TVShow *show)
+void tv_store_id_2x(TVShow *show)
 {
     u32 id;
 
-    id = sub_80F0020();
+    id = player_id_to_dword();
     show->common.srcTrainerIdLo = id;
     show->common.srcTrainerIdHi = id >> 8;
     show->common.trainerIdLo = id;
     show->common.trainerIdHi = id >> 8;
 }
 
-void sub_80ECA38(void)
+static void InterviewAfter_ContestLiveUpdates(void)
 {
     TVShow *show;
     TVShow *show2;
@@ -593,10 +596,57 @@ void sub_80ECA38(void)
         show2->contestLiveUpdates.unk_10 = show->contestLiveUpdates.unk_10;
         show2->contestLiveUpdates.unk_0f = show->contestLiveUpdates.unk_0f;
         StringCopy(show2->contestLiveUpdates.unk_04, show->contestLiveUpdates.unk_04);
-        sub_80ECA10(show2);
+        tv_store_id_2x(show2);
         show2->contestLiveUpdates.language = gGameLanguage;
         show2->contestLiveUpdates.unk_1e = show->contestLiveUpdates.unk_1e;
         sub_80EF910(gSaveBlock1Ptr->tvShows, 24);
+    }
+}
+
+void sub_80ECB00(u8 a0, u16 a1, u16 a2, u16 a3)
+{
+    TVShow *show;
+    u8 name[32];
+
+    gUnknown_030060BC = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    if (gUnknown_030060BC != -1)
+    {
+        sub_80EF550(TVSHOW_BATTLE_UPDATE);
+        if (gScriptResult != 1)
+        {
+            show = &gSaveBlock1Ptr->tvShows[gUnknown_030060BC];
+            show->battleUpdate.kind = TVSHOW_BATTLE_UPDATE;
+            show->battleUpdate.active = TRUE;
+            StringCopy(show->battleUpdate.playerName, gSaveBlock2Ptr->playerName);
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            {
+                show->battleUpdate.battleType = 2;
+            }
+            else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            {
+                show->battleUpdate.battleType = 1;
+            }
+            else
+            {
+                show->battleUpdate.battleType = 0;
+            }
+            show->battleUpdate.unk_14 = a1;
+            show->battleUpdate.unk_16 = a2;
+            show->battleUpdate.unk_02 = a3;
+            StringCopy(name, gLinkPlayers[a0].name);
+            StripExtCtrlCodes(name);
+            StringCopy(show->battleUpdate.linkOpponentName, name);
+            tv_store_id_2x(show);
+            show->battleUpdate.language = gGameLanguage;
+            if (show->battleUpdate.language == LANGUAGE_JAPANESE || gLinkPlayers[a0].language == LANGUAGE_JAPANESE)
+            {
+                show->battleUpdate.unk_1a = LANGUAGE_JAPANESE;
+            }
+            else
+            {
+                show->battleUpdate.unk_1a = gLinkPlayers[a0].language;
+            }
+        }
     }
 }
 

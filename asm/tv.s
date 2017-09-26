@@ -5,124 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80ECB00
-sub_80ECB00: @ 80ECB00
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x20
-	lsls r0, 24
-	lsrs r7, r0, 24
-	lsls r1, 16
-	lsrs r1, 16
-	mov r10, r1
-	lsls r2, 16
-	lsrs r2, 16
-	mov r9, r2
-	lsls r3, 16
-	lsrs r3, 16
-	mov r8, r3
-	ldr r6, =gSaveBlock1Ptr
-	ldr r0, [r6]
-	ldr r5, =0x000027cc
-	adds r0, r5
-	bl sub_80EFADC
-	ldr r4, =gUnknown_030060BC
-	strb r0, [r4]
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _080ECBEC
-	movs r0, 0xA
-	bl sub_80EF550
-	ldr r0, =gScriptResult
-	ldrh r0, [r0]
-	cmp r0, 0x1
-	beq _080ECBEC
-	movs r1, 0
-	ldrsb r1, [r4, r1]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r6]
-	adds r4, r1, r0
-	movs r0, 0xA
-	strb r0, [r4]
-	movs r5, 0x1
-	strb r5, [r4, 0x1]
-	adds r0, r4, 0x4
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	bl StringCopy
-	ldr r0, =gBattleTypeFlags
-	ldr r1, [r0]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	bne _080ECBA0
-	adds r0, r5, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _080ECBA2
-	strb r5, [r4, 0x18]
-	b _080ECBA4
-	.pool
-_080ECBA0:
-	movs r0, 0x2
-_080ECBA2:
-	strb r0, [r4, 0x18]
-_080ECBA4:
-	mov r0, r10
-	strh r0, [r4, 0x14]
-	mov r0, r9
-	strh r0, [r4, 0x16]
-	mov r0, r8
-	strh r0, [r4, 0x2]
-	lsls r0, r7, 3
-	subs r0, r7
-	lsls r5, r0, 2
-	ldr r6, =gLinkPlayers + 8
-	adds r1, r5, r6
-	mov r0, sp
-	bl StringCopy
-	mov r0, sp
-	bl StripExtCtrlCodes
-	adds r0, r4, 0
-	adds r0, 0xC
-	mov r1, sp
-	bl StringCopy
-	adds r0, r4, 0
-	bl sub_80ECA10
-	ldr r0, =gGameLanguage
-	ldrb r0, [r0]
-	strb r0, [r4, 0x19]
-	cmp r0, 0x1
-	beq _080ECBE8
-	adds r0, r6, r5
-	ldrh r0, [r0, 0x12]
-	cmp r0, 0x1
-	bne _080ECBEA
-_080ECBE8:
-	movs r0, 0x1
-_080ECBEA:
-	strb r0, [r4, 0x1A]
-_080ECBEC:
-	add sp, 0x20
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80ECB00
-
 	thumb_func_start sub_80ECC04
 sub_80ECC04: @ 80ECC04
 	push {r4-r7,lr}
@@ -211,7 +93,7 @@ _080ECC68:
 	ldrb r0, [r0]
 	strb r0, [r4, 0x2]
 	adds r0, r4, 0
-	bl sub_80ECA10
+	bl tv_store_id_2x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x14]
@@ -268,7 +150,7 @@ sub_80ECD00: @ 80ECD00
 	strb r0, [r4]
 	movs r5, 0x1
 	strb r5, [r4, 0x1]
-	bl sub_80F0020
+	bl player_id_to_dword
 	strb r0, [r4, 0xA]
 	lsrs r0, 8
 	strb r0, [r4, 0xB]
@@ -282,7 +164,7 @@ sub_80ECD00: @ 80ECD00
 	mov r1, sp
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_80ECA10
+	bl tv_store_id_2x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x17]
@@ -564,7 +446,7 @@ sub_80ECF5C: @ 80ECF5C
 	orrs r0, r1
 	strb r0, [r4, 0x13]
 	adds r0, r4, 0
-	bl sub_80ECA10
+	bl tv_store_id_2x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x1E]
@@ -782,7 +664,7 @@ _080ED1F6:
 	ldrh r0, [r0]
 	strb r0, [r6, 0x1B]
 	adds r0, r6, 0
-	bl sub_80ECA10
+	bl tv_store_id_2x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r6, 0x1D]
@@ -891,7 +773,7 @@ _080ED2B6:
 	ldr r1, [r1]
 	bl StringCopy
 	adds r0, r5, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0x3]
@@ -991,7 +873,7 @@ sub_80ED320: @ 80ED320
 	adds r0, r5, 0
 	bl StripExtCtrlCodes
 	adds r0, r4, 0
-	bl sub_80ECA10
+	bl tv_store_id_2x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x1E]
@@ -1127,7 +1009,7 @@ sub_80ED4DC: @ 80ED4DC
 	bl sub_818E880
 	strb r0, [r4, 0x16]
 	adds r0, r4, 0
-	bl sub_80ECA10
+	bl tv_store_id_2x
 _080ED532:
 	pop {r4}
 	pop {r0}
@@ -1169,7 +1051,7 @@ sub_80ED548: @ 80ED548
 	bl GetMonData
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
-	bl sub_80ECA10
+	bl tv_store_id_2x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x18]
@@ -1205,7 +1087,7 @@ sub_80ED5B8: @ 80ED5B8
 	bl StringCopy
 	strh r5, [r4, 0x2]
 	adds r0, r4, 0
-	bl sub_80ECA10
+	bl tv_store_id_2x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x18]
@@ -1289,7 +1171,7 @@ sub_80ED610: @ 80ED610
 	bl GetMonData
 	strh r0, [r5, 0x2]
 	adds r0, r5, 0
-	bl sub_80ECA10
+	bl tv_store_id_2x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0xD]
@@ -1425,7 +1307,7 @@ _080ED72E:
 	strb r2, [r4, 0x15]
 	strh r3, [r4, 0x16]
 	adds r0, r4, 0
-	bl sub_80ECA10
+	bl tv_store_id_2x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x18]
@@ -1691,7 +1573,7 @@ sub_80ED9A8: @ 80ED9A8
 	ldr r1, [r1]
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x6]
@@ -1802,7 +1684,7 @@ sub_80EDA80: @ 80EDA80
 	ldr r1, [r1]
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xB]
@@ -1930,7 +1812,7 @@ _080EDC1C:
 	adds r0, r7, 0
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xC]
@@ -1990,7 +1872,7 @@ sub_80EDC60: @ 80EDC60
 	ldr r1, [r1]
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x9]
@@ -2050,7 +1932,7 @@ sub_80EDCE8: @ 80EDCE8
 	ldr r1, [r1]
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x5]
@@ -2161,7 +2043,7 @@ _080EDE12:
 	ldr r1, [r1]
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x8]
@@ -2545,7 +2427,7 @@ sub_80EE104: @ 80EE104
 	adds r0, r4, 0
 	bl sub_80EDFB4
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xC]
@@ -2700,7 +2582,7 @@ _080EE2B2:
 	strh r0, [r4, 0xC]
 _080EE2B6:
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xE]
@@ -2760,7 +2642,7 @@ sub_80EE2CC: @ 80EE2CC
 	ldrh r0, [r0]
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x5]
@@ -2868,7 +2750,7 @@ _080EE408:
 	ldrh r2, [r2]
 	strh r2, [r4, 0xE]
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x11]
@@ -2935,7 +2817,7 @@ sub_80EE44C: @ 80EE44C
 	strb r0, [r4, 0x2]
 	strb r7, [r4, 0x3]
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x4]
@@ -3008,7 +2890,7 @@ sub_80EE4DC: @ 80EE4DC
 	bl sub_80EE69C
 	strb r0, [r5, 0x3]
 	adds r0, r5, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0xF]
@@ -3292,7 +3174,7 @@ sub_80EE72C: @ 80EE72C
 	ldrh r0, [r0]
 	strh r0, [r4, 0x6]
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x8]
@@ -3356,7 +3238,7 @@ sub_80EE818: @ 80EE818
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r7, r0, r1
-	bl sub_80F0020
+	bl player_id_to_dword
 	adds r4, r0, 0
 	movs r6, 0x5
 	lsrs r5, r4, 8
@@ -3593,7 +3475,7 @@ _080EEA3C:
 	strh r0, [r7, 0x6]
 _080EEA46:
 	adds r0, r7, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r7, 0xC]
@@ -3676,7 +3558,7 @@ _080EEA86:
 	adds r4, r0
 	str r4, [r5, 0xC]
 	adds r0, r5, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0x1B]
@@ -3818,7 +3700,7 @@ sub_80EEBF4: @ 80EEBF4
 	bl VarGet
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
-	bl sub_80EC9E8
+	bl tv_store_id_3x
 	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x5]
@@ -4818,7 +4700,7 @@ sub_80EF46C: @ 80EF46C
 	ldr r4, =0x000027cc
 	adds r0, r4
 	mov r8, r0
-	bl sub_80F0020
+	bl player_id_to_dword
 	adds r7, r0, 0
 	movs r6, 0x5
 _080EF494:
@@ -6201,7 +6083,7 @@ sub_80EFF6C: @ 80EFF6C
 	thumb_func_start sub_80EFF9C
 sub_80EFF9C: @ 80EFF9C
 	push {r4,lr}
-	bl sub_80F0020
+	bl player_id_to_dword
 	adds r4, r0, 0
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
@@ -6270,8 +6152,8 @@ _080F001C:
 	bx r1
 	thumb_func_end GetTVChannelByShowType
 
-	thumb_func_start sub_80F0020
-sub_80F0020: @ 80F0020
+	thumb_func_start player_id_to_dword
+player_id_to_dword: @ 80F0020
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r0, [r2, 0xD]
@@ -6286,7 +6168,7 @@ sub_80F0020: @ 80F0020
 	orrs r0, r1
 	bx lr
 	.pool
-	thumb_func_end sub_80F0020
+	thumb_func_end player_id_to_dword
 
 	thumb_func_start CheckForBigMovieOrEmergencyNewsOnTV
 CheckForBigMovieOrEmergencyNewsOnTV: @ 80F0040

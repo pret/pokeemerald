@@ -6514,7 +6514,7 @@ sub_81C3220: @ 81C3220
 	b _081C3282
 	.pool
 _081C326C:
-	bl sub_80F0020
+	bl player_id_to_dword
 	adds r4, r0, 0
 	ldr r0, =0x0000ffff
 	ands r4, r0

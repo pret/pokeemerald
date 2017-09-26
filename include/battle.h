@@ -678,5 +678,6 @@ struct BattleSpritesGfx
 extern struct BattleSpritesGfx* gBattleSpritesGfx;
 extern u8 gBattleOutcome;
 extern u16 gLastUsedItem;
+extern u32 gBattleTypeFlags;
 
 #endif // GUARD_BATTLE_H
