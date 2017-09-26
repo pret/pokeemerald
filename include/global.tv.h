@@ -171,7 +171,13 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        // TODO: flesh this out
+        /*0x02*/ u8 unk_02;
+        /*0x03*/ u8 unk_03_0:3;
+        /*0x03*/ u8 unk_03_3:2;
+        /*0x04*/ u8 unk_04[8];
+        /*0x0C*/ u8 playerName[8];
+        /*0x14*/ u8 language;
+        /*0x15*/ u8 unk_15;
     } threeCheers;
 
     // TVSHOW_BATTLE_UPDATE

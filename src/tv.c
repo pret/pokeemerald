@@ -603,7 +603,7 @@ static void InterviewAfter_ContestLiveUpdates(void)
     }
 }
 
-void sub_80ECB00(u8 a0, u16 a1, u16 a2, u16 a3)
+void PutBattleUpdateOnTheAir(u8 a0, u16 a1, u16 a2, u16 a3)
 {
     TVShow *show;
     u8 name[32];
@@ -648,6 +648,44 @@ void sub_80ECB00(u8 a0, u16 a1, u16 a2, u16 a3)
             }
         }
     }
+}
+
+bool8 Put3CheersForPokeblocksOnTheAir(const u8 *a0, u8 a1, u8 a2, u8 a3, u8 language)
+{
+    TVShow *show;
+    u8 name[32];
+
+    gUnknown_030060BC = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    if (gUnknown_030060BC == -1)
+    {
+        return FALSE;
+    }
+    sub_80EF550(TVSHOW_3_CHEERS_FOR_POKEBLOCKS);
+    if (gScriptResult == 1)
+    {
+        return FALSE;
+    }
+    show = &gSaveBlock1Ptr->tvShows[gUnknown_030060BC];
+    show->threeCheers.kind = TVSHOW_3_CHEERS_FOR_POKEBLOCKS;
+    show->threeCheers.active = TRUE;
+    StringCopy(show->threeCheers.playerName, gSaveBlock2Ptr->playerName);
+    StringCopy(name, a0);
+    StripExtCtrlCodes(name);
+    StringCopy(show->threeCheers.unk_04, name);
+    show->threeCheers.unk_03_0 = a1;
+    show->threeCheers.unk_03_3 = a2;
+    show->threeCheers.unk_02 = a3;
+    tv_store_id_2x(show);
+    show->threeCheers.language = gGameLanguage;
+    if (show->threeCheers.language == LANGUAGE_JAPANESE || language == LANGUAGE_JAPANESE)
+    {
+        show->threeCheers.unk_15 = LANGUAGE_JAPANESE;
+    }
+    else
+    {
+        show->threeCheers.unk_15 = language;
+    }
+    return TRUE;
 }
 
 asm(".section .text.dotvshow");

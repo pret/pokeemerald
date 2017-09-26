@@ -8568,7 +8568,7 @@ sub_8083F94: @ 8083F94
 	ldrb r0, [r5, 0x12]
 	str r0, [sp]
 	adds r0, r7, 0
-	bl sub_80ECC04
+	bl Put3CheersForPokeblocksOnTheAir
 	lsls r0, 24
 	cmp r0, 0
 	bne _080840BA
@@ -8617,7 +8617,7 @@ _08084058:
 	ldrb r0, [r5, 0x12]
 	str r0, [sp]
 	adds r0, r7, 0
-	bl sub_80ECC04
+	bl Put3CheersForPokeblocksOnTheAir
 	lsls r0, 24
 	cmp r0, 0
 	beq _080840C4
