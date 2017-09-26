@@ -200,7 +200,7 @@ _080D5320:
 _080D5324:
 	movs r0, 0x3
 _080D5326:
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0

@@ -3232,7 +3232,7 @@ sub_816A084: @ 816A084
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -3271,7 +3271,7 @@ sub_816A0D8: @ 816A0D8
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -3693,7 +3693,7 @@ _0816A48A:
 	movs r1, 0
 	bl sub_8059CB4
 	ldr r0, =gText_WhatWillWallyDo
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
 	bl sub_814F9EC

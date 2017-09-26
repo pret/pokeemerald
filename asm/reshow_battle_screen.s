@@ -103,13 +103,13 @@ _080A93B0:
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E16
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E20
 	strh r1, [r0]
@@ -223,7 +223,7 @@ _080A94F0:
 _080A94F8:
 	bl sub_805EC84
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -247,7 +247,7 @@ _080A94F8:
 	cmp r0, 0
 	beq _080A955C
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

@@ -65,6 +65,7 @@
 #define CHAR_x              0xEC
 #define CHAR_y              0xED
 #define CHAR_z              0xEE
+#define CHAR_SPECIAL_F9     0xF9
 #define CHAR_COLON          0xF0
 #define CHAR_PROMPT_SCROLL  0xFA // waits for button press and scrolls dialog
 #define CHAR_PROMPT_CLEAR   0xFB // waits for button press and clears dialog
@@ -73,6 +74,10 @@
 #define CHAR_NEWLINE        0xFE
 #define EOS                 0xFF // end of string
 
+#define TEXT_COLOR_TRANSPARENT  0x0
+#define TEXT_COLOR_WHITE        0x1
+#define TEXT_COLOR_DARK_GREY    0x2
+
 // battle placeholders are located in battle_message.h
 
 #define EXT_CTRL_CODE_JPN   0x15
@@ -80,23 +85,26 @@
 
 #define NUM_TEXT_PRINTERS 32
 
+struct TextSubPrinter // TODO: Better name
+{
+    u8* current_text_offset;
+    u8 windowId;
+    u8 fontId;
+    u8 x;
+    u8 y;
+    u8 currentX;        // 0x8
+    u8 currentY;
+    u8 letterSpacing;
+    u8 lineSpacing;
+    u8 fontColor_l:4;   // 0xC
+    u8 fontColor_h:4;
+    u8 bgColor:4;
+    u8 shadowColor:4;
+};
+
 struct TextPrinter
 {
-    struct TextSubPrinter {     // TODO: Better name
-        u8* current_text_offset;
-        u8 windowId;
-        u8 fontId;
-        u8 x;
-        u8 y;
-        u8 currentX;        // 0x8
-        u8 currentY;
-        u8 letterSpacing;
-        u8 lineSpacing;
-        u8 fontColor_l:4;   // 0xC
-        u8 fontColor_h:4;
-        u8 bgColor:4;
-        u8 shadowColor:4;
-    } subPrinter;
+    struct TextSubPrinter subPrinter;
 
     void (*callback)(struct TextSubPrinter *, u16); // 0x10
 

@@ -1802,7 +1802,7 @@ static void BattleAICmd_count_alive_pokemon(void)
         u32 status;
         bankOnField1 = gBattlePartyID[index];
         status = GetBankIdentity(index) ^ 2;
-        bankOnField2 = gBattlePartyID[GetBankByPlayerAI(status)];
+        bankOnField2 = gBattlePartyID[GetBankByIdentity(status)];
     }
     else // in singles there's only one bank by side
     {

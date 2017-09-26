@@ -74,7 +74,7 @@ _08062C72:
 	lsrs r0, 24
 	mov r10, r0
 	ldr r4, =gBattleMons
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x58
@@ -87,7 +87,7 @@ _08062C72:
 	b _08062E2C
 _08062C9E:
 	mov r0, r10
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r6, 0
@@ -223,7 +223,7 @@ _08062D74:
 	movs r1, 0x2E
 	bl GetMonData
 	mov r0, r10
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r4, 0
@@ -347,7 +347,7 @@ _08062EB0:
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
@@ -367,7 +367,7 @@ _08062F04:
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r7, r0, 24
 	b _08062F1E
@@ -705,7 +705,7 @@ ai_has_super_effective_move_on_field: @ 80631BC
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, =gAbsentBankFlags
@@ -779,7 +779,7 @@ _0806327C:
 	movs r1, 0x2
 	mov r0, r10
 	eors r0, r1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, =gAbsentBankFlags
@@ -951,7 +951,7 @@ _080633B8:
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
@@ -972,7 +972,7 @@ _08063414:
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -1308,7 +1308,7 @@ _080636C4:
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
@@ -1328,7 +1328,7 @@ _08063718:
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	b _08063732
@@ -1542,7 +1542,7 @@ _080638C2:
 	cmp r0, 0
 	bne _08063910
 	adds r0, r6, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
@@ -1550,13 +1550,13 @@ _080638C2:
 	.pool
 _08063910:
 	adds r0, r5, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0x2
 	eors r5, r0
 	adds r0, r5, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08063928:
@@ -1789,7 +1789,7 @@ _08063AE0:
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
@@ -1810,7 +1810,7 @@ _08063B20:
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x14]
@@ -1844,7 +1844,7 @@ _08063B6C:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]

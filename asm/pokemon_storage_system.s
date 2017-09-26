@@ -17910,7 +17910,7 @@ sub_80D07B0: @ 80D07B0
 	beq _080D0828
 	adds r0, r5, 0
 	movs r2, 0x1
-	bl sub_80D2EDC
+	bl GetMonIconPtr
 	adds r4, r0, 0
 	adds r0, r5, 0
 	bl sub_80D3080

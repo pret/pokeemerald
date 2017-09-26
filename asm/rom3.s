@@ -2134,8 +2134,8 @@ _0803389C:
 	.pool
 	thumb_func_end sub_803375C
 
-	thumb_func_start EmitGetAttributes
-EmitGetAttributes: @ 80338B4
+	thumb_func_start EmitGetMonData
+EmitGetMonData: @ 80338B4
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2152,7 +2152,7 @@ EmitGetAttributes: @ 80338B4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end EmitGetAttributes
+	thumb_func_end EmitGetMonData
 
 	thumb_func_start dp01_build_cmdbuf_x01_a_b_0
 dp01_build_cmdbuf_x01_a_b_0: @ 80338D8
@@ -2175,8 +2175,8 @@ dp01_build_cmdbuf_x01_a_b_0: @ 80338D8
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x01_a_b_0
 
-	thumb_func_start EmitSetAttributes
-EmitSetAttributes: @ 8033900
+	thumb_func_start EmitSetMonData
+EmitSetMonData: @ 8033900
 	push {r4-r6,lr}
 	ldr r4, [sp, 0x10]
 	lsls r0, 24
@@ -2209,7 +2209,7 @@ _0803392E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end EmitSetAttributes
+	thumb_func_end EmitSetMonData
 
 	thumb_func_start sub_8033940
 sub_8033940: @ 8033940
@@ -2809,8 +2809,8 @@ dp01_build_cmdbuf_x12_a_bb: @ 8033DE4
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x12_a_bb
 
-	thumb_func_start sub_8033E10
-sub_8033E10: @ 8033E10
+	thumb_func_start EmitCmd13
+EmitCmd13: @ 8033E10
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2825,7 +2825,7 @@ sub_8033E10: @ 8033E10
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8033E10
+	thumb_func_end EmitCmd13
 
 	thumb_func_start sub_8033E30
 sub_8033E30: @ 8033E30
@@ -2995,8 +2995,8 @@ EmitExpUpdate: @ 8033F34
 	.pool
 	thumb_func_end EmitExpUpdate
 
-	thumb_func_start dp01_build_cmdbuf_x1A_aaaa_bbbb
-dp01_build_cmdbuf_x1A_aaaa_bbbb: @ 8033F68
+	thumb_func_start EmitStatusIconUpdate
+EmitStatusIconUpdate: @ 8033F68
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3036,7 +3036,7 @@ dp01_build_cmdbuf_x1A_aaaa_bbbb: @ 8033F68
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x1A_aaaa_bbbb
+	thumb_func_end EmitStatusIconUpdate
 
 	thumb_func_start EmitStatusAnimation
 EmitStatusAnimation: @ 8033FBC
@@ -3718,8 +3718,8 @@ _08034490:
 	.pool
 	thumb_func_end EmitLinkStandbyMsg
 
-	thumb_func_start dp01_build_cmdbuf_x38_a
-dp01_build_cmdbuf_x38_a: @ 80344A8
+	thumb_func_start EmitResetActionMoveSelection
+EmitResetActionMoveSelection: @ 80344A8
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3733,7 +3733,7 @@ dp01_build_cmdbuf_x38_a: @ 80344A8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x38_a
+	thumb_func_end EmitResetActionMoveSelection
 
 	thumb_func_start Emit_x37
 Emit_x37: @ 80344C8

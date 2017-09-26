@@ -2236,7 +2236,7 @@ _08035F64:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	beq _08035FCC
-	ldr r4, =gUnknown_02022E18
+	ldr r4, =gBattle_BG1_X
 	ldrh r0, [r5, 0xA]
 	bl Sin2
 	lsls r0, 16
@@ -2251,7 +2251,7 @@ _08035F7E:
 	adds r0, r2, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, =gUnknown_02022E1C
+	ldr r4, =gBattle_BG2_X
 	ldrh r0, [r5, 0xC]
 	bl Sin2
 	lsls r0, 16
@@ -2266,16 +2266,16 @@ _08035F9C:
 	adds r0, r3, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldr r2, =0x0000ffdc
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
 	b _08036038
 	.pool
 _08035FCC:
-	ldr r4, =gUnknown_02022E18
+	ldr r4, =gBattle_BG1_X
 	ldrh r0, [r5, 0xA]
 	bl Sin2
 	lsls r0, 16
@@ -2290,7 +2290,7 @@ _08035FDE:
 	adds r0, r3, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, =gUnknown_02022E1A
+	ldr r4, =gBattle_BG1_Y
 	ldrh r0, [r5, 0xA]
 	bl Cos2
 	lsls r0, 16
@@ -2302,7 +2302,7 @@ _08035FFC:
 	asrs r0, 5
 	subs r0, 0xA4
 	strh r0, [r4]
-	ldr r4, =gUnknown_02022E1C
+	ldr r4, =gBattle_BG2_X
 	ldrh r0, [r5, 0xC]
 	bl Sin2
 	lsls r0, 16
@@ -2317,7 +2317,7 @@ _08036014:
 	adds r0, r2, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, =gUnknown_02022E1E
+	ldr r4, =gBattle_BG2_Y
 	ldrh r0, [r5, 0xC]
 	bl Cos2
 	lsls r0, 16
@@ -2504,11 +2504,11 @@ sub_8036154: @ 8036154
 	movs r0, 0x4A
 	movs r1, 0x36
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldr r2, =0x0000ff5c
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
 	ldr r0, =gUnknown_0831AA00
 	bl LoadCompressedObjectPicUsingHeap

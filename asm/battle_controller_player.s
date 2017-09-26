@@ -358,7 +358,7 @@ _0805775A:
 	cmp r0, 0x2
 	bne _080577E8
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
@@ -622,7 +622,7 @@ _080579F0:
 	mov r1, sp
 	adds r0, r1, r4
 	ldrb r0, [r0]
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	strb r0, [r5]
 	ldr r1, =gNoOfAllBanks
 	lsls r0, 24
@@ -750,7 +750,7 @@ _08057B14:
 	mov r1, sp
 	adds r0, r1, r4
 	ldrb r0, [r0]
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	strb r0, [r5]
 	ldr r1, =gNoOfAllBanks
 	lsls r0, 24
@@ -942,7 +942,7 @@ _08057CC4:
 	movs r0, 0x1
 	ands r0, r1
 	eors r0, r2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gUnknown_03005D74
 	strb r0, [r1]
 _08057CDE:
@@ -1035,7 +1035,7 @@ _08057D80:
 	.pool
 _08057DA8:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
@@ -1052,7 +1052,7 @@ _08057DA8:
 _08057DD0:
 	movs r0, 0x1
 _08057DD2:
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gUnknown_03005D74
 _08057DD8:
 	strb r0, [r1]
@@ -8024,7 +8024,7 @@ sub_805BBC4: @ 805BBC4
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -8063,7 +8063,7 @@ sub_805BC18: @ 805BC18
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -8551,7 +8551,7 @@ _0805C062:
 	movs r1, 0
 	bl sub_8059CB4
 	ldr r0, =gText_WhatWillPkmnDo
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
 	bl sub_814F9EC

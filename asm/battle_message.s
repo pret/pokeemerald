@@ -687,7 +687,7 @@ _0814E6CC:
 	ldr r7, [r0]
 _0814E6D8:
 	adds r0, r7, 0
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 _0814E6DE:
 	pop {r3-r5}
 	mov r8, r3
@@ -699,15 +699,15 @@ _0814E6DE:
 	.pool
 	thumb_func_end BufferStringBattle
 
-	thumb_func_start StrCpyDecodeToDisplayedStringBattle
-StrCpyDecodeToDisplayedStringBattle: @ 814E6F0
+	thumb_func_start BattleStringExpandPlaceholdersToDisplayedString
+BattleStringExpandPlaceholdersToDisplayedString: @ 814E6F0
 	push {lr}
 	ldr r1, =gDisplayedStringBattle
 	bl  BattleStringExpandPlaceholders
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end StrCpyDecodeToDisplayedStringBattle
+	thumb_func_end BattleStringExpandPlaceholdersToDisplayedString
 
 	thumb_func_start AppendStatusString
 AppendStatusString: @ 814E700
@@ -924,7 +924,7 @@ _0814E920:
 	.pool
 _0814E92C:
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -943,7 +943,7 @@ _0814E92C:
 	.pool
 _0814E960:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -962,7 +962,7 @@ _0814E960:
 	.pool
 _0814E994:
 	movs r0, 0x2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -981,7 +981,7 @@ _0814E994:
 	.pool
 _0814E9C8:
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1126,7 +1126,7 @@ _0814EB36:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1147,7 +1147,7 @@ _0814EB74:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1177,7 +1177,7 @@ _0814EBB0:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1199,7 +1199,7 @@ _0814EBF8:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23

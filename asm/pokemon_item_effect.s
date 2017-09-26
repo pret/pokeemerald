@@ -1155,7 +1155,7 @@ _0806C6AE:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl EmitGetAttributes
+	bl EmitGetMonData
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	strb r5, [r4]

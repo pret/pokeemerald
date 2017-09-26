@@ -831,7 +831,7 @@ u8 TurnBasedEffects(void)
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                             b_call_bc_move_exec(gUnknown_082DB234);
                             gActiveBank = gBankAttacker;
-                            EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
+                            EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
                             MarkBufferBankForExecution(gActiveBank);
                             break;
                         }
@@ -956,7 +956,7 @@ u8 TurnBasedEffects(void)
                     {
                         CancelMultiTurnMoves(gActiveBank);
                         gBattleMons[gActiveBank].status1 |= (Random() & 3) + 2;
-                        EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
+                        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
                         MarkBufferBankForExecution(gActiveBank);
                         gEffectBank = gActiveBank;
                         b_call_bc_move_exec(BattleScript_YawnMakesAsleep);
@@ -1446,7 +1446,7 @@ u8 AtkCanceller_UnableToUseMove(void)
     if (effect == 2)
     {
         gActiveBank = gBankAttacker;
-        EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
+        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
         MarkBufferBankForExecution(gActiveBank);
     }
     return effect;
@@ -1539,14 +1539,14 @@ bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
     {
         if (GetBankSide(bank) == SIDE_OPPONENT)
         {
-            r7 = GetBankByPlayerAI(1);
-            r6 = GetBankByPlayerAI(3);
+            r7 = GetBankByIdentity(1);
+            r6 = GetBankByIdentity(3);
             party = gEnemyParty;
         }
         else
         {
-            r7 = GetBankByPlayerAI(0);
-            r6 = GetBankByPlayerAI(2);
+            r7 = GetBankByIdentity(0);
+            r6 = GetBankByIdentity(2);
             party = gPlayerParty;
         }
         if (r1 == 6)
@@ -1835,7 +1835,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE);  // fix nighmare glitch
                         gBattleScripting.bank = gActiveBank = bank;
                         b_push_move_exec(BattleScript_ShedSkinActivates);
-                        EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[bank].status1);
+                        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[bank].status1);
                         MarkBufferBankForExecution(gActiveBank);
                         effect++;
                     }
@@ -2156,7 +2156,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         gBattlescriptCurrInstr = gUnknown_082DB68C;
                         gBattleScripting.bank = i;
                         gActiveBank = i;
-                        EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
+                        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
                         MarkBufferBankForExecution(gActiveBank);
                         return effect;
                     }
@@ -2235,14 +2235,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 if (gBattleMons[i].ability == ABILITY_TRACE && (gStatuses3[i] & STATUS3_TRACE))
                 {
                     u8 opposite = (GetBankIdentity(i) ^ 1) & 1;
-                    u8 target1 = GetBankByPlayerAI(opposite);
-                    u8 target2 = GetBankByPlayerAI(opposite + 2);
+                    u8 target1 = GetBankByIdentity(opposite);
+                    u8 target2 = GetBankByIdentity(opposite + 2);
                     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                     {
                         if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0
                          && gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
                         {
-                            gActiveBank = GetBankByPlayerAI(((Random() & 1) * 2) | opposite);
+                            gActiveBank = GetBankByIdentity(((Random() & 1) * 2) | opposite);
                             gBattleMons[i].ability = gBattleMons[gActiveBank].ability;
                             gLastUsedAbility = gBattleMons[gActiveBank].ability;
                             effect++;
@@ -3106,7 +3106,7 @@ _08042E24:\n\
 	movs r1, 0x28\n\
 	movs r2, 0\n\
 	movs r3, 0x4\n\
-	bl EmitSetAttributes\n\
+	bl EmitSetMonData\n\
 	ldrb r0, [r4]\n\
 	bl MarkBufferBankForExecution\n\
 	bl _080443D0\n\
@@ -4500,7 +4500,7 @@ _08043BFC:\n\
 	movs r1, 0x28\n\
 	movs r2, 0\n\
 	movs r3, 0x4\n\
-	bl EmitSetAttributes\n\
+	bl EmitSetMonData\n\
 	ldrb r0, [r4]\n\
 	bl MarkBufferBankForExecution\n\
 	bl _0804443A\n\
@@ -4744,11 +4744,11 @@ _08043E42:\n\
 	eors r5, r1\n\
 	ands r5, r1\n\
 	adds r0, r5, 0\n\
-	bl GetBankByPlayerAI\n\
+	bl GetBankByIdentity\n\
 	lsls r0, 24\n\
 	lsrs r6, r0, 24\n\
 	adds r0, r5, 0x2\n\
-	bl GetBankByPlayerAI\n\
+	bl GetBankByIdentity\n\
 	lsls r0, 24\n\
 	lsrs r7, r0, 24\n\
 	ldr r0, =gBattleTypeFlags\n\
@@ -4792,7 +4792,7 @@ _08043E74:\n\
 	lsls r1, 1\n\
 	orrs r5, r1\n\
 	adds r0, r5, 0\n\
-	bl GetBankByPlayerAI\n\
+	bl GetBankByIdentity\n\
 	mov r2, r8\n\
 	strb r0, [r2]\n\
 	ldrb r0, [r2]\n\
@@ -5609,7 +5609,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                         gBattleTextBuff1[3] = move >> 8;
                         gBattleTextBuff1[4] = 0xFF;
                         b_call_bc_move_exec(BattleScript_BerryPPHealEnd2);
-                        EmitSetAttributes(0, i + REQUEST_PPMOVE1_BATTLE, 0, 1, &changedPP);
+                        EmitSetMonData(0, i + REQUEST_PPMOVE1_BATTLE, 0, 1, &changedPP);
                         MarkBufferBankForExecution(gActiveBank);
                         effect = ITEM_PP_CHANGE;
                     }
@@ -5993,7 +5993,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 switch (effect)
                 {
                 case ITEM_STATUS_CHANGE:
-                    EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[bank].status1);
+                    EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[bank].status1);
                     MarkBufferBankForExecution(gActiveBank);
                     break;
                 case ITEM_PP_CHANGE:
@@ -6148,7 +6148,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 gBattleScripting.bank = bank;
                 gStringBank = bank;
                 gActiveBank = bank;
-                EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
+                EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
                 MarkBufferBankForExecution(gActiveBank);
                 break;
             }
@@ -6251,7 +6251,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
     case MOVE_TARGET_BOTH:
     case MOVE_TARGET_FOES_AND_ALLY:
     case MOVE_TARGET_OPPONENTS_FIELD:
-        targetBank = GetBankByPlayerAI((GetBankIdentity(gBankAttacker) & 1) ^ 1);
+        targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & 1) ^ 1);
         if (gAbsentBankFlags & gBitTable[targetBank])
             targetBank ^= 2;
         break;
@@ -6264,22 +6264,22 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
             if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
             {
                 if (Random() & 1)
-                    targetBank = GetBankByPlayerAI(1);
+                    targetBank = GetBankByIdentity(1);
                 else
-                    targetBank = GetBankByPlayerAI(3);
+                    targetBank = GetBankByIdentity(3);
             }
             else
             {
                 if (Random() & 1)
-                    targetBank = GetBankByPlayerAI(0);
+                    targetBank = GetBankByIdentity(0);
                 else
-                    targetBank = GetBankByPlayerAI(2);
+                    targetBank = GetBankByIdentity(2);
             }
             if (gAbsentBankFlags & gBitTable[targetBank])
                 targetBank ^= 2;
         }
         else
-            targetBank = GetBankByPlayerAI((GetBankIdentity(gBankAttacker) & 1) ^ 1);
+            targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & 1) ^ 1);
         break;
     case MOVE_TARGET_USER:
     case MOVE_TARGET_x10:

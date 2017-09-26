@@ -700,7 +700,7 @@ sub_8159910: @ 8159910
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -739,7 +739,7 @@ sub_8159964: @ 8159964
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -879,7 +879,7 @@ _08159AAE:
 	movs r1, 0
 	bl sub_8059CB4
 	ldr r0, =gText_WhatWillPkmnDo2
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
 	bl sub_814F9EC

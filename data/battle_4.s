@@ -5,51 +5,6 @@
 
 	.section .rodata
 
-
-gMoveEffectBS_Ptrs:: @ 831C224
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB386
-	.4byte gUnknown_082DB395
-	.4byte gUnknown_082DB3A4
-	.4byte gUnknown_082DB3B3
-	.4byte gUnknown_082DB3C9
-	.4byte gUnknown_082DB3E6
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB3C2
-	.4byte gUnknown_082DB3D6
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB3DD
-	.4byte gUnknown_082DB3F4
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB36A
-	.4byte gUnknown_082DB3F4
-
-	.align 2
-	window_template 0x00, 0x01, 0x03, 0x07, 0x0f, 0x1f, 0x003f
-
 	.align 2
 gUnknown_0831C2C8:: @ 831C2C8
 	.incbin "graphics/battle_interface/unk_battlebox.gbapal"
@@ -66,21 +21,21 @@ gUnknown_0831C3B8:: @ 831C3B8
 	.byte 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00
 
 	.align 2
-gUnknown_0831C3C0:: @ 831C3C0
+SpriteTemplate_MonIconOnLvlUpBox:: @ 831C3C0
 	.2byte 0xd75a @ tileTag
 	.2byte 0xd75a @ paletteTag
 	.4byte gUnknown_0831C3B8
 	.4byte gDummySpriteAnimTable
 	.4byte NULL
 	.4byte gDummySpriteAffineAnimTable
-	.4byte sub_804F450
+	.4byte SpriteCB_MonIconOnLvlUpBox
 
 	.align 2
 sProtectSuccessRates:: @ 831C3D8
 	.2byte 0xffff, 0x7fff, 0x3fff, 0x1fff
 
 	.align 2
-gUnknown_0831C3E0:: @ 831C3E0
+gMovesForbiddenToCopy:: @ 831C3E0
 	.2byte MOVE_METRONOME, MOVE_STRUGGLE, MOVE_SKETCH, MOVE_MIMIC
 	.2byte 0xfffe, MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_PROTECT
 	.2byte MOVE_DETECT, MOVE_ENDURE, MOVE_DESTINY_BOND, MOVE_SLEEP_TALK

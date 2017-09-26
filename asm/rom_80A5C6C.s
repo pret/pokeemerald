@@ -1830,8 +1830,8 @@ GetBankIdentity: @ 80A6A44
 	.pool
 	thumb_func_end GetBankIdentity
 
-	thumb_func_start GetBankByPlayerAI
-GetBankByPlayerAI: @ 80A6A54
+	thumb_func_start GetBankByIdentity
+GetBankByIdentity: @ 80A6A54
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -1860,7 +1860,7 @@ _080A6A7E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end GetBankByPlayerAI
+	thumb_func_end GetBankByIdentity
 
 	thumb_func_start sub_80A6A90
 sub_80A6A90: @ 80A6A90
@@ -3496,7 +3496,7 @@ _080A76F2:
 	cmp r5, 0
 	beq _080A771A
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	bl b_side_obj__get_some_boolean
@@ -3504,7 +3504,7 @@ _080A76F2:
 	cmp r0, 0
 	beq _080A771A
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x10
@@ -3514,7 +3514,7 @@ _080A771A:
 	cmp r6, 0
 	beq _080A7746
 	movs r0, 0x2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	bl b_side_obj__get_some_boolean
@@ -3522,7 +3522,7 @@ _080A771A:
 	cmp r0, 0
 	beq _080A7746
 	movs r0, 0x2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -3534,7 +3534,7 @@ _080A7746:
 	cmp r7, 0
 	beq _080A7772
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	bl b_side_obj__get_some_boolean
@@ -3542,7 +3542,7 @@ _080A7746:
 	cmp r0, 0
 	beq _080A7772
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -3555,7 +3555,7 @@ _080A7772:
 	cmp r0, 0
 	beq _080A77A0
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	bl b_side_obj__get_some_boolean
@@ -3563,7 +3563,7 @@ _080A7772:
 	cmp r0, 0
 	beq _080A77A0
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -3592,7 +3592,7 @@ sub_80A77B4: @ 80A77B4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}

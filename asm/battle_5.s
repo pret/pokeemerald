@@ -195,11 +195,11 @@ AdjustFriendshipOnBattleFaint: @ 80570F4
 	cmp r0, 0
 	beq _08057140
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r2, =gBattleMons
@@ -220,7 +220,7 @@ AdjustFriendshipOnBattleFaint: @ 80570F4
 	.pool
 _08057140:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0805714A:
@@ -562,7 +562,7 @@ _08057406:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl EmitSetAttributes
+	bl EmitSetMonData
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _08057430:

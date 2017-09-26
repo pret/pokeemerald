@@ -216,7 +216,7 @@ void sub_806CF24(s32 stat)
     gBankTarget = gBankInMenu;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[stat]]);
     StringCopy(gBattleTextBuff2, gText_StatRose);
-    StrCpyDecodeToDisplayedStringBattle(gText_PkmnsStatChanged2);
+    BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
 }
 
 u8 *sub_806CF78(u16 itemId)
@@ -251,7 +251,7 @@ u8 *sub_806CF78(u16 itemId)
             else
             {
                 gBankAttacker = gBankInMenu;
-                StrCpyDecodeToDisplayedStringBattle(gText_PkmnGettingPumped);
+                BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnGettingPumped);
             }
         }
     }
@@ -259,7 +259,7 @@ u8 *sub_806CF78(u16 itemId)
     if (itemEffect[3] & 0x80)
     {
         gBankAttacker = gBankInMenu;
-        StrCpyDecodeToDisplayedStringBattle(gText_PkmnShroudedInMist);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnShroudedInMist);
     }
 
     return gDisplayedStringBattle;

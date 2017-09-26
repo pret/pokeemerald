@@ -185,7 +185,7 @@ _08075548:
 	.pool
 _08075584:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBankTarget
 	strb r0, [r1]
 	movs r0, 0x1
@@ -1199,13 +1199,13 @@ _08075DD4:
 	lsrs r0, 16
 	mov r9, r0
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _08075E00
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1261,13 +1261,13 @@ _08075E70:
 	.pool
 _08075E80:
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _08075E9C
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1830,7 +1830,7 @@ _080762F8:
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1903,7 +1903,7 @@ sub_8076398: @ 8076398
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0

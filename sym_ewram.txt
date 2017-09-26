@@ -211,16 +211,16 @@ gUnknown_02022E14: @ 2022E14
 gUnknown_02022E16: @ 2022E16
 	.space 0x2
 
-gUnknown_02022E18: @ 2022E18
+gBattle_BG1_X: @ 2022E18
 	.space 0x2
 
-gUnknown_02022E1A: @ 2022E1A
+gBattle_BG1_Y: @ 2022E1A
 	.space 0x2
 
-gUnknown_02022E1C: @ 2022E1C
+gBattle_BG2_X: @ 2022E1C
 	.space 0x2
 
-gUnknown_02022E1E: @ 2022E1E
+gBattle_BG2_Y: @ 2022E1E
 	.space 0x2
 
 gUnknown_02022E20: @ 2022E20

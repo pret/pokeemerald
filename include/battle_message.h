@@ -74,6 +74,22 @@
 #define B_BUFF_PLACEHOLDER_BEGIN        0xFD
 #define B_BUFF_EOS                      0xFF
 
+#define PREPARE_STAT_BUFFER(textVar, statId)                                \
+{                                                                           \
+    textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
+    textVar[1] = B_BUFF_STAT;                                               \
+    textVar[2] = statId;                                                    \
+    textVar[3] = B_BUFF_EOS;                                                \
+}
+
+#define PREPARE_TYPE_BUFFER(textVar, typeId)                                \
+{                                                                           \
+    textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
+    textVar[1] = B_BUFF_TYPE;                                               \
+    textVar[2] = typeId;                                                    \
+    textVar[3] = B_BUFF_EOS;                                                \
+}
+
 #define PREPARE_BYTE_NUMBER_BUFFER(textVar, maxDigits, number)  \
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
@@ -82,6 +98,17 @@
     textVar[3] = maxDigits;                                     \
     textVar[4] = (number);                                      \
     textVar[5] = B_BUFF_EOS;                                    \
+}
+
+#define PREPARE_HWORD_NUMBER_BUFFER(textVar, maxDigits, number)             \
+{                                                                           \
+    textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
+    textVar[1] = B_BUFF_NUMBER;                                             \
+    textVar[2] = 2;                                                         \
+    textVar[3] = maxDigits;                                                 \
+    textVar[4] = (number);                                                  \
+    textVar[5] = (number & 0x0000FF00) >> 8;                                \
+    textVar[6] = B_BUFF_EOS;                                                \
 }
 
 #define PREPARE_WORD_NUMBER_BUFFER(textVar, maxDigits, number)  \
@@ -158,7 +185,7 @@ struct StringInfoBattle
 };
 
 void BufferStringBattle(u16 stringID);
-u32 StrCpyDecodeToDisplayedStringBattle(const u8* src);
+u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src);
 u32 BattleStringExpandPlaceholders(const u8* src, u8* dst);
 void sub_814F9EC(const u8* text, u8 arg1);
 

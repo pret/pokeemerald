@@ -1,7 +1,27 @@
 #ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
+/*
+    Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
+    Each bank has a value consisting of two bits.
+    0x1 bit is responsible for the side, 0 = player's side, 1 = opponent's side.
+    0x2 bit is responsible for the id of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
+*/
+
 #define BATTLE_BANKS_COUNT  4
+
+#define IDENTITY_PLAYER_MON1        0
+#define IDENTITY_OPPONENT_MON1      1
+#define IDENTITY_PLAYER_MON2        2
+#define IDENTITY_OPPONENT_MON2      3
+
+#define SIDE_PLAYER     0x0
+#define SIDE_OPPONENT   0x1
+
+#define BIT_SIDE        0x1
+#define BIT_MON         0x2
+
+#define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
 
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
@@ -40,9 +60,6 @@
 
 #define BATTLE_TYPE_FRONTIER        (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID)
 
-#define SIDE_PLAYER     0x0
-#define SIDE_OPPONENT   0x1
-
 #define BATTLE_WON                  0x1
 #define BATTLE_LOST                 0x2
 #define BATTLE_DREW                 0x3
@@ -66,11 +83,12 @@
 #define STATUS2_CONFUSION           0x00000007
 #define STATUS2_FLINCHED            0x00000008
 #define STATUS2_UPROAR              0x00000070
-#define STATUS2_BIDE                0x00000300  //two bits 0x100 0x200
+#define STATUS2_BIDE                0x00000300  // two bits 0x100, 0x200
 #define STATUS2_LOCK_CONFUSE        0x00000C00
 #define STATUS2_MULTIPLETURNS       0x00001000
 #define STATUS2_WRAPPED             0x0000E000
-#define STATUS2_INFATUATION         0x000F0000
+#define STATUS2_INFATUATION         0x000F0000  // 4 bits, one for every bank
+#define STATUS2_INFATUATED_WITH(bank)((gBitTable[bank] << 16))
 #define STATUS2_FOCUS_ENERGY        0x00100000
 #define STATUS2_TRANSFORMED         0x00200000
 #define STATUS2_RECHARGE            0x00400000
@@ -86,7 +104,7 @@
 
 #define STATUS3_LEECHSEED_BANK          0x3
 #define STATUS3_LEECHSEED               0x4
-#define STATUS3_ALWAYS_HITS             0x18    //two bits
+#define STATUS3_ALWAYS_HITS             0x18    // two bits
 #define STATUS3_PERISH_SONG             0x20
 #define STATUS3_ON_AIR                  0x40
 #define STATUS3_UNDERGROUND             0x80
@@ -188,17 +206,6 @@
 #define WEATHER_HAIL                (1 << 7)
 #define WEATHER_HAIL_ANY ((WEATHER_HAIL))
 
-#define REQUEST_ALL_BATTLE      0x0
-#define REQUEST_SPECIES_BATTLE  0x1
-#define REQUEST_HELDITEM_BATTLE 0x2
-#define REQUEST_MOVES_PP_BATTLE 0x3
-#define REQUEST_PPMOVE1_BATTLE  0x9
-#define REQUEST_PPMOVE2_BATTLE  0xA
-#define REQUEST_PPMOVE3_BATTLE  0xB
-#define REQUEST_PPMOVE4_BATTLE  0xC
-#define REQUEST_STATUS_BATTLE   0x28
-#define REQUEST_HP_BATTLE 0x2A
-
 // array entries for battle communication
 #define CURSOR_POSITION     0x1
 #define MOVE_EFFECT_BYTE    0x3
@@ -222,6 +229,7 @@
 #define BS_GET_TARGET                   0
 #define BS_GET_ATTACKER                 1
 #define BS_GET_EFFECT_BANK              2
+#define BS_ATTACKER_WITH_PARTNER        4 // for atk98_status_icon_update
 #define BS_GET_ATTACKER_SIDE            8 // for atk1E_jumpifability
 #define BS_GET_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
 #define BS_GET_SCRIPTING_BANK           10
@@ -384,11 +392,11 @@ extern struct ProtectStruct gProtectStructs[BATTLE_BANKS_COUNT];
 
 struct SpecialStatus
 {
-    u8 statLowered : 1;
-    u8 lightningRodRedirected : 1;
-    u8 restoredBankSprite: 1;
-    u8 intimidatedPoke : 1;
-    u8 traced : 1;
+    u8 statLowered : 1;             // 0x1
+    u8 lightningRodRedirected : 1;  // 0x2
+    u8 restoredBankSprite: 1;       // 0x4
+    u8 intimidatedPoke : 1;         // 0x8
+    u8 traced : 1;                  // 0x10
     u8 flag20 : 1;
     u8 flag40 : 1;
     u8 focusBanded : 1;
@@ -690,6 +698,7 @@ struct BattleStruct
     u8 field_298[8];
     u8 field_2A0;
     u8 field_2A1;
+    u8 field_2A2;
 };
 
 extern struct BattleStruct* gBattleStruct;
@@ -709,6 +718,13 @@ extern struct BattleStruct* gBattleStruct;
     varName = (u16*)(((void*)(*memes1) + (u32)(memes2)));                                           \
 }
 
+#define GET_USED_ITEM_PTR_VIA_MEME_ACCESS(bank, varName)                                            \
+{                                                                                                   \
+    void** memes1 = (void**)(&gBattleStruct);                                                       \
+    void* memes2 = (void*)((u32)(bank * 2 + offsetof(struct BattleStruct, usedHeldItems)));         \
+    varName = (u16*)(((void*)(*memes1) + (u32)(memes2)));                                           \
+}
+
 #define GET_HP_SWITCHOUT_PTR_VIA_MEME_ACCESS(bank, varName)                                         \
 {                                                                                                   \
     void** memes1 = (void**)(&gBattleStruct);                                                       \
@@ -723,8 +739,6 @@ extern struct BattleStruct* gBattleStruct;
     else                                                    \
         typeArg = gBattleMoves[move].type;                  \
 }
-
-#define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & 1))
 
 #define MOVE_EFFECT_SLEEP               0x1
 #define MOVE_EFFECT_POISON              0x2
@@ -832,26 +846,39 @@ extern struct BattleStruct* gBattleStruct;
 
 #define ATK4F_DONT_CHECK_STATUSES   0x80
 
+#define VARIOUS_CANCEL_MULTI_TURN_MOVES         0
+#define VARIOUS_SET_MAGIC_COAT_TARGET           1
+#define VARIOUS_GET_MOVE_TARGET                 3
+#define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
+#define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
+#define VARIOUS_WAIT_CRY                        18
+#define VARIOUS_RETURN_OPPONENT_MON1            19
+#define VARIOUS_RETURN_OPPONENT_MON2            20
+#define VARIOUS_SET_TELEPORT_OUTCOME            25
+#define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC     26
+
+#define ATK80_DMG_CHANGE_SIGN                               0
+#define ATK80_DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP     1
+#define ATK80_DMG_DOUBLED                                   2
+
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
-#define GET_STAT_BUFF_VALUE(n)((n & 0xF0) >> 4)     // 0x10, 0x20, 0x40
+#define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
+
+#define STAT_CHANGE_BS_PTR                  0x1
+#define STAT_CHANGE_NOT_PROTECT_AFFECTED    0x20
+
+#define STAT_CHANGE_WORKED      0
+#define STAT_CHANGE_DIDNT_WORK  1
 
 #define SET_STAT_BUFF_ID(n)((n & 0xF))
 #define SET_STAT_BUFF_VALUE(n)(((s8)(((s8)(n) << 4)) & 0xF0))
 
 struct BattleScripting
 {
-    u8 field_0;
-    u8 field_1;
-    u8 field_2;
-    u8 field_3;
-    u32 bideDmg;
-    u8 field_8;
-    u8 field_9;
-    u8 field_A;
-    u8 field_B;
-    u8 field_C;
-    u8 field_D;
+    s32 painSplitHp;
+    s32 bideDmg;
+    u8 multihitString[6];
     u8 dmgMultiplier;
     u8 field_F;
     u8 animArg1;
@@ -868,7 +895,7 @@ struct BattleScripting
     u8 field_1B;
     u8 atk23_state;
     u8 field_1D;
-    u8 field_1E;
+    u8 atk6C_state;
     u8 learnMoveState;
 };
 
@@ -887,6 +914,9 @@ void SwitchInClearStructs(void);
 void sub_803BDA0(u8 bank);
 void sub_803FA70(u8 bank);
 void BattleMainCB2(void);
+void ResetSentPokesToOpponentValue(void);
+bool8 CanRunFromBattle(u8 bank);
+bool8 IsRunningFromBattleImpossible(void);
 
 // battle_3
 void BattleScriptPush(const u8* bsPtr);
@@ -920,10 +950,12 @@ u8 AI_TypeCalc(u16 move, u16 species, u8 ability);
 u8 BankGetTurnOrder(u8 bank);
 void BattleDestroyCursorAt(u8 cursorPosition);
 void BattleCreateCursorAt(u8 cursorPosition);
+void BufferMoveToLearnIntoBattleTextBuff2(void);
 
 // battle_5
 void AdjustFriendshipOnBattleFaint(u8 bank);
 void sub_80571DC(u8 bank, u8 arg1);
+u32 sub_805725C(u8 bank);
 
 // battle 7
 void BattleMusicStop(void);
@@ -932,7 +964,7 @@ void sub_805E990(struct Pokemon* mon, u8 bank);
 // rom_80A5C6C
 u8 GetBankSide(u8 bank);
 u8 GetBankIdentity(u8 bank);
-u8 GetBankByPlayerAI(u8 bank);
+u8 GetBankByIdentity(u8 bank);
 
 // Move this somewhere else
 

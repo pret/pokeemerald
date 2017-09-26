@@ -126,6 +126,8 @@
 #define TYPE_DRAGON   0x10
 #define TYPE_DARK     0x11
 
+#define NUMBER_OF_MON_TYPES     0x12
+
 #define PARTY_SIZE 6
 #define MAX_TOTAL_EVS 510
 #define NUM_STATS 6
@@ -333,6 +335,8 @@ struct UnknownPokemonStruct
     u8 friendship;
 };
 
+#define BATTLE_STATS_NO 8
+
 struct BattlePokemon
 {
     /*0x00*/ u16 species;
@@ -350,7 +354,7 @@ struct BattlePokemon
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 isEgg:1;
     /*0x17*/ u32 altAbility:1;
-    /*0x18*/ s8 statStages[8];
+    /*0x18*/ s8 statStages[BATTLE_STATS_NO];
     /*0x20*/ u8 ability;
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;
@@ -521,6 +525,7 @@ extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
 extern const u16 *const gLevelUpLearnsets[];
 
+u8 CountAliveMonsInBattle(u8 caseId);
 #define BATTLE_ALIVE_EXCEPT_ACTIVE  0
 #define BATTLE_ALIVE_ATK_SIDE       1
 #define BATTLE_ALIVE_DEF_SIDE       2
