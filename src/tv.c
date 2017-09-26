@@ -78,7 +78,7 @@ u8 special_0x44(void)
         else
         {
             massOutbreak = &gSaveBlock1Ptr->tvShows[j].massOutbreak;
-            if (massOutbreak->numFights == 0 && massOutbreak->active == TRUE)
+            if (massOutbreak->var16 == 0 && massOutbreak->active == TRUE)
             {
                 return j;
             }
