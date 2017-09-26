@@ -12,6 +12,7 @@
 #include "easy_chat.h"
 #include "species.h"
 #include "moves.h"
+#include "battle.h"
 #include "tv.h"
 
 // Static type declarations
@@ -35,6 +36,7 @@ u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
 void SetTVMetatilesOnMap(int, int, u16);
 bool8 sub_80EEF20(void);
 bool8 IsTVShowInSearchOfTrainersAiring(void);
+void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
 // .rodata
 
@@ -209,7 +211,7 @@ void ResetGabbyAndTy(void)
     gSaveBlock1Ptr->gabbyAndTyData.lastMove = MOVE_NONE;
     gSaveBlock1Ptr->gabbyAndTyData.quote[0] = -1;
     gSaveBlock1Ptr->gabbyAndTyData.valA_0 = FALSE;
-    gSaveBlock1Ptr->gabbyAndTyData.valA_1 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.not_total_victory = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valA_2 = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valA_3 = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valA_4 = FALSE;
@@ -221,6 +223,56 @@ void ResetGabbyAndTy(void)
     gSaveBlock1Ptr->gabbyAndTyData.valB_4 = 0;
     gSaveBlock1Ptr->gabbyAndTyData.mapnum = 0;
     gSaveBlock1Ptr->gabbyAndTyData.battleNum = 0;
+}
+
+void GabbyAndTyBeforeInterview(void)
+{
+    u8 i;
+
+    gSaveBlock1Ptr->gabbyAndTyData.mon1 = gBattleResults.poke1Species;
+    gSaveBlock1Ptr->gabbyAndTyData.mon2 = gBattleResults.opponentSpecies;
+    gSaveBlock1Ptr->gabbyAndTyData.lastMove = gBattleResults.lastUsedMove;
+    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum != 0xFF)
+    {
+        gSaveBlock1Ptr->gabbyAndTyData.battleNum ++;
+    }
+    gSaveBlock1Ptr->gabbyAndTyData.valA_0 = gBattleResults.unk5_0;
+    if (gBattleResults.playerFaintCounter != 0)
+    {
+        gSaveBlock1Ptr->gabbyAndTyData.not_total_victory = TRUE;
+    }
+    else
+    {
+        gSaveBlock1Ptr->gabbyAndTyData.not_total_victory = FALSE;
+    }
+    if (gBattleResults.unk3 != 0)
+    {
+        gSaveBlock1Ptr->gabbyAndTyData.valA_2 = TRUE;
+    }
+    else
+    {
+        gSaveBlock1Ptr->gabbyAndTyData.valA_2 = FALSE;
+    }
+    if (!gBattleResults.unk5_1)
+    {
+        for (i = 0; i < 11; i ++)
+        {
+            if (gBattleResults.unk36[i])
+            {
+                gSaveBlock1Ptr->gabbyAndTyData.valA_3 = TRUE;
+                break;
+            }
+        }
+    }
+    else
+    {
+        gSaveBlock1Ptr->gabbyAndTyData.valA_3 = TRUE;
+    }
+    TakeTVShowInSearchOfTrainersOffTheAir();
+    if (gSaveBlock1Ptr->gabbyAndTyData.lastMove == MOVE_NONE)
+    {
+        FlagSet(0x0001);
+    }
 }
 
 asm(".section .text.dotvshow");

@@ -586,7 +586,7 @@ struct GabbyAndTyData
     /*2bac*/ u8 mapnum;
     /*2bad*/ u8 battleNum;
     /*2bae*/ u8 valA_0:1;
-    /*2bae*/ u8 valA_1:1;
+    /*2bae*/ u8 not_total_victory:1; // TRUE if at least one of the player's pokemon fainted during the battle
     /*2bae*/ u8 valA_2:1;
     /*2bae*/ u8 valA_3:1;
     /*2bae*/ u8 valA_4:1;
