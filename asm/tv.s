@@ -5559,7 +5559,7 @@ _080EEFD0:
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	b _080EF016
 	.pool
 _080EEFE8:
@@ -5583,7 +5583,7 @@ _080EEFE8:
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 _080EF016:
 	ldr r1, =gScriptResult
 	movs r0, 0x1
@@ -5791,8 +5791,8 @@ _080EF196:
 	.pool
 	thumb_func_end sub_80EF120
 
-	thumb_func_start sub_80EF1BC
-sub_80EF1BC: @ 80EF1BC
+	thumb_func_start CopyContestRankToStringVar
+CopyContestRankToStringVar: @ 80EF1BC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -5854,7 +5854,7 @@ _080EF244:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80EF1BC
+	thumb_func_end CopyContestRankToStringVar
 
 	thumb_func_start CopyContestCategoryToStringVar
 @ void CopyContestCategoryToStringVar(u8 stringVarIndex, u8 contestCategoryId)
@@ -5957,8 +5957,8 @@ SetContestCategoryStringVarForInterview: @ 80EF30C
 	.pool
 	thumb_func_end SetContestCategoryStringVarForInterview
 
-	thumb_func_start sub_80EF340
-sub_80EF340: @ 80EF340
+	thumb_func_start CopyContestResultToStringVar
+CopyContestResultToStringVar: @ 80EF340
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -5980,7 +5980,7 @@ sub_80EF340: @ 80EF340
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80EF340
+	thumb_func_end CopyContestResultToStringVar
 
 	thumb_func_start sub_80EF370
 sub_80EF370: @ 80EF370
@@ -6098,12 +6098,12 @@ _080EF43E:
 	bne _080EF458
 	asrs r1, r7, 1
 	mov r0, r8
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	b _080EF460
 _080EF458:
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 _080EF460:
 	pop {r3}
 	mov r8, r3
@@ -10159,247 +10159,6 @@ _080F152C:
 
     .section .text.dotvshow
 
-	thumb_func_start DoTVShowBravoTrainerPokemonProfile
-DoTVShowBravoTrainerPokemonProfile: @ 80F16EC
-	push {r4,r5,lr}
-	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =0x000027cc
-	adds r0, r1
-	ldr r1, [r2]
-	adds r4, r1, r0
-	ldr r1, =gScriptResult
-	movs r0, 0
-	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
-	ldrb r5, [r0]
-	cmp r5, 0x8
-	bls _080F1712
-	b _080F1952
-_080F1712:
-	lsls r0, r5, 2
-	ldr r1, =_080F1734
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080F1734:
-	.4byte _080F1758
-	.4byte _080F17B0
-	.4byte _080F17E8
-	.4byte _080F1818
-	.4byte _080F184C
-	.4byte _080F1880
-	.4byte _080F18C4
-	.4byte _080F190C
-	.4byte _080F193C
-_080F1758:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0x16
-	ldrb r2, [r4, 0x1E]
-	bl sub_81DB5E8
-	ldrb r1, [r4, 0x13]
-	lsls r1, 29
-	lsrs r1, 29
-	movs r0, 0x1
-	bl CopyContestCategoryToStringVar
-	ldrb r1, [r4, 0x13]
-	lsls r1, 27
-	lsrs r1, 30
-	movs r0, 0x2
-	bl sub_80EF1BC
-	ldrh r1, [r4, 0x2]
-	movs r0, 0xB
-	muls r0, r1
-	ldr r1, =gSpeciesNames
-	adds r0, r1
-	adds r1, r4, 0
-	adds r1, 0x8
-	bl StringCompare
-	cmp r0, 0
-	bne _080F17A4
-	ldr r1, =gUnknown_0203A030
-	movs r0, 0x8
-	b _080F1950
-	.pool
-_080F17A4:
-	ldr r1, =gUnknown_0203A030
-	movs r0, 0x1
-	b _080F1950
-	.pool
-_080F17B0:
-	ldr r0, =gStringVar1
-	ldrh r2, [r4, 0x2]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	ldr r0, =gStringVar2
-	adds r1, r4, 0
-	adds r1, 0x8
-	ldrb r2, [r4, 0x1F]
-	bl sub_81DB5E8
-	ldrb r1, [r4, 0x13]
-	lsls r1, 29
-	lsrs r1, 29
-	movs r0, 0x2
-	bl CopyContestCategoryToStringVar
-	b _080F194C
-	.pool
-_080F17E8:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0x16
-	ldrb r2, [r4, 0x1E]
-	bl sub_81DB5E8
-	ldrb r1, [r4, 0x13]
-	movs r0, 0x60
-	ands r0, r1
-	cmp r0, 0
-	bne _080F180C
-	ldr r1, =gUnknown_0203A030
-	movs r0, 0x3
-	b _080F1950
-	.pool
-_080F180C:
-	ldr r1, =gUnknown_0203A030
-	movs r0, 0x4
-	b _080F1950
-	.pool
-_080F1818:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0x16
-	ldrb r2, [r4, 0x1E]
-	bl sub_81DB5E8
-	ldr r0, =gStringVar2
-	ldrh r1, [r4, 0x4]
-	bl CopyEasyChatWord
-	ldrb r1, [r4, 0x13]
-	lsls r1, 25
-	lsrs r1, 30
-	adds r1, 0x1
-	movs r0, 0x2
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
-	movs r0, 0x5
-	b _080F1950
-	.pool
-_080F184C:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0x16
-	ldrb r2, [r4, 0x1E]
-	bl sub_81DB5E8
-	ldr r0, =gStringVar2
-	ldrh r1, [r4, 0x4]
-	bl CopyEasyChatWord
-	ldrb r1, [r4, 0x13]
-	lsls r1, 25
-	lsrs r1, 30
-	adds r1, 0x1
-	movs r0, 0x2
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
-	movs r0, 0x5
-	b _080F1950
-	.pool
-_080F1880:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0x16
-	ldrb r2, [r4, 0x1E]
-	bl sub_81DB5E8
-	ldrb r1, [r4, 0x13]
-	lsls r1, 29
-	lsrs r1, 29
-	movs r0, 0x1
-	bl CopyContestCategoryToStringVar
-	ldr r0, =gStringVar3
-	ldrh r1, [r4, 0x6]
-	bl CopyEasyChatWord
-	ldrh r0, [r4, 0x14]
-	cmp r0, 0
-	beq _080F18B8
-	ldr r1, =gUnknown_0203A030
-	movs r0, 0x6
-	b _080F1950
-	.pool
-_080F18B8:
-	ldr r1, =gUnknown_0203A030
-	movs r0, 0x7
-	b _080F1950
-	.pool
-_080F18C4:
-	ldr r0, =gStringVar1
-	ldrh r2, [r4, 0x2]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	ldr r0, =gStringVar2
-	ldrh r2, [r4, 0x14]
-	movs r1, 0xD
-	muls r1, r2
-	ldr r2, =gMoveNames
-	adds r1, r2
-	bl StringCopy
-	ldr r0, =gStringVar3
-	ldrh r1, [r4, 0x6]
-	bl CopyEasyChatWord
-	ldr r1, =gUnknown_0203A030
-	movs r0, 0x7
-	b _080F1950
-	.pool
-_080F190C:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0x16
-	ldrb r2, [r4, 0x1E]
-	bl sub_81DB5E8
-	ldr r0, =gStringVar2
-	ldrh r2, [r4, 0x2]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	bl TVShowDone
-	b _080F1952
-	.pool
-_080F193C:
-	ldr r0, =gStringVar1
-	ldrh r2, [r4, 0x2]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-_080F194C:
-	ldr r1, =gUnknown_0203A030
-	movs r0, 0x2
-_080F1950:
-	strb r0, [r1]
-_080F1952:
-	ldr r0, =gUnknown_0858D204
-	lsls r1, r5, 2
-	adds r1, r0
-	ldr r0, [r1]
-	bl box_related_two__2
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end DoTVShowBravoTrainerPokemonProfile
-
 	thumb_func_start DoTVShowBravoTrainerBattleTower
 DoTVShowBravoTrainerBattleTower: @ 80F1974
 	push {r4,r5,lr}
@@ -10416,7 +10175,7 @@ DoTVShowBravoTrainerBattleTower: @ 80F1974
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	adds r2, r0, 0
 	cmp r5, 0xE
@@ -10450,7 +10209,7 @@ _080F19FC:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0xA]
 	movs r1, 0xB
@@ -10461,13 +10220,13 @@ _080F19FC:
 	ldrh r0, [r4, 0x16]
 	cmp r0, 0x6
 	bls _080F1A34
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F1BEA
 	.pool
 _080F1A34:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F1BEA
@@ -10488,17 +10247,17 @@ _080F1A58:
 _080F1A60:
 	ldrh r1, [r4, 0x16]
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrb r0, [r4, 0x1C]
 	cmp r0, 0x1
 	bne _080F1A84
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F1BEA
 	.pool
 _080F1A84:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F1BEA
@@ -10508,11 +10267,11 @@ _080F1A90:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1E]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x16]
 	adds r1, 0x1
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 _080F1AA6:
 	ldrb r0, [r4, 0x1B]
 	cmp r0, 0
@@ -10524,7 +10283,7 @@ _080F1AB4:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1E]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x14]
 	movs r1, 0xB
@@ -10539,7 +10298,7 @@ _080F1AE0:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1E]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x14]
 	movs r1, 0xB
@@ -10551,13 +10310,13 @@ _080F1AE0:
 	cmp r0, 0
 	bne _080F1B1C
 _080F1B02:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F1BEA
 	.pool
 _080F1B1C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F1BEA
@@ -10585,8 +10344,8 @@ _080F1B4E:
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
 _080F1B54:
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0xB
 	strb r0, [r1]
 	b _080F1BEA
@@ -10598,13 +10357,13 @@ _080F1B68:
 	ldrb r0, [r4, 0x1B]
 	cmp r0, 0
 	bne _080F1B88
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xC
 	strb r0, [r1]
 	b _080F1BEA
 	.pool
 _080F1B88:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xD
 	strb r0, [r1]
 	b _080F1BEA
@@ -10616,13 +10375,13 @@ _080F1B94:
 	ldr r0, =gStringVar2
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar3
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1E]
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0xE
 	strb r0, [r1]
 	b _080F1BEA
@@ -10631,7 +10390,7 @@ _080F1BCC:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0xA]
 	movs r1, 0xB
@@ -10645,7 +10404,7 @@ _080F1BEA:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -10668,7 +10427,7 @@ DoTVShowTodaysSmartShopper: @ 80F1C0C
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r6, [r0]
 	adds r2, r0, 0
 	cmp r6, 0xC
@@ -10701,7 +10460,7 @@ _080F1C8C:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x12]
 	movs r2, 0
@@ -10709,13 +10468,13 @@ _080F1C8C:
 	ldrh r0, [r5, 0xC]
 	cmp r0, 0xFE
 	bls _080F1CBC
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xB
 	strb r0, [r1]
 	b _080F1E2C
 	.pool
 _080F1CBC:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F1E2C
@@ -10725,7 +10484,7 @@ _080F1CC8:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0x6]
 	bl ItemId_GetItem
@@ -10734,8 +10493,8 @@ _080F1CC8:
 	bl StringCopy
 	ldrh r1, [r5, 0xC]
 	movs r0, 0x2
-	bl sub_80EF340
-	ldr r4, =gUnknown_0203A030
+	bl CopyContestResultToStringVar
+	ldr r4, =sTVShowState
 	bl Random
 	ldrb r2, [r4]
 	adds r2, 0x1
@@ -10762,17 +10521,17 @@ _080F1D22:
 	ldrh r1, [r5, 0xC]
 	adds r1, 0x1
 	movs r0, 0x2
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrh r0, [r5, 0x8]
 	cmp r0, 0
 	beq _080F1D40
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F1E2C
 	.pool
 _080F1D40:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xA
 	strb r0, [r1]
 	b _080F1E2C
@@ -10786,11 +10545,11 @@ _080F1D4C:
 	bl StringCopy
 	ldrh r1, [r5, 0xE]
 	movs r0, 0x2
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrh r0, [r5, 0xA]
 	cmp r0, 0
 	beq _080F1D94
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F1E2C
@@ -10804,12 +10563,12 @@ _080F1D7C:
 	bl StringCopy
 	ldrh r1, [r5, 0x10]
 	movs r0, 0x2
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 _080F1D94:
 	ldrb r0, [r5, 0x2]
 	cmp r0, 0x1
 	beq _080F1DFA
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x9
 	strb r0, [r1]
 	b _080F1E2C
@@ -10843,7 +10602,7 @@ _080F1DD8:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0x6]
 	bl ItemId_GetItem
@@ -10854,13 +10613,13 @@ _080F1DD8:
 	cmp r0, 0x1
 	bne _080F1E10
 _080F1DFA:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F1E2C
 	.pool
 _080F1E10:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xC
 	strb r0, [r1]
 	b _080F1E2C
@@ -10870,14 +10629,14 @@ _080F1E1C:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080F1E2C:
 	ldr r0, =gUnknown_0858D1D0
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -10901,7 +10660,7 @@ DoTVShowTheNameRaterShow: @ 80F1E48
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r6, [r0]
 	adds r2, r0, 0
 	cmp r6, 0x12
@@ -10940,7 +10699,7 @@ _080F1EE0:
 	adds r1, r5, 0
 	adds r1, 0xF
 	ldrb r2, [r5, 0x1E]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x2]
 	movs r1, 0xB
@@ -10951,8 +10710,8 @@ _080F1EE0:
 	ldr r0, =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1F]
-	bl sub_81DB5E8
-	ldr r4, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r4, =sTVShowState
 	adds r0, r5, 0
 	bl sub_80EFBA4
 	adds r0, 0x1
@@ -10985,11 +10744,11 @@ _080F1F4A:
 	adds r1, r5, 0
 	adds r1, 0xF
 	ldrb r2, [r5, 0x1E]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r5, 0x1A]
 	cmp r0, 0
 	bne _080F1F6C
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x9
 	strb r0, [r1]
 	b _080F20FE
@@ -10997,7 +10756,7 @@ _080F1F4A:
 _080F1F6C:
 	cmp r0, 0x1
 	bne _080F1F7C
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xA
 	strb r0, [r1]
 	b _080F20FE
@@ -11007,7 +10766,7 @@ _080F1F7C:
 	beq _080F1F82
 	b _080F20FE
 _080F1F82:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xB
 	strb r0, [r1]
 	b _080F20FE
@@ -11016,7 +10775,7 @@ _080F1F90:
 	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1F]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	movs r4, 0
 	str r4, [sp]
 	str r5, [sp, 0x4]
@@ -11032,7 +10791,7 @@ _080F1F90:
 	movs r2, 0
 	movs r3, 0x1
 	bl sub_80EFBDC
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xC
 	strb r0, [r1]
 	b _080F20FE
@@ -11042,7 +10801,7 @@ _080F1FCC:
 	adds r1, r5, 0
 	adds r1, 0xF
 	ldrb r2, [r5, 0x1E]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	movs r4, 0
 	str r4, [sp]
 	str r5, [sp, 0x4]
@@ -11058,7 +10817,7 @@ _080F1FCC:
 	movs r2, 0x3
 	movs r3, 0x1
 	bl sub_80EFBDC
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xE
 	strb r0, [r1]
 	b _080F20FE
@@ -11102,7 +10861,7 @@ _080F202C:
 	movs r2, 0x3
 	movs r3, 0x2
 	bl sub_80EFBDC
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x10
 	strb r0, [r1]
 	b _080F20FE
@@ -11124,7 +10883,7 @@ _080F2074:
 	movs r2, 0x3
 	movs r3, 0x1
 	bl sub_80EFBDC
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x11
 	strb r0, [r1]
 	b _080F20FE
@@ -11153,7 +10912,7 @@ _080F20A4:
 	movs r3, 0x2
 _080F20D2:
 	bl sub_80EFBDC
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x12
 	strb r0, [r1]
 	b _080F20FE
@@ -11165,14 +10924,14 @@ _080F20F0:
 	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1F]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080F20FE:
 	ldr r0, =gUnknown_0858D338
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -11196,7 +10955,7 @@ DoTVShowPokemonTodaySuccessfulCapture: @ 80F211C
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r6, [r0]
 	adds r2, r0, 0
 	cmp r6, 0xB
@@ -11228,7 +10987,7 @@ _080F2198:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
@@ -11239,17 +10998,17 @@ _080F2198:
 	ldr r0, =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r5, 0xF]
 	cmp r0, 0x1
 	bne _080F21E0
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F2358
 	.pool
 _080F21E0:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F2358
@@ -11267,17 +11026,17 @@ _080F21F2:
 	bl StringCopy
 	ldrb r1, [r5, 0x12]
 	movs r0, 0x2
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrb r0, [r5, 0x12]
 	cmp r0, 0x3
 	bhi _080F2220
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F2358
 	.pool
 _080F2220:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F2358
@@ -11287,7 +11046,7 @@ _080F222C:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
@@ -11298,7 +11057,7 @@ _080F222C:
 	ldr r0, =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	b _080F2286
 	.pool
 _080F2264:
@@ -11310,7 +11069,7 @@ _080F226A:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
@@ -11319,7 +11078,7 @@ _080F226A:
 	adds r1, r2
 	bl StringCopy
 _080F2286:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F2358
@@ -11329,7 +11088,7 @@ _080F22A0:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
@@ -11340,8 +11099,8 @@ _080F22A0:
 	ldr r0, =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
-	bl sub_81DB5E8
-	ldr r4, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r4, =sTVShowState
 	bl Random
 	ldrb r2, [r4]
 	adds r2, 0x1
@@ -11364,7 +11123,7 @@ _080F22F4:
 	ldr r0, =gStringVar2
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r5, 0x10]
 	movs r0, 0x2
 	bl sub_80EF9E8
@@ -11381,9 +11140,9 @@ _080F2324:
 	ldr r0, =gStringVar2
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 _080F233E:
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	strb r4, [r0]
 	b _080F2358
 	.pool
@@ -11394,7 +11153,7 @@ _080F2358:
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -11417,7 +11176,7 @@ DoTVShowPokemonTodayFailedCapture: @ 80F2370
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	cmp r5, 0x6
 	bls _080F2396
@@ -11443,7 +11202,7 @@ _080F23D4:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0xC]
 	movs r1, 0xB
@@ -11451,7 +11210,7 @@ _080F23D4:
 	ldr r2, =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F24C0
@@ -11461,7 +11220,7 @@ _080F2408:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrb r1, [r4, 0x12]
 	movs r2, 0
@@ -11476,13 +11235,13 @@ _080F2408:
 	ldrb r0, [r4, 0x11]
 	cmp r0, 0x1
 	bne _080F2450
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F24C0
 	.pool
 _080F2450:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F24C0
@@ -11492,10 +11251,10 @@ _080F245C:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x10]
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -11504,13 +11263,13 @@ _080F245C:
 	lsls r0, 16
 	cmp r0, 0
 	bne _080F2494
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F24C0
 	.pool
 _080F2494:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F24C0
@@ -11520,8 +11279,8 @@ _080F24A0:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F24C0
@@ -11533,7 +11292,7 @@ _080F24C0:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -11556,7 +11315,7 @@ DoTVShowPokemonFanClubLetter: @ 80F24D8
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r7, [r0]
 	adds r6, r0, 0
 	cmp r7, 0x33
@@ -11628,7 +11387,7 @@ _080F25F4:
 	adds r1, r5, 0
 	adds r1, 0x10
 	ldrb r2, [r5, 0x18]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x2]
 	movs r1, 0xB
@@ -11636,7 +11395,7 @@ _080F25F4:
 	ldr r2, =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x32
 	strb r0, [r1]
 	b _080F26F0
@@ -11650,13 +11409,13 @@ _080F2628:
 	adds r2, r0, 0x1
 	cmp r2, 0x1
 	bne _080F2648
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F26F0
 	.pool
 _080F2648:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	adds r0, r2, 0x2
 	strb r0, [r1]
 	b _080F26F0
@@ -11679,7 +11438,7 @@ _080F265A:
 _080F2672:
 	adds r0, r5, 0
 	bl sub_80EFB58
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F26F0
@@ -11695,7 +11454,7 @@ _080F2684:
 	lsrs r2, r0, 16
 	movs r0, 0x2
 	adds r1, r2, 0
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	bl TVShowDone
 	b _080F26F0
 _080F26A6:
@@ -11706,8 +11465,8 @@ _080F26A6:
 	movs r3, 0x2
 	bl ConvertEasyChatWordsToString
 	adds r0, r4, 0
-	bl box_related_two__2
-	ldr r1, =gUnknown_0203A030
+	bl ShowFieldMessage
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F26FC
@@ -11720,8 +11479,8 @@ _080F26CC:
 	movs r3, 0x2
 	bl ConvertEasyChatWordsToString
 	adds r0, r4, 0
-	bl box_related_two__2
-	ldr r1, =gUnknown_0203A030
+	bl ShowFieldMessage
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F26FC
@@ -11731,7 +11490,7 @@ _080F26F0:
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 _080F26FC:
 	pop {r4-r7}
 	pop {r0}
@@ -11755,7 +11514,7 @@ DoTVShowRecentHappenings: @ 80F2708
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r6, [r0]
 	adds r7, r0, 0
 	cmp r6, 0x32
@@ -11826,10 +11585,10 @@ _080F2820:
 	adds r1, r5, 0
 	adds r1, 0x10
 	ldrb r2, [r5, 0x18]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	adds r0, r5, 0
 	bl sub_80EFB58
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x32
 	strb r0, [r1]
 	b _080F288C
@@ -11860,8 +11619,8 @@ _080F2868:
 	movs r3, 0x2
 	bl ConvertEasyChatWordsToString
 	adds r0, r4, 0
-	bl box_related_two__2
-	ldr r1, =gUnknown_0203A030
+	bl ShowFieldMessage
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F2898
@@ -11871,7 +11630,7 @@ _080F288C:
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 _080F2898:
 	pop {r4-r7}
 	pop {r0}
@@ -11895,7 +11654,7 @@ DoTVShowPokemonFanClubOpinions: @ 80F28A4
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r6, =gUnknown_0203A030
+	ldr r6, =sTVShowState
 	ldrb r5, [r6]
 	cmp r5, 0x3
 	bgt _080F28E8
@@ -11913,7 +11672,7 @@ _080F28EE:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x5
 	ldrb r2, [r4, 0xD]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
@@ -11925,7 +11684,7 @@ _080F28EE:
 	adds r1, r4, 0
 	adds r1, 0x10
 	ldrb r2, [r4, 0xE]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r4, 0x4]
 	lsrs r0, 4
 	adds r0, 0x1
@@ -11936,7 +11695,7 @@ _080F2930:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x5
 	ldrb r2, [r4, 0xD]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
@@ -11955,7 +11714,7 @@ _080F2968:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x5
 	ldrb r2, [r4, 0xD]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar3
 	ldrh r1, [r4, 0x1E]
 	bl CopyEasyChatWord
@@ -11965,7 +11724,7 @@ _080F297E:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -12004,12 +11763,12 @@ DoTVShowPokemonNewsMassOutbreak: @ 80F29A0
 	bl TVShowDone
 	bl StartMassOutbreak
 	ldr r1, =gUnknown_0858D19C
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -12032,7 +11791,7 @@ DoTVShowPokemonContestLiveUpdates: @ 80F2A10
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r7, [r0]
 	adds r2, r0, 0
 	cmp r7, 0x20
@@ -12095,20 +11854,20 @@ _080F2AE0:
 	adds r1, r6, 0
 	adds r1, 0x14
 	ldrb r2, [r6, 0x1D]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r6, 0xD]
 	ldrb r1, [r6, 0xE]
 	cmp r0, r1
 	bne _080F2B38
 	cmp r0, 0
 	bne _080F2B2C
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2B2C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F311C
@@ -12116,13 +11875,13 @@ _080F2B2C:
 _080F2B38:
 	cmp r0, r1
 	bls _080F2B48
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2B48:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F311C
@@ -12201,7 +11960,7 @@ _080F2BC8:
 	adds r1, r6, 0
 	adds r1, 0x14
 	ldrb r2, [r6, 0x1D]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	b _080F2BB2
 	.pool
 _080F2BF4:
@@ -12291,49 +12050,49 @@ _080F2CC0:
 	beq _080F2D20
 	b _080F311C
 _080F2CCA:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2CD8:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2CE4:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xE
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2CF0:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2CFC:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2D08:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x14
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2D14:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x15
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2D20:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x16
 	strb r0, [r1]
 	b _080F311C
@@ -12389,31 +12148,31 @@ _080F2D98:
 	.4byte _080F2DD0
 	.4byte _080F2DDC
 _080F2DAC:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x9
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2DB8:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xA
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2DC4:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xB
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2DD0:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xC
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2DDC:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xD
 	strb r0, [r1]
 	b _080F311C
@@ -12485,31 +12244,31 @@ _080F2E7C:
 	.4byte _080F2EB4
 	.4byte _080F2EC0
 _080F2E90:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xF
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2E9C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x10
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2EA8:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x11
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2EB4:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x12
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2EC0:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x13
 	strb r0, [r1]
 	b _080F311C
@@ -12586,7 +12345,7 @@ _080F2F58:
 _080F2F72:
 	adds r1, r2
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x17
 	strb r0, [r1]
 	b _080F311C
@@ -12602,7 +12361,7 @@ _080F2F94:
 	ldr r0, =gStringVar2
 	adds r1, r6, 0x4
 	ldrb r2, [r6, 0x1E]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar3
 	ldrh r1, [r6, 0x2]
 	muls r1, r5
@@ -12640,49 +12399,49 @@ _080F2FF8:
 	beq _080F3058
 	b _080F311C
 _080F3002:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1F
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F3010:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1E
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F301C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1D
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F3028:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1C
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F3034:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1B
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F3040:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1A
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F304C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x19
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F3058:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x18
 	strb r0, [r1]
 	b _080F311C
@@ -12701,7 +12460,7 @@ _080F3080:
 	ldr r0, =gStringVar1
 	adds r1, r6, 0x4
 	ldrb r2, [r6, 0x1E]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x2]
 	movs r1, 0xB
@@ -12720,7 +12479,7 @@ _080F30AE:
 	adds r1, r6, 0
 	adds r1, 0x14
 	ldrb r2, [r6, 0x1D]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
@@ -12736,9 +12495,9 @@ _080F30E0:
 _080F30E2:
 	adds r1, r6, 0x4
 	ldrb r2, [r6, 0x1E]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 _080F30EA:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x20
 	strb r0, [r1]
 	b _080F311C
@@ -12748,7 +12507,7 @@ _080F30FC:
 	adds r1, r6, 0
 	adds r1, 0x14
 	ldrb r2, [r6, 0x1D]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
@@ -12762,7 +12521,7 @@ _080F311C:
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -12785,7 +12544,7 @@ DoTVShowPokemonBattleUpdate: @ 80F3140
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	adds r2, r0, 0
 	cmp r5, 0x7
@@ -12831,12 +12590,12 @@ _080F31CA:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1A]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r4, 0x18]
 	cmp r0, 0
 	bne _080F3200
@@ -12850,7 +12609,7 @@ _080F3200:
 	ldr r1, =gText_Double
 	bl StringCopy
 _080F3208:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F3362
@@ -12859,7 +12618,7 @@ _080F321C:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x16]
 	movs r1, 0xB
@@ -12874,7 +12633,7 @@ _080F321C:
 	ldr r2, =gMoveNames
 	adds r1, r2
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F3362
@@ -12884,7 +12643,7 @@ _080F3268:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1A]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
@@ -12892,7 +12651,7 @@ _080F3268:
 	ldr r2, =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F3362
@@ -12901,12 +12660,12 @@ _080F329C:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1A]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 	b _080F3362
 	.pool
@@ -12914,13 +12673,13 @@ _080F32C0:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1A]
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F3362
@@ -12929,7 +12688,7 @@ _080F32EC:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x16]
 	movs r1, 0xB
@@ -12944,7 +12703,7 @@ _080F32EC:
 	ldr r2, =gMoveNames
 	adds r1, r2
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F3362
@@ -12953,12 +12712,12 @@ _080F3338:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1A]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar3
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
@@ -12972,7 +12731,7 @@ _080F3362:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -12995,7 +12754,7 @@ DoTVShow3CheersForPokeblocks: @ 80F3388
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	cmp r5, 0x5
 	bls _080F33AE
@@ -13020,17 +12779,17 @@ _080F33E8:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x14]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r4, 0x2]
 	cmp r0, 0x14
 	bls _080F340C
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F3624
 	.pool
 _080F340C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F3624
@@ -13108,8 +12867,8 @@ _080F34DC:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x14]
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F3624
@@ -13193,8 +12952,8 @@ _080F35D0:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x14]
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F3624
@@ -13203,14 +12962,14 @@ _080F35F4:
 	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x15]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x14]
 _080F3606:
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F3624
@@ -13222,7 +12981,7 @@ _080F3624:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13235,7 +12994,7 @@ DoTVShowInSearchOfTrainers: @ 80F363C
 	ldr r0, =gScriptResult
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r7, [r0]
 	adds r2, r0, 0
 	cmp r7, 0x8
@@ -13274,13 +13033,13 @@ _080F368C:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bls _080F36C8
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F37EA
 	.pool
 _080F36C8:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F37EA
@@ -13361,7 +13120,7 @@ _080F372C:
 	muls r1, r6
 	adds r1, r5
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F37EA
@@ -13399,7 +13158,7 @@ _080F37A2:
 	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0
 	strb r0, [r1]
 	bl TakeTVShowInSearchOfTrainersOffTheAir
@@ -13408,7 +13167,7 @@ _080F37EA:
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -13435,12 +13194,12 @@ DoTVShowPokemonAngler: @ 80F3828
 	ldrb r2, [r4, 0x3]
 	cmp r0, r2
 	bcs _080F3868
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	strb r1, [r0]
 	b _080F3870
 	.pool
 _080F3868:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	adds r0, r1, 0
@@ -13457,7 +13216,7 @@ _080F3880:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x6]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x4]
 	movs r1, 0xB
@@ -13467,7 +13226,7 @@ _080F3880:
 	bl StringCopy
 	ldrb r1, [r4, 0x3]
 	movs r0, 0x2
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	bl TVShowDone
 	b _080F38E0
 	.pool
@@ -13476,7 +13235,7 @@ _080F38B8:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x6]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x4]
 	movs r1, 0xB
@@ -13486,14 +13245,14 @@ _080F38B8:
 	bl StringCopy
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x2
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	bl TVShowDone
 _080F38E0:
 	ldr r0, =gUnknown_0858D3B0
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13516,7 +13275,7 @@ DoTVShowTheWorldOfMasters: @ 80F3904
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r6, =gUnknown_0203A030
+	ldr r6, =sTVShowState
 	ldrb r5, [r6]
 	cmp r5, 0x1
 	beq _080F3974
@@ -13535,13 +13294,13 @@ _080F394E:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xB]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x6]
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x2
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	movs r0, 0x1
 	strb r0, [r6]
 	b _080F39BE
@@ -13563,7 +13322,7 @@ _080F3994:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xB]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrb r1, [r4, 0xA]
 	movs r2, 0
@@ -13581,7 +13340,7 @@ _080F39BE:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -13604,7 +13363,7 @@ DoTVShowTodaysRivalTrainer: @ 80F39E4
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	adds r2, r0, 0
 	cmp r5, 0xA
@@ -13664,10 +13423,10 @@ _080F3A92:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldr r0, =gStringVar3
 	ldrb r1, [r4, 0x7]
 	movs r2, 0
@@ -13683,10 +13442,10 @@ _080F3AC0:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	b _080F3AB0
 	.pool
 _080F3ADC:
@@ -13694,10 +13453,10 @@ _080F3ADC:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	b _080F3AB0
 	.pool
 _080F3AF8:
@@ -13705,21 +13464,21 @@ _080F3AF8:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrb r0, [r4, 0x4]
 	cmp r0, 0
 	beq _080F3B24
 _080F3B12:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F3BE8
 	.pool
 _080F3B24:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F3BE8
@@ -13727,7 +13486,7 @@ _080F3B24:
 _080F3B30:
 	ldrb r1, [r4, 0x4]
 	movs r0, 0
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldr r0, =0x000008a8
 	bl FlagGet
 	lsls r0, 24
@@ -13752,13 +13511,13 @@ _080F3B58:
 	cmp r0, 0
 	beq _080F3B84
 _080F3B6E:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F3BE8
 	.pool
 _080F3B84:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F3BE8
@@ -13777,14 +13536,14 @@ _080F3B9C:
 _080F3BA2:
 	ldrb r1, [r4, 0x6]
 	movs r0, 0
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrb r1, [r4, 0x5]
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrh r0, [r4, 0x8]
 	cmp r0, 0
 	beq _080F3BCC
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F3BE8
@@ -13792,9 +13551,9 @@ _080F3BA2:
 _080F3BC4:
 	ldrh r1, [r4, 0x8]
 	movs r0, 0
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 _080F3BCC:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F3BE8
@@ -13804,14 +13563,14 @@ _080F3BD8:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080F3BE8:
 	ldr r0, =gUnknown_0858D3C4
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13834,7 +13593,7 @@ DoTVShowDewfordTrendWatcherNetwork: @ 80F3C04
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	cmp r5, 0x6
 	bls _080F3C2A
@@ -13865,13 +13624,13 @@ _080F3C68:
 	ldrb r0, [r4, 0x8]
 	cmp r0, 0
 	bne _080F3C94
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F3D54
 	.pool
 _080F3C94:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F3D54
@@ -13887,8 +13646,8 @@ _080F3CA0:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x9]
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F3D54
@@ -13903,13 +13662,13 @@ _080F3CD4:
 	ldrb r0, [r4, 0x8]
 	cmp r0, 0
 	bne _080F3D00
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F3D54
 	.pool
 _080F3D00:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F3D54
@@ -13925,8 +13684,8 @@ _080F3D0C:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x9]
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F3D54
@@ -13944,7 +13703,7 @@ _080F3D54:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13967,7 +13726,7 @@ DoTVShowHoennTreasureInvestigators: @ 80F3D74
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r7, =gUnknown_0203A030
+	ldr r7, =sTVShowState
 	ldrb r6, [r7]
 	cmp r6, 0x1
 	beq _080F3E02
@@ -14003,7 +13762,7 @@ _080F3DBE:
 	b _080F3E5C
 	.pool
 _080F3DF0:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F3E5C
@@ -14023,7 +13782,7 @@ _080F3E02:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x5]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar3
 	ldrb r1, [r5, 0x4]
 	movs r2, 0
@@ -14042,14 +13801,14 @@ _080F3E3C:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x5]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080F3E5C:
 	ldr r0, =gUnknown_0858D40C
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -14072,7 +13831,7 @@ DoTVShowFindThatGamer: @ 80F3E7C
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	cmp r5, 0x1
 	beq _080F3F28
@@ -14095,7 +13854,7 @@ _080F3ECC:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r4, 0x3]
 	cmp r0, 0
 	beq _080F3EE8
@@ -14117,12 +13876,12 @@ _080F3F04:
 	ldrb r1, [r4, 0x2]
 	cmp r1, 0x1
 	bne _080F3F1C
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	strb r1, [r0]
 	b _080F4008
 	.pool
 _080F3F1C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F4008
@@ -14132,7 +13891,7 @@ _080F3F28:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r4, 0x3]
 	cmp r0, 0
 	beq _080F3F44
@@ -14153,7 +13912,7 @@ _080F3F58:
 _080F3F60:
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x2
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	bl TVShowDone
 	b _080F4008
 	.pool
@@ -14162,7 +13921,7 @@ _080F3F78:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r4, 0x3]
 	cmp r0, 0
 	beq _080F3F94
@@ -14183,8 +13942,8 @@ _080F3FA8:
 _080F3FB0:
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x2
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
+	bl CopyContestResultToStringVar
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F4008
@@ -14194,7 +13953,7 @@ _080F3FCC:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x3]
 	cmp r1, 0
 	beq _080F3FE8
@@ -14219,7 +13978,7 @@ _080F4008:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -14242,7 +14001,7 @@ DoTVShowBreakingNewsTV: @ 80F4028
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r7, [r0]
 	adds r2, r0, 0
 	cmp r7, 0xC
@@ -14286,7 +14045,7 @@ _080F40BA:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x2]
 	movs r1, 0xB
@@ -14298,7 +14057,7 @@ _080F40BA:
 	ldrb r1, [r6, 0x4]
 	movs r2, 0
 	bl GetMapName
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F4344
@@ -14308,7 +14067,7 @@ _080F40FC:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x2]
 	movs r5, 0xB
@@ -14321,7 +14080,7 @@ _080F40FC:
 	muls r1, r5
 	adds r1, r4
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F4344
@@ -14329,14 +14088,14 @@ _080F40FC:
 _080F4140:
 	ldrh r1, [r6, 0x8]
 	movs r0, 0
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldr r4, =gStringVar2
 	ldrh r0, [r6, 0x6]
 	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F4344
@@ -14346,7 +14105,7 @@ _080F4168:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrb r1, [r6, 0x4]
 	movs r2, 0
@@ -14359,7 +14118,7 @@ _080F418C:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x2]
 	movs r1, 0xB
@@ -14371,7 +14130,7 @@ _080F418C:
 	ldrb r1, [r6, 0x4]
 	movs r2, 0
 	bl GetMapName
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F4344
@@ -14381,7 +14140,7 @@ _080F41D0:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x2]
 	movs r5, 0xB
@@ -14411,25 +14170,25 @@ _080F421E:
 	ldrh r0, [r6, 0xC]
 	cmp r0, 0
 	bne _080F4230
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xC
 	strb r0, [r1]
 	b _080F4344
 	.pool
 _080F4230:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F4344
 	.pool
 _080F423C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x9
 	strb r0, [r1]
 	b _080F4344
 	.pool
 _080F4248:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xA
 	strb r0, [r1]
 	b _080F4344
@@ -14455,7 +14214,7 @@ _080F4284:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x2]
 	movs r5, 0xB
@@ -14469,7 +14228,7 @@ _080F4284:
 	adds r1, r4
 _080F42A8:
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F4344
@@ -14479,12 +14238,12 @@ _080F42C8:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrb r1, [r6, 0x4]
 	movs r2, 0
 	bl GetMapName
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xB
 	strb r0, [r1]
 	b _080F4344
@@ -14494,7 +14253,7 @@ _080F42F4:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x2]
 	movs r4, 0xB
@@ -14506,7 +14265,7 @@ _080F42F4:
 	ldrb r1, [r6, 0x4]
 	movs r2, 0
 	bl GetMapName
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	strb r4, [r0]
 	b _080F4344
 	.pool
@@ -14515,14 +14274,14 @@ _080F4334:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080F4344:
 	ldr r0, =gUnknown_0858D428
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -14545,7 +14304,7 @@ DoTVShowSecretBaseVisit: @ 80F4360
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r6, [r0]
 	adds r2, r0, 0
 	cmp r6, 0xD
@@ -14579,17 +14338,17 @@ _080F43E4:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r5, 0x3]
 	cmp r0, 0
 	bne _080F4408
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F4588
 	.pool
 _080F4408:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F4588
@@ -14604,13 +14363,13 @@ _080F4414:
 	ldrb r0, [r5, 0x3]
 	cmp r0, 0x1
 	bne _080F443C
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F4588
 	.pool
 _080F443C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F4588
@@ -14636,19 +14395,19 @@ _080F4470:
 	beq _080F4490
 	b _080F4588
 _080F4476:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F4588
 	.pool
 _080F4484:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F4588
 	.pool
 _080F4490:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F4588
@@ -14674,7 +14433,7 @@ _080F44C0:
 	adds r1, r2
 _080F44CA:
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F4588
@@ -14688,11 +14447,11 @@ _080F44EA:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r1, [r5, 0x2]
 	cmp r1, 0x18
 	bhi _080F450C
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xC
 	strb r0, [r1]
 	b _080F4588
@@ -14700,7 +14459,7 @@ _080F44EA:
 _080F450C:
 	cmp r1, 0x31
 	bhi _080F451C
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xB
 	strb r0, [r1]
 	b _080F4588
@@ -14708,13 +14467,13 @@ _080F450C:
 _080F451C:
 	cmp r1, 0x45
 	bhi _080F452C
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xA
 	strb r0, [r1]
 	b _080F4588
 	.pool
 _080F452C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x9
 	strb r0, [r1]
 	b _080F4588
@@ -14724,7 +14483,7 @@ _080F4538:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x8]
 	movs r1, 0xB
@@ -14739,7 +14498,7 @@ _080F4538:
 	ldr r2, =gMoveNames
 	adds r1, r2
 	bl StringCopy
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	strb r4, [r0]
 	b _080F4588
 	.pool
@@ -14750,7 +14509,7 @@ _080F4588:
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -14773,13 +14532,13 @@ DoTVShowPokemonLotterWinnerFlashReport: @ 80F45A0
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r6, [r0]
 	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x5]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r5, 0x4]
 	cmp r0, 0
 	bne _080F45FC
@@ -14820,7 +14579,7 @@ _080F4634:
 	lsls r0, r6, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -14843,7 +14602,7 @@ DoTVShowThePokemonBattleSeminar: @ 80F466C
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r7, [r0]
 	cmp r7, 0x6
 	bls _080F4692
@@ -14869,7 +14628,7 @@ _080F46D0:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0x11]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x6]
 	movs r5, 0xB
@@ -14882,7 +14641,7 @@ _080F46D0:
 	muls r1, r5
 	adds r1, r4
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F4858
@@ -14892,7 +14651,7 @@ _080F4714:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0x11]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x4]
 	movs r1, 0xB
@@ -14907,7 +14666,7 @@ _080F4714:
 	ldr r2, =gMoveNames
 	adds r1, r2
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F4858
@@ -14934,19 +14693,19 @@ _080F4788:
 	beq _080F47A8
 	b _080F4824
 _080F478E:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F4858
 	.pool
 _080F479C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F4858
 	.pool
 _080F47A8:
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	strb r1, [r0]
 	b _080F4858
 	.pool
@@ -14993,7 +14752,7 @@ _080F4814:
 _080F4820:
 	bl StringCopy
 _080F4824:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F4858
@@ -15017,7 +14776,7 @@ _080F4858:
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -15040,7 +14799,7 @@ DoTVShowTrainerFanClubSpecial: @ 80F487C
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	cmp r5, 0x5
 	bls _080F48A2
@@ -15065,18 +14824,18 @@ _080F48DC:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x18]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x17]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar3
 	ldrh r1, [r4, 0x14]
 	bl CopyEasyChatWord
 	ldrb r1, [r4, 0x16]
 	cmp r1, 0x59
 	bls _080F4918
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F499A
@@ -15084,7 +14843,7 @@ _080F48DC:
 _080F4918:
 	cmp r1, 0x45
 	bls _080F4928
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F499A
@@ -15092,13 +14851,13 @@ _080F4918:
 _080F4928:
 	cmp r1, 0x1D
 	bls _080F4938
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F499A
 	.pool
 _080F4938:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F499A
@@ -15108,15 +14867,15 @@ _080F4944:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x18]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x17]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x16]
 	movs r0, 0x2
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
+	bl CopyContestResultToStringVar
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F499A
@@ -15126,11 +14885,11 @@ _080F4978:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x18]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x17]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar3
 	ldrh r1, [r4, 0x14]
 	bl CopyEasyChatWord
@@ -15140,7 +14899,7 @@ _080F499A:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -15163,7 +14922,7 @@ DoTVShowTrainerFanClub: @ 80F49BC
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	adds r2, r0, 0
 	cmp r5, 0xB
@@ -15195,7 +14954,7 @@ _080F4A38:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	adds r0, r4, 0
 	adds r0, 0x23
 	ldrb r0, [r0]
@@ -15229,61 +14988,61 @@ _080F4A74:
 	.4byte _080F4AFC
 	.4byte _080F4B08
 _080F4A9C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F4B3A
 	.pool
 _080F4AA8:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F4B3A
 	.pool
 _080F4AB4:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F4B3A
 	.pool
 _080F4AC0:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F4B3A
 	.pool
 _080F4ACC:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F4B3A
 	.pool
 _080F4AD8:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F4B3A
 	.pool
 _080F4AE4:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F4B3A
 	.pool
 _080F4AF0:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F4B3A
 	.pool
 _080F4AFC:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x9
 	strb r0, [r1]
 	b _080F4B3A
 	.pool
 _080F4B08:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xA
 	strb r0, [r1]
 	b _080F4B3A
@@ -15297,7 +15056,7 @@ _080F4B1A:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	ldrh r1, [r4, 0x4]
 	bl CopyEasyChatWord
@@ -15310,7 +15069,7 @@ _080F4B3A:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -15333,7 +15092,7 @@ DoTVShowSpotTheCuties: @ 80F4B5C
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	cmp r5, 0xF
 	bls _080F4B82
@@ -15368,15 +15127,15 @@ _080F4BE4:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xF]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x10]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x2]
 	cmp r1, 0x9
 	bhi _080F4C14
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F4D84
@@ -15384,13 +15143,13 @@ _080F4BE4:
 _080F4C14:
 	cmp r1, 0x13
 	bhi _080F4C24
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F4D84
 	.pool
 _080F4C24:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F4D84
@@ -15400,15 +15159,15 @@ _080F4C30:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xF]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x10]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x2
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
+	bl CopyContestResultToStringVar
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F4D84
@@ -15417,7 +15176,7 @@ _080F4C64:
 	ldr r0, =gStringVar2
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x10]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r4, 0x3]
 	cmp r0, 0x18
 	bls _080F4C76
@@ -15457,61 +15216,61 @@ _080F4C88:
 	.4byte _080F4D4C
 	.4byte _080F4D58
 _080F4CEC:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F4D84
 	.pool
 _080F4CF8:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F4D84
 	.pool
 _080F4D04:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F4D84
 	.pool
 _080F4D10:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F4D84
 	.pool
 _080F4D1C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x9
 	strb r0, [r1]
 	b _080F4D84
 	.pool
 _080F4D28:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xA
 	strb r0, [r1]
 	b _080F4D84
 	.pool
 _080F4D34:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xB
 	strb r0, [r1]
 	b _080F4D84
 	.pool
 _080F4D40:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xC
 	strb r0, [r1]
 	b _080F4D84
 	.pool
 _080F4D4C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xD
 	strb r0, [r1]
 	b _080F4D84
 	.pool
 _080F4D58:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0xE
 	strb r0, [r1]
 	b _080F4D84
@@ -15520,8 +15279,8 @@ _080F4D64:
 	ldr r0, =gStringVar2
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x10]
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0xF
 	strb r0, [r1]
 	b _080F4D84
@@ -15533,7 +15292,7 @@ _080F4D84:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -15556,7 +15315,7 @@ DoTVShowPokemonNewsBattleFrontier: @ 80F4D9C
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r7, [r0]
 	adds r2, r0, 0
 	cmp r7, 0x12
@@ -15675,11 +15434,11 @@ _080F4ECE:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r6, 0x2]
 	movs r0, 0x1
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
+	bl CopyContestResultToStringVar
+	ldr r1, =sTVShowState
 	movs r0, 0x10
 	strb r0, [r1]
 	b _080F5014
@@ -15689,11 +15448,11 @@ _080F4EF4:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r6, 0x2]
 	movs r0, 0x1
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
+	bl CopyContestResultToStringVar
+	ldr r1, =sTVShowState
 	movs r0, 0xF
 	strb r0, [r1]
 	b _080F5014
@@ -15703,11 +15462,11 @@ _080F4F18:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r6, 0x2]
 	movs r0, 0x1
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
+	bl CopyContestResultToStringVar
+	ldr r1, =sTVShowState
 	movs r0, 0xE
 	strb r0, [r1]
 	b _080F5014
@@ -15763,7 +15522,7 @@ _080F4F9C:
 	muls r1, r5
 	adds r1, r4
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x11
 	strb r0, [r1]
 	b _080F5014
@@ -15777,7 +15536,7 @@ _080F4FE0:
 	adds r1, r2
 _080F4FEC:
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x12
 	strb r0, [r1]
 	b _080F5014
@@ -15787,14 +15546,14 @@ _080F5004:
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xC]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080F5014:
 	ldr r0, =gUnknown_0858D524
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -15817,7 +15576,7 @@ DoTVShowWhatsNo1InHoennToday: @ 80F5030
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	cmp r5, 0x8
 	bls _080F5056
@@ -15845,7 +15604,7 @@ _080F509C:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x5]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r4, 0x4]
 	cmp r0, 0x6
 	bhi _080F5164
@@ -15865,43 +15624,43 @@ _080F50C0:
 	.4byte _080F5118
 	.4byte _080F5124
 _080F50DC:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F5164
 	.pool
 _080F50E8:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F5164
 	.pool
 _080F50F4:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F5164
 	.pool
 _080F5100:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F5164
 	.pool
 _080F510C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F5164
 	.pool
 _080F5118:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F5164
 	.pool
 _080F5124:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F5164
@@ -15911,11 +15670,11 @@ _080F5130:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x5]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
+	bl CopyContestResultToStringVar
+	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F5164
@@ -15925,14 +15684,14 @@ _080F5154:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x5]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080F5164:
 	ldr r0, =gUnknown_0858D570
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -16025,7 +15784,7 @@ DoTVShowSecretBaseSecrets: @ 80F51EC
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r2, [r0]
 	mov r9, r2
 	adds r2, r0, 0
@@ -16090,19 +15849,19 @@ _080F52F0:
 	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1C]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	adds r0, r5, 0
 	bl sub_80F5180
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0
 	bne _080F5328
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F552A
@@ -16125,7 +15884,7 @@ _080F5348:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	adds r0, r5, 0
 	bl sub_80F5180
 	lsls r0, 24
@@ -16181,7 +15940,7 @@ _080F53C4:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	adds r0, r5, 0
 	bl sub_80F5180
 	lsls r0, 24
@@ -16189,7 +15948,7 @@ _080F53C4:
 	cmp r6, 0x2
 	bne _080F53F0
 _080F53DE:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x9
 	strb r0, [r1]
 	b _080F552A
@@ -16229,7 +15988,7 @@ _080F542A:
 	adds r0, r5, 0
 _080F542C:
 	bl sub_80F51AC
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	strb r0, [r1]
 	b _080F552A
 	.pool
@@ -16237,19 +15996,19 @@ _080F5444:
 	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1C]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrh r1, [r5, 0x2]
 	movs r0, 0x2
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrh r0, [r5, 0x2]
 	cmp r0, 0x1E
 	bhi _080F547C
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F552A
@@ -16257,13 +16016,13 @@ _080F5444:
 _080F547C:
 	cmp r0, 0x64
 	bhi _080F548C
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
 	b _080F552A
 	.pool
 _080F548C:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x6
 	strb r0, [r1]
 	b _080F552A
@@ -16272,13 +16031,13 @@ _080F5498:
 	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1C]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F552A
@@ -16287,12 +16046,12 @@ _080F54C4:
 	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1C]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 	b _080F552A
 	.pool
@@ -16309,7 +16068,7 @@ _080F54F0:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	ldrb r0, [r5, 0x12]
 	strb r0, [r1]
 	b _080F552A
@@ -16337,7 +16096,7 @@ _080F552A:
 	lsls r1, r2, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -16363,7 +16122,7 @@ DoTVShowSafariFanClub: @ 80F5548
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_0203A030
+	ldr r0, =sTVShowState
 	ldrb r5, [r0]
 	adds r2, r0, 0
 	cmp r5, 0xA
@@ -16411,20 +16170,20 @@ _080F55DC:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x4]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrb r0, [r4, 0x3]
 	cmp r0, 0
 	bne _080F5608
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F56BC
 	.pool
 _080F5608:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F56BC
@@ -16432,8 +16191,8 @@ _080F5608:
 _080F5614:
 	ldrb r1, [r4, 0x3]
 	movs r0, 0x1
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
+	bl CopyContestResultToStringVar
+	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F56BC
@@ -16447,10 +16206,10 @@ _080F562E:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x4]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x1
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	ldrb r0, [r4, 0x3]
 	cmp r0, 0
 	beq _080F5662
@@ -16461,18 +16220,18 @@ _080F5650:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x4]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldrb r0, [r4, 0x3]
 	cmp r0, 0
 	bne _080F5674
 _080F5662:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F56BC
 	.pool
 _080F5674:
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F56BC
@@ -16480,8 +16239,8 @@ _080F5674:
 _080F5680:
 	ldrb r1, [r4, 0x3]
 	movs r0, 0x1
-	bl sub_80EF340
-	ldr r1, =gUnknown_0203A030
+	bl CopyContestResultToStringVar
+	ldr r1, =sTVShowState
 	movs r0, 0x9
 	strb r0, [r1]
 	b _080F56BC
@@ -16495,8 +16254,8 @@ _080F569A:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x4]
-	bl sub_81DB5E8
-	ldr r1, =gUnknown_0203A030
+	bl TVShowConvertInternationalString
+	ldr r1, =sTVShowState
 	movs r0, 0xA
 	strb r0, [r1]
 	b _080F56BC
@@ -16508,7 +16267,7 @@ _080F56BC:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -16531,7 +16290,7 @@ DoTVShowPokemonContestLiveUpdates2: @ 80F56D4
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r6, =gUnknown_0203A030
+	ldr r6, =sTVShowState
 	ldrb r5, [r6]
 	cmp r5, 0x2
 	bgt _080F5718
@@ -16569,20 +16328,20 @@ _080F5744:
 	ldr r0, =gStringVar3
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x17]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 _080F574E:
 	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xB
 	ldrb r2, [r4, 0x18]
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080F575E:
 	ldr r0, =gUnknown_0858D384
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -16594,7 +16353,7 @@ TVShowDone: @ 80F577C
 	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, =gSaveBlock1Ptr
@@ -16615,7 +16374,7 @@ TVShowDone: @ 80F577C
 
 	thumb_func_start ResetTVShowState
 ResetTVShowState: @ 80F57B8
-	ldr r1, =gUnknown_0203A030
+	ldr r1, =sTVShowState
 	movs r0, 0
 	strb r0, [r1]
 	bx lr

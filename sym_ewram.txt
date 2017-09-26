@@ -1187,7 +1187,7 @@ gUnknown_0203A02A: @ 203A02A
 gUnknown_0203A02C: @ 203A02C
 	.space 0x4
 
-gUnknown_0203A030: @ 203A030
+sTVShowState: @ 203A030
 	.space 0x1
 
 gUnknown_0203A031: @ 203A031

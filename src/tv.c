@@ -3,16 +3,29 @@
 #include "global.h"
 #include "rng.h"
 #include "event_data.h"
+#include "string_util.h"
+#include "international_string_util.h"
+#include "field_message_box.h"
+#include "easy_chat.h"
+#include "species.h"
+#include "moves.h"
 #include "tv.h"
 
 // Static type declarations
 
 // Static RAM declarations
 
+extern EWRAM_DATA u8 sTVShowState;
+
 // Static ROM declarations
+
+extern const u8 *const gTVBravoTrainerTextGroup[];
 
 void sub_80EEE5C(void);
 u8 sub_80EFFE0(u8);
+void CopyContestCategoryToStringVar(u8, u8);
+void CopyContestRankToStringVar(u8, u8);
+void CopyContestResultToStringVar(u8, u8);
 
 // .rodata
 
@@ -81,6 +94,8 @@ u8 special_0x44(void)
 }
 
 asm(".section .text.dotvshow");
+
+void TVShowDone(void);
 
 void DoTVShow(void)
 {
@@ -219,4 +234,76 @@ void DoTVShow(void)
                 break;
         }
     }
+}
+
+void DoTVShowBravoTrainerPokemonProfile(void)
+{
+    struct TVShowBravoTrainerPokemonProfiles *bravoTrainer;
+    u8 state;
+
+    bravoTrainer = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].bravoTrainer;
+    gScriptResult = 0;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
+            CopyContestCategoryToStringVar(1, bravoTrainer->contestCategory);
+            CopyContestRankToStringVar(2, bravoTrainer->contestRank);
+            if (!StringCompare(gSpeciesNames[bravoTrainer->species], bravoTrainer->pokemonNickname))
+                sTVShowState = 8;
+            else
+                sTVShowState = 1;
+            break;
+        case 1:
+            StringCopy(gStringVar1, gSpeciesNames[bravoTrainer->species]);
+            TVShowConvertInternationalString(gStringVar2, bravoTrainer->pokemonNickname, bravoTrainer->var1f);
+            CopyContestCategoryToStringVar(2, bravoTrainer->contestCategory);
+            sTVShowState = 2;
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
+            if (bravoTrainer->contestResult == 0) // placed first
+                sTVShowState = 3;
+            else
+                sTVShowState = 4;
+            break;
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
+            CopyEasyChatWord(gStringVar2, bravoTrainer->var04[0]);
+            CopyContestResultToStringVar(2, bravoTrainer->contestResult + 1);
+            sTVShowState = 5;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
+            CopyEasyChatWord(gStringVar2, bravoTrainer->var04[0]);
+            CopyContestResultToStringVar(2, bravoTrainer->contestResult + 1);
+            sTVShowState = 5;
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
+            CopyContestCategoryToStringVar(1, bravoTrainer->contestCategory);
+            CopyEasyChatWord(gStringVar3, bravoTrainer->var04[1]);
+            if (bravoTrainer->var14)
+                sTVShowState = 6;
+            else
+                sTVShowState = 7;
+            break;
+        case 6:
+            StringCopy(gStringVar1, gSpeciesNames[bravoTrainer->species]);
+            StringCopy(gStringVar2, gMoveNames[bravoTrainer->var14]);
+            CopyEasyChatWord(gStringVar3, bravoTrainer->var04[1]);
+            sTVShowState = 7;
+            break;
+        case 7:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
+            StringCopy(gStringVar2, gSpeciesNames[bravoTrainer->species]);
+            TVShowDone();
+            break;
+        case 8:
+            StringCopy(gStringVar1, gSpeciesNames[bravoTrainer->species]);
+            sTVShowState = 2;
+            break;
+    }
+    ShowFieldMessage(gTVBravoTrainerTextGroup[state]);
 }

@@ -3704,7 +3704,7 @@ sub_811BDF0: @ 811BDF0
 	ldrb r2, [r0]
 	mov r0, sp
 	adds r1, r5, 0
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	movs r0, 0
 	mov r1, sp
 	bl sub_81AFC0C

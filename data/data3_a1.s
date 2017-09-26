@@ -299,7 +299,7 @@ gUnknown_0858D1A0:: @ 858D1A0
 gUnknown_0858D1D0:: @ 858D1D0
 	.incbin "baserom.gba", 0x58d1d0, 0x34
 
-gUnknown_0858D204:: @ 858D204
+gTVBravoTrainerTextGroup:: @ 858D204
 	.incbin "baserom.gba", 0x58d204, 0x24
 
 gUnknown_0858D228:: @ 858D228

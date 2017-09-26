@@ -2407,7 +2407,7 @@ _080B1AD8:
 	.pool
 _080B1AEC:
 	bl sub_80B1C7C
-	bl box_related_two__2
+	bl ShowFieldMessage
 _080B1AF4:
 	pop {r0}
 	bx r0
@@ -2468,7 +2468,7 @@ _080B1B56:
 special_trainer_unable_to_battle: @ 80B1B60
 	push {lr}
 	bl sub_80B1D18
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	thumb_func_end special_trainer_unable_to_battle

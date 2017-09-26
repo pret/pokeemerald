@@ -2297,7 +2297,7 @@ _080B3750:
 	b _080B37CC
 _080B375A:
 	ldr r0, =gUnknown_08278091
-	bl box_related_two__2
+	bl ShowFieldMessage
 	movs r0, 0x1
 	strh r0, [r5, 0x8]
 	b _080B37CC

@@ -359,5 +359,6 @@ enum
     MOVE_DOOM_DESIRE,
     MOVE_PSYCHO_BOOST,
 };
+extern const u8 gMoveNames[][13];
 
 #endif // GUARD_MOVES_H

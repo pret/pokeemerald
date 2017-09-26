@@ -4629,7 +4629,7 @@ sub_8137C10: @ 8137C10
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl sub_8137A98
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.pool
@@ -6378,7 +6378,7 @@ sub_8138AA4: @ 8138AA4
 sub_8138AC0: @ 8138AC0
 	push {lr}
 	ldr r0, =gStringVar4
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.pool
@@ -8050,7 +8050,7 @@ sub_81397C4: @ 81397C4
 	cmp r1, r0
 	bls _081397E0
 	movs r0, 0
-	bl sub_80EF340
+	bl CopyContestResultToStringVar
 	b _08139862
 	.pool
 _081397E0:
@@ -9094,7 +9094,7 @@ _0813A062:
 	lsls r0, 2
 	adds r0, r7
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -9996,7 +9996,7 @@ _0813A7C6:
 	lsrs r0, 22
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.pool
@@ -10036,7 +10036,7 @@ sub_813A820: @ 813A820
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	ldr r0, =0x00004031
 	adds r1, r4, 0
 	bl VarSet
@@ -10056,7 +10056,7 @@ sub_813A854: @ 813A854
 	lsrs r0, 14
 	adds r0, r4
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4}
 	pop {r0}
 	bx r0

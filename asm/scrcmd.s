@@ -3267,7 +3267,7 @@ s67_execute_box: @ 809ABD4
 	bne _0809ABE2
 	ldr r0, [r4, 0x64]
 _0809ABE2:
-	bl box_related_two__2
+	bl ShowFieldMessage
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -3793,7 +3793,7 @@ sBD_virtual_message: @ 809AFA0
 	ldr r1, =gUnknown_020375C4
 	ldr r1, [r1]
 	subs r0, r1
-	bl box_related_two__2
+	bl ShowFieldMessage
 	movs r0, 0
 	pop {r1}
 	bx r1
