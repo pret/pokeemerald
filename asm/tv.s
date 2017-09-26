@@ -5,55 +5,6 @@
 
 	.text
 
-	thumb_func_start InterviewAfter
-InterviewAfter: @ 80EC6BC
-	push {lr}
-	ldr r0, =gSpecialVar_0x8005
-	ldrh r0, [r0]
-	subs r0, 0x1
-	cmp r0, 0x7
-	bhi _080EC724
-	lsls r0, 2
-	ldr r1, =_080EC6DC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080EC6DC:
-	.4byte _080EC6FC
-	.4byte _080EC702
-	.4byte _080EC708
-	.4byte _080EC70E
-	.4byte _080EC724
-	.4byte _080EC714
-	.4byte _080EC71A
-	.4byte _080EC720
-_080EC6FC:
-	bl sub_80ED548
-	b _080EC724
-_080EC702:
-	bl sub_80ED5B8
-	b _080EC724
-_080EC708:
-	bl sub_80ED610
-	b _080EC724
-_080EC70E:
-	bl TaskDummy5
-	b _080EC724
-_080EC714:
-	bl sub_80ECF5C
-	b _080EC724
-_080EC71A:
-	bl sub_80ED164
-	b _080EC724
-_080EC720:
-	bl sub_80ECA38
-_080EC724:
-	pop {r0}
-	bx r0
-	thumb_func_end InterviewAfter
-
 	thumb_func_start sub_80EC728
 sub_80EC728: @ 80EC728
 	push {r4-r7,lr}
