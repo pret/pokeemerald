@@ -153,6 +153,18 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
+        /*0x02*/ u16 unk_02;
+        /*0x04*/ u8 unk_04[8];
+        /*0x0C*/ u8 unk_0c;
+        /*0x0D*/ u8 unk_0d;
+        /*0x0e*/ u8 unk_0e;
+        /*0x0f*/ u8 unk_0f;
+        /*0x10*/ u16 unk_10;
+        /*0x12*/ u16 species;
+        /*0x14*/ u8 playerName[8];
+        /*0x1C*/ u8 unk_1c;
+        /*0x1D*/ u8 language;
+        /*0x1E*/ u8 unk_1e;
         // TODO: flesh this out
     } contestLiveUpdates;
 

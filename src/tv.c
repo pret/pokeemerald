@@ -13,6 +13,7 @@
 #include "species.h"
 #include "moves.h"
 #include "battle.h"
+#include "contest.h"
 #include "items.h"
 #include "main.h"
 #include "tv.h"
@@ -569,6 +570,34 @@ void sub_80ECA10(TVShow *show)
     show->common.srcTrainerIdHi = id >> 8;
     show->common.trainerIdLo = id;
     show->common.trainerIdHi = id >> 8;
+}
+
+void sub_80ECA38(void)
+{
+    TVShow *show;
+    TVShow *show2;
+
+    show = &gSaveBlock1Ptr->tvShows[24];
+    if (show->contestLiveUpdates.kind == TVSHOW_CONTEST_LIVE_UPDATES)
+    {
+        show2 = &gSaveBlock1Ptr->tvShows[gUnknown_030060BC];
+        show2->contestLiveUpdates.kind = TVSHOW_CONTEST_LIVE_UPDATES;
+        show2->contestLiveUpdates.active = TRUE;
+        StringCopy(show2->contestLiveUpdates.playerName, gSaveBlock2Ptr->playerName);
+        show2->contestLiveUpdates.unk_1c = gUnknown_02039F2C;
+        show2->contestLiveUpdates.species = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_SPECIES, NULL);
+        show2->contestLiveUpdates.unk_02 = show->contestLiveUpdates.unk_02;
+        show2->contestLiveUpdates.unk_0c = show->contestLiveUpdates.unk_0c;
+        show2->contestLiveUpdates.unk_0d = show->contestLiveUpdates.unk_0d;
+        show2->contestLiveUpdates.unk_0e = show->contestLiveUpdates.unk_0e;
+        show2->contestLiveUpdates.unk_10 = show->contestLiveUpdates.unk_10;
+        show2->contestLiveUpdates.unk_0f = show->contestLiveUpdates.unk_0f;
+        StringCopy(show2->contestLiveUpdates.unk_04, show->contestLiveUpdates.unk_04);
+        sub_80ECA10(show2);
+        show2->contestLiveUpdates.language = gGameLanguage;
+        show2->contestLiveUpdates.unk_1e = show->contestLiveUpdates.unk_1e;
+        sub_80EF910(gSaveBlock1Ptr->tvShows, 24);
+    }
 }
 
 asm(".section .text.dotvshow");
