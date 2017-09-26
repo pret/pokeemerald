@@ -257,7 +257,7 @@ void DoTVShowBravoTrainerPokemonProfile(void)
             break;
         case 1:
             StringCopy(gStringVar1, gSpeciesNames[bravoTrainer->species]);
-            TVShowConvertInternationalString(gStringVar2, bravoTrainer->pokemonNickname, bravoTrainer->var1f);
+            TVShowConvertInternationalString(gStringVar2, bravoTrainer->pokemonNickname, bravoTrainer->pokemonNameLanguage);
             CopyContestCategoryToStringVar(2, bravoTrainer->contestCategory);
             sTVShowState = 2;
             break;
@@ -270,29 +270,29 @@ void DoTVShowBravoTrainerPokemonProfile(void)
             break;
         case 3:
             TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
-            CopyEasyChatWord(gStringVar2, bravoTrainer->var04[0]);
+            CopyEasyChatWord(gStringVar2, bravoTrainer->ecWords[0]);
             CopyContestResultToStringVar(2, bravoTrainer->contestResult + 1);
             sTVShowState = 5;
             break;
         case 4:
             TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
-            CopyEasyChatWord(gStringVar2, bravoTrainer->var04[0]);
+            CopyEasyChatWord(gStringVar2, bravoTrainer->ecWords[0]);
             CopyContestResultToStringVar(2, bravoTrainer->contestResult + 1);
             sTVShowState = 5;
             break;
         case 5:
             TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
             CopyContestCategoryToStringVar(1, bravoTrainer->contestCategory);
-            CopyEasyChatWord(gStringVar3, bravoTrainer->var04[1]);
-            if (bravoTrainer->var14)
+            CopyEasyChatWord(gStringVar3, bravoTrainer->ecWords[1]);
+            if (bravoTrainer->move)
                 sTVShowState = 6;
             else
                 sTVShowState = 7;
             break;
         case 6:
             StringCopy(gStringVar1, gSpeciesNames[bravoTrainer->species]);
-            StringCopy(gStringVar2, gMoveNames[bravoTrainer->var14]);
-            CopyEasyChatWord(gStringVar3, bravoTrainer->var04[1]);
+            StringCopy(gStringVar2, gMoveNames[bravoTrainer->move]);
+            CopyEasyChatWord(gStringVar3, bravoTrainer->ecWords[1]);
             sTVShowState = 7;
             break;
         case 7:

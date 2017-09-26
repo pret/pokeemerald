@@ -391,16 +391,15 @@ struct TVShowBravoTrainerPokemonProfiles
     /*0x00*/ u8 kind;
     /*0x01*/ bool8 active;
     /*0x02*/ u16 species;
-    /*0x04*/ u16 var04[2];
+    /*0x04*/ u16 ecWords[2];
     /*0x08*/ u8 pokemonNickname[11];
     /*0x13*/ u8 contestCategory:3;
     /*0x13*/ u8 contestRank:2;
     /*0x13*/ u8 contestResult:2;
-    /*0x13*/ u8 var13_7:1;
-    /*0x14*/ u16 var14;
+    /*0x14*/ u16 move;
     /*0x16*/ u8 playerName[8];
     /*0x1E*/ u8 language;
-    /*0x1F*/ u8 var1f;
+    /*0x1F*/ u8 pokemonNameLanguage;
 };
 
 struct TVShowBravoTrainerBattleTowerSpotlight
