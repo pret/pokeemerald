@@ -5,23 +5,6 @@
 
 	.text
 
-	thumb_func_start special_0x45
-special_0x45: @ 80EC168
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r2, [r0]
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0
-	ldr r0, =0x000027cc
-	adds r1, r0
-	ldrb r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end special_0x45
-
 	thumb_func_start sub_80EC18C
 sub_80EC18C: @ 80EC18C
 	push {r4,lr}

@@ -171,6 +171,11 @@ void TurnOnTVScreen(void)
     DrawWholeMapView();
 }
 
+u8 special_0x45(void)
+{
+    return gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.kind;
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
