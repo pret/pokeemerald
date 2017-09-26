@@ -41,15 +41,11 @@ u8 FindAnyTVNewsOnTheAir(void);
 static bool8 IsTVShowInSearchOfTrainersAiring(void);
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
-void sub_80EED88(void);
-void sub_80ED718(void);
-void sub_80EC8FC(void);
-void sub_80EC8A4(void);
 bool8 sub_80EFB38(u16);
 s8 sub_80EFB08(TVShow *);
 bool8 sub_80EF46C(u8, u8);
-u32 sub_81DB604(const u8 *);
 void sub_80EC9E8(TVShow *);
+void sub_80EF910(TVShow *, u8);
 
 // .rodata
 
@@ -429,6 +425,10 @@ void InterviewAfter(void)
 
 void PutPokemonTodayCaughtOnAir(void)
 {
+    static void sub_80EC8A4(void);
+    void sub_80EC8FC(void);
+    void sub_80ED718(void);
+    void sub_80EED88(void);
     u8 i;
     u16 ct;
     TVShow *show;
@@ -491,6 +491,23 @@ void PutPokemonTodayCaughtOnAir(void)
             }
         }
     }
+}
+
+static void sub_80EC8A4(void)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[24];
+    if (show->worldOfMasters.kind != TVSHOW_WORLD_OF_MASTERS)
+    {
+        sub_80EF910(gSaveBlock1Ptr->tvShows, 24);
+        show->worldOfMasters.var06 = GetGameStat(GAME_STAT_STEPS);
+        show->worldOfMasters.kind = TVSHOW_WORLD_OF_MASTERS;
+    }
+    show->worldOfMasters.var02 ++;
+    show->worldOfMasters.var04 = gBattleResults.caughtPoke;
+    show->worldOfMasters.var08 = gBattleResults.poke1Species;
+    show->worldOfMasters.var0a = gMapHeader.regionMapSectionId;
 }
 
 asm(".section .text.dotvshow");

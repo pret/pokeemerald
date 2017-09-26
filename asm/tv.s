@@ -5,43 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80EC8A4
-sub_80EC8A4: @ 80EC8A4
-	push {r4,lr}
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r0, =0x00002b2c
-	adds r4, r1, r0
-	ldrb r0, [r4]
-	cmp r0, 0x19
-	beq _080EC8CA
-	ldr r2, =0x000027cc
-	adds r0, r1, r2
-	movs r1, 0x18
-	bl sub_80EF910
-	movs r0, 0x5
-	bl GetGameStat
-	strh r0, [r4, 0x6]
-	movs r0, 0x19
-	strb r0, [r4]
-_080EC8CA:
-	ldrh r0, [r4, 0x2]
-	adds r0, 0x1
-	strh r0, [r4, 0x2]
-	ldr r1, =gBattleResults
-	ldrh r0, [r1, 0x28]
-	strh r0, [r4, 0x4]
-	ldrh r0, [r1, 0x6]
-	strh r0, [r4, 0x8]
-	ldr r0, =gMapHeader
-	ldrb r0, [r0, 0x14]
-	strb r0, [r4, 0xA]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80EC8A4
-
 	thumb_func_start sub_80EC8FC
 sub_80EC8FC: @ 80EC8FC
 	push {r4-r7,lr}

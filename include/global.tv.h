@@ -369,7 +369,7 @@ typedef union TVShow // size = 0x24
     } massOutbreak;
 } TVShow;
 
-struct UnknownSaveStruct2ABC
+struct PokemonNewsData // 2b50
 {
     u8 val0;
     u8 val1;
