@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start SetTVMetatilesOnMap
-@ void SetTVMetatilesOnMap(s32 mapWidth, s32 mapHeight, u16 metatileId)
-SetTVMetatilesOnMap: @ 80EC0CC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	mov r9, r0
-	mov r10, r1
-	lsls r2, 16
-	lsrs r2, 16
-	movs r5, 0
-	cmp r5, r10
-	bge _080EC120
-	movs r1, 0xC0
-	lsls r1, 4
-	adds r0, r1, 0
-	mov r8, r2
-	mov r1, r8
-	orrs r1, r0
-	mov r8, r1
-_080EC0F2:
-	movs r4, 0
-	adds r7, r5, 0x1
-	cmp r4, r9
-	bge _080EC11A
-	mov r0, r8
-	lsls r6, r0, 16
-_080EC0FE:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl MapGridGetMetatileBehaviorAt
-	cmp r0, 0x86
-	bne _080EC114
-	adds r0, r4, 0
-	adds r1, r5, 0
-	lsrs r2, r6, 16
-	bl MapGridSetMetatileIdAt
-_080EC114:
-	adds r4, 0x1
-	cmp r4, r9
-	blt _080EC0FE
-_080EC11A:
-	adds r5, r7, 0
-	cmp r5, r10
-	blt _080EC0F2
-_080EC120:
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end SetTVMetatilesOnMap
-
 	thumb_func_start TurnOffTVScreen
 TurnOffTVScreen: @ 80EC130
 	push {lr}

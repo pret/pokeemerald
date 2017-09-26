@@ -3,6 +3,7 @@
 #include "global.h"
 #include "rng.h"
 #include "event_data.h"
+#include "fieldmap.h"
 #include "strings.h"
 #include "string_util.h"
 #include "international_string_util.h"
@@ -30,7 +31,7 @@ void CopyContestRankToStringVar(u8, u8);
 void TV_ConvertNumberToOrdinal(u8, u32);
 u8 sub_80EC18C(void);
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
-void SetTVMetatilesOnMap(int, int, u8);
+void SetTVMetatilesOnMap(int, int, u16);
 bool8 sub_80EEF20(void);
 bool8 IsTVShowInSearchOfTrainersAiring(void);
 
@@ -137,6 +138,23 @@ void UpdateTVScreensOnMap(int width, int height)
                 SetTVMetatilesOnMap(width, height, 0x3);
             }
             break;
+    }
+}
+
+void SetTVMetatilesOnMap(int width, int height, u16 tileId)
+{
+    int x;
+    int y;
+
+    for (y = 0; y < height; y ++)
+    {
+        for (x = 0; x < width; x ++)
+        {
+            if (MapGridGetMetatileBehaviorAt(x, y) == 0x86) // is this tile a TV?
+            {
+                MapGridSetMetatileIdAt(x, y, tileId | 0xc00);
+            }
+        }
     }
 }
 
