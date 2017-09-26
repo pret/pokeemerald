@@ -40,4 +40,4 @@ gUnknown_085DFF84:: @ 85DFF84
 	.incbin "baserom.gba", 0x5dff84, 0x8
 
 gUnknown_085DFF8C:: @ 85DFF8C
-	.incbin "baserom.gba", 0x5dff8c, 0x638
+	.incbin "baserom.gba", 0x5dff8c, 0x4
