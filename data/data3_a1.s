@@ -305,7 +305,7 @@ gTVBravoTrainerTextGroup:: @ 858D204
 gUnknown_0858D228:: @ 858D228
 	.incbin "baserom.gba", 0x58d228, 0x18
 
-gUnknown_0858D240:: @ 858D240
+gTVBravoTrainerBattleTowerTextGroup:: @ 858D240
 	.incbin "baserom.gba", 0x58d240, 0x3c
 
 gUnknown_0858D27C:: @ 858D27C

@@ -5957,8 +5957,8 @@ SetContestCategoryStringVarForInterview: @ 80EF30C
 	.pool
 	thumb_func_end SetContestCategoryStringVarForInterview
 
-	thumb_func_start CopyContestResultToStringVar
-CopyContestResultToStringVar: @ 80EF340
+	thumb_func_start TV_ConvertNumberToOrdinal
+TV_ConvertNumberToOrdinal: @ 80EF340
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -5980,7 +5980,7 @@ CopyContestResultToStringVar: @ 80EF340
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end CopyContestResultToStringVar
+	thumb_func_end TV_ConvertNumberToOrdinal
 
 	thumb_func_start sub_80EF370
 sub_80EF370: @ 80EF370
@@ -6098,12 +6098,12 @@ _080EF43E:
 	bne _080EF458
 	asrs r1, r7, 1
 	mov r0, r8
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	b _080EF460
 _080EF458:
 	mov r0, r8
 	adds r1, r7, 0
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 _080EF460:
 	pop {r3}
 	mov r8, r3
@@ -10159,258 +10159,6 @@ _080F152C:
 
     .section .text.dotvshow
 
-	thumb_func_start DoTVShowBravoTrainerBattleTower
-DoTVShowBravoTrainerBattleTower: @ 80F1974
-	push {r4,r5,lr}
-	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =0x000027cc
-	adds r0, r1
-	ldr r1, [r2]
-	adds r4, r1, r0
-	ldr r1, =gScriptResult
-	movs r0, 0
-	strh r0, [r1]
-	ldr r0, =sTVShowState
-	ldrb r5, [r0]
-	adds r2, r0, 0
-	cmp r5, 0xE
-	bls _080F199C
-	b _080F1BEA
-_080F199C:
-	lsls r0, r5, 2
-	ldr r1, =_080F19C0
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080F19C0:
-	.4byte _080F19FC
-	.4byte _080F1A40
-	.4byte _080F1A90
-	.4byte _080F1AB4
-	.4byte _080F1AE0
-	.4byte _080F1B28
-	.4byte _080F1B38
-	.4byte _080F1B48
-	.4byte _080F1B4E
-	.4byte _080F1B4E
-	.4byte _080F1B4E
-	.4byte _080F1B68
-	.4byte _080F1B94
-	.4byte _080F1B94
-	.4byte _080F1BCC
-_080F19FC:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0x2
-	ldrb r2, [r4, 0x1D]
-	bl TVShowConvertInternationalString
-	ldr r0, =gStringVar2
-	ldrh r2, [r4, 0xA]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	ldrh r0, [r4, 0x16]
-	cmp r0, 0x6
-	bls _080F1A34
-	ldr r1, =sTVShowState
-	movs r0, 0x1
-	strb r0, [r1]
-	b _080F1BEA
-	.pool
-_080F1A34:
-	ldr r1, =sTVShowState
-	movs r0, 0x2
-	strb r0, [r1]
-	b _080F1BEA
-	.pool
-_080F1A40:
-	ldrb r0, [r4, 0x1A]
-	cmp r0, 0x32
-	bne _080F1A58
-	ldr r0, =gStringVar1
-	ldr r1, =gText_Lv50
-	bl StringCopy
-	b _080F1A60
-	.pool
-_080F1A58:
-	ldr r0, =gStringVar1
-	ldr r1, =gText_OpenLevel
-	bl StringCopy
-_080F1A60:
-	ldrh r1, [r4, 0x16]
-	movs r0, 0x1
-	bl CopyContestResultToStringVar
-	ldrb r0, [r4, 0x1C]
-	cmp r0, 0x1
-	bne _080F1A84
-	ldr r1, =sTVShowState
-	movs r0, 0x3
-	strb r0, [r1]
-	b _080F1BEA
-	.pool
-_080F1A84:
-	ldr r1, =sTVShowState
-	movs r0, 0x4
-	strb r0, [r1]
-	b _080F1BEA
-	.pool
-_080F1A90:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0xC
-	ldrb r2, [r4, 0x1E]
-	bl TVShowConvertInternationalString
-	ldrh r1, [r4, 0x16]
-	adds r1, 0x1
-	movs r0, 0x1
-	bl CopyContestResultToStringVar
-_080F1AA6:
-	ldrb r0, [r4, 0x1B]
-	cmp r0, 0
-	beq _080F1B02
-	b _080F1B1C
-	.pool
-_080F1AB4:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0xC
-	ldrb r2, [r4, 0x1E]
-	bl TVShowConvertInternationalString
-	ldr r0, =gStringVar2
-	ldrh r2, [r4, 0x14]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	b _080F1AA6
-	.pool
-_080F1AE0:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0xC
-	ldrb r2, [r4, 0x1E]
-	bl TVShowConvertInternationalString
-	ldr r0, =gStringVar2
-	ldrh r2, [r4, 0x14]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	ldrb r0, [r4, 0x1B]
-	cmp r0, 0
-	bne _080F1B1C
-_080F1B02:
-	ldr r1, =sTVShowState
-	movs r0, 0x5
-	strb r0, [r1]
-	b _080F1BEA
-	.pool
-_080F1B1C:
-	ldr r1, =sTVShowState
-	movs r0, 0x6
-	strb r0, [r1]
-	b _080F1BEA
-	.pool
-_080F1B28:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0xC
-	ldrb r2, [r4, 0x1E]
-	b _080F1B54
-	.pool
-_080F1B38:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0
-	adds r1, 0xC
-	ldrb r2, [r4, 0x1E]
-	b _080F1B54
-	.pool
-_080F1B48:
-	movs r0, 0xB
-	strb r0, [r2]
-	b _080F1BEA
-_080F1B4E:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0x2
-	ldrb r2, [r4, 0x1D]
-_080F1B54:
-	bl TVShowConvertInternationalString
-	ldr r1, =sTVShowState
-	movs r0, 0xB
-	strb r0, [r1]
-	b _080F1BEA
-	.pool
-_080F1B68:
-	ldr r0, =gStringVar1
-	ldrh r1, [r4, 0x18]
-	bl CopyEasyChatWord
-	ldrb r0, [r4, 0x1B]
-	cmp r0, 0
-	bne _080F1B88
-	ldr r1, =sTVShowState
-	movs r0, 0xC
-	strb r0, [r1]
-	b _080F1BEA
-	.pool
-_080F1B88:
-	ldr r1, =sTVShowState
-	movs r0, 0xD
-	strb r0, [r1]
-	b _080F1BEA
-	.pool
-_080F1B94:
-	ldr r0, =gStringVar1
-	ldrh r1, [r4, 0x18]
-	bl CopyEasyChatWord
-	ldr r0, =gStringVar2
-	adds r1, r4, 0x2
-	ldrb r2, [r4, 0x1D]
-	bl TVShowConvertInternationalString
-	ldr r0, =gStringVar3
-	adds r1, r4, 0
-	adds r1, 0xC
-	ldrb r2, [r4, 0x1E]
-	bl TVShowConvertInternationalString
-	ldr r1, =sTVShowState
-	movs r0, 0xE
-	strb r0, [r1]
-	b _080F1BEA
-	.pool
-_080F1BCC:
-	ldr r0, =gStringVar1
-	adds r1, r4, 0x2
-	ldrb r2, [r4, 0x1D]
-	bl TVShowConvertInternationalString
-	ldr r0, =gStringVar2
-	ldrh r2, [r4, 0xA]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	bl TVShowDone
-_080F1BEA:
-	ldr r0, =gUnknown_0858D240
-	lsls r1, r5, 2
-	adds r1, r0
-	ldr r0, [r1]
-	bl ShowFieldMessage
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end DoTVShowBravoTrainerBattleTower
-
 	thumb_func_start DoTVShowTodaysSmartShopper
 DoTVShowTodaysSmartShopper: @ 80F1C0C
 	push {r4-r6,lr}
@@ -10493,7 +10241,7 @@ _080F1CC8:
 	bl StringCopy
 	ldrh r1, [r5, 0xC]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r4, =sTVShowState
 	bl Random
 	ldrb r2, [r4]
@@ -10521,7 +10269,7 @@ _080F1D22:
 	ldrh r1, [r5, 0xC]
 	adds r1, 0x1
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldrh r0, [r5, 0x8]
 	cmp r0, 0
 	beq _080F1D40
@@ -10545,7 +10293,7 @@ _080F1D4C:
 	bl StringCopy
 	ldrh r1, [r5, 0xE]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldrh r0, [r5, 0xA]
 	cmp r0, 0
 	beq _080F1D94
@@ -10563,7 +10311,7 @@ _080F1D7C:
 	bl StringCopy
 	ldrh r1, [r5, 0x10]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 _080F1D94:
 	ldrb r0, [r5, 0x2]
 	cmp r0, 0x1
@@ -11026,7 +10774,7 @@ _080F21F2:
 	bl StringCopy
 	ldrb r1, [r5, 0x12]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldrb r0, [r5, 0x12]
 	cmp r0, 0x3
 	bhi _080F2220
@@ -11254,7 +11002,7 @@ _080F245C:
 	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x10]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -11454,7 +11202,7 @@ _080F2684:
 	lsrs r2, r0, 16
 	movs r0, 0x2
 	adds r1, r2, 0
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	bl TVShowDone
 	b _080F26F0
 _080F26A6:
@@ -13226,7 +12974,7 @@ _080F3880:
 	bl StringCopy
 	ldrb r1, [r4, 0x3]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	bl TVShowDone
 	b _080F38E0
 	.pool
@@ -13245,7 +12993,7 @@ _080F38B8:
 	bl StringCopy
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	bl TVShowDone
 _080F38E0:
 	ldr r0, =gUnknown_0858D3B0
@@ -13297,10 +13045,10 @@ _080F394E:
 	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x6]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	movs r0, 0x1
 	strb r0, [r6]
 	b _080F39BE
@@ -13426,7 +13174,7 @@ _080F3A92:
 	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r0, =gStringVar3
 	ldrb r1, [r4, 0x7]
 	movs r2, 0
@@ -13445,7 +13193,7 @@ _080F3AC0:
 	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	b _080F3AB0
 	.pool
 _080F3ADC:
@@ -13456,7 +13204,7 @@ _080F3ADC:
 	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	b _080F3AB0
 	.pool
 _080F3AF8:
@@ -13467,7 +13215,7 @@ _080F3AF8:
 	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldrb r0, [r4, 0x4]
 	cmp r0, 0
 	beq _080F3B24
@@ -13486,7 +13234,7 @@ _080F3B24:
 _080F3B30:
 	ldrb r1, [r4, 0x4]
 	movs r0, 0
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r0, =0x000008a8
 	bl FlagGet
 	lsls r0, 24
@@ -13536,10 +13284,10 @@ _080F3B9C:
 _080F3BA2:
 	ldrb r1, [r4, 0x6]
 	movs r0, 0
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldrb r1, [r4, 0x5]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldrh r0, [r4, 0x8]
 	cmp r0, 0
 	beq _080F3BCC
@@ -13551,7 +13299,7 @@ _080F3BA2:
 _080F3BC4:
 	ldrh r1, [r4, 0x8]
 	movs r0, 0
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 _080F3BCC:
 	ldr r1, =sTVShowState
 	movs r0, 0x6
@@ -13912,7 +13660,7 @@ _080F3F58:
 _080F3F60:
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	bl TVShowDone
 	b _080F4008
 	.pool
@@ -13942,7 +13690,7 @@ _080F3FA8:
 _080F3FB0:
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r1, =sTVShowState
 	movs r0, 0x3
 	strb r0, [r1]
@@ -14088,7 +13836,7 @@ _080F40FC:
 _080F4140:
 	ldrh r1, [r6, 0x8]
 	movs r0, 0
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r4, =gStringVar2
 	ldrh r0, [r6, 0x6]
 	bl ItemId_GetItem
@@ -14874,7 +14622,7 @@ _080F4944:
 	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x16]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r1, =sTVShowState
 	movs r0, 0x5
 	strb r0, [r1]
@@ -15166,7 +14914,7 @@ _080F4C30:
 	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
@@ -15437,7 +15185,7 @@ _080F4ECE:
 	bl TVShowConvertInternationalString
 	ldrh r1, [r6, 0x2]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r1, =sTVShowState
 	movs r0, 0x10
 	strb r0, [r1]
@@ -15451,7 +15199,7 @@ _080F4EF4:
 	bl TVShowConvertInternationalString
 	ldrh r1, [r6, 0x2]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r1, =sTVShowState
 	movs r0, 0xF
 	strb r0, [r1]
@@ -15465,7 +15213,7 @@ _080F4F18:
 	bl TVShowConvertInternationalString
 	ldrh r1, [r6, 0x2]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r1, =sTVShowState
 	movs r0, 0xE
 	strb r0, [r1]
@@ -15673,7 +15421,7 @@ _080F5130:
 	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r1, =sTVShowState
 	movs r0, 0x8
 	strb r0, [r1]
@@ -16004,7 +15752,7 @@ _080F5444:
 	bl TVShowConvertInternationalString
 	ldrh r1, [r5, 0x2]
 	movs r0, 0x2
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldrh r0, [r5, 0x2]
 	cmp r0, 0x1E
 	bhi _080F547C
@@ -16173,7 +15921,7 @@ _080F55DC:
 	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldrb r0, [r4, 0x3]
 	cmp r0, 0
 	bne _080F5608
@@ -16191,7 +15939,7 @@ _080F5608:
 _080F5614:
 	ldrb r1, [r4, 0x3]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r1, =sTVShowState
 	movs r0, 0x4
 	strb r0, [r1]
@@ -16209,7 +15957,7 @@ _080F562E:
 	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldrb r0, [r4, 0x3]
 	cmp r0, 0
 	beq _080F5662
@@ -16239,7 +15987,7 @@ _080F5674:
 _080F5680:
 	ldrb r1, [r4, 0x3]
 	movs r0, 0x1
-	bl CopyContestResultToStringVar
+	bl TV_ConvertNumberToOrdinal
 	ldr r1, =sTVShowState
 	movs r0, 0x9
 	strb r0, [r1]

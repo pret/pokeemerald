@@ -410,12 +410,13 @@ struct TVShowBravoTrainerBattleTowerSpotlight
     /*0x0A*/ u16 species;
     /*0x0C*/ u8 pokemonName[8];
     /*0x14*/ u16 defeatedSpecies;
-    /*0x16*/ u16 var16;
+    /*0x16*/ u16 numFights;
     /*0x18*/ u16 var18[1];
     /*0x1A*/ u8 btLevel;
     /*0x1B*/ u8 var1b;
     /*0x1C*/ u8 var1c;
     /*0x1D*/ u8 language;
+    /*0x1E*/ u8 pokemonNameLanguage;
 };
 
 struct TVShowPokemonToday

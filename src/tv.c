@@ -3,6 +3,7 @@
 #include "global.h"
 #include "rng.h"
 #include "event_data.h"
+#include "strings.h"
 #include "string_util.h"
 #include "international_string_util.h"
 #include "field_message_box.h"
@@ -20,12 +21,13 @@ extern EWRAM_DATA u8 sTVShowState;
 // Static ROM declarations
 
 extern const u8 *const gTVBravoTrainerTextGroup[];
+extern const u8 *const gTVBravoTrainerBattleTowerTextGroup[];
 
 void sub_80EEE5C(void);
 u8 sub_80EFFE0(u8);
 void CopyContestCategoryToStringVar(u8, u8);
 void CopyContestRankToStringVar(u8, u8);
-void CopyContestResultToStringVar(u8, u8);
+void TV_ConvertNumberToOrdinal(u8, u32);
 
 // .rodata
 
@@ -76,7 +78,7 @@ u8 special_0x44(void)
         else
         {
             massOutbreak = &gSaveBlock1Ptr->tvShows[j].massOutbreak;
-            if (massOutbreak->var16 == 0 && massOutbreak->active == TRUE)
+            if (massOutbreak->numFights == 0 && massOutbreak->active == TRUE)
             {
                 return j;
             }
@@ -271,13 +273,13 @@ void DoTVShowBravoTrainerPokemonProfile(void)
         case 3:
             TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
             CopyEasyChatWord(gStringVar2, bravoTrainer->ecWords[0]);
-            CopyContestResultToStringVar(2, bravoTrainer->contestResult + 1);
+            TV_ConvertNumberToOrdinal(2, bravoTrainer->contestResult + 1);
             sTVShowState = 5;
             break;
         case 4:
             TVShowConvertInternationalString(gStringVar1, bravoTrainer->playerName, bravoTrainer->language);
             CopyEasyChatWord(gStringVar2, bravoTrainer->ecWords[0]);
-            CopyContestResultToStringVar(2, bravoTrainer->contestResult + 1);
+            TV_ConvertNumberToOrdinal(2, bravoTrainer->contestResult + 1);
             sTVShowState = 5;
             break;
         case 5:
@@ -306,4 +308,100 @@ void DoTVShowBravoTrainerPokemonProfile(void)
             break;
     }
     ShowFieldMessage(gTVBravoTrainerTextGroup[state]);
+}
+
+void DoTVShowBravoTrainerBattleTower(void)
+{
+    struct TVShowBravoTrainerBattleTowerSpotlight *bravoTrainerTower = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].bravoTrainerTower;
+    u8 state;
+
+    gScriptResult = 0;
+    state = sTVShowState;
+    switch(state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->trainerName, bravoTrainerTower->language);
+            StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->species]);
+            if (bravoTrainerTower->numFights >= 7)
+                sTVShowState = 1;
+            else
+                sTVShowState = 2;
+            break;
+        case 1:
+            if (bravoTrainerTower->btLevel == 50)
+            {
+                StringCopy(gStringVar1, gText_Lv50);
+            }
+            else
+            {
+                StringCopy(gStringVar1, gText_OpenLevel);
+            }
+            TV_ConvertNumberToOrdinal(1, bravoTrainerTower->numFights);
+            if (bravoTrainerTower->var1c == 1)
+                sTVShowState = 3;
+            else
+                sTVShowState = 4;
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->pokemonNameLanguage);
+            TV_ConvertNumberToOrdinal(1, bravoTrainerTower->numFights + 1);
+            if (bravoTrainerTower->var1b == 0)
+                sTVShowState = 5;
+            else
+                sTVShowState = 6;
+            break;
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->pokemonNameLanguage);
+            StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->defeatedSpecies]);
+            if (bravoTrainerTower->var1b == 0)
+                sTVShowState = 5;
+            else
+                sTVShowState = 6;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->pokemonNameLanguage);
+            StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->defeatedSpecies]);
+            if (bravoTrainerTower->var1b == 0)
+                sTVShowState = 5;
+            else
+                sTVShowState = 6;
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->pokemonNameLanguage);
+            sTVShowState = 11;
+            break;
+        case 6:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->pokemonNameLanguage);
+            sTVShowState = 11;
+            break;
+        case 7:
+            sTVShowState = 11;
+            break;
+        case 8:
+        case 9:
+        case 10:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->trainerName, bravoTrainerTower->language);
+            sTVShowState = 11;
+            break;
+        case 11:
+            CopyEasyChatWord(gStringVar1, bravoTrainerTower->var18[0]);
+            if (bravoTrainerTower->var1b == 0)
+                sTVShowState = 12;
+            else
+                sTVShowState = 13;
+            break;
+        case 12:
+        case 13:
+            CopyEasyChatWord(gStringVar1, bravoTrainerTower->var18[0]);
+            TVShowConvertInternationalString(gStringVar2, bravoTrainerTower->trainerName, bravoTrainerTower->language);
+            TVShowConvertInternationalString(gStringVar3, bravoTrainerTower->pokemonName, bravoTrainerTower->pokemonNameLanguage);
+            sTVShowState = 14;
+            break;
+        case 14:
+            TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->trainerName, bravoTrainerTower->language);
+            StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->species]);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVBravoTrainerBattleTowerTextGroup[state]);
 }
