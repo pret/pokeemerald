@@ -176,6 +176,20 @@ u8 special_0x45(void)
     return gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.kind;
 }
 
+u8 sub_80EC18C(void)
+{
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->tvShows) - 1; i ++)
+    {
+        if (gSaveBlock1Ptr->tvShows[i].common.kind != 0 && gSaveBlock1Ptr->tvShows[i].common.kind != TVSHOW_MASS_OUTBREAK && gSaveBlock1Ptr->tvShows[i].common.active == TRUE)
+        {
+            return i;
+        }
+    }
+    return 0xFF;
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
