@@ -8,6 +8,10 @@
 	.2byte \vram_tile_offset
 	.endm
 
+	.macro window_template_terminator
+	window_template 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0000
+	.endm
+
 	.macro glyph_width_func font_id, func
 	.4byte \font_id
 	.4byte \func
