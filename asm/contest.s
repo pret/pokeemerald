@@ -15385,18 +15385,18 @@ _080DF6AE:
 	beq _080DF6AE
 _080DF6C4:
 	mov r0, r9
-	bl ContestLiveUpdates_BeforeInterview
+	bl ContestLiveUpdates_BeforeInterview_1
 	mov r0, r10
-	bl sub_80ECDF4
+	bl ContestLiveUpdates_BeforeInterview_2
 	ldr r5, [sp, 0x4]
 	lsrs r0, r5, 24
-	bl sub_80ECE34
+	bl ContestLiveUpdates_BeforeInterview_3
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r0, [r0, 0x1C]
 	add r0, r8
 	ldrh r0, [r0, 0xA]
-	bl sub_80ECE74
+	bl ContestLiveUpdates_BeforeInterview_4
 	adds r0, r4, 0
 	adds r1, r6, 0
 	bl sub_80ECEB4

@@ -717,7 +717,7 @@ void PutFanClubSpecialOnTheAir(void)
     }
 }
 
-void ContestLiveUpdates_BeforeInterview(u8 a0)
+void ContestLiveUpdates_BeforeInterview_1(u8 a0)
 {
     TVShow *show;
 
@@ -728,6 +728,42 @@ void ContestLiveUpdates_BeforeInterview(u8 a0)
         show = &gSaveBlock1Ptr->tvShows[24];
         show->contestLiveUpdates.unk_0d = a0;
         show->contestLiveUpdates.kind = TVSHOW_CONTEST_LIVE_UPDATES;
+    }
+}
+
+void ContestLiveUpdates_BeforeInterview_2(u8 a0)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[24];
+    gUnknown_030060BC = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    if (gUnknown_030060BC != -1)
+    {
+        show->contestLiveUpdates.unk_0e = a0;
+    }
+}
+
+void ContestLiveUpdates_BeforeInterview_3(u8 a0)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[24];
+    gUnknown_030060BC = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    if (gUnknown_030060BC != -1)
+    {
+        show->contestLiveUpdates.unk_0f = a0;
+    }
+}
+
+void ContestLiveUpdates_BeforeInterview_4(u16 a0)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[24];
+    gUnknown_030060BC = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    if (gUnknown_030060BC != -1)
+    {
+        show->contestLiveUpdates.unk_10 = a0;
     }
 }
 
