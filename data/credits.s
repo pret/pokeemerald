@@ -1493,7 +1493,7 @@ gUnknown_085E6F68:: @ 85E6F68 struct BgTemplate
 	.align 2
 gUnknown_085E6F6C:: @ 85E6F6C
 	window_template 0x00, 0x00, 0x09, 0x1e, 0x0c, 0x08, 0x0001
-	window_template 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0000
+	window_template_terminator
 
 	.align 2
 gUnknown_085E6F7C:: @ 85E6F7C

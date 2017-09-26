@@ -10,7 +10,7 @@ gUnknown_085F06C0:: @ 85F06C0
     .align 2
 gUnknown_085F06C8:: @ 85F06C8
     window_template 0x00, 0x03, 0x0f, 0x1a, 0x04, 0x0f, 0x000b
-    window_template 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0000
+    window_template_terminator
 
     .align 2
 gUnknown_085F06D8:: @ 85F06D8
