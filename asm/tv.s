@@ -5,49 +5,6 @@
 
 	.text
 
-	thumb_func_start GabbyAndTyGetLastBattleTrivia
-GabbyAndTyGetLastBattleTrivia: @ 80EC58C
-	push {lr}
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00002baf
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _080EC5AC
-	movs r0, 0x1
-	b _080EC5D2
-	.pool
-_080EC5AC:
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _080EC5B8
-	movs r0, 0x2
-	b _080EC5D2
-_080EC5B8:
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	beq _080EC5C4
-	movs r0, 0x3
-	b _080EC5D2
-_080EC5C4:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	bne _080EC5D0
-	movs r0, 0
-	b _080EC5D2
-_080EC5D0:
-	movs r0, 0x4
-_080EC5D2:
-	pop {r1}
-	bx r1
-	thumb_func_end GabbyAndTyGetLastBattleTrivia
-
 	thumb_func_start GabbyAndTySetScriptVarsToFieldObjectLocalIds
 GabbyAndTySetScriptVarsToFieldObjectLocalIds: @ 80EC5D8
 	push {lr}

@@ -318,6 +318,27 @@ bool8 GabbyAndTyGetLastQuote(void)
     return TRUE;
 }
 
+u8 GabbyAndTyGetLastBattleTrivia(void)
+{
+    if (!gSaveBlock1Ptr->gabbyAndTyData.valB_0)
+    {
+        return 1;
+    }
+    if (gSaveBlock1Ptr->gabbyAndTyData.valB_3)
+    {
+        return 2;
+    }
+    if (gSaveBlock1Ptr->gabbyAndTyData.valB_2)
+    {
+        return 3;
+    }
+    if (gSaveBlock1Ptr->gabbyAndTyData.valB_1)
+    {
+        return 4;
+    }
+    return 0;
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
