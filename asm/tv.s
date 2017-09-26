@@ -5,52 +5,6 @@
 
 	.text
 
-	thumb_func_start ClearTVShowData
-ClearTVShowData: @ 80EBEE0
-	push {r4-r7,lr}
-	movs r3, 0
-	ldr r6, =gSaveBlock1Ptr
-	movs r5, 0
-	ldr r7, =0x000027ce
-_080EBEEA:
-	ldr r0, [r6]
-	lsls r1, r3, 3
-	adds r1, r3
-	lsls r1, 2
-	adds r0, r1
-	ldr r2, =0x000027cc
-	adds r0, r2
-	strb r5, [r0]
-	ldr r0, [r6]
-	adds r0, r1
-	adds r2, 0x1
-	adds r0, r2
-	strb r5, [r0]
-	movs r2, 0
-	adds r4, r3, 0x1
-	adds r3, r1, 0
-_080EBF0A:
-	ldr r0, [r6]
-	adds r1, r2, r3
-	adds r0, r7
-	adds r0, r1
-	strb r5, [r0]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x21
-	bls _080EBF0A
-	lsls r0, r4, 24
-	lsrs r3, r0, 24
-	cmp r3, 0x18
-	bls _080EBEEA
-	bl sub_80EEE5C
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ClearTVShowData
-
 	thumb_func_start special_0x44
 special_0x44: @ 80EBF3C
 	push {r4-r7,lr}

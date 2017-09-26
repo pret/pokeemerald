@@ -152,6 +152,7 @@ SECTIONS {
         asm/contest_effect.o(.text);
         asm/record_mixing.o(.text);
         asm/secret_base.o(.text);
+        src/tv.o(.text);
         asm/tv.o(.text);
         asm/contest_link_80F57C4.o(.text);
         asm/script_pokemon_util_80F87D8.o(.text);
