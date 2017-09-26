@@ -214,7 +214,7 @@ void ResetGabbyAndTy(void)
     gSaveBlock1Ptr->gabbyAndTyData.not_total_victory = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valA_2 = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valA_3 = FALSE;
-    gSaveBlock1Ptr->gabbyAndTyData.valA_4 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.onAir = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valA_5 = 0;
     gSaveBlock1Ptr->gabbyAndTyData.valB_0 = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valB_1 = FALSE;
@@ -281,9 +281,28 @@ void GabbyAndTyAfterInterview(void)
     gSaveBlock1Ptr->gabbyAndTyData.valB_1 = gSaveBlock1Ptr->gabbyAndTyData.not_total_victory;
     gSaveBlock1Ptr->gabbyAndTyData.valB_2 = gSaveBlock1Ptr->gabbyAndTyData.valA_2;
     gSaveBlock1Ptr->gabbyAndTyData.valB_3 = gSaveBlock1Ptr->gabbyAndTyData.valA_3;
-    gSaveBlock1Ptr->gabbyAndTyData.valA_4 = TRUE;
+    gSaveBlock1Ptr->gabbyAndTyData.onAir = TRUE;
     gSaveBlock1Ptr->gabbyAndTyData.mapnum = gMapHeader.regionMapSectionId;
     IncrementGameStat(GAME_STAT_GOT_INTERVIEWED);
+}
+
+void TakeTVShowInSearchOfTrainersOffTheAir(void)
+{
+    gSaveBlock1Ptr->gabbyAndTyData.onAir = FALSE;
+}
+
+u8 GabbyAndTyGetBattleNum(void)
+{
+    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum > 5)
+    {
+        return (gSaveBlock1Ptr->gabbyAndTyData.battleNum % 3) + 6;
+    }
+    return gSaveBlock1Ptr->gabbyAndTyData.battleNum;
+}
+
+bool8 IsTVShowInSearchOfTrainersAiring(void)
+{
+    return gSaveBlock1Ptr->gabbyAndTyData.onAir;
 }
 
 asm(".section .text.dotvshow");

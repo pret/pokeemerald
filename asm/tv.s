@@ -5,56 +5,6 @@
 
 	.text
 
-	thumb_func_start TakeTVShowInSearchOfTrainersOffTheAir
-TakeTVShowInSearchOfTrainersOffTheAir: @ 80EC4E8
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r0, =0x00002bae
-	adds r1, r0
-	ldrb r2, [r1]
-	movs r0, 0x11
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end TakeTVShowInSearchOfTrainersOffTheAir
-
-	thumb_func_start GabbyAndTyGetBattleNum
-GabbyAndTyGetBattleNum: @ 80EC504
-	push {lr}
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r2, =0x00002bad
-	adds r1, r0, r2
-	ldrb r0, [r1]
-	cmp r0, 0x5
-	bls _080EC522
-	ldrb r0, [r1]
-	movs r1, 0x3
-	bl __umodsi3
-	adds r0, 0x6
-	lsls r0, 24
-	lsrs r0, 24
-_080EC522:
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end GabbyAndTyGetBattleNum
-
-	thumb_func_start IsTVShowInSearchOfTrainersAiring
-IsTVShowInSearchOfTrainersAiring: @ 80EC530
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00002bae
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 27
-	lsrs r0, 31
-	bx lr
-	.pool
-	thumb_func_end IsTVShowInSearchOfTrainersAiring
-
 	thumb_func_start GabbyAndTyGetLastQuote
 GabbyAndTyGetLastQuote: @ 80EC548
 	push {r4,r5,lr}
