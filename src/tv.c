@@ -28,6 +28,11 @@ u8 sub_80EFFE0(u8);
 void CopyContestCategoryToStringVar(u8, u8);
 void CopyContestRankToStringVar(u8, u8);
 void TV_ConvertNumberToOrdinal(u8, u32);
+u8 sub_80EC18C(void);
+u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
+void SetTVMetatilesOnMap(int, int, u8);
+bool8 sub_80EEF20(void);
+bool8 IsTVShowInSearchOfTrainersAiring(void);
 
 // .rodata
 
@@ -93,6 +98,46 @@ u8 special_0x44(void)
         }
     } while (j != selIdx);
     return 0xFF;
+}
+
+u8 sub_80EBFF4(void)
+{
+    u8 response;
+
+    response = special_0x44();
+    if (response == 0xFF)
+    {
+        return 0xFF;
+    }
+    if (gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE && gSaveBlock1Ptr->tvShows[response].common.kind == TVSHOW_MASS_OUTBREAK)
+    {
+        return sub_80EC18C();
+    }
+    return response;
+}
+
+void UpdateTVScreensOnMap(int width, int height)
+{
+    FlagSet(SYS_TV_WATCH);
+    switch (CheckForBigMovieOrEmergencyNewsOnTV())
+    {
+        case 1:
+            SetTVMetatilesOnMap(width, height, 0x3);
+            break;
+        case 2:
+            break;
+        default:
+            if (gSaveBlock1Ptr->location.mapGroup == 0x0d && gSaveBlock1Ptr->location.mapNum == 0x00)
+            {
+                SetTVMetatilesOnMap(width, height, 0x3);
+            }
+            else if (FlagGet(SYS_TV_START) && (sub_80EBFF4() != 0xff || sub_80EEF20() != 0xff || IsTVShowInSearchOfTrainersAiring()))
+            {
+                FlagReset(SYS_TV_WATCH);
+                SetTVMetatilesOnMap(width, height, 0x3);
+            }
+            break;
+    }
 }
 
 asm(".section .text.dotvshow");
