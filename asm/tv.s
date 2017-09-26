@@ -5,39 +5,6 @@
 
 	.text
 
-	thumb_func_start special_0x4a
-special_0x4a: @ 80EC1D4
-	push {lr}
-	ldr r3, =gSaveBlock1Ptr
-	ldr r2, =gSpecialVar_0x8004
-	ldrh r1, [r2]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =0x000027cc
-	adds r0, r1
-	ldr r3, [r3]
-	adds r0, r3, r0
-	ldrb r0, [r0]
-	cmp r0, 0x29
-	bne _080EC214
-	ldr r1, =0x00002b90
-	adds r0, r3, r1
-	ldrh r0, [r0]
-	cmp r0, 0
-	beq _080EC214
-	bl sub_80EC18C
-	lsls r0, 24
-	lsrs r0, 24
-	b _080EC216
-	.pool
-_080EC214:
-	ldrb r0, [r2]
-_080EC216:
-	pop {r1}
-	bx r1
-	thumb_func_end special_0x4a
-
 	thumb_func_start ResetGabbyAndTy
 ResetGabbyAndTy: @ 80EC21C
 	push {r4-r6,lr}

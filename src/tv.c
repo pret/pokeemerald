@@ -190,6 +190,18 @@ u8 sub_80EC18C(void)
     return 0xFF;
 }
 
+u8 special_0x4a(void)
+{
+    TVShow *tvShow;
+
+    tvShow = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    if (tvShow->common.kind == TVSHOW_MASS_OUTBREAK && gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE)
+    {
+        return sub_80EC18C();
+    }
+    return gSpecialVar_0x8004;
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
