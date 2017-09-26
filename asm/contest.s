@@ -5360,7 +5360,7 @@ _080DA600:
 	lsls r0, 2
 	adds r0, r2
 	ldrh r0, [r0, 0x8]
-	bl sub_80ED03C
+	bl BravoTrainerPokemonProfile_BeforeInterview1
 	b _080DA668
 	.pool
 _080DA65C:

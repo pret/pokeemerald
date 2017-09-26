@@ -43,13 +43,14 @@ u8 FindAnyTVNewsOnTheAir(void);
 static bool8 IsTVShowInSearchOfTrainersAiring(void);
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
-bool8 sub_80EFB38(u16);
-s8 sub_80EFB08(TVShow *);
+bool8 TV_BernoulliTrial(u16);
+s8 FindEmptyTVSlotBeyondFirstFiveShowsOfArray(TVShow *);
 bool8 sub_80EF46C(u8, u8);
 void tv_store_id_3x(TVShow *);
-void sub_80EF910(TVShow *, u8);
-s8 sub_80EFADC(TVShow *);
-void sub_80EF550(u8);
+void DeleteTVShowInArrayByIdx(TVShow *, u8);
+s8 FindEmptyTVSlotWithinFirstFiveShowsOfArray(TVShow *);
+void FindActiveBroadcastByShowType_SetScriptResult(u8);
+void sub_80EF7B4(void);
 
 // .rodata
 
@@ -449,9 +450,9 @@ void PutPokemonTodayCaughtOnAir(void)
     else
     {
         UpdateWorldOfMastersAndPutItOnTheAir();
-        if (!sub_80EFB38(-1) && StringCompare(gSpeciesNames[gBattleResults.caughtPoke], gBattleResults.caughtNick))
+        if (!TV_BernoulliTrial(-1) && StringCompare(gSpeciesNames[gBattleResults.caughtPoke], gBattleResults.caughtNick))
         {
-            sCurTVShowSlot = sub_80EFB08(gSaveBlock1Ptr->tvShows);
+            sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
             if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_POKEMON_TODAY_CAUGHT, 0) != TRUE)
             {
                 for (i = 0; i < 11; i ++)
@@ -504,7 +505,7 @@ static void UpdateWorldOfMastersAndPutItOnTheAir(void)
     show = &gSaveBlock1Ptr->tvShows[24];
     if (show->worldOfMasters.kind != TVSHOW_WORLD_OF_MASTERS)
     {
-        sub_80EF910(gSaveBlock1Ptr->tvShows, 24);
+        DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, 24);
         show->worldOfMasters.steps = GetGameStat(GAME_STAT_STEPS);
         show->worldOfMasters.kind = TVSHOW_WORLD_OF_MASTERS;
     }
@@ -520,7 +521,7 @@ static void PutPokemonTodayFailedOnTheAir(void)
     u8 i;
     TVShow *show;
 
-    if (!sub_80EFB38(-1))
+    if (!TV_BernoulliTrial(-1))
     {
         for (i = 0, ct = 0; i < 11; i ++)
         {
@@ -532,7 +533,7 @@ static void PutPokemonTodayFailedOnTheAir(void)
         }
         if (ct > 2 && (gBattleOutcome == 6 || gBattleOutcome == 1))
         {
-            sCurTVShowSlot = sub_80EFB08(gSaveBlock1Ptr->tvShows);
+            sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
             if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_POKEMON_TODAY_FAILED, 0) != TRUE)
             {
                 show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
@@ -599,7 +600,7 @@ static void InterviewAfter_ContestLiveUpdates(void)
         tv_store_id_2x(show2);
         show2->contestLiveUpdates.language = gGameLanguage;
         show2->contestLiveUpdates.unk_1e = show->contestLiveUpdates.unk_1e;
-        sub_80EF910(gSaveBlock1Ptr->tvShows, 24);
+        DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, 24);
     }
 }
 
@@ -608,10 +609,10 @@ void PutBattleUpdateOnTheAir(u8 a0, u16 a1, u16 a2, u16 a3)
     TVShow *show;
     u8 name[32];
 
-    sCurTVShowSlot = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
-        sub_80EF550(TVSHOW_BATTLE_UPDATE);
+        FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_BATTLE_UPDATE);
         if (gScriptResult != 1)
         {
             show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
@@ -655,12 +656,12 @@ bool8 Put3CheersForPokeblocksOnTheAir(const u8 *a0, u8 a1, u8 a2, u8 a3, u8 lang
     TVShow *show;
     u8 name[32];
 
-    sCurTVShowSlot = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot == -1)
     {
         return FALSE;
     }
-    sub_80EF550(TVSHOW_3_CHEERS_FOR_POKEBLOCKS);
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_3_CHEERS_FOR_POKEBLOCKS);
     if (gScriptResult == 1)
     {
         return FALSE;
@@ -721,8 +722,8 @@ void ContestLiveUpdates_BeforeInterview_1(u8 a0)
 {
     TVShow *show;
 
-    sub_80EF910(gSaveBlock1Ptr->tvShows, 24);
-    sCurTVShowSlot = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, 24);
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
         show = &gSaveBlock1Ptr->tvShows[24];
@@ -736,7 +737,7 @@ void ContestLiveUpdates_BeforeInterview_2(u8 a0)
     TVShow *show;
 
     show = &gSaveBlock1Ptr->tvShows[24];
-    sCurTVShowSlot = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
         show->contestLiveUpdates.unk_0e = a0;
@@ -748,7 +749,7 @@ void ContestLiveUpdates_BeforeInterview_3(u8 a0)
     TVShow *show;
 
     show = &gSaveBlock1Ptr->tvShows[24];
-    sCurTVShowSlot = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
         show->contestLiveUpdates.unk_0f = a0;
@@ -760,7 +761,7 @@ void ContestLiveUpdates_BeforeInterview_4(u16 a0)
     TVShow *show;
 
     show = &gSaveBlock1Ptr->tvShows[24];
-    sCurTVShowSlot = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
         show->contestLiveUpdates.unk_10 = a0;
@@ -772,7 +773,7 @@ void ContestLiveUpdates_BeforeInterview_5(u8 a0, u8 a1)
     TVShow *show;
 
     show = &gSaveBlock1Ptr->tvShows[24];
-    sCurTVShowSlot = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
         show->contestLiveUpdates.unk_02 = gUnknown_02039E00[a1].unk_00;
@@ -823,7 +824,22 @@ static void InterviewAfter_BravoTrainerPokemonProfile(void)
         {
             show2->bravoTrainer.pokemonNameLanguage = show->bravoTrainer.pokemonNameLanguage;
         }
-        sub_80EF910(gSaveBlock1Ptr->tvShows, 24);
+        DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, 24);
+    }
+}
+
+void BravoTrainerPokemonProfile_BeforeInterview1(u16 a0)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[24];
+    sub_80EF7B4();
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1)
+    {
+        DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, 24);
+        show->bravoTrainer.move = a0;
+        show->bravoTrainer.kind = TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE;
     }
 }
 

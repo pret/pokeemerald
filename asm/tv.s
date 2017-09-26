@@ -5,43 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80ED03C
-sub_80ED03C: @ 80ED03C
-	push {r4-r6,lr}
-	lsls r0, 16
-	lsrs r6, r0, 16
-	ldr r4, =gSaveBlock1Ptr
-	ldr r0, [r4]
-	ldr r1, =0x00002b2c
-	adds r5, r0, r1
-	bl sub_80EF7B4
-	ldr r0, [r4]
-	ldr r1, =0x000027cc
-	adds r0, r1
-	bl sub_80EFADC
-	ldr r1, =sCurTVShowSlot
-	strb r0, [r1]
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _080ED07A
-	ldr r0, [r4]
-	ldr r1, =0x000027cc
-	adds r0, r1
-	movs r1, 0x18
-	bl sub_80EF910
-	strh r6, [r5, 0x14]
-	movs r0, 0x6
-	strb r0, [r5]
-_080ED07A:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80ED03C
-
 	thumb_func_start sub_80ED090
 sub_80ED090: @ 80ED090
 	push {r4-r7,lr}
@@ -55,7 +18,7 @@ sub_80ED090: @ 80ED090
 	adds r7, r4, r0
 	ldr r1, =0x000027cc
 	adds r0, r4, r1
-	bl sub_80EFADC
+	bl FindEmptyTVSlotWithinFirstFiveShowsOfArray
 	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
@@ -231,7 +194,7 @@ SaveRecordedItemPurchasesForTVShow: @ 80ED238
 	cmp r1, r0
 	beq _080ED2F2
 	ldr r0, =0x00005555
-	bl sub_80EFB38
+	bl TV_BernoulliTrial
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -239,7 +202,7 @@ SaveRecordedItemPurchasesForTVShow: @ 80ED238
 	ldr r0, [r5]
 	ldr r7, =0x000027cc
 	adds r0, r7
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r6, =sCurTVShowSlot
 	strb r0, [r6]
 	lsls r0, 24
@@ -769,7 +732,7 @@ _080ED72E:
 	cmp r1, 0x17
 	bls _080ED72E
 	ldr r0, =0x00000147
-	bl sub_80EFB38
+	bl TV_BernoulliTrial
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -778,7 +741,7 @@ _080ED72E:
 	ldr r0, [r6]
 	ldr r1, =0x000027cc
 	adds r0, r1
-	bl sub_80EFADC
+	bl FindEmptyTVSlotWithinFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -1060,7 +1023,7 @@ sub_80ED9A8: @ 80ED9A8
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -1141,7 +1104,7 @@ _080EDA62:
 	ldr r1, =0x000027cc
 	adds r0, r1
 	movs r1, 0x18
-	bl sub_80EF910
+	bl DeleteTVShowInArrayByIdx
 _080EDA6E:
 	pop {r4}
 	pop {r0}
@@ -1159,7 +1122,7 @@ sub_80EDA80: @ 80EDA80
 	ldr r1, =0x00002b2c
 	adds r5, r0, r1
 	ldr r0, =0x0000ffff
-	bl sub_80EFB38
+	bl TV_BernoulliTrial
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0
@@ -1168,7 +1131,7 @@ sub_80EDA80: @ 80EDA80
 	ldr r1, =0x000027cc
 	mov r8, r1
 	add r0, r8
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -1221,7 +1184,7 @@ sub_80EDA80: @ 80EDA80
 	ldr r0, [r7]
 	add r0, r8
 	movs r1, 0x18
-	bl sub_80EF910
+	bl DeleteTVShowInArrayByIdx
 _080EDB1C:
 	pop {r3}
 	mov r8, r3
@@ -1241,7 +1204,7 @@ sub_80EDB44: @ 80EDB44
 	ldr r0, [r4]
 	ldr r1, =0x000027cc
 	adds r0, r1
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r2, =sCurTVShowSlot
 	strb r0, [r2]
 	lsls r0, 24
@@ -1361,7 +1324,7 @@ sub_80EDC60: @ 80EDC60
 	ldr r0, [r7]
 	ldr r6, =0x000027cc
 	adds r0, r6
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -1420,7 +1383,7 @@ sub_80EDCE8: @ 80EDCE8
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -1482,7 +1445,7 @@ sub_80EDD78: @ 80EDD78
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r0, r1
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
@@ -1925,7 +1888,7 @@ sub_80EE104: @ 80EE104
 	ldr r0, [r4]
 	ldr r1, =0x000027cc
 	adds r0, r1
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r2, =sCurTVShowSlot
 	strb r0, [r2]
 	lsls r0, 24
@@ -1975,7 +1938,7 @@ sub_80EE184: @ 80EE184
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -2130,7 +2093,7 @@ sub_80EE2CC: @ 80EE2CC
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -2209,7 +2172,7 @@ sub_80EE35C: @ 80EE35C
 	ldr r0, [r0]
 	ldr r5, =0x000027cc
 	adds r0, r5
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -2310,7 +2273,7 @@ sub_80EE44C: @ 80EE44C
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -2373,7 +2336,7 @@ sub_80EE4DC: @ 80EE4DC
 	ldr r0, [r7]
 	ldr r5, =0x000027cc
 	adds r0, r5
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -2661,7 +2624,7 @@ sub_80EE72C: @ 80EE72C
 	ldr r0, [r5]
 	ldr r6, =0x000027cc
 	adds r0, r6
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
@@ -2722,7 +2685,7 @@ sub_80EE7C0: @ 80EE7C0
 	ldr r0, [r4]
 	ldr r1, =0x000027cc
 	adds r0, r1
-	bl sub_80EFADC
+	bl FindEmptyTVSlotWithinFirstFiveShowsOfArray
 	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
@@ -2732,7 +2695,7 @@ sub_80EE7C0: @ 80EE7C0
 	cmp r0, r1
 	beq _080EE810
 	movs r0, 0xB
-	bl sub_80EF550
+	bl FindActiveBroadcastByShowType_SetScriptResult
 	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x1
@@ -2805,7 +2768,7 @@ _080EE870:
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r0, r1
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
@@ -2823,7 +2786,7 @@ _080EE89C:
 	ldr r4, =0x000027cc
 	adds r0, r4
 	adds r1, r6, 0
-	bl sub_80EF910
+	bl DeleteTVShowInArrayByIdx
 	ldr r0, [r5]
 	adds r0, r4
 	bl sub_80EF93C
@@ -2851,7 +2814,7 @@ sub_80EE8C8: @ 80EE8C8
 	ldr r0, [r5]
 	ldr r1, =0x000027cc
 	adds r0, r1
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r2, =sCurTVShowSlot
 	strb r0, [r2]
 	lsls r0, 24
@@ -3035,7 +2998,7 @@ _080EEA86:
 	ldr r0, [r7]
 	ldr r1, =0x000027cc
 	adds r0, r1
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r2, =sCurTVShowSlot
 	strb r0, [r2]
 	lsls r0, 24
@@ -3195,7 +3158,7 @@ sub_80EEBF4: @ 80EEBF4
 	ldr r0, [r4]
 	ldr r1, =0x000027cc
 	adds r0, r1
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r2, =sCurTVShowSlot
 	strb r0, [r2]
 	lsls r0, 24
@@ -3394,7 +3357,7 @@ sub_80EED88: @ 80EED88
 	cmp r0, r1
 	beq _080EEE0C
 	ldr r0, =0x0000028f
-	bl sub_80EFB38
+	bl TV_BernoulliTrial
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4262,7 +4225,7 @@ _080EF494:
 	ldr r0, [r5]
 	adds r0, r4
 	adds r1, r6, 0
-	bl sub_80EF910
+	bl DeleteTVShowInArrayByIdx
 	ldr r0, [r5]
 	adds r0, r4
 	bl sub_80EF93C
@@ -4333,8 +4296,8 @@ _080EF53C:
 	.pool
 	thumb_func_end sub_80EF500
 
-	thumb_func_start sub_80EF550
-sub_80EF550: @ 80EF550
+	thumb_func_start FindActiveBroadcastByShowType_SetScriptResult
+FindActiveBroadcastByShowType_SetScriptResult: @ 80EF550
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -4362,7 +4325,7 @@ _080EF55C:
 	.pool
 _080EF590:
 	adds r0, r3, r4
-	bl sub_80EF910
+	bl DeleteTVShowInArrayByIdx
 	ldr r0, [r5]
 	adds r0, r4
 	bl sub_80EF93C
@@ -4379,7 +4342,7 @@ _080EF5B2:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EF550
+	thumb_func_end FindActiveBroadcastByShowType_SetScriptResult
 
 	thumb_func_start InterviewBefore
 InterviewBefore: @ 80EF5B8
@@ -4449,7 +4412,7 @@ _080EF646:
 sub_80EF64C: @ 80EF64C
 	push {r4,lr}
 	movs r0, 0x1
-	bl sub_80EF550
+	bl FindActiveBroadcastByShowType_SetScriptResult
 	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
@@ -4495,7 +4458,7 @@ _080EF6A0:
 sub_80EF6C4: @ 80EF6C4
 	push {lr}
 	movs r0, 0x2
-	bl sub_80EF550
+	bl FindActiveBroadcastByShowType_SetScriptResult
 	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
@@ -4523,7 +4486,7 @@ _080EF6F0:
 sub_80EF704: @ 80EF704
 	push {r4-r6,lr}
 	movs r0, 0x3
-	bl sub_80EF550
+	bl FindActiveBroadcastByShowType_SetScriptResult
 	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
@@ -4589,7 +4552,7 @@ sub_80EF79C: @ 80EF79C
 sub_80EF7A8: @ 80EF7A8
 	push {lr}
 	movs r0, 0x5
-	bl sub_80EF550
+	bl FindActiveBroadcastByShowType_SetScriptResult
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EF7A8
@@ -4598,7 +4561,7 @@ sub_80EF7A8: @ 80EF7A8
 sub_80EF7B4: @ 80EF7B4
 	push {lr}
 	movs r0, 0x6
-	bl sub_80EF550
+	bl FindActiveBroadcastByShowType_SetScriptResult
 	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
@@ -4626,7 +4589,7 @@ _080EF7E0:
 sub_80EF7F4: @ 80EF7F4
 	push {lr}
 	movs r0, 0x8
-	bl sub_80EF550
+	bl FindActiveBroadcastByShowType_SetScriptResult
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EF7F4
@@ -4635,7 +4598,7 @@ sub_80EF7F4: @ 80EF7F4
 sub_80EF800: @ 80EF800
 	push {lr}
 	movs r0, 0x9
-	bl sub_80EF550
+	bl FindActiveBroadcastByShowType_SetScriptResult
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80EF800
@@ -4644,7 +4607,7 @@ sub_80EF800: @ 80EF800
 sub_80EF80C: @ 80EF80C
 	push {lr}
 	movs r0, 0x7
-	bl sub_80EF550
+	bl FindActiveBroadcastByShowType_SetScriptResult
 	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
@@ -4672,7 +4635,7 @@ _080EF838:
 sub_80EF84C: @ 80EF84C
 	push {lr}
 	movs r0, 0xB
-	bl sub_80EF550
+	bl FindActiveBroadcastByShowType_SetScriptResult
 	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
@@ -4758,8 +4721,8 @@ sub_80EF8F8: @ 80EF8F8
 	bx r1
 	thumb_func_end sub_80EF8F8
 
-	thumb_func_start sub_80EF910
-sub_80EF910: @ 80EF910
+	thumb_func_start DeleteTVShowInArrayByIdx
+DeleteTVShowInArrayByIdx: @ 80EF910
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -4783,7 +4746,7 @@ _080EF92A:
 	bls _080EF92A
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EF910
+	thumb_func_end DeleteTVShowInArrayByIdx
 
 	thumb_func_start sub_80EF93C
 sub_80EF93C: @ 80EF93C
@@ -4818,7 +4781,7 @@ _080EF954:
 	stm r1!, {r3,r6,r7}
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_80EF910
+	bl DeleteTVShowInArrayByIdx
 	b _080EF986
 _080EF97C:
 	adds r0, r2, 0x1
@@ -4863,7 +4826,7 @@ _080EF9A6:
 	stm r1!, {r3,r6,r7}
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl sub_80EF910
+	bl DeleteTVShowInArrayByIdx
 	b _080EF9D8
 _080EF9CE:
 	adds r0, r2, 0x1
@@ -4969,7 +4932,7 @@ sub_80EFA88: @ 80EFA88
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r0, r1
-	bl sub_80EFADC
+	bl FindEmptyTVSlotWithinFirstFiveShowsOfArray
 	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	ldr r2, =gSpecialVar_0x8006
@@ -4997,8 +4960,8 @@ _080EFAD0:
 	.pool
 	thumb_func_end sub_80EFA88
 
-	thumb_func_start sub_80EFADC
-sub_80EFADC: @ 80EFADC
+	thumb_func_start FindEmptyTVSlotWithinFirstFiveShowsOfArray
+FindEmptyTVSlotWithinFirstFiveShowsOfArray: @ 80EFADC
 	push {lr}
 	adds r2, r0, 0
 	movs r1, 0
@@ -5024,10 +4987,10 @@ _080EFAF6:
 _080EFB04:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80EFADC
+	thumb_func_end FindEmptyTVSlotWithinFirstFiveShowsOfArray
 
-	thumb_func_start sub_80EFB08
-sub_80EFB08: @ 80EFB08
+	thumb_func_start FindEmptyTVSlotBeyondFirstFiveShowsOfArray
+FindEmptyTVSlotBeyondFirstFiveShowsOfArray: @ 80EFB08
 	push {lr}
 	adds r2, r0, 0
 	movs r1, 0x5
@@ -5055,10 +5018,10 @@ _080EFB24:
 _080EFB34:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80EFB08
+	thumb_func_end FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 
-	thumb_func_start sub_80EFB38
-sub_80EFB38: @ 80EFB38
+	thumb_func_start TV_BernoulliTrial
+TV_BernoulliTrial: @ 80EFB38
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -5076,7 +5039,7 @@ _080EFB52:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80EFB38
+	thumb_func_end TV_BernoulliTrial
 
 	thumb_func_start sub_80EFB58
 sub_80EFB58: @ 80EFB58
@@ -6134,7 +6097,7 @@ _080F03F4:
 	add r0, sp
 	ldr r0, [r0]
 	ldr r0, [r0]
-	bl sub_80EFB08
+	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
 	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
@@ -6182,7 +6145,7 @@ _080F0456:
 	ldr r0, [r0]
 	ldr r1, =gUnknown_03001176
 	ldrb r1, [r1]
-	bl sub_80EF910
+	bl DeleteTVShowInArrayByIdx
 _080F0470:
 	mov r1, r9
 	lsls r0, r1, 24
@@ -6307,7 +6270,7 @@ _080F0568:
 	ldr r0, =gUnknown_03001176
 	ldrb r1, [r0]
 	adds r0, r6, 0
-	bl sub_80EF910
+	bl DeleteTVShowInArrayByIdx
 	movs r0, 0x1
 _080F0574:
 	add sp, 0x4
@@ -7151,7 +7114,7 @@ _080F0C4A:
 	lsls r2, 19
 	adds r1, r2
 	lsrs r1, 24
-	bl sub_80EF910
+	bl DeleteTVShowInArrayByIdx
 	adds r4, 0x1
 	lsls r4, 24
 	lsrs r2, r4, 24
