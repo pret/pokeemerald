@@ -5,104 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80ECF5C
-sub_80ECF5C: @ 80ECF5C
-	push {r4-r7,lr}
-	ldr r0, =gSaveBlock1Ptr
-	ldr r6, [r0]
-	ldr r0, =0x00002b2c
-	adds r5, r6, r0
-	ldrb r2, [r5]
-	cmp r2, 0x6
-	bne _080ED02C
-	ldr r0, =gUnknown_030060BC
-	movs r1, 0
-	ldrsb r1, [r0, r1]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =0x000027cc
-	adds r0, r1
-	adds r4, r6, r0
-	strb r2, [r4]
-	movs r7, 0x1
-	strb r7, [r4, 0x1]
-	ldrh r0, [r5, 0x2]
-	strh r0, [r4, 0x2]
-	adds r0, r4, 0
-	adds r0, 0x16
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	bl StringCopy
-	adds r0, r4, 0
-	adds r0, 0x8
-	ldr r2, =0x00002b34
-	adds r1, r6, r2
-	bl StringCopy
-	ldrb r0, [r5, 0x13]
-	lsls r0, 29
-	lsrs r0, 29
-	ldrb r2, [r4, 0x13]
-	movs r3, 0x8
-	negs r3, r3
-	adds r1, r3, 0
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r4, 0x13]
-	ldrb r2, [r5, 0x13]
-	movs r0, 0x18
-	ands r0, r2
-	movs r2, 0x19
-	negs r2, r2
-	ands r2, r1
-	orrs r2, r0
-	strb r2, [r4, 0x13]
-	ldrh r0, [r5, 0x14]
-	strh r0, [r4, 0x14]
-	ldrb r0, [r5, 0x13]
-	movs r1, 0x60
-	ands r1, r0
-	movs r0, 0x61
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r4, 0x13]
-	ldrb r1, [r5, 0x13]
-	lsls r1, 29
-	lsrs r1, 29
-	ands r0, r3
-	orrs r0, r1
-	strb r0, [r4, 0x13]
-	adds r0, r4, 0
-	bl tv_store_id_2x
-	ldr r0, =gGameLanguage
-	ldrb r0, [r0]
-	strb r0, [r4, 0x1E]
-	cmp r0, 0x1
-	beq _080ECFFA
-	ldrb r0, [r5, 0x1F]
-	cmp r0, 0x1
-	bne _080ED01C
-_080ECFFA:
-	strb r7, [r4, 0x1F]
-	b _080ED01E
-	.pool
-_080ED01C:
-	strb r0, [r4, 0x1F]
-_080ED01E:
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x000027cc
-	adds r0, r1
-	movs r1, 0x18
-	bl sub_80EF910
-_080ED02C:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80ECF5C
-
 	thumb_func_start sub_80ED03C
 sub_80ED03C: @ 80ED03C
 	push {r4-r6,lr}
@@ -117,7 +19,7 @@ sub_80ED03C: @ 80ED03C
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFADC
-	ldr r1, =gUnknown_030060BC
+	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
 	asrs r0, 24
@@ -154,7 +56,7 @@ sub_80ED090: @ 80ED090
 	ldr r1, =0x000027cc
 	adds r0, r4, r1
 	bl sub_80EFADC
-	ldr r1, =gUnknown_030060BC
+	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
 	asrs r0, 24
@@ -228,11 +130,11 @@ _080ED134:
 	.pool
 	thumb_func_end sub_80ED090
 
-	thumb_func_start sub_80ED164
-sub_80ED164: @ 80ED164
+	thumb_func_start InterviewAfter_BravoTrainerBattleTowerProfile
+InterviewAfter_BravoTrainerBattleTowerProfile: @ 80ED164
 	push {r4-r6,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -313,7 +215,7 @@ _080ED21E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80ED164
+	thumb_func_end InterviewAfter_BravoTrainerBattleTowerProfile
 
 	thumb_func_start SaveRecordedItemPurchasesForTVShow
 @ void SaveRecordedItemPurchasesForTVShow()
@@ -338,7 +240,7 @@ SaveRecordedItemPurchasesForTVShow: @ 80ED238
 	ldr r7, =0x000027cc
 	adds r0, r7
 	bl sub_80EFB08
-	ldr r6, =gUnknown_030060BC
+	ldr r6, =sCurTVShowSlot
 	strb r0, [r6]
 	lsls r0, 24
 	asrs r0, 24
@@ -449,7 +351,7 @@ sub_80ED320: @ 80ED320
 	cmp r0, 0x1
 	bls _080ED400
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -608,7 +510,7 @@ sub_80ED4DC: @ 80ED4DC
 	cmp r0, 0x1
 	beq _080ED532
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -645,11 +547,11 @@ _080ED532:
 	.pool
 	thumb_func_end sub_80ED4DC
 
-	thumb_func_start sub_80ED548
-sub_80ED548: @ 80ED548
+	thumb_func_start InterviewAfter_FanClubLetter
+InterviewAfter_FanClubLetter: @ 80ED548
 	push {r4,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -687,13 +589,13 @@ sub_80ED548: @ 80ED548
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80ED548
+	thumb_func_end InterviewAfter_FanClubLetter
 
-	thumb_func_start sub_80ED5B8
-sub_80ED5B8: @ 80ED5B8
+	thumb_func_start InterviewAfter_RecentHappenings
+InterviewAfter_RecentHappenings: @ 80ED5B8
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -723,15 +625,15 @@ sub_80ED5B8: @ 80ED5B8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80ED5B8
+	thumb_func_end InterviewAfter_RecentHappenings
 
-	thumb_func_start sub_80ED610
-sub_80ED610: @ 80ED610
+	thumb_func_start InterviewAfter_PkmnFanClubOpinions
+InterviewAfter_PkmnFanClubOpinions: @ 80ED610
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -833,12 +735,12 @@ _080ED706:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80ED610
+	thumb_func_end InterviewAfter_PkmnFanClubOpinions
 
-	thumb_func_start TaskDummy5
-TaskDummy5: @ 80ED714
+	thumb_func_start InterviewAfter_DummyShow4
+InterviewAfter_DummyShow4: @ 80ED714
 	bx lr
-	thumb_func_end TaskDummy5
+	thumb_func_end InterviewAfter_DummyShow4
 
 	thumb_func_start sub_80ED718
 sub_80ED718: @ 80ED718
@@ -877,7 +779,7 @@ _080ED72E:
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFADC
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -1159,7 +1061,7 @@ sub_80ED9A8: @ 80ED9A8
 	ldr r5, =0x000027cc
 	adds r0, r5
 	bl sub_80EFB08
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -1267,7 +1169,7 @@ sub_80EDA80: @ 80EDA80
 	mov r8, r1
 	add r0, r8
 	bl sub_80EFB08
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -1340,7 +1242,7 @@ sub_80EDB44: @ 80EDB44
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFB08
-	ldr r2, =gUnknown_030060BC
+	ldr r2, =sCurTVShowSlot
 	strb r0, [r2]
 	lsls r0, 24
 	asrs r0, 24
@@ -1460,7 +1362,7 @@ sub_80EDC60: @ 80EDC60
 	ldr r6, =0x000027cc
 	adds r0, r6
 	bl sub_80EFB08
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -1519,7 +1421,7 @@ sub_80EDCE8: @ 80EDCE8
 	ldr r5, =0x000027cc
 	adds r0, r5
 	bl sub_80EFB08
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -1581,7 +1483,7 @@ sub_80EDD78: @ 80EDD78
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFB08
-	ldr r1, =gUnknown_030060BC
+	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
 	asrs r0, 24
@@ -1647,7 +1549,7 @@ _080EDE12:
 	lsls r0, 16
 	lsrs r3, r0, 16
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -2024,7 +1926,7 @@ sub_80EE104: @ 80EE104
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFB08
-	ldr r2, =gUnknown_030060BC
+	ldr r2, =sCurTVShowSlot
 	strb r0, [r2]
 	lsls r0, 24
 	asrs r0, 24
@@ -2074,7 +1976,7 @@ sub_80EE184: @ 80EE184
 	ldr r5, =0x000027cc
 	adds r0, r5
 	bl sub_80EFB08
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -2229,7 +2131,7 @@ sub_80EE2CC: @ 80EE2CC
 	ldr r5, =0x000027cc
 	adds r0, r5
 	bl sub_80EFB08
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -2308,7 +2210,7 @@ sub_80EE35C: @ 80EE35C
 	ldr r5, =0x000027cc
 	adds r0, r5
 	bl sub_80EFB08
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -2409,7 +2311,7 @@ sub_80EE44C: @ 80EE44C
 	ldr r5, =0x000027cc
 	adds r0, r5
 	bl sub_80EFB08
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -2472,7 +2374,7 @@ sub_80EE4DC: @ 80EE4DC
 	ldr r5, =0x000027cc
 	adds r0, r5
 	bl sub_80EFB08
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -2760,7 +2662,7 @@ sub_80EE72C: @ 80EE72C
 	ldr r6, =0x000027cc
 	adds r0, r6
 	bl sub_80EFB08
-	ldr r4, =gUnknown_030060BC
+	ldr r4, =sCurTVShowSlot
 	strb r0, [r4]
 	lsls r0, 24
 	asrs r0, 24
@@ -2821,7 +2723,7 @@ sub_80EE7C0: @ 80EE7C0
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFADC
-	ldr r1, =gUnknown_030060BC
+	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
 	asrs r0, 24
@@ -2904,7 +2806,7 @@ _080EE870:
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFB08
-	ldr r1, =gUnknown_030060BC
+	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
 	asrs r0, 24
@@ -2950,7 +2852,7 @@ sub_80EE8C8: @ 80EE8C8
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFB08
-	ldr r2, =gUnknown_030060BC
+	ldr r2, =sCurTVShowSlot
 	strb r0, [r2]
 	lsls r0, 24
 	asrs r0, 24
@@ -3134,7 +3036,7 @@ _080EEA86:
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFB08
-	ldr r2, =gUnknown_030060BC
+	ldr r2, =sCurTVShowSlot
 	strb r0, [r2]
 	lsls r0, 24
 	asrs r0, 24
@@ -3294,7 +3196,7 @@ sub_80EEBF4: @ 80EEBF4
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFB08
-	ldr r2, =gUnknown_030060BC
+	ldr r2, =sCurTVShowSlot
 	strb r0, [r2]
 	lsls r0, 24
 	asrs r0, 24
@@ -3483,7 +3385,7 @@ sub_80EED88: @ 80EED88
 	ldr r7, =0x00002b50
 	adds r0, r7
 	bl sub_80EEE30
-	ldr r5, =gUnknown_030060BC
+	ldr r5, =sCurTVShowSlot
 	strb r0, [r5]
 	lsls r0, 24
 	asrs r0, 24
@@ -4570,7 +4472,7 @@ sub_80EF64C: @ 80EF64C
 	adds r0, r4, 0
 	bl StringCopy
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -4599,7 +4501,7 @@ sub_80EF6C4: @ 80EF6C4
 	cmp r0, 0
 	bne _080EF6F0
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -4655,7 +4557,7 @@ sub_80EF704: @ 80EF704
 	adds r0, r4, 0
 	bl StringGetEnd10
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -4702,7 +4604,7 @@ sub_80EF7B4: @ 80EF7B4
 	cmp r0, 0
 	bne _080EF7E0
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -4748,7 +4650,7 @@ sub_80EF80C: @ 80EF80C
 	cmp r0, 0
 	bne _080EF838
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -4776,7 +4678,7 @@ sub_80EF84C: @ 80EF84C
 	cmp r0, 0
 	bne _080EF878
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -5068,7 +4970,7 @@ sub_80EFA88: @ 80EFA88
 	ldr r1, =0x000027cc
 	adds r0, r1
 	bl sub_80EFADC
-	ldr r1, =gUnknown_030060BC
+	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	ldr r2, =gSpecialVar_0x8006
 	ldrb r1, [r1]
@@ -6233,7 +6135,7 @@ _080F03F4:
 	ldr r0, [r0]
 	ldr r0, [r0]
 	bl sub_80EFB08
-	ldr r1, =gUnknown_030060BC
+	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
 	asrs r0, 24
@@ -6338,7 +6240,7 @@ _080F04DC:
 	beq _080F0534
 	b _080F055A
 _080F04E2:
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -6357,7 +6259,7 @@ _080F04E2:
 	b _080F0556
 	.pool
 _080F050C:
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -6376,7 +6278,7 @@ _080F050C:
 	b _080F0556
 	.pool
 _080F0534:
-	ldr r0, =gUnknown_030060BC
+	ldr r0, =sCurTVShowSlot
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	lsls r0, r1, 3
@@ -7436,7 +7338,7 @@ _080F0DD4:
 	ldr r0, [r0]
 	ldr r0, [r0]
 	bl sub_80EEE30
-	ldr r1, =gUnknown_030060BC
+	ldr r1, =sCurTVShowSlot
 	strb r0, [r1]
 	lsls r0, 24
 	asrs r0, 24
@@ -7499,7 +7401,7 @@ sub_80F0E58: @ 80F0E58
 	asrs r2, 24
 	lsls r2, 2
 	adds r1, r2
-	ldr r2, =gUnknown_030060BC
+	ldr r2, =sCurTVShowSlot
 	ldrb r2, [r2]
 	lsls r2, 24
 	asrs r2, 24

@@ -320,7 +320,7 @@ gUnknown_030060B4: @ 30060B4
 gUnknown_030060B8: @ 30060B8
 	.space 0x4
 
-gUnknown_030060BC: @ 30060BC
+sCurTVShowSlot: @ 30060BC
 	.space 0x4
 
 gUnknown_030060C0: @ 30060C0
