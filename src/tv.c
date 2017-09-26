@@ -339,6 +339,45 @@ u8 GabbyAndTyGetLastBattleTrivia(void)
     return 0;
 }
 
+void GabbyAndTySetScriptVarsToFieldObjectLocalIds(void)
+{
+    switch (GabbyAndTyGetBattleNum())
+    {
+        case 1:
+            gSpecialVar_0x8004 = 14;
+            gSpecialVar_0x8005 = 13;
+            break;
+        case 2:
+            gSpecialVar_0x8004 = 5;
+            gSpecialVar_0x8005 = 6;
+            break;
+        case 3:
+            gSpecialVar_0x8004 = 18;
+            gSpecialVar_0x8005 = 17;
+            break;
+        case 4:
+            gSpecialVar_0x8004 = 21;
+            gSpecialVar_0x8005 = 22;
+            break;
+        case 5:
+            gSpecialVar_0x8004 = 8;
+            gSpecialVar_0x8005 = 9;
+            break;
+        case 6:
+            gSpecialVar_0x8004 = 19;
+            gSpecialVar_0x8005 = 20;
+            break;
+        case 7:
+            gSpecialVar_0x8004 = 23;
+            gSpecialVar_0x8005 = 24;
+            break;
+        case 8:
+            gSpecialVar_0x8004 = 10;
+            gSpecialVar_0x8005 = 11;
+            break;
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
