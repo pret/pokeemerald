@@ -97,113 +97,41 @@ gUnknown_085E51C0:: @ 85E51C0
 
 	.align 2
 gUnknown_085E51F0:: @ 85E51F0
-	.2byte 0xd6ec @ tileTag
-	.2byte 0xd6ec @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6ec, 0xd6ec, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.2byte 0xd6ed @ tileTag
-	.2byte 0xd6ed @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6ed, 0xd6ed, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.2byte 0xd6ee @ tileTag
-	.2byte 0xd6ee @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6ee, 0xd6ee, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.2byte 0xd6ef @ tileTag
-	.2byte 0xd6ef @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6ef, 0xd6ef, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
 gUnknown_085E5250:: @ 85E5250
-	.2byte 0xd6f0 @ tileTag
-	.2byte 0xd6f0 @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6f0, 0xd6f0, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.2byte 0xd6f1 @ tileTag
-	.2byte 0xd6f1 @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6f1, 0xd6f1, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.2byte 0xd6f2 @ tileTag
-	.2byte 0xd6f2 @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6f2, 0xd6f2, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.2byte 0xd6f3 @ tileTag
-	.2byte 0xd6f3 @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6f3, 0xd6f3, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.2byte 0xd6f4 @ tileTag
-	.2byte 0xd6f4 @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6f4, 0xd6f4, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.2byte 0xd6f5 @ tileTag
-	.2byte 0xd6f5 @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6f5, 0xd6f5, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.2byte 0xd6f6 @ tileTag
-	.2byte 0xd6f6 @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6f6, 0xd6f6, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.2byte 0xd6f7 @ tileTag
-	.2byte 0xd6f7 @ paletteTag
-	.4byte gUnknown_08524904
-	.4byte gUnknown_085E519C
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte SpriteCallbackDummy
+	spr_template 0xd6f7, 0xd6f7, gUnknown_08524904, gUnknown_085E519C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
 gUnknown_085E5310:: @ 85E5310
@@ -212,13 +140,7 @@ gUnknown_085E5310:: @ 85E5310
 	.2byte 0x0100, 0x0503, 0x0506, 0x0004
 
 	.align 2
-	.2byte 0x281d @ tileTag
-	.2byte 0x281d @ paletteTag
-	.4byte gUnknown_0852490C
-	.4byte gDummySpriteAnimTable
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte sub_817330C
+	spr_template 0x281d, 0x281d, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_817330C
 
 	.align 2
 gUnknown_085E5350:: @ 8535350
@@ -229,11 +151,5 @@ gUnknown_085E5358:: @ 8535358
 	.4byte gUnknown_085E5350
 
 	.align 2
-	.2byte 0x274a @ tileTag
-	.2byte 0x274a @ paletteTag
-	.4byte gUnknown_08524914
-	.4byte gUnknown_085E5358
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte sub_817330C
+	spr_template 0x274a, 0x274a, gUnknown_08524914, gUnknown_085E5358, NULL, gDummySpriteAffineAnimTable, sub_817330C
 

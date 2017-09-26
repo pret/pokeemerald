@@ -129,8 +129,7 @@ static const u8 *const gUnknown_08618178[][3] = {
     },
 };
 
-extern const u8 gUnknown_089A6550[0xC0];
-extern const u8 gMultiBootProgram_BerryGlitchFix_Start[0x3b34];
+extern const u8 gMultiBootProgram_BerryGlitchFix_Start[0x3BF4];
 extern const u8 gMultiBootProgram_BerryGlitchFix_End[];
 
 // .text
@@ -174,7 +173,7 @@ static void berry_fix_main(void)
         case 3:
             if (berry_fix_text_update(1) == 1)
             {
-                berry_fix_mb_manager->mb.masterp = gUnknown_089A6550;
+                berry_fix_mb_manager->mb.masterp = gMultiBootProgram_BerryGlitchFix_Start;
                 berry_fix_mb_manager->mb.server_type = 0;
                 MultiBootInit(&berry_fix_mb_manager->mb);
                 berry_fix_mb_manager->unk2 = 0;
@@ -189,7 +188,7 @@ static void berry_fix_main(void)
             }
             else if (++ berry_fix_mb_manager->unk2 > 180)
             {
-                MultiBootStartMaster(&berry_fix_mb_manager->mb, gMultiBootProgram_BerryGlitchFix_Start, (u32)(gMultiBootProgram_BerryGlitchFix_End - gMultiBootProgram_BerryGlitchFix_Start), 4, 1);
+                MultiBootStartMaster(&berry_fix_mb_manager->mb, gMultiBootProgram_BerryGlitchFix_Start + ROM_HEADER_SIZE, (u32)(gMultiBootProgram_BerryGlitchFix_End - (gMultiBootProgram_BerryGlitchFix_Start + ROM_HEADER_SIZE)), 4, 1);
                 berry_fix_mb_manager->state = 5;
             }
             break;
