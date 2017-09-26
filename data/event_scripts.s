@@ -184,23 +184,23 @@ gUnknown_0827266F:: @ 827266F
 	.string "Which PC should be accessed?$"
 
 
-gUnknown_0827268c:: @ 827268C
+gUnknown_0827268C:: @ 827268C
 	.string "Accessed SOMEONE’S PC.$"
 
 
-gUnknown_082726a3:: @ 82726A3
+gUnknown_082726A3:: @ 82726A3
 	.string "POKéMON Storage System opened.$"
 
 
-gUnknown_082726c2:: @ 82726C2
+gUnknown_082726C2:: @ 82726C2
 	.string "Accessed {PLAYER}’s PC.$"
 
 
-gUnknown_082726d4:: @ 82726D4
+gUnknown_082726D4:: @ 82726D4
 	.string "Accessed LANETTE’s PC.$"
 
 
-gUnknown_082726eb:: @ 82726EB
+gUnknown_082726EB:: @ 82726EB
 	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to rest your POKéMON?$"
 
 
@@ -212,11 +212,11 @@ gUnknown_08272798:: @ 8272798
 	.string "Thank you for waiting.\pWe’ve restored your POKéMON\nto full health.$"
 
 
-gUnknown_082727db:: @ 82727DB
+gUnknown_082727DB:: @ 82727DB
 	.string "We hope to see you again!$"
 
 
-gUnknown_082727f5:: @ 82727F5
+gUnknown_082727F5:: @ 82727F5
 	.string "Hello, and welcome to\nthe POKéMON CENTER.\pWe restore your tired POKéMON\nto full health.\pWould you like to…$"
 
 
@@ -228,147 +228,147 @@ gUnknown_08272982:: @ 8272982
 	.string "I’m delighted to see you, {PLAYER}!\nYou want the usual, am I right?$"
 
 
-gUnknown_082729c0:: @ 82729C0
+gUnknown_082729C0:: @ 82729C0
 	.string "Okay, I’ll take your POKéMON\nfor a few seconds.$"
 
 
-gUnknown_082729f0:: @ 82729F0
+gUnknown_082729F0:: @ 82729F0
 	.string "Thank you for waiting.$"
 
 
-gUnknown_08272a07:: @ 8272A07
+gUnknown_08272A07:: @ 8272A07
 	.string "We hope to see you again!$"
 
 
-gUnknown_08272a21:: @ 8272A21
+gUnknown_08272A21:: @ 8272A21
 	.string "Welcome!\pHow may I serve you?$"
 
 
-gUnknown_08272a3f:: @ 8272A3F
+gUnknown_08272A3F:: @ 8272A3F
 	.string "Please come again!$"
 
 
-gUnknown_08272a52:: @ 8272A52
+gUnknown_08272A52:: @ 8272A52
 	.string "{PLAYER}{STRING 5}, welcome!\pWhat can I do for you?$"
 
 
-gUnknown_08272a78:: @ 8272A78
+gUnknown_08272A78:: @ 8272A78
 	.string "Obtained the {STR_VAR_2}!$"
 
 
-gUnknown_08272a89:: @ 8272A89
+gUnknown_08272A89:: @ 8272A89
 	.string "The BAG is full…$"
 
 
-gUnknown_08272a9a:: @ 8272A9A
+gUnknown_08272A9A:: @ 8272A9A
 	.string "{PLAYER} put away the {STR_VAR_2}\nin the {STR_VAR_3} POCKET.$"
 
 
-gUnknown_08272abf:: @ 8272ABF
+gUnknown_08272ABF:: @ 8272ABF
 	.string "{PLAYER} found one {STR_VAR_2}!$"
 
 
-gUnknown_08272ad0:: @ 8272AD0
+gUnknown_08272AD0:: @ 8272AD0
 	.string "Too bad!\nThe BAG is full…$"
 
 
-gUnknown_08272aea:: @ 8272AEA
+gUnknown_08272AEA:: @ 8272AEA
 	.string "{PLAYER} put away the {STR_VAR_2}\nin the BAG.$"
 
 
-gUnknown_08272b09:: @ 8272B09
+gUnknown_08272B09:: @ 8272B09
 	.string "Obtained the {STR_VAR_2}!$"
 
 
-gUnknown_08272b1a:: @ 8272B1A
+gUnknown_08272B1A:: @ 8272B1A
 	.string "Too bad! There’s no room left for\nanother {STR_VAR_2}…$"
 
 
-gUnknown_08272b48:: @ 8272B48
+gUnknown_08272B48:: @ 8272B48
 	.string "The {STR_VAR_2} was transferred\nto the PC.$"
 
 
-gUnknown_08272b6a:: @ 8272B6A
+gUnknown_08272B6A:: @ 8272B6A
 	.string "“Selected items for your convenience!”\nPOKéMON MART$"
 
 
-gUnknown_08272b9e:: @ 8272B9E
+gUnknown_08272B9E:: @ 8272B9E
 	.string "“Rejuvenate your tired partners!”\nPOKéMON CENTER$"
 
 
-gUnknown_08272bcf:: @ 8272BCF
+gUnknown_08272BCF:: @ 8272BCF
 	.string "{STR_VAR_1} might like this program.\n… … … … … … … … … … … … … … … …\pBetter get going!$"
 
 
-gUnknown_08272c1d:: @ 8272C1D
+gUnknown_08272C1D:: @ 8272C1D
 	.string "Welcome to LILYCOVE DEPARTMENT STORE.\pWhich floor would you like?$"
 
 
-gUnknown_08272c5f:: @ 8272C5F
+gUnknown_08272C5F:: @ 8272C5F
 	.string "The sandstorm is vicious.\nIt’s impossible to keep going.$"
 
 
-gUnknown_08272c98:: @ 8272C98
+gUnknown_08272C98:: @ 8272C98
 	.string "An item in the BAG can be\nregistered to SELECT for easy use.$"
 
 
-gUnknown_08272cd5:: @ 8272CD5
+gUnknown_08272CD5:: @ 8272CD5
 	.string "There’s an e-mail from POKéMON TRAINER\nSCHOOL.\p… … … … … …\pA POKéMON may learn up to four moves.\pA TRAINER’s expertise is tested on the\nmove sets chosen for POKéMON.\p… … … … … …$"
 
 
-gUnknown_08272d87:: @ 8272D87
+gUnknown_08272D87:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
 
 
-gUnknown_08272d9c:: @ 8272D9C
+gUnknown_08272D9C:: @ 8272D9C
 	.string "The link was canceled.$"
 
 
-gUnknown_08272db3:: @ 8272DB3
+gUnknown_08272DB3:: @ 8272DB3
 	.string "Want to give a nickname to\nthe {STR_VAR_2} you received?$"
 
 
-gUnknown_08272de3:: @ 8272DE3
+gUnknown_08272DE3:: @ 8272DE3
 	.string "{PLAYER} is out of usable\nPOKéMON!\p{PLAYER} whited out!$"
 
 
-gUnknown_08272e0f:: @ 8272E0F
+gUnknown_08272E0F:: @ 8272E0F
 	.string "Registered {STR_VAR_1} {STR_VAR_2}\nin the POKéNAV.$"
 
 
-gUnknown_08272e30:: @ 8272E30
+gUnknown_08272E30:: @ 8272E30
 	.string "Do you know the TM SECRET POWER?\pOur group, we love the TM SECRET\nPOWER.\pOne of our members will give it to you.\nCome back and show me if you get it.\pWe’ll accept you as a member and sell\nyou good stuff in secrecy.$"
 
 
-gUnknown_08272f07:: @ 8272F07
+gUnknown_08272F07:: @ 8272F07
 	.string "Your POKéMON may be infected with\nPOKéRUS.\pLittle is known about the POKéRUS\nexcept that they are microscopic life-\lforms that attach to POKéMON.\pWhile infected, POKéMON are said to\ngrow exceptionally well.$"
 
 
-gUnknown_08272fd6:: @ 8272FD6
+gUnknown_08272FD6:: @ 8272FD6
 	.string "The water is dyed a deep blue…\nWould you like to SURF?$"
 
 
-gUnknown_0827300d:: @ 827300D
+gUnknown_0827300D:: @ 827300D
 	.string "{STR_VAR_1} used SURF!$"
 
 
-gUnknown_0827301b:: @ 827301B
+gUnknown_0827301B:: @ 827301B
 	.string "It sounded as if a door opened\nsomewhere far away.$"
 
 
-gUnknown_0827304e:: @ 827304E
+gUnknown_0827304E:: @ 827304E
 	.string "There is a big hole in the wall.$"
 
 
-gUnknown_0827306f:: @ 827306F
+gUnknown_0827306F:: @ 827306F
 	.string "I’m terribly sorry.\nThe POKéMON WIRELESS CLUB is\lundergoing adjustments now.$"
 
 
-gUnknown_082730bc:: @ 82730BC
+gUnknown_082730BC:: @ 82730BC
 	.string "It appears to be undergoing\nadjustments…$"
 
 
-gUnknown_082730e5:: @ 82730E5
+gUnknown_082730E5:: @ 82730E5
 	.string "I’m terribly sorry. The TRADE CENTER\nis undergoing inspections.$"
 
 
@@ -384,11 +384,11 @@ gUnknown_08273178:: @ 8273178
 	.string "Thank you for accessing the\nMYSTERY GIFT System.$"
 
 
-gUnknown_082731a9:: @ 82731A9
+gUnknown_082731A9:: @ 82731A9
 	.string "{PLAYER} found one {STR_VAR_1}\n{STR_VAR_2}!$"
 
 
-gUnknown_082731bd:: @ 82731BD
+gUnknown_082731BD:: @ 82731BD
 	.string "The weird tree doesn’t like the\nWAILMER PAIL!\pThe weird tree attacked!$"
 
 
@@ -408,7 +408,7 @@ gText_PkmnBoxLanettesPCFull:: @ 82732D9
 	.string "BOX “{STR_VAR_3}” on\nLANETTE’S PC was full.\p{STR_VAR_2} was transferred to\nBOX “{STR_VAR_1}.”$"
 
 
-gUnknown_0827331c:: @ 827331C
+gUnknown_0827331C:: @ 827331C
 	.string "There’s no more room for POKéMON!\pThe POKéMON BOXES are full and\ncan’t accept any more!$"
 
 
@@ -416,11 +416,11 @@ gUnknown_08273374:: @ 8273374
 	.string "Do you want to give a nickname to\nthis {STR_VAR_1}?$"
 
 
-gUnknown_0827339f:: @ 827339F
+gUnknown_0827339F:: @ 827339F
 	.string "There is a questionnaire.\nWould you like to fill it out?$"
 
 
-gUnknown_082733d8:: @ 82733D8
+gUnknown_082733D8:: @ 82733D8
 	.string "Thank you for taking the time to\nfill out our questionnaire.\pYour feedback will be used for\nfuture reference.$"
 
 
@@ -428,7 +428,7 @@ gUnknown_08273446:: @ 8273446
 	.string "Oh, hello!\nYou know those words?\pThat means you must know about\nthe MYSTERY GIFT.\pFrom now on, you should be\nreceiving MYSTERY GIFTS!$"
 
 
-gUnknown_082734cc:: @ 82734CC
+gUnknown_082734CC:: @ 82734CC
 	.string "Once you save your game, you can\naccess the MYSTERY GIFT.$"
 
 
@@ -444,7 +444,7 @@ gUnknown_08273594:: @ 8273594
 	.string "Thank you for using the MYSTERY\nEVENT System.\pYou must be {PLAYER}.\nThere is a ticket here for you.$"
 
 
-gUnknown_082735f2:: @ 82735F2
+gUnknown_082735F2:: @ 82735F2
 	.string "It appears to be for use at\nthe LILYCOVE CITY port.\pWhy not give it a try and see what\nit is about?$"
 
 
@@ -686,139 +686,139 @@ gUnknown_0827E8DA:: @ 827E8DA
 gUnknown_0827EA0C:: @ 827EA0C
 	.incbin "baserom.gba", 0x27ea0c, 0x2b0
 
-gUnknown_0827ecbc:: @ 27ECBC
+gUnknown_0827ECBC:: @ 27ECBC
 	.incbin "baserom.gba", 0x27ecbc, 0x7
 
-gUnknown_0827ecc3:: @ 27ECC3
+gUnknown_0827ECC3:: @ 27ECC3
 	.incbin "baserom.gba", 0x27ecc3, 0xa
 
-gUnknown_0827eccd:: @ 27ECCD
+gUnknown_0827ECCD:: @ 27ECCD
 	.incbin "baserom.gba", 0x27eccd, 0x8
 
-gUnknown_0827ecd5:: @ 27ECD5
+gUnknown_0827ECD5:: @ 27ECD5
 	.incbin "baserom.gba", 0x27ecd5, 0x8
 
-gUnknown_0827ecdd:: @ 27ECDD
+gUnknown_0827ECDD:: @ 27ECDD
 	.incbin "baserom.gba", 0x27ecdd, 0x6
 
-gUnknown_0827ece3:: @ 27ECE3
+gUnknown_0827ECE3:: @ 27ECE3
 	.incbin "baserom.gba", 0x27ece3, 0x8
 
-gUnknown_0827eceb:: @ 27ECEB
+gUnknown_0827ECEB:: @ 27ECEB
 	.incbin "baserom.gba", 0x27eceb, 0x7
 
-gUnknown_0827ecf2:: @ 27ECF2
+gUnknown_0827ECF2:: @ 27ECF2
 	.incbin "baserom.gba", 0x27ecf2, 0x6
 
-gUnknown_0827ecf8:: @ 27ECF8
+gUnknown_0827ECF8:: @ 27ECF8
 	.incbin "baserom.gba", 0x27ecf8, 0x8
 
-gUnknown_0827ed00:: @ 27ED00
+gUnknown_0827ED00:: @ 27ED00
 	.incbin "baserom.gba", 0x27ed00, 0x6
 
-gUnknown_0827ed06:: @ 27ED06
+gUnknown_0827ED06:: @ 27ED06
 	.incbin "baserom.gba", 0x27ed06, 0xa
 
-gUnknown_0827ed10:: @ 27ED10
+gUnknown_0827ED10:: @ 27ED10
 	.incbin "baserom.gba", 0x27ed10, 0x8
 
-gUnknown_0827ed18:: @ 27ED18
+gUnknown_0827ED18:: @ 27ED18
 	.incbin "baserom.gba", 0x27ed18, 0xa
 
-gUnknown_0827ed22:: @ 27ED22
+gUnknown_0827ED22:: @ 27ED22
 	.incbin "baserom.gba", 0x27ed22, 0xa
 
-gUnknown_0827ed2c:: @ 27ED2C
+gUnknown_0827ED2C:: @ 27ED2C
 	.incbin "baserom.gba", 0x27ed2c, 0xa
 
-gUnknown_0827ed36:: @ 27ED36
+gUnknown_0827ED36:: @ 27ED36
 	.incbin "baserom.gba", 0x27ed36, 0xa
 
-gUnknown_0827ed40:: @ 27ED40
+gUnknown_0827ED40:: @ 27ED40
 	.incbin "baserom.gba", 0x27ed40, 0x6
 
-gUnknown_0827ed46:: @ 27ED46
+gUnknown_0827ED46:: @ 27ED46
 	.incbin "baserom.gba", 0x27ed46, 0x9
 
-gUnknown_0827ed4f:: @ 27ED4F
+gUnknown_0827ED4F:: @ 27ED4F
 	.incbin "baserom.gba", 0x27ed4f, 0xa
 
-gUnknown_0827ed59:: @ 27ED59
+gUnknown_0827ED59:: @ 27ED59
 	.incbin "baserom.gba", 0x27ed59, 0xc
 
-gUnknown_0827ed65:: @ 27ED65
+gUnknown_0827ED65:: @ 27ED65
 	.incbin "baserom.gba", 0x27ed65, 0xb
 
-gUnknown_0827ed70:: @ 27ED70
+gUnknown_0827ED70:: @ 27ED70
 	.incbin "baserom.gba", 0x27ed70, 0x4
 
-gUnknown_0827ed74:: @ 27ED74
+gUnknown_0827ED74:: @ 27ED74
 	.incbin "baserom.gba", 0x27ed74, 0x4
 
-gUnknown_0827ed78:: @ 27ED78
+gUnknown_0827ED78:: @ 27ED78
 	.incbin "baserom.gba", 0x27ed78, 0x8
 
-gUnknown_0827ed80:: @ 27ED80
+gUnknown_0827ED80:: @ 27ED80
 	.incbin "baserom.gba", 0x27ed80, 0x15
 
-gUnknown_0827ed95:: @ 27ED95
+gUnknown_0827ED95:: @ 27ED95
 	.incbin "baserom.gba", 0x27ed95, 0x15
 
-gUnknown_0827edaa:: @ 27EDAA
+gUnknown_0827EDAA:: @ 27EDAA
 	.incbin "baserom.gba", 0x27edaa, 0xb
 
-gUnknown_0827edb5:: @ 27EDB5
+gUnknown_0827EDB5:: @ 27EDB5
 	.incbin "baserom.gba", 0x27edb5, 0x5
 
-gUnknown_0827edba:: @ 27EDBA
+gUnknown_0827EDBA:: @ 27EDBA
 	.incbin "baserom.gba", 0x27edba, 0x7
 
-gUnknown_0827edc1:: @ 27EDC1
+gUnknown_0827EDC1:: @ 27EDC1
 	.incbin "baserom.gba", 0x27edc1, 0x8
 
-gUnknown_0827edc9:: @ 27EDC9
+gUnknown_0827EDC9:: @ 27EDC9
 	.incbin "baserom.gba", 0x27edc9, 0xc
 
-gUnknown_0827edd5:: @ 27EDD5
+gUnknown_0827EDD5:: @ 27EDD5
 	.incbin "baserom.gba", 0x27edd5, 0xf
 
-gUnknown_0827ede4:: @ 27EDE4
+gUnknown_0827EDE4:: @ 27EDE4
 	.incbin "baserom.gba", 0x27ede4, 0xc
 
-gUnknown_0827edf0:: @ 27EDF0
+gUnknown_0827EDF0:: @ 27EDF0
 	.incbin "baserom.gba", 0x27edf0, 0x5
 
-gUnknown_0827edf5:: @ 27EDF5
+gUnknown_0827EDF5:: @ 27EDF5
 	.incbin "baserom.gba", 0x27edf5, 0x2
 
-gUnknown_0827edf7:: @ 27EDF7
+gUnknown_0827EDF7:: @ 27EDF7
 	.incbin "baserom.gba", 0x27edf7, 0x2
 
-gUnknown_0827edf9:: @ 27EDF9
+gUnknown_0827EDF9:: @ 27EDF9
 	.incbin "baserom.gba", 0x27edf9, 0x2
 
-gUnknown_0827edfb:: @ 27EDFB
+gUnknown_0827EDFB:: @ 27EDFB
 	.incbin "baserom.gba", 0x27edfb, 0x2
 
-gUnknown_0827edfd:: @ 27EDFD
+gUnknown_0827EDFD:: @ 27EDFD
 	.incbin "baserom.gba", 0x27edfd, 0x2
 
-gUnknown_0827edff:: @ 27EDFF
+gUnknown_0827EDFF:: @ 27EDFF
 	.incbin "baserom.gba", 0x27edff, 0x2
 
-gUnknown_0827ee01:: @ 27EE01
+gUnknown_0827EE01:: @ 27EE01
 	.incbin "baserom.gba", 0x27ee01, 0x2
 
-gUnknown_0827ee03:: @ 27EE03
+gUnknown_0827EE03:: @ 27EE03
 	.incbin "baserom.gba", 0x27ee03, 0x2
 
-gUnknown_0827ee05:: @ 27EE05
+gUnknown_0827EE05:: @ 27EE05
 	.incbin "baserom.gba", 0x27ee05, 0x2
 
-gUnknown_0827ee07:: @ 27EE07
+gUnknown_0827EE07:: @ 27EE07
 	.incbin "baserom.gba", 0x27ee07, 0x2
 
-gUnknown_0827ee09:: @ 27EE09
+gUnknown_0827EE09:: @ 27EE09
 	.incbin "baserom.gba", 0x27ee09, 0x2
 
 gUnknown_0827EE0B:: @ 827EE0B
