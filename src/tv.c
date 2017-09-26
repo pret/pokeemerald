@@ -425,8 +425,8 @@ void InterviewAfter(void)
 
 void PutPokemonTodayCaughtOnAir(void)
 {
-    static void sub_80EC8A4(void);
-    void sub_80EC8FC(void);
+    static void UpdateWorldOfMastersAndPutItOnTheAir(void);
+    static void PutPokemonTodayFailedOnTheAir(void);
     void sub_80ED718(void);
     void sub_80EED88(void);
     u8 i;
@@ -440,11 +440,11 @@ void PutPokemonTodayCaughtOnAir(void)
     sub_80ED718();
     if (gBattleResults.caughtPoke == SPECIES_NONE)
     {
-        sub_80EC8FC();
+        PutPokemonTodayFailedOnTheAir();
     }
     else
     {
-        sub_80EC8A4();
+        UpdateWorldOfMastersAndPutItOnTheAir();
         if (!sub_80EFB38(-1) && StringCompare(gSpeciesNames[gBattleResults.caughtPoke], gBattleResults.caughtNick))
         {
             gUnknown_030060BC = sub_80EFB08(gSaveBlock1Ptr->tvShows);
@@ -493,7 +493,7 @@ void PutPokemonTodayCaughtOnAir(void)
     }
 }
 
-static void sub_80EC8A4(void)
+static void UpdateWorldOfMastersAndPutItOnTheAir(void)
 {
     TVShow *show;
 
@@ -501,13 +501,50 @@ static void sub_80EC8A4(void)
     if (show->worldOfMasters.kind != TVSHOW_WORLD_OF_MASTERS)
     {
         sub_80EF910(gSaveBlock1Ptr->tvShows, 24);
-        show->worldOfMasters.var06 = GetGameStat(GAME_STAT_STEPS);
+        show->worldOfMasters.steps = GetGameStat(GAME_STAT_STEPS);
         show->worldOfMasters.kind = TVSHOW_WORLD_OF_MASTERS;
     }
     show->worldOfMasters.var02 ++;
-    show->worldOfMasters.var04 = gBattleResults.caughtPoke;
-    show->worldOfMasters.var08 = gBattleResults.poke1Species;
-    show->worldOfMasters.var0a = gMapHeader.regionMapSectionId;
+    show->worldOfMasters.caughtPoke = gBattleResults.caughtPoke;
+    show->worldOfMasters.species = gBattleResults.poke1Species;
+    show->worldOfMasters.location = gMapHeader.regionMapSectionId;
+}
+
+static void PutPokemonTodayFailedOnTheAir(void)
+{
+    u16 ct;
+    u8 i;
+    TVShow *show;
+
+    if (!sub_80EFB38(-1))
+    {
+        for (i = 0, ct = 0; i < 11; i ++)
+        {
+            ct += gBattleResults.unk36[i];
+        }
+        if (ct > 0xFF)
+        {
+            ct = 0xFF;
+        }
+        if (ct > 2 && (gBattleOutcome == 6 || gBattleOutcome == 1))
+        {
+            gUnknown_030060BC = sub_80EFB08(gSaveBlock1Ptr->tvShows);
+            if (gUnknown_030060BC != -1 && sub_80EF46C(TVSHOW_POKEMON_TODAY_FAILED, 0) != TRUE)
+            {
+                show = &gSaveBlock1Ptr->tvShows[gUnknown_030060BC];
+                show->pokemonTodayFailed.kind = TVSHOW_POKEMON_TODAY_FAILED;
+                show->pokemonTodayFailed.active = FALSE;
+                show->pokemonTodayFailed.species = gBattleResults.poke1Species;
+                show->pokemonTodayFailed.species2 = gBattleResults.lastOpponentSpecies;
+                show->pokemonTodayFailed.var10 = ct;
+                show->pokemonTodayFailed.var11 = gBattleOutcome;
+                show->pokemonTodayFailed.var12 = gMapHeader.regionMapSectionId;
+                StringCopy(show->pokemonTodayFailed.playerName, gSaveBlock2Ptr->playerName);
+                sub_80EC9E8(show);
+                show->pokemonTodayFailed.language = gGameLanguage;
+            }
+        }
+    }
 }
 
 asm(".section .text.dotvshow");

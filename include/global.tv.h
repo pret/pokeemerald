@@ -241,10 +241,10 @@ typedef union TVShow // size = 0x24
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 var02;
-        /*0x04*/ u16 var04;
-        /*0x06*/ u16 var06;
-        /*0x08*/ u16 var08;
-        /*0x0a*/ u8 var0a;
+        /*0x04*/ u16 caughtPoke;
+        /*0x06*/ u16 steps;
+        /*0x08*/ u16 species;
+        /*0x0a*/ u8 location;
         /*0x0b*/ u8 language;
         u8 pad0c[7];
         /*0x13*/ u8 playerName[8];
