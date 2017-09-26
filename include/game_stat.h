@@ -56,4 +56,6 @@
 
 #define NUM_GAME_STATS                      64
 
+void IncrementGameStat(u8);
+
 #endif // GUARD_GAME_STAT_H

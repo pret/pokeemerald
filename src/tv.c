@@ -275,6 +275,17 @@ void GabbyAndTyBeforeInterview(void)
     }
 }
 
+void GabbyAndTyAfterInterview(void)
+{
+    gSaveBlock1Ptr->gabbyAndTyData.valB_0 = gSaveBlock1Ptr->gabbyAndTyData.valA_0;
+    gSaveBlock1Ptr->gabbyAndTyData.valB_1 = gSaveBlock1Ptr->gabbyAndTyData.not_total_victory;
+    gSaveBlock1Ptr->gabbyAndTyData.valB_2 = gSaveBlock1Ptr->gabbyAndTyData.valA_2;
+    gSaveBlock1Ptr->gabbyAndTyData.valB_3 = gSaveBlock1Ptr->gabbyAndTyData.valA_3;
+    gSaveBlock1Ptr->gabbyAndTyData.valA_4 = TRUE;
+    gSaveBlock1Ptr->gabbyAndTyData.mapnum = gMapHeader.regionMapSectionId;
+    IncrementGameStat(GAME_STAT_GOT_INTERVIEWED);
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
