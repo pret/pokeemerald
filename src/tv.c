@@ -33,9 +33,9 @@ void CopyContestRankToStringVar(u8, u8);
 void TV_ConvertNumberToOrdinal(u8, u32);
 static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
-void SetTVMetatilesOnMap(int, int, u16);
-bool8 FindAnyTVNewsOnTheAir(void);
-bool8 IsTVShowInSearchOfTrainersAiring(void);
+static void SetTVMetatilesOnMap(int, int, u16);
+u8 FindAnyTVNewsOnTheAir(void);
+static bool8 IsTVShowInSearchOfTrainersAiring(void);
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
 // .rodata
@@ -144,7 +144,7 @@ void UpdateTVScreensOnMap(int width, int height)
     }
 }
 
-void SetTVMetatilesOnMap(int width, int height, u16 tileId)
+static void SetTVMetatilesOnMap(int width, int height, u16 tileId)
 {
     int x;
     int y;
@@ -302,7 +302,7 @@ u8 GabbyAndTyGetBattleNum(void)
     return gSaveBlock1Ptr->gabbyAndTyData.battleNum;
 }
 
-bool8 IsTVShowInSearchOfTrainersAiring(void)
+static bool8 IsTVShowInSearchOfTrainersAiring(void)
 {
     return gSaveBlock1Ptr->gabbyAndTyData.onAir;
 }
