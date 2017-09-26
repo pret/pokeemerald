@@ -313,8 +313,8 @@ struct EasyChatPair
 
 struct TVShowCommon
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u8 pad02[20];
     /*0x16*/ u16 var16[3];
     /*0x1C*/ u8 srcTrainerId3Lo;
@@ -329,8 +329,8 @@ struct TVShowCommon
 
 struct TVShowFanClubLetter
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u16 species;
     /*0x04*/ u16 pad04[6];
     /*0x10*/ u8 playerName[8];
@@ -339,8 +339,8 @@ struct TVShowFanClubLetter
 
 struct TVShowRecentHappenings
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u16 var02;
     /*0x04*/ u16 var04[6];
     /*0x10*/ u8 playerName[8];
@@ -350,8 +350,8 @@ struct TVShowRecentHappenings
 
 struct TVShowFanclubOpinions
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u16 var02;
     /*0x04*/ u8 var04A:4;
     /*0x04*/ u8 var04B:4;
@@ -366,16 +366,16 @@ struct TVShowFanclubOpinions
 
 struct TVShowUnknownType04
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u8 pad02[4];
     /*0x06*/ u16 var06;
 };
 
 struct TVShowNameRaterShow
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u16 species;
     /*0x04*/ u8 pokemonName[11];
     /*0x0F*/ u8 trainerName[11];
@@ -388,8 +388,8 @@ struct TVShowNameRaterShow
 
 struct TVShowBravoTrainerPokemonProfiles
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u16 species;
     /*0x04*/ u16 var04[2];
     /*0x08*/ u8 pokemonNickname[11];
@@ -405,8 +405,8 @@ struct TVShowBravoTrainerPokemonProfiles
 
 struct TVShowBravoTrainerBattleTowerSpotlight
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u8 trainerName[8];
     /*0x0A*/ u16 species;
     /*0x0C*/ u8 pokemonName[8];
@@ -421,8 +421,8 @@ struct TVShowBravoTrainerBattleTowerSpotlight
 
 struct TVShowPokemonToday
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u8 language;
     /*0x03*/ u8 language2;
     /*0x04*/ u8 nickname[11];
@@ -434,8 +434,8 @@ struct TVShowPokemonToday
 
 struct TVShowSmartShopper
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u8 priceReduced;
     /*0x03*/ u8 language;
     /*0x04*/ u8 pad04[2];
@@ -447,8 +447,8 @@ struct TVShowSmartShopper
 
 struct TVShowPokemonTodayFailed
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u8 language;
     /*0x03*/ u8 pad03[9];
     /*0x0c*/ u16 species;
@@ -461,8 +461,8 @@ struct TVShowPokemonTodayFailed
 
 struct TVShowPokemonAngler
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u8 var02;
     /*0x03*/ u8 var03;
     /*0x04*/ u16 var04;
@@ -473,8 +473,8 @@ struct TVShowPokemonAngler
 
 struct TVShowWorldOfMasters
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u16 var02;
     /*0x04*/ u16 var04;
     /*0x06*/ u16 var06;
@@ -487,8 +487,8 @@ struct TVShowWorldOfMasters
 
 struct TVShowMassOutbreak
 {
-    /*0x00*/ u8 var00;
-    /*0x01*/ u8 var01;
+    /*0x00*/ u8 kind;
+    /*0x01*/ bool8 active;
     /*0x02*/ u8 var02;
     /*0x03*/ u8 var03;
     /*0x04*/ u16 moves[4];
