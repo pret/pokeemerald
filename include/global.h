@@ -359,34 +359,6 @@ typedef union OldMan
     u8 filler[0x40];
 } OldMan;
 
-struct UnknownSaveStruct2ABC
-{
-    u8 val0;
-    u8 val1;
-    u16 val2;
-};
-
-struct GabbyAndTyData
-{
-    /*2ba4*/ u16 mon1;
-    /*2ba6*/ u16 mon2;
-    /*2ba8*/ u16 lastMove;
-    /*2baa*/ u16 quote[1];
-    /*2bac*/ u8 mapnum;
-    /*2bad*/ u8 battleNum;
-    /*2bae*/ u8 valA_0:1;
-    /*2bae*/ u8 not_total_victory:1; // TRUE if at least one of the player's pokemon fainted during the battle
-    /*2bae*/ u8 valA_2:1;
-    /*2bae*/ u8 valA_3:1;
-    /*2bae*/ u8 onAir:1;
-    /*2bae*/ u8 valA_5:3;
-    /*2baf*/ u8 valB_0:1;
-    /*2baf*/ u8 valB_1:1;
-    /*2baf*/ u8 valB_2:1;
-    /*2baf*/ u8 valB_3:1;
-    /*2baf*/ u8 valB_4:4;
-};
-
 struct RecordMixing_UnknownStructSub
 {
     u32 unk0;

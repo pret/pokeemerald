@@ -4492,13 +4492,13 @@ _080EEE58:
 	bx r1
 	thumb_func_end sub_80EEE30
 
-	thumb_func_start sub_80EEE5C
-sub_80EEE5C: @ 80EEE5C
+	thumb_func_start ClearPokemonNews
+ClearPokemonNews: @ 80EEE5C
 	push {r4,lr}
 	movs r4, 0
 _080EEE60:
 	adds r0, r4, 0
-	bl sub_80EEE78
+	bl ClearPokemonNewsI
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4507,10 +4507,10 @@ _080EEE60:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80EEE5C
+	thumb_func_end ClearPokemonNews
 
-	thumb_func_start sub_80EEE78
-sub_80EEE78: @ 80EEE78
+	thumb_func_start ClearPokemonNewsI
+ClearPokemonNewsI: @ 80EEE78
 	push {r4,lr}
 	lsls r0, 24
 	ldr r3, =gSaveBlock1Ptr
@@ -4535,7 +4535,7 @@ sub_80EEE78: @ 80EEE78
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80EEE78
+	thumb_func_end ClearPokemonNewsI
 
 	thumb_func_start sub_80EEEB8
 sub_80EEEB8: @ 80EEEB8
@@ -4571,7 +4571,7 @@ _080EEEE0:
 	ldr r0, [r0]
 	str r0, [r1]
 	adds r0, r2, 0
-	bl sub_80EEE78
+	bl ClearPokemonNewsI
 	b _080EEF12
 	.pool
 _080EEF08:
@@ -4591,8 +4591,8 @@ _080EEF12:
 	bx r0
 	thumb_func_end sub_80EEEB8
 
-	thumb_func_start sub_80EEF20
-sub_80EEF20: @ 80EEF20
+	thumb_func_start FindAnyTVNewsOnTheAir
+FindAnyTVNewsOnTheAir: @ 80EEF20
 	push {r4,lr}
 	movs r2, 0
 	ldr r0, =gSaveBlock1Ptr
@@ -4629,12 +4629,12 @@ _080EEF64:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80EEF20
+	thumb_func_end FindAnyTVNewsOnTheAir
 
 	thumb_func_start sub_80EEF6C
 sub_80EEF6C: @ 80EEF6C
 	push {r4,r5,lr}
-	bl sub_80EEF20
+	bl FindAnyTVNewsOnTheAir
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -4868,7 +4868,7 @@ _080EF130:
 	cmp r0, r7
 	bcs _080EF164
 	adds r0, r6, 0
-	bl sub_80EEE78
+	bl ClearPokemonNewsI
 	b _080EF196
 	.pool
 _080EF164:
@@ -6662,8 +6662,8 @@ _080EFFD4:
 	.pool
 	thumb_func_end sub_80EFF9C
 
-	thumb_func_start sub_80EFFE0
-sub_80EFFE0: @ 80EFFE0
+	thumb_func_start GetTVChannelByShowType
+GetTVChannelByShowType: @ 80EFFE0
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -6701,7 +6701,7 @@ _080F001A:
 _080F001C:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80EFFE0
+	thumb_func_end GetTVChannelByShowType
 
 	thumb_func_start sub_80F0020
 sub_80F0020: @ 80F0020
@@ -7243,7 +7243,7 @@ sub_80F049C: @ 80F049C
 	adds r0, r6
 	ldrb r0, [r0]
 	str r2, [sp]
-	bl sub_80EFFE0
+	bl GetTVChannelByShowType
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -8099,7 +8099,7 @@ _080F0BBE:
 	ldr r0, =0x000027cc
 	adds r1, r0
 	ldrb r0, [r1]
-	bl sub_80EFFE0
+	bl GetTVChannelByShowType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -8512,7 +8512,7 @@ _080F0EF0:
 	cmp r0, 0x4
 	bls _080F0F08
 	adds r0, r4, 0
-	bl sub_80EEE78
+	bl ClearPokemonNewsI
 _080F0F08:
 	adds r0, r4, 0x1
 	lsls r0, 24

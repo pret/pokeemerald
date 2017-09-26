@@ -26,15 +26,15 @@ extern EWRAM_DATA u8 sTVShowState;
 extern const u8 *const gTVBravoTrainerTextGroup[];
 extern const u8 *const gTVBravoTrainerBattleTowerTextGroup[];
 
-void sub_80EEE5C(void);
-u8 sub_80EFFE0(u8);
+void ClearPokemonNews(void);
+u8 GetTVChannelByShowType(u8);
 void CopyContestCategoryToStringVar(u8, u8);
 void CopyContestRankToStringVar(u8, u8);
 void TV_ConvertNumberToOrdinal(u8, u32);
 static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
 void SetTVMetatilesOnMap(int, int, u16);
-bool8 sub_80EEF20(void);
+bool8 FindAnyTVNewsOnTheAir(void);
 bool8 IsTVShowInSearchOfTrainersAiring(void);
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
@@ -56,7 +56,7 @@ void ClearTVShowData(void)
             gSaveBlock1Ptr->tvShows[i].common.pad02[j] = 0;
         }
     }
-    sub_80EEE5C();
+    ClearPokemonNews();
 }
 
 u8 special_0x44(void)
@@ -77,7 +77,7 @@ u8 special_0x44(void)
     selIdx = j;
     do
     {
-        if (sub_80EFFE0(gSaveBlock1Ptr->tvShows[j].common.kind) != TVSHOW_UNKN_SHOWTYPE_04)
+        if (GetTVChannelByShowType(gSaveBlock1Ptr->tvShows[j].common.kind) != 4)
         {
             if (gSaveBlock1Ptr->tvShows[j].common.active == TRUE)
             {
@@ -87,7 +87,7 @@ u8 special_0x44(void)
         else
         {
             show = &gSaveBlock1Ptr->tvShows[j];
-            if (show->unkShow04.var16 == 0 && show->unkShow04.active == TRUE)
+            if (show->massOutbreak.var16 == 0 && show->massOutbreak.active == TRUE)
             {
                 return j;
             }
@@ -135,7 +135,7 @@ void UpdateTVScreensOnMap(int width, int height)
             {
                 SetTVMetatilesOnMap(width, height, 0x3);
             }
-            else if (FlagGet(SYS_TV_START) && (FindAnyTVShowOnTheAir() != 0xff || sub_80EEF20() != 0xff || IsTVShowInSearchOfTrainersAiring()))
+            else if (FlagGet(SYS_TV_START) && (FindAnyTVShowOnTheAir() != 0xff || FindAnyTVNewsOnTheAir() != 0xff || IsTVShowInSearchOfTrainersAiring()))
             {
                 FlagReset(SYS_TV_WATCH);
                 SetTVMetatilesOnMap(width, height, 0x3);
