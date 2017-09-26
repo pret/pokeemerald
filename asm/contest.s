@@ -15399,7 +15399,7 @@ _080DF6C4:
 	bl ContestLiveUpdates_BeforeInterview_4
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_80ECEB4
+	bl ContestLiveUpdates_BeforeInterview_5
 _080DF6EE:
 	add sp, 0xC
 	pop {r3-r5}

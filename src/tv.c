@@ -767,6 +767,33 @@ void ContestLiveUpdates_BeforeInterview_4(u16 a0)
     }
 }
 
+void ContestLiveUpdates_BeforeInterview_5(u8 a0, u8 a1)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[24];
+    gUnknown_030060BC = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    if (gUnknown_030060BC != -1)
+    {
+        show->contestLiveUpdates.unk_02 = gUnknown_02039E00[a1].unk_00;
+        StringCopy(show->contestLiveUpdates.unk_04, gUnknown_02039E00[a1].unk_0d);
+        StripExtCtrlCodes(show->contestLiveUpdates.unk_04);
+        show->contestLiveUpdates.unk_0c = a0;
+        if (a1 + 1 > gUnknown_02039F30)
+        {
+            show->contestLiveUpdates.unk_1e = gLinkPlayers[0].language;
+        }
+        else if (gGameLanguage == LANGUAGE_JAPANESE || gLinkPlayers[a1].language == LANGUAGE_JAPANESE)
+        {
+            show->contestLiveUpdates.unk_1e = LANGUAGE_JAPANESE;
+        }
+        else
+        {
+            show->contestLiveUpdates.unk_1e = gLinkPlayers[a1].language;
+        }
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
