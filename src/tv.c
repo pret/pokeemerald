@@ -202,6 +202,27 @@ u8 special_0x4a(void)
     return gSpecialVar_0x8004;
 }
 
+void ResetGabbyAndTy(void)
+{
+    gSaveBlock1Ptr->gabbyAndTyData.mon1 = SPECIES_NONE;
+    gSaveBlock1Ptr->gabbyAndTyData.mon2 = SPECIES_NONE;
+    gSaveBlock1Ptr->gabbyAndTyData.lastMove = MOVE_NONE;
+    gSaveBlock1Ptr->gabbyAndTyData.quote[0] = -1;
+    gSaveBlock1Ptr->gabbyAndTyData.valA_0 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.valA_1 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.valA_2 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.valA_3 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.valA_4 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.valA_5 = 0;
+    gSaveBlock1Ptr->gabbyAndTyData.valB_0 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.valB_1 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.valB_2 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.valB_3 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.valB_4 = 0;
+    gSaveBlock1Ptr->gabbyAndTyData.mapnum = 0;
+    gSaveBlock1Ptr->gabbyAndTyData.battleNum = 0;
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
