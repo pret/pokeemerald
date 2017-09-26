@@ -5,38 +5,6 @@
 
 	.text
 
-	thumb_func_start GabbyAndTyGetLastQuote
-GabbyAndTyGetLastQuote: @ 80EC548
-	push {r4,r5,lr}
-	ldr r5, =gSaveBlock1Ptr
-	ldr r0, [r5]
-	ldr r2, =0x00002baa
-	adds r1, r0, r2
-	ldrh r0, [r1]
-	ldr r4, =0x0000ffff
-	cmp r0, r4
-	beq _080EC584
-	ldr r0, =gStringVar1
-	ldrh r1, [r1]
-	bl CopyEasyChatWord
-	ldr r1, [r5]
-	ldr r0, =0x00002baa
-	adds r1, r0
-	ldrh r2, [r1]
-	adds r0, r4, 0
-	orrs r0, r2
-	strh r0, [r1]
-	movs r0, 0x1
-	b _080EC586
-	.pool
-_080EC584:
-	movs r0, 0
-_080EC586:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end GabbyAndTyGetLastQuote
-
 	thumb_func_start GabbyAndTyGetLastBattleTrivia
 GabbyAndTyGetLastBattleTrivia: @ 80EC58C
 	push {lr}

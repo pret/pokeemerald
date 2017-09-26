@@ -370,6 +370,8 @@ struct TVShowUnknownType04
     /*0x01*/ bool8 active;
     /*0x02*/ u8 pad02[4];
     /*0x06*/ u16 var06;
+    /*0x08*/ u8 pad08[14];
+    /*0x16*/ u16 var16;
 };
 
 struct TVShowNameRaterShow

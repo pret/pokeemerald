@@ -31,7 +31,7 @@ u8 sub_80EFFE0(u8);
 void CopyContestCategoryToStringVar(u8, u8);
 void CopyContestRankToStringVar(u8, u8);
 void TV_ConvertNumberToOrdinal(u8, u32);
-u8 sub_80EC18C(void);
+static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
 void SetTVMetatilesOnMap(int, int, u16);
 bool8 sub_80EEF20(void);
@@ -64,7 +64,7 @@ u8 special_0x44(void)
     u8 i;
     u8 j;
     u8 selIdx;
-    struct TVShowMassOutbreak *massOutbreak;
+    struct TVShowUnknownType04 *unkShow04;
 
     for (i = 5; i < ARRAY_COUNT(gSaveBlock1Ptr->tvShows) - 1; i ++)
     {
@@ -77,7 +77,7 @@ u8 special_0x44(void)
     selIdx = j;
     do
     {
-        if (sub_80EFFE0(gSaveBlock1Ptr->tvShows[j].common.kind) != 4)
+        if (sub_80EFFE0(gSaveBlock1Ptr->tvShows[j].common.kind) != TVSHOW_UNKN_SHOWTYPE_04)
         {
             if (gSaveBlock1Ptr->tvShows[j].common.active == TRUE)
             {
@@ -86,8 +86,8 @@ u8 special_0x44(void)
         }
         else
         {
-            massOutbreak = &gSaveBlock1Ptr->tvShows[j].massOutbreak;
-            if (massOutbreak->var16 == 0 && massOutbreak->active == TRUE)
+            unkShow04 = &gSaveBlock1Ptr->tvShows[j].unkShow04;
+            if (unkShow04->var16 == 0 && unkShow04->active == TRUE)
             {
                 return j;
             }
@@ -104,7 +104,7 @@ u8 special_0x44(void)
     return 0xFF;
 }
 
-u8 sub_80EBFF4(void)
+static u8 FindAnyTVShowOnTheAir(void)
 {
     u8 response;
 
@@ -115,7 +115,7 @@ u8 sub_80EBFF4(void)
     }
     if (gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE && gSaveBlock1Ptr->tvShows[response].common.kind == TVSHOW_MASS_OUTBREAK)
     {
-        return sub_80EC18C();
+        return FindFirstActiveTVShowThatIsNotAMassOutbreak();
     }
     return response;
 }
@@ -135,7 +135,7 @@ void UpdateTVScreensOnMap(int width, int height)
             {
                 SetTVMetatilesOnMap(width, height, 0x3);
             }
-            else if (FlagGet(SYS_TV_START) && (sub_80EBFF4() != 0xff || sub_80EEF20() != 0xff || IsTVShowInSearchOfTrainersAiring()))
+            else if (FlagGet(SYS_TV_START) && (FindAnyTVShowOnTheAir() != 0xff || sub_80EEF20() != 0xff || IsTVShowInSearchOfTrainersAiring()))
             {
                 FlagReset(SYS_TV_WATCH);
                 SetTVMetatilesOnMap(width, height, 0x3);
@@ -178,7 +178,7 @@ u8 special_0x45(void)
     return gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.kind;
 }
 
-u8 sub_80EC18C(void)
+static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void)
 {
     u8 i;
 
@@ -199,10 +199,12 @@ u8 special_0x4a(void)
     tvShow = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     if (tvShow->common.kind == TVSHOW_MASS_OUTBREAK && gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE)
     {
-        return sub_80EC18C();
+        return FindFirstActiveTVShowThatIsNotAMassOutbreak();
     }
     return gSpecialVar_0x8004;
 }
+
+// IN SEARCH OF TRAINERS
 
 void ResetGabbyAndTy(void)
 {
@@ -303,6 +305,17 @@ u8 GabbyAndTyGetBattleNum(void)
 bool8 IsTVShowInSearchOfTrainersAiring(void)
 {
     return gSaveBlock1Ptr->gabbyAndTyData.onAir;
+}
+
+bool8 GabbyAndTyGetLastQuote(void)
+{
+    if (gSaveBlock1Ptr->gabbyAndTyData.quote[0] == 0xFFFF)
+    {
+        return FALSE;
+    }
+    CopyEasyChatWord(gStringVar1, gSaveBlock1Ptr->gabbyAndTyData.quote[0]);
+    gSaveBlock1Ptr->gabbyAndTyData.quote[0] = -1;
+    return TRUE;
 }
 
 asm(".section .text.dotvshow");
