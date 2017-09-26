@@ -8,6 +8,10 @@
 // Exported type declarations
 
 // Exported RAM declarations
+extern struct MapCoords {
+    int width;
+    int height;
+} gUnknown_03005DC0;
 
 // Exported ROM declarations
 u32 MapGridGetMetatileBehaviorAt(int, int);

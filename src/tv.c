@@ -4,6 +4,7 @@
 #include "rng.h"
 #include "event_data.h"
 #include "fieldmap.h"
+#include "field_camera.h"
 #include "strings.h"
 #include "string_util.h"
 #include "international_string_util.h"
@@ -156,6 +157,18 @@ void SetTVMetatilesOnMap(int width, int height, u16 tileId)
             }
         }
     }
+}
+
+void TurnOffTVScreen(void)
+{
+    SetTVMetatilesOnMap(gUnknown_03005DC0.width, gUnknown_03005DC0.height, 0x0002);
+    DrawWholeMapView();
+}
+
+void TurnOnTVScreen(void)
+{
+    SetTVMetatilesOnMap(gUnknown_03005DC0.width, gUnknown_03005DC0.height, 0x0003);
+    DrawWholeMapView();
 }
 
 asm(".section .text.dotvshow");

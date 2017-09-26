@@ -5,34 +5,6 @@
 
 	.text
 
-	thumb_func_start TurnOffTVScreen
-TurnOffTVScreen: @ 80EC130
-	push {lr}
-	ldr r1, =gUnknown_03005DC0
-	ldr r0, [r1]
-	ldr r1, [r1, 0x4]
-	movs r2, 0x2
-	bl SetTVMetatilesOnMap
-	bl DrawWholeMapView
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end TurnOffTVScreen
-
-	thumb_func_start TurnOnTVScreen
-TurnOnTVScreen: @ 80EC14C
-	push {lr}
-	ldr r1, =gUnknown_03005DC0
-	ldr r0, [r1]
-	ldr r1, [r1, 0x4]
-	movs r2, 0x3
-	bl SetTVMetatilesOnMap
-	bl DrawWholeMapView
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end TurnOnTVScreen
-
 	thumb_func_start special_0x45
 special_0x45: @ 80EC168
 	ldr r0, =gSaveBlock1Ptr
