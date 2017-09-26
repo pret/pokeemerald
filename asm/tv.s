@@ -5,41 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80ECDA4
-sub_80ECDA4: @ 80ECDA4
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r5, =gSaveBlock1Ptr
-	ldr r0, [r5]
-	ldr r4, =0x000027cc
-	adds r0, r4
-	movs r1, 0x18
-	bl sub_80EF910
-	ldr r0, [r5]
-	adds r0, r4
-	bl sub_80EFADC
-	ldr r1, =gUnknown_030060BC
-	strb r0, [r1]
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _080ECDDC
-	ldr r0, [r5]
-	ldr r1, =0x00002b2c
-	adds r0, r1
-	strb r6, [r0, 0xD]
-	movs r1, 0x8
-	strb r1, [r0]
-_080ECDDC:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80ECDA4
-
 	thumb_func_start sub_80ECDF4
 sub_80ECDF4: @ 80ECDF4
 	push {r4,r5,lr}

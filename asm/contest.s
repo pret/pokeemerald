@@ -15385,7 +15385,7 @@ _080DF6AE:
 	beq _080DF6AE
 _080DF6C4:
 	mov r0, r9
-	bl sub_80ECDA4
+	bl ContestLiveUpdates_BeforeInterview
 	mov r0, r10
 	bl sub_80ECDF4
 	ldr r5, [sp, 0x4]

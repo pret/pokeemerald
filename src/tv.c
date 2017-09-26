@@ -717,6 +717,20 @@ void PutFanClubSpecialOnTheAir(void)
     }
 }
 
+void ContestLiveUpdates_BeforeInterview(u8 a0)
+{
+    TVShow *show;
+
+    sub_80EF910(gSaveBlock1Ptr->tvShows, 24);
+    gUnknown_030060BC = sub_80EFADC(gSaveBlock1Ptr->tvShows);
+    if (gUnknown_030060BC != -1)
+    {
+        show = &gSaveBlock1Ptr->tvShows[24];
+        show->contestLiveUpdates.unk_0d = a0;
+        show->contestLiveUpdates.kind = TVSHOW_CONTEST_LIVE_UPDATES;
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
