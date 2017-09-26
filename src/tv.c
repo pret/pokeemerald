@@ -688,6 +688,35 @@ bool8 Put3CheersForPokeblocksOnTheAir(const u8 *a0, u8 a1, u8 a2, u8 a3, u8 lang
     return TRUE;
 }
 
+void PutFanClubSpecialOnTheAir(void)
+{
+    TVShow *show;
+    u8 name[32];
+    u32 id;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8006];
+    show->fanClubSpecial.unk_16 = gSpecialVar_0x8005 * 10;
+    StringCopy(show->fanClubSpecial.playerName, gSaveBlock2Ptr->playerName);
+    show->fanClubSpecial.kind = TVSHOW_FAN_CLUB_SPECIAL;
+    show->fanClubSpecial.active = TRUE;
+    id = player_id_to_dword();
+    show->fanClubSpecial.idLo = id;
+    show->fanClubSpecial.idHi = id >> 8;
+    StringCopy(name, gStringVar1);
+    StripExtCtrlCodes(name);
+    StringCopy(show->fanClubSpecial.unk_0c, name);
+    tv_store_id_2x(show);
+    show->fanClubSpecial.language = gGameLanguage;
+    if (show->fanClubSpecial.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->unk_31A0 == LANGUAGE_JAPANESE)
+    {
+        show->fanClubSpecial.unk_18 = LANGUAGE_JAPANESE;
+    }
+    else
+    {
+        show->fanClubSpecial.unk_18 = gSaveBlock1Ptr->unk_31A0;
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);

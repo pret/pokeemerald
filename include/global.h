@@ -560,7 +560,8 @@ struct SaveBlock1
     /*0x2e90*/ struct ContestWinner contestWinners[13]; // 0 - 5 used in contest hall, 6 - 7 unused?, 8 - 12 museum
     /*0x3030*/ struct DaycareData daycare;
     /*0x3150*/ struct LinkBattleRecord linkBattleRecords[5];
-    /*0x31A0*/ u8 filler_31A0[8];
+    /*0x31A0*/ u8 unk_31A0;
+    /*0x31A1*/ u8 filler_31A1[7];
     /*0x31A8*/ u8 giftRibbons[52];
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
