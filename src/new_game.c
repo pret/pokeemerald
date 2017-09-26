@@ -19,6 +19,7 @@
 #include "money.h"
 #include "tv.h"
 #include "coins.h"
+#include "text.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gDifferentSaveFile;
@@ -104,7 +105,10 @@ void ClearPokedexFlags(void)
     memset(&gSaveBlock2Ptr->pokedex.seen, 0, sizeof(gSaveBlock2Ptr->pokedex.seen));
 }
 
-extern const struct ContestWinner gContestWinnerPicDummy;
+const struct ContestWinner gContestWinnerPicDummy = {
+    .monName = _(""),
+    .trainerName = _("")
+};
 
 void ClearAllContestWinnerPics(void)
 {

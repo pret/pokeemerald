@@ -113,7 +113,7 @@ _08133AC2:
 _08133AF0:
 	ldrb r1, [r1]
 	lsls r1, 5
-	ldr r0, =gUnknown_085A5C09
+	ldr r0, =gDecorations + 1
 	adds r1, r0
 	movs r0, 0x1
 	movs r2, 0
@@ -172,7 +172,7 @@ _08133B70:
 	ldrb r0, [r7, 0x6]
 	ldrb r2, [r1]
 	lsls r2, 5
-	ldr r1, =gUnknown_085A5C09
+	ldr r1, =gDecorations + 1
 	adds r2, r1
 	lsls r1, r5, 4
 	adds r1, 0x1
@@ -450,7 +450,7 @@ sub_8133DA0: @ 8133DA0
 	ldr r1, =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	lsls r1, 5
-	ldr r4, =gUnknown_085A5C09
+	ldr r4, =gDecorations + 1
 	adds r1, r4
 	bl StringCopy
 	ldr r0, =gStringVar2

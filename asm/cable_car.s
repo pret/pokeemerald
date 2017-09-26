@@ -242,7 +242,7 @@ _0814FE96:
 	bls _0814FE96
 	ldr r0, =gUnknown_085CDB74
 	bl LoadSpritePalettes
-	ldr r0, =gUnknown_085CD67C
+	ldr r0, =gCableCarMtChimneyTilemap
 	adds r1, r5, 0
 	bl malloc_and_decompress
 	ldr r4, =gUnknown_0203ABAC
@@ -250,7 +250,7 @@ _0814FE96:
 	ldr r2, =0x000040fc
 	adds r1, r2
 	str r0, [r1]
-	ldr r0, =gUnknown_085CD7D4
+	ldr r0, =gCableCarTreeTilemap
 	adds r1, r5, 0
 	bl malloc_and_decompress
 	ldr r1, [r4]
@@ -258,14 +258,14 @@ _0814FE96:
 	lsls r3, 7
 	adds r1, r3
 	str r0, [r1]
-	ldr r0, =gUnknown_085CD958
+	ldr r0, =gCableCarMountainTilemap
 	adds r1, r5, 0
 	bl malloc_and_decompress
 	ldr r1, [r4]
 	ldr r2, =0x00004104
 	adds r1, r2
 	str r0, [r1]
-	ldr r0, =gUnknown_085CDB30
+	ldr r0, =gCableCarPylonStemTilemap
 	adds r1, r5, 0
 	bl malloc_and_decompress
 	ldr r1, [r4]
@@ -274,7 +274,7 @@ _0814FE96:
 	str r0, [r2]
 	ldr r0, =0x00004108
 	adds r1, r0
-	ldr r0, =gUnknown_085CDB1C
+	ldr r0, =gCableCarPylonHookTilemapEntries
 	str r0, [r1]
 	ldr r1, =gUnknown_08DBA5B8
 	movs r0, 0
@@ -1908,7 +1908,7 @@ sub_8150D28: @ 8150D28
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x28
-	ldr r1, =gUnknown_085CDBE4
+	ldr r1, =gCableCarPlayerGraphicsIDs
 	add r0, sp, 0xC
 	movs r2, 0x2
 	bl memcpy
@@ -1917,17 +1917,17 @@ sub_8150D28: @ 8150D28
 	lsrs r0, 16
 	mov r9, r0
 	add r6, sp, 0x10
-	ldr r1, =gUnknown_085CDBE6
+	ldr r1, =gMtChimneyHikerGraphicsIDs
 	adds r0, r6, 0
 	movs r2, 0x4
 	bl memcpy
 	add r5, sp, 0x14
-	ldr r1, =gUnknown_085CDBEA
+	ldr r1, =gMtChimneyHikerCoords
 	adds r0, r5, 0
 	movs r2, 0x8
 	bl memcpy
 	add r4, sp, 0x1C
-	ldr r1, =gUnknown_085CDBF2
+	ldr r1, =gMtChimneyHikerMovementDelayTable
 	adds r0, r4, 0
 	movs r2, 0x4
 	bl memcpy
@@ -1982,7 +1982,7 @@ _08150D86:
 	movs r0, 0x49
 	strh r0, [r1, 0x30]
 _08150DD0:
-	ldr r4, =gUnknown_085CDB9C
+	ldr r4, =gSpriteTemplate_85CDB9C
 	adds r0, r4, 0
 	movs r1, 0xB0
 	movs r2, 0x2B
@@ -2088,7 +2088,7 @@ _08150E68:
 	movs r0, 0x27
 	strh r0, [r1, 0x30]
 _08150ED4:
-	ldr r4, =gUnknown_085CDB9C
+	ldr r4, =gSpriteTemplate_85CDB9C
 	adds r0, r4, 0
 	movs r1, 0x68
 	movs r2, 0x9
@@ -2149,7 +2149,7 @@ _08150F3E:
 	ldr r3, =0xfff80000
 	adds r2, r3
 	asrs r2, 16
-	ldr r0, =gUnknown_085CDBCC
+	ldr r0, =gSpriteTemplate_85CDBCC
 	movs r3, 0x68
 	bl CreateSprite
 	lsls r0, 24

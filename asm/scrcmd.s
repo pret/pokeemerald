@@ -3977,7 +3977,7 @@ sub_809B114: @ 809B114
 	adds r4, r0
 	ldr r0, [r4]
 	lsrs r1, 11
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	movs r0, 0
