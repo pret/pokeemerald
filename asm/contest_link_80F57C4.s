@@ -1750,7 +1750,7 @@ task_repel: @ 80F67C4
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_80ED090
+	bl BravoTrainerPokemonProfile_BeforeInterview2
 _080F67E6:
 	movs r0, 0
 	str r0, [sp]

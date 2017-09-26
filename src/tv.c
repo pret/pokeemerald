@@ -843,6 +843,24 @@ void BravoTrainerPokemonProfile_BeforeInterview1(u16 a0)
     }
 }
 
+void BravoTrainerPokemonProfile_BeforeInterview2(u8 a0)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[24];
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1)
+    {
+        show->bravoTrainer.contestResult = a0;
+        show->bravoTrainer.contestCategory = gUnknown_02039F2C;
+        show->bravoTrainer.contestRank = gUnknown_02039F2E;
+        show->bravoTrainer.species = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_SPECIES, NULL);
+        GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_NICKNAME, show->bravoTrainer.pokemonNickname);
+        StripExtCtrlCodes(show->bravoTrainer.pokemonNickname);
+        show->bravoTrainer.pokemonNameLanguage = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_LANGUAGE);
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
