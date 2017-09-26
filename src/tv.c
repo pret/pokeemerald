@@ -547,6 +547,30 @@ static void PutPokemonTodayFailedOnTheAir(void)
     }
 }
 
+void sub_80EC9E8(TVShow *show)
+{
+    u32 id;
+
+    id = sub_80F0020();
+    show->common.srcTrainerId2Lo = id;
+    show->common.srcTrainerId2Hi = id >> 8;
+    show->common.srcTrainerIdLo = id;
+    show->common.srcTrainerIdHi = id >> 8;
+    show->common.trainerIdLo = id;
+    show->common.trainerIdHi = id >> 8;
+}
+
+void sub_80ECA10(TVShow *show)
+{
+    u32 id;
+
+    id = sub_80F0020();
+    show->common.srcTrainerIdLo = id;
+    show->common.srcTrainerIdHi = id >> 8;
+    show->common.trainerIdLo = id;
+    show->common.trainerIdHi = id >> 8;
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);

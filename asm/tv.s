@@ -5,51 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80EC9E8
-sub_80EC9E8: @ 80EC9E8
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_80F0020
-	strb r0, [r4, 0x1E]
-	lsrs r2, r0, 8
-	strb r2, [r4, 0x1F]
-	adds r1, r4, 0
-	adds r1, 0x20
-	strb r0, [r1]
-	adds r1, 0x1
-	strb r2, [r1]
-	adds r1, 0x1
-	strb r0, [r1]
-	adds r0, r4, 0
-	adds r0, 0x23
-	strb r2, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80EC9E8
-
-	thumb_func_start sub_80ECA10
-sub_80ECA10: @ 80ECA10
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_80F0020
-	adds r1, r4, 0
-	adds r1, 0x20
-	strb r0, [r1]
-	lsrs r1, r0, 8
-	adds r2, r4, 0
-	adds r2, 0x21
-	strb r1, [r2]
-	adds r2, 0x1
-	strb r0, [r2]
-	adds r0, r4, 0
-	adds r0, 0x23
-	strb r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80ECA10
-
 	thumb_func_start sub_80ECA38
 sub_80ECA38: @ 80ECA38
 	push {r4-r7,lr}
