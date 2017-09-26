@@ -682,7 +682,7 @@ _080ED72E:
 	strb r1, [r4]
 	movs r3, 0x1
 	strb r3, [r4, 0x1]
-	ldr r2, =gUnknown_0858D094
+	ldr r2, =gPokeOutbreakSpeciesList
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
