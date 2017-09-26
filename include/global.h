@@ -311,218 +311,336 @@ struct EasyChatPair
     u16 words[2];
 }; /*size = 0x8*/
 
-struct TVShowCommon
+typedef union TVShow // size = 0x24
 {
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u8 pad02[20];
-    /*0x16*/ u16 var16[3];
-    /*0x1C*/ u8 srcTrainerId3Lo;
-    /*0x1D*/ u8 srcTrainerId3Hi;
-    /*0x1E*/ u8 srcTrainerId2Lo;
-    /*0x1F*/ u8 srcTrainerId2Hi;
-    /*0x20*/ u8 srcTrainerIdLo;
-    /*0x21*/ u8 srcTrainerIdHi;
-    /*0x22*/ u8 trainerIdLo;
-    /*0x23*/ u8 trainerIdHi;
-};
+    // Common
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 pad02[20];
+        /*0x16*/ u16 var16[3];
+        /*0x1C*/ u8 srcTrainerId3Lo;
+        /*0x1D*/ u8 srcTrainerId3Hi;
+        /*0x1E*/ u8 srcTrainerId2Lo;
+        /*0x1F*/ u8 srcTrainerId2Hi;
+        /*0x20*/ u8 srcTrainerIdLo;
+        /*0x21*/ u8 srcTrainerIdHi;
+        /*0x22*/ u8 trainerIdLo;
+        /*0x23*/ u8 trainerIdHi;
+    } common;
 
-struct TVShowFanClubLetter
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u16 species;
-    /*0x04*/ u16 pad04[6];
-    /*0x10*/ u8 playerName[8];
-    /*0x18*/ u8 language;
-};
+    // TVSHOW_FAN_CLUB_LETTER
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u16 species;
+        /*0x04*/ u16 pad04[6];
+        /*0x10*/ u8 playerName[8];
+        /*0x18*/ u8 language;
+    } fanclubLetter;
 
-struct TVShowRecentHappenings
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u16 var02;
-    /*0x04*/ u16 var04[6];
-    /*0x10*/ u8 playerName[8];
-    /*0x18*/ u8 language;
-    /*0x19*/ u8 pad19[10];
-};
+    // TVSHOW_RECENT_HAPPENINGS
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u16 var02;
+        /*0x04*/ u16 var04[6];
+        /*0x10*/ u8 playerName[8];
+        /*0x18*/ u8 language;
+        /*0x19*/ u8 pad19[10];
+    } recentHappenings;
 
-struct TVShowFanclubOpinions
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u16 var02;
-    /*0x04*/ u8 var04A:4;
-    /*0x04*/ u8 var04B:4;
-    /*0x05*/ u8 playerName[8];
-    /*0x0D*/ u8 language;
-    /*0x0E*/ u8 var0E;
-    /*0x0F*/ u8 var0F;
-    /*0x10*/ u8 var10[8];
-    /*0x18*/ u16 var18[2];
-    /*0x1C*/ u16 var1C[4];
-};
+    // TVSHOW_PKMN_FAN_CLUB_OPINIONS
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u16 var02;
+        /*0x04*/ u8 var04A:4;
+        /*0x04*/ u8 var04B:4;
+        /*0x05*/ u8 playerName[8];
+        /*0x0D*/ u8 language;
+        /*0x0E*/ u8 var0E;
+        /*0x0F*/ u8 var0F;
+        /*0x10*/ u8 var10[8];
+        /*0x18*/ u16 var18[2];
+        /*0x1C*/ u16 var1C[4];
+    } fanclubOpinions;
 
-struct TVShowUnknownType04
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u8 pad02[4];
-    /*0x06*/ u16 var06;
-    /*0x08*/ u8 pad08[14];
-    /*0x16*/ u16 var16;
-};
+    // TVSHOW_UNKN_SHOWTYPE_04 (dummied out)
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 pad02[4];
+        /*0x06*/ u16 var06;
+        /*0x08*/ u8 pad08[14];
+        /*0x16*/ u16 var16;
+    } unkShow04;
 
-struct TVShowNameRaterShow
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u16 species;
-    /*0x04*/ u8 pokemonName[11];
-    /*0x0F*/ u8 trainerName[11];
-    /*0x1A*/ u8 random;
-    /*0x1B*/ u8 random2;
-    /*0x1C*/ u16 var1C;
-    /*0x1E*/ u8 language;
-    /*0x1F*/ u8 pokemonNameLanguage;
-};
+    // TVSHOW_NAME_RATER_SHOW
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u16 species;
+        /*0x04*/ u8 pokemonName[11];
+        /*0x0F*/ u8 trainerName[11];
+        /*0x1A*/ u8 random;
+        /*0x1B*/ u8 random2;
+        /*0x1C*/ u16 var1C;
+        /*0x1E*/ u8 language;
+        /*0x1F*/ u8 pokemonNameLanguage;
+    } nameRaterShow;
 
-struct TVShowBravoTrainerPokemonProfiles
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u16 species;
-    /*0x04*/ u16 ecWords[2];
-    /*0x08*/ u8 pokemonNickname[11];
-    /*0x13*/ u8 contestCategory:3;
-    /*0x13*/ u8 contestRank:2;
-    /*0x13*/ u8 contestResult:2;
-    /*0x14*/ u16 move;
-    /*0x16*/ u8 playerName[8];
-    /*0x1E*/ u8 language;
-    /*0x1F*/ u8 pokemonNameLanguage;
-};
+    // TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE (contest)
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u16 species;
+        /*0x04*/ u16 ecWords[2];
+        /*0x08*/ u8 pokemonNickname[11];
+        /*0x13*/ u8 contestCategory:3;
+        /*0x13*/ u8 contestRank:2;
+        /*0x13*/ u8 contestResult:2;
+        /*0x14*/ u16 move;
+        /*0x16*/ u8 playerName[8];
+        /*0x1E*/ u8 language;
+        /*0x1F*/ u8 pokemonNameLanguage;
+    } bravoTrainer;
 
-struct TVShowBravoTrainerBattleTowerSpotlight
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u8 trainerName[8];
-    /*0x0A*/ u16 species;
-    /*0x0C*/ u8 pokemonName[8];
-    /*0x14*/ u16 defeatedSpecies;
-    /*0x16*/ u16 numFights;
-    /*0x18*/ u16 var18[1];
-    /*0x1A*/ u8 btLevel;
-    /*0x1B*/ u8 var1b;
-    /*0x1C*/ u8 var1c;
-    /*0x1D*/ u8 language;
-    /*0x1E*/ u8 pokemonNameLanguage;
-};
+    // TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 trainerName[8];
+        /*0x0A*/ u16 species;
+        /*0x0C*/ u8 pokemonName[8];
+        /*0x14*/ u16 defeatedSpecies;
+        /*0x16*/ u16 numFights;
+        /*0x18*/ u16 var18[1];
+        /*0x1A*/ u8 btLevel;
+        /*0x1B*/ u8 var1b;
+        /*0x1C*/ u8 var1c;
+        /*0x1D*/ u8 language;
+        /*0x1E*/ u8 pokemonNameLanguage;
+    } bravoTrainerTower;
 
-struct TVShowPokemonToday
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u8 language;
-    /*0x03*/ u8 language2;
-    /*0x04*/ u8 nickname[11];
-    /*0x0F*/ u8 ball;
-    /*0x10*/ u16 species;
-    /*0x12*/ u8 var12;
-    /*0x13*/ u8 playerName[8];
-};
+    // TVSHOW_CONTEST_LIVE_UPDATES
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } contestLiveUpdates;
 
-struct TVShowSmartShopper
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u8 priceReduced;
-    /*0x03*/ u8 language;
-    /*0x04*/ u8 pad04[2];
-    /*0x06*/ u16 itemIds[3];
-    /*0x0C*/ u16 itemAmounts[3];
-    /*0x12*/ u8 shopLocation;
-    /*0x13*/ u8 playerName[8];
-};
+    // TVSHOW_3_CHEERS_FOR_POKEBLOCKS
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } threeCheers;
 
-struct TVShowPokemonTodayFailed
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u8 language;
-    /*0x03*/ u8 pad03[9];
-    /*0x0c*/ u16 species;
-    /*0x0e*/ u16 species2;
-    /*0x10*/ u8 var10;
-    /*0x11*/ u8 var11;
-    /*0x12*/ u8 var12;
-    /*0x13*/ u8 playerName[8];
-};
+    // TVSHOW_BATTLE_UPDATE
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } battleUpdate;
 
-struct TVShowPokemonAngler
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u8 var02;
-    /*0x03*/ u8 var03;
-    /*0x04*/ u16 var04;
-    /*0x06*/ u8 language;
-             u8 pad07[12];
-    /*0x13*/ u8 playerName[8];
-};
+    // TVSHOW_FAN_CLUB_SPECIAL
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } fanClubSpecial;
 
-struct TVShowWorldOfMasters
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u16 var02;
-    /*0x04*/ u16 var04;
-    /*0x06*/ u16 var06;
-    /*0x08*/ u16 var08;
-    /*0x0a*/ u8 var0a;
-    /*0x0b*/ u8 language;
-             u8 pad0c[7];
-    /*0x13*/ u8 playerName[8];
-};
+    // TVSHOW_CONTEST_LIVE_UPDATES_2
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } contestLiveUpdates2;
 
-struct TVShowMassOutbreak
-{
-    /*0x00*/ u8 kind;
-    /*0x01*/ bool8 active;
-    /*0x02*/ u8 var02;
-    /*0x03*/ u8 var03;
-    /*0x04*/ u16 moves[4];
-    /*0x0C*/ u16 species;
-    /*0x0E*/ u16 var0E;
-    /*0x10*/ u8 locationMapNum;
-    /*0x11*/ u8 locationMapGroup;
-    /*0x12*/ u8 var12;
-    /*0x13*/ u8 probability;
-    /*0x14*/ u8 level;
-    /*0x15*/ u8 var15;
-    /*0x16*/ u16 var16;
-    /*0x18*/ u8 language;
-             u8 pad19[11];
-};
+    // TVSHOW_POKEMON_TODAY_CAUGHT
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 language;
+        /*0x03*/ u8 language2;
+        /*0x04*/ u8 nickname[11];
+        /*0x0F*/ u8 ball;
+        /*0x10*/ u16 species;
+        /*0x12*/ u8 var12;
+        /*0x13*/ u8 playerName[8];
+    } pokemonToday;
 
-typedef union TVShow
-{
-    struct TVShowCommon common;
-    struct TVShowFanClubLetter fanclubLetter;
-    struct TVShowRecentHappenings recentHappenings;
-    struct TVShowFanclubOpinions fanclubOpinions;
-    struct TVShowUnknownType04 unkShow04;
-    struct TVShowNameRaterShow nameRaterShow;
-    struct TVShowBravoTrainerPokemonProfiles bravoTrainer;
-    struct TVShowBravoTrainerBattleTowerSpotlight bravoTrainerTower;
-    struct TVShowPokemonToday pokemonToday;
-    struct TVShowSmartShopper smartshopperShow;
-    struct TVShowPokemonTodayFailed pokemonTodayFailed;
-    struct TVShowPokemonAngler pokemonAngler;
-    struct TVShowWorldOfMasters worldOfMasters;
-    struct TVShowMassOutbreak massOutbreak;
+    // TVSHOW_SMART_SHOPPER
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 priceReduced;
+        /*0x03*/ u8 language;
+        /*0x04*/ u8 pad04[2];
+        /*0x06*/ u16 itemIds[3];
+        /*0x0C*/ u16 itemAmounts[3];
+        /*0x12*/ u8 shopLocation;
+        /*0x13*/ u8 playerName[8];
+    } smartshopperShow;
+
+    // TVSHOW_POKEMON_TODAY_FAILED
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 language;
+        /*0x03*/ u8 pad03[9];
+        /*0x0c*/ u16 species;
+        /*0x0e*/ u16 species2;
+        /*0x10*/ u8 var10;
+        /*0x11*/ u8 var11;
+        /*0x12*/ u8 var12;
+        /*0x13*/ u8 playerName[8];
+    } pokemonTodayFailed;
+
+    // TVSHOW_FISHING_ADVICE
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 var02;
+        /*0x03*/ u8 var03;
+        /*0x04*/ u16 var04;
+        /*0x06*/ u8 language;
+        u8 pad07[12];
+        /*0x13*/ u8 playerName[8];
+    } pokemonAngler;
+
+    // TVSHOW_WORLD_OF_MASTERS
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u16 var02;
+        /*0x04*/ u16 var04;
+        /*0x06*/ u16 var06;
+        /*0x08*/ u16 var08;
+        /*0x0a*/ u8 var0a;
+        /*0x0b*/ u8 language;
+        u8 pad0c[7];
+        /*0x13*/ u8 playerName[8];
+    } worldOfMasters;
+
+    // TVSHOW_TODAYS_RIVAL_TRAINER
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } rivalTrainer;
+
+    // TVSHOW_TREND_WATCHER
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } trendWatcher;
+
+    // TVSHOW_TREASURE_INVESTIGATORS
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } treasureInvestigators;
+
+    // TVSHOW_FIND_THAT_GAMER
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } findThatGamer;
+
+    // TVSHOW_BREAKING_NEWS
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } breakingNews;
+
+    // TVSHOW_SECRET_BASE_VISIT
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } secretBaseVisit;
+
+    // TVSHOW_LOTTO_WINNER
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } lottoWinner;
+
+    // TVSHOW_BATTLE_SEMINAR
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } battleSeminar;
+
+    // TVSHOW_TRAINER_FAN_CLUB
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } trainerFanClub;
+
+    // TVSHOW_CUTIES
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } cuties;
+
+    // TVSHOW_FRONTIER
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } frontier;
+
+    // TVSHOW_NUMBER_ONE
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } numberOne;
+
+    // TVSHOW_SECRET_BASE_SECRETS
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } secretBaseSecrets;
+
+    // TVSHOW_SAFARI_FAN_CLUB
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        // TODO: flesh this out
+    } safariFanClub;
+
+    // TVSHOW_MASS_OUTBREAK
+    struct {
+        /*0x00*/ u8 kind;
+        /*0x01*/ bool8 active;
+        /*0x02*/ u8 var02;
+        /*0x03*/ u8 var03;
+        /*0x04*/ u16 moves[4];
+        /*0x0C*/ u16 species;
+        /*0x0E*/ u16 var0E;
+        /*0x10*/ u8 locationMapNum;
+        /*0x11*/ u8 locationMapGroup;
+        /*0x12*/ u8 var12;
+        /*0x13*/ u8 probability;
+        /*0x14*/ u8 level;
+        /*0x15*/ u8 var15;
+        /*0x16*/ u16 var16;
+        /*0x18*/ u8 language;
+        u8 pad19[11];
+    } massOutbreak;
 } TVShow;
 
 struct MailStruct
