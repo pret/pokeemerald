@@ -21,6 +21,7 @@
 #include "event_scripts.h"
 #include "shop.h"
 #include "lilycove_lady.h"
+#include "rom6.h"
 #include "tv.h"
 
 // Static type declarations
@@ -1560,6 +1561,19 @@ void PutLilycoveContestLadyShowOnTheAir(void)
         show->contestLiveUpdates2.pokeblockState = sub_818E880();
         tv_store_id_2x(show);
     }
+}
+
+void InterviewAfter_FanClubLetter(void)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+    show->fanclubLetter.kind = TVSHOW_FAN_CLUB_LETTER;
+    show->fanclubLetter.active = TRUE;
+    StringCopy(show->fanclubLetter.playerName, gSaveBlock2Ptr->playerName);
+    show->fanclubLetter.species = GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_SPECIES, NULL);
+    tv_store_id_2x(show);
+    show->fanclubLetter.language = gGameLanguage;
 }
 
 asm(".section .text.dotvshow");
