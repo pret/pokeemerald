@@ -1576,6 +1576,19 @@ void InterviewAfter_FanClubLetter(void)
     show->fanclubLetter.language = gGameLanguage;
 }
 
+void InterviewAfter_RecentHappenings(void)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+    show->recentHappenings.kind = TVSHOW_RECENT_HAPPENINGS;
+    show->recentHappenings.active = TRUE;
+    StringCopy(show->recentHappenings.playerName, gSaveBlock2Ptr->playerName);
+    show->recentHappenings.var02 = 0;
+    tv_store_id_2x(show);
+    show->recentHappenings.language = gGameLanguage;
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);

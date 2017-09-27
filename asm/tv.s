@@ -3,42 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start InterviewAfter_RecentHappenings
-InterviewAfter_RecentHappenings: @ 80ED5B8
-	push {r4,r5,lr}
-	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =sCurTVShowSlot
-	movs r1, 0
-	ldrsb r1, [r0, r1]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =0x000027cc
-	adds r0, r1
-	ldr r4, [r2]
-	adds r4, r0
-	movs r5, 0
-	movs r0, 0x2
-	strb r0, [r4]
-	movs r0, 0x1
-	strb r0, [r4, 0x1]
-	adds r0, r4, 0
-	adds r0, 0x10
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	bl StringCopy
-	strh r5, [r4, 0x2]
-	adds r0, r4, 0
-	bl tv_store_id_2x
-	ldr r0, =gGameLanguage
-	ldrb r0, [r0]
-	strb r0, [r4, 0x18]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end InterviewAfter_RecentHappenings
-
 	thumb_func_start InterviewAfter_PkmnFanClubOpinions
 InterviewAfter_PkmnFanClubOpinions: @ 80ED610
 	push {r4-r7,lr}
