@@ -590,7 +590,7 @@ _080AA7E0:
 	b _080AAB1E
 	.pool
 _080AA8C4:
-	ldr r0, =gTitleScreenPokemonLogoTiles
+	ldr r0, =gTitleScreenPokemonLogoGfx
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZ77UnCompVram
@@ -602,13 +602,13 @@ _080AA8C4:
 	lsls r2, 1
 	movs r1, 0
 	bl LoadPalette
-	ldr r0, =gTitleScreenRayquazaTiles
+	ldr r0, =gTitleScreenRayquazaGfx
 	ldr r1, =0x06008000
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_0853F83C
+	ldr r0, =gTitleScreenRayquazaTilemap
 	ldr r1, =0x0600d000
 	bl LZ77UnCompVram
-	ldr r0, =gTitleScreenCloudsTiles
+	ldr r0, =gTitleScreenCloudsGfx
 	ldr r1, =0x0600c000
 	bl LZ77UnCompVram
 	ldr r0, =gUnknown_08DDE458
@@ -627,7 +627,7 @@ _080AA8C4:
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_0854013C
 	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_08DDE438
+	ldr r0, =gTitleScreenEmeraldVersionPal
 	movs r1, 0x80
 	lsls r1, 1
 	movs r2, 0x20
