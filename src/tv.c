@@ -1002,7 +1002,7 @@ void PutPokemonTodayCaughtOnAir(void)
 {
     static void UpdateWorldOfMastersAndPutItOnTheAir(void);
     static void PutPokemonTodayFailedOnTheAir(void);
-    void sub_80ED718(void);
+    static void sub_80ED718(void);
     void sub_80EED88(void);
     u8 i;
     u16 ct;
@@ -1619,6 +1619,52 @@ static void InterviewAfter_DummyShow4()
     TVShow *show;
 
     show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+}
+
+static void sub_80ED718(void)
+{
+    u8 i;
+    u16 outbreakIdx;
+    TVShow *show;
+
+    if (FlagGet(SYS_GAME_CLEAR))
+    {
+        for (i = 0; i < 24; i ++)
+        {
+            if (gSaveBlock1Ptr->tvShows[i].common.kind == TVSHOW_MASS_OUTBREAK)
+            {
+                return;
+            }
+        }
+        if (!TV_BernoulliTrial(0x0147))
+        {
+            sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+            if (sCurTVShowSlot != -1)
+            {
+                outbreakIdx = Random() % ARRAY_COUNT(gPokeOutbreakSpeciesList);
+                show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+                show->massOutbreak.kind = TVSHOW_MASS_OUTBREAK;
+                show->massOutbreak.active = TRUE;
+                show->massOutbreak.level = gPokeOutbreakSpeciesList[outbreakIdx].level;
+                show->massOutbreak.var02 = 0;
+                show->massOutbreak.var03 = 0;
+                show->massOutbreak.species = gPokeOutbreakSpeciesList[outbreakIdx].species;
+                show->massOutbreak.var0E = 0;
+                show->massOutbreak.moves[0] = gPokeOutbreakSpeciesList[outbreakIdx].moves[0];
+                show->massOutbreak.moves[1] = gPokeOutbreakSpeciesList[outbreakIdx].moves[1];
+                show->massOutbreak.moves[2] = gPokeOutbreakSpeciesList[outbreakIdx].moves[2];
+                show->massOutbreak.moves[3] = gPokeOutbreakSpeciesList[outbreakIdx].moves[3];
+                show->massOutbreak.locationMapNum = gPokeOutbreakSpeciesList[outbreakIdx].location;
+                show->massOutbreak.locationMapGroup = 0;
+                show->massOutbreak.var12 = 0;
+                show->massOutbreak.probability = 50;
+                show->massOutbreak.var15 = 0;
+                show->massOutbreak.var16 = 1;
+                tv_store_id_2x(show);
+                show->massOutbreak.language = gGameLanguage;
+            }
+        }
+    }
 }
 
 asm(".section .text.dotvshow");
