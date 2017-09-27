@@ -19,6 +19,7 @@
 #include "link.h"
 #include "main.h"
 #include "event_scripts.h"
+#include "shop.h"
 #include "tv.h"
 
 // Static type declarations
@@ -1456,6 +1457,38 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     else
     {
         show->bravoTrainerTower.pokemonNameLanguage = gSaveBlock2Ptr->field_BEB;
+    }
+}
+
+void SaveRecordedItemPurchasesForTVShow(void)
+{
+    void sub_80EF500(void);
+    TVShow *show;
+    u8 i;
+
+    if (!(gSaveBlock1Ptr->location.mapGroup == 0x1a && gSaveBlock1Ptr->location.mapNum == 0x3c) && !(gSaveBlock1Ptr->location.mapGroup == 0x1a && gSaveBlock1Ptr->location.mapNum == 0x37) && !TV_BernoulliTrial(0x5555))
+    {
+        sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+        if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_SMART_SHOPPER, 0) != TRUE)
+        {
+            sub_80EF500();
+            if (gUnknown_02039F80[0].quantity >= 20)
+            {
+                show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+                show->smartshopperShow.kind = TVSHOW_SMART_SHOPPER;
+                show->smartshopperShow.active = FALSE;
+                show->smartshopperShow.shopLocation = gMapHeader.regionMapSectionId;
+                for (i = 0; i < 3; i ++)
+                {
+                    show->smartshopperShow.itemIds[i] = gUnknown_02039F80[i].itemId;
+                    show->smartshopperShow.itemAmounts[i] = gUnknown_02039F80[i].quantity;
+                }
+                show->smartshopperShow.priceReduced = GetPriceReduction(1);
+                StringCopy(show->smartshopperShow.playerName, gSaveBlock2Ptr->playerName);
+                tv_store_id_3x(show);
+                show->smartshopperShow.language = gGameLanguage;
+            }
+        }
     }
 }
 
