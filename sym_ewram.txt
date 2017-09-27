@@ -268,7 +268,7 @@ gUnknown_02022F88: @ 2022F88
 gBattleTypeFlags: @ 2022FEC
 	.space 0x4
 
-gUnknown_02022FF0: @ 2022FF0
+gBattleTerrain: @ 2022FF0
 	.space 0x4
 
 gUnknown_02022FF4: @ 2022FF4
@@ -382,7 +382,7 @@ gMultiHitCounter: @ 2024212
 gBattlescriptCurrInstr: @ 2024214
 	.space 0x8
 
-gUnknown_0202421C: @ 202421C
+gActionForBanks: @ 202421C
 	.space 0x4
 
 gUnknown_02024220: @ 2024220

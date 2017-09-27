@@ -31263,8 +31263,8 @@ _081AAA9E:
 	.pool
 	thumb_func_end sub_81AAA7C
 
-	thumb_func_start CalculateBattlePyramidPickupItemId
-CalculateBattlePyramidPickupItemId: @ 81AAAE0
+	thumb_func_start GetBattlePyramidPickupItemId
+GetBattlePyramidPickupItemId: @ 81AAAE0
 	push {r4-r6,lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
@@ -31331,6 +31331,6 @@ _081AAB5A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end CalculateBattlePyramidPickupItemId
+	thumb_func_end GetBattlePyramidPickupItemId
 
 	.align 2, 0 @ Don't pad with nop.

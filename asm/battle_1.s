@@ -1548,7 +1548,7 @@ _080358E0:
 	.4byte _08035A70
 _08035904:
 	ldr r4, =gUnknown_0831ABA8
-	ldr r5, =gUnknown_02022FF0
+	ldr r5, =gBattleTerrain
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2633,7 +2633,7 @@ _08036350:
 	cmp r0, 0
 	bne _0803639C
 	ldr r4, =gUnknown_0831ABA8
-	ldr r5, =gUnknown_02022FF0
+	ldr r5, =gBattleTerrain
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2779,7 +2779,7 @@ _080364A8:
 	.4byte _08036518
 _080364CC:
 	ldr r2, =gUnknown_0831ABA8
-	ldr r0, =gUnknown_02022FF0
+	ldr r0, =gBattleTerrain
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2889,7 +2889,7 @@ _080365B4:
 	.4byte _08036624
 _080365D8:
 	ldr r2, =gUnknown_0831ABA8
-	ldr r0, =gUnknown_02022FF0
+	ldr r0, =gBattleTerrain
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3004,7 +3004,7 @@ _080366C8:
 	.4byte _08036740
 _080366EC:
 	ldr r2, =gUnknown_0831ABA8
-	ldr r0, =gUnknown_02022FF0
+	ldr r0, =gBattleTerrain
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1

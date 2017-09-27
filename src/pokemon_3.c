@@ -1361,20 +1361,20 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
 void sub_806E994(void)
 {
     gLastUsedAbility = gBattleStruct->field_B0;
-    gBattleTextBuff1[0] = 0xFD;
-    gBattleTextBuff1[1] = 4;
+
+    gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
+    gBattleTextBuff1[1] = B_BUFF_MON_NICK_WITH_PREFIX;
     gBattleTextBuff1[2] = gBattleStruct->field_49;
-    gBattleTextBuff1[4] = EOS;
+    gBattleTextBuff1[4] = B_BUFF_EOS;
+
     if (!GetBankSide(gBattleStruct->field_49))
         gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[gBattleStruct->field_49]);
     else
         gBattleTextBuff1[3] = gBattlePartyID[gBattleStruct->field_49];
-    gBattleTextBuff2[0] = 0xFD;
-    gBattleTextBuff2[1] = 4;
-    gBattleTextBuff2[2] = gBankInMenu;
-    gBattleTextBuff2[3] = pokemon_order_func(gBattlePartyID[gBankInMenu]);
-    gBattleTextBuff2[4] = EOS;
-     BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
+
+    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBankInMenu, pokemon_order_func(gBattlePartyID[gBankInMenu]))
+
+    BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
 }
 
 struct PokeItem
@@ -1388,7 +1388,7 @@ extern const struct PokeItem gAlteringCaveWildMonHeldItems[9];
 static s32 GetWildMonTableIdInAlteringCave(u16 species)
 {
     s32 i;
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < (s32) ARRAY_COUNT(gAlteringCaveWildMonHeldItems); i++)
         if (gAlteringCaveWildMonHeldItems[i].species == species)
             return i;
     return 0;

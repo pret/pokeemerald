@@ -5495,7 +5495,7 @@ _081B2F04:
 	asrs r1, 16
 	ldr r2, [r6]
 	ldrb r2, [r2, 0x1A]
-	bl sub_8075034
+	bl GetScaledHPFraction
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrb r0, [r6, 0x8]

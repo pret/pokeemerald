@@ -170,7 +170,7 @@ _080368BE:
 	ldr r0, =gUnknown_02022E22
 	strh r1, [r0]
 	bl sub_80B0BD0
-	ldr r2, =gUnknown_02022FF0
+	ldr r2, =gBattleTerrain
 	strb r0, [r2]
 	ldr r4, =gBattleTypeFlags
 	ldr r0, [r4]
@@ -7852,7 +7852,7 @@ bc_load_battlefield: @ 803AC34
 	bl GetBankByIdentity
 	ldr r4, =gActiveBank
 	strb r0, [r4]
-	ldr r0, =gUnknown_02022FF0
+	ldr r0, =gBattleTerrain
 	ldrb r1, [r0]
 	movs r0, 0
 	bl dp01_build_cmdbuf_x2E_a
@@ -9207,7 +9207,7 @@ _0803B7DA:
 	ldr r1, =gBattleStruct
 	mov r8, r1
 	movs r7, 0x6
-	ldr r6, =gUnknown_0202421C
+	ldr r6, =gActionForBanks
 	ldr r2, =gChosenMovesByBanks
 	movs r4, 0xFF
 	movs r3, 0
@@ -9511,7 +9511,7 @@ _0803BAB2:
 	ldrb r0, [r4]
 	cmp r2, r0
 	bge _0803BAE0
-	ldr r7, =gUnknown_0202421C
+	ldr r7, =gActionForBanks
 	movs r6, 0xFF
 	movs r5, 0
 	ldr r3, =gChosenMovesByBanks
@@ -10049,7 +10049,7 @@ _0803BF68:
 	ands r3, r0
 	cmp r3, 0
 	beq _0803BFD0
-	ldr r0, =gUnknown_0202421C
+	ldr r0, =gActionForBanks
 	adds r0, r2, r0
 	movs r1, 0xD
 	strb r1, [r0]
@@ -10092,7 +10092,7 @@ _0803BFD0:
 	cmp r1, 0
 	beq _0803C00C
 _0803BFF0:
-	ldr r0, =gUnknown_0202421C
+	ldr r0, =gActionForBanks
 	adds r0, r2, r0
 	strb r3, [r0]
 	ldr r1, =gBattleCommunication
@@ -10100,7 +10100,7 @@ _0803BFF0:
 	bl _0803CC72
 	.pool
 _0803C00C:
-	ldr r0, =gUnknown_0202421C
+	ldr r0, =gActionForBanks
 	ldrb r1, [r0]
 	ldr r0, =gBattleBufferB
 	ldrb r2, [r0, 0x1]
@@ -10141,7 +10141,7 @@ _0803C058:
 	ldrb r1, [r0]
 	adds r0, r5, 0
 	bl RecordedBattle_SetBankAction
-	ldr r1, =gUnknown_0202421C
+	ldr r1, =gActionForBanks
 	ldrb r0, [r6]
 	adds r1, r0, r1
 	lsls r0, 9
@@ -10497,7 +10497,7 @@ _0803C3B0:
 	adds r4, r0, 0
 	cmp r1, 0x2
 	bne _0803C3D8
-	ldr r0, =gUnknown_0202421C
+	ldr r0, =gActionForBanks
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _0803C3D8
@@ -10511,7 +10511,7 @@ _0803C3D8:
 	ldrb r0, [r4]
 	cmp r0, 0x3
 	bne _0803C410
-	ldr r0, =gUnknown_0202421C
+	ldr r0, =gActionForBanks
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x2
 	bne _0803C410
@@ -10664,7 +10664,7 @@ _0803C532:
 	bl _0803CD70
 	.pool
 _0803C550:
-	ldr r4, =gUnknown_0202421C
+	ldr r4, =gActionForBanks
 	ldrb r0, [r5]
 	bl GetBankIdentity
 	eors r0, r6
@@ -10763,7 +10763,7 @@ _0803C628:
 	ands r0, r1
 	cmp r0, 0
 	beq _0803C690
-	ldr r4, =gUnknown_0202421C
+	ldr r4, =gActionForBanks
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
 	bl GetBankIdentity
@@ -10945,7 +10945,7 @@ _0803C7D8:
 	beq _0803C804
 	b _0803CD04
 _0803C804:
-	ldr r1, =gUnknown_0202421C
+	ldr r1, =gActionForBanks
 	adds r0, r5, r1
 	ldrb r0, [r0]
 	adds r2, r1, 0
@@ -11410,7 +11410,7 @@ _0803CC38:
 	lsls r1, 8
 	orrs r0, r1
 	str r0, [r2]
-	ldr r1, =gUnknown_0202421C
+	ldr r1, =gActionForBanks
 	ldrb r0, [r5]
 	adds r0, r1
 	movs r1, 0x3
@@ -11515,7 +11515,7 @@ _0803CD1E:
 	cmp r4, r5
 	bge _0803CD70
 _0803CD4A:
-	ldr r0, =gUnknown_0202421C
+	ldr r0, =gActionForBanks
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	cmp r0, 0x2
@@ -12033,7 +12033,7 @@ _0803D198:
 	b _0803D254
 	.pool
 _0803D1B8:
-	ldr r0, =gUnknown_0202421C
+	ldr r0, =gActionForBanks
 	mov r3, r9
 	adds r1, r3, r0
 	ldrb r1, [r1]
@@ -12209,7 +12209,7 @@ sub_803D2E8: @ 803D2E8
 	b _0803D54A
 _0803D310:
 	ldr r7, =gUnknown_0202407A
-	ldr r6, =gUnknown_0202421C
+	ldr r6, =gActionForBanks
 	mov r2, r8
 	ldr r5, =gTurnOrder
 _0803D318:
@@ -12245,7 +12245,7 @@ _0803D354:
 	ldrb r2, [r2]
 	cmp r3, r2
 	bcs _0803D3C0
-	ldr r0, =gUnknown_0202421C
+	ldr r0, =gActionForBanks
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x3
@@ -12269,7 +12269,7 @@ _0803D376:
 	b _0803D3BE
 	.pool
 _0803D3A4:
-	ldr r1, =gUnknown_0202421C
+	ldr r1, =gActionForBanks
 	ldrb r0, [r1]
 	ldr r4, =gActiveBank
 	mov r8, r4
@@ -12289,7 +12289,7 @@ _0803D3C0:
 	cmp r3, 0x5
 	bne _0803D448
 	ldr r6, =gUnknown_0202407A
-	ldr r1, =gUnknown_0202421C
+	ldr r1, =gActionForBanks
 	mov r2, r8
 	ldrb r0, [r2]
 	adds r0, r1
@@ -12349,7 +12349,7 @@ _0803D448:
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _0803D48E
-	ldr r6, =gUnknown_0202421C
+	ldr r6, =gActionForBanks
 	mov r2, r8
 	ldr r5, =gUnknown_0202407A
 	ldr r4, =gTurnOrder
@@ -12387,7 +12387,7 @@ _0803D48E:
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0803D4D2
-	ldr r6, =gUnknown_0202421C
+	ldr r6, =gActionForBanks
 	ldr r5, =gUnknown_0202407A
 	ldr r4, =gTurnOrder
 _0803D4A2:
@@ -15097,7 +15097,7 @@ sub_803EE48: @ 803EE48
 	cmp r1, 0
 	beq _0803EEE0
 	adds r4, r2, 0
-	ldr r6, =gUnknown_0202421C
+	ldr r6, =gActionForBanks
 	ldr r5, =gBattleOutcome
 _0803EE7C:
 	ldrb r0, [r4]
@@ -15797,8 +15797,8 @@ _0803F532:
 	.pool
 	thumb_func_end PressurePPLose
 
-	thumb_func_start sub_803F548
-sub_803F548: @ 803F548
+	thumb_func_start PressurePPLoseOnUsingImprision
+PressurePPLoseOnUsingImprision: @ 803F548
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -15946,10 +15946,10 @@ _0803F658:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_803F548
+	thumb_func_end PressurePPLoseOnUsingImprision
 
-	thumb_func_start sub_803F67C
-sub_803F67C: @ 803F67C
+	thumb_func_start PressurePPLoseOnUsingPerishSong
+PressurePPLoseOnUsingPerishSong: @ 803F67C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -16078,7 +16078,7 @@ _0803F762:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_803F67C
+	thumb_func_end PressurePPLoseOnUsingPerishSong
 
 	thumb_func_start sub_803F790
 sub_803F790: @ 803F790

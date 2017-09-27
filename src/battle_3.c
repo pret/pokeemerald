@@ -261,7 +261,7 @@ u8 sub_803FB4C(void)  // msg, can't select a move
         }
     }
 
-    if (IsImprisoned(gActiveBank, move))
+    if (GetImprisonedMovesCount(gActiveBank, move))
     {
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
@@ -314,13 +314,6 @@ u8 sub_803FB4C(void)  // msg, can't select a move
     return limitations;
 }
 
-#define MOVE_LIMITATION_ZEROMOVE    (1 << 0)
-#define MOVE_LIMITATION_PP          (1 << 1)
-#define MOVE_LIMITATION_DISABLED    (1 << 2)
-#define MOVE_LIMITATION_TORMENTED   (1 << 3)
-#define MOVE_LIMITATION_TAUNT       (1 << 4)
-#define MOVE_LIMITATION_IMPRISION   (1 << 5)
-
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check)
 {
     u8 holdEffect;
@@ -346,7 +339,7 @@ u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check)
             unusableMoves |= gBitTable[i];
         if (gDisableStructs[bank].tauntTimer1 && check & MOVE_LIMITATION_TAUNT && gBattleMoves[gBattleMons[bank].moves[i]].power == 0)
             unusableMoves |= gBitTable[i];
-        if (IsImprisoned(bank, gBattleMons[bank].moves[i]) && check & MOVE_LIMITATION_IMPRISION)
+        if (GetImprisonedMovesCount(bank, gBattleMons[bank].moves[i]) && check & MOVE_LIMITATION_IMPRISION)
             unusableMoves |= gBitTable[i];
         if (gDisableStructs[bank].encoreTimer1 && gDisableStructs[bank].encoredMove != gBattleMons[bank].moves[i])
             unusableMoves |= gBitTable[i];
@@ -374,7 +367,7 @@ bool8 AreAllMovesUnusable(void)
     return (unusable == 0xF);
 }
 
-u8 IsImprisoned(u8 bank, u16 move)
+u8 GetImprisonedMovesCount(u8 bank, u16 move)
 {
     s32 i;
     u8 imprisionedMoves = 0;
@@ -382,7 +375,7 @@ u8 IsImprisoned(u8 bank, u16 move)
 
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (bankSide != GetBankSide(i) && gStatuses3[i] & STATUS3_IMPRISIONED)
+        if (bankSide != GetBankSide(i) && gStatuses3[i] & STATUS3_IMPRISONED_OTHERS)
         {
             s32 j;
             for (j = 0; j < 4; j++)
@@ -1327,7 +1320,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             gBattleStruct->atkCancellerTracker++;
             break;
         case 8: // imprisoned
-            if (IsImprisoned(gBankAttacker, gCurrentMove))
+            if (GetImprisonedMovesCount(gBankAttacker, gCurrentMove))
             {
                 gProtectStructs[gBankAttacker].usedImprisionedMove = 1;
                 CancelMultiTurnMoves(gBankAttacker);
@@ -2379,7 +2372,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 }
             }
             break;
-        case ABILITYEFFECT_COUNT_OTHER_SIZE: // 16
+        case ABILITYEFFECT_COUNT_OTHER_SIDE: // 16
             side = GetBankSide(bank);
             for (i = 0; i < gNoOfAllBanks; i++)
             {
@@ -6238,7 +6231,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
                 targetBank = Random() % gNoOfAllBanks;
             } while (targetBank == gBankAttacker || side == GetBankSide(targetBank) || gAbsentBankFlags & gBitTable[targetBank]);
             if (gBattleMoves[move].type == TYPE_ELECTRIC
-                && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIZE, gBankAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
+                && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIDE, gBankAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
                 && gBattleMons[targetBank].ability != ABILITY_LIGHTNING_ROD)
             {
                 targetBank ^= 2;

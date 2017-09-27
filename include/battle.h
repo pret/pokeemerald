@@ -112,7 +112,7 @@
 #define STATUS3_ROOTED                  0x400
 #define STATUS3_CHARGED_UP              0x200
 #define STATUS3_YAWN                    0x1800  //two bits
-#define STATUS3_IMPRISIONED             0x2000
+#define STATUS3_IMPRISONED_OTHERS      0x2000
 #define STATUS3_GRUDGE                  0x4000
 #define STATUS3_CANT_SCORE_A_CRIT       0x8000
 #define STATUS3_MUDSPORT                0x10000
@@ -172,7 +172,7 @@
 #define ABILITYEFFECT_CHECK_BANK_SIDE           0xD
 #define ABILITYEFFECT_FIELD_SPORT               0xE
 #define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK   0xF
-#define ABILITYEFFECT_COUNT_OTHER_SIZE          0x10
+#define ABILITYEFFECT_COUNT_OTHER_SIDE          0x10
 #define ABILITYEFFECT_COUNT_BANK_SIDE           0x11
 #define ABILITYEFFECT_COUNT_ON_FIELD            0x12
 #define ABILITYEFFECT_CHECK_ON_FIELD            0x13
@@ -205,6 +205,15 @@
 #define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
 #define WEATHER_HAIL                (1 << 7)
 #define WEATHER_HAIL_ANY ((WEATHER_HAIL))
+
+#define BATTLE_TERRAIN_GRASS        0
+#define BATTLE_TERRAIN_LONG_GRASS   1
+#define BATTLE_TERRAIN_SAND         2
+#define BATTLE_TERRAIN_UNDERWATER   3
+#define BATTLE_TERRAIN_WATER        4
+#define BATTLE_TERRAIN_POND         5
+#define BATTLE_TERRAIN_ROCK         6
+#define BATTLE_TERRAIN_CAVE         7
 
 // array entries for battle communication
 #define CURSOR_POSITION     0x1
@@ -554,46 +563,7 @@ struct BattleStruct
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[4];
-    u8 field_18;
-    u8 field_19;
-    u8 field_1A;
-    u8 field_1B;
-    u8 field_1C;
-    u8 field_1D;
-    u8 field_1E;
-    u8 field_1F;
-    u8 field_20;
-    u8 field_21;
-    u8 field_22;
-    u8 field_23;
-    u8 field_24;
-    u8 field_25;
-    u8 field_26;
-    u8 field_27;
-    u8 field_28;
-    u8 field_29;
-    u8 field_2A;
-    u8 field_2B;
-    u8 field_2C;
-    u8 field_2D;
-    u8 field_2E;
-    u8 field_2F;
-    u8 field_30;
-    u8 field_31;
-    u8 field_32;
-    u8 field_33;
-    u8 field_34;
-    u8 field_35;
-    u8 field_36;
-    u8 field_37;
-    u8 field_38;
-    u8 field_39;
-    u8 field_3A;
-    u8 field_3B;
-    u8 field_3C;
-    u8 field_3D;
-    u8 field_3E;
-    u8 field_3F;
+    u16 assistPossibleMoves[5 * 4]; // 5 mons, each of them knowing 4 moves
     u8 field_40;
     u8 field_41;
     u8 field_42;
@@ -708,28 +678,6 @@ extern struct BattleStruct* gBattleStruct;
     u8* var2 = (u8*)((u32)(arrayId));                                           \
     var2 = (u32)(structPtr) + var2;                                             \
     var2[offsetof(struct structName, offsetField)] = value;                     \
-}
-
-// This is a leftover from R/S direct use of ewram addresses
-#define GET_CHANGED_ITEM_PTR_VIA_MEME_ACCESS(bank, varName)                                         \
-{                                                                                                   \
-    void** memes1 = (void**)(&gBattleStruct);                                                       \
-    void* memes2 = (void*)((u32)(bank * 2 + offsetof(struct BattleStruct, changedItems)));          \
-    varName = (u16*)(((void*)(*memes1) + (u32)(memes2)));                                           \
-}
-
-#define GET_USED_ITEM_PTR_VIA_MEME_ACCESS(bank, varName)                                            \
-{                                                                                                   \
-    void** memes1 = (void**)(&gBattleStruct);                                                       \
-    void* memes2 = (void*)((u32)(bank * 2 + offsetof(struct BattleStruct, usedHeldItems)));         \
-    varName = (u16*)(((void*)(*memes1) + (u32)(memes2)));                                           \
-}
-
-#define GET_HP_SWITCHOUT_PTR_VIA_MEME_ACCESS(bank, varName)                                         \
-{                                                                                                   \
-    void** memes1 = (void**)(&gBattleStruct);                                                       \
-    void* memes2 = (void*)((u32)(bank * 2 + offsetof(struct BattleStruct, hpOnSwitchout)));         \
-    varName = (u16*)(((void*)(*memes1) + (u32)(memes2)));                                           \
 }
 
 #define GET_MOVE_TYPE(move, typeArg)                        \
@@ -917,15 +865,24 @@ void BattleMainCB2(void);
 void ResetSentPokesToOpponentValue(void);
 bool8 CanRunFromBattle(u8 bank);
 bool8 IsRunningFromBattleImpossible(void);
+void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
+void PressurePPLoseOnUsingImprision(u8 bankAtk);
 
 // battle_3
+#define MOVE_LIMITATION_ZEROMOVE    (1 << 0)
+#define MOVE_LIMITATION_PP          (1 << 1)
+#define MOVE_LIMITATION_DISABLED    (1 << 2)
+#define MOVE_LIMITATION_TORMENTED   (1 << 3)
+#define MOVE_LIMITATION_TAUNT       (1 << 4)
+#define MOVE_LIMITATION_IMPRISION   (1 << 5)
+
 void BattleScriptPush(const u8* bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);
 u8 sub_803FB4C(void);  // msg, can't select a move
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 bool8 AreAllMovesUnusable(void);
-u8 IsImprisoned(u8 bank, u16 move);
+u8 GetImprisonedMovesCount(u8 bank, u16 move);
 u8 UpdateTurnCounters(void);
 u8 TurnBasedEffects(void);
 bool8 sub_8041364(void);

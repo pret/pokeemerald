@@ -186,7 +186,7 @@ evolution_cutscene: @ 813DA8C
 	ldr r0, =gUnknown_02022E22
 	movs r1, 0
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022FF0
+	ldr r1, =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
 	bl c2_berry_program_update_menu
@@ -479,7 +479,7 @@ sub_813DD7C: @ 813DD7C
 	strh r0, [r1]
 	ldr r0, =gUnknown_02022E22
 	strh r4, [r0]
-	ldr r1, =gUnknown_02022FF0
+	ldr r1, =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
 	bl c2_berry_program_update_menu

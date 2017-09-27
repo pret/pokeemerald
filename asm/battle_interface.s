@@ -5476,8 +5476,8 @@ _08075028:
 	bx r1
 	thumb_func_end sub_8074FE8
 
-	thumb_func_start sub_8075034
-sub_8075034: @ 8075034
+	thumb_func_start GetScaledHPFraction
+GetScaledHPFraction: @ 8075034
 	push {r4,lr}
 	lsls r2, 24
 	lsrs r2, 24
@@ -5499,7 +5499,7 @@ _08075058:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8075034
+	thumb_func_end GetScaledHPFraction
 
 	thumb_func_start sub_8075060
 sub_8075060: @ 8075060
@@ -5514,7 +5514,7 @@ sub_8075060: @ 8075060
 	b _0807508E
 _08075072:
 	movs r2, 0x30
-	bl sub_8075034
+	bl GetScaledHPFraction
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x3

@@ -82,6 +82,14 @@
     textVar[3] = B_BUFF_EOS;                                                \
 }
 
+#define PREPARE_ABILITY_BUFFER(textVar, abilityId)                          \
+{                                                                           \
+    textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
+    textVar[1] = B_BUFF_ABILITY;                                            \
+    textVar[2] = abilityId;                                                 \
+    textVar[3] = B_BUFF_EOS;                                                \
+}
+
 #define PREPARE_TYPE_BUFFER(textVar, typeId)                                \
 {                                                                           \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
@@ -139,6 +147,15 @@
     textVar[1] = B_BUFF_MOVE;                                   \
     textVar[2] = move;                                          \
     textVar[3] = (move & 0xFF00) >> 8;                          \
+    textVar[4] = B_BUFF_EOS;                                    \
+}
+
+#define PREPARE_ITEM_BUFFER(textVar, item)                      \
+{                                                               \
+    textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
+    textVar[1] = B_BUFF_ITEM;                                   \
+    textVar[2] = item;                                          \
+    textVar[3] = (item & 0xFF00) >> 8;                          \
     textVar[4] = B_BUFF_EOS;                                    \
 }
 

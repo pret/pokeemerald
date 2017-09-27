@@ -47348,7 +47348,7 @@ sub_811675C: @ 811675C
 	ldrsh r0, [r0, r1]
 	bl sub_811583C
 	adds r2, r0, 0
-	ldr r0, =gUnknown_02022FF0
+	ldr r0, =gBattleTerrain
 	ldrb r0, [r0]
 	cmp r0, 0x9
 	bhi _08116832
@@ -49759,7 +49759,7 @@ sub_8117C24: @ 8117C24
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gBattleAnimArgs
-	ldr r1, =gUnknown_02022FF0
+	ldr r1, =gBattleTerrain
 	ldrb r1, [r1]
 	strh r1, [r2]
 	bl move_anim_task_del

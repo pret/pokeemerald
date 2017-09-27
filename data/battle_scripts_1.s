@@ -6,13 +6,13 @@
 gBattleScriptsForMoveEffects:: @ 82D86A8
 	.incbin "baserom.gba", 0x2d86a8, 0x388
 
-gUnknown_082D8A30:: @ 82D8A30
+BattleScript_PresentDamageTarget:: @ 82D8A30
 	.incbin "baserom.gba", 0x2d8a30, 0x1e
 
 BattleScript_MoveEnd:: @ 82D8A4E
 	.incbin "baserom.gba", 0x2d8a4e, 0x12
 
-gUnknown_082D8A60:: @ 82D8A60
+BattleScript_PauseEffectivenessSoundResultMsgEndMove:: @ 82D8A60
 	.incbin "baserom.gba", 0x2d8a60, 0x274
 
 BattleScript_StatUp:: @ 82D8CD4
@@ -24,10 +24,10 @@ BattleScript_StatDown:: @ 82D8D65
 BattleScript_MoveUsedMustRecharge:: @ 82D9462
 	.incbin "baserom.gba", 0x2d9462, 0xa7f
 
-gUnknown_082D9EE1:: @ 82D9EE1
+BattleScript_PresentHealTarget:: @ 82D9EE1
 	.incbin "baserom.gba", 0x2d9ee1, 0x1a
 
-gUnknown_082D9EFB:: @ 82D9EFB
+BattleScript_AlreadyAtFullHp:: @ 82D9EFB
 	.incbin "baserom.gba", 0x2d9efb, 0x21
 
 BattleScript_ButItFailed:: @ 82D9F1C
@@ -180,13 +180,13 @@ BattleScript_AllStatsUp:: @ 82DAF27
 BattleScript_RapidSpinAway:: @ 82DAFC3
 	.incbin "baserom.gba", 0x2dafc3, 0x2
 
-gUnknown_082DAFC5:: @ 82DAFC5
+BattleScript_WrapFree:: @ 82DAFC5
 	.incbin "baserom.gba", 0x2dafc5, 0x11
 
-gUnknown_082DAFD6:: @ 82DAFD6
+BattleScript_LeechSeedFree:: @ 82DAFD6
 	.incbin "baserom.gba", 0x2dafd6, 0x7
 
-gUnknown_082DAFDD:: @ 82DAFDD
+BattleScript_SpikesFree:: @ 82DAFDD
 	.incbin "baserom.gba", 0x2dafdd, 0x7
 
 gUnknown_082DAFE4:: @ 82DAFE4
@@ -444,7 +444,7 @@ BattleScript_SoundproofProtected:: @ 82DB61F
 BattleScript_AbilityNoSpecificStatLoss:: @ 82DB62F
 	.incbin "baserom.gba", 0x2db62f, 0x10
 
-BattleScript_StickyHoldOnKnockOff:: @ 82DB63F
+BattleScript_StickyHoldActivates:: @ 82DB63F
 	.incbin "baserom.gba", 0x2db63f, 0xe
 
 BattleScript_ColorChangeActivates:: @ 82DB64D
