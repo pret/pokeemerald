@@ -67,13 +67,7 @@ gUnknown_0831C3B8:: @ 831C3B8
 
 	.align 2
 gUnknown_0831C3C0:: @ 831C3C0
-	.2byte 0xd75a @ tileTag
-	.2byte 0xd75a @ paletteTag
-	.4byte gUnknown_0831C3B8
-	.4byte gDummySpriteAnimTable
-	.4byte NULL
-	.4byte gDummySpriteAffineAnimTable
-	.4byte sub_804F450
+	spr_template 0xd75a, 0xd75a, gUnknown_0831C3B8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_804F450
 
 	.align 2
 sProtectSuccessRates:: @ 831C3D8

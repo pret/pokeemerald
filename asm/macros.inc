@@ -20,10 +20,41 @@
 	.2byte \tag
 	.endm
 
+	.macro null_obj_tiles
+	obj_tiles 0, 0, 0
+	.endm
+
 	.macro obj_pal address, tag
 	.4byte \address
 	.2byte \tag
 	.2byte 0@ padding
+	.endm
+
+	.macro null_obj_pal
+	obj_pal 0, 0
+	.endm
+
+	.macro paired_pals tag, address
+	.2byte \tag
+	.2byte 0 @ padding
+	.4byte \address
+	.endm
+
+@ For object animation frames.
+	.macro obj_frame_tiles address, uncompressed_size
+	.4byte \address
+	.2byte \uncompressed_size
+	.2byte 0 @ padding
+	.endm
+
+	.macro spr_template tile_tag, pal_tag, oam, anims, images, affine_anims, callback
+	.2byte \tile_tag
+	.2byte \pal_tag
+	.4byte \oam
+	.4byte \anims
+	.4byte \images
+	.4byte \affine_anims
+	.4byte \callback
 	.endm
 
 @ Berry trees have a table defining the palette slot used for each of their 5

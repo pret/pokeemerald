@@ -645,11 +645,29 @@ gUnknown_08DAAFEC:: @ 8DAAFEC
 	.incbin "baserom.gba", 0xdb7aa0, 0x2a78
 
 gUnknown_08DBA518:: @ 8DBA518
-	.incbin "baserom.gba", 0xdba518, 0xa0
+	.incbin "baserom.gba", 0xdba518, 0x80
 
+	.align 2
+gCableCar_Pal:: @ 8DBA598
+	.incbin "graphics/misc/cable_car.gbapal"
+
+	.align 2
 gUnknown_08DBA5B8:: @ 8DBA5B8
-	.incbin "baserom.gba", 0xdba5b8, 0x1d30
+	.incbin "baserom.gba", 0xdba5b8, 0x19d8
 
+	.align 2
+gCableCar_Gfx:: @ 8DBBF90
+	.incbin "graphics/misc/cable_car.4bpp.lz"
+
+	.align 2
+gCableCarDoor_Gfx:: @ 8DBC290
+	.incbin "graphics/misc/cable_car_door.4bpp.lz"
+
+	.align 2
+gCableCarCord_Gfx:: @ 8DBC2C0
+	.incbin "graphics/misc/cable_car_cord.4bpp.lz"
+
+	.align 2
 gUnknown_08DBC2E8:: @ 8DBC2E8
 	.incbin "baserom.gba", 0xdbc2e8, 0x72c
 

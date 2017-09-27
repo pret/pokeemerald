@@ -1264,7 +1264,7 @@ sub_8127454: @ 8127454
 	ldr r1, =gStringVar1
 	bl StringCopy
 	lsls r4, 5
-	ldr r0, =gUnknown_085A5C09
+	ldr r0, =gDecorations + 1
 	adds r4, r0
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -7083,7 +7083,7 @@ sub_812A3D4: @ 812A3D4
 	adds r1, r2
 	ldrb r1, [r1]
 	lsls r1, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4

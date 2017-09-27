@@ -13,6 +13,7 @@
 	.include "constants/trainer_constants.inc"
 	.include "constants/battle_frontier_constants.inc"
 	.include "constants/map_constants.inc"
+	.include "constants/map_object_constants.inc"
 	.include "constants/berry_constants.inc"
 	.include "constants/field_object_constants.inc"
 	.include "constants/contest_move_effects.inc"
