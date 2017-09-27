@@ -3,116 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80ED320
-sub_80ED320: @ 80ED320
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	bl sub_80EF7A8
-	ldr r0, =gScriptResult
-	ldrh r0, [r0]
-	cmp r0, 0x1
-	beq _080ED400
-	ldr r0, =gSpecialVar_0x8004
-	mov r8, r0
-	ldrh r0, [r0]
-	movs r7, 0x64
-	muls r0, r7
-	ldr r6, =gPlayerParty
-	adds r0, r6
-	ldr r4, =gStringVar1
-	movs r1, 0x2
-	adds r2, r4, 0
-	bl GetMonData
-	ldr r1, =gSaveBlock2Ptr
-	mov r9, r1
-	ldr r0, [r1]
-	bl StringLength
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1
-	bls _080ED400
-	adds r0, r4, 0
-	bl StringLength
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1
-	bls _080ED400
-	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =sCurTVShowSlot
-	movs r1, 0
-	ldrsb r1, [r0, r1]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =0x000027cc
-	adds r0, r1
-	ldr r4, [r2]
-	adds r4, r0
-	movs r0, 0x5
-	strb r0, [r4]
-	movs r5, 0x1
-	strb r5, [r4, 0x1]
-	mov r2, r8
-	ldrh r0, [r2]
-	muls r0, r7
-	adds r0, r6
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r4, 0x2]
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x3
-	bl __umodsi3
-	strb r0, [r4, 0x1A]
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	ands r0, r5
-	strb r0, [r4, 0x1B]
-	ldrh r0, [r4, 0x2]
-	bl sub_80EFA24
-	strh r0, [r4, 0x1C]
-	adds r0, r4, 0
-	adds r0, 0xF
-	mov r2, r9
-	ldr r1, [r2]
-	bl StringCopy
-	mov r1, r8
-	ldrh r0, [r1]
-	muls r0, r7
-	adds r0, r6
-	adds r5, r4, 0x4
-	movs r1, 0x2
-	adds r2, r5, 0
-	bl GetMonData
-	adds r0, r5, 0
-	bl StripExtCtrlCodes
-	adds r0, r4, 0
-	bl tv_store_id_2x
-	ldr r0, =gGameLanguage
-	ldrb r0, [r0]
-	strb r0, [r4, 0x1E]
-	mov r2, r8
-	ldrh r0, [r2]
-	muls r0, r7
-	adds r0, r6
-	movs r1, 0x3
-	bl GetMonData
-	strb r0, [r4, 0x1F]
-_080ED400:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80ED320
-
 	thumb_func_start StartMassOutbreak
 StartMassOutbreak: @ 80ED430
 	push {r4,r5,lr}
@@ -5097,7 +4987,7 @@ sub_80EFD98: @ 80EFD98
 	bl StringCompare
 	cmp r0, 0
 	beq _080EFDD4
-	bl sub_80ED320
+	bl PutNameRaterShowOnTheAir
 	movs r0, 0x1
 	b _080EFDD6
 	.pool
