@@ -964,10 +964,10 @@ void GabbyAndTySetScriptVarsToFieldObjectLocalIds(void)
 
 void InterviewAfter(void)
 {
-    void InterviewAfter_FanClubLetter(void);
-    void InterviewAfter_RecentHappenings(void);
-    void InterviewAfter_PkmnFanClubOpinions(void);
-    void InterviewAfter_DummyShow4(void);
+    static void InterviewAfter_FanClubLetter(void);
+    static void InterviewAfter_RecentHappenings(void);
+    static void InterviewAfter_PkmnFanClubOpinions(void);
+    static void InterviewAfter_DummyShow4(void);
     static void InterviewAfter_BravoTrainerPokemonProfile(void);
     static void InterviewAfter_BravoTrainerBattleTowerProfile(void);
     static void InterviewAfter_ContestLiveUpdates(void);
@@ -1563,7 +1563,7 @@ void PutLilycoveContestLadyShowOnTheAir(void)
     }
 }
 
-void InterviewAfter_FanClubLetter(void)
+static void InterviewAfter_FanClubLetter(void)
 {
     TVShow *show;
 
@@ -1576,7 +1576,7 @@ void InterviewAfter_FanClubLetter(void)
     show->fanclubLetter.language = gGameLanguage;
 }
 
-void InterviewAfter_RecentHappenings(void)
+static void InterviewAfter_RecentHappenings(void)
 {
     TVShow *show;
 
@@ -1587,6 +1587,38 @@ void InterviewAfter_RecentHappenings(void)
     show->recentHappenings.var02 = 0;
     tv_store_id_2x(show);
     show->recentHappenings.language = gGameLanguage;
+}
+
+static void InterviewAfter_PkmnFanClubOpinions(void)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+    show->fanclubOpinions.kind = TVSHOW_PKMN_FAN_CLUB_OPINIONS;
+    show->fanclubOpinions.active = TRUE;
+    show->fanclubOpinions.friendshipHighNybble = GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_FRIENDSHIP, NULL) >> 4;
+    show->fanclubOpinions.var04B = gSpecialVar_0x8007;
+    StringCopy(show->fanclubOpinions.playerName, gSaveBlock2Ptr->playerName);
+    GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_NICKNAME, show->fanclubOpinions.nickname);
+    StripExtCtrlCodes(show->fanclubOpinions.nickname);
+    show->fanclubOpinions.species = GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_SPECIES, NULL);
+    tv_store_id_2x(show);
+    show->fanclubOpinions.language = gGameLanguage;
+    if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
+    {
+        show->fanclubOpinions.var0E = LANGUAGE_JAPANESE;
+    }
+    else
+    {
+        show->fanclubOpinions.var0E = GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_LANGUAGE);
+    }
+}
+
+static void InterviewAfter_DummyShow4()
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
 }
 
 asm(".section .text.dotvshow");

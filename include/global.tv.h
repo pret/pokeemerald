@@ -82,14 +82,14 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 var02;
-        /*0x04*/ u8 var04A:4;
+        /*0x02*/ u16 species;
+        /*0x04*/ u8 friendshipHighNybble:4;
         /*0x04*/ u8 var04B:4;
         /*0x05*/ u8 playerName[8];
         /*0x0D*/ u8 language;
         /*0x0E*/ u8 var0E;
         /*0x0F*/ u8 var0F;
-        /*0x10*/ u8 var10[8];
+        /*0x10*/ u8 nickname[8];
         /*0x18*/ u16 var18[2];
         /*0x1C*/ u16 var1C[4];
     } fanclubOpinions;
