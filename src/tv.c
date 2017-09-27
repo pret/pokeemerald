@@ -13,6 +13,7 @@
 #include "species.h"
 #include "moves.h"
 #include "battle.h"
+#include "battle_tower.h"
 #include "contest.h"
 #include "items.h"
 #include "link.h"
@@ -962,7 +963,7 @@ void InterviewAfter(void)
     void InterviewAfter_PkmnFanClubOpinions(void);
     void InterviewAfter_DummyShow4(void);
     static void InterviewAfter_BravoTrainerPokemonProfile(void);
-    void InterviewAfter_BravoTrainerBattleTowerProfile(void);
+    static void InterviewAfter_BravoTrainerBattleTowerProfile(void);
     static void InterviewAfter_ContestLiveUpdates(void);
 
     switch (gSpecialVar_0x8005)
@@ -1421,6 +1422,40 @@ void BravoTrainerPokemonProfile_BeforeInterview2(u8 a0)
         GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_NICKNAME, show->bravoTrainer.pokemonNickname);
         StripExtCtrlCodes(show->bravoTrainer.pokemonNickname);
         show->bravoTrainer.pokemonNameLanguage = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_LANGUAGE);
+    }
+}
+
+static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+    show->bravoTrainerTower.kind = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
+    show->bravoTrainerTower.active = TRUE;
+    StringCopy(show->bravoTrainerTower.trainerName, gSaveBlock2Ptr->playerName);
+    StringCopy(show->bravoTrainerTower.pokemonName, gSaveBlock2Ptr->field_BD8);
+    show->bravoTrainerTower.species = gSaveBlock2Ptr->field_BD4;
+    show->bravoTrainerTower.defeatedSpecies = gSaveBlock2Ptr->field_BD6;
+    show->bravoTrainerTower.numFights = sub_8164FCC(gSaveBlock2Ptr->field_D07, 0);
+    show->bravoTrainerTower.var1c = gSaveBlock2Ptr->field_D06;
+    if (gSaveBlock2Ptr->field_D07 == 0)
+    {
+        show->bravoTrainerTower.btLevel = 50;
+    }
+    else
+    {
+        show->bravoTrainerTower.btLevel = 100;
+    }
+    show->bravoTrainerTower.var1b = gSpecialVar_0x8004;
+    tv_store_id_2x(show);
+    show->bravoTrainerTower.language = gGameLanguage;
+    if (show->bravoTrainerTower.language == LANGUAGE_JAPANESE || gSaveBlock2Ptr->field_BEB == LANGUAGE_JAPANESE)
+    {
+        show->bravoTrainerTower.pokemonNameLanguage = LANGUAGE_JAPANESE;
+    }
+    else
+    {
+        show->bravoTrainerTower.pokemonNameLanguage = gSaveBlock2Ptr->field_BEB;
     }
 }
 
