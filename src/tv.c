@@ -1521,6 +1521,26 @@ void PutNameRaterShowOnTheAir(void)
     }
 }
 
+void StartMassOutbreak(void)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gSaveBlock1Ptr->outbreakPokemonSpecies = show->massOutbreak.species;
+    gSaveBlock1Ptr->outbreakLocationMapNum = show->massOutbreak.locationMapNum;
+    gSaveBlock1Ptr->outbreakLocationMapGroup = show->massOutbreak.locationMapGroup;
+    gSaveBlock1Ptr->outbreakPokemonLevel = show->massOutbreak.level;
+    gSaveBlock1Ptr->outbreakUnk1 = show->massOutbreak.var02;
+    gSaveBlock1Ptr->outbreakUnk2 = show->massOutbreak.var0E;
+    gSaveBlock1Ptr->outbreakPokemonMoves[0] = show->massOutbreak.moves[0];
+    gSaveBlock1Ptr->outbreakPokemonMoves[1] = show->massOutbreak.moves[1];
+    gSaveBlock1Ptr->outbreakPokemonMoves[2] = show->massOutbreak.moves[2];
+    gSaveBlock1Ptr->outbreakPokemonMoves[3] = show->massOutbreak.moves[3];
+    gSaveBlock1Ptr->outbreakUnk4 = show->massOutbreak.var03;
+    gSaveBlock1Ptr->outbreakPokemonProbability = show->massOutbreak.probability;
+    gSaveBlock1Ptr->outbreakUnk5 = 2;
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);
