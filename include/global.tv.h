@@ -211,7 +211,12 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        // TODO: flesh this out
+        /*0x02*/ u8 playerName[8];
+        /*0x0a*/ u8 contestCategory;
+        /*0x0b*/ u8 categoryName[11];
+        /*0x16*/ u8 pokeblockState;
+        /*0x17*/ u8 language;
+        /*0x18*/ u8 unk_18;
     } contestLiveUpdates2;
 
     // TVSHOW_POKEMON_TODAY_CAUGHT

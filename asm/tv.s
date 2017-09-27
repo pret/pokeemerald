@@ -3,52 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80ED4DC
-sub_80ED4DC: @ 80ED4DC
-	push {r4,lr}
-	bl sub_80EFA88
-	ldr r0, =gScriptResult
-	ldrh r0, [r0]
-	cmp r0, 0x1
-	beq _080ED532
-	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =sCurTVShowSlot
-	movs r1, 0
-	ldrsb r1, [r0, r1]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =0x000027cc
-	adds r0, r1
-	ldr r1, [r2]
-	adds r4, r1, r0
-	adds r0, r4, 0
-	adds r0, 0x17
-	bl sub_818E848
-	movs r0, 0x2
-	strb r0, [r4, 0x18]
-	movs r0, 0xC
-	strb r0, [r4]
-	movs r0, 0x1
-	strb r0, [r4, 0x1]
-	adds r0, r4, 0x2
-	bl sub_818E81C
-	adds r0, r4, 0
-	adds r0, 0xA
-	adds r1, r4, 0
-	adds r1, 0xB
-	bl sub_818E7E0
-	bl sub_818E880
-	strb r0, [r4, 0x16]
-	adds r0, r4, 0
-	bl tv_store_id_2x
-_080ED532:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80ED4DC
-
 	thumb_func_start InterviewAfter_FanClubLetter
 InterviewAfter_FanClubLetter: @ 80ED548
 	push {r4,lr}

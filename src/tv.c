@@ -20,6 +20,7 @@
 #include "main.h"
 #include "event_scripts.h"
 #include "shop.h"
+#include "lilycove_lady.h"
 #include "tv.h"
 
 // Static type declarations
@@ -56,6 +57,7 @@ void FindActiveBroadcastByShowType_SetScriptResult(u8);
 void sub_80EF7B4(void);
 void sub_80EF7A8(void);
 u16 sub_80EFA24(u16);
+void sub_80EFA88(void);
 
 // .rodata
 
@@ -1539,6 +1541,25 @@ void StartMassOutbreak(void)
     gSaveBlock1Ptr->outbreakUnk4 = show->massOutbreak.var03;
     gSaveBlock1Ptr->outbreakPokemonProbability = show->massOutbreak.probability;
     gSaveBlock1Ptr->outbreakUnk5 = 2;
+}
+
+void PutLilycoveContestLadyShowOnTheAir(void)
+{
+    TVShow *show;
+
+    sub_80EFA88();
+    if (gScriptResult != TRUE)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        sub_818E848(&show->contestLiveUpdates2.language);
+        show->contestLiveUpdates2.unk_18 = 2;
+        show->contestLiveUpdates2.kind = TVSHOW_CONTEST_LIVE_UPDATES_2;
+        show->contestLiveUpdates2.active = TRUE;
+        sub_818E81C(show->contestLiveUpdates2.playerName);
+        sub_818E7E0(&show->contestLiveUpdates2.contestCategory, show->contestLiveUpdates2.categoryName);
+        show->contestLiveUpdates2.pokeblockState = sub_818E880();
+        tv_store_id_2x(show);
+    }
 }
 
 asm(".section .text.dotvshow");
