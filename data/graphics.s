@@ -13,7 +13,13 @@ gUnknown_08C00524:: @ 8C00524
 	.include "data/graphics/pokemon/circled_question_mark_graphics.inc"
 
 @ 8C00C10
-	.incbin "baserom.gba", 0xc00c10, 0x16f0
+	.incbin "baserom.gba", 0xc00c10, 0xa34
+
+gUnknown_08C01644:: @ 8C01644
+	.incbin "baserom.gba", 0xc01644, 0xE0
+
+gUnknown_08C01724:: @ 8C01724
+	.incbin "baserom.gba", 0xc01724, 0xBDC
 
 gUnknown_08C02300:: @ 8C02300
 	.incbin "baserom.gba", 0xc02300, 0x70f0
@@ -453,7 +459,10 @@ gUnknown_08D8EC24:: @ 8D8EC24
 	.incbin "baserom.gba", 0xd8ec24, 0xf78
 
 gUnknown_08D8FB9C:: @ 8D8FB9C
-	.incbin "baserom.gba", 0xd8fb9c, 0xd8
+	.incbin "baserom.gba", 0xd8fb9c, 0x24
+
+gUnknown_08D8FBC0:: @ 8D8FBC0
+	.incbin "baserom.gba", 0xd8fbc0, 0xb4
 
 	.align 2
 gMonIcon_Egg:: @ 8D8FC74
