@@ -72,8 +72,8 @@ gIntroBattleCircleGfx:: @ 85E45B0
 	.incbin "graphics/intro/battle_circle.4bpp.lz"
 
 	.align 2
-gIntroFlyingPkmnShadowPal:: @ 85E492C
-	.incbin "graphics/intro/flying_shadow.gbapal"
+gIntroFlyingPkmnSilhouettePal:: @ 85E492C
+	.incbin "graphics/intro/flying_silhouette.gbapal"
 
 	.align 2
 	.incbin "graphics/intro/latis.4bpp.lz"
@@ -90,12 +90,12 @@ gIntroFlyingPkmnShadowPal:: @ 85E492C
 
 	.align 2
 gUnknown_085E4A74:: @ 85E4A74
-	obj_tiles gUnknown_08D8D208, 0x0400, 0x05e1
+	obj_tiles gIntroLeavesDropletSparkleGfx, 0x0400, 0x05e1
 	null_obj_tiles
 
 	.align 2
 gUnknown_085E4A84:: @ 85E4A84
-	obj_pal gUnknown_08D8BA54, 0x05e1
+	obj_pal gIntroRayquazaLightningPal, 0x05e1
 	null_obj_pal
 
 	.align 2
@@ -122,16 +122,16 @@ gUnknown_085E4AD0:: @ 85E4AD0
 
 	.align 2
 gUnknown_085E4AE8:: @ 85E4AE8
-	obj_tiles gUnknown_08D85F50, 0x0400, 0x05dc
-	obj_tiles gUnknown_08D86130, 0x0c00, 0x05dd
-	obj_tiles gUnknown_08D86550, 0x2000, 0x05de
+	obj_tiles gIntroVolbeatGfx, 0x0400, 0x05dc
+	obj_tiles gIntroTorchicGfx, 0x0c00, 0x05dd
+	obj_tiles gIntroManectricGfx, 0x2000, 0x05de
 	null_obj_tiles
 
 	.align 2
 gUnknown_085E4B08:: @ 85E4B08
-	obj_pal gUnknown_08D85ED0, 0x05dc
-	obj_pal gUnknown_08D85EF0, 0x05dd
-	obj_pal gUnknown_08D85F10, 0x05de
+	obj_pal gIntroVolbeatPal, 0x05dc
+	obj_pal gIntroTorchicPal, 0x05dd
+	obj_pal gIntroManectricPal, 0x05de
 	null_obj_pal
 
 	.align 2
@@ -194,12 +194,12 @@ gUnknown_085E4BDC:: @ 85E4BDC
 
 	.align 2
 gUnknown_085E4BF4:: @ 85E4BF4
-	obj_tiles gUnknown_08D8B80C, 0x0c00, 0x05df
+	obj_tiles gIntroRayquazaLightningGfx, 0x0c00, 0x05df
 	null_obj_tiles
 
 	.align 2
 gUnknown_085E4C04:: @ 85E4C04
-	obj_pal gUnknown_08D8BA54, 0x05df
+	obj_pal gIntroRayquazaLightningPal, 0x05df
 	null_obj_pal
 
 	.align 2
@@ -236,12 +236,12 @@ gUnknown_085E4C64:: @ 85E4C64
 
 	.align 2
 gUnknown_085E4C88:: @ 85E4C88
-	obj_tiles gUnknown_08D8CF44, 0x0600, 0x05e0
+	obj_tiles gIntroKyogreBubblesGfx, 0x0600, 0x05e0
 	null_obj_tiles
 
 	.align 2
 gUnknown_085E4C98:: @ 85E4C98
-	obj_pal gUnknown_08D8D110, 0x05e0
+	obj_pal gIntroKyogreBubblesPal, 0x05e0
 	null_obj_pal
 
 	.align 2
@@ -492,14 +492,14 @@ gUnknown_085E4FDC:: @ 85E4FDC
 	null_obj_tiles
 
 gUnknown_085E4FEC:: @ 85E4FEC
-	obj_tiles gUnknown_08D8D130, 0x0400, 0x07d2
+	obj_tiles gIntroFlygonSilhouette, 0x0400, 0x07d2
 	null_obj_tiles
 
 	.align 2
 gUnknown_085E4FFC:: @ 85E4FFC
 	obj_pal gIntroLeavesDropsPal, 0x07d0
 	obj_pal gIntroLeavesGFLogoPal, 0x07d1
-	obj_pal gIntroFlyingPkmnShadowPal, 0x07d2
+	obj_pal gIntroFlyingPkmnSilhouettePal, 0x07d2
 	null_obj_pal
 
 	.align 2

@@ -356,26 +356,36 @@ gUnknown_08D85E72:: @ 8D85E72
 gUnknown_08D85E7C:: @ 8D85E7C
 	.incbin "baserom.gba", 0xd85e7c, 0x54
 
-gUnknown_08D85ED0:: @ 8D85ED0
-	.incbin "baserom.gba", 0xd85ed0, 0x20
+	.align 2
+gIntroVolbeatPal:: @ 8D85ED0
+	.incbin "graphics/intro/volbeat.gbapal"
 
-gUnknown_08D85EF0:: @ 8D85EF0
-	.incbin "baserom.gba", 0xd85ef0, 0x20
+	.align 2
+gIntroTorchicPal:: @ 8D85EF0
+	.incbin "graphics/intro/torchic.gbapal"
 
-gUnknown_08D85F10:: @ 8D85ED0
-	.incbin "baserom.gba", 0xd85f10, 0x20
+	.align 2
+gIntroManectricPal:: @ 8D85ED0
+	.incbin "graphics/intro/manectric.gbapal"
 
+	.align 2
 gUnknown_08D85F30:: @ 8D85ED0
 	.incbin "baserom.gba", 0xd85f30, 0x20
 
-gUnknown_08D85F50:: @ 8D85F50
-	.incbin "baserom.gba", 0xd85f50, 0x1e0
+	.align 2
+gIntroVolbeatGfx:: @ 8D85F50
+	.incbin "graphics/intro/volbeat.4bpp.lz"
 
-gUnknown_08D86130:: @ 8D86130
-	.incbin "baserom.gba", 0xd86130, 0x420
+	.align 2
+gIntroTorchicGfx:: @ 8D86130
+	.incbin "graphics/intro/torchic.4bpp.lz"
 
-gUnknown_08D86550:: @ 8D86550
-	.incbin "baserom.gba", 0xd86550, 0x1f44
+	.align 2
+gIntroManectricGfx:: @ 8D86550
+	.incbin "graphics/intro/manectric.4bpp.lz"
+
+	.align 2
+	.incbin "baserom.gba", 0xd8702c, 0x1468
 
 gUnknown_08D88494:: @ 8D88494
 	.incbin "baserom.gba", 0xd88494, 0x8ac
@@ -410,12 +420,15 @@ gUnknown_08D8B440:: @ 8D8B440
 gUnknown_08D8B6E8:: @ 8D8B6E8
 	.incbin "baserom.gba", 0xd8b6e8, 0x124
 
-gUnknown_08D8B80C:: @ 8D8B80C
-	.incbin "baserom.gba", 0xd8b80c, 0x248
+	.align 2
+gIntroRayquazaLightningGfx:: @ 8D8B80C
+	.incbin "graphics/intro/rayquaza_lightning.4bpp.lz"
 
-gUnknown_08D8BA54:: @ 8D8BA54
-	.incbin "baserom.gba", 0xd8ba54, 0x20
+	.align 2
+gIntroRayquazaLightningPal:: @ 8D8BA54
+	.incbin "graphics/intro/rayquaza_lightning.gbapal"
 
+	.align 2
 gUnknown_08D8BA74:: @ 8D8BA74
 	.incbin "baserom.gba", 0xd8ba74, 0x6f8
 
@@ -428,17 +441,24 @@ gUnknown_08D8C838:: @ 8D8C838
 gUnknown_08D8CCC8:: @ 8D8CCC8
 	.incbin "baserom.gba", 0xd8ccc8, 0x27c
 
-gUnknown_08D8CF44:: @ 8D8CF44
-	.incbin "baserom.gba", 0xd8cf44, 0x1cc
+	.align 2
+gIntroKyogreBubblesGfx:: @ 8D8CF44
+	.incbin "graphics/intro/kyogre_bubbles.4bpp.lz"
 
-gUnknown_08D8D110:: @ 8D8D110
-	.incbin "baserom.gba", 0xd8d110, 0x20
+	.align 2
+gIntroKyogreBubblesPal:: @ 8D8D110
+	.incbin "graphics/intro/kyogre_bubbles.gbapal"
 
-gUnknown_08D8D130:: @ 8D8D130
-	.incbin "baserom.gba", 0xd8d130, 0xd8
+	.align 2
+gIntroFlygonSilhouette:: @ 8D8D130
+	.incbin "graphics/intro/flygon_silhouette.4bpp.lz"
 
-gUnknown_08D8D208:: @ 8D8D208
-	.incbin "baserom.gba", 0xd8d208, 0x208
+	.align 2
+gIntroLeavesDropletSparkleGfx:: @ 8D8D208
+	.incbin "graphics/intro/droplet_sparkle.4bpp.lz"
+
+	.align 2
+	.incbin "baserom.gba", 0xd8d2a4, 0x16c
 
 gUnknown_08D8D410:: @ 8D8D410
 	.incbin "baserom.gba", 0xd8d410, 0x17c
