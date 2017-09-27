@@ -17,7 +17,6 @@ extern bool8 sub_8092E9C(u8, u8, u8);
 extern u16 gScriptItemId;
 
 extern const u8 BerryTreeScript[];
-extern const struct BerryTree gBlankBerryTree;
 
 #define BERRY_NAME_LENGTH 6
 
@@ -803,6 +802,54 @@ const struct Berry gBerries[] =
         .smoothness = 40,
     },
 };
+
+const struct UnkStruct_0858AB24 gUnknown_0858AB24[] = {
+    { 50,  20},
+    { 50,  20},
+    { 50,  20},
+    { 50,  20},
+    { 50,  20},
+    { 50,  30},
+    { 50,  30},
+    { 50,  30},
+    { 50,  30},
+    { 50,  30},
+    { 60,  50},
+    { 60,  50},
+    { 60,  50},
+    { 60,  50},
+    { 60,  50},
+    { 80,  70},
+    { 80,  70},
+    { 80,  70},
+    { 80,  70},
+    { 80,  70},
+    {100, 100},
+    {100, 100},
+    {100, 100},
+    {100, 100},
+    {100, 100},
+    {130, 150},
+    {130, 150},
+    {130, 150},
+    {130, 150},
+    {130, 150},
+    {160, 250},
+    {160, 250},
+    {160, 250},
+    {160, 250},
+    {160, 250},
+    {180, 500},
+    {180, 500},
+    {180, 500},
+    {180, 500},
+    {180, 500},
+    {200, 750},
+    {200, 750},
+    {150, 200}
+};
+
+const struct BerryTree gBlankBerryTree = {};
 
 // unused
 void ClearEnigmaBerries(void)
