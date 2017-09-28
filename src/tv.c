@@ -1906,9 +1906,10 @@ void sub_80EDB44(void)
     }
 }
 
-void sub_80EDC60(u16 *words)
+void sub_80EDC60(const u16 *words)
 {
     TVShow *show;
+
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_TREND_WATCHER, 0) != TRUE)
     {
@@ -1921,6 +1922,25 @@ void sub_80EDC60(u16 *words)
         StringCopy(show->trendWatcher.playerName, gSaveBlock2Ptr->playerName);
         tv_store_id_3x(show);
         show->trendWatcher.language = gGameLanguage;
+    }
+}
+
+void sub_80EDCE8(void)
+{
+    TVShow *show;
+
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_TREASURE_INVESTIGATORS, 0) != TRUE)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->treasureInvestigators.kind = TVSHOW_TREASURE_INVESTIGATORS;
+        show->treasureInvestigators.active = FALSE;
+        show->treasureInvestigators.unk02 = gSpecialVar_0x8005;
+        show->treasureInvestigators.location = gMapHeader.regionMapSectionId;
+        show->treasureInvestigators.mapDataId = gMapHeader.mapDataId;
+        StringCopy(show->treasureInvestigators.playerName, gSaveBlock2Ptr->playerName);
+        tv_store_id_3x(show);
+        show->treasureInvestigators.language = gGameLanguage;
     }
 }
 

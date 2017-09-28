@@ -3,66 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EDCE8
-sub_80EDCE8: @ 80EDCE8
-	push {r4-r6,lr}
-	ldr r6, =gSaveBlock1Ptr
-	ldr r0, [r6]
-	ldr r5, =0x000027cc
-	adds r0, r5
-	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
-	ldr r4, =sCurTVShowSlot
-	strb r0, [r4]
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _080EDD56
-	movs r0, 0x1C
-	movs r1, 0
-	bl sub_80EF46C
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080EDD56
-	movs r1, 0
-	ldrsb r1, [r4, r1]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	ldr r4, [r6]
-	adds r4, r0
-	movs r1, 0
-	movs r0, 0x1C
-	strb r0, [r4]
-	strb r1, [r4, 0x1]
-	ldr r0, =gSpecialVar_0x8005
-	ldrh r0, [r0]
-	strh r0, [r4, 0x2]
-	ldr r1, =gMapHeader
-	ldrb r0, [r1, 0x14]
-	strb r0, [r4, 0x4]
-	ldrh r0, [r1, 0x12]
-	strh r0, [r4, 0x6]
-	adds r0, r4, 0
-	adds r0, 0x13
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	bl StringCopy
-	adds r0, r4, 0
-	bl tv_store_id_3x
-	ldr r0, =gGameLanguage
-	ldrb r0, [r0]
-	strb r0, [r4, 0x5]
-_080EDD56:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80EDCE8
-
 	thumb_func_start sub_80EDD78
 sub_80EDD78: @ 80EDD78
 	push {r4-r6,lr}

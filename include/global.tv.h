@@ -317,7 +317,12 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        // TODO: flesh this out
+        /*0x02*/ u16 unk02;
+        /*0x04*/ u8 location;
+        /*0x05*/ u8 language;
+        /*0x06*/ u16 mapDataId;
+        /*0x08*/ u8 filler_08[11];
+        /*0x13*/ u8 playerName[8];
     } treasureInvestigators;
 
     // TVSHOW_FIND_THAT_GAMER
