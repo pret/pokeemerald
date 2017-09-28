@@ -330,7 +330,6 @@ SECTIONS {
         src/rtc.o(.rodata);
         data/data2b.o(.rodata);
         src/battle_4.o(.rodata);
-        data/battle_4.o(.rodata);
         data/battle_controller_player.o(.rodata);
         data/data2b_2.o(.rodata);
         data/battle_controller_opponent.o(.rodata);

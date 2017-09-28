@@ -773,7 +773,7 @@ struct StatFractions
     u8 divisor;
 };
 
-const struct StatFractions gAccuracyStageRatios[] =
+static const struct StatFractions sAccuracyStageRatios[] =
 {
     { 33, 100}, // -6
     { 36, 100}, // -5
@@ -791,9 +791,9 @@ const struct StatFractions gAccuracyStageRatios[] =
 };
 
 // The chance is 1/N for each stage.
-const u16 gCriticalHitChance[] = {16, 8, 4, 3, 2};
+static const u16 sCriticalHitChance[] = {16, 8, 4, 3, 2};
 
-const u32 gStatusFlagsForMoveEffects[] =
+static const u32 sStatusFlagsForMoveEffects[] =
 {
     0x00000000,
     STATUS_SLEEP,
@@ -857,7 +857,7 @@ const u32 gStatusFlagsForMoveEffects[] =
     0x00000000
 };
 
-const u8* const gMoveEffectBS_Ptrs[] =
+static const u8* const sMoveEffectBS_Ptrs[] =
 {
     BattleScript_MoveEffectSleep,	    //  0
     BattleScript_MoveEffectSleep,		//	MOVE_EFFECT_SLEEP
@@ -902,8 +902,8 @@ const u8* const gMoveEffectBS_Ptrs[] =
 
 static const struct WindowTemplate sUnusedWinTemplate = {0, 1, 3, 7, 0xF, 0x1F, 0x3F};
 
-const u16 gUnknown_0831C2C8[] = INCBIN_U16("graphics/battle_interface/unk_battlebox.gbapal");
-const u8 gUnknown_0831C2E8[] = INCBIN_U8("graphics/battle_interface/unk_battlebox.4bpp.lz");
+static const u16 sUnknown_0831C2C8[] = INCBIN_U16("graphics/battle_interface/unk_battlebox.gbapal");
+static const u8 sUnknown_0831C2E8[] = INCBIN_U8("graphics/battle_interface/unk_battlebox.4bpp.lz");
 
 // unused
 static const u8 sRubyLevelUpStatBoxStats[] =
@@ -914,7 +914,7 @@ static const u8 sRubyLevelUpStatBoxStats[] =
 
 #define MON_ICON_LVLUP_BOX_TAG      0xD75A
 
-const struct OamData gUnknown_0831C3B8 =
+static const struct OamData sOamData_MonIconOnLvlUpBox =
 {
     .y = 0,
     .affineMode = 0,
@@ -931,24 +931,24 @@ const struct OamData gUnknown_0831C3B8 =
     .affineParam = 0,
 };
 
-const struct SpriteTemplate SpriteTemplate_MonIconOnLvlUpBox =
+static const struct SpriteTemplate sSpriteTemplate_MonIconOnLvlUpBox =
 {
     .tileTag = MON_ICON_LVLUP_BOX_TAG,
     .paletteTag = MON_ICON_LVLUP_BOX_TAG,
-    .oam = &gUnknown_0831C3B8,
+    .oam = &sOamData_MonIconOnLvlUpBox,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_MonIconOnLvlUpBox
 };
 
-const u16 sProtectSuccessRates[] = {0xFFFF, 0x7FFF, 0x3FFF, 0x1FFF};
+static const u16 sProtectSuccessRates[] = {USHRT_MAX, USHRT_MAX / 2, USHRT_MAX / 4, USHRT_MAX / 8};
 
 #define MIMIC_FORBIDDEN_END             0xFFFE
 #define METRONOME_FORBIDDEN_END         0xFFFF
 #define ASSIST_FORBIDDEN_END            0xFFFF
 
-static const u16 gMovesForbiddenToCopy[] =
+static const u16 sMovesForbiddenToCopy[] =
 {
      MOVE_METRONOME,
      MOVE_STRUGGLE,
@@ -1007,7 +1007,7 @@ static const u16 sWeightToDamageTable[] =
     0xFFFF, 0xFFFF
 };
 
-static const u16 gPickupItems[] =
+static const u16 sPickupItems[] =
 {
     ITEM_POTION,
 	ITEM_ANTIDOTE,
@@ -1029,7 +1029,7 @@ static const u16 gPickupItems[] =
 	ITEM_MAX_ELIXIR,
 };
 
-static const u16 gRarePickupItems[] =
+static const u16 sRarePickupItems[] =
 {
     ITEM_HYPER_POTION,
 	ITEM_NUGGET,
@@ -1044,7 +1044,7 @@ static const u16 gRarePickupItems[] =
 	ITEM_TM26,
 };
 
-static const u8 gPickupProbabilities[] =
+static const u8 sPickupProbabilities[] =
 {
     30, 40, 50, 60, 70, 80, 90, 94, 98
 };
@@ -1057,8 +1057,8 @@ static const u8 sTerrainToType[] =
     TYPE_WATER, // underwater
     TYPE_WATER, // water
     TYPE_WATER, // pond water
-    TYPE_ROCK , // rock
-    TYPE_ROCK , // cave
+    TYPE_ROCK, // rock
+    TYPE_ROCK, // cave
     TYPE_NORMAL, // building
     TYPE_NORMAL, // plain
 };
@@ -1068,7 +1068,31 @@ static const u8 sBallCatchBonuses[] =
     20, 15, 10, 15 // Ultra, Great, Poke, Safari
 };
 
-extern const u8 gUnknown_0831C4F8[];
+// could be a 2d array or a struct
+const ALIGNED(4) u8 gUnknown_0831C494[] =
+{
+    0x3d, 0x44, 0x3d, 0x44, 0x14, 0x2d, 0x54, 0x5c,
+    0x46, 0x55, 0x20, 0x5c, 0x26, 0x45, 0x46, 0x55,
+    0x14, 0x5a, 0x46, 0x5c, 0x1e, 0x32, 0x20, 0x5a,
+    0x38, 0x4e, 0x38, 0x4e, 0x19, 0x28, 0x4b, 0x5a,
+    0x45, 0x4b, 0x1c, 0x53, 0x23, 0x2d, 0x1d, 0x23,
+    0x3e, 0x48, 0x1e, 0x32, 0x3a, 0x5f, 0x58, 0x5e,
+    0x22, 0x2d, 0x1d, 0x28, 0x23, 0x28, 0x23, 0x5f,
+    0x38, 0x4e, 0x38, 0x4e, 0x23, 0x50, 0x22, 0x5e,
+    0x2c, 0x5e, 0x22, 0x28, 0x38, 0x4e, 0x38, 0x4e,
+    0x1e, 0x58, 0x1e, 0x58, 0x1e, 0x2b, 0x1b, 0x21,
+    0x28, 0x5a, 0x19, 0x57, 0x12, 0x58, 0x5a, 0x5f,
+    0x58, 0x5e, 0x16, 0x2a, 0x2a, 0x5c, 0x2a, 0x2f,
+    0x38, 0x4e, 0x38, 0x4e
+};
+
+static const u8 sUnknown_0831C4F8[] =
+{
+	0x03, 0x00, 0x01, 0x00, 0x00, 0x01, 0x03, 0x00,
+	0x01, 0x02, 0x02, 0x00, 0x03, 0x01, 0x03, 0x01,
+	0x02, 0x03, 0x03, 0x02, 0x01, 0x00, 0x02, 0x02,
+	0x03, 0x00, 0x00, 0x00
+};
 
 static void atk00_attackcanceler(void)
 {
@@ -1304,8 +1328,8 @@ static void atk01_accuracycheck(void)
         if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY && gBattleMoves[move].effect == EFFECT_THUNDER)
             moveAcc = 50;
 
-        calc = gAccuracyStageRatios[buff].dividend * moveAcc;
-        calc /= gAccuracyStageRatios[buff].divisor;
+        calc = sAccuracyStageRatios[buff].dividend * moveAcc;
+        calc /= sAccuracyStageRatios[buff].divisor;
 
         if (gBattleMons[gBankAttacker].ability == ABILITY_COMPOUND_EYES)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
@@ -1435,7 +1459,7 @@ static void atk04_critcalc(void)
     if ((gBattleMons[gBankTarget].ability != ABILITY_BATTLE_ARMOR && gBattleMons[gBankTarget].ability != ABILITY_SHELL_ARMOR)
      && !(gStatuses3[gBankAttacker] & STATUS3_CANT_SCORE_A_CRIT)
      && !(gBattleTypeFlags & (BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
-     && !(Random() % gCriticalHitChance[critChance]))
+     && !(Random() % sCriticalHitChance[critChance]))
         gCritMultiplier = 2;
     else
         gCritMultiplier = 1;
@@ -2411,7 +2435,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
 
     if (gBattleCommunication[MOVE_EFFECT_BYTE] <= 6) // status change
     {
-        switch (gStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]])
+        switch (sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]])
         {
         case STATUS_SLEEP:
             // check active uproar
@@ -2630,12 +2654,12 @@ void SetMoveEffect(bool8 primary, u8 certain)
         {
             BattleScriptPush(gBattlescriptCurrInstr + 1);
 
-            if (gStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]] == STATUS_SLEEP)
+            if (sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]] == STATUS_SLEEP)
                 gBattleMons[gEffectBank].status1 |= ((Random() & 3) + 2);
             else
-                gBattleMons[gEffectBank].status1 |= gStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]];
+                gBattleMons[gEffectBank].status1 |= sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]];
 
-            gBattlescriptCurrInstr = gMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
+            gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
 
             gActiveBank = gEffectBank;
             EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gEffectBank].status1);
@@ -2674,7 +2698,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
     }
     else
     {
-        if (gBattleMons[gEffectBank].status2 & gStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]])
+        if (gBattleMons[gEffectBank].status2 & sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]])
         {
             gBattlescriptCurrInstr++;
         }
@@ -2694,7 +2718,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     gBattleMons[gEffectBank].status2 |= (((Random()) % 0x4)) + 2;
 
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = gMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
+                    gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
                 }
                 break;
             case MOVE_EFFECT_FLINCH:
@@ -2714,7 +2738,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 else
                 {
                     if (BankGetTurnOrder(gEffectBank) > gCurrentMoveTurn)
-                        gBattleMons[gEffectBank].status2 |= gStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]];
+                        gBattleMons[gEffectBank].status2 |= sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]];
                     gBattlescriptCurrInstr++;
                 }
                 break;
@@ -2727,7 +2751,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     gBattleMons[gEffectBank].status2 |= ((Random() & 3) + 2) << 4;
 
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = gMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
+                    gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
                 }
                 else
                 {
@@ -2743,7 +2767,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                         gPaydayMoney = 0xFFFF;
                 }
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = gMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
+                gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
                 break;
             case MOVE_EFFECT_TRI_ATTACK:
                 if (gBattleMons[gEffectBank].status1)
@@ -2776,7 +2800,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     *(gBattleStruct->wrappedBy + gEffectBank) = gBankAttacker;
 
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
-                    gBattlescriptCurrInstr = gMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
+                    gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
 
                     for (gBattleCommunication[MULTISTRING_CHOOSER] = 0; ; gBattleCommunication[MULTISTRING_CHOOSER]++)
                     {
@@ -2793,7 +2817,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     gBattleMoveDamage = 1;
 
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = gMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
+                gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
                 break;
             case MOVE_EFFECT_ATK_PLUS_1:
             case MOVE_EFFECT_DEF_PLUS_1:
@@ -3001,7 +3025,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                     gBattleMoveDamage = 1;
 
                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = gMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
+                gBattlescriptCurrInstr = sMoveEffectBS_Ptrs[gBattleCommunication[MOVE_EFFECT_BYTE]];
                 break;
             case MOVE_EFFECT_THRASH:
                 if (gBattleMons[gEffectBank].status2 & STATUS2_LOCK_CONFUSE)
@@ -3108,9 +3132,9 @@ static void atk18_status_effect_clear(void)
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
 
     if (gBattleCommunication[MOVE_EFFECT_BYTE] <= MOVE_EFFECT_TOXIC)
-        gBattleMons[gActiveBank].status1 &= (~gStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]]);
+        gBattleMons[gActiveBank].status1 &= (~sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]]);
     else
-        gBattleMons[gActiveBank].status2 &= (~gStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]]);
+        gBattleMons[gActiveBank].status2 &= (~sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]]);
 
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattlescriptCurrInstr += 2;
@@ -6733,8 +6757,8 @@ static void sub_804F17C(void)
     gBattle_BG2_Y = 0;
     gBattle_BG2_X = 0x1A0;
 
-    LoadPalette(gUnknown_0831C2C8, 0x60, 0x20);
-    CopyToWindowPixelBuffer(14, gUnknown_0831C2E8, 0, 0);
+    LoadPalette(sUnknown_0831C2C8, 0x60, 0x20);
+    CopyToWindowPixelBuffer(14, sUnknown_0831C2E8, 0, 0);
     PutWindowTilemap(14);
     CopyWindowToVram(14, 3);
 
@@ -6860,7 +6884,7 @@ static void PutMonIconOnLvlUpBox(void)
     LoadSpriteSheet(&iconSheet);
     LoadSpritePalette(&iconPalSheet);
 
-    spriteId = CreateSprite(&SpriteTemplate_MonIconOnLvlUpBox, 256, 10, 0);
+    spriteId = CreateSprite(&sSpriteTemplate_MonIconOnLvlUpBox, 256, 10, 0);
     gSprites[spriteId].sDestroy = FALSE;
     gSprites[spriteId].sSavedLvlUpBoxXPosition = gBattle_BG2_X;
 }
@@ -7078,7 +7102,7 @@ static void atk76_various(void)
         {
             gBattleStruct->field_92 |= gBitTable[gActiveBank];
             gBattleCommunication[0] = 1;
-            gBattleCommunication[MULTISTRING_CHOOSER] = gUnknown_0831C4F8[GetNatureFromPersonality(gBattleMons[gActiveBank].personality)];
+            gBattleCommunication[MULTISTRING_CHOOSER] = sUnknown_0831C4F8[GetNatureFromPersonality(gBattleMons[gActiveBank].personality)];
         }
         break;
     case 9:
@@ -8475,10 +8499,10 @@ static void atk9C_set_substitute(void)
 static bool8 IsMoveUncopyableByMimic(u16 move)
 {
     s32 i;
-    for (i = 0; gMovesForbiddenToCopy[i] != MIMIC_FORBIDDEN_END
-                && gMovesForbiddenToCopy[i] != move; i++);
+    for (i = 0; sMovesForbiddenToCopy[i] != MIMIC_FORBIDDEN_END
+                && sMovesForbiddenToCopy[i] != move; i++);
 
-    return (gMovesForbiddenToCopy[i] != MIMIC_FORBIDDEN_END);
+    return (sMovesForbiddenToCopy[i] != MIMIC_FORBIDDEN_END);
 }
 
 static void atk9D_mimicattackcopy(void)
@@ -8537,7 +8561,7 @@ static void atk9E_metronome(void)
 
         for (i = 0; i < 4; i++); // ?
 
-        for (move = gMovesForbiddenToCopy; ; move++)
+        for (move = sMovesForbiddenToCopy; ; move++)
         {
             if (*move == gCurrentMove)
                 break;
@@ -8567,7 +8591,7 @@ static void atk9E_metronome(void)
 	ldr r7, =gCurrentMove\n\
 	movs r6, 0xB1\n\
 	lsls r6, 1\n\
-	ldr r5, =gMovesForbiddenToCopy\n\
+	ldr r5, =sMovesForbiddenToCopy\n\
 	ldr r0, =gBattlescriptCurrInstr\n\
 	mov r8, r0\n\
 _080524EE:\n\
@@ -10580,9 +10604,9 @@ static void atkDE_asistattackselect(void)
             if (IsInvalidForSleepTalkOrAssist(move))
                 continue;
 
-            for (; gMovesForbiddenToCopy[i] != ASSIST_FORBIDDEN_END && move != gMovesForbiddenToCopy[i]; i++);
+            for (; sMovesForbiddenToCopy[i] != ASSIST_FORBIDDEN_END && move != sMovesForbiddenToCopy[i]; i++);
 
-            if (gMovesForbiddenToCopy[i] != ASSIST_FORBIDDEN_END)
+            if (sMovesForbiddenToCopy[i] != ASSIST_FORBIDDEN_END)
                 continue;
             if (move == MOVE_NONE)
                 continue;
@@ -10774,14 +10798,14 @@ static void atkE5_pickup(void)
 
                     for (j = 0; j < 9; j++)
                     {
-                        if (gPickupProbabilities[j] > rand)
+                        if (sPickupProbabilities[j] > rand)
                         {
-                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &gPickupItems[lvlDivBy10 + j]);
+                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupItems[lvlDivBy10 + j]);
                             break;
                         }
                         else if (rand == 99 || rand == 98)
                         {
-                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &gRarePickupItems[lvlDivBy10 + (99 - rand)]);
+                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sRarePickupItems[lvlDivBy10 + (99 - rand)]);
                             break;
                         }
                     }
