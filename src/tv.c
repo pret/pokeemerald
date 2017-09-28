@@ -45,7 +45,7 @@ IWRAM_DATA u8 gUnknown_03001176;
 EWRAM_DATA u16 gUnknown_0203A024 = 0;
 EWRAM_DATA u16 gUnknown_0203A026 = 0;
 EWRAM_DATA u16 gUnknown_0203A028 = 0;
-EWRAM_DATA u8 gUnknown_0203A02A = 0;
+EWRAM_DATA bool8 gUnknown_0203A02A = FALSE;
 EWRAM_DATA struct {
     u8 unk_00;
 } gUnknown_0203A02C = {};
@@ -1958,7 +1958,7 @@ void sub_80EDD78(u16 a0)
         flag = FALSE;
         switch (gUnknown_0203A02A)
         {
-            case 0:
+            case FALSE:
                 if (a0 >= gUnknown_0203A028 + 200)
                 {
                     flag = TRUE;
@@ -1971,7 +1971,7 @@ void sub_80EDD78(u16 a0)
                     break;
                 }
                 return;
-            case 1:
+            case TRUE:
                 if (a0 >= gUnknown_0203A028 + 50)
                 {
                     flag = TRUE;
@@ -1997,6 +1997,18 @@ void sub_80EDD78(u16 a0)
         tv_store_id_3x(show);
         show->findThatGamer.language = gGameLanguage;
     }
+}
+
+void sub_80EDE70(u16 a0)
+{
+    gUnknown_0203A02A = FALSE;
+    gUnknown_0203A028 = a0;
+}
+
+void sub_80EDE84(u16 a0)
+{
+    gUnknown_0203A02A = TRUE;
+    gUnknown_0203A028 = a0;
 }
 
 asm(".section .text.dotvshow");

@@ -3,28 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EDE70
-sub_80EDE70: @ 80EDE70
-	ldr r2, =gUnknown_0203A02A
-	movs r1, 0
-	strb r1, [r2]
-	ldr r1, =gUnknown_0203A028
-	strh r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end sub_80EDE70
-
-	thumb_func_start sub_80EDE84
-sub_80EDE84: @ 80EDE84
-	ldr r2, =gUnknown_0203A02A
-	movs r1, 0x1
-	strb r1, [r2]
-	ldr r1, =gUnknown_0203A028
-	strh r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end sub_80EDE84
-
 	thumb_func_start sub_80EDE98
 sub_80EDE98: @ 80EDE98
 	push {r4-r7,lr}
