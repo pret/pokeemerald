@@ -30,6 +30,7 @@
 
 extern EWRAM_DATA u8 sTVShowState;
 extern s8 sCurTVShowSlot;
+extern u16 gUnknown_0203A026;
 
 // Static ROM declarations
 
@@ -1734,6 +1735,36 @@ void UpdateMassOutbreakTimeLeft(u16 days)
     else
     {
         gSaveBlock1Ptr->outbreakDaysLeft -= days;
+    }
+}
+
+void sub_80ED950(bool8 flag)
+{
+    void sub_80ED9A8(void);
+
+    if (flag)
+    {
+        if (gUnknown_0203A026 >> 8 > 4)
+        {
+            sub_80ED9A8();
+        }
+        gUnknown_0203A026 &= 0xFF;
+        if (gUnknown_0203A026 != 0xFF)
+        {
+            gUnknown_0203A026 += 0x01;
+        }
+    }
+    else
+    {
+        if ((u8)gUnknown_0203A026 > 4)
+        {
+            sub_80ED9A8();
+        }
+        gUnknown_0203A026 &= 0xFF00;
+        if (gUnknown_0203A026 >> 8 != 0xFF)
+        {
+            gUnknown_0203A026 += 0x0100;
+        }
     }
 }
 

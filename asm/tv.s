@@ -3,53 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80ED950
-sub_80ED950: @ 80ED950
-	push {r4,lr}
-	lsls r0, 24
-	cmp r0, 0
-	beq _080ED978
-	ldr r4, =gUnknown_0203A026
-	ldrh r0, [r4]
-	lsrs r0, 8
-	cmp r0, 0x4
-	bls _080ED966
-	bl sub_80ED9A8
-_080ED966:
-	ldrb r0, [r4]
-	strh r0, [r4]
-	cmp r0, 0xFF
-	beq _080ED99C
-	adds r0, 0x1
-	b _080ED99A
-	.pool
-_080ED978:
-	ldr r4, =gUnknown_0203A026
-	ldrb r0, [r4]
-	cmp r0, 0x4
-	bls _080ED984
-	bl sub_80ED9A8
-_080ED984:
-	ldrh r0, [r4]
-	movs r1, 0xFF
-	lsls r1, 8
-	ands r1, r0
-	strh r1, [r4]
-	lsrs r0, r1, 8
-	cmp r0, 0xFF
-	beq _080ED99C
-	movs r2, 0x80
-	lsls r2, 1
-	adds r0, r1, r2
-_080ED99A:
-	strh r0, [r4]
-_080ED99C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80ED950
-
 	thumb_func_start sub_80ED9A8
 sub_80ED9A8: @ 80ED9A8
 	push {r4-r6,lr}
