@@ -1541,7 +1541,7 @@ void StartMassOutbreak(void)
     gSaveBlock1Ptr->outbreakPokemonMoves[3] = show->massOutbreak.moves[3];
     gSaveBlock1Ptr->outbreakUnk4 = show->massOutbreak.var03;
     gSaveBlock1Ptr->outbreakPokemonProbability = show->massOutbreak.probability;
-    gSaveBlock1Ptr->outbreakUnk5 = 2;
+    gSaveBlock1Ptr->outbreakDaysLeft = 2;
 }
 
 void PutLilycoveContestLadyShowOnTheAir(void)
@@ -1681,7 +1681,7 @@ void EndMassOutbreak(void)
     gSaveBlock1Ptr->outbreakPokemonMoves[3] = MOVE_NONE;
     gSaveBlock1Ptr->outbreakUnk4 = 0;
     gSaveBlock1Ptr->outbreakPokemonProbability = 0;
-    gSaveBlock1Ptr->outbreakUnk5 = 0;
+    gSaveBlock1Ptr->outbreakDaysLeft = 0;
 }
 
 void sub_80ED888(u16 days)
@@ -1722,6 +1722,18 @@ void sub_80ED8B4(u16 days)
                 break;
             }
         }
+    }
+}
+
+void UpdateMassOutbreakTimeLeft(u16 days)
+{
+    if (gSaveBlock1Ptr->outbreakDaysLeft <= days)
+    {
+        EndMassOutbreak();
+    }
+    else
+    {
+        gSaveBlock1Ptr->outbreakDaysLeft -= days;
     }
 }
 

@@ -3,29 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start UpdateMassOutbreakTimeLeft
-UpdateMassOutbreakTimeLeft: @ 80ED924
-	push {lr}
-	lsls r0, 16
-	lsrs r2, r0, 16
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r3, =0x00002ba2
-	adds r1, r0, r3
-	ldrh r0, [r1]
-	cmp r0, r2
-	bhi _080ED948
-	bl EndMassOutbreak
-	b _080ED94C
-	.pool
-_080ED948:
-	subs r0, r2
-	strh r0, [r1]
-_080ED94C:
-	pop {r0}
-	bx r0
-	thumb_func_end UpdateMassOutbreakTimeLeft
-
 	thumb_func_start sub_80ED950
 sub_80ED950: @ 80ED950
 	push {r4,lr}
