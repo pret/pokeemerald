@@ -1684,6 +1684,21 @@ void EndMassOutbreak(void)
     gSaveBlock1Ptr->outbreakUnk5 = 0;
 }
 
+void sub_80ED888(u16 a0)
+{
+    void sub_80ED8B4(u16);
+    void UpdateMassOutbreakTimeLeft(u16);
+    void sub_80EF120(u16);
+    void sub_80EDA48(u16);
+    void sub_80EEB98(u16);
+
+    sub_80ED8B4(a0);
+    UpdateMassOutbreakTimeLeft(a0);
+    sub_80EF120(a0);
+    sub_80EDA48(a0);
+    sub_80EEB98(a0);
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);

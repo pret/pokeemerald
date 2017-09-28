@@ -3,27 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80ED888
-sub_80ED888: @ 80ED888
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r4, 0
-	bl sub_80ED8B4
-	adds r0, r4, 0
-	bl UpdateMassOutbreakTimeLeft
-	adds r0, r4, 0
-	bl sub_80EF120
-	adds r0, r4, 0
-	bl sub_80EDA48
-	adds r0, r4, 0
-	bl sub_80EEB98
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80ED888
-
 	thumb_func_start sub_80ED8B4
 sub_80ED8B4: @ 80ED8B4
 	push {r4-r7,lr}
