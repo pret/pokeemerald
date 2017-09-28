@@ -37,6 +37,10 @@ struct {
     u16 unk4;
 } gUnknown_030060E0[10];
 
+IWRAM_DATA u8 gUnknown_03001174;
+IWRAM_DATA u8 gUnknown_03001175;
+IWRAM_DATA u8 gUnknown_03001176;
+
 EWRAM_DATA u16 gUnknown_0203A024 = 0;
 EWRAM_DATA u16 gUnknown_0203A026 = 0;
 EWRAM_DATA u16 gUnknown_0203A028 = 0;
