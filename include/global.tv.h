@@ -289,14 +289,28 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        // TODO: flesh this out
+        /*0x02*/ u16 dexCount;
+        /*0x04*/ u8 badgeCount;
+        /*0x05*/ u8 unk05;
+        /*0x06*/ u8 unk06;
+        /*0x07*/ u8 location;
+        /*0x08*/ u16 battlePoints;
+        /*0x0a*/ u16 mapDataId;
+        /*0x0c*/ u8 language;
+        /*0x0d*/ u8 filler_0d[6];
+        /*0x13*/ u8 playerName[8];
     } rivalTrainer;
 
     // TVSHOW_TREND_WATCHER
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        // TODO: flesh this out
+        /*0x02*/ u8 filler_02[2];
+        /*0x04*/ u16 words[2];
+        /*0x08*/ u8 gender;
+        /*0x09*/ u8 language;
+        /*0x0a*/ u8 filler_0a[9];
+        /*0x13*/ u8 playerName[8];
     } trendWatcher;
 
     // TVSHOW_TREASURE_INVESTIGATORS

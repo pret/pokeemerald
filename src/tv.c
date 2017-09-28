@@ -22,6 +22,7 @@
 #include "shop.h"
 #include "lilycove_lady.h"
 #include "rom6.h"
+#include "pokedex.h"
 #include "tv.h"
 
 // Static type declarations
@@ -1851,6 +1852,75 @@ static void sub_80EDA80(void)
             show2->worldOfMasters.language = gGameLanguage;
             DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, 24);
         }
+    }
+}
+
+void sub_80EDB44(void)
+{
+    TVShow *show;
+    u32 i;
+    u8 nBadges;
+
+    sub_80EF46C(TVSHOW_TODAYS_RIVAL_TRAINER, 1);
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->rivalTrainer.kind = TVSHOW_TODAYS_RIVAL_TRAINER;
+        show->rivalTrainer.active = FALSE;
+        for (i = BADGE01_GET, nBadges = 0; i < BADGE01_GET + 8; i ++)
+        {
+            if (FlagGet(i))
+            {
+                nBadges ++;
+            }
+        }
+        show->rivalTrainer.badgeCount = nBadges;
+        if (IsNationalPokedexEnabled())
+        {
+            show->rivalTrainer.dexCount = pokedex_count(0x01);
+        }
+        else
+        {
+            show->rivalTrainer.dexCount = sub_80C0844(0x01);
+        }
+        show->rivalTrainer.location = gMapHeader.regionMapSectionId;
+        show->rivalTrainer.mapDataId = gMapHeader.mapDataId;
+        show->rivalTrainer.unk05 = 0;
+        show->rivalTrainer.unk06 = 0;
+        for (i = 0; i < 7; i ++)
+        {
+            if (FlagGet(gUnknown_0858D0DE[i]) == TRUE)
+            {
+                show->rivalTrainer.unk05 ++;
+            }
+            if (FlagGet(gUnknown_0858D0D0[i]) == TRUE)
+            {
+                show->rivalTrainer.unk06 ++;
+            }
+        }
+        show->rivalTrainer.battlePoints = gSaveBlock2Ptr->frontierBattlePoints;
+        StringCopy(show->rivalTrainer.playerName, gSaveBlock2Ptr->playerName);
+        tv_store_id_3x(show);
+        show->rivalTrainer.language = gGameLanguage;
+    }
+}
+
+void sub_80EDC60(u16 *words)
+{
+    TVShow *show;
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_TREND_WATCHER, 0) != TRUE)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->trendWatcher.kind = TVSHOW_TREND_WATCHER;
+        show->trendWatcher.active = FALSE;
+        show->trendWatcher.gender = gSaveBlock2Ptr->playerGender;
+        show->trendWatcher.words[0] = words[0];
+        show->trendWatcher.words[1] = words[1];
+        StringCopy(show->trendWatcher.playerName, gSaveBlock2Ptr->playerName);
+        tv_store_id_3x(show);
+        show->trendWatcher.language = gGameLanguage;
     }
 }
 
