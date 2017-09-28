@@ -512,14 +512,17 @@ gUnknown_08D9AE04:: @ 8D9AE04
 gUnknown_08D9AF44:: @ 8D9AF44
 	.incbin "baserom.gba", 0xd9af44, 0x78
 
-gUnknown_08D9AFBC:: @ 8D9AFBC
+gBuyMenuFrame_Gfx:: @ 8D9AFBC
 	.incbin "baserom.gba", 0xd9afbc, 0x10c
 
-gUnknown_08D9B0C8:: @ 8D9B0C8
+gMenuMoneyPal:: @ 8D9B0C8
 	.incbin "baserom.gba", 0xd9b0c8, 0x28
 
-gUnknown_08D9B0F0:: @ 8D9B0F0
-	.incbin "baserom.gba", 0xd9b0f0, 0x1c4
+gBuyMenuFrame_Tilemap:: @ 8D9B0F0
+	.incbin "baserom.gba", 0xd9b0f0, 0x140
+    
+gMenuMoneyGfx:: @ 8D9B230
+    .incbin "baserom.gba", 0xd9b230, 0x84
 
 gUnknown_08D9B2B4:: @ 8D9B2B4
 	.incbin "baserom.gba", 0xd9b2b4, 0x1bc

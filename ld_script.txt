@@ -148,7 +148,6 @@ SECTIONS {
         asm/script_menu.o(.text);
         asm/naming_screen.o(.text);
         src/money.o(.text);
-        asm/money.o(.text);
         asm/contest_effect.o(.text);
         asm/record_mixing.o(.text);
         asm/secret_base.o(.text);
@@ -386,7 +385,7 @@ SECTIONS {
         src/berry.o(.rodata);
         data/script_menu.o(.rodata);
         data/naming_screen.o(.rodata);
-        data/money.o(.rodata);
+        src/money.o(.rodata);
         data/contest_effect.o(.rodata);
         data/record_mixing.o(.rodata);
         data/secret_base.o(.rodata);

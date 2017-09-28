@@ -4468,7 +4468,7 @@ s93_display_money: @ 809B500
 	bl GetMoney
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80E52EC
+	bl DrawMoneyBox
 _0809B530:
 	movs r0, 0
 	pop {r4,r5}
@@ -4480,7 +4480,7 @@ _0809B530:
 	thumb_func_start s94_hide_money
 s94_hide_money: @ 809B53C
 	push {lr}
-	bl sub_80E5384
+	bl HideMoneyBox
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -4505,7 +4505,7 @@ s95_update_money: @ 809B548
 	lsls r1, 3
 	adds r0, r1
 	bl GetMoney
-	bl sub_80E52D4
+	bl ChangeAmountInMoneyBox
 _0809B56E:
 	movs r0, 0
 	pop {r1}
