@@ -398,7 +398,7 @@ typedef union TVShow // size = 0x24
         /*0x13*/ u8 probability;
         /*0x14*/ u8 level;
         /*0x15*/ u8 var15;
-        /*0x16*/ u16 var16;
+        /*0x16*/ u16 daysLeft;
         /*0x18*/ u8 language;
         u8 pad19[11];
     } massOutbreak;

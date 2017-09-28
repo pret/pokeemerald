@@ -671,7 +671,7 @@ u8 special_0x44(void)
         else
         {
             show = &gSaveBlock1Ptr->tvShows[j];
-            if (show->massOutbreak.var16 == 0 && show->massOutbreak.active == TRUE)
+            if (show->massOutbreak.daysLeft == 0 && show->massOutbreak.active == TRUE)
             {
                 return j;
             }
@@ -1659,7 +1659,7 @@ static void sub_80ED718(void)
                 show->massOutbreak.var12 = 0;
                 show->massOutbreak.probability = 50;
                 show->massOutbreak.var15 = 0;
-                show->massOutbreak.var16 = 1;
+                show->massOutbreak.daysLeft = 1;
                 tv_store_id_2x(show);
                 show->massOutbreak.language = gGameLanguage;
             }
@@ -1684,7 +1684,7 @@ void EndMassOutbreak(void)
     gSaveBlock1Ptr->outbreakUnk5 = 0;
 }
 
-void sub_80ED888(u16 a0)
+void sub_80ED888(u16 days)
 {
     void sub_80ED8B4(u16);
     void UpdateMassOutbreakTimeLeft(u16);
@@ -1692,11 +1692,37 @@ void sub_80ED888(u16 a0)
     void sub_80EDA48(u16);
     void sub_80EEB98(u16);
 
-    sub_80ED8B4(a0);
-    UpdateMassOutbreakTimeLeft(a0);
-    sub_80EF120(a0);
-    sub_80EDA48(a0);
-    sub_80EEB98(a0);
+    sub_80ED8B4(days);
+    UpdateMassOutbreakTimeLeft(days);
+    sub_80EF120(days);
+    sub_80EDA48(days);
+    sub_80EEB98(days);
+}
+
+void sub_80ED8B4(u16 days)
+{
+    u8 i;
+    TVShow *show;
+
+    if (gSaveBlock1Ptr->outbreakPokemonSpecies == SPECIES_NONE)
+    {
+        for (i = 0; i < 24; i ++)
+        {
+            if (gSaveBlock1Ptr->tvShows[i].massOutbreak.kind == TVSHOW_MASS_OUTBREAK && gSaveBlock1Ptr->tvShows[i].massOutbreak.active == TRUE)
+            {
+                show = &gSaveBlock1Ptr->tvShows[i];
+                if (show->massOutbreak.daysLeft < days)
+                {
+                    show->massOutbreak.daysLeft = 0;
+                }
+                else
+                {
+                    show->massOutbreak.daysLeft -= days;
+                }
+                break;
+            }
+        }
+    }
 }
 
 asm(".section .text.dotvshow");

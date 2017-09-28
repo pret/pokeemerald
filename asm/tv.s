@@ -3,62 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80ED8B4
-sub_80ED8B4: @ 80ED8B4
-	push {r4-r7,lr}
-	lsls r0, 16
-	lsrs r5, r0, 16
-	ldr r1, =gSaveBlock1Ptr
-	ldr r0, [r1]
-	ldr r2, =0x00002b90
-	adds r0, r2
-	ldrh r0, [r0]
-	mov r12, r1
-	cmp r0, 0
-	bne _080ED91C
-	movs r1, 0
-	ldr r6, =0x000027cc
-_080ED8CE:
-	mov r7, r12
-	ldr r4, [r7]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r3, r0, 2
-	adds r2, r4, r3
-	adds r0, r2, r6
-	ldrb r0, [r0]
-	cmp r0, 0x29
-	bne _080ED912
-	ldr r7, =0x000027cd
-	adds r0, r2, r7
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _080ED912
-	adds r0, r3, r6
-	adds r1, r4, r0
-	ldrh r0, [r1, 0x16]
-	cmp r0, r5
-	bcs _080ED90C
-	movs r0, 0
-	strh r0, [r1, 0x16]
-	b _080ED91C
-	.pool
-_080ED90C:
-	subs r0, r5
-	strh r0, [r1, 0x16]
-	b _080ED91C
-_080ED912:
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x17
-	bls _080ED8CE
-_080ED91C:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80ED8B4
-
 	thumb_func_start UpdateMassOutbreakTimeLeft
 UpdateMassOutbreakTimeLeft: @ 80ED924
 	push {lr}
