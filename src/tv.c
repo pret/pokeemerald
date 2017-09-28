@@ -28,10 +28,24 @@
 
 // Static RAM declarations
 
-extern EWRAM_DATA u8 sTVShowState;
-extern s8 sCurTVShowSlot;
-extern EWRAM_DATA u16 gUnknown_0203A024;
-extern EWRAM_DATA u16 gUnknown_0203A026;
+s8 sCurTVShowSlot;
+u16 gUnknown_030060C0[8];
+u8 gUnknown_030060D0[16];
+struct {
+    u8 unk0;
+    u16 unk2;
+    u16 unk4;
+} gUnknown_030060E0[10];
+
+EWRAM_DATA u16 gUnknown_0203A024 = 0;
+EWRAM_DATA u16 gUnknown_0203A026 = 0;
+EWRAM_DATA u16 gUnknown_0203A028 = 0;
+EWRAM_DATA u8 gUnknown_0203A02A = 0;
+EWRAM_DATA struct {
+    u8 unk_00;
+} gUnknown_0203A02C = {};
+EWRAM_DATA u8 sTVShowState = 0;
+EWRAM_DATA u8 gUnknown_0203A031 = 0;
 
 // Static ROM declarations
 

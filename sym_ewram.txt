@@ -1172,26 +1172,8 @@ gUnknown_0203A01D: @ 203A01D
 gUnknown_0203A020: @ 203A020
 	.space 0x4
 
-gUnknown_0203A024: @ 203A024
-	.space 0x2
-
-gUnknown_0203A026: @ 203A026
-	.space 0x2
-
-gUnknown_0203A028: @ 203A028
-	.space 0x2
-
-gUnknown_0203A02A: @ 203A02A
-	.space 0x2
-
-gUnknown_0203A02C: @ 203A02C
-	.space 0x4
-
-sTVShowState: @ 203A030
-	.space 0x1
-
-gUnknown_0203A031: @ 203A031
-	.space 0x3
+    .include "src/tv.o"
+	.space 2
 
 gUnknown_0203A034: @ 203A034
 	.space 0x4

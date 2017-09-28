@@ -320,17 +320,7 @@ gUnknown_030060B4: @ 30060B4
 gUnknown_030060B8: @ 30060B8
 	.space 0x4
 
-sCurTVShowSlot: @ 30060BC
-	.space 0x4
-
-gUnknown_030060C0: @ 30060C0
-	.space 0x10
-
-gUnknown_030060D0: @ 30060D0
-	.space 0x10
-
-gUnknown_030060E0: @ 30060E0
-	.space 0x50
+    .include "tv.o"
 
 gUnknown_03006130: @ 3006130
 	.space 0x34
