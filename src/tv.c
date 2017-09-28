@@ -81,6 +81,8 @@ void sub_80EF7A8(void);
 u16 sub_80EFA24(u16);
 void sub_80EFA88(void);
 
+void TVShowDone(void);
+
 // .rodata
 
 const struct {
@@ -1944,9 +1946,60 @@ void sub_80EDCE8(void)
     }
 }
 
-asm(".section .text.dotvshow");
+void sub_80EDD78(u16 a0)
+{
+    TVShow *show;
+    bool8 flag;
+    u16 v0;
 
-void TVShowDone(void);
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_FIND_THAT_GAMER, 0) != TRUE)
+    {
+        flag = FALSE;
+        switch (gUnknown_0203A02A)
+        {
+            case 0:
+                if (a0 >= gUnknown_0203A028 + 200)
+                {
+                    flag = TRUE;
+                    v0 = a0 - gUnknown_0203A028;
+                    break;
+                }
+                if (gUnknown_0203A028 >= 100 && a0 <= gUnknown_0203A028 - 100)
+                {
+                    v0 = gUnknown_0203A028 - a0;
+                    break;
+                }
+                return;
+            case 1:
+                if (a0 >= gUnknown_0203A028 + 50)
+                {
+                    flag = TRUE;
+                    v0 = a0 - gUnknown_0203A028;
+                    break;
+                }
+                if (gUnknown_0203A028 >= 50 && a0 <= gUnknown_0203A028 - 50)
+                {
+                    v0 = gUnknown_0203A028 - a0;
+                    break;
+                }
+                return;
+            default:
+                return;
+        }
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->findThatGamer.kind = TVSHOW_FIND_THAT_GAMER;
+        show->findThatGamer.active = FALSE;
+        show->findThatGamer.unk04 = v0;
+        show->findThatGamer.unk03 = gUnknown_0203A02A;
+        show->findThatGamer.unk02 = flag;
+        StringCopy(show->findThatGamer.playerName, gSaveBlock2Ptr->playerName);
+        tv_store_id_3x(show);
+        show->findThatGamer.language = gGameLanguage;
+    }
+}
+
+asm(".section .text.dotvshow");
 
 void DoTVShow(void)
 {
