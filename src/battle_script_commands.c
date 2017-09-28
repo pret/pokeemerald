@@ -2,7 +2,7 @@
 #include "battle.h"
 #include "battle_move_effects.h"
 #include "battle_message.h"
-#include "battle_ai.h"
+#include "battle_ai_script_commands.h"
 #include "moves.h"
 #include "abilities.h"
 #include "item.h"

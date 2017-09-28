@@ -898,7 +898,7 @@ void sub_80458B4(void);
 u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 u8 IsPokeDisobedient(void);
 
-// battle_4
+// battle_script_commands
 void AI_CalcDmg(u8 bankAtk, u8 bankDef);
 u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
 u8 AI_TypeCalc(u16 move, u16 species, u8 ability);
@@ -910,6 +910,7 @@ void BufferMoveToLearnIntoBattleTextBuff2(void);
 void sub_8056A3C(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
 bool8 UproarWakeUpCheck(u8 bank);
 
+extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const u8 gUnknown_0831C494[];
 
 // battle_5

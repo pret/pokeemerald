@@ -13,7 +13,7 @@
 #include "text.h"
 #include "string_util.h"
 #include "battle_message.h"
-#include "battle_ai.h"
+#include "battle_ai_script_commands.h"
 #include "battle_controllers.h"
 #include "event_data.h"
 #include "calculate_base_damage.h"
@@ -57,7 +57,6 @@ extern u8 gCurrMovePos;
 extern u8 gUnknown_020241E9;
 
 extern const struct BattleMove gBattleMoves[];
-extern void (* const gBattleScriptingCommandsTable[])(void);
 
 // scripts
 extern const u8 gUnknown_082DAE2A[];

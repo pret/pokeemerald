@@ -1405,7 +1405,7 @@ gUnknown_0203AB30: @ 203AB30
 gUnknown_0203AB34: @ 203AB34
 	.space 0x4
 
-    .include "src/battle_ai.o"
+    .include "src/battle_ai_script_commands.o"
     
 .align 2
 gUnknown_0203AB40: @ 203AB40

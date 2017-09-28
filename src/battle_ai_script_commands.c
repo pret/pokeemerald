@@ -1,5 +1,5 @@
 #include "global.h"
-#include "battle_ai.h"
+#include "battle_ai_script_commands.h"
 #include "pokemon.h"
 #include "battle.h"
 #include "species.h"
