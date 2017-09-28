@@ -223,7 +223,7 @@ gBattle_BG2_X: @ 2022E1C
 gBattle_BG2_Y: @ 2022E1E
 	.space 0x2
 
-gUnknown_02022E20: @ 2022E20
+gBattle_BG3_X: @ 2022E20
 	.space 0x2
 
 gUnknown_02022E22: @ 2022E22

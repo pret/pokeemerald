@@ -16,14 +16,14 @@ gUnknown_082DBD54:: @ 82DBD54
 gUnknown_082DBD58:: @ 82DBD58
 	.incbin "baserom.gba", 0x2dbd58, 0x2c
 
-gUnknown_082DBD84:: @ 82DBD84
+BattleScript_SuccessBallThrow:: @ 82DBD84
 	.incbin "baserom.gba", 0x2dbd84, 0x46
 
-gUnknown_082DBDCA:: @ 82DBDCA
+BattleScript_WallyBallThrow:: @ 82DBDCA
 	.incbin "baserom.gba", 0x2dbdca, 0xa
 
-gUnknown_082DBDD4:: @ 82DBDD4
+BattleScript_ShakeBallThrow:: @ 82DBDD4
 	.incbin "baserom.gba", 0x2dbdd4, 0x2e
 
-gUnknown_082DBE02:: @ 82DBE02
+BattleScript_TrainerBallBlock:: @ 82DBE02
 	.incbin "baserom.gba", 0x2dbe02, 0xf6

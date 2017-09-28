@@ -2337,8 +2337,8 @@ EmitTrainerSlide: @ 8033A04
 	.pool
 	thumb_func_end EmitTrainerSlide
 
-	thumb_func_start dp01_build_cmdbuf_x09_9_9_9
-dp01_build_cmdbuf_x09_9_9_9: @ 8033A24
+	thumb_func_start EmitTrainerSlideBack
+EmitTrainerSlideBack: @ 8033A24
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2353,7 +2353,7 @@ dp01_build_cmdbuf_x09_9_9_9: @ 8033A24
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x09_9_9_9
+	thumb_func_end EmitTrainerSlideBack
 
 	thumb_func_start EmitFaintAnimation
 EmitFaintAnimation: @ 8033A44
@@ -2409,8 +2409,8 @@ dp01_build_cmdbuf_x0C_C_C_C: @ 8033A84
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x0C_C_C_C
 
-	thumb_func_start dp01_build_cmdbuf_x0D_a
-dp01_build_cmdbuf_x0D_a: @ 8033AA4
+	thumb_func_start EmitBallThrow
+EmitBallThrow: @ 8033AA4
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -2424,7 +2424,7 @@ dp01_build_cmdbuf_x0D_a: @ 8033AA4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x0D_a
+	thumb_func_end EmitBallThrow
 
 	thumb_func_start sub_8033AC4
 sub_8033AC4: @ 8033AC4

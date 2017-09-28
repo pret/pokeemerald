@@ -211,4 +211,6 @@ extern u8 gBattleTextBuff2[];
 extern u8 gBattleTextBuff3[];
 extern u8 gDisplayedStringBattle[];
 
+extern const u8* const gRefereeStringsTable[];
+
 #endif // GUARD_BATTLE_MESSAGE_H

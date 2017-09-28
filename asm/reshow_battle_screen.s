@@ -111,7 +111,7 @@ _080A93B0:
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E22
 	strh r1, [r0]
@@ -286,7 +286,7 @@ _080A955C:
 	b _080A95D2
 	.pool
 _080A95A4:
-	ldr r0, =vblank_cb_08078BB4
+	ldr r0, =VBlankCB_Battle
 	bl SetVBlankCallback
 	bl sub_80A95F4
 	movs r0, 0x1

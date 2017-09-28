@@ -165,7 +165,7 @@ _080368BE:
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E22
 	strh r1, [r0]
@@ -191,7 +191,7 @@ _080368FE:
 	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r0, =vblank_cb_08078BB4
+	ldr r0, =VBlankCB_Battle
 	bl SetVBlankCallback
 	bl sub_803269C
 	ldr r2, [r4]
@@ -3906,8 +3906,8 @@ _08038A1E:
 	.pool
 	thumb_func_end sub_8038A04
 
-	thumb_func_start vblank_cb_08078BB4
-vblank_cb_08078BB4: @ 8038A28
+	thumb_func_start VBlankCB_Battle
+VBlankCB_Battle: @ 8038A28
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -3941,7 +3941,7 @@ _08038A3A:
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
@@ -3972,7 +3972,7 @@ _08038A3A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end vblank_cb_08078BB4
+	thumb_func_end VBlankCB_Battle
 
 	thumb_func_start nullsub_17
 nullsub_17: @ 8038B00
@@ -4379,7 +4379,7 @@ _08038E1A:
 	strh r4, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	strh r4, [r0]
 	ldr r0, =gUnknown_02022E22
 	strh r4, [r0]
@@ -4399,7 +4399,7 @@ _08038E1A:
 	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r0, =vblank_cb_08078BB4
+	ldr r0, =VBlankCB_Battle
 	bl SetVBlankCallback
 	ldr r0, =task00_0800F6FC
 	movs r1, 0
@@ -4850,7 +4850,7 @@ sub_80392A8: @ 80392A8
 	strh r4, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	strh r4, [r0]
 	ldr r0, =gUnknown_02022E22
 	strh r4, [r0]
@@ -4873,7 +4873,7 @@ _080392FE:
 	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r0, =vblank_cb_08078BB4
+	ldr r0, =VBlankCB_Battle
 	bl SetVBlankCallback
 	ldr r0, =sub_803937C
 	bl SetMainCallback2
@@ -9307,7 +9307,7 @@ _0803B866:
 	beq _0803B8B2
 	bl StopCryAndClearCrySongs
 	ldr r0, =gUnknown_082DB8BE
-	bl b_call_bc_move_exec
+	bl BattleScriptExecute
 _0803B8B2:
 	add sp, 0x4
 	pop {r3-r5}
@@ -9561,7 +9561,7 @@ _0803BAE6:
 	cmp r0, 0
 	beq _0803BB5C
 	ldr r0, =gUnknown_082DB881
-	bl b_call_bc_move_exec
+	bl BattleScriptExecute
 	b _0803BB78
 	.pool
 _0803BB5C:
@@ -9577,7 +9577,7 @@ _0803BB5C:
 	cmp r0, 0
 	bne _0803BB78
 	ldr r0, =gUnknown_082DB8BE
-	bl b_call_bc_move_exec
+	bl BattleScriptExecute
 _0803BB78:
 	pop {r3,r4}
 	mov r8, r3
@@ -10866,7 +10866,7 @@ _0803C720:
 	cmp r0, 0x3
 	bne _0803C760
 	ldr r0, =gUnknown_082DAAFE
-	bl b_call_bc_move_exec
+	bl BattleScriptExecute
 	ldr r1, =gBattleCommunication
 	ldrb r0, [r4]
 	adds r0, r1
@@ -12739,7 +12739,7 @@ _0803D71C:
 	cmp r0, 0
 	blt _0803D7A0
 	ldr r0, =gUnknown_082DB1FF
-	bl b_call_bc_move_exec
+	bl BattleScriptExecute
 	b _0803D7E8
 	.pool
 _0803D7A0:

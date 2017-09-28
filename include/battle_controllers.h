@@ -43,6 +43,7 @@ void EmitSwitchInAnim(u8 bufferId, u8 partyId, bool8 dontClearSubstituteBit);
 void EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, const u8* arg4);
 void EmitLinkStandbyMsg(u8 bufferId, u8 arg1, u8 arg2);
 void EmitTrainerSlide(u8 bufferId);
+void EmitTrainerSlideBack(u8 bufferId);
 void EmitFaintingCry(u8 bufferId);
 void Emit_x37(u8 bufferId, u8 arg1);
 void EmitHitAnimation(u8 bufferId);
@@ -51,11 +52,21 @@ void EmitCmd49(u8 bufferId);
 void EmitStatusAnimation(u8 bufferId, bool8 status2, u32 status);
 void EmitCmd13(u8 bufferId);
 void EmitStatusIconUpdate(u8 bufferId, u32 status1, u32 status2);
-void EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 
 #define RESET_ACTION_MOVE_SELECTION     0
 #define RESET_ACTION_SELECTION          1
 #define RESET_MOVE_SELECTION            2
+
+void EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
+
+#define BALL_NO_SHAKES          0
+#define BALL_1_SHAKE            1
+#define BALL_2_SHAKES           2
+#define BALL_3_SHAKES_FAIL      3
+#define BALL_3_SHAKES_SUCCESS   4
+#define BALL_TRAINER_BLOCK      5
+
+void EmitBallThrow(u8 bufferId, u8 caseId);
 
 void MarkBufferBankForExecution(u8 bank);
 

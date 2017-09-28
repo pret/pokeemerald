@@ -30134,7 +30134,7 @@ _0810DB1A:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810DB50
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	ldrh r0, [r4, 0x1A]
 	lsls r0, 16
 	asrs r0, 24
@@ -30145,7 +30145,7 @@ _0810DB1A:
 	b _0810DB60
 	.pool
 _0810DB50:
-	ldr r2, =gUnknown_02022E20
+	ldr r2, =gBattle_BG3_X
 	ldrh r1, [r4, 0x1A]
 	lsls r1, 16
 	asrs r1, 24
@@ -44805,7 +44805,7 @@ _08115314:
 	beq _08115340
 	cmp r0, 0x5
 	bne _08115380
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r0, [r0]
 	strh r0, [r4, 0x22]
 	ldr r0, =sub_81153AC
@@ -44907,7 +44907,7 @@ _081153DA:
 	ands r0, r1
 	cmp r0, 0
 	bne _08115404
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	ldrh r0, [r3, 0x26]
 	ldrh r2, [r3, 0x22]
 	adds r0, r2
@@ -44915,7 +44915,7 @@ _081153DA:
 	b _0811540E
 	.pool
 _08115404:
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r1, [r3, 0x22]
 	ldrh r2, [r3, 0x26]
 	subs r1, r2
@@ -44951,7 +44951,7 @@ _08115430:
 	ands r1, r0
 	cmp r1, 0
 	bne _0811545C
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	ldrh r0, [r3, 0x24]
 	ldrh r2, [r3, 0x22]
 	adds r0, r2
@@ -44959,7 +44959,7 @@ _08115430:
 	b _08115466
 	.pool
 _0811545C:
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r1, [r3, 0x22]
 	ldrh r2, [r3, 0x24]
 	subs r1, r2
@@ -44987,7 +44987,7 @@ _08115484:
 	b _0811549C
 	.pool
 _08115490:
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	ldrh r0, [r3, 0x22]
 	strh r0, [r1]
 	adds r0, r2, 0
@@ -45263,7 +45263,7 @@ _0811565A:
 	movs r0, 0xFF
 	ands r1, r0
 	strh r1, [r4, 0xC]
-	ldr r2, =gUnknown_02022E20
+	ldr r2, =gBattle_BG3_X
 	ldrh r0, [r4, 0xA]
 	strh r0, [r2]
 	ldr r0, =gUnknown_02022E22
@@ -45295,7 +45295,7 @@ sub_81156D0: @ 81156D0
 	ldrsh r0, [r2, r4]
 	cmp r1, r0
 	bne _08115710
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E22
@@ -45305,7 +45305,7 @@ sub_81156D0: @ 81156D0
 	b _0811571C
 	.pool
 _08115710:
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	ldrh r0, [r2, 0xA]
 	strh r0, [r1]
 	ldr r1, =gUnknown_02022E22
@@ -46553,7 +46553,7 @@ _081160DC:
 	beq _081160F4
 	b _08116104
 _081160E2:
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	b _081160F6
 	.pool
 _081160EC:
@@ -46793,7 +46793,7 @@ sub_81162A4: @ 81162A4
 	strh r1, [r2, 0xE]
 	ldrh r1, [r3, 0x6]
 	strh r1, [r2, 0x18]
-	ldr r4, =gUnknown_02022E20
+	ldr r4, =gBattle_BG3_X
 	ldrh r1, [r3]
 	strh r1, [r4]
 	ldr r4, =gUnknown_02022E22
@@ -46824,7 +46824,7 @@ sub_81162F8: @ 81162F8
 	mov r12, r1
 	cmp r0, 0
 	bne _0811637E
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r2, [r0]
 	movs r7, 0x8
 	ldrsh r1, [r3, r7]
@@ -49152,7 +49152,7 @@ sub_81176D8: @ 81176D8
 	ldrh r7, [r1, 0x1E]
 	adds r2, r7
 	strh r2, [r1, 0x1E]
-	ldr r6, =gUnknown_02022E20
+	ldr r6, =gBattle_BG3_X
 	lsls r0, r3, 16
 	asrs r0, 24
 	ldrh r4, [r6]

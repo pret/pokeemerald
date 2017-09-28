@@ -3169,7 +3169,7 @@ _0819044E:
 	strh r4, [r0]
 	ldr r0, =gBattle_BG1_Y
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	strh r4, [r0]
 	ldr r0, =gUnknown_02022E22
 	strh r4, [r0]

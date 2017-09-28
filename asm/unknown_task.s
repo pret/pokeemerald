@@ -291,7 +291,7 @@ _080BA23C:
 	b _080BA24E
 	.pool
 _080BA244:
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	b _080BA24E
 	.pool
 _080BA24C:

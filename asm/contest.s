@@ -58,7 +58,7 @@ sub_80D7678: @ 80D7678
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E22
 	strh r1, [r0]
@@ -1340,7 +1340,7 @@ vblank_cb_battle: @ 80D827C
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg

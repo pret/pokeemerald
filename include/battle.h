@@ -205,6 +205,7 @@
 #define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
 #define WEATHER_HAIL                (1 << 7)
 #define WEATHER_HAIL_ANY ((WEATHER_HAIL))
+#define WEATHER_ANY ((WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY))
 
 #define BATTLE_TERRAIN_GRASS        0
 #define BATTLE_TERRAIN_LONG_GRASS   1
@@ -216,7 +217,9 @@
 #define BATTLE_TERRAIN_CAVE         7
 
 // array entries for battle communication
+#define MULTIUSE_STATE      0x0
 #define CURSOR_POSITION     0x1
+#define TASK_ID             0x1 // task Id and cursor position share the same field
 #define MOVE_EFFECT_BYTE    0x3
 #define MULTISTRING_CHOOSER 0x5
 #define MSG_DISPLAY         0x7
@@ -531,6 +534,9 @@ struct BattleResults
     u8 unk4;                  // 0x4
     u8 unk5_0:1;              // 0x5
     u8 unk5_1:1;              // 0x5
+    u8 caughtMonBall:4;       // 0x5
+    u8 unk5_6:1;              // 0x5
+    u8 unk5_7:1;              // 0x5
     u16 poke1Species;         // 0x6
     u8 pokeString1[10];       // 0x8
     u8 unk12;
@@ -542,10 +548,10 @@ struct BattleResults
     u16 lastUsedMove;         // 0x22
     u16 opponentMove;         // 0x24
     u16 opponentSpecies;      // 0x26
-    u16 caughtPoke;           // 0x28
-    u8 caughtNick[10];        // 0x2A
+    u16 caughtMonSpecies;     // 0x28
+    u8 caughtMonNick[10];     // 0x2A
     u8 filler34[2];
-    u8 unk36[10];  // usedBalls?
+    u8 catchAttempts[10];     // 0x36
 };
 
 extern struct BattleResults gBattleResults;
@@ -588,17 +594,7 @@ struct BattleStruct
     u8 field_5C[4];
     u8 field_60[4][3];
     u8 field_6C;
-    u8 field_6D;
-    u8 field_6E;
-    u8 field_6F;
-    u8 field_70;
-    u8 field_71;
-    u8 field_72;
-    u8 field_73;
-    u8 field_74;
-    u8 field_75;
-    u8 field_76;
-    u8 field_77;
+    u8 caughtMonNick[11];
     u8 field_78;
     u8 field_79;
     u8 field_7A;
@@ -845,6 +841,7 @@ struct BattleScripting
     u8 field_1D;
     u8 atk6C_state;
     u8 learnMoveState;
+    u8 field_20;
 };
 
 extern struct BattleScripting gBattleScripting;
@@ -862,6 +859,7 @@ void SwitchInClearStructs(void);
 void sub_803BDA0(u8 bank);
 void sub_803FA70(u8 bank);
 void BattleMainCB2(void);
+void VBlankCB_Battle(void);
 void ResetSentPokesToOpponentValue(void);
 bool8 CanRunFromBattle(u8 bank);
 bool8 IsRunningFromBattleImpossible(void);
@@ -892,8 +890,8 @@ u8 AtkCanceller_UnableToUseMove(void);
 bool8 sub_80423F4(u8 bank, u8 r1, u8 r2);
 u8 CastformDataTypeChange(u8 bank);
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
-void b_call_bc_move_exec(const u8* BS_ptr);
-void b_push_move_exec(const u8* BS_ptr);
+void BattleScriptExecute(const u8* BS_ptr);
+void BattleScriptPushCursorAndCallback(const u8* BS_ptr);
 u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
 void sub_8045868(u8 bank);
 void sub_80458B4(void);
@@ -905,9 +903,12 @@ void AI_CalcDmg(u8 bankAtk, u8 bankDef);
 u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
 u8 AI_TypeCalc(u16 move, u16 species, u8 ability);
 u8 BankGetTurnOrder(u8 bank);
+void SetMoveEffect(bool8 primary, u8 certain);
 void BattleDestroyCursorAt(u8 cursorPosition);
 void BattleCreateCursorAt(u8 cursorPosition);
 void BufferMoveToLearnIntoBattleTextBuff2(void);
+void sub_8056A3C(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
+bool8 UproarWakeUpCheck(u8 bank);
 
 // battle_5
 void AdjustFriendshipOnBattleFaint(u8 bank);

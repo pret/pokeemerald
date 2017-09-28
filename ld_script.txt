@@ -60,7 +60,6 @@ SECTIONS {
         asm/battle_2.o(.text);
         src/battle_3.o(.text);
         src/battle_4.o(.text);
-        asm/battle_4.o(.text);
         asm/battle_5.o(.text);
         asm/battle_controller_player.o(.text);
         asm/battle_7.o(.text);

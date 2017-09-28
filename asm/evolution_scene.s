@@ -178,7 +178,7 @@ evolution_cutscene: @ 813DA8C
 	strh r2, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r2, [r0]
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
@@ -472,7 +472,7 @@ sub_813DD7C: @ 813DD7C
 	strh r4, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r4, [r0]
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
@@ -642,7 +642,7 @@ _0813DFE0:
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r2, =gUnknown_02022E20
+	ldr r2, =gBattle_BG3_X
 	movs r3, 0x80
 	lsls r3, 1
 	adds r0, r3, 0
@@ -953,7 +953,7 @@ sub_813E1D4: @ 813E1D4
 	strh r4, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r4, [r0]
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
@@ -3654,7 +3654,7 @@ sub_813FCDC: @ 813FCDC
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
@@ -3698,7 +3698,7 @@ sub_813FD64: @ 813FD64
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
@@ -3870,7 +3870,7 @@ sub_813FEE8: @ 813FEE8
 	b _0813FF2C
 	.pool
 _0813FF28:
-	ldr r7, =gUnknown_02022E20
+	ldr r7, =gBattle_BG3_X
 	ldr r6, =gUnknown_02022E22
 _0813FF2C:
 	lsls r4, r5, 2
