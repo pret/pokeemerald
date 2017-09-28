@@ -1667,6 +1667,23 @@ static void sub_80ED718(void)
     }
 }
 
+void EndMassOutbreak(void)
+{
+    gSaveBlock1Ptr->outbreakPokemonSpecies = SPECIES_NONE;
+    gSaveBlock1Ptr->outbreakLocationMapNum = 0;
+    gSaveBlock1Ptr->outbreakLocationMapGroup = 0;
+    gSaveBlock1Ptr->outbreakPokemonLevel = 0;
+    gSaveBlock1Ptr->outbreakUnk1 = 0;
+    gSaveBlock1Ptr->outbreakUnk2 = 0;
+    gSaveBlock1Ptr->outbreakPokemonMoves[0] = MOVE_NONE;
+    gSaveBlock1Ptr->outbreakPokemonMoves[1] = MOVE_NONE;
+    gSaveBlock1Ptr->outbreakPokemonMoves[2] = MOVE_NONE;
+    gSaveBlock1Ptr->outbreakPokemonMoves[3] = MOVE_NONE;
+    gSaveBlock1Ptr->outbreakUnk4 = 0;
+    gSaveBlock1Ptr->outbreakPokemonProbability = 0;
+    gSaveBlock1Ptr->outbreakUnk5 = 0;
+}
+
 asm(".section .text.dotvshow");
 
 void TVShowDone(void);

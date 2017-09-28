@@ -3,64 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start EndMassOutbreak
-EndMassOutbreak: @ 80ED808
-	push {r4,r5,lr}
-	ldr r3, =gSaveBlock1Ptr
-	ldr r0, [r3]
-	ldr r2, =0x00002b90
-	adds r1, r0, r2
-	movs r4, 0
-	movs r2, 0
-	strh r2, [r1]
-	ldr r5, =0x00002b92
-	adds r0, r5
-	strb r4, [r0]
-	ldr r0, [r3]
-	ldr r1, =0x00002b93
-	adds r0, r1
-	strb r4, [r0]
-	ldr r0, [r3]
-	adds r5, 0x2
-	adds r0, r5
-	strb r4, [r0]
-	ldr r0, [r3]
-	adds r1, 0x2
-	adds r0, r1
-	strb r4, [r0]
-	ldr r0, [r3]
-	adds r5, 0x2
-	adds r1, r0, r5
-	strh r2, [r1]
-	adds r5, 0x2
-	adds r1, r0, r5
-	strh r2, [r1]
-	adds r5, 0x2
-	adds r1, r0, r5
-	strh r2, [r1]
-	adds r5, 0x2
-	adds r1, r0, r5
-	strh r2, [r1]
-	adds r5, 0x2
-	adds r1, r0, r5
-	strh r2, [r1]
-	ldr r1, =0x00002ba0
-	adds r0, r1
-	strb r4, [r0]
-	ldr r0, [r3]
-	adds r5, 0x3
-	adds r0, r5
-	strb r4, [r0]
-	ldr r0, [r3]
-	adds r1, 0x2
-	adds r0, r1
-	strh r2, [r0]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end EndMassOutbreak
-
 	thumb_func_start sub_80ED888
 sub_80ED888: @ 80ED888
 	push {r4,lr}
