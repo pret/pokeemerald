@@ -1688,10 +1688,10 @@ void EndMassOutbreak(void)
 
 void sub_80ED888(u16 days)
 {
-    void sub_80ED8B4(u16);
-    void UpdateMassOutbreakTimeLeft(u16);
+    static void sub_80ED8B4(u16);
+    static void UpdateMassOutbreakTimeLeft(u16);
     void sub_80EF120(u16);
-    void sub_80EDA48(u16);
+    static void sub_80EDA48(u16);
     void sub_80EEB98(u16);
 
     sub_80ED8B4(days);
@@ -1781,10 +1781,58 @@ static void PutFishingAdviceShowOnTheAir(void)
         show->pokemonAngler.active = FALSE;
         show->pokemonAngler.var02 = gUnknown_0203A026;
         show->pokemonAngler.var03 = gUnknown_0203A026 >> 8;
-        show->pokemonAngler.var04 = gUnknown_0203A024;
+        show->pokemonAngler.species = gUnknown_0203A024;
         StringCopy(show->pokemonAngler.playerName, gSaveBlock2Ptr->playerName);
         tv_store_id_3x(show);
         show->pokemonAngler.language = gGameLanguage;
+    }
+}
+
+void sub_80EDA3C(u16 species)
+{
+    gUnknown_0203A024 = species;
+}
+
+static void sub_80EDA48(u16 days)
+{
+    static void sub_80EDA80(void);
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[24];
+    if (show->worldOfMasters.kind == TVSHOW_WORLD_OF_MASTERS)
+    {
+        if (show->worldOfMasters.var02 >= 20)
+        {
+            sub_80EDA80();
+        }
+        DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, 24);
+    }
+}
+
+static void sub_80EDA80(void)
+{
+    TVShow *show;
+    TVShow *show2;
+
+    show = &gSaveBlock1Ptr->tvShows[24];
+    if (!TV_BernoulliTrial(0xFFFF))
+    {
+        sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+        if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_WORLD_OF_MASTERS, 0) != TRUE)
+        {
+            show2 = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+            show2->worldOfMasters.kind = TVSHOW_WORLD_OF_MASTERS;
+            show2->worldOfMasters.active = FALSE;
+            show2->worldOfMasters.var02 = show->worldOfMasters.var02;
+            show2->worldOfMasters.steps = GetGameStat(GAME_STAT_STEPS) - show->worldOfMasters.steps;
+            show2->worldOfMasters.caughtPoke = show->worldOfMasters.caughtPoke;
+            show2->worldOfMasters.species = show->worldOfMasters.species;
+            show2->worldOfMasters.location = show->worldOfMasters.location;
+            StringCopy(show2->worldOfMasters.playerName, gSaveBlock2Ptr->playerName);
+            tv_store_id_3x(show2);
+            show2->worldOfMasters.language = gGameLanguage;
+            DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, 24);
+        }
     }
 }
 
