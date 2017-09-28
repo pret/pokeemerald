@@ -11043,7 +11043,7 @@ static void atkEF_pokeball_catch_calculation(void)
                     ballMultiplier = 10;
                 break;
             case ITEM_NEST_BALL:
-                if (gBattleMons[gBankTarget].level <= 39)
+                if (gBattleMons[gBankTarget].level < 40)
                 {
                     ballMultiplier = 40 - gBattleMons[gBankTarget].level;
                     if (ballMultiplier <= 9)
