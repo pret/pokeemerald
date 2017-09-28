@@ -30,7 +30,8 @@
 
 extern EWRAM_DATA u8 sTVShowState;
 extern s8 sCurTVShowSlot;
-extern u16 gUnknown_0203A026;
+extern EWRAM_DATA u16 gUnknown_0203A024;
+extern EWRAM_DATA u16 gUnknown_0203A026;
 
 // Static ROM declarations
 
@@ -1740,13 +1741,13 @@ void UpdateMassOutbreakTimeLeft(u16 days)
 
 void sub_80ED950(bool8 flag)
 {
-    void sub_80ED9A8(void);
+    static void PutFishingAdviceShowOnTheAir(void);
 
     if (flag)
     {
         if (gUnknown_0203A026 >> 8 > 4)
         {
-            sub_80ED9A8();
+            PutFishingAdviceShowOnTheAir();
         }
         gUnknown_0203A026 &= 0xFF;
         if (gUnknown_0203A026 != 0xFF)
@@ -1758,13 +1759,32 @@ void sub_80ED950(bool8 flag)
     {
         if ((u8)gUnknown_0203A026 > 4)
         {
-            sub_80ED9A8();
+            PutFishingAdviceShowOnTheAir();
         }
         gUnknown_0203A026 &= 0xFF00;
         if (gUnknown_0203A026 >> 8 != 0xFF)
         {
             gUnknown_0203A026 += 0x0100;
         }
+    }
+}
+
+static void PutFishingAdviceShowOnTheAir(void)
+{
+    TVShow *show;
+
+     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_FISHING_ADVICE, 0) != TRUE)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->pokemonAngler.kind = TVSHOW_FISHING_ADVICE;
+        show->pokemonAngler.active = FALSE;
+        show->pokemonAngler.var02 = gUnknown_0203A026;
+        show->pokemonAngler.var03 = gUnknown_0203A026 >> 8;
+        show->pokemonAngler.var04 = gUnknown_0203A024;
+        StringCopy(show->pokemonAngler.playerName, gSaveBlock2Ptr->playerName);
+        tv_store_id_3x(show);
+        show->pokemonAngler.language = gGameLanguage;
     }
 }
 
