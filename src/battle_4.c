@@ -262,6 +262,8 @@ static bool8 sub_804F344(void);
 static void PutMonIconOnLvlUpBox(void);
 static void PutLevelAndGenderOnLvlUpBox(void);
 
+static void SpriteCB_MonIconOnLvlUpBox(struct Sprite* sprite);
+
 static void atk00_attackcanceler(void);
 static void atk01_accuracycheck(void);
 static void atk02_attackstring(void);
@@ -900,24 +902,173 @@ const u8* const gMoveEffectBS_Ptrs[] =
 
 static const struct WindowTemplate sUnusedWinTemplate = {0, 1, 3, 7, 0xF, 0x1F, 0x3F};
 
-extern const struct SpriteTemplate SpriteTemplate_MonIconOnLvlUpBox;
-extern const u16 sProtectSuccessRates[];
-extern const u16 sNaturePowerMoves[];
-extern const u16 sWeightToDamageTable[];
-extern const u8 sTerrainToType[];
-extern const u8 sBallCatchBonuses[];
-extern const u16 gUnknown_0831C2C8[];
-extern const u8 gUnknown_0831C2E8[];
-extern const u8 gUnknown_0831C4F8[];
-extern const u8 sFlailHpScaleToPowerTable[12];
-extern const u16 gRarePickupItems[];
-extern const u16 gPickupItems[];
-extern const u8 gPickupProbabilities[];
+const u16 gUnknown_0831C2C8[] = INCBIN_U16("graphics/battle_interface/unk_battlebox.gbapal");
+const u8 gUnknown_0831C2E8[] = INCBIN_U8("graphics/battle_interface/unk_battlebox.4bpp.lz");
 
-extern const u16 gMovesForbiddenToCopy[];
+// unused
+static const u8 sRubyLevelUpStatBoxStats[] =
+{
+    MON_DATA_MAX_HP, MON_DATA_SPATK, MON_DATA_ATK,
+    MON_DATA_SPDEF, MON_DATA_DEF, MON_DATA_SPD
+};
+
+#define MON_ICON_LVLUP_BOX_TAG      0xD75A
+
+const struct OamData gUnknown_0831C3B8 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const struct SpriteTemplate SpriteTemplate_MonIconOnLvlUpBox =
+{
+    .tileTag = MON_ICON_LVLUP_BOX_TAG,
+    .paletteTag = MON_ICON_LVLUP_BOX_TAG,
+    .oam = &gUnknown_0831C3B8,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_MonIconOnLvlUpBox
+};
+
+const u16 sProtectSuccessRates[] = {0xFFFF, 0x7FFF, 0x3FFF, 0x1FFF};
+
 #define MIMIC_FORBIDDEN_END             0xFFFE
 #define METRONOME_FORBIDDEN_END         0xFFFF
 #define ASSIST_FORBIDDEN_END            0xFFFF
+
+static const u16 gMovesForbiddenToCopy[] =
+{
+     MOVE_METRONOME,
+     MOVE_STRUGGLE,
+     MOVE_SKETCH,
+     MOVE_MIMIC,
+     MIMIC_FORBIDDEN_END,
+     MOVE_COUNTER,
+     MOVE_MIRROR_COAT,
+     MOVE_PROTECT,
+     MOVE_DETECT,
+     MOVE_ENDURE,
+     MOVE_DESTINY_BOND,
+     MOVE_SLEEP_TALK,
+     MOVE_THIEF,
+     MOVE_FOLLOW_ME,
+     MOVE_SNATCH,
+     MOVE_HELPING_HAND,
+     MOVE_COVET,
+     MOVE_TRICK,
+     MOVE_FOCUS_PUNCH,
+     METRONOME_FORBIDDEN_END
+};
+
+static const u8 sFlailHpScaleToPowerTable[] =
+{
+    1, 200,
+    4, 150,
+    9, 100,
+    16, 80,
+    32, 40,
+    48, 20
+};
+
+static const u16 sNaturePowerMoves[] =
+{
+    MOVE_STUN_SPORE,
+    MOVE_RAZOR_LEAF,
+    MOVE_EARTHQUAKE,
+    MOVE_HYDRO_PUMP,
+    MOVE_SURF,
+    MOVE_BUBBLE_BEAM,
+    MOVE_ROCK_SLIDE,
+    MOVE_SHADOW_BALL,
+    MOVE_SWIFT,
+    MOVE_SWIFT
+};
+
+// format: min. weight (hectograms), base power
+static const u16 sWeightToDamageTable[] =
+{
+    100, 20,
+    250, 40,
+    500, 60,
+    1000, 80,
+    2000, 100,
+    0xFFFF, 0xFFFF
+};
+
+static const u16 gPickupItems[] =
+{
+    ITEM_POTION,
+	ITEM_ANTIDOTE,
+	ITEM_SUPER_POTION,
+	ITEM_GREAT_BALL,
+	ITEM_REPEL,
+	ITEM_ESCAPE_ROPE,
+	ITEM_X_ATTACK,
+	ITEM_FULL_HEAL,
+	ITEM_ULTRA_BALL,
+	ITEM_HYPER_POTION,
+	ITEM_RARE_CANDY,
+	ITEM_PROTEIN,
+	ITEM_REVIVE,
+	ITEM_HP_UP,
+	ITEM_FULL_RESTORE,
+	ITEM_MAX_REVIVE,
+	ITEM_PP_UP,
+	ITEM_MAX_ELIXIR,
+};
+
+static const u16 gRarePickupItems[] =
+{
+    ITEM_HYPER_POTION,
+	ITEM_NUGGET,
+	ITEM_KINGS_ROCK,
+	ITEM_FULL_RESTORE,
+	ITEM_ETHER,
+	ITEM_WHITE_HERB,
+	ITEM_TM44,
+	ITEM_ELIXIR,
+	ITEM_TM01,
+	ITEM_LEFTOVERS,
+	ITEM_TM26,
+};
+
+static const u8 gPickupProbabilities[] =
+{
+    30, 40, 50, 60, 70, 80, 90, 94, 98
+};
+
+static const u8 sTerrainToType[] =
+{
+    TYPE_GRASS, // tall grass
+    TYPE_GRASS, // long grass
+    TYPE_GROUND, // sand
+    TYPE_WATER, // underwater
+    TYPE_WATER, // water
+    TYPE_WATER, // pond water
+    TYPE_ROCK , // rock
+    TYPE_ROCK , // cave
+    TYPE_NORMAL, // building
+    TYPE_NORMAL, // plain
+};
+
+static const u8 sBallCatchBonuses[] =
+{
+    20, 15, 10, 15 // Ultra, Great, Poke, Safari
+};
+
+extern const u8 gUnknown_0831C4F8[];
 
 static void atk00_attackcanceler(void)
 {
@@ -6684,8 +6835,6 @@ static bool8 sub_804F344(void)
     return (gBattle_BG2_X != 0x1A0);
 }
 
-#define MON_ICON_LVLUP_BOX_TAG      0xD75A
-
 #define sDestroy                    data0
 #define sSavedLvlUpBoxXPosition     data1
 
@@ -6716,7 +6865,7 @@ static void PutMonIconOnLvlUpBox(void)
     gSprites[spriteId].sSavedLvlUpBoxXPosition = gBattle_BG2_X;
 }
 
-void SpriteCB_MonIconOnLvlUpBox(struct Sprite* sprite)
+static void SpriteCB_MonIconOnLvlUpBox(struct Sprite* sprite)
 {
     sprite->pos2.x = sprite->sSavedLvlUpBoxXPosition - gBattle_BG2_X;
 

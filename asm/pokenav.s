@@ -28559,7 +28559,7 @@ _081D5268:
 	ldr r0, =gUnknown_085EE097
 	bl sub_8018884
 	ldr r0, =gUnknown_03006370
-	ldr r1, =gUnknown_089A6550
+	ldr r1, =gMultiBootProgram_BerryGlitchFix_Start
 	ldr r2, =gUnknown_089A3470
 	subs r1, r2
 	bl sub_81D4D50
