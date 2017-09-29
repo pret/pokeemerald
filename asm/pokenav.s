@@ -27356,7 +27356,7 @@ _081D4870:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088E64
+	bl MetatileBehavior_IsPokeGrass
 	lsls r0, 24
 	lsrs r0, 24
 _081D4888:

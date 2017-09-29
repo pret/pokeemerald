@@ -1699,19 +1699,19 @@ _080853AC:
 	lsls r4, 24
 	lsrs r5, r4, 24
 	adds r0, r5, 0
-	bl sub_8088F74
+	bl MetatileBehavior_IsDeepSouthWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080853E8
 	adds r0, r5, 0
-	bl sub_8088F58
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08085442
 	adds r0, r5, 0
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -4,5 +4,5 @@
     .section .rodata
     .align 2, 0
 
-gUnknown_08486EFC:: @ 8486EFC
-	.incbin "baserom.gba", 0x486efc, 0x10090
+gUnknown_8486FEC:: @ 8486FEC
+	.incbin "baserom.gba", 0x486fec, 0xFFA0
