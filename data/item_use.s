@@ -12,4 +12,4 @@ gUnknown_085920E4:: @ 85920E4
 	.incbin "baserom.gba", 0x5920e4, 0x4
 
 gUnknown_085920E8:: @ 85920E8
-	.incbin "baserom.gba", 0x5920e8, 0x128
+	.incbin "baserom.gba", 0x5920e8, 0x8
