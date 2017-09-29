@@ -1308,10 +1308,9 @@ void sub_805EF84(u8 bank, bool8);
 
 extern struct BattlePokemon gBattleMons[4];
 
-/*
-
 void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
 {
+    u16* hpSwitchout;
     s32 i;
     u8 nickname[POKEMON_NAME_LENGTH * 2];
 
@@ -1352,15 +1351,9 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[bank].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[bank].otName);
-    // ewram memes from Ruby return
-    #ifdef NONMATCHING
-        gBattleStruct->hpOnSwitchout[GetBankSide(bank)] = gBattleMons[bank].hp;
-    #else
-        {
-            u32 side = GetBankSide(bank);
-            *(u16*)((void*)(gBattleStruct) + side) = gBattleMons[bank].hp;
-        }
-    #endif // NONMATCHING
+
+    hpSwitchout = &gBattleStruct->hpOnSwitchout[GetBankSide(bank)];
+    *hpSwitchout = gBattleMons[bank].hp;
 
     for (i = 0; i < 8; i++)
         gBattleMons[bank].statStages[i] = 6;
@@ -1369,4 +1362,3 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
     sub_803FA70(bank);
     sub_805EF84(bank, FALSE);
 }
-*/

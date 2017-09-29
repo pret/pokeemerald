@@ -71,7 +71,6 @@ SECTIONS {
         asm/pokemon_1.o(.text);
         src/calculate_base_damage.o(.text);
         src/pokemon_2.o(.text);
-        asm/pokemon_2.o(.text);
         asm/pokemon_item_effect.o(.text);
         src/pokemon_3.o(.text);
         asm/pokemon_3.o(.text);
