@@ -200,7 +200,6 @@ SECTIONS {
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
         src/save.o(.text);
-        asm/save.o(.text);
         asm/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
