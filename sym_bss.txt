@@ -11,21 +11,7 @@ gUnknown_03000000: @ 3000000
     .include "src/main_menu.o"
     .include "src/battle_1.o"
     .include "src/egg_hatch.o"
-    
-.space 0x4 @ why the gap?
-
-gUnknown_03000DE8: @ 3000DE8
-	.space 0x10
-
-gUnknown_03000DF8: @ 3000DF8
-	.space 0xC
-
-gUnknown_03000E04: @ 3000E04
-	.space 0x2
-
-gUnknown_03000E06: @ 3000E06
-	.space 0x2
-
+    .include "src/berry_blender.o"
     .include "src/play_time.o"
 
 .align 2
