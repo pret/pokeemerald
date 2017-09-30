@@ -423,7 +423,8 @@ SECTIONS {
         data/battle_anim_815A0D4.o(.rodata);
         data/learn_move.o(.rodata);
         src/roamer.o(.rodata);
-        data/rom_85CECB0.o(.rodata);
+        data/battle_tower.o(.rodata);
+        data/use_pokeblock.o(.rodata);
         data/battle_controller_wally.o(.rodata);
         data/player_pc.o(.rodata);
         data/intro.o(.rodata);
