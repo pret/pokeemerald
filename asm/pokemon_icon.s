@@ -32,7 +32,7 @@ sub_80D2CC4: @ 80D2CC4
 	str r0, [sp, 0x18]
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_80D2EDC
+	bl GetMonIconPtr
 	str r0, [sp, 0x1C]
 	ldr r0, =gUnknown_0857C5B4
 	str r0, [sp, 0x20]
@@ -271,9 +271,9 @@ _080D2ED2:
 	bx r1
 	thumb_func_end sub_80D2E84
 
-	thumb_func_start sub_80D2EDC
-@ void *sub_80D2EDC(u16 speciesId, u32 personality, bool32)
-sub_80D2EDC: @ 80D2EDC
+	thumb_func_start GetMonIconPtr
+@ void *GetMonIconPtr(u16 speciesId, u32 personality, bool32)
+GetMonIconPtr: @ 80D2EDC
 	push {r4,lr}
 	adds r4, r2, 0
 	lsls r0, 16
@@ -286,7 +286,7 @@ sub_80D2EDC: @ 80D2EDC
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D2EDC
+	thumb_func_end GetMonIconPtr
 
 	thumb_func_start sub_80D2EF8
 sub_80D2EF8: @ 80D2EF8
@@ -534,8 +534,8 @@ sub_80D30A0: @ 80D30A0
 	.pool
 	thumb_func_end sub_80D30A0
 
-	thumb_func_start sub_80D30B0
-sub_80D30B0: @ 80D30B0
+	thumb_func_start GetValidMonIconPalettePtr
+GetValidMonIconPalettePtr: @ 80D30B0
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -556,7 +556,7 @@ _080D30C2:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80D30B0
+	thumb_func_end GetValidMonIconPalettePtr
 
 	thumb_func_start sub_80D30DC
 sub_80D30DC: @ 80D30DC

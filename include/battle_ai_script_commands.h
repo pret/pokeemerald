@@ -1,5 +1,5 @@
-#ifndef GUARD_BATTLE_AI_H
-#define GUARD_BATTLE_AI_H
+#ifndef GUARD_BATTLE_AI_SCRIPT_COMMANDS_H
+#define GUARD_BATTLE_AI_SCRIPT_COMMANDS_H
 
 void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves);
 void BattleAI_SetupAIData(u8 defaultScoreMoves);
@@ -10,4 +10,4 @@ void ClearBankAbilityHistory(u8 bank);
 void RecordItemEffectBattle(u8 bank, u8 itemEffect);
 void ClearBankItemEffectHistory(u8 bank);
 
-#endif // GUARD_BATTLE_AI_H
+#endif // GUARD_BATTLE_AI_SCRIPT_COMMANDS_H

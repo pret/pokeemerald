@@ -35,7 +35,7 @@ extern const u8 gText_BadEgg[];
 extern const u8 gText_EggNickname[];
 
 extern u8 GetBankSide(u8 bank);
-extern u8 GetBankByPlayerAI(u8 bank);
+extern u8 GetBankByIdentity(u8 bank);
 extern u8 GetBankIdentity(u8 bank);
 
 u8 CountAliveMonsInBattle(u8 caseId)
@@ -90,7 +90,7 @@ u8 sub_8069F34(u8 bank)
 
     status ^= 1;
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBankByPlayerAI(status);
+        return GetBankByIdentity(status);
     if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) > 1)
     {
         u8 val;
@@ -99,14 +99,14 @@ u8 sub_8069F34(u8 bank)
             val = status ^ 2;
         else
             val = status;
-        return GetBankByPlayerAI(val);
+        return GetBankByIdentity(val);
     }
     else
     {
         if ((gAbsentBankFlags & gBitTable[status]))
-            return GetBankByPlayerAI(status ^ 2);
+            return GetBankByIdentity(status ^ 2);
         else
-            return GetBankByPlayerAI(status);
+            return GetBankByIdentity(status);
     }
 }
 

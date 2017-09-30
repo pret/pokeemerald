@@ -360,4 +360,6 @@ enum
     MOVE_PSYCHO_BOOST,
 };
 
+#define LAST_MOVE_INDEX     MOVE_PSYCHO_BOOST
+
 #endif // GUARD_MOVES_H

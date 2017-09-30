@@ -687,7 +687,7 @@ _0814E6CC:
 	ldr r7, [r0]
 _0814E6D8:
 	adds r0, r7, 0
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 _0814E6DE:
 	pop {r3-r5}
 	mov r8, r3
@@ -699,15 +699,15 @@ _0814E6DE:
 	.pool
 	thumb_func_end BufferStringBattle
 
-	thumb_func_start StrCpyDecodeToDisplayedStringBattle
-StrCpyDecodeToDisplayedStringBattle: @ 814E6F0
+	thumb_func_start BattleStringExpandPlaceholdersToDisplayedString
+BattleStringExpandPlaceholdersToDisplayedString: @ 814E6F0
 	push {lr}
 	ldr r1, =gDisplayedStringBattle
-	bl StrCpyDecodeBattle
+	bl  BattleStringExpandPlaceholders
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end StrCpyDecodeToDisplayedStringBattle
+	thumb_func_end BattleStringExpandPlaceholdersToDisplayedString
 
 	thumb_func_start AppendStatusString
 AppendStatusString: @ 814E700
@@ -763,8 +763,8 @@ _0814E75A:
 	bx r1
 	thumb_func_end AppendStatusString
 
-	thumb_func_start StrCpyDecodeBattle
-StrCpyDecodeBattle: @ 814E764
+	thumb_func_start  BattleStringExpandPlaceholders
+ BattleStringExpandPlaceholders: @ 814E764
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -904,7 +904,7 @@ _0814E8EE:
 	adds r0, r1, 0
 _0814E8F0:
 	adds r1, r4, 0
-	bl StrCpyDecodeBattleTextBuff
+	bl ExpandBattleTextBuffPlaceholders
 	bl _0814F5C0
 	.pool
 _0814E904:
@@ -924,7 +924,7 @@ _0814E920:
 	.pool
 _0814E92C:
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -943,7 +943,7 @@ _0814E92C:
 	.pool
 _0814E960:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -962,7 +962,7 @@ _0814E960:
 	.pool
 _0814E994:
 	movs r0, 0x2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -981,7 +981,7 @@ _0814E994:
 	.pool
 _0814E9C8:
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1126,7 +1126,7 @@ _0814EB36:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1147,7 +1147,7 @@ _0814EB74:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1177,7 +1177,7 @@ _0814EBB0:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1199,7 +1199,7 @@ _0814EBF8:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -2335,10 +2335,10 @@ _0814F62A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end StrCpyDecodeBattle
+	thumb_func_end  BattleStringExpandPlaceholders
 
-	thumb_func_start StrCpyDecodeBattleTextBuff
-StrCpyDecodeBattleTextBuff: @ 814F648
+	thumb_func_start ExpandBattleTextBuffPlaceholders
+ExpandBattleTextBuffPlaceholders: @ 814F648
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2652,7 +2652,7 @@ _0814F8EA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end StrCpyDecodeBattleTextBuff
+	thumb_func_end ExpandBattleTextBuffPlaceholders
 
 	thumb_func_start sub_814F8F8
 sub_814F8F8: @ 814F8F8
@@ -2773,8 +2773,8 @@ _0814F9E0:
 	.pool
 	thumb_func_end sub_814F950
 
-	thumb_func_start battle_show_message_maybe
-battle_show_message_maybe: @ 814F9EC
+	thumb_func_start sub_814F9EC
+sub_814F9EC: @ 814F9EC
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2987,7 +2987,7 @@ _0814FB9C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end battle_show_message_maybe
+	thumb_func_end sub_814F9EC
 
 	thumb_func_start sub_814FBAC
 sub_814FBAC: @ 814FBAC

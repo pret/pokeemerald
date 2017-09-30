@@ -5045,7 +5045,7 @@ sub_8066FF4: @ 8066FF4
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -5565,7 +5565,7 @@ sub_806743C: @ 806743C
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08067478
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1

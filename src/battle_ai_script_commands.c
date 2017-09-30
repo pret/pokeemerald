@@ -1,5 +1,5 @@
 #include "global.h"
-#include "battle_ai.h"
+#include "battle_ai_script_commands.h"
 #include "pokemon.h"
 #include "battle.h"
 #include "species.h"
@@ -73,10 +73,7 @@ extern const struct BaseStats gBaseStats[];
 extern const u32 gBitTable[];
 extern u8 * const gBattleAI_ScriptsTable[];
 
-extern u8 GetBankIdentity(u8);
 extern u8 b_first_side(u8, u8, u8);
-extern u8 GetBankByPlayerAI(u8);
-extern void TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
 extern void AI_CalcDmg(u8, u8);
 
 extern u8 CheckMoveLimitations();
@@ -1805,7 +1802,7 @@ static void BattleAICmd_count_alive_pokemon(void)
         u32 status;
         bankOnField1 = gBattlePartyID[index];
         status = GetBankIdentity(index) ^ 2;
-        bankOnField2 = gBattlePartyID[GetBankByPlayerAI(status)];
+        bankOnField2 = gBattlePartyID[GetBankByIdentity(status)];
     }
     else // in singles there's only one bank by side
     {

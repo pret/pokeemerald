@@ -4354,7 +4354,7 @@ sub_814D590: @ 814D590
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -4874,7 +4874,7 @@ sub_814D9D8: @ 814D9D8
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0814DA14
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1

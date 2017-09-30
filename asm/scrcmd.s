@@ -4183,7 +4183,7 @@ sC6_load_textvar_box_label: @ 809B2C8
 	ldr r4, [r4]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
