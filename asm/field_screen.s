@@ -8248,7 +8248,7 @@ sub_80AF334: @ 80AF334
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8258,7 +8258,7 @@ sub_80AF334: @ 80AF334
 	.pool
 _080AF36C:
 	adds r0, r4, 0
-	bl sub_8088F58
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =task_map_chg_seq_0807E2CC

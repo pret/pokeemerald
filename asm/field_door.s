@@ -589,7 +589,7 @@ sub_808A854: @ 808A854
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A876
@@ -612,7 +612,7 @@ sub_808A880: @ 808A880
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A8A2
@@ -635,7 +635,7 @@ sub_808A8AC: @ 808A8AC
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A8D8
@@ -664,7 +664,7 @@ task_overworld_door_add_if_role_69_for_opening_door_at: @ 808A8E4
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A910

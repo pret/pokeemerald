@@ -90,7 +90,7 @@ SECTIONS {
         src/new_game.o(.text);
         asm/rom4.o(.text);
         asm/fieldmap.o(.text);
-        asm/metatile_behavior.o(.text);
+        src/metatile_behavior.o(.text);
         asm/field_camera.o(.text);
         asm/field_door.o(.text);
         asm/field_player_avatar.o(.text);
@@ -343,7 +343,8 @@ SECTIONS {
         src/new_game.o(.rodata);
         data/rom4.o(.rodata);
         data/fieldmap.o(.rodata);
-        data/metatile_behavior.o(.rodata);
+        src/metatile_behavior.o(.rodata);
+        data/rom_8486FEC.o(.rodata);
         data/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
         data/field_map_obj.o(.rodata);

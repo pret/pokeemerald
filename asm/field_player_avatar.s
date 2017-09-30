@@ -1223,7 +1223,7 @@ sub_808B238: @ 808B238
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088F58
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808B2D8
@@ -2255,7 +2255,7 @@ PlayCollisionSoundIfNotFacingWarp: @ 808B9EC
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl is_tile_x69_2_warp_door
+	bl MetatileBehavior_IsWarpDoor
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808BA54
