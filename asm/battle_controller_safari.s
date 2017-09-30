@@ -318,7 +318,7 @@ sub_81595E4: @ 81595E4
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r3]
-	ldr r0, =gUnknown_03005D00
+	ldr r0, =gPreBattleCallback1
 	ldr r0, [r0]
 	str r0, [r2]
 	ldr r0, [r2, 0x8]
@@ -778,10 +778,10 @@ sub_81599D0: @ 81599D0
 	thumb_func_start dp01t_10_6_message
 dp01t_10_6_message: @ 81599DC
 	push {r4,lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -832,9 +832,9 @@ sub_8159A54: @ 8159A54
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08159A7A
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, =gBattleBankFunc

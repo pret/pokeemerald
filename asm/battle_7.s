@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start dp11_init
-dp11_init: @ 805D118
+	thumb_func_start AllocateBattleSpritesData
+AllocateBattleSpritesData: @ 805D118
 	push {r4,lr}
 	ldr r4, =gUnknown_020244D0
 	movs r0, 0x10
@@ -32,7 +32,7 @@ dp11_init: @ 805D118
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp11_init
+	thumb_func_end AllocateBattleSpritesData
 
 	thumb_func_start dp11_free
 dp11_free: @ 805D158
@@ -1371,7 +1371,7 @@ _0805DC58:
 	lsls r2, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r2, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsrs r0, 22
 	adds r1, 0x4
@@ -1543,7 +1543,7 @@ _0805DE00:
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsls r2, r7, 2
 	adds r1, 0x4
@@ -1558,7 +1558,7 @@ _0805DE2C:
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsls r2, r7, 2
 	adds r1, 0x4
@@ -1684,7 +1684,7 @@ sub_805DF38: @ 805DF38
 	lsls r4, 3
 	ldr r2, =gTrainerFrontPicTable
 	adds r2, r4, r2
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsrs r0, 22
 	adds r1, 0x4
@@ -1718,7 +1718,7 @@ sub_805DF84: @ 805DF84
 	lsls r5, 3
 	ldr r2, =gTrainerBackPicTable
 	adds r2, r5, r2
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsrs r0, 22
 	adds r1, 0x4
@@ -1959,7 +1959,7 @@ _0805E1AE:
 load_gfxc_health_bar: @ 805E1B8
 	push {lr}
 	ldr r0, =gUnknown_08C093F0
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	movs r2, 0xBA
 	lsls r2, 1
@@ -1971,8 +1971,8 @@ load_gfxc_health_bar: @ 805E1B8
 	.pool
 	thumb_func_end load_gfxc_health_bar
 
-	thumb_func_start battle_load_something
-battle_load_something: @ 805E1D8
+	thumb_func_start BattleInitAllSprites
+BattleInitAllSprites: @ 805E1D8
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -2136,7 +2136,7 @@ _0805E346:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end battle_load_something
+	thumb_func_end BattleInitAllSprites
 
 	thumb_func_start sub_805E350
 sub_805E350: @ 805E350
@@ -2364,7 +2364,7 @@ _0805E51C:
 	lsls r0, r1, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x4]
 	ldr r3, [r2, 0x10]
@@ -2434,7 +2434,7 @@ _0805E59C:
 	lsls r0, r1, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	mov r3, r10
 	lsls r2, r3, 2
@@ -2472,7 +2472,7 @@ _0805E618:
 	lsls r0, r1, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	mov r3, r10
 	lsls r2, r3, 2
@@ -2486,7 +2486,7 @@ _0805E618:
 	mov r2, r8
 	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _0805E662:
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	mov r2, r10
 	lsls r1, r2, 2
@@ -2666,7 +2666,7 @@ _0805E814:
 	beq _0805E83C
 	ldr r0, =gUnknown_08C2CEE0
 _0805E822:
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsls r4, 2
 	adds r1, 0x4
@@ -2677,7 +2677,7 @@ _0805E822:
 	.pool
 _0805E83C:
 	ldr r0, =gUnknown_08C2D120
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	lsls r4, 2
 	adds r1, 0x4
@@ -2688,7 +2688,7 @@ _0805E84E:
 	movs r3, 0x1
 	lsls r6, r5, 4
 	ldr r7, =gUnknown_08C2CEBC
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	adds r0, 0x4
 	adds r4, r0, r4
@@ -3600,15 +3600,15 @@ _0805EFAC:
 	.pool
 	thumb_func_end sub_805EF84
 
-	thumb_func_start init_uns_table_pokemon_copy
-init_uns_table_pokemon_copy: @ 805EFBC
+	thumb_func_start AllocateMonSpritesGfx
+AllocateMonSpritesGfx: @ 805EFBC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
 	movs r6, 0
-	ldr r4, =gBattleSpritesGfx
+	ldr r4, =gMonSpritesGfxPtr
 	str r6, [r4]
 	movs r0, 0xC0
 	lsls r0, 1
@@ -3620,7 +3620,7 @@ init_uns_table_pokemon_copy: @ 805EFBC
 	ldr r1, [r4]
 	str r0, [r1]
 _0805EFE2:
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r1, [r0]
 	lsls r4, r6, 2
 	adds r2, r1, 0x4
@@ -3649,7 +3649,7 @@ _0805EFE2:
 	mov r12, r8
 	adds r7, r4, 0
 _0805F01A:
-	ldr r2, =gBattleSpritesGfx
+	ldr r2, =gMonSpritesGfxPtr
 	ldr r1, [r2]
 	lsls r4, r5, 3
 	add r4, r12
@@ -3672,7 +3672,7 @@ _0805F01A:
 	lsrs r5, r0, 24
 	cmp r5, 0x3
 	bls _0805F01A
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r2, [r1]
 	mov r5, r9
 	adds r0, r5, r6
@@ -3692,7 +3692,7 @@ _0805F01A:
 	movs r0, 0x80
 	lsls r0, 5
 	bl AllocZeroed
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	movs r2, 0xBA
 	lsls r2, 1
@@ -3706,12 +3706,12 @@ _0805F01A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end init_uns_table_pokemon_copy
+	thumb_func_end AllocateMonSpritesGfx
 
 	thumb_func_start sub_805F094
 sub_805F094: @ 805F094
 	push {r4-r6,lr}
-	ldr r6, =gBattleSpritesGfx
+	ldr r6, =gMonSpritesGfxPtr
 	ldr r0, [r6]
 	cmp r0, 0
 	beq _0805F106

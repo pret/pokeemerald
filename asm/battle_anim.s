@@ -264,14 +264,14 @@ _080A3BAA:
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
 _080A3BC2:
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E28
+	ldr r0, =gBattle_WIN1H
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E2A
+	ldr r0, =gBattle_WIN1V
 	strh r1, [r0]
 	add sp, 0x4
 	pop {r3-r5}

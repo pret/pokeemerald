@@ -670,7 +670,7 @@ sub_80F8D28: @ 80F8D28
 	beq _080F8D44
 	b _080F8E9C
 _080F8D44:
-	bl init_uns_table_pokemon_copy
+	bl AllocateMonSpritesGfx
 	movs r0, 0xA
 	mov r9, r0
 	movs r1, 0x3
@@ -710,7 +710,7 @@ _080F8D44:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r6, 0
@@ -722,7 +722,7 @@ _080F8DC4:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r6, 0
@@ -1093,7 +1093,7 @@ sub_80F90DC: @ 80F90DC
 	ands r0, r1
 	cmp r0, 0
 	beq _080F90FE
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080F90FE
@@ -1116,7 +1116,7 @@ sub_80F910C: @ 80F910C
 	ands r0, r1
 	cmp r0, 0
 	beq _080F9126
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080F9126

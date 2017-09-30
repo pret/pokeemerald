@@ -1317,7 +1317,7 @@ _08072D86:
 	movs r2, 0x1
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	movs r1, 0xBA
 	lsls r1, 1
@@ -1333,7 +1333,7 @@ _08072D86:
 	lsls r0, 2
 	adds r5, r0, r1
 _08072DB8:
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	movs r1, 0xBA
 	lsls r1, 1
@@ -1536,7 +1536,7 @@ _08072F52:
 	ldr r1, =gText_Slash
 	bl StringCopy
 _08072F82:
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	movs r1, 0xBA
 	lsls r1, 1
@@ -1556,7 +1556,7 @@ _08072F82:
 _08072FA6:
 	cmp r4, 0x2
 	bhi _08072FF0
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	movs r2, 0xBA
 	lsls r2, 1
@@ -1579,7 +1579,7 @@ _08072FA6:
 	b _0807301A
 	.pool
 _08072FF0:
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	movs r1, 0xBA
 	lsls r1, 1
@@ -1609,7 +1609,7 @@ _08073024:
 	mov r3, r8
 	cmp r3, 0
 	bne _08073084
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r0, [r0]
 	movs r1, 0xBA
 	lsls r1, 1
@@ -1702,7 +1702,7 @@ sub_80730D4: @ 80730D4
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBankIdentity
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r2, [r1]
 	movs r3, 0xBA
 	lsls r3, 1
@@ -1877,7 +1877,7 @@ _08073236:
 	strb r0, [r1, 0x5]
 	movs r0, 0xBA
 	strb r0, [r1, 0x8]
-	ldr r5, =gBattleSpritesGfx
+	ldr r5, =gMonSpritesGfxPtr
 	ldr r0, [r5]
 	movs r2, 0xBA
 	lsls r2, 1

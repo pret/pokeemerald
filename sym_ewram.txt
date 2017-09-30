@@ -31,11 +31,8 @@ gUnknown_020223BD: @ 20223BD
 gUnknown_020223C0: @ 20223C0
 	.space 0x4
 
-gUnknown_020223C4: @ 20223C4
-	.space 0x4
-
-gUnknown_020223C8: @ 20223C8
-	.space 0x4FC
+gBlockRecvBuffer: @ 20223C4
+	.space 0x500
 
 gUnknown_020228C4: @ 20228C4 gBlockSendBuffer
 	.space 0x100
@@ -205,10 +202,10 @@ gUnknown_02022D10: @ 2022D10
 gUnknown_02022E10: @ 2022E10
 	.space 0x4
 
-gUnknown_02022E14: @ 2022E14
+gBattle_BG0_X: @ 2022E14
 	.space 0x2
 
-gUnknown_02022E16: @ 2022E16
+gBattle_BG0_Y: @ 2022E16
 	.space 0x2
 
 gBattle_BG1_X: @ 2022E18
@@ -226,19 +223,19 @@ gBattle_BG2_Y: @ 2022E1E
 gBattle_BG3_X: @ 2022E20
 	.space 0x2
 
-gUnknown_02022E22: @ 2022E22
+gBattle_BG3_Y: @ 2022E22
 	.space 0x2
 
-gUnknown_02022E24: @ 2022E24
+gBattle_WIN0H: @ 2022E24
 	.space 0x2
 
-gUnknown_02022E26: @ 2022E26
+gBattle_WIN0V: @ 2022E26
 	.space 0x2
 
-gUnknown_02022E28: @ 2022E28
+gBattle_WIN1H: @ 2022E28
 	.space 0x2
 
-gUnknown_02022E2A: @ 2022E2A
+gBattle_WIN1V: @ 2022E2A
 	.space 0x2
 
 gDisplayedStringBattle: @ 2022E2C
@@ -526,7 +523,7 @@ gUnknown_020244CC: @ 20244CC
 gUnknown_020244D0: @ 20244D0
 	.space 0x4
 
-gBattleSpritesGfx: @ 20244D4
+gMonSpritesGfxPtr: @ 20244D4
 	.space 0x4
 
 gUnknown_020244D8: @ 20244D8
@@ -1671,7 +1668,7 @@ gUnknown_0203BD26: @ 203BD26
 gUnknown_0203BD28: @ 203BD28
 	.space 0x4
 
-gUnknown_0203BD2C: @ 203BD2C
+gRecordedBattleRngSeed: @ 203BD2C
 	.space 0x4
 
 gUnknown_0203BD30: @ 203BD30

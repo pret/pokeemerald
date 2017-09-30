@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start battle_wireless_setup_if_required_maybe
-battle_wireless_setup_if_required_maybe: @ 8032654
+	thumb_func_start HandleLinkBattleSetup
+HandleLinkBattleSetup: @ 8032654
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -20,7 +20,7 @@ battle_wireless_setup_if_required_maybe: @ 8032654
 	beq _0803266E
 	bl sub_800B488
 _0803266E:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0803267A
@@ -34,10 +34,10 @@ _08032686:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end battle_wireless_setup_if_required_maybe
+	thumb_func_end HandleLinkBattleSetup
 
-	thumb_func_start sub_803269C
-sub_803269C: @ 803269C
+	thumb_func_start SetUpBattleVarsAndBirchZigzagoon
+SetUpBattleVarsAndBirchZigzagoon: @ 803269C
 	push {r4-r7,lr}
 	sub sp, 0x14
 	ldr r0, =gBattleMainFunc
@@ -71,7 +71,7 @@ _080326B8:
 	adds r1, r0, 0
 	cmp r1, 0x3
 	ble _080326B8
-	bl battle_wireless_setup_if_required_maybe
+	bl HandleLinkBattleSetup
 	ldr r0, =gBattleExecBuffer
 	movs r5, 0
 	str r5, [r0]
@@ -112,7 +112,7 @@ _08032728:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_803269C
+	thumb_func_end SetUpBattleVarsAndBirchZigzagoon
 
 	thumb_func_start sub_8032768
 sub_8032768: @ 8032768
@@ -1790,7 +1790,7 @@ _080335A0:
 	ldr r1, [r5]
 	adds r1, r2
 	adds r2, r6, 0
-	bl link_0800A448
+	bl SendBlock
 	ldrh r0, [r4, 0x1E]
 	adds r0, 0x1
 	strh r0, [r4, 0x1E]
@@ -1857,7 +1857,7 @@ sub_8033648: @ 8033648
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08033738
@@ -1869,12 +1869,12 @@ sub_8033648: @ 8033648
 	beq _08033738
 	bl sub_8011BD0
 	movs r4, 0
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	mov r10, r0
 	b _0803372C
 	.pool
 _08033680:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gBitTable
@@ -1891,7 +1891,7 @@ _08033680:
 	lsls r0, r4, 8
 	mov r4, r10
 	adds r3, r0, r4
-	ldr r1, =gUnknown_020223C8
+	ldr r1, =gBlockRecvBuffer + 4
 	adds r0, r1
 	ldrh r6, [r0]
 	ldr r7, =gTasks

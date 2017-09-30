@@ -3592,10 +3592,10 @@ _0816A3AC:
 	thumb_func_start sub_816A3B8
 sub_816A3B8: @ 816A3B8
 	push {r4,lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -3646,9 +3646,9 @@ sub_816A430: @ 816A430
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0816A456
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, =gBattleBankFunc
@@ -3749,9 +3749,9 @@ _0816A522:
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0816A574
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	movs r2, 0xA0
 	lsls r2, 1
 	adds r0, r2, 0

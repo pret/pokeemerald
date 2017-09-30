@@ -20533,10 +20533,10 @@ _081A52A4:
 	lsls r1, 1
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	ldr r1, =gUnknown_02022E24
+	ldr r1, =gBattle_WIN0H
 	movs r0, 0xFF
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E26
+	ldr r1, =gBattle_WIN0V
 	movs r0, 0x70
 	strh r0, [r1]
 	b _081A553E

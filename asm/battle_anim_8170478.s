@@ -18,10 +18,10 @@ sub_8170478: @ 8170478
 	str r0, [sp, 0x10]
 	ldr r0, =gAnimationBankAttacker
 	ldrb r4, [r0]
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	strh r1, [r0]
 	ldr r1, =0x00003f3f
 	movs r0, 0x48
@@ -317,9 +317,9 @@ _08170708:
 	bne _08170814
 	movs r0, 0
 	bl sub_80A477C
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	strh r4, [r0]
 	ldr r4, =0x00003f3f
 	movs r0, 0x48

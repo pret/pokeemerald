@@ -1667,8 +1667,8 @@ _08035A8A:
 	.pool
 	thumb_func_end load_battle_oval_graphics
 
-	thumb_func_start sub_8035AA4
-sub_8035AA4: @ 8035AA4
+	thumb_func_start LoadBattleTextboxAndBackground
+LoadBattleTextboxAndBackground: @ 8035AA4
 	push {lr}
 	ldr r0, =gUnknown_08C00000
 	movs r1, 0xC0
@@ -1690,7 +1690,7 @@ sub_8035AA4: @ 8035AA4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8035AA4
+	thumb_func_end LoadBattleTextboxAndBackground
 
 	thumb_func_start sub_8035AE4
 sub_8035AE4: @ 8035AE4
@@ -2457,8 +2457,8 @@ _08036138:
 	.pool
 	thumb_func_end task00_0800F6FC
 
-	thumb_func_start sub_8036154
-sub_8036154: @ 8036154
+	thumb_func_start LoadBattleEntryBackground
+LoadBattleEntryBackground: @ 8036154
 	push {r4,r5,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
@@ -2668,7 +2668,7 @@ _080363AC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8036154
+	thumb_func_end LoadBattleEntryBackground
 
 	thumb_func_start sub_80363C4
 sub_80363C4: @ 80363C4

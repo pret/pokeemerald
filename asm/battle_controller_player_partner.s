@@ -4952,10 +4952,10 @@ _081BDA3C:
 	thumb_func_start sub_81BDA4C
 sub_81BDA4C: @ 81BDA4C
 	push {r4,lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]

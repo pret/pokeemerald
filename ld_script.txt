@@ -57,6 +57,7 @@ SECTIONS {
         asm/rom3.o(.text);
         src/decompress.o(.text);
         asm/battle_1.o(.text);
+        src/battle_2.o(.text);
         asm/battle_2.o(.text);
         src/battle_3.o(.text);
         src/battle_script_commands.o(.text);

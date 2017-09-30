@@ -55,6 +55,8 @@
 #define BATTLE_TYPE_KYORGE          0x20000000
 #define BATTLE_TYPE_RAYQUAZA        0x40000000
 
+#define TRAINER_OPPONENT_C00        0xC00
+#define TRAINER_OPPONENT_800        0x800
 #define STEVEN_PARTNER_ID           0xC03
 #define SECRET_BASE_OPPONENT        0x400
 
@@ -215,14 +217,17 @@
 #define BATTLE_TERRAIN_POND         5
 #define BATTLE_TERRAIN_ROCK         6
 #define BATTLE_TERRAIN_CAVE         7
+#define BATTLE_TERRAIN_INSIDE       8
 
 // array entries for battle communication
-#define MULTIUSE_STATE      0x0
-#define CURSOR_POSITION     0x1
-#define TASK_ID             0x1 // task Id and cursor position share the same field
-#define MOVE_EFFECT_BYTE    0x3
-#define MULTISTRING_CHOOSER 0x5
-#define MSG_DISPLAY         0x7
+#define MULTIUSE_STATE          0x0
+#define CURSOR_POSITION         0x1
+#define TASK_ID                 0x1 // task Id and cursor position share the same field
+#define SPRITES_INIT_STATE1     0x1 // shares the Id as well
+#define SPRITES_INIT_STATE2     0x2
+#define MOVE_EFFECT_BYTE        0x3
+#define MULTISTRING_CHOOSER     0x5
+#define MSG_DISPLAY             0x7
 
 #define MOVE_TARGET_SELECTED        0x0
 #define MOVE_TARGET_DEPENDS         0x1
@@ -633,15 +638,13 @@ struct BattleStruct
     u8 field_A5;
     u8 field_A6;
     u8 field_A7;
-    u16 hpOnSwitchout[4];
+    u16 hpOnSwitchout[2];
+    u32 savedBattleTypeFlags;
     u8 field_B0;
     u8 hpScale;
     u8 synchronizeMoveEffect;
     u8 field_B3;
-    u8 field_B4;
-    u8 field_B5;
-    u8 field_B6;
-    u8 field_B7;
+    void (*savedCallback)(void);
     u16 usedHeldItems[BATTLE_BANKS_COUNT];
     u8 field_C0[8];
     u16 choicedMove[BATTLE_BANKS_COUNT];
@@ -654,7 +657,11 @@ struct BattleStruct
     u8 field_DF;
     u8 mirrorMoveArrays[32];
     u16 castformPalette[4][16];
-    u8 field_180[32];
+    u8 field_180;
+    u8 field_181;
+    u8 field_182;
+    u8 field_183;
+    struct BattleEnigmaBerry battleEnigmaBerry;
     u8 field_1A0;
     u8 field_1A1;
     u8 filler1A2;
@@ -842,13 +849,24 @@ struct BattleScripting
     u8 atk6C_state;
     u8 learnMoveState;
     u8 field_20;
+    u8 field_21;
+    u8 field_22;
+    u8 field_23;
+    u8 field_24;
+    u8 multiplayerId;
 };
 
 extern struct BattleScripting gBattleScripting;
 
 // functions
 
+// battle_1
+void LoadBattleTextboxAndBackground(void);
+void LoadBattleEntryBackground(void);
+void task00_0800F6FC(u8 taskId);
+
 // battle_2
+void CB2_InitBattle(void);
 void CancelMultiTurnMoves(u8 bank);
 void PressurePPLose(u8 bankAtk, u8 bankDef, u16 move);
 void PrepareStringBattle(u16 stringId, u8 bank);
@@ -914,13 +932,18 @@ extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const u8 gUnknown_0831C494[];
 
 // battle_5
+void AllocateBattleResrouces(void);
 void AdjustFriendshipOnBattleFaint(u8 bank);
 void sub_80571DC(u8 bank, u8 arg1);
 u32 sub_805725C(u8 bank);
 
 // battle 7
+void AllocateBattleSpritesData(void);
 void BattleMusicStop(void);
 void sub_805E990(struct Pokemon* mon, u8 bank);
+void AllocateMonSpritesGfx(void);
+void sub_805EF14(void);
+bool8 BattleInitAllSprites(u8 *state1, u8 *state2);
 
 // rom_80A5C6C
 u8 GetBankSide(u8 bank);
@@ -931,13 +954,13 @@ u8 GetBankByIdentity(u8 bank);
 
 #include "sprite.h"
 
-struct BattleSpritesGfx
+struct MonSpritesGfx
 {
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
     void* sprites[4];
     struct SpriteTemplate templates[4];
 };
 
-extern struct BattleSpritesGfx* gBattleSpritesGfx;
+extern struct MonSpritesGfx* gMonSpritesGfxPtr;
 
 #endif // GUARD_BATTLE_H

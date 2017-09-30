@@ -95,7 +95,7 @@ sub_8184E58: @ 8184E58
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08184EA0
-	ldr r1, =gUnknown_0203BD2C
+	ldr r1, =gRecordedBattleRngSeed
 	ldr r0, =gRngValue
 	ldr r0, [r0]
 	str r0, [r1]
@@ -112,7 +112,7 @@ _08184EA0:
 	cmp r0, 0x2
 	bne _08184EAC
 	ldr r0, =gRngValue
-	ldr r1, =gUnknown_0203BD2C
+	ldr r1, =gRecordedBattleRngSeed
 	ldr r1, [r1]
 	str r1, [r0]
 _08184EAC:
@@ -779,7 +779,7 @@ _081853BA:
 	movs r4, 0x9D
 	lsls r4, 3
 	adds r1, r7, r4
-	ldr r5, =gUnknown_0203BD2C
+	ldr r5, =gRecordedBattleRngSeed
 	ldr r0, [r5]
 	str r0, [r1]
 	ldr r0, =gUnknown_0203C7B8
@@ -1576,7 +1576,7 @@ sub_8185B1C: @ 8185B1C
 	ldr r0, =gMain
 	ldr r1, =sub_8185AB0
 	str r1, [r0, 0x8]
-	ldr r0, =sub_8036760
+	ldr r0, =CB2_InitBattle
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1701,7 +1701,7 @@ _08185C2A:
 	adds r6, 0x1
 	cmp r6, 0x3
 	ble _08185BBE
-	ldr r1, =gUnknown_0203BD2C
+	ldr r1, =gRecordedBattleRngSeed
 	movs r3, 0x9D
 	lsls r3, 3
 	adds r0, r7, r3

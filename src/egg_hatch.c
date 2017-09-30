@@ -64,7 +64,7 @@ extern void sub_806A068(u16, u8);
 extern void fade_screen(u8, u8);
 extern void overworld_free_bg_tilemaps(void);
 extern void sub_80AF168(void);
-extern void init_uns_table_pokemon_copy(void);
+extern void AllocateMonSpritesGfx(void);
 extern void sub_805F094(void);
 extern void remove_some_task(void);
 extern void reset_temp_tile_data_buffers(void);
@@ -439,7 +439,7 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
             u16 species = GetMonData(mon, MON_DATA_SPECIES);
             u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
             HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
-                                                      gBattleSpritesGfx->sprites[(a0 * 2) + 1],
+                                                      gMonSpritesGfxPtr->sprites[(a0 * 2) + 1],
                                                       species, pid);
             LoadCompressedObjectPalette(sub_806E794(mon));
             *speciesLoc = species;
@@ -488,7 +488,7 @@ static void CB2_EggHatch_0(void)
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
 
         sEggHatchData = Alloc(sizeof(struct EggHatchData));
-        init_uns_table_pokemon_copy();
+        AllocateMonSpritesGfx();
         sEggHatchData->eggPartyID = gSpecialVar_0x8004;
         sEggHatchData->eggShardVelocityID = 0;
 

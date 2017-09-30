@@ -45,10 +45,10 @@ sub_80D7678: @ 80D7678
 	lsls r1, 7
 	movs r0, 0
 	bl SetGpuRegBits
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, =gBattle_BG1_X
 	strh r1, [r0]
@@ -60,15 +60,15 @@ sub_80D7678: @ 80D7678
 	strh r1, [r0]
 	ldr r0, =gBattle_BG3_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E28
+	ldr r0, =gBattle_WIN1H
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E2A
+	ldr r0, =gBattle_WIN1V
 	strh r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -546,8 +546,8 @@ _080D7B4E:
 	ldr r0, =gUnknown_02039F38
 	strb r5, [r0]
 	bl sub_80D7988
-	bl init_uns_table_pokemon_copy
-	ldr r4, =gBattleSpritesGfx
+	bl AllocateMonSpritesGfx
+	ldr r4, =gMonSpritesGfxPtr
 	ldr r0, [r4]
 	ldr r0, [r0]
 	bl Free
@@ -1316,11 +1316,11 @@ _080D8266:
 	thumb_func_start vblank_cb_battle
 vblank_cb_battle: @ 80D827C
 	push {lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
@@ -1344,23 +1344,23 @@ vblank_cb_battle: @ 80D827C
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	ldrh r1, [r0]
 	movs r0, 0x40
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	ldrh r1, [r0]
 	movs r0, 0x44
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E28
+	ldr r0, =gBattle_WIN1H
 	ldrh r1, [r0]
 	movs r0, 0x42
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E2A
+	ldr r0, =gBattle_WIN1V
 	ldrh r1, [r0]
 	movs r0, 0x46
 	bl SetGpuReg
@@ -1387,7 +1387,7 @@ sub_80D833C: @ 80D833C
 	ldrsh r1, [r4, r0]
 	cmp r1, 0
 	bne _080D840C
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
@@ -1517,7 +1517,7 @@ sub_80D8490: @ 80D8490
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	movs r1, 0xA0
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y
@@ -1770,7 +1770,7 @@ _080D86E4:
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_80DEC30
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y
@@ -2041,7 +2041,7 @@ sub_80D895C: @ 80D895C
 	lsls r0, 24
 	lsrs r7, r0, 24
 	bl sub_80DB89C
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y
@@ -5322,7 +5322,7 @@ sub_80DA5E8: @ 80DA5E8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y
@@ -6741,7 +6741,7 @@ sub_80DB174: @ 80DB174
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x4]
 	adds r2, r5, 0
@@ -6753,7 +6753,7 @@ _080DB1B8:
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x4]
 	adds r2, r5, 0
@@ -8516,7 +8516,7 @@ _080DBF62:
 	thumb_func_start sub_80DBF68
 sub_80DBF68: @ 80DBF68
 	push {lr}
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y

@@ -1287,10 +1287,10 @@ _08057FD6:
 	beq _08057FF8
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gUnknown_02022E14
+	ldr r1, =gBattle_BG0_X
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	movs r2, 0xA0
 	lsls r2, 1
 	adds r0, r2, 0
@@ -2123,7 +2123,7 @@ sub_80586F8: @ 80586F8
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805875C
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08058798
@@ -2137,7 +2137,7 @@ sub_80586F8: @ 80586F8
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r0, =gUnknown_03005D00
+	ldr r0, =gPreBattleCallback1
 	ldr r0, [r0]
 	str r0, [r3]
 	ldr r0, =sub_8038D64
@@ -2166,7 +2166,7 @@ _0805875C:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r0, =gUnknown_03005D00
+	ldr r0, =gPreBattleCallback1
 	ldr r0, [r0]
 	str r0, [r3]
 	ldr r0, =sub_8038D64
@@ -2233,7 +2233,7 @@ _08058810:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r3]
-	ldr r0, =gUnknown_03005D00
+	ldr r0, =gPreBattleCallback1
 	ldr r0, [r0]
 	str r0, [r2]
 	ldr r0, [r2, 0x8]
@@ -4711,10 +4711,10 @@ b_link_standby_message: @ 8059DC0
 	ands r0, r1
 	cmp r0, 0
 	beq _08059DE0
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, =gText_LinkStandby
 	movs r1, 0
@@ -8444,10 +8444,10 @@ _0805BF70:
 	thumb_func_start sub_805BF80
 sub_805BF80: @ 805BF80
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
@@ -8503,9 +8503,9 @@ sub_805C004: @ 805C004
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805C02A
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, =gBattleBankFunc
@@ -8611,9 +8611,9 @@ sub_805C114: @ 805C114
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805C13E
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	movs r2, 0xA0
 	lsls r2, 1
 	adds r0, r2, 0

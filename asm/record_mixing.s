@@ -849,7 +849,7 @@ _080E745A:
 	strh r0, [r5, 0x20]
 	b _080E7566
 _080E7464:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080E746E
@@ -1066,7 +1066,7 @@ sub_80E7630: @ 80E7630
 	ldr r1, =gTasks
 	adds r0, r1
 	mov r10, r0
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -1302,7 +1302,7 @@ sub_80E7810: @ 80E7810
 sub_80E7820: @ 80E7820
 	lsls r0, 24
 	lsrs r0, 16
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	adds r0, r1
 	bx lr
 	.pool
@@ -2368,7 +2368,7 @@ _080E807C:
 	bl sub_800AC34
 	b _080E80F2
 _080E8090:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080E810A

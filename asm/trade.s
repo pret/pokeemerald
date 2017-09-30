@@ -18,7 +18,7 @@ sub_8077170: @ 8077170
 	lsrs r2, 16
 	movs r0, 0
 	adds r1, r4, 0
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	lsrs r0, 24
 	b _080771A2
@@ -83,7 +83,7 @@ _080771F8:
 	thumb_func_start sub_8077200
 sub_8077200: @ 8077200
 	push {lr}
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -103,7 +103,7 @@ sub_8077210: @ 8077210
 	b _08077230
 	.pool
 _0807722C:
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 _08077230:
 	pop {r0}
 	bx r0
@@ -397,7 +397,7 @@ _080774B2:
 	bl sub_807A19C
 	movs r0, 0
 	bl ShowBg
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r2, [r0]
 	cmp r2, 0
 	bne _0807754C
@@ -504,7 +504,7 @@ _080775D8:
 	b _08077B22
 	.pool
 _080775E8:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080775F2
@@ -1832,7 +1832,7 @@ sub_80781C8: @ 80781C8
 	b _08078244
 	.pool
 _08078220:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _08078244
@@ -2198,7 +2198,7 @@ _08078552:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_8078438
@@ -2237,7 +2237,7 @@ _080785B6:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_8078438
@@ -2276,7 +2276,7 @@ _0807861A:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_8078438
@@ -2318,7 +2318,7 @@ _0807868A:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xD8
 	bl sub_8078438
@@ -2360,7 +2360,7 @@ _080786F0:
 	adds r1, r5, 0
 	eors r1, r2
 	lsls r1, 8
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0xB
 	bl sub_8078438
@@ -2467,7 +2467,7 @@ sub_80787E0: @ 80787E0
 	ands r0, r2
 	cmp r0, 0
 	beq _08078864
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	ldrh r1, [r0]
 	ldr r0, =0x0000bbbb
 	cmp r1, r0
@@ -2521,7 +2521,7 @@ _08078864:
 	ands r0, r2
 	cmp r0, 0
 	beq _080788F6
-	ldr r3, =gUnknown_020223C4
+	ldr r3, =gBlockRecvBuffer
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r3, r1
@@ -2597,7 +2597,7 @@ sub_8078900: @ 8078900
 	ands r0, r5
 	cmp r0, 0
 	beq _080789E2
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	ldrh r1, [r2]
 	ldr r0, =0x0000ddee
 	cmp r1, r0
@@ -4052,7 +4052,7 @@ sub_80794CC: @ 80794CC
 	b _0807953A
 	.pool
 _08079518:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807953A
@@ -6279,7 +6279,7 @@ _0807A718:
 	thumb_func_start sub_807A728
 sub_807A728: @ 807A728
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807A7B4
@@ -7054,7 +7054,7 @@ _0807ACC4:
 	thumb_func_start sub_807ACDC
 sub_807ACDC: @ 807ACDC
 	push {lr}
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807ACF0
@@ -7128,7 +7128,7 @@ _0807AD58:
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -7141,7 +7141,7 @@ _0807AD94:
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r2, [r1]
 	lsls r4, r6, 1
 	adds r1, r4, 0x1
@@ -7254,7 +7254,7 @@ _0807AE78:
 	.4byte _0807B0D4
 	.4byte _0807B0F0
 _0807AEAC:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807AEC0
@@ -7270,7 +7270,7 @@ _0807AEC0:
 	adds r0, r5, 0
 	bl AllocZeroed
 	str r0, [r4]
-	bl init_uns_table_pokemon_copy
+	bl AllocateMonSpritesGfx
 	bl ResetTasks
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
@@ -7321,7 +7321,7 @@ _0807AEC0:
 	b _0807B116
 	.pool
 _0807AF58:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r5, [r0]
 	cmp r5, 0
 	bne _0807AF90
@@ -7401,7 +7401,7 @@ _0807B000:
 	b _0807B116
 _0807B006:
 	bl sub_807AC64
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0807B014
@@ -7729,7 +7729,7 @@ _0807B2D0:
 	adds r0, r5, 0
 	bl AllocZeroed
 	str r0, [r4]
-	bl init_uns_table_pokemon_copy
+	bl AllocateMonSpritesGfx
 	bl ResetTasks
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
@@ -7989,7 +7989,7 @@ _0807B566:
 _0807B57C:
 	mov r0, r9
 	bl sub_807B464
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807B58E
@@ -8029,7 +8029,7 @@ _0807B5D0:
 	ldr r1, [r4]
 	adds r1, 0x74
 	movs r2, 0x14
-	bl link_0800A448
+	bl SendBlock
 	ldr r1, [r4]
 	adds r1, 0x93
 	ldrb r0, [r1]
@@ -10369,7 +10369,7 @@ _0807CCEE:
 	lsls r0, r2, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
@@ -12474,7 +12474,7 @@ _0807E13A:
 	lsls r0, r2, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
@@ -12877,7 +12877,7 @@ _0807E4C2:
 sub_807E4DC: @ 807E4DC
 	push {r4-r6,lr}
 	bl sub_807ACDC
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r6, 0x1
@@ -12885,7 +12885,7 @@ sub_807E4DC: @ 807E4DC
 	ands r0, r6
 	cmp r0, 0
 	beq _0807E51A
-	ldr r4, =gUnknown_020223C4
+	ldr r4, =gBlockRecvBuffer
 	ldrh r1, [r4]
 	ldr r0, =0x0000dcba
 	cmp r1, r0
@@ -12909,7 +12909,7 @@ _0807E51A:
 	ands r0, r5
 	cmp r0, 0
 	beq _0807E542
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r1
@@ -13600,7 +13600,7 @@ _0807EAEC:
 	ldr r1, [r4]
 	adds r1, 0x74
 	movs r2, 0x14
-	bl link_0800A448
+	bl SendBlock
 	ldr r0, [r4]
 	adds r0, 0x72
 	movs r1, 0x2
@@ -14090,7 +14090,7 @@ _0807EFF0:
 	b _0807F03A
 	.pool
 _0807F028:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0807F03A

@@ -5171,10 +5171,10 @@ _08061F24:
 	thumb_func_start sub_8061F34
 sub_8061F34: @ 8061F34
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
@@ -6655,7 +6655,7 @@ sub_8062BB0: @ 8062BB0
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r3]
-	ldr r0, =gUnknown_03005D00
+	ldr r0, =gPreBattleCallback1
 	ldr r0, [r0]
 	str r0, [r2]
 	ldr r0, [r2, 0x8]

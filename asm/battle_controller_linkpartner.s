@@ -4340,10 +4340,10 @@ _0814D580:
 	thumb_func_start sub_814D590
 sub_814D590: @ 814D590
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
