@@ -1,4 +1,4 @@
 sCurTVShowSlot
 gUnknown_030060C0
-gUnknown_030060D0
+sTV_DecorationsBuffer
 gUnknown_030060E0

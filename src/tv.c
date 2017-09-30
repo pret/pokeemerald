@@ -31,7 +31,7 @@
 
 s8 sCurTVShowSlot;
 u16 gUnknown_030060C0[8];
-u8 gUnknown_030060D0[16];
+u8 sTV_DecorationsBuffer[16];
 struct {
     u8 unk0;
     u16 unk2;
@@ -2010,6 +2010,221 @@ void sub_80EDE84(u16 a0)
     gUnknown_0203A02A = TRUE;
     gUnknown_0203A028 = a0;
 }
+
+#ifdef NONMATCHING
+void sub_80EDE98(TVShow *show)
+{
+    u8 i;
+    u8 j;
+    u16 k;
+    u8 n;
+    u8 deco;
+    u8 x;
+
+    for (i = 0; i < 16; i ++)
+    {
+        sTV_DecorationsBuffer[i] = 0;
+    }
+    for (i = 0, n = 0; i < 16; i ++)
+    {
+        deco = gSaveBlock1Ptr->secretBases[0].decorations[i];
+        if (deco)
+        {
+            for (j = 0; j < 16; j ++)
+            {
+                if (sTV_DecorationsBuffer[j] == 0)
+                {
+                    sTV_DecorationsBuffer[j] = deco;
+                    n ++;
+                    break;
+                }
+                if (sTV_DecorationsBuffer[j] == deco)
+                {
+                    break;
+                }
+            }
+        }
+    }
+    if (n > 4)
+    {
+        show->secretBaseVisit.nDecorations = 4;
+    }
+    else
+    {
+        show->secretBaseVisit.nDecorations = n;
+    }
+    switch (show->secretBaseVisit.nDecorations)
+    {
+        case 0:
+            break;
+        case 1:
+            show->secretBaseVisit.decorations[0] = sTV_DecorationsBuffer[0];
+            break;
+        default:
+            for (k = 0; k < n * n; k ++)
+            {
+                i = Random() % n;
+                j = Random() % n;
+                x = sTV_DecorationsBuffer[i];
+                sTV_DecorationsBuffer[i] = sTV_DecorationsBuffer[j];
+                sTV_DecorationsBuffer[j] = x;
+            }
+            for (i = 0; i < show->secretBaseVisit.nDecorations; i ++)
+            {
+                show->secretBaseVisit.decorations[i] = sTV_DecorationsBuffer[i];
+            }
+            break;
+    }
+}
+#else
+__attribute__((naked))
+void sub_80EDE98(TVShow *show)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r9\n"
+                    "\tmov r6, r8\n"
+                    "\tpush {r6,r7}\n"
+                    "\tmov r8, r0\n"
+                    "\tmovs r3, 0\n"
+                    "\tldr r6, =gUnknown_030060D0\n"
+                    "\tldr r7, =gSaveBlock1Ptr\n"
+                    "\tadds r2, r6, 0\n"
+                    "\tmovs r1, 0\n"
+                    "_080EDEAC:\n"
+                    "\tadds r0, r3, r2\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tadds r0, r3, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r3, r0, 24\n"
+                    "\tcmp r3, 0xF\n"
+                    "\tbls _080EDEAC\n"
+                    "\tmovs r3, 0\n"
+                    "\tmovs r5, 0\n"
+                    "_080EDEBE:\n"
+                    "\tldr r0, [r7]\n"
+                    "\tldr r1, =0x00001aae\n"
+                    "\tadds r0, r1\n"
+                    "\tadds r0, r3\n"
+                    "\tldrb r4, [r0]\n"
+                    "\tadds r3, 0x1\n"
+                    "\tcmp r4, 0\n"
+                    "\tbeq _080EDF0A\n"
+                    "\tmovs r1, 0\n"
+                    "\tldrb r0, [r6]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _080EDEE8\n"
+                    "\tstrb r4, [r6]\n"
+                    "\tb _080EDF04\n"
+                    "\t.pool\n"
+                    "_080EDEE8:\n"
+                    "\tadds r0, r1, r6\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, r4\n"
+                    "\tbeq _080EDF0A\n"
+                    "\tadds r0, r1, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r1, r0, 24\n"
+                    "\tcmp r1, 0xF\n"
+                    "\tbhi _080EDF0A\n"
+                    "\tadds r2, r1, r6\n"
+                    "\tldrb r0, [r2]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _080EDEE8\n"
+                    "\tstrb r4, [r2]\n"
+                    "_080EDF04:\n"
+                    "\tadds r0, r5, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r5, r0, 24\n"
+                    "_080EDF0A:\n"
+                    "\tlsls r0, r3, 24\n"
+                    "\tlsrs r3, r0, 24\n"
+                    "\tcmp r3, 0xF\n"
+                    "\tbls _080EDEBE\n"
+                    "\tcmp r5, 0x4\n"
+                    "\tbls _080EDF1E\n"
+                    "\tmovs r0, 0x4\n"
+                    "\tmov r1, r8\n"
+                    "\tstrb r0, [r1, 0x3]\n"
+                    "\tb _080EDF22\n"
+                    "_080EDF1E:\n"
+                    "\tmov r0, r8\n"
+                    "\tstrb r5, [r0, 0x3]\n"
+                    "_080EDF22:\n"
+                    "\tmov r1, r8\n"
+                    "\tldrb r0, [r1, 0x3]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _080EDFA4\n"
+                    "\tcmp r0, 0x1\n"
+                    "\tbne _080EDF34\n"
+                    "\tldrb r0, [r6]\n"
+                    "\tstrb r0, [r1, 0x4]\n"
+                    "\tb _080EDFA4\n"
+                    "_080EDF34:\n"
+                    "\tmovs r6, 0\n"
+                    "\tadds r7, r5, 0\n"
+                    "\tmuls r7, r5\n"
+                    "\tcmp r6, r7\n"
+                    "\tbge _080EDF7E\n"
+                    "\tldr r0, =gUnknown_030060D0\n"
+                    "\tmov r9, r0\n"
+                    "_080EDF42:\n"
+                    "\tbl Random\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r0, 16\n"
+                    "\tadds r1, r5, 0\n"
+                    "\tbl __modsi3\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r4, r0, 24\n"
+                    "\tbl Random\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r0, 16\n"
+                    "\tadds r1, r5, 0\n"
+                    "\tbl __modsi3\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r1, r0, 24\n"
+                    "\tmov r0, r9\n"
+                    "\tadds r2, r4, r0\n"
+                    "\tldrb r3, [r2]\n"
+                    "\tadd r1, r9\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tstrb r0, [r2]\n"
+                    "\tstrb r3, [r1]\n"
+                    "\tadds r0, r6, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r6, r0, 16\n"
+                    "\tcmp r6, r7\n"
+                    "\tblt _080EDF42\n"
+                    "_080EDF7E:\n"
+                    "\tmovs r3, 0\n"
+                    "\tmov r1, r8\n"
+                    "\tldrb r1, [r1, 0x3]\n"
+                    "\tcmp r3, r1\n"
+                    "\tbcs _080EDFA4\n"
+                    "\tmov r2, r8\n"
+                    "\tadds r2, 0x4\n"
+                    "\tldr r4, =gUnknown_030060D0\n"
+                    "_080EDF8E:\n"
+                    "\tadds r1, r2, r3\n"
+                    "\tadds r0, r3, r4\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tadds r0, r3, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r3, r0, 24\n"
+                    "\tmov r0, r8\n"
+                    "\tldrb r0, [r0, 0x3]\n"
+                    "\tcmp r3, r0\n"
+                    "\tbcc _080EDF8E\n"
+                    "_080EDFA4:\n"
+                    "\tpop {r3,r4}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.pool");
+}
+#endif
 
 asm(".section .text.dotvshow");
 

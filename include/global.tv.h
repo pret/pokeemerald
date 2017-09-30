@@ -349,6 +349,9 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
+        /*0x02*/ u8 unk02;
+        /*0x03*/ u8 nDecorations;
+        /*0x04*/ u8 decorations[4];
         // TODO: flesh this out
     } secretBaseVisit;
 
