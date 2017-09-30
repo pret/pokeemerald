@@ -1125,7 +1125,7 @@ BuyMenuInitBgs: @ 80E036C
 BuyMenuDecompressBgGraphics: @ 80E0424
 	push {lr}
 	sub sp, 0x4
-	ldr r1, =gUnknown_08D9AFBC
+	ldr r1, =gBuyMenuFrame_Gfx
 	movs r2, 0xE8
 	lsls r2, 2
 	ldr r3, =0x000003e3
@@ -1133,11 +1133,11 @@ BuyMenuDecompressBgGraphics: @ 80E0424
 	str r0, [sp]
 	movs r0, 0x1
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r0, =gUnknown_08D9B0F0
+	ldr r0, =gBuyMenuFrame_Tilemap
 	ldr r1, =gUnknown_02039F70
 	ldr r1, [r1]
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08D9B0C8
+	ldr r0, =gMenuMoneyPal
 	movs r1, 0xC0
 	movs r2, 0x20
 	bl LoadCompressedPalette
@@ -1259,7 +1259,7 @@ BuyMenuDrawGraphics: @ 80E0524
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD
-	bl set_window_border_style_and_print_money_box
+	bl PrintMoneyAmountInMoneyBoxWithBorder
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1

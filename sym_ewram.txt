@@ -1148,12 +1148,9 @@ gUnknown_02039F90: @ 2039F90
 gUnknown_02039F94: @ 2039F94
 	.space 0x4
 
-gUnknown_02039F98: @ 2039F98
-	.space 0x1
-
-gUnknown_02039F99: @ 2039F99
-	.space 0x3
-
+    .include "src/money.o"
+    
+    .align 2
 gUnknown_02039F9C: @ 2039F9C
 	.space 0x78
 
