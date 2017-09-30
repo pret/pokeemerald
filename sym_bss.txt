@@ -8,19 +8,8 @@ gUnknown_03000000: @ 3000000
 	.include "src/sprite.o"
     .include "src/link.o"
     .include "src/rtc.o"
-
-gUnknown_03000DD0: @ 3000DD0
-	.space 0x4
-
-gUnknown_03000DD4: @ 3000DD4
-	.space 0x4
-
-gUnknown_03000DD8: @ 3000DD8
-	.space 0x4
-
-gUnknown_03000DDC: @ 3000DDC
-	.space 0x4
-
+    .include "src/main_menu.o"
+    .include "src/battle_1.o"
     .include "src/egg_hatch.o"
     
 .space 0x4 @ why the gap?
