@@ -420,7 +420,7 @@ SECTIONS {
         data/field_effect_helpers.o(.rodata);
         data/contest_ai.o(.rodata);
         data/battle_controller_safari.o(.rodata);
-        data/rom_8158B30.o(.rodata);
+        data/rom_85CE2A0.o(.rodata);
         src/roamer.o(.rodata);
         data/rom_85CECB0.o(.rodata);
         data/battle_controller_wally.o(.rodata);
