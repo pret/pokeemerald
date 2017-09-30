@@ -12,6 +12,16 @@
 
 #define SECONDS(value) ((signed) (60.0 * value + 0.5))
 
+extern u8 GetSSTidalLocation(s8 *, s8 *, s16 *, s16 *); // should be in field_specials.h
+extern void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+extern bool8 sub_80D3340(u8, u8, u8);
+extern bool32 CountSSTidalStep(u16);
+extern bool8 exec_movement(u8, u8, u8, u8 *);
+extern void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
+extern void sp13E_warp_to_last_warp(void);
+extern void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
+extern void sub_80AF8B8(void);
+
 // porthole states
 enum
 {
@@ -243,9 +253,6 @@ void EndTruckSequence(u8 taskId)
     }
 }
 
-extern u8 GetSSTidalLocation(s8 *, s8 *, s16 *, s16 *); // should be in field_specials.h
-extern void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-
 bool8 sub_80FB59C(void)
 {
     s8 mapGroup, mapNum;
@@ -261,12 +268,6 @@ bool8 sub_80FB59C(void)
         return TRUE;
     }
 }
-
-extern bool8 sub_80D3340(u8, u8, u8);
-extern bool32 CountSSTidalStep(u16);
-extern bool8 exec_movement(u8, u8, u8, u8 *);
-extern void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
-extern void sp13E_warp_to_last_warp(void);
 
 void Task_HandlePorthole(u8 taskId)
 {
@@ -350,9 +351,6 @@ void sub_80FB768(void)
     CreateTask(Task_HandlePorthole, 80);
     ScriptContext2_Enable();
 }
-
-extern void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
-extern void sub_80AF8B8(void);
 
 void sub_80FB7A4(void)
 {
