@@ -1,27 +1,7 @@
 gUnknown_03000000: @ 3000000
-	.space 0x4
-
+	.include "src/main.o"
 	.include "src/malloc.o"
-
-	.align 4
-gDma3Requests: @ 3000010
-	.space 0xC
-
-gUnknown_0300001C: @ 300001C
-	.space 0xD4
-
-gUnknown_030000F0: @ 30000F0
-	.space 0xA
-
-gUnknown_030000FA: @ 30000FA
-	.space 0x716
-
-gDma3ManagerLocked: @ 3000810
-	.space 0x1
-
-gDma3RequestCursor: @ 3000811
-	.space 0x7
-
+	.include "src/dma3_manager.o"
 	.include "src/gpu_regs.o"
     .include "src/bg.o"
 	.include "src/text.o"
