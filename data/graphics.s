@@ -30,14 +30,25 @@ gUnknown_08C0237C:: @ 8C0237C
 gUnknown_08C093F0:: @ 8C093F0
 	.incbin "baserom.gba", 0xc093f0, 0x87ac
 
-gUnknown_08C11B9C:: @ 8C11B9C
-	.incbin "baserom.gba", 0xc11b9c, 0x20
+    .align 2
+gBattleInterface_BallStatusBarPal:: @ 8C11B9C
+	.incbin "graphics/battle_interface/ball_status_bar.gbapal"
 
-gUnknown_08C11BBC:: @ 8C11BBC
-	.incbin "baserom.gba", 0xc11bbc, 0x20
+    .align 2
+gBattleInterface_BallDisplayPal:: @ 8C11BBC
+	.incbin "graphics/battle_interface/ball_display.gbapal"
 
+    .align 2
 gUnknown_08C11BDC:: @ 8C11BDC
-	.incbin "baserom.gba", 0xc11bdc, 0x52b4
+	.incbin "baserom.gba", 0xc11bdc, 0x840
+
+    .align 2
+gBattleInterface_BallDisplayGfx:: @ 8C1241C
+	.incbin "graphics/battle_interface/ball_display.4bpp"
+
+    .align 2
+gUnknown_08C1249C:: @ 8C1249C
+	.incbin "baserom.gba", 0xc1249c, 0x49f4
 
 gUnknown_08C16E90:: @ 8C16E90
 	.incbin "baserom.gba", 0xc16e90, 0x118
@@ -506,7 +517,11 @@ gUnknown_08D8FB9C:: @ 8D8FB9C
 	.incbin "baserom.gba", 0xd8fb9c, 0x24
 
 gUnknown_08D8FBC0:: @ 8D8FBC0
-	.incbin "baserom.gba", 0xd8fbc0, 0xb4
+	.incbin "baserom.gba", 0xd8fbc0, 0x30
+
+	.align 2
+gBattleInterface_BallStatusBarGfx:: @ 8D8FBF0
+	.incbin "graphics/battle_interface/ball_status_bar.4bpp.lz"
 
 	.align 2
 gMonIcon_Egg:: @ 8D8FC74
