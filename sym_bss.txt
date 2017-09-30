@@ -13,40 +13,9 @@ gUnknown_03000000: @ 3000000
     .include "src/egg_hatch.o"
     .include "src/berry_blender.o"
     .include "src/play_time.o"
-
-.align 2
-
-gUnknown_03000E0C: @ 3000E0C
-	.space 0x4
-
-gUnknown_03000E10: @ 3000E10
-	.space 0x4
-
-gUnknown_03000E14: @ 3000E14
-	.space 0x4
-
-gUnknown_03000E18: @ 3000E18
-	.space 0x1
-
-gUnknown_03000E19: @ 3000E19
-	.space 0x7
-
-gUnknown_03000E20: @ 3000E20
-	.space 0x8
-
-gUnknown_03000E28: @ 3000E28
-	.space 0x2
-
-gUnknown_03000E2A: @ 3000E2A
-	.space 0x2
-
-gUnknown_03000E2C: @ 3000E2C
-	.space 0x4
-
-gUnknown_03000E30: @ 3000E30
-	.space 0x8
-
-.include "src/script.o"
+    .include "src/rom4.o"
+    .include "src/field_camera.o"
+    .include "src/script.o"
 
 .align 2
 gUnknown_03000F30: @ 3000F30
