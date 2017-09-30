@@ -13,13 +13,28 @@ gUnknown_08C00524:: @ 8C00524
 	.include "data/graphics/pokemon/circled_question_mark_graphics.inc"
 
 @ 8C00C10
-	.incbin "baserom.gba", 0xc00c10, 0x16f0
+	.incbin "baserom.gba", 0xc00c10, 0xa34
+
+gUnknown_08C01644:: @ 8C01644
+	.incbin "baserom.gba", 0xc01644, 0xE0
+
+gUnknown_08C01724:: @ 8C01724
+	.incbin "baserom.gba", 0xc01724, 0xBDC
 
 gUnknown_08C02300:: @ 8C02300
-	.incbin "baserom.gba", 0xc02300, 0x70f0
+	.incbin "baserom.gba", 0xc02300, 0x7c
+
+gUnknown_08C0237C:: @ 8C0237C
+	.incbin "baserom.gba", 0xc0237c, 0x7074
 
 gUnknown_08C093F0:: @ 8C093F0
-	.incbin "baserom.gba", 0xc093f0, 0x87ec
+	.incbin "baserom.gba", 0xc093f0, 0x87ac
+
+gUnknown_08C11B9C:: @ 8C11B9C
+	.incbin "baserom.gba", 0xc11b9c, 0x20
+
+gUnknown_08C11BBC:: @ 8C11BBC
+	.incbin "baserom.gba", 0xc11bbc, 0x20
 
 gUnknown_08C11BDC:: @ 8C11BDC
 	.incbin "baserom.gba", 0xc11bdc, 0x52b4
@@ -73,7 +88,22 @@ gUnknown_08C1D1E8:: @ 8C1D1E8
 	.incbin "baserom.gba", 0xc1d1e8, 0x28
 
 gUnknown_08C1D210:: @ 8C1D210
-	.incbin "baserom.gba", 0xc1d210, 0x3458
+	.incbin "baserom.gba", 0xc1d210, 0x1fb8
+
+gUnknown_08C1F1C8:: @ 8C1F1C8
+	.incbin "baserom.gba", 0xc1f1c8, 0x2a4
+
+gUnknown_08C1F46C:: @ 8C1F46C
+	.incbin "baserom.gba", 0xc1f46c, 0x17c
+
+gUnknown_08C1F5E8:: @ 8C1F5E8
+	.incbin "baserom.gba", 0xc1f5e8, 0x184
+
+gUnknown_08C1F76C:: @ 8C1F76C
+	.incbin "baserom.gba", 0xc1f76c, 0x17c
+
+gUnknown_08C1F8E8:: @ 8C1F8E8
+	.incbin "baserom.gba", 0xc1f8e8, 0xd80
 
 gUnknown_08C20668:: @ 8C20668
 	.incbin "baserom.gba", 0xc20668, 0x1c
@@ -348,7 +378,38 @@ gUnknown_08D85E72:: @ 8D85E72
 	.incbin "baserom.gba", 0xd85e72, 0xa
 
 gUnknown_08D85E7C:: @ 8D85E7C
-	.incbin "baserom.gba", 0xd85e7c, 0x2618
+	.incbin "baserom.gba", 0xd85e7c, 0x54
+
+	.align 2
+gIntroVolbeatPal:: @ 8D85ED0
+	.incbin "graphics/intro/volbeat.gbapal"
+
+	.align 2
+gIntroTorchicPal:: @ 8D85EF0
+	.incbin "graphics/intro/torchic.gbapal"
+
+	.align 2
+gIntroManectricPal:: @ 8D85ED0
+	.incbin "graphics/intro/manectric.gbapal"
+
+	.align 2
+gUnknown_08D85F30:: @ 8D85ED0
+	.incbin "baserom.gba", 0xd85f30, 0x20
+
+	.align 2
+gIntroVolbeatGfx:: @ 8D85F50
+	.incbin "graphics/intro/volbeat.4bpp.lz"
+
+	.align 2
+gIntroTorchicGfx:: @ 8D86130
+	.incbin "graphics/intro/torchic.4bpp.lz"
+
+	.align 2
+gIntroManectricGfx:: @ 8D86550
+	.incbin "graphics/intro/manectric.4bpp.lz"
+
+	.align 2
+	.incbin "baserom.gba", 0xd8702c, 0x1468
 
 gUnknown_08D88494:: @ 8D88494
 	.incbin "baserom.gba", 0xd88494, 0x8ac
@@ -381,8 +442,17 @@ gUnknown_08D8B440:: @ 8D8B440
 	.incbin "baserom.gba", 0xd8b440, 0x2a8
 
 gUnknown_08D8B6E8:: @ 8D8B6E8
-	.incbin "baserom.gba", 0xd8b6e8, 0x38c
+	.incbin "baserom.gba", 0xd8b6e8, 0x124
 
+	.align 2
+gIntroRayquazaLightningGfx:: @ 8D8B80C
+	.incbin "graphics/intro/rayquaza_lightning.4bpp.lz"
+
+	.align 2
+gIntroRayquazaLightningPal:: @ 8D8BA54
+	.incbin "graphics/intro/rayquaza_lightning.gbapal"
+
+	.align 2
 gUnknown_08D8BA74:: @ 8D8BA74
 	.incbin "baserom.gba", 0xd8ba74, 0x6f8
 
@@ -393,7 +463,26 @@ gUnknown_08D8C838:: @ 8D8C838
 	.incbin "baserom.gba", 0xd8c838, 0x490
 
 gUnknown_08D8CCC8:: @ 8D8CCC8
-	.incbin "baserom.gba", 0xd8ccc8, 0x748
+	.incbin "baserom.gba", 0xd8ccc8, 0x27c
+
+	.align 2
+gIntroKyogreBubblesGfx:: @ 8D8CF44
+	.incbin "graphics/intro/kyogre_bubbles.4bpp.lz"
+
+	.align 2
+gIntroKyogreBubblesPal:: @ 8D8D110
+	.incbin "graphics/intro/kyogre_bubbles.gbapal"
+
+	.align 2
+gIntroFlygonSilhouette:: @ 8D8D130
+	.incbin "graphics/intro/flygon_silhouette.4bpp.lz"
+
+	.align 2
+gIntroLeavesDropletSparkleGfx:: @ 8D8D208
+	.incbin "graphics/intro/droplet_sparkle.4bpp.lz"
+
+	.align 2
+	.incbin "baserom.gba", 0xd8d2a4, 0x16c
 
 gUnknown_08D8D410:: @ 8D8D410
 	.incbin "baserom.gba", 0xd8d410, 0x17c
@@ -414,7 +503,10 @@ gUnknown_08D8EC24:: @ 8D8EC24
 	.incbin "baserom.gba", 0xd8ec24, 0xf78
 
 gUnknown_08D8FB9C:: @ 8D8FB9C
-	.incbin "baserom.gba", 0xd8fb9c, 0xd8
+	.incbin "baserom.gba", 0xd8fb9c, 0x24
+
+gUnknown_08D8FBC0:: @ 8D8FBC0
+	.incbin "baserom.gba", 0xd8fbc0, 0xb4
 
 	.align 2
 gMonIcon_Egg:: @ 8D8FC74
@@ -1107,19 +1199,29 @@ gTitleScreenBgPalettes:: @ 8DDE258
 	.incbin "graphics/title_screen/rayquaza_and_clouds.gbapal"
 
 	.align 2
-gUnknown_08DDE438:: @ 8DDE438
-	.incbin "baserom.gba", 0xdde438, 0x20
+gTitleScreenEmeraldVersionPal:: @ 8DDE438
+	.incbin "graphics/title_screen/emerald_version.gbapal"
 
+	.align 2
 gUnknown_08DDE458:: @ 8DDE458
 	.incbin "baserom.gba", 0xdde458, 0x238
 
-gTitleScreenPokemonLogoTiles:: @ 8DDE690
+gTitleScreenPokemonLogoGfx:: @ 8DDE690
 	.incbin "graphics/title_screen/pokemon_logo.8bpp.lz"
 
 	.align 2
-@ 8DDFD94
-	.incbin "baserom.gba", 0xddfd94, 0x8b0
+gTitleScreenEmeraldVersionGfx:: @ 8DDFD94
+	.incbin "graphics/title_screen/emerald_version.8bpp.lz"
 
+	.align 2
+gTitleScreenPressStartPal:: @ 8DE03C8
+	.incbin "graphics/title_screen/press_start.gbapal"
+
+	.align 2
+gTitleScreenPressStartGfx:: @ 8DE03E8
+	.incbin "graphics/title_screen/press_start.4bpp.lz"
+
+	.align 2
 gUnknown_08DE0644:: @ 8DE0644
 	.incbin "baserom.gba", 0xde0644, 0x184
 

@@ -332,7 +332,7 @@ SECTIONS {
         src/battle_4.o(.rodata);
         data/battle_4.o(.rodata);
         data/battle_controller_player.o(.rodata);
-        data/data2b_2.o(.rodata);
+        data/smokescreen.o(.rodata);
         data/battle_controller_opponent.o(.rodata);
         data/battle_controller_link_opponent.o(.rodata);
         data/data2c.o(.rodata);

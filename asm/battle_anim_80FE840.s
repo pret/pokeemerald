@@ -21902,7 +21902,7 @@ _0810987E:
 	muls r1, r3
 	lsls r1, 16
 	asrs r1, 16
-	ldr r0, =gUnknown_085955CE
+	ldr r0, =gUnknown_085955CC+2
 	adds r2, r0
 	movs r3, 0
 	ldrsh r2, [r2, r3]
