@@ -1547,11 +1547,7 @@ gUnknown_0203BC38: @ 203BC38
 gDecorationInventories: @ 203BC40
 	.space 0x40
 
-sLocationHistory: @ 203BC80
-	.space 0x6
-
-sRoamerLocation: @ 203BC86
-	.space 0x2
+    .include "src/roamer.o"
 
 gUnknown_0203BC88: @ 203BC88
 	.space 0x4

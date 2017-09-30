@@ -209,7 +209,7 @@ SECTIONS {
         asm/learn_move.o(.text);
         asm/fldeff_softboiled.o(.text);
         asm/decoration_inventory.o(.text);
-        asm/roamer.o(.text);
+        src/roamer.o(.text);
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);
         asm/battle_controller_wally.o(.text);
@@ -418,7 +418,11 @@ SECTIONS {
         data/field_effect_helpers.o(.rodata);
         data/contest_ai.o(.rodata);
         data/battle_controller_safari.o(.rodata);
-        data/rom_8158B30.o(.rodata);
+        data/battle_anim_815A0D4.o(.rodata);
+        data/learn_move.o(.rodata);
+        src/roamer.o(.rodata);
+        data/battle_tower.o(.rodata);
+        data/use_pokeblock.o(.rodata);
         data/battle_controller_wally.o(.rodata);
         data/player_pc.o(.rodata);
         data/intro.o(.rodata);
