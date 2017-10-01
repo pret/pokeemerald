@@ -842,7 +842,7 @@ sub_80F8EB8: @ 80F8EB8
 	ldrh r0, [r1, 0x8]
 	adds r0, 0x1
 	strh r0, [r1, 0x8]
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 _080F8EDC:
 	pop {r0}
 	bx r0

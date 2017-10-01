@@ -797,7 +797,7 @@ sub_817A2C0: @ 817A2C0
 	ldr r0, =gUnknown_0203BD18
 	ldr r0, [r0]
 	bl Free
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 _0817A304:
 	pop {r4}
 	pop {r0}

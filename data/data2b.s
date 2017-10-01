@@ -95,7 +95,7 @@ gUnknown_082FF6C0:: @ 82FF6C0
 gUnknown_082FF70C:: @ 82FF70C
 	.incbin "baserom.gba", 0x2ff70c, 0x162c
 
-gUnknown_08300D38:: @ 8300D38
+gMonFrontPicCoords:: @ 8300D38
 	.incbin "baserom.gba", 0x300d38, 0x6e0
 
 @ 8301418
@@ -196,8 +196,13 @@ gUnknown_0831AC70:: @ 831AC70
 gUnknown_0831AC88:: @ 831AC88
 	.incbin "baserom.gba", 0x31ac88, 0x18
 
-gUnknown_0831ACA0:: @ 831ACA0
-	.incbin "baserom.gba", 0x31aca0, 0x40
+gText_ShedinjaJapaneseName:: @ 831ACA0
+	.string "ヌケニン$" @Nukenin
+    
+.align 2   
+ 
+gUnknown_0831ACA8:: @ 831ACA8
+	.incbin "baserom.gba", 0x31aca8, 0x38
 
 gUnknown_0831ACE0:: @ 831ACE0
 	.incbin "baserom.gba", 0x31ace0, 0x8

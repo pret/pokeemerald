@@ -1150,7 +1150,7 @@ _080A4330:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4374
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r5, 2
@@ -2864,7 +2864,7 @@ BattleAnimGetPanControl: @ 80A5178
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A51C0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gAnimationBankAttacker
 	ldrb r2, [r0]
@@ -2986,7 +2986,7 @@ sub_80A5278: @ 80A5278
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A52C0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gAnimationBankAttacker
 	ldrb r2, [r0]

@@ -65,7 +65,7 @@ extern void fade_screen(u8, u8);
 extern void overworld_free_bg_tilemaps(void);
 extern void sub_80AF168(void);
 extern void AllocateMonSpritesGfx(void);
-extern void sub_805F094(void);
+extern void FreeMonSpritesGfx(void);
 extern void remove_some_task(void);
 extern void reset_temp_tile_data_buffers(void);
 extern void c2_exit_to_overworld_2_switch(void);
@@ -570,7 +570,7 @@ static void CB2_EggHatch_0(void)
 static void EggHatchSetMonNickname(void)
 {
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
-    sub_805F094();
+    FreeMonSpritesGfx();
     Free(sEggHatchData);
     SetMainCallback2(c2_exit_to_overworld_2_switch);
 }
@@ -691,7 +691,7 @@ static void CB2_EggHatch_1(void)
     case 12:
         if (!gPaletteFade.active)
         {
-            sub_805F094();
+            FreeMonSpritesGfx();
             RemoveWindow(sEggHatchData->windowId);
             UnsetBgTilemapBuffer(0);
             UnsetBgTilemapBuffer(1);

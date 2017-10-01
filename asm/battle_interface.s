@@ -780,7 +780,7 @@ sub_807294C: @ 807294C
 	ldr r7, [sp, 0x14]
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, =gUnknown_020244D0
+	ldr r6, =gBattleSpritesDataPtr
 	ldr r4, [r6]
 	ldr r5, [r4, 0xC]
 	lsls r4, r0, 2
@@ -1398,7 +1398,7 @@ sub_8072E0C: @ 8072E0C
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072F28
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	movs r2, 0x3A
 	ldrsh r0, [r7, r2]
@@ -1500,7 +1500,7 @@ _08072F28:
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x2C]
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	ldr r2, [sp, 0x2C]
@@ -2004,7 +2004,7 @@ _0807336A:
 	bne _08073382
 	b _080735A8
 _08073382:
-	ldr r5, =gUnknown_020244D0
+	ldr r5, =gBattleSpritesDataPtr
 	ldr r0, [r5]
 	ldr r3, [r0]
 	mov r0, r9
@@ -2988,7 +2988,7 @@ _08073BC6:
 	ldr r2, [sp, 0x10]
 	cmp r2, 0
 	beq _08073C0A
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r3, [r0, 0x8]
 	ldrb r2, [r3, 0x9]
@@ -3311,7 +3311,7 @@ sub_8073E64: @ 8073E64
 	bne _08073F54
 	ldrb r5, [r4, 0xA]
 	movs r4, 0
-	ldr r6, =gUnknown_020244D0
+	ldr r6, =gBattleSpritesDataPtr
 	adds r0, r7, 0
 	adds r0, 0xE
 	adds r2, r3, r0
@@ -3406,7 +3406,7 @@ _08073F54:
 	negs r0, r0
 	cmp r1, r0
 	bne _08073F8A
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	lsls r1, r2, 1
@@ -3516,7 +3516,7 @@ _08074034:
 	negs r0, r0
 	cmp r2, r0
 	bne _0807406A
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	lsls r1, r5, 1
@@ -4140,7 +4140,7 @@ _08074542:
 	adds r4, 0x1
 	cmp r4, 0x2
 	ble _08074542
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	adds r0, r7, r0
@@ -4222,7 +4222,7 @@ _080745B8:
 	cmp r0, 0x1
 	bne _08074672
 _08074626:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r7, 2
@@ -4760,7 +4760,7 @@ sub_8074AA0: @ 8074AA0
 	mov r9, r2
 	cmp r2, 0
 	bne _08074AEC
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
 	mov r1, r8
@@ -4782,7 +4782,7 @@ sub_8074AA0: @ 8074AA0
 	b _08074B48
 	.pool
 _08074AEC:
-	ldr r2, =gUnknown_020244D0
+	ldr r2, =gBattleSpritesDataPtr
 	mov r10, r2
 	ldr r0, [r2]
 	ldr r2, [r0, 0xC]
@@ -4833,7 +4833,7 @@ _08074B48:
 	beq _08074B64
 	cmp r2, 0
 	bne _08074B6C
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	adds r0, r7, r0
@@ -4851,7 +4851,7 @@ _08074B6C:
 	negs r0, r0
 	cmp r4, r0
 	bne _08074B86
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0, 0xC]
 	mov r2, r8
@@ -4890,7 +4890,7 @@ sub_8074B9C: @ 8074B9C
 	beq _08074CA0
 	b _08074D9E
 _08074BB8:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
 	lsls r5, r6, 2
@@ -4924,7 +4924,7 @@ _08074BF4:
 	ldr r0, =gSprites
 	mov r8, r0
 _08074BFA:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0, 0xC]
 	adds r0, r7, r6
@@ -4995,7 +4995,7 @@ _08074C8A:
 	b _08074D9E
 	.pool
 _08074CA0:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
 	lsls r5, r6, 2
@@ -5055,7 +5055,7 @@ _08074D02:
 	ldrb r1, [r1]
 	lsls r1, 5
 	adds r0, r1
-	ldr r1, =gUnknown_020244D0
+	ldr r1, =gBattleSpritesDataPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0xC]
 	adds r1, r4, r1
@@ -5086,7 +5086,7 @@ _08074D5C:
 	ldrb r1, [r1]
 	lsls r1, 5
 	adds r0, r1
-	ldr r1, =gUnknown_020244D0
+	ldr r1, =gBattleSpritesDataPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0xC]
 	adds r1, r4, r1

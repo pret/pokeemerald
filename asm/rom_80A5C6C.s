@@ -94,7 +94,7 @@ _080A5D28:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5D60
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r5, 2
@@ -112,7 +112,7 @@ _080A5D28:
 	b _080A5D7E
 	.pool
 _080A5D60:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r5, 2
@@ -195,7 +195,7 @@ _080A5E00:
 	ldr r2, [r2, 0x8]
 	b _080A5E42
 _080A5E04:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	lsls r1, r4, 2
@@ -285,7 +285,7 @@ _080A5EC0:
 _080A5EC8:
 	cmp r5, 0xC9
 	bne _080A5F58
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	lsls r1, r4, 2
@@ -344,7 +344,7 @@ _080A5F44:
 	lsls r0, 16
 	lsrs r0, 16
 _080A5F4E:
-	ldr r1, =gUnknown_08300D38
+	ldr r1, =gMonFrontPicCoords
 	lsls r0, 2
 	b _080A5F90
 	.pool
@@ -352,7 +352,7 @@ _080A5F58:
 	ldr r0, =0x00000181
 	cmp r5, r0
 	bne _080A5F7C
-	ldr r0, =gUnknown_08525F78
+	ldr r0, =gCastformFrontSpriteCoords
 	ldr r1, =gBattleMonForms
 	adds r1, r4, r1
 	ldrb r1, [r1]
@@ -366,11 +366,11 @@ _080A5F7C:
 	lsls r0, 1
 	cmp r5, r0
 	bls _080A5F8C
-	ldr r0, =gUnknown_08300D38
+	ldr r0, =gMonFrontPicCoords
 	b _080A5F92
 	.pool
 _080A5F8C:
-	ldr r1, =gUnknown_08300D38
+	ldr r1, =gMonFrontPicCoords
 _080A5F8E:
 	lsls r0, r5, 2
 _080A5F90:
@@ -546,7 +546,7 @@ _080A60E4:
 	ldrh r1, [r2]
 	b _080A610E
 _080A60E8:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r4, 2
@@ -654,7 +654,7 @@ sub_80A6190: @ 80A6190
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A61E4
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r5, 2
@@ -672,7 +672,7 @@ sub_80A6190: @ 80A6190
 	b _080A6202
 	.pool
 _080A61E4:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r5, 2
@@ -2976,7 +2976,7 @@ _080A72B4:
 	lsls r0, 30
 	cmp r0, 0
 	bne _080A7312
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	lsls r0, r7, 1
@@ -4571,7 +4571,7 @@ _080A7F78:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A7FD8
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r5, 2
@@ -4606,7 +4606,7 @@ _080A7FD0:
 	b _080A8026
 	.pool
 _080A7FD8:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r5, 2
@@ -4641,7 +4641,7 @@ _080A8018:
 	b _080A8042
 	.pool
 _080A8024:
-	ldr r0, =gUnknown_08300D38
+	ldr r0, =gMonFrontPicCoords
 _080A8026:
 	lsls r1, r2, 2
 	adds r1, r0
@@ -5200,7 +5200,7 @@ _080A8412:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080A845E
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	ldr r2, [sp, 0x40]
@@ -5263,7 +5263,7 @@ _080A84B0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080A84F6
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	ldr r3, [sp, 0x40]
@@ -5338,7 +5338,7 @@ _080A8540:
 	mov r2, r10
 	lsls r1, r2, 16
 	asrs r1, 16
-	ldr r3, =gUnknown_08300D38
+	ldr r3, =gMonFrontPicCoords
 	b _080A85B2
 	.pool
 _080A85A0:
@@ -5490,7 +5490,7 @@ _080A86C4:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A8790
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	mov r1, r8
@@ -5580,7 +5580,7 @@ _080A8784:
 	b _080A8864
 	.pool
 _080A8790:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	mov r1, r8
@@ -5662,7 +5662,7 @@ _080A8834:
 	add r0, r8
 	ldrb r0, [r0]
 	lsls r0, 2
-	ldr r1, =gUnknown_08525F78
+	ldr r1, =gCastformFrontSpriteCoords
 	adds r4, r0, r1
 	b _080A8866
 	.pool
@@ -5671,13 +5671,13 @@ _080A8850:
 	lsls r0, 1
 	cmp r7, r0
 	bls _080A8860
-	ldr r4, =gUnknown_08300D38
+	ldr r4, =gMonFrontPicCoords
 	b _080A8866
 	.pool
 _080A8860:
 	lsls r1, r7, 2
 _080A8862:
-	ldr r0, =gUnknown_08300D38
+	ldr r0, =gMonFrontPicCoords
 _080A8864:
 	adds r4, r1, r0
 _080A8866:

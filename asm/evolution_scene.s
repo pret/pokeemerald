@@ -189,7 +189,7 @@ evolution_cutscene: @ 813DA8C
 	ldr r1, =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
-	bl c2_berry_program_update_menu
+	bl sub_80356D0
 	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
 	bl remove_some_task
@@ -482,7 +482,7 @@ sub_813DD7C: @ 813DD7C
 	ldr r1, =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
-	bl c2_berry_program_update_menu
+	bl sub_80356D0
 	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
@@ -1775,7 +1775,7 @@ _0813EAF6:
 _0813EB06:
 	adds r0, r7, 0
 	bl DestroyTask
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	ldr r4, =gUnknown_0203AB80
 	ldr r0, [r4]
 	bl Free

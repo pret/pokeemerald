@@ -71211,7 +71211,7 @@ sub_802DBF8: @ 802DBF8
 	movs r6, 0
 	cmp r6, r10
 	bge _0802DC62
-	ldr r0, =gUnknown_08300D38
+	ldr r0, =gMonFrontPicCoords
 	mov r9, r0
 	ldr r1, =gUnknown_02022D00
 	mov r8, r1

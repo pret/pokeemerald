@@ -3250,7 +3250,7 @@ _0815BAB6:
 	cmp r0, 0
 	bne _0815BAF6
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_020244D0
+	ldr r1, =gBattleSpritesDataPtr
 	ldr r1, [r1]
 	ldr r2, [r1]
 	lsls r1, r0, 2
@@ -5723,7 +5723,7 @@ _0815CF18:
 	movs r1, 0x1
 	bl GetMonData
 	mov r8, r0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
 	ldr r1, [r0]
@@ -5791,7 +5791,7 @@ _0815CFC4:
 	movs r1, 0x1
 	bl GetMonData
 	mov r8, r0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
 	ldr r1, [r0]
@@ -10637,7 +10637,7 @@ _0815F67C:
 	adds r0, r2
 	movs r1, 0x2
 	strh r1, [r0, 0x8]
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
@@ -10762,7 +10762,7 @@ sub_815F7C4: @ 815F7C4
 	ble _0815F80E
 	movs r0, 0
 	strh r0, [r4, 0x30]
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
@@ -11072,7 +11072,7 @@ _0815FA28:
 	movs r1, 0x1
 	bl GetMonData
 	mov r9, r0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
 	ldr r1, [r0]
@@ -11136,7 +11136,7 @@ _0815FAC8:
 	movs r1, 0x1
 	bl GetMonData
 	mov r9, r0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
 	ldr r1, [r0]
@@ -11202,7 +11202,7 @@ _0815FB50:
 	bl sub_80A8394
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldrb r0, [r4]
 	ldr r1, [r1]

@@ -18768,7 +18768,7 @@ _081A43EE:
 sub_81A4410: @ 81A4410
 	push {r4,lr}
 	ldr r4, =gScriptResult
-	bl sub_8185338
+	bl MoveRecordedBattleToSaveData
 	strh r0, [r4]
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]

@@ -38602,7 +38602,7 @@ _08111F0C:
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r4
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
@@ -50163,7 +50163,7 @@ _08117F78:
 	adds r3, r4
 	lsls r3, 3
 	adds r3, r0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r4, [r0]
 	ldr r2, =gAnimationBankAttacker
 	ldrb r0, [r2]
@@ -50207,7 +50207,7 @@ sub_8117FD0: @ 8117FD0
 	lsls r0, 5
 	cmp r1, r0
 	bne _08118014
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gAnimationBankAttacker
 	ldrb r3, [r0]

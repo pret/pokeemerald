@@ -145,7 +145,7 @@ extern u16 GetBattlePyramidPickupItemId(void);
 extern u8 sav1_map_get_light_level(void);
 extern u8 sub_813B21C(void);
 extern u16 get_unknown_box_id(void);
-extern void c2_berry_program_update_menu(void);
+extern void sub_80356D0(void);
 
 // BattleScripts
 extern const u8 BattleScript_MoveEnd[];
@@ -11216,7 +11216,7 @@ static void atkF2_display_dex_info(void)
         }
         break;
     case 3:
-        c2_berry_program_update_menu();
+        sub_80356D0();
         LoadBattleTextboxAndBackground();
         gBattle_BG3_X = 0x100;
         gBattleCommunication[0]++;

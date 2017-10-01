@@ -264,32 +264,32 @@
 
 struct TrainerMonNoItemDefaultMoves
 {
-    u16 species;
+    u16 iv;
     u8 lvl;
-    u16 evsValue;
+    u16 species;
 };
 
 struct TrainerMonItemDefaultMoves
 {
-    u16 species;
+    u16 iv;
     u8 lvl;
-    u16 evsValue;
+    u16 species;
     u16 heldItem;
 };
 
 struct TrainerMonNoItemCustomMoves
 {
-    u16 species;
+    u16 iv;
     u8 lvl;
-    u16 evsValue;
+    u16 species;
     u16 moves[4];
 };
 
 struct TrainerMonItemCustomMoves
 {
-    u16 species;
+    u16 iv;
     u8 lvl;
-    u16 evsValue;
+    u16 species;
     u16 heldItem;
     u16 moves[4];
 };
@@ -863,10 +863,13 @@ extern struct BattleScripting gBattleScripting;
 // battle_1
 void LoadBattleTextboxAndBackground(void);
 void LoadBattleEntryBackground(void);
+void ApplyPlayerChosenFrameToBattleMenu(void);
+bool8 LoadChosenBattleElement(u8 caseId);
 void task00_0800F6FC(u8 taskId);
 
 // battle_2
 void CB2_InitBattle(void);
+void CB2_QuitRecordedBattle(void);
 void CancelMultiTurnMoves(u8 bank);
 void PressurePPLose(u8 bankAtk, u8 bankDef, u16 move);
 void PrepareStringBattle(u16 stringId, u8 bank);
@@ -933,15 +936,18 @@ extern const u8 gUnknown_0831C494[];
 
 // battle_5
 void AllocateBattleResrouces(void);
+void FreeBattleResources(void);
 void AdjustFriendshipOnBattleFaint(u8 bank);
 void sub_80571DC(u8 bank, u8 arg1);
 u32 sub_805725C(u8 bank);
 
 // battle 7
 void AllocateBattleSpritesData(void);
+void FreeBattleSpritesData(void);
+void AllocateMonSpritesGfx(void);
+void FreeMonSpritesGfx(void);
 void BattleMusicStop(void);
 void sub_805E990(struct Pokemon* mon, u8 bank);
-void AllocateMonSpritesGfx(void);
 void sub_805EF14(void);
 bool8 BattleInitAllSprites(u8 *state1, u8 *state2);
 
@@ -949,6 +955,30 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *state2);
 u8 GetBankSide(u8 bank);
 u8 GetBankIdentity(u8 bank);
 u8 GetBankByIdentity(u8 bank);
+
+struct BattleSpriteInfo
+{
+    u16 invisible : 1; // 0x1
+    u16 flag_x2 : 1; // 0x2
+    u16 behindSubstitute : 1; // 0x4
+    u16 flag_x8 : 1; // 0x8
+    u16 hpNumbersNoBars : 1; // 0x10
+    u16 transformSpecies;
+};
+
+struct BattleAnimationInfo
+{
+    u16 field; // to fill up later
+};
+
+struct BattleSpriteData
+{
+    struct BattleSpriteInfo *bankData;
+    void* field_4;
+    struct BattleAnimationInfo *animationData;
+};
+
+extern struct BattleSpriteData *gBattleSpritesDataPtr;
 
 // Move this somewhere else
 

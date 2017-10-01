@@ -637,5 +637,6 @@ void sub_8068AA4(void); // sets stats for deoxys
 #include "sprite.h"
 
 void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
+void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
 
 #endif // GUARD_POKEMON_H

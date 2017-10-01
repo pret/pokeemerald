@@ -8939,7 +8939,7 @@ _0807C04C:
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r3
-	ldr r2, =gUnknown_08300D38
+	ldr r2, =gMonFrontPicCoords
 	adds r0, r4, 0
 	adds r0, 0xF0
 	ldrh r0, [r0]
@@ -10395,7 +10395,7 @@ _0807CD1C:
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r4
-	ldr r3, =gUnknown_08300D38
+	ldr r3, =gMonFrontPicCoords
 	adds r2, 0xF2
 	ldrh r0, [r2]
 	lsls r0, 2
@@ -10663,7 +10663,7 @@ _0807CF5C:
 	movs r0, 0
 	bl GetBgTilemapBuffer
 	bl Free
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	ldr r0, [r7]
 	bl Free
 	str r4, [r7]
@@ -11001,7 +11001,7 @@ _0807D428:
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r3
-	ldr r2, =gUnknown_08300D38
+	ldr r2, =gMonFrontPicCoords
 	adds r0, r4, 0
 	adds r0, 0xF0
 	ldrh r0, [r0]
@@ -12500,7 +12500,7 @@ _0807E168:
 	adds r1, r0
 	lsls r1, 2
 	adds r1, r4
-	ldr r3, =gUnknown_08300D38
+	ldr r3, =gMonFrontPicCoords
 	adds r2, 0xF2
 	ldrh r0, [r2]
 	lsls r0, 2
@@ -12768,7 +12768,7 @@ _0807E3A8:
 	movs r0, 0
 	bl GetBgTilemapBuffer
 	bl Free
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	ldr r0, [r7]
 	bl Free
 	str r4, [r7]
@@ -14136,7 +14136,7 @@ c2_080543C4: @ 807F068
 	movs r0, 0
 	bl GetBgTilemapBuffer
 	bl Free
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	ldr r4, =gUnknown_020322A0
 	ldr r0, [r4]
 	bl Free

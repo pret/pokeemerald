@@ -4569,7 +4569,7 @@ sub_80F7E64: @ 80F7E64
 	str r4, [r0, 0x1C]
 	bl Free
 	str r4, [r5]
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	pop {r4,r5}
 	pop {r0}
 	bx r0

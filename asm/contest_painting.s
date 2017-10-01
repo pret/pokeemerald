@@ -72,7 +72,7 @@ sub_812FE0C: @ 812FE0C
 	movs r0, 0x1
 	bl GetBgTilemapBuffer
 	bl Free
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	pop {r4,r5}
 	pop {r0}
 	bx r0

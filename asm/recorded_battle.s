@@ -348,7 +348,7 @@ _0818507A:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, =sub_80384E4
+	ldr r0, =CB2_QuitRecordedBattle
 	bl SetMainCallback2
 	movs r0, 0xFF
 	b _081850C6
@@ -681,8 +681,8 @@ _08185332:
 	bx r1
 	thumb_func_end sub_81852F0
 
-	thumb_func_start sub_8185338
-sub_8185338: @ 8185338
+	thumb_func_start MoveRecordedBattleToSaveData
+MoveRecordedBattleToSaveData: @ 8185338
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1469,7 +1469,7 @@ _08185A14:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8185338
+	thumb_func_end MoveRecordedBattleToSaveData
 
 	thumb_func_start sub_8185A54
 sub_8185A54: @ 8185A54
@@ -2655,8 +2655,8 @@ sub_8186444: @ 8186444
 	.pool
 	thumb_func_end sub_8186444
 
-	thumb_func_start rfu_lacks_rfufunc
-rfu_lacks_rfufunc: @ 8186450
+	thumb_func_start sub_8186450
+sub_8186450: @ 8186450
 	push {lr}
 	movs r1, 0
 	ldr r0, =gUnknown_0203CCD0
@@ -2669,7 +2669,7 @@ _0818645E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end rfu_lacks_rfufunc
+	thumb_func_end sub_8186450
 
 	thumb_func_start sub_8186468
 sub_8186468: @ 8186468

@@ -348,7 +348,7 @@ sub_80A9614: @ 80A9614
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9676
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r4, 2
@@ -404,7 +404,7 @@ _080A96AA:
 	bl sub_805DF84
 	b _080A96F4
 _080A96B2:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r4, 2
@@ -459,7 +459,7 @@ sub_80A9708: @ 80A9708
 	bcc _080A9722
 	b _080A9AA0
 _080A9722:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	lsls r2, r7, 2
@@ -591,7 +591,7 @@ _080A9786:
 	adds r1, r7, r1
 	ldrb r1, [r1]
 	bl StartSpriteAnim
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldr r2, [sp]
@@ -808,7 +808,7 @@ _080A998C:
 	adds r1, r7, r1
 	ldrb r1, [r1]
 	bl StartSpriteAnim
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldr r1, [sp]
@@ -839,7 +839,7 @@ _080A9A70:
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r1
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldr r1, [sp]

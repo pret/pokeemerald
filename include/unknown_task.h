@@ -17,5 +17,6 @@ extern struct UnknownTaskStruct gUnknown_0831AC70;
 // Exported ROM declarations
 void remove_some_task(void);
 void sub_80BA038(struct UnknownTaskStruct arg0);
+void sub_80BA0A8(void);
 
 #endif // GUARD_unknown_task_H

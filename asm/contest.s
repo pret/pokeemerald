@@ -5587,7 +5587,7 @@ sub_80DA830: @ 80DA830
 	str r1, [r0]
 	bl FreeAllWindowBuffers
 	bl sub_80D7A5C
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	ldr r0, =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
 _080DA860:

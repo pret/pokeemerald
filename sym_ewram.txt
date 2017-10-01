@@ -520,7 +520,7 @@ gUnknown_020244BC: @ 20244BC
 gUnknown_020244CC: @ 20244CC
 	.space 0x4
 
-gUnknown_020244D0: @ 20244D0
+gBattleSpritesDataPtr: @ 20244D0
 	.space 0x4
 
 gMonSpritesGfxPtr: @ 20244D4

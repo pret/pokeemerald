@@ -336,7 +336,7 @@ bx_wait_t6: @ 8159624
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0815964A
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -410,7 +410,7 @@ _081596BE:
 	thumb_func_start sub_81596D4
 sub_81596D4: @ 81596D4
 	push {lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -484,7 +484,7 @@ _0815976A:
 	thumb_func_start bx_80364D0
 bx_80364D0: @ 815977C
 	push {lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -689,7 +689,7 @@ sub_8159904: @ 8159904
 	thumb_func_start sub_8159910
 sub_8159910: @ 8159910
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x8]
 	movs r0, 0x4
@@ -730,7 +730,7 @@ sub_8159964: @ 8159964
 	adds r1, 0x1
 	adds r0, r1
 	ldrb r1, [r0]
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	strb r1, [r0, 0x8]
