@@ -62,8 +62,6 @@ EWRAM_DATA u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA u8 gPaletteDecompressionBuffer[0x400] = {0};
 
 extern const u16 *const gUnknown_08510764[];
-extern const u16 *const gUnknown_085112C4[];
-extern const u16 *const gUnknown_08511BCC[];
 extern const u16 *const gUnknown_08512574[];
 extern const u16 *const gUnknown_08512E54[];
 extern const u16 *const gUnknown_08513174[];
@@ -695,7 +693,7 @@ void sub_80A1394(u16 timer_div, u8 timer_mod)
     }
     else
     {
-        timer_div &= 3;
+        timer_div %= 4;
         sub_80A0980(gUnknown_085153E4[timer_div], gUnknown_08515344[timer_mod], 0x80);
         sub_80A0980(gUnknown_085153F4[timer_div], gUnknown_08515364[timer_mod], 0x80);
     }
@@ -704,7 +702,7 @@ void sub_80A1394(u16 timer_div, u8 timer_mod)
 void sub_80A1434(u16 timer_div, u8 timer_mod)
 {
     timer_div -= timer_mod;
-    timer_div &= 0x7;
+    timer_div %= 8;
     if (gUnknown_08515824[timer_div])
         sub_80A0980(gUnknown_08515824[timer_div], gUnknown_08515804[timer_mod], 0x80);
 }
@@ -728,7 +726,7 @@ void sub_80A1498(u16 timer)
 void sub_80A14C0(u16 timer_div, u8 timer_mod)
 {
     timer_div -= timer_mod;
-    timer_div &= 7;
+    timer_div %= 8;
 
     sub_80A0980(gUnknown_085161DC[timer_div], gUnknown_085161BC[timer_mod], 0x80);
 }
