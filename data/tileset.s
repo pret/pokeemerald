@@ -258,25 +258,25 @@ gUnknown_085152A4::
 
 gUnknown_08515344:: @ 8515344
 @ replacing .incbin "baserom.gba", 0x00515344, 0x20
-	.4byte VRAM + 0x4c00
-	.4byte VRAM + 0x4c80
-	.4byte VRAM + 0x4d00
-	.4byte VRAM + 0x4d80
-	.4byte VRAM + 0x4e00
-	.4byte VRAM + 0x4e80
-	.4byte VRAM + 0x4f00
-	.4byte VRAM + 0x4f80
+	.4byte BG_VRAM + 0x4c00
+	.4byte BG_VRAM + 0x4c80
+	.4byte BG_VRAM + 0x4d00
+	.4byte BG_VRAM + 0x4d80
+	.4byte BG_VRAM + 0x4e00
+	.4byte BG_VRAM + 0x4e80
+	.4byte BG_VRAM + 0x4f00
+	.4byte BG_VRAM + 0x4f80
 
 gUnknown_08515364:: @ 8515364
 @ replacing .incbin "baserom.gba", 0x00515364, 0x20
-	.4byte VRAM + 0x5000
-	.4byte VRAM + 0x5080
-	.4byte VRAM + 0x5100
-	.4byte VRAM + 0x5180
-	.4byte VRAM + 0x5200
-	.4byte VRAM + 0x5280
-	.4byte VRAM + 0x5300
-	.4byte VRAM + 0x5380
+	.4byte BG_VRAM + 0x5000
+	.4byte BG_VRAM + 0x5080
+	.4byte BG_VRAM + 0x5100
+	.4byte BG_VRAM + 0x5180
+	.4byte BG_VRAM + 0x5200
+	.4byte BG_VRAM + 0x5280
+	.4byte BG_VRAM + 0x5300
+	.4byte BG_VRAM + 0x5380
 
 gUnknown_08515384:: @ 8515384
 @ replacing .incbin "baserom.gba", 0x00515384, 0x30
@@ -348,8 +348,14 @@ gUnknown_08515784::
 
 
 gUnknown_08515804:: @ 8515804
-	.incbin "baserom.gba", 0x515804, 0x20
-
+    .4byte BG_VRAM + 0x5000
+	.4byte BG_VRAM + 0x5080
+	.4byte BG_VRAM + 0x5100
+	.4byte BG_VRAM + 0x5180
+	.4byte BG_VRAM + 0x5200
+	.4byte BG_VRAM + 0x5280
+	.4byte BG_VRAM + 0x5300
+	.4byte BG_VRAM + 0x5380
 
 gUnknown_08515824:: @ 8515824
 @ replacing .incbin "baserom.gba", 0x00515824, 0x20
@@ -389,10 +395,18 @@ gUnknown_08515AEC::
 	.incbin "baserom.gba", 0x515aec, 0x80
 
 gUnknown_08515B6C::
-	.incbin "baserom.gba", 0x515b6c, 0x20
+	.incbin "baserom.gba", 0x515b6c, 0x80
 
-gUnknown_08515B8C::
-	.incbin "baserom.gba", 0x515b8c, 0x200
+gUnknown_08515BEC::
+	.incbin "baserom.gba", 0x515bec, 0x80
+
+gUnknown_08515C6C::
+	.incbin "baserom.gba", 0x515c6c, 0x80
+
+gUnknown_08515CEC::
+	.incbin "baserom.gba", 0x515cec, 0x80
+
+    .space 0x20
 
 
 gUnknown_08515D8C:: @ 8515D8C
@@ -431,14 +445,14 @@ gUnknown_0851611C::
 
 gUnknown_085161BC:: @ 85161BC
 @ replacing .incbin "baserom.gba", 0x005161bc, 0x20
-	.4byte VRAM + 0x5c00
-	.4byte VRAM + 0x5c80
-	.4byte VRAM + 0x5d00
-	.4byte VRAM + 0x5d80
-	.4byte VRAM + 0x5e00
-	.4byte VRAM + 0x5e80
-	.4byte VRAM + 0x5f00
-	.4byte VRAM + 0x5f80
+	.4byte BG_VRAM + 0x5c00
+	.4byte BG_VRAM + 0x5c80
+	.4byte BG_VRAM + 0x5d00
+	.4byte BG_VRAM + 0x5d80
+	.4byte BG_VRAM + 0x5e00
+	.4byte BG_VRAM + 0x5e80
+	.4byte BG_VRAM + 0x5f00
+	.4byte BG_VRAM + 0x5f80
 
 gUnknown_085161DC:: @ 85161DC
 @ replacing .incbin "baserom.gba", 0x005161dc, 0x20
@@ -692,8 +706,7 @@ gUnknown_085203E4::
 gUnknown_085204E4::
 	.incbin "baserom.gba", 0x5204e4, 0x100
 
-gUnknown_085205E4::
-	.incbin "baserom.gba", 0x5205e4, 0x20
+    .space 0x20
 
 gUnknown_08520604::
 	.incbin "baserom.gba", 0x520604, 0x100
@@ -704,8 +717,15 @@ gUnknown_08520704::
 gUnknown_08520804::
 	.incbin "baserom.gba", 0x520804, 0x100
 
-gUnknown_08520904::
-	.incbin "baserom.gba", 0x520904, 0x3F60
+	.space 0x3d00
+
+gUnknown_08524604::
+	.incbin "baserom.gba", 0x524604, 0x40
+
+	.space 0x1c0
+
+gUnknown_08524804::
+	.incbin "baserom.gba", 0x524804, 0x60
 
 
 gUnknown_08524864:: @ 8524864
