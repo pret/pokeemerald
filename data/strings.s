@@ -4452,16 +4452,16 @@ gText_ButtonTypeLEqualsA:: @ 85EE65D
 gText_XPLink:: @ 85EE667
 	.string "{STR_VAR_1}P LINK$"
 
-gUnknown_085EE670:: @ 85EE670
+gText_BronzeCard:: @ 85EE670
 	.string "BRONZE$"
 
-gUnknown_085EE677:: @ 85EE677
+gText_CopperCard:: @ 85EE677
 	.string "COPPER$"
 
-gUnknown_085EE67E:: @ 85EE67E
+gText_SilverCard:: @ 85EE67E
 	.string "SILVER$"
 
-gUnknown_085EE685:: @ 85EE685
+gText_GoldCard:: @ 85EE685
 	.string "GOLD$"
 
 gText_Day:: @ 85EE68A

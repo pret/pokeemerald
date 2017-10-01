@@ -123,7 +123,6 @@ SECTIONS {
         asm/battle_setup.o(.text);
         asm/cable_club.o(.text);
         asm/trainer_see.o(.text);
-        asm/fldeff_emotion.o(.text);
         asm/wild_encounter.o(.text);
         asm/field_effect.o(.text);
         asm/unknown_task.o(.text);
@@ -365,7 +364,6 @@ SECTIONS {
         data/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         data/trainer_see.o(.rodata);
-        data/fldeff_emotion.o(.rodata);
         data/wild_encounter.o(.rodata);
         data/field_effect.o(.rodata);
         data/option_menu.o(.rodata);
