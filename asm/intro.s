@@ -376,11 +376,11 @@ task_intro_1: @ 816CF18
 	movs r0, 0x12
 	movs r1, 0x28
 	bl SetGpuReg
-	ldr r0, =gIntroLeavesBgGfx
+	ldr r0, =gIntro1BGLeavesGfx
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZ77UnCompVram
-	ldr r0, =gIntroLeavesForegroundTilemap
+	ldr r0, =gIntro1BG0_Tilemap
 	ldr r1, =0x06008000
 	bl LZ77UnCompVram
 	ldr r1, =0x06008800
@@ -393,7 +393,7 @@ task_intro_1: @ 816CF18
 	ldr r5, =0x81000400
 	str r5, [r4, 0x8]
 	ldr r0, [r4, 0x8]
-	ldr r0, =gIntroLeavesMidgroundTilemap
+	ldr r0, =gIntro1BG1_Tilemap
 	ldr r1, =0x06009000
 	bl LZ77UnCompVram
 	ldr r1, =0x06009800
@@ -403,7 +403,7 @@ task_intro_1: @ 816CF18
 	str r1, [r4, 0x4]
 	str r5, [r4, 0x8]
 	ldr r0, [r4, 0x8]
-	ldr r0, =gIntroLeavesBgLeavesTilemap
+	ldr r0, =gIntro1BG2_Tilemap
 	ldr r1, =0x0600a000
 	bl LZ77UnCompVram
 	ldr r1, =0x0600a800
@@ -413,7 +413,7 @@ task_intro_1: @ 816CF18
 	str r1, [r4, 0x4]
 	str r5, [r4, 0x8]
 	ldr r0, [r4, 0x8]
-	ldr r0, =gIntroLeavesBgMountainsTilemap
+	ldr r0, =gIntro1BG3_Tilemap
 	ldr r1, =0x0600b000
 	bl LZ77UnCompVram
 	ldr r1, =0x0600b800
@@ -423,7 +423,7 @@ task_intro_1: @ 816CF18
 	str r1, [r4, 0x4]
 	str r5, [r4, 0x8]
 	ldr r0, [r4, 0x8]
-	ldr r0, =gIntroLeavesPal
+	ldr r0, =gIntro1BGPals
 	movs r5, 0x80
 	lsls r5, 2
 	movs r1, 0
@@ -1779,14 +1779,14 @@ task_intro_10: @ 816DBAC
 	lsls r5, 24
 	lsrs r5, 24
 	bl intro_reset_and_hide_bgs
-	ldr r0, =gIntroBattlePokeBallGfx
+	ldr r0, =gIntro3Pokeball_Gfx
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZ77UnCompVram
-	ldr r0, =gIntroBattlePokeBallTilemap
+	ldr r0, =gIntro3Pokeball_Tilemap
 	ldr r1, =0x06004000
 	bl LZ77UnCompVram
-	ldr r0, =gIntroBattlePokeBallPal
+	ldr r0, =gIntro3PokeballPal
 	movs r2, 0x80
 	lsls r2, 2
 	movs r1, 0

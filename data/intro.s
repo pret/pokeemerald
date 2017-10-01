@@ -4,79 +4,79 @@
 	.section .rodata
 
 	.align 2
-gIntroLeavesDropsPal:: @ 85DFF90
-	.incbin "graphics/intro/leaves_drops.gbapal"
+gIntro1DropsPal:: @ 85DFF90
+	.incbin "graphics/intro/intro1_drops.gbapal"
 
 	.align 2
-gIntroLeavesGFLogoPal:: @ 85DFFB0
-	.incbin "graphics/intro/leaves_gflogo.gbapal"
+gIntro1GFLogoPal:: @ 85DFFB0
+	.incbin "graphics/intro/intro1_gflogo.gbapal"
 
 	.align 2
-gIntroLeavesGFLogoGfx:: @ 85DFFD0
-	.incbin "graphics/intro/leaves_gflogo.4bpp.lz"
+gIntroTiles:: @ 85DFFD0
+	.incbin "graphics/intro/intro.4bpp.lz"
 
 	.align 2
-gIntroLeavesPal:: @ 85E05C4
-	.incbin "graphics/intro/leaves.gbapal"
+gIntro1BGPals:: @ 85E05C4
+	.incbin "graphics/intro/intro1_bgpal.gbapal"
 
 	.align 2
-gIntroLeavesForegroundTilemap:: @ 85E07C4
-	.incbin "graphics/intro/leaves_foreground.bin.lz"
+gIntro1BG0_Tilemap:: @ 85E07C4
+	.incbin "graphics/intro/intro1_bg0_map.bin.lz"
 
 	.align 2
-gIntroLeavesMidgroundTilemap:: @ 85E0B78
-	.incbin "graphics/intro/leaves_midground.bin.lz"
+gIntro1BG1_Tilemap:: @ 85E0B78
+	.incbin "graphics/intro/intro1_bg1_map.bin.lz"
 
 	.align 2
-gIntroLeavesBgLeavesTilemap:: @ 85E0EAC
-	.incbin "graphics/intro/leaves_bgleaves.bin.lz"
+gIntro1BG2_Tilemap:: @ 85E0EAC
+	.incbin "graphics/intro/intro1_bg2_map.bin.lz"
 
 	.align 2
-gIntroLeavesBgMountainsTilemap:: @ 85E119C
-	.incbin "graphics/intro/leaves_bgmountains.bin.lz"
+gIntro1BG3_Tilemap:: @ 85E119C
+	.incbin "graphics/intro/intro1_bg3_map.bin.lz"
 
 	.align 2
-gIntroLeavesBgGfx:: @ 85E13B4
-	.incbin "graphics/intro/leaves_bg.4bpp.lz"
+gIntro1BGLeavesGfx:: @ 85E13B4
+	.incbin "graphics/intro/introgfx.4bpp.lz"
 
 	.align 2
-gIntroBattlePokeBallPal:: @ 85E3524
-	.incbin "graphics/intro/battle_pokeball.gbapal"
+gIntro3PokeballPal:: @ 85E3524
+	.incbin "graphics/intro/intro3_pokeball.gbapal"
 
 	.align 2
-gIntroBattlePokeBallTilemap:: @ 85E3724
-	.incbin "graphics/intro/battle_pokeball.bin.lz"
+gIntro3Pokeball_Tilemap:: @ 85E3724
+	.incbin "graphics/intro/intro3_pokeball_map.bin.lz"
 
 	.align 2
-gIntroBattlePokeBallGfx:: @ 85E3854
-	.incbin "graphics/intro/battle_pokeball.8bpp.lz"
+gIntro3Pokeball_Gfx:: @ 85E3854
+	.incbin "graphics/intro/intro3_pokeball.8bpp.lz"
 
 	.align 2
-	.incbin "graphics/intro/battle_streaks.gbapal"
+	.incbin "graphics/intro/intro3_streaks.gbapal"
 
 	.align 2
-	.incbin "graphics/intro/battle_streaks.4bpp.lz"
+	.incbin "graphics/intro/intro3_streaks.4bpp.lz"
 
 	.align 2
-	.incbin "graphics/intro/battle_streaks.bin.lz"
+	.incbin "graphics/intro/intro3_streaks_map.bin.lz"
 
 	.align 2
-gIntroBattleCirclePal:: @ 85E4570
-	.incbin "graphics/intro/battle_circle_1.gbapal"
+gIntro3Misc1Pal:: @ 85E4570
+	.incbin "graphics/intro/intro3_misc1.gbapal"
 
 	.align 2
-	.incbin "graphics/intro/battle_circle_2.gbapal"
+	.incbin "graphics/intro/intro3_misc2.gbapal"
 
 	.align 2
-gIntroBattleCircleGfx:: @ 85E45B0
-	.incbin "graphics/intro/battle_circle.4bpp.lz"
+gIntro3MiscTiles:: @ 85E45B0
+	.incbin "graphics/intro/intro3_misc.4bpp.lz"
 
 	.align 2
-gIntroFlyingPkmnSilhouettePal:: @ 85E492C
-	.incbin "graphics/intro/flying_silhouette.gbapal"
+gIntro1FlygonPal:: @ 85E492C
+	.incbin "graphics/intro/intro1_flygon.gbapal"
 
 	.align 2
-	.incbin "graphics/intro/latis.4bpp.lz"
+	.incbin "graphics/intro/intro1_eon.4bpp.lz"
 
 	.align 2
 	.byte 0x02, 0x03, 0x04, 0x05, 0x01, 0x01, 0x01, 0x06
@@ -90,12 +90,12 @@ gIntroFlyingPkmnSilhouettePal:: @ 85E492C
 
 	.align 2
 gUnknown_085E4A74:: @ 85E4A74
-	obj_tiles gIntroLeavesDropletSparkleGfx, 0x0400, 0x05e1
+	obj_tiles gIntro1SparkleGfx, 0x0400, 0x05e1
 	null_obj_tiles
 
 	.align 2
 gUnknown_085E4A84:: @ 85E4A84
-	obj_pal gIntroRayquazaLightningPal, 0x05e1
+	obj_pal gIntro3LightningPal, 0x05e1
 	null_obj_pal
 
 	.align 2
@@ -122,16 +122,16 @@ gUnknown_085E4AD0:: @ 85E4AD0
 
 	.align 2
 gUnknown_085E4AE8:: @ 85E4AE8
-	obj_tiles gIntroVolbeatGfx, 0x0400, 0x05dc
-	obj_tiles gIntroTorchicGfx, 0x0c00, 0x05dd
-	obj_tiles gIntroManectricGfx, 0x2000, 0x05de
+	obj_tiles gIntro2VolbeatGfx, 0x0400, 0x05dc
+	obj_tiles gIntro2TorchicGfx, 0x0c00, 0x05dd
+	obj_tiles gIntro2ManectricGfx, 0x2000, 0x05de
 	null_obj_tiles
 
 	.align 2
 gUnknown_085E4B08:: @ 85E4B08
-	obj_pal gIntroVolbeatPal, 0x05dc
-	obj_pal gIntroTorchicPal, 0x05dd
-	obj_pal gIntroManectricPal, 0x05de
+	obj_pal gIntro2VolbeatPal, 0x05dc
+	obj_pal gIntro2TorchicPal, 0x05dd
+	obj_pal gIntro2ManectricPal, 0x05de
 	null_obj_pal
 
 	.align 2
@@ -194,12 +194,12 @@ gUnknown_085E4BDC:: @ 85E4BDC
 
 	.align 2
 gUnknown_085E4BF4:: @ 85E4BF4
-	obj_tiles gIntroRayquazaLightningGfx, 0x0c00, 0x05df
+	obj_tiles gIntro3LightningGfx, 0x0c00, 0x05df
 	null_obj_tiles
 
 	.align 2
 gUnknown_085E4C04:: @ 85E4C04
-	obj_pal gIntroRayquazaLightningPal, 0x05df
+	obj_pal gIntro3LightningPal, 0x05df
 	null_obj_pal
 
 	.align 2
@@ -236,12 +236,12 @@ gUnknown_085E4C64:: @ 85E4C64
 
 	.align 2
 gUnknown_085E4C88:: @ 85E4C88
-	obj_tiles gIntroKyogreBubblesGfx, 0x0600, 0x05e0
+	obj_tiles gIntro2BubblesGfx, 0x0600, 0x05e0
 	null_obj_tiles
 
 	.align 2
 gUnknown_085E4C98:: @ 85E4C98
-	obj_pal gIntroKyogreBubblesPal, 0x05e0
+	obj_pal gIntro2BubblesPal, 0x05e0
 	null_obj_pal
 
 	.align 2
@@ -488,18 +488,18 @@ gUnknown_085E4FC4:: @ 85E4FC4
 
 	.align 2
 gUnknown_085E4FDC:: @ 85E4FDC
-	obj_tiles gIntroLeavesGFLogoGfx, 0x1400, 0x07d0
+	obj_tiles gIntroTiles, 0x1400, 0x07d0
 	null_obj_tiles
 
 gUnknown_085E4FEC:: @ 85E4FEC
-	obj_tiles gIntroFlygonSilhouette, 0x0400, 0x07d2
+	obj_tiles gIntro1FlygonGfx, 0x0400, 0x07d2
 	null_obj_tiles
 
 	.align 2
 gUnknown_085E4FFC:: @ 85E4FFC
-	obj_pal gIntroLeavesDropsPal, 0x07d0
-	obj_pal gIntroLeavesGFLogoPal, 0x07d1
-	obj_pal gIntroFlyingPkmnSilhouettePal, 0x07d2
+	obj_pal gIntro1DropsPal, 0x07d0
+	obj_pal gIntro1GFLogoPal, 0x07d1
+	obj_pal gIntro1FlygonPal, 0x07d2
 	null_obj_pal
 
 	.align 2
@@ -520,10 +520,10 @@ gUnknown_085E5030:: @ 85E5030
 
 	.align 2
 gUnknown_085E5048:: @ 85E5048
-	obj_tiles gIntroBattleCircleGfx, 0x0a00, 0x07d3
+	obj_tiles gIntro3MiscTiles, 0x0a00, 0x07d3
 	null_obj_tiles
 
 gUnknown_085E5058:: @ 85E5058
-	obj_pal gIntroBattleCirclePal, 0x07d3
+	obj_pal gIntro3Misc1Pal, 0x07d3
 	null_obj_pal
 
