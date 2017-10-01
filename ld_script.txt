@@ -110,7 +110,6 @@ SECTIONS {
         asm/reset_rtc_screen.o(.text);
         src/start_menu.o(.text);
         asm/start_menu.o(.text);
-        asm/tileset.o(.text);
         src/palette.o(.text);
         src/sound.o(.text);
         asm/battle_anim.o(.text);
@@ -357,7 +356,7 @@ SECTIONS {
         data/reset_rtc_screen.o(.rodata);
         data/start_menu.o(.rodata);
         data/tileset.o(.rodata);
-        data/palette.o(.rodata);
+        src/palette.o(.rodata);
         data/fanfares.o(.rodata);
         data/battle_anims.o(.rodata);
         data/title_screen.o(.rodata);

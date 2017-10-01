@@ -16,32 +16,8 @@ gUnknown_03000000: @ 3000000
     .include "src/rom4.o"
     .include "src/field_camera.o"
     .include "src/script.o"
-
-.align 2
-gUnknown_03000F30: @ 3000F30
-	.space 0x4
-
-gUnknown_03000F34: @ 3000F34
-	.space 0x2
-
-gUnknown_03000F36: @ 3000F36
-	.space 0x2
-
-gUnknown_03000F38: @ 3000F38
-	.space 0x2
-
-gUnknown_03000F3A: @ 3000F3A
-	.space 0x2
-
-gUnknown_03000F3C: @ 3000F3C
-	.space 0x4
-
-gUnknown_03000F40: @ 3000F40
-	.space 0x4
-
-gUnknown_03000F44: @ 3000F44
-	.space 0x4
-
+    .include "src/scrcmd.o"
+    .include "src/palette.o"
     .include "src/sound.o"
 
 gUnknown_03000F50: @ 3000F50

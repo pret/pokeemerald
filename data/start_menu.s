@@ -26,4 +26,4 @@ gUnknown_085105AC:: @ 85105AC
 	.incbin "baserom.gba", 0x5105ac, 0x10
 
 gUnknown_085105BC:: @ 85105BC
-	.incbin "baserom.gba", 0x5105bc, 0x1a8
+	.incbin "baserom.gba", 0x5105bc, 0x8
