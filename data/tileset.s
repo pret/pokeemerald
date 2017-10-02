@@ -15,7 +15,7 @@ gUnknown_085106C4::
 
 	.space 0x20
 
-gUnknown_08510764:: @ 8510764
+gTilesetAnims_General0:: @ 8510764
 @ replacing .incbin "baserom.gba", 0x00510764, 0x10
 	.4byte gUnknown_08510644
 	.4byte gUnknown_085105C4
@@ -47,7 +47,7 @@ gUnknown_085121B4::
 	.incbin "baserom.gba", 0x5121b4, 0x3c0
 
 
-gUnknown_08512574:: @ 8512574
+gTilesetAnims_General1:: @ 8512574
 @ replacing .incbin "baserom.gba", 0x00512574, 0x20
 	.4byte gUnknown_08510774
 	.4byte gUnknown_08510B34
@@ -80,7 +80,7 @@ gUnknown_08512D14::
 	.incbin "baserom.gba", 0x512d14, 0x140
 
 
-gUnknown_08512E54:: @ 8512E54
+gTilesetAnims_General2:: @ 8512E54
 @ replacing .incbin "baserom.gba", 0x00512e54, 0x20
 	.4byte gUnknown_08512594
 	.4byte gUnknown_085126D4
@@ -104,7 +104,7 @@ gUnknown_085130B4::
 	.incbin "baserom.gba", 0x5130b4, 0xc0
 
 
-gUnknown_08513174:: @ 8513174
+gTilesetAnims_General3:: @ 8513174
 @ replacing .incbin "baserom.gba", 0x00513174, 0x10
 	.4byte gUnknown_08512E74
 	.4byte gUnknown_08512F34
@@ -124,7 +124,7 @@ gUnknown_08513544::
 	.incbin "baserom.gba", 0x513544, 0x140
 
 
-gUnknown_08513684:: @ 8513684
+gTilesetAnims_General4:: @ 8513684
 @ replacing .incbin "baserom.gba", 0x00513684, 0x10
 	.4byte gUnknown_08513184
 	.4byte gUnknown_085132C4
@@ -144,7 +144,7 @@ gUnknown_08513814::
 	.incbin "baserom.gba", 0x513814, 0x80
 
 
-gUnknown_08513894:: @ 8513894
+gTilesetAnims_Lavaridge0:: @ 8513894
 @ replacing .incbin "baserom.gba", 0x00513894, 0x10
 	.4byte gUnknown_08513694
 	.4byte gUnknown_08513714
@@ -161,7 +161,7 @@ gUnknown_08514024::
 	.incbin "baserom.gba", 0x514024, 0x3c0
 
 
-gUnknown_085143E4:: @ 85143E4
+gTilesetAnims_Pacifidlog0:: @ 85143E4
 @ replacing .incbin "baserom.gba", 0x005143e4, 0x10
 	.4byte gUnknown_085138A4
 	.4byte gUnknown_08513C64
@@ -181,7 +181,7 @@ gUnknown_08514574::
 	.incbin "baserom.gba", 0x514574, 0x80
 
 
-gUnknown_085145F4:: @ 85145F4
+gTilesetAnims_Underwater0:: @ 85145F4
 @ replacing .incbin "baserom.gba", 0x005145f4, 0x10
 	.4byte gUnknown_085143F4
 	.4byte gUnknown_08514474
@@ -213,7 +213,7 @@ gUnknown_08514D04::
 	.incbin "baserom.gba", 0x514d04, 0x100
 
 
-gUnknown_08514E04:: @ 8514E04
+gTilesetAnims_Pacifidlog1:: @ 8514E04
 @ replacing .incbin "baserom.gba", 0x00514e04, 0x20
 	.4byte gUnknown_08514604
 	.4byte gUnknown_08514704
@@ -256,7 +256,7 @@ gUnknown_085152A4::
 
 	.space 0x20
 
-gUnknown_08515344:: @ 8515344
+gTilesetAnims_MauvilleVDests0:: @ 8515344
 @ replacing .incbin "baserom.gba", 0x00515344, 0x20
 	.4byte BG_VRAM + 0x4c00
 	.4byte BG_VRAM + 0x4c80
@@ -267,7 +267,7 @@ gUnknown_08515344:: @ 8515344
 	.4byte BG_VRAM + 0x4f00
 	.4byte BG_VRAM + 0x4f80
 
-gUnknown_08515364:: @ 8515364
+gTilesetAnims_MauvilleVDests1:: @ 8515364
 @ replacing .incbin "baserom.gba", 0x00515364, 0x20
 	.4byte BG_VRAM + 0x5000
 	.4byte BG_VRAM + 0x5080
@@ -278,7 +278,7 @@ gUnknown_08515364:: @ 8515364
 	.4byte BG_VRAM + 0x5300
 	.4byte BG_VRAM + 0x5380
 
-gUnknown_08515384:: @ 8515384
+gTilesetAnims_Mauville0a:: @ 8515384
 @ replacing .incbin "baserom.gba", 0x00515384, 0x30
 	.4byte gUnknown_08514E24
 	.4byte gUnknown_08514E24
@@ -293,7 +293,7 @@ gUnknown_08515384:: @ 8515384
 	.4byte gUnknown_08514F24
 	.4byte gUnknown_08514EA4
 
-gUnknown_085153B4:: @ 85153B4
+gTilesetAnims_Mauville0b:: @ 85153B4
 @ replacing .incbin "baserom.gba", 0x005153b4, 0x30
 	.4byte gUnknown_085150A4
 	.4byte gUnknown_085150A4
@@ -308,14 +308,14 @@ gUnknown_085153B4:: @ 85153B4
 	.4byte gUnknown_085151A4
 	.4byte gUnknown_08515124
 
-gUnknown_085153E4:: @ 85153E4
+gTilesetAnims_Mauville1a:: @ 85153E4
 @ replacing .incbin "baserom.gba", 0x005153e4, 0x10
 	.4byte gUnknown_08514E24
 	.4byte gUnknown_08514E24
 	.4byte gUnknown_08515024
 	.4byte gUnknown_08515024
 
-gUnknown_085153F4:: @ 85153F4
+gTilesetAnims_Mauville1b:: @ 85153F4
 @ replacing .incbin "baserom.gba", 0x005153f4, 0x10
 	.4byte gUnknown_085150A4
 	.4byte gUnknown_085150A4
@@ -347,7 +347,7 @@ gUnknown_08515784::
 	.incbin "baserom.gba", 0x515784, 0x80
 
 
-gUnknown_08515804:: @ 8515804
+gTilesetAnims_RustboroVDests0:: @ 8515804
     .4byte BG_VRAM + 0x5000
 	.4byte BG_VRAM + 0x5080
 	.4byte BG_VRAM + 0x5100
@@ -357,7 +357,7 @@ gUnknown_08515804:: @ 8515804
 	.4byte BG_VRAM + 0x5300
 	.4byte BG_VRAM + 0x5380
 
-gUnknown_08515824:: @ 8515824
+gTilesetAnims_Rustboro0:: @ 8515824
 @ replacing .incbin "baserom.gba", 0x00515824, 0x20
 	.4byte gUnknown_08515404
 	.4byte gUnknown_08515484
@@ -377,7 +377,7 @@ gUnknown_085158C4::
 	.space 0x20
 
 
-gUnknown_08515964:: @ 8515964
+gTilesetAnims_Rustboro1:: @ 8515964
 @ replacing .incbin "baserom.gba", 0x00515964, 0x8
 	.4byte gUnknown_08515844
 	.4byte gUnknown_085158C4
@@ -409,7 +409,7 @@ gUnknown_08515CEC::
     .space 0x20
 
 
-gUnknown_08515D8C:: @ 8515D8C
+gTilesetAnims_Lavaridge1_Cave0:: @ 8515D8C
 @ replacing .incbin "baserom.gba", 0x00515d8c, 0x10
 	.4byte gUnknown_0851596C
 	.4byte gUnknown_085159EC
@@ -443,7 +443,7 @@ gUnknown_0851611C::
 	.space 0x20
 
 
-gUnknown_085161BC:: @ 85161BC
+gTilesetAnims_EverGrandeVDests0:: @ 85161BC
 @ replacing .incbin "baserom.gba", 0x005161bc, 0x20
 	.4byte BG_VRAM + 0x5c00
 	.4byte BG_VRAM + 0x5c80
@@ -454,7 +454,7 @@ gUnknown_085161BC:: @ 85161BC
 	.4byte BG_VRAM + 0x5f00
 	.4byte BG_VRAM + 0x5f80
 
-gUnknown_085161DC:: @ 85161DC
+gTilesetAnims_EverGrande0:: @ 85161DC
 @ replacing .incbin "baserom.gba", 0x005161dc, 0x20
 	.4byte gUnknown_08515D9C
 	.4byte gUnknown_08515E1C
@@ -478,7 +478,7 @@ gUnknown_0851643C::
 	.incbin "baserom.gba", 0x51643c, 0xc0
 
 
-gUnknown_085164FC:: @ 85164FC
+gTilesetAnims_Dewford0:: @ 85164FC
 @ replacing .incbin "baserom.gba", 0x005164fc, 0x10
 	.4byte gUnknown_085161FC
 	.4byte gUnknown_085162BC
@@ -498,7 +498,7 @@ gUnknown_0851674C::
 	.incbin "baserom.gba", 0x51674c, 0xc0
 
 
-gUnknown_0851680C:: @ 851680C
+gTilesetAnims_BattleFrontierOutsideWest0:: @ 851680C
 @ replacing .incbin "baserom.gba", 0x0051680c, 0x10
 	.4byte gUnknown_0851650C
 	.4byte gUnknown_085165CC
@@ -518,7 +518,7 @@ gUnknown_08516A5C::
 	.incbin "baserom.gba", 0x516a5c, 0xc0
 
 
-gUnknown_08516B1C:: @ 8516B1C
+gTilesetAnims_BattleFrontierOutsideEast0:: @ 8516B1C
 @ replacing .incbin "baserom.gba", 0x00516b1c, 0x10
 	.4byte gUnknown_0851681C
 	.4byte gUnknown_085168DC
@@ -538,7 +538,7 @@ gUnknown_08516CAC::
 	.incbin "baserom.gba", 0x516cac, 0x80
 
 
-gUnknown_08516D2C:: @ 8516D2C
+gTilesetAnims_Slateport0:: @ 8516D2C
 @ replacing .incbin "baserom.gba", 0x00516d2c, 0x10
 	.4byte gUnknown_08516B2C
 	.4byte gUnknown_08516BAC
@@ -552,7 +552,7 @@ gUnknown_08516DBC::
 	.incbin "baserom.gba", 0x516dbc, 0x80
 
 
-gUnknown_08516E3C:: @ 8516E3C
+gTilesetAnims_InsideBuilding0:: @ 8516E3C
 @ replacing .incbin "baserom.gba", 0x00516e3c, 0x8
 	.4byte gUnknown_08516D3C
 	.4byte gUnknown_08516DBC
@@ -576,13 +576,13 @@ gUnknown_085177C4::
 	.incbin "baserom.gba", 0x5177c4, 0x280
 
 
-gUnknown_08517A44:: @ 8517A44
+gTilesetAnims_SootopolisGym0:: @ 8517A44
 @ replacing .incbin "baserom.gba", 0x00517a44, 0xc
 	.4byte gUnknown_08516E44
 	.4byte gUnknown_08516FC4
 	.4byte gUnknown_08517144
 
-gUnknown_08517A50:: @ 8517A50
+gTilesetAnims_SootopolisGym1:: @ 8517A50
 @ replacing .incbin "baserom.gba", 0x00517a50, 0xc
 	.4byte gUnknown_085172C4
 	.4byte gUnknown_08517544
@@ -609,14 +609,14 @@ gUnknown_08517BBC::
 	.space 0x20
 
 
-gUnknown_08517BFC:: @ 8517BFC
+gTilesetAnims_EliteFour1:: @ 8517BFC
 @ replacing .incbin "baserom.gba", 0x00517bfc, 0x10
 	.4byte gUnknown_08517B5C
 	.4byte gUnknown_08517B7C
 	.4byte gUnknown_08517B9C
 	.4byte gUnknown_08517BBC
 
-gUnknown_08517C0C:: @ 8517C0C
+gTilesetAnims_EliteFour0:: @ 8517C0C
 @ replacing .incbin "baserom.gba", 0x00517c0c, 0x8
 	.4byte gUnknown_08517A5C
 	.4byte gUnknown_08517ADC
@@ -630,7 +630,7 @@ gUnknown_08517E14::
 	.space 0x20
 
 
-gUnknown_08518034:: @ 8518034
+gTilesetAnims_MauvilleGym0:: @ 8518034
 @ replacing .incbin "baserom.gba", 0x00518034, 0x8
 	.4byte gUnknown_08517C14
 	.4byte gUnknown_08517E14
@@ -643,7 +643,7 @@ gUnknown_0851815C::
 
 	.space 0x20
 
-gUnknown_0851829C:: @ 851829C
+gTilesetAnims_BikeShop0:: @ 851829C
 @ replacing .incbin "baserom.gba", 0x0051829c, 0x8
 	.4byte gUnknown_0851803C
 	.4byte gUnknown_0851815C
@@ -686,7 +686,7 @@ gUnknown_0851F2C4::
 gUnknown_0851FAC4::
 	.incbin "baserom.gba", 0x51fac4, 0x800
 
-gUnknown_085202C4:: @ 85202C4
+gTilesetAnims_Sootopolis0:: @ 85202C4
 @ replacing .incbin "baserom.gba", 0x005202c4, 0x20
 	.4byte gUnknown_085182A4
 	.4byte gUnknown_08518EA4
@@ -727,14 +727,13 @@ gUnknown_08524604::
 gUnknown_08524804::
 	.incbin "baserom.gba", 0x524804, 0x60
 
-
-gUnknown_08524864:: @ 8524864
+gTilesetAnims_BattlePyramid0:: @ 8524864
 @ replacing .incbin "baserom.gba", 0x00524864, 0xc
 	.4byte gUnknown_085202E4
 	.4byte gUnknown_085203E4
 	.4byte gUnknown_085204E4
 
-gUnknown_08524870:: @ 8524870
+gTilesetAnims_BattlePyramid1:: @ 8524870
 @ replacing .incbin "baserom.gba", 0x00524870, 0xc
 	.4byte gUnknown_08520604
 	.4byte gUnknown_08520704

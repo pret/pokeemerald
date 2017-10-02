@@ -31,48 +31,48 @@ static void cur_mapheader_run_tileset2_func(void);
 
 // .rodata
 
-extern const u16 *const gUnknown_08510764[];
-extern const u16 *const gUnknown_08512574[];
-extern const u16 *const gUnknown_08512E54[];
-extern const u16 *const gUnknown_08513174[];
-extern const u16 *const gUnknown_08513684[];
-extern const u16 *const gUnknown_08513894[];
-extern const u16 *const gUnknown_085143E4[];
-extern const u16 *const gUnknown_085145F4[];
-extern const u16 *const gUnknown_08514E04[];
-extern u16 *const gUnknown_08515344[];
-extern u16 *const gUnknown_08515364[];
-extern const u16 *const gUnknown_08515384[];
-extern const u16 *const gUnknown_085153B4[];
-extern const u16 *const gUnknown_085153E4[];
-extern const u16 *const gUnknown_085153F4[];
-extern  u16 *const gUnknown_08515804[];
-extern const u16 *const gUnknown_08515824[];
-extern const u16 *const gUnknown_08515964[];
-extern const u16 *const gUnknown_08515D8C[];
-extern  u16 *const gUnknown_085161BC[];
-extern const u16 *const gUnknown_085161DC[];
-extern const u16 *const gUnknown_085164FC[];
-extern const u16 *const gUnknown_0851680C[];
-extern const u16 *const gUnknown_08516B1C[];
-extern const u16 *const gUnknown_08516D2C[];
-extern const u16 *const gUnknown_08516E3C[];
-extern const u16 *const gUnknown_08517A44[];
-extern const u16 *const gUnknown_08517A50[];
-extern const u16 *const gUnknown_08517BFC[];
-extern const u16 *const gUnknown_08517C0C[];
-extern const u16 *const gUnknown_08518034[];
-extern const u16 *const gUnknown_0851829C[];
-extern const u16 *const gUnknown_085202C4[];
-extern const u16 *const gUnknown_08524864[];
-extern const u16 *const gUnknown_08524870[];
+extern const u16 *const gTilesetAnims_General0[];
+extern const u16 *const gTilesetAnims_General1[];
+extern const u16 *const gTilesetAnims_General2[];
+extern const u16 *const gTilesetAnims_General3[];
+extern const u16 *const gTilesetAnims_General4[];
+extern const u16 *const gTilesetAnims_Lavaridge0[];
+extern const u16 *const gTilesetAnims_Pacifidlog0[];
+extern const u16 *const gTilesetAnims_Underwater0[];
+extern const u16 *const gTilesetAnims_Pacifidlog1[];
+extern u16 *const gTilesetAnims_MauvilleVDests0[];
+extern u16 *const gTilesetAnims_MauvilleVDests1[];
+extern const u16 *const gTilesetAnims_Mauville0a[];
+extern const u16 *const gTilesetAnims_Mauville0b[];
+extern const u16 *const gTilesetAnims_Mauville1a[];
+extern const u16 *const gTilesetAnims_Mauville1b[];
+extern  u16 *const gTilesetAnims_RustboroVDests0[];
+extern const u16 *const gTilesetAnims_Rustboro0[];
+extern const u16 *const gTilesetAnims_Rustboro1[];
+extern const u16 *const gTilesetAnims_Lavaridge1_Cave0[];
+extern  u16 *const gTilesetAnims_EverGrandeVDests0[];
+extern const u16 *const gTilesetAnims_EverGrande0[];
+extern const u16 *const gTilesetAnims_Dewford0[];
+extern const u16 *const gTilesetAnims_BattleFrontierOutsideWest0[];
+extern const u16 *const gTilesetAnims_BattleFrontierOutsideEast0[];
+extern const u16 *const gTilesetAnims_Slateport0[];
+extern const u16 *const gTilesetAnims_InsideBuilding0[];
+extern const u16 *const gTilesetAnims_SootopolisGym0[];
+extern const u16 *const gTilesetAnims_SootopolisGym1[];
+extern const u16 *const gTilesetAnims_EliteFour1[];
+extern const u16 *const gTilesetAnims_EliteFour0[];
+extern const u16 *const gTilesetAnims_MauvilleGym0[];
+extern const u16 *const gTilesetAnims_BikeShop0[];
+extern const u16 *const gTilesetAnims_Sootopolis0[];
+extern const u16 *const gTilesetAnims_BattlePyramid0[];
+extern const u16 *const gTilesetAnims_BattlePyramid1[];
 
 extern const u16 gUnknown_08D85640[];
 extern const u16 gUnknown_08D85660[];
 extern const u16 gUnknown_08D85680[];
 extern const u16 gUnknown_08D856A0[];
 
-static const u16 *const gUnknown_0852487C[] = {
+static const u16 *const gTilesetAnims_BattleDomePals0[] = {
     gUnknown_08D85640,
     gUnknown_08D85660,
     gUnknown_08D85680,
@@ -81,24 +81,24 @@ static const u16 *const gUnknown_0852487C[] = {
 
 // .text
 
-static void sub_80A0954(void)
+static void ResetTilesetAnimBuffer(void)
 {
     sTilesetDMA3TransferBufferSize = 0;
     CpuFill32(0, sTilesetDMA3TransferBuffer, sizeof sTilesetDMA3TransferBuffer);
 }
 
-static void sub_80A0980(const u16 *a0, u16 *a1, u16 a2)
+static void AppendTilesetAnimToBuffer(const u16 *src, u16 *dest, u16 size)
 {
     if (sTilesetDMA3TransferBufferSize < 20)
     {
-        sTilesetDMA3TransferBuffer[sTilesetDMA3TransferBufferSize].src = a0;
-        sTilesetDMA3TransferBuffer[sTilesetDMA3TransferBufferSize].dest = a1;
-        sTilesetDMA3TransferBuffer[sTilesetDMA3TransferBufferSize].size = a2;
+        sTilesetDMA3TransferBuffer[sTilesetDMA3TransferBufferSize].src = src;
+        sTilesetDMA3TransferBuffer[sTilesetDMA3TransferBufferSize].dest = dest;
+        sTilesetDMA3TransferBuffer[sTilesetDMA3TransferBufferSize].size = size;
         sTilesetDMA3TransferBufferSize ++;
     }
 }
 
-void sub_80A09D0(void)
+void TransferTilesetAnimsBuffer(void)
 {
     int i;
 
@@ -111,7 +111,7 @@ void sub_80A09D0(void)
 
 void cur_mapheader_run_tileset_funcs_after_some_cpuset(void)
 {
-    sub_80A0954();
+    ResetTilesetAnimBuffer();
     cur_mapheader_run_tileset1_func();
     cur_mapheader_run_tileset2_func();
 }
@@ -123,7 +123,7 @@ void sub_80A0A2C(void)
 
 void sub_80A0A38(void)
 {
-    sub_80A0954();
+    ResetTilesetAnimBuffer();
     if (++sPrimaryTilesetCBCounter >= sPrimaryTilesetCBBufferSize)
         sPrimaryTilesetCBCounter = 0;
     if (++sSecondaryTilesetCBCounter >= sSecondaryTilesetCBBufferSize)
@@ -203,7 +203,7 @@ static void sub_80A0BCC(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08510764[idx], (u16 *)(BG_VRAM + 0x3F80), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_General0[idx], (u16 *)(BG_VRAM + 0x3F80), 0x80);
 }
 
 static void sub_80A0BF4(u16 timer)
@@ -211,7 +211,7 @@ static void sub_80A0BF4(u16 timer)
     u8 idx;
 
     idx = timer % 8;
-    sub_80A0980(gUnknown_08512574[idx], (u16 *)(BG_VRAM + 0x3600), 0x3C0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_General1[idx], (u16 *)(BG_VRAM + 0x3600), 0x3C0);
 }
 
 static void sub_80A0C1C(u16 timer)
@@ -219,7 +219,7 @@ static void sub_80A0C1C(u16 timer)
     u16 idx;
 
     idx = timer % 8;
-    sub_80A0980(gUnknown_08512E54[idx], (u16 *)(BG_VRAM + 0x3a00), 0x140);
+    AppendTilesetAnimToBuffer(gTilesetAnims_General2[idx], (u16 *)(BG_VRAM + 0x3a00), 0x140);
 }
 
 static void sub_80A0C44(u16 timer)
@@ -227,7 +227,7 @@ static void sub_80A0C44(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08513174[idx], (u16 *)(BG_VRAM + 0x3e00), 0xc0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_General3[idx], (u16 *)(BG_VRAM + 0x3e00), 0xc0);
 }
 
 void TilesetCb_Petalburg(void)
@@ -580,7 +580,7 @@ static void sub_80A12AC(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08513684[idx], (u16 *)(BG_VRAM + 0x3c00), 0x140);
+    AppendTilesetAnimToBuffer(gTilesetAnims_General4[idx], (u16 *)(BG_VRAM + 0x3c00), 0x140);
 }
 
 static void sub_80A12D4(u8 timer)
@@ -588,10 +588,10 @@ static void sub_80A12D4(u8 timer)
     u8 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08513894[idx], (u16 *)(BG_VRAM + 0x6400), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge0[idx], (u16 *)(BG_VRAM + 0x6400), 0x80);
 
     idx = (timer + 2) % 4;
-    sub_80A0980(gUnknown_08513894[idx], (u16 *)(BG_VRAM + 0x6480), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge0[idx], (u16 *)(BG_VRAM + 0x6480), 0x80);
 }
 
 static void sub_80A131C(u8 timer)
@@ -599,7 +599,7 @@ static void sub_80A131C(u8 timer)
     u8 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_085143E4[idx], (u16 *)(BG_VRAM + 0x7a00), 0x3C0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Pacifidlog0[idx], (u16 *)(BG_VRAM + 0x7a00), 0x3C0);
 }
 
 static void sub_80A1344(u8 timer)
@@ -607,7 +607,7 @@ static void sub_80A1344(u8 timer)
     u8 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_085145F4[idx], (u16 *)(BG_VRAM + 0x7e00), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Underwater0[idx], (u16 *)(BG_VRAM + 0x7e00), 0x80);
 }
 
 static void sub_80A136C(u8 timer)
@@ -615,7 +615,7 @@ static void sub_80A136C(u8 timer)
     u8 idx;
 
     idx = timer % 8;
-    sub_80A0980(gUnknown_08514E04[idx], (u16 *)(BG_VRAM + 0x7e00), 0x100);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Pacifidlog1[idx], (u16 *)(BG_VRAM + 0x7e00), 0x100);
 }
 
 static void sub_80A1394(u16 timer_div, u8 timer_mod)
@@ -624,14 +624,14 @@ static void sub_80A1394(u16 timer_div, u8 timer_mod)
     if (timer_div < 12) // almost certainly a typo
     {
         timer_div %= 12;
-        sub_80A0980(gUnknown_08515384[timer_div], gUnknown_08515344[timer_mod], 0x80);
-        sub_80A0980(gUnknown_085153B4[timer_div], gUnknown_08515364[timer_mod], 0x80);
+        AppendTilesetAnimToBuffer(gTilesetAnims_Mauville0a[timer_div], gTilesetAnims_MauvilleVDests0[timer_mod], 0x80);
+        AppendTilesetAnimToBuffer(gTilesetAnims_Mauville0b[timer_div], gTilesetAnims_MauvilleVDests1[timer_mod], 0x80);
     }
     else
     {
         timer_div %= 4;
-        sub_80A0980(gUnknown_085153E4[timer_div], gUnknown_08515344[timer_mod], 0x80);
-        sub_80A0980(gUnknown_085153F4[timer_div], gUnknown_08515364[timer_mod], 0x80);
+        AppendTilesetAnimToBuffer(gTilesetAnims_Mauville1a[timer_div], gTilesetAnims_MauvilleVDests0[timer_mod], 0x80);
+        AppendTilesetAnimToBuffer(gTilesetAnims_Mauville1b[timer_div], gTilesetAnims_MauvilleVDests1[timer_mod], 0x80);
     }
 }
 
@@ -639,8 +639,8 @@ static void sub_80A1434(u16 timer_div, u8 timer_mod)
 {
     timer_div -= timer_mod;
     timer_div %= 8;
-    if (gUnknown_08515824[timer_div])
-        sub_80A0980(gUnknown_08515824[timer_div], gUnknown_08515804[timer_mod], 0x80);
+    if (gTilesetAnims_Rustboro0[timer_div])
+        AppendTilesetAnimToBuffer(gTilesetAnims_Rustboro0[timer_div], gTilesetAnims_RustboroVDests0[timer_mod], 0x80);
 }
 
 static void sub_80A1470(u16 timer)
@@ -648,7 +648,7 @@ static void sub_80A1470(u16 timer)
     u16 idx;
 
     idx = timer % 2;
-    sub_80A0980(gUnknown_08515964[idx], (u16 *)(BG_VRAM + 0x7800), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Rustboro1[idx], (u16 *)(BG_VRAM + 0x7800), 0x80);
 }
 
 static void sub_80A1498(u16 timer)
@@ -656,7 +656,7 @@ static void sub_80A1498(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08515D8C[idx], (u16 *)(BG_VRAM + 0x5400), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge1_Cave0[idx], (u16 *)(BG_VRAM + 0x5400), 0x80);
 }
 
 static void sub_80A14C0(u16 timer_div, u8 timer_mod)
@@ -664,7 +664,7 @@ static void sub_80A14C0(u16 timer_div, u8 timer_mod)
     timer_div -= timer_mod;
     timer_div %= 8;
 
-    sub_80A0980(gUnknown_085161DC[timer_div], gUnknown_085161BC[timer_mod], 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_EverGrande0[timer_div], gTilesetAnims_EverGrandeVDests0[timer_mod], 0x80);
 }
 
 static void sub_80A14F8(u16 timer)
@@ -672,7 +672,7 @@ static void sub_80A14F8(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08515D8C[idx], (u16 *)(BG_VRAM + 0x7400), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge1_Cave0[idx], (u16 *)(BG_VRAM + 0x7400), 0x80);
 }
 
 static void sub_80A1520(u16 timer)
@@ -680,7 +680,7 @@ static void sub_80A1520(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_085164FC[idx], (u16 *)(BG_VRAM + 0x5540), 0xC0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Dewford0[idx], (u16 *)(BG_VRAM + 0x5540), 0xC0);
 }
 
 static void sub_80A1548(u16 timer)
@@ -688,7 +688,7 @@ static void sub_80A1548(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_0851680C[idx], (u16 *)(BG_VRAM + 0x5b40), 0xC0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_BattleFrontierOutsideWest0[idx], (u16 *)(BG_VRAM + 0x5b40), 0xC0);
 }
 
 static void sub_80A1570(u16 timer)
@@ -696,7 +696,7 @@ static void sub_80A1570(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08516B1C[idx], (u16 *)(BG_VRAM + 0x5b40), 0xC0);
+    AppendTilesetAnimToBuffer(gTilesetAnims_BattleFrontierOutsideEast0[idx], (u16 *)(BG_VRAM + 0x5b40), 0xC0);
 }
 
 static void sub_80A1598(u16 timer)
@@ -704,7 +704,7 @@ static void sub_80A1598(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08516D2C[idx], (u16 *)(BG_VRAM + 0x5c00), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Slateport0[idx], (u16 *)(BG_VRAM + 0x5c00), 0x80);
 }
 
 static void sub_80A15C0(u16 timer)
@@ -774,7 +774,7 @@ static void sub_80A1688(u16 timer)
     u16 idx;
 
     idx = timer % 2;
-    sub_80A0980(gUnknown_08516E3C[idx], (u16 *)(BG_VRAM + 0x3e00), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_InsideBuilding0[idx], (u16 *)(BG_VRAM + 0x3e00), 0x80);
 }
 
 static void sub_80A16B0(u16 timer)
@@ -782,8 +782,8 @@ static void sub_80A16B0(u16 timer)
     u16 idx;
 
     idx = timer % 3;
-    sub_80A0980(gUnknown_08517A44[idx], (u16 *)(BG_VRAM + 0x7e00), 0x180);
-    sub_80A0980(gUnknown_08517A50[idx], (u16 *)(BG_VRAM + 0x7a00), 0x280);
+    AppendTilesetAnimToBuffer(gTilesetAnims_SootopolisGym0[idx], (u16 *)(BG_VRAM + 0x7e00), 0x180);
+    AppendTilesetAnimToBuffer(gTilesetAnims_SootopolisGym1[idx], (u16 *)(BG_VRAM + 0x7a00), 0x280);
 }
 
 static void sub_80A16F8(u16 timer)
@@ -791,7 +791,7 @@ static void sub_80A16F8(u16 timer)
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08517BFC[idx], (u16 *)(BG_VRAM + 0x7f00), 0x20);
+    AppendTilesetAnimToBuffer(gTilesetAnims_EliteFour1[idx], (u16 *)(BG_VRAM + 0x7f00), 0x20);
 }
 
 static void sub_80A1720(u16 timer)
@@ -799,7 +799,7 @@ static void sub_80A1720(u16 timer)
     u16 idx;
 
     idx = timer % 2;
-    sub_80A0980(gUnknown_08517C0C[idx], (u16 *)(BG_VRAM + 0x7c00), 0x80);
+    AppendTilesetAnimToBuffer(gTilesetAnims_EliteFour0[idx], (u16 *)(BG_VRAM + 0x7c00), 0x80);
 }
 
 static void sub_80A1748(u16 timer)
@@ -807,7 +807,7 @@ static void sub_80A1748(u16 timer)
     u16 idx;
 
     idx = timer % 2;
-    sub_80A0980(gUnknown_08518034[idx], (u16 *)(BG_VRAM + 0x5200), 0x200);
+    AppendTilesetAnimToBuffer(gTilesetAnims_MauvilleGym0[idx], (u16 *)(BG_VRAM + 0x5200), 0x200);
 }
 
 static void sub_80A1770(u16 timer)
@@ -815,7 +815,7 @@ static void sub_80A1770(u16 timer)
     u16 idx;
 
     idx = timer % 2;
-    sub_80A0980(gUnknown_0851829C[idx], (u16 *)(BG_VRAM + 0x7e00), 0x120);
+    AppendTilesetAnimToBuffer(gTilesetAnims_BikeShop0[idx], (u16 *)(BG_VRAM + 0x7e00), 0x120);
 }
 
 static void sub_80A1798(u16 timer)
@@ -823,7 +823,7 @@ static void sub_80A1798(u16 timer)
     u16 idx;
 
     idx = timer % 8;
-    sub_80A0980(gUnknown_085202C4[idx], (u16 *)(BG_VRAM + 0x5e00), 0xc00);
+    AppendTilesetAnimToBuffer(gTilesetAnims_Sootopolis0[idx], (u16 *)(BG_VRAM + 0x5e00), 0xc00);
 }
 
 static void sub_80A17C0(u16 timer)
@@ -831,7 +831,7 @@ static void sub_80A17C0(u16 timer)
     u16 idx;
 
     idx = timer % 3;
-    sub_80A0980(gUnknown_08524864[idx], (u16 *)(BG_VRAM + 0x52e0), 0x100);
+    AppendTilesetAnimToBuffer(gTilesetAnims_BattlePyramid0[idx], (u16 *)(BG_VRAM + 0x52e0), 0x100);
 }
 
 static void sub_80A17EC(u16 timer)
@@ -839,12 +839,12 @@ static void sub_80A17EC(u16 timer)
     u16 idx;
 
     idx = timer % 3;
-    sub_80A0980(gUnknown_08524870[idx], (u16 *)(BG_VRAM + 0x50e0), 0x100);
+    AppendTilesetAnimToBuffer(gTilesetAnims_BattlePyramid1[idx], (u16 *)(BG_VRAM + 0x50e0), 0x100);
 }
 
 static void sub_80A1818(u16 a1)
 {
-    CpuCopy16(gUnknown_0852487C[a1 & 0x3], gPlttBufferUnfaded + 0x80, 32);
+    CpuCopy16(gTilesetAnims_BattleDomePals0[a1 & 0x3], gPlttBufferUnfaded + 0x80, 32);
     BlendPalette(0x80, 0x10, gPaletteFade.y, gPaletteFade.blendColor & 0x7FFF);
     if ((u8)FindTaskIdByFunc(sub_8149DFC) != 0xFF )
     {
@@ -855,7 +855,7 @@ static void sub_80A1818(u16 a1)
 
 static void sub_80A1884(u16 a1)
 {
-    CpuCopy16(gUnknown_0852487C[a1 & 0x3], gPlttBufferUnfaded + 0x80, 32);
+    CpuCopy16(gTilesetAnims_BattleDomePals0[a1 & 0x3], gPlttBufferUnfaded + 0x80, 32);
     if ((u8)FindTaskIdByFunc(sub_8149DFC) == 0xFF )
     {
         BlendPalette(0x80, 0x10, gPaletteFade.y, gPaletteFade.blendColor & 0x7FFF);
