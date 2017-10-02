@@ -1519,8 +1519,6 @@ void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u
         DoMonFrontSpriteAnimation(sprite, species, noCry, arg3);
 }
 
-bool8 HasTwoFramesAnimation(u16 species);
-
 extern void SpriteCallbackDummy_2(struct Sprite*);
 extern void sub_817F60C(struct Sprite*);
 

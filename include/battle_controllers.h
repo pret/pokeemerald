@@ -47,11 +47,15 @@ void EmitTrainerSlideBack(u8 bufferId);
 void EmitFaintingCry(u8 bufferId);
 void Emit_x37(u8 bufferId, u8 arg1);
 void EmitHitAnimation(u8 bufferId);
-void EmitCmd48(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 arg2);
+void EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8 arg2);
 void EmitCmd49(u8 bufferId);
 void EmitStatusAnimation(u8 bufferId, bool8 status2, u32 status);
 void EmitCmd13(u8 bufferId);
 void EmitStatusIconUpdate(u8 bufferId, u32 status1, u32 status2);
+void EmitIntroSlide(u8 bufferId, u8 terrainId);
+void EmitDrawTrainerPic(u8 bufferId);
+void EmitLoadMonSprite(u8 bufferId);
+void EmitIntroTrainerBallThrow(u8 bufferId);
 
 #define RESET_ACTION_MOVE_SELECTION     0
 #define RESET_ACTION_SELECTION          1

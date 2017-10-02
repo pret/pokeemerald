@@ -178,9 +178,6 @@ extern const u8 gStatusConditionString_ConfusionJpn[];
 extern const u8 gStatusConditionString_LoveJpn[];
 extern const u16 gSoundMovesTable[];
 
-extern u8 b_first_side(u8, u8, u8);
-extern void sub_803CEDC(u8, u8);
-extern void BattleTurnPassed(void);
 extern void sub_803F9EC();
 extern bool8 sub_80423F4(u8 bank, u8, u8);
 extern u8 weather_get_current(void);
@@ -414,7 +411,7 @@ u8 UpdateTurnCounters(void)
                 s32 j;
                 for (j = i + 1; j < gNoOfAllBanks; j++)
                 {
-                    if (b_first_side(gTurnOrder[i], gTurnOrder[j], 0))
+                    if (GetWhoStrikesFirst(gTurnOrder[i], gTurnOrder[j], 0))
                         sub_803CEDC(i, j);
                 }
             }
@@ -1667,7 +1664,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 gBankAttacker = bank;
             switch (gLastUsedAbility)
             {
-            case 0xFF: //weather from overworld
+            case ABILITYEFFECT_SWITCH_IN_WEATHER:
             //_08042A86
                 switch (weather_get_current())
                 {

@@ -3685,7 +3685,7 @@ _0816A48A:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0816A48A
-	ldr r1, =gUnknown_020244AC
+	ldr r1, =gActionSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1

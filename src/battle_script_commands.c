@@ -360,7 +360,7 @@ static void atk5D_getmoneyreward(void);
 static void atk5E_8025A70(void);
 static void atk5F_8025B24(void);
 static void atk60_increment_gamestat(void);
-static void atk61_8025BA4(void);
+static void atk61_draw_party_status_summary(void);
 static void atk62_08025C6C(void);
 static void atk63_jumptorandomattack(void);
 static void atk64_statusanimation(void);
@@ -612,7 +612,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk5E_8025A70,
     atk5F_8025B24,
     atk60_increment_gamestat,
-    atk61_8025BA4,
+    atk61_draw_party_status_summary,
     atk62_08025C6C,
     atk63_jumptorandomattack,
     atk64_statusanimation,
@@ -3251,7 +3251,7 @@ static void atk1B_faint_effects_clear(void)
             MarkBufferBankForExecution(gActiveBank);
         }
 
-        UndoEffectsAfterFainting(); // Effects like attractions, trapping, etc.
+        FaintClearSetData(); // Effects like attractions, trapping, etc.
         gBattlescriptCurrInstr += 2;
     }
 }
@@ -5366,7 +5366,7 @@ static void atk4D_switch_data_update(void)
         gBattleMons[gActiveBank].status2 = oldData.status2;
     }
 
-    SwitchInClearStructs();
+    SwitchInClearSetData();
 
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE && gBattleMons[gActiveBank].maxHP / 2 >= gBattleMons[gActiveBank].hp
         && gBattleMons[gActiveBank].hp != 0 && !(gBattleMons[gActiveBank].status1 & STATUS_SLEEP))
@@ -6411,7 +6411,7 @@ static void atk60_increment_gamestat(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk61_8025BA4(void)
+static void atk61_draw_party_status_summary(void)
 {
     s32 i;
     struct Pokemon* party;
@@ -6442,7 +6442,7 @@ static void atk61_8025BA4(void)
         }
     }
 
-    EmitCmd48(0, hpStatuses, 1);
+    EmitDrawPartyStatusSummary(0, hpStatuses, 1);
     MarkBufferBankForExecution(gActiveBank);
 
     gBattlescriptCurrInstr += 2;

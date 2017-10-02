@@ -47,9 +47,9 @@ SetUpBattleVarsAndBirchZigzagoon: @ 803269C
 	str r0, [sp, 0x10]
 	movs r1, 0
 	ldr r7, =gBattleBankFunc
-	ldr r6, =gUnknown_020244AC
+	ldr r6, =gActionSelectionCursor
 	movs r2, 0
-	ldr r5, =gUnknown_020244B0
+	ldr r5, =gMoveSelectionCursor
 	ldr r4, =nullsub_21
 	ldr r3, =gBanksBySide
 _080326B8:
@@ -222,7 +222,7 @@ b_setup_bx: @ 8032824
 	cmp r5, 0
 	beq _080328E4
 	ldr r1, =gBattleMainFunc
-	ldr r0, =sub_8039ECC
+	ldr r0, =BeginBattleIntro
 	str r0, [r1]
 	movs r4, 0x80
 	lsls r4, 17
@@ -286,7 +286,7 @@ _080328E4:
 	b _080329E0
 _080328F0:
 	ldr r0, =gBattleMainFunc
-	ldr r2, =sub_8039ECC
+	ldr r2, =BeginBattleIntro
 	str r2, [r0]
 	movs r1, 0x80
 	ands r1, r3
@@ -380,7 +380,7 @@ _080329CC:
 	b _08032CB2
 	.pool
 _080329E0:
-	ldr r1, =sub_8039ECC
+	ldr r1, =BeginBattleIntro
 	ldr r2, =gBattleMainFunc
 	str r1, [r2]
 	ldr r2, =gBattleBankFunc
@@ -419,7 +419,7 @@ _08032A20:
 	ands r0, r1
 	cmp r0, r1
 	bne _08032AA0
-	ldr r0, =sub_8039ECC
+	ldr r0, =BeginBattleIntro
 	ldr r1, =gBattleMainFunc
 	str r0, [r1]
 	ldr r0, =SetBankFuncToRecordedPlayerBufferRunCommand
@@ -751,7 +751,7 @@ b_setup_bx_link: @ 8032CC0
 	cmp r4, 0
 	beq _08032D1C
 	ldr r1, =gBattleMainFunc
-	ldr r0, =sub_8039ECC
+	ldr r0, =BeginBattleIntro
 	str r0, [r1]
 	ldr r2, =gBattleBankFunc
 	ldr r0, =SetBankFuncToPlayerBufferRunCommand
@@ -789,7 +789,7 @@ _08032D48:
 	cmp r3, 0
 	beq _08032D98
 	ldr r1, =gBattleMainFunc
-	ldr r0, =sub_8039ECC
+	ldr r0, =BeginBattleIntro
 	str r0, [r1]
 	ldr r2, =gBattleBankFunc
 	ldr r4, =SetBankFuncToPlayerBufferRunCommand
@@ -840,7 +840,7 @@ _08032DD0:
 	cmp r3, 0
 	beq _08032E1C
 	ldr r1, =gBattleMainFunc
-	ldr r0, =sub_8039ECC
+	ldr r0, =BeginBattleIntro
 	str r0, [r1]
 	ldr r2, =gBattleBankFunc
 	ldr r0, =SetBankFuncToPlayerBufferRunCommand
@@ -904,7 +904,7 @@ _08032E8C:
 	cmp r0, 0
 	beq _08032EA4
 	ldr r1, =gBattleMainFunc
-	ldr r0, =sub_8039ECC
+	ldr r0, =BeginBattleIntro
 	str r0, [r1]
 _08032EA4:
 	movs r0, 0
@@ -2247,8 +2247,8 @@ _0803396C:
 	.pool
 	thumb_func_end sub_8033940
 
-	thumb_func_start dp01_build_cmdbuf_x04_4_4_4
-dp01_build_cmdbuf_x04_4_4_4: @ 8033980
+	thumb_func_start EmitLoadMonSprite
+EmitLoadMonSprite: @ 8033980
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2262,7 +2262,7 @@ dp01_build_cmdbuf_x04_4_4_4: @ 8033980
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x04_4_4_4
+	thumb_func_end EmitLoadMonSprite
 
 	thumb_func_start EmitSwitchInAnim
 EmitSwitchInAnim: @ 80339A0
@@ -2301,8 +2301,8 @@ EmitReturnPokeToBall: @ 80339C4
 	.pool
 	thumb_func_end EmitReturnPokeToBall
 
-	thumb_func_start dp01_build_cmdbuf_x07_7_7_7
-dp01_build_cmdbuf_x07_7_7_7: @ 80339E4
+	thumb_func_start EmitDrawTrainerPic
+EmitDrawTrainerPic: @ 80339E4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2317,7 +2317,7 @@ dp01_build_cmdbuf_x07_7_7_7: @ 80339E4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x07_7_7_7
+	thumb_func_end EmitDrawTrainerPic
 
 	thumb_func_start EmitTrainerSlide
 EmitTrainerSlide: @ 8033A04
@@ -3532,8 +3532,8 @@ EmitFaintingCry: @ 803432C
 	.pool
 	thumb_func_end EmitFaintingCry
 
-	thumb_func_start dp01_build_cmdbuf_x2E_a
-dp01_build_cmdbuf_x2E_a: @ 803434C
+	thumb_func_start EmitIntroSlide
+EmitIntroSlide: @ 803434C
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3547,10 +3547,10 @@ dp01_build_cmdbuf_x2E_a: @ 803434C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x2E_a
+	thumb_func_end EmitIntroSlide
 
-	thumb_func_start dp01_build_cmdbuf_x2F_2F_2F_2F
-dp01_build_cmdbuf_x2F_2F_2F_2F: @ 803436C
+	thumb_func_start EmitIntroTrainerBallThrow
+EmitIntroTrainerBallThrow: @ 803436C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3565,10 +3565,10 @@ dp01_build_cmdbuf_x2F_2F_2F_2F: @ 803436C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x2F_2F_2F_2F
+	thumb_func_end EmitIntroTrainerBallThrow
 
-	thumb_func_start EmitCmd48
-EmitCmd48: @ 803438C
+	thumb_func_start EmitDrawPartyStatusSummary
+EmitDrawPartyStatusSummary: @ 803438C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3604,7 +3604,7 @@ _080343B4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end EmitCmd48
+	thumb_func_end EmitDrawPartyStatusSummary
 
 	thumb_func_start EmitCmd49
 EmitCmd49: @ 80343D4

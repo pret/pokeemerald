@@ -2998,7 +2998,7 @@ sub_814FBAC: @ 814FBAC
 	ldr r0, =gBattleBufferA + 4
 	adds r1, r0
 	ldr r4, =gUnknown_08D85620
-	ldr r0, =gUnknown_020244B0
+	ldr r0, =gMoveSelectionCursor
 	adds r2, r0
 	ldrb r2, [r2]
 	adds r0, r1, 0

@@ -191,7 +191,7 @@ _080575F0:
 	beq _08057658
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gUnknown_020244AC
+	ldr r1, =gActionSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -233,7 +233,7 @@ _08057658:
 	ands r0, r2
 	cmp r0, 0
 	beq _08057698
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -261,7 +261,7 @@ _08057698:
 	ands r0, r2
 	cmp r0, 0
 	beq _080576D8
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -290,7 +290,7 @@ _080576D8:
 	ands r0, r2
 	cmp r0, 0
 	beq _08057700
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -306,7 +306,7 @@ _08057700:
 	ands r0, r2
 	cmp r0, 0
 	beq _0805774C
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -508,7 +508,7 @@ _080578A0:
 	adds r0, r2
 	ldr r1, =sub_8039B2C
 	str r1, [r0]
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -664,7 +664,7 @@ _08057A32:
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	adds r2, r1
 	ldrb r1, [r2]
 	adds r1, 0xD
@@ -792,7 +792,7 @@ _08057B56:
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	adds r2, r1
 	ldrb r1, [r2]
 	adds r1, 0xD
@@ -890,7 +890,7 @@ _08057C48:
 _08057C58:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -977,7 +977,7 @@ _08057D18:
 	movs r0, 0x1
 	add r8, r0
 _08057D24:
-	ldr r0, =gUnknown_020244B0
+	ldr r0, =gMoveSelectionCursor
 	adds r0, r3, r0
 	adds r1, r6, 0
 	adds r1, 0x8
@@ -1008,7 +1008,7 @@ _08057D5A:
 	cmp r0, 0
 	bne _08057D80
 _08057D62:
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldrb r0, [r7]
 	adds r0, r1
 	ldrb r2, [r0]
@@ -1095,7 +1095,7 @@ _08057E30:
 	ands r0, r2
 	cmp r0, 0
 	beq _08057E60
-	ldr r4, =gUnknown_020244B0
+	ldr r4, =gMoveSelectionCursor
 	ldrb r0, [r7]
 	adds r2, r0, r4
 	ldrb r1, [r2]
@@ -1119,7 +1119,7 @@ _08057E60:
 	ands r0, r2
 	cmp r0, 0
 	beq _08057EA4
-	ldr r4, =gUnknown_020244B0
+	ldr r4, =gMoveSelectionCursor
 	ldrb r0, [r7]
 	adds r3, r0, r4
 	ldrb r2, [r3]
@@ -1151,7 +1151,7 @@ _08057EA4:
 	ands r0, r2
 	cmp r0, 0
 	beq _08057ED4
-	ldr r4, =gUnknown_020244B0
+	ldr r4, =gMoveSelectionCursor
 	ldrb r0, [r7]
 	adds r2, r0, r4
 	ldrb r1, [r2]
@@ -1173,7 +1173,7 @@ _08057ED4:
 	ands r0, r2
 	cmp r0, 0
 	beq _08057F30
-	ldr r4, =gUnknown_020244B0
+	ldr r4, =gMoveSelectionCursor
 	ldrb r0, [r7]
 	adds r3, r0, r4
 	ldrb r2, [r3]
@@ -1221,7 +1221,7 @@ _08057F30:
 	ands r5, r6
 	cmp r5, 0
 	bne _08057F9E
-	ldr r4, =gUnknown_020244B0
+	ldr r4, =gMoveSelectionCursor
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -1302,7 +1302,7 @@ _08057FF8:
 	ands r0, r1
 	cmp r0, 0
 	beq _08058038
-	ldr r5, =gUnknown_020244B0
+	ldr r5, =gMoveSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r2, r0, r5
@@ -1333,7 +1333,7 @@ _08058038:
 	ands r0, r1
 	cmp r0, 0
 	beq _08058086
-	ldr r5, =gUnknown_020244B0
+	ldr r5, =gMoveSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r3, r0, r5
@@ -1370,7 +1370,7 @@ _08058086:
 	ands r0, r1
 	cmp r0, 0
 	beq _080580C8
-	ldr r5, =gUnknown_020244B0
+	ldr r5, =gMoveSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r2, r0, r5
@@ -1401,7 +1401,7 @@ _080580C8:
 	ands r0, r1
 	cmp r0, 0
 	beq _08058116
-	ldr r5, =gUnknown_020244B0
+	ldr r5, =gMoveSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r3, r0, r5
@@ -1457,7 +1457,7 @@ sub_8058138: @ 8058138
 _08058152:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_020244B0
+	ldr r0, =gMoveSelectionCursor
 	mov r10, r0
 	ldr r1, =gActiveBank
 	mov r8, r1
@@ -1594,7 +1594,7 @@ _0805824E:
 	adds r6, 0x1
 	cmp r6, 0x3
 	ble _0805824E
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldrb r0, [r7]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1758,7 +1758,7 @@ _08058392:
 	adds r6, 0x1
 	cmp r6, 0x3
 	ble _08058392
-	ldr r4, =gUnknown_020244B0
+	ldr r4, =gMoveSelectionCursor
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	adds r0, r4
@@ -1892,7 +1892,7 @@ _080584A8:
 	adds r0, r1
 	ldr r1, =sub_8057BFC
 	str r1, [r0]
-	ldr r3, =gUnknown_020244B0
+	ldr r3, =gMoveSelectionCursor
 	ldrb r0, [r2]
 	adds r0, r3
 	ldr r1, =gUnknown_03005D74
@@ -1915,7 +1915,7 @@ _08058500:
 	ldr r0, =gUnknown_03005D74
 	ldrb r0, [r0]
 	bl battle_menu_cursor_related
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r1
@@ -1947,7 +1947,7 @@ _08058554:
 	bne _0805856A
 	b _080586E8
 _0805856A:
-	ldr r0, =gUnknown_020244B0
+	ldr r0, =gMoveSelectionCursor
 	ldr r1, =gActiveBank
 	ldrb r1, [r1]
 	adds r1, r0
@@ -1990,7 +1990,7 @@ _080585BA:
 	bcc _080585C8
 	b _080586E8
 _080585C8:
-	ldr r0, =gUnknown_020244B0
+	ldr r0, =gMoveSelectionCursor
 	ldr r1, =gActiveBank
 	ldrb r1, [r1]
 	adds r1, r0
@@ -2010,7 +2010,7 @@ _080585E8:
 	ands r0, r2
 	cmp r0, 0
 	beq _080586E8
-	ldr r0, =gUnknown_020244B0
+	ldr r0, =gMoveSelectionCursor
 	ldr r1, =gActiveBank
 	ldrb r1, [r1]
 	adds r1, r0
@@ -2034,7 +2034,7 @@ _0805862C:
 	strb r0, [r4]
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -2064,7 +2064,7 @@ _0805865C:
 	ldrb r1, [r1]
 	cmp r0, r1
 	bcs _080586E8
-	ldr r0, =gUnknown_020244B0
+	ldr r0, =gMoveSelectionCursor
 	ldr r1, =gActiveBank
 	ldrb r1, [r1]
 	adds r1, r0
@@ -2087,7 +2087,7 @@ _080586AA:
 	strb r0, [r4]
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -4407,7 +4407,7 @@ sub_8059B3C: @ 8059B3C
 	adds r0, r5, 0x4
 	adds r4, r0
 	ldr r6, =gDisplayedStringBattle
-	ldr r5, =gUnknown_020244B0
+	ldr r5, =gMoveSelectionCursor
 	adds r1, r5
 	adds r0, r4, 0
 	adds r0, 0x8
@@ -4462,7 +4462,7 @@ sub_8059BB0: @ 8059BB0
 	strb r1, [r0]
 	adds r0, 0x1
 	ldr r3, =gBattleMoves
-	ldr r2, =gUnknown_020244B0
+	ldr r2, =gMoveSelectionCursor
 	ldrb r1, [r5]
 	adds r1, r2
 	ldrb r1, [r1]
@@ -6924,11 +6924,11 @@ sub_805B1CC: @ 805B1CC
 	ldr r2, =gPlayerParty
 	adds r0, r2
 	bl sub_805DD7C
-	ldr r1, =gUnknown_020244AC
+	ldr r1, =gActionSelectionCursor
 	ldrb r0, [r5]
 	adds r0, r1
 	strb r4, [r0]
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldrb r0, [r5]
 	adds r0, r1
 	strb r4, [r0]
@@ -8543,7 +8543,7 @@ _0805C062:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0805C062
-	ldr r1, =gUnknown_020244AC
+	ldr r1, =gActionSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -8715,7 +8715,7 @@ sub_805C210: @ 805C210
 	ldr r1, =gUnknown_03005D74
 	movs r0, 0xFF
 	strb r0, [r1]
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -10333,21 +10333,21 @@ _0805D054:
 	beq _0805D07C
 	b _0805D084
 _0805D05A:
-	ldr r0, =gUnknown_020244AC
+	ldr r0, =gActionSelectionCursor
 	adds r0, r3, r0
 	strb r2, [r0]
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldrb r0, [r4]
 	adds r0, r1
 	strb r2, [r0]
 	b _0805D084
 	.pool
 _0805D074:
-	ldr r0, =gUnknown_020244AC
+	ldr r0, =gActionSelectionCursor
 	b _0805D07E
 	.pool
 _0805D07C:
-	ldr r0, =gUnknown_020244B0
+	ldr r0, =gMoveSelectionCursor
 _0805D07E:
 	adds r0, r3, r0
 	movs r1, 0

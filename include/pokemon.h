@@ -633,10 +633,12 @@ s32 sub_806D864(u16 a1);
 bool16 sub_806D82C(u8 id);
 u16 MonTryLearningNewMove(struct Pokemon* mon, bool8);
 void sub_8068AA4(void); // sets stats for deoxys
+bool8 HasTwoFramesAnimation(u16 species);
 
 #include "sprite.h"
 
 void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
 void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
+void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
 
 #endif // GUARD_POKEMON_H

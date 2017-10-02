@@ -4322,7 +4322,7 @@ _0817EF36:
 	b _0817F1FA
 _0817EF44:
 	ldr r3, =gBattleMoves
-	ldr r2, =gUnknown_020244B0
+	ldr r2, =gMoveSelectionCursor
 	adds r0, r4, r2
 	ldrb r0, [r0]
 	lsls r0, 1
@@ -4514,7 +4514,7 @@ _0817F0B4:
 	ble _0817EFC2
 	movs r5, 0
 	ldr r3, =gBankAttacker
-	ldr r6, =gUnknown_020244B0
+	ldr r6, =gMoveSelectionCursor
 	ldr r4, =gBattlePartyID
 	mov r8, r4
 	movs r7, 0x64
@@ -4624,7 +4624,7 @@ _0817F1D4:
 	b _0817F0CC
 _0817F1DC:
 	ldr r2, =gBattleMoveDamage
-	ldr r1, =gUnknown_020244B0
+	ldr r1, =gMoveSelectionCursor
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1

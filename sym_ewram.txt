@@ -445,7 +445,7 @@ gPauseCounterBattle: @ 202432C
 gPaydayMoney: @ 202432E
 	.space 0x2
 
-gUnknown_02024330: @ 2024330
+gRandomTurnNumber: @ 2024330
 	.space 0x2
 
 gBattleCommunication: @ 2024332
@@ -499,10 +499,10 @@ gUnknown_020244A4: @ 20244A4
 gBattleResources: @ 20244A8
 	.space 0x4
 
-gUnknown_020244AC: @ 20244AC
+gActionSelectionCursor: @ 20244AC
 	.space 0x4
 
-gUnknown_020244B0: @ 20244B0
+gMoveSelectionCursor: @ 20244B0
 	.space 0x4
 
 gUnknown_020244B4: @ 20244B4

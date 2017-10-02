@@ -54,6 +54,7 @@
 #define BATTLE_TYPE_GROUDON         0x10000000
 #define BATTLE_TYPE_KYORGE          0x20000000
 #define BATTLE_TYPE_RAYQUAZA        0x40000000
+#define BATTLE_TYPE_x80000000       0x80000000
 
 #define TRAINER_OPPONENT_C00        0xC00
 #define TRAINER_OPPONENT_800        0x800
@@ -178,6 +179,9 @@
 #define ABILITYEFFECT_COUNT_BANK_SIDE           0x11
 #define ABILITYEFFECT_COUNT_ON_FIELD            0x12
 #define ABILITYEFFECT_CHECK_ON_FIELD            0x13
+#define ABILITYEFFECT_SWITCH_IN_WEATHER         0xFF
+
+#define ITEMEFFECT_ON_SWITCH_IN                 0x0
 
 #define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
 
@@ -228,6 +232,7 @@
 #define MOVE_EFFECT_BYTE        0x3
 #define MULTISTRING_CHOOSER     0x5
 #define MSG_DISPLAY             0x7
+#define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
 
 #define MOVE_TARGET_SELECTED        0x0
 #define MOVE_TARGET_DEPENDS         0x1
@@ -556,7 +561,7 @@ struct BattleResults
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[10];     // 0x2A
     u8 filler34[2];
-    u8 catchAttempts[10];     // 0x36
+    u8 catchAttempts[12];     // 0x36
 };
 
 extern struct BattleResults gBattleResults;
@@ -587,7 +592,7 @@ struct BattleStruct
     u8 field_49;
     u8 moneyMultiplier;
     u8 field_4B;
-    u8 field_4C;
+    u8 switchInAbilitiesCounter;
     u8 field_4D;
     u8 field_4E;
     u8 field_4F;
@@ -650,7 +655,7 @@ struct BattleStruct
     u16 choicedMove[BATTLE_BANKS_COUNT];
     u16 changedItems[BATTLE_BANKS_COUNT];
     u8 intimidateBank;
-    u8 fillerD9[0xDA-0xD9];
+    u8 switchInItemsCounter;
     u8 field_DA;
     u8 turnSideTracker;
     u8 fillerDC[0xDF-0xDC];
@@ -664,7 +669,7 @@ struct BattleStruct
     struct BattleEnigmaBerry battleEnigmaBerry;
     u8 field_1A0;
     u8 field_1A1;
-    u8 filler1A2;
+    bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
     u8 field_1A4[240];
     u8 field_294[4];
@@ -845,7 +850,7 @@ struct BattleScripting
     u8 statChanger;
     u8 field_1B;
     u8 atk23_state;
-    u8 field_1D;
+    u8 battleStyle;
     u8 atk6C_state;
     u8 learnMoveState;
     u8 field_20;
@@ -874,9 +879,9 @@ void CancelMultiTurnMoves(u8 bank);
 void PressurePPLose(u8 bankAtk, u8 bankDef, u16 move);
 void PrepareStringBattle(u16 stringId, u8 bank);
 u8 GetBattleBank(u8 caseId);
-void UndoEffectsAfterFainting(void);
+void FaintClearSetData(void);
 bool8 HasMoveFailed(u8 bank);
-void SwitchInClearStructs(void);
+void SwitchInClearSetData(void);
 void sub_803BDA0(u8 bank);
 void sub_803FA70(u8 bank);
 void BattleMainCB2(void);
@@ -886,6 +891,9 @@ bool8 CanRunFromBattle(u8 bank);
 bool8 IsRunningFromBattleImpossible(void);
 void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
 void PressurePPLoseOnUsingImprision(u8 bankAtk);
+u8 GetWhoStrikesFirst(u8 bankAtk, u8 bankDef, bool8 ignoreChosenMoves);
+void sub_803CEDC(u8, u8);
+void BattleTurnPassed(void);
 
 // battle_3
 #define MOVE_LIMITATION_ZEROMOVE    (1 << 0)
@@ -971,10 +979,28 @@ struct BattleAnimationInfo
     u16 field; // to fill up later
 };
 
+struct BattleHealthboxInfo
+{
+    u8 flag_x1 : 1;
+    u8 flag_x2 : 1;
+    u8 flag_x4 : 1;
+    u8 field_1;
+    u8 field_2;
+    u8 field_3;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u8 field_8;
+    u8 field_9;
+    u8 field_A;
+    u8 field_B;
+};
+
 struct BattleSpriteData
 {
     struct BattleSpriteInfo *bankData;
-    void* field_4;
+    struct BattleHealthboxInfo *healthBoxesData;
     struct BattleAnimationInfo *animationData;
 };
 
