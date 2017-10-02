@@ -17,6 +17,7 @@ gUnknown_03000000: @ 3000000
     .include "src/field_camera.o"
     .include "src/script.o"
     .include "src/scrcmd.o"
+    .include "src/tileset_anims.o"
     .include "src/palette.o"
     .include "src/sound.o"
 
