@@ -927,6 +927,9 @@ u8 GetBankSide(u8 bank);
 u8 GetBankIdentity(u8 bank);
 u8 GetBankByIdentity(u8 bank);
 
+// battle_transition
+void sub_8149DFC(u8 a1);
+
 // Move this somewhere else
 
 #include "sprite.h"

@@ -1,5 +1,9 @@
 #include "global.h"
+#include "blend_palette.h"
 #include "palette.h"
+#include "decompress.h"
+#include "gpu_regs.h"
+#include "battle.h"
 #include "task.h"
 
 enum
@@ -38,15 +42,19 @@ struct PaletteStruct
     u8 ps_field_9;
 };
 
-extern void LZDecompressWram(const void *src, void *dest);
-extern void SetGpuReg(u8 regOffset, u16 value);
-extern void sub_8149DFC(u8 a1);
-extern void sub_80A1670(u16 a1);
-extern void sub_80A2D54(u8 a1);
-extern void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value);
-extern void _call_via_r1(u32 a1, void *a2);
-
-extern void BlendPalette(u16, u16, u8, u16);
+static void cur_mapheader_run_tileset1_func(void);
+static void cur_mapheader_run_tileset2_func(void);
+static void unused_sub_80A1CDC(struct PaletteStruct *, u32 *);
+static void unused_sub_80A1E40(struct PaletteStruct *, u32 *);
+static void unused_sub_80A1F00(struct PaletteStruct *);
+static u8 GetPaletteNumByUid(u16);
+static u8 UpdateNormalPaletteFade(void);
+static void BeginFastPaletteFadeInternal(u8);
+static u8 UpdateFastPaletteFade(void);
+static u8 UpdateHardwarePaletteFade(void);
+static void UpdateBlendRegisters(void);
+static bool8 IsSoftwarePaletteFadeFinishing(void);
+static void sub_80A2D54(u8 taskId);
 
 static EWRAM_DATA struct {
     const u16 *src;
@@ -57,8 +65,8 @@ EWRAM_DATA u16 gPlttBufferUnfaded[0x200] = {0};
 EWRAM_DATA u16 gPlttBufferFaded[0x200] = {0};
 EWRAM_DATA struct PaletteStruct sPaletteStructs[0x10] = {0};
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
-EWRAM_DATA u32 gFiller_2037FE0 = 0;
-EWRAM_DATA u32 sPlttBufferTransferPending = 0;
+static EWRAM_DATA u32 gFiller_2037FE0 = 0;
+static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA u8 gPaletteDecompressionBuffer[0x400] = {0};
 
 extern const u16 *const gUnknown_08510764[];
@@ -123,19 +131,6 @@ static const u8 gUnknown_0852489C[] = {
     31, 31
 };
 
-void cur_mapheader_run_tileset1_func(void);
-void cur_mapheader_run_tileset2_func(void);
-static void unused_sub_80A1CDC(struct PaletteStruct *, u32 *);
-static void unused_sub_80A1E40(struct PaletteStruct *, u32 *);
-static void unused_sub_80A1F00(struct PaletteStruct *);
-static u8 GetPaletteNumByUid(u16);
-static u8 UpdateNormalPaletteFade(void);
-static void BeginFastPaletteFadeInternal(u8);
-static u8 UpdateFastPaletteFade(void);
-static u8 UpdateHardwarePaletteFade(void);
-static void UpdateBlendRegisters(void);
-static bool8 IsSoftwarePaletteFadeFinishing(void);
-
 // tileset
 
 IWRAM_DATA u8 sTilesetDMA3TransferBufferSize;
@@ -146,13 +141,13 @@ IWRAM_DATA u16 sSecondaryTilesetCBBufferSize;
 IWRAM_DATA void (*sPrimaryTilesetCB)(u16);
 IWRAM_DATA void (*sSecondaryTilesetCB)(u16);
 
-void sub_80A0954(void)
+static void sub_80A0954(void)
 {
     sTilesetDMA3TransferBufferSize = 0;
     CpuFill32(0, sTilesetDMA3TransferBuffer, sizeof sTilesetDMA3TransferBuffer);
 }
 
-void sub_80A0980(const u16 *a0, u16 *a1, u16 a2)
+static void sub_80A0980(const u16 *a0, u16 *a1, u16 a2)
 {
     if (sTilesetDMA3TransferBufferSize < 20)
     {
@@ -199,7 +194,7 @@ void sub_80A0A38(void)
         sSecondaryTilesetCB(sSecondaryTilesetCBCounter);
 }
 
-void cur_mapheader_run_tileset1_func(void)
+static void cur_mapheader_run_tileset1_func(void)
 {
     sPrimaryTilesetCBCounter = 0;
     sPrimaryTilesetCBBufferSize = 0;
@@ -208,7 +203,7 @@ void cur_mapheader_run_tileset1_func(void)
         gMapHeader.mapData->primaryTileset->callback();
 }
 
-void cur_mapheader_run_tileset2_func(void)
+static void cur_mapheader_run_tileset2_func(void)
 {
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = 0;
@@ -219,7 +214,7 @@ void cur_mapheader_run_tileset2_func(void)
 
 void TilesetCb_General(void)
 {
-    void sub_80A0B70(u16);
+    static void sub_80A0B70(u16);
 
     sPrimaryTilesetCBCounter = 0;
     sPrimaryTilesetCBBufferSize = 0x100;
@@ -228,20 +223,20 @@ void TilesetCb_General(void)
 
 void TilesetCb_InsideBuilding(void)
 {
-    void sub_80A0BB4(u16);
+    static void sub_80A0BB4(u16);
 
     sPrimaryTilesetCBCounter = 0;
     sPrimaryTilesetCBBufferSize = 0x100;
     sPrimaryTilesetCB = sub_80A0BB4;
 }
 
-void sub_80A0B70(u16 timer)
+static void sub_80A0B70(u16 timer)
 {
-    void sub_80A0BCC(u16);
-    void sub_80A0BF4(u16);
-    void sub_80A0C1C(u16);
-    void sub_80A0C44(u16);
-    void sub_80A12AC(u16);
+    static void sub_80A0BCC(u16);
+    static void sub_80A0BF4(u16);
+    static void sub_80A0C1C(u16);
+    static void sub_80A0C44(u16);
+    static void sub_80A12AC(u16);
 
     if ((timer & 0x0F) == 0)
         sub_80A0BCC(timer >> 4);
@@ -255,43 +250,44 @@ void sub_80A0B70(u16 timer)
         sub_80A12AC(timer >> 4);
 }
 
-void sub_80A0BB4(u16 timer)
+static void sub_80A0BB4(u16 timer)
 {
-    void sub_80A1688(u16);
+    static void sub_80A1688(u16);
+
     if ((timer & 0x7) == 0)
         sub_80A1688(timer >> 3);
 }
 
-void sub_80A0BCC(u16 timer)
+static void sub_80A0BCC(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08510764[idx], (u16 *)(VRAM + 0x3F80), 0x80);
+    sub_80A0980(gUnknown_08510764[idx], (u16 *)(BG_VRAM + 0x3F80), 0x80);
 }
 
-void sub_80A0BF4(u16 timer)
+static void sub_80A0BF4(u16 timer)
 {
     u8 idx;
 
     idx = timer % 8;
-    sub_80A0980(gUnknown_08512574[idx], (u16 *)(VRAM + 0x3600), 0x3C0);
+    sub_80A0980(gUnknown_08512574[idx], (u16 *)(BG_VRAM + 0x3600), 0x3C0);
 }
 
-void sub_80A0C1C(u16 timer)
+static void sub_80A0C1C(u16 timer)
 {
     u16 idx;
 
     idx = timer % 8;
-    sub_80A0980(gUnknown_08512E54[idx], (u16 *)(VRAM + 0x3a00), 0x140);
+    sub_80A0980(gUnknown_08512E54[idx], (u16 *)(BG_VRAM + 0x3a00), 0x140);
 }
 
-void sub_80A0C44(u16 timer)
+static void sub_80A0C44(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08513174[idx], (u16 *)(VRAM + 0x3e00), 0xc0);
+    sub_80A0980(gUnknown_08513174[idx], (u16 *)(BG_VRAM + 0x3e00), 0xc0);
 }
 
 void TilesetCb_Petalburg(void)
@@ -303,7 +299,7 @@ void TilesetCb_Petalburg(void)
 
 void TilesetCb_Rustboro(void)
 {
-    void sub_80A103C(u16);
+    static void sub_80A103C(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -312,7 +308,7 @@ void TilesetCb_Rustboro(void)
 
 void TilesetCb_Dewford(void)
 {
-    void sub_80A10B8(u16);
+    static void sub_80A10B8(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -321,7 +317,7 @@ void TilesetCb_Dewford(void)
 
 void TilesetCb_Slateport(void)
 {
-    void sub_80A10D0(u16);
+    static void sub_80A10D0(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -330,7 +326,7 @@ void TilesetCb_Slateport(void)
 
 void TilesetCb_Mauville(void)
 {
-    void sub_80A10E8(u16);
+    static void sub_80A10E8(u16);
 
     sSecondaryTilesetCBCounter = sPrimaryTilesetCBCounter;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -339,7 +335,7 @@ void TilesetCb_Mauville(void)
 
 void TilesetCb_Lavaridge(void)
 {
-    void sub_80A115C(u16);
+    static void sub_80A115C(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -376,7 +372,7 @@ void TilesetCb_Mossdeep(void)
 
 void TilesetCb_EverGrande(void)
 {
-    void sub_80A1188(u16);
+    static void sub_80A1188(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -385,7 +381,7 @@ void TilesetCb_EverGrande(void)
 
 void TilesetCb_Pacifidlog(void)
 {
-    void sub_80A11FC(u16);
+    static void sub_80A11FC(u16);
 
     sSecondaryTilesetCBCounter = sPrimaryTilesetCBCounter;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -394,7 +390,7 @@ void TilesetCb_Pacifidlog(void)
 
 void TilesetCb_Sootopolis(void)
 {
-    void sub_80A122C(u16);
+    static void sub_80A122C(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -403,7 +399,7 @@ void TilesetCb_Sootopolis(void)
 
 void TilesetCb_BattleFrontierOutsideWest(void)
 {
-    void sub_80A127C(u16);
+    static void sub_80A127C(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -412,7 +408,7 @@ void TilesetCb_BattleFrontierOutsideWest(void)
 
 void TilesetCb_BattleFrontierOutsideEast(void)
 {
-    void sub_80A1294(u16);
+    static void sub_80A1294(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -421,7 +417,7 @@ void TilesetCb_BattleFrontierOutsideEast(void)
 
 void TilesetCb_Underwater(void)
 {
-    void sub_80A1244(u16);
+    static void sub_80A1244(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = 128;
@@ -430,7 +426,7 @@ void TilesetCb_Underwater(void)
 
 void TilesetCb_SootopolisGym(void)
 {
-    void sub_80A15D8(u16);
+    static void sub_80A15D8(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = 240;
@@ -439,7 +435,7 @@ void TilesetCb_SootopolisGym(void)
 
 void TilesetCb_Cave(void)
 {
-    void sub_80A1260(u16);
+    static void sub_80A1260(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -448,7 +444,7 @@ void TilesetCb_Cave(void)
 
 void TilesetCb_EliteFour(void)
 {
-    void sub_80A15F0(u16);
+    static void sub_80A15F0(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = 128;
@@ -457,7 +453,7 @@ void TilesetCb_EliteFour(void)
 
 void TilesetCb_MauvilleGym(void)
 {
-    void sub_80A15C0(u16);
+    static void sub_80A15C0(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -466,7 +462,7 @@ void TilesetCb_MauvilleGym(void)
 
 void TilesetCb_BikeShop(void)
 {
-    void sub_80A161C(u16);
+    static void sub_80A161C(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -475,7 +471,7 @@ void TilesetCb_BikeShop(void)
 
 void TilesetCb_BattlePyramid(void)
 {
-    void sub_80A1634(u16);
+    static void sub_80A1634(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
@@ -484,17 +480,17 @@ void TilesetCb_BattlePyramid(void)
 
 void TilesetCb_BattleDome(void)
 {
-    void sub_80A1658(u16);
+    static void sub_80A1658(u16);
 
     sSecondaryTilesetCBCounter = 0;
     sSecondaryTilesetCBBufferSize = sPrimaryTilesetCBBufferSize;
     sSecondaryTilesetCB = sub_80A1658;
 }
 
-void sub_80A103C(u16 timer)
+static void sub_80A103C(u16 timer)
 {
-    void sub_80A1434(u16, u8);
-    void sub_80A1470(u16);
+    static void sub_80A1434(u16, u8);
+    static void sub_80A1470(u16);
 
     if ((timer & 0x07) == 0)
     {
@@ -517,25 +513,25 @@ void sub_80A103C(u16 timer)
         sub_80A1434(timer >> 3, 7);
 }
 
-void sub_80A10B8(u16 timer)
+static void sub_80A10B8(u16 timer)
 {
-    void sub_80A1520(u16);
+    static void sub_80A1520(u16);
 
     if ((timer & 7) == 0)
         sub_80A1520(timer >> 3);
 }
 
-void sub_80A10D0(u16 timer)
+static void sub_80A10D0(u16 timer)
 {
-    void sub_80A1598(u16);
+    static void sub_80A1598(u16);
 
     if ((timer & 15) == 0)
         sub_80A1598(timer >> 4);
 }
 
-void sub_80A10E8(u16 timer)
+static void sub_80A10E8(u16 timer)
 {
-    void sub_80A1394(u16, u8);
+    static void sub_80A1394(u16, u8);
 
     if ((timer & 0x07) == 0)
         sub_80A1394(timer >> 3, 0);
@@ -555,10 +551,10 @@ void sub_80A10E8(u16 timer)
         sub_80A1394(timer >> 3, 7);
 }
 
-void sub_80A115C(u16 timer)
+static void sub_80A115C(u16 timer)
 {
-    void sub_80A12D4(u8);
-    void sub_80A1498(u16);
+    static void sub_80A12D4(u8);
+    static void sub_80A1498(u16);
 
     if ((timer & 0x0F) == 0)
         sub_80A12D4(timer >> 4);
@@ -566,9 +562,9 @@ void sub_80A115C(u16 timer)
         sub_80A1498(timer >> 4);
 }
 
-void sub_80A1188(u16 timer)
+static void sub_80A1188(u16 timer)
 {
-    void sub_80A14C0(u16, u8);
+    static void sub_80A14C0(u16, u8);
 
     if ((timer & 0x07) == 0)
         sub_80A14C0(timer >> 3, 0);
@@ -588,10 +584,10 @@ void sub_80A1188(u16 timer)
         sub_80A14C0(timer >> 3, 7);
 }
 
-void sub_80A11FC(u16 timer)
+static void sub_80A11FC(u16 timer)
 {
-    void sub_80A131C(u8);
-    void sub_80A136C(u8);
+    static void sub_80A131C(u8);
+    static void sub_80A136C(u8);
 
     if ((timer & 0x0F) == 0)
         sub_80A131C(timer >> 4);
@@ -599,90 +595,90 @@ void sub_80A11FC(u16 timer)
         sub_80A136C(timer >> 4);
 }
 
-void sub_80A122C(u16 timer)
+static void sub_80A122C(u16 timer)
 {
-    void sub_80A1798(u16);
+    static void sub_80A1798(u16);
 
     if ((timer & 0x0F) == 0)
         sub_80A1798(timer >> 4);
 }
 
-void sub_80A1244(u16 timer)
+static void sub_80A1244(u16 timer)
 {
-    void sub_80A1344(u8);
+    static void sub_80A1344(u8);
 
     if ((timer & 0x0F) == 0)
         sub_80A1344(timer >> 4);
 }
 
-void sub_80A1260(u16 timer)
+static void sub_80A1260(u16 timer)
 {
-    void sub_80A14F8(u16);
+    static void sub_80A14F8(u16);
 
     if ((timer & 0x0F) == 1)
         sub_80A14F8(timer >> 4);
 }
 
-void sub_80A127C(u16 timer)
+static void sub_80A127C(u16 timer)
 {
-    void sub_80A1548(u16);
+    static void sub_80A1548(u16);
 
     if ((timer & 0x07) == 0)
         sub_80A1548(timer >> 3);
 }
 
-void sub_80A1294(u16 timer)
+static void sub_80A1294(u16 timer)
 {
-    void sub_80A1570(u16);
+    static void sub_80A1570(u16);
 
     if ((timer & 0x07) == 0)
         sub_80A1570(timer >> 3);
 }
 
-void sub_80A12AC(u16 timer)
+static void sub_80A12AC(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08513684[idx], (u16 *)(VRAM + 0x3c00), 0x140);
+    sub_80A0980(gUnknown_08513684[idx], (u16 *)(BG_VRAM + 0x3c00), 0x140);
 }
 
-void sub_80A12D4(u8 timer)
+static void sub_80A12D4(u8 timer)
 {
     u8 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08513894[idx], (u16 *)(VRAM + 0x6400), 0x80);
+    sub_80A0980(gUnknown_08513894[idx], (u16 *)(BG_VRAM + 0x6400), 0x80);
 
     idx = (timer + 2) % 4;
-    sub_80A0980(gUnknown_08513894[idx], (u16 *)(VRAM + 0x6480), 0x80);
+    sub_80A0980(gUnknown_08513894[idx], (u16 *)(BG_VRAM + 0x6480), 0x80);
 }
 
-void sub_80A131C(u8 timer)
+static void sub_80A131C(u8 timer)
 {
     u8 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_085143E4[idx], (u16 *)(VRAM + 0x7a00), 0x3C0);
+    sub_80A0980(gUnknown_085143E4[idx], (u16 *)(BG_VRAM + 0x7a00), 0x3C0);
 }
 
-void sub_80A1344(u8 timer)
+static void sub_80A1344(u8 timer)
 {
     u8 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_085145F4[idx], (u16 *)(VRAM + 0x7e00), 0x80);
+    sub_80A0980(gUnknown_085145F4[idx], (u16 *)(BG_VRAM + 0x7e00), 0x80);
 }
 
-void sub_80A136C(u8 timer)
+static void sub_80A136C(u8 timer)
 {
     u8 idx;
 
     idx = timer % 8;
-    sub_80A0980(gUnknown_08514E04[idx], (u16 *)(VRAM + 0x7e00), 0x100);
+    sub_80A0980(gUnknown_08514E04[idx], (u16 *)(BG_VRAM + 0x7e00), 0x100);
 }
 
-void sub_80A1394(u16 timer_div, u8 timer_mod)
+static void sub_80A1394(u16 timer_div, u8 timer_mod)
 {
     timer_div -= timer_mod;
     if (timer_div < 12) // almost certainly a typo
@@ -699,7 +695,7 @@ void sub_80A1394(u16 timer_div, u8 timer_mod)
     }
 }
 
-void sub_80A1434(u16 timer_div, u8 timer_mod)
+static void sub_80A1434(u16 timer_div, u8 timer_mod)
 {
     timer_div -= timer_mod;
     timer_div %= 8;
@@ -707,23 +703,23 @@ void sub_80A1434(u16 timer_div, u8 timer_mod)
         sub_80A0980(gUnknown_08515824[timer_div], gUnknown_08515804[timer_mod], 0x80);
 }
 
-void sub_80A1470(u16 timer)
+static void sub_80A1470(u16 timer)
 {
     u16 idx;
 
     idx = timer % 2;
-    sub_80A0980(gUnknown_08515964[idx], (u16 *)(VRAM + 0x7800), 0x80);
+    sub_80A0980(gUnknown_08515964[idx], (u16 *)(BG_VRAM + 0x7800), 0x80);
 }
 
-void sub_80A1498(u16 timer)
+static void sub_80A1498(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08515D8C[idx], (u16 *)(VRAM + 0x5400), 0x80);
+    sub_80A0980(gUnknown_08515D8C[idx], (u16 *)(BG_VRAM + 0x5400), 0x80);
 }
 
-void sub_80A14C0(u16 timer_div, u8 timer_mod)
+static void sub_80A14C0(u16 timer_div, u8 timer_mod)
 {
     timer_div -= timer_mod;
     timer_div %= 8;
@@ -731,84 +727,84 @@ void sub_80A14C0(u16 timer_div, u8 timer_mod)
     sub_80A0980(gUnknown_085161DC[timer_div], gUnknown_085161BC[timer_mod], 0x80);
 }
 
-void sub_80A14F8(u16 timer)
+static void sub_80A14F8(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08515D8C[idx], (u16 *)(VRAM + 0x7400), 0x80);
+    sub_80A0980(gUnknown_08515D8C[idx], (u16 *)(BG_VRAM + 0x7400), 0x80);
 }
 
-void sub_80A1520(u16 timer)
+static void sub_80A1520(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_085164FC[idx], (u16 *)(VRAM + 0x5540), 0xC0);
+    sub_80A0980(gUnknown_085164FC[idx], (u16 *)(BG_VRAM + 0x5540), 0xC0);
 }
 
-void sub_80A1548(u16 timer)
+static void sub_80A1548(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_0851680C[idx], (u16 *)(VRAM + 0x5b40), 0xC0);
+    sub_80A0980(gUnknown_0851680C[idx], (u16 *)(BG_VRAM + 0x5b40), 0xC0);
 }
 
-void sub_80A1570(u16 timer)
+static void sub_80A1570(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08516B1C[idx], (u16 *)(VRAM + 0x5b40), 0xC0);
+    sub_80A0980(gUnknown_08516B1C[idx], (u16 *)(BG_VRAM + 0x5b40), 0xC0);
 }
 
-void sub_80A1598(u16 timer)
+static void sub_80A1598(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08516D2C[idx], (u16 *)(VRAM + 0x5c00), 0x80);
+    sub_80A0980(gUnknown_08516D2C[idx], (u16 *)(BG_VRAM + 0x5c00), 0x80);
 }
 
-void sub_80A15C0(u16 timer)
+static void sub_80A15C0(u16 timer)
 {
-    void sub_80A1748(u16);
+    static void sub_80A1748(u16);
 
     if ((timer & 1) == 0)
         sub_80A1748(timer >> 1);
 }
 
-void sub_80A15D8(u16 timer)
+static void sub_80A15D8(u16 timer)
 {
-    void sub_80A16B0(u16);
+    static void sub_80A16B0(u16);
 
     if ((timer & 7) == 0)
         sub_80A16B0(timer >> 3);
 }
 
-void sub_80A15F0(u16 timer)
+static void sub_80A15F0(u16 timer)
 {
-    void sub_80A1720(u16);
-    void sub_80A16F8(u16);
+    static void sub_80A1720(u16);
+    static void sub_80A16F8(u16);
 
     if ((timer & 0x3f) == 1)
         sub_80A1720(timer >> 6);
     if ((timer & 0x07) == 1)
         sub_80A16F8(timer >> 3);
 }
-void sub_80A161C(u16 timer)
+static void sub_80A161C(u16 timer)
 {
-    void sub_80A1770(u16);
+    static void sub_80A1770(u16);
 
     if ((timer & 3) == 0)
         sub_80A1770(timer >> 2);
 }
 
-void sub_80A1634(u16 timer)
+static void sub_80A1634(u16 timer)
 {
-    void sub_80A17C0(u16);
-    void sub_80A17EC(u16);
+    static void sub_80A17C0(u16);
+    static void sub_80A17EC(u16);
 
     if ((timer & 7) == 0)
     {
@@ -817,98 +813,98 @@ void sub_80A1634(u16 timer)
     }
 }
 
-void sub_80A1658(u16 timer)
+static void sub_80A1658(u16 timer)
 {
-    void sub_80A1818(u16);
+    static void sub_80A1818(u16);
 
     if ((timer & 3) == 0)
         sub_80A1818(timer >> 2);
 }
 
-void sub_80A1670(u16 timer)
+static void sub_80A1670(u16 timer)
 {
-    void sub_80A1884(u16);
+    static void sub_80A1884(u16);
 
     if ((timer & 3) == 0)
         sub_80A1884(timer >> 2);
 }
 
-void sub_80A1688(u16 timer)
+static void sub_80A1688(u16 timer)
 {
     u16 idx;
 
     idx = timer % 2;
-    sub_80A0980(gUnknown_08516E3C[idx], (u16 *)(VRAM + 0x3e00), 0x80);
+    sub_80A0980(gUnknown_08516E3C[idx], (u16 *)(BG_VRAM + 0x3e00), 0x80);
 }
 
-void sub_80A16B0(u16 timer)
+static void sub_80A16B0(u16 timer)
 {
     u16 idx;
 
     idx = timer % 3;
-    sub_80A0980(gUnknown_08517A44[idx], (u16 *)(VRAM + 0x7e00), 0x180);
-    sub_80A0980(gUnknown_08517A50[idx], (u16 *)(VRAM + 0x7a00), 0x280);
+    sub_80A0980(gUnknown_08517A44[idx], (u16 *)(BG_VRAM + 0x7e00), 0x180);
+    sub_80A0980(gUnknown_08517A50[idx], (u16 *)(BG_VRAM + 0x7a00), 0x280);
 }
 
-void sub_80A16F8(u16 timer)
+static void sub_80A16F8(u16 timer)
 {
     u16 idx;
 
     idx = timer % 4;
-    sub_80A0980(gUnknown_08517BFC[idx], (u16 *)(VRAM + 0x7f00), 0x20);
+    sub_80A0980(gUnknown_08517BFC[idx], (u16 *)(BG_VRAM + 0x7f00), 0x20);
 }
 
-void sub_80A1720(u16 timer)
+static void sub_80A1720(u16 timer)
 {
     u16 idx;
 
     idx = timer % 2;
-    sub_80A0980(gUnknown_08517C0C[idx], (u16 *)(VRAM + 0x7c00), 0x80);
+    sub_80A0980(gUnknown_08517C0C[idx], (u16 *)(BG_VRAM + 0x7c00), 0x80);
 }
 
-void sub_80A1748(u16 timer)
+static void sub_80A1748(u16 timer)
 {
     u16 idx;
 
     idx = timer % 2;
-    sub_80A0980(gUnknown_08518034[idx], (u16 *)(VRAM + 0x5200), 0x200);
+    sub_80A0980(gUnknown_08518034[idx], (u16 *)(BG_VRAM + 0x5200), 0x200);
 }
 
-void sub_80A1770(u16 timer)
+static void sub_80A1770(u16 timer)
 {
     u16 idx;
 
     idx = timer % 2;
-    sub_80A0980(gUnknown_0851829C[idx], (u16 *)(VRAM + 0x7e00), 0x120);
+    sub_80A0980(gUnknown_0851829C[idx], (u16 *)(BG_VRAM + 0x7e00), 0x120);
 }
 
-void sub_80A1798(u16 timer)
+static void sub_80A1798(u16 timer)
 {
     u16 idx;
 
     idx = timer % 8;
-    sub_80A0980(gUnknown_085202C4[idx], (u16 *)(VRAM + 0x5e00), 0xc00);
+    sub_80A0980(gUnknown_085202C4[idx], (u16 *)(BG_VRAM + 0x5e00), 0xc00);
 }
 
-void sub_80A17C0(u16 timer)
+static void sub_80A17C0(u16 timer)
 {
     u16 idx;
 
     idx = timer % 3;
-    sub_80A0980(gUnknown_08524864[idx], (u16 *)(VRAM + 0x52e0), 0x100);
+    sub_80A0980(gUnknown_08524864[idx], (u16 *)(BG_VRAM + 0x52e0), 0x100);
 }
 
-void sub_80A17EC(u16 timer)
+static void sub_80A17EC(u16 timer)
 {
     u16 idx;
 
     idx = timer % 3;
-    sub_80A0980(gUnknown_08524870[idx], (u16 *)(VRAM + 0x50e0), 0x100);
+    sub_80A0980(gUnknown_08524870[idx], (u16 *)(BG_VRAM + 0x50e0), 0x100);
 }
 
 // palette
 
-void sub_80A1818(u16 a1)
+static void sub_80A1818(u16 a1)
 {
     CpuCopy16(gUnknown_0852487C[a1 & 0x3], gPlttBufferUnfaded + 0x80, 32);
     BlendPalette(0x80, 0x10, gPaletteFade.y, gPaletteFade.blendColor & 0x7FFF);
@@ -919,7 +915,7 @@ void sub_80A1818(u16 a1)
     }
 }
 
-void sub_80A1884(u16 a1)
+static void sub_80A1884(u16 a1)
 {
     CpuCopy16(gUnknown_0852487C[a1 & 0x3], gPlttBufferUnfaded + 0x80, 32);
     if ((u8)FindTaskIdByFunc(sub_8149DFC) == 0xFF )
