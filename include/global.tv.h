@@ -354,7 +354,9 @@ typedef union TVShow // size = 0x24
         /*0x04*/ u8 decorations[4];
         /*0x08*/ u16 species;
         /*0x0a*/ u16 move;
-        // TODO: flesh this out
+        /*0x0c*/ u8 language;
+        /*0x0d*/ u8 filler_0d[6];
+        /*0x13*/ u8 playerName[8];
     } secretBaseVisit;
 
     // TVSHOW_LOTTO_WINNER

@@ -3,59 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EE104
-sub_80EE104: @ 80EE104
-	push {r4,lr}
-	movs r0, 0x1F
-	movs r1, 0x1
-	bl sub_80EF46C
-	ldr r4, =gSaveBlock1Ptr
-	ldr r0, [r4]
-	ldr r1, =0x000027cc
-	adds r0, r1
-	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
-	ldr r2, =sCurTVShowSlot
-	strb r0, [r2]
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _080EE168
-	movs r1, 0
-	ldrsb r1, [r2, r1]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =0x000027cc
-	adds r0, r1
-	ldr r4, [r4]
-	adds r4, r0
-	movs r1, 0
-	movs r0, 0x1F
-	strb r0, [r4]
-	strb r1, [r4, 0x1]
-	adds r0, r4, 0
-	adds r0, 0x13
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	bl StringCopy
-	adds r0, r4, 0
-	bl sub_80EDE98
-	adds r0, r4, 0
-	bl sub_80EDFB4
-	adds r0, r4, 0
-	bl tv_store_id_3x
-	ldr r0, =gGameLanguage
-	ldrb r0, [r0]
-	strb r0, [r4, 0xC]
-_080EE168:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80EE104
-
 	thumb_func_start sub_80EE184
 sub_80EE184: @ 80EE184
 	push {r4-r7,lr}

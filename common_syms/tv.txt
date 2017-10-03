@@ -1,4 +1,4 @@
 sCurTVShowSlot
-gUnknown_030060C0
+sTV_SecretBaseVisitMovesTemp
 sTV_DecorationsBuffer
-gUnknown_030060E0
+sTV_SecretBaseVisitMonsTemp

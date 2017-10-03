@@ -30,13 +30,13 @@
 // Static RAM declarations
 
 s8 sCurTVShowSlot;
-u16 gUnknown_030060C0[8];
+u16 sTV_SecretBaseVisitMovesTemp[8];
 u8 sTV_DecorationsBuffer[16];
 struct {
     u8 level;
     u16 species;
     u16 move;
-} gUnknown_030060E0[10];
+} sTV_SecretBaseVisitMonsTemp[10];
 
 IWRAM_DATA u8 gUnknown_03001174;
 IWRAM_DATA u8 gUnknown_03001175;
@@ -2239,45 +2239,64 @@ void sub_80EDFB4(TVShow *show)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
-            gUnknown_030060E0[nPokemon].level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            gUnknown_030060E0[nPokemon].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+            sTV_SecretBaseVisitMonsTemp[nPokemon].level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            sTV_SecretBaseVisitMonsTemp[nPokemon].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
             nMoves = 0;
             move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1);
             if (move != MOVE_NONE)
             {
-                gUnknown_030060C0[nMoves] = move;
+                sTV_SecretBaseVisitMovesTemp[nMoves] = move;
                 nMoves ++;
             }
             move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE2);
             if (move != MOVE_NONE)
             {
-                gUnknown_030060C0[nMoves] = move;
+                sTV_SecretBaseVisitMovesTemp[nMoves] = move;
                 nMoves ++;
             }
             move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE3);
             if (move != MOVE_NONE)
             {
-                gUnknown_030060C0[nMoves] = move;
+                sTV_SecretBaseVisitMovesTemp[nMoves] = move;
                 nMoves ++;
             }
             move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE4);
             if (move != MOVE_NONE)
             {
-                gUnknown_030060C0[nMoves] = move;
+                sTV_SecretBaseVisitMovesTemp[nMoves] = move;
                 nMoves ++;
             }
-            gUnknown_030060E0[nPokemon].move = gUnknown_030060C0[Random() % nMoves];
+            sTV_SecretBaseVisitMonsTemp[nPokemon].move = sTV_SecretBaseVisitMovesTemp[Random() % nMoves];
             nPokemon ++;
         }
     }
     for (i = 0, sum = 0; i < nPokemon; i ++)
     {
-        sum += gUnknown_030060E0[i].level;
+        sum += sTV_SecretBaseVisitMonsTemp[i].level;
     }
     show->secretBaseVisit.unk02 = sum / nPokemon;
     j = Random() % nPokemon;
-    show->secretBaseVisit.species = gUnknown_030060E0[j].species;
-    show->secretBaseVisit.move = gUnknown_030060E0[j].move;
+    show->secretBaseVisit.species = sTV_SecretBaseVisitMonsTemp[j].species;
+    show->secretBaseVisit.move = sTV_SecretBaseVisitMonsTemp[j].move;
+}
+
+void sub_80EE104(void)
+{
+    TVShow *show;
+
+    sub_80EF46C(TVSHOW_SECRET_BASE_VISIT, 1);
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->secretBaseVisit.kind = TVSHOW_SECRET_BASE_VISIT;
+        show->secretBaseVisit.active = FALSE;
+        StringCopy(show->secretBaseVisit.playerName, gSaveBlock2Ptr->playerName);
+        sub_80EDE98(show);
+        sub_80EDFB4(show);
+        tv_store_id_3x(show);
+        show->secretBaseVisit.language = gGameLanguage;
+    }
 }
 
 asm(".section .text.dotvshow");
