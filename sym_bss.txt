@@ -25,7 +25,6 @@
     .include "src/fldeff_cut.o"
     .include "src/script_menu.o"
     .include "src/record_mixing.o"
-
     .include "src/tv.o"
 
     .space 1 @ TODO: define this u32 in mauville_old_man

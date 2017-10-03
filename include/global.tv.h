@@ -352,6 +352,8 @@ typedef union TVShow // size = 0x24
         /*0x02*/ u8 unk02;
         /*0x03*/ u8 nDecorations;
         /*0x04*/ u8 decorations[4];
+        /*0x08*/ u16 species;
+        /*0x0a*/ u16 move;
         // TODO: flesh this out
     } secretBaseVisit;
 

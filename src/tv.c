@@ -33,9 +33,9 @@ s8 sCurTVShowSlot;
 u16 gUnknown_030060C0[8];
 u8 sTV_DecorationsBuffer[16];
 struct {
-    u8 unk0;
-    u16 unk2;
-    u16 unk4;
+    u8 level;
+    u16 species;
+    u16 move;
 } gUnknown_030060E0[10];
 
 IWRAM_DATA u8 gUnknown_03001174;
@@ -2011,7 +2011,7 @@ void sub_80EDE84(u16 a0)
     gUnknown_0203A028 = a0;
 }
 
-#ifdef NONMATCHING
+#ifdef NONMATCHING // Register allocation shenanigans
 void sub_80EDE98(TVShow *show)
 {
     u8 i;
@@ -2225,6 +2225,60 @@ void sub_80EDE98(TVShow *show)
                     "\t.pool");
 }
 #endif
+
+void sub_80EDFB4(TVShow *show)
+{
+    u8 i;
+    u16 move;
+    u16 j;
+    u8 nMoves;
+    u8 nPokemon;
+    u16 sum;
+
+    for (i = 0, nPokemon = 0; i < PARTY_SIZE; i ++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            gUnknown_030060E0[nPokemon].level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            gUnknown_030060E0[nPokemon].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+            nMoves = 0;
+            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1);
+            if (move != MOVE_NONE)
+            {
+                gUnknown_030060C0[nMoves] = move;
+                nMoves ++;
+            }
+            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE2);
+            if (move != MOVE_NONE)
+            {
+                gUnknown_030060C0[nMoves] = move;
+                nMoves ++;
+            }
+            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE3);
+            if (move != MOVE_NONE)
+            {
+                gUnknown_030060C0[nMoves] = move;
+                nMoves ++;
+            }
+            move = GetMonData(&gPlayerParty[i], MON_DATA_MOVE4);
+            if (move != MOVE_NONE)
+            {
+                gUnknown_030060C0[nMoves] = move;
+                nMoves ++;
+            }
+            gUnknown_030060E0[nPokemon].move = gUnknown_030060C0[Random() % nMoves];
+            nPokemon ++;
+        }
+    }
+    for (i = 0, sum = 0; i < nPokemon; i ++)
+    {
+        sum += gUnknown_030060E0[i].level;
+    }
+    show->secretBaseVisit.unk02 = sum / nPokemon;
+    j = Random() % nPokemon;
+    show->secretBaseVisit.species = gUnknown_030060E0[j].species;
+    show->secretBaseVisit.move = gUnknown_030060E0[j].move;
+}
 
 asm(".section .text.dotvshow");
 
