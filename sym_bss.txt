@@ -1,4 +1,3 @@
-gUnknown_03000000: @ 3000000
 	.include "src/main.o"
 	.include "src/malloc.o"
 	.include "src/dma3_manager.o"
@@ -20,30 +19,11 @@ gUnknown_03000000: @ 3000000
     .include "src/tileset_anims.o"
     .include "src/palette.o"
     .include "src/sound.o"
-
-gUnknown_03000F50: @ 3000F50
-	.space 0x8
-
-gUnknown_03000F58: @ 3000F58
-	.space 0x20
-
-gUnknown_03000F78: @ 3000F78
-	.space 0x188
-
-gUnknown_03001100: @ 3001100
-	.space 0x1
-
-gUnknown_03001101: @ 3001101
-	.space 0x1
-
-gUnknown_03001102: @ 3001102
-	.space 0x6
-
-gUnknown_03001108: @ 3001108
-	.space 0x1C
-
-gUnknown_03001124: @ 3001124
-	.space 0xC
+    .include "src/field_screen.o"
+    .include "src/field_effect.o"
+    .include "src/pokemon_storage_system.o"
+    .include "src/fldeff_cut.o"
+    .include "src/script_menu.o"
 
 gUnknown_03001130: @ 3001130
 	.space 0x4
