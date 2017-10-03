@@ -57,6 +57,7 @@ typedef union TVShow // size = 0x24
         /*0x23*/ u8 trainerIdHi;
     } common;
 
+    // Local shows
     // TVSHOW_FAN_CLUB_LETTER
     struct {
         /*0x00*/ u8 kind;
@@ -219,6 +220,7 @@ typedef union TVShow // size = 0x24
         /*0x18*/ u8 unk_18;
     } contestLiveUpdates2;
 
+    // Record Mixing Shows
     // TVSHOW_POKEMON_TODAY_CAUGHT
     struct {
         /*0x00*/ u8 kind;
@@ -415,6 +417,7 @@ typedef union TVShow // size = 0x24
         // TODO: flesh this out
     } safariFanClub;
 
+    // Mass Outbreak
     // TVSHOW_MASS_OUTBREAK
     struct {
         /*0x00*/ u8 kind;
