@@ -1124,7 +1124,7 @@ static void PutPokemonTodayFailedOnTheAir(void)
         {
             ct = 0xFF;
         }
-        if (ct > 2 && (gBattleOutcome == 6 || gBattleOutcome == 1))
+        if (ct > 2 && (gBattleOutcome == BATTLE_POKE_FLED || gBattleOutcome == BATTLE_WON))
         {
             sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
             if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_POKEMON_TODAY_FAILED, 0) != TRUE)
@@ -2296,6 +2296,79 @@ void sub_80EE104(void)
         sub_80EDFB4(show);
         tv_store_id_3x(show);
         show->secretBaseVisit.language = gGameLanguage;
+    }
+}
+
+void sub_80EE184(void)
+{
+    TVShow *show;
+    u8 i;
+    u16 balls;
+
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_BREAKING_NEWS, 0) != TRUE)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->breakingNews.kind = TVSHOW_BREAKING_NEWS;
+        show->breakingNews.active = FALSE;
+        balls = 0;
+        for (i = 0; i < 11; i ++)
+        {
+            balls += gBattleResults.catchAttempts[i];
+        }
+        if (gBattleResults.usedMasterBall)
+        {
+            balls ++;
+        }
+        show->breakingNews.location = gMapHeader.regionMapSectionId;
+        StringCopy(show->breakingNews.playerName, gSaveBlock2Ptr->playerName);
+        show->breakingNews.poke1Species = gBattleResults.poke1Species;
+        switch (gBattleOutcome)
+        {
+            case BATTLE_LOST:
+            case BATTLE_DREW:
+                show->breakingNews.kind = TVSHOW_OFF_AIR;
+                return;
+            case BATTLE_CAUGHT:
+                show->breakingNews.outcome = 0;
+                break;
+            case BATTLE_WON:
+                show->breakingNews.outcome = 1;
+                break;
+            case BATTLE_RAN:
+            case BATTLE_PLAYER_TELEPORTED:
+            case BATTLE_SAFARI_OUT_OF_BALLS:
+                show->breakingNews.outcome = 2;
+                break;
+            case BATTLE_POKE_FLED:
+            case BATTLE_OPPONENT_TELEPORTED:
+                show->breakingNews.outcome = 3;
+                break;
+        }
+        show->breakingNews.lastOpponentSpecies = gBattleResults.lastOpponentSpecies;
+        switch (show->breakingNews.outcome)
+        {
+            case 0:
+                if (gBattleResults.usedMasterBall)
+                {
+                    show->breakingNews.caughtMonBall = ITEM_MASTER_BALL;
+                }
+                else
+                {
+                    show->breakingNews.caughtMonBall = gBattleResults.caughtMonBall;
+                }
+                show->breakingNews.balls = balls;
+                break;
+            case 1:
+                show->breakingNews.lastUsedMove = gBattleResults.lastUsedMove;
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+        tv_store_id_3x(show);
+        show->breakingNews.language = gGameLanguage;
     }
 }
 

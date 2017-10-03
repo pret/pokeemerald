@@ -67,6 +67,7 @@
 #define BATTLE_PLAYER_TELEPORTED    0x5
 #define BATTLE_POKE_FLED            0x6
 #define BATTLE_CAUGHT               0x7
+#define BATTLE_SAFARI_OUT_OF_BALLS  0x8
 #define BATTLE_OPPONENT_TELEPORTED  0xA
 
 #define STATUS_SLEEP            0x7

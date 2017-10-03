@@ -3,6 +3,8 @@
 
 enum
 {
+    TVSHOW_OFF_AIR,
+
     TVSHOW_FAN_CLUB_LETTER = 1,
     TVSHOW_RECENT_HAPPENINGS,
     TVSHOW_PKMN_FAN_CLUB_OPINIONS,
@@ -344,6 +346,16 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
+        /*0x02*/ u16 lastOpponentSpecies;
+        /*0x04*/ u8 location;
+        /*0x05*/ u8 outcome;
+        /*0x06*/ u16 caughtMonBall;
+        /*0x08*/ u16 balls;
+        /*0x0a*/ u16 poke1Species;
+        /*0x0c*/ u16 lastUsedMove;
+        /*0x0e*/ u8 language;
+        /*0x0f*/ u8 filler_0f[4];
+        /*0x13*/ u8 playerName[8];
         // TODO: flesh this out
     } breakingNews;
 
