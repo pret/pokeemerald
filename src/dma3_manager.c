@@ -1,12 +1,23 @@
 #include "global.h"
 #include "dma3.h"
 
+IWRAM_DATA struct {
+    /* 0x00 */ const u8 *src;
+    /* 0x04 */ u8 *dest;
+    /* 0x08 */ u16 size;
+    /* 0x0A */ u16 mode;
+    /* 0x0C */ u32 value;
+} gDma3Requests[128];
+
+static bool8 gDma3ManagerLocked;
+static u8 gDma3RequestCursor;
+
 void ClearDma3Requests(void)
 {
     int i;
 
     gDma3ManagerLocked = TRUE;
-    gDma3RequestCursor = FALSE;
+    gDma3RequestCursor = 0;
 
     for(i = 0; i < (u8)ARRAY_COUNT(gDma3Requests); i++)
     {
@@ -22,7 +33,6 @@ void ClearDma3Requests(void)
 void ProcessDma3Requests(void)
 {
     // NOTE: the fillerA member of the DMA struct is actually u32 value;
-    // NOTE: gUnknown_0300001C is just a pointer inside the gDma3Requests structure, not a true symbol; feel free to remove
     u16 total_size;
 
     if (gDma3ManagerLocked)
@@ -331,7 +341,7 @@ _08000DB2:\n\
     mov r5, r12\n\
     ldrb r0, [r5]\n\
     lsls r0, 4\n\
-    ldr r3, =gUnknown_0300001C\n\
+    ldr r3, =gDma3Requests + 0x0C\n\
     adds r0, r3\n\
     ldr r0, [r0]\n\
     strh r0, [r1]\n\
@@ -347,7 +357,7 @@ _08000DB2:\n\
     bhi _08000DB2\n\
     ldrb r0, [r5]\n\
     lsls r0, 4\n\
-    ldr r5, =gUnknown_0300001C\n\
+    ldr r5, =gDma3Requests + 0x0C\n\
     adds r0, r5\n\
     ldr r0, [r0]\n\
     strh r0, [r1]\n\
