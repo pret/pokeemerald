@@ -24,48 +24,7 @@
     .include "src/pokemon_storage_system.o"
     .include "src/fldeff_cut.o"
     .include "src/script_menu.o"
-
-gUnknown_03001130: @ 3001130
-	.space 0x4
-
-gUnknown_03001134: @ 3001134
-	.space 0x4
-
-gUnknown_03001138: @ 3001138
-	.space 0x4
-
-gUnknown_0300113C: @ 300113C
-	.space 0x4
-
-gUnknown_03001140: @ 3001140
-	.space 0x4
-
-gUnknown_03001144: @ 3001144
-	.space 0x4
-
-gUnknown_03001148: @ 3001148
-	.space 0x4
-
-gUnknown_0300114C: @ 300114C
-	.space 0x4
-
-gUnknown_03001150: @ 3001150
-	.space 0x4
-
-gUnknown_03001154: @ 3001154
-	.space 0x4
-
-gUnknown_03001158: @ 3001158
-	.space 0x4
-
-gUnknown_0300115C: @ 300115C
-	.space 0x4
-
-gUnknown_03001160: @ 3001160
-	.space 0x8
-
-gUnknown_03001168: @ 3001168
-	.space 0xC
+    .include "src/record_mixing.o"
 
 gUnknown_03001174: @ 3001174
 	.space 0x1
