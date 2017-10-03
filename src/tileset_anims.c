@@ -3,7 +3,7 @@
 #include "global.h"
 #include "palette.h"
 #include "blend_palette.h"
-#include "battle.h"
+#include "battle_transition.h"
 #include "task.h"
 
 // Static type declarations
