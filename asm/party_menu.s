@@ -2484,7 +2484,7 @@ sub_81B1660: @ 81B1660
 	ands r1, r0
 	cmp r1, 0x2
 	bne _081B1680
-	ldr r5, =gUnknown_085EA110
+	ldr r5, =gText_CancelParticipation
 	b _081B168A
 	.pool
 _081B1680:
@@ -3290,7 +3290,7 @@ sub_81B1C84: @ 81B1C84
 	adds r0, r4, 0
 	bl CopyItemName
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E991B
+	ldr r1, =gText_PkmnWasGivenItem
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -3319,7 +3319,7 @@ sub_81B1CD0: @ 81B1CD0
 	adds r0, r4, 0
 	bl CopyItemName
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E999D
+	ldr r1, =gText_RecievedItemFromPkmn
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -3348,7 +3348,7 @@ sub_81B1D1C: @ 81B1D1C
 	adds r0, r4, 0
 	bl CopyItemName
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E993A
+	ldr r1, =gText_SwitchPkmnItem
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -3379,7 +3379,7 @@ sub_81B1D68: @ 81B1D68
 	adds r0, r4, 0
 	bl CopyItemName
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E99DB
+	ldr r1, =gText_SwitchedPkmnItem
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -3474,7 +3474,7 @@ _081B1E3E:
 pokemon_item_not_removed: @ 81B1E48
 	push {lr}
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9A69
+	ldr r1, =gText_BagFullCouldNotRemoveItem
 	bl StringExpandPlaceholders
 	pop {r0}
 	bx r0
@@ -3937,7 +3937,7 @@ sub_81B21AC: @ 81B21AC
 _081B21DC:
 	movs r0, 0x20
 	bl PlaySE
-	ldr r0, =gUnknown_085EA0EE
+	ldr r0, =gText_PkmnCantParticipate
 	movs r1, 0
 	bl sub_81B1B5C
 	movs r0, 0x2
@@ -3962,7 +3962,7 @@ sub_81B2210: @ 81B2210
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_085EA110
+	ldr r0, =gText_CancelParticipation
 	movs r1, 0x1
 	bl sub_81B1B5C
 	movs r0, 0x2
@@ -5495,7 +5495,7 @@ _081B2F04:
 	asrs r1, 16
 	ldr r2, [r6]
 	ldrb r2, [r2, 0x1A]
-	bl sub_8075034
+	bl GetScaledHPFraction
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrb r0, [r6, 0x8]
@@ -6407,7 +6407,7 @@ _081B3674:
 	cmp r6, 0
 	bne _081B36C0
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9980
+	ldr r1, =gText_PkmnNotHolding
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -8348,7 +8348,7 @@ _081B4788:
 	adds r0, r5, 0
 	bl GetMonNickname
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9980
+	ldr r1, =gText_PkmnNotHolding
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -8409,7 +8409,7 @@ sub_81B47E0: @ 81B47E0
 	adds r0, r7, 0
 	bl GetMonNickname
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9980
+	ldr r1, =gText_PkmnNotHolding
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -8428,7 +8428,7 @@ _081B4864:
 	adds r0, r5, 0
 	bl CopyItemName
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9E00
+	ldr r1, =gText_ThrowAwayItem
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -8511,7 +8511,7 @@ _081B491A:
 	ldr r1, =gStringVar1
 	bl CopyItemName
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9E14
+	ldr r1, =gText_ItemThrownAway
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -8731,7 +8731,7 @@ brm_take_2: @ 81B4B20
 	ldr r0, [r5]
 	adds r0, 0xC
 	bl sub_81B302C
-	ldr r0, =gUnknown_085E9855
+	ldr r0, =gText_SendMailToPC
 	movs r1, 0x1
 	bl sub_81B1B5C
 	ldr r1, =gTasks
@@ -8806,7 +8806,7 @@ _081B4BC6:
 	lsrs r0, 24
 	cmp r0, 0xFF
 	beq _081B4C0C
-	ldr r0, =gUnknown_085E9877
+	ldr r0, =gText_MailSentToPC
 	movs r1, 0
 	bl sub_81B1B5C
 	ldr r1, =gTasks
@@ -8818,7 +8818,7 @@ _081B4BC6:
 	b _081B4C4A
 	.pool
 _081B4C0C:
-	ldr r0, =gUnknown_085E9897
+	ldr r0, =gText_PCMailboxFull
 	movs r1, 0
 	bl sub_81B1B5C
 	ldr r1, =gTasks
@@ -8833,7 +8833,7 @@ _081B4C30:
 	movs r0, 0x5
 	bl PlaySE
 _081B4C36:
-	ldr r0, =gUnknown_085E98B4
+	ldr r0, =gText_MailMessageWillBeLost
 	movs r1, 0x1
 	bl sub_81B1B5C
 	ldr r1, =gTasks
@@ -8926,7 +8926,7 @@ _081B4CBE:
 	muls r0, r7
 	adds r0, r6
 	bl sub_80D4680
-	ldr r0, =gUnknown_085E99B8
+	ldr r0, =gText_MailTakenFromPkmn
 	movs r1, 0
 	bl sub_81B1B5C
 	ldr r1, =gTasks
@@ -9167,7 +9167,7 @@ _081B4F36:
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9830
+	ldr r1, =gText_NoMoreThanVar1Pkmn
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x20
@@ -9411,13 +9411,13 @@ sub_81B50C8: @ 81B50C8
 	.pool
 _081B515C:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EA210
+	ldr r1, =gText_PkmnCantBeTradedNow
 	bl StringExpandPlaceholders
 	b _081B5178
 	.pool
 _081B5170:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EA234
+	ldr r1, =gText_EggCantBeTradedNow
 	bl StringExpandPlaceholders
 _081B5178:
 	movs r0, 0x20
@@ -9430,7 +9430,7 @@ _081B5178:
 	adds r0, 0xD
 	bl sub_81B302C
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EA1CA
+	ldr r1, =gText_PauseUntilPress
 	adds r0, r4, 0
 	bl StringAppend
 	adds r0, r4, 0
@@ -9530,7 +9530,7 @@ brm_trade_1: @ 81B51D4
 	ldr r0, [r4]
 	adds r0, 0xD
 	bl sub_81B302C
-	ldr r1, =gUnknown_085EA1CA
+	ldr r1, =gText_PauseUntilPress
 	adds r0, r5, 0
 	bl StringAppend
 	adds r0, r5, 0
@@ -9594,19 +9594,19 @@ _081B5328:
 	b _081B5368
 _081B532E:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EA1E8
+	ldr r1, =gText_OnlyPkmnForBattle
 	bl StringExpandPlaceholders
 	b _081B53C0
 	.pool
 _081B5340:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EA210
+	ldr r1, =gText_PkmnCantBeTradedNow
 	bl StringExpandPlaceholders
 	b _081B53C0
 	.pool
 _081B5354:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EA234
+	ldr r1, =gText_EggCantBeTradedNow
 	bl StringExpandPlaceholders
 	b _081B53C0
 	.pool
@@ -9623,7 +9623,7 @@ _081B5368:
 	ldr r1, =gStringVar1
 	bl GetMonNickname
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EA1CD
+	ldr r1, =gJPText_PutVar1IntoSpinner
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -9641,7 +9641,7 @@ _081B53C0:
 	movs r0, 0x20
 	bl PlaySE
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EA1CA
+	ldr r1, =gText_PauseUntilPress
 	adds r0, r4, 0
 	bl StringAppend
 	adds r0, r4, 0
@@ -9787,7 +9787,7 @@ _081B54E8:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _081B5524
-	ldr r0, =gUnknown_085E97FC
+	ldr r0, =gText_CantUseUntilNewBadge
 	movs r1, 0x1
 	bl sub_81B1B5C
 	ldr r1, =gTasks
@@ -9852,7 +9852,7 @@ _081B557C:
 	ldrb r1, [r1, 0x14]
 	bl sub_81245DC
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EA196
+	ldr r1, =gText_ReturnToHealingSpot
 	b _081B55E8
 	.pool
 _081B55B8:
@@ -9877,7 +9877,7 @@ _081B55B8:
 	ldrb r1, [r1, 0x14]
 	bl sub_81245DC
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EA16B
+	ldr r1, =gText_EscapeFromHere
 _081B55E8:
 	bl StringExpandPlaceholders
 	adds r0, r6, 0
@@ -10051,7 +10051,7 @@ task_launch_hm_phase_2: @ 81B5750
 	cmp r0, 0x1
 	bne _081B577C
 	bl brm_get_selected_species
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [r1]
@@ -10135,7 +10135,7 @@ _081B57FE:
 hm_surf_run_dp02scr: @ 81B5804
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -10239,7 +10239,7 @@ sub_81B58A8: @ 81B58A8
 hm2_waterfall: @ 81B58D4
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -10299,7 +10299,7 @@ _081B594E:
 sub_81B5958: @ 81B5958
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -10314,7 +10314,7 @@ sub_81B5958: @ 81B5958
 sub_81B5974: @ 81B5974
 	push {lr}
 	bl sub_809D1E8
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1, 0x4]
@@ -11562,102 +11562,102 @@ _081B6334:
 	.4byte _081B64A8
 _081B6380:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9C3E
+	ldr r1, =gText_PkmnCuredOfPoison
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B6394:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9C7C
+	ldr r1, =gText_PkmnWokeUp2
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B63A8:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9C8A
+	ldr r1, =gText_PkmnBurnHealed
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B63BC:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9CA2
+	ldr r1, =gText_PkmnThawedOut
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B63D0:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9C5F
+	ldr r1, =gText_PkmnCuredOfParalysis
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B63E4:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9DBE
+	ldr r1, =gText_PkmnSnappedOutOfConfusion
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B63F8:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9DE1
+	ldr r1, =gText_PkmnGotOverInfatuation
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B640C:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9CE0
+	ldr r1, =gText_PkmnBecameHealthy
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B6420:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085E96E3
+	ldr r1, =gText_HP3
 	b _081B6474
 	.pool
 _081B6430:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085EA33C
+	ldr r1, =gText_Attack3
 	b _081B6474
 	.pool
 _081B6440:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085EA343
+	ldr r1, =gText_Defense3
 	b _081B6474
 	.pool
 _081B6450:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085EA35B
+	ldr r1, =gText_Speed2
 	b _081B6474
 	.pool
 _081B6460:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085E96E6
+	ldr r1, =gText_SpAtk3
 	b _081B6474
 	.pool
 _081B6470:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085E96EE
+	ldr r1, =gText_SpDef3
 _081B6474:
 	bl StringCopy
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9D25
+	ldr r1, =gText_PkmnBaseVar2StatIncreased
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B6494:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9CF5
+	ldr r1, =gText_MovesPPIncreased
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B64A8:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9CB7
+	ldr r1, =gText_PPWasRestored
 	bl StringExpandPlaceholders
 	b _081B64C4
 	.pool
 _081B64BC:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E96F6
+	ldr r1, =gText_WontHaveEffect
 	bl StringExpandPlaceholders
 _081B64C4:
 	pop {r0}
@@ -11830,7 +11830,7 @@ _081B6600:
 	strb r0, [r1]
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_085E96F6
+	ldr r0, =gText_WontHaveEffect
 	b _081B66F4
 	.pool
 _081B6624:
@@ -11964,7 +11964,7 @@ sub_81B672C: @ 81B672C
 	ldr r1, =gStringVar1
 	bl GetMonNickname
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9C17
+	ldr r1, =gText_PkmnHPRestoredByVar2
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -12083,7 +12083,7 @@ _081B6850:
 	strb r0, [r1]
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_085E96F6
+	ldr r0, =gText_WontHaveEffect
 	b _081B68E2
 	.pool
 _081B6874:
@@ -12108,19 +12108,19 @@ _081B6874:
 	cmp r0, r8
 	beq _081B68C4
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9D45
+	ldr r1, =gText_PkmnFriendlyBaseVar2Fell
 	bl StringExpandPlaceholders
 	b _081B68E0
 	.pool
 _081B68C4:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9D90
+	ldr r1, =gText_PkmnFriendlyBaseVar2CantFall
 	bl StringExpandPlaceholders
 	b _081B68E0
 	.pool
 _081B68D8:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9D6D
+	ldr r1, =gText_PkmnAdoresBaseVar2Fell
 	bl StringExpandPlaceholders
 _081B68E0:
 	ldr r0, =gStringVar4
@@ -12239,30 +12239,30 @@ _081B69B8:
 	.4byte _081B69E8
 	.4byte _081B69E0
 _081B69D0:
-	ldr r1, =gUnknown_085E96E3
+	ldr r1, =gText_HP3
 	b _081B69F2
 	.pool
 _081B69D8:
-	ldr r1, =gUnknown_085EA33C
+	ldr r1, =gText_Attack3
 	b _081B69F2
 	.pool
 _081B69E0:
-	ldr r1, =gUnknown_085EA343
+	ldr r1, =gText_Defense3
 	b _081B69F2
 	.pool
 _081B69E8:
-	ldr r1, =gUnknown_085EA35B
+	ldr r1, =gText_Speed2
 	b _081B69F2
 	.pool
 _081B69F0:
-	ldr r1, =gUnknown_085E96E6
+	ldr r1, =gText_SpAtk3
 _081B69F2:
 	adds r0, r2, 0
 	bl StringCopy
 	b _081B6A08
 	.pool
 _081B6A00:
-	ldr r1, =gUnknown_085E96EE
+	ldr r1, =gText_SpDef3
 	adds r0, r2, 0
 	bl StringCopy
 _081B6A08:
@@ -12517,7 +12517,7 @@ ether_effect_related: @ 81B6BEC
 	strb r4, [r0]
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_085E96F6
+	ldr r0, =gText_WontHaveEffect
 	b _081B6C7E
 	.pool
 _081B6C34:
@@ -12775,18 +12775,18 @@ sub_81B6DC4: @ 81B6DC4
 	b _081B6E9C
 	.pool
 _081B6E70:
-	ldr r1, =gUnknown_085E9AB4
+	ldr r1, =gText_PkmnCantLearnMove
 	b _081B6E7A
 	.pool
 _081B6E78:
-	ldr r1, =gUnknown_085E9C00
+	ldr r1, =gText_PkmnAlreadyKnows
 _081B6E7A:
 	adds r0, r6, 0
 	bl sub_81B6D98
 	b _081B6E9C
 	.pool
 _081B6E88:
-	ldr r0, =gUnknown_085E9AE9
+	ldr r0, =gText_PkmnNeedsToReplaceMove
 	bl sub_81B6D74
 	ldr r1, =gTasks
 	lsls r0, r6, 2
@@ -12847,7 +12847,7 @@ _081B6EF0:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9AA5
+	ldr r1, =gText_PkmnLearnedMove3
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -12987,7 +12987,7 @@ _081B7048:
 	beq _081B707A
 	b _081B7080
 _081B704E:
-	ldr r0, =gUnknown_085E9B96
+	ldr r0, =gText_WhichMoveToForget
 	movs r1, 0x1
 	bl sub_81B1B5C
 	ldr r1, =gTasks
@@ -13142,7 +13142,7 @@ sub_81B7154: @ 81B7154
 	ldr r2, =gMoveNames
 	adds r1, r2
 	bl StringCopy
-	ldr r0, =gUnknown_085E9BB8
+	ldr r0, =gText_12PoofForgotMove
 	bl sub_81B6D74
 	ldr r1, =gTasks
 	lsls r0, r6, 2
@@ -13214,7 +13214,7 @@ sub_81B7230: @ 81B7230
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9B5D
+	ldr r1, =gText_StopLearningMove2
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -13302,7 +13302,7 @@ _081B7306:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9B76
+	ldr r1, =gText_MoveNotLearned
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -13352,7 +13352,7 @@ _081B7392:
 	ldr r2, =gMoveNames
 	adds r1, r2
 	bl StringCopy
-	ldr r0, =gUnknown_085E9AE9
+	ldr r0, =gText_PkmnNeedsToReplaceMove
 	bl sub_81B6D74
 	ldr r1, =gTasks
 	lsls r0, r6, 2
@@ -13444,7 +13444,7 @@ _081B747A:
 	ldr r1, =gUnknown_0203CEE8
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =gUnknown_085E96F6
+	ldr r0, =gText_WontHaveEffect
 	movs r1, 0x1
 	bl sub_81B1B5C
 	movs r0, 0x2
@@ -13484,7 +13484,7 @@ _081B74B4:
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9D0A
+	ldr r1, =gText_PkmnElevatedToLvVar2
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -13915,7 +13915,7 @@ sub_81B787C: @ 81B787C
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9AE9
+	ldr r1, =gText_PkmnNeedsToReplaceMove
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -13969,7 +13969,7 @@ sub_81B7910: @ 81B7910
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9AA5
+	ldr r1, =gText_PkmnLearnedMove3
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -14225,7 +14225,7 @@ _081B7B82:
 	bne _081B7BC8
 	ldr r0, =gUnknown_0203CEE8
 	strb r1, [r0]
-	ldr r0, =gUnknown_085E96F6
+	ldr r0, =gText_WontHaveEffect
 	movs r1, 0x1
 	bl sub_81B1B5C
 	movs r0, 0x2
@@ -14278,7 +14278,7 @@ sub_81B7C10: @ 81B7C10
 	ldr r1, =gStringVar1
 	bl GetMonNickname
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9C17
+	ldr r1, =gText_PkmnHPRestoredByVar2
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -14322,7 +14322,7 @@ sub_81B7C74: @ 81B7C74
 	ldr r1, =gUnknown_0203CEE8
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =gUnknown_085E96F6
+	ldr r0, =gText_WontHaveEffect
 	movs r1, 0x1
 	bl sub_81B1B5C
 	movs r0, 0x2
@@ -14613,18 +14613,18 @@ sub_81B7E4C: @ 81B7E4C
 	b _081B7F1C
 	.pool
 _081B7EF0:
-	ldr r1, =gUnknown_085E9AB4
+	ldr r1, =gText_PkmnCantLearnMove
 	b _081B7EFA
 	.pool
 _081B7EF8:
-	ldr r1, =gUnknown_085E9C00
+	ldr r1, =gText_PkmnAlreadyKnows
 _081B7EFA:
 	adds r0, r6, 0
 	bl sub_81B6D98
 	b _081B7F1C
 	.pool
 _081B7F08:
-	ldr r0, =gUnknown_085E9AE9
+	ldr r0, =gText_PkmnNeedsToReplaceMove
 	bl sub_81B6D74
 	ldr r1, =gTasks
 	lsls r0, r6, 2
@@ -15152,7 +15152,7 @@ sub_81B83B8: @ 81B83B8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_085E98EC
+	ldr r0, =gText_RemoveMailBeforeItem
 	movs r1, 0x1
 	bl sub_81B1B5C
 	movs r0, 0x2
@@ -15273,7 +15273,7 @@ sub_81B8474: @ 81B8474
 	bl GetMonData
 	cmp r0, 0
 	beq _081B84DC
-	ldr r0, =gUnknown_085E9A08
+	ldr r0, =gText_PkmnHoldingItemCantHoldMail
 	movs r1, 0x1
 	bl sub_81B1B5C
 	b _081B84F2
@@ -15284,7 +15284,7 @@ _081B84DC:
 	bl sub_80D460C
 	adds r0, r4, 0
 	bl sub_80D439C
-	ldr r0, =gUnknown_085E9A40
+	ldr r0, =gText_MailTransferredFromMailbox
 	movs r1, 0x1
 	bl sub_81B1B5C
 _081B84F2:
@@ -15785,7 +15785,7 @@ sub_81B88BC: @ 81B88BC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _081B88E0
-	ldr r0, =gUnknown_085EA126
+	ldr r0, =gText_CancelBattle
 	b _081B88FA
 	.pool
 _081B88E0:
@@ -15795,11 +15795,11 @@ _081B88E0:
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	bne _081B88F8
-	ldr r0, =gUnknown_085EA139
+	ldr r0, =gText_ReturnToWaitingRoom
 	b _081B88FA
 	.pool
 _081B88F8:
-	ldr r0, =gUnknown_085EA155
+	ldr r0, =gText_CancelChallenge
 _081B88FA:
 	pop {r1}
 	bx r1
@@ -16015,7 +16015,7 @@ _081B8AA2:
 	adds r0, r4, 0
 	bl StringCopy
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E97B2
+	ldr r1, =gText_CantSwitchWithAlly
 	b _081B8C42
 	.pool
 _081B8AC4:
@@ -16033,7 +16033,7 @@ _081B8AC4:
 	adds r0, r4, 0
 	bl GetMonNickname
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E978F
+	ldr r1, =gText_PkmnHasNoEnergy
 	b _081B8C42
 	.pool
 _081B8AF8:
@@ -16076,7 +16076,7 @@ _081B8B24:
 	cmp r0, 0
 	beq _081B8B60
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E97E5
+	ldr r1, =gText_EggCantBattle
 	b _081B8C42
 	.pool
 _081B8B60:
@@ -16094,7 +16094,7 @@ _081B8B60:
 	adds r0, r6, 0
 	bl GetMonNickname
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E976F
+	ldr r1, =gText_PkmnAlreadySelected
 	b _081B8C42
 	.pool
 _081B8B94:
@@ -16144,7 +16144,7 @@ _081B8BFC:
 	ldr r1, =gStringVar1
 	bl GetMonNickname
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9754
+	ldr r1, =gText_PkmnAlreadyInBattle
 	b _081B8C42
 	.pool
 _081B8C20:
@@ -16162,7 +16162,7 @@ _081B8C20:
 	ldr r1, =gStringVar1
 	bl GetMonNickname
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9738
+	ldr r1, =gText_PkmnCantSwitchOut
 _081B8C42:
 	bl StringExpandPlaceholders
 _081B8C46:
@@ -16228,7 +16228,7 @@ _081B8CBE:
 	bne _081B8CFC
 	movs r5, 0x1
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	mov r2, sp
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
@@ -16255,7 +16255,7 @@ _081B8CF0:
 _081B8CFC:
 	movs r5, 0x2
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	mov r1, sp
 	ldr r4, =gBattlePartyID
 	lsls r0, 24
@@ -16264,7 +16264,7 @@ _081B8CFC:
 	ldrh r0, [r0]
 	strb r0, [r1]
 	movs r0, 0x2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	mov r1, sp
 	lsls r0, 24
 	lsrs r0, 23
@@ -16344,19 +16344,19 @@ sub_81B8D88: @ 81B8D88
 	cmp r0, 0
 	bne _081B8DB0
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x2
 	b _081B8DBC
 _081B8DB0:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x3
 _081B8DBC:
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	bl sub_81B1250
@@ -17478,7 +17478,7 @@ sub_81B968C: @ 81B968C
 	str r0, [sp]
 	movs r0, 0x3
 	bl sub_81BF8EC
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 	add sp, 0x4

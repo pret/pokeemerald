@@ -17,7 +17,6 @@ extern bool8 sub_8092E9C(u8, u8, u8);
 extern u16 gScriptItemId;
 
 extern const u8 BerryTreeScript[];
-extern const struct BerryTree gBlankBerryTree;
 
 #define BERRY_NAME_LENGTH 6
 
@@ -804,10 +803,58 @@ const struct Berry gBerries[] =
     },
 };
 
+const struct UnkStruct_0858AB24 gUnknown_0858AB24[] = {
+    { 50,  20},
+    { 50,  20},
+    { 50,  20},
+    { 50,  20},
+    { 50,  20},
+    { 50,  30},
+    { 50,  30},
+    { 50,  30},
+    { 50,  30},
+    { 50,  30},
+    { 60,  50},
+    { 60,  50},
+    { 60,  50},
+    { 60,  50},
+    { 60,  50},
+    { 80,  70},
+    { 80,  70},
+    { 80,  70},
+    { 80,  70},
+    { 80,  70},
+    {100, 100},
+    {100, 100},
+    {100, 100},
+    {100, 100},
+    {100, 100},
+    {130, 150},
+    {130, 150},
+    {130, 150},
+    {130, 150},
+    {130, 150},
+    {160, 250},
+    {160, 250},
+    {160, 250},
+    {160, 250},
+    {160, 250},
+    {180, 500},
+    {180, 500},
+    {180, 500},
+    {180, 500},
+    {180, 500},
+    {200, 750},
+    {200, 750},
+    {150, 200}
+};
+
+const struct BerryTree gBlankBerryTree = {};
+
 // unused
 void ClearEnigmaBerries(void)
 {
-    CpuFill16(0, &gSaveBlock1Ptr->enigmaBerry, sizeof(gSaveBlock1Ptr->enigmaBerry));
+    CpuFill16(0, &gSaveBlock1Ptr->enigmaBerry, 52);
 }
 
 void SetEnigmaBerry(u8 *src)
@@ -815,7 +862,7 @@ void SetEnigmaBerry(u8 *src)
     u32 i;
     u8 *dest = (u8*)&gSaveBlock1Ptr->enigmaBerry;
 
-    for (i = 0; i < sizeof(gSaveBlock1Ptr->enigmaBerry); i++)
+    for (i = 0; i < 52; i++)
         dest[i] = src[i];
 }
 
@@ -827,7 +874,7 @@ u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
 
     dest = (u8*)enigmaBerry;
     checksum = 0;
-    for (i = 0; i < sizeof(gSaveBlock1Ptr->enigmaBerry) - sizeof(gSaveBlock1Ptr->enigmaBerry.checksum); i++)
+    for (i = 0; i < 52 - sizeof(gSaveBlock1Ptr->enigmaBerry.checksum); i++)
     {
         checksum += dest[i];
     }

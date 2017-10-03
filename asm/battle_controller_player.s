@@ -358,7 +358,7 @@ _0805775A:
 	cmp r0, 0x2
 	bne _080577E8
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
@@ -622,7 +622,7 @@ _080579F0:
 	mov r1, sp
 	adds r0, r1, r4
 	ldrb r0, [r0]
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	strb r0, [r5]
 	ldr r1, =gNoOfAllBanks
 	lsls r0, 24
@@ -750,7 +750,7 @@ _08057B14:
 	mov r1, sp
 	adds r0, r1, r4
 	ldrb r0, [r0]
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	strb r0, [r5]
 	ldr r1, =gNoOfAllBanks
 	lsls r0, 24
@@ -942,7 +942,7 @@ _08057CC4:
 	movs r0, 0x1
 	ands r0, r1
 	eors r0, r2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gUnknown_03005D74
 	strb r0, [r1]
 _08057CDE:
@@ -1035,7 +1035,7 @@ _08057D80:
 	.pool
 _08057DA8:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
@@ -1052,7 +1052,7 @@ _08057DA8:
 _08057DD0:
 	movs r0, 0x1
 _08057DD2:
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, =gUnknown_03005D74
 _08057DD8:
 	strb r0, [r1]
@@ -1245,9 +1245,9 @@ _08057F80:
 	ldrb r0, [r0]
 	movs r1, 0x1B
 	bl battle_menu_cursor_related_2
-	ldr r0, =gUnknown_085CCACA
+	ldr r0, =gText_BattleSwitchWhich
 	movs r1, 0xB
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -4042,7 +4042,7 @@ sub_8059828: @ 8059828
 	push {lr}
 	ldr r0, =gMain
 	ldr r1, [r0, 0x4]
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	cmp r1, r0
 	bne _08059898
 	ldr r0, =gPaletteFade
@@ -4118,7 +4118,7 @@ sub_80598E0: @ 80598E0
 	push {lr}
 	ldr r0, =gMain
 	ldr r1, [r0, 0x4]
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	cmp r1, r0
 	bne _08059906
 	ldr r0, =gPaletteFade
@@ -4244,11 +4244,11 @@ sub_80599D4: @ 80599D4
 	movs r0, 0x5
 	bl PlaySE
 	ldrb r0, [r4]
-	bl sub_8056BAC
+	bl BattleDestroyCursorAt
 	movs r0, 0
 	strb r0, [r4]
 	movs r0, 0
-	bl sub_8056B74
+	bl BattleCreateCursorAt
 _08059A02:
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -4263,11 +4263,11 @@ _08059A02:
 	movs r0, 0x5
 	bl PlaySE
 	ldrb r0, [r4]
-	bl sub_8056BAC
+	bl BattleDestroyCursorAt
 	movs r0, 0x1
 	strb r0, [r4]
 	movs r0, 0x1
-	bl sub_8056B74
+	bl BattleCreateCursorAt
 _08059A2C:
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -4355,7 +4355,7 @@ _08059AC4:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r7, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _08059AF4
@@ -4377,12 +4377,12 @@ _08059AF4:
 sub_8059B18: @ 8059B18
 	push {r4,lr}
 	ldr r4, =gDisplayedStringBattle
-	ldr r1, =gUnknown_085CCA6F
+	ldr r1, =gText_MoveInterfacePP
 	adds r0, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4432,7 +4432,7 @@ sub_8059B3C: @ 8059B3C
 	bl ConvertIntToDecimalStringN
 	adds r0, r6, 0
 	movs r1, 0x9
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 _08059B98:
 	pop {r4-r7}
 	pop {r0}
@@ -4449,7 +4449,7 @@ sub_8059BB0: @ 8059BB0
 	ldr r0, =gBattleBufferA + 4
 	adds r4, r0
 	ldr r6, =gDisplayedStringBattle
-	ldr r1, =gUnknown_085CCA73
+	ldr r1, =gText_MoveInterfaceType
 	adds r0, r6, 0
 	bl StringCopy
 	movs r1, 0xFC
@@ -4481,7 +4481,7 @@ sub_8059BB0: @ 8059BB0
 	bl StringCopy
 	adds r0, r6, 0
 	movs r1, 0xA
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -4637,7 +4637,7 @@ sub_8059CF8: @ 8059CF8
 	thumb_func_start sub_8059D40
 sub_8059D40: @ 8059D40
 	push {lr}
-	ldr r0, =sub_80A92F8
+	ldr r0, =ReshowBattleScreenAfterMenu
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -4647,7 +4647,7 @@ sub_8059D40: @ 8059D40
 	thumb_func_start sub_8059D50
 sub_8059D50: @ 8059D50
 	push {lr}
-	ldr r0, =sub_80A92F8
+	ldr r0, =ReshowBattleScreenAfterMenu
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -4716,9 +4716,9 @@ b_link_standby_message: @ 8059DC0
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E16
 	strh r1, [r0]
-	ldr r0, =gUnknown_085CCA29
+	ldr r0, =gText_LinkStandby
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 _08059DE0:
 	pop {r0}
 	bx r0
@@ -8024,7 +8024,7 @@ sub_805BBC4: @ 805BBC4
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -8063,7 +8063,7 @@ sub_805BC18: @ 805BC18
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -8458,7 +8458,7 @@ sub_805BF80: @ 805BF80
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -8532,9 +8532,9 @@ dp01t_12_6_battle_menu: @ 805C044
 	ldr r1, =sub_805C004
 	str r1, [r0]
 	bl sub_817F2A8
-	ldr r0, =gUnknown_085CCA3A
+	ldr r0, =gText_BattleMenu
 	movs r1, 0x2
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	movs r4, 0
 _0805C062:
 	lsls r0, r4, 24
@@ -8550,11 +8550,11 @@ _0805C062:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_8059CB4
-	ldr r0, =gUnknown_085CC9F3
-	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gText_WhatWillPkmnDo
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -8578,14 +8578,14 @@ sub_805C0B0: @ 805C0B0
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl sub_8056A3C
-	ldr r0, =gUnknown_085CCABB
+	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gUnknown_03005D74
 	movs r0, 0x1
 	strb r0, [r1]
 	movs r0, 0x1
-	bl sub_8056B74
+	bl BattleCreateCursorAt
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -8913,7 +8913,7 @@ _0805C3BC:
 sub_805C3EC: @ 805C3EC
 	push {lr}
 	sub sp, 0x4
-	bl sub_805EA60
+	bl BattleMusicStop
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -9595,7 +9595,7 @@ sub_805C9B0: @ 805C9B0
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0805C9EC
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1

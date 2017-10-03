@@ -1699,19 +1699,19 @@ _080853AC:
 	lsls r4, 24
 	lsrs r5, r4, 24
 	adds r0, r5, 0
-	bl sub_8088F74
+	bl MetatileBehavior_IsDeepSouthWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080853E8
 	adds r0, r5, 0
-	bl sub_8088F58
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08085442
 	adds r0, r5, 0
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3136,12 +3136,12 @@ map_post_load_hook_exec: @ 8085EA0
 _08085EBC:
 	movs r1, 0
 	str r1, [r4]
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	str r1, [r0]
 	b _08085EEA
 	.pool
 _08085ECC:
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _08085EE0
@@ -3151,7 +3151,7 @@ _08085ECC:
 _08085EE0:
 	bl mapldr_default
 _08085EE4:
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 _08085EEA:
@@ -3174,8 +3174,8 @@ CB2_NewGame: @ 8085EF8
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	ldr r1, =gUnknown_03005DAC
-	ldr r0, =sub_80FB4E0
+	ldr r1, =gFieldCallback
+	ldr r0, =ExecuteTruckSequence
 	str r0, [r1]
 	ldr r1, =gUnknown_03005DB0
 	movs r0, 0
@@ -3214,7 +3214,7 @@ c2_whiteout: @ 8085F58
 	bl player_avatar_init_params_reset
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF3C8
 	str r0, [r1]
 	mov r1, sp
@@ -3304,7 +3304,7 @@ _08086062:
 sub_8086074: @ 8086074
 	push {lr}
 	bl sub_808631C
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_80AF314
 	str r1, [r0]
 	ldr r0, =c2_80567AC
@@ -3399,12 +3399,12 @@ c2_8056854: @ 8086140
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086174
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF314
 	b _08086178
 	.pool
 _08086174:
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF214
 _08086178:
 	str r0, [r1]
@@ -3433,7 +3433,7 @@ sub_8086194: @ 8086194
 sub_80861B0: @ 80861B0
 	push {lr}
 	bl sub_808631C
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF188
 	str r0, [r1]
 	bl c2_exit_to_overworld_2_switch
@@ -3446,7 +3446,7 @@ sub_80861B0: @ 80861B0
 c2_exit_to_overworld_1_continue_scripts_restart_music: @ 80861CC
 	push {lr}
 	bl sub_808631C
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 	bl c2_exit_to_overworld_2_switch
@@ -3459,7 +3459,7 @@ c2_exit_to_overworld_1_continue_scripts_restart_music: @ 80861CC
 sub_80861E8: @ 80861E8
 	push {lr}
 	bl sub_808631C
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF3C8
 	str r0, [r1]
 	bl c2_exit_to_overworld_2_switch
@@ -3562,7 +3562,7 @@ _080862BE:
 	.pool
 _080862F4:
 	bl sub_80EDB44
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_8086204
 	str r1, [r0]
 	ldr r0, =c1_overworld
@@ -3640,7 +3640,7 @@ VBlankCB_Field: @ 8086390
 	bl sub_80BA0A8
 	bl FieldUpdateBgTilemapScroll
 	bl TransferPlttBuffer
-	bl sub_80A09D0
+	bl TransferTilesetAnimsBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end VBlankCB_Field
@@ -4396,7 +4396,7 @@ sub_8086A68: @ 8086A68
 sub_8086A80: @ 8086A80
 	push {lr}
 	ldr r2, =gMapObjects
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5480,7 +5480,7 @@ sub_80872D8: @ 80872D8
 	movs r0, 0x1
 _080872EA:
 	strb r0, [r6, 0x1]
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsls r0, r4, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x3]
@@ -5977,7 +5977,7 @@ sub_80876C4: @ 80876C4
 	thumb_func_start strange_npc_table_clear
 strange_npc_table_clear: @ 80876CC
 	push {lr}
-	ldr r0, =gUnknown_02032308
+	ldr r0, =gLinkPlayerMapObjects
 	movs r1, 0
 	movs r2, 0x10
 	bl memset
@@ -6025,7 +6025,7 @@ sub_80876F0: @ 80876F0
 	lsls r6, 24
 	lsrs r6, 24
 	lsls r4, r7, 2
-	ldr r0, =gUnknown_02032308
+	ldr r0, =gLinkPlayerMapObjects
 	adds r4, r0
 	lsls r5, r6, 3
 	adds r5, r6
@@ -6118,7 +6118,7 @@ sub_80877DC: @ 80877DC
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r2, r1, 24
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r1, r0, r1
 	ldrb r0, [r1]
@@ -6142,7 +6142,7 @@ sub_808780C: @ 808780C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x2]
 	lsls r0, r1, 3
@@ -6176,7 +6176,7 @@ _08087838:
 	thumb_func_start sub_8087858
 sub_8087858: @ 8087858
 	lsls r0, 24
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -6193,7 +6193,7 @@ sub_8087858: @ 8087858
 	thumb_func_start sub_8087878
 sub_8087878: @ 8087878
 	lsls r0, 24
-	ldr r3, =gUnknown_02032308
+	ldr r3, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r0, r3
 	ldrb r3, [r0, 0x2]
@@ -6213,7 +6213,7 @@ sub_8087878: @ 8087878
 	thumb_func_start sub_80878A0
 sub_80878A0: @ 80878A0
 	lsls r0, 24
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -6230,7 +6230,7 @@ sub_80878A0: @ 80878A0
 	thumb_func_start sub_80878C0
 sub_80878C0: @ 80878C0
 	lsls r0, 24
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -6249,7 +6249,7 @@ sub_80878C0: @ 80878C0
 	thumb_func_start sub_80878E4
 sub_80878E4: @ 80878E4
 	lsls r0, 24
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -6271,7 +6271,7 @@ sub_80878E4: @ 80878E4
 sub_808790C: @ 808790C
 	push {r4-r6,lr}
 	movs r2, 0
-	ldr r5, =gUnknown_02032308
+	ldr r5, =gLinkPlayerMapObjects
 	lsls r0, 16
 	asrs r4, r0, 16
 	lsls r1, 16
@@ -6326,7 +6326,7 @@ sub_808796C: @ 808796C
 	lsrs r3, r1, 24
 	adds r2, r3, 0
 	lsrs r0, 22
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x2]
 	lsls r0, r1, 3
@@ -6654,7 +6654,7 @@ sub_8087BCC: @ 8087BCC
 	lsls r1, 24
 	lsrs r3, r1, 24
 	lsls r2, r5, 2
-	ldr r0, =gUnknown_02032308
+	ldr r0, =gLinkPlayerMapObjects
 	adds r2, r0
 	ldrb r1, [r2, 0x2]
 	lsls r0, r1, 3
@@ -6742,7 +6742,7 @@ sub_8087C8C: @ 8087C8C
 	movs r0, 0x2E
 	ldrsh r4, [r5, r0]
 	lsls r4, 2
-	ldr r0, =gUnknown_02032308
+	ldr r0, =gLinkPlayerMapObjects
 	adds r4, r0
 	ldrb r1, [r4, 0x2]
 	lsls r0, r1, 3

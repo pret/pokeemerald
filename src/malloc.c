@@ -2,6 +2,7 @@
 
 static void *sHeapStart;
 static u32 sHeapSize;
+static u32 malloc_c_unused_0300000c; // needed to align dma3_manager.o(.bss)
 
 #define MALLOC_SYSTEM_ID 0xA3A3
 
@@ -38,7 +39,7 @@ void PutMemBlockHeader(void *block, struct MemBlock *prev, struct MemBlock *next
 
 void PutFirstMemBlockHeader(void *block, u32 size)
 {
-	PutMemBlockHeader(block, (struct MemBlock *)block, (struct MemBlock *)block, size - 16);
+	PutMemBlockHeader(block, (struct MemBlock *)block, (struct MemBlock *)block, size - sizeof(struct MemBlock));
 }
 
 void *AllocInternal(void *heapStart, u32 size)
@@ -48,6 +49,7 @@ void *AllocInternal(void *heapStart, u32 size)
 	struct MemBlock *splitBlock;
 	u32 foundBlockSize;
 
+    // Alignment
 	if (size & 3)
 		size = 4 * ((size / 4) + 1);
 
@@ -58,7 +60,7 @@ void *AllocInternal(void *heapStart, u32 size)
 			foundBlockSize = pos->size;
 
 			if (foundBlockSize >= size) {
-				if (foundBlockSize - size <= 31) {
+				if (foundBlockSize - size < 2 * sizeof(struct MemBlock)) {
 					// The block isn't much bigger than the requested size,
 					// so just use it.
 					pos->flag = TRUE;

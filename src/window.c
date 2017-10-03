@@ -35,7 +35,7 @@ static void nullsub_8(void)
 
 }
 
-bool16 InitWindows(struct WindowTemplate *templates)
+bool16 InitWindows(const struct WindowTemplate *templates)
 {
     int i;
     void *bgTilemapBuffer;
@@ -451,7 +451,7 @@ void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16
     FillBitmapRect4Bit(&pixelRect, x, y, width, height, fillValue);
 }
 
-void CopyToWindowPixelBuffer(u8 windowId, u8 *src, u16 size, u16 tileOffset)
+void CopyToWindowPixelBuffer(u8 windowId, const u8 *src, u16 size, u16 tileOffset)
 {
     if (size != 0)
         CpuCopy16(src, gWindows[windowId].tileData + (0x20 * tileOffset), size);

@@ -585,7 +585,7 @@ sub_80B0AF8: @ 80B0AF8
 _080B0B4C:
 	ldr r0, =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF6F0
 	str r0, [r1]
 _080B0B58:
@@ -704,7 +704,7 @@ _080B0C64:
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8089588
+	bl MetatileBehavior_IsMB_0B
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0C78
@@ -734,7 +734,7 @@ _080B0C9C:
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_808962C
+	bl MetatileBehavior_IsDeepOrOceanWater
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B0CF2
@@ -744,7 +744,7 @@ _080B0C9C:
 	cmp r0, 0
 	bne _080B0CE0
 	adds r0, r4, 0
-	bl sub_808959C
+	bl MetatileBehavior_IsMountain
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0CC8
@@ -757,7 +757,7 @@ _080B0CC8:
 	cmp r0, 0
 	beq _080B0CF6
 	adds r0, r4, 0
-	bl sub_80894D4
+	bl MetatileBehavior_GetBridgeSth
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0CE4
@@ -766,7 +766,7 @@ _080B0CE0:
 	b _080B0D1A
 _080B0CE4:
 	adds r0, r4, 0
-	bl sub_80894AC
+	bl MetatileBehavior_IsBridge
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

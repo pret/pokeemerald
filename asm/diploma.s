@@ -262,7 +262,7 @@ pokedex_diploma_something: @ 8177AD4
 	movs r0, 0x14
 	bl SetGpuReg
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EE855
+	ldr r1, =gText_DexNational
 	bl StringCopy
 	b _08177B0C
 	.pool
@@ -271,11 +271,11 @@ _08177AFC:
 	movs r1, 0
 	bl SetGpuReg
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EE84F
+	ldr r1, =gText_DexHoenn
 	bl StringCopy
 _08177B0C:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EE85E
+	ldr r1, =gText_PokedexDiploma
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0

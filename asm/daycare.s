@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start pokemon_get_nick
-pokemon_get_nick: @ 806FA2C
+	thumb_func_start GetMonNick
+GetMonNick: @ 806FA2C
 	push {r4,lr}
 	sub sp, 0x14
 	adds r4, r1, 0
@@ -20,10 +20,10 @@ pokemon_get_nick: @ 806FA2C
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_get_nick
+	thumb_func_end GetMonNick
 
-	thumb_func_start pokemon_get_nick_
-pokemon_get_nick_: @ 806FA4C
+	thumb_func_start GetBoxMonNick
+GetBoxMonNick: @ 806FA4C
 	push {r4,lr}
 	sub sp, 0x14
 	adds r4, r1, 0
@@ -37,7 +37,7 @@ pokemon_get_nick_: @ 806FA4C
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_get_nick_
+	thumb_func_end GetBoxMonNick
 
 	thumb_func_start daycare_count_pokemon
 daycare_count_pokemon: @ 806FA6C
@@ -177,7 +177,7 @@ sub_806FB38: @ 806FB38
 	adds r4, 0x7C
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl pokemon_get_nick
+	bl GetMonNick
 	adds r0, r4, 0
 	bl StripExtCtrlCodes
 	adds r4, 0xB
@@ -376,7 +376,7 @@ sub_806FCF8: @ 806FCF8
 	sub sp, 0x68
 	adds r5, r0, 0
 	ldr r1, =gStringVar1
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	adds r0, r5, 0
 	movs r1, 0xB
 	bl GetBoxMonData
@@ -547,7 +547,7 @@ sub_806FE54: @ 806FE54
 	bl ConvertIntToDecimalStringN
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
@@ -565,7 +565,7 @@ sub_806FE88: @ 806FE88
 	lsrs r4, 24
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	movs r0, 0x64
 	muls r4, r0
 	adds r4, 0x64
@@ -2175,7 +2175,7 @@ _08070B34:
 	lsrs r0, 24
 	cmp r0, 0xFF
 	bne _08070BC0
-	bl sub_807228C
+	bl GetEggStepsToSubtract
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -2280,7 +2280,7 @@ sub_8070C04: @ 8070C04
 	beq _08070C2E
 	ldr r1, =gStringVar1
 	adds r0, r4, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	adds r0, r4, 0
 	movs r1, 0x7
 	mov r2, sp
@@ -2297,7 +2297,7 @@ _08070C2E:
 	beq _08070C44
 	ldr r1, =gStringVar2
 	adds r0, r4, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 _08070C44:
 	add sp, 0xC
 	pop {r4}
@@ -2317,7 +2317,7 @@ sub_8070C58: @ 8070C58
 	ldr r4, =gPlayerParty
 	adds r0, r4
 	ldr r1, =gStringVar1
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	bl brm_get_pokemon_selection
 	lsls r0, 24
 	lsrs r0, 24
@@ -2788,7 +2788,7 @@ _08070FCC:
 	adds r5, r1, r0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8070F98
@@ -2800,7 +2800,7 @@ _08070FCC:
 	adds r0, r7, 0
 	mov r1, sp
 	bl StringCopy
-	ldr r4, =gUnknown_085EF881
+	ldr r4, =gText_NewLine2
 	adds r0, r7, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -2810,7 +2810,7 @@ _08070FCC:
 	adds r0, r7, 0
 	adds r1, r4, 0
 	bl StringAppend
-	ldr r1, =gUnknown_085EF883
+	ldr r1, =gText_Exit4
 	adds r0, r7, 0
 	bl StringAppend
 	add sp, 0x28
@@ -2834,7 +2834,7 @@ sub_8071038: @ 8071038
 	movs r5, 0
 _08071046:
 	adds r0, r4, 0
-	ldr r1, =gUnknown_085EF888
+	ldr r1, =gText_Lv
 	bl StringAppend
 	movs r0, 0x8C
 	adds r2, r5, 0
@@ -2856,7 +2856,7 @@ _08071046:
 	mov r1, sp
 	bl StringAppend
 	adds r0, r4, 0
-	ldr r1, =gUnknown_085EF881
+	ldr r1, =gText_NewLine2
 	bl StringAppend
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -2944,7 +2944,7 @@ sub_8071110: @ 8071110
 	adds r5, r0
 	adds r0, r5, 0
 	mov r1, sp
-	bl pokemon_get_nick_
+	bl GetBoxMonNick
 	mov r0, sp
 	adds r1, r5, 0
 	bl sub_8070F98
@@ -2971,7 +2971,7 @@ sub_8071148: @ 8071148
 	mov r8, r3
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, =gUnknown_085EF888
+	ldr r1, =gText_Lv
 	mov r0, sp
 	bl StringCopy
 	movs r0, 0x8C

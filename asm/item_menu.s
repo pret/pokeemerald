@@ -437,7 +437,7 @@ _081AAF0C:
 	b _081AB012
 	.pool
 _081AAF1C:
-	ldr r1, =gPocketNames
+	ldr r1, =gPocketNamesStringsTable
 	ldr r4, =gUnknown_0203CE58
 	ldrb r0, [r4, 0x5]
 	lsls r0, 2
@@ -972,7 +972,7 @@ _081AB3C0:
 	movs r2, 0x2
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085E921A
+	ldr r1, =gText_ClearTo11Var1Clear5Var2
 	b _081AB438
 	.pool
 _081AB408:
@@ -995,7 +995,7 @@ _081AB420:
 	adds r0, r5, 0
 	bl CopyItemName
 _081AB436:
-	ldr r1, =gUnknown_085E9210
+	ldr r1, =gText_UnkF908Var1Clear7Var2
 _081AB438:
 	adds r0, r6, 0
 	bl StringExpandPlaceholders
@@ -1297,7 +1297,7 @@ bag_menu_print_description_box_text: @ 81AB6B0
 	.pool
 _081AB6E0:
 	ldr r0, =gStringVar1
-	ldr r2, =gUnknown_085E9180
+	ldr r2, =gReturnToXStringsTable
 	ldr r1, =gUnknown_0203CE58
 	ldrb r1, [r1, 0x4]
 	lsls r1, 2
@@ -2423,7 +2423,7 @@ _081AC026:
 	adds r5, r0, 0
 	cmp r1, 0x1
 	bne _081AC07C
-	ldr r2, =gPocketNames
+	ldr r2, =gPocketNamesStringsTable
 	ldrb r0, [r4, 0x5]
 	lsls r0, 2
 	adds r0, r2
@@ -2439,7 +2439,7 @@ _081AC026:
 	b _081AC09A
 	.pool
 _081AC07C:
-	ldr r2, =gPocketNames
+	ldr r2, =gPocketNamesStringsTable
 	add r0, sp, 0x8
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -4808,7 +4808,7 @@ display_sell_item_ask_str: @ 81AD5DC
 	ldr r1, =gStringVar2
 	bl CopyItemName
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E960F
+	ldr r1, =gText_CantBuyKeyItem
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r3, =bag_menu_inits_lists_menu
@@ -4834,7 +4834,7 @@ _081AD64C:
 	ldr r1, =gStringVar2
 	bl CopyItemName
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E962F
+	ldr r1, =gText_HowManyToSell
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r3, =sub_81AD730
@@ -4874,7 +4874,7 @@ sub_81AD680: @ 81AD680
 	movs r3, 0x6
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9654
+	ldr r1, =gText_ICanPayVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r3, =sub_81AD6E4
@@ -5079,7 +5079,7 @@ sub_81AD84C: @ 81AD84C
 	movs r3, 0x6
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9677
+	ldr r1, =gText_TurnedOverVar1ForVar2
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r3, =sub_81AD8C8
@@ -5744,7 +5744,7 @@ unknown_ItemMenu_Show: @ 81ADE38
 	thumb_func_start bag_menu_leave_maybe_3
 bag_menu_leave_maybe_3: @ 81ADE6C
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_819FA50
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -5779,7 +5779,7 @@ unknown_ItemMenu_Give2: @ 81ADE8C
 	thumb_func_start bag_menu_leave_maybe_2
 bag_menu_leave_maybe_2: @ 81ADEBC
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_818DEF4
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -5810,7 +5810,7 @@ unknown_ItemMenu_Confirm2: @ 81ADEDC
 	thumb_func_start bag_menu_leave_maybe
 bag_menu_leave_maybe: @ 81ADF00
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_818E564
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -6237,7 +6237,7 @@ bag_menu_AddMoney_window: @ 81AE268
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0xE
-	bl set_window_border_style_and_print_money_box
+	bl PrintMoneyAmountInMoneyBoxWithBorder
 	movs r0, 0x13
 	movs r1, 0xB
 	bl AddMoneyLabelObject

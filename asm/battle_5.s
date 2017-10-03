@@ -183,8 +183,8 @@ _080570D0:
 	.pool
 	thumb_func_end sub_8057028
 
-	thumb_func_start sub_80570F4
-sub_80570F4: @ 80570F4
+	thumb_func_start AdjustFriendshipOnBattleFaint
+AdjustFriendshipOnBattleFaint: @ 80570F4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -195,11 +195,11 @@ sub_80570F4: @ 80570F4
 	cmp r0, 0
 	beq _08057140
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r2, =gBattleMons
@@ -220,7 +220,7 @@ sub_80570F4: @ 80570F4
 	.pool
 _08057140:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0805714A:
@@ -285,7 +285,7 @@ _080571CE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80570F4
+	thumb_func_end AdjustFriendshipOnBattleFaint
 
 	thumb_func_start sub_80571DC
 sub_80571DC: @ 80571DC
@@ -398,7 +398,7 @@ _0805729A:
 	cmp r0, 0
 	beq _08057372
 	mov r0, r9
-	bl sub_8050650
+	bl UproarWakeUpCheck
 	lsls r0, 24
 	cmp r0, 0
 	beq _080572FC
@@ -414,12 +414,12 @@ _0805729A:
 	ldr r1, =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	bl b_movescr_stack_push_cursor
+	bl BattleScriptPushCursor
 	movs r0, 0x1
 	mov r2, r10
 	strb r0, [r2, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB220
+	ldr r0, =BattleScript_MoveUsedWokeUp
 	str r0, [r1]
 	movs r0, 0x2
 	mov r8, r0
@@ -461,7 +461,7 @@ _08057322:
 	cmp r4, 0
 	beq _08057354
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB213
+	ldr r0, =BattleScript_MoveUsedIsAsleep
 	str r0, [r1]
 	movs r1, 0x2
 	mov r8, r1
@@ -474,11 +474,11 @@ _08057354:
 	ldr r1, =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	bl b_movescr_stack_push_cursor
+	bl BattleScriptPushCursor
 	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB220
+	ldr r0, =BattleScript_MoveUsedWokeUp
 	str r0, [r1]
 	movs r2, 0x2
 	mov r8, r2
@@ -513,7 +513,7 @@ _08057390:
 	cmp r5, 0
 	beq _080573D4
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB26A
+	ldr r0, =BattleScript_MoveUsedIsFrozen
 	str r0, [r1]
 	b _080573EC
 	.pool
@@ -523,9 +523,9 @@ _080573D4:
 	negs r1, r1
 	ands r0, r1
 	str r0, [r4]
-	bl b_movescr_stack_push_cursor
+	bl BattleScriptPushCursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB277
+	ldr r0, =BattleScript_MoveUsedUnfroze
 	str r0, [r1]
 	mov r0, r10
 	strb r5, [r0, 0x5]
@@ -562,9 +562,9 @@ _08057406:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetMonData
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _08057430:
 	mov r0, r8
 	add sp, 0x4

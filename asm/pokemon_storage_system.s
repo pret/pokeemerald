@@ -586,7 +586,7 @@ _080C73F6:
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EBCAD
+	ldr r2, =gText_PartyFull
 	str r4, [sp]
 	movs r0, 0x2
 	str r0, [sp, 0x4]
@@ -609,7 +609,7 @@ _080C7428:
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EBC89
+	ldr r2, =gText_JustOnePkmn
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -870,7 +870,7 @@ sub_80C7678: @ 80C7678
 	bl sub_80CAEA0
 	ldr r1, =gUnknown_02039D00
 	strb r0, [r1]
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_0808C6D8
 	str r0, [r1]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -1019,8 +1019,8 @@ _080C777E:
 _080C779E:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sav3_get_box_name
-	ldr r1, =gUnknown_085EBCC1
+	bl GetBoxNamePtr
+	ldr r1, =gText_Box
 	bl StringCopy
 	adds r4, r5, 0x1
 	adds r1, r4, 0
@@ -1566,7 +1566,7 @@ sub_80C7BE4: @ 80C7BE4
 	lsls r4, 2
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	mov r10, r0
 	mov r1, r9
 	ldr r0, [r1]
@@ -5424,7 +5424,7 @@ _080C9F1C:
 	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	movs r0, 0
 	str r0, [sp]
@@ -5433,7 +5433,7 @@ _080C9F1C:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	b _080C9F56
 	.pool
 _080C9F48:
@@ -10831,7 +10831,7 @@ sub_80CCB50: @ 80CCB50
 	ldr r5, =0x000021b8
 	adds r4, r5
 	mov r0, r8
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -10852,7 +10852,7 @@ sub_80CCB50: @ 80CCB50
 	ldr r0, [sp, 0x2C]
 	bl LoadSpriteSheet
 	mov r0, r8
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	bl sub_80CD00C
 	movs r4, 0
 	lsls r0, 16
@@ -10997,7 +10997,7 @@ _080CCDB0:
 	ldr r5, =0x000021b8
 	adds r4, r5
 	ldr r0, [sp, 0x28]
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -11027,7 +11027,7 @@ _080CCDB0:
 	movs r2, 0x4
 	bl LoadPalette
 	ldr r0, [sp, 0x28]
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	bl sub_80CD00C
 	lsls r0, 16
 	mov r1, r10
@@ -17910,7 +17910,7 @@ sub_80D07B0: @ 80D07B0
 	beq _080D0828
 	adds r0, r5, 0
 	movs r2, 0x1
-	bl sub_80D2EDC
+	bl GetMonIconPtr
 	adds r4, r0, 0
 	adds r0, r5, 0
 	bl sub_80D3080
@@ -21085,8 +21085,8 @@ _080D20CA:
 	bx r1
 	thumb_func_end GetBoxedMonPtr
 
-	thumb_func_start sav3_get_box_name
-sav3_get_box_name: @ 80D20D0
+	thumb_func_start GetBoxNamePtr
+GetBoxNamePtr: @ 80D20D0
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -21106,7 +21106,7 @@ _080D20EC:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sav3_get_box_name
+	thumb_func_end GetBoxNamePtr
 
 	thumb_func_start sub_80D20F8
 sub_80D20F8: @ 80D20F8

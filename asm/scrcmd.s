@@ -3977,7 +3977,7 @@ sub_809B114: @ 809B114
 	adds r4, r0
 	ldr r0, [r4]
 	lsrs r1, 11
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	movs r0, 0
@@ -4183,7 +4183,7 @@ sC6_load_textvar_box_label: @ 809B2C8
 	ldr r4, [r4]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -4468,7 +4468,7 @@ s93_display_money: @ 809B500
 	bl GetMoney
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_80E52EC
+	bl DrawMoneyBox
 _0809B530:
 	movs r0, 0
 	pop {r4,r5}
@@ -4480,7 +4480,7 @@ _0809B530:
 	thumb_func_start s94_hide_money
 s94_hide_money: @ 809B53C
 	push {lr}
-	bl sub_80E5384
+	bl HideMoneyBox
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -4505,7 +4505,7 @@ s95_update_money: @ 809B548
 	lsls r1, 3
 	adds r0, r1
 	bl GetMoney
-	bl sub_80E52D4
+	bl ChangeAmountInMoneyBox
 _0809B56E:
 	movs r0, 0
 	pop {r1}
@@ -4874,7 +4874,7 @@ s9D_set_HM_animation_data: @ 809B7F4
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r4, 2
 	adds r4, r1
 	lsls r0, 16

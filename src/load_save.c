@@ -6,15 +6,11 @@
 #include "rng.h"
 #include "malloc.h"
 
-extern u8 gPlayerPartyCount;
-extern struct PokemonStorage* gPokemonStoragePtr;
 extern void* gUnknown_0203CF5C;
-extern u8 gHeap[0x1C000];
 
 extern bool16 IdentifyFlash(void);
 extern void SetBagItemsPointers(void);
 extern void SetDecorationInventoriesPointers(void);
-extern void InitHeap(void *heapStart, u32 heapSize);
 
 void ApplyNewEncyprtionKeyToAllEncryptedData(u32 encryptionKey);
 

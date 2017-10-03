@@ -236,8 +236,8 @@ _08184FA0:
 	.pool
 	thumb_func_end sub_8184E58
 
-	thumb_func_start sub_8184FBC
-sub_8184FBC: @ 8184FBC
+	thumb_func_start RecordedBattle_SetBankAction
+RecordedBattle_SetBankAction: @ 8184FBC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -269,7 +269,7 @@ _08184FF0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8184FBC
+	thumb_func_end RecordedBattle_SetBankAction
 
 	thumb_func_start sub_8185008
 sub_8185008: @ 8185008
@@ -2212,7 +2212,7 @@ _081860C2:
 	ldr r1, [sp, 0x4C]
 	lsrs r0, r1, 24
 	movs r1, 0x6
-	bl sub_8184FBC
+	bl RecordedBattle_SetBankAction
 	movs r5, 0
 	ldr r2, =gUnknown_0203CC70
 	mov r8, r2
@@ -2241,7 +2241,7 @@ _081860F0:
 	lsrs r1, 24
 	ldr r2, [sp, 0x4C]
 	lsrs r0, r2, 24
-	bl sub_8184FBC
+	bl RecordedBattle_SetBankAction
 	b _08186118
 	.pool
 _08186110:
@@ -2599,7 +2599,7 @@ _081863A2:
 	ldr r2, [sp, 0x40]
 	bl SetMonData
 _081863CA:
-	ldr r2, =gUnknown_02024274
+	ldr r2, =gChosenMovesByBanks
 	ldr r3, [sp, 0x44]
 	adds r2, r3, r2
 	ldr r0, =gBattleStruct

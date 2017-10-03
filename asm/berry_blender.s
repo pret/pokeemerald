@@ -5627,7 +5627,7 @@ _080827AA:
 	ldr r0, [r6]
 	ldr r1, =0x000011b8
 	adds r0, r1
-	ldr r1, =gUnknown_085EE42D
+	ldr r1, =gText_SavingDontTurnOff2
 	movs r2, 0
 	bl sub_808417C
 	bl sub_800ADF8
@@ -8350,7 +8350,7 @@ ShowBerryBlenderRecordWindow: @ 8083E24
 	ldrb r0, [r5]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r6, =gUnknown_085EE44F
+	ldr r6, =gText_BlenderMaxSpeedRecord
 	movs r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0x90
@@ -8367,7 +8367,7 @@ ShowBerryBlenderRecordWindow: @ 8083E24
 	adds r2, r6, 0
 	bl PrintTextOnWindow
 	ldrb r0, [r5]
-	ldr r2, =gUnknown_085EE473
+	ldr r2, =gText_234Players
 	movs r1, 0x29
 	str r1, [sp]
 	str r4, [sp, 0x4]

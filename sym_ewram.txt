@@ -211,19 +211,19 @@ gUnknown_02022E14: @ 2022E14
 gUnknown_02022E16: @ 2022E16
 	.space 0x2
 
-gUnknown_02022E18: @ 2022E18
+gBattle_BG1_X: @ 2022E18
 	.space 0x2
 
-gUnknown_02022E1A: @ 2022E1A
+gBattle_BG1_Y: @ 2022E1A
 	.space 0x2
 
-gUnknown_02022E1C: @ 2022E1C
+gBattle_BG2_X: @ 2022E1C
 	.space 0x2
 
-gUnknown_02022E1E: @ 2022E1E
+gBattle_BG2_Y: @ 2022E1E
 	.space 0x2
 
-gUnknown_02022E20: @ 2022E20
+gBattle_BG3_X: @ 2022E20
 	.space 0x2
 
 gUnknown_02022E22: @ 2022E22
@@ -268,7 +268,7 @@ gUnknown_02022F88: @ 2022F88
 gBattleTypeFlags: @ 2022FEC
 	.space 0x4
 
-gUnknown_02022FF0: @ 2022FF0
+gBattleTerrain: @ 2022FF0
 	.space 0x4
 
 gUnknown_02022FF4: @ 2022FF4
@@ -313,7 +313,7 @@ gUnknown_0202407A: @ 202407A
 gTurnOrder: @ 202407E
 	.space 0x4
 
-gUnknown_02024082: @ 2024082
+gCurrentMoveTurn: @ 2024082
 	.space 0x1
 
 gFightStateTracker: @ 2024083
@@ -334,7 +334,7 @@ gUnknown_020241E9: @ 20241E9
 gCurrentMove: @ 20241EA
 	.space 0x2
 
-gUnknown_020241EC: @ 20241EC
+gLastUsedMove: @ 20241EC
 	.space 0x2
 
 gRandomMove: @ 20241EE
@@ -343,10 +343,10 @@ gRandomMove: @ 20241EE
 gBattleMoveDamage: @ 20241F0
 	.space 0x4
 
-gUnknown_020241F4: @ 20241F4
+gHpDealt: @ 20241F4
 	.space 0x4
 
-gUnknown_020241F8: @ 20241F8
+gTakenDmg: @ 20241F8
 	.space 0x10
 
 gLastUsedItem: @ 2024208
@@ -361,10 +361,10 @@ gBankAttacker: @ 202420B
 gBankTarget: @ 202420C
 	.space 0x1
 
-gUnknown_0202420D: @ 202420D
+gBank1: @ 202420D
 	.space 0x1
 
-gUnknown_0202420E: @ 202420E
+gEffectBank: @ 202420E
 	.space 0x1
 
 gStringBank: @ 202420F
@@ -376,13 +376,13 @@ gAbsentBankFlags: @ 2024210
 gCritMultiplier: @ 2024211
 	.space 0x1
 
-gUnknown_02024212: @ 2024212
+gMultiHitCounter: @ 2024212
 	.space 0x2
 
 gBattlescriptCurrInstr: @ 2024214
 	.space 0x8
 
-gUnknown_0202421C: @ 202421C
+gActionForBanks: @ 202421C
 	.space 0x4
 
 gUnknown_02024220: @ 2024220
@@ -391,7 +391,7 @@ gUnknown_02024220: @ 2024220
 gUnknown_02024230: @ 2024230
 	.space 0x10
 
-gUnknown_02024240: @ 2024240
+gUnknownMovesUsedByBanks: @ 2024240
 	.space 0x8
 
 gLastUsedMovesByBanks: @ 2024248
@@ -406,13 +406,13 @@ gUnknown_02024258: @ 2024258
 gUnknown_02024260: @ 2024260
 	.space 0x8
 
-gUnknown_02024268: @ 2024268
+gLockedMoves: @ 2024268
 	.space 0x8
 
 gUnknown_02024270: @ 2024270
 	.space 0x4
 
-gUnknown_02024274: @ 2024274
+gChosenMovesByBanks: @ 2024274
 	.space 0x8
 
 gBattleMoveFlags: @ 202427C
@@ -424,7 +424,7 @@ gHitMarker: @ 2024280
 gUnknown_02024284: @ 2024284
 	.space 0x4
 
-gUnknown_02024288: @ 2024288
+gTakenDmgBanks: @ 2024288
 	.space 0x4
 
 gUnknown_0202428C: @ 202428C
@@ -442,10 +442,10 @@ gStatuses3: @ 20242AC
 gDisableStructs: @ 20242BC
 	.space 0x70
 
-gUnknown_0202432C: @ 202432C
+gPauseCounterBattle: @ 202432C
 	.space 0x2
 
-gUnknown_0202432E: @ 202432E
+gPaydayMoney: @ 202432E
 	.space 0x2
 
 gUnknown_02024330: @ 2024330
@@ -469,19 +469,19 @@ gSpecialStatuses: @ 202437C
 gBattleWeather: @ 20243CC
 	.space 0x4
 
-gUnknown_020243D0: @ 20243D0
+gWishFutureKnock: @ 20243D0
 	.space 0x2C
 
 gUnknown_020243FC: @ 20243FC
 	.space 0x2
 
-gUnknown_020243FE: @ 20243FE
+gSentPokesToOpponent: @ 20243FE
 	.space 0x2
 
 gDynamicBasePower: @ 2024400
 	.space 0x2
 
-gUnknown_02024402: @ 2024402
+gExpShareExp: @ 2024402
 	.space 0x2
 
 gEnigmaBerries: @ 2024404
@@ -654,7 +654,7 @@ gUnknown_02032304: @ 2032304
 gUnknown_02032306: @ 2032306
 	.space 0x2
 
-gUnknown_02032308: @ 2032308
+gLinkPlayerMapObjects: @ 2032308
 	.space 0x10
 
 gUnknown_02032318: @ 2032318
@@ -663,7 +663,7 @@ gUnknown_02032318: @ 2032318
 gMapHeader: @ 2037318
 	.space 0x1C
 
-gUnknown_02037334: @ 2037334
+gCamera: @ 2037334
 	.space 0xC
 
 gUnknown_02037340: @ 2037340
@@ -678,7 +678,7 @@ gUnknown_0203734C: @ 203734C
 gMapObjects: @ 2037350
 	.space 0x240
 
-gUnknown_02037590: @ 2037590
+gPlayerAvatar: @ 2037590
 	.space 0x14
 
 gUnknown_020375A4: @ 20375A4
@@ -747,9 +747,7 @@ gUnknown_02037621: @ 2037621
 gUnknown_02037622: @ 2037622
 	.space 0x2
 
-gUnknown_02037624: @ 2037624
-	.space 0xF0
-
+	.include "src/tileset_anims.o"
 	.include "src/palette.o"
     .include "src/sound.o"
     
@@ -902,7 +900,7 @@ gUnknown_02038C00: @ 2038C00
 gUnknown_02038C04: @ 2038C04
 	.space 0x4
 
-gUnknown_02038C08: @ 2038C08
+gFieldEffectSpawnParams: @ 2038C08
 	.space 0x20
 
 gUnknown_02038C28: @ 2038C28
@@ -1148,12 +1146,9 @@ gUnknown_02039F90: @ 2039F90
 gUnknown_02039F94: @ 2039F94
 	.space 0x4
 
-gUnknown_02039F98: @ 2039F98
-	.space 0x1
-
-gUnknown_02039F99: @ 2039F99
-	.space 0x3
-
+    .include "src/money.o"
+    
+    .align 2
 gUnknown_02039F9C: @ 2039F9C
 	.space 0x78
 
@@ -1405,7 +1400,7 @@ gUnknown_0203AB30: @ 203AB30
 gUnknown_0203AB34: @ 203AB34
 	.space 0x4
 
-    .include "src/battle_ai.o"
+    .include "src/battle_ai_script_commands.o"
     
 .align 2
 gUnknown_0203AB40: @ 203AB40
@@ -1550,11 +1545,7 @@ gUnknown_0203BC38: @ 203BC38
 gDecorationInventories: @ 203BC40
 	.space 0x40
 
-sLocationHistory: @ 203BC80
-	.space 0x6
-
-sRoamerLocation: @ 203BC86
-	.space 0x2
+    .include "src/roamer.o"
 
 gUnknown_0203BC88: @ 203BC88
 	.space 0x4
@@ -1762,20 +1753,8 @@ gUnknown_0203CCDC: @ 203CCDC
 gUnknown_0203CCE8: @ 203CCE8
 	.space 0x4
 
-gUnknown_0203CCEC: @ 203CCEC
-	.space 0x18
-
-gUnknown_0203CD04: @ 203CD04
-	.space 0x60
-
-gUnknown_0203CD64: @ 203CD64
-	.space 0x4
-
-gUnknown_0203CD68: @ 203CD68
-	.space 0x4
-
-gUnknown_0203CD6C: @ 203CD6C
-	.space 0x4
+    .include "src/battle_dome_cards.o"
+    .include "src/lilycove_lady.o"
 
 gUnknown_0203CD70: @ 203CD70
 	.space 0x4

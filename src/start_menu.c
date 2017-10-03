@@ -151,7 +151,7 @@ static void BuildStartMenuActions_MultiBattleRoom(void)
 extern const struct WindowTemplate gSafariBallsWindowTemplate;
 extern const struct WindowTemplate gPyramidFloorWindowTemplate_1;
 extern const struct WindowTemplate gPyramidFloorWindowTemplate_2;
-extern const u8 gOtherText_SafariStock[];
+extern const u8 gText_SafariBallStock[];
 
 void DisplaySafariBallsWindow(void)
 {
@@ -159,13 +159,13 @@ void DisplaySafariBallsWindow(void)
     PutWindowTilemap(sSafariBallsWindowId);
     sub_81973FC(sSafariBallsWindowId, 0);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, gOtherText_SafariStock);
+    StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
     PrintTextOnWindow(sSafariBallsWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
     CopyWindowToVram(sSafariBallsWindowId, 2);
 }
 
 extern const u8* const gUnknown_08510510[];
-extern const u8 gOtherText_BattlePyramid_X[];
+extern const u8 gText_BattlePyramidFloor[];
 
 void DisplayPyramidFloorWindow(void)
 {
@@ -177,7 +177,7 @@ void DisplayPyramidFloorWindow(void)
     PutWindowTilemap(sBattlePyramidFloorWindowId);
     sub_81973FC(sBattlePyramidFloorWindowId, 0);
     StringCopy(gStringVar1, gUnknown_08510510[*(u16*)(&gSaveBlock2Ptr->field_CAA[8])]);
-    StringExpandPlaceholders(gStringVar4, gOtherText_BattlePyramid_X);
+    StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
     PrintTextOnWindow(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
     CopyWindowToVram(sBattlePyramidFloorWindowId, 2);
 }

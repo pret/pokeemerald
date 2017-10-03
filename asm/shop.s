@@ -227,7 +227,7 @@ HandleShopMenuSell: @ 80DFC0C
 @ int CB2_ExitSellMenu()
 CB2_ExitSellMenu: @ 80DFC48
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =MapPostLoadHook_ExitBuyOrSellMenu
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -325,14 +325,14 @@ Task_ExitSellMenu: @ 80DFCF8
 	ldrb r0, [r0, 0xF]
 	cmp r0, 0x2
 	bne _080DFD2C
-	ldr r1, =gUnknown_085E95C7
+	ldr r1, =gText_CanIHelpWithAnythingElse
 	ldr r2, =ReturnToShopMenuAfterExitingSellMenu
 	adds r0, r4, 0
 	bl DisplayItemMessageOnField
 	b _080DFD36
 	.pool
 _080DFD2C:
-	ldr r1, =gUnknown_085E959B
+	ldr r1, =gText_AnythingElseICanHelp
 	ldr r2, =ReturnToShopMenuAfterExitingSellMenu
 	adds r0, r5, 0
 	bl DisplayItemMessageOnField
@@ -657,7 +657,7 @@ BuyMenuSetListEntry: @ 80E0000
 	.pool
 _080E0020:
 	lsls r1, r4, 5
-	ldr r0, =gUnknown_085A5C09
+	ldr r0, =gDecorations + 1
 	adds r1, r0
 	adds r0, r5, 0
 	bl StringCopy
@@ -748,7 +748,7 @@ _080E00D8:
 	b _080E00EA
 	.pool
 _080E00E8:
-	ldr r4, =gUnknown_085E93E0
+	ldr r4, =gText_QuitShopping
 _080E00EA:
 	movs r0, 0x2
 	movs r1, 0
@@ -817,7 +817,7 @@ _080E0164:
 	bl ConvertIntToDecimalStringN
 _080E0176:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E969C
+	ldr r1, =gText_PokedollarVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x7
@@ -1125,7 +1125,7 @@ BuyMenuInitBgs: @ 80E036C
 BuyMenuDecompressBgGraphics: @ 80E0424
 	push {lr}
 	sub sp, 0x4
-	ldr r1, =gUnknown_08D9AFBC
+	ldr r1, =gBuyMenuFrame_Gfx
 	movs r2, 0xE8
 	lsls r2, 2
 	ldr r3, =0x000003e3
@@ -1133,11 +1133,11 @@ BuyMenuDecompressBgGraphics: @ 80E0424
 	str r0, [sp]
 	movs r0, 0x1
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r0, =gUnknown_08D9B0F0
+	ldr r0, =gBuyMenuFrame_Tilemap
 	ldr r1, =gUnknown_02039F70
 	ldr r1, [r1]
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08D9B0C8
+	ldr r0, =gMenuMoneyPal
 	movs r1, 0xC0
 	movs r2, 0x20
 	bl LoadCompressedPalette
@@ -1259,7 +1259,7 @@ BuyMenuDrawGraphics: @ 80E0524
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD
-	bl set_window_border_style_and_print_money_box
+	bl PrintMoneyAmountInMoneyBoxWithBorder
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -2060,7 +2060,7 @@ _080E0B92:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E0BD0
-	ldr r1, =gUnknown_085E9539
+	ldr r1, =gText_YouDontHaveMoney
 	ldr r2, =BuyMenuReturnToItemList
 	b _080E0C28
 	.pool
@@ -2091,11 +2091,11 @@ _080E0BD0:
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =gUnknown_085E9417
+	ldr r1, =gText_Var1CertainlyHowMany2
 	b _080E0C26
 	.pool
 _080E0C24:
-	ldr r1, =gUnknown_085E93EF
+	ldr r1, =gText_Var1CertainlyHowMany
 _080E0C26:
 	ldr r2, =Task_BuyHowManyDialogueInit
 _080E0C28:
@@ -2106,7 +2106,7 @@ _080E0C28:
 _080E0C38:
 	ldr r0, =gStringVar1
 	lsls r1, r5, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	ldr r0, =gStringVar2
@@ -2121,13 +2121,13 @@ _080E0C38:
 	cmp r0, 0x1
 	bne _080E0C7C
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9468
+	ldr r1, =gText_Var1IsItThatllBeVar2
 	bl StringExpandPlaceholders
 	b _080E0C84
 	.pool
 _080E0C7C:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9493
+	ldr r1, =gText_YouWantedVar1ThatllBeVar2
 	bl StringExpandPlaceholders
 _080E0C84:
 	ldr r1, =gStringVar4
@@ -2171,7 +2171,7 @@ Task_BuyHowManyDialogueInit: @ 80E0CA4
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E93D5
+	ldr r1, =gText_InBagVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -2319,7 +2319,7 @@ _080E0DF0:
 	movs r2, 0
 	movs r3, 0x6
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085E943F
+	ldr r1, =gText_Var1AndYouWantedVar2
 	ldr r2, =BuyMenuConfirmPurchase
 	adds r0, r6, 0
 	bl BuyMenuDisplayMessage
@@ -2400,7 +2400,7 @@ BuyMenuTryMakePurchase: @ 80E0EDC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E0F30
-	ldr r1, =gUnknown_085E94C5
+	ldr r1, =gText_HereYouGoThankYou
 	ldr r2, =BuyMenuSubtractMoney
 	adds r0, r5, 0
 	bl BuyMenuDisplayMessage
@@ -2409,7 +2409,7 @@ BuyMenuTryMakePurchase: @ 80E0EDC
 	b _080E0F7A
 	.pool
 _080E0F30:
-	ldr r1, =gUnknown_085E9558
+	ldr r1, =gText_NoMoreRoomForThis
 	ldr r2, =BuyMenuReturnToItemList
 	b _080E0F60
 	.pool
@@ -2422,11 +2422,11 @@ _080E0F40:
 	ldrb r0, [r6, 0xF]
 	cmp r0, 0x1
 	bne _080E0F5C
-	ldr r1, =gUnknown_085E94E7
+	ldr r1, =gText_ThankYouIllSendItHome
 	b _080E0F5E
 	.pool
 _080E0F5C:
-	ldr r1, =gUnknown_085E9510
+	ldr r1, =gText_ThanksIllSendItHome
 _080E0F5E:
 	ldr r2, =BuyMenuSubtractMoney
 _080E0F60:
@@ -2435,7 +2435,7 @@ _080E0F60:
 	b _080E0F7A
 	.pool
 _080E0F70:
-	ldr r1, =gUnknown_085E957F
+	ldr r1, =gText_SpaceForVar1Full
 	ldr r2, =BuyMenuReturnToItemList
 	adds r0, r7, 0
 	bl BuyMenuDisplayMessage
@@ -2536,7 +2536,7 @@ Task_ReturnToItemListAfterItemPurchase: @ 80E100C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E106C
-	ldr r1, =gUnknown_085E95EA
+	ldr r1, =gText_ThrowInPremierBall
 	ldr r2, =BuyMenuReturnToItemList
 	adds r0, r4, 0
 	bl BuyMenuDisplayMessage
@@ -2668,7 +2668,7 @@ ExitBuyMenu: @ 80E1168
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =MapPostLoadHook_ExitBuyOrSellMenu
 	str r0, [r1]
 	movs r0, 0x1

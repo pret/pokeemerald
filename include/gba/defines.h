@@ -50,6 +50,8 @@
 #define OAM      0x7000000
 #define OAM_SIZE 0x400
 
+#define ROM_HEADER_SIZE   0xC0
+
 #define DISPLAY_WIDTH  240
 #define DISPLAY_HEIGHT 160
 

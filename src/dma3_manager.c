@@ -1,12 +1,23 @@
 #include "global.h"
 #include "dma3.h"
 
+IWRAM_DATA struct {
+    /* 0x00 */ const u8 *src;
+    /* 0x04 */ u8 *dest;
+    /* 0x08 */ u16 size;
+    /* 0x0A */ u16 mode;
+    /* 0x0C */ u32 value;
+} gDma3Requests[128];
+
+static bool8 gDma3ManagerLocked;
+static u8 gDma3RequestCursor;
+
 void ClearDma3Requests(void)
 {
     int i;
 
     gDma3ManagerLocked = TRUE;
-    gDma3RequestCursor = FALSE;
+    gDma3RequestCursor = 0;
 
     for(i = 0; i < (u8)ARRAY_COUNT(gDma3Requests); i++)
     {
@@ -14,7 +25,7 @@ void ClearDma3Requests(void)
         gDma3Requests[i].src = 0;
         gDma3Requests[i].dest = 0;
     }
-    
+
     gDma3ManagerLocked = FALSE;
 }
 
@@ -22,9 +33,8 @@ void ClearDma3Requests(void)
 void ProcessDma3Requests(void)
 {
     // NOTE: the fillerA member of the DMA struct is actually u32 value;
-    // NOTE: gUnknown_0300001C is just a pointer inside the gDma3Requests structure, not a true symbol; feel free to remove
     u16 total_size;
-    
+
     if (gDma3ManagerLocked)
         return;
 
@@ -34,7 +44,7 @@ void ProcessDma3Requests(void)
     while (gDma3Requests[gDma3RequestCursor].size)
     {
         total_size += gDma3Requests[gDma3RequestCursor].size;
-        
+
         if (total_size > 0xA000)
             return; // don't do too much at once
 
@@ -90,14 +100,14 @@ void ProcessDma3Requests(void)
             }
             DmaFill16(3, gDma3Requests[gDma3RequestCursor].value, gDma3Requests[gDma3RequestCursor].dest, gDma3Requests[gDma3RequestCursor].size);
             break;
-        }        
-        gDma3Requests[gDma3RequestCursor].src = 0;
-        gDma3Requests[gDma3RequestCursor].dest = 0;
+        }
+        gDma3Requests[gDma3RequestCursor].src = NULL;
+        gDma3Requests[gDma3RequestCursor].dest = NULL;
         gDma3Requests[gDma3RequestCursor].size = 0;
         gDma3Requests[gDma3RequestCursor].mode = 0;
         gDma3Requests[gDma3RequestCursor].value = 0;
         gDma3RequestCursor++;
-        
+
         if (gDma3RequestCursor >= 128) // loop back to the first DMA request
             gDma3RequestCursor = 0;
     }
@@ -331,7 +341,7 @@ _08000DB2:\n\
     mov r5, r12\n\
     ldrb r0, [r5]\n\
     lsls r0, 4\n\
-    ldr r3, =gUnknown_0300001C\n\
+    ldr r3, =gDma3Requests + 0x0C\n\
     adds r0, r3\n\
     ldr r0, [r0]\n\
     strh r0, [r1]\n\
@@ -347,7 +357,7 @@ _08000DB2:\n\
     bhi _08000DB2\n\
     ldrb r0, [r5]\n\
     lsls r0, 4\n\
-    ldr r5, =gUnknown_0300001C\n\
+    ldr r5, =gDma3Requests + 0x0C\n\
     adds r0, r5\n\
     ldr r0, [r0]\n\
     strh r0, [r1]\n\
@@ -419,13 +429,13 @@ _08000E46:\n\
 }
 #endif
 
-int RequestDma3Copy(void *src, void *dest, u16 size, u8 mode)
+int RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode)
 {
     int cursor;
     int var = 0;
-    
+
     gDma3ManagerLocked = 1;
-    
+
     cursor = gDma3RequestCursor;
     while(1)
     {
@@ -434,12 +444,12 @@ int RequestDma3Copy(void *src, void *dest, u16 size, u8 mode)
             gDma3Requests[cursor].src = src;
             gDma3Requests[cursor].dest = dest;
             gDma3Requests[cursor].size = size;
-        
+
             if(mode == 1)
                 gDma3Requests[cursor].mode = mode;
             else
                 gDma3Requests[cursor].mode = 3;
-        
+
             gDma3ManagerLocked = FALSE;
             return (s16)cursor;
         }
@@ -460,10 +470,10 @@ int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
 {
     int cursor;
     int var = 0;
-    
+
     cursor = gDma3RequestCursor;
     gDma3ManagerLocked = 1;
-    
+
     while(1)
     {
         if(!gDma3Requests[cursor].size)
@@ -477,7 +487,7 @@ int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
                 gDma3Requests[cursor].mode = 2;
             else
                 gDma3Requests[cursor].mode = 4;
-        
+
             gDma3ManagerLocked = FALSE;
             return (s16)cursor;
         }
@@ -503,9 +513,9 @@ int CheckForSpaceForDma3Request(s16 index)
         for (; current < 0x80; current ++)
             if (gDma3Requests[current].size)
                 return -1;
-        
+
         return 0;
-    } 
+    }
 
     if (gDma3Requests[index].size)
         return -1;

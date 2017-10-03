@@ -46,16 +46,16 @@ extern const struct SpindaSpot gSpindaSpotGraphics[];
 extern const u8* const gStatNamesTable[];
 extern const u8 gSpeciesNames[][11];
 extern const u8 gUnknown_08329EC8[];
-extern const u8 gUnknown_085CB38A[];
-extern const u8 gUnknown_085CB3AA[];
-extern const u8 gUnknown_085CA459[];
-extern const u8 gUnknown_085CA424[];
+extern const u8 gText_StatRose[];
+extern const u8 gText_PkmnsStatChanged2[];
+extern const u8 gText_PkmnGettingPumped[];
+extern const u8 gText_PkmnShroudedInMist[];
 extern const s8 gNatureStatTable[][5];
 extern const s8 gUnknown_08329ECE[][3];
 extern const u32 gBitTable[];
 extern const u32 gTMHMLearnsets[][2];
-extern const u8 BattleText_Wally[];
-extern const u8 BattleText_PreventedSwitch[];
+extern const u8 gText_BattleWallyName[];
+extern const u8 gText_PkmnsXPreventsSwitching[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
@@ -215,8 +215,8 @@ void sub_806CF24(s32 stat)
 {
     gBankTarget = gBankInMenu;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[stat]]);
-    StringCopy(gBattleTextBuff2, gUnknown_085CB38A);
-    StrCpyDecodeToDisplayedStringBattle(gUnknown_085CB3AA);
+    StringCopy(gBattleTextBuff2, gText_StatRose);
+    BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
 }
 
 u8 *sub_806CF78(u16 itemId)
@@ -251,7 +251,7 @@ u8 *sub_806CF78(u16 itemId)
             else
             {
                 gBankAttacker = gBankInMenu;
-                StrCpyDecodeToDisplayedStringBattle(gUnknown_085CA459);
+                BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnGettingPumped);
             }
         }
     }
@@ -259,7 +259,7 @@ u8 *sub_806CF78(u16 itemId)
     if (itemEffect[3] & 0x80)
     {
         gBankAttacker = gBankInMenu;
-        StrCpyDecodeToDisplayedStringBattle(gUnknown_085CA424);
+        BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnShroudedInMist);
     }
 
     return gDisplayedStringBattle;
@@ -601,9 +601,9 @@ bool8 sub_806D7EC(void)
     return retVal;
 }
 
-bool8 sub_806D82C(u8 id)
+bool16 sub_806D82C(u8 id)
 {
-    bool8 retVal = FALSE;
+    bool16 retVal = FALSE;
     switch (gLinkPlayers[id].lp_field_18)
     {
     case 0:
@@ -1177,7 +1177,7 @@ u16 GetBattleBGM(void)
         case CLASS_PKMN_TRAINER_RIVAL:
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 return 0x1E1;
-            if (!StringCompare(gTrainers[gTrainerBattleOpponent_A].trainerName, BattleText_Wally))
+            if (!StringCompare(gTrainers[gTrainerBattleOpponent_A].trainerName, gText_BattleWallyName))
                 return 0x1DC;
             return 0x1E1;
         case CLASS_ELITE_FOUR:
@@ -1361,20 +1361,20 @@ void BoxMonRestorePP(struct BoxPokemon *boxMon)
 void sub_806E994(void)
 {
     gLastUsedAbility = gBattleStruct->field_B0;
-    gBattleTextBuff1[0] = 0xFD;
-    gBattleTextBuff1[1] = 4;
+
+    gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
+    gBattleTextBuff1[1] = B_BUFF_MON_NICK_WITH_PREFIX;
     gBattleTextBuff1[2] = gBattleStruct->field_49;
-    gBattleTextBuff1[4] = EOS;
+    gBattleTextBuff1[4] = B_BUFF_EOS;
+
     if (!GetBankSide(gBattleStruct->field_49))
         gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[gBattleStruct->field_49]);
     else
         gBattleTextBuff1[3] = gBattlePartyID[gBattleStruct->field_49];
-    gBattleTextBuff2[0] = 0xFD;
-    gBattleTextBuff2[1] = 4;
-    gBattleTextBuff2[2] = gBankInMenu;
-    gBattleTextBuff2[3] = pokemon_order_func(gBattlePartyID[gBankInMenu]);
-    gBattleTextBuff2[4] = EOS;
-    StrCpyDecodeBattle(BattleText_PreventedSwitch, gStringVar4);
+
+    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBankInMenu, pokemon_order_func(gBattlePartyID[gBankInMenu]))
+
+    BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
 }
 
 struct PokeItem
@@ -1388,7 +1388,7 @@ extern const struct PokeItem gAlteringCaveWildMonHeldItems[9];
 static s32 GetWildMonTableIdInAlteringCave(u16 species)
 {
     s32 i;
-    for (i = 0; i < 9; i++)
+    for (i = 0; i < (s32) ARRAY_COUNT(gAlteringCaveWildMonHeldItems); i++)
         if (gAlteringCaveWildMonHeldItems[i].species == species)
             return i;
     return 0;
@@ -1510,8 +1510,6 @@ static void Task_PokemonSummaryAnimateAfterDelay(u8 taskId)
         DestroyTask(taskId);
     }
 }
-
-void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
 
 void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3)
 {

@@ -1,9 +1,9 @@
 #include "global.h"
-#include "text.h"
 #include "main.h"
 #include "palette.h"
 #include "string_util.h"
 #include "window.h"
+#include "text.h"
 
 extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 extern void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height);
@@ -32,11 +32,7 @@ u8 gUnknown_03002FB0[0x20];
 u8 gUnknown_03002FD0[0x20];
 u8 gUnknown_03002FF0[0x20];
 u8 gGlyphDimensions[0x2];
-struct {
-    u8 flag_0:1;
-    u8 flag_1:1;
-    u8 flag_2:1;
-} gTextFlags;
+TextFlags gTextFlags;
 
 const u8 gFontHalfRowOffsets[] = {
 	0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
@@ -244,11 +240,10 @@ void RunTextPrinters(void)
     }
 }
 
-bool8 IsTextPrinterActive(u8 id)
+bool16 IsTextPrinterActive(u8 id)
 {
     return gTextPrinters[id].sub_union.sub.active;
 }
-
 
 u32 RenderFont(struct TextPrinter *textPrinter)
 {
@@ -1973,7 +1968,7 @@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
     }
 }
 
-bool8 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
+bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 {
     bool8 result = FALSE;
     if (gTextFlags.flag_2 != 0)
@@ -1992,9 +1987,9 @@ bool8 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
     return result;
 }
 
-bool8 TextPrinterWait(struct TextPrinter *textPrinter)
+bool16 TextPrinterWait(struct TextPrinter *textPrinter)
 {
-    bool8 result = FALSE;
+    bool16 result = FALSE;
     if (gTextFlags.flag_2 != 0)
     {
         result = TextPrinterWaitAutoMode(textPrinter);
@@ -2779,7 +2774,7 @@ _08005D6E:\n\
 	bx r1");
 }
 
-u32 GetStringWidthFixedWidthFont(u8 *str, u8 fontId, u8 letterSpacing)
+u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
 {
     int i;
     u8 width;
@@ -2788,7 +2783,7 @@ u32 GetStringWidthFixedWidthFont(u8 *str, u8 fontId, u8 letterSpacing)
     u8 line;
     int strPos;
     u8 lineWidths[8];
-    u8 *strLocal;
+    const u8 *strLocal;
 
     for (i = 0; i < 8; i++)
     {
@@ -2883,7 +2878,7 @@ u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32)
     return 0;
 }
 
-s32 GetStringWidth(u8 fontId, u8 *str, s16 letterSpacing)
+u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
     bool8 isJapanese;
     int minGlyphWidth;

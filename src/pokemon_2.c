@@ -31,11 +31,11 @@ extern const union AnimCmd* gUnknown_082FF70C[];
 extern const union AnimCmd* const * const gUnknown_08309AAC[];
 extern const union AnimCmd* const * const gUnknown_08305D0C[];
 extern const union AnimCmd* const * const gUnknown_0830536C[];
-extern const u8 gBadEggNickname[];
+extern const u8 gText_BadEgg[];
 extern const u8 gText_EggNickname[];
 
 extern u8 GetBankSide(u8 bank);
-extern u8 GetBankByPlayerAI(u8 bank);
+extern u8 GetBankByIdentity(u8 bank);
 extern u8 GetBankIdentity(u8 bank);
 
 u8 CountAliveMonsInBattle(u8 caseId)
@@ -90,7 +90,7 @@ u8 sub_8069F34(u8 bank)
 
     status ^= 1;
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBankByPlayerAI(status);
+        return GetBankByIdentity(status);
     if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) > 1)
     {
         u8 val;
@@ -99,14 +99,14 @@ u8 sub_8069F34(u8 bank)
             val = status ^ 2;
         else
             val = status;
-        return GetBankByPlayerAI(val);
+        return GetBankByIdentity(val);
     }
     else
     {
         if ((gAbsentBankFlags & gBitTable[status]))
-            return GetBankByPlayerAI(status ^ 2);
+            return GetBankByIdentity(status ^ 2);
         else
-            return GetBankByPlayerAI(status);
+            return GetBankByIdentity(status);
     }
 }
 
@@ -409,8 +409,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         if (boxMon->isBadEgg)
         {
             for (retVal = 0;
-                retVal < POKEMON_NAME_LENGTH && gBadEggNickname[retVal] != EOS;
-                data[retVal] = gBadEggNickname[retVal], retVal++) {}
+                retVal < POKEMON_NAME_LENGTH && gText_BadEgg[retVal] != EOS;
+                data[retVal] = gText_BadEgg[retVal], retVal++) {}
 
             data[retVal] = EOS;
         }
@@ -1308,10 +1308,9 @@ void sub_805EF84(u8 bank, bool8);
 
 extern struct BattlePokemon gBattleMons[4];
 
-/*
-
 void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
 {
+    u16* hpSwitchout;
     s32 i;
     u8 nickname[POKEMON_NAME_LENGTH * 2];
 
@@ -1352,15 +1351,9 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[bank].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[bank].otName);
-    // ewram memes from Ruby return
-    #ifdef NONMATCHING
-        gBattleStruct->hpOnSwitchout[GetBankSide(bank)] = gBattleMons[bank].hp;
-    #else
-        {
-            u32 side = GetBankSide(bank);
-            *(u16*)((void*)(gBattleStruct) + side) = gBattleMons[bank].hp;
-        }
-    #endif // NONMATCHING
+
+    hpSwitchout = &gBattleStruct->hpOnSwitchout[GetBankSide(bank)];
+    *hpSwitchout = gBattleMons[bank].hp;
 
     for (i = 0; i < 8; i++)
         gBattleMons[bank].statStages[i] = 6;
@@ -1369,4 +1362,3 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
     sub_803FA70(bank);
     sub_805EF84(bank, FALSE);
 }
-*/

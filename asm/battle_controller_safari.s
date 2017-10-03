@@ -387,7 +387,7 @@ sub_8159698: @ 8159698
 	push {lr}
 	ldr r0, =gMain
 	ldr r1, [r0, 0x4]
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	cmp r1, r0
 	bne _081596BE
 	ldr r0, =gPaletteFade
@@ -700,7 +700,7 @@ sub_8159910: @ 8159910
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -739,7 +739,7 @@ sub_8159964: @ 8159964
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -792,7 +792,7 @@ dp01t_10_6_message: @ 81599DC
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -860,9 +860,9 @@ sub_8159A94: @ 8159A94
 	adds r0, r1
 	ldr r1, =sub_8159A54
 	str r1, [r0]
-	ldr r0, =gUnknown_085CCA54
+	ldr r0, =gText_SafariZoneMenu
 	movs r1, 0x2
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	movs r4, 0
 _08159AAE:
 	lsls r0, r4, 24
@@ -878,11 +878,11 @@ _08159AAE:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_8059CB4
-	ldr r0, =gUnknown_085CCA04
-	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gText_WhatWillPkmnDo2
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1161,7 +1161,7 @@ dp01t_34_6_move_anim_start_t3: @ 8159CC4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08159D00
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1

@@ -7530,7 +7530,7 @@ sub_80EFDDC: @ 80EFDDC
 	mov r1, r10
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3
@@ -7604,7 +7604,7 @@ sub_80EFEC4: @ 80EFEC4
 	mov r1, r8
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -7811,7 +7811,7 @@ GetMomOrDadStringForTVMessage: @ 80F00A4
 	cmp r0, 0
 	bne _080F0104
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD08
+	ldr r1, =gText_Mom
 	bl StringCopy
 	ldr r0, =0x00004003
 	movs r1, 0x1
@@ -7824,7 +7824,7 @@ _080F00EC:
 	cmp r0, 0x2
 	bne _080F0104
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD08
+	ldr r1, =gText_Mom
 	bl StringCopy
 	ldr r0, =0x00004003
 	movs r1, 0x1
@@ -7859,13 +7859,13 @@ _080F0104:
 	bne _080F0158
 _080F0142:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD08
+	ldr r1, =gText_Mom
 	bl StringCopy
 	b _080F01A8
 	.pool
 _080F0158:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD04
+	ldr r1, =gText_Dad
 	bl StringCopy
 	b _080F01A8
 	.pool
@@ -7878,7 +7878,7 @@ _080F016C:
 	cmp r0, 0
 	beq _080F0198
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD08
+	ldr r1, =gText_Mom
 	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -7887,7 +7887,7 @@ _080F016C:
 	.pool
 _080F0198:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD04
+	ldr r1, =gText_Dad
 	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0x2
@@ -10790,13 +10790,13 @@ _080F1A40:
 	cmp r0, 0x32
 	bne _080F1A58
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAEB1
+	ldr r1, =gText_Lv50
 	bl StringCopy
 	b _080F1A60
 	.pool
 _080F1A58:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAEB8
+	ldr r1, =gText_OpenLevel
 	bl StringCopy
 _080F1A60:
 	ldrh r1, [r4, 0x16]
@@ -12536,31 +12536,31 @@ _080F2C08:
 	.4byte _080F2C6C
 _080F2C1C:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB0E8
+	ldr r1, =gText_Cool
 	bl StringCopy
 	b _080F2C74
 	.pool
 _080F2C30:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB0ED
+	ldr r1, =gText_Beauty
 	bl StringCopy
 	b _080F2C74
 	.pool
 _080F2C44:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB0F4
+	ldr r1, =gText_Cute
 	bl StringCopy
 	b _080F2C74
 	.pool
 _080F2C58:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB0F9
+	ldr r1, =gText_Smart
 	bl StringCopy
 	b _080F2C74
 	.pool
 _080F2C6C:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB0FF
+	ldr r1, =gText_Tough
 	bl StringCopy
 _080F2C74:
 	ldr r0, =gStringVar2
@@ -13154,13 +13154,13 @@ _080F31CA:
 	cmp r0, 0
 	bne _080F3200
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_085ECB64
+	ldr r1, =gText_Single
 	bl StringCopy
 	b _080F3208
 	.pool
 _080F3200:
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_085ECB6B
+	ldr r1, =gText_Double
 	bl StringCopy
 _080F3208:
 	ldr r1, =gUnknown_0203A030
@@ -13369,38 +13369,38 @@ _080F3430:
 	.4byte _080F3494
 _080F3444:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085ECB48
+	ldr r1, =gText_Spicy2
 	bl StringCopy
 	b _080F349C
 	.pool
 _080F3458:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085ECB4E
+	ldr r1, =gText_Dry2
 	bl StringCopy
 	b _080F349C
 	.pool
 _080F346C:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085ECB52
+	ldr r1, =gText_Sweet2
 	bl StringCopy
 	b _080F349C
 	.pool
 _080F3480:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085ECB58
+	ldr r1, =gText_Bitter2
 	bl StringCopy
 	b _080F349C
 	.pool
 _080F3494:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085ECB5F
+	ldr r1, =gText_Sour2
 	bl StringCopy
 _080F349C:
 	ldrb r0, [r4, 0x2]
 	cmp r0, 0x18
 	bls _080F34BC
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB2A
+	ldr r1, =gText_Excellent
 	bl StringCopy
 	b _080F34DC
 	.pool
@@ -13408,13 +13408,13 @@ _080F34BC:
 	cmp r0, 0x16
 	bls _080F34D4
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB20
+	ldr r1, =gText_VeryGood
 	bl StringCopy
 	b _080F34DC
 	.pool
 _080F34D4:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB1B
+	ldr r1, =gText_Good
 	bl StringCopy
 _080F34DC:
 	ldr r0, =gStringVar3
@@ -13454,38 +13454,38 @@ _080F3524:
 	.4byte _080F3588
 _080F3538:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085ECB48
+	ldr r1, =gText_Spicy2
 	bl StringCopy
 	b _080F3590
 	.pool
 _080F354C:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085ECB4E
+	ldr r1, =gText_Dry2
 	bl StringCopy
 	b _080F3590
 	.pool
 _080F3560:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085ECB52
+	ldr r1, =gText_Sweet2
 	bl StringCopy
 	b _080F3590
 	.pool
 _080F3574:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085ECB58
+	ldr r1, =gText_Bitter2
 	bl StringCopy
 	b _080F3590
 	.pool
 _080F3588:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085ECB5F
+	ldr r1, =gText_Sour2
 	bl StringCopy
 _080F3590:
 	ldrb r0, [r4, 0x2]
 	cmp r0, 0x10
 	bls _080F35B0
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB34
+	ldr r1, =gText_SoSo
 	bl StringCopy
 	b _080F35D0
 	.pool
@@ -13493,13 +13493,13 @@ _080F35B0:
 	cmp r0, 0xD
 	bls _080F35C8
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB3A
+	ldr r1, =gText_Bad
 	bl StringCopy
 	b _080F35D0
 	.pool
 _080F35C8:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB3E
+	ldr r1, =gText_TheWorst
 	bl StringCopy
 _080F35D0:
 	ldr r0, =gStringVar3
@@ -14418,13 +14418,13 @@ _080F3ECC:
 	.pool
 _080F3EE8:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB0C
+	ldr r1, =gText_Slots
 	bl StringCopy
 	b _080F3F04
 	.pool
 _080F3EFC:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB12
+	ldr r1, =gText_Roulette
 	bl StringCopy
 _080F3F04:
 	ldrb r1, [r4, 0x2]
@@ -14455,13 +14455,13 @@ _080F3F28:
 	.pool
 _080F3F44:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB0C
+	ldr r1, =gText_Slots
 	bl StringCopy
 	b _080F3F60
 	.pool
 _080F3F58:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB12
+	ldr r1, =gText_Roulette
 	bl StringCopy
 _080F3F60:
 	ldrh r1, [r4, 0x4]
@@ -14485,13 +14485,13 @@ _080F3F78:
 	.pool
 _080F3F94:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB0C
+	ldr r1, =gText_Slots
 	bl StringCopy
 	b _080F3FB0
 	.pool
 _080F3FA8:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB12
+	ldr r1, =gText_Roulette
 	bl StringCopy
 _080F3FB0:
 	ldrh r1, [r4, 0x4]
@@ -14517,13 +14517,13 @@ _080F3FCC:
 	.pool
 _080F3FE8:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB12
+	ldr r1, =gText_Roulette
 	bl StringCopy
 	b _080F4004
 	.pool
 _080F3FFC:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB0C
+	ldr r1, =gText_Slots
 	bl StringCopy
 _080F4004:
 	bl TVShowDone
@@ -14911,7 +14911,7 @@ _080F4414:
 	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x4]
 	lsls r1, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	ldrb r0, [r5, 0x3]
@@ -14932,7 +14932,7 @@ _080F4448:
 	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x5]
 	lsls r1, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	ldrb r1, [r5, 0x3]
@@ -14970,7 +14970,7 @@ _080F449C:
 	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x6]
 	lsls r1, 5
-	ldr r4, =gUnknown_085A5C09
+	ldr r4, =gDecorations + 1
 	adds r1, r4
 	bl StringCopy
 	ldr r0, =gStringVar3
@@ -14983,7 +14983,7 @@ _080F44C0:
 	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x6]
 	lsls r1, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 _080F44CA:
 	bl StringCopy
@@ -15097,7 +15097,7 @@ DoTVShowPokemonLotterWinnerFlashReport: @ 80F45A0
 	cmp r0, 0
 	bne _080F45FC
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB72
+	ldr r1, =gText_Jackpot
 	bl StringCopy
 	b _080F4634
 	.pool
@@ -15105,7 +15105,7 @@ _080F45FC:
 	cmp r0, 0x1
 	bne _080F4614
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB7A
+	ldr r1, =gText_First
 	bl StringCopy
 	b _080F4634
 	.pool
@@ -15113,13 +15113,13 @@ _080F4614:
 	cmp r0, 0x2
 	bne _080F462C
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB80
+	ldr r1, =gText_Second
 	bl StringCopy
 	b _080F4634
 	.pool
 _080F462C:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085ECB87
+	ldr r1, =gText_Third
 	bl StringCopy
 _080F4634:
 	ldr r4, =gStringVar3

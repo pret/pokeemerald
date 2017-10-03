@@ -8248,7 +8248,7 @@ sub_80AF334: @ 80AF334
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8258,7 +8258,7 @@ sub_80AF334: @ 80AF334
 	.pool
 _080AF36C:
 	adds r0, r4, 0
-	bl sub_8088F58
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =task_map_chg_seq_0807E2CC
@@ -8725,7 +8725,7 @@ sub_80AF734: @ 80AF734
 	bl play_some_sound
 	movs r0, 0x9
 	bl PlaySE
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =mapldr_default
 	str r1, [r0]
 	ldr r0, =sub_80AFA0C
@@ -8743,7 +8743,7 @@ sp13E_warp_to_last_warp: @ 80AF76C
 	bl music_something
 	bl sub_80AF0B4
 	bl play_some_sound
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =mapldr_default
 	str r1, [r0]
 	ldr r0, =sub_80AFA0C
@@ -8763,7 +8763,7 @@ sub_80AF79C: @ 80AF79C
 	movs r1, 0x8
 	bl fade_screen
 	bl play_some_sound
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_80AF3B0
 	str r1, [r0]
 	ldr r0, =sub_80AFA0C
@@ -8778,7 +8778,7 @@ sub_80AF79C: @ 80AF79C
 sub_80AF7D0: @ 80AF7D0
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =mapldr_default
 	str r1, [r0]
 	ldr r0, =sub_80AFA88
@@ -8793,7 +8793,7 @@ sub_80AF7D0: @ 80AF7D0
 sp13F_fall_to_last_warp: @ 80AF7F4
 	push {lr}
 	bl sp13E_warp_to_last_warp
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80B6B68
 	str r0, [r1]
 	pop {r0}
@@ -8847,7 +8847,7 @@ sub_80AF848: @ 80AF848
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF3E8
 	str r0, [r1]
 	pop {r0}
@@ -8869,7 +8869,7 @@ sub_80AF87C: @ 80AF87C
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF40C
 	str r0, [r1]
 	pop {r0}
@@ -8885,7 +8885,7 @@ sub_80AF8B8: @ 80AF8B8
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80FB768
 	str r0, [r1]
 	pop {r0}
@@ -9328,7 +9328,7 @@ sub_80AFC60: @ 80AFC60
 	bl play_some_sound
 	movs r0, 0x9
 	bl PlaySE
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_80AF3C8
 	str r1, [r0]
 	ldr r0, =task0A_fade_n_map_maybe
@@ -10078,7 +10078,7 @@ sub_80B0244: @ 80B0244
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF3E8
 	str r0, [r1]
 	pop {r0}
@@ -10090,7 +10090,7 @@ sub_80B0244: @ 80B0244
 sub_80B0268: @ 80B0268
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =mapldr_default
 	str r1, [r0]
 	ldr r0, =sub_80B01BC

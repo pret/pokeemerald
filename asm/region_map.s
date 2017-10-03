@@ -1939,7 +1939,7 @@ sub_8123C00: @ 8123C00
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_8137FFC
+	bl GetSSTidalLocation
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r5
@@ -3212,12 +3212,12 @@ sub_81245DC: @ 81245DC
 	beq _081245F8
 	cmp r1, 0x57
 	bne _08124604
-	ldr r1, =gUnknown_085EC9D2
+	ldr r1, =gText_Ferry
 	bl StringCopy
 	b _0812460A
 	.pool
 _081245F8:
-	ldr r1, =gUnknown_085EC9D8
+	ldr r1, =gText_SecretBase
 	bl StringCopy
 	b _0812460A
 	.pool
@@ -3239,7 +3239,7 @@ sub_8124610: @ 8124610
 	bl sub_81245DC
 	b _08124626
 _08124620:
-	ldr r1, =gUnknown_085EC9E4
+	ldr r1, =gText_Hideout
 	bl StringCopy
 _08124626:
 	pop {r1}

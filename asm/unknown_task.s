@@ -275,23 +275,23 @@ _080BA21C:
 	b _080BA24E
 	.pool
 _080BA224:
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	b _080BA24E
 	.pool
 _080BA22C:
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	b _080BA24E
 	.pool
 _080BA234:
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	b _080BA24E
 	.pool
 _080BA23C:
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	b _080BA24E
 	.pool
 _080BA244:
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	b _080BA24E
 	.pool
 _080BA24C:

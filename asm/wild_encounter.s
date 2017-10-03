@@ -68,7 +68,7 @@ _080B4920:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8089660
+	bl MetatileBehavior_IsSurfableAndNotWaterfall
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1424,7 +1424,7 @@ _080B539C:
 	lsls r0, r6, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_808952C
+	bl MetatileBehavior_IsLandWildEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1498,7 +1498,7 @@ _080B5418:
 	.pool
 _080B543C:
 	adds r0, r4, 0
-	bl sub_8089558
+	bl MetatileBehavior_IsWaterWildEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1509,7 +1509,7 @@ _080B543C:
 	cmp r0, 0
 	beq _080B54FE
 	adds r0, r4, 0
-	bl sub_80894AC
+	bl MetatileBehavior_IsBridge
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1726,7 +1726,7 @@ _080B562C:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_808952C
+	bl MetatileBehavior_IsLandWildEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1769,7 +1769,7 @@ _080B568C:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8089558
+	bl MetatileBehavior_IsWaterWildEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -2951,7 +2951,7 @@ task_new_game_prof_birch_speech_17: @ 8031090
 	str r0, [sp, 0x4]
 	movs r0, 0
 	movs r3, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 _080310EC:
 	add sp, 0x8
 	pop {r4,r5}
@@ -4547,7 +4547,7 @@ fmt_time: @ 8031E94
 	push {r4-r6,lr}
 	sub sp, 0xC
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EDCC3
+	ldr r1, =gText_ContinueMenuPlayer
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r6, =gUnknown_082FF0E3
@@ -4589,7 +4589,7 @@ fmt_player: @ 8031EF8
 	push {r4-r6,lr}
 	sub sp, 0x2C
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EDCCA
+	ldr r1, =gText_ContinueMenuTime
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r6, =gUnknown_082FF0E3
@@ -4664,7 +4664,7 @@ _08031FAA:
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EDCCF
+	ldr r1, =gText_ContinueMenuPokedex
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r6, =gUnknown_082FF0E3
@@ -4728,7 +4728,7 @@ _08032030:
 	cmp r4, r0
 	bls _0803201C
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EDCD7
+	ldr r1, =gText_ContinueMenuBadges
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r6, =gUnknown_082FF0E3

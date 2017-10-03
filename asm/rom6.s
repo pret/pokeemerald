@@ -68,7 +68,7 @@ task08_080C9820: @ 813549C
 	lsrs r5, r0, 24
 	adds r6, r5, 0
 	bl ScriptContext2_Enable
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r1, [r1, 0x5]
@@ -127,7 +127,7 @@ sub_813552C: @ 813552C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -167,7 +167,7 @@ sub_8135578: @ 8135578
 	cmp r4, 0
 	bne _081355FC
 	bl player_get_direction_lower_nybble
-	ldr r6, =gUnknown_02038C08
+	ldr r6, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r6, 0x4]
@@ -191,7 +191,7 @@ _081355B0:
 	movs r0, 0x3
 	str r0, [r6, 0x8]
 _081355B8:
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	ldrb r0, [r5, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -244,7 +244,7 @@ sub_813561C: @ 813561C
 	ldrh r0, [r0, 0x1A]
 	orrs r1, r0
 	bl _call_via_r1
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	adds r0, r4, 0
@@ -303,7 +303,7 @@ _081356AC:
 sub_81356C4: @ 81356C4
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -380,7 +380,7 @@ hm2_dig: @ 8135760
 	movs r0, 0x26
 	bl FieldEffectStart
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -1064,23 +1064,23 @@ sub_8135DAC: @ 8135DAC
 	movs r0, 0
 	adds r1, r4, 0
 	bl sub_8135D7C
-	ldr r1, =gUnknown_085E931D
+	ldr r1, =gText_Spicy
 	movs r0, 0x2
 	movs r2, 0
 	bl sub_8135D7C
-	ldr r1, =gUnknown_085E9323
+	ldr r1, =gText_Dry
 	movs r0, 0x3
 	movs r2, 0
 	bl sub_8135D7C
-	ldr r1, =gUnknown_085E9327
+	ldr r1, =gText_Sweet
 	movs r0, 0x4
 	movs r2, 0
 	bl sub_8135D7C
-	ldr r1, =gUnknown_085E932D
+	ldr r1, =gText_Bitter
 	movs r0, 0x5
 	movs r2, 0
 	bl sub_8135D7C
-	ldr r1, =gUnknown_085E9334
+	ldr r1, =gText_Sour
 	movs r0, 0x6
 	movs r2, 0
 	bl sub_8135D7C
@@ -1148,7 +1148,7 @@ _08135E7C:
 	adds r4, r7
 	ldr r0, [r5]
 	adds r0, r4
-	ldr r1, =gUnknown_085E9344
+	ldr r1, =gText_StowCase
 	bl StringCopy
 	ldr r1, [r5]
 	lsls r2, r6, 3
@@ -1231,7 +1231,7 @@ sub_8135F04: @ 8135F04
 	movs r2, 0
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085E934F
+	ldr r1, =gText_LvVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	pop {r4-r6}
@@ -1984,7 +1984,7 @@ sub_8136524: @ 8136524
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _0813655A
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 _0813655A:
@@ -2598,7 +2598,7 @@ sub_8136AB4: @ 8136AB4
 	ldr r1, [r1]
 	bl StringCopy
 	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085E9353
+	ldr r1, =gText_ThrowAwayVar1
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	bl sav2_get_text_speed
@@ -2654,7 +2654,7 @@ sub_8136B78: @ 8136B78
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085E9367
+	ldr r1, =gText_Var1ThrownAway
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	bl sav2_get_text_speed
@@ -3381,7 +3381,7 @@ hm2_flash: @ 8137178
 	lsls r4, 24
 	lsrs r4, 24
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -4651,7 +4651,7 @@ sub_8137C3C: @ 8137C3C
 	push {lr}
 	ldr r0, =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_080CA5C0
 	str r0, [r1]
 	pop {r0}
@@ -4796,14 +4796,14 @@ sub_8137D5C: @ 8137D5C
 	movs r2, 0
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085EB5EE
+	ldr r1, =gText_SpaceTimes
 	adds r0, r4, 0
 	bl StringAppend
 	b _08137D90
 	.pool
 _08137D88:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB5CF
+	ldr r1, =gText_99TimesPlus
 	bl StringCopy
 _08137D90:
 	ldr r0, =0x00000e0f
@@ -4833,14 +4833,14 @@ _08137D90:
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085EB5E5
+	ldr r1, =gText_SpaceSeconds
 	adds r0, r4, 0
 	bl StringAppend
 	b _08137DF8
 	.pool
 _08137DF0:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085EB5DA
+	ldr r1, =gText_1MinutePlus
 	bl StringCopy
 _08137DF8:
 	movs r4, 0
@@ -5062,8 +5062,8 @@ sub_8137FB0: @ 8137FB0
 	.pool
 	thumb_func_end sub_8137FB0
 
-	thumb_func_start sub_8137FC0
-sub_8137FC0: @ 8137FC0
+	thumb_func_start CountSSTidalStep
+CountSSTidalStep: @ 8137FC0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -5091,10 +5091,10 @@ _08137FF6:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8137FC0
+	thumb_func_end CountSSTidalStep
 
-	thumb_func_start sub_8137FFC
-sub_8137FFC: @ 8137FFC
+	thumb_func_start GetSSTidalLocation
+GetSSTidalLocation: @ 8137FFC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -5203,7 +5203,7 @@ _081380CE:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8137FFC
+	thumb_func_end GetSSTidalLocation
 
 	thumb_func_start is_tile_that_overrides_player_control
 is_tile_that_overrides_player_control: @ 81380D8
@@ -6425,13 +6425,13 @@ sub_8138B10: @ 8138B10
 	cmp r0, 0
 	bne _08138B34
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB5F9
+	ldr r1, =gText_BigGuy
 	bl StringCopy
 	b _08138B3C
 	.pool
 _08138B34:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB601
+	ldr r1, =gText_BigGirl
 	bl StringCopy
 _08138B3C:
 	pop {r0}
@@ -6448,13 +6448,13 @@ sub_8138B48: @ 8138B48
 	cmp r0, 0
 	bne _08138B6C
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB60E
+	ldr r1, =gText_Daughter
 	bl StringCopy
 	b _08138B74
 	.pool
 _08138B6C:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EB60A
+	ldr r1, =gText_Son
 	bl StringCopy
 _08138B74:
 	pop {r0}
@@ -8511,7 +8511,7 @@ sub_8139B60: @ 8139B60
 	ldrb r0, [r5]
 	movs r1, 0
 	bl SetStandardWindowBorderStyle
-	ldr r4, =gUnknown_085EB6A5
+	ldr r4, =gText_ElevatorNowOn
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x40
@@ -10131,7 +10131,7 @@ sub_813A8FC: @ 813A8FC
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_085EB6AD
+	ldr r1, =gText_BP
 	bl StringCopy
 	movs r0, 0x1
 	add r1, sp, 0xC
@@ -11039,7 +11039,7 @@ _0813B0F8:
 	ldr r0, =sub_813B160
 	movs r1, 0x8
 	bl CreateTask
-	ldr r3, =gUnknown_02038C08
+	ldr r3, =gFieldEffectSpawnParams
 	movs r0, 0x1
 	str r0, [r3]
 	movs r0, 0x3A
@@ -12650,37 +12650,37 @@ _0813BE58:
 	.4byte _0813BEC0
 _0813BE70:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD14
+	ldr r1, =gText_Steven
 	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BE84:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD1B
+	ldr r1, =gText_Brawly
 	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BE98:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD22
+	ldr r1, =gText_Winona
 	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BEAC:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD29
+	ldr r1, =gText_Phoebe
 	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BEC0:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD30
+	ldr r1, =gText_Glacia
 	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BED4:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EAD0C
+	ldr r1, =gText_Wallace
 	bl StringCopy
 	b _0813BF04
 	.pool
