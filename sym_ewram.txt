@@ -747,9 +747,7 @@ gUnknown_02037621: @ 2037621
 gUnknown_02037622: @ 2037622
 	.space 0x2
 
-gUnknown_02037624: @ 2037624
-	.space 0xF0
-
+	.include "src/tileset_anims.o"
 	.include "src/palette.o"
     .include "src/sound.o"
     
