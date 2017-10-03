@@ -8648,7 +8648,7 @@ sub_805C158: @ 805C158
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805C194
-	ldr r1, =gUnknown_0203BD30
+	ldr r1, =gBattlePalaceMoveSelectionRngValue
 	ldr r0, =gRngValue
 	ldr r0, [r0]
 	str r0, [r1]

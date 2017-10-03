@@ -271,8 +271,8 @@ _08184FF0:
 	.pool
 	thumb_func_end RecordedBattle_SetBankAction
 
-	thumb_func_start sub_8185008
-sub_8185008: @ 8185008
+	thumb_func_start RecordedBattle_ClearBankAction
+RecordedBattle_ClearBankAction: @ 8185008
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -310,7 +310,7 @@ _08185046:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8185008
+	thumb_func_end RecordedBattle_ClearBankAction
 
 	thumb_func_start sub_8185054
 sub_8185054: @ 8185054

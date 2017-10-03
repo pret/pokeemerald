@@ -561,7 +561,7 @@ BattleScript_BerryStatRaiseEnd2:: @ 82DB84E
 BattleScript_BerryFocusEnergyEnd2:: @ 82DB869
 	.incbin "baserom.gba", 0x2db869, 0x10
 
-gUnknown_082DB879:: @ 82DB879
+BattleScript_ActionSelectionItemsCantBeUsed:: @ 82DB879
 	.incbin "baserom.gba", 0x2db879, 0x4
 
 gUnknown_082DB87D:: @ 82DB87D

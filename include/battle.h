@@ -61,7 +61,8 @@
 #define STEVEN_PARTNER_ID           0xC03
 #define SECRET_BASE_OPPONENT        0x400
 
-#define BATTLE_TYPE_FRONTIER        (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID)
+#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID)
+#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000)
 
 #define BATTLE_WON                  0x1
 #define BATTLE_LOST                 0x2
@@ -136,6 +137,7 @@
 #define HITMARKER_PURSUIT_TRAP          0x00001000
 #define HITMARKER_IGNORE_SAFEGUARD      0x00002000
 #define HITMARKER_SYNCHRONISE_EFFECT    0x00004000
+#define HITMARKER_x8000                 0x00008000
 #define HITMARKER_IGNORE_ON_AIR         0x00010000
 #define HITMARKER_IGNORE_UNDERGROUND    0x00020000
 #define HITMARKER_IGNORE_UNDERWATER     0x00040000
@@ -614,10 +616,7 @@ struct BattleStruct
     u8 field_7E;
     u8 formToChangeInto;
     u8 chosenMovesIds[4];
-    u8 field_84;
-    u8 field_85;
-    u8 field_86;
-    u8 field_87;
+    u8 field_84[4];
     u8 field_88;
     u8 field_89;
     u8 field_8A;
@@ -906,7 +905,7 @@ void BattleTurnPassed(void);
 void BattleScriptPush(const u8* bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);
-u8 sub_803FB4C(void);  // msg, can't select a move
+u8 TrySetCantSelectMoveBattleScript(void);
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 bool8 AreAllMovesUnusable(void);
 u8 GetImprisonedMovesCount(u8 bank, u16 move);

@@ -382,7 +382,7 @@ gBattlescriptCurrInstr: @ 2024214
 gActionForBanks: @ 202421C
 	.space 0x4
 
-gUnknown_02024220: @ 2024220
+gBattlescriptPtrsForSelection: @ 2024220
 	.space 0x10
 
 gUnknown_02024230: @ 2024230
@@ -1671,7 +1671,7 @@ gUnknown_0203BD28: @ 203BD28
 gRecordedBattleRngSeed: @ 203BD2C
 	.space 0x4
 
-gUnknown_0203BD30: @ 203BD30
+gBattlePalaceMoveSelectionRngValue: @ 203BD30
 	.space 0x4
 
 gUnknown_0203BD34: @ 203BD34

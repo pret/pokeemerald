@@ -14,6 +14,16 @@ struct MovePpInfo
     u8 ppBonuses;
 };
 
+struct ChooseMoveStruct
+{
+    u16 moves[4];
+    u8 ppNumbers[4];
+    u8 ppWithBonusNumbers[4];
+    u16 species;
+    u8 monType1;
+    u8 monType2;
+};
+
 #define REQUEST_ALL_BATTLE      0x0
 #define REQUEST_SPECIES_BATTLE  0x1
 #define REQUEST_HELDITEM_BATTLE 0x2
@@ -40,8 +50,8 @@ void EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
 void EmitReturnPokeToBall(u8 bufferId, u8 arg1);
 void EmitGetMonData(u8 bufferId, u8 arg1, u8 arg2);
 void EmitSwitchInAnim(u8 bufferId, u8 partyId, bool8 dontClearSubstituteBit);
-void EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, const u8* arg4);
-void EmitLinkStandbyMsg(u8 bufferId, u8 arg1, u8 arg2);
+void EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, u8* arg4);
+void EmitLinkStandbyMsg(u8 bufferId, u8 arg1, bool32 arg2);
 void EmitTrainerSlide(u8 bufferId);
 void EmitTrainerSlideBack(u8 bufferId);
 void EmitFaintingCry(u8 bufferId);
@@ -56,6 +66,10 @@ void EmitIntroSlide(u8 bufferId, u8 terrainId);
 void EmitDrawTrainerPic(u8 bufferId);
 void EmitLoadMonSprite(u8 bufferId);
 void EmitIntroTrainerBallThrow(u8 bufferId);
+void EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2);
+void EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct* movePpData);
+void EmitOpenBag(u8 bufferId, u8* arg1);
+void Emit_x32(u8 bufferId);
 
 #define RESET_ACTION_MOVE_SELECTION     0
 #define RESET_ACTION_SELECTION          1

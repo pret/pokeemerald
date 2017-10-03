@@ -19,7 +19,7 @@
 #include "calculate_base_damage.h"
 
 extern const u8* gBattlescriptCurrInstr;
-extern const u8* gUnknown_02024220[BATTLE_BANKS_COUNT];
+extern const u8* gBattlescriptPtrsForSelection[BATTLE_BANKS_COUNT];
 extern const u8* gUnknown_02024230[BATTLE_BANKS_COUNT];
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern u8 gActiveBank;
@@ -200,7 +200,7 @@ void BattleScriptPop(void)
     gBattlescriptCurrInstr = BATTLESCRIPTS_STACK->ptr[--BATTLESCRIPTS_STACK->size];
 }
 
-u8 sub_803FB4C(void)  // msg, can't select a move
+u8 TrySetCantSelectMoveBattleScript(void)
 {
     u8 limitations = 0;
     u16 move = gBattleMons[gActiveBank].moves[gBattleBufferB[gActiveBank][2]];
@@ -218,7 +218,7 @@ u8 sub_803FB4C(void)  // msg, can't select a move
         }
         else
         {
-            gUnknown_02024220[gActiveBank] = gUnknown_082DAE1F;
+            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DAE1F;
             limitations = 1;
         }
     }
@@ -233,7 +233,7 @@ u8 sub_803FB4C(void)  // msg, can't select a move
         }
         else
         {
-            gUnknown_02024220[gActiveBank] = gUnknown_082DB089;
+            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB089;
             limitations++;
         }
     }
@@ -248,7 +248,7 @@ u8 sub_803FB4C(void)  // msg, can't select a move
         }
         else
         {
-            gUnknown_02024220[gActiveBank] = gUnknown_082DB0A0;
+            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB0A0;
             limitations++;
         }
     }
@@ -263,7 +263,7 @@ u8 sub_803FB4C(void)  // msg, can't select a move
         }
         else
         {
-            gUnknown_02024220[gActiveBank] = gUnknown_082DB181;
+            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB181;
             limitations++;
         }
     }
@@ -285,7 +285,7 @@ u8 sub_803FB4C(void)  // msg, can't select a move
         }
         else
         {
-            gUnknown_02024220[gActiveBank] = gUnknown_082DB812;
+            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB812;
             limitations++;
         }
     }
@@ -298,7 +298,7 @@ u8 sub_803FB4C(void)  // msg, can't select a move
         }
         else
         {
-            gUnknown_02024220[gActiveBank] = gUnknown_082DB076;
+            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB076;
             limitations++;
         }
     }
@@ -349,7 +349,7 @@ bool8 AreAllMovesUnusable(void)
     if (unusable == 0xF) // all moves are unusable
     {
         gProtectStructs[gActiveBank].onlyStruggle = 1;
-        gUnknown_02024220[gActiveBank] = BattleScript_NoMovesLeft;
+        gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_NoMovesLeft;
     }
     else
     {

@@ -2786,8 +2786,8 @@ _08033D7C:
 	.pool
 	thumb_func_end EmitPrintStringPlayerOnly
 
-	thumb_func_start dp01_build_cmdbuf_x12_a_bb
-dp01_build_cmdbuf_x12_a_bb: @ 8033DE4
+	thumb_func_start EmitChooseAction
+EmitChooseAction: @ 8033DE4
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2807,7 +2807,7 @@ dp01_build_cmdbuf_x12_a_bb: @ 8033DE4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x12_a_bb
+	thumb_func_end EmitChooseAction
 
 	thumb_func_start EmitCmd13
 EmitCmd13: @ 8033E10
@@ -2827,8 +2827,8 @@ EmitCmd13: @ 8033E10
 	.pool
 	thumb_func_end EmitCmd13
 
-	thumb_func_start sub_8033E30
-sub_8033E30: @ 8033E30
+	thumb_func_start EmitChooseMove
+EmitChooseMove: @ 8033E30
 	push {r4-r6,lr}
 	adds r5, r3, 0
 	lsls r0, 24
@@ -2858,10 +2858,10 @@ _08033E4C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8033E30
+	thumb_func_end EmitChooseMove
 
-	thumb_func_start sub_8033E6C
-sub_8033E6C: @ 8033E6C
+	thumb_func_start EmitOpenBag
+EmitOpenBag: @ 8033E6C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2886,7 +2886,7 @@ _08033E7E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8033E6C
+	thumb_func_end EmitOpenBag
 
 	thumb_func_start EmitChoosePokemon
 EmitChoosePokemon: @ 8033EA0
@@ -3624,8 +3624,8 @@ EmitCmd49: @ 80343D4
 	.pool
 	thumb_func_end EmitCmd49
 
-	thumb_func_start dp01_build_cmdbuf_x32_32_32_32
-dp01_build_cmdbuf_x32_32_32_32: @ 80343F4
+	thumb_func_start Emit_x32
+Emit_x32: @ 80343F4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3640,7 +3640,7 @@ dp01_build_cmdbuf_x32_32_32_32: @ 80343F4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x32_32_32_32
+	thumb_func_end Emit_x32
 
 	thumb_func_start EmitSpriteInvisibility
 EmitSpriteInvisibility: @ 8034414
