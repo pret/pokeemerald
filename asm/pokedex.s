@@ -8429,8 +8429,8 @@ _080BFDB4:
 	.pool
 	thumb_func_end sub_80BFD7C
 
-	thumb_func_start sub_80BFDF4
-sub_80BFDF4: @ 80BFDF4
+	thumb_func_start CreateDexDisplayMonDataTask
+CreateDexDisplayMonDataTask: @ 80BFDF4
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -8460,7 +8460,7 @@ sub_80BFDF4: @ 80BFDF4
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80BFDF4
+	thumb_func_end CreateDexDisplayMonDataTask
 
 	thumb_func_start sub_80BFE38
 sub_80BFE38: @ 80BFE38

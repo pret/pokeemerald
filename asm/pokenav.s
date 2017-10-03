@@ -13136,7 +13136,7 @@ _081CD8E4:
 	ldr r2, =0x00006325
 	adds r4, r2
 	adds r0, r3, 0
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 _081CD8F4:
@@ -24164,7 +24164,7 @@ _081D2F2C:
 	adds r4, r5, 0x5
 	lsls r0, r7, 24
 	lsrs r0, 24
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 _081D2F3A:
@@ -27356,7 +27356,7 @@ _081D4870:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088E64
+	bl MetatileBehavior_IsPokeGrass
 	lsls r0, 24
 	lsrs r0, 24
 _081D4888:
@@ -28559,7 +28559,7 @@ _081D5268:
 	ldr r0, =gUnknown_085EE097
 	bl sub_8018884
 	ldr r0, =gUnknown_03006370
-	ldr r1, =gUnknown_089A6550
+	ldr r1, =gMultiBootProgram_BerryGlitchFix_Start
 	ldr r2, =gUnknown_089A3470
 	subs r1, r2
 	bl sub_81D4D50

@@ -6,6 +6,7 @@ const u8 *GetPokemonCategory(u16);
 u16 GetPokedexHeightWeight(u16 dexNum, u8 data);
 u16 GetNationalPokedexCount(u8);
 u16 GetHoennPokedexCount(u8);
+u8 CreateDexDisplayMonDataTask(u16 dexNum, u32 trainerId, u32 personality);
 
 enum
 {

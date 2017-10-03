@@ -50,6 +50,8 @@ gText_EggNickname:: @ 85E8264
 
 gText_Pokemon:: @ 85E8268
 	.string "POKéMON$"
+
+gUnknown_085E8270:: @ 85E8270
 	.string "PROF. BIRCH$"
 
 gText_MainMenuNewGame:: @ 85E827C
@@ -78,7 +80,11 @@ gText_MysteryGiftCantUse:: @ 85E82E5
 
 gText_MysteryEventsCantUse:: @ 85E8328
 	.string "MYSTERY EVENTS can’t be used while\nthe Wireless Adapter is attached.$"
+
+gUnknown_085E836D:: @ 85E836D
 	.string "Updating save file using external\ndata. Please wait.$"
+
+gUnknown_085E83A2:: @ 85E83A2
 	.string "The save file has been updated.$"
 
 gText_SaveFileCorrupted:: @ 85E83C2
@@ -92,29 +98,59 @@ gJPText_No1MSubCircuit:: @ 85E8440
 
 gText_BatteryRunDry:: @ 85E8453
 	.string "The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.$"
+
+gUnknown_085E84BF:: @ 85E84BF
 	.string "PLAYER$"
+
+gUnknown_085E84C6:: @ 85E84C6
 	.string "POKéDEX$"
 
 gText_MainMenuTime:: @ 85E84CE
 	.string "TIME$"
+
+gUnknown_085E84D3:: @ 85E84D3
 	.string "BADGES$"
+
+gUnknown_085E84DA:: @ 85E84DA
 	.string "A Button$"
+
+gUnknown_085E84E3:: @ 85E84E3
 	.string "B Button$"
+
+gUnknown_085E84EC:: @ 85E84EC
 	.string "R Button$"
+
+gUnknown_085E84F5:: @ 85E84F5
 	.string "L Button$"
+
+gUnknown_085E84FE:: @ 85E84FE
 	.string "START$"
+
+gUnknown_085E8504:: @ 85E8504
 	.string "SELECT$"
+
+gUnknown_085E850B:: @ 85E850B
 	.string "+ Control Pad$"
+
+gUnknown_085E8519:: @ 85E8519
 	.string "L Button  R Button$"
+
+gUnknown_085E852C:: @ 85E852C
 	.string "CONTROLS$"
 
 	.align 2
+
+gUnknown_085E8538:: @ 85E8538
 	.string "{UNK_CTRL_F80A}PICK {UNK_CTRL_F800}OK$"
 
 	.align 2
+
+gUnknown_085E8544:: @ 85E8544
 	.string "{UNK_CTRL_F800}NEXT$"
 
 	.align 2
+
+gUnknown_085E854C:: @ 85E854C
 	.string "{UNK_CTRL_F800}NEXT {UNK_CTRL_F801}BACK$"
 
 	.align 2
@@ -128,47 +164,131 @@ gText_PickCancel:: @ 85E8574
 	.align 2
 gText_UnkCtrlF800Exit:: @ 85E8588
 	.string "{UNK_CTRL_F800}EXIT$"
+
+gUnknown_085E858F:: @ 85E858F
 	.string "BOY$"
+
+gUnknown_085E8593:: @ 85E8593
 	.string "GIRL$"
+
+gUnknown_085E8598:: @ 85E8598
 	.string "STU$"
+
+gUnknown_085E859C:: @ 85E859C
 	.string "MILTON$"
+
+gUnknown_085E85A3:: @ 85E85A3
 	.string "TOM$"
+
+gUnknown_085E85A7:: @ 85E85A7
 	.string "KENNY$"
+
+gUnknown_085E85AD:: @ 85E85AD
 	.string "REID$"
+
+gUnknown_085E85B2:: @ 85E85B2
 	.string "JUDE$"
+
+gUnknown_085E85B7:: @ 85E85B7
 	.string "JAXSON$"
+
+gUnknown_085E85BE:: @ 85E85BE
 	.string "EASTON$"
+
+gUnknown_085E85C5:: @ 85E85C5
 	.string "WALKER$"
+
+gUnknown_085E85CC:: @ 85E85CC
 	.string "TERU$"
+
+gUnknown_085E85D1:: @ 85E85D1
 	.string "JOHNNY$"
+
+gUnknown_085E85D8:: @ 85E85D8
 	.string "BRETT$"
+
+gUnknown_085E85DE:: @ 85E85DE
 	.string "SETH$"
+
+gUnknown_085E85E3:: @ 85E85E3
 	.string "TERRY$"
+
+gUnknown_085E85E9:: @ 85E85E9
 	.string "CASEY$"
+
+gUnknown_085E85EF:: @ 85E85EF
 	.string "DARREN$"
+
+gUnknown_085E85F6:: @ 85E85F6
 	.string "LANDON$"
+
+gUnknown_085E85FD:: @ 85E85FD
 	.string "COLLIN$"
+
+gUnknown_085E8604:: @ 85E8604
 	.string "STANLEY$"
+
+gUnknown_085E860C:: @ 85E860C
 	.string "QUINCY$"
+
+gUnknown_085E8613:: @ 85E8613
 	.string "KIMMY$"
+
+gUnknown_085E8619:: @ 85E8619
 	.string "TIARA$"
+
+gUnknown_085E861F:: @ 85E861F
 	.string "BELLA$"
+
+gUnknown_085E8625:: @ 85E8625
 	.string "JAYLA$"
+
+gUnknown_085E862B:: @ 85E862B
 	.string "ALLIE$"
+
+gUnknown_085E8631:: @ 85E8631
 	.string "LIANNA$"
+
+gUnknown_085E8638:: @ 85E8638
 	.string "SARA$"
+
+gUnknown_085E863D:: @ 85E863D
 	.string "MONICA$"
+
+gUnknown_085E8644:: @ 85E8644
 	.string "CAMILA$"
+
+gUnknown_085E864B:: @ 85E864B
 	.string "AUBREE$"
+
+gUnknown_085E8652:: @ 85E8652
 	.string "RUTHIE$"
+
+gUnknown_085E8659:: @ 85E8659
 	.string "HAZEL$"
+
+gUnknown_085E865F:: @ 85E865F
 	.string "NADINE$"
+
+gUnknown_085E8666:: @ 85E8666
 	.string "TANJA$"
+
+gUnknown_085E866C:: @ 85E866C
 	.string "YASMIN$"
+
+gUnknown_085E8673:: @ 85E8673
 	.string "NICOLA$"
+
+gUnknown_085E867A:: @ 85E867A
 	.string "LILLIE$"
+
+gUnknown_085E8681:: @ 85E8681
 	.string "TERRA$"
+
+gUnknown_085E8687:: @ 85E8687
 	.string "LUCY$"
+
+gUnknown_085E868C:: @ 85E868C
 	.string "HALIE$"
 
 gText_ThisIsAPokemon:: @ 85E8692
@@ -182,13 +302,23 @@ gText_UnkHeight:: @ 85E86C6
 
 gText_UnkWeight:: @ 85E86D0
 	.string "????.? lbs.$"
+
+gUnknown_085E86DC:: @ 85E86DC
 	.string "                       POKéMON$"
+
+gUnknown_085E86FB:: @ 85E86FB
 	.string "{CLEAR_TO 0x0C}    ’    ”$"
+
+gUnknown_085E8709:: @ 85E8709
 	.string "        .   lbs.$"
+
+gUnknown_085E871A:: @ 85E871A
 	.string "$"
 
 gText_CryOf:: @ 85E871B
 	.string "CRY OF$"
+
+gUnknown_085E8722:: @ 85E8722
 	.string "$"
 
 gText_SizeComparedTo:: @ 85E8723
@@ -211,61 +341,161 @@ gText_SearchCompleted:: @ 85E8773
 
 gUnknown_085E8785:: @ 85E8785
 	.string "No matching POKéMON were found.$"
+
+gUnknown_085E87A5:: @ 85E87A5
 	.string "Search for POKéMON based on\nselected parameters.$"
+
+gUnknown_085E87D6:: @ 85E87D6
 	.string "Switch POKéDEX listings.$"
+
+gUnknown_085E87EF:: @ 85E87EF
 	.string "Return to the POKéDEX.$"
+
+gUnknown_085E8806:: @ 85E8806
 	.string "Select the POKéDEX mode.$"
+
+gUnknown_085E881F:: @ 85E881F
 	.string "Select the POKéDEX listing mode.$"
+
+gUnknown_085E8840:: @ 85E8840
 	.string "List by the first letter in the name.\nSpotted POKéMON only.$"
+
+gUnknown_085E887C:: @ 85E887C
 	.string "List by body color.\nSpotted POKéMON only.$"
+
+gUnknown_085E88A6:: @ 85E88A6
 	.string "List by type.\nOwned POKéMON only.$"
+
+gUnknown_085E88C8:: @ 85E88C8
 	.string "Execute search/switch.$"
+
+gUnknown_085E88DF:: @ 85E88DF
 	.string "HOENN DEX$"
+
+gUnknown_085E88E9:: @ 85E88E9
 	.string "NATIONAL DEX$"
+
+gUnknown_085E88F6:: @ 85E88F6
 	.string "NUMERICAL MODE$"
+
+gUnknown_085E8905:: @ 85E8905
 	.string "A TO Z MODE$"
+
+gUnknown_085E8911:: @ 85E8911
 	.string "HEAVIEST MODE$"
+
+gUnknown_085E891F:: @ 85E891F
 	.string "LIGHTEST MODE$"
+
+gUnknown_085E892D:: @ 85E892D
 	.string "TALLEST MODE$"
+
+gUnknown_085E893A:: @ 85E893A
 	.string "SMALLEST MODE$"
+
+gUnknown_085E8948:: @ 85E8948
 	.string "ABC$"
+
+gUnknown_085E894C:: @ 85E894C
 	.string "DEF$"
+
+gUnknown_085E8950:: @ 85E8950
 	.string "GHI$"
+
+gUnknown_085E8954:: @ 85E8954
 	.string "JKL$"
+
+gUnknown_085E8958:: @ 85E8958
 	.string "MNO$"
+
+gUnknown_085E895C:: @ 85E895C
 	.string "PQR$"
+
+gUnknown_085E8960:: @ 85E8960
 	.string "STU$"
+
+gUnknown_085E8964:: @ 85E8964
 	.string "VWX$"
+
+gUnknown_085E8968:: @ 85E8968
 	.string "YZ$"
+
+gUnknown_085E896B:: @ 85E896B
 	.string "RED$"
+
+gUnknown_085E896F:: @ 85E896F
 	.string "BLUE$"
+
+gUnknown_085E8974:: @ 85E8974
 	.string "YELLOW$"
+
+gUnknown_085E897B:: @ 85E897B
 	.string "GREEN$"
+
+gUnknown_085E8981:: @ 85E8981
 	.string "BLACK$"
+
+gUnknown_085E8987:: @ 85E8987
 	.string "BROWN$"
+
+gUnknown_085E898D:: @ 85E898D
 	.string "PURPLE$"
+
+gUnknown_085E8994:: @ 85E8994
 	.string "GRAY$"
+
+gUnknown_085E8999:: @ 85E8999
 	.string "WHITE$"
+
+gUnknown_085E899F:: @ 85E899F
 	.string "PINK$"
+
+gUnknown_085E89A4:: @ 85E89A4
 	.string "HOENN region’s POKéDEX$"
+
+gUnknown_085E89BB:: @ 85E89BB
 	.string "National edition POKéDEX$"
+
+gUnknown_085E89D4:: @ 85E89D4
 	.string "POKéMON are listed according to their\nnumber.$"
+
+gUnknown_085E8A02:: @ 85E8A02
 	.string "Spotted and owned POKéMON are listed\nalphabetically.$"
+
+gUnknown_085E8A37:: @ 85E8A37
 	.string "Owned POKéMON are listed from the\nheaviest to the lightest.$"
+
+gUnknown_085E8A73:: @ 85E8A73
 	.string "Owned POKéMON are listed from the\nlightest to the heaviest.$"
+
+gUnknown_085E8AAF:: @ 85E8AAF
 	.string "Owned POKéMON are listed from the\ntallest to the smallest.$"
+
+gUnknown_085E8AEA:: @ 85E8AEA
 	.string "Owned POKéMON are listed from the\nsmallest to the tallest.$"
+
+gUnknown_085E8B25:: @ 85E8B25
 	.string "$"
+
+gUnknown_085E8B26:: @ 85E8B26
 	.string "DON’T SPECIFY.$"
+
+gUnknown_085E8B35:: @ 85E8B35
 	.string "NONE$"
 
 gText_SelectorArrow:: @ 85E8B3A
 	.string "▶$"
+
+gUnknown_085E8B3C:: @ 85E8B3C
 	.string " $"
 
 gText_WelcomeToHOF:: @ 85E8B3E
 	.string "Welcome to the HALL OF FAME!$"
+
+gUnknown_085E8B5B:: @ 85E8B5B
 	.string "Spotted POKéMON: {STR_VAR_1}!\nOwned POKéMON: {STR_VAR_2}!\pPROF. BIRCH’s POKéDEX rating!\pPROF. BIRCH: Let’s see…\p$"
+
+gUnknown_085E8BBA:: @ 85E8BBA
 	.string "SAVING…\nDON’T TURN OFF THE POWER.$"
 
 gText_HOFCorrupted:: @ 85E8BDC
@@ -282,6 +512,8 @@ gText_Number:: @ 85E8C36
 
 gText_Level:: @ 85E8C3B
 	.string "Lv. $"
+
+gUnknown_085E8C40:: @ 85E8C40
 	.string "IDNo. /$"
 
 gText_Name:: @ 85E8C48
@@ -295,18 +527,32 @@ gText_BirchInTrouble:: @ 85E8C53
 
 gText_ConfirmStarterChoice:: @ 85E8C90
 	.string "Do you choose this POKéMON?$"
+
+gUnknown_085E8CAC:: @ 85E8CAC
 	.string "POKéMON$"
 
 gText_FlyToWhere:: @ 85E8CB4
 	.string "FLY to where?$"
+
+gUnknown_085E8CC2:: @ 85E8CC2
 	.string "USE$"
+
+gUnknown_085E8CC6:: @ 85E8CC6
 	.string "TOSS$"
+
+gUnknown_085E8CCB:: @ 85E8CCB
 	.string "REGISTER$"
+
+gUnknown_085E8CD4:: @ 85E8CD4
 	.string "GIVE$"
+
+gUnknown_085E8CD9:: @ 85E8CD9
 	.string "CHECK TAG$"
 
 gText_Confirm:: @ 85E8CE3
 	.string "CONFIRM$"
+
+gUnknown_085E8CEB:: @ 85E8CEB
 	.string "WALK$"
 
 gText_Cancel:: @ 85E8CF0
@@ -314,19 +560,35 @@ gText_Cancel:: @ 85E8CF0
 
 gText_Cancel2:: @ 85E8CF7
 	.string "CANCEL$"
+
+gUnknown_085E8CFE:: @ 85E8CFE
 	.string "SHOW$"
 
 gText_EmptyString2:: @ 85E8D03
 	.string "$"
+
+gUnknown_085E8D04:: @ 85E8D04
 	.string "CANCEL$"
+
+gUnknown_085E8D0B:: @ 85E8D0B
 	.string "ITEM$"
+
+gUnknown_085E8D10:: @ 85E8D10
 	.string "MAIL$"
+
+gUnknown_085E8D15:: @ 85E8D15
 	.string "TAKE$"
+
+gUnknown_085E8D1A:: @ 85E8D1A
 	.string "STORE$"
+
+gUnknown_085E8D20:: @ 85E8D20
 	.string "CHECK$"
 
 gText_None:: @ 85E8D26
 	.string "NONE$"
+
+gUnknown_085E8D2B:: @ 85E8D2B
 	.string "DESELECT$"
 
 gText_ThreeMarks:: @ 85E8D34
@@ -358,7 +620,11 @@ gText_LevelSymbol:: @ 85E8D4D
 
 gText_UnkCtrlF908Clear01:: @ 85E8D4F
 	.string "{UNK_CTRL_F908}{CLEAR 0x01}$"
+
+gUnknown_085E8D55:: @ 85E8D55
 	.string "+$"
+
+gUnknown_085E8D57:: @ 85E8D57
 	.string "{RIGHT_ARROW}$"
 
 gText_UnkCtrlF907F908:: @ 85E8D59
@@ -375,10 +641,14 @@ gText_GoBackPrevMenu:: @ 85E8D62
 
 gText_WhatWouldYouLike:: @ 85E8D80
 	.string "What would you like to do?$"
+
+gUnknown_085E8D9B:: @ 85E8D9B
 	.string "GIVE$"
 
 gText_xVar1:: @ 85E8DA0
 	.string "×{STR_VAR_1}$"
+
+gUnknown_085E8DA4:: @ 85E8DA4
 	.string " BERRY$"
 
 gText_Coins:: @ 85E8DAB
@@ -554,7 +824,6 @@ gText_FirmSlash:: @ 85E922C
 gText_Var1DotVar2:: @ 85E9233
 	.string "{STR_VAR_1}.{STR_VAR_2}”$"
 
-
 	.include "data/text/berry_firmness_strings.inc"
 
 gText_UnkF908Var1Var2:: @ 85E9263
@@ -563,19 +832,46 @@ gText_UnkF908Var1Var2:: @ 85E9263
 gText_BerryTag:: @ 85E926B
 	.string "BERRY TAG$"
 
+gUnknown_085E9275:: @ 85E9275
 	.string "RED {POKEBLOCK}$"
+
+gUnknown_085E927F:: @ 85E927F
 	.string "BLUE {POKEBLOCK}$"
+
+gUnknown_085E928A:: @ 85E928A
 	.string "PINK {POKEBLOCK}$"
+
+gUnknown_085E9295:: @ 85E9295
 	.string "GREEN {POKEBLOCK}$"
+
+gUnknown_085E92A1:: @ 85E92A1
 	.string "YELLOW {POKEBLOCK}$"
+
+gUnknown_085E92AE:: @ 85E92AE
 	.string "PURPLE {POKEBLOCK}$"
+
+gUnknown_085E92BB:: @ 85E92BB
 	.string "INDIGO {POKEBLOCK}$"
+
+gUnknown_085E92C8:: @ 85E92C8
 	.string "BROWN {POKEBLOCK}$"
+
+gUnknown_085E92D4:: @ 85E92D4
 	.string "LITEBLUE {POKEBLOCK}$"
+
+gUnknown_085E92E3:: @ 85E92E3
 	.string "OLIVE {POKEBLOCK}$"
+
+gUnknown_085E92EF:: @ 85E92EF
 	.string "GRAY {POKEBLOCK}$"
+
+gUnknown_085E92FA:: @ 85E92FA
 	.string "BLACK {POKEBLOCK}$"
+
+gUnknown_085E9306:: @ 85E9306
 	.string "WHITE {POKEBLOCK}$"
+
+gUnknown_085E9312:: @ 85E9312
 	.string "GOLD {POKEBLOCK}$"
 
 gText_Spicy:: @ 85E931D
@@ -593,7 +889,10 @@ gText_Bitter:: @ 85E932D
 gText_Sour:: @ 85E9334
 	.string "SOUR$"
 
+gUnknown_085E9339:: @ 85E9339
 	.string "TASTY$"
+
+gUnknown_085E933F:: @ 85E933F
 	.string "FEEL$"
 
 gText_StowCase:: @ 85E9344
@@ -617,8 +916,13 @@ gText_Var1HappilyAteVar2:: @ 85E9390
 gText_Var1DisdainfullyAteVar2:: @ 85E93A9
 	.string "{STR_VAR_1} disdainfully ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
+gUnknown_085E93C7:: @ 85E93C7
 	.string "BUY$"
+
+gUnknown_085E93CB:: @ 85E93CB
 	.string "SELL$"
+
+gUnknown_085E93D0:: @ 85E93D0
 	.string "QUIT$"
 
 gText_InBagVar1:: @ 85E93D5
@@ -684,15 +988,34 @@ gText_TurnedOverVar1ForVar2:: @ 85E9677
 gText_PokedollarVar1:: @ 85E969C
 	.string "¥{STR_VAR_1}$"
 
+gUnknown_085E96A0:: @ 85E96A0
 	.string "SHIFT$"
+
+gUnknown_085E96A6:: @ 85E96A6
 	.string "SEND OUT$"
+
+gUnknown_085E96AF:: @ 85E96AF
 	.string "SWITCH$"
+
+gUnknown_085E96B6:: @ 85E96B6
 	.string "SUMMARY$"
+
+gUnknown_085E96BE:: @ 85E96BE
 	.string "MOVES$"
+
+gUnknown_085E96C4:: @ 85E96C4
 	.string "ENTER$"
+
+gUnknown_085E96CA:: @ 85E96CA
 	.string "NO ENTRY$"
+
+gUnknown_085E96D3:: @ 85E96D3
 	.string "TAKE$"
+
+gUnknown_085E96D8:: @ 85E96D8
 	.string "READ$"
+
+gUnknown_085E96DD:: @ 85E96DD
 	.string "TRADE$"
 
 gText_HP3:: @ 85E96E3
@@ -821,6 +1144,7 @@ gText_PkmnThawedOut:: @ 85E9CA2
 gText_PPWasRestored:: @ 85E9CB7
 	.string "PP was restored.{PAUSE_UNTIL_PRESS}$"
 
+gUnknown_085E9CCA:: @ 85E9CCA
 	.string "{STR_VAR_1} regained health.{PAUSE_UNTIL_PRESS}$"
 
 gText_PkmnBecameHealthy:: @ 85E9CE0
@@ -856,45 +1180,124 @@ gText_ThrowAwayItem:: @ 85E9E00
 gText_ItemThrownAway:: @ 85E9E14
 	.string "The {STR_VAR_1}\nwas thrown away.{PAUSE_UNTIL_PRESS}$"
 
+gUnknown_085E9E2E:: @ 85E9E2E
 	.string "Teach which POKéMON?$"
+
+gUnknown_085E9E43:: @ 85E9E43
 	.string "Choose a POKéMON.$"
+
+gUnknown_085E9E55:: @ 85E9E55
 	.string "Move to where?$"
+
+gUnknown_085E9E64:: @ 85E9E64
 	.string "Teach which POKéMON?$"
+
+gUnknown_085E9E79:: @ 85E9E79
 	.string "Use on which POKéMON?$"
+
+gUnknown_085E9E8F:: @ 85E9E8F
 	.string "Give to which POKéMON?$"
+
+gUnknown_085E9EA6:: @ 85E9EA6
 	.string "Do what with this {PKMN}?$"
+
+gUnknown_085E9EBC:: @ 85E9EBC
 	.string "There’s nothing to CUT.$"
+
+gUnknown_085E9ED4:: @ 85E9ED4
 	.string "You can’t SURF here.$"
+
+gUnknown_085E9EE9:: @ 85E9EE9
 	.string "You’re already SURFING.$"
+
+gUnknown_085E9F01:: @ 85E9F01
 	.string "Can’t use that here.$"
+
+gUnknown_085E9F16:: @ 85E9F16
 	.string "Restore which move?$"
+
+gUnknown_085E9F2A:: @ 85E9F2A
 	.string "Boost PP of which move?$"
+
+gUnknown_085E9F42:: @ 85E9F42
 	.string "Do what with an item?$"
+
+gUnknown_085E9F58:: @ 85E9F58
 	.string "No POKéMON for battle!$"
+
+gUnknown_085E9F6F:: @ 85E9F6F
 	.string "Choose a POKéMON.$"
+
+gUnknown_085E9F81:: @ 85E9F81
 	.string "Not enough HP…$"
+
+gUnknown_085E9F90:: @ 85E9F90
 	.string "{STR_VAR_1} POKéMON are needed.$"
+
+gUnknown_085E9FA7:: @ 85E9FA7
 	.string "POKéMON can’t be the same.$"
+
+gUnknown_085E9FC2:: @ 85E9FC2
 	.string "No identical hold items.$"
+
+gUnknown_085E9FDB:: @ 85E9FDB
 	.string "The current is much too fast!$"
+
+gUnknown_085E9FF9:: @ 85E9FF9
 	.string "Do what with the MAIL?$"
+
+gUnknown_085EA010:: @ 85EA010
 	.string "Choose POKéMON or CANCEL.$"
+
+gUnknown_085EA02A:: @ 85EA02A
 	.string "Choose POKéMON and confirm.$"
+
+gUnknown_085EA046:: @ 85EA046
 	.string "Let’s enjoy cycling!$"
+
+gUnknown_085EA05B:: @ 85EA05B
 	.string "This is in use already.$"
+
+gUnknown_085EA073:: @ 85EA073
 	.string "{STR_VAR_1} is already holding\none {STR_VAR_2}.$"
+
+gUnknown_085EA091:: @ 85EA091
 	.string "No use.$"
+
+gUnknown_085EA099:: @ 85EA099
 	.string "ABLE$"
+
+gUnknown_085EA09E:: @ 85EA09E
 	.string "FIRST$"
+
+gUnknown_085EA0A4:: @ 85EA0A4
 	.string "SECOND$"
+
+gUnknown_085EA0AB:: @ 85EA0AB
 	.string "THIRD$"
+
+gUnknown_085EA0B1:: @ 85EA0B1
 	.string "ABLE$"
+
+gUnknown_085EA0B6:: @ 85EA0B6
 	.string "NOT ABLE$"
+
+gUnknown_085EA0BF:: @ 85EA0BF
 	.string "ABLE!$"
+
+gUnknown_085EA0C5:: @ 85EA0C5
 	.string "NOT ABLE!$"
+
+gUnknown_085EA0CF:: @ 85EA0CF
 	.string "LEARNED$"
+
+gUnknown_085EA0D7:: @ 85EA0D7
 	.string "HAVE$"
+
+gUnknown_085EA0DC:: @ 85EA0DC
 	.string "DON’T HAVE$"
+
+gUnknown_085EA0E7:: @ 85EA0E7
 	.string "FOURTH$"
 
 gText_PkmnCantParticipate:: @ 85EA0EE
@@ -922,34 +1325,44 @@ gText_PauseUntilPress:: @ 85EA1CA
 	.string "{PAUSE_UNTIL_PRESS}$"
 
 gJPText_PutVar1IntoSpinner:: @ 85EA1CD
-    .string "{STR_VAR_1}を ぐるぐるこうかんに\nだして よろしいですか？$" @ "{STR_VAR_1}wo gurugurukoukanni\ndashite yoroshiidesuka?" ("do you want to put {STR_VAR_1} into the spinner?" in Japanese)
+	.string "{STR_VAR_1}を ぐるぐるこうかんに\nだして よろしいですか？$" @ "{STR_VAR_1}wo gurugurukoukanni\ndashite yoroshiidesuka?" ("do you want to put {STR_VAR_1} into the spinner?" in Japanese)
 
-    .align 2
+	.align 2
 gText_OnlyPkmnForBattle:: @ 85EA1E8
 	.string "That’s your only\nPOKéMON for battle.$"
 
-    .align 2
+	.align 2
 gText_PkmnCantBeTradedNow:: @ 85EA210
 	.string "That POKéMON can’t be traded\nnow.$"
 
-    .align 2
+	.align 2
 gText_EggCantBeTradedNow:: @ 85EA234
-    .string "An EGG can’t be traded now.$"
-    
-    .align 2
-    .string "The other TRAINER’s POKéMON\ncan’t be traded now.$"
-    
-    .align 2
-    .string "The other TRAINER can’t accept\nthat POKéMON now.$"
-    
-    .align 2
-    .string "You can’t trade with that\nTRAINER now.$"
-    
-    .align 2
-    .string "That isn’t the type of POKéMON\nthat the other TRAINER wants.$"
-    
-    .align 2
-    .string "That isn’t an EGG.$"
+	.string "An EGG can’t be traded now.$"
+
+	.align 2
+
+gUnknown_085EA250:: @ 85EA250
+	.string "The other TRAINER’s POKéMON\ncan’t be traded now.$"
+
+	.align 2
+
+gUnknown_085EA284:: @ 85EA284
+	.string "The other TRAINER can’t accept\nthat POKéMON now.$"
+
+	.align 2
+
+gUnknown_085EA2B8:: @ 85EA2B8
+	.string "You can’t trade with that\nTRAINER now.$"
+
+	.align 2
+
+gUnknown_085EA2E0:: @ 85EA2E0
+	.string "That isn’t the type of POKéMON\nthat the other TRAINER wants.$"
+
+	.align 2
+
+gUnknown_085EA320:: @ 85EA320
+	.string "That isn’t an EGG.$"
 
 gText_Register:: @ 85EA333
 	.string "REGISTER$"
@@ -972,6 +1385,7 @@ gText_Speed2:: @ 85EA35B
 gText_HP4:: @ 85EA361
 	.string "HP$"
 
+gUnknown_085EA364:: @ 85EA364
 	.string "$"
 
 gText_OTSlash:: @ 85EA365
@@ -1010,6 +1424,7 @@ gText_RibbonsVar1:: @ 85EA3B4
 gText_EmptyString5:: @ 85EA3C0
 	.string "$"
 
+gUnknown_085EA3C1:: @ 85EA3C1
 	.string "EVENTS$"
 
 gText_Switch:: @ 85EA3C8
@@ -1096,29 +1511,58 @@ gText_RegisteredDataDeleted:: @ 85EA762
 gText_NoRegistry:: @ 85EA785
 	.string "There is no REGISTRY.{PAUSE_UNTIL_PRESS}$"
 
+gUnknown_085EA79D:: @ 85EA79D
 	.string "DEL REGIST.$"
+
+gUnknown_085EA7A9:: @ 85EA7A9
 	.string "{STR_VAR_3}{STR_VAR_1}/{STR_VAR_2}$"
+
+gUnknown_085EA7B1:: @ 85EA7B1
 	.string "DECORATE$"
+
+gUnknown_085EA7BA:: @ 85EA7BA
 	.string "PUT AWAY$"
+
+gUnknown_085EA7C3:: @ 85EA7C3
 	.string "TOSS$"
 
 gText_Color161Shadow161:: @ 85EA7C8
 	.string "{COLOR 161}{SHADOW 161}$"
 
+gUnknown_085EA7CF:: @ 85EA7CF
 	.string "Put out the selected decoration item.$"
+
+gUnknown_085EA7F5:: @ 85EA7F5
 	.string "Store the chosen decoration in the PC.$"
+
+gUnknown_085EA81C:: @ 85EA81C
 	.string "Throw away unwanted decorations.$"
 
 gText_NoDecorations:: @ 85EA83D
 	.string "There are no decorations.{PAUSE_UNTIL_PRESS}$"
 
+gUnknown_085EA859:: @ 85EA859
 	.string "DESK$"
+
+gUnknown_085EA85E:: @ 85EA85E
 	.string "CHAIR$"
+
+gUnknown_085EA864:: @ 85EA864
 	.string "PLANT$"
+
+gUnknown_085EA86A:: @ 85EA86A
 	.string "ORNAMENT$"
+
+gUnknown_085EA873:: @ 85EA873
 	.string "MAT$"
+
+gUnknown_085EA877:: @ 85EA877
 	.string "POSTER$"
+
+gUnknown_085EA87E:: @ 85EA87E
 	.string "DOLL$"
+
+gUnknown_085EA883:: @ 85EA883
 	.string "CUSHION$"
 
 gText_Gold:: @ 85EA88B
@@ -1145,6 +1589,7 @@ gText_NoMoreDecorations:: @ 85EA8EA
 gText_NoMoreDecorations2:: @ 85EA931
 	.string "No more decorations can be placed.\nThe most that can be placed are {STR_VAR_1}.$"
 
+gUnknown_085EA978:: @ 85EA978
 	.string "This can’t be placed here.\nIt must be on a DESK, etc.$"
 
 gText_CantPlaceInRoom:: @ 85EA9AE
@@ -1174,17 +1619,31 @@ gText_DecorationReturnedToPC:: @ 85EAAC5
 gText_NoDecorationsInUse:: @ 85EAAEC
 	.string "There are no decorations in use.{PAUSE_UNTIL_PRESS}$"
 
+gUnknown_085EAB0F:: @ 85EAB0F
 	.string "TRISTAN$"
+
+gUnknown_085EAB17:: @ 85EAB17
 	.string "PHILIP$"
+
+gUnknown_085EAB1E:: @ 85EAB1E
 	.string "DENNIS$"
+
+gUnknown_085EAB25:: @ 85EAB25
 	.string "ROBERTO$"
+
+gText_TurnOff:: @ 85EAB2D
 	.string "TURN OFF$"
+
+gText_Decoration:: @ 85EAB36
 	.string "DECORATION$"
+
+gText_ItemStorage:: @ 85EAB41
 	.string "ITEM STORAGE$"
 
 gText_Mailbox:: @ 85EAB4E
 	.string "MAILBOX$"
 
+gText_DepositItem:: @ 85EAB56
 	.string "DEPOSIT ITEM$"
 
 gText_WithdrawItem:: @ 85EAB63
@@ -1193,8 +1652,13 @@ gText_WithdrawItem:: @ 85EAB63
 gText_TossItem:: @ 85EAB71
 	.string "TOSS ITEM$"
 
+gText_StoreItemsInPC:: @ 85EAB7B
 	.string "Store items in the PC.$"
+
+gText_TakeOutItemsFromPC:: @ 85EAB92
 	.string "Take out items from the PC.$"
+
+gText_ThrowAwayItemsInPC:: @ 85EABAE
 	.string "Throw away items stored in the PC.$"
 
 gText_NoItems:: @ 85EABD1
@@ -1209,8 +1673,13 @@ gText_WithdrawHowManyItems:: @ 85EAC09
 gText_WithdrawXItems:: @ 85EAC22
 	.string "Withdrew {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
+gText_Read:: @ 85EAC35
 	.string "READ$"
+
+gText_MoveToBag:: @ 85EAC3A
 	.string "MOVE TO BAG$"
+
+gText_Give2:: @ 85EAC46
 	.string "GIVE$"
 
 gText_NoMailHere:: @ 85EAC4B
@@ -1252,16 +1721,37 @@ gText_Phoebe:: @ 85EAD29
 gText_Glacia:: @ 85EAD30
 	.string "GLACIA$"
 
+gUnknown_085EAD37:: @ 85EAD37
 	.string "PETALBURG$"
+
+gUnknown_085EAD41:: @ 85EAD41
 	.string "SLATEPORT$"
+
+gUnknown_085EAD4B:: @ 85EAD4B
 	.string "LITTLEROOT$"
+
+gUnknown_085EAD56:: @ 85EAD56
 	.string "LILYCOVE$"
+
+gUnknown_085EAD5F:: @ 85EAD5F
 	.string "DEWFORD$"
+
+gUnknown_085EAD67:: @ 85EAD67
 	.string "ENTER$"
+
+gUnknown_085EAD6D:: @ 85EAD6D
 	.string "INFO$"
+
+gUnknown_085EAD72:: @ 85EAD72
 	.string "What’s a CONTEST?$"
+
+gUnknown_085EAD84:: @ 85EAD84
 	.string "Types of CONTESTS$"
+
+gUnknown_085EAD96:: @ 85EAD96
 	.string "Ranks$"
+
+gUnknown_085EAD9C:: @ 85EAD9C
 	.string "Judging$"
 
 gUnknown_085EADA4::
@@ -1278,22 +1768,56 @@ gUnknown_085EADD5::
 
 gUnknown_085EADE7::
 	.string "TOUGHNESS CONTEST$"
+
+gUnknown_085EADF9:: @ 85EADF9
 	.string "DECORATION$"
+
+gUnknown_085EAE04:: @ 85EAE04
 	.string "PACK UP$"
+
+gUnknown_085EAE0C:: @ 85EAE0C
 	.string "COUNT$"
+
+gUnknown_085EAE12:: @ 85EAE12
 	.string "REGISTRY$"
+
+gUnknown_085EAE1B:: @ 85EAE1B
 	.string "INFORMATION$"
+
+gUnknown_085EAE27:: @ 85EAE27
 	.string "MACH$"
+
+gUnknown_085EAE2C:: @ 85EAE2C
 	.string "ACRO$"
+
+gUnknown_085EAE31:: @ 85EAE31
 	.string "PSN$"
+
+gUnknown_085EAE35:: @ 85EAE35
 	.string "PAR$"
+
+gUnknown_085EAE39:: @ 85EAE39
 	.string "SLP$"
+
+gUnknown_085EAE3D:: @ 85EAE3D
 	.string "BRN$"
+
+gUnknown_085EAE41:: @ 85EAE41
 	.string "FRZ$"
+
+gUnknown_085EAE45:: @ 85EAE45
 	.string "TOXIC$"
+
+gUnknown_085EAE4B:: @ 85EAE4B
 	.string "OK$"
+
+gUnknown_085EAE4E:: @ 85EAE4E
 	.string "QUIT$"
+
+gUnknown_085EAE53:: @ 85EAE53
 	.string "Saw it$"
+
+gUnknown_085EAE5A:: @ 85EAE5A
 	.string "Not yet$"
 
 gText_Yes:: @ 85EAE62
@@ -1302,12 +1826,25 @@ gText_Yes:: @ 85EAE62
 gText_No:: @ 85EAE66
 	.string "NO$"
 
+gUnknown_085EAE69:: @ 85EAE69
 	.string "INFO$"
+
+gUnknown_085EAE6E:: @ 85EAE6E
 	.string "SINGLE BATTLE$"
+
+gUnknown_085EAE7C:: @ 85EAE7C
 	.string "DOUBLE BATTLE$"
+
+gUnknown_085EAE8A:: @ 85EAE8A
 	.string "MULTI BATTLE$"
+
+gUnknown_085EAE97:: @ 85EAE97
 	.string "MR. BRINEY$"
+
+gUnknown_085EAEA2:: @ 85EAEA2
 	.string "CHALLENGE$"
+
+gUnknown_085EAEAC:: @ 85EAEAC
 	.string "INFO$"
 
 gText_Lv50:: @ 85EAEB1
@@ -1316,44 +1853,121 @@ gText_Lv50:: @ 85EAEB1
 gText_OpenLevel:: @ 85EAEB8
 	.string "OPEN LEVEL$"
 
+gUnknown_085EAEC3:: @ 85EAEC3
 	.string "FRESH WATER{CLEAR_TO 0x48}¥200$"
+
+gUnknown_085EAED6:: @ 85EAED6
 	.string "SODA POP{CLEAR_TO 0x48}¥300$"
+
+gUnknown_085EAEE6:: @ 85EAEE6
 	.string "LEMONADE{CLEAR_TO 0x48}¥350$"
+
+gUnknown_085EAEF6:: @ 85EAEF6
 	.string "HOW TO RIDE$"
+
+gUnknown_085EAF02:: @ 85EAF02
 	.string "HOW TO TURN$"
+
+gUnknown_085EAF0E:: @ 85EAF0E
 	.string "SANDY SLOPES$"
+
+gUnknown_085EAF1B:: @ 85EAF1B
 	.string "WHEELIES$"
+
+gUnknown_085EAF24:: @ 85EAF24
 	.string "BUNNY-HOPS$"
+
+gUnknown_085EAF2F:: @ 85EAF2F
 	.string "JUMP$"
+
+gUnknown_085EAF34:: @ 85EAF34
 	.string "Satisfied$"
+
+gUnknown_085EAF3E:: @ 85EAF3E
 	.string "Dissatisfied$"
+
+gUnknown_085EAF4B:: @ 85EAF4B
 	.string "DEEPSEATOOTH$"
+
+gUnknown_085EAF58:: @ 85EAF58
 	.string "DEEPSEASCALE$"
+
+gUnknown_085EAF65:: @ 85EAF65
 	.string "BLUE FLUTE$"
+
+gUnknown_085EAF70:: @ 85EAF70
 	.string "YELLOW FLUTE$"
+
+gUnknown_085EAF7D:: @ 85EAF7D
 	.string "RED FLUTE$"
+
+gUnknown_085EAF87:: @ 85EAF87
 	.string "WHITE FLUTE$"
+
+gUnknown_085EAF93:: @ 85EAF93
 	.string "BLACK FLUTE$"
+
+gUnknown_085EAF9F:: @ 85EAF9F
 	.string "GLASS CHAIR$"
+
+gUnknown_085EAFAB:: @ 85EAFAB
 	.string "GLASS DESK$"
+
+gUnknown_085EAFB6:: @ 85EAFB6
 	.string "TREECKO DOLL 1,000 COINS$"
+
+gUnknown_085EAFCF:: @ 85EAFCF
 	.string "TORCHIC DOLL 1,000 COINS$"
+
+gUnknown_085EAFE8:: @ 85EAFE8
 	.string "MUDKIP DOLL   1,000 COINS$"
+
+gUnknown_085EB002:: @ 85EB002
 	.string "  50 COINS    ¥1,000$"
+
+gUnknown_085EB017:: @ 85EB017
 	.string "500 COINS  ¥10,000$"
+
+gUnknown_085EB02A:: @ 85EB02A
 	.string "Excellent$"
+
+gUnknown_085EB034:: @ 85EB034
 	.string "Not so good$"
+
+gUnknown_085EB040:: @ 85EB040
 	.string "RED SHARD$"
+
+gUnknown_085EB04A:: @ 85EB04A
 	.string "YELLOW SHARD$"
+
+gUnknown_085EB057:: @ 85EB057
 	.string "BLUE SHARD$"
+
+gUnknown_085EB062:: @ 85EB062
 	.string "GREEN SHARD$"
+
+gUnknown_085EB06E:: @ 85EB06E
 	.string "BATTLE FRONTIER$"
+
+gUnknown_085EB07E:: @ 85EB07E
 	.string "Right$"
+
+gUnknown_085EB084:: @ 85EB084
 	.string "Left$"
+
+gUnknown_085EB089:: @ 85EB089
 	.string "TM32{CLEAR_TO 0x48}1,500 COINS$"
+
+gUnknown_085EB09C:: @ 85EB09C
 	.string "TM29{CLEAR_TO 0x48}3,500 COINS$"
+
+gUnknown_085EB0AF:: @ 85EB0AF
 	.string "TM35{CLEAR_TO 0x48}4,000 COINS$"
+
+gUnknown_085EB0C2:: @ 85EB0C2
 	.string "TM24{CLEAR_TO 0x48}4,000 COINS$"
+
+gUnknown_085EB0D5:: @ 85EB0D5
 	.string "TM13{CLEAR_TO 0x48}4,000 COINS$"
 
 gText_Cool:: @ 85EB0E8
@@ -1371,19 +1985,46 @@ gText_Smart:: @ 85EB0F9
 gText_Tough:: @ 85EB0FF
 	.string "TOUGH$"
 
+gUnknown_085EB105:: @ 85EB105
 	.string "NORMAL$"
+
+gUnknown_085EB10C:: @ 85EB10C
 	.string "SUPER$"
+
+gUnknown_085EB112:: @ 85EB112
 	.string "HYPER$"
+
+gUnknown_085EB118:: @ 85EB118
 	.string "MASTER$"
+
+gUnknown_085EB11F:: @ 85EB11F
 	.string "COOL$"
+
+gUnknown_085EB124:: @ 85EB124
 	.string "BEAUTY$"
+
+gUnknown_085EB12B:: @ 85EB12B
 	.string "CUTE$"
+
+gUnknown_085EB130:: @ 85EB130
 	.string "SMART$"
+
+gUnknown_085EB136:: @ 85EB136
 	.string "TOUGH$"
+
+gUnknown_085EB13C:: @ 85EB13C
 	.string "ITEMS$"
+
+gUnknown_085EB142:: @ 85EB142
 	.string "KEY ITEMS$"
+
+gUnknown_085EB14C:: @ 85EB14C
 	.string "POKé BALLS$"
+
+gUnknown_085EB157:: @ 85EB157
 	.string "TMs & HMs$"
+
+gUnknown_085EB161:: @ 85EB161
 	.string "BERRIES$"
 
 gText_SomeonesPC:: @ 85EB169
@@ -1401,23 +2042,58 @@ gText_HallOfFame:: @ 85EB18B
 gText_LogOff:: @ 85EB198
 	.string "LOG OFF$"
 
+gUnknown_085EB1A0:: @ 85EB1A0
 	.string "OPPONENT$"
+
+gUnknown_085EB1A9:: @ 85EB1A9
 	.string "TOURNEY TREE$"
+
+gUnknown_085EB1B6:: @ 85EB1B6
 	.string "READY TO START$"
+
+gUnknown_085EB1C5:: @ 85EB1C5
 	.string "NORMAL RANK$"
+
+gUnknown_085EB1D1:: @ 85EB1D1
 	.string "SUPER RANK$"
+
+gUnknown_085EB1DC:: @ 85EB1DC
 	.string "HYPER RANK$"
+
+gUnknown_085EB1E7:: @ 85EB1E7
 	.string "MASTER RANK$"
+
+gUnknown_085EB1F3:: @ 85EB1F3
 	.string "SINGLE$"
+
+gUnknown_085EB1FA:: @ 85EB1FA
 	.string "DOUBLE$"
+
+gUnknown_085EB201:: @ 85EB201
 	.string "MULTI$"
+
+gUnknown_085EB207:: @ 85EB207
 	.string "MULTI-LINK$"
+
+gUnknown_085EB212:: @ 85EB212
 	.string "BATTLE BAG$"
+
+gUnknown_085EB21D:: @ 85EB21D
 	.string "HELD ITEM$"
+
+gUnknown_085EB227:: @ 85EB227
 	.string "LINK CONTEST$"
+
+gUnknown_085EB234:: @ 85EB234
 	.string "ABOUT E-MODE$"
+
+gUnknown_085EB241:: @ 85EB241
 	.string "ABOUT G-MODE$"
+
+gUnknown_085EB24E:: @ 85EB24E
 	.string "E-MODE$"
+
+gUnknown_085EB255:: @ 85EB255
 	.string "G-MODE$"
 
 gText_MenuOptionPokedex:: @ 85EB25C
@@ -1432,6 +2108,7 @@ gText_MenuOptionBag:: @ 85EB26C
 gText_MenuOptionPokenav:: @ 85EB270
 	.string "POKéNAV$"
 
+gUnknown_085EB278:: @ 85EB278
 	.string "$"
 
 gText_MenuOptionSave:: @ 85EB279
@@ -1443,77 +2120,220 @@ gText_MenuOptionOption:: @ 85EB27E
 gText_MenuOptionExit:: @ 85EB285
 	.string "EXIT$"
 
-	.align 2
+gUnknown_085EB28A:: @ 85EB28A
+    .string "  "
+
+gUnknown_085EB28C:: @ 85EB28C
 	.string "5BP$"
+
+gUnknown_085EB290:: @ 85EB290
 	.string "10BP$"
+
+gUnknown_085EB295:: @ 85EB295
 	.string "15BP$"
+
+gUnknown_085EB29A:: @ 85EB29A
 	.string "RED TENT$"
+
+gUnknown_085EB2A3:: @ 85EB2A3
 	.string "BLUE TENT$"
+
+gUnknown_085EB2AD:: @ 85EB2AD
 	.string "SOUTHERN ISLAND$"
+
+gUnknown_085EB2BD:: @ 85EB2BD
 	.string "BIRTH ISLAND$"
+
+gUnknown_085EB2CA:: @ 85EB2CA
 	.string "FARAWAY ISLAND$"
+
+gUnknown_085EB2D9:: @ 85EB2D9
 	.string "NAVEL ROCK$"
+
+gUnknown_085EB2E4:: @ 85EB2E4
 	.string "CLAW FOSSIL$"
+
+gUnknown_085EB2F0:: @ 85EB2F0
 	.string "ROOT FOSSIL$"
+
+gUnknown_085EB2FC:: @ 85EB2FC
 	.string "NO$"
+
+gUnknown_085EB2FF:: @ 85EB2FF
 	.string "I’ll battle now!$"
+
+gUnknown_085EB310:: @ 85EB310
 	.string "I won!$"
+
+gUnknown_085EB317:: @ 85EB317
 	.string "I lost!$"
+
+gUnknown_085EB31F:: @ 85EB31F
 	.string "I won’t tell.$"
+
+gUnknown_085EB32D:: @ 85EB32D
 	.string "NORMAL TAG MATCH$"
+
+gUnknown_085EB33E:: @ 85EB33E
 	.string "VARIETY TAG MATCH$"
+
+gUnknown_085EB350:: @ 85EB350
 	.string "UNIQUE TAG MATCH$"
+
+gUnknown_085EB361:: @ 85EB361
 	.string "EXPERT TAG MATCH$"
+
+gUnknown_085EB372:: @ 85EB372
 	.string "TRADE CENTER$"
+
+gUnknown_085EB37F:: @ 85EB37F
 	.string "COLOSSEUM$"
+
+gUnknown_085EB389:: @ 85EB389
 	.string "RECORD CORNER$"
+
+gUnknown_085EB397:: @ 85EB397
 	.string "BERRY CRUSH$"
+
+gUnknown_085EB3A3:: @ 85EB3A3
 	.string "$"
+
+gUnknown_085EB3A4:: @ 85EB3A4
 	.string "POKéMON JUMP$"
+
+gUnknown_085EB3B1:: @ 85EB3B1
 	.string "DODRIO BERRY-PICKING$"
+
+gUnknown_085EB3C6:: @ 85EB3C6
 	.string "BECOME LEADER$"
+
+gUnknown_085EB3D4:: @ 85EB3D4
 	.string "JOIN GROUP$"
+
+gUnknown_085EB3DF:: @ 85EB3DF
 	.string "TWO STYLES$"
+
+gUnknown_085EB3EA:: @ 85EB3EA
 	.string "LV. 50$"
+
+gUnknown_085EB3F1:: @ 85EB3F1
 	.string "OPEN LEVEL$"
+
+gUnknown_085EB3FC:: @ 85EB3FC
 	.string "{PKMN} TYPE & NO.$"
+
+gUnknown_085EB40A:: @ 85EB40A
 	.string "HOLD ITEMS$"
+
+gUnknown_085EB415:: @ 85EB415
 	.string "SYMBOLS$"
+
+gUnknown_085EB41D:: @ 85EB41D
 	.string "RECORD$"
+
+gUnknown_085EB424:: @ 85EB424
 	.string "BATTLE PTS$"
+
+gUnknown_085EB42F:: @ 85EB42F
 	.string "TOWER INFO$"
+
+gUnknown_085EB43A:: @ 85EB43A
 	.string "BATTLE {PKMN}$"
+
+gUnknown_085EB444:: @ 85EB444
 	.string "BATTLE SALON$"
+
+gUnknown_085EB451:: @ 85EB451
 	.string "MULTI-LINK$"
+
+gUnknown_085EB45C:: @ 85EB45C
 	.string "BATTLE RULES$"
+
+gUnknown_085EB469:: @ 85EB469
 	.string "JUDGE: MIND$"
+
+gUnknown_085EB475:: @ 85EB475
 	.string "JUDGE: SKILL$"
+
+gUnknown_085EB482:: @ 85EB482
 	.string "JUDGE: BODY$"
+
+gUnknown_085EB48E:: @ 85EB48E
 	.string "MATCHUP$"
+
+gUnknown_085EB496:: @ 85EB496
 	.string "TOURNEY TREE$"
+
+gUnknown_085EB4A3:: @ 85EB4A3
 	.string "DOUBLE KO$"
+
+gUnknown_085EB4AD:: @ 85EB4AD
 	.string "BASIC RULES$"
+
+gUnknown_085EB4B9:: @ 85EB4B9
 	.string "SWAP: PARTNER$"
+
+gUnknown_085EB4C7:: @ 85EB4C7
 	.string "SWAP: NUMBER$"
+
+gUnknown_085EB4D4:: @ 85EB4D4
 	.string "SWAP: NOTES$"
+
+gUnknown_085EB4E0:: @ 85EB4E0
 	.string "OPEN LEVEL$"
+
+gUnknown_085EB4EB:: @ 85EB4EB
 	.string "BATTLE BASICS$"
+
+gUnknown_085EB4F9:: @ 85EB4F9
 	.string "POKéMON NATURE$"
+
+gUnknown_085EB508:: @ 85EB508
 	.string "POKéMON MOVES$"
+
+gUnknown_085EB516:: @ 85EB516
 	.string "UNDERPOWERED$"
+
+gUnknown_085EB523:: @ 85EB523
 	.string "WHEN IN DANGER$"
+
+gUnknown_085EB532:: @ 85EB532
 	.string "PYRAMID: POKéMON$"
+
+gUnknown_085EB543:: @ 85EB543
 	.string "PYRAMID: TRAINERS$"
+
+gUnknown_085EB555:: @ 85EB555
 	.string "PYRAMID: MAZE$"
+
+gUnknown_085EB563:: @ 85EB563
 	.string "BATTLE BAG$"
+
+gUnknown_085EB56E:: @ 85EB56E
 	.string "POKéNAV AND BAG$"
+
+gUnknown_085EB57E:: @ 85EB57E
 	.string "HELD ITEMS$"
+
+gUnknown_085EB589:: @ 85EB589
 	.string "POKéMON ORDER$"
+
+gUnknown_085EB597:: @ 85EB597
 	.string "BATTLE POKéMON$"
+
+gUnknown_085EB5A6:: @ 85EB5A6
 	.string "BATTLE TRAINERS$"
+
+gUnknown_085EB5B6:: @ 85EB5B6
 	.string "GO ON$"
+
+gUnknown_085EB5BC:: @ 85EB5BC
 	.string "RECORD$"
+
+gUnknown_085EB5C3:: @ 85EB5C3
 	.string "REST$"
+
+gUnknown_085EB5C8:: @ 85EB5C8
 	.string "RETIRE$"
 
 gText_99TimesPlus:: @ 85EB5CF
@@ -1528,6 +2348,7 @@ gText_SpaceSeconds:: @ 85EB5E5
 gText_SpaceTimes:: @ 85EB5EE
 	.string " time(s)$"
 
+gUnknown_085EB5F7:: @ 85EB5F7
 	.string ".$"
 
 gText_BigGuy:: @ 85EB5F9
@@ -1542,28 +2363,73 @@ gText_Son:: @ 85EB60A
 gText_Daughter:: @ 85EB60E
 	.string "daughter$"
 
+gUnknown_085EB617:: @ 85EB617
 	.string "BLUE FLUTE$"
+
+gUnknown_085EB622:: @ 85EB622
 	.string "YELLOW FLUTE$"
+
+gUnknown_085EB62F:: @ 85EB62F
 	.string "RED FLUTE$"
+
+gUnknown_085EB639:: @ 85EB639
 	.string "WHITE FLUTE$"
+
+gUnknown_085EB645:: @ 85EB645
 	.string "BLACK FLUTE$"
+
+gUnknown_085EB651:: @ 85EB651
 	.string "PRETTY CHAIR$"
+
+gUnknown_085EB65E:: @ 85EB65E
 	.string "PRETTY DESK$"
+
+gUnknown_085EB66A:: @ 85EB66A
 	.string "1F$"
+
+gUnknown_085EB66D:: @ 85EB66D
 	.string "2F$"
+
+gUnknown_085EB670:: @ 85EB670
 	.string "3F$"
+
+gUnknown_085EB673:: @ 85EB673
 	.string "4F$"
+
+gUnknown_085EB676:: @ 85EB676
 	.string "5F$"
+
+gUnknown_085EB679:: @ 85EB679
 	.string "6F$"
+
+gUnknown_085EB67C:: @ 85EB67C
 	.string "7F$"
+
+gUnknown_085EB67F:: @ 85EB67F
 	.string "8F$"
+
+gUnknown_085EB682:: @ 85EB682
 	.string "9F$"
+
+gUnknown_085EB685:: @ 85EB685
 	.string "10F$"
+
+gUnknown_085EB689:: @ 85EB689
 	.string "11F$"
+
+gUnknown_085EB68D:: @ 85EB68D
 	.string "B1F$"
+
+gUnknown_085EB691:: @ 85EB691
 	.string "B2F$"
+
+gUnknown_085EB695:: @ 85EB695
 	.string "B3F$"
+
+gUnknown_085EB699:: @ 85EB699
 	.string "B4F$"
+
+gUnknown_085EB69D:: @ 85EB69D
 	.string "ROOFTOP$"
 
 gText_ElevatorNowOn:: @ 85EB6A5
@@ -1572,107 +2438,301 @@ gText_ElevatorNowOn:: @ 85EB6A5
 gText_BP:: @ 85EB6AD
 	.string "BP$"
 
+gUnknown_085EB6B0:: @ 85EB6B0
 	.string "ENERGYPOWDER{CLEAR_TO 0x72}{SIZE 0}50$"
+
+gUnknown_085EB6C5:: @ 85EB6C5
 	.string "ENERGY ROOT{CLEAR_TO 0x72}{SIZE 0}80$"
+
+gUnknown_085EB6D9:: @ 85EB6D9
 	.string "HEAL POWDER{CLEAR_TO 0x72}{SIZE 0}50$"
+
+gUnknown_085EB6ED:: @ 85EB6ED
 	.string "REVIVAL HERB{CLEAR_TO 0x6C}{SIZE 0}300$"
+
+gUnknown_085EB703:: @ 85EB703
 	.string "PROTEIN{CLEAR_TO 0x63}{SIZE 0}1,000$"
+
+gUnknown_085EB716:: @ 85EB716
 	.string "IRON{CLEAR_TO 0x63}{SIZE 0}1,000$"
+
+gUnknown_085EB726:: @ 85EB726
 	.string "CARBOS{CLEAR_TO 0x63}{SIZE 0}1,000$"
+
+gUnknown_085EB738:: @ 85EB738
 	.string "CALCIUM{CLEAR_TO 0x63}{SIZE 0}1,000$"
+
+gUnknown_085EB74B:: @ 85EB74B
 	.string "ZINC{CLEAR_TO 0x63}{SIZE 0}1,000$"
+
+gUnknown_085EB75B:: @ 85EB75B
 	.string "HP UP{CLEAR_TO 0x63}{SIZE 0}1,000$"
+
+gUnknown_085EB76C:: @ 85EB76C
 	.string "PP UP{CLEAR_TO 0x63}{SIZE 0}3,000$"
+
+gUnknown_085EB77D:: @ 85EB77D
 	.string "RANKING HALL$"
+
+gUnknown_085EB78A:: @ 85EB78A
 	.string "EXCHANGE SERVICE$"
+
+gUnknown_085EB79B:: @ 85EB79B
 	.string "LILYCOVE CITY$"
+
+gUnknown_085EB7A9:: @ 85EB7A9
 	.string "SLATEPORT CITY$"
+
+gUnknown_085EB7B8:: @ 85EB7B8
 	.string "CAVE OF ORIGIN$"
+
+gUnknown_085EB7C7:: @ 85EB7C7
 	.string "MT. PYRE$"
+
+gUnknown_085EB7D0:: @ 85EB7D0
 	.string "SKY PILLAR$"
+
+gUnknown_085EB7DB:: @ 85EB7DB
 	.string "Don’t remember$"
 
 gText_Exit:: @ 85EB7EA
 	.string "EXIT$"
 
+gUnknown_085EB7EF:: @ 85EB7EF
 	.string "Exit from the BOX?$"
+
+gUnknown_085EB802:: @ 85EB802
 	.string "What do you want to do?$"
+
+gUnknown_085EB81A:: @ 85EB81A
 	.string "Please pick a theme.$"
+
+gUnknown_085EB82F:: @ 85EB82F
 	.string "Pick the wallpaper.$"
+
+gUnknown_085EB843:: @ 85EB843
 	.string "{SPECIAL_F7 0x00} is selected.$"
+
+gUnknown_085EB853:: @ 85EB853
 	.string "Jump to which BOX?$"
+
+gUnknown_085EB866:: @ 85EB866
 	.string "Deposit in which BOX?$"
+
+gUnknown_085EB87C:: @ 85EB87C
 	.string "{SPECIAL_F7 0x00} was deposited.$"
+
+gUnknown_085EB88E:: @ 85EB88E
 	.string "The BOX is full.$"
+
+gUnknown_085EB89F:: @ 85EB89F
 	.string "Release this POKéMON?$"
+
+gUnknown_085EB8B5:: @ 85EB8B5
 	.string "{SPECIAL_F7 0x00} was released.$"
+
+gUnknown_085EB8C6:: @ 85EB8C6
 	.string "Bye-bye, {SPECIAL_F7 0x00}!$"
+
+gUnknown_085EB8D3:: @ 85EB8D3
 	.string "Mark your POKéMON.$"
+
+gUnknown_085EB8E6:: @ 85EB8E6
 	.string "That’s your last POKéMON!$"
+
+gUnknown_085EB900:: @ 85EB900
 	.string "Your party’s full!$"
+
+gUnknown_085EB913:: @ 85EB913
 	.string "You’re holding a POKéMON!$"
+
+gUnknown_085EB92D:: @ 85EB92D
 	.string "Which one will you take?$"
+
+gUnknown_085EB946:: @ 85EB946
 	.string "You can’t release an EGG.$"
+
+gUnknown_085EB960:: @ 85EB960
 	.string "Continue BOX operations?$"
+
+gUnknown_085EB979:: @ 85EB979
 	.string "{SPECIAL_F7 0x00} came back!$"
+
+gUnknown_085EB987:: @ 85EB987
 	.string "Was it worried about you?$"
+
+gUnknown_085EB9A1:: @ 85EB9A1
 	.string "… … … … !$"
+
+gUnknown_085EB9AB:: @ 85EB9AB
 	.string "Please remove the MAIL.$"
+
+gUnknown_085EB9C3:: @ 85EB9C3
 	.string "GIVE to a POKéMON?$"
+
+gUnknown_085EB9D6:: @ 85EB9D6
 	.string "Placed item in the BAG.$"
+
+gUnknown_085EB9EE:: @ 85EB9EE
 	.string "The BAG is full.$"
+
+gUnknown_085EB9FF:: @ 85EB9FF
 	.string "Put this item in the BAG?$"
+
+gUnknown_085EBA19:: @ 85EBA19
 	.string "{SPECIAL_F7 0x00} is now held.$"
+
+gUnknown_085EBA29:: @ 85EBA29
 	.string "Changed to {SPECIAL_F7 0x00}.$"
+
+gUnknown_085EBA38:: @ 85EBA38
 	.string "MAIL can’t be stored!$"
+
+gUnknown_085EBA4E:: @ 85EBA4E
 	.string "CANCEL$"
+
+gUnknown_085EBA55:: @ 85EBA55
 	.string "STORE$"
+
+gUnknown_085EBA5B:: @ 85EBA5B
 	.string "WITHDRAW$"
+
+gUnknown_085EBA64:: @ 85EBA64
 	.string "SHIFT$"
+
+gUnknown_085EBA6A:: @ 85EBA6A
 	.string "MOVE$"
+
+gUnknown_085EBA6F:: @ 85EBA6F
 	.string "PLACE$"
+
+gUnknown_085EBA75:: @ 85EBA75
 	.string "SUMMARY$"
+
+gUnknown_085EBA7D:: @ 85EBA7D
 	.string "RELEASE$"
+
+gUnknown_085EBA85:: @ 85EBA85
 	.string "MARK$"
+
+gUnknown_085EBA8A:: @ 85EBA8A
 	.string "NAME$"
+
+gUnknown_085EBA8F:: @ 85EBA8F
 	.string "JUMP$"
+
+gUnknown_085EBA94:: @ 85EBA94
 	.string "WALLPAPER$"
+
+gUnknown_085EBA9E:: @ 85EBA9E
 	.string "TAKE$"
+
+gUnknown_085EBAA3:: @ 85EBAA3
 	.string "GIVE$"
+
+gUnknown_085EBAA8:: @ 85EBAA8
 	.string "SWITCH$"
+
+gUnknown_085EBAAF:: @ 85EBAAF
 	.string "BAG$"
+
+gUnknown_085EBAB3:: @ 85EBAB3
 	.string "INFO$"
+
+gUnknown_085EBAB8:: @ 85EBAB8
 	.string "SCENERY 1$"
+
+gUnknown_085EBAC2:: @ 85EBAC2
 	.string "SCENERY 2$"
+
+gUnknown_085EBACC:: @ 85EBACC
 	.string "SCENERY 3$"
+
+gUnknown_085EBAD6:: @ 85EBAD6
 	.string "ETCETERA$"
+
+gUnknown_085EBADF:: @ 85EBADF
 	.string "FRIENDS$"
+
+gUnknown_085EBAE7:: @ 85EBAE7
 	.string "FOREST$"
+
+gUnknown_085EBAEE:: @ 85EBAEE
 	.string "CITY$"
+
+gUnknown_085EBAF3:: @ 85EBAF3
 	.string "DESERT$"
+
+gUnknown_085EBAFA:: @ 85EBAFA
 	.string "SAVANNA$"
+
+gUnknown_085EBB02:: @ 85EBB02
 	.string "CRAG$"
+
+gUnknown_085EBB07:: @ 85EBB07
 	.string "VOLCANO$"
+
+gUnknown_085EBB0F:: @ 85EBB0F
 	.string "SNOW$"
+
+gUnknown_085EBB14:: @ 85EBB14
 	.string "CAVE$"
+
+gUnknown_085EBB19:: @ 85EBB19
 	.string "BEACH$"
+
+gUnknown_085EBB1F:: @ 85EBB1F
 	.string "SEAFLOOR$"
+
+gUnknown_085EBB28:: @ 85EBB28
 	.string "RIVER$"
+
+gUnknown_085EBB2E:: @ 85EBB2E
 	.string "SKY$"
+
+gUnknown_085EBB32:: @ 85EBB32
 	.string "POLKA-DOT$"
+
+gUnknown_085EBB3C:: @ 85EBB3C
 	.string "POKéCENTER$"
+
+gUnknown_085EBB47:: @ 85EBB47
 	.string "MACHINE$"
+
+gUnknown_085EBB4F:: @ 85EBB4F
 	.string "SIMPLE$"
+
+gUnknown_085EBB56:: @ 85EBB56
 	.string "What would you like to do?$"
+
+gUnknown_085EBB71:: @ 85EBB71
 	.string "WITHDRAW POKéMON$"
+
+gUnknown_085EBB82:: @ 85EBB82
 	.string "DEPOSIT POKéMON$"
+
+gUnknown_085EBB92:: @ 85EBB92
 	.string "MOVE POKéMON$"
+
+gUnknown_085EBB9F:: @ 85EBB9F
 	.string "MOVE ITEMS$"
+
+gUnknown_085EBBAA:: @ 85EBBAA
 	.string "SEE YA!$"
+
+gUnknown_085EBBB2:: @ 85EBBB2
 	.string "Move POKéMON stored in BOXES to\nyour party.$"
+
+gUnknown_085EBBDE:: @ 85EBBDE
 	.string "Store POKéMON in your party in BOXES.$"
+
+gUnknown_085EBC04:: @ 85EBC04
 	.string "Organize the POKéMON in BOXES and\nin your party.$"
+
+gUnknown_085EBC35:: @ 85EBC35
 	.string "Move items held by any POKéMON\nin a BOX or your party.$"
+
+gUnknown_085EBC6C:: @ 85EBC6C
 	.string "Return to the previous menu.$"
 
 gText_JustOnePkmn:: @ 85EBC89
@@ -1684,24 +2744,52 @@ gText_PartyFull:: @ 85EBCAD
 gText_Box:: @ 85EBCC1
 	.string "BOX$"
 
+gUnknown_085EBCC5:: @ 85EBCC5
 	.string "Check the map of the HOENN region.$"
+
+gUnknown_085EBCE8:: @ 85EBCE8
 	.string "Check POKéMON in detail.$"
+
+gUnknown_085EBD01:: @ 85EBD01
 	.string "Call a registered TRAINER.$"
+
+gUnknown_085EBD1C:: @ 85EBD1C
 	.string "Check obtained RIBBONS.$"
+
+gUnknown_085EBD34:: @ 85EBD34
 	.string "Put away the POKéNAV.$"
 
 gText_NoRibbonWinners:: @ 85EBD4A
 	.string "There are no RIBBON winners.$"
 
+gUnknown_085EBD67:: @ 85EBD67
 	.string "No TRAINERS are registered.$"
+
+gUnknown_085EBD83:: @ 85EBD83
 	.string "Check party POKéMON in detail.$"
+
+gUnknown_085EBDA2:: @ 85EBDA2
 	.string "Check all POKéMON in detail.$"
+
+gUnknown_085EBDBF:: @ 85EBDBF
 	.string "Return to the POKéNAV menu.$"
+
+gUnknown_085EBDDB:: @ 85EBDDB
 	.string "Find cool POKéMON.$"
+
+gUnknown_085EBDEE:: @ 85EBDEE
 	.string "Find beautiful POKéMON.$"
+
+gUnknown_085EBE06:: @ 85EBE06
 	.string "Find cute POKéMON.$"
+
+gUnknown_085EBE19:: @ 85EBE19
 	.string "Find smart POKéMON.$"
+
+gUnknown_085EBE2D:: @ 85EBE2D
 	.string "Find tough POKéMON.$"
+
+gUnknown_085EBE41:: @ 85EBE41
 	.string "Return to the CONDITION menu.$"
 
 gText_NumberRegistered:: @ 85EBE5F
@@ -1710,24 +2798,61 @@ gText_NumberRegistered:: @ 85EBE5F
 gText_NumberOfBattles:: @ 85EBE6E
 	.string "No. of battles$"
 
+gUnknown_085EBE7D:: @ 85EBE7D
 	.string "DETAIL$"
+
+gUnknown_085EBE84:: @ 85EBE84
 	.string "CALL$"
+
+gUnknown_085EBE89:: @ 85EBE89
 	.string "EXIT$"
+
+gUnknown_085EBE8E:: @ 85EBE8E
 	.string "Can’t call opponent here.$"
+
+gUnknown_085EBEA8:: @ 85EBEA8
 	.string "STRATEGY$"
+
+gUnknown_085EBEB1:: @ 85EBEB1
 	.string "TRAINER’S POKéMON$"
+
+gUnknown_085EBEC3:: @ 85EBEC3
 	.string "SELF-INTRODUCTION$"
+
+gUnknown_085EBED5:: @ 85EBED5
 	.string "{CLEAR 0x80}$"
+
+gUnknown_085EBED9:: @ 85EBED9
 	.string "{UNK_CTRL_F800}ZOOM {UNK_CTRL_F801}CANCEL$"
+
+gUnknown_085EBEE9:: @ 85EBEE9
 	.string "{UNK_CTRL_F800}FULL {UNK_CTRL_F801}CANCEL$"
+
+gUnknown_085EBEF9:: @ 85EBEF9
 	.string "{UNK_CTRL_F800}CONDITION {UNK_CTRL_F801}CANCEL$"
+
+gUnknown_085EBF0E:: @ 85EBF0E
 	.string "{UNK_CTRL_F800}MARKINGS {UNK_CTRL_F801}CANCEL$"
+
+gUnknown_085EBF22:: @ 85EBF22
 	.string "{UNK_CTRL_F800}SELECT MARK {UNK_CTRL_F801}CANCEL$"
+
+gUnknown_085EBF39:: @ 85EBF39
 	.string "{UNK_CTRL_F800}MENU {UNK_CTRL_F801}CANCEL$"
+
+gUnknown_085EBF49:: @ 85EBF49
 	.string "{UNK_CTRL_F800}OK {UNK_CTRL_F801}CANCEL$"
+
+gUnknown_085EBF57:: @ 85EBF57
 	.string "{UNK_CTRL_F801}CANCEL$"
+
+gUnknown_085EBF60:: @ 85EBF60
 	.string "{UNK_CTRL_F800}RIBBONS {UNK_CTRL_F801}CANCEL$"
+
+gUnknown_085EBF73:: @ 85EBF73
 	.string "{UNK_CTRL_F800}CHECK {UNK_CTRL_F801}CANCEL$"
+
+gUnknown_085EBF84:: @ 85EBF84
 	.string "{UNK_CTRL_F801}CANCEL$"
 
 gText_NatureSlash:: @ 85EBF8D
@@ -1742,16 +2867,28 @@ gText_InParty:: @ 85EBFCE
 gText_Number2:: @ 85EBFD7
 	.string "No. $"
 
+gUnknown_085EBFDC:: @ 85EBFDC
 	.string "RIBBONS$"
+
+gUnknown_085EBFE4:: @ 85EBFE4
 	.string "{SPECIAL_F7 0x00}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GREY WHITE LIGHT_GREY}/{LV}{SPECIAL_F7 0x01}$"
+
+gUnknown_085EBFF6:: @ 85EBFF6
 	.string "{SPECIAL_F7 0x00}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GREY WHITE LIGHT_GREY}/{LV}{SPECIAL_F7 0x01}$"
+
+gUnknown_085EC008:: @ 85EC008
 	.string "{SPECIAL_F7 0x00}/{LV}{SPECIAL_F7 0x01}$"
 
 gText_Unknown:: @ 85EC00F
 	.string "UNKNOWN$"
 
+gUnknown_085EC017:: @ 85EC017
 	.string "CALL$"
+
+gUnknown_085EC01C:: @ 85EC01C
 	.string "CHECK$"
+
+gUnknown_085EC022:: @ 85EC022
 	.string "CANCEL$"
 
 gText_NumberF700:: @ 85EC029
@@ -1760,44 +2897,121 @@ gText_NumberF700:: @ 85EC029
 gText_RibbonsF700:: @ 85EC030
 	.string "RIBBONS {SPECIAL_F7 0x00}$"
 
+gUnknown_085EC03B:: @ 85EC03B
 	.string "{SPECIAL_F7 0x00}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GREY WHITE LIGHT_GREY}/{LV}{SPECIAL_F7 0x01}{SPECIAL_F7 0x02}$"
+
+gUnknown_085EC04F:: @ 85EC04F
 	.string "{SPECIAL_F7 0x00}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GREY WHITE LIGHT_GREY}/{LV}{SPECIAL_F7 0x01}{SPECIAL_F7 0x02}$"
+
+gUnknown_085EC063:: @ 85EC063
 	.string "{SPECIAL_F7 0x00}/{LV}{SPECIAL_F7 0x01}{SPECIAL_F7 0x02}$"
+
+gUnknown_085EC06C:: @ 85EC06C
 	.string "Combine four words or phrases$"
+
+gUnknown_085EC08A:: @ 85EC08A
 	.string "and make your profile.$"
+
+gUnknown_085EC0A1:: @ 85EC0A1
 	.string "Combine six words or phrases$"
+
+gUnknown_085EC0BE:: @ 85EC0BE
 	.string "and make a message.$"
+
+gUnknown_085EC0D2:: @ 85EC0D2
 	.string "Find words that describe your$"
+
+gUnknown_085EC0F0:: @ 85EC0F0
 	.string "feelings right now.$"
+
+gUnknown_085EC104:: @ 85EC104
 	.string "With four phrases,$"
+
+gUnknown_085EC117:: @ 85EC117
 	.string "Combine nine words or phrases$"
+
+gUnknown_085EC135:: @ 85EC135
 	.string "and make a message.$"
+
+gUnknown_085EC149:: @ 85EC149
 	.string "Change just one word or phrase$"
+
+gUnknown_085EC168:: @ 85EC168
 	.string "and improve the BARD’s song.$"
+
+gUnknown_085EC185:: @ 85EC185
 	.string "Your profile$"
+
+gUnknown_085EC192:: @ 85EC192
 	.string "Your feeling at the battle’s start$"
+
+gUnknown_085EC1B5:: @ 85EC1B5
 	.string "What you say if you win a battle$"
+
+gUnknown_085EC1D6:: @ 85EC1D6
 	.string "What you say if you lose a battle$"
+
+gUnknown_085EC1F8:: @ 85EC1F8
 	.string "The answer$"
+
+gUnknown_085EC203:: @ 85EC203
 	.string "The MAIL message$"
+
+gUnknown_085EC214:: @ 85EC214
 	.string "The MAIL salutation$"
+
+gUnknown_085EC228:: @ 85EC228
 	.string "The new song$"
+
+gUnknown_085EC235:: @ 85EC235
 	.string "Combine two words or phrases$"
+
+gUnknown_085EC252:: @ 85EC252
 	.string "and make a trendy saying.$"
+
+gUnknown_085EC26C:: @ 85EC26C
 	.string "The trendy saying$"
+
+gUnknown_085EC27E:: @ 85EC27E
 	.string "is as shown. Okay?$"
+
+gUnknown_085EC291:: @ 85EC291
 	.string "Combine two words or phrases$"
+
+gUnknown_085EC2AE:: @ 85EC2AE
 	.string "to teach her a good saying.$"
+
+gUnknown_085EC2CA:: @ 85EC2CA
 	.string "Find words which fit$"
+
+gUnknown_085EC2DF:: @ 85EC2DF
 	.string "the TRAINER’s image.$"
+
+gUnknown_085EC2F4:: @ 85EC2F4
 	.string "The image:$"
+
+gUnknown_085EC2FF:: @ 85EC2FF
 	.string "Out of the listed choices,$"
+
+gUnknown_085EC31A:: @ 85EC31A
 	.string "select the answer to the quiz!$"
+
+gUnknown_085EC339:: @ 85EC339
 	.string "and create a quiz!$"
+
+gUnknown_085EC34C:: @ 85EC34C
 	.string "Pick a word or phrase and$"
+
+gUnknown_085EC366:: @ 85EC366
 	.string "set the quiz answer.$"
+
+gUnknown_085EC37B:: @ 85EC37B
 	.string "The answer:$"
+
+gUnknown_085EC387:: @ 85EC387
 	.string "The quiz:$"
+
+gUnknown_085EC391:: @ 85EC391
 	.string "Apprentice’s phrase:$"
 
 gText_QuitEditing:: @ 85EC3A6
@@ -1806,7 +3020,10 @@ gText_QuitEditing:: @ 85EC3A6
 gText_StopGivingPkmnMail:: @ 85EC3B4
 	.string "Stop giving the POKéMON MAIL?$"
 
+gUnknown_085EC3D2:: @ 85EC3D2
 	.string "and fill out the questionnaire.$"
+
+gUnknown_085EC3F2:: @ 85EC3F2
 	.string "Let’s reply to the interview!$"
 
 gText_AllTextBeingEditedWill:: @ 85EC410
@@ -1815,10 +3032,19 @@ gText_AllTextBeingEditedWill:: @ 85EC410
 gText_BeDeletedThatOkay:: @ 85EC42F
 	.string "be deleted. Is that okay?$"
 
+gUnknown_085EC449:: @ 85EC449
 	.string "Quit editing?$"
+
+gUnknown_085EC457:: @ 85EC457
 	.string "The edited text will not be saved.$"
+
+gUnknown_085EC47A:: @ 85EC47A
 	.string "Is that okay?$"
+
+gUnknown_085EC488:: @ 85EC488
 	.string "Please enter a phrase or word.$"
+
+gUnknown_085EC4A7:: @ 85EC4A7
 	.string "The entire text can’t be deleted.$"
 
 gText_OnlyOnePhrase:: @ 85EC4C9
@@ -1827,27 +3053,61 @@ gText_OnlyOnePhrase:: @ 85EC4C9
 gText_OriginalSongWillBeUsed:: @ 85EC4E9
 	.string "The original song will be used.$"
 
+gUnknown_085EC509:: @ 85EC509
 	.string "That’s trendy already!$"
 
 gText_CombineTwoWordsOrPhrases:: @ 85EC520
 	.string "Combine two words or phrases.$"
 
+gUnknown_085EC53E:: @ 85EC53E
 	.string "Quit giving information?$"
+
+gUnknown_085EC557:: @ 85EC557
 	.string "Stop giving the POKéMON MAIL?$"
+
+gUnknown_085EC575:: @ 85EC575
 	.string "Create a quiz!$"
+
+gUnknown_085EC584:: @ 85EC584
 	.string "Set the answer!$"
+
+gUnknown_085EC594:: @ 85EC594
 	.string "Cancel the selection?$"
+
+gUnknown_085EC5AA:: @ 85EC5AA
 	.string "PROFILE$"
+
+gUnknown_085EC5B2:: @ 85EC5B2
 	.string "At the battle’s start:$"
+
+gUnknown_085EC5C9:: @ 85EC5C9
 	.string "Upon winning a battle:$"
+
+gUnknown_085EC5E0:: @ 85EC5E0
 	.string "Upon losing a battle:$"
+
+gUnknown_085EC5F6:: @ 85EC5F6
 	.string "The BARD’s Song$"
+
+gUnknown_085EC606:: @ 85EC606
 	.string "What’s hip and happening?$"
+
+gUnknown_085EC620:: @ 85EC620
 	.string "Interview$"
+
+gUnknown_085EC62A:: @ 85EC62A
 	.string "Good saying$"
+
+gUnknown_085EC636:: @ 85EC636
 	.string "Fan’s question$"
+
+gUnknown_085EC645:: @ 85EC645
 	.string "クイズの こたえは？$" @ "kuizuno kotaeha?" ("The quiz's answer is?" in Japanese)
+
+gUnknown_085EC650:: @ 85EC650
 	.string "Apprentice’s phrase$"
+
+gUnknown_085EC664:: @ 85EC664
 	.string "QUESTIONNAIRE$"
 
 gText_YouCannotQuitHere:: @ 85EC672
@@ -1862,8 +3122,13 @@ gText_F700sQuiz:: @ 85EC6A8
 gText_Lady:: @ 85EC6B2
 	.string "Lady$"
 
+gUnknown_085EC6B7:: @ 85EC6B7
 	.string "After you have read the quiz$"
+
+gUnknown_085EC6D4:: @ 85EC6D4
 	.string "question, press the A Button.$"
+
+gUnknown_085EC6F2:: @ 85EC6F2
 	.string "The quiz answer is?$"
 
 gText_LikeToQuitQuiz:: @ 85EC706
@@ -1872,6 +3137,7 @@ gText_LikeToQuitQuiz:: @ 85EC706
 gText_ChallengeQuestionMark:: @ 85EC727
 	.string "challenge?$"
 
+gUnknown_085EC732:: @ 85EC732
 	.string "Is this quiz OK?$"
 
 gText_CreateAQuiz:: @ 85EC743
@@ -1883,16 +3149,28 @@ gText_SelectTheAnswer:: @ 85EC752
 gText_LyricsCantBeDeleted:: @ 85EC765
 	.string "The lyrics can’t be deleted.$"
 
+gUnknown_085EC782:: @ 85EC782
 	.string "POKéMON LEAGUE$"
+
+gUnknown_085EC791:: @ 85EC791
 	.string "POKéMON CENTER$"
 
 gText_GetsAPokeBlockQuestion:: @ 85EC7A0
 	.string " gets a {POKEBLOCK}?$"
 
+gUnknown_085EC7AF:: @ 85EC7AF
 	.string "Coolness $"
+
+gUnknown_085EC7B9:: @ 85EC7B9
 	.string "Beauty $"
+
+gUnknown_085EC7C1:: @ 85EC7C1
 	.string "Cuteness $"
+
+gUnknown_085EC7CB:: @ 85EC7CB
 	.string "Smartness $"
+
+gUnknown_085EC7D6:: @ 85EC7D6
 	.string "Toughness $"
 
 gText_WasEnhanced:: @ 85EC7E1
@@ -2015,69 +3293,192 @@ gText_Second:: @ 85ECB80
 gText_Third:: @ 85ECB87
 	.string "third$"
 
+gUnknown_085ECB8D:: @ 85ECB8D
 	.string "0 pts$"
+
+gUnknown_085ECB93:: @ 85ECB93
 	.string "10 pts$"
+
+gUnknown_085ECB9A:: @ 85ECB9A
 	.string "20 pts$"
+
+gUnknown_085ECBA1:: @ 85ECBA1
 	.string "30 pts$"
+
+gUnknown_085ECBA8:: @ 85ECBA8
 	.string "40 pts$"
+
+gUnknown_085ECBAF:: @ 85ECBAF
 	.string "50 pts$"
+
+gUnknown_085ECBB6:: @ 85ECBB6
 	.string "60 pts$"
+
+gUnknown_085ECBBD:: @ 85ECBBD
 	.string "70 pts$"
+
+gUnknown_085ECBC4:: @ 85ECBC4
 	.string "80 pts$"
+
+gUnknown_085ECBCB:: @ 85ECBCB
 	.string "90 pts$"
+
+gUnknown_085ECBD2:: @ 85ECBD2
 	.string "100 pts$"
+
+gUnknown_085ECBDA:: @ 85ECBDA
 	.string "?$"
+
+gUnknown_085ECBDC:: @ 85ECBDC
 	.string "KISS POSTER{CLEAR_TO 0x5E}16BP$"
+
+gUnknown_085ECBEF:: @ 85ECBEF
 	.string "KISS CUSHION{CLEAR_TO 0x5E}32BP$"
+
+gUnknown_085ECC03:: @ 85ECC03
 	.string "SMOOCHUM DOLL{CLEAR_TO 0x5E}32BP$"
+
+gUnknown_085ECC18:: @ 85ECC18
 	.string "TOGEPI DOLL{CLEAR_TO 0x5E}48BP$"
+
+gUnknown_085ECC2B:: @ 85ECC2B
 	.string "MEOWTH DOLL{CLEAR_TO 0x5E}48BP$"
+
+gUnknown_085ECC3E:: @ 85ECC3E
 	.string "CLEFAIRY DOLL{CLEAR_TO 0x5E}48BP$"
+
+gUnknown_085ECC53:: @ 85ECC53
 	.string "DITTO DOLL{CLEAR_TO 0x5E}48BP$"
+
+gUnknown_085ECC65:: @ 85ECC65
 	.string "CYNDAQUIL DOLL{CLEAR_TO 0x5E}80BP$"
+
+gUnknown_085ECC7B:: @ 85ECC7B
 	.string "CHIKORITA DOLL{CLEAR_TO 0x5E}80BP$"
+
+gUnknown_085ECC91:: @ 85ECC91
 	.string "TOTODILE DOLL{CLEAR_TO 0x5E}80BP$"
+
+gUnknown_085ECCA6:: @ 85ECCA6
 	.string "LAPRAS DOLL{CLEAR_TO 0x58}128BP$"
+
+gUnknown_085ECCBA:: @ 85ECCBA
 	.string "SNORLAX DOLL{CLEAR_TO 0x58}128BP$"
+
+gUnknown_085ECCCF:: @ 85ECCCF
 	.string "VENUSAUR DOLL{CLEAR_TO 0x58}256BP$"
+
+gUnknown_085ECCE5:: @ 85ECCE5
 	.string "CHARIZARD DOLL{CLEAR_TO 0x58}256BP$"
+
+gUnknown_085ECCFC:: @ 85ECCFC
 	.string "BLASTOISE DOLL{CLEAR_TO 0x58}256BP$"
+
+gUnknown_085ECD13:: @ 85ECD13
 	.string "PROTEIN{CLEAR_TO 0x64}1BP$"
+
+gUnknown_085ECD21:: @ 85ECD21
 	.string "CALCIUM{CLEAR_TO 0x64}1BP$"
+
+gUnknown_085ECD2F:: @ 85ECD2F
 	.string "IRON{CLEAR_TO 0x64}1BP$"
+
+gUnknown_085ECD3A:: @ 85ECD3A
 	.string "ZINC{CLEAR_TO 0x64}1BP$"
+
+gUnknown_085ECD45:: @ 85ECD45
 	.string "CARBOS{CLEAR_TO 0x64}1BP$"
+
+gUnknown_085ECD52:: @ 85ECD52
 	.string "HP UP{CLEAR_TO 0x64}1BP$"
+
+gUnknown_085ECD5E:: @ 85ECD5E
 	.string "LEFTOVERS{CLEAR_TO 0x5E}48BP$"
+
+gUnknown_085ECD6F:: @ 85ECD6F
 	.string "WHITE HERB{CLEAR_TO 0x5E}48BP$"
+
+gUnknown_085ECD81:: @ 85ECD81
 	.string "QUICK CLAW{CLEAR_TO 0x5E}48BP$"
+
+gUnknown_085ECD93:: @ 85ECD93
 	.string "MENTAL HERB{CLEAR_TO 0x5E}48BP$"
+
+gUnknown_085ECDA6:: @ 85ECDA6
 	.string "BRIGHTPOWDER{CLEAR_TO 0x5E}64BP$"
+
+gUnknown_085ECDBA:: @ 85ECDBA
 	.string "CHOICE BAND{CLEAR_TO 0x5E}64BP$"
+
+gUnknown_085ECDCD:: @ 85ECDCD
 	.string "KING’S ROCK{CLEAR_TO 0x5E}64BP$"
+
+gUnknown_085ECDE0:: @ 85ECDE0
 	.string "FOCUS BAND{CLEAR_TO 0x5E}64BP$"
+
+gUnknown_085ECDF2:: @ 85ECDF2
 	.string "SCOPE LENS{CLEAR_TO 0x5E}64BP$"
+
+gUnknown_085ECE04:: @ 85ECE04
 	.string "SOFTBOILED{CLEAR_TO 0x4E}16BP$"
+
+gUnknown_085ECE16:: @ 85ECE16
 	.string "SEISMIC TOSS{CLEAR_TO 0x4E}24BP$"
+
+gUnknown_085ECE2A:: @ 85ECE2A
 	.string "DREAM EATER{CLEAR_TO 0x4E}24BP$"
+
+gUnknown_085ECE3D:: @ 85ECE3D
 	.string "MEGA PUNCH{CLEAR_TO 0x4E}24BP$"
+
+gUnknown_085ECE4F:: @ 85ECE4F
 	.string "MEGA KICK{CLEAR_TO 0x4E}48BP$"
+
+gUnknown_085ECE60:: @ 85ECE60
 	.string "BODY SLAM{CLEAR_TO 0x4E}48BP$"
+
+gUnknown_085ECE71:: @ 85ECE71
 	.string "ROCK SLIDE{CLEAR_TO 0x4E}48BP$"
+
+gUnknown_085ECE83:: @ 85ECE83
 	.string "COUNTER{CLEAR_TO 0x4E}48BP$"
+
+gUnknown_085ECE92:: @ 85ECE92
 	.string "THUNDER WAVE{CLEAR_TO 0x4E}48BP$"
+
+gUnknown_085ECEA6:: @ 85ECEA6
 	.string "SWORDS DANCE{CLEAR_TO 0x4E}48BP$"
+
+gUnknown_085ECEBA:: @ 85ECEBA
 	.string "DEFENSE CURL{CLEAR_TO 0x4E}16BP$"
+
+gUnknown_085ECECE:: @ 85ECECE
 	.string "SNORE{CLEAR_TO 0x4E}24BP$"
+
+gUnknown_085ECEDB:: @ 85ECEDB
 	.string "MUD-SLAP{CLEAR_TO 0x4E}24BP$"
+
+gUnknown_085ECEEB:: @ 85ECEEB
 	.string "SWIFT{CLEAR_TO 0x4E}24BP$"
+
+gUnknown_085ECEF8:: @ 85ECEF8
 	.string "ICY WIND{CLEAR_TO 0x4E}24BP$"
+
+gUnknown_085ECF08:: @ 85ECF08
 	.string "ENDURE{CLEAR_TO 0x4E}48BP$"
+
+gUnknown_085ECF16:: @ 85ECF16
 	.string "PSYCH UP{CLEAR_TO 0x4E}48BP$"
+
+gUnknown_085ECF26:: @ 85ECF26
 	.string "ICE PUNCH{CLEAR_TO 0x4E}48BP$"
+
+gUnknown_085ECF37:: @ 85ECF37
 	.string "THUNDERPUNCH{CLEAR_TO 0x4E}48BP$"
+
+gUnknown_085ECF4B:: @ 85ECF4B
 	.string "FIRE PUNCH{CLEAR_TO 0x4E}48BP$"
-    
+
 gText_PkmnFainted3:: @ 85ECF5D
 	.string "{STR_VAR_1} fainted…\p\n$"
 
@@ -2093,6 +3494,7 @@ gText_TrainerCardIDNo:: @ 85ECF78
 gText_TrainerCardMoney:: @ 85ECF7E
 	.string "MONEY$"
 
+gUnknown_085ECF84:: @ 85ECF84
 	.string "¥$"
 
 gText_TrainerCardPokedex:: @ 85ECF86
@@ -2104,11 +3506,13 @@ gText_EmptyString6:: @ 85ECF8E
 gText_Colon2:: @ 85ECF8F
 	.string ":$"
 
+gUnknown_085ECF91:: @ 85ECF91
 	.string " points$"
 
 gText_TrainerCardTime:: @ 85ECF99
 	.string "TIME$"
 
+gUnknown_085ECF9E:: @ 85ECF9E
 	.string "ゲ-ムポイント$" @ "geemupointo" ("game point" in Japanese)
 
 gText_Var1sTrainerCard:: @ 85ECFA6
@@ -2117,7 +3521,10 @@ gText_Var1sTrainerCard:: @ 85ECFA6
 gText_HallOfFameDebut:: @ 85ECFB8
 	.string "HALL OF FAME DEBUT  $"
 
+gUnknown_085ECFCD:: @ 85ECFCD
 	.string "LINK BATTLES$"
+
+gUnknown_085ECFDA:: @ 85ECFDA
 	.string "LINK CABLE BATTLES$"
 
 gText_WinsLosses:: @ 85ECFED
@@ -2156,27 +3563,50 @@ gText_BattleTower:: @ 85ED0D3
 gText_WSlashStraightSlash:: @ 85ED0E0
 	.string "W/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GREY}{SHADOW LIGHT_GREY}  STRAIGHT/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}$"
 
+gUnknown_085ED104:: @ 85ED104
 	.string "BATTLE TOWER$"
+
+gUnknown_085ED111:: @ 85ED111
 	.string "BATTLE DOME$"
+
+gUnknown_085ED11D:: @ 85ED11D
 	.string "BATTLE PALACE$"
+
+gUnknown_085ED12B:: @ 85ED12B
 	.string "BATTLE FACTORY$"
+
+gUnknown_085ED13A:: @ 85ED13A
 	.string "BATTLE ARENA$"
+
+gUnknown_085ED147:: @ 85ED147
 	.string "BATTLE PIKE$"
+
+gUnknown_085ED153:: @ 85ED153
 	.string "BATTLE PYRAMID$"
 
 	.align 2
+
+gUnknown_085ED164:: @ 85ED164
 	.string "{STR_VAR_1} SINGLE$"
 
 	.align 2
+
+gUnknown_085ED170:: @ 85ED170
 	.string "{STR_VAR_1} DOUBLE$"
 
 	.align 2
+
+gUnknown_085ED17C:: @ 85ED17C
 	.string "{STR_VAR_1} MULTI$"
 
 	.align 2
+
+gUnknown_085ED188:: @ 85ED188
 	.string "{STR_VAR_1} LINK$"
 
 	.align 2
+
+gUnknown_085ED190:: @ 85ED190
 	.string "{STR_VAR_1}$"
 
 gText_Give:: @ 85ED193
@@ -2218,11 +3648,13 @@ gText_CommunicationStandby:: @ 85ED207
 gText_ColorDarkGrey:: @ 85ED21E
 	.string "{COLOR DARK_GREY}$"
 
+gUnknown_085ED222:: @ 85ED222
 	.string "{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR6 WHITE DYNAMIC_COLOR5}$"
 
 gText_HighlightDarkGrey:: @ 85ED228
 	.string "{HIGHLIGHT DARK_GREY}$"
 
+gUnknown_085ED22C:: @ 85ED22C
 	.string " $"
 
 gText_DynColor2Male:: @ 85ED22E
@@ -2233,22 +3665,22 @@ gText_DynColor1Female:: @ 85ED233
 
 gText_DynColor2:: @ 85ED238
 	.string "{COLOR DYNAMIC_COLOR2}$"
-	
+
 gText_Upper:: @ 85ED23C
 	.string "UPPER$"
-	
+
 gText_Lower:: @ 85ED242
 	.string "lower$"
-	
+
 gText_Others:: @ 85ED248
 	.string "OTHERS$"
-	
+
 gText_Symbols:: @ 85ED24F
 	.string "SYMBOLS$"
-	
+
 gText_Register2:: @ 85ED257
 	.string "REGISTER$"
-	
+
 gText_Exit2:: @ 85ED260
 	.string "EXIT$"
 
@@ -2270,7 +3702,10 @@ gText_F700JoinedChat:: @ 85ED2A9
 gText_F700LeftChat:: @ 85ED2BD
 	.string "{SPECIAL_F7 0x00} left the chat.$"
 
+gUnknown_085ED2CF:: @ 85ED2CF
 	.string "{SPECIAL_F7 0x00}の{SPECIAL_F7 0x01}ひきめ:$" @ "{SPECIAL_F7 0x00}'s {SPECIAL_F7 0x01}hikime"
+
+gUnknown_085ED2D9:: @ 85ED2D9
 	.string "{SPECIAL_F7 0x00}の{SPECIAL_F7 0x01}ひきめは いません$" @ "{SPECIAL_F7 0x00}'s {SPECIAL_F7 0x01}hikimeha imasen"
 
 gText_ExitingChat:: @ 85ED2E8
@@ -2324,25 +3759,52 @@ gText_ThankYou:: @ 85ED440
 gText_ByeBye:: @ 85ED44A
 	.string "BYE-BYE!$"
 
+gUnknown_085ED453:: @ 85ED453
 	.string "Attack the weak points!$"
+
+gUnknown_085ED46B:: @ 85ED46B
 	.string "Ultimate STEEL POKéMON.$"
+
+gUnknown_085ED483:: @ 85ED483
 	.string "I’d climb even waterfalls$"
+
+gUnknown_085ED49D:: @ 85ED49D
 	.string "to find a rare stone!$"
+
+gUnknown_085ED4B3:: @ 85ED4B3
 	.string "I’m the strongest and most$"
+
+gUnknown_085ED4CE:: @ 85ED4CE
 	.string "energetic after all!$"
+
+gUnknown_085ED4E3:: @ 85ED4E3
 	.string "Battle with knowledge!$"
+
+gUnknown_085ED4FA:: @ 85ED4FA
 	.string "I will use various POKéMON.$"
+
+gUnknown_085ED516:: @ 85ED516
 	.string "I’ll be a better POKéMON$"
+
+gUnknown_085ED52F:: @ 85ED52F
 	.string "prof than my father is!$"
+
+gUnknown_085ED547:: @ 85ED547
 	.string "I’m not so good at battles.$"
+
+gUnknown_085ED563:: @ 85ED563
 	.string "I’ll use any POKéMON!$"
+
+gUnknown_085ED579:: @ 85ED579
 	.string "My POKéMON and I help$"
+
+gUnknown_085ED58F:: @ 85ED58F
 	.string "my father’s research.$"
 
-gText_PkmnHatchedFromEgg:: @ 85ED5A5
+gText_HatchedFromEgg:: @ 85ED5A5
 	.string "{STR_VAR_1} hatched from the EGG!$"
 
-gText_NameHatchedPkmn:: @ 85ED5BE
+gText_NickHatchPrompt:: @ 85ED5BE
 	.string "Would you like to nickname the newly\nhatched {STR_VAR_1}?$"
 
 	.align 2
@@ -2404,7 +3866,7 @@ gText_Var1Berry:: @ 85ED7FC
 	.align 2
 gText_TimeColon:: @ 85ED808
 	.string "Time:$"
-	
+
 	.align 2
 gText_PressingSpeed:: @ 85ED810
 	.string "Pressing Speed:$"
@@ -2479,35 +3941,94 @@ gText_BattleRecord:: @ 85ED90E
 gText_BattlePoints:: @ 85ED91C
 	.string "Battle Points$"
 
+gUnknown_085ED92A:: @ 85ED92A
 	.string "CANCEL$"
+
+gUnknown_085ED931:: @ 85ED931
 	.string "$"
+
+gUnknown_085ED932:: @ 85ED932
 	.string "Check BATTLE FRONTIER MAP.$"
+
+gUnknown_085ED94D:: @ 85ED94D
 	.string "Check TRAINER CARD.$"
+
+gUnknown_085ED961:: @ 85ED961
 	.string "View recorded battle.$"
+
+gUnknown_085ED977:: @ 85ED977
 	.string "Put away the FRONTIER PASS.$"
+
+gUnknown_085ED993:: @ 85ED993
 	.string "Your current Battle Points.$"
+
+gUnknown_085ED9AF:: @ 85ED9AF
 	.string "Your collected Symbols.$"
+
+gUnknown_085ED9C7:: @ 85ED9C7
 	.string "Battle Tower - Ability Symbol$"
+
+gUnknown_085ED9E5:: @ 85ED9E5
 	.string "Battle Dome - Tactics Symbol$"
+
+gUnknown_085EDA02:: @ 85EDA02
 	.string "Battle Palace - Spirits Symbol$"
+
+gUnknown_085EDA21:: @ 85EDA21
 	.string "Battle Arena - Guts Symbol$"
+
+gUnknown_085EDA3C:: @ 85EDA3C
 	.string "Battle Factory - Knowledge Symbol$"
+
+gUnknown_085EDA5E:: @ 85EDA5E
 	.string "Battle Pike - Luck Symbol$"
+
+gUnknown_085EDA78:: @ 85EDA78
 	.string "Battle Pyramid - Brave Symbol$"
+
+gUnknown_085EDA96:: @ 85EDA96
 	.string "There is no Battle Record.$"
+
+gUnknown_085EDAB1:: @ 85EDAB1
 	.string "BATTLE TOWER$"
+
+gUnknown_085EDABE:: @ 85EDABE
 	.string "BATTLE DOME$"
+
+gUnknown_085EDACA:: @ 85EDACA
 	.string "BATTLE PALACE$"
+
+gUnknown_085EDAD8:: @ 85EDAD8
 	.string "BATTLE ARENA$"
+
+gUnknown_085EDAE5:: @ 85EDAE5
 	.string "BATTLE FACTORY$"
+
+gUnknown_085EDAF4:: @ 85EDAF4
 	.string "BATTLE PIKE$"
+
+gUnknown_085EDB00:: @ 85EDB00
 	.string "BATTLE PYRAMID$"
+
+gUnknown_085EDB0F:: @ 85EDB0F
 	.string "KO opponents and aim for the top!\nYour ability will be tested.$"
+
+gUnknown_085EDB4E:: @ 85EDB4E
 	.string "Keep winning at the tournament!\nYour tactics will be tested.$"
+
+gUnknown_085EDB8B:: @ 85EDB8B
 	.string "Watch your POKéMON battle!\nYour spirit will be tested.$"
+
+gUnknown_085EDBC2:: @ 85EDBC2
 	.string "Win battles with teamed-up POKéMON!\nYour guts will be tested.$"
+
+gUnknown_085EDC00:: @ 85EDC00
 	.string "Aim for victory using rental POKéMON!\nYour knowledge will be tested.$"
+
+gUnknown_085EDC45:: @ 85EDC45
 	.string "Select one of three paths to battle!\nYour luck will be tested.$"
+
+gUnknown_085EDC84:: @ 85EDC84
 	.string "Aim for the top with exploration!\nYour bravery will be tested.$"
 
 gText_ContinueMenuPlayer:: @ 85EDCC3
@@ -2542,7 +4063,7 @@ gText_BerryPickingResults:: @ 85EDD49
 
 gText_10P30P50P50P:: @ 85EDD6B
 	.string "{CLEAR_TO 0x03}10P{CLEAR_TO 0x2B}30P{CLEAR_TO 0x53}50P{CLEAR_TO 0x77}{UNK_CTRL_F9DD}50P$"
-    
+
 gText_AnnouncingRankings:: @ 85EDD86
 	.string "Announcing rankings!$"
 
@@ -2639,6 +4160,7 @@ gText_4th:: @ 85EDFAC
 gText_Friend:: @ 85EDFB0
 	.string "Friend$"
 
+gUnknown_085EDFB7:: @ 85EDFB7
 	.string "POKeMON$"
 
 gJPText_MysteryGift:: @ 85EDFBF
@@ -2690,8 +4212,13 @@ gUnknown_085EE120:: @ 85EE120
 gUnknown_085EE12D:: @ 85EE12D
 	.byte 0x06, 0x07, 0x0a, 0x20, 0x00, 0x54, 0x77, 0xae, 0x00, 0x44, 0x0d, 0xfe, 0x94, 0xae, 0x60, 0x37, 0x00, 0x1e, 0x40, 0x2e, 0x00, 0x44, 0x07, 0x1f, 0x0e, 0x2e, 0x44, 0x0c, 0x10, 0xff
 
+gUnknown_085EE14B:: @ 85EE14B
 	.string "RED$"
+
+gUnknown_085EE14F:: @ 85EE14F
 	.string "BLUE$"
+
+gUnknown_085EE154:: @ 85EE154
 	.string "---$"
 
 gText_SingleBattleRoomResults:: @ 85EE158
@@ -2779,31 +4306,48 @@ gText_FloorsCleared:: @ 85EE39C
 	.string "Floors cleared: {STR_VAR_1}$"
 
 	.align 2
+
+gUnknown_085EE3B0:: @ 85EE3B0
 	.string "LV. 50$"
 
 	.align 2
+
+gUnknown_085EE3B8:: @ 85EE3B8
 	.string "OPEN LEVEL$"
 
 	.align 2
+
+gUnknown_085EE3C4:: @ 85EE3C4
 	.string "Win streak: {STR_VAR_2}$"
 
 	.align 2
+
+gUnknown_085EE3D4:: @ 85EE3D4
 	.string "Clear streak: {STR_VAR_2}$"
 
 	.align 2
+
+gUnknown_085EE3E8:: @ 85EE3E8
 	.string "Rooms cleared: {STR_VAR_2}$"
 
 	.align 2
+
+gUnknown_085EE3FC:: @ 85EE3FC
 	.string "KOs in a row: {STR_VAR_2}$"
 
 	.align 2
+
+gUnknown_085EE410:: @ 85EE410
 	.string "Floors cleared: {STR_VAR_2}$"
 
 	.align 2
 gText_1Dot:: @ 85EE424
 	.string "1.$"
 
+gUnknown_085EE427:: @ 85EE427
 	.string "2.$"
+
+gUnknown_085EE42A:: @ 85EE42A
 	.string "3.$"
 
 gText_SavingDontTurnOff2:: @ 85EE42D
@@ -2842,12 +4386,25 @@ gText_ABtnTitleScreen:: @ 85EE572
 gText_Option:: @ 85EE589
 	.string "OPTION$"
 
+gUnknown_085EE590:: @ 85EE590
 	.string "TEXT SPEED$"
+
+gUnknown_085EE59B:: @ 85EE59B
 	.string "BATTLE SCENE$"
+
+gUnknown_085EE5A8:: @ 85EE5A8
 	.string "BATTLE STYLE$"
+
+gUnknown_085EE5B5:: @ 85EE5B5
 	.string "SOUND$"
+
+gUnknown_085EE5BB:: @ 85EE5BB
 	.string "FRAME$"
+
+gUnknown_085EE5C1:: @ 85EE5C1
 	.string "CANCEL$"
+
+gUnknown_085EE5C8:: @ 85EE5C8
 	.string "BUTTON MODE$"
 
 gText_TextSpeedSlow:: @ 85EE5D4
@@ -2895,9 +4452,16 @@ gText_ButtonTypeLEqualsA:: @ 85EE65D
 gText_XPLink:: @ 85EE667
 	.string "{STR_VAR_1}P LINK$"
 
+gUnknown_085EE670:: @ 85EE670
 	.string "BRONZE$"
+
+gUnknown_085EE677:: @ 85EE677
 	.string "COPPER$"
+
+gUnknown_085EE67E:: @ 85EE67E
 	.string "SILVER$"
+
+gUnknown_085EE685:: @ 85EE685
 	.string "GOLD$"
 
 gText_Day:: @ 85EE68A
@@ -2909,20 +4473,49 @@ gText_Colon3:: @ 85EE68E
 gText_Confirm2:: @ 85EE690
 	.string "CONFIRM$"
 
+gUnknown_085EE698:: @ 85EE698
 	.string "Days$"
+
+gUnknown_085EE69D:: @ 85EE69D
 	.string "Time:$"
+
+gUnknown_085EE6A3:: @ 85EE6A3
 	.string "Game time$"
+
+gUnknown_085EE6AD:: @ 85EE6AD
 	.string "RTC time$"
+
+gUnknown_085EE6B6:: @ 85EE6B6
 	.string "Updated time$"
+
+gUnknown_085EE6C3:: @ 85EE6C3
 	.string "POKéDEX$"
+
+gUnknown_085EE6CB:: @ 85EE6CB
 	.string "POKéMON$"
+
+gUnknown_085EE6D3:: @ 85EE6D3
 	.string "BAG$"
+
+gUnknown_085EE6D7:: @ 85EE6D7
 	.string "POKéNAV$"
+
+gUnknown_085EE6DF:: @ 85EE6DF
 	.string "{PLAYER}$"
+
+gUnknown_085EE6E2:: @ 85EE6E2
 	.string "SAVE$"
+
+gUnknown_085EE6E7:: @ 85EE6E7
 	.string "OPTION$"
+
+gUnknown_085EE6EE:: @ 85EE6EE
 	.string "EXIT$"
+
+gUnknown_085EE6F3:: @ 85EE6F3
 	.string "RETIRE$"
+
+gUnknown_085EE6FA:: @ 85EE6FA
 	.string "REST$"
 
 gText_SafariBallStock:: @ 85EE6FF
@@ -2931,13 +4524,28 @@ gText_SafariBallStock:: @ 85EE6FF
 gText_BattlePyramidFloor:: @ 85EE716
 	.string "Battle Pyramid\n{STR_VAR_1}$"
 
+gUnknown_085EE728:: @ 85EE728
 	.string "Floor 1$"
+
+gUnknown_085EE730:: @ 85EE730
 	.string "Floor 2$"
+
+gUnknown_085EE738:: @ 85EE738
 	.string "Floor 3$"
+
+gUnknown_085EE740:: @ 85EE740
 	.string "Floor 4$"
+
+gUnknown_085EE748:: @ 85EE748
 	.string "Floor 5$"
+
+gUnknown_085EE750:: @ 85EE750
 	.string "Floor 6$"
+
+gUnknown_085EE758:: @ 85EE758
 	.string "Floor 7$"
+
+gUnknown_085EE760:: @ 85EE760
 	.string "Peak$"
 
 gText_LinkStandby2:: @ 85EE765
@@ -2958,7 +4566,10 @@ gText_EventSafelyLoaded:: @ 85EE80A
 gText_LoadErrorEndingSession:: @ 85EE827
 	.string "Loading error.\nEnding session.$"
 
+gUnknown_085EE846:: @ 85EE846
 	.string "プレイヤー$" @ "pureiyaa" ("player" in Japanese)
+
+gUnknown_085EE84C:: @ 85EE84C
 	.string "さま$" @ "sama" (a very high honorific)
 
 gText_DexHoenn:: @ 85EE84F
@@ -2969,8 +4580,11 @@ gText_DexNational:: @ 85EE855
 
 gText_PokedexDiploma:: @ 85EE85E
 	.string "PLAYER: {CLEAR 0x10}{COLOR RED}{SHADOW LIGHT_RED}{PLAYER}{COLOR DARK_GREY}{SHADOW LIGHT_GREY}\n\nThis document certifies\nthat you have successfully\ncompleted your\n{STR_VAR_1} POKéDEX.\n\n{CLEAR_TO 0x42}{COLOR RED}{SHADOW LIGHT_RED}GAME FREAK$"
-	
+
+gUnknown_085EE8DC:: @ 85EE8DC
 	.string "{COLOR RED}{SHADOW LIGHT_RED}ゲ-ムフリ-ク$" @ geemufuriku ("Game Freak" in Japanese)
+
+gUnknown_085EE8EA:: @ 85EE8EA
 	.string "{COLOR RED}{SHADOW LIGHT_RED}$"
 
 gText_Hoenn:: @ 85EE8F1
@@ -3000,17 +4614,27 @@ gText_XSentOverY:: @ 85EE966
 gText_TakeGoodCareOfX:: @ 85EE977
 	.string "Take good care of {STR_VAR_3}!$"
 
-
 	.include "data/text/easy_chat/easy_chat_group_names.inc"
 
 gText_ThreeQuestionMarks:: @ 85EEA42
 	.string "???$"
 
+gUnknown_085EEA46:: @ 85EEA46
 	.string "MAX. HP$"
+
+gUnknown_085EEA4E:: @ 85EEA4E
 	.string "ATTACK$"
+
+gUnknown_085EEA55:: @ 85EEA55
 	.string "DEFENSE$"
+
+gUnknown_085EEA5D:: @ 85EEA5D
 	.string "SPEED$"
+
+gUnknown_085EEA63:: @ 85EEA63
 	.string "SP. ATK$"
+
+gUnknown_085EEA6B:: @ 85EEA6B
 	.string "SP. DEF$"
 
 gText_UnkCtrlF904:: @ 85EEA73
@@ -3028,9 +4652,16 @@ gText_MixingRecords:: @ 85EEA7E
 gText_RecordMixingComplete:: @ 85EEA8E
 	.string "Record mixing completed.\nThank you for waiting.$"
 
+gUnknown_085EEABE:: @ 85EEABE
 	.string "YOUR NAME?$"
+
+gUnknown_085EEAC9:: @ 85EEAC9
 	.string "BOX NAME?$"
+
+gUnknown_085EEAD3:: @ 85EEAD3
 	.string "{STR_VAR_1}’s nickname?$"
+
+gUnknown_085EEAE2:: @ 85EEAE2
 	.string "Tell him the words.$"
 
 gText_MoveOkBack:: @ 85EEAF6
@@ -3159,12 +4790,16 @@ gText_PkmnForSwap:: @ 85EECD1
 gText_Cancel3:: @ 85EECDD
 	.string "CANCEL$"
 
+gUnknown_085EECE4:: @ 85EECE4
 	.string "SWAP$"
+
+gUnknown_085EECE9:: @ 85EECE9
 	.string "ACCEPT$"
 
 gText_AcceptThisPkmn:: @ 85EECF0
 	.string "Accept this POKéMON?$"
 
+gUnknown_085EED05:: @ 85EED05
 	.string "    $"
 
 gText_SamePkmnInPartyAlready:: @ 85EED0A
@@ -3193,7 +4828,7 @@ gText_PeopleTrading:: @ 85EED5F
 
 gText_PeopleBattling:: @ 85EED6F
 	.string "People battling:$"
-	
+
 gText_PeopleInUnionRoom:: @ 85EED80
 	.string "People in the UNION ROOM:$"
 
@@ -3202,13 +4837,13 @@ gText_PeopleCommunicating:: @ 85EED9A
 
 gText_F700Players:: @ 85EEDB0
 	.string "{SPECIAL_F7 0} players$"
-	
+
 gText_F701Players:: @ 85EEDBB
 	.string "{SPECIAL_F7 1} players$"
-	
+
 gText_F702Players:: @ 85EEDC6
 	.string "{SPECIAL_F7 2} players$"
-	
+
 gText_F703Players:: @ 85EEDD1
 	.string "{SPECIAL_F7 3} players$"
 
@@ -3218,53 +4853,53 @@ gText_F703Players:: @ 85EEDD1
 	.4byte gText_F702Players
 	.4byte gText_F703Players
 
-    .align 2
+	.align 2
 gText_WonderCards:: @ 85EEDEC
-    .string "WONDER CARDS$"
+	.string "WONDER CARDS$"
 
-    .align 2
+	.align 2
 gText_WonderNews:: @ 85EEDFC
-    .string "WONDER NEWS$"
+	.string "WONDER NEWS$"
 
-    .align 2
+	.align 2
 gText_WirelessCommunication:: @ 85EEE08
-    .string "WIRELESS COMMUNICATION$"
+	.string "WIRELESS COMMUNICATION$"
 
-    .align 2
+	.align 2
 gText_Friend2:: @ 85EEE20
-    .string "FRIEND$"
+	.string "FRIEND$"
 
-    .align 2
+	.align 2
 gText_Exit3:: @ 85EEE28
-    .string "EXIT$"
+	.string "EXIT$"
 
-    .align 2
+	.align 2
 gText_Receive:: @ 85EEE30
-    .string "RECEIVE$"
+	.string "RECEIVE$"
 
-    .align 2
+	.align 2
 gText_Send:: @ 85EEE38
-    .string "SEND$"
+	.string "SEND$"
 
-    .align 2
+	.align 2
 gText_Toss:: @ 85EEE40
-    .string "TOSS$"
+	.string "TOSS$"
 
-    .align 2
+	.align 2
 gText_VarietyOfEventsImportedWireless:: @ 85EEE48
-    .string "A variety of events will be imported\nover Wireless Communication.$"
+	.string "A variety of events will be imported\nover Wireless Communication.$"
 
-    .align 2
-gText_WonderCardsInPossession:: @ 85EEE40
-    .string "Read the WONDER CARDS in your\npossession.$"
+	.align 2
+gText_WonderCardsInPossession:: @ 85EEE8C
+	.string "Read the WONDER CARDS in your\npossession.$"
 
-    .align 2
+	.align 2
 gText_ReadNewsThatArrived:: @ 85EEEB8
-    .string "Read the NEWS that arrived.$"
+	.string "Read the NEWS that arrived.$"
 
-    .align 2
+	.align 2
 gText_ReturnToTitle:: @ 85EEED4
-    .string "Return to the title screen.$"
+	.string "Return to the title screen.$"
 
 	.align 2
 gText_DontHaveCardNewOneInput:: @ 85EEEF0
@@ -3283,63 +4918,65 @@ gText_WhereShouldNewsBeAccessed:: @ 85EEF94
 	.string "Where should the WONDER NEWS\nbe accessed?$"
 
 	.align 2
+
+gUnknown_085EEFC0:: @ 85EEFC0
 	.string "Communication standby…\nB Button: Cancel$"
 
 	.align 2
 gText_Communicating:: @ 85EEFE8
-    .string "Communicating…$"
+	.string "Communicating…$"
 
 	.align 2
 gText_CommunicationCompleted:: @ 85EEFF8
-    .string "Communication completed.$"
+	.string "Communication completed.$"
 
 	.align 2
 gText_CommunicationError:: @ 85EF014
-    .string "Communication error.$"
+	.string "Communication error.$"
 
 	.align 2
 gText_CommunicationCanceled:: @ 85EF02C
-    .string "Communication has been canceled.$"
+	.string "Communication has been canceled.$"
 
 	.align 2
 gText_ThrowAwayWonderCard:: @ 85EF050
-    .string "Throw away the WONDER CARD\nand input a new CARD?$"
+	.string "Throw away the WONDER CARD\nand input a new CARD?$"
 
 	.align 2
 gText_HaventReceivedCardsGift:: @ 85EF084
-    .string "You haven’t received the CARD’s gift\nyet. Input a new CARD anyway?$"
+	.string "You haven’t received the CARD’s gift\nyet. Input a new CARD anyway?$"
 
 	.align 2
 gText_WonderCardReceivedFrom:: @ 85EF0C8
-    .string "A WONDER CARD has been received\nfrom {STR_VAR_1}.$"
+	.string "A WONDER CARD has been received\nfrom {STR_VAR_1}.$"
 
 	.align 2
 gText_WonderNewsReceivedFrom:: @ 85EF0F4
-    .string "A WONDER NEWS item has been\nreceived from {STR_VAR_1}.$"
+	.string "A WONDER NEWS item has been\nreceived from {STR_VAR_1}.$"
 
 	.align 2
 gText_WonderCardReceived:: @ 85EF124
-    .string "A new WONDER CARD has been\nreceived.$"
+	.string "A new WONDER CARD has been\nreceived.$"
 
 	.align 2
 gText_WonderNewsReceived:: @ 85EF14C
-    .string "A new WONDER NEWS item has been\nreceived.$"
+	.string "A new WONDER NEWS item has been\nreceived.$"
 
 	.align 2
 gText_NewStampReceived:: @ 85EF178
-    .string "A new STAMP has been received.$"
+	.string "A new STAMP has been received.$"
 
 	.align 2
 gText_NewTrainerReceived:: @ 85EF198
-    .string "A new TRAINER has arrived.$"
+	.string "A new TRAINER has arrived.$"
 
 	.align 2
 gText_AlreadyHadCard:: @ 85EF1B4
-    .string "You already had that\nWONDER CARD.$"
+	.string "You already had that\nWONDER CARD.$"
 
 	.align 2
 gText_AlreadyHadNews:: @ 85EF1D8
-    .string "You already had that\nWONDER NEWS item.$"
+	.string "You already had that\nWONDER NEWS item.$"
 
 	.align 2
 gText_AlreadyHadStamp:: @ 85EF200
@@ -3465,7 +5102,7 @@ gText_TotalRecordWLD:: @ 85EF6A1
 
 gText_WinLoseDraw:: @ 85EF6BD
 	.string "{CLEAR_TO 0x53}WIN{CLEAR_TO 0x80}LOSE{CLEAR_TO 0xB0}DRAW$"
-    
+
 gText_CommunicationStandby5:: @ 85EF6D2
 	.string "Communication standby…$"
 
@@ -3484,9 +5121,16 @@ gText_YouDontHaveThreeCoins:: @ 85EF734
 gText_ReelTimeHelp:: @ 85EF750
 	.string "REEL TIME\nHere’s your chance to take\naim and nail marks!\nReel Time continues for the\nawarded number of spins.\nIt all ends on a Big Bonus.$"
 
+gUnknown_085EF7DA:: @ 85EF7DA
 	.string "The two seem to get along\nvery well.$"
+
+gUnknown_085EF7FF:: @ 85EF7FF
 	.string "The two seem to get along.$"
+
+gUnknown_085EF81A:: @ 85EF81A
 	.string "The two don’t seem to like\neach other much.$"
+
+gUnknown_085EF846:: @ 85EF846
 	.string "The two prefer to play with other\nPOKéMON than each other.$"
 
 gText_NewLine2:: @ 85EF881
@@ -3507,9 +5151,16 @@ gText_TimeCleared:: @ 85EF895
 gText_XMinYDotZSec:: @ 85EF8A3
 	.string "{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.$"
 
+gUnknown_085EF8B6:: @ 85EF8B6
 	.string "1F$"
+
+gUnknown_085EF8B9:: @ 85EF8B9
 	.string "2F$"
+
+gUnknown_085EF8BC:: @ 85EF8BC
 	.string "3F$"
+
+gUnknown_085EF8BF:: @ 85EF8BF
 	.string "4F$"
 
 gText_TeachWhichMoveToPkmn:: @ 85EF8C2
@@ -3533,6 +5184,7 @@ gText_12AndPoof:: @ 85EF979
 gText_PkmnForgotMoveAndLearnedNew:: @ 85EF9A6
 	.string "{STR_VAR_1} forgot {STR_VAR_3}.\pAnd…\p{STR_VAR_1} learned {STR_VAR_2}.$"
 
+gUnknown_085EF9C8:: @ 85EF9C8
 	.string "{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.$"
 
 gText_GiveUpTeachingNewMove:: @ 85EF9E6
@@ -3547,6 +5199,7 @@ gText_BattleMoves2:: @ 85EFA31
 gText_ContestMoves2:: @ 85EFA3E
 	.string "CONTEST MOVES$"
 
+gUnknown_085EFA4C:: @ 85EFA4C
 	.string "TYPE/$"
 
 gText_PPSlash:: @ 85EFA52
@@ -3564,11 +5217,22 @@ gText_Appeal2:: @ 85EFA67
 gText_Jam2:: @ 85EFA6E
 	.string "JAM$"
 
+gUnknown_085EFA72:: @ 85EFA72
 	.string "KIRA$"
+
+gUnknown_085EFA77:: @ 85EFA77
 	.string "AMY$"
+
+gUnknown_085EFA7B:: @ 85EFA7B
 	.string "JOHN$"
+
+gUnknown_085EFA80:: @ 85EFA80
 	.string "ROY$"
+
+gUnknown_085EFA84:: @ 85EFA84
 	.string "GABBY$"
+
+gUnknown_085EFA8A:: @ 85EFA8A
 	.string "ANNA$"
 
 gText_ClearAllSaveData:: @ 85EFA8F
@@ -3586,27 +5250,70 @@ gText_Confirm3:: @ 85EFAE0
 gText_Cancel4:: @ 85EFAE8
 	.string "CANCEL$"
 
+gUnknown_085EFAEF:: @ 85EFAEF
 	.string "DEVON PRES$"
+
+gUnknown_085EFAFA:: @ 85EFAFA
 	.string "MR. STONE$"
+
+gUnknown_085EFB04:: @ 85EFB04
 	.string "HARD AS ROCK$"
+
+gUnknown_085EFB11:: @ 85EFB11
 	.string "STEVEN$"
+
+gUnknown_085EFB18:: @ 85EFB18
 	.string "RAD NEIGHBOR$"
+
+gUnknown_085EFB25:: @ 85EFB25
 	.string "RELIABLE ONE$"
+
+gUnknown_085EFB32:: @ 85EFB32
 	.string "CALM & KIND$"
+
+gUnknown_085EFB3E:: @ 85EFB3E
 	.string "{PKMN} LOVER$"
+
+gUnknown_085EFB47:: @ 85EFB47
 	.string "DAD$"
+
+gUnknown_085EFB4B:: @ 85EFB4B
 	.string "MOM$"
+
+gUnknown_085EFB4F:: @ 85EFB4F
 	.string "ELUSIVE EYES$"
+
+gUnknown_085EFB5C:: @ 85EFB5C
 	.string "SCOTT$"
+
+gUnknown_085EFB62:: @ 85EFB62
 	.string "ROCKIN’ WHIZ$"
+
+gUnknown_085EFB6F:: @ 85EFB6F
 	.string "THE BIG HIT$"
+
+gUnknown_085EFB7B:: @ 85EFB7B
 	.string "SWELL SHOCK$"
+
+gUnknown_085EFB87:: @ 85EFB87
 	.string "PASSION BURN$"
+
+gUnknown_085EFB94:: @ 85EFB94
 	.string "SKY TAMER$"
+
+gUnknown_085EFB9E:: @ 85EFB9E
 	.string "MYSTIC DUO$"
+
+gUnknown_085EFBA9:: @ 85EFBA9
 	.string "DANDY CHARM$"
+
+gUnknown_085EFBB5:: @ 85EFBB5
 	.string "ELITE FOUR$"
+
+gUnknown_085EFBC0:: @ 85EFBC0
 	.string "CHAMPION$"
+
+gUnknown_085EFBC9:: @ 85EFBC9
 	.string "{PKMN} PROF.$"
 
 gText_CommStandbyAwaitingOtherPlayer:: @ 85EFBD2
@@ -3618,25 +5325,64 @@ gText_BattleWasRefused:: @ 85EFC0C
 gText_RefusedBattle:: @ 85EFC27
 	.string "Refused the battle.{PAUSE 60}$"
 
+gUnknown_085EFC3E:: @ 85EFC3E
 	.string "NO WEATHER$"
+
+gUnknown_085EFC49:: @ 85EFC49
 	.string "SUNNY$"
+
+gUnknown_085EFC4F:: @ 85EFC4F
 	.string "SUNNY2$"
+
+gUnknown_085EFC56:: @ 85EFC56
 	.string "RAIN$"
+
+gUnknown_085EFC5B:: @ 85EFC5B
 	.string "SNOW$"
+
+gUnknown_085EFC60:: @ 85EFC60
 	.string "LIGHTNING$"
+
+gUnknown_085EFC6A:: @ 85EFC6A
 	.string "FOG$"
+
+gUnknown_085EFC6E:: @ 85EFC6E
 	.string "VOLCANO ASH$"
+
+gUnknown_085EFC7A:: @ 85EFC7A
 	.string "SANDSTORM$"
+
+gUnknown_085EFC84:: @ 85EFC84
 	.string "FOG2$"
+
+gUnknown_085EFC89:: @ 85EFC89
 	.string "SEAFLOOR$"
+
+gUnknown_085EFC92:: @ 85EFC92
 	.string "CLOUDY$"
+
+gUnknown_085EFC99:: @ 85EFC99
 	.string "SUNNY3$"
+
+gUnknown_085EFCA0:: @ 85EFCA0
 	.string "HEAVY RAIN$"
+
+gUnknown_085EFCAB:: @ 85EFCAB
 	.string "SEAFLOOR2$"
+
+gUnknown_085EFCB5:: @ 85EFCB5
 	.string "DEL. ALL$"
+
+gUnknown_085EFCBE:: @ 85EFCBE
 	.string "CANCEL$"
+
+gUnknown_085EFCC5:: @ 85EFCC5
 	.string "OK$"
+
+gUnknown_085EFCC8:: @ 85EFCC8
 	.string "QUIZ$"
+
+gUnknown_085EFCCD:: @ 85EFCCD
 	.string "ANSWER$"
 
 gText_PokeBalls:: @ 85EFCD4

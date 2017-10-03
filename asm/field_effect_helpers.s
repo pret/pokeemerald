@@ -130,13 +130,13 @@ npc_pal_op: @ 8153FAC
 	cmp r0, 0
 	bne _08154008
 	ldrb r0, [r5, 0x1F]
-	bl sub_80894D4
+	bl MetatileBehavior_GetBridgeSth
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
 	bne _08153FEE
 	ldrb r0, [r5, 0x1E]
-	bl sub_80894D4
+	bl MetatileBehavior_GetBridgeSth
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -702,7 +702,7 @@ _08154412:
 	cmp r0, r1
 	bne _08154490
 	ldrb r0, [r4, 0x1E]
-	bl sub_8088E64
+	bl MetatileBehavior_IsPokeGrass
 	lsls r0, 24
 	cmp r0, 0
 	bne _08154490

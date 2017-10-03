@@ -126,6 +126,8 @@
 #define TYPE_DRAGON   0x10
 #define TYPE_DARK     0x11
 
+#define NUMBER_OF_MON_TYPES     0x12
+
 #define PARTY_SIZE 6
 #define MAX_TOTAL_EVS 510
 #define NUM_STATS 6
@@ -333,6 +335,8 @@ struct UnknownPokemonStruct
     u8 friendship;
 };
 
+#define BATTLE_STATS_NO 8
+
 struct BattlePokemon
 {
     /*0x00*/ u16 species;
@@ -350,7 +354,7 @@ struct BattlePokemon
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 isEgg:1;
     /*0x17*/ u32 altAbility:1;
-    /*0x18*/ s8 statStages[8];
+    /*0x18*/ s8 statStages[BATTLE_STATS_NO];
     /*0x20*/ u8 ability;
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;
@@ -443,6 +447,7 @@ struct BattleMove
 #define FLAG_PROTECT_AFFECTED       0x2
 #define FLAG_MAGICCOAT_AFFECTED     0x4
 #define FLAG_SNATCH_AFFECTED        0x8
+#define FLAG_MIRROR_MOVE_AFFECTED   0x10
 #define FLAG_KINGSROCK_AFFECTED     0x20
 
 struct SpindaSpot
@@ -520,6 +525,7 @@ extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
 extern const u16 *const gLevelUpLearnsets[];
 
+u8 CountAliveMonsInBattle(u8 caseId);
 #define BATTLE_ALIVE_EXCEPT_ACTIVE  0
 #define BATTLE_ALIVE_ATK_SIDE       1
 #define BATTLE_ALIVE_DEF_SIDE       2
@@ -619,5 +625,16 @@ bool32 IsHMMove2(u16 move);
 bool8 IsPokeSpriteNotFlipped(u16 species);
 bool8 IsMonShiny(struct Pokemon *mon);
 bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
+
+void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
+bool8 IsTradedMon(struct Pokemon *mon);
+void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
+s32 sub_806D864(u16 a1);
+bool16 sub_806D82C(u8 id);
+u16 MonTryLearningNewMove(struct Pokemon* mon, bool8);
+
+#include "sprite.h"
+
+void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
 
 #endif // GUARD_POKEMON_H

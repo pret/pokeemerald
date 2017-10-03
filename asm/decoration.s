@@ -1264,7 +1264,7 @@ sub_8127454: @ 8127454
 	ldr r1, =gStringVar1
 	bl StringCopy
 	lsls r4, 5
-	ldr r0, =gUnknown_085A5C09
+	ldr r0, =gDecorations + 1
 	adds r4, r0
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -2222,7 +2222,7 @@ _08127C0A:
 	lsls r4, r0, 16
 	lsls r0, r4, 8
 	lsrs r0, 24
-	bl sub_80892D8
+	bl MetatileBehavior_IsMB_B9
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2257,7 +2257,7 @@ _08127C64:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8089328
+	bl MetatileBehavior_IsMB_B7
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0x1
@@ -3189,7 +3189,7 @@ sub_8128484: @ 8128484
 	lsrs r0, 24
 	lsls r1, 16
 	lsrs r4, r1, 16
-	bl sub_80892C4
+	bl MetatileBehavior_IsMB_B3
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3257,7 +3257,7 @@ sub_81284F4: @ 81284F4
 	lsls r0, r6, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80892C4
+	bl MetatileBehavior_IsMB_B3
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3266,7 +3266,7 @@ sub_81284F4: @ 81284F4
 	cmp r0, 0x21
 	bne _08128522
 	adds r0, r4, 0
-	bl sub_8089378
+	bl MetatileBehavior_IsMB_C2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3274,7 +3274,7 @@ sub_81284F4: @ 81284F4
 _08128522:
 	lsls r0, r6, 24
 	lsrs r0, 24
-	bl sub_8089314
+	bl MetatileBehavior_IsNormal
 	lsls r0, 24
 	cmp r0, 0
 	beq _08128534
@@ -3520,7 +3520,7 @@ _081286B8:
 	adds r5, r1, 0
 	ands r5, r0
 	adds r0, r4, 0
-	bl sub_8089314
+	bl MetatileBehavior_IsNormal
 	lsls r0, 24
 	cmp r0, 0
 	bne _08128724
@@ -3625,12 +3625,12 @@ _08128790:
 	adds r5, r1, 0
 	ands r5, r0
 	adds r0, r4, 0
-	bl sub_8089314
+	bl MetatileBehavior_IsNormal
 	lsls r0, 24
 	cmp r0, 0
 	bne _081287F2
 	adds r0, r4, 0
-	bl sub_8089328
+	bl MetatileBehavior_IsMB_B7
 	lsls r0, 24
 	cmp r0, 0
 	bne _081287F2
@@ -3707,7 +3707,7 @@ _08128868:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8089328
+	bl MetatileBehavior_IsMB_B7
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812890C
@@ -3772,7 +3772,7 @@ _081288D8:
 	bne _08128910
 _08128900:
 	adds r0, r4, 0
-	bl sub_8089364
+	bl MetatileBehavior_IsMB_C3
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812891C
@@ -3781,7 +3781,7 @@ _0812890C:
 	b _0812893E
 _08128910:
 	adds r0, r4, 0
-	bl sub_8089350
+	bl MetatileBehavior_IsMB_B5
 	lsls r0, 24
 	cmp r0, 0
 	beq _08128900
@@ -4149,7 +4149,7 @@ _08128C30:
 	bl sub_812A3C8
 	ldr r0, =0x00000be5
 	bl FreeSpritePaletteByTag
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_8128CD4
 	str r0, [r1]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -6182,13 +6182,13 @@ _08129CA8:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8089288
+	bl MetatileBehavior_IsSecretBasePC
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08129CDE
 	adds r0, r4, 0
-	bl sub_8089404
+	bl MetatileBehavior_IsMB_C5
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6907,7 +6907,7 @@ _0812A280:
 	.pool
 _0812A29C:
 	bl sub_812A3C8
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_812A334
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -7083,7 +7083,7 @@ sub_812A3D4: @ 812A3D4
 	adds r1, r2
 	ldrb r1, [r1]
 	lsls r1, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4

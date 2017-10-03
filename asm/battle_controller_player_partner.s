@@ -4966,7 +4966,7 @@ sub_81BDA4C: @ 81BDA4C
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -5045,7 +5045,7 @@ _081BDB02:
 	cmp r0, 0
 	beq _081BDB3C
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r4, =gBankTarget
 	strb r0, [r4]
 	ldr r0, =gAbsentBankFlags
@@ -5059,7 +5059,7 @@ _081BDB02:
 	cmp r1, 0
 	beq _081BDB3C
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	strb r0, [r4]
 _081BDB3C:
 	ldr r0, =gBankTarget
@@ -5093,11 +5093,11 @@ sub_81BDB7C: @ 81BDB7C
 	cmp r4, 0x6
 	bne _081BDBD0
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0x2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0x3
@@ -5661,7 +5661,7 @@ sub_81BE03C: @ 81BE03C
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081BE078
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1

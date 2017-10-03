@@ -5495,7 +5495,7 @@ _081B2F04:
 	asrs r1, 16
 	ldr r2, [r6]
 	ldrb r2, [r2, 0x1A]
-	bl sub_8075034
+	bl GetScaledHPFraction
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrb r0, [r6, 0x8]
@@ -16228,7 +16228,7 @@ _081B8CBE:
 	bne _081B8CFC
 	movs r5, 0x1
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	mov r2, sp
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
@@ -16255,7 +16255,7 @@ _081B8CF0:
 _081B8CFC:
 	movs r5, 0x2
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	mov r1, sp
 	ldr r4, =gBattlePartyID
 	lsls r0, 24
@@ -16264,7 +16264,7 @@ _081B8CFC:
 	ldrh r0, [r0]
 	strb r0, [r1]
 	movs r0, 0x2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	mov r1, sp
 	lsls r0, 24
 	lsrs r0, 23
@@ -16344,19 +16344,19 @@ sub_81B8D88: @ 81B8D88
 	cmp r0, 0
 	bne _081B8DB0
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x2
 	b _081B8DBC
 _081B8DB0:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x3
 _081B8DBC:
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	bl sub_81B1250
@@ -17478,7 +17478,7 @@ sub_81B968C: @ 81B968C
 	str r0, [sp]
 	movs r0, 0x3
 	bl sub_81BF8EC
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 	add sp, 0x4

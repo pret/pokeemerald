@@ -5,9 +5,9 @@
 
 	.text
 
-	thumb_func_start do_choose_name_or_words_screen
-@ int do_choose_name_or_words_screen(u8 type, sav2 *sav2_ptr, s16 player_gender, s16 a4, int a5, void ( *after_finishing_callback)())
-do_choose_name_or_words_screen: @ 80E2D78
+	thumb_func_start DoNamingScreen
+@ int DoNamingScreen(u8 type, sav2 *sav2_ptr, s16 player_gender, s16 a4, int a5, void ( *after_finishing_callback)())
+DoNamingScreen: @ 80E2D78
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -65,7 +65,7 @@ _080E2DE2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end do_choose_name_or_words_screen
+	thumb_func_end DoNamingScreen
 
 	thumb_func_start c2_choose_name_or_words_screen
 c2_choose_name_or_words_screen: @ 80E2E04
@@ -840,7 +840,7 @@ pokemon_transfer_to_pc_with_message: @ 80E34E4
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -859,7 +859,7 @@ _080E3534:
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -874,7 +874,7 @@ _080E3534:
 	bl get_unknown_box_id
 	lsls r0, 24
 	lsrs r0, 24
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -4197,7 +4197,7 @@ sub_80E5074: @ 80E5074
 	str r0, [sp, 0x4]
 	movs r0, 0
 	movs r3, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -4217,7 +4217,7 @@ sub_80E509C: @ 80E509C
 	str r0, [sp, 0x4]
 	movs r0, 0x1
 	movs r3, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -4237,7 +4237,7 @@ sub_80E50C4: @ 80E50C4
 	str r0, [sp, 0x4]
 	movs r0, 0x2
 	movs r3, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -4257,7 +4257,7 @@ sub_80E50EC: @ 80E50EC
 	str r0, [sp, 0x4]
 	movs r0, 0x3
 	movs r3, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r0}
 	bx r0

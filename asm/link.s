@@ -24689,7 +24689,7 @@ _08016502:
 	ldr r1, =gUnknown_02022C40
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF128
 	str r0, [r1]
 	ldr r1, =c2_exit_to_overworld_2_switch
@@ -24987,7 +24987,7 @@ _0801677E:
 	lsls r0, 22
 	lsrs r0, 22
 	strh r0, [r2]
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF128
 	str r0, [r1]
 	ldr r1, =c2_exit_to_overworld_2_switch

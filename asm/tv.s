@@ -7530,7 +7530,7 @@ sub_80EFDDC: @ 80EFDDC
 	mov r1, r10
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3
@@ -7604,7 +7604,7 @@ sub_80EFEC4: @ 80EFEC4
 	mov r1, r8
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -14911,7 +14911,7 @@ _080F4414:
 	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x4]
 	lsls r1, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	ldrb r0, [r5, 0x3]
@@ -14932,7 +14932,7 @@ _080F4448:
 	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x5]
 	lsls r1, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	ldrb r1, [r5, 0x3]
@@ -14970,7 +14970,7 @@ _080F449C:
 	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x6]
 	lsls r1, 5
-	ldr r4, =gUnknown_085A5C09
+	ldr r4, =gDecorations + 1
 	adds r1, r4
 	bl StringCopy
 	ldr r0, =gStringVar3
@@ -14983,7 +14983,7 @@ _080F44C0:
 	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x6]
 	lsls r1, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 _080F44CA:
 	bl StringCopy

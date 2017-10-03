@@ -2134,8 +2134,8 @@ _0803389C:
 	.pool
 	thumb_func_end sub_803375C
 
-	thumb_func_start dp01_build_cmdbuf_x00_a_b_0
-dp01_build_cmdbuf_x00_a_b_0: @ 80338B4
+	thumb_func_start EmitGetMonData
+EmitGetMonData: @ 80338B4
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2152,7 +2152,7 @@ dp01_build_cmdbuf_x00_a_b_0: @ 80338B4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x00_a_b_0
+	thumb_func_end EmitGetMonData
 
 	thumb_func_start dp01_build_cmdbuf_x01_a_b_0
 dp01_build_cmdbuf_x01_a_b_0: @ 80338D8
@@ -2175,8 +2175,8 @@ dp01_build_cmdbuf_x01_a_b_0: @ 80338D8
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x01_a_b_0
 
-	thumb_func_start EmitSetAttributes
-EmitSetAttributes: @ 8033900
+	thumb_func_start EmitSetMonData
+EmitSetMonData: @ 8033900
 	push {r4-r6,lr}
 	ldr r4, [sp, 0x10]
 	lsls r0, 24
@@ -2209,7 +2209,7 @@ _0803392E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end EmitSetAttributes
+	thumb_func_end EmitSetMonData
 
 	thumb_func_start sub_8033940
 sub_8033940: @ 8033940
@@ -2264,8 +2264,8 @@ dp01_build_cmdbuf_x04_4_4_4: @ 8033980
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x04_4_4_4
 
-	thumb_func_start dp01_build_cmdbuf_x05_a_b_c
-dp01_build_cmdbuf_x05_a_b_c: @ 80339A0
+	thumb_func_start EmitSwitchInAnim
+EmitSwitchInAnim: @ 80339A0
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2282,10 +2282,10 @@ dp01_build_cmdbuf_x05_a_b_c: @ 80339A0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x05_a_b_c
+	thumb_func_end EmitSwitchInAnim
 
-	thumb_func_start dp01_build_cmdbuf_x06_a
-dp01_build_cmdbuf_x06_a: @ 80339C4
+	thumb_func_start EmitReturnPokeToBall
+EmitReturnPokeToBall: @ 80339C4
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -2299,7 +2299,7 @@ dp01_build_cmdbuf_x06_a: @ 80339C4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x06_a
+	thumb_func_end EmitReturnPokeToBall
 
 	thumb_func_start dp01_build_cmdbuf_x07_7_7_7
 dp01_build_cmdbuf_x07_7_7_7: @ 80339E4
@@ -2319,8 +2319,8 @@ dp01_build_cmdbuf_x07_7_7_7: @ 80339E4
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x07_7_7_7
 
-	thumb_func_start dp01_build_cmdbuf_x08_8_8_8
-dp01_build_cmdbuf_x08_8_8_8: @ 8033A04
+	thumb_func_start EmitTrainerSlide
+EmitTrainerSlide: @ 8033A04
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2335,10 +2335,10 @@ dp01_build_cmdbuf_x08_8_8_8: @ 8033A04
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x08_8_8_8
+	thumb_func_end EmitTrainerSlide
 
-	thumb_func_start dp01_build_cmdbuf_x09_9_9_9
-dp01_build_cmdbuf_x09_9_9_9: @ 8033A24
+	thumb_func_start EmitTrainerSlideBack
+EmitTrainerSlideBack: @ 8033A24
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2353,10 +2353,10 @@ dp01_build_cmdbuf_x09_9_9_9: @ 8033A24
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x09_9_9_9
+	thumb_func_end EmitTrainerSlideBack
 
-	thumb_func_start dp01_build_cmdbuf_x0A_A_A_A
-dp01_build_cmdbuf_x0A_A_A_A: @ 8033A44
+	thumb_func_start EmitFaintAnimation
+EmitFaintAnimation: @ 8033A44
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2371,7 +2371,7 @@ dp01_build_cmdbuf_x0A_A_A_A: @ 8033A44
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x0A_A_A_A
+	thumb_func_end EmitFaintAnimation
 
 	thumb_func_start dp01_build_cmdbuf_x0B_B_B_B
 dp01_build_cmdbuf_x0B_B_B_B: @ 8033A64
@@ -2409,8 +2409,8 @@ dp01_build_cmdbuf_x0C_C_C_C: @ 8033A84
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x0C_C_C_C
 
-	thumb_func_start dp01_build_cmdbuf_x0D_a
-dp01_build_cmdbuf_x0D_a: @ 8033AA4
+	thumb_func_start EmitBallThrow
+EmitBallThrow: @ 8033AA4
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -2424,7 +2424,7 @@ dp01_build_cmdbuf_x0D_a: @ 8033AA4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x0D_a
+	thumb_func_end EmitBallThrow
 
 	thumb_func_start sub_8033AC4
 sub_8033AC4: @ 8033AC4
@@ -2465,8 +2465,8 @@ _08033AF2:
 	.pool
 	thumb_func_end sub_8033AC4
 
-	thumb_func_start dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes
-dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes: @ 8033B0C
+	thumb_func_start EmitMoveAnimation
+EmitMoveAnimation: @ 8033B0C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2568,7 +2568,7 @@ _08033BB6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes
+	thumb_func_end EmitMoveAnimation
 
 	thumb_func_start dp01_build_cmdbuf_x10_TODO
 dp01_build_cmdbuf_x10_TODO: @ 8033BE4
@@ -2596,7 +2596,7 @@ dp01_build_cmdbuf_x10_TODO: @ 8033BE4
 	ldr r4, =gCurrentMove
 	ldrh r0, [r4]
 	strh r0, [r2, 0x4]
-	ldr r0, =gUnknown_020241EC
+	ldr r0, =gLastUsedMove
 	ldrh r0, [r0]
 	mov r1, r12
 	strh r0, [r1, 0x2]
@@ -2687,8 +2687,8 @@ _08033C88:
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x10_TODO
 
-	thumb_func_start dp01_build_cmdbuf_x11_TODO
-dp01_build_cmdbuf_x11_TODO: @ 8033CFC
+	thumb_func_start EmitPrintStringPlayerOnly
+EmitPrintStringPlayerOnly: @ 8033CFC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2711,7 +2711,7 @@ dp01_build_cmdbuf_x11_TODO: @ 8033CFC
 	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	strh r0, [r2, 0x4]
-	ldr r0, =gUnknown_020241EC
+	ldr r0, =gLastUsedMove
 	ldrh r0, [r0]
 	mov r1, r12
 	strh r0, [r1, 0x2]
@@ -2784,7 +2784,7 @@ _08033D7C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x11_TODO
+	thumb_func_end EmitPrintStringPlayerOnly
 
 	thumb_func_start dp01_build_cmdbuf_x12_a_bb
 dp01_build_cmdbuf_x12_a_bb: @ 8033DE4
@@ -2809,8 +2809,8 @@ dp01_build_cmdbuf_x12_a_bb: @ 8033DE4
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x12_a_bb
 
-	thumb_func_start sub_8033E10
-sub_8033E10: @ 8033E10
+	thumb_func_start EmitCmd13
+EmitCmd13: @ 8033E10
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2825,7 +2825,7 @@ sub_8033E10: @ 8033E10
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8033E10
+	thumb_func_end EmitCmd13
 
 	thumb_func_start sub_8033E30
 sub_8033E30: @ 8033E30
@@ -2888,8 +2888,8 @@ _08033E7E:
 	.pool
 	thumb_func_end sub_8033E6C
 
-	thumb_func_start dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
-dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f: @ 8033EA0
+	thumb_func_start EmitChoosePokemon
+EmitChoosePokemon: @ 8033EA0
 	push {r4-r6,lr}
 	ldr r6, [sp, 0x10]
 	lsls r0, 24
@@ -2918,7 +2918,7 @@ _08033EBA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
+	thumb_func_end EmitChoosePokemon
 
 	thumb_func_start dp01_build_cmdbuf_x17_17_17_17
 dp01_build_cmdbuf_x17_17_17_17: @ 8033EDC
@@ -2938,8 +2938,8 @@ dp01_build_cmdbuf_x17_17_17_17: @ 8033EDC
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x17_17_17_17
 
-	thumb_func_start dp01_build_cmdbuf_x18_0_aa_health_bar_update
-dp01_build_cmdbuf_x18_0_aa_health_bar_update: @ 8033EFC
+	thumb_func_start EmitHealthBarUpdate
+EmitHealthBarUpdate: @ 8033EFC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2965,10 +2965,10 @@ dp01_build_cmdbuf_x18_0_aa_health_bar_update: @ 8033EFC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x18_0_aa_health_bar_update
+	thumb_func_end EmitHealthBarUpdate
 
-	thumb_func_start dp01_build_cmdbuf_x19_a_bb
-dp01_build_cmdbuf_x19_a_bb: @ 8033F34
+	thumb_func_start EmitExpUpdate
+EmitExpUpdate: @ 8033F34
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2993,10 +2993,10 @@ dp01_build_cmdbuf_x19_a_bb: @ 8033F34
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x19_a_bb
+	thumb_func_end EmitExpUpdate
 
-	thumb_func_start dp01_build_cmdbuf_x1A_aaaa_bbbb
-dp01_build_cmdbuf_x1A_aaaa_bbbb: @ 8033F68
+	thumb_func_start EmitStatusIconUpdate
+EmitStatusIconUpdate: @ 8033F68
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3036,10 +3036,10 @@ dp01_build_cmdbuf_x1A_aaaa_bbbb: @ 8033F68
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x1A_aaaa_bbbb
+	thumb_func_end EmitStatusIconUpdate
 
-	thumb_func_start dp01_build_cmdbuf_x1B_aaaa_b
-dp01_build_cmdbuf_x1B_aaaa_b: @ 8033FBC
+	thumb_func_start EmitStatusAnimation
+EmitStatusAnimation: @ 8033FBC
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3067,7 +3067,7 @@ dp01_build_cmdbuf_x1B_aaaa_b: @ 8033FBC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x1B_aaaa_b
+	thumb_func_end EmitStatusAnimation
 
 	thumb_func_start dp01_build_cmdbuf_x1C_a
 dp01_build_cmdbuf_x1C_a: @ 8033FF8
@@ -3431,8 +3431,8 @@ dp01_build_cmdbuf_x28_28_28_28: @ 8034274
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x28_28_28_28
 
-	thumb_func_start dp01_build_cmdbuf_x29_29_29_29
-dp01_build_cmdbuf_x29_29_29_29: @ 8034294
+	thumb_func_start EmitHitAnimation
+EmitHitAnimation: @ 8034294
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3447,10 +3447,10 @@ dp01_build_cmdbuf_x29_29_29_29: @ 8034294
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x29_29_29_29
+	thumb_func_end EmitHitAnimation
 
-	thumb_func_start dp01_build_cmdbuf_x2A_2A_2A_2A
-dp01_build_cmdbuf_x2A_2A_2A_2A: @ 80342B4
+	thumb_func_start Emit_x2A
+Emit_x2A: @ 80342B4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3465,10 +3465,10 @@ dp01_build_cmdbuf_x2A_2A_2A_2A: @ 80342B4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x2A_2A_2A_2A
+	thumb_func_end Emit_x2A
 
-	thumb_func_start dp01_build_cmdbuf_x2B_aa_0
-dp01_build_cmdbuf_x2B_aa_0: @ 80342D4
+	thumb_func_start EmitEffectivenessSound
+EmitEffectivenessSound: @ 80342D4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3489,10 +3489,10 @@ dp01_build_cmdbuf_x2B_aa_0: @ 80342D4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x2B_aa_0
+	thumb_func_end EmitEffectivenessSound
 
-	thumb_func_start sub_8034300
-sub_8034300: @ 8034300
+	thumb_func_start EmitPlaySound
+EmitPlaySound: @ 8034300
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3512,10 +3512,10 @@ sub_8034300: @ 8034300
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8034300
+	thumb_func_end EmitPlaySound
 
-	thumb_func_start dp01_build_cmdbuf_x2D_2D_2D_2D
-dp01_build_cmdbuf_x2D_2D_2D_2D: @ 803432C
+	thumb_func_start EmitFaintingCry
+EmitFaintingCry: @ 803432C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3530,7 +3530,7 @@ dp01_build_cmdbuf_x2D_2D_2D_2D: @ 803432C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x2D_2D_2D_2D
+	thumb_func_end EmitFaintingCry
 
 	thumb_func_start dp01_build_cmdbuf_x2E_a
 dp01_build_cmdbuf_x2E_a: @ 803434C
@@ -3567,8 +3567,8 @@ dp01_build_cmdbuf_x2F_2F_2F_2F: @ 803436C
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x2F_2F_2F_2F
 
-	thumb_func_start dp01_build_cmdbuf_x30_TODO
-dp01_build_cmdbuf_x30_TODO: @ 803438C
+	thumb_func_start EmitCmd48
+EmitCmd48: @ 803438C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3604,10 +3604,10 @@ _080343B4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x30_TODO
+	thumb_func_end EmitCmd48
 
-	thumb_func_start dp01_build_cmdbuf_x31_31_31_31
-dp01_build_cmdbuf_x31_31_31_31: @ 80343D4
+	thumb_func_start EmitCmd49
+EmitCmd49: @ 80343D4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3622,7 +3622,7 @@ dp01_build_cmdbuf_x31_31_31_31: @ 80343D4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x31_31_31_31
+	thumb_func_end EmitCmd49
 
 	thumb_func_start dp01_build_cmdbuf_x32_32_32_32
 dp01_build_cmdbuf_x32_32_32_32: @ 80343F4
@@ -3642,8 +3642,8 @@ dp01_build_cmdbuf_x32_32_32_32: @ 80343F4
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x32_32_32_32
 
-	thumb_func_start dp01_build_cmdbuf_x33_a_33_33
-dp01_build_cmdbuf_x33_a_33_33: @ 8034414
+	thumb_func_start EmitSpriteInvisibility
+EmitSpriteInvisibility: @ 8034414
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3659,10 +3659,10 @@ dp01_build_cmdbuf_x33_a_33_33: @ 8034414
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x33_a_33_33
+	thumb_func_end EmitSpriteInvisibility
 
-	thumb_func_start dp01_build_cmdbuf_x34_a_bb_aka_battle_anim
-dp01_build_cmdbuf_x34_a_bb_aka_battle_anim: @ 8034438
+	thumb_func_start EmitBattleAnimation
+EmitBattleAnimation: @ 8034438
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3682,10 +3682,10 @@ dp01_build_cmdbuf_x34_a_bb_aka_battle_anim: @ 8034438
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x34_a_bb_aka_battle_anim
+	thumb_func_end EmitBattleAnimation
 
-	thumb_func_start sub_8034464
-sub_8034464: @ 8034464
+	thumb_func_start EmitLinkStandbyMsg
+EmitLinkStandbyMsg: @ 8034464
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3716,10 +3716,10 @@ _08034490:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8034464
+	thumb_func_end EmitLinkStandbyMsg
 
-	thumb_func_start dp01_build_cmdbuf_x38_a
-dp01_build_cmdbuf_x38_a: @ 80344A8
+	thumb_func_start EmitResetActionMoveSelection
+EmitResetActionMoveSelection: @ 80344A8
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -3733,10 +3733,10 @@ dp01_build_cmdbuf_x38_a: @ 80344A8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x38_a
+	thumb_func_end EmitResetActionMoveSelection
 
-	thumb_func_start dp01_build_cmdbuf_x37_a
-dp01_build_cmdbuf_x37_a: @ 80344C8
+	thumb_func_start Emit_x37
+Emit_x37: @ 80344C8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 24
@@ -3770,6 +3770,6 @@ dp01_build_cmdbuf_x37_a: @ 80344C8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x37_a
+	thumb_func_end Emit_x37
 
 	.align 2, 0 @ Don't pad with nop.

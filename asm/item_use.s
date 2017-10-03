@@ -77,7 +77,7 @@ SetUpItemUseOnFieldCallback: @ 80FD0DC
 	ldrsh r0, [r0, r1]
 	cmp r0, 0x1
 	beq _080FD110
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =MapPostLoadHook_UseItem
 	str r0, [r1]
 	adds r0, r2, 0
@@ -464,7 +464,7 @@ _080FD3EC:
 _080FD40C:
 	lsls r0, r6, 24
 	lsrs r0, 24
-	bl sub_8089510
+	bl MetatileBehavior_8089510
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1477,7 +1477,7 @@ _080FDB98:
 	b _080FDBDA
 	.pool
 _080FDBC8:
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_80AF6D4
 	str r1, [r0]
 	movs r0, 0x1
@@ -1630,7 +1630,7 @@ sub_80FDD10: @ 80FDD10
 	ldr r1, =gUnknown_0203A0F4
 	ldr r0, =sub_80FDD74
 	str r0, [r1]
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =MapPostLoadHook_UseItem
 	str r0, [r1]
 	ldr r0, =gUnknown_0203CE54

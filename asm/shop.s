@@ -227,7 +227,7 @@ HandleShopMenuSell: @ 80DFC0C
 @ int CB2_ExitSellMenu()
 CB2_ExitSellMenu: @ 80DFC48
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =MapPostLoadHook_ExitBuyOrSellMenu
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -657,7 +657,7 @@ BuyMenuSetListEntry: @ 80E0000
 	.pool
 _080E0020:
 	lsls r1, r4, 5
-	ldr r0, =gUnknown_085A5C09
+	ldr r0, =gDecorations + 1
 	adds r1, r0
 	adds r0, r5, 0
 	bl StringCopy
@@ -1125,7 +1125,7 @@ BuyMenuInitBgs: @ 80E036C
 BuyMenuDecompressBgGraphics: @ 80E0424
 	push {lr}
 	sub sp, 0x4
-	ldr r1, =gUnknown_08D9AFBC
+	ldr r1, =gBuyMenuFrame_Gfx
 	movs r2, 0xE8
 	lsls r2, 2
 	ldr r3, =0x000003e3
@@ -1133,11 +1133,11 @@ BuyMenuDecompressBgGraphics: @ 80E0424
 	str r0, [sp]
 	movs r0, 0x1
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r0, =gUnknown_08D9B0F0
+	ldr r0, =gBuyMenuFrame_Tilemap
 	ldr r1, =gUnknown_02039F70
 	ldr r1, [r1]
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08D9B0C8
+	ldr r0, =gMenuMoneyPal
 	movs r1, 0xC0
 	movs r2, 0x20
 	bl LoadCompressedPalette
@@ -1259,7 +1259,7 @@ BuyMenuDrawGraphics: @ 80E0524
 	movs r0, 0
 	movs r1, 0x1
 	movs r2, 0xD
-	bl set_window_border_style_and_print_money_box
+	bl PrintMoneyAmountInMoneyBoxWithBorder
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -2106,7 +2106,7 @@ _080E0C28:
 _080E0C38:
 	ldr r0, =gStringVar1
 	lsls r1, r5, 5
-	ldr r2, =gUnknown_085A5C09
+	ldr r2, =gDecorations + 1
 	adds r1, r2
 	bl StringCopy
 	ldr r0, =gStringVar2
@@ -2668,7 +2668,7 @@ ExitBuyMenu: @ 80E1168
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =MapPostLoadHook_ExitBuyOrSellMenu
 	str r0, [r1]
 	movs r0, 0x1

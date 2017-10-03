@@ -1699,19 +1699,19 @@ _080853AC:
 	lsls r4, 24
 	lsrs r5, r4, 24
 	adds r0, r5, 0
-	bl sub_8088F74
+	bl MetatileBehavior_IsDeepSouthWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080853E8
 	adds r0, r5, 0
-	bl sub_8088F58
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08085442
 	adds r0, r5, 0
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3136,12 +3136,12 @@ map_post_load_hook_exec: @ 8085EA0
 _08085EBC:
 	movs r1, 0
 	str r1, [r4]
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	str r1, [r0]
 	b _08085EEA
 	.pool
 _08085ECC:
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _08085EE0
@@ -3151,7 +3151,7 @@ _08085ECC:
 _08085EE0:
 	bl mapldr_default
 _08085EE4:
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 _08085EEA:
@@ -3174,8 +3174,8 @@ CB2_NewGame: @ 8085EF8
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	ldr r1, =gUnknown_03005DAC
-	ldr r0, =sub_80FB4E0
+	ldr r1, =gFieldCallback
+	ldr r0, =ExecuteTruckSequence
 	str r0, [r1]
 	ldr r1, =gUnknown_03005DB0
 	movs r0, 0
@@ -3214,7 +3214,7 @@ c2_whiteout: @ 8085F58
 	bl player_avatar_init_params_reset
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF3C8
 	str r0, [r1]
 	mov r1, sp
@@ -3304,7 +3304,7 @@ _08086062:
 sub_8086074: @ 8086074
 	push {lr}
 	bl sub_808631C
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_80AF314
 	str r1, [r0]
 	ldr r0, =c2_80567AC
@@ -3399,12 +3399,12 @@ c2_8056854: @ 8086140
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086174
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF314
 	b _08086178
 	.pool
 _08086174:
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF214
 _08086178:
 	str r0, [r1]
@@ -3433,7 +3433,7 @@ sub_8086194: @ 8086194
 sub_80861B0: @ 80861B0
 	push {lr}
 	bl sub_808631C
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF188
 	str r0, [r1]
 	bl c2_exit_to_overworld_2_switch
@@ -3446,7 +3446,7 @@ sub_80861B0: @ 80861B0
 c2_exit_to_overworld_1_continue_scripts_restart_music: @ 80861CC
 	push {lr}
 	bl sub_808631C
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 	bl c2_exit_to_overworld_2_switch
@@ -3459,7 +3459,7 @@ c2_exit_to_overworld_1_continue_scripts_restart_music: @ 80861CC
 sub_80861E8: @ 80861E8
 	push {lr}
 	bl sub_808631C
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF3C8
 	str r0, [r1]
 	bl c2_exit_to_overworld_2_switch
@@ -3562,7 +3562,7 @@ _080862BE:
 	.pool
 _080862F4:
 	bl sub_80EDB44
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_8086204
 	str r1, [r0]
 	ldr r0, =c1_overworld

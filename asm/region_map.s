@@ -1939,7 +1939,7 @@ sub_8123C00: @ 8123C00
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_8137FFC
+	bl GetSSTidalLocation
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r5

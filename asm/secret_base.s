@@ -686,7 +686,7 @@ _080E900C:
 _080E9030:
 	bl sub_80E8F9C
 	bl warp_in
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_80AF168
 	str r1, [r0]
 	ldr r0, =c2_load_new_map
@@ -863,7 +863,7 @@ sub_80E916C: @ 80E916C
 	adds r0, r5, 0
 	bl warp1_set
 	bl warp_in
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80E9108
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -1163,13 +1163,13 @@ _080E941E:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8089350
+	bl MetatileBehavior_IsMB_B5
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E9462
 	adds r0, r4, 0
-	bl sub_8089364
+	bl MetatileBehavior_IsMB_C3
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1486,7 +1486,7 @@ _080E96F4:
 	movs r0, 0x7E
 	bl copy_saved_warp2_bank_and_enter_x_to_warp1
 	bl warp_in
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =mapldr_default
 	str r1, [r0]
 	ldr r0, =c2_load_new_map
@@ -3288,7 +3288,7 @@ _080EA62C:
 	.pool
 _080EA668:
 	adds r0, r5, 0
-	bl sub_80893C8
+	bl MetatileBehavior_IsSecretBaseGlitterMat
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3308,7 +3308,7 @@ _080EA680:
 	.pool
 _080EA698:
 	adds r0, r5, 0
-	bl sub_808938C
+	bl MetatileBehavior_IsSecretBaseBalloon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3377,7 +3377,7 @@ _080EA714:
 	.pool
 _080EA72C:
 	adds r0, r5, 0
-	bl sub_80893A0
+	bl MetatileBehavior_IsMB_BE
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3409,7 +3409,7 @@ _080EA75E:
 	.pool
 _080EA778:
 	adds r0, r5, 0
-	bl sub_80893B4
+	bl MetatileBehavior_IsSecretBaseSoundMat
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3429,7 +3429,7 @@ _080EA778:
 	.pool
 _080EA7A8:
 	adds r0, r5, 0
-	bl MetatileBehavior_0xBB
+	bl MetatileBehavior_IsSecretBaseJumpMat
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3449,7 +3449,7 @@ _080EA7A8:
 	.pool
 _080EA7D8:
 	adds r0, r5, 0
-	bl MetatileBehavior_0xBC
+	bl MetatileBehavior_IsSecretBaseSpinMat
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

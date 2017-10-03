@@ -18,7 +18,7 @@ struct PokeblockFeeder
 #define NUM_POKEBLOCK_FEEDERS 10
 
 extern u8 gBattleOutcome;
-extern void* gUnknown_03005DAC;
+extern void* gFieldCallback;
 
 extern u8 gUnknown_082A4B8A[];
 extern u8 gUnknown_082A4B6F[];
@@ -118,7 +118,7 @@ void sub_80FC190(void)
     {
         ScriptContext2_RunNewScript(gUnknown_082A4B4C);
         warp_in();
-        gUnknown_03005DAC = sub_80AF6F0;
+        gFieldCallback = sub_80AF6F0;
         SetMainCallback2(c2_load_new_map);
     }
     else if (gBattleOutcome == BATTLE_CAUGHT)

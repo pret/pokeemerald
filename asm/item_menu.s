@@ -5744,7 +5744,7 @@ unknown_ItemMenu_Show: @ 81ADE38
 	thumb_func_start bag_menu_leave_maybe_3
 bag_menu_leave_maybe_3: @ 81ADE6C
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_819FA50
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -5779,7 +5779,7 @@ unknown_ItemMenu_Give2: @ 81ADE8C
 	thumb_func_start bag_menu_leave_maybe_2
 bag_menu_leave_maybe_2: @ 81ADEBC
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_818DEF4
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -5810,7 +5810,7 @@ unknown_ItemMenu_Confirm2: @ 81ADEDC
 	thumb_func_start bag_menu_leave_maybe
 bag_menu_leave_maybe: @ 81ADF00
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_818E564
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -6237,7 +6237,7 @@ bag_menu_AddMoney_window: @ 81AE268
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0xE
-	bl set_window_border_style_and_print_money_box
+	bl PrintMoneyAmountInMoneyBoxWithBorder
 	movs r0, 0x13
 	movs r1, 0xB
 	bl AddMoneyLabelObject

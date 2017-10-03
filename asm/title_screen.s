@@ -468,7 +468,7 @@ title_screen_vblank_callback: @ 80AA780
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
@@ -590,7 +590,7 @@ _080AA7E0:
 	b _080AAB1E
 	.pool
 _080AA8C4:
-	ldr r0, =gTitleScreenPokemonLogoTiles
+	ldr r0, =gTitleScreenPokemonLogoGfx
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZ77UnCompVram
@@ -602,13 +602,13 @@ _080AA8C4:
 	lsls r2, 1
 	movs r1, 0
 	bl LoadPalette
-	ldr r0, =gTitleScreenRayquazaTiles
+	ldr r0, =gTitleScreenRayquazaGfx
 	ldr r1, =0x06008000
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_0853F83C
+	ldr r0, =gTitleScreenRayquazaTilemap
 	ldr r1, =0x0600d000
 	bl LZ77UnCompVram
-	ldr r0, =gTitleScreenCloudsTiles
+	ldr r0, =gTitleScreenCloudsGfx
 	ldr r1, =0x0600c000
 	bl LZ77UnCompVram
 	ldr r0, =gUnknown_08DDE458
@@ -627,7 +627,7 @@ _080AA8C4:
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_0854013C
 	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_08DDE438
+	ldr r0, =gTitleScreenEmeraldVersionPal
 	movs r1, 0x80
 	lsls r1, 1
 	movs r2, 0x20
@@ -1156,14 +1156,14 @@ _080AAE30:
 	ldrh r0, [r3, 0x10]
 	adds r0, 0x1
 	strh r0, [r3, 0x10]
-	ldr r2, =gUnknown_02022E1A
+	ldr r2, =gBattle_BG1_Y
 	movs r1, 0x10
 	ldrsh r0, [r3, r1]
 	lsrs r1, r0, 31
 	adds r0, r1
 	asrs r0, 1
 	strh r0, [r2]
-	ldr r1, =gUnknown_02022E18
+	ldr r1, =gBattle_BG1_X
 	movs r0, 0
 	strh r0, [r1]
 _080AAE72:

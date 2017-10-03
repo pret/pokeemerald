@@ -3,7 +3,7 @@
 
 	.section .rodata
 
-	.incbin "baserom.gba", 0x5f53c4, 0x48
+	.incbin "baserom.gba", 0x5f53cc, 0x40
 
 gUnknown_085F540C:: @ 85F540C
 	.incbin "baserom.gba", 0x5f540c, 0x10

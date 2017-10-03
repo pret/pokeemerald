@@ -584,7 +584,7 @@ sub_80FA004: @ 80FA004
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_808923C
+	bl MetatileBehavior_IsSecretBaseCave
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -599,7 +599,7 @@ sub_80FA004: @ 80FA004
 	.pool
 _080FA070:
 	adds r0, r4, 0
-	bl sub_808925C
+	bl MetatileBehavior_IsSecretBaseTree
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -614,7 +614,7 @@ _080FA070:
 	.pool
 _080FA0A0:
 	adds r0, r4, 0
-	bl is_tile_x98
+	bl MetatileBehavior_IsSecretBaseShrub
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

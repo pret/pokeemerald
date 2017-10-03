@@ -1,4 +1,5 @@
 #include "global.h"
+#include "gpu_regs.h"
 
 #define GPU_REG_BUF_SIZE 0x60
 
@@ -14,14 +15,15 @@ static bool8 sShouldSyncRegIE;
 static u16 sRegIE;
 
 static void CopyBufferedValueToGpuReg(u8 regOffset);
-static void SyncRegIE();
+static void SyncRegIE(void);
 static void UpdateRegDispstatIntrBits(u16 regIE);
 
-void InitGpuRegManager()
+void InitGpuRegManager(void)
 {
 	s32 i;
 
-	for (i = 0; i < GPU_REG_BUF_SIZE; i++) {
+	for (i = 0; i < GPU_REG_BUF_SIZE; i++)
+    {
 		sGpuRegBuffer[i] = 0;
 		sGpuRegWaitingList[i] = EMPTY_SLOT;
 	}
@@ -33,20 +35,25 @@ void InitGpuRegManager()
 
 static void CopyBufferedValueToGpuReg(u8 regOffset)
 {
-	if (regOffset == REG_OFFSET_DISPSTAT) {
+	if (regOffset == REG_OFFSET_DISPSTAT)
+    {
 		REG_DISPSTAT &= ~(DISPSTAT_HBLANK_INTR | DISPSTAT_VBLANK_INTR);
 		REG_DISPSTAT |= GPU_REG_BUF(REG_OFFSET_DISPSTAT);
-	} else {
+	}
+	else
+    {
 		GPU_REG(regOffset) = GPU_REG_BUF(regOffset);
 	}
 }
 
-void CopyBufferedValuesToGpuRegs()
+void CopyBufferedValuesToGpuRegs(void)
 {
-	if (!sGpuRegBufferLocked) {
+	if (!sGpuRegBufferLocked)
+    {
 		s32 i;
 
-		for (i = 0; i < GPU_REG_BUF_SIZE; i++) {
+		for (i = 0; i < GPU_REG_BUF_SIZE; i++)
+        {
 			u8 regOffset = sGpuRegWaitingList[i];
 			if (regOffset == EMPTY_SLOT)
 				return;
@@ -135,7 +142,7 @@ void ClearGpuRegBits(u8 regOffset, u16 mask)
 	SetGpuReg(regOffset, regValue & ~mask);
 }
 
-static void SyncRegIE()
+static void SyncRegIE(void)
 {
 	if (sShouldSyncRegIE) {
 		u16 temp = REG_IME;

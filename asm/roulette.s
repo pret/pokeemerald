@@ -3273,7 +3273,7 @@ sub_8141E7C: @ 8141E7C
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl sub_8140418
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 	ldr r0, =c2_exit_to_overworld_2_switch

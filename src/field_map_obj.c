@@ -3413,7 +3413,7 @@ bool8 mss_08062EA4(struct MapObject *mapObject, struct Sprite *sprite)
     {
         return FALSE;
     }
-    return gUnknown_0850DA64[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), sub_8088E64);
+    return gUnknown_0850DA64[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), MetatileBehavior_IsPokeGrass);
 }
 
 bool8 sub_80925AC(struct MapObject *, struct Sprite *);
