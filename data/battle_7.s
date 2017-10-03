@@ -40,7 +40,5 @@ gUnknown_0832C108:: @ 832C108
 
     .align 2
 gUnknown_0832C128:: @ 832C128
-	obj_pal gUnknown_08C11B9C, 0xd6ff
-	obj_pal gUnknown_08C11BBC, 0xd704
-
-	.byte 0x00, 0x40, 0x00, 0xc0, 0x00, 0x04, 0x00, 0x00
+	obj_pal gBattleInterface_BallStatusBarPal, 0xd6ff
+	obj_pal gBattleInterface_BallDisplayPal, 0xd704
