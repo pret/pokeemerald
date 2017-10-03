@@ -31,41 +31,587 @@ static void cur_mapheader_run_tileset2_func(void);
 
 // .rodata
 
-extern const u16 *const gTilesetAnims_General0[];
-extern const u16 *const gTilesetAnims_General1[];
-extern const u16 *const gTilesetAnims_General2[];
-extern const u16 *const gTilesetAnims_General3[];
-extern const u16 *const gTilesetAnims_General4[];
-extern const u16 *const gTilesetAnims_Lavaridge0[];
-extern const u16 *const gTilesetAnims_Pacifidlog0[];
-extern const u16 *const gTilesetAnims_Underwater0[];
-extern const u16 *const gTilesetAnims_Pacifidlog1[];
-extern u16 *const gTilesetAnims_MauvilleVDests0[];
-extern u16 *const gTilesetAnims_MauvilleVDests1[];
-extern const u16 *const gTilesetAnims_Mauville0a[];
-extern const u16 *const gTilesetAnims_Mauville0b[];
-extern const u16 *const gTilesetAnims_Mauville1a[];
-extern const u16 *const gTilesetAnims_Mauville1b[];
-extern  u16 *const gTilesetAnims_RustboroVDests0[];
-extern const u16 *const gTilesetAnims_Rustboro0[];
-extern const u16 *const gTilesetAnims_Rustboro1[];
-extern const u16 *const gTilesetAnims_Lavaridge1_Cave0[];
-extern  u16 *const gTilesetAnims_EverGrandeVDests0[];
-extern const u16 *const gTilesetAnims_EverGrande0[];
-extern const u16 *const gTilesetAnims_Dewford0[];
-extern const u16 *const gTilesetAnims_BattleFrontierOutsideWest0[];
-extern const u16 *const gTilesetAnims_BattleFrontierOutsideEast0[];
-extern const u16 *const gTilesetAnims_Slateport0[];
-extern const u16 *const gTilesetAnims_InsideBuilding0[];
-extern const u16 *const gTilesetAnims_SootopolisGym0[];
-extern const u16 *const gTilesetAnims_SootopolisGym1[];
-extern const u16 *const gTilesetAnims_EliteFour1[];
-extern const u16 *const gTilesetAnims_EliteFour0[];
-extern const u16 *const gTilesetAnims_MauvilleGym0[];
-extern const u16 *const gTilesetAnims_BikeShop0[];
-extern const u16 *const gTilesetAnims_Sootopolis0[];
-extern const u16 *const gTilesetAnims_BattlePyramid0[];
-extern const u16 *const gTilesetAnims_BattlePyramid1[];
+
+const u16 gUnknown_085105C4[] = INCBIN_U16("data/tilesets/primary/general/anim/0/1.4bpp");
+
+const u16 gUnknown_08510644[] = INCBIN_U16("data/tilesets/primary/general/anim/0/0.4bpp");
+
+const u16 gUnknown_085106C4[] = INCBIN_U16("data/tilesets/primary/general/anim/0/2.4bpp");
+
+const u16 tileset_anims_space_0[16] = {};
+
+const u16 *const gTilesetAnims_General0[] = {
+    gUnknown_08510644,
+    gUnknown_085105C4,
+    gUnknown_08510644,
+    gUnknown_085106C4
+};
+
+const u16 gUnknown_08510774[] = INCBIN_U16("data/tilesets/primary/general/anim/1/0.4bpp");
+
+const u16 gUnknown_08510B34[] = INCBIN_U16("data/tilesets/primary/general/anim/1/1.4bpp");
+
+const u16 gUnknown_08510EF4[] = INCBIN_U16("data/tilesets/primary/general/anim/1/2.4bpp");
+
+const u16 gUnknown_085112B4[] = INCBIN_U16("data/tilesets/primary/general/anim/1/3.4bpp");
+
+const u16 gUnknown_08511674[] = INCBIN_U16("data/tilesets/primary/general/anim/1/4.4bpp");
+
+const u16 gUnknown_08511A34[] = INCBIN_U16("data/tilesets/primary/general/anim/1/5.4bpp");
+
+const u16 gUnknown_08511DF4[] = INCBIN_U16("data/tilesets/primary/general/anim/1/6.4bpp");
+
+const u16 gUnknown_085121B4[] = INCBIN_U16("data/tilesets/primary/general/anim/1/7.4bpp");
+
+const u16 *const gTilesetAnims_General1[] = {
+    gUnknown_08510774,
+    gUnknown_08510B34,
+    gUnknown_08510EF4,
+    gUnknown_085112B4,
+    gUnknown_08511674,
+    gUnknown_08511A34,
+    gUnknown_08511DF4,
+    gUnknown_085121B4
+};
+
+const u16 gUnknown_08512594[] = INCBIN_U16("data/tilesets/primary/general/anim/2/0.4bpp");
+
+const u16 gUnknown_085126D4[] = INCBIN_U16("data/tilesets/primary/general/anim/2/1.4bpp");
+
+const u16 gUnknown_08512814[] = INCBIN_U16("data/tilesets/primary/general/anim/2/2.4bpp");
+
+const u16 gUnknown_08512954[] = INCBIN_U16("data/tilesets/primary/general/anim/2/3.4bpp");
+
+const u16 gUnknown_08512A94[] = INCBIN_U16("data/tilesets/primary/general/anim/2/4.4bpp");
+
+const u16 gUnknown_08512BD4[] = INCBIN_U16("data/tilesets/primary/general/anim/2/5.4bpp");
+
+const u16 gUnknown_08512D14[] = INCBIN_U16("data/tilesets/primary/general/anim/2/6.4bpp");
+
+const u16 *const gTilesetAnims_General2[] = {
+    gUnknown_08512594,
+    gUnknown_085126D4,
+    gUnknown_08512814,
+    gUnknown_08512954,
+    gUnknown_08512A94,
+    gUnknown_08512BD4,
+    gUnknown_08512D14,
+    gUnknown_08512594
+};
+
+const u16 gUnknown_08512E74[] = INCBIN_U16("data/tilesets/primary/general/anim/3/0.4bpp");
+
+const u16 gUnknown_08512F34[] = INCBIN_U16("data/tilesets/primary/general/anim/3/1.4bpp");
+
+const u16 gUnknown_08512FF4[] = INCBIN_U16("data/tilesets/primary/general/anim/3/2.4bpp");
+
+const u16 gUnknown_085130B4[] = INCBIN_U16("data/tilesets/primary/general/anim/3/3.4bpp");
+
+const u16 *const gTilesetAnims_General3[] = {
+    gUnknown_08512E74,
+    gUnknown_08512F34,
+    gUnknown_08512FF4,
+    gUnknown_085130B4
+};
+
+const u16 gUnknown_08513184[] = INCBIN_U16("data/tilesets/primary/general/anim/4/0.4bpp");
+
+const u16 gUnknown_085132C4[] = INCBIN_U16("data/tilesets/primary/general/anim/4/1.4bpp");
+
+const u16 gUnknown_08513404[] = INCBIN_U16("data/tilesets/primary/general/anim/4/2.4bpp");
+
+const u16 gUnknown_08513544[] = INCBIN_U16("data/tilesets/primary/general/anim/4/3.4bpp");
+
+const u16 *const gTilesetAnims_General4[] = {
+    gUnknown_08513184,
+    gUnknown_085132C4,
+    gUnknown_08513404,
+    gUnknown_08513544
+};
+
+const u16 gUnknown_08513694[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/0.4bpp");
+
+const u16 gUnknown_08513714[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/1.4bpp");
+
+const u16 gUnknown_08513794[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/2.4bpp");
+
+const u16 gUnknown_08513814[] = INCBIN_U16("data/tilesets/secondary/lavaridge/anim/3.4bpp");
+
+const u16 *const gTilesetAnims_Lavaridge0[] = {
+    gUnknown_08513694,
+    gUnknown_08513714,
+    gUnknown_08513794,
+    gUnknown_08513814
+};
+
+const u16 gUnknown_085138A4[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/0/0.4bpp");
+
+const u16 gUnknown_08513C64[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/0/1.4bpp");
+
+const u16 gUnknown_08514024[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/0/2.4bpp");
+
+const u16 *const gTilesetAnims_Pacifidlog0[] = {
+    gUnknown_085138A4,
+    gUnknown_08513C64,
+    gUnknown_08514024,
+    gUnknown_08513C64
+};
+
+const u16 gUnknown_085143F4[] = INCBIN_U16("data/tilesets/secondary/underwater/anim/0.4bpp");
+
+const u16 gUnknown_08514474[] = INCBIN_U16("data/tilesets/secondary/underwater/anim/1.4bpp");
+
+const u16 gUnknown_085144F4[] = INCBIN_U16("data/tilesets/secondary/underwater/anim/2.4bpp");
+
+const u16 gUnknown_08514574[] = INCBIN_U16("data/tilesets/secondary/underwater/anim/3.4bpp");
+
+const u16 *const gTilesetAnims_Underwater0[] = {
+    gUnknown_085143F4,
+    gUnknown_08514474,
+    gUnknown_085144F4,
+    gUnknown_08514574
+};
+
+const u16 gUnknown_08514604[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/0.4bpp");
+
+const u16 gUnknown_08514704[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/1.4bpp");
+
+const u16 gUnknown_08514804[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/2.4bpp");
+
+const u16 gUnknown_08514904[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/3.4bpp");
+
+const u16 gUnknown_08514A04[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/4.4bpp");
+
+const u16 gUnknown_08514B04[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/5.4bpp");
+
+const u16 gUnknown_08514C04[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/6.4bpp");
+
+const u16 gUnknown_08514D04[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/7.4bpp");
+
+const u16 *const gTilesetAnims_Pacifidlog1[] = {
+    gUnknown_08514604,
+    gUnknown_08514704,
+    gUnknown_08514804,
+    gUnknown_08514904,
+    gUnknown_08514A04,
+    gUnknown_08514B04,
+    gUnknown_08514C04,
+    gUnknown_08514D04
+};
+
+const u16 gUnknown_08514E24[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/0.4bpp");
+
+const u16 gUnknown_08514EA4[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/1.4bpp");
+
+const u16 gUnknown_08514F24[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/2.4bpp");
+
+const u16 gUnknown_08514FA4[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/a/3.4bpp");
+
+const u16 gUnknown_08515024[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/1/a/1.4bpp");
+
+const u16 gUnknown_085150A4[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/0.4bpp");
+
+const u16 gUnknown_08515124[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/1.4bpp");
+
+const u16 gUnknown_085151A4[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/2.4bpp");
+
+const u16 gUnknown_08515224[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/0/b/3.4bpp");
+
+const u16 gUnknown_085152A4[] = INCBIN_U16("data/tilesets/secondary/mauville/anim/1/b/1.4bpp");
+
+const u16 tileset_anims_space_1[16] = {};
+
+u16 *const gTilesetAnims_MauvilleVDests0[] = {
+    (u16 *)(BG_VRAM + 0x4c00),
+    (u16 *)(BG_VRAM + 0x4c80),
+    (u16 *)(BG_VRAM + 0x4d00),
+    (u16 *)(BG_VRAM + 0x4d80),
+    (u16 *)(BG_VRAM + 0x4e00),
+    (u16 *)(BG_VRAM + 0x4e80),
+    (u16 *)(BG_VRAM + 0x4f00),
+    (u16 *)(BG_VRAM + 0x4f80)
+};
+
+u16 *const gTilesetAnims_MauvilleVDests1[] = {
+    (u16 *)(BG_VRAM + 0x5000),
+    (u16 *)(BG_VRAM + 0x5080),
+    (u16 *)(BG_VRAM + 0x5100),
+    (u16 *)(BG_VRAM + 0x5180),
+    (u16 *)(BG_VRAM + 0x5200),
+    (u16 *)(BG_VRAM + 0x5280),
+    (u16 *)(BG_VRAM + 0x5300),
+    (u16 *)(BG_VRAM + 0x5380)
+};
+
+const u16 *const gTilesetAnims_Mauville0a[] = {
+    gUnknown_08514E24,
+    gUnknown_08514E24,
+    gUnknown_08514EA4,
+    gUnknown_08514F24,
+    gUnknown_08514FA4,
+    gUnknown_08514FA4,
+    gUnknown_08514FA4,
+    gUnknown_08514FA4,
+    gUnknown_08514FA4,
+    gUnknown_08514FA4,
+    gUnknown_08514F24,
+    gUnknown_08514EA4
+};
+
+const u16 *const gTilesetAnims_Mauville0b[] = {
+    gUnknown_085150A4,
+    gUnknown_085150A4,
+    gUnknown_08515124,
+    gUnknown_085151A4,
+    gUnknown_08515224,
+    gUnknown_08515224,
+    gUnknown_08515224,
+    gUnknown_08515224,
+    gUnknown_08515224,
+    gUnknown_08515224,
+    gUnknown_085151A4,
+    gUnknown_08515124
+};
+
+const u16 *const gTilesetAnims_Mauville1a[] = {
+    gUnknown_08514E24,
+    gUnknown_08514E24,
+    gUnknown_08515024,
+    gUnknown_08515024
+};
+
+const u16 *const gTilesetAnims_Mauville1b[] = {
+    gUnknown_085150A4,
+    gUnknown_085150A4,
+    gUnknown_085152A4,
+    gUnknown_085152A4
+};
+
+const u16 gUnknown_08515404[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/0.4bpp");
+
+const u16 gUnknown_08515484[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/1.4bpp");
+
+const u16 gUnknown_08515504[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/2.4bpp");
+
+const u16 gUnknown_08515584[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/3.4bpp");
+
+const u16 gUnknown_08515604[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/4.4bpp");
+
+const u16 gUnknown_08515684[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/5.4bpp");
+
+const u16 gUnknown_08515704[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/6.4bpp");
+
+const u16 gUnknown_08515784[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/0/7.4bpp");
+
+u16 *const gTilesetAnims_RustboroVDests0[] = {
+    (u16 *)(BG_VRAM + 0x5000),
+    (u16 *)(BG_VRAM + 0x5080),
+    (u16 *)(BG_VRAM + 0x5100),
+    (u16 *)(BG_VRAM + 0x5180),
+    (u16 *)(BG_VRAM + 0x5200),
+    (u16 *)(BG_VRAM + 0x5280),
+    (u16 *)(BG_VRAM + 0x5300),
+    (u16 *)(BG_VRAM + 0x5380)
+};
+
+const u16 *const gTilesetAnims_Rustboro0[] = {
+    gUnknown_08515404,
+    gUnknown_08515484,
+    gUnknown_08515504,
+    gUnknown_08515584,
+    gUnknown_08515604,
+    gUnknown_08515684,
+    gUnknown_08515704,
+    gUnknown_08515784
+};
+
+const u16 gUnknown_08515844[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/1/0.4bpp");
+
+const u16 gUnknown_085158C4[] = INCBIN_U16("data/tilesets/secondary/rustboro/anim/1/1.4bpp");
+
+const u16 tileset_anims_space_2[16] = {};
+
+const u16 *const gTilesetAnims_Rustboro1[] = {
+    gUnknown_08515844,
+    gUnknown_085158C4
+};
+
+const u16 gUnknown_0851596C[] = INCBIN_U16("data/tilesets/secondary/cave/anim/0.4bpp");
+
+const u16 gUnknown_085159EC[] = INCBIN_U16("data/tilesets/secondary/cave/anim/1.4bpp");
+
+const u16 gUnknown_08515A6C[] = INCBIN_U16("data/tilesets/secondary/cave/anim/2.4bpp");
+
+const u16 gUnknown_08515AEC[] = INCBIN_U16("data/tilesets/secondary/cave/anim/3.4bpp");
+
+const u16 gUnknown_08515B6C[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/0.4bpp");
+
+const u16 gUnknown_08515BEC[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/1.4bpp");
+
+const u16 gUnknown_08515C6C[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/2.4bpp");
+
+const u16 gUnknown_08515CEC[] = INCBIN_U16("data/tilesets/secondary/cave/anim/unused/3.4bpp");
+
+const u16 tileset_anims_space_3[16] = {};
+
+const u16 *const gTilesetAnims_Lavaridge1_Cave0[] = {
+    gUnknown_0851596C,
+    gUnknown_085159EC,
+    gUnknown_08515A6C,
+    gUnknown_08515AEC
+};
+
+const u16 gUnknown_08515D9C[] = INCBIN_U16("data/tilesets/secondary/ever_grande/anim/0.4bpp");
+
+const u16 gUnknown_08515E1C[] = INCBIN_U16("data/tilesets/secondary/ever_grande/anim/1.4bpp");
+
+const u16 gUnknown_08515E9C[] = INCBIN_U16("data/tilesets/secondary/ever_grande/anim/2.4bpp");
+
+const u16 gUnknown_08515F1C[] = INCBIN_U16("data/tilesets/secondary/ever_grande/anim/3.4bpp");
+
+const u16 gUnknown_08515F9C[] = INCBIN_U16("data/tilesets/secondary/ever_grande/anim/4.4bpp");
+
+const u16 gUnknown_0851601C[] = INCBIN_U16("data/tilesets/secondary/ever_grande/anim/5.4bpp");
+
+const u16 gUnknown_0851609C[] = INCBIN_U16("data/tilesets/secondary/ever_grande/anim/6.4bpp");
+
+const u16 gUnknown_0851611C[] = INCBIN_U16("data/tilesets/secondary/ever_grande/anim/7.4bpp");
+
+const u16 tileset_anims_space_4[16] = {};
+
+u16 *const gTilesetAnims_EverGrandeVDests0[] = {
+    (u16 *)(BG_VRAM + 0x5c00),
+    (u16 *)(BG_VRAM + 0x5c80),
+    (u16 *)(BG_VRAM + 0x5d00),
+    (u16 *)(BG_VRAM + 0x5d80),
+    (u16 *)(BG_VRAM + 0x5e00),
+    (u16 *)(BG_VRAM + 0x5e80),
+    (u16 *)(BG_VRAM + 0x5f00),
+    (u16 *)(BG_VRAM + 0x5f80)
+};
+
+const u16 *const gTilesetAnims_EverGrande0[] = {
+    gUnknown_08515D9C,
+    gUnknown_08515E1C,
+    gUnknown_08515E9C,
+    gUnknown_08515F1C,
+    gUnknown_08515F9C,
+    gUnknown_0851601C,
+    gUnknown_0851609C,
+    gUnknown_0851611C
+};
+
+const u16 gUnknown_085161FC[] = INCBIN_U16("data/tilesets/secondary/dewford/anim/0.4bpp");
+
+const u16 gUnknown_085162BC[] = INCBIN_U16("data/tilesets/secondary/dewford/anim/1.4bpp");
+
+const u16 gUnknown_0851637C[] = INCBIN_U16("data/tilesets/secondary/dewford/anim/2.4bpp");
+
+const u16 gUnknown_0851643C[] = INCBIN_U16("data/tilesets/secondary/dewford/anim/3.4bpp");
+
+const u16 *const gTilesetAnims_Dewford0[] = {
+    gUnknown_085161FC,
+    gUnknown_085162BC,
+    gUnknown_0851637C,
+    gUnknown_0851643C
+};
+
+const u16 gUnknown_0851650C[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/anim/0.4bpp");
+
+const u16 gUnknown_085165CC[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/anim/1.4bpp");
+
+const u16 gUnknown_0851668C[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/anim/2.4bpp");
+
+const u16 gUnknown_0851674C[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/anim/3.4bpp");
+
+const u16 *const gTilesetAnims_BattleFrontierOutsideWest0[] = {
+    gUnknown_0851650C,
+    gUnknown_085165CC,
+    gUnknown_0851668C,
+    gUnknown_0851674C
+};
+
+const u16 gUnknown_0851681C[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/anim/0.4bpp");
+
+const u16 gUnknown_085168DC[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/anim/1.4bpp");
+
+const u16 gUnknown_0851699C[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/anim/2.4bpp");
+
+const u16 gUnknown_08516A5C[] = INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/anim/3.4bpp");
+
+const u16 *const gTilesetAnims_BattleFrontierOutsideEast0[] = {
+    gUnknown_0851681C,
+    gUnknown_085168DC,
+    gUnknown_0851699C,
+    gUnknown_08516A5C
+};
+
+const u16 gUnknown_08516B2C[] = INCBIN_U16("data/tilesets/secondary/slateport/anim/0.4bpp");
+
+const u16 gUnknown_08516BAC[] = INCBIN_U16("data/tilesets/secondary/slateport/anim/1.4bpp");
+
+const u16 gUnknown_08516C2C[] = INCBIN_U16("data/tilesets/secondary/slateport/anim/2.4bpp");
+
+const u16 gUnknown_08516CAC[] = INCBIN_U16("data/tilesets/secondary/slateport/anim/3.4bpp");
+
+const u16 *const gTilesetAnims_Slateport0[] = {
+    gUnknown_08516B2C,
+    gUnknown_08516BAC,
+    gUnknown_08516C2C,
+    gUnknown_08516CAC
+};
+
+const u16 gUnknown_08516D3C[] = INCBIN_U16("data/tilesets/primary/building/anim/0.4bpp");
+
+const u16 gUnknown_08516DBC[] = INCBIN_U16("data/tilesets/primary/building/anim/1.4bpp");
+
+const u16 *const gTilesetAnims_InsideBuilding0[] = {
+    gUnknown_08516D3C,
+    gUnknown_08516DBC
+};
+
+const u16 gUnknown_08516E44[] = INCBIN_U16("data/tilesets/secondary/sootopolis_gym/anim/0/0.4bpp");
+
+const u16 gUnknown_08516FC4[] = INCBIN_U16("data/tilesets/secondary/sootopolis_gym/anim/0/1.4bpp");
+
+const u16 gUnknown_08517144[] = INCBIN_U16("data/tilesets/secondary/sootopolis_gym/anim/0/2.4bpp");
+
+const u16 gUnknown_085172C4[] = INCBIN_U16("data/tilesets/secondary/sootopolis_gym/anim/1/0.4bpp");
+
+const u16 gUnknown_08517544[] = INCBIN_U16("data/tilesets/secondary/sootopolis_gym/anim/1/1.4bpp");
+
+const u16 gUnknown_085177C4[] = INCBIN_U16("data/tilesets/secondary/sootopolis_gym/anim/1/2.4bpp");
+
+const u16 *const gTilesetAnims_SootopolisGym0[] = {
+    gUnknown_08516E44,
+    gUnknown_08516FC4,
+    gUnknown_08517144
+};
+
+const u16 *const gTilesetAnims_SootopolisGym1[] = {
+    gUnknown_085172C4,
+    gUnknown_08517544,
+    gUnknown_085177C4
+};
+
+const u16 gUnknown_08517A5C[] = INCBIN_U16("data/tilesets/secondary/elite_four/anim/1/0.4bpp");
+
+const u16 gUnknown_08517ADC[] = INCBIN_U16("data/tilesets/secondary/elite_four/anim/1/1.4bpp");
+
+const u16 gUnknown_08517B5C[] = INCBIN_U16("data/tilesets/secondary/elite_four/anim/0/0.4bpp");
+
+const u16 gUnknown_08517B7C[] = INCBIN_U16("data/tilesets/secondary/elite_four/anim/0/1.4bpp");
+
+const u16 gUnknown_08517B9C[] = INCBIN_U16("data/tilesets/secondary/elite_four/anim/0/2.4bpp");
+
+const u16 gUnknown_08517BBC[] = INCBIN_U16("data/tilesets/secondary/elite_four/anim/0/3.4bpp");
+
+const u16 tileset_anims_space_5[16] = {};
+
+const u16 *const gTilesetAnims_EliteFour1[] = {
+    gUnknown_08517B5C,
+    gUnknown_08517B7C,
+    gUnknown_08517B9C,
+    gUnknown_08517BBC
+};
+
+const u16 *const gTilesetAnims_EliteFour0[] = {
+    gUnknown_08517A5C,
+    gUnknown_08517ADC
+};
+
+const u16 gUnknown_08517C14[] = INCBIN_U16("data/tilesets/secondary/mauville_gym/anim/0.4bpp");
+
+const u16 gUnknown_08517E14[] = INCBIN_U16("data/tilesets/secondary/mauville_gym/anim/1.4bpp");
+
+const u16 tileset_anims_space_6[16] = {};
+
+const u16 *const gTilesetAnims_MauvilleGym0[] = {
+    gUnknown_08517C14,
+    gUnknown_08517E14
+};
+
+const u16 gUnknown_0851803C[] = INCBIN_U16("data/tilesets/secondary/bike_shop/anim/0.4bpp");
+
+const u16 gUnknown_0851815C[] = INCBIN_U16("data/tilesets/secondary/bike_shop/anim/1.4bpp");
+
+const u16 tileset_anims_space_7[16] = {};
+
+const u16 *const gTilesetAnims_BikeShop0[] = {
+    gUnknown_0851803C,
+    gUnknown_0851815C
+};
+
+const u16 gUnknown_085182A4[] = INCBIN_U16("data/tilesets/secondary/sootopolis/anim/0.4bpp");
+
+const u16 gUnknown_08518EA4[] = INCBIN_U16("data/tilesets/secondary/sootopolis/anim/1.4bpp");
+
+const u16 gUnknown_08519AA4[] = INCBIN_U16("data/tilesets/secondary/sootopolis/anim/2.4bpp");
+
+const u16 gUnknown_0851A6A4[] = INCBIN_U16("data/tilesets/secondary/sootopolis/anim/3.4bpp");
+
+const u16 gUnknown_0851B2A4[] = INCBIN_U16("data/tilesets/secondary/sootopolis/anim/4.4bpp");
+
+const u16 gUnknown_0851BEA4[] = INCBIN_U16("data/tilesets/secondary/sootopolis/anim/5.4bpp");
+
+const u16 gUnknown_0851CAA4[] = INCBIN_U16("data/tilesets/secondary/sootopolis/anim/6.4bpp");
+
+const u16 gUnknown_0851D6A4[] = INCBIN_U16("data/tilesets/secondary/sootopolis/anim/7.4bpp");
+
+const u16 tileset_anims_space_8[16] = {};
+
+const u16 gUnknown_0851E2C4[] = INCBIN_U16("data/tilesets/secondary/unused_1/0.4bpp");
+
+const u16 gUnknown_0851EAC4[] = INCBIN_U16("data/tilesets/secondary/unused_1/1.4bpp");
+
+const u16 gUnknown_0851F2C4[] = INCBIN_U16("data/tilesets/secondary/unused_1/2.4bpp");
+
+const u16 gUnknown_0851FAC4[] = INCBIN_U16("data/tilesets/secondary/unused_1/3.4bpp");
+
+const u16 *const gTilesetAnims_Sootopolis0[] = {
+    gUnknown_085182A4,
+    gUnknown_08518EA4,
+    gUnknown_08519AA4,
+    gUnknown_0851A6A4,
+    gUnknown_0851B2A4,
+    gUnknown_0851BEA4,
+    gUnknown_0851CAA4,
+    gUnknown_0851D6A4
+};
+
+const u16 gUnknown_085202E4[] = INCBIN_U16("data/tilesets/secondary/battle_pyramid/anim/0/0.4bpp");
+
+const u16 gUnknown_085203E4[] = INCBIN_U16("data/tilesets/secondary/battle_pyramid/anim/0/1.4bpp");
+
+const u16 gUnknown_085204E4[] = INCBIN_U16("data/tilesets/secondary/battle_pyramid/anim/0/2.4bpp");
+
+const u16 tileset_anims_space_9[16] = {};
+
+const u16 gUnknown_08520604[] = INCBIN_U16("data/tilesets/secondary/battle_pyramid/anim/1/0.4bpp");
+
+const u16 gUnknown_08520704[] = INCBIN_U16("data/tilesets/secondary/battle_pyramid/anim/1/1.4bpp");
+
+const u16 gUnknown_08520804[] = INCBIN_U16("data/tilesets/secondary/battle_pyramid/anim/1/2.4bpp");
+
+const u16 tileset_anims_space_10[7808] = {};
+
+const u16 gUnknown_08524604[] = INCBIN_U16("data/tilesets/secondary/unused_2/0.4bpp");
+
+const u16 tileset_anims_space_11[224] = {};
+
+const u16 gUnknown_08524804[] = INCBIN_U16("data/tilesets/secondary/unused_2/1.4bpp");
+
+const u16 *const gTilesetAnims_BattlePyramid0[] = {
+    gUnknown_085202E4,
+    gUnknown_085203E4,
+    gUnknown_085204E4
+};
+
+const u16 *const gTilesetAnims_BattlePyramid1[] = {
+    gUnknown_08520604,
+    gUnknown_08520704,
+    gUnknown_08520804
+};
 
 extern const u16 gUnknown_08D85640[];
 extern const u16 gUnknown_08D85660[];

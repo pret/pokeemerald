@@ -356,7 +356,6 @@ SECTIONS {
         data/field_tasks.o(.rodata);
         data/reset_rtc_screen.o(.rodata);
         data/start_menu.o(.rodata);
-        data/tileset.o(.rodata);
         src/tileset_anims.o(.rodata);
         src/palette.o(.rodata);
         data/fanfares.o(.rodata);
