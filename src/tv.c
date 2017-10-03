@@ -2372,6 +2372,24 @@ void sub_80EE184(void)
     }
 }
 
+void sub_80EE2CC(void)
+{
+    TVShow *show;
+
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_LOTTO_WINNER, 0) != 1)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->lottoWinner.kind = TVSHOW_LOTTO_WINNER;
+        show->lottoWinner.active = FALSE;
+        StringCopy(show->lottoWinner.playerName, gSaveBlock2Ptr->playerName);
+        show->lottoWinner.unk04 = 4 - gSpecialVar_0x8004;
+        show->lottoWinner.unk02 = gSpecialVar_0x8005;
+        tv_store_id_3x(show);
+        show->lottoWinner.language = gGameLanguage;
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
