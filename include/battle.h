@@ -257,14 +257,14 @@
 #define CMP_COMMON_BITS         0x4
 #define CMP_NO_COMMON_BITS      0x5
 
+#include "global.h"
+
 struct TrainerMonNoItemDefaultMoves
 {
     u16 species;
     u8 lvl;
     u16 evsValue;
 };
-
-#include "global.h"
 
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
 u8 GetBankSide(u8 bank);
