@@ -866,7 +866,7 @@ void GabbyAndTyBeforeInterview(void)
     {
         for (i = 0; i < 11; i ++)
         {
-            if (gBattleResults.unk36[i])
+            if (gBattleResults.catchAttempts[i])
             {
                 gSaveBlock1Ptr->gabbyAndTyData.valA_3 = TRUE;
                 break;
@@ -1036,21 +1036,21 @@ void PutPokemonTodayCaughtOnAir(void)
     ct = 0;
     sub_80EED88();
     sub_80ED718();
-    if (gBattleResults.caughtPoke == SPECIES_NONE)
+    if (gBattleResults.caughtMonSpecies == SPECIES_NONE)
     {
         PutPokemonTodayFailedOnTheAir();
     }
     else
     {
         UpdateWorldOfMastersAndPutItOnTheAir();
-        if (!TV_BernoulliTrial(-1) && StringCompare(gSpeciesNames[gBattleResults.caughtPoke], gBattleResults.caughtNick))
+        if (!TV_BernoulliTrial(-1) && StringCompare(gSpeciesNames[gBattleResults.caughtMonSpecies], gBattleResults.caughtMonNick))
         {
             sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
             if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_POKEMON_TODAY_CAUGHT, 0) != TRUE)
             {
                 for (i = 0; i < 11; i ++)
                 {
-                    ct += gBattleResults.unk36[i];
+                    ct += gBattleResults.catchAttempts[i];
                 }
                 if (ct != 0 || gBattleResults.usedMasterBall)
                 {
@@ -1067,7 +1067,7 @@ void PutPokemonTodayCaughtOnAir(void)
                     {
                         for (i = 0; i < 11; i ++)
                         {
-                            ct += gBattleResults.unk36[i];
+                            ct += gBattleResults.catchAttempts[i];
                         }
                         if (ct > 0xFF)
                         {
@@ -1078,10 +1078,10 @@ void PutPokemonTodayCaughtOnAir(void)
                     show->pokemonToday.var12 = ct;
                     show->pokemonToday.ball = itemLastUsed;
                     StringCopy(show->pokemonToday.playerName, gSaveBlock2Ptr->playerName);
-                    StringCopy(show->pokemonToday.nickname, gBattleResults.caughtNick);
+                    StringCopy(show->pokemonToday.nickname, gBattleResults.caughtMonNick);
                     language2 = sub_81DB604(show->pokemonToday.nickname);
                     StripExtCtrlCodes(show->pokemonToday.nickname);
-                    show->pokemonToday.species = gBattleResults.caughtPoke;
+                    show->pokemonToday.species = gBattleResults.caughtMonSpecies;
                     tv_store_id_3x(show);
                     show->pokemonToday.language = gGameLanguage;
                     show->pokemonToday.language2 = language2;
@@ -1103,7 +1103,7 @@ static void UpdateWorldOfMastersAndPutItOnTheAir(void)
         show->worldOfMasters.kind = TVSHOW_WORLD_OF_MASTERS;
     }
     show->worldOfMasters.var02 ++;
-    show->worldOfMasters.caughtPoke = gBattleResults.caughtPoke;
+    show->worldOfMasters.caughtPoke = gBattleResults.caughtMonSpecies;
     show->worldOfMasters.species = gBattleResults.poke1Species;
     show->worldOfMasters.location = gMapHeader.regionMapSectionId;
 }
@@ -1118,7 +1118,7 @@ static void PutPokemonTodayFailedOnTheAir(void)
     {
         for (i = 0, ct = 0; i < 11; i ++)
         {
-            ct += gBattleResults.unk36[i];
+            ct += gBattleResults.catchAttempts[i];
         }
         if (ct > 0xFF)
         {
@@ -2086,7 +2086,7 @@ void sub_80EDE98(TVShow *show)
                     "\tpush {r6,r7}\n"
                     "\tmov r8, r0\n"
                     "\tmovs r3, 0\n"
-                    "\tldr r6, =gUnknown_030060D0\n"
+                    "\tldr r6, =sTV_DecorationsBuffer\n"
                     "\tldr r7, =gSaveBlock1Ptr\n"
                     "\tadds r2, r6, 0\n"
                     "\tmovs r1, 0\n"
@@ -2165,7 +2165,7 @@ void sub_80EDE98(TVShow *show)
                     "\tmuls r7, r5\n"
                     "\tcmp r6, r7\n"
                     "\tbge _080EDF7E\n"
-                    "\tldr r0, =gUnknown_030060D0\n"
+                    "\tldr r0, =sTV_DecorationsBuffer\n"
                     "\tmov r9, r0\n"
                     "_080EDF42:\n"
                     "\tbl Random\n"
@@ -2202,7 +2202,7 @@ void sub_80EDE98(TVShow *show)
                     "\tbcs _080EDFA4\n"
                     "\tmov r2, r8\n"
                     "\tadds r2, 0x4\n"
-                    "\tldr r4, =gUnknown_030060D0\n"
+                    "\tldr r4, =sTV_DecorationsBuffer\n"
                     "_080EDF8E:\n"
                     "\tadds r1, r2, r3\n"
                     "\tadds r0, r3, r4\n"

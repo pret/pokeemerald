@@ -19,7 +19,6 @@ extern struct BattleEnigmaBerry gEnigmaBerries[];
 extern u16 gBattleMovePower;
 extern u16 gTrainerBattleOpponent_A;
 
-u8 CountAliveMonsInBattle(u8);
 bool8 ShouldGetStatBadgeBoost(u16 flagId, u8 bank);
 
 extern const struct BattleMove gBattleMoves[];

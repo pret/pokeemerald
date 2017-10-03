@@ -20578,33 +20578,33 @@ _081A5328:
 	negs r0, r0
 	strb r0, [r1, 0x1]
 	ldr r0, =gText_JapaneseHonorific
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r4, =gDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0xF
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Vs
 	movs r1, 0x10
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_RivalBuffer
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	adds r0, r4, 0
 	movs r1, 0x11
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Mind
 	movs r1, 0x12
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Skill
 	movs r1, 0x13
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Body
 	movs r1, 0x14
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Judgement
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	b _081A553E
 	.pool
 _081A53B4:
@@ -20685,10 +20685,10 @@ _081A5464:
 	movs r3, 0x1
 	bl sub_81A5558
 	ldr r0, =gText_Judgement
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x15
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldrb r0, [r5]
 	adds r0, 0x1
 	strb r0, [r5]
@@ -31263,8 +31263,8 @@ _081AAA9E:
 	.pool
 	thumb_func_end sub_81AAA7C
 
-	thumb_func_start CalculateBattlePyramidPickupItemId
-CalculateBattlePyramidPickupItemId: @ 81AAAE0
+	thumb_func_start GetBattlePyramidPickupItemId
+GetBattlePyramidPickupItemId: @ 81AAAE0
 	push {r4-r6,lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
@@ -31331,6 +31331,6 @@ _081AAB5A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end CalculateBattlePyramidPickupItemId
+	thumb_func_end GetBattlePyramidPickupItemId
 
 	.align 2, 0 @ Don't pad with nop.

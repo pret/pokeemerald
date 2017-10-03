@@ -6237,7 +6237,7 @@ bag_menu_AddMoney_window: @ 81AE268
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0xE
-	bl set_window_border_style_and_print_money_box
+	bl PrintMoneyAmountInMoneyBoxWithBorder
 	movs r0, 0x13
 	movs r1, 0xB
 	bl AddMoneyLabelObject

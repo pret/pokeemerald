@@ -428,7 +428,7 @@ _0805D470:
 	movs r0, 0x1
 	ands r0, r1
 	eors r0, r2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 16
 _0805D48A:
@@ -579,7 +579,7 @@ sub_805D5F4: @ 805D5F4
 	cmp r0, 0
 	bne _0805D630
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -588,13 +588,13 @@ sub_805D5F4: @ 805D5F4
 	.pool
 _0805D630:
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	movs r0, 0x2
 _0805D63E:
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r1, =gBattleMons
@@ -2937,11 +2937,11 @@ _0805EA5A:
 	bx r0
 	thumb_func_end sub_805E990
 
-	thumb_func_start sub_805EA60
-sub_805EA60: @ 805EA60
+	thumb_func_start BattleMusicStop
+BattleMusicStop: @ 805EA60
 	push {r4-r6,lr}
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r5, =gUnknown_020244D0
@@ -2977,7 +2977,7 @@ _0805EAA2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805EA60
+	thumb_func_end BattleMusicStop
 
 	thumb_func_start sub_805EAB4
 sub_805EAB4: @ 805EAB4
@@ -3020,12 +3020,12 @@ sub_805EAE8: @ 805EAE8
 	cmp r0, 0
 	beq _0805EB7E
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	movs r0, 0x2
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -3203,7 +3203,7 @@ sub_805EC84: @ 805EC84
 	ldr r0, =gUnknown_0831C6A0
 	bl LoadCompressedObjectPic
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -3252,7 +3252,7 @@ sub_805EC84: @ 805EC84
 	cmp r0, 0
 	beq _0805ED56
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24

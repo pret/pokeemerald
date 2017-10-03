@@ -97,15 +97,15 @@ _080F57E0:
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E16
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E22
 	strh r1, [r0]
@@ -449,23 +449,23 @@ sub_80F5C24: @ 80F5C24
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	ldrh r1, [r0]
 	movs r0, 0x18
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
@@ -1838,7 +1838,7 @@ _080F68A8:
 	thumb_func_start sub_80F68B4
 sub_80F68B4: @ 80F68B4
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_02022E20
+	ldr r2, =gBattle_BG3_X
 	ldrh r3, [r2]
 	adds r0, r3, 0x2
 	strh r0, [r2]
@@ -1989,7 +1989,7 @@ sub_80F69B8: @ 80F69B8
 _080F69DE:
 	adds r0, r7, 0
 	ldr r1, [sp, 0x28]
-	bl sub_80D2EDC
+	bl GetMonIconPtr
 	adds r3, r0, 0
 	lsls r0, r5, 9
 	adds r0, 0x80

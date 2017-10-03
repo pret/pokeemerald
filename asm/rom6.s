@@ -5062,8 +5062,8 @@ sub_8137FB0: @ 8137FB0
 	.pool
 	thumb_func_end sub_8137FB0
 
-	thumb_func_start sub_8137FC0
-sub_8137FC0: @ 8137FC0
+	thumb_func_start CountSSTidalStep
+CountSSTidalStep: @ 8137FC0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -5091,10 +5091,10 @@ _08137FF6:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8137FC0
+	thumb_func_end CountSSTidalStep
 
-	thumb_func_start sub_8137FFC
-sub_8137FFC: @ 8137FFC
+	thumb_func_start GetSSTidalLocation
+GetSSTidalLocation: @ 8137FFC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -5203,7 +5203,7 @@ _081380CE:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8137FFC
+	thumb_func_end GetSSTidalLocation
 
 	thumb_func_start is_tile_that_overrides_player_control
 is_tile_that_overrides_player_control: @ 81380D8

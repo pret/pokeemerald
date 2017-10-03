@@ -13136,7 +13136,7 @@ _081CD8E4:
 	ldr r2, =0x00006325
 	adds r4, r2
 	adds r0, r3, 0
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 _081CD8F4:
@@ -24164,7 +24164,7 @@ _081D2F2C:
 	adds r4, r5, 0x5
 	lsls r0, r7, 24
 	lsrs r0, 24
-	bl sav3_get_box_name
+	bl GetBoxNamePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 _081D2F3A:
@@ -27356,7 +27356,7 @@ _081D4870:
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088E64
+	bl MetatileBehavior_IsPokeGrass
 	lsls r0, 24
 	lsrs r0, 24
 _081D4888:

@@ -202,14 +202,14 @@ gUnknown_0831ACA0:: @ 831ACA0
 gUnknown_0831ACE0:: @ 831ACE0
 	.incbin "baserom.gba", 0x31ace0, 0x8
 
-gUnknown_0831ACE8:: @ 831ACE8
+gTypeEffectiveness:: @ 831ACE8
 	.incbin "baserom.gba", 0x31ace8, 0x150
 
 @ 831AE38
 	.include "data/text/type_names.inc"
 
 	.align 2
-gUnknown_0831AEB8:: @ 831AEB8
+gTrainerMoneyTable:: @ 831AEB8
 	.incbin "baserom.gba", 0x31aeb8, 0xe0
 
 @ 831AF98

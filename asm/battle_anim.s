@@ -949,17 +949,17 @@ _080A4148:
 	ldrsh r0, [r6, r3]
 	cmp r0, 0
 	bne _080A4190
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	ldrh r0, [r0]
 	strh r0, [r1, 0xE]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	b _080A4198
 	.pool
 _080A4190:
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	ldrh r0, [r0]
 	strh r0, [r1, 0xE]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 _080A4198:
 	ldrh r0, [r0]
 	strh r0, [r1, 0x10]
@@ -1266,7 +1266,7 @@ _080A43F8:
 	ldr r0, =gBankSpriteIds
 	adds r0, r6, r0
 	ldrb r4, [r0]
-	ldr r5, =gUnknown_02022E18
+	ldr r5, =gBattle_BG1_X
 	ldr r0, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
@@ -1294,7 +1294,7 @@ _080A43F8:
 	subs r0, 0x1
 	strh r0, [r5]
 _080A447A:
-	ldr r5, =gUnknown_02022E1A
+	ldr r5, =gBattle_BG1_Y
 	ldr r2, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
@@ -1322,7 +1322,7 @@ _080A447A:
 	orrs r1, r2
 	strb r1, [r0]
 _080A44B0:
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
@@ -1431,7 +1431,7 @@ _080A455E:
 	ldr r0, =gBankSpriteIds
 	adds r2, r5, r0
 	ldrb r4, [r2]
-	ldr r5, =gUnknown_02022E1C
+	ldr r5, =gBattle_BG2_X
 	ldr r3, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
@@ -1443,7 +1443,7 @@ _080A455E:
 	negs r0, r0
 	adds r0, 0x20
 	strh r0, [r5]
-	ldr r4, =gUnknown_02022E1E
+	ldr r4, =gBattle_BG2_Y
 	ldrh r0, [r1, 0x26]
 	ldrh r1, [r1, 0x22]
 	adds r0, r1
@@ -1653,19 +1653,19 @@ sub_80A477C: @ 80A477C
 _080A479C:
 	movs r0, 0x1
 	bl sub_80A6C68
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r1, [r0]
 	b _080A47C6
 	.pool
 _080A47B8:
 	movs r0, 0x2
 	bl sub_80A6C68
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r4, [r0]
 _080A47C6:
 	add sp, 0x10
@@ -1714,13 +1714,13 @@ task_pA_ma0A_obj_to_bg_pal: @ 80A47D8
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _080A4870
-	ldr r1, =gUnknown_02022E18
+	ldr r1, =gBattle_BG1_X
 	lsls r0, r3, 16
 	asrs r0, 16
 	ldrh r3, [r5, 0xE]
 	adds r0, r3
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1A
+	ldr r1, =gBattle_BG1_Y
 	lsls r0, r2, 16
 	asrs r0, 16
 	ldrh r5, [r5, 0x10]
@@ -1740,13 +1740,13 @@ task_pA_ma0A_obj_to_bg_pal: @ 80A47D8
 	b _080A4896
 	.pool
 _080A4870:
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	lsls r0, r3, 16
 	asrs r0, 16
 	ldrh r3, [r5, 0xE]
 	adds r0, r3
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	lsls r0, r2, 16
 	asrs r0, 16
 	ldrh r5, [r5, 0x10]
