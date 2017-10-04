@@ -2632,6 +2632,42 @@ void sub_80EE8C8(u16 a0, u8 a1)
     }
 }
 
+void sub_80EEA70(void)
+{
+    void sub_80E980C(void);
+    TVShow *show;
+    u8 strbuf[32];
+
+    if (IsShowAlreadyOnTheAir(TVSHOW_SECRET_BASE_SECRETS, FALSE) != TRUE)
+    {
+        sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+        if (sCurTVShowSlot != -1)
+        {
+            show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+            show->secretBaseSecrets.kind = TVSHOW_SECRET_BASE_SECRETS;
+            show->secretBaseSecrets.active = FALSE;
+            StringCopy(show->secretBaseSecrets.playerName, gSaveBlock2Ptr->playerName);
+            show->secretBaseSecrets.unk02 = VarGet(0x40ec);
+            sub_80E980C();
+            StringCopy(strbuf, gStringVar1);
+            StripExtCtrlCodes(strbuf);
+            StringCopy(show->secretBaseSecrets.unk04, strbuf);
+            show->secretBaseSecrets.unk10 = VarGet(0x40ed);
+            show->secretBaseSecrets.unk0c = VarGet(0x40ee) + (VarGet(0x40ef) << 16);
+            tv_store_id_3x(show);
+            show->secretBaseSecrets.language = gGameLanguage;
+            if (show->secretBaseSecrets.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].language == LANGUAGE_JAPANESE)
+            {
+                show->secretBaseSecrets.pokemonNameLanguage = LANGUAGE_JAPANESE;
+            }
+            else
+            {
+                show->secretBaseSecrets.pokemonNameLanguage = gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].language;
+            }
+        }
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)

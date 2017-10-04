@@ -448,7 +448,14 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        // TODO: flesh this out
+        /*0x02*/ u16 unk02;
+        /*0x04*/ u8 unk04[8];
+        /*0x0c*/ u32 unk0c;
+        /*0x10*/ u16 unk10;
+        /*0x12*/ u8 filler_12[1];
+        /*0x13*/ u8 playerName[8];
+        /*0x1b*/ u8 language;
+        /*0x1c*/ u8 pokemonNameLanguage;
     } secretBaseSecrets;
 
     // TVSHOW_SAFARI_FAN_CLUB
