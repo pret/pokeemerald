@@ -426,7 +426,15 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        // TODO: flesh this out
+        /*0x02*/ u16 unk02;
+        /*0x04*/ u16 species1;
+        /*0x06*/ u16 species2;
+        /*0x08*/ u16 species3;
+        /*0x0a*/ u16 species4;
+        /*0x0c*/ u8 language;
+        /*0x0d*/ u8 unk0d;
+        /*0x0e*/ u8 filler_0e[5];
+        /*0x13*/ u8 playerName[8];
     } frontier;
 
     // TVSHOW_NUMBER_ONE

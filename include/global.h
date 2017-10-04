@@ -206,7 +206,7 @@ struct SaveBlock2
     /*0xBE3*/ u8 filler_BEC[189];
     /*0xCA9*/ u8 frontierChosenLvl : 2;
     /*0xCA9*/ u8 field_CA9_a : 6;
-    /*0xCAA*/ u8 field_CAA[0x5c];
+    /*0xCAA*/ u16 field_CAA[0x2e];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
     /*0xd08*/ u8 filler_D08[0x112];

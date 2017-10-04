@@ -2583,6 +2583,55 @@ bool8 sub_80EE818(void)
     return TRUE;
 }
 
+void sub_80EE8C8(u16 a0, u8 a1)
+{
+    TVShow *show;
+
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->frontier.kind = TVSHOW_FRONTIER;
+        show->frontier.active = FALSE;
+        StringCopy(show->frontier.playerName, gSaveBlock2Ptr->playerName);
+        show->frontier.unk02 = a0;
+        show->frontier.unk0d = a1;
+        switch (a1)
+        {
+            case  1:
+            case  5:
+            case  6:
+            case  7:
+            case  8:
+            case  9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+                show->frontier.species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
+                show->frontier.species3 = GetMonData(&gPlayerParty[2], MON_DATA_SPECIES, NULL);
+                break;
+            case 2:
+                show->frontier.species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
+                show->frontier.species3 = GetMonData(&gPlayerParty[2], MON_DATA_SPECIES, NULL);
+                show->frontier.species4 = GetMonData(&gPlayerParty[3], MON_DATA_SPECIES, NULL);
+                break;
+            case 3:
+                show->frontier.species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
+                break;
+            case 4:
+                show->frontier.species1 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->field_CAA[0] - 1], MON_DATA_SPECIES, NULL);
+                show->frontier.species2 = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->field_CAA[1] - 1], MON_DATA_SPECIES, NULL);
+                break;
+        }
+        tv_store_id_3x(show);
+        show->frontier.language = gGameLanguage;
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
