@@ -207,10 +207,10 @@ gUnknown_08C2EA9C:: @ 8C2EA9C
 	.incbin "baserom.gba", 0xc2ea9c, 0xf6c
 
 @ 8C2FA08
-	.include "data/graphics/pokemon/mon_graphics.inc"
+	.include "data/graphics/pokemon/graphics.inc"
 
 @ 8D51DC8
-	.include "data/graphics/trainers/trainer_graphics.inc"
+	.include "data/graphics/trainers/graphics.inc"
 
 	.align 2
 gMonIcon_QuestionMark:: @ 8D774D0

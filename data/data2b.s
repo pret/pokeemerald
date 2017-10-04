@@ -3451,7 +3451,7 @@ gUnknown_08300D38:: @ 8300D38
 	.byte 0x35, 0x0d, 0x00, 0x00
 
 @ 8301418
-	.include "data/graphics/pokemon/mon_still_front_pic_table.inc"
+	.include "data/graphics/pokemon/still_front_pic_table.inc"
 
 	.align 2
 gUnknown_083021D8:: @ 83021D8
@@ -3897,13 +3897,13 @@ gUnknown_083021D8:: @ 83021D8
 	.byte 0x47, 0x06, 0x00, 0x00
 
 @ 83028B8
-	.include "data/graphics/pokemon/mon_back_pic_table.inc"
+	.include "data/graphics/pokemon/back_pic_table.inc"
 
 @ 8303678
-	.include "data/graphics/pokemon/mon_palette_table.inc"
+	.include "data/graphics/pokemon/palette_table.inc"
 
 @ 8304438
-	.include "data/graphics/pokemon/mon_shiny_palette_table.inc"
+	.include "data/graphics/pokemon/shiny_palette_table.inc"
 
 gUnknown_083051F8:: @ 83051F8
 	.4byte gUnknown_082FF538
@@ -4376,10 +4376,10 @@ gUnknown_0830536C:: @ 830536C
 	.include "data/graphics/trainers/front_pic_coords.inc"
 
 @ 8305654
-	.include "data/graphics/trainers/trainer_front_pic_table.inc"
+	.include "data/graphics/trainers/front_pic_table.inc"
 
 @ 830593C
-	.include "data/graphics/trainers/trainer_front_pic_palette_table.inc"
+	.include "data/graphics/trainers/front_pic_palette_table.inc"
 
 gUnknown_08305C24:: @ 8305C24
 	.2byte 0x0000, 0x0018, 0x0001, 0x0009, 0x0002, 0x0018, 0x0000, 0x0009
@@ -4470,10 +4470,10 @@ gUnknown_08305D0C:: @ 8305D0C
 	.include "data/graphics/trainers/back_pic_coords.inc"
 
 @ 8305D4C
-	.include "data/graphics/trainers/trainer_back_pic_table.inc"
+	.include "data/graphics/trainers/back_pic_table.inc"
 
 @ 8305D8C
-	.include "data/graphics/trainers/trainer_back_pic_palette_table.inc"
+	.include "data/graphics/trainers/back_pic_palette_table.inc"
 
 @ 8305DCC
 	.include "data/enemy_mon_elevation.inc"
@@ -4484,7 +4484,7 @@ gUnknown_08309AAC:: @ 8309AAC
 	.incbin "baserom.gba", 0x309aac, 0x6e0
 
 @ 830A18C
-	.include "data/graphics/pokemon/mon_front_pic_table.inc"
+	.include "data/graphics/pokemon/front_pic_table.inc"
 
 @ 830AF4C
 	.4byte 0x00000888, 0x00000888, 0x00000888, 0x00000888
