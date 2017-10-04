@@ -2670,7 +2670,7 @@ void sub_80EEA70(void)
 
 static void sub_80EEB98(u16 days)
 {
-    void sub_80EEBF4(u8);
+    static void sub_80EEBF4(u8);
     u8 i;
 
     for (i = 0; i < ARRAY_COUNT(gUnknown_0858D0EC); i ++)
@@ -2684,6 +2684,25 @@ static void sub_80EEB98(u16 days)
     for (i = 0; i < ARRAY_COUNT(gUnknown_0858D0EC); i ++)
     {
         VarSet(gUnknown_0858D0EC[i][0], 0);
+    }
+}
+
+static void sub_80EEBF4(u8 a0)
+{
+    TVShow *show;
+
+    IsShowAlreadyOnTheAir(TVSHOW_NUMBER_ONE, TRUE);
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->numberOne.kind = TVSHOW_NUMBER_ONE;
+        show->numberOne.active = FALSE;
+        StringCopy(show->numberOne.playerName, gSaveBlock2Ptr->playerName);
+        show->numberOne.unk04 = a0;
+        show->numberOne.unk02 = VarGet(gUnknown_0858D0EC[a0][0]);
+        tv_store_id_3x(show);
+        show->numberOne.language = gGameLanguage;
     }
 }
 
