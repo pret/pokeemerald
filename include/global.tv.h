@@ -356,7 +356,6 @@ typedef union TVShow // size = 0x24
         /*0x0e*/ u8 language;
         /*0x0f*/ u8 filler_0f[4];
         /*0x13*/ u8 playerName[8];
-        // TODO: flesh this out
     } breakingNews;
 
     // TVSHOW_SECRET_BASE_VISIT
@@ -408,7 +407,6 @@ typedef union TVShow // size = 0x24
         /*0x08*/ u8 language;
         /*0x09*/ u8 filler_09[10];
         /*0x13*/ u8 playerName[8];
-        // TODO: flesh this out
     } trainerFanClub;
 
     // TVSHOW_CUTIES

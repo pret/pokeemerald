@@ -82,6 +82,7 @@ void sub_80EF7B4(void);
 void sub_80EF7A8(void);
 u16 sub_80EFA24(u16);
 void sub_80EFA88(void);
+void sub_80EF93C(TVShow *);
 
 void TVShowDone(void);
 
@@ -2552,6 +2553,34 @@ bool8 sub_80EE7C0(void)
         return TRUE;
     }
     return FALSE;
+}
+
+bool8 sub_80EE818(void)
+{
+    u32 playerId;
+    u8 showIdx;
+    TVShow *shows;
+
+    if (IsShowAlreadyOnTheAir(TVSHOW_FRONTIER, FALSE) == TRUE)
+    {
+        shows = gSaveBlock1Ptr->tvShows;
+        playerId = player_id_to_dword();
+        for (showIdx = 5; showIdx < 24; showIdx ++)
+        {
+            if (shows[showIdx].common.kind == TVSHOW_FRONTIER && (playerId & 0xFF) == shows[showIdx].common.trainerIdLo && ((playerId >> 8) & 0xFF) == shows[showIdx].common.trainerIdHi)
+            {
+                DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, showIdx);
+                sub_80EF93C(gSaveBlock1Ptr->tvShows);
+                return TRUE;
+            }
+        }
+    }
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot == -1)
+    {
+        return FALSE;
+    }
+    return TRUE;
 }
 
 asm(".section .text.dotvshow");
