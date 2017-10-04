@@ -24,6 +24,7 @@
 #include "lilycove_lady.h"
 #include "rom6.h"
 #include "pokedex.h"
+#include "text.h"
 #include "tv.h"
 
 // Static type declarations
@@ -2532,6 +2533,25 @@ void sub_80EE72C(void)
         tv_store_id_3x(show);
         show->trainerFanClub.language = gGameLanguage;
     }
+}
+
+bool8 sub_80EE7C0(void)
+{
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot == -1)
+    {
+        return TRUE;
+    }
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_FAN_CLUB_SPECIAL);
+    if (gScriptResult == TRUE)
+    {
+        return TRUE;
+    }
+    if (gSaveBlock1Ptr->linkBattleRecords[0].name[0] == EOS)
+    {
+        return TRUE;
+    }
+    return FALSE;
 }
 
 asm(".section .text.dotvshow");

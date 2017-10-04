@@ -3,45 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EE7C0
-sub_80EE7C0: @ 80EE7C0
-	push {r4,lr}
-	ldr r4, =gSaveBlock1Ptr
-	ldr r0, [r4]
-	ldr r1, =0x000027cc
-	adds r0, r1
-	bl FindEmptyTVSlotWithinFirstFiveShowsOfArray
-	ldr r1, =sCurTVShowSlot
-	strb r0, [r1]
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _080EE810
-	movs r0, 0xB
-	bl FindActiveBroadcastByShowType_SetScriptResult
-	ldr r0, =gScriptResult
-	ldrh r0, [r0]
-	cmp r0, 0x1
-	beq _080EE810
-	ldr r0, [r4]
-	ldr r1, =0x00003150
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	beq _080EE810
-	movs r0, 0
-	b _080EE812
-	.pool
-_080EE810:
-	movs r0, 0x1
-_080EE812:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80EE7C0
-
 	thumb_func_start sub_80EE818
 sub_80EE818: @ 80EE818
 	push {r4-r7,lr}
