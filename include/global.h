@@ -556,10 +556,10 @@ struct SaveBlock1
     /*0x2BA1*/ u8 outbreakPokemonProbability;
     /*0x2BA2*/ u16 outbreakDaysLeft;
     /*0x2BA4*/ struct GabbyAndTyData gabbyAndTyData;
-    /*0x????*/ u16 unk2B1C[6];
-    /*0x????*/ u16 unk2B28[6];
-    /*0x????*/ u16 unk2B34[6];
-    /*0x????*/ u16 unk2B3A[3];
+    /*0x2BB0*/ u16 unk2BB0[6];
+    /*0x2BBC*/ u16 unk2BBC[6];
+    /*0x2BC8*/ u16 unk2BC8[6];
+    /*0x2BD4*/ u16 unk2BD4[3];
     /*0x2BE0*/ struct MailStruct mail[16];
     /*0x2E20*/ u8 additionalPhrases[5]; // bitfield for 33 additional phrases in easy chat system
     /*0x2E25*/ u8 unk2E25[3]; // possibly padding?

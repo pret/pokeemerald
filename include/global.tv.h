@@ -403,6 +403,11 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
+        /*0x02*/ u8 filler_02[2];
+        /*0x04*/ u16 unk04[2];
+        /*0x08*/ u8 language;
+        /*0x09*/ u8 filler_09[10];
+        /*0x13*/ u8 playerName[8];
         // TODO: flesh this out
     } trainerFanClub;
 
