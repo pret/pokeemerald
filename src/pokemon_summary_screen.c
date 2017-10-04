@@ -1224,38 +1224,63 @@ void sub_81C13B0(u8 taskId, u8 b)
     gTasks[taskId].func = sub_81C0F44;
 }
 
-struct struct_moveSwap
-{
-    u16 field_0;
-    u16 field_2;
-    u8 field_4;
-    u8 field_5;
-    u8 field_6;
-    u16* ptr_8;
-    u16* ptr_C;
-    u8* ptr_10;
-    u8* ptr_14;
-    u8* ptr_18;
-    u16* ptr_1C;
-    u8* ptr_20;
-    u8* ptr_24;
-};
 
-/* void sub_81C14BC(struct Pokemon *mon, u8 a, u8 b)
+/* void sub_81C14BC(struct Pokemon *mon, u8 swappingFromId, u8 swappingToId)
 {
-    struct struct_moveSwap sp;
+    u16* moveToPtr;
+    u8 r8;
     u8 r2;
-    sp.ptr_8 = &gUnknown_0203CF1C->summary.moves[a];
-    sp.ptr_1C = &sp.field_2;
-    sp.field_2 = gUnknown_0203CF1C->summary.moves[a];
-    sp.ptr_C = &gUnknown_0203CF1C->summary.moves[b];
-    sp.field_0 = gUnknown_0203CF1C->summary.moves[b];
-    sp.ptr_10 = &gUnknown_0203CF1C->summary.pp[a];
-    sp.ptr_24 = &sp.field_5;
-    sp.field_5 = gUnknown_0203CF1C->summary.pp[a];
-    sp.ptr_14 = &gUnknown_0203CF1C->summary.pp[b];
-    sp.ptr_20 = &sp.field_4;
-    sp.field_4 = gUnknown_0203CF1C->summary.pp[b];
-    sp.ptr_18 = &gUnknown_0203CF1C->summary.ppBonuses;
-    sp.field_6 = gUnknown_0203CF1C->summary.ppBonuses;
+    u8 r12;
+    u8 r1;
+    u16 localMoveTo;
+    u16 localMoveFrom;
+    u8 localPpTo;
+    u8 localPpFrom;
+    u8 localPpBonuses;
+    
+    u16* moveFromPtr;
+    u8* ppFromPtr;
+    u8* ppToPtr;
+    u8* ppBonusesPtr;
+    
+    moveFromPtr = &gUnknown_0203CF1C->summary.moves[swappingFromId];
+    localMoveFrom = *moveFromPtr;
+
+    moveToPtr = &gUnknown_0203CF1C->summary.moves[swappingToId];
+    localMoveTo = *moveToPtr;
+
+    ppFromPtr = &gUnknown_0203CF1C->summary.pp[swappingFromId];
+    localPpFrom = *ppFromPtr;
+    ppToPtr = &gUnknown_0203CF1C->summary.pp[swappingToId];
+    localPpTo = *ppToPtr;
+
+    ppBonusesPtr = &gUnknown_0203CF1C->summary.ppBonuses;
+    localPpBonuses = *ppBonusesPtr;
+
+    r8 = gUnknown_08329D22[swappingFromId];
+    r2 = (int)(localPpBonuses & r8) >> (swappingFromId << 1);
+    r12 = gUnknown_08329D22[swappingToId];
+    r1 = (int)(localPpBonuses & r12) >> (swappingToId << 1);
+    localPpBonuses &= ~r8;
+    localPpBonuses &= ~r12;
+    r2 = r2 << (swappingToId << 1);
+    r1 = r1 << (swappingFromId << 1);
+    r2 += r1;
+    localPpBonuses |= r2;
+
+    SetMonData(mon, swappingFromId + MON_DATA_MOVE1, moveToPtr);
+    SetMonData(mon, swappingToId + MON_DATA_MOVE1, moveFromPtr);
+
+    SetMonData(mon, swappingFromId + MON_DATA_PP1, ppToPtr);
+    SetMonData(mon, swappingToId + MON_DATA_PP1, ppFromPtr);
+
+    SetMonData(mon, MON_DATA_PP_BONUSES, &localPpBonuses);
+
+    *moveFromPtr = localMoveTo;
+    *moveToPtr = localMoveFrom;
+
+    *ppFromPtr = localPpTo;
+    *ppToPtr = localPpFrom;
+
+    *ppBonusesPtr = localPpBonuses;
 } */
