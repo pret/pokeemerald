@@ -2469,6 +2469,31 @@ void sub_80EE4DC(struct Pokemon *pokemon, u8 a1)
     }
 }
 
+u8 sub_80EE5A4(struct Pokemon *pokemon)
+{
+    u8 nRibbons;
+
+    nRibbons = 0;
+    nRibbons += GetMonData(pokemon, MON_DATA_COOL_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_BEAUTY_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_CUTE_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_SMART_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_TOUGH_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_CHAMPION_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_WINNING_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_VICTORY_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_ARTIST_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_EFFORT_RIBBON);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_1);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_2);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_3);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_4);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_5);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_6);
+    nRibbons += GetMonData(pokemon, MON_DATA_GIFT_RIBBON_7);
+    return nRibbons;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
