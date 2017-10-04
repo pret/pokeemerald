@@ -505,7 +505,7 @@ enum {
 typedef struct // 2b50
 {
     u8 kind;
-    u8 active;
+    u8 state;
     u16 val2;
 } PokeNews;
 

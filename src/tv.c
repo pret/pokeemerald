@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "rtc.h"
 #include "map_constants.h"
 #include "rng.h"
 #include "event_data.h"
@@ -2760,7 +2761,7 @@ void sub_80EED88(void)
             {
                 gSaveBlock1Ptr->pokeNews[sCurTVShowSlot].kind = newsKind;
                 gSaveBlock1Ptr->pokeNews[sCurTVShowSlot].val2 = 4;
-                gSaveBlock1Ptr->pokeNews[sCurTVShowSlot].active = TRUE;
+                gSaveBlock1Ptr->pokeNews[sCurTVShowSlot].state = TRUE;
             }
         }
     }
@@ -2793,8 +2794,79 @@ void ClearPokemonNews(void)
 void ClearPokemonNewsI(u8 i)
 {
     gSaveBlock1Ptr->pokeNews[i].kind = POKENEWS_NONE;
-    gSaveBlock1Ptr->pokeNews[i].active = FALSE;
+    gSaveBlock1Ptr->pokeNews[i].state = FALSE;
     gSaveBlock1Ptr->pokeNews[i].val2 = 0;
+}
+
+void sub_80EEEB8(void)
+{
+    u8 i;
+    u8 j;
+
+    for (i = 0; i < 15; i ++)
+    {
+        if (gSaveBlock1Ptr->pokeNews[i].kind == POKENEWS_NONE)
+        {
+            for (j = i + 1; j < 16; j ++)
+            {
+                if (gSaveBlock1Ptr->pokeNews[j].kind != POKENEWS_NONE)
+                {
+                    gSaveBlock1Ptr->pokeNews[i] = gSaveBlock1Ptr->pokeNews[j];
+                    ClearPokemonNewsI(j);
+                    break;
+                }
+            }
+        }
+    }
+}
+
+u8 FindAnyTVNewsOnTheAir(void)
+{
+    u8 i;
+
+    for (i = 0; i < 16; i ++)
+    {
+        if (gSaveBlock1Ptr->pokeNews[i].kind != POKENEWS_NONE && gSaveBlock1Ptr->pokeNews[i].state == TRUE && gSaveBlock1Ptr->pokeNews[i].val2 < 3)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void sub_80EEF6C(void)
+{
+    u8 i;
+    u16 n;
+
+    i = FindAnyTVNewsOnTheAir();
+    if (i == 0xFF)
+    {
+        gScriptResult = FALSE;
+    }
+    else
+    {
+        if (gSaveBlock1Ptr->pokeNews[i].val2 == 0)
+        {
+            gSaveBlock1Ptr->pokeNews[i].state = 2;
+            if (gLocalTime.hours < 20)
+            {
+                ShowFieldMessage(gUnknown_0858D11C[gSaveBlock1Ptr->pokeNews[i].kind]);
+            }
+            else
+            {
+                ShowFieldMessage(gUnknown_0858D130[gSaveBlock1Ptr->pokeNews[i].kind]);
+            }
+        }
+        else
+        {
+            n = gSaveBlock1Ptr->pokeNews[i].val2;
+            ConvertIntToDecimalStringN(gStringVar1, n, STR_CONV_MODE_LEFT_ALIGN, 1);
+            gSaveBlock1Ptr->pokeNews[i].state = 0;
+            ShowFieldMessage(gUnknown_0858D108[gSaveBlock1Ptr->pokeNews[i].kind]);
+        }
+        gScriptResult = TRUE;
+    }
 }
 
 asm(".section .text.dotvshow");
