@@ -2390,6 +2390,37 @@ void sub_80EE2CC(void)
     }
 }
 
+void sub_80EE35C(u16 a0, u16 a1, u8 a2, const u16 *a3, u16 a4)
+{
+    TVShow *show;
+    u8 i;
+    u8 j;
+
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_BATTLE_SEMINAR, 0) != 1)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->battleSeminar.kind = TVSHOW_BATTLE_SEMINAR;
+        show->battleSeminar.active = FALSE;
+        StringCopy(show->battleSeminar.playerName, gSaveBlock2Ptr->playerName);
+        show->battleSeminar.unk04 = a0;
+        show->battleSeminar.unk06 = a1;
+        show->battleSeminar.unk02 = a3[a2];
+        for (i = 0, j = 0; i < 4; i ++)
+        {
+            if (i != a2 && a3[i])
+            {
+                show->battleSeminar.unk08[j] = a3[i];
+                j ++;
+            }
+        }
+        show->battleSeminar.unk10 = j;
+        show->battleSeminar.unk0e = a4;
+        tv_store_id_3x(show);
+        show->battleSeminar.language = gGameLanguage;
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
