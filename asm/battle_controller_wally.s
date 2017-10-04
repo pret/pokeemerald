@@ -3039,7 +3039,7 @@ sub_8169EC8: @ 8169EC8
 	movs r0, 0x6
 	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 	ldrb r1, [r1, 0x18]
 	movs r2, 0x8
 	subs r2, r1
@@ -3124,7 +3124,7 @@ dp01t_07_6_: @ 8169F94
 	movs r0, 0x6
 	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 	ldrb r1, [r1, 0x18]
 	movs r2, 0x8
 	subs r2, r1

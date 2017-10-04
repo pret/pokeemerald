@@ -1768,12 +1768,26 @@ gText_SafariBalls:: @ 85CCB2C
 gText_SafariBallLeft:: @ 85CCB3C
 	.string "{HIGHLIGHT DARK_GREY}Left: $"
 	.string "{HIGHLIGHT DARK_GREY}$"
+
+gText_Sleep:: @ 85CCB50
 	.string "sleep$"
+
+gText_Poison:: @ 85CCB4A
 	.string "poison$"
+
+gText_Burn:: @ 85CCB5C
 	.string "burn$"
+
+gText_Paralysis:: @ 85CCB57
 	.string "paralysis$"
+
+gText_Ice:: @ 85CCB66
 	.string "ice$"
+
+gText_Confusion:: @ 85CCB98
 	.string "confusion$"
+
+gText_Love:: @ 85CCBA0
 	.string "love$"
 
 gText_SpaceAndSpace:: @ 85CCB79

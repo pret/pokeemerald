@@ -323,6 +323,8 @@ SECTIONS {
         src/string_util.o(.rodata);
         data/link.o(.rodata);
         src/rtc.o(.rodata);
+        data/main_menu.o(.rodata);
+        data/battle_1.o(.rodata);
         data/data2b.o(.rodata);
         src/battle_script_commands.o(.rodata);
         data/battle_controller_player.o(.rodata);

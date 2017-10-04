@@ -4182,7 +4182,7 @@ sub_81BD37C: @ 81BD37C
 	movs r4, 0x7
 	movs r0, 0x5A
 	mov r9, r0
-	ldr r0, =gUnknown_08305D2C
+	ldr r0, =gTrainerBackPicCoords
 	ldrb r1, [r0, 0x1C]
 	b _081BD3BE
 	.pool
@@ -4193,7 +4193,7 @@ _081BD3A8:
 	lsrs r4, r0, 24
 	movs r0, 0x20
 	mov r9, r0
-	ldr r1, =gUnknown_083054E0
+	ldr r1, =gTrainerFrontPicCoords
 	lsls r0, r4, 2
 	adds r0, r1
 	ldrb r1, [r0]

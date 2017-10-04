@@ -4033,14 +4033,14 @@ _0818BD72:
 	beq _0818BD9C
 	movs r0, 0x5A
 	mov r9, r0
-	ldr r1, =gUnknown_083054E0
+	ldr r1, =gTrainerFrontPicCoords
 	b _0818BD9E
 	.pool
 _0818BD98:
 	movs r0, 0x50
 	mov r9, r0
 _0818BD9C:
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 _0818BD9E:
 	lsls r0, r4, 2
 	adds r0, r1

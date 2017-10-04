@@ -52,12 +52,12 @@ gOamData_855077C:: @ 855077C
 
 	.align 2
 gSpriteImageTable_8550784:: @ 8550784
-	obj_tiles gEmotion_ExclamationMarkGfx, 0x0080, 0x0000
-	obj_tiles gEmotion_QuestionMarkGfx, 0x0080, 0x0000
+	obj_frame_tiles gEmotion_ExclamationMarkGfx, 0x0080
+	obj_frame_tiles gEmotion_QuestionMarkGfx, 0x0080
 
 	.align 2
 gSpriteImageTable_8550794:: @ 8550794
-	obj_tiles gEmotion_HeartGfx, 0x0080, 0x0000
+	obj_frame_tiles gEmotion_HeartGfx, 0x0080
 
 	.align 2
 gSpriteAnim_855079C:: @ 855079C
