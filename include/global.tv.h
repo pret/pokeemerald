@@ -494,12 +494,20 @@ typedef union TVShow // size = 0x24
     } massOutbreak;
 } TVShow;
 
-struct PokemonNewsData // 2b50
-{
-    u8 val0;
-    u8 val1;
-    u16 val2;
+enum {
+    POKENEWS_NONE,
+    POKENEWS_ONE,
+    POKENEWS_TWO,
+    POKENEWS_THREE,
+    POKENEWS_FOUR
 };
+
+typedef struct // 2b50
+{
+    u8 kind;
+    u8 active;
+    u16 val2;
+} PokeNews;
 
 struct GabbyAndTyData
 {

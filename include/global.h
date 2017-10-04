@@ -545,7 +545,7 @@ struct SaveBlock1
     /*0x????*/ u8 decorCushion[10];
     /*0x27CA*/ u8 padding_27CA[2];
     /*0x27CC*/ TVShow tvShows[25];
-    /*0x2B50*/ struct PokemonNewsData pokeNews[16];
+    /*0x2B50*/ PokeNews pokeNews[16];
     /*0x2B90*/ u16 outbreakPokemonSpecies;
     /*0x2B92*/ u8 outbreakLocationMapNum;
     /*0x2B93*/ u8 outbreakLocationMapGroup;

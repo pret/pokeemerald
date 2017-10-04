@@ -29,6 +29,8 @@
 
 // Static type declarations
 
+#define rbernoulli(num, den) TV_BernoulliTrial(0xFFFF * (num) / (den))
+
 // Static RAM declarations
 
 s8 sCurTVShowSlot;
@@ -83,6 +85,9 @@ void sub_80EF7A8(void);
 u16 sub_80EFA24(u16);
 void sub_80EFA88(void);
 void sub_80EF93C(TVShow *);
+s8 sub_80EEE30(PokeNews *);
+bool8 sub_80EF0E4(u16);
+void ClearPokemonNewsI(u8);
 
 void TVShowDone(void);
 
@@ -1046,7 +1051,7 @@ void PutPokemonTodayCaughtOnAir(void)
     else
     {
         UpdateWorldOfMastersAndPutItOnTheAir();
-        if (!TV_BernoulliTrial(-1) && StringCompare(gSpeciesNames[gBattleResults.caughtMonSpecies], gBattleResults.caughtMonNick))
+        if (!rbernoulli(1, 1) && StringCompare(gSpeciesNames[gBattleResults.caughtMonSpecies], gBattleResults.caughtMonNick))
         {
             sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
             if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_POKEMON_TODAY_CAUGHT, FALSE) != TRUE)
@@ -1117,7 +1122,7 @@ static void PutPokemonTodayFailedOnTheAir(void)
     u8 i;
     TVShow *show;
 
-    if (!TV_BernoulliTrial(-1))
+    if (!rbernoulli(1, 1))
     {
         for (i = 0, ct = 0; i < 11; i ++)
         {
@@ -1497,7 +1502,7 @@ void SaveRecordedItemPurchasesForTVShow(void)
     TVShow *show;
     u8 i;
 
-    if (!(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_TRAINER_HILL_LOBBY && gSaveBlock1Ptr->location.mapNum == MAP_ID_TRAINER_HILL_LOBBY) && !(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_BATTLE_FRONTIER_MART && gSaveBlock1Ptr->location.mapNum == MAP_ID_BATTLE_FRONTIER_MART) && !TV_BernoulliTrial(0x5555))
+    if (!(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_TRAINER_HILL_LOBBY && gSaveBlock1Ptr->location.mapNum == MAP_ID_TRAINER_HILL_LOBBY) && !(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_BATTLE_FRONTIER_MART && gSaveBlock1Ptr->location.mapNum == MAP_ID_BATTLE_FRONTIER_MART) && !rbernoulli(1, 3))
     {
         sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
         if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_SMART_SHOPPER, FALSE) != TRUE)
@@ -1662,7 +1667,7 @@ static void sub_80ED718(void)
                 return;
             }
         }
-        if (!TV_BernoulliTrial(0x0147))
+        if (!rbernoulli(1, 200))
         {
             sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
             if (sCurTVShowSlot != -1)
@@ -1839,7 +1844,7 @@ static void sub_80EDA80(void)
     TVShow *show2;
 
     show = &gSaveBlock1Ptr->tvShows[24];
-    if (!TV_BernoulliTrial(0xFFFF))
+    if (!rbernoulli(1, 1))
     {
         sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
         if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_WORLD_OF_MASTERS, FALSE) != TRUE)
@@ -2739,6 +2744,57 @@ void sub_80EED34(void)
 void sub_80EED60(u16 delta)
 {
     VarSet(0x40F1, VarGet(0x40F1) + delta);
+}
+
+void sub_80EED88(void)
+{
+    u16 newsKind;
+
+    if (FlagGet(SYS_GAME_CLEAR))
+    {
+        sCurTVShowSlot = sub_80EEE30(gSaveBlock1Ptr->pokeNews);
+        if (sCurTVShowSlot != -1 && rbernoulli(1, 100) != TRUE)
+        {
+            newsKind = (Random() % 4) + POKENEWS_ONE;
+            if (sub_80EF0E4(newsKind) != TRUE)
+            {
+                gSaveBlock1Ptr->pokeNews[sCurTVShowSlot].kind = newsKind;
+                gSaveBlock1Ptr->pokeNews[sCurTVShowSlot].val2 = 4;
+                gSaveBlock1Ptr->pokeNews[sCurTVShowSlot].active = TRUE;
+            }
+        }
+    }
+}
+
+s8 sub_80EEE30(PokeNews *pokeNews)
+{
+    s8 i;
+
+    for (i = 0; i < 16; i ++)
+    {
+        if (pokeNews[i].kind == 0)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void ClearPokemonNews(void)
+{
+    u8 i;
+
+    for (i = 0; i < 16; i ++)
+    {
+        ClearPokemonNewsI(i);
+    }
+}
+
+void ClearPokemonNewsI(u8 i)
+{
+    gSaveBlock1Ptr->pokeNews[i].kind = POKENEWS_NONE;
+    gSaveBlock1Ptr->pokeNews[i].active = FALSE;
+    gSaveBlock1Ptr->pokeNews[i].val2 = 0;
 }
 
 asm(".section .text.dotvshow");
