@@ -2706,6 +2706,41 @@ static void sub_80EEBF4(u8 a0)
     }
 }
 
+void sub_80EEC80(void)
+{
+    VarSet(0x40E6, VarGet(0x40E6) + 1);
+}
+
+void sub_80EECA4(void)
+{
+    VarSet(0x40EB, VarGet(0x40EB) + 1);
+}
+
+void sub_80EECC8(void)
+{
+    VarSet(0x40E7, VarGet(0x40E7) + 1);
+}
+
+void sub_80EECEC(void)
+{
+    VarSet(0x40E8, VarGet(0x40E8) + 1);
+}
+
+void sub_80EED10(void)
+{
+    VarSet(0x40E9, VarGet(0x40E9) + 1);
+}
+
+void sub_80EED34(void)
+{
+    VarSet(0x40EA, VarGet(0x40EA) + gSpecialVar_0x8006);
+}
+
+void sub_80EED60(u16 delta)
+{
+    VarSet(0x40F1, VarGet(0x40F1) + delta);
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
