@@ -3,53 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EEB98
-sub_80EEB98: @ 80EEB98
-	push {r4-r7,lr}
-	movs r5, 0
-	ldr r6, =gUnknown_0858D0EC
-	adds r7, r6, 0x2
-	b _080EEBAE
-	.pool
-_080EEBA8:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-_080EEBAE:
-	cmp r5, 0x6
-	bhi _080EEBCE
-	lsls r4, r5, 2
-	adds r0, r4, r6
-	ldrh r0, [r0]
-	bl VarGet
-	adds r4, r7
-	lsls r0, 16
-	lsrs r0, 16
-	ldrh r4, [r4]
-	cmp r0, r4
-	bcc _080EEBA8
-	adds r0, r5, 0
-	bl sub_80EEBF4
-_080EEBCE:
-	movs r5, 0
-	ldr r4, =gUnknown_0858D0EC
-_080EEBD2:
-	lsls r0, r5, 2
-	adds r0, r4
-	ldrh r0, [r0]
-	movs r1, 0
-	bl VarSet
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x6
-	bls _080EEBD2
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80EEB98
-
 	thumb_func_start sub_80EEBF4
 sub_80EEBF4: @ 80EEBF4
 	push {r4,r5,lr}

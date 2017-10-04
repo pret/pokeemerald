@@ -1716,7 +1716,7 @@ void sub_80ED888(u16 days)
     static void UpdateMassOutbreakTimeLeft(u16);
     void sub_80EF120(u16);
     static void sub_80EDA48(u16);
-    void sub_80EEB98(u16);
+    static void sub_80EEB98(u16);
 
     sub_80ED8B4(days);
     UpdateMassOutbreakTimeLeft(days);
@@ -2634,7 +2634,7 @@ void sub_80EE8C8(u16 a0, u8 a1)
 
 void sub_80EEA70(void)
 {
-    void sub_80E980C(void);
+    static void sub_80E980C(void);
     TVShow *show;
     u8 strbuf[32];
 
@@ -2665,6 +2665,25 @@ void sub_80EEA70(void)
                 show->secretBaseSecrets.pokemonNameLanguage = gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].language;
             }
         }
+    }
+}
+
+static void sub_80EEB98(u16 days)
+{
+    void sub_80EEBF4(u8);
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(gUnknown_0858D0EC); i ++)
+    {
+        if (VarGet(gUnknown_0858D0EC[i][0]) >= gUnknown_0858D0EC[i][1])
+        {
+            sub_80EEBF4(i);
+            break;
+        }
+    }
+    for (i = 0; i < ARRAY_COUNT(gUnknown_0858D0EC); i ++)
+    {
+        VarSet(gUnknown_0858D0EC[i][0], 0);
     }
 }
 
