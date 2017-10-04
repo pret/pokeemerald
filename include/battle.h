@@ -161,6 +161,20 @@
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
+#define ACTION_USE_MOVE             0
+#define ACTION_USE_ITEM             1
+#define ACTION_SWITCH               2
+#define ACTION_RUN                  3
+#define ACTION_WATCHES_CAREFULLY    4
+#define ACTION_SAFARI_ZONE_BALL     5
+#define ACTION_POKEBLOCK_CASE       6
+#define ACTION_GO_NEAR              7
+#define ACTION_SAFARI_ZONE_RUN      8
+#define ACTION_9                    9
+#define ACTION_CANCEL_PARTNER       12
+#define ACTION_NOTHING_FAINTED      13
+#define ACTION_INIT_VALUE           0xFF
+
 #define ABILITYEFFECT_ON_SWITCHIN               0x0
 #define ABILITYEFFECT_ENDTURN                   0x1
 #define ABILITYEFFECT_MOVES_BLOCK               0x2
@@ -232,6 +246,7 @@
 #define SPRITES_INIT_STATE1     0x1 // shares the Id as well
 #define SPRITES_INIT_STATE2     0x2
 #define MOVE_EFFECT_BYTE        0x3
+#define ACTIONS_CONFIRMED_COUNT 0x4
 #define MULTISTRING_CHOOSER     0x5
 #define MSG_DISPLAY             0x7
 #define BATTLE_COMMUNICATION_ENTRIES_COUNT  0x8
@@ -601,7 +616,7 @@ struct BattleStruct
     u16 expValue;
     u8 field_52;
     u8 sentInPokes;
-    u8 field_54[4];
+    bool8 selectionScriptFinished[BATTLE_BANKS_COUNT];
     u8 field_58[4];
     u8 field_5C[4];
     u8 field_60[4][3];
@@ -615,8 +630,8 @@ struct BattleStruct
     u8 field_7D;
     u8 field_7E;
     u8 formToChangeInto;
-    u8 chosenMovesIds[4];
-    u8 field_84[4];
+    u8 chosenMovesIds[BATTLE_BANKS_COUNT];
+    u8 stateIdAfterSelScript[BATTLE_BANKS_COUNT];
     u8 field_88;
     u8 field_89;
     u8 field_8A;
@@ -890,8 +905,8 @@ bool8 CanRunFromBattle(u8 bank);
 bool8 IsRunningFromBattleImpossible(void);
 void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
 void PressurePPLoseOnUsingImprision(u8 bankAtk);
-u8 GetWhoStrikesFirst(u8 bankAtk, u8 bankDef, bool8 ignoreChosenMoves);
-void sub_803CEDC(u8, u8);
+u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves);
+void SwapTurnOrder(u8, u8);
 void BattleTurnPassed(void);
 
 // battle_3

@@ -32,7 +32,7 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
 extern u16 gBattleWeather;
-extern u8 gTurnOrder[BATTLE_BANKS_COUNT];
+extern u8 gBanksByTurnOrder[BATTLE_BANKS_COUNT];
 extern u16 gSideAffecting[];
 extern u8 gBattleCommunication[];
 extern void (*gBattleMainFunc)(void);
@@ -404,15 +404,15 @@ u8 UpdateTurnCounters(void)
         case 0:
             for (i = 0; i < gNoOfAllBanks; i++)
             {
-                gTurnOrder[i] = i;
+                gBanksByTurnOrder[i] = i;
             }
             for (i = 0; i < gNoOfAllBanks - 1; i++)
             {
                 s32 j;
                 for (j = i + 1; j < gNoOfAllBanks; j++)
                 {
-                    if (GetWhoStrikesFirst(gTurnOrder[i], gTurnOrder[j], 0))
-                        sub_803CEDC(i, j);
+                    if (GetWhoStrikesFirst(gBanksByTurnOrder[i], gBanksByTurnOrder[j], 0))
+                        SwapTurnOrder(i, j);
                 }
             }
 
@@ -537,7 +537,7 @@ u8 UpdateTurnCounters(void)
         case 5:
             while (gBattleStruct->turnSideTracker < gNoOfAllBanks)
             {
-                gActiveBank = gTurnOrder[gBattleStruct->turnSideTracker];
+                gActiveBank = gBanksByTurnOrder[gBattleStruct->turnSideTracker];
                 if (gWishFutureKnock.wishCounter[gActiveBank] != 0
                  && --gWishFutureKnock.wishCounter[gActiveBank] == 0
                  && gBattleMons[gActiveBank].hp != 0)
@@ -649,7 +649,7 @@ u8 TurnBasedEffects(void)
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
     while (gBattleStruct->turnEffectsBank < gNoOfAllBanks && gBattleStruct->turnEffectsTracker <= TURNBASED_MAX_CASE)
     {
-        gActiveBank = gBankAttacker = gTurnOrder[gBattleStruct->turnEffectsBank];
+        gActiveBank = gBankAttacker = gBanksByTurnOrder[gBattleStruct->turnEffectsBank];
         if (gAbsentBankFlags & gBitTable[gActiveBank])
         {
             gBattleStruct->turnEffectsBank++;
@@ -1018,7 +1018,7 @@ bool8 sub_8041364(void)
     case 1:
         while (gBattleStruct->field_1A1 < gNoOfAllBanks)
         {
-            gActiveBank = gBankAttacker = gTurnOrder[gBattleStruct->field_1A1];
+            gActiveBank = gBankAttacker = gBanksByTurnOrder[gBattleStruct->field_1A1];
             if (gAbsentBankFlags & gBitTable[gActiveBank])
             {
                 gBattleStruct->field_1A1++;

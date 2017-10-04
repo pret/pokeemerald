@@ -5,951 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_803CDB8
-sub_803CDB8: @ 803CDB8
-	push {r4,r5,lr}
-	movs r3, 0
-	movs r1, 0
-	ldr r0, =gNoOfAllBanks
-	ldrb r2, [r0]
-	adds r5, r0, 0
-	cmp r3, r2
-	bge _0803CDDA
-	ldr r4, =gBattleCommunication
-_0803CDCA:
-	adds r0, r1, r4
-	ldrb r0, [r0]
-	cmp r0, 0x5
-	bne _0803CDD4
-	adds r3, 0x1
-_0803CDD4:
-	adds r1, 0x1
-	cmp r1, r2
-	blt _0803CDCA
-_0803CDDA:
-	adds r0, r3, 0x1
-	ldrb r5, [r5]
-	cmp r0, r5
-	beq _0803CDF0
-	movs r0, 0
-	b _0803CDF2
-	.pool
-_0803CDF0:
-	movs r0, 0x1
-_0803CDF2:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803CDB8
-
-	thumb_func_start sub_803CDF8
-sub_803CDF8: @ 803CDF8
-	push {r4-r7,lr}
-	ldr r7, =gActiveBank
-	ldrb r0, [r7]
-	ldr r6, =gBattleStruct
-	ldr r1, [r6]
-	adds r1, r0, r1
-	adds r1, 0x5C
-	ldr r4, =gBattleBufferB
-	lsls r0, 9
-	adds r2, r4, 0x1
-	adds r0, r2
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldrb r0, [r7]
-	lsls r1, r0, 9
-	adds r1, r2
-	ldrb r1, [r1]
-	bl RecordedBattle_SetBankAction
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x42
-	ands r0, r1
-	cmp r0, 0x42
-	bne _0803CEC6
-	ldrb r0, [r7]
-	ldr r2, [r6]
-	lsls r1, r0, 1
-	adds r1, r0
-	adds r1, r2
-	adds r1, 0x60
-	ldrb r2, [r1]
-	movs r0, 0xF
-	ands r0, r2
-	strb r0, [r1]
-	ldrb r0, [r7]
-	ldr r2, [r6]
-	lsls r1, r0, 1
-	adds r1, r0
-	adds r1, r2
-	adds r1, 0x60
-	lsls r0, 9
-	adds r5, r4, 0x2
-	adds r0, r5
-	ldrb r2, [r0]
-	movs r3, 0xF0
-	adds r0, r3, 0
-	ands r0, r2
-	ldrb r2, [r1]
-	orrs r0, r2
-	strb r0, [r1]
-	ldrb r1, [r7]
-	ldr r2, [r6]
-	lsls r0, r1, 1
-	adds r0, r1
-	adds r0, r2
-	adds r0, 0x61
-	lsls r1, 9
-	adds r4, 0x3
-	mov r12, r4
-	add r1, r12
-	ldrb r1, [r1]
-	strb r1, [r0]
-	ldrb r0, [r7]
-	movs r4, 0x2
-	eors r0, r4
-	ldr r2, [r6]
-	lsls r1, r0, 1
-	adds r1, r0
-	adds r1, r2
-	adds r1, 0x60
-	ldrb r2, [r1]
-	adds r0, r3, 0
-	ands r0, r2
-	strb r0, [r1]
-	ldrb r0, [r7]
-	eors r0, r4
-	ldr r2, [r6]
-	lsls r1, r0, 1
-	adds r1, r0
-	adds r1, r2
-	adds r1, 0x60
-	ldrb r0, [r7]
-	lsls r0, 9
-	adds r0, r5
-	ldrb r0, [r0]
-	ands r3, r0
-	lsrs r3, 4
-	ldrb r0, [r1]
-	orrs r3, r0
-	strb r3, [r1]
-	ldrb r0, [r7]
-	eors r4, r0
-	ldr r0, [r6]
-	lsls r1, r4, 1
-	adds r1, r4
-	adds r1, r0
-	adds r1, 0x62
-	ldrb r0, [r7]
-	lsls r0, 9
-	add r0, r12
-	ldrb r0, [r0]
-	strb r0, [r1]
-_0803CEC6:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_803CDF8
-
-	thumb_func_start sub_803CEDC
-sub_803CEDC: @ 803CEDC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r2, =gUnknown_0202407A
-	adds r4, r0, r2
-	ldrb r5, [r4]
-	adds r2, r1, r2
-	ldrb r3, [r2]
-	strb r3, [r4]
-	strb r5, [r2]
-	ldr r2, =gTurnOrder
-	adds r0, r2
-	ldrb r5, [r0]
-	adds r1, r2
-	ldrb r2, [r1]
-	strb r2, [r0]
-	strb r5, [r1]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_803CEDC
-
-	thumb_func_start GetWhoStrikesFirst
-GetWhoStrikesFirst: @ 803CF10
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0xC
-	lsls r0, 24
-	lsrs r0, 24
-	mov r9, r0
-	lsls r1, 24
-	lsrs r1, 24
-	mov r10, r1
-	lsls r2, 24
-	lsrs r2, 24
-	str r2, [sp, 0x4]
-	movs r0, 0
-	str r0, [sp, 0x8]
-	str r0, [sp]
-	movs r0, 0x13
-	movs r1, 0
-	movs r2, 0xD
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803CFD8
-	ldr r1, [sp, 0x8]
-	str r1, [sp]
-	movs r0, 0x13
-	movs r1, 0
-	movs r2, 0x4D
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803CFD8
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	mov r2, r9
-	muls r2, r0
-	adds r0, r2, 0
-	adds r0, r1
-	adds r0, 0x20
-	ldrb r3, [r0]
-	cmp r3, 0x21
-	bne _0803CF7C
-	ldr r0, =gBattleWeather
-	ldrh r1, [r0]
-	movs r0, 0x7
-	ands r0, r1
-	cmp r0, 0
-	bne _0803CF8C
-_0803CF7C:
-	cmp r3, 0x22
-	bne _0803CF98
-	ldr r0, =gBattleWeather
-	ldrh r1, [r0]
-	movs r0, 0x60
-	ands r0, r1
-	cmp r0, 0
-	beq _0803CF98
-_0803CF8C:
-	movs r3, 0x2
-	b _0803CF9A
-	.pool
-_0803CF98:
-	movs r3, 0x1
-_0803CF9A:
-	movs r0, 0x58
-	mov r1, r10
-	muls r1, r0
-	adds r0, r1, 0
-	ldr r2, =gBattleMons
-	adds r0, r2
-	adds r0, 0x20
-	ldrb r2, [r0]
-	cmp r2, 0x21
-	bne _0803CFBA
-	ldr r0, =gBattleWeather
-	ldrh r1, [r0]
-	movs r0, 0x7
-	ands r0, r1
-	cmp r0, 0
-	bne _0803CFCA
-_0803CFBA:
-	cmp r2, 0x22
-	bne _0803CFDA
-	ldr r0, =gBattleWeather
-	ldrh r1, [r0]
-	movs r0, 0x60
-	ands r0, r1
-	cmp r0, 0
-	beq _0803CFDA
-_0803CFCA:
-	movs r7, 0x2
-	b _0803CFDC
-	.pool
-_0803CFD8:
-	movs r3, 0x1
-_0803CFDA:
-	movs r7, 0x1
-_0803CFDC:
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	mov r2, r9
-	muls r2, r0
-	adds r0, r2, 0
-	adds r4, r0, r1
-	ldrh r0, [r4, 0x6]
-	muls r3, r0
-	ldr r2, =gStatStageRatios
-	movs r1, 0x1B
-	ldrsb r1, [r4, r1]
-	lsls r1, 1
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	muls r0, r3
-	adds r2, 0x1
-	adds r1, r2
-	ldrb r1, [r1]
-	bl __divsi3
-	mov r8, r0
-	ldrh r0, [r4, 0x2E]
-	cmp r0, 0xAF
-	bne _0803D02C
-	ldr r1, =gEnigmaBerries
-	mov r3, r9
-	lsls r0, r3, 3
-	subs r0, r3
-	lsls r0, 2
-	adds r0, r1
-	ldrb r6, [r0, 0x7]
-	ldrb r5, [r0, 0x1A]
-	b _0803D040
-	.pool
-_0803D02C:
-	ldrh r0, [r4, 0x2E]
-	bl ItemId_GetHoldEffect
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldrh r0, [r4, 0x2E]
-	bl ItemId_GetHoldEffectParam
-	lsls r0, 24
-	lsrs r5, r0, 24
-_0803D040:
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	ldr r1, =0x023f0102
-	ands r0, r1
-	cmp r0, 0
-	bne _0803D074
-	ldr r0, =0x00000869
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _0803D074
-	mov r0, r9
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803D074
-	movs r0, 0x6E
-	mov r1, r8
-	muls r1, r0
-	adds r0, r1, 0
-	movs r1, 0x64
-	bl __udivsi3
-	mov r8, r0
-_0803D074:
-	cmp r6, 0x18
-	bne _0803D07E
-	mov r2, r8
-	lsrs r2, 1
-	mov r8, r2
-_0803D07E:
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	mov r3, r9
-	muls r3, r0
-	adds r0, r3, 0
-	adds r1, 0x4C
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0803D09C
-	mov r0, r8
-	lsrs r0, 2
-	mov r8, r0
-_0803D09C:
-	cmp r6, 0x1A
-	bne _0803D0B8
-	ldr r0, =gRandomTurnNumber
-	ldrh r4, [r0]
-	lsls r0, r5, 16
-	subs r0, r5
-	movs r1, 0x64
-	bl __divsi3
-	cmp r4, r0
-	bge _0803D0B8
-	movs r1, 0x1
-	negs r1, r1
-	mov r8, r1
-_0803D0B8:
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	mov r2, r10
-	muls r2, r0
-	adds r0, r2, 0
-	adds r4, r0, r1
-	ldrh r0, [r4, 0x6]
-	adds r3, r0, 0
-	muls r3, r7
-	ldr r2, =gStatStageRatios
-	movs r1, 0x1B
-	ldrsb r1, [r4, r1]
-	lsls r1, 1
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	muls r0, r3
-	adds r2, 0x1
-	adds r1, r2
-	ldrb r1, [r1]
-	bl __divsi3
-	adds r7, r0, 0
-	ldrh r0, [r4, 0x2E]
-	cmp r0, 0xAF
-	bne _0803D118
-	ldr r1, =gEnigmaBerries
-	mov r3, r10
-	lsls r0, r3, 3
-	subs r0, r3
-	lsls r0, 2
-	adds r0, r1
-	ldrb r6, [r0, 0x7]
-	ldrb r5, [r0, 0x1A]
-	b _0803D12C
-	.pool
-_0803D118:
-	ldrh r0, [r4, 0x2E]
-	bl ItemId_GetHoldEffect
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldrh r0, [r4, 0x2E]
-	bl ItemId_GetHoldEffectParam
-	lsls r0, 24
-	lsrs r5, r0, 24
-_0803D12C:
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	ldr r1, =0x023f0102
-	ands r0, r1
-	cmp r0, 0
-	bne _0803D15C
-	ldr r0, =0x00000869
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _0803D15C
-	mov r0, r10
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803D15C
-	movs r0, 0x6E
-	muls r0, r7
-	movs r1, 0x64
-	bl __udivsi3
-	adds r7, r0, 0
-_0803D15C:
-	cmp r6, 0x18
-	bne _0803D162
-	lsrs r7, 1
-_0803D162:
-	ldr r2, =gBattleMons
-	movs r0, 0x58
-	mov r1, r10
-	muls r1, r0
-	adds r0, r1, 0
-	adds r1, r2, 0
-	adds r1, 0x4C
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0803D17E
-	lsrs r7, 2
-_0803D17E:
-	cmp r6, 0x1A
-	bne _0803D198
-	ldr r0, =gRandomTurnNumber
-	ldrh r4, [r0]
-	lsls r0, r5, 16
-	subs r0, r5
-	movs r1, 0x64
-	bl __divsi3
-	cmp r4, r0
-	bge _0803D198
-	movs r7, 0x1
-	negs r7, r7
-_0803D198:
-	ldr r2, [sp, 0x4]
-	cmp r2, 0
-	beq _0803D1B8
-	movs r3, 0
-	b _0803D254
-	.pool
-_0803D1B8:
-	ldr r0, =gActionForBanks
-	mov r3, r9
-	adds r1, r3, r0
-	ldrb r1, [r1]
-	adds r2, r0, 0
-	cmp r1, 0
-	bne _0803D208
-	ldr r0, =gProtectStructs
-	lsls r1, r3, 4
-	adds r1, r0
-	ldrb r0, [r1]
-	lsls r0, 29
-	cmp r0, 0
-	bge _0803D1E0
-	movs r3, 0xA5
-	b _0803D20A
-	.pool
-_0803D1E0:
-	ldr r0, =gBattleStruct
-	ldr r0, [r0]
-	add r0, r9
-	adds r0, 0x80
-	ldrb r0, [r0]
-	lsls r0, 1
-	movs r1, 0x58
-	mov r3, r9
-	muls r3, r1
-	adds r1, r3, 0
-	adds r0, r1
-	ldr r1, =gBattleMons
-	adds r1, 0xC
-	adds r0, r1
-	ldrh r3, [r0]
-	b _0803D20A
-	.pool
-_0803D208:
-	movs r3, 0
-_0803D20A:
-	mov r1, r10
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0803D254
-	ldr r0, =gProtectStructs
-	lsls r1, 4
-	adds r1, r0
-	ldrb r0, [r1]
-	lsls r0, 29
-	cmp r0, 0
-	bge _0803D22C
-	movs r2, 0xA5
-	b _0803D256
-	.pool
-_0803D22C:
-	ldr r0, =gBattleStruct
-	ldr r0, [r0]
-	add r0, r10
-	adds r0, 0x80
-	ldrb r0, [r0]
-	lsls r0, 1
-	movs r1, 0x58
-	mov r2, r10
-	muls r2, r1
-	adds r1, r2, 0
-	adds r0, r1
-	ldr r1, =gBattleMons
-	adds r1, 0xC
-	adds r0, r1
-	ldrh r2, [r0]
-	b _0803D256
-	.pool
-_0803D254:
-	movs r2, 0
-_0803D256:
-	ldr r4, =gBattleMoves
-	lsls r0, r3, 1
-	adds r0, r3
-	lsls r0, 2
-	adds r0, r4
-	movs r1, 0x7
-	ldrsb r1, [r0, r1]
-	lsls r3, r2, 1
-	cmp r1, 0
-	bne _0803D27A
-	adds r0, r3, r2
-	lsls r0, 2
-	adds r0, r4
-	ldrb r0, [r0, 0x7]
-	lsls r0, 24
-	asrs r0, 24
-	cmp r0, 0
-	beq _0803D2B8
-_0803D27A:
-	adds r0, r3, r2
-	lsls r0, 2
-	adds r0, r4
-	ldrb r0, [r0, 0x7]
-	lsls r0, 24
-	asrs r0, 24
-	cmp r1, r0
-	bne _0803D2AE
-	cmp r8, r7
-	bne _0803D2A4
-	bl Random
-	movs r1, 0x1
-	ands r1, r0
-	cmp r1, 0
-	beq _0803D2A4
-	movs r3, 0x2
-	b _0803D2D4
-	.pool
-_0803D2A4:
-	cmp r8, r7
-	bcs _0803D2D6
-	movs r0, 0x1
-	str r0, [sp, 0x8]
-	b _0803D2D6
-_0803D2AE:
-	cmp r1, r0
-	bge _0803D2D6
-	movs r1, 0x1
-	str r1, [sp, 0x8]
-	b _0803D2D6
-_0803D2B8:
-	cmp r8, r7
-	bne _0803D2CE
-	bl Random
-	movs r1, 0x1
-	ands r1, r0
-	cmp r1, 0
-	beq _0803D2CE
-	movs r2, 0x2
-	str r2, [sp, 0x8]
-	b _0803D2D6
-_0803D2CE:
-	cmp r8, r7
-	bcs _0803D2D6
-	movs r3, 0x1
-_0803D2D4:
-	str r3, [sp, 0x8]
-_0803D2D6:
-	ldr r0, [sp, 0x8]
-	add sp, 0xC
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end GetWhoStrikesFirst
-
-	thumb_func_start sub_803D2E8
-sub_803D2E8: @ 803D2E8
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	movs r3, 0
-	ldr r0, =gBattleTypeFlags
-	ldr r1, [r0]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _0803D354
-	ldr r0, =gActiveBank
-	strb r3, [r0]
-	ldr r4, =gNoOfAllBanks
-	mov r8, r0
-	ldrb r0, [r4]
-	cmp r3, r0
-	bcc _0803D310
-	b _0803D54A
-_0803D310:
-	ldr r7, =gUnknown_0202407A
-	ldr r6, =gActionForBanks
-	mov r2, r8
-	ldr r5, =gTurnOrder
-_0803D318:
-	adds r1, r3, r7
-	ldrb r0, [r2]
-	adds r0, r6
-	ldrb r0, [r0]
-	strb r0, [r1]
-	adds r1, r3, r5
-	ldrb r0, [r2]
-	strb r0, [r1]
-	adds r3, 0x1
-	ldrb r0, [r2]
-	adds r0, 0x1
-	strb r0, [r2]
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r1, [r4]
-	cmp r0, r1
-	bcc _0803D318
-	b _0803D54A
-	.pool
-_0803D354:
-	movs r2, 0x2
-	ands r1, r2
-	cmp r1, 0
-	beq _0803D3A4
-	ldr r0, =gActiveBank
-	strb r3, [r0]
-	ldr r1, =gNoOfAllBanks
-	mov r8, r0
-	adds r2, r1, 0
-	ldrb r2, [r2]
-	cmp r3, r2
-	bcs _0803D3C0
-	ldr r0, =gActionForBanks
-	ldrb r1, [r0]
-	adds r4, r0, 0
-	cmp r1, 0x3
-	beq _0803D3BE
-_0803D376:
-	mov r7, r8
-	ldrb r0, [r7]
-	adds r0, 0x1
-	strb r0, [r7]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gNoOfAllBanks
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcs _0803D3C0
-	ldrb r0, [r7]
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0x3
-	bne _0803D376
-	b _0803D3BE
-	.pool
-_0803D3A4:
-	ldr r1, =gActionForBanks
-	ldrb r0, [r1]
-	ldr r4, =gActiveBank
-	mov r8, r4
-	cmp r0, 0x3
-	bne _0803D3B4
-	strb r3, [r4]
-	movs r3, 0x5
-_0803D3B4:
-	ldrb r0, [r1, 0x2]
-	cmp r0, 0x3
-	bne _0803D3C0
-	mov r7, r8
-	strb r2, [r7]
-_0803D3BE:
-	movs r3, 0x5
-_0803D3C0:
-	cmp r3, 0x5
-	bne _0803D448
-	ldr r6, =gUnknown_0202407A
-	ldr r1, =gActionForBanks
-	mov r2, r8
-	ldrb r0, [r2]
-	adds r0, r1
-	ldrb r0, [r0]
-	strb r0, [r6]
-	ldr r2, =gTurnOrder
-	mov r3, r8
-	ldrb r0, [r3]
-	strb r0, [r2]
-	movs r3, 0x1
-	movs r5, 0
-	adds r4, r1, 0
-	ldr r7, =gBattleMainFunc
-	mov r10, r7
-	ldr r0, =bc_80154A0
-	mov r12, r0
-	ldr r1, =gBattleStruct
-	mov r9, r1
-	ldr r7, =gNoOfAllBanks
-	ldrb r7, [r7]
-	cmp r5, r7
-	bge _0803D41A
-	adds r7, r6, 0
-	adds r6, r4, 0
-	adds r4, r2, 0
-	ldr r2, =gNoOfAllBanks
-_0803D3FC:
-	mov r0, r8
-	ldrb r0, [r0]
-	cmp r5, r0
-	beq _0803D412
-	adds r1, r3, r7
-	adds r0, r5, r6
-	ldrb r0, [r0]
-	strb r0, [r1]
-	adds r0, r3, r4
-	strb r5, [r0]
-	adds r3, 0x1
-_0803D412:
-	adds r5, 0x1
-	ldrb r1, [r2]
-	cmp r5, r1
-	blt _0803D3FC
-_0803D41A:
-	mov r2, r12
-	mov r3, r10
-	str r2, [r3]
-	mov r4, r9
-	ldr r0, [r4]
-	b _0803D554
-	.pool
-_0803D448:
-	movs r0, 0
-	mov r7, r8
-	strb r0, [r7]
-	ldr r1, =gNoOfAllBanks
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _0803D48E
-	ldr r6, =gActionForBanks
-	mov r2, r8
-	ldr r5, =gUnknown_0202407A
-	ldr r4, =gTurnOrder
-_0803D45E:
-	ldrb r0, [r2]
-	adds r0, r6
-	ldrb r1, [r0]
-	subs r0, r1, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bhi _0803D47C
-	adds r0, r3, r5
-	strb r1, [r0]
-	adds r1, r3, r4
-	mov r7, r8
-	ldrb r0, [r7]
-	strb r0, [r1]
-	adds r3, 0x1
-_0803D47C:
-	ldrb r0, [r2]
-	adds r0, 0x1
-	strb r0, [r2]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gNoOfAllBanks
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcc _0803D45E
-_0803D48E:
-	movs r0, 0
-	mov r2, r8
-	strb r0, [r2]
-	ldr r4, =gNoOfAllBanks
-	ldrb r0, [r4]
-	cmp r0, 0
-	beq _0803D4D2
-	ldr r6, =gActionForBanks
-	ldr r5, =gUnknown_0202407A
-	ldr r4, =gTurnOrder
-_0803D4A2:
-	ldrb r0, [r2]
-	adds r0, r6
-	ldrb r1, [r0]
-	subs r0, r1, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bls _0803D4C0
-	adds r0, r3, r5
-	strb r1, [r0]
-	adds r1, r3, r4
-	mov r7, r8
-	ldrb r0, [r7]
-	strb r0, [r1]
-	adds r3, 0x1
-_0803D4C0:
-	ldrb r0, [r2]
-	adds r0, 0x1
-	strb r0, [r2]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gNoOfAllBanks
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcc _0803D4A2
-_0803D4D2:
-	movs r5, 0
-	b _0803D540
-	.pool
-_0803D4E8:
-	adds r4, r5, 0x1
-	adds r7, r4, 0
-	ldrb r1, [r1]
-	cmp r7, r1
-	bge _0803D53E
-	ldr r6, =gUnknown_0202407A
-	lsls r2, r5, 24
-	mov r8, r2
-_0803D4F8:
-	ldr r0, =gTurnOrder
-	adds r1, r5, r0
-	ldrb r3, [r1]
-	adds r0, r4, r0
-	ldrb r1, [r0]
-	adds r0, r5, r6
-	ldrb r2, [r0]
-	cmp r2, 0x1
-	beq _0803D534
-	adds r0, r4, r6
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0803D534
-	cmp r2, 0x2
-	beq _0803D534
-	cmp r0, 0x2
-	beq _0803D534
-	adds r0, r3, 0
-	movs r2, 0
-	bl GetWhoStrikesFirst
-	lsls r0, 24
-	cmp r0, 0
-	beq _0803D534
-	lsls r1, r4, 24
-	lsrs r1, 24
-	mov r3, r8
-	lsrs r0, r3, 24
-	bl sub_803CEDC
-_0803D534:
-	adds r4, 0x1
-	ldr r0, =gNoOfAllBanks
-	ldrb r0, [r0]
-	cmp r4, r0
-	blt _0803D4F8
-_0803D53E:
-	adds r5, r7, 0
-_0803D540:
-	ldr r1, =gNoOfAllBanks
-	ldrb r0, [r1]
-	subs r0, 0x1
-	cmp r5, r0
-	blt _0803D4E8
-_0803D54A:
-	ldr r1, =gBattleMainFunc
-	ldr r0, =bc_80154A0
-	str r0, [r1]
-	ldr r0, =gBattleStruct
-	ldr r0, [r0]
-_0803D554:
-	adds r0, 0x48
-	movs r1, 0
-	strb r1, [r0]
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_803D2E8
 
 	thumb_func_start TurnValuesCleanUp
 TurnValuesCleanUp: @ 803D580
@@ -1215,7 +270,7 @@ _0803D7AE:
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, =gFightStateTracker
-	ldr r0, =gUnknown_0202407A
+	ldr r0, =gActionsByTurnOrder
 	movs r3, 0
 	ldrb r0, [r0]
 	strb r0, [r1]
@@ -2100,7 +1155,7 @@ sub_803E0B8: @ 803E0B8
 	movs r0, 0x4
 	str r0, [sp]
 	ldr r6, =gBankAttacker
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
@@ -2641,7 +1696,7 @@ _0803E5C4:
 	b _0803E74E
 _0803E5E2:
 	ldr r4, =gActiveBank
-	ldr r0, =gTurnOrder
+	ldr r0, =gBanksByTurnOrder
 	ldr r3, [sp]
 	adds r0, r3, r0
 	ldrb r0, [r0]
@@ -2908,7 +1963,7 @@ _0803E83C:
 bs2_8016374: @ 803E868
 	push {r4,lr}
 	ldr r3, =gBankAttacker
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
@@ -2973,7 +2028,7 @@ sub_803E90C: @ 803E90C
 	push {r5-r7}
 	ldr r4, =gBankAttacker
 	ldr r2, =gBankTarget
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
@@ -3534,7 +2589,7 @@ _0803EE24:
 sub_803EE48: @ 803EE48
 	push {r4-r6,lr}
 	ldr r4, =gBankAttacker
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r5, =gCurrentMoveTurn
 	ldrb r0, [r5]
 	adds r0, r1
@@ -3672,7 +2727,7 @@ _0803EF98:
 	thumb_func_start sub_803EFA8
 sub_803EFA8: @ 803EFA8
 	ldr r2, =gBankAttacker
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
@@ -3697,7 +2752,7 @@ sub_803EFA8: @ 803EFA8
 	thumb_func_start bs5_8016AC0
 bs5_8016AC0: @ 803EFF0
 	ldr r2, =gBankAttacker
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
@@ -3730,7 +2785,7 @@ bs5_8016AC0: @ 803EFF0
 sub_803F050: @ 803F050
 	push {r4-r6,lr}
 	ldr r3, =gBankAttacker
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
@@ -3817,7 +2872,7 @@ _0803F100:
 sub_803F120: @ 803F120
 	push {r4,lr}
 	ldr r2, =gBankAttacker
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
@@ -3903,7 +2958,7 @@ _0803F1CA:
 bs8_exit_by_flight: @ 803F1F0
 	push {r4,lr}
 	ldr r2, =gBankAttacker
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r4, =gCurrentMoveTurn
 	ldrb r0, [r4]
 	adds r0, r1
@@ -3926,7 +2981,7 @@ bs8_exit_by_flight: @ 803F1F0
 	thumb_func_start bs9_8016C9C
 bs9_8016C9C: @ 803F22C
 	ldr r3, =gBankAttacker
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
@@ -3958,7 +3013,7 @@ bs9_8016C9C: @ 803F22C
 	ldr r1, =gFightStateTracker
 	movs r0, 0xA
 	strb r0, [r1]
-	ldr r1, =gUnknown_0202407A
+	ldr r1, =gActionsByTurnOrder
 	movs r0, 0xC
 	strb r0, [r1, 0x1]
 	bx lr
@@ -3993,7 +3048,7 @@ bsD_proceed: @ 803F2CC
 	adds r0, 0x1
 	strb r0, [r1]
 	ldr r3, =gFightStateTracker
-	ldr r2, =gUnknown_0202407A
+	ldr r2, =gActionsByTurnOrder
 	ldrb r0, [r1]
 	adds r0, r2
 	ldrb r0, [r0]
@@ -4010,7 +3065,7 @@ bsD_proceed: @ 803F2CC
 	thumb_func_start bsC_8016D70
 bsC_8016D70: @ 803F300
 	push {r4-r6,lr}
-	ldr r1, =gTurnOrder
+	ldr r1, =gBanksByTurnOrder
 	ldr r2, =gCurrentMoveTurn
 	ldrb r0, [r2]
 	adds r0, r1
@@ -4025,7 +3080,7 @@ bsC_8016D70: @ 803F300
 	adds r0, 0x1
 	strb r0, [r2]
 	ldr r3, =gFightStateTracker
-	ldr r1, =gUnknown_0202407A
+	ldr r1, =gActionsByTurnOrder
 	ldrb r0, [r2]
 	adds r0, r1
 	ldrb r0, [r0]

@@ -304,10 +304,10 @@ gBattlePartyID: @ 202406E
 gBanksBySide: @ 2024076
 	.space 0x4
 
-gUnknown_0202407A: @ 202407A
+gActionsByTurnOrder: @ 202407A
 	.space 0x4
 
-gTurnOrder: @ 202407E
+gBanksByTurnOrder: @ 202407E
 	.space 0x4
 
 gCurrentMoveTurn: @ 2024082

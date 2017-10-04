@@ -47,8 +47,8 @@ extern u8 gActiveBank;
 extern u32 gBattleExecBuffer;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
-extern u8 gTurnOrder[BATTLE_BANKS_COUNT];
-extern u8 gUnknown_0202407A[BATTLE_BANKS_COUNT];
+extern u8 gBanksByTurnOrder[BATTLE_BANKS_COUNT];
+extern u8 gActionsByTurnOrder[BATTLE_BANKS_COUNT];
 extern u16 gCurrentMove;
 extern u8 gLastUsedAbility;
 extern u16 gBattleWeather;
@@ -331,7 +331,7 @@ static void atk40_jump_if_move_affected_by_protect(void);
 static void atk41_call(void);
 static void atk42_jumpiftype2(void);
 static void atk43_jumpifabilitypresent(void);
-static void atk44(void);
+static void atk44_end_selection_script(void);
 static void atk45_playanimation(void);
 static void atk46_playanimation2(void);
 static void atk47_setgraphicalstatchangevalues(void);
@@ -583,7 +583,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk41_call,
     atk42_jumpiftype2,
     atk43_jumpifabilitypresent,
-    atk44,
+    atk44_end_selection_script,
     atk45_playanimation,
     atk46_playanimation2,
     atk47_setgraphicalstatchangevalues,
@@ -1151,11 +1151,11 @@ static void atk00_attackcanceler(void)
 
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if ((gProtectStructs[gTurnOrder[i]].stealMove) && gBattleMoves[gCurrentMove].flags & FLAG_SNATCH_AFFECTED)
+        if ((gProtectStructs[gBanksByTurnOrder[i]].stealMove) && gBattleMoves[gCurrentMove].flags & FLAG_SNATCH_AFFECTED)
         {
-            PressurePPLose(gBankAttacker, gTurnOrder[i], MOVE_SNATCH);
-            gProtectStructs[gTurnOrder[i]].stealMove = 0;
-            gBattleScripting.bank = gTurnOrder[i];
+            PressurePPLose(gBankAttacker, gBanksByTurnOrder[i], MOVE_SNATCH);
+            gProtectStructs[gBanksByTurnOrder[i]].stealMove = 0;
+            gBattleScripting.bank = gBanksByTurnOrder[i];
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_SnatchedMove;
             return;
@@ -2378,7 +2378,7 @@ u8 BankGetTurnOrder(u8 bank)
     s32 i;
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (gTurnOrder[i] == bank)
+        if (gBanksByTurnOrder[i] == bank)
             break;
     }
     return i;
@@ -4462,9 +4462,9 @@ static void atk43_jumpifabilitypresent(void)
         gBattlescriptCurrInstr += 6;
 }
 
-static void atk44(void)
+static void atk44_end_selection_script(void)
 {
-    *(gBankAttacker + gBattleStruct->field_54) = 1;
+    *(gBankAttacker + gBattleStruct->selectionScriptFinished) = TRUE;
 }
 
 static void atk45_playanimation(void)
@@ -5903,15 +5903,15 @@ static void atk51_switch_handle_order(void)
         gBattleCommunication[0] = gBattleBufferB[gActiveBank][1];
         *(gBattleStruct->field_5C + gActiveBank) = gBattleBufferB[gActiveBank][1];
 
-        if ((gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_LINK)) == (BATTLE_TYPE_MULTI | BATTLE_TYPE_LINK))
+        if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             *(gActiveBank * 3 + (u8*)(gBattleStruct->field_60) + 0) &= 0xF;
             *(gActiveBank * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleBufferB[gActiveBank][2] & 0xF0);
             *(gActiveBank * 3 + (u8*)(gBattleStruct->field_60) + 1) = gBattleBufferB[gActiveBank][3];
 
-            *((gActiveBank ^ 2) * 3 + (u8*)(gBattleStruct->field_60) + 0) &= (0xF0);
-            *((gActiveBank ^ 2) * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleBufferB[gActiveBank][2] & 0xF0) >> 4;
-            *((gActiveBank ^ 2) * 3 + (u8*)(gBattleStruct->field_60) + 2) = gBattleBufferB[gActiveBank][3];
+            *((gActiveBank ^ BIT_MON) * 3 + (u8*)(gBattleStruct->field_60) + 0) &= (0xF0);
+            *((gActiveBank ^ BIT_MON) * 3 + (u8*)(gBattleStruct->field_60) + 0) |= (gBattleBufferB[gActiveBank][2] & 0xF0) >> 4;
+            *((gActiveBank ^ BIT_MON) * 3 + (u8*)(gBattleStruct->field_60) + 2) = gBattleBufferB[gActiveBank][3];
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
@@ -5983,8 +5983,8 @@ static void atk52_switch_in_effects(void)
 
             for (i = 0; i < gNoOfAllBanks; i++)
             {
-                if (gTurnOrder[i] == gActiveBank)
-                    gUnknown_0202407A[i] = 0xC;
+                if (gBanksByTurnOrder[i] == gActiveBank)
+                    gActionsByTurnOrder[i] = ACTION_CANCEL_PARTNER;
             }
 
             for (i = 0; i < gNoOfAllBanks; i++)
@@ -6569,7 +6569,7 @@ static void atk68_80246A0(void)
     s32 i;
 
     for (i = 0; i < gNoOfAllBanks; i++)
-        gUnknown_0202407A[i] = 0xC;
+        gActionsByTurnOrder[i] = ACTION_CANCEL_PARTNER;
 
     gBattlescriptCurrInstr++;
 }
@@ -9710,8 +9710,8 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
 
         for (i = 0; i < gNoOfAllBanks; i++)
         {
-            if (gTurnOrder[i] == gBankTarget)
-                gUnknown_0202407A[i] = 11;
+            if (gBanksByTurnOrder[i] == gBankTarget)
+                gActionsByTurnOrder[i] = 11;
         }
 
         gCurrentMove = MOVE_PURSUIT;
@@ -10942,7 +10942,7 @@ static void atkEC_pursuit_sth(void)
         && gActionForBanks[gActiveBank] == 0
         && gChosenMovesByBanks[gActiveBank] == MOVE_PURSUIT)
     {
-        gUnknown_0202407A[gActiveBank] = 11;
+        gActionsByTurnOrder[gActiveBank] = 11;
         gCurrentMove = MOVE_PURSUIT;
         gBattlescriptCurrInstr += 5;
         gBattleScripting.animTurn = 1;
