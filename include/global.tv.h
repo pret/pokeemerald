@@ -397,7 +397,6 @@ typedef union TVShow // size = 0x24
         /*0x11*/ u8 language;
         /*0x12*/ u8 filler_12[1];
         /*0x13*/ u8 playerName[8];
-        // TODO: flesh this out
     } battleSeminar;
 
     // TVSHOW_TRAINER_FAN_CLUB
@@ -439,7 +438,11 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        // TODO: flesh this out
+        /*0x02*/ u8 unk02;
+        /*0x03*/ u8 unk03;
+        /*0x04*/ u8 language;
+        /*0x05*/ u8 filler_05[14];
+        /*0x13*/ u8 playerName[8];
     } safariFanClub;
 
     // Mass Outbreak
@@ -460,7 +463,6 @@ typedef union TVShow // size = 0x24
         /*0x15*/ u8 var15;
         /*0x16*/ u16 daysLeft;
         /*0x18*/ u8 language;
-        u8 pad19[11];
     } massOutbreak;
 } TVShow;
 

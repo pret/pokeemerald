@@ -3,70 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EE44C
-sub_80EE44C: @ 80EE44C
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	lsls r1, 24
-	lsrs r7, r1, 24
-	ldr r6, =gSaveBlock1Ptr
-	ldr r0, [r6]
-	ldr r5, =0x000027cc
-	adds r0, r5
-	bl FindEmptyTVSlotBeyondFirstFiveShowsOfArray
-	ldr r4, =sCurTVShowSlot
-	strb r0, [r4]
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _080EE4BE
-	movs r0, 0x27
-	movs r1, 0
-	bl sub_80EF46C
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080EE4BE
-	movs r1, 0
-	ldrsb r1, [r4, r1]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	ldr r4, [r6]
-	adds r4, r0
-	movs r1, 0
-	movs r0, 0x27
-	strb r0, [r4]
-	strb r1, [r4, 0x1]
-	adds r0, r4, 0
-	adds r0, 0x13
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	bl StringCopy
-	mov r0, r8
-	strb r0, [r4, 0x2]
-	strb r7, [r4, 0x3]
-	adds r0, r4, 0
-	bl tv_store_id_3x
-	ldr r0, =gGameLanguage
-	ldrb r0, [r0]
-	strb r0, [r4, 0x4]
-_080EE4BE:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80EE44C
-
 	thumb_func_start sub_80EE4DC
 sub_80EE4DC: @ 80EE4DC
 	push {r4-r7,lr}
@@ -91,7 +27,7 @@ sub_80EE4DC: @ 80EE4DC
 	beq _080EE59A
 	movs r0, 0x23
 	movs r1, 0
-	bl sub_80EF46C
+	bl IsShowAlreadyOnTheAir
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -379,7 +315,7 @@ sub_80EE72C: @ 80EE72C
 	beq _080EE79C
 	movs r0, 0x22
 	movs r1, 0
-	bl sub_80EF46C
+	bl IsShowAlreadyOnTheAir
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -466,7 +402,7 @@ sub_80EE818: @ 80EE818
 	push {r4-r7,lr}
 	movs r0, 0x24
 	movs r1, 0
-	bl sub_80EF46C
+	bl IsShowAlreadyOnTheAir
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -731,7 +667,7 @@ sub_80EEA70: @ 80EEA70
 	sub sp, 0x20
 	movs r0, 0x26
 	movs r1, 0
-	bl sub_80EF46C
+	bl IsShowAlreadyOnTheAir
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -897,7 +833,7 @@ sub_80EEBF4: @ 80EEBF4
 	lsrs r5, r0, 24
 	movs r0, 0x25
 	movs r1, 0x1
-	bl sub_80EF46C
+	bl IsShowAlreadyOnTheAir
 	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, =0x000027cc
@@ -1919,8 +1855,8 @@ _080EF460:
 	bx r0
 	thumb_func_end sub_80EF40C
 
-	thumb_func_start sub_80EF46C
-sub_80EF46C: @ 80EF46C
+	thumb_func_start IsShowAlreadyOnTheAir
+IsShowAlreadyOnTheAir: @ 80EF46C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1992,7 +1928,7 @@ _080EF4F0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80EF46C
+	thumb_func_end IsShowAlreadyOnTheAir
 
 	thumb_func_start sub_80EF500
 sub_80EF500: @ 80EF500

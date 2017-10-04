@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "map_constants.h"
 #include "rng.h"
 #include "event_data.h"
 #include "fieldmap.h"
@@ -71,7 +72,7 @@ void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
 bool8 TV_BernoulliTrial(u16);
 s8 FindEmptyTVSlotBeyondFirstFiveShowsOfArray(TVShow *);
-bool8 sub_80EF46C(u8, u8);
+bool8 IsShowAlreadyOnTheAir(u8, u8);
 void tv_store_id_3x(TVShow *);
 void DeleteTVShowInArrayByIdx(TVShow *, u8);
 s8 FindEmptyTVSlotWithinFirstFiveShowsOfArray(TVShow *);
@@ -738,7 +739,7 @@ void UpdateTVScreensOnMap(int width, int height)
         case 2:
             break;
         default:
-            if (gSaveBlock1Ptr->location.mapGroup == 0x0d && gSaveBlock1Ptr->location.mapNum == 0x00)
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F && gSaveBlock1Ptr->location.mapNum == MAP_ID_LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
             {
                 SetTVMetatilesOnMap(width, height, 0x3);
             }
@@ -1046,7 +1047,7 @@ void PutPokemonTodayCaughtOnAir(void)
         if (!TV_BernoulliTrial(-1) && StringCompare(gSpeciesNames[gBattleResults.caughtMonSpecies], gBattleResults.caughtMonNick))
         {
             sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-            if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_POKEMON_TODAY_CAUGHT, 0) != TRUE)
+            if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_POKEMON_TODAY_CAUGHT, FALSE) != TRUE)
             {
                 for (i = 0; i < 11; i ++)
                 {
@@ -1127,7 +1128,7 @@ static void PutPokemonTodayFailedOnTheAir(void)
         if (ct > 2 && (gBattleOutcome == BATTLE_POKE_FLED || gBattleOutcome == BATTLE_WON))
         {
             sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-            if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_POKEMON_TODAY_FAILED, 0) != TRUE)
+            if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_POKEMON_TODAY_FAILED, FALSE) != TRUE)
             {
                 show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
                 show->pokemonTodayFailed.kind = TVSHOW_POKEMON_TODAY_FAILED;
@@ -1494,10 +1495,10 @@ void SaveRecordedItemPurchasesForTVShow(void)
     TVShow *show;
     u8 i;
 
-    if (!(gSaveBlock1Ptr->location.mapGroup == 0x1a && gSaveBlock1Ptr->location.mapNum == 0x3c) && !(gSaveBlock1Ptr->location.mapGroup == 0x1a && gSaveBlock1Ptr->location.mapNum == 0x37) && !TV_BernoulliTrial(0x5555))
+    if (!(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_TRAINER_HILL_LOBBY && gSaveBlock1Ptr->location.mapNum == MAP_ID_TRAINER_HILL_LOBBY) && !(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_BATTLE_FRONTIER_MART && gSaveBlock1Ptr->location.mapNum == MAP_ID_BATTLE_FRONTIER_MART) && !TV_BernoulliTrial(0x5555))
     {
         sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-        if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_SMART_SHOPPER, 0) != TRUE)
+        if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_SMART_SHOPPER, FALSE) != TRUE)
         {
             sub_80EF500();
             if (gUnknown_02039F80[0].quantity >= 20)
@@ -1795,7 +1796,7 @@ static void PutFishingAdviceShowOnTheAir(void)
     TVShow *show;
 
      sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_FISHING_ADVICE, 0) != TRUE)
+    if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_FISHING_ADVICE, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->pokemonAngler.kind = TVSHOW_FISHING_ADVICE;
@@ -1839,7 +1840,7 @@ static void sub_80EDA80(void)
     if (!TV_BernoulliTrial(0xFFFF))
     {
         sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-        if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_WORLD_OF_MASTERS, 0) != TRUE)
+        if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_WORLD_OF_MASTERS, FALSE) != TRUE)
         {
             show2 = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
             show2->worldOfMasters.kind = TVSHOW_WORLD_OF_MASTERS;
@@ -1863,7 +1864,7 @@ void sub_80EDB44(void)
     u32 i;
     u8 nBadges;
 
-    sub_80EF46C(TVSHOW_TODAYS_RIVAL_TRAINER, 1);
+    IsShowAlreadyOnTheAir(TVSHOW_TODAYS_RIVAL_TRAINER, TRUE);
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
@@ -1913,7 +1914,7 @@ void sub_80EDC60(const u16 *words)
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_TREND_WATCHER, 0) != TRUE)
+    if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_TREND_WATCHER, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->trendWatcher.kind = TVSHOW_TREND_WATCHER;
@@ -1932,7 +1933,7 @@ void sub_80EDCE8(void)
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_TREASURE_INVESTIGATORS, 0) != TRUE)
+    if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_TREASURE_INVESTIGATORS, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->treasureInvestigators.kind = TVSHOW_TREASURE_INVESTIGATORS;
@@ -1953,7 +1954,7 @@ void sub_80EDD78(u16 a0)
     u16 v0;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_FIND_THAT_GAMER, 0) != TRUE)
+    if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_FIND_THAT_GAMER, FALSE) != TRUE)
     {
         flag = FALSE;
         switch (gUnknown_0203A02A)
@@ -2284,7 +2285,7 @@ void sub_80EE104(void)
 {
     TVShow *show;
 
-    sub_80EF46C(TVSHOW_SECRET_BASE_VISIT, 1);
+    IsShowAlreadyOnTheAir(TVSHOW_SECRET_BASE_VISIT, TRUE);
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
@@ -2306,7 +2307,7 @@ void sub_80EE184(void)
     u16 balls;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_BREAKING_NEWS, 0) != TRUE)
+    if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_BREAKING_NEWS, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->breakingNews.kind = TVSHOW_BREAKING_NEWS;
@@ -2377,7 +2378,7 @@ void sub_80EE2CC(void)
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_LOTTO_WINNER, 0) != 1)
+    if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_LOTTO_WINNER, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->lottoWinner.kind = TVSHOW_LOTTO_WINNER;
@@ -2397,7 +2398,7 @@ void sub_80EE35C(u16 a0, u16 a1, u8 a2, const u16 *a3, u16 a4)
     u8 j;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
-    if (sCurTVShowSlot != -1 && sub_80EF46C(TVSHOW_BATTLE_SEMINAR, 0) != 1)
+    if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_BATTLE_SEMINAR, FALSE) != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->battleSeminar.kind = TVSHOW_BATTLE_SEMINAR;
@@ -2418,6 +2419,24 @@ void sub_80EE35C(u16 a0, u16 a1, u8 a2, const u16 *a3, u16 a4)
         show->battleSeminar.unk0e = a4;
         tv_store_id_3x(show);
         show->battleSeminar.language = gGameLanguage;
+    }
+}
+
+void sub_80EE44C(u8 a0, u8 a1)
+{
+    TVShow *show;
+
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_SAFARI_FAN_CLUB, FALSE) != TRUE)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->safariFanClub.kind = TVSHOW_SAFARI_FAN_CLUB;
+        show->safariFanClub.active = FALSE;
+        StringCopy(show->safariFanClub.playerName, gSaveBlock2Ptr->playerName);
+        show->safariFanClub.unk02 = a0;
+        show->safariFanClub.unk03 = a1;
+        tv_store_id_3x(show);
+        show->safariFanClub.language = gGameLanguage;
     }
 }
 
