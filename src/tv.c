@@ -2440,6 +2440,35 @@ void sub_80EE44C(u8 a0, u8 a1)
     }
 }
 
+void sub_80EE4DC(struct Pokemon *pokemon, u8 a1)
+{
+    u8 sub_80EE69C(u8);
+    TVShow *show;
+
+    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    if (sCurTVShowSlot != -1 && IsShowAlreadyOnTheAir(TVSHOW_CUTIES, FALSE) != TRUE)
+    {
+        show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+        show->cuties.kind = TVSHOW_CUTIES;
+        show->cuties.active = FALSE;
+        StringCopy(show->cuties.playerName, gSaveBlock2Ptr->playerName);
+        GetMonData(pokemon, MON_DATA_NICKNAME, show->cuties.nickname);
+        StripExtCtrlCodes(show->cuties.nickname);
+        show->cuties.unk02 = sub_80EE5A4(pokemon);
+        show->cuties.unk03 = sub_80EE69C(a1);
+        tv_store_id_3x(show);
+        show->cuties.language = gGameLanguage;
+        if (show->cuties.language == LANGUAGE_JAPANESE || GetMonData(pokemon, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
+        {
+            show->cuties.pokemonNameLanguage = LANGUAGE_JAPANESE;
+        }
+        else
+        {
+            show->cuties.pokemonNameLanguage = GetMonData(pokemon, MON_DATA_LANGUAGE);
+        }
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)

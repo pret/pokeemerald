@@ -10,5 +10,6 @@ void ClearTVShowData(void);
 void PutPokemonTodayCaughtOnAir(void);
 u32 player_id_to_dword(void);
 bool8 GetPriceReduction(u8);
+u8 sub_80EE5A4(struct Pokemon *);
 
 #endif //GUARD_TV_H
