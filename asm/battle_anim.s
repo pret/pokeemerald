@@ -449,10 +449,10 @@ ma00_load_graphics: @ 80A3D24
 	lsls r0, 8
 	orrs r4, r0
 	lsls r5, r4, 3
-	ldr r0, =gUnknown_085112C4
+	ldr r0, =gUnknown_085112B4 + 0x10
 	adds r0, r5, r0
 	bl LoadCompressedObjectPicUsingHeap
-	ldr r0, =gUnknown_08511BCC
+	ldr r0, =gUnknown_08511A34 + 0x198
 	adds r5, r0
 	adds r0, r5, 0
 	bl LoadCompressedObjectPaletteUsingHeap

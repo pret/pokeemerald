@@ -77,7 +77,7 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
-extern u16 gUnknown_03000000;
+static u16 gUnknown_03000000;
 
 extern u16 gKeyRepeatStartDelay;
 extern u8 gUnknown_030022B4;

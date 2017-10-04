@@ -111,7 +111,7 @@ SECTIONS {
         asm/reset_rtc_screen.o(.text);
         src/start_menu.o(.text);
         asm/start_menu.o(.text);
-        asm/tileset.o(.text);
+        src/tileset_anims.o(.text);
         src/palette.o(.text);
         src/sound.o(.text);
         asm/battle_anim.o(.text);
@@ -249,7 +249,7 @@ SECTIONS {
         asm/item_icon.o(.text);
         asm/party_menu.o(.text);
         asm/battle_tent.o(.text);
-        asm/unk_text_util_2.o(.text);
+        src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
         asm/unk_81BAD84.o(.text);
         asm/battle_controller_player_partner.o(.text);
@@ -357,8 +357,8 @@ SECTIONS {
         data/field_tasks.o(.rodata);
         data/reset_rtc_screen.o(.rodata);
         data/start_menu.o(.rodata);
-        data/tileset.o(.rodata);
-        data/palette.o(.rodata);
+        src/tileset_anims.o(.rodata);
+        src/palette.o(.rodata);
         data/fanfares.o(.rodata);
         data/battle_anims.o(.rodata);
         data/title_screen.o(.rodata);
@@ -454,7 +454,7 @@ SECTIONS {
         data/item_icon.o(.rodata);
         data/party_menu.o(.rodata);
         data/battle_tent.o(.rodata);
-        data/unk_text_util_2.o(.rodata);
+        src/unk_text_util_2.o(.rodata);
         data/unk_81BAD84.o(.rodata);
         data/battle_controller_player_partner.o(.rodata);
         data/fossil_special_fldeff_groundshake.o(.rodata);

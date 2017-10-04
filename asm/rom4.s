@@ -3640,7 +3640,7 @@ VBlankCB_Field: @ 8086390
 	bl sub_80BA0A8
 	bl FieldUpdateBgTilemapScroll
 	bl TransferPlttBuffer
-	bl sub_80A09D0
+	bl TransferTilesetAnimsBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end VBlankCB_Field
