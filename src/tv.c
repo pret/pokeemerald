@@ -3283,6 +3283,60 @@ bool8 sub_80EF88C(u8 monIdx)
     return TRUE;
 }
 
+bool8 sub_80EF8F8(void)
+{
+    return sub_80EF88C(sub_8139688());
+}
+
+void DeleteTVShowInArrayByIdx(TVShow *shows, u8 idx)
+{
+    u8 i;
+
+    shows[idx].common.kind = TVSHOW_OFF_AIR;
+    shows[idx].common.active = FALSE;
+    for (i = 0; i < 34; i ++)
+    {
+        shows[idx].common.pad02[i] = 0;
+    }
+}
+
+void sub_80EF93C(TVShow *shows)
+{
+    u8 i;
+    u8 j;
+
+    for (i = 0; i < 4; i ++)
+    {
+        if (shows[i].common.kind == TVSHOW_OFF_AIR)
+        {
+            for (j = i + 1; j < 5; j ++)
+            {
+                if (shows[j].common.kind != TVSHOW_OFF_AIR)
+                {
+                    shows[i] = shows[j];
+                    DeleteTVShowInArrayByIdx(shows, j);
+                    break;
+                }
+            }
+        }
+    }
+    for (i = 5; i < 24; i ++)
+    {
+        if (shows[i].common.kind == TVSHOW_OFF_AIR)
+        {
+            for (j = i + 1; j < 24; j ++)
+            {
+                if (shows[j].common.kind != TVSHOW_OFF_AIR)
+                {
+                    shows[i] = shows[j];
+                    DeleteTVShowInArrayByIdx(shows, j);
+                    break;
+                }
+            }
+        }
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
