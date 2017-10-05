@@ -3,47 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start IsPriceDiscounted
-IsPriceDiscounted: @ 80EF094
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080EF0A6
-	cmp r0, 0x3
-	beq _080EF0C8
-_080EF0A2:
-	movs r0, 0x1
-	b _080EF0D6
-_080EF0A6:
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldrh r1, [r0, 0x4]
-	movs r0, 0x80
-	lsls r0, 1
-	cmp r1, r0
-	bne _080EF0D4
-	ldr r0, =gScriptLastTalked
-	ldrh r0, [r0]
-	cmp r0, 0x19
-	beq _080EF0A2
-	b _080EF0D4
-	.pool
-_080EF0C8:
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldrh r1, [r0, 0x4]
-	ldr r0, =0x0000150d
-	cmp r1, r0
-	beq _080EF0A2
-_080EF0D4:
-	movs r0, 0
-_080EF0D6:
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end IsPriceDiscounted
-
 	thumb_func_start sub_80EF0E4
 sub_80EF0E4: @ 80EF0E4
 	push {r4,lr}

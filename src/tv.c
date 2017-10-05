@@ -2871,7 +2871,7 @@ void sub_80EEF6C(void)
 
 bool8 GetPriceReduction(u8 newsKind)
 {
-    bool8 IsPriceDiscounted(u8);
+    static bool8 IsPriceDiscounted(u8);
     u8 i;
 
     if (newsKind == 0)
@@ -2890,6 +2890,26 @@ bool8 GetPriceReduction(u8 newsKind)
         }
     }
     return FALSE;
+}
+
+static bool8 IsPriceDiscounted(u8 newsKind)
+{
+    switch (newsKind)
+    {
+        case POKENEWS_ONE:
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_SLATEPORT_CITY && gSaveBlock1Ptr->location.mapNum == MAP_ID_SLATEPORT_CITY && gScriptLastTalked == 25)
+            {
+                return TRUE;
+            }
+            return FALSE;
+        case POKENEWS_THREE:
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP && gSaveBlock1Ptr->location.mapNum == MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP)
+            {
+                return TRUE;
+            }
+            return FALSE;
+    }
+    return TRUE;
 }
 
 asm(".section .text.dotvshow");
