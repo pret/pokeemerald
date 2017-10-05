@@ -3372,6 +3372,57 @@ u16 sub_80EFA24(u16 passedSpecies)
     return species;
 }
 
+void sub_80EFA88(void)
+{
+    sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
+    gSpecialVar_0x8006 = sCurTVShowSlot;
+    if (sCurTVShowSlot == -1)
+    {
+        gScriptResult = TRUE;
+    }
+    else
+    {
+        gScriptResult = FALSE;
+    }
+}
+
+s8 FindEmptyTVSlotWithinFirstFiveShowsOfArray(TVShow *shows)
+{
+    u8 i;
+
+    for (i = 0; i < 5; i ++)
+    {
+        if (shows[i].common.kind == TVSHOW_OFF_AIR)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+s8 FindEmptyTVSlotBeyondFirstFiveShowsOfArray(TVShow *shows)
+{
+    s8 i;
+
+    for (i = 5; i < 24; i ++)
+    {
+        if (shows[i].common.kind == TVSHOW_OFF_AIR)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool8 TV_BernoulliTrial(u16 ratio)
+{
+    if (Random() <= ratio)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
