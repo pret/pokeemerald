@@ -26,6 +26,7 @@
 #include "rom6.h"
 #include "pokedex.h"
 #include "text.h"
+#include "script_menu.h"
 #include "tv.h"
 
 // Static type declarations
@@ -64,9 +65,7 @@ extern const u8 *const gTVBravoTrainerBattleTowerTextGroup[];
 
 void ClearPokemonNews(void);
 u8 GetTVChannelByShowType(u8);
-void CopyContestCategoryToStringVar(u8, u8);
-void CopyContestRankToStringVar(u8, u8);
-void TV_ConvertNumberToOrdinal(u8, u32);
+int sub_80EF370(int);
 static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
 static void SetTVMetatilesOnMap(int, int, u16);
@@ -183,7 +182,7 @@ const u8 *const gUnknown_0858D130[] = {
     gUnknown_0828DF05
 };
 
-const u8 *const gUnknown_0858D144[] = {
+u8 *const gUnknown_0858D144[] = {
     gStringVar1,
     gStringVar2,
     gStringVar3
@@ -2954,6 +2953,100 @@ static void sub_80EF120(u16 days)
     sub_80EEEB8();
 }
 
+void CopyContestRankToStringVar(u8 varIdx, u8 rank)
+{
+    switch (rank)
+    {
+        case 0: // NORMAL
+            StringCopy(gUnknown_0858D144[varIdx], gUnknown_0858BAF0[5]);
+            break;
+        case 1: // SUPER
+            StringCopy(gUnknown_0858D144[varIdx], gUnknown_0858BAF0[6]);
+            break;
+        case 2: // HYPER
+            StringCopy(gUnknown_0858D144[varIdx], gUnknown_0858BAF0[7]);
+            break;
+        case 3: // MASTER
+            StringCopy(gUnknown_0858D144[varIdx], gUnknown_0858BAF0[8]);
+            break;
+    }
+}
+
+void CopyContestCategoryToStringVar(u8 varIdx, u8 category)
+{
+    switch (category)
+    {
+        case 0: // COOL
+            StringCopy(gUnknown_0858D144[varIdx], gUnknown_0858BAF0[0]);
+            break;
+        case 1: // BEAUTY
+            StringCopy(gUnknown_0858D144[varIdx], gUnknown_0858BAF0[1]);
+            break;
+        case 2: // CUTE
+            StringCopy(gUnknown_0858D144[varIdx], gUnknown_0858BAF0[2]);
+            break;
+        case 3: // SMART
+            StringCopy(gUnknown_0858D144[varIdx], gUnknown_0858BAF0[3]);
+            break;
+        case 4: // TOUGH
+            StringCopy(gUnknown_0858D144[varIdx], gUnknown_0858BAF0[4]);
+            break;
+    }
+}
+
+void SetContestCategoryStringVarForInterview(void)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    CopyContestCategoryToStringVar(1, show->bravoTrainer.contestCategory);
+}
+
+void TV_PrintIntToStringVar(u8 varIdx, u32 value)
+{
+    int nDigits;
+
+    nDigits = sub_80EF370(value);
+    ConvertIntToDecimalStringN(gUnknown_0858D144[varIdx], value, STR_CONV_MODE_LEFT_ALIGN, nDigits);
+}
+
+int sub_80EF370(int value)
+{
+    if (value / 10 == 0)
+    {
+        return 1;
+    }
+    if (value / 100 == 0)
+    {
+        return 2;
+    }
+    if (value / 1000 == 0)
+    {
+        return 3;
+    }
+    if (value / 10000 == 0)
+    {
+        return 4;
+    }
+    if (value / 100000 == 0)
+    {
+        return 5;
+    }
+    if (value / 1000000 == 0)
+    {
+        return 6;
+    }
+    if (value / 10000000 == 0)
+    {
+        return 7;
+    }
+    if (value / 100000000 == 0)
+    {
+        return 8;
+    }
+    return 1;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
@@ -3130,13 +3223,13 @@ void DoTVShowBravoTrainerPokemonProfile(void)
         case 3:
             TVShowConvertInternationalString(gStringVar1, show->bravoTrainer.playerName, show->bravoTrainer.language);
             CopyEasyChatWord(gStringVar2, show->bravoTrainer.ecWords[0]);
-            TV_ConvertNumberToOrdinal(2, show->bravoTrainer.contestResult + 1);
+            TV_PrintIntToStringVar(2, show->bravoTrainer.contestResult + 1);
             sTVShowState = 5;
             break;
         case 4:
             TVShowConvertInternationalString(gStringVar1, show->bravoTrainer.playerName, show->bravoTrainer.language);
             CopyEasyChatWord(gStringVar2, show->bravoTrainer.ecWords[0]);
-            TV_ConvertNumberToOrdinal(2, show->bravoTrainer.contestResult + 1);
+            TV_PrintIntToStringVar(2, show->bravoTrainer.contestResult + 1);
             sTVShowState = 5;
             break;
         case 5:
@@ -3194,7 +3287,7 @@ void DoTVShowBravoTrainerBattleTower(void)
             {
                 StringCopy(gStringVar1, gText_OpenLevel);
             }
-            TV_ConvertNumberToOrdinal(1, show->bravoTrainerTower.numFights);
+            TV_PrintIntToStringVar(1, show->bravoTrainerTower.numFights);
             if (show->bravoTrainerTower.var1c == 1)
                 sTVShowState = 3;
             else
@@ -3202,7 +3295,7 @@ void DoTVShowBravoTrainerBattleTower(void)
             break;
         case 2:
             TVShowConvertInternationalString(gStringVar1, show->bravoTrainerTower.pokemonName, show->bravoTrainerTower.pokemonNameLanguage);
-            TV_ConvertNumberToOrdinal(1, show->bravoTrainerTower.numFights + 1);
+            TV_PrintIntToStringVar(1, show->bravoTrainerTower.numFights + 1);
             if (show->bravoTrainerTower.var1b == 0)
                 sTVShowState = 5;
             else

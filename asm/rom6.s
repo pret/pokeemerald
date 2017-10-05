@@ -8050,7 +8050,7 @@ sub_81397C4: @ 81397C4
 	cmp r1, r0
 	bls _081397E0
 	movs r0, 0
-	bl TV_ConvertNumberToOrdinal
+	bl TV_PrintIntToStringVar
 	b _08139862
 	.pool
 _081397E0:
