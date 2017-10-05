@@ -3,58 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EF40C
-sub_80EF40C: @ 80EF40C
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r6, r1, 0
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	movs r7, 0
-	movs r5, 0
-_080EF41E:
-	lsls r4, r5, 1
-	adds r0, r6, 0x6
-	adds r1, r0, r4
-	ldrh r0, [r1]
-	cmp r0, 0
-	beq _080EF43E
-	bl itemid_get_market_price
-	lsls r0, 16
-	lsrs r0, 16
-	adds r1, r6, 0
-	adds r1, 0xC
-	adds r1, r4
-	ldrh r1, [r1]
-	muls r0, r1
-	adds r7, r0
-_080EF43E:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x2
-	bls _080EF41E
-	ldrb r0, [r6, 0x2]
-	cmp r0, 0x1
-	bne _080EF458
-	asrs r1, r7, 1
-	mov r0, r8
-	bl TV_PrintIntToStringVar
-	b _080EF460
-_080EF458:
-	mov r0, r8
-	adds r1, r7, 0
-	bl TV_PrintIntToStringVar
-_080EF460:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80EF40C
-
 	thumb_func_start IsShowAlreadyOnTheAir
 IsShowAlreadyOnTheAir: @ 80EF46C
 	push {r4-r7,lr}

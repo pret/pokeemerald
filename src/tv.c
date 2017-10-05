@@ -18,6 +18,7 @@
 #include "battle_tower.h"
 #include "contest.h"
 #include "items.h"
+#include "item.h"
 #include "link.h"
 #include "main.h"
 #include "event_scripts.h"
@@ -2746,6 +2747,8 @@ void sub_80EED60(u16 delta)
     VarSet(0x40F1, VarGet(0x40F1) + delta);
 }
 
+// PokeNews
+
 void sub_80EED88(void)
 {
     u8 newsKind;
@@ -2953,6 +2956,8 @@ static void sub_80EF120(u16 days)
     sub_80EEEB8();
 }
 
+// DoTVShow
+
 void CopyContestRankToStringVar(u8 varIdx, u8 rank)
 {
     switch (rank)
@@ -3002,7 +3007,7 @@ void SetContestCategoryStringVarForInterview(void)
     CopyContestCategoryToStringVar(1, show->bravoTrainer.contestCategory);
 }
 
-void TV_PrintIntToStringVar(u8 varIdx, u32 value)
+void TV_PrintIntToStringVar(u8 varIdx, int value)
 {
     int nDigits;
 
@@ -3045,6 +3050,29 @@ int sub_80EF370(int value)
         return 8;
     }
     return 1;
+}
+
+void sub_80EF40C(u8 varIdx, TVShow *show)
+{
+    u8 i;
+    int price;
+
+    price = 0;
+    for (i = 0; i < 3; i ++)
+    {
+        if (show->smartshopperShow.itemIds[i] != ITEM_NONE)
+        {
+            price += itemid_get_market_price(show->smartshopperShow.itemIds[i]) * show->smartshopperShow.itemAmounts[i];
+        }
+    }
+    if (show->smartshopperShow.priceReduced == TRUE)
+    {
+        TV_PrintIntToStringVar(varIdx, price >> 1);
+    }
+    else
+    {
+        TV_PrintIntToStringVar(varIdx, price);
+    }
 }
 
 asm(".section .text.dotvshow");
