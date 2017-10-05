@@ -3423,6 +3423,26 @@ bool8 TV_BernoulliTrial(u16 ratio)
     return TRUE;
 }
 
+void sub_80EFB58(TVShow *show)
+{
+    u8 i;
+
+    i = Random() % 6;
+    while (TRUE)
+    {
+        if (i == 6)
+        {
+            i = 0;
+        }
+        if (show->fanclubLetter.words[i] != 0xFFFF)
+        {
+            break;
+        }
+        i ++;
+    }
+    CopyEasyChatWord(gStringVar3, show->fanclubLetter.words[i]);
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)

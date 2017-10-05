@@ -3,46 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EFB58
-sub_80EFB58: @ 80EFB58
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x6
-	bl __umodsi3
-	lsls r0, 24
-	lsrs r2, r0, 24
-	adds r5, r4, 0x4
-	ldr r6, =0x0000ffff
-	b _080EFB7E
-	.pool
-_080EFB78:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-_080EFB7E:
-	cmp r2, 0x6
-	bne _080EFB84
-	movs r2, 0
-_080EFB84:
-	lsls r1, r2, 1
-	adds r0, r5, r1
-	ldrh r0, [r0]
-	adds r3, r4, 0x4
-	cmp r0, r6
-	beq _080EFB78
-	ldr r0, =gStringVar3
-	adds r1, r3, r1
-	ldrh r1, [r1]
-	bl CopyEasyChatWord
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80EFB58
-
 	thumb_func_start sub_80EFBA4
 sub_80EFBA4: @ 80EFBA4
 	push {lr}
