@@ -3,55 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start GetPriceReduction
-GetPriceReduction: @ 80EF038
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r3, r0, 24
-	cmp r3, 0
-	bne _080EF048
-	b _080EF08A
-_080EF044:
-	movs r0, 0x1
-	b _080EF08C
-_080EF048:
-	movs r2, 0
-	ldr r4, =gSaveBlock1Ptr
-_080EF04C:
-	ldr r1, [r4]
-	lsls r0, r2, 2
-	adds r1, r0
-	ldr r5, =0x00002b50
-	adds r0, r1, r5
-	ldrb r0, [r0]
-	cmp r0, r3
-	bne _080EF080
-	ldr r2, =0x00002b51
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	cmp r0, 0x2
-	bne _080EF08A
-	adds r0, r3, 0
-	bl IsPriceDiscounted
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EF044
-	b _080EF08A
-	.pool
-_080EF080:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0xF
-	bls _080EF04C
-_080EF08A:
-	movs r0, 0
-_080EF08C:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end GetPriceReduction
-
 	thumb_func_start IsPriceDiscounted
 IsPriceDiscounted: @ 80EF094
 	push {lr}

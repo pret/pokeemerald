@@ -2869,6 +2869,29 @@ void sub_80EEF6C(void)
     }
 }
 
+bool8 GetPriceReduction(u8 newsKind)
+{
+    bool8 IsPriceDiscounted(u8);
+    u8 i;
+
+    if (newsKind == 0)
+    {
+        return FALSE;
+    }
+    for (i = 0; i < 16; i ++)
+    {
+        if (gSaveBlock1Ptr->pokeNews[i].kind == newsKind)
+        {
+            if (gSaveBlock1Ptr->pokeNews[i].state == 2 && IsPriceDiscounted(newsKind))
+            {
+                return TRUE;
+            }
+            return FALSE;
+        }
+    }
+    return FALSE;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
