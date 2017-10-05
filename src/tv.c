@@ -3143,6 +3143,53 @@ void FindActiveBroadcastByShowType_SetScriptResult(u8 kind)
     sub_80EFA88();
 }
 
+void InterviewBefore(void)
+{
+    void sub_80EF64C(void);
+    void sub_80EF6C4(void);
+    void sub_80EF704(void);
+    void sub_80EF79C(void);
+    void sub_80EF80C(void);
+    void sub_80EF7F4(void);
+    void sub_80EF800(void);
+    void sub_80EF84C(void);
+
+    gScriptResult = FALSE;
+    switch (gSpecialVar_0x8005)
+    {
+        case TVSHOW_FAN_CLUB_LETTER:
+            sub_80EF64C();
+            break;
+        case TVSHOW_RECENT_HAPPENINGS:
+            sub_80EF6C4();
+            break;
+        case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
+            sub_80EF704();
+            break;
+        case TVSHOW_UNKN_SHOWTYPE_04:
+            sub_80EF79C();
+            break;
+        case TVSHOW_NAME_RATER_SHOW:
+            sub_80EF7A8();
+            break;
+        case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
+            sub_80EF7B4();
+            break;
+        case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
+            sub_80EF80C();
+            break;
+        case TVSHOW_CONTEST_LIVE_UPDATES:
+            sub_80EF7F4();
+            break;
+        case TVSHOW_3_CHEERS_FOR_POKEBLOCKS:
+            sub_80EF800();
+            break;
+        case TVSHOW_FAN_CLUB_SPECIAL:
+            sub_80EF84C();
+            break;
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
