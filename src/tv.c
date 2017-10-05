@@ -2956,8 +2956,6 @@ static void sub_80EF120(u16 days)
     sub_80EEEB8();
 }
 
-// DoTVShow
-
 void CopyContestRankToStringVar(u8 varIdx, u8 rank)
 {
     switch (rank)
@@ -3120,6 +3118,29 @@ static void TV_SortPurchasesByQuantity(void)
             }
         }
     }
+}
+
+void FindActiveBroadcastByShowType_SetScriptResult(u8 kind)
+{
+    u8 i;
+    for (i = 0; i < 5; i ++)
+    {
+        if (gSaveBlock1Ptr->tvShows[i].common.kind == kind)
+        {
+            if (gSaveBlock1Ptr->tvShows[i].common.active == TRUE)
+            {
+                gScriptResult = TRUE;
+            }
+            else
+            {
+                DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, i);
+                sub_80EF93C(gSaveBlock1Ptr->tvShows);
+                sub_80EFA88();
+            }
+            return;
+        }
+    }
+    sub_80EFA88();
 }
 
 asm(".section .text.dotvshow");

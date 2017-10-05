@@ -3,54 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start FindActiveBroadcastByShowType_SetScriptResult
-FindActiveBroadcastByShowType_SetScriptResult: @ 80EF550
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r1, 0
-	ldr r5, =gSaveBlock1Ptr
-	ldr r4, =0x000027cc
-_080EF55C:
-	ldr r3, [r5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r2, r3, r0
-	adds r0, r2, r4
-	ldrb r0, [r0]
-	cmp r0, r6
-	bne _080EF5A4
-	ldr r6, =0x000027cd
-	adds r0, r2, r6
-	ldrb r2, [r0]
-	cmp r2, 0x1
-	bne _080EF590
-	ldr r0, =gScriptResult
-	strh r2, [r0]
-	b _080EF5B2
-	.pool
-_080EF590:
-	adds r0, r3, r4
-	bl DeleteTVShowInArrayByIdx
-	ldr r0, [r5]
-	adds r0, r4
-	bl sub_80EF93C
-	bl sub_80EFA88
-	b _080EF5B2
-_080EF5A4:
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x4
-	bls _080EF55C
-	bl sub_80EFA88
-_080EF5B2:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end FindActiveBroadcastByShowType_SetScriptResult
-
 	thumb_func_start InterviewBefore
 InterviewBefore: @ 80EF5B8
 	push {lr}
