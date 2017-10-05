@@ -3,39 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EFBA4
-sub_80EFBA4: @ 80EFBA4
-	push {lr}
-	adds r2, r0, 0
-	movs r3, 0
-	movs r1, 0
-	ldrb r0, [r2, 0x4]
-	cmp r0, 0xFF
-	beq _080EFBD0
-	adds r2, 0x4
-_080EFBB4:
-	adds r0, r2, r1
-	ldrb r0, [r0]
-	adds r0, r3, r0
-	lsls r0, 16
-	lsrs r3, r0, 16
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xA
-	bhi _080EFBD0
-	adds r0, r2, r1
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	bne _080EFBB4
-_080EFBD0:
-	movs r0, 0x7
-	ands r3, r0
-	adds r0, r3, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80EFBA4
-
 	thumb_func_start sub_80EFBDC
 sub_80EFBDC: @ 80EFBDC
 	push {r4-r7,lr}

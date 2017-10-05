@@ -3443,6 +3443,23 @@ void sub_80EFB58(TVShow *show)
     CopyEasyChatWord(gStringVar3, show->fanclubLetter.words[i]);
 }
 
+u8 sub_80EFBA4(TVShow *show)
+{
+    u8 i;
+    u16 ct;
+
+    ct = 0;
+    for (i = 0; i < 11; i ++)
+    {
+        if (show->nameRaterShow.pokemonName[i] == EOS)
+        {
+            break;
+        }
+        ct += show->nameRaterShow.pokemonName[i];
+    }
+    return ct & 7;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
