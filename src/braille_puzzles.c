@@ -246,9 +246,9 @@ void sub_8179860(void)
 
 bool8 ShouldDoBrailleFlyEffect(void)
 {
-    if(!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x44))
+    if (!FlagGet(SYS_BRAILLE_FLY) && (gSaveBlock1Ptr->location.mapGroup == 0x18 && gSaveBlock1Ptr->location.mapNum == 0x44))
     {
-        if(gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 25)
+        if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 25)
             { gBraillePuzzleCallbackFlag = FLY_PUZZLE; return TRUE; }
     }
     return FALSE;
@@ -362,7 +362,7 @@ bool8 FldEff_UsePuzzleEffect(void)
 {
     u8 taskId = oei_task_add();
 
-    if(gBraillePuzzleCallbackFlag == FLY_PUZZLE)
+    if (gBraillePuzzleCallbackFlag == FLY_PUZZLE)
     {
         gTasks[taskId].data[8] = (u32)UseFlyAncientTomb_Callback >> 16;
         gTasks[taskId].data[9] = (u32)UseFlyAncientTomb_Callback;
@@ -394,21 +394,21 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
         if (FlagGet(3) == TRUE)
             return FALSE;
 
-        for(i = 0; i < 36; i++)
+        for (i = 0; i < 36; i++)
         {
-            if(gSaveBlock1Ptr->pos.x == gUnknown_085EFE74[i][0] && gSaveBlock1Ptr->pos.y == gUnknown_085EFE74[i][1])
+            if (gSaveBlock1Ptr->pos.x == gUnknown_085EFE74[i][0] && gSaveBlock1Ptr->pos.y == gUnknown_085EFE74[i][1])
             {
-                if(i < 16)
+                if (i < 16)
                     VarSet(0x403B, (0x10000 << i | VarGet(0x403B) << 16) >> 16); // correct
-                else if(i < 32)
+                else if (i < 32)
                     VarSet(0x403C, (0x10000 << (i - 16) | VarGet(0x403C) << 16) >> 16); // hmm?
                 else
                     VarSet(0x403D, (0x10000 << (i - 32) | VarGet(0x403D) << 16) >> 16); // hmm?
 
-                if(VarGet(0x403B) != 0xFFFF || VarGet(0x403C) != 0xFF || VarGet(0x403D) != 0xF)
+                if (VarGet(0x403B) != 0xFFFF || VarGet(0x403C) != 0xFF || VarGet(0x403D) != 0xF)
                     return FALSE;
 
-                if(gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 21)
+                if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 21)
                     return TRUE;
                 else
                     return FALSE;
