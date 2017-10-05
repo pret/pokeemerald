@@ -3190,6 +3190,99 @@ void InterviewBefore(void)
     }
 }
 
+void sub_80EF64C(void)
+{
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_FAN_CLUB_LETTER);
+    if (!gScriptResult)
+    {
+        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_SPECIES, NULL)]);
+        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanclubLetter.words, 6);
+    }
+}
+
+void sub_80EF6C4(void)
+{
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_RECENT_HAPPENINGS);
+    if (!gScriptResult)
+    {
+        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].recentHappenings.words, 6);
+    }
+}
+
+void sub_80EF704(void)
+{
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_PKMN_FAN_CLUB_OPINIONS);
+    if (!gScriptResult)
+    {
+        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_SPECIES, NULL)]);
+        GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_NICKNAME, gStringVar2);
+        StringGetEnd10(gStringVar2);
+        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanclubOpinions.words, 2);
+    }
+}
+
+void sub_80EF79C(void)
+{
+    gScriptResult = TRUE;
+}
+
+void sub_80EF7A8(void)
+{
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_NAME_RATER_SHOW);
+}
+
+void sub_80EF7B4(void)
+{
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE);
+    if (!gScriptResult)
+    {
+        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].bravoTrainer.words, 2);
+    }
+}
+
+void sub_80EF7F4(void)
+{
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_CONTEST_LIVE_UPDATES);
+}
+
+void sub_80EF800(void)
+{
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_3_CHEERS_FOR_POKEBLOCKS);
+}
+
+void sub_80EF80C(void)
+{
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE);
+    if (!gScriptResult)
+    {
+        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].bravoTrainerTower.words, 1);
+    }
+}
+
+void sub_80EF84C(void)
+{
+    FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_FAN_CLUB_SPECIAL);
+    if (!gScriptResult)
+    {
+        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanClubSpecial.words, 1);
+    }
+}
+
+bool8 sub_80EF88C(u8 monIdx)
+{
+    struct Pokemon *pokemon;
+    u8 language;
+
+    pokemon = &gPlayerParty[monIdx];
+    GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
+    language = GetMonData(pokemon, MON_DATA_LANGUAGE, &language);
+    if (language == LANGUAGE_ENGLISH && !StringCompare(gSpeciesNames[GetMonData(pokemon, MON_DATA_SPECIES, NULL)], gStringVar1))
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
@@ -3365,20 +3458,20 @@ void DoTVShowBravoTrainerPokemonProfile(void)
             break;
         case 3:
             TVShowConvertInternationalString(gStringVar1, show->bravoTrainer.playerName, show->bravoTrainer.language);
-            CopyEasyChatWord(gStringVar2, show->bravoTrainer.ecWords[0]);
+            CopyEasyChatWord(gStringVar2, show->bravoTrainer.words[0]);
             TV_PrintIntToStringVar(2, show->bravoTrainer.contestResult + 1);
             sTVShowState = 5;
             break;
         case 4:
             TVShowConvertInternationalString(gStringVar1, show->bravoTrainer.playerName, show->bravoTrainer.language);
-            CopyEasyChatWord(gStringVar2, show->bravoTrainer.ecWords[0]);
+            CopyEasyChatWord(gStringVar2, show->bravoTrainer.words[0]);
             TV_PrintIntToStringVar(2, show->bravoTrainer.contestResult + 1);
             sTVShowState = 5;
             break;
         case 5:
             TVShowConvertInternationalString(gStringVar1, show->bravoTrainer.playerName, show->bravoTrainer.language);
             CopyContestCategoryToStringVar(1, show->bravoTrainer.contestCategory);
-            CopyEasyChatWord(gStringVar3, show->bravoTrainer.ecWords[1]);
+            CopyEasyChatWord(gStringVar3, show->bravoTrainer.words[1]);
             if (show->bravoTrainer.move)
                 sTVShowState = 6;
             else
@@ -3387,7 +3480,7 @@ void DoTVShowBravoTrainerPokemonProfile(void)
         case 6:
             StringCopy(gStringVar1, gSpeciesNames[show->bravoTrainer.species]);
             StringCopy(gStringVar2, gMoveNames[show->bravoTrainer.move]);
-            CopyEasyChatWord(gStringVar3, show->bravoTrainer.ecWords[1]);
+            CopyEasyChatWord(gStringVar3, show->bravoTrainer.words[1]);
             sTVShowState = 7;
             break;
         case 7:
@@ -3478,7 +3571,7 @@ void DoTVShowBravoTrainerBattleTower(void)
             sTVShowState = 11;
             break;
         case 11:
-            CopyEasyChatWord(gStringVar1, show->bravoTrainerTower.var18[0]);
+            CopyEasyChatWord(gStringVar1, show->bravoTrainerTower.words[0]);
             if (show->bravoTrainerTower.var1b == 0)
                 sTVShowState = 12;
             else
@@ -3486,7 +3579,7 @@ void DoTVShowBravoTrainerBattleTower(void)
             break;
         case 12:
         case 13:
-            CopyEasyChatWord(gStringVar1, show->bravoTrainerTower.var18[0]);
+            CopyEasyChatWord(gStringVar1, show->bravoTrainerTower.words[0]);
             TVShowConvertInternationalString(gStringVar2, show->bravoTrainerTower.trainerName, show->bravoTrainerTower.language);
             TVShowConvertInternationalString(gStringVar3, show->bravoTrainerTower.pokemonName, show->bravoTrainerTower.pokemonNameLanguage);
             sTVShowState = 14;

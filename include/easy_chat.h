@@ -32,5 +32,6 @@ void InitEasyChatPhrases(void);
 void easy_chat_input_maybe(void);
 void CopyEasyChatWord(u8 *, u16);
 bool32 sub_811F8D8(u16);
+void sub_811F88C(u16 *, u8);
 
 #endif // GUARD_EASYCHAT_H

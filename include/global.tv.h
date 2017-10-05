@@ -65,7 +65,7 @@ typedef union TVShow // size = 0x24
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 species;
-        /*0x04*/ u16 pad04[6];
+        /*0x04*/ u16 words[6];
         /*0x10*/ u8 playerName[8];
         /*0x18*/ u8 language;
     } fanclubLetter;
@@ -75,7 +75,7 @@ typedef union TVShow // size = 0x24
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 var02;
-        /*0x04*/ u16 var04[6];
+        /*0x04*/ u16 words[6];
         /*0x10*/ u8 playerName[8];
         /*0x18*/ u8 language;
         /*0x19*/ u8 pad19[10];
@@ -94,7 +94,7 @@ typedef union TVShow // size = 0x24
         /*0x0F*/ u8 var0F;
         /*0x10*/ u8 nickname[8];
         /*0x18*/ u16 var18[2];
-        /*0x1C*/ u16 var1C[4];
+        /*0x1C*/ u16 words[4];
     } fanclubOpinions;
 
     // TVSHOW_UNKN_SHOWTYPE_04 (dummied out)
@@ -124,7 +124,7 @@ typedef union TVShow // size = 0x24
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
         /*0x02*/ u16 species;
-        /*0x04*/ u16 ecWords[2];
+        /*0x04*/ u16 words[2];
         /*0x08*/ u8 pokemonNickname[11];
         /*0x13*/ u8 contestCategory:3;
         /*0x13*/ u8 contestRank:2;
@@ -144,7 +144,7 @@ typedef union TVShow // size = 0x24
         /*0x0C*/ u8 pokemonName[8];
         /*0x14*/ u16 defeatedSpecies;
         /*0x16*/ u16 numFights;
-        /*0x18*/ u16 var18[1];
+        /*0x18*/ u16 words[1];
         /*0x1A*/ u8 btLevel;
         /*0x1B*/ u8 var1b;
         /*0x1C*/ u8 var1c;
@@ -204,7 +204,8 @@ typedef union TVShow // size = 0x24
         /*0x02*/ u8 playerName[8];
         /*0x0a*/ u8 idLo;
         /*0x0b*/ u8 idHi;
-        /*0x0c*/ u8 unk_0c[10];
+        /*0x0c*/ u8 unk_0c[8];
+        /*0x14*/ u16 words[1];
         /*0x16*/ u8 unk_16;
         /*0x17*/ u8 language;
         /*0x18*/ u8 unk_18;
