@@ -56,6 +56,7 @@
 #define BATTLE_TYPE_RAYQUAZA        0x40000000
 #define BATTLE_TYPE_x80000000       0x80000000
 
+#define TRAINER_OPPONENT_3FE        0x3FE
 #define TRAINER_OPPONENT_C00        0xC00
 #define TRAINER_OPPONENT_800        0x800
 #define STEVEN_PARTNER_ID           0xC03
@@ -71,7 +72,10 @@
 #define BATTLE_PLAYER_TELEPORTED    0x5
 #define BATTLE_POKE_FLED            0x6
 #define BATTLE_CAUGHT               0x7
+#define BATTLE_FORFEITED            0x9
 #define BATTLE_OPPONENT_TELEPORTED  0xA
+
+#define BATTLE_OUTCOME_BIT_x80      0x80
 
 #define STATUS_SLEEP            0x7
 #define STATUS_POISON           0x8
@@ -171,8 +175,10 @@
 #define ACTION_GO_NEAR              7
 #define ACTION_SAFARI_ZONE_RUN      8
 #define ACTION_9                    9
-#define ACTION_CANCEL_PARTNER       12
-#define ACTION_NOTHING_FAINTED      13
+#define ACTION_RUN_BATTLESCRIPT     10 // when executing an action
+#define ACTION_CANCEL_PARTNER       12 // when choosing an action
+#define ACTION_FINISHED             12 // when executing an action
+#define ACTION_NOTHING_FAINTED      13 // when choosing an action
 #define ACTION_INIT_VALUE           0xFF
 
 #define ABILITYEFFECT_ON_SWITCHIN               0x0
@@ -559,22 +565,19 @@ struct BattleResults
     u8 playerSwitchesCounter; // 0x2
     u8 unk3;                  // 0x3
     u8 unk4;                  // 0x4
-    u8 unk5_0:1;              // 0x5
-    u8 unk5_1:1;              // 0x5
-    u8 caughtMonBall:4;       // 0x5
-    u8 unk5_6:1;              // 0x5
-    u8 unk5_7:1;              // 0x5
-    u16 poke1Species;         // 0x6
-    u8 pokeString1[10];       // 0x8
-    u8 unk12;
+    u8 unk5_0:1;              // 0x5 , 0x1
+    u8 unk5_1:1;              // 0x5 , 0x2
+    u8 caughtMonBall:4;       // 0x5 , 0x4/0x8/0x10/0x20
+    u8 unk5_6:1;              // 0x5 , 0x40
+    u8 unk5_7:1;              // 0x5 , 0x80
+    u16 playerMon1Species;    // 0x6
+    u8 playerMon1Name[11];    // 0x8
     u8 battleTurnCounter;     // 0x13
-    u8 pokeString2[10];       // 0x14
-    u8 field_1E;              // 0x1E
-    u8 field_1F;              // 0x1F
+    u8 playerMon2Name[11];    // 0x14
     u16 lastOpponentSpecies;  // 0x20
-    u16 lastUsedMove;         // 0x22
-    u16 opponentMove;         // 0x24
-    u16 opponentSpecies;      // 0x26
+    u16 lastUsedMovePlayer;   // 0x22
+    u16 lastUsedMoveOpponent; // 0x24
+    u16 playerMon2Species;    // 0x26
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[10];     // 0x2A
     u8 filler34[2];
@@ -605,7 +608,7 @@ struct BattleStruct
     u8 field_45;
     u8 field_46;
     u8 field_47;
-    u8 field_48;
+    u8 focusPunchBank;
     u8 field_49;
     u8 moneyMultiplier;
     u8 field_4B;
@@ -620,7 +623,7 @@ struct BattleStruct
     u8 field_58[4];
     u8 field_5C[4];
     u8 field_60[4][3];
-    u8 field_6C;
+    u8 runTries;
     u8 caughtMonNick[11];
     u8 field_78;
     u8 field_79;
@@ -630,7 +633,7 @@ struct BattleStruct
     u8 field_7D;
     u8 field_7E;
     u8 formToChangeInto;
-    u8 chosenMovesIds[BATTLE_BANKS_COUNT];
+    u8 chosenMovePositions[BATTLE_BANKS_COUNT];
     u8 stateIdAfterSelScript[BATTLE_BANKS_COUNT];
     u8 field_88;
     u8 field_89;
@@ -665,7 +668,9 @@ struct BattleStruct
     u8 field_B3;
     void (*savedCallback)(void);
     u16 usedHeldItems[BATTLE_BANKS_COUNT];
-    u8 field_C0[8];
+    u8 field_C0[4];
+    u8 field_C4[2];
+    u8 field_C6[2];
     u16 choicedMove[BATTLE_BANKS_COUNT];
     u16 changedItems[BATTLE_BANKS_COUNT];
     u8 intimidateBank;
@@ -818,6 +823,7 @@ extern struct BattleStruct* gBattleStruct;
 
 #define VARIOUS_CANCEL_MULTI_TURN_MOVES         0
 #define VARIOUS_SET_MAGIC_COAT_TARGET           1
+#define VARIOUS_CAN_RUN_FROM_BATTLE             2
 #define VARIOUS_GET_MOVE_TARGET                 3
 #define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
@@ -901,13 +907,15 @@ void sub_803FA70(u8 bank);
 void BattleMainCB2(void);
 void VBlankCB_Battle(void);
 void ResetSentPokesToOpponentValue(void);
-bool8 CanRunFromBattle(u8 bank);
+bool8 TryRunFromBattle(u8 bank);
 bool8 IsRunningFromBattleImpossible(void);
 void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
 void PressurePPLoseOnUsingImprision(u8 bankAtk);
 u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves);
 void SwapTurnOrder(u8, u8);
 void BattleTurnPassed(void);
+void RunBattleScriptCommands_PopCallbacksStack(void);
+void RunBattleScriptCommands(void);
 
 // battle_3
 #define MOVE_LIMITATION_ZEROMOVE    (1 << 0)
@@ -928,7 +936,7 @@ u8 UpdateTurnCounters(void);
 u8 TurnBasedEffects(void);
 bool8 sub_8041364(void);
 bool8 sub_8041728(void);
-void b_clear_atk_up_if_hit_flag_unless_enraged(void);
+void TryClearRageStatuses(void);
 u8 AtkCanceller_UnableToUseMove(void);
 bool8 sub_80423F4(u8 bank, u8 r1, u8 r2);
 u8 CastformDataTypeChange(u8 bank);
@@ -936,7 +944,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 void BattleScriptExecute(const u8* BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8* BS_ptr);
 u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
-void sub_8045868(u8 bank);
+void ClearFuryCutterDestinyBondGrudge(u8 bank);
 void sub_80458B4(void);
 u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 u8 IsPokeDisobedient(void);

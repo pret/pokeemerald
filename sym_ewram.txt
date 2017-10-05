@@ -310,10 +310,10 @@ gActionsByTurnOrder: @ 202407A
 gBanksByTurnOrder: @ 202407E
 	.space 0x4
 
-gCurrentMoveTurn: @ 2024082
+gCurrentTurnActionNumber: @ 2024082
 	.space 0x1
 
-gFightStateTracker: @ 2024083
+gCurrentActionFuncId: @ 2024083
 	.space 0x1
 
 gBattleMons: @ 2024084

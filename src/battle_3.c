@@ -50,7 +50,7 @@ extern u8 gBattleMoveFlags;
 extern s32 gTakenDmg[BATTLE_BANKS_COUNT];
 extern u8 gTakenDmgBanks[BATTLE_BANKS_COUNT];
 extern u8 gLastUsedAbility;
-extern u8 gFightStateTracker;
+extern u8 gCurrentActionFuncId;
 extern u32 gBattleExecBuffer;
 extern u16 gRandomMove;
 extern u8 gCurrMovePos;
@@ -181,8 +181,6 @@ extern const u16 gSoundMovesTable[];
 extern void sub_803F9EC();
 extern bool8 sub_80423F4(u8 bank, u8, u8);
 extern u8 weather_get_current(void);
-extern void sub_803E08C(void);
-extern void bc_move_exec_returning(void);
 extern s8 GetFlavourRelationByPersonality(u32 personality, u8 flavor);
 
 void BattleScriptPush(const u8* bsPtr)
@@ -1156,7 +1154,7 @@ bool8 sub_8041728(void)
     return FALSE;
 }
 
-void b_clear_atk_up_if_hit_flag_unless_enraged(void)
+void TryClearRageStatuses(void)
 {
     int i;
     for (i = 0; i < gNoOfAllBanks; i++)
@@ -5441,8 +5439,8 @@ void BattleScriptExecute(const u8* BS_ptr)
 {
     gBattlescriptCurrInstr = BS_ptr;
     BATTLE_CALLBACKS_STACK->function[BATTLE_CALLBACKS_STACK->size++] = gBattleMainFunc;
-    gBattleMainFunc = bc_move_exec_returning;
-    gFightStateTracker = 0;
+    gBattleMainFunc = RunBattleScriptCommands_PopCallbacksStack;
+    gCurrentActionFuncId = 0;
 }
 
 void BattleScriptPushCursorAndCallback(const u8* BS_ptr)
@@ -5450,7 +5448,7 @@ void BattleScriptPushCursorAndCallback(const u8* BS_ptr)
     BattleScriptPushCursor();
     gBattlescriptCurrInstr = BS_ptr;
     BATTLE_CALLBACKS_STACK->function[BATTLE_CALLBACKS_STACK->size++] = gBattleMainFunc;
-    gBattleMainFunc = sub_803E08C;
+    gBattleMainFunc = RunBattleScriptCommands;
 }
 
 enum
@@ -5520,7 +5518,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
 
     switch (caseID)
     {
-    case 0:
+    case ITEMEFFECT_ON_SWITCH_IN:
         switch (bankHoldEffect)
         {
         case HOLD_EFFECT_DOUBLE_PRIZE:
@@ -6185,7 +6183,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
     return effect;
 }
 
-void sub_8045868(u8 bank)
+void ClearFuryCutterDestinyBondGrudge(u8 bank)
 {
     gDisableStructs[bank].furyCutterCounter = 0;
     gBattleMons[bank].status2 &= ~(STATUS2_DESTINY_BOND);

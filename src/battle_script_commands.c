@@ -67,7 +67,7 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern const u8* gBattlescriptCurrInstr;
 extern u8 gCurrMovePos;
-extern u8 gFightStateTracker;
+extern u8 gCurrentActionFuncId;
 extern u32 gHitMarker;
 extern u8 gBattleMoveFlags;
 extern u8 gBattleCommunication[];
@@ -92,7 +92,7 @@ extern u16 gMoveToLearn;
 extern u16 gRandomMove;
 extern u8 gBankInMenu;
 extern u8 gActionForBanks[BATTLE_BANKS_COUNT];
-extern u8 gCurrentMoveTurn;
+extern u8 gCurrentTurnActionNumber;
 extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
 extern u16 gLockedMoves[BATTLE_BANKS_COUNT];
 extern u16 gPartnerTrainerId;
@@ -377,7 +377,7 @@ static void atk6E_set_atk_to_player0(void);
 static void atk6F_set_visible(void);
 static void atk70_record_last_used_ability(void);
 static void atk71_buffer_move_to_learn(void);
-static void atk72_jump_if_can_run_frombattle(void);
+static void atk72_jump_if_run_attempt_success(void);
 static void atk73_hp_thresholds(void);
 static void atk74_hp_thresholds2(void);
 static void atk75_item_effect_on_opponent(void);
@@ -509,8 +509,8 @@ static void atkF2_display_dex_info(void);
 static void atkF3_nickname_caught_poke(void);
 static void atkF4_subattackerhpbydmg(void);
 static void atkF5_removeattackerstatus1(void);
-static void atkF6_802BF48(void);
-static void atkF7_802BF54(void);
+static void atkF6_action_finished(void);
+static void atkF7_turn_finished(void);
 static void atkF8_trainer_slide_back(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
@@ -629,7 +629,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk6F_set_visible,
     atk70_record_last_used_ability,
     atk71_buffer_move_to_learn,
-    atk72_jump_if_can_run_frombattle,
+    atk72_jump_if_run_attempt_success,
     atk73_hp_thresholds,
     atk74_hp_thresholds2,
     atk75_item_effect_on_opponent,
@@ -761,8 +761,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkF3_nickname_caught_poke,
     atkF4_subattackerhpbydmg,
     atkF5_removeattackerstatus1,
-    atkF6_802BF48,
-    atkF7_802BF54,
+    atkF6_action_finished,
+    atkF7_turn_finished,
     atkF8_trainer_slide_back
 };
 
@@ -1097,9 +1097,9 @@ static void atk00_attackcanceler(void)
 {
     s32 i;
 
-    if (gBattleOutcome)
+    if (gBattleOutcome != 0)
     {
-        gFightStateTracker = 0xC;
+        gCurrentActionFuncId = ACTION_FINISHED;
         return;
     }
     if (gBattleMons[gBankAttacker].hp == 0 && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
@@ -2736,7 +2736,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 }
                 else
                 {
-                    if (BankGetTurnOrder(gEffectBank) > gCurrentMoveTurn)
+                    if (BankGetTurnOrder(gEffectBank) > gCurrentTurnActionNumber)
                         gBattleMons[gEffectBank].status2 |= sStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]];
                     gBattlescriptCurrInstr++;
                 }
@@ -3208,7 +3208,7 @@ static void atk19_faint_pokemon(void)
              && gBattleMons[gBankAttacker].hp != 0
              && gCurrentMove != MOVE_STRUGGLE)
             {
-                u8 moveIndex = *(gBattleStruct->chosenMovesIds + gBankAttacker);
+                u8 moveIndex = *(gBattleStruct->chosenMovePositions + gBankAttacker);
 
                 gBattleMons[gBankAttacker].pp[moveIndex] = 0;
                 BattleScriptPush(gBattlescriptCurrInstr);
@@ -4421,13 +4421,13 @@ static void atk3D_end(void)
 
     gBattleMoveFlags = 0;
     gActiveBank = 0;
-    gFightStateTracker = 0xB;
+    gCurrentActionFuncId = 0xB;
 }
 
 static void atk3E_end2(void)
 {
     gActiveBank = 0;
-    gFightStateTracker = 0xB;
+    gCurrentActionFuncId = 0xB;
 }
 
 static void atk3F_end3(void) // pops the main function stack
@@ -6956,9 +6956,9 @@ static void atk71_buffer_move_to_learn(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk72_jump_if_can_run_frombattle(void)
+static void atk72_jump_if_run_attempt_success(void)
 {
-    if (CanRunFromBattle(gBank1))
+    if (TryRunFromBattle(gBank1))
         gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     else
         gBattlescriptCurrInstr += 5;
@@ -7045,7 +7045,7 @@ static void atk76_various(void)
         else
             gBankTarget = gActiveBank;
         break;
-    case 2:
+    case VARIOUS_CAN_RUN_FROM_BATTLE:
         gBattleCommunication[0] = IsRunningFromBattleImpossible();
         break;
     case VARIOUS_GET_MOVE_TARGET:
@@ -7196,7 +7196,7 @@ static void atk76_various(void)
             gBattleOutcome = BATTLE_OPPONENT_TELEPORTED;
         break;
     case VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC:
-        EmitPlaySound(0, 0x19C, 1);
+        EmitPlaySound(0, BGM_KACHI1, 1);
         MarkBufferBankForExecution(gActiveBank);
         break;
     }
@@ -7212,7 +7212,7 @@ static void atk77_set_protect_like(void) // protect and endure
     if (lastMove != MOVE_PROTECT && lastMove != MOVE_DETECT && lastMove != MOVE_ENDURE)
         gDisableStructs[gBankAttacker].protectUses = 0;
 
-    if (gCurrentMoveTurn == (gNoOfAllBanks - 1))
+    if (gCurrentTurnActionNumber == (gNoOfAllBanks - 1))
         notLastTurn = FALSE;
 
     if (sProtectSuccessRates[gDisableStructs[gBankAttacker].protectUses] >= Random() && notLastTurn)
@@ -9715,7 +9715,7 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
         }
 
         gCurrentMove = MOVE_PURSUIT;
-        gCurrMovePos = gUnknown_020241E9 = *(gBattleStruct->chosenMovesIds + gBankTarget);
+        gCurrMovePos = gUnknown_020241E9 = *(gBattleStruct->chosenMovePositions + gBankTarget);
         gBattlescriptCurrInstr += 5;
         gBattleScripting.animTurn = 1;
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
@@ -10631,7 +10631,7 @@ static void atkDF_setmagiccoat(void)
 {
     gBankTarget = gBankAttacker;
     gSpecialStatuses[gBankAttacker].flag20 = 1;
-    if (gCurrentMoveTurn == gNoOfAllBanks - 1) // moves last turn
+    if (gCurrentTurnActionNumber == gNoOfAllBanks - 1) // moves last turn
     {
         gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     }
@@ -10645,7 +10645,7 @@ static void atkDF_setmagiccoat(void)
 static void atkE0_setstealstatchange(void) // snatch
 {
     gSpecialStatuses[gBankAttacker].flag20 = 1;
-    if (gCurrentMoveTurn == gNoOfAllBanks - 1) // moves last turn
+    if (gCurrentTurnActionNumber == gNoOfAllBanks - 1) // moves last turn
     {
         gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     }
@@ -11393,15 +11393,15 @@ static void atkF5_removeattackerstatus1(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkF6_802BF48(void)
+static void atkF6_action_finished(void)
 {
-    gFightStateTracker = 0xC;
+    gCurrentActionFuncId = ACTION_FINISHED;
 }
 
-static void atkF7_802BF54(void)
+static void atkF7_turn_finished(void)
 {
-    gFightStateTracker = 0xC;
-    gCurrentMoveTurn = gNoOfAllBanks;
+    gCurrentActionFuncId = ACTION_FINISHED;
+    gCurrentTurnActionNumber = gNoOfAllBanks;
 }
 
 static void atkF8_trainer_slide_back(void)

@@ -226,10 +226,10 @@ gTrainerMoneyTable:: @ 831AEB8
 @ 831BAD4
 	.include "data/text/ability_description_pointers.inc"
 
-gUnknown_0831BC0C:: @ 831BC0C
+gTurnActionsFuncsTable:: @ 831BC0C
 	.incbin "baserom.gba", 0x31bc0c, 0x38
 
-gUnknown_0831BC44:: @ 831BC44
+gEndTurnFuncsTable:: @ 831BC44
 	.incbin "baserom.gba", 0x31bc44, 0x2c
 
 gStatusConditionString_PoisonJpn:: @ 831BC70

@@ -68,7 +68,7 @@ _0813DA00:
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl evolution_cutscene
+	bl EvolutionScene
 _0813DA30:
 	add sp, 0x4
 	pop {r4-r7}
@@ -77,8 +77,8 @@ _0813DA30:
 	.pool
 	thumb_func_end sub_813D9C0
 
-	thumb_func_start sub_813DA40
-sub_813DA40: @ 813DA40
+	thumb_func_start BeginEvolutionScene
+BeginEvolutionScene: @ 813DA40
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -110,10 +110,10 @@ sub_813DA40: @ 813DA40
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813DA40
+	thumb_func_end BeginEvolutionScene
 
-	thumb_func_start evolution_cutscene
-evolution_cutscene: @ 813DA8C
+	thumb_func_start EvolutionScene
+EvolutionScene: @ 813DA8C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -393,7 +393,7 @@ evolution_cutscene: @ 813DA8C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end evolution_cutscene
+	thumb_func_end EvolutionScene
 
 	thumb_func_start sub_813DD7C
 sub_813DD7C: @ 813DD7C
