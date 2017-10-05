@@ -3337,6 +3337,41 @@ void sub_80EF93C(TVShow *shows)
     }
 }
 
+u16 sub_80EF9E8(u8 varIdx, u16 passedSpecies)
+{
+    u16 species;
+
+    species = sub_80EFA24(passedSpecies);
+    StringCopy(gUnknown_0858D144[varIdx], gSpeciesNames[species]);
+    return species;
+}
+
+u16 sub_80EFA24(u16 passedSpecies)
+{
+    u16 species;
+    u16 initSpecies;
+
+    species = (Random() % (NUM_SPECIES - 1)) + 1;
+    initSpecies = species;
+    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) != 1 || species == passedSpecies)
+    {
+        if (species == 1)
+        {
+            species = NUM_SPECIES - 1;
+        }
+        else
+        {
+            species --;
+        }
+        if (species == initSpecies)
+        {
+            species = passedSpecies;
+            return species;
+        }
+    };
+    return species;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
