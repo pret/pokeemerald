@@ -3,52 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EF500
-sub_80EF500: @ 80EF500
-	push {r4-r7,lr}
-	movs r2, 0
-_080EF504:
-	adds r1, r2, 0x1
-	lsls r0, r1, 24
-	lsrs r5, r0, 24
-	adds r7, r1, 0
-	cmp r5, 0x2
-	bhi _080EF53C
-	ldr r6, =gUnknown_02039F80
-	lsls r0, r2, 2
-	adds r4, r0, r6
-_080EF516:
-	lsls r0, r5, 2
-	adds r3, r0, r6
-	ldrh r0, [r4, 0x2]
-	ldrh r1, [r3, 0x2]
-	cmp r0, r1
-	bcs _080EF532
-	ldrh r1, [r4]
-	adds r2, r0, 0
-	ldrh r0, [r3]
-	strh r0, [r4]
-	ldrh r0, [r3, 0x2]
-	strh r0, [r4, 0x2]
-	strh r1, [r3]
-	strh r2, [r3, 0x2]
-_080EF532:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x2
-	bls _080EF516
-_080EF53C:
-	lsls r0, r7, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x1
-	bls _080EF504
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80EF500
-
 	thumb_func_start FindActiveBroadcastByShowType_SetScriptResult
 FindActiveBroadcastByShowType_SetScriptResult: @ 80EF550
 	push {r4-r6,lr}

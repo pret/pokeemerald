@@ -1499,7 +1499,7 @@ static void InterviewAfter_BravoTrainerBattleTowerProfile(void)
 
 void SaveRecordedItemPurchasesForTVShow(void)
 {
-    void sub_80EF500(void);
+    static void TV_SortPurchasesByQuantity(void);
     TVShow *show;
     u8 i;
 
@@ -1508,7 +1508,7 @@ void SaveRecordedItemPurchasesForTVShow(void)
         sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
         if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_SMART_SHOPPER, FALSE) != TRUE)
         {
-            sub_80EF500();
+            TV_SortPurchasesByQuantity();
             if (gUnknown_02039F80[0].quantity >= 20)
             {
                 show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
@@ -3096,6 +3096,30 @@ bool8 HasMixableShowAlreadyBeenSpawnedWithPlayerID(u8 kind, bool8 flag)
         }
     }
     return FALSE;
+}
+
+static void TV_SortPurchasesByQuantity(void)
+{
+    u8 i;
+    u8 j;
+    u16 tmpId;
+    u16 tmpQn;
+
+    for (i = 0; i < 2; i ++)
+    {
+        for (j = i + 1; j < 3; j ++)
+        {
+            if (gUnknown_02039F80[i].quantity < gUnknown_02039F80[j].quantity)
+            {
+                tmpId = gUnknown_02039F80[i].itemId;
+                tmpQn = gUnknown_02039F80[i].quantity;
+                gUnknown_02039F80[i].itemId = gUnknown_02039F80[j].itemId;
+                gUnknown_02039F80[i].quantity = gUnknown_02039F80[j].quantity;
+                gUnknown_02039F80[j].itemId = tmpId;
+                gUnknown_02039F80[j].quantity = tmpQn;
+            }
+        }
+    }
 }
 
 asm(".section .text.dotvshow");
