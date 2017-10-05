@@ -506,7 +506,7 @@ typedef struct // 2b50
 {
     u8 kind;
     u8 state;
-    u16 val2;
+    u16 days;
 } PokeNews;
 
 struct GabbyAndTyData
