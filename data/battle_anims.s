@@ -327,7 +327,7 @@ gUnknown_08525E98:: @ 8525E98
 gUnknown_08525F58:: @ 8525F58
 	.incbin "baserom.gba", 0x525f58, 0x20
 
-gUnknown_08525F78:: @ 8525F78
+gCastformFrontSpriteCoords:: @ 8525F78
 	.incbin "baserom.gba", 0x525f78, 0x10
 
 gUnknown_08525F88:: @ 8525F88

@@ -267,11 +267,11 @@ _080BA1D8:
 	.4byte _080BA250
 	.4byte _080BA24C
 _080BA214:
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	b _080BA24E
 	.pool
 _080BA21C:
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	b _080BA24E
 	.pool
 _080BA224:
@@ -295,7 +295,7 @@ _080BA244:
 	b _080BA24E
 	.pool
 _080BA24C:
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 _080BA24E:
 	ldrh r6, [r0]
 _080BA250:

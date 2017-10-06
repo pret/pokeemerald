@@ -533,7 +533,7 @@ sub_81221AC: @ 81221AC
 	bl is_c1_link_related_active
 	cmp r0, 0x1
 	beq _081221BE
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _081221C8

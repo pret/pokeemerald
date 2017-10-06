@@ -1358,8 +1358,8 @@ _080356AA:
 	.pool
 	thumb_func_end trs_config
 
-	thumb_func_start c2_berry_program_update_menu
-c2_berry_program_update_menu: @ 80356D0
+	thumb_func_start sub_80356D0
+sub_80356D0: @ 80356D0
 	push {lr}
 	movs r0, 0x2
 	bl DisableInterrupts
@@ -1381,10 +1381,10 @@ c2_berry_program_update_menu: @ 80356D0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end c2_berry_program_update_menu
+	thumb_func_end sub_80356D0
 
-	thumb_func_start sub_803570C
-sub_803570C: @ 803570C
+	thumb_func_start ApplyPlayerChosenFrameToBattleMenu
+ApplyPlayerChosenFrameToBattleMenu: @ 803570C
 	push {lr}
 	movs r0, 0x2
 	movs r1, 0x12
@@ -1422,7 +1422,7 @@ _0803575A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_803570C
+	thumb_func_end ApplyPlayerChosenFrameToBattleMenu
 
 	thumb_func_start load_battle_oval_graphics
 load_battle_oval_graphics: @ 8035770
@@ -1667,8 +1667,8 @@ _08035A8A:
 	.pool
 	thumb_func_end load_battle_oval_graphics
 
-	thumb_func_start sub_8035AA4
-sub_8035AA4: @ 8035AA4
+	thumb_func_start LoadBattleTextboxAndBackground
+LoadBattleTextboxAndBackground: @ 8035AA4
 	push {lr}
 	ldr r0, =gUnknown_08C00000
 	movs r1, 0xC0
@@ -1685,12 +1685,12 @@ sub_8035AA4: @ 8035AA4
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
-	bl sub_803570C
+	bl ApplyPlayerChosenFrameToBattleMenu
 	bl load_battle_oval_graphics
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8035AA4
+	thumb_func_end LoadBattleTextboxAndBackground
 
 	thumb_func_start sub_8035AE4
 sub_8035AE4: @ 8035AE4
@@ -2457,8 +2457,8 @@ _08036138:
 	.pool
 	thumb_func_end task00_0800F6FC
 
-	thumb_func_start sub_8036154
-sub_8036154: @ 8036154
+	thumb_func_start LoadBattleEntryBackground
+LoadBattleEntryBackground: @ 8036154
 	push {r4,r5,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
@@ -2668,10 +2668,10 @@ _080363AC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8036154
+	thumb_func_end LoadBattleEntryBackground
 
-	thumb_func_start sub_80363C4
-sub_80363C4: @ 80363C4
+	thumb_func_start LoadChosenBattleElement
+LoadChosenBattleElement: @ 80363C4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3051,7 +3051,7 @@ _08036742:
 	b _08036758
 	.pool
 _08036750:
-	bl sub_803570C
+	bl ApplyPlayerChosenFrameToBattleMenu
 	b _08036758
 _08036756:
 	movs r4, 0x1
@@ -3060,6 +3060,6 @@ _08036758:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80363C4
+	thumb_func_end LoadChosenBattleElement
 
 	.align 2, 0 @ Don't pad with nop.

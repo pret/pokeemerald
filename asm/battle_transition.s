@@ -9513,11 +9513,11 @@ sub_814ABE4: @ 814ABE4
 	strh r0, [r6, 0xC]
 	cmp r0, 0
 	bne _0814AC24
-	ldr r5, =gUnknown_02022E14
+	ldr r5, =gBattle_BG0_X
 	ldrh r1, [r5]
 	movs r0, 0x12
 	bl SetGpuReg
-	ldr r4, =gUnknown_02022E16
+	ldr r4, =gBattle_BG0_Y
 	ldrh r1, [r4]
 	movs r0, 0x10
 	bl SetGpuReg
@@ -9562,9 +9562,9 @@ sub_814AC38: @ 814AC38
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r5, [r0]
-	ldr r4, =gUnknown_02022E16
+	ldr r4, =gBattle_BG0_Y
 	strh r5, [r4]
 	movs r0, 0x12
 	movs r1, 0
@@ -9781,10 +9781,10 @@ sub_814AE40: @ 814AE40
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r4, =gUnknown_02022E16
+	ldr r4, =gBattle_BG0_Y
 	strh r1, [r4]
 	movs r0, 0x12
 	movs r1, 0

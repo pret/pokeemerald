@@ -221,7 +221,7 @@ _0806BEE0:
 	mov r0, r8
 	movs r2, 0
 	ldr r3, [sp, 0x10]
-	bl sub_813DA40
+	bl BeginEvolutionScene
 	movs r0, 0
 	bl _0806CD5C
 _0806BEF0:

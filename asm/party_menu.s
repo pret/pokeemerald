@@ -13868,7 +13868,7 @@ sub_81B7810: @ 81B7810
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_813DA40
+	bl BeginEvolutionScene
 	adds r0, r5, 0
 	bl DestroyTask
 	b _081B786E

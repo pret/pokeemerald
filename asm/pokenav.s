@@ -28252,7 +28252,7 @@ _081D4FB6:
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D500C
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _081D4FE6
@@ -28280,7 +28280,7 @@ _081D4FEC:
 	strb r0, [r4]
 	b _081D500C
 _081D4FF8:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081D500C
@@ -28673,13 +28673,13 @@ _081D5374:
 	bl sub_80097E8
 	b _081D53C0
 _081D537A:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _081D5386
 	b _081D548A
 _081D5386:
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	movs r0, 0xF
 	strb r0, [r4, 0x8]
 	b _081D548A
@@ -28694,7 +28694,7 @@ _081D5390:
 	b _081D548A
 	.pool
 _081D53A8:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081D548A

@@ -45,40 +45,40 @@ gUnknown_082DA7C4:: @ 82DA7C4
 gUnknown_082DA7CD:: @ 82DA7CD
 	.incbin "baserom.gba", 0x2da7cd, 0x160
 
-gUnknown_082DA92D:: @ 82DA92D
+BattleScript_LocalTrainerBattleWon:: @ 82DA92D
 	.incbin "baserom.gba", 0x2da92d, 0x3d
 
-gUnknown_082DA96A:: @ 82DA96A
+BattleScript_PayDayMoneyAndPickUpItems:: @ 82DA96A
 	.incbin "baserom.gba", 0x2da96a, 0x3
 
-gUnknown_082DA96D:: @ 82DA96D
+BattleScript_LocalBattleLost:: @ 82DA96D
 	.incbin "baserom.gba", 0x2da96d, 0x9e
 
 gUnknown_082DAA0B:: @ 82DAA0B
 	.incbin "baserom.gba", 0x2daa0b, 0x2a
 
-gUnknown_082DAA35:: @ 82DAA35
+BattleScript_LinkBattleWonOrLost:: @ 82DAA35
 	.incbin "baserom.gba", 0x2daa35, 0x52
 
-gUnknown_082DAA87:: @ 82DAA87
+BattleScript_FrontierTrainerBattleWon:: @ 82DAA87
 	.incbin "baserom.gba", 0x2daa87, 0x54
 
-gUnknown_082DAADB:: @ 82DAADB
+BattleScript_SmokeBallEscape:: @ 82DAADB
 	.incbin "baserom.gba", 0x2daadb, 0xe
 
-gUnknown_082DAAE9:: @ 82DAAE9
+BattleScript_RanAwayUsingMonAbility:: @ 82DAAE9
 	.incbin "baserom.gba", 0x2daae9, 0x7
 
-gUnknown_082DAAF0:: @ 82DAAF0
+BattleScript_GotAwaySafely:: @ 82DAAF0
 	.incbin "baserom.gba", 0x2daaf0, 0x7
 
-gUnknown_082DAAF7:: @ 82DAAF7
+BattleScript_WildMonFled:: @ 82DAAF7
 	.incbin "baserom.gba", 0x2daaf7, 0x7
 
 gUnknown_082DAAFE:: @ 82DAAFE
 	.incbin "baserom.gba", 0x2daafe, 0x4
 
-gUnknown_082DAB02:: @ 82DAB02
+BattleScript_PrintFailedToRunString:: @ 82DAB02
 	.incbin "baserom.gba", 0x2dab02, 0x9
 
 gUnknown_082DAB0B:: @ 82DAB0B
@@ -87,7 +87,7 @@ gUnknown_082DAB0B:: @ 82DAB0B
 gUnknown_082DAB11:: @ 82DAB11
 	.incbin "baserom.gba", 0x2dab11, 0x4
 
-gUnknown_082DAB15:: @ 82DAB15
+BattleScript_ActionSwitch:: @ 82DAB15
 	.incbin "baserom.gba", 0x2dab15, 0xa4
 
 BattleScript_Pausex20:: @ 82DABB9
@@ -255,7 +255,7 @@ BattleScript_OneHitKOMsg:: @ 82DB1CE
 BattleScript_SAtkDown2:: @ 82DB1D5
 	.incbin "baserom.gba", 0x2db1d5, 0x2a
 
-gUnknown_082DB1FF:: @ 82DB1FF
+BattleScript_FocusPunchSetUp:: @ 82DB1FF
 	.incbin "baserom.gba", 0x2db1ff, 0x14
 
 BattleScript_MoveUsedIsAsleep:: @ 82DB213
@@ -561,7 +561,7 @@ BattleScript_BerryStatRaiseEnd2:: @ 82DB84E
 BattleScript_BerryFocusEnergyEnd2:: @ 82DB869
 	.incbin "baserom.gba", 0x2db869, 0x10
 
-gUnknown_082DB879:: @ 82DB879
+BattleScript_ActionSelectionItemsCantBeUsed:: @ 82DB879
 	.incbin "baserom.gba", 0x2db879, 0x4
 
 gUnknown_082DB87D:: @ 82DB87D

@@ -95,7 +95,7 @@ _08179C48:
 	bl FreeAllSpritePalettes
 	b _08179D32
 _08179C4E:
-	bl init_uns_table_pokemon_copy
+	bl AllocateMonSpritesGfx
 	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -322,7 +322,7 @@ _08179E48:
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -797,7 +797,7 @@ sub_817A2C0: @ 817A2C0
 	ldr r0, =gUnknown_0203BD18
 	ldr r0, [r0]
 	bl Free
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 _0817A304:
 	pop {r4}
 	pop {r0}
