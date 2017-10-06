@@ -3460,6 +3460,87 @@ u8 sub_80EFBA4(TVShow *show)
     return ct & 7;
 }
 
+void sub_80EFBDC(u8 varIdx, u8 whichPosition, u8 charParam, u16 whichString, u16 species, TVShow *show /*r8*/)
+{
+    u8 buff[16];
+    u8 i;
+    u16 strlen;
+
+    for (i = 0; i < 3; i ++)
+    {
+        buff[i] = EOS;
+    }
+    if (whichString == 0)
+    {
+        strlen = StringLength(show->nameRaterShow.trainerName);
+        if (charParam == 0)
+        {
+            buff[0] = show->nameRaterShow.trainerName[whichPosition];
+        }
+        else if (charParam == 1)
+        {
+            buff[0] = show->nameRaterShow.trainerName[strlen - whichPosition];
+        }
+        else if (charParam == 2)
+        {
+            buff[0] = show->nameRaterShow.trainerName[whichPosition];
+            buff[1] = show->nameRaterShow.trainerName[whichPosition + 1];
+        }
+        else
+        {
+            buff[0] = show->nameRaterShow.trainerName[strlen - (whichPosition + 2)];
+            buff[1] = show->nameRaterShow.trainerName[strlen - (whichPosition + 1)];
+        }
+        ConvertInternationalString(buff, show->nameRaterShow.language);
+    }
+    else if (whichString == 1)
+    {
+        strlen = StringLength(show->nameRaterShow.pokemonName);
+        if (charParam == 0)
+        {
+            buff[0] = show->nameRaterShow.pokemonName[whichPosition];
+        }
+        else if (charParam == 1)
+        {
+            buff[0] = show->nameRaterShow.pokemonName[strlen - whichPosition];
+        }
+        else if (charParam == 2)
+        {
+            buff[0] = show->nameRaterShow.pokemonName[whichPosition];
+            buff[1] = show->nameRaterShow.pokemonName[whichPosition + 1];
+        }
+        else
+        {
+            buff[0] = show->nameRaterShow.pokemonName[strlen - (whichPosition + 2)];
+            buff[1] = show->nameRaterShow.pokemonName[strlen - (whichPosition + 1)];
+        }
+        ConvertInternationalString(buff, show->nameRaterShow.pokemonNameLanguage);
+    }
+    else
+    {
+        strlen = StringLength(gSpeciesNames[species]);
+        if (charParam == 0)
+        {
+            buff[0] = gSpeciesNames[species][whichPosition];
+        }
+        else if (charParam == 1)
+        {
+            buff[0] = gSpeciesNames[species][strlen - whichPosition];
+        }
+        else if (charParam == 2)
+        {
+            buff[0] = gSpeciesNames[species][whichPosition];
+            buff[1] = gSpeciesNames[species][whichPosition + 1];
+        }
+        else
+        {
+            buff[0] = gSpeciesNames[species][strlen - (whichPosition + 2)];
+            buff[1] = gSpeciesNames[species][strlen - (whichPosition + 1)];
+        }
+    }
+    StringCopy(gUnknown_0858D144[varIdx], buff);
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
