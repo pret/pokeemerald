@@ -2,6 +2,7 @@
 // Includes
 #include "global.h"
 #include "rtc.h"
+#include "rom4.h"
 #include "map_constants.h"
 #include "rng.h"
 #include "event_data.h"
@@ -28,6 +29,7 @@
 #include "pokedex.h"
 #include "text.h"
 #include "script_menu.h"
+#include "naming_screen.h"
 #include "tv.h"
 
 // Static type declarations
@@ -3564,6 +3566,21 @@ bool8 sub_80EFD98(void)
     }
     PutNameRaterShowOnTheAir();
     return TRUE;
+}
+
+void ChangePokemonNickname(void)
+{
+    static void c2_080CC144(void);
+
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
+    DoNamingScreen(3, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY, NULL), c2_080CC144);
+}
+
+static void c2_080CC144(void)
+{
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
+    c2_exit_to_overworld_1_continue_scripts_restart_music();
 }
 
 asm(".section .text.dotvshow");
