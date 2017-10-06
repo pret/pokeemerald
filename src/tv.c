@@ -3601,6 +3601,24 @@ static void ChangeBoxPokemonNickname_CB(void)
     c2_exit_to_overworld_1_continue_scripts_restart_music();
 }
 
+void sub_80EFF6C(void)
+{
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
+    StringGetEnd10(gStringVar1);
+}
+
+void sub_80EFF9C(void)
+{
+    if (player_id_to_dword() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))
+    {
+        gScriptResult = FALSE;
+    }
+    else
+    {
+        gScriptResult = TRUE;
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)

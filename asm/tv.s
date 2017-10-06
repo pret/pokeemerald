@@ -3,58 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80EFF6C
-sub_80EFF6C: @ 80EFF6C
-	push {r4,lr}
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	ldr r4, =gStringVar1
-	movs r1, 0x2
-	adds r2, r4, 0
-	bl GetMonData
-	adds r0, r4, 0
-	bl StringGetEnd10
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80EFF6C
-
-	thumb_func_start sub_80EFF9C
-sub_80EFF9C: @ 80EFF9C
-	push {r4,lr}
-	bl player_id_to_dword
-	adds r4, r0, 0
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0x1
-	movs r2, 0
-	bl GetMonData
-	cmp r4, r0
-	bne _080EFFD0
-	ldr r1, =gScriptResult
-	movs r0, 0
-	b _080EFFD4
-	.pool
-_080EFFD0:
-	ldr r1, =gScriptResult
-	movs r0, 0x1
-_080EFFD4:
-	strh r0, [r1]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80EFF9C
-
 	thumb_func_start GetTVChannelByShowType
 GetTVChannelByShowType: @ 80EFFE0
 	push {lr}
