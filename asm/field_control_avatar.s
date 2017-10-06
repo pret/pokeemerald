@@ -1411,7 +1411,7 @@ _0809CA64:
 	b _0809CB28
 	.pool
 _0809CA7C:
-	bl sub_8179A04
+	bl ShouldDoBrailleRegicePuzzle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
