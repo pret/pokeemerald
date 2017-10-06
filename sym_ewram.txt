@@ -1648,7 +1648,7 @@ gUnknown_0203BCFE: @ 203BCFE
 gUnknown_0203BD0E: @ 203BD0E
 	.space 0x6
 
-gUnknown_0203BD14: @ 203BD14
+gBraillePuzzleCallbackFlag: @ 203BD14
 	.space 0x4
 
 gUnknown_0203BD18: @ 203BD18

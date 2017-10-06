@@ -258,7 +258,7 @@ sub_813561C: @ 813561C
 	thumb_func_start sub_8135654
 sub_8135654: @ 8135654
 	push {r4,lr}
-	bl sub_81797DC
+	bl ShouldDoBrailleStrengthEffect
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813568C
@@ -404,7 +404,7 @@ sub_8135780: @ 8135780
 	lsrs r0, r2, 16
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
-	bl sub_81795E8
+	bl ShouldDoBrailleDigEffect
 	lsls r0, 24
 	cmp r0, 0
 	bne _081357AC
@@ -422,12 +422,12 @@ sub_81357BC: @ 81357BC
 	push {r4,lr}
 	movs r0, 0x26
 	bl FieldEffectActiveListRemove
-	bl sub_81795E8
+	bl ShouldDoBrailleDigEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
 	beq _081357D6
-	bl sub_817963C
+	bl DoBrailleDigEffect
 	b _081357EE
 _081357D6:
 	ldr r0, =task08_080A1C44
@@ -3329,7 +3329,7 @@ _081370E2:
 	thumb_func_start sub_81370FC
 sub_81370FC: @ 81370FC
 	push {r4,lr}
-	bl sub_81798D0
+	bl ShouldDoBrailleFlyEffect
 	lsls r0, 24
 	cmp r0, 0
 	beq _08137134
