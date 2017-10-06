@@ -3460,7 +3460,7 @@ u8 sub_80EFBA4(TVShow *show)
     return ct & 7;
 }
 
-void sub_80EFBDC(u8 varIdx, u8 whichPosition, u8 charParam, u16 whichString, u16 species, TVShow *show /*r8*/)
+void sub_80EFBDC(u8 varIdx, u8 whichPosition, u8 charParam, u16 whichString, u16 species, TVShow *show)
 {
     u8 buff[16];
     u8 i;
@@ -3539,6 +3539,31 @@ void sub_80EFBDC(u8 varIdx, u8 whichPosition, u8 charParam, u16 whichString, u16
         }
     }
     StringCopy(gUnknown_0858D144[varIdx], buff);
+}
+
+bool8 sub_80EFD54(void)
+{
+    u8 i;
+
+    for (i = 0; i < 5; i ++)
+    {
+        if (gSaveBlock1Ptr->tvShows[i].common.kind == gSpecialVar_0x8004)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_80EFD98(void)
+{
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
+    if (!StringCompare(gStringVar3, gStringVar1))
+    {
+        return FALSE;
+    }
+    PutNameRaterShowOnTheAir();
+    return TRUE;
 }
 
 asm(".section .text.dotvshow");
