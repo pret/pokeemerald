@@ -3,7 +3,7 @@
 
 	.section .rodata
 
-gUnknown_085EFD80:: @ 85EFD80
+gClockOamData:: @ 85EFD80
 	.incbin "baserom.gba", 0x5efd80, 0x8
 
 gUnknown_085EFD88:: @ 85EFD88
@@ -18,11 +18,11 @@ gUnknown_085EFD9C:: @ 85EFD9C
 gUnknown_085EFDA4:: @ 85EFDA4
 	.incbin "baserom.gba", 0x5efda4, 0x8
 
-gUnknown_085EFDAC:: @ 85EFDAC
+gClockFrames:: @ 85EFDAC
 	.incbin "baserom.gba", 0x5efdac, 0x18
 
-gUnknown_085EFDC4:: @ 85EFDC4
+gSaveFailedClockPal:: @ 85EFDC4
 	.incbin "baserom.gba", 0x5efdc4, 0x20
 
-gUnknown_085EFDE4:: @ 85EFDE4
+gSaveFailedClockGfx:: @ 85EFDE4
 	.incbin "baserom.gba", 0x5efde4, 0x90
