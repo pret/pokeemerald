@@ -11,6 +11,7 @@
 #include "strings.h"
 #include "string_util.h"
 #include "international_string_util.h"
+#include "pokemon_storage_system.h"
 #include "field_message_box.h"
 #include "easy_chat.h"
 #include "species.h"
@@ -3570,16 +3571,33 @@ bool8 sub_80EFD98(void)
 
 void ChangePokemonNickname(void)
 {
-    static void c2_080CC144(void);
+    static void ChangePokemonNickname_CB(void);
 
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
-    DoNamingScreen(3, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY, NULL), c2_080CC144);
+    DoNamingScreen(3, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY, NULL), ChangePokemonNickname_CB);
 }
 
-static void c2_080CC144(void)
+static void ChangePokemonNickname_CB(void)
 {
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
+    c2_exit_to_overworld_1_continue_scripts_restart_music();
+}
+
+void ChangeBoxPokemonNickname(void)
+{
+    static void ChangeBoxPokemonNickname_CB(void);
+    struct BoxPokemon *boxMon;
+
+    boxMon = GetBoxedMonPtr(gSpecialVar_0x8012, gSpecialVar_0x8013);
+    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar3);
+    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar2);
+    DoNamingScreen(3, gStringVar2, GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL), GetBoxMonGender(boxMon), GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL), ChangeBoxPokemonNickname_CB);
+}
+
+static void ChangeBoxPokemonNickname_CB(void)
+{
+    SetBoxMonNickFromAnyBox(gSpecialVar_0x8012, gSpecialVar_0x8013, gStringVar2);
     c2_exit_to_overworld_1_continue_scripts_restart_music();
 }
 
