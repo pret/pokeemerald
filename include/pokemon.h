@@ -640,6 +640,8 @@ u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
 u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
 void UpdatePartyPokerusTime(u16 days);
 void PartySpreadPokerus(struct Pokemon *party);
+s8 GetMonFlavourRelation(struct Pokemon *mon, u8 a2);
+s8 GetFlavourRelationByPersonality(u32 personality, u8 a2);
 
 #include "sprite.h"
 

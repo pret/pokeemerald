@@ -1600,7 +1600,7 @@ static void atk06_typecalc(void)
         RecordAbilityBattle(gBankTarget, gLastUsedAbility);
     }
     if (gBattleMoveFlags & MOVESTATUS_NOTAFFECTED)
-        gProtectStructs[gBankAttacker].notEffective = 1;
+        gProtectStructs[gBankAttacker].targetNotAffected = 1;
 
     gBattlescriptCurrInstr++;
 }
@@ -1639,14 +1639,14 @@ static void CheckWonderGuardAndLevitate(void)
             if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type1 && gTypeEffectiveness[i + 2] == 0)
             {
                 gBattleMoveFlags |= MOVESTATUS_NOTAFFECTED;
-                gProtectStructs[gBankAttacker].notEffective = 1;
+                gProtectStructs[gBankAttacker].targetNotAffected = 1;
             }
             if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type2 &&
                 gBattleMons[gBankTarget].type1 != gBattleMons[gBankTarget].type2 &&
                 gTypeEffectiveness[i + 2] == TYPE_MUL_NO_EFFECT)
             {
                 gBattleMoveFlags |= MOVESTATUS_NOTAFFECTED;
-                gProtectStructs[gBankAttacker].notEffective = 1;
+                gProtectStructs[gBankAttacker].targetNotAffected = 1;
             }
 
             // check super effective
@@ -5066,7 +5066,7 @@ static void atk49_moveend(void)
         case 9: // make attacker sprite visible
             if (gBattleMoveFlags & MOVESTATUS_NOEFFECT
                 || !(gStatuses3[gBankAttacker] & (STATUS3_SEMI_INVULNERABLE))
-                || HasMoveFailed(gBankAttacker))
+                || WasUnableToUseMove(gBankAttacker))
             {
                 gActiveBank = gBankAttacker;
                 EmitSpriteInvisibility(0, FALSE);
@@ -5297,7 +5297,7 @@ static void atk4A_typecalc2(void)
         RecordAbilityBattle(gBankTarget, gLastUsedAbility);
     }
     if (gBattleMoveFlags & MOVESTATUS_NOTAFFECTED)
-        gProtectStructs[gBankAttacker].notEffective = 1;
+        gProtectStructs[gBankAttacker].targetNotAffected = 1;
 
     gBattlescriptCurrInstr++;
 }
@@ -9518,19 +9518,19 @@ static void atkB3_rolloutdamagecalculation(void)
 
         if (!(gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS)) // first hit
         {
-            gDisableStructs[gBankAttacker].rolloutTimer1 = 5;
-            gDisableStructs[gBankAttacker].rolloutTimer2 = 5;
+            gDisableStructs[gBankAttacker].rolloutCounter1 = 5;
+            gDisableStructs[gBankAttacker].rolloutCounter2 = 5;
             gBattleMons[gBankAttacker].status2 |= STATUS2_MULTIPLETURNS;
             gLockedMoves[gBankAttacker] = gCurrentMove;
         }
-        if (--gDisableStructs[gBankAttacker].rolloutTimer1 == 0) // last hit
+        if (--gDisableStructs[gBankAttacker].rolloutCounter1 == 0) // last hit
         {
             gBattleMons[gBankAttacker].status2 &= ~(STATUS2_MULTIPLETURNS);
         }
 
         gDynamicBasePower = gBattleMoves[gCurrentMove].power;
 
-        for (i = 1; i < (5 - gDisableStructs[gBankAttacker].rolloutTimer1); i++)
+        for (i = 1; i < (5 - gDisableStructs[gBankAttacker].rolloutCounter1); i++)
             gDynamicBasePower *= 2;
 
         if (gBattleMons[gBankAttacker].status2 & STATUS2_DEFENSE_CURL)

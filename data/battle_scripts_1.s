@@ -78,7 +78,7 @@ BattleScript_WildMonFled:: @ 82DAAF7
 gUnknown_082DAAFE:: @ 82DAAFE
 	.incbin "baserom.gba", 0x2daafe, 0x4
 
-gUnknown_082DAB02:: @ 82DAB02
+BattleScript_PrintFailedToRunString:: @ 82DAB02
 	.incbin "baserom.gba", 0x2dab02, 0x9
 
 gUnknown_082DAB0B:: @ 82DAB0B

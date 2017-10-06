@@ -33,7 +33,7 @@ gBattlescriptsForRunningByItem:: @ 82DBD54
 	.4byte BattleScript_RunByUsingItem
 
 	.align 2
-gUnknown_082DBD58:: @ 82DBD58
+gBattlescriptsForSafariActions:: @ 82DBD58
 	.4byte gUnknown_082DBEBD
 	.4byte gUnknown_082DBEC4
 	.4byte gUnknown_082DBECD

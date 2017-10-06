@@ -1,6 +1,28 @@
 #ifndef GUARD_BATTLE_CONTROLLERS_H
 #define GUARD_BATTLE_CONTROLLERS_H
 
+#define REQUEST_ALL_BATTLE      0x0
+#define REQUEST_SPECIES_BATTLE  0x1
+#define REQUEST_HELDITEM_BATTLE 0x2
+#define REQUEST_MOVES_PP_BATTLE 0x3
+#define REQUEST_PPMOVE1_BATTLE  0x9
+#define REQUEST_PPMOVE2_BATTLE  0xA
+#define REQUEST_PPMOVE3_BATTLE  0xB
+#define REQUEST_PPMOVE4_BATTLE  0xC
+#define REQUEST_STATUS_BATTLE   0x28
+#define REQUEST_HP_BATTLE       0x2A
+
+#define RESET_ACTION_MOVE_SELECTION     0
+#define RESET_ACTION_SELECTION          1
+#define RESET_MOVE_SELECTION            2
+
+#define BALL_NO_SHAKES          0
+#define BALL_1_SHAKE            1
+#define BALL_2_SHAKES           2
+#define BALL_3_SHAKES_FAIL      3
+#define BALL_3_SHAKES_SUCCESS   4
+#define BALL_TRAINER_BLOCK      5
+
 struct HpAndStatus
 {
     u16 hp;
@@ -23,17 +45,6 @@ struct ChooseMoveStruct
     u8 monType1;
     u8 monType2;
 };
-
-#define REQUEST_ALL_BATTLE      0x0
-#define REQUEST_SPECIES_BATTLE  0x1
-#define REQUEST_HELDITEM_BATTLE 0x2
-#define REQUEST_MOVES_PP_BATTLE 0x3
-#define REQUEST_PPMOVE1_BATTLE  0x9
-#define REQUEST_PPMOVE2_BATTLE  0xA
-#define REQUEST_PPMOVE3_BATTLE  0xB
-#define REQUEST_PPMOVE4_BATTLE  0xC
-#define REQUEST_STATUS_BATTLE   0x28
-#define REQUEST_HP_BATTLE       0x2A
 
 // rom3.s, emitters
 void EmitSetMonData(u8 bufferId, u8 request, u8 c, u8 bytes, void *data);
@@ -70,22 +81,8 @@ void EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2);
 void EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct* movePpData);
 void EmitOpenBag(u8 bufferId, u8* arg1);
 void Emit_x32(u8 bufferId);
-
-#define RESET_ACTION_MOVE_SELECTION     0
-#define RESET_ACTION_SELECTION          1
-#define RESET_MOVE_SELECTION            2
-
+void EmitPrintString(u8 bufferId, u16 stringId);
 void EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
-
-#define BALL_NO_SHAKES          0
-#define BALL_1_SHAKE            1
-#define BALL_2_SHAKES           2
-#define BALL_3_SHAKES_FAIL      3
-#define BALL_3_SHAKES_SUCCESS   4
-#define BALL_TRAINER_BLOCK      5
-
 void EmitBallThrow(u8 bufferId, u8 caseId);
-
-void MarkBufferBankForExecution(u8 bank);
 
 #endif // GUARD_BATTLE_CONTROLLERS_H

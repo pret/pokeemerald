@@ -40,6 +40,7 @@
 #include "trainer_classes.h"
 #include "evolution_scene.h"
 #include "roamer.h"
+#include "safari_zone.h"
 
 struct UnknownStruct6
 {
@@ -157,6 +158,10 @@ extern const struct BgTemplate gUnknown_0831AA08[];
 extern const struct WindowTemplate * const gUnknown_0831ABA0[];
 extern const u8 gUnknown_0831ACE0[];
 extern const u8 gStatStageRatios[][2];
+extern const u8 gUnknown_0831BCE0[];
+extern const u8 gUnknown_0831BCEF[];
+extern const u8 gUnknown_0831BCF3[];
+extern const u8 * const gBattleScriptsForMoveEffects[];
 
 // strings
 extern const u8 gText_LinkStandby3[];
@@ -190,6 +195,7 @@ extern const u8 BattleScript_GotAwaySafely[];
 extern const u8 BattleScript_WildMonFled[];
 extern const u8 BattleScript_MoveUsedLoafingAround[];
 extern const u8 BattleScript_ActionSwitch[];
+extern const u8 BattleScript_PrintFailedToRunString[];
 
 // functions
 extern void HandleLinkBattleSetup(void); // rom_3
@@ -2942,7 +2948,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBank].flag0Unknown = 0;
     gProtectStructs[gActiveBank].prlzImmobility = 0;
     gProtectStructs[gActiveBank].confusionSelfDmg = 0;
-    gProtectStructs[gActiveBank].notEffective = 0;
+    gProtectStructs[gActiveBank].targetNotAffected = 0;
     gProtectStructs[gActiveBank].chargingTurn = 0;
     gProtectStructs[gActiveBank].fleeFlag = 0;
     gProtectStructs[gActiveBank].usedImprisionedMove = 0;
@@ -3824,15 +3830,18 @@ void sub_803BDA0(u8 bank)
     }
 }
 
-#define STATE_TURN_START_RECORD                     0
-#define STATE_BEFORE_ACTION_CHOSEN                  1
-#define STATE_WAIT_ACTION_CHOSEN                    2
-#define STATE_WAIT_ACTION_CASE_CHOSEN               3
-#define STATE_WAIT_ACTION_CONFIRMED_STANDBY         4
-#define STATE_WAIT_ACTION_CONFIRMED                 5
-#define STATE_SELECTION_SCRIPT                      6
-#define STATE_WAIT_SET_BEFORE_ACTION                7
-#define STATE_SELECTION_SCRIPT_MAY_RUN              8
+enum
+{
+    STATE_TURN_START_RECORD,
+    STATE_BEFORE_ACTION_CHOSEN,
+    STATE_WAIT_ACTION_CHOSEN,
+    STATE_WAIT_ACTION_CASE_CHOSEN,
+    STATE_WAIT_ACTION_CONFIRMED_STANDBY,
+    STATE_WAIT_ACTION_CONFIRMED,
+    STATE_SELECTION_SCRIPT,
+    STATE_WAIT_SET_BEFORE_ACTION,
+    STATE_SELECTION_SCRIPT_MAY_RUN
+};
 
 void HandleTurnActionSelectionState(void)
 {
@@ -4137,7 +4146,7 @@ void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case ACTION_RUN:
-                    gHitMarker |= HITMARKER_x8000;
+                    gHitMarker |= HITMARKER_RUN;
                     gBattleCommunication[gActiveBank]++;
                     break;
                 case ACTION_WATCHES_CAREFULLY:
@@ -4160,7 +4169,7 @@ void HandleTurnActionSelectionState(void)
                     gBattleCommunication[gActiveBank]++;
                     break;
                 case ACTION_SAFARI_ZONE_RUN:
-                    gHitMarker |= HITMARKER_x8000;
+                    gHitMarker |= HITMARKER_RUN;
                     gBattleCommunication[gActiveBank]++;
                     break;
                 case ACTION_9:
@@ -4221,7 +4230,7 @@ void HandleTurnActionSelectionState(void)
             {
                 if (gBattleBufferB[gActiveBank][1] == 13)
                 {
-                    gHitMarker |= HITMARKER_x8000;
+                    gHitMarker |= HITMARKER_RUN;
                     gActionForBanks[gActiveBank] = ACTION_RUN;
                     gBattleCommunication[gActiveBank] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
                 }
@@ -4613,7 +4622,7 @@ void SpecialStatusesClear(void)
 
 static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 {
-    if (!(gHitMarker & HITMARKER_x8000))
+    if (!(gHitMarker & HITMARKER_RUN))
     {
         while (gBattleStruct->focusPunchBank < gNoOfAllBanks)
         {
@@ -4976,8 +4985,6 @@ void RunBattleScriptCommands(void)
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
 }
 
-extern const u8 * const gBattleScriptsForMoveEffects[];
-
 void HandleAction_UseMove(void)
 {
     u8 side;
@@ -5216,6 +5223,7 @@ void HandleAction_Switch(void)
 extern const u8 * const gBattlescriptsForBallThrow[];
 extern const u8 * const gBattlescriptsForRunningByItem[];
 extern const u8 * const gUnknown_082DBD3C[];
+extern const u8 * const gBattlescriptsForSafariActions[];
 
 void HandleAction_UseItem(void)
 {
@@ -5375,3 +5383,198 @@ bool8 TryRunFromBattle(u8 bank)
 
     return effect;
 }
+
+void HandleAction_Run(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+    {
+        gCurrentTurnActionNumber = gNoOfAllBanks;
+
+        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+        {
+            if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+            {
+                if (gActionForBanks[gActiveBank] == ACTION_RUN)
+                    gBattleOutcome |= BATTLE_LOST;
+            }
+            else
+            {
+                if (gActionForBanks[gActiveBank] == ACTION_RUN)
+                    gBattleOutcome |= BATTLE_WON;
+            }
+        }
+
+        gBattleOutcome |= BATTLE_OUTCOME_BIT_x80;
+        gSaveBlock2Ptr->field_CA9_b = 1;
+    }
+    else
+    {
+        if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
+        {
+            if (!TryRunFromBattle(gBankAttacker)) // failed to run away
+            {
+                ClearFuryCutterDestinyBondGrudge(gBankAttacker);
+                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+                gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;
+                gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+            }
+        }
+        else
+        {
+            if (gBattleMons[gBankAttacker].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = 4;
+                gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;
+                gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+            }
+            else
+            {
+                gCurrentTurnActionNumber = gNoOfAllBanks;
+                gBattleOutcome = BATTLE_POKE_FLED;
+            }
+        }
+    }
+}
+
+void HandleAction_WatchesCarefully(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gBattlescriptCurrInstr = gBattlescriptsForSafariActions[0];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+}
+
+void HandleAction_SafariZoneBallThrow(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gNumSafariBalls--;
+    gLastUsedItem = ITEM_SAFARI_BALL;
+    gBattlescriptCurrInstr = gBattlescriptsForBallThrow[ITEM_SAFARI_BALL];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+}
+
+void HandleAction_ThrowPokeblock(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gBattleCommunication[MULTISTRING_CHOOSER] = gBattleBufferB[gBankAttacker][1] - 1;
+    gLastUsedItem = gBattleBufferB[gBankAttacker][2];
+
+    if (gBattleResults.field_1F < 0xFF)
+        gBattleResults.field_1F++;
+    if (gBattleStruct->field_7A < 3)
+        gBattleStruct->field_7A++;
+    if (gBattleStruct->field_7B > 1)
+    {
+        if (gBattleStruct->field_7B < gUnknown_0831BCE0[3 * gBattleStruct->field_7A + gBattleCommunication[MULTISTRING_CHOOSER]])
+            gBattleStruct->field_7B = 1;
+        else
+            gBattleStruct->field_7B -= gUnknown_0831BCE0[3 * gBattleStruct->field_7A + gBattleCommunication[MULTISTRING_CHOOSER]];
+    }
+
+    gBattlescriptCurrInstr = gBattlescriptsForSafariActions[2];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+}
+
+void HandleAction_GoNear(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+
+    gBattleStruct->field_7C += gUnknown_0831BCEF[gBattleStruct->field_79];
+    if (gBattleStruct->field_7C > 20)
+        gBattleStruct->field_7C = 20;
+
+    gBattleStruct->field_7B +=gUnknown_0831BCF3[gBattleStruct->field_79];
+    if (gBattleStruct->field_7B > 20)
+        gBattleStruct->field_7B = 20;
+
+    if (gBattleStruct->field_79 < 3)
+    {
+        gBattleStruct->field_79++;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+    }
+    else
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+    }
+    gBattlescriptCurrInstr = gBattlescriptsForSafariActions[1];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+}
+
+void HandleAction_SafriZoneRun(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    PlaySE(SE_NIGERU);
+    gCurrentTurnActionNumber = gNoOfAllBanks;
+    gBattleOutcome = BATTLE_RAN;
+}
+
+void HandleAction_Action9(void)
+{
+    gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+
+    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBankAttacker, gBattlePartyID[gBankAttacker])
+
+    gBattlescriptCurrInstr = gBattlescriptsForSafariActions[3];
+    gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
+    gActionsByTurnOrder[1] = ACTION_FINISHED;
+}
+
+void HandleAction_Action11(void)
+{
+    if (!sub_8041728())
+    {
+        gBattleStruct->field_4D = 0;
+        gCurrentActionFuncId = ACTION_FINISHED;
+    }
+}
+
+void HandleAction_NothingIsFainted(void)
+{
+    gCurrentTurnActionNumber++;
+    gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
+    gHitMarker &= ~(HITMARKER_DESTINYBOND | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_ATTACKSTRING_PRINTED
+                    | HITMARKER_NO_PPDEDUCT | HITMARKER_IGNORE_SAFEGUARD | HITMARKER_IGNORE_ON_AIR
+                    | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_x100000
+                    | HITMARKER_OBEYS | HITMARKER_x10 | HITMARKER_SYNCHRONISE_EFFECT
+                    | HITMARKER_x8000000 | HITMARKER_x4000000);
+}
+
+void HandleAction_ActionFinished(void)
+{
+    *(gBattleStruct->field_5C + gBanksByTurnOrder[gCurrentTurnActionNumber]) = 6;
+    gCurrentTurnActionNumber++;
+    gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
+    SpecialStatusesClear();
+    gHitMarker &= ~(HITMARKER_DESTINYBOND | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_ATTACKSTRING_PRINTED
+                    | HITMARKER_NO_PPDEDUCT | HITMARKER_IGNORE_SAFEGUARD | HITMARKER_IGNORE_ON_AIR
+                    | HITMARKER_IGNORE_UNDERGROUND | HITMARKER_IGNORE_UNDERWATER | HITMARKER_x100000
+                    | HITMARKER_OBEYS | HITMARKER_x10 | HITMARKER_SYNCHRONISE_EFFECT
+                    | HITMARKER_x8000000 | HITMARKER_x4000000);
+
+    gCurrentMove = 0;
+    gBattleMoveDamage = 0;
+    gBattleMoveFlags = 0;
+    gBattleScripting.animTurn = 0;
+    gBattleScripting.animTargetsHit = 0;
+    gUnknown_02024250[gBankAttacker] = 0;
+    gUnknown_02024258[gBankAttacker] = 0;
+    gBattleStruct->dynamicMoveType = 0;
+    gDynamicBasePower = 0;
+    gBattleScripting.atk49_state = 0;
+    gBattleCommunication[3] = 0;
+    gBattleCommunication[4] = 0;
+    gBattleScripting.field_16 = 0;
+    gBattleResources->battleScriptsStack->size = 0;
+}
+

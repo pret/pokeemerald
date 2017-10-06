@@ -2570,8 +2570,8 @@ _08033BB6:
 	.pool
 	thumb_func_end EmitMoveAnimation
 
-	thumb_func_start dp01_build_cmdbuf_x10_TODO
-dp01_build_cmdbuf_x10_TODO: @ 8033BE4
+	thumb_func_start EmitPrintString
+EmitPrintString: @ 8033BE4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2685,7 +2685,7 @@ _08033C88:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x10_TODO
+	thumb_func_end EmitPrintString
 
 	thumb_func_start EmitPrintStringPlayerOnly
 EmitPrintStringPlayerOnly: @ 8033CFC
