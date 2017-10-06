@@ -3619,6 +3619,32 @@ void sub_80EFF9C(void)
     }
 }
 
+u8 GetTVChannelByShowType(u8 kind)
+{
+    if (kind == TVSHOW_OFF_AIR)
+    {
+        return 0;
+    }
+    if (kind >= TVSHOW_FAN_CLUB_LETTER && kind < TVSHOW_POKEMON_TODAY_CAUGHT)
+    {
+        return 2;
+    }
+    if (kind >= TVSHOW_POKEMON_TODAY_CAUGHT && kind < TVSHOW_MASS_OUTBREAK)
+    {
+        return 3;
+    }
+    if (kind >= TVSHOW_MASS_OUTBREAK && kind < 61)
+    {
+        return 4;
+    }
+    return 0;
+}
+
+u32 player_id_to_dword(void)
+{
+    return (gSaveBlock2Ptr->playerTrainerId[3] << 24) | (gSaveBlock2Ptr->playerTrainerId[2] << 16) | (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)

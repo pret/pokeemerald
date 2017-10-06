@@ -3,65 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start GetTVChannelByShowType
-GetTVChannelByShowType: @ 80EFFE0
-	push {lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	adds r2, r1, 0
-	cmp r1, 0
-	beq _080F0016
-	subs r0, r1, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x13
-	bhi _080EFFFA
-	movs r0, 0x2
-	b _080F001C
-_080EFFFA:
-	adds r0, r1, 0
-	subs r0, 0x15
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x13
-	bhi _080F000A
-	movs r0, 0x3
-	b _080F001C
-_080F000A:
-	adds r0, r2, 0
-	subs r0, 0x29
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x13
-	bls _080F001A
-_080F0016:
-	movs r0, 0
-	b _080F001C
-_080F001A:
-	movs r0, 0x4
-_080F001C:
-	pop {r1}
-	bx r1
-	thumb_func_end GetTVChannelByShowType
-
-	thumb_func_start player_id_to_dword
-player_id_to_dword: @ 80F0020
-	ldr r0, =gSaveBlock2Ptr
-	ldr r2, [r0]
-	ldrb r0, [r2, 0xD]
-	lsls r0, 24
-	ldrb r1, [r2, 0xC]
-	lsls r1, 16
-	orrs r0, r1
-	ldrb r1, [r2, 0xB]
-	lsls r1, 8
-	orrs r0, r1
-	ldrb r1, [r2, 0xA]
-	orrs r0, r1
-	bx lr
-	.pool
-	thumb_func_end player_id_to_dword
-
 	thumb_func_start CheckForBigMovieOrEmergencyNewsOnTV
 CheckForBigMovieOrEmergencyNewsOnTV: @ 80F0040
 	push {lr}
