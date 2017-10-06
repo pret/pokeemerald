@@ -738,7 +738,7 @@ _0814E730:
 	ldr r5, [sp]
 	ldr r4, [sp, 0x4]
 	movs r3, 0
-	ldr r2, =gUnknown_0831BCA8
+	ldr r2, =gStatusConditionStringsTable
 _0814E738:
 	ldr r1, [r2]
 	ldr r0, [r1]

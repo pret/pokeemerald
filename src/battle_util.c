@@ -59,7 +59,6 @@ extern u8 gUnknown_020241E9;
 extern u8 gSentPokesToOpponent[2];
 
 extern const struct BattleMove gBattleMoves[];
-extern const u16 gSoundMovesTable[];
 
 // scripts
 extern const u8 gUnknown_082DAE2A[];
@@ -172,16 +171,14 @@ extern const u8 gUnknown_082DB6A5[]; //disobedient, uses a random move
 extern const u8 gUnknown_082DB6D9[]; //disobedient, went to sleep
 extern const u8 gUnknown_082DB6F0[]; //disobedient, hits itself
 
-// strings
-extern const u8 gStatusConditionString_PoisonJpn[];
-extern const u8 gStatusConditionString_SleepJpn[];
-extern const u8 gStatusConditionString_ParalysisJpn[];
-extern const u8 gStatusConditionString_BurnJpn[];
-extern const u8 gStatusConditionString_IceJpn[];
-extern const u8 gStatusConditionString_ConfusionJpn[];
-extern const u8 gStatusConditionString_LoveJpn[];
-
 extern u8 weather_get_current(void);
+
+// rom const data
+static const u16 sSoundMovesTable[] =
+{
+    MOVE_GROWL, MOVE_ROAR, MOVE_SING, MOVE_SUPERSONIC, MOVE_SCREECH, MOVE_SNORE,
+    MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, 0xFFFF
+};
 
 u8 GetBattleBank(u8 caseId)
 {
@@ -2109,12 +2106,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
         //_08042EF8
             if (gLastUsedAbility == ABILITY_SOUNDPROOF)
             {
-                for (i = 0; gSoundMovesTable[i] != 0xFFFF; i++)
+                for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
                 {
-                    if (gSoundMovesTable[i] == move)
+                    if (sSoundMovesTable[i] == move)
                         break;
                 }
-                if (gSoundMovesTable[i] != 0xFFFF)
+                if (sSoundMovesTable[i] != 0xFFFF)
                 {
                     if (gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS)
                         gHitMarker |= HITMARKER_NO_PPDEDUCT;
@@ -3415,7 +3412,7 @@ _08042EF8:\n\
 	bl _0804441E\n\
 _08042F02:\n\
 	movs r4, 0\n\
-	ldr r0, =gSoundMovesTable\n\
+	ldr r0, =sSoundMovesTable\n\
 	ldrh r2, [r0]\n\
 	ldr r3, =0x0000ffff\n\
 	adds r1, r0, 0\n\
