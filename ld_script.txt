@@ -225,7 +225,7 @@ SECTIONS {
         asm/berry_tag_screen.o(.text);
         asm/mystery_event_menu.o(.text);
         asm/save_failed_screen.o(.text);
-        asm/braille_puzzles.o(.text);
+        src/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
         asm/clear_save_data_screen.o(.text);
         asm/intro_credits_graphics.o(.text);
