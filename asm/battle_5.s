@@ -6,8 +6,8 @@
 	.text
 
     
-	thumb_func_start sub_8056F28
-sub_8056F28: @ 8056F28
+	thumb_func_start AllocateBattleResrouces
+AllocateBattleResrouces: @ 8056F28
 	push {r4-r6,lr}
 	ldr r5, =gBattleResources
 	ldr r6, =gBattleTypeFlags
@@ -102,10 +102,10 @@ _08056FFA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8056F28
+	thumb_func_end AllocateBattleResrouces
 
-	thumb_func_start sub_8057028
-sub_8057028: @ 8057028
+	thumb_func_start FreeBattleResources
+FreeBattleResources: @ 8057028
 	push {r4-r6,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -181,7 +181,7 @@ _080570D0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8057028
+	thumb_func_end FreeBattleResources
 
 	thumb_func_start AdjustFriendshipOnBattleFaint
 AdjustFriendshipOnBattleFaint: @ 80570F4

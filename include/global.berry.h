@@ -1,9 +1,12 @@
 #ifndef GUARD_GLOBAL_BERRY_H
 #define GUARD_GLOBAL_BERRY_H
 
+#define BERRY_NAME_COUNT 7
+#define BERRY_ITEM_EFFECT_COUNT 18
+
 struct Berry
 {
-    const u8 name[7];
+    const u8 name[BERRY_NAME_COUNT];
     u8 firmness;
     u16 size;
     u8 maxYield;
@@ -23,7 +26,7 @@ struct Berry
 
 struct Berry2
 {
-    u8 name[7];
+    u8 name[BERRY_NAME_COUNT];
     u8 firmness;
     u16 size;
     u8 maxYield;
@@ -42,7 +45,7 @@ struct Berry2
 struct EnigmaBerry
 {
     struct Berry2 berry;
-    u8 itemEffect[18];
+    u8 itemEffect[BERRY_ITEM_EFFECT_COUNT];
     u8 holdEffect;
     u8 holdEffectParam;
     u32 checksum;
@@ -50,9 +53,9 @@ struct EnigmaBerry
 
 struct BattleEnigmaBerry
 {
-    /*0x00*/ u8 name[7];
+    /*0x00*/ u8 name[BERRY_NAME_COUNT];
     /*0x07*/ u8 holdEffect;
-    /*0x08*/ u8 itemEffect[18];
+    /*0x08*/ u8 itemEffect[BERRY_ITEM_EFFECT_COUNT];
     /*0x1A*/ u8 holdEffectParam;
 };
 

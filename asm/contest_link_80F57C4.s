@@ -92,10 +92,10 @@ _080F57E0:
 	lsls r1, 8
 	movs r0, 0
 	bl SetGpuRegBits
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, =gBattle_BG1_X
 	strh r1, [r0]
@@ -107,15 +107,15 @@ _080F57E0:
 	strh r1, [r0]
 	ldr r0, =gBattle_BG3_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E28
+	ldr r0, =gBattle_WIN1H
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E2A
+	ldr r0, =gBattle_WIN1V
 	strh r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -387,10 +387,10 @@ sub_80F5B00: @ 80F5B00
 	strb r0, [r1, 0x2]
 	ldr r0, =sub_80F5C00
 	bl SetMainCallback2
-	ldr r1, =gUnknown_02022E28
+	ldr r1, =gBattle_WIN1H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E2A
+	ldr r1, =gBattle_WIN1V
 	ldr r2, =0x000080a0
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -441,11 +441,11 @@ sub_80F5C00: @ 80F5C00
 	thumb_func_start sub_80F5C24
 sub_80F5C24: @ 80F5C24
 	push {lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
@@ -469,23 +469,23 @@ sub_80F5C24: @ 80F5C24
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	ldrh r1, [r0]
 	movs r0, 0x40
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	ldrh r1, [r0]
 	movs r0, 0x44
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E28
+	ldr r0, =gBattle_WIN1H
 	ldrh r1, [r0]
 	movs r0, 0x42
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E2A
+	ldr r0, =gBattle_WIN1V
 	ldrh r1, [r0]
 	movs r0, 0x46
 	bl SetGpuReg
@@ -702,7 +702,7 @@ sub_80F5ED8: @ 80F5ED8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080F5EFC
@@ -1347,10 +1347,10 @@ _080F643C:
 	.4byte _080F6638
 	.4byte _080F667C
 _080F6454:
-	ldr r1, =gUnknown_02022E24
+	ldr r1, =gBattle_WIN0H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E26
+	ldr r1, =gBattle_WIN0V
 	ldr r3, =0x00005050
 	adds r0, r3, 0
 	strh r0, [r1]
@@ -1364,7 +1364,7 @@ _080F6454:
 	mov r9, r4
 	ldr r4, =gMonFrontPicTable
 	mov r12, r4
-	ldr r4, =gBattleSpritesGfx
+	ldr r4, =gMonSpritesGfxPtr
 	mov r8, r4
 	cmp r0, 0
 	beq _080F648C
@@ -1494,7 +1494,7 @@ _080F65A4:
 	strh r0, [r4, 0xC]
 _080F65BA:
 	ldrb r2, [r4, 0xC]
-	ldr r3, =gUnknown_02022E26
+	ldr r3, =gBattle_WIN0V
 	movs r0, 0x50
 	subs r0, r2
 	lsls r0, 8
@@ -1556,7 +1556,7 @@ _080F6638:
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0x2
 	bne _080F669C
-	ldr r3, =gUnknown_02022E26
+	ldr r3, =gBattle_WIN0V
 	ldrh r0, [r3]
 	lsrs r2, r0, 8
 	adds r0, r2, 0x2
@@ -1706,7 +1706,7 @@ sub_80F677C: @ 80F677C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F67AC
@@ -1842,7 +1842,7 @@ sub_80F68B4: @ 80F68B4
 	ldrh r3, [r2]
 	adds r0, r3, 0x2
 	strh r0, [r2]
-	ldr r4, =gUnknown_02022E22
+	ldr r4, =gBattle_BG3_Y
 	ldrh r5, [r4]
 	adds r1, r5, 0x1
 	strh r1, [r4]
@@ -2870,10 +2870,10 @@ _080F70BE:
 	adds r5, 0x1
 	cmp r5, 0x2
 	ble _080F70BE
-	ldr r1, =gUnknown_02022E24
+	ldr r1, =gBattle_WIN0H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r2, =gUnknown_02022E26
+	ldr r2, =gBattle_WIN0V
 	ldrh r1, [r4, 0x22]
 	adds r0, r1, 0
 	subs r0, 0x10
@@ -2910,8 +2910,8 @@ sub_80F7144: @ 80F7144
 	orrs r0, r1
 	mov r1, r12
 	strb r0, [r1]
-	ldr r7, =gUnknown_02022E24
-	ldr r6, =gUnknown_02022E26
+	ldr r7, =gBattle_WIN0H
+	ldr r6, =gBattle_WIN0V
 	adds r5, r3, 0
 	movs r4, 0x4
 	adds r2, 0x2E
@@ -4522,7 +4522,7 @@ sub_80F7DF4: @ 80F7DF4
 	bl AllocZeroed
 	ldr r1, [r4]
 	str r0, [r1, 0x1C]
-	bl init_uns_table_pokemon_copy
+	bl AllocateMonSpritesGfx
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4569,7 +4569,7 @@ sub_80F7E64: @ 80F7E64
 	str r4, [r0, 0x1C]
 	bl Free
 	str r4, [r5]
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -5633,7 +5633,7 @@ sub_80F87B4: @ 80F87B4
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F87D0

@@ -11564,7 +11564,7 @@ sub_813B534: @ 813B534
 	str r0, [r2]
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0813B552
@@ -11651,11 +11651,11 @@ _0813B5FE:
 	lsrs r0, 24
 	ldr r1, =gSpecialVar_0x8004
 	movs r2, 0x2
-	bl link_0800A448
+	bl SendBlock
 	b _0813B708
 	.pool
 _0813B614:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	movs r1, 0x2
 	ands r1, r0
 	cmp r1, 0
@@ -11669,7 +11669,7 @@ _0813B622:
 	b _0813B790
 _0813B62E:
 	ldr r5, =gSpecialVar_0x8005
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r1
@@ -11738,11 +11738,11 @@ _0813B6C2:
 	lsrs r0, 24
 	ldr r1, =gScriptResult
 	movs r2, 0x2
-	bl link_0800A448
+	bl SendBlock
 	b _0813B708
 	.pool
 _0813B6E4:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -11752,7 +11752,7 @@ _0813B6E4:
 	cmp r0, 0
 	beq _0813B790
 	ldr r1, =gScriptResult
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	ldrh r0, [r0]
 	strh r0, [r1]
 	movs r0, 0

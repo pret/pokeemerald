@@ -57,8 +57,8 @@ SECTIONS {
         asm/rom3.o(.text);
         src/decompress.o(.text);
         asm/battle_1.o(.text);
-        asm/battle_2.o(.text);
-        src/battle_3.o(.text);
+        src/battle_2.o(.text);
+        src/battle_util.o(.text);
         src/battle_script_commands.o(.text);
         asm/battle_5.o(.text);
         asm/battle_controller_player.o(.text);
@@ -325,6 +325,8 @@ SECTIONS {
         data/link.o(.rodata);
         src/rtc.o(.rodata);
         data/data2b.o(.rodata);
+        src/battle_2.o(.rodata);
+        src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
         data/battle_controller_player.o(.rodata);
         data/smokescreen.o(.rodata);
