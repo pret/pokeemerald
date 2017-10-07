@@ -1621,14 +1621,7 @@ gUnknown_0203BCF4: @ 203BCF4
 gUnknown_0203BCF8: @ 203BCF8
 	.space 0x4
 
-gUnknown_0203BCFC: @ 203BCFC
-	.space 0x2
-
-gUnknown_0203BCFE: @ 203BCFE
-	.space 0x10
-
-gUnknown_0203BD0E: @ 203BD0E
-	.space 0x6
+    .include "src/save_failed_screen.o"
 
 gBraillePuzzleCallbackFlag: @ 203BD14
 	.space 0x4

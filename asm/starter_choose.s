@@ -122,12 +122,12 @@ set_256color_bg_bg0: @ 8133F0C
 	ldr r0, =0x81000200
 	str r0, [r2, 0x8]
 	ldr r0, [r2, 0x8]
-	ldr r0, =gUnknown_085B0E04
+	ldr r0, =gBirchHelpGfx
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_085B0A80
+	ldr r0, =gBirchBagTilemap
 	ldr r1, =0x06003000
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_085B0C0C
+	ldr r0, =gBirchGrassTilemap
 	ldr r1, =0x06003800
 	bl LZ77UnCompVram
 	movs r0, 0
@@ -155,7 +155,7 @@ set_256color_bg_bg0: @ 8133F0C
 	movs r1, 0xE0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r0, =gUnknown_085B0A00
+	ldr r0, =gBirchBagGrassPal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadPalette
