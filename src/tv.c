@@ -4545,6 +4545,38 @@ void sub_80F0B64(void)
     }
 }
 
+void sub_80F0BB8(void)
+{
+    u8 i;
+
+    for (i = 0; i < 5; i ++)
+    {
+        if (GetTVChannelByShowType(gSaveBlock1Ptr->tvShows[i].common.kind) == 2)
+        {
+            gSaveBlock1Ptr->tvShows[i].common.active = FALSE;
+        }
+    }
+}
+
+void sub_80F0C04(void)
+{
+    s8 i;
+    s8 ct;
+
+    ct = 0;
+    for (i = 5; i < 24; i ++)
+    {
+        if (gSaveBlock1Ptr->tvShows[i].common.kind == TVSHOW_OFF_AIR)
+        {
+            ct ++;
+        }
+    }
+    for (i = 0; i < 5 - ct; i ++)
+    {
+        DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, i + 5);
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
