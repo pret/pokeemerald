@@ -250,7 +250,7 @@ static void CB2_FadeAndReturnToTitleScreen(void)
     }
 }
 
-void CB2_ReturnToTitleScreen(void)
+static void CB2_ReturnToTitleScreen(void)
 {
     if (!UpdatePaletteFade())
     {
