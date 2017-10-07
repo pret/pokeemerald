@@ -102,6 +102,9 @@ void sub_80F0708(void);
 void sub_80F0B64(void);
 s8 sub_80F06D0(TVShow *);
 bool8 sub_80F049C(TVShow *[], TVShow *[], u8);
+bool8 sub_80F0580(TVShow *, TVShow *, u8);
+bool8 sub_80F05E8(TVShow *, TVShow *, u8);
+bool8 sub_80F0668(TVShow *, TVShow *, u8);
 
 void TVShowDone(void);
 
@@ -3841,6 +3844,37 @@ void sub_80F0358(TVShow player1[25], TVShow player2[25], TVShow player3[25], TVS
             }
         }
     }
+}
+
+bool8 sub_80F049C(TVShow *src[25], TVShow *dest[25], u8 idx)
+{
+    u8 value;
+    u8 switchval;
+    TVShow *tv1;
+    TVShow *tv2;
+
+    tv1 = *src;
+    tv2 = *dest;
+    value = FALSE;
+    switchval = GetTVChannelByShowType(tv2[gUnknown_03001176].common.kind);
+    switch (switchval)
+    {
+        case 2:
+            value = sub_80F0580(&tv1[sCurTVShowSlot], &tv2[gUnknown_03001176], idx);
+            break;
+        case 3:
+            value = sub_80F05E8(&tv1[sCurTVShowSlot], &tv2[gUnknown_03001176], idx);
+            break;
+        case 4:
+            value = sub_80F0668(&tv1[sCurTVShowSlot], &tv2[gUnknown_03001176], idx);
+            break;
+    }
+    if (value == TRUE)
+    {
+        DeleteTVShowInArrayByIdx(tv2, gUnknown_03001176);
+        return TRUE;
+    }
+    return FALSE;
 }
 
 asm(".section .text.dotvshow");
