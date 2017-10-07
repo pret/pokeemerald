@@ -4525,6 +4525,26 @@ void sub_80F0B24(u16 species, u8 showIdx)
     }
 }
 
+void sub_80F0B64(void)
+{
+    u16 i;
+
+    if (FlagGet(SYS_GAME_CLEAR) != TRUE)
+    {
+        for (i = 0; i < 24; i ++)
+        {
+            if (gSaveBlock1Ptr->tvShows[i].common.kind == TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE)
+            {
+                gSaveBlock1Ptr->tvShows[i].common.active = FALSE;
+            }
+            else if (gSaveBlock1Ptr->tvShows[i].common.kind == TVSHOW_MASS_OUTBREAK)
+            {
+                gSaveBlock1Ptr->tvShows[i].common.active = FALSE;
+            }
+        }
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)

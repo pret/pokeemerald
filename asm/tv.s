@@ -3,48 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80F0B64
-sub_80F0B64: @ 80F0B64
-	push {r4-r6,lr}
-	ldr r0, =0x00000864
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080F0BA2
-	movs r2, 0
-	ldr r4, =0x000027cd
-	movs r3, 0
-	ldr r5, =gSaveBlock1Ptr
-_080F0B7C:
-	ldr r0, [r5]
-	lsls r1, r2, 3
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r0, r1
-	ldr r6, =0x000027cc
-	adds r0, r1, r6
-	ldrb r0, [r0]
-	cmp r0, 0x7
-	beq _080F0B94
-	cmp r0, 0x29
-	bne _080F0B98
-_080F0B94:
-	adds r0, r1, r4
-	strb r3, [r0]
-_080F0B98:
-	adds r0, r2, 0x1
-	lsls r0, 16
-	lsrs r2, r0, 16
-	cmp r2, 0x17
-	bls _080F0B7C
-_080F0BA2:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80F0B64
-
 	thumb_func_start sub_80F0BB8
 sub_80F0BB8: @ 80F0BB8
 	push {r4-r6,lr}
