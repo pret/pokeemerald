@@ -4683,6 +4683,42 @@ bool8 sub_80F0E84(PokeNews *dest, PokeNews *src, s8 slot)
     return TRUE;
 }
 
+s8 sub_80F0ECC(PokeNews *pokeNews, u8 idx)
+{
+    if (pokeNews[idx].kind == POKENEWS_NONE)
+    {
+        return -1;
+    }
+    return idx;
+}
+
+void sub_80F0EEC(void)
+{
+    u8 i;
+
+    for (i = 0; i < 16; i ++)
+    {
+        if (gSaveBlock1Ptr->pokeNews[i].kind > POKENEWS_FOUR)
+        {
+            ClearPokemonNewsI(i);
+        }
+    }
+    sub_80EEEB8();
+}
+
+void sub_80F0F24(void)
+{
+    u8 i;
+
+    if (FlagGet(SYS_GAME_CLEAR) != TRUE)
+    {
+        for (i = 0; i < 16; i ++)
+        {
+            gSaveBlock1Ptr->pokeNews[i].state = 0;
+        }
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
