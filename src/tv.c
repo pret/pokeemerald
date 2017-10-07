@@ -4512,6 +4512,19 @@ __attribute__((naked)) void sub_80F0708(void)
 }
 #endif
 
+void sub_80F0B00(u8 showIdx)
+{
+    gSaveBlock1Ptr->tvShows[showIdx].common.active = FALSE;
+}
+
+void sub_80F0B24(u16 species, u8 showIdx)
+{
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == 0)
+    {
+        gSaveBlock1Ptr->tvShows[showIdx].common.active = FALSE;
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)

@@ -3,56 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80F0B00
-sub_80F0B00: @ 80F0B00
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gSaveBlock1Ptr
-	ldr r2, [r1]
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	adds r2, r1
-	ldr r0, =0x000027cd
-	adds r2, r0
-	movs r0, 0
-	strb r0, [r2]
-	bx lr
-	.pool
-	thumb_func_end sub_80F0B00
-
-	thumb_func_start sub_80F0B24
-sub_80F0B24: @ 80F0B24
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, 24
-	lsrs r4, r1, 24
-	bl SpeciesToNationalPokedexNum
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0
-	bl GetSetPokedexFlag
-	lsls r0, 24
-	asrs r2, r0, 24
-	cmp r2, 0
-	bne _080F0B56
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	lsls r0, r4, 3
-	adds r0, r4
-	lsls r0, 2
-	adds r1, r0
-	ldr r0, =0x000027cd
-	adds r1, r0
-	strb r2, [r1]
-_080F0B56:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80F0B24
-
 	thumb_func_start sub_80F0B64
 sub_80F0B64: @ 80F0B64
 	push {r4-r6,lr}
