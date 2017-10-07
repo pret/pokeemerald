@@ -28,9 +28,11 @@
 #include "lilycove_lady.h"
 #include "rom6.h"
 #include "pokedex.h"
+#include "field_map_obj.h"
 #include "text.h"
 #include "script_menu.h"
 #include "naming_screen.h"
+#include "malloc.h"
 #include "tv.h"
 
 // Static type declarations
@@ -92,6 +94,12 @@ void sub_80EF93C(TVShow *);
 s8 sub_80EEE30(PokeNews *);
 bool8 sub_80EF0E4(u8);
 void ClearPokemonNewsI(u8);
+void sub_80F1254(TVShow *);
+void sub_80F12A4(TVShow *);
+void sub_80F0358(TVShow *, TVShow *, TVShow *, TVShow *);
+void sub_80F0C04(void);
+void sub_80F0708(void);
+void sub_80F0B64(void);
 
 void TVShowDone(void);
 
@@ -3724,6 +3732,64 @@ void GetMomOrDadStringForTVMessage(void)
             StringCopy(gStringVar1, gText_Dad);
             VarSet(VAR_0x4003, 2);
         }
+    }
+}
+
+void sub_80F01B8(void)
+{
+    VarSet(VAR_0x40BC, 0);
+    RemoveFieldObjectByLocalIdAndMap(5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    FlagSet(0x396);
+}
+
+void sub_80F01E8(void *src, u32 size, u8 masterIdx)
+{
+    u8 i;
+    u16 version;
+    TVShow (*rmBuffer2)[4][25];
+    TVShow (*rmBuffer)[4][25];
+
+    rmBuffer2 = malloc(4 * 25 * sizeof(TVShow));
+    if (rmBuffer2 != NULL)
+    {
+        for (i = 0; i < 4; i ++)
+        {
+            memcpy((*rmBuffer2)[i], src + i * size, sizeof((*rmBuffer2)[i]));
+        }
+        rmBuffer = rmBuffer2;
+        for (i = 0; i < sub_8009FCC(); i ++)
+        {
+            version = gLinkPlayers[i].version;
+            if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
+            {
+                sub_80F1254((*rmBuffer)[i]);
+            }
+            else if (version == VERSION_EMERALD && gLinkPlayers[i].language == LANGUAGE_JAPANESE)
+            {
+                sub_80F12A4((*rmBuffer)[i]);
+            }
+        }
+        switch (masterIdx)
+        {
+            case 0:
+                sub_80F0358(gSaveBlock1Ptr->tvShows, (*rmBuffer)[1], (*rmBuffer)[2], (*rmBuffer)[3]);
+                break;
+            case 1:
+                sub_80F0358((*rmBuffer)[0], gSaveBlock1Ptr->tvShows, (*rmBuffer)[2], (*rmBuffer)[3]);
+                break;
+            case 2:
+                sub_80F0358((*rmBuffer)[0], (*rmBuffer)[1], gSaveBlock1Ptr->tvShows, (*rmBuffer)[3]);
+                break;
+            case 3:
+                sub_80F0358((*rmBuffer)[0], (*rmBuffer)[1], (*rmBuffer)[2], gSaveBlock1Ptr->tvShows);
+                break;
+        }
+        sub_80EF93C(gSaveBlock1Ptr->tvShows);
+        sub_80F0C04();
+        sub_80EF93C(gSaveBlock1Ptr->tvShows);
+        sub_80F0708();
+        sub_80F0B64();
+        free(rmBuffer2);
     }
 }
 

@@ -62,7 +62,7 @@ enum
 
 struct LinkPlayer
 {
-    /* 0x00 */ u16 version;
+    /* 0x00 */ u8 version;
     /* 0x02 */ u16 lp_field_2;
     /* 0x04 */ u32 trainerId;
     /* 0x08 */ u8 name[11];
@@ -190,5 +190,6 @@ u32 LinkMain1(u8 *, u16 *, u16[CMD_LENGTH][MAX_LINK_PLAYERS]);
 void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
+u8 sub_8009FCC(void);
 
 #endif // GUARD_LINK_H
