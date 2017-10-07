@@ -19133,7 +19133,7 @@ sub_81A4684: @ 81A4684
 	adds r4, r5, 0
 	adds r4, 0x12
 	adds r0, r4, 0
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _081A4734
 	add r0, sp, 0xC

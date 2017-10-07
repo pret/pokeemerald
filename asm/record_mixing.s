@@ -1523,7 +1523,7 @@ _080E79CE:
 	adds r4, r1, 0
 	adds r4, 0x20
 	adds r0, r4, 0
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _080E79F2
 	adds r0, r4, 0
@@ -1878,7 +1878,7 @@ _080E7C9A:
 	bne _080E7CEE
 	adds r0, r5, 0
 	adds r0, 0x24
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _080E7CBA
 	adds r0, r5, 0
@@ -1901,7 +1901,7 @@ _080E7CC6:
 	adds r4, r0, 0
 	adds r0, r5, 0
 	adds r0, 0x2C
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _080E7CE2
 	ldrb r0, [r4]

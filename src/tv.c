@@ -4719,6 +4719,81 @@ void sub_80F0F24(void)
     }
 }
 
+#define tvlangfix(strptr, langptr, langfix) \
+if (IsStringJapanese(strptr)) \
+{   \
+    (langptr) = LANGUAGE_JAPANESE; \
+} \
+else \
+{ \
+    (langptr) = langfix; \
+}
+
+void sub_80F0F64(TVShow *show, u32 language)
+{
+    int i;
+    TVShow **r4;
+
+    r4 = calloc(11, sizeof(TVShow *));
+    for (i = 0; i < 24; i ++)
+    {
+        switch (show[i].common.kind)
+        {
+            case TVSHOW_FAN_CLUB_LETTER:
+            case TVSHOW_RECENT_HAPPENINGS:
+                r4[0] = &show[i];
+                tvlangfix(r4[0]->fanclubLetter.playerName, r4[0]->fanclubLetter.language, language);
+                break;
+            case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
+                r4[1] = &show[i];
+                tvlangfix(r4[1]->fanclubOpinions.playerName, r4[1]->fanclubOpinions.language, language);
+                tvlangfix(r4[1]->fanclubOpinions.nickname, r4[1]->fanclubOpinions.var0E, language);
+                break;
+            case TVSHOW_POKEMON_TODAY_CAUGHT:
+                r4[6] = &show[i];
+                tvlangfix(r4[6]->pokemonToday.playerName, r4[6]->pokemonToday.language, language);
+                tvlangfix(r4[6]->pokemonToday.nickname, r4[6]->pokemonToday.language2, language);
+                break;
+            case TVSHOW_SMART_SHOPPER:
+                r4[7] = &show[i];
+                tvlangfix(r4[7]->smartshopperShow.playerName, r4[7]->smartshopperShow.language, language);
+                break;
+            case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
+                r4[5] = &show[i];
+                tvlangfix(r4[5]->bravoTrainerTower.trainerName, r4[5]->bravoTrainerTower.language, language);
+                tvlangfix(r4[5]->bravoTrainerTower.pokemonName, r4[5]->bravoTrainerTower.pokemonNameLanguage, language);
+                break;
+            case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
+                r4[4] = &show[i];
+                tvlangfix(r4[4]->bravoTrainer.playerName, r4[4]->bravoTrainer.language, language);
+                tvlangfix(r4[4]->bravoTrainer.pokemonNickname, r4[4]->bravoTrainer.pokemonNameLanguage, language);
+                break;
+            case TVSHOW_NAME_RATER_SHOW:
+                r4[3] = &show[i];
+                tvlangfix(r4[3]->nameRaterShow.trainerName, r4[3]->nameRaterShow.language, language);
+                tvlangfix(r4[3]->nameRaterShow.pokemonName, r4[3]->nameRaterShow.pokemonNameLanguage, language);
+                break;
+            case TVSHOW_POKEMON_TODAY_FAILED:
+                r4[2] = &show[i];
+                tvlangfix(r4[2]->pokemonTodayFailed.playerName, r4[2]->pokemonTodayFailed.language, language);
+                break;
+            case TVSHOW_FISHING_ADVICE:
+                r4[8] = &show[i];
+                tvlangfix(r4[8]->pokemonAngler.playerName, r4[8]->pokemonAngler.language, language);
+                break;
+            case TVSHOW_WORLD_OF_MASTERS:
+                r4[9] = &show[i];
+                tvlangfix(r4[9]->worldOfMasters.playerName, r4[9]->worldOfMasters.language, language);
+                break;
+            case TVSHOW_MASS_OUTBREAK:
+                r4[10] = &show[i];
+                r4[10]->massOutbreak.language = language;
+                break;
+        }
+    }
+    free(r4);
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
