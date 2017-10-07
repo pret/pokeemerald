@@ -41,7 +41,7 @@ _080B062E:
 	cmp r0, 0x1
 	bne _080B0652
 	bl overworld_free_bg_tilemaps
-	ldr r0, =sub_8036760
+	ldr r0, =CB2_InitBattle
 	bl SetMainCallback2
 	bl prev_quest_postbuffer_cursor_backup_reset
 	bl overworld_poison_timer_set
@@ -638,8 +638,8 @@ _080B0BC6:
 	.pool
 	thumb_func_end sub_80B0B6C
 
-	thumb_func_start sub_80B0BD0
-sub_80B0BD0: @ 80B0BD0
+	thumb_func_start BattleSetup_GetTerrainId
+BattleSetup_GetTerrainId: @ 80B0BD0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -798,7 +798,7 @@ _080B0D1A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80B0BD0
+	thumb_func_end BattleSetup_GetTerrainId
 
 	thumb_func_start sub_80B0D24
 sub_80B0D24: @ 80B0D24
@@ -1387,7 +1387,7 @@ sub_80B11A8: @ 80B11A8
 	ldr r0, =sub_80B1204
 	str r0, [r1, 0x8]
 	bl FreeAllWindowBuffers
-	ldr r0, =sub_8036760
+	ldr r0, =CB2_InitBattle
 	bl SetMainCallback2
 	bl prev_quest_postbuffer_cursor_backup_reset
 	bl overworld_poison_timer_set

@@ -152,8 +152,8 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 
 void sub_806A068(u16 species, u8 bankIdentity)
 {
-    if (gBattleSpritesGfx != NULL)
-        gUnknown_0202499C = gBattleSpritesGfx->templates[bankIdentity];
+    if (gMonSpritesGfxPtr != NULL)
+        gUnknown_0202499C = gMonSpritesGfxPtr->templates[bankIdentity];
     else if (gUnknown_020249B4[0])
         gUnknown_0202499C = gUnknown_020249B4[0]->templates[bankIdentity];
     else if (gUnknown_020249B4[1])
@@ -180,8 +180,8 @@ void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity)
     }
     else
     {
-        if (gBattleSpritesGfx != NULL)
-            gUnknown_0202499C = gBattleSpritesGfx->templates[bankIdentity];
+        if (gMonSpritesGfxPtr != NULL)
+            gUnknown_0202499C = gMonSpritesGfxPtr->templates[bankIdentity];
         else
             gUnknown_0202499C = gUnknown_08329D98[bankIdentity];
         gUnknown_0202499C.anims = gUnknown_0830536C[trainerSpriteId];
@@ -190,8 +190,8 @@ void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity)
 
 void sub_806A1C0(u16 arg0, u8 bankIdentity)
 {
-    if (gBattleSpritesGfx != NULL)
-        gUnknown_0202499C = gBattleSpritesGfx->templates[bankIdentity];
+    if (gMonSpritesGfxPtr != NULL)
+        gUnknown_0202499C = gMonSpritesGfxPtr->templates[bankIdentity];
     else
         gUnknown_0202499C = gUnknown_08329D98[bankIdentity];
     gUnknown_0202499C.paletteTag = arg0;

@@ -629,7 +629,7 @@ sub_80AA18C: @ 80AA18C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r3, 0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrh r0, [r0]
@@ -899,7 +899,7 @@ task0A_80788BC: @ 80AA3B4
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080AA3F6
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r1, =gTasks
 	lsls r0, r4, 2

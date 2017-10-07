@@ -117,7 +117,7 @@ gUnknown_03003110: @ 3003110
 gUnknown_03003120: @ 3003120
 	.space 0x4
 
-gUnknown_03003124: @ 3003124
+gReceivedRemoteLinkPlayers: @ 3003124
 	.space 0xC
 
 gUnknown_03003130: @ 3003130
@@ -203,7 +203,7 @@ gUnknown_03005CDE: @ 3005CDE
 
     .include "rtc.o"
 
-gUnknown_03005D00: @ 3005D00
+gPreBattleCallback1: @ 3005D00
 	.space 0x4
 
 gBattleMainFunc: @ 3005D04

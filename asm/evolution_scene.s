@@ -68,7 +68,7 @@ _0813DA00:
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl evolution_cutscene
+	bl EvolutionScene
 _0813DA30:
 	add sp, 0x4
 	pop {r4-r7}
@@ -77,8 +77,8 @@ _0813DA30:
 	.pool
 	thumb_func_end sub_813D9C0
 
-	thumb_func_start sub_813DA40
-sub_813DA40: @ 813DA40
+	thumb_func_start BeginEvolutionScene
+BeginEvolutionScene: @ 813DA40
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -110,10 +110,10 @@ sub_813DA40: @ 813DA40
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813DA40
+	thumb_func_end BeginEvolutionScene
 
-	thumb_func_start evolution_cutscene
-evolution_cutscene: @ 813DA8C
+	thumb_func_start EvolutionScene
+EvolutionScene: @ 813DA8C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -165,10 +165,10 @@ evolution_cutscene: @ 813DA8C
 	movs r1, 0
 	bl SetGpuReg
 	bl ResetPaletteFade
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r2, 0
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r2, [r0]
 	ldr r0, =gBattle_BG1_X
 	strh r2, [r0]
@@ -183,14 +183,14 @@ evolution_cutscene: @ 813DA8C
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	movs r1, 0
 	strh r1, [r0]
 	ldr r1, =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
-	bl c2_berry_program_update_menu
-	bl sub_8035AA4
+	bl sub_80356D0
+	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
 	bl remove_some_task
 	bl ResetTasks
@@ -202,7 +202,7 @@ evolution_cutscene: @ 813DA8C
 	bl AllocZeroed
 	ldr r1, =gUnknown_0203AB80
 	str r0, [r1]
-	bl init_uns_table_pokemon_copy
+	bl AllocateMonSpritesGfx
 	adds r0, r4, 0
 	movs r1, 0x2
 	mov r2, sp
@@ -235,7 +235,7 @@ evolution_cutscene: @ 813DA8C
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r2, =gBattleSpritesGfx
+	ldr r2, =gMonSpritesGfxPtr
 	ldr r1, [r2]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -291,7 +291,7 @@ evolution_cutscene: @ 813DA8C
 	lsls r0, r1, 3
 	ldr r2, =gMonFrontPicTable
 	adds r0, r2
-	ldr r2, =gBattleSpritesGfx
+	ldr r2, =gMonSpritesGfxPtr
 	ldr r1, [r2]
 	ldr r1, [r1, 0x10]
 	mov r2, r10
@@ -393,7 +393,7 @@ evolution_cutscene: @ 813DA8C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end evolution_cutscene
+	thumb_func_end EvolutionScene
 
 	thumb_func_start sub_813DD7C
 sub_813DD7C: @ 813DD7C
@@ -460,9 +460,9 @@ sub_813DD7C: @ 813DD7C
 	movs r1, 0
 	bl SetGpuReg
 	bl ResetPaletteFade
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r4, [r0]
 	ldr r0, =gBattle_BG1_X
 	strh r4, [r0]
@@ -477,13 +477,13 @@ sub_813DD7C: @ 813DD7C
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r4, [r0]
 	ldr r1, =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
-	bl c2_berry_program_update_menu
-	bl sub_8035AA4
+	bl sub_80356D0
+	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	ldr r1, =gReservedSpritePaletteCount
@@ -492,7 +492,7 @@ sub_813DD7C: @ 813DD7C
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r5, 0
@@ -629,10 +629,10 @@ _0813DFE0:
 	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, =gBattle_BG1_X
 	strh r1, [r0]
@@ -647,7 +647,7 @@ _0813DFE0:
 	lsls r3, 1
 	adds r0, r3, 0
 	strh r0, [r2]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r1, [r0]
 	b _0813E180
 	.pool
@@ -697,7 +697,7 @@ _0813E0A8:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r6, 0
@@ -867,7 +867,7 @@ sub_813E1D4: @ 813E1D4
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -941,9 +941,9 @@ sub_813E1D4: @ 813E1D4
 	mov r1, sp
 	ldrh r1, [r1, 0x14]
 	strh r1, [r0, 0x1C]
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r4, [r0]
 	ldr r0, =gBattle_BG1_X
 	strh r4, [r0]
@@ -958,7 +958,7 @@ sub_813E1D4: @ 813E1D4
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r4, [r0]
 	ldr r2, =gTextFlags
 	ldrb r0, [r2]
@@ -1775,7 +1775,7 @@ _0813EAF6:
 _0813EB06:
 	adds r0, r7, 0
 	bl DestroyTask
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	ldr r4, =gUnknown_0203AB80
 	ldr r0, [r4]
 	bl Free
@@ -3630,11 +3630,11 @@ nullsub_83: @ 813FCD8
 	thumb_func_start sub_813FCDC
 sub_813FCDC: @ 813FCDC
 	push {lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
@@ -3658,7 +3658,7 @@ sub_813FCDC: @ 813FCDC
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
@@ -3674,11 +3674,11 @@ sub_813FCDC: @ 813FCDC
 	thumb_func_start sub_813FD64
 sub_813FD64: @ 813FD64
 	push {lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
@@ -3702,7 +3702,7 @@ sub_813FD64: @ 813FD64
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
@@ -3871,7 +3871,7 @@ sub_813FEE8: @ 813FEE8
 	.pool
 _0813FF28:
 	ldr r7, =gBattle_BG3_X
-	ldr r6, =gUnknown_02022E22
+	ldr r6, =gBattle_BG3_Y
 _0813FF2C:
 	lsls r4, r5, 2
 	adds r4, r5

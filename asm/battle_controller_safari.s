@@ -71,7 +71,7 @@ bx_battle_menu_t6_2: @ 81593D8
 	beq _08159446
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gUnknown_020244AC
+	ldr r1, =gActionSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -118,7 +118,7 @@ _08159446:
 	ands r0, r1
 	cmp r0, 0
 	beq _08159484
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -144,7 +144,7 @@ _08159484:
 	ands r0, r1
 	cmp r0, 0
 	beq _081594C0
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -170,7 +170,7 @@ _081594C0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0815950C
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -204,7 +204,7 @@ _0815950C:
 	ands r0, r1
 	cmp r0, 0
 	beq _0815954E
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -318,7 +318,7 @@ sub_81595E4: @ 81595E4
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r3]
-	ldr r0, =gUnknown_03005D00
+	ldr r0, =gPreBattleCallback1
 	ldr r0, [r0]
 	str r0, [r2]
 	ldr r0, [r2, 0x8]
@@ -336,7 +336,7 @@ bx_wait_t6: @ 8159624
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0815964A
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -410,7 +410,7 @@ _081596BE:
 	thumb_func_start sub_81596D4
 sub_81596D4: @ 81596D4
 	push {lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -484,7 +484,7 @@ _0815976A:
 	thumb_func_start bx_80364D0
 bx_80364D0: @ 815977C
 	push {lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -689,7 +689,7 @@ sub_8159904: @ 8159904
 	thumb_func_start sub_8159910
 sub_8159910: @ 8159910
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x8]
 	movs r0, 0x4
@@ -730,7 +730,7 @@ sub_8159964: @ 8159964
 	adds r1, 0x1
 	adds r0, r1
 	ldrb r1, [r0]
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	strb r1, [r0, 0x8]
@@ -778,10 +778,10 @@ sub_81599D0: @ 81599D0
 	thumb_func_start dp01t_10_6_message
 dp01t_10_6_message: @ 81599DC
 	push {r4,lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -832,9 +832,9 @@ sub_8159A54: @ 8159A54
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08159A7A
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, =gBattleBankFunc
@@ -871,7 +871,7 @@ _08159AAE:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _08159AAE
-	ldr r1, =gUnknown_020244AC
+	ldr r1, =gActionSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1

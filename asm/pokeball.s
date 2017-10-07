@@ -17,7 +17,7 @@ sub_80753E8: @ 80753E8
 	ldr r1, =gDoingBattleAnim
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r6, =gActiveBank
 	ldrb r1, [r6]
@@ -992,7 +992,7 @@ _08075C22:
 	movs r2, 0xC
 	bl PlayCry4
 _08075C2E:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	mov r2, r8
@@ -1082,7 +1082,7 @@ _08075CD8:
 	movs r2, 0xB
 	bl PlayCry4
 _08075CE4:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	mov r2, r8
@@ -1215,7 +1215,7 @@ _08075E00:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075E56
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r0, 0x9]
@@ -1247,7 +1247,7 @@ _08075E56:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075E70
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r0, 0x9]
@@ -1278,7 +1278,7 @@ _08075E9C:
 _08075EA0:
 	movs r4, 0x2
 _08075EA2:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	mov r2, r8
@@ -1508,7 +1508,7 @@ _0807605C:
 	strh r1, [r0, 0x26]
 	ldr r0, =gDoingBattleAnim
 	strb r2, [r0]
-	ldr r4, =gUnknown_020244D0
+	ldr r4, =gBattleSpritesDataPtr
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4]
 	lsls r1, r6, 1
@@ -1619,7 +1619,7 @@ _08076130:
 	ands r0, r1
 	cmp r0, 0
 	beq _08076196
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	lsls r1, r7, 1
@@ -1819,7 +1819,7 @@ _080762F8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076358
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r0, 0x9]
@@ -1892,7 +1892,7 @@ sub_8076398: @ 8076398
 	lsls r0, 24
 	cmp r0, 0
 	beq _080763E8
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r0, 0x9]

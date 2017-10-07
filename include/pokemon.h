@@ -439,7 +439,7 @@ struct BattleMove
     u8 pp;
     u8 secondaryEffectChance;
     u8 target;
-    u8 priority;
+    s8 priority;
     u8 flags;
 };
 
@@ -632,9 +632,21 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
 s32 sub_806D864(u16 a1);
 bool16 sub_806D82C(u8 id);
 u16 MonTryLearningNewMove(struct Pokemon* mon, bool8);
+void sub_8068AA4(void); // sets stats for deoxys
+bool8 HasTwoFramesAnimation(u16 species);
+u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem);
+void RandomlyGivePartyPokerus(struct Pokemon *party);
+u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
+u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
+void UpdatePartyPokerusTime(u16 days);
+void PartySpreadPokerus(struct Pokemon *party);
+s8 GetMonFlavourRelation(struct Pokemon *mon, u8 a2);
+s8 GetFlavourRelationByPersonality(u32 personality, u8 a2);
 
 #include "sprite.h"
 
 void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
+void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
+void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
 
 #endif // GUARD_POKEMON_H

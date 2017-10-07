@@ -512,7 +512,7 @@ _0807FBBE:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0807FBBE
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807FC14
@@ -1116,7 +1116,7 @@ _08080126:
 	adds r5, 0x1
 	cmp r5, 0x3
 	ble _08080126
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0808016A
@@ -1213,7 +1213,7 @@ _08080248:
 	bne _08080254
 	b _08080546
 _08080254:
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
@@ -1239,7 +1239,7 @@ _08080282:
 	movs r0, 0x4
 	movs r1, 0x1
 	bl sub_8197DF8
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	bl sub_800A9D8
 	lsls r4, 24
@@ -1260,7 +1260,7 @@ _080802AC:
 	adds r0, r4, r0
 	adds r0, r6
 	lsls r1, r5, 8
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0x10
 	bl memcpy
@@ -1280,7 +1280,7 @@ _080802D4:
 	lsrs r0, 24
 	cmp r5, r0
 	blt _080802AC
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	b _080804F8
 	.pool
 _080802EC:
@@ -1876,7 +1876,7 @@ sub_80807BC: @ 80807BC
 	sub sp, 0x1C
 	movs r0, 0
 	mov r10, r0
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080807DE
@@ -3330,7 +3330,7 @@ sub_80814B0: @ 80814B0
 	lsrs r1, 16
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080814E4
@@ -3633,7 +3633,7 @@ sub_8081744: @ 8081744
 	push {r4-r6,lr}
 	movs r4, 0
 	movs r6, 0
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808175A
@@ -4702,7 +4702,7 @@ _08081F7C:
 sub_8081F94: @ 8081F94
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08081FB8
@@ -4810,7 +4810,7 @@ _08082078:
 	adds r1, 0x4C
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080820B0
@@ -4848,7 +4848,7 @@ _080820E0:
 	bne _080820EC
 	b _0808249E
 _080820EC:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808218C
@@ -4911,7 +4911,7 @@ _08082132:
 	adds r1, r4
 	movs r0, 0
 	movs r2, 0x20
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	bne _08082172
@@ -4941,7 +4941,7 @@ _0808218C:
 	strh r2, [r0]
 	movs r0, 0
 	movs r2, 0x28
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	bne _080821BE
@@ -4951,20 +4951,20 @@ _080821BE:
 	b _0808245C
 	.pool
 _080821C8:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080821D4
 	b _0808249E
 _080821D4:
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	ldr r5, =gUnknown_020322A4
 	ldr r1, [r5]
 	adds r1, 0x63
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08082254
@@ -4972,7 +4972,7 @@ _080821D4:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08082254
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	ldr r3, [r5]
 	ldrh r0, [r2, 0x4]
 	adds r1, r3, 0
@@ -5016,7 +5016,7 @@ _08082220:
 	b _0808249E
 	.pool
 _08082254:
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	ldr r0, =gUnknown_020322A4
 	ldr r3, [r0]
 	ldrh r0, [r2, 0x4]
@@ -5748,7 +5748,7 @@ _080828BC:
 	strb r0, [r1]
 	b _080828DC
 _080828C6:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _080828DC
@@ -5966,7 +5966,7 @@ _08082A92:
 	thumb_func_start sub_8082AD4
 sub_8082AD4: @ 8082AD4
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08082AE0
@@ -6242,7 +6242,7 @@ sub_8082D18: @ 8082D18
 sub_8082D28: @ 8082D28
 	push {r4,lr}
 	movs r1, 0
-	ldr r4, =gUnknown_03003124
+	ldr r4, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _08082D3C
@@ -7909,7 +7909,7 @@ _08083A80:
 	cmp r5, r0
 	bcc _08083A80
 _08083A9E:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08083AB4
@@ -8514,7 +8514,7 @@ sub_8083F94: @ 8083F94
 	strb r0, [r7, 0xC]
 	movs r0, 0xFF
 	strb r0, [r7]
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080840C4

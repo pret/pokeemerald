@@ -858,9 +858,9 @@ void GabbyAndTyBeforeInterview(void)
 {
     u8 i;
 
-    gSaveBlock1Ptr->gabbyAndTyData.mon1 = gBattleResults.poke1Species;
-    gSaveBlock1Ptr->gabbyAndTyData.mon2 = gBattleResults.opponentSpecies;
-    gSaveBlock1Ptr->gabbyAndTyData.lastMove = gBattleResults.lastUsedMove;
+    gSaveBlock1Ptr->gabbyAndTyData.mon1 = gBattleResults.playerMon1Species;
+    gSaveBlock1Ptr->gabbyAndTyData.mon2 = gBattleResults.playerMon2Species;
+    gSaveBlock1Ptr->gabbyAndTyData.lastMove = gBattleResults.lastUsedMovePlayer;
     if (gSaveBlock1Ptr->gabbyAndTyData.battleNum != 0xFF)
     {
         gSaveBlock1Ptr->gabbyAndTyData.battleNum ++;
@@ -1124,7 +1124,7 @@ static void UpdateWorldOfMastersAndPutItOnTheAir(void)
     }
     show->worldOfMasters.var02 ++;
     show->worldOfMasters.caughtPoke = gBattleResults.caughtMonSpecies;
-    show->worldOfMasters.species = gBattleResults.poke1Species;
+    show->worldOfMasters.species = gBattleResults.playerMon1Species;
     show->worldOfMasters.location = gMapHeader.regionMapSectionId;
 }
 
@@ -1152,7 +1152,7 @@ static void PutPokemonTodayFailedOnTheAir(void)
                 show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
                 show->pokemonTodayFailed.kind = TVSHOW_POKEMON_TODAY_FAILED;
                 show->pokemonTodayFailed.active = FALSE;
-                show->pokemonTodayFailed.species = gBattleResults.poke1Species;
+                show->pokemonTodayFailed.species = gBattleResults.playerMon1Species;
                 show->pokemonTodayFailed.species2 = gBattleResults.lastOpponentSpecies;
                 show->pokemonTodayFailed.var10 = ct;
                 show->pokemonTodayFailed.var11 = gBattleOutcome;
@@ -2342,7 +2342,7 @@ void sub_80EE184(void)
         }
         show->breakingNews.location = gMapHeader.regionMapSectionId;
         StringCopy(show->breakingNews.playerName, gSaveBlock2Ptr->playerName);
-        show->breakingNews.poke1Species = gBattleResults.poke1Species;
+        show->breakingNews.poke1Species = gBattleResults.playerMon1Species;
         switch (gBattleOutcome)
         {
             case BATTLE_LOST:
@@ -2380,7 +2380,7 @@ void sub_80EE184(void)
                 show->breakingNews.balls = balls;
                 break;
             case 1:
-                show->breakingNews.lastUsedMove = gBattleResults.lastUsedMove;
+                show->breakingNews.lastUsedMove = gBattleResults.lastUsedMovePlayer;
                 break;
             case 2:
                 break;
@@ -3759,7 +3759,7 @@ void sub_80F01E8(void *src, u32 size, u8 masterIdx)
         rmBuffer = rmBuffer2;
         for (i = 0; i < sub_8009FCC(); i ++)
         {
-            version = gLinkPlayers[i].version;
+            version = (u8)gLinkPlayers[i].version;
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
             {
                 sub_80F1254((*rmBuffer)[i]);
