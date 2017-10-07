@@ -41,6 +41,7 @@
 #include "evolution_scene.h"
 #include "roamer.h"
 #include "safari_zone.h"
+#include "battle_string_ids.h"
 
 struct UnknownStruct6
 {
@@ -3299,7 +3300,7 @@ static void BattleIntroPrintTrainerWantsToBattle(void)
     if (gBattleExecBuffer == 0)
     {
         gActiveBank = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
-        PrepareStringBattle(0, gActiveBank);
+        PrepareStringBattle(STRINGID_INTROMSG, gActiveBank);
         gBattleMainFunc = BattleIntroPrintOpponentSendsOut;
     }
 }
@@ -3309,7 +3310,7 @@ static void BattleIntroPrintWildMonAttacked(void)
     if (gBattleExecBuffer == 0)
     {
         gBattleMainFunc = BattleIntroPrintPlayerSendsOut;
-        PrepareStringBattle(0, 0);
+        PrepareStringBattle(STRINGID_INTROMSG, 0);
     }
 }
 
@@ -3332,7 +3333,7 @@ static void BattleIntroPrintOpponentSendsOut(void)
     else
         identity = IDENTITY_OPPONENT_MON1;
 
-    PrepareStringBattle(1, GetBankByIdentity(identity));
+    PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByIdentity(identity));
     gBattleMainFunc = BattleIntroOpponent1SendsOutMonAnimation;
 }
 
@@ -3535,7 +3536,7 @@ static void BattleIntroPrintPlayerSendsOut(void)
             identity = IDENTITY_PLAYER_MON1;
 
         if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
-            PrepareStringBattle(1, GetBankByIdentity(identity));
+            PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByIdentity(identity));
 
         gBattleMainFunc = BattleIntroPlayer1SendsOutMonAnimation;
     }

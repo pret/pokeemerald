@@ -20577,7 +20577,7 @@ _081A5328:
 	movs r0, 0x1
 	negs r0, r0
 	strb r0, [r1, 0x1]
-	ldr r0, =gText_JapaneseHonorific
+	ldr r0, =gText_PlayerMon1Name
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r4, =gDisplayedStringBattle
 	adds r0, r4, 0
@@ -20586,7 +20586,7 @@ _081A5328:
 	ldr r0, =gText_Vs
 	movs r1, 0x10
 	bl sub_814F9EC
-	ldr r0, =gText_RivalBuffer
+	ldr r0, =gText_OpponentMon1Name
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	adds r0, r4, 0
 	movs r1, 0x11

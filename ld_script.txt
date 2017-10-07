@@ -190,6 +190,7 @@ SECTIONS {
         asm/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
         asm/battle_controller_linkpartner.o(.text);
+        src/battle_message.o(.text);
         asm/battle_message.o(.text);
         asm/cable_car.o(.text);
         asm/math_util.o(.text);
@@ -411,7 +412,7 @@ SECTIONS {
         src/battle_ai_script_commands.o(.rodata);
         data/data4.o(.rodata);
         data/battle_controller_link_partner.o(.rodata);
-        data/battle_message.o(.rodata);
+        src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
         data/save.o(.rodata);
         data/field_effect_helpers.o(.rodata);
