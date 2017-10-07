@@ -19,7 +19,6 @@ extern void (*gGameContinueCallback)(void);
 
 extern u32 gDamagedSaveSectors;
 
-extern u16 gSaveFailedType;
 extern const u8 gBirchHelpGfx[];
 extern const u8 gBirchBagTilemap[];
 extern const u8 gBirchGrassTilemap[];
@@ -49,21 +48,25 @@ extern u8 gText_GamePlayCannotBeContinued[];
 
 extern u8 gDecompressionBuffer[];
 
-struct ClockInfo
+// gSaveFailedClockInfo enum
+enum
 {
-    bool16 clockRunning;
-    u16 debugTimer; // appears to be unused; it's only set to 0 and never used within the game. perhaps it was a volatile-like timer expected to be modified by an external tool?
+    CLOCK_RUNNING,
+    DEBUG_TIMER
 };
 
-extern struct ClockInfo gSaveFailedClockInfo;
-
-struct WindowIds
+// gSaveFailedWindowIds enum
+enum
 {
-    u8 textWindowId;
-    u8 clockWindowId;
+    TEXT_WIN_ID,
+    CLOCK_WIN_ID
 };
 
-extern struct WindowIds gSaveFailedWindowIds;
+EWRAM_DATA u16 gSaveFailedType = {0};
+EWRAM_DATA u16 gSaveFailedClockInfo[2] = {0};
+EWRAM_DATA u8 gSaveFailedUnused1[12] = {0};
+EWRAM_DATA u8 gSaveFailedWindowIds[2] = {0};
+EWRAM_DATA u8 gSaveFailedUnused2[4] = {0};
 
 static void CB2_SaveFailedScreen(void);
 static void CB2_WipeSave(void);
@@ -82,17 +85,17 @@ static void SaveFailedScreenTextPrint(u8 *text, u8 var1, u8 var2)
     color.fgColor = 0;
     color.bgColor = 15;
     color.shadowColor = 3;
-    AddTextPrinterParametrized2(gSaveFailedWindowIds.textWindowId, 1, var1 * 8, var2 * 8 + 1, 0, 0, &color, 0, text);
+    AddTextPrinterParametrized2(gSaveFailedWindowIds[TEXT_WIN_ID], 1, var1 * 8, var2 * 8 + 1, 0, 0, &color, 0, text);
 }
 
 void DoSaveFailedScreen(u8 saveType)
 {
     SetMainCallback2(CB2_SaveFailedScreen);
     gSaveFailedType = saveType;
-    gSaveFailedClockInfo.clockRunning = FALSE;
-    gSaveFailedClockInfo.debugTimer = 0;
-    gSaveFailedWindowIds.textWindowId = 0;
-    gSaveFailedWindowIds.clockWindowId = 0;
+    gSaveFailedClockInfo[CLOCK_RUNNING] = FALSE;
+    gSaveFailedClockInfo[DEBUG_TIMER] = 0;
+    gSaveFailedWindowIds[TEXT_WIN_ID] = 0;
+    gSaveFailedWindowIds[CLOCK_WIN_ID] = 0;
 }
 
 static void VBlankCB(void)
@@ -137,10 +140,10 @@ static void CB2_SaveFailedScreen(void)
             LoadBgTiles(0, gUnknown_0850E87C, 0x120, 0x214);
             InitWindows(gUnknown_085EFD94);
             // AddWindowWithoutTileMap returns a u16/integer, but the info is clobbered into a u8 here resulting in lost info. Bug?
-            gSaveFailedWindowIds.textWindowId = AddWindowWithoutTileMap(&gUnknown_085EFD9C);
-            SetWindowAttribute(gSaveFailedWindowIds.textWindowId, 7, (u32)&gDecompressionBuffer[0x2800]);
-            gSaveFailedWindowIds.clockWindowId = AddWindowWithoutTileMap(&gUnknown_085EFDA4);
-            SetWindowAttribute(gSaveFailedWindowIds.clockWindowId, 7, (u32)&gDecompressionBuffer[0x3D00]);
+            gSaveFailedWindowIds[TEXT_WIN_ID] = AddWindowWithoutTileMap(&gUnknown_085EFD9C);
+            SetWindowAttribute(gSaveFailedWindowIds[TEXT_WIN_ID], 7, (u32)&gDecompressionBuffer[0x2800]);
+            gSaveFailedWindowIds[CLOCK_WIN_ID] = AddWindowWithoutTileMap(&gUnknown_085EFDA4);
+            SetWindowAttribute(gSaveFailedWindowIds[CLOCK_WIN_ID], 7, (u32)&gDecompressionBuffer[0x3D00]);
             DeactivateAllTextPrinters();
             ResetSpriteData();
             ResetTasks();
@@ -149,12 +152,12 @@ static void CB2_SaveFailedScreen(void)
             LoadPalette(gSaveFailedClockPal, 0x100, 0x20);
             LoadPalette(gUnknown_0850FEFC, 0xE0, 0x20);
             LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
-            SetWindowBorderStyle(gSaveFailedWindowIds.textWindowId, FALSE, 0x214, 0xE);
-            SetWindowBorderStyle(gSaveFailedWindowIds.clockWindowId, FALSE, 0x214, 0xE);
-            FillWindowPixelBuffer(gSaveFailedWindowIds.clockWindowId, 0x11); // backwards?
-            FillWindowPixelBuffer(gSaveFailedWindowIds.textWindowId, 0x11);
-            CopyWindowToVram(gSaveFailedWindowIds.clockWindowId, 2); // again?
-            CopyWindowToVram(gSaveFailedWindowIds.textWindowId, 1);
+            SetWindowBorderStyle(gSaveFailedWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);
+            SetWindowBorderStyle(gSaveFailedWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);
+            FillWindowPixelBuffer(gSaveFailedWindowIds[CLOCK_WIN_ID], 0x11); // backwards?
+            FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], 0x11);
+            CopyWindowToVram(gSaveFailedWindowIds[CLOCK_WIN_ID], 2); // again?
+            CopyWindowToVram(gSaveFailedWindowIds[TEXT_WIN_ID], 1);
             SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
             EnableInterrupts(1);
@@ -179,25 +182,25 @@ static void CB2_WipeSave(void)
 {
     u8 wipeTries = 0;
 
-    gSaveFailedClockInfo.clockRunning = TRUE;
+    gSaveFailedClockInfo[CLOCK_RUNNING] = TRUE;
 
     while (gDamagedSaveSectors != 0 && wipeTries < 3)
     {
         if (WipeSectors(gDamagedSaveSectors) != FALSE)
         {
-            FillWindowPixelBuffer(gSaveFailedWindowIds.textWindowId, 0x11);
+            FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], 0x11);
             SaveFailedScreenTextPrint(gText_BackupMemoryDamaged, 1, 0);
             SetMainCallback2(CB2_GameplayCannotBeContinued);
             return;
         }
 
-        FillWindowPixelBuffer(gSaveFailedWindowIds.textWindowId, 0x11);
+        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], 0x11);
         SaveFailedScreenTextPrint(gText_CheckCompleted, 1, 0);
         HandleSavingData(gSaveFailedType);
 
         if (gDamagedSaveSectors != 0)
         {
-            FillWindowPixelBuffer(gSaveFailedWindowIds.textWindowId, 0x11);
+            FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], 0x11);
             SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
         }
 
@@ -206,12 +209,12 @@ static void CB2_WipeSave(void)
 
     if (wipeTries == 3)
     {
-        FillWindowPixelBuffer(gSaveFailedWindowIds.textWindowId, 0x11);
+        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], 0x11);
         SaveFailedScreenTextPrint(gText_BackupMemoryDamaged, 1, 0);
     }
     else
     {
-        FillWindowPixelBuffer(gSaveFailedWindowIds.textWindowId, 0x11);
+        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], 0x11);
 
         if (gGameContinueCallback == NULL)
             SaveFailedScreenTextPrint(gText_SaveCompleteGameCannotContinue, 1, 0);
@@ -224,11 +227,11 @@ static void CB2_WipeSave(void)
 
 static void CB2_GameplayCannotBeContinued(void)
 {
-    gSaveFailedClockInfo.clockRunning = FALSE;
+    gSaveFailedClockInfo[CLOCK_RUNNING] = FALSE;
 
     if (gMain.newKeys & A_BUTTON)
     {
-        FillWindowPixelBuffer(gSaveFailedWindowIds.textWindowId, 0x11);
+        FillWindowPixelBuffer(gSaveFailedWindowIds[TEXT_WIN_ID], 0x11);
         SaveFailedScreenTextPrint(gText_GamePlayCannotBeContinued, 1, 0);
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(CB2_FadeAndReturnToTitleScreen);
@@ -237,7 +240,7 @@ static void CB2_GameplayCannotBeContinued(void)
 
 static void CB2_FadeAndReturnToTitleScreen(void)
 {
-    gSaveFailedClockInfo.clockRunning = FALSE;
+    gSaveFailedClockInfo[CLOCK_RUNNING] = FALSE;
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -271,7 +274,7 @@ static void VBlankCB_UpdateClockGraphics(void)
     gMain.oamBuffer[0].x = 112;
     gMain.oamBuffer[0].y = (CLOCK_WIN_TOP + 1) * 8;;
 
-    if (gSaveFailedClockInfo.clockRunning != FALSE)
+    if (gSaveFailedClockInfo[CLOCK_RUNNING] != FALSE)
     {
         gMain.oamBuffer[0].tileNum = gClockFrames[n][0];
         gMain.oamBuffer[0].matrixNum = (gClockFrames[n][2] << 4) | (gClockFrames[n][1] << 3);
@@ -283,8 +286,8 @@ static void VBlankCB_UpdateClockGraphics(void)
 
     CpuFastCopy(gMain.oamBuffer, (void *)OAM, 4);
 
-    if (gSaveFailedClockInfo.debugTimer)
-        gSaveFailedClockInfo.debugTimer--;
+    if (gSaveFailedClockInfo[DEBUG_TIMER])
+        gSaveFailedClockInfo[DEBUG_TIMER]--;
 }
 
 static bool8 VerifySectorWipe(u16 sector)
