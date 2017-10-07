@@ -5399,7 +5399,7 @@ sub_8138240: @ 8138240
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0

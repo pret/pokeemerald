@@ -52,7 +52,7 @@ struct {
 
 IWRAM_DATA u8 gUnknown_03001174;
 IWRAM_DATA u8 gUnknown_03001175;
-IWRAM_DATA u8 gUnknown_03001176;
+IWRAM_DATA s8 gUnknown_03001176;
 
 EWRAM_DATA u16 gUnknown_0203A024 = 0;
 EWRAM_DATA u16 gUnknown_0203A026 = 0;
@@ -100,6 +100,8 @@ void sub_80F0358(TVShow *, TVShow *, TVShow *, TVShow *);
 void sub_80F0C04(void);
 void sub_80F0708(void);
 void sub_80F0B64(void);
+s8 sub_80F06D0(TVShow *);
+bool8 sub_80F049C(TVShow *[], TVShow *[], u8);
 
 void TVShowDone(void);
 
@@ -3757,7 +3759,7 @@ void sub_80F01E8(void *src, u32 size, u8 masterIdx)
             memcpy((*rmBuffer2)[i], src + i * size, sizeof((*rmBuffer2)[i]));
         }
         rmBuffer = rmBuffer2;
-        for (i = 0; i < sub_8009FCC(); i ++)
+        for (i = 0; i < GetLinkPlayerCount(); i ++)
         {
             version = (u8)gLinkPlayers[i].version;
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
@@ -3790,6 +3792,54 @@ void sub_80F01E8(void *src, u32 size, u8 masterIdx)
         sub_80F0708();
         sub_80F0B64();
         free(rmBuffer2);
+    }
+}
+
+void sub_80F0358(TVShow player1[25], TVShow player2[25], TVShow player3[25], TVShow player4[25])
+{
+    u8 i;
+    u8 j;
+    TVShow **argslist[4];
+
+    argslist[0] = &player1;
+    argslist[1] = &player2;
+    argslist[2] = &player3;
+    argslist[3] = &player4;
+    gUnknown_03001174 = GetLinkPlayerCount();
+    while (1)
+    {
+        for (i = 0; i < gUnknown_03001174; i ++)
+        {
+            if (i == 0)
+            {
+                gUnknown_0203A02C.unk_00 = i;
+            }
+            gUnknown_03001176 = sub_80F06D0(argslist[i][0]);
+            if (gUnknown_03001176 == -1)
+            {
+                gUnknown_0203A02C.unk_00++;
+                if (gUnknown_0203A02C.unk_00 == gUnknown_03001174)
+                {
+                    return;
+                }
+                }
+            else
+            {
+                for (j = 0; j < gUnknown_03001174 - 1; j ++)
+                {
+                    sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(argslist[(i + j + 1) % gUnknown_03001174][0]);
+                    if (sCurTVShowSlot != -1
+                        && sub_80F049C(&argslist[(i + j + 1) % gUnknown_03001174][0], &argslist[i][0], (i + j + 1) % gUnknown_03001174) == 1)
+                    {
+                        break;
+                    }
+                }
+                if (j == gUnknown_03001174 - 1)
+                {
+                    DeleteTVShowInArrayByIdx(argslist[i][0], gUnknown_03001176);
+                }
+            }
+        }
     }
 }
 

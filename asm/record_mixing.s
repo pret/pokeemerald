@@ -1162,7 +1162,7 @@ _080E7714:
 	lsrs r0, 24
 	mov r8, r0
 _080E771C:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r8, r0
@@ -1179,7 +1179,7 @@ _080E771C:
 	adds r1, 0x1
 	strh r1, [r0, 0x8]
 _080E773E:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, [sp, 0x8]
@@ -1312,7 +1312,7 @@ sub_80E7820: @ 80E7820
 sub_80E7830: @ 80E7830
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -1738,7 +1738,7 @@ sub_80E7B60: @ 80E7B60
 	ldr r0, =gLinkPlayers
 	ldrh r0, [r0, 0x4]
 	bl SeedRng2
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
@@ -1931,7 +1931,7 @@ _080E7CFA:
 	lsrs r0, 16
 	mov r8, r0
 _080E7D04:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r8, r0
@@ -3557,7 +3557,7 @@ sub_80E89AC: @ 80E89AC
 	adds r6, r0, 0
 	mov r8, r1
 	mov r9, r2
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
