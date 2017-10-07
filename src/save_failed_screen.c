@@ -22,22 +22,11 @@ extern u32 gDamagedSaveSectors;
 extern const u8 gBirchHelpGfx[];
 extern const u8 gBirchBagTilemap[];
 extern const u8 gBirchGrassTilemap[];
-extern const u8 gSaveFailedClockGfx[];
-
-extern const struct OamData gClockOamData; // sClockOamData
-extern const u8 gClockFrames[8][3]; // sClockFrames
-
-extern const struct BgTemplate gUnknown_085EFD88[];
-extern const struct WindowTemplate gUnknown_085EFD94[];
-extern struct WindowTemplate gUnknown_085EFD9C;
-extern struct WindowTemplate gUnknown_085EFDA4;
-extern struct SaveSection gSaveDataBuffer;
-extern const u32 gUnknown_0850E87C[];
-
 extern const u16 gBirchBagGrassPal[];
-extern const u16 gSaveFailedClockPal[];
 extern const u16 gUnknown_0850FEFC[];
 extern const u16 gUnknown_0860F074[];
+extern const u32 gUnknown_0850E87C[];
+extern struct SaveSection gSaveDataBuffer;
 
 extern u8 gText_SaveFailedCheckingBackup[];
 extern u8 gText_BackupMemoryDamaged[];
@@ -67,6 +56,108 @@ EWRAM_DATA u16 gSaveFailedClockInfo[2] = {0};
 EWRAM_DATA u8 gSaveFailedUnused1[12] = {0};
 EWRAM_DATA u8 gSaveFailedWindowIds[2] = {0};
 EWRAM_DATA u8 gSaveFailedUnused2[4] = {0};
+
+static const struct OamData sClockOamData =
+{
+    160, // Y
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+};
+
+static const struct BgTemplate gUnknown_085EFD88[3] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0,
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 14,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0,
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 15,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0,
+    },
+};
+
+static const struct WindowTemplate gUnknown_085EFD94[] =
+{
+    {
+        .priority = 255,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 0,
+        .baseBlock = 0,
+    }
+};
+
+static const struct WindowTemplate gUnknown_085EFD9C[] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 13,
+        .width = 28,
+        .height = 6,
+        .paletteNum = 15,
+        .baseBlock = 1,
+    }
+};
+
+static const struct WindowTemplate gUnknown_085EFDA4[] =
+{
+    {
+        .priority = 0,
+        .tilemapLeft = 14,
+        .tilemapTop = 9,
+        .width = 2,
+        .height = 2,
+        .paletteNum = 15,
+        .baseBlock = 169,
+    }
+};
+
+static const u8 sClockFrames[8][3] =
+{
+    { 1, 0, 0 },
+    { 5, 0, 0 },
+    { 9, 0, 0 },
+    { 5, 0, 1 },
+    { 1, 0, 1 },
+    { 5, 1, 1 },
+    { 9, 1, 0 },
+    { 5, 1, 0 },
+};
+
+static const u8 gSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
+static const u8 gSaveFailedClockGfx[] = INCBIN_U8("graphics/misc/clock_small.4bpp.lz");
 
 static void CB2_SaveFailedScreen(void);
 static void CB2_WipeSave(void);
@@ -140,9 +231,9 @@ static void CB2_SaveFailedScreen(void)
             LoadBgTiles(0, gUnknown_0850E87C, 0x120, 0x214);
             InitWindows(gUnknown_085EFD94);
             // AddWindowWithoutTileMap returns a u16/integer, but the info is clobbered into a u8 here resulting in lost info. Bug?
-            gSaveFailedWindowIds[TEXT_WIN_ID] = AddWindowWithoutTileMap(&gUnknown_085EFD9C);
+            gSaveFailedWindowIds[TEXT_WIN_ID] = AddWindowWithoutTileMap(gUnknown_085EFD9C);
             SetWindowAttribute(gSaveFailedWindowIds[TEXT_WIN_ID], 7, (u32)&gDecompressionBuffer[0x2800]);
-            gSaveFailedWindowIds[CLOCK_WIN_ID] = AddWindowWithoutTileMap(&gUnknown_085EFDA4);
+            gSaveFailedWindowIds[CLOCK_WIN_ID] = AddWindowWithoutTileMap(gUnknown_085EFDA4);
             SetWindowAttribute(gSaveFailedWindowIds[CLOCK_WIN_ID], 7, (u32)&gDecompressionBuffer[0x3D00]);
             DeactivateAllTextPrinters();
             ResetSpriteData();
@@ -270,14 +361,14 @@ static void VBlankCB_UpdateClockGraphics(void)
 {
     unsigned int n = (gMain.vblankCounter2 >> 3) & 7;
 
-    gMain.oamBuffer[0] = gClockOamData;
+    gMain.oamBuffer[0] = sClockOamData;
     gMain.oamBuffer[0].x = 112;
     gMain.oamBuffer[0].y = (CLOCK_WIN_TOP + 1) * 8;;
 
     if (gSaveFailedClockInfo[CLOCK_RUNNING] != FALSE)
     {
-        gMain.oamBuffer[0].tileNum = gClockFrames[n][0];
-        gMain.oamBuffer[0].matrixNum = (gClockFrames[n][2] << 4) | (gClockFrames[n][1] << 3);
+        gMain.oamBuffer[0].tileNum = sClockFrames[n][0];
+        gMain.oamBuffer[0].matrixNum = (sClockFrames[n][2] << 4) | (sClockFrames[n][1] << 3);
     }
     else
     {

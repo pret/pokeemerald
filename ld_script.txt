@@ -434,7 +434,7 @@ SECTIONS {
         data/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
         data/mystery_event_menu.o(.rodata);
-        data/save_failed_screen.o(.rodata);
+        src/save_failed_screen.o(.rodata);
         data/braille_puzzles.o(.rodata);
         data/pokeblock_feed.o(.rodata);
         data/clear_save_data_screen.o(.rodata);

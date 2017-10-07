@@ -190,7 +190,7 @@ u16 AddWindow(const struct WindowTemplate *template)
     return win;
 }
 
-int AddWindowWithoutTileMap(struct WindowTemplate *template)
+int AddWindowWithoutTileMap(const struct WindowTemplate *template)
 {
     u16 win;
     u8 bgLayer;
