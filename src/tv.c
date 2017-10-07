@@ -3665,11 +3665,66 @@ u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
             return 0;
         }
     }
-    if (FlagGet(SYS_TV_LATI) == TRUE || FlagGet(SYS_TV_HOME) != TRUE)
+    if (FlagGet(SYS_TV_LATI) == TRUE)
     {
         return 1;
     }
-    return 2;
+    if (FlagGet(SYS_TV_HOME) == TRUE)
+    {
+        return 2;
+    }
+    return 1;
+}
+
+void GetMomOrDadStringForTVMessage(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+    {
+        if (gSaveBlock2Ptr->playerGender == MALE)
+        {
+            if (gSaveBlock1Ptr->location.mapNum == MAP_ID_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+            {
+                StringCopy(gStringVar1, gText_Mom);
+                VarSet(VAR_0x4003, 1);
+            }
+        }
+        else
+        {
+            if (gSaveBlock1Ptr->location.mapNum == MAP_ID_LITTLEROOT_TOWN_MAYS_HOUSE_1F)
+            {
+                StringCopy(gStringVar1, gText_Mom);
+                VarSet(VAR_0x4003, 1);
+            }
+        }
+    }
+    if (VarGet(VAR_0x4003) == 1)
+    {
+        StringCopy(gStringVar1, gText_Mom);
+    }
+    else if (VarGet(VAR_0x4003) == 2)
+    {
+        StringCopy(gStringVar1, gText_Dad);
+    }
+    else if (VarGet(VAR_0x4003) > 2)
+    {
+        if (VarGet(VAR_0x4003) % 2 == 0)
+            StringCopy(gStringVar1, gText_Mom);
+        else
+            StringCopy(gStringVar1, gText_Dad);
+    }
+    else
+    {
+        if (Random() % 2 != 0)
+        {
+            StringCopy(gStringVar1, gText_Mom);
+            VarSet(VAR_0x4003, 1);
+        }
+        else
+        {
+            StringCopy(gStringVar1, gText_Dad);
+            VarSet(VAR_0x4003, 2);
+        }
+    }
 }
 
 asm(".section .text.dotvshow");
