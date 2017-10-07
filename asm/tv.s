@@ -3,41 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80F06D0
-sub_80F06D0: @ 80F06D0
-	push {lr}
-	adds r3, r0, 0
-	movs r2, 0
-_080F06D6:
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	adds r1, r0, r3
-	ldrb r0, [r1, 0x1]
-	cmp r0, 0
-	bne _080F06F6
-	ldrb r0, [r1]
-	subs r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x3B
-	bhi _080F06F6
-	lsls r0, r2, 24
-	asrs r0, 24
-	b _080F0704
-_080F06F6:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x17
-	bls _080F06D6
-	movs r0, 0x1
-	negs r0, r0
-_080F0704:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80F06D0
-
 	thumb_func_start sub_80F0708
 sub_80F0708: @ 80F0708
 	push {r4-r7,lr}

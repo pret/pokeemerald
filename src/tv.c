@@ -3931,6 +3931,20 @@ u8 sub_80F0668(TVShow *tv1, TVShow *tv2, u8 idx)
     return TRUE;
 }
 
+s8 sub_80F06D0(TVShow *tvShows)
+{
+    u8 i;
+
+    for (i = 0; i < 24; i ++)
+    {
+        if (tvShows[i].common.active == FALSE && (u8)(tvShows[i].common.kind - 1) < 60)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
