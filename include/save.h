@@ -76,7 +76,7 @@ u8 GetSaveValidStatus(const struct SaveSectionLocation *location);
 //u8 sub_8125B88(u8 a1, u8 *data, u16 size);
 u8 DoReadFlashWholeSection(u8, struct SaveSection *);
 u16 CalculateChecksum(void *, u16);
-//u8 HandleSavingData(u8 saveType);
+u8 HandleSavingData(u8 saveType);
 //u8 TrySavingData(u8 saveType);
 //u8 sub_8125D80(void);
 //bool8 sub_8125DA8(void);

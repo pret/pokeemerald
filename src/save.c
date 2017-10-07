@@ -15,7 +15,6 @@ extern const struct SaveSectionOffsets gSaveSectionOffsets[0xE];
 extern void DoSaveFailedScreen(u8); // save_failed_screen
 extern void LoadSerializedGame(void); // load_save
 extern bool32 ProgramFlashSectorAndVerify(u8 sector, u8 *data);
-extern void ReadFlash(u8 sector, u32 arg1, void* data, u32 size);
 
 // iwram common
 u16 gLastWrittenSector;
@@ -806,7 +805,7 @@ u32 sub_81535DC(u8 sector, u8* dst)
 
     if (sector != 30 && sector != 31)
         return 0xFF;
-    ReadFlash(sector, 0, &gSaveDataBuffer, sizeof(struct SaveSection));
+    ReadFlash(sector, 0, (u8 *)&gSaveDataBuffer, sizeof(struct SaveSection));
     if (*(u32*)(&gSaveDataBuffer.data[0]) != 0xB39D)
         return 0xFF;
     // copies whole save section except u32 counter

@@ -65,6 +65,7 @@ u16 ReadFlashId(void);
 void StartFlashTimer(u8 phase);
 void SetReadFlash1(u16 *dest);
 void StopFlashTimer(void);
+void ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size);
 
 u16 WaitForFlashWrite_Common(u8 phase, u8 *addr, u8 lastData);
 
