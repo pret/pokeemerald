@@ -1341,7 +1341,7 @@ _080E7856:
 	.pool
 _080E7868:
 	movs r0, 0
-	bl sub_800A2A4
+	bl GetLinkPlayerTrainerId
 	adds r2, r0, 0
 	movs r0, 0x1
 	ands r2, r0
@@ -1362,7 +1362,7 @@ _080E7880:
 	.pool
 _080E7894:
 	movs r0, 0
-	bl sub_800A2A4
+	bl GetLinkPlayerTrainerId
 	movs r1, 0x9
 	bl __umodsi3
 	adds r2, r0, 0

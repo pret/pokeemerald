@@ -47,8 +47,7 @@ typedef union TVShow // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 pad02[20];
-        /*0x16*/ u16 var16[3];
+        /*0x02*/ u8 pad02[26];
         /*0x1C*/ u8 srcTrainerId3Lo;
         /*0x1D*/ u8 srcTrainerId3Hi;
         /*0x1E*/ u8 srcTrainerId2Lo;

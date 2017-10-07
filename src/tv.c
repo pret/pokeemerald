@@ -3877,6 +3877,60 @@ bool8 sub_80F049C(TVShow *src[25], TVShow *dest[25], u8 idx)
     return FALSE;
 }
 
+u8 sub_80F0580(TVShow *tv1, TVShow *tv2, u8 idx)
+{
+    u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
+
+    if ((linkTrainerId & 0xFF) == tv2->common.trainerIdLo && ((linkTrainerId >> 8) & 0xFF) == tv2->common.trainerIdHi)
+    {
+        return FALSE;
+    }
+    tv2->common.trainerIdLo = tv2->common.srcTrainerIdLo;
+    tv2->common.trainerIdHi = tv2->common.srcTrainerIdHi;
+    tv2->common.srcTrainerIdLo = linkTrainerId & 0xFF;
+    tv2->common.srcTrainerIdHi = linkTrainerId >> 8;
+    *tv1 = *tv2;
+    tv1->common.active = TRUE;
+    return TRUE;
+}
+
+u8 sub_80F05E8(TVShow *tv1, TVShow *tv2, u8 idx)
+{
+    u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
+    if ((linkTrainerId & 0xFF) == tv2->common.srcTrainerIdLo && ((linkTrainerId >> 8) & 0xFF) == tv2->common.srcTrainerIdHi)
+    {
+        return FALSE;
+    }
+    if ((linkTrainerId & 0xFF) == tv2->common.trainerIdLo && ((linkTrainerId >> 8) & 0xFF) == tv2->common.trainerIdHi)
+    {
+        return FALSE;
+    }
+    tv2->common.srcTrainerIdLo = tv2->common.srcTrainerId2Lo;
+    tv2->common.srcTrainerIdHi = tv2->common.srcTrainerId2Hi;
+    tv2->common.srcTrainerId2Lo = linkTrainerId & 0xFF;
+    tv2->common.srcTrainerId2Hi = linkTrainerId >> 8;
+    *tv1 = *tv2;
+    tv1->common.active = TRUE;
+    return TRUE;
+}
+
+u8 sub_80F0668(TVShow *tv1, TVShow *tv2, u8 idx)
+{
+    u32 linkTrainerId = GetLinkPlayerTrainerId(idx);
+    if ((linkTrainerId & 0xFF) == tv2->common.trainerIdLo && ((linkTrainerId >> 8) & 0xFF) == tv2->common.trainerIdHi)
+    {
+        return FALSE;
+    }
+    tv2->common.trainerIdLo = tv2->common.srcTrainerIdLo;
+    tv2->common.trainerIdHi = tv2->common.srcTrainerIdHi;
+    tv2->common.srcTrainerIdLo = linkTrainerId & 0xFF;
+    tv2->common.srcTrainerIdHi = linkTrainerId >> 8;
+    *tv1 = *tv2;
+    tv1->common.active = TRUE;
+    tv1->massOutbreak.daysLeft = 1;
+    return TRUE;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
