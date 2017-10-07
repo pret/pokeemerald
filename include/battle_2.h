@@ -25,6 +25,6 @@ extern const u8 gStatusConditionString_IceJpn[8];
 extern const u8 gStatusConditionString_ConfusionJpn[8];
 extern const u8 gStatusConditionString_LoveJpn[8];
 
-extern const u8 * const gStatusConditionStringsTable[][2];
+extern const u8 * const gStatusConditionStringsTable[7][2];
 
 #endif // GUARD_BATTLE_2_H
