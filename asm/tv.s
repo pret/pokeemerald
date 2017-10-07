@@ -3,58 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start CheckForBigMovieOrEmergencyNewsOnTV
-CheckForBigMovieOrEmergencyNewsOnTV: @ 80F0040
-	push {lr}
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	cmp r0, 0x1
-	bne _080F0060
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0
-	bne _080F006C
-	movs r0, 0x5
-	ldrsb r0, [r1, r0]
-	cmp r0, 0
-	beq _080F0074
-_080F0060:
-	movs r0, 0
-	b _080F009E
-	.pool
-_080F006C:
-	movs r0, 0x5
-	ldrsb r0, [r1, r0]
-	cmp r0, 0x2
-	bne _080F0060
-_080F0074:
-	ldr r0, =0x000008bd
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080F0092
-	movs r0, 0x89
-	lsls r0, 4
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080F009C
-_080F0092:
-	movs r0, 0x1
-	b _080F009E
-	.pool
-_080F009C:
-	movs r0, 0x2
-_080F009E:
-	pop {r1}
-	bx r1
-	thumb_func_end CheckForBigMovieOrEmergencyNewsOnTV
-
 	thumb_func_start GetMomOrDadStringForTVMessage
 GetMomOrDadStringForTVMessage: @ 80F00A4
 	push {r4,lr}

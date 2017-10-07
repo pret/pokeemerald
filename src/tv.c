@@ -3645,6 +3645,33 @@ u32 player_id_to_dword(void)
     return (gSaveBlock2Ptr->playerTrainerId[3] << 24) | (gSaveBlock2Ptr->playerTrainerId[2] << 16) | (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
 }
 
+u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+    {
+        return 0;
+    }
+    if (gSaveBlock2Ptr->playerGender == MALE)
+    {
+        if (gSaveBlock1Ptr->location.mapNum != MAP_ID_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+        {
+            return 0;
+        }
+    }
+    else
+    {
+        if (gSaveBlock1Ptr->location.mapNum != MAP_ID_LITTLEROOT_TOWN_MAYS_HOUSE_1F)
+        {
+            return 0;
+        }
+    }
+    if (FlagGet(SYS_TV_LATI) == TRUE || FlagGet(SYS_TV_HOME) != TRUE)
+    {
+        return 1;
+    }
+    return 2;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)
