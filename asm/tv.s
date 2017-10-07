@@ -3,27 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80F0E58
-sub_80F0E58: @ 80F0E58
-	push {lr}
-	ldr r0, [r0]
-	ldr r1, [r1]
-	ldr r2, =gUnknown_03001176
-	ldrb r2, [r2]
-	lsls r2, 24
-	asrs r2, 24
-	lsls r2, 2
-	adds r1, r2
-	ldr r2, =sCurTVShowSlot
-	ldrb r2, [r2]
-	lsls r2, 24
-	asrs r2, 24
-	bl sub_80F0E84
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80F0E58
-
 	thumb_func_start sub_80F0E84
 sub_80F0E84: @ 80F0E84
 	push {r4-r6,lr}

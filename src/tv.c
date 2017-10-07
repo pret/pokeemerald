@@ -112,6 +112,7 @@ void sub_80F0EEC(void);
 void sub_80F0F24(void);
 s8 sub_80F0ECC(PokeNews *, u8);
 void sub_80F0E58(PokeNews *[], PokeNews *[]);
+void sub_80F0E84(PokeNews *, PokeNews *, s8);
 
 void TVShowDone(void);
 
@@ -4647,6 +4648,17 @@ void sub_80F0D60(PokeNews player1[16], PokeNews player2[16], PokeNews player3[16
             }
         }
     }
+}
+
+void sub_80F0E58(PokeNews *src[16], PokeNews *dest[16])
+{
+    PokeNews *ptr1;
+    PokeNews *ptr2;
+
+    ptr1 = *src;
+    ptr2 = *dest;
+    ptr2 += gUnknown_03001176;
+    sub_80F0E84(ptr1, ptr2, sCurTVShowSlot);
 }
 
 asm(".section .text.dotvshow");
