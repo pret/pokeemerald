@@ -107,6 +107,9 @@ bool8 sub_80F05E8(TVShow *, TVShow *, u8);
 bool8 sub_80F0668(TVShow *, TVShow *, u8);
 void sub_80F0B00(u8 showIdx);
 void sub_80F0B24(u16 species, u8 showIdx);
+void sub_80F0D60(PokeNews *, PokeNews *, PokeNews *, PokeNews *);
+void sub_80F0EEC(void);
+void sub_80F0F24(void);
 
 void TVShowDone(void);
 
@@ -4574,6 +4577,41 @@ void sub_80F0C04(void)
     for (i = 0; i < 5 - ct; i ++)
     {
         DeleteTVShowInArrayByIdx(gSaveBlock1Ptr->tvShows, i + 5);
+    }
+}
+
+void sub_80F0C7C(void *src, u32 size, u8 masterIdx)
+{
+    u8 i;
+    PokeNews (*rmBuffer2)[4][16];
+    PokeNews (*rmBuffer)[4][16];
+
+    rmBuffer2 = malloc(4 * 16 * sizeof(PokeNews));
+    if (rmBuffer2 != NULL)
+    {
+        for (i = 0; i < 4; i ++)
+        {
+            memcpy((*rmBuffer2)[i], src + i * size, sizeof((*rmBuffer2)[i]));
+        }
+        rmBuffer = rmBuffer2;
+        switch (masterIdx)
+        {
+            case 0:
+                sub_80F0D60(gSaveBlock1Ptr->pokeNews, (*rmBuffer)[1], (*rmBuffer)[2], (*rmBuffer)[3]);
+                break;
+            case 1:
+                sub_80F0D60((*rmBuffer)[0], gSaveBlock1Ptr->pokeNews, (*rmBuffer)[2], (*rmBuffer)[3]);
+                break;
+            case 2:
+                sub_80F0D60((*rmBuffer)[0], (*rmBuffer)[1], gSaveBlock1Ptr->pokeNews, (*rmBuffer)[3]);
+                break;
+            case 3:
+                sub_80F0D60((*rmBuffer)[0], (*rmBuffer)[1], (*rmBuffer)[2], gSaveBlock1Ptr->pokeNews);
+                break;
+        }
+        sub_80F0EEC();
+        sub_80F0F24();
+        free(rmBuffer2);
     }
 }
 
