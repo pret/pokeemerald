@@ -110,6 +110,8 @@ void sub_80F0B24(u16 species, u8 showIdx);
 void sub_80F0D60(PokeNews *, PokeNews *, PokeNews *, PokeNews *);
 void sub_80F0EEC(void);
 void sub_80F0F24(void);
+s8 sub_80F0ECC(PokeNews *, u8);
+void sub_80F0E58(PokeNews *[], PokeNews *[]);
 
 void TVShowDone(void);
 
@@ -4612,6 +4614,38 @@ void sub_80F0C7C(void *src, u32 size, u8 masterIdx)
         sub_80F0EEC();
         sub_80F0F24();
         free(rmBuffer2);
+    }
+}
+
+void sub_80F0D60(PokeNews player1[16], PokeNews player2[16], PokeNews player3[16], PokeNews player4[16])
+{
+    u8 i;
+    u8 j;
+    u8 k;
+    PokeNews **argslist[4];
+
+    argslist[0] = &player1;
+    argslist[1] = &player2;
+    argslist[2] = &player3;
+    argslist[3] = &player4;
+    gUnknown_03001175 = GetLinkPlayerCount();
+    for (i = 0; i < 16; i ++)
+    {
+        for (j = 0; j < gUnknown_03001175; j ++)
+        {
+            gUnknown_03001176 = sub_80F0ECC(*argslist[j], i);
+            if (gUnknown_03001176 != -1)
+            {
+                for (k = 0; k < gUnknown_03001175 - 1; k++)
+                {
+                    sCurTVShowSlot = sub_80EEE30(*argslist[(j + k + 1) % gUnknown_03001175]);
+                    if (sCurTVShowSlot != -1)
+                    {
+                        sub_80F0E58(argslist[(j + k + 1) % gUnknown_03001175], argslist[j]);
+                    }
+                }
+            }
+        }
     }
 }
 
