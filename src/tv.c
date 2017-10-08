@@ -4794,6 +4794,23 @@ void sub_80F0F64(TVShow *show, u32 language)
     free(r4);
 }
 
+void sub_80F1208(TVShow *shows)
+{
+    TVShow *curShow;
+
+    sub_80F14F8();
+    for (curShow = shows; curShow < shows + 24; curShow ++)
+    {
+        if (curShow->bravoTrainerTower.kind == TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE)
+        {
+            if ((curShow->bravoTrainerTower.language == LANGUAGE_JAPANESE && curShow->bravoTrainerTower.pokemonNameLanguage != LANGUAGE_JAPANESE) || (curShow->bravoTrainerTower.language != LANGUAGE_JAPANESE && curShow->bravoTrainerTower.pokemonNameLanguage == LANGUAGE_JAPANESE))
+            {
+                memset(curShow, 0, sizeof(TVShow));
+            }
+        }
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)

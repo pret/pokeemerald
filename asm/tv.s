@@ -3,50 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80F1208
-sub_80F1208: @ 80F1208
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	bl sub_80F14F8
-	adds r4, r5, 0
-	movs r1, 0xD8
-	lsls r1, 2
-	adds r0, r4, r1
-	cmp r4, r0
-	bcs _080F124C
-_080F121C:
-	ldrb r0, [r4]
-	cmp r0, 0x7
-	bne _080F1240
-	ldrb r0, [r4, 0x1D]
-	cmp r0, 0x1
-	bne _080F1230
-	ldrb r0, [r4, 0x1E]
-	cmp r0, 0x1
-	bne _080F1236
-	b _080F1240
-_080F1230:
-	ldrb r0, [r4, 0x1E]
-	cmp r0, 0x1
-	bne _080F1240
-_080F1236:
-	adds r0, r4, 0
-	movs r1, 0
-	movs r2, 0x24
-	bl memset
-_080F1240:
-	adds r4, 0x24
-	movs r1, 0xD8
-	lsls r1, 2
-	adds r0, r5, r1
-	cmp r4, r0
-	bcc _080F121C
-_080F124C:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80F1208
-
 	thumb_func_start sub_80F1254
 sub_80F1254: @ 80F1254
 	push {r4,r5,lr}
