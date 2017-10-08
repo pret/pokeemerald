@@ -102,6 +102,9 @@ typedef union TVShow // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u8 pad02[4];
         /*0x06*/ u16 var06;
+        /*0x08*/ u8 pad_08[3];
+        /*0x0b*/ u8 string_0b[12];
+        /*0x17*/ u8 language;
     } unkShow04;
 
     // TVSHOW_NAME_RATER_SHOW

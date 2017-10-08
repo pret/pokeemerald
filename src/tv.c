@@ -4831,9 +4831,119 @@ void sub_80F1254(TVShow *shows)
     }
 }
 
-u8 sub_80F1290(u8 *str)
+static u8 TV_GetStringLanguage(u8 *str)
 {
     return IsStringJapanese(str) ? LANGUAGE_JAPANESE : LANGUAGE_ENGLISH;
+}
+
+void sub_80F12A4(TVShow *shows)
+{
+    TVShow *curShow;
+
+    for (curShow = shows; curShow < shows + 24; curShow ++)
+    {
+        switch(curShow->common.kind)
+        {
+            case TVSHOW_FAN_CLUB_LETTER:
+                curShow->fanclubLetter.language = TV_GetStringLanguage(curShow->fanclubLetter.playerName);
+                break;
+            case TVSHOW_RECENT_HAPPENINGS:
+                curShow->recentHappenings.language = TV_GetStringLanguage(curShow->recentHappenings.playerName);
+                break;
+            case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
+                curShow->fanclubOpinions.language = TV_GetStringLanguage(curShow->fanclubOpinions.playerName);
+                curShow->fanclubOpinions.var0E = TV_GetStringLanguage(curShow->fanclubOpinions.nickname);
+                break;
+            case TVSHOW_UNKN_SHOWTYPE_04:
+                curShow->unkShow04.language = TV_GetStringLanguage(curShow->unkShow04.string_0b);
+                break;
+            case TVSHOW_NAME_RATER_SHOW:
+                curShow->nameRaterShow.language = TV_GetStringLanguage(curShow->nameRaterShow.trainerName);
+                curShow->nameRaterShow.pokemonNameLanguage = TV_GetStringLanguage(curShow->nameRaterShow.pokemonName);
+                break;
+            case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
+                curShow->bravoTrainer.language = TV_GetStringLanguage(curShow->bravoTrainer.playerName);
+                curShow->bravoTrainer.pokemonNameLanguage = TV_GetStringLanguage(curShow->bravoTrainer.pokemonNickname);
+                break;
+            case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
+                curShow->bravoTrainerTower.language = TV_GetStringLanguage(curShow->bravoTrainerTower.trainerName);
+                curShow->bravoTrainerTower.pokemonNameLanguage = TV_GetStringLanguage(curShow->bravoTrainerTower.pokemonName);
+                break;
+            case TVSHOW_CONTEST_LIVE_UPDATES:
+                curShow->contestLiveUpdates.language = TV_GetStringLanguage(curShow->contestLiveUpdates.playerName);
+                curShow->contestLiveUpdates.unk_1e = TV_GetStringLanguage(curShow->contestLiveUpdates.unk_04);
+                break;
+            case TVSHOW_3_CHEERS_FOR_POKEBLOCKS:
+                curShow->threeCheers.language = TV_GetStringLanguage(curShow->threeCheers.playerName);
+                curShow->threeCheers.unk_15 = TV_GetStringLanguage(curShow->threeCheers.unk_04);
+                break;
+            case TVSHOW_BATTLE_UPDATE:
+                curShow->battleUpdate.language = TV_GetStringLanguage(curShow->battleUpdate.playerName);
+                curShow->battleUpdate.unk_1a = TV_GetStringLanguage(curShow->battleUpdate.linkOpponentName);
+                break;
+            case TVSHOW_FAN_CLUB_SPECIAL:
+                curShow->fanClubSpecial.language = TV_GetStringLanguage(curShow->fanClubSpecial.playerName);
+                curShow->fanClubSpecial.unk_18 = TV_GetStringLanguage(curShow->fanClubSpecial.unk_0c);
+                break;
+            case TVSHOW_CONTEST_LIVE_UPDATES_2:
+                curShow->contestLiveUpdates2.language = TV_GetStringLanguage(curShow->contestLiveUpdates2.playerName);
+                curShow->contestLiveUpdates2.unk_18 = TV_GetStringLanguage(curShow->contestLiveUpdates2.categoryName);
+                break;
+                
+            case TVSHOW_POKEMON_TODAY_CAUGHT:
+                curShow->pokemonToday.language = TV_GetStringLanguage(curShow->pokemonToday.playerName);
+                curShow->pokemonToday.language2 = TV_GetStringLanguage(curShow->pokemonToday.nickname);
+                break;
+            case TVSHOW_SMART_SHOPPER:
+                curShow->smartshopperShow.language = TV_GetStringLanguage(curShow->smartshopperShow.playerName);
+                break;
+            case TVSHOW_POKEMON_TODAY_FAILED:
+                curShow->pokemonTodayFailed.language = TV_GetStringLanguage(curShow->pokemonTodayFailed.playerName);
+                break;
+            case TVSHOW_FISHING_ADVICE:
+                curShow->pokemonAngler.language = TV_GetStringLanguage(curShow->pokemonAngler.playerName);
+                break;
+            case TVSHOW_WORLD_OF_MASTERS:
+                curShow->worldOfMasters.language = TV_GetStringLanguage(curShow->worldOfMasters.playerName);
+                break;
+            case TVSHOW_TREND_WATCHER:
+                curShow->trendWatcher.language = TV_GetStringLanguage(curShow->trendWatcher.playerName);
+                break;
+            case TVSHOW_BREAKING_NEWS:
+                curShow->breakingNews.language = TV_GetStringLanguage(curShow->breakingNews.playerName);
+                break;
+            case TVSHOW_BATTLE_SEMINAR:
+                curShow->battleSeminar.language = TV_GetStringLanguage(curShow->battleSeminar.playerName);
+                break;
+            case TVSHOW_FIND_THAT_GAMER:
+            case TVSHOW_TRAINER_FAN_CLUB:
+                curShow->trainerFanClub.language = TV_GetStringLanguage(curShow->trainerFanClub.playerName);
+                break;
+            case TVSHOW_CUTIES:
+                curShow->cuties.language = TV_GetStringLanguage(curShow->cuties.playerName);
+                curShow->cuties.pokemonNameLanguage = TV_GetStringLanguage(curShow->cuties.nickname);
+                break;
+            case TVSHOW_TODAYS_RIVAL_TRAINER:
+            case TVSHOW_SECRET_BASE_VISIT:
+            case TVSHOW_FRONTIER:
+                curShow->rivalTrainer.language = TV_GetStringLanguage(curShow->rivalTrainer.playerName);
+                break;
+            case TVSHOW_TREASURE_INVESTIGATORS:
+            case TVSHOW_LOTTO_WINNER:
+            case TVSHOW_NUMBER_ONE:
+                curShow->treasureInvestigators.language = TV_GetStringLanguage(curShow->treasureInvestigators.playerName);
+                break;
+            case TVSHOW_SECRET_BASE_SECRETS:
+                curShow->secretBaseSecrets.language = TV_GetStringLanguage(curShow->secretBaseSecrets.playerName);
+                curShow->secretBaseSecrets.pokemonNameLanguage = TV_GetStringLanguage(curShow->secretBaseSecrets.unk04);
+                break;
+            case TVSHOW_SAFARI_FAN_CLUB:
+                curShow->safariFanClub.language = TV_GetStringLanguage(curShow->safariFanClub.playerName);
+                break;
+            case TVSHOW_MASS_OUTBREAK:
+                break;
+        }
+    }
 }
 
 asm(".section .text.dotvshow");
