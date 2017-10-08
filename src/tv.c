@@ -4831,6 +4831,11 @@ void sub_80F1254(TVShow *shows)
     }
 }
 
+u8 sub_80F1290(u8 *str)
+{
+    return IsStringJapanese(str) ? LANGUAGE_JAPANESE : LANGUAGE_ENGLISH;
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)

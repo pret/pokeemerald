@@ -3,20 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80F1290
-sub_80F1290: @ 80F1290
-	push {lr}
-	bl IsStringJapanese
-	movs r1, 0x2
-	cmp r0, 0
-	beq _080F129E
-	movs r1, 0x1
-_080F129E:
-	adds r0, r1, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80F1290
-
 	thumb_func_start sub_80F12A4
 sub_80F12A4: @ 80F12A4
 	push {r4,r5,lr}
