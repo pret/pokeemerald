@@ -33,6 +33,7 @@
 #include "script_menu.h"
 #include "naming_screen.h"
 #include "malloc.h"
+#include "region_map.h"
 #include "tv.h"
 
 // Static type declarations
@@ -260,7 +261,7 @@ const u8 *const gUnknown_0858D1A0[] = {
     gUnknown_08283A5F
 };
 
-const u8 *const gUnknown_0858D1D0[] = {
+const u8 *const gTVTodaysSmartShopperTextGroup[] = {
     gUnknown_08283B05,
     gUnknown_08283BAF,
     gUnknown_08283C81,
@@ -5276,4 +5277,127 @@ void DoTVShowBravoTrainerBattleTower(void)
             break;
     }
     ShowFieldMessage(gTVBravoTrainerBattleTowerTextGroup[state]);
+}
+
+void DoTVShowTodaysSmartShopper(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    state = sTVShowState;
+    switch(state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
+            GetMapName(gStringVar2, show->smartshopperShow.shopLocation, 0);
+            if (show->smartshopperShow.itemAmounts[0] >= 255)
+            {
+                sTVShowState = 11;
+            }
+            else
+            {
+                sTVShowState = 1;
+            }
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
+            StringCopy(gStringVar2, ItemId_GetItem(show->smartshopperShow.itemIds[0])->name);
+            TV_PrintIntToStringVar(2, show->smartshopperShow.itemAmounts[0]);
+            sTVShowState += 1 + (Random() % 4);
+            break;
+        case 2:
+        case 4:
+        case 5:
+            if (show->smartshopperShow.itemIds[1] != ITEM_NONE)
+            {
+                sTVShowState = 6;
+            }
+            else
+            {
+                sTVShowState = 10;
+            }
+            break;
+        case 3:
+            TV_PrintIntToStringVar(2, show->smartshopperShow.itemAmounts[0] + 1);
+            if (show->smartshopperShow.itemIds[1] != ITEM_NONE)
+            {
+                sTVShowState = 6;
+            }
+            else
+            {
+                sTVShowState = 10;
+            }
+            break;
+        case 6:
+            StringCopy(gStringVar2, ItemId_GetItem(show->smartshopperShow.itemIds[1])->name);
+            TV_PrintIntToStringVar(2, show->smartshopperShow.itemAmounts[1]);
+            if (show->smartshopperShow.itemIds[2] != ITEM_NONE)
+            {
+                sTVShowState = 7;
+            }
+            else if (show->smartshopperShow.priceReduced == TRUE)
+            {
+                sTVShowState = 8;
+            }
+            else
+            {
+                sTVShowState = 9;
+            }
+            break;
+        case 7:
+            StringCopy(gStringVar2, ItemId_GetItem(show->smartshopperShow.itemIds[2])->name);
+            TV_PrintIntToStringVar(2, show->smartshopperShow.itemAmounts[2]);
+            if (show->smartshopperShow.priceReduced == TRUE)
+            {
+                sTVShowState = 8;
+            }
+            else
+            {
+                sTVShowState = 9;
+            }
+            break;
+        case 8:
+            if (show->smartshopperShow.itemAmounts[0] >= 255)
+            {
+                sTVShowState = 12;
+            }
+            else
+            {
+                sTVShowState = 9;
+            }
+            break;
+        case 9:
+            sub_80EF40C(1, show);
+            TVShowDone();
+            break;
+        case 10:
+            if (show->smartshopperShow.priceReduced == TRUE)
+            {
+                sTVShowState = 8;
+            }
+            else
+            {
+                sTVShowState = 9;
+            }
+            break;
+        case 11:
+            TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
+            StringCopy(gStringVar2, ItemId_GetItem(show->smartshopperShow.itemIds[0])->name);
+            if (show->smartshopperShow.priceReduced == TRUE)
+            {
+                sTVShowState = 8;
+            }
+            else
+            {
+                sTVShowState = 12;
+            }
+            break;
+        case 12:
+            TVShowConvertInternationalString(gStringVar1, show->smartshopperShow.playerName, show->smartshopperShow.language);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVTodaysSmartShopperTextGroup[state]);
 }
