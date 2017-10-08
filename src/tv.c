@@ -246,7 +246,7 @@ const u8 *const gUnknown_0858D19C[] = {
     gUnknown_0828178A
 };
 
-const u8 *const gUnknown_0858D1A0[] = {
+const u8 *const gTVPokemonTodaySuccessfulTextGroup[] = {
     gUnknown_082834A0,
     gUnknown_08283552,
     gUnknown_082835AE,
@@ -5498,6 +5498,84 @@ void DoTVShowTheNameRaterShow(void)
             break;
     }
     ShowFieldMessage(gTVNameRaterTextGroup[state]);
+}
+
+void DoTVShowPokemonTodaySuccessfulCapture(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->pokemonToday.playerName, show->pokemonToday.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->pokemonToday.species]);
+            TVShowConvertInternationalString(gStringVar3, show->pokemonToday.nickname, show->pokemonToday.language2);
+            if (show->pokemonToday.ball == ITEM_MASTER_BALL)
+            {
+                sTVShowState = 5;
+            }
+            else
+            {
+                sTVShowState = 1;
+            }
+            break;
+        case 1:
+            sTVShowState = 2;
+            break;
+        case 2:
+            StringCopy(gStringVar2, ItemId_GetItem(show->pokemonToday.ball)->name);
+            TV_PrintIntToStringVar(2, show->pokemonToday.var12);
+            if (show->pokemonToday.var12 < 4)
+            {
+                sTVShowState = 3;
+            }
+            else
+            {
+                sTVShowState = 4;
+            }
+            break;
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, show->pokemonToday.playerName, show->pokemonToday.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->pokemonToday.species]);
+            TVShowConvertInternationalString(gStringVar3, show->pokemonToday.nickname, show->pokemonToday.language2);
+            sTVShowState = 6;
+            break;
+        case 4:
+            sTVShowState = 6;
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, show->pokemonToday.playerName, show->pokemonToday.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->pokemonToday.species]);
+            sTVShowState = 6;
+            break;
+        case 6:
+            TVShowConvertInternationalString(gStringVar1, show->pokemonToday.playerName, show->pokemonToday.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->pokemonToday.species]);
+            TVShowConvertInternationalString(gStringVar3, show->pokemonToday.nickname, show->pokemonToday.language2);
+            sTVShowState += 1 + (Random() % 4);
+            break;
+        case 7:
+        case 8:
+            StringCopy(gStringVar1, gSpeciesNames[show->pokemonToday.species]);
+            TVShowConvertInternationalString(gStringVar2, show->pokemonToday.nickname, show->pokemonToday.language2);
+            TV_GetSomeOtherSpeciesAlreadySeenByPlayer_AndPrintName(2, show->pokemonToday.species);
+            sTVShowState = 11;
+            break;
+        case 9:
+        case 10:
+            StringCopy(gStringVar1, gSpeciesNames[show->pokemonToday.species]);
+            TVShowConvertInternationalString(gStringVar2, show->pokemonToday.nickname, show->pokemonToday.language2);
+            sTVShowState = 11;
+            break;
+        case 11:
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVPokemonTodaySuccessfulTextGroup[state]);
 }
 
 //void TVShowDone(void)
