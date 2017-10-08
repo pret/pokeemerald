@@ -89,7 +89,7 @@ s8 FindEmptyTVSlotWithinFirstFiveShowsOfArray(TVShow *);
 void FindActiveBroadcastByShowType_SetScriptResult(u8);
 void sub_80EF7B4(void);
 void sub_80EF7A8(void);
-u16 sub_80EFA24(u16);
+u16 TV_GetSomeOtherSpeciesAlreadySeenByPlayer(u16);
 void sub_80EFA88(void);
 void sub_80EF93C(TVShow *);
 s8 sub_80EEE30(PokeNews *);
@@ -372,7 +372,7 @@ const u8 *const gUnknown_0858D320[] = {
     gUnknown_0828210E
 };
 
-const u8 *const gUnknown_0858D338[] = {
+const u8 *const gTVNameRaterTextGroup[] = {
     gUnknown_0828218A,
     gUnknown_0828229E,
     gUnknown_08282317,
@@ -1183,7 +1183,7 @@ void tv_store_id_3x(TVShow *show)
 {
     u32 id;
 
-    id = player_id_to_dword();
+    id = GetPlayerIDAsU32();
     show->common.srcTrainerId2Lo = id;
     show->common.srcTrainerId2Hi = id >> 8;
     show->common.srcTrainerIdLo = id;
@@ -1196,7 +1196,7 @@ void tv_store_id_2x(TVShow *show)
 {
     u32 id;
 
-    id = player_id_to_dword();
+    id = GetPlayerIDAsU32();
     show->common.srcTrainerIdLo = id;
     show->common.srcTrainerIdHi = id >> 8;
     show->common.trainerIdLo = id;
@@ -1327,7 +1327,7 @@ void PutFanClubSpecialOnTheAir(void)
     StringCopy(show->fanClubSpecial.playerName, gSaveBlock2Ptr->playerName);
     show->fanClubSpecial.kind = TVSHOW_FAN_CLUB_SPECIAL;
     show->fanClubSpecial.active = TRUE;
-    id = player_id_to_dword();
+    id = GetPlayerIDAsU32();
     show->fanClubSpecial.idLo = id;
     show->fanClubSpecial.idHi = id >> 8;
     StringCopy(name, gStringVar1);
@@ -1570,7 +1570,7 @@ void PutNameRaterShowOnTheAir(void)
             show->nameRaterShow.species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL);
             show->nameRaterShow.random = Random() % 3;
             show->nameRaterShow.random2 = Random() % 2;
-            show->nameRaterShow.var1C = sub_80EFA24(show->nameRaterShow.species);
+            show->nameRaterShow.var1C = TV_GetSomeOtherSpeciesAlreadySeenByPlayer(show->nameRaterShow.species);
             StringCopy(show->nameRaterShow.trainerName, gSaveBlock2Ptr->playerName);
             GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, show->nameRaterShow.pokemonName);
             StripExtCtrlCodes(show->nameRaterShow.pokemonName);
@@ -2045,7 +2045,7 @@ void sub_80EDE84(u16 a0)
     gUnknown_0203A028 = a0;
 }
 
-#ifdef NONMATCHING // Register allocation shenanigans
+#ifdef NONMATCHING // FIXME: Register allocation shenanigans
 void sub_80EDE98(TVShow *show)
 {
     u8 i;
@@ -2595,7 +2595,7 @@ bool8 sub_80EE818(void)
     if (HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_FRONTIER, FALSE) == TRUE)
     {
         shows = gSaveBlock1Ptr->tvShows;
-        playerId = player_id_to_dword();
+        playerId = GetPlayerIDAsU32();
         for (showIdx = 5; showIdx < 24; showIdx ++)
         {
             if (shows[showIdx].common.kind == TVSHOW_FRONTIER && (playerId & 0xFF) == shows[showIdx].common.trainerIdLo && ((playerId >> 8) & 0xFF) == shows[showIdx].common.trainerIdHi)
@@ -3105,7 +3105,7 @@ bool8 HasMixableShowAlreadyBeenSpawnedWithPlayerID(u8 kind, bool8 flag)
     u8 i;
 
     shows = gSaveBlock1Ptr->tvShows;
-    playerId = player_id_to_dword();
+    playerId = GetPlayerIDAsU32();
     for (i = 5; i < 24; i ++)
     {
         if (shows[i].common.kind == kind && (playerId & 0xFF) == shows[i].common.trainerIdLo && ((playerId >> 8) & 0xFF) == shows[i].common.trainerIdHi)
@@ -3362,16 +3362,16 @@ void sub_80EF93C(TVShow *shows)
     }
 }
 
-u16 sub_80EF9E8(u8 varIdx, u16 passedSpecies)
+u16 TV_GetSomeOtherSpeciesAlreadySeenByPlayer_AndPrintName(u8 varIdx, u16 passedSpecies)
 {
     u16 species;
 
-    species = sub_80EFA24(passedSpecies);
+    species = TV_GetSomeOtherSpeciesAlreadySeenByPlayer(passedSpecies);
     StringCopy(gUnknown_0858D144[varIdx], gSpeciesNames[species]);
     return species;
 }
 
-u16 sub_80EFA24(u16 passedSpecies)
+u16 TV_GetSomeOtherSpeciesAlreadySeenByPlayer(u16 passedSpecies)
 {
     u16 species;
     u16 initSpecies;
@@ -3631,7 +3631,7 @@ void sub_80EFF6C(void)
 
 void sub_80EFF9C(void)
 {
-    if (player_id_to_dword() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))
+    if (GetPlayerIDAsU32() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))
     {
         gScriptResult = FALSE;
     }
@@ -3662,7 +3662,7 @@ u8 GetTVChannelByShowType(u8 kind)
     return 0;
 }
 
-u32 player_id_to_dword(void)
+u32 GetPlayerIDAsU32(void)
 {
     return (gSaveBlock2Ptr->playerTrainerId[3] << 24) | (gSaveBlock2Ptr->playerTrainerId[2] << 16) | (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
 }
@@ -5116,7 +5116,7 @@ void DoTVShowBravoTrainerPokemonProfile(void)
     u8 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
-    gScriptResult = 0;
+    gScriptResult = FALSE;
     state = sTVShowState;
     switch (state)
     {
@@ -5188,7 +5188,7 @@ void DoTVShowBravoTrainerBattleTower(void)
     u8 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
-    gScriptResult = 0;
+    gScriptResult = FALSE;
     state = sTVShowState;
     switch(state)
     {
@@ -5285,7 +5285,7 @@ void DoTVShowTodaysSmartShopper(void)
     u8 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
-    gScriptResult = 0;
+    gScriptResult = FALSE;
     state = sTVShowState;
     switch(state)
     {
@@ -5401,3 +5401,113 @@ void DoTVShowTodaysSmartShopper(void)
     }
     ShowFieldMessage(gTVTodaysSmartShopperTextGroup[state]);
 }
+
+void DoTVShowTheNameRaterShow(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->nameRaterShow.trainerName, show->nameRaterShow.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->nameRaterShow.species]);
+            TVShowConvertInternationalString(gStringVar3, show->nameRaterShow.pokemonName, show->nameRaterShow.pokemonNameLanguage);
+            sTVShowState = sub_80EFBA4(show) + 1;
+            break;
+        case 1:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+            if (show->nameRaterShow.random == 0)
+            {
+                sTVShowState = 9;
+            }
+            else if (show->nameRaterShow.random == 1)
+            {
+                sTVShowState = 10;
+            }
+            else if (show->nameRaterShow.random == 2)
+            {
+                sTVShowState = 11;
+            }
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, show->nameRaterShow.trainerName, show->nameRaterShow.language);
+            if (show->nameRaterShow.random == 0)
+            {
+                sTVShowState = 9;
+            }
+            else if (show->nameRaterShow.random == 1)
+            {
+                sTVShowState = 10;
+            }
+            else if (show->nameRaterShow.random == 2)
+            {
+                sTVShowState = 11;
+            }
+            break;
+        case 9:
+        case 10:
+        case 11:
+            TVShowConvertInternationalString(gStringVar1, show->nameRaterShow.pokemonName, show->nameRaterShow.pokemonNameLanguage);
+            sub_80EFBDC(1, 0, 0, 1, 0, show);
+            sub_80EFBDC(2, 1, 0, 1, 0, show);
+            sTVShowState = 12;
+            break;
+        case 13:
+            TVShowConvertInternationalString(gStringVar1, show->nameRaterShow.trainerName, show->nameRaterShow.language);
+            sub_80EFBDC(1, 0, 2, 0, 0, show);
+            sub_80EFBDC(2, 0, 3, 1, 0, show);
+            sTVShowState = 14;
+            break;
+        case 14:
+            sub_80EFBDC(1, 0, 2, 1, 0, show);
+            sub_80EFBDC(2, 0, 3, 0, 0, show);
+            sTVShowState = 18;
+            break;
+        case 15:
+            sub_80EFBDC(0, 0, 2, 1, 0, show);
+            StringCopy(gStringVar2, gSpeciesNames[show->nameRaterShow.species]);
+            sub_80EFBDC(2, 0, 3, 2, show->nameRaterShow.species, show);
+            sTVShowState = 16;
+            break;
+        case 16:
+            sub_80EFBDC(0, 0, 2, 2, show->nameRaterShow.species, show);
+            sub_80EFBDC(2, 0, 3, 1, 0, show);
+            sTVShowState = 17;
+            break;
+        case 17:
+            sub_80EFBDC(0, 0, 2, 1, 0, show);
+            StringCopy(gStringVar2, gSpeciesNames[show->nameRaterShow.var1C]);
+            sub_80EFBDC(2, 0, 3, 2, show->nameRaterShow.var1C, show);
+            sTVShowState = 18;
+            break;
+        case 12:
+            state = 18;
+            sTVShowState = 18;
+        case 18:
+            TVShowConvertInternationalString(gStringVar1, show->nameRaterShow.pokemonName, show->nameRaterShow.pokemonNameLanguage);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVNameRaterTextGroup[state]);
+}
+
+//void TVShowDone(void)
+//{
+//    gScriptResult = TRUE;
+//    sTVShowState = 0;
+//    gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.active = FALSE;
+//}
+//
+//void ResetTVShowState(void)
+//{
+//    sTVShowState = 0;
+//}

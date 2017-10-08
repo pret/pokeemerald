@@ -902,7 +902,7 @@ struct MonSpritesGfx
     struct SpriteTemplate templates[4];
 };
 
-extern struct BattleSpritesGfx* gBattleSpritesGfx;
+extern struct BattleSpritesGfx* gMonSpritesGfx;
 extern u8 gBattleOutcome;
 extern u16 gLastUsedItem;
 extern u32 gBattleTypeFlags;
