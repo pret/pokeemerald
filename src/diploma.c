@@ -53,8 +53,6 @@ static const u8 gDiplomaTiles[] = INCBIN_U8("graphics/misc/diploma.4bpp.lz");
 
 void CB2_ShowDiploma(void)
 {
-    void **mallocPtr;
-
     SetVBlankCallback(NULL);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0);
     SetGpuReg(REG_OFFSET_BG3CNT, DISPCNT_MODE_0);
