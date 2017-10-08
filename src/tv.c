@@ -316,7 +316,7 @@ const u8 *const gTVBravoTrainerBattleTowerTextGroup[] = {
     gUnknown_082801E6
 };
 
-const u8 *const gUnknown_0858D27C[] = {
+const u8 *const gTVContestLiveUpdatesTextGroup[] = {
     gUnknown_08289DD6,
     gUnknown_08289F53,
     gUnknown_08289FB0,
@@ -5768,6 +5768,353 @@ void DoTVShowPokemonNewsMassOutbreak(void)
     TVShowDone();
     StartMassOutbreak();
     ShowFieldMessage(gTVMassOutbreakTextGroup[sTVShowState]);
+}
+
+void DoTVShowPokemonContestLiveUpdates(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case  0:
+            sub_818E868(gStringVar1, show->contestLiveUpdates.unk_1c);
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates.playerName, show->contestLiveUpdates.language);
+            if (show->contestLiveUpdates.unk_0d == show->contestLiveUpdates.unk_0e)
+            {
+                if (show->contestLiveUpdates.unk_0d == 0)
+                {
+                    sTVShowState = 1;
+                }
+                else
+                {
+                    sTVShowState = 3;
+                }
+            }
+            else if (show->contestLiveUpdates.unk_0d > show->contestLiveUpdates.unk_0e)
+            {
+                sTVShowState = 2;
+            }
+            else
+            {
+                sTVShowState = 4;
+            }
+            break;
+        case  1:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            switch (show->contestLiveUpdates.unk_0f)
+            {
+                case 0x01:
+                    sTVShowState = 8;
+                    break;
+                case 0x02:
+                    sTVShowState = 5;
+                    break;
+                case 0x04:
+                    sTVShowState = 14;
+                    break;
+                case 0x08:
+                    sTVShowState = 7;
+                    break;
+                case 0x10:
+                    sTVShowState = 6;
+                    break;
+                case 0x20:
+                    sTVShowState = 20;
+                    break;
+                case 0x40:
+                    sTVShowState = 21;
+                    break;
+                case 0x80:
+                    sTVShowState = 22;
+                    break;
+            }
+            break;
+        case  2:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            switch (show->contestLiveUpdates.unk_0f)
+            {
+                case 0x01:
+                    sTVShowState = 8;
+                    break;
+                case 0x02:
+                    sTVShowState = 5;
+                    break;
+                case 0x04:
+                    sTVShowState = 14;
+                    break;
+                case 0x08:
+                    sTVShowState = 7;
+                    break;
+                case 0x10:
+                    sTVShowState = 6;
+                    break;
+                case 0x20:
+                    sTVShowState = 20;
+                    break;
+                case 0x40:
+                    sTVShowState = 21;
+                    break;
+                case 0x80:
+                    sTVShowState = 22;
+                    break;
+            }
+            break;
+        case  3:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates.playerName, show->contestLiveUpdates.language);
+            switch (show->contestLiveUpdates.unk_0f)
+            {
+                case 0x01:
+                    sTVShowState = 8;
+                    break;
+                case 0x02:
+                    sTVShowState = 5;
+                    break;
+                case 0x04:
+                    sTVShowState = 14;
+                    break;
+                case 0x08:
+                    sTVShowState = 7;
+                    break;
+                case 0x10:
+                    sTVShowState = 6;
+                    break;
+                case 0x20:
+                    sTVShowState = 20;
+                    break;
+                case 0x40:
+                    sTVShowState = 21;
+                    break;
+                case 0x80:
+                    sTVShowState = 22;
+                    break;
+            }
+            break;
+        case  4:
+            switch (show->contestLiveUpdates.unk_1c)
+            {
+                case 0:
+                    StringCopy(gStringVar1, gText_Cool);
+                    break;
+                case 1:
+                    StringCopy(gStringVar1, gText_Beauty);
+                    break;
+                case 2:
+                    StringCopy(gStringVar1, gText_Cute);
+                    break;
+                case 3:
+                    StringCopy(gStringVar1, gText_Smart);
+                    break;
+                case 4:
+                    StringCopy(gStringVar1, gText_Tough);
+                    break;
+            }
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            switch (show->contestLiveUpdates.unk_0f)
+            {
+                case 0x01:
+                    sTVShowState = 8;
+                    break;
+                case 0x02:
+                    sTVShowState = 5;
+                    break;
+                case 0x04:
+                    sTVShowState = 14;
+                    break;
+                case 0x08:
+                    sTVShowState = 7;
+                    break;
+                case 0x10:
+                    sTVShowState = 6;
+                    break;
+                case 0x20:
+                    sTVShowState = 20;
+                    break;
+                case 0x40:
+                    sTVShowState = 21;
+                    break;
+                case 0x80:
+                    sTVShowState = 22;
+                    break;
+            }
+            break;
+        case  5:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case  6:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case  7:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case  8:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            switch (show->contestLiveUpdates.unk_1c)
+            {
+                case 0:
+                    sTVShowState = 9;
+                    break;
+                case 1:
+                    sTVShowState = 10;
+                    break;
+                case 2:
+                    sTVShowState = 11;
+                    break;
+                case 3:
+                    sTVShowState = 12;
+                    break;
+                case 4:
+                    sTVShowState = 13;
+                    break;
+            }
+            break;
+        case  9:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 10:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 11:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 12:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 13:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 14:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            switch (show->contestLiveUpdates.unk_1c)
+            {
+                case 0:
+                    sTVShowState = 15;
+                    break;
+                case 1:
+                    sTVShowState = 16;
+                    break;
+                case 2:
+                    sTVShowState = 17;
+                    break;
+                case 3:
+                    sTVShowState = 18;
+                    break;
+                case 4:
+                    sTVShowState = 19;
+                    break;
+            }
+            break;
+        case 15:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 16:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 17:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 18:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 19:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 20:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 21:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            sTVShowState = 23;
+            break;
+        case 22:
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            StringCopy(gStringVar3, gMoveNames[show->contestLiveUpdates.unk_10]);
+            sTVShowState = 23;
+            break;
+        case 23:
+            StringCopy(gStringVar1, gSpeciesNames[show->contestLiveUpdates.species]);
+            TVShowConvertInternationalString(gStringVar2, show->contestLiveUpdates.unk_04, show->contestLiveUpdates.unk_1e);
+            StringCopy(gStringVar3, gSpeciesNames[show->contestLiveUpdates.unk_02]);
+            switch (show->contestLiveUpdates.unk_0c)
+            {
+                case 0x01:
+                    sTVShowState = 31;
+                    break;
+                case 0x02:
+                    sTVShowState = 30;
+                    break;
+                case 0x04:
+                    sTVShowState = 29;
+                    break;
+                case 0x08:
+                    sTVShowState = 28;
+                    break;
+                case 0x10:
+                    sTVShowState = 27;
+                    break;
+                case 0x20:
+                    sTVShowState = 26;
+                    break;
+                case 0x40:
+                    sTVShowState = 25;
+                    break;
+                case 0x80:
+                    sTVShowState = 24;
+                    break;
+            }
+            break;
+        case 24:
+            StringCopy(gStringVar1, gSpeciesNames[show->contestLiveUpdates.unk_02]);
+            sTVShowState = 32;
+            break;
+        case 25:
+            TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.unk_04, show->contestLiveUpdates.unk_1e);
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.unk_02]);
+            sTVShowState = 32;
+            break;
+        case 28:
+            sTVShowState = 32;
+            break;
+        case 29:
+            TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.playerName, show->contestLiveUpdates.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates.unk_04, show->contestLiveUpdates.unk_1e);
+            sTVShowState = 32;
+            break;
+        case 26:
+        case 27:
+        case 30:
+        case 31:
+            TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.unk_04, show->contestLiveUpdates.unk_1e);
+            sTVShowState = 32;
+            break;
+        case 32:
+
+            TVShowConvertInternationalString(gStringVar1, show->contestLiveUpdates.playerName, show->contestLiveUpdates.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->contestLiveUpdates.species]);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVContestLiveUpdatesTextGroup[state]);
 }
 
 //void TVShowDone(void)
