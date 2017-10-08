@@ -3,47 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80F14F8
-sub_80F14F8: @ 80F14F8
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	adds r4, r5, 0
-	movs r6, 0x17
-_080F1500:
-	ldrb r0, [r4]
-	cmp r0, 0x17
-	beq _080F151C
-	cmp r0, 0x19
-	bne _080F152C
-	ldrb r0, [r4, 0xA]
-	cmp r0, 0x58
-	bls _080F152C
-	adds r0, r5, 0
-	movs r1, 0
-	movs r2, 0x24
-	bl memset
-	b _080F152C
-_080F151C:
-	ldrb r0, [r4, 0x12]
-	cmp r0, 0x58
-	bls _080F152C
-	adds r0, r5, 0
-	movs r1, 0
-	movs r2, 0x24
-	bl memset
-_080F152C:
-	adds r4, 0x24
-	adds r5, 0x24
-	subs r6, 0x1
-	cmp r6, 0
-	bge _080F1500
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80F14F8
-
-    .section .text.dotvshow
-
 	thumb_func_start DoTVShowTodaysSmartShopper
 DoTVShowTodaysSmartShopper: @ 80F1C0C
 	push {r4-r6,lr}

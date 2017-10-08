@@ -4798,7 +4798,7 @@ void sub_80F1208(TVShow *shows)
 {
     TVShow *curShow;
 
-    sub_80F14F8();
+    sub_80F14F8(shows);
     for (curShow = shows; curShow < shows + 24; curShow ++)
     {
         if (curShow->bravoTrainerTower.kind == TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE)
@@ -4946,7 +4946,29 @@ void sub_80F12A4(TVShow *shows)
     }
 }
 
-asm(".section .text.dotvshow");
+void sub_80F14F8(TVShow *shows)
+{
+    int i;
+
+    for (i = 0; i < 24; i ++)
+    {
+        switch (shows[i].common.kind)
+        {
+            case TVSHOW_WORLD_OF_MASTERS:
+                if (shows[i].worldOfMasters.location > 0x58)
+                {
+                    memset(&shows[i], 0, sizeof(TVShow));
+                }
+                break;
+            case TVSHOW_POKEMON_TODAY_FAILED:
+                if (shows[i].pokemonTodayFailed.var12 > 0x58)
+                {
+                    memset(&shows[i], 0, sizeof(TVShow));
+                }
+                break;
+        }
+    }
+}
 
 void DoTVShow(void)
 {
