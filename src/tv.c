@@ -401,7 +401,7 @@ const u8 *const gUnknown_0858D384[] = {
     gUnknown_0828C662
 };
 
-const u8 *const gUnknown_0858D394[] = {
+const u8 *const gTVPokemonTodayFailedTextGroup[] = {
     gUnknown_08282F9B,
     gUnknown_0828304D,
     gUnknown_08283135,
@@ -5576,6 +5576,59 @@ void DoTVShowPokemonTodaySuccessfulCapture(void)
             break;
     }
     ShowFieldMessage(gTVPokemonTodaySuccessfulTextGroup[state]);
+}
+
+void DoTVShowPokemonTodayFailedCapture(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->pokemonTodayFailed.playerName, show->pokemonTodayFailed.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->pokemonTodayFailed.species]);
+            sTVShowState = 1;
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, show->pokemonTodayFailed.playerName, show->pokemonTodayFailed.language);
+            GetMapName(gStringVar2, show->pokemonTodayFailed.var12, 0);
+            StringCopy(gStringVar3, gSpeciesNames[show->pokemonTodayFailed.species2]);
+            if (show->pokemonTodayFailed.var11 == 1)
+            {
+                sTVShowState = 3;
+            }
+            else
+            {
+                sTVShowState = 2;
+            }
+            break;
+        case 2:
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, show->pokemonTodayFailed.playerName, show->pokemonTodayFailed.language);
+            TV_PrintIntToStringVar(1, show->pokemonTodayFailed.var10);
+            if (Random() % 3 == 0)
+            {
+                sTVShowState = 5;
+            }
+            else
+            {
+                sTVShowState = 4;
+            }
+            break;
+        case 4:
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, show->pokemonTodayFailed.playerName, show->pokemonTodayFailed.language);
+            sTVShowState = 6;
+            break;
+        case 6:
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVPokemonTodayFailedTextGroup[state]);
 }
 
 //void TVShowDone(void)

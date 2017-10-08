@@ -41,7 +41,7 @@ enum
     TVSHOW_MASS_OUTBREAK = 41,
 };
 
-typedef union TVShow // size = 0x24
+typedef union // size = 0x24
 {
     // Common
     struct {
