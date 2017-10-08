@@ -1525,7 +1525,7 @@ sub_80D8490: @ 80D8490
 	movs r6, 0
 	ldr r0, =gUnknown_02039F25
 	mov r8, r0
-	ldr r2, =gUnknown_02039E1E
+	ldr r2, =gUnknown_02039E00 + 30
 	mov r10, r2
 	ldr r7, =gUnknown_02039F34
 _080D84B8:
@@ -2624,7 +2624,7 @@ _080D8EF2:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	mov r2, r9
@@ -3562,7 +3562,7 @@ _080D96D4:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
@@ -3671,7 +3671,7 @@ _080D97DC:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
@@ -3809,7 +3809,7 @@ _080D9904:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
@@ -4010,7 +4010,7 @@ _080D9AD2:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gUnknown_02039F34
@@ -4381,7 +4381,7 @@ _080D9DD4:
 	lsls r1, 20
 	lsrs r1, 29
 	lsls r1, 6
-	ldr r4, =gUnknown_02039E02
+	ldr r4, =gUnknown_02039E00 + 2
 	adds r1, r4
 	bl StringCopy
 	ldr r0, =gStringVar1
@@ -4476,7 +4476,7 @@ _080D9EDC:
 	bl sub_80DC9B4
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r0, =gStringVar2
@@ -4626,7 +4626,7 @@ _080DA038:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
@@ -5096,7 +5096,7 @@ sub_80DA3CC: @ 80DA3CC
 	ldr r0, =gStringVar1
 	ldrb r1, [r5]
 	lsls r1, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r5, =gStringVar4
@@ -5667,7 +5667,7 @@ _080DA8F2:
 	ldr r5, =gUnknown_02039F25
 	ldrb r0, [r5]
 	lsls r0, 6
-	ldr r4, =gUnknown_02039E0D
+	ldr r4, =gUnknown_02039E00 + 13
 	adds r0, r4
 	mov r1, sp
 	movs r2, 0x8
@@ -6451,7 +6451,7 @@ sub_80DAF1C: @ 80DAF1C
 	add r0, sp, 0x4
 	bl StringCopy
 	lsls r1, r5, 6
-	ldr r0, =gUnknown_02039E0D
+	ldr r0, =gUnknown_02039E00 + 13
 	adds r1, r0
 	add r0, sp, 0x4
 	bl StringAppend
@@ -6508,7 +6508,7 @@ sub_80DAFA0: @ 80DAFA0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r0, r4, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r0, r2
 	bl sub_80DAED4
 	ldr r0, =gUnknown_02039F26
@@ -11173,7 +11173,7 @@ sub_80DD45C: @ 80DD45C
 	lsrs r6, r1, 24
 	ldr r0, =gStringVar1
 	lsls r1, r4, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r0, =gStringVar2

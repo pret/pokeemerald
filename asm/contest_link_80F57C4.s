@@ -1239,7 +1239,7 @@ _080F6334:
 	ldr r1, =gUnknown_02039F20
 	ldrb r0, [r1]
 	ldr r7, =gStringVar1
-	ldr r2, =gUnknown_02039E0D
+	ldr r2, =gUnknown_02039E00 + 13
 	mov r8, r2
 	cmp r0, 0
 	beq _080F636E
@@ -4994,7 +4994,7 @@ sub_80F8264: @ 80F8264
 	ldr r0, =gSpecialVar_0x8006
 	ldrh r1, [r0]
 	lsls r1, 6
-	ldr r0, =gUnknown_02039E0D
+	ldr r0, =gUnknown_02039E00 + 13
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -5013,7 +5013,7 @@ sub_80F8290: @ 80F8290
 	ldr r1, =gSpecialVar_0x8006
 	ldrh r1, [r1]
 	lsls r1, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	pop {r0}
@@ -5104,7 +5104,7 @@ sub_80F834C: @ 80F834C
 	ldr r2, =gUnknown_02039F20
 	ldrb r0, [r2]
 	ldr r4, =gStringVar3
-	ldr r3, =gUnknown_02039E0D
+	ldr r3, =gUnknown_02039E00 + 13
 	cmp r0, 0
 	beq _080F836E
 _080F835C:
@@ -5137,7 +5137,7 @@ sub_80F8390: @ 80F8390
 	ldr r2, =gUnknown_02039F20
 	ldrb r0, [r2]
 	ldr r4, =gStringVar1
-	ldr r3, =gUnknown_02039E02
+	ldr r3, =gUnknown_02039E00 + 2
 	cmp r0, 0
 	beq _080F83B2
 _080F83A0:
@@ -5578,7 +5578,7 @@ sub_80F8714: @ 80F8714
 	b _080F877E
 	.pool
 _080F8748:
-	ldr r5, =gUnknown_02039E02
+	ldr r5, =gUnknown_02039E00 + 2
 	movs r4, 0x3
 _080F874C:
 	adds r0, r5, 0

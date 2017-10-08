@@ -158,18 +158,18 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 unk_02;
-        /*0x04*/ u8 unk_04[8];
+        /*0x02*/ u16 linkPlayerSpecies;
+        /*0x04*/ u8 linkPlayerName[8];
         /*0x0C*/ u8 unk_0c;
         /*0x0D*/ u8 unk_0d;
         /*0x0e*/ u8 unk_0e;
         /*0x0f*/ u8 unk_0f;
-        /*0x10*/ u16 unk_10;
+        /*0x10*/ u16 move;
         /*0x12*/ u16 species;
         /*0x14*/ u8 playerName[8];
-        /*0x1C*/ u8 unk_1c;
+        /*0x1C*/ u8 category;
         /*0x1D*/ u8 language;
-        /*0x1E*/ u8 unk_1e;
+        /*0x1E*/ u8 linkPlayerLanguage;
     } contestLiveUpdates;
 
     // TVSHOW_3_CHEERS_FOR_POKEBLOCKS
@@ -189,14 +189,14 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 unk_02;
+        /*0x02*/ u16 species;
         /*0x04*/ u8 playerName[8];
         /*0x0C*/ u8 linkOpponentName[8];
-        /*0x14*/ u16 unk_14;
-        /*0x16*/ u16 unk_16;
+        /*0x14*/ u16 move;
+        /*0x16*/ u16 species2;
         /*0x18*/ u8 battleType;
         /*0x19*/ u8 language;
-        /*0x1A*/ u8 unk_1a;
+        /*0x1A*/ u8 linkOpponentLanguage;
     } battleUpdate;
 
     // TVSHOW_FAN_CLUB_SPECIAL

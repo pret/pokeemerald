@@ -5,7 +5,8 @@ struct ContestStruct_02039E00 {
     u16 unk_00;
     u8 unk_02[11];
     u8 unk_0d[8];
-    u8 filler_15[0x2b];
+    u8 filler_15[9];
+    u8 filler_1E[34];
 };
 
 extern struct ContestStruct_02039E00 gUnknown_02039E00[4];

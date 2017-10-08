@@ -10,5 +10,7 @@ extern const u8 gText_Beauty[];
 extern const u8 gText_Cute[];
 extern const u8 gText_Smart[];
 extern const u8 gText_Tough[];
+extern const u8 gText_Single[];
+extern const u8 gText_Double[];
 
 #endif //GUARD_strings_H
