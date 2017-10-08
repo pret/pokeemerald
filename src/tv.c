@@ -242,7 +242,7 @@ const u8 *const gTVFanClubOpinionsTextGroup[] = {
     gUnknown_08280C7A
 };
 
-const u8 *const gUnknown_0858D19C[] = {
+const u8 *const gTVMassOutbreakTextGroup[] = {
     gUnknown_0828178A
 };
 
@@ -5751,6 +5751,23 @@ void DoTVShowPokemonFanClubOpinions(void)
             break;
     }
     ShowFieldMessage(gTVFanClubOpinionsTextGroup[state]);
+}
+
+void DoTVShowDummiedOut(void)
+{
+
+}
+
+void DoTVShowPokemonNewsMassOutbreak(void)
+{
+    TVShow *show;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    GetMapName(gStringVar1, show->massOutbreak.locationMapNum, 0);
+    StringCopy(gStringVar2, gSpeciesNames[show->massOutbreak.species]);
+    TVShowDone();
+    StartMassOutbreak();
+    ShowFieldMessage(gTVMassOutbreakTextGroup[sTVShowState]);
 }
 
 //void TVShowDone(void)

@@ -3,50 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start DoTVShowDummiedOut
-DoTVShowDummiedOut: @ 80F299C
-	bx lr
-	thumb_func_end DoTVShowDummiedOut
-
-	thumb_func_start DoTVShowPokemonNewsMassOutbreak
-DoTVShowPokemonNewsMassOutbreak: @ 80F29A0
-	push {r4,lr}
-	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =0x000027cc
-	adds r0, r1
-	ldr r4, [r2]
-	adds r4, r0
-	ldr r0, =gStringVar1
-	ldrb r1, [r4, 0x10]
-	movs r2, 0
-	bl GetMapName
-	ldr r0, =gStringVar2
-	ldrh r2, [r4, 0xC]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	bl TVShowDone
-	bl StartMassOutbreak
-	ldr r1, =gUnknown_0858D19C
-	ldr r0, =sTVShowState
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	bl ShowFieldMessage
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end DoTVShowPokemonNewsMassOutbreak
-
 	thumb_func_start DoTVShowPokemonContestLiveUpdates
 DoTVShowPokemonContestLiveUpdates: @ 80F2A10
 	push {r4-r7,lr}
