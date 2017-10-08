@@ -4401,7 +4401,7 @@ sub_8059B3C: @ 8059B3C
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _08059B98
-	bl sub_814FBAC
+	bl SetPpNumbersPaletteInMoveSelection
 	ldrb r1, [r7]
 	lsls r4, r1, 9
 	adds r0, r5, 0x4

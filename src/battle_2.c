@@ -4007,8 +4007,8 @@ static void HandleTurnActionSelectionState(void)
                         for (i = 0; i < 4; i++)
                         {
                             moveInfo.moves[i] = gBattleMons[gActiveBank].moves[i];
-                            moveInfo.ppNumbers[i] = gBattleMons[gActiveBank].pp[i];
-                            moveInfo.ppWithBonusNumbers[i] = CalculatePPWithBonus(
+                            moveInfo.currentPp[i] = gBattleMons[gActiveBank].pp[i];
+                            moveInfo.maxPp[i] = CalculatePPWithBonus(
                                                             gBattleMons[gActiveBank].moves[i],
                                                             gBattleMons[gActiveBank].ppBonuses,
                                                             i);

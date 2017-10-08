@@ -103,7 +103,7 @@ struct TextPrinterSubStruct
 
 struct TextSubPrinter // TODO: Better name
 {
-    u8* current_text_offset;
+    const u8* current_text_offset;
     u8 windowId;
     u8 fontId;
     u8 x;

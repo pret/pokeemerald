@@ -9,6 +9,9 @@
 #include "event_data.h"
 #include "link.h"
 #include "item.h"
+#include "window.h"
+#include "palette.h"
+#include "battle_controllers.h"
 
 extern u16 gLastUsedItem;
 extern u8 gLastUsedAbility;
@@ -25,11 +28,15 @@ extern u16 gPartnerTrainerId;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern struct BattleEnigmaBerry gEnigmaBerries[BATTLE_BANKS_COUNT];
 extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
+extern u8 gMoveSelectionCursor[BATTLE_BANKS_COUNT];
+extern u8 gUnknown_0203C7B4;
+extern struct StringInfoBattle *gStringInfo;
 
 extern const u8 gMoveNames[LAST_MOVE_INDEX + 1][13];
 extern const u8 gAbilityNames[][13];
 extern const u8 gTrainerClassNames[][13];
 extern const u8 gTypeNames[][7];
+extern const u16 gUnknown_08D85620[];
 
 // strings
 extern const u8 gText_PkmnBoxSomeonesPCFull[];
@@ -50,10 +57,13 @@ extern void sub_81D572C(u8 arg0, u16 trainerId); // pokenav
 extern const u8* GetTrainer1LoseText(void); // battle_setup
 extern const u8* GetTrainer2LoseText(void); // battle_setup
 extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
+extern s32 GetStringCenterAlignXOffsetWithLetterSpacing(u8 fontId, const u8 *str, s32 totalWidth, s16 letterSpacing);
+extern u8 sub_8185FC4(void);
+extern u8 sav2_get_text_speed(void);
 
 // this file's functions
-void sub_814F8F8(u8 *txtPtr);
-void sub_814F950(u8 *txtPtr);
+static void sub_814F8F8(u8 *textPtr);
+static void sub_814F950(u8 *dst);
 static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 // ewram variables
@@ -63,6 +73,7 @@ EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT] = {0};
 
 // const rom data
+// todo: make some of those names less vague: attacker/target vs pkmn, etc.
 
 const u8 gText_Trainer1LoseText[] = _("{B_TRAINER1_LOSE_TEXT}");
 const u8 gText_PkmnGainedEXP[] = _("{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} EXP. Points!\p");
@@ -83,14 +94,14 @@ const u8 gText_AvoidedDamage[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\ndamage wit
 const u8 gText_PkmnMakesGroundMiss[] = _("{B_DEF_NAME_WITH_PREFIX} makes GROUND\nmoves miss with {B_DEF_ABILITY}!");
 const u8 gText_PkmnAvoidedAttack[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\nthe attack!");
 const u8 gText_ItDoesntAffect[] = _("It doesn’t affect\n{B_DEF_NAME_WITH_PREFIX}…");
-const u8 gText_PkmnFainted[] = _("{B_ATK_NAME_WITH_PREFIX}\nfainted!\p");
-const u8 gText_PkmnFainted2[] = _("{B_DEF_NAME_WITH_PREFIX}\nfainted!\p");
+const u8 gText_AttackerFainted[] = _("{B_ATK_NAME_WITH_PREFIX}\nfainted!\p");
+const u8 gText_TargetFainted[] = _("{B_DEF_NAME_WITH_PREFIX}\nfainted!\p");
 const u8 gText_PlayerGotMoney[] = _("{B_PLAYER_NAME} got ¥{B_BUFF1}\nfor winning!\p");
 const u8 gText_PlayerWhiteout[] = _("{B_PLAYER_NAME} is out of\nusable POKéMON!\p");
 const u8 gText_PlayerWhiteout2[] = _("{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}");
 const u8 gText_PreventsEscape[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} prevents\nescape with {B_SCR_ACTIVE_ABILITY}!\p");
 const u8 gText_CantEscape2[] = _("Can’t escape!\p");
-const u8 gText_PkmnCantEscape2[] = _("{B_ATK_NAME_WITH_PREFIX} can’t escape!");
+const u8 gText_AttackerCantEscape[] = _("{B_ATK_NAME_WITH_PREFIX} can’t escape!");
 const u8 gText_HitXTimes[] = _("Hit {B_BUFF1} time(s)!");
 const u8 gText_PkmnFellAsleep[] = _("{B_EFF_NAME_WITH_PREFIX}\nfell asleep!");
 const u8 gText_PkmnMadeSleep[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B_SCR_ACTIVE_ABILITY}\nmade {B_EFF_NAME_WITH_PREFIX} sleep!");
@@ -206,7 +217,7 @@ const u8 gText_PkmnTryingToTakeFoe[] = _("{B_ATK_NAME_WITH_PREFIX} is trying\nto
 const u8 gText_PkmnTookFoe[] = _("{B_DEF_NAME_WITH_PREFIX} took\n{B_ATK_NAME_WITH_PREFIX} with it!");
 const u8 gText_PkmnReducedPP[] = _("Reduced {B_DEF_NAME_WITH_PREFIX}’s\n{B_BUFF1} by {B_BUFF2}!");
 const u8 gText_PkmnStoleItem[] = _("{B_ATK_NAME_WITH_PREFIX} stole\n{B_DEF_NAME_WITH_PREFIX}’s {B_LAST_ITEM}!");
-const u8 gText_PkmnCantEscape[] = _("{B_DEF_NAME_WITH_PREFIX} can’t\nescape now!");
+const u8 gText_TargetCantEscapeNow[] = _("{B_DEF_NAME_WITH_PREFIX} can’t\nescape now!");
 const u8 gText_PkmnFellIntoNightmare[] = _("{B_DEF_NAME_WITH_PREFIX} fell into\na NIGHTMARE!");
 const u8 gText_PkmnLockedInNightmare[] = _("{B_ATK_NAME_WITH_PREFIX} is locked\nin a NIGHTMARE!");
 const u8 gText_PkmnLaidCurse[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP and\nlaid a CURSE on {B_DEF_NAME_WITH_PREFIX}!");
@@ -289,10 +300,10 @@ const u8 gText_PkmnCutsAttackWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B_
 const u8 gText_PkmnPreventsStatLossWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B_SCR_ACTIVE_ABILITY}\nprevents stat loss!");
 const u8 gText_PkmnHurtsWith[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_DEF_ABILITY}\nhurt {B_ATK_NAME_WITH_PREFIX}!");
 const u8 gText_PkmnTraced[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} TRACED\n{B_BUFF1}’s {B_BUFF2}!");
-const u8 gText_PkmnsXPreventsBurns[] = _("{B_EFF_NAME_WITH_PREFIX}’s {STRING 27}\nprevents burns!");
+const u8 gText_PkmnsXPreventsBurns[] = _("{B_EFF_NAME_WITH_PREFIX}’s {B_EFF_ABILITY}\nprevents burns!");
 const u8 gText_PkmnsXBlocksY[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_DEF_ABILITY}\nblocks {B_CURRENT_MOVE}!");
 const u8 gText_PkmnsXBlocksY2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B_SCR_ACTIVE_ABILITY}\nblocks {B_CURRENT_MOVE}!");
-const u8 gText_PkmnsXRestoredHPALittle2[] = _("{B_ATK_NAME_WITH_PREFIX}’s {STRING 24}\nrestored its HP a little!");
+const u8 gText_PkmnsXRestoredHPALittle2[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_ATK_ABILITY}\nrestored its HP a little!");
 const u8 gText_PkmnsXWhippedUpSandstorm[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B_SCR_ACTIVE_ABILITY}\nwhipped up a sandstorm!");
 const u8 gText_PkmnsXIntensifiedSun[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B_SCR_ACTIVE_ABILITY}\nintensified the sun’s rays!");
 const u8 gText_PkmnsXPreventsYLoss[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B_SCR_ACTIVE_ABILITY}\nprevents {B_BUFF1} loss!");
@@ -302,11 +313,11 @@ const u8 gText_PkmnsXCuredYProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B
 const u8 gText_ItSuckedLiquidOoze[] = _("It sucked up the\nLIQUID OOZE!");
 const u8 gText_PkmnTransformed[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} transformed!");
 const u8 gText_PkmnsXTookAttack[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_DEF_ABILITY}\ntook the attack!");
-const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1}’s {STRING 23}\nprevents switching!\p");
+const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1}’s {B_LAST_ABILITY}\nprevents switching!\p");
 const u8 gText_PreventedFromWorking[] = _("{B_DEF_NAME_WITH_PREFIX}’s {B_DEF_ABILITY}\nprevented {B_SCR_ACTIVE_NAME_WITH_PREFIX}’s\l{B_BUFF1} from working!");
 const u8 gText_PkmnsXMadeItIneffective[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B_SCR_ACTIVE_ABILITY}\nmade it ineffective!");
-const u8 gText_PkmnsXPreventsFlinching[] = _("{B_EFF_NAME_WITH_PREFIX}’s {STRING 27}\nprevents flinching!");
-const u8 gText_PkmnsXPreventsYsZ[] = _("{B_ATK_NAME_WITH_PREFIX}’s {STRING 24}\nprevents {B_DEF_NAME_WITH_PREFIX}’s\l{B_DEF_ABILITY} from working!");
+const u8 gText_PkmnsXPreventsFlinching[] = _("{B_EFF_NAME_WITH_PREFIX}’s {B_EFF_ABILITY}\nprevents flinching!");
+const u8 gText_PkmnsXPreventsYsZ[] = _("{B_ATK_NAME_WITH_PREFIX}’s {B_ATK_ABILITY}\nprevents {B_DEF_NAME_WITH_PREFIX}’s\l{B_DEF_ABILITY} from working!");
 const u8 gText_PkmnsXCuredItsYProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!");
 const u8 gText_PkmnsXHadNoEffectOnY[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}’s {B_SCR_ACTIVE_ABILITY}\nhad no effect on {B_EFF_NAME_WITH_PREFIX}!");
 const u8 gText_StatSharply[] = _("sharply ");
@@ -329,7 +340,7 @@ const u8 gText_NotVeryEffective[] = _("It’s not very effective…");
 const u8 gText_SuperEffective[] = _("It’s super effective!");
 const u8 gText_GotAwaySafely[] = _("{PLAY_SE 0x0011}Got away safely!\p");
 const u8 gText_PkmnFledUsingIts[] = _("{PLAY_SE 0x0011}{B_ATK_NAME_WITH_PREFIX} fled\nusing its {B_LAST_ITEM}!\p");
-const u8 gText_PkmnFledUsing[] = _("{PLAY_SE 0x0011}{B_ATK_NAME_WITH_PREFIX} fled\nusing {STRING 24}!\p");
+const u8 gText_PkmnFledUsing[] = _("{PLAY_SE 0x0011}{B_ATK_NAME_WITH_PREFIX} fled\nusing {B_ATK_ABILITY}!\p");
 const u8 gText_WildPkmnFled[] = _("{PLAY_SE 0x0011}Wild {B_BUFF1} fled!");
 const u8 gText_PlayerDefeatedLinkTrainer[] = _("Player defeated\n{B_20}!");
 const u8 gText_TwoLinkTrainersDefeated[] = _("Player beat {B_20}\nand {B_21}!");
@@ -537,8 +548,8 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 	gText_StatsWontIncrease2,
 	gText_AvoidedDamage,
 	gText_ItDoesntAffect,
-	gText_PkmnFainted,
-	gText_PkmnFainted2,
+	gText_AttackerFainted,
+	gText_TargetFainted,
 	gText_PlayerGotMoney,
 	gText_PlayerWhiteout,
 	gText_PlayerWhiteout2,
@@ -652,7 +663,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 	gText_PkmnTookFoe,
 	gText_PkmnReducedPP,
 	gText_PkmnStoleItem,
-	gText_PkmnCantEscape,
+	gText_TargetCantEscapeNow,
 	gText_PkmnFellIntoNightmare,
 	gText_PkmnLockedInNightmare,
 	gText_PkmnLaidCurse,
@@ -866,7 +877,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 	gText_TheWallShattered,
 	gText_PkmnsXPreventsYsZ,
 	gText_PkmnsXCuredItsYProblem,
-	gText_PkmnCantEscape2,
+	gText_AttackerCantEscape,
 	gText_PkmnObtainedX,
 	gText_PkmnObtainedX2,
 	gText_PkmnObtainedXYObtainedZ,
@@ -899,30 +910,80 @@ const u16 gMissStringIds[] =
     STRINGID_PKMNMAKESGROUNDMISS
 };
 
-// todo: change values to string Ids
-const u16 gUnknown_085CC83E[] =
+const u16 gNoEscapeStringIds[] =
 {
-    0x00e2, 0x00e3, 0x0021,
-    0x0112, 0x0165, 0x00e8, 0x00e9, 0x00e5, 0x00ed, 0x00f0, 0x00f3,
-    0x00ee, 0x00f4, 0x0066, 0x0067, 0x00ef, 0x00f5, 0x00ea, 0x00eb,
-    0x00ec, 0x0065, 0x0098, 0x00e5, 0x00e5, 0x004e, 0x0160, 0x004d,
-    0x0161, 0x004f, 0x0068, 0x0069, 0x001b, 0x006a, 0x0139, 0x0052,
-    0x0053, 0x0070, 0x0071, 0x0073, 0x0074, 0x006c, 0x006e, 0x00f7,
-    0x004c, 0x0075, 0x0076, 0x0077, 0x00d5, 0x00d6, 0x003d, 0x0130,
-    0x0145, 0x0146, 0x00d7, 0x00d8, 0x003e, 0x0130, 0x0054, 0x0055,
-    0x0056, 0x0057, 0x0058, 0x0059, 0x013d, 0x013e, 0x005a, 0x005c,
-    0x005b, 0x005d, 0x005b, 0x0148, 0x0061, 0x00e5, 0x0063, 0x00e5,
-    0x007d, 0x00e5, 0x007e, 0x00fb, 0x0028, 0x0029, 0x0037, 0x0038,
-    0x0023, 0x0024, 0x002e, 0x002f, 0x0031, 0x0032, 0x0035, 0x0036,
-    0x0017, 0x007c, 0x0045, 0x0136, 0x002d, 0x0139, 0x013b, 0x013c,
-    0x00fd, 0x00fd, 0x00fd, 0x00fd, 0x0142, 0x00a1, 0x014f, 0x0107,
-    0x0108, 0x0109, 0x010a, 0x0110, 0x0110, 0x0110, 0x0110, 0x0110,
-    0x0110, 0x0110, 0x0110, 0x0111, 0x0110, 0x0110, 0x0110, 0x00f1,
-    0x0110, 0x0110, 0x0110, 0x0116, 0x0117, 0x0118, 0x0119, 0x016d,
-    0x011b, 0x011c, 0x011e, 0x011f, 0x0120, 0x0128, 0x0123, 0x0126,
-    0x0125, 0x0124, 0x0127, 0x0129, 0x0156, 0x0131, 0x0163, 0x016a,
-    0x00c7, 0x0163, 0x016a, 0x00c9, 0x0163, 0x016a, 0x0166, 0x0167,
-    0x0168, 0x00cb, 0x0137, 0x0177, 0x0178, 0x0179, 0x017a,
+    STRINGID_CANTESCAPE, STRINGID_DONTLEAVEBIRCH, STRINGID_PREVENTSESCAPE,
+    STRINGID_CANTESCAPE2, STRINGID_ATTACKERCANTESCAPE
+};
+
+const u16 gMoveWeatherChangeStringIds[] =
+{
+    STRINGID_STARTEDTORAIN, STRINGID_DOWNPOURSTARTED, STRINGID_BUTITFAILED,
+    STRINGID_SANDSTORMBREWED, STRINGID_SUNLIGHTGOTBRIGHT, STRINGID_STARTEDHAIL
+};
+
+const u16 gSandStormHailContinuesStringIds[] =
+{
+    STRINGID_SANDSTORMRAGES, STRINGID_HAILCONTINUES
+};
+
+const u16 gSandStormHailDmgStringIds[] =
+{
+    STRINGID_PKMNBUFFETEDBYSANDSTORM, STRINGID_PKMNPELTEDBYHAIL
+};
+
+// todo once battlescripts are dumped
+const u16 gTooLazyToSplitThemStringIds[] =
+{
+    STRINGID_SANDSTORMSUBSIDED, STRINGID_HAILSTOPPED, STRINGID_RAINCONTINUES, STRINGID_DOWNPOURCONTINUES,
+    STRINGID_RAINSTOPPED, STRINGID_PKMNPROTECTEDITSELF2, STRINGID_PKMNBRACEDITSELF,
+    STRINGID_BUTITFAILED, STRINGID_BUTITFAILED, STRINGID_PKMNRAISEDDEF,
+    STRINGID_PKMNRAISEDDEFALITTLE, STRINGID_PKMNRAISEDSPDEF, STRINGID_PKMNRAISEDSPDEFALITTLE,
+    STRINGID_PKMNCOVEREDBYVEIL, STRINGID_PKMNSEEDED, STRINGID_PKMNEVADEDATTACK,
+    STRINGID_ITDOESNTAFFECT, STRINGID_PKMNSAPPEDBYLEECHSEED, STRINGID_ITSUCKEDLIQUIDOOZE,
+    STRINGID_PKMNWENTTOSLEEP, STRINGID_PKMNSLEPTHEALTHY, STRINGID_PKMNMAKINGUPROAR,
+    STRINGID_PKMNCALMEDDOWN, STRINGID_PKMNSTOCKPILED, STRINGID_PKMNCANTSTOCKPILE,
+    STRINGID_PKMNWOKEUP, STRINGID_PKMNWOKEUPINUPROAR, STRINGID_FAILEDTOSWALLOW,
+    STRINGID_PKMNHPFULL, STRINGID_PKMNCANTSLEEPINUPROAR2, STRINGID_UPROARKEPTPKMNAWAKE,
+    STRINGID_PKMNSTAYEDAWAKEUSING, STRINGID_PKMNSSTATCHANGED, STRINGID_PKMNSSTATCHANGED2,
+    STRINGID_STATSWONTINCREASE, STRINGID_EMPTYSTRING3, STRINGID_USINGXTHEYOFZN,
+    STRINGID_PKMNUSEDXTOGETPUMPED, STRINGID_PKMNSSTATCHANGED3, STRINGID_PKMNSSTATCHANGED4,
+    STRINGID_STATSWONTDECREASE, STRINGID_EMPTYSTRING3, STRINGID_PKMNWHIPPEDWHIRLWIND,
+    STRINGID_PKMNTOOKSUNLIGHT, STRINGID_PKMNLOWEREDHEAD, STRINGID_PKMNISGLOWING,
+    STRINGID_PKMNFLEWHIGH, STRINGID_PKMNDUGHOLE, STRINGID_PKMNHIDUNDERWATER,
+    STRINGID_PKMNSPRANGUP, STRINGID_PKMNSQUEEZEDBYBIND, STRINGID_PKMNWRAPPEDBY,
+    STRINGID_PKMNTRAPPEDINVORTEX, STRINGID_PKMNCLAMPED, STRINGID_PKMNTRAPPEDINVORTEX,
+    STRINGID_PKMNTRAPPEDBYSANDTOMB, STRINGID_PKMNSHROUDEDINMIST, STRINGID_BUTITFAILED,
+    STRINGID_PKMNGETTINGPUMPED, STRINGID_BUTITFAILED, STRINGID_PKMNTRANSFORMEDINTO,
+    STRINGID_BUTITFAILED, STRINGID_PKMNMADESUBSTITUTE, STRINGID_TOOWEAKFORSUBSTITUTE,
+    STRINGID_PKMNWASPOISONED, STRINGID_PKMNPOISONEDBY, STRINGID_PKMNWASPARALYZED,
+    STRINGID_PKMNWASPARALYZEDBY, STRINGID_PKMNFELLASLEEP, STRINGID_PKMNMADESLEEP,
+    STRINGID_PKMNWASBURNED, STRINGID_PKMNBURNEDBY, STRINGID_PKMNWASFROZEN,
+    STRINGID_PKMNFROZENBY, STRINGID_PKMNWASDEFROSTED2, STRINGID_PKMNWASDEFROSTEDBY,
+    STRINGID_ATTACKMISSED, STRINGID_PKMNUNAFFECTED, STRINGID_PKMNFELLINLOVE,
+    STRINGID_PKMNSXINFATUATEDY, STRINGID_PKMNENERGYDRAINED, STRINGID_ITSUCKEDLIQUIDOOZE,
+    STRINGID_ELECTRICITYWEAKENED, STRINGID_FIREWEAKENED, STRINGID_BELLCHIMED,
+    STRINGID_BELLCHIMED, STRINGID_BELLCHIMED, STRINGID_BELLCHIMED,
+    STRINGID_SOOTHINGAROMA, STRINGID_PKMNFORESAWATTACK, STRINGID_PKMNCHOSEXASDESTINY,
+    STRINGID_PKMNBROKEFREE, STRINGID_ITAPPEAREDCAUGHT, STRINGID_AARGHALMOSTHADIT,
+    STRINGID_SHOOTSOCLOSE, STRINGID_ITISRAINING, STRINGID_ITISRAINING,
+    STRINGID_ITISRAINING, STRINGID_ITISRAINING, STRINGID_ITISRAINING,
+    STRINGID_ITISRAINING, STRINGID_ITISRAINING, STRINGID_ITISRAINING,
+    STRINGID_SANDSTORMISRAGING, STRINGID_ITISRAINING, STRINGID_ITISRAINING,
+    STRINGID_ITISRAINING, STRINGID_SUNLIGHTSTRONG, STRINGID_ITISRAINING,
+    STRINGID_ITISRAINING, STRINGID_ITISRAINING, STRINGID_PKMNLOAFING,
+    STRINGID_PKMNWONTOBEY, STRINGID_PKMNTURNEDAWAY, STRINGID_PKMNPRETENDNOTNOTICE,
+    STRINGID_PKMNINCAPABLEOFPOWER, STRINGID_CREPTCLOSER, STRINGID_CANTGETCLOSER,
+    STRINGID_PKMNCURIOUSABOUTX, STRINGID_PKMNENTHRALLEDBYX, STRINGID_PKMNIGNOREDX,
+    STRINGID_PKMNSITEMSNAPPEDOUT, STRINGID_PKMNSITEMCUREDPARALYSIS, STRINGID_PKMNSITEMDEFROSTEDIT,
+    STRINGID_PKMNSITEMHEALEDBURN, STRINGID_PKMNSITEMCUREDPOISON, STRINGID_PKMNSITEMWOKEIT,
+    STRINGID_PKMNSITEMCUREDPROBLEM, STRINGID_PKMNSITEMNORMALIZEDSTATUS, STRINGID_PKMNSXPREVENTSBURNS,
+    STRINGID_PKMNSXPREVENTSYSZ, STRINGID_PKMNSXHADNOEFFECTONY, STRINGID_PKMNPREVENTSPARALYSISWITH,
+    STRINGID_PKMNSXPREVENTSYSZ, STRINGID_PKMNSXHADNOEFFECTONY, STRINGID_PKMNPREVENTSPOISONINGWITH,
+    STRINGID_PKMNSXPREVENTSYSZ, STRINGID_PKMNSXHADNOEFFECTONY, STRINGID_PKMNOBTAINEDX,
+    STRINGID_PKMNOBTAINEDX2, STRINGID_PKMNOBTAINEDXYOBTAINEDZ, STRINGID_PKMNRAISEDFIREPOWERWITH,
+    STRINGID_PKMNSXMADEYINEFFECTIVE, STRINGID_PKMNTRANSFERREDSOMEONESPC, STRINGID_PKMNTRANSFERREDLANETTESPC,
+    STRINGID_PKMNBOXSOMEONESPCFULL, STRINGID_PKMNBOXLANETTESPCFULL,
 };
 
 const u16 gTrappingMoves[] =
@@ -1022,7 +1083,6 @@ const u8 gText_WillChampinshipDreamComeTrue[] = _("Will the championship dream c
 const u8 gText_AFormerChampion[] = _("A former CHAMPION!\p");
 const u8 gText_ThePreviousChampion[] = _("The previous CHAMPION!\p");
 const u8 gText_TheUnbeatenChampion[] = _("The unbeaten CHAMPION!\p");
-
 const u8 gText_PlayerMon1Name[] = _("{B_PLAYER_MON1_NAME}");
 const u8 gText_Vs[] = _("VS");
 const u8 gText_OpponentMon1Name[] = _("{B_OPPONENT_MON1_NAME}");
@@ -1085,79 +1145,104 @@ const u8 gText_BattleRecordedOnPass[] = _("{B_PLAYER_NAME}’s battle result was
 const u8 gText_LinkTrainerWantsToBattlePause[] = _("{B_20}\nwants to battle!{PAUSE 49}");
 const u8 gText_TwoLinkTrainersWantToBattlePause[] = _("{B_20} and {B_21}\nwant to battle!{PAUSE 49}");
 
-const u16 gUnknown_085CD336[] =
+static const u16 sUnknownMoveTable[] =
 {
-    0x000e, 0x0046, 0x004a, 0x006a, 0x006b, 0x006c, 0x006e, 0x006f,
-	0x0079, 0x007b, 0x007d, 0x0094, 0x0096, 0x0097, 0x009b, 0x009c,
-	0x009f, 0x00a4, 0x00aa, 0x00ad, 0x00b6, 0x00bf, 0x00cb, 0x00cd,
-	0x00cf, 0x00d6, 0x00ed, 0x00f4, 0x00f5, 0x010a, 0x010f, 0x0112,
-	0x0113, 0x011a, 0x0125, 0x0136, 0x013c, 0x0140, 0x0149, 0x014a,
-	0x014e, 0x0154, 0x0000, 0x0064, 0x0069, 0x0075, 0x0085, 0x00af,
-	0x010d, 0x0153, 0x0000, 0x0060, 0x0061, 0x0066, 0x0068, 0x008c,
-	0x0090, 0x00a5, 0x00b8, 0x010c, 0x0111, 0x0118, 0x0119, 0x0129,
-	0x012a, 0x012c, 0x0139, 0x015a, 0x015b, 0x0000, 0x0001, 0x000a,
-	0x000b, 0x0011, 0x0013, 0x0014, 0x0015, 0x001e, 0x0023, 0x0025,
-	0x0027, 0x002b, 0x002c, 0x002d, 0x002e, 0x002f, 0x0040, 0x0047,
-	0x0051, 0x0059, 0x005a, 0x005b, 0x005c, 0x0067, 0x0076, 0x007a,
-	0x0080, 0x0084, 0x008b, 0x0091, 0x00a3, 0x00a9, 0x00ab, 0x00ae,
-	0x00c1, 0x00cc, 0x00d5, 0x00f9, 0x00fd, 0x00ff, 0x0100, 0x0103,
-	0x0104, 0x0110, 0x011b, 0x0141, 0x0157, 0x0000,
+    MOVE_SWORDS_DANCE, MOVE_STRENGTH, MOVE_GROWTH,
+    MOVE_HARDEN, MOVE_MINIMIZE, MOVE_SMOKESCREEN,
+    MOVE_WITHDRAW, MOVE_DEFENSE_CURL, MOVE_EGG_BOMB,
+    MOVE_SMOG, MOVE_BONE_CLUB, MOVE_FLASH, MOVE_SPLASH,
+    MOVE_ACID_ARMOR, MOVE_BONEMERANG, MOVE_REST, MOVE_SHARPEN,
+    MOVE_SUBSTITUTE, MOVE_MIND_READER, MOVE_SNORE,
+    MOVE_PROTECT, MOVE_SPIKES, MOVE_ENDURE, MOVE_ROLLOUT,
+    MOVE_SWAGGER, MOVE_SLEEP_TALK, MOVE_HIDDEN_POWER,
+    MOVE_PSYCH_UP, MOVE_EXTREME_SPEED, MOVE_FOLLOW_ME,
+    MOVE_TRICK, MOVE_ASSIST, MOVE_INGRAIN, MOVE_KNOCK_OFF,
+    MOVE_CAMOUFLAGE, MOVE_ASTONISH, MOVE_ODOR_SLEUTH,
+    MOVE_GRASS_WHISTLE, MOVE_SHEER_COLD, MOVE_MUDDY_WATER,
+    MOVE_IRON_DEFENSE, MOVE_BOUNCE, MOVE_NONE,
+
+    MOVE_TELEPORT, MOVE_RECOVER, MOVE_BIDE, MOVE_AMNESIA,
+    MOVE_FLAIL, MOVE_TAUNT, MOVE_BULK_UP, MOVE_NONE,
+
+    MOVE_MEDITATE, MOVE_AGILITY, MOVE_MIMIC, MOVE_DOUBLE_TEAM,
+    MOVE_BARRAGE, MOVE_TRANSFORM, MOVE_STRUGGLE, MOVE_SCARY_FACE,
+    MOVE_CHARGE, MOVE_WISH, MOVE_BRICK_BREAK, MOVE_YAWN,
+    MOVE_FEATHER_DANCE, MOVE_TEETER_DANCE, MOVE_MUD_SPORT,
+    MOVE_FAKE_TEARS, MOVE_WATER_SPORT, MOVE_CALM_MIND, MOVE_NONE,
+
+    MOVE_POUND, MOVE_SCRATCH, MOVE_VICE_GRIP,
+    MOVE_WING_ATTACK, MOVE_FLY, MOVE_BIND, MOVE_SLAM,
+    MOVE_HORN_ATTACK, MOVE_WRAP, MOVE_THRASH, MOVE_TAIL_WHIP,
+    MOVE_LEER, MOVE_BITE, MOVE_GROWL, MOVE_ROAR,
+    MOVE_SING, MOVE_PECK, MOVE_ABSORB, MOVE_STRING_SHOT,
+    MOVE_EARTHQUAKE, MOVE_FISSURE, MOVE_DIG, MOVE_TOXIC,
+    MOVE_SCREECH, MOVE_METRONOME, MOVE_LICK, MOVE_CLAMP,
+    MOVE_CONSTRICT, MOVE_POISON_GAS, MOVE_BUBBLE,
+    MOVE_SLASH, MOVE_SPIDER_WEB, MOVE_NIGHTMARE, MOVE_CURSE,
+    MOVE_FORESIGHT, MOVE_CHARM, MOVE_ATTRACT, MOVE_ROCK_SMASH,
+    MOVE_UPROAR, MOVE_SPIT_UP, MOVE_SWALLOW, MOVE_TORMENT,
+    MOVE_FLATTER, MOVE_ROLE_PLAY, MOVE_ENDEAVOR, MOVE_TICKLE,
+    MOVE_COVET, MOVE_NONE
 };
 
-static const u8 sDummyWeirdStatusString[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0};
+static const u8 sDummyWeirdStatusString[] = {EOS, EOS, EOS, EOS, EOS, EOS, EOS, EOS, 0, 0};
 
-const u16 gUnknown_085CD42C[] =
+static const u8 gUnknown_085CD42C[] =
 {
-	0x01ff, 0x0100, 0x0000, 0x0101, 0x060f, 0x0000, 0x01ff, 0x0101,
-	0x0000, 0x0100, 0x060f, 0x0000, 0x01ee, 0x0100, 0x0000, 0x0d00,
-	0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000,
-	0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x07ee, 0x0100,
-	0x0000, 0x0d00, 0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00,
-	0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0c00, 0x0b0e, 0x0000,
-	0x01ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x0102,
-	0x0000, 0x0c00, 0x0b0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00,
-	0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000,
-	0x01ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x0100,
-	0x0000, 0x0d00, 0x0f0e, 0x0000, 0x0100, 0x0120, 0x0000, 0x0100,
-	0x0200, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000,
-	0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x01ff,
-	0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0d00,
-	0x0f0e, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000,
-	0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x0100, 0x01ff,
-	0x0000, 0x0100, 0x0600, 0x0000, 0x0100, 0x01ff, 0x0000, 0x0100,
-	0x0600, 0x0000, 0x0100, 0x01ff, 0x0000, 0x0100, 0x0600, 0x0000,
+    0xFF, 1, 0, 1, 0, 0, 1, 1, 0xF, 6, 0, 0, 0xFF, 1,
+    1, 1, 0, 0, 0, 1, 0xF, 6, 0, 0, 0xEE, 1, 0, 1, 0,
+    0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 7, 0, 1, 0, 0, 0,
+    0xD, 0xE, 0xF, 0, 0, 0xEE, 7, 0, 1, 0, 0, 0, 0xD,
+    0xE, 0xF, 0, 0, 0xEE, 7, 0, 1, 0, 0, 0, 0xD, 0xE,
+    0xF, 0, 0, 0xEE, 7, 0, 1, 0, 0, 0, 0xD, 0xE, 0xF,
+    0, 0, 0xEE, 7, 0, 1, 0, 0, 0, 0xC, 0xE, 0xB, 0, 0,
+    0xEE, 1, 0, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE,
+    1, 2, 1, 0, 0, 0, 0xC, 0xE, 0xB, 0, 0, 0xEE, 7, 0,
+    1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 7, 0, 1, 0,
+    0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 1, 0, 1, 0, 0, 0,
+    0xD, 0xE, 0xF, 0, 0, 0xEE, 1, 0, 1, 0, 0, 0, 0xD,
+    0xE, 0xF, 0, 0, 0, 1, 0x20, 1, 0, 0, 0, 1, 0, 2,
+    0, 0, 0xEE, 1, 0xFF, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0,
+    0, 0xEE, 1, 0xFF, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0,
+    0xEE, 1, 0xFF, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE,
+    1, 0xFF, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 1,
+    0xFF, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 1, 0xFF,
+    1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0, 1, 0xFF, 1, 0,
+    0, 0, 1, 0, 6, 0, 0, 0, 1, 0xFF, 1, 0, 0, 0, 1, 0,
+    6, 0, 0, 0, 1, 0xFF, 1, 0, 0, 0, 1, 0, 6, 0, 0
 };
 
-const u16 gUnknown_085CD54C[] =
+static const u8 gUnknown_085CD54C[] =
 {
-	0x01ff, 0x0100, 0x0000, 0x0101, 0x060f, 0x0000, 0x01ff, 0x0101,
-	0x0000, 0x0100, 0x060f, 0x0000, 0x01ee, 0x0100, 0x0000, 0x0d00,
-	0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000,
-	0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x07ee, 0x0100,
-	0x0000, 0x0d00, 0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00,
-	0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0c00, 0x0b0e, 0x0000,
-	0x01ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x0102,
-	0x0000, 0x0c00, 0x0b0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00,
-	0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000,
-	0x01ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x0100,
-	0x0000, 0x0d00, 0x0f0e, 0x0000, 0x0100, 0x0120, 0x0000, 0x0100,
-	0x0200, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0100, 0x0f0e, 0x0000,
-	0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x01ff,
-	0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0d00,
-	0x0f0e, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000,
-	0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x01ff,
-	0x0000, 0x0d00, 0x0f0e, 0x0000, 0x0111, 0x0100, 0x0000, 0x0201,
-	0x0301, 0x0000
+    0xFF, 1, 0, 1, 0, 0, 1, 1, 0xF, 6, 0, 0, 0xFF, 1,
+    1, 1, 0, 0, 0, 1, 0xF, 6, 0, 0, 0xEE, 1, 0, 1, 0,
+    0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 7, 0, 1, 0, 0, 0,
+    0xD, 0xE, 0xF, 0, 0, 0xEE, 7, 0, 1, 0, 0, 0, 0xD,
+    0xE, 0xF, 0, 0, 0xEE, 7, 0, 1, 0, 0, 0, 0xD, 0xE,
+    0xF, 0, 0, 0xEE, 7, 0, 1, 0, 0, 0, 0xD, 0xE, 0xF,
+    0, 0, 0xEE, 7, 0, 1, 0, 0, 0, 0xC, 0xE, 0xB, 0, 0,
+    0xEE, 1, 0, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE,
+    1, 2, 1, 0, 0, 0, 0xC, 0xE, 0xB, 0, 0, 0xEE, 7, 0,
+    1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 7, 0, 1, 0,
+    0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 1, 0, 1, 0, 0, 0,
+    0xD, 0xE, 0xF, 0, 0, 0xEE, 1, 0, 1, 0, 0, 0, 0xD,
+    0xE, 0xF, 0, 0, 0, 1, 0x20, 1, 0, 0, 0, 1, 0, 2,
+    0, 0, 0xEE, 1, 0xFF, 1, 0, 0, 0, 1, 0xE, 0xF, 0,
+    0, 0xEE, 1, 0xFF, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0,
+    0xEE, 1, 0xFF, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE,
+    1, 0xFF, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 1,
+    0xFF, 1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 1, 0xFF,
+    1, 0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0xEE, 1, 0xFF, 1,
+    0, 0, 0, 0xD, 0xE, 0xF, 0, 0, 0x11, 1, 0, 1, 0, 0,
+    1, 2, 1, 3, 0, 0
 };
 
-const u16 * const gUnknown_085CD660[] =
+static const u8 * const gUnknown_085CD660[] =
 {
     gUnknown_085CD42C, gUnknown_085CD54C
 };
 
-const u8 gUnknown_085CD668[] = {8, 4, 1, 0};
-
-extern struct StringInfoBattle *gStringInfo;
+static const u8 sRecordedBattleTextSpeeds[] = {8, 4, 1, 0};
 
 void BufferStringBattle(u16 stringID)
 {
@@ -1356,7 +1441,7 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     case STRINGID_USEDMOVE: // pokemon used a move msg
-        sub_814F8F8(gBattleTextBuff1);
+        sub_814F8F8(gBattleTextBuff1); // buff1 doesn't appear in the string, leftover from japanese move names?
 
         if (gStringInfo->currentMove > LAST_MOVE_INDEX)
             StringCopy(gBattleTextBuff2, gText_UnknownMoveTypes[*(&gBattleStruct->stringMoveType)]);
@@ -1508,8 +1593,6 @@ static const u8* TryGetStatusString(u8* src)
     }                                                                   \
     StringGetEnd10(text);                                               \
     toCpy = text;
-
-extern u8 gUnknown_0203C7B4;
 
 u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
 {
@@ -2066,4 +2149,185 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             break;
         }
     }
+}
+
+static void sub_814F8F8(u8* textBuff)
+{
+    s32 counter = 0;
+    u32 i = 0;
+
+    while (counter != 4)
+    {
+        if (sUnknownMoveTable[i] == MOVE_NONE)
+            counter++;
+        if (sUnknownMoveTable[i++] == gStringInfo->currentMove)
+            break;
+    }
+
+    if (counter >= 0)
+    {
+        if (counter <= 2)
+            StringCopy(textBuff, gText_SpaceIs); // is
+        else if (counter <= 4)
+            StringCopy(textBuff, gText_ApostropheS); // 's
+    }
+}
+
+static void sub_814F950(u8* dst)
+{
+    s32 counter = 0;
+    s32 i = 0;
+
+    while (*dst != EOS)
+        dst++;
+
+    while (counter != 4)
+    {
+        if (sUnknownMoveTable[i] == MOVE_NONE)
+            counter++;
+        if (sUnknownMoveTable[i++] == gStringInfo->currentMove)
+            break;
+    }
+
+    switch (counter)
+    {
+    case 0:
+        StringCopy(dst, gText_ExclamationMark);
+        break;
+    case 1:
+        StringCopy(dst, gText_ExclamationMark2);
+        break;
+    case 2:
+        StringCopy(dst, gText_ExclamationMark3);
+        break;
+    case 3:
+        StringCopy(dst, gText_ExclamationMark4);
+        break;
+    case 4:
+        StringCopy(dst, gText_ExclamationMark5);
+        break;
+    }
+}
+
+void sub_814F9EC(const u8 *text, u8 arg1)
+{
+    const u8 *r8 = gUnknown_085CD660[gBattleScripting.field_24];
+    bool32 r9;
+    struct TextSubPrinter textSubPrinter;
+    u8 speed;
+
+    if (arg1 & 0x80)
+    {
+        arg1 &= ~(0x80);
+        r9 = FALSE;
+    }
+    else
+    {
+        FillWindowPixelBuffer(arg1, r8[12 * arg1]);
+        r9 = TRUE;
+    }
+
+    textSubPrinter.current_text_offset = text;
+    textSubPrinter.windowId = arg1;
+    textSubPrinter.fontId = r8[(12 * arg1) + 1];
+    textSubPrinter.x = r8[(12 * arg1) + 2];
+    textSubPrinter.y = r8[(12 * arg1) + 3];
+    textSubPrinter.currentX = textSubPrinter.x;
+    textSubPrinter.currentY = textSubPrinter.y;
+    textSubPrinter.letterSpacing = r8[(12 * arg1) + 4];
+    textSubPrinter.lineSpacing = r8[(12 * arg1) + 5];
+    textSubPrinter.fontColor_l = 0;
+    textSubPrinter.fontColor_h = r8[(12 * arg1) + 7];
+    textSubPrinter.bgColor = r8[(12 * arg1) + 8];
+    textSubPrinter.shadowColor = r8[(12 * arg1) + 9];
+
+    if (textSubPrinter.x == 0xFF)
+    {
+        s32 var2;
+        u32 var = sub_80397C4(gBattleScripting.field_24, arg1);
+        var2 = GetStringCenterAlignXOffsetWithLetterSpacing(textSubPrinter.fontId, textSubPrinter.current_text_offset, var, textSubPrinter.letterSpacing);
+        textSubPrinter.x = textSubPrinter.currentX = var2;
+    }
+
+    if (arg1 == 0x16)
+        gTextFlags.flag_1 = 0;
+    else
+        gTextFlags.flag_1 = 1;
+
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED))
+        gTextFlags.flag_2 = 1;
+    else
+        gTextFlags.flag_2 = 0;
+
+    if (arg1 == 0 || arg1 == 0x16)
+    {
+        if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+            speed = 1;
+        else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+            speed = sRecordedBattleTextSpeeds[sub_8185FC4()];
+        else
+            speed = sav2_get_text_speed();
+
+        gTextFlags.flag_0 = 1;
+    }
+    else
+    {
+        speed = r8[(12 * arg1) + 6];
+        gTextFlags.flag_0 = 0;
+    }
+
+    AddTextPrinter(&textSubPrinter, speed, NULL);
+
+    if (r9)
+    {
+        PutWindowTilemap(arg1);
+        CopyWindowToVram(arg1, 3);
+    }
+}
+
+void SetPpNumbersPaletteInMoveSelection(void)
+{
+    struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBank][4]);
+    const u16 *palPtr = gUnknown_08D85620;
+    u8 var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[gActiveBank]],
+                         chooseMoveStruct->maxPp[gMoveSelectionCursor[gActiveBank]]);
+
+    gPlttBufferUnfaded[92] = palPtr[(var * 2) + 0];
+    gPlttBufferUnfaded[91] = palPtr[(var * 2) + 1];
+
+    CpuCopy16(&gPlttBufferUnfaded[92], &gPlttBufferFaded[92], sizeof(u16));
+    CpuCopy16(&gPlttBufferUnfaded[91], &gPlttBufferFaded[91], sizeof(u16));
+}
+
+u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp)
+{
+    if (maxPp == currentPp)
+    {
+        return 3;
+    }
+    else if (maxPp <= 2)
+    {
+        if (currentPp > 1)
+            return 3;
+        else
+            return 2 - currentPp;
+    }
+    else if (maxPp <= 7)
+    {
+        if (currentPp > 2)
+            return 3;
+        else
+            return 2 - currentPp;
+    }
+    else
+    {
+        if (currentPp == 0)
+            return 2;
+        if (currentPp <= maxPp / 4)
+            return 1;
+        if (currentPp > maxPp / 2)
+            return 3;
+    }
+
+    return 0;
 }
