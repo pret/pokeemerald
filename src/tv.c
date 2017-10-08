@@ -225,7 +225,7 @@ const u8 *const gTVFanClubTextGroup[] = {
     gUnknown_082810E7
 };
 
-const u8 *const gUnknown_0858D170[] = {
+const u8 *const gTVRecentHappeningsTextGroup[] = {
     gUnknown_0828149E,
     gUnknown_082815AF,
     gUnknown_08281636,
@@ -5683,6 +5683,41 @@ void DoTVShowPokemonFanClubLetter(void)
             return;
     }
     ShowFieldMessage(gTVFanClubTextGroup[state]);
+}
+
+void DoTVShowRecentHappenings(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = 0;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->recentHappenings.playerName, show->recentHappenings.language);
+            sub_80EFB58(show);
+            sTVShowState = 50;
+            break;
+        case 1:
+            sTVShowState += 1 + (Random() % 3);
+            break;
+        case 2:
+        case 3:
+        case 4:
+            sTVShowState = 5;
+            break;
+        case 5:
+            TVShowDone();
+            break;
+        case 50:
+            ConvertEasyChatWordsToString(gStringVar4, show->recentHappenings.words, 2, 2);
+            ShowFieldMessage(gStringVar4);
+            sTVShowState = 1;
+            return;
+    }
+    ShowFieldMessage(gTVRecentHappeningsTextGroup[state]);
 }
 
 //void TVShowDone(void)
