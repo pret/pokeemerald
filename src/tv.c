@@ -4811,6 +4811,26 @@ void sub_80F1208(TVShow *shows)
     }
 }
 
+void sub_80F1254(TVShow *shows)
+{
+    TVShow *curShow;
+
+    for (curShow = shows; curShow < shows + 24; curShow ++)
+    {
+        if (curShow->bravoTrainerTower.kind == TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE)
+        {
+            if (IsStringJapanese(curShow->bravoTrainerTower.pokemonName))
+            {
+                curShow->bravoTrainerTower.pokemonNameLanguage = LANGUAGE_JAPANESE;
+            }
+            else
+            {
+                curShow->bravoTrainerTower.pokemonNameLanguage = LANGUAGE_ENGLISH;
+            }
+        }
+    }
+}
+
 asm(".section .text.dotvshow");
 
 void DoTVShow(void)

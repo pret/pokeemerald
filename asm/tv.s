@@ -3,44 +3,6 @@
 
 	.syntax unified
 
-	thumb_func_start sub_80F1254
-sub_80F1254: @ 80F1254
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r4, 0
-	movs r1, 0xD8
-	lsls r1, 2
-	adds r0, r4, r1
-	cmp r4, r0
-	bcs _080F128A
-_080F1264:
-	ldrb r0, [r4]
-	cmp r0, 0x7
-	bne _080F127E
-	adds r0, r4, 0
-	adds r0, 0xC
-	bl IsStringJapanese
-	cmp r0, 0
-	beq _080F127A
-	movs r0, 0x1
-	b _080F127C
-_080F127A:
-	movs r0, 0x2
-_080F127C:
-	strb r0, [r4, 0x1E]
-_080F127E:
-	adds r4, 0x24
-	movs r1, 0xD8
-	lsls r1, 2
-	adds r0, r5, r1
-	cmp r4, r0
-	bcc _080F1264
-_080F128A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80F1254
-
 	thumb_func_start sub_80F1290
 sub_80F1290: @ 80F1290
 	push {lr}
