@@ -214,7 +214,7 @@ u8 *const gUnknown_0858D144[] = {
     gStringVar3
 };
 
-const u8 *const gUnknown_0858D150[] = {
+const u8 *const gTVFanClubTextGroup[] = {
     gUnknown_08280DEE,
     gUnknown_08280F69,
     gUnknown_08280F88,
@@ -5629,6 +5629,60 @@ void DoTVShowPokemonTodayFailedCapture(void)
             break;
     }
     ShowFieldMessage(gTVPokemonTodayFailedTextGroup[state]);
+}
+
+void DoTVShowPokemonFanClubLetter(void)
+{
+    TVShow *show;
+    u8 state;
+    u16 rval;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->fanclubLetter.playerName, show->fanclubLetter.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->fanclubLetter.species]);
+            sTVShowState = 50;
+            break;
+        case 1:
+            rval = (Random() % 4) + 1;
+            if (rval == 1)
+                sTVShowState = 2;
+            else
+                sTVShowState = rval + 2;
+            break;
+        case 2:
+            sTVShowState = 51;
+            break;
+        case 3:
+            sTVShowState += (Random() % 3) + 1;
+            break;
+        case 4:
+        case 5:
+        case 6:
+            sub_80EFB58(show);
+            sTVShowState = 7;
+            break;
+        case 7:
+            rval = (Random() % 0x1f) + 0x46;
+            TV_PrintIntToStringVar(2, rval);
+            TVShowDone();
+            break;
+        case 50:
+            ConvertEasyChatWordsToString(gStringVar4, show->fanclubLetter.words, 2, 2);
+            ShowFieldMessage(gStringVar4);
+            sTVShowState = 1;
+            return;
+        case 51:
+            ConvertEasyChatWordsToString(gStringVar4, show->fanclubLetter.words, 2, 2);
+            ShowFieldMessage(gStringVar4);
+            sTVShowState = 3;
+            return;
+    }
+    ShowFieldMessage(gTVFanClubTextGroup[state]);
 }
 
 //void TVShowDone(void)
