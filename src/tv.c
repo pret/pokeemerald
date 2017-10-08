@@ -234,7 +234,7 @@ const u8 *const gTVRecentHappeningsTextGroup[] = {
     gUnknown_082816EB
 };
 
-const u8 *const gUnknown_0858D188[] = {
+const u8 *const gTVFanClubOpinionsTextGroup[] = {
     gUnknown_08280886,
     gUnknown_08280A44,
     gUnknown_08280AFC,
@@ -5691,7 +5691,7 @@ void DoTVShowRecentHappenings(void)
     u8 state;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
-    gScriptResult = 0;
+    gScriptResult = FALSE;
     state = sTVShowState;
     switch (state)
     {
@@ -5718,6 +5718,39 @@ void DoTVShowRecentHappenings(void)
             return;
     }
     ShowFieldMessage(gTVRecentHappeningsTextGroup[state]);
+}
+
+void DoTVShowPokemonFanClubOpinions(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->fanclubOpinions.playerName, show->fanclubOpinions.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->fanclubOpinions.species]);
+            TVShowConvertInternationalString(gStringVar3, show->fanclubOpinions.nickname, show->fanclubOpinions.var0E);
+            sTVShowState = show->fanclubOpinions.var04B + 1;
+            break;
+        case 1:
+        case 2:
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, show->fanclubOpinions.playerName, show->fanclubOpinions.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->fanclubOpinions.species]);
+            CopyEasyChatWord(gStringVar3, show->fanclubOpinions.words[0]);
+            sTVShowState = 4;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, show->fanclubOpinions.playerName, show->fanclubOpinions.language);
+            CopyEasyChatWord(gStringVar3, show->fanclubOpinions.words[1]);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVFanClubOpinionsTextGroup[state]);
 }
 
 //void TVShowDone(void)
