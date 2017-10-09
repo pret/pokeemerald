@@ -419,11 +419,11 @@ _080A5FE8:
 	lsls r0, 1
 	cmp r4, r0
 	bls _080A5FF8
-	ldr r0, =gUnknown_08305DCC
+	ldr r0, =gEnemyMonElevation
 	b _080A5FFC
 	.pool
 _080A5FF8:
-	ldr r0, =gUnknown_08305DCC
+	ldr r0, =gEnemyMonElevation
 	adds r0, r7, r0
 _080A5FFC:
 	ldrb r5, [r0]

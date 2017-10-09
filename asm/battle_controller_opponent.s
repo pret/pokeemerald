@@ -4339,7 +4339,7 @@ _080617CA:
 	bl sub_806A12C
 	ldr r6, =gUnknown_0202499C
 	mov r9, r7
-	ldr r1, =gUnknown_083054E0
+	ldr r1, =gTrainerFrontPicCoords
 	mov r2, r8
 	lsls r0, r2, 2
 	adds r0, r1
@@ -4564,7 +4564,7 @@ _080619DE:
 	mov r0, r8
 	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
-	ldr r2, =gUnknown_083054E0
+	ldr r2, =gTrainerFrontPicCoords
 	mov r3, r8
 	lsls r1, r3, 2
 	adds r1, r2

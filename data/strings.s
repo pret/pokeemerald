@@ -165,130 +165,130 @@ gText_PickCancel:: @ 85E8574
 gText_UnkCtrlF800Exit:: @ 85E8588
 	.string "{UNK_CTRL_F800}EXIT$"
 
-gUnknown_085E858F:: @ 85E858F
+gText_BirchBoy:: @ 85E858F
 	.string "BOY$"
 
-gUnknown_085E8593:: @ 85E8593
+gText_BirchGirl:: @ 85E8593
 	.string "GIRL$"
 
-gUnknown_085E8598:: @ 85E8598
+gText_DefaultNameStu:: @ 85E8598
 	.string "STU$"
 
-gUnknown_085E859C:: @ 85E859C
+gText_DefaultNameMilton:: @ 85E859C
 	.string "MILTON$"
 
-gUnknown_085E85A3:: @ 85E85A3
+gText_DefaultNameTom:: @ 85E85A3
 	.string "TOM$"
 
-gUnknown_085E85A7:: @ 85E85A7
+gText_DefaultNameKenny:: @ 85E85A7
 	.string "KENNY$"
 
-gUnknown_085E85AD:: @ 85E85AD
+gText_DefaultNameReid:: @ 85E85AD
 	.string "REID$"
 
-gUnknown_085E85B2:: @ 85E85B2
+gText_DefaultNameJude:: @ 85E85B2
 	.string "JUDE$"
 
-gUnknown_085E85B7:: @ 85E85B7
+gText_DefaultNameJaxson:: @ 85E85B7
 	.string "JAXSON$"
 
-gUnknown_085E85BE:: @ 85E85BE
+gText_DefaultNameEaston:: @ 85E85BE
 	.string "EASTON$"
 
-gUnknown_085E85C5:: @ 85E85C5
+gText_DefaultNameWalker:: @ 85E85C5
 	.string "WALKER$"
 
-gUnknown_085E85CC:: @ 85E85CC
+gText_DefaultNameTeru:: @ 85E85CC
 	.string "TERU$"
 
-gUnknown_085E85D1:: @ 85E85D1
+gText_DefaultNameJohnny:: @ 85E85D1
 	.string "JOHNNY$"
 
-gUnknown_085E85D8:: @ 85E85D8
+gText_DefaultNameBrett:: @ 85E85D8
 	.string "BRETT$"
 
-gUnknown_085E85DE:: @ 85E85DE
+gText_DefaultNameSeth:: @ 85E85DE
 	.string "SETH$"
 
-gUnknown_085E85E3:: @ 85E85E3
+gText_DefaultNameTerry:: @ 85E85E3
 	.string "TERRY$"
 
-gUnknown_085E85E9:: @ 85E85E9
+gText_DefaultNameCasey:: @ 85E85E9
 	.string "CASEY$"
 
-gUnknown_085E85EF:: @ 85E85EF
+gText_DefaultNameDarren:: @ 85E85EF
 	.string "DARREN$"
 
-gUnknown_085E85F6:: @ 85E85F6
+gText_DefaultNameLandon:: @ 85E85F6
 	.string "LANDON$"
 
-gUnknown_085E85FD:: @ 85E85FD
+gText_DefaultNameCollin:: @ 85E85FD
 	.string "COLLIN$"
 
-gUnknown_085E8604:: @ 85E8604
+gText_DefaultNameStanley:: @ 85E8604
 	.string "STANLEY$"
 
-gUnknown_085E860C:: @ 85E860C
+gText_DefaultNameQuincy:: @ 85E860C
 	.string "QUINCY$"
 
-gUnknown_085E8613:: @ 85E8613
+gText_DefaultNameKimmy:: @ 85E8613
 	.string "KIMMY$"
 
-gUnknown_085E8619:: @ 85E8619
+gText_DefaultNameTiara:: @ 85E8619
 	.string "TIARA$"
 
-gUnknown_085E861F:: @ 85E861F
+gText_DefaultNameBella:: @ 85E861F
 	.string "BELLA$"
 
-gUnknown_085E8625:: @ 85E8625
+gText_DefaultNameJayla:: @ 85E8625
 	.string "JAYLA$"
 
-gUnknown_085E862B:: @ 85E862B
+gText_DefaultNameAllie:: @ 85E862B
 	.string "ALLIE$"
 
-gUnknown_085E8631:: @ 85E8631
+gText_DefaultNameLianna:: @ 85E8631
 	.string "LIANNA$"
 
-gUnknown_085E8638:: @ 85E8638
+gText_DefaultNameSara:: @ 85E8638
 	.string "SARA$"
 
-gUnknown_085E863D:: @ 85E863D
+gText_DefaultNameMonica:: @ 85E863D
 	.string "MONICA$"
 
-gUnknown_085E8644:: @ 85E8644
+gText_DefaultNameCamila:: @ 85E8644
 	.string "CAMILA$"
 
-gUnknown_085E864B:: @ 85E864B
+gText_DefaultNameAubree:: @ 85E864B
 	.string "AUBREE$"
 
-gUnknown_085E8652:: @ 85E8652
+gText_DefaultNameRuthie:: @ 85E8652
 	.string "RUTHIE$"
 
-gUnknown_085E8659:: @ 85E8659
+gText_DefaultNameHazel:: @ 85E8659
 	.string "HAZEL$"
 
-gUnknown_085E865F:: @ 85E865F
+gText_DefaultNameNadine:: @ 85E865F
 	.string "NADINE$"
 
-gUnknown_085E8666:: @ 85E8666
+gText_DefaultNameTanja:: @ 85E8666
 	.string "TANJA$"
 
-gUnknown_085E866C:: @ 85E866C
+gText_DefaultNameYasmin:: @ 85E866C
 	.string "YASMIN$"
 
-gUnknown_085E8673:: @ 85E8673
+gText_DefaultNameNicola:: @ 85E8673
 	.string "NICOLA$"
 
-gUnknown_085E867A:: @ 85E867A
+gText_DefaultNameLillie:: @ 85E867A
 	.string "LILLIE$"
 
-gUnknown_085E8681:: @ 85E8681
+gText_DefaultNameTerra:: @ 85E8681
 	.string "TERRA$"
 
-gUnknown_085E8687:: @ 85E8687
+gText_DefaultNameLucy:: @ 85E8687
 	.string "LUCY$"
 
-gUnknown_085E868C:: @ 85E868C
+gText_DefaultNameHalie:: @ 85E868C
 	.string "HALIE$"
 
 gText_ThisIsAPokemon:: @ 85E8692
@@ -4452,16 +4452,16 @@ gText_ButtonTypeLEqualsA:: @ 85EE65D
 gText_XPLink:: @ 85EE667
 	.string "{STR_VAR_1}P LINK$"
 
-gUnknown_085EE670:: @ 85EE670
+gText_BronzeCard:: @ 85EE670
 	.string "BRONZE$"
 
-gUnknown_085EE677:: @ 85EE677
+gText_CopperCard:: @ 85EE677
 	.string "COPPER$"
 
-gUnknown_085EE67E:: @ 85EE67E
+gText_SilverCard:: @ 85EE67E
 	.string "SILVER$"
 
-gUnknown_085EE685:: @ 85EE685
+gText_GoldCard:: @ 85EE685
 	.string "GOLD$"
 
 gText_Day:: @ 85EE68A

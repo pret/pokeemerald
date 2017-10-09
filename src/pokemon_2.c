@@ -28,7 +28,7 @@ extern const u32 gBitTable[];
 extern const struct SpriteTemplate gUnknown_08329D98[];
 extern const struct SpriteTemplate gUnknown_08329DF8[];
 extern const union AnimCmd* gUnknown_082FF70C[];
-extern const union AnimCmd* const * const gUnknown_08309AAC[];
+extern const union AnimCmd* const * const gMonAnimationsSpriteAnimsPtrTable[];
 extern const union AnimCmd* const * const gUnknown_08305D0C[];
 extern const union AnimCmd* const * const gUnknown_0830536C[];
 extern const u8 gText_BadEgg[];
@@ -165,9 +165,9 @@ void sub_806A068(u16 species, u8 bankIdentity)
     if (bankIdentity == 0 || bankIdentity == 2)
         gUnknown_0202499C.anims = gUnknown_082FF70C;
     else if (species > 500)
-        gUnknown_0202499C.anims = gUnknown_08309AAC[species - 500];
+        gUnknown_0202499C.anims = gMonAnimationsSpriteAnimsPtrTable[species - 500];
     else
-        gUnknown_0202499C.anims = gUnknown_08309AAC[species];
+        gUnknown_0202499C.anims = gMonAnimationsSpriteAnimsPtrTable[species];
 }
 
 void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity)
