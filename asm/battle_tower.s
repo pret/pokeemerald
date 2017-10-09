@@ -3194,7 +3194,7 @@ sub_8163A8C: @ 8163A8C
 	ldr r0, =gMain
 	ldr r1, =sub_81639AC
 	str r1, [r0, 0x8]
-	ldr r0, =sub_8036760
+	ldr r0, =CB2_InitBattle
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -5125,21 +5125,21 @@ _08164C18:
 	lsrs r0, 24
 	mov r1, sp
 	movs r2, 0x4
-	bl link_0800A448
+	bl SendBlock
 	ldr r1, =gScriptResult
 	movs r0, 0x1
 	b _08164DB4
 	.pool
 _08164C3C:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x3
 	beq _08164C4A
 	b _08164DB6
 _08164C4A:
-	bl sub_800A5B4
-	ldr r1, =gUnknown_020223C4
+	bl ResetBlockReceivedFlags
+	ldr r1, =gBlockRecvBuffer
 	movs r0, 0x80
 	lsls r0, 1
 	adds r2, r1, r0
@@ -5221,23 +5221,23 @@ _08164CE0:
 	ldr r3, =0x00000cb4
 	adds r1, r3
 	movs r2, 0x28
-	bl link_0800A448
+	bl SendBlock
 	ldr r1, =gScriptResult
 	movs r0, 0x3
 	b _08164DB4
 	.pool
 _08164D14:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x3
 	bne _08164DB6
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	ldr r4, =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldr r5, =0x00000cb4
 	adds r0, r5
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	movs r2, 0x28
 	bl memcpy
 	ldr r2, =gTrainerBattleOpponent_A
@@ -5260,7 +5260,7 @@ _08164D14:
 	ldrh r0, [r4]
 	movs r1, 0x1
 	bl sub_8162614
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08164DB0
@@ -5279,7 +5279,7 @@ _08164D98:
 	b _08164DB4
 	.pool
 _08164DA8:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08164DB6

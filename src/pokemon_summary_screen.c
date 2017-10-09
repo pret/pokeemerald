@@ -1,7 +1,7 @@
+#include "global.h"
 #include "battle.h"
 #include "bg.h"
 #include "decompress.h"
-#include "global.h"
 #include "m4a.h"
 #include "main.h"
 #include "malloc.h"
@@ -264,7 +264,7 @@ void sub_81BF8EC(u8 a, void *b, u8 c, u8 d, void *e)
     byte = gUnknown_0203CF1C->unk40C1;
     gUnknown_0203CF1C->unk40C0 = byte;
     sub_81C488C(0xFF);
-    if (gBattleSpritesGfx == 0)
+    if (gMonSpritesGfxPtr == 0)
         sub_806F2AC(0, 0);
     SetMainCallback2(sub_81BFAE4);
 }
@@ -656,7 +656,7 @@ void sub_81C0484(u8 taskId)
         FreeAllSpritePalettes();
         StopCryAndClearCrySongs();
         m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
-        if (gBattleSpritesGfx == 0)
+        if (gMonSpritesGfxPtr == 0)
             sub_806F47C(0);
         sub_81C0434();
         DestroyTask(taskId);

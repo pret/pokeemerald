@@ -57,8 +57,8 @@ SECTIONS {
         asm/rom3.o(.text);
         src/decompress.o(.text);
         asm/battle_1.o(.text);
-        asm/battle_2.o(.text);
-        src/battle_3.o(.text);
+        src/battle_2.o(.text);
+        src/battle_util.o(.text);
         src/battle_script_commands.o(.text);
         asm/battle_5.o(.text);
         asm/battle_controller_player.o(.text);
@@ -218,11 +218,11 @@ SECTIONS {
         asm/hall_of_fame.o(.text);
         asm/credits.o(.text);
         src/lottery_corner.o(.text);
-        asm/diploma.o(.text);
+        src/diploma.o(.text);
         asm/berry_tag_screen.o(.text);
         asm/mystery_event_menu.o(.text);
-        asm/save_failed_screen.o(.text);
-        asm/braille_puzzles.o(.text);
+        src/save_failed_screen.o(.text);
+        src/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
         asm/clear_save_data_screen.o(.text);
         asm/intro_credits_graphics.o(.text);
@@ -244,7 +244,7 @@ SECTIONS {
         asm/list_menu.o(.text);
         asm/menu_indicators.o(.text);
         asm/unk_text_util.o(.text);
-        asm/save_location.o(.text);
+        src/save_location.o(.text);
         asm/item_icon.o(.text);
         asm/party_menu.o(.text);
         asm/battle_tent.o(.text);
@@ -326,6 +326,8 @@ SECTIONS {
         data/link.o(.rodata);
         src/rtc.o(.rodata);
         data/data2b.o(.rodata);
+        src/battle_2.o(.rodata);
+        src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
         data/battle_controller_player.o(.rodata);
         data/smokescreen.o(.rodata);
@@ -429,11 +431,11 @@ SECTIONS {
         data/hall_of_fame.o(.rodata);
         data/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
-        data/diploma.o(.rodata);
+        src/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
         data/mystery_event_menu.o(.rodata);
-        data/save_failed_screen.o(.rodata);
+        src/save_failed_screen.o(.rodata);
         data/braille_puzzles.o(.rodata);
         data/pokeblock_feed.o(.rodata);
         data/clear_save_data_screen.o(.rodata);
@@ -450,7 +452,7 @@ SECTIONS {
         data/battle_frontier_2.o(.rodata);
         data/item_menu.o(.rodata);
         data/menu_indicators.o(.rodata);
-        data/save_location.o(.rodata);
+        src/save_location.o(.rodata);
         data/item_icon.o(.rodata);
         data/party_menu.o(.rodata);
         data/battle_tent.o(.rodata);

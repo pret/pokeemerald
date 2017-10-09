@@ -9010,7 +9010,7 @@ _080AF9C8:
 	strh r0, [r4]
 	b _080AF9E8
 _080AF9D0:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080AF9E8

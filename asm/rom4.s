@@ -1375,7 +1375,7 @@ _080850C8:
 	bl warp_shift
 	bl set_current_map_header_from_sav1_save_old_name
 	bl CopyFieldObjectTemplatesToSav1
-	bl sav2_set_x9_depending_on_sav1_map
+	bl TrySetMapSaveWarpStatus
 	bl ClearTempFieldEventData
 	bl wild_pokemon_reroll
 	bl prev_quest_postbuffer_cursor_backup_reset
@@ -1463,7 +1463,7 @@ _080851A2:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	bl sub_80EB218
-	bl sav2_set_x9_depending_on_sav1_map
+	bl TrySetMapSaveWarpStatus
 	bl ClearTempFieldEventData
 	bl wild_pokemon_reroll
 	bl prev_quest_postbuffer_cursor_backup_reset

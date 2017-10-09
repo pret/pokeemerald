@@ -98,10 +98,10 @@ _080A93B0:
 	movs r0, 0x3
 	bl ShowBg
 	bl ResetPaletteFade
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r0, =gBattle_BG1_X
 	strh r1, [r0]
@@ -113,7 +113,7 @@ _080A93B0:
 	strh r1, [r0]
 	ldr r0, =gBattle_BG3_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r1, [r0]
 	b _080A95D2
 	.pool
@@ -128,7 +128,7 @@ _080A942C:
 	b _080A95D2
 	.pool
 _080A9444:
-	bl sub_8035AA4
+	bl LoadBattleTextboxAndBackground
 	b _080A95D2
 _080A944A:
 	bl ResetSpriteData
@@ -264,7 +264,7 @@ _080A94F8:
 	adds r0, r4, 0
 	bl sub_805EE54
 _080A955C:
-	ldr r1, =gUnknown_020244AC
+	ldr r1, =gActionSelectionCursor
 	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	adds r0, r1
@@ -275,7 +275,7 @@ _080A955C:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080A95D2
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080A95D2
@@ -348,7 +348,7 @@ sub_80A9614: @ 80A9614
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9676
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r4, 2
@@ -404,7 +404,7 @@ _080A96AA:
 	bl sub_805DF84
 	b _080A96F4
 _080A96B2:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r4, 2
@@ -459,7 +459,7 @@ sub_80A9708: @ 80A9708
 	bcc _080A9722
 	b _080A9AA0
 _080A9722:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	lsls r2, r7, 2
@@ -591,7 +591,7 @@ _080A9786:
 	adds r1, r7, r1
 	ldrb r1, [r1]
 	bl StartSpriteAnim
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldr r2, [sp]
@@ -808,7 +808,7 @@ _080A998C:
 	adds r1, r7, r1
 	ldrb r1, [r1]
 	bl StartSpriteAnim
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldr r1, [sp]
@@ -839,7 +839,7 @@ _080A9A70:
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r1
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldr r1, [sp]

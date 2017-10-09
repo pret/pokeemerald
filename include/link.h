@@ -143,7 +143,6 @@ extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 
 void Task_DestroySelf(u8);
-void sub_8007270(u8);
 void OpenLink(void);
 void CloseLink(void);
 u16 LinkMain2(u16 *);
@@ -162,24 +161,12 @@ void sub_8007E4C(void);
 u8 GetMultiplayerId(void);
 u8 bitmask_all_link_players_but_self(void);
 bool8 SendBlock(u8, void *, u16);
-bool8 sub_8007E9C(u8);
-bool8 sub_8007ECC(void);
 u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);
 void ResetBlockReceivedFlag(u8);
-void sub_8007F4C(void);
 void SetLinkDebugValues(u32, u32);
-u8 sub_8008198(void);
-void sub_80081C8(u8);
-u8 sub_800820C(void);
-u8 sub_8008218(void);
-void sub_800826C(void);
-void sub_80082EC(void);
 u8 GetLinkPlayerCount_2(void);
 bool8 IsLinkMaster(void);
-void sub_800832C(void);
-void sub_8008480(void);
-void sub_80084A4(void);
 void CB2_LinkError(void);
 u8 GetSioMultiSI(void);
 bool8 IsLinkConnectionEstablished(void);
@@ -190,5 +177,12 @@ u32 LinkMain1(u8 *, u16 *, u16[CMD_LENGTH][MAX_LINK_PLAYERS]);
 void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
+
+void sub_800E0E8(void);
+bool8 sub_800A520(void);
+bool8 sub_8010500(void);
+void sub_800DFB4(u8, u8);
+void sub_800ADF8(void);
+u8 sub_8009FCC(void);
 
 #endif // GUARD_LINK_H

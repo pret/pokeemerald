@@ -132,7 +132,7 @@ _08189A40:
 	thumb_func_start sub_8189A58
 sub_8189A58: @ 8189A58
 	push {r4,lr}
-	ldr r4, =gUnknown_020244D0
+	ldr r4, =gBattleSpritesDataPtr
 	ldr r1, [r4]
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
@@ -244,7 +244,7 @@ _08189B42:
 	bne _08189B48
 	b _08189D18
 _08189B48:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	mov r9, r0
 	ldr r0, [r0]
 	ldr r5, =gActiveBank
@@ -435,7 +435,7 @@ _08189CE6:
 _08189CF2:
 	cmp r6, 0
 	beq _08189D18
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r3, =gActiveBank
 	ldrb r1, [r3]
@@ -478,7 +478,7 @@ sub_8189D40: @ 8189D40
 	lsls r0, 24
 	cmp r0, 0
 	bne _08189DBE
-	ldr r5, =gUnknown_020244D0
+	ldr r5, =gBattleSpritesDataPtr
 	ldr r0, [r5]
 	ldrb r2, [r4]
 	ldr r1, [r0, 0x4]
@@ -527,7 +527,7 @@ _08189D8C:
 	adds r0, r3, 0
 	bl sub_8172EF0
 _08189DBE:
-	ldr r3, =gUnknown_020244D0
+	ldr r3, =gBattleSpritesDataPtr
 	ldr r0, [r3]
 	ldr r2, =gActiveBank
 	ldrb r5, [r2]
@@ -621,7 +621,7 @@ _08189E54:
 	ldrb r0, [r0]
 	bl sub_80729D0
 _08189E84:
-	ldr r4, =gUnknown_020244D0
+	ldr r4, =gBattleSpritesDataPtr
 	ldr r0, [r4]
 	ldr r3, =gActiveBank
 	ldrb r1, [r3]
@@ -702,7 +702,7 @@ _08189F38:
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
 _08189F44:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -779,7 +779,7 @@ _08189FC8:
 	ldr r1, =gSprites
 	adds r0, r1
 	bl DestroySprite
-	ldr r3, =gUnknown_020244D0
+	ldr r3, =gBattleSpritesDataPtr
 	ldr r0, [r3]
 	ldr r2, [r0, 0x8]
 	ldrb r1, [r2, 0x9]
@@ -975,7 +975,7 @@ _0818A190:
 	thumb_func_start sub_818A1B0
 sub_818A1B0: @ 818A1B0
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r6, =gActiveBank
 	ldrb r2, [r6]
@@ -1113,7 +1113,7 @@ sub_818A2B4: @ 818A2B4
 	bne _0818A306
 	adds r0, r3, 0
 	bl sub_805E408
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
 	ldr r1, [r0]
@@ -1145,7 +1145,7 @@ _0818A306:
 	thumb_func_start sub_818A328
 sub_818A328: @ 818A328
 	push {lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gActiveBank
 	ldrb r3, [r0]
@@ -1184,7 +1184,7 @@ sub_818A37C: @ 818A37C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r3, =gUnknown_020244D0
+	ldr r3, =gBattleSpritesDataPtr
 	ldr r0, [r3]
 	ldr r7, =gActiveBank
 	ldrb r1, [r7]
@@ -1279,7 +1279,7 @@ _0818A438:
 	thumb_func_start sub_818A470
 sub_818A470: @ 818A470
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_020244D0
+	ldr r6, =gBattleSpritesDataPtr
 	ldr r0, [r6]
 	ldr r4, =gActiveBank
 	ldrb r2, [r4]
@@ -1397,7 +1397,7 @@ _0818A57A:
 	thumb_func_start sub_818A58C
 sub_818A58C: @ 818A58C
 	push {lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -1421,7 +1421,7 @@ _0818A5AE:
 	thumb_func_start sub_818A5BC
 sub_818A5BC: @ 818A5BC
 	push {lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -3852,7 +3852,7 @@ sub_818BBE8: @ 818BBE8
 	ldrb r3, [r0]
 	cmp r3, 0
 	bne _0818BC30
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	lsls r0, r2, 1
@@ -3902,7 +3902,7 @@ _0818BC66:
 	thumb_func_start sub_818BC78
 sub_818BC78: @ 818BC78
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_020244D0
+	ldr r6, =gBattleSpritesDataPtr
 	ldr r4, [r6]
 	ldr r5, =gActiveBank
 	ldrb r2, [r5]
@@ -4350,7 +4350,7 @@ sub_818BFB8: @ 818BFB8
 	thumb_func_start sub_818C064
 sub_818C064: @ 818C064
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_020244D0
+	ldr r6, =gBattleSpritesDataPtr
 	ldr r4, [r6]
 	ldr r5, =gActiveBank
 	ldrb r2, [r5]
@@ -4599,7 +4599,7 @@ _0818C192:
 	b _0818C2A6
 	.pool
 _0818C288:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -4646,7 +4646,7 @@ bx_move_anim_2: @ 818C2B8
 	adds r1, r2
 	ldrb r1, [r1]
 	mov r8, r1
-	ldr r7, =gUnknown_020244D0
+	ldr r7, =gBattleSpritesDataPtr
 	ldr r5, [r7]
 	ldr r1, [r5, 0x4]
 	lsls r0, r3, 1
@@ -4754,7 +4754,7 @@ _0818C37A:
 	ands r0, r2
 	strb r0, [r1]
 _0818C3C8:
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -4808,10 +4808,10 @@ _0818C42C:
 	thumb_func_start sub_818C43C
 sub_818C43C: @ 818C43C
 	push {r4,lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -5134,7 +5134,7 @@ sub_818C6F4: @ 818C6F4
 	movs r2, 0x9
 	bl healthbar_draw_field_maybe
 	ldrb r2, [r4]
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	lsls r1, r2, 1
@@ -5676,7 +5676,7 @@ _0818CB5A:
 	adds r1, r4
 	ldrb r0, [r5]
 	strh r0, [r1, 0x8]
-	ldr r3, =gUnknown_020244D0
+	ldr r3, =gBattleSpritesDataPtr
 	ldr r0, [r3]
 	ldrb r2, [r5]
 	ldr r1, [r0, 0x4]
@@ -5855,7 +5855,7 @@ sub_818CD30: @ 818CD30
 	b _0818CDD4
 	.pool
 _0818CD60:
-	ldr r6, =gUnknown_020244D0
+	ldr r6, =gBattleSpritesDataPtr
 	ldr r0, [r6]
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
@@ -5923,7 +5923,7 @@ _0818CDD4:
 	thumb_func_start bx_increment_dp11b_field_5_till_x60_then_resume
 bx_increment_dp11b_field_5_till_x60_then_resume: @ 818CDF4
 	push {r4,lr}
-	ldr r4, =gUnknown_020244D0
+	ldr r4, =gBattleSpritesDataPtr
 	ldr r0, [r4]
 	ldr r3, =gActiveBank
 	ldrb r1, [r3]
@@ -5959,7 +5959,7 @@ _0818CE2C:
 	thumb_func_start sub_818CE3C
 sub_818CE3C: @ 818CE3C
 	push {lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gActiveBank
 	ldrb r3, [r0]

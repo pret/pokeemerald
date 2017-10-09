@@ -73,7 +73,7 @@ extern const struct BaseStats gBaseStats[];
 extern const u32 gBitTable[];
 extern u8 * const gBattleAI_ScriptsTable[];
 
-extern u8 b_first_side(u8, u8, u8);
+extern u8 GetWhoStrikesFirst(u8, u8, u8);
 extern void AI_CalcDmg(u8, u8);
 
 extern u8 CheckMoveLimitations();
@@ -1756,7 +1756,7 @@ static void BattleAICmd_if_arg_not_equal(void)
 
 static void BattleAICmd_if_would_go_first(void)
 {
-    if (b_first_side(sBank_AI, gBankTarget, 1) == gAIScriptPtr[1])
+    if (GetWhoStrikesFirst(sBank_AI, gBankTarget, 1) == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -1764,7 +1764,7 @@ static void BattleAICmd_if_would_go_first(void)
 
 static void BattleAICmd_if_would_not_go_first(void)
 {
-    if (b_first_side(sBank_AI, gBankTarget, 1) != gAIScriptPtr[1])
+    if (GetWhoStrikesFirst(sBank_AI, gBankTarget, 1) != gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;

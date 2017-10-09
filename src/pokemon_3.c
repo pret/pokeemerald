@@ -486,8 +486,8 @@ u16 SpeciesToCryId(u16 species)
 void sub_806D544(u16 species, u32 personality, u8 *dest)
 {
     if (species == SPECIES_SPINDA
-        && dest != gBattleSpritesGfx->sprites[0]
-        && dest != gBattleSpritesGfx->sprites[2])
+        && dest != gMonSpritesGfxPtr->sprites[0]
+        && dest != gMonSpritesGfxPtr->sprites[2])
     {
         int i;
         for (i = 0; i < 4; i++)
@@ -1518,8 +1518,6 @@ void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u
     else
         DoMonFrontSpriteAnimation(sprite, species, noCry, arg3);
 }
-
-bool8 HasTwoFramesAnimation(u16 species);
 
 extern void SpriteCallbackDummy_2(struct Sprite*);
 extern void sub_817F60C(struct Sprite*);

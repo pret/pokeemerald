@@ -491,14 +491,14 @@ _08175906:
 	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
-	ldr r0, =gUnknown_085B0E04
+	ldr r0, =gBirchHelpGfx
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_085B0C0C
+	ldr r0, =gBirchGrassTilemap
 	ldr r1, =0x06003800
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_085B0A02
+	ldr r0, =gBirchBagGrassPal + 0x2
 	movs r1, 0x1
 	movs r2, 0x3E
 	bl LoadPalette

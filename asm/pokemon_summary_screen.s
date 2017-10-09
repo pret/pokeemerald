@@ -4228,7 +4228,7 @@ _081C4620:
 	lsls r0, r2, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	b _081C46D6
@@ -4238,12 +4238,12 @@ _081C4668:
 	lsls r0, r2, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	b _081C46B0
 	.pool
 _081C4680:
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r3, [r0]
 	adds r4, r0, 0
 	cmp r3, 0

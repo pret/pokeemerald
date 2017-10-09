@@ -14,19 +14,16 @@ gUnknown_085B09F4:: @ 85B09F4
 gUnknown_085B09F8:: @ 85B09F8
 	.incbin "baserom.gba", 0x5b09f8, 0x8
 
-gUnknown_085B0A00:: @ 85B0A00
-	.incbin "baserom.gba", 0x5b0a00, 0x2
+gBirchBagGrassPal:: @ 85B0A00
+	.incbin "baserom.gba", 0x5b0a00, 0x80
 
-gUnknown_085B0A02:: @ 85B0A02
-	.incbin "baserom.gba", 0x5b0a02, 0x7e
-
-gUnknown_085B0A80:: @ 85B0A80
+gBirchBagTilemap:: @ 85B0A80
 	.incbin "baserom.gba", 0x5b0a80, 0x18c
 
-gUnknown_085B0C0C:: @ 85B0C0C
+gBirchGrassTilemap:: @ 85B0C0C
 	.incbin "baserom.gba", 0x5b0c0c, 0x1f8
 
-gUnknown_085B0E04:: @ 85B0E04
+gBirchHelpGfx:: @ 85B0E04
 	.incbin "baserom.gba", 0x5b0e04, 0xfc8
 
 gUnknown_085B1DCC:: @ 85B1DCC

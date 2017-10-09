@@ -84,14 +84,14 @@ gUnknown_0823B68C:: @ 823B68C
 gUnknown_0823C050:: @ 823C050
 	.incbin "baserom.gba", 0x23c050, 0x6431
 
-gUnknown_08242481:: @ 8242481
+gText_BattleRecordCouldntBeSaved:: @ 8242481
 	.incbin "baserom.gba", 0x242481, 0x87b
 
 gUnknown_08242CFC:: @ 8242CFC
 	.incbin "baserom.gba", 0x242cfc, 0x6a91
 
-gUnknown_0824978D:: @ 824978D
-	.incbin "baserom.gba", 0x24978d, 0xe
+gText_LinkStandby3:: @ 824978D
+	.string "Link standby…$"
 
 gUnknown_0824979B:: @ 824979B
 	.incbin "baserom.gba", 0x24979b, 0x944d

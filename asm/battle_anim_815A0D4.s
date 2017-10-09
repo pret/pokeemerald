@@ -1077,10 +1077,10 @@ sub_815A934: @ 815A934
 	lsls r1, 8
 	movs r0, 0
 	bl SetGpuRegBits
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	movs r1, 0
 	strh r1, [r0]
-	ldr r4, =gUnknown_02022E26
+	ldr r4, =gBattle_WIN0V
 	strh r1, [r4]
 	movs r0, 0x40
 	movs r1, 0
@@ -1416,18 +1416,18 @@ sub_815ABEC: @ 815ABEC
 	ldr r1, =0x00001f3f
 	movs r0, 0x48
 	bl SetGpuReg
-	ldr r1, =gUnknown_02022E28
+	ldr r1, =gBattle_WIN1H
 	ldr r2, =0x000098f0
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E2A
+	ldr r1, =gBattle_WIN1V
 	movs r0, 0xA0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	ldrh r1, [r0]
 	movs r0, 0x42
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	ldrh r1, [r0]
 	movs r0, 0x46
 	bl SetGpuReg
@@ -1437,10 +1437,10 @@ _0815AC40:
 	ldr r1, =0x00001f3f
 	movs r0, 0x48
 	bl SetGpuReg
-	ldr r1, =gUnknown_02022E28
+	ldr r1, =gBattle_WIN1H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r4, =gUnknown_02022E2A
+	ldr r4, =gBattle_WIN1V
 	ldr r1, =0x000078a0
 	adds r0, r1, 0
 	strh r0, [r4]
@@ -1471,10 +1471,10 @@ sub_815AC8C: @ 815AC8C
 	ldr r1, =0x00003f3f
 	movs r0, 0x48
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E28
+	ldr r0, =gBattle_WIN1H
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E2A
+	ldr r0, =gBattle_WIN1V
 	strh r1, [r0]
 	bl IsContest
 	lsls r0, 24
@@ -3024,7 +3024,7 @@ _0815B8E0:
 	lsls r0, 24
 	lsrs r1, r0, 24
 _0815B8EA:
-	ldr r0, =gBattleSpritesGfx
+	ldr r0, =gMonSpritesGfxPtr
 	ldr r2, [r0]
 	lsls r0, r1, 2
 	adds r2, 0x4
@@ -3250,7 +3250,7 @@ _0815BAB6:
 	cmp r0, 0
 	bne _0815BAF6
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_020244D0
+	ldr r1, =gBattleSpritesDataPtr
 	ldr r1, [r1]
 	ldr r2, [r1]
 	lsls r1, r0, 2
@@ -5397,10 +5397,10 @@ sub_815CC94: @ 815CC94
 	lsls r1, 8
 	movs r0, 0
 	bl SetGpuRegBits
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	movs r1, 0
 	strh r1, [r0]
-	ldr r4, =gUnknown_02022E26
+	ldr r4, =gBattle_WIN0V
 	strh r1, [r4]
 	movs r0, 0x40
 	movs r1, 0
@@ -5723,7 +5723,7 @@ _0815CF18:
 	movs r1, 0x1
 	bl GetMonData
 	mov r8, r0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
 	ldr r1, [r0]
@@ -5791,7 +5791,7 @@ _0815CFC4:
 	movs r1, 0x1
 	bl GetMonData
 	mov r8, r0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
 	ldr r1, [r0]
@@ -10637,7 +10637,7 @@ _0815F67C:
 	adds r0, r2
 	movs r1, 0x2
 	strh r1, [r0, 0x8]
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
@@ -10762,7 +10762,7 @@ sub_815F7C4: @ 815F7C4
 	ble _0815F80E
 	movs r0, 0
 	strh r0, [r4, 0x30]
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
@@ -11072,7 +11072,7 @@ _0815FA28:
 	movs r1, 0x1
 	bl GetMonData
 	mov r9, r0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
 	ldr r1, [r0]
@@ -11136,7 +11136,7 @@ _0815FAC8:
 	movs r1, 0x1
 	bl GetMonData
 	mov r9, r0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
 	ldr r1, [r0]
@@ -11202,7 +11202,7 @@ _0815FB50:
 	bl sub_80A8394
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldrb r0, [r4]
 	ldr r1, [r1]

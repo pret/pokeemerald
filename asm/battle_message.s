@@ -738,7 +738,7 @@ _0814E730:
 	ldr r5, [sp]
 	ldr r4, [sp, 0x4]
 	movs r3, 0
-	ldr r2, =gUnknown_0831BCA8
+	ldr r2, =gStatusConditionStringsTable
 _0814E738:
 	ldr r1, [r2]
 	ldr r0, [r1]
@@ -2998,7 +2998,7 @@ sub_814FBAC: @ 814FBAC
 	ldr r0, =gBattleBufferA + 4
 	adds r1, r0
 	ldr r4, =gUnknown_08D85620
-	ldr r0, =gUnknown_020244B0
+	ldr r0, =gMoveSelectionCursor
 	adds r2, r0
 	ldrb r2, [r2]
 	adds r0, r1, 0
