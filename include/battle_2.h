@@ -15,6 +15,7 @@ void SwapTurnOrder(u8 id1, u8 id2);
 void BattleTurnPassed(void);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
+u32 sub_80397C4(u32 setId, u32 tableId);
 void sub_8039E9C(struct Sprite *sprite);
 
 extern const u8 gStatusConditionString_PoisonJpn[8];
@@ -25,6 +26,6 @@ extern const u8 gStatusConditionString_IceJpn[8];
 extern const u8 gStatusConditionString_ConfusionJpn[8];
 extern const u8 gStatusConditionString_LoveJpn[8];
 
-extern const u8 * const gStatusConditionStringsTable[][2];
+extern const u8 * const gStatusConditionStringsTable[7][2];
 
 #endif // GUARD_BATTLE_2_H

@@ -41,6 +41,7 @@
 #include "evolution_scene.h"
 #include "roamer.h"
 #include "safari_zone.h"
+#include "battle_string_ids.h"
 
 struct UnknownStruct6
 {
@@ -343,7 +344,7 @@ const u8 gStatusConditionString_IceJpn[8] = _("こおり$$$$");
 const u8 gStatusConditionString_ConfusionJpn[8] = _("こんらん$$$");
 const u8 gStatusConditionString_LoveJpn[8] = _("メロメロ$$$");
 
-const u8 * const gStatusConditionStringsTable[][2] =
+const u8 * const gStatusConditionStringsTable[7][2] =
 {
     {gStatusConditionString_PoisonJpn, gText_Poison},
     {gStatusConditionString_SleepJpn, gText_Sleep},
@@ -3299,7 +3300,7 @@ static void BattleIntroPrintTrainerWantsToBattle(void)
     if (gBattleExecBuffer == 0)
     {
         gActiveBank = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
-        PrepareStringBattle(0, gActiveBank);
+        PrepareStringBattle(STRINGID_INTROMSG, gActiveBank);
         gBattleMainFunc = BattleIntroPrintOpponentSendsOut;
     }
 }
@@ -3309,7 +3310,7 @@ static void BattleIntroPrintWildMonAttacked(void)
     if (gBattleExecBuffer == 0)
     {
         gBattleMainFunc = BattleIntroPrintPlayerSendsOut;
-        PrepareStringBattle(0, 0);
+        PrepareStringBattle(STRINGID_INTROMSG, 0);
     }
 }
 
@@ -3332,7 +3333,7 @@ static void BattleIntroPrintOpponentSendsOut(void)
     else
         identity = IDENTITY_OPPONENT_MON1;
 
-    PrepareStringBattle(1, GetBankByIdentity(identity));
+    PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByIdentity(identity));
     gBattleMainFunc = BattleIntroOpponent1SendsOutMonAnimation;
 }
 
@@ -3535,7 +3536,7 @@ static void BattleIntroPrintPlayerSendsOut(void)
             identity = IDENTITY_PLAYER_MON1;
 
         if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
-            PrepareStringBattle(1, GetBankByIdentity(identity));
+            PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByIdentity(identity));
 
         gBattleMainFunc = BattleIntroPlayer1SendsOutMonAnimation;
     }
@@ -4006,8 +4007,8 @@ static void HandleTurnActionSelectionState(void)
                         for (i = 0; i < 4; i++)
                         {
                             moveInfo.moves[i] = gBattleMons[gActiveBank].moves[i];
-                            moveInfo.ppNumbers[i] = gBattleMons[gActiveBank].pp[i];
-                            moveInfo.ppWithBonusNumbers[i] = CalculatePPWithBonus(
+                            moveInfo.currentPp[i] = gBattleMons[gActiveBank].pp[i];
+                            moveInfo.maxPp[i] = CalculatePPWithBonus(
                                                             gBattleMons[gActiveBank].moves[i],
                                                             gBattleMons[gActiveBank].ppBonuses,
                                                             i);
