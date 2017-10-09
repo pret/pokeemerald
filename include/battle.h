@@ -271,8 +271,6 @@
 #define CMP_COMMON_BITS         0x4
 #define CMP_NO_COMMON_BITS      0x5
 
-#include "global.h"
-
 struct TrainerMonNoItemDefaultMoves
 {
     u16 iv;
