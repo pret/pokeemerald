@@ -520,16 +520,16 @@ struct GabbyAndTyData
     /*2baa*/ u16 quote[1];
     /*2bac*/ u8 mapnum;
     /*2bad*/ u8 battleNum;
-    /*2bae*/ u8 valA_0:1;
-    /*2bae*/ u8 not_total_victory:1; // TRUE if at least one of the player's pokemon fainted during the battle
-    /*2bae*/ u8 valA_2:1;
-    /*2bae*/ u8 valA_3:1;
+    /*2bae*/ u8 battleTookMoreThanOneTurn:1;
+    /*2bae*/ u8 playerLostAMon:1;
+    /*2bae*/ u8 playerUsedAnItem:1;
+    /*2bae*/ u8 playerThrewABall:1;
     /*2bae*/ u8 onAir:1;
     /*2bae*/ u8 valA_5:3;
-    /*2baf*/ u8 valB_0:1;
-    /*2baf*/ u8 valB_1:1;
-    /*2baf*/ u8 valB_2:1;
-    /*2baf*/ u8 valB_3:1;
+    /*2baf*/ u8 battleTookMoreThanOneTurn2:1;
+    /*2baf*/ u8 playerLostAMon2:1;
+    /*2baf*/ u8 playerUsedAnItem2:1;
+    /*2baf*/ u8 playerThrewABall2:1;
     /*2baf*/ u8 valB_4:4;
 };
 

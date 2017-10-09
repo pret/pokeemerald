@@ -853,16 +853,16 @@ void ResetGabbyAndTy(void)
     gSaveBlock1Ptr->gabbyAndTyData.mon2 = SPECIES_NONE;
     gSaveBlock1Ptr->gabbyAndTyData.lastMove = MOVE_NONE;
     gSaveBlock1Ptr->gabbyAndTyData.quote[0] = -1;
-    gSaveBlock1Ptr->gabbyAndTyData.valA_0 = FALSE;
-    gSaveBlock1Ptr->gabbyAndTyData.not_total_victory = FALSE;
-    gSaveBlock1Ptr->gabbyAndTyData.valA_2 = FALSE;
-    gSaveBlock1Ptr->gabbyAndTyData.valA_3 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.onAir = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valA_5 = 0;
-    gSaveBlock1Ptr->gabbyAndTyData.valB_0 = FALSE;
-    gSaveBlock1Ptr->gabbyAndTyData.valB_1 = FALSE;
-    gSaveBlock1Ptr->gabbyAndTyData.valB_2 = FALSE;
-    gSaveBlock1Ptr->gabbyAndTyData.valB_3 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn2 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon2 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem2 = FALSE;
+    gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall2 = FALSE;
     gSaveBlock1Ptr->gabbyAndTyData.valB_4 = 0;
     gSaveBlock1Ptr->gabbyAndTyData.mapnum = 0;
     gSaveBlock1Ptr->gabbyAndTyData.battleNum = 0;
@@ -879,22 +879,22 @@ void GabbyAndTyBeforeInterview(void)
     {
         gSaveBlock1Ptr->gabbyAndTyData.battleNum ++;
     }
-    gSaveBlock1Ptr->gabbyAndTyData.valA_0 = gBattleResults.unk5_0;
+    gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = gBattleResults.unk5_0;
     if (gBattleResults.playerFaintCounter != 0)
     {
-        gSaveBlock1Ptr->gabbyAndTyData.not_total_victory = TRUE;
+        gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon = TRUE;
     }
     else
     {
-        gSaveBlock1Ptr->gabbyAndTyData.not_total_victory = FALSE;
+        gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon = FALSE;
     }
     if (gBattleResults.unk3 != 0)
     {
-        gSaveBlock1Ptr->gabbyAndTyData.valA_2 = TRUE;
+        gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem = TRUE;
     }
     else
     {
-        gSaveBlock1Ptr->gabbyAndTyData.valA_2 = FALSE;
+        gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem = FALSE;
     }
     if (!gBattleResults.usedMasterBall)
     {
@@ -902,14 +902,14 @@ void GabbyAndTyBeforeInterview(void)
         {
             if (gBattleResults.catchAttempts[i])
             {
-                gSaveBlock1Ptr->gabbyAndTyData.valA_3 = TRUE;
+                gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall = TRUE;
                 break;
             }
         }
     }
     else
     {
-        gSaveBlock1Ptr->gabbyAndTyData.valA_3 = TRUE;
+        gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall = TRUE;
     }
     TakeTVShowInSearchOfTrainersOffTheAir();
     if (gSaveBlock1Ptr->gabbyAndTyData.lastMove == MOVE_NONE)
@@ -920,10 +920,10 @@ void GabbyAndTyBeforeInterview(void)
 
 void GabbyAndTyAfterInterview(void)
 {
-    gSaveBlock1Ptr->gabbyAndTyData.valB_0 = gSaveBlock1Ptr->gabbyAndTyData.valA_0;
-    gSaveBlock1Ptr->gabbyAndTyData.valB_1 = gSaveBlock1Ptr->gabbyAndTyData.not_total_victory;
-    gSaveBlock1Ptr->gabbyAndTyData.valB_2 = gSaveBlock1Ptr->gabbyAndTyData.valA_2;
-    gSaveBlock1Ptr->gabbyAndTyData.valB_3 = gSaveBlock1Ptr->gabbyAndTyData.valA_3;
+    gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn2 = gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn;
+    gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon2 = gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon;
+    gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem2 = gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem;
+    gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall2 = gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall;
     gSaveBlock1Ptr->gabbyAndTyData.onAir = TRUE;
     gSaveBlock1Ptr->gabbyAndTyData.mapnum = gMapHeader.regionMapSectionId;
     IncrementGameStat(GAME_STAT_GOT_INTERVIEWED);
@@ -961,19 +961,19 @@ bool8 GabbyAndTyGetLastQuote(void)
 
 u8 GabbyAndTyGetLastBattleTrivia(void)
 {
-    if (!gSaveBlock1Ptr->gabbyAndTyData.valB_0)
+    if (!gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn2)
     {
         return 1;
     }
-    if (gSaveBlock1Ptr->gabbyAndTyData.valB_3)
+    if (gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall2)
     {
         return 2;
     }
-    if (gSaveBlock1Ptr->gabbyAndTyData.valB_2)
+    if (gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem2)
     {
         return 3;
     }
-    if (gSaveBlock1Ptr->gabbyAndTyData.valB_1)
+    if (gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon2)
     {
         return 4;
     }
@@ -6315,19 +6315,19 @@ void DoTVShowInSearchOfTrainers(void)
             sTVShowState = 2;
             break;
         case 2:
-            if (!gSaveBlock1Ptr->gabbyAndTyData.valA_0)
+            if (!gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn)
             {
                 sTVShowState = 4;
             }
-            else if (gSaveBlock1Ptr->gabbyAndTyData.valA_3)
+            else if (gSaveBlock1Ptr->gabbyAndTyData.playerThrewABall)
             {
                 sTVShowState = 5;
             }
-            else if (gSaveBlock1Ptr->gabbyAndTyData.valA_2)
+            else if (gSaveBlock1Ptr->gabbyAndTyData.playerUsedAnItem)
             {
                 sTVShowState = 6;
             }
-            else if (gSaveBlock1Ptr->gabbyAndTyData.not_total_victory)
+            else if (gSaveBlock1Ptr->gabbyAndTyData.playerLostAMon)
             {
                 sTVShowState = 7;
             }
