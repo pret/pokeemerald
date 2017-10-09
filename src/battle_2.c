@@ -245,7 +245,7 @@ static void sub_8038F34(void);
 static void sub_80392A8(void);
 static void sub_803937C(void);
 static void sub_803939C(void);
-static void oac_poke_opponent(struct Sprite *sprite);
+void oac_poke_opponent(struct Sprite *sprite);
 static void sub_803980C(struct Sprite *sprite);
 static void sub_8039838(struct Sprite *sprite);
 static void sub_8039894(struct Sprite *sprite);
@@ -1650,7 +1650,7 @@ void CB2_QuitRecordedBattle(void)
     }
 }
 
-static void sub_8038528(struct Sprite* sprite)
+void sub_8038528(struct Sprite* sprite)
 {
     sprite->data0 = 0;
     sprite->callback = sub_8038538;
@@ -2417,7 +2417,7 @@ u32 sub_80397C4(u32 setId, u32 tableId)
 #define tBank               data0
 #define tSpeciesId          data2
 
-static void oac_poke_opponent(struct Sprite *sprite)
+void oac_poke_opponent(struct Sprite *sprite)
 {
     sprite->callback = sub_803980C;
     StartSpriteAnimIfDifferent(sprite, 0);

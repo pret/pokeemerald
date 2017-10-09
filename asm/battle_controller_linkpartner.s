@@ -3706,7 +3706,7 @@ _0814D002:
 	bl sub_806A12C
 	ldr r6, =gUnknown_0202499C
 	mov r8, r7
-	ldr r0, =gUnknown_08305D2C
+	ldr r0, =gTrainerBackPicCoords
 	lsls r4, 2
 	adds r4, r0
 	ldrb r0, [r4]
