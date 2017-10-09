@@ -63,6 +63,7 @@ extern void sub_8069004(struct BoxPokemon* a, void* b);
 extern void sub_81C1E20(u8 taskId);
 
 extern u32 ChangeBgX(u8 bg, u32 value, u8 op);
+extern void sub_8199C30(u8 a, u8 b, u8 c, u8 d, u8 e, u8 f);
 
 void sub_81BFAE4(void);
 void sub_81BFE24();
@@ -2194,7 +2195,9 @@ void sub_81C20F0(u8 taskId)
     }
 }
 
-/* void sub_81C2194(u16 *a, u16 b, u8 c)
+// somebody send help this is a complete fucking mess
+#ifdef NONMATCHING
+void sub_81C2194(u16 *a, u16 b, u8 c)
 {
     u16 i;
     int var;
@@ -2219,4 +2222,108 @@ void sub_81C20F0(u8 taskId)
             a[((i + var)) + 0x80] = gUnknown_08DC3CD4[i + 40] + b;
         }
     }
-} */
+}
+#else
+__attribute__((naked))
+void sub_81C2194(u16 *a, u16 b, u8 c)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+	adds r6, r0, 0\n\
+	lsls r2, 24\n\
+	lsls r1, 28\n\
+	lsrs r4, r1, 16\n\
+	ldr r7, =0x0000056a\n\
+	cmp r2, 0\n\
+	bne _081C21E4\n\
+	movs r3, 0\n\
+	ldr r5, =gUnknown_08DC3CD4\n\
+_081C21A8:\n\
+	adds r2, r7, r3\n\
+	lsls r2, 1\n\
+	adds r2, r6\n\
+	lsls r0, r3, 1\n\
+	adds r0, r5\n\
+	ldrh r1, [r0]\n\
+	adds r1, r4, r1\n\
+	strh r1, [r2]\n\
+	adds r0, r2, 0\n\
+	adds r0, 0x40\n\
+	strh r1, [r0]\n\
+	adds r2, 0x80\n\
+	adds r0, r3, 0\n\
+	adds r0, 0x14\n\
+	lsls r0, 1\n\
+	adds r0, r5\n\
+	ldrh r0, [r0]\n\
+	adds r0, r4, r0\n\
+	strh r0, [r2]\n\
+	adds r0, r3, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r3, r0, 16\n\
+	cmp r3, 0x13\n\
+	bls _081C21A8\n\
+	b _081C221C\n\
+	.pool\n\
+_081C21E4:\n\
+	movs r3, 0\n\
+	ldr r5, =gUnknown_08DC3CD4\n\
+_081C21E8:\n\
+	adds r1, r7, r3\n\
+	lsls r1, 1\n\
+	adds r1, r6\n\
+	adds r0, r3, 0\n\
+	adds r0, 0x14\n\
+	lsls r0, 1\n\
+	adds r0, r5\n\
+	ldrh r0, [r0]\n\
+	adds r0, r4, r0\n\
+	strh r0, [r1]\n\
+	adds r2, r1, 0\n\
+	adds r2, 0x40\n\
+	adds r0, r3, 0\n\
+	adds r0, 0x28\n\
+	lsls r0, 1\n\
+	adds r0, r5\n\
+	ldrh r0, [r0]\n\
+	adds r0, r4, r0\n\
+	strh r0, [r2]\n\
+	adds r1, 0x80\n\
+	strh r0, [r1]\n\
+	adds r0, r3, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r3, r0, 16\n\
+	cmp r3, 0x13\n\
+	bls _081C21E8\n\
+_081C221C:\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+	.syntax divided\n");
+}
+#endif
+
+void sub_81C2228(struct Pokemon *mon)
+{
+    if (!CheckPartyPokerus(mon, 0) && CheckPartyHasHadPokerus(mon, 0))
+    {
+        gUnknown_0203CF1C->unkTilemap0[0x223] = 0x2C;
+        gUnknown_0203CF1C->unkTilemap0_1[0x223] = 0x2C;
+    }
+    else
+    {
+        gUnknown_0203CF1C->unkTilemap0[0x223] = 0x81A;
+        gUnknown_0203CF1C->unkTilemap0_1[0x223] = 0x81A;
+    }
+    schedule_bg_copy_tilemap_to_vram(3);
+}
+
+void sub_81C228C(u8 a)
+{
+    if (a == 0)
+        sub_8199C30(3, 1, 4, 8, 8, 0);
+    else
+        sub_8199C30(3, 1, 4, 8, 8, 5);
+    schedule_bg_copy_tilemap_to_vram(3);
+}
