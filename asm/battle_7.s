@@ -2541,7 +2541,7 @@ _0805E662:
 	ldr r1, =gSprites
 	adds r1, 0x8
 	adds r0, r1
-	ldr r1, =gUnknown_08309AAC
+	ldr r1, =gMonAnimationsSpriteAnimsPtrTable
 	mov r3, r8
 	lsls r2, r3, 2
 	adds r1, r2

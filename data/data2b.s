@@ -104,11 +104,12 @@ gUnknown_082FF518:: @ 82FF518
 	obj_frame_tiles gTrainerBackPic_Steven + 0x1800, 0x0800
 
 	.align 2
-gUnknown_082FF538:: @ 82FF538
-	.2byte 0x0000, 0x0000, 0xffff, 0x0000
+gAnimCmd_General_Frame0:: @ 82FF538
+    obj_image_anim_frame 0, 0
+    obj_image_anim_end
 
 	.align 2
-gUnknown_082FF540:: @ 82FF540
+AnimCmd_82FF540:: @ 82FF540
 	.2byte 0x0003, 0x0000, 0xffff, 0x0000
 
 	.align 2
@@ -806,1039 +807,1039 @@ gUnknown_082FFDC4:: @ 82FFDC4
 
 	.align 2
 gUnknown_082FFDCC:: @ 82FFDCC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDD0:: @ 82FFDD0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDD4:: @ 82FFDD4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDD8:: @ 82FFDD8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDDC:: @ 82FFDDC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDE0:: @ 82FFDE0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDE4:: @ 82FFDE4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDE8:: @ 82FFDE8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDEC:: @ 82FFDEC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDF0:: @ 82FFDF0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDF4:: @ 82FFDF4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDF8:: @ 82FFDF8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFDFC:: @ 82FFDFC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE00:: @ 82FFE00
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE04:: @ 82FFE04
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE08:: @ 82FFE08
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE0C:: @ 82FFE0C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE10:: @ 82FFE10
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE14:: @ 82FFE14
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE18:: @ 82FFE18
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE1C:: @ 82FFE1C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE20:: @ 82FFE20
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE24:: @ 82FFE24
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE28:: @ 82FFE28
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE2C:: @ 82FFE2C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE30:: @ 82FFE30
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE34:: @ 82FFE34
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE38:: @ 82FFE38
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE3C:: @ 82FFE3C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE40:: @ 82FFE40
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE44:: @ 82FFE44
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE48:: @ 82FFE48
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE4C:: @ 82FFE4C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE50:: @ 82FFE50
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE54:: @ 82FFE54
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE58:: @ 82FFE58
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE5C:: @ 82FFE5C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE60:: @ 82FFE60
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE64:: @ 82FFE64
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE68:: @ 82FFE68
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE6C:: @ 82FFE6C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE70:: @ 82FFE70
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE74:: @ 82FFE74
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE78:: @ 82FFE78
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE7C:: @ 82FFE7C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE80:: @ 82FFE80
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE84:: @ 82FFE84
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE88:: @ 82FFE88
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE8C:: @ 82FFE8C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE90:: @ 82FFE90
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE94:: @ 82FFE94
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE98:: @ 82FFE98
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFE9C:: @ 82FFE9C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEA0:: @ 82FFEA0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEA4:: @ 82FFEA4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEA8:: @ 82FFEA8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEAC:: @ 82FFEAC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEB0:: @ 82FFEB0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEB4:: @ 82FFEB4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEB8:: @ 82FFEB8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEBC:: @ 82FFEBC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEC0:: @ 82FFEC0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEC4:: @ 82FFEC4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEC8:: @ 82FFEC8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFECC:: @ 82FFECC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFED0:: @ 82FFED0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFED4:: @ 82FFED4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFED8:: @ 82FFED8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEDC:: @ 82FFEDC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEE0:: @ 82FFEE0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEE4:: @ 82FFEE4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEE8:: @ 82FFEE8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEEC:: @ 82FFEEC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEF0:: @ 82FFEF0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEF4:: @ 82FFEF4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEF8:: @ 82FFEF8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFEFC:: @ 82FFEFC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF00:: @ 82FFF00
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF04:: @ 82FFF04
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF08:: @ 82FFF08
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF0C:: @ 82FFF0C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF10:: @ 82FFF10
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF14:: @ 82FFF14
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF18:: @ 82FFF18
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF1C:: @ 82FFF1C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF20:: @ 82FFF20
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF24:: @ 82FFF24
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF28:: @ 82FFF28
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF2C:: @ 82FFF2C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF30:: @ 82FFF30
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF34:: @ 82FFF34
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF38:: @ 82FFF38
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF3C:: @ 82FFF3C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF40:: @ 82FFF40
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF44:: @ 82FFF44
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF48:: @ 82FFF48
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF4C:: @ 82FFF4C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF50:: @ 82FFF50
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF54:: @ 82FFF54
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF58:: @ 82FFF58
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF5C:: @ 82FFF5C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF60:: @ 82FFF60
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF64:: @ 82FFF64
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF68:: @ 82FFF68
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF6C:: @ 82FFF6C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF70:: @ 82FFF70
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF74:: @ 82FFF74
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF78:: @ 82FFF78
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF7C:: @ 82FFF7C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF80:: @ 82FFF80
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF84:: @ 82FFF84
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF88:: @ 82FFF88
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF8C:: @ 82FFF8C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF90:: @ 82FFF90
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF94:: @ 82FFF94
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF98:: @ 82FFF98
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFF9C:: @ 82FFF9C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFA0:: @ 82FFFA0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFA4:: @ 82FFFA4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFA8:: @ 82FFFA8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFAC:: @ 82FFFAC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFB0:: @ 82FFFB0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFB4:: @ 82FFFB4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFB8:: @ 82FFFB8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFBC:: @ 82FFFBC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFC0:: @ 82FFFC0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFC4:: @ 82FFFC4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFC8:: @ 82FFFC8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFCC:: @ 82FFFCC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFD0:: @ 82FFFD0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFD4:: @ 82FFFD4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFD8:: @ 82FFFD8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFDC:: @ 82FFFDC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFE0:: @ 82FFFE0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFE4:: @ 82FFFE4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFE8:: @ 82FFFE8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFEC:: @ 82FFFEC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFF0:: @ 82FFFF0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFF4:: @ 82FFFF4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFF8:: @ 82FFFF8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_082FFFFC:: @ 82FFFFC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300000:: @ 8300000
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300004:: @ 8300004
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300008:: @ 8300008
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830000C:: @ 830000C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300010:: @ 8300010
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300014:: @ 8300014
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300018:: @ 8300018
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830001C:: @ 830001C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300020:: @ 8300020
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300024:: @ 8300024
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300028:: @ 8300028
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830002C:: @ 830002C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300030:: @ 8300030
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300034:: @ 8300034
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300038:: @ 8300038
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830003C:: @ 830003C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300040:: @ 8300040
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300044:: @ 8300044
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300048:: @ 8300048
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830004C:: @ 830004C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300050:: @ 8300050
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300054:: @ 8300054
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300058:: @ 8300058
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830005C:: @ 830005C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300060:: @ 8300060
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300064:: @ 8300064
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300068:: @ 8300068
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830006C:: @ 830006C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300070:: @ 8300070
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300074:: @ 8300074
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300078:: @ 8300078
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830007C:: @ 830007C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300080:: @ 8300080
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300084:: @ 8300084
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300088:: @ 8300088
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830008C:: @ 830008C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300090:: @ 8300090
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300094:: @ 8300094
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300098:: @ 8300098
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830009C:: @ 830009C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000A0:: @ 83000A0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000A4:: @ 83000A4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000A8:: @ 83000A8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000AC:: @ 83000AC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000B0:: @ 83000B0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000B4:: @ 83000B4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000B8:: @ 83000B8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000BC:: @ 83000BC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000C0:: @ 83000C0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000C4:: @ 83000C4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000C8:: @ 83000C8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000CC:: @ 83000CC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000D0:: @ 83000D0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000D4:: @ 83000D4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000D8:: @ 83000D8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000DC:: @ 83000DC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000E0:: @ 83000E0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000E4:: @ 83000E4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000E8:: @ 83000E8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000EC:: @ 83000EC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000F0:: @ 83000F0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000F4:: @ 83000F4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000F8:: @ 83000F8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083000FC:: @ 83000FC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300100:: @ 8300100
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300104:: @ 8300104
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300108:: @ 8300108
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830010C:: @ 830010C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300110:: @ 8300110
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300114:: @ 8300114
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300118:: @ 8300118
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830011C:: @ 830011C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300120:: @ 8300120
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300124:: @ 8300124
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300128:: @ 8300128
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830012C:: @ 830012C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300130:: @ 8300130
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300134:: @ 8300134
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300138:: @ 8300138
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830013C:: @ 830013C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300140:: @ 8300140
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300144:: @ 8300144
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300148:: @ 8300148
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830014C:: @ 830014C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300150:: @ 8300150
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300154:: @ 8300154
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300158:: @ 8300158
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830015C:: @ 830015C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300160:: @ 8300160
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300164:: @ 8300164
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300168:: @ 8300168
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830016C:: @ 830016C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300170:: @ 8300170
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300174:: @ 8300174
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300178:: @ 8300178
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830017C:: @ 830017C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300180:: @ 8300180
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300184:: @ 8300184
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300188:: @ 8300188
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830018C:: @ 830018C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300190:: @ 8300190
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300194:: @ 8300194
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300198:: @ 8300198
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830019C:: @ 830019C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001A0:: @ 83001A0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001A4:: @ 83001A4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001A8:: @ 83001A8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001AC:: @ 83001AC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001B0:: @ 83001B0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001B4:: @ 83001B4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001B8:: @ 83001B8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001BC:: @ 83001BC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001C0:: @ 83001C0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001C4:: @ 83001C4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001C8:: @ 83001C8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001CC:: @ 83001CC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001D0: @ 83001D0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001D4:: @ 83001D4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF71C
 	.4byte gUnknown_082FF734
 	.4byte gUnknown_082FF744
@@ -1846,163 +1847,163 @@ gUnknown_083001D4:: @ 83001D4
 
 	.align 2
 gUnknown_083001E8:: @ 83001E8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083001EC:: @ 83001EC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF758
 	.4byte gUnknown_082FF774
 	.4byte gUnknown_082FF790
 
 	.align 2
 gUnknown_083001FC:: @ 83001FC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300200:: @ 8300200
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF79C
 	.4byte gUnknown_082FF7B0
 
 	.align 2
 gUnknown_0830020C:: @ 830020C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF7C4
 
 	.align 2
 gUnknown_08300214:: @ 8300214
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF7CC
 
 	.align 2
 gUnknown_0830021C:: @ 830021C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF7D4
 
 	.align 2
 gUnknown_08300224:: @ 8300224
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF7DC
 	.4byte gUnknown_082FF7E4
 
 	.align 2
 gUnknown_08300230:: @ 8300230
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF7EC
 	.4byte gUnknown_082FF7F4
 
 	.align 2
 gUnknown_0830023C:: @ 830023C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF7FC
 	.4byte gUnknown_082FF804
 
 	.align 2
 gUnknown_08300248:: @ 8300248
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF80C
 	.4byte gUnknown_082FF814
 
 	.align 2
 gUnknown_08300254:: @ 8300254
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF81C
 	.4byte gUnknown_082FF824
 
 	.align 2
 gUnknown_08300260:: @ 8300260
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300264:: @ 8300264
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF82C
 
 	.align 2
 gUnknown_0830026C:: @ 830026C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF834
 	.4byte gUnknown_082FF83C
 
 	.align 2
 gUnknown_08300278:: @ 8300278
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF844
 
 	.align 2
 gUnknown_08300280:: @ 8300280
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF84C
 
 	.align 2
 gUnknown_08300288:: @ 8300288
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF854
 	.4byte gUnknown_082FF85C
 
 	.align 2
 gUnknown_08300294:: @ 8300294
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300298:: @ 8300298
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830029C:: @ 830029C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083002A0:: @ 83002A0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF864
 
 	.align 2
 gUnknown_083002A8:: @ 83002A8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF86C
 
 	.align 2
 gUnknown_083002B0:: @ 83002B0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF874
 
 	.align 2
 gUnknown_083002B8:: @ 83002B8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF87C
 
 	.align 2
 gUnknown_083002C0:: @ 83002C0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083002C4:: @ 83002C4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF884
 
 	.align 2
 gUnknown_083002CC:: @ 83002CC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF88C
 	.4byte gUnknown_082FF894
 
 	.align 2
 gUnknown_083002D8:: @ 83002D8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF89C
 	.4byte gUnknown_082FF8A4
 
 	.align 2
 gUnknown_083002E4:: @ 83002E4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF8AC
 	.4byte gUnknown_082FF8B4
 
 	.align 2
 gUnknown_083002F0:: @ 83002F0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF8BC
 	.4byte gUnknown_082FF8FC
 	.4byte gUnknown_082FF91C
@@ -2010,21 +2011,21 @@ gUnknown_083002F0:: @ 83002F0
 
 	.align 2
 gUnknown_08300304:: @ 8300304
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300308:: @ 8300308
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF93C
 
 	.align 2
 gUnknown_08300310:: @ 8300310
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF944
 
 	.align 2
 gUnknown_08300318:: @ 8300318
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FF94C
 	.4byte gUnknown_082FF9A8
 	.4byte gUnknown_082FFA00
@@ -2032,165 +2033,165 @@ gUnknown_08300318:: @ 8300318
 
 	.align 2
 gUnknown_0830032C:: @ 830032C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFA64
 
 	.align 2
 gUnknown_08300334:: @ 8300334
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFA6C
 
 	.align 2
 gUnknown_0830033C:: @ 830033C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFA74
 
 	.align 2
 gUnknown_08300344:: @ 8300344
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300348:: @ 8300348
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFA7C
 	.4byte gUnknown_082FFA84
 
 	.align 2
 gUnknown_08300354:: @ 8300354
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300358:: @ 8300358
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830035C:: @ 830035C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFA8C
 	.4byte gUnknown_082FFA94
 
 	.align 2
 gUnknown_08300368:: @ 8300368
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830036C:: @ 830036C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300370:: @ 8300370
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFA9C
 	.4byte gUnknown_082FFAA4
 
 	.align 2
 gUnknown_0830037C:: @ 830037C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFAAC
 	.4byte gUnknown_082FFAB4
 
 	.align 2
 gUnknown_08300388:: @ 8300388
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFABC
 	.4byte gUnknown_082FFAC4
 
 	.align 2
 gUnknown_08300394:: @ 8300394
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFACC
 	.4byte gUnknown_082FFAD4
 
 	.align 2
 gUnknown_083003A0:: @ 83003A0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFADC
 
 	.align 2
 gUnknown_083003A8:: @ 83003A8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFAE4
 
 	.align 2
 gUnknown_083003B0:: @ 83003B0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFAEC
 
 	.align 2
 gUnknown_083003B8:: @ 83003B8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFAF4
 
 	.align 2
 gUnknown_083003C0:: @ 83003C0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFAFC
 
 	.align 2
 gUnknown_083003C8:: @ 83003C8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFB04
 	.4byte gUnknown_082FFB0C
 
 	.align 2
 gUnknown_083003D4:: @ 83003D4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFB14
 
 	.align 2
 gUnknown_083003DC:: @ 83003DC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFB1C
 	.4byte gUnknown_082FFB24
 
 	.align 2
 gUnknown_083003E8:: @ 83003E8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFB2C
 
 	.align 2
 gUnknown_083003F0:: @ 83003F0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFB34
 
 	.align 2
 gUnknown_083003F8:: @ 83003F8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFB3C
 
 	.align 2
 gUnknown_08300400:: @ 8300400
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFB44
 	.4byte gUnknown_082FFB60
 
 	.align 2
 gUnknown_0830040C:: @ 830040C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300410:: @ 8300410
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300414:: @ 8300414
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300418:: @ 8300418
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830041C:: @ 830041C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300420:: @ 8300420
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300424:: @ 8300424
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFB7C
 	.4byte gUnknown_082FFBBC
 	.4byte gUnknown_082FFBE0
@@ -2198,174 +2199,174 @@ gUnknown_08300424:: @ 8300424
 
 	.align 2
 gUnknown_08300438:: @ 8300438
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFBFC
 	.4byte gUnknown_082FFC04
 
 	.align 2
 gUnknown_08300444:: @ 8300444
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC0C
 
 	.align 2
 gUnknown_0830044C:: @ 830044C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC14
 
 	.align 2
 gUnknown_08300454:: @ 8300454
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC1C
 
 	.align 2
 gUnknown_0830045C:: @ 830045C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC24
 
 	.align 2
 gUnknown_08300464:: @ 8300464
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC2C
 
 	.align 2
 gUnknown_0830046C:: @ 830046C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC34
 
 	.align 2
 gUnknown_08300474:: @ 8300474
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC3C
 	.4byte gUnknown_082FFC58
 
 	.align 2
 gUnknown_08300480:: @ 8300480
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC74
 
 	.align 2
 gUnknown_08300488:: @ 8300488
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC7C
 	.4byte gUnknown_082FFC84
 
 	.align 2
 gUnknown_08300494:: @ 8300494
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC8C
 	.4byte gUnknown_082FFC94
 
 	.align 2
 gUnknown_083004A0:: @ 83004A0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFC9C
 	.4byte gUnknown_082FFCA4
 
 	.align 2
 gUnknown_083004AC:: @ 83004AC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083004B0:: @ 83004B0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFCAC
 
 	.align 2
 gUnknown_083004B8:: @ 83004B8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFCB4
 
 	.align 2
 gUnknown_083004C0:: @ 83004C0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFCBC
 
 	.align 2
 gUnknown_083004C8:: @ 83004C8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFCC4
 
 	.align 2
 gUnknown_083004D0:: @ 83004D0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFCCC
 
 	.align 2
 gUnknown_083004D8:: @ 83004D8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFCD4
 
 	.align 2
 gUnknown_083004E0:: @ 83004E0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083004E4:: @ 83004E4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083004E8:: @ 83004E8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083004EC:: @ 83004EC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFCDC
 
 	.align 2
 gUnknown_083004F4:: @ 83004F4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083004F8:: @ 83004F8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083004FC:: @ 83004FC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFCE4
 
 	.align 2
 gUnknown_08300504:: @ 8300504
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFCEC
 	.4byte gUnknown_082FFCF4
 
 	.align 2
 gUnknown_08300510:: @ 8300510
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFCFC
 
 	.align 2
 gUnknown_08300518:: @ 8300518
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830051C:: @ 830051C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300520:: @ 8300520
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300524:: @ 8300524
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD04
 
 	.align 2
 gUnknown_0830052C:: @ 830052C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD0C
 
 	.align 2
 gUnknown_08300534:: @ 8300534
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD14
 
 	.align 2
 gUnknown_0830053C:: @ 830053C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD1C
 	.4byte gUnknown_082FFD24
 	.4byte gUnknown_082FFD2C
@@ -2373,228 +2374,228 @@ gUnknown_0830053C:: @ 830053C
 
 	.align 2
 gUnknown_08300550:: @ 8300550
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD3C
 
 	.align 2
 gUnknown_08300558:: @ 8300558
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD44
 
 	.align 2
 gUnknown_08300560:: @ 8300560
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300564:: @ 8300564
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300568:: @ 8300568
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830056C:: @ 830056C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300570:: @ 8300570
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300574:: @ 8300574
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300578:: @ 8300578
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830057C:: @ 830057C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD4C
 	.4byte gUnknown_082FFD54
 
 	.align 2
 gUnknown_08300588:: @ 8300588
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830058C:: @ 830058C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD5C
 	.4byte gUnknown_082FFD64
 
 	.align 2
 gUnknown_08300598:: @ 8300598
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830059C:: @ 830059C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005A0:: @ 83005A0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005A4:: @ 83005A4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD6C
 
 	.align 2
 gUnknown_083005AC:: @ 83005AC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD74
 
 	.align 2
 gUnknown_083005B4:: @ 83005B4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD7C
 	.4byte gUnknown_082FFD84
 
 	.align 2
 gUnknown_083005C0:: @ 83005C0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005C4:: @ 83005C4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005C8:: @ 83005C8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFD8C
 	.4byte gUnknown_082FFDA0
 
 	.align 2
 gUnknown_083005D4:: @ 83005D4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005D8:: @ 83005D8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005DC:: @ 83005DC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_082FFDC4
 
 	.align 2
 gUnknown_083005E4:: @ 83005E4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005E8:: @ 83005E8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005EC:: @ 83005EC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005F0:: @ 83005F0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005F4:: @ 83005F4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005F8:: @ 83005F8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083005FC:: @ 83005FC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300600:: @ 8300600
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300604:: @ 8300604
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300608:: @ 8300608
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830060C:: @ 830060C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300610:: @ 8300610
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300614:: @ 8300614
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300618:: @ 8300618
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830061C:: @ 830061C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300620:: @ 8300620
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300624:: @ 8300624
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300628:: @ 8300628
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830062C:: @ 830062C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300630:: @ 8300630
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300634:: @ 8300634
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300638:: @ 8300638
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830063C:: @ 830063C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300640:: @ 8300640
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300644:: @ 8300644
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300648:: @ 8300648
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830064C:: @ 830064C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300650:: @ 8300650
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08300654:: @ 8300654
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.4byte gUnknown_082FFDCC
 	.4byte gUnknown_082FFDD0
@@ -3936,375 +3937,375 @@ gUnknown_083021D8:: @ 83021D8
 	.include "data/graphics/pokemon/shiny_palette_table.inc"
 
 gUnknown_083051F8:: @ 83051F8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083051FC:: @ 83051FC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305200:: @ 8305200
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305204:: @ 8305204
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305208:: @ 8305208
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830520C:: @ 830520C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305210:: @ 8305210
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305214:: @ 8305214
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305218:: @ 8305218
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830521C:: @ 830521C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305220:: @ 8305220
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305224:: @ 8305224
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305228:: @ 8305228
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830522C:: @ 830522C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305230:: @ 8305230
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305234:: @ 8305234
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305238:: @ 8305238
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830523C:: @ 830523C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305240:: @ 8305240
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305244:: @ 8305244
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305248:: @ 8305248
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830524C:: @ 830524C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305250:: @ 8305250
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305254:: @ 8305254
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305258:: @ 8305258
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830525C:: @ 830525C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305260:: @ 8305260
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305264:: @ 8305264
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305268:: @ 8305268
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830526C:: @ 830526C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305270:: @ 8305270
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305274:: @ 8305274
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305278:: @ 8305278
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830527C:: @ 830527C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305280:: @ 8305280
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305284:: @ 8305284
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305288:: @ 8305288
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830528C:: @ 830528C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305290:: @ 8305290
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305294:: @ 8305294
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305298:: @ 8305298
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830529C:: @ 830529C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052A0:: @ 83052A0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052A4:: @ 83052A4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052A8:: @ 83052A8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052AC:: @ 83052AC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052B0:: @ 83052B0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052B4:: @ 83052B4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052B8:: @ 83052B8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052BC:: @ 83052BC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052C0:: @ 83052C0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052C4:: @ 83052C4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052C8:: @ 83052C8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052CC:: @ 83052CC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052D0:: @ 83052D0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052D4:: @ 83052D4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052D8:: @ 83052D8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052DC:: @ 83052DC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052E0:: @ 83052E0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052E4:: @ 83052E4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052E8:: @ 83052E8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052EC:: @ 83052EC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052F0:: @ 83052F0
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052F4:: @ 83052F4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052F8:: @ 83052F8
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_083052FC:: @ 83052FC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305300:: @ 8305300
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305304:: @ 8305304
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305308:: @ 8305308
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830530C:: @ 830530C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305310:: @ 8305310
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305314:: @ 8305314
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305318:: @ 8305318
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830531C:: @ 830531C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305320:: @ 8305320
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305324:: @ 8305324
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305328:: @ 8305328
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830532C:: @ 830532C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305330:: @ 8305330
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305334:: @ 8305334
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305338:: @ 8305338
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830533C:: @ 830533C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305340:: @ 8305340
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305344:: @ 8305344
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305348:: @ 8305348
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830534C:: @ 830534C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305350:: @ 8305350
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305354:: @ 8305354
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305358:: @ 8305358
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830535C:: @ 830535C
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305360:: @ 8305360
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305364:: @ 8305364
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_08305368:: @ 8305368
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 
 	.align 2
 gUnknown_0830536C:: @ 830536C
@@ -4447,42 +4448,42 @@ gUnknown_08305CB4:: @ 8305CB4
 
 	.align 2
 gUnknown_08305CCC:: @ 8305CCC
-	.4byte gUnknown_082FF540
+	.4byte AnimCmd_82FF540
 	.4byte gUnknown_08305C24
 
 	.align 2
 gUnknown_08305CD4:: @ 8305CD4
-	.4byte gUnknown_082FF540
+	.4byte AnimCmd_82FF540
 	.4byte gUnknown_08305C3C
 
 	.align 2
 gUnknown_08305CDC:: @ 8305CDC
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_08305C6C
 
 	.align 2
 gUnknown_08305CE4:: @ 8305CE4
-	.4byte gUnknown_082FF538
+	.4byte gAnimCmd_General_Frame0
 	.4byte gUnknown_08305C84
 
 	.align 2
 gUnknown_08305CEC:: @ 8305CEC
-	.4byte gUnknown_082FF540
+	.4byte AnimCmd_82FF540
 	.4byte gUnknown_08305C9C
 
 	.align 2
 gUnknown_08305CF4:: @ 8305CF4
-	.4byte gUnknown_082FF540
+	.4byte AnimCmd_82FF540
 	.4byte gUnknown_08305CB4
 
 	.align 2
 gUnknown_08305CFC:: @ 8305CFC
-	.4byte gUnknown_082FF540
+	.4byte AnimCmd_82FF540
 	.4byte gUnknown_08305C54
 
 	.align 2
 gUnknown_08305D04:: @ 8305D04
-	.4byte gUnknown_082FF540
+	.4byte AnimCmd_82FF540
 	.4byte gUnknown_08305C3C
 
 	.align 2
@@ -4508,12 +4509,8 @@ gUnknown_08305D0C:: @ 8305D0C
 @ 8305DCC
 	.include "data/enemy_mon_elevation.inc"
 
-	.incbin "baserom.gba", 0x305f68, 0x2d54
-
-	.incbin "baserom.gba", 0x308cbc, 0xdf0
-
-gUnknown_08309AAC:: @ 8309AAC
-	.incbin "baserom.gba", 0x309aac, 0x6e0
+@ 8305F68
+	.include "data/graphics/pokemon/front_anims.inc"
 
 @ 830A18C
 	.include "data/graphics/pokemon/front_pic_table.inc"

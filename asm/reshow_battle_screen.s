@@ -825,7 +825,7 @@ _080A9A50:
 	adds r0, r5, 0
 	adds r0, 0x8
 	adds r1, r0
-	ldr r0, =gUnknown_08309AAC
+	ldr r0, =gMonAnimationsSpriteAnimsPtrTable
 	ldr r2, =0x00000604
 	adds r0, r2
 	ldr r0, [r0]
