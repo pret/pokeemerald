@@ -1,4 +1,5 @@
 #include "battle.h"
+#include "bg.h"
 #include "decompress.h"
 #include "global.h"
 #include "m4a.h"
@@ -19,6 +20,13 @@ extern u8 gUnknown_0203CF20;
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern s8 gUnknown_0861CC1C[];
 extern u8 gUnknown_08329D22[];
+extern u8 gUnknown_0203CF21;
+extern u16 gSpecialVar_0x8005;
+extern struct unkStruct_61CC04 gUnknown_0861CC04;
+extern struct unkStruct_61CC04 gUnknown_0861CC10;
+extern struct unkStruct_61CC04 gUnknown_0861CBEC;
+extern struct unkStruct_61CC04 gUnknown_0861CBF8;
+extern u16 gUnknown_08DC3CD4[];
 
 extern void sub_806F2AC(u8 a, u8 b);
 void sub_81C488C(u8 a);
@@ -33,7 +41,6 @@ extern void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable);
 extern void ShowBg(u8 a);
 extern void SetGpuReg(u8 regOffset, u16 value);
 extern void schedule_bg_copy_tilemap_to_vram(u8 a);
-extern void InitBgsFromTemplates(u8 bgMode, struct BgTemplate *templates, u8 numTemplates);
 extern void SetBgTilemapBuffer(u8 bg, void *tilemap);
 extern u8 gUnknown_08D9862C;
 extern u8 gUnknown_08D98CC8;
@@ -53,6 +60,7 @@ extern void reset_temp_tile_data_buffers();
 extern void decompress_and_copy_tile_data_to_vram(u8 a, void* tiledata, u8 b, u8 c, u8 d);
 extern u8 free_temp_tile_data_buffers_if_possible();
 extern void sub_8069004(struct BoxPokemon* a, void* b);
+extern void sub_81C1E20(u8 taskId);
 
 extern u32 ChangeBgX(u8 bg, u32 value, u8 op);
 
@@ -79,10 +87,10 @@ void sub_81C0510(u8 taskId);
 void sub_81C171C(u8 taskId);
 void sub_8121E10();
 u8 sub_81B205C(struct Pokemon* a);
-void sub_81C1DA4(u8 a, s16 b);
-void sub_81C1EFC(u8 a, s16 b, u16 c);
+void sub_81C1DA4(u16 a, s16 b);
+void sub_81C1EFC(u16 a, s16 b, u16 c);
 void sub_81C240C(u16 a);
-void sub_81C2194(void* a, u8 b, u8 c);
+void sub_81C2194(u16 *a, u16 b, u8 c);
 void sub_81C2074(u16 a, s16 b);
 void sub_81C2524();
 void sub_81C2228(struct Pokemon* poke);
@@ -128,6 +136,13 @@ void sub_81C14BC(struct Pokemon *mon, u8 a, u8 b);
 void sub_81C15EC(struct BoxPokemon *mon, u8 a, u8 b);
 void sub_81C40A0(u8 a, u8 b);
 void sub_81C4568(u8 a, u8 b);
+void sub_81C174C(u8 taskId);
+u8 sub_81C18A8();
+void sub_81C18F4(u8 a);
+u8 sub_81B6D14(u16 a);
+void sub_81C1940(u8 taskId);
+void sub_81C4154();
+void sub_81C1F80(u8 taskId);
 
 void SetBgAttribute(u8 bg, u8 attributeId, u8 value);
 
@@ -184,14 +199,14 @@ struct unkSummaryStruct
     /*0x08*/ void *unk8;
     /*0x0C*/ struct Pokemon currentPoke;
     /*0x70*/ struct pokeSummary summary;
-    u8 unkTilemap0[0x800];
-    u8 unkTilemap0_1[0x800];
-    u8 unkTilemap1[0x800];
-    u8 unkTilemap1_1[0x800];
-    u8 unkTilemap2[0x800];
-    u8 unkTilemap2_1[0x800];
-    u8 unkTilemap3[0x800];
-    u8 unkTilemap3_1[0x800];
+    u16 unkTilemap0[0x400];
+    u16 unkTilemap0_1[0x400];
+    u16 unkTilemap1[0x400];
+    u16 unkTilemap1_1[0x400];
+    u16 unkTilemap2[0x400];
+    u16 unkTilemap2_1[0x400];
+    u16 unkTilemap3[0x400];
+    u16 unkTilemap3_1[0x400];
     u8 unk40BC;
     u8 unk40BD;
     u8 unk40BE;
@@ -597,8 +612,8 @@ void sub_81C0348(void)
     else
     {
         sub_81C240C(gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unk40C6]);
-        sub_81C2194(&gUnknown_0203CF1C->unkTilemap2, 3, 0);
-        sub_81C2194(&gUnknown_0203CF1C->unkTilemap3, 1, 0);
+        sub_81C2194(&gUnknown_0203CF1C->unkTilemap2[0], 3, 0);
+        sub_81C2194(&gUnknown_0203CF1C->unkTilemap3[0], 1, 0);
         SetBgTilemapBuffer(1, &gUnknown_0203CF1C->unkTilemap3);
         SetBgTilemapBuffer(2, &gUnknown_0203CF1C->unkTilemap2);
         ChangeBgX(2, 0x10000, 1);
@@ -1013,8 +1028,8 @@ void sub_81C0E48(u8 taskId)
         ClearWindowTilemap(5);
         PutWindowTilemap(6);
     }
-    sub_81C2194(&gUnknown_0203CF1C->unkTilemap2, 3, 0);
-    sub_81C2194(&gUnknown_0203CF1C->unkTilemap3, 1, 0);
+    sub_81C2194(&gUnknown_0203CF1C->unkTilemap2[0], 3, 0);
+    sub_81C2194(&gUnknown_0203CF1C->unkTilemap3[0], 1, 0);
     sub_81C3E9C(move);
     sub_81C3F44();
     sub_81C44F0();
@@ -1139,8 +1154,8 @@ void sub_81C11F4(u8 taskId)
     ClearWindowTilemap(6);
     PutWindowTilemap(5);
     sub_81C3E9C(0);
-    sub_81C2194(&gUnknown_0203CF1C->unkTilemap2, 3, 1);
-    sub_81C2194(&gUnknown_0203CF1C->unkTilemap3, 1, 1);
+    sub_81C2194(&gUnknown_0203CF1C->unkTilemap2[0], 3, 1);
+    sub_81C2194(&gUnknown_0203CF1C->unkTilemap3[0], 1, 1);
     sub_81C4064();
     if (gUnknown_0203CF1C->unk40C6 != 4)
     {
@@ -1225,24 +1240,20 @@ void sub_81C13B0(u8 taskId, u8 b)
 }
 
 
-/* void sub_81C14BC(struct Pokemon *mon, u8 swappingFromId, u8 swappingToId)
+#ifdef NONMATCHING
+void sub_81C14BC(struct Pokemon *mon, u8 swappingFromId, u8 swappingToId)
 {
-    u16* moveToPtr;
-    u8 r8;
-    u8 r2;
-    u8 r12;
-    u8 r1;
     u16 localMoveTo;
     u16 localMoveFrom;
     u8 localPpTo;
     u8 localPpFrom;
     u8 localPpBonuses;
-    
     u16* moveFromPtr;
+    u16* moveToPtr;
     u8* ppFromPtr;
     u8* ppToPtr;
     u8* ppBonusesPtr;
-    
+
     moveFromPtr = &gUnknown_0203CF1C->summary.moves[swappingFromId];
     localMoveFrom = *moveFromPtr;
 
@@ -1251,28 +1262,31 @@ void sub_81C13B0(u8 taskId, u8 b)
 
     ppFromPtr = &gUnknown_0203CF1C->summary.pp[swappingFromId];
     localPpFrom = *ppFromPtr;
+
     ppToPtr = &gUnknown_0203CF1C->summary.pp[swappingToId];
     localPpTo = *ppToPtr;
 
     ppBonusesPtr = &gUnknown_0203CF1C->summary.ppBonuses;
     localPpBonuses = *ppBonusesPtr;
 
-    r8 = gUnknown_08329D22[swappingFromId];
-    r2 = (int)(localPpBonuses & r8) >> (swappingFromId << 1);
-    r12 = gUnknown_08329D22[swappingToId];
-    r1 = (int)(localPpBonuses & r12) >> (swappingToId << 1);
-    localPpBonuses &= ~r8;
-    localPpBonuses &= ~r12;
-    r2 = r2 << (swappingToId << 1);
-    r1 = r1 << (swappingFromId << 1);
-    r2 += r1;
-    localPpBonuses |= r2;
+{
+    u8 bitsFrom, bitsTo;
 
-    SetMonData(mon, swappingFromId + MON_DATA_MOVE1, moveToPtr);
-    SetMonData(mon, swappingToId + MON_DATA_MOVE1, moveFromPtr);
+    bitsFrom = (localPpBonuses & gUnknown_08329D22[swappingFromId]) >> (swappingFromId << 1);
+    bitsTo = (localPpBonuses & gUnknown_08329D22[swappingToId]) >> (swappingToId << 1);
 
-    SetMonData(mon, swappingFromId + MON_DATA_PP1, ppToPtr);
-    SetMonData(mon, swappingToId + MON_DATA_PP1, ppFromPtr);
+
+    localPpBonuses &= ~(gUnknown_08329D22[swappingFromId]);
+    localPpBonuses &= ~(gUnknown_08329D22[swappingToId]);
+
+    localPpBonuses |= ((bitsFrom << (swappingToId << 1)) + (bitsTo << (swappingToId << 1)));
+}
+
+    SetMonData(mon, swappingFromId + MON_DATA_MOVE1, &localMoveTo);
+    SetMonData(mon, swappingToId + MON_DATA_MOVE1, &localMoveFrom);
+
+    SetMonData(mon, swappingFromId + MON_DATA_PP1, &localPpTo);
+    SetMonData(mon, swappingToId + MON_DATA_PP1, &localPpFrom);
 
     SetMonData(mon, MON_DATA_PP_BONUSES, &localPpBonuses);
 
@@ -1283,4 +1297,926 @@ void sub_81C13B0(u8 taskId, u8 b)
     *ppToPtr = localPpFrom;
 
     *ppBonusesPtr = localPpBonuses;
+}
+#else
+__attribute__((naked))
+void sub_81C14BC(struct Pokemon *mon, u8 swappingFromId, u8 swappingToId)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x28\n\
+	adds r7, r0, 0\n\
+	adds r4, r1, 0\n\
+	adds r6, r2, 0\n\
+	lsls r4, 24\n\
+	lsrs r4, 24\n\
+	lsls r6, 24\n\
+	lsrs r6, 24\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r2, [r0]\n\
+	lsls r0, r4, 1\n\
+	mov r10, r0\n\
+	adds r1, r2, 0\n\
+	adds r1, 0x84\n\
+	adds r0, r1, r0\n\
+	str r0, [sp, 0x8]\n\
+	ldrh r0, [r0]\n\
+	mov r3, sp\n\
+	adds r3, 0x2\n\
+	str r3, [sp, 0x1C]\n\
+	strh r0, [r3]\n\
+	lsls r0, r6, 1\n\
+	mov r9, r0\n\
+	add r1, r9\n\
+	str r1, [sp, 0xC]\n\
+	ldrh r1, [r1]\n\
+	mov r0, sp\n\
+	strh r1, [r0]\n\
+	adds r1, r2, 0\n\
+	adds r1, 0x8C\n\
+	adds r3, r1, r4\n\
+	str r3, [sp, 0x10]\n\
+	ldrb r0, [r3]\n\
+	mov r3, sp\n\
+	adds r3, 0x5\n\
+	str r3, [sp, 0x24]\n\
+	strb r0, [r3]\n\
+	adds r1, r6\n\
+	str r1, [sp, 0x14]\n\
+	ldrb r0, [r1]\n\
+	mov r1, sp\n\
+	adds r1, 0x4\n\
+	str r1, [sp, 0x20]\n\
+	strb r0, [r1]\n\
+	adds r2, 0xA4\n\
+	str r2, [sp, 0x18]\n\
+	ldrb r0, [r2]\n\
+	mov r5, sp\n\
+	adds r5, 0x6\n\
+	strb r0, [r5]\n\
+	ldr r1, =gUnknown_08329D22\n\
+	adds r0, r4, r1\n\
+	ldrb r0, [r0]\n\
+	mov r8, r0\n\
+	ldrb r0, [r5]\n\
+	adds r2, r0, 0\n\
+	mov r3, r8\n\
+	ands r2, r3\n\
+	mov r3, r10\n\
+	asrs r2, r3\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	adds r1, r6, r1\n\
+	ldrb r1, [r1]\n\
+	mov r12, r1\n\
+	adds r1, r0, 0\n\
+	mov r3, r12\n\
+	ands r1, r3\n\
+	mov r3, r9\n\
+	asrs r1, r3\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	mov r3, r8\n\
+	bics r0, r3\n\
+	strb r0, [r5]\n\
+	ldrb r0, [r5]\n\
+	mov r3, r12\n\
+	bics r0, r3\n\
+	strb r0, [r5]\n\
+	mov r0, r9\n\
+	lsls r2, r0\n\
+	mov r3, r10\n\
+	lsls r1, r3\n\
+	adds r2, r1\n\
+	ldrb r0, [r5]\n\
+	orrs r0, r2\n\
+	strb r0, [r5]\n\
+	adds r1, r4, 0\n\
+	adds r1, 0xD\n\
+	adds r0, r7, 0\n\
+	mov r2, sp\n\
+	bl SetMonData\n\
+	adds r1, r6, 0\n\
+	adds r1, 0xD\n\
+	adds r0, r7, 0\n\
+	ldr r2, [sp, 0x1C]\n\
+	bl SetMonData\n\
+	adds r4, 0x11\n\
+	adds r0, r7, 0\n\
+	adds r1, r4, 0\n\
+	ldr r2, [sp, 0x20]\n\
+	bl SetMonData\n\
+	adds r6, 0x11\n\
+	adds r0, r7, 0\n\
+	adds r1, r6, 0\n\
+	ldr r2, [sp, 0x24]\n\
+	bl SetMonData\n\
+	adds r0, r7, 0\n\
+	movs r1, 0x15\n\
+	adds r2, r5, 0\n\
+	bl SetMonData\n\
+	mov r0, sp\n\
+	ldrh r0, [r0]\n\
+	ldr r1, [sp, 0x8]\n\
+	strh r0, [r1]\n\
+	ldr r3, [sp, 0x1C]\n\
+	ldrh r0, [r3]\n\
+	ldr r1, [sp, 0xC]\n\
+	strh r0, [r1]\n\
+	ldr r3, [sp, 0x20]\n\
+	ldrb r0, [r3]\n\
+	ldr r1, [sp, 0x10]\n\
+	strb r0, [r1]\n\
+	ldr r3, [sp, 0x24]\n\
+	ldrb r0, [r3]\n\
+	ldr r1, [sp, 0x14]\n\
+	strb r0, [r1]\n\
+	ldrb r0, [r5]\n\
+	ldr r3, [sp, 0x18]\n\
+	strb r0, [r3]\n\
+	add sp, 0x28\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+	.syntax divided\n");
+}
+#endif
+
+#ifdef NONMATCHING
+void sub_81C15EC(struct BoxPokemon *mon, u8 swappingFromId, u8 swappingToId)
+{
+    u16 localMoveTo;
+    u16 localMoveFrom;
+    u8 localPpTo;
+    u8 localPpFrom;
+    u8 localPpBonuses;
+    u16* moveFromPtr;
+    u16* moveToPtr;
+    u8* ppFromPtr;
+    u8* ppToPtr;
+    u8* ppBonusesPtr;
+
+    moveFromPtr = &gUnknown_0203CF1C->summary.moves[swappingFromId];
+    localMoveFrom = *moveFromPtr;
+
+    moveToPtr = &gUnknown_0203CF1C->summary.moves[swappingToId];
+    localMoveTo = *moveToPtr;
+
+    ppFromPtr = &gUnknown_0203CF1C->summary.pp[swappingFromId];
+    localPpFrom = *ppFromPtr;
+
+    ppToPtr = &gUnknown_0203CF1C->summary.pp[swappingToId];
+    localPpTo = *ppToPtr;
+
+    ppBonusesPtr = &gUnknown_0203CF1C->summary.ppBonuses;
+    localPpBonuses = *ppBonusesPtr;
+
+{
+    u8 bitsFrom, bitsTo;
+
+    bitsFrom = (localPpBonuses & gUnknown_08329D22[swappingFromId]) >> (swappingFromId << 1);
+    bitsTo = (localPpBonuses & gUnknown_08329D22[swappingToId]) >> (swappingToId << 1);
+
+
+    localPpBonuses &= ~(gUnknown_08329D22[swappingFromId]);
+    localPpBonuses &= ~(gUnknown_08329D22[swappingToId]);
+
+    localPpBonuses |= ((bitsFrom << (swappingToId << 1)) + (bitsTo << (swappingToId << 1)));
+}
+
+    SetBoxMonData(mon, swappingFromId + MON_DATA_MOVE1, &localMoveTo);
+    SetBoxMonData(mon, swappingToId + MON_DATA_MOVE1, &localMoveFrom);
+
+    SetBoxMonData(mon, swappingFromId + MON_DATA_PP1, &localPpTo);
+    SetBoxMonData(mon, swappingToId + MON_DATA_PP1, &localPpFrom);
+
+    SetBoxMonData(mon, MON_DATA_PP_BONUSES, &localPpBonuses);
+
+    *moveFromPtr = localMoveTo;
+    *moveToPtr = localMoveFrom;
+
+    *ppFromPtr = localPpTo;
+    *ppToPtr = localPpFrom;
+
+    *ppBonusesPtr = localPpBonuses;
+}
+#else
+__attribute__((naked))
+void sub_81C15EC(struct BoxPokemon *mon, u8 swappingFromId, u8 swappingToId)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x28\n\
+	adds r7, r0, 0\n\
+	adds r4, r1, 0\n\
+	adds r6, r2, 0\n\
+	lsls r4, 24\n\
+	lsrs r4, 24\n\
+	lsls r6, 24\n\
+	lsrs r6, 24\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r2, [r0]\n\
+	lsls r0, r4, 1\n\
+	mov r10, r0\n\
+	adds r1, r2, 0\n\
+	adds r1, 0x84\n\
+	adds r0, r1, r0\n\
+	str r0, [sp, 0x8]\n\
+	ldrh r0, [r0]\n\
+	mov r3, sp\n\
+	adds r3, 0x2\n\
+	str r3, [sp, 0x1C]\n\
+	strh r0, [r3]\n\
+	lsls r0, r6, 1\n\
+	mov r9, r0\n\
+	add r1, r9\n\
+	str r1, [sp, 0xC]\n\
+	ldrh r1, [r1]\n\
+	mov r0, sp\n\
+	strh r1, [r0]\n\
+	adds r1, r2, 0\n\
+	adds r1, 0x8C\n\
+	adds r3, r1, r4\n\
+	str r3, [sp, 0x10]\n\
+	ldrb r0, [r3]\n\
+	mov r3, sp\n\
+	adds r3, 0x5\n\
+	str r3, [sp, 0x24]\n\
+	strb r0, [r3]\n\
+	adds r1, r6\n\
+	str r1, [sp, 0x14]\n\
+	ldrb r0, [r1]\n\
+	mov r1, sp\n\
+	adds r1, 0x4\n\
+	str r1, [sp, 0x20]\n\
+	strb r0, [r1]\n\
+	adds r2, 0xA4\n\
+	str r2, [sp, 0x18]\n\
+	ldrb r0, [r2]\n\
+	mov r5, sp\n\
+	adds r5, 0x6\n\
+	strb r0, [r5]\n\
+	ldr r1, =gUnknown_08329D22\n\
+	adds r0, r4, r1\n\
+	ldrb r0, [r0]\n\
+	mov r8, r0\n\
+	ldrb r0, [r5]\n\
+	adds r2, r0, 0\n\
+	mov r3, r8\n\
+	ands r2, r3\n\
+	mov r3, r10\n\
+	asrs r2, r3\n\
+	lsls r2, 24\n\
+	lsrs r2, 24\n\
+	adds r1, r6, r1\n\
+	ldrb r1, [r1]\n\
+	mov r12, r1\n\
+	adds r1, r0, 0\n\
+	mov r3, r12\n\
+	ands r1, r3\n\
+	mov r3, r9\n\
+	asrs r1, r3\n\
+	lsls r1, 24\n\
+	lsrs r1, 24\n\
+	mov r3, r8\n\
+	bics r0, r3\n\
+	strb r0, [r5]\n\
+	ldrb r0, [r5]\n\
+	mov r3, r12\n\
+	bics r0, r3\n\
+	strb r0, [r5]\n\
+	mov r0, r9\n\
+	lsls r2, r0\n\
+	mov r3, r10\n\
+	lsls r1, r3\n\
+	adds r2, r1\n\
+	ldrb r0, [r5]\n\
+	orrs r0, r2\n\
+	strb r0, [r5]\n\
+	adds r1, r4, 0\n\
+	adds r1, 0xD\n\
+	adds r0, r7, 0\n\
+	mov r2, sp\n\
+	bl SetBoxMonData\n\
+	adds r1, r6, 0\n\
+	adds r1, 0xD\n\
+	adds r0, r7, 0\n\
+	ldr r2, [sp, 0x1C]\n\
+	bl SetBoxMonData\n\
+	adds r4, 0x11\n\
+	adds r0, r7, 0\n\
+	adds r1, r4, 0\n\
+	ldr r2, [sp, 0x20]\n\
+	bl SetBoxMonData\n\
+	adds r6, 0x11\n\
+	adds r0, r7, 0\n\
+	adds r1, r6, 0\n\
+	ldr r2, [sp, 0x24]\n\
+	bl SetBoxMonData\n\
+	adds r0, r7, 0\n\
+	movs r1, 0x15\n\
+	adds r2, r5, 0\n\
+	bl SetBoxMonData\n\
+	mov r0, sp\n\
+	ldrh r0, [r0]\n\
+	ldr r1, [sp, 0x8]\n\
+	strh r0, [r1]\n\
+	ldr r3, [sp, 0x1C]\n\
+	ldrh r0, [r3]\n\
+	ldr r1, [sp, 0xC]\n\
+	strh r0, [r1]\n\
+	ldr r3, [sp, 0x20]\n\
+	ldrb r0, [r3]\n\
+	ldr r1, [sp, 0x10]\n\
+	strb r0, [r1]\n\
+	ldr r3, [sp, 0x24]\n\
+	ldrb r0, [r3]\n\
+	ldr r1, [sp, 0x14]\n\
+	strb r0, [r1]\n\
+	ldrb r0, [r5]\n\
+	ldr r3, [sp, 0x18]\n\
+	strb r0, [r3]\n\
+	add sp, 0x28\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_81C171C(u8 taskId)
+{
+    sub_81C44F0();
+    sub_81C4AF8(8);
+    gTasks[taskId].func = sub_81C174C;
+}
+
+void sub_81C174C(u8 taskId)
+{
+    s16* data = gTasks[taskId].data;
+    
+    if (sub_81221EC() != 1)
+    {
+        if (gPaletteFade.active != 1)
+        {
+            if (gMain.newKeys & DPAD_UP)
+            {
+                data[0] = 4;
+                sub_81C1070(data, -1, &gUnknown_0203CF1C->unk40C6);
+            }
+            else if (gMain.newKeys & DPAD_DOWN)
+            {
+                data[0] = 4;
+                sub_81C1070(data, 1, &gUnknown_0203CF1C->unk40C6);
+            }
+            else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+            {
+                sub_81C0A8C(taskId, -1);
+            }
+            else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+            {
+                sub_81C0A8C(taskId, 1);
+            }
+            else if (gMain.newKeys & A_BUTTON)
+            {
+                if (sub_81C18A8() == 1)
+                {
+                    sub_81C48F0();
+                    PlaySE(SE_SELECT);
+                    gUnknown_0203CF21 = gUnknown_0203CF1C->unk40C6;
+                    gSpecialVar_0x8005 = gUnknown_0203CF21;
+                    sub_81C044C(taskId);
+                }
+                else
+                {
+                    PlaySE(0x20);
+                    sub_81C18F4(taskId);
+                }
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                u32 var1;
+                sub_81C48F0();
+                PlaySE(SE_SELECT);
+                gUnknown_0203CF21 = 4;
+                gSpecialVar_0x8005 = 4;
+                sub_81C044C(taskId);
+            }   
+        }
+    }
+}
+
+u8 sub_81C18A8()
+{
+    if (gUnknown_0203CF1C->unk40C6 == 4 || gUnknown_0203CF1C->unk40C4 == 0 || sub_81B6D14(gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unk40C6]) != 1)
+        return 1;
+    else
+        return 0;
+}
+
+void sub_81C18F4(u8 taskId)
+{
+    ClearWindowTilemap(14);
+    ClearWindowTilemap(15);
+    schedule_bg_copy_tilemap_to_vram(0);
+    sub_81C1DA4(0, 3);
+    sub_81C1EFC(0, 3, 0);
+    sub_81C4154();
+    gTasks[taskId].func = sub_81C1940;
+}
+
+void sub_81C1940(u8 taskId)
+{
+    s16* data = gTasks[taskId].data;
+    u16 move;
+    if (FuncIsActiveTask(sub_81C1E20) != 1)
+    {
+        if (gMain.newKeys & DPAD_UP)
+        {
+            data[1] = 1;
+            data[0] = 4;
+            sub_81C1070(&data[0], -1, &gUnknown_0203CF1C->unk40C6);
+            data[1] = 0;
+            gTasks[taskId].func = sub_81C174C;
+        }
+        else if (gMain.newKeys & DPAD_DOWN)
+        {
+            data[1] = 1;
+            data[0] = 4;
+            sub_81C1070(&data[0], 1, &gUnknown_0203CF1C->unk40C6);
+            data[1] = 0;
+            gTasks[taskId].func = sub_81C174C;
+        }
+        else if (gMain.newKeys & DPAD_LEFT || GetLRKeysState() == 1)
+        {
+            if (gUnknown_0203CF1C->unk40C0 != 2)
+            {
+                
+                ClearWindowTilemap(19);
+                if (!gSprites[gUnknown_0203CF1C->unk40D5].invisible)
+                    ClearWindowTilemap(13);
+                move = gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unk40C6];
+                gTasks[taskId].func = sub_81C174C;
+                sub_81C0A8C(taskId, -1);
+                sub_81C1DA4(9, -2);
+                sub_81C1EFC(9, -2, move);
+            }
+        }
+        else if (gMain.newKeys & DPAD_RIGHT || GetLRKeysState() == 2)
+        {
+            if (gUnknown_0203CF1C->unk40C0 != 3)
+            {
+                ClearWindowTilemap(19);
+                if (!gSprites[gUnknown_0203CF1C->unk40D5].invisible)
+                    ClearWindowTilemap(13);
+                move = gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unk40C6];
+                gTasks[taskId].func = sub_81C174C;
+                sub_81C0A8C(taskId, 1);
+                sub_81C1DA4(9, -2);
+                sub_81C1EFC(9, -2, move);
+            }
+        }
+        else if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        {
+            ClearWindowTilemap(19);
+            if (!gSprites[gUnknown_0203CF1C->unk40D5].invisible)
+                ClearWindowTilemap(13);
+            move = gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unk40C6];
+            sub_81C3E9C(move);
+            schedule_bg_copy_tilemap_to_vram(0);
+            sub_81C1DA4(9, -3);
+            sub_81C1EFC(9, -3, move);
+            gTasks[taskId].func = sub_81C174C;
+        }
+    }
+}
+
+u8 sub_81C1B94()
+{
+    return gUnknown_0203CF21;
+}
+
+void sub_81C1BA0()
+{
+    u16 *alloced = Alloc(32);
+    u8 i;
+    for (i = 0; i < 4; i++)
+    {
+        u8 j = i << 1;
+        if (i < gUnknown_0203CF1C->unk40C1)
+        {
+            alloced[j+0] = 0x40;
+            alloced[j+1] = 0x40;
+            alloced[j+8] = 0x50;
+            alloced[j+9] = 0x50;
+        }
+        else if (i > gUnknown_0203CF1C->unk40C2)
+        {
+            alloced[j+0] = 0x4A;
+            alloced[j+1] = 0x4A;
+            alloced[j+8] = 0x5A;
+            alloced[j+9] = 0x5A;
+        }
+        else if (i < gUnknown_0203CF1C->unk40C0)
+        {
+            alloced[j+0] = 0x46;
+            alloced[j+1] = 0x47;
+            alloced[j+8] = 0x56;
+            alloced[j+9] = 0x57;
+        }
+        else if (i == gUnknown_0203CF1C->unk40C0)
+        {
+            if (i != gUnknown_0203CF1C->unk40C2)
+            {
+                alloced[j+0] = 0x41;
+                alloced[j+1] = 0x42;
+                alloced[j+8] = 0x51;
+                alloced[j+9] = 0x52;
+            }
+            else
+            {
+                alloced[j+0] = 0x4B;
+                alloced[j+1] = 0x4C;
+                alloced[j+8] = 0x5B;
+                alloced[j+9] = 0x5C;
+            }
+        }
+        else if (i != gUnknown_0203CF1C->unk40C2)
+        {
+            alloced[j+0] = 0x43;
+            alloced[j+1] = 0x44;
+            alloced[j+8] = 0x53;
+            alloced[j+9] = 0x54;
+        }
+        else
+        {
+            alloced[j+0] = 0x48;
+            alloced[j+1] = 0x49;
+            alloced[j+8] = 0x58;
+            alloced[j+9] = 0x59;
+        }
+    }
+    CopyToBgTilemapBufferRect_ChangePalette(3, alloced, 11, 0, 8, 2, 16);
+    schedule_bg_copy_tilemap_to_vram(3);
+    Free(alloced);
+}
+
+struct unkStruct_61CC04
+{
+    u8 *ptr;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u8 field_8;
+    u8 field_9;
+};
+
+#ifdef NONMATCHING
+void sub_81C1CB0(struct unkStruct_61CC04 *a, u16 *b, u8 c, u8 d)
+{
+    u8 *alloced = Alloc(a->field_6 * (a->field_7 << 1));
+    CpuFill16(a->field_4, alloced, a->field_7*a->field_6);
+    if (a->field_6 != c)
+    {
+        if (!d)
+        {
+            for (d;d < a->field_7; d++)
+            {
+                CpuCopy16(&a->ptr + ((c + a->field_6*d)), alloced + ((a->field_6*d) << 1), (a->field_6 - c) * 2);
+            }
+        }
+        else
+        {
+            for (d = 0;d < a->field_7; d++)
+            {
+                CpuCopy16(&a->ptr + (a->field_6*d), alloced + ((c + a->field_6*d) << 1), (a->field_6 - c) * 2);
+            }
+        }
+    }
+    d = 0;
+    while (d < a->field_7)
+    {
+        CpuCopy16(alloced + ((a->field_6*d) << 1), b + ((((a->field_9 + d) << 5) + a->field_8) << 1), a->field_6 * 2);
+        d++;
+    }
+    Free(alloced);
+}
+#else
+__attribute__((naked))
+void sub_81C1CB0(struct unkStruct_61CC04 *a, u16 *b, u8 c, u8 d)
+{
+    asm(".syntax unified\n\
+        push {r4-r7,lr}\n\
+	mov r7, r8\n\
+	push {r7}\n\
+	sub sp, 0x4\n\
+	adds r4, r0, 0\n\
+	mov r8, r1\n\
+	lsls r2, 24\n\
+	lsrs r6, r2, 24\n\
+	lsls r3, 24\n\
+	lsrs r5, r3, 24\n\
+	ldrb r1, [r4, 0x6]\n\
+	ldrb r0, [r4, 0x7]\n\
+	lsls r0, 1\n\
+	muls r0, r1\n\
+	bl Alloc\n\
+	adds r7, r0, 0\n\
+	mov r1, sp\n\
+	ldrh r0, [r4, 0x4]\n\
+	strh r0, [r1]\n\
+	ldrb r1, [r4, 0x7]\n\
+	ldrb r0, [r4, 0x6]\n\
+	adds r2, r1, 0\n\
+	muls r2, r0\n\
+	movs r0, 0x80\n\
+	lsls r0, 17\n\
+	orrs r2, r0\n\
+	mov r0, sp\n\
+	adds r1, r7, 0\n\
+	bl CpuSet\n\
+	ldrb r0, [r4, 0x6]\n\
+	cmp r0, r6\n\
+	beq _081C1D60\n\
+	cmp r5, 0\n\
+	bne _081C1D30\n\
+	movs r5, 0\n\
+	ldrb r0, [r4, 0x7]\n\
+	cmp r5, r0\n\
+	bcs _081C1D60\n\
+_081C1D00:\n\
+	ldrb r2, [r4, 0x6]\n\
+	adds r1, r2, 0\n\
+	muls r1, r5\n\
+	adds r3, r6, r1\n\
+	lsls r3, 1\n\
+	ldr r0, [r4]\n\
+	adds r0, r3\n\
+	lsls r1, 1\n\
+	adds r1, r7, r1\n\
+	subs r2, r6\n\
+	ldr r3, =0x001fffff\n\
+	ands r2, r3\n\
+	bl CpuSet\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r5, r0, 16\n\
+	ldrb r3, [r4, 0x7]\n\
+	cmp r5, r3\n\
+	bcc _081C1D00\n\
+	b _081C1D60\n\
+	.pool\n\
+_081C1D30:\n\
+	movs r5, 0\n\
+	ldrb r0, [r4, 0x7]\n\
+	cmp r5, r0\n\
+	bcs _081C1D60\n\
+_081C1D38:\n\
+	ldrb r2, [r4, 0x6]\n\
+	adds r1, r2, 0\n\
+	muls r1, r5\n\
+	lsls r3, r1, 1\n\
+	ldr r0, [r4]\n\
+	adds r0, r3\n\
+	adds r1, r6, r1\n\
+	lsls r1, 1\n\
+	adds r1, r7, r1\n\
+	subs r2, r6\n\
+	ldr r3, =0x001fffff\n\
+	ands r2, r3\n\
+	bl CpuSet\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r5, r0, 16\n\
+	ldrb r3, [r4, 0x7]\n\
+	cmp r5, r3\n\
+	bcc _081C1D38\n\
+_081C1D60:\n\
+	movs r5, 0\n\
+	b _081C1D8A\n\
+	.pool\n\
+_081C1D68:\n\
+	ldrb r2, [r4, 0x6]\n\
+	adds r0, r2, 0\n\
+	muls r0, r5\n\
+	lsls r0, 1\n\
+	adds r0, r7, r0\n\
+	ldrb r1, [r4, 0x9]\n\
+	adds r1, r5\n\
+	lsls r1, 5\n\
+	ldrb r3, [r4, 0x8]\n\
+	adds r1, r3\n\
+	lsls r1, 1\n\
+	add r1, r8\n\
+	bl CpuSet\n\
+	adds r0, r5, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r5, r0, 16\n\
+_081C1D8A:\n\
+	ldrb r0, [r4, 0x7]\n\
+	cmp r5, r0\n\
+	bcc _081C1D68\n\
+	adds r0, r7, 0\n\
+	bl Free\n\
+	add sp, 0x4\n\
+	pop {r3}\n\
+	mov r8, r3\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.syntax divided\n");
+}
+#endif
+
+void sub_81C1DA4(u16 a, s16 b)
+{
+    if (b > gUnknown_0861CC04.field_6)
+        b = gUnknown_0861CC04.field_6;
+    if (b == 0 || b == gUnknown_0861CC04.field_6)
+    {
+        sub_81C1CB0(&gUnknown_0861CC04, &gUnknown_0203CF1C->unkTilemap2[0], b, 1);
+    }
+    else
+    {
+        u8 taskId = FindTaskIdByFunc(sub_81C1E20);
+        if (taskId == 0xFF)
+        {
+            taskId = CreateTask(sub_81C1E20, 8);
+        }
+        gTasks[taskId].data[0] = b;
+        gTasks[taskId].data[1] = a;
+    }
+}
+
+void sub_81C1E20(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    data[1] += data[0];
+    if (data[1] < 0)
+    {
+        data[1] = 0;
+    }
+    else if (data[1] > gUnknown_0861CC04.field_6)
+    {
+        data[1] = gUnknown_0861CC04.field_6;
+    }
+    sub_81C1CB0(&gUnknown_0861CC04, &gUnknown_0203CF1C->unkTilemap2[0], data[1], 1);
+    if (data[1] <= 0 || data[1] >= gUnknown_0861CC04.field_6)
+    {
+        if (data[0] < 0)
+        {
+            if (gUnknown_0203CF1C->unk40C0 == 2)
+                PutWindowTilemap(14);
+            
+        }
+        else
+        {
+            if (!gSprites[gUnknown_0203CF1C->unk40D5].invisible)
+                PutWindowTilemap(13);
+            PutWindowTilemap(19);
+        }
+        schedule_bg_copy_tilemap_to_vram(0);
+        DestroyTask(taskId);
+    }
+    schedule_bg_copy_tilemap_to_vram(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+}
+
+void sub_81C1EFC(u16 a, s16 b, u16 move)
+{
+    if (b > gUnknown_0861CC10.field_6)
+        b = gUnknown_0861CC10.field_6;
+    if (b == 0 || b == gUnknown_0861CC10.field_6)
+        sub_81C1CB0(&gUnknown_0861CC10, &gUnknown_0203CF1C->unkTilemap3[0], b, 1);
+    else
+    {
+        u8 taskId = FindTaskIdByFunc(sub_81C1F80);
+        if (taskId == 0xFF)
+            taskId = CreateTask(sub_81C1F80, 8);
+        gTasks[taskId].data[0] = b;
+        gTasks[taskId].data[1] = a;
+        gTasks[taskId].data[2] = move;
+    }
+}
+
+void sub_81C1F80(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    data[1] += data[0];
+    if (data[1] < 0)
+    {
+        data[1] = 0;
+    }
+    else if (data[1] > gUnknown_0861CC10.field_6)
+    {
+        data[1] = gUnknown_0861CC10.field_6;
+    }
+    sub_81C1CB0(&gUnknown_0861CC10, &gUnknown_0203CF1C->unkTilemap3[0], data[1], 1);
+    if (data[1] <= 0 || data[1] >= gUnknown_0861CC10.field_6)
+    {
+        if (data[0] < 0)
+        {
+            if (gUnknown_0203CF1C->unk40C0 == 3 && FuncIsActiveTask(sub_81C0B8C) == 0)
+                PutWindowTilemap(15);
+            sub_81C240C(data[2]);
+        }
+        else 
+        {
+            if (!gSprites[gUnknown_0203CF1C->unk40D5].invisible)
+            {
+                PutWindowTilemap(13);
+            }
+            PutWindowTilemap(19);
+        }
+        schedule_bg_copy_tilemap_to_vram(0);
+        DestroyTask(taskId);
+    }
+    schedule_bg_copy_tilemap_to_vram(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+}
+
+void sub_81C2074(u16 a, s16 b)
+{
+    if (b > gUnknown_0861CBEC.field_6)
+        b = gUnknown_0861CBEC.field_6;
+    if (b == 0 || b == gUnknown_0861CBEC.field_6)
+    {
+        sub_81C1CB0(&gUnknown_0861CBEC, &gUnknown_0203CF1C->unkTilemap0[0], b, 0);
+        sub_81C1CB0(&gUnknown_0861CBF8, &gUnknown_0203CF1C->unkTilemap0[0], b, 0);
+    }
+    else
+    {
+        u8 taskId = CreateTask(sub_81C20F0, 8);
+        gTasks[taskId].data[0] = b;
+        gTasks[taskId].data[1] = a;
+    }
+}
+
+void sub_81C20F0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    data[1] += data[0];
+    if (data[1] < 0)
+        data[1] = 0;
+    else if (data[1] > gUnknown_0861CBEC.field_6)
+        data[1] = gUnknown_0861CBEC.field_6;
+    sub_81C1CB0(&gUnknown_0861CBEC, &gUnknown_0203CF1C->unkTilemap0[0], data[1], 0);
+    sub_81C1CB0(&gUnknown_0861CBF8, &gUnknown_0203CF1C->unkTilemap0[0], data[1], 0);
+    schedule_bg_copy_tilemap_to_vram(3);
+    if (data[1] <= 0 || data[1] >= gUnknown_0861CBEC.field_6)
+    {
+        if (data[0] < 0)
+        {
+            sub_81C4A88();
+            PutWindowTilemap(13);
+            schedule_bg_copy_tilemap_to_vram(0);
+        }
+        DestroyTask(taskId);
+    }
+}
+
+/* void sub_81C2194(u16 *a, u16 b, u8 c)
+{
+    u16 i;
+    int var;
+    b *= 0x1000;
+    var = 0x56A;
+
+    if (c == 0)
+    {
+        for (i = 0; i < 20; i++)
+        {
+            a[(i + var) << 1] = gUnknown_08DC3CD4[i] + b;
+            a[((i + var) << 1) + 0x40] = gUnknown_08DC3CD4[i] + b;
+            a[((i + var) << 1) + 0x80] = gUnknown_08DC3CD4[i + 20] + b;
+        }
+    }
+    else
+    {
+        for (i = 0; i < 20; i++)
+        {
+            a[(i + var)] = gUnknown_08DC3CD4[i + 20] + b;
+            a[((i + var)) + 0x40] = gUnknown_08DC3CD4[i + 40] + b;
+            a[((i + var)) + 0x80] = gUnknown_08DC3CD4[i + 40] + b;
+        }
+    }
 } */
