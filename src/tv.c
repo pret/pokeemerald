@@ -456,7 +456,7 @@ const u8 *const gTVFindThatGamerTextGroup[] = {
     gUnknown_08285500
 };
 
-const u8 *const gUnknown_0858D428[] = {
+const u8 *const gTVBreakingNewsTextGroup[] = {
     gUnknown_082855BF,
     gUnknown_082855D1,
     gUnknown_0828563C,
@@ -6742,6 +6742,109 @@ void DoTVShowFindThatGamer(void)
             break;
     }
     ShowFieldMessage(gTVFindThatGamerTextGroup[state]);
+}
+
+void DoTVShowBreakingNewsTV(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            if (show->breakingNews.outcome == 0)
+            {
+                sTVShowState = 1;
+            }
+            else
+            {
+                sTVShowState = 5;
+            }
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->breakingNews.lastOpponentSpecies]);
+            GetMapName(gStringVar3, show->breakingNews.location, 0);
+            sTVShowState = 2;
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->breakingNews.lastOpponentSpecies]);
+            StringCopy(gStringVar3, gSpeciesNames[show->breakingNews.poke1Species]);
+            sTVShowState = 3;
+            break;
+        case 3:
+            TV_PrintIntToStringVar(0, show->breakingNews.balls);
+            StringCopy(gStringVar2, ItemId_GetItem(show->breakingNews.caughtMonBall)->name);
+            sTVShowState = 4;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
+            GetMapName(gStringVar2, show->breakingNews.location, 0);
+            TVShowDone();
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->breakingNews.lastOpponentSpecies]);
+            GetMapName(gStringVar3, show->breakingNews.location, 0);
+            sTVShowState = 6;
+            break;
+        case 6:
+            TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->breakingNews.lastOpponentSpecies]);
+            StringCopy(gStringVar3, gSpeciesNames[show->breakingNews.poke1Species]);
+            switch (show->breakingNews.outcome)
+            {
+                case 1:
+                    if (show->breakingNews.lastUsedMove == MOVE_NONE)
+                    {
+                        sTVShowState = 12;
+                    }
+                    else
+                    {
+                        sTVShowState = 7;
+                    }
+                    break;
+                case 2:
+                    sTVShowState = 9;
+                    break;
+                case 3:
+                    sTVShowState = 10;
+                    break;
+            }
+            break;
+        case 7:
+            StringCopy(gStringVar1, gMoveNames[show->breakingNews.lastUsedMove]);
+            StringCopy(gStringVar2, gSpeciesNames[show->breakingNews.poke1Species]);
+            sTVShowState = 8;
+            break;
+        case 12:
+            TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->breakingNews.lastOpponentSpecies]);
+            StringCopy(gStringVar3, gSpeciesNames[show->breakingNews.poke1Species]);
+            sTVShowState = 8;
+            break;
+        case 8:
+            TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
+            GetMapName(gStringVar2, show->breakingNews.location, 0);
+            sTVShowState = 11;
+            break;
+        case 9:
+        case 10:
+            TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->breakingNews.lastOpponentSpecies]);
+            GetMapName(gStringVar3, show->breakingNews.location, 0);
+            sTVShowState = 11;
+            break;
+        case 11:
+            TVShowConvertInternationalString(gStringVar1, show->breakingNews.playerName, show->breakingNews.language);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVBreakingNewsTextGroup[state]);
 }
 
 //void TVShowDone(void)
