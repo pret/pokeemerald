@@ -1,4 +1,5 @@
 #include "global.h"
+#include "save_location.h"
 #include "map_constants.h"
 
 // used to make the list defines a little less ugly.
@@ -26,7 +27,7 @@ static bool32 IsCurMapInLocationList(const u16 *list)
 }
 
 // TODO: Not require a packed u16 array for these lists
-static const u16 gSaveLocationPokeCenterList[] =
+static const u16 sSaveLocationPokeCenterList[] =
 {
     MAP(OLDALE_TOWN_POKEMON_CENTER_1F),
     MAP(OLDALE_TOWN_POKEMON_CENTER_2F),
@@ -71,10 +72,10 @@ static const u16 gSaveLocationPokeCenterList[] =
 
 static bool32 IsCurMapPokeCenter(void)
 {
-    return IsCurMapInLocationList(gSaveLocationPokeCenterList);
+    return IsCurMapInLocationList(sSaveLocationPokeCenterList);
 }
 
-static const u16 gSaveLocationReloadLocList[] = // there's only 1 location, and it's presumed its for the save reload feature for battle tower
+static const u16 sSaveLocationReloadLocList[] = // there's only 1 location, and it's presumed its for the save reload feature for battle tower
 {
     MAP(BATTLE_TOWER_LOBBY),
     0xFFFF,
@@ -82,18 +83,18 @@ static const u16 gSaveLocationReloadLocList[] = // there's only 1 location, and 
 
 static bool32 IsCurMapReloadLocation(void)
 {
-    return IsCurMapInLocationList(gSaveLocationReloadLocList);
+    return IsCurMapInLocationList(sSaveLocationReloadLocList);
 }
 
 // nulled out list. unknown what this would have been
-static const u16 gUnknown_0861440E[] =
+static const u16 sUnknown_0861440E[] =
 {
     0xFFFF,
 };
 
 bool32 sub_81AFCEC(void)
 {
-    return IsCurMapInLocationList(gUnknown_0861440E);
+    return IsCurMapInLocationList(sUnknown_0861440E);
 }
 
 static void TrySetPokeCenterWarpStatus(void)
