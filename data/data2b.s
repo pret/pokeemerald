@@ -3039,7 +3039,7 @@ gUnknown_08300654:: @ 8300654
 	.4byte gUnknown_08300654
 
 	.align 2
-gUnknown_08300D38:: @ 8300D38
+gMonFrontPicCoords:: @ 8300D38
 	.byte 0x88, 0x00, 0x00, 0x00
 	.byte 0x45, 0x0e, 0x00, 0x00
 	.byte 0x56, 0x0a, 0x00, 0x00
@@ -4828,10 +4828,9 @@ gUnknown_0831AC70:: @ 831AC70
 gUnknown_0831AC88:: @ 831AC88
 	spr_template 0x0000, 0x0000, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8038528
 
-	.align 2
-gUnknown_0831ACA0:: @ 831ACA0
-	.string "ヌケニン$" @ "Nukenin" (Shedinja)
-
+gText_ShedinjaJapaneseName:: @ 831ACA0
+	.string "ヌケニン$" @ Nukenin
+    
 	.align 2
 gUnknown_0831ACA8:: @ 831ACA8
 	.2byte 0x0100
@@ -4881,93 +4880,3 @@ gUnknown_0831ACE0:: @ 831ACE0
 
 @ 831BAD4
 	.include "data/text/ability_description_pointers.inc"
-
-	.align 2
-gUnknown_0831BC0C:: @ 831BC0C
-	.4byte sub_803E0B8
-	.4byte sub_803E90C
-	.4byte bs2_8016374
-	.4byte sub_803EE48
-	.4byte sub_803EFA8
-	.4byte bs5_8016AC0
-	.4byte sub_803F050
-	.4byte sub_803F120
-	.4byte bs8_exit_by_flight
-	.4byte bs9_8016C9C
-	.4byte sub_80458B4
-	.4byte bsB_exit_by_move
-	.4byte bsC_8016D70
-	.4byte bsD_proceed
-
-	.align 2
-gUnknown_0831BC44:: @ 831BC44
-	.4byte bc_8013B1C
-	.4byte sub_803D8C0
-	.4byte sub_803DAC0
-	.4byte sub_803DAC0
-	.4byte sub_803DBA0
-	.4byte sub_803DCD8
-	.4byte bc_80158BC
-	.4byte sub_803DCD8
-	.4byte sub_803DCD8
-	.4byte sub_803DCD8
-	.4byte sub_803DCD8
-
-gStatusConditionString_PoisonJpn:: @ 81FA69C
-	.string "どく$$$$$$"
-
-gStatusConditionString_SleepJpn:: @ 81FA6A4
-	.string "ねむり$$$$$"
-
-gStatusConditionString_ParalysisJpn:: @ 81FA6AC
-	.string "まひ$$$$$$"
-
-gStatusConditionString_BurnJpn:: @ 81FA6B4
-	.string "やけど$$$$$"
-
-gStatusConditionString_IceJpn:: @ 81FA6BC
-	.string "こおり$$$$$"
-
-gStatusConditionString_ConfusionJpn:: @ 81FA6C4
-	.string "こんらん$$$$"
-
-gStatusConditionString_LoveJpn:: @ 81FA6CC
-	.string "メロメロ$$$$"
-
-	.align 2
-gUnknown_0831BCA8:: @ 831BCA8
-	.4byte gStatusConditionString_PoisonJpn, gText_Poison
-	.4byte gStatusConditionString_SleepJpn, gText_Sleep
-	.4byte gStatusConditionString_ParalysisJpn, gText_Paralysis
-	.4byte gStatusConditionString_BurnJpn, gText_Burn
-	.4byte gStatusConditionString_IceJpn, gText_Ice
-	.4byte gStatusConditionString_ConfusionJpn, gText_Confusion
-	.4byte gStatusConditionString_LoveJpn, gText_Love
-
-gUnknown_0831BCE0:: @ 831BCE0
-	.byte 0, 0, 0
-	.byte 3, 5, 0
-	.byte 2, 3, 0
-	.byte 1, 2, 0
-	.byte 1, 1, 0
-
-gUnknown_0831BCEF:: @ 831BCEF
-	.byte 4, 3, 2, 1
-
-gUnknown_0831BCF3:: @ 831BCF3
-	.byte 4, 4, 4, 4
-
-	.align 2
-gSoundMovesTable:: @ 831BCF8
-	.2byte   0x2D
-	.2byte   0x2E
-	.2byte   0x2F
-	.2byte   0x30
-	.2byte   0x67
-	.2byte   0xAD
-	.2byte   0xFD
-	.2byte  0x13F
-	.2byte  0x140
-	.2byte  0x130
-	.2byte 0xFFFF
-

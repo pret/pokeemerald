@@ -264,14 +264,14 @@ _080A3BAA:
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
 _080A3BC2:
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E28
+	ldr r0, =gBattle_WIN1H
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E2A
+	ldr r0, =gBattle_WIN1V
 	strh r1, [r0]
 	add sp, 0x4
 	pop {r3-r5}
@@ -449,10 +449,10 @@ ma00_load_graphics: @ 80A3D24
 	lsls r0, 8
 	orrs r4, r0
 	lsls r5, r4, 3
-	ldr r0, =gUnknown_085112C4
+	ldr r0, =gUnknown_085112B4 + 0x10
 	adds r0, r5, r0
 	bl LoadCompressedObjectPicUsingHeap
-	ldr r0, =gUnknown_08511BCC
+	ldr r0, =gUnknown_08511A34 + 0x198
 	adds r5, r0
 	adds r0, r5, 0
 	bl LoadCompressedObjectPaletteUsingHeap
@@ -1150,7 +1150,7 @@ _080A4330:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4374
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	lsls r0, r5, 2
@@ -2864,7 +2864,7 @@ BattleAnimGetPanControl: @ 80A5178
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A51C0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gAnimationBankAttacker
 	ldrb r2, [r0]
@@ -2986,7 +2986,7 @@ sub_80A5278: @ 80A5278
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A52C0
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
 	ldr r0, =gAnimationBankAttacker
 	ldrb r2, [r0]

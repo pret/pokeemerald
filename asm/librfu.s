@@ -2762,7 +2762,7 @@ sub_82E424C: @ 82E424C
 	b _082E4266
 	.align 2, 0
 _082E4254: .4byte gUnknown_089A324C
-_082E4258: .4byte gUnknown_030000F0
+_082E4258: .4byte gDma3Requests + 0xE0
 	thumb_func_end sub_82E424C
 
 	thumb_func_start sub_82E425C
@@ -2810,7 +2810,7 @@ _082E4274:
 	movs r0, 0
 	b _082E42BE
 	.align 2, 0
-_082E42B0: .4byte gUnknown_030000FA
+_082E42B0: .4byte gDma3Requests + 0xEA
 _082E42B4: .4byte gUnknown_03007890
 _082E42B8: .4byte gUnknown_03007894
 _082E42BC:

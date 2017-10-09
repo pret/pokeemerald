@@ -191,7 +191,7 @@ _080C2836:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080C2852
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080C2852
@@ -261,7 +261,7 @@ _080C28D8:
 	b _080C2ACA
 	.pool
 _080C28E4:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r5, [r0]
 	cmp r5, 0
 	bne _080C290A
@@ -301,7 +301,7 @@ _080C293C:
 	bne _080C2946
 	b _080C2ACA
 _080C2946:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C2960
@@ -346,7 +346,7 @@ _080C299C:
 	ands r0, r1
 	cmp r0, 0
 	beq _080C29F4
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C29DC
@@ -358,7 +358,7 @@ _080C299C:
 	cmp r0, 0x1
 	beq _080C2A14
 _080C29C0:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C29DC
@@ -382,7 +382,7 @@ _080C29F4:
 	ands r0, r1
 	cmp r0, 0
 	beq _080C2ACA
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C2A20
@@ -430,7 +430,7 @@ _080C2A2C:
 	b _080C2ACA
 	.pool
 _080C2A68:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080C2ACA
@@ -1403,7 +1403,7 @@ sub_80C3278: @ 80C3278
 	movs r0, 0x40
 	movs r1, 0xF0
 	bl SetGpuReg
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C32E0
@@ -4267,7 +4267,7 @@ _080C4BF6:
 	ldrb r0, [r1, 0x4]
 	adds r0, 0x1
 	strb r0, [r1, 0x4]
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C4B20
@@ -4745,7 +4745,7 @@ sub_80C4FF0: @ 80C4FF0
 	bl InUnionRoom
 	cmp r0, 0x1
 	bne _080C5060
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080C5060

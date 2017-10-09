@@ -31,11 +31,8 @@ gUnknown_020223BD: @ 20223BD
 gUnknown_020223C0: @ 20223C0
 	.space 0x4
 
-gUnknown_020223C4: @ 20223C4
-	.space 0x4
-
-gUnknown_020223C8: @ 20223C8
-	.space 0x4FC
+gBlockRecvBuffer: @ 20223C4
+	.space 0x500
 
 gUnknown_020228C4: @ 20228C4 gBlockSendBuffer
 	.space 0x100
@@ -205,10 +202,10 @@ gUnknown_02022D10: @ 2022D10
 gUnknown_02022E10: @ 2022E10
 	.space 0x4
 
-gUnknown_02022E14: @ 2022E14
+gBattle_BG0_X: @ 2022E14
 	.space 0x2
 
-gUnknown_02022E16: @ 2022E16
+gBattle_BG0_Y: @ 2022E16
 	.space 0x2
 
 gBattle_BG1_X: @ 2022E18
@@ -226,19 +223,19 @@ gBattle_BG2_Y: @ 2022E1E
 gBattle_BG3_X: @ 2022E20
 	.space 0x2
 
-gUnknown_02022E22: @ 2022E22
+gBattle_BG3_Y: @ 2022E22
 	.space 0x2
 
-gUnknown_02022E24: @ 2022E24
+gBattle_WIN0H: @ 2022E24
 	.space 0x2
 
-gUnknown_02022E26: @ 2022E26
+gBattle_WIN0V: @ 2022E26
 	.space 0x2
 
-gUnknown_02022E28: @ 2022E28
+gBattle_WIN1H: @ 2022E28
 	.space 0x2
 
-gUnknown_02022E2A: @ 2022E2A
+gBattle_WIN1V: @ 2022E2A
 	.space 0x2
 
 gDisplayedStringBattle: @ 2022E2C
@@ -307,16 +304,16 @@ gBattlePartyID: @ 202406E
 gBanksBySide: @ 2024076
 	.space 0x4
 
-gUnknown_0202407A: @ 202407A
+gActionsByTurnOrder: @ 202407A
 	.space 0x4
 
-gTurnOrder: @ 202407E
+gBanksByTurnOrder: @ 202407E
 	.space 0x4
 
-gCurrentMoveTurn: @ 2024082
+gCurrentTurnActionNumber: @ 2024082
 	.space 0x1
 
-gFightStateTracker: @ 2024083
+gCurrentActionFuncId: @ 2024083
 	.space 0x1
 
 gBattleMons: @ 2024084
@@ -385,7 +382,7 @@ gBattlescriptCurrInstr: @ 2024214
 gActionForBanks: @ 202421C
 	.space 0x4
 
-gUnknown_02024220: @ 2024220
+gBattlescriptPtrsForSelection: @ 2024220
 	.space 0x10
 
 gUnknown_02024230: @ 2024230
@@ -448,7 +445,7 @@ gPauseCounterBattle: @ 202432C
 gPaydayMoney: @ 202432E
 	.space 0x2
 
-gUnknown_02024330: @ 2024330
+gRandomTurnNumber: @ 2024330
 	.space 0x2
 
 gBattleCommunication: @ 2024332
@@ -502,10 +499,10 @@ gUnknown_020244A4: @ 20244A4
 gBattleResources: @ 20244A8
 	.space 0x4
 
-gUnknown_020244AC: @ 20244AC
+gActionSelectionCursor: @ 20244AC
 	.space 0x4
 
-gUnknown_020244B0: @ 20244B0
+gMoveSelectionCursor: @ 20244B0
 	.space 0x4
 
 gUnknown_020244B4: @ 20244B4
@@ -523,10 +520,10 @@ gUnknown_020244BC: @ 20244BC
 gUnknown_020244CC: @ 20244CC
 	.space 0x4
 
-gUnknown_020244D0: @ 20244D0
+gBattleSpritesDataPtr: @ 20244D0
 	.space 0x4
 
-gBattleSpritesGfx: @ 20244D4
+gMonSpritesGfxPtr: @ 20244D4
 	.space 0x4
 
 gUnknown_020244D8: @ 20244D8
@@ -747,9 +744,7 @@ gUnknown_02037621: @ 2037621
 gUnknown_02037622: @ 2037622
 	.space 0x2
 
-gUnknown_02037624: @ 2037624
-	.space 0xF0
-
+	.include "src/tileset_anims.o"
 	.include "src/palette.o"
     .include "src/sound.o"
     
@@ -1634,9 +1629,7 @@ gUnknown_0203BCE8: @ 203BCE8
 	.space 0x4
 
     .include "src/lottery_corner.o"
-
-gUnknown_0203BCF0: @ 203BCF0
-	.space 0x4
+    .include "src/diploma.o"
 
 gUnknown_0203BCF4: @ 203BCF4
 	.space 0x4
@@ -1644,16 +1637,9 @@ gUnknown_0203BCF4: @ 203BCF4
 gUnknown_0203BCF8: @ 203BCF8
 	.space 0x4
 
-gUnknown_0203BCFC: @ 203BCFC
-	.space 0x2
+    .include "src/save_failed_screen.o"
 
-gUnknown_0203BCFE: @ 203BCFE
-	.space 0x10
-
-gUnknown_0203BD0E: @ 203BD0E
-	.space 0x6
-
-gUnknown_0203BD14: @ 203BD14
+gBraillePuzzleCallbackFlag: @ 203BD14
 	.space 0x4
 
 gUnknown_0203BD18: @ 203BD18
@@ -1671,10 +1657,10 @@ gUnknown_0203BD26: @ 203BD26
 gUnknown_0203BD28: @ 203BD28
 	.space 0x4
 
-gUnknown_0203BD2C: @ 203BD2C
+gRecordedBattleRngSeed: @ 203BD2C
 	.space 0x4
 
-gUnknown_0203BD30: @ 203BD30
+gBattlePalaceMoveSelectionRngValue: @ 203BD30
 	.space 0x4
 
 gUnknown_0203BD34: @ 203BD34
