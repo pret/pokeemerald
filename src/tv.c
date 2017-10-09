@@ -419,7 +419,7 @@ const u8 *const gTVWorldOfMastersTextGroup[] = {
     gUnknown_0828455B
 };
 
-const u8 *const gUnknown_0858D3C4[] = {
+const u8 *const gTVTodaysRivalTrainerTextGroup[] = {
     gUnknown_08284641,
     gUnknown_0828485F,
     gUnknown_0828489A,
@@ -6419,6 +6419,155 @@ void DoTVShowTheWorldOfMasters(void)
             break;
     }
     ShowFieldMessage(gTVWorldOfMastersTextGroup[state]);
+}
+
+void DoTVShowTodaysRivalTrainer(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            switch (show->rivalTrainer.location)
+            {
+                default:
+                    sTVShowState = 7;
+                    break;
+                case REGION_MAP_SECRET_BASE:
+                    sTVShowState = 8;
+                    break;
+                case REGION_MAP_NONE:
+                    switch (show->rivalTrainer.mapDataId)
+                    {
+                        case 0x115 ... 0x117:
+                            sTVShowState = 10;
+                            break;
+                        default:
+                            sTVShowState = 9;
+                            break;
+                    }
+                    break;
+            }
+            break;
+        case 7:
+            TVShowConvertInternationalString(gStringVar1, show->rivalTrainer.playerName, show->rivalTrainer.language);
+            TV_PrintIntToStringVar(1, show->rivalTrainer.dexCount);
+            GetMapName(gStringVar3, show->rivalTrainer.location, 0);
+            if (show->rivalTrainer.badgeCount != 0)
+            {
+                sTVShowState = 1;
+            }
+            else
+            {
+                sTVShowState = 2;
+            }
+            break;
+        case 8:
+            TVShowConvertInternationalString(gStringVar1, show->rivalTrainer.playerName, show->rivalTrainer.language);
+            TV_PrintIntToStringVar(1, show->rivalTrainer.dexCount);
+            if (show->rivalTrainer.badgeCount != 0)
+            {
+                sTVShowState = 1;
+            }
+            else
+            {
+                sTVShowState = 2;
+            }
+            break;
+        case 9:
+            TVShowConvertInternationalString(gStringVar1, show->rivalTrainer.playerName, show->rivalTrainer.language);
+            TV_PrintIntToStringVar(1, show->rivalTrainer.dexCount);
+            if (show->rivalTrainer.badgeCount != 0)
+            {
+                sTVShowState = 1;
+            }
+            else
+            {
+                sTVShowState = 2;
+            }
+            break;
+        case 10:
+            TVShowConvertInternationalString(gStringVar1, show->rivalTrainer.playerName, show->rivalTrainer.language);
+            TV_PrintIntToStringVar(1, show->rivalTrainer.dexCount);
+            if (show->rivalTrainer.badgeCount != 0)
+            {
+                sTVShowState = 1;
+            }
+            else
+            {
+                sTVShowState = 2;
+            }
+            break;
+        case 1:
+            TV_PrintIntToStringVar(0, show->rivalTrainer.badgeCount);
+            if (FlagGet(CODE_FLAGS + 0x48))
+            {
+                if (show->rivalTrainer.unk05 || show->rivalTrainer.unk06)
+                {
+                    sTVShowState = 4;
+                }
+                else
+                {
+                    sTVShowState = 3;
+                }
+            }
+            else
+            {
+                sTVShowState = 6;
+            }
+            break;
+        case 2:
+            if (FlagGet(CODE_FLAGS + 0x48))
+            {
+                if (show->rivalTrainer.unk05 || show->rivalTrainer.unk06)
+                {
+                    sTVShowState = 4;
+                }
+                else
+                {
+                    sTVShowState = 3;
+                }
+            }
+            else
+            {
+                sTVShowState = 6;
+            }
+            break;
+        case 3:
+            if (show->rivalTrainer.battlePoints == 0)
+            {
+                sTVShowState = 6;
+            }
+            else
+            {
+                sTVShowState = 5;
+            }
+            break;
+        case 4:
+            TV_PrintIntToStringVar(0, show->rivalTrainer.unk06);
+            TV_PrintIntToStringVar(1, show->rivalTrainer.unk05);
+            if (show->rivalTrainer.battlePoints == 0)
+            {
+                sTVShowState = 6;
+            }
+            else
+            {
+                sTVShowState = 5;
+            }
+            break;
+        case 5:
+            TV_PrintIntToStringVar(0, show->rivalTrainer.battlePoints);
+            sTVShowState = 6;
+            break;
+        case 6:
+            TVShowConvertInternationalString(gStringVar1, show->rivalTrainer.playerName, show->rivalTrainer.language);
+            TVShowDone();
+    }
+    ShowFieldMessage(gTVTodaysRivalTrainerTextGroup[state]);
 }
 
 //void TVShowDone(void)
