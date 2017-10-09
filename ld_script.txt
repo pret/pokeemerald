@@ -219,7 +219,7 @@ SECTIONS {
         asm/hall_of_fame.o(.text);
         asm/credits.o(.text);
         src/lottery_corner.o(.text);
-        asm/diploma.o(.text);
+        src/diploma.o(.text);
         asm/berry_tag_screen.o(.text);
         asm/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
@@ -245,7 +245,7 @@ SECTIONS {
         asm/list_menu.o(.text);
         asm/menu_indicators.o(.text);
         asm/unk_text_util.o(.text);
-        asm/save_location.o(.text);
+        src/save_location.o(.text);
         asm/item_icon.o(.text);
         asm/party_menu.o(.text);
         asm/battle_tent.o(.text);
@@ -431,7 +431,7 @@ SECTIONS {
         data/hall_of_fame.o(.rodata);
         data/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
-        data/diploma.o(.rodata);
+        src/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
         data/mystery_event_menu.o(.rodata);
@@ -452,7 +452,7 @@ SECTIONS {
         data/battle_frontier_2.o(.rodata);
         data/item_menu.o(.rodata);
         data/menu_indicators.o(.rodata);
-        data/save_location.o(.rodata);
+        src/save_location.o(.rodata);
         data/item_icon.o(.rodata);
         data/party_menu.o(.rodata);
         data/battle_tent.o(.rodata);

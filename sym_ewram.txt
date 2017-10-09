@@ -1601,9 +1601,7 @@ gUnknown_0203BCE8: @ 203BCE8
 	.space 0x4
 
     .include "src/lottery_corner.o"
-
-gUnknown_0203BCF0: @ 203BCF0
-	.space 0x4
+    .include "src/diploma.o"
 
 gUnknown_0203BCF4: @ 203BCF4
 	.space 0x4
