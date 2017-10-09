@@ -112,7 +112,7 @@ static const u16 sCrc16Table[] =
     0x7BC7, 0x6A4E, 0x58D5, 0x495C, 0x3DE3, 0x2C6A, 0x1EF1, 0x0F78,
 };
 
-const u8 gMiscBlank_Gfx[] = INCBIN_U8("graphics/interface/blank.4bpp"); // unused in Emerald
+const u8 gMiscBlank_Gfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
 
 u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
 {
