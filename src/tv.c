@@ -634,7 +634,7 @@ const u8 *const gUnknown_0858D640[] = {
     gUnknown_08289D33
 };
 
-const u8 *const gUnknown_0858D66C[] = {
+const u8 *const gTVInSearchOfTrainersTextGroup[] = {
     gUnknown_0828B92C,
     gUnknown_0828BA20,
     gUnknown_0828BAC8,
@@ -6290,6 +6290,74 @@ void DoTVShow3CheersForPokeblocks(void)
             break;
     }
     ShowFieldMessage(gTV3CheersForPokeblocksTextGroup[state]);
+}
+
+void DoTVShowInSearchOfTrainers(void)
+{
+    u8 state;
+
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            GetMapName(gStringVar1, gSaveBlock1Ptr->gabbyAndTyData.mapnum, 0);
+            if (gSaveBlock1Ptr->gabbyAndTyData.battleNum > 1)
+            {
+                sTVShowState = 1;
+            }
+            else
+            {
+                sTVShowState = 2;
+            }
+            break;
+        case 1:
+            sTVShowState = 2;
+            break;
+        case 2:
+            if (!gSaveBlock1Ptr->gabbyAndTyData.valA_0)
+            {
+                sTVShowState = 4;
+            }
+            else if (gSaveBlock1Ptr->gabbyAndTyData.valA_3)
+            {
+                sTVShowState = 5;
+            }
+            else if (gSaveBlock1Ptr->gabbyAndTyData.valA_2)
+            {
+                sTVShowState = 6;
+            }
+            else if (gSaveBlock1Ptr->gabbyAndTyData.not_total_victory)
+            {
+                sTVShowState = 7;
+            }
+            else
+            {
+                sTVShowState = 3;
+            }
+            break;
+        case 3:
+            StringCopy(gStringVar1, gSpeciesNames[gSaveBlock1Ptr->gabbyAndTyData.mon1]);
+            StringCopy(gStringVar2, gMoveNames[gSaveBlock1Ptr->gabbyAndTyData.lastMove]);
+            StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1Ptr->gabbyAndTyData.mon2]);
+            sTVShowState = 8;
+            break;
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+            sTVShowState = 8;
+            break;
+        case 8:
+            CopyEasyChatWord(gStringVar1, gSaveBlock1Ptr->gabbyAndTyData.quote[0]);
+            StringCopy(gStringVar2, gSpeciesNames[gSaveBlock1Ptr->gabbyAndTyData.mon1]);
+            StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1Ptr->gabbyAndTyData.mon2]);
+            gScriptResult = TRUE;
+            sTVShowState = 0;
+            TakeTVShowInSearchOfTrainersOffTheAir();
+            break;
+    }
+    ShowFieldMessage(gTVInSearchOfTrainersTextGroup[state]);
 }
 
 //void TVShowDone(void)
