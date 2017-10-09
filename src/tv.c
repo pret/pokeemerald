@@ -61,57 +61,56 @@ static EWRAM_DATA u16 sFindThatGamerPayoutMaybe = 0;
 static EWRAM_DATA bool8 sFindThatGamerGameMaybe = FALSE;
 static EWRAM_DATA ALIGNED(4) u8 sRecordMixingPartnersWithoutShowsToShare = 0;
 EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0;
-EWRAM_DATA u8 gUnknown_0203A031 = 0;
+EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
 
 // Static ROM declarations
 
 extern const u8 *const gTVBravoTrainerTextGroup[];
 extern const u8 *const gTVBravoTrainerBattleTowerTextGroup[];
 
-void ClearPokemonNews(void);
-u8 GetTVChannelByShowType(u8);
-int sub_80EF370(int);
+static void ClearPokemonNews(void);
+static u8 GetTVChannelByShowType(u8 kind);
 static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
-u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
-static void SetTVMetatilesOnMap(int, int, u16);
-u8 FindAnyTVNewsOnTheAir(void);
+static u8 CheckForBigMovieOrEmergencyNewsOnTV(void);
+static void SetTVMetatilesOnMap(int width, int height, u16 tileId);
+static u8 FindAnyTVNewsOnTheAir(void);
 static bool8 IsTVShowInSearchOfTrainersAiring(void);
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
 
-bool8 TV_BernoulliTrial(u16);
-s8 FindEmptyTVSlotBeyondFirstFiveShowsOfArray(TVShow *);
-bool8 HasMixableShowAlreadyBeenSpawnedWithPlayerID(u8, u8);
-void tv_store_id_3x(TVShow *);
-void DeleteTVShowInArrayByIdx(TVShow *, u8);
-s8 FindEmptyTVSlotWithinFirstFiveShowsOfArray(TVShow *);
-void FindActiveBroadcastByShowType_SetScriptResult(u8);
-void sub_80EF7B4(void);
-void sub_80EF7A8(void);
-u16 TV_GetSomeOtherSpeciesAlreadySeenByPlayer(u16);
-void sub_80EFA88(void);
-void sub_80EF93C(TVShow *);
-s8 sub_80EEE30(PokeNews *);
-bool8 sub_80EF0E4(u8);
-void ClearPokemonNewsI(u8);
-void sub_80F1254(TVShow *);
-void sub_80F12A4(TVShow *);
-void sub_80F0358(TVShow *, TVShow *, TVShow *, TVShow *);
-void sub_80F0C04(void);
-void sub_80F0708(void);
-void sub_80F0B64(void);
-s8 sub_80F06D0(TVShow *);
-bool8 sub_80F049C(TVShow *[], TVShow *[], u8);
-bool8 sub_80F0580(TVShow *, TVShow *, u8);
-bool8 sub_80F05E8(TVShow *, TVShow *, u8);
-bool8 sub_80F0668(TVShow *, TVShow *, u8);
-void sub_80F0B00(u8 showIdx);
-void sub_80F0B24(u16 species, u8 showIdx);
-void sub_80F0D60(PokeNews *, PokeNews *, PokeNews *, PokeNews *);
-void sub_80F0EEC(void);
-void sub_80F0F24(void);
-s8 sub_80F0ECC(PokeNews *, u8);
-void sub_80F0E58(PokeNews *[], PokeNews *[]);
-bool8 sub_80F0E84(PokeNews *, PokeNews *, s8);
+static bool8 TV_BernoulliTrial(u16 ratio);
+static s8 FindEmptyTVSlotBeyondFirstFiveShowsOfArray(TVShow *shows);
+static bool8 HasMixableShowAlreadyBeenSpawnedWithPlayerID(u8 kind, bool8 flag);
+static void tv_store_id_3x(TVShow *show);
+static void DeleteTVShowInArrayByIdx(TVShow *shows, u8 idx);
+static s8 FindEmptyTVSlotWithinFirstFiveShowsOfArray(TVShow *shows);
+static void FindActiveBroadcastByShowType_SetScriptResult(u8 kind);
+static void sub_80EF7B4(void);
+static void sub_80EF7A8(void);
+static u16 TV_GetSomeOtherSpeciesAlreadySeenByPlayer(u16 passedSpecies);
+static void sub_80EFA88(void);
+static void sub_80EF93C(TVShow *shows);
+static s8 sub_80EEE30(PokeNews *pokeNews);
+static bool8 sub_80EF0E4(u8 newsKind);
+static void ClearPokemonNewsI(u8 i);
+static void sub_80F1254(TVShow *shows);
+static void sub_80F12A4(TVShow *shows);
+static void sub_80F0358(TVShow *player1, TVShow *player2, TVShow *player3, TVShow *player4);
+static void sub_80F0C04(void);
+static void sub_80F0708(void);
+static void sub_80F0B64(void);
+static s8 sub_80F06D0(TVShow *tvShows);
+static bool8 sub_80F049C(TVShow *dest[], TVShow *src[], u8 idx);
+static bool8 sub_80F0580(TVShow *tv1, TVShow *tv2, u8 idx);
+static bool8 sub_80F05E8(TVShow *tv1, TVShow *tv2, u8 idx);
+static bool8 sub_80F0668(TVShow *tv1, TVShow *tv2, u8 idx);
+static void sub_80F0B00(u8 showIdx);
+static void sub_80F0B24(u16 species, u8 showIdx);
+static void sub_80F0D60(PokeNews *player1, PokeNews *player2, PokeNews *player3, PokeNews *player4);
+static void sub_80F0EEC(void);
+static void sub_80F0F24(void);
+static s8 sub_80F0ECC(PokeNews *pokeNews, u8 idx);
+static void sub_80F0E58(PokeNews *dest[], PokeNews *src[]);
+static bool8 sub_80F0E84(PokeNews *dest, PokeNews *src, s8 slot);
 
 void TVShowDone(void);
 
@@ -3853,15 +3852,15 @@ void sub_80F0358(TVShow player1[25], TVShow player2[25], TVShow player3[25], TVS
     }
 }
 
-bool8 sub_80F049C(TVShow *src[25], TVShow *dest[25], u8 idx)
+bool8 sub_80F049C(TVShow *dest[25], TVShow *src[25], u8 idx)
 {
     u8 value;
     u8 switchval;
     TVShow *tv1;
     TVShow *tv2;
 
-    tv1 = *src;
-    tv2 = *dest;
+    tv1 = *dest;
+    tv2 = *src;
     value = FALSE;
     switchval = GetTVChannelByShowType(tv2[sTVShowMixingCurSlot].common.kind);
     switch (switchval)

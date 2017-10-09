@@ -2526,7 +2526,7 @@ _080F5328:
 	movs r0, 0x1
 	strb r0, [r5, 0x12]
 	bl Random
-	ldr r4, =gUnknown_0203A031
+	ldr r4, =sTVSecretBaseSecretsRandomValues
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -2554,7 +2554,7 @@ _080F5348:
 	.pool
 _080F5370:
 	strb r6, [r5, 0x12]
-	ldr r0, =gUnknown_0203A031
+	ldr r0, =sTVSecretBaseSecretsRandomValues
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F5384
@@ -2568,7 +2568,7 @@ _080F5384:
 	b _080F542C
 _080F538A:
 	bl Random
-	ldr r7, =gUnknown_0203A031
+	ldr r7, =sTVSecretBaseSecretsRandomValues
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -2611,7 +2611,7 @@ _080F53DE:
 	.pool
 _080F53F0:
 	movs r4, 0
-	ldr r7, =gUnknown_0203A031
+	ldr r7, =sTVSecretBaseSecretsRandomValues
 	ldr r2, =0x0000fffe
 	mov r8, r2
 _080F53F8:
@@ -2638,7 +2638,7 @@ _080F5418:
 _080F5422:
 	movs r0, 0x3
 	strb r0, [r5, 0x12]
-	ldr r0, =gUnknown_0203A031
+	ldr r0, =sTVSecretBaseSecretsRandomValues
 	ldrb r1, [r0, 0x2]
 _080F542A:
 	adds r0, r5, 0
