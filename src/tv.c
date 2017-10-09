@@ -34,6 +34,7 @@
 #include "naming_screen.h"
 #include "malloc.h"
 #include "region_map.h"
+#include "decoration.h"
 #include "tv.h"
 
 // Static type declarations
@@ -472,7 +473,7 @@ const u8 *const gTVBreakingNewsTextGroup[] = {
     gUnknown_082858D0
 };
 
-const u8 *const gUnknown_0858D45C[] = {
+const u8 *const gTVSecretBaseVisitTextGroup[] = {
     gUnknown_08285B27,
     gUnknown_08285BCA,
     gUnknown_08285C13,
@@ -6845,6 +6846,102 @@ void DoTVShowBreakingNewsTV(void)
             break;
     }
     ShowFieldMessage(gTVBreakingNewsTextGroup[state]);
+}
+
+void DoTVShowSecretBaseVisit(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseVisit.playerName, show->secretBaseVisit.language);
+            if (show->secretBaseVisit.nDecorations == 0)
+            {
+                sTVShowState = 2;
+            }
+            else
+            {
+                sTVShowState = 1;
+            }
+            break;
+        case 1:
+            StringCopy(gStringVar2, gDecorations[show->secretBaseVisit.decorations[0]].name);
+            if (show->secretBaseVisit.nDecorations == 1)
+            {
+                sTVShowState = 4;
+            }
+            else
+            {
+                sTVShowState = 3;
+            }
+            break;
+        case 3:
+            StringCopy(gStringVar2, gDecorations[show->secretBaseVisit.decorations[1]].name);
+            switch (show->secretBaseVisit.nDecorations)
+            {
+                case 2:
+                    sTVShowState = 7;
+                    break;
+                case 3:
+                    sTVShowState = 6;
+                    break;
+                case 4:
+                    sTVShowState = 5;
+                    break;
+            }
+            break;
+        case 5:
+            StringCopy(gStringVar2, gDecorations[show->secretBaseVisit.decorations[2]].name);
+            StringCopy(gStringVar3, gDecorations[show->secretBaseVisit.decorations[3]].name);
+            sTVShowState = 8;
+            break;
+        case 6:
+            StringCopy(gStringVar2, gDecorations[show->secretBaseVisit.decorations[2]].name);
+            sTVShowState = 8;
+            break;
+        case 2:
+        case 4:
+        case 7:
+            sTVShowState = 8;
+            break;
+        case 8:
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseVisit.playerName, show->secretBaseVisit.language);
+            if (show->secretBaseVisit.unk02 < 25)
+            {
+                sTVShowState = 12;
+            }
+            else if (show->secretBaseVisit.unk02 < 50)
+            {
+                sTVShowState = 11;
+            }
+            else if (show->secretBaseVisit.unk02 < 70)
+            {
+                sTVShowState = 10;
+            }
+            else
+            {
+                sTVShowState = 9;
+            }
+            break;
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseVisit.playerName, show->secretBaseVisit.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->secretBaseVisit.species]);
+            StringCopy(gStringVar3, gMoveNames[show->secretBaseVisit.move]);
+            sTVShowState = 13;
+            break;
+        case 13:
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVSecretBaseVisitTextGroup[state]);
 }
 
 //void TVShowDone(void)
