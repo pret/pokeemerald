@@ -134,7 +134,7 @@ gUnknown_083054E0:: @ 83054E0
 gUnknown_08305D0C:: @ 8305D0C
 	.incbin "baserom.gba", 0x305d0c, 0x20
 
-gUnknown_08305D2C:: @ 8305D2C
+gTrainerBackPicCoords:: @ 8305D2C
 	.incbin "baserom.gba", 0x305d2c, 0x20
 
 @ 8305D4C
@@ -146,7 +146,7 @@ gUnknown_08305D2C:: @ 8305D2C
 gUnknown_08305DCC:: @ 8305DCC
 	.incbin "baserom.gba", 0x305dcc, 0x3ce0
 
-gUnknown_08309AAC:: @ 8309AAC
+gMonAnimationsSpriteAnimsPtrTable:: @ 8309AAC
 	.incbin "baserom.gba", 0x309aac, 0x6e0
 
 @ 830A18C

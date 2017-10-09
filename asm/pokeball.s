@@ -1211,7 +1211,7 @@ _08075DD4:
 	cmp r5, r0
 	bne _08075E56
 _08075E00:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075E56
@@ -1243,7 +1243,7 @@ _08075E4C:
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
 _08075E56:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075E70
@@ -1815,7 +1815,7 @@ _080762F8:
 	ldrb r0, [r5, 0x6]
 	strh r0, [r5, 0x3A]
 	strh r1, [r5, 0x2E]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076358
@@ -1888,7 +1888,7 @@ sub_8076398: @ 8076398
 	ble _080763EC
 	movs r0, 0
 	strh r0, [r5, 0x2E]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080763E8

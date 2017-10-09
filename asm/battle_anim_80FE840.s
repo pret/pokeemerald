@@ -721,7 +721,7 @@ sub_80FEE1C: @ 80FEE1C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FEE36
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FEE3E
@@ -1260,7 +1260,7 @@ _080FF260:
 sub_80FF268: @ 80FF268
 	push {r4,lr}
 	adds r4, r0, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5433,7 +5433,7 @@ _08101378:
 	ldr r0, =gAnimationBankTarget
 _0810137A:
 	ldrb r6, [r0]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _081013C4
@@ -7557,7 +7557,7 @@ _08102448:
 	bne _08102464
 	adds r0, r4, r5
 	ldrb r0, [r0]
-	bl sub_8072984
+	bl SetHealthboxSpriteInvisible
 _08102464:
 	movs r1, 0x2
 	ldrsh r0, [r6, r1]
@@ -7571,7 +7571,7 @@ _08102464:
 	bne _08102482
 	adds r0, r4, r5
 	ldrb r0, [r0]
-	bl sub_8072984
+	bl SetHealthboxSpriteInvisible
 _08102482:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -7600,7 +7600,7 @@ _081024B2:
 	ldr r0, =gHealthBoxesIds
 	adds r0, r4, r0
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -13205,7 +13205,7 @@ _081051F2:
 	movs r0, 0x1
 	adds r4, r0, 0
 	eors r4, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810526A
@@ -26794,7 +26794,7 @@ _0810BF90:
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _0810BFA8
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810BFB4
@@ -33105,7 +33105,7 @@ _0810F284:
 	mov r0, r8
 	cmp r0, 0
 	bne _0810F2B8
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810F2B8
@@ -33501,7 +33501,7 @@ _0810F5A6:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810F5EE
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810F5EE
@@ -43194,7 +43194,7 @@ sub_81144F8: @ 81144F8
 	movs r2, 0x1
 	bl lcd_bg_operations
 _0811455C:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _081145D6
@@ -47859,7 +47859,7 @@ sub_8116B14: @ 8116B14
 	movs r0, 0xA
 	bl SetGpuReg
 _08116BA2:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08116C26
@@ -48295,7 +48295,7 @@ _08116F5C:
 	movs r2, 0x1
 	bl lcd_bg_operations
 _08116FBA:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08117036
