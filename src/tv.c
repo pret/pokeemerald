@@ -490,7 +490,7 @@ const u8 *const gTVSecretBaseVisitTextGroup[] = {
     gUnknown_08286340
 };
 
-const u8 *const gUnknown_0858D494[] = {
+const u8 *const gTVPokemonLotterWinnerFlashReportTextGroup[] = {
     gUnknown_082863CC
 };
 
@@ -2415,8 +2415,8 @@ void sub_80EE2CC(void)
         show->lottoWinner.kind = TVSHOW_LOTTO_WINNER;
         show->lottoWinner.active = FALSE;
         StringCopy(show->lottoWinner.playerName, gSaveBlock2Ptr->playerName);
-        show->lottoWinner.unk04 = 4 - gSpecialVar_0x8004;
-        show->lottoWinner.unk02 = gSpecialVar_0x8005;
+        show->lottoWinner.whichPrize = 4 - gSpecialVar_0x8004;
+        show->lottoWinner.item = gSpecialVar_0x8005;
         tv_store_id_3x(show);
         show->lottoWinner.language = gGameLanguage;
     }
@@ -6942,6 +6942,36 @@ void DoTVShowSecretBaseVisit(void)
             break;
     }
     ShowFieldMessage(gTVSecretBaseVisitTextGroup[state]);
+}
+
+void DoTVShowPokemonLotterWinnerFlashReport(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    TVShowConvertInternationalString(gStringVar1, show->lottoWinner.playerName, show->lottoWinner.language);
+    if (show->lottoWinner.whichPrize == 0)
+    {
+        StringCopy(gStringVar2, gText_Jackpot);
+    }
+    else if (show->lottoWinner.whichPrize == 1)
+    {
+        StringCopy(gStringVar2, gText_First);
+    }
+    else if (show->lottoWinner.whichPrize == 2)
+    {
+        StringCopy(gStringVar2, gText_Second);
+    }
+    else
+    {
+        StringCopy(gStringVar2, gText_Third);
+    }
+    StringCopy(gStringVar3, ItemId_GetItem(show->lottoWinner.item)->name);
+    TVShowDone();
+    ShowFieldMessage(gTVPokemonLotterWinnerFlashReportTextGroup[state]);
 }
 
 //void TVShowDone(void)
