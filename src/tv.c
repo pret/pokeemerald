@@ -411,7 +411,7 @@ const u8 *const gTVPokemonTodayFailedTextGroup[] = {
     gUnknown_082833C6
 };
 
-const u8 *const gUnknown_0858D3B0[] = {
+const u8 *const gTVPokemonAnglerTextGroup[] = {
     gUnknown_08282ACF,
     gUnknown_08282D7C
 };
@@ -6358,6 +6358,41 @@ void DoTVShowInSearchOfTrainers(void)
             break;
     }
     ShowFieldMessage(gTVInSearchOfTrainersTextGroup[state]);
+}
+
+void DoTVShowPokemonAngler(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    if (show->pokemonAngler.var02 < show->pokemonAngler.var03)
+    {
+        sTVShowState = 0;
+    }
+    else
+    {
+        sTVShowState = 1;
+    }
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->pokemonAngler.playerName, show->pokemonAngler.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->pokemonAngler.species]);
+            TV_PrintIntToStringVar(2, show->pokemonAngler.var03);
+            TVShowDone();
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, show->pokemonAngler.playerName, show->pokemonAngler.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->pokemonAngler.species]);
+            TV_PrintIntToStringVar(2, show->pokemonAngler.var02);
+            TVShowDone();
+            break;
+
+    }
+    ShowFieldMessage(gTVPokemonAnglerTextGroup[state]);
 }
 
 //void TVShowDone(void)
