@@ -4705,7 +4705,7 @@ _08137CAC:
 	thumb_func_start sub_8137CB4
 sub_8137CB4: @ 8137CB4
 	push {lr}
-	ldr r0, =sub_8177888
+	ldr r0, =CB2_ShowDiploma
 	bl SetMainCallback2
 	bl ScriptContext2_Enable
 	pop {r0}
