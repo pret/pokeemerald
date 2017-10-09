@@ -289,7 +289,7 @@ const u8 *const gTVBravoTrainerTextGroup[] = {
     gUnknown_0827F6E6
 };
 
-const u8 *const gUnknown_0858D228[] = {
+const u8 *const gTV3CheersForPokeblocksTextGroup[] = {
     gUnknown_082818F4,
     gUnknown_082819C7,
     gUnknown_08281A2F,
@@ -1278,7 +1278,7 @@ void PutBattleUpdateOnTheAir(u8 a0, u16 a1, u16 a2, u16 a3)
     }
 }
 
-bool8 Put3CheersForPokeblocksOnTheAir(const u8 *a0, u8 a1, u8 a2, u8 a3, u8 language)
+bool8 Put3CheersForPokeblocksOnTheAir(const u8 *a0, u8 flavor, u8 a2, u8 a3, u8 language)
 {
     TVShow *show;
     u8 name[32];
@@ -1300,9 +1300,9 @@ bool8 Put3CheersForPokeblocksOnTheAir(const u8 *a0, u8 a1, u8 a2, u8 a3, u8 lang
     StringCopy(name, a0);
     StripExtCtrlCodes(name);
     StringCopy(show->threeCheers.unk_04, name);
-    show->threeCheers.unk_03_0 = a1;
+    show->threeCheers.flavor = flavor;
     show->threeCheers.unk_03_3 = a2;
-    show->threeCheers.unk_02 = a3;
+    show->threeCheers.sheen = a3;
     tv_store_id_2x(show);
     show->threeCheers.language = gGameLanguage;
     if (show->threeCheers.language == LANGUAGE_JAPANESE || language == LANGUAGE_JAPANESE)
@@ -6187,6 +6187,109 @@ void DoTVShowPokemonBattleUpdate(void)
             break;
     }
     ShowFieldMessage(gTVPokemonBattleUpdateTextGroup[state]);
+}
+
+void DoTVShow3CheersForPokeblocks(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->threeCheers.playerName, show->threeCheers.language);
+            if (show->threeCheers.sheen > 20)
+            {
+                sTVShowState = 1;
+            }
+            else
+            {
+                sTVShowState = 3;
+            }
+            break;
+        case 1:
+            switch (show->threeCheers.flavor)
+            {
+                case 0:
+                    StringCopy(gStringVar1, gText_Spicy2);
+                    break;
+                case 1:
+                    StringCopy(gStringVar1, gText_Dry2);
+                    break;
+                case 2:
+                    StringCopy(gStringVar1, gText_Sweet2);
+                    break;
+                case 3:
+                    StringCopy(gStringVar1, gText_Bitter2);
+                    break;
+                case 4:
+                    StringCopy(gStringVar1, gText_Sour2);
+                    break;
+            }
+            if (show->threeCheers.sheen > 24)
+            {
+                StringCopy(gStringVar2, gText_Excellent);
+            } else if (show->threeCheers.sheen > 22)
+            {
+                StringCopy(gStringVar2, gText_VeryGood);
+            }
+            else
+            {
+                StringCopy(gStringVar2, gText_Good);
+            }
+            TVShowConvertInternationalString(gStringVar3, show->threeCheers.playerName, show->threeCheers.language);
+            sTVShowState = 2;
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, show->threeCheers.unk_04, show->threeCheers.unk_15);
+            sTVShowState = 5;
+            break;
+        case 3:
+            switch (show->threeCheers.flavor)
+            {
+                case 0:
+                    StringCopy(gStringVar1, gText_Spicy2);
+                    break;
+                case 1:
+                    StringCopy(gStringVar1, gText_Dry2);
+                    break;
+                case 2:
+                    StringCopy(gStringVar1, gText_Sweet2);
+                    break;
+                case 3:
+                    StringCopy(gStringVar1, gText_Bitter2);
+                    break;
+                case 4:
+                    StringCopy(gStringVar1, gText_Sour2);
+                    break;
+            }
+            if (show->threeCheers.sheen > 16)
+            {
+                StringCopy(gStringVar2, gText_SoSo);
+            } else if (show->threeCheers.sheen > 13)
+            {
+                StringCopy(gStringVar2, gText_Bad);
+            }
+            else
+            {
+                StringCopy(gStringVar2, gText_TheWorst);
+            }
+            TVShowConvertInternationalString(gStringVar3, show->threeCheers.playerName, show->threeCheers.language);
+            sTVShowState = 4;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, show->threeCheers.unk_04, show->threeCheers.unk_15);
+            TVShowConvertInternationalString(gStringVar2, show->threeCheers.playerName, show->threeCheers.language);
+            sTVShowState = 5;
+            break;
+        case 5:
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTV3CheersForPokeblocksTextGroup[state]);
 }
 
 //void TVShowDone(void)

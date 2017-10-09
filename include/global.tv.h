@@ -176,8 +176,8 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 unk_02;
-        /*0x03*/ u8 unk_03_0:3;
+        /*0x02*/ u8 sheen;
+        /*0x03*/ u8 flavor:3;
         /*0x03*/ u8 unk_03_3:2;
         /*0x04*/ u8 unk_04[8];
         /*0x0C*/ u8 playerName[8];

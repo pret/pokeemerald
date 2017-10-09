@@ -12,5 +12,16 @@ extern const u8 gText_Smart[];
 extern const u8 gText_Tough[];
 extern const u8 gText_Single[];
 extern const u8 gText_Double[];
+extern const u8 gText_Spicy2[];
+extern const u8 gText_Dry2[];
+extern const u8 gText_Sweet2[];
+extern const u8 gText_Bitter2[];
+extern const u8 gText_Sour2[];
+extern const u8 gText_Excellent[];
+extern const u8 gText_VeryGood[];
+extern const u8 gText_Good[];
+extern const u8 gText_SoSo[];
+extern const u8 gText_Bad[];
+extern const u8 gText_TheWorst[];
 
 #endif //GUARD_strings_H
