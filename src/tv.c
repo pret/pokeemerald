@@ -443,7 +443,7 @@ const u8 *const TVDewfordTrendWatcherNetworkTextGroup[] = {
     gUnknown_08284E34
 };
 
-const u8 *const gUnknown_0858D40C[] = {
+const u8 *const TVHoennTreasureInvestigatorsTextGroup[] = {
     gUnknown_08284EDF,
     gUnknown_08284FA1,
     gUnknown_082850F5
@@ -1968,7 +1968,7 @@ void sub_80EDCE8(void)
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->treasureInvestigators.kind = TVSHOW_TREASURE_INVESTIGATORS;
         show->treasureInvestigators.active = FALSE;
-        show->treasureInvestigators.unk02 = gSpecialVar_0x8005;
+        show->treasureInvestigators.item = gSpecialVar_0x8005;
         show->treasureInvestigators.location = gMapHeader.regionMapSectionId;
         show->treasureInvestigators.mapDataId = gMapHeader.mapDataId;
         StringCopy(show->treasureInvestigators.playerName, gSaveBlock2Ptr->playerName);
@@ -6624,6 +6624,50 @@ void DoTVShowDewfordTrendWatcherNetwork(void)
             TVShowDone();
     }
     ShowFieldMessage(TVDewfordTrendWatcherNetworkTextGroup[state]);
+}
+
+void DoTVShowHoennTreasureInvestigators(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            StringCopy(gStringVar1, ItemId_GetItem(show->treasureInvestigators.item)->name);
+            if (show->treasureInvestigators.location == REGION_MAP_NONE)
+            {
+                switch (show->treasureInvestigators.mapDataId)
+                {
+                    case 0x115 ... 0x117:
+                        sTVShowState = 2;
+                        break;
+                    default:
+                        sTVShowState = 1;
+                        break;
+                }
+            }
+            else
+            {
+                sTVShowState = 1;
+            }
+            break;
+        case 1:
+            StringCopy(gStringVar1, ItemId_GetItem(show->treasureInvestigators.item)->name);
+            TVShowConvertInternationalString(gStringVar2, show->treasureInvestigators.playerName, show->treasureInvestigators.language);
+            GetMapName(gStringVar3, show->treasureInvestigators.location, 0);
+            TVShowDone();
+            break;
+        case 2:
+            StringCopy(gStringVar1, ItemId_GetItem(show->treasureInvestigators.item)->name);
+            TVShowConvertInternationalString(gStringVar2, show->treasureInvestigators.playerName, show->treasureInvestigators.language);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(TVHoennTreasureInvestigatorsTextGroup[state]);
 }
 
 //void TVShowDone(void)

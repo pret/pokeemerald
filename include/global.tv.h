@@ -324,7 +324,7 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 unk02;
+        /*0x02*/ u16 item;
         /*0x04*/ u8 location;
         /*0x05*/ u8 language;
         /*0x06*/ u16 mapDataId;
