@@ -449,7 +449,7 @@ const u8 *const TVHoennTreasureInvestigatorsTextGroup[] = {
     gUnknown_082850F5
 };
 
-const u8 *const gUnknown_0858D418[] = {
+const u8 *const gTVFindThatGamerTextGroup[] = {
     gUnknown_08285240,
     gUnknown_082852F4,
     gUnknown_08285463,
@@ -6668,6 +6668,80 @@ void DoTVShowHoennTreasureInvestigators(void)
             break;
     }
     ShowFieldMessage(TVHoennTreasureInvestigatorsTextGroup[state]);
+}
+
+void DoTVShowFindThatGamer(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->findThatGamer.playerName, show->findThatGamer.language);
+            switch (show->findThatGamer.unk03)
+            {
+                case 0:
+                    StringCopy(gStringVar2, gText_Slots);
+                    break;
+                case 1:
+                    StringCopy(gStringVar2, gText_Roulette);
+                    break;
+            }
+            if (show->findThatGamer.unk02 == TRUE)
+            {
+                sTVShowState = 1;
+            }
+            else
+            {
+                sTVShowState = 2;
+            }
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, show->findThatGamer.playerName, show->findThatGamer.language);
+            switch (show->findThatGamer.unk03)
+            {
+                case 0:
+                    StringCopy(gStringVar2, gText_Slots);
+                    break;
+                case 1:
+                    StringCopy(gStringVar2, gText_Roulette);
+                    break;
+            }
+            TV_PrintIntToStringVar(2, show->findThatGamer.unk04);
+            TVShowDone(); break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, show->findThatGamer.playerName, show->findThatGamer.language);
+            switch (show->findThatGamer.unk03)
+            {
+                case 0:
+                    StringCopy(gStringVar2, gText_Slots);
+                    break;
+                case 1:
+                    StringCopy(gStringVar2, gText_Roulette);
+                    break;
+            }
+            TV_PrintIntToStringVar(2, show->findThatGamer.unk04);
+            sTVShowState = 3;
+            break;
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, show->findThatGamer.playerName, show->findThatGamer.language);
+            switch (show->findThatGamer.unk03)
+            {
+                case 0:
+                    StringCopy(gStringVar2, gText_Roulette);
+                    break;
+                case 1:
+                    StringCopy(gStringVar2, gText_Slots);
+                    break;
+            }
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVFindThatGamerTextGroup[state]);
 }
 
 //void TVShowDone(void)
