@@ -123,7 +123,6 @@ SECTIONS {
         asm/battle_setup.o(.text);
         asm/cable_club.o(.text);
         asm/trainer_see.o(.text);
-        asm/fldeff_emotion.o(.text);
         asm/wild_encounter.o(.text);
         asm/field_effect.o(.text);
         asm/unknown_task.o(.text);
@@ -191,7 +190,7 @@ SECTIONS {
         asm/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
         asm/battle_controller_linkpartner.o(.text);
-        asm/battle_message.o(.text);
+        src/battle_message.o(.text);
         asm/cable_car.o(.text);
         asm/math_util.o(.text);
         asm/roulette_util.o(.text);
@@ -325,6 +324,8 @@ SECTIONS {
         src/string_util.o(.rodata);
         data/link.o(.rodata);
         src/rtc.o(.rodata);
+        data/main_menu.o(.rodata);
+        data/battle_1.o(.rodata);
         data/data2b.o(.rodata);
         src/battle_2.o(.rodata);
         src/battle_util.o(.rodata);
@@ -368,7 +369,6 @@ SECTIONS {
         data/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         data/trainer_see.o(.rodata);
-        data/fldeff_emotion.o(.rodata);
         data/wild_encounter.o(.rodata);
         data/field_effect.o(.rodata);
         data/option_menu.o(.rodata);
@@ -412,7 +412,7 @@ SECTIONS {
         src/battle_ai_script_commands.o(.rodata);
         data/data4.o(.rodata);
         data/battle_controller_link_partner.o(.rodata);
-        data/battle_message.o(.rodata);
+        src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
         data/save.o(.rodata);
         data/field_effect_helpers.o(.rodata);

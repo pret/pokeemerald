@@ -2617,8 +2617,8 @@ _080B1C96:
 	.pool
 	thumb_func_end sub_80B1C7C
 
-	thumb_func_start sub_80B1CA4
-sub_80B1CA4: @ 80B1CA4
+	thumb_func_start GetTrainer1LoseText
+GetTrainer1LoseText: @ 80B1CA4
 	push {r4,lr}
 	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
@@ -2643,10 +2643,10 @@ _080B1CC0:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80B1CA4
+	thumb_func_end GetTrainer1LoseText
 
-	thumb_func_start sub_80B1CE0
-sub_80B1CE0: @ 80B1CE0
+	thumb_func_start GetTrainer2LoseText
+GetTrainer2LoseText: @ 80B1CE0
 	push {r4,lr}
 	ldr r4, =gStringVar4
 	ldr r0, =gUnknown_02038BE0
@@ -2660,7 +2660,7 @@ sub_80B1CE0: @ 80B1CE0
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80B1CE0
+	thumb_func_end GetTrainer2LoseText
 
 	thumb_func_start sub_80B1D04
 sub_80B1D04: @ 80B1D04

@@ -4401,7 +4401,7 @@ sub_8059B3C: @ 8059B3C
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _08059B98
-	bl sub_814FBAC
+	bl SetPpNumbersPaletteInMoveSelection
 	ldrb r1, [r7]
 	lsls r4, r1, 9
 	adds r0, r5, 0x4
@@ -7371,11 +7371,11 @@ _0805B5E0:
 	beq _0805B618
 	movs r0, 0x5A
 	mov r9, r0
-	ldr r1, =gUnknown_083054E0
+	ldr r1, =gTrainerFrontPicCoords
 	b _0805B642
 	.pool
 _0805B618:
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 	lsls r0, r4, 2
 	adds r0, r1
 	ldrb r1, [r0]
@@ -7392,7 +7392,7 @@ _0805B618:
 _0805B63C:
 	movs r0, 0x50
 	mov r9, r0
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 _0805B642:
 	lsls r0, r4, 2
 	adds r0, r1
@@ -7733,7 +7733,7 @@ _0805B926:
 	adds r0, r4, 0
 	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 	lsls r4, 2
 	adds r4, r1
 	ldrb r1, [r4]

@@ -605,7 +605,7 @@ struct BattleStruct
     u8 field_8B;
     u8 field_8C;
     u8 field_8D;
-    u8 field_8E;
+    u8 stringMoveType;
     u8 expGetterBank;
     u8 field_90;
     u8 field_91;

@@ -5857,8 +5857,8 @@ sub_8165244: @ 8165244
 	.pool
 	thumb_func_end sub_8165244
 
-	thumb_func_start sub_8165264
-sub_8165264: @ 8165264
+	thumb_func_start GetEreaderTrainerClassId
+GetEreaderTrainerClassId: @ 8165264
 	ldr r1, =gTrainerClassToNameIndex
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -5869,10 +5869,10 @@ sub_8165264: @ 8165264
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_8165264
+	thumb_func_end GetEreaderTrainerClassId
 
-	thumb_func_start sub_8165284
-sub_8165284: @ 8165284
+	thumb_func_start GetEreaderTrainerName
+GetEreaderTrainerName: @ 8165284
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r2, 0
@@ -5896,7 +5896,7 @@ _08165294:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8165284
+	thumb_func_end GetEreaderTrainerName
 
 	thumb_func_start sub_81652B4
 sub_81652B4: @ 81652B4

@@ -239,7 +239,7 @@ struct SecretBaseRecord
     /*0x1A9D*/ u8 gender:1;
     /*0x1A9D*/ u8 sbr_field_1_5:1;
     /*0x1A9D*/ u8 sbr_field_1_6:2;
-    /*0x1A9E*/ u8 sbr_field_2[7]; // 0xFF bytes?
+    /*0x1A9E*/ u8 trainerName[7]; // 0xFF bytes?
     /*0x1AA5*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 sbr_field_e;

@@ -34,6 +34,7 @@
 #include "pokemon_storage_system.h"
 #include "task.h"
 #include "naming_screen.h"
+#include "battle_string_ids.h"
 
 // variables
 
@@ -1375,7 +1376,7 @@ static void atk02_attackstring(void)
          return;
     if (!(gHitMarker & (HITMARKER_NO_ATTACKSTRING | HITMARKER_ATTACKSTRING_PRINTED)))
     {
-        PrepareStringBattle(4, gBankAttacker);
+        PrepareStringBattle(STRINGID_USEDMOVE, gBankAttacker);
         gHitMarker |= HITMARKER_ATTACKSTRING_PRINTED;
     }
     gBattlescriptCurrInstr++;
@@ -2000,7 +2001,7 @@ static void atk0B_healthbarupdate(void)
 
         if (gBattleMons[gActiveBank].status2 & STATUS2_SUBSTITUTE && gDisableStructs[gActiveBank].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
         {
-            PrepareStringBattle(0x80, gActiveBank);
+            PrepareStringBattle(STRINGID_SUBSTITUTEDAMAGED, gActiveBank);
         }
         else
         {
@@ -2157,7 +2158,7 @@ static void atk0D_critmessage(void)
     {
         if (gCritMultiplier == 2 && !(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
         {
-            PrepareStringBattle(0xD9, gBankAttacker);
+            PrepareStringBattle(STRINGID_CRITICALHIT, gBankAttacker);
             gBattleCommunication[MSG_DISPLAY] = 1;
         }
         gBattlescriptCurrInstr++;
@@ -2229,22 +2230,22 @@ static void atk0F_resultmessage(void)
         switch (gBattleMoveFlags & (u8)(~(MOVESTATUS_MISSED)))
         {
         case MOVESTATUS_SUPEREFFECTIVE:
-            stringId = 0xDE;
+            stringId = STRINGID_SUPEREFFECTIVE;
             break;
         case MOVESTATUS_NOTVERYEFFECTIVE:
-            stringId = 0xDD;
+            stringId = STRINGID_NOTVERYEFFECTIVE;
             break;
         case MOVESTATUS_ONEHITKO:
-            stringId = 0xDA;
+            stringId = STRINGID_ONEHITKO;
             break;
         case MOVESTATUS_ENDURED:
-            stringId = 0x99;
+            stringId = STRINGID_PKMNENDUREDHIT;
             break;
         case MOVESTATUS_FAILED:
-            stringId = 0xE5;
+            stringId = STRINGID_BUTITFAILED;
             break;
         case MOVESTATUS_NOTAFFECTED:
-            stringId = 0x1B;
+            stringId = STRINGID_ITDOESNTAFFECT;
             break;
         case MOVESTATUS_HUNGON:
             gLastUsedItem = gBattleMons[gBankTarget].item;
@@ -2256,7 +2257,7 @@ static void atk0F_resultmessage(void)
         default:
             if (gBattleMoveFlags & MOVESTATUS_NOTAFFECTED)
             {
-                stringId = 0x1B;
+                stringId = STRINGID_ITDOESNTAFFECT;
             }
             else if (gBattleMoveFlags & MOVESTATUS_ONEHITKO)
             {
@@ -2285,7 +2286,7 @@ static void atk0F_resultmessage(void)
             }
             else if (gBattleMoveFlags & MOVESTATUS_FAILED)
             {
-                stringId = 0xE5;
+                stringId = STRINGID_BUTITFAILED;
             }
             else
             {
@@ -3592,7 +3593,7 @@ static void atk23_getexp(void)
 
                     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage)
 
-                    PrepareStringBattle(0xD, gBattleStruct->expGetterBank);
+                    PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBank);
                     MonGainEVs(&gPlayerParty[gBattleStruct->expGetterId], gBattleMons[gBank1].species);
                 }
                 gBattleStruct->sentInPokes >>= 1;
@@ -6181,7 +6182,7 @@ static void atk5A_yesnoboxlearnmove(void)
                 u16 moveId = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_MOVE1 + movePosition);
                 if (IsHMMove2(moveId))
                 {
-                    PrepareStringBattle(0x13F, gActiveBank);
+                    PrepareStringBattle(STRINGID_HMMOVESCANTBEFORGOTTEN, gActiveBank);
                     gBattleScripting.learnMoveState = 6;
                 }
                 else
