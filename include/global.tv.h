@@ -148,8 +148,8 @@ typedef union // size = 0x24
         /*0x16*/ u16 numFights;
         /*0x18*/ u16 words[1];
         /*0x1A*/ u8 btLevel;
-        /*0x1B*/ u8 var1b;
-        /*0x1C*/ u8 var1c;
+        /*0x1B*/ u8 interviewResponse;
+        /*0x1C*/ bool8 wonTheChallenge;
         /*0x1D*/ u8 language;
         /*0x1E*/ u8 pokemonNameLanguage;
     } bravoTrainerTower;
@@ -158,18 +158,18 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 linkPlayerSpecies;
-        /*0x04*/ u8 linkPlayerName[8];
-        /*0x0C*/ u8 unk_0c;
-        /*0x0D*/ u8 unk_0d;
-        /*0x0e*/ u8 unk_0e;
-        /*0x0f*/ u8 unk_0f;
+        /*0x02*/ u16 winningSpecies;
+        /*0x04*/ u8 winningTrainerName[8];
+        /*0x0C*/ u8 appealFlags2;
+        /*0x0D*/ u8 round1Rank;
+        /*0x0e*/ u8 round2Rank;
+        /*0x0f*/ u8 appealFlags1;
         /*0x10*/ u16 move;
         /*0x12*/ u16 species;
         /*0x14*/ u8 playerName[8];
         /*0x1C*/ u8 category;
         /*0x1D*/ u8 language;
-        /*0x1E*/ u8 linkPlayerLanguage;
+        /*0x1E*/ u8 winningTrainerLanguage;
     } contestLiveUpdates;
 
     // TVSHOW_3_CHEERS_FOR_POKEBLOCKS
@@ -179,10 +179,10 @@ typedef union // size = 0x24
         /*0x02*/ u8 sheen;
         /*0x03*/ u8 flavor:3;
         /*0x03*/ u8 unk_03_3:2;
-        /*0x04*/ u8 unk_04[8];
+        /*0x04*/ u8 worstBlenderName[8];
         /*0x0C*/ u8 playerName[8];
         /*0x14*/ u8 language;
-        /*0x15*/ u8 unk_15;
+        /*0x15*/ u8 worstBlenderLanguage;
     } threeCheers;
 
     // TVSHOW_BATTLE_UPDATE
@@ -235,7 +235,7 @@ typedef union // size = 0x24
         /*0x04*/ u8 nickname[11];
         /*0x0F*/ u8 ball;
         /*0x10*/ u16 species;
-        /*0x12*/ u8 var12;
+        /*0x12*/ u8 nBallsUsed;
         /*0x13*/ u8 playerName[8];
     } pokemonToday;
 
@@ -260,9 +260,9 @@ typedef union // size = 0x24
         /*0x03*/ u8 pad03[9];
         /*0x0c*/ u16 species;
         /*0x0e*/ u16 species2;
-        /*0x10*/ u8 var10;
-        /*0x11*/ u8 var11;
-        /*0x12*/ u8 var12;
+        /*0x10*/ u8 nBallsUsed;
+        /*0x11*/ u8 outcome;
+        /*0x12*/ u8 location;
         /*0x13*/ u8 playerName[8];
     } pokemonTodayFailed;
 
@@ -270,8 +270,8 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 var02;
-        /*0x03*/ u8 var03;
+        /*0x02*/ u8 nBites;
+        /*0x03*/ u8 nFails;
         /*0x04*/ u16 species;
         /*0x06*/ u8 language;
         u8 pad07[12];
@@ -282,7 +282,7 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 var02;
+        /*0x02*/ u16 numPokeCaught;
         /*0x04*/ u16 caughtPoke;
         /*0x06*/ u16 steps;
         /*0x08*/ u16 species;
