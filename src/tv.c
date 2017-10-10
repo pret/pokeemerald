@@ -361,7 +361,7 @@ const u8 *const gTVPokemonBattleUpdateTextGroup[] = {
     gUnknown_0828AE26
 };
 
-const u8 *const gUnknown_0858D320[] = {
+const u8 *const gTVTrainerFanClubSpecialTextGroup[] = {
     gUnknown_08281DFB,
     gUnknown_08281F90,
     gUnknown_08281FFA,
@@ -504,7 +504,7 @@ const u8 *const gTVThePokemonBattleSeminarTextGroup[] = {
     gUnknown_08286777
 };
 
-const u8 *const gUnknown_0858D4B4[] = {
+const u8 *const gTVTrainerFanClubTextGroup[] = {
     gUnknown_08286866,
     gUnknown_0828695E,
     gUnknown_0828698B,
@@ -2558,8 +2558,8 @@ void sub_80EE72C(void)
         show->trainerFanClub.kind = TVSHOW_TRAINER_FAN_CLUB;
         show->trainerFanClub.active = FALSE;
         StringCopy(show->trainerFanClub.playerName, gSaveBlock2Ptr->playerName);
-        show->trainerFanClub.unk04[0] = gSaveBlock1Ptr->unk2BB0[0];
-        show->trainerFanClub.unk04[1] = gSaveBlock1Ptr->unk2BB0[1];
+        show->trainerFanClub.words[0] = gSaveBlock1Ptr->unk2BB0[0];
+        show->trainerFanClub.words[1] = gSaveBlock1Ptr->unk2BB0[1];
         tv_store_id_3x(show);
         show->trainerFanClub.language = gGameLanguage;
     }
@@ -7036,6 +7036,158 @@ void DoTVShowThePokemonBattleSeminar(void)
             break;
     }
     ShowFieldMessage(gTVThePokemonBattleSeminarTextGroup[state]);
+}
+
+void DoTVShowTrainerFanClubSpecial(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
+            CopyEasyChatWord(gStringVar3, show->fanClubSpecial.words[0]);
+            if (show->fanClubSpecial.unk_16 >= 90)
+            {
+                sTVShowState = 1;
+            }
+            else if (show->fanClubSpecial.unk_16 >= 70)
+            {
+                sTVShowState = 2;
+            }
+            else if (show->fanClubSpecial.unk_16 >= 30)
+            {
+                sTVShowState = 3;
+            }
+            else
+            {
+                sTVShowState = 4;
+            }
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
+            TV_PrintIntToStringVar(2, show->fanClubSpecial.unk_16);
+            sTVShowState = 5;
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
+            TV_PrintIntToStringVar(2, show->fanClubSpecial.unk_16);
+            sTVShowState = 5;
+            break;
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
+            TV_PrintIntToStringVar(2, show->fanClubSpecial.unk_16);
+            sTVShowState = 5;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
+            TV_PrintIntToStringVar(2, show->fanClubSpecial.unk_16);
+            sTVShowState = 5;
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
+            CopyEasyChatWord(gStringVar3, show->fanClubSpecial.words[0]);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVTrainerFanClubSpecialTextGroup[state]);
+}
+
+void DoTVShowTrainerFanClub(void)
+{
+    TVShow *show;
+    u8 state;
+    u32 playerId;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->trainerFanClub.playerName, show->trainerFanClub.language);
+            playerId = ((show->common.trainerIdHi << 8) + show->common.trainerIdLo);
+            switch (playerId % 10)
+            {
+                case 0:
+                    sTVShowState = 1;
+                    break;
+                case 1:
+                    sTVShowState = 2;
+                    break;
+                case 2:
+                    sTVShowState = 3;
+                    break;
+                case 3:
+                    sTVShowState = 4;
+                    break;
+                case 4:
+                    sTVShowState = 5;
+                    break;
+                case 5:
+                    sTVShowState = 6;
+                    break;
+                case 6:
+                    sTVShowState = 7;
+                    break;
+                case 7:
+                    sTVShowState = 8;
+                    break;
+                case 8:
+                    sTVShowState = 9;
+                    break;
+                case 9:
+                    sTVShowState = 10;
+                    break;
+            }
+            break;
+        case 1:
+            sTVShowState = 11;
+            break;
+        case 2:
+            sTVShowState = 11;
+            break;
+        case 3:
+            sTVShowState = 11;
+            break;
+        case 4:
+            sTVShowState = 11;
+            break;
+        case 5:
+            sTVShowState = 11;
+            break;
+        case 6:
+            sTVShowState = 11;
+            break;
+        case 7:
+            sTVShowState = 11;
+            break;
+        case 8:
+            sTVShowState = 11;
+            break;
+        case 9:
+            sTVShowState = 11;
+            break;
+        case 10:
+            sTVShowState = 11;
+            break;
+        case 11:
+            TVShowConvertInternationalString(gStringVar1, show->trainerFanClub.playerName, show->trainerFanClub.language);
+            CopyEasyChatWord(gStringVar2, show->trainerFanClub.words[0]);
+            CopyEasyChatWord(gStringVar3, show->trainerFanClub.words[1]);
+            TVShowDone();
+    }
+    ShowFieldMessage(gTVTrainerFanClubTextGroup[state]);
 }
 
 //void TVShowDone(void)
