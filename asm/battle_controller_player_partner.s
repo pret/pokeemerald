@@ -4990,7 +4990,7 @@ sub_81BDAA0: @ 81BDAA0
 	thumb_func_start sub_81BDAAC
 sub_81BDAAC: @ 81BDAAC
 	push {lr}
-	bl sub_8063880
+	bl AI_TrySwitchOrUseItem
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -5087,7 +5087,7 @@ sub_81BDB70: @ 81BDB70
 	thumb_func_start sub_81BDB7C
 sub_81BDB7C: @ 81BDB7C
 	push {r4-r6,lr}
-	bl sub_8063A90
+	bl GetMostSuitableMonToSwitchInto
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x6

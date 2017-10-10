@@ -5212,7 +5212,7 @@ sub_8061F90: @ 8061F90
 	thumb_func_start sub_8061F9C
 sub_8061F9C: @ 8061F9C
 	push {lr}
-	bl sub_8063880
+	bl AI_TrySwitchOrUseItem
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -5456,7 +5456,7 @@ sub_8062188: @ 8062188
 	ldrb r0, [r1]
 	cmp r0, 0x6
 	bne _08062254
-	bl sub_8063A90
+	bl GetMostSuitableMonToSwitchInto
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x6

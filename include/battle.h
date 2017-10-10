@@ -5,6 +5,7 @@
 #include "battle_util.h"
 #include "battle_script_commands.h"
 #include "battle_2.h"
+#include "battle_ai_switch_items.h"
 
 /*
     Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
