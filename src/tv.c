@@ -538,7 +538,7 @@ const u8 *const gTVCutiesTextGroup[] = {
     gUnknown_08287779
 };
 
-const u8 *const gUnknown_0858D524[] = {
+const u8 *const gTVPokemonNewsBattleFrontierTextGroup[] = {
     gUnknown_082877DE,
     gUnknown_0828783D,
     gUnknown_082878B3,
@@ -7293,6 +7293,155 @@ void DoTVShowSpotTheCuties(void)
             TVShowDone();
     }
     ShowFieldMessage(gTVCutiesTextGroup[state]);
+}
+
+void DoTVShowPokemonNewsBattleFrontier(void)
+{
+    TVShow *show;
+    u8 state;
+    u32 playerId;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            switch (show->frontier.unk0d)
+            {
+                case 1:
+                    sTVShowState = 1;
+                    break;
+                case 2:
+                    sTVShowState = 2;
+                    break;
+                case 3:
+                    sTVShowState = 3;
+                    break;
+                case 4:
+                    sTVShowState = 4;
+                    break;
+                case 5:
+                    sTVShowState = 5;
+                    break;
+                case 6:
+                    sTVShowState = 6;
+                    break;
+                case 7:
+                    sTVShowState = 7;
+                    break;
+                case 8:
+                    sTVShowState = 8;
+                    break;
+                case 9:
+                    sTVShowState = 9;
+                    break;
+                case 10:
+                    sTVShowState = 10;
+                    break;
+                case 11:
+                    sTVShowState = 11;
+                    break;
+                case 12:
+                    sTVShowState = 12;
+                    break;
+                case 13:
+                    sTVShowState = 13;
+                    break;
+            }
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 14;
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 16;
+            break;
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 15;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 15;
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 14;
+            break;
+        case 6:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 14;
+            break;
+        case 7:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 14;
+            break;
+        case 8:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 14;
+            break;
+        case 9:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 14;
+            break;
+        case 10:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 14;
+            break;
+        case 11:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 14;
+            break;
+        case 12:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 14;
+            break;
+        case 13:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            sTVShowState = 14;
+            break;
+        case 14:
+            StringCopy(gStringVar1, gSpeciesNames[show->frontier.species1]);
+            StringCopy(gStringVar2, gSpeciesNames[show->frontier.species2]);
+            StringCopy(gStringVar3, gSpeciesNames[show->frontier.species3]);
+            sTVShowState = 18;
+            break;
+        case 15:
+            StringCopy(gStringVar1, gSpeciesNames[show->frontier.species1]);
+            StringCopy(gStringVar2, gSpeciesNames[show->frontier.species2]);
+            sTVShowState = 18;
+            break;
+        case 16:
+            StringCopy(gStringVar1, gSpeciesNames[show->frontier.species1]);
+            StringCopy(gStringVar2, gSpeciesNames[show->frontier.species2]);
+            StringCopy(gStringVar3, gSpeciesNames[show->frontier.species3]);
+            sTVShowState = 17;
+            break;
+        case 17:
+            StringCopy(gStringVar1, gSpeciesNames[show->frontier.species4]);
+            sTVShowState = 18;
+            break;
+        case 18:
+            TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVPokemonNewsBattleFrontierTextGroup[state]);
 }
 
 //void TVShowDone(void)
