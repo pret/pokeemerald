@@ -64,9 +64,7 @@ clean: tidy
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 
 tidy:
-	rm -f pokeemerald.gba
-	rm -f pokeemerald.map
-	rm -f pokeemerald.elf
+	rm -f pokeemerald.{gba,map,elf}
 	rm -r build/*
 
 include graphics_file_rules.mk
