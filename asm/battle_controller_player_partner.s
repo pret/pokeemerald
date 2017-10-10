@@ -645,7 +645,7 @@ _081BB2E2:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	strb r5, [r4]
 	bl battle_type_is_double
 	lsls r0, 24
@@ -918,7 +918,7 @@ _081BB514:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	strb r5, [r4]
 	ldr r0, =sub_81BB628
 	str r0, [r6]
@@ -5068,7 +5068,7 @@ _081BDB3C:
 	orrs r2, r5
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4-r6}
 	pop {r0}

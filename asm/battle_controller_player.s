@@ -226,7 +226,7 @@ _0805764C:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _080577C2
 _08057658:
 	movs r0, 0x20
@@ -393,7 +393,7 @@ _080577B2:
 	movs r1, 0xC
 _080577BC:
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _080577C2:
 	bl PlayerBufferExecCompleted
 	b _080577E8
@@ -518,7 +518,7 @@ _080578A0:
 	orrs r2, r0
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl dp11b_obj_free
@@ -1086,7 +1086,7 @@ _08057E14:
 _08057E1C:
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl PlayerBufferExecCompleted
 	b _08057F9E
 	.pool
@@ -3413,7 +3413,7 @@ _080591FE:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	strb r5, [r4]
 	bl battle_type_is_double
 	lsls r0, 24
@@ -3686,7 +3686,7 @@ _08059430:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	strb r5, [r4]
 	ldr r0, =sub_8059544
 	str r0, [r6]
@@ -4291,14 +4291,14 @@ _08059A2C:
 	movs r0, 0x1
 	movs r1, 0xE
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08059A76
 	.pool
 _08059A6C:
 	movs r0, 0x1
 	movs r1, 0xD
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _08059A76:
 	bl PlayerBufferExecCompleted
 _08059A7A:
@@ -8658,7 +8658,7 @@ sub_805C158: @ 805C158
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl PlayerBufferExecCompleted
 _0805C194:
 	pop {r0}
@@ -9378,7 +9378,7 @@ sub_805C80C: @ 805C80C
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0

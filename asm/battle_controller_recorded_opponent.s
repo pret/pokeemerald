@@ -4754,7 +4754,7 @@ sub_8188EF0: @ 8188EF0
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -4785,7 +4785,7 @@ sub_8188F20: @ 8188F20
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08188F6C
 	.pool
 _08188F48:
@@ -4803,7 +4803,7 @@ _08188F48:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _08188F6C:
 	bl RecordedOpponentBufferExecCompleted
 	pop {r4,r5}

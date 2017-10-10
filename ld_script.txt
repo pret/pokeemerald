@@ -64,6 +64,7 @@ SECTIONS {
         asm/battle_controller_player.o(.text);
         asm/battle_7.o(.text);
         asm/battle_controller_opponent.o(.text);
+        src/battle_9.o(.text);
         asm/battle_9.o(.text);
         asm/battle_controller_linkopponent.o(.text);
         src/pokemon_1.o(.text);

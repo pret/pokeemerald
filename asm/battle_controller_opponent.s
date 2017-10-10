@@ -5243,7 +5243,7 @@ sub_8061FB8: @ 8061FB8
 	movs r0, 0x1
 	movs r1, 0xA
 _08061FD6:
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _08061FDA:
 	bl OpponentBufferExecCompleted
 	b _08062156
@@ -5347,7 +5347,7 @@ _0806209C:
 	movs r0, 0x1
 	movs r1, 0xA
 	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08061FDA
 	.pool
 _080620C4:
@@ -5378,7 +5378,7 @@ _080620C6:
 	movs r0, 0x1
 	movs r1, 0xA
 	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08062152
 	.pool
 _08062108:
@@ -5401,7 +5401,7 @@ _08062108:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08062152
 	.pool
 _0806213C:
@@ -5413,7 +5413,7 @@ _0806213C:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _08062152:
 	bl OpponentBufferExecCompleted
 _08062156:
