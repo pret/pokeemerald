@@ -618,7 +618,7 @@ const u8 *const gTVSecretBaseSecretsTextGroup[] = {
     gUnknown_0828977D
 };
 
-const u8 *const gUnknown_0858D640[] = {
+const u8 *const gTVSafariFanClubTextGroup[] = {
     gUnknown_08289813,
     gUnknown_0828992F,
     gUnknown_0828999D,
@@ -4888,7 +4888,7 @@ void sub_80F12A4(TVShow *shows)
                 curShow->contestLiveUpdates2.language = TV_GetStringLanguage(curShow->contestLiveUpdates2.playerName);
                 curShow->contestLiveUpdates2.unk_18 = TV_GetStringLanguage(curShow->contestLiveUpdates2.categoryName);
                 break;
-                
+
             case TVSHOW_POKEMON_TODAY_CAUGHT:
                 curShow->pokemonToday.language = TV_GetStringLanguage(curShow->pokemonToday.playerName);
                 curShow->pokemonToday.language2 = TV_GetStringLanguage(curShow->pokemonToday.nickname);
@@ -7795,6 +7795,95 @@ void DoTVShowSecretBaseSecrets(void)
             break;
     }
     ShowFieldMessage(gTVSecretBaseSecretsTextGroup[state]);
+}
+
+void DoTVShowSafariFanClub(void)
+{
+    TVShow *show;
+    u8 state;
+    u8 bitCount;
+    u16 i;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            if (show->safariFanClub.unk02 == 0)
+            {
+                sTVShowState = 6;
+            }
+            else if (show->safariFanClub.unk02 < 4)
+            {
+                sTVShowState = 5;
+            }
+            else
+            {
+                sTVShowState = 1;
+            }
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, show->safariFanClub.playerName, show->safariFanClub.language);
+            TV_PrintIntToStringVar(1, show->safariFanClub.unk02);
+            if (show->safariFanClub.unk03 == 0)
+            {
+                sTVShowState = 3;
+            }
+            else
+            {
+                sTVShowState = 2;
+            }
+            break;
+        case 2:
+            TV_PrintIntToStringVar(1, show->safariFanClub.unk03);
+            sTVShowState = 4;
+            break;
+        case 3:
+            sTVShowState = 4;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, show->safariFanClub.playerName, show->safariFanClub.language);
+            sTVShowState = 10;
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, show->safariFanClub.playerName, show->safariFanClub.language);
+            TV_PrintIntToStringVar(1, show->safariFanClub.unk02);
+            if (show->safariFanClub.unk03 == 0)
+            {
+                sTVShowState = 8;
+            }
+            else
+            {
+                sTVShowState = 7;
+            }
+            break;
+        case 6:
+            TVShowConvertInternationalString(gStringVar1, show->safariFanClub.playerName, show->safariFanClub.language);
+            if (show->safariFanClub.unk03 == 0)
+            {
+                sTVShowState = 8;
+            }
+            else
+            {
+                sTVShowState = 7;
+            }
+            break;
+        case 7:
+            TV_PrintIntToStringVar(1, show->safariFanClub.unk03);
+            sTVShowState = 9;
+            break;
+        case 8:
+            sTVShowState = 9;
+            break;
+        case 9:
+            TVShowConvertInternationalString(gStringVar1, show->safariFanClub.playerName, show->safariFanClub.language);
+            sTVShowState = 10;
+            break;
+        case 10:
+            TVShowDone();
+    }
+    ShowFieldMessage(gTVSafariFanClubTextGroup[state]);
 }
 
 //void TVShowDone(void)
