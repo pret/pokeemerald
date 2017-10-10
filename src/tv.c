@@ -572,7 +572,7 @@ const u8 *const gTVWhatsNo1InHoennTodayTextGroup[] = {
     gUnknown_0828858B
 };
 
-const u8 *const gUnknown_0858D594[] = {
+const u8 *const gTVSecretBaseSecretsTextGroup[] = {
     gUnknown_08288608,
     gUnknown_082886C8,
     gUnknown_082886DE,
@@ -2681,8 +2681,8 @@ void sub_80EEA70(void)
             StringCopy(strbuf, gStringVar1);
             StripExtCtrlCodes(strbuf);
             StringCopy(show->secretBaseSecrets.unk04, strbuf);
-            show->secretBaseSecrets.unk10 = VarGet(0x40ed);
-            show->secretBaseSecrets.unk0c = VarGet(0x40ee) + (VarGet(0x40ef) << 16);
+            show->secretBaseSecrets.item = VarGet(0x40ed);
+            show->secretBaseSecrets.flags = VarGet(0x40ee) + (VarGet(0x40ef) << 16);
             tv_store_id_3x(show);
             show->secretBaseSecrets.language = gGameLanguage;
             if (show->secretBaseSecrets.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].language == LANGUAGE_JAPANESE)
@@ -7532,7 +7532,7 @@ u8 sub_80F5180(TVShow *show)
 
     for (i = 0, tot = 0; i < 32; i ++)
     {
-        if ((show->secretBaseSecrets.unk0c >> i) & 1)
+        if ((show->secretBaseSecrets.flags >> i) & 1)
         {
             tot ++;
         }
@@ -7547,7 +7547,7 @@ u8 sub_80F51AC(TVShow *show, u8 a1)
 
     for (i = 0, tot = 0; i < 32; i ++)
     {
-        if ((show->secretBaseSecrets.unk0c >> i) & 1)
+        if ((show->secretBaseSecrets.flags >> i) & 1)
         {
             if (tot == a1)
             {
@@ -7557,6 +7557,244 @@ u8 sub_80F51AC(TVShow *show, u8 a1)
         }
     }
     return 0;
+}
+
+void DoTVShowSecretBaseSecrets(void)
+{
+    TVShow *show;
+    u8 state;
+    u8 bitCount;
+    u16 i;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
+            bitCount = sub_80F5180(show);
+            if (bitCount == 0)
+            {
+                sTVShowState = 8;
+            }
+            else
+            {
+                show->secretBaseSecrets.unk12 = 1;
+                sTVSecretBaseSecretsRandomValues[0] = Random() % bitCount;
+                sTVShowState = sub_80F51AC(show, sTVSecretBaseSecretsRandomValues[0]);
+            }
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
+            bitCount = sub_80F5180(show);
+            switch (bitCount)
+            {
+                case 1:
+                    sTVShowState = 9;
+                    break;
+                case 2:
+                    show->secretBaseSecrets.unk12 = 2;
+                    if (sTVSecretBaseSecretsRandomValues[0] == 0)
+                    {
+                        sTVShowState = sub_80F51AC(show, 1);
+                    }
+                    else
+                    {
+                        sTVShowState = sub_80F51AC(show, 0);
+                    }
+                    break;
+                default:
+                    for (i = 0; i < 0xFFFF; i ++)
+                    {
+                        sTVSecretBaseSecretsRandomValues[1] = Random() % bitCount;
+                        if (sTVSecretBaseSecretsRandomValues[1] != sTVSecretBaseSecretsRandomValues[0])
+                        {
+                            break;
+                        }
+                    }
+                    show->secretBaseSecrets.unk12 = 2;
+                    sTVShowState = sub_80F51AC(show, sTVSecretBaseSecretsRandomValues[1]);
+                    break;
+            }
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
+            bitCount = sub_80F5180(show);
+            if (bitCount == 2)
+            {
+                sTVShowState = 9;
+            }
+            else
+            {
+                for (i = 0; i < 0xFFFF; i ++)
+                {
+                    sTVSecretBaseSecretsRandomValues[2] = Random() % bitCount;
+                    if (sTVSecretBaseSecretsRandomValues[2] != sTVSecretBaseSecretsRandomValues[0] && sTVSecretBaseSecretsRandomValues[2] != sTVSecretBaseSecretsRandomValues[1])
+                    {
+                        break;
+                    }
+                }
+                show->secretBaseSecrets.unk12 = 3;
+                sTVShowState = sub_80F51AC(show, sTVSecretBaseSecretsRandomValues[2]);
+            }
+            break;
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
+            TV_PrintIntToStringVar(2, show->secretBaseSecrets.unk02);
+            if (show->secretBaseSecrets.unk02 <= 30)
+            {
+                sTVShowState = 4;
+            }
+            else if (show->secretBaseSecrets.unk02 <= 100)
+            {
+                sTVShowState = 5;
+            }
+            else
+            {
+                sTVShowState = 6;
+            }
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
+            sTVShowState = 7;
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
+            sTVShowState = 7;
+            break;
+        case 6:
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
+            sTVShowState = 7;
+            break;
+        case 7:
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
+            TVShowDone();
+            break;
+        case 8:
+            sTVShowState = 3;
+            break;
+        case 9:
+            sTVShowState = 3;
+            break;
+        case 10:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 11:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 12:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 13:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 14:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 15:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 16:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 17:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 18:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 19:
+            StringCopy(gStringVar2, ItemId_GetItem(show->secretBaseSecrets.item)->name);
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 20:
+            if (show->common.trainerIdLo & 1)
+            {
+                sTVShowState = 22;
+            }
+            else
+            {
+                sTVShowState = 21;
+            }
+            break;
+        case 21:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 22:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 23:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 24:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 25:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 26:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 27:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 28:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 29:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 30:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 31:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 32:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 33:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 34:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 35:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 36:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 37:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 38:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 39:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 40:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 41:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 42:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+        case 43:
+            sTVShowState = show->secretBaseSecrets.unk12;
+            break;
+    }
+    ShowFieldMessage(gTVSecretBaseSecretsTextGroup[state]);
 }
 
 //void TVShowDone(void)
