@@ -6537,7 +6537,7 @@ _08138BF6:
 	thumb_func_start sub_8138C04
 sub_8138C04: @ 8138C04
 	push {r4,lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7060,7 +7060,7 @@ sub_8138FEC: @ 8138FEC
 	thumb_func_start sub_8139004
 sub_8139004: @ 8139004
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7084,7 +7084,7 @@ _0813902A:
 	thumb_func_start sub_8139030
 sub_8139030: @ 8139030
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7108,7 +7108,7 @@ _08139056:
 	thumb_func_start sub_813905C
 sub_813905C: @ 813905C
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7132,7 +7132,7 @@ _08139082:
 	thumb_func_start sub_8139088
 sub_8139088: @ 8139088
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7156,7 +7156,7 @@ _081390AE:
 	thumb_func_start sub_81390B4
 sub_81390B4: @ 81390B4
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7295,7 +7295,7 @@ RemoveScriptFieldObject: @ 81391AC
 	thumb_func_start sub_81391D0
 sub_81391D0: @ 81391D0
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7479,7 +7479,7 @@ _08139342:
 	thumb_func_start sub_8139348
 sub_8139348: @ 8139348
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7507,7 +7507,7 @@ sub_8139370: @ 8139370
 	movs r1, 0x1
 	mov r0, sp
 	strb r1, [r0]
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7538,7 +7538,7 @@ _081393B6:
 	thumb_func_start sub_81393C8
 sub_81393C8: @ 81393C8
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7882,8 +7882,8 @@ _08139684:
 	bx r0
 	thumb_func_end sub_8139668
 
-	thumb_func_start sub_8139688
-sub_8139688: @ 8139688
+	thumb_func_start GetIdxOfFirstPartyMemberThatIsNotAnEgg
+GetIdxOfFirstPartyMemberThatIsNotAnEgg: @ 8139688
 	push {r4-r6,lr}
 	bl CalculatePlayerPartyCount
 	lsls r0, 24
@@ -7926,7 +7926,7 @@ _081396D8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8139688
+	thumb_func_end GetIdxOfFirstPartyMemberThatIsNotAnEgg
 
 	thumb_func_start sub_81396E0
 sub_81396E0: @ 81396E0

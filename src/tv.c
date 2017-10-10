@@ -85,8 +85,8 @@ static void tv_store_id_3x(TVShow *show);
 static void DeleteTVShowInArrayByIdx(TVShow *shows, u8 idx);
 static s8 FindEmptyTVSlotWithinFirstFiveShowsOfArray(TVShow *shows);
 static void FindActiveBroadcastByShowType_SetScriptResult(u8 kind);
-static void sub_80EF7B4(void);
-static void sub_80EF7A8(void);
+static void InterviewBefore_BravoTrainerPkmnProfile(void);
+static void InterviewBefore_NameRater(void);
 static u16 TV_GetSomeOtherSpeciesAlreadySeenByPlayer(u16 passedSpecies);
 static void sub_80EFA88(void);
 static void sub_80EF93C(TVShow *shows);
@@ -112,8 +112,7 @@ static void sub_80F0F24(void);
 static s8 sub_80F0ECC(PokeNews *pokeNews, u8 idx);
 static void sub_80F0E58(PokeNews *dest[], PokeNews *src[]);
 static bool8 sub_80F0E84(PokeNews *dest, PokeNews *src, s8 slot);
-
-void TVShowDone(void);
+static void TVShowDone(void);
 
 // .rodata
 
@@ -1058,7 +1057,7 @@ void PutPokemonTodayCaughtOnAir(void)
     static void UpdateWorldOfMastersAndPutItOnTheAir(void);
     static void PutPokemonTodayFailedOnTheAir(void);
     static void sub_80ED718(void);
-    void sub_80EED88(void);
+    static void sub_80EED88(void);
     u8 i;
     u16 ct;
     TVShow *show;
@@ -1458,7 +1457,7 @@ void BravoTrainerPokemonProfile_BeforeInterview1(u16 a0)
     TVShow *show;
 
     show = &gSaveBlock1Ptr->tvShows[24];
-    sub_80EF7B4();
+    InterviewBefore_BravoTrainerPkmnProfile();
     sCurTVShowSlot = FindEmptyTVSlotWithinFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {
@@ -1556,7 +1555,7 @@ void PutNameRaterShowOnTheAir(void)
 {
     TVShow *show;
 
-    sub_80EF7A8();
+    InterviewBefore_NameRater();
     if (gScriptResult != 1)
     {
         GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
@@ -1626,7 +1625,7 @@ static void InterviewAfter_FanClubLetter(void)
     show->fanclubLetter.kind = TVSHOW_FAN_CLUB_LETTER;
     show->fanclubLetter.active = TRUE;
     StringCopy(show->fanclubLetter.playerName, gSaveBlock2Ptr->playerName);
-    show->fanclubLetter.species = GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_SPECIES, NULL);
+    show->fanclubLetter.species = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_SPECIES, NULL);
     tv_store_id_2x(show);
     show->fanclubLetter.language = gGameLanguage;
 }
@@ -1651,21 +1650,21 @@ static void InterviewAfter_PkmnFanClubOpinions(void)
     show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
     show->fanclubOpinions.kind = TVSHOW_PKMN_FAN_CLUB_OPINIONS;
     show->fanclubOpinions.active = TRUE;
-    show->fanclubOpinions.friendshipHighNybble = GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_FRIENDSHIP, NULL) >> 4;
+    show->fanclubOpinions.friendshipHighNybble = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_FRIENDSHIP, NULL) >> 4;
     show->fanclubOpinions.var04B = gSpecialVar_0x8007;
     StringCopy(show->fanclubOpinions.playerName, gSaveBlock2Ptr->playerName);
-    GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_NICKNAME, show->fanclubOpinions.nickname);
+    GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_NICKNAME, show->fanclubOpinions.nickname);
     StripExtCtrlCodes(show->fanclubOpinions.nickname);
-    show->fanclubOpinions.species = GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_SPECIES, NULL);
+    show->fanclubOpinions.species = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_SPECIES, NULL);
     tv_store_id_2x(show);
     show->fanclubOpinions.language = gGameLanguage;
-    if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
+    if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
     {
         show->fanclubOpinions.var0E = LANGUAGE_JAPANESE;
     }
     else
     {
-        show->fanclubOpinions.var0E = GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_LANGUAGE);
+        show->fanclubOpinions.var0E = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_LANGUAGE);
     }
 }
 
@@ -3168,126 +3167,126 @@ void FindActiveBroadcastByShowType_SetScriptResult(u8 kind)
 
 void InterviewBefore(void)
 {
-    void sub_80EF64C(void);
-    void sub_80EF6C4(void);
-    void sub_80EF704(void);
-    void sub_80EF79C(void);
-    void sub_80EF80C(void);
-    void sub_80EF7F4(void);
-    void sub_80EF800(void);
-    void sub_80EF84C(void);
+    void InterviewBefore_FanClubLetter(void);
+    void InterviewBefore_RecentHappenings(void);
+    void InterviewBefore_PkmnFanClubOpinions(void);
+    void InterviewBefore_Dummy(void);
+    void InterviewBefore_BravoTrainerBTProfile(void);
+    void InterviewBefore_ContestLiveUpdates(void);
+    void InterviewBefore_3CheersForPokeblocks(void);
+    void InterviewBefore_FanClubSpecial(void);
 
     gScriptResult = FALSE;
     switch (gSpecialVar_0x8005)
     {
         case TVSHOW_FAN_CLUB_LETTER:
-            sub_80EF64C();
+            InterviewBefore_FanClubLetter();
             break;
         case TVSHOW_RECENT_HAPPENINGS:
-            sub_80EF6C4();
+            InterviewBefore_RecentHappenings();
             break;
         case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
-            sub_80EF704();
+            InterviewBefore_PkmnFanClubOpinions();
             break;
         case TVSHOW_UNKN_SHOWTYPE_04:
-            sub_80EF79C();
+            InterviewBefore_Dummy();
             break;
         case TVSHOW_NAME_RATER_SHOW:
-            sub_80EF7A8();
+            InterviewBefore_NameRater();
             break;
         case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
-            sub_80EF7B4();
+            InterviewBefore_BravoTrainerPkmnProfile();
             break;
         case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
-            sub_80EF80C();
+            InterviewBefore_BravoTrainerBTProfile();
             break;
         case TVSHOW_CONTEST_LIVE_UPDATES:
-            sub_80EF7F4();
+            InterviewBefore_ContestLiveUpdates();
             break;
         case TVSHOW_3_CHEERS_FOR_POKEBLOCKS:
-            sub_80EF800();
+            InterviewBefore_3CheersForPokeblocks();
             break;
         case TVSHOW_FAN_CLUB_SPECIAL:
-            sub_80EF84C();
+            InterviewBefore_FanClubSpecial();
             break;
     }
 }
 
-void sub_80EF64C(void)
+void InterviewBefore_FanClubLetter(void)
 {
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_FAN_CLUB_LETTER);
     if (!gScriptResult)
     {
-        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_SPECIES, NULL)]);
-        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanclubLetter.words, 6);
+        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_SPECIES, NULL)]);
+        InitializeEasyChatWordArray(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanclubLetter.words, 6);
     }
 }
 
-void sub_80EF6C4(void)
+void InterviewBefore_RecentHappenings(void)
 {
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_RECENT_HAPPENINGS);
     if (!gScriptResult)
     {
-        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].recentHappenings.words, 6);
+        InitializeEasyChatWordArray(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].recentHappenings.words, 6);
     }
 }
 
-void sub_80EF704(void)
+void InterviewBefore_PkmnFanClubOpinions(void)
 {
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_PKMN_FAN_CLUB_OPINIONS);
     if (!gScriptResult)
     {
-        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_SPECIES, NULL)]);
-        GetMonData(&gPlayerParty[sub_8139688()], MON_DATA_NICKNAME, gStringVar2);
+        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_SPECIES, NULL)]);
+        GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_NICKNAME, gStringVar2);
         StringGetEnd10(gStringVar2);
-        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanclubOpinions.words, 2);
+        InitializeEasyChatWordArray(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanclubOpinions.words, 2);
     }
 }
 
-void sub_80EF79C(void)
+void InterviewBefore_Dummy(void)
 {
     gScriptResult = TRUE;
 }
 
-void sub_80EF7A8(void)
+void InterviewBefore_NameRater(void)
 {
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_NAME_RATER_SHOW);
 }
 
-void sub_80EF7B4(void)
+void InterviewBefore_BravoTrainerPkmnProfile(void)
 {
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE);
     if (!gScriptResult)
     {
-        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].bravoTrainer.words, 2);
+        InitializeEasyChatWordArray(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].bravoTrainer.words, 2);
     }
 }
 
-void sub_80EF7F4(void)
+void InterviewBefore_ContestLiveUpdates(void)
 {
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_CONTEST_LIVE_UPDATES);
 }
 
-void sub_80EF800(void)
+void InterviewBefore_3CheersForPokeblocks(void)
 {
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_3_CHEERS_FOR_POKEBLOCKS);
 }
 
-void sub_80EF80C(void)
+void InterviewBefore_BravoTrainerBTProfile(void)
 {
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE);
     if (!gScriptResult)
     {
-        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].bravoTrainerTower.words, 1);
+        InitializeEasyChatWordArray(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].bravoTrainerTower.words, 1);
     }
 }
 
-void sub_80EF84C(void)
+void InterviewBefore_FanClubSpecial(void)
 {
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_FAN_CLUB_SPECIAL);
     if (!gScriptResult)
     {
-        sub_811F88C(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanClubSpecial.words, 1);
+        InitializeEasyChatWordArray(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanClubSpecial.words, 1);
     }
 }
 
@@ -3308,7 +3307,7 @@ bool8 sub_80EF88C(u8 monIdx)
 
 bool8 sub_80EF8F8(void)
 {
-    return sub_80EF88C(sub_8139688());
+    return sub_80EF88C(GetIdxOfFirstPartyMemberThatIsNotAnEgg());
 }
 
 void DeleteTVShowInArrayByIdx(TVShow *shows, u8 idx)
@@ -3446,7 +3445,7 @@ bool8 TV_BernoulliTrial(u16 ratio)
     return TRUE;
 }
 
-void sub_80EFB58(TVShow *show)
+void TV_FanClubLetter_RandomWordToStringVar3(TVShow *show)
 {
     u8 i;
 
@@ -3466,7 +3465,7 @@ void sub_80EFB58(TVShow *show)
     CopyEasyChatWord(gStringVar3, show->fanclubLetter.words[i]);
 }
 
-u8 sub_80EFBA4(TVShow *show)
+u8 TV_GetNicknameSumMod8(TVShow *show)
 {
     u8 i;
     u16 ct;
@@ -3483,7 +3482,7 @@ u8 sub_80EFBA4(TVShow *show)
     return ct & 7;
 }
 
-void sub_80EFBDC(u8 varIdx, u8 whichPosition, u8 charParam, u16 whichString, u16 species, TVShow *show)
+void TV_GetNicknameSubscore(u8 varIdx, u8 whichPosition, u8 charParam, u16 whichString, u16 species, TVShow *show)
 {
     u8 buff[16];
     u8 i;
@@ -3564,7 +3563,7 @@ void sub_80EFBDC(u8 varIdx, u8 whichPosition, u8 charParam, u16 whichString, u16
     StringCopy(gUnknown_0858D144[varIdx], buff);
 }
 
-bool8 sub_80EFD54(void)
+bool8 TV_IsScriptShowKindAlreadyInQueue(void)
 {
     u8 i;
 
@@ -3578,7 +3577,7 @@ bool8 sub_80EFD54(void)
     return FALSE;
 }
 
-bool8 sub_80EFD98(void)
+bool8 TV_PutNameRaterShowOnTheAirIfNicnkameChanged(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
     if (!StringCompare(gStringVar3, gStringVar1))
@@ -3621,13 +3620,13 @@ static void ChangeBoxPokemonNickname_CB(void)
     c2_exit_to_overworld_1_continue_scripts_restart_music();
 }
 
-void sub_80EFF6C(void)
+void TV_CopyNicknameToStringVar1AndEnsureTerminated(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
     StringGetEnd10(gStringVar1);
 }
 
-void sub_80EFF9C(void)
+void TV_CheckMonOTIDEqualsPlayerID(void)
 {
     if (GetPlayerIDAsU32() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))
     {
@@ -4971,38 +4970,38 @@ void sub_80F14F8(TVShow *shows)
 
 void DoTVShow(void)
 {
-    void DoTVShowPokemonFanClubLetter(void);
-    void DoTVShowRecentHappenings(void);
-    void DoTVShowPokemonFanClubOpinions(void);
-    void DoTVShowDummiedOut(void);
-    void DoTVShowPokemonNewsMassOutbreak(void);
-    void DoTVShowBravoTrainerPokemonProfile(void);
-    void DoTVShowBravoTrainerBattleTower(void);
-    void DoTVShowPokemonTodaySuccessfulCapture(void);
-    void DoTVShowTodaysSmartShopper(void);
-    void DoTVShowTheNameRaterShow(void);
-    void DoTVShowPokemonContestLiveUpdates(void);
-    void DoTVShowPokemonBattleUpdate(void);
-    void DoTVShow3CheersForPokeblocks(void);
-    void DoTVShowPokemonTodayFailedCapture(void);
-    void DoTVShowPokemonAngler(void);
-    void DoTVShowTheWorldOfMasters(void);
-    void DoTVShowTodaysRivalTrainer(void);
-    void DoTVShowDewfordTrendWatcherNetwork(void);
-    void DoTVShowHoennTreasureInvestigators(void);
-    void DoTVShowFindThatGamer(void);
-    void DoTVShowBreakingNewsTV(void);
-    void DoTVShowSecretBaseVisit(void);
-    void DoTVShowPokemonLotteryWinnerFlashReport(void);
-    void DoTVShowThePokemonBattleSeminar(void);
-    void DoTVShowTrainerFanClubSpecial(void);
-    void DoTVShowTrainerFanClub(void);
-    void DoTVShowSpotTheCuties(void);
-    void DoTVShowPokemonNewsBattleFrontier(void);
-    void DoTVShowWhatsNo1InHoennToday(void);
-    void DoTVShowSecretBaseSecrets(void);
-    void DoTVShowSafariFanClub(void);
-    void DoTVShowPokemonContestLiveUpdates2(void);
+    static void DoTVShowPokemonFanClubLetter(void);
+    static void DoTVShowRecentHappenings(void);
+    static void DoTVShowPokemonFanClubOpinions(void);
+    static void DoTVShowDummiedOut(void);
+    static void DoTVShowPokemonNewsMassOutbreak(void);
+    static void DoTVShowBravoTrainerPokemonProfile(void);
+    static void DoTVShowBravoTrainerBattleTower(void);
+    static void DoTVShowPokemonTodaySuccessfulCapture(void);
+    static void DoTVShowTodaysSmartShopper(void);
+    static void DoTVShowTheNameRaterShow(void);
+    static void DoTVShowPokemonContestLiveUpdates(void);
+    static void DoTVShowPokemonBattleUpdate(void);
+    static void DoTVShow3CheersForPokeblocks(void);
+    static void DoTVShowPokemonTodayFailedCapture(void);
+    static void DoTVShowPokemonAngler(void);
+    static void DoTVShowTheWorldOfMasters(void);
+    static void DoTVShowTodaysRivalTrainer(void);
+    static void DoTVShowDewfordTrendWatcherNetwork(void);
+    static void DoTVShowHoennTreasureInvestigators(void);
+    static void DoTVShowFindThatGamer(void);
+    static void DoTVShowBreakingNewsTV(void);
+    static void DoTVShowSecretBaseVisit(void);
+    static void DoTVShowPokemonLotteryWinnerFlashReport(void);
+    static void DoTVShowThePokemonBattleSeminar(void);
+    static void DoTVShowTrainerFanClubSpecial(void);
+    static void DoTVShowTrainerFanClub(void);
+    static void DoTVShowSpotTheCuties(void);
+    static void DoTVShowPokemonNewsBattleFrontier(void);
+    static void DoTVShowWhatsNo1InHoennToday(void);
+    static void DoTVShowSecretBaseSecrets(void);
+    static void DoTVShowSafariFanClub(void);
+    static void DoTVShowPokemonContestLiveUpdates2(void);
 
     if (gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.active)
     {
@@ -5108,7 +5107,7 @@ void DoTVShow(void)
     }
 }
 
-void DoTVShowBravoTrainerPokemonProfile(void)
+static void DoTVShowBravoTrainerPokemonProfile(void)
 {
     TVShow *show;
     u8 state;
@@ -5180,7 +5179,7 @@ void DoTVShowBravoTrainerPokemonProfile(void)
     ShowFieldMessage(gTVBravoTrainerTextGroup[state]);
 }
 
-void DoTVShowBravoTrainerBattleTower(void)
+static void DoTVShowBravoTrainerBattleTower(void)
 {
     TVShow *show;
     u8 state;
@@ -5277,7 +5276,7 @@ void DoTVShowBravoTrainerBattleTower(void)
     ShowFieldMessage(gTVBravoTrainerBattleTowerTextGroup[state]);
 }
 
-void DoTVShowTodaysSmartShopper(void)
+static void DoTVShowTodaysSmartShopper(void)
 {
     TVShow *show;
     u8 state;
@@ -5400,7 +5399,7 @@ void DoTVShowTodaysSmartShopper(void)
     ShowFieldMessage(gTVTodaysSmartShopperTextGroup[state]);
 }
 
-void DoTVShowTheNameRaterShow(void)
+static void DoTVShowTheNameRaterShow(void)
 {
     TVShow *show;
     u8 state;
@@ -5414,7 +5413,7 @@ void DoTVShowTheNameRaterShow(void)
             TVShowConvertInternationalString(gStringVar1, show->nameRaterShow.trainerName, show->nameRaterShow.language);
             StringCopy(gStringVar2, gSpeciesNames[show->nameRaterShow.species]);
             TVShowConvertInternationalString(gStringVar3, show->nameRaterShow.pokemonName, show->nameRaterShow.pokemonNameLanguage);
-            sTVShowState = sub_80EFBA4(show) + 1;
+            sTVShowState = TV_GetNicknameSumMod8(show) + 1;
             break;
         case 1:
         case 3:
@@ -5455,36 +5454,36 @@ void DoTVShowTheNameRaterShow(void)
         case 10:
         case 11:
             TVShowConvertInternationalString(gStringVar1, show->nameRaterShow.pokemonName, show->nameRaterShow.pokemonNameLanguage);
-            sub_80EFBDC(1, 0, 0, 1, 0, show);
-            sub_80EFBDC(2, 1, 0, 1, 0, show);
+            TV_GetNicknameSubscore(1, 0, 0, 1, 0, show);
+            TV_GetNicknameSubscore(2, 1, 0, 1, 0, show);
             sTVShowState = 12;
             break;
         case 13:
             TVShowConvertInternationalString(gStringVar1, show->nameRaterShow.trainerName, show->nameRaterShow.language);
-            sub_80EFBDC(1, 0, 2, 0, 0, show);
-            sub_80EFBDC(2, 0, 3, 1, 0, show);
+            TV_GetNicknameSubscore(1, 0, 2, 0, 0, show);
+            TV_GetNicknameSubscore(2, 0, 3, 1, 0, show);
             sTVShowState = 14;
             break;
         case 14:
-            sub_80EFBDC(1, 0, 2, 1, 0, show);
-            sub_80EFBDC(2, 0, 3, 0, 0, show);
+            TV_GetNicknameSubscore(1, 0, 2, 1, 0, show);
+            TV_GetNicknameSubscore(2, 0, 3, 0, 0, show);
             sTVShowState = 18;
             break;
         case 15:
-            sub_80EFBDC(0, 0, 2, 1, 0, show);
+            TV_GetNicknameSubscore(0, 0, 2, 1, 0, show);
             StringCopy(gStringVar2, gSpeciesNames[show->nameRaterShow.species]);
-            sub_80EFBDC(2, 0, 3, 2, show->nameRaterShow.species, show);
+            TV_GetNicknameSubscore(2, 0, 3, 2, show->nameRaterShow.species, show);
             sTVShowState = 16;
             break;
         case 16:
-            sub_80EFBDC(0, 0, 2, 2, show->nameRaterShow.species, show);
-            sub_80EFBDC(2, 0, 3, 1, 0, show);
+            TV_GetNicknameSubscore(0, 0, 2, 2, show->nameRaterShow.species, show);
+            TV_GetNicknameSubscore(2, 0, 3, 1, 0, show);
             sTVShowState = 17;
             break;
         case 17:
-            sub_80EFBDC(0, 0, 2, 1, 0, show);
+            TV_GetNicknameSubscore(0, 0, 2, 1, 0, show);
             StringCopy(gStringVar2, gSpeciesNames[show->nameRaterShow.var1C]);
-            sub_80EFBDC(2, 0, 3, 2, show->nameRaterShow.var1C, show);
+            TV_GetNicknameSubscore(2, 0, 3, 2, show->nameRaterShow.var1C, show);
             sTVShowState = 18;
             break;
         case 12:
@@ -5498,7 +5497,7 @@ void DoTVShowTheNameRaterShow(void)
     ShowFieldMessage(gTVNameRaterTextGroup[state]);
 }
 
-void DoTVShowPokemonTodaySuccessfulCapture(void)
+static void DoTVShowPokemonTodaySuccessfulCapture(void)
 {
     TVShow *show;
     u8 state;
@@ -5576,7 +5575,7 @@ void DoTVShowPokemonTodaySuccessfulCapture(void)
     ShowFieldMessage(gTVPokemonTodaySuccessfulTextGroup[state]);
 }
 
-void DoTVShowPokemonTodayFailedCapture(void)
+static void DoTVShowPokemonTodayFailedCapture(void)
 {
     TVShow *show;
     u8 state;
@@ -5629,7 +5628,7 @@ void DoTVShowPokemonTodayFailedCapture(void)
     ShowFieldMessage(gTVPokemonTodayFailedTextGroup[state]);
 }
 
-void DoTVShowPokemonFanClubLetter(void)
+static void DoTVShowPokemonFanClubLetter(void)
 {
     TVShow *show;
     u8 state;
@@ -5661,7 +5660,7 @@ void DoTVShowPokemonFanClubLetter(void)
         case 4:
         case 5:
         case 6:
-            sub_80EFB58(show);
+            TV_FanClubLetter_RandomWordToStringVar3(show);
             sTVShowState = 7;
             break;
         case 7:
@@ -5683,7 +5682,7 @@ void DoTVShowPokemonFanClubLetter(void)
     ShowFieldMessage(gTVFanClubTextGroup[state]);
 }
 
-void DoTVShowRecentHappenings(void)
+static void DoTVShowRecentHappenings(void)
 {
     TVShow *show;
     u8 state;
@@ -5695,7 +5694,7 @@ void DoTVShowRecentHappenings(void)
     {
         case 0:
             TVShowConvertInternationalString(gStringVar1, show->recentHappenings.playerName, show->recentHappenings.language);
-            sub_80EFB58(show);
+            TV_FanClubLetter_RandomWordToStringVar3(show);
             sTVShowState = 50;
             break;
         case 1:
@@ -5718,7 +5717,7 @@ void DoTVShowRecentHappenings(void)
     ShowFieldMessage(gTVRecentHappeningsTextGroup[state]);
 }
 
-void DoTVShowPokemonFanClubOpinions(void)
+static void DoTVShowPokemonFanClubOpinions(void)
 {
     TVShow *show;
     u8 state;
@@ -5751,12 +5750,12 @@ void DoTVShowPokemonFanClubOpinions(void)
     ShowFieldMessage(gTVFanClubOpinionsTextGroup[state]);
 }
 
-void DoTVShowDummiedOut(void)
+static void DoTVShowDummiedOut(void)
 {
 
 }
 
-void DoTVShowPokemonNewsMassOutbreak(void)
+static void DoTVShowPokemonNewsMassOutbreak(void)
 {
     TVShow *show;
 
@@ -5768,7 +5767,7 @@ void DoTVShowPokemonNewsMassOutbreak(void)
     ShowFieldMessage(gTVMassOutbreakTextGroup[sTVShowState]);
 }
 
-void DoTVShowPokemonContestLiveUpdates(void)
+static void DoTVShowPokemonContestLiveUpdates(void)
 {
     TVShow *show;
     u8 state;
@@ -6115,7 +6114,7 @@ void DoTVShowPokemonContestLiveUpdates(void)
     ShowFieldMessage(gTVContestLiveUpdatesTextGroup[state]);
 }
 
-void DoTVShowPokemonBattleUpdate(void)
+static void DoTVShowPokemonBattleUpdate(void)
 {
     TVShow *show;
     u8 state;
@@ -6187,7 +6186,7 @@ void DoTVShowPokemonBattleUpdate(void)
     ShowFieldMessage(gTVPokemonBattleUpdateTextGroup[state]);
 }
 
-void DoTVShow3CheersForPokeblocks(void)
+static void DoTVShow3CheersForPokeblocks(void)
 {
     TVShow *show;
     u8 state;
@@ -6290,7 +6289,7 @@ void DoTVShow3CheersForPokeblocks(void)
     ShowFieldMessage(gTV3CheersForPokeblocksTextGroup[state]);
 }
 
-void DoTVShowInSearchOfTrainers(void)
+static void DoTVShowInSearchOfTrainers(void)
 {
     u8 state;
 
@@ -6358,7 +6357,7 @@ void DoTVShowInSearchOfTrainers(void)
     ShowFieldMessage(gTVInSearchOfTrainersTextGroup[state]);
 }
 
-void DoTVShowPokemonAngler(void)
+static void DoTVShowPokemonAngler(void)
 {
     TVShow *show;
     u8 state;
@@ -6392,7 +6391,7 @@ void DoTVShowPokemonAngler(void)
     ShowFieldMessage(gTVPokemonAnglerTextGroup[state]);
 }
 
-void DoTVShowTheWorldOfMasters(void)
+static void DoTVShowTheWorldOfMasters(void)
 {
     TVShow *show;
     u8 state;
@@ -6422,7 +6421,7 @@ void DoTVShowTheWorldOfMasters(void)
     ShowFieldMessage(gTVWorldOfMastersTextGroup[state]);
 }
 
-void DoTVShowTodaysRivalTrainer(void)
+static void DoTVShowTodaysRivalTrainer(void)
 {
     TVShow *show;
     u8 state;
@@ -6571,7 +6570,7 @@ void DoTVShowTodaysRivalTrainer(void)
     ShowFieldMessage(gTVTodaysRivalTrainerTextGroup[state]);
 }
 
-void DoTVShowDewfordTrendWatcherNetwork(void)
+static void DoTVShowDewfordTrendWatcherNetwork(void)
 {
     TVShow *show;
     u8 state;
@@ -6627,7 +6626,7 @@ void DoTVShowDewfordTrendWatcherNetwork(void)
     ShowFieldMessage(TVDewfordTrendWatcherNetworkTextGroup[state]);
 }
 
-void DoTVShowHoennTreasureInvestigators(void)
+static void DoTVShowHoennTreasureInvestigators(void)
 {
     TVShow *show;
     u8 state;
@@ -6671,7 +6670,7 @@ void DoTVShowHoennTreasureInvestigators(void)
     ShowFieldMessage(TVHoennTreasureInvestigatorsTextGroup[state]);
 }
 
-void DoTVShowFindThatGamer(void)
+static void DoTVShowFindThatGamer(void)
 {
     TVShow *show;
     u8 state;
@@ -6745,7 +6744,7 @@ void DoTVShowFindThatGamer(void)
     ShowFieldMessage(gTVFindThatGamerTextGroup[state]);
 }
 
-void DoTVShowBreakingNewsTV(void)
+static void DoTVShowBreakingNewsTV(void)
 {
     TVShow *show;
     u8 state;
@@ -6848,7 +6847,7 @@ void DoTVShowBreakingNewsTV(void)
     ShowFieldMessage(gTVBreakingNewsTextGroup[state]);
 }
 
-void DoTVShowSecretBaseVisit(void)
+static void DoTVShowSecretBaseVisit(void)
 {
     TVShow *show;
     u8 state;
@@ -6944,7 +6943,7 @@ void DoTVShowSecretBaseVisit(void)
     ShowFieldMessage(gTVSecretBaseVisitTextGroup[state]);
 }
 
-void DoTVShowPokemonLotteryWinnerFlashReport(void)
+static void DoTVShowPokemonLotteryWinnerFlashReport(void)
 {
     TVShow *show;
     u8 state;
@@ -6974,7 +6973,7 @@ void DoTVShowPokemonLotteryWinnerFlashReport(void)
     ShowFieldMessage(gTVPokemonLotteryWinnerFlashReportTextGroup[state]);
 }
 
-void DoTVShowThePokemonBattleSeminar(void)
+static void DoTVShowThePokemonBattleSeminar(void)
 {
     TVShow *show;
     u8 state;
@@ -7038,7 +7037,7 @@ void DoTVShowThePokemonBattleSeminar(void)
     ShowFieldMessage(gTVThePokemonBattleSeminarTextGroup[state]);
 }
 
-void DoTVShowTrainerFanClubSpecial(void)
+static void DoTVShowTrainerFanClubSpecial(void)
 {
     TVShow *show;
     u8 state;
@@ -7103,7 +7102,7 @@ void DoTVShowTrainerFanClubSpecial(void)
     ShowFieldMessage(gTVTrainerFanClubSpecialTextGroup[state]);
 }
 
-void DoTVShowTrainerFanClub(void)
+static void DoTVShowTrainerFanClub(void)
 {
     TVShow *show;
     u8 state;
@@ -7190,7 +7189,7 @@ void DoTVShowTrainerFanClub(void)
     ShowFieldMessage(gTVTrainerFanClubTextGroup[state]);
 }
 
-void DoTVShowSpotTheCuties(void)
+static void DoTVShowSpotTheCuties(void)
 {
     TVShow *show;
     u8 state;
@@ -7295,7 +7294,7 @@ void DoTVShowSpotTheCuties(void)
     ShowFieldMessage(gTVCutiesTextGroup[state]);
 }
 
-void DoTVShowPokemonNewsBattleFrontier(void)
+static void DoTVShowPokemonNewsBattleFrontier(void)
 {
     TVShow *show;
     u8 state;
@@ -7444,7 +7443,7 @@ void DoTVShowPokemonNewsBattleFrontier(void)
     ShowFieldMessage(gTVPokemonNewsBattleFrontierTextGroup[state]);
 }
 
-void DoTVShowWhatsNo1InHoennToday(void)
+static void DoTVShowWhatsNo1InHoennToday(void)
 {
     TVShow *show;
     u8 state;
@@ -7559,7 +7558,7 @@ u8 sub_80F51AC(TVShow *show, u8 a1)
     return 0;
 }
 
-void DoTVShowSecretBaseSecrets(void)
+static void DoTVShowSecretBaseSecrets(void)
 {
     TVShow *show;
     u8 state;
@@ -7797,7 +7796,7 @@ void DoTVShowSecretBaseSecrets(void)
     ShowFieldMessage(gTVSecretBaseSecretsTextGroup[state]);
 }
 
-void DoTVShowSafariFanClub(void)
+static void DoTVShowSafariFanClub(void)
 {
     TVShow *show;
     u8 state;
@@ -7884,7 +7883,7 @@ void DoTVShowSafariFanClub(void)
     ShowFieldMessage(gTVSafariFanClubTextGroup[state]);
 }
 
-void DoTVShowPokemonContestLiveUpdates2(void)
+static void DoTVShowPokemonContestLiveUpdates2(void)
 {
     TVShow *show;
     u8 state;
@@ -7920,7 +7919,7 @@ void DoTVShowPokemonContestLiveUpdates2(void)
     ShowFieldMessage(gTVPokemonContestLiveUpdates2TextGroup[state]);
 }
 
-void TVShowDone(void)
+static void TVShowDone(void)
 {
     gScriptResult = TRUE;
     sTVShowState = 0;

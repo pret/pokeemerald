@@ -3841,7 +3841,7 @@ s7E_load_first_pokenames: @ 809AFFC
 	lsls r2, 2
 	adds r2, r0
 	ldr r4, [r2]
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
