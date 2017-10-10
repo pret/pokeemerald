@@ -519,7 +519,7 @@ const u8 *const gTVTrainerFanClubTextGroup[] = {
     gUnknown_08286B4F
 };
 
-const u8 *const gUnknown_0858D4E4[] = {
+const u8 *const gTVCutiesTextGroup[] = {
     gUnknown_08286D8F,
     gUnknown_08286E9D,
     gUnknown_08286EFC,
@@ -2471,9 +2471,9 @@ void sub_80EE44C(u8 a0, u8 a1)
     }
 }
 
-void sub_80EE4DC(struct Pokemon *pokemon, u8 a1)
+void sub_80EE4DC(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
 {
-    static u8 sub_80EE69C(u8);
+    static u8 TV_MonDataIdxToRibbon(u8);
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
@@ -2485,8 +2485,8 @@ void sub_80EE4DC(struct Pokemon *pokemon, u8 a1)
         StringCopy(show->cuties.playerName, gSaveBlock2Ptr->playerName);
         GetMonData(pokemon, MON_DATA_NICKNAME, show->cuties.nickname);
         StripExtCtrlCodes(show->cuties.nickname);
-        show->cuties.unk02 = sub_80EE5A4(pokemon);
-        show->cuties.unk03 = sub_80EE69C(a1);
+        show->cuties.nRibbons = GetRibbonCount(pokemon);
+        show->cuties.selectedRibbon = TV_MonDataIdxToRibbon(ribbonMonDataIdx);
         tv_store_id_3x(show);
         show->cuties.language = gGameLanguage;
         if (show->cuties.language == LANGUAGE_JAPANESE || GetMonData(pokemon, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
@@ -2500,7 +2500,7 @@ void sub_80EE4DC(struct Pokemon *pokemon, u8 a1)
     }
 }
 
-u8 sub_80EE5A4(struct Pokemon *pokemon)
+u8 GetRibbonCount(struct Pokemon *pokemon)
 {
     u8 nRibbons;
 
@@ -2525,7 +2525,7 @@ u8 sub_80EE5A4(struct Pokemon *pokemon)
     return nRibbons;
 }
 
-static u8 sub_80EE69C(u8 monDataIdx)
+static u8 TV_MonDataIdxToRibbon(u8 monDataIdx)
 {
     if (monDataIdx == MON_DATA_CHAMPION_RIBBON) return  0;
     if (monDataIdx == MON_DATA_COOL_RIBBON)     return  1;
@@ -7188,6 +7188,111 @@ void DoTVShowTrainerFanClub(void)
             TVShowDone();
     }
     ShowFieldMessage(gTVTrainerFanClubTextGroup[state]);
+}
+
+void DoTVShowSpotTheCuties(void)
+{
+    TVShow *show;
+    u8 state;
+    u32 playerId;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->cuties.playerName, show->cuties.language);
+            TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
+            if (show->cuties.nRibbons < 10)
+            {
+                sTVShowState = 1;
+            }
+            else if (show->cuties.nRibbons < 20)
+            {
+                sTVShowState = 2;
+            }
+            else
+            {
+                sTVShowState = 3;
+            }
+            break;
+        case 1:
+        case 2:
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, show->cuties.playerName, show->cuties.language);
+            TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
+            TV_PrintIntToStringVar(2, show->cuties.nRibbons);
+            sTVShowState = 4;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
+            switch (show->cuties.selectedRibbon)
+            {
+                case 0:
+                    sTVShowState = 5;
+                    break;
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    sTVShowState = 6;
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                    sTVShowState = 7;
+                    break;
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                    sTVShowState = 8;
+                    break;
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                    sTVShowState = 9;
+                    break;
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                    sTVShowState = 10;
+                    break;
+                case 21:
+                    sTVShowState = 11;
+                    break;
+                case 22:
+                    sTVShowState = 12;
+                    break;
+                case 23:
+                    sTVShowState = 13;
+                    break;
+                case 24:
+                    sTVShowState = 14;
+                    break;
+            }
+            break;
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+            TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
+            sTVShowState = 15;
+            break;
+        case 15:
+            TVShowDone();
+    }
+    ShowFieldMessage(gTVCutiesTextGroup[state]);
 }
 
 //void TVShowDone(void)

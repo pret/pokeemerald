@@ -625,7 +625,7 @@ sub_80F8C7C: @ 80F8C7C
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4

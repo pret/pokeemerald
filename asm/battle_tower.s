@@ -5673,7 +5673,7 @@ _0816508C:
 	bl SetMonData
 	ldr r0, [r7]
 	adds r0, r4
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	strb r0, [r5, 0x1]
 _081650D4:
 	adds r5, 0x4

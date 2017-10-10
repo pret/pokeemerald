@@ -4785,7 +4785,7 @@ _080F8074:
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4834,7 +4834,7 @@ _080F80E2:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4883,7 +4883,7 @@ _080F814E:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4926,7 +4926,7 @@ _080F8190:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4969,7 +4969,7 @@ _080F81F8:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4

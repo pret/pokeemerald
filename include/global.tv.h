@@ -416,8 +416,8 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 unk02;
-        /*0x03*/ u8 unk03;
+        /*0x02*/ u8 nRibbons;
+        /*0x03*/ u8 selectedRibbon;
         /*0x04*/ u8 nickname[11];
         /*0x0f*/ u8 language;
         /*0x10*/ u8 pokemonNameLanguage;

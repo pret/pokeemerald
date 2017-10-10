@@ -4121,7 +4121,7 @@ _081377BC:
 	add r2, sp, 0x18
 	bl SetMonData
 	adds r0, r4, 0
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	strb r0, [r5, 0x1]
 	movs r7, 0x1
 _0813780A:
@@ -7519,7 +7519,7 @@ sub_8139370: @ 8139370
 	mov r2, sp
 	bl SetMonData
 	adds r0, r4, 0
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
