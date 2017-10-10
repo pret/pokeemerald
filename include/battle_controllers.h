@@ -39,8 +39,8 @@ struct MovePpInfo
 struct ChooseMoveStruct
 {
     u16 moves[4];
-    u8 ppNumbers[4];
-    u8 ppWithBonusNumbers[4];
+    u8 currentPp[4];
+    u8 maxPp[4];
     u16 species;
     u8 monType1;
     u8 monType2;
