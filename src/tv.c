@@ -392,7 +392,7 @@ const u8 *const gTVNameRaterTextGroup[] = {
     gUnknown_08282A36
 };
 
-const u8 *const gUnknown_0858D384[] = {
+const u8 *const gTVPokemonContestLiveUpdates2TextGroup[] = {
     gUnknown_0828C137,
     gUnknown_0828C28C,
     gUnknown_0828C45B,
@@ -7801,8 +7801,6 @@ void DoTVShowSafariFanClub(void)
 {
     TVShow *show;
     u8 state;
-    u8 bitCount;
-    u16 i;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
     gScriptResult = FALSE;
@@ -7886,14 +7884,50 @@ void DoTVShowSafariFanClub(void)
     ShowFieldMessage(gTVSafariFanClubTextGroup[state]);
 }
 
-//void TVShowDone(void)
-//{
-//    gScriptResult = TRUE;
-//    sTVShowState = 0;
-//    gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.active = FALSE;
-//}
-//
-//void ResetTVShowState(void)
-//{
-//    sTVShowState = 0;
-//}
+void DoTVShowPokemonContestLiveUpdates2(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            sub_818E868(gStringVar1, show->contestLiveUpdates2.contestCategory);
+            if (show->contestLiveUpdates2.pokeblockState == 1)
+            {
+                sTVShowState = 1;
+            }
+            else if (show->contestLiveUpdates2.pokeblockState == 0)
+            {
+                sTVShowState = 2;
+            }
+            else
+            {
+                sTVShowState = 3;
+            }
+            break;
+        case 1:
+        case 2:
+            TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates2.playerName, show->contestLiveUpdates2.language);
+        case 3:
+            TVShowConvertInternationalString(gStringVar2, show->contestLiveUpdates2.categoryName, show->contestLiveUpdates2.unk_18);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVPokemonContestLiveUpdates2TextGroup[state]);
+}
+
+void TVShowDone(void)
+{
+    gScriptResult = TRUE;
+    sTVShowState = 0;
+    gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.active = FALSE;
+}
+
+void ResetTVShowState(void)
+{
+    sTVShowState = 0;
+}
