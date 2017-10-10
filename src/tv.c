@@ -560,7 +560,7 @@ const u8 *const gTVPokemonNewsBattleFrontierTextGroup[] = {
     gUnknown_08287F77
 };
 
-const u8 *const gUnknown_0858D570[] = {
+const u8 *const gTVWhatsNo1InHoennTodayTextGroup[] = {
     gUnknown_08287FE0,
     gUnknown_082880C0,
     gUnknown_0828815F,
@@ -7442,6 +7442,87 @@ void DoTVShowPokemonNewsBattleFrontier(void)
             break;
     }
     ShowFieldMessage(gTVPokemonNewsBattleFrontierTextGroup[state]);
+}
+
+void DoTVShowWhatsNo1InHoennToday(void)
+{
+    TVShow *show;
+    u8 state;
+    u32 playerId;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
+            switch (show->numberOne.unk04)
+            {
+                case 0:
+                    sTVShowState = 1;
+                    break;
+                case 1:
+                    sTVShowState = 2;
+                    break;
+                case 2:
+                    sTVShowState = 3;
+                    break;
+                case 3:
+                    sTVShowState = 4;
+                    break;
+                case 4:
+                    sTVShowState = 5;
+                    break;
+                case 5:
+                    sTVShowState = 6;
+                    break;
+                case 6:
+                    sTVShowState = 7;
+                    break;
+            }
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
+            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            sTVShowState = 8;
+            break;
+        case 2:
+            TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
+            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            sTVShowState = 8;
+            break;
+        case 3:
+            TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
+            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            sTVShowState = 8;
+            break;
+        case 4:
+            TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
+            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            sTVShowState = 8;
+            break;
+        case 5:
+            TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
+            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            sTVShowState = 8;
+            break;
+        case 6:
+            TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
+            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            sTVShowState = 8;
+            break;
+        case 7:
+            TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
+            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            sTVShowState = 8;
+            break;
+        case 8:
+            TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVWhatsNo1InHoennTodayTextGroup[state]);
 }
 
 //void TVShowDone(void)
