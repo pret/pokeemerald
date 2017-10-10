@@ -7525,6 +7525,40 @@ void DoTVShowWhatsNo1InHoennToday(void)
     ShowFieldMessage(gTVWhatsNo1InHoennTodayTextGroup[state]);
 }
 
+u8 sub_80F5180(TVShow *show)
+{
+    u8 i;
+    u8 tot;
+
+    for (i = 0, tot = 0; i < 32; i ++)
+    {
+        if ((show->secretBaseSecrets.unk0c >> i) & 1)
+        {
+            tot ++;
+        }
+    }
+    return tot;
+}
+
+u8 sub_80F51AC(TVShow *show, u8 a1)
+{
+    u8 i;
+    u8 tot;
+
+    for (i = 0, tot = 0; i < 32; i ++)
+    {
+        if ((show->secretBaseSecrets.unk0c >> i) & 1)
+        {
+            if (tot == a1)
+            {
+                return gUnknown_0858D690[i];
+            }
+            tot ++;
+        }
+    }
+    return 0;
+}
+
 //void TVShowDone(void)
 //{
 //    gScriptResult = TRUE;
