@@ -4193,7 +4193,7 @@ _081BD3A8:
 	lsrs r4, r0, 24
 	movs r0, 0x20
 	mov r9, r0
-	ldr r1, =gUnknown_083054E0
+	ldr r1, =gTrainerFrontPicCoords
 	lsls r0, r4, 2
 	adds r0, r1
 	ldrb r1, [r0]

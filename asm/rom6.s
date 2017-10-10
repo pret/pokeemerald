@@ -7347,7 +7347,7 @@ sub_8139228: @ 8139228
 sub_8139238: @ 8139238
 	push {lr}
 	ldr r0, =gStringVar1
-	bl sub_8165284
+	bl GetEreaderTrainerName
 	pop {r0}
 	bx r0
 	.pool

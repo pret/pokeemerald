@@ -3365,7 +3365,7 @@ _0805EDE4:
 	adds r4, r1, 0
 	cmp r0, 0
 	beq _0805EE06
-	ldr r0, =gUnknown_08305DCC
+	ldr r0, =gEnemyMonElevation
 	ldrh r1, [r3, 0x2]
 	adds r1, r0
 	ldrb r0, [r1]
@@ -3441,7 +3441,7 @@ SetBankEnemyShadowSpriteCallback: @ 805EE54
 	beq _0805EE7E
 	adds r5, r0, 0
 _0805EE7E:
-	ldr r0, =gUnknown_08305DCC
+	ldr r0, =gEnemyMonElevation
 	adds r0, r5, r0
 	ldrb r0, [r0]
 	cmp r0, 0

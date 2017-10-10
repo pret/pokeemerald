@@ -665,7 +665,7 @@ _0817D16C:
 	bl _0817DFAC
 	.pool
 _0817D1B8:
-	ldr r1, =gUnknown_02022F5C
+	ldr r1, =gBattleTextBuff1 + 4
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _0817D1C4
@@ -917,7 +917,7 @@ _0817D3C0:
 	bne _0817D3CC
 	bl _0817E0A6
 _0817D3CC:
-	ldr r1, =gUnknown_02022F6A
+	ldr r1, =gBattleTextBuff2 + 2
 	ldrh r0, [r1]
 	cmp r0, 0xD1
 	bne _0817D3E8
@@ -946,7 +946,7 @@ _0817D3FE:
 	ldrb r1, [r1]
 	cmp r0, r1
 	bne _0817D436
-	ldr r1, =gUnknown_02022F6A
+	ldr r1, =gBattleTextBuff2 + 2
 	ldrh r0, [r1]
 	cmp r0, 0xD1
 	bne _0817D42C
@@ -988,7 +988,7 @@ _0817D45C:
 	bne _0817D468
 	bl _0817E0A6
 _0817D468:
-	ldr r1, =gUnknown_02022F6A
+	ldr r1, =gBattleTextBuff2 + 2
 	ldrh r0, [r1]
 	cmp r0, 0xD3
 	bne _0817D484
@@ -2182,7 +2182,7 @@ _0817DE10:
 	b _0817DFAA
 	.pool
 _0817DE58:
-	ldr r1, =gUnknown_02022F5A
+	ldr r1, =gBattleTextBuff1 + 2
 	ldrh r0, [r1]
 	cmp r0, 0x73
 	bne _0817DE82
@@ -2204,7 +2204,7 @@ _0817DE58:
 	ands r0, r2
 	strb r0, [r1]
 _0817DE82:
-	ldr r2, =gUnknown_02022F5A
+	ldr r2, =gBattleTextBuff1 + 2
 	ldrh r0, [r2]
 	cmp r0, 0x71
 	bne _0817DEAA
@@ -2225,7 +2225,7 @@ _0817DE82:
 	ands r0, r2
 	strb r0, [r1]
 _0817DEAA:
-	ldr r1, =gUnknown_02022F5A
+	ldr r1, =gBattleTextBuff1 + 2
 	ldrh r0, [r1]
 	cmp r0, 0x36
 	beq _0817DEB4

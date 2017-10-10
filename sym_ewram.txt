@@ -238,26 +238,7 @@ gBattle_WIN1H: @ 2022E28
 gBattle_WIN1V: @ 2022E2A
 	.space 0x2
 
-gDisplayedStringBattle: @ 2022E2C
-	.space 0x12C
-
-gBattleTextBuff1: @ 2022F58
-	.space 0x2
-
-gUnknown_02022F5A: @ 2022F5A
-	.space 0x2
-
-gUnknown_02022F5C: @ 2022F5C
-	.space 0xC
-
-gBattleTextBuff2: @ 2022F68
-	.space 0x2
-
-gUnknown_02022F6A: @ 2022F6A
-	.space 0xE
-
-gBattleTextBuff3: @ 2022F78
-	.space 0x10
+    .include "src/battle_message.o"
 
 gUnknown_02022F88: @ 2022F88
 	.space 0x64

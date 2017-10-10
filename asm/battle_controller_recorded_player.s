@@ -4033,7 +4033,7 @@ _0818BD72:
 	beq _0818BD9C
 	movs r0, 0x5A
 	mov r9, r0
-	ldr r1, =gUnknown_083054E0
+	ldr r1, =gTrainerFrontPicCoords
 	b _0818BD9E
 	.pool
 _0818BD98:

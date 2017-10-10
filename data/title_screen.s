@@ -1,9 +1,12 @@
-    .include "asm/macros.inc"
-    .include "constants/constants.inc"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
-    .section .rodata
-    .align 2, 0
+	.section .rodata
+	.align 2, 0
 
+	.incbin "graphics/title_screen/unk_853EF78.gbapal"
+
+	.align 2
 gTitleScreenRayquazaGfx:: @ 853F058
 	.incbin "graphics/title_screen/rayquaza.4bpp.lz"
 
