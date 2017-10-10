@@ -490,11 +490,11 @@ const u8 *const gTVSecretBaseVisitTextGroup[] = {
     gUnknown_08286340
 };
 
-const u8 *const gTVPokemonLotterWinnerFlashReportTextGroup[] = {
+const u8 *const gTVPokemonLotteryWinnerFlashReportTextGroup[] = {
     gUnknown_082863CC
 };
 
-const u8 *const gUnknown_0858D498[] = {
+const u8 *const gTVThePokemonBattleSeminarTextGroup[] = {
     gUnknown_08286616,
     gUnknown_082866B6,
     gUnknown_08286700,
@@ -2422,7 +2422,7 @@ void sub_80EE2CC(void)
     }
 }
 
-void sub_80EE35C(u16 a0, u16 a1, u8 a2, const u16 *a3, u16 a4)
+void sub_80EE35C(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u16 betterMove)
 {
     TVShow *show;
     u8 i;
@@ -2435,19 +2435,19 @@ void sub_80EE35C(u16 a0, u16 a1, u8 a2, const u16 *a3, u16 a4)
         show->battleSeminar.kind = TVSHOW_BATTLE_SEMINAR;
         show->battleSeminar.active = FALSE;
         StringCopy(show->battleSeminar.playerName, gSaveBlock2Ptr->playerName);
-        show->battleSeminar.unk04 = a0;
-        show->battleSeminar.unk06 = a1;
-        show->battleSeminar.unk02 = a3[a2];
+        show->battleSeminar.foeSpecies = foeSpecies;
+        show->battleSeminar.species = species;
+        show->battleSeminar.move = movePtr[moveIdx];
         for (i = 0, j = 0; i < 4; i ++)
         {
-            if (i != a2 && a3[i])
+            if (i != moveIdx && movePtr[i])
             {
-                show->battleSeminar.unk08[j] = a3[i];
+                show->battleSeminar.otherMoves[j] = movePtr[i];
                 j ++;
             }
         }
-        show->battleSeminar.unk10 = j;
-        show->battleSeminar.unk0e = a4;
+        show->battleSeminar.nOtherMoves = j;
+        show->battleSeminar.betterMove = betterMove;
         tv_store_id_3x(show);
         show->battleSeminar.language = gGameLanguage;
     }
@@ -4037,8 +4037,8 @@ void sub_80F0708(void) // FIXME: register allocation shenanigans
             case TVSHOW_LOTTO_WINNER:
                 break;
             case TVSHOW_BATTLE_SEMINAR:
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleSeminar.unk06, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleSeminar.unk04, i);
+                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleSeminar.species, i);
+                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->battleSeminar.foeSpecies, i);
                 break;
             case TVSHOW_TRAINER_FAN_CLUB:
                 break;
@@ -4993,7 +4993,7 @@ void DoTVShow(void)
     void DoTVShowFindThatGamer(void);
     void DoTVShowBreakingNewsTV(void);
     void DoTVShowSecretBaseVisit(void);
-    void DoTVShowPokemonLotterWinnerFlashReport(void);
+    void DoTVShowPokemonLotteryWinnerFlashReport(void);
     void DoTVShowThePokemonBattleSeminar(void);
     void DoTVShowTrainerFanClubSpecial(void);
     void DoTVShowTrainerFanClub(void);
@@ -5075,7 +5075,7 @@ void DoTVShow(void)
                 DoTVShowSecretBaseVisit();
                 break;
             case TVSHOW_LOTTO_WINNER:
-                DoTVShowPokemonLotterWinnerFlashReport();
+                DoTVShowPokemonLotteryWinnerFlashReport();
                 break;
             case TVSHOW_BATTLE_SEMINAR:
                 DoTVShowThePokemonBattleSeminar();
@@ -6944,7 +6944,7 @@ void DoTVShowSecretBaseVisit(void)
     ShowFieldMessage(gTVSecretBaseVisitTextGroup[state]);
 }
 
-void DoTVShowPokemonLotterWinnerFlashReport(void)
+void DoTVShowPokemonLotteryWinnerFlashReport(void)
 {
     TVShow *show;
     u8 state;
@@ -6971,7 +6971,71 @@ void DoTVShowPokemonLotterWinnerFlashReport(void)
     }
     StringCopy(gStringVar3, ItemId_GetItem(show->lottoWinner.item)->name);
     TVShowDone();
-    ShowFieldMessage(gTVPokemonLotterWinnerFlashReportTextGroup[state]);
+    ShowFieldMessage(gTVPokemonLotteryWinnerFlashReportTextGroup[state]);
+}
+
+void DoTVShowThePokemonBattleSeminar(void)
+{
+    TVShow *show;
+    u8 state;
+
+    show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
+    gScriptResult = FALSE;
+    state = sTVShowState;
+    switch (state)
+    {
+        case 0:
+            TVShowConvertInternationalString(gStringVar1, show->battleSeminar.playerName, show->battleSeminar.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->battleSeminar.species]);
+            StringCopy(gStringVar3, gSpeciesNames[show->battleSeminar.foeSpecies]);
+            sTVShowState = 1;
+            break;
+        case 1:
+            TVShowConvertInternationalString(gStringVar1, show->battleSeminar.playerName, show->battleSeminar.language);
+            StringCopy(gStringVar2, gSpeciesNames[show->battleSeminar.foeSpecies]);
+            StringCopy(gStringVar3, gMoveNames[show->battleSeminar.move]);
+            sTVShowState = 2;
+            break;
+        case 2:
+            StringCopy(gStringVar1, gSpeciesNames[show->battleSeminar.species]);
+            switch (show->battleSeminar.nOtherMoves)
+            {
+                case 1:
+                    sTVShowState = 5;
+                    break;
+                case 2:
+                    sTVShowState = 4;
+                    break;
+                case 3:
+                    sTVShowState = 3;
+                    break;
+                default:
+                    sTVShowState = 6;
+                    break;
+            }
+            break;
+        case 3:
+            StringCopy(gStringVar1, gMoveNames[show->battleSeminar.otherMoves[0]]);
+            StringCopy(gStringVar2, gMoveNames[show->battleSeminar.otherMoves[1]]);
+            StringCopy(gStringVar3, gMoveNames[show->battleSeminar.otherMoves[2]]);
+            sTVShowState = 6;
+            break;
+        case 4:
+            StringCopy(gStringVar1, gMoveNames[show->battleSeminar.otherMoves[0]]);
+            StringCopy(gStringVar2, gMoveNames[show->battleSeminar.otherMoves[1]]);
+            sTVShowState = 6;
+            break;
+        case 5:
+            StringCopy(gStringVar2, gMoveNames[show->battleSeminar.otherMoves[0]]);
+            sTVShowState = 6;
+            break;
+        case 6:
+            StringCopy(gStringVar1, gMoveNames[show->battleSeminar.betterMove]);
+            StringCopy(gStringVar2, gMoveNames[show->battleSeminar.move]);
+            TVShowDone();
+            break;
+    }
+    ShowFieldMessage(gTVThePokemonBattleSeminarTextGroup[state]);
 }
 
 //void TVShowDone(void)

@@ -390,12 +390,12 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 unk02;
-        /*0x04*/ u16 unk04;
-        /*0x06*/ u16 unk06;
-        /*0x08*/ u16 unk08[3];
-        /*0x0e*/ u16 unk0e;
-        /*0x10*/ u8 unk10;
+        /*0x02*/ u16 move;
+        /*0x04*/ u16 foeSpecies;
+        /*0x06*/ u16 species;
+        /*0x08*/ u16 otherMoves[3];
+        /*0x0e*/ u16 betterMove;
+        /*0x10*/ u8 nOtherMoves;
         /*0x11*/ u8 language;
         /*0x12*/ u8 filler_12[1];
         /*0x13*/ u8 playerName[8];
