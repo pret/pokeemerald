@@ -59,8 +59,8 @@ IWRAM_DATA s8 sTVShowMixingCurSlot;
 
 EWRAM_DATA u16 sPokemonAnglerSpecies = 0;
 EWRAM_DATA u16 sPokemonAnglerAttemptCounters = 0;
-EWRAM_DATA u16 sFindThatGamerPayoutMaybe = 0;
-EWRAM_DATA bool8 sFindThatGamerGameMaybe = FALSE;
+EWRAM_DATA u16 sFindThatGamerCoinsSpent = 0;
+EWRAM_DATA bool8 sFindThatGamerWhichGame = FALSE;
 EWRAM_DATA ALIGNED(4) u8 sRecordMixingPartnersWithoutShowsToShare = 0;
 EWRAM_DATA ALIGNED(4) u8 sTVShowState = 0;
 EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
@@ -1371,7 +1371,7 @@ void PutFanClubSpecialOnTheAir(void)
     u32 id;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8006];
-    show->fanClubSpecial.unk_16 = gSpecialVar_0x8005 * 10;
+    show->fanClubSpecial.score = gSpecialVar_0x8005 * 10;
     StringCopy(show->fanClubSpecial.playerName, gSaveBlock2Ptr->playerName);
     show->fanClubSpecial.kind = TVSHOW_FAN_CLUB_SPECIAL;
     show->fanClubSpecial.active = TRUE;
@@ -1380,16 +1380,16 @@ void PutFanClubSpecialOnTheAir(void)
     show->fanClubSpecial.idHi = id >> 8;
     StringCopy(name, gStringVar1);
     StripExtCtrlCodes(name);
-    StringCopy(show->fanClubSpecial.unk_0c, name);
+    StringCopy(show->fanClubSpecial.idolName, name);
     tv_store_id_2x(show);
     show->fanClubSpecial.language = gGameLanguage;
     if (show->fanClubSpecial.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->unk_31A0 == LANGUAGE_JAPANESE)
     {
-        show->fanClubSpecial.unk_18 = LANGUAGE_JAPANESE;
+        show->fanClubSpecial.idolNameLanguage = LANGUAGE_JAPANESE;
     }
     else
     {
-        show->fanClubSpecial.unk_18 = gSaveBlock1Ptr->unk_31A0;
+        show->fanClubSpecial.idolNameLanguage = gSaveBlock1Ptr->unk_31A0;
     }
 }
 
@@ -1617,7 +1617,7 @@ void PutNameRaterShowOnTheAir(void)
             show->nameRaterShow.species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL);
             show->nameRaterShow.random = Random() % 3;
             show->nameRaterShow.random2 = Random() % 2;
-            show->nameRaterShow.var1C = TV_GetSomeOtherSpeciesAlreadySeenByPlayer(show->nameRaterShow.species);
+            show->nameRaterShow.randomSpecies = TV_GetSomeOtherSpeciesAlreadySeenByPlayer(show->nameRaterShow.species);
             StringCopy(show->nameRaterShow.trainerName, gSaveBlock2Ptr->playerName);
             GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, show->nameRaterShow.pokemonName);
             StripExtCtrlCodes(show->nameRaterShow.pokemonName);
@@ -1657,11 +1657,11 @@ void PutLilycoveContestLadyShowOnTheAir(void)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         sub_818E848(&show->contestLiveUpdates2.language);
-        show->contestLiveUpdates2.unk_18 = 2;
+        show->contestLiveUpdates2.pokemonNameLanguage = LANGUAGE_ENGLISH;
         show->contestLiveUpdates2.kind = TVSHOW_CONTEST_LIVE_UPDATES_2;
         show->contestLiveUpdates2.active = TRUE;
         sub_818E81C(show->contestLiveUpdates2.playerName);
-        sub_818E7E0(&show->contestLiveUpdates2.contestCategory, show->contestLiveUpdates2.categoryName);
+        sub_818E7E0(&show->contestLiveUpdates2.contestCategory, show->contestLiveUpdates2.nickname);
         show->contestLiveUpdates2.pokeblockState = sub_818E880();
         tv_store_id_2x(show);
     }
@@ -1701,7 +1701,7 @@ void InterviewAfter_PkmnFanClubOpinions(void)
     show->fanclubOpinions.kind = TVSHOW_PKMN_FAN_CLUB_OPINIONS;
     show->fanclubOpinions.active = TRUE;
     show->fanclubOpinions.friendshipHighNybble = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_FRIENDSHIP, NULL) >> 4;
-    show->fanclubOpinions.var04B = gSpecialVar_0x8007;
+    show->fanclubOpinions.questionAsked = gSpecialVar_0x8007;
     StringCopy(show->fanclubOpinions.playerName, gSaveBlock2Ptr->playerName);
     GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_NICKNAME, show->fanclubOpinions.nickname);
     StripExtCtrlCodes(show->fanclubOpinions.nickname);
@@ -1710,11 +1710,11 @@ void InterviewAfter_PkmnFanClubOpinions(void)
     show->fanclubOpinions.language = gGameLanguage;
     if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
     {
-        show->fanclubOpinions.var0E = LANGUAGE_JAPANESE;
+        show->fanclubOpinions.pokemonNameLanguage = LANGUAGE_JAPANESE;
     }
     else
     {
-        show->fanclubOpinions.var0E = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_LANGUAGE);
+        show->fanclubOpinions.pokemonNameLanguage = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_LANGUAGE);
     }
 }
 
@@ -1961,17 +1961,17 @@ void sub_80EDB44(void)
         }
         show->rivalTrainer.location = gMapHeader.regionMapSectionId;
         show->rivalTrainer.mapDataId = gMapHeader.mapDataId;
-        show->rivalTrainer.unk05 = 0;
-        show->rivalTrainer.unk06 = 0;
+        show->rivalTrainer.nSilverSymbols = 0;
+        show->rivalTrainer.nGoldSymbols = 0;
         for (i = 0; i < 7; i ++)
         {
             if (FlagGet(gUnknown_0858D0DE[i]) == TRUE)
             {
-                show->rivalTrainer.unk05 ++;
+                show->rivalTrainer.nSilverSymbols ++;
             }
             if (FlagGet(gUnknown_0858D0D0[i]) == TRUE)
             {
-                show->rivalTrainer.unk06 ++;
+                show->rivalTrainer.nGoldSymbols ++;
             }
         }
         show->rivalTrainer.battlePoints = gSaveBlock2Ptr->frontierBattlePoints;
@@ -2019,41 +2019,41 @@ void sub_80EDCE8(void)
     }
 }
 
-void sub_80EDD78(u16 a0)
+void sub_80EDD78(u16 nCoinsPaidOut)
 {
     TVShow *show;
     bool8 flag;
-    u16 v0;
+    u16 nCoinsWon;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_FIND_THAT_GAMER, FALSE) != TRUE)
     {
         flag = FALSE;
-        switch (sFindThatGamerGameMaybe)
+        switch (sFindThatGamerWhichGame)
         {
             case FALSE:
-                if (a0 >= sFindThatGamerPayoutMaybe + 200)
+                if (nCoinsPaidOut >= sFindThatGamerCoinsSpent + 200)
                 {
                     flag = TRUE;
-                    v0 = a0 - sFindThatGamerPayoutMaybe;
+                    nCoinsWon = nCoinsPaidOut - sFindThatGamerCoinsSpent;
                     break;
                 }
-                if (sFindThatGamerPayoutMaybe >= 100 && a0 <= sFindThatGamerPayoutMaybe - 100)
+                if (sFindThatGamerCoinsSpent >= 100 && nCoinsPaidOut <= sFindThatGamerCoinsSpent - 100)
                 {
-                    v0 = sFindThatGamerPayoutMaybe - a0;
+                    nCoinsWon = sFindThatGamerCoinsSpent - nCoinsPaidOut;
                     break;
                 }
                 return;
             case TRUE:
-                if (a0 >= sFindThatGamerPayoutMaybe + 50)
+                if (nCoinsPaidOut >= sFindThatGamerCoinsSpent + 50)
                 {
                     flag = TRUE;
-                    v0 = a0 - sFindThatGamerPayoutMaybe;
+                    nCoinsWon = nCoinsPaidOut - sFindThatGamerCoinsSpent;
                     break;
                 }
-                if (sFindThatGamerPayoutMaybe >= 50 && a0 <= sFindThatGamerPayoutMaybe - 50)
+                if (sFindThatGamerCoinsSpent >= 50 && nCoinsPaidOut <= sFindThatGamerCoinsSpent - 50)
                 {
-                    v0 = sFindThatGamerPayoutMaybe - a0;
+                    nCoinsWon = sFindThatGamerCoinsSpent - nCoinsPaidOut;
                     break;
                 }
                 return;
@@ -2063,25 +2063,25 @@ void sub_80EDD78(u16 a0)
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
         show->findThatGamer.kind = TVSHOW_FIND_THAT_GAMER;
         show->findThatGamer.active = FALSE;
-        show->findThatGamer.unk04 = v0;
-        show->findThatGamer.unk03 = sFindThatGamerGameMaybe;
-        show->findThatGamer.unk02 = flag;
+        show->findThatGamer.nCoins = nCoinsWon;
+        show->findThatGamer.whichGame = sFindThatGamerWhichGame;
+        show->findThatGamer.won = flag;
         StringCopy(show->findThatGamer.playerName, gSaveBlock2Ptr->playerName);
         tv_store_id_3x(show);
         show->findThatGamer.language = gGameLanguage;
     }
 }
 
-void sub_80EDE70(u16 a0)
+void sub_80EDE70(u16 nCoinsSpent)
 {
-    sFindThatGamerGameMaybe = FALSE;
-    sFindThatGamerPayoutMaybe = a0;
+    sFindThatGamerWhichGame = FALSE;
+    sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
-void sub_80EDE84(u16 a0)
+void sub_80EDE84(u16 nCoinsSpent)
 {
-    sFindThatGamerGameMaybe = TRUE;
-    sFindThatGamerPayoutMaybe = a0;
+    sFindThatGamerWhichGame = TRUE;
+    sFindThatGamerCoinsSpent = nCoinsSpent;
 }
 
 #ifdef NONMATCHING // FIXME: Register allocation shenanigans
@@ -2347,7 +2347,7 @@ void sub_80EDFB4(TVShow *show)
     {
         sum += sTV_SecretBaseVisitMonsTemp[i].level;
     }
-    show->secretBaseVisit.unk02 = sum / nPokemon;
+    show->secretBaseVisit.avgLevel = sum / nPokemon;
     j = Random() % nPokemon;
     show->secretBaseVisit.species = sTV_SecretBaseVisitMonsTemp[j].species;
     show->secretBaseVisit.move = sTV_SecretBaseVisitMonsTemp[j].move;
@@ -2494,7 +2494,7 @@ void sub_80EE35C(u16 foeSpecies, u16 species, u8 moveIdx, const u16 *movePtr, u1
     }
 }
 
-void sub_80EE44C(u8 a0, u8 a1)
+void sub_80EE44C(u8 nMonsCaught, u8 nPkblkUsed)
 {
     TVShow *show;
 
@@ -2505,8 +2505,8 @@ void sub_80EE44C(u8 a0, u8 a1)
         show->safariFanClub.kind = TVSHOW_SAFARI_FAN_CLUB;
         show->safariFanClub.active = FALSE;
         StringCopy(show->safariFanClub.playerName, gSaveBlock2Ptr->playerName);
-        show->safariFanClub.unk02 = a0;
-        show->safariFanClub.unk03 = a1;
+        show->safariFanClub.nMonsCaught = nMonsCaught;
+        show->safariFanClub.nPkblkUsed = nPkblkUsed;
         tv_store_id_3x(show);
         show->safariFanClub.language = gGameLanguage;
     }
@@ -2652,7 +2652,7 @@ bool8 sub_80EE818(void)
     return TRUE;
 }
 
-void sub_80EE8C8(u16 a0, u8 a1)
+void sub_80EE8C8(u16 winStreak, u8 facility)
 {
     TVShow *show;
 
@@ -2663,9 +2663,9 @@ void sub_80EE8C8(u16 a0, u8 a1)
         show->frontier.kind = TVSHOW_FRONTIER;
         show->frontier.active = FALSE;
         StringCopy(show->frontier.playerName, gSaveBlock2Ptr->playerName);
-        show->frontier.unk02 = a0;
-        show->frontier.unk0d = a1;
-        switch (a1)
+        show->frontier.winStreak = winStreak;
+        show->frontier.facility = facility;
+        switch (facility)
         {
             case  1:
             case  5:
@@ -2715,22 +2715,22 @@ void sub_80EEA70(void)
             show->secretBaseSecrets.kind = TVSHOW_SECRET_BASE_SECRETS;
             show->secretBaseSecrets.active = FALSE;
             StringCopy(show->secretBaseSecrets.playerName, gSaveBlock2Ptr->playerName);
-            show->secretBaseSecrets.unk02 = VarGet(0x40ec);
+            show->secretBaseSecrets.stepsInBase = VarGet(0x40ec);
             sub_80E980C();
             StringCopy(strbuf, gStringVar1);
             StripExtCtrlCodes(strbuf);
-            StringCopy(show->secretBaseSecrets.unk04, strbuf);
+            StringCopy(show->secretBaseSecrets.baseOwnersName, strbuf);
             show->secretBaseSecrets.item = VarGet(0x40ed);
             show->secretBaseSecrets.flags = VarGet(0x40ee) + (VarGet(0x40ef) << 16);
             tv_store_id_3x(show);
             show->secretBaseSecrets.language = gGameLanguage;
             if (show->secretBaseSecrets.language == LANGUAGE_JAPANESE || gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].language == LANGUAGE_JAPANESE)
             {
-                show->secretBaseSecrets.pokemonNameLanguage = LANGUAGE_JAPANESE;
+                show->secretBaseSecrets.baseOwnersNameLanguage = LANGUAGE_JAPANESE;
             }
             else
             {
-                show->secretBaseSecrets.pokemonNameLanguage = gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].language;
+                show->secretBaseSecrets.baseOwnersNameLanguage = gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].language;
             }
         }
     }
@@ -3511,7 +3511,7 @@ u8 TV_GetNicknameSumMod8(TVShow *show)
     return ct & 7;
 }
 
-void TV_GetNicknameSubscore(u8 varIdx, u8 whichPosition, u8 charParam, u16 whichString, u16 species, TVShow *show)
+void TV_GetNicknameSubstring(u8 varIdx, u8 whichPosition, u8 charParam, u16 whichString, u16 species, TVShow *show)
 {
     u8 buff[16];
     u8 i;
@@ -4019,7 +4019,7 @@ void sub_80F0708(void) // FIXME: register allocation shenanigans
                 break;
             case TVSHOW_NAME_RATER_SHOW:
                 sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->nameRaterShow.species, i);
-                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->nameRaterShow.var1C, i);
+                sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->nameRaterShow.randomSpecies, i);
                 break;
             case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
                 sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->bravoTrainer.species, i);
@@ -4074,7 +4074,7 @@ void sub_80F0708(void) // FIXME: register allocation shenanigans
             case TVSHOW_FRONTIER:
                 sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->frontier.species1, i);
                 sub_80F0B24((&gSaveBlock1Ptr->tvShows[i])->frontier.species2, i);
-                switch ((&gSaveBlock1Ptr->tvShows[i])->frontier.unk0d)
+                switch ((&gSaveBlock1Ptr->tvShows[i])->frontier.facility)
                 {
                     case  3:
                     case  4:
@@ -4773,7 +4773,7 @@ void sub_80F0F64(TVShow *show, u32 language)
             case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
                 r4[1] = &show[i];
                 tvlangfix(r4[1]->fanclubOpinions.playerName, r4[1]->fanclubOpinions.language, language);
-                tvlangfix(r4[1]->fanclubOpinions.nickname, r4[1]->fanclubOpinions.var0E, language);
+                tvlangfix(r4[1]->fanclubOpinions.nickname, r4[1]->fanclubOpinions.pokemonNameLanguage, language);
                 break;
             case TVSHOW_POKEMON_TODAY_CAUGHT:
                 r4[6] = &show[i];
@@ -4878,7 +4878,7 @@ void sub_80F12A4(TVShow *shows)
                 break;
             case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
                 curShow->fanclubOpinions.language = TV_GetStringLanguage(curShow->fanclubOpinions.playerName);
-                curShow->fanclubOpinions.var0E = TV_GetStringLanguage(curShow->fanclubOpinions.nickname);
+                curShow->fanclubOpinions.pokemonNameLanguage = TV_GetStringLanguage(curShow->fanclubOpinions.nickname);
                 break;
             case TVSHOW_UNKN_SHOWTYPE_04:
                 curShow->unkShow04.language = TV_GetStringLanguage(curShow->unkShow04.string_0b);
@@ -4909,11 +4909,11 @@ void sub_80F12A4(TVShow *shows)
                 break;
             case TVSHOW_FAN_CLUB_SPECIAL:
                 curShow->fanClubSpecial.language = TV_GetStringLanguage(curShow->fanClubSpecial.playerName);
-                curShow->fanClubSpecial.unk_18 = TV_GetStringLanguage(curShow->fanClubSpecial.unk_0c);
+                curShow->fanClubSpecial.idolNameLanguage = TV_GetStringLanguage(curShow->fanClubSpecial.idolName);
                 break;
             case TVSHOW_CONTEST_LIVE_UPDATES_2:
                 curShow->contestLiveUpdates2.language = TV_GetStringLanguage(curShow->contestLiveUpdates2.playerName);
-                curShow->contestLiveUpdates2.unk_18 = TV_GetStringLanguage(curShow->contestLiveUpdates2.categoryName);
+                curShow->contestLiveUpdates2.pokemonNameLanguage = TV_GetStringLanguage(curShow->contestLiveUpdates2.nickname);
                 break;
 
             case TVSHOW_POKEMON_TODAY_CAUGHT:
@@ -4961,7 +4961,7 @@ void sub_80F12A4(TVShow *shows)
                 break;
             case TVSHOW_SECRET_BASE_SECRETS:
                 curShow->secretBaseSecrets.language = TV_GetStringLanguage(curShow->secretBaseSecrets.playerName);
-                curShow->secretBaseSecrets.pokemonNameLanguage = TV_GetStringLanguage(curShow->secretBaseSecrets.unk04);
+                curShow->secretBaseSecrets.baseOwnersNameLanguage = TV_GetStringLanguage(curShow->secretBaseSecrets.baseOwnersName);
                 break;
             case TVSHOW_SAFARI_FAN_CLUB:
                 curShow->safariFanClub.language = TV_GetStringLanguage(curShow->safariFanClub.playerName);
@@ -5449,36 +5449,36 @@ void DoTVShowTheNameRaterShow(void)
         case 10:
         case 11:
             TVShowConvertInternationalString(gStringVar1, show->nameRaterShow.pokemonName, show->nameRaterShow.pokemonNameLanguage);
-            TV_GetNicknameSubscore(1, 0, 0, 1, 0, show);
-            TV_GetNicknameSubscore(2, 1, 0, 1, 0, show);
+            TV_GetNicknameSubstring(1, 0, 0, 1, 0, show);
+            TV_GetNicknameSubstring(2, 1, 0, 1, 0, show);
             sTVShowState = 12;
             break;
         case 13:
             TVShowConvertInternationalString(gStringVar1, show->nameRaterShow.trainerName, show->nameRaterShow.language);
-            TV_GetNicknameSubscore(1, 0, 2, 0, 0, show);
-            TV_GetNicknameSubscore(2, 0, 3, 1, 0, show);
+            TV_GetNicknameSubstring(1, 0, 2, 0, 0, show);
+            TV_GetNicknameSubstring(2, 0, 3, 1, 0, show);
             sTVShowState = 14;
             break;
         case 14:
-            TV_GetNicknameSubscore(1, 0, 2, 1, 0, show);
-            TV_GetNicknameSubscore(2, 0, 3, 0, 0, show);
+            TV_GetNicknameSubstring(1, 0, 2, 1, 0, show);
+            TV_GetNicknameSubstring(2, 0, 3, 0, 0, show);
             sTVShowState = 18;
             break;
         case 15:
-            TV_GetNicknameSubscore(0, 0, 2, 1, 0, show);
+            TV_GetNicknameSubstring(0, 0, 2, 1, 0, show);
             StringCopy(gStringVar2, gSpeciesNames[show->nameRaterShow.species]);
-            TV_GetNicknameSubscore(2, 0, 3, 2, show->nameRaterShow.species, show);
+            TV_GetNicknameSubstring(2, 0, 3, 2, show->nameRaterShow.species, show);
             sTVShowState = 16;
             break;
         case 16:
-            TV_GetNicknameSubscore(0, 0, 2, 2, show->nameRaterShow.species, show);
-            TV_GetNicknameSubscore(2, 0, 3, 1, 0, show);
+            TV_GetNicknameSubstring(0, 0, 2, 2, show->nameRaterShow.species, show);
+            TV_GetNicknameSubstring(2, 0, 3, 1, 0, show);
             sTVShowState = 17;
             break;
         case 17:
-            TV_GetNicknameSubscore(0, 0, 2, 1, 0, show);
-            StringCopy(gStringVar2, gSpeciesNames[show->nameRaterShow.var1C]);
-            TV_GetNicknameSubscore(2, 0, 3, 2, show->nameRaterShow.var1C, show);
+            TV_GetNicknameSubstring(0, 0, 2, 1, 0, show);
+            StringCopy(gStringVar2, gSpeciesNames[show->nameRaterShow.randomSpecies]);
+            TV_GetNicknameSubstring(2, 0, 3, 2, show->nameRaterShow.randomSpecies, show);
             sTVShowState = 18;
             break;
         case 12:
@@ -5725,8 +5725,8 @@ void DoTVShowPokemonFanClubOpinions(void)
         case 0:
             TVShowConvertInternationalString(gStringVar1, show->fanclubOpinions.playerName, show->fanclubOpinions.language);
             StringCopy(gStringVar2, gSpeciesNames[show->fanclubOpinions.species]);
-            TVShowConvertInternationalString(gStringVar3, show->fanclubOpinions.nickname, show->fanclubOpinions.var0E);
-            sTVShowState = show->fanclubOpinions.var04B + 1;
+            TVShowConvertInternationalString(gStringVar3, show->fanclubOpinions.nickname, show->fanclubOpinions.pokemonNameLanguage);
+            sTVShowState = show->fanclubOpinions.questionAsked + 1;
             break;
         case 1:
         case 2:
@@ -6501,7 +6501,7 @@ void DoTVShowTodaysRivalTrainer(void)
             TV_PrintIntToStringVar(0, show->rivalTrainer.badgeCount);
             if (FlagGet(CODE_FLAGS + 0x48))
             {
-                if (show->rivalTrainer.unk05 || show->rivalTrainer.unk06)
+                if (show->rivalTrainer.nSilverSymbols || show->rivalTrainer.nGoldSymbols)
                 {
                     sTVShowState = 4;
                 }
@@ -6518,7 +6518,7 @@ void DoTVShowTodaysRivalTrainer(void)
         case 2:
             if (FlagGet(CODE_FLAGS + 0x48))
             {
-                if (show->rivalTrainer.unk05 || show->rivalTrainer.unk06)
+                if (show->rivalTrainer.nSilverSymbols || show->rivalTrainer.nGoldSymbols)
                 {
                     sTVShowState = 4;
                 }
@@ -6543,8 +6543,8 @@ void DoTVShowTodaysRivalTrainer(void)
             }
             break;
         case 4:
-            TV_PrintIntToStringVar(0, show->rivalTrainer.unk06);
-            TV_PrintIntToStringVar(1, show->rivalTrainer.unk05);
+            TV_PrintIntToStringVar(0, show->rivalTrainer.nGoldSymbols);
+            TV_PrintIntToStringVar(1, show->rivalTrainer.nSilverSymbols);
             if (show->rivalTrainer.battlePoints == 0)
             {
                 sTVShowState = 6;
@@ -6677,7 +6677,7 @@ void DoTVShowFindThatGamer(void)
     {
         case 0:
             TVShowConvertInternationalString(gStringVar1, show->findThatGamer.playerName, show->findThatGamer.language);
-            switch (show->findThatGamer.unk03)
+            switch (show->findThatGamer.whichGame)
             {
                 case 0:
                     StringCopy(gStringVar2, gText_Slots);
@@ -6686,7 +6686,7 @@ void DoTVShowFindThatGamer(void)
                     StringCopy(gStringVar2, gText_Roulette);
                     break;
             }
-            if (show->findThatGamer.unk02 == TRUE)
+            if (show->findThatGamer.won == TRUE)
             {
                 sTVShowState = 1;
             }
@@ -6697,7 +6697,7 @@ void DoTVShowFindThatGamer(void)
             break;
         case 1:
             TVShowConvertInternationalString(gStringVar1, show->findThatGamer.playerName, show->findThatGamer.language);
-            switch (show->findThatGamer.unk03)
+            switch (show->findThatGamer.whichGame)
             {
                 case 0:
                     StringCopy(gStringVar2, gText_Slots);
@@ -6706,11 +6706,11 @@ void DoTVShowFindThatGamer(void)
                     StringCopy(gStringVar2, gText_Roulette);
                     break;
             }
-            TV_PrintIntToStringVar(2, show->findThatGamer.unk04);
+            TV_PrintIntToStringVar(2, show->findThatGamer.nCoins);
             TVShowDone(); break;
         case 2:
             TVShowConvertInternationalString(gStringVar1, show->findThatGamer.playerName, show->findThatGamer.language);
-            switch (show->findThatGamer.unk03)
+            switch (show->findThatGamer.whichGame)
             {
                 case 0:
                     StringCopy(gStringVar2, gText_Slots);
@@ -6719,12 +6719,12 @@ void DoTVShowFindThatGamer(void)
                     StringCopy(gStringVar2, gText_Roulette);
                     break;
             }
-            TV_PrintIntToStringVar(2, show->findThatGamer.unk04);
+            TV_PrintIntToStringVar(2, show->findThatGamer.nCoins);
             sTVShowState = 3;
             break;
         case 3:
             TVShowConvertInternationalString(gStringVar1, show->findThatGamer.playerName, show->findThatGamer.language);
-            switch (show->findThatGamer.unk03)
+            switch (show->findThatGamer.whichGame)
             {
                 case 0:
                     StringCopy(gStringVar2, gText_Roulette);
@@ -6905,15 +6905,15 @@ void DoTVShowSecretBaseVisit(void)
             break;
         case 8:
             TVShowConvertInternationalString(gStringVar1, show->secretBaseVisit.playerName, show->secretBaseVisit.language);
-            if (show->secretBaseVisit.unk02 < 25)
+            if (show->secretBaseVisit.avgLevel < 25)
             {
                 sTVShowState = 12;
             }
-            else if (show->secretBaseVisit.unk02 < 50)
+            else if (show->secretBaseVisit.avgLevel < 50)
             {
                 sTVShowState = 11;
             }
-            else if (show->secretBaseVisit.unk02 < 70)
+            else if (show->secretBaseVisit.avgLevel < 70)
             {
                 sTVShowState = 10;
             }
@@ -7043,18 +7043,18 @@ void DoTVShowTrainerFanClubSpecial(void)
     switch (state)
     {
         case 0:
-            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.idolName, show->fanClubSpecial.idolNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
             CopyEasyChatWord(gStringVar3, show->fanClubSpecial.words[0]);
-            if (show->fanClubSpecial.unk_16 >= 90)
+            if (show->fanClubSpecial.score >= 90)
             {
                 sTVShowState = 1;
             }
-            else if (show->fanClubSpecial.unk_16 >= 70)
+            else if (show->fanClubSpecial.score >= 70)
             {
                 sTVShowState = 2;
             }
-            else if (show->fanClubSpecial.unk_16 >= 30)
+            else if (show->fanClubSpecial.score >= 30)
             {
                 sTVShowState = 3;
             }
@@ -7064,31 +7064,31 @@ void DoTVShowTrainerFanClubSpecial(void)
             }
             break;
         case 1:
-            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.idolName, show->fanClubSpecial.idolNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
-            TV_PrintIntToStringVar(2, show->fanClubSpecial.unk_16);
+            TV_PrintIntToStringVar(2, show->fanClubSpecial.score);
             sTVShowState = 5;
             break;
         case 2:
-            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.idolName, show->fanClubSpecial.idolNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
-            TV_PrintIntToStringVar(2, show->fanClubSpecial.unk_16);
+            TV_PrintIntToStringVar(2, show->fanClubSpecial.score);
             sTVShowState = 5;
             break;
         case 3:
-            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.idolName, show->fanClubSpecial.idolNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
-            TV_PrintIntToStringVar(2, show->fanClubSpecial.unk_16);
+            TV_PrintIntToStringVar(2, show->fanClubSpecial.score);
             sTVShowState = 5;
             break;
         case 4:
-            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.idolName, show->fanClubSpecial.idolNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
-            TV_PrintIntToStringVar(2, show->fanClubSpecial.unk_16);
+            TV_PrintIntToStringVar(2, show->fanClubSpecial.score);
             sTVShowState = 5;
             break;
         case 5:
-            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.unk_0c, show->fanClubSpecial.unk_18);
+            TVShowConvertInternationalString(gStringVar1, show->fanClubSpecial.idolName, show->fanClubSpecial.idolNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->fanClubSpecial.playerName, show->fanClubSpecial.language);
             CopyEasyChatWord(gStringVar3, show->fanClubSpecial.words[0]);
             TVShowDone();
@@ -7301,7 +7301,7 @@ void DoTVShowPokemonNewsBattleFrontier(void)
     switch (state)
     {
         case 0:
-            switch (show->frontier.unk0d)
+            switch (show->frontier.facility)
             {
                 case 1:
                     sTVShowState = 1;
@@ -7346,67 +7346,67 @@ void DoTVShowPokemonNewsBattleFrontier(void)
             break;
         case 1:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 14;
             break;
         case 2:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 16;
             break;
         case 3:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 15;
             break;
         case 4:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 15;
             break;
         case 5:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 14;
             break;
         case 6:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 14;
             break;
         case 7:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 14;
             break;
         case 8:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 14;
             break;
         case 9:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 14;
             break;
         case 10:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 14;
             break;
         case 11:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 14;
             break;
         case 12:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 14;
             break;
         case 13:
             TVShowConvertInternationalString(gStringVar1, show->frontier.playerName, show->frontier.language);
-            TV_PrintIntToStringVar(1, show->frontier.unk02);
+            TV_PrintIntToStringVar(1, show->frontier.winStreak);
             sTVShowState = 14;
             break;
         case 14:
@@ -7566,7 +7566,7 @@ void DoTVShowSecretBaseSecrets(void)
     switch (state)
     {
         case 0:
-            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
             bitCount = sub_80F5180(show);
             if (bitCount == 0)
@@ -7575,7 +7575,7 @@ void DoTVShowSecretBaseSecrets(void)
             }
             else
             {
-                show->secretBaseSecrets.unk12 = 1;
+                show->secretBaseSecrets.savedState = 1;
                 sTVSecretBaseSecretsRandomValues[0] = Random() % bitCount;
                 sTVShowState = sub_80F51AC(show, sTVSecretBaseSecretsRandomValues[0]);
             }
@@ -7589,7 +7589,7 @@ void DoTVShowSecretBaseSecrets(void)
                     sTVShowState = 9;
                     break;
                 case 2:
-                    show->secretBaseSecrets.unk12 = 2;
+                    show->secretBaseSecrets.savedState = 2;
                     if (sTVSecretBaseSecretsRandomValues[0] == 0)
                     {
                         sTVShowState = sub_80F51AC(show, 1);
@@ -7608,7 +7608,7 @@ void DoTVShowSecretBaseSecrets(void)
                             break;
                         }
                     }
-                    show->secretBaseSecrets.unk12 = 2;
+                    show->secretBaseSecrets.savedState = 2;
                     sTVShowState = sub_80F51AC(show, sTVSecretBaseSecretsRandomValues[1]);
                     break;
             }
@@ -7630,19 +7630,19 @@ void DoTVShowSecretBaseSecrets(void)
                         break;
                     }
                 }
-                show->secretBaseSecrets.unk12 = 3;
+                show->secretBaseSecrets.savedState = 3;
                 sTVShowState = sub_80F51AC(show, sTVSecretBaseSecretsRandomValues[2]);
             }
             break;
         case 3:
-            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
-            TV_PrintIntToStringVar(2, show->secretBaseSecrets.unk02);
-            if (show->secretBaseSecrets.unk02 <= 30)
+            TV_PrintIntToStringVar(2, show->secretBaseSecrets.stepsInBase);
+            if (show->secretBaseSecrets.stepsInBase <= 30)
             {
                 sTVShowState = 4;
             }
-            else if (show->secretBaseSecrets.unk02 <= 100)
+            else if (show->secretBaseSecrets.stepsInBase <= 100)
             {
                 sTVShowState = 5;
             }
@@ -7652,22 +7652,22 @@ void DoTVShowSecretBaseSecrets(void)
             }
             break;
         case 4:
-            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
             sTVShowState = 7;
             break;
         case 5:
-            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
             sTVShowState = 7;
             break;
         case 6:
-            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
             sTVShowState = 7;
             break;
         case 7:
-            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.unk04, show->secretBaseSecrets.pokemonNameLanguage);
+            TVShowConvertInternationalString(gStringVar1, show->secretBaseSecrets.baseOwnersName, show->secretBaseSecrets.baseOwnersNameLanguage);
             TVShowConvertInternationalString(gStringVar2, show->secretBaseSecrets.playerName, show->secretBaseSecrets.language);
             TVShowDone();
             break;
@@ -7678,35 +7678,35 @@ void DoTVShowSecretBaseSecrets(void)
             sTVShowState = 3;
             break;
         case 10:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 11:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 12:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 13:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 14:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 15:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 16:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 17:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 18:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 19:
             StringCopy(gStringVar2, ItemId_GetItem(show->secretBaseSecrets.item)->name);
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 20:
             if (show->common.trainerIdLo & 1)
@@ -7719,73 +7719,73 @@ void DoTVShowSecretBaseSecrets(void)
             }
             break;
         case 21:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 22:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 23:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 24:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 25:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 26:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 27:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 28:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 29:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 30:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 31:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 32:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 33:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 34:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 35:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 36:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 37:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 38:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 39:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 40:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 41:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 42:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
         case 43:
-            sTVShowState = show->secretBaseSecrets.unk12;
+            sTVShowState = show->secretBaseSecrets.savedState;
             break;
     }
     ShowFieldMessage(gTVSecretBaseSecretsTextGroup[state]);
@@ -7802,11 +7802,11 @@ void DoTVShowSafariFanClub(void)
     switch (state)
     {
         case 0:
-            if (show->safariFanClub.unk02 == 0)
+            if (show->safariFanClub.nMonsCaught == 0)
             {
                 sTVShowState = 6;
             }
-            else if (show->safariFanClub.unk02 < 4)
+            else if (show->safariFanClub.nMonsCaught < 4)
             {
                 sTVShowState = 5;
             }
@@ -7817,8 +7817,8 @@ void DoTVShowSafariFanClub(void)
             break;
         case 1:
             TVShowConvertInternationalString(gStringVar1, show->safariFanClub.playerName, show->safariFanClub.language);
-            TV_PrintIntToStringVar(1, show->safariFanClub.unk02);
-            if (show->safariFanClub.unk03 == 0)
+            TV_PrintIntToStringVar(1, show->safariFanClub.nMonsCaught);
+            if (show->safariFanClub.nPkblkUsed == 0)
             {
                 sTVShowState = 3;
             }
@@ -7828,7 +7828,7 @@ void DoTVShowSafariFanClub(void)
             }
             break;
         case 2:
-            TV_PrintIntToStringVar(1, show->safariFanClub.unk03);
+            TV_PrintIntToStringVar(1, show->safariFanClub.nPkblkUsed);
             sTVShowState = 4;
             break;
         case 3:
@@ -7840,8 +7840,8 @@ void DoTVShowSafariFanClub(void)
             break;
         case 5:
             TVShowConvertInternationalString(gStringVar1, show->safariFanClub.playerName, show->safariFanClub.language);
-            TV_PrintIntToStringVar(1, show->safariFanClub.unk02);
-            if (show->safariFanClub.unk03 == 0)
+            TV_PrintIntToStringVar(1, show->safariFanClub.nMonsCaught);
+            if (show->safariFanClub.nPkblkUsed == 0)
             {
                 sTVShowState = 8;
             }
@@ -7852,7 +7852,7 @@ void DoTVShowSafariFanClub(void)
             break;
         case 6:
             TVShowConvertInternationalString(gStringVar1, show->safariFanClub.playerName, show->safariFanClub.language);
-            if (show->safariFanClub.unk03 == 0)
+            if (show->safariFanClub.nPkblkUsed == 0)
             {
                 sTVShowState = 8;
             }
@@ -7862,7 +7862,7 @@ void DoTVShowSafariFanClub(void)
             }
             break;
         case 7:
-            TV_PrintIntToStringVar(1, show->safariFanClub.unk03);
+            TV_PrintIntToStringVar(1, show->safariFanClub.nPkblkUsed);
             sTVShowState = 9;
             break;
         case 8:
@@ -7907,7 +7907,7 @@ void DoTVShowPokemonContestLiveUpdates2(void)
         case 2:
             TVShowConvertInternationalString(gStringVar3, show->contestLiveUpdates2.playerName, show->contestLiveUpdates2.language);
         case 3:
-            TVShowConvertInternationalString(gStringVar2, show->contestLiveUpdates2.categoryName, show->contestLiveUpdates2.unk_18);
+            TVShowConvertInternationalString(gStringVar2, show->contestLiveUpdates2.nickname, show->contestLiveUpdates2.pokemonNameLanguage);
             TVShowDone();
             break;
     }

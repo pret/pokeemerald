@@ -77,7 +77,6 @@ typedef union // size = 0x24
         /*0x04*/ u16 words[6];
         /*0x10*/ u8 playerName[8];
         /*0x18*/ u8 language;
-        /*0x19*/ u8 pad19[10];
     } recentHappenings;
 
     // TVSHOW_PKMN_FAN_CLUB_OPINIONS
@@ -86,13 +85,13 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u16 species;
         /*0x04*/ u8 friendshipHighNybble:4;
-        /*0x04*/ u8 var04B:4;
+        /*0x04*/ u8 questionAsked:4;
         /*0x05*/ u8 playerName[8];
         /*0x0D*/ u8 language;
-        /*0x0E*/ u8 var0E;
-        /*0x0F*/ u8 var0F;
+        /*0x0E*/ u8 pokemonNameLanguage;
+        /*0x0F*/ u8 filler_0F[1];
         /*0x10*/ u8 nickname[8];
-        /*0x18*/ u16 var18[2];
+        /*0x18*/ u8 filler_18[4];
         /*0x1C*/ u16 words[4];
     } fanclubOpinions;
 
@@ -116,7 +115,7 @@ typedef union // size = 0x24
         /*0x0F*/ u8 trainerName[11];
         /*0x1A*/ u8 random;
         /*0x1B*/ u8 random2;
-        /*0x1C*/ u16 var1C;
+        /*0x1C*/ u16 randomSpecies;
         /*0x1E*/ u8 language;
         /*0x1F*/ u8 pokemonNameLanguage;
     } nameRaterShow;
@@ -206,11 +205,11 @@ typedef union // size = 0x24
         /*0x02*/ u8 playerName[8];
         /*0x0a*/ u8 idLo;
         /*0x0b*/ u8 idHi;
-        /*0x0c*/ u8 unk_0c[8];
+        /*0x0c*/ u8 idolName[8];
         /*0x14*/ u16 words[1];
-        /*0x16*/ u8 unk_16;
+        /*0x16*/ u8 score;
         /*0x17*/ u8 language;
-        /*0x18*/ u8 unk_18;
+        /*0x18*/ u8 idolNameLanguage;
     } fanClubSpecial;
 
     // TVSHOW_CONTEST_LIVE_UPDATES_2
@@ -219,10 +218,10 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u8 playerName[8];
         /*0x0a*/ u8 contestCategory;
-        /*0x0b*/ u8 categoryName[11];
+        /*0x0b*/ u8 nickname[11];
         /*0x16*/ u8 pokeblockState;
         /*0x17*/ u8 language;
-        /*0x18*/ u8 unk_18;
+        /*0x18*/ u8 pokemonNameLanguage;
     } contestLiveUpdates2;
 
     // Record Mixing Shows
@@ -274,7 +273,7 @@ typedef union // size = 0x24
         /*0x03*/ u8 nFails;
         /*0x04*/ u16 species;
         /*0x06*/ u8 language;
-        u8 pad07[12];
+        /*0x07*/ u8 pad07[12];
         /*0x13*/ u8 playerName[8];
     } pokemonAngler;
 
@@ -288,7 +287,7 @@ typedef union // size = 0x24
         /*0x08*/ u16 species;
         /*0x0a*/ u8 location;
         /*0x0b*/ u8 language;
-        u8 pad0c[7];
+        /*0x0c*/ u8 pad0c[7];
         /*0x13*/ u8 playerName[8];
     } worldOfMasters;
 
@@ -298,8 +297,8 @@ typedef union // size = 0x24
         /*0x01*/ bool8 active;
         /*0x02*/ u16 dexCount;
         /*0x04*/ u8 badgeCount;
-        /*0x05*/ u8 unk05;
-        /*0x06*/ u8 unk06;
+        /*0x05*/ u8 nSilverSymbols;
+        /*0x06*/ u8 nGoldSymbols;
         /*0x07*/ u8 location;
         /*0x08*/ u16 battlePoints;
         /*0x0a*/ u16 mapDataId;
@@ -336,9 +335,9 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 unk02;
-        /*0x03*/ u8 unk03;
-        /*0x04*/ u16 unk04;
+        /*0x02*/ u8 won;
+        /*0x03*/ u8 whichGame;
+        /*0x04*/ u16 nCoins;
         /*0x06*/ u8 filler_06[2];
         /*0x08*/ u8 language;
         /*0x09*/ u8 filler_09[10];
@@ -365,7 +364,7 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 unk02;
+        /*0x02*/ u8 avgLevel;
         /*0x03*/ u8 nDecorations;
         /*0x04*/ u8 decorations[4];
         /*0x08*/ u16 species;
@@ -429,13 +428,13 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 unk02;
+        /*0x02*/ u16 winStreak;
         /*0x04*/ u16 species1;
         /*0x06*/ u16 species2;
         /*0x08*/ u16 species3;
         /*0x0a*/ u16 species4;
         /*0x0c*/ u8 language;
-        /*0x0d*/ u8 unk0d;
+        /*0x0d*/ u8 facility;
         /*0x0e*/ u8 filler_0e[5];
         /*0x13*/ u8 playerName[8];
     } frontier;
@@ -455,22 +454,22 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 unk02;
-        /*0x04*/ u8 unk04[8];
+        /*0x02*/ u16 stepsInBase;
+        /*0x04*/ u8 baseOwnersName[8];
         /*0x0c*/ u32 flags;
         /*0x10*/ u16 item;
-        /*0x12*/ u8 unk12;
+        /*0x12*/ u8 savedState;
         /*0x13*/ u8 playerName[8];
         /*0x1b*/ u8 language;
-        /*0x1c*/ u8 pokemonNameLanguage;
+        /*0x1c*/ u8 baseOwnersNameLanguage;
     } secretBaseSecrets;
 
     // TVSHOW_SAFARI_FAN_CLUB
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 unk02;
-        /*0x03*/ u8 unk03;
+        /*0x02*/ u8 nMonsCaught;
+        /*0x03*/ u8 nPkblkUsed;
         /*0x04*/ u8 language;
         /*0x05*/ u8 filler_05[14];
         /*0x13*/ u8 playerName[8];
