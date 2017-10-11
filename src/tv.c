@@ -212,435 +212,435 @@ u8 *const gUnknown_0858D144[] = {
 };
 
 const u8 *const gTVFanClubTextGroup[] = {
-    gUnknown_08280DEE,
-    gUnknown_08280F69,
-    gUnknown_08280F88,
-    gUnknown_08280FA9,
-    gUnknown_08280FD5,
-    gUnknown_08281040,
-    gUnknown_08281073,
-    gUnknown_082810E7
+    gTVFanClubText00,
+    gTVFanClubText01,
+    gTVFanClubText02,
+    gTVFanClubText03,
+    gTVFanClubText04,
+    gTVFanClubText05,
+    gTVFanClubText06,
+    gTVFanClubText07
 };
 
 const u8 *const gTVRecentHappeningsTextGroup[] = {
-    gUnknown_0828149E,
-    gUnknown_082815AF,
-    gUnknown_08281636,
-    gUnknown_08281666,
-    gUnknown_082816BA,
-    gUnknown_082816EB
+    gTVRecentHappeningsText00,
+    gTVRecentHappeningsText01,
+    gTVRecentHappeningsText02,
+    gTVRecentHappeningsText03,
+    gTVRecentHappeningsText04,
+    gTVRecentHappeningsText05
 };
 
 const u8 *const gTVFanClubOpinionsTextGroup[] = {
-    gUnknown_08280886,
-    gUnknown_08280A44,
-    gUnknown_08280AFC,
-    gUnknown_08280BC4,
-    gUnknown_08280C7A
+    gTVFanClubOpinionsText00,
+    gTVFanClubOpinionsText01,
+    gTVFanClubOpinionsText02,
+    gTVFanClubOpinionsText03,
+    gTVFanClubOpinionsText04
 };
 
 const u8 *const gTVMassOutbreakTextGroup[] = {
-    gUnknown_0828178A
+    gTVMassOutbreakText00
 };
 
 const u8 *const gTVPokemonTodaySuccessfulTextGroup[] = {
-    gUnknown_082834A0,
-    gUnknown_08283552,
-    gUnknown_082835AE,
-    gUnknown_0828361F,
-    gUnknown_08283685,
-    gUnknown_0828370C,
-    gUnknown_082837C2,
-    gUnknown_08283848,
-    gUnknown_082838C2,
-    gUnknown_0828394A,
-    gUnknown_082839EA,
-    gUnknown_08283A5F
+    gTVPokemonTodaySuccessfulText00,
+    gTVPokemonTodaySuccessfulText01,
+    gTVPokemonTodaySuccessfulText02,
+    gTVPokemonTodaySuccessfulText03,
+    gTVPokemonTodaySuccessfulText04,
+    gTVPokemonTodaySuccessfulText05,
+    gTVPokemonTodaySuccessfulText06,
+    gTVPokemonTodaySuccessfulText07,
+    gTVPokemonTodaySuccessfulText08,
+    gTVPokemonTodaySuccessfulText09,
+    gTVPokemonTodaySuccessfulText10,
+    gTVPokemonTodaySuccessfulText11
 };
 
 const u8 *const gTVTodaysSmartShopperTextGroup[] = {
-    gUnknown_08283B05,
-    gUnknown_08283BAF,
-    gUnknown_08283C81,
-    gUnknown_08283D32,
-    gUnknown_08283D99,
-    gUnknown_08283E28,
-    gUnknown_08283F01,
-    gUnknown_08283F72,
-    gUnknown_08283FA9,
-    gUnknown_08283FE7,
-    gUnknown_0828409E,
-    gUnknown_082840CE,
-    gUnknown_082842E6
+    gTVTodaysSmartShopperText00,
+    gTVTodaysSmartShopperText01,
+    gTVTodaysSmartShopperText02,
+    gTVTodaysSmartShopperText03,
+    gTVTodaysSmartShopperText04,
+    gTVTodaysSmartShopperText05,
+    gTVTodaysSmartShopperText06,
+    gTVTodaysSmartShopperText07,
+    gTVTodaysSmartShopperText08,
+    gTVTodaysSmartShopperText09,
+    gTVTodaysSmartShopperText10,
+    gTVTodaysSmartShopperText11,
+    gTVTodaysSmartShopperText12
 };
 
 const u8 *const gTVBravoTrainerTextGroup[] = {
-    gUnknown_0827F275,
-    gUnknown_0827F304,
-    gUnknown_0827F361,
-    gUnknown_0827F3E4,
-    gUnknown_0827F49F,
-    gUnknown_0827F565,
-    gUnknown_0827F624,
-    gUnknown_0827F65C,
-    gUnknown_0827F6E6
+    gTVBravoTrainerText00,
+    gTVBravoTrainerText01,
+    gTVBravoTrainerText02,
+    gTVBravoTrainerText03,
+    gTVBravoTrainerText04,
+    gTVBravoTrainerText05,
+    gTVBravoTrainerText06,
+    gTVBravoTrainerText07,
+    gTVBravoTrainerText08
 };
 
 const u8 *const gTV3CheersForPokeblocksTextGroup[] = {
-    gUnknown_082818F4,
-    gUnknown_082819C7,
-    gUnknown_08281A2F,
-    gUnknown_08281AAC,
-    gUnknown_08281B28,
-    gUnknown_08281B93
+    gTV3CheersForPokeblocksText00,
+    gTV3CheersForPokeblocksText01,
+    gTV3CheersForPokeblocksText02,
+    gTV3CheersForPokeblocksText03,
+    gTV3CheersForPokeblocksText04,
+    gTV3CheersForPokeblocksText05
 };
 
 const u8 *const gTVBravoTrainerBattleTowerTextGroup[] = {
-    gUnknown_0827FB20,
-    gUnknown_0827FBB3,
-    gUnknown_0827FC04,
-    gUnknown_0827FCD1,
-    gUnknown_0827FD91,
-    gUnknown_0827FE93,
-    gUnknown_0827FF89,
-    gUnknown_0828009C,
-    gUnknown_082800A1,
-    gUnknown_082800A6,
-    gUnknown_082800AB,
-    gUnknown_082800B0,
-    gUnknown_082800B6,
-    gUnknown_0828013D,
-    gUnknown_082801E6
+    gTVBravoTrainerBattleTowerText00,
+    gTVBravoTrainerBattleTowerText01,
+    gTVBravoTrainerBattleTowerText02,
+    gTVBravoTrainerBattleTowerText03,
+    gTVBravoTrainerBattleTowerText04,
+    gTVBravoTrainerBattleTowerText05,
+    gTVBravoTrainerBattleTowerText06,
+    gTVBravoTrainerBattleTowerText07,
+    gTVBravoTrainerBattleTowerText08,
+    gTVBravoTrainerBattleTowerText09,
+    gTVBravoTrainerBattleTowerText10,
+    gTVBravoTrainerBattleTowerText11,
+    gTVBravoTrainerBattleTowerText12,
+    gTVBravoTrainerBattleTowerText13,
+    gTVBravoTrainerBattleTowerText14
 };
 
 const u8 *const gTVContestLiveUpdatesTextGroup[] = {
-    gUnknown_08289DD6,
-    gUnknown_08289F53,
-    gUnknown_08289FB0,
-    gUnknown_0828A047,
-    gUnknown_0828A0C6,
-    gUnknown_0828A132,
-    gUnknown_0828A1BE,
-    gUnknown_0828A202,
-    gUnknown_0828A24E,
-    gUnknown_0828A288,
-    gUnknown_0828A29B,
-    gUnknown_0828A2B3,
-    gUnknown_0828A2C6,
-    gUnknown_0828A2DA,
-    gUnknown_0828A2EE,
-    gUnknown_0828A32E,
-    gUnknown_0828A350,
-    gUnknown_0828A36F,
-    gUnknown_0828A38D,
-    gUnknown_0828A3B6,
-    gUnknown_0828A3DC,
-    gUnknown_0828A455,
-    gUnknown_0828A4CF,
-    gUnknown_0828A51C,
-    gUnknown_0828A5AC,
-    gUnknown_0828A638,
-    gUnknown_0828A6CF,
-    gUnknown_0828A797,
-    gUnknown_0828A86D,
-    gUnknown_0828A920,
-    gUnknown_0828A9CC,
-    gUnknown_0828AA74,
-    gUnknown_0828AB01
+    gTVContestLiveUpdatesText00,
+    gTVContestLiveUpdatesText01,
+    gTVContestLiveUpdatesText02,
+    gTVContestLiveUpdatesText03,
+    gTVContestLiveUpdatesText04,
+    gTVContestLiveUpdatesText05,
+    gTVContestLiveUpdatesText06,
+    gTVContestLiveUpdatesText07,
+    gTVContestLiveUpdatesText08,
+    gTVContestLiveUpdatesText09,
+    gTVContestLiveUpdatesText10,
+    gTVContestLiveUpdatesText11,
+    gTVContestLiveUpdatesText12,
+    gTVContestLiveUpdatesText13,
+    gTVContestLiveUpdatesText14,
+    gTVContestLiveUpdatesText15,
+    gTVContestLiveUpdatesText16,
+    gTVContestLiveUpdatesText17,
+    gTVContestLiveUpdatesText18,
+    gTVContestLiveUpdatesText19,
+    gTVContestLiveUpdatesText20,
+    gTVContestLiveUpdatesText21,
+    gTVContestLiveUpdatesText22,
+    gTVContestLiveUpdatesText23,
+    gTVContestLiveUpdatesText24,
+    gTVContestLiveUpdatesText25,
+    gTVContestLiveUpdatesText26,
+    gTVContestLiveUpdatesText27,
+    gTVContestLiveUpdatesText28,
+    gTVContestLiveUpdatesText29,
+    gTVContestLiveUpdatesText30,
+    gTVContestLiveUpdatesText31,
+    gTVContestLiveUpdatesText32
 };
 
 const u8 *const gTVPokemonBattleUpdateTextGroup[] = {
-    gUnknown_0828ABCC,
-    gUnknown_0828AC22,
-    gUnknown_0828AC7E,
-    gUnknown_0828ACB6,
-    gUnknown_0828ACE3,
-    gUnknown_0828AD80,
-    gUnknown_0828ADE2,
-    gUnknown_0828AE26
+    gTVPokemonBattleUpdateText00,
+    gTVPokemonBattleUpdateText01,
+    gTVPokemonBattleUpdateText02,
+    gTVPokemonBattleUpdateText03,
+    gTVPokemonBattleUpdateText04,
+    gTVPokemonBattleUpdateText05,
+    gTVPokemonBattleUpdateText06,
+    gTVPokemonBattleUpdateText07
 };
 
 const u8 *const gTVTrainerFanClubSpecialTextGroup[] = {
-    gUnknown_08281DFB,
-    gUnknown_08281F90,
-    gUnknown_08281FFA,
-    gUnknown_08282052,
-    gUnknown_082820B2,
-    gUnknown_0828210E
+    gTVTrainerFanClubSpecialText00,
+    gTVTrainerFanClubSpecialText01,
+    gTVTrainerFanClubSpecialText02,
+    gTVTrainerFanClubSpecialText03,
+    gTVTrainerFanClubSpecialText04,
+    gTVTrainerFanClubSpecialText05
 };
 
 const u8 *const gTVNameRaterTextGroup[] = {
-    gUnknown_0828218A,
-    gUnknown_0828229E,
-    gUnknown_08282317,
-    gUnknown_0828239D,
-    gUnknown_08282418,
-    gUnknown_082824A6,
-    gUnknown_08282522,
-    gUnknown_082825A1,
-    gUnknown_08282623,
-    gUnknown_082826B4,
-    gUnknown_0828274D,
-    gUnknown_082827CB,
-    gUnknown_08282849,
-    gUnknown_08282883,
-    gUnknown_082828E4,
-    gUnknown_08282912,
-    gUnknown_0828296C,
-    gUnknown_08282996,
-    gUnknown_08282A36
+    gTVNameRaterText00,
+    gTVNameRaterText01,
+    gTVNameRaterText02,
+    gTVNameRaterText03,
+    gTVNameRaterText04,
+    gTVNameRaterText05,
+    gTVNameRaterText06,
+    gTVNameRaterText07,
+    gTVNameRaterText08,
+    gTVNameRaterText09,
+    gTVNameRaterText10,
+    gTVNameRaterText11,
+    gTVNameRaterText12,
+    gTVNameRaterText13,
+    gTVNameRaterText14,
+    gTVNameRaterText15,
+    gTVNameRaterText16,
+    gTVNameRaterText17,
+    gTVNameRaterText18
 };
 
 const u8 *const gTVPokemonContestLiveUpdates2TextGroup[] = {
-    gUnknown_0828C137,
-    gUnknown_0828C28C,
-    gUnknown_0828C45B,
-    gUnknown_0828C662
+    gTVPokemonContestLiveUpdates2Text00,
+    gTVPokemonContestLiveUpdates2Text01,
+    gTVPokemonContestLiveUpdates2Text02,
+    gTVPokemonContestLiveUpdates2Text03
 };
 
 const u8 *const gTVPokemonTodayFailedTextGroup[] = {
-    gUnknown_08282F9B,
-    gUnknown_0828304D,
-    gUnknown_08283135,
-    gUnknown_082831DF,
-    gUnknown_08283294,
-    gUnknown_08283337,
-    gUnknown_082833C6
+    gTVPokemonTodayFailedText00,
+    gTVPokemonTodayFailedText01,
+    gTVPokemonTodayFailedText02,
+    gTVPokemonTodayFailedText03,
+    gTVPokemonTodayFailedText04,
+    gTVPokemonTodayFailedText05,
+    gTVPokemonTodayFailedText06
 };
 
 const u8 *const gTVPokemonAnglerTextGroup[] = {
-    gUnknown_08282ACF,
-    gUnknown_08282D7C
+    gTVPokemonAnglerText00,
+    gTVPokemonAnglerText01
 };
 
 const u8 *const gTVWorldOfMastersTextGroup[] = {
-    gUnknown_082843BA,
-    gUnknown_082844FD,
-    gUnknown_0828455B
+    gTVWorldOfMastersText00,
+    gTVWorldOfMastersText01,
+    gTVWorldOfMastersText02
 };
 
 const u8 *const gTVTodaysRivalTrainerTextGroup[] = {
-    gUnknown_08284641,
-    gUnknown_0828485F,
-    gUnknown_0828489A,
-    gUnknown_082848CC,
-    gUnknown_0828490B,
-    gUnknown_0828496B,
-    gUnknown_082849AE,
-    gUnknown_082846D2,
-    gUnknown_08284738,
-    gUnknown_082847A5,
-    gUnknown_082847F7
+    gTVTodaysRivalTrainerText00,
+    gTVTodaysRivalTrainerText01,
+    gTVTodaysRivalTrainerText02,
+    gTVTodaysRivalTrainerText03,
+    gTVTodaysRivalTrainerText04,
+    gTVTodaysRivalTrainerText05,
+    gTVTodaysRivalTrainerText06,
+    gTVTodaysRivalTrainerText07,
+    gTVTodaysRivalTrainerText08,
+    gTVTodaysRivalTrainerText09,
+    gTVTodaysRivalTrainerText10
 };
 
-const u8 *const TVDewfordTrendWatcherNetworkTextGroup[] = {
-    gUnknown_08284A3E,
-    gUnknown_08284C55,
-    gUnknown_08284C9B,
-    gUnknown_08284CE1,
-    gUnknown_08284DB6,
-    gUnknown_08284DF5,
-    gUnknown_08284E34
+const u8 *const gTVDewfordTrendWatcherNetworkTextGroup[] = {
+    gTVDewfordTrendWatcherNetworkText00,
+    gTVDewfordTrendWatcherNetworkText01,
+    gTVDewfordTrendWatcherNetworkText02,
+    gTVDewfordTrendWatcherNetworkText03,
+    gTVDewfordTrendWatcherNetworkText04,
+    gTVDewfordTrendWatcherNetworkText05,
+    gTVDewfordTrendWatcherNetworkText06
 };
 
-const u8 *const TVHoennTreasureInvestigatorsTextGroup[] = {
-    gUnknown_08284EDF,
-    gUnknown_08284FA1,
-    gUnknown_082850F5
+const u8 *const gTVHoennTreasureInvestigatorsTextGroup[] = {
+    gTVHoennTreasureInvestigatorsText00,
+    gTVHoennTreasureInvestigatorsText01,
+    gTVHoennTreasureInvestigatorsText02
 };
 
 const u8 *const gTVFindThatGamerTextGroup[] = {
-    gUnknown_08285240,
-    gUnknown_082852F4,
-    gUnknown_08285463,
-    gUnknown_08285500
+    gTVFindThatGamerText00,
+    gTVFindThatGamerText01,
+    gTVFindThatGamerText02,
+    gTVFindThatGamerText03
 };
 
 const u8 *const gTVBreakingNewsTextGroup[] = {
-    gUnknown_082855BF,
-    gUnknown_082855D1,
-    gUnknown_0828563C,
-    gUnknown_08285682,
-    gUnknown_08285705,
-    gUnknown_082857B0,
-    gUnknown_08285824,
-    gUnknown_0828586A,
-    gUnknown_0828596F,
-    gUnknown_082859AC,
-    gUnknown_08285A50,
-    gUnknown_08285AB3,
-    gUnknown_082858D0
+    gTVBreakingNewsText00,
+    gTVBreakingNewsText01,
+    gTVBreakingNewsText02,
+    gTVBreakingNewsText03,
+    gTVBreakingNewsText04,
+    gTVBreakingNewsText05,
+    gTVBreakingNewsText06,
+    gTVBreakingNewsText07,
+    gTVBreakingNewsText08,
+    gTVBreakingNewsText09,
+    gTVBreakingNewsText10,
+    gTVBreakingNewsText11,
+    gTVBreakingNewsText12
 };
 
 const u8 *const gTVSecretBaseVisitTextGroup[] = {
-    gUnknown_08285B27,
-    gUnknown_08285BCA,
-    gUnknown_08285C13,
-    gUnknown_08285CFF,
-    gUnknown_08285D5D,
-    gUnknown_08285DE0,
-    gUnknown_08285E3B,
-    gUnknown_08285E9D,
-    gUnknown_08285EFE,
-    gUnknown_08285F46,
-    gUnknown_08286049,
-    gUnknown_0828613A,
-    gUnknown_08286248,
-    gUnknown_08286340
+    gTVSecretBaseVisitText00,
+    gTVSecretBaseVisitText01,
+    gTVSecretBaseVisitText02,
+    gTVSecretBaseVisitText03,
+    gTVSecretBaseVisitText04,
+    gTVSecretBaseVisitText05,
+    gTVSecretBaseVisitText06,
+    gTVSecretBaseVisitText07,
+    gTVSecretBaseVisitText08,
+    gTVSecretBaseVisitText09,
+    gTVSecretBaseVisitText10,
+    gTVSecretBaseVisitText11,
+    gTVSecretBaseVisitText12,
+    gTVSecretBaseVisitText13
 };
 
 const u8 *const gTVPokemonLotteryWinnerFlashReportTextGroup[] = {
-    gUnknown_082863CC
+    gTVPokemonLotteryWinnerFlashReportText00
 };
 
 const u8 *const gTVThePokemonBattleSeminarTextGroup[] = {
-    gUnknown_08286616,
-    gUnknown_082866B6,
-    gUnknown_08286700,
-    gUnknown_0828673B,
-    gUnknown_08286755,
-    gUnknown_0828676A,
-    gUnknown_08286777
+    gTVThePokemonBattleSeminarText00,
+    gTVThePokemonBattleSeminarText01,
+    gTVThePokemonBattleSeminarText02,
+    gTVThePokemonBattleSeminarText03,
+    gTVThePokemonBattleSeminarText04,
+    gTVThePokemonBattleSeminarText05,
+    gTVThePokemonBattleSeminarText06
 };
 
 const u8 *const gTVTrainerFanClubTextGroup[] = {
-    gUnknown_08286866,
-    gUnknown_0828695E,
-    gUnknown_0828698B,
-    gUnknown_082869B0,
-    gUnknown_082869ED,
-    gUnknown_08286A17,
-    gUnknown_08286A48,
-    gUnknown_08286A7C,
-    gUnknown_08286AAE,
-    gUnknown_08286AE6,
-    gUnknown_08286B23,
-    gUnknown_08286B4F
+    gTVTrainerFanClubText00,
+    gTVTrainerFanClubText01,
+    gTVTrainerFanClubText02,
+    gTVTrainerFanClubText03,
+    gTVTrainerFanClubText04,
+    gTVTrainerFanClubText05,
+    gTVTrainerFanClubText06,
+    gTVTrainerFanClubText07,
+    gTVTrainerFanClubText08,
+    gTVTrainerFanClubText09,
+    gTVTrainerFanClubText10,
+    gTVTrainerFanClubText11
 };
 
 const u8 *const gTVCutiesTextGroup[] = {
-    gUnknown_08286D8F,
-    gUnknown_08286E9D,
-    gUnknown_08286EFC,
-    gUnknown_08286F54,
-    gUnknown_08286FAA,
-    gUnknown_08286FE4,
-    gUnknown_082870A3,
-    gUnknown_0828715A,
-    gUnknown_08287215,
-    gUnknown_082872CC,
-    gUnknown_08287387,
-    gUnknown_08287442,
-    gUnknown_08287508,
-    gUnknown_082875D9,
-    gUnknown_082876A1,
-    gUnknown_08287779
+    gTVCutiesText00,
+    gTVCutiesText01,
+    gTVCutiesText02,
+    gTVCutiesText03,
+    gTVCutiesText04,
+    gTVCutiesText05,
+    gTVCutiesText06,
+    gTVCutiesText07,
+    gTVCutiesText08,
+    gTVCutiesText09,
+    gTVCutiesText10,
+    gTVCutiesText11,
+    gTVCutiesText12,
+    gTVCutiesText13,
+    gTVCutiesText14,
+    gTVCutiesText15
 };
 
 const u8 *const gTVPokemonNewsBattleFrontierTextGroup[] = {
-    gUnknown_082877DE,
-    gUnknown_0828783D,
-    gUnknown_082878B3,
-    gUnknown_08287929,
-    gUnknown_0828799E,
-    gUnknown_08287A18,
-    gUnknown_08287A97,
-    gUnknown_08287B16,
-    gUnknown_08287B8E,
-    gUnknown_08287C06,
-    gUnknown_08287C7D,
-    gUnknown_08287CF3,
-    gUnknown_08287D6A,
-    gUnknown_08287DE1,
-    gUnknown_08287E5B,
-    gUnknown_08287EBB,
-    gUnknown_08287F14,
-    gUnknown_08287F39,
-    gUnknown_08287F77
+    gTVPokemonNewsBattleFrontierText00,
+    gTVPokemonNewsBattleFrontierText01,
+    gTVPokemonNewsBattleFrontierText02,
+    gTVPokemonNewsBattleFrontierText03,
+    gTVPokemonNewsBattleFrontierText04,
+    gTVPokemonNewsBattleFrontierText05,
+    gTVPokemonNewsBattleFrontierText06,
+    gTVPokemonNewsBattleFrontierText07,
+    gTVPokemonNewsBattleFrontierText08,
+    gTVPokemonNewsBattleFrontierText09,
+    gTVPokemonNewsBattleFrontierText10,
+    gTVPokemonNewsBattleFrontierText11,
+    gTVPokemonNewsBattleFrontierText12,
+    gTVPokemonNewsBattleFrontierText13,
+    gTVPokemonNewsBattleFrontierText14,
+    gTVPokemonNewsBattleFrontierText15,
+    gTVPokemonNewsBattleFrontierText16,
+    gTVPokemonNewsBattleFrontierText17,
+    gTVPokemonNewsBattleFrontierText18
 };
 
 const u8 *const gTVWhatsNo1InHoennTodayTextGroup[] = {
-    gUnknown_08287FE0,
-    gUnknown_082880C0,
-    gUnknown_0828815F,
-    gUnknown_0828821A,
-    gUnknown_082882BE,
-    gUnknown_08288355,
-    gUnknown_0828842B,
-    gUnknown_082884A5,
-    gUnknown_0828858B
+    gTVWhatsNo1InHoennTodayText00,
+    gTVWhatsNo1InHoennTodayText01,
+    gTVWhatsNo1InHoennTodayText02,
+    gTVWhatsNo1InHoennTodayText03,
+    gTVWhatsNo1InHoennTodayText04,
+    gTVWhatsNo1InHoennTodayText05,
+    gTVWhatsNo1InHoennTodayText06,
+    gTVWhatsNo1InHoennTodayText07,
+    gTVWhatsNo1InHoennTodayText08
 };
 
 const u8 *const gTVSecretBaseSecretsTextGroup[] = {
-    gUnknown_08288608,
-    gUnknown_082886C8,
-    gUnknown_082886DE,
-    gUnknown_082886F8,
-    gUnknown_08288739,
-    gUnknown_08288777,
-    gUnknown_082887AF,
-    gUnknown_082887E9,
-    gUnknown_08288868,
-    gUnknown_082888CA,
-    gUnknown_08288930,
-    gUnknown_082889C0,
-    gUnknown_08288A3A,
-    gUnknown_08288ACA,
-    gUnknown_08288B1E,
-    gUnknown_08288B7A,
-    gUnknown_08288BC9,
-    gUnknown_08288C40,
-    gUnknown_08288C88,
-    gUnknown_08288CC8,
-    gUnknown_08288D7F,
-    gUnknown_08288DA0,
-    gUnknown_08288DDA,
-    gUnknown_08288E1E,
-    gUnknown_08288EC9,
-    gUnknown_08288F58,
-    gUnknown_08289011,
-    gUnknown_082890A4,
-    gUnknown_082890F0,
-    gUnknown_08289193,
-    gUnknown_08289204,
-    gUnknown_0828927C,
-    gUnknown_08289313,
-    gUnknown_08289375,
-    gUnknown_082893FF,
-    gUnknown_08289465,
-    gUnknown_082894F2,
-    gUnknown_08289564,
-    gUnknown_082895EB,
-    gUnknown_08289645,
-    gUnknown_0828967E,
-    gUnknown_082896FC,
-    gUnknown_0828977D
+    gTVSecretBaseSecretsText00,
+    gTVSecretBaseSecretsText01,
+    gTVSecretBaseSecretsText02,
+    gTVSecretBaseSecretsText03,
+    gTVSecretBaseSecretsText04,
+    gTVSecretBaseSecretsText05,
+    gTVSecretBaseSecretsText06,
+    gTVSecretBaseSecretsText07,
+    gTVSecretBaseSecretsText08,
+    gTVSecretBaseSecretsText09,
+    gTVSecretBaseSecretsText10,
+    gTVSecretBaseSecretsText11,
+    gTVSecretBaseSecretsText12,
+    gTVSecretBaseSecretsText13,
+    gTVSecretBaseSecretsText14,
+    gTVSecretBaseSecretsText15,
+    gTVSecretBaseSecretsText16,
+    gTVSecretBaseSecretsText17,
+    gTVSecretBaseSecretsText18,
+    gTVSecretBaseSecretsText19,
+    gTVSecretBaseSecretsText20,
+    gTVSecretBaseSecretsText21,
+    gTVSecretBaseSecretsText22,
+    gTVSecretBaseSecretsText23,
+    gTVSecretBaseSecretsText24,
+    gTVSecretBaseSecretsText25,
+    gTVSecretBaseSecretsText26,
+    gTVSecretBaseSecretsText27,
+    gTVSecretBaseSecretsText28,
+    gTVSecretBaseSecretsText29,
+    gTVSecretBaseSecretsText30,
+    gTVSecretBaseSecretsText31,
+    gTVSecretBaseSecretsText32,
+    gTVSecretBaseSecretsText33,
+    gTVSecretBaseSecretsText34,
+    gTVSecretBaseSecretsText35,
+    gTVSecretBaseSecretsText36,
+    gTVSecretBaseSecretsText37,
+    gTVSecretBaseSecretsText38,
+    gTVSecretBaseSecretsText39,
+    gTVSecretBaseSecretsText40,
+    gTVSecretBaseSecretsText41,
+    gTVSecretBaseSecretsText42
 };
 
 const u8 *const gTVSafariFanClubTextGroup[] = {
-    gUnknown_08289813,
-    gUnknown_0828992F,
-    gUnknown_0828999D,
-    gUnknown_082899DC,
-    gUnknown_08289A29,
-    gUnknown_08289AC2,
-    gUnknown_08289B42,
-    gUnknown_08289BC5,
-    gUnknown_08289C3B,
-    gUnknown_08289C99,
-    gUnknown_08289D33
+    gTVSafariFanClubText00,
+    gTVSafariFanClubText01,
+    gTVSafariFanClubText02,
+    gTVSafariFanClubText03,
+    gTVSafariFanClubText04,
+    gTVSafariFanClubText05,
+    gTVSafariFanClubText06,
+    gTVSafariFanClubText07,
+    gTVSafariFanClubText08,
+    gTVSafariFanClubText09,
+    gTVSafariFanClubText10
 };
 
 const u8 *const gTVInSearchOfTrainersTextGroup[] = {
-    gUnknown_0828B92C,
-    gUnknown_0828BA20,
-    gUnknown_0828BAC8,
-    gUnknown_0828BC18,
-    gUnknown_0828BD20,
-    gUnknown_0828BE01,
-    gUnknown_0828BEEE,
-    gUnknown_0828BF50,
-    gUnknown_0828C011
+    gTVInSearchOfTrainersText00,
+    gTVInSearchOfTrainersText01,
+    gTVInSearchOfTrainersText02,
+    gTVInSearchOfTrainersText03,
+    gTVInSearchOfTrainersText04,
+    gTVInSearchOfTrainersText05,
+    gTVInSearchOfTrainersText06,
+    gTVInSearchOfTrainersText07,
+    gTVInSearchOfTrainersText08
 };
 
 const u8 gUnknown_0858D690[] = {
@@ -6623,7 +6623,7 @@ static void DoTVShowDewfordTrendWatcherNetwork(void)
             CopyEasyChatWord(gStringVar2, show->trendWatcher.words[1]);
             TVShowDone();
     }
-    ShowFieldMessage(TVDewfordTrendWatcherNetworkTextGroup[state]);
+    ShowFieldMessage(gTVDewfordTrendWatcherNetworkTextGroup[state]);
 }
 
 static void DoTVShowHoennTreasureInvestigators(void)
@@ -6667,7 +6667,7 @@ static void DoTVShowHoennTreasureInvestigators(void)
             TVShowDone();
             break;
     }
-    ShowFieldMessage(TVHoennTreasureInvestigatorsTextGroup[state]);
+    ShowFieldMessage(gTVHoennTreasureInvestigatorsTextGroup[state]);
 }
 
 static void DoTVShowFindThatGamer(void)
