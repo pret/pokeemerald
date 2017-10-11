@@ -444,8 +444,8 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u16 unk02;
-        /*0x04*/ u8 unk04;
+        /*0x02*/ u16 count;
+        /*0x04*/ u8 actionIdx;
         /*0x05*/ u8 language;
         /*0x06*/ u8 filler_06[13];
         /*0x13*/ u8 playerName[8];

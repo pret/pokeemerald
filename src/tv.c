@@ -35,6 +35,7 @@
 #include "malloc.h"
 #include "region_map.h"
 #include "decoration.h"
+#include "secret_base.h"
 #include "tv.h"
 
 // Static type declarations
@@ -77,7 +78,6 @@ void SetTVMetatilesOnMap(int width, int height, u16 tileId);
 u8 FindAnyTVNewsOnTheAir(void);
 bool8 IsTVShowInSearchOfTrainersAiring(void);
 void TakeTVShowInSearchOfTrainersOffTheAir(void);
-
 bool8 TV_BernoulliTrial(u16 ratio);
 s8 FindEmptyTVSlotBeyondFirstFiveShowsOfArray(TVShow *shows);
 bool8 HasMixableShowAlreadyBeenSpawnedWithPlayerID(u8 kind, bool8 flag);
@@ -113,6 +113,69 @@ s8 sub_80F0ECC(PokeNews *pokeNews, u8 idx);
 void sub_80F0E58(PokeNews *dest[], PokeNews *src[]);
 bool8 sub_80F0E84(PokeNews *dest, PokeNews *src, s8 slot);
 void TVShowDone(void);
+void InterviewAfter_FanClubLetter(void);
+void InterviewAfter_RecentHappenings(void);
+void InterviewAfter_PkmnFanClubOpinions(void);
+void InterviewAfter_DummyShow4(void);
+void InterviewAfter_BravoTrainerPokemonProfile(void);
+void InterviewAfter_BravoTrainerBattleTowerProfile(void);
+void InterviewAfter_ContestLiveUpdates(void);
+void UpdateWorldOfMastersAndPutItOnTheAir(void);
+void PutPokemonTodayFailedOnTheAir(void);
+void sub_80ED718(void);
+void sub_80EED88(void);
+void TV_SortPurchasesByQuantity(void);
+void sub_80ED8B4(u16 days);
+void UpdateMassOutbreakTimeLeft(u16 days);
+void sub_80EF120(u16 days);
+void sub_80EDA48(u16 days);
+void sub_80EEB98(u16 days);
+void PutFishingAdviceShowOnTheAir(void);
+void sub_80EDA80(void);
+u8 TV_MonDataIdxToRibbon(u8 monDataIdx);
+void sub_80EEBF4(u8 actionIdx);
+bool8 IsPriceDiscounted(u8 newsKind);
+void InterviewBefore_FanClubLetter(void);
+void InterviewBefore_RecentHappenings(void);
+void InterviewBefore_PkmnFanClubOpinions(void);
+void InterviewBefore_Dummy(void);
+void InterviewBefore_BravoTrainerBTProfile(void);
+void InterviewBefore_ContestLiveUpdates(void);
+void InterviewBefore_3CheersForPokeblocks(void);
+void InterviewBefore_FanClubSpecial(void);
+void ChangeBoxPokemonNickname_CB(void);
+void DoTVShowPokemonFanClubLetter(void);
+void DoTVShowRecentHappenings(void);
+void DoTVShowPokemonFanClubOpinions(void);
+void DoTVShowDummiedOut(void);
+void DoTVShowPokemonNewsMassOutbreak(void);
+void DoTVShowBravoTrainerPokemonProfile(void);
+void DoTVShowBravoTrainerBattleTower(void);
+void DoTVShowPokemonTodaySuccessfulCapture(void);
+void DoTVShowTodaysSmartShopper(void);
+void DoTVShowTheNameRaterShow(void);
+void DoTVShowPokemonContestLiveUpdates(void);
+void DoTVShowPokemonBattleUpdate(void);
+void DoTVShow3CheersForPokeblocks(void);
+void DoTVShowPokemonTodayFailedCapture(void);
+void DoTVShowPokemonAngler(void);
+void DoTVShowTheWorldOfMasters(void);
+void DoTVShowTodaysRivalTrainer(void);
+void DoTVShowDewfordTrendWatcherNetwork(void);
+void DoTVShowHoennTreasureInvestigators(void);
+void DoTVShowFindThatGamer(void);
+void DoTVShowBreakingNewsTV(void);
+void DoTVShowSecretBaseVisit(void);
+void DoTVShowPokemonLotteryWinnerFlashReport(void);
+void DoTVShowThePokemonBattleSeminar(void);
+void DoTVShowTrainerFanClubSpecial(void);
+void DoTVShowTrainerFanClub(void);
+void DoTVShowSpotTheCuties(void);
+void DoTVShowPokemonNewsBattleFrontier(void);
+void DoTVShowWhatsNo1InHoennToday(void);
+void DoTVShowSecretBaseSecrets(void);
+void DoTVShowSafariFanClub(void);
+void DoTVShowPokemonContestLiveUpdates2(void);
 
 // .rodata
 
@@ -171,14 +234,14 @@ const u16 gUnknown_0858D0DE[] = {
 };
 
 // TODO: Figure out what these are, and define constants in include/vars.h
-const u16 gUnknown_0858D0EC[][2] = {
-    {0x40E6, 100},
-    {0x40EB,  50},
-    {0x40E7, 100},
-    {0x40E8,  20},
-    {0x40E9,  20},
-    {0x40EA,  20},
-    {0x40F1,  30}
+const u16 gNumberOneVarsAndThresholds[][2] = {
+    {VAR_DAILY_SLOTS, 100},
+    {VAR_DAILY_ROULETTE,  50},
+    {VAR_DAILY_WILDS, 100},
+    {VAR_DAILY_BLENDER,  20},
+    {VAR_DAILY_PLANTED_BERRIES,  20},
+    {VAR_DAILY_PICKED_BERRIES,  20},
+    {VAR_DAILY_BP,  30}
 };
 
 const u8 *const gPokeNewsTextGroup_Upcoming[] = {
@@ -1018,14 +1081,6 @@ void GabbyAndTySetScriptVarsToFieldObjectLocalIds(void)
 
 void InterviewAfter(void)
 {
-    void InterviewAfter_FanClubLetter(void);
-    void InterviewAfter_RecentHappenings(void);
-    void InterviewAfter_PkmnFanClubOpinions(void);
-    void InterviewAfter_DummyShow4(void);
-    void InterviewAfter_BravoTrainerPokemonProfile(void);
-    void InterviewAfter_BravoTrainerBattleTowerProfile(void);
-    void InterviewAfter_ContestLiveUpdates(void);
-
     switch (gSpecialVar_0x8005)
     {
         case TVSHOW_FAN_CLUB_LETTER:
@@ -1054,10 +1109,6 @@ void InterviewAfter(void)
 
 void PutPokemonTodayCaughtOnAir(void)
 {
-    void UpdateWorldOfMastersAndPutItOnTheAir(void);
-    void PutPokemonTodayFailedOnTheAir(void);
-    void sub_80ED718(void);
-    void sub_80EED88(void);
     u8 i;
     u16 ct;
     TVShow *show;
@@ -1521,7 +1572,6 @@ void InterviewAfter_BravoTrainerBattleTowerProfile(void)
 
 void SaveRecordedItemPurchasesForTVShow(void)
 {
-    void TV_SortPurchasesByQuantity(void);
     TVShow *show;
     u8 i;
 
@@ -1740,11 +1790,6 @@ void EndMassOutbreak(void)
 
 void sub_80ED888(u16 days)
 {
-    void sub_80ED8B4(u16);
-    void UpdateMassOutbreakTimeLeft(u16);
-    void sub_80EF120(u16);
-    void sub_80EDA48(u16);
-    void sub_80EEB98(u16);
 
     sub_80ED8B4(days);
     UpdateMassOutbreakTimeLeft(days);
@@ -1793,8 +1838,6 @@ void UpdateMassOutbreakTimeLeft(u16 days)
 
 void sub_80ED950(bool8 flag)
 {
-    void PutFishingAdviceShowOnTheAir(void);
-
     if (flag)
     {
         if (sPokemonAnglerAttemptCounters >> 8 > 4)
@@ -1847,7 +1890,6 @@ void sub_80EDA3C(u16 species)
 
 void sub_80EDA48(u16 days)
 {
-    void sub_80EDA80(void);
     TVShow *show;
 
     show = &gSaveBlock1Ptr->tvShows[24];
@@ -2472,7 +2514,6 @@ void sub_80EE44C(u8 a0, u8 a1)
 
 void sub_80EE4DC(struct Pokemon *pokemon, u8 ribbonMonDataIdx)
 {
-    u8 TV_MonDataIdxToRibbon(u8);
     TVShow *show;
 
     sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
@@ -2662,7 +2703,6 @@ void sub_80EE8C8(u16 a0, u8 a1)
 
 void sub_80EEA70(void)
 {
-    void sub_80E980C(void);
     TVShow *show;
     u8 strbuf[32];
 
@@ -2698,24 +2738,23 @@ void sub_80EEA70(void)
 
 void sub_80EEB98(u16 days)
 {
-    void sub_80EEBF4(u8);
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(gUnknown_0858D0EC); i ++)
+    for (i = 0; i < ARRAY_COUNT(gNumberOneVarsAndThresholds); i ++)
     {
-        if (VarGet(gUnknown_0858D0EC[i][0]) >= gUnknown_0858D0EC[i][1])
+        if (VarGet(gNumberOneVarsAndThresholds[i][0]) >= gNumberOneVarsAndThresholds[i][1])
         {
             sub_80EEBF4(i);
             break;
         }
     }
-    for (i = 0; i < ARRAY_COUNT(gUnknown_0858D0EC); i ++)
+    for (i = 0; i < ARRAY_COUNT(gNumberOneVarsAndThresholds); i ++)
     {
-        VarSet(gUnknown_0858D0EC[i][0], 0);
+        VarSet(gNumberOneVarsAndThresholds[i][0], 0);
     }
 }
 
-void sub_80EEBF4(u8 a0)
+void sub_80EEBF4(u8 actionIdx)
 {
     TVShow *show;
 
@@ -2727,8 +2766,8 @@ void sub_80EEBF4(u8 a0)
         show->numberOne.kind = TVSHOW_NUMBER_ONE;
         show->numberOne.active = FALSE;
         StringCopy(show->numberOne.playerName, gSaveBlock2Ptr->playerName);
-        show->numberOne.unk04 = a0;
-        show->numberOne.unk02 = VarGet(gUnknown_0858D0EC[a0][0]);
+        show->numberOne.actionIdx = actionIdx;
+        show->numberOne.count = VarGet(gNumberOneVarsAndThresholds[actionIdx][0]);
         tv_store_id_3x(show);
         show->numberOne.language = gGameLanguage;
     }
@@ -2736,37 +2775,37 @@ void sub_80EEBF4(u8 a0)
 
 void sub_80EEC80(void)
 {
-    VarSet(0x40E6, VarGet(0x40E6) + 1);
+    VarSet(VAR_DAILY_SLOTS, VarGet(VAR_DAILY_SLOTS) + 1);
 }
 
 void sub_80EECA4(void)
 {
-    VarSet(0x40EB, VarGet(0x40EB) + 1);
+    VarSet(VAR_DAILY_ROULETTE, VarGet(VAR_DAILY_ROULETTE) + 1);
 }
 
 void sub_80EECC8(void)
 {
-    VarSet(0x40E7, VarGet(0x40E7) + 1);
+    VarSet(VAR_DAILY_WILDS, VarGet(VAR_DAILY_WILDS) + 1);
 }
 
 void sub_80EECEC(void)
 {
-    VarSet(0x40E8, VarGet(0x40E8) + 1);
+    VarSet(VAR_DAILY_BLENDER, VarGet(VAR_DAILY_BLENDER) + 1);
 }
 
 void sub_80EED10(void)
 {
-    VarSet(0x40E9, VarGet(0x40E9) + 1);
+    VarSet(VAR_DAILY_PLANTED_BERRIES, VarGet(VAR_DAILY_PLANTED_BERRIES) + 1);
 }
 
 void sub_80EED34(void)
 {
-    VarSet(0x40EA, VarGet(0x40EA) + gSpecialVar_0x8006);
+    VarSet(VAR_DAILY_PICKED_BERRIES, VarGet(VAR_DAILY_PICKED_BERRIES) + gSpecialVar_0x8006);
 }
 
 void sub_80EED60(u16 delta)
 {
-    VarSet(0x40F1, VarGet(0x40F1) + delta);
+    VarSet(VAR_DAILY_BP, VarGet(VAR_DAILY_BP) + delta);
 }
 
 // PokeNews
@@ -2895,7 +2934,6 @@ void DoPokeNews(void)
 
 bool8 GetPriceReduction(u8 newsKind)
 {
-    bool8 IsPriceDiscounted(u8);
     u8 i;
 
     if (newsKind == 0)
@@ -3167,15 +3205,6 @@ void FindActiveBroadcastByShowType_SetScriptResult(u8 kind)
 
 void InterviewBefore(void)
 {
-    void InterviewBefore_FanClubLetter(void);
-    void InterviewBefore_RecentHappenings(void);
-    void InterviewBefore_PkmnFanClubOpinions(void);
-    void InterviewBefore_Dummy(void);
-    void InterviewBefore_BravoTrainerBTProfile(void);
-    void InterviewBefore_ContestLiveUpdates(void);
-    void InterviewBefore_3CheersForPokeblocks(void);
-    void InterviewBefore_FanClubSpecial(void);
-
     gScriptResult = FALSE;
     switch (gSpecialVar_0x8005)
     {
@@ -3605,7 +3634,6 @@ void ChangePokemonNickname_CB(void)
 
 void ChangeBoxPokemonNickname(void)
 {
-    void ChangeBoxPokemonNickname_CB(void);
     struct BoxPokemon *boxMon;
 
     boxMon = GetBoxedMonPtr(gSpecialVar_0x8012, gSpecialVar_0x8013);
@@ -4970,39 +4998,6 @@ void sub_80F14F8(TVShow *shows)
 
 void DoTVShow(void)
 {
-    void DoTVShowPokemonFanClubLetter(void);
-    void DoTVShowRecentHappenings(void);
-    void DoTVShowPokemonFanClubOpinions(void);
-    void DoTVShowDummiedOut(void);
-    void DoTVShowPokemonNewsMassOutbreak(void);
-    void DoTVShowBravoTrainerPokemonProfile(void);
-    void DoTVShowBravoTrainerBattleTower(void);
-    void DoTVShowPokemonTodaySuccessfulCapture(void);
-    void DoTVShowTodaysSmartShopper(void);
-    void DoTVShowTheNameRaterShow(void);
-    void DoTVShowPokemonContestLiveUpdates(void);
-    void DoTVShowPokemonBattleUpdate(void);
-    void DoTVShow3CheersForPokeblocks(void);
-    void DoTVShowPokemonTodayFailedCapture(void);
-    void DoTVShowPokemonAngler(void);
-    void DoTVShowTheWorldOfMasters(void);
-    void DoTVShowTodaysRivalTrainer(void);
-    void DoTVShowDewfordTrendWatcherNetwork(void);
-    void DoTVShowHoennTreasureInvestigators(void);
-    void DoTVShowFindThatGamer(void);
-    void DoTVShowBreakingNewsTV(void);
-    void DoTVShowSecretBaseVisit(void);
-    void DoTVShowPokemonLotteryWinnerFlashReport(void);
-    void DoTVShowThePokemonBattleSeminar(void);
-    void DoTVShowTrainerFanClubSpecial(void);
-    void DoTVShowTrainerFanClub(void);
-    void DoTVShowSpotTheCuties(void);
-    void DoTVShowPokemonNewsBattleFrontier(void);
-    void DoTVShowWhatsNo1InHoennToday(void);
-    void DoTVShowSecretBaseSecrets(void);
-    void DoTVShowSafariFanClub(void);
-    void DoTVShowPokemonContestLiveUpdates2(void);
-
     if (gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.active)
     {
         switch (gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004].common.kind)
@@ -7456,7 +7451,7 @@ void DoTVShowWhatsNo1InHoennToday(void)
     {
         case 0:
             TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
-            switch (show->numberOne.unk04)
+            switch (show->numberOne.actionIdx)
             {
                 case 0:
                     sTVShowState = 1;
@@ -7483,37 +7478,37 @@ void DoTVShowWhatsNo1InHoennToday(void)
             break;
         case 1:
             TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
-            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            TV_PrintIntToStringVar(1, show->numberOne.count);
             sTVShowState = 8;
             break;
         case 2:
             TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
-            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            TV_PrintIntToStringVar(1, show->numberOne.count);
             sTVShowState = 8;
             break;
         case 3:
             TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
-            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            TV_PrintIntToStringVar(1, show->numberOne.count);
             sTVShowState = 8;
             break;
         case 4:
             TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
-            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            TV_PrintIntToStringVar(1, show->numberOne.count);
             sTVShowState = 8;
             break;
         case 5:
             TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
-            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            TV_PrintIntToStringVar(1, show->numberOne.count);
             sTVShowState = 8;
             break;
         case 6:
             TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
-            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            TV_PrintIntToStringVar(1, show->numberOne.count);
             sTVShowState = 8;
             break;
         case 7:
             TVShowConvertInternationalString(gStringVar1, show->numberOne.playerName, show->numberOne.language);
-            TV_PrintIntToStringVar(1, show->numberOne.unk02);
+            TV_PrintIntToStringVar(1, show->numberOne.count);
             sTVShowState = 8;
             break;
         case 8:
