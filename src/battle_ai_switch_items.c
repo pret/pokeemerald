@@ -7,6 +7,8 @@
 #include "species.h"
 #include "rng.h"
 #include "util.h"
+#include "items.h"
+#include "pokemon_item_effects.h"
 
 extern u8 gActiveBank;
 extern u8 gAbsentBankFlags;
@@ -24,13 +26,14 @@ extern s32 gBattleMoveDamage;
 extern const struct BattleMove gBattleMoves[];
 extern const struct BaseStats gBaseStats[];
 extern const u8 gTypeEffectiveness[];
+extern const u8 * const gItemEffectTable[]; // todo: fix once struct is declared
 
 // this file's functions
-bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
-bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent);
-bool8 ShouldUseItem(void);
+static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
+static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent);
+static bool8 ShouldUseItem(void);
 
-bool8 ShouldSwitchIfPerishSong(void)
+static bool8 ShouldSwitchIfPerishSong(void)
 {
     if (gStatuses3[gActiveBank] & STATUS3_PERISH_SONG
         && gDisableStructs[gActiveBank].perishSong1 == 0)
@@ -43,7 +46,7 @@ bool8 ShouldSwitchIfPerishSong(void)
     return FALSE;
 }
 
-bool8 ShouldSwitchIfWonderGuard(void)
+static bool8 ShouldSwitchIfWonderGuard(void)
 {
     u8 opposingIdentity;
     u8 opposingBank;
@@ -127,7 +130,7 @@ bool8 ShouldSwitchIfWonderGuard(void)
     return FALSE; // at this point there is not a single pokemon in the party that has a super effective move against a pokemon with wonder guard
 }
 
-bool8 FindMonThatAbsorbsOpponentsMove(void)
+static bool8 FindMonThatAbsorbsOpponentsMove(void)
 {
     u8 bankIn1, bankIn2;
     u8 absorbingTypeAbility;
@@ -226,7 +229,7 @@ bool8 FindMonThatAbsorbsOpponentsMove(void)
     return FALSE;
 }
 
-bool8 ShouldSwitchIfNaturalCure(void)
+static bool8 ShouldSwitchIfNaturalCure(void)
 {
     if (!(gBattleMons[gActiveBank].status1 & STATUS_SLEEP))
         return FALSE;
@@ -262,7 +265,7 @@ bool8 ShouldSwitchIfNaturalCure(void)
     return FALSE;
 }
 
-bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
+static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
 {
     u8 opposingIdentity;
     u8 opposingBank;
@@ -318,7 +321,7 @@ bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
     return FALSE;
 }
 
-bool8 AreStatsRaised(void)
+static bool8 AreStatsRaised(void)
 {
     u8 buffedStatsValue = 0;
     s32 i;
@@ -332,7 +335,7 @@ bool8 AreStatsRaised(void)
     return (buffedStatsValue > 3);
 }
 
-bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
+static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
 {
     u8 bankIn1, bankIn2;
     s32 firstId;
@@ -433,7 +436,7 @@ bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
     return FALSE;
 }
 
-bool8 ShouldSwitch(void)
+static bool8 ShouldSwitch(void)
 {
     u8 bankIn1, bankIn2;
     u8 *activeBankPtr; // needed to match
@@ -791,4 +794,158 @@ u8 GetMostSuitableMonToSwitchInto(void)
     }
 
     return bestMonId;
+}
+
+// TODO: use PokemonItemEffect struct instead of u8 once it's documented
+static u8 GetAI_ItemType(u8 itemId, const u8 *itemEffect) // NOTE: should take u16 as item Id argument
+{
+    if (itemId == ITEM_FULL_RESTORE)
+        return AI_ITEM_FULL_RESTORE;
+    if (itemEffect[4] & 4)
+        return AI_ITEM_HEAL_HP;
+    if (itemEffect[3] & 0x3F)
+        return AI_ITEM_CURE_CONDITION;
+    if (itemEffect[0] & 0x3F || itemEffect[1] != 0 || itemEffect[2] != 0)
+        return AI_ITEM_X_STAT;
+    if (itemEffect[3] & 0x80)
+        return AI_ITEM_GUARD_SPECS;
+
+    return AI_ITEM_NOT_RECOGNIZABLE;
+}
+
+static bool8 ShouldUseItem(void)
+{
+    struct Pokemon *party;
+    s32 i;
+    u8 validMons = 0;
+    bool8 shouldUse = FALSE;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBankIdentity(gActiveBank) == IDENTITY_PLAYER_MON2)
+        return FALSE;
+
+    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+        party = gPlayerParty;
+    else
+        party = gEnemyParty;
+
+    for (i = 0; i < 6; i++)
+    {
+        if (GetMonData(&party[i], MON_DATA_HP) != 0
+            && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
+            && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+        {
+            validMons++;
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        u16 item;
+        const u8 *itemEffects;
+        u8 paramOffset;
+        u8 bankSide;
+
+        if (i != 0 && validMons > (gBattleResources->battleHistory->itemsNo - i) + 1)
+            continue;
+        item = gBattleResources->battleHistory->trainerItems[i];
+        if (item == ITEM_NONE)
+            continue;
+        if (gItemEffectTable[item - 13] == NULL)
+            continue;
+
+        if (item == ITEM_ENIGMA_BERRY)
+            itemEffects = gSaveBlock1Ptr->enigmaBerry.itemEffect;
+        else
+            itemEffects = gItemEffectTable[item - 13];
+
+        *(gBattleStruct->AI_itemType + gActiveBank / 2) = GetAI_ItemType(item, itemEffects);
+
+        switch (*(gBattleStruct->AI_itemType + gActiveBank / 2))
+        {
+        case AI_ITEM_FULL_RESTORE:
+            if (gBattleMons[gActiveBank].hp >= gBattleMons[gActiveBank].maxHP / 4)
+                break;
+            if (gBattleMons[gActiveBank].hp == 0)
+                break;
+            shouldUse = TRUE;
+            break;
+        case AI_ITEM_HEAL_HP:
+            paramOffset = GetItemEffectParamOffset(item, 4, 4);
+            if (paramOffset == 0)
+                break;
+            if (gBattleMons[gActiveBank].hp == 0)
+                break;
+            if (gBattleMons[gActiveBank].hp < gBattleMons[gActiveBank].maxHP / 4 || gBattleMons[gActiveBank].maxHP - gBattleMons[gActiveBank].hp > itemEffects[paramOffset])
+                shouldUse = TRUE;
+            break;
+        case AI_ITEM_CURE_CONDITION:
+            *(gBattleStruct->AI_itemFlags + gActiveBank / 2) = 0;
+            if (itemEffects[3] & 0x20 && gBattleMons[gActiveBank].status1 & STATUS_SLEEP)
+            {
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x20;
+                shouldUse = TRUE;
+            }
+            if (itemEffects[3] & 0x10 && (gBattleMons[gActiveBank].status1 & STATUS_POISON || gBattleMons[gActiveBank].status1 & STATUS_TOXIC_POISON))
+            {
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x10;
+                shouldUse = TRUE;
+            }
+            if (itemEffects[3] & 0x8 && gBattleMons[gActiveBank].status1 & STATUS_BURN)
+            {
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x8;
+                shouldUse = TRUE;
+            }
+            if (itemEffects[3] & 0x4 && gBattleMons[gActiveBank].status1 & STATUS_FREEZE)
+            {
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x4;
+                shouldUse = TRUE;
+            }
+            if (itemEffects[3] & 0x2 && gBattleMons[gActiveBank].status1 & STATUS_PARALYSIS)
+            {
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x2;
+                shouldUse = TRUE;
+            }
+            if (itemEffects[3] & 0x1 && gBattleMons[gActiveBank].status2 & STATUS2_CONFUSION)
+            {
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x1;
+                shouldUse = TRUE;
+            }
+            break;
+        case AI_ITEM_X_STAT:
+            *(gBattleStruct->AI_itemFlags + gActiveBank / 2) = 0;
+            if (gDisableStructs[gActiveBank].isFirstTurn == 0)
+                break;
+            if (itemEffects[0] & 0xF)
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x1;
+            if (itemEffects[1] & 0xF0)
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x2;
+            if (itemEffects[1] & 0xF)
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x4;
+            if (itemEffects[2] & 0xF)
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x8;
+            if (itemEffects[2] & 0xF0)
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x20;
+            if (itemEffects[0] & 0x30)
+                *(gBattleStruct->AI_itemFlags + gActiveBank / 2) |= 0x80;
+            shouldUse = TRUE;
+            break;
+        case AI_ITEM_GUARD_SPECS:
+            bankSide = GetBankSide(gActiveBank);
+            if (gDisableStructs[gActiveBank].isFirstTurn != 0 && gSideTimers[bankSide].mistTimer == 0)
+                shouldUse = TRUE;
+            break;
+        case AI_ITEM_NOT_RECOGNIZABLE:
+            return FALSE;
+        }
+
+        if (shouldUse)
+        {
+            EmitCmd_x21(1, 1, 0);
+            *(gBattleStruct->field_C0 + (gActiveBank / 2) * 2) = item;
+            gBattleResources->battleHistory->trainerItems[i] = 0;
+            return shouldUse;
+        }
+    }
+
+    return FALSE;
 }

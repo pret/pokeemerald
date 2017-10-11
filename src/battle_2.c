@@ -5324,30 +5324,30 @@ static void HandleAction_UseItem(void)
     {
         gBattleScripting.bank = gBankAttacker;
 
-        switch (*(gBattleStruct->field_C4 + (gBankAttacker >> 1)))
+        switch (*(gBattleStruct->AI_itemType + (gBankAttacker >> 1)))
         {
-        case 1:
-        case 2:
+        case AI_ITEM_FULL_RESTORE:
+        case AI_ITEM_HEAL_HP:
             break;
-        case 3:
+        case AI_ITEM_CURE_CONDITION:
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-            if (*(gBattleStruct->field_C6 + gBankAttacker / 2) & 1)
+            if (*(gBattleStruct->AI_itemFlags + gBankAttacker / 2) & 1)
             {
-                if (*(gBattleStruct->field_C6 + gBankAttacker / 2) & 0x3E)
+                if (*(gBattleStruct->AI_itemFlags + gBankAttacker / 2) & 0x3E)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 5;
             }
             else
             {
-                while (!(*(gBattleStruct->field_C6 + gBankAttacker / 2) & 1))
+                while (!(*(gBattleStruct->AI_itemFlags + gBankAttacker / 2) & 1))
                 {
-                    *(gBattleStruct->field_C6 + gBankAttacker / 2) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + gBankAttacker / 2) >>= 1;
                     gBattleCommunication[MULTISTRING_CHOOSER]++;
                 }
             }
             break;
-        case 4:
+        case AI_ITEM_X_STAT:
             gBattleCommunication[MULTISTRING_CHOOSER] = 4;
-            if (*(gBattleStruct->field_C6 + (gBankAttacker >> 1)) & 0x80)
+            if (*(gBattleStruct->AI_itemFlags + (gBankAttacker >> 1)) & 0x80)
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = 5;
             }
@@ -5356,9 +5356,9 @@ static void HandleAction_UseItem(void)
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK)
                 PREPARE_STRING_BUFFER(gBattleTextBuff2, 0xD2)
 
-                while (!((*(gBattleStruct->field_C6 + (gBankAttacker >> 1))) & 1))
+                while (!((*(gBattleStruct->AI_itemFlags + (gBankAttacker >> 1))) & 1))
                 {
-                    *(gBattleStruct->field_C6 + gBankAttacker / 2) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + gBankAttacker / 2) >>= 1;
                     gBattleTextBuff1[2]++;
                 }
 
@@ -5366,7 +5366,7 @@ static void HandleAction_UseItem(void)
                 gBattleScripting.animArg2 = 0;
             }
             break;
-        case 5:
+        case AI_ITEM_GUARD_SPECS:
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2;
             else
@@ -5374,7 +5374,7 @@ static void HandleAction_UseItem(void)
             break;
         }
 
-        gBattlescriptCurrInstr = gUnknown_082DBD3C[*(gBattleStruct->field_C4 + gBankAttacker / 2)];
+        gBattlescriptCurrInstr = gUnknown_082DBD3C[*(gBattleStruct->AI_itemType + gBankAttacker / 2)];
     }
     gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
 }
