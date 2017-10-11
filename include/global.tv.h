@@ -499,10 +499,10 @@ typedef union // size = 0x24
 
 enum {
     POKENEWS_NONE,
-    POKENEWS_ONE,
-    POKENEWS_TWO,
-    POKENEWS_THREE,
-    POKENEWS_FOUR
+    POKENEWS_SLATEPORT,
+    POKENEWS_GAME_CORNER,
+    POKENEWS_LILYCOVE,
+    POKENEWS_BLENDMASTER
 };
 
 typedef struct // 2b50

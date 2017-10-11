@@ -5405,7 +5405,7 @@ sub_8138240: @ 8138240
 	movs r4, 0
 	cmp r4, r5
 	bcs _0813828A
-	ldr r0, =gUnknown_0858D144
+	ldr r0, =gTVStringVarPtrs
 	mov r8, r0
 _08138262:
 	cmp r7, r4
