@@ -27306,7 +27306,7 @@ _081A8A74:
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	adds r3, r7, 0
-	bl exec_movement
+	bl ScriptMovement_StartObjectMovementScript
 	b _081A8AD4
 	.pool
 _081A8ACC:
@@ -27540,7 +27540,7 @@ _081A8C72:
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl exec_movement
+	bl ScriptMovement_StartObjectMovementScript
 	b _081A8D32
 	.pool
 _081A8C9C:
@@ -27618,7 +27618,7 @@ _081A8D12:
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
-	bl exec_movement
+	bl ScriptMovement_StartObjectMovementScript
 _081A8D32:
 	mov r0, r9
 	adds r0, 0x1
@@ -28660,7 +28660,7 @@ _081A95EE:
 	lsls r0, r7, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	add sp, 0x8
 	pop {r3,r4}
 	mov r8, r3

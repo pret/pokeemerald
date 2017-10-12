@@ -233,7 +233,7 @@ _080EC080:
 	beq _080EC0BE
 _080EC0AE:
 	ldr r0, =0x00000891
-	bl FlagReset
+	bl FlagClear
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x3
@@ -1407,7 +1407,7 @@ sub_80ECA38: @ 80ECA38
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	bl StringCopy
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	strb r0, [r4, 0x1C]
 	ldr r0, =gUnknown_02039F24
@@ -2114,7 +2114,7 @@ sub_80ED090: @ 80ED090
 	ands r2, r1
 	orrs r2, r0
 	strb r2, [r7, 0x13]
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrb r0, [r0]
 	movs r1, 0x7
 	ands r1, r0
@@ -2609,7 +2609,7 @@ sub_80ED548: @ 80ED548
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	bl StringCopy
-	bl sub_8139688
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -2689,7 +2689,7 @@ sub_80ED610: @ 80ED610
 	mov r8, r0
 	mov r1, r8
 	strb r1, [r5, 0x1]
-	bl sub_8139688
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r7, 0x64
@@ -2719,7 +2719,7 @@ sub_80ED610: @ 80ED610
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	bl StringCopy
-	bl sub_8139688
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r7
@@ -2731,7 +2731,7 @@ sub_80ED610: @ 80ED610
 	bl GetMonData
 	adds r0, r4, 0
 	bl StripExtCtrlCodes
-	bl sub_8139688
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r7
@@ -2747,7 +2747,7 @@ sub_80ED610: @ 80ED610
 	strb r0, [r5, 0xD]
 	cmp r0, 0x1
 	beq _080ED6D4
-	bl sub_8139688
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r7
@@ -2761,7 +2761,7 @@ _080ED6D4:
 	b _080ED706
 	.pool
 _080ED6F4:
-	bl sub_8139688
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r7
@@ -5699,7 +5699,7 @@ _080EEFD0:
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	b _080EF016
 	.pool
 _080EEFE8:
@@ -5723,7 +5723,7 @@ _080EEFE8:
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 _080EF016:
 	ldr r1, =gScriptResult
 	movs r0, 0x1
@@ -6495,7 +6495,7 @@ sub_80EF64C: @ 80EF64C
 	cmp r0, 0
 	bne _080EF6A0
 	ldr r4, =gStringVar1
-	bl sub_8139688
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -6569,7 +6569,7 @@ sub_80EF704: @ 80EF704
 	cmp r0, 0
 	bne _080EF774
 	ldr r6, =gStringVar1
-	bl sub_8139688
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0x64
@@ -6585,7 +6585,7 @@ sub_80EF704: @ 80EF704
 	adds r1, r0
 	adds r0, r6, 0
 	bl StringCopy
-	bl sub_8139688
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r5
@@ -6788,7 +6788,7 @@ _080EF8EE:
 	thumb_func_start sub_80EF8F8
 sub_80EF8F8: @ 80EF8F8
 	push {lr}
-	bl sub_8139688
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80EF88C
@@ -10706,7 +10706,7 @@ _080F1952:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -10958,7 +10958,7 @@ _080F1BEA:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -11190,7 +11190,7 @@ _080F1E2C:
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -11485,7 +11485,7 @@ _080F20FE:
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -11707,7 +11707,7 @@ _080F2358:
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -11846,7 +11846,7 @@ _080F24C0:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -12019,7 +12019,7 @@ _080F26A6:
 	movs r3, 0x2
 	bl ConvertEasyChatWordsToString
 	adds r0, r4, 0
-	bl box_related_two__2
+	bl ShowFieldMessage
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x1
 	strb r0, [r1]
@@ -12033,7 +12033,7 @@ _080F26CC:
 	movs r3, 0x2
 	bl ConvertEasyChatWordsToString
 	adds r0, r4, 0
-	bl box_related_two__2
+	bl ShowFieldMessage
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x3
 	strb r0, [r1]
@@ -12044,7 +12044,7 @@ _080F26F0:
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 _080F26FC:
 	pop {r4-r7}
 	pop {r0}
@@ -12173,7 +12173,7 @@ _080F2868:
 	movs r3, 0x2
 	bl ConvertEasyChatWordsToString
 	adds r0, r4, 0
-	bl box_related_two__2
+	bl ShowFieldMessage
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x1
 	strb r0, [r1]
@@ -12184,7 +12184,7 @@ _080F288C:
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 _080F2898:
 	pop {r4-r7}
 	pop {r0}
@@ -12278,7 +12278,7 @@ _080F297E:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -12322,7 +12322,7 @@ DoTVShowPokemonNewsMassOutbreak: @ 80F29A0
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -13075,7 +13075,7 @@ _080F311C:
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -13285,7 +13285,7 @@ _080F3362:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13535,7 +13535,7 @@ _080F3624:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13721,7 +13721,7 @@ _080F37EA:
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -13806,7 +13806,7 @@ _080F38E0:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13894,7 +13894,7 @@ _080F39BE:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -14124,7 +14124,7 @@ _080F3BE8:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -14257,7 +14257,7 @@ _080F3D54:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -14362,7 +14362,7 @@ _080F3E5C:
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -14532,7 +14532,7 @@ _080F4008:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -14835,7 +14835,7 @@ _080F4344:
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -15063,7 +15063,7 @@ _080F4588:
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -15133,7 +15133,7 @@ _080F4634:
 	lsls r0, r6, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -15330,7 +15330,7 @@ _080F4858:
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -15453,7 +15453,7 @@ _080F499A:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -15623,7 +15623,7 @@ _080F4B3A:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -15846,7 +15846,7 @@ _080F4D84:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -16107,7 +16107,7 @@ _080F5014:
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -16245,7 +16245,7 @@ _080F5164:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -16650,7 +16650,7 @@ _080F552A:
 	lsls r1, r2, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -16821,7 +16821,7 @@ _080F56BC:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -16895,7 +16895,7 @@ _080F575E:
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r6}
 	pop {r0}
 	bx r0

@@ -59,8 +59,8 @@ _080983E2:
 	bx r1
 	thumb_func_end sub_80983C4
 
-	thumb_func_start sub_80983E8
-sub_80983E8: @ 80983E8
+	thumb_func_start ScriptFreezeMapObjects
+ScriptFreezeMapObjects: @ 80983E8
 	push {lr}
 	bl player_bitmagic
 	ldr r0, =sub_80983A4
@@ -69,7 +69,7 @@ sub_80983E8: @ 80983E8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80983E8
+	thumb_func_end ScriptFreezeMapObjects
 
 	thumb_func_start sub_8098400
 sub_8098400: @ 8098400
@@ -149,8 +149,8 @@ _0809849A:
 	bx r1
 	thumb_func_end sub_809847C
 
-	thumb_func_start sub_80984A0
-sub_80984A0: @ 80984A0
+	thumb_func_start LockSelectedMapObject
+LockSelectedMapObject: @ 80984A0
 	push {r4,r5,lr}
 	ldr r4, =gSelectedMapObject
 	ldrb r0, [r4]
@@ -184,7 +184,7 @@ _080984DE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80984A0
+	thumb_func_end LockSelectedMapObject
 
 	thumb_func_start sub_80984F4
 sub_80984F4: @ 80984F4
@@ -203,7 +203,7 @@ sub_80984F4: @ 80984F4
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
-	bl sub_809757C
+	bl UnfreezeMapObjects
 	pop {r0}
 	bx r0
 	.pool
@@ -239,7 +239,7 @@ _08098542:
 	adds r0, r4
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
-	bl sub_809757C
+	bl UnfreezeMapObjects
 	pop {r4}
 	pop {r0}
 	bx r0

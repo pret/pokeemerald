@@ -28,7 +28,7 @@ extern u8 gUnknown_030060B0;
 // TODO: replace those declarations with file headers
 extern u16 GetGeneratedTrainerIdLower(void);
 extern void ClearContestWinnerPicsInContestHall(void);
-extern void warp1_set(s8 mapBank, s8 mapNo, s8 warpNo, s8 xPos, s8 yPos);
+extern void Overworld_SetWarpDestination(s8 mapBank, s8 mapNo, s8 warpNo, s8 xPos, s8 yPos);
 extern void warp_in(void);
 extern void sub_80BB358(void);
 extern void ResetBagScrollPositions(void);
@@ -131,7 +131,7 @@ void sub_8084400(void)
 
 void WarpToTruck(void)
 {
-    warp1_set(25, 40, -1, -1, -1); // inside of truck
+    Overworld_SetWarpDestination(25, 40, -1, -1, -1); // inside of truck
     warp_in();
 }
 

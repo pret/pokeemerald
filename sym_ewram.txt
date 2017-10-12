@@ -680,24 +680,9 @@ gUnknown_020375BC: @ 20375BC
 gUnknown_020375C0: @ 20375C0
 	.space 0x4
 
-gUnknown_020375C4: @ 20375C4
-	.space 0x4
+    .include "src/scrcmd.o"
 
-gUnknown_020375C8: @ 20375C8
-	.space 0x2
-
-gUnknown_020375CA: @ 20375CA
-	.space 0x2
-
-gUnknown_020375CC: @ 20375CC
-	.space 0x2
-
-gUnknown_020375CE: @ 20375CE
-	.space 0x2
-
-gUnknown_020375D0: @ 20375D0
-	.space 0x4
-
+    .align 2
 gUnknown_020375D4: @ 20375D4
 	.space 0x2
 
@@ -878,7 +863,7 @@ gUnknown_02038C00: @ 2038C00
 gUnknown_02038C04: @ 2038C04
 	.space 0x4
 
-gFieldEffectSpawnParams: @ 2038C08
+gFieldEffectArguments: @ 2038C08
 	.space 0x20
 
 gUnknown_02038C28: @ 2038C28
@@ -1070,7 +1055,7 @@ gUnknown_02039F2A: @ 2039F2A
 gUnknown_02039F2B: @ 2039F2B
 	.space 0x1
 
-gUnknown_02039F2C: @ 2039F2C
+gScriptContestCategory: @ 2039F2C
 	.space 0x2
 
 gUnknown_02039F2E: @ 2039F2E

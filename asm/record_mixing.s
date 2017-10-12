@@ -2266,7 +2266,7 @@ sub_80E7F68: @ 80E7F68
 	bne _080E7FE4
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_80D6D1C
+	bl CheckPCHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E7FE4

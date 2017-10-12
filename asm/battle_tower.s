@@ -3548,11 +3548,11 @@ _08163E2C:
 	movs r0, 0
 	strb r0, [r4]
 	ldr r0, =gUnknown_08224158
-	bl TrainerBattleConfigure
+	bl BattleSetup_ConfigureTrainerBattle
 	movs r0, 0x1
 	strb r0, [r4]
 	ldr r0, =gUnknown_08224167
-	bl TrainerBattleConfigure
+	bl BattleSetup_ConfigureTrainerBattle
 	ldr r0, =gPartnerTrainerId
 	strh r5, [r0]
 	ldr r0, =sub_8163A8C
@@ -4364,7 +4364,7 @@ _081644E0:
 	strb r0, [r1, 0x1]
 	movs r0, 0xD8
 	lsls r0, 2
-	bl FlagReset
+	bl FlagClear
 	ldr r0, [r6]
 	adds r0, r5
 	ldrh r0, [r0]
@@ -4525,7 +4525,7 @@ _08164660:
 	adds r1, 0xC0
 	strb r0, [r1, 0x1]
 	ldr r0, =0x00000361
-	bl FlagReset
+	bl FlagClear
 	ldr r0, [r6]
 	adds r0, r5
 	ldrh r0, [r0]
@@ -5016,7 +5016,7 @@ _08164B04:
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	b _08164B54
 	.pool
 _08164B28:
@@ -5040,7 +5040,7 @@ _08164B28:
 	lsls r1, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 _08164B54:
 	add sp, 0x8
 	pop {r3-r5}
@@ -6056,7 +6056,7 @@ _081653E0:
 	bne _081653F8
 	bl sub_80F01B8
 	movs r0, 0x77
-	bl FlagReset
+	bl FlagClear
 _081653F8:
 	pop {r0}
 	bx r0

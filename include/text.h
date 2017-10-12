@@ -170,6 +170,7 @@ typedef struct {
     u8 flag_0:1;
     u8 flag_1:1;
     u8 flag_2:1;
+    u8 flag_3:1;
 } TextFlags;
 
 extern TextFlags gTextFlags;

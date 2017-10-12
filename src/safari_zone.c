@@ -60,7 +60,7 @@ void SetSafariZoneFlag(void)
 
 void ResetSafariZoneFlag(void)
 {
-    FlagReset(SYS_SAFARI_MODE);
+    FlagClear(SYS_SAFARI_MODE);
 }
 
 void EnterSafariMode(void)

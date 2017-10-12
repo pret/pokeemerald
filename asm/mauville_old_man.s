@@ -2205,7 +2205,7 @@ sub_8121178: @ 8121178
 	bl ConvertInternationalString
 	mov r0, r8
 	bl sub_8120EC0
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}

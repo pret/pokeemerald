@@ -861,7 +861,7 @@ sub_80E916C: @ 80E916C
 	asrs r0, 24
 	str r0, [sp]
 	adds r0, r5, 0
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	bl warp_in
 	ldr r1, =gFieldCallback
 	ldr r0, =sub_80E9108
@@ -1208,7 +1208,7 @@ _080E9462:
 	adds r0, 0xAE
 	lsls r0, 16
 	lsrs r0, 16
-	bl FlagReset
+	bl FlagClear
 	ldrb r0, [r6]
 	ldr r5, =gSaveBlock1Ptr
 	ldr r2, [r5]
