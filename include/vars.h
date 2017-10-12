@@ -53,6 +53,8 @@
 #define VAR_0x40BC                 0x40BC
 #define VAR_0x40C2                 0x40C2
 
+#define VAR_FRONTIER_FACILITY      0x40CF
+
 #define VAR_DAILY_SLOTS            0x40E6
 #define VAR_DAILY_WILDS            0x40E7
 #define VAR_DAILY_BLENDER          0x40E8

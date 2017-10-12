@@ -6,6 +6,9 @@
 // Exported RAM declarations
 
 // Exported ROM declarations
+
+u8 *const gTVStringVarPtrs[3];
+
 void ClearTVShowData(void);
 void PutPokemonTodayCaughtOnAir(void);
 u32 GetPlayerIDAsU32(void);
