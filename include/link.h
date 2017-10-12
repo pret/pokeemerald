@@ -184,6 +184,5 @@ bool8 sub_800A520(void);
 bool8 sub_8010500(void);
 void sub_800DFB4(u8, u8);
 void sub_800ADF8(void);
-u8 GetLinkPlayerCount(void);
 
 #endif // GUARD_LINK_H

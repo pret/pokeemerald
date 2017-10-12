@@ -246,26 +246,26 @@ const u16 gNumberOneVarsAndThresholds[][2] = {
 
 const u8 *const gPokeNewsTextGroup_Upcoming[] = {
     NULL,
-    gUnknown_0828D0F8,
-    gUnknown_0828D571,
-    gUnknown_0828D875,
-    gUnknown_0828DBEC
+    gPokeNewsTextSlateport_Upcoming,
+    gPokeNewsTextGameCorner_Upcoming,
+    gPokeNewsTextLilycove_Upcoming,
+    gPokeNewsTextBlendMaster_Upcoming
 };
 
 const u8 *const gPokeNewsTextGroup_Ongoing[] = {
     NULL,
-    gUnknown_0828D2A1,
-    gUnknown_0828D66F,
-    gUnknown_0828D994,
-    gUnknown_0828DD9E
+    gPokeNewsTextSlateport_Ongoing,
+    gPokeNewsTextGameCorner_Ongoing,
+    gPokeNewsTextLilycove_Ongoing,
+    gPokeNewsTextBlendMaster_Ongoing
 };
 
 const u8 *const gPokeNewsTextGroup_Ending[] = {
     NULL,
-    gUnknown_0828D3F5,
-    gUnknown_0828D768,
-    gUnknown_0828DAC0,
-    gUnknown_0828DF05
+    gPokeNewsTextSlateport_Ending,
+    gPokeNewsTextGameCorner_Ending,
+    gPokeNewsTextLilycove_Ending,
+    gPokeNewsTextBlendMaster_Ending
 };
 
 u8 *const gTVStringVarPtrs[] = {
