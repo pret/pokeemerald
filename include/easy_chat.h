@@ -30,7 +30,8 @@ enum
 
 void InitEasyChatPhrases(void);
 void easy_chat_input_maybe(void);
-void CopyEasyChatWord(u8 *, u16);
+void CopyEasyChatWord(u8 *dest, u16 word);
+void ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
 bool32 sub_811F8D8(u16);
 
 #endif // GUARD_EASYCHAT_H
