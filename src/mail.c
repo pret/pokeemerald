@@ -75,7 +75,7 @@ struct MailGraphics
 
 // Static RAM declarations
 
-EWRAM_DATA struct Unk203A134 *gUnknown_0203A134;
+static EWRAM_DATA struct Unk203A134 *gUnknown_0203A134 = NULL;
 
 // Static ROM declarations
 
