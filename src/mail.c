@@ -26,6 +26,8 @@ struct UnkMailStruct
     u8 unk_0_0:2;
     u8 unk_0_2:2;
     u8 unk_0_4:4;
+    u8 unk_1_0:4;
+    u8 unk_1_4:1;
 };
 
 struct MailLayout
@@ -35,8 +37,8 @@ struct MailLayout
     u8 var2;
     u8 var3_0:4;
     u8 var3_4:4;
-    struct UnkMailStruct *var4;
-    u32 var8;
+    u32 var4;
+    const struct UnkMailStruct *var8;
 };
 
 struct Unk203A134
@@ -61,9 +63,9 @@ struct Unk203A134
 
 struct MailGraphics
 {
-    u16 (*palette)[];
-    u8 (*tiles)[];
-    u8 (*tileMap)[];
+    const u16 *palette;
+    const u8 *tiles;
+    const u8 *tileMap;
     u16 var0C;
     u16 var0E;
     u16 color10;
@@ -85,12 +87,180 @@ void sub_8121C98(void);
 
 // .rodata
 
-extern const struct BgTemplate gUnknown_0859F290[];
-extern const struct WindowTemplate gUnknown_0859F29C;
-extern const u16 gUnknown_0859F2B0[][2];
-extern const struct MailGraphics gUnknown_0859F2B8[];
-extern const struct MailLayout gUnknown_0859F3B4[];
-extern const struct MailLayout gUnknown_0859F458[];
+const struct BgTemplate gUnknown_0859F290[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .priority = 0
+    }, {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .priority = 1
+    }, {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 29,
+        .priority = 2
+    }
+};
+
+const struct WindowTemplate gUnknown_0859F29C[] = {
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 3,
+        .width = 26,
+        .height = 15,
+        .paletteNum = 15,
+        .baseBlock = 1
+    }, {
+        .priority = -1
+    }
+};
+
+const u8 gUnknown_0859F2AC[] = {
+     0,
+    10,
+    11
+};
+
+const u16 gUnknown_0859F2B0[][2] = {
+    { 0x6ACD, 0x51A5 },
+    { 0x45FC, 0x38D4 }
+};
+
+extern const u16 gUnknown_08DBE818[];
+extern const u16 gUnknown_08DBE838[];
+extern const u16 gUnknown_08DBE858[];
+extern const u16 gUnknown_08DBE878[];
+extern const u16 gUnknown_08DBE898[];
+extern const u16 gUnknown_08DBE8B8[];
+extern const u16 gUnknown_08DBE8D8[];
+extern const u16 gUnknown_08DBE8F8[];
+extern const u16 gUnknown_08DBE918[];
+extern const u16 gUnknown_08DBE938[];
+extern const u16 gUnknown_08DBE958[];
+extern const u16 gUnknown_08DBE978[];
+extern const u8 gUnknown_08DBE998[];
+extern const u8 gUnknown_08DBFBA4[];
+extern const u8 gUnknown_08DBEB38[];
+extern const u8 gUnknown_08DBFC7C[];
+extern const u8 gUnknown_08DBEC74[];
+extern const u8 gUnknown_08DBFD5C[];
+extern const u8 gUnknown_08DBEE84[];
+extern const u8 gUnknown_08DBFE68[];
+extern const u8 gUnknown_08DBEF5C[];
+extern const u8 gUnknown_08DBFF44[];
+extern const u8 gUnknown_08DBF154[];
+extern const u8 gUnknown_08DC0034[];
+extern const u8 gUnknown_08DBF2D4[];
+extern const u8 gUnknown_08DC0114[];
+extern const u8 gUnknown_08DBF37C[];
+extern const u8 gUnknown_08DC01F4[];
+extern const u8 gUnknown_08DBF50C[];
+extern const u8 gUnknown_08DC0300[];
+extern const u8 gUnknown_08DBF64C[];
+extern const u8 gUnknown_08DC03F0[];
+extern const u8 gUnknown_08DBF7B4[];
+extern const u8 gUnknown_08DC04E8[];
+extern const u8 gUnknown_08DBF904[];
+extern const u8 gUnknown_08DC0600[];
+
+const struct MailGraphics gUnknown_0859F2B8[] = {
+    {
+        gUnknown_08DBE818, gUnknown_08DBE998, gUnknown_08DBFBA4, 0x02c0, 0x0000, 0x294a, 0x6739
+    }, {
+        gUnknown_08DBE838, gUnknown_08DBEB38, gUnknown_08DBFC7C, 0x02e0, 0x0000, 0x7fff, 0x4631
+    }, {
+        gUnknown_08DBE858, gUnknown_08DBEC74, gUnknown_08DBFD5C, 0x0400, 0x0000, 0x294a, 0x6739
+    }, {
+        gUnknown_08DBE878, gUnknown_08DBEE84, gUnknown_08DBFE68, 0x01e0, 0x0000, 0x7fff, 0x4631
+    }, {
+        gUnknown_08DBE898, gUnknown_08DBEF5C, gUnknown_08DBFF44, 0x02e0, 0x0000, 0x7fff, 0x4631
+    }, {
+        gUnknown_08DBE8B8, gUnknown_08DBF154, gUnknown_08DC0034, 0x0300, 0x0000, 0x294a, 0x6739
+    }, {
+        gUnknown_08DBE8D8, gUnknown_08DBF2D4, gUnknown_08DC0114, 0x0140, 0x0000, 0x7fff, 0x4631
+    }, {
+        gUnknown_08DBE8F8, gUnknown_08DBF37C, gUnknown_08DC01F4, 0x0300, 0x0000, 0x7fff, 0x4631
+    }, {
+        gUnknown_08DBE918, gUnknown_08DBF50C, gUnknown_08DC0300, 0x0220, 0x0000, 0x294a, 0x6739
+    }, {
+        gUnknown_08DBE938, gUnknown_08DBF64C, gUnknown_08DC03F0, 0x0340, 0x0000, 0x294a, 0x6739
+    }, {
+        gUnknown_08DBE958, gUnknown_08DBF7B4, gUnknown_08DC04E8, 0x02a0, 0x0000, 0x294a, 0x6739
+    }, {
+        gUnknown_08DBE978, gUnknown_08DBF904, gUnknown_08DC0600, 0x0520, 0x0000, 0x294a, 0x6739
+    }
+};
+
+const struct UnkMailStruct Unknown_0859F3A8[] = {
+    { .unk_0_0 = 3, .unk_1_4 = TRUE },
+    { .unk_0_0 = 3, .unk_1_4 = TRUE },
+    { .unk_0_0 = 3, .unk_1_4 = TRUE }
+};
+
+const struct MailLayout gUnknown_0859F3B4[] = {
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x08, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x00, Unknown_0859F3A8 }
+};
+
+const struct UnkMailStruct Unknown_0859F444[] = {
+    { .unk_0_0 = 2, .unk_1_4 = TRUE },
+    { .unk_0_0 = 2, .unk_1_4 = TRUE },
+    { .unk_0_0 = 2, .unk_1_4 = TRUE },
+    { .unk_0_0 = 2, .unk_1_4 = TRUE },
+    { .unk_0_0 = 1, .unk_1_4 = TRUE }
+};
+
+const struct MailLayout gUnknown_0859F458[] = {
+    { 0x05, 0x07, 0x58, 0xb, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x0a, 0x60, 0x9, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x0c, 0x68, 0x5, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x05, 0x60, 0x8, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x0a, 0x60, 0x9, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x09, 0x70, 0x5, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x0c, 0x68, 0x9, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x0d, 0x68, 0xd, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x09, 0x60, 0x9, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x09, 0x60, 0x9, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x11, 0x68, 0xf, 0x0, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x09, 0x60, 0x5, 0x0, 0x1e, Unknown_0859F444 }
+};
+
+const u16 Unknown_0859F4E8[] = {
+    0x00, 0x4000, 0x00, 0x00
+};
+
+const u16 Unknown_0859F4F0[] = {
+    0x00, 0x00, -1, 0x00
+};
+
+const u16 Unknown_0859F4F8[] = {
+    0x04, 0x00, -1, 0x00
+};
+
+const u16 Unknown_0859F500[] = {
+    0x00, 0x40, -1, 0x00
+};
+
+const u16 *const gUnknown_0859F508[] = {
+    Unknown_0859F4F0,
+    Unknown_0859F4F8,
+    Unknown_0859F500
+};
 
 // .text
 
@@ -191,7 +361,7 @@ bool8 sub_81215EC(void)
             SetBgTilemapBuffer(2, gUnknown_0203A134->bg2TilemapBuffer);
             break;
         case 7:
-            InitWindows(&gUnknown_0859F29C);
+            InitWindows(gUnknown_0859F29C);
             DeactivateAllTextPrinters();
             break;
         case 8:

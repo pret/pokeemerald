@@ -401,7 +401,7 @@ SECTIONS {
         data/easy_chat.o(.rodata);
         data/mon_markings.o(.rodata);
         data/mauville_old_man.o(.rodata);
-        data/mail.o(.rodata);
+        src/mail.o(.rodata);
         data/menu_helpers.o(.rodata);
         data/heal_location.o(.rodata);
         data/region_map.o(.rodata);
