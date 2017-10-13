@@ -449,5 +449,6 @@ enum
 };
 
 #define NUM_SPECIES SPECIES_EGG
+extern const u8 gSpeciesNames[][11];
 
 #endif // GUARD_SPECIES_H

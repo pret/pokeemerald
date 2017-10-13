@@ -58,5 +58,6 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
+u16 itemid_get_market_price(u16 itemId);
 
 #endif // ITEM_H
