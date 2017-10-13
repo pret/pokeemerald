@@ -9,6 +9,8 @@
 #include "species.h"
 #include "recorded_battle.h"
 #include "util.h"
+#include "abilities.h"
+#include "battle_message.h"
 
 extern u32 gBattleTypeFlags;
 extern u32 gBattleExecBuffer;
@@ -25,6 +27,7 @@ extern u8 gUnknown_0203C7B4;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
 extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
+extern u8 gBattleBuffersTransferData[0x100];
 extern u8 gUnknown_02022D08;
 extern u8 gUnknown_02022D09;
 extern u8 gUnknown_02022D0A;
@@ -32,6 +35,9 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
 extern u8 gEffectBank;
+extern u16 gBattleWeather;
+
+extern const struct BattleMove gBattleMoves[];
 
 extern void task00_08081A90(u8 taskId); // cable_club
 extern void sub_81B8D64(u8 bank, u8 arg1); // party_menu
@@ -925,4 +931,252 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
 
         gTasks[taskId].data[15] = gTasks[taskId].data[15] + blockSize + LINK_BUFF_DATA;
     }
+}
+
+void EmitGetMonData(u8 bufferId, u8 arg1, u8 arg2)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_GETMONDATA;
+    gBattleBuffersTransferData[1] = arg1;
+    gBattleBuffersTransferData[2] = arg2;
+    gBattleBuffersTransferData[3] = 0;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
+}
+
+void EmitGetRawMonData(u8 bufferId, u8 monId, u8 bytes)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_GETRAWMONDATA;
+    gBattleBuffersTransferData[1] = monId;
+    gBattleBuffersTransferData[2] = bytes;
+    gBattleBuffersTransferData[3] = 0;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
+}
+
+void EmitSetMonData(u8 bufferId, u8 request, u8 c, u8 bytes, void *data)
+{
+    s32 i;
+
+    gBattleBuffersTransferData[0] = CONTROLLER_SETMONDATA;
+    gBattleBuffersTransferData[1] = request;
+    gBattleBuffersTransferData[2] = c;
+    for (i = 0; i < bytes; i++)
+        gBattleBuffersTransferData[3 + i] = *(u8*)(data++);
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 3 + bytes);
+}
+
+void EmitSetRawMonData(u8 bufferId, u8 monId, u8 bytes, void *data)
+{
+    s32 i;
+
+    gBattleBuffersTransferData[0] = CONTROLLER_SETRAWMONDATA;
+    gBattleBuffersTransferData[1] = monId;
+    gBattleBuffersTransferData[2] = bytes;
+    for (i = 0; i < bytes; i++)
+        gBattleBuffersTransferData[3 + i] = *(u8*)(data++);
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, bytes + 3);
+}
+
+void EmitLoadMonSprite(u8 bufferId)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_LOADMONSPRITE;
+    gBattleBuffersTransferData[1] = 4;
+    gBattleBuffersTransferData[2] = 4;
+    gBattleBuffersTransferData[3] = 4;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
+}
+
+void EmitSwitchInAnim(u8 bufferId, u8 partyId, bool8 dontClearSubstituteBit)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_SWITCHINANIM;
+    gBattleBuffersTransferData[1] = partyId;
+    gBattleBuffersTransferData[2] = dontClearSubstituteBit;
+    gBattleBuffersTransferData[3] = 5;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
+}
+
+// TODO: change Poke to Mon to be consistent
+void EmitReturnPokeToBall(u8 bufferId, u8 arg1)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_RETURNPOKETOBALL;
+    gBattleBuffersTransferData[1] = arg1;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 2);
+}
+
+void EmitDrawTrainerPic(u8 bufferId)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_DRAWTRAINERPIC;
+    gBattleBuffersTransferData[1] = 7;
+    gBattleBuffersTransferData[2] = 7;
+    gBattleBuffersTransferData[3] = 7;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
+}
+
+void EmitTrainerSlide(u8 bufferId)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_TRAINERSLIDE;
+    gBattleBuffersTransferData[1] = 8;
+    gBattleBuffersTransferData[2] = 8;
+    gBattleBuffersTransferData[3] = 8;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
+}
+
+void EmitTrainerSlideBack(u8 bufferId)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_TRAINERSLIDEBACK;
+    gBattleBuffersTransferData[1] = 9;
+    gBattleBuffersTransferData[2] = 9;
+    gBattleBuffersTransferData[3] = 9;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
+}
+
+void EmitFaintAnimation(u8 bufferId)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_FAINTANIMATION;
+    gBattleBuffersTransferData[1] = 10;
+    gBattleBuffersTransferData[2] = 10;
+    gBattleBuffersTransferData[3] = 10;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
+}
+
+void EmitCmd11(u8 bufferId)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_11;
+    gBattleBuffersTransferData[1] = 11;
+    gBattleBuffersTransferData[2] = 11;
+    gBattleBuffersTransferData[3] = 11;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
+}
+
+void EmitCmd12(u8 bufferId)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_12;
+    gBattleBuffersTransferData[1] = 12;
+    gBattleBuffersTransferData[2] = 12;
+    gBattleBuffersTransferData[3] = 12;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
+}
+
+void EmitBallThrow(u8 bufferId, u8 caseId)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_BALLTHROW;
+    gBattleBuffersTransferData[1] = caseId;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 2);
+}
+
+void EmitPause(u8 bufferId, u8 toWait, void *data)
+{
+    s32 i;
+
+    gBattleBuffersTransferData[0] = CONTROLLER_PAUSE;
+    gBattleBuffersTransferData[1] = toWait;
+    for (i = 0; i < toWait * 3; i++)
+        gBattleBuffersTransferData[2 + i] = *(u8*)(data++);
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, toWait * 3 + 2);
+}
+
+void EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct *disableStructPtr, u8 multihit)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_MOVEANIMATION;
+    gBattleBuffersTransferData[1] = move;
+    gBattleBuffersTransferData[2] = (move & 0xFF00) >> 8;
+    gBattleBuffersTransferData[3] = turnOfMove;
+    gBattleBuffersTransferData[4] = movePower;
+    gBattleBuffersTransferData[5] = (movePower & 0xFF00) >> 8;
+    gBattleBuffersTransferData[6] = dmg;
+    gBattleBuffersTransferData[7] = (dmg & 0x0000FF00) >> 8;
+    gBattleBuffersTransferData[8] = (dmg & 0x00FF0000) >> 16;
+    gBattleBuffersTransferData[9] = (dmg & 0xFF000000) >> 24;
+    gBattleBuffersTransferData[10] = friendship;
+    gBattleBuffersTransferData[11] = multihit;
+    if (WEATHER_HAS_EFFECT2)
+    {
+        gBattleBuffersTransferData[12] = gBattleWeather;
+        gBattleBuffersTransferData[13] = (gBattleWeather & 0xFF00) >> 8;
+    }
+    else
+    {
+        gBattleBuffersTransferData[12] = 0;
+        gBattleBuffersTransferData[13] = 0;
+    }
+    gBattleBuffersTransferData[14] = 0;
+    gBattleBuffersTransferData[15] = 0;
+    memcpy(&gBattleBuffersTransferData[16], disableStructPtr, sizeof(struct DisableStruct));
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 16 + sizeof(struct DisableStruct));
+}
+
+extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
+extern u16 gCurrentMove;
+extern u16 gLastUsedMove;
+extern u16 gLastUsedItem;
+extern u8 gBattleOutcome;
+extern u8 gLastUsedAbility;
+extern u8 gStringBank;
+
+void EmitPrintString(u8 bufferId, u16 stringID)
+{
+    s32 i;
+    struct StringInfoBattle* stringInfo;
+
+    gBattleBuffersTransferData[0] = CONTROLLER_PRINTSTRING;
+    gBattleBuffersTransferData[1] = gBattleOutcome;
+    gBattleBuffersTransferData[2] = stringID;
+    gBattleBuffersTransferData[3] = (stringID & 0xFF00) >> 8;
+
+    stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
+    stringInfo->currentMove = gCurrentMove;
+    stringInfo->lastMove = gLastUsedMove;
+    stringInfo->lastItem = gLastUsedItem;
+    stringInfo->lastAbility = gLastUsedAbility;
+    stringInfo->scrActive = gBattleScripting.bank;
+    stringInfo->unk1605E = gBattleStruct->field_52;
+    stringInfo->hpScale = gBattleStruct->hpScale;
+    stringInfo->StringBank = gStringBank;
+    stringInfo->moveType = gBattleMoves[gCurrentMove].type;
+
+    for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+        stringInfo->abilities[i] = gBattleMons[i].ability;
+    for (i = 0; i < TEXT_BUFF_ARRAY_COUNT; i++)
+    {
+        stringInfo->textBuffs[0][i] = gBattleTextBuff1[i];
+        stringInfo->textBuffs[1][i] = gBattleTextBuff2[i];
+        stringInfo->textBuffs[2][i] = gBattleTextBuff3[i];
+    }
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, sizeof(struct StringInfoBattle) + 4);
+}
+
+void EmitPrintStringPlayerOnly(u8 bufferId, u16 stringID)
+{
+    s32 i;
+    struct StringInfoBattle* stringInfo;
+
+    gBattleBuffersTransferData[0] = CONTROLLER_PRINTSTRINGPLAYERONLY;
+    gBattleBuffersTransferData[1] = 17;
+    gBattleBuffersTransferData[2] = stringID;
+    gBattleBuffersTransferData[3] = (stringID & 0xFF00) >> 8;
+
+    stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
+    stringInfo->currentMove = gCurrentMove;
+    stringInfo->lastMove = gLastUsedMove;
+    stringInfo->lastItem = gLastUsedItem;
+    stringInfo->lastAbility = gLastUsedAbility;
+    stringInfo->scrActive = gBattleScripting.bank;
+    stringInfo->unk1605E = gBattleStruct->field_52;
+
+    for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+        stringInfo->abilities[i] = gBattleMons[i].ability;
+    for (i = 0; i < TEXT_BUFF_ARRAY_COUNT; i++)
+    {
+        stringInfo->textBuffs[0][i] = gBattleTextBuff1[i];
+        stringInfo->textBuffs[1][i] = gBattleTextBuff2[i];
+        stringInfo->textBuffs[2][i] = gBattleTextBuff3[i];
+    }
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, sizeof(struct StringInfoBattle) + 4);
+}
+
+void EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2)
+{
+    gBattleBuffersTransferData[0] = CONTROLLER_CHOOSEACTION;
+    gBattleBuffersTransferData[1] = arg1;
+    gBattleBuffersTransferData[2] = arg2;
+    gBattleBuffersTransferData[3] = (arg2 & 0xFF00) >> 8;
+    PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }

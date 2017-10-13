@@ -196,7 +196,7 @@ gUnknown_02022D0A: @ 2022D0A
 gUnknown_02022D0C: @ 2022D0C
 	.space 0x4
 
-gUnknown_02022D10: @ 2022D10
+gBattleBuffersTransferData: @ 2022D10
 	.space 0x100
 
 gUnknown_02022E10: @ 2022E10
