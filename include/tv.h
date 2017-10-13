@@ -7,7 +7,7 @@
 
 // Exported ROM declarations
 
-u8 *const gTVStringVarPtrs[3];
+extern u8 *const gTVStringVarPtrs[3];
 
 void ClearTVShowData(void);
 void PutPokemonTodayCaughtOnAir(void);
