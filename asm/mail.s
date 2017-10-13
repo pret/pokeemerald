@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81219F0
-sub_81219F0: @ 81219F0
-	push {lr}
-_081219F2:
-	bl sub_81215EC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08121A0C
-	ldr r0, =sub_8121C64
-	bl SetMainCallback2
-	b _08121A18
-	.pool
-_08121A0C:
-	bl sub_81221AC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _081219F2
-_08121A18:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81219F0
-
 	thumb_func_start sub_8121A1C
 sub_8121A1C: @ 8121A1C
 	push {r4-r7,lr}

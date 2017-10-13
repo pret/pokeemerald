@@ -7,6 +7,7 @@
 #include "unknown_task.h"
 #include "palette.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "text.h"
 #include "text_window.h"
 #include "gpu_regs.h"
@@ -79,6 +80,7 @@ void sub_81219F0(void);
 void sub_8121A1C(void);
 void sub_8121B1C(void);
 void sub_8121C50(void);
+void sub_8121C64(void);
 void sub_8121C98(void);
 
 // .rodata
@@ -274,4 +276,16 @@ bool8 sub_81215EC(void)
     }
     gMain.state ++;
     return FALSE;
+}
+
+void sub_81219F0(void)
+{
+    do
+    {
+        if (sub_81215EC() == TRUE)
+        {
+            SetMainCallback2(sub_8121C64);
+            break;
+        }
+    } while (sub_81221AC() != TRUE);
 }
