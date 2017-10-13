@@ -26,22 +26,35 @@
 
 struct UnkMailStruct
 {
-    u32 unk_0_0:2;
-    u32 unk_0_2:6;
-    u32 unk_1:8;
+    u32 numEasyChatWords:2;
+    u32 xOffset:6;
+    u32 lineHeight:8;
 };
 
 struct MailLayout
 {
-    u8 var0;
-    u8 var1;
-    u8 var2;
-    u8 var3;
-    u8 var4;
+    u8 numSubStructs;
+    u8 signatureYPos;
+    u8 signatureWidth;
+    u8 wordsXPos;
+    u8 wordsYPos;
     const struct UnkMailStruct *var8;
 };
 
-struct Unk203A134
+struct MailGraphics
+{
+    const u16 *palette;
+    const u8 *tiles;
+    const u8 *tileMap;
+    u16 var0C;
+    u16 var0E;
+    u16 color10;
+    u16 color12;
+};
+
+// Static RAM declarations
+
+static EWRAM_DATA struct
 {
     /*0x0000*/ u8 strbuf[8][64];
     /*0x0200*/ u8 playerName[12];
@@ -60,22 +73,7 @@ struct Unk203A134
     /*0x0228*/ const struct MailLayout *layout;
     /*0x022c*/ u8 bg1TilemapBuffer[0x1000];
     /*0x122c*/ u8 bg2TilemapBuffer[0x1000];
-};
-
-struct MailGraphics
-{
-    const u16 *palette;
-    const u8 *tiles;
-    const u8 *tileMap;
-    u16 var0C;
-    u16 var0E;
-    u16 color10;
-    u16 color12;
-};
-
-// Static RAM declarations
-
-static EWRAM_DATA struct Unk203A134 *gUnknown_0203A134 = NULL;
+} *gUnknown_0203A134 = NULL;
 
 // Static ROM declarations
 
@@ -199,9 +197,9 @@ const struct MailGraphics gUnknown_0859F2B8[] = {
 };
 
 const struct UnkMailStruct Unknown_0859F3A8[] = {
-    { .unk_0_0 = 3, .unk_1 = 16 },
-    { .unk_0_0 = 3, .unk_1 = 16 },
-    { .unk_0_0 = 3, .unk_1 = 16 }
+    { .numEasyChatWords = 3, .lineHeight = 16 },
+    { .numEasyChatWords = 3, .lineHeight = 16 },
+    { .numEasyChatWords = 3, .lineHeight = 16 }
 };
 
 const struct MailLayout gUnknown_0859F3B4[] = {
@@ -220,11 +218,11 @@ const struct MailLayout gUnknown_0859F3B4[] = {
 };
 
 const struct UnkMailStruct Unknown_0859F444[] = {
-    { .unk_0_0 = 2, .unk_1 = 16 },
-    { .unk_0_0 = 2, .unk_1 = 16 },
-    { .unk_0_0 = 2, .unk_1 = 16 },
-    { .unk_0_0 = 2, .unk_1 = 16 },
-    { .unk_0_0 = 1, .unk_1 = 16 }
+    { .numEasyChatWords = 2, .lineHeight = 16 },
+    { .numEasyChatWords = 2, .lineHeight = 16 },
+    { .numEasyChatWords = 2, .lineHeight = 16 },
+    { .numEasyChatWords = 2, .lineHeight = 16 },
+    { .numEasyChatWords = 1, .lineHeight = 16 }
 };
 
 const struct MailLayout gUnknown_0859F458[] = {
@@ -272,7 +270,7 @@ void sub_8121478(struct MailStruct *mail, MainCallback callback, bool8 flag) {
     u16 buffer[2];
     u16 species;
 
-    gUnknown_0203A134 = calloc(1, sizeof(struct Unk203A134));
+    gUnknown_0203A134 = calloc(1, sizeof(*gUnknown_0203A134));
     gUnknown_0203A134->language = LANGUAGE_ENGLISH;
     gUnknown_0203A134->playerIsSender = TRUE;
     gUnknown_0203A134->parserSingle = CopyEasyChatWord;
@@ -471,21 +469,21 @@ void sub_8121A1C(void)
     u8 *ptr;
 
     total = 0;
-    for (i = 0; i < gUnknown_0203A134->layout->var0; i ++)
+    for (i = 0; i < gUnknown_0203A134->layout->numSubStructs; i ++)
     {
-        ConvertEasyChatWordsToString(gUnknown_0203A134->strbuf[i], &gUnknown_0203A134->mail->words[total], gUnknown_0203A134->layout->var8[i].unk_0_0, 1);
-        total += gUnknown_0203A134->layout->var8[i].unk_0_0;
+        ConvertEasyChatWordsToString(gUnknown_0203A134->strbuf[i], &gUnknown_0203A134->mail->words[total], gUnknown_0203A134->layout->var8[i].numEasyChatWords, 1);
+        total += gUnknown_0203A134->layout->var8[i].numEasyChatWords;
     }
     ptr = StringCopy(gUnknown_0203A134->playerName, gUnknown_0203A134->mail->playerName);
     if (!gUnknown_0203A134->playerIsSender)
     {
         StringCopy(ptr, gText_FromSpace);
-        gUnknown_0203A134->signatureWidth = gUnknown_0203A134->layout->var2 - (StringLength(gUnknown_0203A134->playerName) * 8 - 0x60);
+        gUnknown_0203A134->signatureWidth = gUnknown_0203A134->layout->signatureWidth - (StringLength(gUnknown_0203A134->playerName) * 8 - 0x60);
     }
     else
     {
         sub_81DB52C(gUnknown_0203A134->playerName);
-        gUnknown_0203A134->signatureWidth = gUnknown_0203A134->layout->var2;
+        gUnknown_0203A134->signatureWidth = gUnknown_0203A134->layout->signatureWidth;
     }
 }
 
@@ -503,19 +501,19 @@ void sub_8121B1C(void)
     PutWindowTilemap(1);
     FillWindowPixelBuffer(0, 0);
     FillWindowPixelBuffer(1, 0);
-    for (i = 0; i < gUnknown_0203A134->layout->var0; i ++)
+    for (i = 0; i < gUnknown_0203A134->layout->numSubStructs; i ++)
     {
         if (gUnknown_0203A134->strbuf[i][0] == EOS || gUnknown_0203A134->strbuf[i][0] == CHAR_SPACE)
         {
             continue;
         }
-        box_print(0, 1, gUnknown_0203A134->layout->var8[i].unk_0_2 + gUnknown_0203A134->layout->var4, y + gUnknown_0203A134->layout->var3, gUnknown_0859F2AC, 0, gUnknown_0203A134->strbuf[i]);
-        y += gUnknown_0203A134->layout->var8[i].unk_1;
+        box_print(0, 1, gUnknown_0203A134->layout->var8[i].xOffset + gUnknown_0203A134->layout->wordsYPos, y + gUnknown_0203A134->layout->wordsXPos, gUnknown_0859F2AC, 0, gUnknown_0203A134->strbuf[i]);
+        y += gUnknown_0203A134->layout->var8[i].lineHeight;
     }
     bufptr = StringCopy(strbuf, gText_FromSpace);
     StringCopy(bufptr, gUnknown_0203A134->playerName);
     box_x = GetStringCenterAlignXOffset(1, strbuf, gUnknown_0203A134->signatureWidth) + 0x68;
-    box_y = gUnknown_0203A134->layout->var1 + 0x58;
+    box_y = gUnknown_0203A134->layout->signatureYPos + 0x58;
     box_print(0, 1, box_x, box_y, gUnknown_0859F2AC, 0, strbuf);
     CopyWindowToVram(0, 3);
     CopyWindowToVram(1, 3);
