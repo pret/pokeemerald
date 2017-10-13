@@ -108,8 +108,8 @@ _080981E4:
 	.pool
 	thumb_func_end task_del_textbox
 
-	thumb_func_start box_related_two__2
-box_related_two__2: @ 80981EC
+	thumb_func_start ShowFieldMessage
+ShowFieldMessage: @ 80981EC
 	push {r4,lr}
 	adds r1, r0, 0
 	ldr r4, =gUnknown_020375BC
@@ -130,7 +130,7 @@ _0809820E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end box_related_two__2
+	thumb_func_end ShowFieldMessage
 
 	thumb_func_start sub_8098214
 sub_8098214: @ 8098214

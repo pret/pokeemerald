@@ -4047,7 +4047,7 @@ sub_80A5AFC: @ 80A5AFC
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5BA6
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5BA6
@@ -4129,7 +4129,7 @@ sub_80A5BAC: @ 80A5BAC
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5C38
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5C38

@@ -5,8 +5,6 @@
 
 	.text
 
-
-
 	thumb_func_start EmitCmd13
 EmitCmd13: @ 8033E10
 	push {lr}

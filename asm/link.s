@@ -1742,8 +1742,8 @@ _0800A298:
 	.pool
 	thumb_func_end sub_800A23C
 
-	thumb_func_start sub_800A2A4
-sub_800A2A4: @ 800A2A4
+	thumb_func_start GetLinkPlayerTrainerId
+GetLinkPlayerTrainerId: @ 800A2A4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gLinkPlayers
@@ -1755,7 +1755,7 @@ sub_800A2A4: @ 800A2A4
 	ldr r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_800A2A4
+	thumb_func_end GetLinkPlayerTrainerId
 
 	thumb_func_start sub_800A2BC
 sub_800A2BC: @ 800A2BC

@@ -822,7 +822,15 @@ gUnknown_0827EE09:: @ 27EE09
 	.incbin "baserom.gba", 0x27ee09, 0x2
 
 gUnknown_0827EE0B:: @ 827EE0B
-	.incbin "baserom.gba", 0x27ee0b, 0x118fa
+	.incbin "baserom.gba", 0x27ee0b, 0x46a
+
+	.include "data/text/tv.inc"
+
+	.incbin "baserom.gba", 0x0028c7e9, 0x90f
+
+	.include "data/text/pokemon_news.inc"
+
+	.incbin "baserom.gba", 0x28e066, 0x269f
 
 gUnknown_08290705:: @ 8290705
 	.incbin "baserom.gba", 0x290705, 0xeb

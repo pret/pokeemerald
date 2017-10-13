@@ -59,7 +59,7 @@ extern u8* GetMonNick(struct Pokemon* mon, u8* dst);
 extern u8* GetBoxMonNick(struct BoxPokemon* boxMon, u8* dst);
 extern u8 sav1_map_get_name(void);
 extern s8 sub_8198C58(void);
-extern void sub_81DB5E8(u8* str1, u8* str2, u8);
+extern void TVShowConvertInternationalString(u8* str1, u8* str2, u8);
 extern void sub_806A068(u16, u8);
 extern void fade_screen(u8, u8);
 extern void overworld_free_bg_tilemaps(void);
@@ -404,8 +404,8 @@ static bool8 sub_807158C(struct DaycareData* daycare, u8 daycareId)
             || StringCompareWithoutExtCtrlCodes(gSaveBlock2Ptr->playerName, daycareMon->OT_name) != 0))
     {
         StringCopy(gStringVar1, nick);
-        sub_81DB5E8(gStringVar2, daycareMon->OT_name, daycareMon->language_maybe);
-        sub_81DB5E8(gStringVar3, daycareMon->monName, daycareMon->unknown);
+        TVShowConvertInternationalString(gStringVar2, daycareMon->OT_name, daycareMon->language_maybe);
+        TVShowConvertInternationalString(gStringVar3, daycareMon->monName, daycareMon->unknown);
         return TRUE;
     }
     return FALSE;

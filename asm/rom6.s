@@ -4121,7 +4121,7 @@ _081377BC:
 	add r2, sp, 0x18
 	bl SetMonData
 	adds r0, r4, 0
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	strb r0, [r5, 0x1]
 	movs r7, 0x1
 _0813780A:
@@ -4629,7 +4629,7 @@ sub_8137C10: @ 8137C10
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl sub_8137A98
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.pool
@@ -5405,7 +5405,7 @@ sub_8138240: @ 8138240
 	movs r4, 0
 	cmp r4, r5
 	bcs _0813828A
-	ldr r0, =gUnknown_0858D144
+	ldr r0, =gTVStringVarPtrs
 	mov r8, r0
 _08138262:
 	cmp r7, r4
@@ -6378,7 +6378,7 @@ sub_8138AA4: @ 8138AA4
 sub_8138AC0: @ 8138AC0
 	push {lr}
 	ldr r0, =gStringVar4
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.pool
@@ -6537,7 +6537,7 @@ _08138BF6:
 	thumb_func_start sub_8138C04
 sub_8138C04: @ 8138C04
 	push {r4,lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7060,7 +7060,7 @@ sub_8138FEC: @ 8138FEC
 	thumb_func_start sub_8139004
 sub_8139004: @ 8139004
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7084,7 +7084,7 @@ _0813902A:
 	thumb_func_start sub_8139030
 sub_8139030: @ 8139030
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7108,7 +7108,7 @@ _08139056:
 	thumb_func_start sub_813905C
 sub_813905C: @ 813905C
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7132,7 +7132,7 @@ _08139082:
 	thumb_func_start sub_8139088
 sub_8139088: @ 8139088
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7156,7 +7156,7 @@ _081390AE:
 	thumb_func_start sub_81390B4
 sub_81390B4: @ 81390B4
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7295,7 +7295,7 @@ RemoveScriptFieldObject: @ 81391AC
 	thumb_func_start sub_81391D0
 sub_81391D0: @ 81391D0
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7479,7 +7479,7 @@ _08139342:
 	thumb_func_start sub_8139348
 sub_8139348: @ 8139348
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7507,7 +7507,7 @@ sub_8139370: @ 8139370
 	movs r1, 0x1
 	mov r0, sp
 	strb r1, [r0]
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7519,7 +7519,7 @@ sub_8139370: @ 8139370
 	mov r2, sp
 	bl SetMonData
 	adds r0, r4, 0
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -7538,7 +7538,7 @@ _081393B6:
 	thumb_func_start sub_81393C8
 sub_81393C8: @ 81393C8
 	push {lr}
-	bl sub_8139688
+	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7882,8 +7882,8 @@ _08139684:
 	bx r0
 	thumb_func_end sub_8139668
 
-	thumb_func_start sub_8139688
-sub_8139688: @ 8139688
+	thumb_func_start GetIdxOfFirstPartyMemberThatIsNotAnEgg
+GetIdxOfFirstPartyMemberThatIsNotAnEgg: @ 8139688
 	push {r4-r6,lr}
 	bl CalculatePlayerPartyCount
 	lsls r0, 24
@@ -7926,7 +7926,7 @@ _081396D8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8139688
+	thumb_func_end GetIdxOfFirstPartyMemberThatIsNotAnEgg
 
 	thumb_func_start sub_81396E0
 sub_81396E0: @ 81396E0
@@ -8050,7 +8050,7 @@ sub_81397C4: @ 81397C4
 	cmp r1, r0
 	bls _081397E0
 	movs r0, 0
-	bl sub_80EF340
+	bl TV_PrintIntToStringVar
 	b _08139862
 	.pool
 _081397E0:
@@ -9094,7 +9094,7 @@ _0813A062:
 	lsls r0, 2
 	adds r0, r7
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -9996,7 +9996,7 @@ _0813A7C6:
 	lsrs r0, 22
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.pool
@@ -10036,7 +10036,7 @@ sub_813A820: @ 813A820
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	ldr r0, =0x00004031
 	adds r1, r4, 0
 	bl VarSet
@@ -10056,7 +10056,7 @@ sub_813A854: @ 813A854
 	lsrs r0, 14
 	adds r0, r4
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r4}
 	pop {r0}
 	bx r0

@@ -11087,7 +11087,7 @@ static void atkEF_pokeball_catch_calculation(void)
         {
             if (gLastUsedItem == ITEM_MASTER_BALL)
             {
-                gBattleResults.unk5_1 = 1;
+                gBattleResults.usedMasterBall = TRUE;
             }
             else
             {
