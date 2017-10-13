@@ -331,7 +331,7 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
         {
             if (gTrainers[gTrainerBattleOpponent_A].items[i] != 0)
             {
-                gBattleResources->battleHistory->TrainerItems[gBattleResources->battleHistory->itemsNo] = gTrainers[gTrainerBattleOpponent_A].items[i];
+                gBattleResources->battleHistory->trainerItems[gBattleResources->battleHistory->itemsNo] = gTrainers[gTrainerBattleOpponent_A].items[i];
                 gBattleResources->battleHistory->itemsNo++;
             }
         }
