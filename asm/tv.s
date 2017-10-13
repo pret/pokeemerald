@@ -7992,7 +7992,7 @@ _080F0270:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _080F0276:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -8107,7 +8107,7 @@ sub_80F0358: @ 80F0358
 	str r0, [sp, 0x8]
 	add r0, sp, 0x1C
 	str r0, [sp, 0xC]
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	ldr r1, =gUnknown_03001174
 	strb r0, [r1]
 _080F0384:
@@ -9329,7 +9329,7 @@ sub_80F0D60: @ 80F0D60
 	str r0, [sp, 0x8]
 	add r0, sp, 0x1C
 	str r0, [sp, 0xC]
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	ldr r1, =gUnknown_03001175
 	strb r0, [r1]
 	movs r0, 0

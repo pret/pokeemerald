@@ -1275,7 +1275,7 @@ _080802AC:
 	strh r0, [r1]
 	adds r5, 0x1
 _080802D4:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -1295,7 +1295,7 @@ _080802EC:
 	bl sub_807FD90
 	b _08080336
 _08080302:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	ldr r2, =gUnknown_020322A4
 	ldr r1, [r2]
 	adds r1, 0x7C
@@ -6091,7 +6091,7 @@ _08082BEE:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08082BF4:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -6104,7 +6104,7 @@ _08082C0C:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08082C12:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -6118,7 +6118,7 @@ _08082C12:
 	cmp r0, 0
 	bne _08082C0C
 _08082C2E:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -6132,7 +6132,7 @@ _08082C48:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08082C4E:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -6149,7 +6149,7 @@ _08082C6A:
 	ldr r4, =gUnknown_03003110
 	adds r0, r4, 0
 	bl sub_8081F94
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0

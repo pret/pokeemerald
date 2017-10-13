@@ -1059,7 +1059,7 @@ _080B2C5C:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _080B2C7E:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1361,7 +1361,7 @@ _080B2F0C:
 	movs r0, 0
 	mov r8, r0
 	mov r9, r0
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
@@ -1980,11 +1980,11 @@ _080B3474:
 	bl sub_800B524
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	adds r5, 0x1C
 	adds r4, 0x1
 _080B349A:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -2080,7 +2080,7 @@ _080B3574:
 	beq _080B35F8
 	b _080B35FE
 _080B357A:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r4, 0

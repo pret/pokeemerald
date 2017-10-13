@@ -10676,7 +10676,7 @@ _08103D54:
 	strh r0, [r3, 0x4]
 	b _08103DB6
 _08103D5C:
-	ldr r1, =gBanksBySide
+	ldr r1, =gBanksByIdentity
 	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
@@ -27474,7 +27474,7 @@ sub_810C560: @ 810C560
 	lsls r0, 8
 	strh r0, [r5, 0x3C]
 _0810C594:
-	ldr r3, =gBanksBySide
+	ldr r3, =gBanksByIdentity
 	ldrb r0, [r7]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -27699,7 +27699,7 @@ _0810C736:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810C78C
-	ldr r1, =gBanksBySide
+	ldr r1, =gBanksByIdentity
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -27843,7 +27843,7 @@ _0810C85A:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810C8B4
-	ldr r1, =gBanksBySide
+	ldr r1, =gBanksByIdentity
 	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
@@ -28771,7 +28771,7 @@ _0810D000:
 	negs r0, r0
 	lsrs r4, r0, 16
 _0810D012:
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	add r0, r8
 	ldrb r1, [r0]
 	adds r0, r7, 0

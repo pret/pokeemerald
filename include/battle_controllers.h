@@ -46,7 +46,13 @@ struct ChooseMoveStruct
     u8 monType2;
 };
 
-// rom3.s, emitters
+// general functions
+void HandleLinkBattleSetup(void);
+void SetUpBattleVarsAndBirchZigzagoon(void);
+void sub_8032768(void);
+void sub_8033648(void);
+
+// emitters
 void EmitSetMonData(u8 bufferId, u8 request, u8 c, u8 bytes, void *data);
 void EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct* disableStructPtr, u8 multihit);
 void EmitHealthBarUpdate(u8 bufferId, u16 hpValue);
@@ -85,5 +91,35 @@ void EmitPrintString(u8 bufferId, u16 stringId);
 void EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void EmitBallThrow(u8 bufferId, u8 caseId);
 void EmitCmd_x21(u8 bufferId, u8 arg1, u16 arg2);
+
+// player controller
+void SetBankFuncToPlayerBufferRunCommand(void);
+void nullsub_21(void);
+void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
+void ActionSelectionDestroyCursorAt(u8 cursorPos);
+
+// recorded player controller
+void SetBankFuncToRecordedPlayerBufferRunCommand(void);
+
+// opponent controller
+void SetBankFuncToOpponentBufferRunCommand(void);
+
+// player partner controller
+void SetBankFuncToPlayerPartnerBufferRunCommand(void);
+
+// safari controller
+void SetBankFuncToSafariBufferRunCommand(void);
+
+// wally controller
+void SetBankFuncToWallyBufferRunCommand(void);
+
+// recorded opponent controller
+void SetBankFuncToRecordedOpponentBufferRunCommand(void);
+
+// link opponent
+void SetBankFuncToLinkOpponentBufferRunCommand(void);
+
+// link partner
+void SetBankFuncToLinkPartnerBufferRunCommand(void);
 
 #endif // GUARD_BATTLE_CONTROLLERS_H

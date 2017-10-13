@@ -353,7 +353,7 @@ void sub_803F850(u8 arg0)
 {
     s32 i;
 
-    for (i = 0; i < sub_8009FCC(); i++)
+    for (i = 0; i < GetLinkPlayerCount(); i++)
         gBattleExecBuffer |= gBitTable[arg0] << (i << 2);
 
     gBattleExecBuffer &= ~(0x10000000 << arg0);

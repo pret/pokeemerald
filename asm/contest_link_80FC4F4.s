@@ -50,7 +50,7 @@ sub_80FC530: @ 80FC530
 	cmp r4, 0
 	beq _080FC552
 	adds r0, r5, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	movs r0, 0x1
 	b _080FC554
 _080FC552:
@@ -141,7 +141,7 @@ sub_80FC5DC: @ 80FC5DC
 	bl GetMultiplayerId
 	ldr r1, =gUnknown_02039F25
 	strb r0, [r1]
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	ldr r4, =gUnknown_02039F30
 	strb r0, [r4]
 	ldr r1, =gUnknown_02039F2A

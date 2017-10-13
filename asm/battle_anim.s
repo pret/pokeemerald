@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80A3934
-sub_80A3934: @ 80A3934
+	thumb_func_start ClearBattleAnimationVars
+ClearBattleAnimationVars: @ 80A3934
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -84,7 +84,7 @@ _080A3994:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80A3934
+	thumb_func_end ClearBattleAnimationVars
 
 	thumb_func_start move_anim_start_t1
 move_anim_start_t1: @ 80A3A10

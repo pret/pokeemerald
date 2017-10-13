@@ -3,6 +3,7 @@
 
 extern u32 gRecordedBattleRngSeed;
 
+void sub_8184DA4(u8 arg0);
 void sub_8185F84(void);
 void sub_8184E58(void);
 void RecordedBattle_SetBankAction(u8 bank, u8 action);
@@ -15,5 +16,6 @@ u8 MoveRecordedBattleToSaveData(void);
 void sub_818603C(u8);
 void sub_8185FD0(void);
 void sub_8186444(void);
+void sub_8185EB8(void);
 
 #endif // GUARD_RECORDED_BATTLE_H

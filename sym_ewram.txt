@@ -282,7 +282,7 @@ gNoOfAllBanks: @ 202406C
 gBattlePartyID: @ 202406E
 	.space 0x8
 
-gBanksBySide: @ 2024076
+gBanksByIdentity: @ 2024076
 	.space 0x4
 
 gActionsByTurnOrder: @ 202407A
@@ -471,10 +471,10 @@ gBattleScripting: @ 2024474
 gBattleStruct: @ 202449C
 	.space 0x4
 
-gUnknown_020244A0: @ 20244A0
+gLinkBattleSendBuffer: @ 20244A0
 	.space 0x4
 
-gUnknown_020244A4: @ 20244A4
+gLinkBattleRecvBuffer: @ 20244A4
 	.space 0x4
 
 gBattleResources: @ 20244A8

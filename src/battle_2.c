@@ -207,9 +207,6 @@ extern const u8 BattleScript_ActionSwitch[];
 extern const u8 BattleScript_PrintFailedToRunString[];
 
 // functions
-extern void HandleLinkBattleSetup(void); // rom_3
-extern void SetUpBattleVarsAndBirchZigzagoon(void); // rom_3
-extern void sub_8032768(void); // rom_3
 extern void dp12_8087EA4(void);
 extern void sub_80356D0(void);
 extern void GetFrontierTrainerName(u8* dst, u16 trainerId); // battle tower

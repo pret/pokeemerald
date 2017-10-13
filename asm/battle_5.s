@@ -59,13 +59,13 @@ _08056F3E:
 	bl AllocZeroed
 	ldr r1, [r5]
 	str r0, [r1, 0x1C]
-	ldr r4, =gUnknown_020244A0
+	ldr r4, =gLinkBattleSendBuffer
 	movs r5, 0x80
 	lsls r5, 5
 	adds r0, r5, 0
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r4, =gUnknown_020244A4
+	ldr r4, =gLinkBattleRecvBuffer
 	adds r0, r5, 0
 	bl AllocZeroed
 	str r0, [r4]
@@ -160,11 +160,11 @@ _0805703C:
 	str r5, [r0, 0x1C]
 	bl Free
 	str r5, [r6]
-	ldr r4, =gUnknown_020244A0
+	ldr r4, =gLinkBattleSendBuffer
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
-	ldr r4, =gUnknown_020244A4
+	ldr r4, =gLinkBattleRecvBuffer
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
