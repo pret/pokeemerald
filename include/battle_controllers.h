@@ -86,5 +86,6 @@ void Emit_x32(u8 bufferId);
 void EmitPrintString(u8 bufferId, u16 stringId);
 void EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void EmitBallThrow(u8 bufferId, u8 caseId);
+void EmitCmd_x21(u8 bufferId, u8 arg1, u16 arg2);
 
 #endif // GUARD_BATTLE_CONTROLLERS_H

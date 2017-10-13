@@ -5212,7 +5212,7 @@ sub_8061F90: @ 8061F90
 	thumb_func_start sub_8061F9C
 sub_8061F9C: @ 8061F9C
 	push {lr}
-	bl sub_8063880
+	bl AI_TrySwitchOrUseItem
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -5243,7 +5243,7 @@ sub_8061FB8: @ 8061FB8
 	movs r0, 0x1
 	movs r1, 0xA
 _08061FD6:
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _08061FDA:
 	bl OpponentBufferExecCompleted
 	b _08062156
@@ -5347,7 +5347,7 @@ _0806209C:
 	movs r0, 0x1
 	movs r1, 0xA
 	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08061FDA
 	.pool
 _080620C4:
@@ -5378,7 +5378,7 @@ _080620C6:
 	movs r0, 0x1
 	movs r1, 0xA
 	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08062152
 	.pool
 _08062108:
@@ -5401,7 +5401,7 @@ _08062108:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08062152
 	.pool
 _0806213C:
@@ -5413,7 +5413,7 @@ _0806213C:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _08062152:
 	bl OpponentBufferExecCompleted
 _08062156:
@@ -5456,7 +5456,7 @@ sub_8062188: @ 8062188
 	ldrb r0, [r1]
 	cmp r0, 0x6
 	bne _08062254
-	bl sub_8063A90
+	bl GetMostSuitableMonToSwitchInto
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x6

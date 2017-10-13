@@ -103,13 +103,13 @@ _0815942A:
 	movs r1, 0x7
 _0815942E:
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08159440
 _08159436:
 	movs r0, 0x1
 	movs r1, 0x8
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _08159440:
 	bl SafariBufferExecCompleted
 	b _0815954E

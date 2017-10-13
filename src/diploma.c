@@ -1,4 +1,5 @@
 #include "global.h"
+#include "diploma.h"
 #include "palette.h"
 #include "main.h"
 #include "gpu_regs.h"
@@ -33,7 +34,7 @@ static void InitDiplomaBg(void);
 static void InitDiplomaWindow(void);
 static void PrintDiplomaText(u8 *, u8, u8);
 
-EWRAM_DATA void **gDiplomaTilemapPtr = {NULL};
+EWRAM_DATA static void **sDiplomaTilemapPtr = {NULL};
 
 static void VBlankCB(void)
 {
@@ -42,14 +43,14 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
-static const u16 gDiplomaPalettes[][16] =
+static const u16 sDiplomaPalettes[][16] =
 {
     INCBIN_U16("graphics/misc/diploma_national.gbapal"),
     INCBIN_U16("graphics/misc/diploma_hoenn.gbapal"),
 };
 
-static const u8 gDiplomaTilemap[] = INCBIN_U8("graphics/misc/diploma_map.bin.lz");
-static const u8 gDiplomaTiles[] = INCBIN_U8("graphics/misc/diploma.4bpp.lz");
+static const u8 sDiplomaTilemap[] = INCBIN_U8("graphics/misc/diploma_map.bin.lz");
+static const u8 sDiplomaTiles[] = INCBIN_U8("graphics/misc/diploma.4bpp.lz");
 
 void CB2_ShowDiploma(void)
 {
@@ -76,15 +77,15 @@ void CB2_ShowDiploma(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    LoadPalette(gDiplomaPalettes, 0, 64);
-    gDiplomaTilemapPtr = malloc(0x1000);
+    LoadPalette(sDiplomaPalettes, 0, 64);
+    sDiplomaTilemapPtr = malloc(0x1000);
     InitDiplomaBg();
     InitDiplomaWindow();
     reset_temp_tile_data_buffers();
-    decompress_and_copy_tile_data_to_vram(1, &gDiplomaTiles, 0, 0, 0);
+    decompress_and_copy_tile_data_to_vram(1, &sDiplomaTiles, 0, 0, 0);
     while (free_temp_tile_data_buffers_if_possible())
         ;
-    LZDecompressWram(&gDiplomaTilemap, gDiplomaTilemapPtr);
+    LZDecompressWram(&sDiplomaTilemap, sDiplomaTilemapPtr);
     CopyBgTilemapBufferToVram(1);
     DisplayDiplomaText();
     BlendPalettes(-1, 16, 0);
@@ -122,7 +123,7 @@ static void Task_DiplomaFadeOut(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        Free(gDiplomaTilemapPtr);
+        Free(sDiplomaTilemapPtr);
         FreeAllWindowBuffers();
         DestroyTask(taskId);
         SetMainCallback2(sub_80861E8);
@@ -147,7 +148,7 @@ static void DisplayDiplomaText(void)
     CopyWindowToVram(0, 3);
 }
 
-static const struct BgTemplate gDiplomaBgTemplates[2] =
+static const struct BgTemplate sDiplomaBgTemplates[2] =
 {
     {
         .bg = 0,
@@ -172,8 +173,8 @@ static const struct BgTemplate gDiplomaBgTemplates[2] =
 static void InitDiplomaBg(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gDiplomaBgTemplates, 2);
-    SetBgTilemapBuffer(1, gDiplomaTilemapPtr);
+    InitBgsFromTemplates(0, sDiplomaBgTemplates, 2);
+    SetBgTilemapBuffer(1, sDiplomaTilemapPtr);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     ShowBg(0);
     ShowBg(1);
@@ -182,7 +183,7 @@ static void InitDiplomaBg(void)
     SetGpuReg(REG_OFFSET_BLDY, DISPCNT_MODE_0);
 }
 
-static const struct WindowTemplate gDiplomaWinTemplates[2] =
+static const struct WindowTemplate sDiplomaWinTemplates[2] =
 {
     {
         .priority = 0,
@@ -198,7 +199,7 @@ static const struct WindowTemplate gDiplomaWinTemplates[2] =
 
 static void InitDiplomaWindow(void)
 {
-    InitWindows(gDiplomaWinTemplates);
+    InitWindows(sDiplomaWinTemplates);
     DeactivateAllTextPrinters();
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
     FillWindowPixelBuffer(0, 0);
