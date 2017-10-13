@@ -165,7 +165,6 @@ SECTIONS {
         asm/mon_markings.o(.text);
         asm/mauville_old_man.o(.text);
         src/mail.o(.text);
-        asm/mail.o(.text);
         asm/menu_helpers.o(.text);
         asm/dewford_trend.o(.text);
         asm/heal_location.o(.text);

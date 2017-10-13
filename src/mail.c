@@ -51,8 +51,8 @@ struct Unk203A134
     /*0x0218*/ bool8 flag;
     /*0x0219*/ u8 signatureWidth;
     /*0x021a*/ u8 mailType;
-    /*0x021b*/ u8 unk_021b;
-    /*0x021c*/ u8 unk_021c;
+    /*0x021b*/ u8 animsActive;
+    /*0x021c*/ u8 monIconSprite;
     /*0x021d*/ u8 language;
     /*0x021e*/ bool8 playerIsSender;
     /*0x0220*/ void (*parserSingle)(u8 *dest, u16 word);
@@ -85,6 +85,8 @@ void sub_8121B1C(void);
 void sub_8121C50(void);
 void sub_8121C64(void);
 void sub_8121C98(void);
+void sub_8121CC0(void);
+void sub_8121D00(void);
 
 // .rodata
 
@@ -299,19 +301,19 @@ void sub_8121478(struct MailStruct *mail, MainCallback callback, bool8 flag) {
         switch (gUnknown_0203A134->mailType)
         {
             default:
-                gUnknown_0203A134->unk_021b = 0;
+                gUnknown_0203A134->animsActive = 0;
                 break;
             case ITEM_BEAD_MAIL - ITEM_ORANGE_MAIL:
-                gUnknown_0203A134->unk_021b = 1;
+                gUnknown_0203A134->animsActive = 1;
                 break;
             case ITEM_DREAM_MAIL - ITEM_ORANGE_MAIL:
-                gUnknown_0203A134->unk_021b = 2;
+                gUnknown_0203A134->animsActive = 2;
                 break;
         }
     }
     else
     {
-        gUnknown_0203A134->unk_021b = 0;
+        gUnknown_0203A134->animsActive = 0;
     }
     gUnknown_0203A134->mail = mail;
     gUnknown_0203A134->callback = callback;
@@ -422,15 +424,15 @@ bool8 sub_81215EC(void)
             break;
         case 17:
             icon = sub_80D2E84(gUnknown_0203A134->mail->species);
-            switch (gUnknown_0203A134->unk_021b)
+            switch (gUnknown_0203A134->animsActive)
             {
                 case 1:
                     sub_80D2F68(icon);
-                    gUnknown_0203A134->unk_021c = sub_80D2D78(icon, SpriteCallbackDummy, 0x60, 0x80, 0, 0);
+                    gUnknown_0203A134->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x60, 0x80, 0, 0);
                     break;
                 case 2:
                     sub_80D2F68(icon);
-                    gUnknown_0203A134->unk_021c = sub_80D2D78(icon, SpriteCallbackDummy, 0x28, 0x80, 0, 0);
+                    gUnknown_0203A134->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x28, 0x80, 0, 0);
                     break;
             }
             break;
@@ -517,4 +519,61 @@ void sub_8121B1C(void)
     box_print(0, 1, box_x, box_y, gUnknown_0859F2AC, 0, strbuf);
     CopyWindowToVram(0, 3);
     CopyWindowToVram(1, 3);
+}
+
+void sub_8121C50(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_8121C64(void)
+{
+    if (gUnknown_0203A134->animsActive != 0)
+    {
+        AnimateSprites();
+        BuildOamBuffer();
+    }
+    gUnknown_0203A134->callback2();
+}
+
+void sub_8121C98(void)
+{
+    if (!UpdatePaletteFade())
+    {
+        gUnknown_0203A134->callback2 = sub_8121CC0;
+    }
+}
+
+void sub_8121CC0(void)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        gUnknown_0203A134->callback2 = sub_8121D00;
+    }
+}
+
+void sub_8121D00(void)
+{
+    if (!UpdatePaletteFade())
+    {
+        SetMainCallback2(gUnknown_0203A134->callback);
+        switch (gUnknown_0203A134->animsActive)
+        {
+            case 1:
+            case 2:
+                sub_80D2FF0(sub_80D2E84(gUnknown_0203A134->mail->species));
+                sub_80D2EF8(&gSprites[gUnknown_0203A134->monIconSprite]);
+        }
+        memset(gUnknown_0203A134, 0, sizeof(*gUnknown_0203A134));
+        ResetPaletteFade();
+        UnsetBgTilemapBuffer(0);
+        UnsetBgTilemapBuffer(1);
+        ResetBgsAndClearDma3BusyFlags(0);
+        FreeAllWindowBuffers();
+        free(gUnknown_0203A134);
+        gUnknown_0203A134 = NULL;
+    }
 }
