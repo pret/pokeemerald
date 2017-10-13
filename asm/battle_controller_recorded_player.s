@@ -4861,7 +4861,7 @@ sub_818C49C: @ 818C49C
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl RecordedPlayerBufferExecCompleted
 _0818C4C6:
 	pop {r0}
@@ -4897,7 +4897,7 @@ _0818C508:
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl RecordedPlayerBufferExecCompleted
 _0818C522:
 	pop {r0}
@@ -4929,7 +4929,7 @@ sub_818C538: @ 818C538
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _0818C584
 	.pool
 _0818C560:
@@ -4947,7 +4947,7 @@ _0818C560:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _0818C584:
 	bl RecordedPlayerBufferExecCompleted
 	pop {r4,r5}

@@ -492,7 +492,7 @@ sub_812287C: @ 812287C
 	bl Free
 	b _08122980
 _081228B0:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0

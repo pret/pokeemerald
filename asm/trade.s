@@ -6603,7 +6603,7 @@ _0807A97C:
 	adds r4, 0x1C
 	adds r5, 0x1
 _0807A980:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -6632,7 +6632,7 @@ _0807A9B0:
 	adds r4, 0x1C
 	adds r5, 0x1
 _0807A9B4:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0

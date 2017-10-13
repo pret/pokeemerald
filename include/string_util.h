@@ -31,7 +31,7 @@ u8 *StringFillWithTerminator(u8 *dest, u16 n);
 u8 *StringCopyN_Multibyte(u8 *dest, u8 *src, u32 n);
 u32 StringLength_Multibyte(u8 *str);
 u8 *WriteColorChangeControlCode(u8 *dest, u32 colorType, u8 color);
-bool32 sub_8009228(u8 *str);
+bool32 IsStringJapanese(u8 *str);
 bool32 sub_800924C(u8 *str, s32 n);
 u8 GetExtCtrlCodeLength(u8 code);
 static const u8 *SkipExtCtrlCode(const u8 *s);

@@ -642,6 +642,7 @@ void UpdatePartyPokerusTime(u16 days);
 void PartySpreadPokerus(struct Pokemon *party);
 s8 GetMonFlavourRelation(struct Pokemon *mon, u8 a2);
 s8 GetFlavourRelationByPersonality(u32 personality, u8 a2);
+u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit);
 
 #include "sprite.h"
 

@@ -1963,7 +1963,7 @@ _08033726:
 	lsls r0, r1, 24
 	lsrs r4, r0, 24
 _0803372C:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -3259,8 +3259,8 @@ _0803413E:
 	.pool
 	thumb_func_end sub_8034110
 
-	thumb_func_start dp01_build_cmdbuf_x21_a_bb
-dp01_build_cmdbuf_x21_a_bb: @ 8034158
+	thumb_func_start EmitCmd_x21
+EmitCmd_x21: @ 8034158
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -3280,7 +3280,7 @@ dp01_build_cmdbuf_x21_a_bb: @ 8034158
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x21_a_bb
+	thumb_func_end EmitCmd_x21
 
 	thumb_func_start dp01_build_cmdbuf_x22_a_three_bytes
 dp01_build_cmdbuf_x22_a_three_bytes: @ 8034184

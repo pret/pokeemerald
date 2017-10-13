@@ -64,7 +64,7 @@ SECTIONS {
         asm/battle_controller_player.o(.text);
         asm/battle_7.o(.text);
         asm/battle_controller_opponent.o(.text);
-        asm/battle_9.o(.text);
+        src/battle_ai_switch_items.o(.text);
         asm/battle_controller_linkopponent.o(.text);
         src/pokemon_1.o(.text);
         asm/pokemon_1.o(.text);
@@ -148,7 +148,7 @@ SECTIONS {
         asm/contest_effect.o(.text);
         asm/record_mixing.o(.text);
         asm/secret_base.o(.text);
-        asm/tv.o(.text);
+        src/tv.o(.text);
         asm/contest_link_80F57C4.o(.text);
         asm/script_pokemon_util_80F87D8.o(.text);
         asm/field_poison.o(.text);
@@ -388,7 +388,7 @@ SECTIONS {
         data/contest_effect.o(.rodata);
         data/record_mixing.o(.rodata);
         data/secret_base.o(.rodata);
-        data/tv.o(.rodata);
+        src/tv.o(.rodata);
         data/contest_link_80F57C4.o(.rodata);
         data/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
