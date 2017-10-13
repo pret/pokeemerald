@@ -625,7 +625,7 @@ u8 *WriteColorChangeControlCode(u8 *dest, u32 colorType, u8 color)
     return dest;
 }
 
-bool32 sub_8009228(u8 *str)
+bool32 IsStringJapanese(u8 *str)
 {
     while (*str != EOS)
     {

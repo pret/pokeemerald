@@ -3193,7 +3193,7 @@ _0817E63A:
 	adds r1, r4, 0
 	ldr r2, [sp]
 	ldr r3, [sp, 0x4]
-	bl sub_80ECB00
+	bl PutBattleUpdateOnTheAir
 	b _0817E670
 	.pool
 _0817E65C:
@@ -3205,7 +3205,7 @@ _0817E65C:
 	adds r1, r4, 0
 	ldr r2, [sp]
 	ldr r3, [sp, 0x4]
-	bl sub_80ECB00
+	bl PutBattleUpdateOnTheAir
 _0817E670:
 	add sp, 0x20
 	pop {r3-r5}

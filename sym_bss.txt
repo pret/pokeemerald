@@ -25,16 +25,9 @@
     .include "src/fldeff_cut.o"
     .include "src/script_menu.o"
     .include "src/record_mixing.o"
+    .include "src/tv.o"
 
-gUnknown_03001174: @ 3001174
-	.space 0x1
-
-gUnknown_03001175: @ 3001175
-	.space 0x1
-
-gUnknown_03001176: @ 3001176
-	.space 0x2
-
+    .space 1 @ TODO: define this u32 in mauville_old_man
 gUnknown_03001178: @ 3001178
 	.space 0x4
 

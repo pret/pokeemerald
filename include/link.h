@@ -177,12 +177,12 @@ u32 LinkMain1(u8 *, u16 *, u16[CMD_LENGTH][MAX_LINK_PLAYERS]);
 void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
+u8 GetLinkPlayerCount(void);
 
 void sub_800E0E8(void);
 bool8 sub_800A520(void);
 bool8 sub_8010500(void);
 void sub_800DFB4(u8, u8);
 void sub_800ADF8(void);
-u8 sub_8009FCC(void);
 
 #endif // GUARD_LINK_H
