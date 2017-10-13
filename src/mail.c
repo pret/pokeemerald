@@ -27,10 +27,8 @@
 struct UnkMailStruct
 {
     u32 unk_0_0:2;
-    u32 unk_0_2:2;
-    u32 unk_0_4:4;
-    u32 unk_1_0:4;
-    u32 unk_1_4:1;
+    u32 unk_0_2:6;
+    u32 unk_1:8;
 };
 
 struct MailLayout
@@ -38,9 +36,8 @@ struct MailLayout
     u8 var0;
     u8 var1;
     u8 var2;
-    u8 var3_0:4;
-    u8 var3_4:4;
-    u32 var4;
+    u8 var3;
+    u8 var4;
     const struct UnkMailStruct *var8;
 };
 
@@ -52,7 +49,7 @@ struct Unk203A134
     /*0x0210*/ MainCallback callback2;
     /*0x0214*/ struct MailStruct *mail;
     /*0x0218*/ bool8 flag;
-    /*0x0219*/ u8 unk_0219;
+    /*0x0219*/ u8 signatureWidth;
     /*0x021a*/ u8 mailType;
     /*0x021b*/ u8 unk_021b;
     /*0x021c*/ u8 unk_021c;
@@ -200,47 +197,47 @@ const struct MailGraphics gUnknown_0859F2B8[] = {
 };
 
 const struct UnkMailStruct Unknown_0859F3A8[] = {
-    { .unk_0_0 = 3, .unk_1_4 = TRUE },
-    { .unk_0_0 = 3, .unk_1_4 = TRUE },
-    { .unk_0_0 = 3, .unk_1_4 = TRUE }
+    { .unk_0_0 = 3, .unk_1 = 16 },
+    { .unk_0_0 = 3, .unk_1 = 16 },
+    { .unk_0_0 = 3, .unk_1 = 16 }
 };
 
 const struct MailLayout gUnknown_0859F3B4[] = {
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x08, 0x00, 0x2, 0x0, 0x04, Unknown_0859F3A8 },
-    { 0x03, 0x00, 0x00, 0x2, 0x0, 0x00, Unknown_0859F3A8 }
+    { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x08, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
+    { 0x03, 0x00, 0x00, 0x02, 0x00, Unknown_0859F3A8 }
 };
 
 const struct UnkMailStruct Unknown_0859F444[] = {
-    { .unk_0_0 = 2, .unk_1_4 = TRUE },
-    { .unk_0_0 = 2, .unk_1_4 = TRUE },
-    { .unk_0_0 = 2, .unk_1_4 = TRUE },
-    { .unk_0_0 = 2, .unk_1_4 = TRUE },
-    { .unk_0_0 = 1, .unk_1_4 = TRUE }
+    { .unk_0_0 = 2, .unk_1 = 16 },
+    { .unk_0_0 = 2, .unk_1 = 16 },
+    { .unk_0_0 = 2, .unk_1 = 16 },
+    { .unk_0_0 = 2, .unk_1 = 16 },
+    { .unk_0_0 = 1, .unk_1 = 16 }
 };
 
 const struct MailLayout gUnknown_0859F458[] = {
-    { 0x05, 0x07, 0x58, 0xb, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x0a, 0x60, 0x9, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x0c, 0x68, 0x5, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x05, 0x60, 0x8, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x0a, 0x60, 0x9, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x09, 0x70, 0x5, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x0c, 0x68, 0x9, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x0d, 0x68, 0xd, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x09, 0x60, 0x9, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x09, 0x60, 0x9, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x11, 0x68, 0xf, 0x0, 0x1e, Unknown_0859F444 },
-    { 0x05, 0x09, 0x60, 0x5, 0x0, 0x1e, Unknown_0859F444 }
+    { 0x05, 0x07, 0x58, 0x0b, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x0a, 0x60, 0x09, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x0c, 0x68, 0x05, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x05, 0x60, 0x08, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x0a, 0x60, 0x09, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x09, 0x70, 0x05, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x0c, 0x68, 0x09, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x0d, 0x68, 0x0d, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x09, 0x60, 0x09, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x09, 0x60, 0x09, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x11, 0x68, 0x0f, 0x1e, Unknown_0859F444 },
+    { 0x05, 0x09, 0x60, 0x05, 0x1e, Unknown_0859F444 }
 };
 
 // What the heck are these meant to be? Call them u16 for now.
@@ -481,11 +478,43 @@ void sub_8121A1C(void)
     if (!gUnknown_0203A134->playerIsSender)
     {
         StringCopy(ptr, gText_FromSpace);
-        gUnknown_0203A134->unk_0219 = gUnknown_0203A134->layout->var2 - (StringLength(gUnknown_0203A134->playerName) * 8 - 0x60);
+        gUnknown_0203A134->signatureWidth = gUnknown_0203A134->layout->var2 - (StringLength(gUnknown_0203A134->playerName) * 8 - 0x60);
     }
     else
     {
         sub_81DB52C(gUnknown_0203A134->playerName);
-        gUnknown_0203A134->unk_0219 = gUnknown_0203A134->layout->var2;
+        gUnknown_0203A134->signatureWidth = gUnknown_0203A134->layout->var2;
     }
+}
+
+void sub_8121B1C(void)
+{
+    u16 i;
+    u8 strbuf[0x20];
+    u8 y;
+    u8 *bufptr;
+    s32 box_x;
+    s32 box_y;
+
+    y = 0;
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    FillWindowPixelBuffer(0, 0);
+    FillWindowPixelBuffer(1, 0);
+    for (i = 0; i < gUnknown_0203A134->layout->var0; i ++)
+    {
+        if (gUnknown_0203A134->strbuf[i][0] == EOS || gUnknown_0203A134->strbuf[i][0] == CHAR_SPACE)
+        {
+            continue;
+        }
+        box_print(0, 1, gUnknown_0203A134->layout->var8[i].unk_0_2 + gUnknown_0203A134->layout->var4, y + gUnknown_0203A134->layout->var3, gUnknown_0859F2AC, 0, gUnknown_0203A134->strbuf[i]);
+        y += gUnknown_0203A134->layout->var8[i].unk_1;
+    }
+    bufptr = StringCopy(strbuf, gText_FromSpace);
+    StringCopy(bufptr, gUnknown_0203A134->playerName);
+    box_x = GetStringCenterAlignXOffset(1, strbuf, gUnknown_0203A134->signatureWidth) + 0x68;
+    box_y = gUnknown_0203A134->layout->var1 + 0x58;
+    box_print(0, 1, box_x, box_y, gUnknown_0859F2AC, 0, strbuf);
+    CopyWindowToVram(0, 3);
+    CopyWindowToVram(1, 3);
 }
