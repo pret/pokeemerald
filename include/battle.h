@@ -5,6 +5,7 @@
 #include "battle_util.h"
 #include "battle_script_commands.h"
 #include "battle_2.h"
+#include "battle_ai_switch_items.h"
 
 /*
     Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
@@ -476,7 +477,7 @@ struct BattleHistory
     struct UsedMoves usedMoves[BATTLE_BANKS_COUNT];
     u8 abilities[BATTLE_BANKS_COUNT];
     u8 itemEffects[BATTLE_BANKS_COUNT];
-    u16 TrainerItems[BATTLE_BANKS_COUNT];
+    u16 trainerItems[BATTLE_BANKS_COUNT];
     u8 itemsNo;
 };
 
@@ -632,8 +633,8 @@ struct BattleStruct
     void (*savedCallback)(void);
     u16 usedHeldItems[BATTLE_BANKS_COUNT];
     u8 field_C0[4];
-    u8 field_C4[2];
-    u8 field_C6[2];
+    u8 AI_itemType[2];
+    u8 AI_itemFlags[2];
     u16 choicedMove[BATTLE_BANKS_COUNT];
     u16 changedItems[BATTLE_BANKS_COUNT];
     u8 intimidateBank;

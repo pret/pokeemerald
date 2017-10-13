@@ -153,7 +153,7 @@ _081684CE:
 	movs r1, 0x9
 _081684E4:
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl WallyBufferExecCompleted
 	ldr r1, [r4]
 	adds r1, 0x94
@@ -208,7 +208,7 @@ _08168540:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl WallyBufferExecCompleted
 _08168564:
 	pop {r4,r5}
@@ -3777,7 +3777,7 @@ _0816A550:
 	lsls r2, 1
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl WallyBufferExecCompleted
 _0816A574:
 	pop {r4}
