@@ -1,6 +1,16 @@
 #ifndef GUARD_BG_H
 #define GUARD_BG_H
 
+struct BGCntrlBitfield // for the I/O registers
+{
+    volatile u16 priority:2;
+    volatile u16 charBaseBlock:2;
+    volatile u16 field_0_2:4;
+    volatile u16 field_1_0:5;
+    volatile u16 areaOverflowMode:1;
+    volatile u16 screenSize:2;
+};
+
 enum
 {
     BG_CTRL_ATTR_VISIBLE = 1,

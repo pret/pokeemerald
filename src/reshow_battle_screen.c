@@ -197,17 +197,6 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     gBattleScripting.reshowMainState++;
 }
 
-// todo: find a better place for the struct declaration
-struct BGCntrlBitfield
-{
-    volatile u16 priority:2;
-    volatile u16 charBaseBlock:2;
-    volatile u16 field_0_2:4;
-    volatile u16 field_1_0:5;
-    volatile u16 areaOverflowMode:1;
-    volatile u16 screenSize:2;
-};
-
 static void sub_80A95F4(void)
 {
     struct BGCntrlBitfield *regBgcnt1, *regBgcnt2;

@@ -4510,7 +4510,7 @@ gUnknown_08305D0C:: @ 8305D0C
 @ 8305DCC
 	.include "data/enemy_mon_elevation.inc"
 
-@ 8309AAC
+@ 8305F68
 	.include "data/graphics/pokemon/front_anims.inc"
 
 @ 830A18C
