@@ -12935,7 +12935,7 @@ _081A1118:
 	adds r1, r0, 0
 	mov r0, sp
 	movs r2, 0x2
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	adds r0, r5, 0
 	mov r1, sp
 	bl StringCopy
@@ -18997,7 +18997,7 @@ sub_81A4594: @ 81A4594
 	adds r1, r6, 0x6
 	ldrb r2, [r6, 0xE]
 	add r0, sp, 0xC
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r1, =gUnknown_0203AB74
 	ldrb r0, [r1]
 	mov r3, r8
@@ -19111,7 +19111,7 @@ sub_81A4684: @ 81A4684
 	adds r1, 0xA
 	ldrb r2, [r5, 0x1A]
 	add r0, sp, 0xC
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	ldr r1, =gUnknown_0203AB74
 	ldrb r0, [r1]
 	adds r3, r7, 0x2
@@ -19133,13 +19133,13 @@ sub_81A4684: @ 81A4684
 	adds r4, r5, 0
 	adds r4, 0x12
 	adds r0, r4, 0
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _081A4734
 	add r0, sp, 0xC
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	b _081A473C
 	.pool
 _081A4734:
@@ -28660,7 +28660,7 @@ _081A95EE:
 	lsls r0, r7, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	add sp, 0x8
 	pop {r3,r4}
 	mov r8, r3

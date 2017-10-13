@@ -1963,7 +1963,7 @@ _08033726:
 	lsls r0, r1, 24
 	lsrs r4, r0, 24
 _0803372C:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0

@@ -1162,7 +1162,7 @@ _080E7714:
 	lsrs r0, 24
 	mov r8, r0
 _080E771C:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r8, r0
@@ -1179,7 +1179,7 @@ _080E771C:
 	adds r1, 0x1
 	strh r1, [r0, 0x8]
 _080E773E:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, [sp, 0x8]
@@ -1312,7 +1312,7 @@ sub_80E7820: @ 80E7820
 sub_80E7830: @ 80E7830
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -1341,7 +1341,7 @@ _080E7856:
 	.pool
 _080E7868:
 	movs r0, 0
-	bl sub_800A2A4
+	bl GetLinkPlayerTrainerId
 	adds r2, r0, 0
 	movs r0, 0x1
 	ands r2, r0
@@ -1362,7 +1362,7 @@ _080E7880:
 	.pool
 _080E7894:
 	movs r0, 0
-	bl sub_800A2A4
+	bl GetLinkPlayerTrainerId
 	movs r1, 0x9
 	bl __umodsi3
 	adds r2, r0, 0
@@ -1523,7 +1523,7 @@ _080E79CE:
 	adds r4, r1, 0
 	adds r4, 0x20
 	adds r0, r4, 0
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _080E79F2
 	adds r0, r4, 0
@@ -1738,7 +1738,7 @@ sub_80E7B60: @ 80E7B60
 	ldr r0, =gLinkPlayers
 	ldrh r0, [r0, 0x4]
 	bl SeedRng2
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
@@ -1878,7 +1878,7 @@ _080E7C9A:
 	bne _080E7CEE
 	adds r0, r5, 0
 	adds r0, 0x24
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _080E7CBA
 	adds r0, r5, 0
@@ -1901,7 +1901,7 @@ _080E7CC6:
 	adds r4, r0, 0
 	adds r0, r5, 0
 	adds r0, 0x2C
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _080E7CE2
 	ldrb r0, [r4]
@@ -1931,7 +1931,7 @@ _080E7CFA:
 	lsrs r0, 16
 	mov r8, r0
 _080E7D04:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r8, r0
@@ -3557,7 +3557,7 @@ sub_80E89AC: @ 80E89AC
 	adds r6, r0, 0
 	mov r8, r1
 	mov r9, r2
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

@@ -170,13 +170,13 @@ extern const u8 gText_BattlePyramidFloor[];
 void DisplayPyramidFloorWindow(void)
 {
     // TODO: fix location
-    if (*(u16*)(&gSaveBlock2Ptr->field_CAA[8]) == 7)
+    if (gSaveBlock2Ptr->field_CAA[4] == 7)
         sBattlePyramidFloorWindowId = AddWindow(&gPyramidFloorWindowTemplate_1);
     else
         sBattlePyramidFloorWindowId = AddWindow(&gPyramidFloorWindowTemplate_2);
     PutWindowTilemap(sBattlePyramidFloorWindowId);
     sub_81973FC(sBattlePyramidFloorWindowId, 0);
-    StringCopy(gStringVar1, gUnknown_08510510[*(u16*)(&gSaveBlock2Ptr->field_CAA[8])]);
+    StringCopy(gStringVar1, gUnknown_08510510[gSaveBlock2Ptr->field_CAA[4]]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
     PrintTextOnWindow(sBattlePyramidFloorWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL);
     CopyWindowToVram(sBattlePyramidFloorWindowId, 2);

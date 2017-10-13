@@ -217,7 +217,7 @@ _080F96FC:
 	ldrb r0, [r4, 0x2]
 	bl sub_80F95C0
 	ldr r0, =gText_PkmnFainted3
-	bl box_related_two__2
+	bl ShowFieldMessage
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]

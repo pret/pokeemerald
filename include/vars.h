@@ -53,4 +53,14 @@
 #define VAR_0x40BC                 0x40BC
 #define VAR_0x40C2                 0x40C2
 
+#define VAR_FRONTIER_FACILITY      0x40CF
+
+#define VAR_DAILY_SLOTS            0x40E6
+#define VAR_DAILY_WILDS            0x40E7
+#define VAR_DAILY_BLENDER          0x40E8
+#define VAR_DAILY_PLANTED_BERRIES  0x40E9
+#define VAR_DAILY_PICKED_BERRIES   0x40EA
+#define VAR_DAILY_ROULETTE         0x40EB
+#define VAR_DAILY_BP               0x40F1
+
 #endif // GUARD_VARS_H
