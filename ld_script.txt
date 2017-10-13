@@ -116,7 +116,7 @@ SECTIONS {
         asm/battle_anim.o(.text);
         asm/rom_80A5C6C.o(.text);
         src/task.o(.text);
-        asm/reshow_battle_screen.o(.text);
+        src/reshow_battle_screen.o(.text);
         asm/battle_anim_80A9C70.o(.text);
         asm/title_screen.o(.text);
         asm/field_screen.o(.text);

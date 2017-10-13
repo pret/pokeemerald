@@ -4497,6 +4497,7 @@ gUnknown_08305D0C:: @ 8305D0C
 	.4byte gUnknown_08305CFC
 	.4byte gUnknown_08305D04
 
+
 @ 8305D2C
 	.include "data/graphics/trainers/back_pic_coords.inc"
 
