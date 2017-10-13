@@ -643,29 +643,29 @@ bool8 ScrCmd_fadescreen(struct ScriptContext *ctx)
 
 bool8 ScrCmd_fadescreendelay(struct ScriptContext *ctx)
 {
-    u8 duration = ScriptReadByte(ctx);
+    u8 mode = ScriptReadByte(ctx);
     u8 delay = ScriptReadByte(ctx);
 
-    fade_screen(duration, delay);
+    fade_screen(mode, delay);
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
 
-int ScrCmd_cmdDC(struct ScriptContext *ctx)
+bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
 {
-    u8 duration = ScriptReadByte(ctx);
+    u8 mode = ScriptReadByte(ctx);
     
-    switch (duration)
+    switch (mode)
     {
         case 1:
         default:
             CpuCopy32(gPlttBufferUnfaded, gPaletteDecompressionBuffer, PLTT_DECOMP_BUFFER_SIZE);
-            fade_screen(duration, 0);
+            fade_screen(mode, 0);
             break;
         case 0:
         case 2:
             CpuCopy32(gPaletteDecompressionBuffer, gPlttBufferUnfaded, PLTT_DECOMP_BUFFER_SIZE);
-            fade_screen(duration, 0);
+            fade_screen(mode, 0);
             break;
     }
 
@@ -821,7 +821,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_cmdD7(struct ScriptContext *ctx)
+bool8 ScrCmd_warpD7(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -1282,7 +1282,7 @@ bool8 ScrCmd_message(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdDF(struct ScriptContext *ctx)
+bool8 ScrCmd_pokenavcall(struct ScriptContext *ctx)
 {
     const u8 *msg = (const u8 *)ScriptReadWord(ctx);
 
@@ -1396,7 +1396,7 @@ bool8 ScrCmd_multichoicedefault(struct ScriptContext *ctx)
     }
 }
 
-bool8 ScrCmd_cmd72(struct ScriptContext *ctx)
+bool8 ScrCmd_drawbox(struct ScriptContext *ctx)
 {
     /*u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
@@ -1426,7 +1426,7 @@ bool8 ScrCmd_multichoicegrid(struct ScriptContext *ctx)
     }
 }
 
-bool8 ScrCmd_cmd73(struct ScriptContext *ctx)
+bool8 ScrCmd_erasebox(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
@@ -1437,7 +1437,7 @@ bool8 ScrCmd_cmd73(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmd74(struct ScriptContext *ctx)
+bool8 ScrCmd_drawboxtext(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
@@ -1721,7 +1721,7 @@ bool8 ScrCmd_getitemname(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdE2(struct ScriptContext *ctx)
+bool8 ScrCmd_getitemnameplural(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
@@ -1768,7 +1768,7 @@ bool8 ScrCmd_getstdstring(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdE1(struct ScriptContext *ctx)
+bool8 ScrCmd_getcontesttype(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 index = VarGet(ScriptReadHalfword(ctx));
@@ -1805,7 +1805,7 @@ bool8 ScrCmd_vgetstring(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdC6(struct ScriptContext *ctx)
+bool8 ScrCmd_getboxname(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 boxId = VarGet(ScriptReadHalfword(ctx));
@@ -2242,7 +2242,7 @@ bool8 ScrCmd_setdoorclosed(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdB1(struct ScriptContext *ctx)
+bool8 ScrCmd_addelevmenuitem(struct ScriptContext *ctx)
 {
     u8 v3 = ScriptReadByte(ctx);
     u16 v5 = VarGet(ScriptReadHalfword(ctx));
@@ -2253,7 +2253,7 @@ bool8 ScrCmd_cmdB1(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdB2(struct ScriptContext *ctx)
+bool8 ScrCmd_showelevmenu(struct ScriptContext *ctx)
 {
     /*ScriptShowElevatorMenu();
     ScriptContext1_Stop();
@@ -2290,7 +2290,7 @@ bool8 ScrCmd_takecoins(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdD3(struct ScriptContext *ctx)
+bool8 ScrCmd_mossdeepgym1(struct ScriptContext *ctx)
 {
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
 
@@ -2298,13 +2298,13 @@ bool8 ScrCmd_cmdD3(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdD4(struct ScriptContext *ctx)
+bool8 ScrCmd_mossdeepgym2(struct ScriptContext *ctx)
 {
     sub_81A8AF8();
     return FALSE;
 }
 
-bool8 ScrCmd_cmdD5(struct ScriptContext *ctx)
+bool8 ScrCmd_mossdeepgym3(struct ScriptContext *ctx)
 {
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
 
@@ -2312,7 +2312,7 @@ bool8 ScrCmd_cmdD5(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdD6(struct ScriptContext *ctx)
+bool8 ScrCmd_mossdeepgym4(struct ScriptContext *ctx)
 {
     sub_81A895C();
     return FALSE;
@@ -2341,7 +2341,8 @@ bool8 ScrCmd_cmdD9(struct ScriptContext *ctx)
     }
 }
 
-bool8 ScrCmd_cmdCD(struct ScriptContext *ctx)
+// This command will force the Pokémon to be obedient, you don't get to choose which value to set its obedience to
+bool8 ScrCmd_setpokeobedient(struct ScriptContext *ctx)
 {
     bool8 obedient = TRUE;
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
@@ -2350,7 +2351,7 @@ bool8 ScrCmd_cmdCD(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdCE(struct ScriptContext *ctx)
+bool8 ScrCmd_checkpokeobedience(struct ScriptContext *ctx)
 {
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
 
@@ -2370,7 +2371,7 @@ bool8 ScrCmd_cmdCF(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdD1(struct ScriptContext *ctx)
+bool8 ScrCmd_warpD1(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
@@ -2385,7 +2386,7 @@ bool8 ScrCmd_cmdD1(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_cmdD2(struct ScriptContext *ctx)
+bool8 ScrCmd_setpokemetlocation(struct ScriptContext *ctx)
 {
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
     u8 location = ScriptReadByte(ctx);
@@ -2401,7 +2402,7 @@ void sub_809BDB4(void)
     RemoveWindow(gUnknown_03000F30);
 }
 
-bool8 ScrCmd_cmdDD(struct ScriptContext *ctx)
+bool8 ScrCmd_gettrainerclass(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 trainerClassId = VarGet(ScriptReadHalfword(ctx));
@@ -2410,7 +2411,7 @@ bool8 ScrCmd_cmdDD(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_cmdDE(struct ScriptContext *ctx)
+bool8 ScrCmd_gettrainername(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 trainerClassId = VarGet(ScriptReadHalfword(ctx));
@@ -2424,7 +2425,7 @@ void sub_809BE48(u16 npcId)
     sMovingNpcId = npcId;
 }
 
-bool8 ScrCmd_cmdE0(struct ScriptContext *ctx)
+bool8 ScrCmd_warpE0(struct ScriptContext *ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);

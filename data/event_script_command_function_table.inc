@@ -114,9 +114,9 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_multichoice
 	.4byte ScrCmd_multichoicedefault
 	.4byte ScrCmd_multichoicegrid
-	.4byte ScrCmd_cmd72
-	.4byte ScrCmd_cmd73
-	.4byte ScrCmd_cmd74
+	.4byte ScrCmd_drawbox
+	.4byte ScrCmd_erasebox
+	.4byte ScrCmd_drawboxtext
 	.4byte ScrCmd_drawpokepic
 	.4byte ScrCmd_erasepokepic
 	.4byte ScrCmd_drawcontestwinner
@@ -177,8 +177,8 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_waitdooranim
 	.4byte ScrCmd_setdooropen
 	.4byte ScrCmd_setdoorclosed
-	.4byte ScrCmd_cmdB1
-	.4byte ScrCmd_cmdB2
+	.4byte ScrCmd_addelevmenuitem
+	.4byte ScrCmd_showelevmenu
 	.4byte ScrCmd_checkcoins
 	.4byte ScrCmd_givecoins
 	.4byte ScrCmd_takecoins
@@ -198,32 +198,32 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_incrementgamestat
 	.4byte ScrCmd_setescapewarp
 	.4byte ScrCmd_waitpokecry
-	.4byte ScrCmd_cmdC6
+	.4byte ScrCmd_getboxname
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_nop1
-	.4byte ScrCmd_cmdCD
-	.4byte ScrCmd_cmdCE
+	.4byte ScrCmd_setpokeobedient
+	.4byte ScrCmd_checkpokeobedience
 	.4byte ScrCmd_cmdCF
 	.4byte ScrCmd_nop1
-	.4byte ScrCmd_cmdD1
-	.4byte ScrCmd_cmdD2
-	.4byte ScrCmd_cmdD3
-	.4byte ScrCmd_cmdD4
-	.4byte ScrCmd_cmdD5
-	.4byte ScrCmd_cmdD6
-	.4byte ScrCmd_cmdD7
+	.4byte ScrCmd_warpD1
+	.4byte ScrCmd_setpokemetlocation
+	.4byte ScrCmd_mossdeepgym1
+	.4byte ScrCmd_mossdeepgym2
+	.4byte ScrCmd_mossdeepgym3
+	.4byte ScrCmd_mossdeepgym4
+	.4byte ScrCmd_warpD7
 	.4byte ScrCmd_cmdD8
 	.4byte ScrCmd_cmdD9
 	.4byte ScrCmd_cmdDA
 	.4byte ScrCmd_cmdDB
-	.4byte ScrCmd_cmdDC
-	.4byte ScrCmd_cmdDD
-	.4byte ScrCmd_cmdDE
-	.4byte ScrCmd_cmdDF
-	.4byte ScrCmd_cmdE0
-	.4byte ScrCmd_cmdE1
-	.4byte ScrCmd_cmdE2
+	.4byte ScrCmd_fadescreenswapbuffers
+	.4byte ScrCmd_gettrainerclass
+	.4byte ScrCmd_gettrainername
+	.4byte ScrCmd_pokenavcall
+	.4byte ScrCmd_warpE0
+	.4byte ScrCmd_getcontesttype
+	.4byte ScrCmd_getitemnameplural
