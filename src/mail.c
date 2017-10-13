@@ -10,6 +10,9 @@
 #include "menu_helpers.h"
 #include "text.h"
 #include "text_window.h"
+#include "string_util.h"
+#include "international_string_util.h"
+#include "strings.h"
 #include "gpu_regs.h"
 #include "bg.h"
 #include "pokemon_icon.h"
@@ -23,11 +26,11 @@
 
 struct UnkMailStruct
 {
-    u8 unk_0_0:2;
-    u8 unk_0_2:2;
-    u8 unk_0_4:4;
-    u8 unk_1_0:4;
-    u8 unk_1_4:1;
+    u32 unk_0_0:2;
+    u32 unk_0_2:2;
+    u32 unk_0_4:4;
+    u32 unk_1_0:4;
+    u32 unk_1_4:1;
 };
 
 struct MailLayout
@@ -43,12 +46,13 @@ struct MailLayout
 
 struct Unk203A134
 {
-    /*0x0000*/ u8 filler_0000[0x20c];
+    /*0x0000*/ u8 strbuf[8][64];
+    /*0x0200*/ u8 playerName[12];
     /*0x020C*/ MainCallback callback;
     /*0x0210*/ MainCallback callback2;
     /*0x0214*/ struct MailStruct *mail;
     /*0x0218*/ bool8 flag;
-    /*0x0219*/ u8 filler_0219[1];
+    /*0x0219*/ u8 unk_0219;
     /*0x021a*/ u8 mailType;
     /*0x021b*/ u8 unk_021b;
     /*0x021c*/ u8 unk_021c;
@@ -115,9 +119,8 @@ const struct WindowTemplate gUnknown_0859F29C[] = {
         .height = 15,
         .paletteNum = 15,
         .baseBlock = 1
-    }, {
-        .priority = -1
-    }
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
 const u8 gUnknown_0859F2AC[] = {
@@ -239,6 +242,8 @@ const struct MailLayout gUnknown_0859F458[] = {
     { 0x05, 0x11, 0x68, 0xf, 0x0, 0x1e, Unknown_0859F444 },
     { 0x05, 0x09, 0x60, 0x5, 0x0, 0x1e, Unknown_0859F444 }
 };
+
+// What the heck are these meant to be? Call them u16 for now.
 
 const u16 Unknown_0859F4E8[] = {
     0x00, 0x4000, 0x00, 0x00
@@ -458,4 +463,29 @@ void sub_81219F0(void)
             break;
         }
     } while (sub_81221AC() != TRUE);
+}
+
+void sub_8121A1C(void)
+{
+    u16 i;
+    u8 total;
+    u8 *ptr;
+
+    total = 0;
+    for (i = 0; i < gUnknown_0203A134->layout->var0; i ++)
+    {
+        ConvertEasyChatWordsToString(gUnknown_0203A134->strbuf[i], &gUnknown_0203A134->mail->words[total], gUnknown_0203A134->layout->var8[i].unk_0_0, 1);
+        total += gUnknown_0203A134->layout->var8[i].unk_0_0;
+    }
+    ptr = StringCopy(gUnknown_0203A134->playerName, gUnknown_0203A134->mail->playerName);
+    if (!gUnknown_0203A134->playerIsSender)
+    {
+        StringCopy(ptr, gText_FromSpace);
+        gUnknown_0203A134->unk_0219 = gUnknown_0203A134->layout->var2 - (StringLength(gUnknown_0203A134->playerName) * 8 - 0x60);
+    }
+    else
+    {
+        sub_81DB52C(gUnknown_0203A134->playerName);
+        gUnknown_0203A134->unk_0219 = gUnknown_0203A134->layout->var2;
+    }
 }
