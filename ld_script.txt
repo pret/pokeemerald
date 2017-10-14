@@ -456,7 +456,6 @@ SECTIONS {
         data/item_icon.o(.rodata);
         data/party_menu.o(.rodata);
         src/battle_tent.o(.rodata);
-        data/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
         data/unk_81BAD84.o(.rodata);
         data/battle_controller_player_partner.o(.rodata);
