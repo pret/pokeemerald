@@ -241,14 +241,14 @@
 	@ Calls a special function; that is, a piece of ASM code designed for use by scripts and listed in a table of pointers.
 	.macro special function
 	.byte 0x25
-	.2byte \function
+	.2byte SPECIAL_\function
 	.endm
 
 	@ Calls a special function. That function's output (if any) will be written to the variable you specify.
 	.macro specialval output, function
 	.byte 0x26
 	.2byte \output
-	.2byte \function
+	.2byte SPECIAL_\function
 	.endm
 
 	@ Blocks script execution until a command or ASM code manually unblocks it. Generally used with specific commands and specials. If this command runs, and a subsequent command or piece of ASM does not unblock state, the script will remain blocked indefinitely (essentially a hang).
