@@ -230,7 +230,7 @@ struct SaveBlock2
     /*0x???*/ u8 field_notSure[9];
     /*0xE6A*/ u16 field_E6A;
     /*0xE6C*/ u16 field_E6C;
-    /*0xE6E*/ u16 battleTentWinStreak;
+    /*0xE6E*/ u16 field_E6E;
     /*0xE70*/ u8 field_E70[72];
     /*0xEB8*/ u16 frontierBattlePoints;
     /*0xEBA*/ u8 field_EBA[39];

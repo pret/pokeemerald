@@ -204,3 +204,64 @@ void sub_81B9CF0(void)
 {
     GetFrontierTrainerName(gStringVar1, gTrainerBattleOpponent_A);
 }
+
+void sub_81B9D08(void)
+{
+    gUnknown_086160F8[gSpecialVar_0x8004]();
+}
+
+void sub_81B9D28(void)
+{
+    gSaveBlock2Ptr->field_CA8 = 0;
+    gSaveBlock2Ptr->field_CB2 = 0;
+    gSaveBlock2Ptr->field_CA9_a = FALSE;
+    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+}
+
+void sub_81B9D7C(void)
+{
+    gScriptResult = gSaveBlock2Ptr->field_E6E;
+}
+
+void sub_81B9D98(void)
+{
+    gSaveBlock2Ptr->field_E6E = gSpecialVar_0x8006;
+}
+
+void sub_81B9DB4(void)
+{
+    gSaveBlock2Ptr->field_CA8 = gSpecialVar_0x8005;
+    VarSet(VAR_0x4000, 0);
+    gSaveBlock2Ptr->field_CA9_a = TRUE;
+    sub_81A4C30();
+}
+
+void sub_81B9DF8(void)
+{
+    gSaveBlock2Ptr->field_E6E = gUnknown_08616120[Random() % 1];
+}
+
+void sub_81B9E20(void)
+{
+    if (AddBagItem(gSaveBlock2Ptr->field_E6E, 1) == TRUE)
+    {
+        CopyItemName(gSaveBlock2Ptr->field_E6E, gStringVar1);
+        gSaveBlock2Ptr->field_E6E = ITEM_NONE;
+        gScriptResult = TRUE;
+    }
+    else
+    {
+        gScriptResult = FALSE;
+    }
+}
+
+void sub_81B9E78(void)
+{
+    ZeroPlayerPartyMons();
+    sub_819A4F8();
+}
+
+void sub_81B9E88(void)
+{
+    sub_819DC00();
+}
