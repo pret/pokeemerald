@@ -53,7 +53,7 @@ void (*const gUnknown_086160B4[])(void) = {
     sub_81B9B28
 };
 
-const u16 gUnknown_086160D4 = 0x08;
+const u16 gUnknown_086160D4[] = {0x08, 0};
 
 void (*const gUnknown_086160D8[])(void) = {
     sub_81B9BA0,
@@ -65,7 +65,7 @@ void (*const gUnknown_086160D8[])(void) = {
     sub_81B9CF0
 };
 
-const u16 gUnknown_086160F4 = 0x15;
+const u16 gUnknown_086160F4[] = {0x15, 0};
 
 void (*const gUnknown_086160F8[])(void) = {
     sub_81B9D28,
@@ -80,10 +80,7 @@ void (*const gUnknown_086160F8[])(void) = {
     sub_81B9EC0
 };
 
-const u16 gUnknown_08616120 = 0x17;
-
-asm(".section .rodata\n"
-    "\t.align 2, 0"); // because gcc doesn't do it on its own
+const u16 gUnknown_08616120[] = {0x17, 0};
 
 // .text
 
@@ -130,4 +127,9 @@ void sub_81B9ABC(void)
     VarSet(VAR_0x4000, 0);
     gSaveBlock2Ptr->field_CA9_a = TRUE;
     sub_81A4C30();
+}
+
+void sub_81B9B00(void)
+{
+    gSaveBlock2Ptr->field_E6A = gUnknown_086160D4[Random() % 1];
 }

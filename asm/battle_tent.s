@@ -5,23 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81B9B00
-sub_81B9B00: @ 81B9B00
-	push {r4,r5,lr}
-	ldr r0, =gSaveBlock2Ptr
-	ldr r4, [r0]
-	ldr r5, =gUnknown_086160D4
-	bl Random
-	ldrh r0, [r5]
-	ldr r1, =0x00000e6a
-	adds r4, r1
-	strh r0, [r4]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81B9B00
-
 	thumb_func_start sub_81B9B28
 sub_81B9B28: @ 81B9B28
 	push {r4,r5,lr}
