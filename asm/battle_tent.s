@@ -5,46 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81B9B28
-sub_81B9B28: @ 81B9B28
-	push {r4,r5,lr}
-	ldr r4, =gSaveBlock2Ptr
-	ldr r0, [r4]
-	ldr r1, =0x00000e6a
-	adds r0, r1
-	ldrh r0, [r0]
-	movs r1, 0x1
-	bl AddBagItem
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x1
-	bne _081B9B70
-	ldr r0, [r4]
-	ldr r1, =0x00000e6a
-	adds r0, r1
-	ldrh r0, [r0]
-	ldr r1, =gStringVar1
-	bl CopyItemName
-	ldr r0, [r4]
-	ldr r1, =0x00000e6a
-	adds r0, r1
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, =gScriptResult
-	strh r5, [r0]
-	b _081B9B76
-	.pool
-_081B9B70:
-	ldr r1, =gScriptResult
-	movs r0, 0
-	strh r0, [r1]
-_081B9B76:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81B9B28
-
 	thumb_func_start sub_81B9B80
 sub_81B9B80: @ 81B9B80
 	push {lr}

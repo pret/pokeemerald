@@ -7,6 +7,8 @@
 #include "battle_tower.h"
 #include "battle_frontier_2.h"
 #include "rng.h"
+#include "item.h"
+#include "items.h"
 
 // Static type declarations
 
@@ -53,7 +55,7 @@ void (*const gUnknown_086160B4[])(void) = {
     sub_81B9B28
 };
 
-const u16 gUnknown_086160D4[] = {0x08, 0};
+const u16 gUnknown_086160D4[] = {ITEM_NEST_BALL, ITEM_NONE};
 
 void (*const gUnknown_086160D8[])(void) = {
     sub_81B9BA0,
@@ -65,7 +67,7 @@ void (*const gUnknown_086160D8[])(void) = {
     sub_81B9CF0
 };
 
-const u16 gUnknown_086160F4[] = {0x15, 0};
+const u16 gUnknown_086160F4[] = {ITEM_HYPER_POTION, ITEM_NONE};
 
 void (*const gUnknown_086160F8[])(void) = {
     sub_81B9D28,
@@ -80,7 +82,7 @@ void (*const gUnknown_086160F8[])(void) = {
     sub_81B9EC0
 };
 
-const u16 gUnknown_08616120[] = {0x17, 0};
+const u16 gUnknown_08616120[] = {ITEM_FULL_HEAL, ITEM_NONE};
 
 // .text
 
@@ -132,4 +134,18 @@ void sub_81B9ABC(void)
 void sub_81B9B00(void)
 {
     gSaveBlock2Ptr->field_E6A = gUnknown_086160D4[Random() % 1];
+}
+
+void sub_81B9B28(void)
+{
+    if (AddBagItem(gSaveBlock2Ptr->field_E6A, 1) == TRUE)
+    {
+        CopyItemName(gSaveBlock2Ptr->field_E6A, gStringVar1);
+        gSaveBlock2Ptr->field_E6A = ITEM_NONE;
+        gScriptResult = TRUE;
+    }
+    else
+    {
+        gScriptResult = FALSE;
+    }
 }
