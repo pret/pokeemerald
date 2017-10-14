@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81B9A60
-sub_81B9A60: @ 81B9A60
-	push {r4,lr}
-	ldr r4, =gTrainerBattleOpponent_A
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0xFF
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, r0, 2
-	adds r1, r0
-	lsrs r1, 6
-	strh r1, [r4]
-	ldrh r0, [r4]
-	movs r1, 0
-	bl sub_8162614
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81B9A60
-
 	thumb_func_start sub_81B9A90
 sub_81B9A90: @ 81B9A90
 	push {lr}

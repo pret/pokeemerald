@@ -3,6 +3,9 @@
 #include "global.h"
 #include "overworld.h"
 #include "event_data.h"
+#include "battle.h"
+#include "battle_tower.h"
+#include "rng.h"
 
 // Static type declarations
 
@@ -104,4 +107,10 @@ void sub_81B9A28(void)
 void sub_81B9A44(void)
 {
     gSaveBlock2Ptr->field_E6A = gSpecialVar_0x8006;
+}
+
+void sub_81B9A60(void)
+{
+    gTrainerBattleOpponent_A = (u32)((Random() % 255) * 5) >> 6;
+    sub_8162614(gTrainerBattleOpponent_A, 0);
 }
