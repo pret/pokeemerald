@@ -29,6 +29,7 @@ void Overworld_SetMapObjTemplateMovementType(u8, u8);
 
 void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
+void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void Overworld_SetHealLocationWarp(u8);
 void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);

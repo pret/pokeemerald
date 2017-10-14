@@ -188,7 +188,9 @@ struct SaveBlock2
     /*0xAC*/ u32 encryptionKey;
 
         // TODO: fix and verify labels
-    /*0xB0*/ u8 field_B0[316];
+    /*0xB0*/ u8 field_B0[0x54];
+    /*0x104*/ u16 ecwords_104[6];
+    /*0x110*/ u8 field_110[0xDC];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
@@ -198,12 +200,17 @@ struct SaveBlock2
         // All below could be a one giant struct
 
     /*0x64C*/ u8 field_64C[0x588];
-    /*0xBD4*/ u16 field_BD4;
-    /*0xBD6*/ u16 field_BD6;
-    /*0xBD8*/ u8 field_BD8[11];
-    /*0xBE3*/ u8 filler_BE3[8];
-    /*0xBEB*/ u8 field_BEB;
-    /*0xBE3*/ u8 filler_BEC[189];
+    /*0xBD4*/ u16 battleTowerSpecies;
+    /*0xBD6*/ u16 battleTowerDefeatedSpecies;
+    /*0xBD8*/ u8 battleTowerNickname[11];
+    /*0xBE3*/ u8 field_BE3[8];
+    /*0xBEB*/ u8 battleTowerNicknameLanguage;
+    /*0xBEC*/ u8 filler_BEC[16];
+    /*0xBFC*/ u16 ecwords_BFC[6];
+    /*0xC08*/ u16 ecwords_C08[6];
+    /*0xC14*/ u16 ecwords_C14[6];
+    /*0xC20*/ u8 filler_C20[0x88];
+    /*0xCA8*/ u8 field_CA8;
     /*0xCA9*/ u8 frontierChosenLvl : 2; // 0x1, 0x2 -> 0x3
     /*0xCA9*/ u8 field_CA9_a : 1;   // 0x4
     /*0xCA9*/ u8 field_CA9_b : 1;   // 0x8
@@ -211,15 +218,19 @@ struct SaveBlock2
     /*0xCA9*/ u8 field_CA9_d : 1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e : 1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
-    /*0xCAA*/ u16 field_CAA[0x2e];
-    /*0xD06*/ u8 field_D06;
-    /*0xD07*/ u8 field_D07;
+    /*0xCAA*/ u16 battleTowerPartyIdxs[4];
+    /*0xCB2*/ u16 field_CB2;
+    /*0xCB4*/ u8 filler_CB4[0x52];
+    /*0xD06*/ u8 battleTowerWonTheChallenge;
+    /*0xD07*/ u8 battleTowerChosenLvl;
     /*0xd08*/ u8 filler_D08[0x112];
     /*0xE1A*/ u16 battlePyramidFloor; // possibly?
     /*0xE1C*/ u8 field_E1C[16];
     /*0xE2C*/ struct PyramidBag pyramidBag;
-    /*0x???*/ u8 field_notSure[13];
-    /*0xE6E*/ u16 battleTentWinStreak;
+    /*0x???*/ u8 field_notSure[9];
+    /*0xE6A*/ u16 field_E6A;
+    /*0xE6C*/ u16 field_E6C;
+    /*0xE6E*/ u16 field_E6E;
     /*0xE70*/ u8 field_E70[72];
     /*0xEB8*/ u16 frontierBattlePoints;
     /*0xEBA*/ u8 field_EBA[39];

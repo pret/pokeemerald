@@ -1,5 +1,5 @@
-#ifndef GUARD_international_string_util_H
-#define GUARD_international_string_util_H
+#ifndef GUARD_INTERNATIONAL_STRING_UTIL_H
+#define GUARD_INTERNATIONAL_STRING_UTIL_H
 
 // Exported type declarations
 
@@ -10,4 +10,4 @@
 void TVShowConvertInternationalString(void *dest, const void *src, u8 language);
 u32 sub_81DB604(const u8 *);
 
-#endif //GUARD_international_string_util_H
+#endif //GUARD_INTERNATIONAL_STRING_UTIL_H
