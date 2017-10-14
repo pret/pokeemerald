@@ -114,3 +114,11 @@ void sub_81B9A60(void)
     gTrainerBattleOpponent_A = (u32)((Random() % 255) * 5) >> 6;
     sub_8162614(gTrainerBattleOpponent_A, 0);
 }
+
+void sub_81B9A90(void)
+{
+    if (gTrainerBattleOpponent_A < 300)
+    {
+        ConvertBattleFrontierTrainerSpeechToString(gUnknown_0203BC88[gTrainerBattleOpponent_A].speechBefore);
+    }
+}

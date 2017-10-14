@@ -5,27 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81B9A90
-sub_81B9A90: @ 81B9A90
-	push {lr}
-	ldr r3, =gTrainerBattleOpponent_A
-	ldrh r1, [r3]
-	ldr r0, =0x0000012b
-	cmp r1, r0
-	bhi _081B9AAC
-	ldr r2, =gUnknown_0203BC88
-	movs r0, 0x34
-	muls r1, r0
-	ldr r0, [r2]
-	adds r0, r1
-	adds r0, 0xC
-	bl ConvertBattleFrontierTrainerSpeechToString
-_081B9AAC:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81B9A90
-
 	thumb_func_start sub_81B9ABC
 sub_81B9ABC: @ 81B9ABC
 	push {r4,lr}

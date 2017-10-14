@@ -188,7 +188,9 @@ struct SaveBlock2
     /*0xAC*/ u32 encryptionKey;
 
         // TODO: fix and verify labels
-    /*0xB0*/ u8 field_B0[316];
+    /*0xB0*/ u8 field_B0[0x54];
+    /*0x104*/ u16 ecwords_104[6];
+    /*0x110*/ u8 field_110[0xDC];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
@@ -203,7 +205,11 @@ struct SaveBlock2
     /*0xBD8*/ u8 battleTowerNickname[11];
     /*0xBE3*/ u8 field_BE3[8];
     /*0xBEB*/ u8 battleTowerNicknameLanguage;
-    /*0xBE3*/ u8 filler_BEC[188];
+    /*0xBEC*/ u8 filler_BEC[16];
+    /*0xBFC*/ u16 ecwords_BFC[6];
+    /*0xC08*/ u16 ecwords_C08[6];
+    /*0xC14*/ u16 ecwords_C14[6];
+    /*0xC20*/ u8 filler_C20[0x88];
     /*0xCA8*/ u8 field_CA8;
     /*0xCA9*/ u8 frontierChosenLvl : 2; // 0x1, 0x2 -> 0x3
     /*0xCA9*/ u8 field_CA9_a : 1;   // 0x4
