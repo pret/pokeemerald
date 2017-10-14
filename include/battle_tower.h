@@ -15,5 +15,6 @@ extern struct BattleFrontierTrainer *gUnknown_0203BC88;
 u16 sub_8164FCC(u8, u8);
 void sub_8162614(u16, u8);
 void ConvertBattleFrontierTrainerSpeechToString(u16 *words);
+void GetFrontierTrainerName(u8 *dest, u16 trainerIdx);
 
 #endif //GUARD_BATTLE_TOWER_H

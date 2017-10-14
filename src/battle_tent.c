@@ -149,3 +149,58 @@ void sub_81B9B28(void)
         gScriptResult = FALSE;
     }
 }
+
+void sub_81B9B80(void)
+{
+    gUnknown_086160D8[gSpecialVar_0x8004]();
+}
+
+void sub_81B9BA0(void)
+{
+    gSaveBlock2Ptr->field_CA8 = 0;
+    gSaveBlock2Ptr->field_CB2 = 0;
+    gSaveBlock2Ptr->field_CA9_a = FALSE;
+    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+}
+
+void sub_81B9BF4(void)
+{
+    gScriptResult = gSaveBlock2Ptr->field_E6C;
+}
+
+void sub_81B9C10(void)
+{
+    gSaveBlock2Ptr->field_E6C = gSpecialVar_0x8006;
+}
+
+void sub_81B9C2C(void)
+{
+    gSaveBlock2Ptr->field_CA8 = gSpecialVar_0x8005;
+    VarSet(VAR_0x4000, 0);
+    gSaveBlock2Ptr->field_CA9_a = TRUE;
+    sub_81A4C30();
+}
+
+void sub_81B9C70(void)
+{
+    gSaveBlock2Ptr->field_E6C = gUnknown_086160F4[Random() % 1];
+}
+
+void sub_81B9C98(void)
+{
+    if (AddBagItem(gSaveBlock2Ptr->field_E6C, 1) == TRUE)
+    {
+        CopyItemName(gSaveBlock2Ptr->field_E6C, gStringVar1);
+        gSaveBlock2Ptr->field_E6C = ITEM_NONE;
+        gScriptResult = TRUE;
+    }
+    else
+    {
+        gScriptResult = FALSE;
+    }
+}
+
+void sub_81B9CF0(void)
+{
+    GetFrontierTrainerName(gStringVar1, gTrainerBattleOpponent_A);
+}
