@@ -5,34 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81B9ABC
-sub_81B9ABC: @ 81B9ABC
-	push {r4,lr}
-	ldr r4, =gSaveBlock2Ptr
-	ldr r0, [r4]
-	ldr r1, =gSpecialVar_0x8005
-	ldrh r1, [r1]
-	ldr r2, =0x00000ca8
-	adds r0, r2
-	strb r1, [r0]
-	movs r0, 0x80
-	lsls r0, 7
-	movs r1, 0
-	bl VarSet
-	ldr r1, [r4]
-	ldr r0, =0x00000ca9
-	adds r1, r0
-	ldrb r0, [r1]
-	movs r2, 0x4
-	orrs r0, r2
-	strb r0, [r1]
-	bl sub_81A4C30
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81B9ABC
-
 	thumb_func_start sub_81B9B00
 sub_81B9B00: @ 81B9B00
 	push {r4,r5,lr}

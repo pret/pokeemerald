@@ -5,6 +5,7 @@
 #include "event_data.h"
 #include "battle.h"
 #include "battle_tower.h"
+#include "battle_frontier_2.h"
 #include "rng.h"
 
 // Static type declarations
@@ -95,7 +96,7 @@ void sub_81B99D4(void)
 {
     gSaveBlock2Ptr->field_CA8 = 0;
     gSaveBlock2Ptr->field_CB2 = 0;
-    gSaveBlock2Ptr->field_CA9_a = 0;
+    gSaveBlock2Ptr->field_CA9_a = FALSE;
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
 
@@ -121,4 +122,12 @@ void sub_81B9A90(void)
     {
         ConvertBattleFrontierTrainerSpeechToString(gUnknown_0203BC88[gTrainerBattleOpponent_A].speechBefore);
     }
+}
+
+void sub_81B9ABC(void)
+{
+    gSaveBlock2Ptr->field_CA8 = gSpecialVar_0x8005;
+    VarSet(VAR_0x4000, 0);
+    gSaveBlock2Ptr->field_CA9_a = TRUE;
+    sub_81A4C30();
 }
