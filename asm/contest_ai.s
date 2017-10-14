@@ -144,7 +144,7 @@ sub_81563B0: @ 81563B0
 	beq _081564A0
 	adds r7, r5, 0
 	ldr r6, =gAIScriptPtr
-	ldr r0, =gUnknown_02039E1E
+	ldr r0, =gUnknown_02039E00 + 30
 	mov r8, r0
 _081563CC:
 	ldr r0, [r7]
@@ -5030,7 +5030,7 @@ sub_8158948: @ 8158948
 	push {r4-r6,lr}
 	movs r5, 0
 	movs r4, 0
-	ldr r6, =gUnknown_02039E1E
+	ldr r6, =gUnknown_02039E00 + 30
 _08158950:
 	lsls r1, r4, 1
 	ldr r0, =gUnknown_02039F34

@@ -114,7 +114,7 @@ void sub_80FC190(void)
     {
         SetMainCallback2(c2_exit_to_overworld_2_switch);
     }
-    else if (gBattleOutcome == 8)
+    else if (gBattleOutcome == BATTLE_SAFARI_OUT_OF_BALLS)
     {
         ScriptContext2_RunNewScript(gUnknown_082A4B4C);
         warp_in();

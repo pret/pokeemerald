@@ -1795,7 +1795,7 @@ _08162ED8:
 	adds r0, 0xE4
 	ldrb r2, [r0]
 	adds r0, r6, 0
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	b _08162F62
 	.pool
 _08162F00:
@@ -1835,7 +1835,7 @@ _08162F3E:
 	adds r1, r0, 0
 	adds r0, r6, 0
 	adds r2, r4, 0
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	b _08162F62
 	.pool
 _08162F5C:
@@ -5673,7 +5673,7 @@ _0816508C:
 	bl SetMonData
 	ldr r0, [r7]
 	adds r0, r4
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	strb r0, [r5, 0x1]
 _081650D4:
 	adds r5, 0x4

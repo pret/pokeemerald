@@ -1772,11 +1772,11 @@ u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef)
     return flags;
 }
 
-u8 AI_TypeCalc(u16 move, u16 species, u8 ability)
+u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
 {
     s32 i = 0;
     u8 flags = 0;
-    u8 type1 = gBaseStats[species].type1, type2 = gBaseStats[species].type2;
+    u8 type1 = gBaseStats[targetSpecies].type1, type2 = gBaseStats[targetSpecies].type2;
     u8 moveType;
 
     if (move == MOVE_STRUGGLE)
@@ -1784,7 +1784,7 @@ u8 AI_TypeCalc(u16 move, u16 species, u8 ability)
 
     moveType = gBattleMoves[move].type;
 
-    if (ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
         flags = MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED;
     }
@@ -1809,7 +1809,7 @@ u8 AI_TypeCalc(u16 move, u16 species, u8 ability)
             i += 3;
         }
     }
-    if (ability == ABILITY_WONDER_GUARD
+    if (targetAbility == ABILITY_WONDER_GUARD
      && (!(flags & MOVESTATUS_SUPEREFFECTIVE) || ((flags & (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)) == (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)))
      && gBattleMoves[move].power)
         flags |= MOVESTATUS_NOTAFFECTED;
@@ -11087,7 +11087,7 @@ static void atkEF_pokeball_catch_calculation(void)
         {
             if (gLastUsedItem == ITEM_MASTER_BALL)
             {
-                gBattleResults.unk5_1 = 1;
+                gBattleResults.usedMasterBall = TRUE;
             }
             else
             {

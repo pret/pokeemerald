@@ -15872,7 +15872,7 @@ sub_81B8958: @ 81B8958
 	thumb_func_start sub_81B8984
 sub_81B8984: @ 81B8984
 	push {lr}
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B8994
@@ -16222,7 +16222,7 @@ _081B8CB0:
 	strb r0, [r6, 0x2]
 	b _081B8D58
 _081B8CBE:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B8CFC
@@ -16382,7 +16382,7 @@ _081B8DE2:
 	strb r0, [r5, 0x2]
 	b _081B8E72
 _081B8DF0:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B8E28

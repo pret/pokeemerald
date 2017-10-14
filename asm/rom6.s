@@ -4121,7 +4121,7 @@ _081377BC:
 	add r2, sp, 0x18
 	bl SetMonData
 	adds r0, r4, 0
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	strb r0, [r5, 0x1]
 	movs r7, 0x1
 _0813780A:
@@ -5399,13 +5399,13 @@ sub_8138240: @ 8138240
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
 	cmp r4, r5
 	bcs _0813828A
-	ldr r0, =gUnknown_0858D144
+	ldr r0, =gTVStringVarPtrs
 	mov r8, r0
 _08138262:
 	cmp r7, r4
@@ -7519,7 +7519,7 @@ sub_8139370: @ 8139370
 	mov r2, sp
 	bl SetMonData
 	adds r0, r4, 0
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -8050,7 +8050,7 @@ sub_81397C4: @ 81397C4
 	cmp r1, r0
 	bls _081397E0
 	movs r0, 0
-	bl sub_80EF340
+	bl TV_PrintIntToStringVar
 	b _08139862
 	.pool
 _081397E0:

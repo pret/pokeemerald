@@ -125,7 +125,7 @@ _08184EAC:
 	bl GetMultiplayerId
 	ldr r1, =gUnknown_0203C7B4
 	strb r0, [r1]
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -505,7 +505,7 @@ _081851D0:
 	adds r4, 0x1C
 	adds r5, 0x1
 _081851DA:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0

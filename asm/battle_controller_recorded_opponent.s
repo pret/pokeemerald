@@ -198,11 +198,11 @@ sub_8186678: @ 8186678
 	push {r6,r7}
 	movs r0, 0
 	mov r9, r0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _081866A4
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _081866F8
@@ -504,7 +504,7 @@ _081868DE:
 	ands r0, r1
 	cmp r0, 0
 	bne _08186994
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08186964
@@ -529,7 +529,7 @@ _081868DE:
 	ldr r2, =gEnemyParty
 	adds r1, r2
 	movs r2, 0
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r7]
 	eors r0, r6
 	bl sub_8076918
@@ -537,7 +537,7 @@ _081868DE:
 	eors r0, r6
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 _08186964:
 	ldr r5, =gHealthBoxesIds
 	ldr r4, =gActiveBank
@@ -553,13 +553,13 @@ _08186964:
 	ldr r2, =gEnemyParty
 	adds r1, r2
 	movs r2, 0
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r4]
 	bl sub_8076918
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 _08186994:
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
@@ -655,7 +655,7 @@ _08186A4C:
 	movs r0, 0x1
 	mov r9, r0
 _08186A6A:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08186AC8
@@ -742,7 +742,7 @@ _08186B26:
 	mov r0, r8
 	cmp r0, 0
 	beq _08186C10
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08186B8A
@@ -781,7 +781,7 @@ _08186B26:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_805EE54
+	bl SetBankEnemyShadowSpriteCallback
 _08186B8A:
 	ldr r1, =gUnknown_03005D7C
 	ldr r4, =gActiveBank
@@ -809,7 +809,7 @@ _08186B8A:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r5, 0
-	bl sub_805EE54
+	bl SetBankEnemyShadowSpriteCallback
 	ldr r3, =gBattleSpritesDataPtr
 	ldr r0, [r3]
 	ldr r2, [r0, 0x8]
@@ -955,7 +955,7 @@ sub_8186D04: @ 8186D04
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r1, r4, 16
 	movs r0, 0x1
@@ -998,7 +998,7 @@ sub_8186D58: @ 8186D58
 	ldr r0, =gHealthBoxesIds
 	adds r0, r3, r0
 	ldrb r0, [r0]
-	bl sub_8072984
+	bl SetHealthboxSpriteInvisible
 	bl RecordedOpponentBufferExecCompleted
 _08186D86:
 	pop {r0}
@@ -1046,7 +1046,7 @@ sub_8186D9C: @ 8186D9C
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8072984
+	bl SetHealthboxSpriteInvisible
 	bl RecordedOpponentBufferExecCompleted
 _08186DF6:
 	pop {r4-r6}
@@ -1302,13 +1302,13 @@ sub_8186F94: @ 8186F94
 	ldr r2, =gEnemyParty
 	adds r1, r2
 	movs r2, 0
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r5]
 	bl sub_8076918
 	ldrb r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 	ldrb r0, [r5]
 	bl sub_805E408
 	ldr r1, =gBattleBankFunc
@@ -1394,7 +1394,7 @@ _081870B6:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_805EE54
+	bl SetBankEnemyShadowSpriteCallback
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -3564,7 +3564,7 @@ sub_818843C: @ 818843C
 	muls r2, r0
 	adds r0, r2, 0
 	add r0, r9
-	bl sub_805DC0C
+	bl BattleLoadOpponentMonSpriteGfx
 	ldrb r0, [r6]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -3654,7 +3654,7 @@ sub_818843C: @ 818843C
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_805EE54
+	bl SetBankEnemyShadowSpriteCallback
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r6]
 	lsls r0, 2
@@ -3753,7 +3753,7 @@ sub_81885D8: @ 81885D8
 	adds r0, r1, 0
 	adds r0, r5
 	adds r1, r6, 0
-	bl sub_805DC0C
+	bl BattleLoadOpponentMonSpriteGfx
 	adds r0, r6, 0
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -3928,7 +3928,7 @@ _081887B0:
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8072984
+	bl SetHealthboxSpriteInvisible
 	bl RecordedOpponentBufferExecCompleted
 _081887EC:
 	pop {r4-r6}
@@ -4754,7 +4754,7 @@ sub_8188EF0: @ 8188EF0
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -4785,7 +4785,7 @@ sub_8188F20: @ 8188F20
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08188F6C
 	.pool
 _08188F48:
@@ -4803,7 +4803,7 @@ _08188F48:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _08188F6C:
 	bl RecordedOpponentBufferExecCompleted
 	pop {r4,r5}
@@ -4981,7 +4981,7 @@ sub_81890CC: @ 81890CC
 	ldr r2, =gEnemyParty
 	adds r1, r2
 	movs r2, 0x9
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r2, [r4]
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
@@ -5518,7 +5518,7 @@ c3_0803D564: @ 8189548
 	adds r0, r1
 	ldrh r0, [r0, 0x8]
 	strb r0, [r7]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08189582

@@ -3256,7 +3256,7 @@ _0815BAB6:
 	lsls r1, r0, 2
 	adds r1, r2
 	ldrh r1, [r1, 0x2]
-	bl sub_805EE54
+	bl SetBankEnemyShadowSpriteCallback
 _0815BAF6:
 	mov r0, r8
 	bl move_anim_task_del
@@ -4001,7 +4001,7 @@ _0815C15C:
 	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -9334,7 +9334,7 @@ sub_815EC48: @ 815EC48
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815ECD0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0x1

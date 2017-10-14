@@ -17,6 +17,7 @@
 #include "easy_chat.h"
 #include "event_data.h"
 #include "money.h"
+#include "tv.h"
 #include "coins.h"
 #include "text.h"
 
@@ -36,7 +37,6 @@ extern void sub_813624C(void); // clears something pokeblock related
 extern void ResetPokedex(void);
 extern void sub_8084400(void);
 extern void ClearMailData(void);
-extern void ClearTVShowData(void);
 extern void ResetGabbyAndTy(void);
 extern void ResetSecretBases(void);
 extern void ResetLinkContestBoolean(void);

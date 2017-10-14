@@ -4494,7 +4494,7 @@ sub_80EAF80: @ 80EAF80
 	bne _080EAF9A
 	b _080EB16A
 _080EAF9A:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

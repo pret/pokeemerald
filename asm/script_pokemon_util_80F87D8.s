@@ -222,7 +222,7 @@ sub_80F8970: @ 80F8970
 	mov r12, r0
 	ldr r1, =gSpecialVar_0x8006
 	mov r9, r1
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	mov r10, r2
 	mov r2, r12
 	mov r1, sp
@@ -625,7 +625,7 @@ sub_80F8C7C: @ 80F8C7C
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4

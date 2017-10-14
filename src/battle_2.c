@@ -40,6 +40,7 @@
 #include "trainer_classes.h"
 #include "evolution_scene.h"
 #include "roamer.h"
+#include "tv.h"
 #include "safari_zone.h"
 #include "battle_string_ids.h"
 
@@ -64,7 +65,6 @@ struct UnknownPokemonStruct2
     /*0x1D*/ u8 language;
 };
 
-extern u32 gBattleTypeFlags;
 extern u8 gBattleCommunication[];
 extern u8 gBattleTerrain;
 extern u16 gBattle_BG0_X;
@@ -88,7 +88,6 @@ extern void (*gBattleMainFunc)(void);
 extern void (*gUnknown_030061E8)(void);
 extern struct UnknownPokemonStruct2 gUnknown_02022FF8[3]; // what is it used for?
 extern struct UnknownPokemonStruct2* gUnknown_02023058; // what is it used for?
-extern u8 gBattleOutcome;
 extern u8 gUnknown_02039B28[]; // possibly a struct?
 extern struct UnknownStruct6 gUnknown_02038C28; // todo: identify & document
 extern struct MusicPlayerInfo gMPlay_SE1;
@@ -139,7 +138,6 @@ extern u8 gActionForBanks[BATTLE_BANKS_COUNT];
 extern u16 gChosenMovesByBanks[BATTLE_BANKS_COUNT];
 extern u8 gCurrentActionFuncId;
 extern u8 gLastUsedAbility;
-extern u16 gLastUsedItem;
 extern u8 gUnknown_0203CF00[];
 extern const u8* gBattlescriptPtrsForSelection[BATTLE_BANKS_COUNT];
 extern const u8* gBattlescriptCurrInstr;
@@ -152,7 +150,6 @@ extern u8 gCurrMovePos;
 extern u8 gUnknown_020241E9;
 extern u16 gLastUsedMove;
 
-extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const struct BattleMove gBattleMoves[];
 extern const u16 gUnknown_08C004E0[]; // battle textbox palette
 extern const struct BgTemplate gUnknown_0831AA08[];
@@ -220,14 +217,12 @@ extern void sub_81B9150(void);
 extern void sub_800AC34(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
 extern void sub_8076918(u8 bank);
-extern void sub_80729D0(u8 healthoxSpriteId);
+extern void SetHealthboxSpriteVisible(u8 healthoxSpriteId);
 extern void sub_81A56B4(void); // battle frontier 2
 extern u8 sub_81A9E28(void); // battle frontier 2
 extern void sub_81A56E8(u8 bank); // battle frontier 2
 extern void sub_81B8FB0(u8, u8); // party menu
 extern u8 pokemon_order_func(u8); // party menu
-extern void sub_80EC728(void); // tv
-extern void sub_80EE184(void); // tv
 extern bool8 InBattlePyramid(void);
 
 // this file's functions
@@ -859,7 +854,7 @@ static void CB2_HandleStartBattle(void)
         {
             s32 i;
 
-            for (i = 0; i < 2 && (gLinkPlayers[i].version & 0xFF) == 3; i++);
+            for (i = 0; i < 2 && (gLinkPlayers[i].version & 0xFF) == VERSION_EMERALD; i++);
 
             if (i == 2)
                 gBattleCommunication[MULTIUSE_STATE] = 16;
@@ -2073,7 +2068,7 @@ static void sub_8038F34(void)
             else
                 monsCount = 2;
 
-            for (i = 0; i < monsCount && (gLinkPlayers[i].version & 0xFF) == 3; i++);
+            for (i = 0; i < monsCount && (gLinkPlayers[i].version & 0xFF) == VERSION_EMERALD; i++);
 
             if (!gSaveBlock2Ptr->field_CA9_b && i == monsCount)
             {
@@ -2442,7 +2437,7 @@ static void sub_8039838(struct Sprite *sprite)
     if (sprite->animEnded)
     {
         sub_8076918(sprite->tBank);
-        sub_80729D0(gHealthBoxesIds[sprite->tBank]);
+        SetHealthboxSpriteVisible(gHealthBoxesIds[sprite->tBank]);
         sprite->callback = sub_8039894;
         StartSpriteAnimIfDifferent(sprite, 0);
         BeginNormalPaletteFade(0x20000, 0, 10, 0, 0x2108);
@@ -4927,7 +4922,7 @@ static void HandleEndTurn_FinishBattle(void)
                     }
                 }
             }
-            sub_80EC728();
+            PutPokemonTodayCaughtOnAir();
         }
 
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
@@ -5324,30 +5319,30 @@ static void HandleAction_UseItem(void)
     {
         gBattleScripting.bank = gBankAttacker;
 
-        switch (*(gBattleStruct->field_C4 + (gBankAttacker >> 1)))
+        switch (*(gBattleStruct->AI_itemType + (gBankAttacker >> 1)))
         {
-        case 1:
-        case 2:
+        case AI_ITEM_FULL_RESTORE:
+        case AI_ITEM_HEAL_HP:
             break;
-        case 3:
+        case AI_ITEM_CURE_CONDITION:
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-            if (*(gBattleStruct->field_C6 + gBankAttacker / 2) & 1)
+            if (*(gBattleStruct->AI_itemFlags + gBankAttacker / 2) & 1)
             {
-                if (*(gBattleStruct->field_C6 + gBankAttacker / 2) & 0x3E)
+                if (*(gBattleStruct->AI_itemFlags + gBankAttacker / 2) & 0x3E)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 5;
             }
             else
             {
-                while (!(*(gBattleStruct->field_C6 + gBankAttacker / 2) & 1))
+                while (!(*(gBattleStruct->AI_itemFlags + gBankAttacker / 2) & 1))
                 {
-                    *(gBattleStruct->field_C6 + gBankAttacker / 2) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + gBankAttacker / 2) >>= 1;
                     gBattleCommunication[MULTISTRING_CHOOSER]++;
                 }
             }
             break;
-        case 4:
+        case AI_ITEM_X_STAT:
             gBattleCommunication[MULTISTRING_CHOOSER] = 4;
-            if (*(gBattleStruct->field_C6 + (gBankAttacker >> 1)) & 0x80)
+            if (*(gBattleStruct->AI_itemFlags + (gBankAttacker >> 1)) & 0x80)
             {
                 gBattleCommunication[MULTISTRING_CHOOSER] = 5;
             }
@@ -5356,9 +5351,9 @@ static void HandleAction_UseItem(void)
                 PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK)
                 PREPARE_STRING_BUFFER(gBattleTextBuff2, 0xD2)
 
-                while (!((*(gBattleStruct->field_C6 + (gBankAttacker >> 1))) & 1))
+                while (!((*(gBattleStruct->AI_itemFlags + (gBankAttacker >> 1))) & 1))
                 {
-                    *(gBattleStruct->field_C6 + gBankAttacker / 2) >>= 1;
+                    *(gBattleStruct->AI_itemFlags + gBankAttacker / 2) >>= 1;
                     gBattleTextBuff1[2]++;
                 }
 
@@ -5366,7 +5361,7 @@ static void HandleAction_UseItem(void)
                 gBattleScripting.animArg2 = 0;
             }
             break;
-        case 5:
+        case AI_ITEM_GUARD_SPECS:
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 2;
             else
@@ -5374,7 +5369,7 @@ static void HandleAction_UseItem(void)
             break;
         }
 
-        gBattlescriptCurrInstr = gUnknown_082DBD3C[*(gBattleStruct->field_C4 + gBankAttacker / 2)];
+        gBattlescriptCurrInstr = gUnknown_082DBD3C[*(gBattleStruct->AI_itemType + gBankAttacker / 2)];
     }
     gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
 }
