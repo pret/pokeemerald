@@ -2465,7 +2465,7 @@ BuyMenuSubtractMoney: @ 80E0F88
 	lsls r2, 6
 	adds r1, r2
 	ldr r1, [r1]
-	bl SubtractMoney
+	bl RemoveMoney
 	movs r0, 0x5F
 	bl PlaySE
 	ldr r0, [r5]

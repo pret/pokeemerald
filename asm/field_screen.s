@@ -7503,8 +7503,8 @@ _080AED78:
 	bx r0
 	thumb_func_end bag_add_task0_by_acit
 
-	thumb_func_start sub_80AED7C
-sub_80AED7C: @ 80AED7C
+	thumb_func_start SetSav1Weather
+SetSav1Weather: @ 80AED7C
 	push {r4,r5,lr}
 	ldr r4, =gSaveBlock1Ptr
 	ldr r1, [r4]
@@ -7525,7 +7525,7 @@ sub_80AED7C: @ 80AED7C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80AED7C
+	thumb_func_end SetSav1Weather
 
 	thumb_func_start sav1_get_weather_probably
 sav1_get_weather_probably: @ 80AEDAC
@@ -7564,7 +7564,7 @@ sub_80AEDBC: @ 80AEDBC
 	thumb_func_start sub_80AEDF0
 sub_80AEDF0: @ 80AEDF0
 	push {lr}
-	bl sub_80AED7C
+	bl SetSav1Weather
 	bl sav1_get_weather_probably
 	lsls r0, 24
 	lsrs r0, 24
@@ -7576,7 +7576,7 @@ sub_80AEDF0: @ 80AEDF0
 	thumb_func_start sub_80AEE08
 sub_80AEE08: @ 80AEE08
 	push {lr}
-	bl sub_80AED7C
+	bl SetSav1Weather
 	bl sav1_get_weather_probably
 	lsls r0, 24
 	lsrs r0, 24
@@ -7585,8 +7585,8 @@ sub_80AEE08: @ 80AEE08
 	bx r0
 	thumb_func_end sub_80AEE08
 
-	thumb_func_start sub_80AEE20
-sub_80AEE20: @ 80AEE20
+	thumb_func_start DoCurrentWeather
+DoCurrentWeather: @ 80AEE20
 	push {r4,r5,lr}
 	bl sav1_get_weather_probably
 	lsls r0, 24
@@ -7627,7 +7627,7 @@ _080AEE6E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80AEE20
+	thumb_func_end DoCurrentWeather
 
 	thumb_func_start sub_80AEE84
 sub_80AEE84: @ 80AEE84
@@ -8390,7 +8390,7 @@ _080AF480:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_808A854
+	bl FieldSetDoorOpened
 	movs r0, 0x1
 	strh r0, [r5, 0x8]
 	b _080AF54A
@@ -8427,7 +8427,7 @@ _080AF4DC:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_808A8AC
+	bl FieldAnimateDoorClose
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]
@@ -8461,7 +8461,7 @@ _080AF520:
 	cmp r0, 0x1
 	beq _080AF54A
 _080AF536:
-	bl sub_809757C
+	bl UnfreezeMapObjects
 	movs r0, 0x4
 	strh r0, [r5, 0x8]
 	b _080AF54A
@@ -8550,7 +8550,7 @@ _080AF5EC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AF60A
-	bl sub_809757C
+	bl UnfreezeMapObjects
 	movs r0, 0x3
 	strh r0, [r5, 0x8]
 	b _080AF60A
@@ -8593,7 +8593,7 @@ _080AF644:
 	bl sub_80AF71C
 	cmp r0, 0
 	beq _080AF65A
-	bl sub_809757C
+	bl UnfreezeMapObjects
 	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
@@ -9142,7 +9142,7 @@ _080AFAD4:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl cur_mapdata_get_door_sound_at
+	bl GetDoorSoundEffect
 	lsls r0, 16
 	lsrs r0, 16
 	bl PlaySE
@@ -9151,7 +9151,7 @@ _080AFAD4:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl task_overworld_door_add_if_role_69_for_opening_door_at
+	bl FieldAnimateDoorOpen
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]
@@ -9211,7 +9211,7 @@ _080AFB6C:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_808A8AC
+	bl FieldAnimateDoorClose
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]
@@ -9996,7 +9996,7 @@ _080B0198:
 	bl sub_808D1B4
 	cmp r0, 0x1
 	beq _080B01B6
-	bl sub_809757C
+	bl UnfreezeMapObjects
 	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask

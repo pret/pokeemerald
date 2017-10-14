@@ -161,7 +161,7 @@ sub_81BE79C: @ 81BE79C
 	beq _081BE7B8
 	movs r0, 0xA7
 	lsls r0, 1
-	bl FlagReset
+	bl FlagClear
 	b _081BE7EE
 	.pool
 _081BE7B8:
@@ -188,7 +188,7 @@ _081BE7D4:
 _081BE7E6:
 	movs r0, 0xA7
 	lsls r0, 1
-	bl FlagReset
+	bl FlagClear
 _081BE7EE:
 	pop {r4}
 	pop {r0}

@@ -2215,7 +2215,7 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80FE234
 	ldr r0, =0x000008ad
 	bl FlagSet
 	ldr r0, =0x000008ae
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =gStringVar4
 	ldr r1, =gText_UsedVar2WildLured
 	bl StringExpandPlaceholders
@@ -2225,7 +2225,7 @@ _080FE278:
 	ldr r0, =0x000008ae
 	bl FlagSet
 	ldr r0, =0x000008ad
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =gStringVar4
 	ldr r1, =gText_UsedVar2WildRepelled
 	bl StringExpandPlaceholders

@@ -170,6 +170,7 @@ typedef struct {
     u8 flag_0:1;
     u8 flag_1:1;
     u8 flag_2:1;
+    u8 flag_3:1;
 } TextFlags;
 
 extern TextFlags gTextFlags;
@@ -195,7 +196,7 @@ u8 gGlyphDimensions[0x2];
 
 void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
-u16 PrintTextOnWindow(u8 windowId, u8 fontId, u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
+u16 PrintTextOnWindow(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
 bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
 void RunTextPrinters(void);
 bool16 IsTextPrinterActive(u8 id);

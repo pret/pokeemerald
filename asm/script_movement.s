@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start exec_movement
-exec_movement: @ 80D32E8
+	thumb_func_start ScriptMovement_StartObjectMovementScript
+ScriptMovement_StartObjectMovementScript: @ 80D32E8
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r3, 0
@@ -47,10 +47,10 @@ _080D3332:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end exec_movement
+	thumb_func_end ScriptMovement_StartObjectMovementScript
 
-	thumb_func_start sub_80D3340
-sub_80D3340: @ 80D3340
+	thumb_func_start ScriptMovement_IsObjectMovementFinished
+ScriptMovement_IsObjectMovementFinished: @ 80D3340
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -87,7 +87,7 @@ _080D3384:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D3340
+	thumb_func_end ScriptMovement_IsObjectMovementFinished
 
 	thumb_func_start sub_80D338C
 sub_80D338C: @ 80D338C

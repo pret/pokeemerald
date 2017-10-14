@@ -434,7 +434,7 @@ sub_80B2688: @ 80B2688
 	movs r0, 0x15
 	bl PlaySE
 	ldr r0, =gUnknown_082780B3
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 	ldr r0, =sub_80B270C
 	b _080B26FA
 	.pool
@@ -442,7 +442,7 @@ _080B26EC:
 	movs r0, 0x16
 	bl PlaySE
 	ldr r0, =gUnknown_08278131
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 	ldr r0, =sub_80B2918
 _080B26FA:
 	str r0, [r4]
@@ -545,7 +545,7 @@ sub_80B275C: @ 80B275C
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
 	ldr r0, =gUnknown_082780F2
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 	mov r0, r9
 	subs r0, 0x8
 	add r0, r8
@@ -598,7 +598,7 @@ sub_80B2804: @ 80B2804
 	beq _080B2878
 _080B2852:
 	ldr r0, =gUnknown_082780B3
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -719,7 +719,7 @@ sub_80B2918: @ 80B2918
 	cmp r0, 0x1
 	bhi _080B297C
 	bl sub_800AC34
-	bl textbox_close
+	bl HideFieldMessageBox
 	ldr r0, =sub_80B2CB0
 	b _080B29E4
 	.pool
@@ -730,7 +730,7 @@ _080B297C:
 	bne _080B2994
 _080B2984:
 	bl sub_80097E8
-	bl textbox_close
+	bl HideFieldMessageBox
 	ldr r0, =sub_80B2CB0
 	b _080B29E4
 	.pool
@@ -814,7 +814,7 @@ _080B2A42:
 _080B2A4A:
 	bl sub_80097E8
 _080B2A4E:
-	bl textbox_close
+	bl HideFieldMessageBox
 	ldr r0, =gTasks
 	lsls r1, r7, 2
 	adds r1, r7
@@ -1151,7 +1151,7 @@ sub_80B2D2C: @ 80B2D2C
 	bl sub_80B241C
 	ldrb r0, [r4, 0x12]
 	bl RemoveWindow
-	bl textbox_close
+	bl HideFieldMessageBox
 	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
@@ -2303,7 +2303,7 @@ _080B375A:
 	b _080B37CC
 	.pool
 _080B376C:
-	bl sub_809833C
+	bl IsFieldMessageBoxHidden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B37CC
@@ -2325,7 +2325,7 @@ _080B378C:
 	beq _080B37B2
 	b _080B37CC
 _080B379E:
-	bl textbox_close
+	bl HideFieldMessageBox
 	movs r0, 0
 	strh r0, [r5, 0x8]
 	bl sub_80872C4

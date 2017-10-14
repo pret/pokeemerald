@@ -3008,7 +3008,7 @@ _080F7236:
 	bl CopyToBgTilemapBufferRect
 	movs r5, 0xF
 _080F7240:
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080F725C
@@ -4640,7 +4640,7 @@ sub_80F7F30: @ 80F7F30
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _080F7F5E
-	ldr r4, =gUnknown_02039F2C
+	ldr r4, =gScriptContestCategory
 	ldrb r0, [r4]
 	ldr r1, =gUnknown_02039F2E
 	ldrb r1, [r1]
@@ -4666,7 +4666,7 @@ sub_80F7F7C: @ 80F7F7C
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r2, r1, r0
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080F7FEE
@@ -4730,7 +4730,7 @@ sub_80F7FFC: @ 80F7FFC
 	beq _080F8010
 	b _080F8250
 _080F8010:
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bls _080F801A
@@ -5488,7 +5488,7 @@ _080F8678:
 	bl sub_80F86E0
 	ldr r1, =gUnknown_02039F2B
 	strb r0, [r1]
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrb r0, [r0]
 	bl sub_80DB09C
 	ldr r1, =sub_80FCF40

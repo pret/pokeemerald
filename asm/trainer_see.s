@@ -734,7 +734,7 @@ sub_80B417C: @ 80B417C
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	adds r4, r2, 0
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -1050,7 +1050,7 @@ sub_80B43E0: @ 80B43E0
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4426
-	ldr r2, =gFieldEffectSpawnParams
+	ldr r2, =gFieldEffectArguments
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	str r0, [r2]
@@ -1303,7 +1303,7 @@ sub_80B45D0: @ 80B45D0
 	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
-	bl sub_809757C
+	bl UnfreezeMapObjects
 	ldr r0, =gUnknown_03006090
 	ldrb r0, [r0, 0xC]
 	bl sub_80974D0
@@ -1432,7 +1432,7 @@ sub_80B46D8: @ 80B46D8
 	orrs r3, r4
 	mov r4, r12
 	strb r3, [r4]
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	ldr r3, [r4]
 	strh r3, [r0, 0x2E]
 	ldr r3, [r4, 0x4]
@@ -1609,7 +1609,7 @@ sub_80B4808: @ 80B4808
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
 	movs r0, 0xFF
-	bl exec_movement
+	bl ScriptMovement_StartObjectMovementScript
 	b _080B489E
 	.pool
 _080B4870:
@@ -1633,7 +1633,7 @@ _080B4870:
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
 	movs r0, 0xFF
-	bl exec_movement
+	bl ScriptMovement_StartObjectMovementScript
 _080B489E:
 	movs r0, 0xFF
 	bl sub_809BE48

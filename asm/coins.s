@@ -5,9 +5,9 @@
 
 	.text
 
-	thumb_func_start AddCoins
-@ bool8 AddCoins(u16 toAdd)
-AddCoins: @ 8145C80
+	thumb_func_start GiveCoins
+@ bool8 GiveCoins(u16 toAdd)
+GiveCoins: @ 8145C80
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -44,11 +44,11 @@ _08145CC0:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end AddCoins
+	thumb_func_end GiveCoins
 
-	thumb_func_start SubtractCoins
-@ bool8 SubtractCoins(u16 toSub)
-SubtractCoins: @ 8145CCC
+	thumb_func_start TakeCoins
+@ bool8 TakeCoins(u16 toSub)
+TakeCoins: @ 8145CCC
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -69,6 +69,6 @@ _08145CEE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end SubtractCoins
+	thumb_func_end TakeCoins
 
 	.align 2, 0 @ Don't pad with nop.

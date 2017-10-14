@@ -178,7 +178,7 @@ _080F96A8:
 	strh r0, [r4]
 	b _080F9722
 _080F96AE:
-	bl sub_809833C
+	bl IsFieldMessageBoxHidden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080F9722

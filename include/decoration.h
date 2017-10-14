@@ -125,8 +125,6 @@ enum DecoId {
     /*120*/ DECOR_REGISTEEL_DOLL
 };
 
-// Exported type declarations
-
 struct Decoration
 {
     /*0x00*/ u8 id;
@@ -139,9 +137,6 @@ struct Decoration
     /*0x1c*/ const u16 *tiles;
 };
 
-// Exported RAM declarations
-
-// Exported ROM declarations
 extern const struct Decoration gDecorations[];
 
 #endif //GUARD_DECORATION_H

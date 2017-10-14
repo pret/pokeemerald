@@ -134,12 +134,12 @@ const u8 *ScriptPop(struct ScriptContext *ctx)
     return ctx->stack[ctx->stackDepth];
 }
 
-void ScriptJump(struct ScriptContext *ctx, u8 *ptr)
+void ScriptJump(struct ScriptContext *ctx, const u8 *ptr)
 {
     ctx->scriptPtr = ptr;
 }
 
-void ScriptCall(struct ScriptContext *ctx, u8 *ptr)
+void ScriptCall(struct ScriptContext *ctx, const u8 *ptr)
 {
     ScriptPush(ctx, ctx->scriptPtr);
     ctx->scriptPtr = ptr;

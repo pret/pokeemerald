@@ -46,7 +46,7 @@ _0809D8CA:
 	ands r0, r1
 	cmp r0, 0
 	beq _0809D8FC
-	bl sub_809E7B0
+	bl DoTimeBasedEvents
 	ldrh r0, [r4]
 	adds r0, 0x1
 	b _0809D8FA
@@ -144,8 +144,8 @@ _0809D992:
 	.pool
 	thumb_func_end overworld_ensure_per_step_coros_running
 
-	thumb_func_start activate_per_step_callback
-activate_per_step_callback: @ 809D9A8
+	thumb_func_start ActivatePerStepCallback
+ActivatePerStepCallback: @ 809D9A8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -180,7 +180,7 @@ _0809D9EA:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end activate_per_step_callback
+	thumb_func_end ActivatePerStepCallback
 
 	thumb_func_start wild_encounter_reset_coro_args
 wild_encounter_reset_coro_args: @ 809D9F0

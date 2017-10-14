@@ -1166,7 +1166,7 @@ _08096E8C:
 @ void GroundEffect_SpawnOnTallGrass(struct npc_state *fieldObject, struct obj *object)
 GroundEffect_SpawnOnTallGrass: @ 8096E90
 	push {lr}
-	ldr r3, =gFieldEffectSpawnParams
+	ldr r3, =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r1, [r0, r2]
 	str r1, [r3]
@@ -1205,7 +1205,7 @@ GroundEffect_SpawnOnTallGrass: @ 8096E90
 @ void GroundEffect_StepOnTallGrass(struct npc_state *fieldObject, struct obj *object)
 GroundEffect_StepOnTallGrass: @ 8096EDC
 	push {lr}
-	ldr r3, =gFieldEffectSpawnParams
+	ldr r3, =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r1, [r0, r2]
 	str r1, [r3]
@@ -1244,7 +1244,7 @@ GroundEffect_StepOnTallGrass: @ 8096EDC
 @ void GroundEffect_SpawnOnLongGrass(struct npc_state *fieldObject, struct obj *object)
 GroundEffect_SpawnOnLongGrass: @ 8096F28
 	push {lr}
-	ldr r3, =gFieldEffectSpawnParams
+	ldr r3, =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r1, [r0, r2]
 	str r1, [r3]
@@ -1283,7 +1283,7 @@ GroundEffect_SpawnOnLongGrass: @ 8096F28
 @ void GroundEffect_StepOnLongGrass(struct npc_state *fieldObject, struct obj *object)
 GroundEffect_StepOnLongGrass: @ 8096F74
 	push {lr}
-	ldr r3, =gFieldEffectSpawnParams
+	ldr r3, =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r1, [r0, r2]
 	str r1, [r3]
@@ -1413,7 +1413,7 @@ DoTracksGroundEffect_Footprints: @ 8097044
 	mov r0, sp
 	movs r2, 0x4
 	bl memcpy
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	movs r2, 0x14
 	ldrsh r0, [r5, r2]
 	str r0, [r1]
@@ -1449,7 +1449,7 @@ DoTracksGroundEffect_BikeTireTracks: @ 8097094
 	ldr r0, [r4, 0x14]
 	cmp r1, r0
 	beq _080970D6
-	ldr r2, =gFieldEffectSpawnParams
+	ldr r2, =gFieldEffectArguments
 	movs r1, 0x14
 	ldrsh r0, [r4, r1]
 	str r0, [r2]
@@ -1520,7 +1520,7 @@ GroundEffect_JumpOnTallGrass: @ 8097110
 	sub sp, 0x4
 	adds r5, r0, 0
 	adds r6, r1, 0
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r0, [r5, r2]
 	str r0, [r1]
@@ -1562,7 +1562,7 @@ _0809715A:
 @ void GroundEffect_JumpOnLongGrass(struct npc_state *fieldObject, struct obj *object)
 GroundEffect_JumpOnLongGrass: @ 8097168
 	push {lr}
-	ldr r2, =gFieldEffectSpawnParams
+	ldr r2, =gFieldEffectArguments
 	movs r3, 0x10
 	ldrsh r1, [r0, r3]
 	str r1, [r2]
@@ -1585,7 +1585,7 @@ GroundEffect_JumpOnLongGrass: @ 8097168
 @ void GroundEffect_JumpOnShallowWater(struct npc_state *fieldObject, struct obj *object)
 GroundEffect_JumpOnShallowWater: @ 8097190
 	push {r4,lr}
-	ldr r3, =gFieldEffectSpawnParams
+	ldr r3, =gFieldEffectArguments
 	movs r4, 0x10
 	ldrsh r2, [r0, r4]
 	str r2, [r3]
@@ -1611,7 +1611,7 @@ GroundEffect_JumpOnShallowWater: @ 8097190
 @ void GroundEffect_JumpOnWater(struct npc_state *fieldObject, struct obj *object)
 GroundEffect_JumpOnWater: @ 80971C0
 	push {r4,lr}
-	ldr r3, =gFieldEffectSpawnParams
+	ldr r3, =gFieldEffectArguments
 	movs r4, 0x10
 	ldrsh r2, [r0, r4]
 	str r2, [r3]
@@ -1637,7 +1637,7 @@ GroundEffect_JumpOnWater: @ 80971C0
 @ void GroundEffect_JumpLandingDust(struct npc_state *fieldObject, struct obj *object)
 GroundEffect_JumpLandingDust: @ 80971F0
 	push {r4,lr}
-	ldr r3, =gFieldEffectSpawnParams
+	ldr r3, =gFieldEffectArguments
 	movs r4, 0x10
 	ldrsh r2, [r0, r4]
 	str r2, [r3]
@@ -1685,7 +1685,7 @@ GroundEffect_HotSprings: @ 8097230
 @ void GroundEffect_Seaweed(struct npc_state *fieldObject, struct obj *object)
 GroundEffect_Seaweed: @ 8097240
 	push {lr}
-	ldr r2, =gFieldEffectSpawnParams
+	ldr r2, =gFieldEffectArguments
 	movs r3, 0x10
 	ldrsh r1, [r0, r3]
 	str r1, [r2]

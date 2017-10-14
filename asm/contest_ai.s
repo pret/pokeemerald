@@ -1352,7 +1352,7 @@ sub_8156CF4: @ 8156CF4
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r1, [r0, 0xC]
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	strh r0, [r1, 0x18]
 	ldr r1, =gAIScriptPtr
