@@ -113,6 +113,7 @@ SECTIONS {
         src/tileset_anims.o(.text);
         src/palette.o(.text);
         src/sound.o(.text);
+        src/battle_anim.o(.text);
         asm/battle_anim.o(.text);
         asm/rom_80A5C6C.o(.text);
         src/task.o(.text);

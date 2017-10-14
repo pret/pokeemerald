@@ -75,7 +75,7 @@ _080326B8:
 	ldr r0, =gBattleExecBuffer
 	movs r5, 0
 	str r5, [r0]
-	bl sub_80A3934
+	bl ClearBattleAnimationVars
 	bl ClearBattleMonForms
 	movs r0, 0xF
 	bl BattleAI_HandleItemUseBeforeAISetup

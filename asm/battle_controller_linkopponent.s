@@ -276,7 +276,7 @@ _080645CA:
 	ldrb r1, [r7]
 	movs r0, 0x2
 	eors r0, r1
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806469C
@@ -4729,7 +4729,7 @@ _08066D32:
 	ldrb r0, [r1]
 	mov r1, r8
 	strb r0, [r1]
-	ldr r3, =gMovePowerMoveAnim
+	ldr r3, =gAnimMovePower
 	ldrb r1, [r5]
 	lsls r1, 9
 	mov r0, r12
@@ -4743,7 +4743,7 @@ _08066D32:
 	lsls r0, 8
 	orrs r2, r0
 	strh r2, [r3]
-	ldr r3, =gMoveDmgMoveAnim
+	ldr r3, =gAnimMoveDmg
 	ldrb r1, [r5]
 	lsls r1, 9
 	mov r0, r12
@@ -4769,7 +4769,7 @@ _08066D32:
 	lsls r0, 24
 	orrs r2, r0
 	str r2, [r3]
-	ldr r2, =gHappinessMoveAnim
+	ldr r2, =gAnimFriendship
 	ldrb r0, [r5]
 	lsls r0, 9
 	mov r1, r12
@@ -4791,7 +4791,7 @@ _08066D32:
 	lsls r0, 8
 	orrs r2, r0
 	strh r2, [r4]
-	ldr r7, =gDisableStructMoveAnim
+	ldr r7, =gAnimDisableStructPtr
 	ldrb r1, [r5]
 	lsls r1, 9
 	mov r0, r12
@@ -4928,7 +4928,7 @@ _08066F08:
 	movs r0, 0
 	bl sub_805EB9C
 	adds r0, r4, 0
-	bl move_anim_start_t1
+	bl DoMoveAnim
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -6080,7 +6080,7 @@ sub_80678D0: @ 80678D0
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl sub_80A6A90
+	bl AnimBankSpriteExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067916

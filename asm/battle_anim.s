@@ -5,1523 +5,16 @@
 
 	.text
 
-	thumb_func_start sub_80A3934
-sub_80A3934: @ 80A3934
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	ldr r0, =gAnimFramesToWait
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, =gAnimScriptActive
-	strb r1, [r0]
-	ldr r0, =gAnimVisualTaskCount
-	strb r1, [r0]
-	ldr r0, =gAnimSoundTaskCount
-	strb r1, [r0]
-	ldr r0, =gDisableStructMoveAnim
-	movs r1, 0
-	str r1, [r0]
-	ldr r0, =gMoveDmgMoveAnim
-	str r1, [r0]
-	ldr r0, =gMovePowerMoveAnim
-	movs r2, 0
-	strh r1, [r0]
-	ldr r0, =gHappinessMoveAnim
-	strb r2, [r0]
-	ldr r4, =gUnknown_02038430
-	ldr r5, =gUnknown_02038432
-	ldr r6, =gUnknown_02038433
-	ldr r7, =gAnimMoveIndex
-	ldr r0, =gAnimationBankAttacker
-	mov r12, r0
-	ldr r1, =gAnimationBankTarget
-	mov r8, r1
-	ldr r0, =gUnknown_02038440
-	mov r9, r0
-	ldr r1, =0x0000ffff
-	adds r3, r1, 0
-	ldr r1, =gAnimSpriteIndexArray
-	movs r2, 0x7
-_080A397E:
-	ldrh r0, [r1]
-	orrs r0, r3
-	strh r0, [r1]
-	adds r1, 0x2
-	subs r2, 0x1
-	cmp r2, 0
-	bge _080A397E
-	ldr r1, =gBattleAnimArgs
-	movs r2, 0
-	adds r0, r1, 0
-	adds r0, 0xE
-_080A3994:
-	strh r2, [r0]
-	subs r0, 0x2
-	cmp r0, r1
-	bge _080A3994
-	movs r1, 0
-	movs r0, 0xFF
-	strb r0, [r4]
-	movs r0, 0x1
-	negs r0, r0
-	strb r0, [r4, 0x1]
-	strb r1, [r5]
-	strb r1, [r6]
-	movs r0, 0
-	strh r1, [r7]
-	mov r1, r12
-	strb r0, [r1]
-	mov r1, r8
-	strb r0, [r1]
-	mov r1, r9
-	strb r0, [r1]
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A3934
-
-	thumb_func_start move_anim_start_t1
-move_anim_start_t1: @ 80A3A10
-	push {lr}
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	ldr r2, =gAnimationBankAttacker
-	ldr r0, =gBankAttacker
-	ldrb r0, [r0]
-	strb r0, [r2]
-	ldr r2, =gAnimationBankTarget
-	ldr r0, =gBankTarget
-	ldrb r0, [r0]
-	strb r0, [r2]
-	ldr r0, =gUnknown_082C8D6C
-	movs r2, 0x1
-	bl move_something
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end move_anim_start_t1
-
-	thumb_func_start move_something
-move_something: @ 80A3A48
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	str r0, [sp]
-	lsls r1, 16
-	lsrs r1, 16
-	mov r8, r1
-	lsls r2, 24
-	lsrs r2, 24
-	mov r9, r2
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A3AE8
-	bl sub_80A8278
-	movs r0, 0
-	bl sub_8072A88
-	movs r4, 0
-	mov r0, r8
-	lsls r0, 2
-	mov r10, r0
-	ldr r6, =gBattlePartyID
-	movs r7, 0x64
-	ldr r5, =gUnknown_02038438
-_080A3A84:
-	lsls r0, r4, 24
-	lsrs r0, 24
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A3AA8
-	ldrh r0, [r6]
-	muls r0, r7
-	ldr r1, =gEnemyParty
-	b _080A3AAE
-	.pool
-_080A3AA8:
-	ldrh r0, [r6]
-	muls r0, r7
-	ldr r1, =gPlayerParty
-_080A3AAE:
-	adds r0, r1
-	movs r1, 0xB
-	bl GetMonData
-	strh r0, [r5]
-	adds r6, 0x2
-	adds r5, 0x2
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _080A3A84
-	ldr r3, =gAnimMoveIndex
-	ldr r5, =gUnknown_02038430
-	ldr r1, =gAnimScriptActive
-	mov r12, r1
-	ldr r7, =gAnimScriptCallback
-	ldr r6, =move_anim_execute
-	b _080A3B10
-	.pool
-_080A3AE8:
-	ldr r3, =gAnimMoveIndex
-	ldr r5, =gUnknown_02038430
-	mov r0, r8
-	lsls r0, 2
-	mov r10, r0
-	ldr r1, =gAnimScriptActive
-	mov r12, r1
-	ldr r7, =gAnimScriptCallback
-	ldr r6, =move_anim_execute
-	ldr r2, =gUnknown_02039F34
-	ldr r1, =gUnknown_02038438
-	movs r4, 0x3
-_080A3B00:
-	ldr r0, [r2]
-	ldr r0, [r0, 0x18]
-	ldrh r0, [r0]
-	strh r0, [r1]
-	adds r1, 0x2
-	subs r4, 0x1
-	cmp r4, 0
-	bge _080A3B00
-_080A3B10:
-	mov r0, r9
-	cmp r0, 0
-	bne _080A3B38
-	strh r0, [r3]
-	b _080A3B3C
-	.pool
-_080A3B38:
-	mov r1, r8
-	strh r1, [r3]
-_080A3B3C:
-	ldr r1, =gBattleAnimArgs
-	movs r2, 0
-	adds r0, r1, 0
-	adds r0, 0xE
-_080A3B44:
-	strh r2, [r0]
-	subs r0, 0x2
-	cmp r0, r1
-	bge _080A3B44
-	movs r0, 0xFF
-	strb r0, [r5]
-	movs r0, 0x1
-	negs r0, r0
-	strb r0, [r5, 0x1]
-	ldr r0, [sp]
-	add r0, r10
-	ldr r0, [r0]
-	ldr r1, =gBattleAnimScriptPtr
-	str r0, [r1]
-	movs r0, 0x1
-	mov r1, r12
-	strb r0, [r1]
-	movs r0, 0
-	ldr r1, =gAnimFramesToWait
-	strb r0, [r1]
-	str r6, [r7]
-	ldr r0, =0x0000ffff
-	adds r2, r0, 0
-	ldr r1, =gAnimSpriteIndexArray
-	movs r4, 0x7
-_080A3B76:
-	ldrh r0, [r1]
-	orrs r0, r2
-	strh r0, [r1]
-	adds r1, 0x2
-	subs r4, 0x1
-	cmp r4, 0
-	bge _080A3B76
-	mov r1, r9
-	cmp r1, 0
-	beq _080A3BC2
-	movs r4, 0
-	ldr r2, =gUnknown_082C8D64
-	b _080A3BAA
-	.pool
-_080A3BA8:
-	adds r4, 0x1
-_080A3BAA:
-	lsls r0, r4, 1
-	adds r0, r2
-	ldrh r0, [r0]
-	ldr r1, =0x0000ffff
-	cmp r0, r1
-	beq _080A3BC2
-	cmp r8, r0
-	bne _080A3BA8
-	ldr r0, =gMPlay_BGM
-	movs r2, 0x80
-	bl m4aMPlayVolumeControl
-_080A3BC2:
-	ldr r0, =gBattle_WIN0H
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, =gBattle_WIN0V
-	strh r1, [r0]
-	ldr r0, =gBattle_WIN1H
-	strh r1, [r0]
-	ldr r0, =gBattle_WIN1V
-	strh r1, [r0]
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end move_something
-
-	thumb_func_start move_anim_8072740
-move_anim_8072740: @ 80A3BFC
-	push {r4,lr}
-	adds r4, r0, 0
-	bl FreeSpriteOamMatrix
-	adds r0, r4, 0
-	bl DestroySprite
-	ldr r1, =gAnimVisualTaskCount
-	ldrb r0, [r1]
-	subs r0, 0x1
-	strb r0, [r1]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end move_anim_8072740
-
-	thumb_func_start move_anim_task_del
-move_anim_task_del: @ 80A3C1C
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-	ldr r1, =gAnimVisualTaskCount
-	ldrb r0, [r1]
-	subs r0, 0x1
-	strb r0, [r1]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end move_anim_task_del
-
-	thumb_func_start move_anim_related_task_del
-move_anim_related_task_del: @ 80A3C38
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-	ldr r1, =gAnimSoundTaskCount
-	ldrb r0, [r1]
-	subs r0, 0x1
-	strb r0, [r1]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end move_anim_related_task_del
-
-	thumb_func_start sub_80A3C54
-sub_80A3C54: @ 80A3C54
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	movs r2, 0
-	ldr r4, =0x0000ffff
-	ldr r1, =gAnimSpriteIndexArray
-_080A3C60:
-	ldrh r0, [r1]
-	cmp r0, r4
-	bne _080A3C74
-	strh r3, [r1]
-	b _080A3C7C
-	.pool
-_080A3C74:
-	adds r1, 0x2
-	adds r2, 0x1
-	cmp r2, 0x7
-	ble _080A3C60
-_080A3C7C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A3C54
-
-	thumb_func_start sub_80A3C84
-sub_80A3C84: @ 80A3C84
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	movs r2, 0
-	ldr r0, =0x0000ffff
-	adds r4, r0, 0
-	ldr r1, =gAnimSpriteIndexArray
-_080A3C92:
-	ldrh r0, [r1]
-	cmp r0, r3
-	bne _080A3CA8
-	orrs r0, r4
-	strh r0, [r1]
-	b _080A3CB0
-	.pool
-_080A3CA8:
-	adds r1, 0x2
-	adds r2, 0x1
-	cmp r2, 0x7
-	ble _080A3C92
-_080A3CB0:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80A3C84
-
-	thumb_func_start move_anim_waiter
-move_anim_waiter: @ 80A3CB8
-	push {lr}
-	ldr r2, =gAnimFramesToWait
-	ldrb r1, [r2]
-	movs r0, 0
-	ldrsb r0, [r2, r0]
-	cmp r0, 0
-	bgt _080A3CDC
-	ldr r0, =gAnimScriptCallback
-	ldr r1, =move_anim_execute
-	str r1, [r0]
-	movs r0, 0
-	b _080A3CDE
-	.pool
-_080A3CDC:
-	subs r0, r1, 0x1
-_080A3CDE:
-	strb r0, [r2]
-	pop {r0}
-	bx r0
-	thumb_func_end move_anim_waiter
-
-	thumb_func_start move_anim_execute
-move_anim_execute: @ 80A3CE4
-	push {r4,lr}
-	ldr r4, =gUnknown_08525E98
-_080A3CE8:
-	ldr r0, =gBattleAnimScriptPtr
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r4
-	ldr r0, [r0]
-	bl _call_via_r0
-	ldr r0, =gAnimFramesToWait
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	cmp r0, 0
-	bne _080A3D0C
-	ldr r0, =gAnimScriptActive
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080A3CE8
-_080A3D0C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end move_anim_execute
-
-	thumb_func_start ma00_load_graphics
-ma00_load_graphics: @ 80A3D24
-	push {r4-r6,lr}
-	ldr r6, =gBattleAnimScriptPtr
-	ldr r0, [r6]
-	adds r1, r0, 0x1
-	str r1, [r6]
-	ldrb r4, [r0, 0x1]
-	ldrb r0, [r1, 0x1]
-	lsls r0, 8
-	orrs r4, r0
-	lsls r5, r4, 3
-	ldr r0, =gUnknown_085112B4 + 0x10
-	adds r0, r5, r0
-	bl LoadCompressedObjectPicUsingHeap
-	ldr r0, =gUnknown_08511A34 + 0x198
-	adds r5, r0
-	adds r0, r5, 0
-	bl LoadCompressedObjectPaletteUsingHeap
-	ldr r0, [r6]
-	adds r0, 0x2
-	str r0, [r6]
-	ldr r0, =0xffffd8f0
-	adds r4, r0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r4, 0
-	bl sub_80A3C54
-	ldr r1, =gAnimFramesToWait
-	movs r0, 0x1
-	strb r0, [r1]
-	ldr r1, =gAnimScriptCallback
-	ldr r0, =move_anim_waiter
-	str r0, [r1]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ma00_load_graphics
-
-	thumb_func_start ma01_080728D0
-@ void ma01_080728D0()
-ma01_080728D0: @ 80A3D8C
-	push {r4-r6,lr}
-	ldr r6, =gBattleAnimScriptPtr
-	ldr r0, [r6]
-	adds r1, r0, 0x1
-	str r1, [r6]
-	ldrb r4, [r0, 0x1]
-	ldrb r0, [r1, 0x1]
-	lsls r0, 8
-	orrs r4, r0
-	ldr r1, =gUnknown_08524B44
-	ldr r0, =0xffffd8f0
-	adds r4, r0
-	lsls r0, r4, 3
-	adds r0, r1
-	ldrh r5, [r0, 0x6]
-	adds r0, r5, 0
-	bl FreeSpriteTilesByTag
-	adds r0, r5, 0
-	bl FreeSpritePaletteByTag
-	ldr r0, [r6]
-	adds r0, 0x2
-	str r0, [r6]
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r4, 0
-	bl sub_80A3C84
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ma01_080728D0
-
-	thumb_func_start ma02_instanciate_template
-ma02_instanciate_template: @ 80A3DD8
-	push {r4-r7,lr}
-	ldr r5, =gBattleAnimScriptPtr
-	ldr r1, [r5]
-	adds r3, r1, 0x1
-	str r3, [r5]
-	ldrb r2, [r1, 0x1]
-	ldrb r0, [r3, 0x1]
-	lsls r0, 8
-	adds r2, r0
-	ldrb r0, [r3, 0x2]
-	lsls r0, 16
-	adds r2, r0
-	ldrb r0, [r3, 0x3]
-	lsls r0, 24
-	adds r7, r2, r0
-	adds r0, r1, 0x5
-	str r0, [r5]
-	ldrb r4, [r1, 0x5]
-	adds r0, r1, 0x6
-	str r0, [r5]
-	ldrb r0, [r1, 0x6]
-	adds r1, 0x7
-	str r1, [r5]
-	cmp r0, 0
-	beq _080A3E28
-	adds r6, r5, 0
-	ldr r5, =gBattleAnimArgs
-	adds r3, r0, 0
-_080A3E10:
-	ldr r2, [r6]
-	ldrb r1, [r2]
-	ldrb r0, [r2, 0x1]
-	lsls r0, 8
-	orrs r1, r0
-	strh r1, [r5]
-	adds r2, 0x2
-	str r2, [r6]
-	adds r5, 0x2
-	subs r3, 0x1
-	cmp r3, 0
-	bne _080A3E10
-_080A3E28:
-	movs r0, 0x80
-	ands r0, r4
-	cmp r0, 0
-	beq _080A3E58
-	movs r0, 0x80
-	eors r4, r0
-	cmp r4, 0x3F
-	bls _080A3E48
-	adds r0, r4, 0
-	subs r0, 0x40
-	b _080A3E4A
-	.pool
-_080A3E48:
-	negs r0, r4
-_080A3E4A:
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, =gAnimationBankTarget
-	b _080A3E6A
-	.pool
-_080A3E58:
-	cmp r4, 0x3F
-	bls _080A3E62
-	adds r0, r4, 0
-	subs r0, 0x40
-	b _080A3E64
-_080A3E62:
-	negs r0, r4
-_080A3E64:
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, =gAnimationBankAttacker
-_080A3E6A:
-	ldrb r0, [r0]
-	bl sub_80A82E4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r4, 24
-	asrs r1, 24
-	adds r0, r1
-	lsls r0, 16
-	lsrs r6, r0, 16
-	lsls r0, r6, 16
-	asrs r0, 16
-	cmp r0, 0x2
-	bgt _080A3E88
-	movs r6, 0x3
-_080A3E88:
-	ldr r5, =gAnimationBankTarget
-	ldrb r0, [r5]
-	movs r1, 0x2
-	bl sub_80A5C6C
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldrb r0, [r5]
-	movs r1, 0x3
-	bl sub_80A5C6C
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, r6, 24
-	lsrs r3, 24
-	adds r0, r7, 0
-	adds r1, r4, 0
-	bl CreateSpriteAndAnimate
-	ldr r1, =gAnimVisualTaskCount
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ma02_instanciate_template
-
-	thumb_func_start sub_80A3ECC
-sub_80A3ECC: @ 80A3ECC
-	push {r4-r7,lr}
-	ldr r4, =gBattleAnimScriptPtr
-	ldr r1, [r4]
-	adds r3, r1, 0x1
-	str r3, [r4]
-	ldrb r2, [r1, 0x1]
-	ldrb r0, [r3, 0x1]
-	lsls r0, 8
-	adds r2, r0
-	ldrb r0, [r3, 0x2]
-	lsls r0, 16
-	adds r2, r0
-	ldrb r0, [r3, 0x3]
-	lsls r0, 24
-	adds r6, r2, r0
-	adds r0, r1, 0x5
-	str r0, [r4]
-	ldrb r7, [r1, 0x5]
-	adds r0, r1, 0x6
-	str r0, [r4]
-	ldrb r0, [r1, 0x6]
-	adds r1, 0x7
-	str r1, [r4]
-	cmp r0, 0
-	beq _080A3F1C
-	adds r5, r4, 0
-	ldr r4, =gBattleAnimArgs
-	adds r3, r0, 0
-_080A3F04:
-	ldr r2, [r5]
-	ldrb r1, [r2]
-	ldrb r0, [r2, 0x1]
-	lsls r0, 8
-	orrs r1, r0
-	strh r1, [r4]
-	adds r2, 0x2
-	str r2, [r5]
-	adds r4, 0x2
-	subs r3, 0x1
-	cmp r3, 0
-	bne _080A3F04
-_080A3F1C:
-	adds r0, r6, 0
-	adds r1, r7, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	bl _call_via_r6
-	ldr r1, =gAnimVisualTaskCount
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A3ECC
-
-	thumb_func_start ma04_wait_countdown
-ma04_wait_countdown: @ 80A3F48
-	push {r4,lr}
-	ldr r1, =gBattleAnimScriptPtr
-	ldr r0, [r1]
-	adds r2, r0, 0x1
-	str r2, [r1]
-	ldr r3, =gAnimFramesToWait
-	ldrb r0, [r0, 0x1]
-	strb r0, [r3]
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A3F66
-	movs r4, 0x1
-	negs r4, r4
-	adds r0, r4, 0
-	strb r0, [r3]
-_080A3F66:
-	adds r0, r2, 0x1
-	str r0, [r1]
-	ldr r1, =gAnimScriptCallback
-	ldr r0, =move_anim_waiter
-	str r0, [r1]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ma04_wait_countdown
-
-	thumb_func_start sub_80A3F88
-sub_80A3F88: @ 80A3F88
-	push {lr}
-	ldr r0, =gAnimVisualTaskCount
-	ldrb r2, [r0]
-	cmp r2, 0
-	bne _080A3FAC
-	ldr r0, =gBattleAnimScriptPtr
-	ldr r1, [r0]
-	adds r1, 0x1
-	str r1, [r0]
-	ldr r0, =gAnimFramesToWait
-	strb r2, [r0]
-	b _080A3FB2
-	.pool
-_080A3FAC:
-	ldr r1, =gAnimFramesToWait
-	movs r0, 0x1
-	strb r0, [r1]
-_080A3FB2:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A3F88
-
-	thumb_func_start nullsub_6
-nullsub_6: @ 80A3FBC
-	bx lr
-	thumb_func_end nullsub_6
-
-	thumb_func_start nullsub_7
-nullsub_7: @ 80A3FC0
-	bx lr
-	thumb_func_end nullsub_7
-
-	thumb_func_start sub_80A3FC4
-sub_80A3FC4: @ 80A3FC4
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	movs r0, 0
-	mov r8, r0
-	ldr r0, =gAnimVisualTaskCount
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080A3FEC
-	ldr r0, =gAnimSoundTaskCount
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080A3FEC
-	ldr r1, =gUnknown_02038430
-	ldrb r0, [r1]
-	cmp r0, 0xFF
-	bne _080A3FEC
-	ldrb r0, [r1, 0x1]
-	cmp r0, 0xFF
-	beq _080A4004
-_080A3FEC:
-	ldr r1, =gSoundAnimFramesToWait
-	movs r0, 0
-	strh r0, [r1]
-	b _080A401E
-	.pool
-_080A4004:
-	bl IsSEPlaying
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A403C
-	ldr r1, =gSoundAnimFramesToWait
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x5A
-	bhi _080A4030
-_080A401E:
-	ldr r1, =gAnimFramesToWait
-	movs r0, 0x1
-	strb r0, [r1]
-	b _080A40A2
-	.pool
-_080A4030:
-	ldr r0, =gMPlay_SE1
-	bl m4aMPlayStop
-	ldr r0, =gMPlay_SE2
-	bl m4aMPlayStop
-_080A403C:
-	ldr r1, =gSoundAnimFramesToWait
-	movs r0, 0
-	strh r0, [r1]
-	movs r5, 0
-	ldr r7, =0x0000ffff
-	ldr r6, =gUnknown_08524B44
-	ldr r4, =gAnimSpriteIndexArray
-_080A404A:
-	ldrh r0, [r4]
-	cmp r0, r7
-	beq _080A406E
-	lsls r0, 3
-	adds r0, r6
-	ldrh r0, [r0, 0x6]
-	bl FreeSpriteTilesByTag
-	ldrh r0, [r4]
-	lsls r0, 3
-	adds r0, r6
-	ldrh r0, [r0, 0x6]
-	bl FreeSpritePaletteByTag
-	ldrh r1, [r4]
-	adds r0, r7, 0
-	orrs r0, r1
-	strh r0, [r4]
-_080A406E:
-	adds r4, 0x2
-	adds r5, 0x1
-	cmp r5, 0x7
-	ble _080A404A
-	mov r1, r8
-	cmp r1, 0
-	bne _080A40A2
-	ldr r0, =gMPlay_BGM
-	ldr r1, =0x0000ffff
-	movs r2, 0x80
-	lsls r2, 1
-	bl m4aMPlayVolumeControl
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A409C
-	bl sub_80A8278
-	movs r0, 0x1
-	bl sub_8072A88
-_080A409C:
-	ldr r0, =gAnimScriptActive
-	mov r1, r8
-	strb r1, [r0]
-_080A40A2:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A3FC4
-
-	thumb_func_start ma09_play_sound
-ma09_play_sound: @ 80A40CC
-	push {r4,lr}
-	ldr r4, =gBattleAnimScriptPtr
-	ldr r0, [r4]
-	adds r1, r0, 0x1
-	str r1, [r4]
-	ldrb r0, [r0, 0x1]
-	ldrb r1, [r1, 0x1]
-	lsls r1, 8
-	orrs r0, r1
-	bl PlaySE
-	ldr r0, [r4]
-	adds r0, 0x2
-	str r0, [r4]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ma09_play_sound
-
-	thumb_func_start sub_80A40F4
-sub_80A40F4: @ 80A40F4
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 24
-	lsrs r7, r0, 24
-	lsls r0, r7, 2
-	adds r0, r7
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	mov r8, r1
-	adds r6, r0, r1
-	ldr r1, =gBankSpriteIds
-	movs r2, 0
-	ldrsh r0, [r6, r2]
-	adds r0, r1
-	ldrb r5, [r0]
-	ldr r1, =gSprites
-	lsls r0, r5, 4
-	adds r0, r5
-	lsls r0, 2
-	adds r4, r0, r1
-	adds r2, r4, 0
-	adds r2, 0x3E
-	ldrb r0, [r2]
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r2]
-	movs r3, 0x4
-	ldrsh r0, [r6, r3]
-	cmp r0, 0
-	bne _080A4148
-	adds r0, r7, 0
-	bl move_anim_task_del
-	b _080A41BE
-	.pool
-_080A4148:
-	ldr r0, =task_pA_ma0A_obj_to_bg_pal
-	movs r1, 0xA
-	bl CreateTask
-	lsls r0, 24
-	lsrs r2, r0, 24
-	mov r1, r8
-	subs r1, 0x8
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r1, r0, r1
-	strh r5, [r1, 0x8]
-	ldrh r0, [r4, 0x24]
-	ldrh r3, [r4, 0x20]
-	adds r0, r3
-	strh r0, [r1, 0xA]
-	ldrh r0, [r4, 0x26]
-	ldrh r4, [r4, 0x22]
-	adds r0, r4
-	strh r0, [r1, 0xC]
-	movs r3, 0x2
-	ldrsh r0, [r6, r3]
-	cmp r0, 0
-	bne _080A4190
-	ldr r0, =gBattle_BG1_X
-	ldrh r0, [r0]
-	strh r0, [r1, 0xE]
-	ldr r0, =gBattle_BG1_Y
-	b _080A4198
-	.pool
-_080A4190:
-	ldr r0, =gBattle_BG2_X
-	ldrh r0, [r0]
-	strh r0, [r1, 0xE]
-	ldr r0, =gBattle_BG2_Y
-_080A4198:
-	ldrh r0, [r0]
-	strh r0, [r1, 0x10]
-	ldr r1, =gTasks
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r0, r1
-	ldrh r1, [r6, 0x2]
-	strh r1, [r0, 0x12]
-	ldrh r1, [r6]
-	strh r1, [r0, 0x14]
-	ldr r1, =gUnknown_02038430
-	movs r3, 0x6
-	ldrsh r0, [r6, r3]
-	adds r0, r1
-	strb r2, [r0]
-	adds r0, r7, 0
-	bl move_anim_task_del
-_080A41BE:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A40F4
-
-	thumb_func_start sub_80A41D8
-sub_80A41D8: @ 80A41D8
-	push {r4,r5,lr}
-	ldr r1, =gBattleAnimScriptPtr
-	ldr r2, [r1]
-	adds r0, r2, 0x1
-	str r0, [r1]
-	ldrb r0, [r2, 0x1]
-	movs r1, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080A41F8
-	ldr r0, =gAnimationBankTarget
-	b _080A41FA
-	.pool
-_080A41F8:
-	ldr r0, =gAnimationBankAttacker
-_080A41FA:
-	ldrb r4, [r0]
-	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A4266
-	adds r0, r4, 0
-	bl GetBankIdentity
-	lsls r0, 24
-	movs r1, 0xFF
-	lsls r1, 24
-	adds r0, r1
-	lsrs r0, 24
-	cmp r0, 0x1
-	bls _080A4226
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A4230
-_080A4226:
-	movs r5, 0
-	b _080A4232
-	.pool
-_080A4230:
-	movs r5, 0x1
-_080A4232:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0
-	bl sub_80A438C
-	ldr r0, =sub_80A40F4
-	movs r1, 0xA
-	bl CreateTask
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r1, =gAnimVisualTaskCount
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r1, =gTasks
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r0, r1
-	movs r2, 0
-	strh r4, [r0, 0x8]
-	strh r5, [r0, 0xA]
-	movs r1, 0x1
-	strh r1, [r0, 0xC]
-	strh r2, [r0, 0xE]
-_080A4266:
-	movs r0, 0x2
-	eors r4, r0
-	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A42D8
-	adds r0, r4, 0
-	bl GetBankIdentity
-	lsls r0, 24
-	movs r1, 0xFF
-	lsls r1, 24
-	adds r0, r1
-	lsrs r0, 24
-	cmp r0, 0x1
-	bls _080A4294
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A42A4
-_080A4294:
-	movs r5, 0
-	b _080A42A6
-	.pool
-_080A42A4:
-	movs r5, 0x1
-_080A42A6:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0
-	bl sub_80A438C
-	ldr r0, =sub_80A40F4
-	movs r1, 0xA
-	bl CreateTask
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r1, =gAnimVisualTaskCount
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r1, =gTasks
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r0, r1
-	strh r4, [r0, 0x8]
-	strh r5, [r0, 0xA]
-	movs r1, 0x1
-	strh r1, [r0, 0xC]
-	strh r1, [r0, 0xE]
-_080A42D8:
-	ldr r1, =gBattleAnimScriptPtr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	ldr r1, =gAnimFramesToWait
-	movs r0, 0x1
-	strb r0, [r1]
-	ldr r1, =gAnimScriptCallback
-	ldr r0, =move_anim_waiter
-	str r0, [r1]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A41D8
-
-	thumb_func_start b_side_obj__get_some_boolean
-b_side_obj__get_some_boolean: @ 80A4310
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r5, r4, 0
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A4330
-	ldr r0, =gAnimationBankAttacker
-	ldrb r0, [r0]
-	cmp r4, r0
-	beq _080A4374
-	b _080A4384
-	.pool
-_080A4330:
-	adds r0, r4, 0
-	bl sub_80A6A90
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A4384
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A4374
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r1, [r0]
-	lsls r0, r5, 2
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080A4374
-	ldr r2, =gSprites
-	ldr r0, =gBankSpriteIds
-	adds r0, r5, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x3E
-	ldrb r0, [r0]
-	lsls r0, 29
-	cmp r0, 0
-	blt _080A4384
-_080A4374:
-	movs r0, 0x1
-	b _080A4386
-	.pool
-_080A4384:
-	movs r0, 0
-_080A4386:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end b_side_obj__get_some_boolean
-
-	thumb_func_start sub_80A438C
-sub_80A438C: @ 80A438C
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x28
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r6, r5, 0
-	lsls r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	mov r9, r2
-	cmp r1, 0
-	beq _080A43AA
-	b _080A455E
-_080A43AA:
-	bl IsContest
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080A43DC
-	ldr r1, =0x06008000
-	movs r2, 0x80
-	lsls r2, 6
-	movs r0, 0
-	movs r3, 0x1
-	bl RequestDma3Fill
-	ldr r1, =0x0600f000
-	movs r2, 0x80
-	lsls r2, 5
-	movs r0, 0xFF
-	movs r3, 0
-	bl RequestDma3Fill
-	b _080A43F8
-	.pool
-_080A43DC:
-	ldr r1, =0x06004000
-	movs r2, 0x80
-	lsls r2, 6
-	movs r0, 0
-	movs r3, 0x1
-	bl RequestDma3Fill
-	ldr r1, =0x0600e000
-	movs r2, 0x80
-	lsls r2, 5
-	movs r0, 0xFF
-	movs r3, 0
-	bl RequestDma3Fill
-_080A43F8:
-	add r0, sp, 0x10
-	bl sub_80A6B30
-	add r0, sp, 0x20
-	movs r1, 0
-	strh r1, [r0]
-	ldr r1, [sp, 0x10]
-	ldr r2, =0x01000800
-	bl CpuSet
-	mov r0, sp
-	adds r0, 0x22
-	movs r1, 0xFF
-	strh r1, [r0]
-	ldr r1, [sp, 0x14]
-	ldr r2, =0x01000400
-	bl CpuSet
-	movs r0, 0x1
-	movs r1, 0x4
-	movs r2, 0x2
-	bl lcd_bg_operations
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0x1
-	bl lcd_bg_operations
-	movs r0, 0x1
-	movs r1, 0x1
-	movs r2, 0
-	bl lcd_bg_operations
-	ldr r0, =gBankSpriteIds
-	adds r0, r6, r0
-	ldrb r4, [r0]
-	ldr r5, =gBattle_BG1_X
-	ldr r0, =gSprites
-	lsls r1, r4, 4
-	adds r1, r4
-	lsls r1, 2
-	adds r1, r0
-	ldrh r0, [r1, 0x24]
-	ldrh r1, [r1, 0x20]
-	adds r0, r1
-	negs r0, r0
-	adds r0, 0x20
-	strh r0, [r5]
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A447A
-	ldr r0, =gUnknown_02039F34
-	ldr r0, [r0]
-	ldr r0, [r0, 0x18]
-	ldrh r0, [r0]
-	bl sub_80DB2A8
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A447A
-	ldrh r0, [r5]
-	subs r0, 0x1
-	strh r0, [r5]
-_080A447A:
-	ldr r5, =gBattle_BG1_Y
-	ldr r2, =gSprites
-	lsls r1, r4, 4
-	adds r1, r4
-	lsls r1, 2
-	adds r1, r2
-	ldrh r0, [r1, 0x26]
-	ldrh r1, [r1, 0x22]
-	adds r0, r1
-	negs r0, r0
-	adds r0, 0x20
-	strh r0, [r5]
-	mov r0, r9
-	cmp r0, 0
-	beq _080A44B0
-	ldr r0, =gBankSpriteIds
-	adds r0, r6, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-_080A44B0:
-	ldr r0, =gBattle_BG1_X
-	ldrh r1, [r0]
-	movs r0, 0x14
-	bl SetGpuReg
-	ldrh r1, [r5]
-	movs r0, 0x16
-	bl SetGpuReg
-	lsls r4, r6, 5
-	ldr r0, =gPlttBufferUnfaded + 0x200
-	adds r4, r0
-	add r0, sp, 0x10
-	ldrb r1, [r0, 0x8]
-	lsls r1, 4
-	adds r0, r4, 0
-	movs r2, 0x20
-	bl LoadPalette
-	add r0, sp, 0x10
-	ldrb r1, [r0, 0x8]
-	lsls r1, 5
-	movs r0, 0xA0
-	lsls r0, 19
-	adds r1, r0
-	ldr r2, =0x04000008
-	adds r0, r4, 0
-	bl CpuSet
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080A4524
-	movs r3, 0
-	b _080A452E
-	.pool
-_080A4524:
-	adds r0, r6, 0
-	bl GetBankIdentity
-	lsls r0, 24
-	lsrs r3, r0, 24
-_080A452E:
-	add r0, sp, 0x10
-	ldrb r0, [r0, 0x8]
-	str r0, [sp]
-	ldr r0, [sp, 0x10]
-	str r0, [sp, 0x4]
-	ldr r0, [sp, 0x14]
-	str r0, [sp, 0x8]
-	add r0, sp, 0x10
-	ldrh r0, [r0, 0xA]
-	str r0, [sp, 0xC]
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0
-	bl sub_8118FBC
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	bne _080A4558
-	b _080A4666
-_080A4558:
-	bl sub_80A46A0
-	b _080A4666
-_080A455E:
-	ldr r1, =0x06006000
-	movs r2, 0x80
-	lsls r2, 6
-	movs r0, 0
-	movs r3, 0x1
-	bl RequestDma3Fill
-	ldr r1, =0x0600f000
-	movs r7, 0x80
-	lsls r7, 5
-	movs r0, 0
-	adds r2, r7, 0
-	movs r3, 0x1
-	bl RequestDma3Fill
-	add r0, sp, 0x10
-	movs r1, 0x2
-	bl sub_80A6B90
-	add r0, sp, 0x24
-	movs r4, 0
-	strh r4, [r0]
-	ldr r1, [sp, 0x10]
-	adds r1, r7
-	ldr r2, =0x01000800
-	bl CpuSet
-	mov r0, sp
-	adds r0, 0x26
-	strh r4, [r0]
-	ldr r1, [sp, 0x14]
-	movs r2, 0x80
-	lsls r2, 4
-	mov r8, r2
-	add r1, r8
-	ldr r2, =0x01000400
-	bl CpuSet
-	movs r0, 0x2
-	movs r1, 0x4
-	movs r2, 0x2
-	bl lcd_bg_operations
-	movs r0, 0x2
-	movs r1, 0
-	movs r2, 0x1
-	bl lcd_bg_operations
-	movs r0, 0x2
-	movs r1, 0x1
-	movs r2, 0
-	bl lcd_bg_operations
-	ldr r0, =gBankSpriteIds
-	adds r2, r5, r0
-	ldrb r4, [r2]
-	ldr r5, =gBattle_BG2_X
-	ldr r3, =gSprites
-	lsls r1, r4, 4
-	adds r1, r4
-	lsls r1, 2
-	adds r1, r3
-	ldrh r0, [r1, 0x24]
-	ldrh r4, [r1, 0x20]
-	adds r0, r4
-	negs r0, r0
-	adds r0, 0x20
-	strh r0, [r5]
-	ldr r4, =gBattle_BG2_Y
-	ldrh r0, [r1, 0x26]
-	ldrh r1, [r1, 0x22]
-	adds r0, r1
-	negs r0, r0
-	adds r0, 0x20
-	strh r0, [r4]
-	mov r0, r9
-	cmp r0, 0
-	beq _080A460E
-	ldrb r1, [r2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-_080A460E:
-	ldrh r1, [r5]
-	movs r0, 0x18
-	bl SetGpuReg
-	ldrh r1, [r4]
-	movs r0, 0x1A
-	bl SetGpuReg
-	lsls r4, r6, 5
-	ldr r0, =gPlttBufferUnfaded + 0x200
-	adds r4, r0
-	adds r0, r4, 0
-	movs r1, 0x90
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r1, =0x05000120
-	ldr r2, =0x04000008
-	adds r0, r4, 0
-	bl CpuSet
-	adds r0, r6, 0
-	bl GetBankIdentity
-	adds r3, r0, 0
-	lsls r3, 24
-	lsrs r3, 24
-	add r0, sp, 0x10
-	ldrb r0, [r0, 0x8]
-	str r0, [sp]
-	ldr r0, [sp, 0x10]
-	adds r0, r7
-	str r0, [sp, 0x4]
-	ldr r0, [sp, 0x14]
-	add r0, r8
-	str r0, [sp, 0x8]
-	add r0, sp, 0x10
-	ldrh r0, [r0, 0xA]
-	str r0, [sp, 0xC]
-	movs r0, 0x2
-	movs r1, 0
-	movs r2, 0
-	bl sub_8118FBC
-_080A4666:
-	add sp, 0x28
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80A438C
-
+    
 	thumb_func_start sub_80A46A0
 sub_80A46A0: @ 80A46A0
 	push {r4-r7,lr}
 	sub sp, 0x10
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x18]
 	ldrh r0, [r0]
-	bl sub_80DB2A8
+	bl IsSpeciesNotUnown
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4712
@@ -1790,14 +283,14 @@ _080A48D2:
 	cmp r4, 0x2
 	bne _080A48E0
 _080A48D6:
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	b _080A48E2
 	.pool
 _080A48E0:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 _080A48E2:
 	ldrb r5, [r0]
-	ldr r3, =gUnknown_02038430
+	ldr r3, =gMonAnimTaskIdArray
 	ldrb r0, [r3]
 	cmp r0, 0xFF
 	beq _080A4908
@@ -1902,7 +395,7 @@ _080A49BC:
 _080A49C4:
 	movs r4, 0x1
 _080A49C6:
-	ldr r6, =gUnknown_02038430
+	ldr r6, =gMonAnimTaskIdArray
 	ldrb r0, [r6]
 	cmp r0, 0xFF
 	beq _080A49DE
@@ -1964,15 +457,15 @@ _080A4A3A:
 	cmp r5, 0x2
 	bne _080A4A48
 _080A4A3E:
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	b _080A4A4A
 	.pool
 _080A4A48:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 _080A4A4A:
 	ldrb r4, [r0]
 	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4A8A
@@ -2005,7 +498,7 @@ _080A4A8A:
 	cmp r5, 0x1
 	bls _080A4ACA
 	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4ACA
@@ -2066,15 +559,15 @@ _080A4AFE:
 	cmp r5, 0x2
 	bne _080A4B0C
 _080A4B02:
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	b _080A4B0E
 	.pool
 _080A4B0C:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 _080A4B0E:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4B38
@@ -2099,7 +592,7 @@ _080A4B38:
 	adds r4, r6, 0
 	eors r4, r0
 	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4B78
@@ -2183,7 +676,7 @@ _080A4BF8:
 	movs r5, 0x1
 _080A4BFA:
 	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4C0C
@@ -2202,7 +695,7 @@ _080A4C0C:
 	movs r0, 0x2
 	eors r4, r0
 	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4C38
@@ -2526,7 +1019,7 @@ sub_80A4E5C: @ 80A4E5C
 	b _080A4EDA
 	.pool
 _080A4EA8:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -2866,7 +1359,7 @@ BattleAnimGetPanControl: @ 80A5178
 	bne _080A51C0
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r2, [r0]
 	ldr r1, [r1, 0x4]
 	lsls r0, r2, 1
@@ -2892,8 +1385,8 @@ _080A51C0:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A51E8
-	ldr r0, =gAnimationBankAttacker
-	ldr r1, =gAnimationBankTarget
+	ldr r0, =gAnimBankAttacker
+	ldr r1, =gAnimBankTarget
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -2905,13 +1398,13 @@ _080A51C0:
 	b _080A524C
 	.pool
 _080A51E8:
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5226
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -2933,7 +1426,7 @@ _080A5218:
 	lsls r0, 24
 	b _080A5250
 _080A5226:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -2988,7 +1481,7 @@ sub_80A5278: @ 80A5278
 	bne _080A52C0
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r2, [r0]
 	ldr r1, [r1, 0x4]
 	lsls r0, r2, 1
@@ -3010,7 +1503,7 @@ sub_80A5278: @ 80A5278
 	b _080A52DE
 	.pool
 _080A52C0:
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -3860,11 +2353,11 @@ sub_80A5984: @ 80A5984
 	str r1, [r0]
 	cmp r2, 0
 	beq _080A59A0
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	b _080A59A2
 	.pool
 _080A59A0:
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 _080A59A2:
 	ldrb r0, [r0]
 	bl GetBankIdentity
@@ -3882,11 +2375,11 @@ _080A59BE:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x2
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 _080A59D2:
 	pop {r4}
 	pop {r0}
@@ -3908,11 +2401,11 @@ sub_80A59DC: @ 80A59DC
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x2
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 _080A5A04:
 	pop {r0}
 	bx r0
@@ -3927,11 +2420,11 @@ sub_80A5A0C: @ 80A5A0C
 	ldrb r6, [r0, 0x1]
 	adds r0, 0x2
 	str r0, [r1]
-	ldr r7, =gAnimationBankAttacker
+	ldr r7, =gAnimBankAttacker
 	ldrb r0, [r7]
 	bl GetBankSide
 	adds r4, r0, 0
-	ldr r5, =gAnimationBankTarget
+	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	bl GetBankSide
 	lsls r4, 24
@@ -3961,11 +2454,11 @@ _080A5A64:
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 	movs r0, 0x2
 	movs r1, 0x4
 	movs r2, 0x2
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 _080A5A78:
 	pop {r4-r7}
 	pop {r0}
@@ -4051,11 +2544,11 @@ sub_80A5AFC: @ 80A5AFC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5BA6
-	ldr r6, =gAnimationBankAttacker
+	ldr r6, =gAnimBankAttacker
 	ldrb r0, [r6]
 	bl GetBankSide
 	adds r4, r0, 0
-	ldr r5, =gAnimationBankTarget
+	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	bl GetBankSide
 	lsls r4, 24
@@ -4133,11 +2626,11 @@ sub_80A5BAC: @ 80A5BAC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5C38
-	ldr r6, =gAnimationBankAttacker
+	ldr r6, =gAnimBankAttacker
 	ldrb r0, [r6]
 	bl GetBankSide
 	adds r4, r0, 0
-	ldr r5, =gAnimationBankTarget
+	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	bl GetBankSide
 	lsls r4, 24

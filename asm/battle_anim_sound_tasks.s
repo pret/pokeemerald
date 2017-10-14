@@ -142,7 +142,7 @@ sub_8158C04: @ 8158C04
 	cmp r0, 0x2
 	bne _08158C4C
 	adds r0, r5, 0
-	bl move_anim_related_task_del
+	bl DestroyAnimSoundTask
 _08158C4C:
 	pop {r4,r5}
 	pop {r0}
@@ -264,7 +264,7 @@ sub_8158D08: @ 8158D08
 	cmp r0, 0
 	bne _08158D50
 	adds r0, r5, 0
-	bl move_anim_related_task_del
+	bl DestroyAnimSoundTask
 	b _08158D82
 	.pool
 _08158D50:
@@ -319,7 +319,7 @@ sub_8158D8C: @ 8158D8C
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08158DC8
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x18]
 	ldrh r4, [r0]
@@ -327,7 +327,7 @@ sub_8158D8C: @ 8158D8C
 	.pool
 _08158DC8:
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _08158E76
 _08158DD0:
 	ldr r0, =gBattleAnimArgs
@@ -336,25 +336,25 @@ _08158DD0:
 	adds r2, r0, 0
 	cmp r1, 0
 	bne _08158DEC
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r4, [r0]
 	b _08158E12
 	.pool
 _08158DEC:
 	cmp r1, 0x1
 	bne _08158DFC
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r4, [r0]
 	b _08158E12
 	.pool
 _08158DFC:
 	cmp r1, 0x2
 	bne _08158E08
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	b _08158E0A
 	.pool
 _08158E08:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 _08158E0A:
 	ldrb r1, [r0]
 	movs r0, 0x2
@@ -369,12 +369,12 @@ _08158E12:
 	bne _08158E38
 _08158E1E:
 	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158E38
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _08158E8C
 	.pool
 _08158E38:
@@ -416,7 +416,7 @@ _08158E76:
 	bl PlayCry3
 _08158E86:
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08158E8C:
 	pop {r4-r6}
 	pop {r0}
@@ -444,7 +444,7 @@ sub_8158E9C: @ 8158E9C
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08158ED8
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x18]
 	ldrh r4, [r0]
@@ -452,7 +452,7 @@ sub_8158E9C: @ 8158E9C
 	.pool
 _08158ED8:
 	adds r0, r6, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _08158F86
 _08158EE0:
 	ldr r0, =gBattleAnimArgs
@@ -461,25 +461,25 @@ _08158EE0:
 	adds r2, r0, 0
 	cmp r1, 0
 	bne _08158EFC
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r4, [r0]
 	b _08158F22
 	.pool
 _08158EFC:
 	cmp r1, 0x1
 	bne _08158F0C
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r4, [r0]
 	b _08158F22
 	.pool
 _08158F0C:
 	cmp r1, 0x2
 	bne _08158F18
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	b _08158F1A
 	.pool
 _08158F18:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 _08158F1A:
 	ldrb r1, [r0]
 	movs r0, 0x2
@@ -494,12 +494,12 @@ _08158F22:
 	bne _08158F48
 _08158F2E:
 	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _08158F48
 	adds r0, r6, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _08158FEE
 	.pool
 _08158F48:
@@ -571,7 +571,7 @@ _08158FD0:
 	.pool
 _08158FE8:
 	adds r0, r6, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08158FEE:
 	pop {r4-r6}
 	pop {r0}
@@ -620,7 +620,7 @@ _08159028:
 	movs r2, 0xA
 	bl PlayCry3
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _0815906A
 _0815904E:
 	bl IsCryPlaying
@@ -633,7 +633,7 @@ _0815904E:
 	movs r2, 0x8
 	bl PlayCry3
 	mov r0, r9
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _0815906A:
 	pop {r3,r4}
 	mov r8, r3
@@ -669,7 +669,7 @@ _081590A0:
 	cmp r0, 0
 	bne _081590B0
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _081590B0:
 	pop {r4}
 	pop {r0}
@@ -698,14 +698,14 @@ sub_81590B8: @ 81590B8
 	lsls r0, 24
 	cmp r0, 0
 	beq _081590F8
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x18]
 	b _08159102
 	.pool
 _081590F8:
-	ldr r1, =gUnknown_02038438
-	ldr r0, =gAnimationBankAttacker
+	ldr r1, =gAnimSpeciesByBanks
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -728,7 +728,7 @@ _08159102:
 	.pool
 _08159130:
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08159136:
 	pop {r4,r5}
 	pop {r0}
@@ -829,7 +829,7 @@ _081591F2:
 	bl PlayCry3
 _081591FE:
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08159204:
 	pop {r3}
 	mov r8, r3
@@ -856,7 +856,7 @@ sub_8159210: @ 8159210
 	adds r0, r5, 0
 	bl PlaySE1WithPanning
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -881,7 +881,7 @@ sub_8159244: @ 8159244
 	adds r0, r5, 0
 	bl PlaySE2WithPanning
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -995,7 +995,7 @@ _08159342:
 	cmp r1, r0
 	bne _0815935A
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _0815935A:
 	pop {r4,r5}
 	pop {r0}

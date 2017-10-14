@@ -16,7 +16,7 @@ sub_8170478: @ 8170478
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x10]
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r4, [r0]
 	ldr r0, =gBattle_WIN0H
 	movs r1, 0
@@ -43,19 +43,19 @@ sub_8170478: @ 8170478
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0x1
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0x1
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 	ldr r0, =gHealthBoxesIds
 	adds r4, r0
 	ldrb r0, [r4]
@@ -212,7 +212,7 @@ sub_8170660: @ 8170660
 	push {r7}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	mov r8, r0
 	ldr r1, =gTasks
@@ -335,7 +335,7 @@ _08170708:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 _0817076C:
 	movs r0, 0
 	bl GetGpuReg
@@ -372,7 +372,7 @@ _0817076C:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl lcd_bg_operations
+	bl SetAnimBgAttribute
 	ldr r0, =gHealthBoxesIds
 	add r0, r8
 	ldrb r0, [r0]
@@ -412,7 +412,7 @@ _0817076C:
 	orrs r2, r5
 	strb r2, [r0, 0x5]
 	adds r0, r7, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08170814:
 	pop {r3}
 	mov r8, r3
@@ -540,12 +540,12 @@ sub_8170920: @ 8170920
 	lsrs r4, 24
 	mov r1, sp
 	adds r1, 0x1
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r2, [r0]
 	mov r0, sp
 	bl sub_8170834
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -628,11 +628,11 @@ sub_81709EC: @ 81709EC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl sub_817094C
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -752,7 +752,7 @@ _08170AD6:
 	cmp r0, 0
 	bne _08170AF8
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08170AF8:
 	pop {r4-r6}
 	pop {r0}
@@ -766,7 +766,7 @@ sub_8170B04: @ 8170B04
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r5, [r0]
@@ -834,7 +834,7 @@ _08170B84:
 	orrs r1, r2
 	strb r1, [r0]
 	adds r0, r6, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08170BA4:
 	pop {r4-r6}
 	pop {r0}
@@ -852,7 +852,7 @@ sub_8170BB0: @ 8170BB0
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, =gBankSpriteIds
-	ldr r4, =gAnimationBankAttacker
+	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	adds r1, r0, r1
 	ldrb r1, [r1]
@@ -904,7 +904,7 @@ _08170C08:
 	b _08170CEE
 	.pool
 _08170C44:
-	ldr r5, =gAnimationBankAttacker
+	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0
 	bl sub_80A5C6C
@@ -979,7 +979,7 @@ _08170CC4:
 	cmp r0, 0
 	bne _08170CEE
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08170CEE:
 	add sp, 0xC
 	pop {r3,r4}
@@ -1003,7 +1003,7 @@ sub_8170CFC: @ 8170CFC
 	lsrs r0, 24
 	bl sub_8076A78
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1023,7 +1023,7 @@ sub_8170D24: @ 8170D24
 	lsrs r0, 24
 	bl sub_8076AE8
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1051,7 +1051,7 @@ _08170D70:
 _08170D74:
 	strh r0, [r1, 0xE]
 	adds r0, r2, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.pool
@@ -1162,7 +1162,7 @@ sub_8170E04: @ 8170E04
 	adds r6, r4, r1
 	movs r0, 0x22
 	strh r0, [r6, 0x2E]
-	ldr r2, =gAnimationBankTarget
+	ldr r2, =gAnimBankTarget
 	mov r8, r2
 	ldrb r0, [r2]
 	movs r1, 0
@@ -1246,7 +1246,7 @@ sub_8170EF0: @ 8170EF0
 	cmp r1, r0
 	bne _08170F1A
 	adds r0, r3, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08170F1A:
 	pop {r0}
 	bx r0
@@ -1313,7 +1313,7 @@ _08170F54:
 	adds r6, r4, r0
 	movs r0, 0x22
 	strh r0, [r6, 0x2E]
-	ldr r1, =gAnimationBankTarget
+	ldr r1, =gAnimBankTarget
 	mov r8, r1
 	ldrb r0, [r1]
 	movs r1, 0
@@ -1550,7 +1550,7 @@ _08171188:
 	movs r2, 0x1
 	movs r3, 0x1C
 	bl sub_8171D98
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r1, [r0]
 	movs r0, 0
 	movs r2, 0xE
@@ -1585,7 +1585,7 @@ sub_81711E8: @ 81711E8
 	str r0, [r4, 0x1C]
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1607,7 +1607,7 @@ sub_8171240: @ 8171240
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r4, [r0]
@@ -2333,7 +2333,7 @@ sub_81717F8: @ 81717F8
 	push {r7}
 	sub sp, 0x4
 	adds r6, r0, 0
-	ldr r7, =gAnimationBankTarget
+	ldr r7, =gAnimBankTarget
 	ldrh r0, [r6, 0x36]
 	adds r0, 0x1
 	movs r1, 0
@@ -2715,7 +2715,7 @@ sub_8171AE4: @ 8171AE4
 	movs r2, 0x1
 	movs r3, 0x1C
 	bl sub_8171D98
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x1
 	movs r2, 0xE
@@ -2724,7 +2724,7 @@ sub_8171AE4: @ 8171AE4
 _08171B36:
 	ldr r6, =gSprites
 	ldr r5, =gBankSpriteIds
-	ldr r4, =gAnimationBankTarget
+	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -2792,7 +2792,7 @@ sub_8171BAC: @ 8171BAC
 _08171BCA:
 	ldr r4, =gSprites
 	ldr r3, =gBankSpriteIds
-	ldr r2, =gAnimationBankTarget
+	ldr r2, =gAnimBankTarget
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -2841,7 +2841,7 @@ _08171C24:
 	beq _08171C8A
 	ldr r4, =gSprites
 	ldr r3, =gBankSpriteIds
-	ldr r2, =gAnimationBankTarget
+	ldr r2, =gAnimBankTarget
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -4730,7 +4730,7 @@ sub_8172BF0: @ 8172BF0
 	movs r0, 0
 	mov r8, r0
 	ldr r0, =gBankSpriteIds
-	ldr r3, =gAnimationBankAttacker
+	ldr r3, =gAnimBankAttacker
 	ldrb r2, [r3]
 	adds r0, r2, r0
 	ldrb r6, [r0]
@@ -4877,7 +4877,7 @@ _08172D28:
 	adds r0, r1
 	ldrb r1, [r0, 0x8]
 	strh r1, [r0, 0x8]
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -4914,7 +4914,7 @@ _08172D7E:
 	beq _08172D8A
 _08172D84:
 	adds r0, r7, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08172D8A:
 	pop {r3}
 	mov r8, r3
@@ -4949,7 +4949,7 @@ _08172DC0:
 	beq _08172E4E
 	b _08172E84
 _08172DC6:
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankIdentity_permutated
 	lsls r0, 24
@@ -5010,7 +5010,7 @@ _08172E14:
 	b _08172E84
 _08172E4E:
 	ldr r1, =gBankSpriteIds
-	ldr r4, =gAnimationBankAttacker
+	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5032,7 +5032,7 @@ _08172E4E:
 	ldrb r0, [r4]
 	bl sub_805E974
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _08172E84:
 	pop {r4,r5}
 	pop {r0}
@@ -5048,7 +5048,7 @@ sub_8172E9C: @ 8172E9C
 	ldr r3, =gBattleAnimArgs
 	ldr r1, =gBattleSpritesDataPtr
 	ldr r2, [r1]
-	ldr r1, =gAnimationBankAttacker
+	ldr r1, =gAnimBankAttacker
 	ldrb r1, [r1]
 	ldr r2, [r2]
 	lsls r1, 2
@@ -5057,7 +5057,7 @@ sub_8172E9C: @ 8172E9C
 	lsls r1, 29
 	lsrs r1, 31
 	strh r1, [r3, 0xE]
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.pool
@@ -5068,11 +5068,11 @@ sub_8172ED0: @ 8172ED0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gAnimationBankTarget
+	ldr r2, =gAnimBankTarget
 	ldr r1, =gEffectBank
 	ldrb r1, [r1]
 	strb r1, [r2]
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.pool
@@ -5108,7 +5108,7 @@ sub_8172EF0: @ 8172EF0
 	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r6, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172FC8
@@ -5540,7 +5540,7 @@ sub_81732B0: @ 81732B0
 	ldr r0, =0x0000281d
 	bl IndexOfSpritePaletteTag
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5559,7 +5559,7 @@ sub_81732E4: @ 81732E4
 	adds r0, r5, 0
 	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -5603,7 +5603,7 @@ sub_817330C: @ 817330C
 	bl sub_80A68D4
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5628,7 +5628,7 @@ sub_817339C: @ 817339C
 	adds r3, r0, 0
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5679,7 +5679,7 @@ sub_8173400: @ 8173400
 	adds r4, r0, 0
 	ldr r5, =gSprites
 	ldr r3, =gBankSpriteIds
-	ldr r2, =gAnimationBankAttacker
+	ldr r2, =gAnimBankAttacker
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -5708,7 +5708,7 @@ sub_8173400: @ 8173400
 	movs r1, 0
 	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl move_anim_8072740
+	bl DestroyAnimSprite
 _08173448:
 	pop {r4,r5}
 	pop {r0}
@@ -5733,7 +5733,7 @@ sub_817345C: @ 817345C
 _08173478:
 	movs r0, 0
 	bl GetBankByIdentity
-	ldr r1, =gAnimationBankAttacker
+	ldr r1, =gAnimBankAttacker
 	strb r0, [r1]
 	movs r0, 0x1
 	b _08173498
@@ -5741,16 +5741,16 @@ _08173478:
 _0817348C:
 	movs r0, 0x1
 	bl GetBankByIdentity
-	ldr r1, =gAnimationBankAttacker
+	ldr r1, =gAnimBankAttacker
 	strb r0, [r1]
 	movs r0, 0
 _08173498:
 	bl GetBankByIdentity
-	ldr r1, =gAnimationBankTarget
+	ldr r1, =gAnimBankTarget
 	strb r0, [r1]
 _081734A0:
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5801,7 +5801,7 @@ _08173508:
 _0817350C:
 	strh r0, [r1]
 	adds r0, r2, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.pool
@@ -5812,18 +5812,18 @@ sub_817351C: @ 817351C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gAnimationBankAttacker
+	ldr r3, =gAnimBankAttacker
 	ldr r1, =gBattleSpritesDataPtr
 	ldr r2, [r1]
 	ldr r1, [r2, 0x8]
 	ldrh r1, [r1]
 	strb r1, [r3]
-	ldr r3, =gAnimationBankTarget
+	ldr r3, =gAnimBankTarget
 	ldr r1, [r2, 0x8]
 	ldrh r1, [r1]
 	lsrs r1, 8
 	strb r1, [r3]
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	pop {r0}
 	bx r0
 	.pool

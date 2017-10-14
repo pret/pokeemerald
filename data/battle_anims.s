@@ -294,7 +294,7 @@ gUnknown_08524B3C:: @ 8524B3C
 	.byte 0x00, 0x87, 0x00, 0xc0, 0x00, 0x08, 0x00, 0x00
 
     .align 2
-gUnknown_08524B44:: @ 8524B44
+gBattleAnimPicTable:: @ 8524B44
 	obj_tiles 0x08c02538, 0x0200, 0x2710
 	obj_tiles 0x08c1c6e0, 0x0300, 0x2711
 	obj_tiles 0x08c20784, 0x0200, 0x2712
@@ -597,6 +597,8 @@ gUnknown_085253AC:: @ 85253AC
 	obj_tiles 0x08c0a3ec, 0x1000, 0x282f
 	obj_tiles 0x08c1bee4, 0x0100, 0x2830
 
+    .align 2
+gBattleAnimPaletteTable:: @ 852544C
 	obj_pal 0x08c028cc, 0x2710
 	obj_pal 0x08c1c794, 0x2711
 	obj_pal 0x08c20868, 0x2712
@@ -930,18 +932,18 @@ gUnknown_08525D54:: @ 8525D54
 	.4byte 0x08c25bec, 0x08d91074, 0x08c27324
 
     .align 2
-gUnknown_08525E98:: @ 8525E98
-	.4byte ma00_load_graphics
-	.4byte ma01_080728D0
-	.4byte ma02_instanciate_template
-	.4byte sub_80A3ECC
-	.4byte ma04_wait_countdown
-	.4byte sub_80A3F88
-	.4byte nullsub_6
-	.4byte nullsub_7
-	.4byte sub_80A3FC4
-	.4byte ma09_play_sound
-	.4byte sub_80A41D8
+sScriptCmdTable:: @ 8525E98
+	.4byte ScriptCmd_loadspritegfx
+	.4byte ScriptCmd_unloadspritegfx
+	.4byte ScriptCmd_createsprite
+	.4byte ScriptCmd_createvisualtask
+	.4byte ScriptCmd_delay
+	.4byte ScriptCmd_waitforvisualfinish
+	.4byte ScriptCmd_hang1
+	.4byte ScriptCmd_hang2
+	.4byte ScriptCmd_end
+	.4byte ScriptCmd_playse
+	.4byte ScriptCmd_monbg
 	.4byte ma0B_0807324C
 	.4byte ma0C_set_BLDCNT_to_x3F40_and_BLDALPHA_to_argument
 	.4byte ma0D_reset_BLDCNT_and_BLDALPHA

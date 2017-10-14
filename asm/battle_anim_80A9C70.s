@@ -331,7 +331,7 @@ sub_80A9EF4: @ 80A9EF4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r4, =gAnimationBankTarget
+	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -616,7 +616,7 @@ _080AA16C:
 	movs r1, 0
 	bl SetGpuReg
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _080AA186:
 	pop {r4}
 	pop {r0}
@@ -829,7 +829,7 @@ _080AA322:
 	b _080AA330
 _080AA328:
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _080AA352
 _080AA330:
 	ldr r0, =gBattleAnimArgs
@@ -863,13 +863,13 @@ move_anim_start_t2: @ 80AA364
 	lsrs r4, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	strb r4, [r0]
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	strb r4, [r0]
 	ldr r0, =gUnknown_082C92FC
 	movs r2, 0
-	bl move_something
+	bl DoBattleAnim
 	ldr r0, =task0A_80788BC
 	movs r1, 0xA
 	bl CreateTask

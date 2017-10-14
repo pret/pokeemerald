@@ -4658,7 +4658,7 @@ _081BD7A2:
 	adds r2, r1
 	ldrb r1, [r2]
 	strb r1, [r5]
-	ldr r4, =gMovePowerMoveAnim
+	ldr r4, =gAnimMovePower
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4672,7 +4672,7 @@ _081BD7A2:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r4, =gMoveDmgMoveAnim
+	ldr r4, =gAnimMoveDmg
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4698,7 +4698,7 @@ _081BD7A2:
 	lsls r1, 24
 	orrs r3, r1
 	str r3, [r4]
-	ldr r3, =gHappinessMoveAnim
+	ldr r3, =gAnimFriendship
 	ldrb r1, [r6]
 	lsls r1, 9
 	mov r2, r12
@@ -4720,7 +4720,7 @@ _081BD7A2:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r3, =gDisableStructMoveAnim
+	ldr r3, =gAnimDisableStructPtr
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4849,7 +4849,7 @@ _081BD960:
 	movs r0, 0
 	bl sub_805EB9C
 	adds r0, r4, 0
-	bl move_anim_start_t1
+	bl DoMoveAnim
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -6207,7 +6207,7 @@ sub_81BE53C: @ 81BE53C
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl sub_80A6A90
+	bl AnimBankSpriteExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _081BE582
