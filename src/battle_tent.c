@@ -3,6 +3,7 @@
 #include "global.h"
 #include "overworld.h"
 #include "event_data.h"
+#include "region_map.h"
 #include "battle.h"
 #include "battle_tower.h"
 #include "battle_frontier_2.h"
@@ -264,4 +265,9 @@ void sub_81B9E78(void)
 void sub_81B9E88(void)
 {
     sub_819DC00();
+}
+
+bool8 sub_81B9E94(void)
+{
+    return (gMapHeader.regionMapSectionId == REGION_MAP_SLATEPORT_CITY && ((gMapHeader.mapDataId == 385) | (gMapHeader.mapDataId == 386)) ? TRUE : FALSE);
 }

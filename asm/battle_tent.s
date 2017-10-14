@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81B9E94
-sub_81B9E94: @ 81B9E94
-	push {lr}
-	movs r2, 0
-	ldr r1, =gMapHeader
-	ldrb r0, [r1, 0x14]
-	cmp r0, 0x8
-	bne _081B9EB2
-	ldr r3, =0xfffffe7f
-	adds r0, r3, 0
-	ldrh r1, [r1, 0x12]
-	adds r0, r1
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1
-	bhi _081B9EB2
-	movs r2, 0x1
-_081B9EB2:
-	adds r0, r2, 0
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81B9E94
-
 	thumb_func_start sub_81B9EC0
 sub_81B9EC0: @ 81B9EC0
 	push {r4-r7,lr}
