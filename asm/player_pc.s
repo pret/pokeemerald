@@ -31,7 +31,7 @@ _0816AE1A:
 	ldrh r0, [r0]
 	adds r1, r6
 	ldrh r1, [r1]
-	bl sub_80D6D70
+	bl AddPCItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

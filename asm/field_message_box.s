@@ -181,8 +181,8 @@ _08098272:
 	bx r1
 	thumb_func_end sub_8098238
 
-	thumb_func_start box_related_two__3
-box_related_two__3: @ 8098278
+	thumb_func_start ShowFieldAutoScrollMessage
+ShowFieldAutoScrollMessage: @ 8098278
 	push {lr}
 	adds r1, r0, 0
 	ldr r2, =gUnknown_020375BC
@@ -202,7 +202,7 @@ _08098298:
 _0809829A:
 	pop {r1}
 	bx r1
-	thumb_func_end box_related_two__3
+	thumb_func_end ShowFieldAutoScrollMessage
 
 	thumb_func_start sub_80982A0
 sub_80982A0: @ 80982A0
@@ -267,8 +267,8 @@ textbox_auto_and_task_add: @ 8098304
 	bx r0
 	thumb_func_end textbox_auto_and_task_add
 
-	thumb_func_start textbox_close
-textbox_close: @ 8098314
+	thumb_func_start HideFieldMessageBox
+HideFieldMessageBox: @ 8098314
 	push {lr}
 	bl task_del_textbox
 	movs r0, 0
@@ -280,7 +280,7 @@ textbox_close: @ 8098314
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end textbox_close
+	thumb_func_end HideFieldMessageBox
 
 	thumb_func_start textbox_any_visible
 textbox_any_visible: @ 8098330
@@ -290,8 +290,8 @@ textbox_any_visible: @ 8098330
 	.pool
 	thumb_func_end textbox_any_visible
 
-	thumb_func_start sub_809833C
-sub_809833C: @ 809833C
+	thumb_func_start IsFieldMessageBoxHidden
+IsFieldMessageBoxHidden: @ 809833C
 	push {lr}
 	ldr r0, =gUnknown_020375BC
 	ldrb r0, [r0]
@@ -305,7 +305,7 @@ _08098350:
 _08098352:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809833C
+	thumb_func_end IsFieldMessageBoxHidden
 
 	thumb_func_start sub_8098358
 sub_8098358: @ 8098358

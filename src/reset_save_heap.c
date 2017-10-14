@@ -5,7 +5,7 @@
 #include "load_save.h"
 #include "save.h"
 #include "new_game.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "malloc.h"
 
 void sub_81700F8(void)

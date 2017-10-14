@@ -13,10 +13,10 @@
 #define SECONDS(value) ((signed) (60.0 * value + 0.5))
 
 extern u8 GetSSTidalLocation(s8 *, s8 *, s16 *, s16 *); // should be in field_specials.h
-extern void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-extern bool8 sub_80D3340(u8, u8, u8);
+extern void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+extern bool8 ScriptMovement_IsObjectMovementFinished(u8, u8, u8);
 extern bool32 CountSSTidalStep(u16);
-extern bool8 exec_movement(u8, u8, u8, u8 *);
+extern bool8 ScriptMovement_StartObjectMovementScript(u8, u8, u8, u8 *);
 extern void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 extern void sp13E_warp_to_last_warp(void);
 extern void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
@@ -264,7 +264,7 @@ bool8 sub_80FB59C(void)
     }
     else
     {
-        warp1_set(mapGroup, mapNum, -1, x, y);
+        Overworld_SetWarpDestination(mapGroup, mapNum, -1, x, y);
         return TRUE;
     }
 }
@@ -287,7 +287,7 @@ void Task_HandlePorthole(u8 taskId)
     case IDLE_CHECK: // idle and move.
         if (gMain.newKeys & A_BUTTON)
             data[1] = 1;
-        if (!sub_80D3340(0xFF, location->mapNum, location->mapGroup))
+        if (!ScriptMovement_IsObjectMovementFinished(0xFF, location->mapNum, location->mapGroup))
             return;
         if (CountSSTidalStep(1) == TRUE)
         {
@@ -308,18 +308,18 @@ void Task_HandlePorthole(u8 taskId)
         // run this once.
         if (*var == 2) // which direction?
         {
-            exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_0858E8AB);
+            ScriptMovement_StartObjectMovementScript(0xFF, location->mapNum, location->mapGroup, gUnknown_0858E8AB);
             data[0] = IDLE_CHECK; // run case 1.
         }
         else
         {
-            exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_0858E8AD);
+            ScriptMovement_StartObjectMovementScript(0xFF, location->mapNum, location->mapGroup, gUnknown_0858E8AD);
             data[0] = IDLE_CHECK; // run case 1.
         }
         break;
     case EXIT_PORTHOLE: // exit porthole.
-        FlagReset(0x4001);
-        FlagReset(0x4000);
+        FlagClear(0x4001);
+        FlagClear(0x4000);
         copy_saved_warp2_bank_and_enter_x_to_warp1(0);
         sp13E_warp_to_last_warp();
         DestroyTask(taskId);

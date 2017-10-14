@@ -53,13 +53,13 @@ static void UpdateBlendRegisters(void);
 static bool8 IsSoftwarePaletteFadeFinishing(void);
 static void sub_80A2D54(u8 taskId);
 
-EWRAM_DATA u16 gPlttBufferUnfaded[0x200] = {0};
-EWRAM_DATA u16 gPlttBufferFaded[0x200] = {0};
+EWRAM_DATA u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE] = {0};
+EWRAM_DATA u16 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
 EWRAM_DATA struct PaletteStruct sPaletteStructs[0x10] = {0};
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 static EWRAM_DATA u32 gFiller_2037FE0 = 0;
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
-EWRAM_DATA u8 gPaletteDecompressionBuffer[0x400] = {0};
+EWRAM_DATA u8 gPaletteDecompressionBuffer[PLTT_DECOMP_BUFFER_SIZE] = {0};
 
 static const struct PaletteStructTemplate gDummyPaletteStructTemplate = {
     .uid = 0xFFFF,

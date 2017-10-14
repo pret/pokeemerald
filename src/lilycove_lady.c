@@ -4,7 +4,7 @@
 
 #include "global.h"
 #include "main.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "rom6.h"
 #include "event_data.h"
 #include "script.h"

@@ -2094,7 +2094,7 @@ sub_8127B04: @ 8127B04
 	lsls r4, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	bl warp_in
 	add sp, 0x4
 	pop {r4,r5}
@@ -2490,7 +2490,7 @@ _08127E34:
 	cmp r0, 0x1
 	bne _08127F1C
 	adds r0, r4, 0
-	bl FlagReset
+	bl FlagClear
 	movs r2, 0
 	ldr r0, [r7, 0x4]
 	ldrb r4, [r0]

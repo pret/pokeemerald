@@ -21117,7 +21117,7 @@ sub_8014290: @ 8014290
 	asrs r5, 24
 	str r5, [sp]
 	adds r3, r4, 0
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	ldr r0, [r6]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
@@ -21182,7 +21182,7 @@ sub_8014304: @ 8014304
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r3, r8
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	bl warp_in
 	add sp, 0x4
 	pop {r3}
@@ -28312,7 +28312,7 @@ _080181BC:
 sub_80181CC: @ 80181CC
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_80983E8
+	bl ScriptFreezeMapObjects
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80181CC
@@ -31292,7 +31292,7 @@ flag_clear_x63: @ 8019A64
 	adds r0, r1
 	lsls r0, 16
 	lsrs r0, 16
-	bl FlagReset
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.pool

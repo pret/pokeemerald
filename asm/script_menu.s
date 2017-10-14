@@ -5,9 +5,9 @@
 
 	.text
 
-	thumb_func_start Multichoice
-@ bool8 Multichoice(u8 x, u8 y, u8 menuId, bool8 noCancelling)
-Multichoice: @ 80E1E08
+	thumb_func_start ScriptMenu_Multichoice
+@ bool8 ScriptMenu_Multichoice(u8 x, u8 y, u8 menuId, bool8 noCancelling)
+ScriptMenu_Multichoice: @ 80E1E08
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -44,10 +44,10 @@ _080E1E4E:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end Multichoice
+	thumb_func_end ScriptMenu_Multichoice
 
-	thumb_func_start sub_80E1E58
-sub_80E1E58: @ 80E1E58
+	thumb_func_start ScriptMenu_MultichoiceWithDefault
+ScriptMenu_MultichoiceWithDefault: @ 80E1E58
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -91,7 +91,7 @@ _080E1EAA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80E1E58
+	thumb_func_end ScriptMenu_MultichoiceWithDefault
 
 	thumb_func_start sub_80E1EB8
 sub_80E1EB8: @ 80E1EB8
@@ -379,8 +379,8 @@ _080E20FC:
 	.pool
 	thumb_func_end sub_80E2058
 
-	thumb_func_start yes_no_box
-yes_no_box: @ 80E2108
+	thumb_func_start ScriptMenu_YesNo
+ScriptMenu_YesNo: @ 80E2108
 	push {r4,lr}
 	ldr r4, =task_yes_no_maybe
 	adds r0, r4, 0
@@ -405,7 +405,7 @@ _080E213A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end yes_no_box
+	thumb_func_end ScriptMenu_YesNo
 
 	thumb_func_start sub_80E2140
 sub_80E2140: @ 80E2140
@@ -485,8 +485,8 @@ _080E21C4:
 	.pool
 	thumb_func_end task_yes_no_maybe
 
-	thumb_func_start sub_80E21D0
-sub_80E21D0: @ 80E21D0
+	thumb_func_start ScriptMenu_MultichoiceGrid
+ScriptMenu_MultichoiceGrid: @ 80E21D0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -627,7 +627,7 @@ _080E22E8:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80E21D0
+	thumb_func_end ScriptMenu_MultichoiceGrid
 
 	thumb_func_start sub_80E2308
 sub_80E2308: @ 80E2308
@@ -1334,8 +1334,8 @@ _080E28F8:
 	bx r0
 	thumb_func_end task_picbox
 
-	thumb_func_start sub_80E2900
-sub_80E2900: @ 80E2900
+	thumb_func_start ScriptMenu_ShowPokemonPic
+ScriptMenu_ShowPokemonPic: @ 80E2900
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1422,10 +1422,10 @@ _080E29BA:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80E2900
+	thumb_func_end ScriptMenu_ShowPokemonPic
 
-	thumb_func_start picbox_close
-picbox_close: @ 80E29C4
+	thumb_func_start ScriptMenu_GetPicboxWaitFunc
+ScriptMenu_GetPicboxWaitFunc: @ 80E29C4
 	push {lr}
 	ldr r0, =task_picbox
 	bl FindTaskIdByFunc
@@ -1449,7 +1449,7 @@ _080E29F4:
 _080E29F6:
 	pop {r1}
 	bx r1
-	thumb_func_end picbox_close
+	thumb_func_end ScriptMenu_GetPicboxWaitFunc
 
 	thumb_func_start sub_80E29FC
 sub_80E29FC: @ 80E29FC

@@ -1,7 +1,3 @@
-//
-// Created by Scott Norton on 9/6/17.
-//
-
 #ifndef GUARD_FIELD_PLAYER_AVATAR_H
 #define GUARD_FIELD_PLAYER_AVATAR_H
 
@@ -13,5 +9,7 @@ void PlayerGetDestCoords(s16 *, s16 *);
 u8 player_get_direction_lower_nybble(void);
 u8 player_get_direction_upper_nybble(void);
 u8 player_get_x22(void);
+
+void sub_808D074(u8);
 
 #endif //GUARD_FIELD_PLAYER_AVATAR_H

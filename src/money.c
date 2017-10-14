@@ -110,7 +110,7 @@ void AddMoney(u32* moneyPtr, u32 toAdd)
     SetMoney(moneyPtr, toSet);
 }
 
-void SubtractMoney(u32* moneyPtr, u32 toSub)
+void RemoveMoney(u32* moneyPtr, u32 toSub)
 {
     u32 toSet = GetMoney(moneyPtr);
 
@@ -130,7 +130,7 @@ bool8 IsEnoughForCostInVar0x8005(void)
 
 void SubtractMoneyFromVar0x8005(void)
 {
-    SubtractMoney(&gSaveBlock1Ptr->money, gSpecialVar_0x8005);
+    RemoveMoney(&gSaveBlock1Ptr->money, gSpecialVar_0x8005);
 }
 
 void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed)

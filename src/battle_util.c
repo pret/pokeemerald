@@ -132,6 +132,8 @@ extern const u8 BattleScript_MoveHPDrain[];
 extern const u8 BattleScript_MoveHPDrain_PPLoss[];
 extern const u8 BattleScript_FlashFireBoost[];
 extern const u8 BattleScript_FlashFireBoost_PPLoss[];
+extern const u8 gUnknown_082DB592[];
+extern const u8 gUnknown_082DB591[];
 extern const u8 BattleScript_ColorChangeActivates[];
 extern const u8 BattleScript_RoughSkinActivates[];
 extern const u8 BattleScript_ApplySecondaryEffect[];
@@ -1859,13 +1861,12 @@ u8 CastformDataTypeChange(u8 bank)
     return formChange;
 }
 
-// We meet again, ABE.
-#ifdef NONMATCHING
+// The largest function in the game, but even it could not save itself from decompiling.
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 {
     u8 effect = 0;
-    struct Pokemon* pokeAtk;
-    struct Pokemon* pokeDef;
+    struct Pokemon *pokeAtk;
+    struct Pokemon *pokeDef;
     u16 speciesAtk;
     u16 speciesDef;
     u32 pidAtk;
@@ -1893,12 +1894,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI)) // why isn't that check done at the beginning?
     {
-        int i;  // r4
+        u8 moveType;
+        s32 i;
         u16 move;
-        // Hmm...
-        #define moveType moveArg
-        //u16 moveType;
         u8 side;
+        u8 target1;
 
         if (special)
             gLastUsedAbility = special;
@@ -1918,44 +1918,45 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
         switch (caseID)
         {
         case ABILITYEFFECT_ON_SWITCHIN: // 0
-        //_08042A18
             if (gBankAttacker >= gNoOfAllBanks)
                 gBankAttacker = bank;
             switch (gLastUsedAbility)
             {
             case ABILITYEFFECT_SWITCH_IN_WEATHER:
-            //_08042A86
-                switch (weather_get_current())
+                if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
                 {
-                case 3:
-                case 5:
-                case 13:
-                    if (!(gBattleWeather & WEATHER_RAIN_ANY))
+                    switch (weather_get_current())
                     {
-                        gBattleWeather = (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_PERMANENT);
-                        gBattleScripting.animArg1 = 0xA;
-                        gBattleScripting.bank = bank;
-                        effect++;
+                    case 3:
+                    case 5:
+                    case 13:
+                        if (!(gBattleWeather & WEATHER_RAIN_ANY))
+                        {
+                            gBattleWeather = (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_PERMANENT);
+                            gBattleScripting.animArg1 = B_ANIM_RAIN_CONTINUES;
+                            gBattleScripting.bank = bank;
+                            effect++;
+                        }
+                        break;
+                    case 8:
+                        if (!(gBattleWeather & WEATHER_SANDSTORM_ANY))
+                        {
+                            gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
+                            gBattleScripting.animArg1 = B_ANIM_SANDSTORM_CONTINUES;
+                            gBattleScripting.bank = bank;
+                            effect++;
+                        }
+                        break;
+                    case 12:
+                        if (!(gBattleWeather & WEATHER_SUN_ANY))
+                        {
+                            gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
+                            gBattleScripting.animArg1 = B_ANIM_SUN_CONTINUES;
+                            gBattleScripting.bank = bank;
+                            effect++;
+                        }
+                        break;
                     }
-                    break;
-                case 8:
-                    if (!(gBattleWeather & WEATHER_SANDSTORM_ANY))
-                    {
-                        gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
-                        gBattleScripting.animArg1 = 0xC;
-                        gBattleScripting.bank = bank;
-                        effect++;
-                    }
-                    break;
-                case 12:
-                    if (!(gBattleWeather & WEATHER_SUN_ANY))
-                    {
-                        gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
-                        gBattleScripting.animArg1 = 0xB;
-                        gBattleScripting.bank = bank;
-                        effect++;
-                    }
-                    break;
                 }
                 if (effect)
                 {
@@ -1964,7 +1965,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 }
                 break;
             case ABILITY_DRIZZLE:
-            //_08042B78
                 if (!(gBattleWeather & WEATHER_RAIN_PERMANENT))
                 {
                     gBattleWeather = (WEATHER_RAIN_PERMANENT | WEATHER_RAIN_TEMPORARY);
@@ -1974,7 +1974,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 }
                 break;
             case ABILITY_SAND_STREAM:
-            //_08042BA8
                 if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT))
                 {
                     gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
@@ -1984,7 +1983,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 }
                 break;
             case ABILITY_DROUGHT:
-            //_08042BD8
                 if (!(gBattleWeather & WEATHER_SUN_PERMANENT))
                 {
                     gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
@@ -1994,7 +1992,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 }
                 break;
             case ABILITY_INTIMIDATE:
-            //_08042C08
                 if (!(gSpecialStatuses[bank].intimidatedPoke))
                 {
                     gStatuses3[bank] |= STATUS3_INTIMIDATE_POKES;
@@ -2002,13 +1999,12 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 }
                 break;
             case ABILITY_FORECAST:
-            //_08042C3C
                 effect = CastformDataTypeChange(bank);
                 if (effect != 0)
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
                     gBattleScripting.bank = bank;
-                    gBattleStruct->formToChangeInto = effect - 1;
+                    *(&gBattleStruct->formToChangeInto) = effect - 1;
                 }
                 break;
             case ABILITY_TRACE:
@@ -2021,18 +2017,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             case ABILITY_CLOUD_NINE:
             case ABILITY_AIR_LOCK:
                 {
-                    u8 i;
-
-                    for (i = 0; i < gNoOfAllBanks; i++)
+                    // that's a weird choice for a variable, why not use i or bank?
+                    for (target1 = 0; target1 < gNoOfAllBanks; target1++)
                     {
-                        // TODO: i should be in r6 here
-                        //asm("":::"r4","r5");
-                        effect = CastformDataTypeChange(i);
+                        effect = CastformDataTypeChange(target1);
                         if (effect != 0)
                         {
                             BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-                            gBattleScripting.bank = i;
-                            gBattleStruct->formToChangeInto = effect - 1;
+                            gBattleScripting.bank = target1;
+                            *(&gBattleStruct->formToChangeInto) = effect - 1;
                             break;
                         }
                     }
@@ -2041,18 +2034,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_ENDTURN: // 1
-        //_08042CDC
             if (gBattleMons[bank].hp != 0)
             {
                 gBankAttacker = bank;
                 switch (gLastUsedAbility)
                 {
                 case ABILITY_RAIN_DISH:
-                //_08042D22
                     if (WEATHER_HAS_EFFECT && (gBattleWeather & WEATHER_RAIN_ANY)
                      && gBattleMons[bank].maxHP > gBattleMons[bank].hp)
                     {
-                        gLastUsedAbility = ABILITY_RAIN_DISH; //why
+                        gLastUsedAbility = ABILITY_RAIN_DISH; // why
                         BattleScriptPushCursorAndCallback(BattleScript_RainDishActivates);
                         gBattleMoveDamage = gBattleMons[bank].maxHP / 16;
                         if (gBattleMoveDamage == 0)
@@ -2062,7 +2053,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     }
                     break;
                 case ABILITY_SHED_SKIN:
-                //_08042DA0
                     if ((gBattleMons[bank].status1 & STATUS_ANY) && (Random() % 3) == 0)
                     {
                         if (gBattleMons[bank].status1 & (STATUS_POISON | STATUS_TOXIC_POISON))
@@ -2076,7 +2066,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         if (gBattleMons[bank].status1 & STATUS_FREEZE)
                             StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
                         gBattleMons[bank].status1 = 0;
-                        gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE);  // fix nighmare glitch
+                        gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE);  // fix nightmare glitch
                         gBattleScripting.bank = gActiveBank = bank;
                         BattleScriptPushCursorAndCallback(BattleScript_ShedSkinActivates);
                         EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[bank].status1);
@@ -2085,7 +2075,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     }
                     break;
                 case ABILITY_SPEED_BOOST:
-                //_08042E84
                     if (gBattleMons[bank].statStages[STAT_STAGE_SPEED] < 0xC && gDisableStructs[bank].isFirstTurn != 2)
                     {
                         gBattleMons[bank].statStages[STAT_STAGE_SPEED]++;
@@ -2103,7 +2092,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_MOVES_BLOCK: // 2
-        //_08042EF8
             if (gLastUsedAbility == ABILITY_SOUNDPROOF)
             {
                 for (i = 0; sSoundMovesTable[i] != 0xFFFF; i++)
@@ -2132,6 +2120,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                             gBattlescriptCurrInstr = BattleScript_MoveHPDrain;
                         else
                             gBattlescriptCurrInstr = BattleScript_MoveHPDrain_PPLoss;
+
                         effect = 1;
                     }
                     break;
@@ -2142,11 +2131,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                             gBattlescriptCurrInstr = BattleScript_MoveHPDrain;
                         else
                             gBattlescriptCurrInstr = BattleScript_MoveHPDrain_PPLoss;
+
                         effect = 1;
                     }
                     break;
                 case ABILITY_FLASH_FIRE:
-                //_0804305C
                     if (moveType == TYPE_FIRE && !(gBattleMons[bank].status1 & STATUS_FREEZE))
                     {
                         if (!(gBattleResources->flags->flags[bank] & UNKNOWN_FLAG_FLASH_FIRE))
@@ -2156,6 +2145,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
+
                             gBattleResources->flags->flags[bank] |= UNKNOWN_FLAG_FLASH_FIRE;
                             effect = 2;
                         }
@@ -2166,6 +2156,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost;
                             else
                                 gBattlescriptCurrInstr = BattleScript_FlashFireBoost_PPLoss;
+
                             effect = 2;
                         }
                     }
@@ -2176,9 +2167,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (gBattleMons[bank].maxHP == gBattleMons[bank].hp)
                     {
                         if ((gProtectStructs[gBankAttacker].notFirstStrike))
-                            gBattlescriptCurrInstr = BattleScript_MoveHPDrain;
+                            gBattlescriptCurrInstr = gUnknown_082DB592;
                         else
-                            gBattlescriptCurrInstr = BattleScript_MoveHPDrain_PPLoss;
+                            gBattlescriptCurrInstr = gUnknown_082DB591;
                     }
                     else
                     {
@@ -2191,11 +2182,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_CONTACT: // 4
-        //_080431AC
             switch (gLastUsedAbility)
             {
             case ABILITY_COLOR_CHANGE:
-            //_08043288
                 if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
                  && move != MOVE_STRUGGLE
                  && gBattleMoves[move].power != 0
@@ -2206,17 +2195,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 {
                     gBattleMons[bank].type1 = moveType;
                     gBattleMons[bank].type2 = moveType;
-                    gBattleTextBuff1[0] = 0xFD;
-                    gBattleTextBuff1[1] = 3;
-                    gBattleTextBuff1[2] = moveType;
-                    gBattleTextBuff1[3] = 0xFF;
+                    PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType)
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_ColorChangeActivates;
                     effect++;
                 }
                 break;
             case ABILITY_ROUGH_SKIN:
-            //_08043350
                 if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
                  && gBattleMons[gBankAttacker].hp != 0
                  && !gProtectStructs[gBankAttacker].confusionSelfDmg
@@ -2232,7 +2217,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 }
                 break;
             case ABILITY_EFFECT_SPORE:
-            //_08043410
                 if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
                  && gBattleMons[gBankAttacker].hp != 0
                  && !gProtectStructs[gBankAttacker].confusionSelfDmg
@@ -2244,9 +2228,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     {
                         gBattleCommunication[MOVE_EFFECT_BYTE] = Random() & 3;
                     } while (gBattleCommunication[MOVE_EFFECT_BYTE] == 0);
-                    if (gBattleCommunication[MOVE_EFFECT_BYTE] == 3)
-                        gBattleCommunication[MOVE_EFFECT_BYTE] += 2;
-                    gBattleCommunication[MOVE_EFFECT_BYTE] += 0x40;
+
+                    if (gBattleCommunication[MOVE_EFFECT_BYTE] == MOVE_EFFECT_BURN)
+                        gBattleCommunication[MOVE_EFFECT_BYTE] += 2; // 5 MOVE_EFFECT_PARALYSIS
+
+                    gBattleCommunication[MOVE_EFFECT_BYTE] += MOVE_EFFECT_AFFECTS_USER;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
                     gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
@@ -2261,7 +2247,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                  && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
                  && (Random() % 3) == 0)
                 {
-                    gBattleCommunication[MOVE_EFFECT_BYTE] = 0x42;
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_POISON;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
                     gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
@@ -2276,7 +2262,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                  && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
                  && (Random() % 3) == 0)
                 {
-                    gBattleCommunication[MOVE_EFFECT_BYTE] = 0x45;
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_PARALYSIS;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
                     gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
@@ -2291,7 +2277,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                  && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
                  && (Random() % 3) == 0)
                 {
-                    gBattleCommunication[MOVE_EFFECT_BYTE] = 0x43;
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_BURN;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_ApplySecondaryEffect;
                     gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
@@ -2299,7 +2285,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 }
                 break;
             case ABILITY_CUTE_CHARM:
-            //_0804379C
                 if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
                  && gBattleMons[gBankAttacker].hp != 0
                  && !gProtectStructs[gBankAttacker].confusionSelfDmg
@@ -2310,10 +2295,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                  && gBattleMons[gBankAttacker].ability != ABILITY_OBLIVIOUS
                  && GetGenderFromSpeciesAndPersonality(speciesAtk, pidAtk) != GetGenderFromSpeciesAndPersonality(speciesDef, pidDef)
                  && !(gBattleMons[gBankAttacker].status2 & STATUS2_INFATUATION)
-                 && GetGenderFromSpeciesAndPersonality(speciesAtk, pidAtk) != 0xFF
-                 && GetGenderFromSpeciesAndPersonality(speciesDef, pidDef) != 0xFF)
+                 && GetGenderFromSpeciesAndPersonality(speciesAtk, pidAtk) != MON_GENDERLESS
+                 && GetGenderFromSpeciesAndPersonality(speciesDef, pidDef) != MON_GENDERLESS)
                 {
-                    gBattleMons[gBankAttacker].status2 |= (gBitTable[gBankTarget] << 0x10);
+                    gBattleMons[gBankAttacker].status2 |= STATUS2_INFATUATED_WITH(gBankTarget);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_CuteCharmActivates;
                     effect++;
@@ -2323,28 +2308,26 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             break;
         case ABILITYEFFECT_IMMUNITY: // 5
             {
-            #define i bank
-                for (i = 0; i < gNoOfAllBanks; i++)
+                for (bank = 0; bank < gNoOfAllBanks; bank++)
                 {
-                    switch (gBattleMons[i].ability)
+                    switch (gBattleMons[bank].ability)
                     {
                     case ABILITY_IMMUNITY:
-                        if (gBattleMons[i].status1 & (STATUS_POISON | STATUS_TOXIC_POISON | 0xF00))  // TODO: what is 0xF00?
+                        if (gBattleMons[bank].status1 & (STATUS_POISON | STATUS_TOXIC_POISON | STATUS_TOXIC_COUNTER))
                         {
                             StringCopy(gBattleTextBuff1, gStatusConditionString_PoisonJpn);
                             effect = 1;
                         }
                         break;
                     case ABILITY_OWN_TEMPO:
-                    //_08043A7C
-                        if (gBattleMons[i].status2 & STATUS2_CONFUSION)
+                        if (gBattleMons[bank].status2 & STATUS2_CONFUSION)
                         {
                             StringCopy(gBattleTextBuff1, gStatusConditionString_ConfusionJpn);
                             effect = 2;
                         }
                         break;
                     case ABILITY_LIMBER:
-                        if (gBattleMons[i].status1 & STATUS_PARALYSIS)
+                        if (gBattleMons[bank].status1 & STATUS_PARALYSIS)
                         {
                             StringCopy(gBattleTextBuff1, gStatusConditionString_ParalysisJpn);
                             effect = 1;
@@ -2352,30 +2335,29 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         break;
                     case ABILITY_INSOMNIA:
                     case ABILITY_VITAL_SPIRIT:
-                        if (gBattleMons[i].status1 & STATUS_SLEEP)
+                        if (gBattleMons[bank].status1 & STATUS_SLEEP)
                         {
-                            gBattleMons[i].status2 &= ~(STATUS2_NIGHTMARE);
+                            gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE);
                             StringCopy(gBattleTextBuff1, gStatusConditionString_SleepJpn);
                             effect = 1;
                         }
                         break;
                     case ABILITY_WATER_VEIL:
-                        if (gBattleMons[i].status1 & STATUS_BURN)
+                        if (gBattleMons[bank].status1 & STATUS_BURN)
                         {
                             StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
                             effect = 1;
                         }
                         break;
                     case ABILITY_MAGMA_ARMOR:
-                        if (gBattleMons[i].status1 & STATUS_FREEZE)
+                        if (gBattleMons[bank].status1 & STATUS_FREEZE)
                         {
                             StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
                             effect = 1;
                         }
                         break;
                     case ABILITY_OBLIVIOUS:
-                    //_08043B70
-                        if (gBattleMons[i].status2 & STATUS2_INFATUATION)
+                        if (gBattleMons[bank].status2 & STATUS2_INFATUATION)
                         {
                             StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
                             effect = 3;
@@ -2387,56 +2369,52 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         switch (effect)
                         {
                         case 1: // status cleared
-                            gBattleMons[i].status1 = 0;
+                            gBattleMons[bank].status1 = 0;
                             break;
                         case 2: // get rid of confusion
-                            gBattleMons[i].status2 &= ~(STATUS2_CONFUSION);
+                            gBattleMons[bank].status2 &= ~(STATUS2_CONFUSION);
                             break;
                         case 3: // get rid of infatuation
-                            gBattleMons[i].status2 &= ~(STATUS2_INFATUATION);
+                            gBattleMons[bank].status2 &= ~(STATUS2_INFATUATION);
                             break;
                         }
+
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = gUnknown_082DB68C;
-                        gBattleScripting.bank = i;
-                        gActiveBank = i;
+                        gBattleScripting.bank = bank;
+                        gActiveBank = bank;
                         EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
                         MarkBufferBankForExecution(gActiveBank);
                         return effect;
                     }
                 }
-            #undef i
             }
             break;
         case ABILITYEFFECT_FORECAST: // 6
+            for (bank = 0; bank < gNoOfAllBanks; bank++)
             {
-            #define i bank
-                for (i = 0; i < gNoOfAllBanks; i++)
+                if (gBattleMons[bank].ability == ABILITY_FORECAST)
                 {
-                    if (gBattleMons[i].ability == ABILITY_FORECAST)
+                    effect = CastformDataTypeChange(bank);
+                    if (effect)
                     {
-                        effect = CastformDataTypeChange(i);
-                        if (effect)
-                        {
-                            BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-                            gBattleScripting.bank = i;
-                            gBattleStruct->formToChangeInto = effect - 1;
-                            return effect;
-                        }
+                        BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
+                        gBattleScripting.bank = bank;
+                        *(&gBattleStruct->formToChangeInto) = effect - 1;
+                        return effect;
                     }
                 }
-            #undef i
             }
             break;
         case ABILITYEFFECT_SYNCHRONIZE: // 7
-        //_08043CBC
             if (gLastUsedAbility == ABILITY_SYNCHRONIZE && (gHitMarker & HITMARKER_SYNCHRONISE_EFFECT))
             {
                 gHitMarker &= ~(HITMARKER_SYNCHRONISE_EFFECT);
-                gBattleStruct->synchronizeMoveEffect &= 0x3F;
-                if (gBattleStruct->synchronizeMoveEffect == 6)
-                    gBattleStruct->synchronizeMoveEffect = 2;
-                gBattleCommunication[MOVE_EFFECT_BYTE] = gBattleStruct->synchronizeMoveEffect + 0x40;
+                gBattleStruct->synchronizeMoveEffect &= ~(MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
+                if (gBattleStruct->synchronizeMoveEffect == MOVE_EFFECT_TOXIC)
+                    gBattleStruct->synchronizeMoveEffect = MOVE_EFFECT_POISON;
+
+                gBattleCommunication[MOVE_EFFECT_BYTE] = gBattleStruct->synchronizeMoveEffect + MOVE_EFFECT_AFFECTS_USER;
                 gBattleScripting.bank = gBankTarget;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_SynchronizeActivates;
@@ -2448,9 +2426,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             if (gLastUsedAbility == ABILITY_SYNCHRONIZE && (gHitMarker & HITMARKER_SYNCHRONISE_EFFECT))
             {
                 gHitMarker &= ~(HITMARKER_SYNCHRONISE_EFFECT);
-                gBattleStruct->synchronizeMoveEffect &= 0x3F;
-                if (gBattleStruct->synchronizeMoveEffect == 6)
-                    gBattleStruct->synchronizeMoveEffect = 2;
+                gBattleStruct->synchronizeMoveEffect &= ~(MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
+                if (gBattleStruct->synchronizeMoveEffect == MOVE_EFFECT_TOXIC)
+                    gBattleStruct->synchronizeMoveEffect = MOVE_EFFECT_POISON;
+
                 gBattleCommunication[MOVE_EFFECT_BYTE] = gBattleStruct->synchronizeMoveEffect;
                 gBattleScripting.bank = gBankAttacker;
                 BattleScriptPushCursor();
@@ -2478,15 +2457,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             {
                 if (gBattleMons[i].ability == ABILITY_TRACE && (gStatuses3[i] & STATUS3_TRACE))
                 {
-                    u8 opposite = (GetBankIdentity(i) ^ 1) & 1;
-                    u8 target1 = GetBankByIdentity(opposite);
-                    u8 target2 = GetBankByIdentity(opposite + 2);
+                    u8 target2;
+                    side = (GetBankIdentity(i) ^ BIT_SIDE) & BIT_SIDE; // side of the opposing pokemon
+                    target1 = GetBankByIdentity(side);
+                    target2 = GetBankByIdentity(side + BIT_MON);
                     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                     {
                         if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0
                          && gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
                         {
-                            gActiveBank = GetBankByIdentity(((Random() & 1) * 2) | opposite);
+                            gActiveBank = GetBankByIdentity(((Random() & 1) * 2) | side);
                             gBattleMons[i].ability = gBattleMons[gActiveBank].ability;
                             gLastUsedAbility = gBattleMons[gActiveBank].ability;
                             effect++;
@@ -2522,16 +2502,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         gStatuses3[i] &= ~(STATUS3_TRACE);
                         gBattleScripting.bank = i;
 
-                        gBattleTextBuff1[0] = 0xFD;
-                        gBattleTextBuff1[1] = 4;
-                        gBattleTextBuff1[2] = gActiveBank;
-                        gBattleTextBuff1[3] = gBattlePartyID[gActiveBank];
-                        gBattleTextBuff1[4] = EOS;
-
-                        gBattleTextBuff2[0] = 0xFD;
-                        gBattleTextBuff2[1] = 9;
-                        gBattleTextBuff2[2] = gLastUsedAbility;
-                        gBattleTextBuff2[3] = EOS;
+                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gActiveBank, gBattlePartyID[gActiveBank])
+                        PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)
                         break;
                     }
                 }
@@ -2656,3045 +2628,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         }
-        if (effect && caseID < 0xC && gLastUsedAbility != 0xFF)
+
+        if (effect && caseID < ABILITYEFFECT_CHECK_OTHER_SIDE && gLastUsedAbility != 0xFF)
             RecordAbilityBattle(bank, gLastUsedAbility);
     }
 
     return effect;
 }
-#else
-__attribute__((naked))
-u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
-{
-    asm(
-    "\n\
-	.syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x28\n\
-	ldr r4, [sp, 0x48]\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	str r0, [sp, 0x4]\n\
-	lsls r1, 24\n\
-	lsrs r1, 24\n\
-	mov r10, r1\n\
-	lsls r2, 24\n\
-	lsrs r6, r2, 24\n\
-	lsls r3, 24\n\
-	lsrs r3, 24\n\
-	mov r8, r3\n\
-	lsls r4, 16\n\
-	lsrs r4, 16\n\
-	movs r0, 0\n\
-	mov r9, r0\n\
-	ldr r5, =gBankAttacker\n\
-	ldr r1, =gNoOfAllBanks\n\
-	ldrb r0, [r5]\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	bcc _08042864\n\
-	mov r1, r10\n\
-	strb r1, [r5]\n\
-_08042864:\n\
-	ldrb r0, [r5]\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _08042894\n\
-	ldr r1, =gBattlePartyID\n\
-	ldrb r0, [r5]\n\
-	lsls r0, 1\n\
-	adds r0, r1\n\
-	ldrh r1, [r0]\n\
-	movs r0, 0x64\n\
-	muls r1, r0\n\
-	ldr r0, =gPlayerParty\n\
-	b _080428A4\n\
-	.pool\n\
-_08042894:\n\
-	ldr r1, =gBattlePartyID\n\
-	ldrb r0, [r5]\n\
-	lsls r0, 1\n\
-	adds r0, r1\n\
-	ldrh r1, [r0]\n\
-	movs r0, 0x64\n\
-	muls r1, r0\n\
-	ldr r0, =gEnemyParty\n\
-_080428A4:\n\
-	adds r7, r1, r0\n\
-	ldr r5, =gBankTarget\n\
-	ldr r1, =gNoOfAllBanks\n\
-	ldrb r0, [r5]\n\
-	ldrb r1, [r1]\n\
-	cmp r0, r1\n\
-	bcc _080428B6\n\
-	mov r2, r10\n\
-	strb r2, [r5]\n\
-_080428B6:\n\
-	ldrb r0, [r5]\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _080428E8\n\
-	ldr r1, =gBattlePartyID\n\
-	ldrb r0, [r5]\n\
-	lsls r0, 1\n\
-	adds r0, r1\n\
-	ldrh r1, [r0]\n\
-	movs r0, 0x64\n\
-	muls r1, r0\n\
-	ldr r0, =gPlayerParty\n\
-	b _080428F8\n\
-	.pool\n\
-_080428E8:\n\
-	ldr r1, =gBattlePartyID\n\
-	ldrb r0, [r5]\n\
-	lsls r0, 1\n\
-	adds r0, r1\n\
-	ldrh r1, [r0]\n\
-	movs r0, 0x64\n\
-	muls r1, r0\n\
-	ldr r0, =gEnemyParty\n\
-_080428F8:\n\
-	adds r5, r1, r0\n\
-	adds r0, r7, 0\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	str r0, [sp, 0x8]\n\
-	adds r0, r7, 0\n\
-	movs r1, 0\n\
-	bl GetMonData\n\
-	str r0, [sp, 0x10]\n\
-	adds r0, r5, 0\n\
-	movs r1, 0xB\n\
-	bl GetMonData\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	str r0, [sp, 0xC]\n\
-	adds r0, r5, 0\n\
-	movs r1, 0\n\
-	bl GetMonData\n\
-	str r0, [sp, 0x14]\n\
-	ldr r0, =gBattleTypeFlags\n\
-	ldr r0, [r0]\n\
-	movs r1, 0x80\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _0804293A\n\
-	bl _0804443A\n\
-_0804293A:\n\
-	mov r3, r8\n\
-	cmp r3, 0\n\
-	beq _08042958\n\
-	ldr r0, =gLastUsedAbility\n\
-	strb r3, [r0]\n\
-	adds r7, r0, 0\n\
-	b _0804296E\n\
-	.pool\n\
-_08042958:\n\
-	ldr r2, =gLastUsedAbility\n\
-	ldr r1, =gBattleMons\n\
-	movs r0, 0x58\n\
-	mov r5, r10\n\
-	muls r5, r0\n\
-	adds r0, r5, 0\n\
-	adds r0, r1\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r2]\n\
-	adds r7, r2, 0\n\
-_0804296E:\n\
-	cmp r4, 0\n\
-	beq _08042980\n\
-	adds r5, r4, 0\n\
-	b _08042984\n\
-	.pool\n\
-_08042980:\n\
-	ldr r0, =gCurrentMove\n\
-	ldrh r5, [r0]\n\
-_08042984:\n\
-	ldr r1, =gBattleStruct\n\
-	ldr r0, [r1]\n\
-	ldrb r0, [r0, 0x13]\n\
-	mov r8, r1\n\
-	cmp r0, 0\n\
-	beq _080429A0\n\
-	movs r3, 0x3F\n\
-	ands r3, r0\n\
-	b _080429AC\n\
-	.pool\n\
-_080429A0:\n\
-	ldr r1, =gBattleMoves\n\
-	lsls r0, r5, 1\n\
-	adds r0, r5\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldrb r3, [r0, 0x2]\n\
-_080429AC:\n\
-	ldr r0, [sp, 0x4]\n\
-	cmp r0, 0x13\n\
-	bls _080429B6\n\
-	bl _0804441E\n\
-_080429B6:\n\
-	lsls r0, 2\n\
-	ldr r1, =_080429C8\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
-_080429C8:\n\
-	.4byte _08042A18\n\
-	.4byte _08042CDC\n\
-	.4byte _08042EF8\n\
-	.4byte _08042F8C\n\
-	.4byte _080431AC\n\
-	.4byte _08043908\n\
-	.4byte _08043C6C\n\
-	.4byte _08043CBC\n\
-	.4byte _08043D40\n\
-	.4byte _08043DC4\n\
-	.4byte _08043FE4\n\
-	.4byte _08043E08\n\
-	.4byte _08044028\n\
-	.4byte _08044084\n\
-	.4byte _080440E0\n\
-	.4byte _080441DC\n\
-	.4byte _08044220\n\
-	.4byte _0804427C\n\
-	.4byte _080443EC\n\
-	.4byte _08044196\n\
-_08042A18:\n\
-	ldr r2, =gBankAttacker\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r1, [r2]\n\
-	adds r5, r0, 0\n\
-	ldrb r3, [r5]\n\
-	cmp r1, r3\n\
-	bcc _08042A2A\n\
-	mov r0, r10\n\
-	strb r0, [r2]\n\
-_08042A2A:\n\
-	ldrb r0, [r7]\n\
-	cmp r0, 0x2D\n\
-	bne _08042A32\n\
-	b _08042BA8\n\
-_08042A32:\n\
-	cmp r0, 0x2D\n\
-	bgt _08042A64\n\
-	cmp r0, 0xD\n\
-	bne _08042A3C\n\
-	b _08042CA4\n\
-_08042A3C:\n\
-	cmp r0, 0xD\n\
-	bgt _08042A54\n\
-	cmp r0, 0x2\n\
-	bne _08042A46\n\
-	b _08042B78\n\
-_08042A46:\n\
-	bl _0804441E\n\
-	.pool\n\
-_08042A54:\n\
-	cmp r0, 0x16\n\
-	bne _08042A5A\n\
-	b _08042C08\n\
-_08042A5A:\n\
-	cmp r0, 0x24\n\
-	bne _08042A60\n\
-	b _08042C68\n\
-_08042A60:\n\
-	bl _0804441E\n\
-_08042A64:\n\
-	cmp r0, 0x46\n\
-	bne _08042A6A\n\
-	b _08042BD8\n\
-_08042A6A:\n\
-	cmp r0, 0x46\n\
-	bgt _08042A78\n\
-	cmp r0, 0x3B\n\
-	bne _08042A74\n\
-	b _08042C3C\n\
-_08042A74:\n\
-	bl _0804441E\n\
-_08042A78:\n\
-	cmp r0, 0x4D\n\
-	bne _08042A7E\n\
-	b _08042CA4\n\
-_08042A7E:\n\
-	cmp r0, 0xFF\n\
-	beq _08042A86\n\
-	bl _0804441E\n\
-_08042A86:\n\
-	ldr r0, =gBattleTypeFlags\n\
-	ldr r0, [r0]\n\
-	movs r1, 0x80\n\
-	lsls r1, 17\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08042B4C\n\
-	bl weather_get_current\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	subs r0, 0x3\n\
-	cmp r0, 0xA\n\
-	bhi _08042B4C\n\
-	lsls r0, 2\n\
-	ldr r1, =_08042AB4\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
-_08042AB4:\n\
-	.4byte _08042AE0\n\
-	.4byte _08042B4C\n\
-	.4byte _08042AE0\n\
-	.4byte _08042B4C\n\
-	.4byte _08042B4C\n\
-	.4byte _08042B04\n\
-	.4byte _08042B4C\n\
-	.4byte _08042B4C\n\
-	.4byte _08042B4C\n\
-	.4byte _08042B28\n\
-	.4byte _08042AE0\n\
-_08042AE0:\n\
-	ldr r2, =gBattleWeather\n\
-	ldrh r1, [r2]\n\
-	movs r0, 0x7\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08042B4C\n\
-	movs r0, 0x5\n\
-	strh r0, [r2]\n\
-	ldr r1, =gBattleScripting\n\
-	movs r0, 0xA\n\
-	strb r0, [r1, 0x10]\n\
-	mov r2, r10\n\
-	strb r2, [r1, 0x17]\n\
-	b _08042B42\n\
-	.pool\n\
-_08042B04:\n\
-	ldr r3, =gBattleWeather\n\
-	ldrh r1, [r3]\n\
-	movs r2, 0x18\n\
-	adds r0, r2, 0\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08042B4C\n\
-	strh r2, [r3]\n\
-	ldr r1, =gBattleScripting\n\
-	movs r0, 0xC\n\
-	strb r0, [r1, 0x10]\n\
-	mov r3, r10\n\
-	strb r3, [r1, 0x17]\n\
-	b _08042B42\n\
-	.pool\n\
-_08042B28:\n\
-	ldr r3, =gBattleWeather\n\
-	ldrh r1, [r3]\n\
-	movs r2, 0x60\n\
-	adds r0, r2, 0\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08042B4C\n\
-	strh r2, [r3]\n\
-	ldr r1, =gBattleScripting\n\
-	movs r0, 0xB\n\
-	strb r0, [r1, 0x10]\n\
-	mov r5, r10\n\
-	strb r5, [r1, 0x17]\n\
-_08042B42:\n\
-	mov r0, r9\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_08042B4C:\n\
-	mov r0, r9\n\
-	cmp r0, 0\n\
-	bne _08042B56\n\
-	bl _0804443A\n\
-_08042B56:\n\
-	bl weather_get_current\n\
-	ldr r1, =gBattleCommunication\n\
-	strb r0, [r1, 0x5]\n\
-	ldr r0, =gUnknown_082DACE7\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	bl _0804441E\n\
-	.pool\n\
-_08042B78:\n\
-	ldr r2, =gBattleWeather\n\
-	ldrh r1, [r2]\n\
-	movs r0, 0x4\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08042B88\n\
-	bl _0804441E\n\
-_08042B88:\n\
-	movs r0, 0x5\n\
-	strh r0, [r2]\n\
-	ldr r0, =BattleScript_DrizzleActivates\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	ldr r0, =gBattleScripting\n\
-	mov r1, r10\n\
-	strb r1, [r0, 0x17]\n\
-	bl _080443D0\n\
-	.pool\n\
-_08042BA8:\n\
-	ldr r2, =gBattleWeather\n\
-	ldrh r1, [r2]\n\
-	movs r0, 0x10\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08042BB8\n\
-	bl _0804441E\n\
-_08042BB8:\n\
-	movs r0, 0x18\n\
-	strh r0, [r2]\n\
-	ldr r0, =BattleScript_SandstreamActivates\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	ldr r0, =gBattleScripting\n\
-	mov r2, r10\n\
-	strb r2, [r0, 0x17]\n\
-	bl _080443D0\n\
-	.pool\n\
-_08042BD8:\n\
-	ldr r2, =gBattleWeather\n\
-	ldrh r1, [r2]\n\
-	movs r0, 0x40\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08042BE8\n\
-	bl _0804441E\n\
-_08042BE8:\n\
-	movs r0, 0x60\n\
-	strh r0, [r2]\n\
-	ldr r0, =BattleScript_DroughtActivates\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	ldr r0, =gBattleScripting\n\
-	mov r3, r10\n\
-	strb r3, [r0, 0x17]\n\
-	bl _080443D0\n\
-	.pool\n\
-_08042C08:\n\
-	ldr r0, =gSpecialStatuses\n\
-	mov r5, r10\n\
-	lsls r2, r5, 2\n\
-	adds r1, r2, r5\n\
-	lsls r1, 2\n\
-	adds r3, r1, r0\n\
-	ldrb r0, [r3]\n\
-	lsls r0, 28\n\
-	cmp r0, 0\n\
-	bge _08042C20\n\
-	bl _0804441E\n\
-_08042C20:\n\
-	ldr r1, =gStatuses3\n\
-	adds r1, r2, r1\n\
-	ldr r0, [r1]\n\
-	movs r2, 0x80\n\
-	lsls r2, 12\n\
-	orrs r0, r2\n\
-	str r0, [r1]\n\
-	ldrb r0, [r3]\n\
-	movs r1, 0x8\n\
-	b _08042C92\n\
-	.pool\n\
-_08042C3C:\n\
-	mov r0, r10\n\
-	bl CastformDataTypeChange\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-	cmp r0, 0\n\
-	bne _08042C50\n\
-	bl _0804443A\n\
-_08042C50:\n\
-	ldr r0, =BattleScript_CastformChange\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	ldr r0, =gBattleScripting\n\
-	mov r1, r10\n\
-	strb r1, [r0, 0x17]\n\
-	bl _080442E2\n\
-	.pool\n\
-_08042C68:\n\
-	ldr r0, =gSpecialStatuses\n\
-	mov r3, r10\n\
-	lsls r2, r3, 2\n\
-	adds r1, r2, r3\n\
-	lsls r1, 2\n\
-	adds r3, r1, r0\n\
-	ldrb r0, [r3]\n\
-	lsls r0, 27\n\
-	cmp r0, 0\n\
-	bge _08042C80\n\
-	bl _0804441E\n\
-_08042C80:\n\
-	ldr r1, =gStatuses3\n\
-	adds r1, r2, r1\n\
-	ldr r0, [r1]\n\
-	movs r2, 0x80\n\
-	lsls r2, 13\n\
-	orrs r0, r2\n\
-	str r0, [r1]\n\
-	ldrb r0, [r3]\n\
-	movs r1, 0x10\n\
-_08042C92:\n\
-	orrs r0, r1\n\
-	strb r0, [r3]\n\
-	bl _0804441E\n\
-	.pool\n\
-_08042CA4:\n\
-	movs r6, 0\n\
-	ldrb r5, [r5]\n\
-	cmp r6, r5\n\
-	bcc _08042CB0\n\
-	bl _0804441E\n\
-_08042CB0:\n\
-	adds r0, r6, 0\n\
-	bl CastformDataTypeChange\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-	cmp r0, 0\n\
-	beq _08042CC4\n\
-	bl _080442D8\n\
-_08042CC4:\n\
-	adds r0, r6, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r6, r0\n\
-	bcc _08042CB0\n\
-	bl _0804441E\n\
-	.pool\n\
-_08042CDC:\n\
-	ldr r5, =gBattleMons\n\
-	mov r8, r5\n\
-	movs r0, 0x58\n\
-	mov r6, r10\n\
-	muls r6, r0\n\
-	adds r4, r6, r5\n\
-	ldrh r0, [r4, 0x28]\n\
-	cmp r0, 0\n\
-	bne _08042CF2\n\
-	bl _0804441E\n\
-_08042CF2:\n\
-	ldr r0, =gBankAttacker\n\
-	mov r1, r10\n\
-	strb r1, [r0]\n\
-	ldrb r5, [r7]\n\
-	cmp r5, 0x2C\n\
-	beq _08042D22\n\
-	cmp r5, 0x2C\n\
-	bgt _08042D14\n\
-	cmp r5, 0x3\n\
-	bne _08042D08\n\
-	b _08042E84\n\
-_08042D08:\n\
-	bl _0804441E\n\
-	.pool\n\
-_08042D14:\n\
-	cmp r5, 0x36\n\
-	bne _08042D1A\n\
-	b _08042ED0\n\
-_08042D1A:\n\
-	cmp r5, 0x3D\n\
-	beq _08042DA0\n\
-	bl _0804441E\n\
-_08042D22:\n\
-	movs r0, 0\n\
-	str r0, [sp]\n\
-	movs r0, 0x13\n\
-	movs r1, 0\n\
-	movs r2, 0xD\n\
-	movs r3, 0\n\
-	bl AbilityBattleEffects\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0\n\
-	beq _08042D3E\n\
-	bl _0804441E\n\
-_08042D3E:\n\
-	str r0, [sp]\n\
-	movs r0, 0x13\n\
-	movs r1, 0\n\
-	movs r2, 0x4D\n\
-	movs r3, 0\n\
-	bl AbilityBattleEffects\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _08042D56\n\
-	bl _0804441E\n\
-_08042D56:\n\
-	ldr r0, =gBattleWeather\n\
-	ldrh r1, [r0]\n\
-	movs r0, 0x7\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08042D66\n\
-	bl _0804441E\n\
-_08042D66:\n\
-	ldrh r0, [r4, 0x2C]\n\
-	ldrh r2, [r4, 0x28]\n\
-	cmp r0, r2\n\
-	bhi _08042D72\n\
-	bl _0804441E\n\
-_08042D72:\n\
-	strb r5, [r7]\n\
-	ldr r0, =BattleScript_RainDishActivates\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	ldr r1, =gBattleMoveDamage\n\
-	ldrh r0, [r4, 0x2C]\n\
-	lsrs r0, 4\n\
-	str r0, [r1]\n\
-	cmp r0, 0\n\
-	bne _08042D8A\n\
-	movs r0, 0x1\n\
-	str r0, [r1]\n\
-_08042D8A:\n\
-	ldr r0, [r1]\n\
-	negs r0, r0\n\
-	str r0, [r1]\n\
-	bl _080443D0\n\
-	.pool\n\
-_08042DA0:\n\
-	mov r0, r8\n\
-	adds r0, 0x4C\n\
-	adds r5, r6, r0\n\
-	ldrb r0, [r5]\n\
-	cmp r0, 0\n\
-	bne _08042DB0\n\
-	bl _0804441E\n\
-_08042DB0:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0x3\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	cmp r4, 0\n\
-	beq _08042DCA\n\
-	bl _0804441E\n\
-_08042DCA:\n\
-	ldr r0, [r5]\n\
-	movs r1, 0x88\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08042DDC\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_PoisonJpn\n\
-	bl StringCopy\n\
-_08042DDC:\n\
-	ldr r0, [r5]\n\
-	movs r1, 0x7\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08042DEE\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_SleepJpn\n\
-	bl StringCopy\n\
-_08042DEE:\n\
-	ldr r0, [r5]\n\
-	movs r1, 0x40\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08042E00\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_ParalysisJpn\n\
-	bl StringCopy\n\
-_08042E00:\n\
-	ldr r0, [r5]\n\
-	movs r1, 0x10\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08042E12\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_BurnJpn\n\
-	bl StringCopy\n\
-_08042E12:\n\
-	ldr r0, [r5]\n\
-	movs r1, 0x20\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08042E24\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_IceJpn\n\
-	bl StringCopy\n\
-_08042E24:\n\
-	str r4, [r5]\n\
-	mov r1, r8\n\
-	adds r1, 0x50\n\
-	adds r1, r6, r1\n\
-	ldr r0, [r1]\n\
-	ldr r2, =0xf7ffffff\n\
-	ands r0, r2\n\
-	str r0, [r1]\n\
-	ldr r0, =gBattleScripting\n\
-	ldr r4, =gActiveBank\n\
-	mov r3, r10\n\
-	strb r3, [r4]\n\
-	strb r3, [r0, 0x17]\n\
-	ldr r0, =BattleScript_ShedSkinActivates\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	str r5, [sp]\n\
-	movs r0, 0\n\
-	movs r1, 0x28\n\
-	movs r2, 0\n\
-	movs r3, 0x4\n\
-	bl EmitSetMonData\n\
-	ldrb r0, [r4]\n\
-	bl MarkBufferBankForExecution\n\
-	bl _080443D0\n\
-	.pool\n\
-_08042E84:\n\
-	ldrb r2, [r4, 0x1B]\n\
-	movs r0, 0x1B\n\
-	ldrsb r0, [r4, r0]\n\
-	cmp r0, 0xB\n\
-	ble _08042E92\n\
-	bl _0804441E\n\
-_08042E92:\n\
-	ldr r0, =gDisableStructs\n\
-	mov r5, r10\n\
-	lsls r1, r5, 3\n\
-	subs r1, r5\n\
-	lsls r1, 2\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x16]\n\
-	cmp r0, 0x2\n\
-	bne _08042EA8\n\
-	bl _0804441E\n\
-_08042EA8:\n\
-	adds r0, r2, 0x1\n\
-	movs r1, 0\n\
-	strb r0, [r4, 0x1B]\n\
-	ldr r4, =gBattleScripting\n\
-	movs r0, 0x11\n\
-	strb r0, [r4, 0x10]\n\
-	strb r1, [r4, 0x11]\n\
-	ldr r0, =BattleScript_SpeedBoostActivates\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	strb r5, [r4, 0x17]\n\
-	bl _080443D0\n\
-	.pool\n\
-_08042ED0:\n\
-	ldr r2, =gDisableStructs\n\
-	ldrb r0, [r0]\n\
-	lsls r1, r0, 3\n\
-	subs r1, r0\n\
-	lsls r1, 2\n\
-	adds r1, r2\n\
-	ldrb r3, [r1, 0x18]\n\
-	lsls r0, r3, 31\n\
-	lsrs r0, 31\n\
-	movs r2, 0x1\n\
-	eors r2, r0\n\
-	movs r0, 0x2\n\
-	negs r0, r0\n\
-	ands r0, r3\n\
-	orrs r0, r2\n\
-	strb r0, [r1, 0x18]\n\
-	bl _0804441E\n\
-	.pool\n\
-_08042EF8:\n\
-	ldrb r0, [r7]\n\
-	cmp r0, 0x2B\n\
-	beq _08042F02\n\
-	bl _0804441E\n\
-_08042F02:\n\
-	movs r4, 0\n\
-	ldr r0, =sSoundMovesTable\n\
-	ldrh r2, [r0]\n\
-	ldr r3, =0x0000ffff\n\
-	adds r1, r0, 0\n\
-	cmp r2, r3\n\
-	bne _08042F14\n\
-	bl _0804441E\n\
-_08042F14:\n\
-	cmp r2, r5\n\
-	beq _08042F2C\n\
-	adds r2, r1, 0\n\
-_08042F1A:\n\
-	adds r2, 0x2\n\
-	adds r4, 0x1\n\
-	ldrh r0, [r2]\n\
-	cmp r0, r3\n\
-	bne _08042F28\n\
-	bl _0804441E\n\
-_08042F28:\n\
-	cmp r0, r5\n\
-	bne _08042F1A\n\
-_08042F2C:\n\
-	lsls r0, r4, 1\n\
-	adds r0, r1\n\
-	ldrh r1, [r0]\n\
-	ldr r0, =0x0000ffff\n\
-	cmp r1, r0\n\
-	bne _08042F3C\n\
-	bl _0804441E\n\
-_08042F3C:\n\
-	ldr r1, =gBattleMons\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r2, [r0]\n\
-	movs r0, 0x58\n\
-	muls r0, r2\n\
-	adds r1, 0x50\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	movs r1, 0x80\n\
-	lsls r1, 5\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08042F62\n\
-	ldr r0, =gHitMarker\n\
-	ldr r1, [r0]\n\
-	movs r2, 0x80\n\
-	lsls r2, 4\n\
-	orrs r1, r2\n\
-	str r1, [r0]\n\
-_08042F62:\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_SoundproofProtected\n\
-	str r0, [r1]\n\
-	movs r0, 0x1\n\
-	mov r9, r0\n\
-	bl _08044424\n\
-	.pool\n\
-_08042F8C:\n\
-	cmp r5, 0\n\
-	bne _08042F94\n\
-	bl _0804441E\n\
-_08042F94:\n\
-	ldrb r0, [r7]\n\
-	cmp r0, 0xB\n\
-	beq _08043004\n\
-	cmp r0, 0xB\n\
-	bgt _08042FA4\n\
-	cmp r0, 0xA\n\
-	beq _08042FAA\n\
-	b _08043126\n\
-_08042FA4:\n\
-	cmp r0, 0x12\n\
-	beq _0804305C\n\
-	b _08043126\n\
-_08042FAA:\n\
-	cmp r3, 0xD\n\
-	beq _08042FB0\n\
-	b _08043126\n\
-_08042FB0:\n\
-	ldr r0, =gBattleMoves\n\
-	lsls r1, r5, 1\n\
-	adds r1, r5\n\
-	lsls r1, 2\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x1]\n\
-	cmp r0, 0\n\
-	bne _08042FC2\n\
-	b _08043126\n\
-_08042FC2:\n\
-	ldr r1, =gProtectStructs\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 4\n\
-	adds r0, r1\n\
-	ldrb r0, [r0, 0x2]\n\
-	lsls r0, 28\n\
-	cmp r0, 0\n\
-	bge _08042FF0\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_MoveHPDrain\n\
-	b _08042FF4\n\
-	.pool\n\
-_08042FF0:\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_MoveHPDrain_PPLoss\n\
-_08042FF4:\n\
-	str r0, [r1]\n\
-	movs r1, 0x1\n\
-	b _08043124\n\
-	.pool\n\
-_08043004:\n\
-	cmp r3, 0xB\n\
-	beq _0804300A\n\
-	b _08043126\n\
-_0804300A:\n\
-	ldr r0, =gBattleMoves\n\
-	lsls r1, r5, 1\n\
-	adds r1, r5\n\
-	lsls r1, 2\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x1]\n\
-	cmp r0, 0\n\
-	bne _0804301C\n\
-	b _08043126\n\
-_0804301C:\n\
-	ldr r1, =gProtectStructs\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 4\n\
-	adds r0, r1\n\
-	ldrb r0, [r0, 0x2]\n\
-	lsls r0, 28\n\
-	cmp r0, 0\n\
-	bge _08043048\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_MoveHPDrain\n\
-	b _0804304C\n\
-	.pool\n\
-_08043048:\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_MoveHPDrain_PPLoss\n\
-_0804304C:\n\
-	str r0, [r1]\n\
-	movs r2, 0x1\n\
-	mov r9, r2\n\
-	b _08043126\n\
-	.pool\n\
-_0804305C:\n\
-	cmp r3, 0xA\n\
-	bne _08043126\n\
-	ldr r1, =gBattleMons\n\
-	movs r0, 0x58\n\
-	mov r3, r10\n\
-	muls r3, r0\n\
-	adds r0, r3, 0\n\
-	adds r1, 0x4C\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	movs r1, 0x20\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08043126\n\
-	ldr r2, =gBattleResources\n\
-	ldr r0, [r2]\n\
-	ldr r0, [r0, 0x4]\n\
-	mov r5, r10\n\
-	lsls r1, r5, 2\n\
-	adds r0, r1\n\
-	ldr r3, [r0]\n\
-	movs r4, 0x1\n\
-	ands r3, r4\n\
-	adds r5, r1, 0\n\
-	cmp r3, 0\n\
-	bne _080430EC\n\
-	ldr r0, =gBattleCommunication\n\
-	strb r3, [r0, 0x5]\n\
-	ldr r1, =gProtectStructs\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 4\n\
-	adds r0, r1\n\
-	ldrb r0, [r0, 0x2]\n\
-	lsls r0, 28\n\
-	cmp r0, 0\n\
-	bge _080430C8\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_FlashFireBoost\n\
-	b _080430CC\n\
-	.pool\n\
-_080430C8:\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_FlashFireBoost_PPLoss\n\
-_080430CC:\n\
-	str r0, [r1]\n\
-	ldr r0, [r2]\n\
-	ldr r1, [r0, 0x4]\n\
-	adds r1, r5\n\
-	ldr r0, [r1]\n\
-	movs r2, 0x1\n\
-	orrs r0, r2\n\
-	str r0, [r1]\n\
-	movs r0, 0x2\n\
-	mov r9, r0\n\
-	b _08043126\n\
-	.pool\n\
-_080430EC:\n\
-	ldr r0, =gBattleCommunication\n\
-	strb r4, [r0, 0x5]\n\
-	ldr r1, =gProtectStructs\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 4\n\
-	adds r0, r1\n\
-	ldrb r0, [r0, 0x2]\n\
-	lsls r0, 28\n\
-	cmp r0, 0\n\
-	bge _0804311C\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_FlashFireBoost\n\
-	b _08043120\n\
-	.pool\n\
-_0804311C:\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_FlashFireBoost_PPLoss\n\
-_08043120:\n\
-	str r0, [r1]\n\
-	movs r1, 0x2\n\
-_08043124:\n\
-	mov r9, r1\n\
-_08043126:\n\
-	mov r2, r9\n\
-	cmp r2, 0x1\n\
-	beq _08043130\n\
-	bl _0804441E\n\
-_08043130:\n\
-	ldr r1, =gBattleMons\n\
-	movs r0, 0x58\n\
-	mov r3, r10\n\
-	muls r3, r0\n\
-	adds r0, r3, 0\n\
-	adds r1, r0, r1\n\
-	ldrh r0, [r1, 0x2C]\n\
-	ldrh r5, [r1, 0x28]\n\
-	cmp r0, r5\n\
-	bne _0804318C\n\
-	ldr r1, =gProtectStructs\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 4\n\
-	adds r0, r1\n\
-	ldrb r0, [r0, 0x2]\n\
-	lsls r0, 28\n\
-	cmp r0, 0\n\
-	bge _08043178\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =gUnknown_082DB592\n\
-	str r0, [r1]\n\
-	bl _0804441E\n\
-	.pool\n\
-_08043178:\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =gUnknown_082DB591\n\
-	str r0, [r1]\n\
-	bl _0804441E\n\
-	.pool\n\
-_0804318C:\n\
-	ldr r2, =gBattleMoveDamage\n\
-	ldrh r0, [r1, 0x2C]\n\
-	lsrs r0, 2\n\
-	str r0, [r2]\n\
-	cmp r0, 0\n\
-	bne _0804319C\n\
-	mov r0, r9\n\
-	str r0, [r2]\n\
-_0804319C:\n\
-	ldr r0, [r2]\n\
-	negs r0, r0\n\
-	str r0, [r2]\n\
-	bl _0804441E\n\
-	.pool\n\
-_080431AC:\n\
-	ldrb r0, [r7]\n\
-	subs r0, 0x9\n\
-	cmp r0, 0x2F\n\
-	bls _080431B8\n\
-	bl _0804441E\n\
-_080431B8:\n\
-	lsls r0, 2\n\
-	ldr r1, =_080431C8\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
-_080431C8:\n\
-	.4byte _080435E4\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _08043288\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _08043350\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _08043410\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _08043508\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _080436C0\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804441E\n\
-	.4byte _0804379C\n\
-_08043288:\n\
-	ldr r0, =gBattleMoveFlags\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x29\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08043298\n\
-	bl _0804441E\n\
-_08043298:\n\
-	cmp r5, 0xA5\n\
-	bne _080432A0\n\
-	bl _0804441E\n\
-_080432A0:\n\
-	ldr r0, =gBattleMoves\n\
-	lsls r1, r5, 1\n\
-	adds r1, r5\n\
-	lsls r1, 2\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x1]\n\
-	cmp r0, 0\n\
-	bne _080432B4\n\
-	bl _0804441E\n\
-_080432B4:\n\
-	ldr r2, =gSpecialStatuses\n\
-	ldr r0, =gBankTarget\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r1, r0, 2\n\
-	adds r0, r2, 0\n\
-	adds r0, 0x8\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080432DC\n\
-	adds r0, r2, 0\n\
-	adds r0, 0xC\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080432DC\n\
-	bl _0804441E\n\
-_080432DC:\n\
-	ldr r1, =gBattleMons\n\
-	movs r0, 0x58\n\
-	mov r2, r10\n\
-	muls r2, r0\n\
-	adds r0, r2, 0\n\
-	adds r1, r0, r1\n\
-	adds r4, r1, 0\n\
-	adds r4, 0x21\n\
-	ldrb r0, [r4]\n\
-	cmp r0, r3\n\
-	bne _080432F6\n\
-	bl _0804441E\n\
-_080432F6:\n\
-	adds r2, r1, 0\n\
-	adds r2, 0x22\n\
-	ldrb r0, [r2]\n\
-	cmp r0, r3\n\
-	bne _08043304\n\
-	bl _0804441E\n\
-_08043304:\n\
-	ldrh r0, [r1, 0x28]\n\
-	cmp r0, 0\n\
-	bne _0804330E\n\
-	bl _0804441E\n\
-_0804330E:\n\
-	strb r3, [r4]\n\
-	strb r3, [r2]\n\
-	ldr r1, =gBattleTextBuff1\n\
-	movs r0, 0xFD\n\
-	strb r0, [r1]\n\
-	movs r0, 0x3\n\
-	strb r0, [r1, 0x1]\n\
-	strb r3, [r1, 0x2]\n\
-	movs r0, 0xFF\n\
-	strb r0, [r1, 0x3]\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_ColorChangeActivates\n\
-	str r0, [r1]\n\
-	bl _080443D0\n\
-	.pool\n\
-_08043350:\n\
-	ldr r0, =gBattleMoveFlags\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x29\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08043360\n\
-	bl _0804441E\n\
-_08043360:\n\
-	ldr r1, =gBattleMons\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r2, [r0]\n\
-	movs r0, 0x58\n\
-	muls r0, r2\n\
-	adds r3, r0, r1\n\
-	ldrh r0, [r3, 0x28]\n\
-	cmp r0, 0\n\
-	bne _08043376\n\
-	bl _0804441E\n\
-_08043376:\n\
-	ldr r0, =gProtectStructs\n\
-	lsls r1, r2, 4\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x1]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _08043388\n\
-	bl _0804441E\n\
-_08043388:\n\
-	ldr r2, =gSpecialStatuses\n\
-	ldr r0, =gBankTarget\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r1, r0, 2\n\
-	adds r0, r2, 0\n\
-	adds r0, 0x8\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080433B0\n\
-	adds r0, r2, 0\n\
-	adds r0, 0xC\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _080433B0\n\
-	bl _0804441E\n\
-_080433B0:\n\
-	ldr r1, =gBattleMoves\n\
-	lsls r0, r5, 1\n\
-	adds r0, r5\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldrb r1, [r0, 0x8]\n\
-	movs r2, 0x1\n\
-	adds r0, r2, 0\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _080433CA\n\
-	bl _0804441E\n\
-_080433CA:\n\
-	ldr r1, =gBattleMoveDamage\n\
-	ldrh r0, [r3, 0x2C]\n\
-	lsrs r0, 4\n\
-	str r0, [r1]\n\
-	cmp r0, 0\n\
-	bne _080433D8\n\
-	str r2, [r1]\n\
-_080433D8:\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_RoughSkinActivates\n\
-	str r0, [r1]\n\
-	bl _080443D0\n\
-	.pool\n\
-_08043410:\n\
-	ldr r0, =gBattleMoveFlags\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x29\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08043420\n\
-	bl _0804441E\n\
-_08043420:\n\
-	ldr r1, =gBattleMons\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r2, [r0]\n\
-	movs r0, 0x58\n\
-	muls r0, r2\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x28]\n\
-	cmp r0, 0\n\
-	bne _08043436\n\
-	bl _0804441E\n\
-_08043436:\n\
-	ldr r0, =gProtectStructs\n\
-	lsls r1, r2, 4\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x1]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _08043448\n\
-	bl _0804441E\n\
-_08043448:\n\
-	ldr r2, =gSpecialStatuses\n\
-	ldr r0, =gBankTarget\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r1, r0, 2\n\
-	adds r0, r2, 0\n\
-	adds r0, 0x8\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08043470\n\
-	adds r0, r2, 0\n\
-	adds r0, 0xC\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08043470\n\
-	bl _0804441E\n\
-_08043470:\n\
-	ldr r1, =gBattleMoves\n\
-	lsls r0, r5, 1\n\
-	adds r0, r5\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldrb r1, [r0, 0x8]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08043488\n\
-	bl _0804441E\n\
-_08043488:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0xA\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	cmp r0, 0\n\
-	beq _080434A0\n\
-	bl _0804441E\n\
-_080434A0:\n\
-	ldr r5, =gBattleCommunication\n\
-	movs r4, 0x3\n\
-_080434A4:\n\
-	bl Random\n\
-	ands r0, r4\n\
-	strb r0, [r5, 0x3]\n\
-	cmp r0, 0\n\
-	beq _080434A4\n\
-	ldr r1, =gBattleCommunication\n\
-	ldrb r0, [r1, 0x3]\n\
-	cmp r0, 0x3\n\
-	bne _080434BC\n\
-	adds r0, 0x2\n\
-	strb r0, [r1, 0x3]\n\
-_080434BC:\n\
-	ldrb r0, [r1, 0x3]\n\
-	adds r0, 0x40\n\
-	strb r0, [r1, 0x3]\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_ApplySecondaryEffect\n\
-	str r0, [r1]\n\
-	ldr r2, =gHitMarker\n\
-	ldr r0, [r2]\n\
-	movs r1, 0x80\n\
-	lsls r1, 6\n\
-	orrs r0, r1\n\
-	str r0, [r2]\n\
-	bl _080443D0\n\
-	.pool\n\
-_08043508:\n\
-	ldr r0, =gBattleMoveFlags\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x29\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08043518\n\
-	bl _0804441E\n\
-_08043518:\n\
-	ldr r1, =gBattleMons\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r2, [r0]\n\
-	movs r0, 0x58\n\
-	muls r0, r2\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x28]\n\
-	cmp r0, 0\n\
-	bne _0804352E\n\
-	bl _0804441E\n\
-_0804352E:\n\
-	ldr r0, =gProtectStructs\n\
-	lsls r1, r2, 4\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x1]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _08043540\n\
-	bl _0804441E\n\
-_08043540:\n\
-	ldr r2, =gSpecialStatuses\n\
-	ldr r0, =gBankTarget\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r1, r0, 2\n\
-	adds r0, r2, 0\n\
-	adds r0, 0x8\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08043568\n\
-	adds r0, r2, 0\n\
-	adds r0, 0xC\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08043568\n\
-	bl _0804441E\n\
-_08043568:\n\
-	ldr r1, =gBattleMoves\n\
-	lsls r0, r5, 1\n\
-	adds r0, r5\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldrb r1, [r0, 0x8]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08043580\n\
-	bl _0804441E\n\
-_08043580:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0x3\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	cmp r0, 0\n\
-	beq _08043598\n\
-	bl _0804441E\n\
-_08043598:\n\
-	ldr r1, =gBattleCommunication\n\
-	movs r0, 0x42\n\
-	strb r0, [r1, 0x3]\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_ApplySecondaryEffect\n\
-	str r0, [r1]\n\
-	ldr r2, =gHitMarker\n\
-	ldr r0, [r2]\n\
-	movs r1, 0x80\n\
-	lsls r1, 6\n\
-	orrs r0, r1\n\
-	str r0, [r2]\n\
-	bl _080443D0\n\
-	.pool\n\
-_080435E4:\n\
-	ldr r0, =gBattleMoveFlags\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x29\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080435F4\n\
-	bl _0804441E\n\
-_080435F4:\n\
-	ldr r1, =gBattleMons\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r2, [r0]\n\
-	movs r0, 0x58\n\
-	muls r0, r2\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x28]\n\
-	cmp r0, 0\n\
-	bne _0804360A\n\
-	bl _0804441E\n\
-_0804360A:\n\
-	ldr r0, =gProtectStructs\n\
-	lsls r1, r2, 4\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x1]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _0804361C\n\
-	bl _0804441E\n\
-_0804361C:\n\
-	ldr r2, =gSpecialStatuses\n\
-	ldr r0, =gBankTarget\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r1, r0, 2\n\
-	adds r0, r2, 0\n\
-	adds r0, 0x8\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08043644\n\
-	adds r0, r2, 0\n\
-	adds r0, 0xC\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08043644\n\
-	bl _0804441E\n\
-_08043644:\n\
-	ldr r1, =gBattleMoves\n\
-	lsls r0, r5, 1\n\
-	adds r0, r5\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldrb r1, [r0, 0x8]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _0804365C\n\
-	bl _0804441E\n\
-_0804365C:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0x3\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	cmp r0, 0\n\
-	beq _08043674\n\
-	bl _0804441E\n\
-_08043674:\n\
-	ldr r1, =gBattleCommunication\n\
-	movs r0, 0x45\n\
-	strb r0, [r1, 0x3]\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_ApplySecondaryEffect\n\
-	str r0, [r1]\n\
-	ldr r2, =gHitMarker\n\
-	ldr r0, [r2]\n\
-	movs r1, 0x80\n\
-	lsls r1, 6\n\
-	orrs r0, r1\n\
-	str r0, [r2]\n\
-	bl _080443D0\n\
-	.pool\n\
-_080436C0:\n\
-	ldr r0, =gBattleMoveFlags\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x29\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080436D0\n\
-	bl _0804441E\n\
-_080436D0:\n\
-	ldr r1, =gBattleMons\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r2, [r0]\n\
-	movs r0, 0x58\n\
-	muls r0, r2\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x28]\n\
-	cmp r0, 0\n\
-	bne _080436E6\n\
-	bl _0804441E\n\
-_080436E6:\n\
-	ldr r0, =gProtectStructs\n\
-	lsls r1, r2, 4\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x1]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _080436F8\n\
-	bl _0804441E\n\
-_080436F8:\n\
-	ldr r1, =gBattleMoves\n\
-	lsls r0, r5, 1\n\
-	adds r0, r5\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldrb r1, [r0, 0x8]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08043710\n\
-	bl _0804441E\n\
-_08043710:\n\
-	ldr r2, =gSpecialStatuses\n\
-	ldr r0, =gBankTarget\n\
-	ldrb r1, [r0]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r1, r0, 2\n\
-	adds r0, r2, 0\n\
-	adds r0, 0x8\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08043738\n\
-	adds r0, r2, 0\n\
-	adds r0, 0xC\n\
-	adds r0, r1, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08043738\n\
-	bl _0804441E\n\
-_08043738:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0x3\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	cmp r0, 0\n\
-	beq _08043750\n\
-	bl _0804441E\n\
-_08043750:\n\
-	ldr r1, =gBattleCommunication\n\
-	movs r0, 0x43\n\
-	strb r0, [r1, 0x3]\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_ApplySecondaryEffect\n\
-	str r0, [r1]\n\
-	ldr r2, =gHitMarker\n\
-	ldr r0, [r2]\n\
-	movs r1, 0x80\n\
-	lsls r1, 6\n\
-	orrs r0, r1\n\
-	str r0, [r2]\n\
-	bl _080443D0\n\
-	.pool\n\
-_0804379C:\n\
-	ldr r0, =gBattleMoveFlags\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x29\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080437AC\n\
-	bl _0804441E\n\
-_080437AC:\n\
-	ldr r6, =gBattleMons\n\
-	ldr r3, =gBankAttacker\n\
-	mov r8, r3\n\
-	ldrb r1, [r3]\n\
-	movs r7, 0x58\n\
-	adds r0, r1, 0\n\
-	muls r0, r7\n\
-	adds r0, r6\n\
-	ldrh r0, [r0, 0x28]\n\
-	cmp r0, 0\n\
-	bne _080437C6\n\
-	bl _0804441E\n\
-_080437C6:\n\
-	ldr r0, =gProtectStructs\n\
-	lsls r1, 4\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x1]\n\
-	lsls r0, 31\n\
-	cmp r0, 0\n\
-	beq _080437D8\n\
-	bl _0804441E\n\
-_080437D8:\n\
-	ldr r1, =gBattleMoves\n\
-	lsls r0, r5, 1\n\
-	adds r0, r5\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldrb r1, [r0, 0x8]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _080437F0\n\
-	bl _0804441E\n\
-_080437F0:\n\
-	ldr r3, =gSpecialStatuses\n\
-	ldr r5, =gBankTarget\n\
-	ldrb r1, [r5]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r2, r0, 2\n\
-	adds r0, r3, 0\n\
-	adds r0, 0x8\n\
-	adds r0, r2, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08043818\n\
-	adds r0, r3, 0\n\
-	adds r0, 0xC\n\
-	adds r0, r2, r0\n\
-	ldr r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08043818\n\
-	bl _0804441E\n\
-_08043818:\n\
-	adds r0, r1, 0\n\
-	muls r0, r7\n\
-	adds r0, r6\n\
-	ldrh r0, [r0, 0x28]\n\
-	cmp r0, 0\n\
-	bne _08043828\n\
-	bl _0804441E\n\
-_08043828:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0x3\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	cmp r0, 0\n\
-	beq _08043840\n\
-	bl _0804441E\n\
-_08043840:\n\
-	mov r1, r8\n\
-	ldrb r0, [r1]\n\
-	muls r0, r7\n\
-	adds r0, r6\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0xC\n\
-	bne _08043854\n\
-	bl _0804441E\n\
-_08043854:\n\
-	ldr r0, [sp, 0x8]\n\
-	ldr r1, [sp, 0x10]\n\
-	bl GetGenderFromSpeciesAndPersonality\n\
-	adds r4, r0, 0\n\
-	ldr r0, [sp, 0xC]\n\
-	ldr r1, [sp, 0x14]\n\
-	bl GetGenderFromSpeciesAndPersonality\n\
-	lsls r4, 24\n\
-	lsls r0, 24\n\
-	cmp r4, r0\n\
-	bne _08043872\n\
-	bl _0804441E\n\
-_08043872:\n\
-	mov r2, r8\n\
-	ldrb r0, [r2]\n\
-	muls r0, r7\n\
-	adds r4, r6, 0\n\
-	adds r4, 0x50\n\
-	adds r0, r4\n\
-	ldr r0, [r0]\n\
-	movs r1, 0xF0\n\
-	lsls r1, 12\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _0804388E\n\
-	bl _0804441E\n\
-_0804388E:\n\
-	ldr r0, [sp, 0x8]\n\
-	ldr r1, [sp, 0x10]\n\
-	bl GetGenderFromSpeciesAndPersonality\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0xFF\n\
-	bne _080438A2\n\
-	bl _0804441E\n\
-_080438A2:\n\
-	ldr r0, [sp, 0xC]\n\
-	ldr r1, [sp, 0x14]\n\
-	bl GetGenderFromSpeciesAndPersonality\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0xFF\n\
-	bne _080438B6\n\
-	bl _0804441E\n\
-_080438B6:\n\
-	mov r3, r8\n\
-	ldrb r0, [r3]\n\
-	adds r2, r0, 0\n\
-	muls r2, r7\n\
-	adds r2, r4\n\
-	ldr r1, =gBitTable\n\
-	ldrb r0, [r5]\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	ldr r1, [r0]\n\
-	lsls r1, 16\n\
-	ldr r0, [r2]\n\
-	orrs r0, r1\n\
-	str r0, [r2]\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_CuteCharmActivates\n\
-	str r0, [r1]\n\
-	bl _080443D0\n\
-	.pool\n\
-_08043908:\n\
-	movs r5, 0\n\
-	mov r10, r5\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r10, r0\n\
-	bcc _08043918\n\
-	bl _0804441E\n\
-_08043918:\n\
-	ldr r1, =gBattleMons\n\
-	movs r0, 0x58\n\
-	mov r2, r10\n\
-	muls r2, r0\n\
-	adds r0, r2, 0\n\
-	adds r0, r1\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	subs r0, 0x7\n\
-	adds r2, r1, 0\n\
-	cmp r0, 0x41\n\
-	bls _08043932\n\
-	b _08043B96\n\
-_08043932:\n\
-	lsls r0, 2\n\
-	ldr r1, =_08043948\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.pool\n\
-	.align 2, 0\n\
-_08043948:\n\
-	.4byte _08043AAC\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B70\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043AD4\n\
-	.4byte _08043B96\n\
-	.4byte _08043A50\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043A7C\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B40\n\
-	.4byte _08043B10\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043B96\n\
-	.4byte _08043AD4\n\
-_08043A50:\n\
-	movs r0, 0x58\n\
-	mov r3, r10\n\
-	muls r3, r0\n\
-	adds r0, r3, 0\n\
-	adds r1, r2, 0\n\
-	adds r1, 0x4C\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	ldr r1, =0x00000f88\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08043A6A\n\
-	b _08043B96\n\
-_08043A6A:\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_PoisonJpn\n\
-	b _08043B5C\n\
-	.pool\n\
-_08043A7C:\n\
-	movs r0, 0x58\n\
-	mov r1, r10\n\
-	muls r1, r0\n\
-	adds r0, r1, 0\n\
-	adds r1, r2, 0\n\
-	adds r1, 0x50\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	movs r1, 0x7\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08043A96\n\
-	b _08043B96\n\
-_08043A96:\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_ConfusionJpn\n\
-	bl StringCopy\n\
-	movs r2, 0x2\n\
-	mov r9, r2\n\
-	b _08043B9C\n\
-	.pool\n\
-_08043AAC:\n\
-	movs r0, 0x58\n\
-	mov r3, r10\n\
-	muls r3, r0\n\
-	adds r0, r3, 0\n\
-	adds r1, r2, 0\n\
-	adds r1, 0x4C\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	movs r1, 0x40\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08043B96\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_ParalysisJpn\n\
-	b _08043B5C\n\
-	.pool\n\
-_08043AD4:\n\
-	movs r0, 0x58\n\
-	mov r3, r10\n\
-	muls r3, r0\n\
-	adds r0, r2, 0\n\
-	adds r0, 0x4C\n\
-	adds r0, r3, r0\n\
-	ldr r0, [r0]\n\
-	movs r1, 0x7\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08043B96\n\
-	adds r2, 0x50\n\
-	adds r2, r3, r2\n\
-	ldr r0, [r2]\n\
-	ldr r1, =0xf7ffffff\n\
-	ands r0, r1\n\
-	str r0, [r2]\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_SleepJpn\n\
-	bl StringCopy\n\
-	movs r0, 0x1\n\
-	mov r9, r0\n\
-	b _08043B9C\n\
-	.pool\n\
-_08043B10:\n\
-	movs r0, 0x58\n\
-	mov r1, r10\n\
-	muls r1, r0\n\
-	adds r0, r1, 0\n\
-	adds r1, r2, 0\n\
-	adds r1, 0x4C\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	movs r1, 0x10\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08043B96\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_BurnJpn\n\
-	bl StringCopy\n\
-	movs r2, 0x1\n\
-	mov r9, r2\n\
-	b _08043B9C\n\
-	.pool\n\
-_08043B40:\n\
-	movs r0, 0x58\n\
-	mov r3, r10\n\
-	muls r3, r0\n\
-	adds r0, r3, 0\n\
-	adds r1, r2, 0\n\
-	adds r1, 0x4C\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	movs r1, 0x20\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08043B96\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_IceJpn\n\
-_08043B5C:\n\
-	bl StringCopy\n\
-	movs r5, 0x1\n\
-	mov r9, r5\n\
-	b _08043B9C\n\
-	.pool\n\
-_08043B70:\n\
-	movs r0, 0x58\n\
-	mov r1, r10\n\
-	muls r1, r0\n\
-	adds r0, r1, 0\n\
-	adds r1, r2, 0\n\
-	adds r1, 0x50\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	movs r1, 0xF0\n\
-	lsls r1, 12\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _08043B96\n\
-	ldr r0, =gBattleTextBuff1\n\
-	ldr r1, =gStatusConditionString_LoveJpn\n\
-	bl StringCopy\n\
-	movs r2, 0x3\n\
-	mov r9, r2\n\
-_08043B96:\n\
-	mov r3, r9\n\
-	cmp r3, 0\n\
-	beq _08043C50\n\
-_08043B9C:\n\
-	mov r5, r9\n\
-	cmp r5, 0x2\n\
-	beq _08043BD0\n\
-	cmp r5, 0x2\n\
-	bgt _08043BB4\n\
-	cmp r5, 0x1\n\
-	beq _08043BBC\n\
-	b _08043BFC\n\
-	.pool\n\
-_08043BB4:\n\
-	mov r0, r9\n\
-	cmp r0, 0x3\n\
-	beq _08043BE8\n\
-	b _08043BFC\n\
-_08043BBC:\n\
-	ldr r1, =gBattleMons\n\
-	movs r0, 0x58\n\
-	mov r2, r10\n\
-	muls r2, r0\n\
-	adds r1, 0x4C\n\
-	adds r2, r1\n\
-	movs r0, 0\n\
-	b _08043BFA\n\
-	.pool\n\
-_08043BD0:\n\
-	ldr r1, =gBattleMons\n\
-	movs r0, 0x58\n\
-	mov r2, r10\n\
-	muls r2, r0\n\
-	adds r1, 0x50\n\
-	adds r2, r1\n\
-	ldr r0, [r2]\n\
-	movs r1, 0x8\n\
-	negs r1, r1\n\
-	b _08043BF8\n\
-	.pool\n\
-_08043BE8:\n\
-	ldr r1, =gBattleMons\n\
-	movs r0, 0x58\n\
-	mov r2, r10\n\
-	muls r2, r0\n\
-	adds r1, 0x50\n\
-	adds r2, r1\n\
-	ldr r0, [r2]\n\
-	ldr r1, =0xfff0ffff\n\
-_08043BF8:\n\
-	ands r0, r1\n\
-_08043BFA:\n\
-	str r0, [r2]\n\
-_08043BFC:\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =gUnknown_082DB68C\n\
-	str r0, [r1]\n\
-	ldr r0, =gBattleScripting\n\
-	mov r1, r10\n\
-	strb r1, [r0, 0x17]\n\
-	ldr r4, =gActiveBank\n\
-	strb r1, [r4]\n\
-	ldrb r1, [r4]\n\
-	movs r0, 0x58\n\
-	muls r0, r1\n\
-	ldr r1, =gBattleMons + 0x4C\n\
-	adds r0, r1\n\
-	str r0, [sp]\n\
-	movs r0, 0\n\
-	movs r1, 0x28\n\
-	movs r2, 0\n\
-	movs r3, 0x4\n\
-	bl EmitSetMonData\n\
-	ldrb r0, [r4]\n\
-	bl MarkBufferBankForExecution\n\
-	bl _0804443A\n\
-	.pool\n\
-_08043C50:\n\
-	mov r0, r10\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r10, r0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r10, r0\n\
-	bcs _08043C64\n\
-	b _08043918\n\
-_08043C64:\n\
-	bl _0804441E\n\
-	.pool\n\
-_08043C6C:\n\
-	movs r2, 0\n\
-	mov r10, r2\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r10, r0\n\
-	bcc _08043C7A\n\
-	b _0804441E\n\
-_08043C7A:\n\
-	ldr r4, =gBattleMons\n\
-_08043C7C:\n\
-	movs r0, 0x58\n\
-	mov r3, r10\n\
-	muls r3, r0\n\
-	adds r0, r3, 0\n\
-	adds r0, r4\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0x3B\n\
-	bne _08043CA0\n\
-	mov r0, r10\n\
-	bl CastformDataTypeChange\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-	cmp r0, 0\n\
-	beq _08043CA0\n\
-	b _080442FC\n\
-_08043CA0:\n\
-	mov r0, r10\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r10, r0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r10, r0\n\
-	bcc _08043C7C\n\
-	b _0804441E\n\
-	.pool\n\
-_08043CBC:\n\
-	ldrb r0, [r7]\n\
-	cmp r0, 0x1C\n\
-	beq _08043CC4\n\
-	b _0804441E\n\
-_08043CC4:\n\
-	ldr r4, =gHitMarker\n\
-	ldr r1, [r4]\n\
-	movs r0, 0x80\n\
-	lsls r0, 7\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08043CD4\n\
-	b _0804441E\n\
-_08043CD4:\n\
-	ldr r0, =0xffffbfff\n\
-	ands r1, r0\n\
-	str r1, [r4]\n\
-	mov r5, r8\n\
-	ldr r1, [r5]\n\
-	adds r1, 0xB2\n\
-	ldrb r2, [r1]\n\
-	movs r0, 0x3F\n\
-	ands r0, r2\n\
-	strb r0, [r1]\n\
-	ldr r0, [r5]\n\
-	adds r1, r0, 0\n\
-	adds r1, 0xB2\n\
-	ldrb r0, [r1]\n\
-	cmp r0, 0x6\n\
-	bne _08043CF8\n\
-	movs r0, 0x2\n\
-	strb r0, [r1]\n\
-_08043CF8:\n\
-	ldr r1, =gBattleCommunication\n\
-	mov r2, r8\n\
-	ldr r0, [r2]\n\
-	adds r0, 0xB2\n\
-	ldrb r0, [r0]\n\
-	adds r0, 0x40\n\
-	strb r0, [r1, 0x3]\n\
-	ldr r1, =gBattleScripting\n\
-	ldr r0, =gBankTarget\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1, 0x17]\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_SynchronizeActivates\n\
-	str r0, [r1]\n\
-	ldr r0, [r4]\n\
-	movs r1, 0x80\n\
-	lsls r1, 6\n\
-	orrs r0, r1\n\
-	str r0, [r4]\n\
-	b _080443D0\n\
-	.pool\n\
-_08043D40:\n\
-	ldrb r0, [r7]\n\
-	cmp r0, 0x1C\n\
-	beq _08043D48\n\
-	b _0804441E\n\
-_08043D48:\n\
-	ldr r4, =gHitMarker\n\
-	ldr r1, [r4]\n\
-	movs r0, 0x80\n\
-	lsls r0, 7\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _08043D58\n\
-	b _0804441E\n\
-_08043D58:\n\
-	ldr r0, =0xffffbfff\n\
-	ands r1, r0\n\
-	str r1, [r4]\n\
-	mov r3, r8\n\
-	ldr r1, [r3]\n\
-	adds r1, 0xB2\n\
-	ldrb r2, [r1]\n\
-	movs r0, 0x3F\n\
-	ands r0, r2\n\
-	strb r0, [r1]\n\
-	ldr r0, [r3]\n\
-	adds r1, r0, 0\n\
-	adds r1, 0xB2\n\
-	ldrb r0, [r1]\n\
-	cmp r0, 0x6\n\
-	bne _08043D7C\n\
-	movs r0, 0x2\n\
-	strb r0, [r1]\n\
-_08043D7C:\n\
-	ldr r1, =gBattleCommunication\n\
-	mov r3, r8\n\
-	ldr r0, [r3]\n\
-	adds r0, 0xB2\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1, 0x3]\n\
-	ldr r1, =gBattleScripting\n\
-	ldr r0, =gBankAttacker\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1, 0x17]\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =BattleScript_SynchronizeActivates\n\
-	str r0, [r1]\n\
-	ldr r0, [r4]\n\
-	movs r1, 0x80\n\
-	lsls r1, 6\n\
-	orrs r0, r1\n\
-	str r0, [r4]\n\
-	b _080443D0\n\
-	.pool\n\
-_08043DC4:\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r1, [r0]\n\
-	cmp r4, r1\n\
-	blt _08043DD0\n\
-	b _0804441E\n\
-_08043DD0:\n\
-	ldr r0, =gBattleMons\n\
-	adds r5, r1, 0\n\
-	ldr r2, =gStatuses3\n\
-	adds r3, r0, 0\n\
-	adds r3, 0x20\n\
-	movs r6, 0x80\n\
-	lsls r6, 12\n\
-_08043DDE:\n\
-	ldrb r1, [r3]\n\
-	cmp r1, 0x16\n\
-	bne _08043DEE\n\
-	ldr r0, [r2]\n\
-	ands r0, r6\n\
-	cmp r0, 0\n\
-	beq _08043DEE\n\
-	b _08044324\n\
-_08043DEE:\n\
-	adds r2, 0x4\n\
-	adds r3, 0x58\n\
-	adds r4, 0x1\n\
-	cmp r4, r5\n\
-	blt _08043DDE\n\
-	b _0804441E\n\
-	.pool\n\
-_08043E08:\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _08043E14\n\
-	b _0804441E\n\
-_08043E14:\n\
-	ldr r5, =gActiveBank\n\
-	mov r8, r5\n\
-	ldr r0, =gBattleMons\n\
-	adds r0, 0x20\n\
-	str r0, [sp, 0x1C]\n\
-	movs r1, 0\n\
-	str r1, [sp, 0x20]\n\
-_08043E22:\n\
-	ldr r2, [sp, 0x1C]\n\
-	ldrb r0, [r2]\n\
-	cmp r0, 0x24\n\
-	beq _08043E2C\n\
-	b _08043FBE\n\
-_08043E2C:\n\
-	ldr r0, =gStatuses3\n\
-	ldr r3, [sp, 0x20]\n\
-	adds r0, r3, r0\n\
-	ldr r1, [r0]\n\
-	movs r0, 0x80\n\
-	lsls r0, 13\n\
-	ands r1, r0\n\
-	str r3, [sp, 0x18]\n\
-	cmp r1, 0\n\
-	bne _08043E42\n\
-	b _08043FBE\n\
-_08043E42:\n\
-	lsls r0, r4, 24\n\
-	lsrs r0, 24\n\
-	bl GetBankIdentity\n\
-	movs r1, 0x1\n\
-	adds r5, r0, 0\n\
-	eors r5, r1\n\
-	ands r5, r1\n\
-	adds r0, r5, 0\n\
-	bl GetBankByIdentity\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	adds r0, r5, 0x2\n\
-	bl GetBankByIdentity\n\
-	lsls r0, 24\n\
-	lsrs r7, r0, 24\n\
-	ldr r0, =gBattleTypeFlags\n\
-	ldr r0, [r0]\n\
-	movs r2, 0x1\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	bne _08043E74\n\
-	b _08043F84\n\
-_08043E74:\n\
-	movs r1, 0x58\n\
-	adds r0, r6, 0\n\
-	muls r0, r1\n\
-	ldr r3, =gBattleMons\n\
-	adds r1, r0, r3\n\
-	adds r0, r1, 0\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _08043F40\n\
-	ldrh r0, [r1, 0x28]\n\
-	cmp r0, 0\n\
-	beq _08043EFC\n\
-	movs r1, 0x58\n\
-	adds r0, r7, 0\n\
-	muls r0, r1\n\
-	adds r1, r0, r3\n\
-	adds r0, r1, 0\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _08043EFC\n\
-	ldrh r0, [r1, 0x28]\n\
-	cmp r0, 0\n\
-	beq _08043EFC\n\
-	str r2, [sp, 0x24]\n\
-	bl Random\n\
-	ldr r2, [sp, 0x24]\n\
-	adds r1, r2, 0\n\
-	ands r1, r0\n\
-	lsls r1, 1\n\
-	orrs r5, r1\n\
-	adds r0, r5, 0\n\
-	bl GetBankByIdentity\n\
-	mov r2, r8\n\
-	strb r0, [r2]\n\
-	ldrb r0, [r2]\n\
-	movs r3, 0x58\n\
-	muls r0, r3\n\
-	ldr r5, =gBattleMons\n\
-	adds r0, r5\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	ldr r1, [sp, 0x1C]\n\
-	strb r0, [r1]\n\
-	ldrb r0, [r2]\n\
-	muls r0, r3\n\
-	adds r0, r5\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	ldr r2, =gLastUsedAbility\n\
-	strb r0, [r2]\n\
-	b _08043FAC\n\
-	.pool\n\
-_08043EFC:\n\
-	ldr r3, =gBattleMons\n\
-	movs r2, 0x58\n\
-	adds r0, r6, 0\n\
-	muls r0, r2\n\
-	adds r1, r0, r3\n\
-	adds r0, r1, 0\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _08043F40\n\
-	ldrh r0, [r1, 0x28]\n\
-	cmp r0, 0\n\
-	beq _08043F40\n\
-	mov r5, r8\n\
-	strb r6, [r5]\n\
-	adds r1, r4, 0\n\
-	muls r1, r2\n\
-	adds r1, r3\n\
-	ldrb r0, [r5]\n\
-	muls r0, r2\n\
-	adds r0, r3\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	adds r1, 0x20\n\
-	strb r0, [r1]\n\
-	ldrb r0, [r5]\n\
-	muls r0, r2\n\
-	adds r0, r3\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	b _08043FA8\n\
-	.pool\n\
-_08043F40:\n\
-	ldr r3, =gBattleMons\n\
-	movs r2, 0x58\n\
-	adds r0, r7, 0\n\
-	muls r0, r2\n\
-	adds r1, r0, r3\n\
-	adds r0, r1, 0\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _08043FB6\n\
-	ldrh r0, [r1, 0x28]\n\
-	cmp r0, 0\n\
-	beq _08043FB6\n\
-	mov r5, r8\n\
-	strb r7, [r5]\n\
-	adds r1, r4, 0\n\
-	muls r1, r2\n\
-	adds r1, r3\n\
-	ldrb r0, [r5]\n\
-	muls r0, r2\n\
-	adds r0, r3\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	adds r1, 0x20\n\
-	strb r0, [r1]\n\
-	ldrb r0, [r5]\n\
-	muls r0, r2\n\
-	adds r0, r3\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	b _08043FA8\n\
-	.pool\n\
-_08043F84:\n\
-	mov r2, r8\n\
-	strb r6, [r2]\n\
-	movs r3, 0x58\n\
-	adds r0, r6, 0\n\
-	muls r0, r3\n\
-	ldr r5, =gBattleMons\n\
-	adds r0, r5\n\
-	adds r2, r0, 0\n\
-	adds r2, 0x20\n\
-	ldrb r1, [r2]\n\
-	cmp r1, 0\n\
-	beq _08043FB6\n\
-	ldrh r0, [r0, 0x28]\n\
-	cmp r0, 0\n\
-	beq _08043FB6\n\
-	ldr r0, [sp, 0x1C]\n\
-	strb r1, [r0]\n\
-	ldrb r0, [r2]\n\
-_08043FA8:\n\
-	ldr r1, =gLastUsedAbility\n\
-	strb r0, [r1]\n\
-_08043FAC:\n\
-	mov r0, r9\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_08043FB6:\n\
-	mov r2, r9\n\
-	cmp r2, 0\n\
-	beq _08043FBE\n\
-	b _08044340\n\
-_08043FBE:\n\
-	ldr r3, [sp, 0x1C]\n\
-	adds r3, 0x58\n\
-	str r3, [sp, 0x1C]\n\
-	ldr r5, [sp, 0x20]\n\
-	adds r5, 0x4\n\
-	str r5, [sp, 0x20]\n\
-	adds r4, 0x1\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	bge _08043FD6\n\
-	b _08043E22\n\
-_08043FD6:\n\
-	b _0804441E\n\
-	.pool\n\
-_08043FE4:\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r1, [r0]\n\
-	cmp r4, r1\n\
-	blt _08043FF0\n\
-	b _0804441E\n\
-_08043FF0:\n\
-	ldr r0, =gBattleMons\n\
-	adds r5, r1, 0\n\
-	ldr r2, =gStatuses3\n\
-	adds r3, r0, 0\n\
-	adds r3, 0x20\n\
-	movs r6, 0x80\n\
-	lsls r6, 12\n\
-_08043FFE:\n\
-	ldrb r1, [r3]\n\
-	cmp r1, 0x16\n\
-	bne _0804400E\n\
-	ldr r0, [r2]\n\
-	ands r0, r6\n\
-	cmp r0, 0\n\
-	beq _0804400E\n\
-	b _080443B4\n\
-_0804400E:\n\
-	adds r2, 0x4\n\
-	adds r3, 0x58\n\
-	adds r4, 0x1\n\
-	cmp r4, r5\n\
-	blt _08043FFE\n\
-	b _0804441E\n\
-	.pool\n\
-_08044028:\n\
-	mov r0, r10\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _0804403E\n\
-	b _0804441E\n\
-_0804403E:\n\
-	ldr r7, =gBattleMons\n\
-_08044040:\n\
-	lsls r0, r4, 24\n\
-	lsrs r0, 24\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r3, r4, 0x1\n\
-	cmp r0, r5\n\
-	beq _0804406A\n\
-	movs r0, 0x58\n\
-	muls r0, r4\n\
-	adds r0, r7\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, r6\n\
-	bne _0804406A\n\
-	ldr r0, =gLastUsedAbility\n\
-	strb r6, [r0]\n\
-	lsls r0, r3, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_0804406A:\n\
-	adds r4, r3, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _08044040\n\
-	b _0804441E\n\
-	.pool\n\
-_08044084:\n\
-	mov r0, r10\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _0804409A\n\
-	b _0804441E\n\
-_0804409A:\n\
-	ldr r7, =gBattleMons\n\
-_0804409C:\n\
-	lsls r0, r4, 24\n\
-	lsrs r0, 24\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r3, r4, 0x1\n\
-	cmp r0, r5\n\
-	bne _080440C6\n\
-	movs r0, 0x58\n\
-	muls r0, r4\n\
-	adds r0, r7\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, r6\n\
-	bne _080440C6\n\
-	ldr r0, =gLastUsedAbility\n\
-	strb r6, [r0]\n\
-	lsls r0, r3, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_080440C6:\n\
-	adds r4, r3, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _0804409C\n\
-	b _0804441E\n\
-	.pool\n\
-_080440E0:\n\
-	ldrb r0, [r7]\n\
-	cmp r0, 0xFD\n\
-	beq _08044104\n\
-	cmp r0, 0xFE\n\
-	beq _0804413C\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	adds r5, r0, 0\n\
-	ldrb r0, [r5]\n\
-	cmp r4, r0\n\
-	blt _080440F8\n\
-	b _0804441E\n\
-_080440F8:\n\
-	ldr r2, =gBattleMons\n\
-	b _08044174\n\
-	.pool\n\
-_08044104:\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _08044110\n\
-	b _0804441E\n\
-_08044110:\n\
-	ldr r5, =gStatuses3\n\
-	movs r2, 0x80\n\
-	lsls r2, 9\n\
-	adds r1, r0, 0\n\
-_08044118:\n\
-	lsls r0, r4, 2\n\
-	adds r0, r5\n\
-	ldr r0, [r0]\n\
-	ands r0, r2\n\
-	adds r3, r4, 0x1\n\
-	cmp r0, 0\n\
-	beq _0804412C\n\
-	lsls r0, r3, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_0804412C:\n\
-	adds r4, r3, 0\n\
-	cmp r4, r1\n\
-	blt _08044118\n\
-	b _0804441E\n\
-	.pool\n\
-_0804413C:\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _08044148\n\
-	b _0804441E\n\
-_08044148:\n\
-	ldr r5, =gStatuses3\n\
-	movs r2, 0x80\n\
-	lsls r2, 10\n\
-	adds r1, r0, 0\n\
-_08044150:\n\
-	lsls r0, r4, 2\n\
-	adds r0, r5\n\
-	ldr r0, [r0]\n\
-	ands r0, r2\n\
-	adds r3, r4, 0x1\n\
-	cmp r0, 0\n\
-	beq _08044164\n\
-	lsls r0, r3, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_08044164:\n\
-	adds r4, r3, 0\n\
-	cmp r4, r1\n\
-	blt _08044150\n\
-	b _0804441E\n\
-	.pool\n\
-_08044174:\n\
-	movs r0, 0x58\n\
-	muls r0, r4\n\
-	adds r0, r2\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	adds r3, r4, 0x1\n\
-	cmp r0, r6\n\
-	bne _0804418C\n\
-	strb r6, [r7]\n\
-	lsls r0, r3, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_0804418C:\n\
-	adds r4, r3, 0\n\
-	ldrb r1, [r5]\n\
-	cmp r4, r1\n\
-	blt _08044174\n\
-	b _0804441E\n\
-_08044196:\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _080441A2\n\
-	b _0804441E\n\
-_080441A2:\n\
-	ldr r2, =gBattleMons\n\
-	mov r8, r2\n\
-	adds r2, r0, 0\n\
-	movs r5, 0x58\n\
-_080441AA:\n\
-	adds r0, r4, 0\n\
-	muls r0, r5\n\
-	mov r3, r8\n\
-	adds r1, r0, r3\n\
-	adds r0, r1, 0\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	adds r3, r4, 0x1\n\
-	cmp r0, r6\n\
-	bne _080441CC\n\
-	ldrh r0, [r1, 0x28]\n\
-	cmp r0, 0\n\
-	beq _080441CC\n\
-	strb r6, [r7]\n\
-	lsls r0, r3, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_080441CC:\n\
-	adds r4, r3, 0\n\
-	cmp r4, r2\n\
-	blt _080441AA\n\
-	b _0804441E\n\
-	.pool\n\
-_080441DC:\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _080441E8\n\
-	b _0804441E\n\
-_080441E8:\n\
-	ldr r7, =gBattleMons\n\
-	adds r1, r0, 0\n\
-	movs r5, 0x58\n\
-	ldr r2, =gLastUsedAbility\n\
-_080441F0:\n\
-	adds r0, r4, 0\n\
-	muls r0, r5\n\
-	adds r0, r7\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	adds r3, r4, 0x1\n\
-	cmp r0, r6\n\
-	bne _0804420C\n\
-	cmp r4, r10\n\
-	beq _0804420C\n\
-	strb r6, [r2]\n\
-	lsls r0, r3, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_0804420C:\n\
-	adds r4, r3, 0\n\
-	cmp r4, r1\n\
-	blt _080441F0\n\
-	b _0804441E\n\
-	.pool\n\
-_08044220:\n\
-	mov r0, r10\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _08044236\n\
-	b _0804441E\n\
-_08044236:\n\
-	ldr r7, =gBattleMons\n\
-_08044238:\n\
-	lsls r0, r4, 24\n\
-	lsrs r0, 24\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, r5\n\
-	beq _08044264\n\
-	movs r0, 0x58\n\
-	muls r0, r4\n\
-	adds r0, r7\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, r6\n\
-	bne _08044264\n\
-	ldr r0, =gLastUsedAbility\n\
-	strb r6, [r0]\n\
-	mov r0, r9\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_08044264:\n\
-	adds r4, 0x1\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _08044238\n\
-	b _0804441E\n\
-	.pool\n\
-_0804427C:\n\
-	mov r0, r10\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _08044292\n\
-	b _0804441E\n\
-_08044292:\n\
-	ldr r7, =gBattleMons\n\
-_08044294:\n\
-	lsls r0, r4, 24\n\
-	lsrs r0, 24\n\
-	bl GetBankSide\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, r5\n\
-	bne _080442C0\n\
-	movs r0, 0x58\n\
-	muls r0, r4\n\
-	adds r0, r7\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, r6\n\
-	bne _080442C0\n\
-	ldr r0, =gLastUsedAbility\n\
-	strb r6, [r0]\n\
-	mov r0, r9\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_080442C0:\n\
-	adds r4, 0x1\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	blt _08044294\n\
-	b _0804441E\n\
-	.pool\n\
-_080442D8:\n\
-	ldr r0, =BattleScript_CastformChange\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	ldr r0, =gBattleScripting\n\
-	strb r6, [r0, 0x17]\n\
-_080442E2:\n\
-	ldr r0, =gBattleStruct\n\
-	ldr r0, [r0]\n\
-	adds r0, 0x7F\n\
-	mov r1, r9\n\
-	subs r1, 0x1\n\
-	strb r1, [r0]\n\
-	b _0804441E\n\
-	.pool\n\
-_080442FC:\n\
-	ldr r0, =BattleScript_CastformChange\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	ldr r0, =gBattleScripting\n\
-	mov r5, r10\n\
-	strb r5, [r0, 0x17]\n\
-	ldr r0, =gBattleStruct\n\
-	ldr r0, [r0]\n\
-	adds r0, 0x7F\n\
-	mov r1, r9\n\
-	subs r1, 0x1\n\
-	strb r1, [r0]\n\
-	b _0804443A\n\
-	.pool\n\
-_08044324:\n\
-	strb r1, [r7]\n\
-	ldr r0, [r2]\n\
-	ldr r1, =0xfff7ffff\n\
-	ands r0, r1\n\
-	str r0, [r2]\n\
-	ldr r0, =gUnknown_082DB4B8\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	b _080443C8\n\
-	.pool\n\
-_08044340:\n\
-	ldr r0, =BattleScript_TraceActivates\n\
-	bl BattleScriptPushCursorAndCallback\n\
-	ldr r1, =gStatuses3\n\
-	ldr r0, [sp, 0x18]\n\
-	adds r1, r0, r1\n\
-	ldr r0, [r1]\n\
-	ldr r2, =0xffefffff\n\
-	ands r0, r2\n\
-	str r0, [r1]\n\
-	ldr r0, =gBattleScripting\n\
-	strb r4, [r0, 0x17]\n\
-	ldr r1, =gBattleTextBuff1\n\
-	movs r4, 0xFD\n\
-	strb r4, [r1]\n\
-	movs r0, 0x4\n\
-	strb r0, [r1, 0x1]\n\
-	ldr r2, =gActiveBank\n\
-	ldrb r0, [r2]\n\
-	strb r0, [r1, 0x2]\n\
-	ldr r3, =gBattlePartyID\n\
-	ldrb r0, [r2]\n\
-	lsls r0, 1\n\
-	adds r0, r3\n\
-	ldrh r0, [r0]\n\
-	strb r0, [r1, 0x3]\n\
-	movs r0, 0xFF\n\
-	strb r0, [r1, 0x4]\n\
-	ldr r1, =gBattleTextBuff2\n\
-	strb r4, [r1]\n\
-	movs r0, 0x9\n\
-	strb r0, [r1, 0x1]\n\
-	ldr r0, =gLastUsedAbility\n\
-	ldrb r0, [r0]\n\
-	strb r0, [r1, 0x2]\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	strb r0, [r1, 0x3]\n\
-	b _0804441E\n\
-	.pool\n\
-_080443B4:\n\
-	strb r1, [r7]\n\
-	ldr r0, [r2]\n\
-	ldr r1, =0xfff7ffff\n\
-	ands r0, r1\n\
-	str r0, [r2]\n\
-	bl BattleScriptPushCursor\n\
-	ldr r1, =gBattlescriptCurrInstr\n\
-	ldr r0, =gUnknown_082DB4C1\n\
-	str r0, [r1]\n\
-_080443C8:\n\
-	ldr r0, =gBattleStruct\n\
-	ldr r0, [r0]\n\
-	adds r0, 0xD8\n\
-	strb r4, [r0]\n\
-_080443D0:\n\
-	mov r0, r9\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-	b _0804441E\n\
-	.pool\n\
-_080443EC:\n\
-	movs r4, 0\n\
-	ldr r0, =gNoOfAllBanks\n\
-	ldrb r1, [r0]\n\
-	cmp r4, r1\n\
-	bge _0804441E\n\
-	ldr r0, =gBattleMons\n\
-	adds r2, r1, 0\n\
-	adds r1, r0, 0\n\
-	adds r1, 0x20\n\
-	ldr r3, =gLastUsedAbility\n\
-_08044400:\n\
-	ldrb r0, [r1]\n\
-	cmp r0, r6\n\
-	bne _08044416\n\
-	cmp r4, r10\n\
-	beq _08044416\n\
-	strb r6, [r3]\n\
-	mov r0, r9\n\
-	adds r0, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r9, r0\n\
-_08044416:\n\
-	adds r1, 0x58\n\
-	adds r4, 0x1\n\
-	cmp r4, r2\n\
-	blt _08044400\n\
-_0804441E:\n\
-	mov r1, r9\n\
-	cmp r1, 0\n\
-	beq _0804443A\n\
-_08044424:\n\
-	ldr r2, [sp, 0x4]\n\
-	cmp r2, 0xB\n\
-	bhi _0804443A\n\
-	ldr r1, =gLastUsedAbility\n\
-	ldrb r0, [r1]\n\
-	cmp r0, 0xFF\n\
-	beq _0804443A\n\
-	adds r1, r0, 0\n\
-	mov r0, r10\n\
-	bl RecordAbilityBattle\n\
-_0804443A:\n\
-	mov r0, r9\n\
-	add sp, 0x28\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.pool\n\
-	.syntax divided");
-}
-#endif // NONMATCHING
 
 void BattleScriptExecute(const u8* BS_ptr)
 {

@@ -1089,7 +1089,7 @@ u8 SendMonToPC(struct Pokemon* mon)
                 gSpecialVar_0x8012 = boxNo;
                 gSpecialVar_0x8013 = boxPos;
                 if (get_unknown_box_id() != boxNo)
-                    FlagReset(SYS_STORAGE_UNKNOWN_FLAG);
+                    FlagClear(SYS_STORAGE_UNKNOWN_FLAG);
                 VarSet(VAR_STORAGE_UNKNOWN, boxNo);
                 return MON_GIVEN_TO_PC;
             }
