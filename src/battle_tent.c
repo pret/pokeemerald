@@ -95,3 +95,13 @@ void sub_81B99D4(void)
     gSaveBlock2Ptr->field_CA9_a = 0;
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
 }
+
+void sub_81B9A28(void)
+{
+    gScriptResult = gSaveBlock2Ptr->field_E6A;
+}
+
+void sub_81B9A44(void)
+{
+    gSaveBlock2Ptr->field_E6A = gSpecialVar_0x8006;
+}

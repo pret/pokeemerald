@@ -5,32 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81B9A28
-sub_81B9A28: @ 81B9A28
-	ldr r1, =gScriptResult
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldr r2, =0x00000e6a
-	adds r0, r2
-	ldrh r0, [r0]
-	strh r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end sub_81B9A28
-
-	thumb_func_start sub_81B9A44
-sub_81B9A44: @ 81B9A44
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldr r1, =gSpecialVar_0x8006
-	ldrh r1, [r1]
-	ldr r2, =0x00000e6a
-	adds r0, r2
-	strh r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end sub_81B9A44
-
 	thumb_func_start sub_81B9A60
 sub_81B9A60: @ 81B9A60
 	push {r4,lr}
