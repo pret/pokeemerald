@@ -810,8 +810,8 @@ struct BattleScripting
     u8 atk6C_state;
     u8 learnMoveState;
     u8 field_20;
-    u8 field_21;
-    u8 field_22;
+    u8 reshowMainState;
+    u8 reshowHelperState;
     u8 field_23;
     u8 field_24;
     u8 multiplayerId;
@@ -841,9 +841,29 @@ void FreeBattleSpritesData(void);
 void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);
 void BattleMusicStop(void);
-void sub_805E990(struct Pokemon* mon, u8 bank);
+void sub_805E990(struct Pokemon *mon, u8 bank);
 void sub_805EF14(void);
 bool8 BattleInitAllSprites(u8 *state1, u8 *state2);
+void sub_805E350(void);
+bool8 BattleLoadAllHealthBoxesGfx(u8 state);
+void LoadAndCreateEnemyShadowSprites(void);
+void SetBankEnemyShadowSpriteCallback(u8 bank, u16 species);
+void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 bank);
+void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank);
+void BattleLoadSubstituteSpriteGfx(u8 bank, bool8 arg1);
+
+enum
+{
+    BACK_PIC_BRENDAN,
+    BACK_PIC_MAY,
+    BACK_PIC_RED,
+    BACK_PIC_LEAF,
+    BACK_PIC_RS_BRENDAN,
+    BACK_PIC_RS_MAY,
+    BACK_PIC_WALLY,
+    BACK_PIC_STEVEN
+};
+void LoadBackTrainerBankSpriteGfx(u8 backPicId, u8 bank);
 
 // rom_80A5C6C
 u8 GetBankSide(u8 bank);

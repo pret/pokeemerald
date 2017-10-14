@@ -217,7 +217,7 @@ extern void sub_81B9150(void);
 extern void sub_800AC34(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
 extern void sub_8076918(u8 bank);
-extern void sub_80729D0(u8 healthoxSpriteId);
+extern void SetHealthboxSpriteVisible(u8 healthoxSpriteId);
 extern void sub_81A56B4(void); // battle frontier 2
 extern u8 sub_81A9E28(void); // battle frontier 2
 extern void sub_81A56E8(u8 bank); // battle frontier 2
@@ -2437,7 +2437,7 @@ static void sub_8039838(struct Sprite *sprite)
     if (sprite->animEnded)
     {
         sub_8076918(sprite->tBank);
-        sub_80729D0(gHealthBoxesIds[sprite->tBank]);
+        SetHealthboxSpriteVisible(gHealthBoxesIds[sprite->tBank]);
         sprite->callback = sub_8039894;
         StartSpriteAnimIfDifferent(sprite, 0);
         BeginNormalPaletteFade(0x20000, 0, 10, 0, 0x2108);

@@ -2013,9 +2013,9 @@ _0811A0B0:
 	bl SetPlayerAvatarTransitionFlags
 	ldr r4, =0x00000193
 	adds r0, r4, 0
-	bl sav1_set_battle_music_maybe
+	bl Overworld_SetSavedMusic
 	adds r0, r4, 0
-	bl sub_80858C4
+	bl Overworld_ChangeMusicTo
 _0811A0C4:
 	pop {r4}
 	pop {r0}

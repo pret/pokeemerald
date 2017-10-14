@@ -101,7 +101,7 @@ SECTIONS {
         asm/map_obj_lock.o(.text);
         src/text_window.o(.text);
         src/script.o(.text);
-        asm/scrcmd.o(.text);
+        src/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
         src/event_data.o(.text);
         asm/coord_event_weather.o(.text);
@@ -116,7 +116,7 @@ SECTIONS {
         asm/battle_anim.o(.text);
         asm/rom_80A5C6C.o(.text);
         src/task.o(.text);
-        asm/reshow_battle_screen.o(.text);
+        src/reshow_battle_screen.o(.text);
         asm/battle_anim_80A9C70.o(.text);
         asm/title_screen.o(.text);
         asm/field_screen.o(.text);
@@ -354,7 +354,7 @@ SECTIONS {
         data/field_ground_effect.o(.rodata);
         data/map_obj_8097404.o(.rodata);
         data/text_window.o(.rodata);
-        data/scrcmd.o(.rodata);
+        src/scrcmd.o(.rodata);
         data/coord_event_weather.o(.rodata);
         data/field_tasks.o(.rodata);
         data/reset_rtc_screen.o(.rodata);

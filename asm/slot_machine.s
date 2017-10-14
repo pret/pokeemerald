@@ -55,8 +55,8 @@ _0812A530:
 	.pool
 	thumb_func_end sub_812A4DC
 
-	thumb_func_start sub_812A540
-sub_812A540: @ 812A540
+	thumb_func_start PlaySlotMachine
+PlaySlotMachine: @ 812A540
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -85,7 +85,7 @@ sub_812A540: @ 812A540
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_812A540
+	thumb_func_end PlaySlotMachine
 
 	thumb_func_start sub_812A588
 sub_812A588: @ 812A588

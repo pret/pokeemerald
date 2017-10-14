@@ -22,5 +22,6 @@ void SetWindowBorderStyle(u8 windowId, bool8 copyToVram, u16 tileStart, u8 palet
 void reset_temp_tile_data_buffers(void);
 int decompress_and_copy_tile_data_to_vram(u8 bg_id, const void *src, int size, u16 offset, u8 mode);
 bool8 free_temp_tile_data_buffers_if_possible(void);
+u64 sub_8198A50(struct WindowTemplate*, u8, u8, u8, u8, u8, u8, u16); // returns something but it isn't used, fix when menu.s is decomp'd
 
 #endif // GUARD_MENU_H

@@ -9914,7 +9914,7 @@ _0811EF48:
 	adds r1, r5, 0
 	bl ConvertEasyChatWordsToString
 	adds r0, r4, 0
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 _0811EF58:
 	pop {r4,r5}
 	pop {r0}

@@ -2,7 +2,7 @@
 // Includes
 #include "global.h"
 #include "main.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "task.h"
 #include "unknown_task.h"
 #include "palette.h"
