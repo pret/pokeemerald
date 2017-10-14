@@ -139,7 +139,7 @@ static void ClearAllPokeblockFeeders(void)
     memset(sPokeblockFeeders, 0, sizeof(sPokeblockFeeders));
 }
 
-static void GetPokeblockFeederInFront(void)
+void GetPokeblockFeederInFront(void)
 {
     s16 x, y;
     u16 i;
