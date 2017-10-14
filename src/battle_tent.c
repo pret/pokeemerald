@@ -1,6 +1,8 @@
 
 // Includes
 #include "global.h"
+#include "overworld.h"
+#include "event_data.h"
 
 // Static type declarations
 
@@ -80,3 +82,16 @@ asm(".section .rodata\n"
     "\t.align 2, 0"); // because gcc doesn't do it on its own
 
 // .text
+
+void sub_81B99B4(void)
+{
+    gUnknown_086160B4[gSpecialVar_0x8004]();
+}
+
+void sub_81B99D4(void)
+{
+    gSaveBlock2Ptr->field_CA8 = 0;
+    gSaveBlock2Ptr->field_CB2 = 0;
+    gSaveBlock2Ptr->field_CA9_a = 0;
+    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+}

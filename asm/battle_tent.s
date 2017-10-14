@@ -5,56 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81B99B4
-sub_81B99B4: @ 81B99B4
-	push {lr}
-	ldr r1, =gUnknown_086160B4
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	bl _call_via_r0
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81B99B4
-
-	thumb_func_start sub_81B99D4
-sub_81B99D4: @ 81B99D4
-	push {lr}
-	ldr r1, =gSaveBlock2Ptr
-	ldr r0, [r1]
-	ldr r2, =0x00000ca8
-	adds r0, r2
-	movs r2, 0
-	strb r2, [r0]
-	ldr r1, [r1]
-	ldr r3, =0x00000cb2
-	adds r0, r1, r3
-	strh r2, [r0]
-	ldr r0, =0x00000ca9
-	adds r1, r0
-	ldrb r2, [r1]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1]
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	movs r1, 0x4
-	ldrsb r1, [r0, r1]
-	movs r2, 0x5
-	ldrsb r2, [r0, r2]
-	movs r3, 0x1
-	negs r3, r3
-	movs r0, 0
-	bl saved_warp2_set
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81B99D4
-
 	thumb_func_start sub_81B9A28
 sub_81B9A28: @ 81B9A28
 	ldr r1, =gScriptResult

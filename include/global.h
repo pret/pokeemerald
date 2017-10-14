@@ -203,7 +203,8 @@ struct SaveBlock2
     /*0xBD8*/ u8 field_BD8[11];
     /*0xBE3*/ u8 filler_BE3[8];
     /*0xBEB*/ u8 field_BEB;
-    /*0xBE3*/ u8 filler_BEC[189];
+    /*0xBE3*/ u8 filler_BEC[188];
+    /*0xCA8*/ u8 field_CA8;
     /*0xCA9*/ u8 frontierChosenLvl : 2; // 0x1, 0x2 -> 0x3
     /*0xCA9*/ u8 field_CA9_a : 1;   // 0x4
     /*0xCA9*/ u8 field_CA9_b : 1;   // 0x8
@@ -211,7 +212,9 @@ struct SaveBlock2
     /*0xCA9*/ u8 field_CA9_d : 1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e : 1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
-    /*0xCAA*/ u16 field_CAA[0x2e];
+    /*0xCAA*/ u16 field_CAA[4];
+    /*0xCB2*/ u16 field_CB2;
+    /*0xCB4*/ u8 filler_CB4[0x52];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
     /*0xd08*/ u8 filler_D08[0x112];
