@@ -4508,7 +4508,7 @@ _0818C192:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	ldr r5, =gUnknown_02038432
+	ldr r5, =gAnimMoveTurn
 	mov r1, r12
 	adds r1, 0x3
 	adds r2, r1

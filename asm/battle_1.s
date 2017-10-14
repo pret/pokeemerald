@@ -1424,8 +1424,8 @@ _0803575A:
 	.pool
 	thumb_func_end ApplyPlayerChosenFrameToBattleMenu
 
-	thumb_func_start load_battle_oval_graphics
-load_battle_oval_graphics: @ 8035770
+	thumb_func_start LoadFittingBackgroundForBattle
+LoadFittingBackgroundForBattle: @ 8035770
 	push {r4,r5,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
@@ -1665,7 +1665,7 @@ _08035A8A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end load_battle_oval_graphics
+	thumb_func_end LoadFittingBackgroundForBattle
 
 	thumb_func_start LoadBattleTextboxAndBackground
 LoadBattleTextboxAndBackground: @ 8035AA4
@@ -1686,7 +1686,7 @@ LoadBattleTextboxAndBackground: @ 8035AA4
 	movs r2, 0x40
 	bl LoadCompressedPalette
 	bl ApplyPlayerChosenFrameToBattleMenu
-	bl load_battle_oval_graphics
+	bl LoadFittingBackgroundForBattle
 	pop {r0}
 	bx r0
 	.pool

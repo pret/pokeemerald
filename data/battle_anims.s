@@ -902,7 +902,7 @@ gUnknown_08525CB4:: @ 8525CB4
 	obj_pal 0x08c1bf5c, 0x2830
 
     .align 2
-gUnknown_08525D54:: @ 8525D54
+gBattleAnimBackgroundTable:: @ 8525D54
 	.4byte 0x08c1c844, 0x08c1ce3c, 0x08c1ce5c
 	.4byte 0x08c1c844, 0x08c1ce3c, 0x08c1ce5c
 	.4byte 0x08d90074, 0x08d90d3c, 0x08d90d58
@@ -944,33 +944,33 @@ sScriptCmdTable:: @ 8525E98
 	.4byte ScriptCmd_end
 	.4byte ScriptCmd_playse
 	.4byte ScriptCmd_monbg
-	.4byte ma0B_0807324C
-	.4byte ma0C_set_BLDCNT_to_x3F40_and_BLDALPHA_to_argument
-	.4byte ma0D_reset_BLDCNT_and_BLDALPHA
-	.4byte ma0E_call
-	.4byte sub_80A4D00
-	.4byte ma10_080736AC
-	.4byte ma11_if_else
-	.4byte ma12_cond_if
-	.4byte ma13_goto
-	.4byte ma14_load_background
-	.4byte ma15_load_battle_screen_elements
-	.4byte ma16_wait_for_battle_screen_elements_s2
-	.4byte sub_80A5124
-	.4byte ma18_load_background_probably
-	.4byte ma19_08073BC8
-	.4byte ma1A_8073C00
+	.4byte ScriptCmd_clearmonbg
+	.4byte ScriptCmd_setalpha
+	.4byte ScriptCmd_blendoff
+	.4byte ScriptCmd_call
+	.4byte ScriptCmd_return
+	.4byte ScriptCmd_setarg
+	.4byte ScriptCmd_choosetwoturnanim
+	.4byte ScriptCmd_jumpifmoveturn
+	.4byte ScriptCmd_jump
+	.4byte ScriptCmd_fadetobg
+	.4byte ScriptCmd_restorebg
+	.4byte ScriptCmd_waitbgfadeout
+	.4byte ScriptCmd_waitbgfadein
+	.4byte ScriptCmd_changebg
+	.4byte ScriptCmd_playsewithpan
+	.4byte ScriptCmd_setpan
 	.4byte ma1B_8073C2C
 	.4byte ma1C_8073ED0
 	.4byte ma1D_08073FB4
-	.4byte ma1E_set_BLDCNT
+	.4byte ScriptCmd_setbldcnt
 	.4byte sub_80A57F8
 	.4byte ma20_wait_for_something
 	.4byte ma21_08074164
-	.4byte sub_80A4A18
-	.4byte ma23_8073484
+	.4byte ScriptCmd_monbg_22
+	.4byte ScriptCmd_clearmonbg_23
 	.4byte sub_80A5944
-	.4byte sub_80A4E5C
+	.4byte ScriptCmd_fadetobgfromset
 	.4byte sub_80A5508
 	.4byte sub_80A559C
 	.4byte sub_80A5984

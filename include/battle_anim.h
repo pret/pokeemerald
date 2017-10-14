@@ -30,6 +30,13 @@ struct UnknownAnimStruct2
     u16 unkC;
 };
 
+struct BattleAnimBackground
+{
+    void *image;
+    void *palette;
+    void *tilemap;
+};
+
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
 void DoBattleAnim(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim);
@@ -38,8 +45,11 @@ void DestroyAnimVisualTask(u8 taskId);
 void DestroyAnimSoundTask(u8 taskId);
 bool8 IsAnimBankSpriteVisible(u8 bank);
 void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible);
-
 bool8 IsContest(void);
+s8 BattleAnimAdjustPanning(s8 pan);
+s8 BattleAnimAdjustPanning2(s8 pan);
+s16 sub_80A52EC(s16 a);
+s16 sub_80A5314(s16 a, s16 b, s16 c);
 
 // battle_anim_80FE840.s
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);

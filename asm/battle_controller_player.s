@@ -8134,7 +8134,7 @@ _0805BCBE:
 	ldrb r0, [r0]
 	lsls r0, 8
 	orrs r6, r0
-	ldr r0, =gUnknown_02038432
+	ldr r0, =gAnimMoveTurn
 	mov r8, r0
 	mov r0, r12
 	adds r0, 0x3

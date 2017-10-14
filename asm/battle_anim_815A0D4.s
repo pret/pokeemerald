@@ -1349,7 +1349,7 @@ sub_815AB5C: @ 815AB5C
 	bne _0815ABBA
 	movs r0, 0x40
 	negs r0, r0
-	bl BattleAnimGetPanControl
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -2004,7 +2004,7 @@ _0815B0BC:
 	lsrs r4, r0, 24
 	movs r0, 0x40
 	negs r0, r0
-	bl BattleAnimGetPanControl
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -3551,7 +3551,7 @@ _0815BD8E:
 	strh r0, [r1, 0x8]
 	movs r0, 0x40
 	negs r0, r0
-	bl BattleAnimGetPanControl
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -10271,7 +10271,7 @@ _0815F3CE:
 	bne _0815F482
 	movs r0, 0x40
 	negs r0, r0
-	bl BattleAnimGetPanControl
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -10341,7 +10341,7 @@ _0815F460:
 	bne _0815F482
 	movs r0, 0x40
 	negs r0, r0
-	bl BattleAnimGetPanControl
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -10431,7 +10431,7 @@ _0815F520:
 	cmp r0, 0
 	blt _0815F61A
 	movs r0, 0x3F
-	bl BattleAnimGetPanControl
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -10460,7 +10460,7 @@ _0815F544:
 	cmp r1, 0x7F
 	ble _0815F61A
 	movs r0, 0x3F
-	bl BattleAnimGetPanControl
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -10502,7 +10502,7 @@ _0815F5B4:
 	cmp r0, 0x8
 	ble _0815F61A
 	movs r0, 0x3F
-	bl BattleAnimGetPanControl
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -11557,7 +11557,7 @@ _0815FE92:
 	cmp r1, r0
 	bne _0815FF2C
 	movs r0, 0x3F
-	bl BattleAnimGetPanControl
+	bl BattleAnimAdjustPanning
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24

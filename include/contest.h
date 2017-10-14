@@ -36,5 +36,6 @@ struct ContestResources
 extern struct ContestResources *gContestResources;
 
 bool8 IsSpeciesNotUnown(u16 species);
+void LoadContestBgAfterMoveAnim(void);
 
 #endif //GUARD_CONTEST_H

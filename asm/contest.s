@@ -76,8 +76,8 @@ sub_80D7678: @ 80D7678
 	.pool
 	thumb_func_end sub_80D7678
 
-	thumb_func_start sub_80D7724
-sub_80D7724: @ 80D7724
+	thumb_func_start LoadContestBgAfterMoveAnim
+LoadContestBgAfterMoveAnim: @ 80D7724
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_08C17AB0
 	movs r1, 0xC0
@@ -119,7 +119,7 @@ _080D775E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D7724
+	thumb_func_end LoadContestBgAfterMoveAnim
 
 	thumb_func_start sub_80D779C
 sub_80D779C: @ 80D779C
@@ -13662,7 +13662,7 @@ _080DE8FA:
 	cmp r0, 0x7
 	bne _080DE99C
 _080DE910:
-	ldr r1, =gUnknown_02038432
+	ldr r1, =gAnimMoveTurn
 	movs r0, 0
 	b _080DE9A0
 	.pool
@@ -13715,12 +13715,12 @@ _080DE978:
 	bne _080DE99C
 	movs r0, 0x2
 	strb r0, [r2]
-	ldr r0, =gUnknown_02038432
+	ldr r0, =gAnimMoveTurn
 	strb r1, [r0]
 	b _080DE9A2
 	.pool
 _080DE99C:
-	ldr r1, =gUnknown_02038432
+	ldr r1, =gAnimMoveTurn
 	movs r0, 0x1
 _080DE9A0:
 	strb r0, [r1]
