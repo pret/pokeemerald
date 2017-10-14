@@ -349,7 +349,7 @@ static void atk51_switch_handle_order(void);
 static void atk52_switch_in_effects(void);
 static void atk53_trainer_slide(void);
 static void atk54_effectiveness_sound(void);
-static void atk55_play_sound(void);
+static void atk55_play_fanfare(void);
 static void atk56_fainting_cry(void);
 static void atk57(void);
 static void atk58_return_to_ball(void);
@@ -601,7 +601,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk52_switch_in_effects,
     atk53_trainer_slide,
     atk54_effectiveness_sound,
-    atk55_play_sound,
+    atk55_play_fanfare,
     atk56_fainting_cry,
     atk57,
     atk58_return_to_ball,
@@ -5308,7 +5308,7 @@ static void atk4B_return_atk_to_ball(void)
     gActiveBank = gBankAttacker;
     if (!(gHitMarker & HITMARKER_FAINTED(gActiveBank)))
     {
-        EmitReturnPokeToBall(0, 0);
+        EmitReturnMonToBall(0, 0);
         MarkBufferBankForExecution(gActiveBank);
     }
     gBattlescriptCurrInstr++;
@@ -5627,7 +5627,7 @@ static void atk50_openpartyscreen(void)
                 {
                     gAbsentBankFlags |= gBitTable[gActiveBank];
                     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBank));
-                    Emit_x2A(0);
+                    EmitCmd42(0);
                     MarkBufferBankForExecution(gActiveBank);
                 }
                 else if (!gSpecialStatuses[gActiveBank].flag40)
@@ -5649,7 +5649,7 @@ static void atk50_openpartyscreen(void)
                 {
                     gAbsentBankFlags |= gBitTable[gActiveBank];
                     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBank));
-                    Emit_x2A(0);
+                    EmitCmd42(0);
                     MarkBufferBankForExecution(gActiveBank);
                 }
                 else if (!gSpecialStatuses[gActiveBank].flag40)
@@ -5670,7 +5670,7 @@ static void atk50_openpartyscreen(void)
                 {
                     gAbsentBankFlags |= gBitTable[gActiveBank];
                     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBank));
-                    Emit_x2A(0);
+                    EmitCmd42(0);
                     MarkBufferBankForExecution(gActiveBank);
                 }
                 else if (!gSpecialStatuses[gActiveBank].flag40)
@@ -5692,7 +5692,7 @@ static void atk50_openpartyscreen(void)
                 {
                     gAbsentBankFlags |= gBitTable[gActiveBank];
                     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBank));
-                    Emit_x2A(0);
+                    EmitCmd42(0);
                     MarkBufferBankForExecution(gActiveBank);
                 }
                 else if (!gSpecialStatuses[gActiveBank].flag40)
@@ -5755,7 +5755,7 @@ static void atk50_openpartyscreen(void)
                     {
                         gAbsentBankFlags |= gBitTable[gActiveBank];
                         gHitMarker &= ~(HITMARKER_FAINTED(gActiveBank));
-                        Emit_x2A(0);
+                        EmitCmd42(0);
                         MarkBufferBankForExecution(gActiveBank);
                     }
                     else if (!gSpecialStatuses[gActiveBank].flag40)
@@ -5771,7 +5771,7 @@ static void atk50_openpartyscreen(void)
                     {
                         gAbsentBankFlags |= gBitTable[gActiveBank];
                         gHitMarker &= ~(HITMARKER_FAINTED(gActiveBank));
-                        Emit_x2A(0);
+                        EmitCmd42(0);
                         MarkBufferBankForExecution(gActiveBank);
                     }
                     else if (!gSpecialStatuses[gActiveBank].flag40)
@@ -6031,10 +6031,10 @@ static void atk54_effectiveness_sound(void)
     gBattlescriptCurrInstr += 3;
 }
 
-static void atk55_play_sound(void)
+static void atk55_play_fanfare(void)
 {
     gActiveBank = gBankAttacker;
-    EmitPlaySound(0, BS2ScriptRead16(gBattlescriptCurrInstr + 1), 0);
+    EmitPlayFanfareOrBGM(0, BS2ScriptRead16(gBattlescriptCurrInstr + 1), FALSE);
     MarkBufferBankForExecution(gActiveBank);
 
     gBattlescriptCurrInstr += 3;
@@ -6052,7 +6052,7 @@ static void atk56_fainting_cry(void)
 static void atk57(void)
 {
     gActiveBank = GetBankByIdentity(0);
-    Emit_x37(0, gBattleOutcome);
+    EmitCmd55(0, gBattleOutcome);
     MarkBufferBankForExecution(gActiveBank);
 
     gBattlescriptCurrInstr += 1;
@@ -6061,7 +6061,7 @@ static void atk57(void)
 static void atk58_return_to_ball(void)
 {
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
-    EmitReturnPokeToBall(0, 1);
+    EmitReturnMonToBall(0, 1);
     MarkBufferBankForExecution(gActiveBank);
 
     gBattlescriptCurrInstr += 2;
@@ -7137,7 +7137,7 @@ static void atk76_various(void)
         gDisableStructs[1].truantUnknownBit = 1;
         break;
     case 13:
-        EmitCmd13(0);
+        EmitCmd19(0);
         MarkBufferBankForExecution(gActiveBank);
         break;
     case 14:
@@ -7162,7 +7162,7 @@ static void atk76_various(void)
         gActiveBank = 1;
         if (gBattleMons[gActiveBank].hp != 0)
         {
-            EmitReturnPokeToBall(0, 0);
+            EmitReturnMonToBall(0, 0);
             MarkBufferBankForExecution(gActiveBank);
         }
         break;
@@ -7172,7 +7172,7 @@ static void atk76_various(void)
             gActiveBank = 3;
             if (gBattleMons[gActiveBank].hp != 0)
             {
-                EmitReturnPokeToBall(0, 0);
+                EmitReturnMonToBall(0, 0);
                 MarkBufferBankForExecution(gActiveBank);
             }
         }
@@ -7197,7 +7197,7 @@ static void atk76_various(void)
             gBattleOutcome = BATTLE_OPPONENT_TELEPORTED;
         break;
     case VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC:
-        EmitPlaySound(0, BGM_KACHI1, 1);
+        EmitPlayFanfareOrBGM(0, BGM_KACHI1, TRUE);
         MarkBufferBankForExecution(gActiveBank);
         break;
     }

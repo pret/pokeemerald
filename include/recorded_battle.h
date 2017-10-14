@@ -17,5 +17,6 @@ void sub_818603C(u8);
 void sub_8185FD0(void);
 void sub_8186444(void);
 void sub_8185EB8(void);
+u8 sub_81850DC(u8 *arg0);
 
 #endif // GUARD_RECORDED_BATTLE_H
