@@ -26,6 +26,7 @@
 #include "lilycove_lady.h"
 #include "main.h"
 #include "map_obj_lock.h"
+#include "menu.h"
 #include "money.h"
 #include "mystery_event_script.h"
 #include "new_menu_helpers.h"
@@ -46,6 +47,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "text.h"
+#include "text_window.h"
 #include "trainer_see.h"
 #include "tv.h"
 #include "window.h"
@@ -1483,46 +1485,56 @@ bool8 ScrCmd_drawcontestwinner(struct ScriptContext *ctx)
     return TRUE;
 }
 
-// Temporary, will come back to this later.
-/*bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
+// Lots of math, can't figure it out.
+/*
+bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 {
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
-    u8 *localStringVar4;
+    struct WindowTemplate template1;
+    struct WindowTemplate template2;
+    int i;
     u8 width;
     u8 height;
-    u8 temp;
+    int temp1;
+    int temp2;
+    u8 x;
+    u8 y;
 
-    StringExpandPlaceholders(gStringVar4, ptr);
+    StringExpandPlaceholders(gStringVar4, ptr + 6);
     
     width = GetStringWidth(6, gStringVar4, -1) / 8;
     
     if (width > 0x1C)
         width = 0x1C;
     
-    height = 4;
-    localStringVar4 = gStringVar4;
-    temp = width + 2;
-    
-    for (; *localStringVar4 != 0xFF; localStringVar4++)
+    for (i = 0, height = 4; gStringVar4[i] != 0xFF;)
     {
-        if (*localStringVar4 == 0xFE)
-            height += 4;
+        if (gStringVar4[i++] == 0xFE)
+            height += 3;
     }
     
     if (height > 0x12)
         height = 0x12;
     
-    temp = 0x1E - temp;
+    x = width + 2;
+    temp1 = (0x1E - x) / 2;
+    x = temp1 + 1;
+    temp1 = ((x - temp1 - 1) * 8 + 3);
     
-    u8 v2 = ptr[0];
-    u8 v3 = ptr[1];
-    u8 v4 = ptr[2];
-    u8 v5 = ptr[3];
-    u8 v6 = ptr[4];
-    u8 v7 = ptr[5];
-    StringBraille(gStringVar4, ptr + 6);
-    MenuDrawTextWindow(v2, v3, v4, v5);
-    MenuPrint(gStringVar4, v6, v7);
+    y = height + 2;
+    temp2 = (0x14 - y) / 2;
+    y = temp2 + 2;
+    temp2 = ((y - temp2 - 1) * 8);
+    
+    sub_8198A50(&template1, 0, x, y, width, height, 0xF, 0x1);
+    template2 = template1;
+    gUnknown_03000F30 = AddWindow(&template2);
+    sub_809882C(gUnknown_03000F30, 0x214, 0xE0);
+    sub_81973FC(gUnknown_03000F30, 0);
+    PutWindowTilemap(gUnknown_03000F30);
+    FillWindowPixelBuffer(gUnknown_03000F30, 0x11);
+    PrintTextOnWindow(gUnknown_03000F30, 6, gStringVar4, temp1, temp2, 0xFF, 0x0);
+    CopyWindowToVram(gUnknown_03000F30, 3);
     return FALSE;
 }*/
 __attribute__((naked))
