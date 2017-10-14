@@ -246,6 +246,7 @@ SECTIONS {
         src/save_location.o(.text);
         asm/item_icon.o(.text);
         asm/party_menu.o(.text);
+        src/battle_tent.o(.text);
         asm/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
@@ -454,6 +455,7 @@ SECTIONS {
         src/save_location.o(.rodata);
         data/item_icon.o(.rodata);
         data/party_menu.o(.rodata);
+        src/battle_tent.o(.rodata);
         data/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
         data/unk_81BAD84.o(.rodata);
