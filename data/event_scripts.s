@@ -12,13 +12,13 @@ gScriptCmdTableEnd:: @ 81DBA08
 gSpecialVars:: @ 81DBA0C
 	.incbin "baserom.gba", 0x1dba0c, 0x58
 
-gUnknown_081DBA64:: @ 81DBA64
+gSpecials:: @ 81DBA64
 	.incbin "baserom.gba", 0x1dba64, 0x83c
 
-gUnknown_081DC2A0:: @ 81DC2A0
+gStdScripts:: @ 81DC2A0
 	.incbin "baserom.gba", 0x1dc2a0, 0x2c
 
-gUnknown_081DC2CC:: @ 81DC2CC
+gStdScripts_End:: @ 81DC2CC
 	.incbin "baserom.gba", 0x1dc2cc, 0x34ee
 
 gUnknown_081DF7BA:: @ 81DF7BA
@@ -822,7 +822,15 @@ gUnknown_0827EE09:: @ 27EE09
 	.incbin "baserom.gba", 0x27ee09, 0x2
 
 gUnknown_0827EE0B:: @ 827EE0B
-	.incbin "baserom.gba", 0x27ee0b, 0x118fa
+	.incbin "baserom.gba", 0x27ee0b, 0x46a
+
+	.include "data/text/tv.inc"
+
+	.incbin "baserom.gba", 0x0028c7e9, 0x90f
+
+	.include "data/text/pokemon_news.inc"
+
+	.incbin "baserom.gba", 0x28e066, 0x269f
 
 gUnknown_08290705:: @ 8290705
 	.incbin "baserom.gba", 0x290705, 0xeb

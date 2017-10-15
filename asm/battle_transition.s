@@ -2151,7 +2151,7 @@ sub_8147018: @ 8147018
 	ands r5, r0
 	movs r1, 0
 	mov r8, r4
-	ldr r6, =gFieldEffectSpawnParams
+	ldr r6, =gFieldEffectArguments
 _08147046:
 	lsls r5, 16
 	asrs r5, 16
@@ -2221,7 +2221,7 @@ _081470C4:
 sub_81470D0: @ 81470D0
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_085C8E68
-	ldr r5, =gFieldEffectSpawnParams
+	ldr r5, =gFieldEffectArguments
 	movs r2, 0
 	ldrsh r1, [r5, r2]
 	movs r3, 0x4

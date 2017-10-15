@@ -6514,7 +6514,7 @@ sub_81C3220: @ 81C3220
 	b _081C3282
 	.pool
 _081C326C:
-	bl sub_80F0020
+	bl GetPlayerIDAsU32
 	adds r4, r0, 0
 	ldr r0, =0x0000ffff
 	ands r4, r0
@@ -7571,7 +7571,7 @@ sub_81C3B08: @ 81C3B08
 	adds r7, r4, 0
 	ldrb r0, [r5]
 	adds r1, r6, 0
-	bl sub_814FC20
+	bl GetCurrentPpToMaxPpState
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0

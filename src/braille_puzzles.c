@@ -220,7 +220,7 @@ bool8 ShouldDoBrailleStrengthEffect(void)
 
 void sub_8179834(void)
 {
-    gFieldEffectSpawnParams[0] = brm_get_pokemon_selection();
+    gFieldEffectArguments[0] = brm_get_pokemon_selection();
     FieldEffectStart(FLDEFF_USE_FLY_ANCIENT_TOMB);
 }
 
@@ -256,7 +256,7 @@ bool8 ShouldDoBrailleFlyEffect(void)
 
 void sub_8179918(void)
 {
-    gFieldEffectSpawnParams[0] = brm_get_pokemon_selection();
+    gFieldEffectArguments[0] = brm_get_pokemon_selection();
     FieldEffectStart(FLDEFF_USE_FLY_ANCIENT_TOMB);
 }
 
@@ -417,7 +417,7 @@ bool8 ShouldDoBrailleRegicePuzzle(void)
     }
     // TODO: Find what flags 2 and 3 are.
     FlagSet(3);
-    FlagReset(2);
+    FlagClear(2);
     return FALSE;
 }
 #else
@@ -568,7 +568,7 @@ _08179B44:\n\
     movs r0, 0x3\n\
     bl FlagSet\n\
     movs r0, 0x2\n\
-    bl FlagReset\n\
+    bl FlagClear\n\
 _08179B5A:\n\
     movs r0, 0\n\
 _08179B5C:\n\

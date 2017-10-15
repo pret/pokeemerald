@@ -7,11 +7,13 @@
 #include "rng.h"
 #include "item.h"
 #include "battle_move_effects.h"
+#include "moves.h"
+#include "util.h"
 
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
 #define AIScriptRead8(ptr) ((ptr)[0])
-#define AIScriptReadPtr(ptr) (u8*) AIScriptRead32(ptr)
+#define AIScriptReadPtr(ptr) (const u8*) AIScriptRead32(ptr)
 
 #define AI_ACTION_DONE          0x0001
 #define AI_ACTION_FLEE          0x0002
@@ -52,16 +54,16 @@ AI scripts.
 
 extern u32 gBattleTypeFlags;
 extern u8 gActiveBank;
-extern struct BattlePokemon gBattleMons[4];
+extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern u16 gCurrentMove;
 extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
-extern u16 gLastUsedMovesByBanks[4];
+extern u16 gLastUsedMovesByBanks[BATTLE_BANKS_COUNT];
 extern u16 gTrainerBattleOpponent_A;
 extern u16 gTrainerBattleOpponent_B;
-extern u32 gStatuses3[4];
+extern u32 gStatuses3[BATTLE_BANKS_COUNT];
 extern u16 gSideAffecting[2];
-extern u16 gBattlePartyID[4];
+extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern u16 gDynamicBasePower;
 extern u8 gBattleMoveFlags;
 extern s32 gBattleMoveDamage;
@@ -70,13 +72,8 @@ extern u16 gBattleWeather;
 
 extern const struct BattleMove gBattleMoves[];
 extern const struct BaseStats gBaseStats[];
-extern const u32 gBitTable[];
-extern u8 * const gBattleAI_ScriptsTable[];
+extern const u8 * const gBattleAI_ScriptsTable[];
 
-extern u8 GetWhoStrikesFirst(u8, u8, u8);
-extern void AI_CalcDmg(u8, u8);
-
-extern u8 CheckMoveLimitations();
 extern u32 GetAiScriptsInRecordedBattle();
 extern u32 GetAiScriptsInBattleFactory();
 
@@ -116,8 +113,8 @@ static void BattleAICmd_if_move(void);
 static void BattleAICmd_if_not_move(void);
 static void BattleAICmd_if_in_bytes(void);
 static void BattleAICmd_if_not_in_bytes(void);
-static void BattleAICmd_if_in_words(void);
-static void BattleAICmd_if_not_in_words(void);
+static void BattleAICmd_if_in_hwords(void);
+static void BattleAICmd_if_not_in_hwords(void);
 static void BattleAICmd_if_user_can_damage(void);
 static void BattleAICmd_if_user_cant_damage(void);
 static void BattleAICmd_get_turn_count(void);
@@ -227,8 +224,8 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     BattleAICmd_if_not_move,                 // 0x1A
     BattleAICmd_if_in_bytes,                 // 0x1B
     BattleAICmd_if_not_in_bytes,             // 0x1C
-    BattleAICmd_if_in_words,                 // 0x1D
-    BattleAICmd_if_not_in_words,             // 0x1E
+    BattleAICmd_if_in_hwords,                 // 0x1D
+    BattleAICmd_if_not_in_hwords,             // 0x1E
     BattleAICmd_if_user_can_damage,          // 0x1F
     BattleAICmd_if_user_cant_damage,         // 0x20
     BattleAICmd_get_turn_count,              // 0x21
@@ -334,7 +331,7 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
         {
             if (gTrainers[gTrainerBattleOpponent_A].items[i] != 0)
             {
-                gBattleResources->battleHistory->TrainerItems[gBattleResources->battleHistory->itemsNo] = gTrainers[gTrainerBattleOpponent_A].items[i];
+                gBattleResources->battleHistory->trainerItems[gBattleResources->battleHistory->itemsNo] = gTrainers[gTrainerBattleOpponent_A].items[i];
                 gBattleResources->battleHistory->itemsNo++;
             }
         }
@@ -472,13 +469,11 @@ static u8 BattleAI_ChooseMoveOrAction_Singles(void)
     return consideredMoveArray[Random() % numOfBestMoves];
 }
 
-#ifdef NONMATCHING
 static u8 BattleAI_ChooseMoveOrAction_Doubles(void)
 {
     s32 i;
     s32 j;
     s32 scriptsToRun;
-    s16 mostMovePoints;
     s16 bestMovePointsForTarget[4];
     s8 mostViableTargetsArray[4];
     u8 actionOrMoveIndex[4];
@@ -486,27 +481,27 @@ static u8 BattleAI_ChooseMoveOrAction_Doubles(void)
     u8 mostViableMovesIndices[4];
     s32 mostViableTargetsNo;
     s32 mostViableMovesNo;
+    s16 mostMovePoints;
 
-    for (i = 0; i < 4; i++) //08130D14
+    for (i = 0; i < 4; i++)
     {
         if (i == sBank_AI || gBattleMons[i].hp == 0)
         {
-            //_08130D2E
             actionOrMoveIndex[i] = -1;
             bestMovePointsForTarget[i] = -1;
         }
-        //_08130D48
         else
         {
             if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
                 BattleAI_SetupAIData(gBattleStruct->field_92 >> 4);
             else
                 BattleAI_SetupAIData(0xF);
-            //_08130D76
+
             gBankTarget = i;
-            if ((i & 1) != (sBank_AI & 1))
+
+            if ((i & BIT_SIDE) != (sBank_AI & BIT_SIDE))
                 RecordLastUsedMoveByTarget();
-            //_08130D90
+
             AI_THINKING_STRUCT->aiLogicId = 0;
             AI_THINKING_STRUCT->movesetIndex = 0;
             scriptsToRun = AI_THINKING_STRUCT->aiFlags;
@@ -521,14 +516,12 @@ static u8 BattleAI_ChooseMoveOrAction_Doubles(void)
                 AI_THINKING_STRUCT->aiLogicId++;
                 AI_THINKING_STRUCT->movesetIndex = 0;
             }
-            //_08130DD8
             if (AI_THINKING_STRUCT->aiAction & AI_ACTION_FLEE)
                 actionOrMoveIndex[i] = 4;
             else if (AI_THINKING_STRUCT->aiAction & AI_ACTION_WATCH)
                 actionOrMoveIndex[i] = 5;
             else
             {
-                //_08130E10
                 mostViableMovesScores[0] = AI_THINKING_STRUCT->score[0];
                 mostViableMovesIndices[0] = 0;
                 mostViableMovesNo = 1;
@@ -555,17 +548,20 @@ static u8 BattleAI_ChooseMoveOrAction_Doubles(void)
                 bestMovePointsForTarget[i] = mostViableMovesScores[0];
 
                 // don't use a move against ally if it has less than 100 pts
-                if (i == (sBank_AI ^ 2) && bestMovePointsForTarget[i] < 100)
+                if (i == (sBank_AI ^ BIT_MON) && bestMovePointsForTarget[i] < 100)
+                {
                     bestMovePointsForTarget[i] = -1;
+                    mostViableMovesScores[0] = mostViableMovesScores[0]; // needed to match
+                }
+
             }
         }
-        //_08130EAE
     }
 
-    //08130EC4
     mostMovePoints = bestMovePointsForTarget[0];
     mostViableTargetsArray[0] = 0;
     mostViableTargetsNo = 1;
+
     for (i = 1; i < 4; i++)
     {
         //_08130EDA
@@ -582,305 +578,10 @@ static u8 BattleAI_ChooseMoveOrAction_Doubles(void)
             mostViableTargetsNo = 1;
         }
     }
+
     gBankTarget = mostViableTargetsArray[Random() % mostViableTargetsNo];
     return actionOrMoveIndex[gBankTarget];
 }
-#else
-__attribute__((naked))
-static u8 BattleAI_ChooseMoveOrAction_Doubles(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x24\n\
-    movs r0, 0\n\
-    mov r8, r0\n\
-    mov r1, sp\n\
-    adds r1, 0xC\n\
-    str r1, [sp, 0x1C]\n\
-    mov r2, sp\n\
-    adds r2, 0x8\n\
-    str r2, [sp, 0x18]\n\
-    str r1, [sp, 0x20]\n\
-    mov r10, sp\n\
-_08130D14:\n\
-    ldr r0, =sBank_AI\n\
-    ldrb r0, [r0]\n\
-    cmp r8, r0\n\
-    beq _08130D2E\n\
-    movs r0, 0x58\n\
-    mov r7, r8\n\
-    muls r7, r0\n\
-    adds r0, r7, 0\n\
-    ldr r1, =gBattleMons\n\
-    adds r0, r1\n\
-    ldrh r0, [r0, 0x28]\n\
-    cmp r0, 0\n\
-    bne _08130D48\n\
-_08130D2E:\n\
-    movs r0, 0xFF\n\
-    ldr r2, [sp, 0x20]\n\
-    strb r0, [r2]\n\
-    ldr r0, =0x0000ffff\n\
-    mov r7, r10\n\
-    strh r0, [r7]\n\
-    b _08130EAE\n\
-    .pool\n\
-_08130D48:\n\
-    ldr r0, =gBattleTypeFlags\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x80\n\
-    lsls r1, 10\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08130D70\n\
-    ldr r0, =gBattleStruct\n\
-    ldr r0, [r0]\n\
-    adds r0, 0x92\n\
-    ldrb r0, [r0]\n\
-    lsrs r0, 4\n\
-    bl BattleAI_SetupAIData\n\
-    b _08130D76\n\
-    .pool\n\
-_08130D70:\n\
-    movs r0, 0xF\n\
-    bl BattleAI_SetupAIData\n\
-_08130D76:\n\
-    ldr r0, =gBankTarget\n\
-    mov r1, r8\n\
-    strb r1, [r0]\n\
-    movs r1, 0x1\n\
-    mov r2, r8\n\
-    ands r2, r1\n\
-    ldr r0, =sBank_AI\n\
-    ldrb r0, [r0]\n\
-    ands r1, r0\n\
-    cmp r2, r1\n\
-    beq _08130D90\n\
-    bl RecordLastUsedMoveByTarget\n\
-_08130D90:\n\
-    ldr r2, =gBattleResources\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    movs r1, 0\n\
-    strb r1, [r0, 0x11]\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    strb r1, [r0, 0x1]\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    ldr r4, [r0, 0xC]\n\
-    mov r9, r2\n\
-    cmp r4, 0\n\
-    beq _08130DD8\n\
-    mov r5, r9\n\
-    movs r6, 0\n\
-_08130DB0:\n\
-    movs r0, 0x1\n\
-    ands r0, r4\n\
-    cmp r0, 0\n\
-    beq _08130DC2\n\
-    ldr r0, [r5]\n\
-    ldr r0, [r0, 0x14]\n\
-    strb r6, [r0]\n\
-    bl BattleAI_DoAIProcessing\n\
-_08130DC2:\n\
-    asrs r4, 1\n\
-    ldr r0, [r5]\n\
-    ldr r1, [r0, 0x14]\n\
-    ldrb r0, [r1, 0x11]\n\
-    adds r0, 0x1\n\
-    strb r0, [r1, 0x11]\n\
-    ldr r0, [r5]\n\
-    ldr r0, [r0, 0x14]\n\
-    strb r6, [r0, 0x1]\n\
-    cmp r4, 0\n\
-    bne _08130DB0\n\
-_08130DD8:\n\
-    mov r2, r9\n\
-    ldr r0, [r2]\n\
-    ldr r3, [r0, 0x14]\n\
-    ldrb r1, [r3, 0x10]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08130DFC\n\
-    movs r0, 0x4\n\
-    ldr r7, [sp, 0x20]\n\
-    strb r0, [r7]\n\
-    b _08130EAE\n\
-    .pool\n\
-_08130DFC:\n\
-    movs r0, 0x4\n\
-    ands r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    cmp r2, 0\n\
-    beq _08130E10\n\
-    movs r0, 0x5\n\
-    ldr r1, [sp, 0x20]\n\
-    strb r0, [r1]\n\
-    b _08130EAE\n\
-_08130E10:\n\
-    add r1, sp, 0x10\n\
-    ldrb r0, [r3, 0x4]\n\
-    strb r0, [r1]\n\
-    add r0, sp, 0x14\n\
-    strb r2, [r0]\n\
-    movs r5, 0x1\n\
-    movs r3, 0x1\n\
-    adds r6, r1, 0\n\
-    ldr r0, =sBank_AI\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    ldr r2, =gBattleMons + 0xC\n\
-    adds r0, r2\n\
-    adds r4, r0, 0x2\n\
-    add r7, sp, 0x14\n\
-_08130E30:\n\
-    ldrh r0, [r4]\n\
-    cmp r0, 0\n\
-    beq _08130E72\n\
-    ldrb r1, [r6]\n\
-    mov r2, r9\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    adds r0, 0x4\n\
-    adds r2, r0, r3\n\
-    movs r0, 0\n\
-    ldrsb r0, [r2, r0]\n\
-    cmp r1, r0\n\
-    bne _08130E56\n\
-    adds r0, r6, r5\n\
-    ldrb r1, [r2]\n\
-    strb r1, [r0]\n\
-    adds r0, r7, r5\n\
-    strb r3, [r0]\n\
-    adds r5, 0x1\n\
-_08130E56:\n\
-    ldrb r1, [r6]\n\
-    mov r2, r9\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    adds r0, 0x4\n\
-    adds r2, r0, r3\n\
-    movs r0, 0\n\
-    ldrsb r0, [r2, r0]\n\
-    cmp r1, r0\n\
-    bge _08130E72\n\
-    ldrb r0, [r2]\n\
-    strb r0, [r6]\n\
-    strb r3, [r7]\n\
-    movs r5, 0x1\n\
-_08130E72:\n\
-    adds r4, 0x2\n\
-    adds r3, 0x1\n\
-    cmp r3, 0x3\n\
-    ble _08130E30\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    adds r1, r5, 0\n\
-    bl __modsi3\n\
-    add r0, sp\n\
-    adds r0, 0x14\n\
-    ldrb r0, [r0]\n\
-    ldr r7, [sp, 0x20]\n\
-    strb r0, [r7]\n\
-    ldrb r2, [r6]\n\
-    mov r0, r10\n\
-    strh r2, [r0]\n\
-    ldr r0, =sBank_AI\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x2\n\
-    eors r0, r1\n\
-    cmp r8, r0\n\
-    bne _08130EAE\n\
-    cmp r2, 0x63\n\
-    bgt _08130EAE\n\
-    ldr r0, =0x0000ffff\n\
-    mov r1, r10\n\
-    strh r0, [r1]\n\
-_08130EAE:\n\
-    ldr r2, [sp, 0x20]\n\
-    adds r2, 0x1\n\
-    str r2, [sp, 0x20]\n\
-    movs r7, 0x2\n\
-    add r10, r7\n\
-    movs r0, 0x1\n\
-    add r8, r0\n\
-    mov r1, r8\n\
-    cmp r1, 0x3\n\
-    bgt _08130EC4\n\
-    b _08130D14\n\
-_08130EC4:\n\
-    mov r0, sp\n\
-    ldrh r5, [r0]\n\
-    movs r0, 0\n\
-    ldr r2, [sp, 0x18]\n\
-    strb r0, [r2]\n\
-    movs r4, 0x1\n\
-    mov r8, r4\n\
-    ldr r6, =gBankTarget\n\
-    ldr r3, [sp, 0x18]\n\
-    mov r1, sp\n\
-    adds r1, 0x2\n\
-_08130EDA:\n\
-    lsls r0, r5, 16\n\
-    asrs r2, r0, 16\n\
-    movs r7, 0\n\
-    ldrsh r0, [r1, r7]\n\
-    cmp r2, r0\n\
-    bne _08130EEE\n\
-    adds r0, r3, r4\n\
-    mov r7, r8\n\
-    strb r7, [r0]\n\
-    adds r4, 0x1\n\
-_08130EEE:\n\
-    movs r7, 0\n\
-    ldrsh r0, [r1, r7]\n\
-    cmp r2, r0\n\
-    bge _08130EFE\n\
-    ldrh r5, [r1]\n\
-    mov r0, r8\n\
-    strb r0, [r3]\n\
-    movs r4, 0x1\n\
-_08130EFE:\n\
-    adds r1, 0x2\n\
-    movs r2, 0x1\n\
-    add r8, r2\n\
-    mov r7, r8\n\
-    cmp r7, 0x3\n\
-    ble _08130EDA\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    adds r1, r4, 0\n\
-    bl __modsi3\n\
-    ldr r1, [sp, 0x18]\n\
-    adds r0, r1, r0\n\
-    ldrb r0, [r0]\n\
-    strb r0, [r6]\n\
-    ldrb r0, [r6]\n\
-    ldr r2, [sp, 0x1C]\n\
-    adds r0, r2, r0\n\
-    ldrb r0, [r0]\n\
-    add sp, 0x24\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .pool\n\
-    .syntax divided\n");
-}
-#endif
 
 static void BattleAI_DoAIProcessing(void)
 {
@@ -888,7 +589,7 @@ static void BattleAI_DoAIProcessing(void)
     {
         switch (AI_THINKING_STRUCT->aiState)
         {
-            case AIState_DoNotProcess: //Needed to match.
+            case AIState_DoNotProcess: // Needed to match.
                 break;
             case AIState_SettingUp:
                 gAIScriptPtr = gBattleAI_ScriptsTable[AI_THINKING_STRUCT->aiLogicId]; // set AI ptr to logic ID.
@@ -904,7 +605,7 @@ static void BattleAI_DoAIProcessing(void)
                 break;
             case AIState_Processing:
                 if (AI_THINKING_STRUCT->moveConsidered != 0)
-                    sBattleAICmdTable[*gAIScriptPtr](); // run AI command.
+                    sBattleAICmdTable[*gAIScriptPtr](); // Run AI command.
                 else
                 {
                     AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] = 0;
@@ -934,7 +635,7 @@ static void RecordLastUsedMoveByTarget(void)
     {
         if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] == gLastUsedMovesByBanks[gBankTarget])
             break;
-        if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] != gLastUsedMovesByBanks[gBankTarget]  //HACK: This redundant condition is a hack to make the asm match.
+        if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] != gLastUsedMovesByBanks[gBankTarget]  // HACK: This redundant condition is a hack to make the asm match.
          && gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] == 0)
         {
             gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] = gLastUsedMovesByBanks[gBankTarget];
@@ -1261,7 +962,7 @@ static void BattleAICmd_if_not_equal(void)
 
 static void BattleAICmd_if_less_than_32(void)
 {
-    u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
     if (AI_THINKING_STRUCT->funcResult < *temp)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
@@ -1271,7 +972,7 @@ static void BattleAICmd_if_less_than_32(void)
 
 static void BattleAICmd_if_more_than_32(void)
 {
-    u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
     if (AI_THINKING_STRUCT->funcResult > *temp)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
@@ -1281,7 +982,7 @@ static void BattleAICmd_if_more_than_32(void)
 
 static void BattleAICmd_if_equal_32(void)
 {
-    u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
     if (AI_THINKING_STRUCT->funcResult == *temp)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
@@ -1291,7 +992,7 @@ static void BattleAICmd_if_equal_32(void)
 
 static void BattleAICmd_if_not_equal_32(void)
 {
-    u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
     if (AI_THINKING_STRUCT->funcResult != *temp)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
@@ -1321,7 +1022,7 @@ static void BattleAICmd_if_not_move(void)
 
 static void BattleAICmd_if_in_bytes(void)
 {
-    u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
 
     while (*ptr != 0xFF)
     {
@@ -1337,7 +1038,7 @@ static void BattleAICmd_if_in_bytes(void)
 
 static void BattleAICmd_if_not_in_bytes(void)
 {
-    u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
+    const u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
 
     while (*ptr != 0xFF)
     {
@@ -1351,9 +1052,9 @@ static void BattleAICmd_if_not_in_bytes(void)
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 }
 
-static void BattleAICmd_if_in_words(void)
+static void BattleAICmd_if_in_hwords(void)
 {
-    u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
+    const u16 *ptr = (const u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
 
     while (*ptr != 0xFFFF)
     {
@@ -1367,9 +1068,9 @@ static void BattleAICmd_if_in_words(void)
     gAIScriptPtr += 9;
 }
 
-static void BattleAICmd_if_not_in_words(void)
+static void BattleAICmd_if_not_in_hwords(void)
 {
-    u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
+    const u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
 
     while (*ptr != 0xFFFF)
     {
@@ -1456,9 +1157,9 @@ static u8 BattleAI_GetWantedBank(u8 index)
         default:
             return gBankTarget;
         case AI_USER_PARTNER:
-            return sBank_AI ^ 2;
+            return sBank_AI ^ BIT_MON;
         case AI_TARGET_PARTNER:
-            return gBankTarget ^ 2;
+            return gBankTarget ^ BIT_MON;
     }
 }
 
@@ -1484,248 +1185,68 @@ static void BattleAICmd_get_last_used_bank_move_power(void)
     gAIScriptPtr += 1;
 }
 
-__attribute__((naked)) // not even going to try. if it doesnt match in ruby, it wont match in emerald (yet).
 static void BattleAICmd_is_most_powerful_move(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x14\n\
-    movs r3, 0\n\
-    ldr r0, =sDiscouragedPowerfulMoveEffects\n\
-    ldrh r1, [r0]\n\
-    ldr r5, =0x0000ffff\n\
-    ldr r6, =gBattleMoves\n\
-    ldr r2, =gBattleResources\n\
-    cmp r1, r5\n\
-    beq _08131F86\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    ldrh r1, [r0, 0x2]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r6\n\
-    ldrb r4, [r0]\n\
-    ldr r1, =sDiscouragedPowerfulMoveEffects\n\
-_08131F76:\n\
-    ldrh r0, [r1]\n\
-    cmp r4, r0\n\
-    beq _08131F86\n\
-    adds r1, 0x2\n\
-    adds r3, 0x1\n\
-    ldrh r0, [r1]\n\
-    cmp r0, r5\n\
-    bne _08131F76\n\
-_08131F86:\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    ldrh r1, [r0, 0x2]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r6\n\
-    ldrb r0, [r0, 0x1]\n\
-    cmp r0, 0x1\n\
-    bhi _08131F9C\n\
-    b _08132126\n\
-_08131F9C:\n\
-    lsls r0, r3, 1\n\
-    ldr r1, =sDiscouragedPowerfulMoveEffects\n\
-    adds r0, r1\n\
-    ldrh r3, [r0]\n\
-    ldr r0, =0x0000ffff\n\
-    cmp r3, r0\n\
-    beq _08131FAC\n\
-    b _08132126\n\
-_08131FAC:\n\
-    ldr r0, =gDynamicBasePower\n\
-    movs r1, 0\n\
-    strh r1, [r0]\n\
-    ldr r0, =gBattleStruct\n\
-    ldr r0, [r0]\n\
-    strb r1, [r0, 0x13]\n\
-    ldr r0, =gBattleScripting\n\
-    movs r2, 0x1\n\
-    strb r2, [r0, 0xE]\n\
-    ldr r0, =gBattleMoveFlags\n\
-    strb r1, [r0]\n\
-    ldr r0, =gCritMultiplier\n\
-    strb r2, [r0]\n\
-    movs r6, 0\n\
-    mov r9, r3\n\
-    ldr r2, =sDiscouragedPowerfulMoveEffects\n\
-    ldrh r2, [r2]\n\
-    str r2, [sp, 0x10]\n\
-_08131FD0:\n\
-    movs r3, 0\n\
-    ldr r5, =gBattleMons\n\
-    lsls r4, r6, 1\n\
-    ldr r7, =sBank_AI\n\
-    lsls r0, r6, 2\n\
-    mov r8, r0\n\
-    adds r1, r6, 0x1\n\
-    mov r10, r1\n\
-    ldr r2, [sp, 0x10]\n\
-    cmp r2, r9\n\
-    beq _08132014\n\
-    ldr r2, =gBattleMoves\n\
-    ldrb r1, [r7]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r4, r0\n\
-    adds r1, r5, 0\n\
-    adds r1, 0xC\n\
-    adds r0, r1\n\
-    ldrh r1, [r0]\n\
-    lsls r0, r1, 1\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    ldrb r2, [r0]\n\
-    ldr r1, =sDiscouragedPowerfulMoveEffects\n\
-_08132004:\n\
-    ldrh r0, [r1]\n\
-    cmp r2, r0\n\
-    beq _08132014\n\
-    adds r1, 0x2\n\
-    adds r3, 0x1\n\
-    ldrh r0, [r1]\n\
-    cmp r0, r9\n\
-    bne _08132004\n\
-_08132014:\n\
-    ldrb r1, [r7]\n\
-    movs r0, 0x58\n\
-    muls r0, r1\n\
-    adds r0, r4, r0\n\
-    adds r1, r5, 0\n\
-    adds r1, 0xC\n\
-    adds r1, r0, r1\n\
-    ldrh r0, [r1]\n\
-    cmp r0, 0\n\
-    beq _081320C0\n\
-    lsls r0, r3, 1\n\
-    ldr r2, =sDiscouragedPowerfulMoveEffects\n\
-    adds r0, r2\n\
-    ldrh r0, [r0]\n\
-    cmp r0, r9\n\
-    bne _081320C0\n\
-    ldr r0, =gBattleMoves\n\
-    ldrh r2, [r1]\n\
-    lsls r1, r2, 1\n\
-    adds r1, r2\n\
-    lsls r1, 2\n\
-    adds r1, r0\n\
-    ldrb r0, [r1, 0x1]\n\
-    cmp r0, 0x1\n\
-    bls _081320C0\n\
-    ldr r5, =gCurrentMove\n\
-    strh r2, [r5]\n\
-    ldrb r0, [r7]\n\
-    ldr r4, =gBankTarget\n\
-    ldrb r1, [r4]\n\
-    bl AI_CalcDmg\n\
-    ldrh r0, [r5]\n\
-    ldrb r1, [r7]\n\
-    ldrb r2, [r4]\n\
-    bl TypeCalc\n\
-    mov r4, sp\n\
-    add r4, r8\n\
-    ldr r2, =gBattleMoveDamage\n\
-    ldr r0, =gBattleResources\n\
-    ldr r0, [r0]\n\
-    ldr r0, [r0, 0x14]\n\
-    adds r0, 0x18\n\
-    adds r0, r6\n\
-    ldrb r1, [r0]\n\
-    ldr r0, [r2]\n\
-    muls r0, r1\n\
-    movs r1, 0x64\n\
-    bl __divsi3\n\
-    str r0, [r4]\n\
-    cmp r0, 0\n\
-    bne _081320C8\n\
-    movs r0, 0x1\n\
-    str r0, [r4]\n\
-    b _081320C8\n\
-    .pool\n\
-_081320C0:\n\
-    mov r1, sp\n\
-    add r1, r8\n\
-    movs r0, 0\n\
-    str r0, [r1]\n\
-_081320C8:\n\
-    mov r6, r10\n\
-    cmp r6, 0x3\n\
-    bgt _081320D0\n\
-    b _08131FD0\n\
-_081320D0:\n\
-    movs r6, 0\n\
-    ldr r2, =gBattleResources\n\
-    ldr r0, [r2]\n\
-    ldr r0, [r0, 0x14]\n\
-    ldrb r0, [r0, 0x1]\n\
-    lsls r0, 2\n\
-    add r0, sp\n\
-    ldr r1, [sp]\n\
-    ldr r0, [r0]\n\
-    ldr r5, =gAIScriptPtr\n\
-    cmp r1, r0\n\
-    bgt _08132106\n\
-    adds r4, r2, 0\n\
-    mov r3, sp\n\
-_081320EC:\n\
-    adds r3, 0x4\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x3\n\
-    bgt _08132106\n\
-    ldr r0, [r4]\n\
-    ldr r0, [r0, 0x14]\n\
-    ldrb r0, [r0, 0x1]\n\
-    lsls r0, 2\n\
-    add r0, sp\n\
-    ldr r1, [r3]\n\
-    ldr r0, [r0]\n\
-    cmp r1, r0\n\
-    ble _081320EC\n\
-_08132106:\n\
-    cmp r6, 0x4\n\
-    bne _0813211C\n\
-    ldr r0, [r2]\n\
-    ldr r1, [r0, 0x14]\n\
-    movs r0, 0x2\n\
-    str r0, [r1, 0x8]\n\
-    b _08132130\n\
-    .pool\n\
-_0813211C:\n\
-    ldr r0, [r2]\n\
-    ldr r1, [r0, 0x14]\n\
-    movs r0, 0x1\n\
-    str r0, [r1, 0x8]\n\
-    b _08132130\n\
-_08132126:\n\
-    ldr r0, [r2]\n\
-    ldr r1, [r0, 0x14]\n\
-    movs r0, 0\n\
-    str r0, [r1, 0x8]\n\
-    ldr r5, =gAIScriptPtr\n\
-_08132130:\n\
-    ldr r0, [r5]\n\
-    adds r0, 0x1\n\
-    str r0, [r5]\n\
-    add sp, 0x14\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided");
+    s32 i, checkedMove;
+    s32 moveDmgs[4];
+
+    for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
+    {
+        if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == sDiscouragedPowerfulMoveEffects[i])
+            break;
+    }
+
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power > 1
+        && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
+    {
+        gDynamicBasePower = 0;
+        *(&gBattleStruct->dynamicMoveType) = 0;
+        gBattleScripting.dmgMultiplier = 1;
+        gBattleMoveFlags = 0;
+        gCritMultiplier = 1;
+
+        for (checkedMove = 0; checkedMove < 4; checkedMove++)
+        {
+            for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
+            {
+                if (gBattleMoves[gBattleMons[sBank_AI].moves[checkedMove]].effect == sDiscouragedPowerfulMoveEffects[i])
+                    break;
+            }
+
+            if (gBattleMons[sBank_AI].moves[checkedMove] != MOVE_NONE
+                && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF
+                && gBattleMoves[gBattleMons[sBank_AI].moves[checkedMove]].power > 1)
+            {
+                gCurrentMove = gBattleMons[sBank_AI].moves[checkedMove];
+                AI_CalcDmg(sBank_AI, gBankTarget);
+                TypeCalc(gCurrentMove, sBank_AI, gBankTarget);
+                moveDmgs[checkedMove] = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[checkedMove] / 100;
+                if (moveDmgs[checkedMove] == 0)
+                    moveDmgs[checkedMove] = 1;
+            }
+            else
+            {
+                moveDmgs[checkedMove] = 0;
+            }
+        }
+
+        for (checkedMove = 0; checkedMove < 4; checkedMove++)
+        {
+            if (moveDmgs[checkedMove] > moveDmgs[AI_THINKING_STRUCT->movesetIndex])
+                break;
+        }
+
+        if (checkedMove == 4)
+            AI_THINKING_STRUCT->funcResult = 2; // is the most powerful
+        else
+            AI_THINKING_STRUCT->funcResult = 1; // not most powerful
+    }
+    else
+    {
+        AI_THINKING_STRUCT->funcResult = 0; // highly discouraged in terms of power
+    }
+
+    gAIScriptPtr++;
 }
 
 static void BattleAICmd_get_last_used_bank_move(void)
@@ -1756,7 +1277,7 @@ static void BattleAICmd_if_arg_not_equal(void)
 
 static void BattleAICmd_if_would_go_first(void)
 {
-    if (GetWhoStrikesFirst(sBank_AI, gBankTarget, 1) == gAIScriptPtr[1])
+    if (GetWhoStrikesFirst(sBank_AI, gBankTarget, TRUE) == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -1764,7 +1285,7 @@ static void BattleAICmd_if_would_go_first(void)
 
 static void BattleAICmd_if_would_not_go_first(void)
 {
-    if (GetWhoStrikesFirst(sBank_AI, gBankTarget, 1) != gAIScriptPtr[1])
+    if (GetWhoStrikesFirst(sBank_AI, gBankTarget, TRUE) != gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -1792,7 +1313,7 @@ static void BattleAICmd_count_alive_pokemon(void)
     else
         index = gBankTarget;
 
-    if (GetBankSide(index) == 0)
+    if (GetBankSide(index) == SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -1896,11 +1417,10 @@ static void BattleAICmd_get_ability(void)
     gAIScriptPtr += 2;
 }
 
-#ifdef NONMATCHING
 static void BattleAICmd_check_ability(void)
 {
-    u8 bank = BattleAI_GetWantedBank(gAIScriptPtr[1]);
-    u8 ability = gAIScriptPtr[2];
+    u32 bank = BattleAI_GetWantedBank(gAIScriptPtr[1]);
+    u32 ability = gAIScriptPtr[2];
 
     if (gAIScriptPtr[1] == AI_TARGET || gAIScriptPtr[1] == AI_TARGET_PARTNER)
     {
@@ -1920,8 +1440,9 @@ static void BattleAICmd_check_ability(void)
         {
             if (gBaseStats[gBattleMons[bank].species].ability2 != ABILITY_NONE)
             {
-                if (gBaseStats[gBattleMons[bank].species].ability1 != ability
-                && gBaseStats[gBattleMons[bank].species].ability2 != ability)
+                u8 abilityDummyVariable = ability; // needed to match
+                if (gBaseStats[gBattleMons[bank].species].ability1 != abilityDummyVariable
+                && gBaseStats[gBattleMons[bank].species].ability2 != abilityDummyVariable)
                 {
                     ability = gBaseStats[gBattleMons[bank].species].ability1;
                 }
@@ -1957,137 +1478,6 @@ static void BattleAICmd_check_ability(void)
     }
     gAIScriptPtr += 3;
 }
-#else
-__attribute__((naked))
-static void BattleAICmd_check_ability(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    ldr r4, =gAIScriptPtr\n\
-    ldr r0, [r4]\n\
-    ldrb r0, [r0, 0x1]\n\
-    bl BattleAI_GetWantedBank\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    ldr r0, [r4]\n\
-    ldrb r3, [r0, 0x2]\n\
-    ldrb r0, [r0, 0x1]\n\
-    cmp r0, 0\n\
-    beq _0813253A\n\
-    cmp r0, 0x2\n\
-    bne _081325BC\n\
-_0813253A:\n\
-    ldr r0, =gBattleResources\n\
-    ldr r4, [r0]\n\
-    ldr r1, [r4, 0x18]\n\
-    adds r1, 0x40\n\
-    adds r2, r1, r5\n\
-    ldrb r1, [r2]\n\
-    adds r6, r0, 0\n\
-    cmp r1, 0\n\
-    beq _0813255C\n\
-    adds r3, r1, 0\n\
-    ldr r0, [r4, 0x14]\n\
-    str r3, [r0, 0x8]\n\
-    b _081325CA\n\
-    .pool\n\
-_0813255C:\n\
-    ldr r1, =gBattleMons\n\
-    movs r0, 0x58\n\
-    muls r0, r5\n\
-    adds r4, r0, r1\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x20\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x17\n\
-    beq _08132576\n\
-    cmp r0, 0x2A\n\
-    beq _08132576\n\
-    cmp r0, 0x47\n\
-    bne _08132588\n\
-_08132576:\n\
-    movs r0, 0x58\n\
-    muls r0, r5\n\
-    adds r0, r1\n\
-    adds r0, 0x20\n\
-    ldrb r3, [r0]\n\
-    b _081325CA\n\
-    .pool\n\
-_08132588:\n\
-    ldr r2, =gBaseStats\n\
-    ldrh r1, [r4]\n\
-    lsls r0, r1, 3\n\
-    subs r0, r1\n\
-    lsls r0, 2\n\
-    adds r1, r0, r2\n\
-    ldrb r4, [r1, 0x16]\n\
-    cmp r4, 0\n\
-    beq _081325B8\n\
-    ldrb r2, [r1, 0x17]\n\
-    cmp r2, 0\n\
-    beq _081325B4\n\
-    adds r0, r3, 0\n\
-    cmp r4, r0\n\
-    beq _081325CE\n\
-    cmp r2, r0\n\
-    beq _081325CE\n\
-    adds r3, r4, 0\n\
-    b _081325CA\n\
-    .pool\n\
-_081325B4:\n\
-    ldrb r3, [r1, 0x16]\n\
-    b _081325CA\n\
-_081325B8:\n\
-    ldrb r3, [r1, 0x17]\n\
-    b _081325CA\n\
-_081325BC:\n\
-    ldr r1, =gBattleMons\n\
-    movs r0, 0x58\n\
-    muls r0, r5\n\
-    adds r0, r1\n\
-    adds r0, 0x20\n\
-    ldrb r3, [r0]\n\
-    ldr r6, =gBattleResources\n\
-_081325CA:\n\
-    cmp r3, 0\n\
-    bne _081325E8\n\
-_081325CE:\n\
-    ldr r0, [r6]\n\
-    ldr r1, [r0, 0x14]\n\
-    movs r0, 0x2\n\
-    str r0, [r1, 0x8]\n\
-    ldr r2, =gAIScriptPtr\n\
-    b _08132608\n\
-    .pool\n\
-_081325E8:\n\
-    ldr r0, =gAIScriptPtr\n\
-    ldr r1, [r0]\n\
-    adds r2, r0, 0\n\
-    ldrb r1, [r1, 0x2]\n\
-    cmp r3, r1\n\
-    bne _08132600\n\
-    ldr r0, [r6]\n\
-    ldr r1, [r0, 0x14]\n\
-    movs r0, 0x1\n\
-    b _08132606\n\
-    .pool\n\
-_08132600:\n\
-    ldr r0, [r6]\n\
-    ldr r1, [r0, 0x14]\n\
-    movs r0, 0\n\
-_08132606:\n\
-    str r0, [r1, 0x8]\n\
-_08132608:\n\
-    ldr r0, [r2]\n\
-    adds r0, 0x3\n\
-    str r0, [r2]\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided");
-}
-#endif
 
 static void BattleAICmd_get_highest_type_effectiveness(void)
 {
@@ -2184,7 +1574,7 @@ static void BattleAICmd_if_status_in_party(void)
 
     switch(gAIScriptPtr[1])
     {
-        case 1:
+        case AI_USER:
             index = sBank_AI;
             break;
         default:
@@ -2397,7 +1787,7 @@ static void BattleAICmd_if_cant_faint(void)
 static void BattleAICmd_if_has_move(void)
 {
     int i;
-    u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
+    const u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
 
     switch(gAIScriptPtr[1])
     {
@@ -2464,7 +1854,7 @@ static void BattleAICmd_if_has_move(void)
 static void BattleAICmd_if_dont_have_move(void)
 {
     int i;
-    u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
+    const u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
 
     switch(gAIScriptPtr[1])
     {
@@ -2631,7 +2021,7 @@ static void BattleAICmd_if_curr_move_disabled_or_encored(void)
 
 static void BattleAICmd_flee(void)
 {
-    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_FLEE | AI_ACTION_DO_NOT_ATTACK); // what matters is UNK2 being enabled.
+    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_FLEE | AI_ACTION_DO_NOT_ATTACK);
 }
 
 static void BattleAICmd_if_random_100(void)
@@ -2646,7 +2036,7 @@ static void BattleAICmd_if_random_100(void)
 
 static void BattleAICmd_watch(void)
 {
-    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK); // what matters is UNK3 being enabled.
+    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK);
 }
 
 static void BattleAICmd_get_hold_effect(void)
@@ -2675,7 +2065,7 @@ static void BattleAICmd_if_holds_item(void)
     u16 item;
     u8 var1, var2;
 
-    if ((bank & 1) == (sBank_AI & 1))
+    if ((bank & BIT_SIDE) == (sBank_AI & BIT_SIDE))
         item = gBattleMons[bank].item;
     else
         item = BATTLE_HISTORY->itemEffects[bank];
@@ -2752,7 +2142,7 @@ static void BattleAICmd_get_used_held_item(void)
     #ifdef NONMATCHING
         AI_THINKING_STRUCT->funcResult = gBattleStruct->usedHeldItems[bank];
     #else
-        AI_THINKING_STRUCT->funcResult = *(u8*)((u8*)(gBattleStruct) + 0xB8 + (bank * 2));
+        AI_THINKING_STRUCT->funcResult = *(u8*)((u8*)(gBattleStruct) + offsetof(struct BattleStruct, usedHeldItems) + (bank * 2));
     #endif // NONMATCHING
 
     gAIScriptPtr += 2;

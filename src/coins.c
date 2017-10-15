@@ -54,7 +54,7 @@ void SetCoins(u16 coinAmount)
 }
 
 /* Can't match it lol
-bool8 AddCoins(u16 toAdd)
+bool8 GiveCoins(u16 toAdd)
 {
     u16 newAmount;
     u16 ownedCoins = GetCoins();

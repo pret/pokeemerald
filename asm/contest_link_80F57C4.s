@@ -1239,7 +1239,7 @@ _080F6334:
 	ldr r1, =gUnknown_02039F20
 	ldrb r0, [r1]
 	ldr r7, =gStringVar1
-	ldr r2, =gUnknown_02039E0D
+	ldr r2, =gUnknown_02039E00 + 13
 	mov r8, r2
 	cmp r0, 0
 	beq _080F636E
@@ -1750,7 +1750,7 @@ task_repel: @ 80F67C4
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_80ED090
+	bl BravoTrainerPokemonProfile_BeforeInterview2
 _080F67E6:
 	movs r0, 0
 	str r0, [sp]
@@ -3008,7 +3008,7 @@ _080F7236:
 	bl CopyToBgTilemapBufferRect
 	movs r5, 0xF
 _080F7240:
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080F725C
@@ -4640,7 +4640,7 @@ sub_80F7F30: @ 80F7F30
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _080F7F5E
-	ldr r4, =gUnknown_02039F2C
+	ldr r4, =gScriptContestCategory
 	ldrb r0, [r4]
 	ldr r1, =gUnknown_02039F2E
 	ldrb r1, [r1]
@@ -4666,7 +4666,7 @@ sub_80F7F7C: @ 80F7F7C
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r2, r1, r0
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080F7FEE
@@ -4730,7 +4730,7 @@ sub_80F7FFC: @ 80F7FFC
 	beq _080F8010
 	b _080F8250
 _080F8010:
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bls _080F801A
@@ -4785,7 +4785,7 @@ _080F8074:
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4834,7 +4834,7 @@ _080F80E2:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4883,7 +4883,7 @@ _080F814E:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4926,7 +4926,7 @@ _080F8190:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4969,7 +4969,7 @@ _080F81F8:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4994,7 +4994,7 @@ sub_80F8264: @ 80F8264
 	ldr r0, =gSpecialVar_0x8006
 	ldrh r1, [r0]
 	lsls r1, 6
-	ldr r0, =gUnknown_02039E0D
+	ldr r0, =gUnknown_02039E00 + 13
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -5013,7 +5013,7 @@ sub_80F8290: @ 80F8290
 	ldr r1, =gSpecialVar_0x8006
 	ldrh r1, [r1]
 	lsls r1, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	pop {r0}
@@ -5104,7 +5104,7 @@ sub_80F834C: @ 80F834C
 	ldr r2, =gUnknown_02039F20
 	ldrb r0, [r2]
 	ldr r4, =gStringVar3
-	ldr r3, =gUnknown_02039E0D
+	ldr r3, =gUnknown_02039E00 + 13
 	cmp r0, 0
 	beq _080F836E
 _080F835C:
@@ -5137,7 +5137,7 @@ sub_80F8390: @ 80F8390
 	ldr r2, =gUnknown_02039F20
 	ldrb r0, [r2]
 	ldr r4, =gStringVar1
-	ldr r3, =gUnknown_02039E02
+	ldr r3, =gUnknown_02039E00 + 2
 	cmp r0, 0
 	beq _080F83B2
 _080F83A0:
@@ -5488,7 +5488,7 @@ _080F8678:
 	bl sub_80F86E0
 	ldr r1, =gUnknown_02039F2B
 	strb r0, [r1]
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrb r0, [r0]
 	bl sub_80DB09C
 	ldr r1, =sub_80FCF40
@@ -5578,7 +5578,7 @@ sub_80F8714: @ 80F8714
 	b _080F877E
 	.pool
 _080F8748:
-	ldr r5, =gUnknown_02039E02
+	ldr r5, =gUnknown_02039E00 + 2
 	movs r4, 0x3
 _080F874C:
 	adds r0, r5, 0

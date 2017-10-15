@@ -2,7 +2,7 @@
 #define GUARD_MALLOC_H
 
 #define malloc Alloc
-#define calloc AllocZeroed
+#define calloc(ct, sz) AllocZeroed((ct) * (sz))
 #define free Free
 
 extern u8 gHeap[];

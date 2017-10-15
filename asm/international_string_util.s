@@ -268,8 +268,8 @@ _081DB5E4:
 	bx r0
 	thumb_func_end sub_81DB5AC
 
-	thumb_func_start sub_81DB5E8
-sub_81DB5E8: @ 81DB5E8
+	thumb_func_start TVShowConvertInternationalString
+TVShowConvertInternationalString: @ 81DB5E8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r2, 0
@@ -282,7 +282,7 @@ sub_81DB5E8: @ 81DB5E8
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81DB5E8
+	thumb_func_end TVShowConvertInternationalString
 
 	thumb_func_start sub_81DB604
 sub_81DB604: @ 81DB604

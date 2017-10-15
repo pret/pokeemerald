@@ -261,8 +261,8 @@ sub_80724A8: @ 80724A8
 	bx r0
 	thumb_func_end sub_80724A8
 
-	thumb_func_start battle_make_oam_normal_battle
-battle_make_oam_normal_battle: @ 80724DC
+	thumb_func_start CreateBankHealthboxSprites
+CreateBankHealthboxSprites: @ 80724DC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -274,7 +274,7 @@ battle_make_oam_normal_battle: @ 80724DC
 	mov r10, r0
 	movs r0, 0
 	str r0, [sp]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080725F0
@@ -608,10 +608,10 @@ _08072718:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end battle_make_oam_normal_battle
+	thumb_func_end CreateBankHealthboxSprites
 
-	thumb_func_start battle_make_oam_safari_battle
-battle_make_oam_safari_battle: @ 8072804
+	thumb_func_start CreateSafariPlayerHealthboxSprites
+CreateSafariPlayerHealthboxSprites: @ 8072804
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -680,7 +680,7 @@ battle_make_oam_safari_battle: @ 8072804
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end battle_make_oam_safari_battle
+	thumb_func_end CreateSafariPlayerHealthboxSprites
 
 	thumb_func_start sub_80728A4
 sub_80728A4: @ 80728A4
@@ -802,8 +802,8 @@ sub_807294C: @ 807294C
 	.pool
 	thumb_func_end sub_807294C
 
-	thumb_func_start sub_8072984
-sub_8072984: @ 8072984
+	thumb_func_start SetHealthboxSpriteInvisible
+SetHealthboxSpriteInvisible: @ 8072984
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -841,10 +841,10 @@ sub_8072984: @ 8072984
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8072984
+	thumb_func_end SetHealthboxSpriteInvisible
 
-	thumb_func_start sub_80729D0
-sub_80729D0: @ 80729D0
+	thumb_func_start SetHealthboxSpriteVisible
+SetHealthboxSpriteVisible: @ 80729D0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -885,7 +885,7 @@ sub_80729D0: @ 80729D0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80729D0
+	thumb_func_end SetHealthboxSpriteVisible
 
 	thumb_func_start sub_8072A24
 sub_8072A24: @ 8072A24
@@ -1014,14 +1014,14 @@ _08072B00:
 	.pool
 	thumb_func_end sub_8072A88
 
-	thumb_func_start sub_8072B18
-sub_8072B18: @ 8072B18
+	thumb_func_start SetBankHealthboxSpritePos
+SetBankHealthboxSpritePos: @ 8072B18
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
 	movs r4, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072B44
@@ -1081,7 +1081,7 @@ _08072B7C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8072B18
+	thumb_func_end SetBankHealthboxSpritePos
 
 	thumb_func_start healthbar_draw_level
 healthbar_draw_level: @ 8072B94
@@ -1132,7 +1132,7 @@ healthbar_draw_level: @ 8072B94
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072C18
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	ldr r2, =0x06010420
 	adds r1, r4, r2
@@ -1187,7 +1187,7 @@ heathbar_draw_hp: @ 8072C38
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072D10
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072D10
@@ -1267,7 +1267,7 @@ _08072D10:
 	ldrh r0, [r6, 0x3A]
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r4
@@ -1993,7 +1993,7 @@ _08073354:
 	bne _0807336A
 	b _080735A8
 _0807336A:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073382
@@ -2036,7 +2036,7 @@ _08073382:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080734B0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080733D0
@@ -2107,7 +2107,7 @@ _08073468:
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0x5
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	movs r0, 0x75
 	bl sub_80728A4
 	ldrb r2, [r6]
@@ -2209,7 +2209,7 @@ _0807355C:
 	ldr r4, =gEnemyParty
 	adds r1, r4
 	movs r2, 0x5
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
@@ -2222,7 +2222,7 @@ _0807355C:
 	muls r1, r5
 	adds r1, r4
 	movs r2, 0x4
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 _08073592:
 	ldr r0, =gHealthBoxesIds
 	add r0, r9
@@ -2303,7 +2303,7 @@ _08073630:
 	mov r9, r3
 	cmp r4, 0
 	beq _08073642
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073648
@@ -3842,7 +3842,7 @@ _08074272:
 	adds r1, r6, 0
 	movs r2, 0x6
 	bl sub_8075198
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	ldr r1, =0x06010400
 	adds r5, r4, r1
@@ -4013,7 +4013,7 @@ draw_status_ailment_maybe: @ 80743F8
 	movs r1, 0x37
 	bl GetMonData
 	adds r4, r0, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	movs r3, 0x12
 	mov r8, r3
@@ -4210,7 +4210,7 @@ _080745B8:
 	ldr r2, =0x04000018
 	adds r0, r6, 0
 	bl CpuSet
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4468,8 +4468,8 @@ sub_80747D8: @ 80747D8
 	.pool
 	thumb_func_end sub_80747D8
 
-	thumb_func_start healthbar_draw_field_maybe
-healthbar_draw_field_maybe: @ 8074860
+	thumb_func_start UpdateHealthboxAttribute
+UpdateHealthboxAttribute: @ 8074860
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4492,7 +4492,7 @@ healthbar_draw_field_maybe: @ 8074860
 	mov r9, r0
 	cmp r7, 0
 	bne _0807489C
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807489C
@@ -4581,7 +4581,7 @@ _08074914:
 	movs r3, 0
 	bl sub_8074AA0
 _08074948:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -4742,7 +4742,7 @@ _08074A8E:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end healthbar_draw_field_maybe
+	thumb_func_end UpdateHealthboxAttribute
 
 	thumb_func_start sub_8074AA0
 sub_8074AA0: @ 8074AA0

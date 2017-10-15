@@ -6902,7 +6902,7 @@ sub_80CABE0: @ 80CABE0
 	cmp r1, r0
 	beq _080CAC0A
 	ldr r0, =0x000008d7
-	bl FlagReset
+	bl FlagClear
 	ldr r4, =0x00004036
 	bl StorageGetCurrentBox
 	adds r1, r0, 0

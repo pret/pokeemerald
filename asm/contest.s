@@ -1525,7 +1525,7 @@ sub_80D8490: @ 80D8490
 	movs r6, 0
 	ldr r0, =gUnknown_02039F25
 	mov r8, r0
-	ldr r2, =gUnknown_02039E1E
+	ldr r2, =gUnknown_02039E00 + 30
 	mov r10, r2
 	ldr r7, =gUnknown_02039F34
 _080D84B8:
@@ -2624,7 +2624,7 @@ _080D8EF2:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	mov r2, r9
@@ -3562,7 +3562,7 @@ _080D96D4:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
@@ -3671,7 +3671,7 @@ _080D97DC:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
@@ -3809,7 +3809,7 @@ _080D9904:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
@@ -4010,7 +4010,7 @@ _080D9AD2:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gUnknown_02039F34
@@ -4381,7 +4381,7 @@ _080D9DD4:
 	lsls r1, 20
 	lsrs r1, 29
 	lsls r1, 6
-	ldr r4, =gUnknown_02039E02
+	ldr r4, =gUnknown_02039E00 + 2
 	adds r1, r4
 	bl StringCopy
 	ldr r0, =gStringVar1
@@ -4476,7 +4476,7 @@ _080D9EDC:
 	bl sub_80DC9B4
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r0, =gStringVar2
@@ -4626,7 +4626,7 @@ _080DA038:
 	bl sub_80DB89C
 	ldr r0, =gStringVar1
 	lsls r1, r6, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
@@ -5096,7 +5096,7 @@ sub_80DA3CC: @ 80DA3CC
 	ldr r0, =gStringVar1
 	ldrb r1, [r5]
 	lsls r1, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r5, =gStringVar4
@@ -5360,7 +5360,7 @@ _080DA600:
 	lsls r0, 2
 	adds r0, r2
 	ldrh r0, [r0, 0x8]
-	bl sub_80ED03C
+	bl BravoTrainerPokemonProfile_BeforeInterview1
 	b _080DA668
 	.pool
 _080DA65C:
@@ -5667,7 +5667,7 @@ _080DA8F2:
 	ldr r5, =gUnknown_02039F25
 	ldrb r0, [r5]
 	lsls r0, 6
-	ldr r4, =gUnknown_02039E0D
+	ldr r4, =gUnknown_02039E00 + 13
 	adds r0, r4
 	mov r1, sp
 	movs r2, 0x8
@@ -6313,7 +6313,7 @@ _080DAE1E:
 	movs r0, 0x4
 	b _080DAE9A
 _080DAE2E:
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080DAE82
@@ -6451,7 +6451,7 @@ sub_80DAF1C: @ 80DAF1C
 	add r0, sp, 0x4
 	bl StringCopy
 	lsls r1, r5, 6
-	ldr r0, =gUnknown_02039E0D
+	ldr r0, =gUnknown_02039E00 + 13
 	adds r1, r0
 	add r0, sp, 0x4
 	bl StringAppend
@@ -6508,7 +6508,7 @@ sub_80DAFA0: @ 80DAFA0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r0, r4, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r0, r2
 	bl sub_80DAED4
 	ldr r0, =gUnknown_02039F26
@@ -8456,7 +8456,7 @@ sub_80DBED4: @ 80DBED4
 	adds r0, r1
 	ldrb r1, [r0]
 	lsls r1, 1
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	lsls r0, 3
 	adds r1, r0
@@ -11173,7 +11173,7 @@ sub_80DD45C: @ 80DD45C
 	lsrs r6, r1, 24
 	ldr r0, =gStringVar1
 	lsls r1, r4, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	ldr r0, =gStringVar2
@@ -11805,7 +11805,7 @@ sub_80DD9F0: @ 80DD9F0
 	ldrb r1, [r0, 0x1]
 	lsls r1, 29
 	lsrs r1, 29
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r2, [r0]
 	lsls r0, r2, 2
 	adds r0, r2
@@ -14260,7 +14260,7 @@ _080DEDE6:
 	b _080DEF90
 	.pool
 _080DEE00:
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080DEE4C
@@ -14383,7 +14383,7 @@ _080DEF02:
 	mov r2, r9
 	lsls r1, r2, 5
 	adds r0, r1
-	ldr r1, =gUnknown_02039F2C
+	ldr r1, =gScriptContestCategory
 	ldrh r1, [r1]
 	ldr r3, =0x00002e9a
 	adds r0, r3
@@ -14485,7 +14485,7 @@ _080DEFE6:
 	b _080DF03A
 	.pool
 _080DEFF8:
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080DF038
@@ -15385,21 +15385,21 @@ _080DF6AE:
 	beq _080DF6AE
 _080DF6C4:
 	mov r0, r9
-	bl sub_80ECDA4
+	bl ContestLiveUpdates_BeforeInterview_1
 	mov r0, r10
-	bl sub_80ECDF4
+	bl ContestLiveUpdates_BeforeInterview_2
 	ldr r5, [sp, 0x4]
 	lsrs r0, r5, 24
-	bl sub_80ECE34
+	bl ContestLiveUpdates_BeforeInterview_3
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r0, [r0, 0x1C]
 	add r0, r8
 	ldrh r0, [r0, 0xA]
-	bl sub_80ECE74
+	bl ContestLiveUpdates_BeforeInterview_4
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_80ECEB4
+	bl ContestLiveUpdates_BeforeInterview_5
 _080DF6EE:
 	add sp, 0xC
 	pop {r3-r5}

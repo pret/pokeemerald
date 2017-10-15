@@ -141,7 +141,7 @@ sub_80FC5DC: @ 80FC5DC
 	bl GetMultiplayerId
 	ldr r1, =gUnknown_02039F25
 	strb r0, [r1]
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	ldr r4, =gUnknown_02039F30
 	strb r0, [r4]
 	ldr r1, =gUnknown_02039F2A

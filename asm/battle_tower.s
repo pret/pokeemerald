@@ -1795,7 +1795,7 @@ _08162ED8:
 	adds r0, 0xE4
 	ldrb r2, [r0]
 	adds r0, r6, 0
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	b _08162F62
 	.pool
 _08162F00:
@@ -1835,7 +1835,7 @@ _08162F3E:
 	adds r1, r0, 0
 	adds r0, r6, 0
 	adds r2, r4, 0
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	b _08162F62
 	.pool
 _08162F5C:
@@ -3548,11 +3548,11 @@ _08163E2C:
 	movs r0, 0
 	strb r0, [r4]
 	ldr r0, =gUnknown_08224158
-	bl TrainerBattleConfigure
+	bl BattleSetup_ConfigureTrainerBattle
 	movs r0, 0x1
 	strb r0, [r4]
 	ldr r0, =gUnknown_08224167
-	bl TrainerBattleConfigure
+	bl BattleSetup_ConfigureTrainerBattle
 	ldr r0, =gPartnerTrainerId
 	strh r5, [r0]
 	ldr r0, =sub_8163A8C
@@ -4364,7 +4364,7 @@ _081644E0:
 	strb r0, [r1, 0x1]
 	movs r0, 0xD8
 	lsls r0, 2
-	bl FlagReset
+	bl FlagClear
 	ldr r0, [r6]
 	adds r0, r5
 	ldrh r0, [r0]
@@ -4525,7 +4525,7 @@ _08164660:
 	adds r1, 0xC0
 	strb r0, [r1, 0x1]
 	ldr r0, =0x00000361
-	bl FlagReset
+	bl FlagClear
 	ldr r0, [r6]
 	adds r0, r5
 	ldrh r0, [r0]
@@ -5016,7 +5016,7 @@ _08164B04:
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl box_related_two__2
+	bl ShowFieldMessage
 	b _08164B54
 	.pool
 _08164B28:
@@ -5040,7 +5040,7 @@ _08164B28:
 	lsls r1, 2
 	adds r1, r0
 	ldr r0, [r1]
-	bl box_related_two__2
+	bl ShowFieldMessage
 _08164B54:
 	add sp, 0x8
 	pop {r3-r5}
@@ -5673,7 +5673,7 @@ _0816508C:
 	bl SetMonData
 	ldr r0, [r7]
 	adds r0, r4
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	strb r0, [r5, 0x1]
 _081650D4:
 	adds r5, 0x4
@@ -5857,8 +5857,8 @@ sub_8165244: @ 8165244
 	.pool
 	thumb_func_end sub_8165244
 
-	thumb_func_start sub_8165264
-sub_8165264: @ 8165264
+	thumb_func_start GetEreaderTrainerClassId
+GetEreaderTrainerClassId: @ 8165264
 	ldr r1, =gTrainerClassToNameIndex
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -5869,10 +5869,10 @@ sub_8165264: @ 8165264
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_8165264
+	thumb_func_end GetEreaderTrainerClassId
 
-	thumb_func_start sub_8165284
-sub_8165284: @ 8165284
+	thumb_func_start GetEreaderTrainerName
+GetEreaderTrainerName: @ 8165284
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r2, 0
@@ -5896,7 +5896,7 @@ _08165294:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8165284
+	thumb_func_end GetEreaderTrainerName
 
 	thumb_func_start sub_81652B4
 sub_81652B4: @ 81652B4
@@ -6056,7 +6056,7 @@ _081653E0:
 	bne _081653F8
 	bl sub_80F01B8
 	movs r0, 0x77
-	bl FlagReset
+	bl FlagClear
 _081653F8:
 	pop {r0}
 	bx r0

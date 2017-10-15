@@ -2590,7 +2590,7 @@ ContestEffectFunc_080E6778: @ 80E6778
 	adds r0, r3
 	ldrb r0, [r0, 0x1]
 	lsls r0, 29
-	ldr r1, =gUnknown_02039F2C
+	ldr r1, =gScriptContestCategory
 	lsrs r0, 29
 	ldrh r1, [r1]
 	cmp r0, r1

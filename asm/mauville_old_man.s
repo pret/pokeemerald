@@ -1392,7 +1392,7 @@ _08120BB0:
 	movs r0, 0xFF
 	strb r0, [r7, 0x7]
 	mov r0, sp
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _08120BF8
 	mov r0, sp
@@ -1458,7 +1458,7 @@ _08120C48:
 	muls r0, r5
 	adds r0, 0x5
 	adds r0, r6, r0
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _08120C5E
 	mov r0, r8
@@ -1480,7 +1480,7 @@ _08120C6A:
 	movs r5, 0x3
 _08120C74:
 	adds r0, r6, 0
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _08120C84
 	mov r1, r8
@@ -1569,7 +1569,7 @@ _08120CF2:
 	mov r1, r8
 	strb r0, [r1, 0x7]
 	mov r0, sp
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _08120D1A
 	movs r0, 0x1
@@ -2205,7 +2205,7 @@ sub_8121178: @ 8121178
 	bl ConvertInternationalString
 	mov r0, r8
 	bl sub_8120EC0
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}

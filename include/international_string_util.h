@@ -14,7 +14,8 @@ s32 sub_81DB3D8(const u8 **str, u8* arg1, s32 arg2);
 // sub_81DB52C
 // sub_81DB554
 // sub_81DB5AC
-// sub_81DB5E8
+void TVShowConvertInternationalString(u8 *dest, const u8 *src, u8 language);
+u32 sub_81DB604(const u8 *);
 // sub_81DB620
 
 #endif // GUARD_INTERNATIONAL_STRING_UTIL_H
