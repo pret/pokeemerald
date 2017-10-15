@@ -732,7 +732,7 @@ _080FEE36:
 _080FEE3E:
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8335,7 +8335,7 @@ _08102A9A:
 	str r0, [r6]
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8376,7 +8376,7 @@ sub_8102AE0: @ 8102AE0
 	bne _08102B32
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12777,7 +12777,7 @@ sub_8104E74: @ 8104E74
 	bl sub_80A861C
 	strh r0, [r5, 0x26]
 	ldrb r0, [r4]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -33069,7 +33069,7 @@ _0810F22E:
 	lsrs r4, r0, 24
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -33445,7 +33445,7 @@ sub_810F524: @ 810F524
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -34592,7 +34592,7 @@ _0810FE86:
 _0810FE92:
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -38512,7 +38512,7 @@ sub_8111E78: @ 8111E78
 	adds r5, r0, r1
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r1, 0x26
@@ -38866,7 +38866,7 @@ sub_8112170: @ 8112170
 	adds r4, r0, r1
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r1, 0x26
@@ -41108,7 +41108,7 @@ sub_81133E8: @ 81133E8
 	adds r4, r1, r0
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -41480,7 +41480,7 @@ sub_81136E8: @ 81136E8
 	movs r0, 0x52
 	bl SetGpuReg
 	adds r0, r4, 0
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -41663,7 +41663,7 @@ sub_8113888: @ 8113888
 	bl SetGpuReg
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -42098,7 +42098,7 @@ _08113C1E:
 	strh r0, [r5, 0x18]
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xE]
@@ -42417,7 +42417,7 @@ _08113EBC:
 _08113EF8:
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xE]
@@ -43016,7 +43016,7 @@ sub_81143C0: @ 81143C0
 	mov r10, r0
 	ldr r6, =gAnimBankAttacker
 	ldrb r0, [r6]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -43093,7 +43093,7 @@ sub_8114470: @ 8114470
 	lsrs r6, r0, 24
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -44098,7 +44098,7 @@ _08114D3C:
 	strh r0, [r4, 0x1C]
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1E]
@@ -44291,7 +44291,7 @@ sub_8114EB4: @ 8114EB4
 	strh r4, [r1, 0x26]
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -44444,7 +44444,7 @@ _08115018:
 	strh r0, [r4, 0x1C]
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1E]

@@ -4951,7 +4951,7 @@ _08172DC0:
 _08172DC6:
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5134,9 +5134,9 @@ _08172F4E:
 	lsrs r0, 16
 	cmp r0, r7
 	bne _08172F6E
-	ldr r0, =gUnknown_0852528C
+	ldr r0, =gBattleAnimPicTable + 0x748
 	bl LoadCompressedObjectPicUsingHeap
-	ldr r0, =gUnknown_08525B94
+	ldr r0, =gBattleAnimPaletteTable + 0x748
 	bl LoadCompressedObjectPaletteUsingHeap
 _08172F6E:
 	ldr r5, =sub_8172FEC
@@ -5533,9 +5533,9 @@ sub_81732B0: @ 81732B0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_085253AC
+	ldr r0, =gBattleAnimPicTable + 0x868
 	bl LoadCompressedObjectPicUsingHeap
-	ldr r0, =gUnknown_08525CB4
+	ldr r0, =gBattleAnimPaletteTable + 0x868
 	bl LoadCompressedObjectPaletteUsingHeap
 	ldr r0, =0x0000281d
 	bl IndexOfSpritePaletteTag

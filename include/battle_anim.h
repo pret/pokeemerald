@@ -37,6 +37,24 @@ struct BattleAnimBackground
     void *tilemap;
 };
 
+#define ANIM_ARGS_COUNT 8
+
+extern void (*gAnimScriptCallback)(void);
+extern bool8 gAnimScriptActive;
+extern u8 gAnimVisualTaskCount;
+extern u8 gAnimSoundTaskCount;
+extern struct DisableStruct *gAnimDisableStructPtr;
+extern u32 gAnimMoveDmg;
+extern u16 gAnimMovePower;
+extern u8 gAnimFriendship;
+extern u16 gWeatherMoveAnim;
+extern s16 gBattleAnimArgs[ANIM_ARGS_COUNT];
+extern u8 gAnimMoveTurn;
+extern u8 gAnimBankAttacker;
+extern u8 gAnimBankTarget;
+extern u16 gAnimSpeciesByBanks[BATTLE_BANKS_COUNT];
+extern u8 gUnknown_02038440;
+
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
 void DoBattleAnim(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim);
@@ -49,7 +67,7 @@ bool8 IsContest(void);
 s8 BattleAnimAdjustPanning(s8 pan);
 s8 BattleAnimAdjustPanning2(s8 pan);
 s16 sub_80A52EC(s16 a);
-s16 sub_80A5314(s16 a, s16 b, s16 c);
+s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 
 // battle_anim_80FE840.s
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);

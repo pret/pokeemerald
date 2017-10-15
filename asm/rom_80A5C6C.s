@@ -2063,7 +2063,7 @@ sub_80A6BFC: @ 80A6BFC
 _080A6C30:
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1
@@ -5083,8 +5083,8 @@ _080A835C:
 	bx r1
 	thumb_func_end sub_80A8328
 
-	thumb_func_start GetBankIdentity_permutated
-GetBankIdentity_permutated: @ 80A8364
+	thumb_func_start sub_80A8364
+sub_80A8364: @ 80A8364
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -5109,7 +5109,7 @@ _080A838C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end GetBankIdentity_permutated
+	thumb_func_end sub_80A8364
 
 	thumb_func_start sub_80A8394
 sub_80A8394: @ 80A8394

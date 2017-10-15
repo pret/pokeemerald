@@ -1629,7 +1629,7 @@ _0815ADDE:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r6, 0
@@ -2935,7 +2935,7 @@ _0815B81C:
 	bl SetGpuReg
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3211,7 +3211,7 @@ _0815BA82:
 	bl SetGpuReg
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6123,7 +6123,7 @@ _0815D2B4:
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
 	adds r0, r5, 0
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6218,7 +6218,7 @@ sub_815D398: @ 815D398
 	ldr r1, =gTasks
 	adds r6, r0, r1
 	ldrb r0, [r6, 0x12]
-	bl GetBankIdentity_permutated
+	bl sub_80A8364
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

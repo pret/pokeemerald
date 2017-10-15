@@ -26,9 +26,9 @@ sub_80A9C70: @ 80A9C70
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, =gUnknown_08524F84
+	ldr r0, =gBattleAnimPicTable + 0x440
 	bl LoadCompressedObjectPicUsingHeap
-	ldr r0, =gUnknown_0852588C
+	ldr r0, =gBattleAnimPaletteTable + 0x440
 	bl LoadCompressedObjectPaletteUsingHeap
 	ldr r1, =gTasks
 	mov r2, r8

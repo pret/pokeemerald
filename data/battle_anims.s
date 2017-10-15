@@ -353,9 +353,6 @@ gBattleAnimPicTable:: @ 8524B44
 	obj_tiles 0x08c0a8bc, 0x0200, 0x2747
 	obj_tiles 0x08c0a3ec, 0x1000, 0x2748
 	obj_tiles 0x08c0a980, 0x0180, 0x2749
-
-    .align 2
-gUnknown_08524D14:: @ 8524D14
 	obj_tiles 0x08c0aa2c, 0x0c00, 0x274a
 	obj_tiles 0x08c0aebc, 0x0100, 0x274b
 	obj_tiles 0x08c0af38, 0x0040, 0x274c
@@ -434,9 +431,6 @@ gUnknown_08524D14:: @ 8524D14
 	obj_tiles 0x08c14b78, 0x0100, 0x2795
 	obj_tiles 0x08c14c1c, 0x0200, 0x2796
 	obj_tiles 0x08c1a3a0, 0x0200, 0x2797
-
-    .align 2
-gUnknown_08524F84:: @ 8524F84
 	obj_tiles 0x08c1a540, 0x0020, 0x2798
 	obj_tiles 0x08c1a58c, 0x0a00, 0x2799
 	obj_tiles 0x08c1ab40, 0x0800, 0x279a
@@ -534,9 +528,6 @@ gUnknown_08524F84:: @ 8524F84
 	obj_tiles 0x08c258b8, 0x0800, 0x27f6
 	obj_tiles 0x08c28394, 0x0380, 0x27f7
 	obj_tiles 0x08c27e34, 0x0800, 0x27f8
-
-    .align 2
-gUnknown_0852528C:: @ 852528C
 	obj_tiles 0x08c28564, 0x00c0, 0x27f9
 	obj_tiles 0x08c28610, 0x0800, 0x27fa
 	obj_tiles 0x08c28880, 0x0060, 0x27fb
@@ -573,9 +564,6 @@ gUnknown_0852528C:: @ 852528C
 	obj_tiles 0x08d93b9c, 0x0080, 0x281a
 	obj_tiles 0x08c2407c, 0x0800, 0x281b
 	obj_tiles 0x08d8ea54, 0x0020, 0x281c
-
-    .align 2
-gUnknown_085253AC:: @ 85253AC
 	obj_tiles 0x08d8ef2c, 0x0080, 0x281d
 	obj_tiles 0x08dba378, 0x0400, 0x281e
 	obj_tiles 0x08dba4b8, 0x0080, 0x281f
@@ -657,9 +645,6 @@ gBattleAnimPaletteTable:: @ 852544C
 	obj_pal 0x08c09fd8, 0x2747
 	obj_pal 0x08c0a894, 0x2748
 	obj_pal 0x08c0aa08, 0x2749
-
-    .align 2
-gUnknown_0852561C:: @ 852561C
 	obj_pal 0x08c0ae94, 0x274a
 	obj_pal 0x08c0af1c, 0x274b
 	obj_pal 0x08c0af60, 0x274c
@@ -738,9 +723,6 @@ gUnknown_0852561C:: @ 852561C
 	obj_pal 0x08c14bf4, 0x2795
 	obj_pal 0x08c14bf4, 0x2796
 	obj_pal 0x08c1a478, 0x2797
-
-    .align 2
-gUnknown_0852588C:: @ 852588C
 	obj_pal 0x08c1a564, 0x2798
 	obj_pal 0x08c1a478, 0x2799
 	obj_pal 0x08c1a478, 0x279a
@@ -838,9 +820,6 @@ gUnknown_0852588C:: @ 852588C
 	obj_pal 0x08c25890, 0x27f6
 	obj_pal 0x08c2836c, 0x27f7
 	obj_pal 0x08c2836c, 0x27f8
-
-    .align 2
-gUnknown_08525B94:: @ 8525B94
 	obj_pal 0x08c285e8, 0x27f9
 	obj_pal 0x08c287d0, 0x27fa
 	obj_pal 0x08c288d0, 0x27fb
@@ -877,9 +856,6 @@ gUnknown_08525B94:: @ 8525B94
 	obj_pal 0x08d93bdc, 0x281a
 	obj_pal 0x08d93bf4, 0x281b
 	obj_pal 0x08d93c0c, 0x281c
-
-    .align 2
-gUnknown_08525CB4:: @ 8525CB4
 	obj_pal 0x08d8ef80, 0x281d
 	obj_pal 0x08dba35c, 0x281e
 	obj_pal 0x08dba4a0, 0x281f
@@ -930,105 +906,3 @@ gBattleAnimBackgroundTable:: @ 8525D54
 	.4byte 0x08c25bec, 0x08d91074, 0x08c26958
 	.4byte 0x08c25bec, 0x08d91074, 0x08c26e54
 	.4byte 0x08c25bec, 0x08d91074, 0x08c27324
-
-    .align 2
-sScriptCmdTable:: @ 8525E98
-	.4byte ScriptCmd_loadspritegfx
-	.4byte ScriptCmd_unloadspritegfx
-	.4byte ScriptCmd_createsprite
-	.4byte ScriptCmd_createvisualtask
-	.4byte ScriptCmd_delay
-	.4byte ScriptCmd_waitforvisualfinish
-	.4byte ScriptCmd_hang1
-	.4byte ScriptCmd_hang2
-	.4byte ScriptCmd_end
-	.4byte ScriptCmd_playse
-	.4byte ScriptCmd_monbg
-	.4byte ScriptCmd_clearmonbg
-	.4byte ScriptCmd_setalpha
-	.4byte ScriptCmd_blendoff
-	.4byte ScriptCmd_call
-	.4byte ScriptCmd_return
-	.4byte ScriptCmd_setarg
-	.4byte ScriptCmd_choosetwoturnanim
-	.4byte ScriptCmd_jumpifmoveturn
-	.4byte ScriptCmd_jump
-	.4byte ScriptCmd_fadetobg
-	.4byte ScriptCmd_restorebg
-	.4byte ScriptCmd_waitbgfadeout
-	.4byte ScriptCmd_waitbgfadein
-	.4byte ScriptCmd_changebg
-	.4byte ScriptCmd_playsewithpan
-	.4byte ScriptCmd_setpan
-	.4byte ma1B_8073C2C
-	.4byte ma1C_8073ED0
-	.4byte ma1D_08073FB4
-	.4byte ScriptCmd_setbldcnt
-	.4byte sub_80A57F8
-	.4byte ma20_wait_for_something
-	.4byte ma21_08074164
-	.4byte ScriptCmd_monbg_22
-	.4byte ScriptCmd_clearmonbg_23
-	.4byte sub_80A5944
-	.4byte ScriptCmd_fadetobgfromset
-	.4byte sub_80A5508
-	.4byte sub_80A559C
-	.4byte sub_80A5984
-	.4byte sub_80A59DC
-	.4byte sub_80A5A0C
-	.4byte ma2B_make_side_invisible
-	.4byte ma2C_make_side_visible
-	.4byte sub_80A5AFC
-	.4byte sub_80A5BAC
-	.4byte ma2F_stop_music
-
-    .align 2
-gUnknown_08525F58:: @ 8525F58
-	.byte 0x48, 0x50, 0x00, 0x00, 0xb0, 0x28, 0x00, 0x00
-	.byte 0x30, 0x28, 0x00, 0x00, 0x70, 0x50, 0x00, 0x00
-	.byte 0x20, 0x50, 0x00, 0x00, 0xc8, 0x28, 0x00, 0x00
-	.byte 0x5a, 0x58, 0x00, 0x00, 0x98, 0x20, 0x00, 0x00
-
-    .align 2
-gCastformFrontSpriteCoords:: @ 8525F78
-	.byte 0x44, 0x11, 0x00, 0x00, 0x66, 0x09, 0x00, 0x00
-	.byte 0x46, 0x09, 0x00, 0x00, 0x86, 0x08, 0x00, 0x00
-
-    .align 2
-gUnknown_08525F88:: @ 8525F88
-	.byte 0x0d, 0x0e, 0x0d, 0x0d
-
-    .align 2
-gUnknown_08525F8C:: @ 8525F8C
-	.byte 0x00, 0x00, 0x00, 0x00
-
-    .align 2
-gUnknown_08525F90:: @ 8525F90
-	spr_template 0xd755, 0xd755, gUnknown_0852497C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 0xd756, 0xd756, gUnknown_0852497C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-    .align 2
-gUnknown_08525FC0:: @ 8525FC0
-	obj_tiles gMiscBlank_Gfx, 0x0800, 0xd755
-	obj_tiles gMiscBlank_Gfx, 0x0800, 0xd756
-
-    .align 2
-@ the mother of all baserom includes
-	.incbin "baserom.gba", 0x525fd0, 0x18f60
-
-    .align 2
-gUnknown_0853EF30:: @ 853EF30
-	.byte 0xf0, 0xf0, 0x0c, 0x80, 0xf0, 0x30, 0x0d, 0x84, 0x30, 0xf0, 0x0e, 0x86, 0x30, 0x30, 0x08, 0x88
-
-    .align 2
-gUnknown_0853EF40:: @ 853EF40
-	.4byte 0x00000004, gUnknown_0853EF30
-
-    .align 2
-gUnknown_0853EF48:: @ 853EF48
-	spr_template 0x271a, 0x271a, gUnknown_08524A3C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-    .align 2
-gUnknown_0853EF60:: @ 853EF60
-	spr_template 0x2798, 0x2798, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A9E44
-

@@ -36,7 +36,7 @@ sub_8158B30: @ 8158B30
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x2
-	bl sub_80A5314
+	bl CalculatePanIncrement
 	strh r4, [r6, 0xC]
 	strh r5, [r6, 0xE]
 	lsls r0, 24
@@ -193,7 +193,7 @@ mas_80DCF38: @ 8158C58
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_80A5314
+	bl CalculatePanIncrement
 	ldr r2, =gTasks
 	mov r3, r8
 	lsls r1, r3, 2
@@ -924,7 +924,7 @@ sub_8159278: @ 8159278
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_80A5314
+	bl CalculatePanIncrement
 	ldr r2, =gTasks
 	mov r3, r8
 	lsls r1, r3, 2
