@@ -903,11 +903,21 @@ struct BattleHealthboxInfo
     u8 field_B;
 };
 
+struct BattleBarInfo
+{
+    u8 healthboxSpriteId;
+    u32 maxValue;
+    u32 currentValue;
+    bool32 isDoubleBattle;
+    s32 field_10;
+};
+
 struct BattleSpriteData
 {
     struct BattleSpriteInfo *bankData;
     struct BattleHealthboxInfo *healthBoxesData;
     struct BattleAnimationInfo *animationData;
+    struct BattleBarInfo *battleBars;
 };
 
 extern struct BattleSpriteData *gBattleSpritesDataPtr;

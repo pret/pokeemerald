@@ -4,48 +4,7 @@
 	.section .rodata
 	.align 2, 0
 
-gUnknown_0832C138:: @ 832C138
-	.byte 0x00, 0x40, 0x00, 0xc0, 0x00, 0x04, 0x00, 0x00
 
-	.align 2
-gUnknown_0832C140:: @ 832C140
-	spr_template 0xd6ff, 0xd6ff, gUnknown_0832C138, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-	.align 2
-gUnknown_0832C158:: @ 832C158
-	spr_template 0xd700, 0xd6ff, gUnknown_0832C138, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-	.align 2
-gUnknown_0832C170:: @ 832C170
-	spr_template 0xd701, 0xd6ff, gUnknown_0832C138, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-	.align 2
-gUnknown_0832C188:: @ 832C188
-	spr_template 0xd702, 0xd6ff, gUnknown_0832C138, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-	.align 2
-gUnknown_0832C1A0:: @ 832C1A0
-	spr_template 0xd70b, 0xd6ff, gUnknown_0832C138, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-	.align 2
-gUnknown_0832C1B8:: @ 832C1B8
-	.byte 0x00, 0x40, 0x00, 0x40, 0x00, 0x04, 0x00, 0x00
-
-	.align 2
-gUnknown_0832C1C0:: @ 832C1C0
-	spr_template 0xd704, 0xd704, gUnknown_0832C1B8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80728B4
-
-	.align 2
-gUnknown_0832C1D8:: @ 832C1D8
-	spr_template 0xd705, 0xd704, gUnknown_0832C1B8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80728B4
-
-	.align 2
-gUnknown_0832C1F0:: @ 832C1F0
-	spr_template 0xd706, 0xd704, gUnknown_0832C1B8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80728B4
-
-	.align 2
-gUnknown_0832C208:: @ 832C208
-	spr_template 0xd707, 0xd704, gUnknown_0832C1B8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80728B4
 
 	.align 2
 gUnknown_0832C220:: @ 832C220

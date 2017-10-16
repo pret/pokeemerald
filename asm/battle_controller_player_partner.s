@@ -789,7 +789,7 @@ sub_81BB414: @ 81BB414
 	negs r0, r0
 	str r0, [sp]
 	mov r0, r10
-	bl sub_807294C
+	bl SetBattleBarStruct
 	movs r0, 0x21
 	bl PlaySE
 	ldr r0, =sub_81BB4E4
@@ -5209,7 +5209,7 @@ sub_81BDC10: @ 81BDC10
 	ldrb r1, [r1]
 	str r7, [sp]
 	mov r2, r8
-	bl sub_807294C
+	bl SetBattleBarStruct
 	b _081BDCCA
 	.pool
 _081BDCA0:
@@ -5231,7 +5231,7 @@ _081BDCA0:
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
-	bl sub_807294C
+	bl SetBattleBarStruct
 _081BDCCA:
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank

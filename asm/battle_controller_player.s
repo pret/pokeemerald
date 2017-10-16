@@ -3557,7 +3557,7 @@ sub_8059330: @ 8059330
 	negs r0, r0
 	str r0, [sp]
 	mov r0, r10
-	bl sub_807294C
+	bl SetBattleBarStruct
 	movs r0, 0x21
 	bl PlaySE
 	ldr r0, =sub_8059400
@@ -8992,7 +8992,7 @@ _0805C44A:
 	ldrb r1, [r1]
 	str r7, [sp]
 	mov r2, r8
-	bl sub_807294C
+	bl SetBattleBarStruct
 	b _0805C4F2
 	.pool
 _0805C4B4:
@@ -9016,7 +9016,7 @@ _0805C4B4:
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
-	bl sub_807294C
+	bl SetBattleBarStruct
 	mov r2, r9
 	ldrb r0, [r2]
 	adds r0, r4

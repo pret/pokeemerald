@@ -1801,7 +1801,7 @@ _0805E056:
 	movs r4, 0
 	cmp r4, r5
 	bcs _0805E076
-	ldr r7, =gBanksBySide
+	ldr r7, =gBanksByIdentity
 	ldr r6, =gUnknown_0832C108
 _0805E060:
 	adds r0, r4, r7
@@ -1874,14 +1874,14 @@ _0805E0F0:
 _0805E100:
 	cmp r4, 0x4
 	bne _0805E110
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0]
 	b _0805E198
 	.pool
 _0805E110:
 	cmp r4, 0x5
 	bne _0805E1AC
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0, 0x1]
 	b _0805E198
 	.pool
@@ -1916,28 +1916,28 @@ _0805E150:
 _0805E160:
 	cmp r4, 0x6
 	bne _0805E170
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0]
 	b _0805E198
 	.pool
 _0805E170:
 	cmp r4, 0x7
 	bne _0805E180
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0, 0x1]
 	b _0805E198
 	.pool
 _0805E180:
 	cmp r4, 0x8
 	bne _0805E190
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0, 0x2]
 	b _0805E198
 	.pool
 _0805E190:
 	cmp r5, 0x9
 	bne _0805E1AC
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0, 0x3]
 _0805E198:
 	lsls r0, 3
@@ -2038,7 +2038,7 @@ _0805E252:
 _0805E260:
 	ldrb r0, [r4]
 	bl SetBankHealthboxSpritePos
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]

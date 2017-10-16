@@ -5,803 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8072304
-sub_8072304: @ 8072304
-	movs r0, 0x9
-	bx lr
-	thumb_func_end sub_8072304
-
-	thumb_func_start sub_8072308
-sub_8072308: @ 8072308
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	adds r7, r1, 0
-	lsls r0, 16
-	lsrs r5, r0, 16
-	lsls r2, 24
-	lsrs r2, 24
-	mov r10, r2
-	movs r3, 0
-	movs r2, 0
-_08072324:
-	lsls r0, r3, 24
-	asrs r0, 24
-	mov r3, sp
-	adds r1, r3, r0
-	strb r2, [r1]
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	asrs r0, 24
-	cmp r0, 0x3
-	ble _08072324
-	movs r3, 0x3
-	movs r0, 0x1
-	negs r0, r0
-	mov r9, r0
-	mov r8, sp
-_08072344:
-	lsls r0, r5, 16
-	asrs r6, r0, 16
-	cmp r6, 0
-	ble _08072372
-	lsls r4, r3, 24
-	asrs r4, 24
-	mov r1, sp
-	adds r5, r1, r4
-	adds r0, r6, 0
-	movs r1, 0xA
-	bl __modsi3
-	strb r0, [r5]
-	adds r0, r6, 0
-	movs r1, 0xA
-	bl __divsi3
-	lsls r0, 16
-	lsrs r5, r0, 16
-	subs r4, 0x1
-	lsls r4, 24
-	lsrs r3, r4, 24
-	b _08072344
-_08072372:
-	lsls r1, r3, 24
-	asrs r0, r1, 24
-	cmp r0, r9
-	ble _08072396
-	movs r4, 0xFF
-	movs r3, 0x1
-	negs r3, r3
-_08072380:
-	asrs r2, r1, 24
-	mov r5, sp
-	adds r1, r5, r2
-	ldrb r0, [r1]
-	orrs r0, r4
-	strb r0, [r1]
-	subs r2, 0x1
-	lsls r1, r2, 24
-	asrs r0, r1, 24
-	cmp r0, r3
-	bgt _08072380
-_08072396:
-	mov r1, r8
-	ldrb r0, [r1, 0x3]
-	cmp r0, 0xFF
-	bne _080723A2
-	movs r0, 0
-	strb r0, [r1, 0x3]
-_080723A2:
-	mov r2, r10
-	cmp r2, 0
-	bne _08072432
-	movs r3, 0
-	movs r1, 0
-	movs r6, 0xFC
-	lsls r6, 8
-	movs r5, 0x1E
-	mov r12, r5
-_080723B4:
-	lsls r1, 24
-	asrs r2, r1, 24
-	mov r0, sp
-	adds r5, r0, r2
-	ldrb r0, [r5]
-	mov r8, r1
-	cmp r0, 0xFF
-	bne _080723EA
-	lsls r1, r2, 1
-	adds r1, r7
-	ldrh r2, [r1]
-	adds r0, r6, 0
-	ands r0, r2
-	mov r2, r12
-	orrs r0, r2
-	strh r0, [r1]
-	lsls r3, 24
-	asrs r1, r3, 23
-	adds r1, r7
-	adds r1, 0x40
-	ldrh r2, [r1]
-	adds r0, r6, 0
-	ands r0, r2
-	mov r5, r12
-	orrs r0, r5
-	strh r0, [r1]
-	b _0807241A
-_080723EA:
-	lsls r2, 1
-	adds r2, r7
-	ldrh r0, [r2]
-	adds r1, r6, 0
-	ands r1, r0
-	ldrb r0, [r5]
-	adds r0, 0x14
-	orrs r1, r0
-	strh r1, [r2]
-	lsls r4, r3, 24
-	asrs r3, r4, 24
-	lsls r2, r3, 1
-	adds r2, r7
-	adds r2, 0x40
-	ldrh r0, [r2]
-	adds r1, r6, 0
-	ands r1, r0
-	mov r5, sp
-	adds r0, r5, r3
-	ldrb r0, [r0]
-	adds r0, 0x34
-	orrs r1, r0
-	strh r1, [r2]
-	adds r3, r4, 0
-_0807241A:
-	movs r0, 0x80
-	lsls r0, 17
-	add r0, r8
-	lsrs r1, r0, 24
-	movs r2, 0x80
-	lsls r2, 17
-	adds r0, r3, r2
-	lsrs r3, r0, 24
-	asrs r0, 24
-	cmp r0, 0x3
-	ble _080723B4
-	b _08072496
-_08072432:
-	movs r3, 0
-	movs r4, 0xFC
-	lsls r4, 8
-	movs r6, 0x1E
-_0807243A:
-	lsls r1, r3, 24
-	asrs r2, r1, 24
-	mov r3, sp
-	adds r5, r3, r2
-	ldrb r0, [r5]
-	adds r3, r1, 0
-	cmp r0, 0xFF
-	bne _08072466
-	lsls r1, r2, 1
-	adds r1, r7
-	ldrh r2, [r1]
-	adds r0, r4, 0
-	ands r0, r2
-	orrs r0, r6
-	strh r0, [r1]
-	adds r1, 0x40
-	ldrh r2, [r1]
-	adds r0, r4, 0
-	ands r0, r2
-	orrs r0, r6
-	strh r0, [r1]
-	b _08072488
-_08072466:
-	lsls r2, 1
-	adds r2, r7
-	ldrh r0, [r2]
-	adds r1, r4, 0
-	ands r1, r0
-	ldrb r0, [r5]
-	adds r0, 0x14
-	orrs r1, r0
-	strh r1, [r2]
-	adds r2, 0x40
-	ldrh r0, [r2]
-	adds r1, r4, 0
-	ands r1, r0
-	ldrb r0, [r5]
-	adds r0, 0x34
-	orrs r1, r0
-	strh r1, [r2]
-_08072488:
-	movs r5, 0x80
-	lsls r5, 17
-	adds r0, r3, r5
-	lsrs r3, r0, 24
-	asrs r0, 24
-	cmp r0, 0x3
-	ble _0807243A
-_08072496:
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8072308
-
-	thumb_func_start sub_80724A8
-sub_80724A8: @ 80724A8
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r0, r1, 0
-	adds r5, r2, 0
-	lsls r4, 16
-	lsrs r4, 16
-	movs r1, 0x1E
-	strh r1, [r5, 0x8]
-	lsls r0, 16
-	asrs r0, 16
-	adds r1, r5, 0
-	movs r2, 0
-	bl sub_8072308
-	lsls r4, 16
-	asrs r4, 16
-	adds r5, 0xA
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x1
-	bl sub_8072308
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80724A8
-
-	thumb_func_start CreateBankHealthboxSprites
-CreateBankHealthboxSprites: @ 80724DC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	mov r10, r0
-	movs r0, 0
-	str r0, [sp]
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	bne _080725F0
-	mov r0, r10
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _08072574
-	ldr r4, =gUnknown_0832C140
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r6, r0, 24
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r4, =gSprites
-	lsls r1, r6, 4
-	adds r1, r6
-	lsls r1, 2
-	adds r1, r4
-	ldrb r2, [r1, 0x1]
-	movs r3, 0x3F
-	adds r0, r3, 0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	lsls r2, r7, 4
-	adds r2, r7
-	lsls r2, 2
-	adds r2, r4
-	ldrb r0, [r2, 0x1]
-	ands r3, r0
-	strb r3, [r2, 0x1]
-	ldrh r3, [r2, 0x4]
-	lsls r1, r3, 22
-	lsrs r1, 22
-	adds r1, 0x40
-	ldr r4, =0x000003ff
-	adds r0, r4, 0
-	ands r1, r0
-	ldr r0, =0xfffffc00
-	ands r0, r3
-	orrs r0, r1
-	strh r0, [r2, 0x4]
-	b _080725BA
-	.pool
-_08072574:
-	ldr r4, =gUnknown_0832C170
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r6, r0, 24
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r0, =gSprites
-	lsls r2, r7, 4
-	adds r2, r7
-	lsls r2, 2
-	adds r2, r0
-	ldrh r3, [r2, 0x4]
-	lsls r1, r3, 22
-	lsrs r1, 22
-	adds r1, 0x20
-	ldr r5, =0x000003ff
-	adds r0, r5, 0
-	ands r1, r0
-	ldr r0, =0xfffffc00
-	ands r0, r3
-	orrs r0, r1
-	strh r0, [r2, 0x4]
-	movs r0, 0x2
-	str r0, [sp]
-_080725BA:
-	ldr r2, =gSprites
-	lsls r0, r6, 4
-	adds r0, r6
-	lsls r0, 2
-	adds r0, r2
-	strh r7, [r0, 0x6]
-	lsls r0, r7, 4
-	adds r0, r7
-	lsls r0, 2
-	adds r1, r0, r2
-	strh r6, [r1, 0x38]
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, =sub_8072924
-	str r1, [r0]
-	b _08072718
-	.pool
-_080725F0:
-	mov r0, r10
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _08072694
-	mov r0, r10
-	bl GetBankIdentity
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 25
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	ldr r4, =gUnknown_0832C140
-	adds r0, r4
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r6, r0, 24
-	mov r0, r10
-	bl GetBankIdentity
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 25
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r4
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r4, =gSprites
-	lsls r0, r6, 4
-	adds r0, r6
-	lsls r0, 2
-	adds r0, r4
-	strh r7, [r0, 0x6]
-	lsls r2, r7, 4
-	adds r2, r7
-	lsls r2, 2
-	adds r3, r2, r4
-	strh r6, [r3, 0x38]
-	ldrh r1, [r3, 0x4]
-	mov r8, r1
-	mov r5, r8
-	lsls r1, r5, 22
-	lsrs r1, 22
-	adds r1, 0x20
-	ldr r5, =0x000003ff
-	adds r0, r5, 0
-	ands r1, r0
-	ldr r0, =0xfffffc00
-	mov r5, r8
-	ands r0, r5
-	orrs r0, r1
-	strh r0, [r3, 0x4]
-	adds r4, 0x1C
-	adds r2, r4
-	ldr r0, =sub_8072924
-	str r0, [r2]
-	movs r0, 0x1
-	b _08072716
-	.pool
-_08072694:
-	mov r0, r10
-	bl GetBankIdentity
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 25
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	ldr r4, =gUnknown_0832C170
-	adds r0, r4
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r6, r0, 24
-	mov r0, r10
-	bl GetBankIdentity
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 25
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r4
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r4, =gSprites
-	lsls r0, r6, 4
-	adds r0, r6
-	lsls r0, 2
-	adds r0, r4
-	strh r7, [r0, 0x6]
-	lsls r2, r7, 4
-	adds r2, r7
-	lsls r2, 2
-	adds r3, r2, r4
-	strh r6, [r3, 0x38]
-	ldrh r1, [r3, 0x4]
-	mov r8, r1
-	mov r5, r8
-	lsls r1, r5, 22
-	lsrs r1, 22
-	adds r1, 0x20
-	ldr r5, =0x000003ff
-	adds r0, r5, 0
-	ands r1, r0
-	ldr r0, =0xfffffc00
-	mov r5, r8
-	ands r0, r5
-	orrs r0, r1
-	strh r0, [r3, 0x4]
-	adds r4, 0x1C
-	adds r2, r4
-	ldr r0, =sub_8072924
-	str r0, [r2]
-	movs r0, 0x2
-_08072716:
-	str r0, [sp]
-_08072718:
-	ldr r0, =gBanksBySide
-	add r0, r10
-	ldrb r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	ldr r1, =gUnknown_0832C1C0
-	adds r0, r1
-	movs r1, 0x8C
-	movs r2, 0x3C
-	movs r3, 0
-	bl CreateSpriteAtEnd
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r4, r5, 4
-	adds r4, r5
-	lsls r4, 2
-	ldr r1, =gSprites
-	mov r8, r1
-	add r4, r8
-	mov r0, r10
-	bl GetBankSide
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 21
-	ldr r0, =gUnknown_0832C28C
-	adds r1, r0
-	adds r0, r4, 0
-	bl SetSubspriteTables
-	adds r2, r4, 0
-	adds r2, 0x42
-	ldrb r1, [r2]
-	movs r0, 0x3F
-	ands r0, r1
-	movs r1, 0x80
-	orrs r0, r1
-	strb r0, [r2]
-	ldrb r1, [r4, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r1
-	movs r2, 0x4
-	mov r9, r2
-	mov r1, r9
-	orrs r0, r1
-	strb r0, [r4, 0x5]
-	movs r0, 0x1
-	bl sub_80728A4
-	ldrh r1, [r4, 0x4]
-	lsls r1, 22
-	lsrs r1, 17
-	ldr r2, =0x06010000
-	adds r1, r2
-	ldr r2, =0x04000010
-	bl CpuSet
-	lsls r0, r6, 4
-	adds r0, r6
-	lsls r0, 2
-	add r0, r8
-	strh r5, [r0, 0x38]
-	mov r2, r10
-	strh r2, [r0, 0x3A]
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	mov r5, r9
-	orrs r1, r5
-	strb r1, [r0]
-	lsls r0, r7, 4
-	adds r0, r7
-	lsls r0, 2
-	add r0, r8
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r5
-	strb r1, [r0]
-	strh r6, [r4, 0x38]
-	mov r0, sp
-	ldrh r0, [r0]
-	strh r0, [r4, 0x3A]
-	adds r4, 0x3E
-	ldrb r0, [r4]
-	orrs r0, r5
-	strb r0, [r4]
-	adds r0, r6, 0
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end CreateBankHealthboxSprites
-
-	thumb_func_start CreateSafariPlayerHealthboxSprites
-CreateSafariPlayerHealthboxSprites: @ 8072804
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	ldr r4, =gUnknown_0832C1A0
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSprite
-	adds r6, r0, 0
-	lsls r6, 24
-	lsrs r6, 24
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gSprites
-	mov r9, r1
-	lsls r4, r6, 4
-	adds r4, r6
-	lsls r4, 2
-	add r4, r9
-	ldrb r3, [r4, 0x1]
-	movs r2, 0x3F
-	adds r1, r2, 0
-	ands r1, r3
-	strb r1, [r4, 0x1]
-	lsls r3, r0, 4
-	adds r3, r0
-	lsls r3, 2
-	mov r7, r9
-	adds r5, r3, r7
-	ldrb r1, [r5, 0x1]
-	ands r2, r1
-	strb r2, [r5, 0x1]
-	ldrh r1, [r5, 0x4]
-	mov r8, r1
-	mov r7, r8
-	lsls r2, r7, 22
-	lsrs r2, 22
-	adds r2, 0x40
-	ldr r7, =0x000003ff
-	adds r1, r7, 0
-	ands r2, r1
-	ldr r1, =0xfffffc00
-	mov r7, r8
-	ands r1, r7
-	orrs r1, r2
-	strh r1, [r5, 0x4]
-	strh r0, [r4, 0x6]
-	strh r6, [r5, 0x38]
-	movs r0, 0x1C
-	add r9, r0
-	add r3, r9
-	ldr r0, =sub_8072924
-	str r0, [r3]
-	adds r0, r6, 0
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end CreateSafariPlayerHealthboxSprites
-
-	thumb_func_start sub_80728A4
-sub_80728A4: @ 80728A4
-	lsls r0, 24
-	lsrs r0, 19
-	ldr r1, =gUnknown_08C11BDC
-	adds r0, r1
-	bx lr
-	.pool
-	thumb_func_end sub_80728A4
-
-	thumb_func_start sub_80728B4
-sub_80728B4: @ 80728B4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x38]
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r1, 0x3A
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x1
-	beq _080728E4
-	cmp r0, 0x1
-	bgt _080728F8
-	cmp r0, 0
-	bne _080728F8
-	ldr r2, =gSprites
-	lsls r3, r5, 4
-	adds r1, r3, r5
-	lsls r1, 2
-	adds r1, r2
-	ldrh r0, [r1, 0x20]
-	adds r0, 0x10
-	b _08072906
-	.pool
-_080728E4:
-	ldr r2, =gSprites
-	lsls r3, r5, 4
-	adds r1, r3, r5
-	lsls r1, 2
-	adds r1, r2
-	ldrh r0, [r1, 0x20]
-	adds r0, 0x10
-	b _08072906
-	.pool
-_080728F8:
-	ldr r2, =gSprites
-	lsls r3, r5, 4
-	adds r1, r3, r5
-	lsls r1, 2
-	adds r1, r2
-	ldrh r0, [r1, 0x20]
-	adds r0, 0x8
-_08072906:
-	strh r0, [r4, 0x20]
-	ldrh r0, [r1, 0x22]
-	strh r0, [r4, 0x22]
-	adds r0, r3, r5
-	lsls r0, 2
-	adds r0, r2
-	ldrh r1, [r0, 0x24]
-	strh r1, [r4, 0x24]
-	ldrh r0, [r0, 0x26]
-	strh r0, [r4, 0x26]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80728B4
-
-	thumb_func_start sub_8072924
-sub_8072924: @ 8072924
-	ldrh r1, [r0, 0x38]
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r3, =gSprites
-	lsls r2, r1, 4
-	adds r2, r1
-	lsls r2, 2
-	adds r2, r3
-	ldrh r1, [r2, 0x20]
-	adds r1, 0x40
-	strh r1, [r0, 0x20]
-	ldrh r1, [r2, 0x22]
-	strh r1, [r0, 0x22]
-	ldrh r1, [r2, 0x24]
-	strh r1, [r0, 0x24]
-	ldrh r1, [r2, 0x26]
-	strh r1, [r0, 0x26]
-	bx lr
-	.pool
-	thumb_func_end sub_8072924
-
-	thumb_func_start sub_807294C
-sub_807294C: @ 807294C
-	push {r4-r7,lr}
-	ldr r7, [sp, 0x14]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r6, =gBattleSpritesDataPtr
-	ldr r4, [r6]
-	ldr r5, [r4, 0xC]
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 2
-	adds r5, r4, r5
-	strb r1, [r5]
-	ldr r0, [r6]
-	ldr r0, [r0, 0xC]
-	adds r4, r0
-	str r2, [r4, 0x4]
-	str r3, [r4, 0x8]
-	str r7, [r4, 0xC]
-	ldr r0, =0xffff8000
-	str r0, [r4, 0x10]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_807294C
-
 	thumb_func_start SetHealthboxSpriteInvisible
 SetHealthboxSpriteInvisible: @ 8072984
 	push {r4,lr}
@@ -1448,7 +651,7 @@ _08072E5E:
 	ldr r0, [sp, 0x28]
 	bl sub_807512C
 	movs r0, 0x74
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	ldrh r1, [r7, 0x4]
 	lsls r1, 22
 	lsrs r1, 17
@@ -1647,7 +850,7 @@ _08073084:
 	cmp r0, 0
 	bne _080730B8
 	movs r0, 0x74
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	ldr r2, =gSprites
 	mov r3, r9
 	lsls r1, r3, 4
@@ -1778,7 +981,7 @@ _080731A4:
 _080731A8:
 	movs r0, 0x2B
 _080731AA:
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	lsls r1, r5, 6
 	adds r1, r6, r1
 	ldr r2, =0x04000008
@@ -2109,7 +1312,7 @@ _08073468:
 	movs r2, 0x5
 	bl UpdateHealthboxAttribute
 	movs r0, 0x75
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	ldrb r2, [r6]
 	lsls r1, r2, 4
 	adds r1, r2
@@ -3932,7 +3135,7 @@ sub_8074310: @ 8074310
 	cmp r7, 0
 	beq _080743C4
 	movs r0, 0x46
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -4047,7 +3250,7 @@ _08074484:
 	bl sub_80746A8
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r0, 0x2
 	b _080745B8
@@ -4062,7 +3265,7 @@ _080744AC:
 	bl sub_80746A8
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r0, 0
 	b _080745B8
@@ -4076,7 +3279,7 @@ _080744CA:
 	bl sub_80746A8
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r0, 0x4
 	b _080745B8
@@ -4090,7 +3293,7 @@ _080744E8:
 	bl sub_80746A8
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r0, 0x3
 	b _080745B8
@@ -4104,13 +3307,13 @@ _08074506:
 	bl sub_80746A8
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r0, 0x1
 	b _080745B8
 _08074524:
 	movs r0, 0x27
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	adds r6, r0, 0
 	movs r4, 0
 	mov r2, r9
@@ -4150,7 +3353,7 @@ _08074542:
 	cmp r0, 0
 	bne _08074598
 	movs r0, 0x1
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	ldr r2, =gSprites
 	mov r3, r10
 	lsls r1, r3, 4
@@ -4233,7 +3436,7 @@ _08074626:
 	cmp r0, 0
 	bne _08074672
 	movs r0, 0
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	mov r3, r10
 	lsls r4, r3, 4
 	add r4, r10
@@ -4248,7 +3451,7 @@ _08074626:
 	adds r2, r5, 0
 	bl CpuSet
 	movs r0, 0x41
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	ldrh r1, [r4, 0x4]
 	lsls r1, 22
 	lsrs r1, 17
@@ -4574,7 +3777,7 @@ _08074914:
 	mov r0, r9
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_807294C
+	bl SetBattleBarStruct
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0
@@ -4636,7 +3839,7 @@ _0807495E:
 	str r0, [sp]
 	mov r0, r9
 	adds r1, r6, 0
-	bl sub_807294C
+	bl SetBattleBarStruct
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0x1
@@ -4710,7 +3913,7 @@ _08074A3C:
 	mov r0, r9
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_807294C
+	bl SetBattleBarStruct
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0
@@ -4941,7 +4144,7 @@ _08074BFA:
 	cmp r5, 0x1
 	bhi _08074C5C
 	mov r0, r9
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	mov r1, sp
 	adds r1, r5
 	adds r1, 0x8
@@ -4966,7 +4169,7 @@ _08074BFA:
 	.pool
 _08074C5C:
 	mov r0, r9
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	mov r1, sp
 	adds r1, r5
 	adds r1, 0x8
@@ -5048,7 +4251,7 @@ _08074D02:
 	cmp r5, 0x3
 	bhi _08074D5C
 	movs r0, 0xC
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	mov r1, sp
 	adds r1, r5
 	adds r1, 0x8
@@ -5079,7 +4282,7 @@ _08074D02:
 	.pool
 _08074D5C:
 	movs r0, 0xC
-	bl sub_80728A4
+	bl GetHealthboxElementGfxPtr
 	mov r1, sp
 	adds r1, r5
 	adds r1, 0x8

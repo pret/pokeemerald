@@ -4910,7 +4910,7 @@ sub_8188FD0: @ 8188FD0
 	ldrb r1, [r1]
 	str r7, [sp]
 	mov r2, r8
-	bl sub_807294C
+	bl SetBattleBarStruct
 	b _0818908A
 	.pool
 _08189060:
@@ -4932,7 +4932,7 @@ _08189060:
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
-	bl sub_807294C
+	bl SetBattleBarStruct
 _0818908A:
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank

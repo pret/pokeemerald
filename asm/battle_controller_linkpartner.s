@@ -4480,7 +4480,7 @@ sub_814D63C: @ 814D63C
 	ldrb r1, [r1]
 	str r7, [sp]
 	mov r2, r8
-	bl sub_807294C
+	bl SetBattleBarStruct
 	b _0814D6F6
 	.pool
 _0814D6CC:
@@ -4502,7 +4502,7 @@ _0814D6CC:
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
-	bl sub_807294C
+	bl SetBattleBarStruct
 _0814D6F6:
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank

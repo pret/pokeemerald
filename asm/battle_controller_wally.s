@@ -3883,7 +3883,7 @@ sub_816A5D4: @ 816A5D4
 	ldrb r1, [r1]
 	str r7, [sp]
 	mov r2, r8
-	bl sub_807294C
+	bl SetBattleBarStruct
 	b _0816A69E
 	.pool
 _0816A664:
@@ -3905,7 +3905,7 @@ _0816A664:
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
-	bl sub_807294C
+	bl SetBattleBarStruct
 	mov r1, r9
 	ldrb r0, [r1]
 	adds r0, r4

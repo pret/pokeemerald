@@ -282,7 +282,7 @@ gNoOfAllBanks: @ 202406C
 gBattlePartyID: @ 202406E
 	.space 0x8
 
-gBanksBySide: @ 2024076
+gBanksByIdentity: @ 2024076
 	.space 0x4
 
 gActionsByTurnOrder: @ 202407A
