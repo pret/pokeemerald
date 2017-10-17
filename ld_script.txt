@@ -263,6 +263,7 @@ SECTIONS {
         asm/unk_sprite_file.o(.text);
         asm/unk_transition.o(.text);
         asm/unk_transition_2.o(.text);
+        src/international_string_util.o(.text);
         asm/international_string_util.o(.text);
     } =0
 
