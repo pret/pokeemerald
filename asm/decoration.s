@@ -5,52 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8126A58
-sub_8126A58: @ 8126A58
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, =gUnknown_0203A188
-	adds r4, r0
-	ldrb r0, [r4]
-	movs r1, 0
-	bl sub_8198070
-	ldrb r0, [r4]
-	bl ClearWindowTilemap
-	ldrb r0, [r4]
-	bl RemoveWindow
-	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8126A58
-
-	thumb_func_start sub_8126A88
-sub_8126A88: @ 8126A88
-	push {r4,lr}
-	movs r0, 0
-	bl sub_81269D4
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r2, =gUnknown_085A6B48
-	adds r0, r4, 0
-	movs r1, 0x4
-	bl PrintMenuTable
-	ldr r0, =gUnknown_0203A150
-	ldrb r2, [r0]
-	adds r0, r4, 0
-	movs r1, 0x4
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8126A88
-
 	thumb_func_start sub_8126ABC
 sub_8126ABC: @ 8126ABC
 	push {lr}

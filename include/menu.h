@@ -21,5 +21,7 @@ void SetWindowTemplateFields(struct WindowTemplate* template, u8 priority, u8 ti
 void SetWindowBorderStyle(u8 windowId, bool8 copyToVram, u16 tileStart, u8 palette);
 void sub_8198A50(struct WindowTemplate*, u8, u8, u8, u8, u8, u8, u16); // returns something but it isn't used, fix when menu.s is decomp'd
 void schedule_bg_copy_tilemap_to_vram(u8 bgNum);
+void PrintMenuTable(u8 idx, u8 nstrs, const u8 *const *strs);
+void InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 idx, u8 nstrs,u8);
 
 #endif // GUARD_MENU_H

@@ -11,6 +11,7 @@
 // Static RAM declarations
 
 extern EWRAM_DATA u8 *gUnknown_0203A14C;
+extern EWRAM_DATA u8 gUnknown_0203A150;
 extern EWRAM_DATA u8 gUnknown_0203A173;
 extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
 extern EWRAM_DATA u8 gUnknown_0203A188[4];
@@ -65,4 +66,21 @@ u8 sub_81269D4(u8 idx)
     SetWindowBorderStyle(*winidx, 0, 0x214, 0xe);
     schedule_bg_copy_tilemap_to_vram(0);
     return *winidx;
+}
+
+void sub_8126A58(u8 idx)
+{
+    sub_8198070(gUnknown_0203A188[idx], FALSE);
+    ClearWindowTilemap(gUnknown_0203A188[idx]);
+    RemoveWindow(gUnknown_0203A188[idx]);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void sub_8126A88(void)
+{
+    u8 idx;
+
+    idx = sub_81269D4(0);
+    PrintMenuTable(idx, 4, gUnknown_085A6B48);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(idx, 4, gUnknown_0203A150);
 }
