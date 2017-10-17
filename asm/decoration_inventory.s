@@ -6,34 +6,6 @@
 	.text
 
 
-	thumb_func_start DecorationCheckSpace
-DecorationCheckSpace: @ 81619A8
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0
-	beq _081619D4
-	ldr r1, =gDecorations
-	lsls r0, 5
-	adds r0, r1
-	ldrb r0, [r0, 0x13]
-	bl sub_81618D0
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _081619D4
-	movs r0, 0x1
-	b _081619D6
-	.pool
-_081619D4:
-	movs r0, 0
-_081619D6:
-	pop {r1}
-	bx r1
-	thumb_func_end DecorationCheckSpace
-
 	thumb_func_start DecorationRemove
 DecorationRemove: @ 81619DC
 	push {r4-r6,lr}

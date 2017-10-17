@@ -102,3 +102,16 @@ bool8 DecorationAdd(u8 decor)
     gDecorationInventories[category].items[idx] = decor;
     return TRUE;
 }
+
+bool8 DecorationCheckSpace(u8 decor)
+{
+    if (decor == DECOR_NONE)
+    {
+        return FALSE;
+    }
+    if (sub_81618D0(gDecorations[decor].category) == -1)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
