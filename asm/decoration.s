@@ -5,66 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81269D4
-sub_81269D4: @ 81269D4
-	push {r4,lr}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldr r0, =gUnknown_0203A188
-	adds r4, r1, r0
-	cmp r1, 0
-	bne _08126A28
-	ldr r0, =gUnknown_085A6B90
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [sp]
-	str r1, [sp, 0x4]
-	ldr r0, =gUnknown_085A6B48
-	movs r1, 0x4
-	bl GetMaxWidthInMenuTable
-	lsls r0, 24
-	ldr r2, =0x00ffffff
-	ldr r1, [sp]
-	ands r1, r2
-	orrs r1, r0
-	str r1, [sp]
-	lsrs r0, r1, 24
-	cmp r0, 0x12
-	bls _08126A14
-	adds r0, r2, 0
-	ands r0, r1
-	movs r1, 0x90
-	lsls r1, 21
-	orrs r0, r1
-	str r0, [sp]
-_08126A14:
-	mov r0, sp
-	b _08126A2E
-	.pool
-_08126A28:
-	lsls r0, r1, 3
-	ldr r1, =gUnknown_085A6B90
-	adds r0, r1
-_08126A2E:
-	bl AddWindow
-	strb r0, [r4]
-	ldrb r0, [r4]
-	movs r2, 0x85
-	lsls r2, 2
-	movs r1, 0
-	movs r3, 0xE
-	bl SetWindowBorderStyle
-	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
-	ldrb r0, [r4]
-	add sp, 0x8
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81269D4
-
 	thumb_func_start sub_8126A58
 sub_8126A58: @ 8126A58
 	push {r4,lr}
