@@ -5,37 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8126C08
-sub_8126C08: @ 8126C08
-	push {lr}
-	sub sp, 0x10
-	movs r0, 0
-	movs r1, 0x11
-	bl FillWindowPixelBuffer
-	ldr r1, =gUnknown_085A6B68
-	ldr r0, =gUnknown_0203A150
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r2, [r0]
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x2
-	str r0, [sp, 0x4]
-	movs r0, 0x1
-	str r0, [sp, 0x8]
-	movs r0, 0x3
-	str r0, [sp, 0xC]
-	movs r0, 0
-	movs r1, 0x1
-	movs r3, 0
-	bl AddTextPrinterParametrized
-	add sp, 0x10
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8126C08
-
 	thumb_func_start sub_8126C48
 sub_8126C48: @ 8126C48
 	push {r4,r5,lr}

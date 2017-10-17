@@ -5,14 +5,11 @@
 
 struct MenuAction
 {
-   const u8 *text;
-   u8 (*func)();
-};
-
-struct MenuAction2
-{
     const u8 *text;
-    void (*func)(u8);
+    union {
+        void (*void_u8)(u8);
+        u8 (*u8_void)(void);
+    } func;
 };
 
 void box_print(u8, u8, u8, u8, const void *, s8, const u8 *);

@@ -6,6 +6,7 @@
 #include "task.h"
 #include "palette.h"
 #include "songs.h"
+#include "new_menu_helpers.h"
 #include "sound.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
@@ -29,7 +30,8 @@ void sub_8126D6C(u8 taskId);
 // .rodata
 
 extern const struct WindowTemplate gUnknown_085A6B90[4];
-extern const struct MenuAction2 gUnknown_085A6B48[];
+extern const struct MenuAction gUnknown_085A6B48[];
+extern const u8 *gUnknown_085A6B68[];
 
 // .text
 
@@ -60,7 +62,7 @@ u8 sub_81269D4(u8 idx)
     if (idx == 0)
     {
         template = gUnknown_085A6B90[0];
-        template.width = GetMaxWidthInMenuTable((const struct MenuAction *)gUnknown_085A6B48, 4);
+        template.width = GetMaxWidthInMenuTable(gUnknown_085A6B48, 4);
         if (template.width > 18)
         {
             template.width = 18;
@@ -89,7 +91,7 @@ void sub_8126A88(void)
     u8 idx;
 
     idx = sub_81269D4(0);
-    PrintMenuTable(idx, 4, (const struct MenuAction *)gUnknown_085A6B48);
+    PrintMenuTable(idx, 4, gUnknown_085A6B48);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(idx, 4, gUnknown_0203A150);
 }
 
@@ -132,7 +134,7 @@ void sub_8126B80(u8 taskId)
         {
             default:
                 PlaySE(SE_SELECT);
-                gUnknown_085A6B48[gUnknown_0203A150].func(taskId);
+                gUnknown_085A6B48[gUnknown_0203A150].func.void_u8(taskId);
                 break;
             case -2:
                 gUnknown_0203A150 = GetMenuCursorPos();
@@ -147,4 +149,10 @@ void sub_8126B80(u8 taskId)
                 break;
         }
     }
+}
+
+void sub_8126C08(void)
+{
+    FillWindowPixelBuffer(0, 0x11);
+    AddTextPrinterParametrized(0, 1, gUnknown_085A6B68[gUnknown_0203A150], 0, 0, 2, 1, 3);
 }
