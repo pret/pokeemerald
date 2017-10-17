@@ -2190,7 +2190,7 @@ _08127BF0:
 	ldr r4, [sp, 0x10]
 	lsls r4, 5
 	str r4, [sp, 0x18]
-	ldr r0, =gUnknown_085A5C24
+	ldr r0, =gDecorations + 0x1c
 	adds r0, r4, r0
 	str r0, [sp, 0x1C]
 	ldr r0, =gDecorations

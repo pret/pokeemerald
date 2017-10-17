@@ -4,11 +4,16 @@
 	.section .rodata
 	.align 2, 0
 
-gDecorations:: @ 85A5C08
-	.incbin "baserom.gba", 0x5a5c08, 0x1c
+gDecorationTilemaps::
+	.include "data/decoration_tiles.inc"
 
-gUnknown_085A5C24:: @ 85A5C24
-	.incbin "baserom.gba", 0x5a5c24, 0xf04
+gDecorationDescriptions::
+	.include "data/text/decoration_descriptions.inc"
+
+	.align 2, 0
+
+gDecorations:: @ 85A5C08
+	.include "data/decorations.inc"
 
 gUnknown_085A6B28:: @ 85A6B28
 	.incbin "baserom.gba", 0x5a6b28, 0x20
