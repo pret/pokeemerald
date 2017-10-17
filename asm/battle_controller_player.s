@@ -3278,7 +3278,7 @@ bx_t1_healthbar_update: @ 8059130
 	adds r0, r6
 	ldrb r0, [r0]
 	movs r2, 0
-	bl heathbar_draw_hp
+	bl UpdateHpTextInHealthbox
 	b _08059192
 	.pool
 _08059178:
@@ -9023,7 +9023,7 @@ _0805C4B4:
 	ldrb r0, [r0]
 	movs r1, 0
 	movs r2, 0
-	bl heathbar_draw_hp
+	bl UpdateHpTextInHealthbox
 _0805C4F2:
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank

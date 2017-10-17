@@ -931,6 +931,8 @@ struct MonSpritesGfx
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
     void* sprites[4];
     struct SpriteTemplate templates[4];
+    u8 field_74[0x100];
+    u8 *fontPixels;
 };
 
 extern struct BattleSpritesGfx* gMonSpritesGfx;

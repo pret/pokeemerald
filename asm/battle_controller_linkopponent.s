@@ -985,7 +985,7 @@ sub_8064BC0: @ 8064BC0
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r2, 0
-	bl heathbar_draw_hp
+	bl UpdateHpTextInHealthbox
 	b _08064C0C
 	.pool
 _08064C08:

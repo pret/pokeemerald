@@ -129,7 +129,7 @@ move_something: @ 80A3A48
 	bne _080A3AE8
 	bl sub_80A8278
 	movs r0, 0
-	bl sub_8072A88
+	bl UpdateOamPriorityInAllHealthboxes
 	movs r4, 0
 	mov r0, r8
 	lsls r0, 2
@@ -852,7 +852,7 @@ _080A406E:
 	bne _080A409C
 	bl sub_80A8278
 	movs r0, 0x1
-	bl sub_8072A88
+	bl UpdateOamPriorityInAllHealthboxes
 _080A409C:
 	ldr r0, =gAnimScriptActive
 	mov r1, r8

@@ -3,6 +3,9 @@
 #include "pokemon.h"
 #include "battle_interface.h"
 #include "sprite.h"
+#include "window.h"
+#include "string_util.h"
+#include "text.h"
 
 extern bool8 IsDoubleBattle(void);
 extern u8 gBanksByIdentity[BATTLE_BANKS_COUNT];
@@ -11,6 +14,12 @@ extern u8 gBanksByIdentity[BATTLE_BANKS_COUNT];
 void sub_8072924(struct Sprite *sprite);
 void sub_80728B4(struct Sprite *sprite);
 const u32 *GetHealthboxElementGfxPtr(u8 elementId);
+u32 AddTextPrinterAndCreateWindowOnHealthbox(u8 *str, u32 x, u32 y, u32 arg3, u32 *windowId);
+void sub_8075198(void *objVram, u32 windowTileData, u32 arg2);
+void RemoveWindow_(u32 windowId);
+void sub_8075170(void *dest, u32 arg1, u32 arg2);
+void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
+void sub_807513C(void *dest, u32 arg1, u32 arg2);
 
 // const rom data
 const struct OamData gUnknown_0832C138 =
@@ -143,6 +152,9 @@ static const struct SpriteTemplate gUnknown_0832C1C0[4] =
         .callback = sub_80728B4
     }
 };
+
+extern const u8 gUnknown_0832C3C4[0x14];
+extern const u8 gUnknown_0832C3D8[0x14];
 
 u8 sub_8072304(void)
 {
@@ -612,4 +624,301 @@ void SetBattleBarStruct(u8 bank, u8 healthboxSpriteId, u32 maxVal, u32 currVal, 
     gBattleSpritesDataPtr->battleBars[bank].currentValue = currVal;
     gBattleSpritesDataPtr->battleBars[bank].isDoubleBattle = isDoubleBattle;
     gBattleSpritesDataPtr->battleBars[bank].field_10 = -32768;
+}
+
+void SetHealthboxSpriteInvisible(u8 healthboxSpriteId)
+{
+    gSprites[healthboxSpriteId].invisible = 1;
+    gSprites[gSprites[healthboxSpriteId].data5].invisible = 1;
+    gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = 1;
+}
+
+void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
+{
+    gSprites[healthboxSpriteId].invisible = 0;
+    gSprites[gSprites[healthboxSpriteId].data5].invisible = 0;
+    gSprites[gSprites[healthboxSpriteId].oam.affineParam].invisible = 0;
+}
+
+static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
+{
+    gSprites[spriteId].pos1.x = x;
+    gSprites[spriteId].pos1.y = y;
+}
+
+void DestoryHealthboxSprite(u8 healthboxSpriteId)
+{
+    DestroySprite(&gSprites[gSprites[healthboxSpriteId].oam.affineParam]);
+    DestroySprite(&gSprites[gSprites[healthboxSpriteId].data5]);
+    DestroySprite(&gSprites[healthboxSpriteId]);
+}
+
+void nullsub_30(u8 healthboxSpriteId, bool8 isDoubleBattleBankOnly)
+{
+
+}
+
+extern u8 gNoOfAllBanks;
+extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
+
+void UpdateOamPriorityInAllHealthboxes(u8 priority)
+{
+    s32 i;
+
+    for (i = 0; i < gNoOfAllBanks; i++)
+    {
+        u8 healthboxSpriteId_1 = gHealthBoxesIds[i];
+        u8 healthboxSpriteId_2 = gSprites[gHealthBoxesIds[i]].oam.affineParam;
+        u8 healthboxSpriteId_3 = gSprites[gHealthBoxesIds[i]].data5;
+
+        gSprites[healthboxSpriteId_1].oam.priority = priority;
+        gSprites[healthboxSpriteId_2].oam.priority = priority;
+        gSprites[healthboxSpriteId_3].oam.priority = priority;
+    }
+}
+
+void SetBankHealthboxSpritePos(u8 bank)
+{
+    s16 x = 0, y = 0;
+
+    if (!IsDoubleBattle())
+    {
+        if (GetBankSide(bank) != SIDE_PLAYER)
+            x = 44, y = 30;
+        else
+            x = 158, y = 88;
+    }
+    else
+    {
+        switch (GetBankIdentity(bank))
+        {
+        case IDENTITY_PLAYER_MON1:
+            x = 159, y = 76;
+            break;
+        case IDENTITY_PLAYER_MON2:
+            x = 171, y = 101;
+            break;
+        case IDENTITY_OPPONENT_MON1:
+            x = 44, y = 19;
+            break;
+        case IDENTITY_OPPONENT_MON2:
+            x = 32, y = 44;
+            break;
+        }
+    }
+
+    UpdateSpritePos(gHealthBoxesIds[bank], x, y);
+}
+
+void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
+{
+    u32 windowId, windowTileData, spriteTileNum;
+    u8 text[16];
+    u32 xPos, var1;
+    void *objVram;
+
+    text[0] = 0xF9;
+    text[1] = 5;
+
+    xPos = (u32) ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+    // Alright, that part was unmatchable. It's basically doing:
+    // xPos = 5 * (3 - (u32)(&text[2]));
+    xPos--;
+    xPos--;
+    xPos -= ((u32)(text));
+    var1 = (3 - xPos);
+    xPos = 4 * var1;
+    xPos += var1;
+
+    windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, xPos, 3, 2, &windowId);
+    spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * 32;
+
+    if (GetBankSide(gSprites[healthboxSpriteId].data6) == SIDE_PLAYER)
+    {
+        objVram = (void*)(OBJ_VRAM0);
+        if (!IsDoubleBattle())
+            objVram += spriteTileNum + 0x820;
+        else
+            objVram += spriteTileNum + 0x420;
+    }
+    else
+    {
+        objVram = (void*)(OBJ_VRAM0);
+        objVram += spriteTileNum + 0x400;
+    }
+    sub_8075198(objVram, windowTileData, 3);
+    RemoveWindow_(windowId);
+}
+
+void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
+{
+    u32 windowId, windowTileData, spriteTileNum;
+    u8 text[32];
+    void *objVram;
+
+    if (GetBankSide(gSprites[healthboxSpriteId].data6) == SIDE_PLAYER && !IsDoubleBattle())
+    {
+        spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * 32;
+        if (maxOrCurrent) // singles, max
+        {
+            ConvertIntToDecimalStringN(text, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 0, 5, 2, &windowId);
+            objVram = (void*)(OBJ_VRAM0);
+            objVram += spriteTileNum + 0xB40;
+            sub_8075170(objVram, windowTileData, 2);
+            RemoveWindow_(windowId);
+        }
+        else // singles, current
+        {
+            ConvertIntToDecimalStringN(text, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            text[3] = CHAR_SLASH;
+            text[4] = EOS;
+            windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 4, 5, 2, &windowId);
+            objVram = (void*)(OBJ_VRAM0);
+            objVram += spriteTileNum + 0x3E0;
+            sub_8075170(objVram, windowTileData, 1);
+            objVram = (void*)(OBJ_VRAM0);
+            objVram += spriteTileNum + 0xB00;
+            sub_8075170(objVram, windowTileData + 0x20, 2);
+            RemoveWindow_(windowId);
+        }
+
+    }
+    else
+    {
+        u8 bank;
+
+        memcpy(text, gUnknown_0832C3C4, sizeof(gUnknown_0832C3C4));
+        bank = gSprites[healthboxSpriteId].data6;
+        if (IsDoubleBattle() == TRUE || GetBankSide(bank) == SIDE_OPPONENT)
+        {
+            UpdateHpTextInHealthboxInDoubles(healthboxSpriteId, value, maxOrCurrent);
+        }
+        else
+        {
+            u32 var;
+            u8 i;
+
+            if (GetBankSide(gSprites[healthboxSpriteId].data6) == SIDE_PLAYER)
+            {
+                if (!maxOrCurrent)
+                    var = 29;
+                else
+                    var = 89;
+            }
+            else
+            {
+                if (!maxOrCurrent)
+                    var = 20;
+                else
+                    var = 48;
+            }
+
+            ConvertIntToDecimalStringN(text + 6, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            RenderTextFont9(gMonSpritesGfxPtr->fontPixels, 9, text);
+
+            for (i = 0; i < 3; i++)
+            {
+                CpuCopy32(&gMonSpritesGfxPtr->fontPixels[i * 64 + 32],
+                          (void*)((OBJ_VRAM0) + 32 * (gSprites[healthboxSpriteId].oam.tileNum + var + i)),
+                          0x20);
+            }
+        }
+    }
+}
+
+extern const u8 gText_Slash[];
+
+void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
+{
+    u32 windowId, windowTileData, spriteTileNum;
+    u8 text[32];
+    void *objVram;
+
+    if (GetBankSide(gSprites[healthboxSpriteId].data6) == SIDE_PLAYER)
+    {
+        if (gBattleSpritesDataPtr->bankData[gSprites[healthboxSpriteId].data6].hpNumbersNoBars) // don't print text if only bars are visible
+        {
+            spriteTileNum = gSprites[gSprites[healthboxSpriteId].data5].oam.tileNum * 32;
+            objVram = (void*)(OBJ_VRAM0) + spriteTileNum;
+
+            if (maxOrCurrent) // doubles, max hp
+            {
+                ConvertIntToDecimalStringN(text, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+                windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 0, 5, 0, &windowId);
+                sub_8075170((void*)(OBJ_VRAM0) + spriteTileNum + 0xC0, windowTileData, 2);
+                RemoveWindow_(windowId);
+                CpuCopy32(GetHealthboxElementGfxPtr(0x74),
+                          (void*)(OBJ_VRAM0 + 0x680) + (gSprites[healthboxSpriteId].oam.tileNum * 32),
+                           0x20);
+            }
+            else
+            {
+                ConvertIntToDecimalStringN(text, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+                text[3] = CHAR_SLASH;
+                text[4] = EOS;
+                windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 4, 5, 0, &windowId);
+                sub_807513C(objVram, 0, 3);
+                sub_8075170((void*)(OBJ_VRAM0 + 0x60) + spriteTileNum, windowTileData, 3);
+                RemoveWindow_(windowId);
+            }
+        }
+    }
+    else
+    {
+        u8 bank;
+
+        memcpy(text, gUnknown_0832C3D8, sizeof(gUnknown_0832C3D8));
+        bank = gSprites[healthboxSpriteId].data6;
+
+        if (gBattleSpritesDataPtr->bankData[bank].hpNumbersNoBars) // don't print text if only bars are visible
+        {
+            u8 var = 4;
+            u8 r7;
+            u8 *txtPtr;
+            u8 i;
+
+            if (!maxOrCurrent)
+                var = 0;
+
+            r7 = gSprites[healthboxSpriteId].data5;
+            txtPtr = ConvertIntToDecimalStringN(text + 6, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            if (!maxOrCurrent)
+                StringCopy(txtPtr, gText_Slash);
+            RenderTextFont9(gMonSpritesGfxPtr->fontPixels, 9, text);
+
+            for (i = var; i < var + 3; i++)
+            {
+                if (i < 3)
+                {
+                    CpuCopy32(&gMonSpritesGfxPtr->fontPixels[((i - var) * 64) + 32],
+                          (void*)((OBJ_VRAM0) + 32 * (1 + gSprites[r7].oam.tileNum + i)),
+                          0x20);
+                }
+                else
+                {
+                    CpuCopy32(&gMonSpritesGfxPtr->fontPixels[((i - var) * 64) + 32],
+                          (void*)((OBJ_VRAM0 + 0x20) + 32 * (i + gSprites[r7].oam.tileNum)),
+                          0x20);
+                }
+            }
+
+            if (!maxOrCurrent)
+            {
+                CpuCopy32(&gMonSpritesGfxPtr->fontPixels[224],
+                          (void*)((OBJ_VRAM0) + ((gSprites[r7].oam.tileNum + 4) * 32)),
+                          0x20);
+                CpuFill32(0, (void*)((OBJ_VRAM0) + (gSprites[r7].oam.tileNum * 32)), 0x20);
+            }
+            else
+            {
+                if (GetBankSide(bank) == SIDE_PLAYER) // impossible to reach part, because the bank is from the opponent's side
+                {
+                    CpuCopy32(GetHealthboxElementGfxPtr(0x74),
+                          (void*)(OBJ_VRAM0) + ((gSprites[healthboxSpriteId].oam.tileNum + 52) * 32),
+                           0x20);
+                }
+            }
+        }
+    }
 }

@@ -509,7 +509,7 @@ bx_t4_healthbar_update: @ 814B2D0
 	adds r0, r6
 	ldrb r0, [r0]
 	movs r2, 0
-	bl heathbar_draw_hp
+	bl UpdateHpTextInHealthbox
 	b _0814B332
 	.pool
 _0814B318:

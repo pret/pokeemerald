@@ -885,7 +885,7 @@ sub_818A0A4: @ 818A0A4
 	adds r0, r6
 	ldrb r0, [r0]
 	movs r2, 0
-	bl heathbar_draw_hp
+	bl UpdateHpTextInHealthbox
 	b _0818A106
 	.pool
 _0818A0EC:
@@ -5083,7 +5083,7 @@ _0818C678:
 	ldrb r0, [r0]
 	movs r1, 0
 	movs r2, 0
-	bl heathbar_draw_hp
+	bl UpdateHpTextInHealthbox
 _0818C6B2:
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank

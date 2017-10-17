@@ -1079,7 +1079,7 @@ sub_805FA70: @ 805FA70
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r2, 0
-	bl heathbar_draw_hp
+	bl UpdateHpTextInHealthbox
 	b _0805FABC
 	.pool
 _0805FAB8:

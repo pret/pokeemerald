@@ -2379,7 +2379,7 @@ _0817185A:
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
-	bl sub_8072A88
+	bl UpdateOamPriorityInAllHealthboxes
 	bl m4aMPlayAllStop
 	ldr r0, =0x00000213
 	bl PlaySE
@@ -2879,7 +2879,7 @@ _08171C24:
 	ldr r0, =gDoingBattleAnim
 	strb r6, [r0]
 	movs r0, 0x1
-	bl sub_8072A88
+	bl UpdateOamPriorityInAllHealthboxes
 _08171C8A:
 	pop {r4-r7}
 	pop {r0}
@@ -2974,7 +2974,7 @@ _08171D3E:
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x1
-	bl sub_8072A88
+	bl UpdateOamPriorityInAllHealthboxes
 _08171D52:
 	pop {r4}
 	pop {r0}

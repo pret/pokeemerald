@@ -966,7 +966,7 @@ sub_8186D04: @ 8186D04
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r2, 0
-	bl heathbar_draw_hp
+	bl UpdateHpTextInHealthbox
 	b _08186D50
 	.pool
 _08186D4C:
