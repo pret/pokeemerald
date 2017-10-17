@@ -205,7 +205,6 @@ SECTIONS {
         asm/learn_move.o(.text);
         asm/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
-        asm/decoration_inventory.o(.text);
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);

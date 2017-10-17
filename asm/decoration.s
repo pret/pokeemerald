@@ -331,7 +331,7 @@ sub_8126C48: @ 8126C48
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8161B10
+	bl CountDecorations
 	lsls r0, 24
 	cmp r0, 0
 	bne _08126C7C
@@ -415,7 +415,7 @@ sub_8126D10: @ 8126D10
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8161B10
+	bl CountDecorations
 	lsls r0, 24
 	cmp r0, 0
 	bne _08126D44
@@ -744,7 +744,7 @@ _08126FA2:
 	adds r3, r7, 0
 	bl PrintTextOnWindow
 	mov r0, r8
-	bl sub_8161AD0
+	bl CountDecorationCategoryN
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -874,14 +874,14 @@ sub_81270E8: @ 81270E8
 	lsrs r5, r0, 24
 	ldr r4, =gUnknown_0203A173
 	ldrb r0, [r4]
-	bl sub_8161AD0
+	bl CountDecorationCategoryN
 	ldr r1, =gUnknown_0203A151
 	strb r0, [r1]
 	lsls r0, 24
 	cmp r0, 0
 	beq _08127154
 	ldrb r0, [r4]
-	bl sub_8161A38
+	bl CondenseDecorationCategoryN
 	ldr r2, =gUnknown_0203A14C
 	ldr r1, =gDecorationInventories
 	ldrb r0, [r4]
@@ -7143,11 +7143,11 @@ sub_812A478: @ 812A478
 	strb r1, [r0]
 	ldr r5, =gUnknown_0203A173
 	ldrb r0, [r5]
-	bl sub_8161AD0
+	bl CountDecorationCategoryN
 	ldr r1, =gUnknown_0203A151
 	strb r0, [r1]
 	ldrb r0, [r5]
-	bl sub_8161A38
+	bl CondenseDecorationCategoryN
 	adds r0, r4, 0
 	bl sub_8127814
 	ldr r5, =gStringVar4

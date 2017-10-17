@@ -5,13 +5,16 @@ struct DecorationInventory {
     u8 size;
 };
 
-extern EWRAM_DATA struct DecorationInventory gDecorationInventories[];
+extern struct DecorationInventory gDecorationInventories[];
 
 void ClearDecorationInventories(void);
+s8 GetFirstEmptyDecorSlot(u8 idx);
 u8 CheckHasDecoration(u8);
 u8 DecorationAdd(u8);
 u8 DecorationCheckSpace(u8);
 s8 DecorationRemove(u8);
-void sub_8161A38(u8);
+void CondenseDecorationCategoryN(u8);
+u8 CountDecorationCategoryN(u8 idx);
+u8 CountDecorations(void);
 
 #endif // GUARD_DECORATION_INVENTORY_H

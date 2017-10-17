@@ -34,7 +34,7 @@ void SetDecorationInventoriesPointers(void)
     sub_8126968();
 }
 
-void ClearDecorationInventory(u8 idx)
+static void ClearDecorationInventory(u8 idx)
 {
     u8 i;
 
@@ -54,7 +54,7 @@ void ClearDecorationInventories(void)
     }
 }
 
-s8 sub_81618D0(u8 idx)
+s8 GetFirstEmptyDecorSlot(u8 idx)
 {
     s8 i;
 
@@ -94,7 +94,7 @@ bool8 DecorationAdd(u8 decor)
         return FALSE;
     }
     category = gDecorations[decor].category;
-    idx = sub_81618D0(category);
+    idx = GetFirstEmptyDecorSlot(category);
     if (idx == -1)
     {
         return FALSE;
@@ -109,7 +109,7 @@ bool8 DecorationCheckSpace(u8 decor)
     {
         return FALSE;
     }
-    if (sub_81618D0(gDecorations[decor].category) == -1)
+    if (GetFirstEmptyDecorSlot(gDecorations[decor].category) == -1)
     {
         return FALSE;
     }
@@ -132,14 +132,14 @@ s8 DecorationRemove(u8 decor)
         if (gDecorationInventories[idx].items[i] == decor)
         {
             gDecorationInventories[idx].items[i] = DECOR_NONE;
-            sub_8161A38(idx);
+            CondenseDecorationCategoryN(idx);
             return 1;
         }
     }
     return 0;
 }
 
-void sub_8161A38(u8 idx)
+void CondenseDecorationCategoryN(u8 idx)
 {
     u8 i;
     u8 j;
@@ -157,4 +157,33 @@ void sub_8161A38(u8 idx)
             }
         }
     }
+}
+
+u8 CountDecorationCategoryN(u8 idx)
+{
+    u8 i;
+    u8 ct;
+
+    ct = 0;
+    for (i = 0; i < gDecorationInventories[idx].size; i ++)
+    {
+        if (gDecorationInventories[idx].items[i] != DECOR_NONE)
+        {
+            ct ++;
+        }
+    }
+    return ct;
+}
+
+u8 CountDecorations(void)
+{
+    u8 idx;
+    u8 ct;
+
+    ct = 0;
+    for (idx = 0; idx < 8; idx ++)
+    {
+        ct += CountDecorationCategoryN(idx);
+    }
+    return ct;
 }
