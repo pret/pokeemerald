@@ -2,9 +2,11 @@
 // Includes
 #include "global.h"
 #include "menu.h"
+#include "international_string_util.h"
+#include "script.h"
+#include "task.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
-#include "international_string_util.h"
 
 // Static type declarations
 
@@ -17,6 +19,9 @@ extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
 extern EWRAM_DATA u8 gUnknown_0203A188[4];
 
 // Static ROM declarations
+
+void sub_8126C08(void);
+void sub_8126B80(u8 taskId);
 
 // .rodata
 
@@ -83,4 +88,32 @@ void sub_8126A88(void)
     idx = sub_81269D4(0);
     PrintMenuTable(idx, 4, gUnknown_085A6B48);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(idx, 4, gUnknown_0203A150);
+}
+
+void sub_8126ABC(void)
+{
+    gUnknown_0203A150 = 0;
+    ScriptContext2_Enable();
+    sub_8126A88();
+    sub_8126C08();
+}
+
+void sub_8126AD8(u8 taskId)
+{
+    sub_8126ABC();
+    gUnknown_0203A17C.items = gSaveBlock1Ptr->secretBases[0].decorations;
+    gUnknown_0203A17C.pos = gSaveBlock1Ptr->secretBases[0].decorationPos;
+    gUnknown_0203A17C.size = sizeof(gSaveBlock1Ptr->secretBases[0].decorations);
+    gUnknown_0203A17C.isPlayerRoom = FALSE;
+    gTasks[taskId].func = sub_8126B80;
+}
+
+void sub_8126B2C(u8 taskId)
+{
+    sub_8126ABC();
+    gUnknown_0203A17C.items = gSaveBlock1Ptr->playerRoomDecor;
+    gUnknown_0203A17C.pos = gSaveBlock1Ptr->playerRoomDecorPos;
+    gUnknown_0203A17C.size = sizeof(gSaveBlock1Ptr->playerRoomDecor);
+    gUnknown_0203A17C.isPlayerRoom = TRUE;
+    gTasks[taskId].func = sub_8126B80;
 }
