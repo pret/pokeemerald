@@ -5,66 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8126B80
-sub_8126B80: @ 8126B80
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08126C00
-	bl GetMenuCursorPos
-	lsls r0, 24
-	lsrs r4, r0, 24
-	bl ProcessMenuInput
-	lsls r0, 24
-	asrs r1, r0, 24
-	movs r0, 0x2
-	negs r0, r0
-	cmp r1, r0
-	beq _08126BD8
-	adds r0, 0x1
-	cmp r1, r0
-	beq _08126BF4
-	movs r0, 0x5
-	bl PlaySE
-	ldr r1, =gUnknown_085A6B48
-	ldr r0, =gUnknown_0203A150
-	ldrb r0, [r0]
-	lsls r0, 3
-	adds r1, 0x4
-	adds r0, r1
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl _call_via_r1
-	b _08126C00
-	.pool
-_08126BD8:
-	bl GetMenuCursorPos
-	ldr r1, =gUnknown_0203A150
-	strb r0, [r1]
-	lsls r0, r4, 24
-	asrs r0, 24
-	ldrb r1, [r1]
-	cmp r0, r1
-	beq _08126C00
-	bl sub_8126C08
-	b _08126C00
-	.pool
-_08126BF4:
-	movs r0, 0x5
-	bl PlaySE
-	adds r0, r5, 0
-	bl sub_8126D6C
-_08126C00:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8126B80
-
 	thumb_func_start sub_8126C08
 sub_8126C08: @ 8126C08
 	push {lr}

@@ -5,6 +5,9 @@
 #include "international_string_util.h"
 #include "script.h"
 #include "task.h"
+#include "palette.h"
+#include "songs.h"
+#include "sound.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
 
@@ -22,11 +25,12 @@ extern EWRAM_DATA u8 gUnknown_0203A188[4];
 
 void sub_8126C08(void);
 void sub_8126B80(u8 taskId);
+void sub_8126D6C(u8 taskId);
 
 // .rodata
 
 extern const struct WindowTemplate gUnknown_085A6B90[4];
-extern const u8 *const gUnknown_085A6B48[];
+extern const struct MenuAction2 gUnknown_085A6B48[];
 
 // .text
 
@@ -57,7 +61,7 @@ u8 sub_81269D4(u8 idx)
     if (idx == 0)
     {
         template = gUnknown_085A6B90[0];
-        template.width = GetMaxWidthInMenuTable(gUnknown_085A6B48, 4);
+        template.width = GetMaxWidthInMenuTable((const struct MenuAction *)gUnknown_085A6B48, 4);
         if (template.width > 18)
         {
             template.width = 18;
@@ -86,7 +90,7 @@ void sub_8126A88(void)
     u8 idx;
 
     idx = sub_81269D4(0);
-    PrintMenuTable(idx, 4, gUnknown_085A6B48);
+    PrintMenuTable(idx, 4, (const struct MenuAction *)gUnknown_085A6B48);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(idx, 4, gUnknown_0203A150);
 }
 
@@ -116,4 +120,32 @@ void sub_8126B2C(u8 taskId)
     gUnknown_0203A17C.size = sizeof(gSaveBlock1Ptr->playerRoomDecor);
     gUnknown_0203A17C.isPlayerRoom = TRUE;
     gTasks[taskId].func = sub_8126B80;
+}
+
+void sub_8126B80(u8 taskId)
+{
+    u8 menuPos;
+
+    if (!gPaletteFade.active)
+    {
+        menuPos = GetMenuCursorPos();
+        switch (ProcessMenuInput())
+        {
+            default:
+                PlaySE(SE_SELECT);
+                gUnknown_085A6B48[gUnknown_0203A150].func(taskId);
+                break;
+            case -2:
+                gUnknown_0203A150 = GetMenuCursorPos();
+                if ((s8)menuPos != gUnknown_0203A150)
+                {
+                    sub_8126C08();
+                }
+                break;
+            case -1:
+                PlaySE(SE_SELECT);
+                sub_8126D6C(taskId);
+                break;
+        }
+    }
 }
