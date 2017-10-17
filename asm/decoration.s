@@ -5,50 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8126968
-sub_8126968: @ 8126968
-	push {lr}
-	ldr r3, =gUnknown_0203A173
-	ldrb r0, [r3]
-	cmp r0, 0x7
-	bhi _0812697E
-	ldr r2, =gUnknown_0203A14C
-	ldr r1, =gDecorationInventories
-	lsls r0, 3
-	adds r0, r1
-	ldr r0, [r0]
-	str r0, [r2]
-_0812697E:
-	ldr r2, =gUnknown_0203A17C
-	ldrb r0, [r2, 0x9]
-	cmp r0, 0
-	bne _08126996
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r3, =0x00001aae
-	adds r1, r0, r3
-	str r1, [r2]
-	ldr r1, =0x00001abe
-	adds r0, r1
-	str r0, [r2, 0x4]
-_08126996:
-	ldrb r0, [r2, 0x9]
-	cmp r0, 0x1
-	bne _081269AC
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r3, =0x0000271c
-	adds r1, r0, r3
-	str r1, [r2]
-	ldr r1, =0x00002728
-	adds r0, r1
-	str r0, [r2, 0x4]
-_081269AC:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8126968
-
 	thumb_func_start sub_81269D4
 sub_81269D4: @ 81269D4
 	push {r4,lr}

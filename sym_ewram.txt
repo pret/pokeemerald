@@ -1188,6 +1188,8 @@ gUnknown_0203A144: @ 203A144
 gUnknown_0203A148: @ 203A148
 	.space 0x4
 
+@ decoration
+
 gUnknown_0203A14C: @ 203A14C
 	.space 0x4
 
@@ -1250,6 +1252,8 @@ gUnknown_0203AA44: @ 203AA44
 
 gUnknown_0203AAC4: @ 203AAC4
 	.space 0x4
+
+@ slot_machine
 
 gUnknown_0203AAC8: @ 203AAC8
 	.space 0x4

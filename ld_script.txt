@@ -170,6 +170,7 @@ SECTIONS {
         asm/heal_location.o(.text);
         asm/region_map.o(.text);
         asm/cute_sketch.o(.text);
+        src/decoration.o(.text);
         asm/decoration.o(.text);
         asm/slot_machine.o(.text);
         asm/contest_painting.o(.text);
