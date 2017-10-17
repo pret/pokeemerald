@@ -33,3 +33,23 @@ void SetDecorationInventoriesPointers(void)
     SET_DECOR_INV(7, gSaveBlock1Ptr->decorCushion);
     sub_8126968();
 }
+
+void ClearDecorationInventory(u8 idx)
+{
+    u8 i;
+
+    for (i = 0; i < gDecorationInventories[idx].size; i ++)
+    {
+        gDecorationInventories[idx].items[i] = DECOR_NONE;
+    }
+}
+
+void ClearDecorationInventories(void)
+{
+    u8 idx;
+
+    for (idx = 0; idx < 8; idx ++)
+    {
+        ClearDecorationInventory(idx);
+    }
+}

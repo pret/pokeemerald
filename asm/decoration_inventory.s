@@ -6,54 +6,6 @@
 	.text
 
 
-	thumb_func_start ClearDecorationInventory
-ClearDecorationInventory: @ 8161880
-	push {r4,r5,lr}
-	lsls r0, 24
-	movs r3, 0
-	ldr r1, =gDecorationInventories
-	lsrs r2, r0, 21
-	adds r0, r2, r1
-	ldrb r0, [r0, 0x4]
-	cmp r3, r0
-	bcs _081618AA
-	adds r5, r1, 0
-	movs r4, 0
-_08161896:
-	adds r0, r2, r5
-	ldr r1, [r0]
-	adds r1, r3
-	strb r4, [r1]
-	adds r1, r3, 0x1
-	lsls r1, 24
-	lsrs r3, r1, 24
-	ldrb r0, [r0, 0x4]
-	cmp r3, r0
-	bcc _08161896
-_081618AA:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ClearDecorationInventory
-
-	thumb_func_start ClearDecorationInventories
-ClearDecorationInventories: @ 81618B4
-	push {r4,lr}
-	movs r4, 0
-_081618B8:
-	adds r0, r4, 0
-	bl ClearDecorationInventory
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x7
-	bls _081618B8
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end ClearDecorationInventories
-
 	thumb_func_start sub_81618D0
 sub_81618D0: @ 81618D0
 	push {r4,lr}
