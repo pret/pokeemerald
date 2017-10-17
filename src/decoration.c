@@ -195,3 +195,18 @@ void sub_8126CA4(u8 taskId)
         gTasks[taskId].func = sub_8129ABC;
     }
 }
+
+void sub_8126D10(u8 taskId)
+{
+    if (CountDecorations() == 0)
+    {
+        StringExpandPlaceholders(gStringVar4, gText_NoDecorations);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_8126DA4);
+    }
+    else
+    {
+        gTasks[taskId].data[11] = 1;
+        gUnknown_0203A173 = DECORCAT_DESK;
+        sub_8126DCC(taskId);
+    }
+}
