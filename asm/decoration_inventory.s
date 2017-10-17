@@ -6,43 +6,6 @@
 	.text
 
 
-	thumb_func_start DecorationAdd
-DecorationAdd: @ 8161960
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _081619A0
-	ldr r1, =gDecorations
-	lsls r0, r4, 5
-	adds r0, r1
-	ldrb r5, [r0, 0x13]
-	adds r0, r5, 0
-	bl sub_81618D0
-	lsls r0, 24
-	asrs r2, r0, 24
-	movs r0, 0x1
-	negs r0, r0
-	cmp r2, r0
-	beq _081619A0
-	ldr r0, =gDecorationInventories
-	lsls r1, r5, 3
-	adds r1, r0
-	ldr r0, [r1]
-	adds r0, r2
-	strb r4, [r0]
-	movs r0, 0x1
-	b _081619A2
-	.pool
-_081619A0:
-	movs r0, 0
-_081619A2:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end DecorationAdd
-
 	thumb_func_start DecorationCheckSpace
 DecorationCheckSpace: @ 81619A8
 	push {lr}

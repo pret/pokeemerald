@@ -83,3 +83,22 @@ bool8 CheckHasDecoration(u8 decor)
     }
     return FALSE;
 }
+
+bool8 DecorationAdd(u8 decor)
+{
+    u8 category;
+    s8 idx;
+
+    if (decor == DECOR_NONE)
+    {
+        return FALSE;
+    }
+    category = gDecorations[decor].category;
+    idx = sub_81618D0(category);
+    if (idx == -1)
+    {
+        return FALSE;
+    }
+    gDecorationInventories[category].items[idx] = decor;
+    return TRUE;
+}
