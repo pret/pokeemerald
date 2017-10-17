@@ -53,3 +53,33 @@ void ClearDecorationInventories(void)
         ClearDecorationInventory(idx);
     }
 }
+
+s8 sub_81618D0(u8 idx)
+{
+    s8 i;
+
+    for (i = 0; i < (s8)gDecorationInventories[idx].size; i ++)
+    {
+        if (gDecorationInventories[idx].items[i] == DECOR_NONE)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool8 CheckHasDecoration(u8 decor)
+{
+    u8 i;
+    u8 category;
+
+    category = gDecorations[decor].category;
+    for (i = 0; i < gDecorationInventories[category].size; i ++)
+    {
+        if (gDecorationInventories[category].items[i] == decor)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
