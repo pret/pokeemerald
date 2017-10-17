@@ -12,6 +12,8 @@
 #include "sound.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
+#include "event_scripts.h"
+#include "player_pc.h"
 #include "strings.h"
 
 // Static type declarations
@@ -31,6 +33,9 @@ void sub_8126C08(void);
 void sub_8126DA4(u8 taskId);
 void sub_8126D6C(u8 taskId);
 void sub_8126DCC(u8 taskId);
+void sub_8126DFC(u8 taskId);
+void sub_8126E8C(u8 taskId);
+void sub_8127088(u8 taskId);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 
@@ -39,6 +44,7 @@ void sub_8129ABC(u8 taskId);
 extern const struct WindowTemplate gUnknown_085A6B90[4];
 extern const struct MenuAction gUnknown_085A6B48[];
 extern const u8 *gUnknown_085A6B68[];
+extern const u16 gUnknown_085A6BB0[];
 
 // .text
 
@@ -209,4 +215,50 @@ void sub_8126D10(u8 taskId)
         gUnknown_0203A173 = DECORCAT_DESK;
         sub_8126DCC(taskId);
     }
+}
+
+void sub_8126D6C(u8 taskId)
+{
+    sub_8126A58(0);
+    if (!gUnknown_0203A17C.isPlayerRoom)
+    {
+        ScriptContext1_SetupScript(gUnknown_0823B4E8);
+        DestroyTask(taskId);
+    }
+    else
+    {
+        sub_816B060(taskId);
+    }
+}
+
+void sub_8126DA4(u8 taskId)
+{
+    sub_8126C08();
+    gTasks[taskId].func = sub_8126B80;
+}
+
+void sub_8126DCC(u8 taskId)
+{
+    LoadPalette(gUnknown_085A6BB0, 0xd0, 0x20);
+    sub_8197434(0, 0);
+    sub_8126A58(0);
+    sub_8126DFC(taskId);
+}
+
+void sub_8126DFC(u8 taskId)
+{
+    u8 winIdx;
+
+    winIdx = sub_81269D4(1);
+    sub_8126E8C(taskId);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(winIdx, 9, gUnknown_0203A173);
+    gTasks[taskId].func = sub_8127088;
+}
+
+void sub_8126E44(u8 taskId)
+{
+    FillWindowPixelBuffer(gUnknown_0203A188[1], 0x11);
+    sub_8126E8C(taskId);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gUnknown_0203A188[1], 9, gUnknown_0203A173);
+    gTasks[taskId].func = sub_8127088;
 }

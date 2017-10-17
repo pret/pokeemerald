@@ -356,5 +356,6 @@ extern const u8 gPokeNewsTextLilycove_Ending[];
 extern const u8 gPokeNewsTextBlendMaster_Upcoming[];
 extern const u8 gPokeNewsTextBlendMaster_Ongoing[];
 extern const u8 gPokeNewsTextBlendMaster_Ending[];
+extern const u8 gUnknown_0823B4E8[];
 
 #endif //GUARD_EVENT_SCRIPTS_H
