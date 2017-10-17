@@ -138,3 +138,23 @@ s8 DecorationRemove(u8 decor)
     }
     return 0;
 }
+
+void sub_8161A38(u8 idx)
+{
+    u8 i;
+    u8 j;
+    u8 tmp;
+
+    for (i = 0; i < gDecorationInventories[idx].size; i ++)
+    {
+        for (j = i + 1; j < gDecorationInventories[idx].size; j ++)
+        {
+            if (gDecorationInventories[idx].items[j] != DECOR_NONE && (gDecorationInventories[idx].items[i] == DECOR_NONE || gDecorationInventories[idx].items[i] > gDecorationInventories[idx].items[j]))
+            {
+                tmp = gDecorationInventories[idx].items[i];
+                gDecorationInventories[idx].items[i] = gDecorationInventories[idx].items[j];
+                gDecorationInventories[idx].items[j] = tmp;
+            }
+        }
+    }
+}
