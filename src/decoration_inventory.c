@@ -115,3 +115,26 @@ bool8 DecorationCheckSpace(u8 decor)
     }
     return TRUE;
 }
+
+s8 DecorationRemove(u8 decor)
+{
+    u8 i;
+    u8 idx;
+
+    i = 0;
+    if (decor == DECOR_NONE)
+    {
+        return 0;
+    }
+    for (i = 0; i < gDecorationInventories[gDecorations[decor].category].size; i ++)
+    {
+        idx = gDecorations[decor].category;
+        if (gDecorationInventories[idx].items[i] == decor)
+        {
+            gDecorationInventories[idx].items[i] = DECOR_NONE;
+            sub_8161A38(idx);
+            return 1;
+        }
+    }
+    return 0;
+}

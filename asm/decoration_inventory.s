@@ -6,56 +6,6 @@
 	.text
 
 
-	thumb_func_start DecorationRemove
-DecorationRemove: @ 81619DC
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r3, 0
-	cmp r5, 0
-	bne _081619F8
-	b _08161A26
-_081619EA:
-	movs r0, 0
-	strb r0, [r1]
-	adds r0, r6, 0
-	bl sub_8161A38
-	movs r0, 0x1
-	b _08161A28
-_081619F8:
-	ldr r2, =gDecorationInventories
-	ldr r1, =gDecorations
-	lsls r0, r5, 5
-	adds r0, r1
-	ldrb r4, [r0, 0x13]
-	lsls r0, r4, 3
-	adds r0, r2
-	ldrb r1, [r0, 0x4]
-	cmp r3, r1
-	bcs _08161A26
-	adds r6, r4, 0
-	adds r4, r0, 0
-	adds r2, r1, 0
-_08161A12:
-	ldr r0, [r4]
-	adds r1, r0, r3
-	ldrb r0, [r1]
-	cmp r0, r5
-	beq _081619EA
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	cmp r3, r2
-	bcc _08161A12
-_08161A26:
-	movs r0, 0
-_08161A28:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end DecorationRemove
-
 	thumb_func_start sub_8161A38
 sub_8161A38: @ 8161A38
 	push {r4-r7,lr}
