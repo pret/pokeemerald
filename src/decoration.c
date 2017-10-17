@@ -1,7 +1,6 @@
 
 // Includes
 #include "global.h"
-#include "menu.h"
 #include "international_string_util.h"
 #include "script.h"
 #include "task.h"
