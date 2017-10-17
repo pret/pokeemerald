@@ -29,5 +29,6 @@ extern const u8 gText_Jackpot[];
 extern const u8 gText_First[];
 extern const u8 gText_Second[];
 extern const u8 gText_Third[];
+extern const u8 gText_NoDecorations[];
 
 #endif //GUARD_strings_H

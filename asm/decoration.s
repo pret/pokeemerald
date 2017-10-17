@@ -5,45 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8126C48
-sub_8126C48: @ 8126C48
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl CountDecorations
-	lsls r0, 24
-	cmp r0, 0
-	bne _08126C7C
-	ldr r4, =gStringVar4
-	ldr r1, =gText_NoDecorations
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	ldr r2, =sub_8126DA4
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl DisplayItemMessageOnField
-	b _08126C96
-	.pool
-_08126C7C:
-	ldr r1, =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	movs r2, 0
-	movs r1, 0
-	strh r1, [r0, 0x1E]
-	ldr r0, =gUnknown_0203A173
-	strb r2, [r0]
-	adds r0, r5, 0
-	bl sub_8126DCC
-_08126C96:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8126C48
-
 	thumb_func_start sub_8126CA4
 sub_8126CA4: @ 8126CA4
 	push {r4,r5,lr}

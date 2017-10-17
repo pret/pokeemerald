@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "string_util.h"
 #include "international_string_util.h"
 #include "script.h"
 #include "task.h"
@@ -10,6 +11,7 @@
 #include "sound.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
+#include "strings.h"
 
 // Static type declarations
 
@@ -23,9 +25,11 @@ extern EWRAM_DATA u8 gUnknown_0203A188[4];
 
 // Static ROM declarations
 
-void sub_8126C08(void);
 void sub_8126B80(u8 taskId);
+void sub_8126C08(void);
+void sub_8126DA4(u8 taskId);
 void sub_8126D6C(u8 taskId);
+void sub_8126DCC(u8 taskId);
 
 // .rodata
 
@@ -155,4 +159,19 @@ void sub_8126C08(void)
 {
     FillWindowPixelBuffer(0, 0x11);
     AddTextPrinterParametrized(0, 1, gUnknown_085A6B68[gUnknown_0203A150], 0, 0, 2, 1, 3);
+}
+
+void sub_8126C48(u8 taskId)
+{
+    if (CountDecorations() == 0)
+    {
+        StringExpandPlaceholders(gStringVar4, gText_NoDecorations);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_8126DA4);
+    }
+    else
+    {
+        gTasks[taskId].data[11] = 0;
+        gUnknown_0203A173 = DECORCAT_DESK;
+        sub_8126DCC(taskId);
+    }
 }
