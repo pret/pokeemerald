@@ -7,6 +7,7 @@
 #include "task.h"
 #include "palette.h"
 #include "songs.h"
+#include "field_weather.h"
 #include "new_menu_helpers.h"
 #include "sound.h"
 #include "decoration.h"
@@ -30,6 +31,8 @@ void sub_8126C08(void);
 void sub_8126DA4(u8 taskId);
 void sub_8126D6C(u8 taskId);
 void sub_8126DCC(u8 taskId);
+bool8 sub_81299AC(u8 taskId);
+void sub_8129ABC(u8 taskId);
 
 // .rodata
 
@@ -173,5 +176,22 @@ void sub_8126C48(u8 taskId)
         gTasks[taskId].data[11] = 0;
         gUnknown_0203A173 = DECORCAT_DESK;
         sub_8126DCC(taskId);
+    }
+}
+
+void sub_8126CA4(u8 taskId)
+{
+    if (!sub_81299AC(taskId))
+    {
+        StringExpandPlaceholders(gStringVar4, gText_NoDecorationsInUse);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_8126DA4);
+    }
+    else
+    {
+        sub_8126A58(0);
+        sub_8197434(0, 0);
+        fade_screen(1, 0);
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].func = sub_8129ABC;
     }
 }
