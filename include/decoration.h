@@ -139,4 +139,6 @@ struct Decoration
 
 extern const struct Decoration gDecorations[];
 
+void sub_8126968(void);
+
 #endif //GUARD_DECORATION_H

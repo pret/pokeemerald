@@ -5,67 +5,6 @@
 
 	.text
 
-    
-	thumb_func_start SetDecorationInventoriesPointers
-SetDecorationInventoriesPointers: @ 81617F4
-	push {r4,lr}
-	ldr r0, =gDecorationInventories
-	mov r12, r0
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r2, =0x00002734
-	adds r0, r1, r2
-	mov r4, r12
-	str r0, [r4]
-	movs r3, 0xA
-	strb r3, [r4, 0x4]
-	adds r2, 0xA
-	adds r0, r1, r2
-	str r0, [r4, 0x8]
-	strb r3, [r4, 0xC]
-	ldr r4, =0x00002748
-	adds r0, r1, r4
-	mov r2, r12
-	str r0, [r2, 0x10]
-	strb r3, [r2, 0x14]
-	adds r4, 0xA
-	adds r0, r1, r4
-	str r0, [r2, 0x18]
-	movs r2, 0x1E
-	mov r0, r12
-	strb r2, [r0, 0x1C]
-	adds r4, 0x1E
-	adds r0, r1, r4
-	mov r4, r12
-	str r0, [r4, 0x20]
-	mov r0, r12
-	adds r0, 0x24
-	strb r2, [r0]
-	ldr r2, =0x0000278e
-	adds r0, r1, r2
-	str r0, [r4, 0x28]
-	mov r0, r12
-	adds r0, 0x2C
-	strb r3, [r0]
-	ldr r4, =0x00002798
-	adds r0, r1, r4
-	mov r2, r12
-	str r0, [r2, 0x30]
-	adds r2, 0x34
-	movs r0, 0x28
-	strb r0, [r2]
-	adds r4, 0x28
-	adds r1, r4
-	mov r0, r12
-	str r1, [r0, 0x38]
-	adds r0, 0x3C
-	strb r3, [r0]
-	bl sub_8126968
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end SetDecorationInventoriesPointers
 
 	thumb_func_start ClearDecorationInventory
 ClearDecorationInventory: @ 8161880
@@ -456,4 +395,3 @@ _08161B16:
 	thumb_func_end sub_8161B10
 
 	.align 2, 0 @ Don't pad with nop.
-    

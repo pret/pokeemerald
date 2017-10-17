@@ -1477,9 +1477,7 @@ gUnknown_0203BC34: @ 203BC34
 gUnknown_0203BC38: @ 203BC38
 	.space 0x8
 
-gDecorationInventories: @ 203BC40
-	.space 0x40
-
+	.include "src/decoration_inventory.o"
     .include "src/roamer.o"
 
 gUnknown_0203BC88: @ 203BC88
