@@ -2,17 +2,40 @@
 #include "battle.h"
 #include "bg.h"
 #include "decompress.h"
+#include "item.h"
+#include "items.h"
+#include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "malloc.h"
+#include "moves.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "songs.h"
 #include "sound.h"
+#include "species.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
+#include "text.h"
 #include "window.h"
+
+struct contestMove
+{
+    u8 effect;
+    u8 type;
+    u8 comboID;
+    u8 combo[4];
+};
+
+struct contestEffect
+{
+    u8 type;
+    u8 appeal;
+    u8 jam;
+};
+
+
 
 extern struct unkSummaryStruct* gUnknown_0203CF1C;
 extern struct BgTemplate gUnknown_0861CBB4;
@@ -27,6 +50,21 @@ extern struct unkStruct_61CC04 gUnknown_0861CC10;
 extern struct unkStruct_61CC04 gUnknown_0861CBEC;
 extern struct unkStruct_61CC04 gUnknown_0861CBF8;
 extern u16 gUnknown_08DC3CD4[];
+extern struct contestMove gContestMoves[];
+extern struct contestEffect gContestEffects[];
+extern struct WindowTemplate gUnknown_0861CC24;
+extern struct TextColor gUnknown_0861CD2C[];
+extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
+extern u8 gText_MaleSymbol[];
+extern u8 gText_FemaleSymbol[];
+extern u8 gUnknown_0861CDD3[];
+extern void (*const gUnknown_0861CE54[])();
+extern void (*const gUnknown_0861CE64[])(u8 taskId);
+extern struct WindowTemplate gUnknown_0861CCCC;
+extern u8 gUnknown_0861CE74[];
+extern u8 gUnknown_0861CE7B[];
+extern struct WindowTemplate gUnknown_0861CCEC;
+extern struct WindowTemplate gUnknown_0861CD14;
 
 extern void sub_806F2AC(u8 a, u8 b);
 void sub_81C488C(u8 a);
@@ -61,9 +99,81 @@ extern void decompress_and_copy_tile_data_to_vram(u8 a, void* tiledata, u8 b, u8
 extern u8 free_temp_tile_data_buffers_if_possible();
 extern void sub_8069004(struct BoxPokemon* a, void* b);
 extern void sub_81C1E20(u8 taskId);
+extern u8 *GetMonNickname(struct Pokemon *mon, u8 *dest);
+extern u16 SpeciesToPokedexNum(u16 species);
+extern u8 gText_UnkCtrlF908Clear01[];
+extern u8 gText_LevelSymbol[];
+extern u8 gText_PkmnInfo[];
+extern u8 gText_PkmnSkills[];
+extern u8 gText_BattleMoves[];
+extern u8 gText_ContestMoves[];
+extern u8 gText_Cancel2[];
+extern u8 gText_Info[];
+extern u8 gText_Switch[];
+extern u8 gText_RentalPkmn[];
+extern u8 gText_TypeSlash[];
+extern u8 gText_HP4[];
+extern u8 gText_Attack3[];
+extern u8 gText_Defense3[];
+extern u8 gText_SpAtk4[];
+extern u8 gText_SpDef4[];
+extern u8 gText_Speed2[];
+extern u8 gText_ExpPoints[];
+extern u8 gText_NextLv[];
+extern u8 gText_Status[];
+extern u8 gText_Power[];
+extern u8 gText_Accuracy2[];
+extern u8 gText_Appeal[];
+extern u8 gText_Jam[];
+extern u8 gText_OTSlash[];
+extern u8 gText_UnkCtrlF907F908[];
+extern u8 gAbilityNames[][13];
+extern u8 *gAbilityDescriptionPointers[];
+extern u8 gText_XNature[];
+extern u8 gText_XNatureHatchedAtYZ[];
+extern u8 gText_XNatureHatchedSomewhereAt[];
+extern u8 gText_XNatureMetAtYZ[];
+extern u8 gText_XNatureMetSomewhereAt[];
+extern u8 gText_XNatureFatefulEncounter[];
+extern u8 gText_XNatureProbablyMetAt[];
+extern u8 gText_XNatureObtainedInTrade[];
+extern u8 *gNatureNamePointers[];
+extern u8 gText_EmptyString5[];
+extern u32 gBattleTypeFlags;
+extern u8 gText_FiveMarks[];
+extern u8 gText_EggWillTakeALongTime[];
+extern u8 gText_EggAboutToHatch[];
+extern u8 gText_EggWillHatchSoon[];
+extern u8 gText_EggWillTakeSomeTime[];
+extern u8 gText_PeculiarEggNicePlace[];
+extern u8 gText_PeculiarEggTrade[];
+extern u8 gText_EggFromTraveler[];
+extern u8 gText_EggFromHotSprings[];
+extern u8 gText_OddEggFoundByCouple[];
+extern u8 gText_None[];
+extern u8 gText_RibbonsVar1[];
+extern u8 gUnknown_0861CE82[];
+extern u8 gUnknown_0861CE8E[];
+extern u8 gMoveNames[][13];
+extern u8 gText_OneDash[];
+extern u8 gText_TwoDashes[];
+extern u8 gText_ThreeDashes[];
+extern u8 gUnknown_0861CE97[];
+extern struct BattleMove gBattleMoves[];
 
 extern u32 ChangeBgX(u8 bg, u32 value, u8 op);
 extern void sub_8199C30(u8 a, u8 b, u8 c, u8 d, u8 e, u8 f);
+extern void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor* colors, s8 speed, u8 *str);
+extern s32 GetStringCenterAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
+extern s32 GetStringRightAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
+extern u8 sub_81A6BF4();
+extern u8 sub_81B9E94();
+extern void sub_81AFBF0();
+extern u8 sub_81AFC0C(u8 a, u8 *b);
+extern void sub_81AFC28(u8 *a, u8 *b);
+extern void sub_8124610(u8 *a, u8 b);
+extern int sub_80F0020();
+extern u8 sub_814FC20(u8 a, u8 b);
 
 void sub_81BFAE4(void);
 void sub_81BFE24();
@@ -111,7 +221,7 @@ void sub_81C20F0(u8 taskId);
 bool8 sub_81C0A50(struct Pokemon* mon);
 void sub_81C49E0();
 void sub_81C0E24();
-void sub_81C2C38();
+void sub_81C2C38(u8 a);
 void sub_81C0B8C(u8 taskId);
 void sub_81C0CC4(u8 taskId);
 void sub_81C2DE4(u8 a);
@@ -144,6 +254,34 @@ u8 sub_81B6D14(u16 a);
 void sub_81C1940(u8 taskId);
 void sub_81C4154();
 void sub_81C1F80(u8 taskId);
+void sub_81C2628();
+void sub_81C2794();
+void sub_81C27DC(struct Pokemon *mon, u16 a);
+void sub_81C2D68(u8 a);
+void sub_81C335C();
+void sub_81C33CC();
+void sub_81C3428();
+void sub_81C349C();
+void sub_81C2EC4();
+void sub_81C2F5C();
+void sub_81C2FD8();
+void sub_81C302C();
+void sub_81C307C();
+void sub_81C3194();
+void sub_81C31C0();
+u8 sub_81C3304();
+void sub_81C31F0(u8 *a);
+u8 sub_81C3220();
+u8 sub_81C32BC();
+void sub_81C35E4();
+void sub_81C3690();
+void sub_81C3710();
+void sub_81C37D8();
+void sub_81C3808();
+void sub_81C3890();
+void sub_81C38C0();
+void sub_81C3B08(u8 a);
+void sub_81C3E2C(u8 a);
 
 void SetBgAttribute(u8 bg, u8 attributeId, u8 value);
 
@@ -221,7 +359,8 @@ struct unkSummaryStruct
     u8 unk40C7;
     u8 unk40C8;
     u8 unk40C9;
-    u8 unk_filler2[0x9];
+    u8 unk40CA;
+    u8 unk40CB[8];
     u8 unk40D3;
     u8 unk40D4;
     u8 unk40D5;
@@ -2326,4 +2465,1217 @@ void sub_81C228C(u8 a)
     else
         sub_8199C30(3, 1, 4, 8, 8, 5);
     schedule_bg_copy_tilemap_to_vram(3);
+}
+
+void sub_81C22CC(struct Pokemon *unused)
+{
+    s64 r6r7;
+    struct pokeSummary *summary = &gUnknown_0203CF1C->summary;
+    u16 *r9;
+    u8 i;
+
+    if (summary->level < MAX_MON_LEVEL)
+    {
+        u32 r1 = gExperienceTables[gBaseStats[summary->species].growthRate][summary->level + 1] - gExperienceTables[gBaseStats[summary->species].growthRate][summary->level];
+        u32 r4 = summary->exp - gExperienceTables[gBaseStats[summary->species].growthRate][summary->level];
+
+        r6r7 = r4 * 64 / r1;
+        if (r6r7 == 0 && r4 != 0)
+            r6r7 = 1;
+    }
+    else
+    {
+        r6r7 = 0;
+    }
+
+    r9 = &gUnknown_0203CF1C->unkTilemap1_1[0x255];
+    for (i = 0; i < 8; i++)
+    {
+        if (r6r7 > 7)
+            r9[i] = 0x206A;
+        else
+            r9[i] = 0x2062 + (r6r7 % 8);
+        r6r7 -= 8;
+        if (r6r7 < 0)
+            r6r7 = 0;
+    }
+
+    if (GetBgTilemapBuffer(1) == gUnknown_0203CF1C->unkTilemap1)
+        schedule_bg_copy_tilemap_to_vram(1);
+    else
+        schedule_bg_copy_tilemap_to_vram(2);
+}
+
+void sub_81C240C(u16 move)
+{
+    u16* r5 = &gUnknown_0203CF1C->unkTilemap3_1[0];
+    u8 i;
+    u8 r4;
+    if (move != MOVE_NONE)
+    {
+        r4 = gContestEffects[gContestMoves[move].effect].appeal;
+        if (r4 != 0xFF)
+            r4 /= 10;
+        for (i = 0;i < 8; i++)
+        {
+            if (r4 != 0xFF && i < r4)
+            {
+                r5[((i>>2)*32)+(i&3)+0x1E6] = 0x103A;
+            }
+            else
+                r5[((i>>2)*32)+(i&3)+0x1E6] = 0x1039;
+        }
+        r4 = gContestEffects[gContestMoves[move].effect].jam;
+        if (r4 != 0xFF)
+            r4 /= 10;
+        for (i = 0;i < 8; i++)
+        {
+            if (r4 != 0xFF && i < r4)
+            {
+                r5[((i>>2)*32)+(i&3)+0x226] = 0x103C;
+            }
+            else
+                r5[((i>>2)*32)+(i&3)+0x226] = 0x103D;
+        }
+    }
+}
+
+void sub_81C2524()
+{
+    if (gUnknown_0203CF1C->summary.isEgg != 0)
+        ChangeBgX(3, 0x10000, 0);
+    else
+        ChangeBgX(3, 0, 0);
+}
+
+void sub_81C2554()
+{
+    u8 i;
+    InitWindows(&gUnknown_0861CC24);
+    DeactivateAllTextPrinters();
+    for (i = 0; i < 20; i++)
+        FillWindowPixelBuffer(i, 0);
+    for (i = 0; i < 8; i++)
+        gUnknown_0203CF1C->unk40CB[i] |= 0xFF;
+}
+
+void sub_81C25A4(u8 a, u8 *b, u8 c, u8 d, u8 e, u8 f)
+{
+    AddTextPrinterParametrized2(a, 1, c, d, 0, e, &gUnknown_0861CD2C[f], 0, b);
+}
+
+void sub_81C25E8()
+{
+    FillWindowPixelBuffer(17, 0);
+    FillWindowPixelBuffer(18, 0);
+    FillWindowPixelBuffer(19, 0);
+    if (gUnknown_0203CF1C->summary.isEgg == 0)
+        sub_81C2628();
+    else
+        sub_81C2794();
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void sub_81C2628()
+{
+    u8 strArray[16];
+    struct Pokemon *mon = &gUnknown_0203CF1C->currentPoke;
+    struct pokeSummary *summary = &gUnknown_0203CF1C->summary;
+    u16 r5 = SpeciesToPokedexNum(summary->species);
+    if (r5 != 0xFFFF)
+    {
+        StringCopy(gStringVar1, &gText_UnkCtrlF908Clear01[0]);
+        ConvertIntToDecimalStringN(gStringVar2, r5, 2, 3);
+        StringAppend(gStringVar1, gStringVar2);
+        if (IsMonShiny(mon) == 0)
+        {
+            sub_81C25A4(17, gStringVar1, 0, 1, 0, 1);
+            sub_81C228C(0);
+        }
+        else
+        {
+            sub_81C25A4(17, gStringVar1, 0, 1, 0, 7);
+            sub_81C228C(1);
+        }
+        PutWindowTilemap(17);
+    }
+    else
+    {
+        ClearWindowTilemap(17);
+        if (IsMonShiny(mon) == 0)
+            sub_81C228C(0);
+        else
+            sub_81C228C(1);
+    }
+    StringCopy(gStringVar1, &gText_LevelSymbol[0]);
+    ConvertIntToDecimalStringN(gStringVar2, summary->level, 0, 3);
+    StringAppend(gStringVar1, gStringVar2);
+    sub_81C25A4(19, gStringVar1, 0x18, 17, 0, 1);
+    GetMonNickname(mon, gStringVar1);
+    sub_81C25A4(18, gStringVar1, 0, 1, 0, 1);
+    strArray[0] = CHAR_SLASH;
+    StringCopy(&strArray[1], &gSpeciesNames[summary->species2][0]);
+    sub_81C25A4(19, &strArray[0], 0, 1, 0, 1);
+    sub_81C27DC(mon, summary->species2);
+    PutWindowTilemap(18);
+    PutWindowTilemap(19);
+}
+
+void sub_81C2794()
+{
+    GetMonNickname(&gUnknown_0203CF1C->currentPoke, gStringVar1);
+    sub_81C25A4(18, gStringVar1, 0, 1, 0, 1);
+    PutWindowTilemap(18);
+    ClearWindowTilemap(17);
+    ClearWindowTilemap(19);
+}
+
+void sub_81C27DC(struct Pokemon *mon, u16 a)
+{
+    if (a != SPECIES_NIDORAN_M && a != SPECIES_NIDORAN_F)
+    {
+        u8 gender = GetMonGender(mon);
+        switch (gender)
+        {
+            case 0:
+                sub_81C25A4(0x13, &gText_MaleSymbol[0], 0x39, 17, 0, 3);
+                break;
+            case 0xFE:
+                sub_81C25A4(0x13, &gText_FemaleSymbol[0], 0x39, 17, 0, 4);
+                break;
+        }
+    }
+}
+
+void sub_81C2838(u8 a, u8 b, u32 c)
+{
+    BlitBitmapToWindow(a, (b) ? &gUnknown_0861CDD3[0] : &gUnknown_0861CDD3[0] - 0x80, c, 0, 16, 16);
+}
+
+void sub_81C286C()
+{
+    int r4;
+    int r2;
+    int temp;
+    sub_81C25A4(0, gText_PkmnInfo, 2, 1, 0, 1);
+    sub_81C25A4(1, gText_PkmnSkills, 2, 1, 0, 1);
+    sub_81C25A4(2, gText_BattleMoves, 2, 1, 0, 1);
+    sub_81C25A4(3, gText_ContestMoves, 2, 1, 0, 1);
+    r4 = GetStringRightAlignXOffset(1, gText_Cancel2, 0x3E);
+    r2 = r4 - 16;
+    if (r2 < 0)
+        r2 = 0;
+    sub_81C2838(4, 0, r2);
+    sub_81C25A4(4, gText_Cancel2, r4, 1, 0, 0);
+    r4 = GetStringRightAlignXOffset(1, gText_Info, 0x3E);
+    r2 = r4 - 16;
+    if (r2 < 0)
+        r2 = 0;
+    sub_81C2838(5, 0, r2);
+    sub_81C25A4(5, gText_Info, r4, 1, 0, 0);
+    r4 = GetStringRightAlignXOffset(1, gText_Switch, 0x3E);
+    r2 = r4 - 16;
+    if (r2 < 0)
+        r2 = 0;
+    sub_81C2838(6, 0, r2);
+    sub_81C25A4(6, gText_Switch, r4, 1, 0, 0);
+    sub_81C25A4(8, gText_RentalPkmn, 0, 1, 0, 1);
+    sub_81C25A4(9, gText_TypeSlash, 0, 1, 0, 0);
+    temp = 6;
+    temp += GetStringCenterAlignXOffset(1, gText_HP4, 42);
+    sub_81C25A4(10, gText_HP4, temp, 1, 0, 1);
+    temp = 6;
+    temp += GetStringCenterAlignXOffset(1, gText_Attack3, 42);
+    sub_81C25A4(10, gText_Attack3, temp, 17, 0, 1);
+    temp = 6;
+    temp += GetStringCenterAlignXOffset(1, gText_Defense3, 42);
+    sub_81C25A4(10, gText_Defense3, temp, 33, 0, 1);
+    temp = 2;
+    temp += GetStringCenterAlignXOffset(1, gText_SpAtk4, 36);
+    sub_81C25A4(11, gText_SpAtk4, temp, 1, 0, 1);
+    temp = 2;
+    temp += GetStringCenterAlignXOffset(1, gText_SpDef4, 36);
+    sub_81C25A4(11, gText_SpDef4, temp, 17, 0, 1);
+    temp = 2;
+    temp += GetStringCenterAlignXOffset(1, gText_Speed2, 36);
+    sub_81C25A4(11, gText_Speed2, temp, 33, 0, 1);
+    sub_81C25A4(12, gText_ExpPoints, 6, 1, 0, 1);
+    sub_81C25A4(12, gText_NextLv, 6, 17, 0, 1);
+    sub_81C25A4(13, gText_Status, 2, 1, 0, 1);
+    sub_81C25A4(14, gText_Power, 0, 1, 0, 1);
+    sub_81C25A4(14, gText_Accuracy2, 0, 17, 0, 1);
+    sub_81C25A4(15, gText_Appeal, 0, 1, 0, 1);
+    sub_81C25A4(15, gText_Jam, 0, 17, 0, 1);
+}
+
+void sub_81C2AFC(u8 a)
+{
+    u8 i;
+    ClearWindowTilemap(0);
+    ClearWindowTilemap(1);
+    ClearWindowTilemap(2);
+    ClearWindowTilemap(3);
+    switch (a)
+    {
+        case 0:
+            PutWindowTilemap(0);
+            PutWindowTilemap(4);
+            if (sub_81A6BF4() == 1 || sub_81B9E94() == 1)
+                PutWindowTilemap(8);
+            PutWindowTilemap(9);
+            break;
+        case 1:
+            PutWindowTilemap(1);
+            PutWindowTilemap(10);
+            PutWindowTilemap(11);
+            PutWindowTilemap(12);
+            break;
+        case 2:
+            PutWindowTilemap(2);
+            if (gUnknown_0203CF1C->unk40BC == 3)
+            {
+                if(!(gUnknown_0203CF1C->unk40C4 == 0 && gUnknown_0203CF1C->unk40C6 == 4))
+                    PutWindowTilemap(14);
+            }
+            else
+                PutWindowTilemap(5);
+            break;
+        case 3:
+            PutWindowTilemap(3);
+            if (gUnknown_0203CF1C->unk40BC == 3)
+            {
+                if(!(gUnknown_0203CF1C->unk40C4 == 0 && gUnknown_0203CF1C->unk40C6 == 4))
+                    PutWindowTilemap(15);
+            }
+            else
+                PutWindowTilemap(5);
+            break;
+    }
+    for (i = 0; i < 8; i++)
+    {
+        PutWindowTilemap(gUnknown_0203CF1C->unk40CB[i]);
+    }
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void sub_81C2C38(u8 a)
+{
+    u8 i;
+    switch (a)
+    {
+        case 0:
+            ClearWindowTilemap(4);
+            if (sub_81A6BF4() == 1 || sub_81B9E94() == 1)
+                ClearWindowTilemap(8);
+            ClearWindowTilemap(9);
+            break;
+        case 1:
+            ClearWindowTilemap(10);
+            ClearWindowTilemap(11);
+            ClearWindowTilemap(12);
+            break;
+        case 2:
+            if (gUnknown_0203CF1C->unk40BC == 3)
+            {
+                if(!(gUnknown_0203CF1C->unk40C4 == 0 && gUnknown_0203CF1C->unk40C6 == 4))
+                    ClearWindowTilemap(14);
+            }
+            else
+                ClearWindowTilemap(5);
+            break;
+        case 3:
+            if (gUnknown_0203CF1C->unk40BC == 3)
+            {
+                if(!(gUnknown_0203CF1C->unk40C4 == 0 && gUnknown_0203CF1C->unk40C6 == 4))
+                    ClearWindowTilemap(15);
+            }
+            else
+                ClearWindowTilemap(5);
+            break;
+    }
+    for (i = 0; i < 8; i++)
+        sub_81C2D68(i);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+
+
+#ifdef NONMATCHING
+u8 sub_81C2D2C(struct WindowTemplate *template, u8 a)
+{
+    u8 *r4 = gUnknown_0203CF1C->unk40CB;
+    if (r4[a] == 0xFF)
+    {
+        r4[a] = AddWindow(&template[a]);
+        FillWindowPixelBuffer(r4[a], 0);
+    }
+    return r4[a];
+}
+#else
+__attribute__((naked))
+u8 sub_81C2D2C(struct WindowTemplate *template, u8 a)
+{
+    asm(".syntax unified\n\
+    push {r4,lr}\n\
+	adds r3, r0, 0\n\
+	lsls r1, 24\n\
+	lsrs r2, r1, 24\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r4, =0x000040cb\n\
+	adds r1, r2, r4\n\
+	ldr r0, [r0]\n\
+	adds r4, r0, r1\n\
+	ldrb r0, [r4]\n\
+	cmp r0, 0xFF\n\
+	bne _081C2D56\n\
+	lsls r0, r2, 3\n\
+	adds r0, r3, r0\n\
+	bl AddWindow\n\
+	strb r0, [r4]\n\
+	ldrb r0, [r4]\n\
+	movs r1, 0\n\
+	bl FillWindowPixelBuffer\n\
+_081C2D56:\n\
+	ldrb r0, [r4]\n\
+	pop {r4}\n\
+	pop {r1}\n\
+	bx r1\n\
+	.pool\n\
+	.syntax divided\n");
+}
+#endif
+
+#ifdef NONMATCHING
+void sub_81C2D68(u8 a)
+{
+    u8 *r4 = gUnknown_0203CF1C->unk40CB;
+    if (r4[a] != 0xFF)
+    {
+        ClearWindowTilemap(r4[a]);
+        RemoveWindow(r4[a]);
+        r4[a] = 0xFF;
+    }
+}
+#else
+__attribute__((naked))
+void sub_81C2D68(u8 a)
+{
+    asm(".syntax unified\n\
+    push {r4,lr}\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	ldr r1, =gUnknown_0203CF1C\n\
+	ldr r2, =0x000040cb\n\
+	adds r0, r2\n\
+	ldr r1, [r1]\n\
+	adds r4, r1, r0\n\
+	ldrb r0, [r4]\n\
+	cmp r0, 0xFF\n\
+	beq _081C2D8C\n\
+	bl ClearWindowTilemap\n\
+	ldrb r0, [r4]\n\
+	bl RemoveWindow\n\
+	movs r0, 0xFF\n\
+	strb r0, [r4]\n\
+_081C2D8C:\n\
+	pop {r4}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+	.syntax divided\n");
+}
+#endif
+
+void sub_81C2D9C(u8 a)
+{
+    u16 i;
+    for (i = 0; i < 8; i++)
+    {
+        if (gUnknown_0203CF1C->unk40CB[i] != 0xFF)
+            FillWindowPixelBuffer(gUnknown_0203CF1C->unk40CB[i], 0);
+    }
+    gUnknown_0861CE54[a]();
+}
+
+void sub_81C2DE4(u8 a)
+{
+    CreateTask(gUnknown_0861CE64[a], 16);
+}
+
+void sub_81C2E00()
+{
+    if (gUnknown_0203CF1C->summary.isEgg)
+    {
+        sub_81C335C();
+        sub_81C33CC();
+        sub_81C3428();
+        sub_81C349C();
+    }
+    else
+    {
+        sub_81C2EC4();
+        sub_81C2F5C();
+        sub_81C2FD8();
+        sub_81C302C();
+        sub_81C307C();
+        sub_81C3194();
+    }
+}
+
+void sub_81C2E40(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    s16 dataa = data[0] - 1;
+    switch (dataa)
+    {
+        case 0:
+            sub_81C2EC4();
+            break;
+        case 1:
+            sub_81C2F5C();
+            break;
+        case 2:
+            sub_81C2FD8();
+            break;
+        case 3:
+            sub_81C302C();
+            break;
+        case 4:
+            sub_81C307C();
+            break;
+        case 5:
+            sub_81C3194();
+            break;
+        case 6:
+            DestroyTask(taskId);
+            return;
+    }
+    data[0]++;
+}
+
+void sub_81C2EC4()
+{
+    u8 r5;
+    int r2;
+    if (sub_81A6BF4() != 1 && sub_81B9E94() != 1)
+    {
+        r5 = sub_81C2D2C(&gUnknown_0861CCCC, 0);
+        sub_81C25A4(r5, gText_OTSlash, 0, 1, 0, 1);
+        r2 = GetStringWidth(1, gText_OTSlash, 0);
+        if (gUnknown_0203CF1C->summary.OTGender == 0)
+            sub_81C25A4(r5, gUnknown_0203CF1C->summary.OTName, r2, 1, 0, 5);
+        else
+            sub_81C25A4(r5, gUnknown_0203CF1C->summary.OTName, r2, 1, 0, 6);
+    }
+}
+
+void sub_81C2F5C()
+{
+    int r4;
+    if (sub_81A6BF4() != 1 && sub_81B9E94() != 1)
+    {
+        ConvertIntToDecimalStringN(StringCopy(gStringVar1, gText_UnkCtrlF907F908), (u16)gUnknown_0203CF1C->summary.OTID, 2, 5);
+        r4 = GetStringRightAlignXOffset(1, gStringVar1, 0x38);
+        sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCCC, 1), gStringVar1, r4, 1, 0, 1);
+    }
+}
+
+void sub_81C2FD8()
+{
+    u8 ability = GetAbilityBySpecies(gUnknown_0203CF1C->summary.species, gUnknown_0203CF1C->summary.altability);
+    sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCCC, 2), gAbilityNames[ability], 0, 1, 0, 1);
+}
+
+void sub_81C302C()
+{
+    u8 ability = GetAbilityBySpecies(gUnknown_0203CF1C->summary.species, gUnknown_0203CF1C->summary.altability);
+    sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCCC, 2), gAbilityDescriptionPointers[ability], 0, 17, 0, 0);
+}
+
+void sub_81C307C()
+{
+    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    u8 *text;
+    sub_81AFBF0();
+    sub_81AFC0C(0, gUnknown_0861CE74);
+    sub_81AFC0C(1, gUnknown_0861CE7B);
+    sub_81C31C0();
+    if (sub_81A6BF4() == 1 || sub_81B9E94() == 1 || sub_81C3304() == 1)
+        sub_81AFC28(gStringVar4, gText_XNature);
+    else
+    {
+        u8 *alloced1 = Alloc(32);
+        u8 *alloced2 = Alloc(32);
+        sub_81C31F0(alloced1);
+        if (sum->metLocation <= 0xD4)
+        {
+            sub_8124610(alloced2, sum->metLocation);
+            sub_81AFC0C(4, alloced2);
+        }
+        if (sub_81C3220() == 1)
+        {
+            if (sum->metLevel == 0)
+                text = (sum->metLocation > 0xD4) ? gText_XNatureHatchedSomewhereAt : gText_XNatureHatchedAtYZ;
+            else
+                text = (sum->metLocation > 0xD4) ? gText_XNatureMetSomewhereAt : gText_XNatureMetAtYZ;
+        }
+        else if (sum->metLocation == 0xFF)
+            text = gText_XNatureFatefulEncounter;
+        else if (sum->metLocation != 0xFE && sub_81C32BC())
+            text = (sum->metLocation > 0xD4) ? gText_XNatureObtainedInTrade : gText_XNatureProbablyMetAt;
+        else
+            text = gText_XNatureObtainedInTrade;
+        sub_81AFC28(gStringVar4, text);
+        Free(alloced1);
+        Free(alloced2);
+    }
+}
+
+void sub_81C3194()
+{
+    sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCCC, 3), gStringVar4, 0, 1, 0, 0);
+}
+
+void sub_81C31C0()
+{
+    struct unkSummaryStruct *sumStruct = gUnknown_0203CF1C;
+    sub_81AFC0C(2, gNatureNamePointers[sumStruct->summary.nature]);
+    sub_81AFC0C(5, gText_EmptyString5);
+}
+
+void sub_81C31F0(u8 *a)
+{
+    u8 level = gUnknown_0203CF1C->summary.metLevel;
+    if (level == 0)
+        level = 5;
+    ConvertIntToDecimalStringN(a, level, 0, 3);
+    sub_81AFC0C(3, a);
+}
+
+u8 sub_81C3220()
+{
+    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    u32 r4;
+    u8 r5;
+    if (gUnknown_0203CF1C->unk0 == (union unkUnion *)&gEnemyParty)
+    {
+        u8 multiID = GetMultiplayerId()^1;
+        r4 = (u16)gLinkPlayers[multiID].trainerId;
+        r5 = gLinkPlayers[multiID].gender;
+        StringCopy(gStringVar1, gLinkPlayers[multiID].name);
+    }
+    else
+    {
+        r4 = sub_80F0020() & 0xFFFF;
+        r5 = gSaveBlock2Ptr->playerGender;
+        StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
+    }
+    if (r5 != sum->OTGender || r4 != (sum->OTID & 0xFFFF) || StringCompareWithoutExtCtrlCodes(gStringVar1, sum->OTName))
+    {
+            return 0;
+    }
+    return 1;
+}
+
+u8 sub_81C32BC()
+{
+    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    u8 r0 = sum->metGame - 1;
+    if (r0 <= 4)
+        return 1;
+    return 0;
+}
+
+u8 sub_81C32E0()
+{
+    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    u8 r0 = sum->metGame - 1;
+    if (r0 <= 2)
+        return 1;
+    return 0;
+}
+
+u8 sub_81C3304()
+{
+    if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) && gMain.inBattle)
+    {
+        if (gUnknown_0203CF1C->unk40BE == 1 || gUnknown_0203CF1C->unk40BE == 4 || gUnknown_0203CF1C->unk40BE == 5)
+            return 1;
+    }
+    return 0;
+}
+
+#ifdef NONMATCHING
+void sub_81C335C()
+{
+    u8 r4 = sub_81C2D2C(&gUnknown_0861CCCC, 0);
+    u32 r5 = GetStringWidth(1, gText_OTSlash, 0);
+    sub_81C25A4(r4, gText_OTSlash, 0, 1, 0, 1);
+    sub_81C25A4(r4, gText_FiveMarks, r5, 1, 0, 1);
+}
+#else
+__attribute__((naked))
+void sub_81C335C()
+{
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5,r6}\n\
+	sub sp, 0x8\n\
+	ldr r0, =gUnknown_0861CCCC\n\
+	movs r1, 0\n\
+	bl sub_81C2D2C\n\
+	adds r4, r0, 0\n\
+	lsls r4, 24\n\
+	lsrs r4, 24\n\
+	ldr r0, =gText_OTSlash\n\
+	mov r8, r0\n\
+	movs r0, 0x1\n\
+	mov r1, r8\n\
+	movs r2, 0\n\
+	bl GetStringWidth\n\
+	adds r5, r0, 0\n\
+	movs r0, 0\n\
+	mov r9, r0\n\
+	str r0, [sp]\n\
+	movs r6, 0x1\n\
+	str r6, [sp, 0x4]\n\
+	adds r0, r4, 0\n\
+	mov r1, r8\n\
+	movs r2, 0\n\
+	movs r3, 0x1\n\
+	bl sub_81C25A4\n\
+	ldr r1, =gText_FiveMarks\n\
+	lsls r5, 24\n\
+	lsrs r5, 24\n\
+	mov r0, r9\n\
+	str r0, [sp]\n\
+	str r6, [sp, 0x4]\n\
+	adds r0, r4, 0\n\
+	adds r2, r5, 0\n\
+	movs r3, 0x1\n\
+	bl sub_81C25A4\n\
+	add sp, 0x8\n\
+	pop {r3,r4}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	pop {r4-r6}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+	.syntax divided\n");
+}
+#endif
+
+void sub_81C33CC()
+{
+    int r4;
+    StringCopy(gStringVar1, gText_UnkCtrlF907F908);
+    StringAppend(gStringVar1, gText_FiveMarks);
+    r4 = GetStringRightAlignXOffset(1, gStringVar1, 0x38);
+    sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCCC, 1), gStringVar1, r4, 1, 0, 1);
+}
+
+void sub_81C3428()
+{
+    u8 *text;
+    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    if (gUnknown_0203CF1C->summary.sanity == 1)
+        text = gText_EggWillTakeALongTime;
+    else if (sum->friendship <= 5)
+        text = gText_EggAboutToHatch;
+    else if (sum->friendship <= 10)
+        text = gText_EggWillHatchSoon;
+    else if (sum->friendship <= 40)
+        text = gText_EggWillTakeSomeTime;
+    else
+        text = gText_EggWillTakeALongTime;
+    sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCCC, 2), text, 0, 1, 0, 0);
+}
+
+void sub_81C349C()
+{
+    u8 *text;
+    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    if (gUnknown_0203CF1C->summary.sanity != 1)
+    {
+        if (sum->metLocation == 0xFF)
+            text = gText_PeculiarEggNicePlace;
+        else if (sub_81C32BC() == 0 || sub_81C3220() == 0)
+            text = gText_PeculiarEggTrade;
+        else if (sum->metLocation == 0xFD)
+            text = (sub_81C32E0() == 1) ? gText_EggFromHotSprings : gText_EggFromTraveler;
+        else
+            text = gText_OddEggFoundByCouple;
+    }
+    else
+        text = gText_OddEggFoundByCouple;
+    sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCCC, 3), text, 0, 1, 0, 0);
+}
+
+void sub_81C3530()
+{
+    sub_81C35E4();
+    sub_81C3690();
+    sub_81C3710();
+    sub_81C37D8();
+    sub_81C3808();
+    sub_81C3890();
+    sub_81C38C0();
+}
+
+void sub_81C3554(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    s16 dataa = data[0] - 1;
+    switch (dataa)
+    {
+        case 0:
+            sub_81C35E4();
+            break;
+        case 1:
+            sub_81C3690();
+            break;
+        case 2:
+            sub_81C3710();
+            break;
+        case 3:
+            sub_81C37D8();
+            break;
+        case 4:
+            sub_81C3808();
+            break;
+        case 5:
+            sub_81C3890();
+            break;
+        case 6:
+            sub_81C38C0();
+            break;
+        case 7:
+            DestroyTask(taskId);
+            return;
+    }
+    data[0]++;
+}
+
+void sub_81C35E4()
+{
+    u8 *text;
+    int offset;
+    if (gUnknown_0203CF1C->summary.item == ITEM_ENIGMA_BERRY && sub_81B1250() == 1 && (gUnknown_0203CF1C->unk40BE == 1 || gUnknown_0203CF1C->unk40BE == 4 || gUnknown_0203CF1C->unk40BE == 5))
+    {
+        text = (u8*)ItemId_GetItem(ITEM_ENIGMA_BERRY);
+    }
+    else if (gUnknown_0203CF1C->summary.item == ITEM_NONE)
+        text = gText_None;
+    else
+    {
+        CopyItemName(gUnknown_0203CF1C->summary.item, gStringVar1);
+        text = gStringVar1;
+    }
+    offset = GetStringCenterAlignXOffset(1, text, 0x48) + 6;
+    sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCEC, 0), text, offset, 1, 0, 0);
+}
+
+void sub_81C3690()
+{
+    u8 *text;
+    int offset;
+    if (gUnknown_0203CF1C->summary.ribbons == 0)
+        text = gText_None;
+    else
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gUnknown_0203CF1C->summary.ribbons, 1, 2);
+        StringExpandPlaceholders(gStringVar4, gText_RibbonsVar1);
+        text = gStringVar4;
+    }
+    offset = GetStringCenterAlignXOffset(1, text, 0x46) + 6;
+    sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCEC, 1), text, offset, 1, 0, 0);
+}
+
+void sub_81C3710()
+{
+    u8 *alloced1 = Alloc(8);
+    u8 *alloced2 = Alloc(8);
+    u8 *alloced3 = Alloc(8);
+    u8 *alloced4 = Alloc(8);
+    ConvertIntToDecimalStringN(alloced1, gUnknown_0203CF1C->summary.currentHP, 1, 3);
+    ConvertIntToDecimalStringN(alloced2, gUnknown_0203CF1C->summary.maxHP, 1, 3);
+    ConvertIntToDecimalStringN(alloced3, gUnknown_0203CF1C->summary.atk, 1, 7);
+    ConvertIntToDecimalStringN(alloced4, gUnknown_0203CF1C->summary.def, 1, 7);
+    sub_81AFBF0();
+    sub_81AFC0C(0, alloced1);
+    sub_81AFC0C(1, alloced2);
+    sub_81AFC0C(2, alloced3);
+    sub_81AFC0C(3, alloced4);
+    sub_81AFC28(gStringVar4, gUnknown_0861CE82);
+    Free(alloced1);
+    Free(alloced2);
+    Free(alloced3);
+    Free(alloced4);
+}
+
+void sub_81C37D8()
+{
+    sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCEC, 2), gStringVar4, 4, 1, 0, 0);
+}
+
+void sub_81C3808()
+{
+    ConvertIntToDecimalStringN(gStringVar1, gUnknown_0203CF1C->summary.spatk, 1, 3);
+    ConvertIntToDecimalStringN(gStringVar2, gUnknown_0203CF1C->summary.spdef, 1, 3);
+    ConvertIntToDecimalStringN(gStringVar3, gUnknown_0203CF1C->summary.speed, 1, 3);
+    sub_81AFBF0();
+    sub_81AFC0C(0, gStringVar1);
+    sub_81AFC0C(1, gStringVar2);
+    sub_81AFC0C(2, gStringVar3);
+    sub_81AFC28(gStringVar4, gUnknown_0861CE8E);
+}
+
+void sub_81C3890()
+{
+    sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCEC, 3), gStringVar4, 2, 1, 0, 0);
+}
+
+void sub_81C38C0()
+{
+    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    u8 r6 = sub_81C2D2C(&gUnknown_0861CCEC, 4);
+    int offset;
+    u32 expToNextLevel;
+    ConvertIntToDecimalStringN(gStringVar1, sum->exp, 1, 7);
+    offset = GetStringRightAlignXOffset(1, gStringVar1, 0x2A) + 2;
+    sub_81C25A4(r6, gStringVar1, offset, 1, 0, 0);
+    if (sum->level < MAX_MON_LEVEL)
+        expToNextLevel = gExperienceTables[gBaseStats[sum->species].growthRate][sum->level + 1] - sum->exp;
+    else
+        expToNextLevel = 0;
+    ConvertIntToDecimalStringN(gStringVar1, expToNextLevel, 1, 6);
+    offset = GetStringRightAlignXOffset(1, gStringVar1, 0x2A) + 2;
+    sub_81C25A4(r6, gStringVar1, offset, 17, 0, 0);
+}
+
+void sub_81C3984()
+{
+    sub_81C3B08(0);
+    sub_81C3B08(1);
+    sub_81C3B08(2);
+    sub_81C3B08(3);
+    if (gUnknown_0203CF1C->unk40BC == 3)
+    {
+        sub_81C3F44();
+        if (gUnknown_0203CF1C->unk40C6 == 4)
+        {
+            if (gUnknown_0203CF1C->unk40C4 != 0)
+                sub_81C3E9C(gUnknown_0203CF1C->unk40C4);
+        }
+        else
+            sub_81C3E9C(gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unk40C6]);
+    }
+}
+
+void sub_81C39F0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    s16 dataa = data[0] - 1;
+
+    switch (dataa)
+    {
+        case 0:
+            sub_81C3B08(0);
+            break;
+        case 1:
+            sub_81C3B08(1);
+            break;
+        case 2:
+            sub_81C3B08(2);
+            break;
+        case 3:
+            sub_81C3B08(3);
+            break;
+        case 4:
+            if (gUnknown_0203CF1C->unk40BC == 3)
+                sub_81C3F44();
+            break;
+        case 5:
+            if (gUnknown_0203CF1C->unk40BC == 3)
+            {
+                if (gUnknown_0203CF1C->unk40C6 == 4)
+                    data[1] = gUnknown_0203CF1C->unk40C4;
+                else
+                    data[1] = gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unk40C6];
+            }
+            break;
+        case 6:
+            if (gUnknown_0203CF1C->unk40BC == 3)
+            {
+                if (!(gUnknown_0203CF1C->unk40C4 == 0 && gUnknown_0203CF1C->unk40C6 == 4))
+                    sub_81C3E9C(data[1]);
+            }
+            break;
+        case 7:
+            DestroyTask(taskId);
+            return;
+    }
+    data[0]++;
+}
+
+#ifdef NONMATCHING
+void sub_81C3B08(u8 a)
+{
+    struct unkSummaryStruct *r10 = gUnknown_0203CF1C;
+    u8 r8 = sub_81C2D2C(&gUnknown_0861CD14, 0);
+    u8 sp = sub_81C2D2C(&gUnknown_0861CD14, 1);
+    u8 r6;
+    u8 r5;
+    u8 *text;
+    int offset;
+    u16 move;
+    if (r10->summary.moves[a] != 0)
+    {
+        move = r10->summary.moves[a];
+        r6 = CalculatePPWithBonus(move, r10->summary.ppBonuses, a);
+        sub_81C25A4(r8, gMoveNames[move], 0, (a<<4) + 1, 0, 1);
+        ConvertIntToDecimalStringN(gStringVar1, r10->summary.pp[a], 1, 2);
+        ConvertIntToDecimalStringN(gStringVar2, r6, 1, 2);
+        sub_81AFBF0();
+        sub_81AFC0C(0, gStringVar1);
+        sub_81AFC0C(1, gStringVar2);
+        sub_81AFC28(gStringVar4, gUnknown_0861CE97);
+        text = gStringVar4;
+        r5 = sub_814FC20(r10->summary.pp[a], r6) + 9;
+        offset = GetStringRightAlignXOffset(1, text, 0x2C);
+    }
+    else
+    {
+        sub_81C25A4(r8, gText_OneDash, 0, (a<<4) + 1, 0, 1);
+        text = gText_TwoDashes;
+        r5 = 12;
+        offset = GetStringCenterAlignXOffset(1, text, 0x2C);
+    }
+    sub_81C25A4(sp, text, offset, (a<<4), 0, r5);
+}
+#else
+__attribute__((naked))
+void sub_81C3B08(u8 a)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0xC\n\
+	lsls r0, 24\n\
+	lsrs r7, r0, 24\n\
+	ldr r0, =gUnknown_0203CF1C\n\
+	ldr r0, [r0]\n\
+	mov r10, r0\n\
+	ldr r4, =gUnknown_0861CD14\n\
+	adds r0, r4, 0\n\
+	movs r1, 0\n\
+	bl sub_81C2D2C\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	mov r8, r0\n\
+	adds r0, r4, 0\n\
+	movs r1, 0x1\n\
+	bl sub_81C2D2C\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	str r0, [sp, 0x8]\n\
+	lsls r1, r7, 1\n\
+	mov r0, r10\n\
+	adds r0, 0x84\n\
+	adds r0, r1\n\
+	ldrh r5, [r0]\n\
+	cmp r5, 0\n\
+	beq _081C3C00\n\
+	mov r0, r10\n\
+	adds r0, 0xA4\n\
+	ldrb r1, [r0]\n\
+	adds r0, r5, 0\n\
+	adds r2, r7, 0\n\
+	bl CalculatePPWithBonus\n\
+	adds r6, r0, 0\n\
+	lsls r6, 24\n\
+	lsrs r6, 24\n\
+	movs r0, 0xD\n\
+	adds r1, r5, 0\n\
+	muls r1, r0\n\
+	ldr r0, =gMoveNames\n\
+	adds r1, r0\n\
+	lsls r0, r7, 4\n\
+	mov r9, r0\n\
+	mov r3, r9\n\
+	adds r3, 0x1\n\
+	lsls r3, 24\n\
+	lsrs r3, 24\n\
+	movs r0, 0\n\
+	str r0, [sp]\n\
+	movs r0, 0x1\n\
+	str r0, [sp, 0x4]\n\
+	mov r0, r8\n\
+	movs r2, 0\n\
+	bl sub_81C25A4\n\
+	ldr r0, =gStringVar1\n\
+	mov r8, r0\n\
+	mov r5, r10\n\
+	adds r5, 0x8C\n\
+	adds r5, r7\n\
+	ldrb r1, [r5]\n\
+	movs r2, 0x1\n\
+	movs r3, 0x2\n\
+	bl ConvertIntToDecimalStringN\n\
+	ldr r4, =gStringVar2\n\
+	adds r0, r4, 0\n\
+	adds r1, r6, 0\n\
+	movs r2, 0x1\n\
+	movs r3, 0x2\n\
+	bl ConvertIntToDecimalStringN\n\
+	bl sub_81AFBF0\n\
+	movs r0, 0\n\
+	mov r1, r8\n\
+	bl sub_81AFC0C\n\
+	movs r0, 0x1\n\
+	adds r1, r4, 0\n\
+	bl sub_81AFC0C\n\
+	ldr r4, =gStringVar4\n\
+	ldr r1, =gUnknown_0861CE97\n\
+	adds r0, r4, 0\n\
+	bl sub_81AFC28\n\
+	adds r7, r4, 0\n\
+	ldrb r0, [r5]\n\
+	adds r1, r6, 0\n\
+	bl sub_814FC20\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	adds r5, r0, 0\n\
+	adds r5, 0x9\n\
+	movs r0, 0x1\n\
+	adds r1, r7, 0\n\
+	movs r2, 0x2C\n\
+	bl GetStringRightAlignXOffset\n\
+	mov r4, r9\n\
+	b _081C3C26\n\
+	.pool\n\
+_081C3C00:\n\
+	ldr r1, =gText_OneDash\n\
+	lsls r4, r7, 4\n\
+	adds r3, r4, 0x1\n\
+	lsls r3, 24\n\
+	lsrs r3, 24\n\
+	str r5, [sp]\n\
+	movs r0, 0x1\n\
+	str r0, [sp, 0x4]\n\
+	mov r0, r8\n\
+	movs r2, 0\n\
+	bl sub_81C25A4\n\
+	ldr r7, =gText_TwoDashes\n\
+	movs r5, 0xC\n\
+	movs r0, 0x1\n\
+	adds r1, r7, 0\n\
+	movs r2, 0x2C\n\
+	bl GetStringCenterAlignXOffset\n\
+_081C3C26:\n\
+	lsls r2, r0, 24\n\
+	lsrs r2, 24\n\
+	adds r3, r4, 0x1\n\
+	lsls r3, 24\n\
+	lsrs r3, 24\n\
+	movs r0, 0\n\
+	str r0, [sp]\n\
+	lsls r0, r5, 24\n\
+	lsrs r0, 24\n\
+	str r0, [sp, 0x4]\n\
+	ldr r0, [sp, 0x8]\n\
+	adds r1, r7, 0\n\
+	bl sub_81C25A4\n\
+	add sp, 0xC\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+	.syntax divided\n");
+}
+#endif
+
+void sub_81C3C5C(u16 move)
+{
+    u8 *text;
+    if (move != 0)
+    {
+        FillWindowPixelRect(14, 0, 0x35, 0, 0x13, 0x20);
+        if (gBattleMoves[move].power <= 1)
+            text = gText_ThreeDashes;
+        else
+        {
+            ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].power, 1, 3);
+            text = gStringVar1;
+        }
+        sub_81C25A4(14, text, 0x35, 1, 0, 0);
+        if (gBattleMoves[move].accuracy == 0)
+            text = gText_ThreeDashes;
+        else
+        {
+            ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].accuracy, 1, 3);
+            text = gStringVar1;
+        }
+        sub_81C25A4(14, text, 0x35, 17, 0, 0);
+    }
+}
+
+void sub_81C3D08()
+{
+    sub_81C3B08(0);
+    sub_81C3B08(1);
+    sub_81C3B08(2);
+    sub_81C3B08(3);
+    if (gUnknown_0203CF1C->unk40BC == 3)
+    {
+        sub_81C3F44();
+        sub_81C3E2C(gUnknown_0203CF1C->unk40C6);
+    }
+}
+
+void sub_81C3D54(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    s16 dataa = data[0] - 1;
+    
+    switch (dataa)
+    {
+        case 0:
+            sub_81C3B08(0);
+            break;
+        case 1:
+            sub_81C3B08(1);
+            break;
+        case 2:
+            sub_81C3B08(2);
+            break;
+        case 3:
+            sub_81C3B08(3);
+            break;
+        case 4:
+            if (gUnknown_0203CF1C->unk40BC == 3)
+                sub_81C3F44();
+            break;
+        case 5:
+            if (gUnknown_0203CF1C->unk40BC == 3)
+            {
+                if (!(gUnknown_0203CF1C->unk40C4 == 0 && gUnknown_0203CF1C->unk40C6 == 4))
+                    sub_81C3E2C(gUnknown_0203CF1C->unk40C6);
+            }
+            break;
+        case 6:
+            DestroyTask(taskId);
+            return;
+    }
+    data[0]++;
 }
