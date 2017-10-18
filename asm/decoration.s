@@ -5,32 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8127058
-sub_8127058: @ 8127058
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r4, r1, 24
-	lsrs r4, 24
-	ldr r1, =gText_Color161Shadow161
-	bl StringCopy
-	cmp r4, 0x1
-	bne _08127078
-	movs r0, 0x4
-	strb r0, [r5, 0x2]
-	movs r0, 0x5
-	b _0812707E
-	.pool
-_08127078:
-	movs r0, 0x2
-	strb r0, [r5, 0x2]
-	movs r0, 0x3
-_0812707E:
-	strb r0, [r5, 0x5]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8127058
-
 	thumb_func_start sub_8127088
 sub_8127088: @ 8127088
 	push {r4,r5,lr}

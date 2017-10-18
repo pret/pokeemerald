@@ -33,5 +33,6 @@ extern const u8 gText_NoDecorations[];
 extern const u8 gText_NoDecorationsInUse[];
 extern const u8 gText_Exit[];
 extern const u8 gText_Cancel[];
+extern const u8 gText_Color161Shadow161[];
 
 #endif //GUARD_strings_H

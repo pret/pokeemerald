@@ -314,3 +314,18 @@ void sub_8126F68(u8 winid, u8 decorCat, u8 x, u8 y, bool8 flag, u8 speed)
     x = GetStringRightAlignXOffset(1, gStringVar4, width);
     PrintTextOnWindow(winid, 1, gStringVar4, x, y, speed, NULL);
 }
+
+void sub_8127058(u8 *str, bool8 flag)
+{
+    StringCopy(str, gText_Color161Shadow161);
+    if (flag == TRUE)
+    {
+        str[2] = 0x04; // RED
+        str[5] = 0x05; // LIGHT_RED
+    }
+    else
+    {
+        str[2] = 0x02; // DARK_GREY
+        str[5] = 0x03; // LIGHT_GREY
+    }
+}
