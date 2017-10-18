@@ -8,6 +8,7 @@
 #include "palette.h"
 #include "songs.h"
 #include "field_weather.h"
+#include "list_menu.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
 #include "sound.h"
@@ -30,7 +31,8 @@ extern EWRAM_DATA u8 gUnknown_0203A173;
 extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
 extern EWRAM_DATA u8 gUnknown_0203A188[4];
 extern EWRAM_DATA struct {
-    u8 filler_0000[0x520];
+    struct ListMenuItem unk_000[41];
+    u8 unk_148[41][24];
     u8 unk_520;
     u8 unk_521;
 } *gUnknown_0203A18C;
@@ -57,6 +59,7 @@ void sub_81279B4(u8 taskId);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_8133E1C(u8 taskId);
+void sub_8127454(u8 *dest, u16 decoId);
 
 // .rodata
 
@@ -65,6 +68,7 @@ extern const u8 *const gUnknown_085A6B28[];
 extern const struct MenuAction gUnknown_085A6B48[];
 extern const u8 *const gUnknown_085A6B68[];
 extern const u16 gUnknown_085A6BB0[];
+extern const struct ListMenuTemplate gUnknown_085A6BD0;
 
 // .text
 
@@ -460,4 +464,34 @@ void sub_81272C8(void)
 void sub_81272F8(void)
 {
     sub_8122298(&gUnknown_0203A170, &gUnknown_0203A16E, gUnknown_0203A18C->unk_521, gUnknown_0203A18C->unk_520, 8);
+}
+
+void sub_8127330(u8 taskId)
+{
+    s16 *data;
+    u16 i;
+
+    data = gTasks[taskId].data;
+    if ((gUnknown_0203A173 < DECORCAT_DOLL || gUnknown_0203A173 > DECORCAT_CUSHION) && gUnknown_0203A17C.isPlayerRoom == TRUE && data[11] == 0)
+    {
+        sub_8127058(gStringVar1, TRUE);
+    }
+    else
+    {
+        sub_8127058(gStringVar1, FALSE);
+    }
+    for (i = 0; i < gUnknown_0203A18C->unk_520 - 1; i ++)
+    {
+        sub_8127454(gUnknown_0203A18C->unk_148[i], gUnknown_0203A14C[i]);
+        gUnknown_0203A18C->unk_000[i].unk_00 = gUnknown_0203A18C->unk_148[i];
+        gUnknown_0203A18C->unk_000[i].unk_04 = i;
+    }
+    StringCopy(gUnknown_0203A18C->unk_148[i], gText_Cancel);
+    gUnknown_0203A18C->unk_000[i].unk_00 = gUnknown_0203A18C->unk_148[i];
+    gUnknown_0203A18C->unk_000[i].unk_04 = -2;
+    gUnknown_03006310 = gUnknown_085A6BD0;
+    gUnknown_03006310.unk_10 = gUnknown_0203A188[1];
+    gUnknown_03006310.unk_0c = gUnknown_0203A18C->unk_520;
+    gUnknown_03006310.unk_00 = gUnknown_0203A18C->unk_000;
+    gUnknown_03006310.unk_0e = gUnknown_0203A18C->unk_521;
 }
