@@ -226,7 +226,7 @@ _0805764C:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _080577C2
 _08057658:
 	movs r0, 0x20
@@ -249,7 +249,7 @@ _08057674:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -277,7 +277,7 @@ _080576B4:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -321,7 +321,7 @@ _0805771A:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -333,7 +333,7 @@ _08057732:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8059CB4
+	bl ActionSelectionCreateCursorAt
 	b _080577E8
 	.pool
 _0805774C:
@@ -393,7 +393,7 @@ _080577B2:
 	movs r1, 0xC
 _080577BC:
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _080577C2:
 	bl PlayerBufferExecCompleted
 	b _080577E8
@@ -518,7 +518,7 @@ _080578A0:
 	orrs r2, r0
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl dp11b_obj_free
@@ -1086,7 +1086,7 @@ _08057E14:
 _08057E1C:
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl PlayerBufferExecCompleted
 	b _08057F9E
 	.pool
@@ -2385,11 +2385,11 @@ sub_805896C: @ 805896C
 	mov r5, r8
 	push {r5-r7}
 	movs r7, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058998
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080589D0
@@ -2541,7 +2541,7 @@ _08058A0E:
 	ldr r4, =gPlayerParty
 	adds r0, r4
 	bl sub_805E990
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058AE4
@@ -2672,7 +2672,7 @@ _08058BB2:
 	ands r0, r1
 	cmp r0, 0
 	bne _08058C68
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058C38
@@ -2697,7 +2697,7 @@ _08058BB2:
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r7]
 	eors r0, r6
 	bl sub_8076918
@@ -2705,7 +2705,7 @@ _08058BB2:
 	eors r0, r6
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 _08058C38:
 	ldr r5, =gHealthBoxesIds
 	ldr r4, =gActiveBank
@@ -2721,13 +2721,13 @@ _08058C38:
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r4]
 	bl sub_8076918
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 _08058C68:
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
@@ -2817,11 +2817,11 @@ _08058D14:
 	movs r0, 0x1
 	mov r9, r0
 _08058D32:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058D52
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058DAC
@@ -2915,7 +2915,7 @@ _08058E0A:
 	mov r0, r8
 	cmp r0, 0
 	beq _08058EAA
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058E48
@@ -3207,13 +3207,13 @@ _0805905E:
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r5]
 	bl sub_8076918
 	ldrb r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -3267,7 +3267,7 @@ bx_t1_healthbar_update: @ 8059130
 	ldrb r0, [r5]
 	adds r0, r6
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r1, r4, 16
 	movs r0, 0x1
@@ -3338,7 +3338,7 @@ sub_80591B8: @ 80591B8
 	str r7, [sp, 0x8]
 	ldrh r2, [r1, 0xA]
 	str r2, [sp, 0xC]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3413,9 +3413,9 @@ _080591FE:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	strb r5, [r4]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3616,7 +3616,7 @@ _08059430:
 	lsls r4, 16
 	lsrs r4, 16
 	ldrb r0, [r5]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r4, 16
 	movs r0, 0x1
@@ -3686,7 +3686,7 @@ _08059430:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	strb r5, [r4]
 	ldr r0, =sub_8059544
 	str r0, [r6]
@@ -3729,7 +3729,7 @@ sub_8059544: @ 8059544
 	adds r0, r1
 	ldrb r4, [r0, 0xC]
 	ldrb r6, [r0, 0x8]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3795,7 +3795,7 @@ sub_80595A4: @ 80595A4
 	adds r0, r7, 0
 	movs r1, 0x38
 	bl GetMonData
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3814,7 +3814,7 @@ sub_80595A4: @ 80595A4
 	ldrb r0, [r0]
 	adds r1, r7, 0
 	movs r2, 0
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	b _08059638
 	.pool
 _08059624:
@@ -3826,7 +3826,7 @@ _08059624:
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 _08059638:
 	ldr r0, =gTasks
 	lsls r1, r6, 2
@@ -3930,7 +3930,7 @@ sub_80596A8: @ 80596A8
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8072984
+	bl SetHealthboxSpriteInvisible
 	bl PlayerBufferExecCompleted
 _08059724:
 	pop {r4-r6}
@@ -3977,7 +3977,7 @@ sub_8059744: @ 8059744
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8072984
+	bl SetHealthboxSpriteInvisible
 	bl PlayerBufferExecCompleted
 _08059798:
 	pop {r4-r6}
@@ -4291,14 +4291,14 @@ _08059A2C:
 	movs r0, 0x1
 	movs r1, 0xE
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08059A76
 	.pool
 _08059A6C:
 	movs r0, 0x1
 	movs r1, 0xD
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _08059A76:
 	bl PlayerBufferExecCompleted
 _08059A7A:
@@ -4401,7 +4401,7 @@ sub_8059B3C: @ 8059B3C
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _08059B98
-	bl sub_814FBAC
+	bl SetPpNumbersPaletteInMoveSelection
 	ldrb r1, [r7]
 	lsls r4, r1, 9
 	adds r0, r5, 0x4
@@ -4561,8 +4561,8 @@ battle_menu_cursor_related: @ 8059C70
 	.pool
 	thumb_func_end battle_menu_cursor_related
 
-	thumb_func_start sub_8059CB4
-sub_8059CB4: @ 8059CB4
+	thumb_func_start ActionSelectionCreateCursorAt
+ActionSelectionCreateCursorAt: @ 8059CB4
 	push {r4,lr}
 	sub sp, 0x10
 	adds r3, r0, 0
@@ -4595,10 +4595,10 @@ sub_8059CB4: @ 8059CB4
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8059CB4
+	thumb_func_end ActionSelectionCreateCursorAt
 
-	thumb_func_start sub_8059CF8
-sub_8059CF8: @ 8059CF8
+	thumb_func_start ActionSelectionDestroyCursorAt
+ActionSelectionDestroyCursorAt: @ 8059CF8
 	push {lr}
 	sub sp, 0x10
 	adds r3, r0, 0
@@ -4632,7 +4632,7 @@ sub_8059CF8: @ 8059CF8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8059CF8
+	thumb_func_end ActionSelectionDestroyCursorAt
 
 	thumb_func_start sub_8059D40
 sub_8059D40: @ 8059D40
@@ -6866,7 +6866,7 @@ sub_805B164: @ 805B164
 	muls r0, r2
 	ldr r2, =gPlayerParty
 	adds r0, r2
-	bl sub_805DD7C
+	bl BattleLoadPlayerMonSpriteGfx
 	ldr r2, =gSprites
 	ldr r0, =gBankSpriteIds
 	ldrb r3, [r4]
@@ -6923,7 +6923,7 @@ sub_805B1CC: @ 805B1CC
 	muls r0, r2
 	ldr r2, =gPlayerParty
 	adds r0, r2
-	bl sub_805DD7C
+	bl BattleLoadPlayerMonSpriteGfx
 	ldr r1, =gActionSelectionCursor
 	ldrb r0, [r5]
 	adds r0, r1
@@ -7162,7 +7162,7 @@ _0805B41C:
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8072984
+	bl SetHealthboxSpriteInvisible
 	bl PlayerBufferExecCompleted
 _0805B452:
 	pop {r4-r6}
@@ -7371,11 +7371,11 @@ _0805B5E0:
 	beq _0805B618
 	movs r0, 0x5A
 	mov r9, r0
-	ldr r1, =gUnknown_083054E0
+	ldr r1, =gTrainerFrontPicCoords
 	b _0805B642
 	.pool
 _0805B618:
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 	lsls r0, r4, 2
 	adds r0, r1
 	ldrb r1, [r0]
@@ -7392,7 +7392,7 @@ _0805B618:
 _0805B63C:
 	movs r0, 0x50
 	mov r9, r0
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 _0805B642:
 	lsls r0, r4, 2
 	adds r0, r1
@@ -7542,7 +7542,7 @@ _0805B794:
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_805DF84
+	bl LoadBackTrainerBankSpriteGfx
 	ldrb r0, [r5]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -7724,7 +7724,7 @@ _0805B926:
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_805DF84
+	bl LoadBackTrainerBankSpriteGfx
 	ldrb r0, [r5]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -7733,7 +7733,7 @@ _0805B926:
 	adds r0, r4, 0
 	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 	lsls r4, 2
 	adds r4, r1
 	ldrb r1, [r4]
@@ -8539,7 +8539,7 @@ dp01t_12_6_battle_menu: @ 805C044
 _0805C062:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0805C062
@@ -8549,7 +8549,7 @@ _0805C062:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8059CB4
+	bl ActionSelectionCreateCursorAt
 	ldr r0, =gText_WhatWillPkmnDo
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
@@ -8658,7 +8658,7 @@ sub_805C158: @ 805C158
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl PlayerBufferExecCompleted
 _0805C194:
 	pop {r0}
@@ -9130,7 +9130,7 @@ sub_805C5C4: @ 805C5C4
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0x9
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r2, [r4]
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
@@ -9378,7 +9378,7 @@ sub_805C80C: @ 805C80C
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -9860,7 +9860,7 @@ sub_805CC00: @ 805CC00
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_805DD7C
+	bl BattleLoadPlayerMonSpriteGfx
 	ldr r0, =gBankSpriteIds
 	adds r4, r0
 	ldrb r1, [r4]
@@ -9906,7 +9906,7 @@ _0805CC94:
 	mov r9, r0
 	ldrh r0, [r1, 0x8]
 	strb r0, [r7]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805CCB4
@@ -9965,7 +9965,7 @@ _0805CCE4:
 	muls r0, r2
 	ldr r2, =gPlayerParty
 	adds r0, r2
-	bl sub_805DD7C
+	bl BattleLoadPlayerMonSpriteGfx
 	ldrb r0, [r7]
 	movs r1, 0
 	bl sub_805B258

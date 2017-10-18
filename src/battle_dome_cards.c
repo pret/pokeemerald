@@ -17,7 +17,7 @@ extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const union AffineAnimCmd *const gUnknown_082FF618[];
 extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const union AnimCmd *const gUnknown_082FF70C[];
-extern const union AnimCmd *const *const gUnknown_08309AAC[NUM_SPECIES];
+extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[NUM_SPECIES];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
 extern const u8 gUnknown_0831F578[];
 
@@ -282,7 +282,7 @@ u16 sub_818D3E4(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s16 y, 
         images[j].size = 0x800;
     }
     gUnknown_0203CCEC.tileTag = 0xFFFF;
-    gUnknown_0203CCEC.anims = gUnknown_08309AAC[species];
+    gUnknown_0203CCEC.anims = gMonAnimationsSpriteAnimsPtrTable[species];
     gUnknown_0203CCEC.images = images;
     if (flags2 == 0x01)
     {

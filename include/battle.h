@@ -5,6 +5,7 @@
 #include "battle_util.h"
 #include "battle_script_commands.h"
 #include "battle_2.h"
+#include "battle_ai_switch_items.h"
 
 /*
     Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
@@ -77,6 +78,7 @@
 #define BATTLE_PLAYER_TELEPORTED    0x5
 #define BATTLE_POKE_FLED            0x6
 #define BATTLE_CAUGHT               0x7
+#define BATTLE_SAFARI_OUT_OF_BALLS  0x8
 #define BATTLE_FORFEITED            0x9
 #define BATTLE_OPPONENT_TELEPORTED  0xA
 
@@ -498,7 +500,7 @@ struct BattleHistory
     struct UsedMoves usedMoves[BATTLE_BANKS_COUNT];
     u8 abilities[BATTLE_BANKS_COUNT];
     u8 itemEffects[BATTLE_BANKS_COUNT];
-    u16 TrainerItems[BATTLE_BANKS_COUNT];
+    u16 trainerItems[BATTLE_BANKS_COUNT];
     u8 itemsNo;
 };
 
@@ -549,11 +551,11 @@ struct BattleResults
     u8 playerSwitchesCounter; // 0x2
     u8 unk3;                  // 0x3
     u8 unk4;                  // 0x4
-    u8 unk5_0:1;              // 0x5 , 0x1
-    u8 unk5_1:1;              // 0x5 , 0x2
-    u8 caughtMonBall:4;       // 0x5 , 0x4/0x8/0x10/0x20
-    u8 unk5_6:1;              // 0x5 , 0x40
-    u8 unk5_7:1;              // 0x5 , 0x80
+    u8 unk5_0:1;              // 0x5
+    u8 usedMasterBall:1;      // 0x5
+    u8 caughtMonBall:4;       // 0x5
+    u8 unk5_6:1;              // 0x5
+    u8 unk5_7:1;              // 0x5
     u16 playerMon1Species;    // 0x6
     u8 playerMon1Name[11];    // 0x8
     u8 battleTurnCounter;     // 0x13
@@ -566,7 +568,7 @@ struct BattleResults
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[10];     // 0x2A
     u8 filler34[2];
-    u8 catchAttempts[12];     // 0x36
+    u8 catchAttempts[11];     // 0x36
 };
 
 extern struct BattleResults gBattleResults;
@@ -626,7 +628,7 @@ struct BattleStruct
     u8 field_8B;
     u8 field_8C;
     u8 field_8D;
-    u8 field_8E;
+    u8 stringMoveType;
     u8 expGetterBank;
     u8 field_90;
     u8 field_91;
@@ -654,8 +656,8 @@ struct BattleStruct
     void (*savedCallback)(void);
     u16 usedHeldItems[BATTLE_BANKS_COUNT];
     u8 field_C0[4];
-    u8 field_C4[2];
-    u8 field_C6[2];
+    u8 AI_itemType[2];
+    u8 AI_itemFlags[2];
     u16 choicedMove[BATTLE_BANKS_COUNT];
     u16 changedItems[BATTLE_BANKS_COUNT];
     u8 intimidateBank;
@@ -830,8 +832,8 @@ struct BattleScripting
     u8 atk6C_state;
     u8 learnMoveState;
     u8 field_20;
-    u8 field_21;
-    u8 field_22;
+    u8 reshowMainState;
+    u8 reshowHelperState;
     u8 field_23;
     u8 field_24;
     u8 multiplayerId;
@@ -861,9 +863,29 @@ void FreeBattleSpritesData(void);
 void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);
 void BattleMusicStop(void);
-void sub_805E990(struct Pokemon* mon, u8 bank);
+void sub_805E990(struct Pokemon *mon, u8 bank);
 void sub_805EF14(void);
 bool8 BattleInitAllSprites(u8 *state1, u8 *state2);
+void sub_805E350(void);
+bool8 BattleLoadAllHealthBoxesGfx(u8 state);
+void LoadAndCreateEnemyShadowSprites(void);
+void SetBankEnemyShadowSpriteCallback(u8 bank, u16 species);
+void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 bank);
+void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank);
+void BattleLoadSubstituteSpriteGfx(u8 bank, bool8 arg1);
+
+enum
+{
+    BACK_PIC_BRENDAN,
+    BACK_PIC_MAY,
+    BACK_PIC_RED,
+    BACK_PIC_LEAF,
+    BACK_PIC_RS_BRENDAN,
+    BACK_PIC_RS_MAY,
+    BACK_PIC_WALLY,
+    BACK_PIC_STEVEN
+};
+void LoadBackTrainerBankSpriteGfx(u8 backPicId, u8 bank);
 
 // rom_80A5C6C
 u8 GetBankSide(u8 bank);
@@ -923,6 +945,10 @@ struct MonSpritesGfx
     struct SpriteTemplate templates[4];
 };
 
+extern struct BattleSpritesGfx* gMonSpritesGfx;
+extern u8 gBattleOutcome;
+extern u16 gLastUsedItem;
+extern u32 gBattleTypeFlags;
 extern struct MonSpritesGfx* gMonSpritesGfxPtr;
 
 #endif // GUARD_BATTLE_H

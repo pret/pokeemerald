@@ -156,8 +156,8 @@ _08161910:
 	bx r1
 	thumb_func_end sub_81618D0
 
-	thumb_func_start sub_8161918
-sub_8161918: @ 8161918
+	thumb_func_start CheckHasDecoration
+CheckHasDecoration: @ 8161918
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -193,7 +193,7 @@ _08161958:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8161918
+	thumb_func_end CheckHasDecoration
 
 	thumb_func_start DecorationAdd
 DecorationAdd: @ 8161960

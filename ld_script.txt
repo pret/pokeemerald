@@ -64,7 +64,7 @@ SECTIONS {
         asm/battle_controller_player.o(.text);
         asm/battle_7.o(.text);
         asm/battle_controller_opponent.o(.text);
-        asm/battle_9.o(.text);
+        src/battle_ai_switch_items.o(.text);
         asm/battle_controller_linkopponent.o(.text);
         src/pokemon_1.o(.text);
         asm/pokemon_1.o(.text);
@@ -101,7 +101,7 @@ SECTIONS {
         asm/map_obj_lock.o(.text);
         src/text_window.o(.text);
         src/script.o(.text);
-        asm/scrcmd.o(.text);
+        src/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
         src/event_data.o(.text);
         asm/coord_event_weather.o(.text);
@@ -116,14 +116,13 @@ SECTIONS {
         asm/battle_anim.o(.text);
         asm/rom_80A5C6C.o(.text);
         src/task.o(.text);
-        asm/reshow_battle_screen.o(.text);
+        src/reshow_battle_screen.o(.text);
         asm/battle_anim_80A9C70.o(.text);
         asm/title_screen.o(.text);
         asm/field_screen.o(.text);
         asm/battle_setup.o(.text);
         asm/cable_club.o(.text);
         asm/trainer_see.o(.text);
-        asm/fldeff_emotion.o(.text);
         asm/wild_encounter.o(.text);
         asm/field_effect.o(.text);
         asm/unknown_task.o(.text);
@@ -149,7 +148,7 @@ SECTIONS {
         asm/contest_effect.o(.text);
         asm/record_mixing.o(.text);
         asm/secret_base.o(.text);
-        asm/tv.o(.text);
+        src/tv.o(.text);
         asm/contest_link_80F57C4.o(.text);
         asm/script_pokemon_util_80F87D8.o(.text);
         asm/field_poison.o(.text);
@@ -190,7 +189,7 @@ SECTIONS {
         asm/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
         asm/battle_controller_linkpartner.o(.text);
-        asm/battle_message.o(.text);
+        src/battle_message.o(.text);
         asm/cable_car.o(.text);
         asm/math_util.o(.text);
         asm/roulette_util.o(.text);
@@ -265,6 +264,7 @@ SECTIONS {
         asm/unk_sprite_file.o(.text);
         asm/unk_transition.o(.text);
         asm/unk_transition_2.o(.text);
+        src/international_string_util.o(.text);
         asm/international_string_util.o(.text);
     } =0
 
@@ -325,6 +325,8 @@ SECTIONS {
         src/string_util.o(.rodata);
         data/link.o(.rodata);
         src/rtc.o(.rodata);
+        data/main_menu.o(.rodata);
+        data/battle_1.o(.rodata);
         data/data2b.o(.rodata);
         src/battle_2.o(.rodata);
         src/battle_util.o(.rodata);
@@ -354,7 +356,7 @@ SECTIONS {
         data/field_ground_effect.o(.rodata);
         data/map_obj_8097404.o(.rodata);
         data/text_window.o(.rodata);
-        data/scrcmd.o(.rodata);
+        src/scrcmd.o(.rodata);
         data/coord_event_weather.o(.rodata);
         data/field_tasks.o(.rodata);
         data/reset_rtc_screen.o(.rodata);
@@ -368,7 +370,6 @@ SECTIONS {
         data/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         data/trainer_see.o(.rodata);
-        data/fldeff_emotion.o(.rodata);
         data/wild_encounter.o(.rodata);
         data/field_effect.o(.rodata);
         data/option_menu.o(.rodata);
@@ -388,7 +389,7 @@ SECTIONS {
         data/contest_effect.o(.rodata);
         data/record_mixing.o(.rodata);
         data/secret_base.o(.rodata);
-        data/tv.o(.rodata);
+        src/tv.o(.rodata);
         data/contest_link_80F57C4.o(.rodata);
         data/script_pokemon_util_80F87D8.o(.rodata);
         src/pokemon_size_record.o(.rodata)
@@ -412,7 +413,7 @@ SECTIONS {
         src/battle_ai_script_commands.o(.rodata);
         data/data4.o(.rodata);
         data/battle_controller_link_partner.o(.rodata);
-        data/battle_message.o(.rodata);
+        src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
         data/save.o(.rodata);
         data/field_effect_helpers.o(.rodata);

@@ -153,7 +153,7 @@ _081684CE:
 	movs r1, 0x9
 _081684E4:
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl WallyBufferExecCompleted
 	ldr r1, [r4]
 	adds r1, 0x94
@@ -180,10 +180,10 @@ _08168508:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_8059CB4
+	bl ActionSelectionCreateCursorAt
 	ldr r0, [r4]
 	adds r0, 0x96
 	movs r1, 0x40
@@ -208,7 +208,7 @@ _08168540:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl WallyBufferExecCompleted
 _08168564:
 	pop {r4,r5}
@@ -425,7 +425,7 @@ _081686D2:
 	ldr r0, [r0]
 	cmp r0, r3
 	bne _081687DC
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0816877A
@@ -459,7 +459,7 @@ _081686D2:
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r5]
 	eors r0, r6
 	bl sub_8076918
@@ -467,7 +467,7 @@ _081686D2:
 	eors r0, r6
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 _0816877A:
 	ldr r1, =gUnknown_03005D7C
 	ldr r4, =gActiveBank
@@ -493,13 +493,13 @@ _0816877A:
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r4]
 	bl sub_8076918
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r2, [r0, 0x8]
@@ -665,7 +665,7 @@ sub_8168934: @ 8168934
 	ldrb r0, [r5]
 	adds r0, r6
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 	lsls r4, 16
 	asrs r1, r4, 16
 	movs r0, 0x1
@@ -796,7 +796,7 @@ sub_8168A20: @ 8168A20
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8072984
+	bl SetHealthboxSpriteInvisible
 	bl WallyBufferExecCompleted
 _08168A74:
 	pop {r4-r6}
@@ -3015,7 +3015,7 @@ _08169E80:
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8072984
+	bl SetHealthboxSpriteInvisible
 	bl WallyBufferExecCompleted
 _08169EB6:
 	pop {r4-r6}
@@ -3030,7 +3030,7 @@ sub_8169EC8: @ 8169EC8
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
 	movs r0, 0x6
-	bl sub_805DF84
+	bl LoadBackTrainerBankSpriteGfx
 	ldrb r0, [r4]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -3039,7 +3039,7 @@ sub_8169EC8: @ 8169EC8
 	movs r0, 0x6
 	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 	ldrb r1, [r1, 0x18]
 	movs r2, 0x8
 	subs r2, r1
@@ -3115,7 +3115,7 @@ dp01t_07_6_: @ 8169F94
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
 	movs r0, 0x6
-	bl sub_805DF84
+	bl LoadBackTrainerBankSpriteGfx
 	ldrb r0, [r4]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -3124,7 +3124,7 @@ dp01t_07_6_: @ 8169F94
 	movs r0, 0x6
 	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gUnknown_08305D2C
+	ldr r1, =gTrainerBackPicCoords
 	ldrb r1, [r1, 0x18]
 	movs r2, 0x8
 	subs r2, r1
@@ -3681,7 +3681,7 @@ dp01t_12_1_battle_menu: @ 816A470
 _0816A48A:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0816A48A
@@ -3691,7 +3691,7 @@ _0816A48A:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8059CB4
+	bl ActionSelectionCreateCursorAt
 	ldr r0, =gText_WhatWillWallyDo
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
@@ -3777,7 +3777,7 @@ _0816A550:
 	lsls r2, 1
 	movs r0, 0x1
 	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	bl WallyBufferExecCompleted
 _0816A574:
 	pop {r4}

@@ -1,7 +1,3 @@
-//
-// Created by Scott Norton on 9/15/17.
-//
-
 #ifndef GUARD_FIELD_EFFECTS_H
 #define GUARD_FIELD_EFFECTS_H
 
@@ -73,8 +69,9 @@ enum FieldEffectScriptIdx
     FLDEFF_USE_TELEPORT
 };
 
-extern u32 gFieldEffectSpawnParams[8];
-
 u8 FieldEffectStart(u8);
+bool8 FieldEffectActiveListContains(u8 id);
+
+extern u32 gFieldEffectArguments[8];
 
 #endif //GUARD_FIELD_EFFECTS_H

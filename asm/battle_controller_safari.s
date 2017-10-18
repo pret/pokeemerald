@@ -103,13 +103,13 @@ _0815942A:
 	movs r1, 0x7
 _0815942E:
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 	b _08159440
 _08159436:
 	movs r0, 0x1
 	movs r1, 0x8
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd_x21
 _08159440:
 	bl SafariBufferExecCompleted
 	b _0815954E
@@ -132,7 +132,7 @@ _08159446:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -158,7 +158,7 @@ _08159484:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -184,7 +184,7 @@ _081594C0:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -196,7 +196,7 @@ _081594F2:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8059CB4
+	bl ActionSelectionCreateCursorAt
 	b _0815954E
 	.pool
 _0815950C:
@@ -218,7 +218,7 @@ _0815950C:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -229,7 +229,7 @@ _0815950C:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8059CB4
+	bl ActionSelectionCreateCursorAt
 _0815954E:
 	pop {r4,r5}
 	pop {r0}
@@ -569,7 +569,7 @@ sub_8159800: @ 8159800
 	ldrb r0, [r0, 0x8]
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
-	bl sub_805DF84
+	bl LoadBackTrainerBankSpriteGfx
 	ldr r0, [r4]
 	ldrb r6, [r0, 0x8]
 	ldrb r0, [r5]
@@ -580,7 +580,7 @@ sub_8159800: @ 8159800
 	adds r0, r6, 0
 	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
-	ldr r2, =gUnknown_08305D2C
+	ldr r2, =gTrainerBackPicCoords
 	ldr r1, [r4]
 	ldrb r1, [r1, 0x8]
 	lsls r1, 2
@@ -867,7 +867,7 @@ sub_8159A94: @ 8159A94
 _08159AAE:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _08159AAE
@@ -877,7 +877,7 @@ _08159AAE:
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8059CB4
+	bl ActionSelectionCreateCursorAt
 	ldr r0, =gText_WhatWillPkmnDo2
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
@@ -981,7 +981,7 @@ sub_8159B84: @ 8159B84
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0xB
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -1256,13 +1256,13 @@ sub_8159D90: @ 8159D90
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0xA
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r4]
 	bl sub_8076918
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2

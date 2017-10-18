@@ -46,7 +46,7 @@ sub_8153804: @ 8153804
 	ldr r1, =gUnknown_08674C86
 	bl StringExpandPlaceholders
 	movs r0, 0x3
-	bl sub_81538C4
+	bl SetMysteryEventScriptStatus
 	pop {r0}
 	bx r0
 	.pool
@@ -140,13 +140,13 @@ _081538AC:
 	.pool
 	thumb_func_end sub_81538A0
 
-	thumb_func_start sub_81538C4
-sub_81538C4: @ 81538C4
+	thumb_func_start SetMysteryEventScriptStatus
+SetMysteryEventScriptStatus: @ 81538C4
 	ldr r1, =gUnknown_0203BBC0
 	str r0, [r1, 0x6C]
 	bx lr
 	.pool
-	thumb_func_end sub_81538C4
+	thumb_func_end SetMysteryEventScriptStatus
 
 	thumb_func_start sub_81538D0
 sub_81538D0: @ 81538D0

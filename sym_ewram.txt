@@ -238,26 +238,7 @@ gBattle_WIN1H: @ 2022E28
 gBattle_WIN1V: @ 2022E2A
 	.space 0x2
 
-gDisplayedStringBattle: @ 2022E2C
-	.space 0x12C
-
-gBattleTextBuff1: @ 2022F58
-	.space 0x2
-
-gUnknown_02022F5A: @ 2022F5A
-	.space 0x2
-
-gUnknown_02022F5C: @ 2022F5C
-	.space 0xC
-
-gBattleTextBuff2: @ 2022F68
-	.space 0x2
-
-gUnknown_02022F6A: @ 2022F6A
-	.space 0xE
-
-gBattleTextBuff3: @ 2022F78
-	.space 0x10
+    .include "src/battle_message.o"
 
 gUnknown_02022F88: @ 2022F88
 	.space 0x64
@@ -699,24 +680,9 @@ gUnknown_020375BC: @ 20375BC
 gUnknown_020375C0: @ 20375C0
 	.space 0x4
 
-gUnknown_020375C4: @ 20375C4
-	.space 0x4
+    .include "src/scrcmd.o"
 
-gUnknown_020375C8: @ 20375C8
-	.space 0x2
-
-gUnknown_020375CA: @ 20375CA
-	.space 0x2
-
-gUnknown_020375CC: @ 20375CC
-	.space 0x2
-
-gUnknown_020375CE: @ 20375CE
-	.space 0x2
-
-gUnknown_020375D0: @ 20375D0
-	.space 0x4
-
+    .align 2
 gUnknown_020375D4: @ 20375D4
 	.space 0x2
 
@@ -897,7 +863,7 @@ gUnknown_02038C00: @ 2038C00
 gUnknown_02038C04: @ 2038C04
 	.space 0x4
 
-gFieldEffectSpawnParams: @ 2038C08
+gFieldEffectArguments: @ 2038C08
 	.space 0x20
 
 gUnknown_02038C28: @ 2038C28
@@ -1048,16 +1014,7 @@ gBagPockets: @ 2039DD8
 	.space 0x28
 
 gUnknown_02039E00: @ 2039E00
-	.space 0x2
-
-gUnknown_02039E02: @ 2039E02
-	.space 0xB
-
-gUnknown_02039E0D: @ 2039E0D
-	.space 0x11
-
-gUnknown_02039E1E: @ 2039E1E
-	.space 0xE2
+	.space 0x100
 
 gUnknown_02039F00: @ 2039F00
 	.space 0x8
@@ -1089,7 +1046,7 @@ gUnknown_02039F2A: @ 2039F2A
 gUnknown_02039F2B: @ 2039F2B
 	.space 0x1
 
-gUnknown_02039F2C: @ 2039F2C
+gScriptContestCategory: @ 2039F2C
 	.space 0x2
 
 gUnknown_02039F2E: @ 2039F2E
@@ -1164,26 +1121,7 @@ gUnknown_0203A01D: @ 203A01D
 gUnknown_0203A020: @ 203A020
 	.space 0x4
 
-gUnknown_0203A024: @ 203A024
-	.space 0x2
-
-gUnknown_0203A026: @ 203A026
-	.space 0x2
-
-gUnknown_0203A028: @ 203A028
-	.space 0x2
-
-gUnknown_0203A02A: @ 203A02A
-	.space 0x2
-
-gUnknown_0203A02C: @ 203A02C
-	.space 0x4
-
-gUnknown_0203A030: @ 203A030
-	.space 0x1
-
-gUnknown_0203A031: @ 203A031
-	.space 0x3
+    .include "src/tv.o"
 
 gUnknown_0203A034: @ 203A034
 	.space 0x4

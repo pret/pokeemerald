@@ -5388,7 +5388,7 @@ _081ADB6C:
 	ldrh r0, [r4]
 	mov r3, r8
 	ldrh r1, [r3, 0x10]
-	bl sub_80D6D70
+	bl AddPCItem
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x1

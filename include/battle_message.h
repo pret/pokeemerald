@@ -3,59 +3,59 @@
 
 // for 0xFD
 
-#define B_TXT_BUFF1 00
-#define B_TXT_BUFF2 01
-#define B_TXT_COPY_VAR_1 02
-#define B_TXT_COPY_VAR_2 03
-#define B_TXT_COPY_VAR_3 04
-#define B_TXT_PLAYER_MON1_NAME 05
-#define B_TXT_OPPONENT_MON1_NAME 06
-#define B_TXT_PLAYER_MON2_NAME 07
-#define B_TXT_OPPONENT_MON2_NAME 08
-#define B_TXT_LINK_PLAYER_MON1_NAME 09
-#define B_TXT_LINK_OPPONENT_MON1_NAME 0A
-#define B_TXT_LINK_PLAYER_MON2_NAME 0B
-#define B_TXT_LINK_OPPONENT_MON2_NAME 0C
-#define B_TXT_ATK_NAME_WITH_PREFIX_MON1 0D
-#define B_TXT_ATK_NAME 0E
-#define B_TXT_ATK_NAME_WITH_PREFIX 0F
-#define B_TXT_DEF_NAME_WITH_PREFIX 10
-#define B_TXT_EFF_NAME_WITH_PREFIX 11 // EFF = short for gEffectBank
-#define B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX 12
-#define B_TXT_ACTIVE_NAME_WITH_PREFIX 13
-#define B_TXT_CURRENT_MOVE 14
-#define B_TXT_LAST_MOVE 15
-#define B_TXT_LAST_ITEM 16
-#define B_TXT_LAST_ABILITY 17
-#define B_TXT_ATK_ABILITY 18
-#define B_TXT_DEF_ABILITY 19
-#define B_TXT_SCR_ACTIVE_ABILITY 1A
-#define B_TXT_EFF_ABILITY 1B
-#define B_TXT_TRAINER1_CLASS 1C
-#define B_TXT_TRAINER1_NAME 1D
-#define B_TXT_1E 1E // trainer name for a link player
-#define B_TXT_1F 1F // trainer name for a link player
-#define B_TXT_20 20 // trainer name for a link player
-#define B_TXT_21 21 // trainer name for a link player
-#define B_TXT_22 22 // trainer name for a link player
-#define B_TXT_PLAYER_NAME 23
-#define B_TXT_TRAINER1_LOSE_TEXT 24
-#define B_TXT_TRAINER1_WIN_TEXT 25
-#define B_TXT_26 26
-#define B_TXT_PC_CREATOR_NAME 27
-#define B_TXT_ATK_PREFIX1 28
-#define B_TXT_DEF_PREFIX1 29
-#define B_TXT_ATK_PREFIX2 2A
-#define B_TXT_DEF_PREFIX2 2B
-#define B_TXT_ATK_PREFIX3 2C
-#define B_TXT_DEF_PREFIX3 2D
-#define B_TXT_TRAINER2_CLASS 2E
-#define B_TXT_TRAINER2_NAME 2F
-#define B_TXT_TRAINER2_LOSE_TEXT 30
-#define B_TXT_TRAINER2_WIN_TEXT 31
-#define B_TXT_PARTNER_CLASS 32
-#define B_TXT_PARTNER_NAME 33
-#define B_TXT_BUFF3 34
+#define B_TXT_BUFF1 0x0
+#define B_TXT_BUFF2 0x1
+#define B_TXT_COPY_VAR_1 0x2
+#define B_TXT_COPY_VAR_2 0x3
+#define B_TXT_COPY_VAR_3 0x4
+#define B_TXT_PLAYER_MON1_NAME 0x5
+#define B_TXT_OPPONENT_MON1_NAME 0x6
+#define B_TXT_PLAYER_MON2_NAME 0x7
+#define B_TXT_OPPONENT_MON2_NAME 0x8
+#define B_TXT_LINK_PLAYER_MON1_NAME 0x9
+#define B_TXT_LINK_OPPONENT_MON1_NAME 0xA
+#define B_TXT_LINK_PLAYER_MON2_NAME 0xB
+#define B_TXT_LINK_OPPONENT_MON2_NAME 0xC
+#define B_TXT_ATK_NAME_WITH_PREFIX_MON1 0xD
+#define B_TXT_ATK_PARTNER_NAME 0xE
+#define B_TXT_ATK_NAME_WITH_PREFIX 0xF
+#define B_TXT_DEF_NAME_WITH_PREFIX 0x10
+#define B_TXT_EFF_NAME_WITH_PREFIX 0x11 // EFF = short for gEffectBank
+#define B_TXT_ACTIVE_NAME_WITH_PREFIX 0x12
+#define B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX 0x13
+#define B_TXT_CURRENT_MOVE 0x14
+#define B_TXT_LAST_MOVE 0x15
+#define B_TXT_LAST_ITEM 0x16
+#define B_TXT_LAST_ABILITY 0x17
+#define B_TXT_ATK_ABILITY 0x18
+#define B_TXT_DEF_ABILITY 0x19
+#define B_TXT_SCR_ACTIVE_ABILITY 0x1A
+#define B_TXT_EFF_ABILITY 0x1B
+#define B_TXT_TRAINER1_CLASS 0x1C
+#define B_TXT_TRAINER1_NAME 0x1D
+#define B_TXT_1E 0x1E // trainer name for a link player
+#define B_TXT_1F 0x1F // trainer name for a link player
+#define B_TXT_20 0x20 // trainer name for a link player
+#define B_TXT_21 0x21 // trainer name for a link player
+#define B_TXT_22 0x22 // trainer name for a link player
+#define B_TXT_PLAYER_NAME 0x23
+#define B_TXT_TRAINER1_LOSE_TEXT 0x24
+#define B_TXT_TRAINER1_WIN_TEXT 0x25
+#define B_TXT_26 0x26
+#define B_TXT_PC_CREATOR_NAME 0x27
+#define B_TXT_ATK_PREFIX1 0x28
+#define B_TXT_DEF_PREFIX1 0x29
+#define B_TXT_ATK_PREFIX2 0x2A
+#define B_TXT_DEF_PREFIX2 0x2B
+#define B_TXT_ATK_PREFIX3 0x2C
+#define B_TXT_DEF_PREFIX3 0x2D
+#define B_TXT_TRAINER2_CLASS 0x2E
+#define B_TXT_TRAINER2_NAME 0x2F
+#define B_TXT_TRAINER2_LOSE_TEXT 0x30
+#define B_TXT_TRAINER2_WIN_TEXT 0x31
+#define B_TXT_PARTNER_CLASS 0x32
+#define B_TXT_PARTNER_NAME 0x33
+#define B_TXT_BUFF3 0x34
 
 // for B_TXT_BUFF1, B_TXT_BUFF2 and B_TXT_BUFF3
 
@@ -205,12 +205,22 @@ void BufferStringBattle(u16 stringID);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8* src);
 u32 BattleStringExpandPlaceholders(const u8* src, u8* dst);
 void sub_814F9EC(const u8* text, u8 arg1);
+void SetPpNumbersPaletteInMoveSelection(void);
+u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 
-extern u8 gBattleTextBuff1[];
-extern u8 gBattleTextBuff2[];
-extern u8 gBattleTextBuff3[];
-extern u8 gDisplayedStringBattle[];
+#define TEXT_BUFF_ARRAY_COUNT   16
 
+extern u8 gDisplayedStringBattle[300];
+extern u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT];
+extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
+extern u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT];
+
+extern const u8* const gStatNamesTable[];
+extern const u8* const gPokeblockWasTooXStringTable[];
 extern const u8* const gRefereeStringsTable[];
+extern const u8* const gStatNamesTable2[];
+
+extern const u16 gMissStringIds[];
+extern const u16 gTrappingMoves[];
 
 #endif // GUARD_BATTLE_MESSAGE_H

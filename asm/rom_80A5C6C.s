@@ -419,11 +419,11 @@ _080A5FE8:
 	lsls r0, 1
 	cmp r4, r0
 	bls _080A5FF8
-	ldr r0, =gUnknown_08305DCC
+	ldr r0, =gEnemyMonElevation
 	b _080A5FFC
 	.pool
 _080A5FF8:
-	ldr r0, =gUnknown_08305DCC
+	ldr r0, =gEnemyMonElevation
 	adds r0, r7, r0
 _080A5FFC:
 	ldrb r5, [r0]
@@ -1928,15 +1928,15 @@ _080A6B1A:
 	bx r1
 	thumb_func_end sub_80A6A90
 
-	thumb_func_start battle_type_is_double
-battle_type_is_double: @ 80A6B20
+	thumb_func_start IsDoubleBattle
+IsDoubleBattle: @ 80A6B20
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
 	bx lr
 	.pool
-	thumb_func_end battle_type_is_double
+	thumb_func_end IsDoubleBattle
 
 	thumb_func_start sub_80A6B30
 sub_80A6B30: @ 80A6B30
@@ -5807,7 +5807,7 @@ _080A8946:
 	bl sub_80A5C6C
 	lsls r0, 24
 	lsrs r7, r0, 24
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A8998
