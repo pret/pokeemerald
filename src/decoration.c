@@ -35,16 +35,18 @@ void sub_8126D6C(u8 taskId);
 void sub_8126DCC(u8 taskId);
 void sub_8126DFC(u8 taskId);
 void sub_8126E8C(u8 taskId);
+void sub_8126F68(u8 winid, u8 decorCat, u8 x, u8 y, bool8 flag, u8 speed);
+void sub_8127058(u8 *str, bool8 flag);
 void sub_8127088(u8 taskId);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
-void sub_8126F68(u8, u8, u8, u8, bool8, u8);
 
 // .rodata
 
 extern const struct WindowTemplate gUnknown_085A6B90[4];
+extern const u8 *const gUnknown_085A6B28[];
 extern const struct MenuAction gUnknown_085A6B48[];
-extern const u8 *gUnknown_085A6B68[];
+extern const u8 *const gUnknown_085A6B68[];
 extern const u16 gUnknown_085A6BB0[];
 
 // .text
@@ -293,4 +295,22 @@ void sub_8126E8C(u8 taskId)
     }
     PrintTextOnWindow(r5, 1, gTasks[taskId].data[11] == 2 ? gText_Exit : gText_Cancel, 8, (i << 4) + 1, 0, 0);
     schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void sub_8126F68(u8 winid, u8 decorCat, u8 x, u8 y, bool8 flag, u8 speed)
+{
+    u8 width;
+    u8 *strbuf;
+
+    width = x == 8 ? 0x68 : 0x60;
+    y ++;
+    sub_8127058(gStringVar4, flag);
+    strbuf = StringLength(gStringVar4) + gStringVar4;
+    StringCopy(strbuf, gUnknown_085A6B28[decorCat]);
+    PrintTextOnWindow(winid, 1, gStringVar4, x, y, speed, NULL);
+    strbuf = ConvertIntToDecimalStringN(strbuf, CountDecorationCategoryN(decorCat), STR_CONV_MODE_RIGHT_ALIGN, 2);
+    *strbuf++ = CHAR_SLASH;
+    ConvertIntToDecimalStringN(strbuf, gDecorationInventories[decorCat].size, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    x = GetStringRightAlignXOffset(1, gStringVar4, width);
+    PrintTextOnWindow(winid, 1, gStringVar4, x, y, speed, NULL);
 }
