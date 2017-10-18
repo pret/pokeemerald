@@ -38,6 +38,8 @@ void sub_8126E8C(u8 taskId);
 void sub_8126F68(u8 winid, u8 decorCat, u8 x, u8 y, bool8 flag, u8 speed);
 void sub_8127058(u8 *str, bool8 flag);
 void sub_8127088(u8 taskId);
+void sub_81270E8(u8 taskId);
+void sub_812719C(u8 taskId);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 
@@ -327,5 +329,30 @@ void sub_8127058(u8 *str, bool8 flag)
     {
         str[2] = 0x02; // DARK_GREY
         str[5] = 0x03; // LIGHT_GREY
+    }
+}
+
+void sub_8127088(u8 taskId)
+{
+    s8 input;
+
+    if (!gPaletteFade.active)
+    {
+        input = ProcessMenuInput();
+        switch (input)
+        {
+            case -1:
+            case 8:
+                PlaySE(SE_SELECT);
+                sub_812719C(taskId);
+                break;
+            case -2:
+                break;
+            default:
+                PlaySE(SE_SELECT);
+                gUnknown_0203A173 = input;
+                sub_81270E8(taskId);
+                break;
+        }
     }
 }

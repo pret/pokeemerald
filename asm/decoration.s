@@ -5,55 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8127088
-sub_8127088: @ 8127088
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _081270DE
-	bl ProcessMenuInput
-	lsls r0, 24
-	lsrs r4, r0, 24
-	asrs r1, r0, 24
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _081270C0
-	cmp r1, r0
-	bgt _081270BC
-	subs r0, 0x1
-	cmp r1, r0
-	beq _081270DE
-	b _081270CE
-	.pool
-_081270BC:
-	cmp r1, 0x8
-	bne _081270CE
-_081270C0:
-	movs r0, 0x5
-	bl PlaySE
-	adds r0, r5, 0
-	bl sub_812719C
-	b _081270DE
-_081270CE:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, =gUnknown_0203A173
-	strb r4, [r0]
-	adds r0, r5, 0
-	bl sub_81270E8
-_081270DE:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8127088
-
 	thumb_func_start sub_81270E8
 sub_81270E8: @ 81270E8
 	push {r4,r5,lr}
