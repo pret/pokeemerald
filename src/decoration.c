@@ -50,6 +50,7 @@ void sub_8127620(u8 taskId);
 void sub_81279B4(u8 taskId);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
+void sub_8133E1C(u8 taskId);
 
 // .rodata
 
@@ -419,4 +420,15 @@ void sub_8127208(u8 taskId)
     gTasks[taskId].data[11] = 2;
     gUnknown_0203A173 = DECORCAT_DESK;
     sub_8126DFC(taskId);
+}
+
+void sub_8127250(u8 *dest, u8 decorCat)
+{
+    StringCopy(dest, gUnknown_085A6B28[decorCat]);
+}
+
+void sub_8127268(u8 taskId)
+{
+    sub_8126A58(1);
+    sub_8133E1C(taskId);
 }

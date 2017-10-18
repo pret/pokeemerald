@@ -5,35 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8127250
-sub_8127250: @ 8127250
-	push {lr}
-	lsls r1, 24
-	ldr r2, =gUnknown_085A6B28
-	lsrs r1, 22
-	adds r1, r2
-	ldr r1, [r1]
-	bl StringCopy
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8127250
-
-	thumb_func_start sub_8127268
-sub_8127268: @ 8127268
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x1
-	bl sub_8126A58
-	adds r0, r4, 0
-	bl sub_8133E1C
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8127268
-
 	thumb_func_start sub_8127284
 sub_8127284: @ 8127284
 	push {lr}
