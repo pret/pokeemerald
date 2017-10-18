@@ -38,6 +38,7 @@ void sub_8126E8C(u8 taskId);
 void sub_8127088(u8 taskId);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
+void sub_8126F68(u8, u8, u8, u8, bool8, u8);
 
 // .rodata
 
@@ -261,4 +262,35 @@ void sub_8126E44(u8 taskId)
     sub_8126E8C(taskId);
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(gUnknown_0203A188[1], 9, gUnknown_0203A173);
     gTasks[taskId].func = sub_8127088;
+}
+
+void sub_8126E8C(u8 taskId)
+{
+    s16 *data;
+    u8 r5;
+    bool8 r8;
+    u8 i;
+    bool8 fl;
+
+    data = gTasks[taskId].data;
+    r5 = gUnknown_0203A188[1];
+    fl = gUnknown_0203A17C.isPlayerRoom;
+    r8 = FALSE;
+    if (fl == TRUE && data[11] == 0)
+    {
+        r8 = TRUE;
+    }
+    for (i = 0; i < 8; i ++)
+    {
+        if (r8 == TRUE && i != DECORCAT_DOLL && i != DECORCAT_CUSHION)
+        {
+            sub_8126F68(r5, i, 8, i << 4, TRUE, 0xFF);
+        }
+        else
+        {
+            sub_8126F68(r5, i, 8, i << 4, FALSE, 0xFF);
+        }
+    }
+    PrintTextOnWindow(r5, 1, gTasks[taskId].data[11] == 2 ? gText_Exit : gText_Cancel, 8, (i << 4) + 1, 0, 0);
+    schedule_bg_copy_tilemap_to_vram(0);
 }
