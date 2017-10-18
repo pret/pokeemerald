@@ -15,6 +15,10 @@
 #include "gpu_regs.h"
 #include "battle_message.h"
 #include "species.h"
+#include "pokedex.h"
+#include "palette.h"
+#include "international_string_util.h"
+#include "safari_zone.h"
 
 extern bool8 IsDoubleBattle(void);
 extern u8 gBanksByIdentity[BATTLE_BANKS_COUNT];
@@ -29,9 +33,9 @@ extern const u8 gText_Slash[];
 void sub_8072924(struct Sprite *sprite);
 void sub_80728B4(struct Sprite *sprite);
 const u32 *GetHealthboxElementGfxPtr(u8 elementId);
-u32 AddTextPrinterAndCreateWindowOnHealthbox(u8 *str, u32 x, u32 y, u32 arg3, u32 *windowId);
+u32 AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 arg3, u32 *windowId);
 void sub_8075198(void *objVram, u32 windowTileData, u32 arg2);
-void RemoveWindow_(u32 windowId);
+void RemoveWindowOnHealthbox(u32 windowId);
 void sub_8075170(void *dest, u32 arg1, u32 arg2);
 void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 void sub_807513C(void *dest, u32 arg1, u32 arg2);
@@ -42,6 +46,7 @@ void sub_8073F98(u8 taskId);
 void sub_8073E64(u8 taskId);
 void sub_8074158(struct Sprite *sprite);
 void sub_8074090(struct Sprite *sprite);
+u8 GetStatusIconForBankId(u8 statusElementId, u8 bank);
 
 // const rom data
 const struct OamData gUnknown_0832C138 =
@@ -186,6 +191,7 @@ extern const struct SpriteTemplate gUnknown_0832C364[2];
 extern const struct SpriteTemplate gUnknown_0832C394[2];
 extern const struct SubspriteTable gUnknown_0832C2C4;
 extern const struct SubspriteTable gUnknown_0832C2CC;
+extern const u16 gBattleInterfaceStatusIcons_DynPals[];
 
 u8 sub_8072304(void)
 {
@@ -773,7 +779,7 @@ void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
         objVram += spriteTileNum + 0x400;
     }
     sub_8075198(objVram, windowTileData, 3);
-    RemoveWindow_(windowId);
+    RemoveWindowOnHealthbox(windowId);
 }
 
 void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
@@ -792,7 +798,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
             objVram = (void*)(OBJ_VRAM0);
             objVram += spriteTileNum + 0xB40;
             sub_8075170(objVram, windowTileData, 2);
-            RemoveWindow_(windowId);
+            RemoveWindowOnHealthbox(windowId);
         }
         else // singles, current
         {
@@ -806,7 +812,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
             objVram = (void*)(OBJ_VRAM0);
             objVram += spriteTileNum + 0xB00;
             sub_8075170(objVram, windowTileData + 0x20, 2);
-            RemoveWindow_(windowId);
+            RemoveWindowOnHealthbox(windowId);
         }
 
     }
@@ -871,7 +877,7 @@ void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrC
                 ConvertIntToDecimalStringN(text, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
                 windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 0, 5, 0, &windowId);
                 sub_8075170((void*)(OBJ_VRAM0) + spriteTileNum + 0xC0, windowTileData, 2);
-                RemoveWindow_(windowId);
+                RemoveWindowOnHealthbox(windowId);
                 CpuCopy32(GetHealthboxElementGfxPtr(0x74),
                           (void*)(OBJ_VRAM0 + 0x680) + (gSprites[healthboxSpriteId].oam.tileNum * 32),
                            0x20);
@@ -884,7 +890,7 @@ void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrC
                 windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 4, 5, 0, &windowId);
                 sub_807513C(objVram, 0, 3);
                 sub_8075170((void*)(OBJ_VRAM0 + 0x60) + spriteTileNum, windowTileData, 3);
-                RemoveWindow_(windowId);
+                RemoveWindowOnHealthbox(windowId);
             }
         }
     }
@@ -1580,5 +1586,194 @@ void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
         sub_8075198((void*)(0x6010020 + spriteTileNum), windowTileData, 7);
     }
 
-    RemoveWindow_(windowId);
+    RemoveWindowOnHealthbox(windowId);
+}
+
+void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
+{
+    u8 bank, healthboxSpriteId_2;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
+        return;
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        return;
+
+    bank = gSprites[healthboxSpriteId].data6;
+    if (GetBankSide(bank) == SIDE_PLAYER)
+        return;
+    if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES)), FLAG_GET_CAUGHT))
+        return;
+
+    healthboxSpriteId_2 = gSprites[healthboxSpriteId].data5;
+
+    if (noStatus)
+        CpuCopy32(GetHealthboxElementGfxPtr(0x46), (void*)(OBJ_VRAM0 + (gSprites[healthboxSpriteId_2].oam.tileNum + 8) * 32), 32);
+    else
+        CpuFill32(0, (void*)(OBJ_VRAM0 + (gSprites[healthboxSpriteId_2].oam.tileNum + 8) * 32), 32);
+}
+
+void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
+{
+    s32 i;
+    u8 bank, healthboxSpriteId_2;
+    u32 status, pltAdder;
+    const u32 *statusGfxPtr;
+    s16 tileNumAdder;
+    u8 statusPalId;
+
+    bank = gSprites[healthboxSpriteId].data6;
+    healthboxSpriteId_2 = gSprites[healthboxSpriteId].data5;
+    if (GetBankSide(bank) == SIDE_PLAYER)
+    {
+        status = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_STATUS);
+        if (!IsDoubleBattle())
+            tileNumAdder = 0x1A;
+        else
+            tileNumAdder = 0x12;
+    }
+    else
+    {
+        status = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_STATUS);
+        tileNumAdder = 0x11;
+    }
+
+    if (status & STATUS_SLEEP)
+    {
+        statusGfxPtr = GetHealthboxElementGfxPtr(GetStatusIconForBankId(0x1B, bank));
+        statusPalId = 2;
+    }
+    else if (status & STATUS_PSN_ANY)
+    {
+        statusGfxPtr = GetHealthboxElementGfxPtr(GetStatusIconForBankId(0x15, bank));
+        statusPalId = 0;
+    }
+    else if (status & STATUS_BURN)
+    {
+        statusGfxPtr = GetHealthboxElementGfxPtr(GetStatusIconForBankId(0x21, bank));
+        statusPalId = 4;
+    }
+    else if (status & STATUS_FREEZE)
+    {
+        statusGfxPtr = GetHealthboxElementGfxPtr(GetStatusIconForBankId(0x1E, bank));
+        statusPalId = 3;
+    }
+    else if (status & STATUS_PARALYSIS)
+    {
+        statusGfxPtr = GetHealthboxElementGfxPtr(GetStatusIconForBankId(0x18, bank));
+        statusPalId = 1;
+    }
+    else
+    {
+        statusGfxPtr = GetHealthboxElementGfxPtr(0x27);
+
+        for (i = 0; i < 3; i++)
+            CpuCopy32(statusGfxPtr, (void*)(OBJ_VRAM0 + (gSprites[healthboxSpriteId].oam.tileNum + tileNumAdder + i) * 32), 32);
+
+        if (!gBattleSpritesDataPtr->bankData[bank].hpNumbersNoBars)
+            CpuCopy32(GetHealthboxElementGfxPtr(1), (void *)(OBJ_VRAM0 + gSprites[healthboxSpriteId_2].oam.tileNum * 32), 64);
+
+        TryAddPokeballIconToHealthbox(healthboxSpriteId, TRUE);
+        return;
+    }
+
+    pltAdder = gSprites[healthboxSpriteId].oam.paletteNum * 16;
+    pltAdder += bank + 12;
+
+    FillPalette(gBattleInterfaceStatusIcons_DynPals[statusPalId], pltAdder + 0x100, 2);
+    CpuCopy16(gPlttBufferUnfaded + 0x100 + pltAdder, (void*)(OBJ_PLTT + pltAdder * 2), 2);
+    CpuCopy32(statusGfxPtr, (void*)(OBJ_VRAM0 + (gSprites[healthboxSpriteId].oam.tileNum + tileNumAdder) * 32), 96);
+    if (IsDoubleBattle() == TRUE || GetBankSide(bank) == SIDE_OPPONENT)
+    {
+        if (!gBattleSpritesDataPtr->bankData[bank].hpNumbersNoBars)
+        {
+            CpuCopy32(GetHealthboxElementGfxPtr(0), (void*)(OBJ_VRAM0 + gSprites[healthboxSpriteId_2].oam.tileNum * 32), 32);
+            CpuCopy32(GetHealthboxElementGfxPtr(0x41), (void*)(OBJ_VRAM0 + (gSprites[healthboxSpriteId_2].oam.tileNum + 1) * 32), 32);
+        }
+    }
+    TryAddPokeballIconToHealthbox(healthboxSpriteId, FALSE);
+}
+
+u8 GetStatusIconForBankId(u8 statusElementId, u8 bank)
+{
+    u8 ret = statusElementId;
+
+    switch (statusElementId)
+    {
+    case 21:
+        if (bank == 0)
+            ret = 21;
+        else if (bank == 1)
+            ret = 71;
+        else if (bank == 2)
+            ret = 86;
+        else
+            ret = 101;
+        break;
+    case 24:
+        if (bank == 0)
+            ret = 24;
+        else if (bank == 1)
+            ret = 74;
+        else if (bank == 2)
+            ret = 89;
+        else
+            ret = 104;
+        break;
+    case 27:
+        if (bank == 0)
+            ret = 27;
+        else if (bank == 1)
+            ret = 77;
+        else if (bank == 2)
+            ret = 92;
+        else
+            ret = 107;
+        break;
+    case 30:
+        if (bank == 0)
+            ret = 30;
+        else if (bank == 1)
+            ret = 80;
+        else if (bank == 2)
+            ret = 95;
+        else
+            ret = 110;
+        break;
+    case 33:
+        if (bank == 0)
+            ret = 33;
+        else if (bank == 1)
+            ret = 83;
+        else if (bank == 2)
+            ret = 98;
+        else
+            ret = 113;
+        break;
+    }
+    return ret;
+}
+
+extern const u8 gText_SafariBalls[];
+extern const u8 gText_SafariBallLeft[];
+
+void UpdateSafariBallsTextOnHealthbox(u8 healthboxSpriteId)
+{
+    u32 windowId, windowTileData, spriteTileNum;
+
+    windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(gText_SafariBalls, 0, 3, 2, &windowId);
+    spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * 32;
+    sub_8075198((void*)(OBJ_VRAM0 + 0x40) + spriteTileNum, windowTileData, 6);
+    sub_8075198((void*)(OBJ_VRAM0 + 0x800) + spriteTileNum, windowTileData + 0xC0, 2);
+    RemoveWindowOnHealthbox(windowId);
+}
+
+void UpdateLeftNoOfBallsTextOnHealthbox(healthboxSpriteId)
+{
+    u8 text[20];
+    u8 *txtPtr;
+    u32 windowId, windowTileData, spriteTileNum;
+
+    txtPtr = StringCopy(text, gText_SafariBallLeft);
+    ConvertIntToDecimalStringN(txtPtr, gNumSafariBalls, STR_CONV_MODE_LEFT_ALIGN, 2);
+    windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, GetStringRightAlignXOffset(0, 1));
 }
