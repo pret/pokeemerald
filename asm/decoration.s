@@ -5,62 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81270E8
-sub_81270E8: @ 81270E8
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r4, =gUnknown_0203A173
-	ldrb r0, [r4]
-	bl CountDecorationCategoryN
-	ldr r1, =gUnknown_0203A151
-	strb r0, [r1]
-	lsls r0, 24
-	cmp r0, 0
-	beq _08127154
-	ldrb r0, [r4]
-	bl CondenseDecorationCategoryN
-	ldr r2, =gUnknown_0203A14C
-	ldr r1, =gDecorationInventories
-	ldrb r0, [r4]
-	lsls r0, 3
-	adds r0, r1
-	ldr r0, [r0]
-	str r0, [r2]
-	adds r0, r5, 0
-	bl sub_81279B4
-	ldr r0, =gUnknown_0203A170
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, =gUnknown_0203A16E
-	strh r1, [r0]
-	ldr r1, =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, =sub_8127620
-	str r1, [r0]
-	b _0812716E
-	.pool
-_08127154:
-	movs r0, 0x1
-	bl sub_8126A58
-	ldr r4, =gStringVar4
-	ldr r1, =gText_NoDecorations
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	ldr r2, =sub_8127180
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl DisplayItemMessageOnField
-_0812716E:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81270E8
-
 	thumb_func_start sub_8127180
 sub_8127180: @ 8127180
 	push {r4,lr}

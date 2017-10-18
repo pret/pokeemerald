@@ -22,6 +22,9 @@
 
 extern EWRAM_DATA u8 *gUnknown_0203A14C;
 extern EWRAM_DATA u8 gUnknown_0203A150;
+extern EWRAM_DATA u8 gUnknown_0203A151;
+extern EWRAM_DATA u16 gUnknown_0203A16E;
+extern EWRAM_DATA u16 gUnknown_0203A170;
 extern EWRAM_DATA u8 gUnknown_0203A173;
 extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
 extern EWRAM_DATA u8 gUnknown_0203A188[4];
@@ -39,7 +42,10 @@ void sub_8126F68(u8 winid, u8 decorCat, u8 x, u8 y, bool8 flag, u8 speed);
 void sub_8127058(u8 *str, bool8 flag);
 void sub_8127088(u8 taskId);
 void sub_81270E8(u8 taskId);
+void sub_8127180(u8 taskId);
 void sub_812719C(u8 taskId);
+void sub_8127620(u8 taskId);
+void sub_81279B4(u8 taskId);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 
@@ -354,5 +360,25 @@ void sub_8127088(u8 taskId)
                 sub_81270E8(taskId);
                 break;
         }
+    }
+}
+
+void sub_81270E8(u8 taskId)
+{
+    gUnknown_0203A151 = CountDecorationCategoryN(gUnknown_0203A173);
+    if (gUnknown_0203A151 != 0)
+    {
+        CondenseDecorationCategoryN(gUnknown_0203A173);
+        gUnknown_0203A14C = gDecorationInventories[gUnknown_0203A173].items;
+        sub_81279B4(taskId);
+        gUnknown_0203A170 = 0;
+        gUnknown_0203A16E = 0;
+        gTasks[taskId].func = sub_8127620;
+    }
+    else
+    {
+        sub_8126A58(1);
+        StringExpandPlaceholders(gStringVar4, gText_NoDecorations);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_8127180);
     }
 }
