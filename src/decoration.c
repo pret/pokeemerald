@@ -44,6 +44,8 @@ void sub_8127088(u8 taskId);
 void sub_81270E8(u8 taskId);
 void sub_8127180(u8 taskId);
 void sub_812719C(u8 taskId);
+void sub_81271CC(u8 taskId);
+void sub_8127268(u8 taskId);
 void sub_8127620(u8 taskId);
 void sub_81279B4(u8 taskId);
 bool8 sub_81299AC(u8 taskId);
@@ -381,4 +383,40 @@ void sub_81270E8(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gText_NoDecorations);
         DisplayItemMessageOnField(taskId, gStringVar4, sub_8127180);
     }
+}
+
+void sub_8127180(u8 taskId)
+{
+    sub_8197434(0, 0);
+    sub_8126DFC(taskId);
+}
+
+void sub_812719C(u8 taskId)
+{
+    if (gTasks[taskId].data[11] != 2)
+    {
+        sub_81271CC(taskId);
+    }
+    else
+    {
+        sub_8127268(taskId);
+    }
+}
+
+void sub_81271CC(u8 taskId)
+{
+    sub_8126A58(1);
+    sub_8126A88();
+    sub_81973C4(0, 0);
+    sub_8126C08();
+    gTasks[taskId].func = sub_8126B80;
+}
+
+void sub_8127208(u8 taskId)
+{
+    LoadPalette(gUnknown_085A6BB0, 0xd0, 0x20);
+    sub_8197434(0, 0);
+    gTasks[taskId].data[11] = 2;
+    gUnknown_0203A173 = DECORCAT_DESK;
+    sub_8126DFC(taskId);
 }
