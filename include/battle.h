@@ -883,6 +883,19 @@ struct BattleSpriteInfo
 struct BattleAnimationInfo
 {
     u16 field; // to fill up later
+    u8 field_2;
+    u8 field_3;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u8 field_8;
+    u8 field_9_x1 : 1;
+    u8 field_9_x2 : 1;
+    u8 field_9_x1C : 3;
+    u8 field_9_x20 : 1;
+    u8 field_9_x40 : 1;
+    u8 field_9_x80 : 1;
 };
 
 struct BattleHealthboxInfo

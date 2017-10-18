@@ -6,9 +6,24 @@
 #include "window.h"
 #include "string_util.h"
 #include "text.h"
+#include "battle_controllers.h"
+#include "sound.h"
+#include "songs.h"
+#include "decompress.h"
+#include "task.h"
+#include "util.h"
+#include "gpu_regs.h"
+#include "battle_message.h"
+#include "species.h"
 
 extern bool8 IsDoubleBattle(void);
 extern u8 gBanksByIdentity[BATTLE_BANKS_COUNT];
+extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
+extern u8 gNoOfAllBanks;
+extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
+
+extern const u8 * const gNatureNamePointers[];
+extern const u8 gText_Slash[];
 
 // this file's functions
 void sub_8072924(struct Sprite *sprite);
@@ -20,6 +35,13 @@ void RemoveWindow_(u32 windowId);
 void sub_8075170(void *dest, u32 arg1, u32 arg2);
 void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 void sub_807513C(void *dest, u32 arg1, u32 arg2);
+void UpdateStatusIconInHealthbox(u8 healthboxSpriteId);
+void sub_80741C8(struct Sprite *sprite);
+void sub_8073E08(u8 taskId);
+void sub_8073F98(u8 taskId);
+void sub_8073E64(u8 taskId);
+void sub_8074158(struct Sprite *sprite);
+void sub_8074090(struct Sprite *sprite);
 
 // const rom data
 const struct OamData gUnknown_0832C138 =
@@ -155,6 +177,15 @@ static const struct SpriteTemplate gUnknown_0832C1C0[4] =
 
 extern const u8 gUnknown_0832C3C4[0x14];
 extern const u8 gUnknown_0832C3D8[0x14];
+extern const u32 gHealthboxElementsGfxTable[][8];
+extern const struct CompressedSpriteSheet gUnknown_0832C334;
+extern const struct SpriteSheet gUnknown_0832C34C;
+extern const struct SpritePalette gUnknown_0832C33C;
+extern const struct SpritePalette gUnknown_0832C344;
+extern const struct SpriteTemplate gUnknown_0832C364[2];
+extern const struct SpriteTemplate gUnknown_0832C394[2];
+extern const struct SubspriteTable gUnknown_0832C2C4;
+extern const struct SubspriteTable gUnknown_0832C2CC;
 
 u8 sub_8072304(void)
 {
@@ -574,8 +605,6 @@ u8 CreateSafariPlayerHealthboxSprites(void)
     return healthboxSpriteId_1;
 }
 
-extern const u32 gHealthboxElementsGfxTable[][8];
-
 const u32 *GetHealthboxElementGfxPtr(u8 elementId)
 {
     return gHealthboxElementsGfxTable[elementId];
@@ -657,9 +686,6 @@ void nullsub_30(u8 healthboxSpriteId, bool8 isDoubleBattleBankOnly)
 {
 
 }
-
-extern u8 gNoOfAllBanks;
-extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
 
 void UpdateOamPriorityInAllHealthboxes(u8 priority)
 {
@@ -827,8 +853,6 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
     }
 }
 
-extern const u8 gText_Slash[];
-
 void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
 {
     u32 windowId, windowTileData, spriteTileNum;
@@ -921,4 +945,640 @@ void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrC
             }
         }
     }
+}
+
+void sub_80730D4(u8 healthboxSpriteId, struct Pokemon *mon)
+{
+    u8 text[20];
+    s32 j, var2;
+    u8 *fontPixels;
+    u8 i, var, nature, healthboxSpriteId_2;
+
+    memcpy(text, gUnknown_0832C3C4, sizeof(gUnknown_0832C3C4));
+    fontPixels = &gMonSpritesGfxPtr->fontPixels[0x520 + (GetBankIdentity(gSprites[healthboxSpriteId].data6) * 384)];
+    var = 5;
+    nature = GetNature(mon);
+    StringCopy(text + 6, gNatureNamePointers[nature]);
+    RenderTextFont9(fontPixels, 9, text);
+
+    for (j = 6, i = 0; i < var; i++, j++)
+    {
+        u8 elementId;
+
+        if ((text[j] >= 55 && text[j] <= 74) || (text[j] >= 135 && text[j] <= 154))
+            elementId = 44;
+        else if ((text[j] >= 75 && text[j] <= 79) || (text[j] >= 155 && text[j] <= 159))
+            elementId = 45;
+        else
+            elementId = 43;
+
+        CpuCopy32(GetHealthboxElementGfxPtr(elementId), fontPixels + (i * 64), 0x20);
+    }
+
+    for (j = 1; j < var + 1; j++)
+    {
+        var2 = (gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * 32;
+        CpuCopy32(fontPixels, (void*)(OBJ_VRAM0) + (var2), 0x20);
+        fontPixels += 0x20;
+
+        var2 = (8 + gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * 32;
+        CpuCopy32(fontPixels, (void*)(OBJ_VRAM0) + (var2), 0x20);
+        fontPixels += 0x20;
+    }
+
+    healthboxSpriteId_2 = gSprites[healthboxSpriteId].data5;
+    ConvertIntToDecimalStringN(text + 6, gBattleStruct->field_7C, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    ConvertIntToDecimalStringN(text + 9, gBattleStruct->field_7B, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    text[5] = CHAR_SPACE;
+    text[8] = CHAR_SLASH;
+    RenderTextFont9(gMonSpritesGfxPtr->fontPixels, 9, text);
+
+    j = healthboxSpriteId_2; // needed to match for some reason
+    for (j = 0; j < 5; j++)
+    {
+        if (j <= 1)
+        {
+            CpuCopy32(&gMonSpritesGfxPtr->fontPixels[0x40 * j + 0x20],
+                      (void*)(OBJ_VRAM0) + (gSprites[healthboxSpriteId_2].oam.tileNum + 2 + j) * 32,
+                      32);
+        }
+        else
+        {
+            CpuCopy32(&gMonSpritesGfxPtr->fontPixels[0x40 * j + 0x20],
+                      (void*)(OBJ_VRAM0 + 0xC0) + (j + gSprites[healthboxSpriteId_2].oam.tileNum) * 32,
+                      32);
+        }
+    }
+}
+
+void SwapHpBarsWithHpText(void)
+{
+    s32 i;
+    u8 spriteId;
+
+    for (i = 0; i < gNoOfAllBanks; i++)
+    {
+        if (gSprites[gHealthBoxesIds[i]].callback == SpriteCallbackDummy
+         && GetBankSide(i) != SIDE_OPPONENT
+         && (IsDoubleBattle() || GetBankSide(i) != SIDE_PLAYER))
+        {
+            bool8 noBars;
+
+            gBattleSpritesDataPtr->bankData[i].hpNumbersNoBars ^= 1;
+            noBars = gBattleSpritesDataPtr->bankData[i].hpNumbersNoBars;
+            if (GetBankSide(i) == SIDE_PLAYER)
+            {
+                if (!IsDoubleBattle())
+                    continue;
+                if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+                    continue;
+
+                if (noBars == TRUE) // bars to text
+                {
+                    spriteId = gSprites[gHealthBoxesIds[i]].data5;
+
+                    CpuFill32(0, (void*)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32), 0x100);
+                    UpdateHpTextInHealthboxInDoubles(gHealthBoxesIds[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_HP), 0);
+                    UpdateHpTextInHealthboxInDoubles(gHealthBoxesIds[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_MAX_HP), 1);
+                }
+                else // text to bars
+                {
+                    UpdateStatusIconInHealthbox(gHealthBoxesIds[i]);
+                    UpdateHealthboxAttribute(gHealthBoxesIds[i], &gPlayerParty[gBattlePartyID[i]], HEALTHBOX_HEALTH_BAR);
+                    CpuCopy32(GetHealthboxElementGfxPtr(0x75), (void*)(OBJ_VRAM0 + 0x680 + gSprites[gHealthBoxesIds[i]].oam.tileNum * 32), 32);
+                }
+            }
+            else
+            {
+                if (noBars == TRUE) // bars to text
+                {
+                    if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+                    {
+                        sub_80730D4(gHealthBoxesIds[i], &gEnemyParty[gBattlePartyID[i]]);
+                    }
+                    else
+                    {
+                        spriteId = gSprites[gHealthBoxesIds[i]].data5;
+
+                        CpuFill32(0, (void *)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32), 0x100);
+                        UpdateHpTextInHealthboxInDoubles(gHealthBoxesIds[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_HP), 0);
+                        UpdateHpTextInHealthboxInDoubles(gHealthBoxesIds[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_MAX_HP), 1);
+                    }
+                }
+                else // text to bars
+                {
+                    UpdateStatusIconInHealthbox(gHealthBoxesIds[i]);
+                    UpdateHealthboxAttribute(gHealthBoxesIds[i], &gEnemyParty[gBattlePartyID[i]], HEALTHBOX_HEALTH_BAR);
+                    if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+                        UpdateHealthboxAttribute(gHealthBoxesIds[i], &gEnemyParty[gBattlePartyID[i]], HEALTHBOX_NICK);
+                }
+            }
+            gSprites[gHealthBoxesIds[i]].data7 ^= 1;
+        }
+    }
+}
+
+u8 CreatePartyStatusSummarySprites(u8 bank, struct HpAndStatus *partyInfo, u8 arg2, bool8 isBattleStart)
+{
+    bool8 isOpponent;
+    s16 bar_X, bar_Y, bar_pos2_X, bar_data0;
+    s32 i, j, var;
+    u8 barSpriteId;
+    u8 ballIconSpritesIds[6];
+    u8 taskId;
+
+    if (!arg2 || GetBankIdentity(bank) != IDENTITY_OPPONENT_MON2)
+    {
+        if (GetBankSide(bank) == SIDE_PLAYER)
+        {
+            isOpponent = FALSE;
+            bar_X = 136, bar_Y = 96;
+            bar_pos2_X = 100;
+            bar_data0 = -5;
+        }
+        else
+        {
+            isOpponent = TRUE;
+
+            if (!arg2 || !IsDoubleBattle())
+                bar_X = 104, bar_Y = 40;
+            else
+                bar_X = 104, bar_Y = 16;
+
+            bar_pos2_X = -100;
+            bar_data0 = 5;
+        }
+    }
+    else
+    {
+        isOpponent = TRUE;
+        bar_X = 104, bar_Y = 40;
+        bar_pos2_X = -100;
+        bar_data0 = 5;
+    }
+
+    LoadCompressedObjectPicUsingHeap(&gUnknown_0832C334);
+    LoadSpriteSheet(&gUnknown_0832C34C);
+    LoadSpritePalette(&gUnknown_0832C33C);
+    LoadSpritePalette(&gUnknown_0832C344);
+
+    barSpriteId = CreateSprite(&gUnknown_0832C364[isOpponent], bar_X, bar_Y, 10);
+    SetSubspriteTables(&gSprites[barSpriteId], &gUnknown_0832C2C4);
+    gSprites[barSpriteId].pos2.x = bar_pos2_X;
+    gSprites[barSpriteId].data0 = bar_data0;
+
+    if (isOpponent)
+    {
+        gSprites[barSpriteId].pos1.x -= 96;
+        gSprites[barSpriteId].oam.matrixNum = 8;
+    }
+    else
+    {
+        gSprites[barSpriteId].pos1.x += 96;
+    }
+
+    for (i = 0; i < 6; i++)
+    {
+        ballIconSpritesIds[i] = CreateSpriteAtEnd(&gUnknown_0832C394[isOpponent], bar_X, bar_Y - 4, 9);
+
+        if (!isBattleStart)
+            gSprites[ballIconSpritesIds[i]].callback = sub_80741C8;
+
+        if (!isOpponent)
+        {
+            gSprites[ballIconSpritesIds[i]].pos2.x = 0;
+            gSprites[ballIconSpritesIds[i]].pos2.y = 0;
+        }
+
+        gSprites[ballIconSpritesIds[i]].data0 = barSpriteId;
+
+        if (!isOpponent)
+        {
+            gSprites[ballIconSpritesIds[i]].pos1.x += 10 * i + 24;
+            gSprites[ballIconSpritesIds[i]].data1 = i * 7 + 10;
+            gSprites[ballIconSpritesIds[i]].pos2.x = 120;
+        }
+        else
+        {
+            gSprites[ballIconSpritesIds[i]].pos1.x -= 10 * (5 - i) + 24;
+            gSprites[ballIconSpritesIds[i]].data1 = (6 - i) * 7 + 10;
+            gSprites[ballIconSpritesIds[i]].pos2.x = -120;
+        }
+
+        gSprites[ballIconSpritesIds[i]].data2 = isOpponent;
+    }
+
+    if (GetBankSide(bank) == SIDE_PLAYER)
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        {
+            for (i = 0; i < 6; i++)
+            {
+                if (partyInfo[i].hp == 0xFFFF) // empty slot or an egg
+                {
+                    gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
+                    gSprites[ballIconSpritesIds[i]].data7 = 1;
+                }
+                else if (partyInfo[i].hp == 0) // fainted mon
+                {
+                    gSprites[ballIconSpritesIds[i]].oam.tileNum += 3;
+                }
+                else if (partyInfo[i].status != 0) // mon with major status
+                {
+                    gSprites[ballIconSpritesIds[i]].oam.tileNum += 2;
+                }
+            }
+        }
+        else
+        {
+            for (i = 0, var = 5, j = 0; j < 6; j++)
+            {
+                if (partyInfo[j].hp == 0xFFFF) // empty slot or an egg
+                {
+                    gSprites[ballIconSpritesIds[var]].oam.tileNum += 1;
+                    gSprites[ballIconSpritesIds[var]].data7 = 1;
+                    var--;
+                    continue;
+                }
+                else if (partyInfo[j].hp == 0) // fainted mon
+                {
+                    gSprites[ballIconSpritesIds[i]].oam.tileNum += 3;
+                }
+                else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->field_2A0 & gBitTable[j]) // hmm...?
+                {
+                    gSprites[ballIconSpritesIds[i]].oam.tileNum += 3;
+                }
+                else if (partyInfo[j].status != 0) // mon with major status
+                {
+                    gSprites[ballIconSpritesIds[i]].oam.tileNum += 2;
+                }
+                i++;
+            }
+        }
+    }
+    else
+    {
+        if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS))
+        {
+            for (var = 5, i = 0; i < 6; i++)
+            {
+                if (partyInfo[i].hp == 0xFFFF) // empty slot or an egg
+                {
+                    gSprites[ballIconSpritesIds[var]].oam.tileNum += 1;
+                    gSprites[ballIconSpritesIds[var]].data7 = 1;
+                }
+                else if (partyInfo[i].hp == 0) // fainted mon
+                {
+                    gSprites[ballIconSpritesIds[var]].oam.tileNum += 3;
+                }
+                else if (partyInfo[i].status != 0) // mon with major status
+                {
+                    gSprites[ballIconSpritesIds[var]].oam.tileNum += 2;
+                }
+                var--;
+            }
+        }
+        else
+        {
+            for (var = 0, i = 0, j = 0; j < 6; j++)
+            {
+                if (partyInfo[j].hp == 0xFFFF) // empty slot or an egg
+                {
+                    gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
+                    gSprites[ballIconSpritesIds[i]].data7 = 1;
+                    i++;
+                    continue;
+                }
+                else if (partyInfo[j].hp == 0) // fainted mon
+                {
+                    gSprites[ballIconSpritesIds[5 - var]].oam.tileNum += 3;
+                }
+                else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->field_2A1 & gBitTable[j]) // hmm...?
+                {
+                    gSprites[ballIconSpritesIds[5 - var]].oam.tileNum += 3;
+                }
+                else if (partyInfo[j].status != 0) // mon with major status
+                {
+                    gSprites[ballIconSpritesIds[5 - var]].oam.tileNum += 2;
+                }
+                var++;
+            }
+        }
+    }
+
+    taskId = CreateTask(TaskDummy, 5);
+    gTasks[taskId].data[0] = bank;
+    gTasks[taskId].data[1] = barSpriteId;
+
+    for (i = 0; i < 6; i++)
+        gTasks[taskId].data[3 + i] = ballIconSpritesIds[i];
+
+    gTasks[taskId].data[10] = isBattleStart;
+
+    if (isBattleStart)
+    {
+        gBattleSpritesDataPtr->animationData->field_9_x1C++;
+    }
+
+    PlaySE12WithPanning(SE_TB_START, 0);
+    return taskId;
+}
+
+void sub_8073C30(u8 taskId)
+{
+    u8 sp[6];
+    u8 r7;
+    u8 r10;
+    u8 bank;
+    s32 i;
+
+    r7 = gTasks[taskId].data[10];
+    r10 = gTasks[taskId].data[1];
+    bank = gTasks[taskId].data[0];
+
+    for (i = 0; i < 6; i++)
+        sp[i] = gTasks[taskId].data[3 + i];
+
+    SetGpuReg(REG_OFFSET_BLDCNT, 0x3F40);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0x10);
+
+    gTasks[taskId].data[15] = 16;
+
+    for (i = 0; i < 6; i++)
+        gSprites[sp[i]].oam.objMode = 1;
+
+    gSprites[r10].oam.objMode = 1;
+
+    if (r7 != 0)
+    {
+        for (i = 0; i < 6; i++)
+        {
+            if (GetBankSide(bank) != SIDE_PLAYER)
+            {
+                gSprites[sp[5 - i]].data1 = 7 * i;
+                gSprites[sp[5 - i]].data3 = 0;
+                gSprites[sp[5 - i]].data4 = 0;
+                gSprites[sp[5 - i]].callback = sub_8074158;
+            }
+            else
+            {
+                gSprites[sp[i]].data1 = 7 * i;
+                gSprites[sp[i]].data3 = 0;
+                gSprites[sp[i]].data4 = 0;
+                gSprites[sp[i]].callback = sub_8074158;
+            }
+        }
+        gSprites[r10].data0 /= 2;
+        gSprites[r10].data1 = 0;
+        gSprites[r10].callback = sub_8074090;
+        SetSubspriteTables(&gSprites[r10], &gUnknown_0832C2CC);
+        gTasks[taskId].func = sub_8073E08;
+    }
+    else
+    {
+        gTasks[taskId].func = sub_8073F98;
+    }
+}
+
+void sub_8073E08(u8 taskId)
+{
+    u16 temp = gTasks[taskId].data[11]++;
+
+    if (!(temp & 1))
+    {
+        gTasks[taskId].data[15]--;
+        if (gTasks[taskId].data[15] < 0)
+            return;
+
+        SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[15]) | ((16 - gTasks[taskId].data[15]) << 8));
+    }
+    if (gTasks[taskId].data[15] == 0)
+        gTasks[taskId].func = sub_8073E64;
+}
+
+void sub_8073E64(u8 taskId)
+{
+    u8 sp[6];
+    s32 i;
+
+    u8 bank = gTasks[taskId].data[0];
+    gTasks[taskId].data[15]--;
+    if (gTasks[taskId].data[15] == -1)
+    {
+        u8 var = gTasks[taskId].data[1];
+
+        for (i = 0; i < 6; i++)
+            sp[i] = gTasks[taskId].data[3 + i];
+
+        gBattleSpritesDataPtr->animationData->field_9_x1C--;
+        if (!gBattleSpritesDataPtr->animationData->field_9_x1C)
+        {
+            DestroySpriteAndFreeResources(&gSprites[var]);
+            DestroySpriteAndFreeResources(&gSprites[sp[0]]);
+        }
+        else
+        {
+            FreeSpriteOamMatrix(&gSprites[var]);
+            DestroySprite(&gSprites[var]);
+            FreeSpriteOamMatrix(&gSprites[sp[0]]);
+            DestroySprite(&gSprites[sp[0]]);
+        }
+
+        for (i = 1; i < 6; i++)
+            DestroySprite(&gSprites[sp[i]]);
+    }
+    else if (gTasks[taskId].data[15] == -3)
+    {
+        gBattleSpritesDataPtr->healthBoxesData[bank].flag_x1 = 0;
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8073F98(u8 taskId)
+{
+    u8 sp[6];
+    s32 i;
+
+    u8 bank = gTasks[taskId].data[0];
+    gTasks[taskId].data[15]--;
+    if (gTasks[taskId].data[15] >= 0)
+    {
+        SetGpuReg(REG_OFFSET_BLDALPHA, (gTasks[taskId].data[15]) | ((16 - gTasks[taskId].data[15]) << 8));
+    }
+    else if (gTasks[taskId].data[15] == -1)
+    {
+        u8 var = gTasks[taskId].data[1];
+
+        for (i = 0; i < 6; i++)
+            sp[i] = gTasks[taskId].data[3 + i];
+
+        DestroySpriteAndFreeResources(&gSprites[var]);
+        DestroySpriteAndFreeResources(&gSprites[sp[0]]);
+
+        for (i = 1; i < 6; i++)
+            DestroySprite(&gSprites[sp[i]]);
+    }
+    else if (gTasks[taskId].data[15] == -3)
+    {
+        gBattleSpritesDataPtr->healthBoxesData[bank].flag_x1 = 0;
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8074078(struct Sprite *sprite)
+{
+    if (sprite->pos2.x != 0)
+        sprite->pos2.x += sprite->data0;
+}
+
+void sub_8074090(struct Sprite *sprite)
+{
+    sprite->data1 += 32;
+    if (sprite->data0 > 0)
+        sprite->pos2.x += sprite->data1 >> 4;
+    else
+        sprite->pos2.x -= sprite->data1 >> 4;
+    sprite->data1 &= 0xF;
+}
+
+void sub_80740C4(struct Sprite *sprite)
+{
+    u8 var1;
+    u16 var2;
+    s8 pan;
+
+    if (sprite->data1 > 0)
+    {
+        sprite->data1--;
+        return;
+    }
+    var1 = sprite->data2;
+    var2 = sprite->data3;
+    var2 += 56;
+    sprite->data3 = var2 & 0xFFF0;
+    if (var1 != 0)
+    {
+        sprite->pos2.x += var2 >> 4;
+        if (sprite->pos2.x > 0)
+            sprite->pos2.x = 0;
+    }
+    else
+    {
+        sprite->pos2.x -= var2 >> 4;
+        if (sprite->pos2.x < 0)
+            sprite->pos2.x = 0;
+    }
+    if (sprite->pos2.x == 0)
+    {
+        pan = 63;
+        if (var1 != 0)
+            pan = -64;
+        if (sprite->data7 != 0)
+            PlaySE2WithPanning(SE_TB_KARA, pan);
+        else
+            PlaySE1WithPanning(SE_TB_KON, pan);
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+void sub_8074158(struct Sprite *sprite)
+{
+    u8 var1;
+    u16 var2;
+
+    if (sprite->data1 > 0)
+    {
+        sprite->data1--;
+        return;
+    }
+    var1 = sprite->data2;
+    var2 = sprite->data3;
+    var2 += 56;
+    sprite->data3 = var2 & 0xFFF0;
+    if (var1 != 0)
+        sprite->pos2.x += var2 >> 4;
+    else
+        sprite->pos2.x -= var2 >> 4;
+    if (sprite->pos2.x + sprite->pos1.x > 248
+     || sprite->pos2.x + sprite->pos1.x < -8)
+    {
+        sprite->invisible = TRUE;
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+void sub_80741C8(struct Sprite *sprite)
+{
+    u8 barSpriteId = sprite->data0;
+
+    sprite->pos2.x = gSprites[barSpriteId].pos2.x;
+    sprite->pos2.y = gSprites[barSpriteId].pos2.y;
+}
+
+extern const u8 gText_HighlightDarkGrey[];
+extern const u8 gText_DynColor2[];
+extern const u8 gText_DynColor2Male[];
+extern const u8 gText_DynColor1Female[];
+extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
+
+void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
+{
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    void *ptr;
+    const u8 *genderTxt;
+    u32 windowId, windowTileData, spriteTileNum;
+    u16 species;
+    u8 gender;
+
+    StringCopy(gDisplayedStringBattle, gText_HighlightDarkGrey);
+    GetMonData(mon, MON_DATA_NICKNAME, nickname);
+    StringGetEnd10(nickname);
+    ptr = StringAppend(gDisplayedStringBattle, nickname);
+
+    gender = GetMonGender(mon);
+    species = GetMonData(mon, MON_DATA_SPECIES);
+
+    if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && StringCompare(nickname, gSpeciesNames[species]) == 0)
+        gender = 100;
+
+    // AddTextPrinterAndCreateWindowOnHealthbox's arguments are the same in all 3 cases.
+    // It's possible they may have been different in early development phases.
+    switch (gender)
+    {
+    default:
+        StringCopy(ptr, gText_DynColor2);
+        windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(gDisplayedStringBattle, 0, 3, 2, &windowId);
+        break;
+    case MON_MALE:
+        StringCopy(ptr, gText_DynColor2Male);
+        windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(gDisplayedStringBattle, 0, 3, 2, &windowId);
+        break;
+    case MON_FEMALE:
+        StringCopy(ptr, gText_DynColor1Female);
+        windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(gDisplayedStringBattle, 0, 3, 2, &windowId);
+        break;
+    }
+
+    spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * 32;
+
+    if (GetBankSide(gSprites[healthboxSpriteId].data6) == SIDE_PLAYER)
+    {
+        sub_8075198((void*)(0x6010040 + spriteTileNum), windowTileData, 6);
+        ptr = (void*)(OBJ_VRAM0);
+        if (!IsDoubleBattle())
+            ptr += spriteTileNum + 0x800;
+        else
+            ptr += spriteTileNum + 0x400;
+        sub_8075198(ptr, windowTileData + 0xC0, 1);
+    }
+    else
+    {
+        sub_8075198((void*)(0x6010020 + spriteTileNum), windowTileData, 7);
+    }
+
+    RemoveWindow_(windowId);
 }

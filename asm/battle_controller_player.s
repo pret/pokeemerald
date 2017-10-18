@@ -403,7 +403,7 @@ _080577DC:
 	ands r0, r2
 	cmp r0, 0
 	beq _080577E8
-	bl sub_8073314
+	bl SwapHpBarsWithHpText
 _080577E8:
 	pop {r4-r7}
 	pop {r0}
@@ -10038,7 +10038,7 @@ _0805CDA4:
 	subs r4, 0x2
 	adds r3, r4
 	ldrb r3, [r3]
-	bl sub_80735DC
+	bl CreatePartyStatusSummarySprites
 	ldr r2, =gUnknown_020244B4
 	ldrb r1, [r5]
 	adds r1, r2

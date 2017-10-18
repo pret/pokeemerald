@@ -8,7 +8,7 @@ void LZDecompressVram(const void *src, void *dest);
 
 u16 LoadCompressedObjectPic(const struct CompressedSpriteSheet *src);
 void LoadCompressedObjectPicOverrideBuffer(const struct CompressedSpriteSheet *src, void *buffer);
-bool8 LoadCompressedObjectPicUsingHeap(struct CompressedSpriteSheet* src);
+bool8 LoadCompressedObjectPicUsingHeap(const struct CompressedSpriteSheet* src);
 
 void LoadCompressedObjectPalette(const struct CompressedSpritePalette *src);
 void LoadCompressedObjectPaletteOverrideBuffer(const struct CompressedSpritePalette *a, void *buffer);

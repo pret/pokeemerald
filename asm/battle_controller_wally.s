@@ -4645,7 +4645,7 @@ _0816ACA8:
 	subs r3, 0x2
 	adds r4, r3
 	ldrb r3, [r4]
-	bl sub_80735DC
+	bl CreatePartyStatusSummarySprites
 	ldr r2, =gUnknown_020244B4
 	ldrb r1, [r5]
 	adds r1, r2
