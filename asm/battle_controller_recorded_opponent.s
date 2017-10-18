@@ -4863,7 +4863,7 @@ sub_8188FD0: @ 8188FD0
 	push {r6,r7}
 	sub sp, 0x4
 	movs r0, 0
-	bl load_gfxc_health_bar
+	bl LoadBattleBarGfx
 	ldr r3, =gBattleBufferA
 	ldr r0, =gActiveBank
 	mov r9, r0

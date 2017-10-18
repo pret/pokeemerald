@@ -5162,7 +5162,7 @@ sub_81BDC10: @ 81BDC10
 	push {r6,r7}
 	sub sp, 0x4
 	movs r0, 0
-	bl load_gfxc_health_bar
+	bl LoadBattleBarGfx
 	ldr r3, =gBattleBufferA
 	ldr r0, =gActiveBank
 	mov r9, r0
@@ -5275,7 +5275,7 @@ sub_81BDD00: @ 81BDD00
 	.pool
 _081BDD38:
 	movs r0, 0x1
-	bl load_gfxc_health_bar
+	bl LoadBattleBarGfx
 	adds r0, r4, 0
 	movs r1, 0xB
 	bl GetMonData

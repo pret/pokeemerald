@@ -35,6 +35,7 @@ void sub_80728B4(struct Sprite *sprite);
 const u32 *GetHealthboxElementGfxPtr(u8 elementId);
 u32 AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 arg3, u32 *windowId);
 void sub_8075198(void *objVram, u32 windowTileData, u32 arg2);
+void sub_80751E4(void *objVram, u32 windowTileData, u32 arg2);
 void RemoveWindowOnHealthbox(u32 windowId);
 void sub_8075170(void *dest, u32 arg1, u32 arg2);
 void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
@@ -47,6 +48,7 @@ void sub_8073E64(u8 taskId);
 void sub_8074158(struct Sprite *sprite);
 void sub_8074090(struct Sprite *sprite);
 u8 GetStatusIconForBankId(u8 statusElementId, u8 bank);
+void sub_8074AA0(u8 bank, u8 healthboxSpriteId, u8 whichBar, u8 arg3);
 
 // const rom data
 const struct OamData gUnknown_0832C138 =
@@ -1767,13 +1769,91 @@ void UpdateSafariBallsTextOnHealthbox(u8 healthboxSpriteId)
     RemoveWindowOnHealthbox(windowId);
 }
 
-void UpdateLeftNoOfBallsTextOnHealthbox(healthboxSpriteId)
+void UpdateLeftNoOfBallsTextOnHealthbox(u8 healthboxSpriteId)
 {
-    u8 text[20];
+    u8 text[16];
     u8 *txtPtr;
     u32 windowId, windowTileData, spriteTileNum;
 
     txtPtr = StringCopy(text, gText_SafariBallLeft);
     ConvertIntToDecimalStringN(txtPtr, gNumSafariBalls, STR_CONV_MODE_LEFT_ALIGN, 2);
-    windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, GetStringRightAlignXOffset(0, 1));
+
+    windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, GetStringRightAlignXOffset(0, text, 0x2F), 3, 2, &windowId);
+    spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * 32;
+    sub_80751E4((void*)(OBJ_VRAM0 + 0x2C0) + spriteTileNum, windowTileData, 2);
+    sub_80751E4((void*)(OBJ_VRAM0 + 0xA00) + spriteTileNum, windowTileData + 0x40, 4);
+    RemoveWindowOnHealthbox(windowId);
+}
+
+extern void LoadBattleBarGfx(u8 arg0);
+
+void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId)
+{
+    u32 maxHp, currHp;
+    u8 bank = gSprites[healthboxSpriteId].data6;
+
+    if (elementId == HEALTHBOX_ALL && !IsDoubleBattle())
+        GetBankSide(bank); // pointless function call
+
+    if (GetBankSide(gSprites[healthboxSpriteId].data6) == SIDE_PLAYER)
+    {
+        u8 isDoubles;
+
+        if (elementId == HEALTHBOX_LEVEL || elementId == HEALTHBOX_ALL)
+            UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL));
+        if (elementId == HEALTHBOX_CURRENT_HP || elementId == HEALTHBOX_ALL)
+            UpdateHpTextInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_HP), 0);
+        if (elementId == HEALTHBOX_MAX_HP || elementId == HEALTHBOX_ALL)
+            UpdateHpTextInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_MAX_HP), 1);
+        if (elementId == HEALTHBOX_HEALTH_BAR || elementId == HEALTHBOX_ALL)
+        {
+            LoadBattleBarGfx(0);
+            maxHp = GetMonData(mon, MON_DATA_MAX_HP);
+            currHp = GetMonData(mon, MON_DATA_HP);
+            SetBattleBarStruct(bank, healthboxSpriteId, maxHp, currHp, FALSE);
+            sub_8074AA0(bank, healthboxSpriteId, 0, 0);
+        }
+        isDoubles = IsDoubleBattle();
+        if (!isDoubles && (elementId == HEALTHBOX_EXP_BAR || elementId == HEALTHBOX_ALL))
+        {
+            u16 species;
+            u32 exp, currLevelExp, currExpBarValue, maxExpBarValue;
+            u8 level;
+
+            LoadBattleBarGfx(3);
+            species = GetMonData(mon, MON_DATA_SPECIES);
+            level = GetMonData(mon, MON_DATA_LEVEL);
+            exp = GetMonData(mon, MON_DATA_EXP);
+            currLevelExp = gExperienceTables[gBaseStats[species].growthRate][level];
+            currExpBarValue = exp - currLevelExp;
+            maxExpBarValue = gExperienceTables[gBaseStats[species].growthRate][level + 1] - currLevelExp;
+            SetBattleBarStruct(bank, healthboxSpriteId, maxExpBarValue, currExpBarValue, isDoubles);
+            sub_8074AA0(bank, healthboxSpriteId, 1, 0);
+        }
+        if (elementId == HEALTHBOX_NICK || elementId == HEALTHBOX_ALL)
+            UpdateNickInHealthbox(healthboxSpriteId, mon);
+        if (elementId == HEALTHBOX_STATUS_ICON || elementId == HEALTHBOX_ALL)
+            UpdateStatusIconInHealthbox(healthboxSpriteId);
+        if (elementId == HEALTHBOX_SAFARI_ALL_TEXT)
+            UpdateSafariBallsTextOnHealthbox(healthboxSpriteId);
+        if (elementId == HEALTHBOX_SAFARI_ALL_TEXT || elementId == HEALTHBOX_SAFARI_BALLS_TEXT)
+            UpdateLeftNoOfBallsTextOnHealthbox(healthboxSpriteId);
+    }
+    else
+    {
+        if (elementId == HEALTHBOX_LEVEL || elementId == HEALTHBOX_ALL)
+            UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL));
+        if (elementId == HEALTHBOX_HEALTH_BAR || elementId == HEALTHBOX_ALL)
+        {
+            LoadBattleBarGfx(0);
+            maxHp = GetMonData(mon, MON_DATA_MAX_HP);
+            currHp = GetMonData(mon, MON_DATA_HP);
+            SetBattleBarStruct(bank, healthboxSpriteId, maxHp, currHp, FALSE);
+            sub_8074AA0(bank, healthboxSpriteId, 0, 0);
+        }
+        if (elementId == HEALTHBOX_NICK || elementId == HEALTHBOX_ALL)
+            UpdateNickInHealthbox(healthboxSpriteId, mon);
+        if (elementId == HEALTHBOX_STATUS_ICON || elementId == HEALTHBOX_ALL)
+            UpdateStatusIconInHealthbox(healthboxSpriteId);
+    }
 }

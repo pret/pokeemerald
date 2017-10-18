@@ -1955,8 +1955,8 @@ _0805E1AE:
 	bx r1
 	thumb_func_end BattleLoadAllHealthBoxesGfx
 
-	thumb_func_start load_gfxc_health_bar
-load_gfxc_health_bar: @ 805E1B8
+	thumb_func_start LoadBattleBarGfx
+LoadBattleBarGfx: @ 805E1B8
 	push {lr}
 	ldr r0, =gUnknown_08C093F0
 	ldr r1, =gMonSpritesGfxPtr
@@ -1969,7 +1969,7 @@ load_gfxc_health_bar: @ 805E1B8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end load_gfxc_health_bar
+	thumb_func_end LoadBattleBarGfx
 
 	thumb_func_start BattleInitAllSprites
 BattleInitAllSprites: @ 805E1D8
