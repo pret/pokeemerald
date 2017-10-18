@@ -8,6 +8,7 @@
 #include "palette.h"
 #include "songs.h"
 #include "field_weather.h"
+#include "menu_helpers.h"
 #include "new_menu_helpers.h"
 #include "sound.h"
 #include "decoration.h"
@@ -449,4 +450,14 @@ void sub_8127284(void)
     {
         gUnknown_0203A18C->unk_521 = gUnknown_0203A18C->unk_520;
     }
+}
+
+void sub_81272C8(void)
+{
+    sub_812225C(&gUnknown_0203A170, &gUnknown_0203A16E, gUnknown_0203A18C->unk_521, gUnknown_0203A18C->unk_520);
+}
+
+void sub_81272F8(void)
+{
+    sub_8122298(&gUnknown_0203A170, &gUnknown_0203A16E, gUnknown_0203A18C->unk_521, gUnknown_0203A18C->unk_520, 8);
 }
