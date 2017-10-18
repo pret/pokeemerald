@@ -61,6 +61,8 @@ void sub_8129ABC(u8 taskId);
 void sub_8133E1C(u8 taskId);
 void sub_8127454(u8 *dest, u16 decorId);
 void sub_8127744(u32 a0);
+bool8 sub_81277BC(u8 idx);
+bool8 sub_81277E8(u8 idx);
 
 // .rodata
 
@@ -510,4 +512,19 @@ void sub_8127480(u32 a0, bool8 flag)
         PlaySE(SE_SELECT);
     }
     sub_8127744(a0);
+}
+
+void sub_81274A0(u8 a0, s32 a1, u8 a2)
+{
+    if (a1 != -2)
+    {
+        if (sub_81277BC(a1 + 1) == TRUE)
+        {
+            blit_move_info_icon(a0, 0x18, 0x5c, a2 + 2);
+        }
+        else if (sub_81277E8(a1 + 1) == TRUE)
+        {
+            blit_move_info_icon(a0, 0x19, 0x5c, a2 + 2);
+        }
+    }
 }

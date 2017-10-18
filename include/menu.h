@@ -22,5 +22,6 @@ void PrintMenuTable(u8 idx, u8 nstrs, const struct MenuAction *strs);
 void InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 idx, u8 nstrs,u8);
 u8 GetMenuCursorPos(void);
 s8 ProcessMenuInput(void);
+void blit_move_info_icon(u8 winId, u8 a2, u16 x, u16 y);
 
 #endif // GUARD_MENU_H

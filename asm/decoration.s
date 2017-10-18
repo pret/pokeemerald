@@ -5,56 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81274A0
-sub_81274A0: @ 81274A0
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	mov r8, r6
-	lsls r2, 24
-	lsrs r5, r2, 24
-	adds r7, r5, 0
-	movs r0, 0x2
-	negs r0, r0
-	cmp r1, r0
-	beq _081274F6
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	bl sub_81277BC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _081274DC
-	adds r3, r5, 0x2
-	adds r0, r6, 0
-	movs r1, 0x18
-	movs r2, 0x5C
-	bl blit_move_info_icon
-	b _081274F6
-_081274DC:
-	adds r0, r4, 0
-	bl sub_81277E8
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _081274F6
-	adds r3, r7, 0x2
-	mov r0, r8
-	movs r1, 0x19
-	movs r2, 0x5C
-	bl blit_move_info_icon
-_081274F6:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81274A0
-
 	thumb_func_start sub_8127500
 sub_8127500: @ 8127500
 	push {r4,lr}
