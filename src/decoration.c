@@ -28,6 +28,11 @@ extern EWRAM_DATA u16 gUnknown_0203A170;
 extern EWRAM_DATA u8 gUnknown_0203A173;
 extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
 extern EWRAM_DATA u8 gUnknown_0203A188[4];
+extern EWRAM_DATA struct {
+    u8 filler_0000[0x520];
+    u8 unk_520;
+    u8 unk_521;
+} *gUnknown_0203A18C;
 
 // Static ROM declarations
 
@@ -431,4 +436,17 @@ void sub_8127268(u8 taskId)
 {
     sub_8126A58(1);
     sub_8133E1C(taskId);
+}
+
+void sub_8127284(void)
+{
+    gUnknown_0203A18C->unk_520 = gUnknown_0203A151 + 1;
+    if (gUnknown_0203A18C->unk_520 > 8)
+    {
+        gUnknown_0203A18C->unk_521 = 8;
+    }
+    else
+    {
+        gUnknown_0203A18C->unk_521 = gUnknown_0203A18C->unk_520;
+    }
 }
