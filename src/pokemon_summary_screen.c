@@ -154,7 +154,6 @@ extern u8 gText_None[];
 extern u8 gText_RibbonsVar1[];
 extern u8 gUnknown_0861CE82[];
 extern u8 gUnknown_0861CE8E[];
-extern u8 gMoveNames[][13];
 extern u8 gText_OneDash[];
 extern u8 gText_TwoDashes[];
 extern u8 gText_ThreeDashes[];
