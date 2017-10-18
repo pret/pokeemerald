@@ -59,7 +59,8 @@ void sub_81279B4(u8 taskId);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_8133E1C(u8 taskId);
-void sub_8127454(u8 *dest, u16 decoId);
+void sub_8127454(u8 *dest, u16 decorId);
+void sub_8127744(u32 a0);
 
 // .rodata
 
@@ -494,4 +495,19 @@ void sub_8127330(u8 taskId)
     gUnknown_03006310.unk_0c = gUnknown_0203A18C->unk_520;
     gUnknown_03006310.unk_00 = gUnknown_0203A18C->unk_000;
     gUnknown_03006310.unk_0e = gUnknown_0203A18C->unk_521;
+}
+
+void sub_8127454(u8 *dest, u16 decorId)
+{
+    StringCopy(dest, gStringVar1);
+    StringAppend(dest, gDecorations[decorId].name);
+}
+
+void sub_8127480(u32 a0, bool8 flag)
+{
+    if (flag != TRUE)
+    {
+        PlaySE(SE_SELECT);
+    }
+    sub_8127744(a0);
 }

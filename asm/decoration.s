@@ -5,44 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8127454
-sub_8127454: @ 8127454
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r4, r1, 16
-	lsrs r4, 16
-	ldr r1, =gStringVar1
-	bl StringCopy
-	lsls r4, 5
-	ldr r0, =gDecorations + 1
-	adds r4, r0
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl StringAppend
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8127454
-
-	thumb_func_start sub_8127480
-sub_8127480: @ 8127480
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	cmp r1, 0x1
-	beq _08127492
-	movs r0, 0x5
-	bl PlaySE
-_08127492:
-	adds r0, r4, 0
-	bl sub_8127744
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8127480
-
 	thumb_func_start sub_81274A0
 sub_81274A0: @ 81274A0
 	push {r4-r7,lr}
