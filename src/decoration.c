@@ -15,6 +15,7 @@
 #include "field_weather.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
+#include "field_map_obj.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
@@ -23,6 +24,7 @@
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "event_scripts.h"
+#include "event_data.h"
 #include "player_pc.h"
 #include "strings.h"
 
@@ -50,6 +52,14 @@ extern EWRAM_DATA u8 gUnknown_0203A173;
 extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
 extern EWRAM_DATA u8 gUnknown_0203A188[4];
 extern EWRAM_DATA struct UnkStruct_0203A18C *gUnknown_0203A18C;
+extern EWRAM_DATA struct {
+    /*0x000; 0x0203a190*/ const struct Decoration *decoration;
+    /*0x004; 0x0203a194*/ u16 tiles[0x40];
+    /*0x084; 0x0203a214*/ u8 image[0x800];
+    /*0x884; 0x0203aa14*/ u16 palette[16];
+} gUnknown_0203A190;
+extern EWRAM_DATA u16 gUnknown_0203AA34;
+extern EWRAM_DATA u16 gUnknown_0203AA36;
 
 // Static ROM declarations
 
@@ -905,5 +915,34 @@ void sub_8127D38(u16 mapX, u16 mapY, u16 decor)
         case DECORSHAPE_3x2:
             sub_8127B90(mapX, mapY, 3, 2, decor);
             break;
+    }
+}
+
+void sub_8127E18(void)
+{
+    u8 i;
+    u8 j;
+
+    for (i = 0; i < 14; i ++)
+    {
+        if (FlagGet(0xAE + i) == TRUE)
+        {
+            FlagClear(0xAE + i);
+            for (j = 0; j < gMapHeader.events->mapObjectCount; j ++)
+            {
+                if (gMapHeader.events->mapObjects[j].flagId == 0xAE + i)
+                {
+                    break;
+                }
+            }
+            VarSet(0x3F20 + gMapHeader.events->mapObjects[j].graphicsId, gUnknown_0203A190.decoration->tiles[0]);
+            gSpecialVar_0x8005 = gMapHeader.events->mapObjects[j].localId;
+            gSpecialVar_0x8006 = gUnknown_0203AA34;
+            gSpecialVar_0x8007 = gUnknown_0203AA36;
+            show_sprite(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            sub_808EBA8(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
+            sub_808F254(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            break;
+        }
     }
 }
