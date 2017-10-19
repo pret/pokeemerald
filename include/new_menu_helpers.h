@@ -2,6 +2,7 @@
 #define GUARD_NEW_MENU_HELPERS_H
 
 #include "text.h"
+#include "task.h"
 
 void sub_81973A4(void);
 void sub_81973C4(u8, u8);

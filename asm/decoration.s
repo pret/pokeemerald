@@ -5,47 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8127500
-sub_8127500: @ 8127500
-	push {r4,lr}
-	sub sp, 0x10
-	ldr r4, =gUnknown_0203A18C
-	ldr r1, [r4]
-	ldr r2, =0x00000522
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	bne _08127540
-	subs r2, 0x2
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	adds r2, 0x1
-	adds r1, r2
-	ldrb r1, [r1]
-	subs r0, r1
-	str r0, [sp]
-	movs r0, 0x6E
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	ldr r0, =gUnknown_0203A170
-	str r0, [sp, 0xC]
-	movs r0, 0x2
-	movs r1, 0x3C
-	movs r2, 0xC
-	movs r3, 0x94
-	bl AddScrollIndicatorArrowPairParametrized
-	ldr r1, [r4]
-	ldr r2, =0x00000522
-	adds r1, r2
-	strb r0, [r1]
-_08127540:
-	add sp, 0x10
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8127500
-
 	thumb_func_start sub_8127554
 sub_8127554: @ 8127554
 	push {r4,lr}

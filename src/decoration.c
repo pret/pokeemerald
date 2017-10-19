@@ -11,6 +11,7 @@
 #include "list_menu.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
+#include "menu_indicators.h"
 #include "sound.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
@@ -35,6 +36,7 @@ extern EWRAM_DATA struct {
     u8 unk_148[41][24];
     u8 unk_520;
     u8 unk_521;
+    u8 unk_522;
 } *gUnknown_0203A18C;
 
 // Static ROM declarations
@@ -54,15 +56,15 @@ void sub_8127180(u8 taskId);
 void sub_812719C(u8 taskId);
 void sub_81271CC(u8 taskId);
 void sub_8127268(u8 taskId);
-void sub_8127620(u8 taskId);
-void sub_81279B4(u8 taskId);
-bool8 sub_81299AC(u8 taskId);
-void sub_8129ABC(u8 taskId);
-void sub_8133E1C(u8 taskId);
 void sub_8127454(u8 *dest, u16 decorId);
+void sub_8127620(u8 taskId);
 void sub_8127744(u32 a0);
 bool8 sub_81277BC(u8 idx);
 bool8 sub_81277E8(u8 idx);
+bool8 sub_81299AC(u8 taskId);
+void sub_81279B4(u8 taskId);
+void sub_8129ABC(u8 taskId);
+void sub_8133E1C(u8 taskId);
 
 // .rodata
 
@@ -526,5 +528,13 @@ void sub_81274A0(u8 a0, s32 a1, u8 a2)
         {
             blit_move_info_icon(a0, 0x19, 0x5c, a2 + 2);
         }
+    }
+}
+
+void sub_8127500(void)
+{
+    if (gUnknown_0203A18C->unk_522 == 0xFF)
+    {
+        gUnknown_0203A18C->unk_522 = AddScrollIndicatorArrowPairParametrized(0x02, 0x3c, 0x0c, 0x94, gUnknown_0203A18C->unk_520 - gUnknown_0203A18C->unk_521, 0x6e, 0x6e, &gUnknown_0203A170);
     }
 }
