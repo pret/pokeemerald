@@ -919,9 +919,9 @@ struct BattleHealthboxInfo
 struct BattleBarInfo
 {
     u8 healthboxSpriteId;
-    u32 maxValue;
-    u32 currentValue;
-    bool32 isDoubleBattle;
+    s32 maxValue;
+    s32 currentValue;
+    s32 field_C;
     s32 field_10;
 };
 

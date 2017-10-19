@@ -2857,7 +2857,7 @@ sub_805E990: @ 805E990
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2997,7 +2997,7 @@ sub_805EAB4: @ 805EAB4
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
@@ -3796,7 +3796,7 @@ sub_805F110: @ 805F110
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

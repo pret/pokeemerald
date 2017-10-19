@@ -5954,7 +5954,7 @@ _0807A488:
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8075060
+	bl GetHPBarLevel
 	ldr r1, [r7]
 	adds r1, 0x5D
 	adds r1, r6
@@ -5997,7 +5997,7 @@ _0807A4E8:
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_8075060
+	bl GetHPBarLevel
 	ldr r1, [r7]
 	adds r1, 0x63
 	adds r1, r6
