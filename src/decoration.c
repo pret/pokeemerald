@@ -677,7 +677,7 @@ bool8 sub_81277E8(u8 idx)
     return FALSE;
 }
 
-void sub_8127814(u8 unused)
+void sub_8127814(u8 taskId)
 {
     u16 i;
     u16 j;
@@ -726,4 +726,26 @@ void sub_8127814(u8 unused)
             }
         }
     }
+}
+
+void sub_81279B4(u8 taskId)
+{
+    sub_8127814(taskId);
+}
+
+bool8 sub_81279C4(void)
+{
+    u16 i;
+    for (i = 0; i < 16; i ++)
+    {
+        if (gUnknown_0203A152[i] == gUnknown_0203A170 + gUnknown_0203A16E + 1)
+        {
+            return FALSE;
+        }
+        if (i < 12 && gUnknown_0203A162[i] == gUnknown_0203A170 + gUnknown_0203A16E + 1)
+        {
+            return FALSE;
+        }
+    }
+    return TRUE;
 }
