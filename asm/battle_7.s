@@ -2048,7 +2048,7 @@ _0805E260:
 	adds r0, r1, r0
 	ldrb r0, [r0]
 	movs r1, 0
-	bl nullsub_30
+	bl DummyBattleInterfaceFunc
 	b _0805E30E
 	.pool
 _0805E288:
@@ -2056,7 +2056,7 @@ _0805E288:
 	adds r0, r1, r0
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl nullsub_30
+	bl DummyBattleInterfaceFunc
 	b _0805E30E
 	.pool
 _0805E29C:

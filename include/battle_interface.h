@@ -1,6 +1,20 @@
 #ifndef GUARD_BATTLE_INTERFACE_H
 #define GUARD_BATTLE_INTERFACE_H
 
+#define TAG_HEALTHBOX_PLAYER1_TILE      0xD6FF
+#define TAG_HEALTHBOX_PLAYER2_TILE      0xD700
+#define TAG_HEALTHBOX_OPPONENT1_TILE    0xD701
+#define TAG_HEALTHBOX_OPPONENT2_TILE    0xD702
+
+#define TAG_HEALTHBOX_SAFARI_TILE       0xD70B
+
+#define TAG_STATUS_SUMMARY_BAR_TILE     0xD70C
+#define TAG_STATUS_SUMMARY_BALLS_TILE   0xD714
+
+#define TAG_HEALTHBOX_PAL               0xD6FF
+#define TAG_STATUS_SUMMARY_BAR_PAL      0xD710
+#define TAG_STATUS_SUMMARY_BALLS_PAL    0xD712
+
 enum
 {
     HEALTHBOX_ALL,
@@ -23,7 +37,7 @@ void SetBattleBarStruct(u8 bank, u8 healthboxSpriteId, s32 maxVal, s32 currVal, 
 void SetHealthboxSpriteInvisible(u8 healthboxSpriteId);
 void SetHealthboxSpriteVisible(u8 healthboxSpriteId);
 void DestoryHealthboxSprite(u8 healthboxSpriteId);
-void nullsub_30(u8 healthboxSpriteId, bool8 isDoubleBattleBankOnly);
+void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBankOnly);
 void UpdateOamPriorityInAllHealthboxes(u8 priority);
 void SetBankHealthboxSpritePos(u8 bank);
 void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
