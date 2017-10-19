@@ -676,3 +676,54 @@ bool8 sub_81277E8(u8 idx)
     }
     return FALSE;
 }
+
+void sub_8127814(u8 unused)
+{
+    u16 i;
+    u16 j;
+    u16 k;
+    u16 cnt;
+
+    cnt = 0;
+    memset(gUnknown_0203A152, 0, 16);
+    memset(gUnknown_0203A162, 0, 12);
+    for (i = 0; i < 16; i ++)
+    {
+        if (gSaveBlock1Ptr->secretBases[0].decorations[i] != DECOR_NONE)
+        {
+            for (j = 0; j < gDecorationInventories[gUnknown_0203A173].size; j ++)
+            {
+                if (gUnknown_0203A14C[j] == gSaveBlock1Ptr->secretBases[0].decorations[i])
+                {
+                    for (k = 0; k < cnt && gUnknown_0203A152[k] != j + 1; k ++);
+                    if (k == cnt)
+                    {
+                        gUnknown_0203A152[cnt] = j + 1;
+                        cnt ++;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    cnt = 0;
+    for (i = 0; i < 12; i ++)
+    {
+        if (gSaveBlock1Ptr->playerRoomDecor[i] != DECOR_NONE)
+        {
+            for (j = 0; j < gDecorationInventories[gUnknown_0203A173].size; j ++)
+            {
+                if (gUnknown_0203A14C[j] == gSaveBlock1Ptr->playerRoomDecor[i] && sub_81277BC(j + 1) != TRUE)
+                {
+                    for (k = 0; k < cnt && gUnknown_0203A162[k] != j + 1; k ++);
+                    if (k == cnt)
+                    {
+                        gUnknown_0203A162[cnt] = j + 1;
+                        cnt ++;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
