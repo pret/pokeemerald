@@ -1048,7 +1048,7 @@ _080D8004:
 	bl sub_80DC594
 	bl sub_80DC5E8
 	bl sub_80DC7EC
-	ldr r1, =gBanksBySide
+	ldr r1, =gBanksByIdentity
 	strb r4, [r1]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]

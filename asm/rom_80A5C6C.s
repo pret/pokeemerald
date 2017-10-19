@@ -1810,7 +1810,7 @@ _080A6A04:
 GetBankSide: @ 80A6A30
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gBanksBySide
+	ldr r1, =gBanksByIdentity
 	adds r0, r1
 	ldrb r1, [r0]
 	movs r0, 0x1
@@ -1823,7 +1823,7 @@ GetBankSide: @ 80A6A30
 GetBankIdentity: @ 80A6A44
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gBanksBySide
+	ldr r1, =gBanksByIdentity
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
@@ -1840,7 +1840,7 @@ GetBankByIdentity: @ 80A6A54
 	ldrb r2, [r0]
 	cmp r1, r2
 	bcs _080A6A7E
-	ldr r4, =gBanksBySide
+	ldr r4, =gBanksByIdentity
 	ldrb r0, [r4]
 	cmp r0, r3
 	beq _080A6A7E
@@ -1883,7 +1883,7 @@ AnimBankSpriteExists: @ 80A6A90
 	b _080A6B18
 	.pool
 _080A6ABC:
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	cmp r0, 0xFF

@@ -1113,7 +1113,7 @@ _0814B872:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
+	bl EmitDataTransfer
 	bl LinkPartnerBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}

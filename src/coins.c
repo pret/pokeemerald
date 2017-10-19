@@ -5,12 +5,12 @@
 #include "text_window.h"
 #include "string_util.h"
 #include "menu.h"
+#include "international_string_util.h"
 
 #define MAX_COINS 9999
 
 EWRAM_DATA u8 sCoinsWindowId = 0;
 
-extern s32 GetStringRightAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
 extern void sub_819746C(u8 windowId, bool8 copyToVram);
 
 extern const u8 gText_Coins[];

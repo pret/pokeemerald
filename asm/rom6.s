@@ -11676,7 +11676,7 @@ _0813B62E:
 	ldrh r0, [r0]
 	strh r0, [r5]
 	movs r0, 0x1
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
@@ -11756,7 +11756,7 @@ _0813B6E4:
 	ldrh r0, [r0]
 	strh r0, [r1]
 	movs r0, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 _0813B708:
 	ldr r1, =gTasks
 	lsls r0, r4, 2

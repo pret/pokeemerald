@@ -27,7 +27,9 @@
 #define BIT_SIDE        0x1
 #define BIT_MON         0x2
 
+#define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
 #define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
+#define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
 
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
@@ -655,7 +657,9 @@ struct BattleStruct
     u8 field_1A1;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
-    u8 field_1A4[240];
+    u8 field_1A4[96];
+    u8 field_204[104];
+    u8 field_26C[40];
     u8 field_294[4];
     u8 field_298[8];
     u8 field_2A0;
@@ -914,6 +918,11 @@ struct BattleSpriteData
 };
 
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
+
+#define BATTLE_BUFFER_LINK_SIZE 0x1000
+
+extern u8 *gLinkBattleSendBuffer;
+extern u8 *gLinkBattleRecvBuffer;
 
 // Move this somewhere else
 

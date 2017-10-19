@@ -1489,7 +1489,7 @@ _0818A646:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
+	bl EmitDataTransfer
 	bl RecordedPlayerBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
@@ -4861,7 +4861,7 @@ sub_818C49C: @ 818C49C
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl RecordedPlayerBufferExecCompleted
 _0818C4C6:
 	pop {r0}
@@ -4897,7 +4897,7 @@ _0818C508:
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl RecordedPlayerBufferExecCompleted
 _0818C522:
 	pop {r0}
@@ -4929,7 +4929,7 @@ sub_818C538: @ 818C538
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 	b _0818C584
 	.pool
 _0818C560:
@@ -4947,7 +4947,7 @@ _0818C560:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 _0818C584:
 	bl RecordedPlayerBufferExecCompleted
 	pop {r4,r5}
@@ -4983,7 +4983,7 @@ sub_818C5A0: @ 818C5A0
 	ldrb r1, [r0]
 	movs r0, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x22_a_three_bytes
+	bl EmitCmd34
 	bl RecordedPlayerBufferExecCompleted
 	pop {r4}
 	pop {r0}

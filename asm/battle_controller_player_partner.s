@@ -645,7 +645,7 @@ _081BB2E2:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitCmd_x21
+	bl EmitCmd33
 	strb r5, [r4]
 	bl IsDoubleBattle
 	lsls r0, 24
@@ -918,7 +918,7 @@ _081BB514:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitCmd_x21
+	bl EmitCmd33
 	strb r5, [r4]
 	ldr r0, =sub_81BB628
 	str r0, [r6]
@@ -1688,7 +1688,7 @@ _081BBCBE:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
+	bl EmitDataTransfer
 	bl PlayerPartnerBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
@@ -5068,7 +5068,7 @@ _081BDB3C:
 	orrs r2, r5
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4-r6}
 	pop {r0}
@@ -5138,7 +5138,7 @@ _081BDBD0:
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x22_a_three_bytes
+	bl EmitCmd34
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4-r6}
 	pop {r0}
