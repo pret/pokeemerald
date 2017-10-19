@@ -36,6 +36,7 @@ extern EWRAM_DATA u8 *gUnknown_0203A14C;
 extern EWRAM_DATA u8 gUnknown_0203A150;
 extern EWRAM_DATA u8 gUnknown_0203A151;
 extern EWRAM_DATA u8 gUnknown_0203A152[16];
+extern EWRAM_DATA u8 gUnknown_0203A162[12];
 extern EWRAM_DATA u16 gUnknown_0203A16E;
 extern EWRAM_DATA u16 gUnknown_0203A170;
 extern EWRAM_DATA u8 gUnknown_0203A172;
@@ -655,6 +656,20 @@ bool8 sub_81277BC(u8 idx)
     for (i = 0; i < 16; i ++)
     {
         if (gUnknown_0203A152[i] == idx)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 sub_81277E8(u8 idx)
+{
+    u8 i;
+
+    for (i = 0; i < 12; i ++)
+    {
+        if (gUnknown_0203A162[i] == idx)
         {
             return TRUE;
         }

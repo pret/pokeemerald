@@ -5,33 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81277E8
-sub_81277E8: @ 81277E8
-	push {lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	movs r1, 0
-	ldr r3, =gUnknown_0203A162
-_081277F2:
-	adds r0, r1, r3
-	ldrb r0, [r0]
-	cmp r0, r2
-	bne _08127804
-	movs r0, 0x1
-	b _08127810
-	.pool
-_08127804:
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xB
-	bls _081277F2
-	movs r0, 0
-_08127810:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81277E8
-
 	thumb_func_start sub_8127814
 sub_8127814: @ 8127814
 	push {r4-r7,lr}
