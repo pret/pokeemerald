@@ -870,3 +870,40 @@ void sub_8127B90(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decor)
         }
     }
 }
+
+void sub_8127D38(u16 mapX, u16 mapY, u16 decor)
+{
+    switch (gDecorations[decor].shape)
+    {
+        case DECORSHAPE_1x1:
+            sub_8127B90(mapX, mapY, 1, 1, decor);
+            break;
+        case DECORSHAPE_2x1:
+            sub_8127B90(mapX, mapY, 2, 1, decor);
+            break;
+        case DECORSHAPE_3x1: // unused
+            sub_8127B90(mapX, mapY, 3, 1, decor);
+            break;
+        case DECORSHAPE_4x2:
+            sub_8127B90(mapX, mapY, 4, 2, decor);
+            break;
+        case DECORSHAPE_2x2:
+            sub_8127B90(mapX, mapY, 2, 2, decor);
+            break;
+        case DECORSHAPE_1x2:
+            sub_8127B90(mapX, mapY, 1, 2, decor);
+            break;
+        case DECORSHAPE_1x3: // unused
+            sub_8127B90(mapX, mapY, 1, 3, decor);
+            break;
+        case DECORSHAPE_2x4:
+            sub_8127B90(mapX, mapY, 2, 4, decor);
+            break;
+        case DECORSHAPE_3x3:
+            sub_8127B90(mapX, mapY, 3, 3, decor);
+            break;
+        case DECORSHAPE_3x2:
+            sub_8127B90(mapX, mapY, 3, 2, decor);
+            break;
+    }
+}
