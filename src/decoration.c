@@ -9,8 +9,10 @@
 #include "main.h"
 #include "palette.h"
 #include "songs.h"
+#include "overworld.h"
 #include "field_weather.h"
 #include "field_player_avatar.h"
+#include "field_camera.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
@@ -791,4 +793,11 @@ void sub_8127ACC(u8 taskId)
     gTasks[taskId].data[3] = gSaveBlock1Ptr->pos.x;
     gTasks[taskId].data[4] = gSaveBlock1Ptr->pos.y;
     PlayerGetDestCoords(&gTasks[taskId].data[0], &gTasks[taskId].data[1]);
+}
+
+void sub_8127B04(u8 taskId)
+{
+    DrawWholeMapView();
+    Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, gTasks[taskId].data[3], gTasks[taskId].data[4]);
+    warp_in();
 }

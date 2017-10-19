@@ -54,5 +54,6 @@ void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 void sub_8086230(void);
 void c2_exit_to_overworld_2_switch(void);
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
+void warp_in(void);
 
 #endif //GUARD_ROM4_H

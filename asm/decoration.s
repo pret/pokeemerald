@@ -5,43 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8127B04
-sub_8127B04: @ 8127B04
-	push {r4,r5,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	bl DrawWholeMapView
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	ldrb r1, [r1, 0x5]
-	lsls r1, 24
-	asrs r1, 24
-	movs r2, 0x1
-	negs r2, r2
-	ldr r3, =gTasks
-	lsls r4, r5, 2
-	adds r4, r5
-	lsls r4, 3
-	adds r4, r3
-	movs r3, 0xE
-	ldrsb r3, [r4, r3]
-	ldrb r4, [r4, 0x10]
-	lsls r4, 24
-	asrs r4, 24
-	str r4, [sp]
-	bl Overworld_SetWarpDestination
-	bl warp_in
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8127B04
-
 	thumb_func_start sub_8127B54
 sub_8127B54: @ 8127B54
 	push {lr}
