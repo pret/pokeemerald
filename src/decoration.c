@@ -91,6 +91,7 @@ void sub_8129ABC(u8 taskId);
 void sub_8133E1C(u8 taskId);
 void sub_812759C(u8 taskId);
 void sub_8127718(u8 decorCat);
+void sub_8128060(u8 taskId);
 
 // .rodata
 
@@ -944,5 +945,54 @@ void sub_8127E18(void)
             sub_808F254(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
             break;
         }
+    }
+}
+
+bool8 sub_8127F38(void)
+{
+    u16 i;
+
+    for (i = 0; i < gUnknown_0203A17C.size; i ++)
+    {
+        if (gUnknown_0203A17C.items[i] == DECOR_NONE)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_8127F68(u8 taskId)
+{
+    if (gUnknown_0203A17C.isPlayerRoom == TRUE && gUnknown_0203A173 != DECORCAT_DOLL && gUnknown_0203A173 != DECORCAT_CUSHION)
+    {
+        StringExpandPlaceholders(gStringVar4, gText_CantPlaceInRoom);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_8127A5C);
+    }
+    else if (sub_81279C4() == TRUE)
+    {
+        if (sub_8127F38() == TRUE)
+        {
+            fade_screen(1, 0);
+            gTasks[taskId].data[2] = 0;
+            gTasks[taskId].func = sub_8128060;
+        }
+        else
+        {
+            ConvertIntToDecimalStringN(gStringVar1, gUnknown_0203A17C.size, STR_CONV_MODE_RIGHT_ALIGN, 2);
+            if (gUnknown_0203A17C.isPlayerRoom == FALSE) {
+                StringExpandPlaceholders(gStringVar4, gText_NoMoreDecorations);
+            }
+            else
+            {
+                StringExpandPlaceholders(gStringVar4, gText_NoMoreDecorations2);
+            }
+            DisplayItemMessageOnField(taskId, gStringVar4, sub_8127A5C);
+        }
+    }
+    else
+    {
+        StringExpandPlaceholders(gStringVar4, gText_InUseAlready);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_8127A5C);
     }
 }

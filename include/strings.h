@@ -35,5 +35,9 @@ extern const u8 gText_Exit[];
 extern const u8 gText_Cancel[];
 extern const u8 gText_Color161Shadow161[];
 extern const u8 gText_GoBackPrevMenu[];
+extern const u8 gText_CantPlaceInRoom[];
+extern const u8 gText_NoMoreDecorations[];
+extern const u8 gText_NoMoreDecorations2[];
+extern const u8 gText_InUseAlready[];
 
 #endif //GUARD_strings_H
