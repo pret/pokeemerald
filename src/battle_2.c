@@ -204,9 +204,6 @@ extern const u8 BattleScript_ActionSwitch[];
 extern const u8 BattleScript_PrintFailedToRunString[];
 
 // functions
-extern void HandleLinkBattleSetup(void); // rom_3
-extern void SetUpBattleVarsAndBirchZigzagoon(void); // rom_3
-extern void sub_8032768(void); // rom_3
 extern void dp12_8087EA4(void);
 extern void sub_80356D0(void);
 extern void GetFrontierTrainerName(u8* dst, u16 trainerId); // battle tower
@@ -4083,7 +4080,7 @@ static void HandleTurnActionSelectionState(void)
                     if (gBattleMons[GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON)].status2 & STATUS2_MULTIPLETURNS
                         || gBattleMons[GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON)].status2 & STATUS2_RECHARGE)
                     {
-                        Emit_x32(0);
+                        EmitCmd50(0);
                         MarkBufferBankForExecution(gActiveBank);
                         return;
                     }
@@ -4111,7 +4108,7 @@ static void HandleTurnActionSelectionState(void)
                     {
                         RecordedBattle_ClearBankAction(GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON), 3);
                     }
-                    Emit_x32(0);
+                    EmitCmd50(0);
                     MarkBufferBankForExecution(gActiveBank);
                     return;
                 }

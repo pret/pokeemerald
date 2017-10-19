@@ -545,7 +545,7 @@ _08009888:
 	movs r6, 0
 	strh r0, [r4]
 	adds r0, r5, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	ldrh r0, [r4]
 	cmp r0, r8
 	beq _080098C4
@@ -2181,8 +2181,8 @@ _0800A5E2:
 	.pool
 	thumb_func_end ResetBlockReceivedFlags
 
-	thumb_func_start sub_800A5EC
-sub_800A5EC: @ 800A5EC
+	thumb_func_start ResetBlockReceivedFlag
+ResetBlockReceivedFlag: @ 800A5EC
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -2206,7 +2206,7 @@ _0800A616:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_800A5EC
+	thumb_func_end ResetBlockReceivedFlag
 
 	thumb_func_start sub_800A620
 sub_800A620: @ 800A620
@@ -14607,7 +14607,7 @@ sub_8010A70: @ 8010A70
 	adds r1, r4, 0
 	bl CpuSet
 	movs r0, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 _08010A9C:
 	add sp, 0x4
 	pop {r4,r5}
@@ -14683,7 +14683,7 @@ _08010B40:
 	b _08010CF0
 _08010B4A:
 	adds r0, r4, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	movs r0, 0xF0
 	lsls r0, 7
 	bl sub_800FD14
@@ -14713,7 +14713,7 @@ _08010B78:
 	b _08010CF0
 _08010B8C:
 	adds r0, r4, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	lsls r2, r4, 8
 	ldr r0, =gBlockRecvBuffer
 	adds r2, r0
@@ -14845,7 +14845,7 @@ _08010C94:
 	ldr r2, =0x0100007e
 	bl CpuSet
 	movs r0, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	ldr r1, =gUnknown_03005000
 	ldr r5, =0x00000ce8
 	adds r0, r1, r5
@@ -14947,7 +14947,7 @@ _08010D82:
 	ldr r0, =gBlockRecvBuffer
 	bl sub_8010A14
 	movs r0, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	ldr r0, =gReceivedRemoteLinkPlayers
 	strb r4, [r0]
 	adds r0, r5, 0
@@ -39108,7 +39108,7 @@ sub_801D978: @ 801D978
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	pop {r0}
 	bx r0
 	thumb_func_end sub_801D978
@@ -42361,7 +42361,7 @@ _0801F3A2:
 	strh r1, [r4, 0x4]
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	lsls r0, 8

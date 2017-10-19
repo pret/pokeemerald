@@ -103,13 +103,13 @@ _0815942A:
 	movs r1, 0x7
 _0815942E:
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	b _08159440
 _08159436:
 	movs r0, 0x1
 	movs r1, 0x8
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 _08159440:
 	bl SafariBufferExecCompleted
 	b _0815954E
@@ -399,7 +399,7 @@ sub_8159698: @ 8159698
 	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl dp01_build_cmdbuf_x23_aa_0
+	bl EmitCmd35
 	bl SafariBufferExecCompleted
 _081596BE:
 	pop {r0}
