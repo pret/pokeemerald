@@ -153,7 +153,7 @@ _081684CE:
 	movs r1, 0x9
 _081684E4:
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl WallyBufferExecCompleted
 	ldr r1, [r4]
 	adds r1, 0x94
@@ -208,7 +208,7 @@ _08168540:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl WallyBufferExecCompleted
 _08168564:
 	pop {r4,r5}
@@ -311,7 +311,7 @@ sub_8168610: @ 8168610
 	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl dp01_build_cmdbuf_x23_aa_0
+	bl EmitCmd35
 	bl WallyBufferExecCompleted
 _08168636:
 	pop {r0}
@@ -975,7 +975,7 @@ _08168BFA:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
+	bl EmitDataTransfer
 	bl WallyBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
@@ -3777,7 +3777,7 @@ _0816A550:
 	lsls r2, 1
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl WallyBufferExecCompleted
 _0816A574:
 	pop {r4}

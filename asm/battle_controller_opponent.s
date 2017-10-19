@@ -1666,7 +1666,7 @@ _0805FFEA:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
+	bl EmitDataTransfer
 	bl OpponentBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
@@ -2607,7 +2607,7 @@ _08060806:
 	ldrb r1, [r0]
 	movs r0, 0x1
 	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
+	bl EmitDataTransfer
 	bl OpponentBufferExecCompleted
 	add sp, 0x58
 	pop {r4-r7}
@@ -5243,7 +5243,7 @@ sub_8061FB8: @ 8061FB8
 	movs r0, 0x1
 	movs r1, 0xA
 _08061FD6:
-	bl EmitCmd_x21
+	bl EmitCmd33
 _08061FDA:
 	bl OpponentBufferExecCompleted
 	b _08062156
@@ -5347,7 +5347,7 @@ _0806209C:
 	movs r0, 0x1
 	movs r1, 0xA
 	adds r2, r4, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	b _08061FDA
 	.pool
 _080620C4:
@@ -5378,7 +5378,7 @@ _080620C6:
 	movs r0, 0x1
 	movs r1, 0xA
 	adds r2, r4, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	b _08062152
 	.pool
 _08062108:
@@ -5401,7 +5401,7 @@ _08062108:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 	b _08062152
 	.pool
 _0806213C:
@@ -5413,7 +5413,7 @@ _0806213C:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 _08062152:
 	bl OpponentBufferExecCompleted
 _08062156:
@@ -5435,7 +5435,7 @@ sub_806215C: @ 806215C
 	adds r0, 0xC0
 	ldrb r1, [r0]
 	movs r0, 0x1
-	bl dp01_build_cmdbuf_x23_aa_0
+	bl EmitCmd35
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -5550,7 +5550,7 @@ _0806225A:
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x22_a_three_bytes
+	bl EmitCmd34
 	bl OpponentBufferExecCompleted
 	pop {r4-r7}
 	pop {r0}

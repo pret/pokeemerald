@@ -514,7 +514,7 @@ _08072694:
 _08072716:
 	str r0, [sp]
 _08072718:
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	add r0, r10
 	ldrb r1, [r0]
 	lsls r0, r1, 1

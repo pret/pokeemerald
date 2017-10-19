@@ -54,7 +54,7 @@ SECTIONS {
         asm/link.o(.text);
         src/rtc.o(.text);
         asm/main_menu.o(.text);
-        asm/rom3.o(.text);
+        src/battle_controllers.o(.text);
         src/decompress.o(.text);
         asm/battle_1.o(.text);
         src/battle_2.o(.text);
@@ -263,6 +263,7 @@ SECTIONS {
         asm/unk_sprite_file.o(.text);
         asm/unk_transition.o(.text);
         asm/unk_transition_2.o(.text);
+        src/international_string_util.o(.text);
         asm/international_string_util.o(.text);
     } =0
 

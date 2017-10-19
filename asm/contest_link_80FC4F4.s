@@ -50,7 +50,7 @@ sub_80FC530: @ 80FC530
 	cmp r4, 0
 	beq _080FC552
 	adds r0, r5, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	movs r0, 0x1
 	b _080FC554
 _080FC552:

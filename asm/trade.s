@@ -125,7 +125,7 @@ sub_8077234: @ 8077234
 _08077250:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 _08077258:
 	pop {r4}
 	pop {r0}
@@ -12903,7 +12903,7 @@ _0807E504:
 	strb r6, [r0]
 _0807E514:
 	movs r0, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 _0807E51A:
 	movs r0, 0x2
 	ands r0, r5
@@ -12924,7 +12924,7 @@ _0807E51A:
 	strb r1, [r0]
 _0807E53C:
 	movs r0, 0x1
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 _0807E542:
 	pop {r4-r6}
 	pop {r0}

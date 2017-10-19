@@ -1980,7 +1980,7 @@ _080B3474:
 	bl sub_800B524
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	adds r5, 0x1C
 	adds r4, 0x1
 _080B349A:

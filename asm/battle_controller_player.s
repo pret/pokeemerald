@@ -226,7 +226,7 @@ _0805764C:
 	movs r0, 0x1
 	movs r1, 0x3
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	b _080577C2
 _08057658:
 	movs r0, 0x20
@@ -393,7 +393,7 @@ _080577B2:
 	movs r1, 0xC
 _080577BC:
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 _080577C2:
 	bl PlayerBufferExecCompleted
 	b _080577E8
@@ -518,7 +518,7 @@ _080578A0:
 	orrs r2, r0
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl dp11b_obj_free
@@ -1086,7 +1086,7 @@ _08057E14:
 _08057E1C:
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl PlayerBufferExecCompleted
 	b _08057F9E
 	.pool
@@ -3413,7 +3413,7 @@ _080591FE:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitCmd_x21
+	bl EmitCmd33
 	strb r5, [r4]
 	bl IsDoubleBattle
 	lsls r0, 24
@@ -3686,7 +3686,7 @@ _08059430:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitCmd_x21
+	bl EmitCmd33
 	strb r5, [r4]
 	ldr r0, =sub_8059544
 	str r0, [r6]
@@ -4059,14 +4059,14 @@ sub_8059828: @ 8059828
 	ldrb r1, [r0]
 	ldr r2, =gUnknown_0203CF00
 	movs r0, 0x1
-	bl dp01_build_cmdbuf_x22_a_three_bytes
+	bl EmitCmd34
 	b _0805987A
 	.pool
 _08059870:
 	movs r0, 0x1
 	movs r1, 0x6
 	movs r2, 0
-	bl dp01_build_cmdbuf_x22_a_three_bytes
+	bl EmitCmd34
 _0805987A:
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -4130,7 +4130,7 @@ sub_80598E0: @ 80598E0
 	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl dp01_build_cmdbuf_x23_aa_0
+	bl EmitCmd35
 	bl PlayerBufferExecCompleted
 _08059906:
 	pop {r0}
@@ -4291,14 +4291,14 @@ _08059A2C:
 	movs r0, 0x1
 	movs r1, 0xE
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	b _08059A76
 	.pool
 _08059A6C:
 	movs r0, 0x1
 	movs r1, 0xD
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 _08059A76:
 	bl PlayerBufferExecCompleted
 _08059A7A:
@@ -4772,7 +4772,7 @@ _08059E4E:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
+	bl EmitDataTransfer
 	bl PlayerBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
@@ -5713,7 +5713,7 @@ _0805A66A:
 	ldrb r1, [r0]
 	movs r0, 0x1
 	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
+	bl EmitDataTransfer
 	bl PlayerBufferExecCompleted
 	add sp, 0x58
 	pop {r4-r7}
@@ -8658,7 +8658,7 @@ sub_805C158: @ 805C158
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl PlayerBufferExecCompleted
 _0805C194:
 	pop {r0}
@@ -8826,7 +8826,7 @@ _0805C2C8:
 	lsrs r1, 24
 	movs r0, 0x1
 	mov r2, r12
-	bl dp01_build_cmdbuf_x22_a_three_bytes
+	bl EmitCmd34
 	bl PlayerBufferExecCompleted
 	b _0805C3BC
 	.pool
@@ -9378,7 +9378,7 @@ sub_805C80C: @ 805C80C
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -9390,7 +9390,7 @@ sub_805C820: @ 805C820
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl dp01_build_cmdbuf_x22_a_three_bytes
+	bl EmitCmd34
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -9401,7 +9401,7 @@ sub_805C834: @ 805C834
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
-	bl dp01_build_cmdbuf_x23_aa_0
+	bl EmitCmd35
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -9412,7 +9412,7 @@ sub_805C848: @ 805C848
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
-	bl dp01_build_cmdbuf_x24_aa_0
+	bl EmitCmd36
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
