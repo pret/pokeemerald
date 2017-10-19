@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "malloc.h"
 #include "string_util.h"
 #include "international_string_util.h"
 #include "script.h"
@@ -21,6 +22,14 @@
 
 // Static type declarations
 
+struct UnkStruct_0203A18C {
+    struct ListMenuItem unk_000[41];
+    u8 unk_148[41][24];
+    u8 unk_520;
+    u8 unk_521;
+    u8 unk_522;
+};
+
 // Static RAM declarations
 
 extern EWRAM_DATA u8 *gUnknown_0203A14C;
@@ -31,13 +40,7 @@ extern EWRAM_DATA u16 gUnknown_0203A170;
 extern EWRAM_DATA u8 gUnknown_0203A173;
 extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
 extern EWRAM_DATA u8 gUnknown_0203A188[4];
-extern EWRAM_DATA struct {
-    struct ListMenuItem unk_000[41];
-    u8 unk_148[41][24];
-    u8 unk_520;
-    u8 unk_521;
-    u8 unk_522;
-} *gUnknown_0203A18C;
+extern EWRAM_DATA struct UnkStruct_0203A18C *gUnknown_0203A18C;
 
 // Static ROM declarations
 
@@ -65,6 +68,8 @@ bool8 sub_81299AC(u8 taskId);
 void sub_81279B4(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_8133E1C(u8 taskId);
+void sub_812759C(u8 taskId);
+void sub_8127718(u8 decorCat);
 
 // .rodata
 
@@ -537,4 +542,36 @@ void sub_8127500(void)
     {
         gUnknown_0203A18C->unk_522 = AddScrollIndicatorArrowPairParametrized(0x02, 0x3c, 0x0c, 0x94, gUnknown_0203A18C->unk_520 - gUnknown_0203A18C->unk_521, 0x6e, 0x6e, &gUnknown_0203A170);
     }
+}
+
+void sub_8127554(void)
+{
+    if (gUnknown_0203A18C->unk_522 != 0xFF)
+    {
+        RemoveScrollIndicatorArrowPair(gUnknown_0203A18C->unk_522);
+        gUnknown_0203A18C->unk_522 = 0xFF;
+    }
+}
+
+void sub_8127580(u8 taskId)
+{
+    sub_81269D4(1);
+    sub_812759C(taskId);
+}
+
+void sub_812759C(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    sub_81269D4(3);
+    sub_8127718(gUnknown_0203A173);
+    gUnknown_0203A18C = calloc(1, sizeof(struct UnkStruct_0203A18C));
+    gUnknown_0203A18C->unk_522 = 0xFF;
+    sub_8127284();
+    sub_81272C8();
+    sub_81272F8();
+    sub_8127330(taskId);
+    data[13] = ListMenuInit(&gUnknown_03006310, gUnknown_0203A170, gUnknown_0203A16E);
+    sub_8127500();
 }

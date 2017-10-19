@@ -23,4 +23,6 @@ extern struct ListMenuTemplate gUnknown_03006310;
 
 // Exported ROM declarations
 
+u8 ListMenuInit(struct ListMenuTemplate *template, u16 a1, u16 a2);
+
 #endif //GUARD_LIST_MENU_H
