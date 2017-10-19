@@ -831,26 +831,24 @@ void sub_80A477C(bool8 to_BG2)
 
 static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
 {
-    u8 r4;
-    u8 r6;
-    s16 r3;
-    s16 r2;
+    u8 spriteId, palIndex;
+    s16 x, y;
     struct UnknownAnimStruct2 unknownStruct;
 
-    r4 = gTasks[taskId].data[0];
-    r6 = gTasks[taskId].data[6];
+    spriteId = gTasks[taskId].data[0];
+    palIndex = gTasks[taskId].data[6];
     sub_80A6B30(&unknownStruct);
-    r3 = gTasks[taskId].data[1] - (gSprites[r4].pos1.x + gSprites[r4].pos2.x);
-    r2 = gTasks[taskId].data[2] - (gSprites[r4].pos1.y + gSprites[r4].pos2.y);
+    x = gTasks[taskId].data[1] - (gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x);
+    y = gTasks[taskId].data[2] - (gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y);
 
     if (gTasks[taskId].data[5] == 0)
     {
         u16 *src;
         u16 *dst;
 
-        gBattle_BG1_X = r3 + gTasks[taskId].data[3];
-        gBattle_BG1_Y = r2 + gTasks[taskId].data[4];
-        src = gPlttBufferFaded + 0x100 + r6 * 16;
+        gBattle_BG1_X = x + gTasks[taskId].data[3];
+        gBattle_BG1_Y = y + gTasks[taskId].data[4];
+        src = gPlttBufferFaded + 0x100 + palIndex * 16;
         dst = gPlttBufferFaded + 0x100 + unknownStruct.unk8 * 16 - 256;
         CpuCopy32(src, dst, 0x20);
     }
@@ -859,9 +857,9 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
         u16 *src;
         u16 *dst;
 
-        gBattle_BG2_X = r3 + gTasks[taskId].data[3];
-        gBattle_BG2_Y = r2 + gTasks[taskId].data[4];
-        src = gPlttBufferFaded + 0x100 + r6 * 16;
+        gBattle_BG2_X = x + gTasks[taskId].data[3];
+        gBattle_BG2_Y = y + gTasks[taskId].data[4];
+        src = gPlttBufferFaded + 0x100 + palIndex * 16;
         dst = gPlttBufferFaded + 0x100 - 112;
         CpuCopy32(src, dst, 0x20);
     }
@@ -1232,7 +1230,7 @@ static void LoadDefaultBg(void)
     if (IsContest())
         LoadContestBgAfterMoveAnim();
     else
-        LoadFittingBackgroundForBattle();
+        DrawMainBattleBackground();
 }
 
 static void ScriptCmd_restorebg(void)
@@ -1286,39 +1284,39 @@ s8 BattleAnimAdjustPanning(s8 pan)
     if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gAnimBankAttacker].flag_x10)
     {
         if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
-            pan = 63;
+            pan = PAN_ATTACKER_OPPONENT;
         else
-            pan = -64;
+            pan = PAN_ATTACKER_PLAYER;
     }
     else if (IsContest())
     {
-        if (gAnimBankAttacker != gAnimBankTarget || gAnimBankAttacker != 2 || pan != 63)
+        if (gAnimBankAttacker != gAnimBankTarget || gAnimBankAttacker != 2 || pan != PAN_ATTACKER_OPPONENT)
             pan *= -1;
     }
     else if (GetBankSide(gAnimBankAttacker) == SIDE_PLAYER)
     {
         if (GetBankSide(gAnimBankTarget) == SIDE_PLAYER)
         {
-            if (pan == 63)
-                pan = -64;
-            else if (pan != -64)
+            if (pan == PAN_ATTACKER_OPPONENT)
+                pan = PAN_ATTACKER_PLAYER;
+            else if (pan != PAN_ATTACKER_PLAYER)
                 pan *= -1;
         }
     }
     else if (GetBankSide(gAnimBankTarget) == SIDE_OPPONENT)
     {
-        if (pan == -64)
-            pan = 63;
+        if (pan == PAN_ATTACKER_PLAYER)
+            pan = PAN_ATTACKER_OPPONENT;
     }
     else
     {
         pan *= -1;
     }
 
-    if (pan > 63)
-        pan = 63;
-    else if (pan < -64)
-        pan = -64;
+    if (pan > PAN_ATTACKER_OPPONENT)
+        pan = PAN_ATTACKER_OPPONENT;
+    else if (pan < PAN_ATTACKER_PLAYER)
+        pan = PAN_ATTACKER_PLAYER;
 
     return pan;
 }
@@ -1328,9 +1326,9 @@ s8 BattleAnimAdjustPanning2(s8 pan)
     if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gAnimBankAttacker].flag_x10)
     {
         if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
-            pan = 63;
+            pan = PAN_ATTACKER_OPPONENT;
         else
-            pan = -64;
+            pan = PAN_ATTACKER_PLAYER;
     }
     else
     {

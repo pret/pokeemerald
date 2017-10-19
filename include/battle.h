@@ -830,7 +830,7 @@ void LoadBattleTextboxAndBackground(void);
 void LoadBattleEntryBackground(void);
 void ApplyPlayerChosenFrameToBattleMenu(void);
 bool8 LoadChosenBattleElement(u8 caseId);
-void LoadFittingBackgroundForBattle(void);
+void DrawMainBattleBackground(void);
 void task00_0800F6FC(u8 taskId);
 
 // battle_5
