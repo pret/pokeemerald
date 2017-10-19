@@ -15,6 +15,7 @@
 #include "field_weather.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
+#include "field_screen.h"
 #include "field_map_obj.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
@@ -38,6 +39,13 @@ struct UnkStruct_0203A18C {
     u8 unk_522;
 };
 
+struct UnkStruct_0203A190 {
+    /*0x000; 0x0203a190*/ const struct Decoration *decoration;
+    /*0x004; 0x0203a194*/ u16 tiles[0x40];
+    /*0x084; 0x0203a214*/ u8 image[0x800];
+    /*0x884; 0x0203aa14*/ u16 palette[16];
+};
+
 // Static RAM declarations
 
 extern EWRAM_DATA u8 *gUnknown_0203A14C;
@@ -52,12 +60,7 @@ extern EWRAM_DATA u8 gUnknown_0203A173;
 extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
 extern EWRAM_DATA u8 gUnknown_0203A188[4];
 extern EWRAM_DATA struct UnkStruct_0203A18C *gUnknown_0203A18C;
-extern EWRAM_DATA struct {
-    /*0x000; 0x0203a190*/ const struct Decoration *decoration;
-    /*0x004; 0x0203a194*/ u16 tiles[0x40];
-    /*0x084; 0x0203a214*/ u8 image[0x800];
-    /*0x884; 0x0203aa14*/ u16 palette[16];
-} gUnknown_0203A190;
+extern EWRAM_DATA struct UnkStruct_0203A190 gUnknown_0203A190;
 extern EWRAM_DATA u16 gUnknown_0203AA34;
 extern EWRAM_DATA u16 gUnknown_0203AA36;
 
@@ -92,6 +95,10 @@ void sub_8133E1C(u8 taskId);
 void sub_812759C(u8 taskId);
 void sub_8127718(u8 decorCat);
 void sub_8128060(u8 taskId);
+void ConfigureCameraObjectForPlacingDecoration(struct UnkStruct_0203A190 *data, u8 image);
+void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_0203A190 *data);
+void sub_812826C(u8 taskId);
+void sub_8128FD8(u8 taskId);
 
 // .rodata
 
@@ -994,5 +1001,35 @@ void sub_8127F68(u8 taskId)
     {
         StringExpandPlaceholders(gStringVar4, gText_InUseAlready);
         DisplayItemMessageOnField(taskId, gStringVar4, sub_8127A5C);
+    }
+}
+
+void sub_8128060(u8 taskId)
+{
+    switch (gTasks[taskId].data[2])
+    {
+        case 0:
+            if (!gPaletteFade.active)
+            {
+                sub_8127ACC(taskId);
+                gTasks[taskId].data[2] = 1;
+            }
+            break;
+        case 1:
+            gPaletteFade.bufferTransferDisabled = TRUE;
+            ConfigureCameraObjectForPlacingDecoration(&gUnknown_0203A190, gUnknown_0203A14C[gUnknown_0203A172]);
+            sub_812826C(taskId);
+            SetUpPlacingDecorationPlayerAvatar(taskId, &gUnknown_0203A190);
+            pal_fill_black();
+            gPaletteFade.bufferTransferDisabled = FALSE;
+            gTasks[taskId].data[2] = 2;
+            break;
+        case 2:
+            if (sub_80ABDFC() == TRUE)
+            {
+                gTasks[taskId].data[12] = 0;
+                sub_8128FD8(taskId);
+            }
+            break;
     }
 }
