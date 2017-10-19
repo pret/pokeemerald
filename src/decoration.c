@@ -89,6 +89,8 @@ extern const u8 *const gUnknown_085A6B68[];
 extern void (*const gUnknown_085A6B78[][2])(u8 taskId);
 extern const u16 gUnknown_085A6BB0[];
 extern const struct ListMenuTemplate gUnknown_085A6BD0;
+extern const u8 gUnknown_085A72E4[];
+extern const u8 gUnknown_085A72EC[];
 
 // .text
 
@@ -800,4 +802,22 @@ void sub_8127B04(u8 taskId)
     DrawWholeMapView();
     Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, gTasks[taskId].data[3], gTasks[taskId].data[4]);
     warp_in();
+}
+
+u16 sub_8127B54(u8 decor, u8 a1)
+{
+    u16 resp;
+
+    resp = -1;
+    switch (decor)
+    {
+        case DECOR_STAND:
+            resp = gUnknown_085A72E4[a1] << 12;
+            return resp;
+        case DECOR_SLIDE:
+            resp = gUnknown_085A72EC[a1] << 12;
+            return resp;
+        default:
+            return resp;
+    }
 }
