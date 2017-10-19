@@ -35,6 +35,7 @@ struct UnkStruct_0203A18C {
 extern EWRAM_DATA u8 *gUnknown_0203A14C;
 extern EWRAM_DATA u8 gUnknown_0203A150;
 extern EWRAM_DATA u8 gUnknown_0203A151;
+extern EWRAM_DATA u8 gUnknown_0203A152[16];
 extern EWRAM_DATA u16 gUnknown_0203A16E;
 extern EWRAM_DATA u16 gUnknown_0203A170;
 extern EWRAM_DATA u8 gUnknown_0203A172;
@@ -639,4 +640,24 @@ void sub_8127744(u32 a0)
         txt = gDecorations[gUnknown_0203A14C[a0]].description;
     }
     PrintTextOnWindow(winidx, 1, txt, 0, 1, 0, 0);
+}
+
+void sub_81277A8(void)
+{
+    sub_8126A58(3);
+    sub_8126A58(2);
+}
+
+bool8 sub_81277BC(u8 idx)
+{
+    u8 i;
+
+    for (i = 0; i < 16; i ++)
+    {
+        if (gUnknown_0203A152[i] == idx)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
