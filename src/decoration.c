@@ -63,6 +63,7 @@ extern EWRAM_DATA struct UnkStruct_0203A18C *gUnknown_0203A18C;
 extern EWRAM_DATA struct UnkStruct_0203A190 gUnknown_0203A190;
 extern EWRAM_DATA u16 gUnknown_0203AA34;
 extern EWRAM_DATA u16 gUnknown_0203AA36;
+extern EWRAM_DATA u8 gUnknown_0203AA38;
 
 // Static ROM declarations
 
@@ -95,10 +96,12 @@ void sub_8133E1C(u8 taskId);
 void sub_812759C(u8 taskId);
 void sub_8127718(u8 decorCat);
 void sub_8128060(u8 taskId);
-void ConfigureCameraObjectForPlacingDecoration(struct UnkStruct_0203A190 *data, u8 image);
+void ConfigureCameraObjectForPlacingDecoration(struct UnkStruct_0203A190 *data, u8 decor);
 void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_0203A190 *data);
 void sub_812826C(u8 taskId);
 void sub_8128FD8(u8 taskId);
+void sub_81292D0(struct Sprite *sprite);
+u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 decor);
 
 // .rodata
 
@@ -111,6 +114,12 @@ extern const u16 gUnknown_085A6BB0[];
 extern const struct ListMenuTemplate gUnknown_085A6BD0;
 extern const u8 gUnknown_085A72E4[];
 extern const u8 gUnknown_085A72EC[];
+extern const struct {
+    u8 shape;
+    u8 size;
+    u8 x;
+    u8 y;
+} gUnknown_085A7250[];
 
 // .text
 
@@ -1032,4 +1041,14 @@ void sub_8128060(u8 taskId)
             }
             break;
     }
+}
+
+void ConfigureCameraObjectForPlacingDecoration(struct UnkStruct_0203A190 *data, u8 decor)
+{
+    gUnknown_0203AA38 = gSprites[gUnknown_03005DD0.unk4].data0;
+    gUnknown_03005DD0.unk4 = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
+    gSprites[gUnknown_03005DD0.unk4].oam.priority = 1;
+    gSprites[gUnknown_03005DD0.unk4].callback = sub_81292D0;
+    gSprites[gUnknown_03005DD0.unk4].pos1.x = gUnknown_085A7250[data->decoration->shape].x;
+    gSprites[gUnknown_03005DD0.unk4].pos1.y = gUnknown_085A7250[data->decoration->shape].y;
 }
