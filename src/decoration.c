@@ -10,6 +10,8 @@
 #include "palette.h"
 #include "songs.h"
 #include "overworld.h"
+#include "fieldmap.h"
+#include "metatile_behavior.h"
 #include "field_weather.h"
 #include "field_player_avatar.h"
 #include "field_camera.h"
@@ -819,5 +821,52 @@ u16 sub_8127B54(u8 decor, u8 a1)
             return resp;
         default:
             return resp;
+    }
+}
+
+void sub_8127B90(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decor)
+{
+    u16 i;
+    u16 j;
+    u16 behavior;
+    u16 flags;
+    u16 v0;
+    u16 v1;
+    s16 decLeft;
+    s16 decBottom;
+
+    for (i = 0; i < decHeight; i ++)
+    {
+        decBottom = mapY - decHeight + 1 + i;
+        for (j = 0; j < decWidth; j ++)
+        {
+            decLeft = mapX + j;
+            behavior = GetBehaviorByMetatileId(0x200 + gDecorations[decor].tiles[i * decWidth + j]);
+            if (MetatileBehavior_IsMB_B9(behavior) == TRUE || (gDecorations[decor].permission != DECORPERM_PASS_FLOOR && (behavior >> 12)))
+            {
+                flags = 0xc00;
+            }
+            else
+            {
+                flags = 0x000;
+            }
+            if (gDecorations[decor].permission != DECORPERM_NA_WALL && MetatileBehavior_IsMB_B7(MapGridGetMetatileBehaviorAt(decLeft, decBottom)) == TRUE)
+            {
+                v0 = 1;
+            }
+            else
+            {
+                v0 = 0;
+            }
+            v1 = sub_8127B54(gDecorations[decor].id, i * decWidth + j);
+            if (v1 != 0xFFFF)
+            {
+                MapGridSetMetatileEntryAt(decLeft, decBottom, (gDecorations[decor].tiles[i * decWidth + j] + (0x200 | v0)) | flags | v1);
+            }
+            else
+            {
+                MapGridSetMetatileIdAt(decLeft, decBottom, (gDecorations[decor].tiles[i * decWidth + j] + (0x200 | v0)) | flags);
+            }
+        }
     }
 }
