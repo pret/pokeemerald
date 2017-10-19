@@ -6,9 +6,11 @@
 #include "international_string_util.h"
 #include "script.h"
 #include "task.h"
+#include "main.h"
 #include "palette.h"
 #include "songs.h"
 #include "field_weather.h"
+#include "field_player_avatar.h"
 #include "list_menu.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
@@ -748,4 +750,45 @@ bool8 sub_81279C4(void)
         }
     }
     return TRUE;
+}
+
+void sub_8127A14(u8 taskId)
+{
+    sub_81269D4(1);
+    sub_8127620(taskId);
+}
+
+void sub_8127A30(u8 taskId)
+{
+    sub_8197434(0, 0);
+    gTasks[taskId].func = sub_8127A14;
+}
+
+void sub_8127A5C(u8 taskId)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        sub_8197434(0, 0);
+        sub_81269D4(1);
+        sub_8127620(taskId);
+    }
+}
+
+void sub_8127A8C(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    sub_8127554();
+    sub_81277A8();
+    sub_81AE6C8(data[13], NULL, NULL);
+    free(gUnknown_0203A18C);
+    sub_8126E44(taskId);
+}
+
+void sub_8127ACC(u8 taskId)
+{
+    gTasks[taskId].data[3] = gSaveBlock1Ptr->pos.x;
+    gTasks[taskId].data[4] = gSaveBlock1Ptr->pos.y;
+    PlayerGetDestCoords(&gTasks[taskId].data[0], &gTasks[taskId].data[1]);
 }
