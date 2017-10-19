@@ -37,6 +37,7 @@ extern EWRAM_DATA u8 gUnknown_0203A150;
 extern EWRAM_DATA u8 gUnknown_0203A151;
 extern EWRAM_DATA u16 gUnknown_0203A16E;
 extern EWRAM_DATA u16 gUnknown_0203A170;
+extern EWRAM_DATA u8 gUnknown_0203A172;
 extern EWRAM_DATA u8 gUnknown_0203A173;
 extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
 extern EWRAM_DATA u8 gUnknown_0203A188[4];
@@ -61,7 +62,9 @@ void sub_81271CC(u8 taskId);
 void sub_8127268(u8 taskId);
 void sub_8127454(u8 *dest, u16 decorId);
 void sub_8127620(u8 taskId);
+void sub_812764C(u8 taskId);
 void sub_8127744(u32 a0);
+void sub_81277A8(void);
 bool8 sub_81277BC(u8 idx);
 bool8 sub_81277E8(u8 idx);
 bool8 sub_81299AC(u8 taskId);
@@ -77,6 +80,7 @@ extern const struct WindowTemplate gUnknown_085A6B90[4];
 extern const u8 *const gUnknown_085A6B28[];
 extern const struct MenuAction gUnknown_085A6B48[];
 extern const u8 *const gUnknown_085A6B68[];
+extern void (*const gUnknown_085A6B78[][2])(u8 taskId);
 extern const u16 gUnknown_085A6BB0[];
 extern const struct ListMenuTemplate gUnknown_085A6BD0;
 
@@ -574,4 +578,42 @@ void sub_812759C(u8 taskId)
     sub_8127330(taskId);
     data[13] = ListMenuInit(&gUnknown_03006310, gUnknown_0203A170, gUnknown_0203A16E);
     sub_8127500();
+}
+
+void sub_8127620(u8 taskId)
+{
+    sub_812759C(taskId);
+    gTasks[taskId].func = sub_812764C;
+}
+
+void sub_812764C(u8 taskId)
+{
+    s16 *data;
+    s32 input;
+
+    data = gTasks[taskId].data;
+    if (!gPaletteFade.active)
+    {
+        input = ListMenuHandleInput(data[13]);
+        get_coro_args_x18_x1A(data[13], &gUnknown_0203A170, &gUnknown_0203A16E);
+        switch (input)
+        {
+            case -1:
+                break;
+            case -2:
+                PlaySE(SE_SELECT);
+                gUnknown_085A6B78[data[11]][1](taskId);
+                break;
+            default:
+                PlaySE(SE_SELECT);
+                gUnknown_0203A172 = input;
+                sub_8127554();
+                sub_81AE6C8(data[13], &gUnknown_0203A170, &gUnknown_0203A16E);
+                sub_8126A58(1);
+                sub_81277A8();
+                free(gUnknown_0203A18C);
+                gUnknown_085A6B78[data[11]][0](taskId);
+                break;
+        }
+    }
 }
