@@ -171,8 +171,8 @@ extern void sub_81AFBF0();
 extern u8 sub_81AFC0C(u8 a, u8 *b);
 extern void sub_81AFC28(u8 *a, u8 *b);
 extern void sub_8124610(u8 *a, u8 b);
-extern int sub_80F0020();
-extern u8 sub_814FC20(u8 a, u8 b);
+extern int GetPlayerIDAsU32();
+extern u8 GetCurrentPpToMaxPpState(u8 a, u8 b);
 
 void sub_81BFAE4(void);
 void sub_81BFE24();
@@ -3065,7 +3065,7 @@ u8 sub_81C3220()
     }
     else
     {
-        r4 = sub_80F0020() & 0xFFFF;
+        r4 = GetPlayerIDAsU32() & 0xFFFF;
         r5 = gSaveBlock2Ptr->playerGender;
         StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
     }
@@ -3443,7 +3443,7 @@ void sub_81C3B08(u8 a)
         sub_81AFC0C(1, gStringVar2);
         sub_81AFC28(gStringVar4, gUnknown_0861CE97);
         text = gStringVar4;
-        r5 = sub_814FC20(r10->summary.pp[a], r6) + 9;
+        r5 = GetCurrentPpToMaxPpState(r10->summary.pp[a], r6) + 9;
         offset = GetStringRightAlignXOffset(1, text, 0x2C);
     }
     else
@@ -3547,7 +3547,7 @@ void sub_81C3B08(u8 a)
 	adds r7, r4, 0\n\
 	ldrb r0, [r5]\n\
 	adds r1, r6, 0\n\
-	bl sub_814FC20\n\
+	bl GetCurrentPpToMaxPpState\n\
 	lsls r0, 24\n\
 	lsrs r0, 24\n\
 	adds r5, r0, 0\n\
