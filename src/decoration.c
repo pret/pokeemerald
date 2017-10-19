@@ -617,3 +617,26 @@ void sub_812764C(u8 taskId)
         }
     }
 }
+
+void sub_8127718(u8 decorCat)
+{
+    sub_8126F68(sub_81269D4(2), decorCat, 0, 0, 0, 0);
+}
+
+void sub_8127744(u32 a0)
+{
+    u8 winidx;
+    const u8 *txt;
+
+    winidx = gUnknown_0203A188[3];
+    FillWindowPixelBuffer(winidx, 0x11);
+    if (a0 >= gUnknown_0203A151)
+    {
+        txt = gText_GoBackPrevMenu;
+    }
+    else
+    {
+        txt = gDecorations[gUnknown_0203A14C[a0]].description;
+    }
+    PrintTextOnWindow(winidx, 1, txt, 0, 1, 0, 0);
+}
