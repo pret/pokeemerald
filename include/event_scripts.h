@@ -8,6 +8,7 @@
 extern const u8 gUnknown_0823B4E8[];
 extern const u8 gUnknown_08275D0C[];
 extern const u8 gUnknown_08275D1F[];
+extern const u8 gUnknown_08275D2E[];
 extern const u8 gUnknown_082766A2[];
 extern const u8 gUnknown_082766A6[];
 

@@ -129,6 +129,7 @@ const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_812A3C8(void);
+void sub_8129D64(u8 taskId);
 void sub_8133E1C(u8 taskId);
 
 // .rodata
@@ -1976,5 +1977,41 @@ void sub_81297F8(void)
             }
             sub_81296EC(gUnknown_0203AA44[i].idx);
         }
+    }
+}
+
+void sub_81298EC(u8 taskId)
+{
+    switch (gTasks[taskId].data[2])
+    {
+        case 0:
+            sub_81297F8();
+            gTasks[taskId].data[2] = 1;
+            break;
+        case 1:
+            if (!gPaletteFade.active) {
+                DrawWholeMapView();
+                ScriptContext1_SetupScript(gUnknown_08275D2E);
+                sub_8197434(0, 1);
+                gTasks[taskId].data[2] = 2;
+            }
+            break;
+        case 2:
+            ScriptContext2_Enable();
+            sub_8127814(taskId);
+            pal_fill_black();
+            gTasks[taskId].data[2] = 3;
+            break;
+        case 3:
+            if (sub_80ABDFC() == TRUE)
+            {
+                StringExpandPlaceholders(gStringVar4, gText_DecorationReturnedToPC);
+                DisplayItemMessageOnField(taskId, gStringVar4, sub_8129D64);
+                if (gMapHeader.regionMapSectionId == REGION_MAP_SECRET_BASE)
+                {
+                    TV_PutSecretBaseVisitOnTheAir();
+                }
+            }
+            break;
     }
 }
