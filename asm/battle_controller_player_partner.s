@@ -645,7 +645,7 @@ _081BB2E2:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitCmd_x21
+	bl EmitCmd33
 	strb r5, [r4]
 	bl IsDoubleBattle
 	lsls r0, 24
@@ -918,7 +918,7 @@ _081BB514:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitCmd_x21
+	bl EmitCmd33
 	strb r5, [r4]
 	ldr r0, =sub_81BB628
 	str r0, [r6]
@@ -1688,7 +1688,7 @@ _081BBCBE:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
+	bl EmitDataTransfer
 	bl PlayerPartnerBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
@@ -4652,13 +4652,13 @@ _081BD7A2:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	ldr r5, =gUnknown_02038432
+	ldr r5, =gAnimMoveTurn
 	mov r1, r12
 	adds r1, 0x3
 	adds r2, r1
 	ldrb r1, [r2]
 	strb r1, [r5]
-	ldr r4, =gMovePowerMoveAnim
+	ldr r4, =gAnimMovePower
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4672,7 +4672,7 @@ _081BD7A2:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r4, =gMoveDmgMoveAnim
+	ldr r4, =gAnimMoveDmg
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4698,7 +4698,7 @@ _081BD7A2:
 	lsls r1, 24
 	orrs r3, r1
 	str r3, [r4]
-	ldr r3, =gHappinessMoveAnim
+	ldr r3, =gAnimFriendship
 	ldrb r1, [r6]
 	lsls r1, 9
 	mov r2, r12
@@ -4720,7 +4720,7 @@ _081BD7A2:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r3, =gDisableStructMoveAnim
+	ldr r3, =gAnimDisableStructPtr
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4849,7 +4849,7 @@ _081BD960:
 	movs r0, 0
 	bl sub_805EB9C
 	adds r0, r4, 0
-	bl move_anim_start_t1
+	bl DoMoveAnim
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -5068,7 +5068,7 @@ _081BDB3C:
 	orrs r2, r5
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4-r6}
 	pop {r0}
@@ -5138,7 +5138,7 @@ _081BDBD0:
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x22_a_three_bytes
+	bl EmitCmd34
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4-r6}
 	pop {r0}
@@ -6207,7 +6207,7 @@ sub_81BE53C: @ 81BE53C
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl sub_80A6A90
+	bl AnimBankSpriteExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _081BE582

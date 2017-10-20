@@ -1135,7 +1135,7 @@ _080E76DC:
 	bl memcpy
 _080E76E4:
 	mov r0, r8
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	mov r0, r9
 	lsls r1, r0, 1
 	adds r1, r5, r1

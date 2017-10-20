@@ -141,6 +141,7 @@ extern u8 gShouldAdvanceLinkState;
 extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
+extern bool8 gLinkVSyncDisabled;
 
 void Task_DestroySelf(u8);
 void OpenLink(void);
@@ -184,5 +185,11 @@ bool8 sub_800A520(void);
 bool8 sub_8010500(void);
 void sub_800DFB4(u8, u8);
 void sub_800ADF8(void);
+void sub_800B488(void);
+void sub_8009734(void);
+void sub_800A620(void);
+void sub_8011BD0(void);
+u8 sub_800ABAC(void);
+u8 sub_800ABBC(void);
 
 #endif // GUARD_LINK_H

@@ -1489,7 +1489,7 @@ _0818A646:
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
+	bl EmitDataTransfer
 	bl RecordedPlayerBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
@@ -4508,13 +4508,13 @@ _0818C192:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	ldr r5, =gUnknown_02038432
+	ldr r5, =gAnimMoveTurn
 	mov r1, r12
 	adds r1, 0x3
 	adds r2, r1
 	ldrb r1, [r2]
 	strb r1, [r5]
-	ldr r4, =gMovePowerMoveAnim
+	ldr r4, =gAnimMovePower
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4528,7 +4528,7 @@ _0818C192:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r4, =gMoveDmgMoveAnim
+	ldr r4, =gAnimMoveDmg
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4554,7 +4554,7 @@ _0818C192:
 	lsls r1, 24
 	orrs r3, r1
 	str r3, [r4]
-	ldr r3, =gHappinessMoveAnim
+	ldr r3, =gAnimFriendship
 	ldrb r1, [r6]
 	lsls r1, 9
 	mov r2, r12
@@ -4576,7 +4576,7 @@ _0818C192:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r3, =gDisableStructMoveAnim
+	ldr r3, =gAnimDisableStructPtr
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4705,7 +4705,7 @@ _0818C350:
 	movs r0, 0
 	bl sub_805EB9C
 	adds r0, r4, 0
-	bl move_anim_start_t1
+	bl DoMoveAnim
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -4861,7 +4861,7 @@ sub_818C49C: @ 818C49C
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl RecordedPlayerBufferExecCompleted
 _0818C4C6:
 	pop {r0}
@@ -4897,7 +4897,7 @@ _0818C508:
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitCmd_x21
+	bl EmitCmd33
 	bl RecordedPlayerBufferExecCompleted
 _0818C522:
 	pop {r0}
@@ -4929,7 +4929,7 @@ sub_818C538: @ 818C538
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 	b _0818C584
 	.pool
 _0818C560:
@@ -4947,7 +4947,7 @@ _0818C560:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd_x21
+	bl EmitCmd33
 _0818C584:
 	bl RecordedPlayerBufferExecCompleted
 	pop {r4,r5}
@@ -4983,7 +4983,7 @@ sub_818C5A0: @ 818C5A0
 	ldrb r1, [r0]
 	movs r0, 0x1
 	movs r2, 0
-	bl dp01_build_cmdbuf_x22_a_three_bytes
+	bl EmitCmd34
 	bl RecordedPlayerBufferExecCompleted
 	pop {r4}
 	pop {r0}
@@ -6003,7 +6003,7 @@ sub_818CE98: @ 818CE98
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl sub_80A6A90
+	bl AnimBankSpriteExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0818CEDE

@@ -27,7 +27,9 @@
 #define BIT_SIDE        0x1
 #define BIT_MON         0x2
 
+#define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
 #define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
+#define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
 
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
@@ -655,7 +657,9 @@ struct BattleStruct
     u8 field_1A1;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
-    u8 field_1A4[240];
+    u8 field_1A4[96];
+    u8 field_204[104];
+    u8 field_26C[40];
     u8 field_294[4];
     u8 field_298[8];
     u8 field_2A0;
@@ -826,6 +830,7 @@ void LoadBattleTextboxAndBackground(void);
 void LoadBattleEntryBackground(void);
 void ApplyPlayerChosenFrameToBattleMenu(void);
 bool8 LoadChosenBattleElement(u8 caseId);
+void DrawMainBattleBackground(void);
 void task00_0800F6FC(u8 taskId);
 
 // battle_5
@@ -903,6 +908,8 @@ struct BattleHealthboxInfo
     u8 flag_x1 : 1;
     u8 flag_x2 : 1;
     u8 flag_x4 : 1;
+    u8 flag_x8 : 1;
+    u8 flag_x10 : 1;
     u8 field_1;
     u8 field_2;
     u8 field_3;
@@ -934,6 +941,11 @@ struct BattleSpriteData
 };
 
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
+
+#define BATTLE_BUFFER_LINK_SIZE 0x1000
+
+extern u8 *gLinkBattleSendBuffer;
+extern u8 *gLinkBattleRecvBuffer;
 
 // Move this somewhere else
 

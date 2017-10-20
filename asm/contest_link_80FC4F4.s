@@ -50,7 +50,7 @@ sub_80FC530: @ 80FC530
 	cmp r4, 0
 	beq _080FC552
 	adds r0, r5, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	movs r0, 0x1
 	b _080FC554
 _080FC552:
@@ -657,7 +657,7 @@ _080FCA30:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCAB2
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r2, [r0]
 	ldr r0, =gUnknown_02039F25
 	ldrb r0, [r0]
@@ -688,7 +688,7 @@ _080FCA68:
 	ldrb r0, [r6]
 	cmp r2, r0
 	bge _080FCAA4
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	mov r8, r1
 	ldr r4, =gBlockRecvBuffer
 	movs r3, 0
@@ -955,7 +955,7 @@ _080FCCE8:
 	bne _080FCCF4
 	b _080FCE42
 _080FCCF4:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	movs r1, 0x70
@@ -968,7 +968,7 @@ _080FCD04:
 	bne _080FCD10
 	b _080FCE42
 _080FCD10:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	ldr r1, =gUnknown_02039F2B
@@ -1004,7 +1004,7 @@ _080FCD54:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCE42
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	movs r1, 0x14
@@ -1015,7 +1015,7 @@ _080FCD6C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCE42
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldr r1, =gUnknown_02039F2B
@@ -1031,7 +1031,7 @@ _080FCD98:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCE42
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x10]
 	b _080FCDD4
@@ -1041,7 +1041,7 @@ _080FCDB0:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FCE42
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x10]
 	b _080FCE04

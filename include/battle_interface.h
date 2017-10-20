@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_INTERFACE_H
 #define GUARD_BATTLE_INTERFACE_H
 
+#include "battle_controllers.h"
+
 #define TAG_HEALTHBOX_PLAYER1_TILE      0xD6FF
 #define TAG_HEALTHBOX_PLAYER2_TILE      0xD700
 #define TAG_HEALTHBOX_OPPONENT1_TILE    0xD701
