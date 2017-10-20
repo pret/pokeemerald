@@ -1145,3 +1145,37 @@ void sub_8128414(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_CancelDecorating);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_8128B80);
 }
+
+bool8 sub_8128484(u8 behaviorAt, u16 behaviorBy)
+{
+    if (MetatileBehavior_IsMB_B3(behaviorAt) != TRUE || behaviorBy != 0)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_81284AC(u8 taskId, s16 x, s16 y, u16 decor)
+{
+    if (x == gTasks[taskId].data[3] + 7 && y == gTasks[taskId].data[4] + 7 && decor != DECOR_NONE)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_81284F4(u16 behaviorAt, const struct Decoration *decoration)
+{
+    if (MetatileBehavior_IsMB_B3(behaviorAt) != TRUE)
+    {
+        if (decoration->id == DECOR_SOLID_BOARD && MetatileBehavior_IsMB_C2(behaviorAt) == TRUE)
+        {
+            return TRUE;
+        }
+        if (MetatileBehavior_IsNormal(behaviorAt))
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
