@@ -118,7 +118,7 @@ void sub_8129020(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
 void sub_81292E8(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 decor);
-void *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
+const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_812A3C8(void);
@@ -133,6 +133,7 @@ extern const u8 *const gUnknown_085A6B68[];
 extern void (*const gUnknown_085A6B78[][2])(u8 taskId);
 extern const u16 gUnknown_085A6BB0[];
 extern const struct ListMenuTemplate gUnknown_085A6BD0;
+extern const void *const gUnknown_085A6BE8[][2];
 extern const struct YesNoFuncTable gUnknown_085A72C4;
 extern const struct YesNoFuncTable gUnknown_085A72CC;
 extern const struct YesNoFuncTable gUnknown_085A72D4[];
@@ -1804,4 +1805,13 @@ u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
     FreeItemIconTemporaryBuffers();
     free(template);
     return spriteId;
+}
+
+const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
+{
+    if (decor > 120)
+    {
+        decor = 0;
+    }
+    return gUnknown_085A6BE8[decor][mode];
 }

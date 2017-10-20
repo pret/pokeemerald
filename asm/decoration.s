@@ -5,29 +5,6 @@
 
 	.text
 
-	thumb_func_start GetDecorationIconPicOrPalette
-@ u32 GetDecorationIconPicOrPalette(u16 decorationId, u8 which)
-GetDecorationIconPicOrPalette: @ 812949C
-	push {lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	lsls r1, 24
-	lsrs r0, r1, 24
-	cmp r3, 0x78
-	bls _081294AC
-	movs r3, 0
-_081294AC:
-	ldr r2, =gUnknown_085A6BE8
-	lsls r0, 2
-	lsls r1, r3, 3
-	adds r0, r1
-	adds r0, r2
-	ldr r0, [r0]
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end GetDecorationIconPicOrPalette
-
 	thumb_func_start AddDecorationIconObjectFromFieldObject
 @ u8 AddDecorationIconObjectFromFieldObject(u16 tilesTag, u16 paletteTag, u8 decorationId)
 AddDecorationIconObjectFromFieldObject: @ 81294C0
