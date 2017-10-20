@@ -20,7 +20,7 @@
 #include "text.h"
 #include "window.h"
 
-struct contestMove
+struct ContestMove
 {
     u8 effect;
     u8 type;
@@ -28,7 +28,7 @@ struct contestMove
     u8 combo[4];
 };
 
-struct contestEffect
+struct ContestEffect
 {
     u8 type;
     u8 appeal;
@@ -37,7 +37,7 @@ struct contestEffect
 
 
 
-extern struct unkSummaryStruct* gUnknown_0203CF1C;
+extern struct UnkSummaryStruct* gUnknown_0203CF1C;
 extern struct BgTemplate gUnknown_0861CBB4;
 extern u8 gUnknown_0203CF20;
 extern struct MusicPlayerInfo gMPlay_BGM;
@@ -50,8 +50,8 @@ extern struct unkStruct_61CC04 gUnknown_0861CC10;
 extern struct unkStruct_61CC04 gUnknown_0861CBEC;
 extern struct unkStruct_61CC04 gUnknown_0861CBF8;
 extern u16 gUnknown_08DC3CD4[];
-extern struct contestMove gContestMoves[];
-extern struct contestEffect gContestEffects[];
+extern struct ContestMove gContestMoves[];
+extern struct ContestEffect gContestEffects[];
 extern struct WindowTemplate gUnknown_0861CC24;
 extern struct TextColor gUnknown_0861CD2C[];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
@@ -289,14 +289,14 @@ u8 sub_81B1250();
 
 union unkUnion
 {
-    struct Pokemon mons[6];
-    struct BoxPokemon boxMons[6];
+    struct Pokemon mon[6];
+    struct BoxPokemon boxMon[6];
 };
 
 
 u8 sub_80D214C(union unkUnion* a, u8 b, u8 c, u8 d);
 
-struct pokeSummary
+struct PokeSummary
 {
     u16 species; // 0x0
     u16 species2; // 0x2
@@ -304,7 +304,7 @@ struct pokeSummary
     u8 level; // 0x5
     u8 ribbons; // 0x6
     u8 unk7; // 0x7
-    u8 altability; // 0x8
+    u8 altAbility; // 0x8
     u8 metLocation; // 0x9
     u8 metLevel; // 0xA
     u8 metGame; // 0xB
@@ -330,13 +330,13 @@ struct pokeSummary
     u32 OTID; // 0x48
 };
 
-struct unkSummaryStruct
+struct UnkSummaryStruct
 {
     /*0x00*/ union unkUnion *unk0;
     /*0x04*/ void *unk4;
     /*0x08*/ void *unk8;
     /*0x0C*/ struct Pokemon currentPoke;
-    /*0x70*/ struct pokeSummary summary;
+    /*0x70*/ struct PokeSummary summary;
     u16 unkTilemap0[0x400];
     u16 unkTilemap0_1[0x400];
     u16 unkTilemap1[0x400];
@@ -583,8 +583,8 @@ void sub_81BFE24()
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
     schedule_bg_copy_tilemap_to_vram(3);
-    SetGpuReg(0, 0x1040);
-    SetGpuReg(0x50, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, 0x1040);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);
@@ -660,20 +660,20 @@ void sub_81C0098(struct Pokemon *poke)
 {
     if (gUnknown_0203CF1C->unk40BD == 0)
     {
-        struct Pokemon *pokeMons = gUnknown_0203CF1C->unk0->mons;
-        *poke = pokeMons[gUnknown_0203CF1C->unk40BE];
+        struct Pokemon *partyMon = gUnknown_0203CF1C->unk0->mon;
+        *poke = partyMon[gUnknown_0203CF1C->unk40BE];
     }
     else
     {
-        struct BoxPokemon *boxMons = gUnknown_0203CF1C->unk0->boxMons;
-        sub_8069004(&boxMons[gUnknown_0203CF1C->unk40BE], poke);
+        struct BoxPokemon *boxMon = gUnknown_0203CF1C->unk0->boxMon;
+        sub_8069004(&boxMon[gUnknown_0203CF1C->unk40BE], poke);
     }
 }
 
 bool8 sub_81C00F0(struct Pokemon *a)
 {
     u32 i;
-    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     switch (gUnknown_0203CF1C->unk40F0)
     {
     case 0:
@@ -681,7 +681,7 @@ bool8 sub_81C00F0(struct Pokemon *a)
         sum->species2 = GetMonData(a, MON_DATA_SPECIES2);
         sum->exp = GetMonData(a, MON_DATA_EXP);
         sum->level = GetMonData(a, MON_DATA_LEVEL);
-        sum->altability = GetMonData(a, MON_DATA_ALT_ABILITY);
+        sum->altAbility = GetMonData(a, MON_DATA_ALT_ABILITY);
         sum->item = GetMonData(a, MON_DATA_HELD_ITEM);
         sum->pid = GetMonData(a, MON_DATA_PERSONALITY);
         sum->sanity = GetMonData(a, MON_DATA_SANITY_BIT1);
@@ -968,7 +968,7 @@ void sub_81C0704(u8 taskId)
 
 s8 sub_81C08F8(s8 a)
 {
-    struct Pokemon *mons = gUnknown_0203CF1C->unk0->mons;
+    struct Pokemon *mon = gUnknown_0203CF1C->unk0->mon;
 
     if (gUnknown_0203CF1C->unk40C0 == 0)
     {
@@ -987,14 +987,14 @@ s8 sub_81C08F8(s8 a)
             index += a;
             if (index < 0 || index > gUnknown_0203CF1C->unk40BF)
                 return -1;
-        } while (GetMonData(&mons[index], MON_DATA_IS_EGG) != 0);
+        } while (GetMonData(&mon[index], MON_DATA_IS_EGG) != 0);
         return index;
     }
 }
 
 s8 sub_81C09B4(s8 a)
 {
-    struct Pokemon *mons = gUnknown_0203CF1C->unk0->mons;
+    struct Pokemon *mon = gUnknown_0203CF1C->unk0->mon;
     s8 r5 = 0;
     u8 i;
 
@@ -1016,7 +1016,7 @@ s8 sub_81C09B4(s8 a)
         if (r5 < 0 || r5 >= 6)
             return -1;
         b = c[r5];
-        if (sub_81C0A50(&mons[b]) == TRUE)
+        if (sub_81C0A50(&mon[b]) == TRUE)
             return b;
     }
 }
@@ -1033,7 +1033,7 @@ bool8 sub_81C0A50(struct Pokemon* mon)
 
 void sub_81C0A8C(u8 taskId, s8 b)
 {
-    struct pokeSummary *summary = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *summary = &gUnknown_0203CF1C->summary;
     s16 *data = gTasks[taskId].data;
 
     if (summary->isEgg)
@@ -1357,12 +1357,12 @@ void sub_81C13B0(u8 taskId, u8 b)
     {
         if (gUnknown_0203CF1C->unk40BD == 0)
         {
-            struct Pokemon *why = gUnknown_0203CF1C->unk0->mons;
+            struct Pokemon *why = gUnknown_0203CF1C->unk0->mon;
             sub_81C14BC(&why[gUnknown_0203CF1C->unk40BE], gUnknown_0203CF1C->unk40C6, gUnknown_0203CF1C->unk40C7);
         }
         else
         {
-            struct BoxPokemon *why = gUnknown_0203CF1C->unk0->boxMons;
+            struct BoxPokemon *why = gUnknown_0203CF1C->unk0->boxMon;
             sub_81C15EC(&why[gUnknown_0203CF1C->unk40BE], gUnknown_0203CF1C->unk40C6, gUnknown_0203CF1C->unk40C7);
         }
         sub_81C0098(&gUnknown_0203CF1C->currentPoke);
@@ -2469,7 +2469,7 @@ void sub_81C228C(u8 a)
 void sub_81C22CC(struct Pokemon *unused)
 {
     s64 r6r7;
-    struct pokeSummary *summary = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *summary = &gUnknown_0203CF1C->summary;
     u16 *r9;
     u8 i;
 
@@ -2579,7 +2579,7 @@ void sub_81C2628()
 {
     u8 strArray[16];
     struct Pokemon *mon = &gUnknown_0203CF1C->currentPoke;
-    struct pokeSummary *summary = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *summary = &gUnknown_0203CF1C->summary;
     u16 r5 = SpeciesToPokedexNum(summary->species);
     if (r5 != 0xFFFF)
     {
@@ -2981,19 +2981,19 @@ void sub_81C2F5C()
 
 void sub_81C2FD8()
 {
-    u8 ability = GetAbilityBySpecies(gUnknown_0203CF1C->summary.species, gUnknown_0203CF1C->summary.altability);
+    u8 ability = GetAbilityBySpecies(gUnknown_0203CF1C->summary.species, gUnknown_0203CF1C->summary.altAbility);
     sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCCC, 2), gAbilityNames[ability], 0, 1, 0, 1);
 }
 
 void sub_81C302C()
 {
-    u8 ability = GetAbilityBySpecies(gUnknown_0203CF1C->summary.species, gUnknown_0203CF1C->summary.altability);
+    u8 ability = GetAbilityBySpecies(gUnknown_0203CF1C->summary.species, gUnknown_0203CF1C->summary.altAbility);
     sub_81C25A4(sub_81C2D2C(&gUnknown_0861CCCC, 2), gAbilityDescriptionPointers[ability], 0, 17, 0, 0);
 }
 
 void sub_81C307C()
 {
-    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     u8 *text;
     sub_81AFBF0();
     sub_81AFC0C(0, gUnknown_0861CE74);
@@ -3037,7 +3037,7 @@ void sub_81C3194()
 
 void sub_81C31C0()
 {
-    struct unkSummaryStruct *sumStruct = gUnknown_0203CF1C;
+    struct UnkSummaryStruct *sumStruct = gUnknown_0203CF1C;
     sub_81AFC0C(2, gNatureNamePointers[sumStruct->summary.nature]);
     sub_81AFC0C(5, gText_EmptyString5);
 }
@@ -3053,7 +3053,7 @@ void sub_81C31F0(u8 *a)
 
 u8 sub_81C3220()
 {
-    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     u32 r4;
     u8 r5;
     if (gUnknown_0203CF1C->unk0 == (union unkUnion *)&gEnemyParty)
@@ -3078,7 +3078,7 @@ u8 sub_81C3220()
 
 u8 sub_81C32BC()
 {
-    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     u8 r0 = sum->metGame - 1;
     if (r0 <= 4)
         return 1;
@@ -3087,7 +3087,7 @@ u8 sub_81C32BC()
 
 u8 sub_81C32E0()
 {
-    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     u8 r0 = sum->metGame - 1;
     if (r0 <= 2)
         return 1;
@@ -3179,7 +3179,7 @@ void sub_81C33CC()
 void sub_81C3428()
 {
     u8 *text;
-    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     if (gUnknown_0203CF1C->summary.sanity == 1)
         text = gText_EggWillTakeALongTime;
     else if (sum->friendship <= 5)
@@ -3196,7 +3196,7 @@ void sub_81C3428()
 void sub_81C349C()
 {
     u8 *text;
-    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     if (gUnknown_0203CF1C->summary.sanity != 1)
     {
         if (sum->metLocation == 0xFF)
@@ -3339,7 +3339,7 @@ void sub_81C3890()
 
 void sub_81C38C0()
 {
-    struct pokeSummary *sum = &gUnknown_0203CF1C->summary;
+    struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     u8 r6 = sub_81C2D2C(&gUnknown_0861CCEC, 4);
     int offset;
     u32 expToNextLevel;
@@ -3423,7 +3423,7 @@ void sub_81C39F0(u8 taskId)
 #ifdef NONMATCHING
 void sub_81C3B08(u8 a)
 {
-    struct unkSummaryStruct *r10 = gUnknown_0203CF1C;
+    struct UnkSummaryStruct *r10 = gUnknown_0203CF1C;
     u8 r8 = sub_81C2D2C(&gUnknown_0861CD14, 0);
     u8 sp = sub_81C2D2C(&gUnknown_0861CD14, 1);
     u8 r6;
