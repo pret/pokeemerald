@@ -129,6 +129,7 @@ const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_8129B34(u8 taskId);
+void sub_812A36C(struct Sprite *sprite);
 void sub_812A39C(void);
 void sub_812A3C8(void);
 void sub_8129D64(u8 taskId);
@@ -2083,4 +2084,16 @@ void sub_8129ABC(u8 taskId)
             }
             break;
     }
+}
+
+void sub_8129B34(u8 taskId)
+{
+    sub_8197434(0, 1);
+    gSprites[gUnknown_0203AA38].data7 = 0;
+    gSprites[gUnknown_0203AA38].invisible = FALSE;
+    gSprites[gUnknown_0203AA38].callback = sub_812A36C;
+    gSprites[gUnknown_0203AA39].pos1.x = 0x88;
+    gSprites[gUnknown_0203AA39].pos1.y = 0x48;
+    gTasks[taskId].data[10] = 0;
+    gTasks[taskId].func = sub_8128E18;
 }
