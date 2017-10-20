@@ -520,8 +520,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_81D4BEC
 	def_special sub_80224D0
 	def_special sub_81D99BC
-	def_special walda_maybe
-	def_special sub_81D9AC4
+	def_special DoWaldaNamingScreen
+	def_special TryGetWallpaperWithWaldaPhrase
 	def_special sub_8139ED0
 	def_special sub_813B968
 	def_special sub_80F8B94

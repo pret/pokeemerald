@@ -5,7 +5,7 @@
 #define NAMING_SCREEN_BOX           1
 #define NAMING_SCREEN_CAUGHT_MON    2
 #define NAMING_SCREEN_3             3
-#define NAMING_SCREEN_WANDA         4
+#define NAMING_SCREEN_WALDA         4
 
 void DoNamingScreen(u8 caseId, u8* dst, u16 monSpecies, u8 monGender, u32 monPersonality, void (*callback)(void));
 

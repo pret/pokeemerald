@@ -5971,11 +5971,11 @@ _081D99B4:
 	thumb_func_start sub_81D99BC
 sub_81D99BC: @ 81D99BC
 	push {r4,lr}
-	bl sub_80D2578
+	bl IsWaldaPhraseEmpty
 	cmp r0, 0
 	bne _081D99DC
 	ldr r4, =gStringVar1
-	bl sub_80D2548
+	bl GetWaldaPhrasePtr
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
