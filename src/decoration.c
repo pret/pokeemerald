@@ -128,6 +128,7 @@ u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 d
 const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
+void sub_812A39C(void);
 void sub_812A3C8(void);
 void sub_8129D64(u8 taskId);
 void sub_8133E1C(u8 taskId);
@@ -163,6 +164,7 @@ extern const struct {
 extern const struct SpriteTemplate gUnknown_085A728C;
 extern const struct SpritePalette gUnknown_085A72BC;
 extern const u16 gUnknown_085A72F4[];
+extern const struct SpriteTemplate gUnknown_085A7404;
 
 // .text
 
@@ -2014,4 +2016,39 @@ void sub_81298EC(u8 taskId)
             }
             break;
     }
+}
+
+
+bool8 sub_81299AC(u8 taskId)
+{
+    u16 i;
+
+    for (i = 0; i < gUnknown_0203A17C.size; i ++)
+    {
+        if (gUnknown_0203A17C.items[i] != DECOR_NONE)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void SetUpPuttingAwayDecorationPlayerAvatar(void)
+{
+    player_get_direction_lower_nybble();
+    gUnknown_0203AA38 = gSprites[gUnknown_03005DD0.unk4].data0;
+    sub_812A39C();
+    gUnknown_03005DD0.unk4 = CreateSprite(&gUnknown_085A7404, 0x78, 0x50, 0);
+    if (gSaveBlock2Ptr->playerGender == MALE)
+    {
+        gUnknown_0203AA39 = AddPseudoFieldObject(0xC1, SpriteCallbackDummy, 0x88, 0x48, 0);
+    }
+    else
+    {
+        gUnknown_0203AA39 = AddPseudoFieldObject(0xC2, SpriteCallbackDummy, 0x88, 0x48, 0);
+    }
+    gSprites[gUnknown_0203AA39].oam.priority = 1;
+    DestroySprite(&gSprites[gUnknown_0203AA38]);
+    gUnknown_0203AA38 = gUnknown_03005DD0.unk4;
+    gSprites[gUnknown_0203AA38].oam.priority = 1;
 }
