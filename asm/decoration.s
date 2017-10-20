@@ -5,51 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81292E8
-sub_81292E8: @ 81292E8
-	push {lr}
-	adds r2, r0, 0
-	movs r1, 0x3C
-	ldrsh r0, [r2, r1]
-	cmp r0, 0
-	bne _08129322
-	movs r1, 0x3A
-	ldrsh r0, [r2, r1]
-	cmp r0, 0xE
-	bgt _0812930A
-	adds r3, r2, 0
-	adds r3, 0x3E
-	ldrb r1, [r3]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r1
-	b _08129314
-_0812930A:
-	adds r3, r2, 0
-	adds r3, 0x3E
-	ldrb r0, [r3]
-	movs r1, 0x4
-	orrs r0, r1
-_08129314:
-	strb r0, [r3]
-	ldrh r0, [r2, 0x3A]
-	adds r0, 0x1
-	movs r1, 0x1F
-	ands r0, r1
-	strh r0, [r2, 0x3A]
-	b _0812932E
-_08129322:
-	adds r2, 0x3E
-	ldrb r1, [r2]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r2]
-_0812932E:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81292E8
-
 	thumb_func_start gpu_pal_decompress_alloc_tag_and_upload
 gpu_pal_decompress_alloc_tag_and_upload: @ 8129334
 	push {r4,r5,lr}

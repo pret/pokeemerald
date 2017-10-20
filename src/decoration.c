@@ -1732,3 +1732,24 @@ void sub_81292D0(struct Sprite *sprite)
     sprite->data7 = 0;
     sprite->callback = sub_81292E8;
 }
+
+void sub_81292E8(struct Sprite *sprite)
+{
+    if (sprite->data7 == 0)
+    {
+        if (sprite->data6 < 15)
+        {
+            sprite->invisible = FALSE;
+        }
+        else
+        {
+            sprite->invisible = TRUE;
+        }
+        sprite->data6 ++;
+        sprite->data6 &= 0x1F;
+    }
+    else
+    {
+        sprite->invisible = FALSE;
+    }
+}
