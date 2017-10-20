@@ -73,6 +73,13 @@ extern EWRAM_DATA u8 gUnknown_0203AA38;
 extern EWRAM_DATA u8 gUnknown_0203AA39;
 extern EWRAM_DATA u8 gUnknown_0203AA3A;
 extern EWRAM_DATA struct OamData gUnknown_0203AA3C;
+extern EWRAM_DATA struct {
+    u8 idx;
+    u8 width;
+    u8 height;
+    u16 flagId;
+} gUnknown_0203AA44[];
+extern EWRAM_DATA u8 gUnknown_0203AAC4;
 
 // Static ROM declarations
 
@@ -1554,7 +1561,7 @@ void sub_8128DE0(void)
 void sub_8128E18(u8 taskId)
 {
     s16 *data;
-    
+
     data = gTasks[taskId].data;
     if (!gSprites[gUnknown_0203AA38].data4)
     {
@@ -1897,4 +1904,35 @@ u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u1
     }
     gSprites[spriteId].oam.priority = priority;
     return spriteId;
+}
+
+void sub_81296EC(u8 idx)
+{
+    gUnknown_0203A17C.items[idx] = 0;
+    gUnknown_0203A17C.pos[idx] = 0;
+}
+
+void sub_8129708(void)
+{
+    u16 i;
+
+    gSpecialVar_0x8005 = 0;
+    gScriptResult = 0;
+    if (gSpecialVar_0x8004 == gUnknown_0203AAC4)
+    {
+        gScriptResult = 1;
+    }
+    else if (gDecorations[gUnknown_0203A17C.items[gUnknown_0203AA44[gSpecialVar_0x8004].idx]].permission == DECORPERM_SOLID_MAT)
+    {
+        gSpecialVar_0x8005 = gUnknown_0203AA44[gSpecialVar_0x8004].flagId;
+        sub_81296EC(gUnknown_0203AA44[gSpecialVar_0x8004].idx);
+        for (i = 0; i < gMapHeader.events->mapObjectCount; i ++)
+        {
+            if (gMapHeader.events->mapObjects[i].flagId == gSpecialVar_0x8005)
+            {
+                gSpecialVar_0x8006 = gMapHeader.events->mapObjects[i].localId;
+                break;
+            }
+        }
+    }
 }
