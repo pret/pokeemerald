@@ -6,6 +6,7 @@ extern struct MapCoords {
     int height;
 } gUnknown_03005DC0;
 
+u32 MapGridGetMetatileIdAt(int, int);
 u32 MapGridGetMetatileBehaviorAt(int, int);
 void MapGridSetMetatileIdAt(int, int, u16);
 void MapGridSetMetatileEntryAt(int, int, u16);

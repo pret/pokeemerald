@@ -1179,3 +1179,136 @@ bool8 sub_81284F4(u16 behaviorAt, const struct Decoration *decoration)
     }
     return FALSE;
 }
+
+bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
+{
+    u8 i;
+    u8 j;
+    u8 behaviorAt;
+    u16 behaviorBy;
+    u8 mapY;
+    u8 mapX;
+    s16 curY;
+    s16 curX;
+    mapY = gTasks[taskId].data[6];
+    mapX = gTasks[taskId].data[5];
+
+    switch (decoration->permission)
+    {
+        case DECORPERM_SOLID_FLOOR:
+        case DECORPERM_PASS_FLOOR:
+            for (i=0; i<mapY; i++)
+            {
+                curY = gTasks[taskId].data[1] - i;
+                for (j=0; j<mapX; j++)
+                {
+                    curX = gTasks[taskId].data[0] + j;
+                    behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
+                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
+                    if (!sub_81284F4(behaviorAt, decoration))
+                    {
+                        return FALSE;
+                    }
+                    if (!sub_81284AC(taskId, curX, curY, behaviorBy))
+                    {
+                        return FALSE;
+                    }
+                    behaviorAt = GetFieldObjectIdByXYZ(curX, curY, 0);
+                    if (behaviorAt != 0 && behaviorAt != 16)
+                    {
+                        return FALSE;
+                    }
+                }
+            }
+            break;
+        case DECORPERM_BEHIND_FLOOR:
+            for (i=0; i<mapY-1; i++)
+            {
+                curY = gTasks[taskId].data[1] - i;
+                for (j=0; j<mapX; j++)
+                {
+                    curX = gTasks[taskId].data[0] + j;
+                    behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
+                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
+                    if (!MetatileBehavior_IsNormal(behaviorAt) && !sub_8128484(behaviorAt, behaviorBy))
+                    {
+                        return FALSE;
+                    }
+                    if (!sub_81284AC(taskId, curX, curY, behaviorBy))
+                    {
+                        return FALSE;
+                    }
+                    if (GetFieldObjectIdByXYZ(curX, curY, 0) != 16)
+                    {
+                        return FALSE;
+                    }
+                }
+            }
+            curY = gTasks[taskId].data[1] - mapY + 1;
+            for (j=0; j<mapX; j++)
+            {
+                curX = gTasks[taskId].data[0] + j;
+                behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
+                behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[j]) & 0xf000;
+                if (!MetatileBehavior_IsNormal(behaviorAt) && !MetatileBehavior_IsMB_B7(behaviorAt))
+                {
+                    return FALSE;
+                }
+                if (!sub_81284AC(taskId, curX, curY, behaviorBy))
+                {
+                    return FALSE;
+                }
+                behaviorAt = GetFieldObjectIdByXYZ(curX, curY, 0);
+                if (behaviorAt != 0 && behaviorAt != 16)
+                {
+                    return FALSE;
+                }
+            }
+            break;
+        case DECORPERM_NA_WALL:
+            for (i=0; i<mapY; i++)
+            {
+                curY = gTasks[taskId].data[1] - i;
+                for (j=0; j<mapX; j++)
+                {
+                    curX = gTasks[taskId].data[0] + j;
+                    if (!MetatileBehavior_IsMB_B7(MapGridGetMetatileBehaviorAt(curX, curY)))
+                    {
+                        return FALSE;
+                    }
+                    if (MapGridGetMetatileIdAt(curX, curY + 1) == 0x28c)
+                    {
+                        return FALSE;
+                    }
+                }
+            }
+            break;
+        case DECORPERM_SOLID_MAT:
+            curY = gTasks[taskId].data[1];
+            for (j=0; j<mapX; j++)
+            {
+                curX = gTasks[taskId].data[0] + j;
+                behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
+                if (decoration->shape == DECORSHAPE_1x2)
+                {
+                    if (!MetatileBehavior_IsMB_C3(behaviorAt))
+                    {
+                        return FALSE;
+                    }
+                }
+                else if (!MetatileBehavior_IsMB_B5(behaviorAt))
+                {
+                    if (!MetatileBehavior_IsMB_C3(behaviorAt))
+                    {
+                        return FALSE;
+                    }
+                }
+                if (GetFieldObjectIdByXYZ(curX, curY, 0) != 16)
+                {
+                    return FALSE;
+                }
+            }
+            break;
+    }
+    return TRUE;
+}
