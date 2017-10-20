@@ -244,7 +244,7 @@ void DoBattleAnim(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim)
     if (!IsContest())
     {
         sub_80A8278();
-        sub_8072A88(0);
+        UpdateOamPriorityInAllHealthboxes(0);
         for (i = 0; i < BATTLE_BANKS_COUNT; i++)
         {
             if (GetBankSide(i) != 0)
@@ -549,7 +549,7 @@ static void ScriptCmd_end(void)
         if (!IsContest())
         {
             sub_80A8278();
-            sub_8072A88(1);
+            UpdateOamPriorityInAllHealthboxes(1);
         }
         gAnimScriptActive = FALSE;
     }
@@ -1284,39 +1284,39 @@ s8 BattleAnimAdjustPanning(s8 pan)
     if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gAnimBankAttacker].flag_x10)
     {
         if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
-            pan = PAN_ATTACKER_OPPONENT;
+            pan = PAN_SIDE_OPPONENT;
         else
-            pan = PAN_ATTACKER_PLAYER;
+            pan = PAN_SIDE_PLAYER;
     }
     else if (IsContest())
     {
-        if (gAnimBankAttacker != gAnimBankTarget || gAnimBankAttacker != 2 || pan != PAN_ATTACKER_OPPONENT)
+        if (gAnimBankAttacker != gAnimBankTarget || gAnimBankAttacker != 2 || pan != PAN_SIDE_OPPONENT)
             pan *= -1;
     }
     else if (GetBankSide(gAnimBankAttacker) == SIDE_PLAYER)
     {
         if (GetBankSide(gAnimBankTarget) == SIDE_PLAYER)
         {
-            if (pan == PAN_ATTACKER_OPPONENT)
-                pan = PAN_ATTACKER_PLAYER;
-            else if (pan != PAN_ATTACKER_PLAYER)
+            if (pan == PAN_SIDE_OPPONENT)
+                pan = PAN_SIDE_PLAYER;
+            else if (pan != PAN_SIDE_PLAYER)
                 pan *= -1;
         }
     }
     else if (GetBankSide(gAnimBankTarget) == SIDE_OPPONENT)
     {
-        if (pan == PAN_ATTACKER_PLAYER)
-            pan = PAN_ATTACKER_OPPONENT;
+        if (pan == PAN_SIDE_PLAYER)
+            pan = PAN_SIDE_OPPONENT;
     }
     else
     {
         pan *= -1;
     }
 
-    if (pan > PAN_ATTACKER_OPPONENT)
-        pan = PAN_ATTACKER_OPPONENT;
-    else if (pan < PAN_ATTACKER_PLAYER)
-        pan = PAN_ATTACKER_PLAYER;
+    if (pan > PAN_SIDE_OPPONENT)
+        pan = PAN_SIDE_OPPONENT;
+    else if (pan < PAN_SIDE_PLAYER)
+        pan = PAN_SIDE_PLAYER;
 
     return pan;
 }
@@ -1326,9 +1326,9 @@ s8 BattleAnimAdjustPanning2(s8 pan)
     if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gAnimBankAttacker].flag_x10)
     {
         if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
-            pan = PAN_ATTACKER_OPPONENT;
+            pan = PAN_SIDE_OPPONENT;
         else
-            pan = PAN_ATTACKER_PLAYER;
+            pan = PAN_SIDE_PLAYER;
     }
     else
     {

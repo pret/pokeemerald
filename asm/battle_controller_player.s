@@ -403,7 +403,7 @@ _080577DC:
 	ands r0, r2
 	cmp r0, 0
 	beq _080577E8
-	bl sub_8073314
+	bl SwapHpBarsWithHpText
 _080577E8:
 	pop {r4-r7}
 	pop {r0}
@@ -3278,7 +3278,7 @@ bx_t1_healthbar_update: @ 8059130
 	adds r0, r6
 	ldrb r0, [r0]
 	movs r2, 0
-	bl heathbar_draw_hp
+	bl UpdateHpTextInHealthbox
 	b _08059192
 	.pool
 _08059178:
@@ -3557,7 +3557,7 @@ sub_8059330: @ 8059330
 	negs r0, r0
 	str r0, [sp]
 	mov r0, r10
-	bl sub_807294C
+	bl SetBattleBarStruct
 	movs r0, 0x21
 	bl PlaySE
 	ldr r0, =sub_8059400
@@ -8936,7 +8936,7 @@ sub_805C410: @ 805C410
 	push {r6,r7}
 	sub sp, 0x4
 	movs r0, 0
-	bl load_gfxc_health_bar
+	bl LoadBattleBarGfx
 	ldr r3, =gBattleBufferA
 	ldr r0, =gActiveBank
 	mov r9, r0
@@ -8992,7 +8992,7 @@ _0805C44A:
 	ldrb r1, [r1]
 	str r7, [sp]
 	mov r2, r8
-	bl sub_807294C
+	bl SetBattleBarStruct
 	b _0805C4F2
 	.pool
 _0805C4B4:
@@ -9016,14 +9016,14 @@ _0805C4B4:
 	ldrb r1, [r1]
 	str r7, [sp]
 	movs r3, 0
-	bl sub_807294C
+	bl SetBattleBarStruct
 	mov r2, r9
 	ldrb r0, [r2]
 	adds r0, r4
 	ldrb r0, [r0]
 	movs r1, 0
 	movs r2, 0
-	bl heathbar_draw_hp
+	bl UpdateHpTextInHealthbox
 _0805C4F2:
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank
@@ -9067,7 +9067,7 @@ sub_805C528: @ 805C528
 	.pool
 _0805C560:
 	movs r0, 0x1
-	bl load_gfxc_health_bar
+	bl LoadBattleBarGfx
 	adds r0, r4, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -10038,7 +10038,7 @@ _0805CDA4:
 	subs r4, 0x2
 	adds r3, r4
 	ldrb r3, [r3]
-	bl sub_80735DC
+	bl CreatePartyStatusSummarySprites
 	ldr r2, =gUnknown_020244B4
 	ldrb r1, [r5]
 	adds r1, r2

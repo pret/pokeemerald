@@ -39,7 +39,7 @@ gBattleInterface_BallDisplayPal:: @ 8C11BBC
 	.incbin "graphics/battle_interface/ball_display.gbapal"
 
     .align 2
-gUnknown_08C11BDC:: @ 8C11BDC
+gHealthboxElementsGfxTable:: @ 8C11BDC
 	.incbin "baserom.gba", 0xc11bdc, 0x840
 
     .align 2

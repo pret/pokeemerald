@@ -1955,8 +1955,8 @@ _0805E1AE:
 	bx r1
 	thumb_func_end BattleLoadAllHealthBoxesGfx
 
-	thumb_func_start load_gfxc_health_bar
-load_gfxc_health_bar: @ 805E1B8
+	thumb_func_start LoadBattleBarGfx
+LoadBattleBarGfx: @ 805E1B8
 	push {lr}
 	ldr r0, =gUnknown_08C093F0
 	ldr r1, =gMonSpritesGfxPtr
@@ -1969,7 +1969,7 @@ load_gfxc_health_bar: @ 805E1B8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end load_gfxc_health_bar
+	thumb_func_end LoadBattleBarGfx
 
 	thumb_func_start BattleInitAllSprites
 BattleInitAllSprites: @ 805E1D8
@@ -2048,7 +2048,7 @@ _0805E260:
 	adds r0, r1, r0
 	ldrb r0, [r0]
 	movs r1, 0
-	bl nullsub_30
+	bl DummyBattleInterfaceFunc
 	b _0805E30E
 	.pool
 _0805E288:
@@ -2056,7 +2056,7 @@ _0805E288:
 	adds r0, r1, r0
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl nullsub_30
+	bl DummyBattleInterfaceFunc
 	b _0805E30E
 	.pool
 _0805E29C:
@@ -2857,7 +2857,7 @@ sub_805E990: @ 805E990
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2997,7 +2997,7 @@ sub_805EAB4: @ 805EAB4
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
@@ -3796,7 +3796,7 @@ sub_805F110: @ 805F110
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

@@ -79,7 +79,7 @@ SECTIONS {
         src/blend_palette.o(.text);
         asm/daycare.o(.text);
         src/egg_hatch.o(.text);
-        asm/battle_interface.o(.text);
+        src/battle_interface.o(.text);
         asm/smokescreen.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
@@ -340,7 +340,7 @@ SECTIONS {
         data/daycare.o(.rodata);
         src/egg_hatch.o(.rodata);
         data/battle_7.o(.rodata);
-        data/battle_interface.o(.rodata);
+        src/battle_interface.o(.rodata);
         data/pokeball.o(.rodata);
         data/trade.o(.rodata);
         data/berry_blender.o(.rodata);
