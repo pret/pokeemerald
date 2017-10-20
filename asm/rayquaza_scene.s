@@ -5968,26 +5968,5 @@ _081D99B4:
 	bx r0
 	thumb_func_end sub_81D98B4
 
-	thumb_func_start sub_81D99BC
-sub_81D99BC: @ 81D99BC
-	push {r4,lr}
-	bl IsWaldaPhraseEmpty
-	cmp r0, 0
-	bne _081D99DC
-	ldr r4, =gStringVar1
-	bl GetWaldaPhrasePtr
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl StringCopy
-	movs r0, 0x1
-	b _081D99DE
-	.pool
-_081D99DC:
-	movs r0, 0
-_081D99DE:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81D99BC
 
 	.align 2, 0 @ Don't pad with nop.

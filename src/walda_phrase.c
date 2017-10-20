@@ -44,6 +44,15 @@ enum
     PHRASE_FIRST_ATTEMPT
 };
 
+u16 TryBufferWaldaPhrase(void)
+{
+    if (IsWaldaPhraseEmpty())
+        return FALSE;
+
+    StringCopy(gStringVar1, GetWaldaPhrasePtr());
+    return TRUE;
+}
+
 void DoWaldaNamingScreen(void)
 {
     StringCopy(gStringVar2, GetWaldaPhrasePtr());
