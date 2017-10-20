@@ -1,6 +1,8 @@
 #ifndef GUARD_ROM4_H
 #define GUARD_ROM4_H
 
+#include "main.h"
+
 struct UnkPlayerStruct
 {
     u8 player_field_0;
@@ -21,6 +23,7 @@ struct UCoords32
 };
 
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
+extern MainCallback gFieldCallback;
 
 void IncrementGameStat(u8 index);
 

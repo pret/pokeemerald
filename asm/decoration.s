@@ -5,56 +5,6 @@
 
 	.text
 
-	thumb_func_start c1_overworld_prev_quest
-c1_overworld_prev_quest: @ 8128BEC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r5, r0, r1
-	movs r1, 0xC
-	ldrsh r0, [r5, r1]
-	cmp r0, 0
-	beq _08128C10
-	cmp r0, 0x1
-	beq _08128C30
-	b _08128C4C
-	.pool
-_08128C10:
-	bl ScriptContext2_Enable
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08128C4C
-	adds r0, r4, 0
-	bl sub_8127B04
-	movs r0, 0x1
-	strh r0, [r5, 0xC]
-	b _08128C4C
-	.pool
-_08128C30:
-	bl sub_812A3C8
-	ldr r0, =0x00000be5
-	bl FreeSpritePaletteByTag
-	ldr r1, =gFieldCallback
-	ldr r0, =sub_8128CD4
-	str r0, [r1]
-	ldr r0, =c2_exit_to_overworld_2_switch
-	bl SetMainCallback2
-	adds r0, r4, 0
-	bl DestroyTask
-_08128C4C:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end c1_overworld_prev_quest
-
 	thumb_func_start sub_8128C64
 sub_8128C64: @ 8128C64
 	push {r4-r6,lr}

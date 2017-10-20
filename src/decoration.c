@@ -105,6 +105,7 @@ void sub_8128AAC(u8 taskId);
 void sub_8128B80(u8 taskId);
 void sub_8128BBC(u8 taskId);
 void c1_overworld_prev_quest(u8 taskId);
+void sub_8128CD4(void);
 void sub_8128DE0(void);
 void sub_8128FD8(u8 taskId);
 void sub_8129020(u8 taskId);
@@ -112,6 +113,7 @@ void sub_81292D0(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 decor);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
+void sub_812A3C8(void);
 void sub_8133E1C(u8 taskId);
 
 // .rodata
@@ -1419,4 +1421,26 @@ void sub_8128BBC(u8 taskId)
     fade_screen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = c1_overworld_prev_quest;
+}
+
+void c1_overworld_prev_quest(u8 taskId)
+{
+    switch (gTasks[taskId].data[2])
+    {
+        case 0:
+            ScriptContext2_Enable();
+            if (!gPaletteFade.active)
+            {
+                sub_8127B04(taskId);
+                gTasks[taskId].data[2] = 1;
+            }
+            break;
+        case 1:
+            sub_812A3C8();
+            FreeSpritePaletteByTag(0xbe5);
+            gFieldCallback = sub_8128CD4;
+            SetMainCallback2(c2_exit_to_overworld_2_switch);
+            DestroyTask(taskId);
+            break;
+    }
 }
