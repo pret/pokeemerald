@@ -68,7 +68,7 @@ ContestEffectFunc_080E547C: @ 80E547C
 	thumb_func_start ContestEffectFunc_080E5480
 ContestEffectFunc_080E5480: @ 80E5480
 	push {lr}
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r1, [r3]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -94,7 +94,7 @@ ContestEffectFunc_080E5480: @ 80E5480
 	thumb_func_start ContestEffectFunc_080E54B0
 ContestEffectFunc_080E54B0: @ 80E54B0
 	push {lr}
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r1, [r3]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -119,7 +119,7 @@ ContestEffectFunc_080E54B0: @ 80E54B0
 
 	thumb_func_start ContestEffectFunc_080E54E0
 ContestEffectFunc_080E54E0: @ 80E54E0
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r1, [r3]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -165,7 +165,7 @@ ContestEffectFunc_080E54E0: @ 80E54E0
 	thumb_func_start ContestEffectFunc_080E5534
 ContestEffectFunc_080E5534: @ 80E5534
 	push {lr}
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r1, [r3]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -189,7 +189,7 @@ ContestEffectFunc_080E5534: @ 80E5534
 	thumb_func_start ContestEffectFunc_080E5560
 ContestEffectFunc_080E5560: @ 80E5560
 	push {lr}
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r1, [r3]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -215,7 +215,7 @@ ContestEffectFunc_080E5560: @ 80E5560
 	thumb_func_start ContestEffectFunc_080E5590
 ContestEffectFunc_080E5590: @ 80E5590
 	push {lr}
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r1, [r3]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -239,7 +239,7 @@ ContestEffectFunc_080E5590: @ 80E5590
 	thumb_func_start ContestEffectFunc_080E55BC
 ContestEffectFunc_080E55BC: @ 80E55BC
 	push {lr}
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r1, [r3]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -266,7 +266,7 @@ ContestEffectFunc_080E55BC: @ 80E55BC
 ContestEffectFunc_080E55EC: @ 80E55EC
 	push {r4,r5,lr}
 	movs r2, 0
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1, 0x11]
@@ -293,7 +293,7 @@ _080E560A:
 	cmp r0, r1
 	bne _080E560A
 _080E5622:
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r0, [r1]
 	ldr r0, [r0, 0x8]
 	strb r2, [r0, 0x8]
@@ -307,14 +307,14 @@ _080E5622:
 _080E563A:
 	cmp r2, 0
 	bne _080E564C
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x36
 	bl sub_80DD3F0
 _080E564C:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -330,7 +330,7 @@ _080E564C:
 ContestEffectFunc_080E5664: @ 80E5664
 	push {r4-r6,lr}
 	movs r1, 0
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r0, [r2]
 	ldr r0, [r0, 0x8]
 	ldrb r5, [r0, 0x11]
@@ -359,7 +359,7 @@ _080E5698:
 	adds r3, 0x1
 	cmp r3, 0x3
 	ble _080E567E
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	adds r0, 0x8
@@ -372,14 +372,14 @@ _080E5698:
 _080E56B4:
 	cmp r1, 0
 	bne _080E56C6
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x36
 	bl sub_80DD3F0
 _080E56C6:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -409,7 +409,7 @@ ContestEffectFunc_080E56E0: @ 80E56E0
 	bhi _080E5702
 	movs r1, 0x28
 _080E5702:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	strh r1, [r0, 0x4]
@@ -425,7 +425,7 @@ ContestEffectFunc_080E5718: @ 80E5718
 	mov r7, r8
 	push {r7}
 	movs r7, 0
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r0, [r1]
 	ldr r0, [r0, 0x8]
 	ldrb r5, [r0, 0x11]
@@ -521,7 +521,7 @@ ContestEffectFunc_080E57CC: @ 80E57CC
 	push {r5-r7}
 	movs r0, 0
 	mov r9, r0
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r0, [r1]
 	ldr r0, [r0, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -619,7 +619,7 @@ ContestEffectFunc_080E588C: @ 80E588C
 	push {r6,r7}
 	movs r0, 0
 	mov r9, r0
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r0, [r1]
 	ldr r0, [r0, 0x8]
 	ldrb r7, [r0, 0x11]
@@ -674,7 +674,7 @@ _080E58DA:
 _080E5900:
 	adds r6, 0x1C
 	adds r5, 0x1
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	cmp r5, 0x3
 	ble _080E58B0
 _080E590A:
@@ -704,7 +704,7 @@ _080E5928:
 	thumb_func_start ContestEffectFunc_080E5938
 ContestEffectFunc_080E5938: @ 80E5938
 	push {r4,lr}
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r1, [r4]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -732,7 +732,7 @@ ContestEffectFunc_080E5938: @ 80E5938
 	thumb_func_start ContestEffectFunc_080E5970
 ContestEffectFunc_080E5970: @ 80E5970
 	push {r4,lr}
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r1, [r4]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -765,7 +765,7 @@ ContestEffectFunc_080E59B0: @ 80E59B0
 	push {lr}
 	movs r0, 0
 	bl sub_80E6934
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -781,7 +781,7 @@ ContestEffectFunc_080E59D0: @ 80E59D0
 	push {lr}
 	movs r0, 0x1
 	bl sub_80E6934
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -797,7 +797,7 @@ ContestEffectFunc_080E59F0: @ 80E59F0
 	push {lr}
 	movs r0, 0x2
 	bl sub_80E6934
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -813,7 +813,7 @@ ContestEffectFunc_080E5A10: @ 80E5A10
 	push {lr}
 	movs r0, 0x3
 	bl sub_80E6934
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -829,7 +829,7 @@ ContestEffectFunc_080E5A30: @ 80E5A30
 	push {lr}
 	movs r0, 0x4
 	bl sub_80E6934
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -844,7 +844,7 @@ ContestEffectFunc_080E5A30: @ 80E5A30
 ContestEffectFunc_080E5A50: @ 80E5A50
 	push {r4-r6,lr}
 	movs r4, 0
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r0, [r2]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r0, 0x11]
@@ -855,7 +855,7 @@ ContestEffectFunc_080E5A50: @ 80E5A50
 	beq _080E5AB0
 	movs r5, 0
 _080E5A68:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x8]
 	ldrb r0, [r1, 0x11]
@@ -932,7 +932,7 @@ ContestEffectFunc_080E5AD4: @ 80E5AD4
 	mov r10, r3
 	movs r6, 0
 _080E5B00:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r2, [r0]
 	ldr r1, [r2, 0x8]
 	ldrb r0, [r1, 0x11]
@@ -1000,7 +1000,7 @@ _080E5B76:
 	bge _080E5B76
 _080E5B7E:
 	movs r5, 0
-	ldr r7, =gUnknown_02039F34
+	ldr r7, =gContestResources
 	movs r6, 0
 	mov r4, r10
 _080E5B86:
@@ -1125,7 +1125,7 @@ _080E5C70:
 	lsrs r0, 24
 	mov r9, r0
 _080E5C86:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	adds r0, 0xD
@@ -1139,7 +1139,7 @@ _080E5C86:
 	cmp r0, 0xFF
 	bne _080E5C16
 _080E5CA0:
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	ldr r0, [r6]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -1173,7 +1173,7 @@ ContestEffectFunc_080E5CD4: @ 80E5CD4
 	movs r0, 0
 	mov r8, r0
 	movs r6, 0
-	ldr r7, =gUnknown_02039F34
+	ldr r7, =gContestResources
 	movs r5, 0
 _080E5CE4:
 	ldr r2, [r7]
@@ -1228,7 +1228,7 @@ _080E5D46:
 	adds r6, 0x1
 	cmp r6, 0x3
 	ble _080E5CE4
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -1256,7 +1256,7 @@ ContestEffectFunc_080E5D7C: @ 80E5D7C
 	push {r4-r7,lr}
 	movs r7, 0
 	movs r4, 0
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	movs r6, 0
 _080E5D86:
 	ldr r3, [r5]
@@ -1301,7 +1301,7 @@ _080E5DD2:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _080E5D86
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -1325,7 +1325,7 @@ _080E5DF8:
 ContestEffectFunc_080E5E04: @ 80E5E04
 	push {r4,lr}
 	ldr r1, =gUnknown_02039F26
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r4, [r0]
 	ldr r0, [r4, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -1366,7 +1366,7 @@ _080E5E46:
 ContestEffectFunc_080E5E5C: @ 80E5E5C
 	push {r4,lr}
 	ldr r1, =gUnknown_02039F26
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r4, [r0]
 	ldr r0, [r4, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -1408,7 +1408,7 @@ ContestEffectFunc_080E5EB4: @ 80E5EB4
 	push {r4-r7,lr}
 	movs r1, 0
 	movs r5, 0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r4, [r0]
 	ldr r2, [r4, 0x8]
 	ldrb r0, [r2, 0x11]
@@ -1434,7 +1434,7 @@ _080E5EDA:
 	bge _080E5EE8
 	movs r5, 0
 _080E5EE8:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r3, [r0]
 	ldr r0, [r3, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -1467,7 +1467,7 @@ _080E5F0C:
 	movs r1, 0x11
 	bl sub_80DD3D4
 _080E5F2C:
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r1, [r4]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -1498,7 +1498,7 @@ _080E5F2C:
 ContestEffectFunc_080E5F64: @ 80E5F64
 	push {r4-r7,lr}
 	movs r6, 0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r4, [r0]
 	ldr r2, [r4, 0x8]
 	ldrb r1, [r2, 0x11]
@@ -1567,7 +1567,7 @@ _080E5FDE:
 	thumb_func_start ContestEffectFunc_080E5FE4
 ContestEffectFunc_080E5FE4: @ 80E5FE4
 	push {r4,r5,lr}
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r3, [r1]
 	ldr r0, [r3, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -1647,7 +1647,7 @@ ContestEffectFunc_080E6068: @ 80E6068
 	cmp r0, 0x2
 	bhi _080E6098
 	movs r4, 0xA
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -1659,7 +1659,7 @@ _080E6098:
 	cmp r0, 0x5
 	bhi _080E60B4
 	movs r4, 0x14
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -1671,7 +1671,7 @@ _080E60B4:
 	cmp r0, 0x7
 	bhi _080E60D0
 	movs r4, 0x28
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -1683,7 +1683,7 @@ _080E60D0:
 	cmp r1, 0x8
 	bhi _080E60EC
 	movs r4, 0x3C
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -1693,14 +1693,14 @@ _080E60D0:
 	.pool
 _080E60EC:
 	movs r4, 0x50
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1E
 	bl sub_80DD3D4
 _080E60FC:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r1, [r0]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -1721,7 +1721,7 @@ ContestEffectFunc_080E611C: @ 80E611C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r0, [r2]
 	ldr r3, [r0, 0x8]
 	ldrb r0, [r3, 0x11]
@@ -1743,7 +1743,7 @@ _080E6140:
 	adds r5, r0, 0
 	cmp r6, r1
 	beq _080E616A
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 _080E614E:
 	lsls r0, r2, 24
 	movs r2, 0x80
@@ -1845,7 +1845,7 @@ ContestEffectFunc_080E620C: @ 80E620C
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r3, [r0]
 	ldr r1, [r3, 0x8]
 	ldrb r2, [r1, 0x11]
@@ -1928,7 +1928,7 @@ _080E62AC:
 	thumb_func_start ContestEffectFunc_080E62B8
 ContestEffectFunc_080E62B8: @ 80E62B8
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r0, 0x11]
@@ -1939,7 +1939,7 @@ ContestEffectFunc_080E62B8: @ 80E62B8
 	movs r5, 0
 	movs r6, 0
 _080E62CE:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r4, [r0]
 	ldr r1, [r4, 0x8]
 	ldrb r2, [r1, 0x11]
@@ -1994,7 +1994,7 @@ _080E632E:
 	thumb_func_start ContestEffectFunc_080E6334
 ContestEffectFunc_080E6334: @ 80E6334
 	push {r4,lr}
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r1, [r4]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -2046,7 +2046,7 @@ _080E6390:
 	thumb_func_start ContestEffectFunc_080E6398
 ContestEffectFunc_080E6398: @ 80E6398
 	push {lr}
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r1, [r3]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -2090,7 +2090,7 @@ _080E63E4:
 ContestEffectFunc_080E63E8: @ 80E63E8
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r2, [r0]
 	ldr r1, [r2]
 	ldrb r1, [r1, 0x1]
@@ -2258,7 +2258,7 @@ ContestEffectFunc_080E6520: @ 80E6520
 	mov r7, r8
 	push {r7}
 	sub sp, 0x4
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r2, [r0]
 	ldr r1, [r2]
 	ldrb r1, [r1, 0x1]
@@ -2434,7 +2434,7 @@ ContestEffectFunc_080E6664: @ 80E6664
 ContestEffectFunc_080E6668: @ 80E6668
 	push {r4-r7,lr}
 	sub sp, 0x8
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r1, [r0]
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x1]
@@ -2517,7 +2517,7 @@ _080E66FC:
 	cmp r0, 0x3
 	ble _080E66AA
 	movs r6, 0
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	adds r4, r5, 0
 _080E6712:
 	ldr r0, [r4]
@@ -2576,7 +2576,7 @@ _080E676C:
 ContestEffectFunc_080E6778: @ 80E6778
 	push {lr}
 	ldr r3, =gContestMoves
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r1, [r0]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -2613,7 +2613,7 @@ ContestEffectFunc_080E67BC: @ 80E67BC
 	movs r0, 0
 	mov r8, r0
 	movs r4, 0
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	movs r6, 0
 _080E67CC:
 	ldr r3, [r5]
@@ -2672,14 +2672,14 @@ _080E682E:
 	mov r7, r8
 	cmp r7, 0
 	bne _080E684A
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x36
 	bl sub_80DD3F0
 _080E684A:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -2696,7 +2696,7 @@ _080E684A:
 	thumb_func_start ContestEffectFunc_080E6868
 ContestEffectFunc_080E6868: @ 80E6868
 	push {r4,lr}
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r1, [r0]
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x13]
@@ -2745,7 +2745,7 @@ _080E68C2:
 	movs r1, 0x1E
 	bl sub_80DD3D4
 _080E68CE:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r1, [r0]
 	ldr r0, [r1, 0x8]
 	ldrb r2, [r0, 0x11]
@@ -2764,7 +2764,7 @@ _080E68CE:
 	thumb_func_start ContestEffectFunc_080E68EC
 ContestEffectFunc_080E68EC: @ 80E68EC
 	push {r4,lr}
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r2, [r0, 0x10]
 	ldrb r1, [r2, 0x1]
@@ -2811,7 +2811,7 @@ sub_80E6934: @ 80E6934
 	mov r8, r0
 	movs r7, 0
 	movs r4, 0
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	ldr r0, =gContestMoves
 	mov r9, r0
 	movs r5, 0
@@ -2861,7 +2861,7 @@ _080E699E:
 	ble _080E694E
 	cmp r7, 0
 	bne _080E69B8
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x11]
@@ -2882,7 +2882,7 @@ sub_80E69C8: @ 80E69C8
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r0, [r2]
 	ldr r0, [r0, 0x8]
 	adds r0, 0xD
@@ -2945,7 +2945,7 @@ sub_80E6A2C: @ 80E6A2C
 	movs r2, 0x8
 	bl memset
 	movs r7, 0
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
 	ldrb r0, [r0, 0x8]
@@ -3040,7 +3040,7 @@ _080E6AD6:
 	strh r0, [r1]
 _080E6AFE:
 	adds r7, 0x1
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
 	adds r0, 0x8
@@ -3081,7 +3081,7 @@ sub_80E6B3C: @ 80E6B3C
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r4, [r2]
 	ldr r3, [r4, 0x4]
 	lsls r2, r0, 3

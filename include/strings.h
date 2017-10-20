@@ -1,6 +1,13 @@
-#ifndef GUARD_strings_H
-#define GUARD_strings_H
+#ifndef GUARD_STRINGS_H
+#define GUARD_STRINGS_H
 
+// Exported type declarations
+
+// Exported RAM declarations
+
+// Exported ROM declarations
+
+extern const u8 gText_FromSpace[];
 extern const u8 gText_Lv50[];
 extern const u8 gText_OpenLevel[];
 extern const u8 gText_Mom[];
@@ -43,4 +50,4 @@ extern const u8 gText_CancelDecorating[];
 extern const u8 gText_PlaceItHere[];
 extern const u8 gText_CantBePlacedHere[];
 
-#endif //GUARD_strings_H
+#endif //GUARD_STRINGS_H

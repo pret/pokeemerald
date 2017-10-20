@@ -5441,7 +5441,7 @@ sub_81B2E64: @ 81B2E64
 	mov r2, r9
 	lsls r1, r2, 16
 	asrs r1, 16
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -10452,7 +10452,7 @@ sub_81B5A8C: @ 81B5A8C
 	asrs r2, 16
 	adds r0, r1, 0
 	adds r1, r2, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

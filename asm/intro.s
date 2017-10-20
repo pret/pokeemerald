@@ -1958,9 +1958,9 @@ task_intro_13: @ 816DD28
 	ldr r0, =gUnknown_08D8A818
 	ldr r1, =0x0600e000
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08524D14
+	ldr r0, =gBattleAnimPicTable + 0x1D0
 	bl LoadCompressedObjectPicUsingHeap
-	ldr r0, =gUnknown_0852561C
+	ldr r0, =gBattleAnimPaletteTable + 0x1D0
 	bl LoadCompressedObjectPaletteUsingHeap
 	ldr r0, =gUnknown_08D85CD0
 	ldr r1, =gPlttBufferUnfaded

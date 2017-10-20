@@ -76,8 +76,8 @@ sub_80D7678: @ 80D7678
 	.pool
 	thumb_func_end sub_80D7678
 
-	thumb_func_start sub_80D7724
-sub_80D7724: @ 80D7724
+	thumb_func_start LoadContestBgAfterMoveAnim
+LoadContestBgAfterMoveAnim: @ 80D7724
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_08C17AB0
 	movs r1, 0xC0
@@ -119,7 +119,7 @@ _080D775E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D7724
+	thumb_func_end LoadContestBgAfterMoveAnim
 
 	thumb_func_start sub_80D779C
 sub_80D779C: @ 80D779C
@@ -138,7 +138,7 @@ sub_80D779C: @ 80D779C
 _080D77BA:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	lsls r2, r4, 2
 	adds r1, 0x24
@@ -224,7 +224,7 @@ _080D7848:
 	thumb_func_start sub_80D787C
 sub_80D787C: @ 80D787C
 	push {r4-r7,lr}
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0]
 	movs r1, 0
@@ -244,7 +244,7 @@ _080D7890:
 	cmp r5, 0x3
 	ble _080D7890
 	movs r4, 0
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	movs r5, 0x3
 _080D78AA:
 	ldr r0, [r6]
@@ -257,7 +257,7 @@ _080D78AA:
 	subs r5, 0x1
 	cmp r5, 0
 	bge _080D78AA
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	movs r7, 0x4
 	negs r7, r7
 	movs r6, 0xFF
@@ -287,7 +287,7 @@ _080D78CC:
 	subs r5, 0x1
 	cmp r5, 0
 	bge _080D78CC
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
 	movs r1, 0
@@ -339,7 +339,7 @@ _080D7942:
 	cmp r5, 0x3
 	ble _080D7942
 	bl sub_80DD590
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x1C]
 	movs r1, 0
@@ -354,7 +354,7 @@ _080D7942:
 	thumb_func_start sub_80D7988
 sub_80D7988: @ 80D7988
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	movs r0, 0x40
 	bl AllocZeroed
 	str r0, [r4]
@@ -441,7 +441,7 @@ sub_80D7988: @ 80D7988
 	thumb_func_start sub_80D7A5C
 sub_80D7A5C: @ 80D7A5C
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r0, [r0]
 	bl Free
@@ -590,7 +590,7 @@ _080D7BD4:
 	strb r0, [r6]
 	b _080D7C56
 _080D7BDA:
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0]
 	adds r0, 0x59
@@ -628,7 +628,7 @@ _080D7C04:
 	ldr r0, =sub_80D7C7C
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r1, [r1]
 	strb r0, [r1, 0x8]
@@ -840,7 +840,7 @@ sub_80D7DE8: @ 80D7DE8
 	bl GetMultiplayerId
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x8]
@@ -973,7 +973,7 @@ _080D7F40:
 	bl CopyToBgTilemapBuffer
 	movs r0, 0x2
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x2C]
 	ldr r2, =0x0201aa04
@@ -1038,7 +1038,7 @@ _080D8004:
 	bl sub_80DBF90
 	bl sub_80DB2BC
 	bl sub_80DB120
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r1, [r1]
 	movs r4, 0
@@ -1256,7 +1256,7 @@ _080D81FA:
 	b _080D822C
 	.pool
 _080D8208:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x6]
@@ -1401,7 +1401,7 @@ sub_80D833C: @ 80D833C
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x1]
@@ -1527,7 +1527,7 @@ sub_80D8490: @ 80D8490
 	mov r8, r0
 	ldr r2, =gUnknown_02039E00 + 30
 	mov r10, r2
-	ldr r7, =gUnknown_02039F34
+	ldr r7, =gContestResources
 _080D84B8:
 	lsls r1, r6, 1
 	mov r0, r8
@@ -1632,7 +1632,7 @@ _080D856C:
 	lsrs r6, r0, 24
 	cmp r6, 0x3
 	bls _080D84B8
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0]
 	ldrb r0, [r0]
@@ -1738,7 +1738,7 @@ _080D868E:
 	movs r0, 0
 	bl sub_80DC490
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x1]
@@ -1785,7 +1785,7 @@ _080D86E4:
 	b _080D87FA
 	.pool
 _080D8730:
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0]
 	ldrb r0, [r0]
@@ -1804,7 +1804,7 @@ _080D8754:
 	subs r0, 0x1
 _080D8756:
 	strb r0, [r1]
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0]
 	ldrb r0, [r0]
@@ -1831,7 +1831,7 @@ _080D8756:
 	b _080D87FA
 	.pool
 _080D879C:
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0]
 	ldrb r0, [r0]
@@ -1851,7 +1851,7 @@ _080D87C0:
 	adds r0, r2, 0x1
 	strb r0, [r1]
 _080D87C4:
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0]
 	ldrb r0, [r0]
@@ -1967,7 +1967,7 @@ sub_80D8894: @ 80D8894
 	ldr r4, =gUnknown_02039F25
 	ldrb r0, [r4]
 	bl sub_80DB8B8
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldrb r2, [r4]
 	ldr r3, [r1, 0x4]
@@ -2020,7 +2020,7 @@ sub_80D892C: @ 80D892C
 	lsrs r0, 24
 	bl DestroyTask
 	ldr r2, =gTasks
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x8]
@@ -2145,7 +2145,7 @@ sub_80D8A50: @ 80D8A50
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x6]
@@ -2184,7 +2184,7 @@ sub_80D8A88: @ 80D8A88
 	asrs r0, 16
 	cmp r0, 0x13
 	ble _080D8B18
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r0, [r2]
 	ldr r1, [r0]
 	movs r0, 0
@@ -2217,7 +2217,7 @@ _080D8ADE:
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80DB8B8
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldrb r2, [r5]
 	adds r2, r4
@@ -2259,7 +2259,7 @@ sub_80D8B38: @ 80D8B38
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r0, [r2]
 	ldr r0, [r0]
 	ldrb r6, [r0, 0x11]
@@ -2348,7 +2348,7 @@ _080D8B84:
 _080D8C74:
 	bl sub_80DCD48
 	movs r7, 0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0]
 	ldr r0, [r0, 0x8]
@@ -2367,7 +2367,7 @@ _080D8C92:
 	cmp r1, r0
 	bne _080D8C92
 _080D8C9C:
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0]
 	strb r7, [r0, 0x11]
@@ -2447,7 +2447,7 @@ _080D8D56:
 	adds r0, r6, 0
 	bl sub_80DF080
 	bl sub_80DF750
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	lsls r0, r6, 3
@@ -2678,7 +2678,7 @@ _080D8F84:
 	beq _080D8F92
 	bl _080DA100
 _080D8F92:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	adds r0, 0x5A
@@ -2719,7 +2719,7 @@ _080D8FB8:
 	adds r0, r4, 0
 	bl sub_80DEAA8
 	adds r0, r4, 0
-	bl move_anim_start_t1
+	bl DoMoveAnim
 	ldr r1, =gTasks
 	mov r2, r8
 	lsls r0, r2, 2
@@ -2742,7 +2742,7 @@ _080D9010:
 _080D9024:
 	adds r0, r6, 0
 	bl sub_80DE9B0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r1, [r0]
 	ldr r0, [r1]
 	adds r0, 0x5A
@@ -3173,7 +3173,7 @@ _080D939E:
 	cmp r7, 0x3
 	bgt _080D9418
 	ldr r5, =gUnknown_02039F26
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 _080D93BC:
 	movs r3, 0
 	str r3, [sp]
@@ -3488,7 +3488,7 @@ _080D963C:
 	movs r0, 0x64
 	bl PlaySE
 _080D9642:
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r1, [r0, 0x4]
 	lsls r0, r7, 3
@@ -3588,7 +3588,7 @@ _080D971C:
 	beq _080D9728
 	bl _080DA100
 _080D9728:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	lsls r0, r6, 3
@@ -3739,7 +3739,7 @@ _080D9870:
 	bgt _080D988E
 	bl _080DA100
 _080D988E:
-	ldr r7, =gUnknown_02039F34
+	ldr r7, =gContestResources
 	ldr r0, [r7]
 	ldr r1, [r0, 0x4]
 	lsls r0, r6, 3
@@ -3866,7 +3866,7 @@ _080D999E:
 	beq _080D99A8
 	b _080DA100
 _080D99A8:
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r1, [r0, 0x4]
 	lsls r4, r6, 3
@@ -3898,7 +3898,7 @@ _080D99A8:
 	.pool
 _080D99EC:
 	bl sub_80DCD48
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x14]
 	lsls r0, r6, 2
@@ -3992,7 +3992,7 @@ _080D9AAE:
 	lsls r0, r5, 24
 	cmp r0, 0
 	ble _080D9AD2
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	ldr r2, [sp, 0x4]
@@ -4013,7 +4013,7 @@ _080D9AD2:
 	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x13]
@@ -4374,7 +4374,7 @@ _080D9DC2:
 _080D9DD4:
 	bl sub_80DB89C
 	ldr r0, =gStringVar3
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r1, [r5]
 	ldr r1, [r1, 0x10]
 	ldr r1, [r1]
@@ -4725,7 +4725,7 @@ sub_80DA110: @ 80DA110
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r3, [r1]
 	ldrb r2, [r3, 0x7]
@@ -4829,7 +4829,7 @@ _080DA1C6:
 	ands r0, r1
 	cmp r0, 0
 	beq _080DA224
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x7]
@@ -4861,7 +4861,7 @@ _080DA224:
 	bl sub_80DBA18
 	b _080DA23E
 _080DA22E:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x7]
@@ -4947,7 +4947,7 @@ _080DA2BA:
 	strh r5, [r4, 0xA]
 	b _080DA2F6
 _080DA2D2:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x7]
@@ -5082,7 +5082,7 @@ sub_80DA3CC: @ 80DA3CC
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _080DA448
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r5, =gUnknown_02039F25
 	ldrb r1, [r5]
@@ -5255,7 +5255,7 @@ sub_80DA51C: @ 80DA51C
 	ldrh r1, [r4]
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r0, [r2]
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x1]
@@ -5296,7 +5296,7 @@ sub_80DA5B4: @ 80DA5B4
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x6]
@@ -5327,7 +5327,7 @@ sub_80DA5E8: @ 80DA5E8
 	strh r1, [r0]
 	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	movs r3, 0
 	ldr r2, =gUnknown_02039F10
 	movs r1, 0x3
@@ -5350,7 +5350,7 @@ _080DA600:
 	ands r0, r1
 	cmp r0, 0
 	bne _080DA65C
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r2, [r0]
 	ldr r0, =gUnknown_02039F25
 	ldrb r1, [r0]
@@ -5553,7 +5553,7 @@ sub_80DA7EC: @ 80DA7EC
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 	ldr r2, =gTasks
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x8]
@@ -6818,7 +6818,7 @@ _080DB1CC:
 	strh r0, [r4, 0x2E]
 	strh r5, [r4, 0x32]
 	adds r0, r5, 0
-	bl sub_80DB2A8
+	bl IsSpeciesNotUnown
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB278
@@ -6851,8 +6851,8 @@ _080DB280:
 	.pool
 	thumb_func_end sub_80DB174
 
-	thumb_func_start sub_80DB2A8
-sub_80DB2A8: @ 80DB2A8
+	thumb_func_start IsSpeciesNotUnown
+IsSpeciesNotUnown: @ 80DB2A8
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -6865,12 +6865,12 @@ _080DB2B6:
 _080DB2B8:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80DB2A8
+	thumb_func_end IsSpeciesNotUnown
 
 	thumb_func_start sub_80DB2BC
 sub_80DB2BC: @ 80DB2BC
 	push {r4-r6,lr}
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r0, [r0, 0x24]
 	movs r4, 0xA0
@@ -7199,7 +7199,7 @@ sub_80DB584: @ 80DB584
 	movs r4, 0
 	movs r5, 0
 _080DB58A:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	adds r0, r5, r0
@@ -7238,7 +7238,7 @@ sub_80DB5B8: @ 80DB5B8
 	lsrs r1, 24
 	mov r8, r1
 	mov r10, r8
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	mov r9, r0
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
@@ -7365,7 +7365,7 @@ _080DB6B6:
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	add r0, r8
@@ -7486,7 +7486,7 @@ sub_80DB798: @ 80DB798
 	adds r1, 0x2
 	lsls r1, 24
 	lsrs r7, r1, 24
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r2, [r1, 0x4]
 	lsls r1, r0, 3
@@ -7647,7 +7647,7 @@ _080DB8D0:
 	.pool
 _080DB8F4:
 	ldr r2, =gUnknown_02039E00
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r0, [r0]
@@ -7674,7 +7674,7 @@ _080DB91E:
 	lsls r0, r4, 24
 	lsrs r0, 24
 	bl sub_80DB8B8
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r1, [r1, 0x4]
 	adds r1, r5, r1
@@ -7696,7 +7696,7 @@ sub_80DB944: @ 80DB944
 	mov r6, r8
 	push {r6,r7}
 	sub sp, 0x8
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	mov r4, sp
 	movs r3, 0
 	movs r6, 0x3
@@ -7751,7 +7751,7 @@ _080DB9A4:
 	movs r0, 0x4
 	negs r0, r0
 	mov r9, r0
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	mov r8, r1
 	movs r7, 0x3
 	mov r12, r7
@@ -7806,7 +7806,7 @@ _080DB9F8:
 	thumb_func_start sub_80DBA18
 sub_80DBA18: @ 80DBA18
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	movs r2, 0
 	movs r3, 0x3
 _080DBA20:
@@ -7854,7 +7854,7 @@ sub_80DBA68: @ 80DBA68
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r2, [r1, 0x4]
 	lsls r1, r0, 3
@@ -7889,7 +7889,7 @@ sub_80DBAA0: @ 80DBAA0
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	movs r0, 0
 	mov r8, r0
 	movs r1, 0x7
@@ -8092,7 +8092,7 @@ _080DBC1A:
 	b _080DBAC0
 _080DBC34:
 	movs r6, 0
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	movs r7, 0
 	movs r4, 0
 _080DBC3C:
@@ -8132,7 +8132,7 @@ _080DBC3C:
 	adds r6, 0x1
 	cmp r6, 0x3
 	ble _080DBC3C
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0, 0x10]
 	ldrb r1, [r2, 0x1]
@@ -8155,7 +8155,7 @@ sub_80DBCA8: @ 80DBCA8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r2, [r1, 0x4]
 	lsls r1, r0, 3
@@ -8626,7 +8626,7 @@ sub_80DC028: @ 80DC028
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
 	lsls r1, r2, 2
@@ -8746,7 +8746,7 @@ _080DC126:
 	bne _080DC15C
 	adds r0, r7, 0
 	bl DestroyTask
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
 	mov r2, r9
@@ -8950,7 +8950,7 @@ _080DC2C8:
 	movs r1, 0xB4
 	movs r3, 0x1
 	bl CreateSprite
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r2, [r1, 0x14]
 	lsls r1, r4, 2
@@ -8970,7 +8970,7 @@ sub_80DC308: @ 80DC308
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r2, [r0, 0x14]
 	lsls r3, r6, 2
@@ -9067,7 +9067,7 @@ _080DC3B0:
 sub_80DC3C4: @ 80DC3C4
 	push {r4,lr}
 	movs r2, 0
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r0, [r3]
 	ldr r0, [r0, 0x14]
 	ldrb r1, [r0, 0x2]
@@ -9114,7 +9114,7 @@ sub_80DC408: @ 80DC408
 	ldrsh r0, [r3, r4]
 	cmp r1, r0
 	bne _080DC440
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	movs r2, 0x2E
 	ldrsh r1, [r3, r2]
@@ -9145,7 +9145,7 @@ sub_80DC44C: @ 80DC44C
 	push {r4-r6,lr}
 	movs r2, 0
 	ldr r6, =gSprites
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r4, =gUnknown_08587A6C
 	ldr r3, =gUnknown_02039F26
 _080DC458:
@@ -9180,7 +9180,7 @@ sub_80DC490: @ 80DC490
 	movs r3, 0
 	ldr r7, =gUnknown_02039F26
 	ldr r5, =gSprites
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	movs r2, 0
 _080DC4A0:
 	adds r0, r3, r7
@@ -9231,7 +9231,7 @@ sub_80DC4F0: @ 80DC4F0
 	ldr r0, =gUnknown_08587B08
 	bl LoadSpritePalette
 	movs r5, 0
-	ldr r7, =gUnknown_02039F34
+	ldr r7, =gContestResources
 	ldr r0, =gSprites
 	mov r8, r0
 	movs r6, 0
@@ -9315,7 +9315,7 @@ sub_80DC594: @ 80DC594
 	movs r3, 0x4
 	orrs r2, r3
 	strb r2, [r1]
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r1, [r1]
 	adds r1, 0x58
@@ -9333,7 +9333,7 @@ sub_80DC5E8: @ 80DC5E8
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r1, [r1]
 	strb r0, [r1, 0xD]
@@ -9365,7 +9365,7 @@ sub_80DC630: @ 80DC630
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =gTasks
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r5, [r1]
 	ldr r1, [r5]
 	ldrb r2, [r1, 0xD]
@@ -9430,7 +9430,7 @@ sub_80DC6A4: @ 80DC6A4
 	adds r0, r2
 	ldrb r0, [r0, 0x8]
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r4, [r0]
 	ldr r0, [r4]
 	ldrb r1, [r0, 0xD]
@@ -9553,7 +9553,7 @@ _080DC79C:
 	eors r1, r2
 	strh r1, [r0]
 _080DC7AA:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	adds r0, 0x14
@@ -9590,7 +9590,7 @@ sub_80DC7EC: @ 80DC7EC
 	ldr r0, =sub_80DC8D0
 	movs r1, 0x1E
 	bl CreateTask
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r1, [r1]
 	strb r0, [r1, 0xE]
@@ -9614,7 +9614,7 @@ sub_80DC81C: @ 80DC81C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =gTasks
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r4, [r1]
 	ldr r1, [r4]
 	ldrb r2, [r1, 0xE]
@@ -9819,7 +9819,7 @@ sub_80DC9B4: @ 80DC9B4
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	lsls r0, r2, 3
@@ -9923,7 +9923,7 @@ sub_80DC9EC: @ 80DC9EC
 	lsls r3, 6
 	ldr r0, =0x0600e026
 	adds r3, r0
-	ldr r7, =gUnknown_02039F34
+	ldr r7, =gContestResources
 	ldr r0, [r7]
 	ldr r0, [r0, 0x34]
 	str r0, [sp]
@@ -10083,7 +10083,7 @@ sub_80DCBE8: @ 80DCBE8
 	lsrs r0, 24
 	mov r9, r0
 	bl sub_80DCBB4
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r1, [r0]
 	ldr r2, =gSprites
 	mov r8, r2
@@ -10186,7 +10186,7 @@ _080DCCCC:
 	thumb_func_start sub_80DCCD8
 sub_80DCCD8: @ 80DCCD8
 	push {lr}
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	movs r3, 0x30
 	ldrsh r2, [r0, r3]
@@ -10279,7 +10279,7 @@ _080DCD7E:
 	bls _080DCD7E
 	movs r5, 0
 _080DCD92:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	lsls r0, r5, 3
@@ -10322,7 +10322,7 @@ _080DCDBC:
 	bls _080DCD92
 	movs r5, 0
 _080DCDEA:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	lsls r0, r5, 3
@@ -10536,7 +10536,7 @@ _080DCF80:
 	ldr r3, =gUnknown_02039F26
 	movs r6, 0
 _080DCF90:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	adds r0, r6, r0
@@ -10577,7 +10577,7 @@ _080DCFCC:
 	add r3, sp, 0x4
 	mov r12, r3
 _080DCFE0:
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	ldr r0, [r6]
 	ldr r1, [r0, 0x4]
 	lsls r0, r4, 3
@@ -10667,7 +10667,7 @@ sub_80DD080: @ 80DD080
 	push {r6,r7}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r3, [r4]
 	ldr r1, [r3, 0x4]
 	lsls r7, r6, 3
@@ -10731,7 +10731,7 @@ _080DD0B4:
 	b _080DD12C
 	.pool
 _080DD110:
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4]
 	lsls r3, r6, 3
@@ -10789,7 +10789,7 @@ _080DD166:
 	adds r2, 0x1
 	cmp r2, 0x3
 	ble _080DD166
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r1, [r0, 0x4]
 	subs r0, r7, r6
@@ -10819,7 +10819,7 @@ _080DD1B4:
 	add r0, r9
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	subs r0, r7, r6
@@ -10855,7 +10855,7 @@ _080DD204:
 _080DD206:
 	adds r0, r1
 	strh r0, [r2, 0x2]
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r1, [r0, 0x4]
 	subs r0, r7, r6
@@ -10927,7 +10927,7 @@ _080DD206:
 	.pool
 _080DD29C:
 	ldr r2, =gContestMoves
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r1, [r0, 0x4]
 	subs r0, r7, r6
@@ -10960,7 +10960,7 @@ _080DD2D8:
 	ands r0, r1
 	strb r0, [r3, 0x15]
 _080DD2E2:
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r1, [r0, 0x4]
 	subs r0, r7, r6
@@ -11071,7 +11071,7 @@ _080DD3AE:
 	cmp r0, 0
 	bne _080DD3A2
 _080DD3B6:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	subs r0, r7, r6
@@ -11092,7 +11092,7 @@ _080DD3C4:
 sub_80DD3D4: @ 80DD3D4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r2, [r2]
 	ldr r3, [r2, 0x4]
 	lsls r2, r0, 3
@@ -11108,7 +11108,7 @@ sub_80DD3D4: @ 80DD3D4
 sub_80DD3F0: @ 80DD3F0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r2, [r2]
 	ldr r3, [r2, 0x4]
 	lsls r2, r0, 3
@@ -11177,7 +11177,7 @@ sub_80DD45C: @ 80DD45C
 	adds r1, r2
 	bl StringCopy
 	ldr r0, =gStringVar2
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r1, [r5]
 	ldr r2, [r1, 0x4]
 	lsls r1, r4, 3
@@ -11265,7 +11265,7 @@ sub_80DD560: @ 80DD560
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r1, [r4]
 	ldr r3, [r1, 0x4]
 	lsls r1, r0, 3
@@ -11315,7 +11315,7 @@ _080DD5AC:
 	cmp r4, 0x3
 	ble _080DD5AC
 	movs r4, 0
-	ldr r7, =gUnknown_02039F34
+	ldr r7, =gContestResources
 	ldr r1, [r7]
 	mov r8, r1
 	adds r5, r2, 0
@@ -11422,7 +11422,7 @@ _080DD684:
 	cmp r4, 0x3
 	ble _080DD5CA
 	movs r4, 0
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	movs r5, 0
 _080DD690:
 	ldr r0, [r6]
@@ -11483,7 +11483,7 @@ sub_80DD6DC: @ 80DD6DC
 	strb r0, [r3]
 	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x6]
@@ -11502,7 +11502,7 @@ sub_80DD720: @ 80DD720
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r5, [r0, 0x12]
@@ -11700,7 +11700,7 @@ _080DD8F8:
 	adds r2, r4
 	ldr r0, =sub_80DD6DC
 	str r0, [r2]
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x6]
@@ -11720,7 +11720,7 @@ sub_80DD940: @ 80DD940
 	mov r6, r8
 	push {r6,r7}
 	movs r5, 0
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	ldr r0, =gSprites
 	mov r9, r0
 	ldr r0, =0x06010000
@@ -11905,7 +11905,7 @@ _080DDACA:
 	movs r1, 0x1
 	eors r0, r1
 	strh r0, [r4, 0xE]
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
@@ -11939,7 +11939,7 @@ sub_80DDB0C: @ 80DDB0C
 	movs r1, 0xA
 	bl CreateTask
 	ldr r3, =gSprites
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r2, [r4]
 	ldr r0, [r2]
 	adds r0, 0x58
@@ -11981,7 +11981,7 @@ sub_80DDB6C: @ 80DDB6C
 	lsls r0, 24
 	lsrs r0, 24
 	adds r3, r0, 0
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0]
 	adds r0, 0x58
@@ -12040,7 +12040,7 @@ _080DDBD4:
 sub_80DDBE8: @ 80DDBE8
 	push {r4,r5,lr}
 	ldr r5, =gSprites
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r2, [r0]
 	adds r0, r2, 0
@@ -12093,7 +12093,7 @@ task08_080CD1CC: @ 80DDC4C
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r0, [r0]
 	adds r0, 0x58
@@ -12175,7 +12175,7 @@ sub_80DDCDC: @ 80DDCDC
 	lsls r4, 24
 	asrs r4, 24
 	strh r4, [r1, 0x8]
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x6]
@@ -12216,7 +12216,7 @@ _080DDD4E:
 	bl sub_80DDB0C
 	b _080DDD64
 _080DDD54:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x6]
@@ -12241,7 +12241,7 @@ _080DDD70:
 	movs r0, 0
 	strh r0, [r4, 0x1E]
 	bl sub_80DD940
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x6]
@@ -12261,7 +12261,7 @@ _080DDD9C:
 	thumb_func_start sub_80DDDA8
 sub_80DDDA8: @ 80DDDA8
 	ldr r3, =gSprites
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r2, [r0]
 	ldr r0, [r2]
 	adds r0, 0x58
@@ -12292,7 +12292,7 @@ sub_80DDDA8: @ 80DDDA8
 	thumb_func_start sub_80DDDE4
 sub_80DDDE4: @ 80DDDE4
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	adds r0, 0x58
@@ -12316,7 +12316,7 @@ sub_80DDE0C: @ 80DDE0C
 	ldr r0, =sub_80DDE30
 	movs r1, 0xF
 	bl CreateTask
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x6]
@@ -12383,7 +12383,7 @@ _080DDE8C:
 	ldrsh r0, [r0, r1]
 	cmp r0, 0x9
 	bne _080DDEBA
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x6]
@@ -12421,7 +12421,7 @@ sub_80DDED0: @ 80DDED0
 	cmp r4, 0
 	ble _080DDF1C
 	movs r5, 0
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r0, [r2]
 	ldr r0, [r0]
 	movs r1, 0x13
@@ -12433,7 +12433,7 @@ sub_80DDED0: @ 80DDED0
 	b _080DDF4E
 	.pool
 _080DDF1C:
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r0, [r2]
 	ldr r0, [r0]
 	movs r1, 0x13
@@ -12458,7 +12458,7 @@ _080DDF48:
 	movs r5, 0xC
 	movs r3, 0
 _080DDF4C:
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 _080DDF4E:
 	ldr r1, =gTasks
 	lsls r0, r6, 2
@@ -12536,7 +12536,7 @@ _080DDFB8:
 	bne _080DDFFC
 	adds r0, r5, 0
 	bl DestroyTask
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x7]
@@ -12562,7 +12562,7 @@ sub_80DE008: @ 80DE008
 	lsrs r0, 24
 	mov r10, r0
 	movs r5, 0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	mov r9, r0
 	mov r8, r9
 	ldr r6, =gSprites
@@ -12666,7 +12666,7 @@ sub_80DE0F0: @ 80DE0F0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r2, [r1, 0x4]
 	lsls r1, r0, 3
@@ -12708,7 +12708,7 @@ sub_80DE12C: @ 80DE12C
 	movs r0, 0x11
 	mov r9, r0
 _080DE146:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	adds r0, 0xD
@@ -12789,7 +12789,7 @@ sub_80DE1E8: @ 80DE1E8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r2, [r1, 0x4]
 	lsls r1, r0, 3
@@ -12896,7 +12896,7 @@ sub_80DE224: @ 80DE224
 	movs r0, 0
 	str r0, [sp, 0x8]
 	add r0, sp, 0x8
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r1, [r4]
 	ldr r1, [r1, 0x28]
 	ldr r2, =0x05000400
@@ -12963,7 +12963,7 @@ sub_80DE350: @ 80DE350
 	bl RequestDma3Fill
 	movs r5, 0
 	str r5, [sp]
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	ldr r0, [r6]
 	ldr r1, [r0, 0x28]
 	ldr r2, =0x05000400
@@ -13136,7 +13136,7 @@ _080DE4D0:
 _080DE4DA:
 	movs r2, 0
 	adds r6, r3, 0
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r3, =gUnknown_02039F26
 _080DE4E2:
 	ldr r0, [r5]
@@ -13170,7 +13170,7 @@ _080DE52C:
 	ands r1, r0
 	cmp r1, 0
 	beq _080DE584
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x7]
@@ -13201,7 +13201,7 @@ _080DE584:
 	bl sub_80DBAA0
 	b _080DE59A
 _080DE58A:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x7]
@@ -13356,7 +13356,7 @@ sub_80DE69C: @ 80DE69C
 	mov r8, r0
 	movs r7, 0
 	ldr r6, =gSprites
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 _080DE6AE:
 	bl AllocOamMatrix
 	ldr r1, [r5]
@@ -13450,7 +13450,7 @@ _080DE74C:
 	adds r1, r2
 	mov r0, r8
 	strh r0, [r1, 0x8]
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x7]
@@ -13471,7 +13471,7 @@ sub_80DE794: @ 80DE794
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r2, =gSprites
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r0, [r3]
 	ldr r0, [r0, 0x14]
 	ldrb r1, [r0]
@@ -13515,7 +13515,7 @@ _080DE7CC:
 _080DE7EC:
 	movs r4, 0
 _080DE7EE:
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r1, [r0, 0x14]
 	lsls r0, r4, 2
@@ -13583,7 +13583,7 @@ sub_80DE864: @ 80DE864
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r1, [r0, 0x4]
 	lsls r0, r7, 3
@@ -13662,12 +13662,12 @@ _080DE8FA:
 	cmp r0, 0x7
 	bne _080DE99C
 _080DE910:
-	ldr r1, =gUnknown_02038432
+	ldr r1, =gAnimMoveTurn
 	movs r0, 0
 	b _080DE9A0
 	.pool
 _080DE920:
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	ldr r0, [r6]
 	ldr r1, [r0, 0x4]
 	lsls r0, r7, 3
@@ -13695,17 +13695,17 @@ _080DE920:
 	b _080DE9A2
 	.pool
 _080DE960:
-	ldr r1, =gHappinessMoveAnim
+	ldr r1, =gAnimFriendship
 	movs r0, 0xFF
 	b _080DE9A0
 	.pool
 _080DE96C:
-	ldr r1, =gHappinessMoveAnim
+	ldr r1, =gAnimFriendship
 	movs r0, 0
 	b _080DE9A0
 	.pool
 _080DE978:
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0]
 	adds r2, r0, 0
@@ -13715,12 +13715,12 @@ _080DE978:
 	bne _080DE99C
 	movs r0, 0x2
 	strb r0, [r2]
-	ldr r0, =gUnknown_02038432
+	ldr r0, =gAnimMoveTurn
 	strb r1, [r0]
 	b _080DE9A2
 	.pool
 _080DE99C:
-	ldr r1, =gUnknown_02038432
+	ldr r1, =gAnimMoveTurn
 	movs r0, 0x1
 _080DE9A0:
 	strb r0, [r1]
@@ -13735,7 +13735,7 @@ _080DE9A2:
 	thumb_func_start sub_80DE9B0
 sub_80DE9B0: @ 80DE9B0
 	push {r4,lr}
-	ldr r4, =gUnknown_02039F34
+	ldr r4, =gContestResources
 	ldr r0, [r4]
 	ldr r0, [r0, 0x18]
 	movs r1, 0
@@ -13763,7 +13763,7 @@ sub_80DE9DC: @ 80DE9DC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	ldr r0, [r6]
 	ldr r0, [r0, 0x18]
 	strb r4, [r0, 0x5]
@@ -14558,7 +14558,7 @@ sub_80DF080: @ 80DF080
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r3, [r2]
 	ldr r5, [r3, 0x10]
 	ldrb r1, [r5, 0x1]
@@ -14810,7 +14810,7 @@ sub_80DF250: @ 80DF250
 	movs r0, 0
 	str r0, [sp, 0x20]
 	movs r4, 0
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	mov r2, sp
 	adds r2, 0xC
 	str r2, [sp, 0x28]
@@ -14871,7 +14871,7 @@ _080DF2C2:
 	subs r2, r0
 	cmp r2, 0x32
 	bgt _080DF2EE
-	ldr r7, =gUnknown_02039F34
+	ldr r7, =gContestResources
 	ldr r0, [r7]
 	ldr r2, [r0, 0x1C]
 	add r2, r9
@@ -14880,7 +14880,7 @@ _080DF2C2:
 	orrs r0, r1
 	strb r0, [r2, 0xD]
 _080DF2EE:
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r0, [r1]
 	ldr r0, [r0, 0x1C]
 	mov r3, r9
@@ -14926,7 +14926,7 @@ _080DF336:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080DF354
-	ldr r2, =gUnknown_02039F34
+	ldr r2, =gContestResources
 	ldr r0, [r2]
 	ldr r2, [r0, 0x1C]
 	add r2, r9
@@ -14978,7 +14978,7 @@ _080DF38E:
 	mov r2, r8
 	cmp r2, 0
 	bne _080DF3B4
-	ldr r3, =gUnknown_02039F34
+	ldr r3, =gContestResources
 	ldr r0, [r3]
 	ldr r2, [r0, 0x1C]
 	add r2, r9
@@ -14987,7 +14987,7 @@ _080DF38E:
 	orrs r0, r1
 	strb r0, [r2, 0xD]
 _080DF3B4:
-	ldr r6, =gUnknown_02039F34
+	ldr r6, =gContestResources
 	ldr r0, [r6]
 	ldr r0, [r0, 0x1C]
 	mov r7, r9
@@ -15031,7 +15031,7 @@ _080DF3EA:
 	ldr r2, [sp, 0x28]
 	strb r0, [r2, 0x5]
 	movs r4, 0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	mov r8, r0
 	ldr r7, [sp, 0x30]
@@ -15046,7 +15046,7 @@ _080DF40E:
 	mov r12, r4
 	cmp r0, 0
 	beq _080DF450
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r6, [r0]
 	ldr r3, [sp, 0x28]
 	mov r4, sp
@@ -15123,7 +15123,7 @@ _080DF4B6:
 	bne _080DF478
 _080DF4C0:
 	bl Random
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r1, [r1]
 	ldr r4, [r1, 0x1C]
 	ldr r1, [sp, 0x30]
@@ -15167,7 +15167,7 @@ sub_80DF4F8: @ 80DF4F8
 _080DF514:
 	movs r7, 0
 	movs r3, 0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	mov r12, r0
 _080DF51C:
 	adds r0, r3, r1
@@ -15253,7 +15253,7 @@ _080DF5A0:
 	bl __modsi3
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x1C]
 	add r0, r8
@@ -15295,7 +15295,7 @@ _080DF5F6:
 	bne _080DF628
 	mov r0, sp
 	strb r1, [r0]
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r0, [r1]
 	ldr r0, [r0, 0x1C]
 	ldrb r4, [r0, 0x1D]
@@ -15306,7 +15306,7 @@ _080DF628:
 	mov r1, sp
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =gUnknown_02039F34
+	ldr r1, =gContestResources
 	ldr r0, [r1]
 	ldr r0, [r0, 0x1C]
 	ldrb r4, [r0, 0xD]
@@ -15360,7 +15360,7 @@ _080DF682:
 	ldrb r6, [r0]
 	movs r2, 0x80
 	movs r3, 0
-	ldr r5, =gUnknown_02039F34
+	ldr r5, =gContestResources
 	ldr r0, [r5]
 	ldr r0, [r0, 0x1C]
 	lsls r1, r6, 4
@@ -15391,7 +15391,7 @@ _080DF6C4:
 	ldr r5, [sp, 0x4]
 	lsrs r0, r5, 24
 	bl ContestLiveUpdates_BeforeInterview_3
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r0, [r0, 0x1C]
 	add r0, r8
@@ -15519,7 +15519,7 @@ _080DF7AE:
 	movs r2, 0x5
 	movs r3, 0x1
 	bl sub_80DEBD0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x1C]
 	lsls r0, r7, 4
@@ -15606,7 +15606,7 @@ _080DF884:
 	add r0, sp, 0x4
 	ldr r1, =gText_BDot
 	bl StringCopy
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r1, [r0, 0x1C]
 	lsls r0, r7, 4

@@ -465,7 +465,7 @@ u32 sub_8034974(void* ptr)
     return (ptr_[3] << 16) | (ptr_[2] << 8) | (ptr_[1]);
 }
 
-bool8 LoadCompressedObjectPicUsingHeap(struct CompressedSpriteSheet* src)
+bool8 LoadCompressedObjectPicUsingHeap(const struct CompressedSpriteSheet* src)
 {
     struct SpriteSheet dest;
     void* buffer;

@@ -830,6 +830,7 @@ void LoadBattleTextboxAndBackground(void);
 void LoadBattleEntryBackground(void);
 void ApplyPlayerChosenFrameToBattleMenu(void);
 bool8 LoadChosenBattleElement(u8 caseId);
+void DrawMainBattleBackground(void);
 void task00_0800F6FC(u8 taskId);
 
 // battle_5
@@ -887,6 +888,19 @@ struct BattleSpriteInfo
 struct BattleAnimationInfo
 {
     u16 field; // to fill up later
+    u8 field_2;
+    u8 field_3;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u8 field_8;
+    u8 field_9_x1 : 1;
+    u8 field_9_x2 : 1;
+    u8 field_9_x1C : 3;
+    u8 field_9_x20 : 1;
+    u8 field_9_x40 : 1;
+    u8 field_9_x80 : 1;
 };
 
 struct BattleHealthboxInfo
@@ -894,6 +908,8 @@ struct BattleHealthboxInfo
     u8 flag_x1 : 1;
     u8 flag_x2 : 1;
     u8 flag_x4 : 1;
+    u8 flag_x8 : 1;
+    u8 flag_x10 : 1;
     u8 field_1;
     u8 field_2;
     u8 field_3;
@@ -907,11 +923,21 @@ struct BattleHealthboxInfo
     u8 field_B;
 };
 
+struct BattleBarInfo
+{
+    u8 healthboxSpriteId;
+    s32 maxValue;
+    s32 currentValue;
+    s32 field_C;
+    s32 field_10;
+};
+
 struct BattleSpriteData
 {
     struct BattleSpriteInfo *bankData;
     struct BattleHealthboxInfo *healthBoxesData;
     struct BattleAnimationInfo *animationData;
+    struct BattleBarInfo *battleBars;
 };
 
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
@@ -930,6 +956,8 @@ struct MonSpritesGfx
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
     void* sprites[4];
     struct SpriteTemplate templates[4];
+    u8 field_74[0x100];
+    u8 *fontPixels;
 };
 
 extern struct BattleSpritesGfx* gMonSpritesGfx;
