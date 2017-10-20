@@ -22,12 +22,14 @@
 #include "new_menu_helpers.h"
 #include "menu_indicators.h"
 #include "sound.h"
-#include "decoration.h"
-#include "decoration_inventory.h"
 #include "event_scripts.h"
 #include "event_data.h"
+#include "region_map.h"
 #include "player_pc.h"
 #include "strings.h"
+#include "tv.h"
+#include "decoration_inventory.h"
+#include "decoration.h"
 
 // Static type declarations
 
@@ -102,7 +104,9 @@ void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_0203A190 *da
 void sub_812826C(u8 taskId);
 void sub_8128950(u8 taskId);
 void sub_81289D0(u8 taskId);
+void sub_8128AAC(u8 taskId);
 void sub_8128B80(u8 taskId);
+void sub_8128BBC(u8 taskId);
 void sub_8128DE0(void);
 void sub_8128FD8(u8 taskId);
 void sub_8129020(u8 taskId);
@@ -117,6 +121,7 @@ extern const struct MenuAction gUnknown_085A6B48[];
 extern const u8 *const gUnknown_085A6B68[];
 extern void (*const gUnknown_085A6B78[][2])(u8 taskId);
 extern const u16 gUnknown_085A6BB0[];
+extern const struct YesNoFuncTable gUnknown_085A72C4;
 extern const struct ListMenuTemplate gUnknown_085A6BD0;
 extern const u8 gUnknown_085A72E4[];
 extern const u8 gUnknown_085A72EC[];
@@ -1327,5 +1332,70 @@ void sub_8128950(u8 taskId)
         PlaySE(SE_HAZURE);
         StringExpandPlaceholders(gStringVar4, gText_CantBePlacedHere);
         DisplayItemMessageOnField(taskId, gStringVar4, sub_8129020);
+    }
+}
+
+void sub_81289D0(u8 taskId)
+{
+    sub_8197930();
+    sub_8121F68(taskId, &gUnknown_085A72C4);
+}
+
+void sub_81289F0(u8 taskId)
+{
+    sub_8197434(0, 0);
+    sub_8128AAC(taskId);
+    if (gDecorations[gUnknown_0203A14C[gUnknown_0203A172]].permission != DECORPERM_SOLID_MAT)
+    {
+        sub_8127D38(gTasks[taskId].data[0], gTasks[taskId].data[1], gUnknown_0203A14C[gUnknown_0203A172]);
+    }
+    else
+    {
+        gUnknown_0203AA34 = gTasks[taskId].data[0] - 7;
+        gUnknown_0203AA36 = gTasks[taskId].data[1] - 7;
+        ScriptContext1_SetupScript(gUnknown_08275D1F);
+    }
+    gSprites[gUnknown_0203AA38].pos1.y += 2;
+    if (gMapHeader.regionMapSectionId == REGION_MAP_SECRET_BASE)
+    {
+        TV_PutSecretBaseVisitOnTheAir();
+    }
+    sub_8128BBC(taskId);
+}
+
+void sub_8128AAC(u8 taskId)
+{
+    u16 i;
+
+    for (i = 0; i < gUnknown_0203A17C.size; i ++)
+    {
+        if (gUnknown_0203A17C.items[i] == DECOR_NONE)
+        {
+            gUnknown_0203A17C.items[i] = gUnknown_0203A14C[gUnknown_0203A172];
+            gUnknown_0203A17C.pos[i] = ((gTasks[taskId].data[0] - 7) << 4) + (gTasks[taskId].data[1] - 7);
+            break;
+        }
+    }
+    if (!gUnknown_0203A17C.isPlayerRoom)
+    {
+        for (i = 0; i < 16; i ++)
+        {
+            if (gUnknown_0203A152[i] == 0)
+            {
+                gUnknown_0203A152[i] = gUnknown_0203A172 + 1;
+                break;
+            }
+        }
+    }
+    else
+    {
+        for (i = 0; i < 12; i ++)
+        {
+            if (gUnknown_0203A162[i] == 0)
+            {
+                gUnknown_0203A162[i] = gUnknown_0203A172 + 1;
+                break;
+            }
+        }
     }
 }
