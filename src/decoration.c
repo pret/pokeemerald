@@ -68,6 +68,7 @@ extern EWRAM_DATA u16 gUnknown_0203AA34;
 extern EWRAM_DATA u16 gUnknown_0203AA36;
 extern EWRAM_DATA u8 gUnknown_0203AA38;
 extern EWRAM_DATA u8 gUnknown_0203AA39;
+extern EWRAM_DATA u8 gUnknown_0203AA3A;
 
 // Static ROM declarations
 
@@ -1483,4 +1484,32 @@ void sub_8128CD4(void)
     taskId = CreateTask(sub_8128C64, 8);
     sub_8127580(taskId);
     gTasks[taskId].data[2] = 0;
+}
+
+bool8 sub_8128D10(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    if (gUnknown_0203AA3A == DIR_SOUTH && data[1] - data[6] - 6 < 0)
+    {
+        data[1] ++;
+        return FALSE;
+    }
+    if (gUnknown_0203AA3A == DIR_NORTH && data[1] - 7 >= gMapHeader.mapData->height)
+    {
+        data[1] --;
+        return FALSE;
+    }
+    if (gUnknown_0203AA3A == DIR_WEST && data[0] - 7 < 0)
+    {
+        data[0] ++;
+        return FALSE;
+    }
+    if (gUnknown_0203AA3A == DIR_EAST && data[0] + data[5] - 8 >= gMapHeader.mapData->width)
+    {
+        data[0] --;
+        return FALSE;
+    }
+    return TRUE;
 }
