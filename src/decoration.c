@@ -114,6 +114,7 @@ void sub_8128DE0(void);
 void sub_8128FD8(u8 taskId);
 void sub_8129020(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
+void sub_81292E8(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 decor);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
@@ -1719,4 +1720,15 @@ void sub_812925C(u8 decoShape)
     gUnknown_0203AA3C.tileNum = 0;
     gUnknown_0203AA3C.priority = 0;
     gUnknown_0203AA3C.paletteNum = 0;
+}
+
+void sub_81292D0(struct Sprite *sprite)
+{
+    sprite->data2 = 0;
+    sprite->data3 = 0;
+    sprite->data4 = 0;
+    sprite->data5 = 0;
+    sprite->data6 = 0;
+    sprite->data7 = 0;
+    sprite->callback = sub_81292E8;
 }

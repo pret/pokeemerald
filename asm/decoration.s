@@ -5,21 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81292D0
-sub_81292D0: @ 81292D0
-	movs r1, 0
-	strh r1, [r0, 0x32]
-	strh r1, [r0, 0x34]
-	strh r1, [r0, 0x36]
-	strh r1, [r0, 0x38]
-	strh r1, [r0, 0x3A]
-	strh r1, [r0, 0x3C]
-	ldr r1, =sub_81292E8
-	str r1, [r0, 0x1C]
-	bx lr
-	.pool
-	thumb_func_end sub_81292D0
-
 	thumb_func_start sub_81292E8
 sub_81292E8: @ 81292E8
 	push {lr}
