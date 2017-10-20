@@ -203,7 +203,7 @@ void sub_81C240C(u16 a);
 void sub_81C2194(u16 *a, u16 b, u8 c);
 void sub_81C2074(u16 a, s16 b);
 void sub_81C2524();
-void sub_81C2228(struct Pokemon* poke);
+void sub_81C2228(struct Pokemon* mon);
 void sub_81C0484(u8 taskId);
 void sub_81C4898();
 void sub_806F47C(u8 a);
@@ -287,14 +287,14 @@ void SetBgAttribute(u8 bg, u8 attributeId, u8 value);
 bool8 sub_81BFB10();
 u8 sub_81B1250();
 
-union unkUnion
+union UnkUnion
 {
     struct Pokemon mon[6];
     struct BoxPokemon boxMon[6];
 };
 
 
-u8 sub_80D214C(union unkUnion* a, u8 b, u8 c, u8 d);
+u8 sub_80D214C(union UnkUnion* a, u8 b, u8 c, u8 d);
 
 struct PokeSummary
 {
@@ -332,10 +332,10 @@ struct PokeSummary
 
 struct UnkSummaryStruct
 {
-    /*0x00*/ union unkUnion *unk0;
+    /*0x00*/ union UnkUnion *unk0;
     /*0x04*/ void *unk4;
     /*0x08*/ void *unk8;
-    /*0x0C*/ struct Pokemon currentPoke;
+    /*0x0C*/ struct Pokemon currentMon;
     /*0x70*/ struct PokeSummary summary;
     u16 unkTilemap0[0x400];
     u16 unkTilemap0_1[0x400];
@@ -490,12 +490,12 @@ bool8 sub_81BFB10(void)
         gMain.state++;
         break;
     case 9:
-        sub_81C0098(&gUnknown_0203CF1C->currentPoke);
+        sub_81C0098(&gUnknown_0203CF1C->currentMon);
         gUnknown_0203CF1C->unk40F0 = 0;
         gMain.state++;
         break;
     case 10:
-        if (sub_81C00F0(&gUnknown_0203CF1C->currentPoke) != 0)
+        if (sub_81C00F0(&gUnknown_0203CF1C->currentMon) != 0)
             gMain.state++;
         break;
     case 11:
@@ -525,7 +525,7 @@ bool8 sub_81BFB10(void)
         gMain.state++;
         break;
     case 17:
-        gUnknown_0203CF1C->unk40D3 = sub_81C45F4(&gUnknown_0203CF1C->currentPoke, &gUnknown_0203CF1C->unk40F0);
+        gUnknown_0203CF1C->unk40D3 = sub_81C45F4(&gUnknown_0203CF1C->currentMon, &gUnknown_0203CF1C->unk40F0);
         if (gUnknown_0203CF1C->unk40D3 != 0xFF)
         {
             gUnknown_0203CF1C->unk40F0 = 0;
@@ -533,11 +533,11 @@ bool8 sub_81BFB10(void)
         }
         break;
     case 18:
-        sub_81C4984(&gUnknown_0203CF1C->currentPoke);
+        sub_81C4984(&gUnknown_0203CF1C->currentMon);
         gMain.state++;
         break;
     case 19:
-        sub_81C4A08(&gUnknown_0203CF1C->currentPoke);
+        sub_81C4A08(&gUnknown_0203CF1C->currentMon);
         gMain.state++;
         break;
     case 20:
@@ -656,17 +656,17 @@ u8 sub_81BFEB0()
     return 0;
 }
 
-void sub_81C0098(struct Pokemon *poke)
+void sub_81C0098(struct Pokemon *mon)
 {
     if (gUnknown_0203CF1C->unk40BD == 0)
     {
         struct Pokemon *partyMon = gUnknown_0203CF1C->unk0->mon;
-        *poke = partyMon[gUnknown_0203CF1C->unk40BE];
+        *mon = partyMon[gUnknown_0203CF1C->unk40BE];
     }
     else
     {
         struct BoxPokemon *boxMon = gUnknown_0203CF1C->unk0->boxMon;
-        sub_8069004(&boxMon[gUnknown_0203CF1C->unk40BE], poke);
+        sub_8069004(&boxMon[gUnknown_0203CF1C->unk40BE], mon);
     }
 }
 
@@ -769,7 +769,7 @@ void sub_81C0348(void)
             PutWindowTilemap(0xD);
     }
     sub_81C2524();
-    sub_81C2228(&gUnknown_0203CF1C->currentPoke);
+    sub_81C2228(&gUnknown_0203CF1C->currentMon);
 }
 
 void sub_81C0434()
@@ -915,27 +915,27 @@ void sub_81C0704(u8 taskId)
         DestroySpriteAndFreeResources(&gSprites[gUnknown_0203CF1C->unk40D4]);
         break;
     case 3:
-        sub_81C0098(&gUnknown_0203CF1C->currentPoke);
+        sub_81C0098(&gUnknown_0203CF1C->currentMon);
         gUnknown_0203CF1C->unk40F0 = 0;
         break;
     case 4:
-        if (sub_81C00F0(&gUnknown_0203CF1C->currentPoke) == FALSE)
+        if (sub_81C00F0(&gUnknown_0203CF1C->currentMon) == FALSE)
             return;
         break;
     case 5:
-        sub_81C49E0(&gUnknown_0203CF1C->currentPoke);
+        sub_81C49E0(&gUnknown_0203CF1C->currentMon);
         break;
     case 6:
-        sub_81C4A08(&gUnknown_0203CF1C->currentPoke);
+        sub_81C4A08(&gUnknown_0203CF1C->currentMon);
         break;
     case 7:
         if (gUnknown_0203CF1C->summary.unk7)
             sub_81C2074(10, -2);
-        sub_81C2228(&gUnknown_0203CF1C->currentPoke);
+        sub_81C2228(&gUnknown_0203CF1C->currentMon);
         data[1] = 0;
         break;
     case 8:
-        gUnknown_0203CF1C->unk40D3 = sub_81C45F4(&gUnknown_0203CF1C->currentPoke, &data[1]);
+        gUnknown_0203CF1C->unk40D3 = sub_81C45F4(&gUnknown_0203CF1C->currentMon, &data[1]);
         if (gUnknown_0203CF1C->unk40D3 == 0xFF)
             return;
         gSprites[gUnknown_0203CF1C->unk40D3].data2 = 1;
@@ -1149,7 +1149,7 @@ void sub_81C0D44(u8 taskId)
 void sub_81C0E24()
 {
     if (gUnknown_0203CF1C->unk40C0 == 1)
-        sub_81C22CC(&gUnknown_0203CF1C->currentPoke);
+        sub_81C22CC(&gUnknown_0203CF1C->currentMon);
 }
 
 void sub_81C0E48(u8 taskId)
@@ -1365,7 +1365,7 @@ void sub_81C13B0(u8 taskId, u8 b)
             struct BoxPokemon *why = gUnknown_0203CF1C->unk0->boxMon;
             sub_81C15EC(&why[gUnknown_0203CF1C->unk40BE], gUnknown_0203CF1C->unk40C6, gUnknown_0203CF1C->unk40C7);
         }
-        sub_81C0098(&gUnknown_0203CF1C->currentPoke);
+        sub_81C0098(&gUnknown_0203CF1C->currentMon);
         sub_81C40A0(gUnknown_0203CF1C->unk40C6, gUnknown_0203CF1C->unk40C7);
         sub_81C4568(gUnknown_0203CF1C->unk40C6, gUnknown_0203CF1C->unk40C7);
         gUnknown_0203CF1C->unk40C6 = gUnknown_0203CF1C->unk40C7;
@@ -2578,7 +2578,7 @@ void sub_81C25E8()
 void sub_81C2628()
 {
     u8 strArray[16];
-    struct Pokemon *mon = &gUnknown_0203CF1C->currentPoke;
+    struct Pokemon *mon = &gUnknown_0203CF1C->currentMon;
     struct PokeSummary *summary = &gUnknown_0203CF1C->summary;
     u16 r5 = SpeciesToPokedexNum(summary->species);
     if (r5 != 0xFFFF)
@@ -2622,7 +2622,7 @@ void sub_81C2628()
 
 void sub_81C2794()
 {
-    GetMonNickname(&gUnknown_0203CF1C->currentPoke, gStringVar1);
+    GetMonNickname(&gUnknown_0203CF1C->currentMon, gStringVar1);
     sub_81C25A4(18, gStringVar1, 0, 1, 0, 1);
     PutWindowTilemap(18);
     ClearWindowTilemap(17);
@@ -3056,7 +3056,7 @@ u8 sub_81C3220()
     struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     u32 r4;
     u8 r5;
-    if (gUnknown_0203CF1C->unk0 == (union unkUnion *)&gEnemyParty)
+    if (gUnknown_0203CF1C->unk0 == (union UnkUnion *)&gEnemyParty)
     {
         u8 multiID = GetMultiplayerId()^1;
         r4 = (u16)gLinkPlayers[multiID].trainerId;
