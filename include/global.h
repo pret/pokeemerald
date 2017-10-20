@@ -500,6 +500,16 @@ typedef union // TODO
     u8 id;
 } LilycoveLady;
 
+struct WaldaPhrase
+{
+    u16 field_0;
+    u16 field_2;
+    u8 text[16];
+    u8 iconId;
+    u8 patternId;
+    bool8 patternUnlocked;
+};
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -586,7 +596,7 @@ struct SaveBlock1
     /*0x3B24*/ u8 seen2[52];
     /*0x3B58*/ LilycoveLady lilycoveLady;
     /*0x3B88*/ u8 filler_3B88[0x1E8];
-    /*0x3D70*/ u8 babyPhrase[24]; // TODO: convert to a struct
+    /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88
 };
 
