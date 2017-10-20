@@ -64,6 +64,7 @@ extern EWRAM_DATA struct UnkStruct_0203A190 gUnknown_0203A190;
 extern EWRAM_DATA u16 gUnknown_0203AA34;
 extern EWRAM_DATA u16 gUnknown_0203AA36;
 extern EWRAM_DATA u8 gUnknown_0203AA38;
+extern EWRAM_DATA u8 gUnknown_0203AA39;
 
 // Static ROM declarations
 
@@ -1051,4 +1052,26 @@ void ConfigureCameraObjectForPlacingDecoration(struct UnkStruct_0203A190 *data, 
     gSprites[gUnknown_03005DD0.unk4].callback = sub_81292D0;
     gSprites[gUnknown_03005DD0.unk4].pos1.x = gUnknown_085A7250[data->decoration->shape].x;
     gSprites[gUnknown_03005DD0.unk4].pos1.y = gUnknown_085A7250[data->decoration->shape].y;
+}
+
+void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_0203A190 *data)
+{
+    u8 v0;
+
+    v0 = 16 * (u8)gTasks[taskId].data[5] + gUnknown_085A7250[data->decoration->shape].x - 8 * ((u8)gTasks[taskId].data[5] - 1);
+    if (data->decoration->shape == DECORSHAPE_3x1 || data->decoration->shape == DECORSHAPE_3x3 || data->decoration->shape == DECORSHAPE_3x2)
+    {
+        v0 -= 8;
+    }
+    if (gSaveBlock2Ptr->playerGender == MALE)
+    {
+        gUnknown_0203AA39 = AddPseudoFieldObject(0xC1, SpriteCallbackDummy, v0, 0x48, 0);
+    }
+    else
+    {
+        gUnknown_0203AA39 = AddPseudoFieldObject(0xC2, SpriteCallbackDummy, v0, 0x48, 0);
+    }
+    gSprites[gUnknown_0203AA39].oam.priority = 1;
+    DestroySprite(&gSprites[gUnknown_0203AA38]);
+    gUnknown_0203AA38 = gUnknown_03005DD0.unk4;
 }
