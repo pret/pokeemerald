@@ -24,5 +24,6 @@ void SetHealthboxSpriteVisible(u8 healthboxSpriteId);
 void SetHealthboxSpriteInvisible(u8 healthboxSpriteId);
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId);
 void nullsub_30(u8 healthboxSpriteId, bool8 isDoubleBattleBankOnly);
+void sub_8072A88(u8 arg0);
 
 #endif // GUARD_BATTLE_INTERFACE_H

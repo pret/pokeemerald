@@ -830,6 +830,7 @@ void LoadBattleTextboxAndBackground(void);
 void LoadBattleEntryBackground(void);
 void ApplyPlayerChosenFrameToBattleMenu(void);
 bool8 LoadChosenBattleElement(u8 caseId);
+void DrawMainBattleBackground(void);
 void task00_0800F6FC(u8 taskId);
 
 // battle_5
@@ -894,6 +895,8 @@ struct BattleHealthboxInfo
     u8 flag_x1 : 1;
     u8 flag_x2 : 1;
     u8 flag_x4 : 1;
+    u8 flag_x8 : 1;
+    u8 flag_x10 : 1;
     u8 field_1;
     u8 field_2;
     u8 field_3;

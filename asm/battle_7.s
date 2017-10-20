@@ -1056,10 +1056,10 @@ _0805D980:
 	b _0805DA1E
 	.pool
 _0805D9CC:
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	mov r2, r10
 	strb r2, [r0]
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	mov r1, sp
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -1070,7 +1070,7 @@ _0805D9CC:
 	ldr r0, =gUnknown_082C9320
 	adds r1, r5, 0
 	movs r2, 0
-	bl move_something
+	bl DoBattleAnim
 	ldr r0, =task0A_0803415C
 	movs r1, 0xA
 	bl CreateTask
@@ -1180,14 +1180,14 @@ move_anim_start_t4: @ 805DAC4
 	lsrs r4, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	strb r1, [r0]
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	strb r2, [r0]
 	ldr r0, =gUnknown_082C937C
 	adds r1, r3, 0
 	movs r2, 0
-	bl move_something
+	bl DoBattleAnim
 	ldr r0, =task0A_08034248
 	movs r1, 0xA
 	bl CreateTask
@@ -2353,7 +2353,7 @@ _0805E51C:
 	beq _0805E558
 	movs r0, 0
 	mov r10, r0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0, 0x18]
 	ldrh r1, [r2, 0x2]
@@ -3111,7 +3111,7 @@ sub_805EB9C: @ 805EB9C
 _0805EBC8:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80A6A90
+	bl AnimBankSpriteExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805EC60
@@ -3329,7 +3329,7 @@ sub_805ED70: @ 805ED70
 	cmp r0, 0
 	beq _0805EDAC
 	adds r0, r4, 0
-	bl sub_80A6A90
+	bl AnimBankSpriteExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805EDC0

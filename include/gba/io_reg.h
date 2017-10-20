@@ -521,6 +521,8 @@
 #define DISPSTAT_HBLANK_INTR 0x0010 // H-Blank interrupt enabled
 #define DISPSTAT_VCOUNT_INTR 0x0020 // V-Count interrupt enabled
 
+// BLDCNT
+
 // SOUNDCNT_H
 #define SOUND_CGB_MIX_QUARTER 0x0000
 #define SOUND_CGB_MIX_HALF    0x0001
