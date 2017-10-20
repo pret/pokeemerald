@@ -1627,3 +1627,47 @@ void sub_8129068(u16 *dest, u16 decor)
 {
     CpuFastCopy(&((u16 *)gTilesetPointer_SecretBase->palettes)[decor << 4], dest, 32);
 }
+
+void sub_8129088(u8 *dest, u16 flags)
+{
+    u8 buffer[32];
+    u16 mode;
+    u16 i;
+
+    mode = flags >> 10;
+    if (flags != 0)
+    {
+        flags &= 0x03FF;
+    }
+    CpuFastCopy(&((u8 *)gTilesetPointer_SecretBase->tiles)[flags << 5], buffer, 32);
+    switch (mode)
+    {
+        case 0:
+            CpuFastCopy(buffer, dest, 32);
+            break;
+        case 1:
+            for (i = 0; i < 8; i ++)
+            {
+                dest[4 * i] = (buffer[4 * (i + 1) - 1] >> 4) + ((buffer[4 * (i + 1) - 1] & 0x0F) << 4);
+                dest[4 * i + 1] = (buffer[4 * (i + 1) - 2] >> 4) + ((buffer[4 * (i + 1) - 2] & 0x0F) << 4);
+                dest[4 * i + 2] = (buffer[4 * (i + 1) - 3] >> 4) + ((buffer[4 * (i + 1) - 3] & 0x0F) << 4);
+                dest[4 * i + 3] = (buffer[4 * (i + 1) - 4] >> 4) + ((buffer[4 * (i + 1) - 4] & 0x0F) << 4);
+            }
+            break;
+        case 2:
+            for (i = 0; i < 8; i ++)
+            {
+                dest[4 * i] = buffer[4 * (7 - i)];
+                dest[4 * i + 1] = buffer[4 * (7 - i) + 1];
+                dest[4 * i + 2] = buffer[4 * (7 - i) + 2];
+                dest[4 * i + 3] = buffer[4 * (7 - i) + 3];
+            }
+            break;
+        case 3:
+            for (i = 0; i < 32; i ++)
+            {
+                dest[i] = (buffer[31 - i] >> 4) + ((buffer[31 - i] & 0x0F) << 4);
+            }
+            break;
+    }
+}
