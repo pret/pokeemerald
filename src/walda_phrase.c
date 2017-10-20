@@ -1,4 +1,5 @@
 #include "global.h"
+#include "walda_phrase.h"
 #include "string_util.h"
 #include "event_data.h"
 #include "naming_screen.h"
@@ -21,13 +22,13 @@ extern void SetWaldaWallpaperColors(u16 backgroundColor, u16 foregroundColor);
 extern void SetWaldaWallpaperLockedOrUnlocked(bool32 unlocked);
 
 // this file's functions
-void CB2_HandleGivenWaldaPhrase(void);
-u32 GetWaldaPhraseInputCase(u8 *inputPtr);
-bool32 TryCalculateWallpaper(u16* backgroundClr, u16 *foregroundClr, u8 *iconId, u8 *patternId, u16 trainerId, u8 *phrase);
-void sub_81D9D5C(u8 *array, u8 *letterTableIds, s32 arg2, s32 arg3, s32 arg4);
-s32 sub_81D9DAC(u8 *array, s32 arg1, s32 arg2);
-void sub_81D9C90(u8 *array, s32 arg1, s32 arg2);
-void sub_81D9CDC(u8 *array, s32 arg1, u8 arg2);
+static void CB2_HandleGivenWaldaPhrase(void);
+static u32 GetWaldaPhraseInputCase(u8 *inputPtr);
+static bool32 TryCalculateWallpaper(u16* backgroundClr, u16 *foregroundClr, u8 *iconId, u8 *patternId, u16 trainerId, u8 *phrase);
+static void sub_81D9D5C(u8 *array, u8 *letterTableIds, u32 arg2, u32 arg3, u32 loopCount);
+static u32 sub_81D9DAC(u8 *array, u32 arg1, u32 loopCount);
+static void sub_81D9C90(u8 *array, s32 arg1, s32 arg2);
+static void sub_81D9CDC(u8 *array, u32 loopCount, u8 arg2);
 
 // only consonants are allowed, no vowels, some lowercase letters are missing
 static const u8 sWaldaLettersTable[] =
@@ -49,7 +50,7 @@ void DoWaldaNamingScreen(void)
     DoNamingScreen(NAMING_SCREEN_WALDA, gStringVar2, 0, 0, 0, CB2_HandleGivenWaldaPhrase);
 }
 
-void CB2_HandleGivenWaldaPhrase(void)
+static void CB2_HandleGivenWaldaPhrase(void)
 {
     gSpecialVar_0x8004 = GetWaldaPhraseInputCase(gStringVar2);
 
@@ -73,7 +74,7 @@ void CB2_HandleGivenWaldaPhrase(void)
     SetMainCallback2(c2_exit_to_overworld_2_switch);
 }
 
-u32 GetWaldaPhraseInputCase(u8 *inputPtr)
+static u32 GetWaldaPhraseInputCase(u8 *inputPtr)
 {
     if (inputPtr[0] == EOS)
         return PHRASE_FIRST_ATTEMPT;
@@ -101,7 +102,7 @@ u16 TryGetWallpaperWithWaldaPhrase(void)
     return (bool8)(gScriptResult);
 }
 
-u8 GetLetterTableId(u8 letter)
+static u8 GetLetterTableId(u8 letter)
 {
     s32 i;
 
@@ -114,7 +115,7 @@ u8 GetLetterTableId(u8 letter)
     return ARRAY_COUNT(sWaldaLettersTable);
 }
 
-bool32 TryCalculateWallpaper(u16* backgroundClr, u16 *foregroundClr, u8 *iconId, u8 *patternId, u16 trainerId, u8 *phrase)
+static bool32 TryCalculateWallpaper(u16* backgroundClr, u16 *foregroundClr, u8 *iconId, u8 *patternId, u16 trainerId, u8 *phrase)
 {
     s32 i;
     ALIGNED(2) u8 array[12];
@@ -163,7 +164,7 @@ bool32 TryCalculateWallpaper(u16* backgroundClr, u16 *foregroundClr, u8 *iconId,
     return TRUE;
 }
 
-void sub_81D9C90(u8 *array, s32 arg1, s32 arg2)
+static void sub_81D9C90(u8 *array, s32 arg1, s32 arg2)
 {
     s32 i, j;
     u8 var1, var2;
@@ -172,7 +173,7 @@ void sub_81D9C90(u8 *array, s32 arg1, s32 arg2)
     {
         var1 = (array[0] & 0x80) >> 7;
 
-        var1++;var1--; // needed to match
+        var1++; var1--; // needed to match
 
         for (j = arg1 - 1; j >= 0; j--)
         {
@@ -182,4 +183,66 @@ void sub_81D9C90(u8 *array, s32 arg1, s32 arg2)
             var1 = var2 >> 7;
         }
     }
+}
+
+static void sub_81D9CDC(u8 *array, u32 loopCount, u8 arg2)
+{
+    u32 i;
+
+    arg2 |= (arg2 << 4);
+
+    for (i = 0; i < loopCount; i++)
+    {
+        array[i] ^= arg2;
+    }
+}
+
+static bool8 sub_81D9D0C(u8 *array, u32 arg1)
+{
+    u32 arrayId = arg1 >> 3;
+    u32 bits = 0x80 >> (7 & arg1);
+
+    return ((array[arrayId] & bits) != 0);
+}
+
+static void sub_81D9D28(u8 *array, u32 arg1)
+{
+    u32 arrayId = arg1 >> 3;
+    u8 bits = 0x80 >> (7 & arg1);
+
+    array[arrayId] |= bits;
+}
+
+static void sub_81D9D40(u8 *array, u32 arg1)
+{
+    u32 arrayId = arg1 >> 3;
+    u8 bits = ~(0x80 >> (7 & arg1));
+
+    array[arrayId] &= bits;
+}
+
+static void sub_81D9D5C(u8 *array, u8 *letterTableIds, u32 arg2, u32 arg3, u32 loopCount)
+{
+    u32 i;
+
+    for (i = 0; i < loopCount; i++)
+    {
+        if (sub_81D9D0C(letterTableIds, arg3 + i))
+            sub_81D9D28(array, arg2 + i);
+        else
+            sub_81D9D40(array, arg2 + i);
+    }
+}
+
+static u32 sub_81D9DAC(u8 *array, u32 arg1, u32 loopCount)
+{
+    u32 ret, i;
+
+    for (ret = 0, i = 0; i < loopCount; i++)
+    {
+        ret <<= 1;
+        ret |= sub_81D9D0C(array, arg1 + i);
+    }
+
+    return ret;
 }
