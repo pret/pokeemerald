@@ -129,10 +129,11 @@ const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_8129B34(u8 taskId);
+void sub_8129C74(u8 taskId);
+void sub_8129D64(u8 taskId);
 void sub_812A36C(struct Sprite *sprite);
 void sub_812A39C(void);
 void sub_812A3C8(void);
-void sub_8129D64(u8 taskId);
 void sub_8133E1C(u8 taskId);
 
 // .rodata
@@ -2096,4 +2097,11 @@ void sub_8129B34(u8 taskId)
     gSprites[gUnknown_0203AA39].pos1.y = 0x48;
     gTasks[taskId].data[10] = 0;
     gTasks[taskId].func = sub_8128E18;
+}
+
+void sub_8129BCC(u8 taskId)
+{
+    gTasks[taskId].data[10] = 0;
+    sub_8128DE0();
+    sub_8129C74(taskId);
 }

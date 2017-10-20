@@ -5,28 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8129BCC
-sub_8129BCC: @ 8129BCC
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	movs r1, 0
-	strh r1, [r0, 0x1C]
-	bl sub_8128DE0
-	adds r0, r4, 0
-	bl sub_8129C74
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8129BCC
-
 	thumb_func_start sub_8129BF8
 sub_8129BF8: @ 8129BF8
 	push {r4,r5,lr}
