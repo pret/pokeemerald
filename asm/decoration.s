@@ -5,54 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8128950
-sub_8128950: @ 8128950
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r0, =gUnknown_0203A172
-	ldrb r1, [r0]
-	ldr r0, =gUnknown_0203A14C
-	ldr r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r1, 5
-	ldr r0, =gDecorations
-	adds r1, r0
-	adds r0, r5, 0
-	bl sub_812853C
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _081289A4
-	ldr r4, =gStringVar4
-	ldr r1, =gText_PlaceItHere
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	ldr r2, =sub_81289D0
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl DisplayItemMessageOnField
-	b _081289BE
-	.pool
-_081289A4:
-	movs r0, 0x20
-	bl PlaySE
-	ldr r4, =gStringVar4
-	ldr r1, =gText_CantBePlacedHere
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	ldr r2, =sub_8129020
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl DisplayItemMessageOnField
-_081289BE:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8128950
-
 	thumb_func_start sub_81289D0
 sub_81289D0: @ 81289D0
 	push {r4,lr}

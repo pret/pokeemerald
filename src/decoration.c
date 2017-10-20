@@ -101,9 +101,11 @@ void ConfigureCameraObjectForPlacingDecoration(struct UnkStruct_0203A190 *data, 
 void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_0203A190 *data);
 void sub_812826C(u8 taskId);
 void sub_8128950(u8 taskId);
+void sub_81289D0(u8 taskId);
 void sub_8128B80(u8 taskId);
 void sub_8128DE0(void);
 void sub_8128FD8(u8 taskId);
+void sub_8129020(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 decor);
 
@@ -1311,4 +1313,19 @@ bool8 sub_812853C(u8 taskId, const struct Decoration *decoration)
             break;
     }
     return TRUE;
+}
+
+void sub_8128950(u8 taskId)
+{
+    if (sub_812853C(taskId, &gDecorations[gUnknown_0203A14C[gUnknown_0203A172]]) == TRUE)
+    {
+        StringExpandPlaceholders(gStringVar4, gText_PlaceItHere);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_81289D0);
+    }
+    else
+    {
+        PlaySE(SE_HAZURE);
+        StringExpandPlaceholders(gStringVar4, gText_CantBePlacedHere);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_8129020);
+    }
 }

@@ -40,5 +40,7 @@ extern const u8 gText_NoMoreDecorations[];
 extern const u8 gText_NoMoreDecorations2[];
 extern const u8 gText_InUseAlready[];
 extern const u8 gText_CancelDecorating[];
+extern const u8 gText_PlaceItHere[];
+extern const u8 gText_CantBePlacedHere[];
 
 #endif //GUARD_strings_H
