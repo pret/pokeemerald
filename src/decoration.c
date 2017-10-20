@@ -29,6 +29,7 @@
 #include "strings.h"
 #include "tv.h"
 #include "secret_base.h"
+#include "tilesets.h"
 #include "decoration_inventory.h"
 #include "decoration.h"
 
@@ -1599,4 +1600,30 @@ void sub_8128E18(u8 taskId)
             data[10] = B_BUTTON;
         }
     }
+}
+
+void sub_8128FD8(u8 taskId)
+{
+    sub_8197434(0, 1);
+    gSprites[gUnknown_0203AA38].data7 = 0;
+    gTasks[taskId].data[10] = 0;
+    gTasks[taskId].func = sub_8128E18;
+}
+
+void sub_8129020(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        sub_8128FD8(taskId);
+    }
+}
+
+void sub_8129048(struct UnkStruct_0203A190 *data)
+{
+    CpuFill16(0, data, sizeof(*data));
+}
+
+void sub_8129068(u16 *dest, u16 decor)
+{
+    CpuFastCopy(&((u16 *)gTilesetPointer_SecretBase->palettes)[decor << 4], dest, 32);
 }
