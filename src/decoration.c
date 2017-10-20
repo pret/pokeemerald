@@ -28,6 +28,7 @@
 #include "player_pc.h"
 #include "strings.h"
 #include "tv.h"
+#include "secret_base.h"
 #include "decoration_inventory.h"
 #include "decoration.h"
 
@@ -1441,6 +1442,34 @@ void c1_overworld_prev_quest(u8 taskId)
             gFieldCallback = sub_8128CD4;
             SetMainCallback2(c2_exit_to_overworld_2_switch);
             DestroyTask(taskId);
+            break;
+    }
+}
+
+void sub_8128C64(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    switch (data[2])
+    {
+        case 0:
+            sub_80E9578();
+            data[2] ++;
+            break;
+        case 1:
+            ScriptContext1_SetupScript(gUnknown_08275D0C);
+            data[2] ++;
+            break;
+        case 2:
+            ScriptContext2_Enable();
+            data[2] ++;
+            break;
+        case 3:
+            if (sub_80ABDFC() == TRUE)
+            {
+                gTasks[taskId].func = sub_812764C;
+            }
             break;
     }
 }

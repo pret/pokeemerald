@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8128C64
-sub_8128C64: @ 8128C64
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r5, r1, 3
-	ldr r6, =gTasks + 0x8
-	adds r4, r5, r6
-	movs r1, 0x4
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x1
-	beq _08128C9C
-	cmp r0, 0x1
-	bgt _08128C8C
-	cmp r0, 0
-	beq _08128C96
-	b _08128CCA
-	.pool
-_08128C8C:
-	cmp r0, 0x2
-	beq _08128CA8
-	cmp r0, 0x3
-	beq _08128CB4
-	b _08128CCA
-_08128C96:
-	bl sub_80E9578
-	b _08128CAC
-_08128C9C:
-	ldr r0, =gUnknown_08275D0C
-	bl ScriptContext1_SetupScript
-	b _08128CAC
-	.pool
-_08128CA8:
-	bl ScriptContext2_Enable
-_08128CAC:
-	ldrh r0, [r4, 0x4]
-	adds r0, 0x1
-	strh r0, [r4, 0x4]
-	b _08128CCA
-_08128CB4:
-	bl sub_80ABDFC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08128CCA
-	adds r0, r6, 0
-	subs r0, 0x8
-	adds r0, r5, r0
-	ldr r1, =sub_812764C
-	str r1, [r0]
-_08128CCA:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8128C64
-
 	thumb_func_start sub_8128CD4
 sub_8128CD4: @ 8128CD4
 	push {r4,lr}
