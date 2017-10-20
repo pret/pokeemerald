@@ -1813,7 +1813,7 @@ const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
 {
     if (decor > 120)
     {
-        decor = 0;
+        decor = DECOR_NONE;
     }
     return gUnknown_085A6BE8[decor][mode];
 }
@@ -1851,5 +1851,50 @@ u8 AddDecorationIconObjectFromFieldObject(u16 tilesTag, u16 paletteTag, u8 decor
     {
         spriteId = AddPseudoFieldObject(gUnknown_0203A190.decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
     }
+    return spriteId;
+}
+
+u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u16 paletteTag)
+{
+    u8 spriteId;
+
+    if (decor > 120)
+    {
+        spriteId = AddDecorationIconObjectFromIconTable(tilesTag, paletteTag, DECOR_NONE);
+        if (spriteId == MAX_SPRITES)
+        {
+            return MAX_SPRITES;
+        }
+        gSprites[spriteId].pos2.x = x + 4;
+        gSprites[spriteId].pos2.y = y + 4;
+    }
+    else if (gUnknown_085A6BE8[decor][0] == NULL)
+    {
+        spriteId = AddDecorationIconObjectFromFieldObject(tilesTag, paletteTag, decor);
+        if (spriteId == MAX_SPRITES)
+        {
+            return MAX_SPRITES;
+        }
+        gSprites[spriteId].pos2.x = x;
+        if (decor == DECOR_SILVER_SHIELD || decor == DECOR_GOLD_SHIELD)
+        {
+            gSprites[spriteId].pos2.y = y - 4;
+        }
+        else
+        {
+            gSprites[spriteId].pos2.y = y;
+        }
+    }
+    else
+    {
+        spriteId = AddDecorationIconObjectFromIconTable(tilesTag, paletteTag, decor);
+        if (spriteId == MAX_SPRITES)
+        {
+            return MAX_SPRITES;
+        }
+        gSprites[spriteId].pos2.x = x + 4;
+        gSprites[spriteId].pos2.y = y + 4;
+    }
+    gSprites[spriteId].oam.priority = priority;
     return spriteId;
 }
