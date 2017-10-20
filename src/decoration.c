@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "decompress.h"
 #include "malloc.h"
 #include "string_util.h"
 #include "international_string_util.h"
@@ -30,6 +31,7 @@
 #include "tv.h"
 #include "secret_base.h"
 #include "tilesets.h"
+#include "item_icon.h"
 #include "decoration_inventory.h"
 #include "decoration.h"
 
@@ -116,6 +118,7 @@ void sub_8129020(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
 void sub_81292E8(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 decor);
+void *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_812A3C8(void);
@@ -1771,4 +1774,34 @@ u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 d
     sub_8129068(data->palette, ((u16 *)gTilesetPointer_SecretBaseRedCave->metatiles)[(data->decoration->tiles[0] * 8) + 7] >> 12);
     LoadSpritePalette(&gUnknown_085A72BC);
     return CreateSprite(&gUnknown_085A728C, 0, 0, 0);
+}
+
+u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
+{
+    struct SpriteSheet sheet;
+    struct CompressedSpritePalette palette;
+    struct SpriteTemplate *template;
+    u8 spriteId;
+
+    if (!AllocItemIconTemporaryBuffers())
+    {
+        return MAX_SPRITES;
+    }
+    LZDecompressWram(GetDecorationIconPicOrPalette(decor, 0), gUnknown_0203CEBC);
+    CopyItemIconPicTo4x4Buffer(gUnknown_0203CEBC, gUnknown_0203CEC0);
+    sheet.data = gUnknown_0203CEC0;
+    sheet.size = 0x200;
+    sheet.tag = tilesTag;
+    LoadSpriteSheet(&sheet);
+    palette.data = GetDecorationIconPicOrPalette(decor, 1);
+    palette.tag = paletteTag;
+    LoadCompressedObjectPalette(&palette);
+    template = malloc(sizeof(struct SpriteTemplate));
+    *template = gUnknown_08614FF4;
+    template->tileTag = tilesTag;
+    template->paletteTag = paletteTag;
+    spriteId = CreateSprite(template, 0, 0, 0);
+    FreeItemIconTemporaryBuffers();
+    free(template);
+    return spriteId;
 }
