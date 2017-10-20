@@ -147,6 +147,8 @@ extern const struct {
     u8 x;
     u8 y;
 } gUnknown_085A7250[];
+extern const struct SpriteTemplate gUnknown_085A728C;
+extern const struct SpritePalette gUnknown_085A72BC;
 
 // .text
 
@@ -1631,9 +1633,9 @@ void sub_8129048(struct UnkStruct_0203A190 *data)
     CpuFill16(0, data, sizeof(*data));
 }
 
-void sub_8129068(u16 *dest, u16 decor)
+void sub_8129068(u16 *dest, u16 pal)
 {
-    CpuFastCopy(&((u16 *)gTilesetPointer_SecretBase->palettes)[decor << 4], dest, 32);
+    CpuFastCopy(&((u16 *)gTilesetPointer_SecretBase->palettes)[pal << 4], dest, 32);
 }
 
 void sub_8129088(u8 *dest, u16 tile)
@@ -1752,4 +1754,21 @@ void sub_81292E8(struct Sprite *sprite)
     {
         sprite->invisible = FALSE;
     }
+}
+
+u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 decor)
+{
+    sub_8129048(data);
+    data->decoration = &gDecorations[decor];
+    if (data->decoration->permission == DECORPERM_SOLID_MAT)
+    {
+        return AddPseudoFieldObject(data->decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
+    }
+    FreeSpritePaletteByTag(0xBE5);
+    sub_81291E8(data);
+    sub_812925C(data->decoration->shape);
+    sub_81291A4(data);
+    sub_8129068(data->palette, ((u16 *)gTilesetPointer_SecretBaseRedCave->metatiles)[(data->decoration->tiles[0] * 8) + 7] >> 12);
+    LoadSpritePalette(&gUnknown_085A72BC);
+    return CreateSprite(&gUnknown_085A728C, 0, 0, 0);
 }

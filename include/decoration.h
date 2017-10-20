@@ -129,7 +129,7 @@ enum DecorPerm {
     /*
      * The nomenclature here describes collision and placement permissions, in that order.
      */
-        DECORPERM_SOLID_FLOOR,
+    DECORPERM_SOLID_FLOOR,
     DECORPERM_PASS_FLOOR,
     DECORPERM_BEHIND_FLOOR,
     DECORPERM_NA_WALL,
