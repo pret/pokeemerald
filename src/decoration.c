@@ -1473,3 +1473,14 @@ void sub_8128C64(u8 taskId)
             break;
     }
 }
+
+void sub_8128CD4(void)
+{
+    u8 taskId;
+
+    ScriptContext2_Enable();
+    pal_fill_black();
+    taskId = CreateTask(sub_8128C64, 8);
+    sub_8127580(taskId);
+    gTasks[taskId].data[2] = 0;
+}

@@ -5,32 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8128CD4
-sub_8128CD4: @ 8128CD4
-	push {r4,lr}
-	bl ScriptContext2_Enable
-	bl pal_fill_black
-	ldr r0, =sub_8128C64
-	movs r1, 0x8
-	bl CreateTask
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r4, 0
-	bl sub_8127580
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	movs r1, 0
-	strh r1, [r0, 0xC]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8128CD4
-
 	thumb_func_start sub_8128D10
 sub_8128D10: @ 8128D10
 	push {r4,lr}
