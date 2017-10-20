@@ -134,6 +134,12 @@ extern const struct YesNoFuncTable gUnknown_085A72D4[];
 extern const u8 gUnknown_085A72E4[];
 extern const u8 gUnknown_085A72EC[];
 extern const struct {
+    const u8 *tiles;
+    const u8 *y;
+    const u8 *x;
+    u8 size;
+} gUnknown_085A71B0[];
+extern const struct {
     u8 shape;
     u8 size;
     u8 x;
@@ -1628,18 +1634,18 @@ void sub_8129068(u16 *dest, u16 decor)
     CpuFastCopy(&((u16 *)gTilesetPointer_SecretBase->palettes)[decor << 4], dest, 32);
 }
 
-void sub_8129088(u8 *dest, u16 flags)
+void sub_8129088(u8 *dest, u16 tile)
 {
     u8 buffer[32];
     u16 mode;
     u16 i;
 
-    mode = flags >> 10;
-    if (flags != 0)
+    mode = tile >> 10;
+    if (tile != 0)
     {
-        flags &= 0x03FF;
+        tile &= 0x03FF;
     }
-    CpuFastCopy(&((u8 *)gTilesetPointer_SecretBase->tiles)[flags << 5], buffer, 32);
+    CpuFastCopy(&((u8 *)gTilesetPointer_SecretBase->tiles)[tile << 5], buffer, 32);
     switch (mode)
     {
         case 0:
@@ -1669,5 +1675,31 @@ void sub_8129088(u8 *dest, u16 flags)
                 dest[i] = (buffer[31 - i] >> 4) + ((buffer[31 - i] & 0x0F) << 4);
             }
             break;
+    }
+}
+
+void sub_81291A4(struct UnkStruct_0203A190 *data)
+{
+    u16 i;
+    for (i = 0; i < 64; i ++)
+    {
+        sub_8129088(&data->image[i * 32], data->tiles[i]);
+    }
+}
+
+u16 sub_81291CC(u16 tile)
+{
+    return ((u16 *)gTilesetPointer_SecretBaseRedCave->metatiles)[tile] & 0xFFF;
+}
+
+void sub_81291E8(struct UnkStruct_0203A190 *data)
+{
+    u8 i;
+    u8 shape;
+
+    shape = data->decoration->shape;
+    for (i = 0; i < gUnknown_085A71B0[shape].size; i ++)
+    {
+        data->tiles[gUnknown_085A71B0[shape].tiles[i]] = sub_81291CC(data->decoration->tiles[gUnknown_085A71B0[shape].y[i]] * 8 + gUnknown_085A71B0[shape].x[i]);
     }
 }

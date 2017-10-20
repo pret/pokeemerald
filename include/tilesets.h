@@ -8,5 +8,6 @@
 // Exported ROM declarations
 
 extern struct Tileset *gTilesetPointer_SecretBase;
+extern struct Tileset *gTilesetPointer_SecretBaseRedCave;
 
 #endif //GUARD_tilesets_H
