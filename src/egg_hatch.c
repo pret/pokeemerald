@@ -462,7 +462,7 @@ static void VBlankCB_EggHatch(void)
     TransferPlttBuffer();
 }
 
-static void EggHatch(void)
+void EggHatch(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_EggHatch, 10);
