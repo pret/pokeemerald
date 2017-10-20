@@ -1936,3 +1936,45 @@ void sub_8129708(void)
         }
     }
 }
+
+void sub_81297AC(void)
+{
+    u8 i;
+
+    for (i = 0; i < gMapHeader.events->mapObjectCount; i ++)
+    {
+        if (gMapHeader.events->mapObjects[i].flagId == gSpecialVar_0x8004)
+        {
+            gSpecialVar_0x8005 = gMapHeader.events->mapObjects[i].localId;
+            break;
+        }
+    }
+}
+
+void sub_81297F8(void)
+{
+    u8 i;
+    u8 y;
+    u8 x;
+    int posX;
+    int posY;
+    u8 perm;
+
+    for (i = 0; i < gUnknown_0203AAC4; i ++)
+    {
+        perm = gDecorations[gUnknown_0203A17C.items[gUnknown_0203AA44[i].idx]].permission;
+        posX = gUnknown_0203A17C.pos[gUnknown_0203AA44[i].idx] >> 4;
+        posY = gUnknown_0203A17C.pos[gUnknown_0203AA44[i].idx] & 0x0F;
+        if (perm != DECORPERM_SOLID_MAT)
+        {
+            for (y = 0; y < gUnknown_0203AA44[i].height; y ++)
+            {
+                for (x = 0; x < gUnknown_0203AA44[i].width; x ++)
+                {
+                    MapGridSetMetatileEntryAt(posX + 7 + x, posY + 7 - y, gMapHeader.mapData->map[posX + x + gMapHeader.mapData->width * (posY - y)] | 0x3000);
+                }
+            }
+            sub_81296EC(gUnknown_0203AA44[i].idx);
+        }
+    }
+}
