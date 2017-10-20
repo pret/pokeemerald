@@ -372,7 +372,7 @@ struct UnkSummaryStruct
 void sub_81BF8EC(u8 a, void *b, u8 c, u8 d, void *e)
 {
     u8 byte;
-    gUnknown_0203CF1C = AllocZeroed(0x40F8);
+    gUnknown_0203CF1C = AllocZeroed(sizeof(struct UnkSummaryStruct));
     gUnknown_0203CF1C->unk40BC = a;
     gUnknown_0203CF1C->unk0 = b;
     gUnknown_0203CF1C->unk40BE = c;
