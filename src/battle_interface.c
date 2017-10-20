@@ -19,6 +19,7 @@
 #include "palette.h"
 #include "international_string_util.h"
 #include "safari_zone.h"
+#include "battle_anim.h"
 
 enum
 {
@@ -226,7 +227,7 @@ static u8 sub_8074E8C(s32 maxValue, s32 currValue, s32 arg2, s32 *arg3, u8 *arg4
 static void sub_8074F88(struct TestingBar *barInfo, s32 *arg1, u16 *arg2);
 
 // const rom data
-static const struct OamData gUnknown_0832C138 =
+static const struct OamData sUnknown_0832C138 =
 {
     .y = 0,
     .affineMode = 0,
@@ -248,7 +249,7 @@ static const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[2] =
     {
         .tileTag = TAG_HEALTHBOX_PLAYER1_TILE,
         .paletteTag = TAG_HEALTHBOX_PAL,
-        .oam = &gUnknown_0832C138,
+        .oam = &sUnknown_0832C138,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -257,7 +258,7 @@ static const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[2] =
     {
         .tileTag = TAG_HEALTHBOX_PLAYER2_TILE,
         .paletteTag = TAG_HEALTHBOX_PAL,
-        .oam = &gUnknown_0832C138,
+        .oam = &sUnknown_0832C138,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -270,7 +271,7 @@ static const struct SpriteTemplate sHealthboxOpponentSpriteTemplates[2] =
     {
         .tileTag = TAG_HEALTHBOX_OPPONENT1_TILE,
         .paletteTag = TAG_HEALTHBOX_PAL,
-        .oam = &gUnknown_0832C138,
+        .oam = &sUnknown_0832C138,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -279,7 +280,7 @@ static const struct SpriteTemplate sHealthboxOpponentSpriteTemplates[2] =
     {
         .tileTag = TAG_HEALTHBOX_OPPONENT2_TILE,
         .paletteTag = TAG_HEALTHBOX_PAL,
-        .oam = &gUnknown_0832C138,
+        .oam = &sUnknown_0832C138,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -291,14 +292,14 @@ static const struct SpriteTemplate sHealthboxSafariSpriteTemplate =
 {
     .tileTag = TAG_HEALTHBOX_SAFARI_TILE,
     .paletteTag = TAG_HEALTHBOX_PAL,
-    .oam = &gUnknown_0832C138,
+    .oam = &sUnknown_0832C138,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gUnknown_0832C1B8 =
+static const struct OamData sUnknown_0832C1B8 =
 {
     .y = 0,
     .affineMode = 0,
@@ -315,12 +316,12 @@ static const struct OamData gUnknown_0832C1B8 =
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate gUnknown_0832C1C0[4] =
+static const struct SpriteTemplate sUnknown_0832C1C0[4] =
 {
     {
         .tileTag = 0xd704,
         .paletteTag = 0xd704,
-        .oam = &gUnknown_0832C1B8,
+        .oam = &sUnknown_0832C1B8,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -329,7 +330,7 @@ static const struct SpriteTemplate gUnknown_0832C1C0[4] =
     {
         .tileTag = 0xd705,
         .paletteTag = 0xd704,
-        .oam = &gUnknown_0832C1B8,
+        .oam = &sUnknown_0832C1B8,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -338,7 +339,7 @@ static const struct SpriteTemplate gUnknown_0832C1C0[4] =
     {
         .tileTag = 0xd706,
         .paletteTag = 0xd704,
-        .oam = &gUnknown_0832C1B8,
+        .oam = &sUnknown_0832C1B8,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -347,7 +348,7 @@ static const struct SpriteTemplate gUnknown_0832C1C0[4] =
     {
         .tileTag = 0xd707,
         .paletteTag = 0xd704,
-        .oam = &gUnknown_0832C1B8,
+        .oam = &sUnknown_0832C1B8,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -421,7 +422,7 @@ static const struct Subsprite sStatusSummaryBar_Subsprites_0[] =
     {0,     0,  1,  1,  12,     1}
 };
 
-static const struct Subsprite gUnknown_0832C2AC[] =
+static const struct Subsprite sUnknown_0832C2AC[] =
 {
     {160,   0,  1,  1,  0,      1},
     {192,   0,  1,  1,  4,      1},
@@ -436,23 +437,13 @@ static const struct SubspriteTable sStatusSummaryBar_SubspriteTable[] =
     {ARRAY_COUNT(sStatusSummaryBar_Subsprites_0), sStatusSummaryBar_Subsprites_0}
 };
 
-static const struct SubspriteTable gUnknown_0832C2CC[] =
+static const struct SubspriteTable sUnknown_0832C2CC[] =
 {
-    {ARRAY_COUNT(gUnknown_0832C2AC), gUnknown_0832C2AC}
+    {ARRAY_COUNT(sUnknown_0832C2AC), sUnknown_0832C2AC}
 };
 
-// unused unknown data
-static const u16 gUnknown_0832C2D4[] =
-{
-    0x0000, 0x0000, 0x3333, 0x3333, 0x4444, 0x4444, 0x2222, 0x2222,
-    0x7777, 0x7777, 0x7777, 0x7777, 0x7777, 0x7777, 0x7777, 0x7777,
-
-    0x0000, 0x0000, 0x3333, 0x3333, 0x4444, 0x4444, 0x2222, 0x2222,
-    0x7777, 0x7777, 0x7777, 0x7717, 0x1777, 0x7177, 0x7777, 0x7771,
-
-    0x0000, 0x0000, 0x3333, 0x3333, 0x4444, 0x4444, 0x2222, 0x2222,
-    0x7777, 0x7777, 0x7777, 0x7111, 0x7777, 0x7171, 0x7777, 0x7111,
-};
+// unused unknown image
+static const u8 sUnknown_0832C2D4[] = INCBIN_U8("graphics/battle_interface/unknown_32C2D4.4bpp");
 
 static const struct CompressedSpriteSheet sStatusSummaryBarSpriteSheet =
 {
@@ -492,7 +483,7 @@ static const struct OamData sUnknown_0832C354 =
     .affineParam = 0,
 };
 
-static const struct OamData sOamData_StatusSummayBalls =
+static const struct OamData sOamData_StatusSummaryBalls =
 {
     .y = 0,
     .affineMode = 0,
@@ -514,7 +505,7 @@ static const struct SpriteTemplate sStatusSummaryBarSpriteTemplates[2] =
     {
         .tileTag = TAG_STATUS_SUMMARY_BAR_TILE,
         .paletteTag = TAG_STATUS_SUMMARY_BAR_PAL,
-        .oam = &gUnknown_0832C138,
+        .oam = &sUnknown_0832C138,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -523,7 +514,7 @@ static const struct SpriteTemplate sStatusSummaryBarSpriteTemplates[2] =
     {
         .tileTag = TAG_STATUS_SUMMARY_BAR_TILE,
         .paletteTag = TAG_STATUS_SUMMARY_BAR_PAL,
-        .oam = &gUnknown_0832C138,
+        .oam = &sUnknown_0832C138,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -536,7 +527,7 @@ static const struct SpriteTemplate sStatusSummaryBallsSpriteTemplates[2] =
     {
         .tileTag = TAG_STATUS_SUMMARY_BALLS_TILE,
         .paletteTag = TAG_STATUS_SUMMARY_BALLS_PAL,
-        .oam = &sOamData_StatusSummayBalls,
+        .oam = &sOamData_StatusSummaryBalls,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -545,7 +536,7 @@ static const struct SpriteTemplate sStatusSummaryBallsSpriteTemplates[2] =
     {
         .tileTag = TAG_STATUS_SUMMARY_BALLS_TILE,
         .paletteTag = TAG_STATUS_SUMMARY_BALLS_PAL,
-        .oam = &sOamData_StatusSummayBalls,
+        .oam = &sOamData_StatusSummaryBalls,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -554,7 +545,7 @@ static const struct SpriteTemplate sStatusSummaryBallsSpriteTemplates[2] =
 };
 
 // possibly text
-static const u8 gUnknown_0832C3C4[] =
+static const u8 sUnknown_0832C3C4[] =
 {
     0xfc, 0x01, 0x01, 0xfc, 0x02, 0x02, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -562,7 +553,7 @@ static const u8 gUnknown_0832C3C4[] =
 };
 
 // possibly text
-static const u8 gUnknown_0832C3D8[] =
+static const u8 sUnknown_0832C3D8[] =
 {
     0xfc, 0x01, 0x01, 0xfc, 0x02, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -982,7 +973,7 @@ u8 CreateBankHealthboxSprites(u8 bank)
         }
     }
 
-    unkSpriteId = CreateSpriteAtEnd(&gUnknown_0832C1C0[gBanksByIdentity[bank]], 140, 60, 0);
+    unkSpriteId = CreateSpriteAtEnd(&sUnknown_0832C1C0[gBanksByIdentity[bank]], 140, 60, 0);
     unkSpritePtr = &gSprites[unkSpriteId];
     SetSubspriteTables(unkSpritePtr, &sUnknown_0832C28C[GetBankSide(bank)]);
     unkSpritePtr->subspriteMode = 2;
@@ -1234,7 +1225,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
     {
         u8 bank;
 
-        memcpy(text, gUnknown_0832C3C4, sizeof(gUnknown_0832C3C4));
+        memcpy(text, sUnknown_0832C3C4, sizeof(sUnknown_0832C3C4));
         bank = gSprites[healthboxSpriteId].data6;
         if (IsDoubleBattle() == TRUE || GetBankSide(bank) == SIDE_OPPONENT)
         {
@@ -1313,7 +1304,7 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
     {
         u8 bank;
 
-        memcpy(text, gUnknown_0832C3D8, sizeof(gUnknown_0832C3D8));
+        memcpy(text, sUnknown_0832C3D8, sizeof(sUnknown_0832C3D8));
         bank = gSprites[healthboxSpriteId].data6;
 
         if (gBattleSpritesDataPtr->bankData[bank].hpNumbersNoBars) // don't print text if only bars are visible
@@ -1375,7 +1366,7 @@ static void sub_80730D4(u8 healthboxSpriteId, struct Pokemon *mon)
     u8 *fontPixels;
     u8 i, var, nature, healthboxSpriteId_2;
 
-    memcpy(text, gUnknown_0832C3C4, sizeof(gUnknown_0832C3C4));
+    memcpy(text, sUnknown_0832C3C4, sizeof(sUnknown_0832C3C4));
     fontPixels = &gMonSpritesGfxPtr->fontPixels[0x520 + (GetBankIdentity(gSprites[healthboxSpriteId].data6) * 384)];
     var = 5;
     nature = GetNature(mon);
@@ -1752,7 +1743,7 @@ void sub_8073C30(u8 taskId)
         gSprites[r10].data0 /= 2;
         gSprites[r10].data1 = 0;
         gSprites[r10].callback = sub_8074090;
-        SetSubspriteTables(&gSprites[r10], gUnknown_0832C2CC);
+        SetSubspriteTables(&gSprites[r10], sUnknown_0832C2CC);
         gTasks[taskId].func = sub_8073E08;
     }
     else
@@ -1898,9 +1889,9 @@ static void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite *sprite)
 
     if (sprite->pos2.x == 0)
     {
-        pan = 63;
+        pan = PAN_SIDE_OPPONENT;
         if (var1 != 0)
-            pan = -64;
+            pan = PAN_SIDE_PLAYER;
 
         if (sprite->data7 != 0)
             PlaySE2WithPanning(SE_TB_KARA, pan);
