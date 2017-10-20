@@ -140,7 +140,7 @@ enum DecorShape {
     /*
      * Width-x-height
      */
-        DECORSHAPE_1x1,
+    DECORSHAPE_1x1,
     DECORSHAPE_2x1,
     DECORSHAPE_3x1, // unused
     DECORSHAPE_4x2,

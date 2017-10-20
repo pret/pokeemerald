@@ -134,6 +134,7 @@ extern void (*const gUnknown_085A6B78[][2])(u8 taskId);
 extern const u16 gUnknown_085A6BB0[];
 extern const struct ListMenuTemplate gUnknown_085A6BD0;
 extern const void *const gUnknown_085A6BE8[][2];
+extern const struct SpriteTemplate gUnknown_085A72A4;
 extern const struct YesNoFuncTable gUnknown_085A72C4;
 extern const struct YesNoFuncTable gUnknown_085A72CC;
 extern const struct YesNoFuncTable gUnknown_085A72D4[];
@@ -153,6 +154,7 @@ extern const struct {
 } gUnknown_085A7250[];
 extern const struct SpriteTemplate gUnknown_085A728C;
 extern const struct SpritePalette gUnknown_085A72BC;
+extern const u16 gUnknown_085A72F4[];
 
 // .text
 
@@ -1814,4 +1816,40 @@ const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
         decor = 0;
     }
     return gUnknown_085A6BE8[decor][mode];
+}
+
+u8 AddDecorationIconObjectFromFieldObject(u16 tilesTag, u16 paletteTag, u8 decor)
+{
+    u8 spriteId;
+    struct SpriteSheet sheet;
+    struct SpritePalette palette;
+    struct SpriteTemplate *template;
+
+    sub_8129048(&gUnknown_0203A190);
+    gUnknown_0203A190.decoration = &gDecorations[decor];
+    if (gUnknown_0203A190.decoration->permission != DECORPERM_SOLID_MAT)
+    {
+        sub_81291E8(&gUnknown_0203A190);
+        sub_812925C(gUnknown_0203A190.decoration->shape);
+        sub_81291A4(&gUnknown_0203A190);
+        sub_8129068(gUnknown_0203A190.palette, ((u16 *)gTilesetPointer_SecretBaseRedCave->metatiles)[(gUnknown_0203A190.decoration->tiles[0] * 8) + 7] >> 12);
+        sheet.data = gUnknown_0203A190.image;
+        sheet.size = gUnknown_085A72F4[gUnknown_0203A190.decoration->shape] << 5;
+        sheet.tag = tilesTag;
+        LoadSpriteSheet(&sheet);
+        palette.data = gUnknown_0203A190.palette;
+        palette.tag = paletteTag;
+        LoadSpritePalette(&palette);
+        template = Alloc(sizeof(struct SpriteTemplate));
+        *template = gUnknown_085A72A4;
+        template->tileTag = tilesTag;
+        template->paletteTag = paletteTag;
+        spriteId = CreateSprite(template, 0, 0, 0);
+        free(template);
+    }
+    else
+    {
+        spriteId = AddPseudoFieldObject(gUnknown_0203A190.decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
+    }
+    return spriteId;
 }
