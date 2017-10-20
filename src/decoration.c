@@ -100,6 +100,9 @@ void sub_8128060(u8 taskId);
 void ConfigureCameraObjectForPlacingDecoration(struct UnkStruct_0203A190 *data, u8 decor);
 void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_0203A190 *data);
 void sub_812826C(u8 taskId);
+void sub_8128950(u8 taskId);
+void sub_8128B80(u8 taskId);
+void sub_8128DE0(void);
 void sub_8128FD8(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 decor);
@@ -1122,4 +1125,23 @@ void sub_812826C(u8 taskId)
             gTasks[taskId].data[6] = 2;
             break;
     }
+}
+
+void sub_81283BC(u8 taskId)
+{
+    gTasks[taskId].data[10] = 0;
+    gSprites[gUnknown_0203AA38].data7 = 1;
+    gSprites[gUnknown_0203AA39].data7 = 1;
+    sub_8128DE0();
+    sub_8128950(taskId);
+}
+
+void sub_8128414(u8 taskId)
+{
+    gTasks[taskId].data[10] = 0;
+    gSprites[gUnknown_0203AA38].data7 = 1;
+    gSprites[gUnknown_0203AA39].data7 = 1;
+    sub_8128DE0();
+    StringExpandPlaceholders(gStringVar4, gText_CancelDecorating);
+    DisplayItemMessageOnField(taskId, gStringVar4, sub_8128B80);
 }
