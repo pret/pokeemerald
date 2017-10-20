@@ -92,10 +92,7 @@ void sub_8127744(u32 a0);
 void sub_81277A8(void);
 bool8 sub_81277BC(u8 idx);
 bool8 sub_81277E8(u8 idx);
-bool8 sub_81299AC(u8 taskId);
 void sub_81279B4(u8 taskId);
-void sub_8129ABC(u8 taskId);
-void sub_8133E1C(u8 taskId);
 void sub_812759C(u8 taskId);
 void sub_8127718(u8 decorCat);
 void sub_8128060(u8 taskId);
@@ -107,11 +104,15 @@ void sub_81289D0(u8 taskId);
 void sub_8128AAC(u8 taskId);
 void sub_8128B80(u8 taskId);
 void sub_8128BBC(u8 taskId);
+void c1_overworld_prev_quest(u8 taskId);
 void sub_8128DE0(void);
 void sub_8128FD8(u8 taskId);
 void sub_8129020(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 decor);
+bool8 sub_81299AC(u8 taskId);
+void sub_8129ABC(u8 taskId);
+void sub_8133E1C(u8 taskId);
 
 // .rodata
 
@@ -121,8 +122,9 @@ extern const struct MenuAction gUnknown_085A6B48[];
 extern const u8 *const gUnknown_085A6B68[];
 extern void (*const gUnknown_085A6B78[][2])(u8 taskId);
 extern const u16 gUnknown_085A6BB0[];
-extern const struct YesNoFuncTable gUnknown_085A72C4;
 extern const struct ListMenuTemplate gUnknown_085A6BD0;
+extern const struct YesNoFuncTable gUnknown_085A72C4;
+extern const struct YesNoFuncTable gUnknown_085A72CC;
 extern const u8 gUnknown_085A72E4[];
 extern const u8 gUnknown_085A72EC[];
 extern const struct {
@@ -1398,4 +1400,23 @@ void sub_8128AAC(u8 taskId)
             }
         }
     }
+}
+
+void sub_8128B80(u8 taskId)
+{
+    sub_8197930();
+    sub_8121F68(taskId, &gUnknown_085A72CC);
+}
+
+void sub_8128BA0(u8 taskId)
+{
+    sub_8197434(0, 0);
+    sub_8128BBC(taskId);
+}
+
+void sub_8128BBC(u8 taskId)
+{
+    fade_screen(1, 0);
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].func = c1_overworld_prev_quest;
 }

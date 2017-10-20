@@ -5,62 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8128B80
-sub_8128B80: @ 8128B80
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl sub_8197930
-	ldr r1, =gUnknown_085A72CC
-	adds r0, r4, 0
-	bl sub_8121F68
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8128B80
-
-	thumb_func_start sub_8128BA0
-sub_8128BA0: @ 8128BA0
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0
-	movs r1, 0
-	bl sub_8197434
-	adds r0, r4, 0
-	bl sub_8128BBC
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8128BA0
-
-	thumb_func_start sub_8128BBC
-sub_8128BBC: @ 8128BBC
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x1
-	movs r1, 0
-	bl fade_screen
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	movs r1, 0
-	strh r1, [r0, 0xC]
-	ldr r1, =c1_overworld_prev_quest
-	str r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8128BBC
-
 	thumb_func_start c1_overworld_prev_quest
 c1_overworld_prev_quest: @ 8128BEC
 	push {r4,r5,lr}
