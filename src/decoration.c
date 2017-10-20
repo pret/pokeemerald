@@ -129,6 +129,7 @@ extern const u16 gUnknown_085A6BB0[];
 extern const struct ListMenuTemplate gUnknown_085A6BD0;
 extern const struct YesNoFuncTable gUnknown_085A72C4;
 extern const struct YesNoFuncTable gUnknown_085A72CC;
+extern const struct YesNoFuncTable gUnknown_085A72D4[];
 extern const u8 gUnknown_085A72E4[];
 extern const u8 gUnknown_085A72EC[];
 extern const struct {
@@ -1524,4 +1525,78 @@ bool8 sub_8128DB4(void)
         return FALSE;
     }
     return TRUE;
+}
+
+void sub_8128DE0(void)
+{
+    gUnknown_0203AA3A = 0;
+    gSprites[gUnknown_0203AA38].data2 = 0;
+    gSprites[gUnknown_0203AA38].data3 = 0;
+}
+
+void sub_8128E18(u8 taskId)
+{
+    s16 *data;
+    
+    data = gTasks[taskId].data;
+    if (!gSprites[gUnknown_0203AA38].data4)
+    {
+        if (data[10] == 1)
+        {
+            gUnknown_085A72D4[data[12]].yesFunc(taskId);
+            return;
+        } else if (data[10] == 2)
+        {
+            gUnknown_085A72D4[data[12]].noFunc(taskId);
+            return;
+        }
+        if ((gMain.heldKeys & 0x0F0) == DPAD_UP)
+        {
+            gUnknown_0203AA3A = DIR_SOUTH;
+            gSprites[gUnknown_0203AA38].data2 =  0;
+            gSprites[gUnknown_0203AA38].data3 = -2;
+            data[1]--;
+        }
+        if ((gMain.heldKeys & 0x0F0) == DPAD_DOWN)
+        {
+            gUnknown_0203AA3A = DIR_NORTH;
+            gSprites[gUnknown_0203AA38].data2 =  0;
+            gSprites[gUnknown_0203AA38].data3 =  2;
+            data[1]++;
+        }
+        if ((gMain.heldKeys & 0x0F0) == DPAD_LEFT)
+        {
+            gUnknown_0203AA3A = DIR_WEST;
+            gSprites[gUnknown_0203AA38].data2 = -2;
+            gSprites[gUnknown_0203AA38].data3 =  0;
+            data[0]--;
+        }
+        if ((gMain.heldKeys & 0x0F0) == DPAD_RIGHT)
+        {
+            gUnknown_0203AA3A = DIR_EAST;
+            gSprites[gUnknown_0203AA38].data2 =  2;
+            gSprites[gUnknown_0203AA38].data3 =  0;
+            data[0]++;
+        }
+        if (!sub_8128DB4() || !sub_8128D10(taskId))
+        {
+            sub_8128DE0();
+        }
+    }
+    if (gUnknown_0203AA3A)
+    {
+        gSprites[gUnknown_0203AA38].data4++;
+        gSprites[gUnknown_0203AA38].data4 &= 7;
+    }
+    if (!data[10])
+    {
+        if (gMain.newKeys & A_BUTTON)
+        {
+            data[10] = A_BUTTON;
+        }
+        if (gMain.newKeys & B_BUTTON)
+        {
+            data[10] = B_BUTTON;
+        }
+    }
 }
