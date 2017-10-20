@@ -1513,3 +1513,15 @@ bool8 sub_8128D10(u8 taskId)
     }
     return TRUE;
 }
+
+bool8 sub_8128DB4(void)
+{
+    u16 heldKeys;
+
+    heldKeys = gMain.heldKeys & 0x0F0;
+    if (heldKeys != DPAD_UP && heldKeys != DPAD_DOWN && heldKeys != DPAD_LEFT && heldKeys != DPAD_RIGHT)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}

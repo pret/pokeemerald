@@ -5,31 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8128DB4
-sub_8128DB4: @ 8128DB4
-	push {lr}
-	ldr r0, =gMain
-	ldrh r0, [r0, 0x2C]
-	movs r1, 0xF0
-	ands r1, r0
-	cmp r1, 0x40
-	beq _08128DD8
-	cmp r1, 0x80
-	beq _08128DD8
-	cmp r1, 0x20
-	beq _08128DD8
-	cmp r1, 0x10
-	beq _08128DD8
-	movs r0, 0
-	b _08128DDA
-	.pool
-_08128DD8:
-	movs r0, 0x1
-_08128DDA:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8128DB4
-
 	thumb_func_start sub_8128DE0
 sub_8128DE0: @ 8128DE0
 	push {r4,lr}
