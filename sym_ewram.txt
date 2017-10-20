@@ -1105,8 +1105,7 @@ gUnknown_0203A12C: @ 203A12C
 gUnknown_0203A130: @ 203A130
 	.space 0x4
 
-gUnknown_0203A134: @ 203A134
-	.space 0x4
+    .include "src/mail.o"
 
 gUnknown_0203A138: @ 203A138
 	.space 0x8

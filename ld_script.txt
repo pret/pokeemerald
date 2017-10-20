@@ -164,7 +164,7 @@ SECTIONS {
         asm/easy_chat.o(.text);
         asm/mon_markings.o(.text);
         asm/mauville_old_man.o(.text);
-        asm/mail.o(.text);
+        src/mail.o(.text);
         asm/menu_helpers.o(.text);
         asm/dewford_trend.o(.text);
         asm/heal_location.o(.text);
@@ -403,7 +403,7 @@ SECTIONS {
         data/easy_chat.o(.rodata);
         data/mon_markings.o(.rodata);
         data/mauville_old_man.o(.rodata);
-        data/mail.o(.rodata);
+        src/mail.o(.rodata);
         data/menu_helpers.o(.rodata);
         data/heal_location.o(.rodata);
         data/region_map.o(.rodata);
