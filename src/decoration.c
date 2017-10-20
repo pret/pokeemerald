@@ -128,6 +128,7 @@ u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 d
 const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
+void sub_8129B34(u8 taskId);
 void sub_812A39C(void);
 void sub_812A3C8(void);
 void sub_8129D64(u8 taskId);
@@ -2051,4 +2052,35 @@ void SetUpPuttingAwayDecorationPlayerAvatar(void)
     DestroySprite(&gSprites[gUnknown_0203AA38]);
     gUnknown_0203AA38 = gUnknown_03005DD0.unk4;
     gSprites[gUnknown_0203AA38].oam.priority = 1;
+}
+
+void sub_8129ABC(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    switch (data[2])
+    {
+        case 0:
+            if (!gPaletteFade.active)
+            {
+                sub_8127ACC(taskId);
+                data[2] = 1;
+                data[6] = 1;
+                data[5] = 1;
+            }
+            break;
+        case 1:
+            SetUpPuttingAwayDecorationPlayerAvatar();
+            pal_fill_black();
+            data[2] = 2;
+            break;
+        case 2:
+            if (sub_80ABDFC() == TRUE)
+            {
+                data[12] = 1;
+                sub_8129B34(taskId);
+            }
+            break;
+    }
 }

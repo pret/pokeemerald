@@ -5,66 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8129ABC
-sub_8129ABC: @ 8129ABC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r4, r0, r1
-	movs r1, 0x4
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x1
-	beq _08129B0C
-	cmp r0, 0x1
-	bgt _08129AE4
-	cmp r0, 0
-	beq _08129AEA
-	b _08129B2E
-	.pool
-_08129AE4:
-	cmp r0, 0x2
-	beq _08129B1A
-	b _08129B2E
-_08129AEA:
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08129B2E
-	adds r0, r5, 0
-	bl sub_8127ACC
-	movs r0, 0x1
-	strh r0, [r4, 0x4]
-	strh r0, [r4, 0xC]
-	strh r0, [r4, 0xA]
-	b _08129B2E
-	.pool
-_08129B0C:
-	bl SetUpPuttingAwayDecorationPlayerAvatar
-	bl pal_fill_black
-	movs r0, 0x2
-	strh r0, [r4, 0x4]
-	b _08129B2E
-_08129B1A:
-	bl sub_80ABDFC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08129B2E
-	strh r0, [r4, 0x18]
-	adds r0, r5, 0
-	bl sub_8129B34
-_08129B2E:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8129ABC
-
 	thumb_func_start sub_8129B34
 sub_8129B34: @ 8129B34
 	push {r4-r6,lr}
