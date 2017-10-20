@@ -70,6 +70,7 @@ extern EWRAM_DATA u16 gUnknown_0203AA36;
 extern EWRAM_DATA u8 gUnknown_0203AA38;
 extern EWRAM_DATA u8 gUnknown_0203AA39;
 extern EWRAM_DATA u8 gUnknown_0203AA3A;
+extern EWRAM_DATA struct OamData gUnknown_0203AA3C;
 
 // Static ROM declarations
 
@@ -1702,4 +1703,20 @@ void sub_81291E8(struct UnkStruct_0203A190 *data)
     {
         data->tiles[gUnknown_085A71B0[shape].tiles[i]] = sub_81291CC(data->decoration->tiles[gUnknown_085A71B0[shape].y[i]] * 8 + gUnknown_085A71B0[shape].x[i]);
     }
+}
+
+void sub_812925C(u8 decoShape)
+{
+    gUnknown_0203AA3C.y = 0;
+    gUnknown_0203AA3C.affineMode = ST_OAM_AFFINE_OFF;
+    gUnknown_0203AA3C.objMode = ST_OAM_OBJ_NORMAL;
+    gUnknown_0203AA3C.mosaic = 0;
+    gUnknown_0203AA3C.bpp = ST_OAM_4BPP;
+    gUnknown_0203AA3C.shape = gUnknown_085A7250[decoShape].shape;
+    gUnknown_0203AA3C.x = 0;
+    gUnknown_0203AA3C.matrixNum = 0;
+    gUnknown_0203AA3C.size = gUnknown_085A7250[decoShape].size;
+    gUnknown_0203AA3C.tileNum = 0;
+    gUnknown_0203AA3C.priority = 0;
+    gUnknown_0203AA3C.paletteNum = 0;
 }

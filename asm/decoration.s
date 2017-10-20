@@ -5,61 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_812925C
-sub_812925C: @ 812925C
-	push {r4,r5,lr}
-	lsls r0, 24
-	ldr r3, =gUnknown_0203AA3C
-	movs r1, 0
-	strb r1, [r3]
-	ldrb r2, [r3, 0x1]
-	subs r1, 0x4
-	ands r1, r2
-	movs r5, 0xD
-	negs r5, r5
-	ands r1, r5
-	movs r2, 0x11
-	negs r2, r2
-	ands r1, r2
-	subs r2, 0x10
-	ands r1, r2
-	strb r1, [r3, 0x1]
-	ldr r1, =gUnknown_085A7250
-	lsrs r0, 22
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r4, 0x3F
-	lsls r1, 6
-	strb r1, [r3, 0x1]
-	ldrh r2, [r3, 0x2]
-	ldr r1, =0xfffffe00
-	ands r1, r2
-	strh r1, [r3, 0x2]
-	ldrb r2, [r3, 0x3]
-	movs r1, 0x3F
-	negs r1, r1
-	ands r1, r2
-	strb r1, [r3, 0x3]
-	ldrb r0, [r0, 0x1]
-	lsls r0, 6
-	ands r4, r1
-	orrs r4, r0
-	strb r4, [r3, 0x3]
-	ldrh r1, [r3, 0x4]
-	ldr r0, =0xfffffc00
-	ands r0, r1
-	strh r0, [r3, 0x4]
-	ldrb r0, [r3, 0x5]
-	ands r5, r0
-	movs r0, 0xF
-	ands r5, r0
-	strb r5, [r3, 0x5]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_812925C
-
 	thumb_func_start sub_81292D0
 sub_81292D0: @ 81292D0
 	movs r1, 0
