@@ -106,6 +106,8 @@ void sub_812719C(u8 taskId);
 void sub_81271CC(u8 taskId);
 void sub_8127268(u8 taskId);
 void sub_8127454(u8 *dest, u16 decorId);
+void sub_8127480(u32 a0, bool8 flag, struct ListMenu *menu);
+void sub_81274A0(u8 a0, s32 a1, u8 a2);
 void sub_8127620(u8 taskId);
 void sub_812764C(u8 taskId);
 void sub_8127744(u32 a0);
@@ -197,9 +199,30 @@ void (*const gUnknown_085A6B78[][2])(u8 taskId) = {
         sub_8133DA0, sub_8127A8C
    }
 };
-extern const struct WindowTemplate gUnknown_085A6B90[4];
-extern const u16 gUnknown_085A6BB0[];
-extern const struct ListMenuTemplate gUnknown_085A6BD0;
+
+const struct WindowTemplate gUnknown_085A6B90[4] = {
+    { 0,  1,  1, 18,  8, 15, 0x0001 },
+    { 0,  1,  1, 13, 18, 13, 0x0091 },
+    { 0, 17,  1, 12,  2, 15, 0x017b },
+    { 0, 16, 13, 13,  6, 15, 0x0193 }
+};
+
+const u16 gUnknown_085A6BB0[] = {
+    0x532e, 0x7fff, 0x318c, 0x675a,
+    0x739c, 0x6318, 0x0000, 0x77bd,
+    0x6318, 0x4a52, 0x001f, 0x0016,
+    0x631f, 0x7d4a, 0x58c6, 0x7f18
+};
+
+const struct ListMenuTemplate gUnknown_085A6BD0 = {
+    NULL,
+    sub_8127480,
+    sub_81274A0,
+    0, 0,
+    0, 0, 8, 0,
+    9, 2, 1, 3, FALSE, 0, FALSE, 7
+};
+
 extern const void *const gUnknown_085A6BE8[][2];
 extern const struct {
     const u8 *tiles;
