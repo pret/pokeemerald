@@ -52,6 +52,13 @@ struct UnkStruct_0203A190 {
     /*0x884; 0x0203aa14*/ u16 palette[16];
 };
 
+struct UnkStruct_0203AA44 {
+u8 idx;
+u8 width;
+u8 height;
+u16 flagId;
+};
+
 // Static RAM declarations
 
 extern EWRAM_DATA u8 *gUnknown_0203A14C;
@@ -73,12 +80,7 @@ extern EWRAM_DATA u8 gUnknown_0203AA38;
 extern EWRAM_DATA u8 gUnknown_0203AA39;
 extern EWRAM_DATA u8 gUnknown_0203AA3A;
 extern EWRAM_DATA struct OamData gUnknown_0203AA3C;
-extern EWRAM_DATA struct {
-    u8 idx;
-    u8 width;
-    u8 height;
-    u16 flagId;
-} gUnknown_0203AA44[];
+extern EWRAM_DATA struct UnkStruct_0203AA44 gUnknown_0203AA44[];
 extern EWRAM_DATA u8 gUnknown_0203AAC4;
 
 // Static ROM declarations
@@ -2146,5 +2148,58 @@ void sub_8129C74(u8 taskId)
             StringExpandPlaceholders(gStringVar4, gText_NoDecorationHere);
             DisplayItemMessageOnField(taskId, gStringVar4, sub_8129D64);
         }
+    }
+}
+
+void sub_8129D64(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        sub_8129B34(taskId);
+    }
+}
+
+void sub_8129D8C(u8 decor, struct UnkStruct_0203AA44 *data)
+{
+    if (gDecorations[decor].shape == DECORSHAPE_1x1)
+    {
+        data->width = 1;
+        data->height = 1;
+    } else if (gDecorations[decor].shape == DECORSHAPE_2x1)
+    {
+        data->width = 2;
+        data->height = 1;
+    } else if (gDecorations[decor].shape == DECORSHAPE_3x1)
+    {
+        data->width = 3;
+        data->height = 1;
+    } else if (gDecorations[decor].shape == DECORSHAPE_4x2)
+    {
+        data->width = 4;
+        data->height = 2;
+    } else if (gDecorations[decor].shape == DECORSHAPE_2x2)
+    {
+        data->width = 2;
+        data->height = 2;
+    } else if (gDecorations[decor].shape == DECORSHAPE_1x2)
+    {
+        data->width = 1;
+        data->height = 2;
+    } else if (gDecorations[decor].shape == DECORSHAPE_1x3)
+    {
+        data->width = 1;
+        data->height = 3;
+    } else if (gDecorations[decor].shape == DECORSHAPE_2x4)
+    {
+        data->width = 2;
+        data->height = 4;
+    } else if (gDecorations[decor].shape == DECORSHAPE_3x3)
+    {
+        data->width = 3;
+        data->height = 3;
+    } else if (gDecorations[decor].shape == DECORSHAPE_3x2)
+    {
+        data->width = 3;
+        data->height = 2;
     }
 }
