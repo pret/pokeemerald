@@ -2478,3 +2478,31 @@ void sub_812A25C(u8 taskId)
             break;
     }
 }
+
+void sub_812A2C4(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    switch (data[2])
+    {
+        case 0:
+            sub_80E9578();
+            data[2] ++;
+            break;
+        case 1:
+            ScriptContext1_SetupScript(gUnknown_08275D0C);
+            data[2] ++;
+            break;
+        case 2:
+            ScriptContext2_Enable();
+            data[2] ++;
+            break;
+        case 3:
+            if (sub_80ABDFC() == TRUE)
+            {
+                gTasks[taskId].func = sub_8126B80;
+            }
+            break;
+    }
+}

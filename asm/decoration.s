@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_812A2C4
-sub_812A2C4: @ 812A2C4
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r5, r1, 3
-	ldr r6, =gTasks + 0x8
-	adds r4, r5, r6
-	movs r1, 0x4
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x1
-	beq _0812A2FC
-	cmp r0, 0x1
-	bgt _0812A2EC
-	cmp r0, 0
-	beq _0812A2F6
-	b _0812A32A
-	.pool
-_0812A2EC:
-	cmp r0, 0x2
-	beq _0812A308
-	cmp r0, 0x3
-	beq _0812A314
-	b _0812A32A
-_0812A2F6:
-	bl sub_80E9578
-	b _0812A30C
-_0812A2FC:
-	ldr r0, =gUnknown_08275D0C
-	bl ScriptContext1_SetupScript
-	b _0812A30C
-	.pool
-_0812A308:
-	bl ScriptContext2_Enable
-_0812A30C:
-	ldrh r0, [r4, 0x4]
-	adds r0, 0x1
-	strh r0, [r4, 0x4]
-	b _0812A32A
-_0812A314:
-	bl sub_80ABDFC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0812A32A
-	adds r0, r6, 0
-	subs r0, 0x8
-	adds r0, r5, r0
-	ldr r1, =sub_8126B80
-	str r1, [r0]
-_0812A32A:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_812A2C4
-
 	thumb_func_start sub_812A334
 sub_812A334: @ 812A334
 	push {lr}
