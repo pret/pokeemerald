@@ -33,6 +33,7 @@
 #include "tilesets.h"
 #include "item_icon.h"
 #include "trader.h"
+#include "map_object_constants.h"
 #include "decoration_inventory.h"
 #include "decoration.h"
 
@@ -147,20 +148,18 @@ void sub_812A458(u8 taskId);
 
 // .rodata
 
-extern const struct WindowTemplate gUnknown_085A6B90[4];
+#include "data/decoration/tiles.h"
+#include "data/decoration/description.h"
+#include "data/decoration/header.h"
+
 extern const u8 *const gUnknown_085A6B28[];
 extern const struct MenuAction gUnknown_085A6B48[];
 extern const u8 *const gUnknown_085A6B68[];
 extern void (*const gUnknown_085A6B78[][2])(u8 taskId);
+extern const struct WindowTemplate gUnknown_085A6B90[4];
 extern const u16 gUnknown_085A6BB0[];
 extern const struct ListMenuTemplate gUnknown_085A6BD0;
 extern const void *const gUnknown_085A6BE8[][2];
-extern const struct SpriteTemplate gUnknown_085A72A4;
-extern const struct YesNoFuncTable gUnknown_085A72C4;
-extern const struct YesNoFuncTable gUnknown_085A72CC;
-extern const struct YesNoFuncTable gUnknown_085A72D4[];
-extern const u8 gUnknown_085A72E4[];
-extern const u8 gUnknown_085A72EC[];
 extern const struct {
     const u8 *tiles;
     const u8 *y;
@@ -174,7 +173,13 @@ extern const struct {
     u8 y;
 } gUnknown_085A7250[];
 extern const struct SpriteTemplate gUnknown_085A728C;
+extern const struct SpriteTemplate gUnknown_085A72A4;
 extern const struct SpritePalette gUnknown_085A72BC;
+extern const struct YesNoFuncTable gUnknown_085A72C4;
+extern const struct YesNoFuncTable gUnknown_085A72CC;
+extern const struct YesNoFuncTable gUnknown_085A72D4[];
+extern const u8 gUnknown_085A72E4[];
+extern const u8 gUnknown_085A72EC[];
 extern const u16 gUnknown_085A72F4[];
 extern const struct YesNoFuncTable gUnknown_085A7348;
 extern const struct YesNoFuncTable gUnknown_085A7350;

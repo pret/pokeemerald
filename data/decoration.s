@@ -4,17 +4,6 @@
 	.section .rodata
 	.align 2, 0
 
-gDecorationTilemaps::
-	.include "data/decoration_tiles.inc"
-
-gDecorationDescriptions::
-	.include "data/text/decoration_descriptions.inc"
-
-	.align 2, 0
-
-gDecorations:: @ 85A5C08
-	.include "data/decorations.inc"
-
 gUnknown_085A6B28:: @ 85A6B28
 	.4byte gUnknown_085EA859
 	.4byte gUnknown_085EA85E

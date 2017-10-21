@@ -408,6 +408,7 @@ SECTIONS {
         data/heal_location.o(.rodata);
         data/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
+        src/decoration.o(.rodata);
         data/decoration.o(.rodata);
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
