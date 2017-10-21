@@ -26,8 +26,14 @@ gUnknown_085A6BB0:: @ 85A6BB0
 	.2byte 0x6318, 0x4a52, 0x001f, 0x0016
 	.2byte 0x631f, 0x7d4a, 0x58c6, 0x7f18
 
+	.align 2
 gUnknown_085A6BD0:: @ 85A6BD0
-	.incbin "baserom.gba", 0x5a6bd0, 0x18
+	.4byte 0x00000000
+	.4byte sub_8127480
+	.4byte sub_81274A0
+	.2byte 0x0000, 0x0000
+	.byte 0x00, 0x00, 0x08, 0x00
+	.4byte 0x07003129
 
 gUnknown_085A6BE8:: @ 85A6BE8
 	.incbin "baserom.gba", 0x5a6be8, 0x5c8

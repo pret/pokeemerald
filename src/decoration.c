@@ -661,7 +661,7 @@ void sub_8127454(u8 *dest, u16 decorId)
     StringAppend(dest, gDecorations[decorId].name);
 }
 
-void sub_8127480(u32 a0, bool8 flag)
+void sub_8127480(u32 a0, bool8 flag, struct ListMenu *menu)
 {
     if (flag != TRUE)
     {
