@@ -53,10 +53,10 @@ struct UnkStruct_0203A190 {
 };
 
 struct UnkStruct_0203AA44 {
-u8 idx;
-u8 width;
-u8 height;
-u16 flagId;
+    u8 idx;
+    u8 width;
+    u8 height;
+    u16 flagId;
 };
 
 // Static RAM declarations
@@ -2210,4 +2210,29 @@ void sub_8129E0C(u8 x, u8 y)
     gSprites[gUnknown_0203AA38].callback = SpriteCallbackDummy;
     gSprites[gUnknown_0203AA39].pos1.x = (x << 4) + 0x88;
     gSprites[gUnknown_0203AA39].pos1.y = (y << 4) + 0x48;
+}
+
+bool8 sub_8129E74(u8 taskId, u8 idx, struct UnkStruct_0203AA44 *data)
+{
+    u8 x;
+    u8 y;
+    u8 xOff;
+    u8 yOff;
+    u8 ht;
+
+    x = gTasks[taskId].data[0] - 7;
+    y = gTasks[taskId].data[1] - 7;
+    xOff = gUnknown_0203A17C.pos[idx] >> 4;
+    yOff = gUnknown_0203A17C.pos[idx] & 0x0F;
+    ht = data->height;
+    if (gUnknown_0203A17C.items[idx] == DECOR_SAND_ORNAMENT && MapGridGetMetatileIdAt(xOff + 7, yOff + 7) == 0x28C)
+    {
+        ht --;
+    }
+    if (x >= xOff && x < xOff + data->width && y > yOff - ht && y <= yOff)
+    {
+        sub_8129E0C(data->width - (x - xOff + 1), yOff - y);
+        return TRUE;
+    }
+    return FALSE;
 }
