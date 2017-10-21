@@ -72,7 +72,7 @@ void nullsub_118(void);
 
 void WallyBufferRunCommand(void);
 
-void (*const gWallyBufferCommands[CONTOLLER_CMDS_CONT])(void) =
+void (*const gWallyBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
 {
     WallyHandleGetMonData,
     WallyHandleGetRawMonData,

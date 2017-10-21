@@ -103,13 +103,13 @@ _0815942A:
 	movs r1, 0x7
 _0815942E:
 	movs r2, 0
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	b _08159440
 _08159436:
 	movs r0, 0x1
 	movs r1, 0x8
 	movs r2, 0
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 _08159440:
 	bl SafariBufferExecCompleted
 	b _0815954E
@@ -569,7 +569,7 @@ sub_8159800: @ 8159800
 	ldrb r0, [r0, 0x8]
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
-	bl LoadBackTrainerBankSpriteGfx
+	bl DecompressTrainerBackPic
 	ldr r0, [r4]
 	ldrb r6, [r0, 0x8]
 	ldrb r0, [r5]
@@ -792,7 +792,7 @@ dp01t_10_6_message: @ 81599DC
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -862,7 +862,7 @@ sub_8159A94: @ 8159A94
 	str r1, [r0]
 	ldr r0, =gText_SafariZoneMenu
 	movs r1, 0x2
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	movs r4, 0
 _08159AAE:
 	lsls r0, r4, 24
@@ -882,7 +882,7 @@ _08159AAE:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	pop {r4}
 	pop {r0}
 	bx r0

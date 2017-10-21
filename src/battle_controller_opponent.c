@@ -72,7 +72,7 @@ void nullsub_91(void);
 
 void OpponentBufferRunCommand(void);
 
-void (*const gOpponentBufferCommands[CONTOLLER_CMDS_CONT])(void) =
+void (*const gOpponentBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
 {
     OpponentHandleGetMonData,
     OpponentHandleGetRawMonData,

@@ -644,6 +644,9 @@ s8 GetMonFlavourRelation(struct Pokemon *mon, u8 a2);
 s8 GetFlavourRelationByPersonality(u32 personality, u8 a2);
 u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit);
 u8 GetDefaultMoveTarget(u8 atkBank);
+u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
+void sub_806A1C0(u16 arg0, u8 bankIdentity);
+void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity);
 
 #include "sprite.h"
 

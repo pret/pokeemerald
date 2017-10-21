@@ -1258,11 +1258,11 @@ _0805DB76:
 	.pool
 	thumb_func_end task0A_08034248
 
-	thumb_func_start sub_805DB8C
-sub_805DB8C: @ 805DB8C
+	thumb_func_start IsMoveWithoutAnimation
+IsMoveWithoutAnimation: @ 805DB8C
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_805DB8C
+	thumb_func_end IsMoveWithoutAnimation
 
 	thumb_func_start mplay_80342A4
 mplay_80342A4: @ 805DB90
@@ -1357,7 +1357,7 @@ BattleLoadOpponentMonSpriteGfx: @ 805DC0C
 	.pool
 _0805DC50:
 	ldrh r5, [r2, 0x2]
-	ldr r0, =gUnknown_020244BC
+	ldr r0, =gTransformedPersonalities
 	adds r0, r1, r0
 	ldr r6, [r0]
 _0805DC58:
@@ -1510,7 +1510,7 @@ BattleLoadPlayerMonSpriteGfx: @ 805DD7C
 	.pool
 _0805DDC0:
 	ldrh r5, [r2, 0x2]
-	ldr r0, =gUnknown_020244BC
+	ldr r0, =gTransformedPersonalities
 	adds r0, r1, r0
 	ldr r4, [r0]
 _0805DDC8:
@@ -1670,8 +1670,8 @@ nullsub_24: @ 805DF34
 	bx lr
 	thumb_func_end nullsub_24
 
-	thumb_func_start sub_805DF38
-sub_805DF38: @ 805DF38
+	thumb_func_start DecompressTrainerFrontPic
+DecompressTrainerFrontPic: @ 805DF38
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
@@ -1701,10 +1701,10 @@ sub_805DF38: @ 805DF38
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805DF38
+	thumb_func_end DecompressTrainerFrontPic
 
-	thumb_func_start LoadBackTrainerBankSpriteGfx
-LoadBackTrainerBankSpriteGfx: @ 805DF84
+	thumb_func_start DecompressTrainerBackPic
+DecompressTrainerBackPic: @ 805DF84
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -1742,15 +1742,15 @@ LoadBackTrainerBankSpriteGfx: @ 805DF84
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end LoadBackTrainerBankSpriteGfx
+	thumb_func_end DecompressTrainerBackPic
 
 	thumb_func_start nullsub_25
 nullsub_25: @ 805DFE0
 	bx lr
 	thumb_func_end nullsub_25
 
-	thumb_func_start sub_805DFE4
-sub_805DFE4: @ 805DFE4
+	thumb_func_start FreeTrainerFrontPicPalette
+FreeTrainerFrontPicPalette: @ 805DFE4
 	push {lr}
 	lsls r0, 16
 	ldr r1, =gTrainerFrontPicPaletteTable
@@ -1761,7 +1761,7 @@ sub_805DFE4: @ 805DFE4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805DFE4
+	thumb_func_end FreeTrainerFrontPicPalette
 
 	thumb_func_start sub_805DFFC
 sub_805DFFC: @ 805DFFC
@@ -2441,7 +2441,7 @@ _0805E59C:
 	adds r1, 0x4
 	adds r1, r2
 	ldr r1, [r1]
-	ldr r3, =gUnknown_020244BC
+	ldr r3, =gTransformedPersonalities
 	lsls r2, r7, 2
 	adds r2, r3
 	ldr r3, [r2]
@@ -2479,7 +2479,7 @@ _0805E618:
 	adds r1, 0x4
 	adds r1, r2
 	ldr r1, [r1]
-	ldr r3, =gUnknown_020244BC
+	ldr r3, =gTransformedPersonalities
 	lsls r2, r7, 2
 	adds r2, r3
 	ldr r3, [r2]
@@ -2795,8 +2795,8 @@ _0805E93E:
 	bx r0
 	thumb_func_end refresh_graphics_maybe
 
-	thumb_func_start sub_805E94C
-sub_805E94C: @ 805E94C
+	thumb_func_start TrySetBehindSubstituteSpriteBit
+TrySetBehindSubstituteSpriteBit: @ 805E94C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -2817,7 +2817,7 @@ _0805E96C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805E94C
+	thumb_func_end TrySetBehindSubstituteSpriteBit
 
 	thumb_func_start sub_805E974
 sub_805E974: @ 805E974
@@ -3572,8 +3572,8 @@ _0805EF6A:
 	.pool
 	thumb_func_end sub_805EF14
 
-	thumb_func_start sub_805EF84
-sub_805EF84: @ 805EF84
+	thumb_func_start ClearTemporarySpeciesSpriteData
+ClearTemporarySpeciesSpriteData: @ 805EF84
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3598,7 +3598,7 @@ _0805EFAC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805EF84
+	thumb_func_end ClearTemporarySpeciesSpriteData
 
 	thumb_func_start AllocateMonSpritesGfx
 AllocateMonSpritesGfx: @ 805EFBC

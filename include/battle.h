@@ -326,7 +326,7 @@ struct UnknownFlags
 
 struct DisableStruct
 {
-    /*0x00*/ u32 unk0;
+    /*0x00*/ u32 transformedMonPersonality;
     /*0x04*/ u16 disabledMove;
     /*0x06*/ u16 encoredMove;
     /*0x08*/ u8 protectUses;
@@ -858,6 +858,16 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank);
 void BattleLoadSubstituteSpriteGfx(u8 bank, bool8 arg1);
 void nullsub_24(u16 arg0);
 void nullsub_25(u8 arg0);
+void ClearTemporarySpeciesSpriteData(u8 bank, bool8 dontClearSubstitute);
+void sub_805D714(struct Sprite *sprite);
+void DecompressTrainerBackPic(u16 backPicId, u8 bank);
+void DecompressTrainerFrontPic(u16 frontPicId, u8 bank);
+void FreeTrainerFrontPicPalette(u16 frontPicId);
+void sub_805D7AC(struct Sprite *sprite);
+bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn);
+void sub_805EB9C(u8 arg0);
+void sub_805E394(void);
+void TrySetBehindSubstituteSpriteBit(u8 bank, u16 move);
 
 enum
 {
@@ -870,7 +880,6 @@ enum
     BACK_PIC_WALLY,
     BACK_PIC_STEVEN
 };
-void LoadBackTrainerBankSpriteGfx(u8 backPicId, u8 bank);
 
 // rom_80A5C6C
 u8 GetBankSide(u8 bank);

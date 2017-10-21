@@ -3641,7 +3641,7 @@ sub_818B9FC: @ 818B9FC
 	adds r6, r4, 0x2
 	adds r1, r6
 	ldrb r1, [r1]
-	bl sub_805EF84
+	bl ClearTemporarySpeciesSpriteData
 	ldr r2, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r1, r0, 1
@@ -3690,7 +3690,7 @@ sub_818BA6C: @ 818BA6C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_805EF84
+	bl ClearTemporarySpeciesSpriteData
 	ldr r0, =gBattlePartyID
 	lsls r2, r6, 1
 	adds r2, r0
@@ -4063,14 +4063,14 @@ _0818BDC0:
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r5, r4, 0
 	ldr r6, =gActiveBank
 	ldrb r1, [r6]
 	adds r0, r5, 0
-	bl sub_805DF38
+	bl DecompressTrainerFrontPic
 	ldrb r0, [r6]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -4182,7 +4182,7 @@ _0818BEDC:
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl LoadBackTrainerBankSpriteGfx
+	bl DecompressTrainerBackPic
 	ldrb r0, [r5]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -4583,14 +4583,14 @@ _0818C192:
 	adds r1, 0x10
 	adds r2, r1
 	str r2, [r3]
-	ldr r3, =gUnknown_020244BC
+	ldr r3, =gTransformedPersonalities
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r3
 	ldr r2, [r2]
 	str r2, [r1]
 	ldrb r1, [r5]
-	bl sub_805DB8C
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -4785,7 +4785,7 @@ _0818C3F0:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_805E94C
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -4822,7 +4822,7 @@ sub_818C43C: @ 818C43C
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -4861,7 +4861,7 @@ sub_818C49C: @ 818C49C
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	bl RecordedPlayerBufferExecCompleted
 _0818C4C6:
 	pop {r0}
@@ -4897,7 +4897,7 @@ _0818C508:
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	bl RecordedPlayerBufferExecCompleted
 _0818C522:
 	pop {r0}
@@ -4929,7 +4929,7 @@ sub_818C538: @ 818C538
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	b _0818C584
 	.pool
 _0818C560:
@@ -4947,7 +4947,7 @@ _0818C560:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 _0818C584:
 	bl RecordedPlayerBufferExecCompleted
 	pop {r4,r5}

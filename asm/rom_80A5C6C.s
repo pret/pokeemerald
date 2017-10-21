@@ -217,7 +217,7 @@ _080A5E04:
 	b _080A5E42
 	.pool
 _080A5E3C:
-	ldr r0, =gUnknown_020244BC
+	ldr r0, =gTransformedPersonalities
 	adds r0, r1, r0
 	ldr r2, [r0]
 _080A5E42:
@@ -307,7 +307,7 @@ _080A5EC8:
 	b _080A5F0A
 	.pool
 _080A5F04:
-	ldr r0, =gUnknown_020244BC
+	ldr r0, =gTransformedPersonalities
 	adds r0, r1, r0
 	ldr r2, [r0]
 _080A5F0A:
@@ -5522,7 +5522,7 @@ _080A86C4:
 	.pool
 _080A871C:
 	ldrh r7, [r1, 0x2]
-	ldr r0, =gUnknown_020244BC
+	ldr r0, =gTransformedPersonalities
 	adds r0, r2, r0
 	ldr r2, [r0]
 _080A8724:
@@ -5612,7 +5612,7 @@ _080A8790:
 	.pool
 _080A87DC:
 	ldrh r7, [r1, 0x2]
-	ldr r0, =gUnknown_020244BC
+	ldr r0, =gTransformedPersonalities
 	adds r0, r2, r0
 	ldr r2, [r0]
 _080A87E4:

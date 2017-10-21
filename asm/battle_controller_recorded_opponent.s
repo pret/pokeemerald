@@ -129,7 +129,7 @@ sub_81865C8: @ 81865C8
 	bne _0818661A
 	adds r0, r2, r5
 	ldrh r0, [r0, 0x6]
-	bl sub_805DFE4
+	bl FreeTrainerFrontPicPalette
 	ldrb r0, [r4]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -3716,7 +3716,7 @@ sub_81885D8: @ 81885D8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_805EF84
+	bl ClearTemporarySpeciesSpriteData
 	ldr r0, =gBattlePartyID
 	lsls r4, r6, 1
 	adds r4, r0
@@ -4078,7 +4078,7 @@ _08188910:
 	adds r0, r2
 	ldrb r0, [r0, 0x13]
 _08188924:
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 _08188928:
 	lsls r0, 16
 	lsrs r0, 16
@@ -4086,7 +4086,7 @@ _0818892C:
 	mov r8, r0
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
-	bl sub_805DF38
+	bl DecompressTrainerFrontPic
 	ldrb r0, [r5]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -4483,14 +4483,14 @@ _08188BE6:
 	adds r1, 0x10
 	adds r2, r1
 	str r2, [r3]
-	ldr r3, =gUnknown_020244BC
+	ldr r3, =gTransformedPersonalities
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r3
 	ldr r2, [r2]
 	str r2, [r1]
 	ldrb r1, [r5]
-	bl sub_805DB8C
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -4685,7 +4685,7 @@ _08188E44:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_805E94C
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -4722,7 +4722,7 @@ sub_8188E90: @ 8188E90
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -4754,7 +4754,7 @@ sub_8188EF0: @ 8188EF0
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -4785,7 +4785,7 @@ sub_8188F20: @ 8188F20
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	b _08188F6C
 	.pool
 _08188F48:
@@ -4803,7 +4803,7 @@ _08188F48:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 _08188F6C:
 	bl RecordedOpponentBufferExecCompleted
 	pop {r4,r5}
@@ -5601,7 +5601,7 @@ sub_818962C: @ 818962C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x6]
-	bl sub_805DFE4
+	bl FreeTrainerFrontPicPalette
 	adds r0, r4, 0
 	bl FreeSpriteOamMatrix
 	adds r0, r4, 0

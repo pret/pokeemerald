@@ -6956,7 +6956,7 @@ _08192574:
 	cmp r2, r0
 	bne _08192598
 	ldrb r0, [r1, 0x8]
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 	lsls r0, 16
 	lsrs r0, 16
 	b _081925B6
@@ -8535,7 +8535,7 @@ _081932A2:
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 	lsls r0, 16
 	lsrs r0, 16
 	mov r2, r8
@@ -8621,7 +8621,7 @@ _0819335A:
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 	lsls r0, 16
 	lsrs r0, 16
 	b _081933B0

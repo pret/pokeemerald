@@ -1659,7 +1659,7 @@ u16 sub_806EFF0(u16 arg0)
     return gUnknown_0831F578[arg0];
 }
 
-u16 sub_806F000(u8 playerGender)
+u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
 {
     if (playerGender)
         return sub_806EFF0(0x3F);

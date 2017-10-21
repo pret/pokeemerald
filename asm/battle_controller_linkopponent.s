@@ -113,7 +113,7 @@ sub_8064470: @ 8064470
 	bne _080644C2
 	adds r0, r2, r5
 	ldrh r0, [r0, 0x6]
-	bl sub_805DFE4
+	bl FreeTrainerFrontPicPalette
 	ldrb r0, [r4]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -3718,7 +3718,7 @@ sub_8066494: @ 8066494
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_805EF84
+	bl ClearTemporarySpeciesSpriteData
 	ldr r0, =gBattlePartyID
 	lsls r4, r6, 1
 	adds r4, r0
@@ -4248,7 +4248,7 @@ _0806693A:
 	lsls r1, 2
 	adds r1, r6
 	ldrb r0, [r1, 0x13]
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 _08066948:
 	lsls r0, 16
 	lsrs r0, 16
@@ -4256,7 +4256,7 @@ _0806694C:
 	mov r8, r0
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
-	bl sub_805DF38
+	bl DecompressTrainerFrontPic
 	ldrb r0, [r5]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -4385,7 +4385,7 @@ _08066A76:
 	mov r8, r0
 	ldr r6, =gActiveBank
 	ldrb r1, [r6]
-	bl sub_805DF38
+	bl DecompressTrainerFrontPic
 	ldrb r0, [r6]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -4781,7 +4781,7 @@ _08066D32:
 	adds r0, 0x10
 	adds r1, r0
 	str r1, [r7]
-	ldr r2, =gUnknown_020244BC
+	ldr r2, =gTransformedPersonalities
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r2
@@ -4790,7 +4790,7 @@ _08066D32:
 	mov r0, r8
 	ldrb r1, [r0]
 	adds r0, r6, 0
-	bl sub_805DB8C
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -4991,7 +4991,7 @@ _08066FA8:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_805E94C
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -5028,7 +5028,7 @@ LinkOpponentHandlePrintString: @ 8066FF4
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -5845,7 +5845,7 @@ sub_80676FC: @ 80676FC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x6]
-	bl sub_805DFE4
+	bl FreeTrainerFrontPicPalette
 	adds r0, r4, 0
 	bl FreeSpriteOamMatrix
 	adds r0, r4, 0

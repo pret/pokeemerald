@@ -220,9 +220,9 @@ static bool8 LoadBankSpriteGfx(u8 bank)
                 BattleLoadSubstituteSpriteGfx(bank, FALSE);
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
-            LoadBackTrainerBankSpriteGfx(gSaveBlock2Ptr->playerGender, bank);
+            DecompressTrainerBackPic(gSaveBlock2Ptr->playerGender, bank);
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
-            LoadBackTrainerBankSpriteGfx(BACK_PIC_WALLY, bank);
+            DecompressTrainerBackPic(BACK_PIC_WALLY, bank);
         else if (!gBattleSpritesDataPtr->bankData[bank].behindSubstitute)
             BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlePartyID[bank]], bank);
         else

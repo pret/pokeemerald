@@ -72,7 +72,7 @@ void nullsub_92(void);
 
 void LinkOpponentBufferRunCommand(void);
 
-void (*const gLinkOpponentBufferCommands[CONTOLLER_CMDS_CONT])(void) =
+void (*const gLinkOpponentBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
 {
     LinkOpponentHandleGetMonData,
     LinkOpponentHandleGetRawMonData,

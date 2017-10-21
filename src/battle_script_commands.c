@@ -6114,8 +6114,8 @@ static void atk5A_yesnoboxlearnmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-        sub_8056A3C(0x18, 8, 0x1D, 0xD, 0);
-        sub_814F9EC(gText_BattleYesNoChoice, 0xC);
+        HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+        BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt(0);
@@ -6140,7 +6140,7 @@ static void atk5A_yesnoboxlearnmove(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] == 0)
             {
-                sub_8056A3C(0x18, 0x8, 0x1D, 0xD, 1);
+                HandleBattleWindow(0x18, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
                 BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
                 gBattleScripting.learnMoveState++;
             }
@@ -6214,7 +6214,7 @@ static void atk5A_yesnoboxlearnmove(void)
         }
         break;
     case 5:
-        sub_8056A3C(0x18, 8, 0x1D, 0xD, 1);
+        HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
         gBattlescriptCurrInstr += 5;
         break;
     case 6:
@@ -6231,8 +6231,8 @@ static void atk5B_yesnoboxstoplearningmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-        sub_8056A3C(0x18, 8, 0x1D, 0xD, 0);
-        sub_814F9EC(gText_BattleYesNoChoice, 0xC);
+        HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+        BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt(0);
@@ -6261,13 +6261,13 @@ static void atk5B_yesnoboxstoplearningmove(void)
             else
                 gBattlescriptCurrInstr += 5;
 
-            sub_8056A3C(0x18, 0x8, 0x1D, 0xD, 1);
+            HandleBattleWindow(0x18, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
         }
         else if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
             gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
-            sub_8056A3C(0x18, 0x8, 0x1D, 0xD, 1);
+            HandleBattleWindow(0x18, 0x8, 0x1D, 0xD, WINDOW_CLEAR);
         }
         break;
     }
@@ -6527,8 +6527,8 @@ static void atk67_yesnobox(void)
     switch (gBattleCommunication[0])
     {
     case 0:
-        sub_8056A3C(0x18, 8, 0x1D, 0xD, 0);
-        sub_814F9EC(gText_BattleYesNoChoice, 0xC);
+        HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+        BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
         gBattleCommunication[0]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt(0);
@@ -6552,13 +6552,13 @@ static void atk67_yesnobox(void)
         {
             gBattleCommunication[CURSOR_POSITION] = 1;
             PlaySE(SE_SELECT);
-            sub_8056A3C(0x18, 8, 0x1D, 0xD, 1);
+            HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
             gBattlescriptCurrInstr++;
         }
         else if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sub_8056A3C(0x18, 8, 0x1D, 0xD, 1);
+            HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
             gBattlescriptCurrInstr++;
         }
         break;
@@ -6674,7 +6674,7 @@ static void atk6C_draw_lvlupbox(void)
         SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, 0);
         ShowBg(0);
         ShowBg(1);
-        sub_8056A3C(0x12, 7, 0x1D, 0x13, 0x80);
+        HandleBattleWindow(0x12, 7, 0x1D, 0x13, WINDOW_x80);
         gBattleScripting.atk6C_state = 4;
         break;
     case 4:
@@ -6704,7 +6704,7 @@ static void atk6C_draw_lvlupbox(void)
         if (gMain.newKeys != 0)
         {
             PlaySE(SE_SELECT);
-            sub_8056A3C(0x12, 7, 0x1D, 0x13, 0x81);
+            HandleBattleWindow(0x12, 7, 0x1D, 0x13, WINDOW_x80 | WINDOW_CLEAR);
             gBattleScripting.atk6C_state++;
         }
         break;
@@ -7136,8 +7136,8 @@ static void atk76_various(void)
         gDisableStructs[0].truantUnknownBit = 1;
         gDisableStructs[1].truantUnknownBit = 1;
         break;
-    case 13:
-        EmitCmd19(0);
+    case VARIOUS_EMIT_YESNOBOX:
+        EmitYesNoBox(0);
         MarkBufferBankForExecution(gActiveBank);
         break;
     case 14:
@@ -7148,7 +7148,7 @@ static void atk76_various(void)
         break;
     case 16:
         BattleStringExpandPlaceholdersToDisplayedString(gRefereeStringsTable[gBattlescriptCurrInstr[1]]);
-        sub_814F9EC(gDisplayedStringBattle, 0x16);
+        BattleHandleAddTextPrinter(gDisplayedStringBattle, 0x16);
         break;
     case 17:
         if (IsTextPrinterActive(0x16))
@@ -8443,7 +8443,7 @@ static void atk9B_transformdataexecution(void)
         gBattleMons[gBankAttacker].status2 |= STATUS2_TRANSFORMED;
         gDisableStructs[gBankAttacker].disabledMove = 0;
         gDisableStructs[gBankAttacker].disableTimer1 = 0;
-        gDisableStructs[gBankAttacker].unk0 = gBattleMons[gBankTarget].personality;
+        gDisableStructs[gBankAttacker].transformedMonPersonality = gBattleMons[gBankTarget].personality;
         gDisableStructs[gBankAttacker].unk18_b = 0;
 
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBankTarget].species)
@@ -9152,7 +9152,7 @@ static void atkA8_copymovepermanently(void) // sketch
 
             for (i = 0; i < 4; i++)
             {
-                movePpData.move[i] = gBattleMons[gBankAttacker].moves[i];
+                movePpData.moves[i] = gBattleMons[gBankAttacker].moves[i];
                 movePpData.pp[i] = gBattleMons[gBankAttacker].pp[i];
             }
             movePpData.ppBonuses = gBattleMons[gBankAttacker].ppBonuses;
@@ -11238,7 +11238,7 @@ static void atkF2_display_dex_info(void)
     }
 }
 
-void sub_8056A3C(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
+void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
 {
     s32 destY, destX;
     u16 var = 0;
@@ -11275,10 +11275,10 @@ void sub_8056A3C(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
                     var = 0x1026;
             }
 
-            if (flags & 1)
+            if (flags & WINDOW_CLEAR)
                 var = 0;
 
-            if (flags & 0x80)
+            if (flags & WINDOW_x80)
                 CopyToBgTilemapBufferRect_ChangePalette(1, &var, destX, destY, 1, 1, 0x11);
             else
                 CopyToBgTilemapBufferRect_ChangePalette(0, &var, destX, destY, 1, 1, 0x11);
@@ -11311,8 +11311,8 @@ static void atkF3_nickname_caught_poke(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        sub_8056A3C(0x18, 8, 0x1D, 0xD, 0);
-        sub_814F9EC(gText_BattleYesNoChoice, 0xC);
+        HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+        BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
         gBattleCommunication[MULTIUSE_STATE]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
         BattleCreateYesNoCursorAt(0);

@@ -645,7 +645,7 @@ _081BB2E2:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	strb r5, [r4]
 	bl IsDoubleBattle
 	lsls r0, 24
@@ -918,7 +918,7 @@ _081BB514:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	strb r5, [r4]
 	ldr r0, =sub_81BB628
 	str r0, [r6]
@@ -3840,7 +3840,7 @@ sub_81BD074: @ 81BD074
 	adds r6, r4, 0x2
 	adds r1, r6
 	ldrb r1, [r1]
-	bl sub_805EF84
+	bl ClearTemporarySpeciesSpriteData
 	ldr r2, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r1, r0, 1
@@ -3889,7 +3889,7 @@ sub_81BD0E4: @ 81BD0E4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_805EF84
+	bl ClearTemporarySpeciesSpriteData
 	ldr r0, =gBattlePartyID
 	lsls r2, r6, 1
 	adds r2, r0
@@ -4213,7 +4213,7 @@ _081BD3BE:
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl LoadBackTrainerBankSpriteGfx
+	bl DecompressTrainerBackPic
 	ldrb r0, [r5]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -4287,7 +4287,7 @@ _081BD494:
 	ldr r6, =gActiveBank
 	ldrb r1, [r6]
 	adds r0, r5, 0
-	bl sub_805DF38
+	bl DecompressTrainerFrontPic
 	ldrb r0, [r6]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -4727,14 +4727,14 @@ _081BD7A2:
 	adds r1, 0x10
 	adds r2, r1
 	str r2, [r3]
-	ldr r3, =gUnknown_020244BC
+	ldr r3, =gTransformedPersonalities
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r3
 	ldr r2, [r2]
 	str r2, [r1]
 	ldrb r1, [r5]
-	bl sub_805DB8C
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -4929,7 +4929,7 @@ _081BDA00:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_805E94C
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -4966,7 +4966,7 @@ sub_81BDA4C: @ 81BDA4C
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -5068,7 +5068,7 @@ _081BDB3C:
 	orrs r2, r5
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4-r6}
 	pop {r0}

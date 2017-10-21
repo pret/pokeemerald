@@ -112,7 +112,7 @@ sub_805F240: @ 805F240
 	bne _0805F292
 	adds r0, r2, r5
 	ldrh r0, [r0, 0x6]
-	bl sub_805DFE4
+	bl FreeTrainerFrontPicPalette
 	ldrb r0, [r4]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -3879,7 +3879,7 @@ sub_80613DC: @ 80613DC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_805EF84
+	bl ClearTemporarySpeciesSpriteData
 	ldr r0, =gBattlePartyID
 	lsls r4, r6, 1
 	adds r4, r0
@@ -4311,7 +4311,7 @@ _080617CA:
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
 	mov r0, r8
-	bl sub_805DF38
+	bl DecompressTrainerFrontPic
 	ldrb r0, [r5]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -4537,7 +4537,7 @@ _080619DE:
 	mov r8, r0
 	ldr r6, =gActiveBank
 	ldrb r1, [r6]
-	bl sub_805DF38
+	bl DecompressTrainerFrontPic
 	ldrb r0, [r6]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -4928,14 +4928,14 @@ _08061C8A:
 	adds r1, 0x10
 	adds r2, r1
 	str r2, [r3]
-	ldr r3, =gUnknown_020244BC
+	ldr r3, =gTransformedPersonalities
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r3
 	ldr r2, [r2]
 	str r2, [r1]
 	ldrb r1, [r5]
-	bl sub_805DB8C
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -5130,7 +5130,7 @@ _08061EE8:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_805E94C
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -5167,7 +5167,7 @@ OpponentHandlePrintString: @ 8061F34
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -5225,7 +5225,7 @@ OpponentHandleChooseMove: @ 8061FB8
 	movs r0, 0x1
 	movs r1, 0xA
 _08061FD6:
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 _08061FDA:
 	bl OpponentBufferExecCompleted
 	b _08062156
@@ -5329,7 +5329,7 @@ _0806209C:
 	movs r0, 0x1
 	movs r1, 0xA
 	adds r2, r4, 0
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	b _08061FDA
 	.pool
 _080620C4:
@@ -5360,7 +5360,7 @@ _080620C6:
 	movs r0, 0x1
 	movs r1, 0xA
 	adds r2, r4, 0
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	b _08062152
 	.pool
 _08062108:
@@ -5383,7 +5383,7 @@ _08062108:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	b _08062152
 	.pool
 _0806213C:
@@ -5395,7 +5395,7 @@ _0806213C:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 _08062152:
 	bl OpponentBufferExecCompleted
 _08062156:
@@ -6196,7 +6196,7 @@ sub_806280C: @ 806280C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x6]
-	bl sub_805DFE4
+	bl FreeTrainerFrontPicPalette
 	adds r0, r4, 0
 	bl FreeSpriteOamMatrix
 	adds r0, r4, 0

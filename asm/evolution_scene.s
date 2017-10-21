@@ -1338,7 +1338,7 @@ _0813E6E4:
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -1626,7 +1626,7 @@ _0813E99E:
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =0x00000173
 	bl PlayBGM
 	ldr r2, =gTasks
@@ -1868,7 +1868,7 @@ _0813EBE4:
 _0813EBEC:
 	ldr r0, =gStringVar4
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -1900,7 +1900,7 @@ _0813EC2A:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -1997,7 +1997,7 @@ _0813ED16:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -2026,7 +2026,7 @@ _0813ED62:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2051,7 +2051,7 @@ _0813ED90:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -2084,10 +2084,10 @@ _0813EDEA:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_8056A3C
+	bl HandleBattleWindow
 	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2152,7 +2152,7 @@ _0813EE84:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_8056A3C
+	bl HandleBattleWindow
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =gBattleCommunication
@@ -2202,7 +2202,7 @@ _0813EF00:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_8056A3C
+	bl HandleBattleWindow
 	movs r0, 0x5
 	bl PlaySE
 	ldr r1, =gTasks
@@ -2292,7 +2292,7 @@ _0813EFC8:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -2341,7 +2341,7 @@ _0813F05C:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -2370,7 +2370,7 @@ _0813F0AA:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2398,7 +2398,7 @@ _0813F0D8:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -2414,7 +2414,7 @@ _0813F120:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gTasks
 	mov r3, r8
 	adds r0, r3, r7
@@ -2434,7 +2434,7 @@ _0813F154:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r7

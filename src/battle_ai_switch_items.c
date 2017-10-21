@@ -39,7 +39,7 @@ static bool8 ShouldSwitchIfPerishSong(void)
         && gDisableStructs[gActiveBank].perishSong1 == 0)
     {
         *(gBattleStruct->field_294 + gActiveBank) = 6;
-        EmitCmd33(1, 2, 0);
+        EmitChoiceReturnValue(1, 2, 0);
         return TRUE;
     }
 
@@ -121,7 +121,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             {
                 // we found a mon
                 *(gBattleStruct->field_294 + gActiveBank) = i;
-                EmitCmd33(1, 2, 0);
+                EmitChoiceReturnValue(1, 2, 0);
                 return TRUE;
             }
         }
@@ -221,7 +221,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         {
             // we found a mon
             *(gBattleStruct->field_294 + gActiveBank) = i;
-            EmitCmd33(1, 2, 0);
+            EmitChoiceReturnValue(1, 2, 0);
             return TRUE;
         }
     }
@@ -241,13 +241,13 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if ((gUnknown_02024250[gActiveBank] == 0 || gUnknown_02024250[gActiveBank] == 0xFFFF) && Random() & 1)
     {
         *(gBattleStruct->field_294 + gActiveBank) = 6;
-        EmitCmd33(1, 2, 0);
+        EmitChoiceReturnValue(1, 2, 0);
         return TRUE;
     }
     else if (gBattleMoves[gUnknown_02024250[gActiveBank]].power == 0 && Random() & 1)
     {
         *(gBattleStruct->field_294 + gActiveBank) = 6;
-        EmitCmd33(1, 2, 0);
+        EmitChoiceReturnValue(1, 2, 0);
         return TRUE;
     }
 
@@ -258,7 +258,7 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if (Random() & 1)
     {
         *(gBattleStruct->field_294 + gActiveBank) = 6;
-        EmitCmd33(1, 2, 0);
+        EmitChoiceReturnValue(1, 2, 0);
         return TRUE;
     }
 
@@ -426,7 +426,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
                 if (moveFlags & MOVESTATUS_SUPEREFFECTIVE && Random() % moduloPercent == 0)
                 {
                     *(gBattleStruct->field_294 + gActiveBank) = i;
-                    EmitCmd33(1, 2, 0);
+                    EmitChoiceReturnValue(1, 2, 0);
                     return TRUE;
                 }
             }
@@ -611,7 +611,7 @@ void AI_TrySwitchOrUseItem(void)
         }
     }
 
-    EmitCmd33(1, 0, (gActiveBank ^ BIT_SIDE) << 8);
+    EmitChoiceReturnValue(1, 0, (gActiveBank ^ BIT_SIDE) << 8);
 }
 
 #define TYPE_FORESIGHT  0xFE
@@ -940,7 +940,7 @@ static bool8 ShouldUseItem(void)
 
         if (shouldUse)
         {
-            EmitCmd33(1, 1, 0);
+            EmitChoiceReturnValue(1, 1, 0);
             *(gBattleStruct->field_C0 + (gActiveBank / 2) * 2) = item;
             gBattleResources->battleHistory->trainerItems[i] = 0;
             return shouldUse;

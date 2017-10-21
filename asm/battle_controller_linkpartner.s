@@ -3265,7 +3265,7 @@ sub_814CC28: @ 814CC28
 	adds r6, r4, 0x2
 	adds r1, r6
 	ldrb r1, [r1]
-	bl sub_805EF84
+	bl ClearTemporarySpeciesSpriteData
 	ldr r2, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r1, r0, 1
@@ -3314,7 +3314,7 @@ sub_814CC98: @ 814CC98
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_805EF84
+	bl ClearTemporarySpeciesSpriteData
 	ldr r0, =gBattlePartyID
 	lsls r2, r6, 1
 	adds r2, r0
@@ -3696,7 +3696,7 @@ _0814D002:
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl LoadBackTrainerBankSpriteGfx
+	bl DecompressTrainerBackPic
 	ldrb r0, [r5]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -4107,7 +4107,7 @@ _0814D2CE:
 	adds r0, 0x10
 	adds r1, r0
 	str r1, [r7]
-	ldr r2, =gUnknown_020244BC
+	ldr r2, =gTransformedPersonalities
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r2
@@ -4116,7 +4116,7 @@ _0814D2CE:
 	mov r0, r8
 	ldrb r1, [r0]
 	adds r0, r6, 0
-	bl sub_805DB8C
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -4317,7 +4317,7 @@ _0814D544:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_805E94C
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -4354,7 +4354,7 @@ sub_814D590: @ 814D590
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2

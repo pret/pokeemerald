@@ -939,11 +939,11 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
     }
 }
 
-void EmitGetMonData(u8 bufferId, u8 arg1, u8 arg2)
+void EmitGetMonData(u8 bufferId, u8 requestId, u8 monsToCheck)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_GETMONDATA;
-    gBattleBuffersTransferData[1] = arg1;
-    gBattleBuffersTransferData[2] = arg2;
+    gBattleBuffersTransferData[1] = requestId;
+    gBattleBuffersTransferData[2] = monsToCheck;
     gBattleBuffersTransferData[3] = 0;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
@@ -957,13 +957,13 @@ void EmitGetRawMonData(u8 bufferId, u8 monId, u8 bytes)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitSetMonData(u8 bufferId, u8 request, u8 c, u8 bytes, void *data)
+void EmitSetMonData(u8 bufferId, u8 requestId, u8 monsToCheck, u8 bytes, void *data)
 {
     s32 i;
 
     gBattleBuffersTransferData[0] = CONTROLLER_SETMONDATA;
-    gBattleBuffersTransferData[1] = request;
-    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[1] = requestId;
+    gBattleBuffersTransferData[2] = monsToCheck;
     for (i = 0; i < bytes; i++)
         gBattleBuffersTransferData[3 + i] = *(u8*)(data++);
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 3 + bytes);
@@ -1042,12 +1042,12 @@ void EmitFaintAnimation(u8 bufferId)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitCmd11(u8 bufferId)
+void EmitPaletteFade(u8 bufferId)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_11;
-    gBattleBuffersTransferData[1] = 11;
-    gBattleBuffersTransferData[2] = 11;
-    gBattleBuffersTransferData[3] = 11;
+    gBattleBuffersTransferData[0] = CONTROLLER_PALETTEFADE;
+    gBattleBuffersTransferData[1] = CONTROLLER_PALETTEFADE;
+    gBattleBuffersTransferData[2] = CONTROLLER_PALETTEFADE;
+    gBattleBuffersTransferData[3] = CONTROLLER_PALETTEFADE;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1178,12 +1178,12 @@ void EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitCmd19(u8 bufferId)
+void EmitYesNoBox(u8 bufferId)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_19;
-    gBattleBuffersTransferData[1] = 19;
-    gBattleBuffersTransferData[2] = 19;
-    gBattleBuffersTransferData[3] = 19;
+    gBattleBuffersTransferData[0] = CONTROLLER_YESNOBOX;
+    gBattleBuffersTransferData[1] = CONTROLLER_YESNOBOX;
+    gBattleBuffersTransferData[2] = CONTROLLER_YESNOBOX;
+    gBattleBuffersTransferData[3] = CONTROLLER_YESNOBOX;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1337,9 +1337,9 @@ void EmitCmd32(u8 bufferId, u16 size, void *data)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, size + 3);
 }
 
-void EmitCmd33(u8 bufferId, u8 arg1, u16 arg2)
+void EmitChoiceReturnValue(u8 bufferId, u8 arg1, u16 arg2)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_33;
+    gBattleBuffersTransferData[0] = CONTROLLER_CHOICERETURNVALUE;
     gBattleBuffersTransferData[1] = arg1;
     gBattleBuffersTransferData[2] = arg2;
     gBattleBuffersTransferData[3] = (arg2 & 0xFF00) >> 8;

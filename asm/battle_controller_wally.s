@@ -121,7 +121,7 @@ _081684CE:
 	movs r1, 0x9
 _081684E4:
 	movs r2, 0
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	bl WallyBufferExecCompleted
 	ldr r1, [r4]
 	adds r1, 0x94
@@ -176,7 +176,7 @@ _08168540:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	bl WallyBufferExecCompleted
 _08168564:
 	pop {r4,r5}
@@ -2998,7 +2998,7 @@ WallyHandleDrawTrainerPic: @ 8169EC8
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
 	movs r0, 0x6
-	bl LoadBackTrainerBankSpriteGfx
+	bl DecompressTrainerBackPic
 	ldrb r0, [r4]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -3083,7 +3083,7 @@ WallyHandleTrainerSlide: @ 8169F94
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
 	movs r0, 0x6
-	bl LoadBackTrainerBankSpriteGfx
+	bl DecompressTrainerBackPic
 	ldrb r0, [r4]
 	bl GetBankIdentity
 	adds r1, r0, 0
@@ -3359,14 +3359,14 @@ WallyHandleMoveAnimation: @ 816A144
 	adds r1, 0x10
 	adds r2, r1
 	str r2, [r3]
-	ldr r3, =gUnknown_020244BC
+	ldr r3, =gTransformedPersonalities
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r3
 	ldr r2, [r2]
 	str r2, [r1]
 	ldrb r1, [r5]
-	bl sub_805DB8C
+	bl IsMoveWithoutAnimation
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -3538,7 +3538,7 @@ _0816A370:
 	ldrb r2, [r2]
 	lsls r2, 8
 	orrs r1, r2
-	bl sub_805E94C
+	bl TrySetBehindSubstituteSpriteBit
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -3574,7 +3574,7 @@ WallyHandlePrintString: @ 816A3B8
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -3644,7 +3644,7 @@ WallyHandleChooseAction: @ 816A470
 	str r1, [r0]
 	ldr r0, =gText_BattleMenu
 	movs r1, 0x2
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	movs r4, 0
 _0816A48A:
 	lsls r0, r4, 24
@@ -3664,7 +3664,7 @@ _0816A48A:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3745,7 +3745,7 @@ _0816A550:
 	lsls r2, 1
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitCmd33
+	bl EmitChoiceReturnValue
 	bl WallyBufferExecCompleted
 _0816A574:
 	pop {r4}
