@@ -131,6 +131,9 @@ void sub_8129ABC(u8 taskId);
 void sub_8129B34(u8 taskId);
 void sub_8129C74(u8 taskId);
 void sub_8129D64(u8 taskId);
+void sub_812A0E8(u8 taskId);
+void sub_812A1A0(u8 taskId);
+void sub_812A1F0(u8 taskId);
 void sub_812A36C(struct Sprite *sprite);
 void sub_812A39C(void);
 void sub_812A3C8(void);
@@ -2104,4 +2107,44 @@ void sub_8129BCC(u8 taskId)
     gTasks[taskId].data[10] = 0;
     sub_8128DE0();
     sub_8129C74(taskId);
+}
+
+void sub_8129BF8(u8 taskId)
+{
+    gTasks[taskId].data[10] = 0;
+    sub_8128DE0();
+    gSprites[gUnknown_0203AA38].invisible = FALSE;
+    gSprites[gUnknown_0203AA38].callback = SpriteCallbackDummy;
+    StringExpandPlaceholders(gStringVar4, gText_StopPuttingAwayDecorations);
+    DisplayItemMessageOnField(taskId, gStringVar4, sub_812A1F0);
+}
+
+void sub_8129C74(u8 taskId)
+{
+    s16 *data;
+    u8 behavior;
+
+    sub_812A0E8(taskId);
+    if (gUnknown_0203AAC4 != 0)
+    {
+        StringExpandPlaceholders(gStringVar4, gText_ReturnDecorationToPC);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_812A1A0);
+    }
+    else
+    {
+        data = gTasks[taskId].data;
+        behavior = MapGridGetMetatileBehaviorAt(data[0], data[1]);
+        if (MetatileBehavior_IsSecretBasePC(behavior) == TRUE || MetatileBehavior_IsMB_C5(behavior) == TRUE)
+        {
+            gSprites[gUnknown_0203AA38].invisible = FALSE;
+            gSprites[gUnknown_0203AA38].callback = SpriteCallbackDummy;
+            StringExpandPlaceholders(gStringVar4, gText_StopPuttingAwayDecorations);
+            DisplayItemMessageOnField(taskId, gStringVar4, sub_812A1F0);
+        }
+        else
+        {
+            StringExpandPlaceholders(gStringVar4, gText_NoDecorationHere);
+            DisplayItemMessageOnField(taskId, gStringVar4, sub_8129D64);
+        }
+    }
 }
