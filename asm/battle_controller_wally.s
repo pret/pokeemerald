@@ -5,38 +5,6 @@
 
 	.text
 
-    
-	thumb_func_start nullsub_117
-nullsub_117: @ 81683B4
-	bx lr
-	thumb_func_end nullsub_117
-
-	thumb_func_start SetBankFuncToWallyBufferRunCommand
-SetBankFuncToWallyBufferRunCommand: @ 81683B8
-	ldr r1, =gBattleBankFunc
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =WallyBufferRunCommand
-	str r1, [r0]
-	ldr r2, =gBattleStruct
-	ldr r0, [r2]
-	adds r0, 0x94
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x95
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x96
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r0, 0x97
-	strb r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end SetBankFuncToWallyBufferRunCommand
 
 	thumb_func_start WallyBufferRunCommand
 WallyBufferRunCommand: @ 81683F4
@@ -928,8 +896,8 @@ _08168B92:
 	.pool
 	thumb_func_end sub_8168B70
 
-	thumb_func_start dp01t_00_5_getattr
-dp01t_00_5_getattr: @ 8168BA0
+	thumb_func_start WallyHandleGetMonData
+WallyHandleGetMonData: @ 8168BA0
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -981,7 +949,7 @@ _08168BFA:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_00_5_getattr
+	thumb_func_end WallyHandleGetMonData
 
 	thumb_func_start sub_8168C14
 sub_8168C14: @ 8168C14
@@ -1861,16 +1829,16 @@ _081693AA:
 	.pool
 	thumb_func_end sub_8168C14
 
-	thumb_func_start sub_81693C0
-sub_81693C0: @ 81693C0
+	thumb_func_start WallyHandleGetRawMonData
+WallyHandleGetRawMonData: @ 81693C0
 	push {lr}
-	bl sub_805A614
+	bl PlayerHandleGetRawMonData
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81693C0
+	thumb_func_end WallyHandleGetRawMonData
 
-	thumb_func_start sub_81693CC
-sub_81693CC: @ 81693CC
+	thumb_func_start WallyHandleSetMonData
+WallyHandleSetMonData: @ 81693CC
 	push {r4,r5,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -1910,7 +1878,7 @@ _0816941A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81693CC
+	thumb_func_end WallyHandleSetMonData
 
 	thumb_func_start sub_8169424
 sub_8169424: @ 8169424
@@ -2945,32 +2913,32 @@ _08169DEA:
 	.pool
 	thumb_func_end sub_8169424
 
-	thumb_func_start sub_8169E20
-sub_8169E20: @ 8169E20
+	thumb_func_start WallyHandleSetRawMonData
+WallyHandleSetRawMonData: @ 8169E20
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8169E20
+	thumb_func_end WallyHandleSetRawMonData
 
-	thumb_func_start sub_8169E2C
-sub_8169E2C: @ 8169E2C
+	thumb_func_start WallyHandleLoadMonSprite
+WallyHandleLoadMonSprite: @ 8169E2C
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8169E2C
+	thumb_func_end WallyHandleLoadMonSprite
 
-	thumb_func_start sub_8169E38
-sub_8169E38: @ 8169E38
+	thumb_func_start WallyHandleSwitchInAnim
+WallyHandleSwitchInAnim: @ 8169E38
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8169E38
+	thumb_func_end WallyHandleSwitchInAnim
 
-	thumb_func_start sub_8169E44
-sub_8169E44: @ 8169E44
+	thumb_func_start WallyHandleReturnMonToBall
+WallyHandleReturnMonToBall: @ 8169E44
 	push {r4-r6,lr}
 	ldr r0, =gBattleBufferA
 	ldr r6, =gActiveBank
@@ -3022,10 +2990,10 @@ _08169EB6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8169E44
+	thumb_func_end WallyHandleReturnMonToBall
 
-	thumb_func_start sub_8169EC8
-sub_8169EC8: @ 8169EC8
+	thumb_func_start WallyHandleDrawTrainerPic
+WallyHandleDrawTrainerPic: @ 8169EC8
 	push {r4-r6,lr}
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
@@ -3107,10 +3075,10 @@ sub_8169EC8: @ 8169EC8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8169EC8
+	thumb_func_end WallyHandleDrawTrainerPic
 
-	thumb_func_start dp01t_07_6_
-dp01t_07_6_: @ 8169F94
+	thumb_func_start WallyHandleTrainerSlide
+WallyHandleTrainerSlide: @ 8169F94
 	push {r4-r6,lr}
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
@@ -3192,34 +3160,34 @@ dp01t_07_6_: @ 8169F94
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_07_6_
+	thumb_func_end WallyHandleTrainerSlide
 
-	thumb_func_start sub_816A060
-sub_816A060: @ 816A060
+	thumb_func_start WallyHandleTrainerSlideBack
+WallyHandleTrainerSlideBack: @ 816A060
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A060
+	thumb_func_end WallyHandleTrainerSlideBack
 
-	thumb_func_start sub_816A06C
-sub_816A06C: @ 816A06C
+	thumb_func_start WallyHandleFaintAnimation
+WallyHandleFaintAnimation: @ 816A06C
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A06C
+	thumb_func_end WallyHandleFaintAnimation
 
-	thumb_func_start sub_816A078
-sub_816A078: @ 816A078
+	thumb_func_start WallyHandleCmd11
+WallyHandleCmd11: @ 816A078
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A078
+	thumb_func_end WallyHandleCmd11
 
-	thumb_func_start sub_816A084
-sub_816A084: @ 816A084
+	thumb_func_start WallyHandleCmd12
+WallyHandleCmd12: @ 816A084
 	push {r4,r5,lr}
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
@@ -3250,10 +3218,10 @@ sub_816A084: @ 816A084
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816A084
+	thumb_func_end WallyHandleCmd12
 
-	thumb_func_start sub_816A0D8
-sub_816A0D8: @ 816A0D8
+	thumb_func_start WallyHandleBallThrow
+WallyHandleBallThrow: @ 816A0D8
 	push {r4,r5,lr}
 	ldr r1, =gBattleBufferA
 	ldr r5, =gActiveBank
@@ -3289,18 +3257,18 @@ sub_816A0D8: @ 816A0D8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816A0D8
+	thumb_func_end WallyHandleBallThrow
 
-	thumb_func_start sub_816A138
-sub_816A138: @ 816A138
+	thumb_func_start WallyHandlePause
+WallyHandlePause: @ 816A138
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A138
+	thumb_func_end WallyHandlePause
 
-	thumb_func_start sub_816A144
-sub_816A144: @ 816A144
+	thumb_func_start WallyHandleMoveAnimation
+WallyHandleMoveAnimation: @ 816A144
 	push {r4-r6,lr}
 	ldr r0, =gBattleBufferA
 	mov r12, r0
@@ -3427,7 +3395,7 @@ _0816A25A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816A144
+	thumb_func_end WallyHandleMoveAnimation
 
 	thumb_func_start bx_move_anim_5
 bx_move_anim_5: @ 816A26C
@@ -3589,8 +3557,8 @@ _0816A3AC:
 	bx r0
 	thumb_func_end bx_move_anim_5
 
-	thumb_func_start sub_816A3B8
-sub_816A3B8: @ 816A3B8
+	thumb_func_start WallyHandlePrintString
+WallyHandlePrintString: @ 816A3B8
 	push {r4,lr}
 	ldr r0, =gBattle_BG0_X
 	movs r1, 0
@@ -3617,10 +3585,10 @@ sub_816A3B8: @ 816A3B8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816A3B8
+	thumb_func_end WallyHandlePrintString
 
-	thumb_func_start dp01t_11_5_message_for_player_only
-dp01t_11_5_message_for_player_only: @ 816A40C
+	thumb_func_start WallyHandlePrintStringPlayerOnly
+WallyHandlePrintStringPlayerOnly: @ 816A40C
 	push {lr}
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -3628,7 +3596,7 @@ dp01t_11_5_message_for_player_only: @ 816A40C
 	lsls r0, 24
 	cmp r0, 0
 	bne _0816A428
-	bl sub_816A3B8
+	bl WallyHandlePrintString
 	b _0816A42C
 	.pool
 _0816A428:
@@ -3636,7 +3604,7 @@ _0816A428:
 _0816A42C:
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_11_5_message_for_player_only
+	thumb_func_end WallyHandlePrintStringPlayerOnly
 
 	thumb_func_start sub_816A430
 sub_816A430: @ 816A430
@@ -3664,8 +3632,8 @@ _0816A456:
 	.pool
 	thumb_func_end sub_816A430
 
-	thumb_func_start dp01t_12_1_battle_menu
-dp01t_12_1_battle_menu: @ 816A470
+	thumb_func_start WallyHandleChooseAction
+WallyHandleChooseAction: @ 816A470
 	push {r4,lr}
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank
@@ -3701,18 +3669,18 @@ _0816A48A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_12_1_battle_menu
+	thumb_func_end WallyHandleChooseAction
 
-	thumb_func_start sub_816A4D8
-sub_816A4D8: @ 816A4D8
+	thumb_func_start WallyHandleCmd19
+WallyHandleCmd19: @ 816A4D8
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A4D8
+	thumb_func_end WallyHandleCmd19
 
-	thumb_func_start sub_816A4E4
-sub_816A4E4: @ 816A4E4
+	thumb_func_start WallyHandleChooseMove
+WallyHandleChooseMove: @ 816A4E4
 	push {r4,lr}
 	ldr r4, =gBattleStruct
 	ldr r1, [r4]
@@ -3783,10 +3751,10 @@ _0816A574:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A4E4
+	thumb_func_end WallyHandleChooseMove
 
-	thumb_func_start sub_816A57C
-sub_816A57C: @ 816A57C
+	thumb_func_start WallyHandleOpenBag
+WallyHandleOpenBag: @ 816A57C
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0x1
@@ -3810,26 +3778,26 @@ sub_816A57C: @ 816A57C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816A57C
+	thumb_func_end WallyHandleOpenBag
 
-	thumb_func_start sub_816A5BC
-sub_816A5BC: @ 816A5BC
+	thumb_func_start WallyHandleChoosePokemon
+WallyHandleChoosePokemon: @ 816A5BC
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A5BC
+	thumb_func_end WallyHandleChoosePokemon
 
-	thumb_func_start sub_816A5C8
-sub_816A5C8: @ 816A5C8
+	thumb_func_start WallyHandleCmd23
+WallyHandleCmd23: @ 816A5C8
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A5C8
+	thumb_func_end WallyHandleCmd23
 
-	thumb_func_start sub_816A5D4
-sub_816A5D4: @ 816A5D4
+	thumb_func_start WallyHandleHealthBarUpdate
+WallyHandleHealthBarUpdate: @ 816A5D4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3929,138 +3897,138 @@ _0816A69E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816A5D4
+	thumb_func_end WallyHandleHealthBarUpdate
 
-	thumb_func_start sub_816A6D4
-sub_816A6D4: @ 816A6D4
+	thumb_func_start WallyHandleExpUpdate
+WallyHandleExpUpdate: @ 816A6D4
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A6D4
+	thumb_func_end WallyHandleExpUpdate
 
-	thumb_func_start sub_816A6E0
-sub_816A6E0: @ 816A6E0
+	thumb_func_start WallyHandleStatusIconUpdate
+WallyHandleStatusIconUpdate: @ 816A6E0
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A6E0
+	thumb_func_end WallyHandleStatusIconUpdate
 
-	thumb_func_start sub_816A6EC
-sub_816A6EC: @ 816A6EC
+	thumb_func_start WallyHandleStatusAnimation
+WallyHandleStatusAnimation: @ 816A6EC
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A6EC
+	thumb_func_end WallyHandleStatusAnimation
 
-	thumb_func_start sub_816A6F8
-sub_816A6F8: @ 816A6F8
+	thumb_func_start WallyHandleStatusXor
+WallyHandleStatusXor: @ 816A6F8
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A6F8
+	thumb_func_end WallyHandleStatusXor
 
-	thumb_func_start sub_816A704
-sub_816A704: @ 816A704
+	thumb_func_start WallyHandleDataTransfer
+WallyHandleDataTransfer: @ 816A704
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A704
+	thumb_func_end WallyHandleDataTransfer
 
-	thumb_func_start sub_816A710
-sub_816A710: @ 816A710
+	thumb_func_start WallyHandleDMA3Transfer
+WallyHandleDMA3Transfer: @ 816A710
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A710
+	thumb_func_end WallyHandleDMA3Transfer
 
-	thumb_func_start sub_816A71C
-sub_816A71C: @ 816A71C
+	thumb_func_start WallyHandlePlayBGM
+WallyHandlePlayBGM: @ 816A71C
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A71C
+	thumb_func_end WallyHandlePlayBGM
 
-	thumb_func_start sub_816A728
-sub_816A728: @ 816A728
+	thumb_func_start WallyHandleCmd32
+WallyHandleCmd32: @ 816A728
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A728
+	thumb_func_end WallyHandleCmd32
 
-	thumb_func_start sub_816A734
-sub_816A734: @ 816A734
+	thumb_func_start WallyHandleCmd33
+WallyHandleCmd33: @ 816A734
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A734
+	thumb_func_end WallyHandleCmd33
 
-	thumb_func_start sub_816A740
-sub_816A740: @ 816A740
+	thumb_func_start WallyHandleCmd34
+WallyHandleCmd34: @ 816A740
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A740
+	thumb_func_end WallyHandleCmd34
 
-	thumb_func_start sub_816A74C
-sub_816A74C: @ 816A74C
+	thumb_func_start WallyHandleCmd35
+WallyHandleCmd35: @ 816A74C
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A74C
+	thumb_func_end WallyHandleCmd35
 
-	thumb_func_start sub_816A758
-sub_816A758: @ 816A758
+	thumb_func_start WallyHandleCmd36
+WallyHandleCmd36: @ 816A758
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A758
+	thumb_func_end WallyHandleCmd36
 
-	thumb_func_start sub_816A764
-sub_816A764: @ 816A764
+	thumb_func_start WallyHandleCmd37
+WallyHandleCmd37: @ 816A764
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A764
+	thumb_func_end WallyHandleCmd37
 
-	thumb_func_start sub_816A770
-sub_816A770: @ 816A770
+	thumb_func_start WallyHandleCmd38
+WallyHandleCmd38: @ 816A770
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A770
+	thumb_func_end WallyHandleCmd38
 
-	thumb_func_start sub_816A77C
-sub_816A77C: @ 816A77C
+	thumb_func_start WallyHandleCmd39
+WallyHandleCmd39: @ 816A77C
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A77C
+	thumb_func_end WallyHandleCmd39
 
-	thumb_func_start sub_816A788
-sub_816A788: @ 816A788
+	thumb_func_start WallyHandleCmd40
+WallyHandleCmd40: @ 816A788
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A788
+	thumb_func_end WallyHandleCmd40
 
-	thumb_func_start sub_816A794
-sub_816A794: @ 816A794
+	thumb_func_start WallyHandleHitAnimation
+WallyHandleHitAnimation: @ 816A794
 	push {r4,lr}
 	ldr r3, =gSprites
 	ldr r2, =gBankSpriteIds
@@ -4106,18 +4074,18 @@ _0816A7F2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816A794
+	thumb_func_end WallyHandleHitAnimation
 
-	thumb_func_start sub_816A804
-sub_816A804: @ 816A804
+	thumb_func_start WallyHandleCmd42
+WallyHandleCmd42: @ 816A804
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A804
+	thumb_func_end WallyHandleCmd42
 
-	thumb_func_start sub_816A810
-sub_816A810: @ 816A810
+	thumb_func_start WallyHandleEffectivenessSound
+WallyHandleEffectivenessSound: @ 816A810
 	push {lr}
 	ldr r2, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -4136,10 +4104,10 @@ sub_816A810: @ 816A810
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816A810
+	thumb_func_end WallyHandleEffectivenessSound
 
-	thumb_func_start sub_816A840
-sub_816A840: @ 816A840
+	thumb_func_start WallyHandlePlayFanfareOrBGM
+WallyHandlePlayFanfareOrBGM: @ 816A840
 	push {r4,r5,lr}
 	ldr r4, =gBattleBufferA
 	ldr r5, =gActiveBank
@@ -4179,10 +4147,10 @@ _0816A890:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816A840
+	thumb_func_end WallyHandlePlayFanfareOrBGM
 
-	thumb_func_start sub_816A89C
-sub_816A89C: @ 816A89C
+	thumb_func_start WallyHandleFaintingCry
+WallyHandleFaintingCry: @ 816A89C
 	push {lr}
 	ldr r1, =gBattlePartyID
 	ldr r0, =gActiveBank
@@ -4204,10 +4172,10 @@ sub_816A89C: @ 816A89C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816A89C
+	thumb_func_end WallyHandleFaintingCry
 
-	thumb_func_start dp01t_2E_5_battle_intro
-dp01t_2E_5_battle_intro: @ 816A8D8
+	thumb_func_start WallyHandleIntroSlide
+WallyHandleIntroSlide: @ 816A8D8
 	push {lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -4226,10 +4194,10 @@ dp01t_2E_5_battle_intro: @ 816A8D8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_2E_5_battle_intro
+	thumb_func_end WallyHandleIntroSlide
 
-	thumb_func_start sub_816A90C
-sub_816A90C: @ 816A90C
+	thumb_func_start WallyHandleIntroTrainerBallThrow
+WallyHandleIntroTrainerBallThrow: @ 816A90C
 	push {r4-r7,lr}
 	ldr r6, =gBankSpriteIds
 	ldr r7, =gActiveBank
@@ -4381,7 +4349,7 @@ _0816AA24:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816A90C
+	thumb_func_end WallyHandleIntroTrainerBallThrow
 
 	thumb_func_start sub_816AA80
 sub_816AA80: @ 816AA80
@@ -4601,8 +4569,8 @@ _0816AC5E:
 	.pool
 	thumb_func_end sub_816AC04
 
-	thumb_func_start sub_816AC78
-sub_816AC78: @ 816AC78
+	thumb_func_start WallyHandleDrawPartyStatusSummary
+WallyHandleDrawPartyStatusSummary: @ 816AC78
 	push {r4,r5,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -4656,34 +4624,34 @@ _0816ACE6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816AC78
+	thumb_func_end WallyHandleDrawPartyStatusSummary
 
-	thumb_func_start sub_816ACFC
-sub_816ACFC: @ 816ACFC
+	thumb_func_start WallyHandleCmd49
+WallyHandleCmd49: @ 816ACFC
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816ACFC
+	thumb_func_end WallyHandleCmd49
 
-	thumb_func_start sub_816AD08
-sub_816AD08: @ 816AD08
+	thumb_func_start WallyHandleCmd50
+WallyHandleCmd50: @ 816AD08
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816AD08
+	thumb_func_end WallyHandleCmd50
 
-	thumb_func_start sub_816AD14
-sub_816AD14: @ 816AD14
+	thumb_func_start WallyHandleSpriteInvisibility
+WallyHandleSpriteInvisibility: @ 816AD14
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816AD14
+	thumb_func_end WallyHandleSpriteInvisibility
 
-	thumb_func_start sub_816AD20
-sub_816AD20: @ 816AD20
+	thumb_func_start WallyHandleBattleAnimation
+WallyHandleBattleAnimation: @ 816AD20
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, =gBattleBufferA
@@ -4724,26 +4692,26 @@ _0816AD6C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816AD20
+	thumb_func_end WallyHandleBattleAnimation
 
-	thumb_func_start sub_816AD7C
-sub_816AD7C: @ 816AD7C
+	thumb_func_start WallyHandleLinkStandbyMsg
+WallyHandleLinkStandbyMsg: @ 816AD7C
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816AD7C
+	thumb_func_end WallyHandleLinkStandbyMsg
 
-	thumb_func_start sub_816AD88
-sub_816AD88: @ 816AD88
+	thumb_func_start WallyHandleResetActionMoveSelection
+WallyHandleResetActionMoveSelection: @ 816AD88
 	push {lr}
 	bl WallyBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_816AD88
+	thumb_func_end WallyHandleResetActionMoveSelection
 
-	thumb_func_start sub_816AD94
-sub_816AD94: @ 816AD94
+	thumb_func_start WallyHandleCmd55
+WallyHandleCmd55: @ 816AD94
 	push {r4,lr}
 	ldr r2, =gBattleOutcome
 	ldr r1, =gBattleBufferA
@@ -4776,7 +4744,7 @@ _0816ADD0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816AD94
+	thumb_func_end WallyHandleCmd55
 
 	thumb_func_start nullsub_118
 nullsub_118: @ 816ADF0

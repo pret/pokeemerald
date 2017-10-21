@@ -9861,7 +9861,7 @@ sub_81C4EFC: @ 81C4EFC
 	thumb_func_start sub_81C4F10
 sub_81C4F10: @ 81C4F10
 	push {lr}
-	ldr r1, =sub_8059D50
+	ldr r1, =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x1
 	bl sub_81C4F98
 	pop {r0}

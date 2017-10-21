@@ -5,4728 +5,11 @@
 
 	.text
 
-	thumb_func_start nullsub_21
-nullsub_21: @ 8057458
-	bx lr
-	thumb_func_end nullsub_21
+    
+    
 
-	thumb_func_start SetBankFuncToPlayerBufferRunCommand
-SetBankFuncToPlayerBufferRunCommand: @ 805745C
-	ldr r1, =gBattleBankFunc
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =PlayerBufferRunCommand
-	str r1, [r0]
-	ldr r0, =gDoingBattleAnim
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, =gUnknown_020244CC
-	strb r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end SetBankFuncToPlayerBufferRunCommand
-
-	thumb_func_start PlayerBufferExecCompleted
-PlayerBufferExecCompleted: @ 805748C
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r1, =gBattleBankFunc
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =PlayerBufferRunCommand
-	str r1, [r0]
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080574E0
-	bl GetMultiplayerId
-	mov r1, sp
-	strb r0, [r1]
-	movs r0, 0x2
-	movs r1, 0x4
-	mov r2, sp
-	bl PrepareBufferDataTransferLink
-	ldr r1, =gBattleBufferA
-	ldrb r0, [r4]
-	lsls r0, 9
-	adds r0, r1
-	movs r1, 0x38
-	strb r1, [r0]
-	b _080574F2
-	.pool
-_080574E0:
-	ldr r2, =gBattleExecBuffer
-	ldr r1, =gBitTable
-	ldrb r0, [r4]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, [r0]
-	ldr r0, [r2]
-	bics r0, r1
-	str r0, [r2]
-_080574F2:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end PlayerBufferExecCompleted
-
-	thumb_func_start PlayerBufferRunCommand
-PlayerBufferRunCommand: @ 8057504
-	push {lr}
-	ldr r2, =gBattleExecBuffer
-	ldr r1, =gBitTable
-	ldr r0, =gActiveBank
-	ldrb r3, [r0]
-	lsls r0, r3, 2
-	adds r0, r1
-	ldr r1, [r2]
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	beq _08057550
-	ldr r0, =gBattleBufferA
-	lsls r1, r3, 9
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r0, 0x38
-	bhi _0805754C
-	ldr r0, =gPlayerBufferCommands
-	ldrb r1, [r1]
-	lsls r1, 2
-	adds r1, r0
-	ldr r0, [r1]
-	bl _call_via_r0
-	b _08057550
-	.pool
-_0805754C:
-	bl PlayerBufferExecCompleted
-_08057550:
-	pop {r0}
-	bx r0
-	thumb_func_end PlayerBufferRunCommand
-
-	thumb_func_start bx_0802E404
-bx_0802E404: @ 8057554
-	push {lr}
-	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	movs r1, 0x24
-	ldrsh r0, [r0, r1]
-	cmp r0, 0
-	bne _08057576
-	bl PlayerBufferExecCompleted
-_08057576:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end bx_0802E404
-
-	thumb_func_start sub_8057588
-sub_8057588: @ 8057588
-	push {r4-r7,lr}
-	ldr r3, =gBattleBufferA
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	lsls r2, r0, 9
-	adds r1, r3, 0x2
-	adds r1, r2, r1
-	ldrb r5, [r1]
-	adds r3, 0x3
-	adds r2, r3
-	ldrb r1, [r2]
-	lsls r1, 8
-	orrs r5, r1
-	movs r1, 0x1
-	movs r2, 0x7
-	movs r3, 0x1
-	bl dp11b_obj_instanciate
-	ldrb r0, [r4]
-	movs r1, 0
-	movs r2, 0x7
-	movs r3, 0x1
-	bl dp11b_obj_instanciate
-	ldr r0, =gMain
-	ldrh r1, [r0, 0x30]
-	movs r0, 0xF0
-	ands r0, r1
-	cmp r0, 0
-	beq _080575EC
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x13]
-	cmp r0, 0x2
-	bne _080575EC
-	ldr r1, =gUnknown_020244CC
-	ldrb r0, [r1]
-	adds r0, 0x1
-	b _080575F0
-	.pool
-_080575EC:
-	ldr r1, =gUnknown_020244CC
-	movs r0, 0
-_080575F0:
-	strb r0, [r1]
-	ldr r0, =gMain
-	ldrh r2, [r0, 0x2E]
-	movs r3, 0x1
-	adds r0, r3, 0
-	ands r0, r2
-	cmp r0, 0
-	beq _08057658
-	movs r0, 0x5
-	bl PlaySE
-	ldr r1, =gActionSelectionCursor
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _08057640
-	cmp r0, 0x1
-	bgt _08057630
-	cmp r0, 0
-	beq _0805763A
-	b _080577C2
-	.pool
-_08057630:
-	cmp r0, 0x2
-	beq _08057646
-	cmp r0, 0x3
-	beq _0805764C
-	b _080577C2
-_0805763A:
-	movs r0, 0x1
-	movs r1, 0
-	b _080577BC
-_08057640:
-	movs r0, 0x1
-	movs r1, 0x1
-	b _080577BC
-_08057646:
-	movs r0, 0x1
-	movs r1, 0x2
-	b _080577BC
-_0805764C:
-	movs r0, 0x1
-	movs r1, 0x3
-	movs r2, 0
-	bl EmitCmd33
-	b _080577C2
-_08057658:
-	movs r0, 0x20
-	ands r0, r2
-	cmp r0, 0
-	beq _08057698
-	ldr r5, =gActionSelectionCursor
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	adds r0, r3, 0
-	ands r0, r1
-	cmp r0, 0
-	bne _08057674
-	b _080577E8
-_08057674:
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	bl ActionSelectionDestroyCursorAt
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	movs r2, 0x1
-	b _08057732
-	.pool
-_08057698:
-	movs r0, 0x10
-	ands r0, r2
-	cmp r0, 0
-	beq _080576D8
-	ldr r5, =gActionSelectionCursor
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	adds r0, r3, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _080576B4
-	b _080577E8
-_080576B4:
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	bl ActionSelectionDestroyCursorAt
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	movs r2, 0x1
-	b _08057732
-	.pool
-_080576D8:
-	movs r7, 0x40
-	adds r0, r7, 0
-	ands r0, r2
-	cmp r0, 0
-	beq _08057700
-	ldr r5, =gActionSelectionCursor
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080577E8
-	b _0805771A
-	.pool
-_08057700:
-	movs r0, 0x80
-	ands r0, r2
-	cmp r0, 0
-	beq _0805774C
-	ldr r5, =gActionSelectionCursor
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	bne _080577E8
-_0805771A:
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	bl ActionSelectionDestroyCursorAt
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	movs r2, 0x2
-_08057732:
-	eors r0, r2
-	strb r0, [r1]
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	movs r1, 0
-	bl ActionSelectionCreateCursorAt
-	b _080577E8
-	.pool
-_0805774C:
-	movs r0, 0x2
-	ands r0, r2
-	cmp r0, 0
-	bne _0805775A
-	ldrb r0, [r1]
-	cmp r0, 0x3B
-	bls _080577DC
-_0805775A:
-	ldr r4, =gBattleTypeFlags
-	ldr r0, [r4]
-	ands r0, r3
-	cmp r0, 0
-	beq _080577E8
-	ldr r6, =gActiveBank
-	ldrb r0, [r6]
-	bl GetBankIdentity
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	bne _080577E8
-	movs r0, 0
-	bl GetBankByIdentity
-	ldr r1, =gAbsentBankFlags
-	ldrb r1, [r1]
-	ldr r2, =gBitTable
-	lsls r0, 24
-	lsrs r0, 22
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	bne _080577E8
-	ldr r0, [r4]
-	ands r0, r7
-	cmp r0, 0
-	bne _080577E8
-	ldr r0, =gBattleBufferA
-	ldrb r1, [r6]
-	lsls r1, 9
-	adds r0, 0x1
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r0, 0x1
-	bne _080577B2
-	cmp r5, 0xC
-	bhi _080577E8
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl AddBagItem
-_080577B2:
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0x1
-	movs r1, 0xC
-_080577BC:
-	movs r2, 0
-	bl EmitCmd33
-_080577C2:
-	bl PlayerBufferExecCompleted
-	b _080577E8
-	.pool
-_080577DC:
-	movs r0, 0x8
-	ands r0, r2
-	cmp r0, 0
-	beq _080577E8
-	bl SwapHpBarsWithHpText
-_080577E8:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8057588
-
-	thumb_func_start sub_80577F0
-sub_80577F0: @ 80577F0
-	push {r4,lr}
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	movs r1, 0x1
-	bl dp11b_obj_free
-	ldrb r0, [r4]
-	movs r1, 0
-	bl dp11b_obj_free
-	ldr r1, =gBattleBankFunc
-	ldrb r0, [r4]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_8057824
-	str r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80577F0
-
-	thumb_func_start sub_8057824
-sub_8057824: @ 8057824
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r1, =gUnknown_0831C5F8
-	mov r0, sp
-	movs r2, 0x4
-	bl memcpy
-	ldr r0, =gUnknown_03005D74
-	ldrb r0, [r0]
-	movs r1, 0x1
-	movs r2, 0xF
-	movs r3, 0x1
-	bl dp11b_obj_instanciate
-	movs r4, 0
-	ldr r0, =gNoOfAllBanks
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _08057866
-_0805784A:
-	ldr r0, =gUnknown_03005D74
-	ldrb r0, [r0]
-	cmp r4, r0
-	beq _0805785C
-	lsls r0, r4, 24
-	lsrs r0, 24
-	movs r1, 0x1
-	bl dp11b_obj_free
-_0805785C:
-	adds r4, 0x1
-	ldr r0, =gNoOfAllBanks
-	ldrb r0, [r0]
-	cmp r4, r0
-	blt _0805784A
-_08057866:
-	ldr r2, =gMain
-	ldrh r1, [r2, 0x2C]
-	movs r0, 0xF0
-	ands r0, r1
-	cmp r0, 0
-	beq _0805789C
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x13]
-	cmp r0, 0x2
-	bne _0805789C
-	ldr r1, =gUnknown_020244CC
-	ldrb r0, [r1]
-	adds r0, 0x1
-	b _080578A0
-	.pool
-_0805789C:
-	ldr r1, =gUnknown_020244CC
-	movs r0, 0
-_080578A0:
-	strb r0, [r1]
-	ldrh r2, [r2, 0x2E]
-	movs r0, 0x1
-	ands r0, r2
-	cmp r0, 0
-	beq _08057910
-	movs r0, 0x5
-	bl PlaySE
-	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r4, =gUnknown_03005D74
-	ldrb r0, [r4]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, =sub_8039B2C
-	str r1, [r0]
-	ldr r1, =gMoveSelectionCursor
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r2, [r0]
-	ldrb r0, [r4]
-	lsls r0, 8
-	orrs r2, r0
-	movs r0, 0x1
-	movs r1, 0xA
-	bl EmitCmd33
-	ldrb r0, [r4]
-	movs r1, 0x1
-	bl dp11b_obj_free
-	bl PlayerBufferExecCompleted
-	b _08057BC8
-	.pool
-_08057910:
-	movs r0, 0x2
-	ands r0, r2
-	cmp r0, 0
-	bne _0805791E
-	ldrb r0, [r1]
-	cmp r0, 0x3B
-	bls _0805798C
-_0805791E:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r5, =gUnknown_03005D74
-	ldrb r0, [r5]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, =sub_8039B2C
-	str r1, [r0]
-	ldr r1, =gBattleBankFunc
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_8057BFC
-	str r1, [r0]
-	ldrb r0, [r4]
-	movs r1, 0x1
-	movs r2, 0x7
-	movs r3, 0x1
-	bl dp11b_obj_instanciate
-	ldrb r0, [r4]
-	movs r1, 0
-	movs r2, 0x7
-	movs r3, 0x1
-	bl dp11b_obj_instanciate
-	ldrb r0, [r5]
-	movs r1, 0x1
-	bl dp11b_obj_free
-	b _08057BC8
-	.pool
-_0805798C:
-	movs r0, 0x60
-	ands r0, r2
-	cmp r0, 0
-	bne _08057996
-	b _08057AB0
-_08057996:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r3, =gUnknown_03005D74
-	ldrb r0, [r3]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, =sub_8039B2C
-	str r1, [r0]
-	adds r5, r3, 0
-_080579B8:
-	ldrb r0, [r5]
-	bl GetBankIdentity
-	lsls r0, 24
-	lsrs r1, r0, 24
-	movs r4, 0
-	mov r0, sp
-	b _080579E2
-	.pool
-_080579D8:
-	adds r4, 0x1
-	cmp r4, 0x3
-	bgt _080579E8
-	mov r2, sp
-	adds r0, r2, r4
-_080579E2:
-	ldrb r0, [r0]
-	cmp r1, r0
-	bne _080579D8
-_080579E8:
-	subs r4, 0x1
-	cmp r4, 0
-	bge _080579F0
-	movs r4, 0x4
-_080579F0:
-	mov r1, sp
-	adds r0, r1, r4
-	ldrb r0, [r0]
-	bl GetBankByIdentity
-	strb r0, [r5]
-	ldr r1, =gNoOfAllBanks
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r1, [r1]
-	cmp r0, r1
-	beq _080579E8
-	movs r4, 0
-	ldrb r0, [r5]
-	bl GetBankIdentity
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _08057A6E
-	cmp r0, 0x1
-	bgt _08057A28
-	cmp r0, 0
-	beq _08057A32
-	b _08057A70
-	.pool
-_08057A28:
-	cmp r0, 0x2
-	beq _08057A32
-	cmp r0, 0x3
-	beq _08057A6E
-	b _08057A70
-_08057A32:
-	ldr r2, =gActiveBank
-	ldrb r0, [r2]
-	ldrb r1, [r5]
-	cmp r0, r1
-	bne _08057A6E
-	ldr r1, =gBattlePartyID
-	ldrb r2, [r2]
-	lsls r0, r2, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	ldr r1, =gMoveSelectionCursor
-	adds r2, r1
-	ldrb r1, [r2]
-	adds r1, 0xD
-	bl GetMonData
-	ldr r2, =gBattleMoves
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r1, [r1, 0x6]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08057A70
-_08057A6E:
-	adds r4, 0x1
-_08057A70:
-	ldr r0, =gAbsentBankFlags
-	ldrb r1, [r0]
-	ldr r2, =gBitTable
-	ldrb r0, [r5]
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	ldr r0, =gUnknown_03005D74
-	cmp r1, 0
-	beq _08057A88
-	movs r4, 0
-_08057A88:
-	cmp r4, 0
-	beq _080579B8
-	b _08057BB0
-	.pool
-_08057AB0:
-	movs r0, 0x90
-	ands r0, r2
-	cmp r0, 0
-	bne _08057ABA
-	b _08057BC8
-_08057ABA:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r3, =gUnknown_03005D74
-	ldrb r0, [r3]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, =sub_8039B2C
-	str r1, [r0]
-	adds r5, r3, 0
-_08057ADC:
-	ldrb r0, [r5]
-	bl GetBankIdentity
-	lsls r0, 24
-	lsrs r1, r0, 24
-	movs r4, 0
-	mov r0, sp
-	b _08057B06
-	.pool
-_08057AFC:
-	adds r4, 0x1
-	cmp r4, 0x3
-	bgt _08057B0C
-	mov r2, sp
-	adds r0, r2, r4
-_08057B06:
-	ldrb r0, [r0]
-	cmp r1, r0
-	bne _08057AFC
-_08057B0C:
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _08057B14
-	movs r4, 0
-_08057B14:
-	mov r1, sp
-	adds r0, r1, r4
-	ldrb r0, [r0]
-	bl GetBankByIdentity
-	strb r0, [r5]
-	ldr r1, =gNoOfAllBanks
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r1, [r1]
-	cmp r0, r1
-	beq _08057B0C
-	movs r4, 0
-	ldrb r0, [r5]
-	bl GetBankIdentity
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _08057B92
-	cmp r0, 0x1
-	bgt _08057B4C
-	cmp r0, 0
-	beq _08057B56
-	b _08057B94
-	.pool
-_08057B4C:
-	cmp r0, 0x2
-	beq _08057B56
-	cmp r0, 0x3
-	beq _08057B92
-	b _08057B94
-_08057B56:
-	ldr r2, =gActiveBank
-	ldrb r0, [r2]
-	ldrb r1, [r5]
-	cmp r0, r1
-	bne _08057B92
-	ldr r1, =gBattlePartyID
-	ldrb r2, [r2]
-	lsls r0, r2, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	ldr r1, =gMoveSelectionCursor
-	adds r2, r1
-	ldrb r1, [r2]
-	adds r1, 0xD
-	bl GetMonData
-	ldr r2, =gBattleMoves
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r1, [r1, 0x6]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08057B94
-_08057B92:
-	adds r4, 0x1
-_08057B94:
-	ldr r0, =gAbsentBankFlags
-	ldrb r1, [r0]
-	ldr r2, =gBitTable
-	ldrb r0, [r5]
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	ldr r0, =gUnknown_03005D74
-	cmp r1, 0
-	beq _08057BAC
-	movs r4, 0
-_08057BAC:
-	cmp r4, 0
-	beq _08057ADC
-_08057BB0:
-	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, =sub_8039AD8
-	str r1, [r0]
-_08057BC8:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8057824
-
-	thumb_func_start sub_8057BFC
-sub_8057BFC: @ 8057BFC
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	movs r0, 0
-	mov r8, r0
-	ldr r3, =gActiveBank
-	ldrb r0, [r3]
-	lsls r0, 9
-	ldr r1, =gBattleBufferA + 4
-	adds r6, r0, r1
-	ldr r2, =gMain
-	ldrh r1, [r2, 0x2C]
-	movs r0, 0xF0
-	ands r0, r1
-	adds r7, r3, 0
-	cmp r0, 0
-	beq _08057C44
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x13]
-	cmp r0, 0x2
-	bne _08057C44
-	ldr r1, =gUnknown_020244CC
-	ldrb r0, [r1]
-	adds r0, 0x1
-	b _08057C48
-	.pool
-_08057C44:
-	ldr r1, =gUnknown_020244CC
-	movs r0, 0
-_08057C48:
-	strb r0, [r1]
-	ldrh r2, [r2, 0x2E]
-	movs r5, 0x1
-	adds r0, r5, 0
-	ands r0, r2
-	cmp r0, 0
-	bne _08057C58
-	b _08057E04
-_08057C58:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r1, =gMoveSelectionCursor
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 1
-	adds r1, r6, r0
-	ldrh r0, [r1]
-	cmp r0, 0xAE
-	bne _08057C98
-	ldrb r0, [r6, 0x12]
-	movs r4, 0
-	cmp r0, 0x7
-	beq _08057CA6
-	ldrb r1, [r6, 0x13]
-	movs r0, 0x7
-	eors r1, r0
-	negs r0, r1
-	orrs r0, r1
-	asrs r4, r0, 31
-	movs r0, 0x10
-	ands r4, r0
-	b _08057CA6
-	.pool
-_08057C98:
-	ldr r2, =gBattleMoves
-	ldrh r1, [r1]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r4, [r0, 0x6]
-_08057CA6:
-	movs r0, 0x10
-	ands r0, r4
-	cmp r0, 0
-	beq _08057CC4
-	ldr r0, =gUnknown_03005D74
-	ldr r1, =gActiveBank
-	ldrb r1, [r1]
-	strb r1, [r0]
-	b _08057CDE
-	.pool
-_08057CC4:
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	bl GetBankIdentity
-	adds r1, r0, 0
-	movs r2, 0x1
-	movs r0, 0x1
-	ands r0, r1
-	eors r0, r2
-	bl GetBankByIdentity
-	ldr r1, =gUnknown_03005D74
-	strb r0, [r1]
-_08057CDE:
-	ldr r5, =gBattleBufferA
-	ldr r0, =gActiveBank
-	ldrb r3, [r0]
-	lsls r2, r3, 9
-	adds r1, r5, 0x1
-	adds r1, r2, r1
-	ldrb r1, [r1]
-	adds r7, r0, 0
-	cmp r1, 0
-	bne _08057D18
-	movs r0, 0x2
-	ands r0, r4
-	cmp r0, 0
-	beq _08057D5A
-	adds r0, r5, 0x2
-	adds r0, r2, r0
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08057D5A
-	movs r0, 0x1
-	add r8, r0
-	b _08057D5A
-	.pool
-_08057D18:
-	movs r0, 0x7D
-	ands r0, r4
-	cmp r0, 0
-	bne _08057D24
-	movs r0, 0x1
-	add r8, r0
-_08057D24:
-	ldr r0, =gMoveSelectionCursor
-	adds r0, r3, r0
-	adds r1, r6, 0
-	adds r1, 0x8
-	ldrb r0, [r0]
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _08057D62
-	movs r0, 0x12
-	ands r0, r4
-	cmp r0, 0
-	bne _08057D5A
-	movs r0, 0
-	bl CountAliveMonsInBattle
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bhi _08057D5A
-	ldrb r0, [r7]
-	bl sub_8069F34
-	ldr r1, =gUnknown_03005D74
-	strb r0, [r1]
-	movs r0, 0
-	mov r8, r0
-_08057D5A:
-	ldr r7, =gActiveBank
-	mov r0, r8
-	cmp r0, 0
-	bne _08057D80
-_08057D62:
-	ldr r1, =gMoveSelectionCursor
-	ldrb r0, [r7]
-	adds r0, r1
-	ldrb r2, [r0]
-	ldr r0, =gUnknown_03005D74
-	ldrb r0, [r0]
-	lsls r0, 8
-	orrs r2, r0
-	b _08057E1C
-	.pool
-_08057D80:
-	ldr r1, =gBattleBankFunc
-	ldrb r0, [r7]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_8057824
-	str r1, [r0]
-	movs r0, 0x12
-	ands r4, r0
-	cmp r4, 0
-	beq _08057DA8
-	ldr r1, =gUnknown_03005D74
-	ldrb r0, [r7]
-	b _08057DD8
-	.pool
-_08057DA8:
-	movs r0, 0x1
-	bl GetBankByIdentity
-	ldr r1, =gAbsentBankFlags
-	ldrb r1, [r1]
-	ldr r2, =gBitTable
-	lsls r0, 24
-	lsrs r0, 22
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	beq _08057DD0
-	movs r0, 0x3
-	b _08057DD2
-	.pool
-_08057DD0:
-	movs r0, 0x1
-_08057DD2:
-	bl GetBankByIdentity
-	ldr r1, =gUnknown_03005D74
-_08057DD8:
-	strb r0, [r1]
-	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gUnknown_03005D74
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, =sub_8039AD8
-	b _08057F9C
-	.pool
-_08057E04:
-	movs r6, 0x2
-	adds r0, r6, 0
-	ands r0, r2
-	cmp r0, 0
-	bne _08057E14
-	ldrb r0, [r1]
-	cmp r0, 0x3B
-	bls _08057E30
-_08057E14:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r2, =0x0000ffff
-_08057E1C:
-	movs r0, 0x1
-	movs r1, 0xA
-	bl EmitCmd33
-	bl PlayerBufferExecCompleted
-	b _08057F9E
-	.pool
-_08057E30:
-	movs r0, 0x20
-	ands r0, r2
-	cmp r0, 0
-	beq _08057E60
-	ldr r4, =gMoveSelectionCursor
-	ldrb r0, [r7]
-	adds r2, r0, r4
-	ldrb r1, [r2]
-	adds r0, r5, 0
-	ands r0, r1
-	cmp r0, 0
-	bne _08057E4A
-	b _08057F9E
-_08057E4A:
-	ldrb r0, [r2]
-	bl battle_menu_cursor_related
-	ldrb r1, [r7]
-	adds r1, r4
-	ldrb r0, [r1]
-	movs r2, 0x1
-	eors r0, r2
-	b _08057F08
-	.pool
-_08057E60:
-	movs r0, 0x10
-	ands r0, r2
-	cmp r0, 0
-	beq _08057EA4
-	ldr r4, =gMoveSelectionCursor
-	ldrb r0, [r7]
-	adds r3, r0, r4
-	ldrb r2, [r3]
-	movs r6, 0x1
-	adds r0, r5, 0
-	ands r0, r2
-	cmp r0, 0
-	beq _08057E7C
-	b _08057F9E
-_08057E7C:
-	ldr r1, =gUnknown_03005D78
-	adds r0, r6, 0
-	eors r0, r2
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcc _08057E8A
-	b _08057F9E
-_08057E8A:
-	ldrb r0, [r3]
-	bl battle_menu_cursor_related
-	ldrb r1, [r7]
-	adds r1, r4
-	ldrb r0, [r1]
-	eors r0, r6
-	b _08057F08
-	.pool
-_08057EA4:
-	movs r0, 0x40
-	ands r0, r2
-	cmp r0, 0
-	beq _08057ED4
-	ldr r4, =gMoveSelectionCursor
-	ldrb r0, [r7]
-	adds r2, r0, r4
-	ldrb r1, [r2]
-	adds r0, r6, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08057F9E
-	ldrb r0, [r2]
-	bl battle_menu_cursor_related
-	ldrb r1, [r7]
-	adds r1, r4
-	ldrb r0, [r1]
-	movs r2, 0x2
-	eors r0, r2
-	b _08057F08
-	.pool
-_08057ED4:
-	movs r0, 0x80
-	ands r0, r2
-	cmp r0, 0
-	beq _08057F30
-	ldr r4, =gMoveSelectionCursor
-	ldrb r0, [r7]
-	adds r3, r0, r4
-	ldrb r2, [r3]
-	movs r5, 0x2
-	adds r0, r6, 0
-	ands r0, r2
-	cmp r0, 0
-	bne _08057F9E
-	ldr r1, =gUnknown_03005D78
-	adds r0, r5, 0
-	eors r0, r2
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcs _08057F9E
-	ldrb r0, [r3]
-	bl battle_menu_cursor_related
-	ldrb r1, [r7]
-	adds r1, r4
-	ldrb r0, [r1]
-	eors r0, r5
-_08057F08:
-	strb r0, [r1]
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r7]
-	adds r0, r4
-	ldrb r0, [r0]
-	movs r1, 0
-	bl battle_menu_cursor_related_2
-	bl sub_8059B3C
-	bl sub_8059BB0
-	b _08057F9E
-	.pool
-_08057F30:
-	movs r0, 0x4
-	ands r0, r2
-	cmp r0, 0
-	beq _08057F9E
-	ldr r0, =gUnknown_03005D78
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bls _08057F9E
-	ldr r0, =gBattleTypeFlags
-	ldr r5, [r0]
-	ands r5, r6
-	cmp r5, 0
-	bne _08057F9E
-	ldr r4, =gMoveSelectionCursor
-	ldrb r0, [r7]
-	adds r0, r4
-	ldrb r0, [r0]
-	movs r1, 0x1D
-	bl battle_menu_cursor_related_2
-	ldrb r0, [r7]
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _08057F78
-	ldr r0, =gUnknown_03005D74
-	strb r5, [r0]
-	b _08057F80
-	.pool
-_08057F78:
-	ldr r1, =gUnknown_03005D74
-	adds r0, 0x1
-	strb r0, [r1]
-	adds r0, r1, 0
-_08057F80:
-	ldrb r0, [r0]
-	movs r1, 0x1B
-	bl battle_menu_cursor_related_2
-	ldr r0, =gText_BattleSwitchWhich
-	movs r1, 0xB
-	bl sub_814F9EC
-	ldr r1, =gBattleBankFunc
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_8058138
-_08057F9C:
-	str r1, [r0]
-_08057F9E:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8057BFC
-
-	thumb_func_start sub_8057FBC
-sub_8057FBC: @ 8057FBC
-	push {r4-r7,lr}
-	movs r7, 0
-	ldr r4, =gMain
-	ldrh r1, [r4, 0x2E]
-	movs r6, 0x1
-	adds r0, r6, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08057FD6
-	movs r0, 0x5
-	bl PlaySE
-	movs r7, 0x1
-_08057FD6:
-	ldrh r1, [r4, 0x2E]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08057FF8
-	movs r0, 0x5
-	bl PlaySE
-	ldr r1, =gBattle_BG0_X
-	movs r0, 0
-	strh r0, [r1]
-	ldr r1, =gBattle_BG0_Y
-	movs r2, 0xA0
-	lsls r2, 1
-	adds r0, r2, 0
-	strh r0, [r1]
-	movs r7, 0xFF
-_08057FF8:
-	ldrh r1, [r4, 0x2E]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _08058038
-	ldr r5, =gMoveSelectionCursor
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r2, r0, r5
-	ldrb r1, [r2]
-	adds r0, r6, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08058038
-	ldrb r0, [r2]
-	bl battle_menu_cursor_related
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	movs r2, 0x1
-	eors r0, r2
-	strb r0, [r1]
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	movs r1, 0
-	bl battle_menu_cursor_related_2
-_08058038:
-	ldr r0, =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _08058086
-	ldr r5, =gMoveSelectionCursor
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r3, r0, r5
-	ldrb r2, [r3]
-	movs r6, 0x1
-	movs r0, 0x1
-	ands r0, r2
-	cmp r0, 0
-	bne _08058086
-	ldr r1, =gUnknown_03005D78
-	adds r0, r6, 0
-	eors r0, r2
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcs _08058086
-	ldrb r0, [r3]
-	bl battle_menu_cursor_related
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	eors r0, r6
-	strb r0, [r1]
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	movs r1, 0
-	bl battle_menu_cursor_related_2
-_08058086:
-	ldr r0, =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _080580C8
-	ldr r5, =gMoveSelectionCursor
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r2, r0, r5
-	ldrb r1, [r2]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080580C8
-	ldrb r0, [r2]
-	bl battle_menu_cursor_related
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	movs r2, 0x2
-	eors r0, r2
-	strb r0, [r1]
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	movs r1, 0
-	bl battle_menu_cursor_related_2
-_080580C8:
-	ldr r0, =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08058116
-	ldr r5, =gMoveSelectionCursor
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r3, r0, r5
-	ldrb r2, [r3]
-	movs r6, 0x2
-	movs r0, 0x2
-	ands r0, r2
-	cmp r0, 0
-	bne _08058116
-	ldr r1, =gUnknown_03005D78
-	adds r0, r6, 0
-	eors r0, r2
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcs _08058116
-	ldrb r0, [r3]
-	bl battle_menu_cursor_related
-	ldrb r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	eors r0, r6
-	strb r0, [r1]
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	movs r1, 0
-	bl battle_menu_cursor_related_2
-_08058116:
-	adds r0, r7, 0
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8057FBC
-
-	thumb_func_start sub_8058138
-sub_8058138: @ 8058138
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x24
-	ldr r0, =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x5
-	ands r0, r1
-	cmp r0, 0
-	bne _08058152
-	b _08058500
-_08058152:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, =gMoveSelectionCursor
-	mov r10, r0
-	ldr r1, =gActiveBank
-	mov r8, r1
-	ldrb r1, [r1]
-	adds r2, r1, r0
-	ldr r5, =gUnknown_03005D74
-	ldrb r0, [r2]
-	ldrb r3, [r5]
-	cmp r0, r3
-	bne _08058170
-	b _080584A8
-_08058170:
-	lsls r1, 9
-	ldr r0, =gBattleBufferA + 4
-	adds r1, r0
-	mov r9, r1
-	ldrb r1, [r2]
-	lsls r1, 1
-	add r1, r9
-	ldrh r6, [r1]
-	ldrb r0, [r5]
-	lsls r0, 1
-	add r0, r9
-	ldrh r0, [r0]
-	strh r0, [r1]
-	ldrb r0, [r5]
-	lsls r0, 1
-	add r0, r9
-	strh r6, [r0]
-	mov r1, r8
-	ldrb r0, [r1]
-	add r0, r10
-	ldrb r1, [r0]
-	mov r7, r9
-	adds r7, 0x8
-	adds r1, r7, r1
-	ldrb r6, [r1]
-	ldrb r0, [r5]
-	adds r0, r7, r0
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldrb r0, [r5]
-	adds r0, r7, r0
-	strb r6, [r0]
-	mov r2, r8
-	ldrb r0, [r2]
-	add r0, r10
-	ldrb r1, [r0]
-	mov r2, r9
-	adds r2, 0xC
-	adds r1, r2, r1
-	ldrb r6, [r1]
-	ldrb r0, [r5]
-	adds r0, r2, r0
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldrb r0, [r5]
-	adds r2, r0
-	strb r6, [r2]
-	mov r3, r8
-	ldrb r1, [r3]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	ldr r2, =gDisableStructs
-	adds r6, r0, r2
-	ldrb r4, [r6, 0x18]
-	lsls r3, r4, 24
-	lsrs r2, r3, 28
-	ldr r0, =gBitTable
-	mov r12, r0
-	add r1, r10
-	ldrb r0, [r1]
-	lsls r0, 2
-	add r0, r12
-	ldr r0, [r0]
-	ands r2, r0
-	cmp r2, 0
-	beq _0805822A
-	lsrs r1, r3, 28
-	bics r1, r0
-	lsls r1, 4
-	movs r2, 0xF
-	adds r0, r2, 0
-	ands r0, r4
-	orrs r0, r1
-	strb r0, [r6, 0x18]
-	mov r1, r8
-	ldrb r0, [r1]
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	ldr r3, =gDisableStructs
-	adds r1, r3
-	ldrb r4, [r1, 0x18]
-	lsrs r3, r4, 4
-	ldrb r0, [r5]
-	lsls r0, 2
-	add r0, r12
-	ldr r0, [r0]
-	orrs r0, r3
-	lsls r0, 4
-	ands r2, r4
-	orrs r2, r0
-	strb r2, [r1, 0x18]
-_0805822A:
-	bl sub_8059AAC
-	movs r6, 0
-	mov r12, r7
-	mov r5, sp
-	adds r5, 0x18
-	str r5, [sp, 0x1C]
-	ldr r2, =gBattleMons
-	mov r0, r8
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r2
-	adds r4, r0, 0
-	adds r4, 0x3B
-	mov r7, r8
-	mov r10, r2
-	movs r5, 0x3
-_0805824E:
-	mov r1, sp
-	adds r3, r1, r6
-	ldrb r1, [r4]
-	lsls r2, r6, 1
-	adds r0, r5, 0
-	lsls r0, r2
-	ands r1, r0
-	asrs r1, r2
-	strb r1, [r3]
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _0805824E
-	ldr r1, =gMoveSelectionCursor
-	ldrb r0, [r7]
-	adds r0, r1
-	ldrb r0, [r0]
-	add r0, sp
-	ldrb r0, [r0]
-	ldr r2, [sp, 0x1C]
-	strb r0, [r2]
-	ldrb r0, [r7]
-	adds r0, r1
-	ldrb r0, [r0]
-	mov r3, sp
-	adds r2, r3, r0
-	ldr r1, =gUnknown_03005D74
-	ldrb r0, [r1]
-	add r0, sp
-	ldrb r0, [r0]
-	movs r3, 0
-	strb r0, [r2]
-	ldrb r0, [r1]
-	mov r5, sp
-	adds r1, r5, r0
-	ldr r2, [sp, 0x1C]
-	ldrb r0, [r2]
-	strb r0, [r1]
-	strb r3, [r2]
-	movs r6, 0
-	ldr r2, [sp, 0x1C]
-_0805829E:
-	mov r3, sp
-	adds r0, r3, r6
-	ldrb r1, [r0]
-	lsls r0, r6, 1
-	lsls r1, r0
-	ldrb r0, [r2]
-	orrs r0, r1
-	strb r0, [r2]
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _0805829E
-	ldrb r1, [r7]
-	movs r0, 0x58
-	muls r0, r1
-	add r0, r10
-	adds r0, 0x3B
-	ldr r5, [sp, 0x1C]
-	ldrb r1, [r5]
-	strb r1, [r0]
-	movs r6, 0
-	adds r4, r7, 0
-	movs r3, 0x58
-	movs r0, 0x24
-	add r0, r10
-	mov r8, r0
-	mov r2, r9
-	mov r7, r10
-	adds r7, 0xC
-	mov r5, r12
-_080582D8:
-	lsls r1, r6, 1
-	ldrb r0, [r4]
-	muls r0, r3
-	adds r1, r0
-	adds r1, r7
-	ldrh r0, [r2]
-	strh r0, [r1]
-	ldrb r0, [r4]
-	adds r1, r0, 0
-	muls r1, r3
-	adds r1, r6, r1
-	add r1, r8
-	adds r0, r5, r6
-	ldrb r0, [r0]
-	strb r0, [r1]
-	adds r2, 0x2
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _080582D8
-	ldr r2, =gActiveBank
-	ldrb r1, [r2]
-	movs r0, 0x58
-	muls r0, r1
-	mov r1, r10
-	adds r1, 0x50
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 14
-	ands r0, r1
-	cmp r0, 0
-	beq _0805831A
-	b _080584A8
-_0805831A:
-	movs r6, 0
-	mov r1, sp
-	adds r1, 0x4
-	str r1, [sp, 0x20]
-	add r3, sp, 0xC
-	mov r10, r3
-	ldr r5, =gBattlePartyID
-	mov r9, r5
-	mov r8, r2
-	movs r7, 0x64
-	ldr r5, =gPlayerParty
-	adds r4, r1, 0
-_08058332:
-	mov r1, r8
-	ldrb r0, [r1]
-	lsls r0, 1
-	add r0, r9
-	ldrh r0, [r0]
-	muls r0, r7
-	adds r0, r5
-	adds r1, r6, 0
-	adds r1, 0xD
-	bl GetMonData
-	strh r0, [r4]
-	mov r2, r8
-	ldrb r0, [r2]
-	lsls r0, 1
-	add r0, r9
-	ldrh r0, [r0]
-	muls r0, r7
-	adds r0, r5
-	adds r1, r6, 0
-	adds r1, 0x11
-	bl GetMonData
-	mov r3, r10
-	adds r1, r3, r6
-	strb r0, [r1]
-	adds r4, 0x2
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _08058332
-	ldr r1, =gBattlePartyID
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0x15
-	bl GetMonData
-	ldr r5, [sp, 0x1C]
-	strb r0, [r5]
-	movs r6, 0
-	movs r5, 0x3
-	ldr r4, [sp, 0x1C]
-_08058392:
-	mov r0, sp
-	adds r3, r0, r6
-	lsls r2, r6, 1
-	adds r1, r5, 0
-	lsls r1, r2
-	ldrb r0, [r4]
-	ands r0, r1
-	asrs r0, r2
-	strb r0, [r3]
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _08058392
-	ldr r4, =gMoveSelectionCursor
-	ldr r3, =gActiveBank
-	ldrb r0, [r3]
-	adds r0, r4
-	ldrb r1, [r0]
-	lsls r1, 1
-	ldr r2, [sp, 0x20]
-	adds r1, r2, r1
-	ldrh r6, [r1]
-	ldr r2, =gUnknown_03005D74
-	ldrb r0, [r2]
-	lsls r0, 1
-	ldr r5, [sp, 0x20]
-	adds r0, r5, r0
-	ldrh r0, [r0]
-	movs r5, 0
-	strh r0, [r1]
-	ldrb r0, [r2]
-	lsls r0, 1
-	ldr r1, [sp, 0x20]
-	adds r0, r1, r0
-	strh r6, [r0]
-	ldrb r0, [r3]
-	adds r0, r4
-	ldrb r1, [r0]
-	add r1, r10
-	ldrb r6, [r1]
-	ldrb r0, [r2]
-	add r0, r10
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldrb r0, [r2]
-	add r0, r10
-	strb r6, [r0]
-	ldrb r0, [r3]
-	adds r0, r4
-	ldrb r0, [r0]
-	add r0, sp
-	ldrb r0, [r0]
-	ldr r1, [sp, 0x1C]
-	strb r0, [r1]
-	ldrb r0, [r3]
-	adds r0, r4
-	ldrb r0, [r0]
-	mov r3, sp
-	adds r1, r3, r0
-	ldrb r0, [r2]
-	add r0, sp
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldrb r0, [r2]
-	adds r1, r3, r0
-	ldr r2, [sp, 0x1C]
-	ldrb r0, [r2]
-	strb r0, [r1]
-	strb r5, [r2]
-	movs r6, 0
-	ldr r2, [sp, 0x1C]
-_0805841E:
-	mov r3, sp
-	adds r0, r3, r6
-	ldrb r1, [r0]
-	lsls r0, r6, 1
-	lsls r1, r0
-	ldrb r0, [r2]
-	orrs r0, r1
-	strb r0, [r2]
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _0805841E
-	movs r6, 0
-	ldr r5, =gBattlePartyID
-	mov r10, r5
-	ldr r0, =gActiveBank
-	mov r9, r0
-	movs r1, 0x64
-	mov r8, r1
-	ldr r7, =gPlayerParty
-	ldr r5, [sp, 0x20]
-	adds r5, 0x8
-	ldr r4, [sp, 0x20]
-_0805844A:
-	mov r2, r9
-	ldrb r0, [r2]
-	lsls r0, 1
-	add r0, r10
-	ldrh r0, [r0]
-	mov r3, r8
-	muls r3, r0
-	adds r0, r3, 0
-	adds r0, r7
-	adds r1, r6, 0
-	adds r1, 0xD
-	adds r2, r4, 0
-	bl SetMonData
-	mov r1, r9
-	ldrb r0, [r1]
-	lsls r0, 1
-	add r0, r10
-	ldrh r0, [r0]
-	mov r2, r8
-	muls r2, r0
-	adds r0, r2, 0
-	adds r0, r7
-	adds r1, r6, 0
-	adds r1, 0x11
-	adds r2, r5, 0
-	bl SetMonData
-	adds r5, 0x1
-	adds r4, 0x2
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _0805844A
-	ldr r1, =gBattlePartyID
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0x15
-	ldr r2, [sp, 0x1C]
-	bl SetMonData
-_080584A8:
-	ldr r1, =gBattleBankFunc
-	ldr r2, =gActiveBank
-	ldrb r0, [r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_8057BFC
-	str r1, [r0]
-	ldr r3, =gMoveSelectionCursor
-	ldrb r0, [r2]
-	adds r0, r3
-	ldr r1, =gUnknown_03005D74
-	ldrb r1, [r1]
-	strb r1, [r0]
-	ldrb r0, [r2]
-	adds r0, r3
-	ldrb r0, [r0]
-	movs r1, 0
-	bl battle_menu_cursor_related_2
-	b _08058532
-	.pool
-_08058500:
-	movs r0, 0x6
-	ands r0, r1
-	cmp r0, 0
-	beq _08058554
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, =gUnknown_03005D74
-	ldrb r0, [r0]
-	bl battle_menu_cursor_related
-	ldr r1, =gMoveSelectionCursor
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r1
-	ldrb r0, [r0]
-	movs r1, 0
-	bl battle_menu_cursor_related_2
-	ldr r1, =gBattleBankFunc
-	ldrb r0, [r4]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_8057BFC
-	str r1, [r0]
-_08058532:
-	bl sub_8059B18
-	bl sub_8059B3C
-	bl sub_8059BB0
-	b _080586E8
-	.pool
-_08058554:
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _080585A4
-	ldr r3, =gUnknown_03005D74
-	ldrb r2, [r3]
-	movs r0, 0x1
-	ands r0, r2
-	cmp r0, 0
-	bne _0805856A
-	b _080586E8
-_0805856A:
-	ldr r0, =gMoveSelectionCursor
-	ldr r1, =gActiveBank
-	ldrb r1, [r1]
-	adds r1, r0
-	ldrb r5, [r1]
-	cmp r2, r5
-	bne _08058590
-_08058578:
-	ldrb r0, [r1]
-	movs r1, 0x1D
-	bl battle_menu_cursor_related_2
-	b _08058596
-	.pool
-_08058590:
-	ldrb r0, [r3]
-	bl battle_menu_cursor_related
-_08058596:
-	ldr r4, =gUnknown_03005D74
-	ldrb r0, [r4]
-	movs r1, 0x1
-	b _0805862C
-	.pool
-_080585A4:
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _080585E8
-	ldr r3, =gUnknown_03005D74
-	ldrb r2, [r3]
-	movs r0, 0x1
-	ands r0, r2
-	cmp r0, 0
-	beq _080585BA
-	b _080586E8
-_080585BA:
-	ldr r1, =gUnknown_03005D78
-	movs r0, 0x1
-	eors r0, r2
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcc _080585C8
-	b _080586E8
-_080585C8:
-	ldr r0, =gMoveSelectionCursor
-	ldr r1, =gActiveBank
-	ldrb r1, [r1]
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r2, r0
-	beq _08058578
-	b _08058590
-	.pool
-_080585E8:
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0805865C
-	ldr r3, =gUnknown_03005D74
-	ldrb r2, [r3]
-	movs r0, 0x2
-	ands r0, r2
-	cmp r0, 0
-	beq _080586E8
-	ldr r0, =gMoveSelectionCursor
-	ldr r1, =gActiveBank
-	ldrb r1, [r1]
-	adds r1, r0
-	ldrb r5, [r1]
-	cmp r2, r5
-	bne _08058620
-	ldrb r0, [r1]
-	movs r1, 0x1D
-	bl battle_menu_cursor_related_2
-	b _08058626
-	.pool
-_08058620:
-	ldrb r0, [r3]
-	bl battle_menu_cursor_related
-_08058626:
-	ldr r4, =gUnknown_03005D74
-	ldrb r0, [r4]
-	movs r1, 0x2
-_0805862C:
-	eors r0, r1
-	strb r0, [r4]
-	movs r0, 0x5
-	bl PlaySE
-	ldr r1, =gMoveSelectionCursor
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r4]
-	ldrb r0, [r0]
-	cmp r1, r0
-	beq _080586CA
-	ldrb r0, [r4]
-	movs r1, 0x1B
-	bl battle_menu_cursor_related_2
-	b _080586E8
-	.pool
-_0805865C:
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _080586E8
-	ldr r3, =gUnknown_03005D74
-	ldrb r2, [r3]
-	movs r0, 0x2
-	ands r0, r2
-	cmp r0, 0
-	bne _080586E8
-	ldr r1, =gUnknown_03005D78
-	movs r0, 0x2
-	eors r0, r2
-	ldrb r1, [r1]
-	cmp r0, r1
-	bcs _080586E8
-	ldr r0, =gMoveSelectionCursor
-	ldr r1, =gActiveBank
-	ldrb r1, [r1]
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r2, r0
-	bne _080586A4
-	ldrb r0, [r1]
-	movs r1, 0x1D
-	bl battle_menu_cursor_related_2
-	b _080586AA
-	.pool
-_080586A4:
-	ldrb r0, [r3]
-	bl battle_menu_cursor_related
-_080586AA:
-	ldr r4, =gUnknown_03005D74
-	ldrb r0, [r4]
-	movs r1, 0x2
-	eors r0, r1
-	strb r0, [r4]
-	movs r0, 0x5
-	bl PlaySE
-	ldr r1, =gMoveSelectionCursor
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r4]
-	ldrb r0, [r0]
-	cmp r1, r0
-	bne _080586E0
-_080586CA:
-	adds r0, r1, 0
-	movs r1, 0
-	bl battle_menu_cursor_related_2
-	b _080586E8
-	.pool
-_080586E0:
-	ldrb r0, [r4]
-	movs r1, 0x1B
-	bl battle_menu_cursor_related_2
-_080586E8:
-	add sp, 0x24
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8058138
-
-	thumb_func_start sub_80586F8
-sub_80586F8: @ 80586F8
-	push {lr}
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0805875C
-	ldr r0, =gReceivedRemoteLinkPlayers
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08058798
-	movs r0, 0x5A
-	bl m4aSongNumStop
-	ldr r3, =gMain
-	ldr r0, =0x00000439
-	adds r2, r3, r0
-	ldrb r1, [r2]
-	movs r0, 0x3
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r2]
-	ldr r0, =gPreBattleCallback1
-	ldr r0, [r0]
-	str r0, [r3]
-	ldr r0, =sub_8038D64
-	bl SetMainCallback2
-	ldr r0, =gBattleOutcome
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08058738
-	bl sub_817E3F4
-_08058738:
-	bl FreeAllWindowBuffers
-	b _08058798
-	.pool
-_0805875C:
-	bl sub_800A520
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058798
-	movs r0, 0x5A
-	bl m4aSongNumStop
-	ldr r3, =gMain
-	ldr r0, =0x00000439
-	adds r2, r3, r0
-	ldrb r1, [r2]
-	movs r0, 0x3
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r2]
-	ldr r0, =gPreBattleCallback1
-	ldr r0, [r0]
-	str r0, [r3]
-	ldr r0, =sub_8038D64
-	bl SetMainCallback2
-	ldr r0, =gBattleOutcome
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08058794
-	bl sub_817E3F4
-_08058794:
-	bl FreeAllWindowBuffers
-_08058798:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80586F8
-
-	thumb_func_start sub_80587B0
-sub_80587B0: @ 80587B0
-	push {lr}
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08058832
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08058810
-	bl sub_800A520
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058832
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080587F0
-	bl sub_800AC34
-	b _080587F4
-	.pool
-_080587F0:
-	bl sub_800ADF8
-_080587F4:
-	ldr r1, =gBattleBankFunc
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_80586F8
-	str r1, [r0]
-	b _08058832
-	.pool
-_08058810:
-	movs r0, 0x5A
-	bl m4aSongNumStop
-	ldr r2, =gMain
-	ldr r0, =0x00000439
-	adds r3, r2, r0
-	ldrb r1, [r3]
-	movs r0, 0x3
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r3]
-	ldr r0, =gPreBattleCallback1
-	ldr r0, [r0]
-	str r0, [r2]
-	ldr r0, [r2, 0x8]
-	bl SetMainCallback2
-_08058832:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80587B0
-
-	thumb_func_start sub_8058844
-sub_8058844: @ 8058844
-	push {lr}
-	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, [r0]
-	ldr r0, =SpriteCallbackDummy
-	cmp r1, r0
-	bne _08058868
-	bl PlayerBufferExecCompleted
-_08058868:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8058844
-
-	thumb_func_start sub_805887C
-sub_805887C: @ 805887C
-	push {lr}
-	ldr r2, =gSprites
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, [r0]
-	ldr r0, =SpriteCallbackDummy
-	cmp r1, r0
-	bne _080588A0
-	bl PlayerBufferExecCompleted
-_080588A0:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_805887C
-
-	thumb_func_start bx_802F7A0
-bx_802F7A0: @ 80588B4
-	push {r4-r6,lr}
-	ldr r6, =gSprites
-	ldr r5, =gBankSpriteIds
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r1, r6, 0
-	adds r1, 0x1C
-	adds r0, r1
-	ldr r1, [r0]
-	ldr r0, =SpriteCallbackDummy
-	cmp r1, r0
-	bne _08058908
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x8]
-	bl nullsub_25
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	bl FreeSpriteOamMatrix
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	bl DestroySprite
-	bl PlayerBufferExecCompleted
-_08058908:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end bx_802F7A0
-
-	thumb_func_start sub_8058924
-sub_8058924: @ 8058924
-	push {r4,lr}
-	ldr r4, =gBattleSpritesDataPtr
-	ldr r1, [r4]
-	ldr r3, =gActiveBank
-	ldrb r0, [r3]
-	ldr r2, [r1, 0x4]
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r0, [r1, 0x9]
-	subs r0, 0x1
-	strb r0, [r1, 0x9]
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	bne _0805895C
-	ldr r0, [r4]
-	ldrb r1, [r3]
-	ldr r2, [r0, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	movs r1, 0
-	strb r1, [r0, 0x9]
-	bl PlayerBufferExecCompleted
-_0805895C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8058924
-
-	thumb_func_start sub_805896C
-sub_805896C: @ 805896C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	movs r7, 0
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058998
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	beq _080589D0
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _080589D0
-_08058998:
-	ldr r2, =gSprites
-	ldr r1, =gHealthBoxesIds
-	ldr r3, =gActiveBank
-	ldrb r0, [r3]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, [r0]
-	ldr r0, =SpriteCallbackDummy
-	mov r10, r3
-	cmp r1, r0
-	bne _08058A0A
-	b _08058A0E
-	.pool
-_080589D0:
-	ldr r3, =gSprites
-	ldr r6, =gHealthBoxesIds
-	ldr r2, =gActiveBank
-	ldrb r4, [r2]
-	adds r0, r4, r6
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r5, r3, 0
-	adds r5, 0x1C
-	adds r0, r5
-	ldr r3, [r0]
-	ldr r0, =SpriteCallbackDummy
-	mov r10, r2
-	cmp r3, r0
-	bne _08058A0A
-	movs r0, 0x2
-	eors r4, r0
-	adds r0, r4, r6
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	ldr r0, [r0]
-	cmp r0, r3
-	bne _08058A0A
-	movs r7, 0x1
-_08058A0A:
-	cmp r7, 0
-	beq _08058B08
-_08058A0E:
-	ldr r0, =gBattleSpritesDataPtr
-	mov r9, r0
-	ldr r0, [r0]
-	mov r6, r10
-	ldrb r2, [r6]
-	ldr r3, [r0, 0x4]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r4, r0, r3
-	ldrb r1, [r4, 0x1]
-	movs r5, 0x1
-	adds r0, r5, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08058B08
-	movs r1, 0x2
-	mov r8, r1
-	mov r1, r8
-	eors r1, r2
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	ldrb r1, [r0, 0x1]
-	adds r0, r5, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08058B08
-	ldrb r1, [r4]
-	movs r3, 0x7F
-	adds r0, r3, 0
-	ands r0, r1
-	strb r0, [r4]
-	mov r2, r9
-	ldr r0, [r2]
-	ldrb r2, [r6]
-	ldr r0, [r0, 0x4]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r0
-	ldrb r2, [r1, 0x1]
-	movs r4, 0x2
-	negs r4, r4
-	adds r0, r4, 0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	mov r0, r9
-	ldr r2, [r0]
-	ldrb r0, [r6]
-	mov r1, r8
-	eors r1, r0
-	ldr r2, [r2, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0]
-	ands r3, r1
-	strb r3, [r0]
-	mov r1, r9
-	ldr r2, [r1]
-	ldrb r0, [r6]
-	mov r1, r8
-	eors r1, r0
-	ldr r2, [r2, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0, 0x1]
-	ands r4, r1
-	strb r4, [r0, 0x1]
-	ldr r4, =0x000027f9
-	adds r0, r4, 0
-	bl FreeSpriteTilesByTag
-	adds r0, r4, 0
-	bl FreeSpritePaletteByTag
-	ldr r7, =gBattlePartyID
-	ldrb r1, [r6]
-	lsls r0, r1, 1
-	adds r0, r7
-	ldrh r0, [r0]
-	movs r5, 0x64
-	muls r0, r5
-	ldr r4, =gPlayerParty
-	adds r0, r4
-	bl sub_805E990
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058AE4
-	ldrb r0, [r6]
-	mov r1, r8
-	eors r1, r0
-	lsls r0, r1, 1
-	adds r0, r7
-	ldrh r0, [r0]
-	muls r0, r5
-	adds r0, r4
-	bl sub_805E990
-_08058AE4:
-	mov r2, r9
-	ldr r0, [r2]
-	mov r2, r10
-	ldrb r1, [r2]
-	ldr r2, [r0, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	movs r1, 0x3
-	strb r1, [r0, 0x9]
-	ldr r1, =gBattleBankFunc
-	mov r2, r10
-	ldrb r0, [r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_8058924
-	str r1, [r0]
-_08058B08:
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_805896C
-
-	thumb_func_start sub_8058B40
-sub_8058B40: @ 8058B40
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	movs r0, 0
-	mov r9, r0
-	mov r8, r0
-	ldr r4, =gBattleSpritesDataPtr
-	ldr r0, [r4]
-	ldr r7, =gActiveBank
-	ldrb r2, [r7]
-	ldr r1, [r0, 0x4]
-	lsls r3, r2, 1
-	adds r0, r3, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r5, 0x88
-	adds r0, r5, 0
-	ands r0, r1
-	cmp r0, 0
-	bne _08058B80
-	ldr r0, =gBattlePartyID
-	adds r0, r3, r0
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r1, r0
-	adds r0, r2, 0
-	bl sub_8172EF0
-_08058B80:
-	ldr r1, [r4]
-	ldrb r0, [r7]
-	movs r6, 0x2
-	adds r2, r6, 0
-	eors r2, r0
-	ldr r1, [r1, 0x4]
-	lsls r3, r2, 1
-	adds r0, r3, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0]
-	adds r0, r5, 0
-	ands r0, r1
-	cmp r0, 0
-	bne _08058BB2
-	ldr r0, =gBattlePartyID
-	adds r0, r3, r0
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r1, r0
-	adds r0, r2, 0
-	bl sub_8172EF0
-_08058BB2:
-	ldr r0, [r4]
-	ldrb r2, [r7]
-	ldr r3, [r0, 0x4]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r4, r0, r3
-	ldrb r1, [r4]
-	movs r5, 0x8
-	adds r0, r5, 0
-	ands r0, r1
-	cmp r0, 0
-	bne _08058C82
-	adds r1, r6, 0
-	eors r1, r2
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	ldrb r1, [r0]
-	adds r0, r5, 0
-	ands r0, r1
-	cmp r0, 0
-	bne _08058C82
-	ldrb r1, [r4, 0x1]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08058C68
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058C38
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x40
-	ands r0, r1
-	cmp r0, 0
-	bne _08058C38
-	ldr r4, =gHealthBoxesIds
-	ldrb r0, [r7]
-	adds r1, r6, 0
-	eors r1, r0
-	adds r0, r1, r4
-	ldrb r0, [r0]
-	ldr r2, =gBattlePartyID
-	lsls r1, 1
-	adds r1, r2
-	ldrh r2, [r1]
-	movs r1, 0x64
-	muls r1, r2
-	ldr r2, =gPlayerParty
-	adds r1, r2
-	movs r2, 0
-	bl UpdateHealthboxAttribute
-	ldrb r0, [r7]
-	eors r0, r6
-	bl sub_8076918
-	ldrb r0, [r7]
-	eors r0, r6
-	adds r0, r4
-	ldrb r0, [r0]
-	bl SetHealthboxSpriteVisible
-_08058C38:
-	ldr r5, =gHealthBoxesIds
-	ldr r4, =gActiveBank
-	ldrb r1, [r4]
-	adds r0, r1, r5
-	ldrb r0, [r0]
-	ldr r2, =gBattlePartyID
-	lsls r1, 1
-	adds r1, r2
-	ldrh r2, [r1]
-	movs r1, 0x64
-	muls r1, r2
-	ldr r2, =gPlayerParty
-	adds r1, r2
-	movs r2, 0
-	bl UpdateHealthboxAttribute
-	ldrb r0, [r4]
-	bl sub_8076918
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r0, [r0]
-	bl SetHealthboxSpriteVisible
-_08058C68:
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r2, [r0]
-	ldr r0, =gActiveBank
-	ldrb r1, [r0]
-	ldr r2, [r2, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0, 0x1]
-	movs r2, 0x80
-	orrs r1, r2
-	strb r1, [r0, 0x1]
-_08058C82:
-	ldr r5, =gBattleSpritesDataPtr
-	ldr r0, [r5]
-	ldr r4, =gActiveBank
-	ldrb r2, [r4]
-	ldr r3, [r0, 0x4]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r3
-	ldrb r1, [r0, 0x1]
-	movs r0, 0xC0
-	ands r0, r1
-	cmp r0, 0x80
-	bne _08058D32
-	movs r1, 0x2
-	eors r1, r2
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	ldrb r1, [r0, 0x1]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	bne _08058D32
-	bl IsCryPlayingOrClearCrySongs
-	lsls r0, 24
-	cmp r0, 0
-	bne _08058D32
-	ldr r0, [r5]
-	ldrb r1, [r4]
-	ldr r2, [r0, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0, 0x1]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	bne _08058D14
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x42
-	ands r0, r1
-	cmp r0, 0x42
-	bne _08058D08
-	ldr r0, =gMPlay_BGM
-	bl m4aMPlayContinue
-	b _08058D14
-	.pool
-_08058D08:
-	ldr r0, =gMPlay_BGM
-	ldr r1, =0x0000ffff
-	movs r2, 0x80
-	lsls r2, 1
-	bl m4aMPlayVolumeControl
-_08058D14:
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r2, [r0]
-	ldr r0, =gActiveBank
-	ldrb r1, [r0]
-	ldr r2, [r2, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0, 0x1]
-	movs r2, 0x20
-	orrs r1, r2
-	strb r1, [r0, 0x1]
-	movs r0, 0x1
-	mov r9, r0
-_08058D32:
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058D52
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058DAC
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _08058DAC
-_08058D52:
-	ldr r2, =gSprites
-	ldr r0, =gUnknown_03005D7C
-	ldr r1, =gActiveBank
-	ldrb r4, [r1]
-	adds r0, r4, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r3, [r0]
-	ldr r0, =SpriteCallbackDummy
-	cmp r3, r0
-	bne _08058E0A
-	ldr r0, =gBankSpriteIds
-	adds r0, r4, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	cmp r0, r3
-	bne _08058E0A
-	b _08058E06
-	.pool
-_08058DAC:
-	ldr r2, =gSprites
-	ldr r7, =gUnknown_03005D7C
-	ldr r0, =gActiveBank
-	ldrb r3, [r0]
-	adds r0, r3, r7
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r4, [r0]
-	ldr r0, =SpriteCallbackDummy
-	cmp r4, r0
-	bne _08058E0A
-	ldr r6, =gBankSpriteIds
-	adds r0, r3, r6
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r5, [r0]
-	cmp r5, r4
-	bne _08058E0A
-	movs r0, 0x2
-	eors r3, r0
-	adds r0, r3, r7
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r4, [r0]
-	cmp r4, r5
-	bne _08058E0A
-	adds r0, r3, r6
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	cmp r0, r4
-	bne _08058E0A
-_08058E06:
-	movs r0, 0x1
-	mov r8, r0
-_08058E0A:
-	mov r0, r9
-	cmp r0, 0
-	beq _08058EAA
-	mov r0, r8
-	cmp r0, 0
-	beq _08058EAA
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	beq _08058E48
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x40
-	ands r0, r1
-	cmp r0, 0
-	bne _08058E48
-	ldr r2, =gUnknown_03005D7C
-	ldr r0, =gActiveBank
-	ldrb r1, [r0]
-	movs r0, 0x2
-	eors r0, r1
-	adds r0, r2
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gSprites
-	adds r0, r1
-	bl DestroySprite
-_08058E48:
-	ldr r1, =gUnknown_03005D7C
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gSprites
-	adds r0, r1
-	bl DestroySprite
-	ldr r3, =gBattleSpritesDataPtr
-	ldr r0, [r3]
-	ldr r2, [r0, 0x8]
-	ldrb r1, [r2, 0x9]
-	movs r0, 0x2
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r2, 0x9]
-	ldr r0, [r3]
-	ldrb r2, [r4]
-	ldr r0, [r0, 0x4]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r0
-	ldrb r2, [r1, 0x1]
-	movs r0, 0x21
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	ldr r0, [r3]
-	ldrb r2, [r4]
-	ldr r0, [r0, 0x4]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r0
-	ldrb r2, [r1, 0x1]
-	movs r0, 0x7F
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	ldr r1, =gBattleBankFunc
-	ldrb r0, [r4]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_805896C
-	str r1, [r0]
-_08058EAA:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8058B40
-
-	thumb_func_start sub_8058EDC
-sub_8058EDC: @ 8058EDC
-	push {r4-r6,lr}
-	ldr r2, =gSprites
-	ldr r0, =gHealthBoxesIds
-	ldr r6, =gActiveBank
-	ldrb r3, [r6]
-	adds r0, r3, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r4, [r0]
-	ldr r0, =SpriteCallbackDummy
-	cmp r4, r0
-	bne _08058F94
-	ldr r5, =gBattleSpritesDataPtr
-	ldr r0, [r5]
-	ldr r1, [r0, 0x4]
-	lsls r0, r3, 1
-	adds r0, r3
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0, 0x1]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08058F94
-	ldr r0, =gBankSpriteIds
-	adds r0, r3, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	cmp r0, r4
-	bne _08058F94
-	adds r0, r3, 0
-	bl sub_805E408
-	ldr r0, [r5]
-	ldrb r2, [r6]
-	ldr r0, [r0, 0x4]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r0
-	ldrb r2, [r1]
-	movs r0, 0x7F
-	ands r0, r2
-	strb r0, [r1]
-	ldr r0, [r5]
-	ldrb r2, [r6]
-	ldr r0, [r0, 0x4]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r0
-	ldrb r2, [r1, 0x1]
-	movs r0, 0x2
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	ldr r4, =0x000027f9
-	adds r0, r4, 0
-	bl FreeSpriteTilesByTag
-	adds r0, r4, 0
-	bl FreeSpritePaletteByTag
-	ldr r0, [r5]
-	ldrb r2, [r6]
-	ldr r1, [r0]
-	lsls r0, r2, 2
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	beq _08058F88
-	adds r0, r2, 0
-	adds r1, r2, 0
-	movs r3, 0x6
-	bl move_anim_start_t4
-_08058F88:
-	ldr r0, =gBattleBankFunc
-	ldrb r1, [r6]
-	lsls r1, 2
-	adds r1, r0
-	ldr r0, =sub_8058FC0
-	str r0, [r1]
-_08058F94:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8058EDC
-
-	thumb_func_start sub_8058FC0
-sub_8058FC0: @ 8058FC0
-	push {r4,lr}
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r4, =gActiveBank
-	ldrb r1, [r4]
-	ldr r2, [r0, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	bne _0805900E
-	bl IsCryPlayingOrClearCrySongs
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805900E
-	ldr r0, =gMPlay_BGM
-	ldr r1, =0x0000ffff
-	movs r2, 0x80
-	lsls r2, 1
-	bl m4aMPlayVolumeControl
-	ldr r2, =gBattlePartyID
-	ldrb r1, [r4]
-	lsls r0, r1, 1
-	adds r0, r2
-	ldrh r2, [r0]
-	movs r0, 0x64
-	muls r0, r2
-	ldr r2, =gPlayerParty
-	adds r0, r2
-	bl sub_805E990
-	bl PlayerBufferExecCompleted
-_0805900E:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8058FC0
-
-	thumb_func_start sub_805902C
-sub_805902C: @ 805902C
-	push {r4-r6,lr}
-	ldr r6, =gBattleSpritesDataPtr
-	ldr r0, [r6]
-	ldr r5, =gActiveBank
-	ldrb r2, [r5]
-	ldr r1, [r0, 0x4]
-	lsls r3, r2, 1
-	adds r0, r3, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x88
-	ands r0, r1
-	cmp r0, 0
-	bne _0805905E
-	ldr r0, =gBattlePartyID
-	adds r0, r3, r0
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r1, r0
-	adds r0, r2, 0
-	bl sub_8172EF0
-_0805905E:
-	ldr r4, =gSprites
-	ldr r0, =gUnknown_03005D7C
-	ldrb r2, [r5]
-	adds r0, r2, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r3, r0, 2
-	adds r0, r4, 0
-	adds r0, 0x1C
-	adds r0, r3, r0
-	ldr r1, [r0]
-	ldr r0, =SpriteCallbackDummy
-	cmp r1, r0
-	bne _080590D2
-	ldr r0, [r6]
-	ldr r1, [r0, 0x4]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	bne _080590D2
-	adds r0, r3, r4
-	bl DestroySprite
-	ldr r4, =gHealthBoxesIds
-	ldrb r1, [r5]
-	adds r0, r1, r4
-	ldrb r0, [r0]
-	ldr r2, =gBattlePartyID
-	lsls r1, 1
-	adds r1, r2
-	ldrh r2, [r1]
-	movs r1, 0x64
-	muls r1, r2
-	ldr r2, =gPlayerParty
-	adds r1, r2
-	movs r2, 0
-	bl UpdateHealthboxAttribute
-	ldrb r0, [r5]
-	bl sub_8076918
-	ldrb r0, [r5]
-	adds r0, r4
-	ldrb r0, [r0]
-	bl SetHealthboxSpriteVisible
-	ldr r1, =gBattleBankFunc
-	ldrb r0, [r5]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_8058EDC
-	str r1, [r0]
-_080590D2:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_805902C
-
-	thumb_func_start c3_0802FDF4
-c3_0802FDF4: @ 8059100
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	bl IsCryPlayingOrClearCrySongs
-	lsls r0, 24
-	cmp r0, 0
-	bne _08059122
-	ldr r0, =gMPlay_BGM
-	ldr r1, =0x0000ffff
-	movs r2, 0x80
-	lsls r2, 1
-	bl m4aMPlayVolumeControl
-	adds r0, r4, 0
-	bl DestroyTask
-_08059122:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end c3_0802FDF4
-
-	thumb_func_start bx_t1_healthbar_update
-bx_t1_healthbar_update: @ 8059130
-	push {r4-r6,lr}
-	ldr r5, =gActiveBank
-	ldrb r0, [r5]
-	ldr r6, =gHealthBoxesIds
-	adds r1, r0, r6
-	ldrb r1, [r1]
-	movs r2, 0
-	movs r3, 0
-	bl sub_8074AA0
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	ldrb r0, [r5]
-	adds r0, r6
-	ldrb r0, [r0]
-	bl SetHealthboxSpriteVisible
-	lsls r4, 16
-	asrs r1, r4, 16
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _08059178
-	ldrb r0, [r5]
-	adds r0, r6
-	ldrb r0, [r0]
-	movs r2, 0
-	bl UpdateHpTextInHealthbox
-	b _08059192
-	.pool
-_08059178:
-	ldr r2, =gBattlePartyID
-	ldrb r1, [r5]
-	lsls r0, r1, 1
-	adds r0, r2
-	ldrh r2, [r0]
-	movs r0, 0x64
-	muls r0, r2
-	ldr r2, =gPlayerParty
-	adds r0, r2
-	bl sub_805E990
-	bl PlayerBufferExecCompleted
-_08059192:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end bx_t1_healthbar_update
-
-	thumb_func_start sub_80591A0
-sub_80591A0: @ 80591A0
-	push {lr}
-	movs r0, 0
-	bl IsTextPrinterActive
-	lsls r0, 16
-	cmp r0, 0
-	bne _080591B2
-	bl PlayerBufferExecCompleted
-_080591B2:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80591A0
-
-	thumb_func_start sub_80591B8
-sub_80591B8: @ 80591B8
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x10
-	lsls r0, 24
-	lsrs r0, 24
-	mov r9, r0
-	ldr r1, =gTasks
-	lsls r0, 2
-	add r0, r9
-	lsls r0, 3
-	adds r0, r1
-	mov r8, r0
-	ldrb r0, [r0, 0x8]
-	mov r10, r0
-	mov r1, r8
-	ldrb r7, [r1, 0xC]
-	str r7, [sp, 0x8]
-	ldrh r2, [r1, 0xA]
-	str r2, [sp, 0xC]
-	bl IsDoubleBattle
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080591FE
-	ldr r1, =gBattlePartyID
-	lsls r0, r7, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r10, r0
-	bne _080591FE
-	b _08059314
-_080591FE:
-	movs r0, 0x64
-	mov r1, r10
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r6, r1, r0
-	adds r0, r6, 0
-	movs r1, 0xB
-	bl GetMonData
-	adds r5, r0, 0
-	lsls r5, 16
-	lsrs r5, 16
-	adds r0, r6, 0
-	movs r1, 0x38
-	bl GetMonData
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r6, 0
-	movs r1, 0x19
-	bl GetMonData
-	str r0, [sp, 0x4]
-	ldr r3, =gExperienceTables
-	adds r4, 0x1
-	lsls r4, 2
-	ldr r2, =gBaseStats
-	lsls r1, r5, 3
-	subs r1, r5
-	lsls r1, 2
-	adds r1, r2
-	ldrb r2, [r1, 0x13]
-	movs r1, 0xCA
-	lsls r1, 1
-	muls r1, r2
-	adds r4, r1
-	adds r4, r3
-	ldr r2, [r4]
-	str r2, [sp]
-	ldr r3, [sp, 0xC]
-	lsls r1, r3, 16
-	asrs r1, 16
-	adds r0, r1
-	cmp r0, r2
-	bcc _080592EC
-	adds r0, r6, 0
-	movs r1, 0x19
-	mov r2, sp
-	bl SetMonData
-	adds r0, r6, 0
-	bl CalculateMonStats
-	ldr r2, [sp]
-	add r0, sp, 0x4
-	ldrh r0, [r0]
-	subs r2, r0
-	ldr r0, [sp, 0xC]
-	subs r2, r0, r2
-	ldr r4, =gActiveBank
-	ldrb r5, [r4]
-	strb r7, [r4]
-	lsls r2, 16
-	lsrs r2, 16
-	movs r0, 0x1
-	movs r1, 0xB
-	bl EmitCmd33
-	strb r5, [r4]
-	bl IsDoubleBattle
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080592D4
-	ldr r2, =gBattlePartyID
-	lsls r0, r7, 1
-	adds r0, r2
-	mov r1, r10
-	ldrh r0, [r0]
-	cmp r1, r0
-	beq _080592B2
-	movs r0, 0x2
-	eors r7, r0
-	lsls r0, r7, 1
-	adds r0, r2
-	ldrh r0, [r0]
-	cmp r1, r0
-	bne _080592D4
-_080592B2:
-	ldr r0, =sub_8059544
-	b _08059316
-	.pool
-_080592D4:
-	ldr r0, =gTasks
-	mov r2, r9
-	lsls r1, r2, 2
-	add r1, r9
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, =sub_805965C
-	b _08059318
-	.pool
-_080592EC:
-	str r0, [sp, 0x4]
-	add r2, sp, 0x4
-	adds r0, r6, 0
-	movs r1, 0x19
-	bl SetMonData
-	ldr r1, =gBattleBankFunc
-	ldr r3, [sp, 0x8]
-	lsls r0, r3, 2
-	adds r0, r1
-	ldr r1, =sub_80591A0
-	str r1, [r0]
-	mov r0, r9
-	bl DestroyTask
-	b _0805931A
-	.pool
-_08059314:
-	ldr r0, =sub_8059330
-_08059316:
-	mov r1, r8
-_08059318:
-	str r0, [r1]
-_0805931A:
-	add sp, 0x10
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80591B8
-
-	thumb_func_start sub_8059330
-sub_8059330: @ 8059330
-	push {r4-r6,lr}
-	mov r6, r10
-	mov r5, r9
-	mov r4, r8
-	push {r4-r6}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gTasks
-	lsls r2, r0, 2
-	mov r8, r2
-	add r8, r0
-	mov r0, r8
-	lsls r0, 3
-	mov r8, r0
-	add r8, r1
-	mov r2, r8
-	ldrb r1, [r2, 0x8]
-	movs r0, 0xA
-	ldrsh r2, [r2, r0]
-	mov r9, r2
-	mov r2, r8
-	ldrb r2, [r2, 0xC]
-	mov r10, r2
-	movs r0, 0x64
-	adds r6, r1, 0
-	muls r6, r0
-	ldr r0, =gPlayerParty
-	adds r6, r0
-	adds r0, r6, 0
-	movs r1, 0x38
-	bl GetMonData
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r6, 0
-	movs r1, 0xB
-	bl GetMonData
-	adds r5, r0, 0
-	lsls r5, 16
-	lsrs r5, 16
-	adds r0, r6, 0
-	movs r1, 0x19
-	bl GetMonData
-	adds r3, r0, 0
-	ldr r6, =gExperienceTables
-	lsls r1, r4, 2
-	ldr r2, =gBaseStats
-	lsls r0, r5, 3
-	subs r0, r5
-	lsls r0, 2
-	adds r0, r2
-	ldrb r2, [r0, 0x13]
-	movs r0, 0xCA
-	lsls r0, 1
-	muls r0, r2
-	adds r1, r0
-	adds r1, r6
-	ldr r1, [r1]
-	subs r3, r1
-	adds r4, 0x1
-	lsls r4, 2
-	adds r4, r0
-	adds r4, r6
-	ldr r2, [r4]
-	subs r2, r1
-	ldr r0, =gHealthBoxesIds
-	add r0, r10
-	ldrb r1, [r0]
-	mov r0, r9
-	negs r0, r0
-	str r0, [sp]
-	mov r0, r10
-	bl SetBattleBarStruct
-	movs r0, 0x21
-	bl PlaySE
-	ldr r0, =sub_8059400
-	mov r1, r8
-	str r0, [r1]
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059330
-
-	thumb_func_start sub_8059400
-sub_8059400: @ 8059400
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	ldr r1, =gTasks
-	lsls r0, 2
-	add r0, r8
-	lsls r0, 3
-	adds r6, r0, r1
-	ldrh r1, [r6, 0x1C]
-	movs r2, 0x1C
-	ldrsh r0, [r6, r2]
-	cmp r0, 0xC
-	bgt _08059430
-	adds r0, r1, 0x1
-	strh r0, [r6, 0x1C]
-	b _0805952C
-	.pool
-_08059430:
-	ldrb r0, [r6, 0x8]
-	mov r9, r0
-	ldrh r2, [r6, 0xA]
-	mov r10, r2
-	ldrb r7, [r6, 0xC]
-	ldr r5, =gHealthBoxesIds
-	adds r5, r7, r5
-	ldrb r1, [r5]
-	adds r0, r7, 0
-	movs r2, 0x1
-	movs r3, 0
-	bl sub_8074AA0
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	ldrb r0, [r5]
-	bl SetHealthboxSpriteVisible
-	lsls r4, 16
-	asrs r4, 16
-	movs r0, 0x1
-	negs r0, r0
-	cmp r4, r0
-	bne _0805952C
-	movs r0, 0x21
-	bl m4aSongNumStop
-	movs r0, 0x64
-	mov r1, r9
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r5, r1, r0
-	adds r0, r5, 0
-	movs r1, 0x38
-	bl GetMonData
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r5, 0
-	movs r1, 0x19
-	bl GetMonData
-	str r0, [sp, 0x4]
-	adds r0, r5, 0
-	movs r1, 0xB
-	bl GetMonData
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r3, =gExperienceTables
-	adds r4, 0x1
-	lsls r4, 2
-	ldr r2, =gBaseStats
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r1, [r1, 0x13]
-	movs r0, 0xCA
-	lsls r0, 1
-	muls r0, r1
-	adds r4, r0
-	adds r4, r3
-	ldr r1, [r4]
-	str r1, [sp]
-	mov r2, r10
-	lsls r0, r2, 16
-	asrs r4, r0, 16
-	ldr r0, [sp, 0x4]
-	adds r0, r4
-	cmp r0, r1
-	blt _08059510
-	adds r0, r5, 0
-	movs r1, 0x19
-	mov r2, sp
-	bl SetMonData
-	adds r0, r5, 0
-	bl CalculateMonStats
-	ldr r2, [sp]
-	add r0, sp, 0x4
-	ldrh r0, [r0]
-	subs r2, r0
-	subs r2, r4, r2
-	ldr r4, =gActiveBank
-	ldrb r5, [r4]
-	strb r7, [r4]
-	lsls r2, 16
-	lsrs r2, 16
-	movs r0, 0x1
-	movs r1, 0xB
-	bl EmitCmd33
-	strb r5, [r4]
-	ldr r0, =sub_8059544
-	str r0, [r6]
-	b _0805952C
-	.pool
-_08059510:
-	str r0, [sp, 0x4]
-	add r2, sp, 0x4
-	adds r0, r5, 0
-	movs r1, 0x19
-	bl SetMonData
-	ldr r1, =gBattleBankFunc
-	lsls r0, r7, 2
-	adds r0, r1
-	ldr r1, =sub_80591A0
-	str r1, [r0]
-	mov r0, r8
-	bl DestroyTask
-_0805952C:
-	add sp, 0x8
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059400
-
-	thumb_func_start sub_8059544
-sub_8059544: @ 8059544
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r1, =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	ldrb r4, [r0, 0xC]
-	ldrb r6, [r0, 0x8]
-	bl IsDoubleBattle
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08059578
-	ldr r1, =gBattlePartyID
-	movs r0, 0x2
-	adds r2, r4, 0
-	eors r2, r0
-	lsls r0, r2, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r6, r0
-	bne _08059578
-	adds r4, r2, 0
-_08059578:
-	adds r0, r4, 0
-	adds r1, r4, 0
-	adds r2, r4, 0
-	movs r3, 0
-	bl move_anim_start_t4
-	ldr r0, =gTasks
-	lsls r1, r5, 2
-	adds r1, r5
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, =sub_80595A4
-	str r0, [r1]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059544
-
-	thumb_func_start sub_80595A4
-sub_80595A4: @ 80595A4
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r1, =gTasks
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 3
-	adds r2, r0, r1
-	ldrb r5, [r2, 0xC]
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r1, [r0, 0x4]
-	lsls r0, r5, 1
-	adds r0, r5
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	bne _08059646
-	ldrb r4, [r2, 0x8]
-	movs r0, 0x64
-	adds r1, r4, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r7, r1, r0
-	adds r0, r7, 0
-	movs r1, 0x38
-	bl GetMonData
-	bl IsDoubleBattle
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08059624
-	ldr r1, =gBattlePartyID
-	movs r0, 0x2
-	adds r2, r5, 0
-	eors r2, r0
-	lsls r0, r2, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r4, r0
-	bne _08059624
-	ldr r0, =gHealthBoxesIds
-	adds r0, r2, r0
-	ldrb r0, [r0]
-	adds r1, r7, 0
-	movs r2, 0
-	bl UpdateHealthboxAttribute
-	b _08059638
-	.pool
-_08059624:
-	ldr r0, =gHealthBoxesIds
-	adds r0, r5, r0
-	ldrb r0, [r0]
-	movs r1, 0x64
-	muls r1, r4
-	ldr r2, =gPlayerParty
-	adds r1, r2
-	movs r2, 0
-	bl UpdateHealthboxAttribute
-_08059638:
-	ldr r0, =gTasks
-	lsls r1, r6, 2
-	adds r1, r6
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, =sub_805965C
-	str r0, [r1]
-_08059646:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80595A4
-
-	thumb_func_start sub_805965C
-sub_805965C: @ 805965C
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r0, =gTasks
-	lsls r4, r5, 2
-	adds r4, r5
-	lsls r4, 3
-	adds r4, r0
-	ldrb r1, [r4, 0x8]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0x38
-	bl GetMonData
-	ldrb r0, [r4, 0xC]
-	ldr r1, =gBattleBankFunc
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_80591A0
-	str r1, [r0]
-	adds r0, r5, 0
-	bl DestroyTask
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_805965C
-
-	thumb_func_start sub_80596A8
-sub_80596A8: @ 80596A8
-	push {r4-r6,lr}
-	ldr r6, =gSprites
-	ldr r5, =gBankSpriteIds
-	ldr r4, =gActiveBank
-	ldrb r2, [r4]
-	adds r0, r2, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r3, 0x22
-	ldrsh r1, [r0, r3]
-	movs r3, 0x26
-	ldrsh r0, [r0, r3]
-	adds r1, r0
-	cmp r1, 0xA0
-	ble _08059724
-	ldr r1, =gBattlePartyID
-	lsls r0, r2, 1
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0xB
-	bl GetMonData
-	lsls r0, 16
-	lsrs r0, 16
-	bl nullsub_24
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	ldrb r0, [r0, 0x3]
-	lsls r0, 26
-	lsrs r0, 27
-	bl FreeOamMatrix
-	ldrb r0, [r4]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	bl DestroySprite
-	ldr r1, =gHealthBoxesIds
-	ldrb r0, [r4]
-	adds r0, r1
-	ldrb r0, [r0]
-	bl SetHealthboxSpriteInvisible
-	bl PlayerBufferExecCompleted
-_08059724:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80596A8
-
-	thumb_func_start sub_8059744
-sub_8059744: @ 8059744
-	push {r4-r6,lr}
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r0, [r0]
-	ldr r6, =gActiveBank
-	ldrb r2, [r6]
-	ldr r1, [r0, 0x4]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	bne _08059798
-	ldr r5, =gBankSpriteIds
-	adds r0, r2, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r4, =gSprites
-	adds r0, r4
-	bl FreeSpriteOamMatrix
-	ldrb r0, [r6]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	bl DestroySprite
-	ldr r1, =gHealthBoxesIds
-	ldrb r0, [r6]
-	adds r0, r1
-	ldrb r0, [r0]
-	bl SetHealthboxSpriteInvisible
-	bl PlayerBufferExecCompleted
-_08059798:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059744
-
-	thumb_func_start sub_80597B4
-sub_80597B4: @ 80597B4
-	push {lr}
-	movs r0, 0
-	bl IsTextPrinterActive
-	lsls r0, 16
-	cmp r0, 0
-	bne _080597C6
-	bl PlayerBufferExecCompleted
-_080597C6:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80597B4
-
-	thumb_func_start sub_80597CC
-sub_80597CC: @ 80597CC
-	push {r4,lr}
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0805980A
-	ldr r1, =gBattleBankFunc
-	ldr r2, =gActiveBank
-	ldrb r0, [r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_8059828
-	str r1, [r0]
-	ldr r3, =gTasks
-	ldr r1, =gUnknown_03005D7C
-	ldrb r0, [r2]
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r3
-	ldrb r4, [r1, 0x8]
-	bl DestroyTask
-	bl FreeAllWindowBuffers
-	adds r0, r4, 0
-	bl sub_81B89AC
-_0805980A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80597CC
-
-	thumb_func_start sub_8059828
-sub_8059828: @ 8059828
-	push {lr}
-	ldr r0, =gMain
-	ldr r1, [r0, 0x4]
-	ldr r0, =BattleMainCB2
-	cmp r1, r0
-	bne _08059898
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08059898
-	ldr r0, =gUnknown_0203CEE8
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08059870
-	ldr r0, =gUnknown_0203CEE9
-	ldrb r1, [r0]
-	ldr r2, =gUnknown_0203CF00
-	movs r0, 0x1
-	bl EmitCmd34
-	b _0805987A
-	.pool
-_08059870:
-	movs r0, 0x1
-	movs r1, 0x6
-	movs r2, 0
-	bl EmitCmd34
-_0805987A:
-	ldr r1, =gBattleBufferA
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 9
-	adds r1, 0x1
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0xF
-	ands r0, r1
-	cmp r0, 0x1
-	bne _08059894
-	bl b_link_standby_message
-_08059894:
-	bl PlayerBufferExecCompleted
-_08059898:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059828
-
-	thumb_func_start sub_80598A4
-sub_80598A4: @ 80598A4
-	push {lr}
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080598CC
-	ldr r1, =gBattleBankFunc
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_80598E0
-	str r1, [r0]
-	bl nullsub_35
-	bl FreeAllWindowBuffers
-	bl sub_81AABB0
-_080598CC:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80598A4
-
-	thumb_func_start sub_80598E0
-sub_80598E0: @ 80598E0
-	push {lr}
-	ldr r0, =gMain
-	ldr r1, [r0, 0x4]
-	ldr r0, =BattleMainCB2
-	cmp r1, r0
-	bne _08059906
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08059906
-	ldr r0, =gScriptItemId
-	ldrh r1, [r0]
-	movs r0, 0x1
-	bl EmitCmd35
-	bl PlayerBufferExecCompleted
-_08059906:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80598E0
-
-	thumb_func_start bx_wait_t1
-bx_wait_t1: @ 805991C
-	push {lr}
-	ldr r0, =gDoingBattleAnim
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _08059942
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r2, [r0]
-	ldr r0, =gActiveBank
-	ldrb r1, [r0]
-	ldr r2, [r2, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	bne _08059946
-_08059942:
-	bl PlayerBufferExecCompleted
-_08059946:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end bx_wait_t1
-
-	thumb_func_start bx_blink_t1
-bx_blink_t1: @ 8059958
-	push {r4,lr}
-	ldr r1, =gBankSpriteIds
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	ldr r2, =gSprites
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r4, r0, r2
-	movs r1, 0x30
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x20
-	bne _080599A4
-	movs r3, 0
-	movs r0, 0
-	strh r0, [r4, 0x30]
-	adds r2, r4, 0
-	adds r2, 0x3E
-	ldrb r1, [r2]
-	subs r0, 0x5
-	ands r0, r1
-	strb r0, [r2]
-	ldr r0, =gDoingBattleAnim
-	strb r3, [r0]
-	bl PlayerBufferExecCompleted
-	b _080599CE
-	.pool
-_080599A4:
-	ldrh r0, [r4, 0x30]
-	movs r1, 0x3
-	ands r0, r1
-	cmp r0, 0
-	bne _080599C8
-	adds r3, r4, 0
-	adds r3, 0x3E
-	ldrb r2, [r3]
-	lsls r0, r2, 29
-	lsrs r0, 31
-	movs r1, 0x1
-	eors r1, r0
-	lsls r1, 2
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r3]
-_080599C8:
-	ldrh r0, [r4, 0x30]
-	adds r0, 0x1
-	strh r0, [r4, 0x30]
-_080599CE:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end bx_blink_t1
-
-	thumb_func_start sub_80599D4
-sub_80599D4: @ 80599D4
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r0, =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _08059A02
-	ldr r4, =gUnknown_03005D74
-	ldrb r0, [r4]
-	cmp r0, 0
-	beq _08059A02
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	bl BattleDestroyCursorAt
-	movs r0, 0
-	strb r0, [r4]
-	movs r0, 0
-	bl BattleCreateCursorAt
-_08059A02:
-	ldr r0, =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08059A2C
-	ldr r4, =gUnknown_03005D74
-	ldrb r0, [r4]
-	cmp r0, 0
-	bne _08059A2C
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4]
-	bl BattleDestroyCursorAt
-	movs r0, 0x1
-	strb r0, [r4]
-	movs r0, 0x1
-	bl BattleCreateCursorAt
-_08059A2C:
-	ldr r0, =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r2, 0x1
-	adds r0, r2, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08059A7A
-	str r2, [sp]
-	movs r0, 0x18
-	movs r1, 0x8
-	movs r2, 0x1D
-	movs r3, 0xD
-	bl sub_8056A3C
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, =gUnknown_03005D74
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _08059A6C
-	movs r0, 0x1
-	movs r1, 0xE
-	movs r2, 0
-	bl EmitCmd33
-	b _08059A76
-	.pool
-_08059A6C:
-	movs r0, 0x1
-	movs r1, 0xD
-	movs r2, 0
-	bl EmitCmd33
-_08059A76:
-	bl PlayerBufferExecCompleted
-_08059A7A:
-	ldr r0, =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08059AA0
-	movs r0, 0x1
-	str r0, [sp]
-	movs r0, 0x18
-	movs r1, 0x8
-	movs r2, 0x1D
-	movs r3, 0xD
-	bl sub_8056A3C
-	movs r0, 0x5
-	bl PlaySE
-	bl PlayerBufferExecCompleted
-_08059AA0:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80599D4
-
-	thumb_func_start sub_8059AAC
-sub_8059AAC: @ 8059AAC
-	push {r4-r7,lr}
-	ldr r0, =gActiveBank
-	ldrb r1, [r0]
-	lsls r1, 9
-	ldr r3, =gBattleBufferA + 4
-	ldr r2, =gUnknown_03005D78
-	movs r0, 0
-	strb r0, [r2]
-	movs r5, 0
-	ldr r7, =gDisplayedStringBattle
-	adds r4, r1, r3
-	adds r6, r2, 0
-_08059AC4:
-	lsls r0, r5, 24
-	lsrs r0, 24
-	bl battle_menu_cursor_related
-	ldrh r1, [r4]
-	movs r0, 0xD
-	muls r1, r0
-	ldr r0, =gMoveNames
-	adds r1, r0
-	adds r0, r7, 0
-	bl StringCopy
-	adds r1, r5, 0x3
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r7, 0
-	bl sub_814F9EC
-	ldrh r0, [r4]
-	cmp r0, 0
-	beq _08059AF4
-	ldrb r0, [r6]
-	adds r0, 0x1
-	strb r0, [r6]
-_08059AF4:
-	adds r4, 0x2
-	adds r5, 0x1
-	cmp r5, 0x3
-	ble _08059AC4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059AAC
-
-	thumb_func_start sub_8059B18
-sub_8059B18: @ 8059B18
-	push {r4,lr}
-	ldr r4, =gDisplayedStringBattle
-	ldr r1, =gText_MoveInterfacePP
-	adds r0, r4, 0
-	bl StringCopy
-	adds r0, r4, 0
-	movs r1, 0x7
-	bl sub_814F9EC
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059B18
-
-	thumb_func_start sub_8059B3C
-sub_8059B3C: @ 8059B3C
-	push {r4-r7,lr}
-	ldr r5, =gBattleBufferA
-	ldr r7, =gActiveBank
-	ldrb r0, [r7]
-	lsls r0, 9
-	adds r1, r5, 0x2
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _08059B98
-	bl SetPpNumbersPaletteInMoveSelection
-	ldrb r1, [r7]
-	lsls r4, r1, 9
-	adds r0, r5, 0x4
-	adds r4, r0
-	ldr r6, =gDisplayedStringBattle
-	ldr r5, =gMoveSelectionCursor
-	adds r1, r5
-	adds r0, r4, 0
-	adds r0, 0x8
-	ldrb r1, [r1]
-	adds r0, r1
-	ldrb r1, [r0]
-	adds r0, r6, 0
-	movs r2, 0x1
-	movs r3, 0x2
-	bl ConvertIntToDecimalStringN
-	movs r1, 0xBA
-	strb r1, [r0]
-	adds r0, 0x1
-	ldrb r1, [r7]
-	adds r1, r5
-	adds r4, 0xC
-	ldrb r1, [r1]
-	adds r4, r1
-	ldrb r1, [r4]
-	movs r2, 0x1
-	movs r3, 0x2
-	bl ConvertIntToDecimalStringN
-	adds r0, r6, 0
-	movs r1, 0x9
-	bl sub_814F9EC
-_08059B98:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059B3C
-
-	thumb_func_start sub_8059BB0
-sub_8059BB0: @ 8059BB0
-	push {r4-r6,lr}
-	ldr r5, =gActiveBank
-	ldrb r4, [r5]
-	lsls r4, 9
-	ldr r0, =gBattleBufferA + 4
-	adds r4, r0
-	ldr r6, =gDisplayedStringBattle
-	ldr r1, =gText_MoveInterfaceType
-	adds r0, r6, 0
-	bl StringCopy
-	movs r1, 0xFC
-	strb r1, [r0]
-	adds r0, 0x1
-	movs r1, 0x6
-	strb r1, [r0]
-	adds r0, 0x1
-	movs r1, 0x1
-	strb r1, [r0]
-	adds r0, 0x1
-	ldr r3, =gBattleMoves
-	ldr r2, =gMoveSelectionCursor
-	ldrb r1, [r5]
-	adds r1, r2
-	ldrb r1, [r1]
-	lsls r1, 1
-	adds r4, r1
-	ldrh r2, [r4]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r3
-	ldrb r2, [r1, 0x2]
-	lsls r1, r2, 3
-	subs r1, r2
-	ldr r2, =gTypeNames
-	adds r1, r2
-	bl StringCopy
-	adds r0, r6, 0
-	movs r1, 0xA
-	bl sub_814F9EC
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059BB0
-
-	thumb_func_start battle_menu_cursor_related_2
-battle_menu_cursor_related_2: @ 8059C28
-	push {lr}
-	sub sp, 0x10
-	adds r3, r0, 0
-	lsls r3, 24
-	lsrs r3, 24
-	lsls r1, 24
-	lsrs r1, 24
-	add r2, sp, 0xC
-	adds r0, r1, 0x1
-	strh r0, [r2]
-	adds r0, r2, 0
-	adds r1, 0x2
-	strh r1, [r0, 0x2]
-	movs r1, 0x1
-	adds r0, r3, 0
-	ands r0, r1
-	lsls r2, r0, 3
-	adds r2, r0
-	adds r2, 0x1
-	movs r0, 0x2
-	ands r3, r0
-	adds r3, 0x37
-	str r1, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0
-	add r1, sp, 0xC
-	bl CopyToBgTilemapBufferRect_ChangePalette
-	movs r0, 0
-	bl CopyBgTilemapBufferToVram
-	add sp, 0x10
-	pop {r0}
-	bx r0
-	thumb_func_end battle_menu_cursor_related_2
-
-	thumb_func_start battle_menu_cursor_related
-battle_menu_cursor_related: @ 8059C70
-	push {lr}
-	sub sp, 0x10
-	adds r3, r0, 0
-	lsls r3, 24
-	lsrs r3, 24
-	add r0, sp, 0xC
-	ldr r1, =0x00001016
-	strh r1, [r0]
-	strh r1, [r0, 0x2]
-	movs r1, 0x1
-	adds r0, r3, 0
-	ands r0, r1
-	lsls r2, r0, 3
-	adds r2, r0
-	adds r2, 0x1
-	movs r0, 0x2
-	ands r3, r0
-	adds r3, 0x37
-	str r1, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0
-	add r1, sp, 0xC
-	bl CopyToBgTilemapBufferRect_ChangePalette
-	movs r0, 0
-	bl CopyBgTilemapBufferToVram
-	add sp, 0x10
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end battle_menu_cursor_related
-
-	thumb_func_start ActionSelectionCreateCursorAt
-ActionSelectionCreateCursorAt: @ 8059CB4
-	push {r4,lr}
-	sub sp, 0x10
-	adds r3, r0, 0
-	lsls r3, 24
-	lsrs r3, 24
-	add r0, sp, 0xC
-	movs r4, 0x1
-	strh r4, [r0]
-	movs r1, 0x2
-	strh r1, [r0, 0x2]
-	adds r0, r3, 0
-	ands r0, r4
-	lsls r2, r0, 3
-	subs r2, r0
-	adds r2, 0x10
-	lsls r2, 24
-	lsrs r2, 24
-	ands r3, r1
-	adds r3, 0x23
-	str r4, [sp]
-	str r1, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0
-	add r1, sp, 0xC
-	bl CopyToBgTilemapBufferRect_ChangePalette
-	movs r0, 0
-	bl CopyBgTilemapBufferToVram
-	add sp, 0x10
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end ActionSelectionCreateCursorAt
-
-	thumb_func_start ActionSelectionDestroyCursorAt
-ActionSelectionDestroyCursorAt: @ 8059CF8
-	push {lr}
-	sub sp, 0x10
-	adds r3, r0, 0
-	lsls r3, 24
-	lsrs r3, 24
-	add r0, sp, 0xC
-	ldr r1, =0x00001016
-	strh r1, [r0]
-	strh r1, [r0, 0x2]
-	movs r1, 0x1
-	adds r0, r3, 0
-	ands r0, r1
-	lsls r2, r0, 3
-	subs r2, r0
-	adds r2, 0x10
-	lsls r2, 24
-	lsrs r2, 24
-	movs r0, 0x2
-	ands r3, r0
-	adds r3, 0x23
-	str r1, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0x11
-	str r0, [sp, 0x8]
-	movs r0, 0
-	add r1, sp, 0xC
-	bl CopyToBgTilemapBufferRect_ChangePalette
-	movs r0, 0
-	bl CopyBgTilemapBufferToVram
-	add sp, 0x10
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ActionSelectionDestroyCursorAt
-
-	thumb_func_start sub_8059D40
-sub_8059D40: @ 8059D40
-	push {lr}
-	ldr r0, =ReshowBattleScreenAfterMenu
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059D40
-
-	thumb_func_start sub_8059D50
-sub_8059D50: @ 8059D50
-	push {lr}
-	ldr r0, =ReshowBattleScreenAfterMenu
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059D50
-
-	thumb_func_start sub_8059D60
-sub_8059D60: @ 8059D60
-	push {lr}
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r2, [r0]
-	ldr r0, =gActiveBank
-	ldrb r1, [r0]
-	ldr r2, [r2, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0]
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	bne _08059D82
-	bl PlayerBufferExecCompleted
-_08059D82:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8059D60
-
-	thumb_func_start bx_8030B2C
-bx_8030B2C: @ 8059D90
-	push {lr}
-	ldr r0, =gBattleSpritesDataPtr
-	ldr r2, [r0]
-	ldr r0, =gActiveBank
-	ldrb r1, [r0]
-	ldr r2, [r2, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	bne _08059DB2
-	bl PlayerBufferExecCompleted
-_08059DB2:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end bx_8030B2C
-
-	thumb_func_start b_link_standby_message
-b_link_standby_message: @ 8059DC0
-	push {lr}
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08059DE0
-	ldr r0, =gBattle_BG0_X
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, =gBattle_BG0_Y
-	strh r1, [r0]
-	ldr r0, =gText_LinkStandby
-	movs r1, 0
-	bl sub_814F9EC
-_08059DE0:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end b_link_standby_message
-
-	thumb_func_start dp01t_00_1_getattr
-dp01t_00_1_getattr: @ 8059DF4
+	thumb_func_start PlayerHandleGetMonData
+PlayerHandleGetMonData: @ 8059DF4
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -4778,7 +61,7 @@ _08059E4E:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_00_1_getattr
+	thumb_func_end PlayerHandleGetMonData
 
 	thumb_func_start dp01_getattr_by_ch1_for_player_pokemon_
 dp01_getattr_by_ch1_for_player_pokemon_: @ 8059E68
@@ -5658,8 +941,8 @@ _0805A5FE:
 	.pool
 	thumb_func_end dp01_getattr_by_ch1_for_player_pokemon_
 
-	thumb_func_start sub_805A614
-sub_805A614: @ 805A614
+	thumb_func_start PlayerHandleGetRawMonData
+PlayerHandleGetRawMonData: @ 805A614
 	push {r4-r7,lr}
 	sub sp, 0x58
 	ldr r2, =gBattlePartyID
@@ -5720,10 +1003,10 @@ _0805A66A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805A614
+	thumb_func_end PlayerHandleGetRawMonData
 
-	thumb_func_start dp01t_02_1_setattr
-dp01t_02_1_setattr: @ 805A69C
+	thumb_func_start PlayerHandleSetMonData
+PlayerHandleSetMonData: @ 805A69C
 	push {r4,r5,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -5763,7 +1046,7 @@ _0805A6EA:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_02_1_setattr
+	thumb_func_end PlayerHandleSetMonData
 
 	thumb_func_start dp01_setattr_by_ch1_for_player_pokemon
 dp01_setattr_by_ch1_for_player_pokemon: @ 805A6F4
@@ -6798,8 +2081,8 @@ _0805B0BA:
 	.pool
 	thumb_func_end dp01_setattr_by_ch1_for_player_pokemon
 
-	thumb_func_start sub_805B0F0
-sub_805B0F0: @ 805B0F0
+	thumb_func_start PlayerHandleSetRawMonData
+PlayerHandleSetRawMonData: @ 805B0F0
 	push {r4-r7,lr}
 	ldr r1, =gBattlePartyID
 	ldr r7, =gActiveBank
@@ -6851,10 +2134,10 @@ _0805B148:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805B0F0
+	thumb_func_end PlayerHandleSetRawMonData
 
-	thumb_func_start sub_805B164
-sub_805B164: @ 805B164
+	thumb_func_start PlayerHandleLoadMonSprite
+PlayerHandleLoadMonSprite: @ 805B164
 	push {r4,lr}
 	ldr r2, =gBattlePartyID
 	ldr r4, =gActiveBank
@@ -6886,16 +2169,16 @@ sub_805B164: @ 805B164
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =bx_0802E404
+	ldr r1, =CompleteOnBankSpritePosX_0
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805B164
+	thumb_func_end PlayerHandleLoadMonSprite
 
-	thumb_func_start sub_805B1CC
-sub_805B1CC: @ 805B1CC
+	thumb_func_start PlayerHandleSwitchInAnim
+PlayerHandleSwitchInAnim: @ 805B1CC
 	push {r4-r6,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -6947,7 +2230,7 @@ sub_805B1CC: @ 805B1CC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805B1CC
+	thumb_func_end PlayerHandleSwitchInAnim
 
 	thumb_func_start sub_805B258
 sub_805B258: @ 805B258
@@ -7112,8 +2395,8 @@ sub_805B258: @ 805B258
 	.pool
 	thumb_func_end sub_805B258
 
-	thumb_func_start sub_805B3D4
-sub_805B3D4: @ 805B3D4
+	thumb_func_start PlayerHandleReturnMonToBall
+PlayerHandleReturnMonToBall: @ 805B3D4
 	push {r4-r6,lr}
 	ldr r1, =gBattleBufferA
 	ldr r6, =gActiveBank
@@ -7169,7 +2452,7 @@ _0805B452:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805B3D4
+	thumb_func_end PlayerHandleReturnMonToBall
 
 	thumb_func_start sub_805B464
 sub_805B464: @ 805B464
@@ -7241,8 +2524,8 @@ _0805B4E2:
 	.pool
 	thumb_func_end sub_805B464
 
-	thumb_func_start sub_805B4F0
-sub_805B4F0: @ 805B4F0
+	thumb_func_start PlayerHandleDrawTrainerPic
+PlayerHandleDrawTrainerPic: @ 805B4F0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -7615,7 +2898,7 @@ _0805B82A:
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_8058844
+	ldr r1, =CompleteOnBankSpriteCallbackDummy
 	str r1, [r0]
 	pop {r3,r4}
 	mov r8, r3
@@ -7624,10 +2907,10 @@ _0805B82A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805B4F0
+	thumb_func_end PlayerHandleDrawTrainerPic
 
-	thumb_func_start dp01t_08_1_8032428
-dp01t_08_1_8032428: @ 805B864
+	thumb_func_start PlayerHandleTrainerSlide
+PlayerHandleTrainerSlide: @ 805B864
 	push {r4-r6,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -7797,16 +3080,16 @@ _0805B926:
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805887C
+	ldr r1, =CompleteOnBankSpriteCallbackDummy2
 	str r1, [r0]
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_08_1_8032428
+	thumb_func_end PlayerHandleTrainerSlide
 
-	thumb_func_start sub_805B9F8
-sub_805B9F8: @ 805B9F8
+	thumb_func_start PlayerHandleTrainerSlideBack
+PlayerHandleTrainerSlideBack: @ 805B9F8
 	push {r4-r6,lr}
 	ldr r5, =gBankSpriteIds
 	ldr r6, =gActiveBank
@@ -7879,16 +3162,16 @@ sub_805B9F8: @ 805B9F8
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =bx_802F7A0
+	ldr r1, =sub_80588B4
 	str r1, [r0]
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805B9F8
+	thumb_func_end PlayerHandleTrainerSlideBack
 
-	thumb_func_start sub_805BAB8
-sub_805BAB8: @ 805BAB8
+	thumb_func_start PlayerHandleFaintAnimation
+PlayerHandleFaintAnimation: @ 805BAB8
 	push {r4-r6,lr}
 	ldr r6, =gBattleSpritesDataPtr
 	ldr r4, [r6]
@@ -7990,10 +3273,10 @@ _0805BB82:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805BAB8
+	thumb_func_end PlayerHandleFaintAnimation
 
-	thumb_func_start sub_805BBA4
-sub_805BBA4: @ 805BBA4
+	thumb_func_start PlayerHandleCmd11
+PlayerHandleCmd11: @ 805BBA4
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0x1
@@ -8008,10 +3291,10 @@ sub_805BBA4: @ 805BBA4
 	add sp, 0x4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805BBA4
+	thumb_func_end PlayerHandleCmd11
 
-	thumb_func_start sub_805BBC4
-sub_805BBC4: @ 805BBC4
+	thumb_func_start PlayerHandleCmd12
+PlayerHandleCmd12: @ 805BBC4
 	push {r4,r5,lr}
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
@@ -8036,16 +3319,16 @@ sub_805BBC4: @ 805BBC4
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =bx_wait_t1
+	ldr r1, =sub_805991C
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805BBC4
+	thumb_func_end PlayerHandleCmd12
 
-	thumb_func_start sub_805BC18
-sub_805BC18: @ 805BC18
+	thumb_func_start PlayerHandleBallThrow
+PlayerHandleBallThrow: @ 805BC18
 	push {r4,r5,lr}
 	ldr r1, =gBattleBufferA
 	ldr r5, =gActiveBank
@@ -8075,16 +3358,16 @@ sub_805BC18: @ 805BC18
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =bx_wait_t1
+	ldr r1, =sub_805991C
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805BC18
+	thumb_func_end PlayerHandleBallThrow
 
-	thumb_func_start sub_805BC78
-sub_805BC78: @ 805BC78
+	thumb_func_start PlayerHandlePause
+PlayerHandlePause: @ 805BC78
 	push {lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -8106,10 +3389,10 @@ _0805BC96:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805BC78
+	thumb_func_end PlayerHandlePause
 
-	thumb_func_start dp01t_0F_1_move_anim
-dp01t_0F_1_move_anim: @ 805BCA8
+	thumb_func_start PlayerHandleMoveAnimation
+PlayerHandleMoveAnimation: @ 805BCA8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -8255,7 +3538,7 @@ _0805BDE4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_0F_1_move_anim
+	thumb_func_end PlayerHandleMoveAnimation
 
 	thumb_func_start bx_move_anim_1
 bx_move_anim_1: @ 805BDFC
@@ -8441,8 +3724,8 @@ _0805BF70:
 	bx r0
 	thumb_func_end bx_move_anim_1
 
-	thumb_func_start sub_805BF80
-sub_805BF80: @ 805BF80
+	thumb_func_start PlayerHandlePrintString
+PlayerHandlePrintString: @ 805BF80
 	push {r4,r5,lr}
 	ldr r0, =gBattle_BG0_X
 	movs r1, 0
@@ -8463,7 +3746,7 @@ sub_805BF80: @ 805BF80
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_80597B4
+	ldr r1, =CompleteOnInactiveTextPrinter2
 	str r1, [r0]
 	ldrh r0, [r4]
 	bl sub_817C95C
@@ -8474,10 +3757,10 @@ sub_805BF80: @ 805BF80
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805BF80
+	thumb_func_end PlayerHandlePrintString
 
-	thumb_func_start dp01t_11_1_message_for_player_only
-dp01t_11_1_message_for_player_only: @ 805BFE0
+	thumb_func_start PlayerHandlePrintStringPlayerOnly
+PlayerHandlePrintStringPlayerOnly: @ 805BFE0
 	push {lr}
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -8485,7 +3768,7 @@ dp01t_11_1_message_for_player_only: @ 805BFE0
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805BFFC
-	bl sub_805BF80
+	bl PlayerHandlePrintString
 	b _0805C000
 	.pool
 _0805BFFC:
@@ -8493,7 +3776,7 @@ _0805BFFC:
 _0805C000:
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_11_1_message_for_player_only
+	thumb_func_end PlayerHandlePrintStringPlayerOnly
 
 	thumb_func_start sub_805C004
 sub_805C004: @ 805C004
@@ -8513,7 +3796,7 @@ sub_805C004: @ 805C004
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_8057588
+	ldr r1, =HandleInputChooseAction
 	str r1, [r0]
 _0805C02A:
 	pop {r0}
@@ -8521,8 +3804,8 @@ _0805C02A:
 	.pool
 	thumb_func_end sub_805C004
 
-	thumb_func_start dp01t_12_6_battle_menu
-dp01t_12_6_battle_menu: @ 805C044
+	thumb_func_start PlayerHandleChooseAction
+PlayerHandleChooseAction: @ 805C044
 	push {r4,lr}
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank
@@ -8559,10 +3842,10 @@ _0805C062:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_12_6_battle_menu
+	thumb_func_end PlayerHandleChooseAction
 
-	thumb_func_start sub_805C0B0
-sub_805C0B0: @ 805C0B0
+	thumb_func_start PlayerHandleCmd19
+PlayerHandleCmd19: @ 805C0B0
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r4, =gActiveBank
@@ -8581,11 +3864,11 @@ sub_805C0B0: @ 805C0B0
 	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
 	bl sub_814F9EC
-	ldr r1, =gUnknown_03005D74
+	ldr r1, =gMultiUsePlayerCursor
 	movs r0, 0x1
 	strb r0, [r1]
 	movs r0, 0x1
-	bl BattleCreateCursorAt
+	bl BattleCreateYesNoCursorAt
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -8601,7 +3884,7 @@ _0805C10C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C0B0
+	thumb_func_end PlayerHandleCmd19
 
 	thumb_func_start sub_805C114
 sub_805C114: @ 805C114
@@ -8623,7 +3906,7 @@ sub_805C114: @ 805C114
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_8057BFC
+	ldr r1, =HandleInputChooseMove
 	str r1, [r0]
 _0805C13E:
 	pop {r0}
@@ -8666,8 +3949,8 @@ _0805C194:
 	.pool
 	thumb_func_end sub_805C158
 
-	thumb_func_start dp01t_14_5_move_menu_pokedude
-dp01t_14_5_move_menu_pokedude: @ 805C1A8
+	thumb_func_start PlayerHandleChooseMove
+PlayerHandleChooseMove: @ 805C1A8
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -8706,13 +3989,13 @@ _0805C1FC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_14_5_move_menu_pokedude
+	thumb_func_end PlayerHandleChooseMove
 
 	thumb_func_start sub_805C210
 sub_805C210: @ 805C210
 	push {lr}
-	bl sub_8059AAC
-	ldr r1, =gUnknown_03005D74
+	bl MoveSelectionDisplayMoveNames
+	ldr r1, =gMultiUsePlayerCursor
 	movs r0, 0xFF
 	strb r0, [r1]
 	ldr r1, =gMoveSelectionCursor
@@ -8721,17 +4004,17 @@ sub_805C210: @ 805C210
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl battle_menu_cursor_related_2
-	bl sub_8059B18
-	bl sub_8059B3C
-	bl sub_8059BB0
+	bl MoveSelectionCreateCursorAt
+	bl MoveSelectionDisplayPpString
+	bl MoveSelectionDisplayPpNumber
+	bl MoveSelectionDisplayMoveType
 	pop {r0}
 	bx r0
 	.pool
 	thumb_func_end sub_805C210
 
-	thumb_func_start sub_805C248
-sub_805C248: @ 805C248
+	thumb_func_start PlayerHandleOpenBag
+PlayerHandleOpenBag: @ 805C248
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r0, 0x1
@@ -8771,10 +4054,10 @@ _0805C276:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C248
+	thumb_func_end PlayerHandleOpenBag
 
-	thumb_func_start sub_805C2AC
-sub_805C2AC: @ 805C2AC
+	thumb_func_start PlayerHandleChoosePokemon
+PlayerHandleChoosePokemon: @ 805C2AC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -8907,10 +4190,10 @@ _0805C3BC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C2AC
+	thumb_func_end PlayerHandleChoosePokemon
 
-	thumb_func_start sub_805C3EC
-sub_805C3EC: @ 805C3EC
+	thumb_func_start PlayerHandleCmd23
+PlayerHandleCmd23: @ 805C3EC
 	push {lr}
 	sub sp, 0x4
 	bl BattleMusicStop
@@ -8926,10 +4209,10 @@ sub_805C3EC: @ 805C3EC
 	add sp, 0x4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C3EC
+	thumb_func_end PlayerHandleCmd23
 
-	thumb_func_start sub_805C410
-sub_805C410: @ 805C410
+	thumb_func_start PlayerHandleHealthBarUpdate
+PlayerHandleHealthBarUpdate: @ 805C410
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -9040,10 +4323,10 @@ _0805C4F2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C410
+	thumb_func_end PlayerHandleHealthBarUpdate
 
-	thumb_func_start sub_805C528
-sub_805C528: @ 805C528
+	thumb_func_start PlayerHandleExpUpdate
+PlayerHandleExpUpdate: @ 805C528
 	push {r4-r7,lr}
 	ldr r5, =gBattleBufferA
 	ldr r6, =gActiveBank
@@ -9106,10 +4389,10 @@ _0805C5AC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C528
+	thumb_func_end PlayerHandleExpUpdate
 
-	thumb_func_start sub_805C5C4
-sub_805C5C4: @ 805C5C4
+	thumb_func_start PlayerHandleStatusIconUpdate
+PlayerHandleStatusIconUpdate: @ 805C5C4
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -9155,10 +4438,10 @@ _0805C618:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C5C4
+	thumb_func_end PlayerHandleStatusIconUpdate
 
-	thumb_func_start sub_805C63C
-sub_805C63C: @ 805C63C
+	thumb_func_start PlayerHandleStatusAnimation
+PlayerHandleStatusAnimation: @ 805C63C
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -9202,10 +4485,10 @@ _0805C68C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C63C
+	thumb_func_end PlayerHandleStatusAnimation
 
-	thumb_func_start sub_805C6A4
-sub_805C6A4: @ 805C6A4
+	thumb_func_start PlayerHandleStatusXor
+PlayerHandleStatusXor: @ 805C6A4
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -9249,18 +4532,18 @@ sub_805C6A4: @ 805C6A4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C6A4
+	thumb_func_end PlayerHandleStatusXor
 
-	thumb_func_start sub_805C710
-sub_805C710: @ 805C710
+	thumb_func_start PlayerHandleDataTransfer
+PlayerHandleDataTransfer: @ 805C710
 	push {lr}
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C710
+	thumb_func_end PlayerHandleDataTransfer
 
-	thumb_func_start sub_805C71C
-sub_805C71C: @ 805C71C
+	thumb_func_start PlayerHandleDMA3Transfer
+PlayerHandleDMA3Transfer: @ 805C71C
 	push {r4,r5,lr}
 	ldr r3, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -9340,10 +4623,10 @@ _0805C7B8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C71C
+	thumb_func_end PlayerHandleDMA3Transfer
 
-	thumb_func_start sub_805C7D0
-sub_805C7D0: @ 805C7D0
+	thumb_func_start PlayerHandlePlayBGM
+PlayerHandlePlayBGM: @ 805C7D0
 	push {lr}
 	ldr r2, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -9362,18 +4645,18 @@ sub_805C7D0: @ 805C7D0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C7D0
+	thumb_func_end PlayerHandlePlayBGM
 
-	thumb_func_start sub_805C800
-sub_805C800: @ 805C800
+	thumb_func_start PlayerHandleCmd32
+PlayerHandleCmd32: @ 805C800
 	push {lr}
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C800
+	thumb_func_end PlayerHandleCmd32
 
-	thumb_func_start sub_805C80C
-sub_805C80C: @ 805C80C
+	thumb_func_start PlayerHandleCmd33
+PlayerHandleCmd33: @ 805C80C
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
@@ -9382,10 +4665,10 @@ sub_805C80C: @ 805C80C
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C80C
+	thumb_func_end PlayerHandleCmd33
 
-	thumb_func_start sub_805C820
-sub_805C820: @ 805C820
+	thumb_func_start PlayerHandleCmd34
+PlayerHandleCmd34: @ 805C820
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
@@ -9394,10 +4677,10 @@ sub_805C820: @ 805C820
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C820
+	thumb_func_end PlayerHandleCmd34
 
-	thumb_func_start sub_805C834
-sub_805C834: @ 805C834
+	thumb_func_start PlayerHandleCmd35
+PlayerHandleCmd35: @ 805C834
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
@@ -9405,10 +4688,10 @@ sub_805C834: @ 805C834
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C834
+	thumb_func_end PlayerHandleCmd35
 
-	thumb_func_start sub_805C848
-sub_805C848: @ 805C848
+	thumb_func_start PlayerHandleCmd36
+PlayerHandleCmd36: @ 805C848
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
@@ -9416,10 +4699,10 @@ sub_805C848: @ 805C848
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C848
+	thumb_func_end PlayerHandleCmd36
 
-	thumb_func_start sub_805C85C
-sub_805C85C: @ 805C85C
+	thumb_func_start PlayerHandleCmd37
+PlayerHandleCmd37: @ 805C85C
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -9431,10 +4714,10 @@ sub_805C85C: @ 805C85C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C85C
+	thumb_func_end PlayerHandleCmd37
 
-	thumb_func_start sub_805C878
-sub_805C878: @ 805C878
+	thumb_func_start PlayerHandleCmd38
+PlayerHandleCmd38: @ 805C878
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, =gBattleBufferA
@@ -9456,10 +4739,10 @@ sub_805C878: @ 805C878
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C878
+	thumb_func_end PlayerHandleCmd38
 
-	thumb_func_start sub_805C8B0
-sub_805C8B0: @ 805C8B0
+	thumb_func_start PlayerHandleCmd39
+PlayerHandleCmd39: @ 805C8B0
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -9470,10 +4753,10 @@ sub_805C8B0: @ 805C8B0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C8B0
+	thumb_func_end PlayerHandleCmd39
 
-	thumb_func_start sub_805C8C8
-sub_805C8C8: @ 805C8C8
+	thumb_func_start PlayerHandleCmd40
+PlayerHandleCmd40: @ 805C8C8
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, [r3]
@@ -9491,10 +4774,10 @@ sub_805C8C8: @ 805C8C8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C8C8
+	thumb_func_end PlayerHandleCmd40
 
-	thumb_func_start dp01t_29_1_blink
-dp01t_29_1_blink: @ 805C8F0
+	thumb_func_start PlayerHandleHitAnimation
+PlayerHandleHitAnimation: @ 805C8F0
 	push {r4,lr}
 	ldr r3, =gSprites
 	ldr r2, =gBankSpriteIds
@@ -9533,25 +4816,25 @@ _0805C924:
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =bx_blink_t1
+	ldr r1, =DoHitAnimBlinkEffect
 	str r1, [r0]
 _0805C94E:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_29_1_blink
+	thumb_func_end PlayerHandleHitAnimation
 
-	thumb_func_start sub_805C960
-sub_805C960: @ 805C960
+	thumb_func_start PlayerHandleCmd42
+PlayerHandleCmd42: @ 805C960
 	push {lr}
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C960
+	thumb_func_end PlayerHandleCmd42
 
-	thumb_func_start sub_805C96C
-sub_805C96C: @ 805C96C
+	thumb_func_start PlayerHandleEffectivenessSound
+PlayerHandleEffectivenessSound: @ 805C96C
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -9581,10 +4864,10 @@ _0805C980:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805C96C
+	thumb_func_end PlayerHandleEffectivenessSound
 
-	thumb_func_start sub_805C9B0
-sub_805C9B0: @ 805C9B0
+	thumb_func_start PlayerHandlePlayFanfareOrBGM
+PlayerHandlePlayFanfareOrBGM: @ 805C9B0
 	push {r4,r5,lr}
 	ldr r4, =gBattleBufferA
 	ldr r5, =gActiveBank
@@ -9624,10 +4907,10 @@ _0805CA00:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C9B0
+	thumb_func_end PlayerHandlePlayFanfareOrBGM
 
-	thumb_func_start sub_805CA0C
-sub_805CA0C: @ 805CA0C
+	thumb_func_start PlayerHandleFaintingCry
+PlayerHandleFaintingCry: @ 805CA0C
 	push {lr}
 	ldr r1, =gBattlePartyID
 	ldr r0, =gActiveBank
@@ -9651,10 +4934,10 @@ sub_805CA0C: @ 805CA0C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805CA0C
+	thumb_func_end PlayerHandleFaintingCry
 
-	thumb_func_start dp01t_2E_1_battle_intro
-dp01t_2E_1_battle_intro: @ 805CA4C
+	thumb_func_start PlayerHandleIntroSlide
+PlayerHandleIntroSlide: @ 805CA4C
 	push {lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -9673,10 +4956,10 @@ dp01t_2E_1_battle_intro: @ 805CA4C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_2E_1_battle_intro
+	thumb_func_end PlayerHandleIntroSlide
 
-	thumb_func_start dp01t_2F_1_pokemon_enter
-dp01t_2F_1_pokemon_enter: @ 805CA80
+	thumb_func_start PlayerHandleIntroTrainerBallThrow
+PlayerHandleIntroTrainerBallThrow: @ 805CA80
 	push {r4-r7,lr}
 	ldr r6, =gBankSpriteIds
 	ldr r7, =gActiveBank
@@ -9833,7 +5116,7 @@ _0805CBA2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_2F_1_pokemon_enter
+	thumb_func_end PlayerHandleIntroTrainerBallThrow
 
 	thumb_func_start sub_805CC00
 sub_805CC00: @ 805CC00
@@ -9994,8 +5277,8 @@ _0805CD50:
 	.pool
 	thumb_func_end task05_08033660
 
-	thumb_func_start sub_805CD74
-sub_805CD74: @ 805CD74
+	thumb_func_start PlayerHandleDrawPartyStatusSummary
+PlayerHandleDrawPartyStatusSummary: @ 805CD74
 	push {r4-r6,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -10078,7 +5361,7 @@ _0805CE18:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805CD74
+	thumb_func_end PlayerHandleDrawPartyStatusSummary
 
 	thumb_func_start sub_805CE38
 sub_805CE38: @ 805CE38
@@ -10116,8 +5399,8 @@ _0805CE70:
 	.pool
 	thumb_func_end sub_805CE38
 
-	thumb_func_start sub_805CE80
-sub_805CE80: @ 805CE80
+	thumb_func_start PlayerHandleCmd49
+PlayerHandleCmd49: @ 805CE80
 	push {lr}
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
@@ -10148,10 +5431,10 @@ _0805CEB2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805CE80
+	thumb_func_end PlayerHandleCmd49
 
-	thumb_func_start sub_805CED0
-sub_805CED0: @ 805CED0
+	thumb_func_start PlayerHandleCmd50
+PlayerHandleCmd50: @ 805CED0
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -10165,10 +5448,10 @@ sub_805CED0: @ 805CED0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805CED0
+	thumb_func_end PlayerHandleCmd50
 
-	thumb_func_start dp01t_33_1_enemy_move
-dp01t_33_1_enemy_move: @ 805CEF4
+	thumb_func_start PlayerHandleSpriteInvisibility
+PlayerHandleSpriteInvisibility: @ 805CEF4
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -10208,10 +5491,10 @@ _0805CF3A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_33_1_enemy_move
+	thumb_func_end PlayerHandleSpriteInvisibility
 
-	thumb_func_start sub_805CF54
-sub_805CF54: @ 805CF54
+	thumb_func_start PlayerHandleBattleAnimation
+PlayerHandleBattleAnimation: @ 805CF54
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, =gActiveBank
@@ -10250,7 +5533,7 @@ _0805CFA4:
 	ldrb r1, [r5]
 	lsls r1, 2
 	adds r1, r0
-	ldr r0, =bx_8030B2C
+	ldr r0, =sub_8059D90
 	str r0, [r1]
 _0805CFB0:
 	adds r0, r6, 0
@@ -10261,10 +5544,10 @@ _0805CFB6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805CF54
+	thumb_func_end PlayerHandleBattleAnimation
 
-	thumb_func_start dp01t_35_1_link_standby_message_and_free_vram
-dp01t_35_1_link_standby_message_and_free_vram: @ 805CFC8
+	thumb_func_start PlayerHandleLinkStandbyMsg
+PlayerHandleLinkStandbyMsg: @ 805CFC8
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -10290,7 +5573,7 @@ _0805CFF8:
 	beq _0805D01C
 	b _0805D020
 _0805CFFE:
-	bl b_link_standby_message
+	bl PrintLinkStandbyMsg
 _0805D002:
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -10302,16 +5585,16 @@ _0805D002:
 	b _0805D020
 	.pool
 _0805D01C:
-	bl b_link_standby_message
+	bl PrintLinkStandbyMsg
 _0805D020:
 	bl PlayerBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_35_1_link_standby_message_and_free_vram
+	thumb_func_end PlayerHandleLinkStandbyMsg
 
-	thumb_func_start sub_805D02C
-sub_805D02C: @ 805D02C
+	thumb_func_start PlayerHandleResetActionMoveSelection
+PlayerHandleResetActionMoveSelection: @ 805D02C
 	push {r4,lr}
 	ldr r1, =gBattleBufferA
 	ldr r4, =gActiveBank
@@ -10358,10 +5641,10 @@ _0805D084:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805D02C
+	thumb_func_end PlayerHandleResetActionMoveSelection
 
-	thumb_func_start sub_805D094
-sub_805D094: @ 805D094
+	thumb_func_start PlayerHandleCmd55
+PlayerHandleCmd55: @ 805D094
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -10409,7 +5692,7 @@ sub_805D094: @ 805D094
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805D094
+	thumb_func_end PlayerHandleCmd55
 
 	thumb_func_start nullsub_22
 nullsub_22: @ 805D114

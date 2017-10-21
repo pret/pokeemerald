@@ -61,10 +61,13 @@ SECTIONS {
         src/battle_util.o(.text);
         src/battle_script_commands.o(.text);
         asm/battle_5.o(.text);
+        src/battle_controller_player.o(.text);
         asm/battle_controller_player.o(.text);
         asm/battle_7.o(.text);
+        src/battle_controller_opponent.o(.text);
         asm/battle_controller_opponent.o(.text);
         src/battle_ai_switch_items.o(.text);
+        src/battle_controller_linkopponent.o(.text);
         asm/battle_controller_linkopponent.o(.text);
         src/pokemon_1.o(.text);
         asm/pokemon_1.o(.text);
@@ -208,6 +211,7 @@ SECTIONS {
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);
+        src/battle_controller_wally.o(.text);
         asm/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
         asm/intro.o(.text);
@@ -330,10 +334,10 @@ SECTIONS {
         src/battle_2.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);
-        data/battle_controller_player.o(.rodata);
+        src/battle_controller_player.o(.rodata);
         data/smokescreen.o(.rodata);
-        data/battle_controller_opponent.o(.rodata);
-        data/battle_controller_link_opponent.o(.rodata);
+        src/battle_controller_opponent.o(.rodata);
+        src/battle_controller_linkopponent.o(.rodata);
         data/data2c.o(.rodata);
         src/trig.o(.rodata);
         src/util.o(.rodata);
@@ -425,7 +429,7 @@ SECTIONS {
         src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
         data/use_pokeblock.o(.rodata);
-        data/battle_controller_wally.o(.rodata);
+        src/battle_controller_wally.o(.rodata);
         data/player_pc.o(.rodata);
         data/intro.o(.rodata);
         data/field_region_map.o(.rodata);

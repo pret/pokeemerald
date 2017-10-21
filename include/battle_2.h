@@ -13,10 +13,13 @@ u8 IsRunningFromBattleImpossible(void);
 u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves);
 void SwapTurnOrder(u8 id1, u8 id2);
 void BattleTurnPassed(void);
+void sub_8038D64(void);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 u32 sub_80397C4(u32 setId, u32 tableId);
 void sub_8039E9C(struct Sprite *sprite);
+void sub_8039B2C(struct Sprite *sprite);
+void sub_8039AD8(struct Sprite *sprite);
 void nullsub_20(void);
 void BeginBattleIntro(void);
 

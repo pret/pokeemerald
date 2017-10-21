@@ -107,7 +107,7 @@ enum
     CONTROLLER_56
 };
 
-#define LAST_CONTROLLER_CMD_ID CONTROLLER_56 + 1
+#define CONTOLLER_CMDS_COUNT CONTROLLER_56 + 1
 
 // general functions
 void HandleLinkBattleSetup(void);

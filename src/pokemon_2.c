@@ -84,7 +84,7 @@ bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 bank)
     return FALSE;
 }
 
-u8 sub_8069F34(u8 bank)
+u8 GetDefaultMoveTarget(u8 bank)
 {
     u8 status = GetBankIdentity(bank) & 1;
 

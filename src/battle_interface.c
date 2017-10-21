@@ -27,12 +27,6 @@ enum
     EXP_BAR
 };
 
-enum
-{
-    HP_CURRENT,
-    HP_MAX
-};
-
 struct TestingBar
 {
     s32 maxValue;

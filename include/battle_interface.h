@@ -3,6 +3,12 @@
 
 #include "battle_controllers.h"
 
+enum
+{
+    HP_CURRENT,
+    HP_MAX
+};
+
 #define TAG_HEALTHBOX_PLAYER1_TILE      0xD6FF
 #define TAG_HEALTHBOX_PLAYER2_TILE      0xD700
 #define TAG_HEALTHBOX_OPPONENT1_TILE    0xD701

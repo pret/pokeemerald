@@ -2257,7 +2257,7 @@ static void sub_803939C(void)
             sub_8056A3C(0x18, 8, 0x1D, 0xD, 0);
             sub_814F9EC(gText_BattleYesNoChoice, 0xC);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateCursorAt(1);
+            BattleCreateYesNoCursorAt(1);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -2267,9 +2267,9 @@ static void sub_803939C(void)
             if (gBattleCommunication[CURSOR_POSITION] != 0)
             {
                 PlaySE(SE_SELECT);
-                BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+                BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
                 gBattleCommunication[CURSOR_POSITION] = 0;
-                BattleCreateCursorAt(0);
+                BattleCreateYesNoCursorAt(0);
             }
         }
         else if (gMain.newKeys & DPAD_DOWN)
@@ -2277,9 +2277,9 @@ static void sub_803939C(void)
             if (gBattleCommunication[CURSOR_POSITION] == 0)
             {
                 PlaySE(SE_SELECT);
-                BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+                BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
                 gBattleCommunication[CURSOR_POSITION] = 1;
-                BattleCreateCursorAt(1);
+                BattleCreateYesNoCursorAt(1);
             }
         }
         else if (gMain.newKeys & A_BUTTON)

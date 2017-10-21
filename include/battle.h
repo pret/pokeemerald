@@ -856,6 +856,8 @@ void SetBankEnemyShadowSpriteCallback(u8 bank, u16 species);
 void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 bank);
 void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank);
 void BattleLoadSubstituteSpriteGfx(u8 bank, bool8 arg1);
+void nullsub_24(u16 arg0);
+void nullsub_25(u8 arg0);
 
 enum
 {
@@ -910,7 +912,17 @@ struct BattleHealthboxInfo
     u8 flag_x4 : 1;
     u8 flag_x8 : 1;
     u8 flag_x10 : 1;
-    u8 field_1;
+    u8 flag_x20 : 1;
+    u8 flag_x40 : 1;
+    u8 flag_x80 : 1;
+    u8 field_1_x1 : 1;
+    u8 field_1_x2 : 1;
+    u8 field_1_x4 : 1;
+    u8 field_1_x8 : 1;
+    u8 field_1_x10 : 1;
+    u8 field_1_x20 : 1;
+    u8 field_1_x40 : 1;
+    u8 field_1_x80 : 1;
     u8 field_2;
     u8 field_3;
     u8 field_4;

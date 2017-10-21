@@ -2100,7 +2100,7 @@ _0813EDEA:
 	ldr r0, =gBattleCommunication
 	strb r2, [r0, 0x1]
 	movs r0, 0
-	bl BattleCreateCursorAt
+	bl BattleCreateYesNoCursorAt
 	b _0813F1A4
 	.pool
 _0813EE34:
@@ -2117,10 +2117,10 @@ _0813EE34:
 	movs r0, 0x5
 	bl PlaySE
 	ldrb r0, [r4, 0x1]
-	bl BattleDestroyCursorAt
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0
 	strb r0, [r4, 0x1]
-	bl BattleCreateCursorAt
+	bl BattleCreateYesNoCursorAt
 _0813EE5C:
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -2135,10 +2135,10 @@ _0813EE5C:
 	movs r0, 0x5
 	bl PlaySE
 	ldrb r0, [r4, 0x1]
-	bl BattleDestroyCursorAt
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
-	bl BattleCreateCursorAt
+	bl BattleCreateYesNoCursorAt
 _0813EE84:
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]

@@ -5,24 +5,6 @@
 
   	.text
     
- 
-	thumb_func_start nullsub_26
-nullsub_26: @ 805F160
-	bx lr
-	thumb_func_end nullsub_26
-
-	thumb_func_start SetBankFuncToOpponentBufferRunCommand
-SetBankFuncToOpponentBufferRunCommand: @ 805F164
-	ldr r1, =gBattleBankFunc
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =OpponentBufferRunCommand
-	str r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end SetBankFuncToOpponentBufferRunCommand
 
 	thumb_func_start OpponentBufferRunCommand
 OpponentBufferRunCommand: @ 805F180
@@ -1619,8 +1601,8 @@ _0805FF7E:
 	.pool
 	thumb_func_end OpponentBufferExecCompleted
 
-	thumb_func_start dp01t_00_7_getattr
-dp01t_00_7_getattr: @ 805FF90
+	thumb_func_start OpponentHandleGetMonData
+OpponentHandleGetMonData: @ 805FF90
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -1672,7 +1654,7 @@ _0805FFEA:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_00_7_getattr
+	thumb_func_end OpponentHandleGetMonData
 
 	thumb_func_start sub_8060004
 sub_8060004: @ 8060004
@@ -2552,8 +2534,8 @@ _0806079A:
 	.pool
 	thumb_func_end sub_8060004
 
-	thumb_func_start dp01t_01_2_read_pokmon_data_slice
-dp01t_01_2_read_pokmon_data_slice: @ 80607B0
+	thumb_func_start OpponentHandleGetRawMonData
+OpponentHandleGetRawMonData: @ 80607B0
 	push {r4-r7,lr}
 	sub sp, 0x58
 	ldr r2, =gBattlePartyID
@@ -2614,10 +2596,10 @@ _08060806:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_01_2_read_pokmon_data_slice
+	thumb_func_end OpponentHandleGetRawMonData
 
-	thumb_func_start dp01t_02_7_setattr
-dp01t_02_7_setattr: @ 8060838
+	thumb_func_start OpponentHandleSetMonData
+OpponentHandleSetMonData: @ 8060838
 	push {r4,r5,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -2657,7 +2639,7 @@ _08060886:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_02_7_setattr
+	thumb_func_end OpponentHandleSetMonData
 
 	thumb_func_start sub_8060890
 sub_8060890: @ 8060890
@@ -3644,8 +3626,8 @@ _0806119C:
 	.pool
 	thumb_func_end sub_8060890
 
-	thumb_func_start sub_80611B0
-sub_80611B0: @ 80611B0
+	thumb_func_start OpponentHandleSetRawMonData
+OpponentHandleSetRawMonData: @ 80611B0
 	push {r4-r7,lr}
 	ldr r1, =gBattlePartyID
 	ldr r7, =gActiveBank
@@ -3697,10 +3679,10 @@ _08061208:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80611B0
+	thumb_func_end OpponentHandleSetRawMonData
 
-	thumb_func_start sub_8061224
-sub_8061224: @ 8061224
+	thumb_func_start OpponentHandleLoadMonSprite
+OpponentHandleLoadMonSprite: @ 8061224
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3843,10 +3825,10 @@ sub_8061224: @ 8061224
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061224
+	thumb_func_end OpponentHandleLoadMonSprite
 
-	thumb_func_start sub_806137C
-sub_806137C: @ 806137C
+	thumb_func_start OpponentHandleSwitchInAnim
+OpponentHandleSwitchInAnim: @ 806137C
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -3882,7 +3864,7 @@ sub_806137C: @ 806137C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806137C
+	thumb_func_end OpponentHandleSwitchInAnim
 
 	thumb_func_start sub_80613DC
 sub_80613DC: @ 80613DC
@@ -4057,8 +4039,8 @@ sub_80613DC: @ 80613DC
 	.pool
 	thumb_func_end sub_80613DC
 
-	thumb_func_start sub_806156C
-sub_806156C: @ 806156C
+	thumb_func_start OpponentHandleReturnMonToBall
+OpponentHandleReturnMonToBall: @ 806156C
 	push {r4-r6,lr}
 	ldr r1, =gBattleBufferA
 	ldr r6, =gActiveBank
@@ -4116,7 +4098,7 @@ _080615F0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806156C
+	thumb_func_end OpponentHandleReturnMonToBall
 
 	thumb_func_start sub_8061604
 sub_8061604: @ 8061604
@@ -4188,8 +4170,8 @@ _08061682:
 	.pool
 	thumb_func_end sub_8061604
 
-	thumb_func_start sub_8061690
-sub_8061690: @ 8061690
+	thumb_func_start OpponentHandleDrawTrainerPic
+OpponentHandleDrawTrainerPic: @ 8061690
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4434,10 +4416,10 @@ _080617CA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061690
+	thumb_func_end OpponentHandleDrawTrainerPic
 
-	thumb_func_start sub_80618D8
-sub_80618D8: @ 80618D8
+	thumb_func_start OpponentHandleTrainerSlide
+OpponentHandleTrainerSlide: @ 80618D8
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -4662,10 +4644,10 @@ _080619DE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80618D8
+	thumb_func_end OpponentHandleTrainerSlide
 
-	thumb_func_start sub_8061AF0
-sub_8061AF0: @ 8061AF0
+	thumb_func_start OpponentHandleTrainerSlideBack
+OpponentHandleTrainerSlideBack: @ 8061AF0
 	push {r4-r6,lr}
 	ldr r6, =gBankSpriteIds
 	ldr r4, =gActiveBank
@@ -4736,10 +4718,10 @@ sub_8061AF0: @ 8061AF0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061AF0
+	thumb_func_end OpponentHandleTrainerSlideBack
 
-	thumb_func_start sub_8061B9C
-sub_8061B9C: @ 8061B9C
+	thumb_func_start OpponentHandleFaintAnimation
+OpponentHandleFaintAnimation: @ 8061B9C
 	push {r4-r6,lr}
 	ldr r6, =gBattleSpritesDataPtr
 	ldr r4, [r6]
@@ -4813,42 +4795,42 @@ _08061C2C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061B9C
+	thumb_func_end OpponentHandleFaintAnimation
 
-	thumb_func_start sub_8061C48
-sub_8061C48: @ 8061C48
+	thumb_func_start OpponentHandleCmd11
+OpponentHandleCmd11: @ 8061C48
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061C48
+	thumb_func_end OpponentHandleCmd11
 
-	thumb_func_start sub_8061C54
-sub_8061C54: @ 8061C54
+	thumb_func_start OpponentHandleCmd12
+OpponentHandleCmd12: @ 8061C54
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061C54
+	thumb_func_end OpponentHandleCmd12
 
-	thumb_func_start sub_8061C60
-sub_8061C60: @ 8061C60
+	thumb_func_start OpponentHandleBallThrow
+OpponentHandleBallThrow: @ 8061C60
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061C60
+	thumb_func_end OpponentHandleBallThrow
 
-	thumb_func_start sub_8061C6C
-sub_8061C6C: @ 8061C6C
+	thumb_func_start OpponentHandlePause
+OpponentHandlePause: @ 8061C6C
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061C6C
+	thumb_func_end OpponentHandlePause
 
-	thumb_func_start sub_8061C78
-sub_8061C78: @ 8061C78
+	thumb_func_start OpponentHandleMoveAnimation
+OpponentHandleMoveAnimation: @ 8061C78
 	push {r4-r6,lr}
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
@@ -4982,7 +4964,7 @@ _08061D9E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061C78
+	thumb_func_end OpponentHandleMoveAnimation
 
 	thumb_func_start bx_move_anim_7
 bx_move_anim_7: @ 8061DB0
@@ -5168,8 +5150,8 @@ _08061F24:
 	bx r0
 	thumb_func_end bx_move_anim_7
 
-	thumb_func_start sub_8061F34
-sub_8061F34: @ 8061F34
+	thumb_func_start OpponentHandlePrintString
+OpponentHandlePrintString: @ 8061F34
 	push {r4,r5,lr}
 	ldr r0, =gBattle_BG0_X
 	movs r1, 0
@@ -5199,35 +5181,35 @@ sub_8061F34: @ 8061F34
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061F34
+	thumb_func_end OpponentHandlePrintString
 
-	thumb_func_start sub_8061F90
-sub_8061F90: @ 8061F90
+	thumb_func_start OpponentHandlePrintStringPlayerOnly
+OpponentHandlePrintStringPlayerOnly: @ 8061F90
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061F90
+	thumb_func_end OpponentHandlePrintStringPlayerOnly
 
-	thumb_func_start sub_8061F9C
-sub_8061F9C: @ 8061F9C
+	thumb_func_start OpponentHandleChooseAction
+OpponentHandleChooseAction: @ 8061F9C
 	push {lr}
 	bl AI_TrySwitchOrUseItem
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061F9C
+	thumb_func_end OpponentHandleChooseAction
 
-	thumb_func_start sub_8061FAC
-sub_8061FAC: @ 8061FAC
+	thumb_func_start OpponentHandleCmd19
+OpponentHandleCmd19: @ 8061FAC
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061FAC
+	thumb_func_end OpponentHandleCmd19
 
-	thumb_func_start sub_8061FB8
-sub_8061FB8: @ 8061FB8
+	thumb_func_start OpponentHandleChooseMove
+OpponentHandleChooseMove: @ 8061FB8
 	push {r4-r6,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r2, [r0]
@@ -5420,10 +5402,10 @@ _08062156:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061FB8
+	thumb_func_end OpponentHandleChooseMove
 
-	thumb_func_start sub_806215C
-sub_806215C: @ 806215C
+	thumb_func_start OpponentHandleOpenBag
+OpponentHandleOpenBag: @ 806215C
 	push {lr}
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -5440,10 +5422,10 @@ sub_806215C: @ 806215C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806215C
+	thumb_func_end OpponentHandleOpenBag
 
-	thumb_func_start sub_8062188
-sub_8062188: @ 8062188
+	thumb_func_start OpponentHandleChoosePokemon
+OpponentHandleChoosePokemon: @ 8062188
 	push {r4-r7,lr}
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -5556,18 +5538,18 @@ _0806225A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062188
+	thumb_func_end OpponentHandleChoosePokemon
 
-	thumb_func_start sub_8062288
-sub_8062288: @ 8062288
+	thumb_func_start OpponentHandleCmd23
+OpponentHandleCmd23: @ 8062288
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062288
+	thumb_func_end OpponentHandleCmd23
 
-	thumb_func_start sub_8062294
-sub_8062294: @ 8062294
+	thumb_func_start OpponentHandleHealthBarUpdate
+OpponentHandleHealthBarUpdate: @ 8062294
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -5660,18 +5642,18 @@ _0806234E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062294
+	thumb_func_end OpponentHandleHealthBarUpdate
 
-	thumb_func_start sub_8062384
-sub_8062384: @ 8062384
+	thumb_func_start OpponentHandleExpUpdate
+OpponentHandleExpUpdate: @ 8062384
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062384
+	thumb_func_end OpponentHandleExpUpdate
 
-	thumb_func_start sub_8062390
-sub_8062390: @ 8062390
+	thumb_func_start OpponentHandleStatusIconUpdate
+OpponentHandleStatusIconUpdate: @ 8062390
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -5717,10 +5699,10 @@ _080623E4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062390
+	thumb_func_end OpponentHandleStatusIconUpdate
 
-	thumb_func_start sub_8062408
-sub_8062408: @ 8062408
+	thumb_func_start OpponentHandleStatusAnimation
+OpponentHandleStatusAnimation: @ 8062408
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -5764,82 +5746,82 @@ _08062458:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062408
+	thumb_func_end OpponentHandleStatusAnimation
 
-	thumb_func_start sub_8062470
-sub_8062470: @ 8062470
+	thumb_func_start OpponentHandleStatusXor
+OpponentHandleStatusXor: @ 8062470
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062470
+	thumb_func_end OpponentHandleStatusXor
 
-	thumb_func_start sub_806247C
-sub_806247C: @ 806247C
+	thumb_func_start OpponentHandleDataTransfer
+OpponentHandleDataTransfer: @ 806247C
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806247C
+	thumb_func_end OpponentHandleDataTransfer
 
-	thumb_func_start sub_8062488
-sub_8062488: @ 8062488
+	thumb_func_start OpponentHandleDMA3Transfer
+OpponentHandleDMA3Transfer: @ 8062488
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062488
+	thumb_func_end OpponentHandleDMA3Transfer
 
-	thumb_func_start sub_8062494
-sub_8062494: @ 8062494
+	thumb_func_start OpponentHandlePlayBGM
+OpponentHandlePlayBGM: @ 8062494
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062494
+	thumb_func_end OpponentHandlePlayBGM
 
-	thumb_func_start sub_80624A0
-sub_80624A0: @ 80624A0
+	thumb_func_start OpponentHandleCmd32
+OpponentHandleCmd32: @ 80624A0
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80624A0
+	thumb_func_end OpponentHandleCmd32
 
-	thumb_func_start sub_80624AC
-sub_80624AC: @ 80624AC
+	thumb_func_start OpponentHandleCmd33
+OpponentHandleCmd33: @ 80624AC
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80624AC
+	thumb_func_end OpponentHandleCmd33
 
-	thumb_func_start sub_80624B8
-sub_80624B8: @ 80624B8
+	thumb_func_start OpponentHandleCmd34
+OpponentHandleCmd34: @ 80624B8
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80624B8
+	thumb_func_end OpponentHandleCmd34
 
-	thumb_func_start sub_80624C4
-sub_80624C4: @ 80624C4
+	thumb_func_start OpponentHandleCmd35
+OpponentHandleCmd35: @ 80624C4
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80624C4
+	thumb_func_end OpponentHandleCmd35
 
-	thumb_func_start sub_80624D0
-sub_80624D0: @ 80624D0
+	thumb_func_start OpponentHandleCmd36
+OpponentHandleCmd36: @ 80624D0
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80624D0
+	thumb_func_end OpponentHandleCmd36
 
-	thumb_func_start sub_80624DC
-sub_80624DC: @ 80624DC
+	thumb_func_start OpponentHandleCmd37
+OpponentHandleCmd37: @ 80624DC
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -5851,10 +5833,10 @@ sub_80624DC: @ 80624DC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80624DC
+	thumb_func_end OpponentHandleCmd37
 
-	thumb_func_start sub_80624F8
-sub_80624F8: @ 80624F8
+	thumb_func_start OpponentHandleCmd38
+OpponentHandleCmd38: @ 80624F8
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, =gBattleBufferA
@@ -5876,10 +5858,10 @@ sub_80624F8: @ 80624F8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80624F8
+	thumb_func_end OpponentHandleCmd38
 
-	thumb_func_start sub_8062530
-sub_8062530: @ 8062530
+	thumb_func_start OpponentHandleCmd39
+OpponentHandleCmd39: @ 8062530
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -5890,10 +5872,10 @@ sub_8062530: @ 8062530
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062530
+	thumb_func_end OpponentHandleCmd39
 
-	thumb_func_start sub_8062548
-sub_8062548: @ 8062548
+	thumb_func_start OpponentHandleCmd40
+OpponentHandleCmd40: @ 8062548
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, [r3]
@@ -5911,10 +5893,10 @@ sub_8062548: @ 8062548
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062548
+	thumb_func_end OpponentHandleCmd40
 
-	thumb_func_start dp01t_29_7_blink
-dp01t_29_7_blink: @ 8062570
+	thumb_func_start OpponentHandleHitAnimation
+OpponentHandleHitAnimation: @ 8062570
 	push {r4,lr}
 	ldr r3, =gSprites
 	ldr r2, =gBankSpriteIds
@@ -5960,18 +5942,18 @@ _080625CE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_29_7_blink
+	thumb_func_end OpponentHandleHitAnimation
 
-	thumb_func_start sub_80625E0
-sub_80625E0: @ 80625E0
+	thumb_func_start OpponentHandleCmd42
+OpponentHandleCmd42: @ 80625E0
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80625E0
+	thumb_func_end OpponentHandleCmd42
 
-	thumb_func_start sub_80625EC
-sub_80625EC: @ 80625EC
+	thumb_func_start OpponentHandleEffectivenessSound
+OpponentHandleEffectivenessSound: @ 80625EC
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -6001,10 +5983,10 @@ _08062600:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80625EC
+	thumb_func_end OpponentHandleEffectivenessSound
 
-	thumb_func_start sub_8062630
-sub_8062630: @ 8062630
+	thumb_func_start OpponentHandlePlayFanfareOrBGM
+OpponentHandlePlayFanfareOrBGM: @ 8062630
 	push {r4,r5,lr}
 	ldr r4, =gBattleBufferA
 	ldr r5, =gActiveBank
@@ -6044,10 +6026,10 @@ _08062680:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062630
+	thumb_func_end OpponentHandlePlayFanfareOrBGM
 
-	thumb_func_start sub_806268C
-sub_806268C: @ 806268C
+	thumb_func_start OpponentHandleFaintingCry
+OpponentHandleFaintingCry: @ 806268C
 	push {lr}
 	ldr r1, =gBattlePartyID
 	ldr r0, =gActiveBank
@@ -6070,10 +6052,10 @@ sub_806268C: @ 806268C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806268C
+	thumb_func_end OpponentHandleFaintingCry
 
-	thumb_func_start dp01t_2E_7_battle_intro
-dp01t_2E_7_battle_intro: @ 80626C8
+	thumb_func_start OpponentHandleIntroSlide
+OpponentHandleIntroSlide: @ 80626C8
 	push {lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -6092,10 +6074,10 @@ dp01t_2E_7_battle_intro: @ 80626C8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_2E_7_battle_intro
+	thumb_func_end OpponentHandleIntroSlide
 
-	thumb_func_start sub_80626FC
-sub_80626FC: @ 80626FC
+	thumb_func_start OpponentHandleIntroTrainerBallThrow
+OpponentHandleIntroTrainerBallThrow: @ 80626FC
 	push {r4-r6,lr}
 	ldr r5, =gBankSpriteIds
 	ldr r6, =gActiveBank
@@ -6207,7 +6189,7 @@ _080627BE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80626FC
+	thumb_func_end OpponentHandleIntroTrainerBallThrow
 
 	thumb_func_start sub_806280C
 sub_806280C: @ 806280C
@@ -6327,8 +6309,8 @@ _080628E0:
 	.pool
 	thumb_func_end sub_8062828
 
-	thumb_func_start dp01t_30_7_0803D67C
-dp01t_30_7_0803D67C: @ 8062918
+	thumb_func_start OpponentHandleDrawPartyStatusSummary
+OpponentHandleDrawPartyStatusSummary: @ 8062918
 	push {r4-r7,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -6450,7 +6432,7 @@ _08062A12:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_30_7_0803D67C
+	thumb_func_end OpponentHandleDrawPartyStatusSummary
 
 	thumb_func_start bx_0803D790_t7
 bx_0803D790_t7: @ 8062A2C
@@ -6488,8 +6470,8 @@ _08062A64:
 	.pool
 	thumb_func_end bx_0803D790_t7
 
-	thumb_func_start sub_8062A74
-sub_8062A74: @ 8062A74
+	thumb_func_start OpponentHandleCmd49
+OpponentHandleCmd49: @ 8062A74
 	push {lr}
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
@@ -6520,18 +6502,18 @@ _08062AA6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062A74
+	thumb_func_end OpponentHandleCmd49
 
-	thumb_func_start sub_8062AC4
-sub_8062AC4: @ 8062AC4
+	thumb_func_start OpponentHandleCmd50
+OpponentHandleCmd50: @ 8062AC4
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062AC4
+	thumb_func_end OpponentHandleCmd50
 
-	thumb_func_start sub_8062AD0
-sub_8062AD0: @ 8062AD0
+	thumb_func_start OpponentHandleSpriteInvisibility
+OpponentHandleSpriteInvisibility: @ 8062AD0
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -6571,10 +6553,10 @@ _08062B16:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062AD0
+	thumb_func_end OpponentHandleSpriteInvisibility
 
-	thumb_func_start dp01t_34_7_move_anim_start_t3
-dp01t_34_7_move_anim_start_t3: @ 8062B30
+	thumb_func_start OpponentHandleBattleAnimation
+OpponentHandleBattleAnimation: @ 8062B30
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, =gActiveBank
@@ -6620,26 +6602,26 @@ _08062B88:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_34_7_move_anim_start_t3
+	thumb_func_end OpponentHandleBattleAnimation
 
-	thumb_func_start sub_8062B98
-sub_8062B98: @ 8062B98
+	thumb_func_start OpponentHandleLinkStandbyMsg
+OpponentHandleLinkStandbyMsg: @ 8062B98
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062B98
+	thumb_func_end OpponentHandleLinkStandbyMsg
 
-	thumb_func_start sub_8062BA4
-sub_8062BA4: @ 8062BA4
+	thumb_func_start OpponentHandleResetActionMoveSelection
+OpponentHandleResetActionMoveSelection: @ 8062BA4
 	push {lr}
 	bl OpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062BA4
+	thumb_func_end OpponentHandleResetActionMoveSelection
 
-	thumb_func_start sub_8062BB0
-sub_8062BB0: @ 8062BB0
+	thumb_func_start OpponentHandleCmd55
+OpponentHandleCmd55: @ 8062BB0
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -6665,7 +6647,7 @@ _08062BDA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062BB0
+	thumb_func_end OpponentHandleCmd55
 
 	thumb_func_start nullsub_91
 nullsub_91: @ 8062BF4
