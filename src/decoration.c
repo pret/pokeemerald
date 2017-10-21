@@ -2299,3 +2299,125 @@ void sub_812A040(u8 left, u8 top, u8 right, u8 bottom)
         }
     }
 }
+
+#ifdef NONMATCHING
+void sub_812A0E8(u8 taskId)
+{
+    u8 i;
+    u8 xOff;
+    u8 yOff;
+    u8 decor;
+    register u8 decor asm("r1");
+    struct UnkStruct_0203AA44 *data;
+
+    gUnknown_0203AAC4 = 0;
+    if (sub_8129FC8(taskId) != TRUE)
+    {
+        for (i = 0; i < gUnknown_0203A17C.size; i ++)
+        {
+            decor = gUnknown_0203A17C.items[i];
+            if (decor != DECOR_NONE)
+            {
+                data = &gUnknown_0203AA44[0];
+                sub_8129D8C(decor, data);
+                if (sub_8129E74(taskId, i, data) == TRUE)
+                {
+                    data->idx = i;
+                    gUnknown_0203AAC4 ++;
+                    break;
+                }
+            }
+        }
+        if (gUnknown_0203AAC4 != 0)
+        {
+            xOff = gUnknown_0203A17C.pos[gUnknown_0203AA44[0].idx] >> 4;
+            yOff = gUnknown_0203A17C.pos[gUnknown_0203AA44[0].idx] & 0x0F;
+            sub_812A040(xOff, yOff - gUnknown_0203AA44[0].height + 1, xOff + gUnknown_0203AA44[0].width - 1, yOff); // Arithmetic register swap at the r2 argument: `add r2, r0, r2` instead of `add r2, r2, r0`
+        }
+    }
+}
+#else
+__attribute__((naked)) void sub_812A0E8(u8 taskId)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r6, r0, 24\n"
+                    "\tldr r4, =gUnknown_0203AAC4\n"
+                    "\tmovs r0, 0\n"
+                    "\tstrb r0, [r4]\n"
+                    "\tadds r0, r6, 0\n"
+                    "\tbl sub_8129FC8\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tcmp r0, 0x1\n"
+                    "\tbeq _0812A18C\n"
+                    "\tmovs r5, 0\n"
+                    "\tldr r0, =gUnknown_0203A17C\n"
+                    "\tldrb r1, [r0, 0x8]\n"
+                    "\tcmp r5, r1\n"
+                    "\tbcs _0812A15A\n"
+                    "\tadds r7, r4, 0\n"
+                    "_0812A10E:\n"
+                    "\tldr r0, [r0]\n"
+                    "\tadds r0, r5\n"
+                    "\tldrb r1, [r0]\n"
+                    "\tcmp r1, 0\n"
+                    "\tbeq _0812A14C\n"
+                    "\tldr r4, =gUnknown_0203AA44\n"
+                    "\tadds r0, r1, 0\n"
+                    "\tadds r1, r4, 0\n"
+                    "\tbl sub_8129D8C\n"
+                    "\tadds r0, r6, 0\n"
+                    "\tadds r1, r5, 0\n"
+                    "\tadds r2, r4, 0\n"
+                    "\tbl sub_8129E74\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r0, 24\n"
+                    "\tcmp r0, 0x1\n"
+                    "\tbne _0812A14C\n"
+                    "\tstrb r5, [r4]\n"
+                    "\tldrb r0, [r7]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r7]\n"
+                    "\tb _0812A15A\n"
+                    "\t.pool\n"
+                    "_0812A14C:\n"
+                    "\tadds r0, r5, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r5, r0, 24\n"
+                    "\tldr r0, =gUnknown_0203A17C\n"
+                    "\tldrb r1, [r0, 0x8]\n"
+                    "\tcmp r5, r1\n"
+                    "\tbcc _0812A10E\n"
+                    "_0812A15A:\n"
+                    "\tldr r0, =gUnknown_0203AAC4\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0812A18C\n"
+                    "\tldr r0, =gUnknown_0203A17C\n"
+                    "\tldr r2, =gUnknown_0203AA44\n"
+                    "\tldrb r1, [r2]\n"
+                    "\tldr r0, [r0, 0x4]\n"
+                    "\tadds r0, r1\n"
+                    "\tldrb r1, [r0]\n"
+                    "\tlsrs r0, r1, 4\n"
+                    "\tmovs r3, 0xF\n"
+                    "\tands r3, r1\n"
+                    "\tldrb r1, [r2, 0x2]\n"
+                    "\tsubs r1, r3, r1\n"
+                    "\tadds r1, 0x1\n"
+                    "\tlsls r1, 24\n"
+                    "\tlsrs r1, 24\n"
+                    "\tldrb r2, [r2, 0x1]\n"
+                    "\tadds r2, r0\n"
+                    "\tsubs r2, 0x1\n"
+                    "\tlsls r2, 24\n"
+                    "\tlsrs r2, 24\n"
+                    "\tbl sub_812A040\n"
+                    "_0812A18C:\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.pool");
+}
+#endif
