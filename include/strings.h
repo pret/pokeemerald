@@ -56,5 +56,19 @@ extern const u8 gText_NoDecorationHere[];
 extern const u8 gText_DecorationWillBeDiscarded[];
 extern const u8 gText_CantThrowAwayInUse[];
 extern const u8 gText_DecorationThrownAway[];
+extern const u8 gUnknown_085EA859[];
+extern const u8 gUnknown_085EA85E[];
+extern const u8 gUnknown_085EA864[];
+extern const u8 gUnknown_085EA86A[];
+extern const u8 gUnknown_085EA873[];
+extern const u8 gUnknown_085EA877[];
+extern const u8 gUnknown_085EA7CF[];
+extern const u8 gUnknown_085EA7F5[];
+extern const u8 gUnknown_085EA81C[];
+extern const u8 gUnknown_085EA87E[];
+extern const u8 gUnknown_085EA883[];
+extern const u8 gUnknown_085EA7B1[];
+extern const u8 gUnknown_085EA7BA[];
+extern const u8 gUnknown_085EA7C3[];
 
 #endif //GUARD_STRINGS_H

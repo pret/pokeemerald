@@ -89,6 +89,9 @@ extern EWRAM_DATA u8 gUnknown_0203AAC4;
 
 void sub_8126B80(u8 taskId);
 void sub_8126C08(void);
+void sub_8126C48(u8 taskId);
+void sub_8126CA4(u8 taskId);
+void sub_8126D10(u8 taskId);
 void sub_8126DA4(u8 taskId);
 void sub_8126D6C(u8 taskId);
 void sub_8126DCC(u8 taskId);
@@ -112,6 +115,8 @@ bool8 sub_81277E8(u8 idx);
 void sub_81279B4(u8 taskId);
 void sub_812759C(u8 taskId);
 void sub_8127718(u8 decorCat);
+void sub_8127A8C(u8 taskId);
+void sub_8127F68(u8 taskId);
 void sub_8128060(u8 taskId);
 void ConfigureCameraObjectForPlacingDecoration(struct UnkStruct_0203A190 *data, u8 decor);
 void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_0203A190 *data);
@@ -144,6 +149,7 @@ void sub_812A334(void);
 void sub_812A36C(struct Sprite *sprite);
 void sub_812A39C(void);
 void sub_812A3C8(void);
+void sub_812A3D4(u8 taskId);
 void sub_812A458(u8 taskId);
 
 // .rodata
@@ -152,10 +158,45 @@ void sub_812A458(u8 taskId);
 #include "data/decoration/description.h"
 #include "data/decoration/header.h"
 
-extern const u8 *const gUnknown_085A6B28[];
-extern const struct MenuAction gUnknown_085A6B48[];
-extern const u8 *const gUnknown_085A6B68[];
-extern void (*const gUnknown_085A6B78[][2])(u8 taskId);
+const u8 *const gUnknown_085A6B28[] = {
+    gUnknown_085EA859,
+    gUnknown_085EA85E,
+    gUnknown_085EA864,
+    gUnknown_085EA86A,
+    gUnknown_085EA873,
+    gUnknown_085EA877,
+    gUnknown_085EA87E,
+    gUnknown_085EA883
+};
+
+const struct MenuAction gUnknown_085A6B48[] = {
+    {
+        gUnknown_085EA7B1, {.void_u8=sub_8126C48}
+    }, {
+        gUnknown_085EA7BA, {.void_u8=sub_8126CA4}
+    }, {
+        gUnknown_085EA7C3, {.void_u8=sub_8126D10}
+    }, {
+        gText_Cancel, {.void_u8=sub_8126D6C}
+    }
+};
+
+const u8 *const gUnknown_085A6B68[] = {
+    gUnknown_085EA7CF,
+    gUnknown_085EA7F5,
+    gUnknown_085EA81C,
+    gText_GoBackPrevMenu
+};
+
+void (*const gUnknown_085A6B78[][2])(u8 taskId) = {
+   {
+        sub_8127F68, sub_8127A8C
+   }, {
+        sub_812A3D4, sub_8127A8C
+   }, {
+        sub_8133DA0, sub_8127A8C
+   }
+};
 extern const struct WindowTemplate gUnknown_085A6B90[4];
 extern const u16 gUnknown_085A6BB0[];
 extern const struct ListMenuTemplate gUnknown_085A6BD0;
