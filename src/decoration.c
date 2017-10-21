@@ -32,6 +32,7 @@
 #include "secret_base.h"
 #include "tilesets.h"
 #include "item_icon.h"
+#include "trader.h"
 #include "decoration_inventory.h"
 #include "decoration.h"
 
@@ -136,10 +137,11 @@ void sub_8129D64(u8 taskId);
 void sub_812A0E8(u8 taskId);
 void sub_812A1A0(u8 taskId);
 void sub_812A1F0(u8 taskId);
+void sub_812A22C(u8 taskId);
+void sub_812A25C(u8 taskId);
 void sub_812A36C(struct Sprite *sprite);
 void sub_812A39C(void);
 void sub_812A3C8(void);
-void sub_8133E1C(u8 taskId);
 
 // .rodata
 
@@ -172,6 +174,8 @@ extern const struct {
 extern const struct SpriteTemplate gUnknown_085A728C;
 extern const struct SpritePalette gUnknown_085A72BC;
 extern const u16 gUnknown_085A72F4[];
+extern const struct YesNoFuncTable gUnknown_085A7348;
+extern const struct YesNoFuncTable gUnknown_085A7350;
 extern const struct SpriteTemplate gUnknown_085A7404;
 
 // .text
@@ -2421,3 +2425,35 @@ __attribute__((naked)) void sub_812A0E8(u8 taskId)
                     "\t.pool");
 }
 #endif
+
+void sub_812A1A0(u8 taskId)
+{
+    sub_8197930();
+    sub_8121F68(taskId, &gUnknown_085A7348);
+}
+
+void sub_812A1C0(u8 taskId)
+{
+    fade_screen(1, 0);
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].func = sub_81298EC;
+}
+
+void sub_812A1F0(u8 taskId)
+{
+    sub_8197930();
+    sub_8121F68(taskId, &gUnknown_085A7350);
+}
+
+void sub_812A210(u8 taskId)
+{
+    sub_8197434(0, 0);
+    sub_812A22C(taskId);
+}
+
+void sub_812A22C(u8 taskId)
+{
+    fade_screen(1, 0);
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].func = sub_812A25C;
+}
