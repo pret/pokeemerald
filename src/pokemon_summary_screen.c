@@ -281,6 +281,7 @@ void sub_81C3890();
 void sub_81C38C0();
 void sub_81C3B08(u8 a);
 void sub_81C3E2C(u8 a);
+void sub_81C4D18();
 
 void SetBgAttribute(u8 bg, u8 attributeId, u8 value);
 
@@ -1232,8 +1233,6 @@ bool8 sub_81C1040(void)
     }
     return FALSE;
 }
-
-void sub_81C4D18();
 
 void sub_81C1070(s16 *a, s8 b, u8 *c)
 {
