@@ -143,6 +143,7 @@ void sub_812A334(void);
 void sub_812A36C(struct Sprite *sprite);
 void sub_812A39C(void);
 void sub_812A3C8(void);
+void sub_812A458(u8 taskId);
 
 // .rodata
 
@@ -180,6 +181,7 @@ extern const struct YesNoFuncTable gUnknown_085A7350;
 extern const struct SpritePalette gUnknown_085A73D8;
 extern const struct SpritePalette gUnknown_085A73E0;
 extern const struct SpriteTemplate gUnknown_085A7404;
+extern const struct YesNoFuncTable gUnknown_085A741C;
 
 // .text
 
@@ -2544,4 +2546,40 @@ void sub_812A39C(void)
     {
         LoadSpritePalette(&gUnknown_085A73E0);
     }
+}
+
+void sub_812A3C8(void)
+{
+    FreeSpritePaletteByTag(0x0008);
+}
+
+void sub_812A3D4(u8 taskId)
+{
+    if (sub_81279C4() == TRUE)
+    {
+        StringCopy(gStringVar1, gDecorations[gUnknown_0203A14C[gUnknown_0203A172]].name);
+        StringExpandPlaceholders(gStringVar4, gText_DecorationWillBeDiscarded);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_812A458);
+    }
+    else
+    {
+        StringExpandPlaceholders(gStringVar4, gText_CantThrowAwayInUse);
+        DisplayItemMessageOnField(taskId, gStringVar4, sub_8127A5C);
+    }
+}
+
+void sub_812A458(u8 taskId)
+{
+    sub_8197930();
+    sub_8121F68(taskId, &gUnknown_085A741C);
+}
+
+void sub_812A478(u8 taskId)
+{
+    gUnknown_0203A14C[gUnknown_0203A172] = DECOR_NONE;
+    gUnknown_0203A151 = CountDecorationCategoryN(gUnknown_0203A173);
+    CondenseDecorationCategoryN(gUnknown_0203A173);
+    sub_8127814(taskId);
+    StringExpandPlaceholders(gStringVar4, gText_DecorationThrownAway);
+    DisplayItemMessageOnField(taskId, gStringVar4, sub_8127A5C);
 }

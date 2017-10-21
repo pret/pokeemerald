@@ -53,5 +53,8 @@ extern const u8 gText_DecorationReturnedToPC[];
 extern const u8 gText_StopPuttingAwayDecorations[];
 extern const u8 gText_ReturnDecorationToPC[];
 extern const u8 gText_NoDecorationHere[];
+extern const u8 gText_DecorationWillBeDiscarded[];
+extern const u8 gText_CantThrowAwayInUse[];
+extern const u8 gText_DecorationThrownAway[];
 
 #endif //GUARD_STRINGS_H
