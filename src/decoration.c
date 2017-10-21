@@ -2236,3 +2236,21 @@ bool8 sub_8129E74(u8 taskId, u8 idx, struct UnkStruct_0203AA44 *data)
     }
     return FALSE;
 }
+
+void sub_8129F20(void)
+{
+    u8 xOff;
+    u8 yOff;
+    u16 i;
+    
+    xOff = gUnknown_0203A17C.pos[gUnknown_0203AA44[gUnknown_0203AAC4].idx] >> 4;
+    yOff = gUnknown_0203A17C.pos[gUnknown_0203AA44[gUnknown_0203AAC4].idx] & 0x0F;
+    for (i = 0; i < 0x40; i ++)
+    {
+        if (gSaveBlock1Ptr->mapObjectTemplates[i].x == xOff && gSaveBlock1Ptr->mapObjectTemplates[i].y == yOff && !FlagGet(gSaveBlock1Ptr->mapObjectTemplates[i].flagId))
+        {
+            gUnknown_0203AA44[gUnknown_0203AAC4].flagId = gSaveBlock1Ptr->mapObjectTemplates[i].flagId;
+            break;
+        }
+    }
+}
