@@ -2203,3 +2203,11 @@ void sub_8129D8C(u8 decor, struct UnkStruct_0203AA44 *data)
         data->height = 2;
     }
 }
+
+void sub_8129E0C(u8 x, u8 y)
+{
+    gSprites[gUnknown_0203AA38].invisible = TRUE;
+    gSprites[gUnknown_0203AA38].callback = SpriteCallbackDummy;
+    gSprites[gUnknown_0203AA39].pos1.x = (x << 4) + 0x88;
+    gSprites[gUnknown_0203AA39].pos1.y = (y << 4) + 0x48;
+}

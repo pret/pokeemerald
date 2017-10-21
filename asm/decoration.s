@@ -5,55 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8129E0C
-sub_8129E0C: @ 8129E0C
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsls r1, 24
-	ldr r5, =gSprites
-	ldr r6, =gUnknown_0203AA38
-	ldrb r3, [r6]
-	lsls r2, r3, 4
-	adds r2, r3
-	lsls r2, 2
-	adds r2, r5
-	adds r2, 0x3E
-	ldrb r3, [r2]
-	movs r4, 0x4
-	orrs r3, r4
-	strb r3, [r2]
-	ldrb r3, [r6]
-	lsls r2, r3, 4
-	adds r2, r3
-	lsls r2, 2
-	adds r3, r5, 0
-	adds r3, 0x1C
-	adds r2, r3
-	ldr r3, =SpriteCallbackDummy
-	str r3, [r2]
-	ldr r4, =gUnknown_0203AA39
-	ldrb r3, [r4]
-	lsls r2, r3, 4
-	adds r2, r3
-	lsls r2, 2
-	adds r2, r5
-	lsrs r0, 20
-	adds r0, 0x88
-	strh r0, [r2, 0x20]
-	ldrb r2, [r4]
-	lsls r0, r2, 4
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r5
-	lsrs r1, 20
-	adds r1, 0x48
-	strh r1, [r0, 0x22]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8129E0C
-
 	thumb_func_start sub_8129E74
 sub_8129E74: @ 8129E74
 	push {r4-r7,lr}
