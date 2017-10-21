@@ -2278,3 +2278,24 @@ bool8 sub_8129FC8(u8 taskId)
     }
     return FALSE;
 }
+
+void sub_812A040(u8 left, u8 top, u8 right, u8 bottom)
+{
+    u8 i;
+    u8 xOff;
+    u8 yOff;
+    u8 decorIdx;
+
+    for (i = 0; i < gUnknown_0203A17C.size; i ++)
+    {
+        decorIdx = gUnknown_0203A17C.items[i];
+        xOff = gUnknown_0203A17C.pos[i] >> 4;
+        yOff = gUnknown_0203A17C.pos[i] & 0x0F;
+        if (decorIdx != 0 && gDecorations[decorIdx].permission == DECORPERM_SOLID_MAT && left <= xOff && top <= yOff && right >= xOff && bottom >= yOff)
+        {
+            gUnknown_0203AA44[gUnknown_0203AAC4].idx = i;
+            sub_8129F20();
+            gUnknown_0203AAC4++;
+        }
+    }
+}
