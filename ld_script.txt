@@ -223,7 +223,7 @@ SECTIONS {
         src/save_failed_screen.o(.text);
         src/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
-        asm/clear_save_data_screen.o(.text);
+        src/clear_save_data_screen.o(.text);
         asm/intro_credits_graphics.o(.text);
         asm/evolution_graphics.o(.text);
         asm/bard_music.o(.text);
@@ -440,7 +440,7 @@ SECTIONS {
         src/save_failed_screen.o(.rodata);
         data/braille_puzzles.o(.rodata);
         data/pokeblock_feed.o(.rodata);
-        data/clear_save_data_screen.o(.rodata);
+        src/clear_save_data_screen.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
         data/evolution_graphics.o(.rodata);
         data/bard_music.o(.rodata);
