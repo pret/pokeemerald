@@ -5,53 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_812A25C
-sub_812A25C: @ 812A25C
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r5, r0, r1
-	movs r1, 0xC
-	ldrsh r0, [r5, r1]
-	cmp r0, 0
-	beq _0812A280
-	cmp r0, 0x1
-	beq _0812A29C
-	b _0812A2B2
-	.pool
-_0812A280:
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0812A2B2
-	adds r0, r4, 0
-	bl sub_8127B04
-	movs r0, 0x1
-	strh r0, [r5, 0xC]
-	b _0812A2B2
-	.pool
-_0812A29C:
-	bl sub_812A3C8
-	ldr r0, =gFieldCallback
-	ldr r1, =sub_812A334
-	str r1, [r0]
-	ldr r0, =c2_exit_to_overworld_2_switch
-	bl SetMainCallback2
-	adds r0, r4, 0
-	bl DestroyTask
-_0812A2B2:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_812A25C
-
 	thumb_func_start sub_812A2C4
 sub_812A2C4: @ 812A2C4
 	push {r4-r6,lr}

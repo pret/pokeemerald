@@ -139,6 +139,7 @@ void sub_812A1A0(u8 taskId);
 void sub_812A1F0(u8 taskId);
 void sub_812A22C(u8 taskId);
 void sub_812A25C(u8 taskId);
+void sub_812A334(void);
 void sub_812A36C(struct Sprite *sprite);
 void sub_812A39C(void);
 void sub_812A3C8(void);
@@ -2456,4 +2457,24 @@ void sub_812A22C(u8 taskId)
     fade_screen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_812A25C;
+}
+
+void sub_812A25C(u8 taskId)
+{
+    switch (gTasks[taskId].data[2])
+    {
+        case 0:
+            if (!gPaletteFade.active)
+            {
+                sub_8127B04(taskId);
+                gTasks[taskId].data[2] = 1;
+            }
+            break;
+        case 1:
+            sub_812A3C8();
+            gFieldCallback = sub_812A334;
+            SetMainCallback2(c2_exit_to_overworld_2_switch);
+            DestroyTask(taskId);
+            break;
+    }
 }
