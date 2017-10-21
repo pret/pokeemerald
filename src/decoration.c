@@ -177,6 +177,8 @@ extern const struct SpritePalette gUnknown_085A72BC;
 extern const u16 gUnknown_085A72F4[];
 extern const struct YesNoFuncTable gUnknown_085A7348;
 extern const struct YesNoFuncTable gUnknown_085A7350;
+extern const struct SpritePalette gUnknown_085A73D8;
+extern const struct SpritePalette gUnknown_085A73E0;
 extern const struct SpriteTemplate gUnknown_085A7404;
 
 // .text
@@ -2504,5 +2506,42 @@ void sub_812A2C4(u8 taskId)
                 gTasks[taskId].func = sub_8126B80;
             }
             break;
+    }
+}
+
+void sub_812A334(void)
+{
+    u8 taskId;
+
+    pal_fill_black();
+    sub_81973C4(0, 1);
+    sub_8126ABC();
+    taskId = CreateTask(sub_812A2C4, 8);
+    gTasks[taskId].data[2] = 0;
+}
+
+void sub_812A36C(struct Sprite *sprite)
+{
+    sprite->data0 ++;
+    sprite->data0 &= 0x1F;
+    if (sprite->data0 > 15)
+    {
+        sprite->invisible = TRUE;
+    }
+    else
+    {
+        sprite->invisible = FALSE;
+    }
+}
+
+void sub_812A39C(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+    {
+        LoadSpritePalette(&gUnknown_085A73D8);
+    }
+    else
+    {
+        LoadSpritePalette(&gUnknown_085A73E0);
     }
 }
