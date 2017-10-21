@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8129FC8
-sub_8129FC8: @ 8129FC8
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r7, r0, 24
-	movs r6, 0
-	b _0812A02A
-_08129FD2:
-	ldr r0, [r0]
-	adds r1, r0, r6
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _0812A024
-	ldr r0, =gDecorations
-	ldrb r2, [r1]
-	lsls r1, r2, 5
-	adds r1, r0
-	ldrb r0, [r1, 0x11]
-	cmp r0, 0x4
-	bne _0812A024
-	ldr r5, =gUnknown_0203AA44
-	adds r0, r2, 0
-	adds r1, r5, 0
-	bl sub_8129D8C
-	lsls r1, r6, 24
-	lsrs r1, 24
-	adds r0, r7, 0
-	adds r2, r5, 0
-	bl sub_8129E74
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x1
-	bne _0812A024
-	strb r6, [r5]
-	bl sub_8129F20
-	ldr r0, =gUnknown_0203AAC4
-	strb r4, [r0]
-	movs r0, 0x1
-	b _0812A034
-	.pool
-_0812A024:
-	adds r0, r6, 0x1
-	lsls r0, 16
-	lsrs r6, r0, 16
-_0812A02A:
-	ldr r0, =gUnknown_0203A17C
-	ldrb r1, [r0, 0x8]
-	cmp r6, r1
-	bcc _08129FD2
-	movs r0, 0
-_0812A034:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8129FC8
-
 	thumb_func_start sub_812A040
 sub_812A040: @ 812A040
 	push {r4-r7,lr}

@@ -2254,3 +2254,27 @@ void sub_8129F20(void)
         }
     }
 }
+
+bool8 sub_8129FC8(u8 taskId)
+{
+    u16 i;
+
+    for (i = 0; i < gUnknown_0203A17C.size; i ++)
+    {
+        if (gUnknown_0203A17C.items[i] != 0)
+        {
+            if (gDecorations[gUnknown_0203A17C.items[i]].permission == DECORPERM_SOLID_MAT)
+            {
+                sub_8129D8C(gUnknown_0203A17C.items[i], gUnknown_0203AA44);
+                if (sub_8129E74(taskId, i, gUnknown_0203AA44) == TRUE)
+                {
+                    gUnknown_0203AA44->idx = i;
+                    sub_8129F20();
+                    gUnknown_0203AAC4 = 1;
+                    return TRUE;
+                }
+            }
+        }
+    }
+    return FALSE;
+}
