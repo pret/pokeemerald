@@ -136,7 +136,7 @@ void sub_8129020(u8 taskId);
 void sub_81292D0(struct Sprite *sprite);
 void sub_81292E8(struct Sprite *sprite);
 u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 decor);
-const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
+const u8 *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 bool8 sub_81299AC(u8 taskId);
 void sub_8129ABC(u8 taskId);
 void sub_8129B34(u8 taskId);
@@ -223,7 +223,7 @@ const struct ListMenuTemplate gUnknown_085A6BD0 = {
     9, 2, 1, 3, FALSE, 0, FALSE, 7
 };
 
-extern const void *const gUnknown_085A6BE8[][2];
+extern const u8 *const gUnknown_085A6BE8[][2];
 extern const struct {
     const u8 *tiles;
     const u8 *y;
@@ -1905,7 +1905,7 @@ u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
     return spriteId;
 }
 
-const void *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
+const u8 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
 {
     if (decor > 120)
     {
