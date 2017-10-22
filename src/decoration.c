@@ -77,6 +77,7 @@ extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
 extern EWRAM_DATA u8 gUnknown_0203A188[4];
 extern EWRAM_DATA struct UnkStruct_0203A18C *gUnknown_0203A18C;
 extern EWRAM_DATA struct UnkStruct_0203A190 gUnknown_0203A190;
+extern EWRAM_DATA u8 gUnknown_0203A214[0x800];
 extern EWRAM_DATA u16 gUnknown_0203AA34;
 extern EWRAM_DATA u16 gUnknown_0203AA36;
 extern EWRAM_DATA u8 gUnknown_0203AA38;
@@ -242,16 +243,42 @@ const struct {
     {0x02, 0x03, 0x80, 0x56},
     {0x02, 0x03, 0x80, 0x36},
     {0x00, 0x03, 0x90, 0x46},
-    {0x01, 0x03, 0x90, 0x46},
-    {0x00, 0x00, 0x00, 0x00},
-    {0xff, 0xff, 0x00, 0x00},
-    {0x78, 0x72, 0x5a, 0x08},
-    {0x14, 0xa2, 0x03, 0x02},
-    {0x00, 0x08, 0x00, 0x00}
+    {0x01, 0x03, 0x90, 0x46}
 };
 
-extern const struct SpriteTemplate gUnknown_085A728C;
-extern const struct SpriteTemplate gUnknown_085A72A4;
+const union AnimCmd gUnknown_085A7278[] = {
+    ANIMCMD_FRAME(0, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_085A7280[] = {
+    gUnknown_085A7278
+};
+
+const struct SpriteFrameImage gUnknown_085A7284 = {
+    gUnknown_0203A214, 0x800
+};
+
+const struct SpriteTemplate gUnknown_085A728C = {
+    0xffff,
+    0x0be5,
+    &gUnknown_0203AA3C,
+    gUnknown_085A7280,
+    &gUnknown_085A7284,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+const struct SpriteTemplate gUnknown_085A72A4 = {
+    0x0000,
+    0x0000,
+    &gUnknown_0203AA3C,
+    gUnknown_085A7280,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
 extern const struct SpritePalette gUnknown_085A72BC;
 extern const struct YesNoFuncTable gUnknown_085A72C4;
 extern const struct YesNoFuncTable gUnknown_085A72CC;

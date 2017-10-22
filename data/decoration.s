@@ -4,35 +4,37 @@
 	.section .rodata
 	.align 2, 0
 
-gUnknown_085A728C:: @ 85A728C
-	.incbin "baserom.gba", 0x5a728c, 0x18
-
-gUnknown_085A72A4:: @ 85A72A4
-	.incbin "baserom.gba", 0x5a72a4, 0x18
-
 gUnknown_085A72BC:: @ 85A72BC
 	.incbin "baserom.gba", 0x5a72bc, 0x8
 
 gUnknown_085A72C4:: @ 85A72C4
-	.incbin "baserom.gba", 0x5a72c4, 0x8
+	.4byte sub_81289F0
+	.4byte sub_8128FD8
 
 gUnknown_085A72CC:: @ 85A72CC
-	.incbin "baserom.gba", 0x5a72cc, 0x8
+	.4byte sub_8128BA0
+	.4byte sub_8128FD8
 
 gUnknown_085A72D4:: @ 85A72D4
-	.incbin "baserom.gba", 0x5a72d4, 0x10
+	.4byte sub_81283BC
+	.4byte sub_8128414
+	.4byte sub_8129BCC
+	.4byte sub_8129BF8
 
 gUnknown_085A72E4:: @ 85A72E4
-	.incbin "baserom.gba", 0x5a72e4, 0x8
+	.byte 0x04, 0x04, 0x04, 0x04, 0x00, 0x03, 0x03, 0x00
 
 gUnknown_085A72EC:: @ 85A72EC
-	.incbin "baserom.gba", 0x5a72ec, 0x8
+	.byte 0x04, 0x04, 0x04, 0x04, 0x00, 0x04, 0x03, 0x00
 
 gUnknown_085A72F4:: @ 85A72F4
-	.incbin "baserom.gba", 0x5a72f4, 0x54
+	.2byte 0x0004, 0x0008, 0x0010, 0x0020, 0x0010, 0x0008, 0x0010, 0x0020, 0x0040, 0x0020, 0x530e, 0x5b5f, 0x4b1f, 0x3a5b, 0x210f, 0x3d27
+	.2byte 0x30e5, 0x28a3, 0x1c82, 0x779b, 0x2f1f, 0x2e77, 0x2d9f, 0x2118, 0x7fff, 0x0000, 0x530e, 0x677f, 0x4a9b, 0x3a19, 0x296f, 0x398c
+	.2byte 0x20e5, 0x29b4, 0x1cc9, 0x6f39, 0x2f1f, 0x2e77, 0x2d9f, 0x2118, 0x7fff, 0x0000
 
 gUnknown_085A7348:: @ 85A7348
-	.incbin "baserom.gba", 0x5a7348, 0x8
+	.4byte sub_812A1C0
+	.4byte sub_8129B34
 
 gUnknown_085A7350:: @ 85A7350
 	.incbin "baserom.gba", 0x5a7350, 0x88
@@ -44,7 +46,10 @@ gUnknown_085A73E0:: @ 85A73E0
 	.incbin "baserom.gba", 0x5a73e0, 0x24
 
 gUnknown_085A7404:: @ 85A7404
-	.incbin "baserom.gba", 0x5a7404, 0x18
+	.align 2
+	spr_template 0xffff, 0x0008, 0x085a73e8, 0x085a73f8, 0x085a73fc, 0x082ec6a8, 0x0812a36d
 
 gUnknown_085A741C:: @ 85A741C
-	.incbin "baserom.gba", 0x5a741c, 0x8
+	.4byte sub_812A478
+	.4byte sub_8127A30
+

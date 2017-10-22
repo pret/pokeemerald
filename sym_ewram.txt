@@ -1158,7 +1158,13 @@ gUnknown_0203A18C: @ 203A18C
 	.space 0x4
 
 gUnknown_0203A190: @ 203A190
-	.space 0x8A4
+	.space 0x84
+
+gUnknown_0203A214: @ 203A214
+    .space 0x800
+
+gUnknown_0203AA14: @ 203AA14
+    .space 0x20
 
 gUnknown_0203AA34: @ 203AA34
 	.space 0x2
