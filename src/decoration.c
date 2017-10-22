@@ -64,29 +64,28 @@ struct UnkStruct_0203AA44 {
 
 // Static RAM declarations
 
-extern EWRAM_DATA u8 *gUnknown_0203A14C;
-extern EWRAM_DATA u8 gUnknown_0203A150;
-extern EWRAM_DATA u8 gUnknown_0203A151;
-extern EWRAM_DATA u8 gUnknown_0203A152[16];
-extern EWRAM_DATA u8 gUnknown_0203A162[12];
-extern EWRAM_DATA u16 gUnknown_0203A16E;
-extern EWRAM_DATA u16 gUnknown_0203A170;
-extern EWRAM_DATA u8 gUnknown_0203A172;
-extern EWRAM_DATA u8 gUnknown_0203A173;
-extern EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C;
-extern EWRAM_DATA u8 gUnknown_0203A188[4];
-extern EWRAM_DATA struct UnkStruct_0203A18C *gUnknown_0203A18C;
-extern EWRAM_DATA struct UnkStruct_0203A190 gUnknown_0203A190;
-extern EWRAM_DATA u8 gUnknown_0203A214[0x800];
-extern EWRAM_DATA u16 gUnknown_0203AA14[16];
-extern EWRAM_DATA u16 gUnknown_0203AA34;
-extern EWRAM_DATA u16 gUnknown_0203AA36;
-extern EWRAM_DATA u8 gUnknown_0203AA38;
-extern EWRAM_DATA u8 gUnknown_0203AA39;
-extern EWRAM_DATA u8 gUnknown_0203AA3A;
-extern EWRAM_DATA struct OamData gUnknown_0203AA3C;
-extern EWRAM_DATA struct UnkStruct_0203AA44 gUnknown_0203AA44[];
-extern EWRAM_DATA u8 gUnknown_0203AAC4;
+EWRAM_DATA u8 *gUnknown_0203A14C = NULL;
+EWRAM_DATA u8 gUnknown_0203A150 = 0;
+EWRAM_DATA u8 gUnknown_0203A151 = 0;
+EWRAM_DATA u8 gUnknown_0203A152[16] = {};
+EWRAM_DATA u8 gUnknown_0203A162[12] = {};
+EWRAM_DATA u16 gUnknown_0203A16E = 0;
+EWRAM_DATA u16 gUnknown_0203A170 = 0;
+EWRAM_DATA u8 gUnknown_0203A172 = 0;
+EWRAM_DATA u8 gUnknown_0203A173 = 0;
+EWRAM_DATA u32 filler_0203a174[2] = {};
+EWRAM_DATA struct DecoPCPointers gUnknown_0203A17C = {};
+EWRAM_DATA u8 gUnknown_0203A188[4] = {};
+EWRAM_DATA struct UnkStruct_0203A18C *gUnknown_0203A18C = NULL;
+EWRAM_DATA struct UnkStruct_0203A190 gUnknown_0203A190 = {};
+EWRAM_DATA u16 gUnknown_0203AA34 = 0;
+EWRAM_DATA u16 gUnknown_0203AA36 = 0;
+EWRAM_DATA u8 gUnknown_0203AA38 = 0;
+EWRAM_DATA u8 gUnknown_0203AA39 = 0;
+EWRAM_DATA u8 gUnknown_0203AA3A = 0;
+EWRAM_DATA struct OamData gUnknown_0203AA3C = {};
+EWRAM_DATA struct UnkStruct_0203AA44 gUnknown_0203AA44[16] = {};
+EWRAM_DATA u8 gUnknown_0203AAC4 = 0;
 
 // Static ROM declarations
 
@@ -267,7 +266,7 @@ const union AnimCmd *const gUnknown_085A7280[] = {
 };
 
 const struct SpriteFrameImage gUnknown_085A7284 = {
-    gUnknown_0203A214, 0x800
+    (const u8 *)&gUnknown_0203A190.image, 0x800
 };
 
 const struct SpriteTemplate gUnknown_085A728C = {
@@ -291,7 +290,7 @@ const struct SpriteTemplate gUnknown_085A72A4 = {
 };
 
 const struct SpritePalette gUnknown_085A72BC = {
-    gUnknown_0203AA14, 0x0be5
+    (const u16 *)&gUnknown_0203A190.palette, 0x0be5
 };
 
 const struct YesNoFuncTable gUnknown_085A72C4 = {

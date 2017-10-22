@@ -1119,76 +1119,8 @@ gUnknown_0203A144: @ 203A144
 gUnknown_0203A148: @ 203A148
 	.space 0x4
 
-@ decoration
-
-gUnknown_0203A14C: @ 203A14C
-	.space 0x4
-
-gUnknown_0203A150: @ 203A150
-	.space 0x1
-
-gUnknown_0203A151: @ 203A151
-	.space 0x1
-
-gUnknown_0203A152: @ 203A152
-	.space 0x10
-
-gUnknown_0203A162: @ 203A162
-	.space 0xC
-
-gUnknown_0203A16E: @ 203A16E
-	.space 0x2
-
-gUnknown_0203A170: @ 203A170
-	.space 0x2
-
-gUnknown_0203A172: @ 203A172
-	.space 0x1
-
-gUnknown_0203A173: @ 203A173
-	.space 0x9
-
-gUnknown_0203A17C: @ 203A17C
-	.space 0xC
-
-gUnknown_0203A188: @ 203A188
-	.space 0x4
-
-gUnknown_0203A18C: @ 203A18C
-	.space 0x4
-
-gUnknown_0203A190: @ 203A190
-	.space 0x84
-
-gUnknown_0203A214: @ 203A214
-    .space 0x800
-
-gUnknown_0203AA14: @ 203AA14
-    .space 0x20
-
-gUnknown_0203AA34: @ 203AA34
-	.space 0x2
-
-gUnknown_0203AA36: @ 203AA36
-	.space 0x2
-
-gUnknown_0203AA38: @ 203AA38
-	.space 0x1
-
-gUnknown_0203AA39: @ 203AA39
-	.space 0x1
-
-gUnknown_0203AA3A: @ 203AA3A
-	.space 0x2
-
-gUnknown_0203AA3C: @ 203AA3C
-	.space 0x8
-
-gUnknown_0203AA44: @ 203AA44
-	.space 0x80
-
-gUnknown_0203AAC4: @ 203AAC4
-	.space 0x4
+    .include "src/decoration.o"
+    .align 2
 
 @ slot_machine
 

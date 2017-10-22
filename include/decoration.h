@@ -187,6 +187,8 @@ struct DecoPCPointers
 };
 
 extern const struct Decoration gDecorations[];
+extern EWRAM_DATA u8 *gUnknown_0203A14C;
+extern EWRAM_DATA u8 gUnknown_0203A172;
 
 void sub_8126968(void);
 
