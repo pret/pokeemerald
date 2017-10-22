@@ -6,58 +6,6 @@
 	.text
 
 
-	thumb_func_start nullsub_77
-nullsub_77: @ 81BADF0
-	bx lr
-	thumb_func_end nullsub_77
-
-	thumb_func_start SetBankFuncToPlayerPartnerBufferRunCommand
-SetBankFuncToPlayerPartnerBufferRunCommand: @ 81BADF4
-	ldr r1, =gBattleBankFunc
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =PlayerPartnerBufferRunCommand
-	str r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end SetBankFuncToPlayerPartnerBufferRunCommand
-
-	thumb_func_start PlayerPartnerBufferRunCommand
-PlayerPartnerBufferRunCommand: @ 81BAE10
-	push {lr}
-	ldr r2, =gBattleExecBuffer
-	ldr r1, =gBitTable
-	ldr r0, =gActiveBank
-	ldrb r3, [r0]
-	lsls r0, r3, 2
-	adds r0, r1
-	ldr r1, [r2]
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	beq _081BAE5C
-	ldr r0, =gBattleBufferA
-	lsls r1, r3, 9
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r0, 0x38
-	bhi _081BAE58
-	ldr r0, =gPlayerPartnerBufferCommands
-	ldrb r1, [r1]
-	lsls r1, 2
-	adds r1, r0
-	ldr r0, [r1]
-	bl _call_via_r0
-	b _081BAE5C
-	.pool
-_081BAE58:
-	bl PlayerPartnerBufferExecCompleted
-_081BAE5C:
-	pop {r0}
-	bx r0
-	thumb_func_end PlayerPartnerBufferRunCommand
 
 	thumb_func_start sub_81BAE60
 sub_81BAE60: @ 81BAE60
@@ -1641,8 +1589,8 @@ _081BBC56:
 	.pool
 	thumb_func_end bx_80E8A6C
 
-	thumb_func_start dp01t_00_3_getattr
-dp01t_00_3_getattr: @ 81BBC64
+	thumb_func_start PlayerPartnerHandleGetMonData
+PlayerPartnerHandleGetMonData: @ 81BBC64
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -1694,7 +1642,7 @@ _081BBCBE:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_00_3_getattr
+	thumb_func_end PlayerPartnerHandleGetMonData
 
 	thumb_func_start dp01_getattr_by_ch1_for_player_pokemon
 dp01_getattr_by_ch1_for_player_pokemon: @ 81BBCD8
@@ -2574,16 +2522,16 @@ _081BC46E:
 	.pool
 	thumb_func_end dp01_getattr_by_ch1_for_player_pokemon
 
-	thumb_func_start sub_81BC484
-sub_81BC484: @ 81BC484
+	thumb_func_start PlayerPartnerHandleGetRawMonData
+PlayerPartnerHandleGetRawMonData: @ 81BC484
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BC484
+	thumb_func_end PlayerPartnerHandleGetRawMonData
 
-	thumb_func_start sub_81BC490
-sub_81BC490: @ 81BC490
+	thumb_func_start PlayerPartnerHandleSetMonData
+PlayerPartnerHandleSetMonData: @ 81BC490
 	push {r4,r5,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -2623,7 +2571,7 @@ _081BC4DE:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BC490
+	thumb_func_end PlayerPartnerHandleSetMonData
 
 	thumb_func_start sub_81BC4E8
 sub_81BC4E8: @ 81BC4E8
@@ -3658,8 +3606,8 @@ _081BCEAE:
 	.pool
 	thumb_func_end sub_81BC4E8
 
-	thumb_func_start sub_81BCEE4
-sub_81BCEE4: @ 81BCEE4
+	thumb_func_start PlayerPartnerHandleSetRawMonData
+PlayerPartnerHandleSetRawMonData: @ 81BCEE4
 	push {r4-r7,lr}
 	ldr r1, =gBattlePartyID
 	ldr r7, =gActiveBank
@@ -3711,10 +3659,10 @@ _081BCF3C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BCEE4
+	thumb_func_end PlayerPartnerHandleSetRawMonData
 
-	thumb_func_start sub_81BCF58
-sub_81BCF58: @ 81BCF58
+	thumb_func_start PlayerPartnerHandleLoadMonSprite
+PlayerPartnerHandleLoadMonSprite: @ 81BCF58
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3828,10 +3776,10 @@ sub_81BCF58: @ 81BCF58
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BCF58
+	thumb_func_end PlayerPartnerHandleLoadMonSprite
 
-	thumb_func_start sub_81BD074
-sub_81BD074: @ 81BD074
+	thumb_func_start PlayerPartnerHandleSwitchInAnim
+PlayerPartnerHandleSwitchInAnim: @ 81BD074
 	push {r4-r6,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -3874,7 +3822,7 @@ sub_81BD074: @ 81BD074
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BD074
+	thumb_func_end PlayerPartnerHandleSwitchInAnim
 
 	thumb_func_start sub_81BD0E4
 sub_81BD0E4: @ 81BD0E4
@@ -4039,8 +3987,8 @@ sub_81BD0E4: @ 81BD0E4
 	.pool
 	thumb_func_end sub_81BD0E4
 
-	thumb_func_start sub_81BD260
-sub_81BD260: @ 81BD260
+	thumb_func_start PlayerPartnerHandleReturnMonToBall
+PlayerPartnerHandleReturnMonToBall: @ 81BD260
 	push {r4-r6,lr}
 	ldr r1, =gBattleBufferA
 	ldr r6, =gActiveBank
@@ -4096,7 +4044,7 @@ _081BD2DE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BD260
+	thumb_func_end PlayerPartnerHandleReturnMonToBall
 
 	thumb_func_start sub_81BD2F0
 sub_81BD2F0: @ 81BD2F0
@@ -4168,8 +4116,8 @@ _081BD36E:
 	.pool
 	thumb_func_end sub_81BD2F0
 
-	thumb_func_start sub_81BD37C
-sub_81BD37C: @ 81BD37C
+	thumb_func_start PlayerPartnerHandleDrawTrainerPic
+PlayerPartnerHandleDrawTrainerPic: @ 81BD37C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4408,18 +4356,18 @@ _081BD57C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BD37C
+	thumb_func_end PlayerPartnerHandleDrawTrainerPic
 
-	thumb_func_start sub_81BD5BC
-sub_81BD5BC: @ 81BD5BC
+	thumb_func_start PlayerPartnerHandleTrainerSlide
+PlayerPartnerHandleTrainerSlide: @ 81BD5BC
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BD5BC
+	thumb_func_end PlayerPartnerHandleTrainerSlide
 
-	thumb_func_start sub_81BD5C8
-sub_81BD5C8: @ 81BD5C8
+	thumb_func_start PlayerPartnerHandleTrainerSlideBack
+PlayerPartnerHandleTrainerSlideBack: @ 81BD5C8
 	push {r4-r6,lr}
 	ldr r6, =gBankSpriteIds
 	ldr r4, =gActiveBank
@@ -4489,10 +4437,10 @@ sub_81BD5C8: @ 81BD5C8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BD5C8
+	thumb_func_end PlayerPartnerHandleTrainerSlideBack
 
-	thumb_func_start sub_81BD674
-sub_81BD674: @ 81BD674
+	thumb_func_start PlayerPartnerHandleFaintAnimation
+PlayerPartnerHandleFaintAnimation: @ 81BD674
 	push {r4-r6,lr}
 	ldr r6, =gBattleSpritesDataPtr
 	ldr r4, [r6]
@@ -4594,42 +4542,42 @@ _081BD73E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BD674
+	thumb_func_end PlayerPartnerHandleFaintAnimation
 
-	thumb_func_start sub_81BD760
-sub_81BD760: @ 81BD760
+	thumb_func_start PlayerPartnerHandlePaletteFade
+PlayerPartnerHandlePaletteFade: @ 81BD760
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BD760
+	thumb_func_end PlayerPartnerHandlePaletteFade
 
-	thumb_func_start sub_81BD76C
-sub_81BD76C: @ 81BD76C
+	thumb_func_start PlayerPartnerHandleSuccessBallThrowAnim
+PlayerPartnerHandleSuccessBallThrowAnim: @ 81BD76C
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BD76C
+	thumb_func_end PlayerPartnerHandleSuccessBallThrowAnim
 
-	thumb_func_start sub_81BD778
-sub_81BD778: @ 81BD778
+	thumb_func_start PlayerPartnerHandleBallThrowAnim
+PlayerPartnerHandleBallThrowAnim: @ 81BD778
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BD778
+	thumb_func_end PlayerPartnerHandleBallThrowAnim
 
-	thumb_func_start sub_81BD784
-sub_81BD784: @ 81BD784
+	thumb_func_start PlayerPartnerHandlePause
+PlayerPartnerHandlePause: @ 81BD784
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BD784
+	thumb_func_end PlayerPartnerHandlePause
 
-	thumb_func_start sub_81BD790
-sub_81BD790: @ 81BD790
+	thumb_func_start PlayerPartnerHandleMoveAnimation
+PlayerPartnerHandleMoveAnimation: @ 81BD790
 	push {r4-r6,lr}
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
@@ -4763,7 +4711,7 @@ _081BD8B6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BD790
+	thumb_func_end PlayerPartnerHandleMoveAnimation
 
 	thumb_func_start bx_move_anim_3
 bx_move_anim_3: @ 81BD8C8
@@ -4949,8 +4897,8 @@ _081BDA3C:
 	bx r0
 	thumb_func_end bx_move_anim_3
 
-	thumb_func_start sub_81BDA4C
-sub_81BDA4C: @ 81BDA4C
+	thumb_func_start PlayerPartnerHandlePrintString
+PlayerPartnerHandlePrintString: @ 81BDA4C
 	push {r4,lr}
 	ldr r0, =gBattle_BG0_X
 	movs r1, 0
@@ -4977,35 +4925,35 @@ sub_81BDA4C: @ 81BDA4C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDA4C
+	thumb_func_end PlayerPartnerHandlePrintString
 
-	thumb_func_start sub_81BDAA0
-sub_81BDAA0: @ 81BDAA0
+	thumb_func_start PlayerPartnerHandlePrintStringPlayerOnly
+PlayerPartnerHandlePrintStringPlayerOnly: @ 81BDAA0
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDAA0
+	thumb_func_end PlayerPartnerHandlePrintStringPlayerOnly
 
-	thumb_func_start sub_81BDAAC
-sub_81BDAAC: @ 81BDAAC
+	thumb_func_start PlayerPartnerHandleChooseAction
+PlayerPartnerHandleChooseAction: @ 81BDAAC
 	push {lr}
 	bl AI_TrySwitchOrUseItem
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDAAC
+	thumb_func_end PlayerPartnerHandleChooseAction
 
-	thumb_func_start sub_81BDABC
-sub_81BDABC: @ 81BDABC
+	thumb_func_start PlayerPartnerHandleUnknownYesNoBox
+PlayerPartnerHandleUnknownYesNoBox: @ 81BDABC
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDABC
+	thumb_func_end PlayerPartnerHandleUnknownYesNoBox
 
-	thumb_func_start sub_81BDAC8
-sub_81BDAC8: @ 81BDAC8
+	thumb_func_start PlayerPartnerHandleChooseMove
+PlayerPartnerHandleChooseMove: @ 81BDAC8
 	push {r4-r6,lr}
 	ldr r6, =gActiveBank
 	ldrb r4, [r6]
@@ -5074,18 +5022,18 @@ _081BDB3C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDAC8
+	thumb_func_end PlayerPartnerHandleChooseMove
 
-	thumb_func_start sub_81BDB70
-sub_81BDB70: @ 81BDB70
+	thumb_func_start PlayerPartnerHandleChooseItem
+PlayerPartnerHandleChooseItem: @ 81BDB70
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDB70
+	thumb_func_end PlayerPartnerHandleChooseItem
 
-	thumb_func_start sub_81BDB7C
-sub_81BDB7C: @ 81BDB7C
+	thumb_func_start PlayerPartnerHandleChoosePokemon
+PlayerPartnerHandleChoosePokemon: @ 81BDB7C
 	push {r4-r6,lr}
 	bl GetMostSuitableMonToSwitchInto
 	lsls r0, 24
@@ -5144,18 +5092,18 @@ _081BDBD0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDB7C
+	thumb_func_end PlayerPartnerHandleChoosePokemon
 
-	thumb_func_start sub_81BDC04
-sub_81BDC04: @ 81BDC04
+	thumb_func_start PlayerPartnerHandleCmd23
+PlayerPartnerHandleCmd23: @ 81BDC04
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDC04
+	thumb_func_end PlayerPartnerHandleCmd23
 
-	thumb_func_start sub_81BDC10
-sub_81BDC10: @ 81BDC10
+	thumb_func_start PlayerPartnerHandleHealthBarUpdate
+PlayerPartnerHandleHealthBarUpdate: @ 81BDC10
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -5248,10 +5196,10 @@ _081BDCCA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDC10
+	thumb_func_end PlayerPartnerHandleHealthBarUpdate
 
-	thumb_func_start sub_81BDD00
-sub_81BDD00: @ 81BDD00
+	thumb_func_start PlayerPartnerHandleExpUpdate
+PlayerPartnerHandleExpUpdate: @ 81BDD00
 	push {r4-r7,lr}
 	ldr r5, =gBattleBufferA
 	ldr r6, =gActiveBank
@@ -5314,10 +5262,10 @@ _081BDD84:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDD00
+	thumb_func_end PlayerPartnerHandleExpUpdate
 
-	thumb_func_start sub_81BDD9C
-sub_81BDD9C: @ 81BDD9C
+	thumb_func_start PlayerPartnerHandleStatusIconUpdate
+PlayerPartnerHandleStatusIconUpdate: @ 81BDD9C
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -5363,10 +5311,10 @@ _081BDDF0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDD9C
+	thumb_func_end PlayerPartnerHandleStatusIconUpdate
 
-	thumb_func_start sub_81BDE14
-sub_81BDE14: @ 81BDE14
+	thumb_func_start PlayerPartnerHandleStatusAnimation
+PlayerPartnerHandleStatusAnimation: @ 81BDE14
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -5410,82 +5358,82 @@ _081BDE64:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDE14
+	thumb_func_end PlayerPartnerHandleStatusAnimation
 
-	thumb_func_start sub_81BDE7C
-sub_81BDE7C: @ 81BDE7C
+	thumb_func_start PlayerPartnerHandleStatusXor
+PlayerPartnerHandleStatusXor: @ 81BDE7C
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDE7C
+	thumb_func_end PlayerPartnerHandleStatusXor
 
-	thumb_func_start sub_81BDE88
-sub_81BDE88: @ 81BDE88
+	thumb_func_start PlayerPartnerHandleDataTransfer
+PlayerPartnerHandleDataTransfer: @ 81BDE88
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDE88
+	thumb_func_end PlayerPartnerHandleDataTransfer
 
-	thumb_func_start sub_81BDE94
-sub_81BDE94: @ 81BDE94
+	thumb_func_start PlayerPartnerHandleDMA3Transfer
+PlayerPartnerHandleDMA3Transfer: @ 81BDE94
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDE94
+	thumb_func_end PlayerPartnerHandleDMA3Transfer
 
-	thumb_func_start sub_81BDEA0
-sub_81BDEA0: @ 81BDEA0
+	thumb_func_start PlayerPartnerHandlePlayBGM
+PlayerPartnerHandlePlayBGM: @ 81BDEA0
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDEA0
+	thumb_func_end PlayerPartnerHandlePlayBGM
 
-	thumb_func_start sub_81BDEAC
-sub_81BDEAC: @ 81BDEAC
+	thumb_func_start PlayerPartnerHandleCmd32
+PlayerPartnerHandleCmd32: @ 81BDEAC
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDEAC
+	thumb_func_end PlayerPartnerHandleCmd32
 
-	thumb_func_start sub_81BDEB8
-sub_81BDEB8: @ 81BDEB8
+	thumb_func_start PlayerPartnerHandleTwoReturnValues
+PlayerPartnerHandleTwoReturnValues: @ 81BDEB8
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDEB8
+	thumb_func_end PlayerPartnerHandleTwoReturnValues
 
-	thumb_func_start sub_81BDEC4
-sub_81BDEC4: @ 81BDEC4
+	thumb_func_start PlayerPartnerHandleChosenMonReturnValue
+PlayerPartnerHandleChosenMonReturnValue: @ 81BDEC4
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDEC4
+	thumb_func_end PlayerPartnerHandleChosenMonReturnValue
 
-	thumb_func_start sub_81BDED0
-sub_81BDED0: @ 81BDED0
+	thumb_func_start PlayerPartnerHandleOneReturnValue
+PlayerPartnerHandleOneReturnValue: @ 81BDED0
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDED0
+	thumb_func_end PlayerPartnerHandleOneReturnValue
 
-	thumb_func_start sub_81BDEDC
-sub_81BDEDC: @ 81BDEDC
+	thumb_func_start PlayerPartnerHandleOneReturnValue_Duplicate
+PlayerPartnerHandleOneReturnValue_Duplicate: @ 81BDEDC
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDEDC
+	thumb_func_end PlayerPartnerHandleOneReturnValue_Duplicate
 
-	thumb_func_start sub_81BDEE8
-sub_81BDEE8: @ 81BDEE8
+	thumb_func_start PlayerPartnerHandleCmd37
+PlayerPartnerHandleCmd37: @ 81BDEE8
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -5497,10 +5445,10 @@ sub_81BDEE8: @ 81BDEE8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDEE8
+	thumb_func_end PlayerPartnerHandleCmd37
 
-	thumb_func_start sub_81BDF04
-sub_81BDF04: @ 81BDF04
+	thumb_func_start PlayerPartnerHandleCmd38
+PlayerPartnerHandleCmd38: @ 81BDF04
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, =gBattleBufferA
@@ -5522,10 +5470,10 @@ sub_81BDF04: @ 81BDF04
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDF04
+	thumb_func_end PlayerPartnerHandleCmd38
 
-	thumb_func_start sub_81BDF3C
-sub_81BDF3C: @ 81BDF3C
+	thumb_func_start PlayerPartnerHandleCmd39
+PlayerPartnerHandleCmd39: @ 81BDF3C
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -5536,10 +5484,10 @@ sub_81BDF3C: @ 81BDF3C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDF3C
+	thumb_func_end PlayerPartnerHandleCmd39
 
-	thumb_func_start sub_81BDF54
-sub_81BDF54: @ 81BDF54
+	thumb_func_start PlayerPartnerHandleCmd40
+PlayerPartnerHandleCmd40: @ 81BDF54
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, [r3]
@@ -5557,10 +5505,10 @@ sub_81BDF54: @ 81BDF54
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDF54
+	thumb_func_end PlayerPartnerHandleCmd40
 
-	thumb_func_start dp01t_29_3_blink
-dp01t_29_3_blink: @ 81BDF7C
+	thumb_func_start PlayerPartnerHandleHitAnimation
+PlayerPartnerHandleHitAnimation: @ 81BDF7C
 	push {r4,lr}
 	ldr r3, =gSprites
 	ldr r2, =gBankSpriteIds
@@ -5606,18 +5554,18 @@ _081BDFDA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_29_3_blink
+	thumb_func_end PlayerPartnerHandleHitAnimation
 
-	thumb_func_start sub_81BDFEC
-sub_81BDFEC: @ 81BDFEC
+	thumb_func_start PlayerPartnerHandleCmd42
+PlayerPartnerHandleCmd42: @ 81BDFEC
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BDFEC
+	thumb_func_end PlayerPartnerHandleCmd42
 
-	thumb_func_start sub_81BDFF8
-sub_81BDFF8: @ 81BDFF8
+	thumb_func_start PlayerPartnerHandleEffectivenessSound
+PlayerPartnerHandleEffectivenessSound: @ 81BDFF8
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -5647,10 +5595,10 @@ _081BE00C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BDFF8
+	thumb_func_end PlayerPartnerHandleEffectivenessSound
 
-	thumb_func_start sub_81BE03C
-sub_81BE03C: @ 81BE03C
+	thumb_func_start PlayerPartnerHandlePlayFanfareOrBGM
+PlayerPartnerHandlePlayFanfareOrBGM: @ 81BE03C
 	push {r4,r5,lr}
 	ldr r4, =gBattleBufferA
 	ldr r5, =gActiveBank
@@ -5690,10 +5638,10 @@ _081BE08C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BE03C
+	thumb_func_end PlayerPartnerHandlePlayFanfareOrBGM
 
-	thumb_func_start sub_81BE098
-sub_81BE098: @ 81BE098
+	thumb_func_start PlayerPartnerHandleFaintingCry
+PlayerPartnerHandleFaintingCry: @ 81BE098
 	push {lr}
 	ldr r1, =gBattlePartyID
 	ldr r0, =gActiveBank
@@ -5717,10 +5665,10 @@ sub_81BE098: @ 81BE098
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BE098
+	thumb_func_end PlayerPartnerHandleFaintingCry
 
-	thumb_func_start dp01t_2E_3_battle_intro
-dp01t_2E_3_battle_intro: @ 81BE0D8
+	thumb_func_start PlayerPartnerHandleIntroSlide
+PlayerPartnerHandleIntroSlide: @ 81BE0D8
 	push {lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -5739,10 +5687,10 @@ dp01t_2E_3_battle_intro: @ 81BE0D8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_2E_3_battle_intro
+	thumb_func_end PlayerPartnerHandleIntroSlide
 
-	thumb_func_start sub_81BE10C
-sub_81BE10C: @ 81BE10C
+	thumb_func_start PlayerPartnerHandleIntroTrainerBallThrow
+PlayerPartnerHandleIntroTrainerBallThrow: @ 81BE10C
 	push {r4-r6,lr}
 	ldr r6, =gBankSpriteIds
 	ldr r5, =gActiveBank
@@ -5919,7 +5867,7 @@ _081BE27E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BE10C
+	thumb_func_end PlayerPartnerHandleIntroTrainerBallThrow
 
 	thumb_func_start sub_81BE2C8
 sub_81BE2C8: @ 81BE2C8
@@ -6038,8 +5986,8 @@ _081BE3B0:
 	.pool
 	thumb_func_end sub_81BE2C8
 
-	thumb_func_start dp01t_30_3_80EB11C
-dp01t_30_3_80EB11C: @ 81BE3D4
+	thumb_func_start PlayerPartnerHandleDrawPartyStatusSummary
+PlayerPartnerHandleDrawPartyStatusSummary: @ 81BE3D4
 	push {r4-r6,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -6122,7 +6070,7 @@ _081BE478:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_30_3_80EB11C
+	thumb_func_end PlayerPartnerHandleDrawPartyStatusSummary
 
 	thumb_func_start sub_81BE498
 sub_81BE498: @ 81BE498
@@ -6160,8 +6108,8 @@ _081BE4D0:
 	.pool
 	thumb_func_end sub_81BE498
 
-	thumb_func_start sub_81BE4E0
-sub_81BE4E0: @ 81BE4E0
+	thumb_func_start PlayerPartnerHandleCmd49
+PlayerPartnerHandleCmd49: @ 81BE4E0
 	push {lr}
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
@@ -6192,18 +6140,18 @@ _081BE512:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BE4E0
+	thumb_func_end PlayerPartnerHandleCmd49
 
-	thumb_func_start sub_81BE530
-sub_81BE530: @ 81BE530
+	thumb_func_start PlayerPartnerHandleCmd50
+PlayerPartnerHandleCmd50: @ 81BE530
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BE530
+	thumb_func_end PlayerPartnerHandleCmd50
 
-	thumb_func_start sub_81BE53C
-sub_81BE53C: @ 81BE53C
+	thumb_func_start PlayerPartnerHandleSpriteInvisibility
+PlayerPartnerHandleSpriteInvisibility: @ 81BE53C
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -6243,10 +6191,10 @@ _081BE582:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BE53C
+	thumb_func_end PlayerPartnerHandleSpriteInvisibility
 
-	thumb_func_start sub_81BE59C
-sub_81BE59C: @ 81BE59C
+	thumb_func_start PlayerPartnerHandleBattleAnimation
+PlayerPartnerHandleBattleAnimation: @ 81BE59C
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, =gActiveBank
@@ -6292,26 +6240,26 @@ _081BE5F4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BE59C
+	thumb_func_end PlayerPartnerHandleBattleAnimation
 
-	thumb_func_start sub_81BE604
-sub_81BE604: @ 81BE604
+	thumb_func_start PlayerPartnerHandleLinkStandbyMsg
+PlayerPartnerHandleLinkStandbyMsg: @ 81BE604
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BE604
+	thumb_func_end PlayerPartnerHandleLinkStandbyMsg
 
-	thumb_func_start sub_81BE610
-sub_81BE610: @ 81BE610
+	thumb_func_start PlayerPartnerHandleResetActionMoveSelection
+PlayerPartnerHandleResetActionMoveSelection: @ 81BE610
 	push {lr}
 	bl PlayerPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81BE610
+	thumb_func_end PlayerPartnerHandleResetActionMoveSelection
 
-	thumb_func_start sub_81BE61C
-sub_81BE61C: @ 81BE61C
+	thumb_func_start PlayerPartnerHandleCmd55
+PlayerPartnerHandleCmd55: @ 81BE61C
 	push {r4,lr}
 	ldr r2, =gBattleOutcome
 	ldr r1, =gBattleBufferA
@@ -6337,7 +6285,7 @@ sub_81BE61C: @ 81BE61C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81BE61C
+	thumb_func_end PlayerPartnerHandleCmd55
 
 	thumb_func_start nullsub_128
 nullsub_128: @ 81BE668
