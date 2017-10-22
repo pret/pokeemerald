@@ -86,4 +86,14 @@
     dmaRegs[5];                                                 \
 }
 
+#define IntrEnable(flags)                                       \
+{                                                               \
+    u16 imeTemp;                                                \
+                                                                \
+    imeTemp = REG_IME;                                          \
+    REG_IME = 0;                                                \
+    REG_IE |= flags;                                            \
+    REG_IME = imeTemp;                                          \
+}                                                               \
+
 #endif // GUARD_GBA_MACRO_H
