@@ -27,7 +27,9 @@
 #define BIT_SIDE        0x1
 #define BIT_MON         0x2
 
+#define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
 #define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
+#define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
 
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
@@ -655,7 +657,9 @@ struct BattleStruct
     u8 field_1A1;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
-    u8 field_1A4[240];
+    u8 field_1A4[96];
+    u8 field_204[104];
+    u8 field_26C[40];
     u8 field_294[4];
     u8 field_298[8];
     u8 field_2A0;
@@ -826,6 +830,7 @@ void LoadBattleTextboxAndBackground(void);
 void LoadBattleEntryBackground(void);
 void ApplyPlayerChosenFrameToBattleMenu(void);
 bool8 LoadChosenBattleElement(u8 caseId);
+void DrawMainBattleBackground(void);
 void task00_0800F6FC(u8 taskId);
 
 // battle_5
@@ -883,6 +888,19 @@ struct BattleSpriteInfo
 struct BattleAnimationInfo
 {
     u16 field; // to fill up later
+    u8 field_2;
+    u8 field_3;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u8 field_8;
+    u8 field_9_x1 : 1;
+    u8 field_9_x2 : 1;
+    u8 field_9_x1C : 3;
+    u8 field_9_x20 : 1;
+    u8 field_9_x40 : 1;
+    u8 field_9_x80 : 1;
 };
 
 struct BattleHealthboxInfo
@@ -890,6 +908,8 @@ struct BattleHealthboxInfo
     u8 flag_x1 : 1;
     u8 flag_x2 : 1;
     u8 flag_x4 : 1;
+    u8 flag_x8 : 1;
+    u8 flag_x10 : 1;
     u8 field_1;
     u8 field_2;
     u8 field_3;
@@ -903,14 +923,29 @@ struct BattleHealthboxInfo
     u8 field_B;
 };
 
+struct BattleBarInfo
+{
+    u8 healthboxSpriteId;
+    s32 maxValue;
+    s32 currentValue;
+    s32 field_C;
+    s32 field_10;
+};
+
 struct BattleSpriteData
 {
     struct BattleSpriteInfo *bankData;
     struct BattleHealthboxInfo *healthBoxesData;
     struct BattleAnimationInfo *animationData;
+    struct BattleBarInfo *battleBars;
 };
 
 extern struct BattleSpriteData *gBattleSpritesDataPtr;
+
+#define BATTLE_BUFFER_LINK_SIZE 0x1000
+
+extern u8 *gLinkBattleSendBuffer;
+extern u8 *gLinkBattleRecvBuffer;
 
 // Move this somewhere else
 
@@ -921,6 +956,8 @@ struct MonSpritesGfx
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
     void* sprites[4];
     struct SpriteTemplate templates[4];
+    u8 field_74[0x100];
+    u8 *fontPixels;
 };
 
 extern struct BattleSpritesGfx* gMonSpritesGfx;

@@ -336,9 +336,9 @@ static void CreateHealthboxSprite(u8 bank)
             UpdateHealthboxAttribute(gHealthBoxesIds[bank], &gPlayerParty[gBattlePartyID[bank]], HEALTHBOX_ALL);
 
         if (GetBankIdentity(bank) == IDENTITY_OPPONENT_MON2 || GetBankIdentity(bank) == IDENTITY_PLAYER_MON2)
-            nullsub_30(gHealthBoxesIds[bank], TRUE);
+            DummyBattleInterfaceFunc(gHealthBoxesIds[bank], TRUE);
         else
-            nullsub_30(gHealthBoxesIds[bank], FALSE);
+            DummyBattleInterfaceFunc(gHealthBoxesIds[bank], FALSE);
 
         if (GetBankSide(bank) != SIDE_PLAYER)
         {

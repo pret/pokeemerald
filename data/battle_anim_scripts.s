@@ -6,7 +6,7 @@
 gUnknown_082C8D64:: @ 82C8D64
 	.incbin "baserom.gba", 0x2c8d64, 0x8
 
-gUnknown_082C8D6C:: @ 82C8D6C
+gBattleAnims_Moves:: @ 82C8D6C
 	.incbin "baserom.gba", 0x2c8d6c, 0x590
 
 gUnknown_082C92FC:: @ 82C92FC

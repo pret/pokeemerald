@@ -60,7 +60,7 @@ void SetSafariZoneFlag(void)
 
 void ResetSafariZoneFlag(void)
 {
-    FlagReset(SYS_SAFARI_MODE);
+    FlagClear(SYS_SAFARI_MODE);
 }
 
 void EnterSafariMode(void)
@@ -139,7 +139,7 @@ static void ClearAllPokeblockFeeders(void)
     memset(sPokeblockFeeders, 0, sizeof(sPokeblockFeeders));
 }
 
-static void GetPokeblockFeederInFront(void)
+void GetPokeblockFeederInFront(void)
 {
     s16 x, y;
     u16 i;

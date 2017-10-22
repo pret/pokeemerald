@@ -12,13 +12,12 @@ gScriptCmdTableEnd:: @ 81DBA08
 gSpecialVars:: @ 81DBA0C
 	.incbin "baserom.gba", 0x1dba0c, 0x58
 
-gUnknown_081DBA64:: @ 81DBA64
-	.incbin "baserom.gba", 0x1dba64, 0x83c
+	.include "data/specials.inc"
 
-gUnknown_081DC2A0:: @ 81DC2A0
+gStdScripts:: @ 81DC2A0
 	.incbin "baserom.gba", 0x1dc2a0, 0x2c
 
-gUnknown_081DC2CC:: @ 81DC2CC
+gStdScripts_End:: @ 81DC2CC
 	.incbin "baserom.gba", 0x1dc2cc, 0x34ee
 
 gUnknown_081DF7BA:: @ 81DF7BA

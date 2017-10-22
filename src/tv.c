@@ -2,7 +2,7 @@
 // Includes
 #include "global.h"
 #include "rtc.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "map_constants.h"
 #include "rng.h"
 #include "event_data.h"
@@ -838,7 +838,7 @@ void UpdateTVScreensOnMap(int width, int height)
             }
             else if (FlagGet(SYS_TV_START) && (FindAnyTVShowOnTheAir() != 0xff || FindAnyTVNewsOnTheAir() != 0xff || IsTVShowInSearchOfTrainersAiring()))
             {
-                FlagReset(SYS_TV_WATCH);
+                FlagClear(SYS_TV_WATCH);
                 SetTVMetatilesOnMap(width, height, 0x3);
             }
             break;
@@ -1263,7 +1263,7 @@ void InterviewAfter_ContestLiveUpdates(void)
         show2->contestLiveUpdates.kind = TVSHOW_CONTEST_LIVE_UPDATES;
         show2->contestLiveUpdates.active = TRUE;
         StringCopy(show2->contestLiveUpdates.playerName, gSaveBlock2Ptr->playerName);
-        show2->contestLiveUpdates.category = gUnknown_02039F2C;
+        show2->contestLiveUpdates.category = gScriptContestCategory;
         show2->contestLiveUpdates.species = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_SPECIES, NULL);
         show2->contestLiveUpdates.winningSpecies = show->contestLiveUpdates.winningSpecies;
         show2->contestLiveUpdates.appealFlags2 = show->contestLiveUpdates.appealFlags2;
@@ -1527,7 +1527,7 @@ void BravoTrainerPokemonProfile_BeforeInterview2(u8 a0)
     if (sCurTVShowSlot != -1)
     {
         show->bravoTrainer.contestResult = a0;
-        show->bravoTrainer.contestCategory = gUnknown_02039F2C;
+        show->bravoTrainer.contestCategory = gScriptContestCategory;
         show->bravoTrainer.contestRank = gUnknown_02039F2E;
         show->bravoTrainer.species = GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_SPECIES, NULL);
         GetMonData(&gPlayerParty[gUnknown_02039F24], MON_DATA_NICKNAME, show->bravoTrainer.pokemonNickname);
@@ -1675,7 +1675,7 @@ void InterviewAfter_FanClubLetter(void)
     show->fanclubLetter.kind = TVSHOW_FAN_CLUB_LETTER;
     show->fanclubLetter.active = TRUE;
     StringCopy(show->fanclubLetter.playerName, gSaveBlock2Ptr->playerName);
-    show->fanclubLetter.species = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_SPECIES, NULL);
+    show->fanclubLetter.species = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
     tv_store_id_2x(show);
     show->fanclubLetter.language = gGameLanguage;
 }
@@ -1700,21 +1700,21 @@ void InterviewAfter_PkmnFanClubOpinions(void)
     show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
     show->fanclubOpinions.kind = TVSHOW_PKMN_FAN_CLUB_OPINIONS;
     show->fanclubOpinions.active = TRUE;
-    show->fanclubOpinions.friendshipHighNybble = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_FRIENDSHIP, NULL) >> 4;
+    show->fanclubOpinions.friendshipHighNybble = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_FRIENDSHIP, NULL) >> 4;
     show->fanclubOpinions.questionAsked = gSpecialVar_0x8007;
     StringCopy(show->fanclubOpinions.playerName, gSaveBlock2Ptr->playerName);
-    GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_NICKNAME, show->fanclubOpinions.nickname);
+    GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, show->fanclubOpinions.nickname);
     StripExtCtrlCodes(show->fanclubOpinions.nickname);
-    show->fanclubOpinions.species = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_SPECIES, NULL);
+    show->fanclubOpinions.species = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL);
     tv_store_id_2x(show);
     show->fanclubOpinions.language = gGameLanguage;
-    if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
+    if (gGameLanguage == LANGUAGE_JAPANESE || GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
     {
         show->fanclubOpinions.pokemonNameLanguage = LANGUAGE_JAPANESE;
     }
     else
     {
-        show->fanclubOpinions.pokemonNameLanguage = GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_LANGUAGE);
+        show->fanclubOpinions.pokemonNameLanguage = GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_LANGUAGE);
     }
 }
 
@@ -3073,7 +3073,7 @@ void TV_PrintIntToStringVar(u8 varIdx, int value)
     ConvertIntToDecimalStringN(gTVStringVarPtrs[varIdx], value, STR_CONV_MODE_LEFT_ALIGN, nDigits);
 }
 
-int sub_80EF370(int value)
+size_t sub_80EF370(int value)
 {
     if (value / 10 == 0)
     {
@@ -3246,7 +3246,7 @@ void InterviewBefore_FanClubLetter(void)
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_FAN_CLUB_LETTER);
     if (!gScriptResult)
     {
-        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_SPECIES, NULL)]);
+        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL)]);
         InitializeEasyChatWordArray(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanclubLetter.words, 6);
     }
 }
@@ -3265,8 +3265,8 @@ void InterviewBefore_PkmnFanClubOpinions(void)
     FindActiveBroadcastByShowType_SetScriptResult(TVSHOW_PKMN_FAN_CLUB_OPINIONS);
     if (!gScriptResult)
     {
-        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_SPECIES, NULL)]);
-        GetMonData(&gPlayerParty[GetIdxOfFirstPartyMemberThatIsNotAnEgg()], MON_DATA_NICKNAME, gStringVar2);
+        StringCopy(gStringVar1, gSpeciesNames[GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SPECIES, NULL)]);
+        GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_NICKNAME, gStringVar2);
         StringGetEnd10(gStringVar2);
         InitializeEasyChatWordArray(gSaveBlock1Ptr->tvShows[sCurTVShowSlot].fanclubOpinions.words, 2);
     }
@@ -3336,7 +3336,7 @@ bool8 sub_80EF88C(u8 monIdx)
 
 bool8 sub_80EF8F8(void)
 {
-    return sub_80EF88C(GetIdxOfFirstPartyMemberThatIsNotAnEgg());
+    return sub_80EF88C(GetLeadMonIndex());
 }
 
 void DeleteTVShowInArrayByIdx(TVShow *shows, u8 idx)

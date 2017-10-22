@@ -1043,7 +1043,7 @@ _080C77C2:
 	lsrs r5, r0, 16
 	cmp r5, 0xD
 	bls _080C77C2
-	bl sub_80D242C
+	bl ResetWaldaWallpaper
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -6902,7 +6902,7 @@ sub_80CABE0: @ 80CABE0
 	cmp r1, r0
 	beq _080CAC0A
 	ldr r0, =0x000008d7
-	bl FlagReset
+	bl FlagClear
 	ldr r4, =0x00004036
 	bl StorageGetCurrentBox
 	adds r1, r0, 0
@@ -7122,7 +7122,7 @@ sub_80CADD8: @ 80CADD8
 	bl sub_80CFF34
 	movs r0, 0x15
 	bl sub_80CFF34
-	bl sub_80D2494
+	bl IsWaldaWallpaperUnlocked
 	cmp r0, 0
 	beq _080CAE04
 	movs r0, 0x16
@@ -10421,7 +10421,7 @@ _080CC888:
 	b _080CC9DA
 	.pool
 _080CC8C4:
-	bl sub_80D24A8
+	bl GetWaldaWallpaperPatternId
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -10448,13 +10448,13 @@ _080CC8C4:
 	adds r1, r4
 	movs r2, 0x20
 	bl CpuSet
-	bl sub_80D2510
+	bl GetWaldaWallpaperColorsPtr
 	ldr r1, [r7]
 	ldr r2, =0x00000794
 	adds r1, r2
 	movs r2, 0x2
 	bl CpuSet
-	bl sub_80D2510
+	bl GetWaldaWallpaperColorsPtr
 	ldr r1, [r7]
 	ldr r3, =0x000007b4
 	adds r1, r3
@@ -10500,7 +10500,7 @@ _080CC976:
 	adds r1, r5
 	str r0, [r1]
 	ldr r4, =gUnknown_0857B004
-	bl sub_80D24DC
+	bl GetWaldaWallpaperIconId
 	lsls r0, 2
 	adds r0, r4
 	ldr r0, [r0]
@@ -21544,8 +21544,8 @@ _080D241E:
 	bx r1
 	thumb_func_end sub_80D23A8
 
-	thumb_func_start sub_80D242C
-sub_80D242C: @ 80D242C
+	thumb_func_start ResetWaldaWallpaper
+ResetWaldaWallpaper: @ 80D242C
 	ldr r2, =gSaveBlock1Ptr
 	ldr r0, [r2]
 	ldr r1, =0x00003d84
@@ -21575,10 +21575,10 @@ sub_80D242C: @ 80D242C
 	strb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_80D242C
+	thumb_func_end ResetWaldaWallpaper
 
-	thumb_func_start sub_80D2480
-sub_80D2480: @ 80D2480
+	thumb_func_start SetWaldaWallpaperLockedOrUnlocked
+SetWaldaWallpaperLockedOrUnlocked: @ 80D2480
 	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, =0x00003d86
@@ -21586,10 +21586,10 @@ sub_80D2480: @ 80D2480
 	strb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_80D2480
+	thumb_func_end SetWaldaWallpaperLockedOrUnlocked
 
-	thumb_func_start sub_80D2494
-sub_80D2494: @ 80D2494
+	thumb_func_start IsWaldaWallpaperUnlocked
+IsWaldaWallpaperUnlocked: @ 80D2494
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003d86
@@ -21597,10 +21597,10 @@ sub_80D2494: @ 80D2494
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_80D2494
+	thumb_func_end IsWaldaWallpaperUnlocked
 
-	thumb_func_start sub_80D24A8
-sub_80D24A8: @ 80D24A8
+	thumb_func_start GetWaldaWallpaperPatternId
+GetWaldaWallpaperPatternId: @ 80D24A8
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003d85
@@ -21608,10 +21608,10 @@ sub_80D24A8: @ 80D24A8
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_80D24A8
+	thumb_func_end GetWaldaWallpaperPatternId
 
-	thumb_func_start sub_80D24BC
-sub_80D24BC: @ 80D24BC
+	thumb_func_start SetWaldaWallpaperPatternId
+SetWaldaWallpaperPatternId: @ 80D24BC
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -21626,10 +21626,10 @@ _080D24D0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D24BC
+	thumb_func_end SetWaldaWallpaperPatternId
 
-	thumb_func_start sub_80D24DC
-sub_80D24DC: @ 80D24DC
+	thumb_func_start GetWaldaWallpaperIconId
+GetWaldaWallpaperIconId: @ 80D24DC
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003d84
@@ -21637,10 +21637,10 @@ sub_80D24DC: @ 80D24DC
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_80D24DC
+	thumb_func_end GetWaldaWallpaperIconId
 
-	thumb_func_start sub_80D24F0
-sub_80D24F0: @ 80D24F0
+	thumb_func_start SetWaldaWallpaperIconId
+SetWaldaWallpaperIconId: @ 80D24F0
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -21655,20 +21655,20 @@ _080D2504:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D24F0
+	thumb_func_end SetWaldaWallpaperIconId
 
-	thumb_func_start sub_80D2510
-sub_80D2510: @ 80D2510
+	thumb_func_start GetWaldaWallpaperColorsPtr
+GetWaldaWallpaperColorsPtr: @ 80D2510
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003d70
 	adds r0, r1
 	bx lr
 	.pool
-	thumb_func_end sub_80D2510
+	thumb_func_end GetWaldaWallpaperColorsPtr
 
-	thumb_func_start sub_80D2524
-sub_80D2524: @ 80D2524
+	thumb_func_start SetWaldaWallpaperColors
+SetWaldaWallpaperColors: @ 80D2524
 	push {r4,lr}
 	ldr r2, =gSaveBlock1Ptr
 	ldr r2, [r2]
@@ -21682,20 +21682,20 @@ sub_80D2524: @ 80D2524
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D2524
+	thumb_func_end SetWaldaWallpaperColors
 
-	thumb_func_start sub_80D2548
-sub_80D2548: @ 80D2548
+	thumb_func_start GetWaldaPhrasePtr
+GetWaldaPhrasePtr: @ 80D2548
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003d74
 	adds r0, r1
 	bx lr
 	.pool
-	thumb_func_end sub_80D2548
+	thumb_func_end GetWaldaPhrasePtr
 
-	thumb_func_start sub_80D255C
-sub_80D255C: @ 80D255C
+	thumb_func_start SetWaldaPhrase
+SetWaldaPhrase: @ 80D255C
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, =gSaveBlock1Ptr
@@ -21706,10 +21706,10 @@ sub_80D255C: @ 80D255C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D255C
+	thumb_func_end SetWaldaPhrase
 
-	thumb_func_start sub_80D2578
-sub_80D2578: @ 80D2578
+	thumb_func_start IsWaldaPhraseEmpty
+IsWaldaPhraseEmpty: @ 80D2578
 	push {lr}
 	movs r1, 0
 	ldr r0, =gSaveBlock1Ptr
@@ -21725,7 +21725,7 @@ _080D258C:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80D2578
+	thumb_func_end IsWaldaPhraseEmpty
 
 	thumb_func_start sub_80D259C
 sub_80D259C: @ 80D259C

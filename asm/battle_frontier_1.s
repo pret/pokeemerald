@@ -14296,7 +14296,7 @@ sub_81963F0: @ 81963F0
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
-	bl sub_809757C
+	bl UnfreezeMapObjects
 	bl ScriptContext2_Disable
 _08196446:
 	movs r0, 0x1
@@ -14680,7 +14680,7 @@ sub_8196748: @ 8196748
 	ldr r4, =gUnknown_085500A4
 _08196750:
 	ldrh r0, [r4]
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819675E
@@ -14706,7 +14706,7 @@ sub_8196774: @ 8196774
 	ldr r5, =gUnknown_085500A4
 _0819677E:
 	ldrh r0, [r5]
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819679A

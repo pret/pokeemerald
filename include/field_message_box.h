@@ -1,12 +1,10 @@
-#ifndef GUARD_field_message_box_H
-#define GUARD_field_message_box_H
+#ifndef GUARD_FIELD_MESSAGE_BOX_H
+#define GUARD_FIELD_MESSAGE_BOX_H
 
-// Exported type declarations
+bool8 ShowFieldMessage(const u8 *message);
+bool8 sub_8098238(const u8 *message);
+bool8 ShowFieldAutoScrollMessage(const u8 *message);
+void HideFieldMessageBox(void);
+bool8 IsFieldMessageBoxHidden(void);
 
-// Exported RAM declarations
-
-// Exported ROM declarations
-
-void ShowFieldMessage(const u8 *);
-
-#endif //GUARD_field_message_box_H
+#endif // GUARD_FIELD_MESSAGE_BOX_H

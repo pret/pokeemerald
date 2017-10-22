@@ -5441,7 +5441,7 @@ sub_81B2E64: @ 81B2E64
 	mov r2, r9
 	lsls r1, r2, 16
 	asrs r1, 16
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -10051,7 +10051,7 @@ task_launch_hm_phase_2: @ 81B5750
 	cmp r0, 0x1
 	bne _081B577C
 	bl brm_get_selected_species
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [r1]
@@ -10135,7 +10135,7 @@ _081B57FE:
 hm_surf_run_dp02scr: @ 81B5804
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -10239,7 +10239,7 @@ sub_81B58A8: @ 81B58A8
 hm2_waterfall: @ 81B58D4
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -10299,7 +10299,7 @@ _081B594E:
 sub_81B5958: @ 81B5958
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -10314,7 +10314,7 @@ sub_81B5958: @ 81B5958
 sub_81B5974: @ 81B5974
 	push {lr}
 	bl sub_809D1E8
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1, 0x4]
@@ -10452,7 +10452,7 @@ sub_81B5A8C: @ 81B5A8C
 	asrs r2, 16
 	adds r0, r1, 0
 	adds r1, r2, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -15205,7 +15205,7 @@ sub_81B841C: @ 81B841C
 	beq _081B8438
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_80D6D70
+	bl AddPCItem
 	b _081B8440
 	.pool
 _081B8438:

@@ -167,7 +167,7 @@ sub_8135578: @ 8135578
 	cmp r4, 0
 	bne _081355FC
 	bl player_get_direction_lower_nybble
-	ldr r6, =gFieldEffectSpawnParams
+	ldr r6, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r6, 0x4]
@@ -303,7 +303,7 @@ _081356AC:
 sub_81356C4: @ 81356C4
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -380,7 +380,7 @@ hm2_dig: @ 8135760
 	movs r0, 0x26
 	bl FieldEffectStart
 	bl brm_get_pokemon_selection
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -3381,7 +3381,7 @@ hm2_flash: @ 8137178
 	lsls r4, 24
 	lsrs r4, 24
 	bl brm_get_pokemon_selection
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -4337,7 +4337,7 @@ sub_8137988: @ 8137988
 	.pool
 _081379C8:
 	ldr r0, =0x0000089a
-	bl FlagReset
+	bl FlagClear
 _081379CE:
 	pop {r0}
 	bx r0
@@ -5030,7 +5030,7 @@ _08137F6E:
 	movs r1, 0
 	bl VarSet
 	movs r0, 0
-	bl sav1_set_battle_music_maybe
+	bl Overworld_SetSavedMusic
 _08137F7C:
 	pop {r4}
 	pop {r0}
@@ -5056,7 +5056,7 @@ sub_8137F90: @ 8137F90
 sub_8137FB0: @ 8137FB0
 	push {lr}
 	ldr r0, =0x0000088d
-	bl FlagReset
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.pool
@@ -6485,7 +6485,7 @@ sub_8138B8C: @ 8138B8C
 	movs r0, 0x13
 	movs r1, 0
 	movs r3, 0x6
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	b _08138BC2
 	.pool
 _08138BB0:
@@ -6496,7 +6496,7 @@ _08138BB0:
 	movs r0, 0x13
 	movs r1, 0x1
 	movs r3, 0x6
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 _08138BC2:
 	add sp, 0x4
 	pop {r0}
@@ -6537,7 +6537,7 @@ _08138BF6:
 	thumb_func_start sub_8138C04
 sub_8138C04: @ 8138C04
 	push {r4,lr}
-	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7051,7 +7051,7 @@ sub_8138FEC: @ 8138FEC
 	ldr r1, =gSpecialVar_0x8004
 	ldr r0, =0x000001f5
 	strh r0, [r1]
-	bl FlagReset
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.pool
@@ -7060,7 +7060,7 @@ sub_8138FEC: @ 8138FEC
 	thumb_func_start sub_8139004
 sub_8139004: @ 8139004
 	push {lr}
-	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7084,7 +7084,7 @@ _0813902A:
 	thumb_func_start sub_8139030
 sub_8139030: @ 8139030
 	push {lr}
-	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7108,7 +7108,7 @@ _08139056:
 	thumb_func_start sub_813905C
 sub_813905C: @ 813905C
 	push {lr}
-	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7132,7 +7132,7 @@ _08139082:
 	thumb_func_start sub_8139088
 sub_8139088: @ 8139088
 	push {lr}
-	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7156,7 +7156,7 @@ _081390AE:
 	thumb_func_start sub_81390B4
 sub_81390B4: @ 81390B4
 	push {lr}
-	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7295,7 +7295,7 @@ RemoveScriptFieldObject: @ 81391AC
 	thumb_func_start sub_81391D0
 sub_81391D0: @ 81391D0
 	push {lr}
-	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7479,7 +7479,7 @@ _08139342:
 	thumb_func_start sub_8139348
 sub_8139348: @ 8139348
 	push {lr}
-	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7507,7 +7507,7 @@ sub_8139370: @ 8139370
 	movs r1, 0x1
 	mov r0, sp
 	strb r1, [r0]
-	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7538,7 +7538,7 @@ _081393B6:
 	thumb_func_start sub_81393C8
 sub_81393C8: @ 81393C8
 	push {lr}
-	bl GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7858,7 +7858,7 @@ sub_8139648: @ 8139648
 	cmp r0, 0x1
 	beq _08139664
 	movs r0, 0x14
-	bl sub_80AED7C
+	bl SetSav1Weather
 _08139664:
 	pop {r0}
 	bx r0
@@ -7876,14 +7876,14 @@ sub_8139668: @ 8139668
 	cmp r0, 0x1
 	beq _08139684
 	movs r0, 0x15
-	bl sub_80AED7C
+	bl SetSav1Weather
 _08139684:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8139668
 
-	thumb_func_start GetIdxOfFirstPartyMemberThatIsNotAnEgg
-GetIdxOfFirstPartyMemberThatIsNotAnEgg: @ 8139688
+	thumb_func_start GetLeadMonIndex
+GetLeadMonIndex: @ 8139688
 	push {r4-r6,lr}
 	bl CalculatePlayerPartyCount
 	lsls r0, 24
@@ -7926,7 +7926,7 @@ _081396D8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end GetIdxOfFirstPartyMemberThatIsNotAnEgg
+	thumb_func_end GetLeadMonIndex
 
 	thumb_func_start sub_81396E0
 sub_81396E0: @ 81396E0
@@ -11039,7 +11039,7 @@ _0813B0F8:
 	ldr r0, =sub_813B160
 	movs r1, 0x8
 	bl CreateTask
-	ldr r3, =gFieldEffectSpawnParams
+	ldr r3, =gFieldEffectArguments
 	movs r0, 0x1
 	str r0, [r3]
 	movs r0, 0x3A
@@ -11074,7 +11074,7 @@ _0813B13A:
 	adds r0, r5, r0
 	ldrb r2, [r0]
 	movs r0, 0x1
-	bl update_saveblock1_field_object_coords
+	bl Overworld_SetMapObjTemplateCoords
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -11238,7 +11238,7 @@ _0813B27E:
 	cmp r0, r4
 	beq _0813B2A6
 	ldr r0, =0x000008d7
-	bl FlagReset
+	bl FlagClear
 _0813B2A6:
 	ldr r0, =0x00004036
 	lsrs r1, r7, 16
@@ -11676,7 +11676,7 @@ _0813B62E:
 	ldrh r0, [r0]
 	strh r0, [r5]
 	movs r0, 0x1
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
@@ -11756,7 +11756,7 @@ _0813B6E4:
 	ldrh r0, [r0]
 	strh r0, [r1]
 	movs r0, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 _0813B708:
 	ldr r1, =gTasks
 	lsls r0, r4, 2
@@ -11778,7 +11778,7 @@ _0813B728:
 	cmp r0, 0x2
 	bne _0813B790
 	ldr r0, =gUnknown_0824979B
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 	b _0813B790
 	.pool
 _0813B74C:
@@ -11787,7 +11787,7 @@ _0813B74C:
 	cmp r0, 0x3
 	bne _0813B790
 	ldr r0, =gUnknown_0824979B
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 	b _0813B790
 	.pool
 _0813B764:
@@ -12075,7 +12075,7 @@ sub_813B9A0: @ 813B9A0
 	cmp r1, r0
 	bne _0813B9B6
 	movs r0, 0x3
-	bl sub_8084D1C
+	bl Overworld_SetHealLocationWarp
 _0813B9B6:
 	pop {r0}
 	bx r0
@@ -12187,16 +12187,16 @@ sub_813BA60: @ 813BA60
 	adds r1, r2
 	strh r0, [r1]
 	ldr r0, =0x00000315
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00000316
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00000317
-	bl FlagReset
+	bl FlagClear
 	movs r0, 0xC6
 	lsls r0, 2
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x000002da
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00004095
 	movs r1, 0x1
 	bl VarSet

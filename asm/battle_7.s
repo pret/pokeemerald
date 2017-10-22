@@ -1056,10 +1056,10 @@ _0805D980:
 	b _0805DA1E
 	.pool
 _0805D9CC:
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	mov r2, r10
 	strb r2, [r0]
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	mov r1, sp
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -1070,7 +1070,7 @@ _0805D9CC:
 	ldr r0, =gUnknown_082C9320
 	adds r1, r5, 0
 	movs r2, 0
-	bl move_something
+	bl DoBattleAnim
 	ldr r0, =task0A_0803415C
 	movs r1, 0xA
 	bl CreateTask
@@ -1180,14 +1180,14 @@ move_anim_start_t4: @ 805DAC4
 	lsrs r4, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	strb r1, [r0]
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	strb r2, [r0]
 	ldr r0, =gUnknown_082C937C
 	adds r1, r3, 0
 	movs r2, 0
-	bl move_something
+	bl DoBattleAnim
 	ldr r0, =task0A_08034248
 	movs r1, 0xA
 	bl CreateTask
@@ -1801,7 +1801,7 @@ _0805E056:
 	movs r4, 0
 	cmp r4, r5
 	bcs _0805E076
-	ldr r7, =gBanksBySide
+	ldr r7, =gBanksByIdentity
 	ldr r6, =gUnknown_0832C108
 _0805E060:
 	adds r0, r4, r7
@@ -1874,14 +1874,14 @@ _0805E0F0:
 _0805E100:
 	cmp r4, 0x4
 	bne _0805E110
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0]
 	b _0805E198
 	.pool
 _0805E110:
 	cmp r4, 0x5
 	bne _0805E1AC
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0, 0x1]
 	b _0805E198
 	.pool
@@ -1916,28 +1916,28 @@ _0805E150:
 _0805E160:
 	cmp r4, 0x6
 	bne _0805E170
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0]
 	b _0805E198
 	.pool
 _0805E170:
 	cmp r4, 0x7
 	bne _0805E180
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0, 0x1]
 	b _0805E198
 	.pool
 _0805E180:
 	cmp r4, 0x8
 	bne _0805E190
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0, 0x2]
 	b _0805E198
 	.pool
 _0805E190:
 	cmp r5, 0x9
 	bne _0805E1AC
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r0, [r0, 0x3]
 _0805E198:
 	lsls r0, 3
@@ -1955,8 +1955,8 @@ _0805E1AE:
 	bx r1
 	thumb_func_end BattleLoadAllHealthBoxesGfx
 
-	thumb_func_start load_gfxc_health_bar
-load_gfxc_health_bar: @ 805E1B8
+	thumb_func_start LoadBattleBarGfx
+LoadBattleBarGfx: @ 805E1B8
 	push {lr}
 	ldr r0, =gUnknown_08C093F0
 	ldr r1, =gMonSpritesGfxPtr
@@ -1969,7 +1969,7 @@ load_gfxc_health_bar: @ 805E1B8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end load_gfxc_health_bar
+	thumb_func_end LoadBattleBarGfx
 
 	thumb_func_start BattleInitAllSprites
 BattleInitAllSprites: @ 805E1D8
@@ -2038,7 +2038,7 @@ _0805E252:
 _0805E260:
 	ldrb r0, [r4]
 	bl SetBankHealthboxSpritePos
-	ldr r0, =gBanksBySide
+	ldr r0, =gBanksByIdentity
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
@@ -2048,7 +2048,7 @@ _0805E260:
 	adds r0, r1, r0
 	ldrb r0, [r0]
 	movs r1, 0
-	bl nullsub_30
+	bl DummyBattleInterfaceFunc
 	b _0805E30E
 	.pool
 _0805E288:
@@ -2056,7 +2056,7 @@ _0805E288:
 	adds r0, r1, r0
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl nullsub_30
+	bl DummyBattleInterfaceFunc
 	b _0805E30E
 	.pool
 _0805E29C:
@@ -2353,7 +2353,7 @@ _0805E51C:
 	beq _0805E558
 	movs r0, 0
 	mov r10, r0
-	ldr r0, =gUnknown_02039F34
+	ldr r0, =gContestResources
 	ldr r0, [r0]
 	ldr r2, [r0, 0x18]
 	ldrh r1, [r2, 0x2]
@@ -2857,7 +2857,7 @@ sub_805E990: @ 805E990
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2997,7 +2997,7 @@ sub_805EAB4: @ 805EAB4
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
@@ -3111,7 +3111,7 @@ sub_805EB9C: @ 805EB9C
 _0805EBC8:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80A6A90
+	bl AnimBankSpriteExists
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805EC60
@@ -3329,7 +3329,7 @@ sub_805ED70: @ 805ED70
 	cmp r0, 0
 	beq _0805EDAC
 	adds r0, r4, 0
-	bl sub_80A6A90
+	bl AnimBankSpriteExists
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805EDC0
@@ -3796,7 +3796,7 @@ sub_805F110: @ 805F110
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8075060
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
