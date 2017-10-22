@@ -11,9 +11,6 @@
 #include "text_window.h"
 #include "songs.h"
 
-extern void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos); // menu.s
-extern s8 sub_8198C58(void); // menu.s
-
 extern u8 gText_ClearAllSaveData[];
 extern u8 gText_ClearingData[];
 
@@ -134,17 +131,17 @@ static bool8 SetupClearSaveDataScreen(void)
         default:
             SetVBlankCallback(NULL);
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_BG0HOFS, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_BG0VOFS, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_BG3HOFS, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_BG3VOFS, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_WIN0H, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_WIN0V, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_WININ, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_WINOUT, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_BLDCNT, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_BLDALPHA, DISPCNT_MODE_0);
-            SetGpuReg(REG_OFFSET_BLDY, DISPCNT_MODE_0);
+            SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+            SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+            SetGpuReg(REG_OFFSET_BG3HOFS, 0);
+            SetGpuReg(REG_OFFSET_BG3VOFS, 0);
+            SetGpuReg(REG_OFFSET_WIN0H, 0);
+            SetGpuReg(REG_OFFSET_WIN0V, 0);
+            SetGpuReg(REG_OFFSET_WININ, 0);
+            SetGpuReg(REG_OFFSET_WINOUT, 0);
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
+            SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+            SetGpuReg(REG_OFFSET_BLDY, 0);
             DmaFill16(3, 0, (void *)VRAM, VRAM_SIZE);
             DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
             DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
@@ -165,7 +162,7 @@ static bool8 SetupClearSaveDataScreen(void)
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
             ShowBg(0);
             ShowBg(3);
-            SetGpuReg(REG_OFFSET_BLDCNT, DISPCNT_MODE_0);
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
             InitClearSaveDataScreenWindows();
             BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, 0xFFFF);
             EnableInterrupts(1);
