@@ -225,13 +225,8 @@ const struct ListMenuTemplate gUnknown_085A6BD0 = {
 };
 
 #include "data/decoration/icon.h"
+#include "data/decoration/tilemaps.h"
 
-extern const struct {
-    const u8 *tiles;
-    const u8 *y;
-    const u8 *x;
-    u8 size;
-} gUnknown_085A71B0[];
 extern const struct {
     u8 shape;
     u8 size;
