@@ -152,7 +152,7 @@ enum DecorShape {
     DECORSHAPE_3x2
 };
 
-enum DecoCat {
+enum DecorCat {
     /*
      * In which category you can find the decoration in the PC.
      */
@@ -178,7 +178,7 @@ struct Decoration
     /*0x1c*/ const u16 *tiles;
 };
 
-struct DecoPCPointers
+struct DecorPCPointers
 {
     /* 0x00 */ u8 *items;
     /* 0x04 */ u8 *pos;
