@@ -4,6 +4,7 @@
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "battle_anim.h"
+#include "battle_link_817C95C.h"
 #include "pokemon.h"
 #include "link.h"
 #include "util.h"
@@ -21,6 +22,8 @@
 #include "string_util.h"
 #include "bg.h"
 #include "reshow_battle_screen.h"
+#include "rng.h"
+#include "pokeball.h"
 
 extern u32 gBattleExecBuffer;
 extern u8 gActiveBank;
@@ -39,98 +42,134 @@ extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
 extern u8 gMultiUsePlayerCursor;
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern struct MusicPlayerInfo gMPlay_BGM;
+extern u16 gPartnerTrainerId;
+extern struct SpriteTemplate gUnknown_0202499C;
+extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
+extern u16 gScriptItemId;
+extern u8 gUnknown_0203CEE8;
+extern u8 gUnknown_0203CEE9;
+extern u8 gUnknown_0203CF00[];
+extern u8 gUnknown_03005D7C[BATTLE_BANKS_COUNT];
+extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
+extern u8 gBattleOutcome;
+extern u8 gNumberOfMovesToChoose;
+extern u16 gBattle_BG0_X;
+extern u16 gBattle_BG0_Y;
+extern s32 gUnknown_0203CD70;
+extern u8 gBankInMenu;
+extern u32 gBattlePalaceMoveSelectionRngValue;
+extern u32 gTransformedPersonalities[BATTLE_BANKS_COUNT];
+extern u8 gUnknown_020244B4[];
+extern u16 gUnknown_020243FC;
+extern struct UnusedControllerStruct gUnknown_02022D0C;
 
+extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
+extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
+extern const u8 gTypeNames[][7];
 extern const struct BattleMove gBattleMoves[];
 
-extern void dp11b_obj_instanciate(u8, u8, s8, s8);
-extern void dp11b_obj_free(u8, u8);
-extern void sub_800AC34(void);
+extern const u8 gText_BattleSwitchWhich[];
+extern const u8 gText_MoveInterfacePP[];
+extern const u8 gText_MoveInterfaceType[];
+extern const u8 gText_LinkStandby[];
+extern const u8 gText_BattleMenu[];
+extern const u8 gText_WhatWillPkmnDo[];
+extern const u8 gText_BattleYesNoChoice[];
+
+extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
+extern void sub_81B89AC(u8 arg0);
+extern void sub_81AABB0(void);
+extern void sub_806A068(u16, u8);
+extern void sub_81A57E4(u8 bank, u16 stringId);
+extern void sub_81851A8(u8 *);
 
 // this file's functions
-void PlayerHandleGetMonData(void);
+static void PlayerHandleGetMonData(void);
 void PlayerHandleGetRawMonData(void);
-void PlayerHandleSetMonData(void);
-void PlayerHandleSetRawMonData(void);
-void PlayerHandleLoadMonSprite(void);
-void PlayerHandleSwitchInAnim(void);
-void PlayerHandleReturnMonToBall(void);
-void PlayerHandleDrawTrainerPic(void);
-void PlayerHandleTrainerSlide(void);
-void PlayerHandleTrainerSlideBack(void);
-void PlayerHandleFaintAnimation(void);
-void PlayerHandlePaletteFade(void);
-void PlayerHandleCmd12(void);
-void PlayerHandleBallThrow(void);
-void PlayerHandlePause(void);
-void PlayerHandleMoveAnimation(void);
-void PlayerHandlePrintString(void);
-void PlayerHandlePrintStringPlayerOnly(void);
-void PlayerHandleChooseAction(void);
-void PlayerHandleCmd19(void);
-void PlayerHandleChooseMove(void);
-void PlayerHandleOpenBag(void);
-void PlayerHandleChoosePokemon(void);
-void PlayerHandleCmd23(void);
-void PlayerHandleHealthBarUpdate(void);
-void PlayerHandleExpUpdate(void);
-void PlayerHandleStatusIconUpdate(void);
-void PlayerHandleStatusAnimation(void);
-void PlayerHandleStatusXor(void);
-void PlayerHandleDataTransfer(void);
-void PlayerHandleDMA3Transfer(void);
-void PlayerHandlePlayBGM(void);
-void PlayerHandleCmd32(void);
-void PlayerHandleCmd33(void);
-void PlayerHandleCmd34(void);
-void PlayerHandleCmd35(void);
-void PlayerHandleCmd36(void);
-void PlayerHandleCmd37(void);
-void PlayerHandleCmd38(void);
-void PlayerHandleCmd39(void);
-void PlayerHandleCmd40(void);
-void PlayerHandleHitAnimation(void);
-void PlayerHandleCmd42(void);
-void PlayerHandleEffectivenessSound(void);
-void PlayerHandlePlayFanfareOrBGM(void);
-void PlayerHandleFaintingCry(void);
-void PlayerHandleIntroSlide(void);
-void PlayerHandleIntroTrainerBallThrow(void);
-void PlayerHandleDrawPartyStatusSummary(void);
-void PlayerHandleCmd49(void);
-void PlayerHandleCmd50(void);
-void PlayerHandleSpriteInvisibility(void);
-void PlayerHandleBattleAnimation(void);
-void PlayerHandleLinkStandbyMsg(void);
-void PlayerHandleResetActionMoveSelection(void);
-void PlayerHandleCmd55(void);
-void nullsub_22(void);
+static void PlayerHandleSetMonData(void);
+static void PlayerHandleSetRawMonData(void);
+static void PlayerHandleLoadMonSprite(void);
+static void PlayerHandleSwitchInAnim(void);
+static void PlayerHandleReturnMonToBall(void);
+static void PlayerHandleDrawTrainerPic(void);
+static void PlayerHandleTrainerSlide(void);
+static void PlayerHandleTrainerSlideBack(void);
+static void PlayerHandleFaintAnimation(void);
+static void PlayerHandlePaletteFade(void);
+static void PlayerHandleSuccessBallThrowAnim(void);
+static void PlayerHandleBallThrowAnim(void);
+static void PlayerHandlePause(void);
+static void PlayerHandleMoveAnimation(void);
+static void PlayerHandlePrintString(void);
+static void PlayerHandlePrintStringPlayerOnly(void);
+static void PlayerHandleChooseAction(void);
+static void PlayerHandleUnknownYesNoBox(void);
+static void PlayerHandleChooseMove(void);
+static void PlayerHandleChooseItem(void);
+static void PlayerHandleChoosePokemon(void);
+static void PlayerHandleCmd23(void);
+static void PlayerHandleHealthBarUpdate(void);
+static void PlayerHandleExpUpdate(void);
+static void PlayerHandleStatusIconUpdate(void);
+static void PlayerHandleStatusAnimation(void);
+static void PlayerHandleStatusXor(void);
+static void PlayerHandleDataTransfer(void);
+static void PlayerHandleDMA3Transfer(void);
+static void PlayerHandlePlayBGM(void);
+static void PlayerHandleCmd32(void);
+static void PlayerHandleTwoReturnValues(void);
+static void PlayerHandleChosenMonReturnValue(void);
+static void PlayerHandleOneReturnValue(void);
+static void PlayerHandleOneReturnValue_Duplicate(void);
+static void PlayerHandleCmd37(void);
+static void PlayerHandleCmd38(void);
+static void PlayerHandleCmd39(void);
+static void PlayerHandleCmd40(void);
+static void PlayerHandleHitAnimation(void);
+static void PlayerHandleCmd42(void);
+static void PlayerHandleEffectivenessSound(void);
+static void PlayerHandlePlayFanfareOrBGM(void);
+static void PlayerHandleFaintingCry(void);
+static void PlayerHandleIntroSlide(void);
+static void PlayerHandleIntroTrainerBallThrow(void);
+static void PlayerHandleDrawPartyStatusSummary(void);
+static void PlayerHandleCmd49(void);
+static void PlayerHandleCmd50(void);
+static void PlayerHandleSpriteInvisibility(void);
+static void PlayerHandleBattleAnimation(void);
+static void PlayerHandleLinkStandbyMsg(void);
+static void PlayerHandleResetActionMoveSelection(void);
+static void PlayerHandleCmd55(void);
+static void nullsub_22(void);
 
-void PlayerBufferRunCommand(void);
-void HandleInputChooseTarget(void);
-void HandleInputChooseMove(void);
-void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
-void MoveSelectionDestroyCursorAt(u8 cursorPos);
-void MoveSelectionDisplayPpNumber(void);
-void MoveSelectionDisplayPpString(void);
-void MoveSelectionDisplayMoveType(void);
-void MoveSelectionDisplayMoveNames(void);
-void HandleMoveSwitchting(void);
-void sub_8058FC0(void);
-void sub_8059828(void);
-void sub_80598E0(void);
-void sub_8059544(u8 taskId);
-void sub_8059330(u8 taskId);
-void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId);
-void sub_8059400(u8 taskId);
-void sub_80595A4(u8 taskId);
-void PrintLinkStandbyMsg(void);
-u32 CopyPlayerMonData(u8 monId, u8 *dst);
-void SetPlayerMonData(u8 monId);
-void sub_805B258(u8 bank, bool8 dontClearSubstituteBit);
-void sub_805B464(void);
-void PlayerDoMoveAnimation(void);
+static void PlayerBufferRunCommand(void);
+static void HandleInputChooseTarget(void);
+static void HandleInputChooseMove(void);
+static void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
+static void MoveSelectionDestroyCursorAt(u8 cursorPos);
+static void MoveSelectionDisplayPpNumber(void);
+static void MoveSelectionDisplayPpString(void);
+static void MoveSelectionDisplayMoveType(void);
+static void MoveSelectionDisplayMoveNames(void);
+static void HandleMoveSwitchting(void);
+static void sub_8058FC0(void);
+static void sub_8059828(void);
+static void sub_80598E0(void);
+static void sub_8059544(u8 taskId);
+static void Task_PrepareToGiveExpWithExpBar(u8 taskId);
+static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId);
+static void sub_8059400(u8 taskId);
+static void sub_80595A4(u8 taskId);
+static void PrintLinkStandbyMsg(void);
+static u32 CopyPlayerMonData(u8 monId, u8 *dst);
+static void SetPlayerMonData(u8 monId);
+static void sub_805B258(u8 bank, bool8 dontClearSubstituteBit);
+static void DoSwitchOutAnimation(void);
+static void PlayerDoMoveAnimation(void);
+static void task05_08033660(u8 taskId);
+static void sub_805CE38(void);
 
-void (*const gPlayerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const gPlayerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
 {
     PlayerHandleGetMonData,
     PlayerHandleGetRawMonData,
@@ -144,16 +183,16 @@ void (*const gPlayerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
     PlayerHandleTrainerSlideBack,
     PlayerHandleFaintAnimation,
     PlayerHandlePaletteFade,
-    PlayerHandleCmd12,
-    PlayerHandleBallThrow,
+    PlayerHandleSuccessBallThrowAnim,
+    PlayerHandleBallThrowAnim,
     PlayerHandlePause,
     PlayerHandleMoveAnimation,
     PlayerHandlePrintString,
     PlayerHandlePrintStringPlayerOnly,
     PlayerHandleChooseAction,
-    PlayerHandleCmd19,
+    PlayerHandleUnknownYesNoBox,
     PlayerHandleChooseMove,
-    PlayerHandleOpenBag,
+    PlayerHandleChooseItem,
     PlayerHandleChoosePokemon,
     PlayerHandleCmd23,
     PlayerHandleHealthBarUpdate,
@@ -165,10 +204,10 @@ void (*const gPlayerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
     PlayerHandleDMA3Transfer,
     PlayerHandlePlayBGM,
     PlayerHandleCmd32,
-    PlayerHandleCmd33,
-    PlayerHandleCmd34,
-    PlayerHandleCmd35,
-    PlayerHandleCmd36,
+    PlayerHandleTwoReturnValues,
+    PlayerHandleChosenMonReturnValue,
+    PlayerHandleOneReturnValue,
+    PlayerHandleOneReturnValue_Duplicate,
     PlayerHandleCmd37,
     PlayerHandleCmd38,
     PlayerHandleCmd39,
@@ -207,7 +246,7 @@ void SetBankFuncToPlayerBufferRunCommand(void)
     gUnknown_020244CC = 0;
 }
 
-void PlayerBufferExecCompleted(void)
+static void PlayerBufferExecCompleted(void)
 {
     gBattleBankFunc[gActiveBank] = PlayerBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -223,7 +262,7 @@ void PlayerBufferExecCompleted(void)
     }
 }
 
-void PlayerBufferRunCommand(void)
+static void PlayerBufferRunCommand(void)
 {
     if (gBattleExecBuffer & gBitTable[gActiveBank])
     {
@@ -234,13 +273,13 @@ void PlayerBufferRunCommand(void)
     }
 }
 
-void CompleteOnBankSpritePosX_0(void)
+static void CompleteOnBankSpritePosX_0(void)
 {
     if (gSprites[gBankSpriteIds[gActiveBank]].pos2.x == 0)
         PlayerBufferExecCompleted();
 }
 
-void HandleInputChooseAction(void)
+static void HandleInputChooseAction(void)
 {
     u16 itemId = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
 
@@ -259,16 +298,16 @@ void HandleInputChooseAction(void)
         switch (gActionSelectionCursor[gActiveBank])
         {
         case ACTION_USE_MOVE:
-            EmitChoiceReturnValue(1, ACTION_USE_MOVE, 0);
+            EmitTwoReturnValues(1, ACTION_USE_MOVE, 0);
             break;
         case ACTION_USE_ITEM:
-            EmitChoiceReturnValue(1, ACTION_USE_ITEM, 0);
+            EmitTwoReturnValues(1, ACTION_USE_ITEM, 0);
             break;
         case ACTION_SWITCH:
-            EmitChoiceReturnValue(1, ACTION_SWITCH, 0);
+            EmitTwoReturnValues(1, ACTION_SWITCH, 0);
             break;
         case ACTION_RUN:
-            EmitChoiceReturnValue(1, ACTION_RUN, 0);
+            EmitTwoReturnValues(1, ACTION_RUN, 0);
             break;
         }
         PlayerBufferExecCompleted();
@@ -329,7 +368,7 @@ void HandleInputChooseAction(void)
                     return;
             }
             PlaySE(SE_SELECT);
-            EmitChoiceReturnValue(1, ACTION_CANCEL_PARTNER, 0);
+            EmitTwoReturnValues(1, ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted();
         }
     }
@@ -339,14 +378,14 @@ void HandleInputChooseAction(void)
     }
 }
 
-void sub_80577F0(void) // unused
+static void sub_80577F0(void) // unused
 {
     dp11b_obj_free(gActiveBank, 1);
     dp11b_obj_free(gActiveBank, 0);
     gBattleBankFunc[gActiveBank] = HandleInputChooseTarget;
 }
 
-void HandleInputChooseTarget(void)
+static void HandleInputChooseTarget(void)
 {
     s32 i;
     u8 identities[4];
@@ -375,7 +414,7 @@ void HandleInputChooseTarget(void)
     {
         PlaySE(SE_SELECT);
         gSprites[gBankSpriteIds[gMultiUsePlayerCursor]].callback = sub_8039B2C;
-        EmitChoiceReturnValue(1, 10, gMoveSelectionCursor[gActiveBank] | (gMultiUsePlayerCursor << 8));
+        EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBank] | (gMultiUsePlayerCursor << 8));
         dp11b_obj_free(gMultiUsePlayerCursor, 1);
         PlayerBufferExecCompleted();
     }
@@ -474,10 +513,7 @@ void HandleInputChooseTarget(void)
     }
 }
 
-extern u8 gNumberOfMovesToChoose;
-extern const u8 gText_BattleSwitchWhich[];
-
-void HandleInputChooseMove(void)
+static void HandleInputChooseMove(void)
 {
     bool32 canSelectTarget = FALSE;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBank][4]);
@@ -532,7 +568,7 @@ void HandleInputChooseMove(void)
 
         if (!canSelectTarget)
         {
-            EmitChoiceReturnValue(1, 10, gMoveSelectionCursor[gActiveBank] | (gMultiUsePlayerCursor << 8));
+            EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBank] | (gMultiUsePlayerCursor << 8));
             PlayerBufferExecCompleted();
         }
         else
@@ -552,7 +588,7 @@ void HandleInputChooseMove(void)
     else if (gMain.newKeys & B_BUTTON || gUnknown_020244CC > 59)
     {
         PlaySE(SE_SELECT);
-        EmitChoiceReturnValue(1, 10, 0xFFFF);
+        EmitTwoReturnValues(1, 10, 0xFFFF);
         PlayerBufferExecCompleted();
     }
     else if (gMain.newKeys & DPAD_LEFT)
@@ -623,9 +659,6 @@ void HandleInputChooseMove(void)
     }
 }
 
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-
 u32 sub_8057FBC(void) // unused
 {
     u32 var = 0;
@@ -676,7 +709,7 @@ u32 sub_8057FBC(void) // unused
     return var;
 }
 
-void HandleMoveSwitchting(void)
+static void HandleMoveSwitchting(void)
 {
     u8 perMovePPBonuses[4];
     struct ChooseMoveStruct moveStruct;
@@ -860,10 +893,7 @@ void HandleMoveSwitchting(void)
     }
 }
 
-extern u8 gBattleOutcome;
-extern void sub_817E3F4(void); // battle_link_817C95C
-
-void sub_80586F8(void)
+static void sub_80586F8(void)
 {
     if (gLinkVSyncDisabled == 0)
     {
@@ -919,19 +949,19 @@ void sub_80587B0(void)
     }
 }
 
-void CompleteOnBankSpriteCallbackDummy(void)
+static void CompleteOnBankSpriteCallbackDummy(void)
 {
     if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
         PlayerBufferExecCompleted();
 }
 
-void CompleteOnBankSpriteCallbackDummy2(void)
+static void CompleteOnBankSpriteCallbackDummy2(void)
 {
     if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
         PlayerBufferExecCompleted();
 }
 
-void sub_80588B4(void)
+static void sub_80588B4(void)
 {
     if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
     {
@@ -942,7 +972,7 @@ void sub_80588B4(void)
     }
 }
 
-void sub_8058924(void)
+static void sub_8058924(void)
 {
     if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_9 == 0xFF)
     {
@@ -951,11 +981,7 @@ void sub_8058924(void)
     }
 }
 
-extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
-
-extern bool8 IsDoubleBattle(void);
-
-void sub_805896C(void)
+static void sub_805896C(void)
 {
     bool8 var = FALSE;
 
@@ -991,11 +1017,7 @@ void sub_805896C(void)
     }
 }
 
-extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
-extern void sub_8076918(u8 bank);
-extern u8 gUnknown_03005D7C[BATTLE_BANKS_COUNT];
-
-void sub_8058B40(void)
+static void sub_8058B40(void)
 {
     bool32 r9 = FALSE;
     bool32 r8 = FALSE;
@@ -1071,31 +1093,28 @@ void sub_8058B40(void)
     }
 }
 
-extern void sub_805E408(u8 bank);
-extern void move_anim_start_t4(u8 arg0, u8 atkBank, u8 defBank, u8 tableId);
-
-void sub_8058EDC(void)
+static void sub_8058EDC(void)
 {
     if (gSprites[gHealthBoxesIds[gActiveBank]].callback == SpriteCallbackDummy
      && gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x1
      && gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
     {
-        sub_805E408(gActiveBank);
+        SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80 = 0;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x1 = 0;
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
 
         if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute)
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
+            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_MON_TO_SUBSTITUTE);
 
         gBattleBankFunc[gActiveBank] = sub_8058FC0;
     }
 }
 
-void sub_8058FC0(void)
+static void sub_8058FC0(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x40
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive
         && !IsCryPlayingOrClearCrySongs())
     {
         m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
@@ -1104,7 +1123,7 @@ void sub_8058FC0(void)
     }
 }
 
-void sub_805902C(void)
+static void sub_805902C(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80
         && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
@@ -1132,7 +1151,7 @@ void c3_0802FDF4(u8 taskId)
     }
 }
 
-void bx_t1_healthbar_update(void)
+static void CompleteOnHealthbarDone(void)
 {
     s16 hpValue = sub_8074AA0(gActiveBank, gHealthBoxesIds[gActiveBank], 0, 0);
 
@@ -1149,19 +1168,24 @@ void bx_t1_healthbar_update(void)
     }
 }
 
-void CompleteOnInactiveTextPrinter(void)
+static void CompleteOnInactiveTextPrinter(void)
 {
     if (!IsTextPrinterActive(0))
         PlayerBufferExecCompleted();
 }
 
-void sub_80591B8(u8 taskId)
-{
-    u32 monId = (u8)(gTasks[taskId].data[0]);
-    u8 bank = gTasks[taskId].data[2];
-    s16 gainedExp = gTasks[taskId].data[1];
+#define tExpTask_monId      data[0]
+#define tExpTask_gainedExp  data[1]
+#define tExpTask_bank       data[2]
+#define tExpTask_frames     data[10]
 
-    if (IsDoubleBattle() == TRUE || monId != gBattlePartyID[bank])
+static void Task_GiveExpToMon(u8 taskId)
+{
+    u32 monId = (u8)(gTasks[taskId].tExpTask_monId);
+    u8 bank = gTasks[taskId].tExpTask_bank;
+    s16 gainedExp = gTasks[taskId].tExpTask_gainedExp;
+
+    if (IsDoubleBattle() == TRUE || monId != gBattlePartyID[bank]) // give exp without the expbar
     {
         struct Pokemon *mon = &gPlayerParty[monId];
         u16 species = GetMonData(mon, MON_DATA_SPECIES);
@@ -1178,7 +1202,7 @@ void sub_80591B8(u8 taskId)
             gainedExp -= nextLvlExp - currExp;
             savedActiveBank = gActiveBank;
             gActiveBank = bank;
-            EmitChoiceReturnValue(1, 11, gainedExp);
+            EmitTwoReturnValues(1, RET_VALUE_LEVELLED_UP, gainedExp);
             gActiveBank = savedActiveBank;
 
             if (IsDoubleBattle() == TRUE
@@ -1197,15 +1221,15 @@ void sub_80591B8(u8 taskId)
     }
     else
     {
-        gTasks[taskId].func = sub_8059330;
+        gTasks[taskId].func = Task_PrepareToGiveExpWithExpBar;
     }
 }
 
-void sub_8059330(u8 taskId)
+static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
 {
-    u8 monIndex = gTasks[taskId].data[0];
-    s32 gainedExp = gTasks[taskId].data[1];
-    u8 bank = gTasks[taskId].data[2];
+    u8 monIndex = gTasks[taskId].tExpTask_monId;
+    s32 gainedExp = gTasks[taskId].tExpTask_gainedExp;
+    u8 bank = gTasks[taskId].tExpTask_bank;
     struct Pokemon *mon = &gPlayerParty[monIndex];
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
@@ -1220,20 +1244,20 @@ void sub_8059330(u8 taskId)
     gTasks[taskId].func = sub_8059400;
 }
 
-void sub_8059400(u8 taskId)
+static void sub_8059400(u8 taskId)
 {
-    if (gTasks[taskId].data[10] < 13)
+    if (gTasks[taskId].tExpTask_frames < 13)
     {
-        gTasks[taskId].data[10]++;
+        gTasks[taskId].tExpTask_frames++;
     }
     else
     {
-        u8 monId = gTasks[taskId].data[0];
-        s16 gainedExp = gTasks[taskId].data[1];
-        u8 bank = gTasks[taskId].data[2];
+        u8 monId = gTasks[taskId].tExpTask_monId;
+        s16 gainedExp = gTasks[taskId].tExpTask_gainedExp;
+        u8 bank = gTasks[taskId].tExpTask_bank;
         s16 r4;
 
-        r4 = sub_8074AA0(bank, gHealthBoxesIds[bank], 1, 0);
+        r4 = sub_8074AA0(bank, gHealthBoxesIds[bank], EXP_BAR, 0);
         SetHealthboxSpriteVisible(gHealthBoxesIds[bank]);
         if (r4 == -1)
         {
@@ -1257,7 +1281,7 @@ void sub_8059400(u8 taskId)
                 gainedExp -= expOnNextLvl - currExp;
                 savedActiveBank = gActiveBank;
                 gActiveBank = bank;
-                EmitChoiceReturnValue(1, 11, gainedExp);
+                EmitTwoReturnValues(1, RET_VALUE_LEVELLED_UP, gainedExp);
                 gActiveBank = savedActiveBank;
                 gTasks[taskId].func = sub_8059544;
             }
@@ -1272,25 +1296,25 @@ void sub_8059400(u8 taskId)
     }
 }
 
-void sub_8059544(u8 taskId)
+static void sub_8059544(u8 taskId)
 {
-    u8 bank = gTasks[taskId].data[2];
-    u8 monIndex = gTasks[taskId].data[0];
+    u8 bank = gTasks[taskId].tExpTask_bank;
+    u8 monIndex = gTasks[taskId].tExpTask_monId;
 
     if (IsDoubleBattle() == TRUE && monIndex == gBattlePartyID[bank ^ BIT_MON])
         bank ^= BIT_MON;
 
-    move_anim_start_t4(bank, bank, bank, 0);
+    DoSpecialBattleAnimation(bank, bank, bank, B_ANIM_LVL_UP);
     gTasks[taskId].func = sub_80595A4;
 }
 
-void sub_80595A4(u8 taskId)
+static void sub_80595A4(u8 taskId)
 {
-    u8 bank = gTasks[taskId].data[2];
+    u8 bank = gTasks[taskId].tExpTask_bank;
 
-    if (!gBattleSpritesDataPtr->healthBoxesData[bank].flag_x40)
+    if (!gBattleSpritesDataPtr->healthBoxesData[bank].specialAnimActive)
     {
-        u8 monIndex = gTasks[taskId].data[0];
+        u8 monIndex = gTasks[taskId].tExpTask_monId;
 
         GetMonData(&gPlayerParty[monIndex], MON_DATA_LEVEL);  // Unused return value
 
@@ -1303,19 +1327,19 @@ void sub_80595A4(u8 taskId)
     }
 }
 
-void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId)
+static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId)
 {
     u8 monIndex;
     u8 bank;
 
-    monIndex = gTasks[taskId].data[0];
+    monIndex = gTasks[taskId].tExpTask_monId;
     GetMonData(&gPlayerParty[monIndex], MON_DATA_LEVEL);  // Unused return value
-    bank = gTasks[taskId].data[2];
+    bank = gTasks[taskId].tExpTask_bank;
     gBattleBankFunc[bank] = CompleteOnInactiveTextPrinter;
     DestroyTask(taskId);
 }
 
-void sub_80596A8(void)
+static void sub_80596A8(void)
 {
     if (gSprites[gBankSpriteIds[gActiveBank]].pos1.y + gSprites[gBankSpriteIds[gActiveBank]].pos2.y > DISPLAY_HEIGHT)
     {
@@ -1329,9 +1353,9 @@ void sub_80596A8(void)
     }
 }
 
-void sub_8059744(void)
+static void sub_8059744(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x40)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
     {
         FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBank]]);
         DestroySprite(&gSprites[gBankSpriteIds[gActiveBank]]);
@@ -1340,15 +1364,13 @@ void sub_8059744(void)
     }
 }
 
-void CompleteOnInactiveTextPrinter2(void)
+static void CompleteOnInactiveTextPrinter2(void)
 {
     if (!IsTextPrinterActive(0))
         PlayerBufferExecCompleted();
 }
 
-extern void sub_81B89AC(u8 arg0);
-
-void sub_80597CC(void)
+static void sub_80597CC(void)
 {
     if (!gPaletteFade.active)
     {
@@ -1362,18 +1384,14 @@ void sub_80597CC(void)
     }
 }
 
-extern u8 gUnknown_0203CEE8;
-extern u8 gUnknown_0203CEE9;
-extern u8 gUnknown_0203CF00[];
-
-void sub_8059828(void)
+static void sub_8059828(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
         if (gUnknown_0203CEE8 == 1)
-            EmitCmd34(1, gUnknown_0203CEE9, gUnknown_0203CF00);
+            EmitChosenMonReturnValue(1, gUnknown_0203CEE9, gUnknown_0203CF00);
         else
-            EmitCmd34(1, 6, NULL);
+            EmitChosenMonReturnValue(1, 6, NULL);
 
         if ((gBattleBufferA[gActiveBank][1] & 0xF) == 1)
             PrintLinkStandbyMsg();
@@ -1382,10 +1400,7 @@ void sub_8059828(void)
     }
 }
 
-extern void sub_81AABB0(void);
-extern void nullsub_35(void);
-
-void sub_80598A4(void)
+static void sub_80598A4(void)
 {
     if (!gPaletteFade.active)
     {
@@ -1396,24 +1411,22 @@ void sub_80598A4(void)
     }
 }
 
-extern u16 gScriptItemId;
-
-void sub_80598E0(void)
+static void sub_80598E0(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        EmitCmd35(1, gScriptItemId);
+        EmitOneReturnValue(1, gScriptItemId);
         PlayerBufferExecCompleted();
     }
 }
 
-void sub_805991C(void)
+static void CompleteOnSpecialAnimDone(void)
 {
-    if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x40)
+    if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         PlayerBufferExecCompleted();
 }
 
-void DoHitAnimBlinkEffect(void)
+static void DoHitAnimBlinkSpriteEffect(void)
 {
     u8 spriteId = gBankSpriteIds[gActiveBank];
 
@@ -1432,7 +1445,7 @@ void DoHitAnimBlinkEffect(void)
     }
 }
 
-void PlayerHandleYesNoInput(void)
+static void PlayerHandleUnknownYesNoInput(void)
 {
     if (gMain.newKeys & DPAD_UP && gMultiUsePlayerCursor != 0)
     {
@@ -1454,9 +1467,9 @@ void PlayerHandleYesNoInput(void)
         PlaySE(SE_SELECT);
 
         if (gMultiUsePlayerCursor != 0)
-            EmitChoiceReturnValue(1, 0xE, 0);
+            EmitTwoReturnValues(1, 0xE, 0);
         else
-            EmitChoiceReturnValue(1, 0xD, 0);
+            EmitTwoReturnValues(1, 0xD, 0);
 
         PlayerBufferExecCompleted();
     }
@@ -1468,10 +1481,7 @@ void PlayerHandleYesNoInput(void)
     }
 }
 
-extern const u8 gText_MoveInterfacePP[];
-extern const u8 gText_MoveInterfaceType[];
-
-void MoveSelectionDisplayMoveNames(void)
+static void MoveSelectionDisplayMoveNames(void)
 {
     s32 i;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBank][4]);
@@ -1487,13 +1497,13 @@ void MoveSelectionDisplayMoveNames(void)
     }
 }
 
-void MoveSelectionDisplayPpString(void)
+static void MoveSelectionDisplayPpString(void)
 {
     StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
     BattleHandleAddTextPrinter(gDisplayedStringBattle, 7);
 }
 
-void MoveSelectionDisplayPpNumber(void)
+static void MoveSelectionDisplayPpNumber(void)
 {
     u8 *txtPtr;
     struct ChooseMoveStruct *moveInfo;
@@ -1511,9 +1521,7 @@ void MoveSelectionDisplayPpNumber(void)
     BattleHandleAddTextPrinter(gDisplayedStringBattle, 9);
 }
 
-extern const u8 gTypeNames[][7];
-
-void MoveSelectionDisplayMoveType(void)
+static void MoveSelectionDisplayMoveType(void)
 {
     u8 *txtPtr;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBank][4]);
@@ -1530,7 +1538,7 @@ void MoveSelectionDisplayMoveType(void)
     BattleHandleAddTextPrinter(gDisplayedStringBattle, 10);
 }
 
-void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
+static void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
 {
     u16 src[2];
     src[0] = arg1 + 1;
@@ -1540,7 +1548,7 @@ void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
     CopyBgTilemapBufferToVram(0);
 }
 
-void MoveSelectionDestroyCursorAt(u8 cursorPosition)
+static void MoveSelectionDestroyCursorAt(u8 cursorPosition)
 {
     u16 src[2];
     src[0] = 0x1016;
@@ -1580,21 +1588,19 @@ void SetCB2ToReshowScreenAfterMenu2(void)
     SetMainCallback2(ReshowBattleScreenAfterMenu);
 }
 
-void sub_8059D60(void)
+static void CompleteOnFinishedStatusAnimation(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x10)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].statusAnimActive)
         PlayerBufferExecCompleted();
 }
 
-void sub_8059D90(void)
+static void CompleteOnFinishedBattleAnimation(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x20)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animFromTableActive)
         PlayerBufferExecCompleted();
 }
 
-extern const u8 gText_LinkStandby[];
-
-void PrintLinkStandbyMsg(void)
+static void PrintLinkStandbyMsg(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
@@ -1604,7 +1610,7 @@ void PrintLinkStandbyMsg(void)
     }
 }
 
-void PlayerHandleGetMonData(void)
+static void PlayerHandleGetMonData(void)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
@@ -1629,7 +1635,7 @@ void PlayerHandleGetMonData(void)
     PlayerBufferExecCompleted();
 }
 
-u32 CopyPlayerMonData(u8 monId, u8 *dst)
+static u32 CopyPlayerMonData(u8 monId, u8 *dst)
 {
     struct BattlePokemon battleMon;
     struct MovePpInfo moveData;
@@ -1949,7 +1955,7 @@ void PlayerHandleGetRawMonData(void)
     PlayerBufferExecCompleted();
 }
 
-void PlayerHandleSetMonData(void)
+static void PlayerHandleSetMonData(void)
 {
     u8 monsToCheck;
     u8 i;
@@ -1971,7 +1977,7 @@ void PlayerHandleSetMonData(void)
     PlayerBufferExecCompleted();
 }
 
-void SetPlayerMonData(u8 monId)
+static void SetPlayerMonData(u8 monId)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBank][3];
     struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBank][3];
@@ -2189,7 +2195,7 @@ void SetPlayerMonData(u8 monId)
     sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 }
 
-void PlayerHandleSetRawMonData(void)
+static void PlayerHandleSetRawMonData(void)
 {
     u8 *dst = (u8 *)&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1];
     u8 i;
@@ -2200,14 +2206,14 @@ void PlayerHandleSetRawMonData(void)
     PlayerBufferExecCompleted();
 }
 
-void PlayerHandleLoadMonSprite(void)
+static void PlayerHandleLoadMonSprite(void)
 {
     BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
     gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
     gBattleBankFunc[gActiveBank] = CompleteOnBankSpritePosX_0;
 }
 
-void PlayerHandleSwitchInAnim(void)
+static void PlayerHandleSwitchInAnim(void)
 {
     ClearTemporarySpeciesSpriteData(gActiveBank, gBattleBufferA[gActiveBank][2]);
     gBattlePartyID[gActiveBank] = gBattleBufferA[gActiveBank][1];
@@ -2218,16 +2224,7 @@ void PlayerHandleSwitchInAnim(void)
     gBattleBankFunc[gActiveBank] = sub_805902C;
 }
 
-extern struct SpriteTemplate gUnknown_0202499C;
-extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
-
-extern u8 sub_80A5C6C(u16, u8);
-extern u8 sub_80A6138(u8 bank);
-extern u8 sub_80A82E4(u8 bank);
-extern u8 sub_80753E8(u16, u8);
-extern void sub_806A068(u16, u8);
-
-void sub_805B258(u8 bank, bool8 dontClearSubstituteBit)
+static void sub_805B258(u8 bank, bool8 dontClearSubstituteBit)
 {
     u16 species;
 
@@ -2258,12 +2255,12 @@ void sub_805B258(u8 bank, bool8 dontClearSubstituteBit)
     gSprites[gUnknown_03005D7C[bank]].data0 = sub_80753E8(0, 0xFF);
 }
 
-void PlayerHandleReturnMonToBall(void)
+static void PlayerHandleReturnMonToBall(void)
 {
     if (gBattleBufferA[gActiveBank][1] == 0)
     {
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4 = 0;
-        gBattleBankFunc[gActiveBank] = sub_805B464;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
+        gBattleBankFunc[gActiveBank] = DoSwitchOutAnimation;
     }
     else
     {
@@ -2274,21 +2271,21 @@ void PlayerHandleReturnMonToBall(void)
     }
 }
 
-void sub_805B464(void)
+static void DoSwitchOutAnimation(void)
 {
-    switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4)
+    switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState)
     {
     case 0:
         if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute)
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
+            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
 
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4 = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 1;
         break;
     case 1:
-        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x40)
+        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4 = 0;
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 1);
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
+            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SWITCH_OUT_MON);
             gBattleBankFunc[gActiveBank] = sub_8059744;
         }
         break;
@@ -2306,14 +2303,10 @@ struct MonCoords
 extern const struct MonCoords gTrainerBackPicCoords[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 
-extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-
-extern u16 gPartnerTrainerId;
-
 // some explanation here
 // in emerald it's possible to have a tag battle in the battle frontier facilities with AI
 // which use the front sprite for both the player and the partner as opposed to any other battles (including the one with Steven) that use the back pic as well as animate it
-void PlayerHandleDrawTrainerPic(void)
+static void PlayerHandleDrawTrainerPic(void)
 {
     s16 xPos, yPos;
     u32 trainerPicId;
@@ -2396,7 +2389,7 @@ void PlayerHandleDrawTrainerPic(void)
     gBattleBankFunc[gActiveBank] = CompleteOnBankSpriteCallbackDummy;
 }
 
-void PlayerHandleTrainerSlide(void)
+static void PlayerHandleTrainerSlide(void)
 {
     u32 trainerPicId;
 
@@ -2434,12 +2427,7 @@ void PlayerHandleTrainerSlide(void)
     gBattleBankFunc[gActiveBank] = CompleteOnBankSpriteCallbackDummy2;
 }
 
-extern void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
-extern void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
-extern void sub_80A6EEC(struct Sprite *sprite);
-extern void sub_8039C00(struct Sprite *sprite);
-
-void PlayerHandleTrainerSlideBack(void)
+static void PlayerHandleTrainerSlideBack(void)
 {
     oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBank]]);
     gSprites[gBankSpriteIds[gActiveBank]].data0 = 50;
@@ -2451,19 +2439,19 @@ void PlayerHandleTrainerSlideBack(void)
     gBattleBankFunc[gActiveBank] = sub_80588B4;
 }
 
-void PlayerHandleFaintAnimation(void)
+static void PlayerHandleFaintAnimation(void)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4 == 0)
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState == 0)
     {
         if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute)
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4++;
+            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState++;
     }
     else
     {
-        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x40)
+        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4 = 0;
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
             sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
             PlaySE12WithPanning(SE_POKE_DEAD, -64);
             gSprites[gBankSpriteIds[gActiveBank]].data1 = 0;
@@ -2474,31 +2462,31 @@ void PlayerHandleFaintAnimation(void)
     }
 }
 
-void PlayerHandlePaletteFade(void)
+static void PlayerHandlePaletteFade(void)
 {
     BeginNormalPaletteFade(-1, 2, 0, 16, 0);
     PlayerBufferExecCompleted();
 }
 
-void PlayerHandleCmd12(void)
+static void PlayerHandleSuccessBallThrowAnim(void)
 {
-    gBattleSpritesDataPtr->animationData->field_8 = 4;
+    gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), 3);
-    gBattleBankFunc[gActiveBank] = sub_805991C;
+    DoSpecialBattleAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_BALL_THROW);
+    gBattleBankFunc[gActiveBank] = CompleteOnSpecialAnimDone;
 }
 
-void PlayerHandleBallThrow(void)
+static void PlayerHandleBallThrowAnim(void)
 {
-    u8 var = gBattleBufferA[gActiveBank][1];
+    u8 ballThrowCaseId = gBattleBufferA[gActiveBank][1];
 
-    gBattleSpritesDataPtr->animationData->field_8 = var;
+    gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), 3);
-    gBattleBankFunc[gActiveBank] = sub_805991C;
+    DoSpecialBattleAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_BALL_THROW);
+    gBattleBankFunc[gActiveBank] = CompleteOnSpecialAnimDone;
 }
 
-void PlayerHandlePause(void)
+static void PlayerHandlePause(void)
 {
     u8 var = gBattleBufferA[gActiveBank][1];
 
@@ -2509,12 +2497,7 @@ void PlayerHandlePause(void)
     PlayerBufferExecCompleted();
 }
 
-extern void sub_817E0FC(u16 move, u16 weatherFlags, struct DisableStruct *disableStructPtr);
-extern bool8 mplay_80342A4(u8 bank);
-
-extern u32 gTransformedPersonalities[BATTLE_BANKS_COUNT];
-
-void PlayerHandleMoveAnimation(void)
+static void PlayerHandleMoveAnimation(void)
 {
     if (!mplay_80342A4(gActiveBank))
     {
@@ -2533,35 +2516,35 @@ void PlayerHandleMoveAnimation(void)
         }
         else
         {
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4 = 0;
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
             gBattleBankFunc[gActiveBank] = PlayerDoMoveAnimation;
             sub_817E0FC(move, gWeatherMoveAnim, gAnimDisableStructPtr);
         }
     }
 }
 
-void PlayerDoMoveAnimation(void)
+static void PlayerDoMoveAnimation(void)
 {
     u16 move = gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8);
     u8 multihit = gBattleBufferA[gActiveBank][11];
 
-    switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4)
+    switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState)
     {
     case 0:
         if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute
             && !gBattleSpritesDataPtr->bankData[gActiveBank].flag_x8)
         {
             gBattleSpritesDataPtr->bankData[gActiveBank].flag_x8 = 1;
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
+            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
         }
-        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4 = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 1;
         break;
     case 1:
-        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x40)
+        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         {
             sub_805EB9C(0);
             DoMoveAnim(move);
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4 = 2;
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 2;
         }
         break;
     case 2:
@@ -2571,28 +2554,25 @@ void PlayerDoMoveAnimation(void)
             sub_805EB9C(1);
             if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute && multihit < 2)
             {
-                move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
+                DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_MON_TO_SUBSTITUTE);
                 gBattleSpritesDataPtr->bankData[gActiveBank].flag_x8 = 0;
             }
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4 = 3;
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 3;
         }
         break;
     case 3:
-        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x40)
+        if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         {
             sub_805E394();
             TrySetBehindSubstituteSpriteBit(gActiveBank, gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
-            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_4 = 0;
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
             PlayerBufferExecCompleted();
         }
         break;
     }
 }
 
-extern void sub_817C95C(u16 stringId);
-extern void sub_81A57E4(u8 bank, u16 stringId);
-
-void PlayerHandlePrintString(void)
+static void PlayerHandlePrintString(void)
 {
     u16 *stringId;
 
@@ -2606,7 +2586,7 @@ void PlayerHandlePrintString(void)
     sub_81A57E4(gActiveBank, *stringId);
 }
 
-void PlayerHandlePrintStringPlayerOnly(void)
+static void PlayerHandlePrintStringPlayerOnly(void)
 {
     if (GetBankSide(gActiveBank) == SIDE_PLAYER)
         PlayerHandlePrintString();
@@ -2614,7 +2594,7 @@ void PlayerHandlePrintStringPlayerOnly(void)
         PlayerBufferExecCompleted();
 }
 
-void HandleChooseActionAfterDma3(void)
+static void HandleChooseActionAfterDma3(void)
 {
     if (!IsDma3ManagerBusyWithBgCopy())
     {
@@ -2624,12 +2604,7 @@ void HandleChooseActionAfterDma3(void)
     }
 }
 
-extern void sub_817F2A8(void);
-extern const u8 gText_BattleMenu[];
-extern const u8 gText_WhatWillPkmnDo[];
-extern const u8 gText_BattleYesNoChoice[];
-
-void PlayerHandleChooseAction(void)
+static void PlayerHandleChooseAction(void)
 {
     s32 i;
 
@@ -2645,7 +2620,7 @@ void PlayerHandleChooseAction(void)
     BattleHandleAddTextPrinter(gDisplayedStringBattle, 1);
 }
 
-void PlayerHandleCmd19(void)
+static void PlayerHandleUnknownYesNoBox(void)
 {
     if (GetBankSide(gActiveBank) == SIDE_PLAYER)
     {
@@ -2653,10 +2628,533 @@ void PlayerHandleCmd19(void)
         BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 12);
         gMultiUsePlayerCursor = 1;
         BattleCreateYesNoCursorAt(1);
-        gBattleBankFunc[gActiveBank] = PlayerHandleYesNoInput;
+        gBattleBankFunc[gActiveBank] = PlayerHandleUnknownYesNoInput;
     }
     else
     {
         PlayerBufferExecCompleted();
     }
+}
+
+static void HandleChooseMoveAfterDma3(void)
+{
+    if (!IsDma3ManagerBusyWithBgCopy())
+    {
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = 320;
+        gBattleBankFunc[gActiveBank] = HandleInputChooseMove;
+    }
+}
+
+static void PlayerChooseMoveInBattlePalace(void)
+{
+    if (--*(gBattleStruct->field_298 + gActiveBank) == 0)
+    {
+        gBattlePalaceMoveSelectionRngValue = gRngValue;
+        EmitTwoReturnValues(1, 10, ChooseMoveAndTargetInBattlePalace());
+        PlayerBufferExecCompleted();
+    }
+}
+
+static void PlayerHandleChooseMove(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+    {
+        *(gBattleStruct->field_298 + gActiveBank) = 8;
+        gBattleBankFunc[gActiveBank] = PlayerChooseMoveInBattlePalace;
+    }
+    else
+    {
+        InitMoveSelectionsVarsAndStrings();
+        gBattleBankFunc[gActiveBank] = HandleChooseMoveAfterDma3;
+    }
+}
+
+void InitMoveSelectionsVarsAndStrings(void)
+{
+    MoveSelectionDisplayMoveNames();
+    gMultiUsePlayerCursor = 0xFF;
+    MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBank], 0);
+    MoveSelectionDisplayPpString();
+    MoveSelectionDisplayPpNumber();
+    MoveSelectionDisplayMoveType();
+}
+
+static void PlayerHandleChooseItem(void)
+{
+    s32 i;
+
+    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    gBattleBankFunc[gActiveBank] = sub_80598A4;
+    gBankInMenu = gActiveBank;
+
+    for (i = 0; i < 3; i++)
+        gUnknown_0203CF00[i] = gBattleBufferA[gActiveBank][1 + i];
+}
+
+static void PlayerHandleChoosePokemon(void)
+{
+    s32 i;
+
+    for (i = 0; i < 3; i++)
+        gUnknown_0203CF00[i] = gBattleBufferA[gActiveBank][4 + i];
+
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA && (gBattleBufferA[gActiveBank][1] & 0xF) != 2)
+    {
+        EmitChosenMonReturnValue(1, gBattlePartyID[gActiveBank] + 1, gUnknown_0203CF00);
+        PlayerBufferExecCompleted();
+    }
+    else
+    {
+        gUnknown_03005D7C[gActiveBank] = CreateTask(TaskDummy, 0xFF);
+        gTasks[gUnknown_03005D7C[gActiveBank]].data[0] = gBattleBufferA[gActiveBank][1] & 0xF;
+        *(&gBattleStruct->field_49) = gBattleBufferA[gActiveBank][1] >> 4;
+        *(&gBattleStruct->field_8B) = gBattleBufferA[gActiveBank][2];
+        *(&gBattleStruct->field_B0) = gBattleBufferA[gActiveBank][3];
+        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        gBattleBankFunc[gActiveBank] = sub_80597CC;
+        gBankInMenu = gActiveBank;
+    }
+}
+
+static void PlayerHandleCmd23(void)
+{
+    BattleMusicStop();
+    BeginNormalPaletteFade(-1, 2, 0, 16, 0);
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleHealthBarUpdate(void)
+{
+    s16 hpVal;
+
+    LoadBattleBarGfx(0);
+    hpVal = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
+
+    if (hpVal > 0)
+        gUnknown_0203CD70 += hpVal;
+
+    if (hpVal != INSTANT_HP_BAR_DROP)
+    {
+        u32 maxHP = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MAX_HP);
+        u32 curHP = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_HP);
+
+        SetBattleBarStruct(gActiveBank, gHealthBoxesIds[gActiveBank], maxHP, curHP, hpVal);
+    }
+    else
+    {
+        u32 maxHP = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MAX_HP);
+
+        SetBattleBarStruct(gActiveBank, gHealthBoxesIds[gActiveBank], maxHP, 0, hpVal);
+        UpdateHpTextInHealthbox(gHealthBoxesIds[gActiveBank], 0, HP_CURRENT);
+    }
+
+    gBattleBankFunc[gActiveBank] = CompleteOnHealthbarDone;
+}
+
+static void PlayerHandleExpUpdate(void)
+{
+    u8 monId = gBattleBufferA[gActiveBank][1];
+
+    if (GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL) >= MAX_MON_LEVEL)
+    {
+        PlayerBufferExecCompleted();
+    }
+    else
+    {
+        s16 expPointsToGive;
+        u8 taskId;
+
+        LoadBattleBarGfx(1);
+        GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);  // unused return value
+        expPointsToGive = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
+        taskId = CreateTask(Task_GiveExpToMon, 10);
+        gTasks[taskId].tExpTask_monId = monId;
+        gTasks[taskId].tExpTask_gainedExp = expPointsToGive;
+        gTasks[taskId].tExpTask_bank = gActiveBank;
+        gBattleBankFunc[gActiveBank] = nullsub_21;
+    }
+}
+
+#undef tExpTask_monId
+#undef tExpTask_gainedExp
+#undef tExpTask_bank
+#undef tExpTask_frames
+
+static void PlayerHandleStatusIconUpdate(void)
+{
+    if (!mplay_80342A4(gActiveBank))
+    {
+        u8 bank;
+
+        UpdateHealthboxAttribute(gHealthBoxesIds[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], HEALTHBOX_STATUS_ICON);
+        bank = gActiveBank;
+        gBattleSpritesDataPtr->healthBoxesData[bank].statusAnimActive = 0;
+        gBattleBankFunc[gActiveBank] = CompleteOnFinishedStatusAnimation;
+    }
+}
+
+static void PlayerHandleStatusAnimation(void)
+{
+    if (!mplay_80342A4(gActiveBank))
+    {
+        DoStatusAnimation(gBattleBufferA[gActiveBank][1],
+                        gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8) | (gBattleBufferA[gActiveBank][4] << 16) | (gBattleBufferA[gActiveBank][5] << 24));
+        gBattleBankFunc[gActiveBank] = CompleteOnFinishedStatusAnimation;
+    }
+}
+
+static void PlayerHandleStatusXor(void)
+{
+    u8 val = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_STATUS) ^ gBattleBufferA[gActiveBank][1];
+
+    SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_STATUS, &val);
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleDataTransfer(void)
+{
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleDMA3Transfer(void)
+{
+    u32 dstArg = gBattleBufferA[gActiveBank][1]
+            | (gBattleBufferA[gActiveBank][2] << 8)
+            | (gBattleBufferA[gActiveBank][3] << 16)
+            | (gBattleBufferA[gActiveBank][4] << 24);
+    u16 sizeArg = gBattleBufferA[gActiveBank][5] | (gBattleBufferA[gActiveBank][6] << 8);
+
+    const u8 *src = &gBattleBufferA[gActiveBank][7];
+    u8 *dst = (u8*)(dstArg);
+    u32 size = sizeArg;
+
+    while (1)
+    {
+        if (size <= 0x1000)
+        {
+            DmaCopy16(3, src, dst, size);
+            break;
+        }
+        DmaCopy16(3, src, dst, 0x1000);
+        src += 0x1000;
+        dst += 0x1000;
+        size -= 0x1000;
+    }
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandlePlayBGM(void)
+{
+    PlayBGM(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleCmd32(void)
+{
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleTwoReturnValues(void)
+{
+    EmitTwoReturnValues(1, 0, 0);
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleChosenMonReturnValue(void)
+{
+    EmitChosenMonReturnValue(1, 0, NULL);
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleOneReturnValue(void)
+{
+    EmitOneReturnValue(1, 0);
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleOneReturnValue_Duplicate(void)
+{
+    EmitOneReturnValue_Duplicate(1, 0);
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleCmd37(void)
+{
+    gUnknown_02022D0C.field_0 = 0;
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleCmd38(void)
+{
+    gUnknown_02022D0C.field_0 = gBattleBufferA[gActiveBank][1];
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleCmd39(void)
+{
+    gUnknown_02022D0C.flag_x80 = 0;
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleCmd40(void)
+{
+    gUnknown_02022D0C.flag_x80 ^= 1;
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleHitAnimation(void)
+{
+    if (gSprites[gBankSpriteIds[gActiveBank]].invisible == TRUE)
+    {
+        PlayerBufferExecCompleted();
+    }
+    else
+    {
+        gDoingBattleAnim = 1;
+        gSprites[gBankSpriteIds[gActiveBank]].data1 = 0;
+        DoHitAnimHealthboxEffect(gActiveBank);
+        gBattleBankFunc[gActiveBank] = DoHitAnimBlinkSpriteEffect;
+    }
+}
+
+static void PlayerHandleCmd42(void)
+{
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleEffectivenessSound(void)
+{
+    s8 pan;
+
+    if (GetBankSide(gActiveBank) == SIDE_PLAYER)
+        pan = PAN_SIDE_PLAYER;
+    else
+        pan = PAN_SIDE_OPPONENT;
+
+    PlaySE12WithPanning(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8), pan);
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandlePlayFanfareOrBGM(void)
+{
+    if (gBattleBufferA[gActiveBank][3])
+    {
+        BattleMusicStop();
+        PlayBGM(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
+    }
+    else
+    {
+        PlayFanfare(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
+    }
+
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleFaintingCry(void)
+{
+    u16 species = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
+
+    PlayCry3(species, -25, 5);
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleIntroSlide(void)
+{
+    HandleIntroSlide(gBattleBufferA[gActiveBank][1]);
+    gUnknown_020243FC |= 1;
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleIntroTrainerBallThrow(void)
+{
+    u8 paletteNum;
+    u8 taskId;
+
+    oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBank]]);
+
+    gSprites[gBankSpriteIds[gActiveBank]].data0 = 50;
+    gSprites[gBankSpriteIds[gActiveBank]].data2 = -40;
+    gSprites[gBankSpriteIds[gActiveBank]].data4 = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
+    gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80A6EEC;
+    gSprites[gBankSpriteIds[gActiveBank]].data5 = gActiveBank;
+
+    StoreSpriteCallbackInData6(&gSprites[gBankSpriteIds[gActiveBank]], sub_805CC00);
+    StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], 1);
+
+    paletteNum = AllocSpritePalette(0xD6F8);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[gSaveBlock2Ptr->playerGender].data, 0x100 + paletteNum * 16, 32);
+    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = paletteNum;
+
+    taskId = CreateTask(task05_08033660, 5);
+    gTasks[taskId].data[0] = gActiveBank;
+
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x1)
+        gTasks[gUnknown_020244B4[gActiveBank]].func = sub_8073C30;
+
+    gBattleSpritesDataPtr->animationData->field_9_x1 = 1;
+    gBattleBankFunc[gActiveBank] = nullsub_21;
+}
+
+void sub_805CC00(struct Sprite *sprite)
+{
+    u8 bank = sprite->data5;
+
+    FreeSpriteOamMatrix(sprite);
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
+    DestroySprite(sprite);
+    BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlePartyID[bank]], bank);
+    StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], 0);
+}
+
+static void task05_08033660(u8 taskId)
+{
+    if (gTasks[taskId].data[1] < 31)
+    {
+        gTasks[taskId].data[1]++;
+    }
+    else
+    {
+        u8 savedActiveBank = gActiveBank;
+
+        gActiveBank = gTasks[taskId].data[0];
+        if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        {
+            gBattleBufferA[gActiveBank][1] = gBattlePartyID[gActiveBank];
+            sub_805B258(gActiveBank, FALSE);
+        }
+        else
+        {
+            gBattleBufferA[gActiveBank][1] = gBattlePartyID[gActiveBank];
+            sub_805B258(gActiveBank, FALSE);
+            gActiveBank ^= BIT_MON;
+            gBattleBufferA[gActiveBank][1] = gBattlePartyID[gActiveBank];
+            BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+            sub_805B258(gActiveBank, FALSE);
+            gActiveBank ^= BIT_MON;
+        }
+        gBattleBankFunc[gActiveBank] = sub_8058B40;
+        gActiveBank = savedActiveBank;
+        DestroyTask(taskId);
+    }
+}
+
+static void PlayerHandleDrawPartyStatusSummary(void)
+{
+    if (gBattleBufferA[gActiveBank][1] != 0 && GetBankSide(gActiveBank) == SIDE_PLAYER)
+    {
+        PlayerBufferExecCompleted();
+    }
+    else
+    {
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x1 = 1;
+        gUnknown_020244B4[gActiveBank] = CreatePartyStatusSummarySprites(gActiveBank, (struct HpAndStatus *)&gBattleBufferA[gActiveBank][4], gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][2]);
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_5 = 0;
+
+        if (gBattleBufferA[gActiveBank][2] != 0)
+            gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_5 = 0x5D;
+
+        gBattleBankFunc[gActiveBank] = sub_805CE38;
+    }
+}
+
+static void sub_805CE38(void)
+{
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_5++ > 0x5C)
+    {
+        gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_5 = 0;
+        PlayerBufferExecCompleted();
+    }
+}
+
+static void PlayerHandleCmd49(void)
+{
+    if (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x1)
+        gTasks[gUnknown_020244B4[gActiveBank]].func = sub_8073C30;
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleCmd50(void)
+{
+    dp11b_obj_free(gActiveBank, 1);
+    dp11b_obj_free(gActiveBank, 0);
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleSpriteInvisibility(void)
+{
+    if (AnimBankSpriteExists(gActiveBank))
+    {
+        gSprites[gBankSpriteIds[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
+        SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);
+    }
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleBattleAnimation(void)
+{
+    if (!mplay_80342A4(gActiveBank))
+    {
+        u8 animationId = gBattleBufferA[gActiveBank][1];
+        u16 argument = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
+
+        if (DoBattleAnimationFromTable(gActiveBank, gActiveBank, gActiveBank, animationId, argument))
+            PlayerBufferExecCompleted();
+        else
+            gBattleBankFunc[gActiveBank] = CompleteOnFinishedBattleAnimation;
+
+        sub_817E32C(animationId);
+    }
+}
+
+static void PlayerHandleLinkStandbyMsg(void)
+{
+    sub_81851A8(&gBattleBufferA[gActiveBank][2]);
+    switch (gBattleBufferA[gActiveBank][1])
+    {
+    case 0:
+        PrintLinkStandbyMsg();
+        // fall through
+    case 1:
+        dp11b_obj_free(gActiveBank, 1);
+        dp11b_obj_free(gActiveBank, 0);
+        break;
+    case 2:
+        PrintLinkStandbyMsg();
+        break;
+    }
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleResetActionMoveSelection(void)
+{
+    switch (gBattleBufferA[gActiveBank][1])
+    {
+    case RESET_ACTION_MOVE_SELECTION:
+        gActionSelectionCursor[gActiveBank] = 0;
+        gMoveSelectionCursor[gActiveBank] = 0;
+        break;
+    case RESET_ACTION_SELECTION:
+        gActionSelectionCursor[gActiveBank] = 0;
+        break;
+    case RESET_MOVE_SELECTION:
+        gMoveSelectionCursor[gActiveBank] = 0;
+        break;
+    }
+    PlayerBufferExecCompleted();
+}
+
+static void PlayerHandleCmd55(void)
+{
+    sub_81851A8(&gBattleBufferA[gActiveBank][4]);
+    gBattleOutcome = gBattleBufferA[gActiveBank][1];
+    gSaveBlock2Ptr->field_CA9_b = gBattleBufferA[gActiveBank][2];
+    FadeOutMapMusic(5);
+    BeginFastPaletteFade(3);
+    PlayerBufferExecCompleted();
+    gBattleBankFunc[gActiveBank] = sub_80587B0;
+}
+
+static void nullsub_22(void)
+{
 }

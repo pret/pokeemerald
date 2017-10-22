@@ -238,7 +238,6 @@ static void sub_8038F34(void);
 static void sub_80392A8(void);
 static void sub_803937C(void);
 static void sub_803939C(void);
-void oac_poke_opponent(struct Sprite *sprite);
 static void sub_803980C(struct Sprite *sprite);
 static void sub_8039838(struct Sprite *sprite);
 static void sub_8039894(struct Sprite *sprite);
@@ -4025,7 +4024,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     else
                     {
-                        EmitOpenBag(0, gBattleStruct->field_60[gActiveBank]);
+                        EmitChooseItem(0, gBattleStruct->field_60[gActiveBank]);
                         MarkBufferBankForExecution(gActiveBank);
                     }
                     break;
@@ -4070,7 +4069,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case ACTION_POKEBLOCK_CASE:
-                    EmitOpenBag(0, gBattleStruct->field_60[gActiveBank]);
+                    EmitChooseItem(0, gBattleStruct->field_60[gActiveBank]);
                     MarkBufferBankForExecution(gActiveBank);
                     break;
                 case ACTION_CANCEL_PARTNER:

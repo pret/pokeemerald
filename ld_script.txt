@@ -62,7 +62,6 @@ SECTIONS {
         src/battle_script_commands.o(.text);
         asm/battle_5.o(.text);
         src/battle_controller_player.o(.text);
-        asm/battle_controller_player.o(.text);
         asm/battle_7.o(.text);
         src/battle_controller_opponent.o(.text);
         asm/battle_controller_opponent.o(.text);
@@ -117,7 +116,7 @@ SECTIONS {
         src/palette.o(.text);
         src/sound.o(.text);
         src/battle_anim.o(.text);
-        asm/rom_80A5C6C.o(.text);
+        asm/battle_anim_80A5C6C.o(.text);
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
         asm/battle_anim_80A9C70.o(.text);

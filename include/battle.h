@@ -750,38 +750,39 @@ extern struct BattleStruct* gBattleStruct;
 #define MOVE_EFFECT_AFFECTS_USER        0x40
 #define MOVE_EFFECT_CERTAIN             0x80
 
-// battle animations ids
+// table ids for general animations
+#define B_ANIM_CASTFORM_CHANGE          0x0
+#define B_ANIM_STATS_CHANGE             0x1
+#define B_ANIM_SUBSTITUTE_FADE          0x2
+#define B_ANIM_SUBSTITUTE_APPEAR        0x3
+#define B_ANIM_x4                       0x4
+#define B_ANIM_ITEM_KNOCKOFF            0x5
+#define B_ANIM_TURN_TRAP                0x6
+#define B_ANIM_ITEM_EFFECT              0x7
+#define B_ANIM_SMOKEBALL_ESCAPE         0x8
+#define B_ANIM_HANGED_ON                0x9
+#define B_ANIM_RAIN_CONTINUES           0xA
+#define B_ANIM_SUN_CONTINUES            0xB
+#define B_ANIM_SANDSTORM_CONTINUES      0xC
+#define B_ANIM_HAIL_CONTINUES           0xD
+#define B_ANIM_LEECH_SEED_DRAIN         0xE
+#define B_ANIM_MON_HIT                  0xF
+#define B_ANIM_ITEM_STEAL               0x10
+#define B_ANIM_SNATCH_MOVE              0x11
+#define B_ANIM_FUTURE_SIGHT_HIT         0x12
+#define B_ANIM_x13                      0x13
+#define B_ANIM_x14                      0x14
+#define B_ANIM_INGRAIN_HEAL             0x15
+#define B_ANIM_WISH_HEAL                0x16
 
-#define B_ANIM_CASTFORM_CHANGE      0x0
-#define B_ANIM_STATS_CHANGE         0x1
-#define B_ANIM_SUBSTITUTE_FADE      0x2
-#define B_ANIM_SUBSTITUTE_APPEAR    0x3
-#define B_ANIM_x4                   0x4
-#define B_ANIM_ITEM_KNOCKOFF        0x5
-#define B_ANIM_TURN_TRAP            0x6
-#define B_ANIM_ITEM_EFFECT          0x7
-#define B_ANIM_SMOKEBALL_ESCAPE     0x8
-#define B_ANIM_HANGED_ON            0x9
-#define B_ANIM_RAIN_CONTINUES       0xA
-#define B_ANIM_SUN_CONTINUES        0xB
-#define B_ANIM_SANDSTORM_CONTINUES  0xC
-#define B_ANIM_HAIL_CONTINUES       0xD
-#define B_ANIM_LEECH_SEED_DRAIN     0xE
-#define B_ANIM_MON_HIT              0xF
-#define B_ANIM_ITEM_STEAL           0x10
-#define B_ANIM_SNATCH_MOVE          0x11
-#define B_ANIM_FUTURE_SIGHT_HIT     0x12
-#define B_ANIM_x13                  0x13
-#define B_ANIM_x14                  0x14
-#define B_ANIM_INGRAIN_HEAL         0x15
-#define B_ANIM_WISH_HEAL            0x16
-#define B_ANIM_x17                  0x17
-#define B_ANIM_x18                  0x18
-#define B_ANIM_x19                  0x19
-#define B_ANIM_x1A                  0x1A
-#define B_ANIM_x1B                  0x1B
-#define B_ANIM_x1C                  0x1C
-#define B_ANIM_x1D                  0x1D
+// special animations table
+#define B_ANIM_LVL_UP                   0x0
+#define B_ANIM_SWITCH_OUT_MON           0x1
+#define B_ANIM_SPECIAL_2                0x2
+#define B_ANIM_BALL_THROW               0x3
+#define B_ANIM_SPECIAL_4                0x4
+#define B_ANIM_SUBSTITUTE_TO_MON        0x5
+#define B_ANIM_MON_TO_SUBSTITUTE        0x6
 
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
@@ -868,6 +869,13 @@ bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn);
 void sub_805EB9C(u8 arg0);
 void sub_805E394(void);
 void TrySetBehindSubstituteSpriteBit(u8 bank, u16 move);
+void DoStatusAnimation(bool8 isStatus2, u32 status);
+void DoSpecialBattleAnimation(u8 activeBank, u8 atkBank, u8 defBank, u8 tableId);
+bool8 DoBattleAnimationFromTable(u8 active, u8 atkBank, u8 defBank, u8 tableId, u16 argument);
+void SetBattleSpriteInvisibilityBitToSpriteInvisibility(u8 bank);
+u16 ChooseMoveAndTargetInBattlePalace(void);
+void LoadBattleBarGfx(u8 arg0);
+bool8 mplay_80342A4(u8 bank);
 
 enum
 {
@@ -905,7 +913,7 @@ struct BattleAnimationInfo
     u8 field_5;
     u8 field_6;
     u8 field_7;
-    u8 field_8;
+    u8 ballThrowCaseId;
     u8 field_9_x1 : 1;
     u8 field_9_x2 : 1;
     u8 field_9_x1C : 3;
@@ -920,9 +928,9 @@ struct BattleHealthboxInfo
     u8 flag_x2 : 1;
     u8 flag_x4 : 1;
     u8 flag_x8 : 1;
-    u8 flag_x10 : 1;
-    u8 flag_x20 : 1;
-    u8 flag_x40 : 1;
+    u8 statusAnimActive : 1; // x10
+    u8 animFromTableActive : 1; // x20
+    u8 specialAnimActive : 1; //x40
     u8 flag_x80 : 1;
     u8 field_1_x1 : 1;
     u8 field_1_x2 : 1;
@@ -934,7 +942,7 @@ struct BattleHealthboxInfo
     u8 field_1_x80 : 1;
     u8 field_2;
     u8 field_3;
-    u8 field_4;
+    u8 animationState;
     u8 field_5;
     u8 field_6;
     u8 field_7;
@@ -949,7 +957,7 @@ struct BattleBarInfo
     u8 healthboxSpriteId;
     s32 maxValue;
     s32 currentValue;
-    s32 field_C;
+    s32 receivedValue;
     s32 field_10;
 };
 

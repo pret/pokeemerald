@@ -103,13 +103,13 @@ _0815942A:
 	movs r1, 0x7
 _0815942E:
 	movs r2, 0
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 	b _08159440
 _08159436:
 	movs r0, 0x1
 	movs r1, 0x8
 	movs r2, 0
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 _08159440:
 	bl SafariBufferExecCompleted
 	b _0815954E
@@ -399,7 +399,7 @@ sub_8159698: @ 8159698
 	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl EmitCmd35
+	bl EmitOneReturnValue
 	bl SafariBufferExecCompleted
 _081596BE:
 	pop {r0}
@@ -707,7 +707,7 @@ sub_8159910: @ 8159910
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x4
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -746,7 +746,7 @@ sub_8159964: @ 8159964
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x4
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -1227,7 +1227,7 @@ dp01t_2E_6_battle_intro: @ 8159D5C
 	adds r1, 0x1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl battle_intro_launch
+	bl HandleIntroSlide
 	ldr r2, =gUnknown_020243FC
 	ldrh r0, [r2]
 	movs r1, 0x1
@@ -1329,7 +1329,7 @@ sub_8159E1C: @ 8159E1C
 	str r4, [sp]
 	adds r0, r2, 0
 	adds r1, r2, 0
-	bl move_anim_start_t3
+	bl DoBattleAnimationFromTable
 	lsls r0, 24
 	cmp r0, 0
 	beq _08159E5C

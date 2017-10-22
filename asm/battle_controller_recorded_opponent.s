@@ -1161,7 +1161,7 @@ sub_8186EA4: @ 8186EA4
 	adds r1, r3, 0
 	adds r2, r3, 0
 	movs r3, 0x6
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _08186EE4:
 	ldr r0, =gBattleBankFunc
 	ldrb r1, [r4]
@@ -1310,7 +1310,7 @@ sub_8186F94: @ 8186F94
 	ldrb r0, [r0]
 	bl SetHealthboxSpriteVisible
 	ldrb r0, [r5]
-	bl sub_805E408
+	bl SetBattleSpriteInvisibilityBitToSpriteInvisibility
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -3968,7 +3968,7 @@ _08188828:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _08188842:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -3993,7 +3993,7 @@ _08188856:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x2
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -4301,7 +4301,7 @@ sub_8188AF8: @ 8188AF8
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _08188B2C:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -4584,7 +4584,7 @@ _08188D6E:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _08188D90:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -4642,7 +4642,7 @@ _08188DCE:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r0, [r0]
@@ -4754,7 +4754,7 @@ sub_8188EF0: @ 8188EF0
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -4779,13 +4779,13 @@ sub_8188F20: @ 8188F20
 	ands r0, r1
 	cmp r0, 0
 	beq _08188F48
-	bl sub_805D19C
+	bl ChooseMoveAndTargetInBattlePalace
 	adds r2, r0, 0
 	lsls r2, 16
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 	b _08188F6C
 	.pool
 _08188F48:
@@ -4803,7 +4803,7 @@ _08188F48:
 	orrs r2, r4
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 _08188F6C:
 	bl RecordedOpponentBufferExecCompleted
 	pop {r4,r5}
@@ -4839,7 +4839,7 @@ sub_8188F88: @ 8188F88
 	ldrb r1, [r0]
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitCmd34
+	bl EmitChosenMonReturnValue
 	bl RecordedOpponentBufferExecCompleted
 	pop {r4}
 	pop {r0}
@@ -5041,7 +5041,7 @@ sub_8189144: @ 8189144
 	ldrb r2, [r3]
 	lsls r2, 24
 	orrs r1, r2
-	bl move_anim_start_t2_for_situation
+	bl DoStatusAnimation
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -5237,7 +5237,7 @@ _081892E0:
 	movs r1, 0
 	strh r1, [r0, 0x30]
 	ldrb r0, [r4]
-	bl sub_80769F4
+	bl DoHitAnimHealthboxEffect
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -5371,7 +5371,7 @@ sub_8189404: @ 8189404
 	adds r1, 0x1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl battle_intro_launch
+	bl HandleIntroSlide
 	ldr r2, =gUnknown_020243FC
 	ldrh r0, [r2]
 	movs r1, 0x1
@@ -5848,7 +5848,7 @@ sub_8189800: @ 8189800
 	orrs r0, r1
 	strb r0, [r2]
 	ldrb r0, [r4]
-	bl sub_805E408
+	bl SetBattleSpriteInvisibilityBitToSpriteInvisibility
 _08189846:
 	bl RecordedOpponentBufferExecCompleted
 	pop {r4}
@@ -5884,7 +5884,7 @@ sub_8189860: @ 8189860
 	str r4, [sp]
 	adds r0, r2, 0
 	adds r1, r2, 0
-	bl move_anim_start_t3
+	bl DoBattleAnimationFromTable
 	lsls r0, 24
 	cmp r0, 0
 	beq _081898AC

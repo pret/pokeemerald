@@ -47,18 +47,6 @@ extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const struct BattleAnimBackground gBattleAnimBackgroundTable[];
 
-extern void sub_80A8278(void); // rom_80A5C6C.s
-extern void sub_80A6B30(struct UnknownAnimStruct2*); // rom_80A5C6C.s
-extern void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1); // rom_80A5C6C.s
-extern u8 sub_80A82E4(u8 bank); // rom_80A5C6C.s
-extern u8 sub_80A5C6C(u8 bank, u8 attributeId); // rom_80A5C6C.s
-extern bool8 AnimBankSpriteExists(u8 bank); // rom_80A5C6C.s
-extern void sub_80A6C68(u8 arg0); // rom_80A5C6C.s
-extern u8 GetAnimBankSpriteId(u8 wantedBank); // rom_80A5C6C.s
-extern u8 sub_80A6D94(void);
-extern u8 sub_80A8364(u8);
-extern bool8 IsDoubleBattle(void);
-
 // this file's functions
 static void ScriptCmd_loadspritegfx(void);
 static void ScriptCmd_unloadspritegfx(void);
@@ -234,10 +222,10 @@ void DoMoveAnim(u16 move)
 {
     gAnimBankAttacker = gBankAttacker;
     gAnimBankTarget = gBankTarget;
-    DoBattleAnim(gBattleAnims_Moves, move, TRUE);
+    LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
 }
 
-void DoBattleAnim(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim)
+void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim)
 {
     s32 i;
 
@@ -1281,7 +1269,7 @@ static void ScriptCmd_changebg(void)
 
 s8 BattleAnimAdjustPanning(s8 pan)
 {
-    if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gAnimBankAttacker].flag_x10)
+    if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gAnimBankAttacker].statusAnimActive)
     {
         if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
             pan = PAN_SIDE_OPPONENT;
@@ -1323,7 +1311,7 @@ s8 BattleAnimAdjustPanning(s8 pan)
 
 s8 BattleAnimAdjustPanning2(s8 pan)
 {
-    if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gAnimBankAttacker].flag_x10)
+    if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gAnimBankAttacker].statusAnimActive)
     {
         if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
             pan = PAN_SIDE_OPPONENT;

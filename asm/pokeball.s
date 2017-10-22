@@ -2685,8 +2685,8 @@ _080769EA:
 	.pool
 	thumb_func_end sub_80769CC
 
-	thumb_func_start sub_80769F4
-sub_80769F4: @ 80769F4
+	thumb_func_start DoHitAnimHealthboxEffect
+DoHitAnimHealthboxEffect: @ 80769F4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2714,7 +2714,7 @@ sub_80769F4: @ 80769F4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80769F4
+	thumb_func_end DoHitAnimHealthboxEffect
 
 	thumb_func_start oamc_804BEB4
 oamc_804BEB4: @ 8076A38

@@ -736,7 +736,7 @@ sub_814B4E0: @ 814B4E0
 	cmp r1, r0
 	bne _0814B532
 	adds r0, r3, 0
-	bl sub_805E408
+	bl SetBattleSpriteInvisibilityBitToSpriteInvisibility
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
@@ -751,7 +751,7 @@ sub_814B4E0: @ 814B4E0
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _0814B526:
 	ldr r0, =gBattleBankFunc
 	ldrb r1, [r4]
@@ -3554,7 +3554,7 @@ _0814CECC:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _0814CEE6:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -3579,7 +3579,7 @@ _0814CEFA:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x1
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -3893,7 +3893,7 @@ sub_814D19C: @ 814D19C
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _0814D1D0:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -4216,7 +4216,7 @@ _0814D46E:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _0814D490:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -4274,7 +4274,7 @@ _0814D4CE:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r0, [r0]
@@ -4611,7 +4611,7 @@ sub_814D7B0: @ 814D7B0
 	ldrb r2, [r3]
 	lsls r2, 24
 	orrs r1, r2
-	bl move_anim_start_t2_for_situation
+	bl DoStatusAnimation
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -4807,7 +4807,7 @@ _0814D94C:
 	movs r1, 0
 	strh r1, [r0, 0x30]
 	ldrb r0, [r4]
-	bl sub_80769F4
+	bl DoHitAnimHealthboxEffect
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -4942,7 +4942,7 @@ dp01t_2E_4_battle_intro: @ 814DA74
 	adds r1, 0x1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl battle_intro_launch
+	bl HandleIntroSlide
 	ldr r2, =gUnknown_020243FC
 	ldrh r0, [r2]
 	movs r1, 0x1
@@ -5503,7 +5503,7 @@ sub_814DF40: @ 814DF40
 	orrs r0, r1
 	strb r0, [r2]
 	ldrb r0, [r4]
-	bl sub_805E408
+	bl SetBattleSpriteInvisibilityBitToSpriteInvisibility
 _0814DF86:
 	bl LinkPartnerBufferExecCompleted
 	pop {r4}
@@ -5540,7 +5540,7 @@ sub_814DFA0: @ 814DFA0
 	adds r0, r2, 0
 	adds r1, r2, 0
 	adds r3, r6, 0
-	bl move_anim_start_t3
+	bl DoBattleAnimationFromTable
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814DFF0

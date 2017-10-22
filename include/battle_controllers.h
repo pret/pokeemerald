@@ -76,6 +76,16 @@ enum
 #define BALL_3_SHAKES_SUCCESS   4
 #define BALL_TRAINER_BLOCK      5
 
+#define RET_VALUE_LEVELLED_UP   11
+
+#define INSTANT_HP_BAR_DROP     32767
+
+struct UnusedControllerStruct
+{
+    u8 field_0 : 7;
+    u8 flag_x80 : 1;
+};
+
 struct HpAndStatus
 {
     u16 hp;
@@ -113,14 +123,14 @@ enum
     CONTROLLER_TRAINERSLIDEBACK,
     CONTROLLER_FAINTANIMATION,
     CONTROLLER_PALETTEFADE,
-    CONTROLLER_12,
-    CONTROLLER_BALLTHROW,
+    CONTROLLER_SUCCESSBALLTHROWANIM,
+    CONTROLLER_BALLTHROWANIM,
     CONTROLLER_PAUSE,
     CONTROLLER_MOVEANIMATION,
     CONTROLLER_PRINTSTRING,
     CONTROLLER_PRINTSTRINGPLAYERONLY,
     CONTROLLER_CHOOSEACTION,
-    CONTROLLER_YESNOBOX,
+    CONTROLLER_UNKNOWNYESNOBOX,
     CONTROLLER_CHOOSEMOVE,
     CONTROLLER_OPENBAG,
     CONTROLLER_CHOOSEPOKEMON,
@@ -134,10 +144,10 @@ enum
     CONTROLLER_DMA3TRANSFER,
     CONTROLLER_31,
     CONTROLLER_32,
-    CONTROLLER_CHOICERETURNVALUE,
-    CONTROLLER_34,
-    CONTROLLER_35,
-    CONTROLLER_36,
+    CONTROLLER_TWORETURNVALUES,
+    CONTROLLER_CHOSENMONRETURNVALUE,
+    CONTROLLER_ONERETURNVALUE,
+    CONTROLLER_ONERETURNVALUE_DUPLICATE,
     CONTROLLER_37,
     CONTROLLER_38,
     CONTROLLER_39,
@@ -182,16 +192,16 @@ void EmitTrainerSlide(u8 bufferId);
 void EmitTrainerSlideBack(u8 bufferId);
 void EmitFaintAnimation(u8 bufferId);
 void EmitPaletteFade(u8 bufferId); // unused
-void EmitCmd12(u8 bufferId); // unused
-void EmitBallThrow(u8 bufferId, u8 caseId);
+void EmitSuccessBallThrowAnim(u8 bufferId); // unused
+void EmitBallThrowAnim(u8 bufferId, u8 caseId);
 void EmitPause(u8 bufferId, u8 toWait, void *data); // unused
 void EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct *disableStructPtr, u8 multihit);
 void EmitPrintString(u8 bufferId, u16 stringId);
 void EmitPrintStringPlayerOnly(u8 bufferId, u16 stringId);
 void EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2);
-void EmitYesNoBox(u8 bufferId);
+void EmitUnknownYesNoBox(u8 bufferId);
 void EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct *movePpData);
-void EmitOpenBag(u8 bufferId, u8* arg1);
+void EmitChooseItem(u8 bufferId, u8* arg1);
 void EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, u8* arg4);
 void EmitCmd23(u8 bufferId); // unused
 void EmitHealthBarUpdate(u8 bufferId, u16 hpValue);
@@ -203,14 +213,14 @@ void EmitDataTransfer(u8 bufferId, u16 size, void *data);
 void EmitDMA3Transfer(u8 bufferId, void *dst, u16 size, void *data); // unused
 void EmitPlayBGM(u8 bufferId, u16 songId, void *unusedDumbDataParameter); // unused
 void EmitCmd32(u8 bufferId, u16 size, void *c); // unused
-void EmitChoiceReturnValue(u8 bufferId, u8 arg1, u16 arg2);
-void EmitCmd34(u8 bufferId, u8 b, u8 *c);
-void EmitCmd35(u8 bufferId, u16 b);
-void EmitCmd36(u8 bufferId, u16 b);
-void EmitCmd37(u8 bufferId);
-void EmitCmd38(u8 bufferId, u8 b);
-void EmitCmd39(u8 bufferId);
-void EmitCmd40(u8 bufferId);
+void EmitTwoReturnValues(u8 bufferId, u8 arg1, u16 arg2);
+void EmitChosenMonReturnValue(u8 bufferId, u8 b, u8 *c);
+void EmitOneReturnValue(u8 bufferId, u16 arg1);
+void EmitOneReturnValue_Duplicate(u8 bufferId, u16 b);
+void EmitCmd37(u8 bufferId); // unused
+void EmitCmd38(u8 bufferId, u8 b); // unused
+void EmitCmd39(u8 bufferId); // unused
+void EmitCmd40(u8 bufferId); // unused
 void EmitHitAnimation(u8 bufferId);
 void EmitCmd42(u8 bufferId);
 void EmitEffectivenessSound(u8 bufferId, u16 songId);
@@ -230,8 +240,15 @@ void EmitCmd55(u8 bufferId, u8 arg1);
 // player controller
 void SetBankFuncToPlayerBufferRunCommand(void);
 void nullsub_21(void);
+void PlayerHandleGetRawMonData(void);
+void sub_80587B0(void);
+void sub_805CC00(struct Sprite *sprite);
+void SetCB2ToReshowScreenAfterMenu(void);
+void SetCB2ToReshowScreenAfterMenu2(void);
+void c3_0802FDF4(u8 taskId);
 void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
 void ActionSelectionDestroyCursorAt(u8 cursorPos);
+void InitMoveSelectionsVarsAndStrings(void);
 
 // recorded player controller
 void SetBankFuncToRecordedPlayerBufferRunCommand(void);

@@ -645,7 +645,7 @@ _081BB2E2:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 	strb r5, [r4]
 	bl IsDoubleBattle
 	lsls r0, 24
@@ -918,7 +918,7 @@ _081BB514:
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xB
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 	strb r5, [r4]
 	ldr r0, =sub_81BB628
 	str r0, [r6]
@@ -981,7 +981,7 @@ _081BB65C:
 	adds r1, r4, 0
 	adds r2, r4, 0
 	movs r3, 0
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
@@ -1311,7 +1311,7 @@ sub_81BB92C: @ 81BB92C
 	cmp r1, r0
 	bne _081BB97E
 	adds r0, r3, 0
-	bl sub_805E408
+	bl SetBattleSpriteInvisibilityBitToSpriteInvisibility
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldrb r2, [r4]
@@ -1326,7 +1326,7 @@ sub_81BB92C: @ 81BB92C
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _081BB972:
 	ldr r0, =gBattleBankFunc
 	ldrb r1, [r4]
@@ -4129,7 +4129,7 @@ _081BD318:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _081BD332:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -4154,7 +4154,7 @@ _081BD346:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x1
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -4517,7 +4517,7 @@ sub_81BD674: @ 81BD674
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _081BD6A8:
 	ldr r0, [r6]
 	ldrb r1, [r5]
@@ -4828,7 +4828,7 @@ _081BD92A:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _081BD94C:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -4886,7 +4886,7 @@ _081BD98A:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r0, [r0]
@@ -5068,7 +5068,7 @@ _081BDB3C:
 	orrs r2, r5
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4-r6}
 	pop {r0}
@@ -5138,7 +5138,7 @@ _081BDBD0:
 	lsrs r1, 24
 	movs r0, 0x1
 	movs r2, 0
-	bl EmitCmd34
+	bl EmitChosenMonReturnValue
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4-r6}
 	pop {r0}
@@ -5398,7 +5398,7 @@ sub_81BDE14: @ 81BDE14
 	ldrb r2, [r3]
 	lsls r2, 24
 	orrs r1, r2
-	bl move_anim_start_t2_for_situation
+	bl DoStatusAnimation
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -5594,7 +5594,7 @@ _081BDFB0:
 	movs r1, 0
 	strh r1, [r0, 0x30]
 	ldrb r0, [r4]
-	bl sub_80769F4
+	bl DoHitAnimHealthboxEffect
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -5729,7 +5729,7 @@ dp01t_2E_3_battle_intro: @ 81BE0D8
 	adds r1, 0x1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl battle_intro_launch
+	bl HandleIntroSlide
 	ldr r2, =gUnknown_020243FC
 	ldrh r0, [r2]
 	movs r1, 0x1
@@ -6236,7 +6236,7 @@ sub_81BE53C: @ 81BE53C
 	orrs r0, r1
 	strb r0, [r2]
 	ldrb r0, [r4]
-	bl sub_805E408
+	bl SetBattleSpriteInvisibilityBitToSpriteInvisibility
 _081BE582:
 	bl PlayerPartnerBufferExecCompleted
 	pop {r4}
@@ -6272,7 +6272,7 @@ sub_81BE59C: @ 81BE59C
 	str r4, [sp]
 	adds r0, r2, 0
 	adds r1, r2, 0
-	bl move_anim_start_t3
+	bl DoBattleAnimationFromTable
 	lsls r0, 24
 	cmp r0, 0
 	beq _081BE5E8

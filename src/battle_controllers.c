@@ -984,9 +984,9 @@ void EmitSetRawMonData(u8 bufferId, u8 monId, u8 bytes, void *data)
 void EmitLoadMonSprite(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_LOADMONSPRITE;
-    gBattleBuffersTransferData[1] = 4;
-    gBattleBuffersTransferData[2] = 4;
-    gBattleBuffersTransferData[3] = 4;
+    gBattleBuffersTransferData[1] = CONTROLLER_LOADMONSPRITE;
+    gBattleBuffersTransferData[2] = CONTROLLER_LOADMONSPRITE;
+    gBattleBuffersTransferData[3] = CONTROLLER_LOADMONSPRITE;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1009,27 +1009,27 @@ void EmitReturnMonToBall(u8 bufferId, u8 arg1)
 void EmitDrawTrainerPic(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_DRAWTRAINERPIC;
-    gBattleBuffersTransferData[1] = 7;
-    gBattleBuffersTransferData[2] = 7;
-    gBattleBuffersTransferData[3] = 7;
+    gBattleBuffersTransferData[1] = CONTROLLER_DRAWTRAINERPIC;
+    gBattleBuffersTransferData[2] = CONTROLLER_DRAWTRAINERPIC;
+    gBattleBuffersTransferData[3] = CONTROLLER_DRAWTRAINERPIC;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitTrainerSlide(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_TRAINERSLIDE;
-    gBattleBuffersTransferData[1] = 8;
-    gBattleBuffersTransferData[2] = 8;
-    gBattleBuffersTransferData[3] = 8;
+    gBattleBuffersTransferData[1] = CONTROLLER_TRAINERSLIDE;
+    gBattleBuffersTransferData[2] = CONTROLLER_TRAINERSLIDE;
+    gBattleBuffersTransferData[3] = CONTROLLER_TRAINERSLIDE;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitTrainerSlideBack(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_TRAINERSLIDEBACK;
-    gBattleBuffersTransferData[1] = 9;
-    gBattleBuffersTransferData[2] = 9;
-    gBattleBuffersTransferData[3] = 9;
+    gBattleBuffersTransferData[1] = CONTROLLER_TRAINERSLIDEBACK;
+    gBattleBuffersTransferData[2] = CONTROLLER_TRAINERSLIDEBACK;
+    gBattleBuffersTransferData[3] = CONTROLLER_TRAINERSLIDEBACK;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1051,18 +1051,18 @@ void EmitPaletteFade(u8 bufferId)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitCmd12(u8 bufferId)
+void EmitSuccessBallThrowAnim(u8 bufferId)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_12;
-    gBattleBuffersTransferData[1] = 12;
-    gBattleBuffersTransferData[2] = 12;
-    gBattleBuffersTransferData[3] = 12;
+    gBattleBuffersTransferData[0] = CONTROLLER_SUCCESSBALLTHROWANIM;
+    gBattleBuffersTransferData[1] = CONTROLLER_SUCCESSBALLTHROWANIM;
+    gBattleBuffersTransferData[2] = CONTROLLER_SUCCESSBALLTHROWANIM;
+    gBattleBuffersTransferData[3] = CONTROLLER_SUCCESSBALLTHROWANIM;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitBallThrow(u8 bufferId, u8 caseId)
+void EmitBallThrowAnim(u8 bufferId, u8 caseId)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_BALLTHROW;
+    gBattleBuffersTransferData[0] = CONTROLLER_BALLTHROWANIM;
     gBattleBuffersTransferData[1] = caseId;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 2);
 }
@@ -1178,12 +1178,12 @@ void EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitYesNoBox(u8 bufferId)
+void EmitUnknownYesNoBox(u8 bufferId)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_YESNOBOX;
-    gBattleBuffersTransferData[1] = CONTROLLER_YESNOBOX;
-    gBattleBuffersTransferData[2] = CONTROLLER_YESNOBOX;
-    gBattleBuffersTransferData[3] = CONTROLLER_YESNOBOX;
+    gBattleBuffersTransferData[0] = CONTROLLER_UNKNOWNYESNOBOX;
+    gBattleBuffersTransferData[1] = CONTROLLER_UNKNOWNYESNOBOX;
+    gBattleBuffersTransferData[2] = CONTROLLER_UNKNOWNYESNOBOX;
+    gBattleBuffersTransferData[3] = CONTROLLER_UNKNOWNYESNOBOX;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1200,7 +1200,7 @@ void EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct 
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, sizeof(*movePpData) + 4);
 }
 
-void EmitOpenBag(u8 bufferId, u8 *arg1)
+void EmitChooseItem(u8 bufferId, u8 *arg1)
 {
     s32 i;
 
@@ -1337,38 +1337,38 @@ void EmitCmd32(u8 bufferId, u16 size, void *data)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, size + 3);
 }
 
-void EmitChoiceReturnValue(u8 bufferId, u8 arg1, u16 arg2)
+void EmitTwoReturnValues(u8 bufferId, u8 arg1, u16 arg2)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_CHOICERETURNVALUE;
+    gBattleBuffersTransferData[0] = CONTROLLER_TWORETURNVALUES;
     gBattleBuffersTransferData[1] = arg1;
     gBattleBuffersTransferData[2] = arg2;
     gBattleBuffersTransferData[3] = (arg2 & 0xFF00) >> 8;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitCmd34(u8 bufferId, u8 b, u8 *c)
+void EmitChosenMonReturnValue(u8 bufferId, u8 b, u8 *c)
 {
     s32 i;
 
-    gBattleBuffersTransferData[0] = CONTROLLER_34;
+    gBattleBuffersTransferData[0] = CONTROLLER_CHOSENMONRETURNVALUE;
     gBattleBuffersTransferData[1] = b;
     for (i = 0; i < 3; i++)
         gBattleBuffersTransferData[2 + i] = c[i];
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 5);
 }
 
-void EmitCmd35(u8 bufferId, u16 b)
+void EmitOneReturnValue(u8 bufferId, u16 arg1)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_35;
-    gBattleBuffersTransferData[1] = b;
-    gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[0] = CONTROLLER_ONERETURNVALUE;
+    gBattleBuffersTransferData[1] = arg1;
+    gBattleBuffersTransferData[2] = (arg1 & 0xFF00) >> 8;
     gBattleBuffersTransferData[3] = 0;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitCmd36(u8 bufferId, u16 b)
+void EmitOneReturnValue_Duplicate(u8 bufferId, u16 b)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_36;
+    gBattleBuffersTransferData[0] = CONTROLLER_ONERETURNVALUE_DUPLICATE;
     gBattleBuffersTransferData[1] = b;
     gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
     gBattleBuffersTransferData[3] = 0;
@@ -1378,9 +1378,9 @@ void EmitCmd36(u8 bufferId, u16 b)
 void EmitCmd37(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_37;
-    gBattleBuffersTransferData[1] = 37;
-    gBattleBuffersTransferData[2] = 37;
-    gBattleBuffersTransferData[3] = 37;
+    gBattleBuffersTransferData[1] = CONTROLLER_37;
+    gBattleBuffersTransferData[2] = CONTROLLER_37;
+    gBattleBuffersTransferData[3] = CONTROLLER_37;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1394,27 +1394,27 @@ void EmitCmd38(u8 bufferId, u8 b)
 void EmitCmd39(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_39;
-    gBattleBuffersTransferData[1] = 39;
-    gBattleBuffersTransferData[2] = 39;
-    gBattleBuffersTransferData[3] = 39;
+    gBattleBuffersTransferData[1] = CONTROLLER_39;
+    gBattleBuffersTransferData[2] = CONTROLLER_39;
+    gBattleBuffersTransferData[3] = CONTROLLER_39;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitCmd40(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_40;
-    gBattleBuffersTransferData[1] = 40;
-    gBattleBuffersTransferData[2] = 40;
-    gBattleBuffersTransferData[3] = 40;
+    gBattleBuffersTransferData[1] = CONTROLLER_40;
+    gBattleBuffersTransferData[2] = CONTROLLER_40;
+    gBattleBuffersTransferData[3] = CONTROLLER_40;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitHitAnimation(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_HITANIMATION;
-    gBattleBuffersTransferData[1] = 41;
-    gBattleBuffersTransferData[2] = 41;
-    gBattleBuffersTransferData[3] = 41;
+    gBattleBuffersTransferData[1] = CONTROLLER_HITANIMATION;
+    gBattleBuffersTransferData[2] = CONTROLLER_HITANIMATION;
+    gBattleBuffersTransferData[3] = CONTROLLER_HITANIMATION;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 

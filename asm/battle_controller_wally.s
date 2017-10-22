@@ -121,7 +121,7 @@ _081684CE:
 	movs r1, 0x9
 _081684E4:
 	movs r2, 0
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 	bl WallyBufferExecCompleted
 	ldr r1, [r4]
 	adds r1, 0x94
@@ -176,7 +176,7 @@ _08168540:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 	bl WallyBufferExecCompleted
 _08168564:
 	pop {r4,r5}
@@ -279,7 +279,7 @@ sub_8168610: @ 8168610
 	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl EmitCmd35
+	bl EmitOneReturnValue
 	bl WallyBufferExecCompleted
 _08168636:
 	pop {r0}
@@ -2952,7 +2952,7 @@ WallyHandleReturnMonToBall: @ 8169E44
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x1
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r0, =gBattleBankFunc
 	ldrb r1, [r6]
 	lsls r1, 2
@@ -3207,7 +3207,7 @@ WallyHandleCmd12: @ 816A084
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x4
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -3246,7 +3246,7 @@ WallyHandleBallThrow: @ 816A0D8
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r3, 0x4
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -3452,7 +3452,7 @@ _0816A2C6:
 	adds r1, r3, 0
 	adds r2, r3, 0
 	movs r3, 0x5
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _0816A2E2:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -3507,7 +3507,7 @@ _0816A320:
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
-	bl move_anim_start_t4
+	bl DoSpecialBattleAnimation
 _0816A354:
 	ldr r0, [r7]
 	ldrb r1, [r6]
@@ -3700,7 +3700,7 @@ _0816A504:
 	beq _0816A550
 	b _0816A574
 _0816A50A:
-	bl sub_805C210
+	bl InitMoveSelectionsVarsAndStrings
 	ldr r1, [r4]
 	adds r1, 0x95
 	ldrb r0, [r1]
@@ -3745,7 +3745,7 @@ _0816A550:
 	lsls r2, 1
 	movs r0, 0x1
 	movs r1, 0xA
-	bl EmitChoiceReturnValue
+	bl EmitTwoReturnValues
 	bl WallyBufferExecCompleted
 _0816A574:
 	pop {r4}
@@ -4062,7 +4062,7 @@ _0816A7C8:
 	movs r1, 0
 	strh r1, [r0, 0x30]
 	ldrb r0, [r4]
-	bl sub_80769F4
+	bl DoHitAnimHealthboxEffect
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -4184,7 +4184,7 @@ WallyHandleIntroSlide: @ 816A8D8
 	adds r1, 0x1
 	adds r0, r1
 	ldrb r0, [r0]
-	bl battle_intro_launch
+	bl HandleIntroSlide
 	ldr r2, =gUnknown_020243FC
 	ldrh r0, [r2]
 	movs r1, 0x1
@@ -4672,7 +4672,7 @@ WallyHandleBattleAnimation: @ 816AD20
 	str r4, [sp]
 	adds r0, r2, 0
 	adds r1, r2, 0
-	bl move_anim_start_t3
+	bl DoBattleAnimationFromTable
 	lsls r0, 24
 	cmp r0, 0
 	beq _0816AD60

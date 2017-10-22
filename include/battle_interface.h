@@ -9,6 +9,12 @@ enum
     HP_MAX
 };
 
+enum
+{
+    HEALTH_BAR,
+    EXP_BAR
+};
+
 #define TAG_HEALTHBOX_PLAYER1_TILE      0xD6FF
 #define TAG_HEALTHBOX_PLAYER2_TILE      0xD700
 #define TAG_HEALTHBOX_OPPONENT1_TILE    0xD701
@@ -41,7 +47,7 @@ enum
 
 u8 CreateBankHealthboxSprites(u8 bank);
 u8 CreateSafariPlayerHealthboxSprites(void);
-void SetBattleBarStruct(u8 bank, u8 healthboxSpriteId, s32 maxVal, s32 currVal, s32 field_C);
+void SetBattleBarStruct(u8 bank, u8 healthboxSpriteId, s32 maxVal, s32 currVal, s32 receivedValue);
 void SetHealthboxSpriteInvisible(u8 healthboxSpriteId);
 void SetHealthboxSpriteVisible(u8 healthboxSpriteId);
 void DestoryHealthboxSprite(u8 healthboxSpriteId);

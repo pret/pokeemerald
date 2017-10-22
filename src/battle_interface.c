@@ -21,17 +21,11 @@
 #include "safari_zone.h"
 #include "battle_anim.h"
 
-enum
-{
-    HEALTH_BAR,
-    EXP_BAR
-};
-
 struct TestingBar
 {
     s32 maxValue;
     s32 currValue;
-    s32 field_8;
+    s32 receivedValue;
     u32 unkC_0:5;
     u32 unk10;
 };
@@ -183,7 +177,6 @@ extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u8 gHealthboxElementsGfxTable[][32];
 
 // functions
-extern bool8 IsDoubleBattle(void);
 extern void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, s8 speed, const u8 *str); // menu.h
 extern void LoadBattleBarGfx(u8 arg0);
 
@@ -214,10 +207,10 @@ static void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite *sprite);
 static void SpriteCB_StatusSummaryBallsOnSwitchout(struct Sprite *sprite);
 
 static u8 GetStatusIconForBankId(u8 statusElementId, u8 bank);
-static s32 sub_8074DB8(s32 maxValue, s32 currValue, s32 arg2, s32 *arg3, u8 arg4, u16 arg5);
-static u8 GetScaledExpFraction(s32 currValue, s32 arg1, s32 maxValue, u8 scale);
+static s32 sub_8074DB8(s32 maxValue, s32 currValue, s32 receivedValue, s32 *arg3, u8 arg4, u16 arg5);
+static u8 GetScaledExpFraction(s32 currValue, s32 receivedValue, s32 maxValue, u8 scale);
 static void sub_8074B9C(u8 bank, u8 whichBar);
-static u8 sub_8074E8C(s32 maxValue, s32 currValue, s32 arg2, s32 *arg3, u8 *arg4, u8 arg5);
+static u8 sub_8074E8C(s32 maxValue, s32 currValue, s32 receivedValue, s32 *arg3, u8 *arg4, u8 arg5);
 static void sub_8074F88(struct TestingBar *barInfo, s32 *arg1, u16 *arg2);
 
 // const rom data
@@ -1049,12 +1042,12 @@ static void sub_8072924(struct Sprite *sprite)
     sprite->pos2.y = gSprites[otherSpriteId].pos2.y;
 }
 
-void SetBattleBarStruct(u8 bank, u8 healthboxSpriteId, s32 maxVal, s32 currVal, s32 field_C)
+void SetBattleBarStruct(u8 bank, u8 healthboxSpriteId, s32 maxVal, s32 currVal, s32 receivedValue)
 {
     gBattleSpritesDataPtr->battleBars[bank].healthboxSpriteId = healthboxSpriteId;
     gBattleSpritesDataPtr->battleBars[bank].maxValue = maxVal;
     gBattleSpritesDataPtr->battleBars[bank].currentValue = currVal;
-    gBattleSpritesDataPtr->battleBars[bank].field_C = field_C;
+    gBattleSpritesDataPtr->battleBars[bank].receivedValue = receivedValue;
     gBattleSpritesDataPtr->battleBars[bank].field_10 = -32768;
 }
 
@@ -2262,22 +2255,22 @@ s32 sub_8074AA0(u8 bank, u8 healthboxSpriteId, u8 whichBar, u8 arg3)
     {
         var = sub_8074DB8(gBattleSpritesDataPtr->battleBars[bank].maxValue,
                     gBattleSpritesDataPtr->battleBars[bank].currentValue,
-                    gBattleSpritesDataPtr->battleBars[bank].field_C,
+                    gBattleSpritesDataPtr->battleBars[bank].receivedValue,
                     &gBattleSpritesDataPtr->battleBars[bank].field_10,
                     6, 1);
     }
     else // exp bar
     {
         u16 expFraction = GetScaledExpFraction(gBattleSpritesDataPtr->battleBars[bank].currentValue,
-                    gBattleSpritesDataPtr->battleBars[bank].field_C,
+                    gBattleSpritesDataPtr->battleBars[bank].receivedValue,
                     gBattleSpritesDataPtr->battleBars[bank].maxValue, 8);
         if (expFraction == 0)
             expFraction = 1;
-        expFraction = abs(gBattleSpritesDataPtr->battleBars[bank].field_C / expFraction);
+        expFraction = abs(gBattleSpritesDataPtr->battleBars[bank].receivedValue / expFraction);
 
         var = sub_8074DB8(gBattleSpritesDataPtr->battleBars[bank].maxValue,
                     gBattleSpritesDataPtr->battleBars[bank].currentValue,
-                    gBattleSpritesDataPtr->battleBars[bank].field_C,
+                    gBattleSpritesDataPtr->battleBars[bank].receivedValue,
                     &gBattleSpritesDataPtr->battleBars[bank].field_10,
                     8, expFraction);
     }
@@ -2293,7 +2286,7 @@ s32 sub_8074AA0(u8 bank, u8 healthboxSpriteId, u8 whichBar, u8 arg3)
 
 static void sub_8074B9C(u8 bank, u8 whichBar)
 {
-    u8 array[7];
+    u8 array[8];
     u8 subRet, level;
     u8 barElementId;
     u8 i;
@@ -2303,7 +2296,7 @@ static void sub_8074B9C(u8 bank, u8 whichBar)
     case HEALTH_BAR:
         subRet = sub_8074E8C(gBattleSpritesDataPtr->battleBars[bank].maxValue,
                             gBattleSpritesDataPtr->battleBars[bank].currentValue,
-                            gBattleSpritesDataPtr->battleBars[bank].field_C,
+                            gBattleSpritesDataPtr->battleBars[bank].receivedValue,
                             &gBattleSpritesDataPtr->battleBars[bank].field_10,
                             array, 6);
         barElementId = 3;
@@ -2327,7 +2320,7 @@ static void sub_8074B9C(u8 bank, u8 whichBar)
     case EXP_BAR:
         sub_8074E8C(gBattleSpritesDataPtr->battleBars[bank].maxValue,
                     gBattleSpritesDataPtr->battleBars[bank].currentValue,
-                    gBattleSpritesDataPtr->battleBars[bank].field_C,
+                    gBattleSpritesDataPtr->battleBars[bank].receivedValue,
                     &gBattleSpritesDataPtr->battleBars[bank].field_10,
                     array, 8);
         level = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_LEVEL);
@@ -2349,7 +2342,7 @@ static void sub_8074B9C(u8 bank, u8 whichBar)
     }
 }
 
-static s32 sub_8074DB8(s32 maxValue, s32 currValue, s32 arg2, s32 *arg3, u8 arg4, u16 arg5)
+static s32 sub_8074DB8(s32 maxValue, s32 currValue, s32 receivedValue, s32 *arg3, u8 arg4, u16 arg5)
 {
     s32 r6;
     s32 ret;
@@ -2363,7 +2356,7 @@ static s32 sub_8074DB8(s32 maxValue, s32 currValue, s32 arg2, s32 *arg3, u8 arg4
             *arg3 = currValue;
     }
 
-    currValue -= arg2;
+    currValue -= receivedValue;
     if (currValue < 0)
         currValue = 0;
     else if (currValue > maxValue)
@@ -2388,7 +2381,7 @@ static s32 sub_8074DB8(s32 maxValue, s32 currValue, s32 arg2, s32 *arg3, u8 arg4
     {
         s32 var = (maxValue << 8) / arg4;
 
-        if (arg2 < 0)
+        if (receivedValue < 0)
         {
             *arg3 = r6 + var;
             ret = *arg3 >> 8;
@@ -2413,7 +2406,7 @@ static s32 sub_8074DB8(s32 maxValue, s32 currValue, s32 arg2, s32 *arg3, u8 arg4
     }
     else
     {
-        if (arg2 < 0)
+        if (receivedValue < 0)
         {
             *arg3 += arg5;
             if (*arg3 > currValue)
@@ -2432,9 +2425,9 @@ static s32 sub_8074DB8(s32 maxValue, s32 currValue, s32 arg2, s32 *arg3, u8 arg4
     return ret;
 }
 
-static u8 sub_8074E8C(s32 maxValue, s32 currValue, s32 arg2, s32 *arg3, u8 *arg4, u8 arg5)
+static u8 sub_8074E8C(s32 maxValue, s32 currValue, s32 receivedValue, s32 *arg3, u8 *arg4, u8 arg5)
 {
-    s32 r5 = currValue - arg2;
+    s32 r5 = currValue - receivedValue;
     u8 ret;
     u8 i;
     u8 r2;
@@ -2487,7 +2480,7 @@ static s16 sub_8074F28(struct TestingBar *barInfo, s32 *arg1, u16 *arg2, s32 arg
 
     ret = sub_8074DB8(barInfo->maxValue,
                     barInfo->currValue,
-                    barInfo->field_8,
+                    barInfo->receivedValue,
                     arg1, 6, 1);
     sub_8074F88(barInfo, arg1, arg2);
 
@@ -2508,7 +2501,7 @@ static void sub_8074F88(struct TestingBar *barInfo, s32 *arg1, u16 *arg2)
     u8 i;
 
     sub_8074E8C(barInfo->maxValue, barInfo->currValue,
-                barInfo->field_8, arg1, sp8, 6);
+                barInfo->receivedValue, arg1, sp8, 6);
 
     for (i = 0; i < 6; i++)
         sp10[i] = (barInfo->unkC_0 << 12) | (barInfo->unk10 + sp8[i]);
@@ -2516,13 +2509,13 @@ static void sub_8074F88(struct TestingBar *barInfo, s32 *arg1, u16 *arg2)
     CpuCopy16(sp10, arg2, sizeof(sp10));
 }
 
-static u8 GetScaledExpFraction(s32 currValue, s32 arg1, s32 maxValue, u8 scale)
+static u8 GetScaledExpFraction(s32 currValue, s32 receivedValue, s32 maxValue, u8 scale)
 {
     s32 r5, result;
     s8 r4, r0;
 
     scale *= 8;
-    r5 = currValue - arg1;
+    r5 = currValue - receivedValue;
 
     if (r5 < 0)
         r5 = 0;

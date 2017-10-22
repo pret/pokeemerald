@@ -3625,7 +3625,7 @@ static void atk23_getexp(void)
         if (gBattleExecBuffer == 0)
         {
             gActiveBank = gBattleStruct->expGetterBank;
-            if (gBattleBufferB[gActiveBank][0] == 0x21 && gBattleBufferB[gActiveBank][1] == 0xB)
+            if (gBattleBufferB[gActiveBank][0] == CONTROLLER_TWORETURNVALUES && gBattleBufferB[gActiveBank][1] == RET_VALUE_LEVELLED_UP)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gBattlePartyID[gActiveBank] == gBattleStruct->expGetterId)
                     sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
@@ -7137,7 +7137,7 @@ static void atk76_various(void)
         gDisableStructs[1].truantUnknownBit = 1;
         break;
     case VARIOUS_EMIT_YESNOBOX:
-        EmitYesNoBox(0);
+        EmitUnknownYesNoBox(0);
         MarkBufferBankForExecution(gActiveBank);
         break;
     case 14:
@@ -7255,7 +7255,7 @@ static void atk78_faintifabilitynotdamp(void)
     {
         gActiveBank = gBankAttacker;
         gBattleMoveDamage = gBattleMons[gActiveBank].hp;
-        EmitHealthBarUpdate(0, 0x7FFF);
+        EmitHealthBarUpdate(0, INSTANT_HP_BAR_DROP);
         MarkBufferBankForExecution(gActiveBank);
         gBattlescriptCurrInstr++;
 
@@ -10184,7 +10184,7 @@ static void atkC9_jumpifattackandspecialattackcannotfall(void) // memento
     {
         gActiveBank = gBankAttacker;
         gBattleMoveDamage = gBattleMons[gActiveBank].hp;
-        EmitHealthBarUpdate(0, 0x7FFF);
+        EmitHealthBarUpdate(0, INSTANT_HP_BAR_DROP);
         MarkBufferBankForExecution(gActiveBank);
         gBattlescriptCurrInstr += 5;
     }
@@ -11003,13 +11003,13 @@ static void atkEF_pokeball_catch_calculation(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        EmitBallThrow(0, BALL_TRAINER_BLOCK);
+        EmitBallThrowAnim(0, BALL_TRAINER_BLOCK);
         MarkBufferBankForExecution(gActiveBank);
         gBattlescriptCurrInstr = BattleScript_TrainerBallBlock;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
     {
-        EmitBallThrow(0, BALL_3_SHAKES_SUCCESS);
+        EmitBallThrowAnim(0, BALL_3_SHAKES_SUCCESS);
         MarkBufferBankForExecution(gActiveBank);
         gBattlescriptCurrInstr = BattleScript_WallyBallThrow;
     }
@@ -11098,7 +11098,7 @@ static void atkEF_pokeball_catch_calculation(void)
 
         if (odds > 254) // mon caught
         {
-            EmitBallThrow(0, BALL_3_SHAKES_SUCCESS);
+            EmitBallThrowAnim(0, BALL_3_SHAKES_SUCCESS);
             MarkBufferBankForExecution(gActiveBank);
             gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
             SetMonData(&gEnemyParty[gBattlePartyID[gBankTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
@@ -11120,7 +11120,7 @@ static void atkEF_pokeball_catch_calculation(void)
             if (gLastUsedItem == ITEM_MASTER_BALL)
                 shakes = BALL_3_SHAKES_SUCCESS; // why calculate the shakes before that check?
 
-            EmitBallThrow(0, shakes);
+            EmitBallThrowAnim(0, shakes);
             MarkBufferBankForExecution(gActiveBank);
 
             if (shakes == BALL_3_SHAKES_SUCCESS) // mon caught, copy of the code above

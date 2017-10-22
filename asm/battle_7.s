@@ -67,8 +67,8 @@ _0805D192:
 	.pool
 	thumb_func_end FreeBattleSpritesData
 
-	thumb_func_start sub_805D19C
-sub_805D19C: @ 805D19C
+	thumb_func_start ChooseMoveAndTargetInBattlePalace
+ChooseMoveAndTargetInBattlePalace: @ 805D19C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -448,7 +448,7 @@ _0805D496:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_805D19C
+	thumb_func_end ChooseMoveAndTargetInBattlePalace
 
 	thumb_func_start sub_805D4A8
 sub_805D4A8: @ 805D4A8
@@ -834,8 +834,8 @@ _0805D800:
 	.pool
 	thumb_func_end sub_805D7EC
 
-	thumb_func_start move_anim_start_t2_for_situation
-move_anim_start_t2_for_situation: @ 805D808
+	thumb_func_start DoStatusAnimation
+DoStatusAnimation: @ 805D808
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -962,10 +962,10 @@ _0805D902:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end move_anim_start_t2_for_situation
+	thumb_func_end DoStatusAnimation
 
-	thumb_func_start move_anim_start_t3
-move_anim_start_t3: @ 805D908
+	thumb_func_start DoBattleAnimationFromTable
+DoBattleAnimationFromTable: @ 805D908
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1070,7 +1070,7 @@ _0805D9CC:
 	ldr r0, =gUnknown_082C9320
 	adds r1, r5, 0
 	movs r2, 0
-	bl DoBattleAnim
+	bl LaunchBattleAnimation
 	ldr r0, =task0A_0803415C
 	movs r1, 0xA
 	bl CreateTask
@@ -1105,7 +1105,7 @@ _0805DA1E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end move_anim_start_t3
+	thumb_func_end DoBattleAnimationFromTable
 
 	thumb_func_start task0A_0803415C
 task0A_0803415C: @ 805DA48
@@ -1172,8 +1172,8 @@ _0805DABE:
 	bx r1
 	thumb_func_end sub_805DAA0
 
-	thumb_func_start move_anim_start_t4
-move_anim_start_t4: @ 805DAC4
+	thumb_func_start DoSpecialBattleAnimation
+DoSpecialBattleAnimation: @ 805DAC4
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -1187,7 +1187,7 @@ move_anim_start_t4: @ 805DAC4
 	ldr r0, =gUnknown_082C937C
 	adds r1, r3, 0
 	movs r2, 0
-	bl DoBattleAnim
+	bl LaunchBattleAnimation
 	ldr r0, =task0A_08034248
 	movs r1, 0xA
 	bl CreateTask
@@ -1216,7 +1216,7 @@ move_anim_start_t4: @ 805DAC4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end move_anim_start_t4
+	thumb_func_end DoSpecialBattleAnimation
 
 	thumb_func_start task0A_08034248
 task0A_08034248: @ 805DB34
@@ -2229,8 +2229,8 @@ _0805E3EA:
 	.pool
 	thumb_func_end sub_805E394
 
-	thumb_func_start sub_805E408
-sub_805E408: @ 805E408
+	thumb_func_start SetBattleSpriteInvisibilityBitToSpriteInvisibility
+SetBattleSpriteInvisibilityBitToSpriteInvisibility: @ 805E408
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gBattleSpritesDataPtr
@@ -2258,7 +2258,7 @@ sub_805E408: @ 805E408
 	strb r0, [r3]
 	bx lr
 	.pool
-	thumb_func_end sub_805E408
+	thumb_func_end SetBattleSpriteInvisibilityBitToSpriteInvisibility
 
 	thumb_func_start sub_805E448
 sub_805E448: @ 805E448
