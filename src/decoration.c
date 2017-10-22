@@ -40,6 +40,9 @@
 
 // Static type declarations
 
+#define OVERWORLD_DECOR_PAL_TAG 0xbe5
+#define OVERWORLD_DECOR_BOX_PAL_TAG 0x008
+
 struct UnkStruct_0203A18C {
     struct ListMenuItem unk_000[41];
     u8 unk_148[41][24];
@@ -219,12 +222,7 @@ const struct WindowTemplate gUnknown_085A6B90[4] = {
     { 0, 16, 13, 13,  6, 15, 0x0193 }
 };
 
-const u16 gUnknown_085A6BB0[] = {
-    0x532e, 0x7fff, 0x318c, 0x675a,
-    0x739c, 0x6318, 0x0000, 0x77bd,
-    0x6318, 0x4a52, 0x001f, 0x0016,
-    0x631f, 0x7d4a, 0x58c6, 0x7f18
-};
+const u16 gUnknown_085A6BB0[] = INCBIN_U16("graphics/decorations/unk_85a6bb0.gbapal");
 
 const struct ListMenuTemplate gUnknown_085A6BD0 = {
     NULL,
@@ -244,16 +242,16 @@ const struct {
     u8 x;
     u8 y;
 } gUnknown_085A7250[] = {
-    {0x00, 0x01, 0x78, 0x4e},
-    {0x01, 0x02, 0x80, 0x4e},
-    {0x01, 0x03, 0x90, 0x56},
-    {0x01, 0x03, 0x90, 0x46},
-    {0x00, 0x02, 0x80, 0x46},
-    {0x02, 0x02, 0x78, 0x46},
-    {0x02, 0x03, 0x80, 0x56},
-    {0x02, 0x03, 0x80, 0x36},
-    {0x00, 0x03, 0x90, 0x46},
-    {0x01, 0x03, 0x90, 0x46}
+    {0, 1, 0x78, 0x4e},
+    {1, 2, 0x80, 0x4e},
+    {1, 3, 0x90, 0x56},
+    {1, 3, 0x90, 0x46},
+    {0, 2, 0x80, 0x46},
+    {2, 2, 0x78, 0x46},
+    {2, 3, 0x80, 0x56},
+    {2, 3, 0x80, 0x36},
+    {0, 3, 0x90, 0x46},
+    {1, 3, 0x90, 0x46}
 };
 
 const union AnimCmd gUnknown_085A7278[] = {
@@ -271,7 +269,7 @@ const struct SpriteFrameImage gUnknown_085A7284 = {
 
 const struct SpriteTemplate gUnknown_085A728C = {
     0xffff,
-    0x0be5,
+    OVERWORLD_DECOR_PAL_TAG,
     &gUnknown_0203AA3C,
     gUnknown_085A7280,
     &gUnknown_085A7284,
@@ -290,7 +288,7 @@ const struct SpriteTemplate gUnknown_085A72A4 = {
 };
 
 const struct SpritePalette gUnknown_085A72BC = {
-    (const u16 *)&gUnknown_0203A190.palette, 0x0be5
+    (const u16 *)&gUnknown_0203A190.palette, OVERWORLD_DECOR_PAL_TAG
 };
 
 const struct YesNoFuncTable gUnknown_085A72C4 = {
@@ -325,19 +323,9 @@ const u16 gUnknown_085A72F4[] = {
     0x04, 0x08, 0x10, 0x20, 0x10, 0x08, 0x10, 0x20, 0x40, 0x20
 };
 
-const u16 Unknown_085A7308[] = {
-    0x530e, 0x5b5f, 0x4b1f, 0x3a5b,
-    0x210f, 0x3d27, 0x30e5, 0x28a3,
-    0x1c82, 0x779b, 0x2f1f, 0x2e77,
-    0x2d9f, 0x2118, 0x7fff, 0x0000
-};
+const u16 Unknown_085A7308[] = INCBIN_U16("graphics/decorations/unk_85a7308.gbapal");
 
-const u16 Unknown_085A7328[] = {
-    0x530e, 0x677f, 0x4a9b, 0x3a19,
-    0x296f, 0x398c, 0x20e5, 0x29b4,
-    0x1cc9, 0x6f39, 0x2f1f, 0x2e77,
-    0x2d9f, 0x2118, 0x7fff, 0x0000
-};
+const u16 Unknown_085A7328[] = INCBIN_U16("graphics/decorations/unk_85a7328.gbapal");
 
 const struct YesNoFuncTable gUnknown_085A7348 = {
     sub_812A1C0,
@@ -352,11 +340,11 @@ const struct YesNoFuncTable gUnknown_085A7350 = {
 const u8 Unknown_085A7358[] = INCBIN_U8("graphics/misc/decoration_unk_85a7358.4bpp");
 
 const struct SpritePalette gUnknown_085A73D8 = {
-    Unknown_085A7308, 8
+    Unknown_085A7308, OVERWORLD_DECOR_BOX_PAL_TAG
 };
 
 const struct SpritePalette gUnknown_085A73E0 = {
-    Unknown_085A7328, 8
+    Unknown_085A7328, OVERWORLD_DECOR_BOX_PAL_TAG
 };
 
 const struct OamData Unknown_085A73E8 = {
@@ -378,7 +366,7 @@ const struct SpriteFrameImage Unknown_085A73FC = {
 
 const struct SpriteTemplate gUnknown_085A7404 = {
     0xFFFF,
-    8,
+    OVERWORLD_DECOR_BOX_PAL_TAG,
     &Unknown_085A73E8,
     Unknown_085A73F8,
     &Unknown_085A73FC,
@@ -1692,7 +1680,7 @@ void c1_overworld_prev_quest(u8 taskId)
             break;
         case 1:
             sub_812A3C8();
-            FreeSpritePaletteByTag(0xbe5);
+            FreeSpritePaletteByTag(OVERWORLD_DECOR_PAL_TAG);
             gFieldCallback = sub_8128CD4;
             SetMainCallback2(c2_exit_to_overworld_2_switch);
             DestroyTask(taskId);
@@ -2005,7 +1993,7 @@ u8 gpu_pal_decompress_alloc_tag_and_upload(struct UnkStruct_0203A190 *data, u8 d
     {
         return AddPseudoFieldObject(data->decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
     }
-    FreeSpritePaletteByTag(0xBE5);
+    FreeSpritePaletteByTag(OVERWORLD_DECOR_PAL_TAG);
     sub_81291E8(data);
     sub_812925C(data->decoration->shape);
     sub_81291A4(data);
@@ -2758,7 +2746,7 @@ void sub_812A39C(void)
 
 void sub_812A3C8(void)
 {
-    FreeSpritePaletteByTag(0x0008);
+    FreeSpritePaletteByTag(OVERWORLD_DECOR_BOX_PAL_TAG);
 }
 
 void sub_812A3D4(u8 taskId)
