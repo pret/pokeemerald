@@ -409,7 +409,6 @@ SECTIONS {
         data/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/decoration.o(.rodata);
-        data/decoration.o(.rodata);
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
