@@ -36,6 +36,7 @@
 #include "map_object_constants.h"
 #include "decoration_inventory.h"
 #include "decoration.h"
+#include "graphics.h"
 
 // Static type declarations
 
@@ -223,7 +224,8 @@ const struct ListMenuTemplate gUnknown_085A6BD0 = {
     9, 2, 1, 3, FALSE, 0, FALSE, 7
 };
 
-extern const u8 *const gUnknown_085A6BE8[][2];
+#include "data/decoration/icon.h"
+
 extern const struct {
     const u8 *tiles;
     const u8 *y;
