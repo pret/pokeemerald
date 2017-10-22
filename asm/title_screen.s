@@ -1228,7 +1228,7 @@ c2_clear_save_data_screen_1: @ 80AAEF0
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AAF02
-	ldr r0, =c2_clear_save_data_screen_2
+	ldr r0, =CB2_InitClearSaveDataScreen
 	bl SetMainCallback2
 _080AAF02:
 	pop {r0}
