@@ -45,10 +45,10 @@ extern s8 gUnknown_0861CC1C[];
 extern u8 gUnknown_08329D22[];
 extern u8 gUnknown_0203CF21;
 extern u16 gSpecialVar_0x8005;
-extern struct unkStruct_61CC04 gUnknown_0861CC04;
-extern struct unkStruct_61CC04 gUnknown_0861CC10;
-extern struct unkStruct_61CC04 gUnknown_0861CBEC;
-extern struct unkStruct_61CC04 gUnknown_0861CBF8;
+extern struct UnkStruct_61CC04 gUnknown_0861CC04;
+extern struct UnkStruct_61CC04 gUnknown_0861CC10;
+extern struct UnkStruct_61CC04 gUnknown_0861CBEC;
+extern struct UnkStruct_61CC04 gUnknown_0861CBF8;
 extern u16 gUnknown_08DC3CD4[];
 extern struct ContestMove gContestMoves[];
 extern struct ContestEffect gContestEffects[];
@@ -1862,12 +1862,12 @@ void sub_81C174C(u8 taskId)
     }
 }
 
-u8 sub_81C18A8()
+bool8 sub_81C18A8()
 {
     if (gUnknown_0203CF1C->unk40C6 == 4 || gUnknown_0203CF1C->unk40C4 == 0 || sub_81B6D14(gUnknown_0203CF1C->summary.moves[gUnknown_0203CF1C->unk40C6]) != 1)
-        return 1;
+        return TRUE;
     else
-        return 0;
+        return FALSE;
 }
 
 void sub_81C18F4(u8 taskId)
@@ -2017,7 +2017,7 @@ void sub_81C1BA0()
     Free(alloced);
 }
 
-struct unkStruct_61CC04
+struct UnkStruct_61CC04
 {
     u8 *ptr;
     u8 field_4;
@@ -2029,7 +2029,7 @@ struct unkStruct_61CC04
 };
 
 #ifdef NONMATCHING
-void sub_81C1CB0(struct unkStruct_61CC04 *a, u16 *b, u8 c, u8 d)
+void sub_81C1CB0(struct UnkStruct_61CC04 *a, u16 *b, u8 c, u8 d)
 {
     u8 *alloced = Alloc(a->field_6 * (a->field_7 << 1));
     CpuFill16(a->field_4, alloced, a->field_7*a->field_6);
@@ -2060,7 +2060,7 @@ void sub_81C1CB0(struct unkStruct_61CC04 *a, u16 *b, u8 c, u8 d)
 }
 #else
 __attribute__((naked))
-void sub_81C1CB0(struct unkStruct_61CC04 *a, u16 *b, u8 c, u8 d)
+void sub_81C1CB0(struct UnkStruct_61CC04 *a, u16 *b, u8 c, u8 d)
 {
     asm(".syntax unified\n\
         push {r4-r7,lr}\n\
@@ -2645,7 +2645,7 @@ void sub_81C27DC(struct Pokemon *mon, u16 a)
     }
 }
 
-void sub_81C2838(u8 a, u8 b, u32 c)
+void sub_81C2838(u8 a, bool8 b, u32 c)
 {
     BlitBitmapToWindow(a, (b) ? &gUnknown_0861CDD3[0] : &gUnknown_0861CDD3[0] - 0x80, c, 0, 16, 16);
 }
@@ -3075,32 +3075,32 @@ u8 sub_81C3220()
     return 1;
 }
 
-u8 sub_81C32BC()
+bool8 sub_81C32BC()
 {
     struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     u8 r0 = sum->metGame - 1;
     if (r0 <= 4)
-        return 1;
-    return 0;
+        return TRUE;
+    return FALSE;
 }
 
-u8 sub_81C32E0()
+bool8 sub_81C32E0()
 {
     struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     u8 r0 = sum->metGame - 1;
     if (r0 <= 2)
-        return 1;
-    return 0;
+        return TRUE;
+    return FALSE;
 }
 
-u8 sub_81C3304()
+bool8 sub_81C3304()
 {
     if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) && gMain.inBattle)
     {
         if (gUnknown_0203CF1C->unk40BE == 1 || gUnknown_0203CF1C->unk40BE == 4 || gUnknown_0203CF1C->unk40BE == 5)
-            return 1;
+            return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 #ifdef NONMATCHING
