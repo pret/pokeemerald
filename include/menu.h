@@ -23,7 +23,7 @@ void reset_temp_tile_data_buffers(void);
 int decompress_and_copy_tile_data_to_vram(u8 bg_id, const void *src, int size, u16 offset, u8 mode);
 bool8 free_temp_tile_data_buffers_if_possible(void);
 u64 sub_8198A50(struct WindowTemplate*, u8, u8, u8, u8, u8, u8, u16); // returns something but it isn't used, fix when menu.s is decomp'd
-void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos); // menu.s
-s8 sub_8198C58(void); // menu.s
+void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
+s8 sub_8198C58(void);
 
 #endif // GUARD_MENU_H
