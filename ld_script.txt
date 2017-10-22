@@ -170,7 +170,7 @@ SECTIONS {
         asm/heal_location.o(.text);
         asm/region_map.o(.text);
         asm/cute_sketch.o(.text);
-        asm/decoration.o(.text);
+        src/decoration.o(.text);
         asm/slot_machine.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
@@ -204,7 +204,7 @@ SECTIONS {
         asm/battle_anim_815A0D4.o(.text);
         asm/learn_move.o(.text);
         asm/fldeff_softboiled.o(.text);
-        asm/decoration_inventory.o(.text);
+        src/decoration_inventory.o(.text);
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);
@@ -412,7 +412,7 @@ SECTIONS {
         data/heal_location.o(.rodata);
         data/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
-        data/decoration.o(.rodata);
+        src/decoration.o(.rodata);
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);

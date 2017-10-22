@@ -351,7 +351,7 @@ sub_8133CF4: @ 8133CF4
 	ldr r5, =gScriptResult
 _08133CFA:
 	adds r0, r4, 0
-	bl sub_8161AD0
+	bl CountDecorationCategoryN
 	lsls r0, 24
 	cmp r0, 0
 	beq _08133D10
@@ -395,7 +395,7 @@ sub_8133D2C: @ 8133D2C
 	cmp r1, r0
 	beq _08133D72
 	adds r0, r1, 0
-	bl sub_81618D0
+	bl GetFirstEmptyDecorSlot
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x1
