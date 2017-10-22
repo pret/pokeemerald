@@ -247,7 +247,7 @@ void sub_81C15EC(struct BoxPokemon *mon, u8 a, u8 b);
 void sub_81C40A0(u8 a, u8 b);
 void sub_81C4568(u8 a, u8 b);
 void sub_81C174C(u8 taskId);
-u8 sub_81C18A8();
+bool8 sub_81C18A8();
 void sub_81C18F4(u8 a);
 u8 sub_81B6D14(u16 a);
 void sub_81C1940(u8 taskId);
@@ -268,10 +268,10 @@ void sub_81C302C();
 void sub_81C307C();
 void sub_81C3194();
 void sub_81C31C0();
-u8 sub_81C3304();
+bool8 sub_81C3304();
 void sub_81C31F0(u8 *a);
 u8 sub_81C3220();
-u8 sub_81C32BC();
+bool8 sub_81C32BC();
 void sub_81C35E4();
 void sub_81C3690();
 void sub_81C3710();
@@ -1835,7 +1835,7 @@ void sub_81C174C(u8 taskId)
             }
             else if (gMain.newKeys & A_BUTTON)
             {
-                if (sub_81C18A8() == 1)
+                if (sub_81C18A8() == TRUE)
                 {
                     sub_81C48F0();
                     PlaySE(SE_SELECT);
@@ -2998,7 +2998,7 @@ void sub_81C307C()
     sub_81AFC0C(0, gUnknown_0861CE74);
     sub_81AFC0C(1, gUnknown_0861CE7B);
     sub_81C31C0();
-    if (sub_81A6BF4() == 1 || sub_81B9E94() == 1 || sub_81C3304() == 1)
+    if (sub_81A6BF4() == 1 || sub_81B9E94() == 1 || sub_81C3304() == TRUE)
         sub_81AFC28(gStringVar4, gText_XNature);
     else
     {
@@ -3203,7 +3203,7 @@ void sub_81C349C()
         else if (sub_81C32BC() == 0 || sub_81C3220() == 0)
             text = gText_PeculiarEggTrade;
         else if (sum->metLocation == 0xFD)
-            text = (sub_81C32E0() == 1) ? gText_EggFromHotSprings : gText_EggFromTraveler;
+            text = (sub_81C32E0() == TRUE) ? gText_EggFromHotSprings : gText_EggFromTraveler;
         else
             text = gText_OddEggFoundByCouple;
     }
