@@ -154,7 +154,7 @@ static void MoveSelectionDisplayMoveNames(void);
 static void HandleMoveSwitchting(void);
 static void sub_8058FC0(void);
 static void sub_8059828(void);
-static void sub_80598E0(void);
+static void CompleteWhenChoseItem(void);
 static void sub_8059544(u8 taskId);
 static void Task_PrepareToGiveExpWithExpBar(u8 taskId);
 static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId);
@@ -297,16 +297,16 @@ static void HandleInputChooseAction(void)
 
         switch (gActionSelectionCursor[gActiveBank])
         {
-        case ACTION_USE_MOVE:
+        case 0:
             EmitTwoReturnValues(1, ACTION_USE_MOVE, 0);
             break;
-        case ACTION_USE_ITEM:
+        case 1:
             EmitTwoReturnValues(1, ACTION_USE_ITEM, 0);
             break;
-        case ACTION_SWITCH:
+        case 2:
             EmitTwoReturnValues(1, ACTION_SWITCH, 0);
             break;
-        case ACTION_RUN:
+        case 3:
             EmitTwoReturnValues(1, ACTION_RUN, 0);
             break;
         }
@@ -1400,18 +1400,18 @@ static void sub_8059828(void)
     }
 }
 
-static void sub_80598A4(void)
+static void OpenBagAndChooseItem(void)
 {
     if (!gPaletteFade.active)
     {
-        gBattleBankFunc[gActiveBank] = sub_80598E0;
+        gBattleBankFunc[gActiveBank] = CompleteWhenChoseItem;
         nullsub_35();
         FreeAllWindowBuffers();
         sub_81AABB0();
     }
 }
 
-static void sub_80598E0(void)
+static void CompleteWhenChoseItem(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
@@ -2685,7 +2685,7 @@ static void PlayerHandleChooseItem(void)
     s32 i;
 
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-    gBattleBankFunc[gActiveBank] = sub_80598A4;
+    gBattleBankFunc[gActiveBank] = OpenBagAndChooseItem;
     gBankInMenu = gActiveBank;
 
     for (i = 0; i < 3; i++)

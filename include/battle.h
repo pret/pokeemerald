@@ -780,7 +780,7 @@ extern struct BattleStruct* gBattleStruct;
 #define B_ANIM_SWITCH_OUT_MON           0x1
 #define B_ANIM_SPECIAL_2                0x2
 #define B_ANIM_BALL_THROW               0x3
-#define B_ANIM_SPECIAL_4                0x4
+#define B_ANIM_SAFARI_BALL_THROW        0x4
 #define B_ANIM_SUBSTITUTE_TO_MON        0x5
 #define B_ANIM_MON_TO_SUBSTITUTE        0x6
 
