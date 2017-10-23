@@ -4748,7 +4748,7 @@ sub_8188EF0: @ 8188EF0
 	push {lr}
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl sub_8185054
+	bl RecordedBattle_ReadBankAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4791,12 +4791,12 @@ sub_8188F20: @ 8188F20
 _08188F48:
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	bl sub_8185054
+	bl RecordedBattle_ReadBankAction
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5]
-	bl sub_8185054
+	bl RecordedBattle_ReadBankAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 16
@@ -4825,7 +4825,7 @@ sub_8188F88: @ 8188F88
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl sub_8185054
+	bl RecordedBattle_ReadBankAction
 	ldrb r1, [r4]
 	ldr r3, =gBattleStruct
 	ldr r2, [r3]

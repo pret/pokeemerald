@@ -1456,7 +1456,7 @@ static void PlayerPartnerHandleMoveAnimation(void)
         gWeatherMoveAnim = gBattleBufferA[gActiveBank][12] | (gBattleBufferA[gActiveBank][13] << 8);
         gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBank][16];
         gTransformedPersonalities[gActiveBank] = gAnimDisableStructPtr->transformedMonPersonality;
-        if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // always return FALSE
+        if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // always returns FALSE
         {
             PlayerPartnerBufferExecCompleted();
         }
