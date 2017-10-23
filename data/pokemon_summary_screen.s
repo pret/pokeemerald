@@ -40,10 +40,7 @@ gUnknown_0861CD14:: @ 861CD14
 	.incbin "baserom.gba", 0x61cd14, 0x18
 
 gUnknown_0861CD2C:: @ 861CD2C
-	.incbin "baserom.gba", 0x61cd2c, 0x27
-
-gUnknown_0861CD53:: @ 861CD53
-	.incbin "baserom.gba", 0x61cd53, 0x80
+	.incbin "baserom.gba", 0x61cd2c, 0xa7
 
 gUnknown_0861CDD3:: @ 861CDD3
 	.incbin "baserom.gba", 0x61cdd3, 0x81

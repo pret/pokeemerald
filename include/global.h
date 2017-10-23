@@ -12,10 +12,8 @@
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 
 #if defined (__APPLE__) || defined (__CYGWIN__)
-void *memset(void *, int, size_t);
-void *memcpy(void *, const void *, size_t);
-int strcmp(const char *s1, const char *s2);
-char* strcpy(char *dst0, const char *src0);
+void memset(void *, int, size_t);
+void memcpy(void *, const void *, size_t);
 #endif // __APPLE__
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))

@@ -74,7 +74,6 @@ u8 npc_block_way(struct MapObject *, s16, s16, u32);
 void MoveCoords(u8, s16 *, s16 *);
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
 u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
-u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z);
 
 // Exported data declarations
 

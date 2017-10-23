@@ -1192,7 +1192,7 @@ _080E9462:
 	mov r3, r10
 	ldrb r1, [r3]
 	lsls r1, 5
-	ldr r2, =gDecorations + 0x1c
+	ldr r2, =gUnknown_085A5C24
 	adds r1, r2
 	ldr r1, [r1]
 	ldrh r1, [r1]

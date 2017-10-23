@@ -881,10 +881,7 @@ gUnknown_08DAAFEC:: @ 8DAAFEC
 	.include "data/graphics/items/item_graphics.inc"
 
 @ 8DB7AA0
-	.include "data/graphics/decorations/decoration_graphics.inc"
-
-@ 8DBA14C
-    .incbin "baserom.gba", 0xdba14c, 0x3cc
+	.incbin "baserom.gba", 0xdb7aa0, 0x2a78
 
 gUnknown_08DBA518:: @ 8DBA518
 	.incbin "baserom.gba", 0xdba518, 0x80

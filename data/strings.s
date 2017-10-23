@@ -1517,52 +1517,52 @@ gUnknown_085EA79D:: @ 85EA79D
 gUnknown_085EA7A9:: @ 85EA7A9
 	.string "{STR_VAR_3}{STR_VAR_1}/{STR_VAR_2}$"
 
-gText_Decorate:: @ 85EA7B1
+gUnknown_085EA7B1:: @ 85EA7B1
 	.string "DECORATE$"
 
-gText_PutAway:: @ 85EA7BA
+gUnknown_085EA7BA:: @ 85EA7BA
 	.string "PUT AWAY$"
 
-gText_Toss2:: @ 85EA7C3
+gUnknown_085EA7C3:: @ 85EA7C3
 	.string "TOSS$"
 
 gText_Color161Shadow161:: @ 85EA7C8
 	.string "{COLOR 161}{SHADOW 161}$"
 
-gText_PutOutSelectedDecorItem:: @ 85EA7CF
+gUnknown_085EA7CF:: @ 85EA7CF
 	.string "Put out the selected decoration item.$"
 
-gText_StoreChosenDecorInPC:: @ 85EA7F5
+gUnknown_085EA7F5:: @ 85EA7F5
 	.string "Store the chosen decoration in the PC.$"
 
-gText_ThrowAwayUnwantedDecors:: @ 85EA81C
+gUnknown_085EA81C:: @ 85EA81C
 	.string "Throw away unwanted decorations.$"
 
 gText_NoDecorations:: @ 85EA83D
 	.string "There are no decorations.{PAUSE_UNTIL_PRESS}$"
 
-gText_Desk:: @ 85EA859
+gUnknown_085EA859:: @ 85EA859
 	.string "DESK$"
 
-gText_Chair:: @ 85EA85E
+gUnknown_085EA85E:: @ 85EA85E
 	.string "CHAIR$"
 
-gText_Plant:: @ 85EA864
+gUnknown_085EA864:: @ 85EA864
 	.string "PLANT$"
 
-gText_Ornament:: @ 85EA86A
+gUnknown_085EA86A:: @ 85EA86A
 	.string "ORNAMENT$"
 
-gText_Mat:: @ 85EA873
+gUnknown_085EA873:: @ 85EA873
 	.string "MAT$"
 
-gText_Poster:: @ 85EA877
+gUnknown_085EA877:: @ 85EA877
 	.string "POSTER$"
 
-gText_Doll:: @ 85EA87E
+gUnknown_085EA87E:: @ 85EA87E
 	.string "DOLL$"
 
-gText_Cushion:: @ 85EA883
+gUnknown_085EA883:: @ 85EA883
 	.string "CUSHION$"
 
 gText_Gold:: @ 85EA88B
