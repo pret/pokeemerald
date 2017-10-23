@@ -43,6 +43,7 @@
 #include "tv.h"
 #include "safari_zone.h"
 #include "battle_string_ids.h"
+#include "data2.h"
 
 struct UnknownStruct6
 {
@@ -2480,15 +2481,6 @@ static void sub_80398D0(struct Sprite *sprite)
         }
     }
 }
-
-// to get rid of once the struct is declared in a header
-struct MonCoords
-{
-    // This would use a bitfield, but sub_8079F44
-    // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
-    u8 y_offset;
-};
 
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];

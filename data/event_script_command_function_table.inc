@@ -67,18 +67,18 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_setdivewarp
 	.4byte ScrCmd_setholewarp
 	.4byte ScrCmd_getplayerxy
-	.4byte ScrCmd_countpokemon
-	.4byte ScrCmd_additem
-	.4byte ScrCmd_removeitem
+	.4byte ScrCmd_getpartysize
+	.4byte ScrCmd_giveitem
+	.4byte ScrCmd_takeitem
 	.4byte ScrCmd_checkitemspace
 	.4byte ScrCmd_checkitem
 	.4byte ScrCmd_checkitemtype
-	.4byte ScrCmd_addpcitem
+	.4byte ScrCmd_givepcitem
 	.4byte ScrCmd_checkpcitem
-	.4byte ScrCmd_adddecor
-	.4byte ScrCmd_removedecor
-	.4byte ScrCmd_hasdecor
+	.4byte ScrCmd_givedecoration
+	.4byte ScrCmd_takedecoration
 	.4byte ScrCmd_checkdecor
+	.4byte ScrCmd_checkdecorspace
 	.4byte ScrCmd_applymovement
 	.4byte ScrCmd_applymovement_at
 	.4byte ScrCmd_waitmovement
@@ -88,12 +88,12 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_addobject
 	.4byte ScrCmd_addobject_at
 	.4byte ScrCmd_setobjectxy
-	.4byte ScrCmd_showobject
-	.4byte ScrCmd_hideobject
+	.4byte ScrCmd_showobject_at
+	.4byte ScrCmd_hideobject_at
 	.4byte ScrCmd_faceplayer
 	.4byte ScrCmd_turnobject
 	.4byte ScrCmd_trainerbattle
-	.4byte ScrCmd_battlebegin
+	.4byte ScrCmd_dotrainerbattle
 	.4byte ScrCmd_ontrainerbattleend
 	.4byte ScrCmd_ontrainerbattleendgoto
 	.4byte ScrCmd_checktrainerflag
@@ -109,7 +109,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_lock
 	.4byte ScrCmd_releaseall
 	.4byte ScrCmd_release
-	.4byte ScrCmd_waitbutton
+	.4byte ScrCmd_waitbuttonpress
 	.4byte ScrCmd_yesnobox
 	.4byte ScrCmd_multichoice
 	.4byte ScrCmd_multichoicedefault
@@ -117,28 +117,28 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_drawbox
 	.4byte ScrCmd_erasebox
 	.4byte ScrCmd_drawboxtext
-	.4byte ScrCmd_drawpokepic
-	.4byte ScrCmd_erasepokepic
-	.4byte ScrCmd_drawcontestwinner
+	.4byte ScrCmd_showmonpic
+	.4byte ScrCmd_hidemonpic
+	.4byte ScrCmd_showcontestwinner
 	.4byte ScrCmd_braillemessage
-	.4byte ScrCmd_givepoke
+	.4byte ScrCmd_givemon
 	.4byte ScrCmd_giveegg
-	.4byte ScrCmd_setpokemove
-	.4byte ScrCmd_checkpokemove
-	.4byte ScrCmd_getspeciesname
-	.4byte ScrCmd_getfirstpartypokename
-	.4byte ScrCmd_getpartypokename
-	.4byte ScrCmd_getitemname
-	.4byte ScrCmd_getdecorname
-	.4byte ScrCmd_getmovename
-	.4byte ScrCmd_getnumberstring
-	.4byte ScrCmd_getstdstring
-	.4byte ScrCmd_getstring
+	.4byte ScrCmd_setmonmove
+	.4byte ScrCmd_checkpartymove
+	.4byte ScrCmd_bufferspeciesname
+	.4byte ScrCmd_bufferleadmonspeciesname
+	.4byte ScrCmd_bufferpartymonnick
+	.4byte ScrCmd_bufferitemname
+	.4byte ScrCmd_bufferdecorationname
+	.4byte ScrCmd_buffermovename
+	.4byte ScrCmd_buffernumberstring
+	.4byte ScrCmd_bufferstdstring
+	.4byte ScrCmd_bufferstring
 	.4byte ScrCmd_pokemart
-	.4byte ScrCmd_pokemartdecor
-	.4byte ScrCmd_pokemartbp
+	.4byte ScrCmd_pokemartdecoration
+	.4byte ScrCmd_pokemartdecoration2
 	.4byte ScrCmd_playslotmachine
-	.4byte ScrCmd_plantberrytree
+	.4byte ScrCmd_setberrytree
 	.4byte ScrCmd_choosecontestpkmn
 	.4byte ScrCmd_startcontest
 	.4byte ScrCmd_showcontestresults
@@ -152,21 +152,21 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_updatemoneybox
 	.4byte ScrCmd_getpricereduction
 	.4byte ScrCmd_fadescreen
-	.4byte ScrCmd_fadescreendelay
-	.4byte ScrCmd_setdarklevel
-	.4byte ScrCmd_animdarklevel
+	.4byte ScrCmd_fadescreenspeed
+	.4byte ScrCmd_setflashradius
+	.4byte ScrCmd_animateflash
 	.4byte ScrCmd_messageautoscroll
 	.4byte ScrCmd_dofieldeffect
-	.4byte ScrCmd_setfieldeffect
+	.4byte ScrCmd_setfieldeffectarg
 	.4byte ScrCmd_waitfieldeffect
-	.4byte ScrCmd_sethealplace
+	.4byte ScrCmd_setrespawn
 	.4byte ScrCmd_checkplayergender
-	.4byte ScrCmd_playpokecry
-	.4byte ScrCmd_setmaptile
+	.4byte ScrCmd_playmoncry
+	.4byte ScrCmd_setmetatile
 	.4byte ScrCmd_resetweather
 	.4byte ScrCmd_setweather
 	.4byte ScrCmd_doweather
-	.4byte ScrCmd_tileeffect
+	.4byte ScrCmd_setstepcallback
 	.4byte ScrCmd_setmaplayoutindex
 	.4byte ScrCmd_setobjectpriority
 	.4byte ScrCmd_resetobjectpriority
@@ -191,26 +191,26 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_vcall_if
 	.4byte ScrCmd_vmessage
 	.4byte ScrCmd_vloadword
-	.4byte ScrCmd_vgetstring
+	.4byte ScrCmd_vbufferstring
 	.4byte ScrCmd_showcoinsbox
 	.4byte ScrCmd_hidecoinsbox
 	.4byte ScrCmd_updatecoinsbox
 	.4byte ScrCmd_incrementgamestat
 	.4byte ScrCmd_setescapewarp
-	.4byte ScrCmd_waitpokecry
-	.4byte ScrCmd_getboxname
+	.4byte ScrCmd_waitmoncry
+	.4byte ScrCmd_bufferboxname
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_nop1
-	.4byte ScrCmd_setpokeobedient
-	.4byte ScrCmd_checkpokeobedience
+	.4byte ScrCmd_setmonobedient
+	.4byte ScrCmd_checkmonobedience
 	.4byte ScrCmd_cmdCF
 	.4byte ScrCmd_nop1
 	.4byte ScrCmd_warpD1
-	.4byte ScrCmd_setpokemetlocation
+	.4byte ScrCmd_setmonmetlocation
 	.4byte ScrCmd_mossdeepgym1
 	.4byte ScrCmd_mossdeepgym2
 	.4byte ScrCmd_mossdeepgym3
@@ -221,9 +221,9 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_cmdDA
 	.4byte ScrCmd_cmdDB
 	.4byte ScrCmd_fadescreenswapbuffers
-	.4byte ScrCmd_gettrainerclass
-	.4byte ScrCmd_gettrainername
+	.4byte ScrCmd_buffertrainerclassname
+	.4byte ScrCmd_buffertrainername
 	.4byte ScrCmd_pokenavcall
 	.4byte ScrCmd_warpE0
-	.4byte ScrCmd_getcontesttype
-	.4byte ScrCmd_getitemnameplural
+	.4byte ScrCmd_buffercontesttype
+	.4byte ScrCmd_bufferitemnameplural
