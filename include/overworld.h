@@ -1,6 +1,8 @@
 #ifndef GUARD_ROM4_H
 #define GUARD_ROM4_H
 
+#include "main.h"
+
 struct UnkPlayerStruct
 {
     u8 player_field_0;
@@ -21,6 +23,7 @@ struct UCoords32
 };
 
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
+extern MainCallback gFieldCallback;
 
 void IncrementGameStat(u8 index);
 
@@ -55,5 +58,6 @@ void sub_8086230(void);
 void c2_exit_to_overworld_2_switch(void);
 bool32 sub_8087598(void);
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
+void warp_in(void);
 
 #endif //GUARD_ROM4_H

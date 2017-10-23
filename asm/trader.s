@@ -351,7 +351,7 @@ sub_8133CF4: @ 8133CF4
 	ldr r5, =gScriptResult
 _08133CFA:
 	adds r0, r4, 0
-	bl sub_8161AD0
+	bl CountDecorationCategoryN
 	lsls r0, 24
 	cmp r0, 0
 	beq _08133D10
@@ -395,7 +395,7 @@ sub_8133D2C: @ 8133D2C
 	cmp r1, r0
 	beq _08133D72
 	adds r0, r1, 0
-	bl sub_81618D0
+	bl GetFirstEmptyDecorSlot
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x1
@@ -433,15 +433,15 @@ sub_8133DA0: @ 8133DA0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_81279C4
+	bl IsSelectedDecorInThePC
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08133DFC
 	ldr r5, =gSpecialVar_0x8006
-	ldr r0, =gUnknown_0203A172
+	ldr r0, =gCurDecorationIndex
 	ldrb r1, [r0]
-	ldr r0, =gUnknown_0203A14C
+	ldr r0, =gCurDecorInventoryItems
 	ldr r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]

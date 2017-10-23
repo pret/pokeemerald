@@ -28,13 +28,13 @@ s32 GetStringWidthDifference(s32 fontId, const u8 *str, s32 totalWidth, s32 lett
         return 0;
 }
 
-s32 GetMaxWidthInMenuTable(const u8 **str, s32 arg1)
+s32 GetMaxWidthInMenuTable(const struct MenuAction *str, s32 arg1)
 {
     s32 i, var;
 
     for (var = 0, i = 0; i < arg1; i++)
     {
-        s32 stringWidth = GetStringWidth(1, str[i * 2], 0);
+        s32 stringWidth = GetStringWidth(1, str[i].text, 0);
         if (stringWidth > var)
             var = stringWidth;
     }
@@ -42,13 +42,13 @@ s32 GetMaxWidthInMenuTable(const u8 **str, s32 arg1)
     return convert_pixel_width_to_tile_width(var);
 }
 
-s32 sub_81DB3D8(const u8 **str, u8* arg1, s32 arg2)
+s32 sub_81DB3D8(const struct MenuAction *str, u8* arg1, s32 arg2)
 {
     s32 i, var;
 
     for (var = 0, i = 0; i < arg2; i++)
     {
-        s32 stringWidth = GetStringWidth(1, str[arg1[i] * 2], 0);
+        s32 stringWidth = GetStringWidth(1, str[arg1[i]].text, 0);
         if (stringWidth > var)
             var = stringWidth;
     }
