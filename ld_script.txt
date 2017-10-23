@@ -190,6 +190,7 @@ SECTIONS {
         asm/landmark.o(.text);
         asm/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
+        src/battle_controller_link_partner.o(.text);
         asm/battle_controller_linkpartner.o(.text);
         src/battle_message.o(.text);
         asm/cable_car.o(.text);
@@ -420,7 +421,7 @@ SECTIONS {
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/data4.o(.rodata);
-        data/battle_controller_link_partner.o(.rodata);
+        src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
         data/save.o(.rodata);

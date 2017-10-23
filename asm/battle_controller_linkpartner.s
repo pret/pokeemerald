@@ -5,58 +5,7 @@
 
 	.text
 
-	thumb_func_start nullsub_112
-nullsub_112: @ 814AEAC
-	bx lr
-	thumb_func_end nullsub_112
 
-	thumb_func_start SetBankFuncToLinkPartnerBufferRunCommand
-SetBankFuncToLinkPartnerBufferRunCommand: @ 814AEB0
-	ldr r1, =gBattleBankFunc
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =LinkPartnerBufferRunCommand
-	str r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end SetBankFuncToLinkPartnerBufferRunCommand
-
-	thumb_func_start LinkPartnerBufferRunCommand
-LinkPartnerBufferRunCommand: @ 814AECC
-	push {lr}
-	ldr r2, =gBattleExecBuffer
-	ldr r1, =gBitTable
-	ldr r0, =gActiveBank
-	ldrb r3, [r0]
-	lsls r0, r3, 2
-	adds r0, r1
-	ldr r1, [r2]
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	beq _0814AF18
-	ldr r0, =gBattleBufferA
-	lsls r1, r3, 9
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r0, 0x38
-	bhi _0814AF14
-	ldr r0, =gLinkPartnerBufferCommands
-	ldrb r1, [r1]
-	lsls r1, 2
-	adds r1, r0
-	ldr r0, [r1]
-	bl _call_via_r0
-	b _0814AF18
-	.pool
-_0814AF14:
-	bl LinkPartnerBufferExecCompleted
-_0814AF18:
-	pop {r0}
-	bx r0
-	thumb_func_end LinkPartnerBufferRunCommand
 
 	thumb_func_start sub_814AF1C
 sub_814AF1C: @ 814AF1C
@@ -1066,8 +1015,8 @@ _0814B80A:
 	.pool
 	thumb_func_end sub_814B7E8
 
-	thumb_func_start dp01t_00_4_getattr
-dp01t_00_4_getattr: @ 814B818
+	thumb_func_start LinkPartnerHandleGetMonData
+LinkPartnerHandleGetMonData: @ 814B818
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -1119,7 +1068,7 @@ _0814B872:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_00_4_getattr
+	thumb_func_end LinkPartnerHandleGetMonData
 
 	thumb_func_start dp01_getattr_by_ch1_for_player_pokemon__
 dp01_getattr_by_ch1_for_player_pokemon__: @ 814B88C
@@ -1999,16 +1948,16 @@ _0814C022:
 	.pool
 	thumb_func_end dp01_getattr_by_ch1_for_player_pokemon__
 
-	thumb_func_start sub_814C038
-sub_814C038: @ 814C038
+	thumb_func_start LinkPartnerHandleGetRawMonData
+LinkPartnerHandleGetRawMonData: @ 814C038
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814C038
+	thumb_func_end LinkPartnerHandleGetRawMonData
 
-	thumb_func_start sub_814C044
-sub_814C044: @ 814C044
+	thumb_func_start LinkPartnerHandleSetMonData
+LinkPartnerHandleSetMonData: @ 814C044
 	push {r4,r5,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -2048,7 +1997,7 @@ _0814C092:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814C044
+	thumb_func_end LinkPartnerHandleSetMonData
 
 	thumb_func_start sub_814C09C
 sub_814C09C: @ 814C09C
@@ -3083,8 +3032,8 @@ _0814CA62:
 	.pool
 	thumb_func_end sub_814C09C
 
-	thumb_func_start sub_814CA98
-sub_814CA98: @ 814CA98
+	thumb_func_start LinkPartnerHandleSetRawMonData
+LinkPartnerHandleSetRawMonData: @ 814CA98
 	push {r4-r7,lr}
 	ldr r1, =gBattlePartyID
 	ldr r7, =gActiveBank
@@ -3136,10 +3085,10 @@ _0814CAF0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814CA98
+	thumb_func_end LinkPartnerHandleSetRawMonData
 
-	thumb_func_start sub_814CB0C
-sub_814CB0C: @ 814CB0C
+	thumb_func_start LinkPartnerHandleLoadMonSprite
+LinkPartnerHandleLoadMonSprite: @ 814CB0C
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3253,10 +3202,10 @@ sub_814CB0C: @ 814CB0C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814CB0C
+	thumb_func_end LinkPartnerHandleLoadMonSprite
 
-	thumb_func_start sub_814CC28
-sub_814CC28: @ 814CC28
+	thumb_func_start LinkPartnerHandleSwitchInAnim
+LinkPartnerHandleSwitchInAnim: @ 814CC28
 	push {r4-r6,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -3299,7 +3248,7 @@ sub_814CC28: @ 814CC28
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814CC28
+	thumb_func_end LinkPartnerHandleSwitchInAnim
 
 	thumb_func_start sub_814CC98
 sub_814CC98: @ 814CC98
@@ -3464,8 +3413,8 @@ sub_814CC98: @ 814CC98
 	.pool
 	thumb_func_end sub_814CC98
 
-	thumb_func_start sub_814CE14
-sub_814CE14: @ 814CE14
+	thumb_func_start LinkPartnerHandleReturnMonToBall
+LinkPartnerHandleReturnMonToBall: @ 814CE14
 	push {r4-r6,lr}
 	ldr r1, =gBattleBufferA
 	ldr r6, =gActiveBank
@@ -3521,7 +3470,7 @@ _0814CE92:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814CE14
+	thumb_func_end LinkPartnerHandleReturnMonToBall
 
 	thumb_func_start sub_814CEA4
 sub_814CEA4: @ 814CEA4
@@ -3593,8 +3542,8 @@ _0814CF22:
 	.pool
 	thumb_func_end sub_814CEA4
 
-	thumb_func_start sub_814CF30
-sub_814CF30: @ 814CF30
+	thumb_func_start LinkPartnerHandleDrawTrainerPic
+LinkPartnerHandleDrawTrainerPic: @ 814CF30
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3784,18 +3733,18 @@ _0814D002:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814CF30
+	thumb_func_end LinkPartnerHandleDrawTrainerPic
 
-	thumb_func_start sub_814D0E4
-sub_814D0E4: @ 814D0E4
+	thumb_func_start LinkPartnerHandleTrainerSlide
+LinkPartnerHandleTrainerSlide: @ 814D0E4
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D0E4
+	thumb_func_end LinkPartnerHandleTrainerSlide
 
-	thumb_func_start sub_814D0F0
-sub_814D0F0: @ 814D0F0
+	thumb_func_start LinkPartnerHandleTrainerSlideBack
+LinkPartnerHandleTrainerSlideBack: @ 814D0F0
 	push {r4-r6,lr}
 	ldr r6, =gBankSpriteIds
 	ldr r4, =gActiveBank
@@ -3865,10 +3814,10 @@ sub_814D0F0: @ 814D0F0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D0F0
+	thumb_func_end LinkPartnerHandleTrainerSlideBack
 
-	thumb_func_start sub_814D19C
-sub_814D19C: @ 814D19C
+	thumb_func_start LinkPartnerHandleFaintAnimation
+LinkPartnerHandleFaintAnimation: @ 814D19C
 	push {r4-r6,lr}
 	ldr r6, =gBattleSpritesDataPtr
 	ldr r4, [r6]
@@ -3970,42 +3919,42 @@ _0814D266:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D19C
+	thumb_func_end LinkPartnerHandleFaintAnimation
 
-	thumb_func_start sub_814D288
-sub_814D288: @ 814D288
+	thumb_func_start LinkPartnerHandlePaletteFade
+LinkPartnerHandlePaletteFade: @ 814D288
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D288
+	thumb_func_end LinkPartnerHandlePaletteFade
 
-	thumb_func_start sub_814D294
-sub_814D294: @ 814D294
+	thumb_func_start LinkPartnerHandleSuccessBallThrowAnim
+LinkPartnerHandleSuccessBallThrowAnim: @ 814D294
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D294
+	thumb_func_end LinkPartnerHandleSuccessBallThrowAnim
 
-	thumb_func_start sub_814D2A0
-sub_814D2A0: @ 814D2A0
+	thumb_func_start LinkPartnerHandleBallThrowAnim
+LinkPartnerHandleBallThrowAnim: @ 814D2A0
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D2A0
+	thumb_func_end LinkPartnerHandleBallThrowAnim
 
-	thumb_func_start sub_814D2AC
-sub_814D2AC: @ 814D2AC
+	thumb_func_start LinkPartnerHandlePause
+LinkPartnerHandlePause: @ 814D2AC
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D2AC
+	thumb_func_end LinkPartnerHandlePause
 
-	thumb_func_start sub_814D2B8
-sub_814D2B8: @ 814D2B8
+	thumb_func_start LinkPartnerHandleMoveAnimation
+LinkPartnerHandleMoveAnimation: @ 814D2B8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4151,7 +4100,7 @@ _0814D3F4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D2B8
+	thumb_func_end LinkPartnerHandleMoveAnimation
 
 	thumb_func_start bx_move_anim_4
 bx_move_anim_4: @ 814D40C
@@ -4337,8 +4286,8 @@ _0814D580:
 	bx r0
 	thumb_func_end bx_move_anim_4
 
-	thumb_func_start sub_814D590
-sub_814D590: @ 814D590
+	thumb_func_start LinkPartnerHandlePrintString
+LinkPartnerHandlePrintString: @ 814D590
 	push {r4,r5,lr}
 	ldr r0, =gBattle_BG0_X
 	movs r1, 0
@@ -4367,66 +4316,66 @@ sub_814D590: @ 814D590
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D590
+	thumb_func_end LinkPartnerHandlePrintString
 
-	thumb_func_start sub_814D5E8
-sub_814D5E8: @ 814D5E8
+	thumb_func_start LinkPartnerHandlePrintStringPlayerOnly
+LinkPartnerHandlePrintStringPlayerOnly: @ 814D5E8
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D5E8
+	thumb_func_end LinkPartnerHandlePrintStringPlayerOnly
 
-	thumb_func_start sub_814D5F4
-sub_814D5F4: @ 814D5F4
+	thumb_func_start LinkPartnerHandleChooseAction
+LinkPartnerHandleChooseAction: @ 814D5F4
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D5F4
+	thumb_func_end LinkPartnerHandleChooseAction
 
-	thumb_func_start sub_814D600
-sub_814D600: @ 814D600
+	thumb_func_start LinkPartnerHandleUnknownYesNoBox
+LinkPartnerHandleUnknownYesNoBox: @ 814D600
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D600
+	thumb_func_end LinkPartnerHandleUnknownYesNoBox
 
-	thumb_func_start sub_814D60C
-sub_814D60C: @ 814D60C
+	thumb_func_start LinkPartnerHandleChooseMove
+LinkPartnerHandleChooseMove: @ 814D60C
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D60C
+	thumb_func_end LinkPartnerHandleChooseMove
 
-	thumb_func_start sub_814D618
-sub_814D618: @ 814D618
+	thumb_func_start LinkPartnerHandleChooseItem
+LinkPartnerHandleChooseItem: @ 814D618
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D618
+	thumb_func_end LinkPartnerHandleChooseItem
 
-	thumb_func_start sub_814D624
-sub_814D624: @ 814D624
+	thumb_func_start LinkPartnerHandleChoosePokemon
+LinkPartnerHandleChoosePokemon: @ 814D624
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D624
+	thumb_func_end LinkPartnerHandleChoosePokemon
 
-	thumb_func_start sub_814D630
-sub_814D630: @ 814D630
+	thumb_func_start LinkPartnerHandleCmd23
+LinkPartnerHandleCmd23: @ 814D630
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D630
+	thumb_func_end LinkPartnerHandleCmd23
 
-	thumb_func_start sub_814D63C
-sub_814D63C: @ 814D63C
+	thumb_func_start LinkPartnerHandleHealthBarUpdate
+LinkPartnerHandleHealthBarUpdate: @ 814D63C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4519,18 +4468,18 @@ _0814D6F6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D63C
+	thumb_func_end LinkPartnerHandleHealthBarUpdate
 
-	thumb_func_start sub_814D72C
-sub_814D72C: @ 814D72C
+	thumb_func_start LinkPartnerHandleExpUpdate
+LinkPartnerHandleExpUpdate: @ 814D72C
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D72C
+	thumb_func_end LinkPartnerHandleExpUpdate
 
-	thumb_func_start sub_814D738
-sub_814D738: @ 814D738
+	thumb_func_start LinkPartnerHandleStatusIconUpdate
+LinkPartnerHandleStatusIconUpdate: @ 814D738
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -4576,10 +4525,10 @@ _0814D78C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D738
+	thumb_func_end LinkPartnerHandleStatusIconUpdate
 
-	thumb_func_start sub_814D7B0
-sub_814D7B0: @ 814D7B0
+	thumb_func_start LinkPartnerHandleStatusAnimation
+LinkPartnerHandleStatusAnimation: @ 814D7B0
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -4623,82 +4572,82 @@ _0814D800:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D7B0
+	thumb_func_end LinkPartnerHandleStatusAnimation
 
-	thumb_func_start sub_814D818
-sub_814D818: @ 814D818
+	thumb_func_start LinkPartnerHandleStatusXor
+LinkPartnerHandleStatusXor: @ 814D818
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D818
+	thumb_func_end LinkPartnerHandleStatusXor
 
-	thumb_func_start sub_814D824
-sub_814D824: @ 814D824
+	thumb_func_start LinkPartnerHandleDataTransfer
+LinkPartnerHandleDataTransfer: @ 814D824
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D824
+	thumb_func_end LinkPartnerHandleDataTransfer
 
-	thumb_func_start sub_814D830
-sub_814D830: @ 814D830
+	thumb_func_start LinkPartnerHandleDMA3Transfer
+LinkPartnerHandleDMA3Transfer: @ 814D830
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D830
+	thumb_func_end LinkPartnerHandleDMA3Transfer
 
-	thumb_func_start sub_814D83C
-sub_814D83C: @ 814D83C
+	thumb_func_start LinkPartnerHandlePlayBGM
+LinkPartnerHandlePlayBGM: @ 814D83C
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D83C
+	thumb_func_end LinkPartnerHandlePlayBGM
 
-	thumb_func_start sub_814D848
-sub_814D848: @ 814D848
+	thumb_func_start LinkPartnerHandleCmd32
+LinkPartnerHandleCmd32: @ 814D848
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D848
+	thumb_func_end LinkPartnerHandleCmd32
 
-	thumb_func_start sub_814D854
-sub_814D854: @ 814D854
+	thumb_func_start LinkPartnerHandleTwoReturnValues
+LinkPartnerHandleTwoReturnValues: @ 814D854
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D854
+	thumb_func_end LinkPartnerHandleTwoReturnValues
 
-	thumb_func_start sub_814D860
-sub_814D860: @ 814D860
+	thumb_func_start LinkPartnerHandleChosenMonReturnValue
+LinkPartnerHandleChosenMonReturnValue: @ 814D860
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D860
+	thumb_func_end LinkPartnerHandleChosenMonReturnValue
 
-	thumb_func_start sub_814D86C
-sub_814D86C: @ 814D86C
+	thumb_func_start LinkPartnerHandleOneReturnValue
+LinkPartnerHandleOneReturnValue: @ 814D86C
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D86C
+	thumb_func_end LinkPartnerHandleOneReturnValue
 
-	thumb_func_start sub_814D878
-sub_814D878: @ 814D878
+	thumb_func_start LinkPartnerHandleOneReturnValue_Duplicate
+LinkPartnerHandleOneReturnValue_Duplicate: @ 814D878
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D878
+	thumb_func_end LinkPartnerHandleOneReturnValue_Duplicate
 
-	thumb_func_start sub_814D884
-sub_814D884: @ 814D884
+	thumb_func_start LinkPartnerHandleCmd37
+LinkPartnerHandleCmd37: @ 814D884
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -4710,10 +4659,10 @@ sub_814D884: @ 814D884
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D884
+	thumb_func_end LinkPartnerHandleCmd37
 
-	thumb_func_start sub_814D8A0
-sub_814D8A0: @ 814D8A0
+	thumb_func_start LinkPartnerHandleCmd38
+LinkPartnerHandleCmd38: @ 814D8A0
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, =gBattleBufferA
@@ -4735,10 +4684,10 @@ sub_814D8A0: @ 814D8A0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D8A0
+	thumb_func_end LinkPartnerHandleCmd38
 
-	thumb_func_start sub_814D8D8
-sub_814D8D8: @ 814D8D8
+	thumb_func_start LinkPartnerHandleCmd39
+LinkPartnerHandleCmd39: @ 814D8D8
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -4749,10 +4698,10 @@ sub_814D8D8: @ 814D8D8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D8D8
+	thumb_func_end LinkPartnerHandleCmd39
 
-	thumb_func_start sub_814D8F0
-sub_814D8F0: @ 814D8F0
+	thumb_func_start LinkPartnerHandleCmd40
+LinkPartnerHandleCmd40: @ 814D8F0
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, [r3]
@@ -4770,10 +4719,10 @@ sub_814D8F0: @ 814D8F0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D8F0
+	thumb_func_end LinkPartnerHandleCmd40
 
-	thumb_func_start dp01t_29_4_blink
-dp01t_29_4_blink: @ 814D918
+	thumb_func_start LinkPartnerHandleHitAnimation
+LinkPartnerHandleHitAnimation: @ 814D918
 	push {r4,lr}
 	ldr r3, =gSprites
 	ldr r2, =gBankSpriteIds
@@ -4819,18 +4768,18 @@ _0814D976:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_29_4_blink
+	thumb_func_end LinkPartnerHandleHitAnimation
 
-	thumb_func_start sub_814D988
-sub_814D988: @ 814D988
+	thumb_func_start LinkPartnerHandleCmd42
+LinkPartnerHandleCmd42: @ 814D988
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D988
+	thumb_func_end LinkPartnerHandleCmd42
 
-	thumb_func_start sub_814D994
-sub_814D994: @ 814D994
+	thumb_func_start LinkPartnerHandleEffectivenessSound
+LinkPartnerHandleEffectivenessSound: @ 814D994
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -4860,10 +4809,10 @@ _0814D9A8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814D994
+	thumb_func_end LinkPartnerHandleEffectivenessSound
 
-	thumb_func_start sub_814D9D8
-sub_814D9D8: @ 814D9D8
+	thumb_func_start LinkPartnerHandlePlayFanfareOrBGM
+LinkPartnerHandlePlayFanfareOrBGM: @ 814D9D8
 	push {r4,r5,lr}
 	ldr r4, =gBattleBufferA
 	ldr r5, =gActiveBank
@@ -4903,10 +4852,10 @@ _0814DA28:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814D9D8
+	thumb_func_end LinkPartnerHandlePlayFanfareOrBGM
 
-	thumb_func_start sub_814DA34
-sub_814DA34: @ 814DA34
+	thumb_func_start LinkPartnerHandleFaintingCry
+LinkPartnerHandleFaintingCry: @ 814DA34
 	push {lr}
 	ldr r1, =gBattlePartyID
 	ldr r0, =gActiveBank
@@ -4930,10 +4879,10 @@ sub_814DA34: @ 814DA34
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814DA34
+	thumb_func_end LinkPartnerHandleFaintingCry
 
-	thumb_func_start dp01t_2E_4_battle_intro
-dp01t_2E_4_battle_intro: @ 814DA74
+	thumb_func_start LinkPartnerHandleIntroSlide
+LinkPartnerHandleIntroSlide: @ 814DA74
 	push {lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -4952,10 +4901,10 @@ dp01t_2E_4_battle_intro: @ 814DA74
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_2E_4_battle_intro
+	thumb_func_end LinkPartnerHandleIntroSlide
 
-	thumb_func_start sub_814DAA8
-sub_814DAA8: @ 814DAA8
+	thumb_func_start LinkPartnerHandleIntroTrainerBallThrow
+LinkPartnerHandleIntroTrainerBallThrow: @ 814DAA8
 	push {r4-r7,lr}
 	ldr r5, =gBankSpriteIds
 	ldr r6, =gActiveBank
@@ -5186,7 +5135,7 @@ _0814DC80:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814DAA8
+	thumb_func_end LinkPartnerHandleIntroTrainerBallThrow
 
 	thumb_func_start sub_814DCCC
 sub_814DCCC: @ 814DCCC
@@ -5305,8 +5254,8 @@ _0814DDB4:
 	.pool
 	thumb_func_end sub_814DCCC
 
-	thumb_func_start sub_814DDD8
-sub_814DDD8: @ 814DDD8
+	thumb_func_start LinkPartnerHandleDrawPartyStatusSummary
+LinkPartnerHandleDrawPartyStatusSummary: @ 814DDD8
 	push {r4-r6,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -5389,7 +5338,7 @@ _0814DE7C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814DDD8
+	thumb_func_end LinkPartnerHandleDrawPartyStatusSummary
 
 	thumb_func_start sub_814DE9C
 sub_814DE9C: @ 814DE9C
@@ -5427,8 +5376,8 @@ _0814DED4:
 	.pool
 	thumb_func_end sub_814DE9C
 
-	thumb_func_start sub_814DEE4
-sub_814DEE4: @ 814DEE4
+	thumb_func_start LinkPartnerHandleCmd49
+LinkPartnerHandleCmd49: @ 814DEE4
 	push {lr}
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
@@ -5459,18 +5408,18 @@ _0814DF16:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814DEE4
+	thumb_func_end LinkPartnerHandleCmd49
 
-	thumb_func_start sub_814DF34
-sub_814DF34: @ 814DF34
+	thumb_func_start LinkPartnerHandleCmd50
+LinkPartnerHandleCmd50: @ 814DF34
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814DF34
+	thumb_func_end LinkPartnerHandleCmd50
 
-	thumb_func_start sub_814DF40
-sub_814DF40: @ 814DF40
+	thumb_func_start LinkPartnerHandleSpriteInvisibility
+LinkPartnerHandleSpriteInvisibility: @ 814DF40
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -5510,10 +5459,10 @@ _0814DF86:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814DF40
+	thumb_func_end LinkPartnerHandleSpriteInvisibility
 
-	thumb_func_start sub_814DFA0
-sub_814DFA0: @ 814DFA0
+	thumb_func_start LinkPartnerHandleBattleAnimation
+LinkPartnerHandleBattleAnimation: @ 814DFA0
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, =gActiveBank
@@ -5563,10 +5512,10 @@ _0814E002:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814DFA0
+	thumb_func_end LinkPartnerHandleBattleAnimation
 
-	thumb_func_start sub_814E014
-sub_814E014: @ 814E014
+	thumb_func_start LinkPartnerHandleLinkStandbyMsg
+LinkPartnerHandleLinkStandbyMsg: @ 814E014
 	push {lr}
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -5578,18 +5527,18 @@ sub_814E014: @ 814E014
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814E014
+	thumb_func_end LinkPartnerHandleLinkStandbyMsg
 
-	thumb_func_start sub_814E034
-sub_814E034: @ 814E034
+	thumb_func_start LinkPartnerHandleResetActionMoveSelection
+LinkPartnerHandleResetActionMoveSelection: @ 814E034
 	push {lr}
 	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814E034
+	thumb_func_end LinkPartnerHandleResetActionMoveSelection
 
-	thumb_func_start sub_814E040
-sub_814E040: @ 814E040
+	thumb_func_start LinkPartnerHandleCmd55
+LinkPartnerHandleCmd55: @ 814E040
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -5637,7 +5586,7 @@ sub_814E040: @ 814E040
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814E040
+	thumb_func_end LinkPartnerHandleCmd55
 
 	thumb_func_start nullsub_113
 nullsub_113: @ 814E0C0
