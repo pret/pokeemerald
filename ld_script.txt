@@ -254,6 +254,7 @@ SECTIONS {
         asm/fldeff_groundshake.o(.text);
         asm/fossil_specials.o(.text);
         src/berry_fix_program.o(.text);
+        src/pokemon_summary_screen.o(.text);
         asm/pokemon_summary_screen.o(.text);
         asm/pokenav.o(.text);
         asm/rayquaza_scene.o(.text);
