@@ -433,15 +433,15 @@ sub_8133DA0: @ 8133DA0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_81279C4
+	bl IsSelectedDecorInThePC
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08133DFC
 	ldr r5, =gSpecialVar_0x8006
-	ldr r0, =gUnknown_0203A172
+	ldr r0, =gCurDecorationIndex
 	ldrb r1, [r0]
-	ldr r0, =gUnknown_0203A14C
+	ldr r0, =gCurDecorInventoryItems
 	ldr r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
