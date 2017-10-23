@@ -5,41 +5,6 @@
 
 	.text
 
-	thumb_func_start ResetSecretBases
-ResetSecretBases: @ 80E8B28
-	push {r4,r5,lr}
-	movs r4, 0
-	ldr r5, =gSaveBlock1Ptr
-_080E8B2E:
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 5
-	ldr r0, =0x00001a9c
-	adds r1, r0
-	ldr r0, [r5]
-	adds r0, r1
-	bl sub_80E8AF0
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x13
-	bls _080E8B2E
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ResetSecretBases
-
-	thumb_func_start sub_80E8B58
-sub_80E8B58: @ 80E8B58
-	ldr r0, =gUnknown_0203A01C
-	ldr r1, =gSpecialVar_0x8004
-	ldrh r1, [r1]
-	strb r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end sub_80E8B58
-
 	thumb_func_start sub_80E8B6C
 sub_80E8B6C: @ 80E8B6C
 	push {r4,lr}
