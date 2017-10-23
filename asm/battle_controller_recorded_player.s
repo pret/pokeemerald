@@ -5,60 +5,6 @@
 
 	.text
 
-    
-	thumb_func_start nullsub_120
-nullsub_120: @ 8189948
-	bx lr
-	thumb_func_end nullsub_120
-
-	thumb_func_start SetBankFuncToRecordedPlayerBufferRunCommand
-SetBankFuncToRecordedPlayerBufferRunCommand: @ 818994C
-	ldr r1, =gBattleBankFunc
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =RecordedPlayerBufferRunCommand
-	str r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end SetBankFuncToRecordedPlayerBufferRunCommand
-
-	thumb_func_start RecordedPlayerBufferRunCommand
-RecordedPlayerBufferRunCommand: @ 8189968
-	push {lr}
-	ldr r2, =gBattleExecBuffer
-	ldr r1, =gBitTable
-	ldr r0, =gActiveBank
-	ldrb r3, [r0]
-	lsls r0, r3, 2
-	adds r0, r1
-	ldr r1, [r2]
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	beq _081899B4
-	ldr r0, =gBattleBufferA
-	lsls r1, r3, 9
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r0, 0x38
-	bhi _081899B0
-	ldr r0, =gRecordedPlayerBufferCommands
-	ldrb r1, [r1]
-	lsls r1, 2
-	adds r1, r0
-	ldr r0, [r1]
-	bl _call_via_r0
-	b _081899B4
-	.pool
-_081899B0:
-	bl RecordedPlayerBufferExecCompleted
-_081899B4:
-	pop {r0}
-	bx r0
-	thumb_func_end RecordedPlayerBufferRunCommand
-
 	thumb_func_start sub_81899B8
 sub_81899B8: @ 81899B8
 	push {lr}
@@ -1442,8 +1388,8 @@ _0818A5DE:
 	.pool
 	thumb_func_end sub_818A5BC
 
-	thumb_func_start sub_818A5EC
-sub_818A5EC: @ 818A5EC
+	thumb_func_start RecordedPlayerHandleGetMonData
+RecordedPlayerHandleGetMonData: @ 818A5EC
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -1495,7 +1441,7 @@ _0818A646:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818A5EC
+	thumb_func_end RecordedPlayerHandleGetMonData
 
 	thumb_func_start sub_818A660
 sub_818A660: @ 818A660
@@ -2375,16 +2321,16 @@ _0818ADF6:
 	.pool
 	thumb_func_end sub_818A660
 
-	thumb_func_start sub_818AE0C
-sub_818AE0C: @ 818AE0C
+	thumb_func_start RecordedPlayerHandleGetRawMonData
+RecordedPlayerHandleGetRawMonData: @ 818AE0C
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818AE0C
+	thumb_func_end RecordedPlayerHandleGetRawMonData
 
-	thumb_func_start sub_818AE18
-sub_818AE18: @ 818AE18
+	thumb_func_start RecordedPlayerHandleSetMonData
+RecordedPlayerHandleSetMonData: @ 818AE18
 	push {r4,r5,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -2424,7 +2370,7 @@ _0818AE66:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818AE18
+	thumb_func_end RecordedPlayerHandleSetMonData
 
 	thumb_func_start sub_818AE70
 sub_818AE70: @ 818AE70
@@ -3459,8 +3405,8 @@ _0818B836:
 	.pool
 	thumb_func_end sub_818AE70
 
-	thumb_func_start sub_818B86C
-sub_818B86C: @ 818B86C
+	thumb_func_start RecordedPlayerHandleSetRawMonData
+RecordedPlayerHandleSetRawMonData: @ 818B86C
 	push {r4-r7,lr}
 	ldr r1, =gBattlePartyID
 	ldr r7, =gActiveBank
@@ -3512,10 +3458,10 @@ _0818B8C4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818B86C
+	thumb_func_end RecordedPlayerHandleSetRawMonData
 
-	thumb_func_start sub_818B8E0
-sub_818B8E0: @ 818B8E0
+	thumb_func_start RecordedPlayerHandleLoadMonSprite
+RecordedPlayerHandleLoadMonSprite: @ 818B8E0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3629,10 +3575,10 @@ sub_818B8E0: @ 818B8E0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818B8E0
+	thumb_func_end RecordedPlayerHandleLoadMonSprite
 
-	thumb_func_start sub_818B9FC
-sub_818B9FC: @ 818B9FC
+	thumb_func_start RecordedPlayerHandleSwitchInAnim
+RecordedPlayerHandleSwitchInAnim: @ 818B9FC
 	push {r4-r6,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -3675,7 +3621,7 @@ sub_818B9FC: @ 818B9FC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818B9FC
+	thumb_func_end RecordedPlayerHandleSwitchInAnim
 
 	thumb_func_start sub_818BA6C
 sub_818BA6C: @ 818BA6C
@@ -3840,8 +3786,8 @@ sub_818BA6C: @ 818BA6C
 	.pool
 	thumb_func_end sub_818BA6C
 
-	thumb_func_start sub_818BBE8
-sub_818BBE8: @ 818BBE8
+	thumb_func_start RecordedPlayerHandleReturnMonToBall
+RecordedPlayerHandleReturnMonToBall: @ 818BBE8
 	push {r4-r6,lr}
 	ldr r1, =gBattleBufferA
 	ldr r6, =gActiveBank
@@ -3897,7 +3843,7 @@ _0818BC66:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818BBE8
+	thumb_func_end RecordedPlayerHandleReturnMonToBall
 
 	thumb_func_start sub_818BC78
 sub_818BC78: @ 818BC78
@@ -3969,8 +3915,8 @@ _0818BCF6:
 	.pool
 	thumb_func_end sub_818BC78
 
-	thumb_func_start sub_818BD04
-sub_818BD04: @ 818BD04
+	thumb_func_start RecordedPlayerHandleDrawTrainerPic
+RecordedPlayerHandleDrawTrainerPic: @ 818BD04
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4264,18 +4210,18 @@ _0818BF72:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818BD04
+	thumb_func_end RecordedPlayerHandleDrawTrainerPic
 
-	thumb_func_start sub_818BFAC
-sub_818BFAC: @ 818BFAC
+	thumb_func_start RecordedPlayerHandleTrainerSlide
+RecordedPlayerHandleTrainerSlide: @ 818BFAC
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818BFAC
+	thumb_func_end RecordedPlayerHandleTrainerSlide
 
-	thumb_func_start sub_818BFB8
-sub_818BFB8: @ 818BFB8
+	thumb_func_start RecordedPlayerHandleTrainerSlideBack
+RecordedPlayerHandleTrainerSlideBack: @ 818BFB8
 	push {r4-r6,lr}
 	ldr r6, =gBankSpriteIds
 	ldr r4, =gActiveBank
@@ -4345,10 +4291,10 @@ sub_818BFB8: @ 818BFB8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818BFB8
+	thumb_func_end RecordedPlayerHandleTrainerSlideBack
 
-	thumb_func_start sub_818C064
-sub_818C064: @ 818C064
+	thumb_func_start RecordedPlayerHandleFaintAnimation
+RecordedPlayerHandleFaintAnimation: @ 818C064
 	push {r4-r6,lr}
 	ldr r6, =gBattleSpritesDataPtr
 	ldr r4, [r6]
@@ -4450,42 +4396,42 @@ _0818C12E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C064
+	thumb_func_end RecordedPlayerHandleFaintAnimation
 
-	thumb_func_start sub_818C150
-sub_818C150: @ 818C150
+	thumb_func_start RecordedPlayerHandlePaletteFade
+RecordedPlayerHandlePaletteFade: @ 818C150
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C150
+	thumb_func_end RecordedPlayerHandlePaletteFade
 
-	thumb_func_start sub_818C15C
-sub_818C15C: @ 818C15C
+	thumb_func_start RecordedPlayerHandleSuccessBallThrowAnim
+RecordedPlayerHandleSuccessBallThrowAnim: @ 818C15C
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C15C
+	thumb_func_end RecordedPlayerHandleSuccessBallThrowAnim
 
-	thumb_func_start sub_818C168
-sub_818C168: @ 818C168
+	thumb_func_start RecordedPlayerHandleBallThrowAnim
+RecordedPlayerHandleBallThrowAnim: @ 818C168
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C168
+	thumb_func_end RecordedPlayerHandleBallThrowAnim
 
-	thumb_func_start sub_818C174
-sub_818C174: @ 818C174
+	thumb_func_start RecordedPlayerHandlePause
+RecordedPlayerHandlePause: @ 818C174
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C174
+	thumb_func_end RecordedPlayerHandlePause
 
-	thumb_func_start sub_818C180
-sub_818C180: @ 818C180
+	thumb_func_start RecordedPlayerHandleMoveAnimation
+RecordedPlayerHandleMoveAnimation: @ 818C180
 	push {r4-r6,lr}
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
@@ -4619,7 +4565,7 @@ _0818C2A6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C180
+	thumb_func_end RecordedPlayerHandleMoveAnimation
 
 	thumb_func_start bx_move_anim_2
 bx_move_anim_2: @ 818C2B8
@@ -4805,8 +4751,8 @@ _0818C42C:
 	bx r0
 	thumb_func_end bx_move_anim_2
 
-	thumb_func_start sub_818C43C
-sub_818C43C: @ 818C43C
+	thumb_func_start RecordedPlayerHandlePrintString
+RecordedPlayerHandlePrintString: @ 818C43C
 	push {r4,lr}
 	ldr r0, =gBattle_BG0_X
 	movs r1, 0
@@ -4833,15 +4779,15 @@ sub_818C43C: @ 818C43C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C43C
+	thumb_func_end RecordedPlayerHandlePrintString
 
-	thumb_func_start sub_818C490
-sub_818C490: @ 818C490
+	thumb_func_start RecordedPlayerHandlePrintStringPlayerOnly
+RecordedPlayerHandlePrintStringPlayerOnly: @ 818C490
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C490
+	thumb_func_end RecordedPlayerHandlePrintStringPlayerOnly
 
 	thumb_func_start sub_818C49C
 sub_818C49C: @ 818C49C
@@ -4869,8 +4815,8 @@ _0818C4C6:
 	.pool
 	thumb_func_end sub_818C49C
 
-	thumb_func_start sub_818C4D8
-sub_818C4D8: @ 818C4D8
+	thumb_func_start RecordedPlayerHandleChooseAction
+RecordedPlayerHandleChooseAction: @ 818C4D8
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -4903,18 +4849,18 @@ _0818C522:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C4D8
+	thumb_func_end RecordedPlayerHandleChooseAction
 
-	thumb_func_start sub_818C52C
-sub_818C52C: @ 818C52C
+	thumb_func_start RecordedPlayerHandleUnknownYesNoBox
+RecordedPlayerHandleUnknownYesNoBox: @ 818C52C
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C52C
+	thumb_func_end RecordedPlayerHandleUnknownYesNoBox
 
-	thumb_func_start sub_818C538
-sub_818C538: @ 818C538
+	thumb_func_start RecordedPlayerHandleChooseMove
+RecordedPlayerHandleChooseMove: @ 818C538
 	push {r4,r5,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -4954,18 +4900,18 @@ _0818C584:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C538
+	thumb_func_end RecordedPlayerHandleChooseMove
 
-	thumb_func_start sub_818C594
-sub_818C594: @ 818C594
+	thumb_func_start RecordedPlayerHandleChooseItem
+RecordedPlayerHandleChooseItem: @ 818C594
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C594
+	thumb_func_end RecordedPlayerHandleChooseItem
 
-	thumb_func_start sub_818C5A0
-sub_818C5A0: @ 818C5A0
+	thumb_func_start RecordedPlayerHandleChoosePokemon
+RecordedPlayerHandleChoosePokemon: @ 818C5A0
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -4989,18 +4935,18 @@ sub_818C5A0: @ 818C5A0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C5A0
+	thumb_func_end RecordedPlayerHandleChoosePokemon
 
-	thumb_func_start sub_818C5DC
-sub_818C5DC: @ 818C5DC
+	thumb_func_start RecordedPlayerHandleCmd23
+RecordedPlayerHandleCmd23: @ 818C5DC
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C5DC
+	thumb_func_end RecordedPlayerHandleCmd23
 
-	thumb_func_start sub_818C5E8
-sub_818C5E8: @ 818C5E8
+	thumb_func_start RecordedPlayerHandleHealthBarUpdate
+RecordedPlayerHandleHealthBarUpdate: @ 818C5E8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -5100,18 +5046,18 @@ _0818C6B2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C5E8
+	thumb_func_end RecordedPlayerHandleHealthBarUpdate
 
-	thumb_func_start sub_818C6E8
-sub_818C6E8: @ 818C6E8
+	thumb_func_start RecordedPlayerHandleExpUpdate
+RecordedPlayerHandleExpUpdate: @ 818C6E8
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C6E8
+	thumb_func_end RecordedPlayerHandleExpUpdate
 
-	thumb_func_start sub_818C6F4
-sub_818C6F4: @ 818C6F4
+	thumb_func_start RecordedPlayerHandleStatusIconUpdate
+RecordedPlayerHandleStatusIconUpdate: @ 818C6F4
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -5157,10 +5103,10 @@ _0818C748:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C6F4
+	thumb_func_end RecordedPlayerHandleStatusIconUpdate
 
-	thumb_func_start sub_818C76C
-sub_818C76C: @ 818C76C
+	thumb_func_start RecordedPlayerHandleStatusAnimation
+RecordedPlayerHandleStatusAnimation: @ 818C76C
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -5204,82 +5150,82 @@ _0818C7BC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C76C
+	thumb_func_end RecordedPlayerHandleStatusAnimation
 
-	thumb_func_start sub_818C7D4
-sub_818C7D4: @ 818C7D4
+	thumb_func_start RecordedPlayerHandleStatusXor
+RecordedPlayerHandleStatusXor: @ 818C7D4
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C7D4
+	thumb_func_end RecordedPlayerHandleStatusXor
 
-	thumb_func_start sub_818C7E0
-sub_818C7E0: @ 818C7E0
+	thumb_func_start RecordedPlayerHandleDataTransfer
+RecordedPlayerHandleDataTransfer: @ 818C7E0
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C7E0
+	thumb_func_end RecordedPlayerHandleDataTransfer
 
-	thumb_func_start sub_818C7EC
-sub_818C7EC: @ 818C7EC
+	thumb_func_start RecordedPlayerHandleDMA3Transfer
+RecordedPlayerHandleDMA3Transfer: @ 818C7EC
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C7EC
+	thumb_func_end RecordedPlayerHandleDMA3Transfer
 
-	thumb_func_start sub_818C7F8
-sub_818C7F8: @ 818C7F8
+	thumb_func_start RecordedPlayerHandlePlayBGM
+RecordedPlayerHandlePlayBGM: @ 818C7F8
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C7F8
+	thumb_func_end RecordedPlayerHandlePlayBGM
 
-	thumb_func_start sub_818C804
-sub_818C804: @ 818C804
+	thumb_func_start RecordedPlayerHandleCmd32
+RecordedPlayerHandleCmd32: @ 818C804
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C804
+	thumb_func_end RecordedPlayerHandleCmd32
 
-	thumb_func_start sub_818C810
-sub_818C810: @ 818C810
+	thumb_func_start RecordedPlayerHandleTwoReturnValues
+RecordedPlayerHandleTwoReturnValues: @ 818C810
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C810
+	thumb_func_end RecordedPlayerHandleTwoReturnValues
 
-	thumb_func_start sub_818C81C
-sub_818C81C: @ 818C81C
+	thumb_func_start RecordedPlayerHandleChosenMonReturnValue
+RecordedPlayerHandleChosenMonReturnValue: @ 818C81C
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C81C
+	thumb_func_end RecordedPlayerHandleChosenMonReturnValue
 
-	thumb_func_start sub_818C828
-sub_818C828: @ 818C828
+	thumb_func_start RecordedPlayerHandleOneReturnValue
+RecordedPlayerHandleOneReturnValue: @ 818C828
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C828
+	thumb_func_end RecordedPlayerHandleOneReturnValue
 
-	thumb_func_start sub_818C834
-sub_818C834: @ 818C834
+	thumb_func_start RecordedPlayerHandleOneReturnValue_Duplicate
+RecordedPlayerHandleOneReturnValue_Duplicate: @ 818C834
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C834
+	thumb_func_end RecordedPlayerHandleOneReturnValue_Duplicate
 
-	thumb_func_start sub_818C840
-sub_818C840: @ 818C840
+	thumb_func_start RecordedPlayerHandleCmd37
+RecordedPlayerHandleCmd37: @ 818C840
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -5291,10 +5237,10 @@ sub_818C840: @ 818C840
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C840
+	thumb_func_end RecordedPlayerHandleCmd37
 
-	thumb_func_start sub_818C85C
-sub_818C85C: @ 818C85C
+	thumb_func_start RecordedPlayerHandleCmd38
+RecordedPlayerHandleCmd38: @ 818C85C
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, =gBattleBufferA
@@ -5316,10 +5262,10 @@ sub_818C85C: @ 818C85C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C85C
+	thumb_func_end RecordedPlayerHandleCmd38
 
-	thumb_func_start sub_818C894
-sub_818C894: @ 818C894
+	thumb_func_start RecordedPlayerHandleCmd39
+RecordedPlayerHandleCmd39: @ 818C894
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -5330,10 +5276,10 @@ sub_818C894: @ 818C894
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C894
+	thumb_func_end RecordedPlayerHandleCmd39
 
-	thumb_func_start sub_818C8AC
-sub_818C8AC: @ 818C8AC
+	thumb_func_start RecordedPlayerHandleCmd40
+RecordedPlayerHandleCmd40: @ 818C8AC
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, [r3]
@@ -5351,10 +5297,10 @@ sub_818C8AC: @ 818C8AC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C8AC
+	thumb_func_end RecordedPlayerHandleCmd40
 
-	thumb_func_start sub_818C8D4
-sub_818C8D4: @ 818C8D4
+	thumb_func_start RecordedPlayerHandleHitAnimation
+RecordedPlayerHandleHitAnimation: @ 818C8D4
 	push {r4,lr}
 	ldr r3, =gSprites
 	ldr r2, =gBankSpriteIds
@@ -5400,18 +5346,18 @@ _0818C932:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C8D4
+	thumb_func_end RecordedPlayerHandleHitAnimation
 
-	thumb_func_start sub_818C944
-sub_818C944: @ 818C944
+	thumb_func_start RecordedPlayerHandleCmd42
+RecordedPlayerHandleCmd42: @ 818C944
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C944
+	thumb_func_end RecordedPlayerHandleCmd42
 
-	thumb_func_start sub_818C950
-sub_818C950: @ 818C950
+	thumb_func_start RecordedPlayerHandleEffectivenessSound
+RecordedPlayerHandleEffectivenessSound: @ 818C950
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -5441,10 +5387,10 @@ _0818C964:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C950
+	thumb_func_end RecordedPlayerHandleEffectivenessSound
 
-	thumb_func_start sub_818C994
-sub_818C994: @ 818C994
+	thumb_func_start RecordedPlayerHandlePlayFanfareOrBGM
+RecordedPlayerHandlePlayFanfareOrBGM: @ 818C994
 	push {r4,r5,lr}
 	ldr r4, =gBattleBufferA
 	ldr r5, =gActiveBank
@@ -5484,10 +5430,10 @@ _0818C9E4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818C994
+	thumb_func_end RecordedPlayerHandlePlayFanfareOrBGM
 
-	thumb_func_start sub_818C9F0
-sub_818C9F0: @ 818C9F0
+	thumb_func_start RecordedPlayerHandleFaintingCry
+RecordedPlayerHandleFaintingCry: @ 818C9F0
 	push {lr}
 	ldr r1, =gBattlePartyID
 	ldr r0, =gActiveBank
@@ -5511,10 +5457,10 @@ sub_818C9F0: @ 818C9F0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818C9F0
+	thumb_func_end RecordedPlayerHandleFaintingCry
 
-	thumb_func_start dp01t_2E_2_battle_intro
-dp01t_2E_2_battle_intro: @ 818CA30
+	thumb_func_start RecordedPlayerHandleIntroSlide
+RecordedPlayerHandleIntroSlide: @ 818CA30
 	push {lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -5533,10 +5479,10 @@ dp01t_2E_2_battle_intro: @ 818CA30
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_2E_2_battle_intro
+	thumb_func_end RecordedPlayerHandleIntroSlide
 
-	thumb_func_start sub_818CA64
-sub_818CA64: @ 818CA64
+	thumb_func_start RecordedPlayerHandleIntroTrainerBallThrow
+RecordedPlayerHandleIntroTrainerBallThrow: @ 818CA64
 	push {r4-r6,lr}
 	ldr r5, =gBankSpriteIds
 	ldr r6, =gActiveBank
@@ -5715,7 +5661,7 @@ _0818CBD4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818CA64
+	thumb_func_end RecordedPlayerHandleIntroTrainerBallThrow
 
 	thumb_func_start sub_818CC24
 sub_818CC24: @ 818CC24
@@ -5834,8 +5780,8 @@ _0818CD0C:
 	.pool
 	thumb_func_end sub_818CC24
 
-	thumb_func_start sub_818CD30
-sub_818CD30: @ 818CD30
+	thumb_func_start RecordedPlayerHandleDrawPartyStatusSummary
+RecordedPlayerHandleDrawPartyStatusSummary: @ 818CD30
 	push {r4-r6,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -5918,7 +5864,7 @@ _0818CDD4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818CD30
+	thumb_func_end RecordedPlayerHandleDrawPartyStatusSummary
 
 	thumb_func_start bx_increment_dp11b_field_5_till_x60_then_resume
 bx_increment_dp11b_field_5_till_x60_then_resume: @ 818CDF4
@@ -5956,8 +5902,8 @@ _0818CE2C:
 	.pool
 	thumb_func_end bx_increment_dp11b_field_5_till_x60_then_resume
 
-	thumb_func_start sub_818CE3C
-sub_818CE3C: @ 818CE3C
+	thumb_func_start RecordedPlayerHandleCmd49
+RecordedPlayerHandleCmd49: @ 818CE3C
 	push {lr}
 	ldr r0, =gBattleSpritesDataPtr
 	ldr r1, [r0]
@@ -5988,18 +5934,18 @@ _0818CE6E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818CE3C
+	thumb_func_end RecordedPlayerHandleCmd49
 
-	thumb_func_start sub_818CE8C
-sub_818CE8C: @ 818CE8C
+	thumb_func_start RecordedPlayerHandleCmd50
+RecordedPlayerHandleCmd50: @ 818CE8C
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818CE8C
+	thumb_func_end RecordedPlayerHandleCmd50
 
-	thumb_func_start sub_818CE98
-sub_818CE98: @ 818CE98
+	thumb_func_start RecordedPlayerHandleSpriteInvisibility
+RecordedPlayerHandleSpriteInvisibility: @ 818CE98
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -6039,10 +5985,10 @@ _0818CEDE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818CE98
+	thumb_func_end RecordedPlayerHandleSpriteInvisibility
 
-	thumb_func_start sub_818CEF8
-sub_818CEF8: @ 818CEF8
+	thumb_func_start RecordedPlayerHandleBattleAnimation
+RecordedPlayerHandleBattleAnimation: @ 818CEF8
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, =gActiveBank
@@ -6088,26 +6034,26 @@ _0818CF50:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818CEF8
+	thumb_func_end RecordedPlayerHandleBattleAnimation
 
-	thumb_func_start sub_818CF60
-sub_818CF60: @ 818CF60
+	thumb_func_start RecordedPlayerHandleLinkStandbyMsg
+RecordedPlayerHandleLinkStandbyMsg: @ 818CF60
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818CF60
+	thumb_func_end RecordedPlayerHandleLinkStandbyMsg
 
-	thumb_func_start sub_818CF6C
-sub_818CF6C: @ 818CF6C
+	thumb_func_start RecordedPlayerHandleResetActionMoveSelection
+RecordedPlayerHandleResetActionMoveSelection: @ 818CF6C
 	push {lr}
 	bl RecordedPlayerBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818CF6C
+	thumb_func_end RecordedPlayerHandleResetActionMoveSelection
 
-	thumb_func_start sub_818CF78
-sub_818CF78: @ 818CF78
+	thumb_func_start RecordedPlayerHandleCmd55
+RecordedPlayerHandleCmd55: @ 818CF78
 	push {r4,lr}
 	ldr r2, =gBattleOutcome
 	ldr r1, =gBattleBufferA
@@ -6133,7 +6079,7 @@ sub_818CF78: @ 818CF78
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_818CF78
+	thumb_func_end RecordedPlayerHandleCmd55
 
 	thumb_func_start nullsub_121
 nullsub_121: @ 818CFC4
