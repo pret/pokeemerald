@@ -4238,18 +4238,18 @@ _08061708:
 	cmp r0, 0x1
 	bne _08061734
 	ldrh r0, [r3]
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 	b _0806175A
 	.pool
 _08061734:
 	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 	b _0806175A
 	.pool
 _08061744:
 	ldrh r0, [r3]
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 	b _0806175A
 _0806174C:
 	movs r0, 0x80
@@ -4485,18 +4485,18 @@ _08061950:
 	cmp r0, 0x1
 	bne _0806197C
 	ldrh r0, [r3]
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 	b _080619A2
 	.pool
 _0806197C:
 	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 	b _080619A2
 	.pool
 _0806198C:
 	ldrh r0, [r3]
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 	b _080619A2
 _08061994:
 	movs r0, 0x80

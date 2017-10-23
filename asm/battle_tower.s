@@ -1329,8 +1329,8 @@ _08162A8A:
 	.pool
 	thumb_func_end sub_81628A0
 
-	thumb_func_start sub_8162AA0
-sub_8162AA0: @ 8162AA0
+	thumb_func_start GetFrontierTrainerFrontSpriteId
+GetFrontierTrainerFrontSpriteId: @ 8162AA0
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -1454,7 +1454,7 @@ _08162BCA:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8162AA0
+	thumb_func_end GetFrontierTrainerFrontSpriteId
 
 	thumb_func_start GetFrontierOpponentClass
 GetFrontierOpponentClass: @ 8162BD8

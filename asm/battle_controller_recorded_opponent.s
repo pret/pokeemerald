@@ -4045,7 +4045,7 @@ _081888D8:
 	ldr r0, =gTrainerBattleOpponent_B
 _081888DA:
 	ldrh r0, [r0]
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	b _0818892C

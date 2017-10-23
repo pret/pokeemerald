@@ -6971,7 +6971,7 @@ _08192598:
 	.pool
 _081925AC:
 	ldr r0, [sp, 0x24]
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 _081925B2:
 	lsls r0, 24
 	lsrs r0, 24
@@ -8554,7 +8554,7 @@ _081932D4:
 _081932E4:
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 _081932EC:
 	lsls r0, 24
 	lsrs r0, 24
@@ -8642,7 +8642,7 @@ _08193388:
 _081933A4:
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 _081933B0:
