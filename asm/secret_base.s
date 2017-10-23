@@ -5,37 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E8AF0
-sub_80E8AF0: @ 80E8AF0
-	push {r4,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	movs r0, 0
-	str r0, [sp]
-	ldr r2, =0x01000028
-	mov r0, sp
-	adds r1, r4, 0
-	bl CpuFastSet
-	movs r2, 0
-	adds r4, 0x2
-	movs r3, 0xFF
-_080E8B0A:
-	adds r0, r4, r2
-	ldrb r1, [r0]
-	orrs r1, r3
-	strb r1, [r0]
-	adds r0, r2, 0x1
-	lsls r0, 16
-	lsrs r2, r0, 16
-	cmp r2, 0x6
-	bls _080E8B0A
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E8AF0
-
 	thumb_func_start ResetSecretBases
 ResetSecretBases: @ 80E8B28
 	push {r4,r5,lr}
