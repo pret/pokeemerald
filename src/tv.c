@@ -2353,7 +2353,7 @@ void sub_80EDFB4(TVShow *show)
     show->secretBaseVisit.move = sTV_SecretBaseVisitMonsTemp[j].move;
 }
 
-void sub_80EE104(void)
+void TV_PutSecretBaseVisitOnTheAir(void)
 {
     TVShow *show;
 

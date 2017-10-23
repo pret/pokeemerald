@@ -207,7 +207,7 @@ static bool32 PrintStartMenuItemsMultistep(s16 *index, u32 n)
 
     do
     {
-        if (sStartMenuItems[sCurrentStartMenuActions[_index]].func == StartMenu_PlayerName)
+        if (sStartMenuItems[sCurrentStartMenuActions[_index]].func.u8_void == StartMenu_PlayerName)
         {
 
         }
