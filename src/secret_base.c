@@ -16,7 +16,7 @@ struct SecretBaseListMenuBuffer {
 };
 
 // Static RAM declarations
-EWRAM_DATA u8 gUnknown_0203A01C = 0;
+EWRAM_DATA u8 sCurSecretBaseId = 0;
 EWRAM_DATA u8 gUnknown_0203A01D = 0;
 EWRAM_DATA struct SecretBaseListMenuBuffer *gUnknown_0203A020 = NULL;
 
@@ -45,7 +45,36 @@ void ResetSecretBases(void)
 
 void sub_80E8B58(void)
 {
-    gUnknown_0203A01C = gSpecialVar_0x8004;
+    sCurSecretBaseId = gSpecialVar_0x8004;
+}
+
+void sub_80E8B6C(void)
+{
+    u16 i;
+
+    gScriptResult = FALSE;
+    for (i = 0; i < 20; i ++)
+    {
+        if (sCurSecretBaseId != gSaveBlock1Ptr->secretBases[i].secretBaseId)
+        {
+            continue;
+        }
+        gScriptResult = TRUE;
+        VarSet(VAR_0x4054, i);
+        break;
+    }
+}
+
+void sub_80E8BC8(void)
+{
+    if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0)
+    {
+        gScriptResult = TRUE;
+    }
+    else
+    {
+        gScriptResult = FALSE;
+    }
 }
 
 // .rodata

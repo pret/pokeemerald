@@ -5,72 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E8B6C
-sub_80E8B6C: @ 80E8B6C
-	push {r4,lr}
-	ldr r0, =gScriptResult
-	movs r1, 0
-	strh r1, [r0]
-	movs r3, 0
-	adds r4, r0, 0
-	b _080E8B86
-	.pool
-_080E8B80:
-	adds r0, r3, 0x1
-	lsls r0, 16
-	lsrs r3, r0, 16
-_080E8B86:
-	cmp r3, 0x13
-	bhi _080E8BB0
-	ldr r2, =gUnknown_0203A01C
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	lsls r0, r3, 2
-	adds r0, r3
-	lsls r0, 5
-	adds r1, r0
-	ldr r0, =0x00001a9c
-	adds r1, r0
-	ldrb r0, [r2]
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _080E8B80
-	movs r0, 0x1
-	strh r0, [r4]
-	ldr r0, =0x00004054
-	adds r1, r3, 0
-	bl VarSet
-_080E8BB0:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E8B6C
-
-	thumb_func_start sub_80E8BC8
-sub_80E8BC8: @ 80E8BC8
-	push {lr}
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00001a9c
-	adds r0, r1
-	ldrb r1, [r0]
-	cmp r1, 0
-	beq _080E8BEC
-	ldr r1, =gScriptResult
-	movs r0, 0x1
-	strh r0, [r1]
-	b _080E8BF0
-	.pool
-_080E8BEC:
-	ldr r0, =gScriptResult
-	strh r1, [r0]
-_080E8BF0:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E8BC8
-
 	thumb_func_start sub_80E8BF8
 sub_80E8BF8: @ 80E8BF8
 	push {r4,lr}
@@ -375,7 +309,7 @@ sub_80E8E18: @ 80E8E18
 	push {r6}
 	ldr r2, =gSaveBlock1Ptr
 	ldr r0, [r2]
-	ldr r1, =gUnknown_0203A01C
+	ldr r1, =sCurSecretBaseId
 	ldrb r1, [r1]
 	ldr r3, =0x00001a9c
 	adds r0, r3
@@ -548,7 +482,7 @@ _080E8F8A:
 	thumb_func_start sub_80E8F9C
 sub_80E8F9C: @ 80E8F9C
 	push {lr}
-	ldr r0, =gUnknown_0203A01C
+	ldr r0, =sCurSecretBaseId
 	ldrb r0, [r0]
 	movs r1, 0xA
 	bl __udivsi3
@@ -767,7 +701,7 @@ sub_80E916C: @ 80E916C
 	ands r0, r1
 	cmp r0, 0
 	bne _080E91D4
-	ldr r0, =gUnknown_0203A01C
+	ldr r0, =sCurSecretBaseId
 	ldrb r0, [r0]
 	movs r1, 0xA
 	bl __udivsi3
@@ -1302,7 +1236,7 @@ sub_80E9608: @ 80E9608
 	ldrb r0, [r4, 0x3]
 	cmp r3, r0
 	bge _080E9660
-	ldr r6, =gUnknown_0203A01C
+	ldr r6, =sCurSecretBaseId
 _080E9618:
 	lsls r3, 16
 	asrs r1, r3, 16
@@ -1456,7 +1390,7 @@ sub_80E9744: @ 80E9744
 	ldr r0, [r0]
 	ldr r1, =0x00001a9c
 	adds r0, r1
-	ldr r1, =gUnknown_0203A01C
+	ldr r1, =sCurSecretBaseId
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
