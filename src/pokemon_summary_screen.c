@@ -165,8 +165,8 @@ extern void sub_8199C30(u8 a, u8 b, u8 c, u8 d, u8 e, u8 f);
 extern void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor* colors, s8 speed, u8 *str);
 extern s32 GetStringCenterAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
 extern s32 GetStringRightAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
-extern u8 sub_81A6BF4();
-extern u8 sub_81B9E94();
+extern bool8 sub_81A6BF4();
+extern bool8 sub_81B9E94();
 extern void sub_81AFBF0();
 extern u8 sub_81AFC0C(u8 a, u8 *b);
 extern void sub_81AFC28(u8 *a, u8 *b);
@@ -2718,7 +2718,7 @@ void sub_81C2AFC(u8 a)
         case 0:
             PutWindowTilemap(0);
             PutWindowTilemap(4);
-            if (sub_81A6BF4() == 1 || sub_81B9E94() == 1)
+            if (sub_81A6BF4() == TRUE || sub_81B9E94() == TRUE)
                 PutWindowTilemap(8);
             PutWindowTilemap(9);
             break;
@@ -2763,7 +2763,7 @@ void sub_81C2C38(u8 a)
     {
         case 0:
             ClearWindowTilemap(4);
-            if (sub_81A6BF4() == 1 || sub_81B9E94() == 1)
+            if (sub_81A6BF4() == TRUE || sub_81B9E94() == TRUE)
                 ClearWindowTilemap(8);
             ClearWindowTilemap(9);
             break;
@@ -2970,7 +2970,7 @@ void sub_81C2EC4()
 void sub_81C2F5C()
 {
     int r4;
-    if (sub_81A6BF4() != 1 && sub_81B9E94() != 1)
+    if (sub_81A6BF4() != TRUE && sub_81B9E94() != TRUE)
     {
         ConvertIntToDecimalStringN(StringCopy(gStringVar1, gText_UnkCtrlF907F908), (u16)gUnknown_0203CF1C->summary.OTID, 2, 5);
         r4 = GetStringRightAlignXOffset(1, gStringVar1, 0x38);
@@ -2998,7 +2998,7 @@ void sub_81C307C()
     sub_81AFC0C(0, gUnknown_0861CE74);
     sub_81AFC0C(1, gUnknown_0861CE7B);
     sub_81C31C0();
-    if (sub_81A6BF4() == 1 || sub_81B9E94() == 1 || sub_81C3304() == TRUE)
+    if (sub_81A6BF4() == TRUE || sub_81B9E94() == TRUE || sub_81C3304() == TRUE)
         sub_81AFC28(gStringVar4, gText_XNature);
     else
     {
