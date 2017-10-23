@@ -4054,7 +4054,7 @@ _08066796:
 	.pool
 _080667A8:
 	ldrb r0, [r5]
-	bl sub_806D864
+	bl GetBankMultiplayerId
 	ldr r6, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
@@ -4065,7 +4065,7 @@ _080667A8:
 	cmp r0, 0x4
 	beq _080667D8
 	ldrb r0, [r5]
-	bl sub_806D864
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4077,7 +4077,7 @@ _080667A8:
 	bne _080667F4
 _080667D8:
 	ldrb r0, [r5]
-	bl sub_806D864
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4089,7 +4089,7 @@ _080667D8:
 	.pool
 _080667F4:
 	ldrb r0, [r5]
-	bl sub_806D864
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4100,7 +4100,7 @@ _080667F4:
 	cmp r0, 0x2
 	beq _08066822
 	ldrb r0, [r5]
-	bl sub_806D864
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4111,7 +4111,7 @@ _080667F4:
 	bne _08066838
 _08066822:
 	ldrb r0, [r5]
-	bl sub_806D864
+	bl GetBankMultiplayerId
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4122,7 +4122,7 @@ _08066822:
 	b _08066924
 _08066838:
 	ldrb r0, [r5]
-	bl sub_806D864
+	bl GetBankMultiplayerId
 	b _0806693A
 _08066840:
 	movs r7, 0xB0

@@ -5463,7 +5463,7 @@ static void atk4F_jump_if_cannot_switch(void)
                 party = gPlayerParty;
 
                 val = 0;
-                if (sub_806D82C(sub_806D864(gActiveBank)) == TRUE)
+                if (sub_806D82C(GetBankMultiplayerId(gActiveBank)) == TRUE)
                     val = 3;
             }
             else
@@ -5485,7 +5485,7 @@ static void atk4F_jump_if_cannot_switch(void)
 
 
             val = 0;
-            if (sub_806D82C(sub_806D864(gActiveBank)) == TRUE)
+            if (sub_806D82C(GetBankMultiplayerId(gActiveBank)) == TRUE)
                 val = 3;
         }
 
@@ -7933,7 +7933,7 @@ static void atk8F_forcerandomswitch(void)
         else if ((gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
                  || (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_x2000000))
         {
-            if (sub_806D82C(sub_806D864(gBankTarget)) == 1)
+            if (sub_806D82C(GetBankMultiplayerId(gBankTarget)) == 1)
             {
                 firstMonId = 3;
                 lastMonId = 6;

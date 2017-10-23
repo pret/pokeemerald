@@ -1226,9 +1226,9 @@ void EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, u8* arg4)
 void EmitCmd23(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_23;
-    gBattleBuffersTransferData[1] = 23;
-    gBattleBuffersTransferData[2] = 23;
-    gBattleBuffersTransferData[3] = 23;
+    gBattleBuffersTransferData[1] = CONTROLLER_23;
+    gBattleBuffersTransferData[2] = CONTROLLER_23;
+    gBattleBuffersTransferData[3] = CONTROLLER_23;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1289,7 +1289,7 @@ void EmitDataTransfer(u8 bufferId, u16 size, void *data)
     s32 i;
 
     gBattleBuffersTransferData[0] = CONTROLLER_DATATRANSFER;
-    gBattleBuffersTransferData[1] = 29;
+    gBattleBuffersTransferData[1] = CONTROLLER_DATATRANSFER;
     gBattleBuffersTransferData[2] = size;
     gBattleBuffersTransferData[3] = (size & 0xFF00) >> 8;
     for (i = 0; i < size; i++)
@@ -1421,9 +1421,9 @@ void EmitHitAnimation(u8 bufferId)
 void EmitCmd42(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_42;
-    gBattleBuffersTransferData[1] = 42;
-    gBattleBuffersTransferData[2] = 42;
-    gBattleBuffersTransferData[3] = 42;
+    gBattleBuffersTransferData[1] = CONTROLLER_42;
+    gBattleBuffersTransferData[2] = CONTROLLER_42;
+    gBattleBuffersTransferData[3] = CONTROLLER_42;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1448,9 +1448,9 @@ void EmitPlayFanfareOrBGM(u8 bufferId, u16 songId, bool8 playBGM)
 void EmitFaintingCry(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_FAINTINGCRY;
-    gBattleBuffersTransferData[1] = 45;
-    gBattleBuffersTransferData[2] = 45;
-    gBattleBuffersTransferData[3] = 45;
+    gBattleBuffersTransferData[1] = CONTROLLER_FAINTINGCRY;
+    gBattleBuffersTransferData[2] = CONTROLLER_FAINTINGCRY;
+    gBattleBuffersTransferData[3] = CONTROLLER_FAINTINGCRY;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1464,9 +1464,9 @@ void EmitIntroSlide(u8 bufferId, u8 terrainId)
 void EmitIntroTrainerBallThrow(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_INTROTRAINERBALLTHROW;
-    gBattleBuffersTransferData[1] = 47;
-    gBattleBuffersTransferData[2] = 47;
-    gBattleBuffersTransferData[3] = 47;
+    gBattleBuffersTransferData[1] = CONTROLLER_INTROTRAINERBALLTHROW;
+    gBattleBuffersTransferData[2] = CONTROLLER_INTROTRAINERBALLTHROW;
+    gBattleBuffersTransferData[3] = CONTROLLER_INTROTRAINERBALLTHROW;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1477,7 +1477,7 @@ void EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8
     gBattleBuffersTransferData[0] = CONTROLLER_DRAWPARTYSTATUSSUMMARY;
     gBattleBuffersTransferData[1] = arg2 & 0x7F;
     gBattleBuffersTransferData[2] = (arg2 & 0x80) >> 7;
-    gBattleBuffersTransferData[3] = 48;
+    gBattleBuffersTransferData[3] = CONTROLLER_DRAWPARTYSTATUSSUMMARY;
     for (i = 0; i < (s32)(sizeof(struct HpAndStatus) * 6); i++)
         gBattleBuffersTransferData[4 + i] = *(i + (u8*)(hpAndStatus));
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, sizeof(struct HpAndStatus) * 6 + 4);
@@ -1486,18 +1486,18 @@ void EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8
 void EmitCmd49(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_49;
-    gBattleBuffersTransferData[1] = 49;
-    gBattleBuffersTransferData[2] = 49;
-    gBattleBuffersTransferData[3] = 49;
+    gBattleBuffersTransferData[1] = CONTROLLER_49;
+    gBattleBuffersTransferData[2] = CONTROLLER_49;
+    gBattleBuffersTransferData[3] = CONTROLLER_49;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitCmd50(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_50;
-    gBattleBuffersTransferData[1] = 50;
-    gBattleBuffersTransferData[2] = 50;
-    gBattleBuffersTransferData[3] = 50;
+    gBattleBuffersTransferData[1] = CONTROLLER_50;
+    gBattleBuffersTransferData[2] = CONTROLLER_50;
+    gBattleBuffersTransferData[3] = CONTROLLER_50;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1505,8 +1505,8 @@ void EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_SPRITEINVISIBILITY;
     gBattleBuffersTransferData[1] = isInvisible;
-    gBattleBuffersTransferData[2] = 51;
-    gBattleBuffersTransferData[3] = 51;
+    gBattleBuffersTransferData[2] = CONTROLLER_SPRITEINVISIBILITY;
+    gBattleBuffersTransferData[3] = CONTROLLER_SPRITEINVISIBILITY;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 

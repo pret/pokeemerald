@@ -1716,7 +1716,7 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
 
     paletteNum = AllocSpritePalette(0xD6F9);
     if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
-        trainerPicId = gLinkPlayers[sub_806D864(gActiveBank)].gender;
+        trainerPicId = gLinkPlayers[GetBankMultiplayerId(gActiveBank)].gender;
     else
         trainerPicId = gSaveBlock2Ptr->playerGender;
 
