@@ -1490,8 +1490,13 @@
 	goto_eq \dest
 	.endm
 
-	.macro giveitem item, amount=1, function=0
+	.macro giveitem_std item, amount=1, function=0
 	setorcopyvar 0x8000, \item
 	setorcopyvar 0x8001, \amount
 	callstd \function
+	.endm
+
+	.macro givedecoration_std decoration
+	setorcopyvar 0x8000, \decoration
+	callstd 7
 	.endm
