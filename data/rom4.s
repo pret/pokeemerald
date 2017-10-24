@@ -25,13 +25,13 @@ gUnknown_08339E00:: @ 8339E00
 	.incbin "baserom.gba", 0x339e00, 0x8
 
 @ 8339E08
-	.include "data/tilesets/tileset_graphics.inc"
+	.include "data/tilesets/graphics.inc"
 
 @ 83960F0
 	.include "data/tilesets/metatiles.inc"
 
 @ 83DF704
-	.include "data/tilesets/tilesets.inc"
+	.include "data/tilesets/headers.inc"
 
 @ 83DFE14
 	.incbin "baserom.gba", 0x3dfe14, 0xa1fc0
