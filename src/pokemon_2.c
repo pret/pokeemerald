@@ -513,7 +513,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_DEF_EV:
         retVal = substruct2->defenseEV;
         break;
-    case MON_DATA_SPD_EV:
+    case MON_DATA_SPEED_EV:
         retVal = substruct2->speedEV;
         break;
     case MON_DATA_SPATK_EV:
@@ -881,7 +881,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_DEF_EV:
         SET8(substruct2->defenseEV);
         break;
-    case MON_DATA_SPD_EV:
+    case MON_DATA_SPEED_EV:
         SET8(substruct2->speedEV);
         break;
     case MON_DATA_SPATK_EV:

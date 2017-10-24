@@ -621,7 +621,7 @@ static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
         battleMon.hpIV = GetMonData(&gEnemyParty[monId], MON_DATA_HP_IV);
         battleMon.attackIV = GetMonData(&gEnemyParty[monId], MON_DATA_ATK_IV);
         battleMon.defenseIV = GetMonData(&gEnemyParty[monId], MON_DATA_DEF_IV);
-        battleMon.speedIV = GetMonData(&gEnemyParty[monId], MON_DATA_SPD_IV);
+        battleMon.speedIV = GetMonData(&gEnemyParty[monId], MON_DATA_SPEED_IV);
         battleMon.spAttackIV = GetMonData(&gEnemyParty[monId], MON_DATA_SPATK_IV);
         battleMon.spDefenseIV = GetMonData(&gEnemyParty[monId], MON_DATA_SPDEF_IV);
         battleMon.personality = GetMonData(&gEnemyParty[monId], MON_DATA_PERSONALITY);
@@ -631,7 +631,7 @@ static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
         battleMon.maxHP = GetMonData(&gEnemyParty[monId], MON_DATA_MAX_HP);
         battleMon.attack = GetMonData(&gEnemyParty[monId], MON_DATA_ATK);
         battleMon.defense = GetMonData(&gEnemyParty[monId], MON_DATA_DEF);
-        battleMon.speed = GetMonData(&gEnemyParty[monId], MON_DATA_SPD);
+        battleMon.speed = GetMonData(&gEnemyParty[monId], MON_DATA_SPEED);
         battleMon.spAttack = GetMonData(&gEnemyParty[monId], MON_DATA_SPATK);
         battleMon.spDefense = GetMonData(&gEnemyParty[monId], MON_DATA_SPDEF);
         battleMon.isEgg = GetMonData(&gEnemyParty[monId], MON_DATA_IS_EGG);
@@ -716,7 +716,7 @@ static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
         size = 1;
         break;
     case REQUEST_SPEED_EV_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_SPD_EV);
+        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_SPEED_EV);
         size = 1;
         break;
     case REQUEST_SPATK_EV_BATTLE:
@@ -755,7 +755,7 @@ static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
         dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_HP_IV);
         dst[1] = GetMonData(&gEnemyParty[monId], MON_DATA_ATK_IV);
         dst[2] = GetMonData(&gEnemyParty[monId], MON_DATA_DEF_IV);
-        dst[3] = GetMonData(&gEnemyParty[monId], MON_DATA_SPD_IV);
+        dst[3] = GetMonData(&gEnemyParty[monId], MON_DATA_SPEED_IV);
         dst[4] = GetMonData(&gEnemyParty[monId], MON_DATA_SPATK_IV);
         dst[5] = GetMonData(&gEnemyParty[monId], MON_DATA_SPDEF_IV);
         size = 6;
@@ -773,7 +773,7 @@ static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
         size = 1;
         break;
     case REQUEST_SPEED_IV_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_SPD_IV);
+        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_SPEED_IV);
         size = 1;
         break;
     case REQUEST_SPATK_IV_BATTLE:
@@ -835,7 +835,7 @@ static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
         size = 2;
         break;
     case REQUEST_SPEED_BATTLE:
-        data16 = GetMonData(&gEnemyParty[monId], MON_DATA_SPD);
+        data16 = GetMonData(&gEnemyParty[monId], MON_DATA_SPEED);
         dst[0] = data16;
         dst[1] = data16 >> 8;
         size = 2;
@@ -957,7 +957,7 @@ static void SetLinkOpponentMonData(u8 monId)
             iv = battlePokemon->defenseIV;
             SetMonData(&gEnemyParty[monId], MON_DATA_DEF_IV, &iv);
             iv = battlePokemon->speedIV;
-            SetMonData(&gEnemyParty[monId], MON_DATA_SPD_IV, &iv);
+            SetMonData(&gEnemyParty[monId], MON_DATA_SPEED_IV, &iv);
             iv = battlePokemon->spAttackIV;
             SetMonData(&gEnemyParty[monId], MON_DATA_SPATK_IV, &iv);
             iv = battlePokemon->spDefenseIV;
@@ -969,7 +969,7 @@ static void SetLinkOpponentMonData(u8 monId)
             SetMonData(&gEnemyParty[monId], MON_DATA_MAX_HP, &battlePokemon->maxHP);
             SetMonData(&gEnemyParty[monId], MON_DATA_ATK, &battlePokemon->attack);
             SetMonData(&gEnemyParty[monId], MON_DATA_DEF, &battlePokemon->defense);
-            SetMonData(&gEnemyParty[monId], MON_DATA_SPD, &battlePokemon->speed);
+            SetMonData(&gEnemyParty[monId], MON_DATA_SPEED, &battlePokemon->speed);
             SetMonData(&gEnemyParty[monId], MON_DATA_SPATK, &battlePokemon->spAttack);
             SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF, &battlePokemon->spDefense);
         }
@@ -1023,7 +1023,7 @@ static void SetLinkOpponentMonData(u8 monId)
         SetMonData(&gEnemyParty[monId], MON_DATA_DEF_EV, &gBattleBufferA[gActiveBank][3]);
         break;
     case REQUEST_SPEED_EV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPD_EV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED_EV, &gBattleBufferA[gActiveBank][3]);
         break;
     case REQUEST_SPATK_EV_BATTLE:
         SetMonData(&gEnemyParty[monId], MON_DATA_SPATK_EV, &gBattleBufferA[gActiveBank][3]);
@@ -1053,7 +1053,7 @@ static void SetLinkOpponentMonData(u8 monId)
         SetMonData(&gEnemyParty[monId], MON_DATA_HP_IV, &gBattleBufferA[gActiveBank][3]);
         SetMonData(&gEnemyParty[monId], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBank][4]);
         SetMonData(&gEnemyParty[monId], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBank][5]);
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPD_IV, &gBattleBufferA[gActiveBank][6]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBank][6]);
         SetMonData(&gEnemyParty[monId], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBank][7]);
         SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBank][8]);
         break;
@@ -1067,7 +1067,7 @@ static void SetLinkOpponentMonData(u8 monId)
         SetMonData(&gEnemyParty[monId], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBank][3]);
         break;
     case REQUEST_SPEED_IV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPD_IV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBank][3]);
         break;
     case REQUEST_SPATK_IV_BATTLE:
         SetMonData(&gEnemyParty[monId], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBank][3]);
@@ -1100,7 +1100,7 @@ static void SetLinkOpponentMonData(u8 monId)
         SetMonData(&gEnemyParty[monId], MON_DATA_DEF, &gBattleBufferA[gActiveBank][3]);
         break;
     case REQUEST_SPEED_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPD, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED, &gBattleBufferA[gActiveBank][3]);
         break;
     case REQUEST_SPATK_BATTLE:
         SetMonData(&gEnemyParty[monId], MON_DATA_SPATK, &gBattleBufferA[gActiveBank][3]);

@@ -30,7 +30,7 @@
 #define MON_DATA_HP_EV             26
 #define MON_DATA_ATK_EV            27
 #define MON_DATA_DEF_EV            28
-#define MON_DATA_SPD_EV            29
+#define MON_DATA_SPEED_EV          29
 #define MON_DATA_SPATK_EV          30
 #define MON_DATA_SPDEF_EV          31
 #define MON_DATA_FRIENDSHIP        32
@@ -43,7 +43,7 @@
 #define MON_DATA_HP_IV             39
 #define MON_DATA_ATK_IV            40
 #define MON_DATA_DEF_IV            41
-#define MON_DATA_SPEED_IV            42
+#define MON_DATA_SPEED_IV          42
 #define MON_DATA_SPATK_IV          43
 #define MON_DATA_SPDEF_IV          44
 #define MON_DATA_IS_EGG            45
@@ -62,7 +62,7 @@
 #define MON_DATA_MAX_HP            58
 #define MON_DATA_ATK               59
 #define MON_DATA_DEF               60
-#define MON_DATA_SPEED               61
+#define MON_DATA_SPEED             61
 #define MON_DATA_SPATK             62
 #define MON_DATA_SPDEF             63
 #define MON_DATA_MAIL              64
