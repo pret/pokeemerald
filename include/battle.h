@@ -636,10 +636,10 @@ struct BattleStruct
     u8 field_91;
     u8 field_92;
     u8 field_93;
-    u8 field_94;
-    u8 field_95;
-    u8 field_96;
-    u8 field_97;
+    u8 wallyBattleState;
+    u8 wallyMovesState;
+    u8 wallyWaitFrames;
+    u8 wallyMoveFrames;
     u8 mirrorMoves[8]; // ask gamefreak why they declared it that way
     u8 field_A0;
     u8 field_A1;

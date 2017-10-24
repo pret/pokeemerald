@@ -210,7 +210,6 @@ SECTIONS {
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);
         src/battle_controller_wally.o(.text);
-        asm/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
         asm/intro.o(.text);
         src/reset_save_heap.o(.text);
