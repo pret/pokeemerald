@@ -709,7 +709,7 @@ bool8 sub_81C00F0(struct Pokemon *a)
             sum->def = GetMonData(a, MON_DATA_DEF);
             sum->spatk = GetMonData(a, MON_DATA_SPATK);
             sum->spdef = GetMonData(a, MON_DATA_SPDEF);
-            sum->speed = GetMonData(a, MON_DATA_SPD);
+            sum->speed = GetMonData(a, MON_DATA_SPEED);
         }
         else
         {

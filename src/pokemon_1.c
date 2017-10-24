@@ -33,7 +33,7 @@ void ZeroMonData(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_MAX_HP, &arg);
     SetMonData(mon, MON_DATA_ATK, &arg);
     SetMonData(mon, MON_DATA_DEF, &arg);
-    SetMonData(mon, MON_DATA_SPD, &arg);
+    SetMonData(mon, MON_DATA_SPEED, &arg);
     SetMonData(mon, MON_DATA_SPATK, &arg);
     SetMonData(mon, MON_DATA_SPDEF, &arg);
     arg = 255;
@@ -128,7 +128,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_HP_IV, &fixedIV);
         SetBoxMonData(boxMon, MON_DATA_ATK_IV, &fixedIV);
         SetBoxMonData(boxMon, MON_DATA_DEF_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_SPD_IV, &fixedIV);
+        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &fixedIV);
         SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &fixedIV);
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &fixedIV);
     }
@@ -147,7 +147,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         value = Random();
 
         iv = value & 0x1F;
-        SetBoxMonData(boxMon, MON_DATA_SPD_IV, &iv);
+        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
         iv = (value & 0x3E0) >> 5;
         SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
         iv = (value & 0x7C00) >> 10;
@@ -234,7 +234,7 @@ void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u
     SetMonData(mon, MON_DATA_HP_IV, &ivs[0]);
     SetMonData(mon, MON_DATA_ATK_IV, &ivs[1]);
     SetMonData(mon, MON_DATA_DEF_IV, &ivs[2]);
-    SetMonData(mon, MON_DATA_SPD_IV, &ivs[3]);
+    SetMonData(mon, MON_DATA_SPEED_IV, &ivs[3]);
     SetMonData(mon, MON_DATA_SPATK_IV, &ivs[4]);
     SetMonData(mon, MON_DATA_SPDEF_IV, &ivs[5]);
     CalculateMonStats(mon);
@@ -317,7 +317,7 @@ void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src)
     value = src->defenseIV;
     SetMonData(mon, MON_DATA_DEF_IV, &value);
     value = src->speedIV;
-    SetMonData(mon, MON_DATA_SPD_IV, &value);
+    SetMonData(mon, MON_DATA_SPEED_IV, &value);
     value = src->spAttackIV;
     SetMonData(mon, MON_DATA_SPATK_IV, &value);
     value = src->spDefenseIV;
@@ -381,7 +381,7 @@ void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lv
     value = src->defenseIV;
     SetMonData(mon, MON_DATA_DEF_IV, &value);
     value = src->speedIV;
-    SetMonData(mon, MON_DATA_SPD_IV, &value);
+    SetMonData(mon, MON_DATA_SPEED_IV, &value);
     value = src->spAttackIV;
     SetMonData(mon, MON_DATA_SPATK_IV, &value);
     value = src->spDefenseIV;
