@@ -1489,3 +1489,9 @@
 	compare_var_to_value 0x8000, \condition
 	goto_eq \dest
 	.endm
+
+	.macro giveitem item, amount=1, function=0
+	setorcopyvar 0x8000, \item
+	setorcopyvar 0x8001, \amount
+	callstd \function
+	.endm
