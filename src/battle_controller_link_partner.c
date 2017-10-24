@@ -40,7 +40,6 @@ extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
 extern u8 gBattleOutcome;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
-extern u8 gBankInMenu;
 extern u16 gUnknown_020243FC;
 extern u8 gUnknown_03005D7C[BATTLE_BANKS_COUNT];
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
@@ -1129,7 +1128,7 @@ static void DoSwitchOutAnimation(void)
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
-            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SWITCH_OUT_MON);
+            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SWITCH_OUT_PLAYER_MON);
             gBattleBankFunc[gActiveBank] = sub_814B3DC;
         }
         break;
@@ -1221,7 +1220,7 @@ static void LinkPartnerHandleFaintAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
             sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
-            PlaySE12WithPanning(SE_POKE_DEAD, -64);
+            PlaySE12WithPanning(SE_POKE_DEAD, PAN_SIDE_PLAYER);
             gSprites[gBankSpriteIds[gActiveBank]].data1 = 0;
             gSprites[gBankSpriteIds[gActiveBank]].data2 = 5;
             gSprites[gBankSpriteIds[gActiveBank]].callback = sub_8039C00;

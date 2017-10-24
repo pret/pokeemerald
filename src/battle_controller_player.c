@@ -2285,7 +2285,7 @@ static void DoSwitchOutAnimation(void)
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
-            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SWITCH_OUT_MON);
+            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SWITCH_OUT_PLAYER_MON);
             gBattleBankFunc[gActiveBank] = sub_8059744;
         }
         break;
@@ -2453,7 +2453,7 @@ static void PlayerHandleFaintAnimation(void)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
             sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
-            PlaySE12WithPanning(SE_POKE_DEAD, -64);
+            PlaySE12WithPanning(SE_POKE_DEAD, PAN_SIDE_PLAYER);
             gSprites[gBankSpriteIds[gActiveBank]].data1 = 0;
             gSprites[gBankSpriteIds[gActiveBank]].data2 = 5;
             gSprites[gBankSpriteIds[gActiveBank]].callback = sub_8039C00;
@@ -2911,7 +2911,7 @@ static void PlayerHandleHitAnimation(void)
     }
     else
     {
-        gDoingBattleAnim = 1;
+        gDoingBattleAnim = TRUE;
         gSprites[gBankSpriteIds[gActiveBank]].data1 = 0;
         DoHitAnimHealthboxEffect(gActiveBank);
         gBattleBankFunc[gActiveBank] = DoHitAnimBlinkSpriteEffect;

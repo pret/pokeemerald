@@ -799,8 +799,8 @@ extern struct BattleStruct* gBattleStruct;
 
 // special animations table
 #define B_ANIM_LVL_UP                   0x0
-#define B_ANIM_SWITCH_OUT_MON           0x1
-#define B_ANIM_SPECIAL_2                0x2
+#define B_ANIM_SWITCH_OUT_PLAYER_MON    0x1
+#define B_ANIM_SWITCH_OUT_OPPONENT_MON  0x2
 #define B_ANIM_BALL_THROW               0x3
 #define B_ANIM_SAFARI_BALL_THROW        0x4
 #define B_ANIM_SUBSTITUTE_TO_MON        0x5
@@ -898,6 +898,7 @@ void SetBattleSpriteInvisibilityBitToSpriteInvisibility(u8 bank);
 u16 ChooseMoveAndTargetInBattlePalace(void);
 void LoadBattleBarGfx(u8 arg0);
 bool8 mplay_80342A4(u8 bank);
+void sub_805EEE0(u8 bank);
 
 enum
 {
@@ -955,10 +956,7 @@ struct BattleHealthboxInfo
     u8 specialAnimActive : 1; //x40
     u8 flag_x80 : 1;
     u8 field_1_x1 : 1;
-    u8 field_1_x2 : 1;
-    u8 field_1_x4 : 1;
-    u8 field_1_x8 : 1;
-    u8 field_1_x10 : 1;
+    u8 field_1_x1E : 4;
     u8 field_1_x20 : 1;
     u8 field_1_x40 : 1;
     u8 field_1_x80 : 1;
