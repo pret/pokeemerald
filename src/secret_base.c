@@ -2,8 +2,10 @@
 // Includes
 #include "global.h"
 #include "list_menu.h"
+#include "map_constants.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
+#include "overworld.h"
 #include "fieldmap.h"
 #include "field_camera.h"
 #include "field_player_avatar.h"
@@ -32,6 +34,8 @@ extern const struct {
     u16 tile1;
     u16 tile2;
 } gUnknown_0858CFCC[7];
+
+extern const u8 gUnknown_0858CFE8[];
 
 // .text
 
@@ -243,4 +247,12 @@ void sub_80E8EE0(struct MapEvents *events)
             }
         }
     }
+}
+
+void sub_80E8F9C(void)
+{
+    s8 idx;
+
+    idx = sCurSecretBaseId / 10 * 4;
+    warp1_set_2(MAP_GROUP_SECRET_BASE_RED_CAVE1, gUnknown_0858CFE8[idx], gUnknown_0858CFE8[idx + 1]);
 }

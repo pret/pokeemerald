@@ -59,5 +59,6 @@ void c2_exit_to_overworld_2_switch(void);
 bool32 sub_8087598(void);
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 void warp_in(void);
+void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpNum);
 
 #endif //GUARD_ROM4_H

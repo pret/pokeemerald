@@ -5,31 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E8F9C
-sub_80E8F9C: @ 80E8F9C
-	push {lr}
-	ldr r0, =sCurSecretBaseId
-	ldrb r0, [r0]
-	movs r1, 0xA
-	bl __udivsi3
-	ldr r2, =gUnknown_0858CFE8
-	lsls r0, 26
-	asrs r0, 24
-	adds r1, r0, r2
-	ldrb r1, [r1]
-	lsls r1, 24
-	asrs r1, 24
-	adds r0, 0x1
-	adds r0, r2
-	movs r2, 0
-	ldrsb r2, [r0, r2]
-	movs r0, 0x19
-	bl warp1_set_2
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E8F9C
-
 	thumb_func_start sub_80E8FD0
 sub_80E8FD0: @ 80E8FD0
 	push {r4,lr}
