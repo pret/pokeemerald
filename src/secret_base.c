@@ -332,3 +332,18 @@ void sub_80E9108(void)
     pal_fill_black();
     CreateTask(sub_80E90C8, 0);
 }
+
+void sub_80E916C(u8 taskId)
+{
+    s8 idx;
+
+    if (!gPaletteFade.active)
+    {
+        idx = sCurSecretBaseId / 10 * 4;
+        Overworld_SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, gUnknown_0858CFE8[idx + 2], gUnknown_0858CFE8[idx + 3]);
+        warp_in();
+        gFieldCallback = sub_80E9108;
+        SetMainCallback2(c2_load_new_map);
+        DestroyTask(taskId);
+    }
+}

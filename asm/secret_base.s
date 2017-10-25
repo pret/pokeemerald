@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E916C
-sub_80E916C: @ 80E916C
-	push {r4-r6,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080E91D4
-	ldr r0, =sCurSecretBaseId
-	ldrb r0, [r0]
-	movs r1, 0xA
-	bl __udivsi3
-	ldr r1, =gSaveBlock1Ptr
-	ldr r1, [r1]
-	movs r5, 0x4
-	ldrsb r5, [r1, r5]
-	ldrb r1, [r1, 0x5]
-	lsls r1, 24
-	asrs r1, 24
-	movs r2, 0x1
-	negs r2, r2
-	ldr r4, =gUnknown_0858CFE8
-	lsls r0, 26
-	asrs r0, 24
-	adds r3, r0, 0x2
-	adds r3, r4
-	ldrb r3, [r3]
-	lsls r3, 24
-	asrs r3, 24
-	adds r0, 0x3
-	adds r0, r4
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	str r0, [sp]
-	adds r0, r5, 0
-	bl Overworld_SetWarpDestination
-	bl warp_in
-	ldr r1, =gFieldCallback
-	ldr r0, =sub_80E9108
-	str r0, [r1]
-	ldr r0, =c2_load_new_map
-	bl SetMainCallback2
-	adds r0, r6, 0
-	bl DestroyTask
-_080E91D4:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E916C
-
 	thumb_func_start sub_80E91F8
 sub_80E91F8: @ 80E91F8
 	push {lr}
