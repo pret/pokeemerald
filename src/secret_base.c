@@ -570,3 +570,10 @@ void sub_80E9744(void)
         gScriptResult = FALSE;
     }
 }
+
+u8 *sub_80E9780(u8 *dest, u8 sbId)
+{
+    *StringCopyN(dest, gSaveBlock1Ptr->secretBases[sbId].trainerName, sub_80E8DF4(gSaveBlock1Ptr->secretBases[sbId].trainerName)) = EOS;
+    ConvertInternationalString(dest, gSaveBlock1Ptr->secretBases[sbId].language);
+    return StringAppend(dest, gText_ApostropheSBase);
+}
