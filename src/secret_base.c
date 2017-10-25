@@ -12,6 +12,7 @@
 #include "field_screen.h"
 #include "field_weather.h"
 #include "field_map_obj.h"
+#include "metatile_behavior.h"
 #include "map_name_popup.h"
 #include "text.h"
 #include "string_util.h"
@@ -391,6 +392,81 @@ void sub_80E9238(u8 flagIn)
         {
             sub_80E8CB0(&x, &y, 0x220);
             MapGridSetMetatileIdAt(x + 7, y + 7, 0x20a | 0xc00);
+        }
+    }
+}
+
+void sub_80E933C(void)
+{
+    u8 *roomdecor;
+    u8 *roomdecorpos;
+    u8 decidx;
+    u8 objid;
+    u8 metatile;
+    u8 category;
+    u8 permission;
+    u8 ndecor;
+    u16 curBase;
+
+    objid = 0;
+    if (!CurrentMapIsSecretBase())
+    {
+        roomdecor = gSaveBlock1Ptr->playerRoomDecor;
+        roomdecorpos = gSaveBlock1Ptr->playerRoomDecorPos;
+        ndecor = 12;
+    }
+    else
+    {
+        curBase = VarGet(VAR_0x4054);
+        roomdecor = gSaveBlock1Ptr->secretBases[curBase].decorations;
+        roomdecorpos = gSaveBlock1Ptr->secretBases[curBase].decorationPos;
+        ndecor = 16;
+    }
+    for (decidx = 0; decidx < ndecor; decidx ++)
+    {
+        if (roomdecor[decidx] != DECOR_NONE)
+        {
+            permission = gDecorations[roomdecor[decidx]].permission;
+            category = gDecorations[roomdecor[decidx]].category;
+            if (permission == DECORPERM_SOLID_MAT)
+            {
+                for (objid = 0; objid < gMapHeader.events->mapObjectCount; objid ++)
+                {
+                    if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
+                    {
+                        break;
+                    }
+                }
+                if (objid == gMapHeader.events->mapObjectCount)
+                {
+                    continue;
+                }
+                gSpecialVar_0x8006 = roomdecorpos[decidx] >> 4;
+                gSpecialVar_0x8007 = roomdecorpos[decidx] & 0xF;
+                metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
+                if (MetatileBehavior_IsMB_B5(metatile) == TRUE || MetatileBehavior_IsMB_C3(metatile) == TRUE)
+                {
+                    gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + VAR_0x3F20;
+                    VarSet(gScriptResult, gDecorations[roomdecor[decidx]].tiles[0]);
+                    gScriptResult = gMapHeader.events->mapObjects[objid].localId;
+                    FlagClear(gSpecialVar_0x8004 + 0xAE);
+                    show_sprite(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+                    sub_808EBA8(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
+                    sub_808F254(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+                    if (CurrentMapIsSecretBase() == TRUE && VarGet(VAR_0x4054) != 0)
+                    {
+                        if (category == DECORCAT_DOLL)
+                        {
+                            sub_808F28C(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, DECORCAT_DOLL);
+                        }
+                        else if (category == DECORCAT_CUSHION)
+                        {
+                            sub_808F28C(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, DECORCAT_CUSHION);
+                        }
+                    }
+                    gSpecialVar_0x8004 ++;
+                }
+            }
         }
     }
 }

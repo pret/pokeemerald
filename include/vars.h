@@ -1,6 +1,8 @@
 #ifndef GUARD_VARS_H
 #define GUARD_VARS_H
 
+#define VAR_0x3F20                 0x3F20
+
 #define VAR_0x4000                 0x4000
 #define VAR_0x4001                 0x4001
 #define VAR_0x4002                 0x4002
