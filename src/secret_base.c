@@ -516,3 +516,57 @@ void sub_80E9668(struct Coords16 *coords, struct MapEvents *events)
     sub_80E8B6C();
     ScriptContext1_SetupScript(gUnknown_08275BB7);
 }
+
+bool8 sub_80E9680(void)
+{
+    sub_80E8B58();
+    sub_80E8B6C();
+    if (gScriptResult == TRUE)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_80E96A4(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            ScriptContext2_Enable();
+            gTasks[taskId].data[0] = 1;
+            break;
+        case 1:
+            if (!gPaletteFade.active)
+            {
+                gTasks[taskId].data[0] = 2;
+            }
+            break;
+        case 2:
+            copy_saved_warp2_bank_and_enter_x_to_warp1(0x7e);
+            warp_in();
+            gFieldCallback = mapldr_default;
+            SetMainCallback2(c2_load_new_map);
+            ScriptContext2_Disable();
+            DestroyTask(taskId);
+            break;
+    }
+}
+
+void sub_80E9728(void)
+{
+    CreateTask(sub_80E96A4, 0);
+    fade_screen(1, 0);
+}
+
+void sub_80E9744(void)
+{
+    if (gSaveBlock1Ptr->secretBases[0].secretBaseId != sCurSecretBaseId)
+    {
+        gScriptResult = TRUE;
+    }
+    else
+    {
+        gScriptResult = FALSE;
+    }
+}
