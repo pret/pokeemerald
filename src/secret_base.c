@@ -8,6 +8,7 @@
 #include "field_camera.h"
 #include "field_player_avatar.h"
 #include "text.h"
+#include "string_util.h"
 #include "event_data.h"
 #include "secret_base.h"
 
@@ -263,4 +264,34 @@ void sub_80E8D4C(void)
             return;
         }
     }
+}
+
+u8 sub_80E8DF4(const u8 *src)
+{
+    u8 i;
+
+    for (i = 0; i < 7; i ++)
+    {
+        if (src[i] == EOS)
+        {
+            return i;
+        }
+    }
+    return 7;
+}
+
+void sub_80E8E18(void)
+{
+    u16 i;
+
+    gSaveBlock1Ptr->secretBases[0].secretBaseId = sCurSecretBaseId;
+    for (i = 0; i < 4; i ++)
+    {
+        gSaveBlock1Ptr->secretBases[0].trainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
+    }
+    VarSet(VAR_0x4054, 0);
+    StringCopyN(gSaveBlock1Ptr->secretBases[0].trainerName, gSaveBlock2Ptr->playerName, sub_80E8DF4(gSaveBlock2Ptr->playerName));
+    gSaveBlock1Ptr->secretBases[0].gender = gSaveBlock2Ptr->playerGender;
+    gSaveBlock1Ptr->secretBases[0].language = GAME_LANGUAGE;
+    VarSet(VAR_SECRET_BASE_MAP, gMapHeader.regionMapSectionId);
 }
