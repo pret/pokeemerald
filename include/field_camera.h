@@ -23,5 +23,6 @@ extern u16 gUnknown_03005DE8;
 // Exported ROM declarations
 
 void DrawWholeMapView(void);
+void CurrentMapDrawMetatileAt(int x, int y);
 
 #endif //GUARD_FIELD_CAMERA_H
