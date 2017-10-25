@@ -593,3 +593,25 @@ void sub_80E980C(void)
     *StringCopyN(gStringVar1, src, sub_80E8DF4(src)) = EOS;
     ConvertInternationalString(gStringVar1, gSaveBlock1Ptr->secretBases[sbId].language);
 }
+
+bool8 sub_80E9878(u8 sbId)
+{
+    if (gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_6 != 0)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+u8 sub_80E98AC(struct Pokemon *pokemon)
+{
+    u16 evTotal;
+
+    evTotal  = GetMonData(pokemon, MON_DATA_HP_EV);
+    evTotal += GetMonData(pokemon, MON_DATA_ATK_EV);
+    evTotal += GetMonData(pokemon, MON_DATA_DEF_EV);
+    evTotal += GetMonData(pokemon, MON_DATA_SPD_EV);
+    evTotal += GetMonData(pokemon, MON_DATA_SPATK_EV);
+    evTotal += GetMonData(pokemon, MON_DATA_SPDEF_EV);
+    return evTotal / 6;
+}
