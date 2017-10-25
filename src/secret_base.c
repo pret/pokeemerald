@@ -17,6 +17,7 @@
 #include "text.h"
 #include "string_util.h"
 #include "script.h"
+#include "event_scripts.h"
 #include "event_data.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
@@ -36,6 +37,8 @@ EWRAM_DATA struct SecretBaseListMenuBuffer *gUnknown_0203A020 = NULL;
 
 // Static ROM declarations
 
+u8 sub_80EA20C(u8 sbId);
+
 // .rodata
 
 extern const struct {
@@ -44,6 +47,7 @@ extern const struct {
 } gUnknown_0858CFCC[7];
 
 extern const u8 gUnknown_0858CFE8[];
+extern const u8 gUnknown_0858D060[];
 
 // .text
 
@@ -485,4 +489,30 @@ void sub_80E9578(void)
             FlagSet(flagId);
         }
     }
+}
+
+void sub_80E95D4(void)
+{
+    VarSet(VAR_0x401F, gUnknown_0858D060[sub_80EA20C(VarGet(VAR_0x4054))]);
+}
+
+void sub_80E9608(struct Coords16 *coords, struct MapEvents *events)
+{
+    s16 bgevtidx;
+
+    for (bgevtidx = 0; bgevtidx < events->bgEventCount; bgevtidx ++)
+    {
+        if (events->bgEvents[bgevtidx].kind == 8 && coords->x == events->bgEvents[bgevtidx].x + 7 && coords->y == events->bgEvents[bgevtidx].y + 7)
+        {
+            sCurSecretBaseId = events->bgEvents[bgevtidx].bgUnion.secretBaseId;
+            break;
+        }
+    }
+}
+
+void sub_80E9668(struct Coords16 *coords, struct MapEvents *events)
+{
+    sub_80E9608(coords, events);
+    sub_80E8B6C();
+    ScriptContext1_SetupScript(gUnknown_08275BB7);
 }
