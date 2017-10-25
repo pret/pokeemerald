@@ -362,3 +362,35 @@ bool8 CurrentMapIsSecretBase(void)
     }
     return FALSE;
 }
+
+void sub_80E9238(u8 flagIn)
+{
+    u16 curBaseId;
+    u16 x;
+    u16 y;
+    u8 *decorations;
+    u8 *decorPos;
+
+    if (CurrentMapIsSecretBase())
+    {
+        curBaseId = VarGet(VAR_0x4054);
+        decorations = gSaveBlock1Ptr->secretBases[curBaseId].decorations;
+        decorPos = gSaveBlock1Ptr->secretBases[curBaseId].decorationPos;
+        for (x = 0; x < 16; x ++)
+        {
+            if (decorations[x] > 0 && decorations[x] <= 0x78 && gDecorations[decorations[x]].permission != DECORPERM_SOLID_MAT) {
+                sub_8127D38((decorPos[x] >> 4) + 7, (decorPos[x] & 0xF) + 7, decorations[x]);
+            }
+        }
+        if (curBaseId != 0)
+        {
+            sub_80E8CB0(&x, &y, 0x220);
+            MapGridSetMetatileIdAt(x + 7, y + 7, 0x221 | 0xc00);
+        }
+        else if (flagIn == 1 && VarGet(VAR_0x4089) == 1)
+        {
+            sub_80E8CB0(&x, &y, 0x220);
+            MapGridSetMetatileIdAt(x + 7, y + 7, 0x20a | 0xc00);
+        }
+    }
+}
