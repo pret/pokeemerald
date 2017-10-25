@@ -295,3 +295,38 @@ void sub_80E8E18(void)
     gSaveBlock1Ptr->secretBases[0].language = GAME_LANGUAGE;
     VarSet(VAR_SECRET_BASE_MAP, gMapHeader.regionMapSectionId);
 }
+
+void sub_80E8EE0(struct MapEvents *events)
+{
+    u16 bgevidx;
+    u16 idx;
+    u16 jdx;
+    s16 tile_id;
+    s16 x;
+    s16 y;
+
+    for (bgevidx = 0; bgevidx < events->bgEventCount; bgevidx ++)
+    {
+        if (events->bgEvents[bgevidx].kind == 8)
+        {
+            for (jdx = 0; jdx < 20; jdx ++)
+            {
+                if (gSaveBlock1Ptr->secretBases[jdx].secretBaseId == events->bgEvents[bgevidx].bgUnion.secretBaseId)
+                {
+                    x = events->bgEvents[bgevidx].x + 7;
+                    y = events->bgEvents[bgevidx].y + 7;
+                    tile_id = MapGridGetMetatileIdAt(x, y);
+                    for (idx = 0; idx < 7; idx ++)
+                    {
+                        if (gUnknown_0858CFCC[idx].tile1 == tile_id)
+                        {
+                            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[idx].tile2 | 0xc00);
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+}
