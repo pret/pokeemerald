@@ -470,3 +470,19 @@ void sub_80E933C(void)
         }
     }
 }
+
+void sub_80E9578(void)
+{
+    u8 objIdx;
+    u16 flagId;
+
+    for (objIdx = 0; objIdx < gMapHeader.events->mapObjectCount; objIdx ++)
+    {
+        flagId = gMapHeader.events->mapObjects[objIdx].flagId;
+        if (flagId >= 0xAE && flagId <= 0xBB)
+        {
+            RemoveFieldObjectByLocalIdAndMap(gMapHeader.events->mapObjects[objIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            FlagSet(flagId);
+        }
+    }
+}

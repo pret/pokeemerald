@@ -5,53 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E9578
-sub_80E9578: @ 80E9578
-	push {r4-r6,lr}
-	movs r5, 0
-	ldr r1, =gMapHeader
-	ldr r0, [r1, 0x4]
-	ldrb r0, [r0]
-	cmp r5, r0
-	bcs _080E95C4
-	adds r6, r1, 0
-_080E9588:
-	ldr r0, [r6, 0x4]
-	ldr r1, [r0, 0x4]
-	lsls r0, r5, 1
-	adds r0, r5
-	lsls r0, 3
-	adds r1, r0, r1
-	ldrh r4, [r1, 0x14]
-	adds r0, r4, 0
-	subs r0, 0xAE
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0xD
-	bhi _080E95B6
-	ldrb r0, [r1]
-	ldr r1, =gSaveBlock1Ptr
-	ldr r2, [r1]
-	ldrb r1, [r2, 0x5]
-	ldrb r2, [r2, 0x4]
-	bl RemoveFieldObjectByLocalIdAndMap
-	adds r0, r4, 0
-	bl FlagSet
-_080E95B6:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r0, [r6, 0x4]
-	ldrb r0, [r0]
-	cmp r5, r0
-	bcc _080E9588
-_080E95C4:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E9578
-
 	thumb_func_start sub_80E95D4
 sub_80E95D4: @ 80E95D4
 	push {r4,r5,lr}
