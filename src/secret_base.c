@@ -5,17 +5,20 @@
 #include "palette.h"
 #include "list_menu.h"
 #include "map_constants.h"
-#include "decoration.h"
-#include "decoration_inventory.h"
 #include "overworld.h"
 #include "fieldmap.h"
 #include "field_camera.h"
 #include "field_player_avatar.h"
 #include "field_screen.h"
 #include "field_weather.h"
+#include "field_map_obj.h"
+#include "map_name_popup.h"
 #include "text.h"
 #include "string_util.h"
+#include "script.h"
 #include "event_data.h"
+#include "decoration.h"
+#include "decoration_inventory.h"
 #include "secret_base.h"
 
 // Static type declarations
@@ -302,4 +305,30 @@ bool8 sub_80E909C(void)
         return FALSE;
     }
     return TRUE;
+}
+
+void sub_80E90C8(u8 taskId)
+{
+    FieldObjectTurn(&gMapObjects[gPlayerAvatar.mapObjectId], DIR_NORTH);
+    if (sub_80ABDFC() == TRUE)
+    {
+        EnableBothScriptContexts();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_80E9108(void)
+{
+    s16 x;
+    s16 y;
+
+    ScriptContext2_Enable();
+    HideMapNamePopUpWindow();
+    sub_80E8CB0(&x, &y, 0x220);
+    x += 7;
+    y += 7;
+    MapGridSetMetatileIdAt(x, y, 0x220 | 0xC00);
+    CurrentMapDrawMetatileAt(x, y);
+    pal_fill_black();
+    CreateTask(sub_80E90C8, 0);
 }
