@@ -347,3 +347,18 @@ void sub_80E916C(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+void sub_80E91F8(void)
+{
+    CreateTask(sub_80E916C, 0);
+    fade_screen(1, 0);
+}
+
+bool8 CurrentMapIsSecretBase(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_SECRET_BASE_RED_CAVE1 && (u8)gSaveBlock1Ptr->location.mapNum <= MAP_ID_SECRET_BASE_SHRUB4)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}

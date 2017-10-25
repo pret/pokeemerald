@@ -5,42 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E91F8
-sub_80E91F8: @ 80E91F8
-	push {lr}
-	ldr r0, =sub_80E916C
-	movs r1, 0
-	bl CreateTask
-	movs r0, 0x1
-	movs r1, 0
-	bl fade_screen
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E91F8
-
-	thumb_func_start CurrentMapIsSecretBase
-CurrentMapIsSecretBase: @ 80E9214
-	push {lr}
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	cmp r0, 0x19
-	bne _080E9230
-	ldrb r0, [r1, 0x5]
-	cmp r0, 0x17
-	bhi _080E9230
-	movs r0, 0x1
-	b _080E9232
-	.pool
-_080E9230:
-	movs r0, 0
-_080E9232:
-	pop {r1}
-	bx r1
-	thumb_func_end CurrentMapIsSecretBase
-
 	thumb_func_start sub_80E9238
 sub_80E9238: @ 80E9238
 	push {r4-r7,lr}
