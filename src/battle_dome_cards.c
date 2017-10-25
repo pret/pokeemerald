@@ -19,7 +19,7 @@ extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const union AnimCmd *const gUnknown_082FF70C[];
 extern const union AnimCmd *const *const gMonAnimationsSpriteAnimsPtrTable[NUM_SPECIES];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
-extern const u8 gUnknown_0831F578[];
+extern const u8 gTrainerClassToFrontPicId[];
 
 // Static type declarations
 
@@ -421,9 +421,9 @@ u8 sub_818D97C(u8 a0, u8 a1)
         switch (a0)
         {
             default:
-                return gUnknown_0831F578[0x3F];
+                return gTrainerClassToFrontPicId[0x3F];
             case 0:
-                return gUnknown_0831F578[0x3C];
+                return gTrainerClassToFrontPicId[0x3C];
         }
     }
     return a0;
