@@ -135,7 +135,7 @@ static void PlayerPartnerDoMoveAnimation(void);
 static void sub_81BE2C8(u8 taskId);
 static void sub_81BE498(void);
 
-static void (*const gPlayerPartnerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const sPlayerPartnerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
 {
     PlayerPartnerHandleGetMonData,
     PlayerPartnerHandleGetRawMonData,
@@ -218,8 +218,8 @@ static void PlayerPartnerBufferRunCommand(void)
 {
     if (gBattleExecBuffer & gBitTable[gActiveBank])
     {
-        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(gPlayerPartnerBufferCommands))
-            gPlayerPartnerBufferCommands[gBattleBufferA[gActiveBank][0]]();
+        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(sPlayerPartnerBufferCommands))
+            sPlayerPartnerBufferCommands[gBattleBufferA[gActiveBank][0]]();
         else
             PlayerPartnerBufferExecCompleted();
     }

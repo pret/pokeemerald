@@ -129,7 +129,7 @@ static void LinkPartnerDoMoveAnimation(void);
 static void sub_814DCCC(u8 taskId);
 static void sub_814DE9C(void);
 
-static void (*const gLinkPartnerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const sLinkPartnerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
 {
     LinkPartnerHandleGetMonData,
     LinkPartnerHandleGetRawMonData,
@@ -203,8 +203,8 @@ static void LinkPartnerBufferRunCommand(void)
 {
     if (gBattleExecBuffer & gBitTable[gActiveBank])
     {
-        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(gLinkPartnerBufferCommands))
-            gLinkPartnerBufferCommands[gBattleBufferA[gActiveBank][0]]();
+        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(sLinkPartnerBufferCommands))
+            sLinkPartnerBufferCommands[gBattleBufferA[gActiveBank][0]]();
         else
             LinkPartnerBufferExecCompleted();
     }

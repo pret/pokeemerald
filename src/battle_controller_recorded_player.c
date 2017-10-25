@@ -132,7 +132,7 @@ static void RecordedPlayerDoMoveAnimation(void);
 static void sub_818CC24(u8 taskId);
 static void sub_818CDF4(void);
 
-static void (*const gRecordedPlayerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const sRecordedPlayerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
 {
     RecordedPlayerHandleGetMonData,
     RecordedPlayerHandleGetRawMonData,
@@ -206,8 +206,8 @@ static void RecordedPlayerBufferRunCommand(void)
 {
     if (gBattleExecBuffer & gBitTable[gActiveBank])
     {
-        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(gRecordedPlayerBufferCommands))
-            gRecordedPlayerBufferCommands[gBattleBufferA[gActiveBank][0]]();
+        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(sRecordedPlayerBufferCommands))
+            sRecordedPlayerBufferCommands[gBattleBufferA[gActiveBank][0]]();
         else
             RecordedPlayerBufferExecCompleted();
     }

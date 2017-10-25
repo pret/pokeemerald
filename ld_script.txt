@@ -233,7 +233,6 @@ SECTIONS {
         asm/pokemon_animation.o(.text);
         asm/recorded_battle.o(.text);
         src/battle_controller_recorded_opponent.o(.text);
-        asm/battle_controller_recorded_opponent.o(.text);
         src/battle_controller_recorded_player.o(.text);
         src/battle_dome_cards.o(.text);
         src/lilycove_lady.o(.text);

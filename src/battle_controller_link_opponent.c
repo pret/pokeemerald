@@ -135,7 +135,7 @@ static void sub_8067618(u8 taskId);
 static void sub_80676FC(struct Sprite *sprite);
 static void sub_806782C(void);
 
-static void (*const gLinkOpponentBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const sLinkOpponentBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
 {
     LinkOpponentHandleGetMonData,
     LinkOpponentHandleGetRawMonData,
@@ -209,8 +209,8 @@ static void LinkOpponentBufferRunCommand(void)
 {
     if (gBattleExecBuffer & gBitTable[gActiveBank])
     {
-        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(gLinkOpponentBufferCommands))
-            gLinkOpponentBufferCommands[gBattleBufferA[gActiveBank][0]]();
+        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(sLinkOpponentBufferCommands))
+            sLinkOpponentBufferCommands[gBattleBufferA[gActiveBank][0]]();
         else
             LinkOpponentBufferExecCompleted();
     }

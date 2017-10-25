@@ -110,7 +110,7 @@ static void SafariBufferRunCommand(void);
 static void SafariBufferExecCompleted(void);
 static void CompleteWhenChosePokeblock(void);
 
-static void (*const gSafariBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const sSafariBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
 {
     SafariHandleGetMonData,
     SafariHandleGetRawMonData,
@@ -184,8 +184,8 @@ static void SafariBufferRunCommand(void)
 {
     if (gBattleExecBuffer & gBitTable[gActiveBank])
     {
-        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(gSafariBufferCommands))
-            gSafariBufferCommands[gBattleBufferA[gActiveBank][0]]();
+        if (gBattleBufferA[gActiveBank][0] < ARRAY_COUNT(sSafariBufferCommands))
+            sSafariBufferCommands[gBattleBufferA[gActiveBank][0]]();
         else
             SafariBufferExecCompleted();
     }
