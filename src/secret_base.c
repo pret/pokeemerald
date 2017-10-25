@@ -1,6 +1,8 @@
 
 // Includes
 #include "global.h"
+#include "task.h"
+#include "palette.h"
 #include "list_menu.h"
 #include "map_constants.h"
 #include "decoration.h"
@@ -9,6 +11,8 @@
 #include "fieldmap.h"
 #include "field_camera.h"
 #include "field_player_avatar.h"
+#include "field_screen.h"
+#include "field_weather.h"
 #include "text.h"
 #include "string_util.h"
 #include "event_data.h"
@@ -255,4 +259,47 @@ void sub_80E8F9C(void)
 
     idx = sCurSecretBaseId / 10 * 4;
     warp1_set_2(MAP_GROUP_SECRET_BASE_RED_CAVE1, gUnknown_0858CFE8[idx], gUnknown_0858CFE8[idx + 1]);
+}
+
+void sub_80E8FD0(u8 taskId)
+{
+    u16 sbrId;
+
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            if (!gPaletteFade.active)
+            {
+                gTasks[taskId].data[0] = 1;
+            }
+            break;
+        case 1:
+            sbrId = VarGet(VAR_0x4054);
+            if (gSaveBlock1Ptr->secretBases[sbrId].sbr_field_10 < 255)
+            {
+                gSaveBlock1Ptr->secretBases[sbrId].sbr_field_10 ++;
+            }
+            sub_80E8F9C();
+            warp_in();
+            gFieldCallback = sub_80AF168;
+            SetMainCallback2(c2_load_new_map);
+            DestroyTask(taskId);
+            break;
+    }
+}
+
+void sub_80E9068(void)
+{
+    CreateTask(sub_80E8FD0, 0);
+    fade_screen(1, 0);
+    saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+}
+
+bool8 sub_80E909C(void)
+{
+    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_0x4097) == 0)
+    {
+        return FALSE;
+    }
+    return TRUE;
 }

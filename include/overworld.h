@@ -32,6 +32,7 @@ void Overworld_SetMapObjTemplateMovementType(u8, u8);
 
 void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
+void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void Overworld_SetHealLocationWarp(u8);
 void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
@@ -60,5 +61,6 @@ bool32 sub_8087598(void);
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 void warp_in(void);
 void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpNum);
+void c2_load_new_map(void);
 
 #endif //GUARD_ROM4_H
