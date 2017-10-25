@@ -232,6 +232,7 @@ SECTIONS {
         asm/battle_link_817C95C.o(.text);
         asm/pokemon_animation.o(.text);
         asm/recorded_battle.o(.text);
+        src/battle_controller_recorded_opponent.o(.text);
         asm/battle_controller_recorded_opponent.o(.text);
         src/battle_controller_recorded_player.o(.text);
         src/battle_dome_cards.o(.text);
@@ -451,7 +452,7 @@ SECTIONS {
         data/evolution_graphics.o(.rodata);
         data/bard_music.o(.rodata);
         data/data_860A4AC.o(.rodata);
-        data/battle_controller_recorded_opponent.o(.rodata);
+        src/battle_controller_recorded_opponent.o(.rodata);
         src/battle_controller_recorded_player.o(.rodata);
         src/battle_dome_cards.o(.rodata);
         src/lilycove_lady.o(.rodata);
