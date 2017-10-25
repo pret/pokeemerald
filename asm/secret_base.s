@@ -5,68 +5,6 @@
 
 	.text
 
-	thumb_func_start GetSecretBaseMapName
-GetSecretBaseMapName: @ 80E97EC
-	push {r4,lr}
-	adds r4, r0, 0
-	ldr r0, =0x00004054
-	bl VarGet
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl sub_80E9780
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end GetSecretBaseMapName
-
-	thumb_func_start sub_80E980C
-sub_80E980C: @ 80E980C
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	ldr r0, =0x00004054
-	bl VarGet
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gSaveBlock1Ptr
-	mov r8, r1
-	lsls r5, r0, 2
-	adds r5, r0
-	lsls r5, 5
-	ldr r4, [r1]
-	adds r4, r5, r4
-	ldr r0, =0x00001a9e
-	adds r4, r0
-	ldr r6, =gStringVar1
-	adds r0, r4, 0
-	bl sub_80E8DF4
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r6, 0
-	adds r1, r4, 0
-	bl StringCopyN
-	movs r1, 0xFF
-	strb r1, [r0]
-	mov r1, r8
-	ldr r0, [r1]
-	adds r0, r5
-	ldr r1, =0x00001aa9
-	adds r0, r1
-	ldrb r1, [r0]
-	adds r0, r6, 0
-	bl ConvertInternationalString
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E980C
-
 	thumb_func_start sub_80E9878
 sub_80E9878: @ 80E9878
 	push {lr}

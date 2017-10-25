@@ -577,3 +577,19 @@ u8 *sub_80E9780(u8 *dest, u8 sbId)
     ConvertInternationalString(dest, gSaveBlock1Ptr->secretBases[sbId].language);
     return StringAppend(dest, gText_ApostropheSBase);
 }
+
+u8 *GetSecretBaseMapName(u8 *dest)
+{
+    return sub_80E9780(dest, VarGet(VAR_0x4054));
+}
+
+void sub_80E980C(void)
+{
+    u8 sbId;
+    const u8 *src;
+
+    sbId = VarGet(VAR_0x4054);
+    src = gSaveBlock1Ptr->secretBases[sbId].trainerName;
+    *StringCopyN(gStringVar1, src, sub_80E8DF4(src)) = EOS;
+    ConvertInternationalString(gStringVar1, gSaveBlock1Ptr->secretBases[sbId].language);
+}
