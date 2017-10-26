@@ -860,3 +860,36 @@ void sub_80E9A90(void)
     gSaveBlock1Ptr->secretBases[0].sbr_field_e = sbr_e;
     sub_80E9728();
 }
+
+void sub_80E9AC0(void)
+{
+    IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
+    sub_80E9A90();
+}
+
+void sub_80E9AD0(void)
+{
+    u16 i;
+    u16 j;
+    s16 tile;
+    struct MapEvents *events;
+
+    events = gMapHeader.events;
+    for (i = 0; i < events->bgEventCount; i ++)
+    {
+        if (events->bgEvents[i].kind == 8 && gSaveBlock1Ptr->secretBases[0].secretBaseId == events->bgEvents[i].bgUnion.secretBaseId)
+        {
+            tile = MapGridGetMetatileIdAt(events->bgEvents[i].x + 7, events->bgEvents[i].y + 7);
+            for (j = 0; j < 7; j ++)
+            {
+                if (gUnknown_0858CFCC[j].tile2 == tile)
+                {
+                    MapGridSetMetatileIdAt(events->bgEvents[i].x + 7, events->bgEvents[i].y + 7, gUnknown_0858CFCC[j].tile1 | 0xc00);
+                    break;
+                }
+            }
+            DrawWholeMapView();
+            break;
+        }
+    }
+}
