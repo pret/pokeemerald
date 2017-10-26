@@ -24,7 +24,7 @@ CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
-LDFLAGS = -Map $(MAP)
+LDFLAGS = -Map ../../$(MAP)
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 

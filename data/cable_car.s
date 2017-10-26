@@ -86,7 +86,7 @@ gMtChimneyHikerGraphicsIDs:: @ 85CDBE6
 	.byte MAP_OBJ_GFX_HIKER
 	.byte MAP_OBJ_GFX_CAMPER
 	.byte MAP_OBJ_GFX_PICNICKER
-	.byte MAP_OBJ_GFX_ZIGZAGOON @ not used
+	.byte MAP_OBJ_GFX_ZIGZAGOON_1 @ not used
 
 	.align 1
 gMtChimneyHikerCoords:: @ 85CDBEA

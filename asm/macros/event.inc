@@ -1490,6 +1490,17 @@
 	goto_eq \dest
 	.endm
 
+	.macro msgbox text, type=4
+	loadword 0, \text
+	callstd \type
+	.endm
+
+	@ Message box types
+	MSGBOX_YESNO = 5
+
+	YES = 1
+	NO  = 0
+
 	.macro giveitem_std item, amount=1, function=0
 	setorcopyvar 0x8000, \item
 	setorcopyvar 0x8001, \amount
