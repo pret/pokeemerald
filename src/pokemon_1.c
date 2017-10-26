@@ -305,7 +305,7 @@ void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src)
     SetMonData(mon, MON_DATA_HP_EV, &src->hpEV);
     SetMonData(mon, MON_DATA_ATK_EV, &src->attackEV);
     SetMonData(mon, MON_DATA_DEF_EV, &src->defenseEV);
-    SetMonData(mon, MON_DATA_SPD_EV, &src->speedEV);
+    SetMonData(mon, MON_DATA_SPEED_EV, &src->speedEV);
     SetMonData(mon, MON_DATA_SPATK_EV, &src->spAttackEV);
     SetMonData(mon, MON_DATA_SPDEF_EV, &src->spDefenseEV);
     value = src->altAbility;
@@ -369,7 +369,7 @@ void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lv
     SetMonData(mon, MON_DATA_HP_EV, &src->hpEV);
     SetMonData(mon, MON_DATA_ATK_EV, &src->attackEV);
     SetMonData(mon, MON_DATA_DEF_EV, &src->defenseEV);
-    SetMonData(mon, MON_DATA_SPD_EV, &src->speedEV);
+    SetMonData(mon, MON_DATA_SPEED_EV, &src->speedEV);
     SetMonData(mon, MON_DATA_SPATK_EV, &src->spAttackEV);
     SetMonData(mon, MON_DATA_SPDEF_EV, &src->spDefenseEV);
     value = src->altAbility;
