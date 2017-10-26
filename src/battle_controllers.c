@@ -1036,9 +1036,9 @@ void EmitTrainerSlideBack(u8 bufferId)
 void EmitFaintAnimation(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_FAINTANIMATION;
-    gBattleBuffersTransferData[1] = 10;
-    gBattleBuffersTransferData[2] = 10;
-    gBattleBuffersTransferData[3] = 10;
+    gBattleBuffersTransferData[1] = CONTROLLER_FAINTANIMATION;
+    gBattleBuffersTransferData[2] = CONTROLLER_FAINTANIMATION;
+    gBattleBuffersTransferData[3] = CONTROLLER_FAINTANIMATION;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1146,7 +1146,7 @@ void EmitPrintStringPlayerOnly(u8 bufferId, u16 stringID)
     struct StringInfoBattle* stringInfo;
 
     gBattleBuffersTransferData[0] = CONTROLLER_PRINTSTRINGPLAYERONLY;
-    gBattleBuffersTransferData[1] = 17;
+    gBattleBuffersTransferData[1] = CONTROLLER_PRINTSTRINGPLAYERONLY;
     gBattleBuffersTransferData[2] = stringID;
     gBattleBuffersTransferData[3] = (stringID & 0xFF00) >> 8;
 
