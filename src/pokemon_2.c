@@ -352,7 +352,7 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8* data)
     case MON_DATA_DEF2:
         ret = mon->defense;
         break;
-    case MON_DATA_SPD2:
+    case MON_DATA_SPEED2:
         ret = mon->speed;
         break;
     case MON_DATA_SPATK2:

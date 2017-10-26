@@ -87,7 +87,7 @@
 #define MON_DATA_RIBBONS           83
 #define MON_DATA_ATK2              84
 #define MON_DATA_DEF2              85
-#define MON_DATA_SPD2              86
+#define MON_DATA_SPEED2            86
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
