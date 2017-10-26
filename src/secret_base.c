@@ -850,3 +850,13 @@ __attribute__((naked)) void sub_80E9914(void)
                     "\t.pool");
 }
 #endif
+
+void sub_80E9A90(void)
+{
+    u16 sbr_e;
+
+    sbr_e = gSaveBlock1Ptr->secretBases[0].sbr_field_e;
+    sub_80E8AF0(&gSaveBlock1Ptr->secretBases[0]);
+    gSaveBlock1Ptr->secretBases[0].sbr_field_e = sbr_e;
+    sub_80E9728();
+}

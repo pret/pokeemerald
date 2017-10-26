@@ -5,27 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E9A90
-sub_80E9A90: @ 80E9A90
-	push {r4-r6,lr}
-	ldr r5, =gSaveBlock1Ptr
-	ldr r0, [r5]
-	ldr r4, =0x00001aaa
-	adds r1, r0, r4
-	ldrh r6, [r1]
-	ldr r1, =0x00001a9c
-	adds r0, r1
-	bl sub_80E8AF0
-	ldr r0, [r5]
-	adds r0, r4
-	strh r6, [r0]
-	bl sub_80E9728
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E9A90
-
 	thumb_func_start sub_80E9AC0
 sub_80E9AC0: @ 80E9AC0
 	push {lr}
