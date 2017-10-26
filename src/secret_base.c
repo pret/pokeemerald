@@ -893,3 +893,30 @@ void sub_80E9AD0(void)
         }
     }
 }
+
+void sub_80E9B70(void)
+{
+    u16 sbr_e;
+
+    sub_80E9AD0();
+    IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
+    sbr_e = gSaveBlock1Ptr->secretBases[0].sbr_field_e;
+    sub_80E8AF0(&gSaveBlock1Ptr->secretBases[0]);
+    gSaveBlock1Ptr->secretBases[0].sbr_field_e = sbr_e;
+}
+
+u8 sub_80E9BA8(void)
+{
+    u8 tot;
+    s16 i;
+
+    tot = 0;
+    for (i = 1; i < 20; i ++)
+    {
+        if (sub_80E9878(i) == TRUE)
+        {
+            tot ++;
+        }
+    }
+    return tot;
+}

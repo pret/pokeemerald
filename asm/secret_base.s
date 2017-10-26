@@ -5,60 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E9B70
-sub_80E9B70: @ 80E9B70
-	push {r4-r6,lr}
-	bl sub_80E9AD0
-	movs r0, 0x14
-	bl IncrementGameStat
-	ldr r5, =gSaveBlock1Ptr
-	ldr r0, [r5]
-	ldr r4, =0x00001aaa
-	adds r1, r0, r4
-	ldrh r6, [r1]
-	ldr r1, =0x00001a9c
-	adds r0, r1
-	bl sub_80E8AF0
-	ldr r0, [r5]
-	adds r0, r4
-	strh r6, [r0]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E9B70
-
-	thumb_func_start sub_80E9BA8
-sub_80E9BA8: @ 80E9BA8
-	push {r4,r5,lr}
-	movs r5, 0
-	movs r4, 0x1
-_080E9BAE:
-	lsls r0, r4, 24
-	lsrs r0, 24
-	bl sub_80E9878
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080E9BC4
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-_080E9BC4:
-	lsls r0, r4, 16
-	movs r1, 0x80
-	lsls r1, 9
-	adds r0, r1
-	lsrs r4, r0, 16
-	asrs r0, 16
-	cmp r0, 0x13
-	ble _080E9BAE
-	adds r0, r5, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80E9BA8
-
 	thumb_func_start sub_80E9BDC
 sub_80E9BDC: @ 80E9BDC
 	push {lr}
