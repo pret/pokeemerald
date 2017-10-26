@@ -660,7 +660,7 @@ bool8 IsAnimBankSpriteVisible(u8 bank)
         else
             return FALSE;
     }
-    if (!AnimBankSpriteExists(bank))
+    if (!IsBankSpritePresent(bank))
         return FALSE;
     if (IsContest())
         return TRUE; // this line wont ever be reached.

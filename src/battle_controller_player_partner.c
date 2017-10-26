@@ -209,7 +209,7 @@ static void nullsub_77(void)
 {
 }
 
-void SetBankFuncToPlayerPartnerBufferRunCommand(void)
+void SetControllerToPlayerPartner(void)
 {
     gBattleBankFunc[gActiveBank] = PlayerPartnerBufferRunCommand;
 }
@@ -1924,7 +1924,7 @@ static void PlayerPartnerHandleCmd50(void)
 
 static void PlayerPartnerHandleSpriteInvisibility(void)
 {
-    if (AnimBankSpriteExists(gActiveBank))
+    if (IsBankSpritePresent(gActiveBank))
     {
         gSprites[gBankSpriteIds[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);

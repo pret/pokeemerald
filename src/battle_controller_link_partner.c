@@ -194,7 +194,7 @@ static void nullsub_112(void)
 {
 }
 
-void SetBankFuncToLinkPartnerBufferRunCommand(void)
+void SetControllerToLinkPartner(void)
 {
     gBattleBankFunc[gActiveBank] = LinkPartnerBufferRunCommand;
 }
@@ -1678,7 +1678,7 @@ static void LinkPartnerHandleCmd50(void)
 
 static void LinkPartnerHandleSpriteInvisibility(void)
 {
-    if (AnimBankSpriteExists(gActiveBank))
+    if (IsBankSpritePresent(gActiveBank))
     {
         gSprites[gBankSpriteIds[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);

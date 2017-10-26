@@ -3111,7 +3111,7 @@ sub_805EB9C: @ 805EB9C
 _0805EBC8:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl AnimBankSpriteExists
+	bl IsBankSpritePresent
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805EC60
@@ -3329,7 +3329,7 @@ sub_805ED70: @ 805ED70
 	cmp r0, 0
 	beq _0805EDAC
 	adds r0, r4, 0
-	bl AnimBankSpriteExists
+	bl IsBankSpritePresent
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805EDC0

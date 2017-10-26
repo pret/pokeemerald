@@ -197,7 +197,7 @@ static void nullsub_120(void)
 {
 }
 
-void SetBankFuncToRecordedPlayerBufferRunCommand(void)
+void SetControllerToRecordedPlayer(void)
 {
     gBattleBankFunc[gActiveBank] = RecordedPlayerBufferRunCommand;
 }
@@ -1808,7 +1808,7 @@ static void RecordedPlayerHandleCmd50(void)
 
 static void RecordedPlayerHandleSpriteInvisibility(void)
 {
-    if (AnimBankSpriteExists(gActiveBank))
+    if (IsBankSpritePresent(gActiveBank))
     {
         gSprites[gBankSpriteIds[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);

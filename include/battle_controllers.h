@@ -238,7 +238,7 @@ void EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void EmitCmd55(u8 bufferId, u8 arg1);
 
 // player controller
-void SetBankFuncToPlayerBufferRunCommand(void);
+void SetControllerToPlayer(void);
 void nullsub_21(void);
 void PlayerHandleGetRawMonData(void);
 void sub_80587B0(void);
@@ -251,27 +251,27 @@ void ActionSelectionDestroyCursorAt(u8 cursorPos);
 void InitMoveSelectionsVarsAndStrings(void);
 
 // recorded player controller
-void SetBankFuncToRecordedPlayerBufferRunCommand(void);
+void SetControllerToRecordedPlayer(void);
 
 // opponent controller
-void SetBankFuncToOpponentBufferRunCommand(void);
+void SetControllerToOpponent(void);
 
 // player partner controller
-void SetBankFuncToPlayerPartnerBufferRunCommand(void);
+void SetControllerToPlayerPartner(void);
 
 // safari controller
-void SetBankFuncToSafariBufferRunCommand(void);
+void SetControllerToSafari(void);
 
 // wally controller
-void SetBankFuncToWallyBufferRunCommand(void);
+void SetControllerToWally(void);
 
 // recorded opponent controller
-void SetBankFuncToRecordedOpponentBufferRunCommand(void);
+void SetControllerToRecordedOpponent(void);
 
 // link opponent
-void SetBankFuncToLinkOpponentBufferRunCommand(void);
+void SetControllerToLinkOpponent(void);
 
 // link partner
-void SetBankFuncToLinkPartnerBufferRunCommand(void);
+void SetControllerToLinkPartner(void);
 
 #endif // GUARD_BATTLE_CONTROLLERS_H

@@ -657,7 +657,7 @@ struct BattleStruct
     u8 field_B3;
     void (*savedCallback)(void);
     u16 usedHeldItems[BATTLE_BANKS_COUNT];
-    u8 field_C0[4];
+    u8 chosenItem[4]; // why is this an u8?
     u8 AI_itemType[2];
     u8 AI_itemFlags[2];
     u16 choicedMove[BATTLE_BANKS_COUNT];

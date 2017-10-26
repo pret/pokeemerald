@@ -201,7 +201,7 @@ static void nullsub_117(void)
 {
 }
 
-void SetBankFuncToWallyBufferRunCommand(void)
+void SetControllerToWally(void)
 {
     gBattleBankFunc[gActiveBank] = WallyBufferRunCommand;
     gBattleStruct->wallyBattleState = 0;

@@ -84,7 +84,7 @@ void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
 u8 sub_80A82E4(u8 bank);
 u8 sub_80A5C6C(u8 bank, u8 attributeId);
-bool8 AnimBankSpriteExists(u8 bank);
+bool8 IsBankSpritePresent(u8 bank);
 void sub_80A6C68(u8 arg0);
 u8 GetAnimBankSpriteId(u8 wantedBank);
 bool8 IsDoubleBattle(void);

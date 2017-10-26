@@ -175,7 +175,7 @@ static void nullsub_114(void)
 {
 }
 
-void SetBankFuncToSafariBufferRunCommand(void)
+void SetControllerToSafari(void)
 {
     gBattleBankFunc[gActiveBank] = SafariBufferRunCommand;
 }

@@ -145,30 +145,30 @@ static void SetControllersVariables(void)
 
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
-            gBattleBankFunc[0] = SetBankFuncToRecordedPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToRecordedPlayer;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[2] = SetBankFuncToPlayerPartnerBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToPlayerPartner;
             gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToOpponent;
             gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
         }
         else
         {
-            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToPlayer;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[2] = SetBankFuncToPlayerPartnerBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToPlayerPartner;
             gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToOpponent;
             gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
         }
 
@@ -189,15 +189,15 @@ static void SetControllersVariables(void)
         gBattleMainFunc = BeginBattleIntro;
 
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            gBattleBankFunc[0] = SetBankFuncToSafariBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToSafari;
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
-            gBattleBankFunc[0] = SetBankFuncToWallyBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToWally;
         else
-            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToPlayer;
 
         gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-        gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+        gBattleBankFunc[1] = SetControllerToOpponent;
         gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
         gNoOfAllBanks = 2;
@@ -210,20 +210,20 @@ static void SetControllersVariables(void)
                 {
                     gBattleMainFunc = BeginBattleIntro;
 
-                    gBattleBankFunc[0] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                    gBattleBankFunc[0] = SetControllerToRecordedPlayer;
                     gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-                    gBattleBankFunc[1] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                    gBattleBankFunc[1] = SetControllerToRecordedOpponent;
                     gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
                     gNoOfAllBanks = 2;
                 }
                 else // see how the banks are switched
                 {
-                    gBattleBankFunc[1] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                    gBattleBankFunc[1] = SetControllerToRecordedPlayer;
                     gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
 
-                    gBattleBankFunc[0] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                    gBattleBankFunc[0] = SetControllerToRecordedOpponent;
                     gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
 
                     gNoOfAllBanks = 2;
@@ -231,10 +231,10 @@ static void SetControllersVariables(void)
             }
             else
             {
-                gBattleBankFunc[0] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[0] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-                gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+                gBattleBankFunc[1] = SetControllerToOpponent;
                 gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
             }
         }
@@ -243,16 +243,16 @@ static void SetControllersVariables(void)
     {
         gBattleMainFunc = BeginBattleIntro;
 
-        gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+        gBattleBankFunc[0] = SetControllerToPlayer;
         gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-        gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+        gBattleBankFunc[1] = SetControllerToOpponent;
         gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-        gBattleBankFunc[2] = SetBankFuncToPlayerBufferRunCommand;
+        gBattleBankFunc[2] = SetControllerToPlayer;
         gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-        gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+        gBattleBankFunc[3] = SetControllerToOpponent;
         gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
 
         gNoOfAllBanks = 4;
@@ -263,16 +263,16 @@ static void SetControllersVariables(void)
             {
                 gBattleMainFunc = BeginBattleIntro;
 
-                gBattleBankFunc[0] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[0] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[0] = 0;
 
-                gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+                gBattleBankFunc[1] = SetControllerToOpponent;
                 gBanksByIdentity[1] = 1;
 
-                gBattleBankFunc[2] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[2] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[2] = 2;
 
-                gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+                gBattleBankFunc[3] = SetControllerToOpponent;
                 gBanksByIdentity[3] = 3;
 
                 gNoOfAllBanks = 4;
@@ -307,7 +307,7 @@ static void SetControllersVariables(void)
 
                     if (i == var)
                     {
-                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToRecordedPlayer;
                         switch (gLinkPlayers[i].lp_field_18)
                         {
                         case 0:
@@ -325,7 +325,7 @@ static void SetControllersVariables(void)
                     else if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[var].lp_field_18 & 1))
                             || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[var].lp_field_18 & 1)))
                     {
-                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToRecordedPlayer;
                         switch (gLinkPlayers[i].lp_field_18)
                         {
                         case 0:
@@ -342,7 +342,7 @@ static void SetControllersVariables(void)
                     }
                     else
                     {
-                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToRecordedOpponent;
                         switch (gLinkPlayers[i].lp_field_18)
                         {
                         case 0:
@@ -361,51 +361,51 @@ static void SetControllersVariables(void)
             }
             else if (gBattleTypeFlags & BATTLE_TYPE_WILD)
             {
-                gBattleBankFunc[0] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[0] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-                gBattleBankFunc[2] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[2] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
                 if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
                 {
-                  gBattleBankFunc[1] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                  gBattleBankFunc[1] = SetControllerToRecordedOpponent;
                   gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-                  gBattleBankFunc[3] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                  gBattleBankFunc[3] = SetControllerToRecordedOpponent;
                   gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
                 }
                 else
                 {
-                  gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+                  gBattleBankFunc[1] = SetControllerToOpponent;
                   gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-                  gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+                  gBattleBankFunc[3] = SetControllerToOpponent;
                   gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
                 }
             }
             else
             {
-                gBattleBankFunc[1] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[1] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
 
-                gBattleBankFunc[3] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[3] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[3] = IDENTITY_PLAYER_MON2;
 
                 if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
                 {
-                    gBattleBankFunc[0] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                    gBattleBankFunc[0] = SetControllerToRecordedOpponent;
                     gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
 
-                    gBattleBankFunc[2] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                    gBattleBankFunc[2] = SetControllerToRecordedOpponent;
                     gBanksByIdentity[2] = IDENTITY_OPPONENT_MON2;
                 }
                 else
                 {
-                    gBattleBankFunc[0] = SetBankFuncToOpponentBufferRunCommand;
+                    gBattleBankFunc[0] = SetControllerToOpponent;
                     gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
 
-                    gBattleBankFunc[2] = SetBankFuncToOpponentBufferRunCommand;
+                    gBattleBankFunc[2] = SetControllerToOpponent;
                     gBanksByIdentity[2] = IDENTITY_OPPONENT_MON2;
                 }
             }
@@ -424,20 +424,20 @@ static void SetControllersVariablesInLinkBattle(void)
         {
             gBattleMainFunc = BeginBattleIntro;
 
-            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToPlayer;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToLinkOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
             gNoOfAllBanks = 2;
         }
         else
         {
-            gBattleBankFunc[1] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToPlayer;
             gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[0] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToLinkOpponent;
             gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
 
             gNoOfAllBanks = 2;
@@ -449,32 +449,32 @@ static void SetControllersVariablesInLinkBattle(void)
         {
             gBattleMainFunc = BeginBattleIntro;
 
-            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToPlayer;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToLinkOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[2] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToPlayer;
             gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[3] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToLinkOpponent;
             gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
 
             gNoOfAllBanks = 4;
         }
         else
         {
-            gBattleBankFunc[1] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToPlayer;
             gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[0] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToLinkOpponent;
             gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[3] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToPlayer;
             gBanksByIdentity[3] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[2] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToLinkOpponent;
             gBanksByIdentity[2] = IDENTITY_OPPONENT_MON2;
 
             gNoOfAllBanks = 4;
@@ -486,32 +486,32 @@ static void SetControllersVariablesInLinkBattle(void)
         {
             gBattleMainFunc = BeginBattleIntro;
 
-            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToPlayer;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[2] = SetBankFuncToLinkPartnerBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToLinkPartner;
             gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToOpponent;
             gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
 
             gNoOfAllBanks = 4;
         }
         else
         {
-            gBattleBankFunc[0] = SetBankFuncToLinkPartnerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToLinkPartner;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToLinkOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[2] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToPlayer;
             gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[3] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToLinkOpponent;
             gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
 
             gNoOfAllBanks = 4;
@@ -549,7 +549,7 @@ static void SetControllersVariablesInLinkBattle(void)
 
             if (i == multiplayerId)
             {
-                gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToPlayerBufferRunCommand;
+                gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToPlayer;
                 switch (gLinkPlayers[i].lp_field_18)
                 {
                 case 0:
@@ -569,7 +569,7 @@ static void SetControllersVariablesInLinkBattle(void)
                 if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[multiplayerId].lp_field_18 & 1))
                  || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[multiplayerId].lp_field_18 & 1)))
                 {
-                    gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToLinkPartnerBufferRunCommand;
+                    gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToLinkPartner;
                     switch (gLinkPlayers[i].lp_field_18)
                     {
                     case 0:
@@ -586,7 +586,7 @@ static void SetControllersVariablesInLinkBattle(void)
                 }
                 else
                 {
-                    gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToLinkOpponentBufferRunCommand;
+                    gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToLinkOpponent;
                     switch (gLinkPlayers[i].lp_field_18)
                     {
                     case 0:

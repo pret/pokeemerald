@@ -941,7 +941,7 @@ static bool8 ShouldUseItem(void)
         if (shouldUse)
         {
             EmitTwoReturnValues(1, ACTION_USE_ITEM, 0);
-            *(gBattleStruct->field_C0 + (gActiveBank / 2) * 2) = item;
+            *(gBattleStruct->chosenItem + (gActiveBank / 2) * 2) = item;
             gBattleResources->battleHistory->trainerItems[i] = 0;
             return shouldUse;
         }

@@ -239,7 +239,7 @@ void nullsub_21(void)
 {
 }
 
-void SetBankFuncToPlayerBufferRunCommand(void)
+void SetControllerToPlayer(void)
 {
     gBattleBankFunc[gActiveBank] = PlayerBufferRunCommand;
     gDoingBattleAnim = FALSE;
@@ -3083,7 +3083,7 @@ static void PlayerHandleCmd50(void)
 
 static void PlayerHandleSpriteInvisibility(void)
 {
-    if (AnimBankSpriteExists(gActiveBank))
+    if (IsBankSpritePresent(gActiveBank))
     {
         gSprites[gBankSpriteIds[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);

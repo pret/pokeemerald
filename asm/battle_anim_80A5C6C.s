@@ -726,7 +726,7 @@ GetAnimBankSpriteId: @ 80A6240
 	bne _080A6268
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
-	bl AnimBankSpriteExists
+	bl IsBankSpritePresent
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A62B6
@@ -739,7 +739,7 @@ _080A6268:
 	bne _080A6288
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
-	bl AnimBankSpriteExists
+	bl IsBankSpritePresent
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A62B6
@@ -1862,8 +1862,8 @@ _080A6A7E:
 	.pool
 	thumb_func_end GetBankByIdentity
 
-	thumb_func_start AnimBankSpriteExists
-AnimBankSpriteExists: @ 80A6A90
+	thumb_func_start IsBankSpritePresent
+IsBankSpritePresent: @ 80A6A90
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1926,7 +1926,7 @@ _080A6B1A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end AnimBankSpriteExists
+	thumb_func_end IsBankSpritePresent
 
 	thumb_func_start IsDoubleBattle
 IsDoubleBattle: @ 80A6B20
