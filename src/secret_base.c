@@ -1429,3 +1429,31 @@ void sub_80EA3E4(u8 taskId)
             break;
     }
 }
+
+void sub_80EA828(u8 sbId, struct SecretBaseRecord *base, u32 version, u32 language)
+{
+    int strlen;
+    u8 *name;
+
+    gSaveBlock1Ptr->secretBases[sbId] = *base;
+    gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_6 = 2;
+    if (version == VERSION_SAPPHIRE || version == VERSION_RUBY)
+    {
+        gSaveBlock1Ptr->secretBases[sbId].language = LANGUAGE_ENGLISH;
+    }
+    if (version == VERSION_EMERALD && language == LANGUAGE_JAPANESE)
+    {
+        name = gSaveBlock1Ptr->secretBases[sbId].trainerName;
+        for (strlen = 0; strlen < 7; strlen ++)
+        {
+            if (name[strlen] == EOS)
+            {
+                break;
+            }
+        }
+        if (strlen > 5)
+        {
+            gSaveBlock1Ptr->secretBases[sbId].language = LANGUAGE_ENGLISH;
+        }
+    }
+}
