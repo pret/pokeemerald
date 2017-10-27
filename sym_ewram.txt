@@ -196,7 +196,7 @@ gUnknown_02022D0A: @ 2022D0A
 gUnknown_02022D0C: @ 2022D0C
 	.space 0x4
 
-gUnknown_02022D10: @ 2022D10
+gBattleBuffersTransferData: @ 2022D10
 	.space 0x100
 
 gUnknown_02022E10: @ 2022E10
@@ -282,7 +282,7 @@ gNoOfAllBanks: @ 202406C
 gBattlePartyID: @ 202406E
 	.space 0x8
 
-gBanksBySide: @ 2024076
+gBanksByIdentity: @ 2024076
 	.space 0x4
 
 gActionsByTurnOrder: @ 202407A
@@ -471,10 +471,10 @@ gBattleScripting: @ 2024474
 gBattleStruct: @ 202449C
 	.space 0x4
 
-gUnknown_020244A0: @ 20244A0
+gLinkBattleSendBuffer: @ 20244A0
 	.space 0x4
 
-gUnknown_020244A4: @ 20244A4
+gLinkBattleRecvBuffer: @ 20244A4
 	.space 0x4
 
 gBattleResources: @ 20244A8
@@ -713,77 +713,9 @@ gUnknown_02037622: @ 2037622
 	.include "src/tileset_anims.o"
 	.include "src/palette.o"
     .include "src/sound.o"
-    
-    .align 0x2
+    .include "src/battle_anim.o"
 
-gBattleAnimScriptPtr: @ 20383F0
-	.space 0x4
-
-gBattleAnimScriptRetAddr: @ 20383F4
-	.space 0x4
-
-gAnimScriptCallback: @ 20383F8
-	.space 0x4
-
-gAnimFramesToWait: @ 20383FC
-	.space 0x1
-
-gAnimScriptActive: @ 20383FD
-	.space 0x1
-
-gAnimVisualTaskCount: @ 20383FE
-	.space 0x1
-
-gAnimSoundTaskCount: @ 20383FF
-	.space 0x1
-
-gDisableStructMoveAnim: @ 2038400
-	.space 0x4
-
-gMoveDmgMoveAnim: @ 2038404
-	.space 0x4
-
-gMovePowerMoveAnim: @ 2038408
-	.space 0x2
-
-gAnimSpriteIndexArray: @ 203840A
-	.space 0x10
-
-gHappinessMoveAnim: @ 203841A
-	.space 0x2
-
-gWeatherMoveAnim: @ 203841C
-	.space 0x2
-
-gBattleAnimArgs: @ 203841E
-	.space 0x10
-
-gSoundAnimFramesToWait: @ 203842E
-	.space 0x2
-
-gUnknown_02038430: @ 2038430
-	.space 0x2
-
-gUnknown_02038432: @ 2038432
-	.space 0x1
-
-gUnknown_02038433: @ 2038433
-	.space 0x1
-
-gAnimMoveIndex: @ 2038434
-	.space 0x2
-
-gAnimationBankAttacker: @ 2038436
-	.space 0x1
-
-gAnimationBankTarget: @ 2038437
-	.space 0x1
-
-gUnknown_02038438: @ 2038438
-	.space 0x8
-
-gUnknown_02038440: @ 2038440
-	.space 0x4
+.align 2
 
 gUnknown_02038444: @ 2038444
 	.space 0x10
@@ -1058,7 +990,7 @@ gUnknown_02039F30: @ 2039F30
 gUnknown_02039F31: @ 2039F31
 	.space 0x3
 
-gUnknown_02039F34: @ 2039F34
+gContestResources: @ 2039F34
 	.space 0x4
 
 gUnknown_02039F38: @ 2039F38
@@ -1173,8 +1105,7 @@ gUnknown_0203A12C: @ 203A12C
 gUnknown_0203A130: @ 203A130
 	.space 0x4
 
-gUnknown_0203A134: @ 203A134
-	.space 0x4
+    .include "src/mail.o"
 
 gUnknown_0203A138: @ 203A138
 	.space 0x8
@@ -1188,68 +1119,10 @@ gUnknown_0203A144: @ 203A144
 gUnknown_0203A148: @ 203A148
 	.space 0x4
 
-gUnknown_0203A14C: @ 203A14C
-	.space 0x4
+    .include "src/decoration.o"
+    .align 2
 
-gUnknown_0203A150: @ 203A150
-	.space 0x1
-
-gUnknown_0203A151: @ 203A151
-	.space 0x1
-
-gUnknown_0203A152: @ 203A152
-	.space 0x10
-
-gUnknown_0203A162: @ 203A162
-	.space 0xC
-
-gUnknown_0203A16E: @ 203A16E
-	.space 0x2
-
-gUnknown_0203A170: @ 203A170
-	.space 0x2
-
-gUnknown_0203A172: @ 203A172
-	.space 0x1
-
-gUnknown_0203A173: @ 203A173
-	.space 0x9
-
-gUnknown_0203A17C: @ 203A17C
-	.space 0xC
-
-gUnknown_0203A188: @ 203A188
-	.space 0x4
-
-gUnknown_0203A18C: @ 203A18C
-	.space 0x4
-
-gUnknown_0203A190: @ 203A190
-	.space 0x8A4
-
-gUnknown_0203AA34: @ 203AA34
-	.space 0x2
-
-gUnknown_0203AA36: @ 203AA36
-	.space 0x2
-
-gUnknown_0203AA38: @ 203AA38
-	.space 0x1
-
-gUnknown_0203AA39: @ 203AA39
-	.space 0x1
-
-gUnknown_0203AA3A: @ 203AA3A
-	.space 0x2
-
-gUnknown_0203AA3C: @ 203AA3C
-	.space 0x8
-
-gUnknown_0203AA44: @ 203AA44
-	.space 0x80
-
-gUnknown_0203AAC4: @ 203AAC4
-	.space 0x4
+@ slot_machine
 
 gUnknown_0203AAC8: @ 203AAC8
 	.space 0x4
@@ -1477,9 +1350,7 @@ gUnknown_0203BC34: @ 203BC34
 gUnknown_0203BC38: @ 203BC38
 	.space 0x8
 
-gDecorationInventories: @ 203BC40
-	.space 0x40
-
+	.include "src/decoration_inventory.o"
     .include "src/roamer.o"
 
 gUnknown_0203BC88: @ 203BC88

@@ -57,7 +57,7 @@ static u32 GetMonSizeHash(struct Pokemon *pkmn)
     u16 hpIV = GetMonData(pkmn, MON_DATA_HP_IV) & 0xF;
     u16 attackIV = GetMonData(pkmn, MON_DATA_ATK_IV) & 0xF;
     u16 defenseIV = GetMonData(pkmn, MON_DATA_DEF_IV) & 0xF;
-    u16 speedIV = GetMonData(pkmn, MON_DATA_SPD_IV) & 0xF;
+    u16 speedIV = GetMonData(pkmn, MON_DATA_SPEED_IV) & 0xF;
     u16 spAtkIV = GetMonData(pkmn, MON_DATA_SPATK_IV) & 0xF;
     u16 spDefIV = GetMonData(pkmn, MON_DATA_SPDEF_IV) & 0xF;
     u32 hibyte = ((attackIV ^ defenseIV) * hpIV) ^ (personality & 0xFF);

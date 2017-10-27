@@ -54,7 +54,7 @@ SECTIONS {
         asm/link.o(.text);
         src/rtc.o(.text);
         asm/main_menu.o(.text);
-        asm/rom3.o(.text);
+        src/battle_controllers.o(.text);
         src/decompress.o(.text);
         asm/battle_1.o(.text);
         src/battle_2.o(.text);
@@ -79,7 +79,7 @@ SECTIONS {
         src/blend_palette.o(.text);
         asm/daycare.o(.text);
         src/egg_hatch.o(.text);
-        asm/battle_interface.o(.text);
+        src/battle_interface.o(.text);
         asm/smokescreen.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
@@ -113,7 +113,7 @@ SECTIONS {
         src/tileset_anims.o(.text);
         src/palette.o(.text);
         src/sound.o(.text);
-        asm/battle_anim.o(.text);
+        src/battle_anim.o(.text);
         asm/rom_80A5C6C.o(.text);
         src/task.o(.text);
         src/reshow_battle_screen.o(.text);
@@ -164,13 +164,13 @@ SECTIONS {
         asm/easy_chat.o(.text);
         asm/mon_markings.o(.text);
         asm/mauville_old_man.o(.text);
-        asm/mail.o(.text);
+        src/mail.o(.text);
         asm/menu_helpers.o(.text);
         asm/dewford_trend.o(.text);
         asm/heal_location.o(.text);
         asm/region_map.o(.text);
         asm/cute_sketch.o(.text);
-        asm/decoration.o(.text);
+        src/decoration.o(.text);
         asm/slot_machine.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
@@ -204,7 +204,7 @@ SECTIONS {
         asm/battle_anim_815A0D4.o(.text);
         asm/learn_move.o(.text);
         asm/fldeff_softboiled.o(.text);
-        asm/decoration_inventory.o(.text);
+        src/decoration_inventory.o(.text);
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
         asm/use_pokeblock.o(.text);
@@ -223,7 +223,7 @@ SECTIONS {
         src/save_failed_screen.o(.text);
         src/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
-        asm/clear_save_data_screen.o(.text);
+        src/clear_save_data_screen.o(.text);
         asm/intro_credits_graphics.o(.text);
         asm/evolution_graphics.o(.text);
         asm/bard_music.o(.text);
@@ -254,15 +254,17 @@ SECTIONS {
         asm/fldeff_groundshake.o(.text);
         asm/fossil_specials.o(.text);
         src/berry_fix_program.o(.text);
+        src/pokemon_summary_screen.o(.text);
         asm/pokemon_summary_screen.o(.text);
         asm/pokenav.o(.text);
         asm/rayquaza_scene.o(.text);
-        asm/walda_phrase.o(.text);
+        src/walda_phrase.o(.text);
         asm/contest_link_81D9DE4.o(.text);
         asm/trainer_rematch.o(.text);
         asm/unk_sprite_file.o(.text);
         asm/unk_transition.o(.text);
         asm/unk_transition_2.o(.text);
+        src/international_string_util.o(.text);
         asm/international_string_util.o(.text);
     } =0
 
@@ -291,6 +293,10 @@ SECTIONS {
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
         src/siirtc.o(.text);
+        src/librfu_stwi.o(.text);
+        src/librfu_intr.o(.text);
+        asm/librfu_intr.o(.text);
+        src/librfu_rfu.o(.text);
         asm/librfu.o(.text);
         asm/libagbsyscall.o(.text);
         tools/agbcc/lib/libgcc.a:_call_via_rX.o(.text);
@@ -339,7 +345,7 @@ SECTIONS {
         data/daycare.o(.rodata);
         src/egg_hatch.o(.rodata);
         data/battle_7.o(.rodata);
-        data/battle_interface.o(.rodata);
+        src/battle_interface.o(.rodata);
         data/pokeball.o(.rodata);
         data/trade.o(.rodata);
         data/berry_blender.o(.rodata);
@@ -363,6 +369,8 @@ SECTIONS {
         src/palette.o(.rodata);
         data/fanfares.o(.rodata);
         data/battle_anims.o(.rodata);
+        src/battle_anim.o(.rodata);
+        data/rom_8525F58.o(.rodata);
         data/title_screen.o(.rodata);
         data/field_screen.o(.rodata);
         data/battle_setup.o(.rodata);
@@ -400,12 +408,12 @@ SECTIONS {
         data/easy_chat.o(.rodata);
         data/mon_markings.o(.rodata);
         data/mauville_old_man.o(.rodata);
-        data/mail.o(.rodata);
+        src/mail.o(.rodata);
         data/menu_helpers.o(.rodata);
         data/heal_location.o(.rodata);
         data/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
-        data/decoration.o(.rodata);
+        src/decoration.o(.rodata);
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
@@ -437,7 +445,7 @@ SECTIONS {
         src/save_failed_screen.o(.rodata);
         data/braille_puzzles.o(.rodata);
         data/pokeblock_feed.o(.rodata);
-        data/clear_save_data_screen.o(.rodata);
+        src/clear_save_data_screen.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
         data/evolution_graphics.o(.rodata);
         data/bard_music.o(.rodata);
@@ -463,7 +471,7 @@ SECTIONS {
         data/pokemon_summary_screen.o(.rodata);
         data/pokenav.o(.rodata);
         data/rayquaza_scene.o(.rodata);
-        data/walda_phrase.o(.rodata);
+        src/walda_phrase.o(.rodata);
         data/trainer_rematch.o(.rodata);
         data/unk_sprite_file.o(.rodata);
         data/unk_transition.o(.rodata);
