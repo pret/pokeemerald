@@ -20,6 +20,8 @@
 #include "field_screen.h"
 #include "field_weather.h"
 #include "field_map_obj.h"
+#include "field_effect.h"
+#include "fldeff_80F9BCC.h"
 #include "metatile_behavior.h"
 #include "map_name_popup.h"
 #include "text.h"
@@ -1286,4 +1288,144 @@ void sub_80EA354(void)
     }
     gSpecialVar_0x8004 = sub_80EA20C(sbId);
     gScriptResult = gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_5;
+}
+
+
+void sub_80EA3E4(u8 taskId)
+{
+    s16 x;
+    s16 y;
+    u8 behavior;
+    u16 tileId;
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    switch (data[1])
+    {
+        case 0:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                gUnknown_0203A01D = TRUE;
+            }
+            else
+            {
+                gUnknown_0203A01D = FALSE;
+            }
+            PlayerGetDestCoords(&data[2], &data[3]);
+            data[1] = 1;
+            break;
+        case 1:
+            PlayerGetDestCoords(&x, &y);
+            if (x != data[2] || y != data[3])
+            {
+                data[2] = x;
+                data[3] = y;
+                VarSet(VAR_0x40EC, VarGet(VAR_0x40EC) + 1);
+                behavior = MapGridGetMetatileBehaviorAt(x, y);
+                tileId = MapGridGetMetatileIdAt(x, y);
+                if (tileId == 0x234 || tileId == 0x23C)
+                {
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x20);
+                    }
+                }
+                else if (tileId == 0x2b8 || tileId == 0x2b9 || tileId == 0x2ba || tileId == 0x2c0 || tileId == 0x2c1 || tileId == 0x2c2 || tileId == 0x2c8 || tileId == 0x2c9 || tileId == 0x2ca)
+                {
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x01);
+                    }
+                }
+                else if (tileId == 0x239 || tileId == 0x241 || tileId == 0x251 || tileId == 0x259)
+                {
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x04);
+                    }
+                }
+                else if ((behavior == 0x34 && tileId == 0x26d) || (behavior == 0x35 && MapGridGetMetatileIdAt(x, y) == 0x26a))
+                {
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x200);
+                    }
+                }
+                else if (behavior == 0xc1 && tileId == 0x23d)
+                {
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) ^ 0x1000);
+                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x2000);
+                    }
+                }
+                else if (behavior == 0x47 && tileId == 0x23e)
+                {
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x1000);
+                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) ^ 0x2000);
+                    }
+                }
+                else if (MetatileBehavior_IsSecretBaseGlitterMat(behavior) == TRUE)
+                {
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x80);
+                    }
+                }
+                else if (MetatileBehavior_IsSecretBaseBalloon(behavior) == TRUE)
+                {
+                    sub_80FA5E4(MapGridGetMetatileIdAt(x, y), x, y);
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        switch ((int)MapGridGetMetatileIdAt(x, y))
+                        {
+                            case 0x338:
+                            case 0x33c:
+                            case 0x340:
+                                VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x02);
+                                break;
+                            case 0x228:
+                                VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x100);
+                                break;
+                        }
+                    }
+                }
+                else if (MetatileBehavior_IsMB_BE(behavior) == TRUE)
+                {
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x400);
+                    }
+                    sub_80FA794(x, y);
+                }
+                else if (MetatileBehavior_IsSecretBaseSoundMat(behavior) == TRUE){
+                    if (gUnknown_0203A01D == TRUE) {
+                        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x8000);
+                    }
+                }
+                else if (MetatileBehavior_IsSecretBaseJumpMat(behavior) == TRUE)
+                {
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x4000);
+                    }
+                }
+                else if (MetatileBehavior_IsSecretBaseSpinMat(behavior) == TRUE)
+                {
+                    if (gUnknown_0203A01D == TRUE)
+                    {
+                        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x02);
+                    }
+                }
+            }
+            break;
+        case 2:
+            if (!FieldEffectActiveListContains(data[4]))
+            {
+                data[1] = 1;
+            }
+            break;
+    }
 }
