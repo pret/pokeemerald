@@ -50,6 +50,7 @@ void game_continue(u8 taskId);
 void sub_80E9E00(u8 taskId);
 void sub_80E9E44(u8 taskId);
 void sub_80E9E90(u8 taskId);
+void sub_80E9F20(u8 taskId);
 void task_pc_turn_off(u8 taskId);
 u8 sub_80EA20C(u8 sbId);
 
@@ -1051,4 +1052,35 @@ void sub_80E9E44(u8 taskId)
 
     data = gTasks[taskId].data;
     data[8] = AddScrollIndicatorArrowPairParametrized(0x02, 0xbc, 0x0c, 0x94, data[0] - data[3], 0x13f8, 0x13f8, &data[2]);
+}
+
+void sub_80E9E90(u8 taskId)
+{
+    s16 *data;
+    s32 input;
+
+    data = gTasks[taskId].data;
+    input = ListMenuHandleInput(data[5]);
+    get_coro_args_x18_x1A(data[5], &data[2], &data[1]);
+    switch (input)
+    {
+        case -1:
+            break;
+        case -2:
+            PlaySE(SE_SELECT);
+            sub_81AE6C8(data[5], NULL, NULL);
+            RemoveScrollIndicatorArrowPair(data[8]);
+            sub_819746C(data[6], 0);
+            ClearWindowTilemap(data[6]);
+            RemoveWindow(data[6]);
+            schedule_bg_copy_tilemap_to_vram(0);
+            free(gUnknown_0203A020);
+            task_pc_turn_off(taskId);
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            data[4] = input;
+            sub_80E9F20(taskId);
+            break;
+    }
 }

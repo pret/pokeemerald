@@ -5,69 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E9E90
-sub_80E9E90: @ 80E9E90
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r4, r0, r1
-	ldrb r0, [r4, 0xA]
-	bl ListMenuHandleInput
-	adds r5, r0, 0
-	ldrb r0, [r4, 0xA]
-	adds r1, r4, 0x4
-	adds r2, r4, 0x2
-	bl get_coro_args_x18_x1A
-	movs r0, 0x2
-	negs r0, r0
-	cmp r5, r0
-	beq _080E9EC8
-	adds r0, 0x1
-	cmp r5, r0
-	bne _080E9F0C
-	b _080E9F1A
-	.pool
-_080E9EC8:
-	movs r0, 0x5
-	bl PlaySE
-	ldrb r0, [r4, 0xA]
-	movs r1, 0
-	movs r2, 0
-	bl sub_81AE6C8
-	ldrb r0, [r4, 0x10]
-	bl RemoveScrollIndicatorArrowPair
-	ldrb r0, [r4, 0xC]
-	movs r1, 0
-	bl sub_819746C
-	ldrb r0, [r4, 0xC]
-	bl ClearWindowTilemap
-	ldrb r0, [r4, 0xC]
-	bl RemoveWindow
-	movs r0, 0
-	bl schedule_bg_copy_tilemap_to_vram
-	ldr r0, =gUnknown_0203A020
-	ldr r0, [r0]
-	bl Free
-	adds r0, r6, 0
-	bl task_pc_turn_off
-	b _080E9F1A
-	.pool
-_080E9F0C:
-	movs r0, 0x5
-	bl PlaySE
-	strh r5, [r4, 0x8]
-	adds r0, r6, 0
-	bl sub_80E9F20
-_080E9F1A:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80E9E90
-
 	thumb_func_start sub_80E9F20
 sub_80E9F20: @ 80E9F20
 	push {r4-r6,lr}
