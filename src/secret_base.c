@@ -6,11 +6,12 @@
 #include "palette.h"
 #include "list_menu.h"
 #include "window.h"
+#include "menu.h"
 #include "new_menu_helpers.h"
+#include "menu_indicators.h"
 #include "map_constants.h"
-#include "species.h"
-#include "moves.h"
-#include "items.h"
+#include "songs.h"
+#include "sound.h"
 #include "overworld.h"
 #include "fieldmap.h"
 #include "field_camera.h"
@@ -47,6 +48,7 @@ EWRAM_DATA struct SecretBaseListMenuBuffer *gUnknown_0203A020 = NULL;
 void sub_80E9C9C(u8 taskId);
 void game_continue(u8 taskId);
 void sub_80E9E00(u8 taskId);
+void sub_80E9E44(u8 taskId);
 void sub_80E9E90(u8 taskId);
 void task_pc_turn_off(u8 taskId);
 u8 sub_80EA20C(u8 sbId);
@@ -1022,4 +1024,31 @@ void game_continue(u8 taskId)
     gUnknown_03006310.unk_0c = data[0];
     gUnknown_03006310.unk_00 = gUnknown_0203A020->items;
     gUnknown_03006310.unk_0e = data[3];
+}
+
+void sub_80E9DEC(u32 unused, bool8 flag)
+{
+    if (flag != TRUE)
+    {
+        PlaySE(SE_SELECT);
+    }
+}
+
+void sub_80E9E00(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    SetStandardWindowBorderStyle(data[6], 0);
+    data[5] = ListMenuInit(&gUnknown_03006310, data[2], data[1]);
+    sub_80E9E44(taskId);
+    schedule_bg_copy_tilemap_to_vram(0);
+}
+
+void sub_80E9E44(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    data[8] = AddScrollIndicatorArrowPairParametrized(0x02, 0xbc, 0x0c, 0x94, data[0] - data[3], 0x13f8, 0x13f8, &data[2]);
 }
