@@ -498,7 +498,7 @@ gDoingBattleAnim: @ 20244B9
 gTransformedPersonalities: @ 20244BC
 	.space 0x10
 
-gUnknown_020244CC: @ 20244CC
+gPlayerDpadHoldFrames: @ 20244CC
 	.space 0x4
 
 gBattleSpritesDataPtr: @ 20244D0

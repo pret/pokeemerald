@@ -34,7 +34,6 @@ extern u8 gMoveSelectionCursor[BATTLE_BANKS_COUNT];
 extern u8 gAbsentBankFlags;
 extern u8 gNoOfAllBanks;
 extern bool8 gDoingBattleAnim;
-extern u8 gUnknown_020244CC;
 extern void (*gBattleBankFunc[BATTLE_BANKS_COUNT])(void);
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
@@ -377,7 +376,7 @@ static void sub_8168818(void)
 
 static void CompleteOnHealthbarDone(void)
 {
-    s16 hpValue = sub_8074AA0(gActiveBank, gHealthBoxesIds[gActiveBank], 0, 0);
+    s16 hpValue = sub_8074AA0(gActiveBank, gHealthBoxesIds[gActiveBank], HEALTH_BAR, 0);
 
     SetHealthboxSpriteVisible(gHealthBoxesIds[gActiveBank]);
 

@@ -33,7 +33,7 @@ extern u8 gMoveSelectionCursor[BATTLE_BANKS_COUNT];
 extern u8 gAbsentBankFlags;
 extern u8 gNoOfAllBanks;
 extern bool8 gDoingBattleAnim;
-extern u8 gUnknown_020244CC;
+extern u8 gPlayerDpadHoldFrames;
 extern void (*gBattleBankFunc[BATTLE_BANKS_COUNT])(void);
 extern void (*gPreBattleCallback1)(void);
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
@@ -243,7 +243,7 @@ void SetControllerToPlayer(void)
 {
     gBattleBankFunc[gActiveBank] = PlayerBufferRunCommand;
     gDoingBattleAnim = FALSE;
-    gUnknown_020244CC = 0;
+    gPlayerDpadHoldFrames = 0;
 }
 
 static void PlayerBufferExecCompleted(void)
@@ -287,9 +287,9 @@ static void HandleInputChooseAction(void)
     dp11b_obj_instanciate(gActiveBank, 0, 7, 1);
 
     if (gMain.newAndRepeatedKeys & DPAD_ANY && gSaveBlock2Ptr->optionsButtonMode == 2)
-        gUnknown_020244CC++;
+        gPlayerDpadHoldFrames++;
     else
-        gUnknown_020244CC = 0;
+        gPlayerDpadHoldFrames = 0;
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -352,7 +352,7 @@ static void HandleInputChooseAction(void)
             ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBank], 0);
         }
     }
-    else if (gMain.newKeys & B_BUTTON || gUnknown_020244CC > 59)
+    else if (gMain.newKeys & B_BUTTON || gPlayerDpadHoldFrames > 59)
     {
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
          && GetBankIdentity(gActiveBank) == IDENTITY_PLAYER_MON2
@@ -406,9 +406,9 @@ static void HandleInputChooseTarget(void)
     }
 
     if (gMain.heldKeys & DPAD_ANY && gSaveBlock2Ptr->optionsButtonMode == 2)
-        gUnknown_020244CC++;
+        gPlayerDpadHoldFrames++;
     else
-        gUnknown_020244CC = 0;
+        gPlayerDpadHoldFrames = 0;
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -418,7 +418,7 @@ static void HandleInputChooseTarget(void)
         dp11b_obj_free(gMultiUsePlayerCursor, 1);
         PlayerBufferExecCompleted();
     }
-    else if (gMain.newKeys & B_BUTTON || gUnknown_020244CC > 59)
+    else if (gMain.newKeys & B_BUTTON || gPlayerDpadHoldFrames > 59)
     {
         PlaySE(SE_SELECT);
         gSprites[gBankSpriteIds[gMultiUsePlayerCursor]].callback = sub_8039B2C;
@@ -519,9 +519,9 @@ static void HandleInputChooseMove(void)
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBank][4]);
 
     if (gMain.heldKeys & DPAD_ANY && gSaveBlock2Ptr->optionsButtonMode == 2)
-        gUnknown_020244CC++;
+        gPlayerDpadHoldFrames++;
     else
-        gUnknown_020244CC = 0;
+        gPlayerDpadHoldFrames = 0;
 
     if (gMain.newKeys & A_BUTTON)
     {
@@ -585,7 +585,7 @@ static void HandleInputChooseMove(void)
             gSprites[gBankSpriteIds[gMultiUsePlayerCursor]].callback = sub_8039AD8;
         }
     }
-    else if (gMain.newKeys & B_BUTTON || gUnknown_020244CC > 59)
+    else if (gMain.newKeys & B_BUTTON || gPlayerDpadHoldFrames > 59)
     {
         PlaySE(SE_SELECT);
         EmitTwoReturnValues(1, 10, 0xFFFF);
@@ -1153,7 +1153,7 @@ void c3_0802FDF4(u8 taskId)
 
 static void CompleteOnHealthbarDone(void)
 {
-    s16 hpValue = sub_8074AA0(gActiveBank, gHealthBoxesIds[gActiveBank], 0, 0);
+    s16 hpValue = sub_8074AA0(gActiveBank, gHealthBoxesIds[gActiveBank], HEALTH_BAR, 0);
 
     SetHealthboxSpriteVisible(gHealthBoxesIds[gActiveBank]);
 

@@ -316,7 +316,7 @@ static void sub_81BB1D4(void)
 
 static void CompleteOnHealthbarDone(void)
 {
-    s16 hpValue = sub_8074AA0(gActiveBank, gHealthBoxesIds[gActiveBank], 0, 0);
+    s16 hpValue = sub_8074AA0(gActiveBank, gHealthBoxesIds[gActiveBank], HEALTH_BAR, 0);
 
     SetHealthboxSpriteVisible(gHealthBoxesIds[gActiveBank]);
 

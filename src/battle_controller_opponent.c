@@ -31,7 +31,6 @@ extern u8 gActiveBank;
 extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
 extern bool8 gDoingBattleAnim;
-extern u8 gUnknown_020244CC;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
 extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
@@ -412,7 +411,7 @@ static void sub_805F994(void)
 
 static void CompleteOnHealthbarDone(void)
 {
-    s16 hpValue = sub_8074AA0(gActiveBank, gHealthBoxesIds[gActiveBank], 0, 0);
+    s16 hpValue = sub_8074AA0(gActiveBank, gHealthBoxesIds[gActiveBank], HEALTH_BAR, 0);
     SetHealthboxSpriteVisible(gHealthBoxesIds[gActiveBank]);
     if (hpValue != -1)
     {
