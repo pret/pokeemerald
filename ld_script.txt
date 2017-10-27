@@ -180,6 +180,7 @@ SECTIONS {
         asm/rom6.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
+        src/evolution_scene.o(.text);
         asm/evolution_scene.o(.text);
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
