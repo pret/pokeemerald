@@ -26,6 +26,7 @@
 #include "script.h"
 #include "event_scripts.h"
 #include "strings.h"
+#include "international_string_util.h"
 #include "event_data.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
@@ -51,7 +52,9 @@ void sub_80E9E00(u8 taskId);
 void sub_80E9E44(u8 taskId);
 void sub_80E9E90(u8 taskId);
 void sub_80E9F20(u8 taskId);
+void sub_80E9FB0(u8 taskId);
 void task_pc_turn_off(u8 taskId);
+u8 sub_80EA18C(u8 sbId);
 u8 sub_80EA20C(u8 sbId);
 
 // .rodata
@@ -63,8 +66,9 @@ extern const struct {
 
 extern const u8 gUnknown_0858CFE8[];
 extern const u8 gUnknown_0858D060[];
-extern const struct WindowTemplate gUnknown_0858D06C;
+extern const struct WindowTemplate gUnknown_0858D06C[];
 extern const struct ListMenuTemplate gUnknown_0858D07C;
+extern const struct MenuAction gUnknown_0858D048[];
 
 // .text
 
@@ -980,7 +984,7 @@ void sub_80E9C9C(u8 taskId)
         data[2] = 0;
         sub_8197434(0, 0);
         gUnknown_0203A020 = calloc(1, sizeof(struct SecretBaseListMenuBuffer));
-        data[6] = AddWindow(&gUnknown_0858D06C);
+        data[6] = AddWindow(&gUnknown_0858D06C[0]);
         game_continue(taskId);
         sub_80E9E00(taskId);
         gTasks[taskId].func = sub_80E9E90;
@@ -1081,6 +1085,43 @@ void sub_80E9E90(u8 taskId)
             PlaySE(SE_SELECT);
             data[4] = input;
             sub_80E9F20(taskId);
+            break;
+    }
+}
+
+void sub_80E9F20(u8 taskId)
+{
+    struct WindowTemplate template;
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    RemoveScrollIndicatorArrowPair(data[8]);
+    template = gUnknown_0858D06C[1];
+    template.width = GetMaxWidthInMenuTable(gUnknown_0858D048, 2);
+    data[7] = AddWindow(&template);
+    SetStandardWindowBorderStyle(data[7], 0);
+    PrintMenuTable(data[7], 2, gUnknown_0858D048);
+    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(data[7], 2, 0);
+    schedule_bg_copy_tilemap_to_vram(0);
+    gTasks[taskId].func = sub_80E9FB0;
+}
+
+void sub_80E9FB0(u8 taskId)
+{
+    s8 input;
+
+    input = ProcessMenuInputNoWrapAround();
+    switch (input)
+    {
+        case -1:
+            PlaySE(SE_SELECT);
+            sub_80EA18C(taskId);
+            break;
+        case -2:
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            gUnknown_0858D048[input].func.void_u8(taskId);
             break;
     }
 }
