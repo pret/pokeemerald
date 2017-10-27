@@ -338,7 +338,7 @@ EvolutionScene: @ 813DA8C
 	movs r2, 0x4
 	orrs r0, r2
 	strb r0, [r1]
-	bl sub_817BE78
+	bl LoadEvoSparkleSpriteAndPal
 	ldr r0, =evovle_mon_maybe
 	movs r1, 0
 	bl CreateTask
@@ -917,7 +917,7 @@ sub_813E1D4: @ 813E1D4
 	movs r2, 0x4
 	orrs r0, r2
 	strb r0, [r1]
-	bl sub_817BE78
+	bl LoadEvoSparkleSpriteAndPal
 	ldr r0, =sub_813F1B8
 	movs r1, 0
 	bl CreateTask
@@ -1421,7 +1421,7 @@ _0813E7C0:
 	movs r0, 0
 	bl sub_8140000
 	movs r0, 0x11
-	bl sub_817BE94
+	bl LaunchTask_PreEvoSparklesSet1
 	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, =gTasks
@@ -1454,7 +1454,7 @@ _0813E7FE:
 	ldr r1, [r0]
 	movs r0, 0x1
 	strb r0, [r1, 0x3]
-	bl sub_817BFB4
+	bl LaunchTask_PreEvoSparklesSet2
 	strb r0, [r4, 0x2]
 	bl _0813F1A4
 	.pool
@@ -1514,7 +1514,7 @@ _0813E890:
 	b _0813EC52
 	.pool
 _0813E8A4:
-	bl sub_817C068
+	bl LaunchTask_PostEvoSparklesSet1
 	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, =gTasks
@@ -1541,7 +1541,7 @@ _0813E8D6:
 	lsls r4, 3
 	adds r4, r5
 	ldrh r0, [r4, 0xC]
-	bl sub_817C144
+	bl LaunchTask_PostEvoSparklesSet2AndFlash
 	strb r0, [r6, 0x2]
 	b _0813EB96
 	.pool
@@ -2631,7 +2631,7 @@ _0813F324:
 	adds r6, r0, 0
 	adds r6, 0x10
 	adds r0, r6, 0
-	bl sub_817BE94
+	bl LaunchTask_PreEvoSparklesSet1
 	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r1, =gTasks
@@ -2670,7 +2670,7 @@ _0813F396:
 	ldr r1, [r0]
 	movs r0, 0x1
 	strb r0, [r1, 0x3]
-	bl sub_817BFB4
+	bl LaunchTask_PreEvoSparklesSet2
 	strb r0, [r4, 0x2]
 	bl _0813FCC4
 	.pool
@@ -2722,7 +2722,7 @@ _0813F420:
 	b _0813F6AC
 	.pool
 _0813F42C:
-	bl sub_817C068
+	bl LaunchTask_PostEvoSparklesSet1
 	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r1, =gTasks
@@ -2749,7 +2749,7 @@ _0813F45E:
 	lsls r4, 3
 	adds r4, r5
 	ldrh r0, [r4, 0xC]
-	bl sub_817C280
+	bl LaunchTask_PostEvoSparklesSet2AndFlash_Trade
 	strb r0, [r6, 0x2]
 	b _0813F6F2
 	.pool

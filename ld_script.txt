@@ -226,7 +226,6 @@ SECTIONS {
         src/clear_save_data_screen.o(.text);
         asm/intro_credits_graphics.o(.text);
         src/evolution_graphics.o(.text);
-        asm/evolution_graphics.o(.text);
         asm/bard_music.o(.text);
         asm/fldeff_teleport.o(.text);
         asm/battle_link_817C95C.o(.text);
@@ -448,7 +447,6 @@ SECTIONS {
         data/pokeblock_feed.o(.rodata);
         src/clear_save_data_screen.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
-        data/evolution_graphics.o(.rodata);
         src/evolution_graphics.o(.rodata);
         data/bard_music.o(.rodata);
         data/data_860A4AC.o(.rodata);
