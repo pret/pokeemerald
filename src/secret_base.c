@@ -1507,3 +1507,31 @@ s16 sub_80EA990(u8 sbId)
     }
     return -1;
 }
+
+u8 sub_80EA9D8(void)
+{
+    s16 i;
+
+    for (i = 1; i < 20; i ++)
+    {
+        if (gSaveBlock1Ptr->secretBases[i].secretBaseId == 0)
+        {
+            return i;
+        }
+    }
+    return 0;
+}
+
+u8 sub_80EAA18(void)
+{
+    s16 i;
+
+    for (i = 1; i < 20; i ++)
+    {
+        if (gSaveBlock1Ptr->secretBases[i].sbr_field_1_6 == 0 && gSaveBlock1Ptr->secretBases[i].sbr_field_1_0 == 0)
+        {
+            return i;
+        }
+    }
+    return 0;
+}
