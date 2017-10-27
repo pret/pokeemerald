@@ -5,40 +5,6 @@
 
 	.text
 
-	thumb_func_start nullsub_67
-nullsub_67: @ 817BA40
-	bx lr
-	thumb_func_end nullsub_67
-
-	thumb_func_start sub_817BA44
-sub_817BA44: @ 817BA44
-	push {r4,r5,lr}
-	sub sp, 0x4
-	movs r4, 0
-	ldr r5, =gUnknown_085F5458
-_0817BA4C:
-	adds r0, r4, 0
-	adds r0, 0x14
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r4, 1
-	adds r1, r5
-	ldrh r1, [r1]
-	str r1, [sp]
-	movs r2, 0
-	movs r3, 0
-	bl SetOamMatrix
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0xB
-	bls _0817BA4C
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_817BA44
 
 	thumb_func_start sub_817BA7C
 sub_817BA7C: @ 817BA7C
@@ -603,7 +569,7 @@ sub_817BEC4: @ 817BEC4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_817BA44
+	bl SetEvoSparklesMatrices
 	ldr r0, =gTasks
 	lsls r5, r4, 2
 	adds r5, r4
@@ -738,7 +704,7 @@ sub_817BFCC: @ 817BFCC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_817BA44
+	bl SetEvoSparklesMatrices
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -832,7 +798,7 @@ sub_817C080: @ 817C080
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_817BA44
+	bl SetEvoSparklesMatrices
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -958,7 +924,7 @@ sub_817C174: @ 817C174
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_817BA44
+	bl SetEvoSparklesMatrices
 	ldr r0, =gTasks
 	lsls r5, r4, 2
 	adds r5, r4
@@ -1105,7 +1071,7 @@ sub_817C2B0: @ 817C2B0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_817BA44
+	bl SetEvoSparklesMatrices
 	ldr r0, =gTasks
 	lsls r5, r4, 2
 	adds r5, r4
