@@ -63,6 +63,7 @@ gTVBravoTrainerText07:: @ 0827F65C
 gTVBravoTrainerText08:: @ 0827F6E6
 	.string "Introducing the TRAINER’s {STR_VAR_1}!$"
 
+BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F704:: @ 0827F704
 	.string "Hello! You’re the TRAINER who just had\n"
 	.string "a battle, right?\p"
 	.string "I’m gathering interviews with TRAINERS\n"
@@ -70,6 +71,7 @@ gTVBravoTrainerText08:: @ 0827F6E6
 	.string "May I get a few words from you about\n"
 	.string "your impressions on battling?$"
 
+BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F7BA:: @ 0827F7BA
 	.string "You will? Really?\n"
 	.string "Thank you!\l"
 	.string "Then, uh…\p"
@@ -78,37 +80,44 @@ gTVBravoTrainerText08:: @ 0827F6E6
 	.string "Were you satisfied with the battle?\n"
 	.string "Or are you unhappy?$"
 
+BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F84C:: @ 0827F84C
 	.string "Oh…\n"
 	.string "Sorry we disturbed you.\p"
 	.string "Please give us an interview the next\n"
 	.string "time you visit the BATTLE TOWER.$"
 
+BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F8AE:: @ 0827F8AE
 	.string "Well, of course!\p"
 	.string "That unmistakable look of satisfaction\n"
 	.string "on your face…\p"
 	.string "It’s obvious that you’ve had a great\n"
 	.string "battle.$"
 
+BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F921:: @ 0827F921
 	.string "Oh, I see…\p"
 	.string "Well, it certainly is difficult to make a\n"
 	.string "battle turn out exactly as planned.$"
 
+BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F97A:: @ 0827F97A
 	.string "Oh, oh, may I ask one more question?\p"
 	.string "If you were to describe your\n"
 	.string "impressions about this battle with\l"
 	.string "one saying, what would it be?$"
 
+BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F9FD:: @ 0827F9FD
 	.string "Oh, that is stunningly cool!\p"
 	.string "That’s a great line!\n"
 	.string "I hope you’ll do great next time, too.\p"
 	.string "I hope to see you again!$"
 
+BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27FA6F:: @ 0827FA6F
 	.string "Oh, I see…\p"
 	.string "Still, being the silent type is also\n"
 	.string "cool, isn’t it?\p"
 	.string "I hope you’ll give me the opportunity\n"
 	.string "to share your thoughts again!$"
 
+BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27FAF3:: @ 0827FAF3
 	.string "I’ll be looking forward to your\n"
 	.string "next battle!$"
 
@@ -215,6 +224,7 @@ gTVBravoTrainerBattleTowerText14:: @ 082801E6
 	.string "That’s all the time we have!\n"
 	.string "Until next time, see you!$"
 
+SlateportCity_PokemonFanClub_Text_280270: @ 08280270
 	.string "Wow!\p"
 	.string "It’s plain to see that you lavish your\n"
 	.string "love on your {STR_VAR_1}.\p"
@@ -225,30 +235,36 @@ gTVBravoTrainerBattleTowerText14:: @ 082801E6
 	.string "Would you be willing to answer a few\n"
 	.string "simple questions for me?$"
 
+SlateportCity_PokemonFanClub_Text_28034F: @ 0828034F
 	.string "Great! Thank you!\p"
 	.string "Okay, here goes.\n"
 	.string "I just need quick answers, okay?$"
 
+SlateportCity_PokemonFanClub_Text_280393: @ 08280393
 	.string "When you first met {STR_VAR_1},\n"
 	.string "what did you feel?\p"
 	.string "How would you describe your feelings\n"
 	.string "at the time?$"
 
+SlateportCity_PokemonFanClub_Text_2803EF: @ 082803EF
 	.string "Your {STR_VAR_1} is cared for lovingly.\p"
 	.string "If you were to liken it to something\n"
 	.string "that you like, what would it be?$"
 
+SlateportCity_PokemonFanClub_Text_280454: @ 08280454
 	.string "This question also relates to your\n"
 	.string "beloved {STR_VAR_1}.\p"
 	.string "What was it about {STR_VAR_1} that\n"
 	.string "attracted you?$"
 
+SlateportCity_PokemonFanClub_Text_2804AC: @ 082804AC
 	.string "Okay, that makes sense.\p"
 	.string "The next question might be a little\n"
 	.string "on the tough side.\p"
 	.string "Here goes…\p"
 	.string "What do POKéMON mean to you?$"
 
+SlateportCity_PokemonFanClub_Text_280523: @ 08280523
 	.string "I see!\p"
 	.string "Hmhm…\p"
 	.string "Okay!\n"
@@ -260,13 +276,16 @@ gTVBravoTrainerBattleTowerText14:: @ 082801E6
 	.string "Okay, that’s all.\n"
 	.string "Bye-bye!$"
 
+SlateportCity_PokemonFanClub_Text_2805E2: @ 082805E2
 	.string "Oh, okay…\p"
 	.string "Well, if you get the urge to tell me\n"
 	.string "about POKéMON, I’ll be here!$"
 
+SlateportCity_PokemonFanClub_Text_28062E: @ 0828062E
 	.string "I enjoy this job--you get to learn\n"
 	.string "about POKéMON by doing interviews.$"
 
+SlateportCity_PokemonFanClub_Text_280674: @ 08280674
 	.string "Hi, you seem to be very close to your\n"
 	.string "{STR_VAR_1}.\p"
 	.string "Do you know what?\n"
@@ -276,10 +295,12 @@ gTVBravoTrainerBattleTowerText14:: @ 082801E6
 	.string "I’m wondering if you’d be willing to tell\n"
 	.string "me a little about your {STR_VAR_1}?$"
 
+SlateportCity_PokemonFanClub_Text_28073B: @ 0828073B
 	.string "Wow, thank you!\p"
 	.string "Okay, then, please tell me anything\n"
 	.string "you’d like about your {STR_VAR_1}.$"
 
+SlateportCity_PokemonFanClub_Text_280789: @ 08280789
 	.string "Wow…\n"
 	.string "That’s an interesting account.\p"
 	.string "You really are tight with {STR_VAR_1},\n"
@@ -413,6 +434,7 @@ gTVFanClubText07:: @ 082810E7
 	.string "A-whoops, will you look at the time?\n"
 	.string "Time to say good-bye until next time!$"
 
+SlateportCity_OceanicMuseum_1F_Text_2811A0: @ 082811A0
 	.string "Oh?\n"
 	.string "Do you perhaps like POKéMON?\p"
 	.string "I’m on assignment with the TV network.\p"
@@ -421,27 +443,32 @@ gTVFanClubText07:: @ 082810E7
 	.string "If you don’t mind, could you tell me\n"
 	.string "something about yourself?$"
 
+SlateportCity_OceanicMuseum_1F_Text_28126D: @ 0828126D
 	.string "I’m gathering stories on POKéMON and\n"
 	.string "TRAINERS that occurred recently.\p"
 	.string "If you don’t mind, could you tell me\n"
 	.string "something about yourself?$"
 
+SlateportCity_OceanicMuseum_1F_Text_2812F2: @ 082812F2
 	.string "Oh, you will?\n"
 	.string "Thank you!\p"
 	.string "Then, please, tell me anything of\n"
 	.string "interest that you experienced recently\l"
 	.string "involving POKéMON.$"
 
+SlateportCity_OceanicMuseum_1F_Text_281367: @ 08281367
 	.string "Oh, I see…\p"
 	.string "Well, if you do have an interesting\n"
 	.string "story to tell, please let me know.$"
 
+SlateportCity_OceanicMuseum_1F_Text_2813B9: @ 082813B9
 	.string "Oh, what an uplifting story!\p"
 	.string "I’ll be sure to get your story told\n"
 	.string "on television.\p"
 	.string "It should be aired sometime, I think,\n"
 	.string "so please look forward to it.$"
 
+SlateportCity_OceanicMuseum_1F_Text_28144D: @ 0828144D
 	.string "Hmmm…\n"
 	.string "I’ve got a good story for a TV program.\p"
 	.string "I’d better write it up in a hurry!$"
@@ -540,35 +567,44 @@ gTV3CheersForPokeblocksText05:: @ 08281B93
 	.string "Tune in next time!\n"
 	.string "Our slogan is “3 CHEERS FOR {POKEBLOCK}S!”$"
 
+LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281BCB:: @ 8281BCB
 	.string "Hi, there!\p"
 	.string "I’m a big fan of {STR_VAR_1}.\n"
 	.string "What’s your opinion of {STR_VAR_1}?$"
 
+LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281C06:: @ 8281C06
 	.string "I see, I see. That’s what you think\n"
 	.string "about the TRAINER.$"
 
+LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281C3D:: @ 8281C3D
 	.string "Have you completely forgotten\n"
 	.string "about {STR_VAR_1}?$"
 
+LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281C65:: @ 8281C65
 	.string "I’m a big fan of {STR_VAR_1}.\n"
 	.string "What’s your opinion of {STR_VAR_1}?$"
 
+LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281C95:: @ 8281C95
 	.string "How strong would you rate {STR_VAR_1}\n"
 	.string "on a scale of one hundred?$"
 
+LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281CCD:: @ 8281CCD
 	.string "Have you completely forgotten\n"
 	.string "about {STR_VAR_1}?$"
 
+LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281CF5:: @ 8281CF5
 	.string "Oh, I see!\n"
 	.string "You should meet {STR_VAR_1} sometime.\l"
 	.string "I’m sure you’ll become a fan, too!$"
 
+LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281D40:: @ 8281D40
 	.string "I see, I see.\p"
 	.string "Thank you!\n"
 	.string "That’s very useful to know.\p"
 	.string "I’ll share this information with other\n"
 	.string "{STR_VAR_1} fans and discuss it.$"
 
+LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281DB4:: @ 8281DB4
 	.string "There’s going to be a TV special on\n"
 	.string "{STR_VAR_1} very soon.\p"
 	.string "I hope you catch it!$"
@@ -2613,19 +2649,25 @@ gTVPokemonBattleUpdateText07:: @ 0828AE26
 	.string "This concludes this episode of\n"
 	.string "“POKéMON BATTLE UPDATE!”$"
 
+Route111_Text_28AF05: @ 0828AF05
 	.string "GABBY: Oh! We’ve just spotted a tough-\n"
 	.string "looking TRAINER here of all places!\p"
 	.string "Okay, roll camera!\n"
 	.string "Let’s get this interview.$"
 
+Route111_Text_28AF7D: @ 0828AF7D
+Route118_Text_28AF7D: @ 0828AF7D
+Route120_Text_28AF7D: @ 0828AF7D
 	.string "GABBY: Oh! You’re {PLAYER}! Hi!\n"
 	.string "Do you remember us from last time?\p"
 	.string "Can you show us how much stronger\n"
 	.string "you’ve become? Okay, cue interview!$"
 
+Route111_Text_28B000: @ 0828B000
 	.string "GABBY: My eyes didn’t lie!\n"
 	.string "I did discover an astonishing TRAINER!$"
 
+Route111_Text_28B042: @ 0828B042
 	.string "GABBY: Awesome! Awesome!\n"
 	.string "Who are you?!\p"
 	.string "I knew we were onto something wild\n"
@@ -2636,16 +2678,19 @@ gTVPokemonBattleUpdateText07:: @ 0828AE26
 	.string "So, would you give us a bit of your time\n"
 	.string "for an interview?$"
 
+Route111_Text_28B137: @ 0828B137
 	.string "GABBY: “{STR_VAR_1}!”\p"
 	.string "Remember? That’s the quote you gave\n"
 	.string "us as the battle clincher last time.\p"
 	.string "I never, ever forget stuff like that!$"
 
+Route111_Text_28B1B3: @ 0828B1B3
 	.string "The last time we battled, you stomped\n"
 	.string "us before we could brace ourselves…\p"
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
+Route111_Text_28B23D: @ 0828B23D
 	.string "The last time we battled, didn’t you\n"
 	.string "throw a POKé BALL at us?\p"
 	.string "We were shocked! So we told everyone,\n"
@@ -2653,25 +2698,30 @@ gTVPokemonBattleUpdateText07:: @ 0828AE26
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
+Route111_Text_28B2FA: @ 0828B2FA
 	.string "The last time we battled, your item\n"
 	.string "skills cleverly did us in.\p"
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
+Route111_Text_28B379: @ 0828B379
 	.string "The last time we battled, we managed\n"
 	.string "to look respectable.\p"
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
+Route111_Text_28B3F3: @ 0828B3F3
 	.string "Anyway, what do you think?\n"
 	.string "Do you want to be interviewed again?$"
 
+Route111_Text_28B433: @ 0828B433
 	.string "You will?\n"
 	.string "Thank you!\p"
 	.string "Okay, I need you to describe your\n"
 	.string "feelings about our battle, but it\l"
 	.string "has to be short and sweet. Go!$"
 
+Route111_Text_28B4AB: @ 0828B4AB
 	.string "GABBY: Mmm, yeah!\n"
 	.string "That’s the perfect clincher!\p"
 	.string "I get the feeling that this will make\n"
@@ -2681,16 +2731,24 @@ gTVPokemonBattleUpdateText07:: @ 0828AE26
 	.string "Okay!\n"
 	.string "We’ll be seeing you!$"
 
+Route111_Text_28B577: @ 0828B577
 	.string "GABBY: Oh…\p"
 	.string "Okay, but don’t give up!\n"
 	.string "We’ll be keeping an eye out for you!$"
 
+Route111_Text_28B5C0: @ 0828B5C0
+Route118_Text_28B5C0: @ 0828B5C0
+Route120_Text_28B5C0: @ 0828B5C0
 	.string "GABBY: We’ll be keeping an eye out\n"
 	.string "for you!$"
 
+Route111_Text_28B5EC: @ 0828B5EC
+Route118_Text_28B5EC: @ 0828B5EC
+Route120_Text_28B5EC: @ 0828B5EC
 	.string "GABBY: Is there a strong TRAINER\n"
 	.string "anywhere with a lot of POKéMON?$"
 
+Route111_Text_28B62D: @ 0828B62D
 	.string "GABBY: Wow, you are something!\p"
 	.string "You’ve gotten a lot stronger--a lot--\n"
 	.string "since we last battled.\p"
@@ -2700,29 +2758,46 @@ gTVPokemonBattleUpdateText07:: @ 0828AE26
 	.string "Are you willing to give us an interview\l"
 	.string "this time?$"
 
+Route111_Text_28B719: @ 0828B719
+Route118_Text_28B719: @ 0828B719
+Route120_Text_28B719: @ 0828B719
 	.string "GABBY: That was an intense battle!\n"
 	.string "Did you get all that on camera?$"
 
+Route111_Text_28B75C: @ 0828B75C
 	.string "TY: Hey, lookie here! A tough-looking\n"
 	.string "TRAINER here, of all places!\l"
 	.string "Camera’s rolling!$"
 
+Route111_Text_28B7B1: @ 0828B7B1
+Route118_Text_28B7B1: @ 0828B7B1
+Route120_Text_28B7B1: @ 0828B7B1
 	.string "TY: Hey, lookie here!\n"
 	.string "I remember you!\p"
 	.string "I’ll get this battle all on this\n"
 	.string "here camera!$"
 
+Route111_Text_28B805: @ 0828B805
+Route118_Text_28B805: @ 0828B805
+Route120_Text_28B805: @ 0828B805
 	.string "TY: You’re a natural!\n"
 	.string "Got me some prime footage right here!$"
 
+Route111_Text_28B841: @ 0828B841
+Route118_Text_28B841: @ 0828B841
+Route120_Text_28B841: @ 0828B841
 	.string "TY: Do you only have the one POKéMON\n"
 	.string "and that’s it?\p"
 	.string "If you had more POKéMON, it’d make for\n"
 	.string "better footage, but…$"
 
+Route111_Text_28B8B1: @ 0828B8B1
 	.string "TY: Yep, we sure spotted a hot TRAINER.\n"
 	.string "This is a huge scoop for us!$"
 
+Route111_Text_28B8F6: @ 0828B8F6
+Route118_Text_28B8F6: @ 0828B8F6
+Route120_Text_28B8F6: @ 0828B8F6
 	.string "TY: Yep, I got it all.\n"
 	.string "That whole battle’s on camera.$"
 

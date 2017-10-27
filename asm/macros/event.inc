@@ -642,6 +642,9 @@
 		.4byte \pointer2 @ text
 		.4byte \pointer3 @ text
 		.4byte \pointer4 @ event script
+	.elseif \type == 9
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
 	.endif
 	.endm
 
