@@ -7,6 +7,7 @@
 #include "list_menu.h"
 #include "window.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "new_menu_helpers.h"
 #include "menu_indicators.h"
 #include "map_constants.h"
@@ -53,6 +54,7 @@ void sub_80E9E44(u8 taskId);
 void sub_80E9E90(u8 taskId);
 void sub_80E9F20(u8 taskId);
 void sub_80E9FB0(u8 taskId);
+void sub_80EA06C(u8 taskId);
 void task_pc_turn_off(u8 taskId);
 u8 sub_80EA18C(u8 sbId);
 u8 sub_80EA20C(u8 sbId);
@@ -69,6 +71,7 @@ extern const u8 gUnknown_0858D060[];
 extern const struct WindowTemplate gUnknown_0858D06C[];
 extern const struct ListMenuTemplate gUnknown_0858D07C;
 extern const struct MenuAction gUnknown_0858D048[];
+extern const struct YesNoFuncTable gUnknown_0858D058;
 
 // .text
 
@@ -1124,4 +1127,40 @@ void sub_80E9FB0(u8 taskId)
             gUnknown_0858D048[input].func.void_u8(taskId);
             break;
     }
+}
+
+void sub_80E9FFC(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    sub_819746C(data[6], FALSE);
+    sub_819746C(data[7], FALSE);
+    ClearWindowTilemap(data[6]);
+    ClearWindowTilemap(data[7]);
+    RemoveWindow(data[7]);
+    schedule_bg_copy_tilemap_to_vram(0);
+    sub_80E9780(gStringVar1, data[4]);
+    StringExpandPlaceholders(gStringVar4, gText_OkayToDeleteFromRegistry);
+    DisplayItemMessageOnField(taskId, gStringVar4, sub_80EA06C);
+}
+
+void sub_80EA06C(u8 taskId)
+{
+    sub_8197930();
+    sub_8121F68(taskId, &gUnknown_0858D058);
+}
+
+void sub_80EA08C(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    sub_8197434(0, 0);
+    sub_81AE6C8(data[5], &data[2], &data[1]);
+    gSaveBlock1Ptr->secretBases[data[4]].sbr_field_1_6 = 0;
+    game_continue(taskId);
+    sub_812225C(&data[2], &data[1], data[3], data[0]);
+    sub_80E9E00(taskId);
+    gTasks[taskId].func = sub_80E9E90;
 }
