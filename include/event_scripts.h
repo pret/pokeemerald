@@ -362,4 +362,14 @@ extern const u8 gPokeNewsTextLilycove_Ending[];
 extern const u8 gPokeNewsTextBlendMaster_Upcoming[];
 extern const u8 gPokeNewsTextBlendMaster_Ongoing[];
 extern const u8 gPokeNewsTextBlendMaster_Ending[];
+extern const u8 gUnknown_08274966[];
+extern const u8 gUnknown_08274D13[];
+extern const u8 gUnknown_08274FFE[];
+extern const u8 gUnknown_08275367[];
+extern const u8 gUnknown_082756C7[];
+extern const u8 gUnknown_08274B24[];
+extern const u8 gUnknown_08274E75[];
+extern const u8 gUnknown_082751E1[];
+extern const u8 gUnknown_082754F6[];
+extern const u8 gUnknown_082758CC[];
 #endif //GUARD_EVENT_SCRIPTS_H

@@ -987,5 +987,6 @@ extern u8 gBattleOutcome;
 extern u16 gLastUsedItem;
 extern u32 gBattleTypeFlags;
 extern struct MonSpritesGfx* gMonSpritesGfxPtr;
+extern u16 gTrainerBattleOpponent_A;
 
 #endif // GUARD_BATTLE_H

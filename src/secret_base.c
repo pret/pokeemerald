@@ -29,6 +29,8 @@
 #include "strings.h"
 #include "international_string_util.h"
 #include "event_data.h"
+#include "battle.h"
+#include "rom6.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "secret_base.h"
@@ -1210,4 +1212,60 @@ void task_pc_turn_off(u8 taskId)
 u8 sub_80EA20C(u8 sbId)
 {
     return (gSaveBlock1Ptr->secretBases[sbId].trainerId[0] % 5) + (gSaveBlock1Ptr->secretBases[sbId].gender * 5);
+}
+
+const u8 *sub_80EA250(void)
+{
+    u8 param;
+
+    param = sub_80EA20C(VarGet(VAR_0x4054));
+    if (param == 0)
+    {
+        return gUnknown_08274966;
+    }
+    if (param == 1)
+    {
+        return gUnknown_08274D13;
+    }
+    if (param == 2)
+    {
+        return gUnknown_08274FFE;
+    }
+    if (param == 3)
+    {
+        return gUnknown_08275367;
+    }
+    if (param == 4)
+    {
+        return gUnknown_082756C7;
+    }
+    if (param == 5)
+    {
+        return gUnknown_08274B24;
+    }
+    if (param == 6)
+    {
+        return gUnknown_08274E75;
+    }
+    if (param == 7)
+    {
+        return gUnknown_082751E1;
+    }
+    if (param == 8)
+    {
+        return gUnknown_082754F6;
+    }
+    return gUnknown_082758CC;
+}
+
+void sub_80EA2E4(void)
+{
+    sub_813BADC(TRUE);
+    gTrainerBattleOpponent_A = 0x400;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_SECRET_BASE;
+}
+
+void sub_80EA30C(void)
+{
+    gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gScriptResult;
 }
