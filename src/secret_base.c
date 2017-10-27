@@ -1457,3 +1457,53 @@ void sub_80EA828(u8 sbId, struct SecretBaseRecord *base, u32 version, u32 langua
         }
     }
 }
+
+bool8 sub_80EA8D4(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
+{
+    u8 i;
+    for (i = 0; i < 4; i ++)
+    {
+        if (sbr1->trainerId[i] != sbr2->trainerId[i])
+        {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+bool8 sub_80EA904(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
+{
+    u8 i;
+
+    for (i = 0; i < OT_NAME_LENGTH && (sbr1->trainerName[i] != EOS || sbr2->trainerName[i] != EOS); i++)
+    {
+        if (sbr1->trainerName[i] != sbr2->trainerName[i])
+        {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+bool8 sub_80EA950(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
+{
+    if (sbr1->gender == sbr2->gender && sub_80EA8D4(sbr1, sbr2) && sub_80EA904(sbr1, sbr2))
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+s16 sub_80EA990(u8 sbId)
+{
+    s16 i;
+
+    for (i = 0; i < 20; i ++)
+    {
+        if (gSaveBlock1Ptr->secretBases[i].secretBaseId == sbId)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
