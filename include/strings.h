@@ -73,5 +73,6 @@ extern const u8 gText_Toss2[];
 extern const u8 gText_ApostropheSBase[];
 extern const u8 gText_NoRegistry[];
 extern const u8 gText_OkayToDeleteFromRegistry[];
+extern const u8 gText_RegisteredDataDeleted[];
 
 #endif //GUARD_STRINGS_H

@@ -55,8 +55,8 @@ void sub_80E9E90(u8 taskId);
 void sub_80E9F20(u8 taskId);
 void sub_80E9FB0(u8 taskId);
 void sub_80EA06C(u8 taskId);
+void sub_80EA18C(u8 taskId);
 void task_pc_turn_off(u8 taskId);
-u8 sub_80EA18C(u8 sbId);
 u8 sub_80EA20C(u8 sbId);
 
 // .rodata
@@ -1163,4 +1163,51 @@ void sub_80EA08C(u8 taskId)
     sub_812225C(&data[2], &data[1], data[3], data[0]);
     sub_80E9E00(taskId);
     gTasks[taskId].func = sub_80E9E90;
+}
+
+void sub_80EA120(u8 taskId)
+{
+    DisplayItemMessageOnField(taskId, gText_RegisteredDataDeleted, sub_80EA08C);
+}
+
+void sub_80EA13C(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    sub_8197434(0, 0);
+    sub_81AE6C8(data[5], &data[2], &data[1]);
+    sub_80E9E00(taskId);
+    gTasks[taskId].func = sub_80E9E90;
+}
+
+void sub_80EA18C(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    sub_80E9E44(taskId);
+    sub_819746C(data[7], 0);
+    ClearWindowTilemap(data[7]);
+    RemoveWindow(data[7]);
+    schedule_bg_copy_tilemap_to_vram(0);
+    gTasks[taskId].func = sub_80E9E90;
+}
+
+void task_pc_turn_off(u8 taskId)
+{
+    if (VarGet(VAR_0x4054) == 0)
+    {
+        ScriptContext1_SetupScript(gUnknown_0823B4E8);
+    }
+    else
+    {
+        ScriptContext1_SetupScript(gUnknown_0823B5E9);
+    }
+    DestroyTask(taskId);
+}
+
+u8 sub_80EA20C(u8 sbId)
+{
+    return (gSaveBlock1Ptr->secretBases[sbId].trainerId[0] % 5) + (gSaveBlock1Ptr->secretBases[sbId].gender * 5);
 }
