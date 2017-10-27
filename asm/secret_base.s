@@ -5,68 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80EA354
-sub_80EA354: @ 80EA354
-	push {r4-r7,lr}
-	ldr r0, =0x00004054
-	bl VarGet
-	lsls r0, 16
-	lsrs r5, r0, 16
-	ldr r0, =0x00000922
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	bne _080EA39A
-	movs r3, 0
-	ldr r7, =gSaveBlock1Ptr
-	ldr r4, =0x00001a9d
-	movs r6, 0x21
-	negs r6, r6
-_080EA376:
-	ldr r1, [r7]
-	lsls r0, r3, 2
-	adds r0, r3
-	lsls r0, 5
-	adds r1, r0
-	adds r1, r4
-	ldrb r2, [r1]
-	adds r0, r6, 0
-	ands r0, r2
-	strb r0, [r1]
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	cmp r3, 0x13
-	bls _080EA376
-	ldr r0, =0x00000922
-	bl FlagSet
-_080EA39A:
-	ldr r4, =gSpecialVar_0x8004
-	lsls r0, r5, 24
-	lsrs r0, 24
-	bl sub_80EA20C
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4]
-	ldr r2, =gScriptResult
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 5
-	adds r1, r0
-	ldr r0, =0x00001a9d
-	adds r1, r0
-	ldrb r0, [r1]
-	lsls r0, 26
-	lsrs r0, 31
-	strh r0, [r2]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80EA354
-
 	thumb_func_start sub_80EA3E4
 sub_80EA3E4: @ 80EA3E4
 	push {r4-r6,lr}

@@ -1269,3 +1269,21 @@ void sub_80EA30C(void)
 {
     gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gScriptResult;
 }
+
+void sub_80EA354(void)
+{
+    u16 sbId;
+    u8 i;
+
+    sbId = VarGet(VAR_0x4054);
+    if (!FlagGet(0x922))
+    {
+        for (i = 0; i < 20; i ++)
+        {
+            gSaveBlock1Ptr->secretBases[i].sbr_field_1_5 = FALSE;
+        }
+        FlagSet(0x922);
+    }
+    gSpecialVar_0x8004 = sub_80EA20C(sbId);
+    gScriptResult = gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_5;
+}
