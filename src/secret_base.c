@@ -1,9 +1,12 @@
 
 // Includes
 #include "global.h"
+#include "malloc.h"
 #include "task.h"
 #include "palette.h"
 #include "list_menu.h"
+#include "window.h"
+#include "new_menu_helpers.h"
 #include "map_constants.h"
 #include "species.h"
 #include "moves.h"
@@ -21,6 +24,7 @@
 #include "string_util.h"
 #include "script.h"
 #include "event_scripts.h"
+#include "strings.h"
 #include "event_data.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
@@ -40,6 +44,11 @@ EWRAM_DATA struct SecretBaseListMenuBuffer *gUnknown_0203A020 = NULL;
 
 // Static ROM declarations
 
+void sub_80E9C9C(u8 taskId);
+void game_continue(u8 taskId);
+void sub_80E9E00(u8 taskId);
+void sub_80E9E90(u8 taskId);
+void task_pc_turn_off(u8 taskId);
 u8 sub_80EA20C(u8 sbId);
 
 // .rodata
@@ -51,6 +60,8 @@ extern const struct {
 
 extern const u8 gUnknown_0858CFE8[];
 extern const u8 gUnknown_0858D060[];
+extern const struct WindowTemplate gUnknown_0858D06C;
+extern const struct ListMenuTemplate gUnknown_0858D07C;
 
 // .text
 
@@ -919,4 +930,96 @@ u8 sub_80E9BA8(void)
         }
     }
     return tot;
+}
+
+void sub_80E9BDC(void)
+{
+    if (sub_80E9878(VarGet(VAR_0x4054)) == TRUE)
+    {
+        gScriptResult = 1;
+    }
+    else if (sub_80E9BA8() > 9)
+    {
+        gScriptResult = 2;
+    }
+    else
+    {
+        gScriptResult = 0;
+    }
+}
+
+void sub_80E9C2C(void)
+{
+    gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].sbr_field_1_6 ^= 1;
+    FlagSet(0x10C);
+}
+
+void sub_80E9C74(void)
+{
+    CreateTask(sub_8126AD8, 0);
+}
+
+void sub_80E9C88(void)
+{
+    CreateTask(sub_80E9C9C, 0);
+}
+
+void sub_80E9C9C(u8 taskId)
+{
+    s16 *data;
+
+    data = gTasks[taskId].data;
+    ScriptContext2_Enable();
+    data[0] = sub_80E9BA8();
+    if (data[0] != 0)
+    {
+        data[1] = 0;
+        data[2] = 0;
+        sub_8197434(0, 0);
+        gUnknown_0203A020 = calloc(1, sizeof(struct SecretBaseListMenuBuffer));
+        data[6] = AddWindow(&gUnknown_0858D06C);
+        game_continue(taskId);
+        sub_80E9E00(taskId);
+        gTasks[taskId].func = sub_80E9E90;
+    }
+    else
+    {
+        DisplayItemMessageOnField(taskId, gText_NoRegistry, task_pc_turn_off);
+    }
+}
+
+void game_continue(u8 taskId)
+{
+    s16 *data;
+    u8 i;
+    u8 ct;
+
+    data = gTasks[taskId].data;
+    ct = 0;
+    for (i = 1; i < 20; i ++)
+    {
+        if (sub_80E9878(i))
+        {
+            sub_80E9780(gUnknown_0203A020->names[ct], i);
+            gUnknown_0203A020->items[ct].unk_00 = gUnknown_0203A020->names[ct];
+            gUnknown_0203A020->items[ct].unk_04 = i;
+            ct ++;
+        }
+    }
+    gUnknown_0203A020->items[ct].unk_00 = gText_Cancel;
+    gUnknown_0203A020->items[ct].unk_04 = -2;
+    data[0] = ct + 1;
+    if (data[0] < 8)
+    {
+        data[3] = data[0];
+    }
+    else
+    {
+        data[3] = 8;
+    }
+    gUnknown_03006310 = gUnknown_0858D07C;
+    gUnknown_03006310.unk_10 = data[6];
+    gUnknown_03006310.unk_0c = data[0];
+    gUnknown_03006310.unk_00 = gUnknown_0203A020->items;
+    gUnknown_03006310.unk_0e = data[3];
 }

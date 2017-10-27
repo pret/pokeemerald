@@ -191,6 +191,7 @@ extern EWRAM_DATA u8 *gCurDecorInventoryItems;
 extern EWRAM_DATA u8 gCurDecorationIndex;
 
 void sub_8126968(void);
+void sub_8126AD8(u8 taskId);
 void sub_8127D38(u16 mapX, u16 mapY, u16 decor);
 
 #endif //GUARD_DECORATION_H
