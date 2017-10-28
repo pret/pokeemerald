@@ -909,7 +909,7 @@ static const u8 sUnknown_0831C2E8[] = INCBIN_U8("graphics/battle_interface/unk_b
 static const u8 sRubyLevelUpStatBoxStats[] =
 {
     MON_DATA_MAX_HP, MON_DATA_SPATK, MON_DATA_ATK,
-    MON_DATA_SPDEF, MON_DATA_DEF, MON_DATA_SPD
+    MON_DATA_SPDEF, MON_DATA_DEF, MON_DATA_SPEED
 };
 
 #define MON_ICON_LVLUP_BOX_TAG      0xD75A
@@ -3610,7 +3610,7 @@ static void atk23_getexp(void)
                 BATTLE_LVLUP_STATS->hp = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_MAX_HP);
                 BATTLE_LVLUP_STATS->atk = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_ATK);
                 BATTLE_LVLUP_STATS->def = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_DEF);
-                BATTLE_LVLUP_STATS->spd = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPD);
+                BATTLE_LVLUP_STATS->spd = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPEED);
                 BATTLE_LVLUP_STATS->spAtk = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPATK);
                 BATTLE_LVLUP_STATS->spDef = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPDEF);
 
@@ -3649,8 +3649,8 @@ static void atk23_getexp(void)
                     gBattleMons[0].attack = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_ATK);
                     gBattleMons[0].defense = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_DEF);
                     // Why is this duplicated?
-                    gBattleMons[0].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPD);
-                    gBattleMons[0].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPD);
+                    gBattleMons[0].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPEED);
+                    gBattleMons[0].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPEED);
 
                     gBattleMons[0].spAttack = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPATK);
                     gBattleMons[0].spDefense = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPDEF);
@@ -3664,8 +3664,8 @@ static void atk23_getexp(void)
                     gBattleMons[2].attack = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_ATK);
                     gBattleMons[2].defense = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_DEF);
                     // Duplicated again, but this time there's no Sp Defense
-                    gBattleMons[2].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPD);
-                    gBattleMons[2].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPD);
+                    gBattleMons[2].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPEED);
+                    gBattleMons[2].speed = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPEED);
 
                     gBattleMons[2].spAttack = GetMonData(&gPlayerParty[gBattleStruct->expGetterId], MON_DATA_SPATK);
                 }
