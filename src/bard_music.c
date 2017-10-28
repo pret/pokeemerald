@@ -4,13 +4,7 @@
 #include "bard_music.h"
 #include "easy_chat.h"
 
-// Static type declarations
-
-// Static RAM declarations
-
-// Static ROM declarations
-
-// .rodata
+#define NULL_BARD_SOUND {0xff, 0, 0, 0, 0}
 
 #include "data/bard_music/pokemon.h"
 #include "data/bard_music/moves.h"
@@ -32,37 +26,10 @@
 #include "data/bard_music/adjectives.h"
 #include "data/bard_music/events.h"
 #include "data/bard_music/trendysaying.h"
-
-const struct BardSound (*const gBardSoundsTable[])[6] = {
-    NULL,
-    gBardSounds_Trainer,
-    gBardSounds_Status,
-    gBardSounds_Battle,
-    gBardSounds_Greetings,
-    gBardSounds_People,
-    gBardSounds_Voices,
-    gBardSounds_Speech,
-    gBardSounds_Endings,
-    gBardSounds_Feelings,
-    gBardSounds_Conditions,
-    gBardSounds_Actions,
-    gBardSounds_Lifestyle,
-    gBardSounds_Hobbies,
-    gBardSounds_Time,
-    gBardSounds_Misc,
-    gBardSounds_Adjectives,
-    gBardSounds_Events,
-    NULL,
-    NULL,
-    gBardSounds_TrendySaying,
-    NULL
-};
-
-extern const s16 *const gUnknown_0860A320[];
-extern const int gUnknown_0860A3DC[];
-extern const struct BardSound gBardSound_InvalidWord[6];
-
-// .text
+#include "data/bard_music/bard_sounds_table.h"
+#include "data/bard_music/word_pitch.h"
+#include "data/bard_music/default_sound.h"
+#include "data/bard_music/length_table.h"
 
 s16 CalcWordPitch(int arg0, int songPos)
 {
@@ -110,7 +77,7 @@ void GetWordPhonemes(struct BardSong *song, u16 word)
         sound = &song->sound[i];
         if (sound->var00 != 0xFF)
         {
-            song->phonemes[i].length = sound->var01 + gUnknown_0860A3DC[sound->var00];
+            song->phonemes[i].length = sound->var01 + gBardSoundLengthTable[sound->var00];
             song->phonemes[i].pitch = CalcWordPitch(word + 30, i);
             song->length += song->phonemes[i].length;
         }
