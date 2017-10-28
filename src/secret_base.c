@@ -44,6 +44,12 @@ struct SecretBaseListMenuBuffer {
     u8 names[11][32];
 };
 
+struct SecretBaseRecordMixer {
+    struct SecretBaseRecord *records;
+    u32 version;
+    u32 language;
+};
+
 // Static RAM declarations
 EWRAM_DATA u8 sCurSecretBaseId = 0;
 EWRAM_DATA u8 gUnknown_0203A01D = 0;
@@ -1600,15 +1606,15 @@ void sub_80EAAF4(void)
     }
 }
 
-void sub_80EABA4(u32 *args, u8 b)
+void sub_80EABA4(struct SecretBaseRecordMixer *mixer, u8 b)
 {
     u16 i;
 
     for (i = 1; i < 20; i ++)
     {
-        if (((struct SecretBaseRecord *)args[0])[i].sbr_field_1_6 == b)
+        if (mixer->records[i].sbr_field_1_6 == b)
         {
-            sub_80EAA64(&((struct SecretBaseRecord *)args[0])[i], args[1], args[2]);
+            sub_80EAA64(&mixer->records[i], mixer->version, mixer->language);
         }
     }
 }
@@ -1757,4 +1763,41 @@ void sub_80EAD94(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
             basesD[i].sbr_field_1_5 = 0;
         }
     }
+}
+
+void sub_80EAE90(struct SecretBaseRecord *base, u32 version, u32 language)
+{
+    if (base->sbr_field_1_0 == 1)
+    {
+        sub_80EAA64(base, version, language);
+        ClearSecretBase(base);
+    }
+}
+
+void sub_80EAEB4(struct SecretBaseRecordMixer *mixer)
+{
+    u16 i;
+
+    for (i = 0; i < 20; i ++)
+    {
+        sub_80EAE90(&mixer[0].records[i], mixer[0].version, mixer[0].language);
+        sub_80EAE90(&mixer[1].records[i], mixer[1].version, mixer[1].language);
+        sub_80EAE90(&mixer[2].records[i], mixer[2].version, mixer[2].language);
+    }
+}
+
+void sub_80EAEF4(struct SecretBaseRecordMixer *mixer)
+{
+    DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(mixer[0].records, mixer[1].records, mixer[2].records);
+    sub_80EAD94(gSaveBlock1Ptr->secretBases, mixer[0].records, mixer[1].records, mixer[2].records);
+    sub_80EAEB4(mixer);
+    sub_80EAA64(mixer[0].records, mixer[0].version, mixer[0].language);
+    sub_80EAA64(mixer[1].records, mixer[1].version, mixer[1].language);
+    sub_80EAA64(mixer[2].records, mixer[2].version, mixer[2].language);
+    sub_80EABA4(&mixer[0], 1);
+    sub_80EABA4(&mixer[1], 1);
+    sub_80EABA4(&mixer[2], 1);
+    sub_80EABA4(&mixer[0], 0);
+    sub_80EABA4(&mixer[1], 0);
+    sub_80EABA4(&mixer[2], 0);
 }
