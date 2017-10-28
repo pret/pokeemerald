@@ -191,6 +191,7 @@ SECTIONS {
         asm/battle_controller_linkpartner.o(.text);
         src/battle_message.o(.text);
         asm/cable_car.o(.text);
+        src/math_util.o(.text);
         asm/math_util.o(.text);
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
