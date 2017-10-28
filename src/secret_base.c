@@ -1612,3 +1612,29 @@ void sub_80EABA4(u32 *args, u8 b)
         }
     }
 }
+
+bool8 sub_80EABDC(struct SecretBaseRecord *secretBase)
+{
+    u8 i;
+
+    if (secretBase->secretBaseId == 0)
+        return FALSE;
+
+    if (secretBase->secretBaseId && secretBase->gender != gSaveBlock2Ptr->playerGender)
+        return FALSE;
+
+    // Check if the player's trainer Id matches the secret base's id.
+    for (i = 0; i < 4; i ++)
+    {
+        if (secretBase->trainerId[i] != gSaveBlock2Ptr->playerTrainerId[i])
+            return FALSE;
+    }
+
+    for (i = 0; i < OT_NAME_LENGTH && (secretBase->trainerName[i] != EOS || gSaveBlock2Ptr->playerName[i] != EOS); i ++)
+    {
+        if (secretBase->trainerName[i] != gSaveBlock2Ptr->playerName[i])
+            return FALSE;
+    }
+
+    return TRUE;
+}
