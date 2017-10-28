@@ -1577,3 +1577,25 @@ u8 sub_80EAA64(struct SecretBaseRecord *base, u32 version, u32 language)
     }
     return 0;
 }
+
+void sub_80EAAF4(void)
+{
+    u8 i;
+    u8 j;
+    struct SecretBaseRecord base;
+    struct SecretBaseRecord *secretBases;
+
+    secretBases = gSaveBlock1Ptr->secretBases;
+    for (i = 1; i < 19; i ++)
+    {
+        for (j = i + 1; j < 20; j ++)
+        {
+            if ((secretBases[i].sbr_field_1_6 == 0 && secretBases[j].sbr_field_1_6 == 1) || (secretBases[i].sbr_field_1_6 == 2 && secretBases[j].sbr_field_1_6 != 2))
+            {
+                base = secretBases[i];
+                secretBases[i] = secretBases[j];
+                secretBases[j] = base;
+            }
+        }
+    }
+}
