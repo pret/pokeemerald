@@ -1599,3 +1599,16 @@ void sub_80EAAF4(void)
         }
     }
 }
+
+void sub_80EABA4(u32 *args, u8 b)
+{
+    u16 i;
+
+    for (i = 1; i < 20; i ++)
+    {
+        if (((struct SecretBaseRecord *)args[0])[i].sbr_field_1_6 == b)
+        {
+            sub_80EAA64(&((struct SecretBaseRecord *)args[0])[i], args[1], args[2]);
+        }
+    }
+}

@@ -5,38 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80EABA4
-sub_80EABA4: @ 80EABA4
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	lsls r1, 24
-	lsrs r6, r1, 24
-	movs r4, 0x1
-_080EABAE:
-	ldr r0, [r5]
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 5
-	adds r3, r1, r0
-	ldrb r0, [r3, 0x1]
-	lsrs r0, 6
-	cmp r0, r6
-	bne _080EABCA
-	ldr r1, [r5, 0x4]
-	ldr r2, [r5, 0x8]
-	adds r0, r3, 0
-	bl sub_80EAA64
-_080EABCA:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x13
-	bls _080EABAE
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80EABA4
-
 	thumb_func_start sub_80EABDC
 sub_80EABDC: @ 80EABDC
 	push {r4-r6,lr}
