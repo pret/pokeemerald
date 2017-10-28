@@ -2194,3 +2194,21 @@ void sub_80EBB28(void)
             break;
     }
 }
+
+void sub_80EBE7C(void)
+{
+    s16 x;
+    s16 y;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    switch ((int)MapGridGetMetatileIdAt(x, y))
+    {
+        case 0x28d:
+        case 0x28e:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x4);
+            }
+            break;
+    }
+}
