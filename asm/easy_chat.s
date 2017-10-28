@@ -9335,8 +9335,8 @@ _0811EB0A:
 	bx r1
 	thumb_func_end sub_811EAA4
 
-	thumb_func_start sub_811EB10
-sub_811EB10: @ 811EB10
+	thumb_func_start IsECWordInValidRange
+IsECWordInValidRange: @ 811EB10
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 25
@@ -9380,7 +9380,7 @@ _0811EB5C:
 _0811EB5E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_811EB10
+	thumb_func_end IsECWordInValidRange
 
 	thumb_func_start GetEasyChatWord
 @ char *GetEasyChatWord(u8 groupId, u16 wordId)

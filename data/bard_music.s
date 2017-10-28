@@ -8,7 +8,7 @@ gUnknown_085F5490:: @ 85F5490
 	.4byte 0x19C
 
 	.align 2
-gUnknown_085F5494:: @ 85F5494
+gBardSounds_Pokemon:: @ 85F5494
 	.4byte 0x000000ff, 0x00000000, 0x000000ff, 0x00000000
 	.4byte 0x000000ff, 0x00000000, 0x000000ff, 0x00000000
 	.4byte 0x000000ff, 0x00000000, 0x000000ff, 0x00000000
@@ -1251,7 +1251,7 @@ gUnknown_085FA1D4:: @ 85FA1D4
 	.4byte 0x163
 
 	.align 2
-gUnknown_085FA1D8:: @ 85FA1D8
+gBardSounds_Moves:: @ 85FA1D8
 	.4byte 0x000000ff, 0x00000000, 0x000000ff, 0x00000000
 	.4byte 0x000000ff, 0x00000000, 0x000000ff, 0x00000000
 	.4byte 0x000000ff, 0x00000000, 0x000000ff, 0x00000000
@@ -5397,7 +5397,7 @@ gUnknown_08609B38:: @ 8609B38
 	.4byte 0x000000ff, 0x00000000, 0x000000ff, 0x00000000
 
 	.align 2
-gUnknown_0860A168:: @ 860A168
+gBardSoundsTable:: @ 860A168
 	.4byte NULL
 	.4byte gUnknown_085FE468
 	.4byte gUnknown_085FE978
@@ -5566,7 +5566,7 @@ gUnknown_0860A320:: @ 860A320
 	.4byte gUnknown_0860A30E
 
 	.align 2
-gUnknown_0860A3AC:: @ 860A3AC
+gBardSound_InvalidWord:: @ 860A3AC
 	.4byte 0x000000ff, 0x00000000, 0x000000ff, 0x00000000
 	.4byte 0x000000ff, 0x00000000, 0x000000ff, 0x00000000
 	.4byte 0x000000ff, 0x00000000, 0x000000ff, 0x00000000
