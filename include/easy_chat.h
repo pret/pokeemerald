@@ -34,5 +34,6 @@ void CopyEasyChatWord(u8 *dest, u16 word);
 bool32 sub_811F8D8(u16 word);
 void InitializeEasyChatWordArray(u16 *words, u16 length);
 void ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 length1, u16 length2);
+bool8 sub_811EB10(u16 word);
 
 #endif // GUARD_EASYCHAT_H

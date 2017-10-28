@@ -226,6 +226,7 @@ SECTIONS {
         src/clear_save_data_screen.o(.text);
         asm/intro_credits_graphics.o(.text);
         asm/evolution_graphics.o(.text);
+        src/bard_music.o(.text);
         asm/bard_music.o(.text);
         asm/fldeff_teleport.o(.text);
         asm/battle_link_817C95C.o(.text);
