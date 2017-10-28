@@ -35,6 +35,7 @@
 #include "rom6.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
+#include "link.h"
 #include "secret_base.h"
 
 // Static type declarations
@@ -1774,30 +1775,118 @@ void sub_80EAE90(struct SecretBaseRecord *base, u32 version, u32 language)
     }
 }
 
-void sub_80EAEB4(struct SecretBaseRecordMixer *mixer)
+void sub_80EAEB4(struct SecretBaseRecordMixer *mixers)
 {
     u16 i;
 
     for (i = 0; i < 20; i ++)
     {
-        sub_80EAE90(&mixer[0].records[i], mixer[0].version, mixer[0].language);
-        sub_80EAE90(&mixer[1].records[i], mixer[1].version, mixer[1].language);
-        sub_80EAE90(&mixer[2].records[i], mixer[2].version, mixer[2].language);
+        sub_80EAE90(&mixers[0].records[i], mixers[0].version, mixers[0].language);
+        sub_80EAE90(&mixers[1].records[i], mixers[1].version, mixers[1].language);
+        sub_80EAE90(&mixers[2].records[i], mixers[2].version, mixers[2].language);
     }
 }
 
-void sub_80EAEF4(struct SecretBaseRecordMixer *mixer)
+void sub_80EAEF4(struct SecretBaseRecordMixer *mixers)
 {
-    DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(mixer[0].records, mixer[1].records, mixer[2].records);
-    sub_80EAD94(gSaveBlock1Ptr->secretBases, mixer[0].records, mixer[1].records, mixer[2].records);
-    sub_80EAEB4(mixer);
-    sub_80EAA64(mixer[0].records, mixer[0].version, mixer[0].language);
-    sub_80EAA64(mixer[1].records, mixer[1].version, mixer[1].language);
-    sub_80EAA64(mixer[2].records, mixer[2].version, mixer[2].language);
-    sub_80EABA4(&mixer[0], 1);
-    sub_80EABA4(&mixer[1], 1);
-    sub_80EABA4(&mixer[2], 1);
-    sub_80EABA4(&mixer[0], 0);
-    sub_80EABA4(&mixer[1], 0);
-    sub_80EABA4(&mixer[2], 0);
+    DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(mixers[0].records, mixers[1].records, mixers[2].records);
+    sub_80EAD94(gSaveBlock1Ptr->secretBases, mixers[0].records, mixers[1].records, mixers[2].records);
+    sub_80EAEB4(mixers);
+    sub_80EAA64(mixers[0].records, mixers[0].version, mixers[0].language);
+    sub_80EAA64(mixers[1].records, mixers[1].version, mixers[1].language);
+    sub_80EAA64(mixers[2].records, mixers[2].version, mixers[2].language);
+    sub_80EABA4(&mixers[0], 1);
+    sub_80EABA4(&mixers[1], 1);
+    sub_80EABA4(&mixers[2], 1);
+    sub_80EABA4(&mixers[0], 0);
+    sub_80EABA4(&mixers[1], 0);
+    sub_80EABA4(&mixers[2], 0);
+}
+
+void sub_80EAF80(void *records, size_t recordSize, u8 linkIdx)
+{
+    struct SecretBaseRecordMixer mixers[3];
+    u16 i;
+    
+    if (FlagGet(0x60))
+    {
+        switch (GetLinkPlayerCount())
+        {
+            case 2:
+                memset(records + 2 * recordSize, 0, recordSize);
+                memset(records + 3 * recordSize, 0, recordSize);
+                break;
+            case 3:
+                memset(records + 3 * recordSize, 0, recordSize);
+                break;
+        }
+        switch (linkIdx)
+        {
+            case 0:
+                mixers[0].records = records + 1 * recordSize;
+                mixers[0].version = gLinkPlayers[1].version & 0xFF;
+                mixers[0].language = gLinkPlayers[1].language;
+                mixers[1].records = records + 2 * recordSize;
+                mixers[1].version = gLinkPlayers[2].version & 0xFF;
+                mixers[1].language = gLinkPlayers[2].language;
+                mixers[2].records = records + 3 * recordSize;
+                mixers[2].version = gLinkPlayers[3].version & 0xFF;
+                mixers[2].language = gLinkPlayers[3].language;
+                break;
+            case 1:
+                mixers[0].records = records + 2 * recordSize;
+                mixers[0].version = gLinkPlayers[2].version & 0xFF;
+                mixers[0].language = gLinkPlayers[2].language;
+                mixers[1].records = records + 3 * recordSize;
+                mixers[1].version = gLinkPlayers[3].version & 0xFF;
+                mixers[1].language = gLinkPlayers[3].language;
+                mixers[2].records = records + 0 * recordSize;
+                mixers[2].version = gLinkPlayers[0].version & 0xFF;
+                mixers[2].language = gLinkPlayers[0].language;
+                break;
+            case 2:
+                mixers[0].records = records + 3 * recordSize;
+                mixers[0].version = gLinkPlayers[3].version & 0xFF;
+                mixers[0].language = gLinkPlayers[3].language;
+                mixers[1].records = records + 0 * recordSize;
+                mixers[1].version = gLinkPlayers[0].version & 0xFF;
+                mixers[1].language = gLinkPlayers[0].language;
+                mixers[2].records = records + 1 * recordSize;
+                mixers[2].version = gLinkPlayers[1].version & 0xFF;
+                mixers[2].language = gLinkPlayers[1].language;
+                break;
+            case 3:
+                mixers[0].records = records + 0 * recordSize;
+                mixers[0].version = gLinkPlayers[0].version & 0xFF;
+                mixers[0].language = gLinkPlayers[0].language;
+                mixers[1].records = records + 1 * recordSize;
+                mixers[1].version = gLinkPlayers[1].version & 0xFF;
+                mixers[1].language = gLinkPlayers[1].language;
+                mixers[2].records = records + 2 * recordSize;
+                mixers[2].version = gLinkPlayers[2].version & 0xFF;
+                mixers[2].language = gLinkPlayers[2].language;
+                break;
+        }
+        sub_80EAEF4(mixers);
+        for (i = 1; i < 20; i ++)
+        {
+            if (gSaveBlock1Ptr->secretBases[i].sbr_field_1_0 == 1)
+            {
+                gSaveBlock1Ptr->secretBases[i].sbr_field_1_6 = 1;
+                gSaveBlock1Ptr->secretBases[i].sbr_field_1_0 = 0;
+            }
+        }
+        sub_80EAAF4();
+        for (i = 1; i < 20; i ++)
+        {
+            if (gSaveBlock1Ptr->secretBases[i].sbr_field_1_6 == 2)
+            {
+                gSaveBlock1Ptr->secretBases[i].sbr_field_1_6 = 0;
+            }
+        }
+        if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0 && gSaveBlock1Ptr->secretBases[0].sbr_field_e != 0xFFFF)
+        {
+            gSaveBlock1Ptr->secretBases[0].sbr_field_e ++;
+        }
+    }
 }
