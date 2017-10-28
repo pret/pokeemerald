@@ -1992,3 +1992,34 @@ void sub_80EB438(void)
         VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x001);
     }
 }
+
+void sub_80EB498(void)
+{
+    s16 x;
+    s16 y;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    switch (MapGridGetMetatileIdAt(x, y))
+    {
+        case 0x31C:
+        case 0x31D:
+        case 0x31E:
+        case 0x31F:
+        case 0x324:
+        case 0x325:
+        case 0x326:
+        case 0x327:
+        case 0x32C:
+        case 0x32D:
+        case 0x330:
+        case 0x331:
+        case 0x332:
+        case 0x333:
+        case 0x334:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x4000);
+            }
+            break;
+    }
+}
