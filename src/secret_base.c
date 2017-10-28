@@ -1936,3 +1936,59 @@ void sub_80EB218(void)
         VarSet(VAR_0x40F0, FALSE);
     }
 }
+
+void sub_80EB290(void)
+{
+    if (VarGet(VAR_0x4054) != 0)
+    {
+        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x800);
+    }
+}
+
+void sub_80EB2C8(void)
+{
+    if (VarGet(VAR_0x4054) != 0)
+    {
+        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x400);
+    }
+}
+
+void sub_80EB300(void)
+{
+    if (VarGet(VAR_0x4054) != 0)
+    {
+        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
+        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
+        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x2000);
+    }
+}
+
+void sub_80EB368(void)
+{
+    if (VarGet(VAR_0x4054) != 0)
+    {
+        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
+        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
+        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x800);
+    }
+}
+
+void sub_80EB3D0(void)
+{
+    if (VarGet(VAR_0x4054) != 0)
+    {
+        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
+        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
+        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x1000);
+    }
+}
+
+void sub_80EB438(void)
+{
+    if (VarGet(VAR_0x4054) != 0)
+    {
+        VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) & ~0x3800);
+        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) & ~0x001);
+        VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x001);
+    }
+}
