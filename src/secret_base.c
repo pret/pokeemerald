@@ -1535,3 +1535,45 @@ u8 sub_80EAA18(void)
     }
     return 0;
 }
+
+u8 sub_80EAA64(struct SecretBaseRecord *base, u32 version, u32 language)
+{
+    s16 sbId;
+
+    if (base->secretBaseId == 0)
+    {
+        return 0;
+    }
+    sbId = sub_80EA990(base->secretBaseId);
+    if (sbId != 0)
+    {
+        if (sbId != -1)
+        {
+            if (gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_0 == 1)
+            {
+                return 0;
+            }
+            if (gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_6 != 2 || base->sbr_field_1_0 == 1)
+            {
+                sub_80EA828(sbId, base, version, language);
+                return sbId;
+            }
+        }
+        else
+        {
+            sbId = sub_80EA9D8();
+            if (sbId != 0)
+            {
+                sub_80EA828(sbId, base, version, language);
+                return sbId;
+            }
+            sbId = sub_80EAA18();
+            if (sbId != 0)
+            {
+                sub_80EA828(sbId, base, version, language);
+                return sbId;
+            }
+        }
+    }
+    return 0;
+}
