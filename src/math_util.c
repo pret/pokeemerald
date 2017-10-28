@@ -60,3 +60,27 @@ s32 sub_81515FC(s32 x, s32 y)
     _x *= 256;
     return _x / y;
 }
+
+s16 sub_8151624(s16 y)
+{
+    s32 x;
+
+    x = 0x10000;
+    return x / y;
+}
+
+s16 sub_815163C(u8 s, s16 y)
+{
+    s32 x;
+
+    x = 0x100 << s;
+    return x / y;
+}
+
+s32 sub_815165C(s32 y)
+{
+    s64 x;
+
+    x = 0x10000;
+    return x / y;
+}
