@@ -1644,7 +1644,7 @@ void DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(struct SecretBaseR
     u8 i;
     u8 sbFlags = 0x0;
 
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < 20; i ++)
     {
         if (!(sbFlags & 0x1)) // 001
         {
@@ -1684,7 +1684,7 @@ bool8 sub_80EAD14(struct SecretBaseRecord *base, struct SecretBaseRecord *secret
 {
     u8 i;
 
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < 20; i ++)
     {
         if (secretBases[i].secretBaseId != 0)
         {
@@ -1711,4 +1711,50 @@ bool8 sub_80EAD14(struct SecretBaseRecord *base, struct SecretBaseRecord *secret
     }
 
     return FALSE;
+}
+
+void sub_80EAD94(struct SecretBaseRecord *basesA, struct SecretBaseRecord *basesB, struct SecretBaseRecord *basesC, struct SecretBaseRecord *basesD)
+{
+    u8 i;
+
+    for (i = 1; i < 20; i ++)
+    {
+        if (basesA[i].secretBaseId)
+        {
+            if (basesA[i].sbr_field_1_6 == 1)
+            {
+                basesA[i].sbr_field_1_0 = 1;
+            }
+            if (!sub_80EAD14(&basesA[i], basesB, i))
+            {
+                if (!sub_80EAD14(&basesA[i], basesC, i))
+                {
+                    sub_80EAD14(&basesA[i], basesD, i);
+                }
+            }
+        }
+    }
+    for (i = 0; i < 20; i ++)
+    {
+        if (basesB[i].secretBaseId)
+        {
+            basesB[i].sbr_field_1_5 = 0;
+            if (!sub_80EAD14(&basesB[i], basesC, i))
+            {
+                sub_80EAD14(&basesB[i], basesD, i);
+            }
+        }
+    }
+    for (i = 0; i < 20; i ++)
+    {
+        if (basesC[i].secretBaseId)
+        {
+            basesC[i].sbr_field_1_5 = 0;
+            sub_80EAD14(&basesC[i], basesD, i);
+        }
+        if (basesD[i].secretBaseId)
+        {
+            basesD[i].sbr_field_1_5 = 0;
+        }
+    }
 }
