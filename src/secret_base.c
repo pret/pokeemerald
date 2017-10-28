@@ -2023,3 +2023,94 @@ void sub_80EB498(void)
             break;
     }
 }
+
+void sub_80EB56C(void)
+{
+    s16 x;
+    s16 y;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    switch (MapGridGetMetatileIdAt(x, y))
+    {
+        case 0x28a:
+        case 0x28b:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x40);
+            }
+            break;
+        case 0x2d8:
+        case 0x2d9:
+        case 0x2da:
+        case 0x2db:
+        case 0x2dc:
+        case 0x2dd:
+        case 0x2e8:
+        case 0x2e9:
+        case 0x2ea:
+        case 0x2eb:
+        case 0x2ec:
+        case 0x2ed:
+        case 0x2ee:
+        case 0x2ef:
+        case 0x2f8:
+        case 0x2f9:
+        case 0x2fa:
+        case 0x2fb:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EE, VarGet(VAR_0x40EE) | 0x8);
+            }
+            break;
+        case 0x22c:
+        case 0x233:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x40);
+            }
+            break;
+        case 0x288:
+        case 0x289:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x100);
+            }
+            break;
+        case 0x22d:
+        case 0x22e:
+        case 0x22f:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x10);
+            }
+            break;
+        case 0x287:
+        case 0x28f:
+        case 0x298:
+        case 0x299:
+        case 0x29a:
+        case 0x29b:
+        case 0x29c:
+        case 0x29d:
+        case 0x29e:
+        case 0x29f:
+        case 0x2ab:
+        case 0x2b0:
+        case 0x2b1:
+        case 0x2b2:
+        case 0x2b4:
+        case 0x2b5:
+        case 0x2b6:
+        case 0x2b7:
+        case 0x2cb:
+        case 0x2cc:
+        case 0x2cd:
+        case 0x2ce:
+        case 0x2cf:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x8);
+            }
+            break;
+    }
+}
