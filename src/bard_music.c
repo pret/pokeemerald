@@ -33,7 +33,7 @@
 
 s16 CalcWordPitch(int arg0, int songPos)
 {
-    return gUnknown_0860A320[arg0][songPos];
+    return gBardSoundPitchTables[arg0][songPos];
 }
 
 const struct BardSound *GetWordSounds(u16 word)

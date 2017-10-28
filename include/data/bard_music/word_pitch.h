@@ -2,7 +2,7 @@
 #define GUARD_WORD_PITCH_H
 
 const s16 gUnknown_0860A1C0[] = {
-    0xfd00, 0x1800
+    -0x300, 0x1800
 };
 
 const s16 gUnknown_0860A1C4[] = {
@@ -22,11 +22,11 @@ const s16 gUnknown_0860A1D0[] = {
 };
 
 const s16 gUnknown_0860A1D4[] = {
-    0xfd00, 0xff00, 0x1800
+    -0x300, -0x100, 0x1800
 };
 
 const s16 gUnknown_0860A1DA[] = {
-    0xfd00, 0x0200, 0x1800
+    -0x300, 0x0200, 0x1800
 };
 
 const s16 gUnknown_0860A1E0[] = {
@@ -42,11 +42,11 @@ const s16 gUnknown_0860A1EC[] = {
 };
 
 const s16 gUnknown_0860A1F2[] = {
-    0xfd00, 0xff00, 0xfd00, 0x1800
+    -0x300, -0x100, -0x300, 0x1800
 };
 
 const s16 gUnknown_0860A1FA[] = {
-    0x0400, 0xfd00, 0x0400, 0x1800
+    0x0400, -0x300, 0x0400, 0x1800
 };
 
 const s16 gUnknown_0860A202[] = {
@@ -82,7 +82,7 @@ const s16 gUnknown_0860A242[] = {
 };
 
 const s16 gUnknown_0860A24C[] = {
-    0xfd00, 0xff00, 0x0100, 0x0200, 0x0400, 0x1800
+    -0x300, -0x100, 0x0100, 0x0200, 0x0400, 0x1800
 };
 
 const s16 gUnknown_0860A258[] = {
@@ -94,7 +94,7 @@ const s16 gUnknown_0860A264[] = {
 };
 
 const s16 gUnknown_0860A270[] = {
-    0x0900, 0x0400, 0x0900, 0x0400, 0xfd00, 0x1800
+    0x0900, 0x0400, 0x0900, 0x0400, -0x300, 0x1800
 };
 
 const s16 gUnknown_0860A27C[] = {
@@ -102,11 +102,11 @@ const s16 gUnknown_0860A27C[] = {
 };
 
 const s16 gUnknown_0860A288[] = {
-    0xfd00, 0xff00, 0x0100, 0x0200, 0x0400, 0x0600, 0x1800
+    -0x300, -0x100, 0x0100, 0x0200, 0x0400, 0x0600, 0x1800
 };
 
 const s16 gUnknown_0860A296[] = {
-    0x0800, 0x0600, 0x0400, 0x0200, 0x0100, 0xff00, 0x1800
+    0x0800, 0x0600, 0x0400, 0x0200, 0x0100, -0x100, 0x1800
 };
 
 const s16 gUnknown_0860A2A4[] = {
@@ -114,7 +114,7 @@ const s16 gUnknown_0860A2A4[] = {
 };
 
 const s16 gUnknown_0860A2B2[] = {
-    0x0400, 0xfd00, 0x0900, 0x0400, 0x0900, 0x0400, 0x1800
+    0x0400, -0x300, 0x0900, 0x0400, 0x0900, 0x0400, 0x1800
 };
 
 const s16 gUnknown_0860A2C0[] = {
@@ -126,7 +126,7 @@ const s16 gUnknown_0860A2CE[] = {
 };
 
 const s16 gUnknown_0860A2DE[] = {
-    0x0100, 0x0100, 0xff00, 0xff00, 0xfd00, 0x0400, 0xfd00, 0x1800
+    0x0100, 0x0100, -0x100, -0x100, -0x300, 0x0400, -0x300, 0x1800
 };
 
 const s16 gUnknown_0860A2EE[] = {
@@ -141,7 +141,7 @@ const s16 gUnknown_0860A30E[] = {
     0x0300, 0x0400, 0x0600, 0x0800, 0x0700, 0x0800, 0x0400, 0x1800
 };
 
-const s16 *const gUnknown_0860A320[] = {
+const s16 *const gBardSoundPitchTables[] = {
     gUnknown_0860A1C0,
     gUnknown_0860A1C4,
     gUnknown_0860A1C8,
