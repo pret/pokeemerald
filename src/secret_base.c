@@ -2141,3 +2141,56 @@ void sub_80EB9E0(void)
             break;
     }
 }
+
+void sub_80EBB28(void)
+{
+    s16 x;
+    s16 y;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    switch (MapGridGetMetatileIdAt(x, y))
+    {
+        case 0x290:
+        case 0x292:
+        case 0x293:
+        case 0x295:
+        case 0x296:
+        case 0x2a0:
+        case 0x2a2:
+        case 0x2a3:
+        case 0x2a4:
+        case 0x2a6:
+        case 0x2a7:
+        case 0x2a8:
+        case 0x2aa:
+        case 0x2ac:
+        case 0x2ae:
+        case 0x2af:
+        case 0x2bc:
+        case 0x2bd:
+        case 0x2bf:
+        case 0x2c4:
+        case 0x2c5:
+        case 0x2c7:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x8);
+            }
+            break;
+        case 0x280:
+        case 0x281:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x100);
+            }
+            break;
+        case 0x225:
+        case 0x226:
+        case 0x227:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x10);
+            }
+            break;
+    }
+}
