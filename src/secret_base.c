@@ -79,7 +79,7 @@ extern const struct YesNoFuncTable gUnknown_0858D058;
 
 // .text
 
-void sub_80E8AF0(struct SecretBaseRecord *sbr)
+void ClearSecretBase(struct SecretBaseRecord *sbr)
 {
     u16 i;
 
@@ -96,7 +96,7 @@ void ResetSecretBases(void)
 
     for (i = 0; i < 20; i ++)
     {
-        sub_80E8AF0(&gSaveBlock1Ptr->secretBases[i]);
+        ClearSecretBase(&gSaveBlock1Ptr->secretBases[i]);
     }
 }
 
@@ -881,7 +881,7 @@ void sub_80E9A90(void)
     u16 sbr_e;
 
     sbr_e = gSaveBlock1Ptr->secretBases[0].sbr_field_e;
-    sub_80E8AF0(&gSaveBlock1Ptr->secretBases[0]);
+    ClearSecretBase(&gSaveBlock1Ptr->secretBases[0]);
     gSaveBlock1Ptr->secretBases[0].sbr_field_e = sbr_e;
     sub_80E9728();
 }
@@ -926,7 +926,7 @@ void sub_80E9B70(void)
     sub_80E9AD0();
     IncrementGameStat(GAME_STAT_MOVED_SECRET_BASE);
     sbr_e = gSaveBlock1Ptr->secretBases[0].sbr_field_e;
-    sub_80E8AF0(&gSaveBlock1Ptr->secretBases[0]);
+    ClearSecretBase(&gSaveBlock1Ptr->secretBases[0]);
     gSaveBlock1Ptr->secretBases[0].sbr_field_e = sbr_e;
 }
 
@@ -1613,7 +1613,7 @@ void sub_80EABA4(u32 *args, u8 b)
     }
 }
 
-bool8 sub_80EABDC(struct SecretBaseRecord *secretBase)
+bool8 DoesSecretBaseBelongToPlayer(struct SecretBaseRecord *secretBase)
 {
     u8 i;
 
@@ -1637,4 +1637,45 @@ bool8 sub_80EABDC(struct SecretBaseRecord *secretBase)
     }
 
     return TRUE;
+}
+
+void DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(struct SecretBaseRecord *basesA, struct SecretBaseRecord *basesB, struct SecretBaseRecord *basesC)
+{
+    u8 i;
+    u8 sbFlags = 0x0;
+
+    for (i = 0; i < 20; i++)
+    {
+        if (!(sbFlags & 0x1)) // 001
+        {
+            if (DoesSecretBaseBelongToPlayer(&basesA[i]) == TRUE)
+            {
+                ClearSecretBase(&basesA[i]);
+                sbFlags |= 1;
+            }
+        }
+
+        if (!(sbFlags & 0x2)) // 010
+        {
+            if (DoesSecretBaseBelongToPlayer(&basesB[i]) == TRUE)
+            {
+                ClearSecretBase(&basesB[i]);
+                sbFlags |= 2;
+            }
+        }
+
+        if (!(sbFlags & 0x4)) // 100
+        {
+            if (DoesSecretBaseBelongToPlayer(&basesC[i]) == TRUE)
+            {
+                ClearSecretBase(&basesC[i]);
+                sbFlags |= 4;
+            }
+        }
+
+        if (sbFlags == 0x7) // 111
+        {
+            break;
+        }
+    }
 }

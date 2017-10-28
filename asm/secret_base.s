@@ -5,100 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80EAC5C
-sub_80EAC5C: @ 80EAC5C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	mov r10, r0
-	mov r9, r1
-	mov r8, r2
-	movs r5, 0
-	movs r6, 0
-_080EAC70:
-	movs r0, 0x1
-	ands r0, r5
-	cmp r0, 0
-	bne _080EAC9A
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 5
-	mov r1, r10
-	adds r4, r1, r0
-	adds r0, r4, 0
-	bl sub_80EABDC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080EAC9A
-	adds r0, r4, 0
-	bl sub_80E8AF0
-	movs r0, 0x1
-	orrs r5, r0
-_080EAC9A:
-	movs r7, 0x2
-	movs r0, 0x2
-	ands r0, r5
-	cmp r0, 0
-	bne _080EACC8
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 5
-	mov r1, r9
-	adds r4, r1, r0
-	adds r0, r4, 0
-	bl sub_80EABDC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080EACC8
-	adds r0, r4, 0
-	bl sub_80E8AF0
-	orrs r5, r7
-	lsls r0, r5, 24
-	lsrs r5, r0, 24
-_080EACC8:
-	movs r7, 0x4
-	movs r0, 0x4
-	ands r0, r5
-	cmp r0, 0
-	bne _080EACF6
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 5
-	mov r1, r8
-	adds r4, r1, r0
-	adds r0, r4, 0
-	bl sub_80EABDC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080EACF6
-	adds r0, r4, 0
-	bl sub_80E8AF0
-	orrs r5, r7
-	lsls r0, r5, 24
-	lsrs r5, r0, 24
-_080EACF6:
-	cmp r5, 0x7
-	beq _080EAD04
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	cmp r6, 0x13
-	bls _080EAC70
-_080EAD04:
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80EAC5C
-
 	thumb_func_start sub_80EAD14
 sub_80EAD14: @ 80EAD14
 	push {r4-r7,lr}
@@ -128,7 +34,7 @@ _080EAD24:
 	cmp r7, 0
 	bne _080EAD50
 	adds r0, r4, 0
-	bl sub_80E8AF0
+	bl ClearSecretBase
 	b _080EAD88
 _080EAD50:
 	ldrh r0, [r6, 0xE]
@@ -136,7 +42,7 @@ _080EAD50:
 	cmp r0, r3
 	bls _080EAD60
 	adds r0, r4, 0
-	bl sub_80E8AF0
+	bl ClearSecretBase
 	b _080EAD88
 _080EAD60:
 	ldrb r0, [r6, 0x1]
@@ -150,7 +56,7 @@ _080EAD60:
 	orrs r1, r0
 	strb r1, [r4, 0x1]
 	adds r0, r6, 0
-	bl sub_80E8AF0
+	bl ClearSecretBase
 	movs r0, 0x1
 	b _080EAD8A
 _080EAD7E:
@@ -314,7 +220,7 @@ sub_80EAE90: @ 80EAE90
 	adds r1, r3, 0
 	bl sub_80EAA64
 	adds r0, r4, 0
-	bl sub_80E8AF0
+	bl ClearSecretBase
 _080EAEAE:
 	pop {r4}
 	pop {r0}
@@ -362,7 +268,7 @@ sub_80EAEF4: @ 80EAEF4
 	ldr r0, [r4]
 	ldr r1, [r4, 0xC]
 	ldr r2, [r4, 0x18]
-	bl sub_80EAC5C
+	bl DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00001a9c
@@ -683,7 +589,7 @@ _080EB192:
 	cmp r0, 0x1
 	bne _080EB19E
 	adds r0, r4, 0
-	bl sub_80E8AF0
+	bl ClearSecretBase
 _080EB19E:
 	adds r4, 0xA0
 	adds r5, 0x1
