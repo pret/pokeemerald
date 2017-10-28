@@ -448,6 +448,7 @@ SECTIONS {
         src/clear_save_data_screen.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
         data/evolution_graphics.o(.rodata);
+        src/bard_music.o(.rodata);
         data/bard_music.o(.rodata);
         data/data_860A4AC.o(.rodata);
         data/battle_controller_recorded_opponent.o(.rodata);

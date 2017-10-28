@@ -38,4 +38,6 @@ struct BardSong
 
 // Exported ROM declarations
 
+extern const u16 gUnknown_085F5490;
+
 #endif //GUARD_BARD_MUSIC_H
