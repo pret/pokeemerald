@@ -61,29 +61,89 @@ EWRAM_DATA struct SecretBaseListMenuBuffer *gUnknown_0203A020 = NULL;
 
 void sub_80E9C9C(u8 taskId);
 void game_continue(u8 taskId);
+void sub_80E9DEC(u32 a0, bool8 flag, struct ListMenu *menu);
 void sub_80E9E00(u8 taskId);
 void sub_80E9E44(u8 taskId);
 void sub_80E9E90(u8 taskId);
 void sub_80E9F20(u8 taskId);
 void sub_80E9FB0(u8 taskId);
+void sub_80E9FFC(u8 taskId);
 void sub_80EA06C(u8 taskId);
+void sub_80EA120(u8 taskId);
+void sub_80EA13C(u8 taskId);
 void sub_80EA18C(u8 taskId);
 void task_pc_turn_off(u8 taskId);
 u8 sub_80EA20C(u8 sbId);
 
 // .rodata
 
-extern const struct {
+const struct {
     u16 tile1;
     u16 tile2;
-} gUnknown_0858CFCC[7];
+} gUnknown_0858CFCC[] = {
+    {0x0026, 0x0036},
+    {0x0027, 0x0037},
+    {0x01a0, 0x01a1},
+    {0x01a8, 0x01a9},
+    {0x01b0, 0x01b1},
+    {0x0208, 0x0210},
+    {0x0271, 0x0278}
+};
 
-extern const u8 gUnknown_0858CFE8[];
-extern const u8 gUnknown_0858D060[];
-extern const struct WindowTemplate gUnknown_0858D06C[];
-extern const struct ListMenuTemplate gUnknown_0858D07C;
-extern const struct MenuAction gUnknown_0858D048[];
-extern const struct YesNoFuncTable gUnknown_0858D058;
+const u8 gUnknown_0858CFE8[] = {
+    MAP_ID_SECRET_BASE_RED_CAVE1,    0x00, 0x01, 0x03,
+    MAP_ID_SECRET_BASE_RED_CAVE2,    0x00, 0x05, 0x09,
+    MAP_ID_SECRET_BASE_RED_CAVE3,    0x00, 0x01, 0x03,
+    MAP_ID_SECRET_BASE_RED_CAVE4,    0x00, 0x07, 0x0d,
+    MAP_ID_SECRET_BASE_BROWN_CAVE1,  0x00, 0x02, 0x03,
+    MAP_ID_SECRET_BASE_BROWN_CAVE2,  0x00, 0x09, 0x02,
+    MAP_ID_SECRET_BASE_BROWN_CAVE3,  0x00, 0x0d, 0x04,
+    MAP_ID_SECRET_BASE_BROWN_CAVE4,  0x00, 0x01, 0x02,
+    MAP_ID_SECRET_BASE_BLUE_CAVE1,   0x00, 0x01, 0x03,
+    MAP_ID_SECRET_BASE_BLUE_CAVE2,   0x00, 0x01, 0x02,
+    MAP_ID_SECRET_BASE_BLUE_CAVE3,   0x00, 0x03, 0x0f,
+    MAP_ID_SECRET_BASE_BLUE_CAVE4,   0x00, 0x03, 0x0e,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 0x00, 0x09, 0x03,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE2, 0x00, 0x08, 0x07,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE3, 0x00, 0x03, 0x06,
+    MAP_ID_SECRET_BASE_YELLOW_CAVE4, 0x00, 0x05, 0x09,
+    MAP_ID_SECRET_BASE_TREE1,        0x00, 0x02, 0x03,
+    MAP_ID_SECRET_BASE_TREE2,        0x00, 0x05, 0x06,
+    MAP_ID_SECRET_BASE_TREE3,        0x00, 0x0f, 0x03,
+    MAP_ID_SECRET_BASE_TREE4,        0x00, 0x04, 0x0a,
+    MAP_ID_SECRET_BASE_SHRUB1,       0x00, 0x03, 0x03,
+    MAP_ID_SECRET_BASE_SHRUB2,       0x00, 0x01, 0x02,
+    MAP_ID_SECRET_BASE_SHRUB3,       0x00, 0x07, 0x08,
+    MAP_ID_SECRET_BASE_SHRUB4,       0x00, 0x09, 0x06
+};
+
+const struct MenuAction gUnknown_0858D048[] = {
+    {gUnknown_085EA79D, {.void_u8 = sub_80E9FFC}},
+    {gText_Cancel, {.void_u8 = sub_80EA18C}}
+};
+
+const struct YesNoFuncTable gUnknown_0858D058 = {
+    sub_80EA120, sub_80EA13C
+};
+
+const u8 gUnknown_0858D060[10] = {
+    0x23, 0x24, 0x0f, 0x1f, 0x21,
+    0x2f, 0x0e, 0x14, 0x20, 0x22
+};
+
+const struct WindowTemplate gUnknown_0858D06C[] = {
+    { 0, 18, 1, 11, 18, 15, 0x01 },
+    { 0,  2, 1, 28,  4, 15, 0xc7 }
+};
+
+const struct ListMenuTemplate gUnknown_0858D07C = {
+    NULL,
+    sub_80E9DEC,
+    NULL,
+    0, 0,
+    0, 0, 8, 0,
+    9, 2, 1, 3, FALSE, 0, FALSE, 1
+};
 
 // .text
 
@@ -1046,7 +1106,7 @@ void game_continue(u8 taskId)
     gUnknown_03006310.unk_0e = data[3];
 }
 
-void sub_80E9DEC(u32 unused, bool8 flag)
+void sub_80E9DEC(u32 a0, bool8 flag, struct ListMenu *menu)
 {
     if (flag != TRUE)
     {

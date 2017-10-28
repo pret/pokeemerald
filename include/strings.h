@@ -74,5 +74,6 @@ extern const u8 gText_ApostropheSBase[];
 extern const u8 gText_NoRegistry[];
 extern const u8 gText_OkayToDeleteFromRegistry[];
 extern const u8 gText_RegisteredDataDeleted[];
+extern const u8 gUnknown_085EA79D[];
 
 #endif //GUARD_STRINGS_H
