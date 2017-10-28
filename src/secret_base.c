@@ -36,6 +36,7 @@
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "link.h"
+#include "tv.h"
 #include "secret_base.h"
 
 // Static type declarations
@@ -1888,5 +1889,50 @@ void sub_80EAF80(void *records, size_t recordSize, u8 linkIdx)
         {
             gSaveBlock1Ptr->secretBases[0].sbr_field_e ++;
         }
+    }
+}
+
+void sub_80EB18C(struct SecretBaseRecord *bases)
+{
+    u32 i;
+
+    for (i = 0; i < 20; i ++)
+    {
+        if (bases[i].language == LANGUAGE_JAPANESE)
+        {
+            ClearSecretBase(&bases[i]);
+        }
+    }
+}
+
+void sub_80EB1AC(void)
+{
+    VarSet(VAR_0x40EC, 0);
+    VarSet(VAR_0x40ED, 0);
+    VarSet(VAR_0x40EE, 0);
+    VarSet(VAR_0x40EF, 0);
+    if (VarGet(VAR_0x4054) != 0)
+    {
+        VarSet(VAR_0x40F0, TRUE);
+    }
+    else
+    {
+        VarSet(VAR_0x40F0, FALSE);
+    }
+    gUnknown_0203A01D = FALSE;
+}
+
+void sub_80EB218(void)
+{
+    if (VarGet(VAR_0x40F0) && gUnknown_0203A01D == TRUE && !CurrentMapIsSecretBase())
+    {
+        VarSet(VAR_0x40F0, FALSE);
+        gUnknown_0203A01D = FALSE;
+        sub_80EEA70();
+        VarSet(VAR_0x40EC, 0);
+        VarSet(VAR_0x40ED, 0);
+        VarSet(VAR_0x40EE, 0);
+        VarSet(VAR_0x40EF, 0);
+        VarSet(VAR_0x40F0, FALSE);
     }
 }
