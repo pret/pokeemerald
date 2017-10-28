@@ -2114,3 +2114,30 @@ void sub_80EB56C(void)
             break;
     }
 }
+
+void sub_80EB9E0(void)
+{
+    s16 x;
+    s16 y;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    switch (MapGridGetMetatileIdAt(x, y))
+    {
+        case 0x291:
+        case 0x294:
+        case 0x297:
+        case 0x2a1:
+        case 0x2a5:
+        case 0x2a9:
+        case 0x2ad:
+        case 0x2bb:
+        case 0x2be:
+        case 0x2c3:
+        case 0x2c6:
+            if (VarGet(VAR_0x4054) != 0)
+            {
+                VarSet(VAR_0x40EF, VarGet(VAR_0x40EF) | 0x8);
+            }
+            break;
+    }
+}
