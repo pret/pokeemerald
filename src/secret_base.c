@@ -1679,3 +1679,36 @@ void DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(struct SecretBaseR
         }
     }
 }
+
+bool8 sub_80EAD14(struct SecretBaseRecord *base, struct SecretBaseRecord *secretBases, u8 c)
+{
+    u8 i;
+
+    for (i = 0; i < 20; i++)
+    {
+        if (secretBases[i].secretBaseId != 0)
+        {
+            if (sub_80EA950(base, &secretBases[i]) == TRUE)
+            {
+                if (c == 0)
+                {
+                    ClearSecretBase(&secretBases[i]);
+                    return FALSE;
+                }
+
+                if (base->sbr_field_e > secretBases[i].sbr_field_e)
+                {
+                    ClearSecretBase(&secretBases[i]);
+                    return FALSE;
+                }
+
+                secretBases[i].sbr_field_1_0 = base->sbr_field_1_0;
+
+                ClearSecretBase(base);
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}
