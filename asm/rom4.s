@@ -841,7 +841,7 @@ sub_8084CCC: @ 8084CCC
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8122CBC
+	bl GetHealLocationPointer
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _08084CFA
@@ -885,7 +885,7 @@ Overworld_SetHealLocationWarp: @ 8084D1C
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8122CBC
+	bl GetHealLocationPointer
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _08084D50
@@ -1187,7 +1187,7 @@ sub_8084F6C: @ 8084F6C
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8122CBC
+	bl GetHealLocationPointer
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _08084FA0

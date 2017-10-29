@@ -15,7 +15,7 @@
 
 // .rodata
 
-const struct HealLocation gUnknown_0859F53C[] = {
+static const struct HealLocation sSpawnLocations[] = {
     HEAL_LOCATION(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F,  4,  2),
     HEAL_LOCATION(LITTLEROOT_TOWN_MAYS_HOUSE_2F,      4,  2),
     HEAL_LOCATION(PETALBURG_CITY,                    20, 17),
@@ -40,17 +40,17 @@ const struct HealLocation gUnknown_0859F53C[] = {
     HEAL_LOCATION(BATTLE_FRONTIER_OUTSIDE_EAST,       3, 52)
 };
 
-#define NUM_HEAL_LOCATIONS (ARRAY_COUNT(gUnknown_0859F53C))
+#define NUM_HEAL_LOCATIONS (ARRAY_COUNT(sSpawnLocations))
 
 // .text
 
-u32 sub_8122C5C(u16 mapGroup, u16 mapNum)
+static u32 GetHealLocationIndexFromMapGroupAndNum(u16 mapGroup, u16 mapNum)
 {
     u32 i;
 
     for (i = 0; i < NUM_HEAL_LOCATIONS; i ++)
     {
-        if (gUnknown_0859F53C[i].group == mapGroup && gUnknown_0859F53C[i].map == mapNum)
+        if (sSpawnLocations[i].group == mapGroup && sSpawnLocations[i].map == mapNum)
         {
             return i + 1;
         }
@@ -58,19 +58,19 @@ u32 sub_8122C5C(u16 mapGroup, u16 mapNum)
     return 0;
 }
 
-const struct HealLocation *sub_8122C94(u16 mapGroup, u16 mapNum)
+const struct HealLocation *GetHealLocationPointerFromMapGroupAndNum(u16 mapGroup, u16 mapNum)
 {
     u32 loc;
 
-    loc = sub_8122C5C(mapGroup, mapNum);
+    loc = GetHealLocationIndexFromMapGroupAndNum(mapGroup, mapNum);
     if (loc == 0)
     {
         return NULL;
     }
-    return &gUnknown_0859F53C[loc - 1];
+    return &sSpawnLocations[loc - 1];
 }
 
-const struct HealLocation *sub_8122CBC(u32 loc)
+const struct HealLocation *GetHealLocationPointer(u32 loc)
 {
     if (loc == 0)
     {
@@ -80,5 +80,5 @@ const struct HealLocation *sub_8122CBC(u32 loc)
     {
         return NULL;
     }
-    return &gUnknown_0859F53C[loc - 1];
+    return &sSpawnLocations[loc - 1];
 }

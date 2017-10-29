@@ -20,4 +20,6 @@ struct HealLocation
 
 // Exported ROM declarations
 
+const struct HealLocation *GetHealLocationPointer(u32 loc);
+
 #endif //GUARD_HEAL_LOCATION_H
