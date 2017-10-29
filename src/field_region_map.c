@@ -20,8 +20,8 @@
 
 EWRAM_DATA struct {
     MainCallback callback;
-    u8 filler_004[0x4];
-    u8 filler_008[0x884];
+    u32 filler_004;
+    struct RegionMap regionMap;
     u16 state;
 } *gUnknown_0203BCD0 = NULL;
 
@@ -31,7 +31,7 @@ static void sub_81701C4(void);
 static void sub_8170260(void);
 static void sub_8170274(void);
 static void sub_8170290(void);
-void sub_8170428(void);
+static void sub_8170428(void);
 
 // .rodata
 
@@ -95,7 +95,7 @@ void sub_8170290(void)
     switch (gUnknown_0203BCD0->state)
     {
         case 0:
-            sub_8122CDC(gUnknown_0203BCD0->filler_008, 0);
+            sub_8122CDC(&gUnknown_0203BCD0->regionMap, 0);
             sub_8124288(0, 0);
             sub_81240D4(1, 1);
             gUnknown_0203BCD0->state ++;
@@ -103,7 +103,7 @@ void sub_8170290(void)
         case 1:
             SetWindowBorderStyle(1, 0, 0x27, 0xd);
             offset = GetStringCenterAlignXOffset(1, gText_Hoenn, 0x38);
-            PrintTextOnWindow(1, 1, gText_Hoenn, offset, 1, 0, 0);
+            PrintTextOnWindow(1, 1, gText_Hoenn, offset, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
             SetWindowBorderStyle(0, 0, 0x27, 0xd);
             sub_8170428();
@@ -151,5 +151,20 @@ void sub_8170290(void)
                 FreeAllWindowBuffers();
             }
             break;
+    }
+}
+
+static void sub_8170428(void)
+{
+    if (gUnknown_0203BCD0->regionMap.unk_02)
+    {
+        FillWindowPixelBuffer(0, 0x11);
+        PrintTextOnWindow(0, 1, gUnknown_0203BCD0->regionMap.mapSecName, 0, 1, 0, NULL);
+        schedule_bg_copy_tilemap_to_vram(0);
+    }
+    else
+    {
+        FillWindowPixelBuffer(0, 0x11);
+        CopyWindowToVram(0, 3);
     }
 }
