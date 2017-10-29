@@ -1,0 +1,6 @@
+#ifndef GUARD_FIELD_SPECIALS_H
+#define GUARD_FIELD_SPECIALS_H
+
+u8 GetLeadMonIndex(void);
+
+#endif // GUARD_FIELD_SPECIALS_H

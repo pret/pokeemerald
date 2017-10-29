@@ -214,7 +214,7 @@ _0811A72C:
 	ldr r4, =gStringVar3
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_811F88C
+	bl InitializeEasyChatWordArray
 	b _0811A7C2
 	.pool
 _0811A73C:
@@ -3353,7 +3353,7 @@ sub_811BDF0: @ 811BDF0
 	ldrb r2, [r0]
 	mov r0, sp
 	adds r1, r5, 0
-	bl sub_81DB5E8
+	bl TVShowConvertInternationalString
 	movs r0, 0
 	mov r1, sp
 	bl sub_81AFC0C
@@ -9563,7 +9563,7 @@ _0811EF48:
 	adds r1, r5, 0
 	bl ConvertEasyChatWordsToString
 	adds r0, r4, 0
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 _0811EF58:
 	pop {r4,r5}
 	pop {r0}
@@ -10758,8 +10758,8 @@ _0811F886:
 	bx r1
 	thumb_func_end sub_811F860
 
-	thumb_func_start sub_811F88C
-sub_811F88C: @ 811F88C
+	thumb_func_start InitializeEasyChatWordArray
+InitializeEasyChatWordArray: @ 811F88C
 	push {lr}
 	adds r2, r0, 0
 	lsls r1, 16
@@ -10782,7 +10782,7 @@ _0811F8AE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_811F88C
+	thumb_func_end InitializeEasyChatWordArray
 
 	thumb_func_start sub_811F8BC
 sub_811F8BC: @ 811F8BC

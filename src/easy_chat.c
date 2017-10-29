@@ -3,7 +3,7 @@
 #include "global.h"
 #include "songs.h"
 #include "sound.h"
-#include "rom4.h"
+#include "overworld.h"
 #include "task.h"
 #include "main.h"
 #include "window.h"

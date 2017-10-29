@@ -861,7 +861,7 @@ sub_80E916C: @ 80E916C
 	asrs r0, 24
 	str r0, [sp]
 	adds r0, r5, 0
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	bl warp_in
 	ldr r1, =gFieldCallback
 	ldr r0, =sub_80E9108
@@ -1163,13 +1163,13 @@ _080E941E:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8089350
+	bl MetatileBehavior_IsMB_B5
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E9462
 	adds r0, r4, 0
-	bl sub_8089364
+	bl MetatileBehavior_IsMB_C3
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1192,7 +1192,7 @@ _080E9462:
 	mov r3, r10
 	ldrb r1, [r3]
 	lsls r1, 5
-	ldr r2, =gUnknown_085A5C24
+	ldr r2, =gDecorations + 0x1c
 	adds r1, r2
 	ldr r1, [r1]
 	ldrh r1, [r1]
@@ -1208,7 +1208,7 @@ _080E9462:
 	adds r0, 0xAE
 	lsls r0, 16
 	lsrs r0, 16
-	bl FlagReset
+	bl FlagClear
 	ldrb r0, [r6]
 	ldr r5, =gSaveBlock1Ptr
 	ldr r2, [r5]
@@ -3288,7 +3288,7 @@ _080EA62C:
 	.pool
 _080EA668:
 	adds r0, r5, 0
-	bl sub_80893C8
+	bl MetatileBehavior_IsSecretBaseGlitterMat
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3308,7 +3308,7 @@ _080EA680:
 	.pool
 _080EA698:
 	adds r0, r5, 0
-	bl sub_808938C
+	bl MetatileBehavior_IsSecretBaseBalloon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3377,7 +3377,7 @@ _080EA714:
 	.pool
 _080EA72C:
 	adds r0, r5, 0
-	bl sub_80893A0
+	bl MetatileBehavior_IsMB_BE
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3409,7 +3409,7 @@ _080EA75E:
 	.pool
 _080EA778:
 	adds r0, r5, 0
-	bl sub_80893B4
+	bl MetatileBehavior_IsSecretBaseSoundMat
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3429,7 +3429,7 @@ _080EA778:
 	.pool
 _080EA7A8:
 	adds r0, r5, 0
-	bl MetatileBehavior_0xBB
+	bl MetatileBehavior_IsSecretBaseJumpMat
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3449,7 +3449,7 @@ _080EA7A8:
 	.pool
 _080EA7D8:
 	adds r0, r5, 0
-	bl MetatileBehavior_0xBC
+	bl MetatileBehavior_IsSecretBaseSpinMat
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4494,7 +4494,7 @@ sub_80EAF80: @ 80EAF80
 	bne _080EAF9A
 	b _080EB16A
 _080EAF9A:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

@@ -130,13 +130,13 @@ npc_pal_op: @ 8153FAC
 	cmp r0, 0
 	bne _08154008
 	ldrb r0, [r5, 0x1F]
-	bl sub_80894D4
+	bl MetatileBehavior_GetBridgeSth
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
 	bne _08153FEE
 	ldrb r0, [r5, 0x1E]
-	bl sub_80894D4
+	bl MetatileBehavior_GetBridgeSth
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -574,7 +574,7 @@ _0815432E:
 	thumb_func_start oei_shadow
 oei_shadow: @ 8154340
 	push {r4,r5,lr}
-	ldr r5, =gFieldEffectSpawnParams
+	ldr r5, =gFieldEffectArguments
 	ldrb r0, [r5]
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
@@ -702,7 +702,7 @@ _08154412:
 	cmp r0, r1
 	bne _08154490
 	ldrb r0, [r4, 0x1E]
-	bl sub_8088E64
+	bl MetatileBehavior_IsPokeGrass
 	lsls r0, 24
 	cmp r0, 0
 	bne _08154490
@@ -742,7 +742,7 @@ _08154498:
 oei_grass_normal: @ 81544AC
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, =gFieldEffectSpawnParams
+	ldr r5, =gFieldEffectArguments
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -951,7 +951,7 @@ _08154648:
 	thumb_func_start sub_8154658
 sub_8154658: @ 8154658
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1080,7 +1080,7 @@ _0815474C:
 sub_8154758: @ 8154758
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, =gFieldEffectSpawnParams
+	ldr r5, =gFieldEffectArguments
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -1282,7 +1282,7 @@ _081548EA:
 	thumb_func_start sub_81548FC
 sub_81548FC: @ 81548FC
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1336,7 +1336,7 @@ _08154958:
 	thumb_func_start sub_815496C
 sub_815496C: @ 815496C
 	push {r4-r6,lr}
-	ldr r6, =gFieldEffectSpawnParams
+	ldr r6, =gFieldEffectArguments
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -1537,7 +1537,7 @@ _08154AF2:
 	thumb_func_start sub_8154B04
 sub_8154B04: @ 8154B04
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1591,7 +1591,7 @@ _08154B62:
 	thumb_func_start sub_8154B78
 sub_8154B78: @ 8154B78
 	push {r4,r5,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1646,7 +1646,7 @@ _08154BD8:
 	thumb_func_start sub_8154BEC
 sub_8154BEC: @ 8154BEC
 	push {r4,r5,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1777,7 +1777,7 @@ _08154CE4:
 	thumb_func_start sub_8154CEC
 sub_8154CEC: @ 8154CEC
 	push {r4-r6,lr}
-	ldr r6, =gFieldEffectSpawnParams
+	ldr r6, =gFieldEffectArguments
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -1922,7 +1922,7 @@ _08154E0A:
 	thumb_func_start sub_8154E1C
 sub_8154E1C: @ 8154E1C
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1976,7 +1976,7 @@ _08154E78:
 	thumb_func_start oei_water_drop_tall
 oei_water_drop_tall: @ 8154E8C
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2030,7 +2030,7 @@ _08154EE8:
 	thumb_func_start sub_8154EFC
 sub_8154EFC: @ 8154EFC
 	push {r4-r7,lr}
-	ldr r7, =gFieldEffectSpawnParams
+	ldr r7, =gFieldEffectArguments
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
@@ -2193,7 +2193,7 @@ oei_ripples: @ 8155054
 	push {r4,lr}
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x14]
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	movs r3, 0x4
@@ -2238,7 +2238,7 @@ _081550A0:
 	thumb_func_start sub_81550B4
 sub_81550B4: @ 81550B4
 	push {r4-r6,lr}
-	ldr r6, =gFieldEffectSpawnParams
+	ldr r6, =gFieldEffectArguments
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -2393,7 +2393,7 @@ _081551E4:
 	thumb_func_start sub_81551F0
 sub_81551F0: @ 81551F0
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2445,7 +2445,7 @@ _08155248:
 	thumb_func_start sub_815525C
 sub_815525C: @ 815525C
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2497,7 +2497,7 @@ _081552B4:
 	thumb_func_start sub_81552C8
 sub_81552C8: @ 81552C8
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2549,7 +2549,7 @@ _08155320:
 	thumb_func_start sub_8155334
 sub_8155334: @ 8155334
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2603,7 +2603,7 @@ ash: @ 81553A0
 	push {r4,lr}
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	lsls r0, 16
 	asrs r0, 16
 	str r0, [r4]
@@ -2630,7 +2630,7 @@ ash: @ 81553A0
 oei_ash: @ 81553D4
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, =gFieldEffectSpawnParams
+	ldr r5, =gFieldEffectArguments
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -2809,7 +2809,7 @@ _0815552C:
 	thumb_func_start sub_8155534
 sub_8155534: @ 8155534
 	push {r4,r5,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3261,7 +3261,7 @@ _08155888:
 	thumb_func_start sub_8155890
 sub_8155890: @ 8155890
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3315,7 +3315,7 @@ _081558EC:
 	thumb_func_start sub_8155900
 sub_8155900: @ 8155900
 	push {r4-r7,lr}
-	ldr r7, =gFieldEffectSpawnParams
+	ldr r7, =gFieldEffectArguments
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
@@ -3505,7 +3505,7 @@ _08155A76:
 	thumb_func_start sub_8155A88
 sub_8155A88: @ 8155A88
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3586,7 +3586,7 @@ _08155B20:
 	thumb_func_start sub_8155B2C
 sub_8155B2C: @ 8155B2C
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3689,7 +3689,7 @@ ShowDisguiseFieldEffect: @ 8155BD0
 	lsrs r6, r1, 24
 	lsls r2, 24
 	lsrs r7, r2, 24
-	ldr r5, =gFieldEffectSpawnParams
+	ldr r5, =gFieldEffectArguments
 	ldrb r0, [r5]
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
@@ -3950,7 +3950,7 @@ _08155DD8:
 	thumb_func_start sub_8155DDC
 sub_8155DDC: @ 8155DDC
 	push {r4,lr}
-	ldr r4, =gFieldEffectSpawnParams
+	ldr r4, =gFieldEffectArguments
 	ldr r0, [r4]
 	adds r0, 0x7
 	str r0, [r4]

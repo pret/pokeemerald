@@ -18,7 +18,7 @@ sub_80D51AC: @ 80D51AC
 	cmp r2, 0xFF
 	bne _080D51D0
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _080D520C
 	.pool
 _080D51D0:
@@ -140,7 +140,7 @@ _080D5288:
 	adds r0, r6
 	strh r3, [r0, 0x26]
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _080D52CA
 _080D52C6:
 	subs r0, 0x1
@@ -200,11 +200,11 @@ _080D5320:
 _080D5324:
 	movs r0, 0x3
 _080D5326:
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D533C
@@ -216,7 +216,7 @@ _080D533C:
 	.pool
 _080D5348:
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 _080D5350:
@@ -226,7 +226,7 @@ _080D5352:
 	beq _080D5368
 _080D5356:
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _080D53A6
 	.pool
 _080D5368:
@@ -359,7 +359,7 @@ _080D5436:
 	adds r0, r7
 	strh r2, [r0, 0x26]
 	adds r0, r6, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _080D5478
 _080D5474:
 	subs r0, r2, 0x1
@@ -385,7 +385,7 @@ sub_80D5484: @ 80D5484
 	cmp r3, 0xFF
 	bne _080D54A8
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _080D54F6
 	.pool
 _080D54A8:
@@ -584,7 +584,7 @@ _080D55F8:
 	strh r0, [r2, 0x26]
 _080D5630:
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _080D563C
 _080D5638:
 	subs r0, r2, 0x1
@@ -705,7 +705,7 @@ _080D56F6:
 	cmp r0, 0
 	bne _080D5728
 	adds r0, r6, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _080D5728:
 	pop {r4-r7}
 	pop {r0}
@@ -829,7 +829,7 @@ _080D5810:
 	strh r0, [r4, 0x24]
 	strh r0, [r4, 0x26]
 	adds r0, r6, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _080D5822:
 	pop {r4-r6}
 	pop {r0}
@@ -842,7 +842,7 @@ sub_80D5830: @ 80D5830
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -871,7 +871,7 @@ sub_80D5860: @ 80D5860
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -892,7 +892,7 @@ _080D5894:
 	strh r2, [r4, 0x2E]
 	strh r0, [r4, 0x32]
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -919,7 +919,7 @@ sub_80D58D4: @ 80D58D4
 	strh r1, [r0, 0x30]
 	ldr r1, =sub_80A6630
 	str r1, [r0, 0x1C]
-	ldr r1, =move_anim_8072740
+	ldr r1, =DestroyAnimSprite
 	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
@@ -970,7 +970,7 @@ sub_80D5944: @ 80D5944
 	strh r1, [r0, 0x32]
 	ldr r1, =sub_80A6630
 	str r1, [r0, 0x1C]
-	ldr r1, =move_anim_8072740
+	ldr r1, =DestroyAnimSprite
 	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
@@ -988,12 +988,12 @@ sub_80D5968: @ 80D5968
 	cmp r0, 0
 	bne _080D598C
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	b _080D5990
 	.pool
 _080D598C:
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 _080D5990:
 	ldrb r0, [r0]
 	adds r0, r1
@@ -1093,7 +1093,7 @@ _080D5A56:
 	strh r1, [r3, 0x26]
 _080D5A58:
 	adds r0, r2, 0
-	bl move_anim_8072740
+	bl DestroyAnimSprite
 	b _080D5A8E
 	.pool
 _080D5A64:
@@ -1133,11 +1133,11 @@ sub_80D5A94: @ 80D5A94
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080D5AB0
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	b _080D5AB2
 	.pool
 _080D5AB0:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 _080D5AB2:
 	ldrb r2, [r0]
 	ldr r0, =gBankSpriteIds
@@ -1192,7 +1192,7 @@ _080D5ADC:
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =move_anim_8072740
+	ldr r1, =DestroyAnimSprite
 	adds r0, r5, 0
 	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6680
@@ -1218,11 +1218,11 @@ sub_80D5B48: @ 80D5B48
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080D5B70
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	b _080D5B72
 	.pool
 _080D5B70:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 _080D5B72:
 	ldrb r1, [r0]
 	ldr r0, =gBankSpriteIds
@@ -1281,7 +1281,7 @@ _080D5B9C:
 	lsls r0, 16
 	cmp r0, 0
 	bne _080D5C04
-	ldr r1, =move_anim_8072740
+	ldr r1, =DestroyAnimSprite
 	adds r0, r6, 0
 	bl StoreSpriteCallbackInData6
 	b _080D5C0C
@@ -1318,7 +1318,7 @@ sub_80D5C20: @ 80D5C20
 	lsls r1, 2
 	adds r1, r4
 	strh r3, [r1, 0x26]
-	bl move_anim_8072740
+	bl DestroyAnimSprite
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1338,7 +1338,7 @@ sub_80D5C50: @ 80D5C50
 	bl __divsi3
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -1485,7 +1485,7 @@ _080D5D70:
 	cmp r0, 0
 	bne _080D5DA4
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _080D5DA4:
 	pop {r4,r5}
 	pop {r0}
@@ -1518,16 +1518,16 @@ _080D5DD8:
 	beq _080D5DE8
 	b _080D5E10
 _080D5DDE:
-	ldr r5, =gAnimationBankAttacker
+	ldr r5, =gAnimBankAttacker
 	b _080D5DEA
 	.pool
 _080D5DE8:
-	ldr r5, =gAnimationBankTarget
+	ldr r5, =gAnimBankTarget
 _080D5DEA:
 	ldrb r0, [r5]
 	movs r4, 0x2
 	eors r0, r4
-	bl b_side_obj__get_some_boolean
+	bl IsAnimBankSpriteVisible
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5E10
@@ -1540,7 +1540,7 @@ _080D5DEA:
 	.pool
 _080D5E10:
 	adds r0, r6, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _080D5E58
 _080D5E18:
 	ldr r1, =gTasks
@@ -1549,7 +1549,7 @@ _080D5E18:
 	lsls r0, 3
 	adds r5, r0, r1
 	strh r2, [r5, 0x8]
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -1609,7 +1609,7 @@ sub_80D5E6C: @ 80D5E6C
 	cmp r1, r0
 	bls _080D5EAA
 	adds r0, r4, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _080D5EAA:
 	pop {r4}
 	pop {r0}
@@ -1622,7 +1622,7 @@ sub_80D5EB8: @ 80D5EB8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r6, =gAnimationBankAttacker
+	ldr r6, =gAnimBankAttacker
 	ldrb r0, [r6]
 	bl GetBankSide
 	lsls r0, 24
@@ -1660,7 +1660,7 @@ _080D5ED4:
 	b _080D5F18
 	.pool
 _080D5F14:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 _080D5F18:
 	strh r0, [r2, 0x12]
@@ -1817,7 +1817,7 @@ _080D601E:
 	strh r3, [r0, 0x24]
 	strh r3, [r0, 0x26]
 	adds r0, r6, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _080D6050:
 	pop {r3,r4}
 	mov r8, r3
@@ -1923,7 +1923,7 @@ _080D6120:
 	adds r0, r6, 0
 	bl sub_80A7344
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _080D612C:
 	pop {r4-r6}
 	pop {r0}
@@ -1995,11 +1995,11 @@ _080D61B8:
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _080D61C8
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	b _080D61CA
 	.pool
 _080D61C8:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 _080D61CA:
 	ldrb r0, [r0]
 	bl GetBankSide
@@ -2076,11 +2076,11 @@ sub_80D622C: @ 80D622C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080D6274
-	ldr r0, =gAnimationBankAttacker
+	ldr r0, =gAnimBankAttacker
 	b _080D6276
 	.pool
 _080D6274:
-	ldr r0, =gAnimationBankTarget
+	ldr r0, =gAnimBankTarget
 _080D6276:
 	ldrb r0, [r0]
 	bl GetBankSide
@@ -2201,7 +2201,7 @@ _080D6364:
 	bl sub_80A7344
 _080D636A:
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 	b _080D6382
 _080D6372:
 	movs r0, 0
@@ -2236,7 +2236,7 @@ sub_80D6388: @ 80D6388
 	adds r0, r5, r7
 	lsls r0, 3
 	adds r6, r0, r4
-	ldr r0, =gMovePowerMoveAnim
+	ldr r0, =gAnimMovePower
 	ldrh r0, [r0]
 	movs r1, 0xC
 	bl __udivsi3
@@ -2248,7 +2248,7 @@ _080D63C0:
 	adds r0, r5, r7
 	lsls r0, 3
 	adds r6, r0, r4
-	ldr r0, =gMoveDmgMoveAnim
+	ldr r0, =gAnimMoveDmg
 	ldr r0, [r0]
 	movs r1, 0xC
 	bl __divsi3
@@ -2435,7 +2435,7 @@ _080D6518:
 	adds r0, r2
 	strh r4, [r0, 0x26]
 	adds r0, r5, 0
-	bl move_anim_task_del
+	bl DestroyAnimVisualTask
 _080D654A:
 	pop {r4,r5}
 	pop {r0}

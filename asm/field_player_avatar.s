@@ -1223,7 +1223,7 @@ sub_808B238: @ 808B238
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088F58
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808B2D8
@@ -1522,7 +1522,7 @@ PlayerAvatarTransition_Surfing: @ 808B4D8
 	bl FieldObjectTurn
 	movs r0, 0x8
 	bl SetPlayerAvatarStateMask
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	movs r2, 0x10
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -2255,7 +2255,7 @@ PlayCollisionSoundIfNotFacingWarp: @ 808B9EC
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl is_tile_x69_2_warp_door
+	bl MetatileBehavior_IsWarpDoor
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808BA54
@@ -3517,7 +3517,7 @@ _0808C3F0:
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl FieldObjectSetSpecialAnim
-	ldr r2, =gFieldEffectSpawnParams
+	ldr r2, =gFieldEffectArguments
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	str r0, [r2]
@@ -3897,7 +3897,7 @@ sub_808C750: @ 808C750
 	lsrs r4, 24
 	bl ScriptContext2_Enable
 	bl sav1_reset_battle_music_maybe
-	bl sub_8085898
+	bl Overworld_ChangeMusicToDefault
 	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2]
 	movs r0, 0xF7
@@ -4858,7 +4858,7 @@ fishF: @ 808CF2C
 	ldr r0, =gPlayerAvatar
 	strb r1, [r0, 0x6]
 	bl ScriptContext2_Disable
-	bl sub_809757C
+	bl UnfreezeMapObjects
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_8197434

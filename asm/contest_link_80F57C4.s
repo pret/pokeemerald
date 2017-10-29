@@ -92,30 +92,30 @@ _080F57E0:
 	lsls r1, 8
 	movs r0, 0
 	bl SetGpuRegBits
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E28
+	ldr r0, =gBattle_WIN1H
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E2A
+	ldr r0, =gBattle_WIN1V
 	strh r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -387,10 +387,10 @@ sub_80F5B00: @ 80F5B00
 	strb r0, [r1, 0x2]
 	ldr r0, =sub_80F5C00
 	bl SetMainCallback2
-	ldr r1, =gUnknown_02022E28
+	ldr r1, =gBattle_WIN1H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E2A
+	ldr r1, =gBattle_WIN1V
 	ldr r2, =0x000080a0
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -441,51 +441,51 @@ sub_80F5C00: @ 80F5C00
 	thumb_func_start sub_80F5C24
 sub_80F5C24: @ 80F5C24
 	push {lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	ldrh r1, [r0]
 	movs r0, 0x18
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E24
+	ldr r0, =gBattle_WIN0H
 	ldrh r1, [r0]
 	movs r0, 0x40
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E26
+	ldr r0, =gBattle_WIN0V
 	ldrh r1, [r0]
 	movs r0, 0x44
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E28
+	ldr r0, =gBattle_WIN1H
 	ldrh r1, [r0]
 	movs r0, 0x42
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E2A
+	ldr r0, =gBattle_WIN1V
 	ldrh r1, [r0]
 	movs r0, 0x46
 	bl SetGpuReg
@@ -702,7 +702,7 @@ sub_80F5ED8: @ 80F5ED8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080F5EFC
@@ -1239,7 +1239,7 @@ _080F6334:
 	ldr r1, =gUnknown_02039F20
 	ldrb r0, [r1]
 	ldr r7, =gStringVar1
-	ldr r2, =gUnknown_02039E0D
+	ldr r2, =gUnknown_02039E00 + 13
 	mov r8, r2
 	cmp r0, 0
 	beq _080F636E
@@ -1347,10 +1347,10 @@ _080F643C:
 	.4byte _080F6638
 	.4byte _080F667C
 _080F6454:
-	ldr r1, =gUnknown_02022E24
+	ldr r1, =gBattle_WIN0H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E26
+	ldr r1, =gBattle_WIN0V
 	ldr r3, =0x00005050
 	adds r0, r3, 0
 	strh r0, [r1]
@@ -1364,7 +1364,7 @@ _080F6454:
 	mov r9, r4
 	ldr r4, =gMonFrontPicTable
 	mov r12, r4
-	ldr r4, =gBattleSpritesGfx
+	ldr r4, =gMonSpritesGfxPtr
 	mov r8, r4
 	cmp r0, 0
 	beq _080F648C
@@ -1494,7 +1494,7 @@ _080F65A4:
 	strh r0, [r4, 0xC]
 _080F65BA:
 	ldrb r2, [r4, 0xC]
-	ldr r3, =gUnknown_02022E26
+	ldr r3, =gBattle_WIN0V
 	movs r0, 0x50
 	subs r0, r2
 	lsls r0, 8
@@ -1556,7 +1556,7 @@ _080F6638:
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0x2
 	bne _080F669C
-	ldr r3, =gUnknown_02022E26
+	ldr r3, =gBattle_WIN0V
 	ldrh r0, [r3]
 	lsrs r2, r0, 8
 	adds r0, r2, 0x2
@@ -1706,7 +1706,7 @@ sub_80F677C: @ 80F677C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F67AC
@@ -1750,7 +1750,7 @@ task_repel: @ 80F67C4
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_80ED090
+	bl BravoTrainerPokemonProfile_BeforeInterview2
 _080F67E6:
 	movs r0, 0
 	str r0, [sp]
@@ -1838,11 +1838,11 @@ _080F68A8:
 	thumb_func_start sub_80F68B4
 sub_80F68B4: @ 80F68B4
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_02022E20
+	ldr r2, =gBattle_BG3_X
 	ldrh r3, [r2]
 	adds r0, r3, 0x2
 	strh r0, [r2]
-	ldr r4, =gUnknown_02022E22
+	ldr r4, =gBattle_BG3_Y
 	ldrh r5, [r4]
 	adds r1, r5, 0x1
 	strh r1, [r4]
@@ -1989,7 +1989,7 @@ sub_80F69B8: @ 80F69B8
 _080F69DE:
 	adds r0, r7, 0
 	ldr r1, [sp, 0x28]
-	bl sub_80D2EDC
+	bl GetMonIconPtr
 	adds r3, r0, 0
 	lsls r0, r5, 9
 	adds r0, 0x80
@@ -2870,10 +2870,10 @@ _080F70BE:
 	adds r5, 0x1
 	cmp r5, 0x2
 	ble _080F70BE
-	ldr r1, =gUnknown_02022E24
+	ldr r1, =gBattle_WIN0H
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r2, =gUnknown_02022E26
+	ldr r2, =gBattle_WIN0V
 	ldrh r1, [r4, 0x22]
 	adds r0, r1, 0
 	subs r0, 0x10
@@ -2910,8 +2910,8 @@ sub_80F7144: @ 80F7144
 	orrs r0, r1
 	mov r1, r12
 	strb r0, [r1]
-	ldr r7, =gUnknown_02022E24
-	ldr r6, =gUnknown_02022E26
+	ldr r7, =gBattle_WIN0H
+	ldr r6, =gBattle_WIN0V
 	adds r5, r3, 0
 	movs r4, 0x4
 	adds r2, 0x2E
@@ -3008,7 +3008,7 @@ _080F7236:
 	bl CopyToBgTilemapBufferRect
 	movs r5, 0xF
 _080F7240:
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080F725C
@@ -4522,7 +4522,7 @@ sub_80F7DF4: @ 80F7DF4
 	bl AllocZeroed
 	ldr r1, [r4]
 	str r0, [r1, 0x1C]
-	bl init_uns_table_pokemon_copy
+	bl AllocateMonSpritesGfx
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4569,7 +4569,7 @@ sub_80F7E64: @ 80F7E64
 	str r4, [r0, 0x1C]
 	bl Free
 	str r4, [r5]
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4640,7 +4640,7 @@ sub_80F7F30: @ 80F7F30
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _080F7F5E
-	ldr r4, =gUnknown_02039F2C
+	ldr r4, =gScriptContestCategory
 	ldrb r0, [r4]
 	ldr r1, =gUnknown_02039F2E
 	ldrb r1, [r1]
@@ -4666,7 +4666,7 @@ sub_80F7F7C: @ 80F7F7C
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r2, r1, r0
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080F7FEE
@@ -4730,7 +4730,7 @@ sub_80F7FFC: @ 80F7FFC
 	beq _080F8010
 	b _080F8250
 _080F8010:
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bls _080F801A
@@ -4785,7 +4785,7 @@ _080F8074:
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4834,7 +4834,7 @@ _080F80E2:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4883,7 +4883,7 @@ _080F814E:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4926,7 +4926,7 @@ _080F8190:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4969,7 +4969,7 @@ _080F81F8:
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
-	bl sub_80EE5A4
+	bl GetRibbonCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -4994,7 +4994,7 @@ sub_80F8264: @ 80F8264
 	ldr r0, =gSpecialVar_0x8006
 	ldrh r1, [r0]
 	lsls r1, 6
-	ldr r0, =gUnknown_02039E0D
+	ldr r0, =gUnknown_02039E00 + 13
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -5013,7 +5013,7 @@ sub_80F8290: @ 80F8290
 	ldr r1, =gSpecialVar_0x8006
 	ldrh r1, [r1]
 	lsls r1, 6
-	ldr r2, =gUnknown_02039E02
+	ldr r2, =gUnknown_02039E00 + 2
 	adds r1, r2
 	bl StringCopy
 	pop {r0}
@@ -5104,7 +5104,7 @@ sub_80F834C: @ 80F834C
 	ldr r2, =gUnknown_02039F20
 	ldrb r0, [r2]
 	ldr r4, =gStringVar3
-	ldr r3, =gUnknown_02039E0D
+	ldr r3, =gUnknown_02039E00 + 13
 	cmp r0, 0
 	beq _080F836E
 _080F835C:
@@ -5137,7 +5137,7 @@ sub_80F8390: @ 80F8390
 	ldr r2, =gUnknown_02039F20
 	ldrb r0, [r2]
 	ldr r4, =gStringVar1
-	ldr r3, =gUnknown_02039E02
+	ldr r3, =gUnknown_02039E00 + 2
 	cmp r0, 0
 	beq _080F83B2
 _080F83A0:
@@ -5488,7 +5488,7 @@ _080F8678:
 	bl sub_80F86E0
 	ldr r1, =gUnknown_02039F2B
 	strb r0, [r1]
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrb r0, [r0]
 	bl sub_80DB09C
 	ldr r1, =sub_80FCF40
@@ -5578,7 +5578,7 @@ sub_80F8714: @ 80F8714
 	b _080F877E
 	.pool
 _080F8748:
-	ldr r5, =gUnknown_02039E02
+	ldr r5, =gUnknown_02039E00 + 2
 	movs r4, 0x3
 _080F874C:
 	adds r0, r5, 0
@@ -5633,7 +5633,7 @@ sub_80F87B4: @ 80F87B4
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F87D0

@@ -68,7 +68,7 @@ _0813DA00:
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl evolution_cutscene
+	bl EvolutionScene
 _0813DA30:
 	add sp, 0x4
 	pop {r4-r7}
@@ -77,8 +77,8 @@ _0813DA30:
 	.pool
 	thumb_func_end sub_813D9C0
 
-	thumb_func_start sub_813DA40
-sub_813DA40: @ 813DA40
+	thumb_func_start BeginEvolutionScene
+BeginEvolutionScene: @ 813DA40
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -110,10 +110,10 @@ sub_813DA40: @ 813DA40
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813DA40
+	thumb_func_end BeginEvolutionScene
 
-	thumb_func_start evolution_cutscene
-evolution_cutscene: @ 813DA8C
+	thumb_func_start EvolutionScene
+EvolutionScene: @ 813DA8C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -165,32 +165,32 @@ evolution_cutscene: @ 813DA8C
 	movs r1, 0
 	bl SetGpuReg
 	bl ResetPaletteFade
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r2, 0
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r2, [r0]
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	movs r1, 0
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022FF0
+	ldr r1, =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
-	bl c2_berry_program_update_menu
-	bl sub_8035AA4
+	bl sub_80356D0
+	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
 	bl remove_some_task
 	bl ResetTasks
@@ -202,7 +202,7 @@ evolution_cutscene: @ 813DA8C
 	bl AllocZeroed
 	ldr r1, =gUnknown_0203AB80
 	str r0, [r1]
-	bl init_uns_table_pokemon_copy
+	bl AllocateMonSpritesGfx
 	adds r0, r4, 0
 	movs r1, 0x2
 	mov r2, sp
@@ -235,7 +235,7 @@ evolution_cutscene: @ 813DA8C
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r2, =gBattleSpritesGfx
+	ldr r2, =gMonSpritesGfxPtr
 	ldr r1, [r2]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -291,7 +291,7 @@ evolution_cutscene: @ 813DA8C
 	lsls r0, r1, 3
 	ldr r2, =gMonFrontPicTable
 	adds r0, r2
-	ldr r2, =gBattleSpritesGfx
+	ldr r2, =gMonSpritesGfxPtr
 	ldr r1, [r2]
 	ldr r1, [r1, 0x10]
 	mov r2, r10
@@ -393,7 +393,7 @@ evolution_cutscene: @ 813DA8C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end evolution_cutscene
+	thumb_func_end EvolutionScene
 
 	thumb_func_start sub_813DD7C
 sub_813DD7C: @ 813DD7C
@@ -460,30 +460,30 @@ sub_813DD7C: @ 813DD7C
 	movs r1, 0
 	bl SetGpuReg
 	bl ResetPaletteFade
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r4, [r0]
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r4, [r0]
-	ldr r1, =gUnknown_02022FF0
+	ldr r1, =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
-	bl c2_berry_program_update_menu
-	bl sub_8035AA4
+	bl sub_80356D0
+	bl LoadBattleTextboxAndBackground
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	ldr r1, =gReservedSpritePaletteCount
@@ -492,7 +492,7 @@ sub_813DD7C: @ 813DD7C
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r5, 0
@@ -629,25 +629,25 @@ _0813DFE0:
 	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
-	ldr r2, =gUnknown_02022E20
+	ldr r2, =gBattle_BG3_X
 	movs r3, 0x80
 	lsls r3, 1
 	adds r0, r3, 0
 	strh r0, [r2]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r1, [r0]
 	b _0813E180
 	.pool
@@ -697,7 +697,7 @@ _0813E0A8:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r6, 0
@@ -867,7 +867,7 @@ sub_813E1D4: @ 813E1D4
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
+	ldr r1, =gMonSpritesGfxPtr
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -941,24 +941,24 @@ sub_813E1D4: @ 813E1D4
 	mov r1, sp
 	ldrh r1, [r1, 0x14]
 	strh r1, [r0, 0x1C]
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r4, [r0]
-	ldr r1, =gUnknown_02022E20
+	ldr r1, =gBattle_BG3_X
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r4, [r0]
 	ldr r2, =gTextFlags
 	ldrb r0, [r2]
@@ -1338,7 +1338,7 @@ _0813E6E4:
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -1626,7 +1626,7 @@ _0813E99E:
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =0x00000173
 	bl PlayBGM
 	ldr r2, =gTasks
@@ -1775,7 +1775,7 @@ _0813EAF6:
 _0813EB06:
 	adds r0, r7, 0
 	bl DestroyTask
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	ldr r4, =gUnknown_0203AB80
 	ldr r0, [r4]
 	bl Free
@@ -1868,7 +1868,7 @@ _0813EBE4:
 _0813EBEC:
 	ldr r0, =gStringVar4
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -1892,15 +1892,15 @@ _0813EC1E:
 	beq _0813EC2A
 	b _0813F1A4
 _0813EC2A:
-	bl sub_804F574
+	bl BufferMoveToLearnIntoBattleTextBuff2
 	ldr r0, =0x0000016f
 	bl PlayFanfare
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0xC]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -1991,13 +1991,13 @@ _0813ED0A:
 	beq _0813ED16
 	b _0813F1A4
 _0813ED16:
-	bl sub_804F574
+	bl BufferMoveToLearnIntoBattleTextBuff2
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x10]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -2023,10 +2023,10 @@ _0813ED56:
 _0813ED62:
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x14]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2048,10 +2048,10 @@ _0813ED90:
 	bne _0813EDCE
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x18]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -2087,7 +2087,7 @@ _0813EDEA:
 	bl sub_8056A3C
 	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2100,7 +2100,7 @@ _0813EDEA:
 	ldr r0, =gBattleCommunication
 	strb r2, [r0, 0x1]
 	movs r0, 0
-	bl sub_8056B74
+	bl BattleCreateCursorAt
 	b _0813F1A4
 	.pool
 _0813EE34:
@@ -2117,10 +2117,10 @@ _0813EE34:
 	movs r0, 0x5
 	bl PlaySE
 	ldrb r0, [r4, 0x1]
-	bl sub_8056BAC
+	bl BattleDestroyCursorAt
 	movs r0, 0
 	strb r0, [r4, 0x1]
-	bl sub_8056B74
+	bl BattleCreateCursorAt
 _0813EE5C:
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -2135,10 +2135,10 @@ _0813EE5C:
 	movs r0, 0x5
 	bl PlaySE
 	ldrb r0, [r4, 0x1]
-	bl sub_8056BAC
+	bl BattleDestroyCursorAt
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
-	bl sub_8056B74
+	bl BattleCreateCursorAt
 _0813EE84:
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -2289,10 +2289,10 @@ _0813EFC8:
 	ldr r3, =0x000004cc
 	adds r0, r3
 	ldr r0, [r0]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -2338,10 +2338,10 @@ _0813F05C:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -2367,10 +2367,10 @@ _0813F09E:
 _0813F0AA:
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x1C]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2395,10 +2395,10 @@ _0813F0D8:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -2411,10 +2411,10 @@ _0813F0D8:
 _0813F120:
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x20]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gTasks
 	mov r3, r8
 	adds r0, r3, r7
@@ -2431,10 +2431,10 @@ _0813F120:
 _0813F154:
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x24]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -3059,12 +3059,12 @@ _0813F756:
 	beq _0813F762
 	b _0813FCC4
 _0813F762:
-	bl sub_804F574
+	bl BufferMoveToLearnIntoBattleTextBuff2
 	ldr r0, =0x0000016f
 	bl PlayFanfare
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0xC]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3160,10 +3160,10 @@ _0813F846:
 	beq _0813F852
 	b _0813FCC4
 _0813F852:
-	bl sub_804F574
+	bl BufferMoveToLearnIntoBattleTextBuff2
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x10]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3193,7 +3193,7 @@ _0813F892:
 _0813F89E:
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x14]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3219,7 +3219,7 @@ _0813F8CC:
 	bne _0813F90C
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x18]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3299,7 +3299,7 @@ _0813F98C:
 	lsls r1, 3
 	adds r0, r1
 	ldr r0, [r0]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3336,7 +3336,7 @@ _0813F9E4:
 	lsls r1, 3
 	adds r0, r1
 	ldr r0, [r0]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3441,7 +3441,7 @@ _0813FAEC:
 	ldr r1, =0x000004cc
 	adds r0, r1
 	ldr r0, [r0]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3481,7 +3481,7 @@ _0813FB3C:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3511,7 +3511,7 @@ _0813FBB2:
 _0813FBBE:
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x1C]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3540,7 +3540,7 @@ _0813FBEC:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3557,7 +3557,7 @@ _0813FBEC:
 _0813FC38:
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x20]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3578,7 +3578,7 @@ _0813FC38:
 _0813FC70:
 	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x24]
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
@@ -3630,35 +3630,35 @@ nullsub_83: @ 813FCD8
 	thumb_func_start sub_813FCDC
 sub_813FCDC: @ 813FCDC
 	push {lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	ldrh r1, [r0]
 	movs r0, 0x18
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
@@ -3674,35 +3674,35 @@ sub_813FCDC: @ 813FCDC
 	thumb_func_start sub_813FD64
 sub_813FD64: @ 813FD64
 	push {lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	ldrh r1, [r0]
 	movs r0, 0x18
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	ldrh r1, [r0]
 	movs r0, 0x1C
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
@@ -3852,9 +3852,9 @@ sub_813FEE8: @ 813FEE8
 	push {r6,r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	mov r8, r0
-	ldr r1, =gUnknown_02022E1A
+	ldr r1, =gBattle_BG1_Y
 	mov r9, r1
 	ldr r1, =gTasks
 	lsls r0, r5, 2
@@ -3865,13 +3865,13 @@ sub_813FEE8: @ 813FEE8
 	ldrsh r0, [r0, r2]
 	cmp r0, 0
 	bne _0813FF28
-	ldr r7, =gUnknown_02022E1C
-	ldr r6, =gUnknown_02022E1E
+	ldr r7, =gBattle_BG2_X
+	ldr r6, =gBattle_BG2_Y
 	b _0813FF2C
 	.pool
 _0813FF28:
-	ldr r7, =gUnknown_02022E20
-	ldr r6, =gUnknown_02022E22
+	ldr r7, =gBattle_BG3_X
+	ldr r6, =gBattle_BG3_Y
 _0813FF2C:
 	lsls r4, r5, 2
 	adds r4, r5
@@ -4130,12 +4130,12 @@ sub_8140174: @ 8140174
 	movs r0, 0x50
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r1, [r0]
 	movs r0, 0x1
 	movs r1, 0x5

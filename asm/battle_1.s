@@ -1358,8 +1358,8 @@ _080356AA:
 	.pool
 	thumb_func_end trs_config
 
-	thumb_func_start c2_berry_program_update_menu
-c2_berry_program_update_menu: @ 80356D0
+	thumb_func_start sub_80356D0
+sub_80356D0: @ 80356D0
 	push {lr}
 	movs r0, 0x2
 	bl DisableInterrupts
@@ -1381,10 +1381,10 @@ c2_berry_program_update_menu: @ 80356D0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end c2_berry_program_update_menu
+	thumb_func_end sub_80356D0
 
-	thumb_func_start sub_803570C
-sub_803570C: @ 803570C
+	thumb_func_start ApplyPlayerChosenFrameToBattleMenu
+ApplyPlayerChosenFrameToBattleMenu: @ 803570C
 	push {lr}
 	movs r0, 0x2
 	movs r1, 0x12
@@ -1422,10 +1422,10 @@ _0803575A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_803570C
+	thumb_func_end ApplyPlayerChosenFrameToBattleMenu
 
-	thumb_func_start load_battle_oval_graphics
-load_battle_oval_graphics: @ 8035770
+	thumb_func_start DrawMainBattleBackground
+DrawMainBattleBackground: @ 8035770
 	push {r4,r5,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
@@ -1547,8 +1547,8 @@ _080358E0:
 	.4byte _08035A40
 	.4byte _08035A70
 _08035904:
-	ldr r4, =gUnknown_0831ABA8
-	ldr r5, =gUnknown_02022FF0
+	ldr r4, =gBattleTerrainTable
+	ldr r5, =gBattleTerrain
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1665,10 +1665,10 @@ _08035A8A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end load_battle_oval_graphics
+	thumb_func_end DrawMainBattleBackground
 
-	thumb_func_start sub_8035AA4
-sub_8035AA4: @ 8035AA4
+	thumb_func_start LoadBattleTextboxAndBackground
+LoadBattleTextboxAndBackground: @ 8035AA4
 	push {lr}
 	ldr r0, =gUnknown_08C00000
 	movs r1, 0xC0
@@ -1685,12 +1685,12 @@ sub_8035AA4: @ 8035AA4
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
-	bl sub_803570C
-	bl load_battle_oval_graphics
+	bl ApplyPlayerChosenFrameToBattleMenu
+	bl DrawMainBattleBackground
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8035AA4
+	thumb_func_end LoadBattleTextboxAndBackground
 
 	thumb_func_start sub_8035AE4
 sub_8035AE4: @ 8035AE4
@@ -1888,7 +1888,7 @@ sub_8035C4C: @ 8035C4C
 	bne _08035C68
 	ldr r0, =gText_Draw
 	movs r1, 0x15
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	b _08035D68
 	.pool
 _08035C68:
@@ -1964,10 +1964,10 @@ _08035CE2:
 _08035CFC:
 	ldr r0, =gText_Win
 	movs r1, 0x17
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Loss
 	movs r1, 0x16
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	b _08035D68
 	.pool
 _08035D20:
@@ -1985,19 +1985,19 @@ _08035D20:
 _08035D36:
 	ldr r0, =gText_Win
 	movs r1, 0x16
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Loss
 	movs r1, 0x17
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	b _08035D68
 	.pool
 _08035D58:
 	ldr r0, =gText_Win
 	movs r1, 0x17
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r0, =gText_Loss
 	movs r1, 0x16
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 _08035D68:
 	pop {r0}
 	bx r0
@@ -2068,14 +2068,14 @@ _08035DDC:
 _08035DE6:
 	adds r0, r1, 0
 	movs r1, 0x11
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x4
 	b _08035E14
 _08035DF4:
 	adds r0, r1, 0
 	movs r1, 0x12
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x4
 	str r0, [sp]
@@ -2085,7 +2085,7 @@ _08035DF4:
 _08035E08:
 	adds r0, r1, 0
 	movs r1, 0x13
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x8
 _08035E14:
@@ -2099,7 +2099,7 @@ _08035E1A:
 _08035E22:
 	adds r0, r1, 0
 	movs r1, 0x14
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x8
 	str r0, [sp]
@@ -2139,14 +2139,14 @@ _08035E66:
 	adds r1, r0, r4
 	adds r0, r1, 0
 	movs r1, 0xF
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	lsls r0, r6, 3
 	subs r0, r6
 	lsls r0, 2
 	adds r1, r0, r4
 	adds r0, r1, 0
 	movs r1, 0x10
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	movs r4, 0x7
 	str r4, [sp]
 	adds r0, r7, 0
@@ -2236,7 +2236,7 @@ _08035F64:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	beq _08035FCC
-	ldr r4, =gUnknown_02022E18
+	ldr r4, =gBattle_BG1_X
 	ldrh r0, [r5, 0xA]
 	bl Sin2
 	lsls r0, 16
@@ -2251,7 +2251,7 @@ _08035F7E:
 	adds r0, r2, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, =gUnknown_02022E1C
+	ldr r4, =gBattle_BG2_X
 	ldrh r0, [r5, 0xC]
 	bl Sin2
 	lsls r0, 16
@@ -2266,16 +2266,16 @@ _08035F9C:
 	adds r0, r3, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldr r2, =0x0000ffdc
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
 	b _08036038
 	.pool
 _08035FCC:
-	ldr r4, =gUnknown_02022E18
+	ldr r4, =gBattle_BG1_X
 	ldrh r0, [r5, 0xA]
 	bl Sin2
 	lsls r0, 16
@@ -2290,7 +2290,7 @@ _08035FDE:
 	adds r0, r3, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, =gUnknown_02022E1A
+	ldr r4, =gBattle_BG1_Y
 	ldrh r0, [r5, 0xA]
 	bl Cos2
 	lsls r0, 16
@@ -2302,7 +2302,7 @@ _08035FFC:
 	asrs r0, 5
 	subs r0, 0xA4
 	strh r0, [r4]
-	ldr r4, =gUnknown_02022E1C
+	ldr r4, =gBattle_BG2_X
 	ldrh r0, [r5, 0xC]
 	bl Sin2
 	lsls r0, 16
@@ -2317,7 +2317,7 @@ _08036014:
 	adds r0, r2, 0
 	subs r0, r1
 	strh r0, [r4]
-	ldr r4, =gUnknown_02022E1E
+	ldr r4, =gBattle_BG2_Y
 	ldrh r0, [r5, 0xC]
 	bl Cos2
 	lsls r0, 16
@@ -2457,8 +2457,8 @@ _08036138:
 	.pool
 	thumb_func_end task00_0800F6FC
 
-	thumb_func_start sub_8036154
-sub_8036154: @ 8036154
+	thumb_func_start LoadBattleEntryBackground
+LoadBattleEntryBackground: @ 8036154
 	push {r4,r5,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
@@ -2504,11 +2504,11 @@ sub_8036154: @ 8036154
 	movs r0, 0x4A
 	movs r1, 0x36
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldr r2, =0x0000ff5c
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
 	ldr r0, =gUnknown_0831AA00
 	bl LoadCompressedObjectPicUsingHeap
@@ -2632,8 +2632,8 @@ _08036350:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803639C
-	ldr r4, =gUnknown_0831ABA8
-	ldr r5, =gUnknown_02022FF0
+	ldr r4, =gBattleTerrainTable
+	ldr r5, =gBattleTerrain
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2668,10 +2668,10 @@ _080363AC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8036154
+	thumb_func_end LoadBattleEntryBackground
 
-	thumb_func_start sub_80363C4
-sub_80363C4: @ 80363C4
+	thumb_func_start LoadChosenBattleElement
+LoadChosenBattleElement: @ 80363C4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2778,8 +2778,8 @@ _080364A8:
 	.4byte _08036510
 	.4byte _08036518
 _080364CC:
-	ldr r2, =gUnknown_0831ABA8
-	ldr r0, =gUnknown_02022FF0
+	ldr r2, =gBattleTerrainTable
+	ldr r0, =gBattleTerrain
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2888,8 +2888,8 @@ _080365B4:
 	.4byte _0803661C
 	.4byte _08036624
 _080365D8:
-	ldr r2, =gUnknown_0831ABA8
-	ldr r0, =gUnknown_02022FF0
+	ldr r2, =gBattleTerrainTable
+	ldr r0, =gBattleTerrain
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3003,8 +3003,8 @@ _080366C8:
 	.4byte _08036738
 	.4byte _08036740
 _080366EC:
-	ldr r2, =gUnknown_0831ABA8
-	ldr r0, =gUnknown_02022FF0
+	ldr r2, =gBattleTerrainTable
+	ldr r0, =gBattleTerrain
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3051,7 +3051,7 @@ _08036742:
 	b _08036758
 	.pool
 _08036750:
-	bl sub_803570C
+	bl ApplyPlayerChosenFrameToBattleMenu
 	b _08036758
 _08036756:
 	movs r4, 0x1
@@ -3060,6 +3060,6 @@ _08036758:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80363C4
+	thumb_func_end LoadChosenBattleElement
 
 	.align 2, 0 @ Don't pad with nop.

@@ -36,15 +36,15 @@ flag_var_implications_of_teleport_: @ 8084660
 	push {lr}
 	bl player_avatar_init_params_reset
 	ldr r0, =0x0000088b
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x0000088d
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x0000088c
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00000889
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00000888
-	bl FlagReset
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.pool
@@ -55,15 +55,15 @@ sub_808469C: @ 808469C
 	push {lr}
 	bl player_avatar_init_params_reset
 	ldr r0, =0x0000088b
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x0000088d
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x0000088c
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00000889
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00000888
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =gUnknown_08271862
 	bl ScriptContext2_RunNewScript
 	pop {r0}
@@ -76,15 +76,15 @@ flagmods_08054D70: @ 80846E4
 	push {lr}
 	bl player_avatar_init_params_reset
 	ldr r0, =0x0000088b
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x0000088d
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x0000088c
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00000889
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00000888
-	bl FlagReset
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.pool
@@ -95,15 +95,15 @@ sub_8084720: @ 8084720
 	push {r4,lr}
 	bl player_avatar_init_params_reset
 	ldr r0, =0x0000088b
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x0000088d
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x0000088c
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00000889
-	bl FlagReset
+	bl FlagClear
 	ldr r0, =0x00000888
-	bl FlagReset
+	bl FlagClear
 	ldr r4, =0x00004039
 	adds r0, r4, 0
 	bl VarGet
@@ -128,7 +128,7 @@ _08084764:
 sub_8084788: @ 8084788
 	push {lr}
 	ldr r0, =0x0000088c
-	bl FlagReset
+	bl FlagClear
 	bl sub_8085B2C
 	bl wild_pokemon_reroll
 	bl UpdateLocationHistoryForRoamer
@@ -324,8 +324,8 @@ _080848F4:
 	.pool
 	thumb_func_end CopyFieldObjectTemplateCoordsToSav1
 
-	thumb_func_start update_saveblock1_field_object_coords
-update_saveblock1_field_object_coords: @ 8084910
+	thumb_func_start Overworld_SetMapObjTemplateCoords
+Overworld_SetMapObjTemplateCoords: @ 8084910
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -356,10 +356,10 @@ _08084944:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end update_saveblock1_field_object_coords
+	thumb_func_end Overworld_SetMapObjTemplateCoords
 
-	thumb_func_start update_saveblock1_field_object_movement_behavior
-update_saveblock1_field_object_movement_behavior: @ 808494C
+	thumb_func_start Overworld_SetMapObjTemplateMovementType
+Overworld_SetMapObjTemplateMovementType: @ 808494C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -387,7 +387,7 @@ _08084978:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end update_saveblock1_field_object_movement_behavior
+	thumb_func_end Overworld_SetMapObjTemplateMovementType
 
 	thumb_func_start mapdata_load_assets_to_gpu_and_full_redraw
 mapdata_load_assets_to_gpu_and_full_redraw: @ 8084980
@@ -710,9 +710,9 @@ warp_in: @ 8084BD8
 	bx r0
 	thumb_func_end warp_in
 
-	thumb_func_start warp1_set
-@ void warp1_set(char bank, char map, char warpid, char enter_x, char enter_y)
-warp1_set: @ 8084BEC
+	thumb_func_start Overworld_SetWarpDestination
+@ void Overworld_SetWarpDestination(char bank, char map, char warpid, char enter_x, char enter_y)
+Overworld_SetWarpDestination: @ 8084BEC
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -741,7 +741,7 @@ warp1_set: @ 8084BEC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end warp1_set
+	thumb_func_end Overworld_SetWarpDestination
 
 	thumb_func_start warp1_set_2
 @ void warp1_set_2(char bank, char map, char warpid)
@@ -757,7 +757,7 @@ warp1_set_2: @ 8084C28
 	movs r3, 0x1
 	negs r3, r3
 	str r3, [sp]
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -857,7 +857,7 @@ sub_8084CCC: @ 8084CCC
 	lsls r4, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 _08084CFA:
 	add sp, 0x4
 	pop {r4}
@@ -879,8 +879,8 @@ copy_saved_warp3_bank_and_enter_x_to_warp1: @ 8084D04
 	.pool
 	thumb_func_end copy_saved_warp3_bank_and_enter_x_to_warp1
 
-	thumb_func_start sub_8084D1C
-sub_8084D1C: @ 8084D1C
+	thumb_func_start Overworld_SetHealLocationWarp
+Overworld_SetHealLocationWarp: @ 8084D1C
 	push {r4,r5,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -911,7 +911,7 @@ _08084D50:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8084D1C
+	thumb_func_end Overworld_SetHealLocationWarp
 
 	thumb_func_start sub_8084D5C
 sub_8084D5C: @ 8084D5C
@@ -1126,7 +1126,7 @@ _08084EF0:
 	lsls r4, r6, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 _08084F0A:
 	add sp, 0x4
 	pop {r4-r6}
@@ -1289,7 +1289,7 @@ sub_8084FF8: @ 8084FF8
 	lsls r4, r5, 24
 	asrs r4, 24
 	str r4, [sp]
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	b _0808504C
 _08085030:
 	bl mapheader_run_script_with_tag_x6
@@ -1365,7 +1365,7 @@ mliX_load_map: @ 8085098
 	negs r3, r3
 	str r3, [sp]
 	adds r2, r3, 0
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	ldr r4, =gMapHeader
 	ldrb r0, [r4, 0x14]
 	cmp r0, 0x3A
@@ -1375,14 +1375,14 @@ _080850C8:
 	bl warp_shift
 	bl set_current_map_header_from_sav1_save_old_name
 	bl CopyFieldObjectTemplatesToSav1
-	bl sav2_set_x9_depending_on_sav1_map
+	bl TrySetMapSaveWarpStatus
 	bl ClearTempFieldEventData
 	bl wild_pokemon_reroll
 	bl prev_quest_postbuffer_cursor_backup_reset
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl sub_80B21B4
-	bl sub_809E7B0
+	bl DoTimeBasedEvents
 	bl sub_80AEDBC
 	bl sub_8085B2C
 	bl update_sav1_flash_used_on_map
@@ -1404,7 +1404,7 @@ _08085116:
 	bl sub_80A0A2C
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMove
-	bl sub_80AEE20
+	bl DoCurrentWeather
 	bl wild_encounter_reset_coro_args
 	bl mapheader_run_script_with_tag_x5
 	ldr r2, =gMapHeader
@@ -1463,7 +1463,7 @@ _080851A2:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	bl sub_80EB218
-	bl sav2_set_x9_depending_on_sav1_map
+	bl TrySetMapSaveWarpStatus
 	bl ClearTempFieldEventData
 	bl wild_pokemon_reroll
 	bl prev_quest_postbuffer_cursor_backup_reset
@@ -1481,14 +1481,14 @@ _080851A2:
 	bl sub_80B21B4
 	cmp r7, 0x1
 	beq _080851EE
-	bl sub_809E7B0
+	bl DoTimeBasedEvents
 _080851EE:
 	bl sub_80AEDBC
 	bl sub_8085B2C
 	cmp r5, 0
 	beq _08085200
 	ldr r0, =0x00000888
-	bl FlagReset
+	bl FlagClear
 _08085200:
 	bl update_sav1_flash_used_on_map
 	bl sav1_reset_battle_music_maybe
@@ -1699,19 +1699,19 @@ _080853AC:
 	lsls r4, 24
 	lsrs r5, r4, 24
 	adds r0, r5, 0
-	bl sub_8088F74
+	bl MetatileBehavior_IsDeepSouthWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080853E8
 	adds r0, r5, 0
-	bl sub_8088F58
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08085442
 	adds r0, r5, 0
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1858,8 +1858,8 @@ _080854DE:
 	.pool
 	thumb_func_end update_sav1_flash_used_on_map
 
-	thumb_func_start sub_80854EC
-sub_80854EC: @ 80854EC
+	thumb_func_start Overworld_SetFlashLevel
+Overworld_SetFlashLevel: @ 80854EC
 	push {lr}
 	adds r1, r0, 0
 	cmp r1, 0
@@ -1878,7 +1878,7 @@ _080854FE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80854EC
+	thumb_func_end Overworld_SetFlashLevel
 
 	thumb_func_start sav1_get_flash_used_on_map
 sav1_get_flash_used_on_map: @ 8085514
@@ -2263,14 +2263,14 @@ _080857E8:
 	.pool
 	thumb_func_end sub_8085784
 
-	thumb_func_start sav1_set_battle_music_maybe
-sav1_set_battle_music_maybe: @ 80857F4
+	thumb_func_start Overworld_SetSavedMusic
+Overworld_SetSavedMusic: @ 80857F4
 	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	strh r0, [r1, 0x2C]
 	bx lr
 	.pool
-	thumb_func_end sav1_set_battle_music_maybe
+	thumb_func_end Overworld_SetSavedMusic
 
 	thumb_func_start sav1_reset_battle_music_maybe
 sav1_reset_battle_music_maybe: @ 8085800
@@ -2339,8 +2339,8 @@ _08085890:
 	bx r0
 	thumb_func_end sub_8085810
 
-	thumb_func_start sub_8085898
-sub_8085898: @ 8085898
+	thumb_func_start Overworld_ChangeMusicToDefault
+Overworld_ChangeMusicToDefault: @ 8085898
 	push {r4,lr}
 	bl GetCurrentMapMusic
 	adds r4, r0, 0
@@ -2360,10 +2360,10 @@ _080858BE:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8085898
+	thumb_func_end Overworld_ChangeMusicToDefault
 
-	thumb_func_start sub_80858C4
-sub_80858C4: @ 80858C4
+	thumb_func_start Overworld_ChangeMusicTo
+Overworld_ChangeMusicTo: @ 80858C4
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -2383,7 +2383,7 @@ _080858E4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80858C4
+	thumb_func_end Overworld_ChangeMusicTo
 
 	thumb_func_start is_warp1_light_level_8_or_9
 is_warp1_light_level_8_or_9: @ 80858F0
@@ -3175,7 +3175,7 @@ CB2_NewGame: @ 8085EF8
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
 	ldr r1, =gFieldCallback
-	ldr r0, =sub_80FB4E0
+	ldr r0, =ExecuteTruckSequence
 	str r0, [r1]
 	ldr r1, =gUnknown_03005DB0
 	movs r0, 0
@@ -3525,8 +3525,8 @@ _08086278:
 _08086286:
 	bl CopyFieldObjectTemplateCoordsToSav1
 _0808628A:
-	bl sub_809757C
-	bl sub_809E7B0
+	bl UnfreezeMapObjects
+	bl DoTimeBasedEvents
 	bl sub_8084788
 	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
@@ -3640,7 +3640,7 @@ VBlankCB_Field: @ 8086390
 	bl sub_80BA0A8
 	bl FieldUpdateBgTilemapScroll
 	bl TransferPlttBuffer
-	bl sub_80A09D0
+	bl TransferTilesetAnimsBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end VBlankCB_Field

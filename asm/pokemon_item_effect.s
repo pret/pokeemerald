@@ -221,7 +221,7 @@ _0806BEE0:
 	mov r0, r8
 	movs r2, 0
 	ldr r3, [sp, 0x10]
-	bl sub_813DA40
+	bl BeginEvolutionScene
 	movs r0, 0
 	bl _0806CD5C
 _0806BEF0:
@@ -1155,7 +1155,7 @@ _0806C6AE:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl dp01_build_cmdbuf_x00_a_b_0
+	bl EmitGetMonData
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	strb r5, [r4]

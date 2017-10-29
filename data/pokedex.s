@@ -95,7 +95,7 @@ gUnknown_0856E688:: @ 856E688
 	.incbin "baserom.gba", 0x56e688, 0xc
 
 @ 856E694
-	.include "data/graphics/pokemon/mon_footprint_table.inc"
+	.include "data/graphics/pokemon/footprint_table.inc"
 
 gUnknown_0856ED08:: @ 856ED08
 	.incbin "baserom.gba", 0x56ed08, 0x28

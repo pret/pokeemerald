@@ -60,7 +60,7 @@ void SetSafariZoneFlag(void)
 
 void ResetSafariZoneFlag(void)
 {
-    FlagReset(SYS_SAFARI_MODE);
+    FlagClear(SYS_SAFARI_MODE);
 }
 
 void EnterSafariMode(void)
@@ -114,7 +114,7 @@ void sub_80FC190(void)
     {
         SetMainCallback2(c2_exit_to_overworld_2_switch);
     }
-    else if (gBattleOutcome == 8)
+    else if (gBattleOutcome == BATTLE_SAFARI_OUT_OF_BALLS)
     {
         ScriptContext2_RunNewScript(gUnknown_082A4B4C);
         warp_in();
@@ -139,7 +139,7 @@ static void ClearAllPokeblockFeeders(void)
     memset(sPokeblockFeeders, 0, sizeof(sPokeblockFeeders));
 }
 
-static void GetPokeblockFeederInFront(void)
+void GetPokeblockFeederInFront(void)
 {
     s16 x, y;
     u16 i;

@@ -434,7 +434,7 @@ sub_80B2688: @ 80B2688
 	movs r0, 0x15
 	bl PlaySE
 	ldr r0, =gUnknown_082780B3
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 	ldr r0, =sub_80B270C
 	b _080B26FA
 	.pool
@@ -442,7 +442,7 @@ _080B26EC:
 	movs r0, 0x16
 	bl PlaySE
 	ldr r0, =gUnknown_08278131
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 	ldr r0, =sub_80B2918
 _080B26FA:
 	str r0, [r4]
@@ -545,7 +545,7 @@ sub_80B275C: @ 80B275C
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
 	ldr r0, =gUnknown_082780F2
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 	mov r0, r9
 	subs r0, 0x8
 	add r0, r8
@@ -598,7 +598,7 @@ sub_80B2804: @ 80B2804
 	beq _080B2878
 _080B2852:
 	ldr r0, =gUnknown_082780B3
-	bl box_related_two__3
+	bl ShowFieldAutoScrollMessage
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -719,7 +719,7 @@ sub_80B2918: @ 80B2918
 	cmp r0, 0x1
 	bhi _080B297C
 	bl sub_800AC34
-	bl textbox_close
+	bl HideFieldMessageBox
 	ldr r0, =sub_80B2CB0
 	b _080B29E4
 	.pool
@@ -730,7 +730,7 @@ _080B297C:
 	bne _080B2994
 _080B2984:
 	bl sub_80097E8
-	bl textbox_close
+	bl HideFieldMessageBox
 	ldr r0, =sub_80B2CB0
 	b _080B29E4
 	.pool
@@ -814,7 +814,7 @@ _080B2A42:
 _080B2A4A:
 	bl sub_80097E8
 _080B2A4E:
-	bl textbox_close
+	bl HideFieldMessageBox
 	ldr r0, =gTasks
 	lsls r1, r7, 2
 	adds r1, r7
@@ -1030,7 +1030,7 @@ sub_80B2C30: @ 80B2C30
 	bl sub_80B24F8
 	cmp r0, 0x1
 	beq _080B2C9C
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	bl sub_800A9A8
 	lsls r4, 24
@@ -1047,7 +1047,7 @@ _080B2C5C:
 	ldr r1, =gUnknown_02039B58
 	adds r0, r1
 	lsls r1, r4, 8
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	adds r1, r2
 	lsls r2, r4, 3
 	subs r2, r4
@@ -1059,14 +1059,14 @@ _080B2C5C:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _080B2C7E:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
 	bcc _080B2C5C
 	movs r0, 0
 	bl sub_800B330
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	ldr r0, =gScriptResult
 	adds r1, r5, 0
 	bl task_map_chg_seq_0807EC34
@@ -1082,7 +1082,7 @@ sub_80B2CB0: @ 80B2CB0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B2CDE
@@ -1151,7 +1151,7 @@ sub_80B2D2C: @ 80B2D2C
 	bl sub_80B241C
 	ldrb r0, [r4, 0x12]
 	bl RemoveWindow
-	bl textbox_close
+	bl HideFieldMessageBox
 	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1361,7 +1361,7 @@ _080B2F0C:
 	movs r0, 0
 	mov r8, r0
 	mov r9, r0
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
@@ -1434,7 +1434,7 @@ _080B2FA8:
 	bl DestroyTask
 	b _080B2FC6
 _080B2FB4:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B2FC6
@@ -1706,7 +1706,7 @@ sub_80B3220: @ 80B3220
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080B3248
@@ -1836,7 +1836,7 @@ _080B3338:
 	bl sub_800AC34
 	b _080B3346
 _080B333E:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 _080B3342:
 	cmp r0, 0
@@ -1872,7 +1872,7 @@ _080B3378:
 	lsls r2, 4
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =sub_8036760
+	ldr r0, =CB2_InitBattle
 	bl SetMainCallback2
 	ldr r1, =gMain
 	ldr r0, =sub_80B360C
@@ -1948,13 +1948,13 @@ _080B3444:
 	ldr r1, =gUnknown_020229CC
 	movs r0, 0
 	movs r2, 0x1C
-	bl link_0800A448
+	bl SendBlock
 	movs r0, 0x3
 	strh r0, [r6]
 	b _080B3532
 	.pool
 _080B3458:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	bl sub_800A9D8
 	lsls r4, 24
@@ -1967,7 +1967,7 @@ _080B3458:
 	.pool
 _080B3474:
 	lsls r1, r4, 8
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	adds r0, r5, 0
 	adds r1, r2
 	ldm r1!, {r2,r3,r7}
@@ -1980,11 +1980,11 @@ _080B3474:
 	bl sub_800B524
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	adds r5, 0x1C
 	adds r4, 0x1
 _080B349A:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -2045,7 +2045,7 @@ _080B3504:
 	lsls r3, 4
 	adds r0, r3, 0
 	strh r0, [r1]
-	ldr r0, =sub_8036760
+	ldr r0, =CB2_InitBattle
 	bl SetMainCallback2
 	ldr r1, =gMain
 	ldr r0, =sub_80B360C
@@ -2080,7 +2080,7 @@ _080B3574:
 	beq _080B35F8
 	b _080B35FE
 _080B357A:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r4, 0
@@ -2128,7 +2128,7 @@ _080B35C8:
 	b _080B35FE
 	.pool
 _080B35E0:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B35FE
@@ -2297,13 +2297,13 @@ _080B3750:
 	b _080B37CC
 _080B375A:
 	ldr r0, =gUnknown_08278091
-	bl box_related_two__2
+	bl ShowFieldMessage
 	movs r0, 0x1
 	strh r0, [r5, 0x8]
 	b _080B37CC
 	.pool
 _080B376C:
-	bl sub_809833C
+	bl IsFieldMessageBoxHidden
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B37CC
@@ -2325,7 +2325,7 @@ _080B378C:
 	beq _080B37B2
 	b _080B37CC
 _080B379E:
-	bl textbox_close
+	bl HideFieldMessageBox
 	movs r0, 0
 	strh r0, [r5, 0x8]
 	bl sub_80872C4
@@ -2425,7 +2425,7 @@ _080B3864:
 	b _080B3884
 	.pool
 _080B3870:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B3884
@@ -2657,7 +2657,7 @@ task00_08081A90: @ 80B3A30
 	adds r0, r4, 0
 	bl DestroyTask
 _080B3A62:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B3AA6
@@ -2691,7 +2691,7 @@ sub_80B3AAC: @ 80B3AAC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B3AC4
@@ -2804,7 +2804,7 @@ _080B3B96:
 	strh r0, [r5]
 	b _080B3BB8
 _080B3B9E:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080B3BB8

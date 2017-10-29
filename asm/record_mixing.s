@@ -849,7 +849,7 @@ _080E745A:
 	strh r0, [r5, 0x20]
 	b _080E7566
 _080E7464:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080E746E
@@ -1066,7 +1066,7 @@ sub_80E7630: @ 80E7630
 	ldr r1, =gTasks
 	adds r0, r1
 	mov r10, r0
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -1135,7 +1135,7 @@ _080E76DC:
 	bl memcpy
 _080E76E4:
 	mov r0, r8
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	mov r0, r9
 	lsls r1, r0, 1
 	adds r1, r5, r1
@@ -1162,7 +1162,7 @@ _080E7714:
 	lsrs r0, 24
 	mov r8, r0
 _080E771C:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r8, r0
@@ -1179,7 +1179,7 @@ _080E771C:
 	adds r1, 0x1
 	strh r1, [r0, 0x8]
 _080E773E:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, [sp, 0x8]
@@ -1302,7 +1302,7 @@ sub_80E7810: @ 80E7810
 sub_80E7820: @ 80E7820
 	lsls r0, 24
 	lsrs r0, 16
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	adds r0, r1
 	bx lr
 	.pool
@@ -1312,7 +1312,7 @@ sub_80E7820: @ 80E7820
 sub_80E7830: @ 80E7830
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -1341,7 +1341,7 @@ _080E7856:
 	.pool
 _080E7868:
 	movs r0, 0
-	bl sub_800A2A4
+	bl GetLinkPlayerTrainerId
 	adds r2, r0, 0
 	movs r0, 0x1
 	ands r2, r0
@@ -1362,7 +1362,7 @@ _080E7880:
 	.pool
 _080E7894:
 	movs r0, 0
-	bl sub_800A2A4
+	bl GetLinkPlayerTrainerId
 	movs r1, 0x9
 	bl __umodsi3
 	adds r2, r0, 0
@@ -1523,7 +1523,7 @@ _080E79CE:
 	adds r4, r1, 0
 	adds r4, 0x20
 	adds r0, r4, 0
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _080E79F2
 	adds r0, r4, 0
@@ -1738,7 +1738,7 @@ sub_80E7B60: @ 80E7B60
 	ldr r0, =gLinkPlayers
 	ldrh r0, [r0, 0x4]
 	bl SeedRng2
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
@@ -1878,7 +1878,7 @@ _080E7C9A:
 	bne _080E7CEE
 	adds r0, r5, 0
 	adds r0, 0x24
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _080E7CBA
 	adds r0, r5, 0
@@ -1901,7 +1901,7 @@ _080E7CC6:
 	adds r4, r0, 0
 	adds r0, r5, 0
 	adds r0, 0x2C
-	bl sub_8009228
+	bl IsStringJapanese
 	cmp r0, 0
 	beq _080E7CE2
 	ldrb r0, [r4]
@@ -1931,7 +1931,7 @@ _080E7CFA:
 	lsrs r0, 16
 	mov r8, r0
 _080E7D04:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r8, r0
@@ -2266,7 +2266,7 @@ sub_80E7F68: @ 80E7F68
 	bne _080E7FE4
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_80D6D1C
+	bl CheckPCHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E7FE4
@@ -2368,7 +2368,7 @@ _080E807C:
 	bl sub_800AC34
 	b _080E80F2
 _080E8090:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080E810A
@@ -3557,7 +3557,7 @@ sub_80E89AC: @ 80E89AC
 	adds r6, r0, 0
 	mov r8, r1
 	mov r9, r2
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

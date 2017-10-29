@@ -370,7 +370,7 @@ sub_81DA10C: @ 81DA10C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02039F2C
+	ldr r0, =gScriptContestCategory
 	ldrb r0, [r0]
 	bl sub_80DB09C
 	ldr r1, =sub_80FCF40
@@ -469,7 +469,7 @@ _081DA1EC:
 	ldr r0, =gUnknown_02039E00
 	adds r4, r0
 	lsls r1, r5, 8
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	adds r1, r0
 	adds r0, r4, 0
 	movs r2, 0x40
@@ -554,7 +554,7 @@ _081DA2AC:
 	cmp r0, 0
 	beq _081DA2D4
 	ldr r0, =gRngValue
-	ldr r4, =gUnknown_020223C4
+	ldr r4, =gBlockRecvBuffer
 	adds r1, r4, 0
 	movs r2, 0x4
 	bl memcpy
@@ -641,7 +641,7 @@ _081DA35A:
 	mov r0, r8
 	adds r0, 0xA
 	adds r3, r5, r0
-	ldr r4, =gUnknown_020223C4
+	ldr r4, =gBlockRecvBuffer
 	mov r2, sp
 	movs r5, 0x80
 	lsls r5, 1
@@ -744,7 +744,7 @@ _081DA42A:
 	mov r0, r8
 	adds r0, 0x2
 	adds r3, r5, r0
-	ldr r4, =gUnknown_020223C4
+	ldr r4, =gBlockRecvBuffer
 	mov r2, sp
 	movs r5, 0x80
 	lsls r5, 1
@@ -849,7 +849,7 @@ _081DA50C:
 	lsls r0, r3, 6
 	ldr r5, =gUnknown_02039E00
 	adds r0, r5
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	movs r2, 0x4
 	subs r2, r3
 	lsls r2, 6

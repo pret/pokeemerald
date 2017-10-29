@@ -6,8 +6,8 @@
 	.text
 
     
-	thumb_func_start sub_8056F28
-sub_8056F28: @ 8056F28
+	thumb_func_start AllocateBattleResrouces
+AllocateBattleResrouces: @ 8056F28
 	push {r4-r6,lr}
 	ldr r5, =gBattleResources
 	ldr r6, =gBattleTypeFlags
@@ -59,13 +59,13 @@ _08056F3E:
 	bl AllocZeroed
 	ldr r1, [r5]
 	str r0, [r1, 0x1C]
-	ldr r4, =gUnknown_020244A0
+	ldr r4, =gLinkBattleSendBuffer
 	movs r5, 0x80
 	lsls r5, 5
 	adds r0, r5, 0
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r4, =gUnknown_020244A4
+	ldr r4, =gLinkBattleRecvBuffer
 	adds r0, r5, 0
 	bl AllocZeroed
 	str r0, [r4]
@@ -102,10 +102,10 @@ _08056FFA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8056F28
+	thumb_func_end AllocateBattleResrouces
 
-	thumb_func_start sub_8057028
-sub_8057028: @ 8057028
+	thumb_func_start FreeBattleResources
+FreeBattleResources: @ 8057028
 	push {r4-r6,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -160,11 +160,11 @@ _0805703C:
 	str r5, [r0, 0x1C]
 	bl Free
 	str r5, [r6]
-	ldr r4, =gUnknown_020244A0
+	ldr r4, =gLinkBattleSendBuffer
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
-	ldr r4, =gUnknown_020244A4
+	ldr r4, =gLinkBattleRecvBuffer
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
@@ -181,10 +181,10 @@ _080570D0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8057028
+	thumb_func_end FreeBattleResources
 
-	thumb_func_start sub_80570F4
-sub_80570F4: @ 80570F4
+	thumb_func_start AdjustFriendshipOnBattleFaint
+AdjustFriendshipOnBattleFaint: @ 80570F4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -195,11 +195,11 @@ sub_80570F4: @ 80570F4
 	cmp r0, 0
 	beq _08057140
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x3
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r2, =gBattleMons
@@ -220,7 +220,7 @@ sub_80570F4: @ 80570F4
 	.pool
 _08057140:
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0805714A:
@@ -285,7 +285,7 @@ _080571CE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80570F4
+	thumb_func_end AdjustFriendshipOnBattleFaint
 
 	thumb_func_start sub_80571DC
 sub_80571DC: @ 80571DC
@@ -414,7 +414,7 @@ _0805729A:
 	ldr r1, =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	bl b_movescr_stack_push_cursor
+	bl BattleScriptPushCursor
 	movs r0, 0x1
 	mov r2, r10
 	strb r0, [r2, 0x5]
@@ -474,7 +474,7 @@ _08057354:
 	ldr r1, =0xf7ffffff
 	ands r0, r1
 	str r0, [r2]
-	bl b_movescr_stack_push_cursor
+	bl BattleScriptPushCursor
 	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
@@ -523,7 +523,7 @@ _080573D4:
 	negs r1, r1
 	ands r0, r1
 	str r0, [r4]
-	bl b_movescr_stack_push_cursor
+	bl BattleScriptPushCursor
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =BattleScript_MoveUsedUnfroze
 	str r0, [r1]
@@ -562,7 +562,7 @@ _08057406:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl EmitSetAttributes
+	bl EmitSetMonData
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _08057430:

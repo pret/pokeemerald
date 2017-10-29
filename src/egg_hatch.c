@@ -59,13 +59,13 @@ extern u8* GetMonNick(struct Pokemon* mon, u8* dst);
 extern u8* GetBoxMonNick(struct BoxPokemon* boxMon, u8* dst);
 extern u8 sav1_map_get_name(void);
 extern s8 sub_8198C58(void);
-extern void sub_81DB5E8(u8* str1, u8* str2, u8);
+extern void TVShowConvertInternationalString(u8* str1, u8* str2, u8);
 extern void sub_806A068(u16, u8);
 extern void fade_screen(u8, u8);
 extern void overworld_free_bg_tilemaps(void);
 extern void sub_80AF168(void);
-extern void init_uns_table_pokemon_copy(void);
-extern void sub_805F094(void);
+extern void AllocateMonSpritesGfx(void);
+extern void FreeMonSpritesGfx(void);
 extern void remove_some_task(void);
 extern void reset_temp_tile_data_buffers(void);
 extern void c2_exit_to_overworld_2_switch(void);
@@ -404,8 +404,8 @@ static bool8 sub_807158C(struct DaycareData* daycare, u8 daycareId)
             || StringCompareWithoutExtCtrlCodes(gSaveBlock2Ptr->playerName, daycareMon->OT_name) != 0))
     {
         StringCopy(gStringVar1, nick);
-        sub_81DB5E8(gStringVar2, daycareMon->OT_name, daycareMon->language_maybe);
-        sub_81DB5E8(gStringVar3, daycareMon->monName, daycareMon->unknown);
+        TVShowConvertInternationalString(gStringVar2, daycareMon->OT_name, daycareMon->language_maybe);
+        TVShowConvertInternationalString(gStringVar3, daycareMon->monName, daycareMon->unknown);
         return TRUE;
     }
     return FALSE;
@@ -439,7 +439,7 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
             u16 species = GetMonData(mon, MON_DATA_SPECIES);
             u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
             HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
-                                                      gBattleSpritesGfx->sprites[(a0 * 2) + 1],
+                                                      gMonSpritesGfxPtr->sprites[(a0 * 2) + 1],
                                                       species, pid);
             LoadCompressedObjectPalette(sub_806E794(mon));
             *speciesLoc = species;
@@ -462,7 +462,7 @@ static void VBlankCB_EggHatch(void)
     TransferPlttBuffer();
 }
 
-static void EggHatch(void)
+void EggHatch(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_EggHatch, 10);
@@ -488,7 +488,7 @@ static void CB2_EggHatch_0(void)
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
 
         sEggHatchData = Alloc(sizeof(struct EggHatchData));
-        init_uns_table_pokemon_copy();
+        AllocateMonSpritesGfx();
         sEggHatchData->eggPartyID = gSpecialVar_0x8004;
         sEggHatchData->eggShardVelocityID = 0;
 
@@ -570,7 +570,7 @@ static void CB2_EggHatch_0(void)
 static void EggHatchSetMonNickname(void)
 {
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
-    sub_805F094();
+    FreeMonSpritesGfx();
     Free(sEggHatchData);
     SetMainCallback2(c2_exit_to_overworld_2_switch);
 }
@@ -691,7 +691,7 @@ static void CB2_EggHatch_1(void)
     case 12:
         if (!gPaletteFade.active)
         {
-            sub_805F094();
+            FreeMonSpritesGfx();
             RemoveWindow(sEggHatchData->windowId);
             UnsetBgTilemapBuffer(0);
             UnsetBgTilemapBuffer(1);

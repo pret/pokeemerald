@@ -291,7 +291,7 @@ sub_809EB04: @ 809EB04
 	lsrs r5, 24
 	ldr r0, =gUnknown_085104C4
 	bl LoadSpritePalette
-	ldr r0, =gUnknown_085104F0
+	ldr r0, =gSpriteTemplate_85104F0
 	mov r8, r0
 	movs r1, 0x35
 	movs r2, 0x44
@@ -655,7 +655,7 @@ sub_809EDE8: @ 809EDE8
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, =gUnknown_0851041C
+	ldr r1, =gUnknown_08510420 - 0x4
 	adds r2, r0, r1
 	ldr r1, =gMain
 	ldrh r3, [r1, 0x2E]

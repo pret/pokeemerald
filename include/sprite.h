@@ -212,14 +212,14 @@ struct Sprite
              u16 flags_5:1;             //0x20
              u16 flags_6:1;             //0x40
              u16 flags_7:1;             //0x80
-    /*0x3F*/ u16 hFlip:1;
-             u16 vFlip:1;
-             u16 animBeginning:1;
-             u16 affineAnimBeginning:1;
-             u16 animEnded:1;
-             u16 affineAnimEnded:1;
-             u16 usingSheet:1;
-             u16 flags_f:1;
+    /*0x3F*/ u16 hFlip:1;               //1
+             u16 vFlip:1;               //2
+             u16 animBeginning:1;       //4
+             u16 affineAnimBeginning:1; //8
+             u16 animEnded:1;           //0x10
+             u16 affineAnimEnded:1;     //0x20
+             u16 usingSheet:1;          //0x40
+             u16 flags_f:1;             //0x80
 
     /*0x40*/ u16 sheetTileStart;
 
@@ -251,7 +251,7 @@ void BuildOamBuffer(void);
 u8 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 u8 CreateInvisibleSprite(void (*callback)(struct Sprite *));
-u8 CreateSpriteAndAnimate(struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
+u8 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 void DestroySprite(struct Sprite *sprite);
 void ResetOamRange(u8 a, u8 b);
 void LoadOam(void);

@@ -4,7 +4,7 @@
 	.section script_data, "aw", %progbits
 
 	.align 2
-gUnknown_082DBD08:: @ 82DBD08
+gBattlescriptsForBallThrow:: @ 82DBD08
 	.4byte gUnknown_082DBD68
 	.4byte gUnknown_082DBD68
 	.4byte gUnknown_082DBD68
@@ -29,11 +29,11 @@ gUnknown_082DBD3C:: @ 82DBD3C
 	.4byte gUnknown_082DBE91
 
 	.align 2
-gUnknown_082DBD54:: @ 82DBD54
-	.4byte gUnknown_082DBEB3
+gBattlescriptsForRunningByItem:: @ 82DBD54
+	.4byte BattleScript_RunByUsingItem
 
 	.align 2
-gUnknown_082DBD58:: @ 82DBD58
+gBattlescriptsForSafariActions:: @ 82DBD58
 	.4byte gUnknown_082DBEBD
 	.4byte gUnknown_082DBEC4
 	.4byte gUnknown_082DBECD
@@ -45,16 +45,16 @@ gUnknown_082DBD68:: @ 82DBD68
 gUnknown_082DBD7E:: @ 82DBD7E
 	.incbin "baserom.gba", 0x2dbd7e, 0x6
 
-gUnknown_082DBD84:: @ 82DBD84
+BattleScript_SuccessBallThrow:: @ 82DBD84
 	.incbin "baserom.gba", 0x2dbd84, 0x46
 
-gUnknown_082DBDCA:: @ 82DBDCA
+BattleScript_WallyBallThrow:: @ 82DBDCA
 	.incbin "baserom.gba", 0x2dbdca, 0xa
 
-gUnknown_082DBDD4:: @ 82DBDD4
+BattleScript_ShakeBallThrow:: @ 82DBDD4
 	.incbin "baserom.gba", 0x2dbdd4, 0x2e
 
-gUnknown_082DBE02:: @ 82DBE02
+BattleScript_TrainerBallBlock:: @ 82DBE02
 	.incbin "baserom.gba", 0x2dbe02, 0x10
 
 gUnknown_082DBE12:: @ 82DBE12
@@ -72,7 +72,7 @@ gUnknown_082DBE6F:: @ 82DBE6F
 gUnknown_082DBE91:: @ 82DBE91
 	.incbin "baserom.gba", 0x2dbe91, 0x22
 
-gUnknown_082DBEB3:: @ 82DBEB3
+BattleScript_RunByUsingItem:: @ 82DBEB3
 	.incbin "baserom.gba", 0x2dbeb3, 0xA
 
 gUnknown_082DBEBD:: @ 82DBEBD

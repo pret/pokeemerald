@@ -31,6 +31,7 @@ extern struct BagPocket gBagPockets[];
 
 void GetBerryCountString(u8* dst, const u8* berryName, u32 quantity);
 void CopyItemName(u16 itemId, u8 *string);
+void CopyItemNameHandlePlural(u16 itemId, u8 *string, u32 quantity);
 bool8 IsBagPocketNonEmpty(u8 pocket);
 bool8 CheckBagHasItem(u16 itemId, u16 count);
 bool8 CheckBagHasSpace(u16 itemId, u16 count);
@@ -58,5 +59,6 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
+u16 itemid_get_market_price(u16 itemId);
 
 #endif // ITEM_H

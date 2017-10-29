@@ -22,4 +22,6 @@ extern u16 gUnknown_03005DE8;
 
 // Exported ROM declarations
 
+void DrawWholeMapView(void);
+
 #endif //GUARD_FIELD_CAMERA_H

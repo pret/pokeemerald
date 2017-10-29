@@ -1,5 +1,19 @@
 SHELL := /bin/bash -o pipefail
 
+ROM := pokeemerald.gba
+OBJ_DIR := build/emerald
+
+ELF = $(ROM:.gba=.elf)
+MAP = $(ROM:.gba=.map)
+
+C_SUBDIR = src
+ASM_SUBDIR = asm
+DATA_ASM_SUBDIR = data
+
+C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
+ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
+DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
+
 AS      := $(DEVKITARM)/bin/arm-none-eabi-as
 ASFLAGS := -mcpu=arm7tdmi
 
@@ -10,7 +24,7 @@ CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
-LDFLAGS := -T ld_script.ld -Map pokeemerald.map
+LDFLAGS = -Map ../../$(MAP)
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
@@ -20,7 +34,7 @@ SHA1 := sha1sum -c
 
 GFX := tools/gbagfx/gbagfx
 AIF := tools/aif2pcm/aif2pcm
-MID := tools/mid2agb/mid2agb
+MID := $(abspath tools/mid2agb/mid2agb)
 SCANINC := tools/scaninc/scaninc
 PREPROC := tools/preproc/preproc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
@@ -35,19 +49,19 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen
 
 .PHONY: rom clean compare tidy
 
-C_SRCS := $(wildcard src/*.c)
-C_OBJS := $(C_SRCS:%.c=%.o)
+$(shell mkdir -p $(C_BUILDDIR) $(ASM_BUILDDIR) $(DATA_ASM_BUILDDIR))
 
-ASM_SRCS := $(wildcard asm/*.s)
-ASM_OBJS := $(ASM_SRCS:%.s=%.o)
+C_SRCS := $(wildcard $(C_SUBDIR)/*.c)
+C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
-DATA_ASM_SRCS := $(wildcard data/*.s)
-DATA_ASM_OBJS := $(DATA_ASM_SRCS:%.s=%.o)
+ASM_SRCS := $(wildcard $(ASM_SUBDIR)/*.s)
+ASM_OBJS := $(patsubst $(ASM_SUBDIR)/%.s,$(ASM_BUILDDIR)/%.o,$(ASM_SRCS))
+
+DATA_ASM_SRCS := $(wildcard $(DATA_ASM_SUBDIR)/*.s)
+DATA_ASM_OBJS := $(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o,$(DATA_ASM_SRCS))
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
-
-ROM := pokeemerald.gba
-ELF := $(ROM:.gba=.elf)
+OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
 rom: $(ROM)
 
@@ -59,8 +73,8 @@ clean: tidy
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 
 tidy:
-	rm -f ld_script.ld sym_bss.ld sym_common.ld sym_ewram.ld
-	rm -f $(ROM) $(ELF) $(OBJS) $(C_SRCS:%.c=%.i) pokeemerald.map
+	rm -f $(ROM) $(ELF) $(MAP)
+	rm -r build/*
 
 include graphics_file_rules.mk
 
@@ -75,56 +89,62 @@ include graphics_file_rules.mk
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
 
-src/libc.o: CC1 := tools/agbcc/bin/old_agbcc
-src/libc.o: CFLAGS := -O2
+$(C_BUILDDIR)/libc.o: CC1 := tools/agbcc/bin/old_agbcc
+$(C_BUILDDIR)/libc.o: CFLAGS := -O2
 
-src/siirtc.o: CFLAGS := -mthumb-interwork
+$(C_BUILDDIR)/siirtc.o: CFLAGS := -mthumb-interwork
 
-src/agb_flash.o: CFLAGS := -O -mthumb-interwork
-src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
-src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
+$(C_BUILDDIR)/agb_flash.o: CFLAGS := -O -mthumb-interwork
+$(C_BUILDDIR)/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
+$(C_BUILDDIR)/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 
-src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
-src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
-
-ifeq ($(NODEP),)
-%.o: c_dep = $(shell $(SCANINC) $*.c)
-else
-%.o: c_dep :=
-endif
-
-$(C_OBJS): %.o : %.c $$(c_dep)
-	@$(CPP) $(CPPFLAGS) $< -o $*.i
-	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
-	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
-	$(AS) $(ASFLAGS) -o $@ $*.s
+$(C_BUILDDIR)/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+$(C_BUILDDIR)/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
 ifeq ($(NODEP),)
-%.o: asm_dep = $(shell $(SCANINC) $*.s)
+$(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I include $(C_SUBDIR)/$*.c)
 else
-%.o: asm_dep :=
+$(C_BUILDDIR)/%.o: c_dep :=
 endif
 
-$(ASM_OBJS): %.o: %.s $$(asm_dep)
+$(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
+	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
+	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
+	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
+	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
+
+ifeq ($(NODEP),)
+$(ASM_BUILDDIR)/%.o: asm_dep = $(shell $(SCANINC) $(ASM_SUBDIR)/$*.s)
+else
+$(ASM_BUILDDIR)/%.o: asm_dep :=
+endif
+
+$(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s $$(asm_dep)
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(DATA_ASM_OBJS): %.o: %.s $$(asm_dep)
+ifeq ($(NODEP),)
+$(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) $(DATA_ASM_SUBDIR)/$*.s)
+else
+$(DATA_ASM_BUILDDIR)/%.o: data_dep :=
+endif
+
+$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s $$(data_dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
-sym_bss.ld: sym_bss.txt
-	$(RAMSCRGEN) .bss sym_bss.txt ENGLISH >$@
+$(OBJ_DIR)/sym_bss.ld: sym_bss.txt
+	$(RAMSCRGEN) .bss $< ENGLISH > $@
 
-sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
-	$(RAMSCRGEN) COMMON sym_common.txt ENGLISH -c src,common_syms >$@
+$(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
+	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
 
-sym_ewram.ld: sym_ewram.txt
-	$(RAMSCRGEN) ewram_data sym_ewram.txt ENGLISH >$@
+$(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
+	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
-ld_script.ld: ld_script.txt sym_bss.ld sym_common.ld sym_ewram.ld
-	sed -f ld_script.sed ld_script.txt >ld_script.ld
+$(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
+	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../../$< | sed "s#tools/#../../tools/#g" | sed "s#sound/#../../sound/#g" > ld_script.ld
 
-$(ELF): ld_script.ld $(OBJS)
-	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LIBGCC)
+$(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
+	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) ../../$(LIBGCC)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@

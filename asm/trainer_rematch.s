@@ -185,7 +185,7 @@ _081DA6D4:
 	adds r0, r1
 	adds r0, r6
 	ldrh r0, [r0]
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA6F0

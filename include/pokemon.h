@@ -30,7 +30,7 @@
 #define MON_DATA_HP_EV             26
 #define MON_DATA_ATK_EV            27
 #define MON_DATA_DEF_EV            28
-#define MON_DATA_SPD_EV            29
+#define MON_DATA_SPEED_EV          29
 #define MON_DATA_SPATK_EV          30
 #define MON_DATA_SPDEF_EV          31
 #define MON_DATA_FRIENDSHIP        32
@@ -43,7 +43,7 @@
 #define MON_DATA_HP_IV             39
 #define MON_DATA_ATK_IV            40
 #define MON_DATA_DEF_IV            41
-#define MON_DATA_SPD_IV            42
+#define MON_DATA_SPEED_IV          42
 #define MON_DATA_SPATK_IV          43
 #define MON_DATA_SPDEF_IV          44
 #define MON_DATA_IS_EGG            45
@@ -62,7 +62,7 @@
 #define MON_DATA_MAX_HP            58
 #define MON_DATA_ATK               59
 #define MON_DATA_DEF               60
-#define MON_DATA_SPD               61
+#define MON_DATA_SPEED             61
 #define MON_DATA_SPATK             62
 #define MON_DATA_SPDEF             63
 #define MON_DATA_MAIL              64
@@ -87,7 +87,7 @@
 #define MON_DATA_RIBBONS           83
 #define MON_DATA_ATK2              84
 #define MON_DATA_DEF2              85
-#define MON_DATA_SPD2              86
+#define MON_DATA_SPEED2            86
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
@@ -125,6 +125,8 @@
 #define TYPE_ICE      0x0f
 #define TYPE_DRAGON   0x10
 #define TYPE_DARK     0x11
+
+#define NUMBER_OF_MON_TYPES     0x12
 
 #define PARTY_SIZE 6
 #define MAX_TOTAL_EVS 510
@@ -333,6 +335,8 @@ struct UnknownPokemonStruct
     u8 friendship;
 };
 
+#define BATTLE_STATS_NO 8
+
 struct BattlePokemon
 {
     /*0x00*/ u16 species;
@@ -350,7 +354,7 @@ struct BattlePokemon
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 isEgg:1;
     /*0x17*/ u32 altAbility:1;
-    /*0x18*/ s8 statStages[8];
+    /*0x18*/ s8 statStages[BATTLE_STATS_NO];
     /*0x20*/ u8 ability;
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;
@@ -435,7 +439,7 @@ struct BattleMove
     u8 pp;
     u8 secondaryEffectChance;
     u8 target;
-    u8 priority;
+    s8 priority;
     u8 flags;
 };
 
@@ -443,6 +447,7 @@ struct BattleMove
 #define FLAG_PROTECT_AFFECTED       0x2
 #define FLAG_MAGICCOAT_AFFECTED     0x4
 #define FLAG_SNATCH_AFFECTED        0x8
+#define FLAG_MIRROR_MOVE_AFFECTED   0x10
 #define FLAG_KINGSROCK_AFFECTED     0x20
 
 struct SpindaSpot
@@ -520,6 +525,7 @@ extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
 extern const u16 *const gLevelUpLearnsets[];
 
+u8 CountAliveMonsInBattle(u8 caseId);
 #define BATTLE_ALIVE_EXCEPT_ACTIVE  0
 #define BATTLE_ALIVE_ATK_SIDE       1
 #define BATTLE_ALIVE_DEF_SIDE       2
@@ -620,8 +626,28 @@ bool8 IsPokeSpriteNotFlipped(u16 species);
 bool8 IsMonShiny(struct Pokemon *mon);
 bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 
+void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
+bool8 IsTradedMon(struct Pokemon *mon);
+void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
+s32 sub_806D864(u16 a1);
+bool16 sub_806D82C(u8 id);
+u16 MonTryLearningNewMove(struct Pokemon* mon, bool8);
+void sub_8068AA4(void); // sets stats for deoxys
+bool8 HasTwoFramesAnimation(u16 species);
+u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem);
+void RandomlyGivePartyPokerus(struct Pokemon *party);
+u8 CheckPartyPokerus(struct Pokemon *party, u8 selection);
+u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
+void UpdatePartyPokerusTime(u16 days);
+void PartySpreadPokerus(struct Pokemon *party);
+s8 GetMonFlavourRelation(struct Pokemon *mon, u8 a2);
+s8 GetFlavourRelationByPersonality(u32 personality, u8 a2);
+u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit);
+
 #include "sprite.h"
 
 void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
+void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
+void BattleAnimateBackSprite(struct Sprite* sprite, u16 species);
 
 #endif // GUARD_POKEMON_H

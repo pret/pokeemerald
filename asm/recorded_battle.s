@@ -95,7 +95,7 @@ sub_8184E58: @ 8184E58
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08184EA0
-	ldr r1, =gUnknown_0203BD2C
+	ldr r1, =gRecordedBattleRngSeed
 	ldr r0, =gRngValue
 	ldr r0, [r0]
 	str r0, [r1]
@@ -112,7 +112,7 @@ _08184EA0:
 	cmp r0, 0x2
 	bne _08184EAC
 	ldr r0, =gRngValue
-	ldr r1, =gUnknown_0203BD2C
+	ldr r1, =gRecordedBattleRngSeed
 	ldr r1, [r1]
 	str r1, [r0]
 _08184EAC:
@@ -125,7 +125,7 @@ _08184EAC:
 	bl GetMultiplayerId
 	ldr r1, =gUnknown_0203C7B4
 	strb r0, [r1]
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -236,8 +236,8 @@ _08184FA0:
 	.pool
 	thumb_func_end sub_8184E58
 
-	thumb_func_start sub_8184FBC
-sub_8184FBC: @ 8184FBC
+	thumb_func_start RecordedBattle_SetBankAction
+RecordedBattle_SetBankAction: @ 8184FBC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -269,10 +269,10 @@ _08184FF0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8184FBC
+	thumb_func_end RecordedBattle_SetBankAction
 
-	thumb_func_start sub_8185008
-sub_8185008: @ 8185008
+	thumb_func_start RecordedBattle_ClearBankAction
+RecordedBattle_ClearBankAction: @ 8185008
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -310,7 +310,7 @@ _08185046:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8185008
+	thumb_func_end RecordedBattle_ClearBankAction
 
 	thumb_func_start sub_8185054
 sub_8185054: @ 8185054
@@ -348,7 +348,7 @@ _0818507A:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, =sub_80384E4
+	ldr r0, =CB2_QuitRecordedBattle
 	bl SetMainCallback2
 	movs r0, 0xFF
 	b _081850C6
@@ -505,7 +505,7 @@ _081851D0:
 	adds r4, 0x1C
 	adds r5, 0x1
 _081851DA:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -681,8 +681,8 @@ _08185332:
 	bx r1
 	thumb_func_end sub_81852F0
 
-	thumb_func_start sub_8185338
-sub_8185338: @ 8185338
+	thumb_func_start MoveRecordedBattleToSaveData
+MoveRecordedBattleToSaveData: @ 8185338
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -779,7 +779,7 @@ _081853BA:
 	movs r4, 0x9D
 	lsls r4, 3
 	adds r1, r7, r4
-	ldr r5, =gUnknown_0203BD2C
+	ldr r5, =gRecordedBattleRngSeed
 	ldr r0, [r5]
 	str r0, [r1]
 	ldr r0, =gUnknown_0203C7B8
@@ -1469,7 +1469,7 @@ _08185A14:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8185338
+	thumb_func_end MoveRecordedBattleToSaveData
 
 	thumb_func_start sub_8185A54
 sub_8185A54: @ 8185A54
@@ -1576,7 +1576,7 @@ sub_8185B1C: @ 8185B1C
 	ldr r0, =gMain
 	ldr r1, =sub_8185AB0
 	str r1, [r0, 0x8]
-	ldr r0, =sub_8036760
+	ldr r0, =CB2_InitBattle
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1701,7 +1701,7 @@ _08185C2A:
 	adds r6, 0x1
 	cmp r6, 0x3
 	ble _08185BBE
-	ldr r1, =gUnknown_0203BD2C
+	ldr r1, =gRecordedBattleRngSeed
 	movs r3, 0x9D
 	lsls r3, 3
 	adds r0, r7, r3
@@ -2212,7 +2212,7 @@ _081860C2:
 	ldr r1, [sp, 0x4C]
 	lsrs r0, r1, 24
 	movs r1, 0x6
-	bl sub_8184FBC
+	bl RecordedBattle_SetBankAction
 	movs r5, 0
 	ldr r2, =gUnknown_0203CC70
 	mov r8, r2
@@ -2241,7 +2241,7 @@ _081860F0:
 	lsrs r1, 24
 	ldr r2, [sp, 0x4C]
 	lsrs r0, r2, 24
-	bl sub_8184FBC
+	bl RecordedBattle_SetBankAction
 	b _08186118
 	.pool
 _08186110:
@@ -2655,8 +2655,8 @@ sub_8186444: @ 8186444
 	.pool
 	thumb_func_end sub_8186444
 
-	thumb_func_start rfu_lacks_rfufunc
-rfu_lacks_rfufunc: @ 8186450
+	thumb_func_start sub_8186450
+sub_8186450: @ 8186450
 	push {lr}
 	movs r1, 0
 	ldr r0, =gUnknown_0203CCD0
@@ -2669,7 +2669,7 @@ _0818645E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end rfu_lacks_rfufunc
+	thumb_func_end sub_8186450
 
 	thumb_func_start sub_8186468
 sub_8186468: @ 8186468

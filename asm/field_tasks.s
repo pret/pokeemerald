@@ -46,7 +46,7 @@ _0809D8CA:
 	ands r0, r1
 	cmp r0, 0
 	beq _0809D8FC
-	bl sub_809E7B0
+	bl DoTimeBasedEvents
 	ldrh r0, [r4]
 	adds r0, 0x1
 	b _0809D8FA
@@ -144,8 +144,8 @@ _0809D992:
 	.pool
 	thumb_func_end overworld_ensure_per_step_coros_running
 
-	thumb_func_start activate_per_step_callback
-activate_per_step_callback: @ 809D9A8
+	thumb_func_start ActivatePerStepCallback
+ActivatePerStepCallback: @ 809D9A8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -180,7 +180,7 @@ _0809D9EA:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end activate_per_step_callback
+	thumb_func_end ActivatePerStepCallback
 
 	thumb_func_start wild_encounter_reset_coro_args
 wild_encounter_reset_coro_args: @ 809D9F0
@@ -221,7 +221,7 @@ sub_809DA30: @ 809DA30
 	lsls r1, 24
 	lsrs r4, r1, 24
 	adds r0, r4, 0
-	bl sub_8089764
+	bl MetatileBehavior_IsPacifilogVerticalLog1
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DA48
@@ -229,7 +229,7 @@ sub_809DA30: @ 809DA30
 	b _0809DA80
 _0809DA48:
 	adds r0, r4, 0
-	bl sub_8089778
+	bl MetatileBehavior_IsPacifilogVerticalLog2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DA5A
@@ -238,7 +238,7 @@ _0809DA48:
 	b _0809DA80
 _0809DA5A:
 	adds r0, r4, 0
-	bl sub_808978C
+	bl MetatileBehavior_IsPacifilogHorizontalLog1
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DA6C
@@ -247,7 +247,7 @@ _0809DA5A:
 	b _0809DA80
 _0809DA6C:
 	adds r0, r4, 0
-	bl sub_80897A0
+	bl MetatileBehavior_IsPacifilogHorizontalLog2
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809DA7C
@@ -414,7 +414,7 @@ sub_809DB7C: @ 809DB7C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8089764
+	bl MetatileBehavior_IsPacifilogVerticalLog1
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DBC0
@@ -427,7 +427,7 @@ _0809DBBC:
 	b _0809DC08
 _0809DBC0:
 	adds r0, r4, 0
-	bl sub_8089778
+	bl MetatileBehavior_IsPacifilogVerticalLog2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DBD8
@@ -439,7 +439,7 @@ _0809DBC0:
 	b _0809DBBC
 _0809DBD8:
 	adds r0, r4, 0
-	bl sub_808978C
+	bl MetatileBehavior_IsPacifilogHorizontalLog1
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DBF0
@@ -451,7 +451,7 @@ _0809DBD8:
 	b _0809DBBC
 _0809DBF0:
 	adds r0, r4, 0
-	bl sub_80897A0
+	bl MetatileBehavior_IsPacifilogHorizontalLog2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DC06
@@ -496,7 +496,7 @@ sub_809DC18: @ 809DC18
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8089764
+	bl MetatileBehavior_IsPacifilogVerticalLog1
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DC5C
@@ -509,7 +509,7 @@ _0809DC58:
 	b _0809DCA4
 _0809DC5C:
 	adds r0, r4, 0
-	bl sub_8089778
+	bl MetatileBehavior_IsPacifilogVerticalLog2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DC74
@@ -521,7 +521,7 @@ _0809DC5C:
 	b _0809DC58
 _0809DC74:
 	adds r0, r4, 0
-	bl sub_808978C
+	bl MetatileBehavior_IsPacifilogHorizontalLog1
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DC8C
@@ -533,7 +533,7 @@ _0809DC74:
 	b _0809DC58
 _0809DC8C:
 	adds r0, r4, 0
-	bl sub_80897A0
+	bl MetatileBehavior_IsPacifilogHorizontalLog2
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809DCA2
@@ -1326,7 +1326,7 @@ _0809E29A:
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_8089604
+	bl MetatileBehavior_IsThinIce
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1341,7 +1341,7 @@ _0809E29A:
 	.pool
 _0809E2E0:
 	adds r0, r4, 0
-	bl sub_8089618
+	bl MetatileBehavior_IsCrackedIce
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1630,7 +1630,7 @@ _0809E53E:
 	lsls r0, r6, 24
 	lsrs r6, r0, 24
 	adds r0, r6, 0
-	bl sub_8089918
+	bl MetatileBehavior_IsCrackedFloorHole
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809E556
@@ -1658,7 +1658,7 @@ _0809E572:
 	ldrh r0, [r4]
 	strh r0, [r5, 0x6]
 	adds r0, r6, 0
-	bl sub_808992C
+	bl MetatileBehavior_IsCrackedFloor
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809E5D2

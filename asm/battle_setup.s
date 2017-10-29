@@ -41,7 +41,7 @@ _080B062E:
 	cmp r0, 0x1
 	bne _080B0652
 	bl overworld_free_bg_tilemaps
-	ldr r0, =sub_8036760
+	ldr r0, =CB2_InitBattle
 	bl SetMainCallback2
 	bl prev_quest_postbuffer_cursor_backup_reset
 	bl overworld_poison_timer_set
@@ -299,8 +299,8 @@ sub_80B086C: @ 80B086C
 	.pool
 	thumb_func_end sub_80B086C
 
-	thumb_func_start sub_80B08A8
-sub_80B08A8: @ 80B08A8
+	thumb_func_start BattleSetup_StartScriptedWildBattle
+BattleSetup_StartScriptedWildBattle: @ 80B08A8
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r1, =gMain
@@ -323,7 +323,7 @@ sub_80B08A8: @ 80B08A8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80B08A8
+	thumb_func_end BattleSetup_StartScriptedWildBattle
 
 	thumb_func_start sub_80B08EC
 sub_80B08EC: @ 80B08EC
@@ -638,8 +638,8 @@ _080B0BC6:
 	.pool
 	thumb_func_end sub_80B0B6C
 
-	thumb_func_start sub_80B0BD0
-sub_80B0BD0: @ 80B0BD0
+	thumb_func_start BattleSetup_GetTerrainId
+BattleSetup_GetTerrainId: @ 80B0BD0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -704,7 +704,7 @@ _080B0C64:
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8089588
+	bl MetatileBehavior_IsMB_0B
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0C78
@@ -734,7 +734,7 @@ _080B0C9C:
 	lsls r0, r5, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_808962C
+	bl MetatileBehavior_IsDeepOrOceanWater
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B0CF2
@@ -744,7 +744,7 @@ _080B0C9C:
 	cmp r0, 0
 	bne _080B0CE0
 	adds r0, r4, 0
-	bl sub_808959C
+	bl MetatileBehavior_IsMountain
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0CC8
@@ -757,7 +757,7 @@ _080B0CC8:
 	cmp r0, 0
 	beq _080B0CF6
 	adds r0, r4, 0
-	bl sub_80894D4
+	bl MetatileBehavior_GetBridgeSth
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B0CE4
@@ -766,7 +766,7 @@ _080B0CE0:
 	b _080B0D1A
 _080B0CE4:
 	adds r0, r4, 0
-	bl sub_80894AC
+	bl MetatileBehavior_IsBridge
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -798,7 +798,7 @@ _080B0D1A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80B0BD0
+	thumb_func_end BattleSetup_GetTerrainId
 
 	thumb_func_start sub_80B0D24
 sub_80B0D24: @ 80B0D24
@@ -1357,7 +1357,7 @@ sub_80B1158: @ 80B1158
 	movs r1, 0x5
 	movs r2, 0
 	movs r3, 0
-	bl sub_80F9244
+	bl ScriptGiveMon
 	bl ResetTasks
 	bl PlayBattleBGM
 	ldr r0, =sub_80B11A8
@@ -1387,7 +1387,7 @@ sub_80B11A8: @ 80B11A8
 	ldr r0, =sub_80B1204
 	str r0, [r1, 0x8]
 	bl FreeAllWindowBuffers
-	ldr r0, =sub_8036760
+	ldr r0, =CB2_InitBattle
 	bl SetMainCallback2
 	bl prev_quest_postbuffer_cursor_backup_reset
 	bl overworld_poison_timer_set
@@ -1686,9 +1686,9 @@ _080B141A:
 	.pool
 	thumb_func_end battle_80801F0
 
-	thumb_func_start TrainerBattleConfigure
-@ u8 *TrainerBattleConfigure(u8 *args)
-TrainerBattleConfigure: @ 80B1430
+	thumb_func_start BattleSetup_ConfigureTrainerBattle
+@ u8 *BattleSetup_ConfigureTrainerBattle(u8 *args)
+BattleSetup_ConfigureTrainerBattle: @ 80B1430
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl InitTrainerBattleVariables
@@ -1872,7 +1872,7 @@ _080B161E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end TrainerBattleConfigure
+	thumb_func_end BattleSetup_ConfigureTrainerBattle
 
 	thumb_func_start SingleTrainerWantsBattle
 @ void SingleTrainerWantsBattle(u8 trainerFieldObjectId, u8 *trainerScript)
@@ -1892,7 +1892,7 @@ SingleTrainerWantsBattle: @ 80B162C
 	strh r0, [r4]
 	adds r1, 0x1
 	adds r0, r1, 0
-	bl TrainerBattleConfigure
+	bl BattleSetup_ConfigureTrainerBattle
 	ldr r0, =gUnknown_08271354
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -1920,7 +1920,7 @@ TwoTrainersWantBattle: @ 80B1670
 	strh r0, [r4]
 	adds r1, 0x1
 	adds r0, r1, 0
-	bl TrainerBattleConfigure
+	bl BattleSetup_ConfigureTrainerBattle
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2056,8 +2056,8 @@ sub_80B178C: @ 80B178C
 	bx r0
 	thumb_func_end sub_80B178C
 
-	thumb_func_start trainer_flag_check
-trainer_flag_check: @ 80B17A0
+	thumb_func_start HasTrainerAlreadyBeenFought
+HasTrainerAlreadyBeenFought: @ 80B17A0
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xA0
@@ -2069,7 +2069,7 @@ trainer_flag_check: @ 80B17A0
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end trainer_flag_check
+	thumb_func_end HasTrainerAlreadyBeenFought
 
 	thumb_func_start trainer_flag_set
 trainer_flag_set: @ 80B17B8
@@ -2092,13 +2092,13 @@ trainer_flag_clear: @ 80B17CC
 	lsls r1, 19
 	adds r0, r1
 	lsrs r0, 16
-	bl FlagReset
+	bl FlagClear
 	pop {r0}
 	bx r0
 	thumb_func_end trainer_flag_clear
 
-	thumb_func_start sub_80B17E0
-sub_80B17E0: @ 80B17E0
+	thumb_func_start BattleSetup_StartTrainerBattle
+BattleSetup_StartTrainerBattle: @ 80B17E0
 	push {r4,lr}
 	ldr r0, =gUnknown_030060A8
 	ldrb r0, [r0]
@@ -2217,7 +2217,7 @@ _080B190C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80B17E0
+	thumb_func_end BattleSetup_StartTrainerBattle
 
 	thumb_func_start sub_80B1918
 sub_80B1918: @ 80B1918
@@ -2407,14 +2407,14 @@ _080B1AD8:
 	.pool
 _080B1AEC:
 	bl sub_80B1C7C
-	bl box_related_two__2
+	bl ShowFieldMessage
 _080B1AF4:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80B1A14
 
-	thumb_func_start sub_80B1AF8
-sub_80B1AF8: @ 80B1AF8
+	thumb_func_start BattleSetup_GetScriptAddrAfterBattle
+BattleSetup_GetScriptAddrAfterBattle: @ 80B1AF8
 	push {lr}
 	ldr r0, =gUnknown_02038BEC
 	ldr r0, [r0]
@@ -2425,10 +2425,10 @@ _080B1B04:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80B1AF8
+	thumb_func_end BattleSetup_GetScriptAddrAfterBattle
 
-	thumb_func_start sub_80B1B10
-sub_80B1B10: @ 80B1B10
+	thumb_func_start BattleSetup_GetTrainerPostBattleScript
+BattleSetup_GetTrainerPostBattleScript: @ 80B1B10
 	push {lr}
 	ldr r1, =gUnknown_02038BF8
 	ldrb r2, [r1]
@@ -2462,13 +2462,13 @@ _080B1B56:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80B1B10
+	thumb_func_end BattleSetup_GetTrainerPostBattleScript
 
 	thumb_func_start special_trainer_unable_to_battle
 special_trainer_unable_to_battle: @ 80B1B60
 	push {lr}
 	bl sub_80B1D18
-	bl box_related_two__2
+	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	thumb_func_end special_trainer_unable_to_battle
@@ -2617,8 +2617,8 @@ _080B1C96:
 	.pool
 	thumb_func_end sub_80B1C7C
 
-	thumb_func_start sub_80B1CA4
-sub_80B1CA4: @ 80B1CA4
+	thumb_func_start GetTrainer1LoseText
+GetTrainer1LoseText: @ 80B1CA4
 	push {r4,lr}
 	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
@@ -2643,10 +2643,10 @@ _080B1CC0:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80B1CA4
+	thumb_func_end GetTrainer1LoseText
 
-	thumb_func_start sub_80B1CE0
-sub_80B1CE0: @ 80B1CE0
+	thumb_func_start GetTrainer2LoseText
+GetTrainer2LoseText: @ 80B1CE0
 	push {r4,lr}
 	ldr r4, =gStringVar4
 	ldr r0, =gUnknown_02038BE0
@@ -2660,7 +2660,7 @@ sub_80B1CE0: @ 80B1CE0
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80B1CE0
+	thumb_func_end GetTrainer2LoseText
 
 	thumb_func_start sub_80B1D04
 sub_80B1D04: @ 80B1D04
@@ -2796,7 +2796,7 @@ _080B1DCE:
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _080B1DE2
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B1DCA
@@ -2895,7 +2895,7 @@ sub_80B1E94: @ 80B1E94
 	lsls r0, r4, 4
 	adds r0, r5
 	ldrh r0, [r0]
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3076,7 +3076,7 @@ _080B1FE2:
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _080B1FCA
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1FD4
@@ -3127,7 +3127,7 @@ _080B203A:
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _080B201E
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B2028
@@ -3233,7 +3233,7 @@ sub_80B20F4: @ 80B20F4
 	lsls r0, r1, 4
 	adds r0, r4
 	ldrh r0, [r0, 0x2]
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B211E
@@ -3509,7 +3509,7 @@ sub_80B2318: @ 80B2318
 	lsrs r4, r0, 12
 	adds r6, r4, r7
 	ldrh r0, [r6]
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3527,7 +3527,7 @@ _080B2338:
 	adds r4, r6, 0x2
 _080B2346:
 	ldrh r0, [r4]
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B2360

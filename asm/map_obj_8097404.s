@@ -205,8 +205,8 @@ _0809756C:
 	.pool
 	thumb_func_end npc_sync_anim_pause_bits
 
-	thumb_func_start sub_809757C
-sub_809757C: @ 809757C
+	thumb_func_start UnfreezeMapObjects
+UnfreezeMapObjects: @ 809757C
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, =gMapObjects
@@ -231,7 +231,7 @@ _08097598:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_809757C
+	thumb_func_end UnfreezeMapObjects
 
 	thumb_func_start little_step
 @ void little_step(struct obj *object, u8 direction)
@@ -1396,7 +1396,7 @@ oe_exec_and_other_stuff: @ 8097DD0
 	adds r0, r1, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -1434,7 +1434,7 @@ DoRippleFieldEffect: @ 8097E14
 	adds r4, r1, 0
 	ldrb r0, [r0, 0x5]
 	bl GetFieldObjectGraphicsInfo
-	ldr r2, =gFieldEffectSpawnParams
+	ldr r2, =gFieldEffectArguments
 	movs r3, 0x20
 	ldrsh r1, [r4, r3]
 	str r1, [r2]

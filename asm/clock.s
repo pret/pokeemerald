@@ -27,8 +27,8 @@ sub_809E778: @ 809E778
 	.pool
 	thumb_func_end sub_809E778
 
-	thumb_func_start sub_809E7B0
-sub_809E7B0: @ 809E7B0
+	thumb_func_start DoTimeBasedEvents
+DoTimeBasedEvents: @ 809E7B0
 	push {r4,lr}
 	ldr r0, =0x00000895
 	bl FlagGet
@@ -50,7 +50,7 @@ _0809E7DA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_809E7B0
+	thumb_func_end DoTimeBasedEvents
 
 	thumb_func_start sub_809E7E8
 sub_809E7E8: @ 809E7E8

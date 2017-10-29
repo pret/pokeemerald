@@ -2599,10 +2599,10 @@ _0818FFFC:
 	b _081900A4
 	.pool
 _0819002C:
-	ldr r0, =gUnknown_0831ACE8
+	ldr r0, =gTypeEffectiveness
 	adds r1, r6, r0
 	ldrb r0, [r1]
-	ldr r7, =gUnknown_0831ACE8
+	ldr r7, =gTypeEffectiveness
 	cmp r0, 0xFF
 	beq _081900A4
 	adds r4, r1, 0
@@ -2657,7 +2657,7 @@ _08190088:
 _08190096:
 	adds r4, 0x3
 	adds r6, 0x3
-	ldr r1, =gUnknown_0831ACE8
+	ldr r1, =gTypeEffectiveness
 	adds r0, r6, r1
 	ldrb r0, [r0]
 	cmp r0, 0xFF
@@ -3161,31 +3161,31 @@ _0819044E:
 	ldr r0, =gUnknown_0860CEB4
 	bl InitWindows
 	bl DeactivateAllTextPrinters
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E20
+	ldr r0, =gBattle_BG3_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E22
+	ldr r0, =gBattle_BG3_Y
 	strh r4, [r0]
 	mov r2, r9
 	cmp r2, 0x2
 	bne _081904DC
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r4, [r0]
 	b _081904E6
 	.pool
 _081904DC:
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r4, [r0]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 _081904E6:
@@ -4366,27 +4366,27 @@ _08190E98:
 	ldrsh r2, [r0, r5]
 	cmp r2, 0
 	beq _08190ED4
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E1A
+	ldr r1, =gBattle_BG1_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	b _08190EE6
 	.pool
 _08190ED4:
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r2, [r0]
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	movs r0, 0xA0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r2, [r0]
 _08190EE6:
 	cmp r6, 0x1
@@ -4396,9 +4396,9 @@ _08190EE6:
 	ldrb r1, [r0, 0x10]
 	cmp r1, 0
 	bne _08190F50
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r6, 0xA0
 	lsls r6, 1
 	adds r0, r6, 0
@@ -4424,12 +4424,12 @@ _08190EE6:
 	b _08191084
 	.pool
 _08190F50:
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r6, 0x80
 	lsls r6, 1
 	adds r0, r6, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	movs r4, 0
 	strh r4, [r0]
 	ldr r3, =gUnknown_0860D080
@@ -4473,9 +4473,9 @@ _08190F9C:
 	lsrs r0, 24
 	adds r1, 0x11
 	bl sub_8192F08
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r5, [r0]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r3, 0xA0
 	lsls r3, 1
 	adds r0, r3, 0
@@ -4508,10 +4508,10 @@ _08190FF8:
 	lsrs r0, 24
 	adds r1, 0x11
 	bl sub_8192F08
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r2, 0xA0
 	lsls r2, 1
 	adds r0, r2, 0
@@ -4529,12 +4529,12 @@ _08190FF8:
 	b _08191084
 	.pool
 _0819104C:
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r3, 0x80
 	lsls r3, 1
 	adds r0, r3, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, =gTasks
@@ -4765,29 +4765,29 @@ _08191234:
 	ldrsh r2, [r0, r5]
 	cmp r2, 0
 	beq _08191278
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E1A
+	ldr r1, =gBattle_BG1_Y
 	ldr r2, =0x0000ff60
 	adds r0, r2, 0
 	strh r0, [r1]
 	b _0819128C
 	.pool
 _08191278:
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r2, [r0]
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	ldr r3, =0x0000ff60
 	adds r0, r3, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r2, [r0]
 _0819128C:
 	cmp r6, 0x2
@@ -4797,9 +4797,9 @@ _0819128C:
 	ldrb r1, [r0, 0x10]
 	cmp r1, 0
 	bne _081912F4
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r3, =gUnknown_0860D080
@@ -4823,10 +4823,10 @@ _0819128C:
 	b _0819141C
 	.pool
 _081912F4:
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	movs r4, 0
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r4, [r0]
 	ldr r3, =gUnknown_0860D080
 	ldr r2, =gTasks
@@ -4869,9 +4869,9 @@ _0819133C:
 	lsrs r0, 24
 	adds r1, 0x11
 	bl sub_8192F08
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	strh r5, [r0]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r2, [r6]
@@ -4902,10 +4902,10 @@ _08191394:
 	lsrs r0, 24
 	adds r1, 0x11
 	bl sub_8192F08
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r2, [r6]
@@ -4921,12 +4921,12 @@ _08191394:
 	b _0819141C
 	.pool
 _081913E4:
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r4, 0x80
 	lsls r4, 1
 	adds r0, r4, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0
 	strh r0, [r1]
 	ldr r1, =gTasks
@@ -5157,31 +5157,31 @@ _081915CC:
 	ldrsh r2, [r0, r5]
 	cmp r2, 0
 	beq _0819160C
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r2, =gUnknown_02022E18
+	ldr r2, =gBattle_BG1_X
 	movs r6, 0x80
 	lsls r6, 1
 	adds r0, r6, 0
 	strh r0, [r2]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r1, [r0]
 	b _08191622
 	.pool
 _0819160C:
-	ldr r1, =gUnknown_02022E14
+	ldr r1, =gBattle_BG0_X
 	movs r3, 0x80
 	lsls r3, 1
 	adds r0, r3, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r2, [r0]
 _08191622:
 	ldr r0, =gUnknown_0203CD78
@@ -5189,12 +5189,12 @@ _08191622:
 	ldrb r0, [r4, 0x10]
 	cmp r0, 0
 	bne _08191688
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r4, 0x80
 	lsls r4, 1
 	adds r0, r4, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r3, =gUnknown_0860D080
@@ -5218,12 +5218,12 @@ _08191622:
 	b _081916C6
 	.pool
 _08191688:
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r6, 0x80
 	lsls r6, 1
 	adds r0, r6, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0
 	strh r0, [r1]
 	ldr r3, =gUnknown_0860D15C
@@ -5457,31 +5457,31 @@ _0819187C:
 	ldrsh r2, [r0, r5]
 	cmp r2, 0
 	beq _081918BC
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r2, =gUnknown_02022E18
+	ldr r2, =gBattle_BG1_X
 	movs r6, 0x80
 	lsls r6, 1
 	adds r0, r6, 0
 	strh r0, [r2]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r1, [r0]
 	b _081918D2
 	.pool
 _081918BC:
-	ldr r1, =gUnknown_02022E14
+	ldr r1, =gBattle_BG0_X
 	movs r3, 0x80
 	lsls r3, 1
 	adds r0, r3, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r2, [r0]
 _081918D2:
 	ldr r0, =gUnknown_0203CD78
@@ -5489,12 +5489,12 @@ _081918D2:
 	ldrb r0, [r2, 0x10]
 	cmp r0, 0
 	bne _08191924
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r4, 0x80
 	lsls r4, 1
 	adds r0, r4, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, =gTasks
@@ -5510,10 +5510,10 @@ _081918D2:
 	b _08191958
 	.pool
 _08191924:
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, =gTasks
@@ -5744,31 +5744,31 @@ _08191B08:
 	ldrsh r2, [r0, r5]
 	cmp r2, 0
 	beq _08191B48
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r2, =gUnknown_02022E18
+	ldr r2, =gBattle_BG1_X
 	movs r6, 0xFF
 	lsls r6, 8
 	adds r0, r6, 0
 	strh r0, [r2]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r1, [r0]
 	b _08191B5E
 	.pool
 _08191B48:
-	ldr r1, =gUnknown_02022E14
+	ldr r1, =gBattle_BG0_X
 	movs r3, 0xFF
 	lsls r3, 8
 	adds r0, r3, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r2, [r0]
 _08191B5E:
 	ldr r0, =gUnknown_0203CD78
@@ -5776,19 +5776,19 @@ _08191B5E:
 	ldrb r0, [r0, 0x10]
 	cmp r0, 0x1
 	bne _08191B94
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	b _08191B9E
 	.pool
 _08191B94:
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	strh r1, [r0]
 _08191B9E:
 	ldr r4, =gUnknown_0860D15C
@@ -6011,31 +6011,31 @@ _08191D68:
 	ldrsh r2, [r0, r5]
 	cmp r2, 0
 	beq _08191DA8
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
-	ldr r2, =gUnknown_02022E18
+	ldr r2, =gBattle_BG1_X
 	movs r6, 0xFF
 	lsls r6, 8
 	adds r0, r6, 0
 	strh r0, [r2]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r1, [r0]
 	b _08191DBE
 	.pool
 _08191DA8:
-	ldr r1, =gUnknown_02022E14
+	ldr r1, =gBattle_BG0_X
 	movs r3, 0xFF
 	lsls r3, 8
 	adds r0, r3, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r2, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r2, [r0]
 _08191DBE:
 	ldr r0, =gUnknown_0203CD78
@@ -6043,12 +6043,12 @@ _08191DBE:
 	ldrb r0, [r2, 0x10]
 	cmp r0, 0x2
 	bne _08191E10
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r4, 0x80
 	lsls r4, 1
 	adds r0, r4, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, =gTasks
@@ -6064,10 +6064,10 @@ _08191DBE:
 	b _08191E44
 	.pool
 _08191E10:
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, =gTasks
@@ -6306,15 +6306,15 @@ _08191FF8:
 	asrs r0, 16
 	cmp r0, 0x29
 	beq _08192100
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	ldrh r0, [r1]
 	subs r0, 0x4
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1A
+	ldr r1, =gBattle_BG1_Y
 	ldrh r0, [r1]
 	subs r0, 0x4
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	b _081920A4
 	.pool
 _08192038:
@@ -6331,15 +6331,15 @@ _08192038:
 	asrs r0, 16
 	cmp r0, 0x29
 	beq _08192100
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	ldrh r0, [r1]
 	adds r0, 0x4
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1A
+	ldr r1, =gBattle_BG1_Y
 	ldrh r0, [r1]
 	adds r0, 0x4
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1E
+	ldr r1, =gBattle_BG2_Y
 	b _081920E8
 	.pool
 _08192078:
@@ -6356,15 +6356,15 @@ _08192078:
 	asrs r0, 16
 	cmp r0, 0x41
 	beq _08192100
-	ldr r1, =gUnknown_02022E14
+	ldr r1, =gBattle_BG0_X
 	ldrh r0, [r1]
 	subs r0, 0x4
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E18
+	ldr r1, =gBattle_BG1_X
 	ldrh r0, [r1]
 	subs r0, 0x4
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 _081920A4:
 	ldrh r0, [r1]
 	subs r0, 0x4
@@ -6385,15 +6385,15 @@ _081920BC:
 	asrs r0, 16
 	cmp r0, 0x41
 	beq _08192100
-	ldr r1, =gUnknown_02022E14
+	ldr r1, =gBattle_BG0_X
 	ldrh r0, [r1]
 	adds r0, 0x4
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E18
+	ldr r1, =gBattle_BG1_X
 	ldrh r0, [r1]
 	adds r0, 0x4
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022E1C
+	ldr r1, =gBattle_BG2_X
 _081920E8:
 	ldrh r0, [r1]
 	adds r0, 0x4
@@ -10109,7 +10109,7 @@ _08194074:
 	lsls r0, r4, 1
 	add r0, r10
 	ldrh r0, [r0]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0x6
@@ -10400,13 +10400,13 @@ _0819427C:
 	ldr r0, =gUnknown_0860CE94
 	bl InitWindows
 	bl DeactivateAllTextPrinters
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	strh r4, [r0]
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	strh r4, [r0]
 	movs r0, 0x2
 	movs r1, 0
@@ -11358,27 +11358,27 @@ sub_8194B70: @ 8194B70
 	movs r1, 0x80
 	movs r2, 0x2
 	bl ChangeBgY
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1C
+	ldr r0, =gBattle_BG2_X
 	ldrh r1, [r0]
 	movs r0, 0x18
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1E
+	ldr r0, =gBattle_BG2_Y
 	ldrh r1, [r0]
 	movs r0, 0x1A
 	bl SetGpuReg
@@ -11486,19 +11486,19 @@ _08194CD4:
 	thumb_func_start sub_8194CE4
 sub_8194CE4: @ 8194CE4
 	push {lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	ldrh r1, [r0]
 	movs r0, 0x10
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	ldrh r1, [r0]
 	movs r0, 0x12
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E18
+	ldr r0, =gBattle_BG1_X
 	ldrh r1, [r0]
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, =gUnknown_02022E1A
+	ldr r0, =gBattle_BG1_Y
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
@@ -14296,7 +14296,7 @@ sub_81963F0: @ 81963F0
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
-	bl sub_809757C
+	bl UnfreezeMapObjects
 	bl ScriptContext2_Disable
 _08196446:
 	movs r0, 0x1
@@ -14680,7 +14680,7 @@ sub_8196748: @ 8196748
 	ldr r4, =gUnknown_085500A4
 _08196750:
 	ldrh r0, [r4]
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819675E
@@ -14706,7 +14706,7 @@ sub_8196774: @ 8196774
 	ldr r5, =gUnknown_085500A4
 _0819677E:
 	ldrh r0, [r5]
-	bl trainer_flag_check
+	bl HasTrainerAlreadyBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819679A

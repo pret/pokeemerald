@@ -51,7 +51,7 @@ process_overworld_input: @ 809BF08
 	bl cur_mapdata_block_role_at_player_pos
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_808904C
+	bl MetatileBehavior_IsMoveTile
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r6, 0x2
@@ -831,7 +831,7 @@ _0809C55C:
 	.pool
 _0809C574:
 	adds r0, r5, 0
-	bl is_tile_x8B
+	bl MetatileBehavior_IsClosedSootopolisGymDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -841,7 +841,7 @@ _0809C574:
 	.pool
 _0809C58C:
 	adds r0, r5, 0
-	bl is_tile_xEA
+	bl MetatileBehavior_IsUnknownClosedDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -851,7 +851,7 @@ _0809C58C:
 	.pool
 _0809C5A4:
 	adds r0, r5, 0
-	bl is_tile_x84
+	bl MetatileBehavior_IsCableBoxResults1
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -859,7 +859,7 @@ _0809C5A4:
 	b _0809C6E4
 _0809C5B4:
 	adds r0, r5, 0
-	bl is_tile_x87
+	bl MetatileBehavior_IsPokeblockFeeder
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -869,7 +869,7 @@ _0809C5B4:
 	.pool
 _0809C5CC:
 	adds r0, r5, 0
-	bl is_tile_x8C
+	bl MetatileBehavior_IsTrickHousePuzzleDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -879,7 +879,7 @@ _0809C5CC:
 	.pool
 _0809C5E4:
 	adds r0, r5, 0
-	bl is_tile_x85
+	bl MetatileBehavior_IsRegionMap
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -889,7 +889,7 @@ _0809C5E4:
 	.pool
 _0809C5FC:
 	adds r0, r5, 0
-	bl sub_8089A1C
+	bl MetatileBehavior_IsRunningShoesInstruction
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -899,7 +899,7 @@ _0809C5FC:
 	.pool
 _0809C614:
 	adds r0, r5, 0
-	bl sub_8089A30
+	bl MetatileBehavior_IsPictureBookShelf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -909,7 +909,7 @@ _0809C614:
 	.pool
 _0809C62C:
 	adds r0, r5, 0
-	bl sub_8089A44
+	bl MetatileBehavior_IsBookShelf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -919,7 +919,7 @@ _0809C62C:
 	.pool
 _0809C644:
 	adds r0, r5, 0
-	bl sub_8089A58
+	bl MetatileBehavior_IsPokeCenterBookShelf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -929,7 +929,7 @@ _0809C644:
 	.pool
 _0809C65C:
 	adds r0, r5, 0
-	bl sub_8089A6C
+	bl MetatileBehavior_IsVase
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -939,7 +939,7 @@ _0809C65C:
 	.pool
 _0809C674:
 	adds r0, r5, 0
-	bl sub_8089A80
+	bl MetatileBehavior_IsTrashCan
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -949,7 +949,7 @@ _0809C674:
 	.pool
 _0809C68C:
 	adds r0, r5, 0
-	bl sub_8089A94
+	bl MetatileBehavior_IsShopShelf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -959,7 +959,7 @@ _0809C68C:
 	.pool
 _0809C6A4:
 	adds r0, r5, 0
-	bl sub_8089AA8
+	bl MetatileBehavior_IsBlueprint
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -970,7 +970,7 @@ _0809C6A4:
 _0809C6BC:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8089AD0
+	bl MetatileBehavior_IsPlayerFacingWirelessBoxResults
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -981,7 +981,7 @@ _0809C6BC:
 _0809C6D4:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8089AEC
+	bl MetatileBehavior_IsCableBoxResults2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1023,7 +1023,7 @@ _0809C71C:
 	cmp r4, r0
 	bne _0809C7D0
 	adds r0, r5, 0
-	bl sub_8089288
+	bl MetatileBehavior_IsSecretBasePC
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1033,7 +1033,7 @@ _0809C71C:
 	.pool
 _0809C74C:
 	adds r0, r5, 0
-	bl sub_808929C
+	bl MetatileBehavior_IsSecretBaseRegisterPC
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1043,7 +1043,7 @@ _0809C74C:
 	.pool
 _0809C764:
 	adds r0, r5, 0
-	bl sub_80893DC
+	bl MetatileBehavior_IsMB_BF
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1053,7 +1053,7 @@ _0809C764:
 	.pool
 _0809C77C:
 	adds r0, r5, 0
-	bl sub_80893F0
+	bl MetatileBehavior_IsSecretBaseTvOrShield
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1063,7 +1063,7 @@ _0809C77C:
 	.pool
 _0809C794:
 	adds r0, r5, 0
-	bl sub_80892EC
+	bl MetatileBehavior_IsMB_C6
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1072,7 +1072,7 @@ _0809C794:
 	b _0809C7E2
 _0809C7A8:
 	adds r0, r5, 0
-	bl sub_8089364
+	bl MetatileBehavior_IsMB_C3
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1081,7 +1081,7 @@ _0809C7A8:
 	b _0809C7E2
 _0809C7BC:
 	adds r0, r5, 0
-	bl sub_8089350
+	bl MetatileBehavior_IsMB_B5
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1090,7 +1090,7 @@ _0809C7BC:
 	b _0809C7E2
 _0809C7D0:
 	adds r0, r5, 0
-	bl sub_8089300
+	bl MetatileBehavior_IsSecretBasePoster
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1297,7 +1297,7 @@ sub_809C96C: @ 809C96C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8089918
+	bl MetatileBehavior_IsCrackedFloorHole
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C988
@@ -1306,7 +1306,7 @@ sub_809C96C: @ 809C96C
 	.pool
 _0809C988:
 	adds r0, r4, 0
-	bl sub_8089ABC
+	bl MetatileBehavior_IsBattlePyramidWarp
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C9A4
@@ -1318,7 +1318,7 @@ _0809C996:
 	.pool
 _0809C9A4:
 	adds r0, r4, 0
-	bl sub_80893C8
+	bl MetatileBehavior_IsSecretBaseGlitterMat
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1327,7 +1327,7 @@ _0809C9A4:
 	b _0809C9E8
 _0809C9B8:
 	adds r0, r4, 0
-	bl sub_80893B4
+	bl MetatileBehavior_IsSecretBaseSoundMat
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1376,7 +1376,7 @@ _0809CA04:
 	bne _0809CAF8
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_808904C
+	bl MetatileBehavior_IsMoveTile
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809CAF8
@@ -1411,7 +1411,7 @@ _0809CA64:
 	b _0809CB28
 	.pool
 _0809CA7C:
-	bl sub_8179A04
+	bl ShouldDoBrailleRegicePuzzle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1467,7 +1467,7 @@ _0809CAF8:
 	cmp r0, 0x1
 	beq _0809CB28
 	movs r0, 0x1
-	bl sub_8137FC0
+	bl CountSSTidalStep
 	cmp r0, 0x1
 	bne _0809CB1C
 	ldr r0, =gUnknown_0823C050
@@ -1719,7 +1719,7 @@ sub_809CC9C: @ 809CC9C
 	.pool
 _0809CCF8:
 	adds r0, r4, 0
-	bl sub_8089870
+	bl MetatileBehavior_IsLavaridgeB1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1729,7 +1729,7 @@ _0809CCF8:
 	b _0809CD8C
 _0809CD0E:
 	adds r0, r4, 0
-	bl is_role_x68
+	bl MetatileBehavior_IsLavaridge1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1749,7 +1749,7 @@ _0809CD24:
 	b _0809CD8C
 _0809CD3A:
 	adds r0, r4, 0
-	bl sub_80898AC
+	bl MetatileBehavior_IsWarpOrBridge
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1759,7 +1759,7 @@ _0809CD3A:
 	b _0809CD8C
 _0809CD50:
 	adds r0, r4, 0
-	bl sub_8089904
+	bl MetatileBehavior_IsMtPyreHole
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1771,7 +1771,7 @@ _0809CD50:
 	.pool
 _0809CD6C:
 	adds r0, r4, 0
-	bl sub_80898C0
+	bl MetatileBehavior_IsMossdeepGymWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1797,7 +1797,7 @@ is_warp_tile: @ 809CD94
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl is_tile_x69_2_warp_door
+	bl MetatileBehavior_IsWarpDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1815,19 +1815,19 @@ is_warp_tile: @ 809CD94
 	cmp r0, 0x1
 	beq _0809CE2A
 	adds r0, r4, 0
-	bl sub_8088F58
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0809CE2A
 	adds r0, r4, 0
-	bl sub_8089870
+	bl MetatileBehavior_IsLavaridgeB1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0809CE2A
 	adds r0, r4, 0
-	bl is_role_x68
+	bl MetatileBehavior_IsLavaridge1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1839,19 +1839,19 @@ is_warp_tile: @ 809CD94
 	cmp r0, 0x1
 	beq _0809CE2A
 	adds r0, r4, 0
-	bl sub_8089904
+	bl MetatileBehavior_IsMtPyreHole
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0809CE2A
 	adds r0, r4, 0
-	bl sub_80898C0
+	bl MetatileBehavior_IsMossdeepGymWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0809CE2A
 	adds r0, r4, 0
-	bl sub_80898AC
+	bl MetatileBehavior_IsWarpOrBridge
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2048,7 +2048,7 @@ map_warp_consider_2_to_inside: @ 809CF78
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8089210
+	bl MetatileBehavior_IsSecretBaseOpen
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2062,7 +2062,7 @@ map_warp_consider_2_to_inside: @ 809CF78
 	.pool
 _0809CFB0:
 	adds r0, r4, 0
-	bl is_tile_x69_2_warp_door
+	bl MetatileBehavior_IsWarpDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2322,7 +2322,7 @@ dive_warp: @ 809D16C
 	bne _0809D1A4
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80895D0
+	bl MetatileBehavior_IsUnableToEmerge
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809D1A4
@@ -2340,7 +2340,7 @@ dive_warp: @ 809D16C
 _0809D1A4:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl sub_80895B0
+	bl MetatileBehavior_IsDiveable
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2394,7 +2394,7 @@ sub_809D1E8: @ 809D1E8
 	cmp r0, 0x5
 	bne _0809D244
 	adds r0, r5, 0
-	bl sub_80895D0
+	bl MetatileBehavior_IsUnableToEmerge
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809D244
@@ -2417,7 +2417,7 @@ sub_809D1E8: @ 809D1E8
 	.pool
 _0809D244:
 	adds r0, r5, 0
-	bl sub_80895B0
+	bl MetatileBehavior_IsDiveable
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

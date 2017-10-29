@@ -2,17 +2,19 @@
 #include "gba/flash_internal.h"
 #include "save.h"
 #include "game_stat.h"
+#include "task.h"
 
-extern struct SaveSectionOffsets gSaveSectionOffsets[0xE];
 extern struct SaveSectionLocation gRamSaveSectionLocations[0xE];
 extern u8 gDecompressionBuffer[];
 extern u32 gFlashMemoryPresent;
 extern u16 gUnknown_03006294;
+extern bool8 gSoftResetDisabled;
+
+extern const struct SaveSectionOffsets gSaveSectionOffsets[0xE];
 
 extern void DoSaveFailedScreen(u8); // save_failed_screen
 extern void LoadSerializedGame(void); // load_save
 extern bool32 ProgramFlashSectorAndVerify(u8 sector, u8 *data);
-extern void ReadFlash(u8 sector, u32 arg1, void* data, u32 size);
 
 // iwram common
 u16 gLastWrittenSector;
@@ -576,84 +578,27 @@ u16 CalculateChecksum(void *data, u16 size)
     return ((checksum >> 16) + checksum);
 }
 
-#ifdef NONMATCHING
-// the initial allocation of the pointer and toAdd variable doesnt match up with the original function. however, forcing it is impossible since gRamSaveSectionLocations is loaded first.
 void UpdateSaveAddresses(void)
 {
     int i = 0;
-    gRamSaveSectionLocations[i].data = gSaveBlock2Ptr + gSaveSectionOffsets[0].toAdd;
-    gRamSaveSectionLocations[i].size = gSaveSectionOffsets[0].size;
 
-    for(i = 1; i < 5; i++)
+    gRamSaveSectionLocations[i].data = (void*)(gSaveBlock2Ptr) + gSaveSectionOffsets[i].toAdd;
+    gRamSaveSectionLocations[i].size = gSaveSectionOffsets[i].size;
+
+    for (i = 1; i < 5; i++)
     {
-        gRamSaveSectionLocations[i].data = gSaveBlock1Ptr + gSaveSectionOffsets[i].toAdd;
+        gRamSaveSectionLocations[i].data = (void*)(gSaveBlock1Ptr) + gSaveSectionOffsets[i].toAdd;
         gRamSaveSectionLocations[i].size = gSaveSectionOffsets[i].size;
     }
 
-    for(i = 5; i < 14; i++)
+    for (i = 5; i < 14; i++)
     {
-        gRamSaveSectionLocations[i].data = gPokemonStoragePtr + gSaveSectionOffsets[i].toAdd;
+        gRamSaveSectionLocations[i].data = (void*)(gPokemonStoragePtr) + gSaveSectionOffsets[i].toAdd;
         gRamSaveSectionLocations[i].size = gSaveSectionOffsets[i].size;
+
+        i++;i--; // needed to match
     }
 }
-#else
-__attribute__((naked))
-void UpdateSaveAddresses(void)
-{
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    ldr r3, =gRamSaveSectionLocations\n\
-    ldr r0, =gSaveBlock2Ptr\n\
-    ldr r2, =gSaveSectionOffsets\n\
-    ldrh r1, [r2]\n\
-    ldr r0, [r0]\n\
-    adds r0, r1\n\
-    str r0, [r3]\n\
-    ldrh r0, [r2, 0x2]\n\
-    strh r0, [r3, 0x4]\n\
-    ldr r5, =gSaveBlock1Ptr\n\
-    adds r3, 0x8\n\
-    adds r2, 0x4\n\
-    movs r4, 0x3\n\
-_081531AC:\n\
-    ldrh r0, [r2]\n\
-    ldr r1, [r5]\n\
-    adds r1, r0\n\
-    str r1, [r3]\n\
-    ldrh r0, [r2, 0x2]\n\
-    strh r0, [r3, 0x4]\n\
-    adds r3, 0x8\n\
-    adds r2, 0x4\n\
-    subs r4, 0x1\n\
-    cmp r4, 0\n\
-    bge _081531AC\n\
-    movs r4, 0x5\n\
-    ldr r1, =gRamSaveSectionLocations\n\
-    ldr r5, =gPokemonStoragePtr\n\
-    ldr r0, =gSaveSectionOffsets\n\
-    adds r3, r1, 0\n\
-    adds r3, 0x28\n\
-    adds r2, r0, 0\n\
-    adds r2, 0x14\n\
-_081531D2:\n\
-    ldrh r0, [r2]\n\
-    ldr r1, [r5]\n\
-    adds r1, r0\n\
-    str r1, [r3]\n\
-    ldrh r0, [r2, 0x2]\n\
-    strh r0, [r3, 0x4]\n\
-    adds r3, 0x8\n\
-    adds r2, 0x4\n\
-    adds r4, 0x1\n\
-    cmp r4, 0xD\n\
-    ble _081531D2\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .pool\n\
-    .syntax divided");
-}
-#endif
 
 extern u32 GetGameStat(u8 index); // rom4
 extern void IncrementGameStat(u8 index); // rom4
@@ -860,7 +805,7 @@ u32 sub_81535DC(u8 sector, u8* dst)
 
     if (sector != 30 && sector != 31)
         return 0xFF;
-    ReadFlash(sector, 0, &gSaveDataBuffer, sizeof(struct SaveSection));
+    ReadFlash(sector, 0, (u8 *)&gSaveDataBuffer, sizeof(struct SaveSection));
     if (*(u32*)(&gSaveDataBuffer.data[0]) != 0xB39D)
         return 0xFF;
     // copies whole save section except u32 counter
@@ -893,4 +838,86 @@ u32 sub_8153634(u8 sector, u8* src)
     if (ProgramFlashSectorAndVerify(sector, savDataBuffer) != 0)
         return 0xFF;
     return 1;
+}
+
+extern void save_serialize_map(void);
+extern void sub_8076D5C(void);
+extern void sav2_gender2_inplace_and_xFE(void);
+extern void sub_800ADF8(void);
+extern bool8 sub_800A520(void);
+
+void sub_8153688(u8 taskId)
+{
+    s16* taskData = gTasks[taskId].data;
+
+    switch (taskData[0])
+    {
+    case 0:
+        gSoftResetDisabled = TRUE;
+        taskData[0] = 1;
+        break;
+    case 1:
+        sub_800ADF8();
+        taskData[0] = 2;
+        break;
+    case 2:
+        if (sub_800A520())
+        {
+            if (taskData[2] == 0)
+                save_serialize_map();
+            taskData[0] = 3;
+        }
+        break;
+    case 3:
+        if (taskData[2] == 0)
+            sub_8076D5C();
+        sub_8153380();
+        taskData[0] = 4;
+        break;
+    case 4:
+        if (++taskData[1] == 5)
+        {
+            taskData[1] = 0;
+            taskData[0] = 5;
+        }
+        break;
+    case 5:
+        if (sub_81533AC())
+            taskData[0] = 6;
+        else
+            taskData[0] = 4;
+        break;
+    case 6:
+        sub_81533E0();
+        taskData[0] = 7;
+        break;
+    case 7:
+        if (taskData[2] == 0)
+            sav2_gender2_inplace_and_xFE();
+        sub_800ADF8();
+        taskData[0] = 8;
+        break;
+    case 8:
+        if (sub_800A520())
+        {
+            sub_8153408();
+            taskData[0] = 9;
+        }
+        break;
+    case 9:
+        sub_800ADF8();
+        taskData[0] = 10;
+        break;
+    case 10:
+        if (sub_800A520())
+            taskData[0]++;
+        break;
+    case 11:
+        if (++taskData[1] > 5)
+        {
+            gSoftResetDisabled = FALSE;
+            DestroyTask(taskId);
+        }
+        break;
+    }
 }

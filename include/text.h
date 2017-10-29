@@ -65,54 +65,67 @@
 #define CHAR_x              0xEC
 #define CHAR_y              0xED
 #define CHAR_z              0xEE
+#define CHAR_SPECIAL_F9     0xF9
 #define CHAR_COLON          0xF0
 #define CHAR_PROMPT_SCROLL  0xFA // waits for button press and scrolls dialog
 #define CHAR_PROMPT_CLEAR   0xFB // waits for button press and clears dialog
 #define EXT_CTRL_CODE_BEGIN 0xFC // extended control code
 #define PLACEHOLDER_BEGIN   0xFD // string placeholder
 #define CHAR_NEWLINE        0xFE
-#define EOS 0xFF // end of string
+#define EOS                 0xFF // end of string
+
+#define TEXT_COLOR_TRANSPARENT  0x0
+#define TEXT_COLOR_WHITE        0x1
+#define TEXT_COLOR_DARK_GREY    0x2
+
+// battle placeholders are located in battle_message.h
 
 #define EXT_CTRL_CODE_JPN   0x15
 #define EXT_CTRL_CODE_ENG   0x16
 
 #define NUM_TEXT_PRINTERS 32
 
+struct TextPrinterSubStruct
+{
+    u8 font_type:4;  // 0x14
+    u8 font_type_upper:1;
+    u8 font_type_5:3;
+    u8 field_1:5;
+    u8 field_1_upmid:2;
+    u8 field_1_top:1;
+    u8 frames_visible_counter;
+    u8 field_3;
+    u8 field_4; // 0x18
+    u8 field_5;
+    u8 field_6;
+    u8 active;
+};
+
+struct TextSubPrinter // TODO: Better name
+{
+    const u8* current_text_offset;
+    u8 windowId;
+    u8 fontId;
+    u8 x;
+    u8 y;
+    u8 currentX;        // 0x8
+    u8 currentY;
+    u8 letterSpacing;
+    u8 lineSpacing;
+    u8 fontColor_l:4;   // 0xC
+    u8 fontColor_h:4;
+    u8 bgColor:4;
+    u8 shadowColor:4;
+};
+
 struct TextPrinter
 {
-    struct TextSubPrinter {     // TODO: Better name
-        u8* current_text_offset;
-        u8 windowId;
-        u8 fontId;
-        u8 x;
-        u8 y;
-        u8 currentX;        // 0x8
-        u8 currentY;
-        u8 letterSpacing;
-        u8 lineSpacing;
-        u8 fontColor_l:4;   // 0xC
-        u8 fontColor_h:4;
-        u8 bgColor:4;
-        u8 shadowColor:4;
-    } subPrinter;
+    struct TextSubPrinter subPrinter;
 
     void (*callback)(struct TextSubPrinter *, u16); // 0x10
 
     union {
-        struct TextPrinterSubStruct
-        {
-            u8 font_type:4;  // 0x14
-            u8 font_type_upper:4;
-            u8 field_1:5;
-            u8 field_1_upmid:2;
-            u8 field_1_top:1;
-            u8 frames_visible_counter;
-            u8 field_3;
-            u8 field_4; // 0x18
-            u8 field_5;
-            u8 field_6;
-            u8 active;
-        } sub;
+        struct TextPrinterSubStruct sub;
 
         u8 sub_fields[8];
     } sub_union;
@@ -138,6 +151,8 @@ struct FontInfo
     u8 shadowColor:4;
 };
 
+extern const struct FontInfo *gFonts;
+
 struct GlyphWidthFunc
 {
     u32 font_id;
@@ -151,6 +166,15 @@ struct KeypadIcon
     u8 height;
 };
 
+typedef struct {
+    u8 flag_0:1;
+    u8 flag_1:1;
+    u8 flag_2:1;
+    u8 flag_3:1;
+} TextFlags;
+
+extern TextFlags gTextFlags;
+
 struct __attribute__((packed)) TextColor
 {
     u8 fgColor;
@@ -163,9 +187,16 @@ extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
 
+u8 gUnknown_03002F84;
+u8 gUnknown_03002F90[0x20];
+u8 gUnknown_03002FB0[0x20];
+u8 gUnknown_03002FD0[0x20];
+u8 gUnknown_03002FF0[0x20];
+u8 gGlyphDimensions[0x2];
+
 void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
-u16 PrintTextOnWindow(u8 windowId, u8 fontId, u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
+u16 PrintTextOnWindow(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
 bool16 AddTextPrinter(struct TextSubPrinter *textSubPrinter, u8 speed, void (*callback)(struct TextSubPrinter *, u16));
 void RunTextPrinters(void);
 bool16 IsTextPrinterActive(u8 id);
@@ -191,8 +222,8 @@ void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter);
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter);
 void TextPrinterClearDownArrow(struct TextPrinter *textPrinter);
 bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter);
-bool8 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
-bool8 TextPrinterWait(struct TextPrinter *textPrinter);
+bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
+bool16 TextPrinterWait(struct TextPrinter *textPrinter);
 void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex);
 u16 RenderText(struct TextPrinter *textPrinter);
 u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing);

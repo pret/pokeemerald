@@ -1,272 +1,33 @@
-gUnknown_03000000: @ 3000000
-	.space 0x4
-
+	.include "src/main.o"
 	.include "src/malloc.o"
-
-	.align 4
-gDma3Requests: @ 3000010
-	.space 0xC
-
-gUnknown_0300001C: @ 300001C
-	.space 0xD4
-
-gUnknown_030000F0: @ 30000F0
-	.space 0xA
-
-gUnknown_030000FA: @ 30000FA
-	.space 0x716
-
-gDma3ManagerLocked: @ 3000810
-	.space 0x1
-
-gDma3RequestCursor: @ 3000811
-	.space 0x7
-
+	.include "src/dma3_manager.o"
 	.include "src/gpu_regs.o"
     .include "src/bg.o"
 	.include "src/text.o"
 	.include "src/sprite.o"
-
-gUnknown_03000D10: @ 3000D10
-	.space 0x10
-
-gUnknown_03000D20: @ 3000D20
-	.space 0x30
-
-gUnknown_03000D50: @ 3000D50
-	.space 0x4
-
-gUnknown_03000D54: @ 3000D54
-	.space 0x4
-
-gUnknown_03000D58: @ 3000D58
-	.space 0x4
-
-gUnknown_03000D5C: @ 3000D5C
-	.space 0x4
-
-gUnknown_03000D60: @ 3000D60
-	.space 0x4
-
-gUnknown_03000D64: @ 3000D64
-	.space 0x4
-
-gUnknown_03000D68: @ 3000D68
-	.space 0x4
-
-gUnknown_03000D6C: @ 3000D6C
-	.space 0x1
-
-gUnknown_03000D6D: @ 3000D6D
-	.space 0x1
-
-gUnknown_03000D6E: @ 3000D6E
-	.space 0x2
-
-gUnknown_03000D70: @ 3000D70
-	.space 0x2
-
-gUnknown_03000D72: @ 3000D72
-	.space 0x1
-
-gUnknown_03000D73: @ 3000D73
-	.space 0x1
-
-gUnknown_03000D74: @ 3000D74
-	.space 0x4
-
-gUnknown_03000D78: @ 3000D78
-	.space 0x8
-
-gUnknown_03000D80: @ 3000D80
-	.space 0x10
-
-gUnknown_03000D90: @ 3000D90
-	.space 0x10
-
-gUnknown_03000DA0: @ 3000DA0
-	.space 0x4
-
-gUnknown_03000DA4: @ 3000DA4
-	.space 0x4
-
-gUnknown_03000DA8: @ 3000DA8
-	.space 0x4
-
-gUnknown_03000DAC: @ 3000DAC
-	.space 0x4
-
-gUnknown_03000DB0: @ 3000DB0
-	.space 0x8
-
+    .include "src/link.o"
     .include "src/rtc.o"
-
-gUnknown_03000DD0: @ 3000DD0
-	.space 0x4
-
-gUnknown_03000DD4: @ 3000DD4
-	.space 0x4
-
-gUnknown_03000DD8: @ 3000DD8
-	.space 0x4
-
-gUnknown_03000DDC: @ 3000DDC
-	.space 0x4
-
+    .include "src/main_menu.o"
+    .include "src/battle_1.o"
     .include "src/egg_hatch.o"
-    
-.space 0x4 @ why the gap?
-
-gUnknown_03000DE8: @ 3000DE8
-	.space 0x10
-
-gUnknown_03000DF8: @ 3000DF8
-	.space 0xC
-
-gUnknown_03000E04: @ 3000E04
-	.space 0x2
-
-gUnknown_03000E06: @ 3000E06
-	.space 0x2
-
+    .include "src/berry_blender.o"
     .include "src/play_time.o"
-
-.align 2
-
-gUnknown_03000E0C: @ 3000E0C
-	.space 0x4
-
-gUnknown_03000E10: @ 3000E10
-	.space 0x4
-
-gUnknown_03000E14: @ 3000E14
-	.space 0x4
-
-gUnknown_03000E18: @ 3000E18
-	.space 0x1
-
-gUnknown_03000E19: @ 3000E19
-	.space 0x7
-
-gUnknown_03000E20: @ 3000E20
-	.space 0x8
-
-gUnknown_03000E28: @ 3000E28
-	.space 0x2
-
-gUnknown_03000E2A: @ 3000E2A
-	.space 0x2
-
-gUnknown_03000E2C: @ 3000E2C
-	.space 0x4
-
-gUnknown_03000E30: @ 3000E30
-	.space 0x8
-
-.include "src/script.o"
-
-.align 2
-gUnknown_03000F30: @ 3000F30
-	.space 0x4
-
-gUnknown_03000F34: @ 3000F34
-	.space 0x2
-
-gUnknown_03000F36: @ 3000F36
-	.space 0x2
-
-gUnknown_03000F38: @ 3000F38
-	.space 0x2
-
-gUnknown_03000F3A: @ 3000F3A
-	.space 0x2
-
-gUnknown_03000F3C: @ 3000F3C
-	.space 0x4
-
-gUnknown_03000F40: @ 3000F40
-	.space 0x4
-
-gUnknown_03000F44: @ 3000F44
-	.space 0x4
-
+    .include "src/rom4.o"
+    .include "src/field_camera.o"
+    .include "src/script.o"
+    .include "src/scrcmd.o"
+    .include "src/tileset_anims.o"
+    .include "src/palette.o"
     .include "src/sound.o"
+    .include "src/field_screen.o"
+    .include "src/field_effect.o"
+    .include "src/pokemon_storage_system.o"
+    .include "src/fldeff_cut.o"
+    .include "src/script_menu.o"
+    .include "src/record_mixing.o"
+    .include "src/tv.o"
 
-gUnknown_03000F50: @ 3000F50
-	.space 0x8
-
-gUnknown_03000F58: @ 3000F58
-	.space 0x20
-
-gUnknown_03000F78: @ 3000F78
-	.space 0x188
-
-gUnknown_03001100: @ 3001100
-	.space 0x1
-
-gUnknown_03001101: @ 3001101
-	.space 0x1
-
-gUnknown_03001102: @ 3001102
-	.space 0x6
-
-gUnknown_03001108: @ 3001108
-	.space 0x1C
-
-gUnknown_03001124: @ 3001124
-	.space 0xC
-
-gUnknown_03001130: @ 3001130
-	.space 0x4
-
-gUnknown_03001134: @ 3001134
-	.space 0x4
-
-gUnknown_03001138: @ 3001138
-	.space 0x4
-
-gUnknown_0300113C: @ 300113C
-	.space 0x4
-
-gUnknown_03001140: @ 3001140
-	.space 0x4
-
-gUnknown_03001144: @ 3001144
-	.space 0x4
-
-gUnknown_03001148: @ 3001148
-	.space 0x4
-
-gUnknown_0300114C: @ 300114C
-	.space 0x4
-
-gUnknown_03001150: @ 3001150
-	.space 0x4
-
-gUnknown_03001154: @ 3001154
-	.space 0x4
-
-gUnknown_03001158: @ 3001158
-	.space 0x4
-
-gUnknown_0300115C: @ 300115C
-	.space 0x4
-
-gUnknown_03001160: @ 3001160
-	.space 0x8
-
-gUnknown_03001168: @ 3001168
-	.space 0xC
-
-gUnknown_03001174: @ 3001174
-	.space 0x1
-
-gUnknown_03001175: @ 3001175
-	.space 0x1
-
-gUnknown_03001176: @ 3001176
-	.space 0x2
-
+    .space 1 @ TODO: define this u32 in mauville_old_man
 gUnknown_03001178: @ 3001178
 	.space 0x4
 

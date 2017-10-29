@@ -28,14 +28,14 @@ extern const u32 gBitTable[];
 extern const struct SpriteTemplate gUnknown_08329D98[];
 extern const struct SpriteTemplate gUnknown_08329DF8[];
 extern const union AnimCmd* gUnknown_082FF70C[];
-extern const union AnimCmd* const * const gUnknown_08309AAC[];
+extern const union AnimCmd* const * const gMonAnimationsSpriteAnimsPtrTable[];
 extern const union AnimCmd* const * const gUnknown_08305D0C[];
 extern const union AnimCmd* const * const gUnknown_0830536C[];
 extern const u8 gText_BadEgg[];
 extern const u8 gText_EggNickname[];
 
 extern u8 GetBankSide(u8 bank);
-extern u8 GetBankByPlayerAI(u8 bank);
+extern u8 GetBankByIdentity(u8 bank);
 extern u8 GetBankIdentity(u8 bank);
 
 u8 CountAliveMonsInBattle(u8 caseId)
@@ -90,7 +90,7 @@ u8 sub_8069F34(u8 bank)
 
     status ^= 1;
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBankByPlayerAI(status);
+        return GetBankByIdentity(status);
     if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) > 1)
     {
         u8 val;
@@ -99,14 +99,14 @@ u8 sub_8069F34(u8 bank)
             val = status ^ 2;
         else
             val = status;
-        return GetBankByPlayerAI(val);
+        return GetBankByIdentity(val);
     }
     else
     {
         if ((gAbsentBankFlags & gBitTable[status]))
-            return GetBankByPlayerAI(status ^ 2);
+            return GetBankByIdentity(status ^ 2);
         else
-            return GetBankByPlayerAI(status);
+            return GetBankByIdentity(status);
     }
 }
 
@@ -152,8 +152,8 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 
 void sub_806A068(u16 species, u8 bankIdentity)
 {
-    if (gBattleSpritesGfx != NULL)
-        gUnknown_0202499C = gBattleSpritesGfx->templates[bankIdentity];
+    if (gMonSpritesGfxPtr != NULL)
+        gUnknown_0202499C = gMonSpritesGfxPtr->templates[bankIdentity];
     else if (gUnknown_020249B4[0])
         gUnknown_0202499C = gUnknown_020249B4[0]->templates[bankIdentity];
     else if (gUnknown_020249B4[1])
@@ -165,9 +165,9 @@ void sub_806A068(u16 species, u8 bankIdentity)
     if (bankIdentity == 0 || bankIdentity == 2)
         gUnknown_0202499C.anims = gUnknown_082FF70C;
     else if (species > 500)
-        gUnknown_0202499C.anims = gUnknown_08309AAC[species - 500];
+        gUnknown_0202499C.anims = gMonAnimationsSpriteAnimsPtrTable[species - 500];
     else
-        gUnknown_0202499C.anims = gUnknown_08309AAC[species];
+        gUnknown_0202499C.anims = gMonAnimationsSpriteAnimsPtrTable[species];
 }
 
 void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity)
@@ -180,8 +180,8 @@ void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity)
     }
     else
     {
-        if (gBattleSpritesGfx != NULL)
-            gUnknown_0202499C = gBattleSpritesGfx->templates[bankIdentity];
+        if (gMonSpritesGfxPtr != NULL)
+            gUnknown_0202499C = gMonSpritesGfxPtr->templates[bankIdentity];
         else
             gUnknown_0202499C = gUnknown_08329D98[bankIdentity];
         gUnknown_0202499C.anims = gUnknown_0830536C[trainerSpriteId];
@@ -190,8 +190,8 @@ void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity)
 
 void sub_806A1C0(u16 arg0, u8 bankIdentity)
 {
-    if (gBattleSpritesGfx != NULL)
-        gUnknown_0202499C = gBattleSpritesGfx->templates[bankIdentity];
+    if (gMonSpritesGfxPtr != NULL)
+        gUnknown_0202499C = gMonSpritesGfxPtr->templates[bankIdentity];
     else
         gUnknown_0202499C = gUnknown_08329D98[bankIdentity];
     gUnknown_0202499C.paletteTag = arg0;
@@ -330,7 +330,7 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8* data)
         if (!ret)
             ret = mon->defense;
         break;
-    case MON_DATA_SPD:
+    case MON_DATA_SPEED:
         ret = GetDeoxysStat(mon, STAT_SPD);
         if (!ret)
             ret = mon->speed;
@@ -351,7 +351,7 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8* data)
     case MON_DATA_DEF2:
         ret = mon->defense;
         break;
-    case MON_DATA_SPD2:
+    case MON_DATA_SPEED2:
         ret = mon->speed;
         break;
     case MON_DATA_SPATK2:
@@ -512,7 +512,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_DEF_EV:
         retVal = substruct2->defenseEV;
         break;
-    case MON_DATA_SPD_EV:
+    case MON_DATA_SPEED_EV:
         retVal = substruct2->speedEV;
         break;
     case MON_DATA_SPATK_EV:
@@ -566,7 +566,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_DEF_IV:
         retVal = substruct3->defenseIV;
         break;
-    case MON_DATA_SPD_IV:
+    case MON_DATA_SPEED_IV:
         retVal = substruct3->speedIV;
         break;
     case MON_DATA_SPATK_IV:
@@ -747,7 +747,7 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
     case MON_DATA_DEF:
         SET16(mon->defense);
         break;
-    case MON_DATA_SPD:
+    case MON_DATA_SPEED:
         SET16(mon->speed);
         break;
     case MON_DATA_SPATK:
@@ -880,7 +880,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_DEF_EV:
         SET8(substruct2->defenseEV);
         break;
-    case MON_DATA_SPD_EV:
+    case MON_DATA_SPEED_EV:
         SET8(substruct2->speedEV);
         break;
     case MON_DATA_SPATK_EV:
@@ -940,7 +940,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_DEF_IV:
         SET8(substruct3->defenseIV);
         break;
-    case MON_DATA_SPD_IV:
+    case MON_DATA_SPEED_IV:
         SET8(substruct3->speedIV);
         break;
     case MON_DATA_SPATK_IV:
@@ -1089,7 +1089,7 @@ u8 SendMonToPC(struct Pokemon* mon)
                 gSpecialVar_0x8012 = boxNo;
                 gSpecialVar_0x8013 = boxPos;
                 if (get_unknown_box_id() != boxNo)
-                    FlagReset(SYS_STORAGE_UNKNOWN_FLAG);
+                    FlagClear(SYS_STORAGE_UNKNOWN_FLAG);
                 VarSet(VAR_STORAGE_UNKNOWN, boxNo);
                 return MON_GIVEN_TO_PC;
             }
@@ -1308,10 +1308,9 @@ void sub_805EF84(u8 bank, bool8);
 
 extern struct BattlePokemon gBattleMons[4];
 
-/*
-
 void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
 {
+    u16* hpSwitchout;
     s32 i;
     u8 nickname[POKEMON_NAME_LENGTH * 2];
 
@@ -1330,7 +1329,7 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
     gBattleMons[bank].hpIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HP_IV, NULL);
     gBattleMons[bank].attackIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ATK_IV, NULL);
     gBattleMons[bank].defenseIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_DEF_IV, NULL);
-    gBattleMons[bank].speedIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPD_IV, NULL);
+    gBattleMons[bank].speedIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPEED_IV, NULL);
     gBattleMons[bank].spAttackIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK_IV, NULL);
     gBattleMons[bank].spDefenseIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF_IV, NULL);
     gBattleMons[bank].personality = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY, NULL);
@@ -1340,7 +1339,7 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
     gBattleMons[bank].maxHP = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MAX_HP, NULL);
     gBattleMons[bank].attack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ATK, NULL);
     gBattleMons[bank].defense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_DEF, NULL);
-    gBattleMons[bank].speed = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPD, NULL);
+    gBattleMons[bank].speed = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPEED, NULL);
     gBattleMons[bank].spAttack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK, NULL);
     gBattleMons[bank].spDefense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF, NULL);
     gBattleMons[bank].isEgg = GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_EGG, NULL);
@@ -1352,15 +1351,9 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[bank].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[bank].otName);
-    // ewram memes from Ruby return
-    #ifdef NONMATCHING
-        gBattleStruct->hpOnSwitchout[GetBankSide(bank)] = gBattleMons[bank].hp;
-    #else
-        {
-            u32 side = GetBankSide(bank);
-            *(u16*)((void*)(gBattleStruct) + side) = gBattleMons[bank].hp;
-        }
-    #endif // NONMATCHING
+
+    hpSwitchout = &gBattleStruct->hpOnSwitchout[GetBankSide(bank)];
+    *hpSwitchout = gBattleMons[bank].hp;
 
     for (i = 0; i < 8; i++)
         gBattleMons[bank].statStages[i] = 6;
@@ -1369,4 +1362,3 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
     sub_803FA70(bank);
     sub_805EF84(bank, FALSE);
 }
-*/

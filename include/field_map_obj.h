@@ -33,6 +33,7 @@ u8 sub_808D4F4(void);
 void RemoveFieldObjectByLocalIdAndMap(u8, u8, u8);
 void npc_load_two_palettes__no_record(u16, u8);
 void npc_load_two_palettes__and_record(u16, u8);
+void sub_808EBA8(u8, u8, u8, s16, s16);
 void pal_patch_for_npc(u16, u8);
 void sub_808E16C(s16, s16);
 void sub_8092FF0(s16, s16, s16 *, s16 *);
@@ -63,6 +64,7 @@ void npc_coords_shift(struct MapObject *, s16, s16);
 void sub_808EB08(struct MapObject *, s16, s16);
 void sub_808F254(u8, u8, u8);
 void FieldObjectStep(struct MapObject *, struct Sprite *, bool8(struct MapObject *, struct Sprite *));
+u8 FieldObjectFaceOppositeDirection(struct MapObject *, u8);
 u8 GetOppositeDirection(u8);
 u8 GetStepInPlaceDelay4AnimId(u32);
 u8 GetStepInPlaceDelay8AnimId(u32);
@@ -71,6 +73,8 @@ u8 GetStepInPlaceDelay32AnimId(u32);
 u8 npc_block_way(struct MapObject *, s16, s16, u32);
 void MoveCoords(u8, s16 *, s16 *);
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
+u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
+u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z);
 
 // Exported data declarations
 

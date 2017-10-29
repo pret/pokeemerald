@@ -581,15 +581,15 @@ sub_808A83C: @ 808A83C
 	.pool
 	thumb_func_end sub_808A83C
 
-	thumb_func_start sub_808A854
-sub_808A854: @ 808A854
+	thumb_func_start FieldSetDoorOpened
+FieldSetDoorOpened: @ 808A854
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A876
@@ -602,17 +602,17 @@ _0808A876:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_808A854
+	thumb_func_end FieldSetDoorOpened
 
-	thumb_func_start sub_808A880
-sub_808A880: @ 808A880
+	thumb_func_start FieldSetDoorClosed
+FieldSetDoorClosed: @ 808A880
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A8A2
@@ -625,17 +625,17 @@ _0808A8A2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_808A880
+	thumb_func_end FieldSetDoorClosed
 
-	thumb_func_start sub_808A8AC
-sub_808A8AC: @ 808A8AC
+	thumb_func_start FieldAnimateDoorClose
+FieldAnimateDoorClose: @ 808A8AC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A8D8
@@ -654,17 +654,17 @@ _0808A8DC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808A8AC
+	thumb_func_end FieldAnimateDoorClose
 
-	thumb_func_start task_overworld_door_add_if_role_69_for_opening_door_at
-task_overworld_door_add_if_role_69_for_opening_door_at: @ 808A8E4
+	thumb_func_start FieldAnimateDoorOpen
+FieldAnimateDoorOpen: @ 808A8E4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8088EFC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A910
@@ -683,10 +683,10 @@ _0808A914:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end task_overworld_door_add_if_role_69_for_opening_door_at
+	thumb_func_end FieldAnimateDoorOpen
 
-	thumb_func_start sub_808A91C
-sub_808A91C: @ 808A91C
+	thumb_func_start FieldIsDoorAnimationRunning
+FieldIsDoorAnimationRunning: @ 808A91C
 	push {lr}
 	ldr r0, =task50_overworld_door
 	bl FuncIsActiveTask
@@ -695,10 +695,10 @@ sub_808A91C: @ 808A91C
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_808A91C
+	thumb_func_end FieldIsDoorAnimationRunning
 
-	thumb_func_start cur_mapdata_get_door_sound_at
-cur_mapdata_get_door_sound_at: @ 808A930
+	thumb_func_start GetDoorSoundEffect
+GetDoorSoundEffect: @ 808A930
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -725,7 +725,7 @@ _0808A95C:
 _0808A95E:
 	pop {r1}
 	bx r1
-	thumb_func_end cur_mapdata_get_door_sound_at
+	thumb_func_end GetDoorSoundEffect
 
 	thumb_func_start sub_808A964
 sub_808A964: @ 808A964

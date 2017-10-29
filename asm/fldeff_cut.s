@@ -130,7 +130,7 @@ _080D37F6:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8088E64
+	bl MetatileBehavior_IsPokeGrass
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -175,7 +175,7 @@ _080D3890:
 	movs r0, 0x1
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl sub_80899F8
+	bl MetatileBehavior_IsCuttableGrass
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1
@@ -309,7 +309,7 @@ _080D395A:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8088E64
+	bl MetatileBehavior_IsPokeGrass
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -339,7 +339,7 @@ _080D39F4:
 	b _080D395A
 _080D39F8:
 	adds r0, r4, 0
-	bl sub_80899F8
+	bl MetatileBehavior_IsCuttableGrass
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1
@@ -385,7 +385,7 @@ hm2_ruin_valley: @ 80D3A50
 	movs r0, 0x1
 	bl FieldEffectStart
 	bl brm_get_pokemon_selection
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -421,7 +421,7 @@ sub_80D3A6C: @ 80D3A6C
 sub_80D3A9C: @ 80D3A9C
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gFieldEffectSpawnParams
+	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -1344,7 +1344,7 @@ sub_80D423C: @ 80D423C
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl MetatileBehavior_IsLongGrass2
+	bl MetatileBehavior_IsLongGrass_Duplicate
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D42AE

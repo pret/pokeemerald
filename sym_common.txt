@@ -117,7 +117,7 @@ gUnknown_03003110: @ 3003110
 gUnknown_03003120: @ 3003120
 	.space 0x4
 
-gUnknown_03003124: @ 3003124
+gReceivedRemoteLinkPlayers: @ 3003124
 	.space 0xC
 
 gUnknown_03003130: @ 3003130
@@ -203,22 +203,16 @@ gUnknown_03005CDE: @ 3005CDE
 
     .include "rtc.o"
 
-gUnknown_03005D00: @ 3005D00
+gPreBattleCallback1: @ 3005D00
 	.space 0x4
 
 gBattleMainFunc: @ 3005D04
 	.space 0xC
 
 gBattleResults: @ 3005D10
-	.space 0x2A
+	.space 0x44
 
-gUnknown_03005D3A: @ 3005D3A
-	.space 0xC
-
-gUnknown_03005D46: @ 3005D46
-	.space 0xE
-
-gUnknown_03005D54: @ 3005D54
+gLeveledUpInBattle: @ 3005D54
 	.space 0xC
 
 gBattleBankFunc: @ 3005D60
@@ -326,17 +320,7 @@ gUnknown_030060B4: @ 30060B4
 gUnknown_030060B8: @ 30060B8
 	.space 0x4
 
-gUnknown_030060BC: @ 30060BC
-	.space 0x4
-
-gUnknown_030060C0: @ 30060C0
-	.space 0x10
-
-gUnknown_030060D0: @ 30060D0
-	.space 0x10
-
-gUnknown_030060E0: @ 30060E0
-	.space 0x50
+    .include "tv.o"
 
 gUnknown_03006130: @ 3006130
 	.space 0x34
@@ -393,7 +377,7 @@ gUnknown_030061EC: @ 30061EC
 	.space 0x4
 
     .include"save.o"
-    
+
     .space 0x8
 
 gRamSaveSectionLocations: @ 3006220
@@ -448,7 +432,7 @@ gUnknown_03006370: @ 3006370
 
 	.include "agb_flash.o"
 
-gUnknown_03007868: @ 3007868
+gRfuState: @ 3007868
 	.space 0x8
 
 gUnknown_03007870: @ 3007870

@@ -71,7 +71,7 @@ bx_battle_menu_t6_2: @ 81593D8
 	beq _08159446
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gUnknown_020244AC
+	ldr r1, =gActionSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -103,13 +103,13 @@ _0815942A:
 	movs r1, 0x7
 _0815942E:
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd33
 	b _08159440
 _08159436:
 	movs r0, 0x1
 	movs r1, 0x8
 	movs r2, 0
-	bl dp01_build_cmdbuf_x21_a_bb
+	bl EmitCmd33
 _08159440:
 	bl SafariBufferExecCompleted
 	b _0815954E
@@ -118,7 +118,7 @@ _08159446:
 	ands r0, r1
 	cmp r0, 0
 	beq _08159484
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -132,7 +132,7 @@ _08159446:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -144,7 +144,7 @@ _08159484:
 	ands r0, r1
 	cmp r0, 0
 	beq _081594C0
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -158,7 +158,7 @@ _08159484:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -170,7 +170,7 @@ _081594C0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0815950C
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -184,7 +184,7 @@ _081594C0:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -196,7 +196,7 @@ _081594F2:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8059CB4
+	bl ActionSelectionCreateCursorAt
 	b _0815954E
 	.pool
 _0815950C:
@@ -204,7 +204,7 @@ _0815950C:
 	ands r0, r1
 	cmp r0, 0
 	beq _0815954E
-	ldr r5, =gUnknown_020244AC
+	ldr r5, =gActionSelectionCursor
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r0, r5
@@ -218,7 +218,7 @@ _0815950C:
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	ldrb r1, [r4]
 	adds r1, r5
 	ldrb r0, [r1]
@@ -229,7 +229,7 @@ _0815950C:
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8059CB4
+	bl ActionSelectionCreateCursorAt
 _0815954E:
 	pop {r4,r5}
 	pop {r0}
@@ -318,7 +318,7 @@ sub_81595E4: @ 81595E4
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r3]
-	ldr r0, =gUnknown_03005D00
+	ldr r0, =gPreBattleCallback1
 	ldr r0, [r0]
 	str r0, [r2]
 	ldr r0, [r2, 0x8]
@@ -336,7 +336,7 @@ bx_wait_t6: @ 8159624
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0815964A
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -387,7 +387,7 @@ sub_8159698: @ 8159698
 	push {lr}
 	ldr r0, =gMain
 	ldr r1, [r0, 0x4]
-	ldr r0, =sub_8038420
+	ldr r0, =BattleMainCB2
 	cmp r1, r0
 	bne _081596BE
 	ldr r0, =gPaletteFade
@@ -399,7 +399,7 @@ sub_8159698: @ 8159698
 	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
-	bl dp01_build_cmdbuf_x23_aa_0
+	bl EmitCmd35
 	bl SafariBufferExecCompleted
 _081596BE:
 	pop {r0}
@@ -410,7 +410,7 @@ _081596BE:
 	thumb_func_start sub_81596D4
 sub_81596D4: @ 81596D4
 	push {lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -484,7 +484,7 @@ _0815976A:
 	thumb_func_start bx_80364D0
 bx_80364D0: @ 815977C
 	push {lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
@@ -569,7 +569,7 @@ sub_8159800: @ 8159800
 	ldrb r0, [r0, 0x8]
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
-	bl sub_805DF84
+	bl LoadBackTrainerBankSpriteGfx
 	ldr r0, [r4]
 	ldrb r6, [r0, 0x8]
 	ldrb r0, [r5]
@@ -580,7 +580,7 @@ sub_8159800: @ 8159800
 	adds r0, r6, 0
 	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
-	ldr r2, =gUnknown_08305D2C
+	ldr r2, =gTrainerBackPicCoords
 	ldr r1, [r4]
 	ldrb r1, [r1, 0x8]
 	lsls r1, 2
@@ -689,7 +689,7 @@ sub_8159904: @ 8159904
 	thumb_func_start sub_8159910
 sub_8159910: @ 8159910
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x8]
 	movs r0, 0x4
@@ -700,7 +700,7 @@ sub_8159910: @ 8159910
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -730,7 +730,7 @@ sub_8159964: @ 8159964
 	adds r1, 0x1
 	adds r0, r1
 	ldrb r1, [r0]
-	ldr r0, =gUnknown_020244D0
+	ldr r0, =gBattleSpritesDataPtr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
 	strb r1, [r0, 0x8]
@@ -739,7 +739,7 @@ sub_8159964: @ 8159964
 	strb r0, [r1]
 	ldrb r4, [r5]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -778,10 +778,10 @@ sub_81599D0: @ 81599D0
 	thumb_func_start dp01t_10_6_message
 dp01t_10_6_message: @ 81599DC
 	push {r4,lr}
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02022E16
+	ldr r0, =gBattle_BG0_Y
 	strh r1, [r0]
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -792,7 +792,7 @@ dp01t_10_6_message: @ 81599DC
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -832,9 +832,9 @@ sub_8159A54: @ 8159A54
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08159A7A
-	ldr r0, =gUnknown_02022E14
+	ldr r0, =gBattle_BG0_X
 	strh r1, [r0]
-	ldr r1, =gUnknown_02022E16
+	ldr r1, =gBattle_BG0_Y
 	movs r0, 0xA0
 	strh r0, [r1]
 	ldr r1, =gBattleBankFunc
@@ -862,27 +862,27 @@ sub_8159A94: @ 8159A94
 	str r1, [r0]
 	ldr r0, =gText_SafariZoneMenu
 	movs r1, 0x2
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	movs r4, 0
 _08159AAE:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_8059CF8
+	bl ActionSelectionDestroyCursorAt
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _08159AAE
-	ldr r1, =gUnknown_020244AC
+	ldr r1, =gActionSelectionCursor
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8059CB4
+	bl ActionSelectionCreateCursorAt
 	ldr r0, =gText_WhatWillPkmnDo2
-	bl StrCpyDecodeToDisplayedStringBattle
+	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
-	bl battle_show_message_maybe
+	bl sub_814F9EC
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -981,7 +981,7 @@ sub_8159B84: @ 8159B84
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0xB
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	bl SafariBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -1161,7 +1161,7 @@ dp01t_34_6_move_anim_start_t3: @ 8159CC4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08159D00
-	bl sub_805EA60
+	bl BattleMusicStop
 	ldrb r1, [r5]
 	lsls r1, 9
 	adds r0, r4, 0x1
@@ -1256,13 +1256,13 @@ sub_8159D90: @ 8159D90
 	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0xA
-	bl healthbar_draw_field_maybe
+	bl UpdateHealthboxAttribute
 	ldrb r0, [r4]
 	bl sub_8076918
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
-	bl sub_80729D0
+	bl SetHealthboxSpriteVisible
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2

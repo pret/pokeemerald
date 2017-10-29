@@ -316,7 +316,7 @@ gFieldEffectScript_FieldMoveShowMonInit:: @ 82DBCCC
 	field_eff_end
 
 gFieldEffectScript_Unknown60:: @ 82DBCD2
-	field_eff_callnative sub_81799B8
+	field_eff_callnative FldEff_UsePuzzleEffect
 	field_eff_end
 
 gFieldEffectScript_Unknown61:: @ 82DBCD8

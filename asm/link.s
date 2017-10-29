@@ -402,7 +402,7 @@ sub_8009734: @ 8009734
 	strb r4, [r0]
 	ldr r0, =gUnknown_030030F8
 	strb r4, [r0]
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	bl sub_800A2E0
 	ldr r0, =gUnknown_03000D54
 	str r4, [r0]
@@ -420,7 +420,7 @@ sub_8009734: @ 8009734
 _080097A8:
 	bl sub_800E700
 _080097AC:
-	ldr r1, =gUnknown_03003124
+	ldr r1, =gReceivedRemoteLinkPlayers
 	movs r0, 0
 	strb r0, [r1]
 	movs r1, 0
@@ -448,7 +448,7 @@ _080097BE:
 	thumb_func_start sub_80097E8
 sub_80097E8: @ 80097E8
 	push {r4,lr}
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	movs r4, 0
 	strb r4, [r0]
 	ldr r0, =gLinkVSyncDisabled
@@ -514,7 +514,7 @@ _08009868:
 	lsrs r5, r0, 24
 	cmp r5, 0x3
 	bls _08009840
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0xF
@@ -532,7 +532,7 @@ _08009888:
 	cmp r0, 0
 	beq _080098C4
 	lsls r0, r5, 8
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	adds r0, r1
 	lsls r4, r5, 1
 	adds r1, r4, r5
@@ -545,7 +545,7 @@ _08009888:
 	movs r6, 0
 	strh r0, [r4]
 	adds r0, r5, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	ldrh r0, [r4]
 	cmp r0, r8
 	beq _080098C4
@@ -752,7 +752,7 @@ _08009A78:
 	blt _08009A70
 	cmp r5, 0
 	bne _08009A94
-	ldr r1, =gUnknown_03003124
+	ldr r1, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _08009A94
@@ -952,7 +952,7 @@ _08009C14:
 	.pool
 _08009C40:
 	movs r2, 0
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	mov r9, r1
 	adds r7, r3, 0
 	ldr r3, =gUnknown_03003090
@@ -996,7 +996,7 @@ _08009C70:
 	cmp r0, 0x1
 	bne _08009D16
 	lsls r1, r6, 8
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	adds r1, r0
 	mov r8, r1
 	lsls r0, r6, 3
@@ -1080,7 +1080,7 @@ _08009D3E:
 	adds r2, r3
 	ldrh r2, [r2]
 	movs r0, 0
-	bl link_0800A448
+	bl SendBlock
 	b _08009D6E
 	.pool
 _08009D64:
@@ -1321,7 +1321,7 @@ _08009F6A:
 	thumb_func_start sub_8009F70
 sub_8009F70: @ 8009F70
 	push {lr}
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08009F80
@@ -1371,8 +1371,8 @@ _08009FC4:
 	.pool
 	thumb_func_end sub_8009FAC
 
-	thumb_func_start sub_8009FCC
-sub_8009FCC: @ 8009FCC
+	thumb_func_start GetLinkPlayerCount
+GetLinkPlayerCount: @ 8009FCC
 	push {lr}
 	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
@@ -1392,14 +1392,14 @@ _08009FEC:
 _08009FF4:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8009FCC
+	thumb_func_end GetLinkPlayerCount
 
 	thumb_func_start sub_8009FF8
 sub_8009FF8: @ 8009FF8
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r5, r1, 0
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r2, 0
@@ -1442,7 +1442,7 @@ sub_800A03C: @ 800A03C
 	thumb_func_start sub_800A040
 sub_800A040: @ 800A040
 	push {lr}
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -1526,7 +1526,7 @@ sub_800A0C8: @ 800A0C8
 	adds r5, r0, 0
 	adds r6, r1, 0
 	movs r7, 0
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r4, [r0]
 	cmp r4, 0x1
 	beq _0800A0DA
@@ -1546,7 +1546,7 @@ _0800A0EA:
 	b _0800A22E
 	.pool
 _0800A0FC:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800A10E
@@ -1572,12 +1572,12 @@ _0800A130:
 	adds r5, 0x1C
 	adds r6, 0x1
 _0800A134:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
 	blt _0800A120
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r7, r0
@@ -1714,12 +1714,12 @@ _0800A266:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0800A26C:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
 	bcc _0800A24C
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
@@ -1742,8 +1742,8 @@ _0800A298:
 	.pool
 	thumb_func_end sub_800A23C
 
-	thumb_func_start sub_800A2A4
-sub_800A2A4: @ 800A2A4
+	thumb_func_start GetLinkPlayerTrainerId
+GetLinkPlayerTrainerId: @ 800A2A4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gLinkPlayers
@@ -1755,7 +1755,7 @@ sub_800A2A4: @ 800A2A4
 	ldr r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_800A2A4
+	thumb_func_end GetLinkPlayerTrainerId
 
 	thumb_func_start sub_800A2BC
 sub_800A2BC: @ 800A2BC
@@ -2008,8 +2008,8 @@ bitmask_all_link_players_but_self: @ 800A490
 	bx r1
 	thumb_func_end bitmask_all_link_players_but_self
 
-	thumb_func_start link_0800A448
-link_0800A448: @ 800A4AC
+	thumb_func_start SendBlock
+SendBlock: @ 800A4AC
 	push {lr}
 	adds r3, r1, 0
 	lsls r2, 16
@@ -2030,7 +2030,7 @@ _0800A4CE:
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end link_0800A448
+	thumb_func_end SendBlock
 
 	thumb_func_start sub_800A4D8
 sub_800A4D8: @ 800A4D8
@@ -2095,8 +2095,8 @@ _0800A546:
 	.pool
 	thumb_func_end sub_800A520
 
-	thumb_func_start sub_800A550
-sub_800A550: @ 800A550
+	thumb_func_start GetBlockReceivedStatus
+GetBlockReceivedStatus: @ 800A550
 	push {lr}
 	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
@@ -2122,7 +2122,7 @@ _0800A580:
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A550
+	thumb_func_end GetBlockReceivedStatus
 
 	thumb_func_start sub_800A588
 sub_800A588: @ 800A588
@@ -2148,8 +2148,8 @@ _0800A5AC:
 	.pool
 	thumb_func_end sub_800A588
 
-	thumb_func_start sub_800A5B4
-sub_800A5B4: @ 800A5B4
+	thumb_func_start ResetBlockReceivedFlags
+ResetBlockReceivedFlags: @ 800A5B4
 	push {r4,lr}
 	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
@@ -2179,10 +2179,10 @@ _0800A5E2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_800A5B4
+	thumb_func_end ResetBlockReceivedFlags
 
-	thumb_func_start sub_800A5EC
-sub_800A5EC: @ 800A5EC
+	thumb_func_start ResetBlockReceivedFlag
+ResetBlockReceivedFlag: @ 800A5EC
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -2206,7 +2206,7 @@ _0800A616:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_800A5EC
+	thumb_func_end ResetBlockReceivedFlag
 
 	thumb_func_start sub_800A620
 sub_800A620: @ 800A620
@@ -2573,7 +2573,7 @@ task00_link_test: @ 800A850
 	movs r2, 0x2
 	movs r3, 0x2
 	bl sub_800A6E8
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0xF
@@ -2697,7 +2697,7 @@ _0800A9E2:
 	lsrs r4, r0, 24
 	adds r5, 0x1
 _0800A9EE:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -3044,7 +3044,7 @@ _0800AC96:
 	thumb_func_start sub_800ACAC
 sub_800ACAC: @ 800ACAC
 	push {r4,lr}
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r3, 0
@@ -3142,7 +3142,7 @@ _0800AD72:
 	thumb_func_start sub_800AD88
 sub_800AD88: @ 800AD88
 	push {r4,r5,lr}
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r1, 0
@@ -3239,7 +3239,7 @@ _0800AE46:
 	thumb_func_start sub_800AE5C
 sub_800AE5C: @ 800AE5C
 	push {r4,lr}
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
@@ -3813,7 +3813,7 @@ sub_800B3A4: @ 800B3A4
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 8
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	adds r4, r2, r1
 	lsls r2, r0, 3
 	subs r2, r0
@@ -3907,7 +3907,7 @@ _0800B482:
 	thumb_func_start sub_800B488
 sub_800B488: @ 800B488
 	push {lr}
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B498
@@ -3923,7 +3923,7 @@ _0800B498:
 	thumb_func_start sub_800B4A4
 sub_800B4A4: @ 800B4A4
 	push {lr}
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0800B4B2
@@ -3938,7 +3938,7 @@ _0800B4B2:
 	thumb_func_start sub_800B4C0
 sub_800B4C0: @ 800B4C0
 	push {lr}
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0800B4CE
@@ -9671,7 +9671,7 @@ _0800E1C8:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _0800E1E6:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -9965,7 +9965,7 @@ _0800E428:
 	ble _0800E3FC
 	mov r4, r9
 _0800E434:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -10019,7 +10019,7 @@ _0800E4A6:
 	adds r5, 0x1C
 	adds r4, 0x1
 _0800E4AC:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -11500,7 +11500,7 @@ _0800F18C:
 	cmp r4, 0
 	bne _0800F1A8
 	bl sub_800EDD4
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	strb r4, [r0]
 	b _0800F1D2
 	.pool
@@ -11976,7 +11976,7 @@ _0800F514:
 	bl sub_8011A64
 _0800F58C:
 	bl rfu_clearAllSlot
-	ldr r1, =gUnknown_03003124
+	ldr r1, =gReceivedRemoteLinkPlayers
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, =gUnknown_03005000
@@ -12224,7 +12224,7 @@ _0800F786:
 	thumb_func_start rfu_func_080F97B8
 rfu_func_080F97B8: @ 800F794
 	push {lr}
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800F7C6
@@ -12430,7 +12430,7 @@ _0800F90E:
 	ldrb r0, [r4, 0xC]
 	cmp r0, 0
 	bne _0800F920
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800F920
@@ -12536,7 +12536,7 @@ _0800F9EA:
 	orrs r0, r3
 	str r0, [r1]
 	movs r4, 0
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	mov r9, r0
 	mov r12, r2
 	mov r1, r8
@@ -12599,7 +12599,7 @@ _0800FA5C:
 	beq _0800FA7E
 	b _0800FC08
 _0800FA7E:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800FA88
@@ -12610,7 +12610,7 @@ _0800FA88:
 	beq _0800FA90
 	b _0800FC08
 _0800FA90:
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	bl sub_8010A70
 	b _0800FC08
 	.pool
@@ -12662,7 +12662,7 @@ _0800FB10:
 	ldrb r2, [r7, 0xC]
 	cmp r2, 0
 	bne _0800FB78
-	ldr r3, =gUnknown_03003124
+	ldr r3, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r3]
 	mov r6, r8
 	adds r6, 0x1
@@ -13410,7 +13410,7 @@ sub_801011C: @ 801011C
 	push {lr}
 	bl rfu_clearAllSlot
 	bl sub_800C048
-	ldr r1, =gUnknown_03003124
+	ldr r1, =gReceivedRemoteLinkPlayers
 	movs r0, 0
 	strb r0, [r1]
 	ldr r2, =gUnknown_03005000
@@ -13627,7 +13627,7 @@ sub_80102B8: @ 80102B8
 	bl sub_800FD14
 	strh r4, [r5]
 _080102E6:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
@@ -13734,7 +13734,7 @@ sub_8010390: @ 8010390
 	b _0801041C
 	.pool
 _080103CC:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0x1
@@ -14374,14 +14374,14 @@ _080108B6:
 	bne _080108C2
 	b _080109D2
 _080108C2:
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	bl sub_800B348
 	b _08010948
 _080108CC:
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0x1
 	bne _0801090C
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080108E8
@@ -14471,7 +14471,7 @@ _0801096E:
 _08010984:
 	adds r0, r6, 0
 	bl DestroyTask
-	ldr r1, =gUnknown_03003124
+	ldr r1, =gReceivedRemoteLinkPlayers
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r0, =0x00000ce8
@@ -14607,7 +14607,7 @@ sub_8010A70: @ 8010A70
 	adds r1, r4, 0
 	bl CpuSet
 	movs r0, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 _08010A9C:
 	add sp, 0x4
 	pop {r4,r5}
@@ -14683,7 +14683,7 @@ _08010B40:
 	b _08010CF0
 _08010B4A:
 	adds r0, r4, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	movs r0, 0xF0
 	lsls r0, 7
 	bl sub_800FD14
@@ -14702,7 +14702,7 @@ _08010B6A:
 	b _08010C52
 	.pool
 _08010B78:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	asrs r0, r4
@@ -14713,9 +14713,9 @@ _08010B78:
 	b _08010CF0
 _08010B8C:
 	adds r0, r4, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	lsls r2, r4, 8
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	adds r2, r0
 	ldr r1, =gLinkPlayers
 	lsls r0, r4, 3
@@ -14799,7 +14799,7 @@ _08010C20:
 	ldr r1, =gUnknown_020228C4
 	movs r0, 0
 	movs r2, 0xA0
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _08010CF0
@@ -14833,7 +14833,7 @@ _08010C94:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08010CF0
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -14841,11 +14841,11 @@ _08010C94:
 	mov r0, sp
 	movs r4, 0
 	strh r4, [r0]
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	ldr r2, =0x0100007e
 	bl CpuSet
 	movs r0, 0
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	ldr r1, =gUnknown_03005000
 	ldr r5, =0x00000ce8
 	adds r0, r1, r5
@@ -14924,7 +14924,7 @@ _08010D56:
 	ldr r1, =gUnknown_020228C4
 	movs r0, 0
 	movs r2, 0x3C
-	bl link_0800A448
+	bl SendBlock
 	b _08010D7A
 	.pool
 _08010D70:
@@ -14938,17 +14938,17 @@ _08010D7A:
 	strh r0, [r4, 0x8]
 	b _08010DA6
 _08010D82:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	movs r4, 0x1
 	adds r1, r4, 0
 	ands r1, r0
 	cmp r1, 0
 	beq _08010DA6
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	bl sub_8010A14
 	movs r0, 0
-	bl sub_800A5EC
-	ldr r0, =gUnknown_03003124
+	bl ResetBlockReceivedFlag
+	ldr r0, =gReceivedRemoteLinkPlayers
 	strb r4, [r0]
 	adds r0, r5, 0
 	bl DestroyTask
@@ -15290,7 +15290,7 @@ _08011048:
 	strb r0, [r1, 0x3]
 	adds r4, 0x1
 _08011054:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -15701,7 +15701,7 @@ _0801136C:
 	bics r3, r2
 	adds r2, r3, 0
 	strb r2, [r1]
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080113B0
@@ -15912,7 +15912,7 @@ _08011544:
 	movs r1, 0x5
 	movs r2, 0x5
 	bl nullsub_5
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080115DE
@@ -16397,7 +16397,7 @@ _08011958:
 	ldrb r0, [r2, 0xC]
 	cmp r0, 0x1
 	bne _08011996
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080119B4
@@ -16423,7 +16423,7 @@ _08011996:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _080119B4
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080119B4
@@ -17502,7 +17502,7 @@ sub_801229C: @ 801229C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1C
@@ -18913,7 +18913,7 @@ _08012F14:
 	strb r0, [r6, 0xC]
 	b _08012F50
 _08012F22:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08012F50
@@ -19861,7 +19861,7 @@ _080137A6:
 	b _08013A86
 	.pool
 _080137C4:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0801387A
@@ -20806,11 +20806,11 @@ _08013FDE:
 	adds r1, r0
 	movs r0, 0
 	movs r2, 0x64
-	bl link_0800A448
+	bl SendBlock
 	b _080140BC
 	.pool
 _08013FFC:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -20822,13 +20822,13 @@ _08013FFC:
 	eors r1, r2
 	lsls r1, 24
 	lsrs r1, 16
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	adds r1, r2
 	movs r2, 0x64
 	bl memcpy
 	movs r0, 0x32
 	bl IncrementGameStat
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	b _0801405A
 	.pool
 _08014038:
@@ -20843,7 +20843,7 @@ _08014038:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0xDC
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _080140BC
@@ -20854,7 +20854,7 @@ _0801405A:
 	b _080140BC
 	.pool
 _08014070:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -20866,12 +20866,12 @@ _08014070:
 	eors r1, r0
 	lsls r1, 24
 	lsrs r1, 16
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	adds r1, r0
 	adds r0, r4, 0
 	movs r2, 0xD8
 	bl memcpy
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	ldr r1, =gUnknown_02032298
 	strb r7, [r1]
 	movs r0, 0x6
@@ -20925,7 +20925,7 @@ _08014114:
 	strh r0, [r4, 0x8]
 	b _0801419E
 _0801411C:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	bl sub_800A9D8
 	lsls r4, 24
@@ -20938,7 +20938,7 @@ _0801411C:
 	.pool
 _08014138:
 	lsls r1, r4, 8
-	ldr r0, =gUnknown_020223C4
+	ldr r0, =gBlockRecvBuffer
 	adds r3, r1, r0
 	movs r0, 0x64
 	muls r0, r4
@@ -20950,12 +20950,12 @@ _08014138:
 	adds r5, 0x1C
 	adds r4, 0x1
 _08014152:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
 	blt _08014138
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -20965,7 +20965,7 @@ _08014152:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 16
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	adds r3, r0, r1
 	adds r0, r3, 0
 	adds r0, 0x60
@@ -20976,7 +20976,7 @@ _08014152:
 _08014190:
 	bl sub_801B940
 _08014194:
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	adds r0, r6, 0
 	bl DestroyTask
 _0801419E:
@@ -21117,7 +21117,7 @@ sub_8014290: @ 8014290
 	asrs r5, 24
 	str r5, [sp]
 	adds r3, r4, 0
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	ldr r0, [r6]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
@@ -21159,7 +21159,7 @@ sub_8014304: @ 8014304
 	strh r1, [r0]
 	ldr r0, =0x00004087
 	bl VarSet
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	ldr r1, =gUnknown_03005DB8
 	strb r0, [r1]
 	bl GetMultiplayerId
@@ -21182,7 +21182,7 @@ sub_8014304: @ 8014304
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r3, r8
-	bl warp1_set
+	bl Overworld_SetWarpDestination
 	bl warp_in
 	add sp, 0x4
 	pop {r3}
@@ -21665,7 +21665,7 @@ _08014854:
 	movs r0, 0x4
 	strh r0, [r7]
 	bl sub_800E3A8
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	b _080149B2
 	.pool
 _080148B8:
@@ -21723,7 +21723,7 @@ _08014934:
 	movs r0, 0
 	adds r1, r2, 0
 	movs r2, 0xE
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _080149B2
@@ -21731,13 +21731,13 @@ _08014934:
 	strh r0, [r7]
 	b _080149B2
 _0801494A:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	bne _080149B2
-	bl sub_800A5B4
-	ldr r0, =gUnknown_020223C4
+	bl ResetBlockReceivedFlags
+	ldr r0, =gBlockRecvBuffer
 	movs r2, 0x80
 	lsls r2, 1
 	adds r1, r0, r2
@@ -21766,7 +21766,7 @@ _08014992:
 	strh r0, [r7]
 	b _080149B2
 _0801499C:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080149B2
@@ -22316,7 +22316,7 @@ _08014E8C:
 	strb r0, [r5, 0xC]
 	b _08014EF2
 _08014E92:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08014EF2
@@ -22636,7 +22636,7 @@ _08015180:
 	b _080152A0
 	.pool
 _080151A4:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080151C2
@@ -23002,7 +23002,7 @@ _080154E0:
 	b _08015604
 	.pool
 _08015504:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08015522
@@ -23714,7 +23714,7 @@ _08015BB8:
 	movs r0, 0x40
 	strb r0, [r1]
 _08015BBE:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08015BCA
@@ -23750,7 +23750,7 @@ _08015C24:
 	movs r0, 0x5
 	bl _08016876
 _08015C2A:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08015C36
@@ -23785,7 +23785,7 @@ _08015C54:
 	bne _08015C78
 	bl _08016878
 _08015C78:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08015C94
@@ -23918,7 +23918,7 @@ _08015DA6:
 	bl _08016876
 	.pool
 _08015DD0:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08015DF4
@@ -24212,7 +24212,7 @@ _08016084:
 	movs r0, 0x1E
 	bl sub_8015664
 _08016092:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801609E
@@ -24241,7 +24241,7 @@ _080160C6:
 	movs r0, 0x2
 	bl _08016876
 _080160DA:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080160E4
@@ -24452,7 +24452,7 @@ _080162D4:
 	movs r0, 0x24
 	b _08016876
 _080162DC:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r4, [r0]
 	cmp r4, 0
 	beq _080162E6
@@ -28312,7 +28312,7 @@ _080181BC:
 sub_80181CC: @ 80181CC
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_80983E8
+	bl ScriptFreezeMapObjects
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80181CC
@@ -30478,7 +30478,7 @@ _08019406:
 	strb r0, [r5, 0x8]
 	b _08019922
 _0801940C:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0801942C
@@ -30646,7 +30646,7 @@ _0801956A:
 	strb r0, [r5, 0x8]
 	b _08019922
 _08019574:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0801957E
@@ -30981,7 +30981,7 @@ _080197EE:
 	strb r0, [r5, 0x8]
 	b _08019922
 _080197F8:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08019810
@@ -31050,7 +31050,7 @@ _08019884:
 	b _08019922
 	.pool
 _080198A0:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08019922
@@ -31292,7 +31292,7 @@ flag_clear_x63: @ 8019A64
 	adds r0, r1
 	lsls r0, 16
 	lsrs r0, 16
-	bl FlagReset
+	bl FlagClear
 	pop {r0}
 	bx r0
 	.pool
@@ -33417,7 +33417,7 @@ _0801AB1E:
 	lsls r2, 4
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, =sub_8036760
+	ldr r0, =CB2_InitBattle
 	bl SetMainCallback2
 	pop {r4-r7}
 	pop {r0}
@@ -33741,7 +33741,7 @@ _0801AE7A:
 	ldr r1, =gUnknown_020228C4
 	movs r0, 0
 	movs r2, 0x20
-	bl link_0800A448
+	bl SendBlock
 	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -33749,14 +33749,14 @@ _0801AE7A:
 	b _0801AF8A
 	.pool
 _0801AE98:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _0801AEA6
 	b _0801AFAE
 _0801AEA6:
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	ldrh r0, [r1]
 	cmp r0, 0x51
 	bne _0801AEE0
@@ -33782,7 +33782,7 @@ _0801AEA6:
 	.pool
 _0801AEE0:
 	bl sub_800AC34
-	ldr r4, =gUnknown_020223C4
+	ldr r4, =gBlockRecvBuffer
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 16
@@ -33805,7 +33805,7 @@ _0801AF0C:
 	movs r1, 0x8
 _0801AF16:
 	strb r1, [r0]
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	b _0801AFAE
 	.pool
 _0801AF24:
@@ -33842,7 +33842,7 @@ _0801AF58:
 	b _0801AFAE
 	.pool
 _0801AF7C:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801AFAE
@@ -39072,7 +39072,7 @@ sub_801D938: @ 801D938
 	adds r3, r0, 0
 	adds r0, r1, 0
 	lsls r3, 8
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	adds r3, r1
 	adds r1, r3, 0
 	bl memcpy
@@ -39085,7 +39085,7 @@ sub_801D938: @ 801D938
 sub_801D954: @ 801D954
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	asrs r0, r4
@@ -39108,7 +39108,7 @@ sub_801D978: @ 801D978
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	pop {r0}
 	bx r0
 	thumb_func_end sub_801D978
@@ -39273,7 +39273,7 @@ _0801DA7C:
 	movs r0, 0
 	mov r1, sp
 	movs r2, 0x8
-	bl link_0800A448
+	bl SendBlock
 	b _0801DB3E
 	.pool
 _0801DAC8:
@@ -39300,7 +39300,7 @@ _0801DAC8:
 	lsls r2, r0, 16
 	lsrs r2, 16
 	movs r0, 0
-	bl link_0800A448
+	bl SendBlock
 	ldrh r0, [r4, 0x10]
 	adds r0, 0x1
 	strh r0, [r4, 0x10]
@@ -39310,7 +39310,7 @@ _0801DB08:
 	adds r1, r3
 	movs r0, 0
 	movs r2, 0xFC
-	bl link_0800A448
+	bl SendBlock
 	ldrh r0, [r4, 0x10]
 	adds r0, 0x1
 	strh r0, [r4, 0x10]
@@ -39697,7 +39697,7 @@ sub_801DDD0: @ 801DDD0
 	strb r5, [r4, 0x16]
 	movs r0, 0xFF
 	strb r0, [r4, 0x1A]
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	strb r0, [r4, 0xD]
 	bl GetMultiplayerId
 	strb r0, [r4, 0x13]
@@ -39942,7 +39942,7 @@ _0801DFE0:
 	adds r1, r0
 	movs r0, 0
 	movs r2, 0x28
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E028
@@ -40416,7 +40416,7 @@ _0801E3D4:
 	adds r1, r0
 	movs r0, 0
 	movs r2, 0x28
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E414
@@ -40432,14 +40432,14 @@ _0801E410:
 _0801E412:
 	strh r0, [r1, 0x6]
 _0801E414:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E458
 	b _0801E42C
 	.pool
 _0801E424:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E438
@@ -40556,7 +40556,7 @@ _0801E50C:
 	adds r1, r0
 	movs r0, 0
 	movs r2, 0x28
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E5BC
@@ -40564,7 +40564,7 @@ _0801E50C:
 	b _0801E59A
 	.pool
 _0801E540:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -40599,7 +40599,7 @@ _0801E584:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _0801E590:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E5BC
@@ -40683,7 +40683,7 @@ _0801E62E:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _0801E638:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E662
@@ -40798,7 +40798,7 @@ _0801E724:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _0801E730:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E75C
@@ -40849,7 +40849,7 @@ _0801E784:
 	.4byte _0801E802
 	.4byte _0801E820
 _0801E798:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E7AC
@@ -40883,7 +40883,7 @@ _0801E7C0:
 	adds r1, r0
 	movs r0, 0
 	movs r2, 0x28
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E830
@@ -42276,7 +42276,7 @@ _0801F2E0:
 	.4byte _0801F494
 	.4byte _0801F438
 _0801F300:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801F30A
@@ -42285,7 +42285,7 @@ _0801F30A:
 	movs r0, 0x1
 	strh r0, [r4]
 _0801F30E:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	adds r2, r0, 0
@@ -42304,7 +42304,7 @@ _0801F30E:
 	b _0801F4C4
 	.pool
 _0801F33C:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x6]
@@ -42361,11 +42361,11 @@ _0801F3A2:
 	strh r1, [r4, 0x4]
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl sub_800A5EC
+	bl ResetBlockReceivedFlag
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	lsls r0, 8
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	adds r0, r1
 	ldrb r0, [r0]
 	subs r0, 0x1
@@ -42406,7 +42406,7 @@ _0801F3F6:
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	lsls r1, 8
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 	adds r1, r2
 	bl sub_801EFF8
 	cmp r0, 0
@@ -42446,7 +42446,7 @@ _0801F448:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0
 	beq _0801F47C
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -45486,7 +45486,7 @@ sub_8020C70: @ 8020C70
 	adds r4, r0, 0
 	movs r0, 0
 	mov r8, r0
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08020C8E
@@ -45504,7 +45504,7 @@ _08020C8E:
 	b _08020CF8
 	.pool
 _08020CAC:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -49731,7 +49731,7 @@ _08022F7A:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x2
-	bl link_0800A448
+	bl SendBlock
 	b _08023060
 _08022FAA:
 	bl sub_800A520
@@ -49742,7 +49742,7 @@ _08022FAA:
 	strh r0, [r5, 0x10]
 	b _08023060
 _08022FBA:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	ldr r2, =gUnknown_082F4448
 	ldrb r4, [r5, 0x9]
 	subs r1, r4, 0x2
@@ -49755,7 +49755,7 @@ _08022FBA:
 	movs r3, 0
 	cmp r3, r4
 	bcs _0802301E
-	ldr r7, =gUnknown_020223C4
+	ldr r7, =gBlockRecvBuffer
 	movs r6, 0
 	ldr r4, =gUnknown_0858AB24
 _08022FDC:
@@ -49796,7 +49796,7 @@ _08022FF6:
 _0802301E:
 	movs r0, 0
 	strh r0, [r5, 0x10]
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	movs r1, 0x18
 	ldrsh r0, [r5, r1]
 	lsls r0, 8
@@ -51445,7 +51445,7 @@ _08023D12:
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x2
-	bl link_0800A448
+	bl SendBlock
 	b _0802402E
 _08023D2A:
 	bl sub_800A520
@@ -51456,7 +51456,7 @@ _08023D2A:
 _08023D36:
 	b _08024004
 _08023D38:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	ldr r2, =gUnknown_082F4448
 	ldrb r3, [r7, 0x9]
 	subs r1, r3, 0x2
@@ -51474,7 +51474,7 @@ _08023D50:
 	adds r4, 0x42
 	cmp r8, r3
 	bcs _08023D7E
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 _08023D5E:
 	mov r3, r8
 	lsls r1, r3, 5
@@ -51496,7 +51496,7 @@ _08023D7E:
 	movs r0, 0
 	strh r0, [r7, 0x10]
 	strh r0, [r4]
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	ldrb r0, [r7, 0x8]
 	cmp r0, 0
 	bne _08023D9C
@@ -51788,7 +51788,7 @@ _08023FC4:
 	movs r0, 0
 	ldr r1, [sp, 0xC]
 	movs r2, 0x30
-	bl link_0800A448
+	bl SendBlock
 	b _0802402E
 _08023FD0:
 	bl sub_800A520
@@ -51797,7 +51797,7 @@ _08023FD0:
 	beq _08024034
 	b _08024004
 _08023FDC:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -51808,11 +51808,11 @@ _08023FDC:
 	movs r1, 0
 	movs r2, 0x30
 	bl memset
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	adds r0, r4, 0
 	movs r2, 0x30
 	bl memcpy
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 _08024004:
 	movs r0, 0
 	strh r0, [r7, 0x10]
@@ -52207,7 +52207,7 @@ _08024306:
 	strh r5, [r0]
 	movs r0, 0
 	movs r2, 0x2
-	bl link_0800A448
+	bl SendBlock
 	b _080243AC
 _08024328:
 	bl sub_800A520
@@ -52217,7 +52217,7 @@ _08024328:
 	strh r5, [r4, 0x10]
 	b _080243AC
 _08024336:
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	ldr r2, =gUnknown_082F4448
 	ldrb r3, [r4, 0x9]
 	subs r1, r3, 0x2
@@ -52234,7 +52234,7 @@ _08024336:
 	cmp r5, r3
 	bcs _08024374
 	adds r1, r6, 0
-	ldr r2, =gUnknown_020223C4
+	ldr r2, =gBlockRecvBuffer
 _0802435C:
 	lsls r0, r5, 8
 	adds r0, r2
@@ -52264,7 +52264,7 @@ _08024390:
 	movs r2, 0
 	bl sub_8022BEC
 _0802439A:
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	movs r1, 0
 	movs r0, 0
 	strh r0, [r7]
@@ -52485,7 +52485,7 @@ _08024528:
 	bl sub_800AC34
 	b _08024558
 _08024538:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802455E
@@ -53023,7 +53023,7 @@ sub_802493C: @ 802493C
 	ldr r1, =gUnknown_03000DB0
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08024A10
@@ -53271,7 +53271,7 @@ _08024B2C:
 _08024B6A:
 	ldr r0, [sp, 0x10]
 	strb r1, [r0]
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	mov r1, r8
 	strb r0, [r1]
 	bl GetMultiplayerId
@@ -53382,7 +53382,7 @@ _08024C5A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08024D40
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08024D20
@@ -53989,7 +53989,7 @@ _0802516C:
 	thumb_func_start sub_8025170
 sub_8025170: @ 8025170
 	push {r4,lr}
-	bl sub_800A550
+	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -54001,7 +54001,7 @@ sub_8025170: @ 8025170
 	movs r0, 0
 	b _08025192
 _0802518C:
-	bl sub_800A5B4
+	bl ResetBlockReceivedFlags
 	movs r0, 0x1
 _08025192:
 	pop {r4}
@@ -54031,7 +54031,7 @@ _080251BA:
 	adds r1, 0x4A
 	movs r0, 0
 	movs r2, 0x3C
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025226
@@ -54115,7 +54115,7 @@ _08025252:
 	adds r1, r2, r1
 	movs r0, 0
 	movs r2, 0x3C
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025316
@@ -54139,7 +54139,7 @@ _08025282:
 _0802528E:
 	ldr r0, [r5]
 	adds r0, 0x4A
-	ldr r1, =gUnknown_020223C4
+	ldr r1, =gBlockRecvBuffer
 	movs r2, 0x3C
 	bl memcpy
 	ldr r1, [r5]
@@ -54265,7 +54265,7 @@ _0802539C:
 	strb r0, [r1]
 	movs r0, 0
 	movs r2, 0x1
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025466
@@ -54302,7 +54302,7 @@ _080253DC:
 	adds r3, r1, 0
 	movs r5, 0x86
 	lsls r5, 1
-	ldr r4, =gUnknown_020223C4
+	ldr r4, =gBlockRecvBuffer
 _080253FA:
 	ldr r1, [r3]
 	adds r1, r2, r1
@@ -54452,7 +54452,7 @@ _0802553C:
 	strb r0, [r1]
 	movs r0, 0
 	movs r2, 0x1
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802563C
@@ -54486,7 +54486,7 @@ _08025578:
 	adds r3, r1, 0
 	movs r5, 0x86
 	lsls r5, 1
-	ldr r4, =gUnknown_020223C4
+	ldr r4, =gBlockRecvBuffer
 _08025596:
 	ldr r1, [r3]
 	adds r1, r2, r1
@@ -54617,7 +54617,7 @@ _08025688:
 	strb r0, [r1, 0x10]
 	b _080256A0
 _08025692:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080256A0
@@ -54829,7 +54829,7 @@ _0802585C:
 	bl sub_802903C
 	ldr r0, [r4]
 	bl sub_8024A30
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08025882
@@ -54946,7 +54946,7 @@ _0802593E:
 	adds r1, r0
 	movs r0, 0
 	movs r2, 0x1
-	bl link_0800A448
+	bl SendBlock
 	lsls r0, 24
 	cmp r0, 0
 	beq _080259E8
@@ -54976,7 +54976,7 @@ _0802597E:
 	cmp r2, r0
 	bcs _080259C4
 	adds r3, r1, 0
-	ldr r5, =gUnknown_020223C4
+	ldr r5, =gBlockRecvBuffer
 	ldr r4, =0x0000318c
 _0802599A:
 	ldr r0, [r3]
@@ -57700,7 +57700,7 @@ _08026EF6:
 	adds r4, 0xC
 	adds r5, 0x1
 _08026EFE:
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -58643,7 +58643,7 @@ sub_8027660: @ 8027660
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802768C
@@ -59511,7 +59511,7 @@ _08027C76:
 	thumb_func_start sub_8027D20
 sub_8027D20: @ 8027D20
 	push {lr}
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	ldr r1, =gUnknown_02022C98
 	ldr r1, [r1]
 	adds r1, 0x24
@@ -64818,7 +64818,7 @@ sub_802A9A8: @ 802A9A8
 	adds r6, r1, 0
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0802AA3C
@@ -64891,7 +64891,7 @@ sub_802AA48: @ 802AA48
 sub_802AA60: @ 802AA60
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	movs r2, 0
 	strb r0, [r4, 0x5]
 	adds r1, r4, 0
@@ -67232,7 +67232,7 @@ _0802BD02:
 	b _0802BD24
 	.pool
 _0802BD14:
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802BD24
@@ -68775,7 +68775,7 @@ _0802C8A4:
 	thumb_func_start sub_802C8AC
 sub_802C8AC: @ 802C8AC
 	push {lr}
-	bl sub_8009FCC
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -71211,7 +71211,7 @@ sub_802DBF8: @ 802DBF8
 	movs r6, 0
 	cmp r6, r10
 	bge _0802DC62
-	ldr r0, =gUnknown_08300D38
+	ldr r0, =gMonFrontPicCoords
 	mov r9, r0
 	ldr r1, =gUnknown_02022D00
 	mov r8, r1
@@ -73081,7 +73081,7 @@ sub_802EAB0: @ 802EAB0
 	lsls r1, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r1, r0
-	ldr r0, =gUnknown_03003124
+	ldr r0, =gReceivedRemoteLinkPlayers
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0802EB14

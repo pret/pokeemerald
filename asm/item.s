@@ -676,8 +676,8 @@ _080D6D04:
 	.pool
 	thumb_func_end sub_80D6CE4
 
-	thumb_func_start sub_80D6D1C
-sub_80D6D1C: @ 80D6D1C
+	thumb_func_start CheckPCHasItem
+CheckPCHasItem: @ 80D6D1C
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -717,10 +717,10 @@ _080D6D68:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D6D1C
+	thumb_func_end CheckPCHasItem
 
-	thumb_func_start sub_80D6D70
-sub_80D6D70: @ 80D6D70
+	thumb_func_start AddPCItem
+AddPCItem: @ 80D6D70
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -819,7 +819,7 @@ _080D6E3A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80D6D70
+	thumb_func_end AddPCItem
 
 	thumb_func_start sub_80D6E48
 sub_80D6E48: @ 80D6E48

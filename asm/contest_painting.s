@@ -72,7 +72,7 @@ sub_812FE0C: @ 812FE0C
 	movs r0, 0x1
 	bl GetBgTilemapBuffer
 	bl Free
-	bl sub_805F094
+	bl FreeMonSpritesGfx
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -110,7 +110,7 @@ _0812FE94:
 	bl remove_some_task
 	movs r0, 0
 	bl SetVBlankCallback
-	bl init_uns_table_pokemon_copy
+	bl AllocateMonSpritesGfx
 	ldr r1, =gUnknown_030061C0
 	ldr r0, =gUnknown_02039F3C
 	str r0, [r1]
@@ -581,7 +581,7 @@ sub_81302E8: @ 81302E8
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r4, =gBattleSpritesGfx
+	ldr r4, =gMonSpritesGfxPtr
 	ldr r1, [r4]
 	ldr r1, [r1, 0x8]
 	ldr r2, [r6]
@@ -600,7 +600,7 @@ _08130348:
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r4, =gBattleSpritesGfx
+	ldr r4, =gMonSpritesGfxPtr
 	ldr r1, [r4]
 	ldr r1, [r1, 0x4]
 	ldr r2, [r6]
