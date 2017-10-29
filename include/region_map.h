@@ -219,66 +219,35 @@ enum {
     MAPSEC_TRAINER_HILL
 };
 
+struct UnkStruct_8122CF8 {
+    u32 unk_0_0:2;
+    u32 unk_0_2:2;
+    u32 unk_0_4:5;
+};
+
 struct RegionMap {
-    u8 unk_00;
-    u8 unk_01;
-    bool8 unk_02;
-    u8 unk_03;
-    u8 mapSecName[0x14];
-    u16 mapSecId;
-    u8 unk16;
-    u8 everGrandeCityArea;
-    u8 (*inputCallback)(void);
-    struct Sprite *cursorSprite;
-    struct Sprite *playerIconSprite;
-    s32 bg2x;
-    s32 bg2y;
-    u32 unk2C;  //
-    u32 unk30;  //  Map rotation parameters
-    u32 unk34;  //  Likely a scrapped feature
-    u32 unk38;  //
-    s32 unk3C;
-    s32 unk40;
-    s32 unk44;
-    s32 unk48;
-    s32 unk4C;
-    s32 unk50;
-    u16 cursorPosX;
-    u16 cursorPosY;
-    u16 cursorTileTag;
-    u16 cursorPaletteTag;
-    s16 scrollX;
-    s16 scrollY;
-    s16 unk60;
-    s16 unk62;
-    u16 unk64;
-    u16 unk66;
-    u16 unk68;
-    u16 unk6A;
-    u16 unk6C;
-    u16 unk6E;
-    u16 playerIconTileTag;
-    u16 playerIconPaletteTag;
-    u16 unk74;
-    u16 unk76;
-    bool8 zoomed;
-    u8 initStep;
-    s8 unk7A;
-    s8 cursorDeltaX;
-    s8 cursorDeltaY;
-    bool8 needUpdateVideoRegs;
-    bool8 blinkPlayerIcon;
-    bool8 playerIsInCave;
-    /*0x084*/ u8 filler80[0x100];
-    /*0x184*/ u8 cursorSmallImage[0x100];
-    /*0x284*/ u8 cursorLargeImage[0x600];
+    /*0x000*/ u8 unk_00;
+    /*0x001*/ u8 unk_01;
+    /*0x002*/ bool8 unk_02;
+    /*0x003*/ u8 unk_03;
+    /*0x004*/ u8 mapSecName[0x14];
+    /*0x018*/ u8 (*inputCallback)(void);
+    /*0x01c*/ u8 filler_01c[0x5c];
+    /*0x078*/ u8 unk_078;
+    /*0x079*/ bool8 unk_079;
+    /*0x07a*/ u8 filler_07a[6];
+    /*0x080*/ u8 unk_080;
+    /*0x081*/ u8 unk_081;
+    /*0x082*/ u8 unk_082;
+    /*0x083*/ bool8 unk_083;
+    /*0x084*/ u8 filler_084[0x800];
 }; // size = 0x884
 
 // Exported RAM declarations
 
 // Exported ROM declarations
 void GetMapName(u8 *, u16, u16);
-void sub_8122CDC(struct RegionMap *regionMap, u8 argument);
+void sub_8122CDC(struct RegionMap *regionMap, bool8 argument);
 void sub_8124288(u16 x, u16 y);
 void sub_81240D4(u16 x, u16 y);
 u8 sub_81230AC(void);

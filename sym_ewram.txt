@@ -1113,12 +1113,7 @@ gUnknown_0203A138: @ 203A138
 gUnknown_0203A140: @ 203A140
 	.space 0x4
 
-gUnknown_0203A144: @ 203A144
-	.space 0x4
-
-gUnknown_0203A148: @ 203A148
-	.space 0x4
-
+	.include "src/region_map.o"
     .include "src/decoration.o"
     .align 2
 

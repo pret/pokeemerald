@@ -120,7 +120,7 @@ void sub_8170290(void)
     switch (gUnknown_0203BCD0->state)
     {
         case 0:
-            sub_8122CDC(&gUnknown_0203BCD0->regionMap, 0);
+            sub_8122CDC(&gUnknown_0203BCD0->regionMap, FALSE);
             sub_8124288(0, 0);
             sub_81240D4(1, 1);
             gUnknown_0203BCD0->state ++;
