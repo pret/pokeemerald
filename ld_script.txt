@@ -167,6 +167,7 @@ SECTIONS {
         src/mail.o(.text);
         asm/menu_helpers.o(.text);
         asm/dewford_trend.o(.text);
+        src/heal_location.o(.text);
         asm/heal_location.o(.text);
         asm/region_map.o(.text);
         asm/cute_sketch.o(.text);
@@ -410,7 +411,7 @@ SECTIONS {
         data/mauville_old_man.o(.rodata);
         src/mail.o(.rodata);
         data/menu_helpers.o(.rodata);
-        data/heal_location.o(.rodata);
+        src/heal_location.o(.rodata);
         data/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/decoration.o(.rodata);
