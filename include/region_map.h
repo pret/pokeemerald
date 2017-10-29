@@ -223,5 +223,10 @@ enum {
 
 // Exported ROM declarations
 void GetMapName(u8 *, u16, u16);
+void sub_8122CDC(void *data, u8 argument);
+void sub_8124288(u16 x, u16 y);
+void sub_81240D4(u16 x, u16 y);
+u8 sub_81230AC(void);
+void sub_812305C(void);
 
 #endif //GUARD_REGION_MAP_H

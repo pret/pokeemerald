@@ -70,5 +70,6 @@ extern const u8 gText_Cushion[];
 extern const u8 gText_Decorate[];
 extern const u8 gText_PutAway[];
 extern const u8 gText_Toss2[];
+extern const u8 gText_Hoenn[];
 
 #endif //GUARD_STRINGS_H
