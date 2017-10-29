@@ -15,14 +15,6 @@
 
 // .rodata
 
-const struct {
-    const union AffineAnimCmd *const *const affineAnims;
-    void (* callback)(struct Sprite *sprite);
-} gUnknown_0859F534 = {
-    gDummySpriteAffineAnimTable,
-    SpriteCallbackDummy
-};
-
 const struct HealLocation gUnknown_0859F53C[] = {
     HEAL_LOCATION(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F,  4,  2),
     HEAL_LOCATION(LITTLEROOT_TOWN_MAYS_HOUSE_2F,      4,  2),
@@ -48,6 +40,45 @@ const struct HealLocation gUnknown_0859F53C[] = {
     HEAL_LOCATION(BATTLE_FRONTIER_OUTSIDE_EAST,       3, 52)
 };
 
-const u16 gUnknown_0859F5EC[] = INCBIN_U16("graphics/unknown/unk_859f5ec.gbapal");
+#define NUM_HEAL_LOCATIONS (ARRAY_COUNT(gUnknown_0859F53C))
 
 // .text
+
+u32 sub_8122C5C(u16 mapGroup, u16 mapNum)
+{
+    u32 i;
+
+    for (i = 0; i < NUM_HEAL_LOCATIONS; i ++)
+    {
+        if (gUnknown_0859F53C[i].group == mapGroup && gUnknown_0859F53C[i].map == mapNum)
+        {
+            return i + 1;
+        }
+    }
+    return 0;
+}
+
+const struct HealLocation *sub_8122C94(u16 mapGroup, u16 mapNum)
+{
+    u32 loc;
+
+    loc = sub_8122C5C(mapGroup, mapNum);
+    if (loc == 0)
+    {
+        return NULL;
+    }
+    return &gUnknown_0859F53C[loc - 1];
+}
+
+const struct HealLocation *sub_8122CBC(u32 loc)
+{
+    if (loc == 0)
+    {
+        return NULL;
+    }
+    if (loc > NUM_HEAL_LOCATIONS)
+    {
+        return NULL;
+    }
+    return &gUnknown_0859F53C[loc - 1];
+}

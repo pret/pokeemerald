@@ -3,6 +3,11 @@
 
 // Exported type declarations
 
+struct UnkStruct_0859F534 {
+    const union AffineAnimCmd *const *const affineAnims;
+    void (* callback)(struct Sprite *sprite);
+};
+
 struct HealLocation
 {
     s8 group;
