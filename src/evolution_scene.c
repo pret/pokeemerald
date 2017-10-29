@@ -23,16 +23,21 @@
 #include "battle_message.h"
 #include "gpu_regs.h"
 #include "bg.h"
+#include "link.h"
+#include "blend_palette.h"
+#include "trig.h"
 
 struct EvoInfo
 {
     u8 preEvoSpriteID;
     u8 postEvoSpriteID;
     u8 evoTaskID;
+    u8 field_3;
     u16 savedPalette[48];
 };
 
-extern struct EvoInfo *gEvoStructPtr;
+static EWRAM_DATA struct EvoInfo *sEvoStructPtr = NULL;
+static EWRAM_DATA u16 *sEvoMovingBgPtr = NULL;
 
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
@@ -42,31 +47,66 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern u16 gBattle_WIN0H;
-extern u16 gBattle_WIN0V;
-extern u16 gBattle_WIN1H;
-extern u16 gBattle_WIN1V;
 extern u8 gBattleTerrain;
 extern struct SpriteTemplate gUnknown_0202499C;
+extern bool8 gAffineAnimsDisabled;
+extern u16 gMoveToLearn;
 
+extern u8 gBattleCommunication[];
+#define sEvoCursorPos           gBattleCommunication[1] // when learning a new move
+#define sEvoGraphicsTaskID      gBattleCommunication[2]
+
+extern const struct WindowTemplate gUnknown_0833900C;
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+extern const u8 gUnknown_085B58C9[][4];
+extern const u16 gUnknown_085B5884[];
+extern const u8 gUnknown_085B58D9[];
+extern const u16 gUnknown_085B51E4[];
+extern const u32 gUnknown_085B4134[];
+extern const u32 gUnknown_085B482C[];
+extern const u32 gUnknown_085B4D10[];
 
+// strings
+extern const u8 gUnknown_085B58C4[];
+extern const u8 gText_PkmnIsEvolving[];
+extern const u8 gText_CongratsPkmnEvolved[];
+extern const u8 gText_BattleYesNoChoice[];
+extern const u8 gText_PkmnStoppedEvolving[];
+extern const u8 gText_EllipsisQuestionMark[];
+extern const u8 gText_CommunicationStandby5[];
+
+extern void copy_decompressed_tile_data_to_vram_autofree(u8 arg0, const void *arg1, bool32 arg2, u16 arg3, u8 arg4);
+extern u32 sub_80391E0(u8, u8);
 extern void SpriteCallbackDummy_2(struct Sprite *sprite);
 extern void sub_80356D0(void);
+extern void sub_807B154(void);
 extern void sub_806A068(u16, u8);
+extern void sub_807F19C(void);
+extern void sub_807B140(void);
+extern void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
+extern void sub_8085784(void);
+extern void sub_81BFA38(struct Pokemon *party, u8 monId, u8 partyCount, void *CB2_ptr, u16 move);
+extern u8 sub_81C1B94(void);
+extern void sub_807F1A8(u8 arg0, const u8 *arg1, u8 arg2);
+extern void sub_800E084(void);
 
 // this file's functions
-void Task_EvolutionScene(u8 taskID);
-void Task_TradeEvolutionScene(u8 taskID);
-void CB2_EvolutionSceneUpdate(void);
-void CB2_TradeEvolutionSceneUpdate(void);
-void EvoDummyFunc(void);
-void EvoDummyFunc2(void);
-void VBlankCB_EvolutionScene(void);
-void VBlankCB_TradeEvolutionScene(void);
-void sub_81150D8(void);
+static void Task_EvolutionScene(u8 taskID);
+static void Task_TradeEvolutionScene(u8 taskID);
+static void CB2_EvolutionSceneUpdate(void);
+static void CB2_TradeEvolutionSceneUpdate(void);
+static void EvoDummyFunc(void);
+static void VBlankCB_EvolutionScene(void);
+static void VBlankCB_TradeEvolutionScene(void);
+static void sub_81150D8(void);
+static void sub_8140134(void);
+static void EvoScene_DoMonAnimation(u8 monSpriteId, u16 speciesId);
+static bool32 EvoScene_IsMonAnimFinished(u8 monSpriteId);
+static void InitMovingBackgroundTask(bool8 isLink);
+static void sub_813FEE8(u8 taskId);
+static void sub_8140174(void);
 
-void CB2_BeginEvolutionScene(void)
+static void CB2_BeginEvolutionScene(void)
 {
     UpdatePaletteFade();
     RunTasks();
@@ -87,7 +127,7 @@ void CB2_BeginEvolutionScene(void)
 #define TASK_BIT_CAN_STOP       0x1
 #define TASK_BIT_LEARN_MOVE     0x80
 
-void Task_BeginEvolutionScene(u8 taskID)
+static void Task_BeginEvolutionScene(u8 taskID)
 {
     struct Pokemon* mon = NULL;
     switch (gTasks[taskID].tState)
@@ -167,7 +207,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
 
     gReservedSpritePaletteCount = 4;
 
-    gEvoStructPtr = AllocZeroed(sizeof(struct EvoInfo));
+    sEvoStructPtr = AllocZeroed(sizeof(struct EvoInfo));
     AllocateMonSpritesGfx();
 
     GetMonData(mon, MON_DATA_NICKNAME, name);
@@ -186,7 +226,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
 
     sub_806A068(currSpecies, 1);
     gUnknown_0202499C.affineAnims = gDummySpriteAffineAnimTable;
-    gEvoStructPtr->preEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
+    sEvoStructPtr->preEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
 
     gSprites[ID].callback = SpriteCallbackDummy_2;
     gSprites[ID].oam.paletteNum = 1;
@@ -201,14 +241,14 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
 
     sub_806A068(speciesToEvolve, 3);
     gUnknown_0202499C.affineAnims = gDummySpriteAffineAnimTable;
-    gEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
+    sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
     gSprites[ID].callback = SpriteCallbackDummy_2;
     gSprites[ID].oam.paletteNum = 2;
     gSprites[ID].invisible = 1;
 
     LoadEvoSparkleSpriteAndPal();
 
-    gEvoStructPtr->evoTaskID = ID = CreateTask(Task_EvolutionScene, 0);
+    sEvoStructPtr->evoTaskID = ID = CreateTask(Task_EvolutionScene, 0);
     gTasks[ID].tState = 0;
     gTasks[ID].tPreEvoSpecies = currSpecies;
     gTasks[ID].tPostEvoSpecies = speciesToEvolve;
@@ -217,7 +257,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gTasks[ID].tEvoWasStopped = FALSE;
     gTasks[ID].tPartyID = partyID;
 
-    memcpy(&gEvoStructPtr->savedPalette, &gPlttBufferUnfaded[0x20], 0x60);
+    memcpy(&sEvoStructPtr->savedPalette, &gPlttBufferUnfaded[0x20], 0x60);
 
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP);
 
@@ -227,15 +267,15 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     SetMainCallback2(CB2_EvolutionSceneUpdate);
 }
 
-void CB2_EvolutionSceneLoadGraphics(void)
+static void CB2_EvolutionSceneLoadGraphics(void)
 {
     u8 ID;
     const struct CompressedSpritePalette* pokePal;
     u16 postEvoSpecies;
     u32 TiD, PiD;
-    struct Pokemon* Mon = &gPlayerParty[gTasks[gEvoStructPtr->evoTaskID].tPartyID];
+    struct Pokemon* Mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskID].tPartyID];
 
-    postEvoSpecies = gTasks[gEvoStructPtr->evoTaskID].tPostEvoSpecies;
+    postEvoSpecies = gTasks[sEvoStructPtr->evoTaskID].tPostEvoSpecies;
     TiD = GetMonData(Mon, MON_DATA_OT_ID);
     PiD = GetMonData(Mon, MON_DATA_PERSONALITY);
 
@@ -279,7 +319,7 @@ void CB2_EvolutionSceneLoadGraphics(void)
 
     sub_806A068(postEvoSpecies, 3);
     gUnknown_0202499C.affineAnims = gDummySpriteAffineAnimTable;
-    gEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
+    sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
 
     gSprites[ID].callback = SpriteCallbackDummy_2;
     gSprites[ID].oam.paletteNum = 2;
@@ -296,4 +336,1171 @@ void CB2_EvolutionSceneLoadGraphics(void)
     ShowBg(1);
     ShowBg(2);
     ShowBg(3);
+}
+
+static void CB2_TradeEvolutionSceneLoadGraphics(void)
+{
+    struct Pokemon* Mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskID].tPartyID];
+    u16 postEvoSpecies = gTasks[sEvoStructPtr->evoTaskID].tPostEvoSpecies;
+
+    switch (gMain.state)
+    {
+    case 0:
+        SetGpuReg(REG_OFFSET_DISPCNT, 0);
+        SetHBlankCallback(NULL);
+        SetVBlankCallback(NULL);
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gReservedSpritePaletteCount = 4;
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = 0;
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
+        gBattle_BG2_X = 0;
+        gBattle_BG2_Y = 0;
+        gBattle_BG3_X = 256;
+        gBattle_BG3_Y = 0;
+        gMain.state++;
+        break;
+    case 1:
+        ResetPaletteFade();
+        SetHBlankCallback(EvoDummyFunc);
+        SetVBlankCallback(VBlankCB_TradeEvolutionScene);
+        gMain.state++;
+        break;
+    case 2:
+        sub_807F19C();
+        gMain.state++;
+        break;
+    case 3:
+        FillBgTilemapBufferRect(1, 0, 0, 0, 0x20, 0x20, 0x11);
+        CopyBgTilemapBufferToVram(1);
+        gMain.state++;
+        break;
+    case 4:
+        {
+            const struct CompressedSpritePalette* pokePal;
+            u32 TiD = GetMonData(Mon, MON_DATA_OT_ID);
+            u32 PiD = GetMonData(Mon, MON_DATA_PERSONALITY);
+            DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
+                                     gMonSpritesGfxPtr->sprites[3],
+                                     postEvoSpecies);
+            pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, TiD, PiD);
+            LoadCompressedPalette(pokePal->data, 0x120, 0x20);
+            gMain.state++;
+        }
+        break;
+    case 5:
+        {
+            u8 ID;
+
+            sub_806A068(postEvoSpecies, 1);
+            gUnknown_0202499C.affineAnims = gDummySpriteAffineAnimTable;
+            sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
+
+            gSprites[ID].callback = SpriteCallbackDummy_2;
+            gSprites[ID].oam.paletteNum = 2;
+            gMain.state++;
+            sub_807B154();
+        }
+        break;
+    case 6:
+        if (gLinkVSyncDisabled)
+        {
+            sub_800E0E8();
+            sub_800DFB4(0, 0);
+        }
+        BlendPalettes(-1,0x10, 0);
+        gMain.state++;
+        break;
+    case 7:
+        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        sub_807B140();
+        ShowBg(0);
+        ShowBg(1);
+        SetMainCallback2(CB2_TradeEvolutionSceneUpdate);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP);
+        break;
+    }
+}
+
+void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpriteID, u8 partyID)
+{
+    u8 name[20];
+    u16 currSpecies;
+    u32 TiD, PiD;
+    const struct CompressedSpritePalette* pokePal;
+    u8 ID;
+
+    GetMonData(mon, MON_DATA_NICKNAME, name);
+    StringCopy10(gStringVar1, name);
+    StringCopy(gStringVar2, gSpeciesNames[speciesToEvolve]);
+
+    gAffineAnimsDisabled = TRUE;
+
+    // preEvo sprite
+    currSpecies = GetMonData(mon, MON_DATA_SPECIES);
+    PiD = GetMonData(mon, MON_DATA_PERSONALITY);
+    TiD = GetMonData(mon, MON_DATA_OT_ID);
+
+    sEvoStructPtr = AllocZeroed(sizeof(struct EvoInfo));
+    sEvoStructPtr->preEvoSpriteID = preEvoSpriteID;
+
+    DecompressPicFromTable_2(&gMonFrontPicTable[speciesToEvolve],
+                            gMonSpritesGfxPtr->sprites[1],
+                            speciesToEvolve);
+
+    pokePal = GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, TiD, PiD);
+    LoadCompressedPalette(pokePal->data, 0x120, 0x20);
+
+    sub_806A068(speciesToEvolve, 1);
+    gUnknown_0202499C.affineAnims = gDummySpriteAffineAnimTable;
+    sEvoStructPtr->postEvoSpriteID = ID = CreateSprite(&gUnknown_0202499C, 120, 64, 30);
+
+    gSprites[ID].callback = SpriteCallbackDummy_2;
+    gSprites[ID].oam.paletteNum = 2;
+    gSprites[ID].invisible = 1;
+
+    LoadEvoSparkleSpriteAndPal();
+
+    sEvoStructPtr->evoTaskID = ID = CreateTask(Task_TradeEvolutionScene, 0);
+    gTasks[ID].tState = 0;
+    gTasks[ID].tPreEvoSpecies = currSpecies;
+    gTasks[ID].tPostEvoSpecies = speciesToEvolve;
+    gTasks[ID].tLearnsFirstMove = TRUE;
+    gTasks[ID].tEvoWasStopped = FALSE;
+    gTasks[ID].tPartyID = partyID;
+
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
+    gBattle_BG2_X = 0;
+    gBattle_BG2_Y = 0;
+    gBattle_BG3_X = 256;
+    gBattle_BG3_Y = 0;
+
+    gTextFlags.flag_1 = 1;
+
+    SetVBlankCallback(VBlankCB_TradeEvolutionScene);
+    SetMainCallback2(CB2_TradeEvolutionSceneUpdate);
+}
+
+static void CB2_EvolutionSceneUpdate(void)
+{
+    AnimateSprites();
+    BuildOamBuffer();
+    RunTextPrinters();
+    UpdatePaletteFade();
+    RunTasks();
+}
+
+static void CB2_TradeEvolutionSceneUpdate(void)
+{
+    AnimateSprites();
+    BuildOamBuffer();
+    RunTextPrinters();
+    UpdatePaletteFade();
+    RunTasks();
+}
+
+static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
+{
+    u32 data = 0;
+    if (gEvolutionTable[preEvoSpecies].evolutions[0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < 6)
+    {
+        s32 i;
+        struct Pokemon* Shedinja = &gPlayerParty[gPlayerPartyCount];
+        const struct EvolutionData* EvoTable;
+        const struct EvolutionData* Evos;
+
+        CopyMon(&gPlayerParty[gPlayerPartyCount], mon, sizeof(struct Pokemon));
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, (&gEvolutionTable[preEvoSpecies].evolutions[1].targetSpecies));
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_NICKNAME, (gSpeciesNames[gEvolutionTable[preEvoSpecies].evolutions[1].targetSpecies]));
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_HELD_ITEM, (&data));
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_MARKINGS, (&data));
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_10, (&data));
+
+        for (i = MON_DATA_COOL_RIBBON; i < MON_DATA_COOL_RIBBON + 5; i++)
+            SetMonData(&gPlayerParty[gPlayerPartyCount], i, (&data));
+        for (i = MON_DATA_CHAMPION_RIBBON; i <= MON_DATA_FATEFUL_ENCOUNTER; i++)
+            SetMonData(&gPlayerParty[gPlayerPartyCount], i, (&data));
+
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_STATUS, (&data));
+        data = 0xFF;
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_MAIL, (&data));
+
+        CalculateMonStats(&gPlayerParty[gPlayerPartyCount]);
+        CalculatePlayerPartyCount();
+
+        // can't match it otherwise, ehh
+        EvoTable = gEvolutionTable;
+        Evos = EvoTable + preEvoSpecies;
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(Evos->evolutions[1].targetSpecies), FLAG_SET_SEEN);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(Evos->evolutions[1].targetSpecies), FLAG_SET_CAUGHT);
+
+        if (GetMonData(Shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
+            && GetMonData(Shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
+            && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
+                SetMonData(Shedinja, MON_DATA_NICKNAME, gUnknown_085B58C4);
+    }
+}
+
+static void Task_EvolutionScene(u8 taskID)
+{
+    u32 var;
+    struct Pokemon* mon = &gPlayerParty[gTasks[taskID].tPartyID];
+
+    // check if B Button was held, so the evolution gets stopped
+    if (gMain.heldKeys == B_BUTTON
+        && gTasks[taskID].tState == 8
+        && gTasks[sEvoGraphicsTaskID].isActive
+        && gTasks[taskID].tBits & TASK_BIT_CAN_STOP)
+    {
+        gTasks[taskID].tState = 17;
+        gTasks[sEvoGraphicsTaskID].EvoGraphicsTaskEvoStop = TRUE;
+        sub_8140134();
+        return;
+    }
+
+    switch (gTasks[taskID].tState)
+    {
+    case 0:
+        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        gSprites[sEvoStructPtr->preEvoSpriteID].invisible = 0;
+        gTasks[taskID].tState++;
+        ShowBg(0);
+        ShowBg(1);
+        ShowBg(2);
+        ShowBg(3);
+        break;
+    case 1: // print 'whoa, poke is evolving!!!' msg
+        if (!gPaletteFade.active)
+        {
+            StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
+            BattleHandleAddTextPrinter(gStringVar4, 0);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 2: // wait for string, animate mon(and play its cry)
+        if (!IsTextPrinterActive(0))
+        {
+            EvoScene_DoMonAnimation(sEvoStructPtr->preEvoSpriteID, gTasks[taskID].tPreEvoSpecies);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 3:
+        if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteID)) // wait for animation, play tu du SE
+        {
+            PlaySE(BGM_ME_SHINKA);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 4: // play evolution music and fade screen black
+        if (!IsSEPlaying())
+        {
+            PlayNewMapMusic(BGM_SHINKA);
+            gTasks[taskID].tState++;
+            BeginNormalPaletteFade(0x1C, 4, 0, 0x10, 0);
+        }
+        break;
+    case 5: // launch moving bg task, preapre evo sparkles
+        if (!gPaletteFade.active)
+        {
+            InitMovingBackgroundTask(FALSE);
+            sEvoGraphicsTaskID = LaunchTask_PreEvoSparklesSet1(17);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 6: // another set of evo sparkles
+        if (!gTasks[sEvoGraphicsTaskID].isActive)
+        {
+            gTasks[taskID].tState++;
+            sEvoStructPtr->field_3 = 1;
+            sEvoGraphicsTaskID = LaunchTask_PreEvoSparklesSet2();
+        }
+        break;
+    case 7: // launch task that flashes pre evo with post evo sprites
+        if (!gTasks[sEvoGraphicsTaskID].isActive)
+        {
+            sEvoGraphicsTaskID = sub_817C3A0(sEvoStructPtr->preEvoSpriteID, sEvoStructPtr->postEvoSpriteID);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 8: // wait for the above task to finish
+        if (--sEvoStructPtr->field_3 == 0)
+        {
+            sEvoStructPtr->field_3 = 3;
+            if (!gTasks[sEvoGraphicsTaskID].isActive)
+                gTasks[taskID].tState++;
+        }
+        break;
+    case 9: // post evo sparkles
+        sEvoGraphicsTaskID = LaunchTask_PostEvoSparklesSet1();
+        gTasks[taskID].tState++;
+        break;
+    case 10:
+        if (!gTasks[sEvoGraphicsTaskID].isActive)
+        {
+            sEvoGraphicsTaskID = LaunchTask_PostEvoSparklesSet2AndFlash(gTasks[taskID].tPostEvoSpecies);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 11: // play tu du sound after evolution
+        if (!gTasks[sEvoGraphicsTaskID].isActive)
+        {
+            PlaySE(SE_EXP);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 12: // stop music, return screen to pre-fade state
+        if (IsSEPlaying())
+        {
+            m4aMPlayAllStop();
+            memcpy(&gPlttBufferUnfaded[0x20], sEvoStructPtr->savedPalette, 0x60);
+            sub_8140174();
+            BeginNormalPaletteFade(0x1C, 0, 0x10, 0, 0);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 13: // animate mon
+        if (!gPaletteFade.active)
+        {
+            EvoScene_DoMonAnimation(sEvoStructPtr->postEvoSpriteID, gTasks[taskID].tPostEvoSpecies);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 14: // congratulations string and rename prompt
+        if (IsCryFinished())
+        {
+            StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
+            BattleHandleAddTextPrinter(gStringVar4, 0);
+            PlayBGM(BGM_FANFA5);
+            gTasks[taskID].tState++;
+            SetMonData(mon, MON_DATA_SPECIES, (void*)(&gTasks[taskID].tPostEvoSpecies));
+            CalculateMonStats(mon);
+            EvolutionRenameMon(mon, gTasks[taskID].tPreEvoSpecies, gTasks[taskID].tPostEvoSpecies);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), FLAG_SET_SEEN);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), FLAG_SET_CAUGHT);
+            IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
+        }
+        break;
+    case 15: // check if it wants to learn a new move
+        if (!IsTextPrinterActive(0))
+        {
+            var = MonTryLearningNewMove(mon, gTasks[taskID].tLearnsFirstMove);
+            if (var != 0 && !gTasks[taskID].tEvoWasStopped)
+            {
+                u8 text[20];
+
+                if (!(gTasks[taskID].tBits & TASK_BIT_LEARN_MOVE))
+                {
+                    StopMapMusic();
+                    sub_8085784();
+                }
+
+                gTasks[taskID].tBits |= TASK_BIT_LEARN_MOVE;
+                gTasks[taskID].tLearnsFirstMove = FALSE;
+                gTasks[taskID].tLearnMoveState = 0;
+                GetMonData(mon, MON_DATA_NICKNAME, text);
+                StringCopy10(gBattleTextBuff1, text);
+
+                if (var == 0xFFFF) // no place to learn it
+                    gTasks[taskID].tState = 22;
+                else if (var == 0xFFFE) // it already knows that move
+                    break;
+                else
+                    gTasks[taskID].tState = 20; // has less than 4 moves, so it's been learned
+            }
+            else // no move to learn
+            {
+                BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                gTasks[taskID].tState++;
+            }
+        }
+        break;
+    case 16: // task has finished, return
+        if (!gPaletteFade.active)
+        {
+            if (!(gTasks[taskID].tBits & TASK_BIT_LEARN_MOVE))
+            {
+                StopMapMusic();
+                sub_8085784();
+            }
+            if (!gTasks[taskID].tEvoWasStopped)
+                CreateShedinja(gTasks[taskID].tPreEvoSpecies, mon);
+
+            DestroyTask(taskID);
+            FreeMonSpritesGfx();
+            Free(sEvoStructPtr);
+            sEvoStructPtr = NULL;
+            FreeAllWindowBuffers();
+            SetMainCallback2(gCB2_AfterEvolution);
+        }
+        break;
+    case 17: // evolution has been canceled, stop music and re-fade palette
+        if (!gTasks[sEvoGraphicsTaskID].isActive)
+        {
+            m4aMPlayAllStop();
+            BeginNormalPaletteFade(0x6001C, 0, 0x10, 0, 0x7FFF);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 18: // animate pokemon trying to evolve again, evolution has been stopped
+        if (!gPaletteFade.active)
+        {
+            EvoScene_DoMonAnimation(sEvoStructPtr->preEvoSpriteID, gTasks[taskID].tPreEvoSpecies);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 19: // after the animation, print the string 'WHOA IT DID NOT EVOLVE!!!'
+        if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteID))
+        {
+            if (gTasks[taskID].tEvoWasStopped)
+                StringExpandPlaceholders(gStringVar4, gText_EllipsisQuestionMark);
+            else // Fire Red leftover probably
+                StringExpandPlaceholders(gStringVar4, gText_PkmnStoppedEvolving);
+
+            BattleHandleAddTextPrinter(gStringVar4, 0);
+            gTasks[taskID].tEvoWasStopped = TRUE;
+            gTasks[taskID].tState = 15;
+        }
+        break;
+    case 20: // pokemon learned a new move, print string and play a fanfare
+        if (!IsTextPrinterActive(0) && !IsSEPlaying())
+        {
+            BufferMoveToLearnIntoBattleTextBuff2();
+            PlayFanfare(BGM_FANFA1);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[3]);
+            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+            gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 21: // wait a bit and check if can learn another move
+        if (!IsTextPrinterActive(0) && !IsSEPlaying() && --gTasks[taskID].tLearnsFirstMove == 0)
+            gTasks[taskID].tState = 15;
+        break;
+    case 22: // try to learn a new move
+        switch (gTasks[taskID].tLearnMoveState)
+        {
+        case 0:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                BufferMoveToLearnIntoBattleTextBuff2();
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[4]);
+                BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                gTasks[taskID].tLearnMoveState++;
+            }
+            break;
+        case 1:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[5]);
+                BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                gTasks[taskID].tLearnMoveState++;
+            }
+            break;
+        case 2:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[6]);
+                BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                gTasks[taskID].tData7 = 5;
+                gTasks[taskID].tData8 = 10;
+                gTasks[taskID].tLearnMoveState++;
+            }
+        case 3:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+                BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
+                gTasks[taskID].tLearnMoveState++;
+                sEvoCursorPos = 0;
+                BattleCreateYesNoCursorAt(0);
+            }
+            break;
+        case 4:
+            if (gMain.newKeys & DPAD_UP && sEvoCursorPos != 0)
+            {
+                PlaySE(SE_SELECT);
+                BattleDestroyYesNoCursorAt(sEvoCursorPos);
+                sEvoCursorPos = 0;
+                BattleCreateYesNoCursorAt(0);
+            }
+            if (gMain.newKeys & DPAD_DOWN && sEvoCursorPos == 0)
+            {
+                PlaySE(SE_SELECT);
+                BattleDestroyYesNoCursorAt(sEvoCursorPos);
+                sEvoCursorPos = 1;
+                BattleCreateYesNoCursorAt(1);
+            }
+            if (gMain.newKeys & A_BUTTON)
+            {
+                HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
+                PlaySE(SE_SELECT);
+
+                if (sEvoCursorPos != 0)
+                {
+                    gTasks[taskID].tLearnMoveState = gTasks[taskID].tData8;
+                }
+                else
+                {
+                    gTasks[taskID].tLearnMoveState = gTasks[taskID].tData7;
+                    if (gTasks[taskID].tLearnMoveState == 5)
+                        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                }
+            }
+            if (gMain.newKeys & B_BUTTON)
+            {
+                HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
+                PlaySE(SE_SELECT);
+                gTasks[taskID].tLearnMoveState = gTasks[taskID].tData8;
+            }
+            break;
+        case 5:
+            if (!gPaletteFade.active)
+            {
+                FreeAllWindowBuffers();
+                sub_81BFA38(gPlayerParty, gTasks[taskID].tPartyID,
+                            gPlayerPartyCount - 1, CB2_EvolutionSceneLoadGraphics,
+                            gMoveToLearn);
+                gTasks[taskID].tLearnMoveState++;
+            }
+            break;
+        case 6:
+            if (!gPaletteFade.active && gMain.callback2 == CB2_EvolutionSceneUpdate)
+            {
+                var = sub_81C1B94(); // moveID
+                if (var == 4)
+                {
+                    gTasks[taskID].tLearnMoveState = 10;
+                }
+                else
+                {
+                    u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
+                    if (IsHMMove2(move))
+                    {
+                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[307]);
+                        BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                        gTasks[taskID].tLearnMoveState = 12;
+                    }
+                    else
+                    {
+                        PREPARE_MOVE_BUFFER(gBattleTextBuff2, move)
+
+                        RemoveMonPPBonus(mon, var);
+                        SetMonMoveSlot(mon, gMoveToLearn, var);
+                        gTasks[taskID].tLearnMoveState++;
+                    }
+                }
+            }
+            break;
+        case 7:
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[207]);
+            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+            gTasks[taskID].tLearnMoveState++;
+            break;
+        case 8:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[7]);
+                BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                gTasks[taskID].tLearnMoveState++;
+            }
+            break;
+        case 9:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[208]);
+                BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+                gTasks[taskID].tState = 20;
+            }
+            break;
+        case 10:
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[8]);
+            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+            gTasks[taskID].tData7 = 11;
+            gTasks[taskID].tData8 = 0;
+            gTasks[taskID].tLearnMoveState = 3;
+            break;
+        case 11:
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[9]);
+            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
+            gTasks[taskID].tState = 15;
+            break;
+        case 12:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+                gTasks[taskID].tLearnMoveState = 5;
+            break;
+        }
+        break;
+    }
+}
+
+static void Task_TradeEvolutionScene(u8 taskID)
+{
+    u32 var = 0;
+    struct Pokemon* mon = &gPlayerParty[gTasks[taskID].tPartyID];
+
+    switch (gTasks[taskID].tState)
+    {
+    case 0:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
+        sub_807F1A8(0, gStringVar4, 1);
+        gTasks[taskID].tState++;
+        break;
+    case 1:
+        if (!IsTextPrinterActive(0))
+        {
+            PlayCry1(gTasks[taskID].tPreEvoSpecies, 0);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 2:
+        if (IsCryFinished())
+        {
+            m4aSongNumStop(BGM_SHINKA);
+            PlaySE(BGM_ME_SHINKA);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 3:
+        if (!IsSEPlaying())
+        {
+            PlayBGM(BGM_SHINKA);
+            gTasks[taskID].tState++;
+            BeginNormalPaletteFade(0x1C, 4, 0, 0x10, 0);
+        }
+        break;
+    case 4:
+        if (!gPaletteFade.active)
+        {
+            InitMovingBackgroundTask(TRUE);
+            var = gSprites[sEvoStructPtr->preEvoSpriteID].oam.paletteNum + 16;
+            sEvoGraphicsTaskID = LaunchTask_PreEvoSparklesSet1(var);
+            gTasks[taskID].tState++;
+            SetGpuReg(REG_OFFSET_BG3CNT, 0x603);
+        }
+        break;
+    case 5:
+        if (!gTasks[sEvoGraphicsTaskID].isActive)
+        {
+            gTasks[taskID].tState++;
+            sEvoStructPtr->field_3 = 1;
+            sEvoGraphicsTaskID = LaunchTask_PreEvoSparklesSet2();
+        }
+        break;
+    case 6:
+        if (!gTasks[sEvoGraphicsTaskID].isActive)
+        {
+            sEvoGraphicsTaskID = sub_817C3A0(sEvoStructPtr->preEvoSpriteID, sEvoStructPtr->postEvoSpriteID);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 7:
+        if (--sEvoStructPtr->field_3 == 0)
+        {
+            sEvoStructPtr->field_3 = 3;
+            if (!gTasks[sEvoGraphicsTaskID].isActive)
+                gTasks[taskID].tState++;
+        }
+        break;
+    case 8:
+        sEvoGraphicsTaskID = LaunchTask_PostEvoSparklesSet1();
+        gTasks[taskID].tState++;
+        break;
+    case 9:
+        if (!gTasks[sEvoGraphicsTaskID].isActive)
+        {
+            sEvoGraphicsTaskID = LaunchTask_PostEvoSparklesSet2AndFlash_Trade(gTasks[taskID].tPostEvoSpecies);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 10:
+        if (!gTasks[sEvoGraphicsTaskID].isActive)
+        {
+            PlaySE(SE_EXP);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 11:
+        if (IsSEPlaying())
+        {
+            Free(sEvoMovingBgPtr);
+            EvoScene_DoMonAnimation(sEvoStructPtr->postEvoSpriteID, gTasks[taskID].tPostEvoSpecies);
+            memcpy(&gPlttBufferUnfaded[0x20], sEvoStructPtr->savedPalette, 0x60);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 12:
+        if (IsCryFinished())
+        {
+            StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
+            sub_807F1A8(0, gStringVar4, 1);
+            PlayFanfare(BGM_FANFA5);
+            gTasks[taskID].tState++;
+            SetMonData(mon, MON_DATA_SPECIES, (&gTasks[taskID].tPostEvoSpecies));
+            CalculateMonStats(mon);
+            EvolutionRenameMon(mon, gTasks[taskID].tPreEvoSpecies, gTasks[taskID].tPostEvoSpecies);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), FLAG_SET_SEEN);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), FLAG_SET_CAUGHT);
+            IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
+        }
+        break;
+    case 13:
+        if (!IsTextPrinterActive(0) && IsFanfareTaskInactive() == TRUE)
+        {
+            var = MonTryLearningNewMove(mon, gTasks[taskID].tLearnsFirstMove);
+            if (var != 0 && !gTasks[taskID].tEvoWasStopped)
+            {
+                u8 text[20];
+
+                gTasks[taskID].tBits |= TASK_BIT_LEARN_MOVE;
+                gTasks[taskID].tLearnsFirstMove = FALSE;
+                gTasks[taskID].tLearnMoveState = 0;
+                GetMonData(mon, MON_DATA_NICKNAME, text);
+                StringCopy10(gBattleTextBuff1, text);
+
+                if (var == 0xFFFF)
+                    gTasks[taskID].tState = 20;
+                else if (var == 0xFFFE)
+                    break;
+                else
+                    gTasks[taskID].tState = 18;
+            }
+            else
+            {
+                PlayBGM(BGM_SHINKA);
+                sub_807F1A8(0, gText_CommunicationStandby5, 1);
+                gTasks[taskID].tState++;
+            }
+        }
+        break;
+    case 14:
+        if (!IsTextPrinterActive(0))
+        {
+            DestroyTask(taskID);
+            Free(sEvoStructPtr);
+            sEvoStructPtr = NULL;
+            gTextFlags.flag_1 = 0;
+            SetMainCallback2(gCB2_AfterEvolution);
+        }
+        break;
+    case 15:
+        if (!gTasks[sEvoGraphicsTaskID].isActive)
+        {
+            m4aMPlayAllStop();
+            BeginNormalPaletteFade((1 << (gSprites[sEvoStructPtr->preEvoSpriteID].oam.paletteNum + 16)) | (0x4001C), 0, 0x10, 0, 0x7FFF);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 16:
+        if (!gPaletteFade.active)
+        {
+            EvoScene_DoMonAnimation(sEvoStructPtr->preEvoSpriteID, gTasks[taskID].tPreEvoSpecies);
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 17:
+        if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteID))
+        {
+            StringExpandPlaceholders(gStringVar4, gText_EllipsisQuestionMark);
+            sub_807F1A8(0, gStringVar4, 1);
+            gTasks[taskID].tEvoWasStopped = 1;
+            gTasks[taskID].tState = 13;
+        }
+        break;
+    case 18:
+        if (!IsTextPrinterActive(0) && !IsSEPlaying())
+        {
+            BufferMoveToLearnIntoBattleTextBuff2();
+            PlayFanfare(BGM_FANFA1);
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[3]);
+            sub_807F1A8(0, gDisplayedStringBattle, 1);
+            gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
+            gTasks[taskID].tState++;
+        }
+        break;
+    case 19:
+        if (!IsTextPrinterActive(0) && IsFanfareTaskInactive() == TRUE && --gTasks[taskID].tLearnsFirstMove == 0)
+            gTasks[taskID].tState = 13;
+        break;
+    case 20:
+        switch (gTasks[taskID].tLearnMoveState)
+        {
+        case 0:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                BufferMoveToLearnIntoBattleTextBuff2();
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[4]);
+                sub_807F1A8(0, gDisplayedStringBattle, 1);
+                gTasks[taskID].tLearnMoveState++;
+            }
+            break;
+        case 1:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[5]);
+                sub_807F1A8(0, gDisplayedStringBattle, 1);
+                gTasks[taskID].tLearnMoveState++;
+            }
+            break;
+        case 2:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[6]);
+                sub_807F1A8(0, gDisplayedStringBattle, 1);
+                gTasks[taskID].tData7 = 5;
+                gTasks[taskID].tData8 = 9;
+                gTasks[taskID].tLearnMoveState++;
+            }
+        case 3:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                sub_809882C(0, 0xA8, 0xE0);
+                CreateYesNoMenu(&gUnknown_0833900C, 0xA8, 0xE, 0);
+                sEvoCursorPos = 0;
+                gTasks[taskID].tLearnMoveState++;
+                sEvoCursorPos = 0;
+            }
+            break;
+        case 4:
+            switch (sub_8198C58())
+            {
+            case 0:
+                sEvoCursorPos = 0;
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
+                sub_807F1A8(0, gDisplayedStringBattle, 1);
+                gTasks[taskID].tLearnMoveState = gTasks[taskID].tData7;
+                if (gTasks[taskID].tLearnMoveState == 5)
+                    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                break;
+            case 1:
+            case -1:
+                sEvoCursorPos = 1;
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[292]);
+                sub_807F1A8(0, gDisplayedStringBattle, 1);
+                gTasks[taskID].tLearnMoveState = gTasks[taskID].tData8;
+                break;
+            }
+            break;
+        case 5:
+            if (!gPaletteFade.active)
+            {
+                if (gLinkVSyncDisabled)
+                    sub_800E084();
+
+                Free(GetBgTilemapBuffer(3));
+                Free(GetBgTilemapBuffer(1));
+                Free(GetBgTilemapBuffer(0));
+                FreeAllWindowBuffers();
+
+                sub_81BFA38(gPlayerParty, gTasks[taskID].tPartyID,
+                            gPlayerPartyCount - 1, CB2_TradeEvolutionSceneLoadGraphics,
+                            gMoveToLearn);
+                gTasks[taskID].tLearnMoveState++;
+            }
+            break;
+        case 6:
+            if (!gPaletteFade.active && gMain.callback2 == CB2_TradeEvolutionSceneUpdate)
+            {
+                var = sub_81C1B94(); // moveID
+                if (var == 4)
+                {
+                    gTasks[taskID].tLearnMoveState = 9;
+                }
+                else
+                {
+                    u16 move = GetMonData(mon, var + MON_DATA_MOVE1);
+                    if (IsHMMove2(move))
+                    {
+                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[307]);
+                        sub_807F1A8(0, gDisplayedStringBattle, 1);
+                        gTasks[taskID].tLearnMoveState = 11;
+                    }
+                    else
+                    {
+                        PREPARE_MOVE_BUFFER(gBattleTextBuff2, move)
+
+                        RemoveMonPPBonus(mon, var);
+                        SetMonMoveSlot(mon, gMoveToLearn, var);
+                        BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[207]);
+                        sub_807F1A8(0, gDisplayedStringBattle, 1);
+                        gTasks[taskID].tLearnMoveState++;
+                    }
+                }
+            }
+            break;
+        case 7:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[7]);
+                sub_807F1A8(0, gDisplayedStringBattle, 1);
+                gTasks[taskID].tLearnMoveState++;
+            }
+            break;
+        case 8:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+            {
+                BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[208]);
+                sub_807F1A8(0, gDisplayedStringBattle, 1);
+                gTasks[taskID].tState = 18;
+            }
+            break;
+        case 9:
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[8]);
+            sub_807F1A8(0, gDisplayedStringBattle, 1);
+            gTasks[taskID].tData7 = 10;
+            gTasks[taskID].tData8 = 0;
+            gTasks[taskID].tLearnMoveState = 3;
+            break;
+        case 10:
+            BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[9]);
+            sub_807F1A8(0, gDisplayedStringBattle, 1);
+            gTasks[taskID].tState = 13;
+            break;
+        case 11:
+            if (!IsTextPrinterActive(0) && !IsSEPlaying())
+                gTasks[taskID].tLearnMoveState = 5;
+            break;
+        }
+        break;
+    }
+}
+
+#undef tState
+#undef tPreEvoSpecies
+#undef tPostEvoSpecies
+#undef tCanStop
+#undef tBits
+#undef tLearnsFirstMove
+#undef tLearnMoveState
+#undef tData7
+#undef tData8
+#undef tEvoWasStopped
+#undef tPartyID
+
+static void EvoDummyFunc(void)
+{
+}
+
+static void VBlankCB_EvolutionScene(void)
+{
+    SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
+    SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
+    SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
+    SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
+    SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
+    SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
+    SetGpuReg(REG_OFFSET_BG3HOFS, gBattle_BG3_X);
+    SetGpuReg(REG_OFFSET_BG3VOFS, gBattle_BG3_Y);
+
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+    sub_80BA0A8();
+}
+
+static void VBlankCB_TradeEvolutionScene(void)
+{
+    SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
+    SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
+    SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
+    SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
+    SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
+    SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
+    SetGpuReg(REG_OFFSET_BG3HOFS, gBattle_BG3_X);
+    SetGpuReg(REG_OFFSET_BG3VOFS, gBattle_BG3_Y);
+
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+    sub_80BA0A8();
+}
+
+static void sub_813FDEC(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (data[6] != 0)
+        return;
+    if (data[5]++ < 20)
+        return;
+
+    if (data[0]++ > gUnknown_085B58C9[data[2]][3])
+    {
+        if (gUnknown_085B58C9[data[2]][1] == data[1])
+        {
+            data[3]++;
+            if (data[3] == gUnknown_085B58C9[data[2]][2])
+            {
+                data[3] = 0;
+                data[2]++;
+            }
+            data[1] = gUnknown_085B58C9[data[2]][0];
+        }
+        else
+        {
+            LoadPalette(&sEvoMovingBgPtr[data[1] * 16], 0xA0, 0x20);
+            data[0] = 0;
+            data[1]++;
+        }
+    }
+
+    if (data[2] == 4)
+        DestroyTask(taskId);
+}
+
+static void sub_813FEA4(bool8 isLink)
+{
+    u8 taskId = CreateTask(sub_813FEE8, 7);
+
+    if (!isLink)
+        gTasks[taskId].data[2] = 0;
+    else
+        gTasks[taskId].data[2] = 1;
+}
+
+static void sub_813FEE8(u8 taskId)
+{
+    u16 *outer_X, *outer_Y;
+
+    u16 *inner_X = &gBattle_BG1_X;
+    u16 *inner_Y = &gBattle_BG1_Y;
+
+    if (!gTasks[taskId].data[2])
+    {
+        outer_X = &gBattle_BG2_X;
+        outer_Y = &gBattle_BG2_Y;
+    }
+    else
+    {
+        outer_X = &gBattle_BG3_X;
+        outer_Y = &gBattle_BG3_Y;
+    }
+
+    gTasks[taskId].data[0] = (gTasks[taskId].data[0] + 5) & 0xFF;
+    gTasks[taskId].data[1] = (gTasks[taskId].data[0] + 0x80) & 0xFF;
+
+    *inner_X = Cos(gTasks[taskId].data[0], 4) + 8;
+    *inner_Y = Sin(gTasks[taskId].data[0], 4) + 16;
+
+    *outer_X = Cos(gTasks[taskId].data[1], 4) + 8;
+    *outer_Y = Sin(gTasks[taskId].data[1], 4) + 16;
+
+    if (!FuncIsActiveTask(sub_813FDEC))
+    {
+        DestroyTask(taskId);
+
+        *inner_X = 0;
+        *inner_Y = 0;
+
+        *outer_X = 256;
+        *outer_Y = 0;
+    }
+}
+
+static void InitMovingBgValues(u16 *movingBgs)
+{
+    s32 i, j;
+
+    for (i = 0; i < 50; i++)
+    {
+        for (j = 0; j < 16; j++)
+        {
+            movingBgs[i * 16 + j] = gUnknown_085B5884[gUnknown_085B58D9[i * 16 + j]];
+        }
+    }
+}
+
+static void InitMovingBackgroundTask(bool8 isLink)
+{
+    u8 innerBgId, outerBgId;
+
+    sEvoMovingBgPtr = AllocZeroed(0x640);
+    InitMovingBgValues(sEvoMovingBgPtr);
+
+    if (!isLink)
+        innerBgId = 1, outerBgId = 2;
+    else
+        innerBgId = 1, outerBgId = 3;
+
+    LoadPalette(gUnknown_085B51E4, 0xA0, 0x20);
+
+    copy_decompressed_tile_data_to_vram_autofree(1, gUnknown_085B4134, FALSE, 0, 0);
+    CopyToBgTilemapBuffer(1, gUnknown_085B482C, 0, 0);
+    CopyToBgTilemapBuffer(outerBgId, gUnknown_085B4D10, 0, 0);
+    CopyBgTilemapBufferToVram(1);
+    CopyBgTilemapBufferToVram(outerBgId);
+
+    if (!isLink)
+    {
+        SetGpuReg(REG_OFFSET_BLDCNT, 0x442);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0x808);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG2_ON | DISPCNT_BG1_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
+
+        SetBgAttribute(innerBgId, BG_CTRL_ATTR_MOSAIC, 2);
+        SetBgAttribute(outerBgId, BG_CTRL_ATTR_MOSAIC, 2);
+
+        ShowBg(1);
+        ShowBg(2);
+    }
+    else
+    {
+        SetGpuReg(REG_OFFSET_BLDCNT, 0x842);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0x808);
+        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG1_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
+    }
+
+    CreateTask(sub_813FDEC, 5);
+    sub_813FEA4(isLink);
+}
+
+static void sub_8140100(void) // unused
+{
+    u8 taskId = FindTaskIdByFunc(sub_813FDEC);
+
+    if (taskId != 0xFF)
+        gTasks[taskId].data[6] = 1;
+
+    FillPalette(0, 0xA0, 0x20);
+}
+
+static void sub_8140134(void)
+{
+    u8 taskId;
+
+    if ((taskId = FindTaskIdByFunc(sub_813FDEC)) != 0xFF)
+        DestroyTask(taskId);
+    if ((taskId = FindTaskIdByFunc(sub_813FEE8)) != 0xFF)
+        DestroyTask(taskId);
+
+    FillPalette(0, 0xA0, 0x20);
+    sub_8140174();
+}
+
+static void sub_8140174(void)
+{
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
+    gBattle_BG2_X = 0;
+    SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, sub_80391E0(1, 5));
+    SetBgAttribute(2, BG_CTRL_ATTR_MOSAIC, sub_80391E0(2, 5));
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
+    Free(sEvoMovingBgPtr);
+}
+
+static void EvoScene_DoMonAnimation(u8 monSpriteId, u16 speciesId)
+{
+    DoMonFrontSpriteAnimation(&gSprites[monSpriteId], speciesId, FALSE, 0);
+}
+
+static bool32 EvoScene_IsMonAnimFinished(u8 monSpriteId)
+{
+    if (gSprites[monSpriteId].callback == SpriteCallbackDummy)
+        return TRUE;
+
+    return FALSE;
 }

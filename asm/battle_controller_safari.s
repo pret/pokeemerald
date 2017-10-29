@@ -792,7 +792,7 @@ dp01t_10_6_message: @ 81599DC
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -862,7 +862,7 @@ sub_8159A94: @ 8159A94
 	str r1, [r0]
 	ldr r0, =gText_SafariZoneMenu
 	movs r1, 0x2
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	movs r4, 0
 _08159AAE:
 	lsls r0, r4, 24
@@ -882,7 +882,7 @@ _08159AAE:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	pop {r4}
 	pop {r0}
 	bx r0

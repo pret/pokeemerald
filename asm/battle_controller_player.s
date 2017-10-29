@@ -1247,7 +1247,7 @@ _08057F80:
 	bl battle_menu_cursor_related_2
 	ldr r0, =gText_BattleSwitchWhich
 	movs r1, 0xB
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -4244,11 +4244,11 @@ sub_80599D4: @ 80599D4
 	movs r0, 0x5
 	bl PlaySE
 	ldrb r0, [r4]
-	bl BattleDestroyCursorAt
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0
 	strb r0, [r4]
 	movs r0, 0
-	bl BattleCreateCursorAt
+	bl BattleCreateYesNoCursorAt
 _08059A02:
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -4263,11 +4263,11 @@ _08059A02:
 	movs r0, 0x5
 	bl PlaySE
 	ldrb r0, [r4]
-	bl BattleDestroyCursorAt
+	bl BattleDestroyYesNoCursorAt
 	movs r0, 0x1
 	strb r0, [r4]
 	movs r0, 0x1
-	bl BattleCreateCursorAt
+	bl BattleCreateYesNoCursorAt
 _08059A2C:
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -4281,7 +4281,7 @@ _08059A2C:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_8056A3C
+	bl HandleBattleWindow
 	movs r0, 0x5
 	bl PlaySE
 	ldr r0, =gUnknown_03005D74
@@ -4314,7 +4314,7 @@ _08059A7A:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_8056A3C
+	bl HandleBattleWindow
 	movs r0, 0x5
 	bl PlaySE
 	bl PlayerBufferExecCompleted
@@ -4355,7 +4355,7 @@ _08059AC4:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r7, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _08059AF4
@@ -4382,7 +4382,7 @@ sub_8059B18: @ 8059B18
 	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4432,7 +4432,7 @@ sub_8059B3C: @ 8059B3C
 	bl ConvertIntToDecimalStringN
 	adds r0, r6, 0
 	movs r1, 0x9
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 _08059B98:
 	pop {r4-r7}
 	pop {r0}
@@ -4481,7 +4481,7 @@ sub_8059BB0: @ 8059BB0
 	bl StringCopy
 	adds r0, r6, 0
 	movs r1, 0xA
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -4718,7 +4718,7 @@ b_link_standby_message: @ 8059DC0
 	strh r1, [r0]
 	ldr r0, =gText_LinkStandby
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 _08059DE0:
 	pop {r0}
 	bx r0
@@ -8458,7 +8458,7 @@ sub_805BF80: @ 805BF80
 	bl BufferStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -8534,7 +8534,7 @@ dp01t_12_6_battle_menu: @ 805C044
 	bl sub_817F2A8
 	ldr r0, =gText_BattleMenu
 	movs r1, 0x2
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	movs r4, 0
 _0805C062:
 	lsls r0, r4, 24
@@ -8554,7 +8554,7 @@ _0805C062:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -8577,15 +8577,15 @@ sub_805C0B0: @ 805C0B0
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl sub_8056A3C
+	bl HandleBattleWindow
 	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r1, =gUnknown_03005D74
 	movs r0, 0x1
 	strb r0, [r1]
 	movs r0, 0x1
-	bl BattleCreateCursorAt
+	bl BattleCreateYesNoCursorAt
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2

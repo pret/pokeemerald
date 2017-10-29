@@ -10590,7 +10590,7 @@ _0807CEDC:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_807B4D0
-	ldr r1, =gUnknown_030061E8
+	ldr r1, =gCB2_AfterEvolution
 	ldr r0, =sub_807B60C
 	str r0, [r1]
 	ldr r7, =gUnknown_02032298
@@ -10615,7 +10615,7 @@ _0807CEDC:
 	adds r1, 0x8F
 	ldrb r2, [r1]
 	adds r1, r4, 0
-	bl sub_813E1D4
+	bl TradeEvolutionScene
 	b _0807CF48
 	.pool
 _0807CF38:
@@ -12695,7 +12695,7 @@ _0807E328:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_807B4D0
-	ldr r1, =gUnknown_030061E8
+	ldr r1, =gCB2_AfterEvolution
 	ldr r0, =sub_807B60C
 	str r0, [r1]
 	ldr r7, =gUnknown_02032298
@@ -12720,7 +12720,7 @@ _0807E328:
 	adds r1, 0x8F
 	ldrb r2, [r1]
 	adds r1, r4, 0
-	bl sub_813E1D4
+	bl TradeEvolutionScene
 	b _0807E394
 	.pool
 _0807E384:
@@ -12810,7 +12810,7 @@ _0807E434:
 	b _0807E4B2
 	.pool
 _0807E444:
-	ldr r0, =gUnknown_030061E8
+	ldr r0, =gCB2_AfterEvolution
 	ldr r1, =sub_807EB50
 	mov r8, r1
 	str r1, [r0]
@@ -12836,7 +12836,7 @@ _0807E444:
 	adds r1, 0x8F
 	ldrb r2, [r1]
 	adds r1, r4, 0
-	bl sub_813E1D4
+	bl TradeEvolutionScene
 	b _0807E4AE
 	.pool
 _0807E494:

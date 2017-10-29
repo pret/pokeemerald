@@ -85,7 +85,7 @@ extern u16 gTrainerBattleOpponent_B;
 extern struct BattleEnigmaBerry gEnigmaBerries[BATTLE_BANKS_COUNT];
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);
-extern void (*gUnknown_030061E8)(void);
+extern void (*gCB2_AfterEvolution)(void);
 extern struct UnknownPokemonStruct2 gUnknown_02022FF8[3]; // what is it used for?
 extern struct UnknownPokemonStruct2* gUnknown_02023058; // what is it used for?
 extern u8 gUnknown_02039B28[]; // possibly a struct?
@@ -2121,7 +2121,7 @@ static void sub_8038F34(void)
         if (sub_800A520() == TRUE)
         {
             sub_800ADF8();
-            sub_814F9EC(gText_LinkStandby3, 0);
+            BattleHandleAddTextPrinter(gText_LinkStandby3, 0);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -2247,17 +2247,17 @@ static void sub_803939C(void)
     case 3:
         if (!gPaletteFade.active)
         {
-            sub_814F9EC(gText_RecordBattleToPass, 0);
+            BattleHandleAddTextPrinter(gText_RecordBattleToPass, 0);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case 4:
         if (!IsTextPrinterActive(0))
         {
-            sub_8056A3C(0x18, 8, 0x1D, 0xD, 0);
-            sub_814F9EC(gText_BattleYesNoChoice, 0xC);
+            HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+            BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateCursorAt(1);
+            BattleCreateYesNoCursorAt(1);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -2267,9 +2267,9 @@ static void sub_803939C(void)
             if (gBattleCommunication[CURSOR_POSITION] != 0)
             {
                 PlaySE(SE_SELECT);
-                BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+                BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
                 gBattleCommunication[CURSOR_POSITION] = 0;
-                BattleCreateCursorAt(0);
+                BattleCreateYesNoCursorAt(0);
             }
         }
         else if (gMain.newKeys & DPAD_DOWN)
@@ -2277,9 +2277,9 @@ static void sub_803939C(void)
             if (gBattleCommunication[CURSOR_POSITION] == 0)
             {
                 PlaySE(SE_SELECT);
-                BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+                BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
                 gBattleCommunication[CURSOR_POSITION] = 1;
-                BattleCreateCursorAt(1);
+                BattleCreateYesNoCursorAt(1);
             }
         }
         else if (gMain.newKeys & A_BUTTON)
@@ -2287,7 +2287,7 @@ static void sub_803939C(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[CURSOR_POSITION] == 0)
             {
-                sub_8056A3C(0x18, 8, 0x1D, 0xD, 1);
+                HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
                 gBattleCommunication[1] = MoveRecordedBattleToSaveData();
                 gBattleCommunication[MULTIUSE_STATE] = 10;
             }
@@ -2305,11 +2305,11 @@ static void sub_803939C(void)
     case 6:
         if (sub_800A520() == TRUE)
         {
-            sub_8056A3C(0x18, 8, 0x1D, 0xD, 1);
+            HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
             if (gMain.field_439_x4)
             {
                 sub_800ADF8();
-                sub_814F9EC(gText_LinkStandby3, 0);
+                BattleHandleAddTextPrinter(gText_LinkStandby3, 0);
             }
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -2340,14 +2340,14 @@ static void sub_803939C(void)
         {
             PlaySE(SE_SAVE);
             BattleStringExpandPlaceholdersToDisplayedString(gText_BattleRecordedOnPass);
-            sub_814F9EC(gDisplayedStringBattle, 0);
+            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
             gBattleCommunication[1] = 0x80;
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         else
         {
             BattleStringExpandPlaceholdersToDisplayedString(gText_BattleRecordCouldntBeSaved);
-            sub_814F9EC(gDisplayedStringBattle, 0);
+            BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
             gBattleCommunication[1] = 0x80;
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -2358,7 +2358,7 @@ static void sub_803939C(void)
             if (gMain.field_439_x4)
             {
                 sub_800ADF8();
-                sub_814F9EC(gText_LinkStandby3, 0);
+                BattleHandleAddTextPrinter(gText_LinkStandby3, 0);
             }
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -3690,7 +3690,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     TurnValuesCleanUp(FALSE);
     SpecialStatusesClear();
     *(&gBattleStruct->field_91) = gAbsentBankFlags;
-    sub_814F9EC(gText_EmptyString3, 0);
+    BattleHandleAddTextPrinter(gText_EmptyString3, 0);
     gBattleMainFunc = HandleTurnActionSelectionState;
     ResetSentPokesToOpponentValue();
 
@@ -3797,7 +3797,7 @@ void BattleTurnPassed(void)
         *(gBattleStruct->field_5C + i) = 6;
 
     *(&gBattleStruct->field_91) = gAbsentBankFlags;
-    sub_814F9EC(gText_EmptyString3, 0);
+    BattleHandleAddTextPrinter(gText_EmptyString3, 0);
     gBattleMainFunc = HandleTurnActionSelectionState;
     gRandomTurnNumber = Random();
 
@@ -4939,7 +4939,7 @@ static void HandleEndTurn_FinishBattle(void)
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
-        gUnknown_030061E8 = BattleMainCB2;
+        gCB2_AfterEvolution = BattleMainCB2;
     }
     else
     {

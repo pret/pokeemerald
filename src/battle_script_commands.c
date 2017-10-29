@@ -6114,33 +6114,33 @@ static void atk5A_yesnoboxlearnmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-        sub_8056A3C(0x18, 8, 0x1D, 0xD, 0);
-        sub_814F9EC(gText_BattleYesNoChoice, 0xC);
+        HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+        BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
-        BattleCreateCursorAt(0);
+        BattleCreateYesNoCursorAt(0);
         break;
     case 1:
         if (gMain.newKeys & DPAD_UP && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);
-            BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+            BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
-            BattleCreateCursorAt(0);
+            BattleCreateYesNoCursorAt(0);
         }
         if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
-            BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+            BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateCursorAt(1);
+            BattleCreateYesNoCursorAt(1);
         }
         if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] == 0)
             {
-                sub_8056A3C(0x18, 0x8, 0x1D, 0xD, 1);
+                HandleBattleWindow(0x18, 0x8, 0x1D, 0xD, 1);
                 BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
                 gBattleScripting.learnMoveState++;
             }
@@ -6214,7 +6214,7 @@ static void atk5A_yesnoboxlearnmove(void)
         }
         break;
     case 5:
-        sub_8056A3C(0x18, 8, 0x1D, 0xD, 1);
+        HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
         gBattlescriptCurrInstr += 5;
         break;
     case 6:
@@ -6231,26 +6231,26 @@ static void atk5B_yesnoboxstoplearningmove(void)
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-        sub_8056A3C(0x18, 8, 0x1D, 0xD, 0);
-        sub_814F9EC(gText_BattleYesNoChoice, 0xC);
+        HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+        BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
-        BattleCreateCursorAt(0);
+        BattleCreateYesNoCursorAt(0);
         break;
     case 1:
         if (gMain.newKeys & DPAD_UP && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);
-            BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+            BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
-            BattleCreateCursorAt(0);
+            BattleCreateYesNoCursorAt(0);
         }
         if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
-            BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+            BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateCursorAt(1);
+            BattleCreateYesNoCursorAt(1);
         }
         if (gMain.newKeys & A_BUTTON)
         {
@@ -6261,13 +6261,13 @@ static void atk5B_yesnoboxstoplearningmove(void)
             else
                 gBattlescriptCurrInstr += 5;
 
-            sub_8056A3C(0x18, 0x8, 0x1D, 0xD, 1);
+            HandleBattleWindow(0x18, 0x8, 0x1D, 0xD, 1);
         }
         else if (gMain.newKeys & B_BUTTON)
         {
             PlaySE(SE_SELECT);
             gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
-            sub_8056A3C(0x18, 0x8, 0x1D, 0xD, 1);
+            HandleBattleWindow(0x18, 0x8, 0x1D, 0xD, 1);
         }
         break;
     }
@@ -6527,38 +6527,38 @@ static void atk67_yesnobox(void)
     switch (gBattleCommunication[0])
     {
     case 0:
-        sub_8056A3C(0x18, 8, 0x1D, 0xD, 0);
-        sub_814F9EC(gText_BattleYesNoChoice, 0xC);
+        HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+        BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
         gBattleCommunication[0]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
-        BattleCreateCursorAt(0);
+        BattleCreateYesNoCursorAt(0);
         break;
     case 1:
         if (gMain.newKeys & DPAD_UP && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);
-            BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+            BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
-            BattleCreateCursorAt(0);
+            BattleCreateYesNoCursorAt(0);
         }
         if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
-            BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+            BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateCursorAt(1);
+            BattleCreateYesNoCursorAt(1);
         }
         if (gMain.newKeys & B_BUTTON)
         {
             gBattleCommunication[CURSOR_POSITION] = 1;
             PlaySE(SE_SELECT);
-            sub_8056A3C(0x18, 8, 0x1D, 0xD, 1);
+            HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
             gBattlescriptCurrInstr++;
         }
         else if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            sub_8056A3C(0x18, 8, 0x1D, 0xD, 1);
+            HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
             gBattlescriptCurrInstr++;
         }
         break;
@@ -6674,7 +6674,7 @@ static void atk6C_draw_lvlupbox(void)
         SetBgAttribute(1, BG_CTRL_ATTR_MOSAIC, 0);
         ShowBg(0);
         ShowBg(1);
-        sub_8056A3C(0x12, 7, 0x1D, 0x13, 0x80);
+        HandleBattleWindow(0x12, 7, 0x1D, 0x13, 0x80);
         gBattleScripting.atk6C_state = 4;
         break;
     case 4:
@@ -6704,7 +6704,7 @@ static void atk6C_draw_lvlupbox(void)
         if (gMain.newKeys != 0)
         {
             PlaySE(SE_SELECT);
-            sub_8056A3C(0x12, 7, 0x1D, 0x13, 0x81);
+            HandleBattleWindow(0x12, 7, 0x1D, 0x13, 0x81);
             gBattleScripting.atk6C_state++;
         }
         break;
@@ -7148,7 +7148,7 @@ static void atk76_various(void)
         break;
     case 16:
         BattleStringExpandPlaceholdersToDisplayedString(gRefereeStringsTable[gBattlescriptCurrInstr[1]]);
-        sub_814F9EC(gDisplayedStringBattle, 0x16);
+        BattleHandleAddTextPrinter(gDisplayedStringBattle, 0x16);
         break;
     case 17:
         if (IsTextPrinterActive(0x16))
@@ -11238,7 +11238,7 @@ static void atkF2_display_dex_info(void)
     }
 }
 
-void sub_8056A3C(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
+void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
 {
     s32 destY, destX;
     u16 var = 0;
@@ -11286,7 +11286,7 @@ void sub_8056A3C(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
     }
 }
 
-void BattleCreateCursorAt(u8 cursorPosition)
+void BattleCreateYesNoCursorAt(u8 cursorPosition)
 {
     u16 src[2];
     src[0] = 1;
@@ -11296,7 +11296,7 @@ void BattleCreateCursorAt(u8 cursorPosition)
     CopyBgTilemapBufferToVram(0);
 }
 
-void BattleDestroyCursorAt(u8 cursorPosition)
+void BattleDestroyYesNoCursorAt(u8 cursorPosition)
 {
     u16 src[2];
     src[0] = 0x1016;
@@ -11311,26 +11311,26 @@ static void atkF3_nickname_caught_poke(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        sub_8056A3C(0x18, 8, 0x1D, 0xD, 0);
-        sub_814F9EC(gText_BattleYesNoChoice, 0xC);
+        HandleBattleWindow(0x18, 8, 0x1D, 0xD, 0);
+        BattleHandleAddTextPrinter(gText_BattleYesNoChoice, 0xC);
         gBattleCommunication[MULTIUSE_STATE]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
-        BattleCreateCursorAt(0);
+        BattleCreateYesNoCursorAt(0);
         break;
     case 1:
         if (gMain.newKeys & DPAD_UP && gBattleCommunication[CURSOR_POSITION] != 0)
         {
             PlaySE(SE_SELECT);
-            BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+            BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 0;
-            BattleCreateCursorAt(0);
+            BattleCreateYesNoCursorAt(0);
         }
         if (gMain.newKeys & DPAD_DOWN && gBattleCommunication[CURSOR_POSITION] == 0)
         {
             PlaySE(SE_SELECT);
-            BattleDestroyCursorAt(gBattleCommunication[CURSOR_POSITION]);
+            BattleDestroyYesNoCursorAt(gBattleCommunication[CURSOR_POSITION]);
             gBattleCommunication[CURSOR_POSITION] = 1;
-            BattleCreateCursorAt(1);
+            BattleCreateYesNoCursorAt(1);
         }
         if (gMain.newKeys & A_BUTTON)
         {

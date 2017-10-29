@@ -2209,7 +2209,7 @@ static void sub_814F950(u8* dst)
     }
 }
 
-void sub_814F9EC(const u8 *text, u8 arg1)
+void BattleHandleAddTextPrinter(const u8 *text, u8 arg1)
 {
     const u8 *r8 = gUnknown_085CD660[gBattleScripting.field_24];
     bool32 r9;

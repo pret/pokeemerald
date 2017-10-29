@@ -46,10 +46,10 @@ u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
 u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility);
 u8 BankGetTurnOrder(u8 bank);
 void SetMoveEffect(bool8 primary, u8 certain);
-void BattleDestroyCursorAt(u8 cursorPosition);
-void BattleCreateCursorAt(u8 cursorPosition);
+void BattleDestroyYesNoCursorAt(u8 cursorPosition);
+void BattleCreateYesNoCursorAt(u8 cursorPosition);
 void BufferMoveToLearnIntoBattleTextBuff2(void);
-void sub_8056A3C(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
+void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
 bool8 UproarWakeUpCheck(u8 bank);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
