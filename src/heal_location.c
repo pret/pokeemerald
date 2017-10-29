@@ -2,7 +2,6 @@
 // Includes
 #include "global.h"
 #include "map_constants.h"
-#include "sprite.h"
 #include "heal_location.h"
 
 #define HEAL_LOCATION(map, x, y) {MAP_GROUP_##map, MAP_ID_##map, x, y}
@@ -15,7 +14,7 @@
 
 // .rodata
 
-static const struct HealLocation sSpawnLocations[] = {
+static const struct HealLocation sHealLocations[] = {
     HEAL_LOCATION(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F,  4,  2),
     HEAL_LOCATION(LITTLEROOT_TOWN_MAYS_HOUSE_2F,      4,  2),
     HEAL_LOCATION(PETALBURG_CITY,                    20, 17),
@@ -40,7 +39,7 @@ static const struct HealLocation sSpawnLocations[] = {
     HEAL_LOCATION(BATTLE_FRONTIER_OUTSIDE_EAST,       3, 52)
 };
 
-#define NUM_HEAL_LOCATIONS (ARRAY_COUNT(sSpawnLocations))
+#define NUM_HEAL_LOCATIONS (ARRAY_COUNT(sHealLocations))
 
 // .text
 
@@ -50,7 +49,7 @@ static u32 GetHealLocationIndexFromMapGroupAndNum(u16 mapGroup, u16 mapNum)
 
     for (i = 0; i < NUM_HEAL_LOCATIONS; i ++)
     {
-        if (sSpawnLocations[i].group == mapGroup && sSpawnLocations[i].map == mapNum)
+        if (sHealLocations[i].group == mapGroup && sHealLocations[i].map == mapNum)
         {
             return i + 1;
         }
@@ -67,7 +66,7 @@ const struct HealLocation *GetHealLocationPointerFromMapGroupAndNum(u16 mapGroup
     {
         return NULL;
     }
-    return &sSpawnLocations[loc - 1];
+    return &sHealLocations[loc - 1];
 }
 
 const struct HealLocation *GetHealLocationPointer(u32 loc)
@@ -80,5 +79,5 @@ const struct HealLocation *GetHealLocationPointer(u32 loc)
     {
         return NULL;
     }
-    return &sSpawnLocations[loc - 1];
+    return &sHealLocations[loc - 1];
 }
