@@ -18,7 +18,7 @@
 
 // Static RAM declarations
 
-EWRAM_DATA struct {
+static EWRAM_DATA struct {
     MainCallback callback;
     u32 filler_004;
     struct RegionMap regionMap;
@@ -35,8 +35,33 @@ static void sub_8170428(void);
 
 // .rodata
 
-extern const struct BgTemplate gUnknown_085E5068[];
-extern const struct WindowTemplate gUnknown_085E5070[];
+static const struct BgTemplate gUnknown_085E5068[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    }, {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 28,
+        .screenSize = 2,
+        .paletteMode = 1,
+        .priority = 2,
+        .baseTile = 0
+    }
+};
+
+static const struct WindowTemplate gUnknown_085E5070[] = {
+    {
+        0, 17, 17, 12,  2, 15, 0x0001
+    }, {
+        0, 22,  1,  7,  2, 15, 0x0019
+    }, DUMMY_WIN_TEMPLATE
+};
 
 // .text
 
