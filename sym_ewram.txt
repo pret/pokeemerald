@@ -1410,8 +1410,7 @@ gUnknown_0203BCC8: @ 203BCC8
 gUnknown_0203BCCC: @ 203BCCC
 	.space 0x4
 
-gUnknown_0203BCD0: @ 203BCD0
-	.space 0x4
+	.include "src/field_region_map.o"
 
 gUnknown_0203BCD4: @ 203BCD4
 	.space 0x4

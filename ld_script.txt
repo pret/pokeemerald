@@ -212,6 +212,7 @@ SECTIONS {
         asm/player_pc.o(.text);
         asm/intro.o(.text);
         src/reset_save_heap.o(.text);
+        src/field_region_map.o(.text);
         asm/field_region_map.o(.text);
         asm/battle_anim_8170478.o(.text);
         asm/hall_of_fame.o(.text);
@@ -433,6 +434,7 @@ SECTIONS {
         data/battle_controller_wally.o(.rodata);
         data/player_pc.o(.rodata);
         data/intro.o(.rodata);
+        src/field_region_map.o(.rodata);
         data/field_region_map.o(.rodata);
         data/battle_anim_8170478.o(.rodata);
         data/hall_of_fame.o(.rodata);
