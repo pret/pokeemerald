@@ -250,10 +250,12 @@ struct RegionMap {
     /*0x076*/ u16 unk_076;
     /*0x078*/ u8 unk_078;
     /*0x079*/ u8 unk_079;
-    /*0x07a*/ u8 unk_07a;
-    /*0x07b*/ u8 filler_07b[3];
+    /*0x07a*/ s8 unk_07a;
+    /*0x07b*/ s8 unk_07b;
+    /*0x07c*/ u8 unk_07c;
+    /*0x07d*/ u8 unk_07d;
     /*0x07e*/ u8 unk_07e;
-    /*0x07f*/ u8 filler_07f[1];
+    /*0x07f*/ u8 unk_07f;
     /*0x080*/ u8 unk_080;
     /*0x081*/ u8 unk_081;
     /*0x082*/ u8 unk_082;
@@ -266,6 +268,8 @@ struct RegionMap {
 // Exported RAM declarations
 
 // Exported ROM declarations
+void sub_8122CF8(struct RegionMap *regionMap, struct UnkStruct_8122CF8 *arg1, bool8 arg2);
+bool8 sub_8122DB0(void);
 void GetMapName(u8 *, u16, u16);
 void sub_8122CDC(struct RegionMap *regionMap, u8 argument);
 void sub_8124288(u16 x, u16 y);

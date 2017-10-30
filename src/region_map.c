@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "main.h"
 #include "region_map.h"
 #include "menu.h"
 #include "palette.h"
@@ -12,6 +13,17 @@ struct UnkStruct_0203A148 {
     u8 filler_000[0xa74];
 };
 
+enum
+{
+    INPUT_EVENT_NONE,
+    INPUT_EVENT_DPAD,
+    INPUT_EVENT_2,
+    INPUT_EVENT_3,
+    INPUT_EVENT_A_BUTTON,
+    INPUT_EVENT_B_BUTTON,
+};
+
+
 // Static RAM declarations
 
 EWRAM_DATA struct RegionMap *gUnknown_0203A144 = NULL;
@@ -19,16 +31,15 @@ EWRAM_DATA struct UnkStruct_0203A148 *gUnknown_0203A148 = NULL;
 
 // Static ROM declarations
 
-void sub_8122CF8(struct RegionMap *regionMap, struct UnkStruct_8122CF8 *arg1, bool8 arg2);
-bool8 sub_8122DB0(void);
-u8 sub_8123254(void);
 u8 sub_81230C4(void);
-void sub_81238AC(void);
-u16 sub_8123EB4(u16 mapSecId);
-u8 get_flagnr_blue_points(u16 mapSecId);
+u8 sub_8123254(void);
 void sub_81236C4(s32 a0, s32 a1, s32 a2, s32 a3, u16 a4, u16 a5, u16 a6);
-void sub_8123FB0(void);
 void sub_81237B4(void);
+void sub_81238AC(void);
+u8 get_flagnr_blue_points(u16 mapSecId);
+u16 sub_8123EB4(u16 mapSecId);
+void sub_8123FB0(void);
+u8 _swiopen(void);
 
 // .rodata
 
@@ -186,4 +197,47 @@ void sub_812305C(void)
 u8 sub_81230AC(void)
 {
     return gUnknown_0203A144->inputCallback();
+}
+
+u8 sub_81230C4(void)
+{
+    u8 input;
+
+    input = INPUT_EVENT_NONE;
+    gUnknown_0203A144->unk_07b = 0;
+    gUnknown_0203A144->unk_07c = 0;
+    if (gMain.heldKeys & DPAD_UP && gUnknown_0203A144->unk_056 > 2)
+    {
+        gUnknown_0203A144->unk_07c = -1;
+        input = INPUT_EVENT_DPAD;
+    }
+    if (gMain.heldKeys & DPAD_DOWN && gUnknown_0203A144->unk_056 < 16)
+    {
+        gUnknown_0203A144->unk_07c = +1;
+        input = INPUT_EVENT_DPAD;
+    }
+    if (gMain.heldKeys & DPAD_LEFT && gUnknown_0203A144->unk_054 > 1)
+    {
+        gUnknown_0203A144->unk_07b = -1;
+        input = INPUT_EVENT_DPAD;
+    }
+    if (gMain.heldKeys & DPAD_RIGHT && gUnknown_0203A144->unk_054 < 28)
+    {
+        gUnknown_0203A144->unk_07b = +1;
+        input = INPUT_EVENT_DPAD;
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        input = INPUT_EVENT_A_BUTTON;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        input = INPUT_EVENT_B_BUTTON;
+    }
+    if (input == INPUT_EVENT_DPAD)
+    {
+        gUnknown_0203A144->unk_07a = 4;
+        gUnknown_0203A144->inputCallback = _swiopen;
+    }
+    return input;
 }
