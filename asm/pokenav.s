@@ -10864,7 +10864,7 @@ sub_81CC670: @ 81CC670
 	movs r0, 0x4
 	bl sub_81C763C
 	adds r4, r0, 0
-	bl sub_812305C
+	bl FreeRegionMapIconResources
 	bl sub_81CC9EC
 	ldrb r0, [r4, 0x8]
 	bl RemoveWindow
@@ -10994,7 +10994,7 @@ _081CC784:
 	bl sub_8124288
 	movs r0, 0x5
 	movs r1, 0xA
-	bl sub_81240D4
+	bl CreateRegionMapCursor
 	bl sub_812454C
 	b _081CC77C
 _081CC7AC:

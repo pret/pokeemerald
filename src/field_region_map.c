@@ -120,9 +120,9 @@ void sub_8170290(void)
     switch (gUnknown_0203BCD0->state)
     {
         case 0:
-            sub_8122CDC(&gUnknown_0203BCD0->regionMap, 0);
+            InitRegionMap(&gUnknown_0203BCD0->regionMap, 0);
             sub_8124288(0, 0);
-            sub_81240D4(1, 1);
+            CreateRegionMapCursor(1, 1);
             gUnknown_0203BCD0->state ++;
             break;
         case 1:
@@ -166,7 +166,7 @@ void sub_8170290(void)
         case 6:
             if (!gPaletteFade.active)
             {
-                sub_812305C();
+                FreeRegionMapIconResources();
                 SetMainCallback2(gUnknown_0203BCD0->callback);
                 if (gUnknown_0203BCD0 != NULL)
                 {

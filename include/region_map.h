@@ -1,6 +1,8 @@
 #ifndef GUARD_REGION_MAP_H
 #define GUARD_REGION_MAP_H
 
+#include "bg.h"
+
 // Exported type declarations
 
 enum {
@@ -219,12 +221,6 @@ enum {
     MAPSEC_TRAINER_HILL
 };
 
-struct UnkStruct_8122CF8 {
-    u32 unk_0_0:2;
-    u32 unk_0_2:2;
-    u32 unk_0_4:5;
-};
-
 struct RegionMap {
     /*0x000*/ u16 mapSecId;
     /*0x002*/ u8 unk_002;
@@ -233,7 +229,12 @@ struct RegionMap {
     /*0x018*/ u8 (*inputCallback)(void);
     /*0x01c*/ struct Sprite *cursorSprite;
     /*0x020*/ struct Sprite *playerIconSprite;
-    /*0x024*/ u8 filler_024[0x18];
+    /*0x024*/ s32 bg2x;
+    /*0x028*/ s32 bg2y;
+    /*0x02c*/ u32 bg2pa;
+    /*0x030*/ u32 bg2pb;
+    /*0x034*/ u32 bg2pc;
+    /*0x038*/ u32 bg2pd;
     /*0x03c*/ s32 unk_03c;
     /*0x040*/ s32 unk_040;
     /*0x044*/ s32 unk_044;
@@ -263,13 +264,13 @@ struct RegionMap {
     /*0x07a*/ s8 cursorMovementFrameCounter;
     /*0x07b*/ s8 cursorDeltaX;
     /*0x07c*/ s8 cursorDeltaY;
-    /*0x07d*/ bool8 unk_07d;
+    /*0x07d*/ bool8 needUpdateVideoRegs;
     /*0x07e*/ bool8 blinkPlayerIcon;
     /*0x07f*/ bool8 unk_07f;
     /*0x080*/ u8 bgNum;
-    /*0x081*/ u8 unk_081;
-    /*0x082*/ u8 unk_082;
-    /*0x083*/ bool8 unk_083;
+    /*0x081*/ u8 charBaseIdx;
+    /*0x082*/ u8 mapBaseIdx;
+    /*0x083*/ bool8 bgManaged;
     /*0x084*/ u8 filler_084[0x100];
     /*0x184*/ u8 cursorSmallImage[0x100];
     /*0x284*/ u8 cursorLargeImage[0x600];
@@ -288,13 +289,13 @@ enum
 // Exported RAM declarations
 
 // Exported ROM declarations
-void sub_8122CF8(struct RegionMap *regionMap, struct UnkStruct_8122CF8 *arg1, bool8 arg2);
+void sub_8122CF8(struct RegionMap *regionMap, struct BgTemplate *template, bool8 zoomed);
 bool8 sub_8122DB0(void);
 void GetMapName(u8 *, u16, u16);
-void sub_8122CDC(struct RegionMap *regionMap, u8 argument);
+void InitRegionMap(struct RegionMap *regionMap, u8 argument);
 void sub_8124288(u16 x, u16 y);
-void sub_81240D4(u16 x, u16 y);
+void CreateRegionMapCursor(u16 x, u16 y);
 u8 sub_81230AC(void);
-void sub_812305C(void);
+void FreeRegionMapIconResources(void);
 
 #endif //GUARD_REGION_MAP_H

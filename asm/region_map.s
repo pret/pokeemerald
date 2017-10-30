@@ -5,333 +5,9 @@
 
 	.text
 
-	thumb_func_start sub_8123514
-sub_8123514: @ 8123514
-	push {r4-r6,lr}
-	sub sp, 0xC
-	ldr r0, =gUnknown_0203A144
-	ldr r3, [r0]
-	adds r2, r3, 0
-	adds r2, 0x6E
-	ldrh r1, [r2]
-	adds r5, r0, 0
-	cmp r1, 0xF
-	bls _08123530
-	movs r0, 0
-	b _081236B8
-	.pool
-_08123530:
-	adds r0, r1, 0x1
-	movs r1, 0
-	strh r0, [r2]
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x10
-	bne _081235A4
-	str r1, [r3, 0x44]
-	str r1, [r3, 0x48]
-	adds r0, r3, 0
-	adds r0, 0x60
-	ldrh r1, [r0]
-	subs r0, 0x4
-	strh r1, [r0]
-	adds r0, 0x6
-	ldrh r0, [r0]
-	adds r1, r3, 0
-	adds r1, 0x5E
-	strh r0, [r1]
-	adds r1, 0x1A
-	ldrb r0, [r1]
-	movs r2, 0x80
-	lsls r2, 9
-	cmp r0, 0
-	bne _08123566
-	movs r2, 0x80
-	lsls r2, 8
-_08123566:
-	str r2, [r3, 0x4C]
-	movs r2, 0
-	ldrb r0, [r1]
-	cmp r0, 0
-	bne _08123572
-	movs r2, 0x1
-_08123572:
-	strb r2, [r1]
-	ldr r1, [r5]
-	adds r0, r1, 0
-	adds r0, 0x78
-	ldrb r0, [r0]
-	ldr r2, =sub_8123254
-	cmp r0, 0
-	bne _08123584
-	ldr r2, =sub_81230C4
-_08123584:
-	str r2, [r1, 0x18]
-	adds r0, r1, 0
-	adds r0, 0x58
-	ldrh r0, [r0]
-	adds r1, 0x5A
-	ldrh r1, [r1]
-	bl sub_81240D4
-	bl sub_81243DC
-	movs r4, 0
-	b _08123686
-	.pool
-_081235A4:
-	ldr r2, [r3, 0x3C]
-	ldr r0, [r3, 0x44]
-	adds r2, r0
-	str r2, [r3, 0x3C]
-	ldr r0, [r3, 0x40]
-	ldr r1, [r3, 0x48]
-	adds r0, r1
-	str r0, [r3, 0x40]
-	asrs r2, 8
-	adds r4, r3, 0
-	adds r4, 0x5C
-	strh r2, [r4]
-	ldr r0, [r3, 0x40]
-	asrs r0, 8
-	adds r1, r3, 0
-	adds r1, 0x5E
-	strh r0, [r1]
-	ldr r0, [r3, 0x4C]
-	ldr r1, [r3, 0x50]
-	adds r0, r1
-	str r0, [r3, 0x4C]
-	ldr r2, [r3, 0x44]
-	cmp r2, 0
-	bge _081235E4
-	adds r0, r3, 0
-	adds r0, 0x60
-	movs r6, 0
-	ldrsh r1, [r4, r6]
-	movs r6, 0
-	ldrsh r0, [r0, r6]
-	cmp r1, r0
-	blt _081235F8
-_081235E4:
-	cmp r2, 0
-	ble _08123608
-	adds r0, r3, 0
-	adds r0, 0x60
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	movs r6, 0
-	ldrsh r0, [r0, r6]
-	cmp r1, r0
-	ble _08123608
-_081235F8:
-	ldr r3, [r5]
-	adds r0, r3, 0
-	adds r0, 0x60
-	ldrh r2, [r0]
-	subs r0, 0x4
-	movs r1, 0
-	strh r2, [r0]
-	str r1, [r3, 0x44]
-_08123608:
-	ldr r2, [r5]
-	ldr r4, [r2, 0x48]
-	cmp r4, 0
-	bge _08123624
-	adds r0, r2, 0
-	adds r0, 0x5E
-	adds r3, r2, 0
-	adds r3, 0x62
-	movs r6, 0
-	ldrsh r1, [r0, r6]
-	movs r6, 0
-	ldrsh r0, [r3, r6]
-	cmp r1, r0
-	blt _0812363C
-_08123624:
-	cmp r4, 0
-	ble _0812364E
-	adds r1, r2, 0
-	adds r1, 0x5E
-	adds r0, r2, 0
-	adds r0, 0x62
-	movs r2, 0
-	ldrsh r1, [r1, r2]
-	movs r6, 0
-	ldrsh r0, [r0, r6]
-	cmp r1, r0
-	ble _0812364E
-_0812363C:
-	ldr r2, [r5]
-	adds r0, r2, 0
-	adds r0, 0x62
-	ldrh r1, [r0]
-	adds r3, r2, 0
-	adds r3, 0x5E
-	movs r0, 0
-	strh r1, [r3]
-	str r0, [r2, 0x48]
-_0812364E:
-	ldr r0, =gUnknown_0203A144
-	ldr r2, [r0]
-	adds r0, r2, 0
-	adds r0, 0x78
-	ldrb r3, [r0]
-	cmp r3, 0
-	bne _08123674
-	ldr r1, [r2, 0x4C]
-	ldr r0, =0x00007fff
-	cmp r1, r0
-	bgt _08123684
-	adds r0, 0x1
-	str r0, [r2, 0x4C]
-	str r3, [r2, 0x50]
-	b _08123684
-	.pool
-_08123674:
-	ldr r0, [r2, 0x4C]
-	movs r1, 0x80
-	lsls r1, 9
-	cmp r0, r1
-	ble _08123684
-	str r1, [r2, 0x4C]
-	movs r0, 0
-	str r0, [r2, 0x50]
-_08123684:
-	movs r4, 0x1
-_08123686:
-	ldr r0, =gUnknown_0203A144
-	ldr r3, [r0]
-	adds r0, r3, 0
-	adds r0, 0x5C
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	adds r1, r3, 0
-	adds r1, 0x5E
-	movs r2, 0
-	ldrsh r1, [r1, r2]
-	ldr r2, [r3, 0x4C]
-	lsls r2, 8
-	lsrs r2, 16
-	str r2, [sp]
-	ldr r2, [r3, 0x4C]
-	lsls r2, 8
-	lsrs r2, 16
-	str r2, [sp, 0x4]
-	movs r2, 0
-	str r2, [sp, 0x8]
-	movs r2, 0x38
-	movs r3, 0x48
-	bl sub_81236C4
-	adds r0, r4, 0
-_081236B8:
-	add sp, 0xC
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8123514
-
-	thumb_func_start sub_81236C4
-sub_81236C4: @ 81236C4
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	ldr r4, [sp, 0x24]
-	ldr r7, [sp, 0x28]
-	ldr r5, [sp, 0x2C]
-	lsls r4, 16
-	lsrs r4, 16
-	mov r8, r4
-	lsls r7, 16
-	adds r4, r7, 0
-	lsrs r4, 16
-	mov r9, r4
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r4, =gUnknown_0203A144
-	ldr r6, [r4]
-	ldr r7, =gSineTable
-	mov r12, r7
-	adds r4, r5, 0
-	adds r4, 0x40
-	lsls r4, 1
-	add r4, r12
-	movs r7, 0
-	ldrsh r4, [r4, r7]
-	str r4, [sp]
-	mov r7, r8
-	muls r7, r4
-	adds r4, r7, 0
-	asrs r4, 8
-	mov r10, r4
-	str r4, [r6, 0x2C]
-	lsls r5, 1
-	add r5, r12
-	movs r7, 0
-	ldrsh r5, [r5, r7]
-	negs r4, r5
-	mov r7, r8
-	muls r7, r4
-	adds r4, r7, 0
-	asrs r4, 8
-	mov r12, r4
-	str r4, [r6, 0x30]
-	mov r7, r9
-	muls r7, r5
-	adds r5, r7, 0
-	asrs r5, 8
-	str r5, [r6, 0x34]
-	ldr r7, [sp]
-	mov r4, r9
-	muls r4, r7
-	asrs r4, 8
-	mov r8, r4
-	str r4, [r6, 0x38]
-	lsls r0, 16
-	asrs r0, 8
-	lsls r2, 16
-	asrs r2, 16
-	lsls r4, r2, 8
-	adds r0, r4
-	lsls r3, 16
-	asrs r3, 16
-	adds r4, r3, 0
-	muls r4, r5
-	mov r5, r10
-	muls r5, r2
-	adds r4, r5
-	subs r0, r4
-	str r0, [r6, 0x24]
-	lsls r1, 16
-	asrs r1, 8
-	lsls r0, r3, 8
-	adds r1, r0
-	mov r0, r8
-	muls r0, r3
-	mov r3, r12
-	muls r3, r2
-	adds r2, r3, 0
-	adds r0, r2
-	subs r1, r0
-	str r1, [r6, 0x28]
-	adds r6, 0x7D
-	movs r0, 0x1
-	strb r0, [r6]
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81236C4
-
 	thumb_func_start sub_812378C
 sub_812378C: @ 812378C
-	ldr r2, =gUnknown_0203A144
+	ldr r2, =gRegionMap
 	ldr r2, [r2]
 	lsls r0, 16
 	asrs r0, 8
@@ -355,7 +31,7 @@ sub_812378C: @ 812378C
 	thumb_func_start sub_81237B4
 sub_81237B4: @ 81237B4
 	push {r4,lr}
-	ldr r4, =gUnknown_0203A144
+	ldr r4, =gRegionMap
 	ldr r1, [r4]
 	adds r0, r1, 0
 	adds r0, 0x7D
@@ -422,9 +98,9 @@ sub_8123824: @ 8123824
 	adds r1, r5, 0
 	movs r2, 0x38
 	movs r3, 0x48
-	bl sub_81236C4
+	bl CalcZoomScrollParams
 	bl sub_81237B4
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r2, [r0]
 	ldr r1, [r2, 0x20]
 	cmp r1, 0
@@ -533,7 +209,7 @@ _08123904:
 	.4byte _08123A28
 	.4byte _081239E4
 _08123928:
-	ldr r4, =gUnknown_0203A144
+	ldr r4, =gRegionMap
 	ldr r0, [r4]
 	ldr r3, =gMapHeader
 	ldrb r1, [r3, 0x14]
@@ -586,7 +262,7 @@ _0812396C:
 	lsrs r1, 16
 	bl get_mapheader_by_bank_and_number
 	adds r5, r0, 0
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r0, [r0]
 	ldrb r1, [r5, 0x14]
 	strh r1, [r0]
@@ -603,7 +279,7 @@ _0812396C:
 	b _08123ABE
 	.pool
 _081239C8:
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r0, [r0]
 	ldrb r1, [r2, 0x14]
 	strh r1, [r0]
@@ -630,7 +306,7 @@ _081239E4:
 	lsrs r1, 16
 	bl get_mapheader_by_bank_and_number
 	adds r5, r0, 0
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r0, [r0]
 	ldrb r1, [r5, 0x14]
 	strh r1, [r0]
@@ -647,7 +323,7 @@ _081239E4:
 	b _08123ABE
 	.pool
 _08123A28:
-	ldr r4, =gUnknown_0203A144
+	ldr r4, =gRegionMap
 	ldr r0, [r4]
 	ldr r1, =gMapHeader
 	ldrb r1, [r1, 0x14]
@@ -690,7 +366,7 @@ _08123A64:
 	ldrb r0, [r5, 0x14]
 	strh r0, [r1]
 _08123A8A:
-	ldr r4, =gUnknown_0203A144
+	ldr r4, =gRegionMap
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	bl sub_8123F74
@@ -716,7 +392,7 @@ _08123AB0:
 _08123ABE:
 	str r6, [sp]
 	ldr r5, =gRegionMapEntries
-	ldr r4, =gUnknown_0203A144
+	ldr r4, =gRegionMap
 	ldr r0, [r4]
 	mov r10, r0
 	ldrh r7, [r0]
@@ -852,7 +528,7 @@ _08123BB8:
 	bl sub_8123F30
 	b _08123BEC
 _08123BC6:
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r2, [r0]
 	ldrh r0, [r2]
 	lsls r0, 3
@@ -923,28 +599,28 @@ _08123C40:
 	.4byte _08123C74
 	.4byte _08123C84
 _08123C54:
-	ldr r2, =gUnknown_0203A144
+	ldr r2, =gRegionMap
 	ldr r1, [r2]
 	movs r0, 0x8
 	strh r0, [r1]
 	b _08123D10
 	.pool
 _08123C64:
-	ldr r2, =gUnknown_0203A144
+	ldr r2, =gRegionMap
 	ldr r1, [r2]
 	movs r0, 0xC
 	strh r0, [r1]
 	b _08123D10
 	.pool
 _08123C74:
-	ldr r2, =gUnknown_0203A144
+	ldr r2, =gRegionMap
 	ldr r1, [r2]
 	movs r0, 0x27
 	strh r0, [r1]
 	b _08123D10
 	.pool
 _08123C84:
-	ldr r2, =gUnknown_0203A144
+	ldr r2, =gRegionMap
 	ldr r1, [r2]
 	movs r0, 0x2E
 	strh r0, [r1]
@@ -955,7 +631,7 @@ _08123C94:
 	ldrb r0, [r0]
 	ldrb r1, [r4]
 	bl get_mapheader_by_bank_and_number
-	ldr r1, =gUnknown_0203A144
+	ldr r1, =gRegionMap
 	mov r9, r1
 	ldr r2, [r1]
 	ldrb r1, [r0, 0x14]
@@ -1373,7 +1049,7 @@ sub_8123F9C: @ 8123F9C
 	thumb_func_start sub_8123FB0
 sub_8123FB0: @ 8123FB0
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r1, [r0]
 	ldrh r0, [r1]
 	cmp r0, 0xD5
@@ -1407,7 +1083,7 @@ _08123FE6:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_812386C
-	ldr r1, =gUnknown_0203A144
+	ldr r1, =gRegionMap
 	ldr r1, [r1]
 	lsls r0, 16
 	lsrs r0, 16
@@ -1432,7 +1108,7 @@ _08124008:
 	b _08124008
 	.pool
 _08124028:
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r0, [r0]
 	strb r6, [r0, 0x3]
 _0812402E:
@@ -1463,7 +1139,7 @@ _0812405A:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_812386C
-	ldr r1, =gUnknown_0203A144
+	ldr r1, =gRegionMap
 	ldr r1, [r1]
 	lsls r0, 16
 	lsrs r0, 16
@@ -1488,7 +1164,7 @@ _0812407C:
 sub_8124088: @ 8124088
 	push {r4,lr}
 	adds r2, r0, 0
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r1, [r0]
 	adds r3, r1, 0
 	adds r3, 0x7A
@@ -1529,8 +1205,8 @@ TaskDummy8: @ 81240D0
 	bx lr
 	thumb_func_end TaskDummy8
 
-	thumb_func_start sub_81240D4
-sub_81240D4: @ 81240D4
+	thumb_func_start CreateRegionMapCursor
+CreateRegionMapCursor: @ 81240D4
 	push {r4-r7,lr}
 	sub sp, 0x28
 	lsls r0, 16
@@ -1554,7 +1230,7 @@ sub_81240D4: @ 81240D4
 	str r1, [r2, 0x4]
 	mov r0, sp
 	strh r3, [r0]
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r4, [r0]
 	adds r0, r4, 0
 	adds r0, 0x58
@@ -1615,7 +1291,7 @@ _0812416E:
 	lsrs r1, r0, 24
 	cmp r1, 0x40
 	beq _08124228
-	ldr r4, =gUnknown_0203A144
+	ldr r4, =gRegionMap
 	ldr r2, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -1669,7 +1345,7 @@ _081241DC:
 	adds r0, 0x4
 	strh r0, [r2, 0x22]
 _08124204:
-	ldr r4, =gUnknown_0203A144
+	ldr r4, =gRegionMap
 	ldr r0, [r4]
 	ldr r1, [r0, 0x1C]
 	movs r0, 0x2
@@ -1692,12 +1368,12 @@ _08124228:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81240D4
+	thumb_func_end CreateRegionMapCursor
 
 	thumb_func_start sub_8124238
 sub_8124238: @ 8124238
 	push {r4,lr}
-	ldr r4, =gUnknown_0203A144
+	ldr r4, =gRegionMap
 	ldr r0, [r4]
 	ldr r0, [r0, 0x1C]
 	cmp r0, 0
@@ -1720,7 +1396,7 @@ _0812425C:
 
 	thumb_func_start sub_8124268
 sub_8124268: @ 8124268
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r0, [r0]
 	ldr r1, [r0, 0x1C]
 	movs r0, 0x1
@@ -1731,7 +1407,7 @@ sub_8124268: @ 8124268
 
 	thumb_func_start sub_8124278
 sub_8124278: @ 8124278
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r0, [r0]
 	ldr r1, [r0, 0x1C]
 	movs r0, 0
@@ -1780,7 +1456,7 @@ sub_8124288: @ 8124288
 	bl sub_8124668
 	cmp r0, 0
 	beq _08124304
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r0, [r0]
 	str r5, [r0, 0x20]
 	b _081243A4
@@ -1807,7 +1483,7 @@ _08124316:
 	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_0203A144
+	ldr r1, =gRegionMap
 	ldr r2, [r1]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -1866,7 +1542,7 @@ _081243A4:
 	thumb_func_start sub_81243B0
 sub_81243B0: @ 81243B0
 	push {lr}
-	ldr r3, =gUnknown_0203A144
+	ldr r3, =gRegionMap
 	ldr r0, [r3]
 	ldr r2, [r0, 0x20]
 	cmp r2, 0
@@ -1889,7 +1565,7 @@ _081243CE:
 	thumb_func_start sub_81243DC
 sub_81243DC: @ 81243DC
 	push {lr}
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r3, [r0]
 	ldr r1, [r3, 0x20]
 	cmp r1, 0
@@ -1955,7 +1631,7 @@ _08124452:
 sub_812445C: @ 812445C
 	push {r4,lr}
 	adds r3, r0, 0
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x5C
@@ -2041,7 +1717,7 @@ sub_81244EC: @ 81244EC
 sub_81244F8: @ 81244F8
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r0, [r0]
 	adds r0, 0x7E
 	ldrb r0, [r0]
@@ -2086,7 +1762,7 @@ _08124548:
 	thumb_func_start sub_812454C
 sub_812454C: @ 812454C
 	push {lr}
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x7F
@@ -2235,7 +1911,7 @@ sub_8124630: @ 8124630
 
 	thumb_func_start sub_8124658
 sub_8124658: @ 8124658
-	ldr r0, =gUnknown_0203A144
+	ldr r0, =gRegionMap
 	ldr r0, [r0]
 	adds r0, 0x78
 	ldrb r0, [r0]
@@ -2373,10 +2049,10 @@ _0812479C:
 	ldr r0, [r4]
 	adds r0, 0x8
 	movs r1, 0
-	bl sub_8122CDC
+	bl InitRegionMap
 	movs r0, 0
 	movs r1, 0
-	bl sub_81240D4
+	bl CreateRegionMapCursor
 	movs r0, 0x1
 	movs r1, 0x1
 	bl sub_8124288
@@ -3142,7 +2818,7 @@ _08124E3E:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08124F1A
-	bl sub_812305C
+	bl FreeRegionMapIconResources
 	ldr r1, [r4]
 	ldr r2, =0x00000a72
 	adds r0, r1, r2

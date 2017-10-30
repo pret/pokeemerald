@@ -2,10 +2,10 @@
 // Includes
 #include "global.h"
 #include "main.h"
-#include "region_map.h"
 #include "menu.h"
 #include "palette.h"
-#include "bg.h"
+#include "trig.h"
+#include "region_map.h"
 
 // Static type declarations
 
@@ -15,25 +15,26 @@ struct UnkStruct_0203A148 {
 
 // Static RAM declarations
 
-EWRAM_DATA struct RegionMap *gUnknown_0203A144 = NULL;
+EWRAM_DATA struct RegionMap *gRegionMap = NULL;
 EWRAM_DATA struct UnkStruct_0203A148 *gUnknown_0203A148 = NULL;
 
 // Static ROM declarations
 
-u8 sub_81230C4(void);
-u8 sub_8123254(void);
-void sub_81236C4(s32 a0, s32 a1, s32 a2, s32 a3, u16 a4, u16 a5, u16 a6);
+static u8 ProcessRegionMapInput_Full(void);
+static u8 MoveRegionMapCursor_Full(void);
+static u8 ProcessRegionMapInput_Zoomed(void);
+static u8 MoveRegionMapCursor_Zoomed(void);
+void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
 void sub_81237B4(void);
 void sub_81238AC(void);
 u8 get_flagnr_blue_points(u16 mapSecId);
 u16 sub_8123EB4(u16 mapSecId);
 void sub_8123FB0(void);
-u8 _swiopen(void);
-u8 sub_8123334(void);
 u16 sub_812386C(u16 x, u16 y);
 void sub_812378C(s16 x, s16 y);
 void sub_8124238(void);
 void sub_81243B0(void);
+void sub_81243DC(void);
 
 // .rodata
 
@@ -45,50 +46,50 @@ extern const u8 gUnknown_0859F650[];
 
 // .text
 
-void sub_8122CDC(struct RegionMap *regionMap, u8 argument)
+void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed)
 {
-    sub_8122CF8(regionMap, NULL, argument);
+    sub_8122CF8(regionMap, NULL, zoomed);
     while (sub_8122DB0());
 }
 
-void sub_8122CF8(struct RegionMap *regionMap, struct UnkStruct_8122CF8 *arg1, u8 arg2)
+void sub_8122CF8(struct RegionMap *regionMap, struct BgTemplate *template, bool8 zoomed)
 {
-    gUnknown_0203A144 = regionMap;
-    gUnknown_0203A144->initStep = 0;
-    gUnknown_0203A144->zoomed = arg2;
-    gUnknown_0203A144->inputCallback = arg2 == TRUE ? sub_8123254 : sub_81230C4;
-    if (arg1 != NULL)
+    gRegionMap = regionMap;
+    gRegionMap->initStep = 0;
+    gRegionMap->zoomed = zoomed;
+    gRegionMap->inputCallback = zoomed == TRUE ? ProcessRegionMapInput_Zoomed : ProcessRegionMapInput_Full;
+    if (template != NULL)
     {
-        gUnknown_0203A144->bgNum = arg1->unk_0_0;
-        gUnknown_0203A144->unk_081 = arg1->unk_0_2;
-        gUnknown_0203A144->unk_082 = arg1->unk_0_4;
-        gUnknown_0203A144->unk_083 = TRUE;
+        gRegionMap->bgNum = template->bg;
+        gRegionMap->charBaseIdx = template->charBaseIndex;
+        gRegionMap->mapBaseIdx = template->mapBaseIndex;
+        gRegionMap->bgManaged = TRUE;
     }
     else
     {
-        gUnknown_0203A144->bgNum = 2;
-        gUnknown_0203A144->unk_081 = 2;
-        gUnknown_0203A144->unk_082 = 28;
-        gUnknown_0203A144->unk_083 = FALSE;
+        gRegionMap->bgNum = 2;
+        gRegionMap->charBaseIdx = 2;
+        gRegionMap->mapBaseIdx = 28;
+        gRegionMap->bgManaged = FALSE;
     }
 }
 
 void sub_8122D88(struct RegionMap *regionMap)
 {
-    gUnknown_0203A144 = regionMap;
+    gRegionMap = regionMap;
     sub_81238AC();
-    gUnknown_0203A144->unk_074 = gUnknown_0203A144->cursorPosX;
-    gUnknown_0203A144->unk_076 = gUnknown_0203A144->cursorPosY;
+    gRegionMap->unk_074 = gRegionMap->cursorPosX;
+    gRegionMap->unk_076 = gRegionMap->cursorPosY;
 }
 
 bool8 sub_8122DB0(void)
 {
-    switch (gUnknown_0203A144->initStep)
+    switch (gRegionMap->initStep)
     {
         case 0:
-            if (gUnknown_0203A144->unk_083)
+            if (gRegionMap->bgManaged)
             {
-                decompress_and_copy_tile_data_to_vram(gUnknown_0203A144->bgNum, gUnknown_0859F77C, 0, 0, 0);
+                decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, gUnknown_0859F77C, 0, 0, 0);
             }
             else
             {
@@ -96,11 +97,11 @@ bool8 sub_8122DB0(void)
             }
             break;
         case 1:
-            if (gUnknown_0203A144->unk_083)
+            if (gRegionMap->bgManaged)
             {
                 if (!free_temp_tile_data_buffers_if_possible())
                 {
-                    decompress_and_copy_tile_data_to_vram(gUnknown_0203A144->bgNum, gUnknown_085A04E0, 0, 0, 1);
+                    decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, gUnknown_085A04E0, 0, 0, 1);
                 }
             }
             else
@@ -115,54 +116,54 @@ bool8 sub_8122DB0(void)
             }
             break;
         case 3:
-            LZ77UnCompWram(gUnknown_0859F60C, gUnknown_0203A144->cursorSmallImage);
+            LZ77UnCompWram(gUnknown_0859F60C, gRegionMap->cursorSmallImage);
             break;
         case 4:
-            LZ77UnCompWram(gUnknown_0859F650, gUnknown_0203A144->cursorLargeImage);
+            LZ77UnCompWram(gUnknown_0859F650, gRegionMap->cursorLargeImage);
             break;
         case 5:
             sub_81238AC();
-            gUnknown_0203A144->unk_074 = gUnknown_0203A144->cursorPosX;
-            gUnknown_0203A144->unk_076 = gUnknown_0203A144->cursorPosY;
-            gUnknown_0203A144->mapSecId = sub_8123EB4(gUnknown_0203A144->mapSecId);
-            gUnknown_0203A144->unk_002 = get_flagnr_blue_points(gUnknown_0203A144->mapSecId);
-            GetMapName(gUnknown_0203A144->mapSecName, gUnknown_0203A144->mapSecId, 16);
+            gRegionMap->unk_074 = gRegionMap->cursorPosX;
+            gRegionMap->unk_076 = gRegionMap->cursorPosY;
+            gRegionMap->mapSecId = sub_8123EB4(gRegionMap->mapSecId);
+            gRegionMap->unk_002 = get_flagnr_blue_points(gRegionMap->mapSecId);
+            GetMapName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
             break;
         case 6:
-            if (gUnknown_0203A144->zoomed == FALSE)
+            if (gRegionMap->zoomed == FALSE)
             {
-                sub_81236C4(0, 0, 0, 0, 0x100, 0x100, 0);
+                CalcZoomScrollParams(0, 0, 0, 0, 0x100, 0x100, 0);
             }
             else
             {
-                gUnknown_0203A144->scrollX = gUnknown_0203A144->cursorPosX * 8 - 0x34;
-                gUnknown_0203A144->scrollY = gUnknown_0203A144->cursorPosY * 8 - 0x44;
-                gUnknown_0203A144->unk_064 = gUnknown_0203A144->cursorPosX;
-                gUnknown_0203A144->unk_066 = gUnknown_0203A144->cursorPosY;
-                sub_81236C4(gUnknown_0203A144->scrollX, gUnknown_0203A144->scrollY, 0x38, 0x48, 0x80, 0x80, 0);
+                gRegionMap->scrollX = gRegionMap->cursorPosX * 8 - 0x34;
+                gRegionMap->scrollY = gRegionMap->cursorPosY * 8 - 0x44;
+                gRegionMap->unk_064 = gRegionMap->cursorPosX;
+                gRegionMap->unk_066 = gRegionMap->cursorPosY;
+                CalcZoomScrollParams(gRegionMap->scrollX, gRegionMap->scrollY, 0x38, 0x48, 0x80, 0x80, 0);
             }
             break;
         case 7:
             sub_8123FB0();
             sub_81237B4();
-            gUnknown_0203A144->cursorSprite = NULL;
-            gUnknown_0203A144->playerIconSprite = NULL;
-            gUnknown_0203A144->cursorMovementFrameCounter = 0;
-            gUnknown_0203A144->blinkPlayerIcon = FALSE;
-            if (gUnknown_0203A144->unk_083)
+            gRegionMap->cursorSprite = NULL;
+            gRegionMap->playerIconSprite = NULL;
+            gRegionMap->cursorMovementFrameCounter = 0;
+            gRegionMap->blinkPlayerIcon = FALSE;
+            if (gRegionMap->bgManaged)
             {
-                SetBgAttribute(gUnknown_0203A144->bgNum, BG_CTRL_ATTR_MAPBASEINDEX, 2);
-                SetBgAttribute(gUnknown_0203A144->bgNum, BG_CTRL_ATTR_VISIBLE, gUnknown_0203A144->unk_081);
-                SetBgAttribute(gUnknown_0203A144->bgNum, BG_CTRL_ATTR_CHARBASEINDEX, gUnknown_0203A144->unk_082);
-                SetBgAttribute(gUnknown_0203A144->bgNum, BG_CTRL_ATTR_PRIORITY, 1);
-                SetBgAttribute(gUnknown_0203A144->bgNum, BG_CTRL_ATTR_SCREENSIZE, 1);
+                SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_MAPBASEINDEX, 2);
+                SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_VISIBLE, gRegionMap->charBaseIdx);
+                SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_CHARBASEINDEX, gRegionMap->mapBaseIdx);
+                SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_PRIORITY, 1);
+                SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_SCREENSIZE, 1);
             }
-            gUnknown_0203A144->initStep ++;
+            gRegionMap->initStep ++;
             return FALSE;
         default:
             return FALSE;
     }
-    gUnknown_0203A144->initStep ++;
+    gRegionMap->initStep ++;
     return TRUE;
 }
 
@@ -172,52 +173,52 @@ void sub_8123030(u16 a0, u32 a1)
     CpuCopy16(gPlttBufferFaded + 0x70, gPlttBufferUnfaded + 0x70, 0x60);
 }
 
-void sub_812305C(void)
+void FreeRegionMapIconResources(void)
 {
-    if (gUnknown_0203A144->cursorSprite != NULL)
+    if (gRegionMap->cursorSprite != NULL)
     {
-        DestroySprite(gUnknown_0203A144->cursorSprite);
-        FreeSpriteTilesByTag(gUnknown_0203A144->cursorTileTag);
-        FreeSpritePaletteByTag(gUnknown_0203A144->cursorPaletteTag);
+        DestroySprite(gRegionMap->cursorSprite);
+        FreeSpriteTilesByTag(gRegionMap->cursorTileTag);
+        FreeSpritePaletteByTag(gRegionMap->cursorPaletteTag);
     }
-    if (gUnknown_0203A144->playerIconSprite != NULL)
+    if (gRegionMap->playerIconSprite != NULL)
     {
-        DestroySprite(gUnknown_0203A144->playerIconSprite);
-        FreeSpriteTilesByTag(gUnknown_0203A144->playerIconTileTag);
-        FreeSpritePaletteByTag(gUnknown_0203A144->playerIconPaletteTag);
+        DestroySprite(gRegionMap->playerIconSprite);
+        FreeSpriteTilesByTag(gRegionMap->playerIconTileTag);
+        FreeSpritePaletteByTag(gRegionMap->playerIconPaletteTag);
     }
 }
 
 u8 sub_81230AC(void)
 {
-    return gUnknown_0203A144->inputCallback();
+    return gRegionMap->inputCallback();
 }
 
-u8 sub_81230C4(void)
+static u8 ProcessRegionMapInput_Full(void)
 {
     u8 input;
 
     input = INPUT_EVENT_NONE;
-    gUnknown_0203A144->cursorDeltaX = 0;
-    gUnknown_0203A144->cursorDeltaY = 0;
-    if (gMain.heldKeys & DPAD_UP && gUnknown_0203A144->cursorPosY > 2)
+    gRegionMap->cursorDeltaX = 0;
+    gRegionMap->cursorDeltaY = 0;
+    if (gMain.heldKeys & DPAD_UP && gRegionMap->cursorPosY > 2)
     {
-        gUnknown_0203A144->cursorDeltaY = -1;
+        gRegionMap->cursorDeltaY = -1;
         input = INPUT_EVENT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_DOWN && gUnknown_0203A144->cursorPosY < 16)
+    if (gMain.heldKeys & DPAD_DOWN && gRegionMap->cursorPosY < 16)
     {
-        gUnknown_0203A144->cursorDeltaY = +1;
+        gRegionMap->cursorDeltaY = +1;
         input = INPUT_EVENT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_LEFT && gUnknown_0203A144->cursorPosX > 1)
+    if (gMain.heldKeys & DPAD_LEFT && gRegionMap->cursorPosX > 1)
     {
-        gUnknown_0203A144->cursorDeltaX = -1;
+        gRegionMap->cursorDeltaX = -1;
         input = INPUT_EVENT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_RIGHT && gUnknown_0203A144->cursorPosX < 28)
+    if (gMain.heldKeys & DPAD_RIGHT && gRegionMap->cursorPosX < 28)
     {
-        gUnknown_0203A144->cursorDeltaX = +1;
+        gRegionMap->cursorDeltaX = +1;
         input = INPUT_EVENT_MOVE_START;
     }
     if (gMain.newKeys & A_BUTTON)
@@ -230,73 +231,73 @@ u8 sub_81230C4(void)
     }
     if (input == INPUT_EVENT_MOVE_START)
     {
-        gUnknown_0203A144->cursorMovementFrameCounter = 4;
-        gUnknown_0203A144->inputCallback = _swiopen;
+        gRegionMap->cursorMovementFrameCounter = 4;
+        gRegionMap->inputCallback = MoveRegionMapCursor_Full;
     }
     return input;
 }
 
-u8 _swiopen(void)
+static u8 MoveRegionMapCursor_Full(void)
 {
     u16 mapSecId;
 
-    if (gUnknown_0203A144->cursorMovementFrameCounter != 0)
+    if (gRegionMap->cursorMovementFrameCounter != 0)
     {
         return INPUT_EVENT_MOVE_CONT;
     }
-    if (gUnknown_0203A144->cursorDeltaX > 0)
+    if (gRegionMap->cursorDeltaX > 0)
     {
-        gUnknown_0203A144->cursorPosX ++;
+        gRegionMap->cursorPosX ++;
     }
-    if (gUnknown_0203A144->cursorDeltaX < 0)
+    if (gRegionMap->cursorDeltaX < 0)
     {
-        gUnknown_0203A144->cursorPosX --;
+        gRegionMap->cursorPosX --;
     }
-    if (gUnknown_0203A144->cursorDeltaY > 0)
+    if (gRegionMap->cursorDeltaY > 0)
     {
-        gUnknown_0203A144->cursorPosY ++;
+        gRegionMap->cursorPosY ++;
     }
-    if (gUnknown_0203A144->cursorDeltaY < 0)
+    if (gRegionMap->cursorDeltaY < 0)
     {
-        gUnknown_0203A144->cursorPosY --;
+        gRegionMap->cursorPosY --;
     }
-    mapSecId = sub_812386C(gUnknown_0203A144->cursorPosX, gUnknown_0203A144->cursorPosY);
-    gUnknown_0203A144->unk_002 = get_flagnr_blue_points(mapSecId);
-    if (mapSecId != gUnknown_0203A144->mapSecId)
+    mapSecId = sub_812386C(gRegionMap->cursorPosX, gRegionMap->cursorPosY);
+    gRegionMap->unk_002 = get_flagnr_blue_points(mapSecId);
+    if (mapSecId != gRegionMap->mapSecId)
     {
-        gUnknown_0203A144->mapSecId = mapSecId;
-        GetMapName(gUnknown_0203A144->mapSecName, gUnknown_0203A144->mapSecId, 16);
+        gRegionMap->mapSecId = mapSecId;
+        GetMapName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
     }
     sub_8123FB0();
-    gUnknown_0203A144->inputCallback = sub_81230C4;
+    gRegionMap->inputCallback = ProcessRegionMapInput_Full;
     return INPUT_EVENT_MOVE_END;
 }
 
-u8 sub_8123254(void)
+static u8 ProcessRegionMapInput_Zoomed(void)
 {
     u8 input;
 
     input = INPUT_EVENT_NONE;
-    gUnknown_0203A144->zoomedCursorDeltaX = 0;
-    gUnknown_0203A144->zoomedCursorDeltaY = 0;
-    if (gMain.heldKeys & DPAD_UP && gUnknown_0203A144->scrollY > -0x34)
+    gRegionMap->zoomedCursorDeltaX = 0;
+    gRegionMap->zoomedCursorDeltaY = 0;
+    if (gMain.heldKeys & DPAD_UP && gRegionMap->scrollY > -0x34)
     {
-        gUnknown_0203A144->zoomedCursorDeltaY = -1;
+        gRegionMap->zoomedCursorDeltaY = -1;
         input = INPUT_EVENT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_DOWN && gUnknown_0203A144->scrollY < 0x3c)
+    if (gMain.heldKeys & DPAD_DOWN && gRegionMap->scrollY < 0x3c)
     {
-        gUnknown_0203A144->zoomedCursorDeltaY = +1;
+        gRegionMap->zoomedCursorDeltaY = +1;
         input = INPUT_EVENT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_LEFT && gUnknown_0203A144->scrollX > -0x2c)
+    if (gMain.heldKeys & DPAD_LEFT && gRegionMap->scrollX > -0x2c)
     {
-        gUnknown_0203A144->zoomedCursorDeltaX = -1;
+        gRegionMap->zoomedCursorDeltaX = -1;
         input = INPUT_EVENT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_RIGHT && gUnknown_0203A144->scrollX < 0xac)
+    if (gMain.heldKeys & DPAD_RIGHT && gRegionMap->scrollX < 0xac)
     {
-        gUnknown_0203A144->zoomedCursorDeltaX = +1;
+        gRegionMap->zoomedCursorDeltaX = +1;
         input = INPUT_EVENT_MOVE_START;
     }
     if (gMain.newKeys & A_BUTTON)
@@ -309,41 +310,41 @@ u8 sub_8123254(void)
     }
     if (input == INPUT_EVENT_MOVE_START)
     {
-        gUnknown_0203A144->inputCallback = sub_8123334;
-        gUnknown_0203A144->zoomedCursorMovementFrameCounter = 0;
+        gRegionMap->inputCallback = MoveRegionMapCursor_Zoomed;
+        gRegionMap->zoomedCursorMovementFrameCounter = 0;
     }
     return input;
 }
 
-u8 sub_8123334(void)
+static u8 MoveRegionMapCursor_Zoomed(void)
 {
     u16 x;
     u16 y;
     u16 mapSecId;
 
-    gUnknown_0203A144->scrollY += gUnknown_0203A144->zoomedCursorDeltaY;
-    gUnknown_0203A144->scrollX += gUnknown_0203A144->zoomedCursorDeltaX;
-    sub_812378C(gUnknown_0203A144->scrollX, gUnknown_0203A144->scrollY);
-    gUnknown_0203A144->zoomedCursorMovementFrameCounter ++;
-    if (gUnknown_0203A144->zoomedCursorMovementFrameCounter == 8)
+    gRegionMap->scrollY += gRegionMap->zoomedCursorDeltaY;
+    gRegionMap->scrollX += gRegionMap->zoomedCursorDeltaX;
+    sub_812378C(gRegionMap->scrollX, gRegionMap->scrollY);
+    gRegionMap->zoomedCursorMovementFrameCounter ++;
+    if (gRegionMap->zoomedCursorMovementFrameCounter == 8)
     {
-        x = (gUnknown_0203A144->scrollX + 0x2c) / 8 + 1;
-        y = (gUnknown_0203A144->scrollY + 0x34) / 8 + 2;
-        if (x != gUnknown_0203A144->unk_064 || y != gUnknown_0203A144->unk_066)
+        x = (gRegionMap->scrollX + 0x2c) / 8 + 1;
+        y = (gRegionMap->scrollY + 0x34) / 8 + 2;
+        if (x != gRegionMap->unk_064 || y != gRegionMap->unk_066)
         {
-            gUnknown_0203A144->unk_064 = x;
-            gUnknown_0203A144->unk_066 = y;
+            gRegionMap->unk_064 = x;
+            gRegionMap->unk_066 = y;
             mapSecId = sub_812386C(x, y);
-            gUnknown_0203A144->unk_002 = get_flagnr_blue_points(mapSecId);
-            if (mapSecId != gUnknown_0203A144->mapSecId)
+            gRegionMap->unk_002 = get_flagnr_blue_points(mapSecId);
+            if (mapSecId != gRegionMap->mapSecId)
             {
-                gUnknown_0203A144->mapSecId = mapSecId;
-                GetMapName(gUnknown_0203A144->mapSecName, gUnknown_0203A144->mapSecId, 16);
+                gRegionMap->mapSecId = mapSecId;
+                GetMapName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
             }
             sub_8123FB0();
         }
-        gUnknown_0203A144->zoomedCursorMovementFrameCounter = 0;
-        gUnknown_0203A144->inputCallback = sub_8123254;
+        gRegionMap->zoomedCursorMovementFrameCounter = 0;
+        gRegionMap->inputCallback = ProcessRegionMapInput_Zoomed;
         return INPUT_EVENT_MOVE_END;
     }
     return INPUT_EVENT_MOVE_CONT;
@@ -351,35 +352,119 @@ u8 sub_8123334(void)
 
 void sub_8123418(void)
 {
-    if (gUnknown_0203A144->zoomed == FALSE)
+    if (gRegionMap->zoomed == FALSE)
     {
-        gUnknown_0203A144->scrollY = 0;
-        gUnknown_0203A144->scrollX = 0;
-        gUnknown_0203A144->unk_040 = 0;
-        gUnknown_0203A144->unk_03c = 0;
-        gUnknown_0203A144->unk_060 = gUnknown_0203A144->cursorPosX * 8 - 0x34;
-        gUnknown_0203A144->unk_062 = gUnknown_0203A144->cursorPosY * 8 - 0x44;
-        gUnknown_0203A144->unk_044 = (gUnknown_0203A144->unk_060 << 8) / 16;
-        gUnknown_0203A144->unk_048 = (gUnknown_0203A144->unk_062 << 8) / 16;
-        gUnknown_0203A144->unk_064 = gUnknown_0203A144->cursorPosX;
-        gUnknown_0203A144->unk_066 = gUnknown_0203A144->cursorPosY;
-        gUnknown_0203A144->unk_04c = 0x10000;
-        gUnknown_0203A144->unk_050 = -0x800;
+        gRegionMap->scrollY = 0;
+        gRegionMap->scrollX = 0;
+        gRegionMap->unk_040 = 0;
+        gRegionMap->unk_03c = 0;
+        gRegionMap->unk_060 = gRegionMap->cursorPosX * 8 - 0x34;
+        gRegionMap->unk_062 = gRegionMap->cursorPosY * 8 - 0x44;
+        gRegionMap->unk_044 = (gRegionMap->unk_060 << 8) / 16;
+        gRegionMap->unk_048 = (gRegionMap->unk_062 << 8) / 16;
+        gRegionMap->unk_064 = gRegionMap->cursorPosX;
+        gRegionMap->unk_066 = gRegionMap->cursorPosY;
+        gRegionMap->unk_04c = 0x10000;
+        gRegionMap->unk_050 = -0x800;
     }
     else
     {
-        gUnknown_0203A144->unk_03c = gUnknown_0203A144->scrollX * 256;
-        gUnknown_0203A144->unk_040 = gUnknown_0203A144->scrollY * 256;
-        gUnknown_0203A144->unk_060 = 0;
-        gUnknown_0203A144->unk_062 = 0;
-        gUnknown_0203A144->unk_044 = -(gUnknown_0203A144->unk_03c / 16);
-        gUnknown_0203A144->unk_048 = -(gUnknown_0203A144->unk_040 / 16);
-        gUnknown_0203A144->cursorPosX = gUnknown_0203A144->unk_064;
-        gUnknown_0203A144->cursorPosY = gUnknown_0203A144->unk_066;
-        gUnknown_0203A144->unk_04c = 0x8000;
-        gUnknown_0203A144->unk_050 = 0x800;
+        gRegionMap->unk_03c = gRegionMap->scrollX * 256;
+        gRegionMap->unk_040 = gRegionMap->scrollY * 256;
+        gRegionMap->unk_060 = 0;
+        gRegionMap->unk_062 = 0;
+        gRegionMap->unk_044 = -(gRegionMap->unk_03c / 16);
+        gRegionMap->unk_048 = -(gRegionMap->unk_040 / 16);
+        gRegionMap->cursorPosX = gRegionMap->unk_064;
+        gRegionMap->cursorPosY = gRegionMap->unk_066;
+        gRegionMap->unk_04c = 0x8000;
+        gRegionMap->unk_050 = 0x800;
     }
-    gUnknown_0203A144->unk_06e = 0;
+    gRegionMap->unk_06e = 0;
     sub_8124238();
     sub_81243B0();
+}
+
+u8 sub_8123514(void)
+{
+    u8 r4;
+
+    if (gRegionMap->unk_06e >= 16)
+        return 0;
+    gRegionMap->unk_06e ++;
+    if (gRegionMap->unk_06e == 16)
+    {
+        gRegionMap->unk_044 = 0;
+        gRegionMap->unk_048 = 0;
+        gRegionMap->scrollX = gRegionMap->unk_060;
+        gRegionMap->scrollY = gRegionMap->unk_062;
+        gRegionMap->unk_04c = (gRegionMap->zoomed == FALSE) ? (128 << 8) : (256 << 8);
+        gRegionMap->zoomed = !gRegionMap->zoomed;
+        gRegionMap->inputCallback = (gRegionMap->zoomed == FALSE) ? ProcessRegionMapInput_Full : ProcessRegionMapInput_Zoomed;
+        CreateRegionMapCursor(gRegionMap->cursorTileTag, gRegionMap->cursorPaletteTag);
+        sub_81243DC();
+        r4 = 0;
+    }
+    else
+    {
+        gRegionMap->unk_03c += gRegionMap->unk_044;
+        gRegionMap->unk_040 += gRegionMap->unk_048;
+        gRegionMap->scrollX = gRegionMap->unk_03c >> 8;
+        gRegionMap->scrollY = gRegionMap->unk_040 >> 8;
+        gRegionMap->unk_04c += gRegionMap->unk_050;
+        if ((gRegionMap->unk_044 < 0 && gRegionMap->scrollX < gRegionMap->unk_060)
+            || (gRegionMap->unk_044 > 0 && gRegionMap->scrollX > gRegionMap->unk_060))
+        {
+            gRegionMap->scrollX = gRegionMap->unk_060;
+            gRegionMap->unk_044 = 0;
+        }
+        if ((gRegionMap->unk_048 < 0 && gRegionMap->scrollY < gRegionMap->unk_062)
+            || (gRegionMap->unk_048 > 0 && gRegionMap->scrollY > gRegionMap->unk_062))
+        {
+            gRegionMap->scrollY = gRegionMap->unk_062;
+            gRegionMap->unk_048 = 0;
+        }
+        if (gRegionMap->zoomed == FALSE)
+        {
+            if (gRegionMap->unk_04c < (128 << 8))
+            {
+                gRegionMap->unk_04c = (128 << 8);
+                gRegionMap->unk_050 = 0;
+            }
+        }
+        else
+        {
+            if (gRegionMap->unk_04c > (256 << 8))
+            {
+                gRegionMap->unk_04c = (256 << 8);
+                gRegionMap->unk_050 = 0;
+            }
+        }
+        r4 = 1;
+    }
+    CalcZoomScrollParams(gRegionMap->scrollX, gRegionMap->scrollY, 0x38, 0x48, gRegionMap->unk_04c >> 8, gRegionMap->unk_04c >> 8, 0);
+    return r4;
+}
+
+void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation)
+{
+    s32 var1;
+    s32 var2;
+    s32 var3;
+    s32 var4;
+
+    gRegionMap->bg2pa = e * gSineTable[rotation + 64] >> 8;
+    gRegionMap->bg2pb = e * -gSineTable[rotation] >> 8;
+    gRegionMap->bg2pc = f * gSineTable[rotation] >> 8;
+    gRegionMap->bg2pd = f * gSineTable[rotation + 64] >> 8;
+
+    var1 = (scrollX << 8) + (c << 8);
+    var2 = d * gRegionMap->bg2pc + gRegionMap->bg2pa * c;
+    gRegionMap->bg2x = var1 - var2;
+
+    var3 = (scrollY << 8) + (d << 8);
+    var4 = gRegionMap->bg2pd * d + gRegionMap->bg2pb * c;
+    gRegionMap->bg2y = var3 - var4;
+
+    gRegionMap->needUpdateVideoRegs = TRUE;
 }
