@@ -13,17 +13,6 @@ struct UnkStruct_0203A148 {
     u8 filler_000[0xa74];
 };
 
-enum
-{
-    INPUT_EVENT_NONE,
-    INPUT_EVENT_DPAD,
-    INPUT_EVENT_2,
-    INPUT_EVENT_3,
-    INPUT_EVENT_A_BUTTON,
-    INPUT_EVENT_B_BUTTON,
-};
-
-
 // Static RAM declarations
 
 EWRAM_DATA struct RegionMap *gUnknown_0203A144 = NULL;
@@ -40,6 +29,7 @@ u8 get_flagnr_blue_points(u16 mapSecId);
 u16 sub_8123EB4(u16 mapSecId);
 void sub_8123FB0(void);
 u8 _swiopen(void);
+u16 sub_812386C(u16 x, u16 y);
 
 // .rodata
 
@@ -209,22 +199,22 @@ u8 sub_81230C4(void)
     if (gMain.heldKeys & DPAD_UP && gUnknown_0203A144->unk_056 > 2)
     {
         gUnknown_0203A144->unk_07c = -1;
-        input = INPUT_EVENT_DPAD;
+        input = INPUT_EVENT_MOVE_START;
     }
     if (gMain.heldKeys & DPAD_DOWN && gUnknown_0203A144->unk_056 < 16)
     {
         gUnknown_0203A144->unk_07c = +1;
-        input = INPUT_EVENT_DPAD;
+        input = INPUT_EVENT_MOVE_START;
     }
     if (gMain.heldKeys & DPAD_LEFT && gUnknown_0203A144->unk_054 > 1)
     {
         gUnknown_0203A144->unk_07b = -1;
-        input = INPUT_EVENT_DPAD;
+        input = INPUT_EVENT_MOVE_START;
     }
     if (gMain.heldKeys & DPAD_RIGHT && gUnknown_0203A144->unk_054 < 28)
     {
         gUnknown_0203A144->unk_07b = +1;
-        input = INPUT_EVENT_DPAD;
+        input = INPUT_EVENT_MOVE_START;
     }
     if (gMain.newKeys & A_BUTTON)
     {
@@ -234,10 +224,46 @@ u8 sub_81230C4(void)
     {
         input = INPUT_EVENT_B_BUTTON;
     }
-    if (input == INPUT_EVENT_DPAD)
+    if (input == INPUT_EVENT_MOVE_START)
     {
         gUnknown_0203A144->unk_07a = 4;
         gUnknown_0203A144->inputCallback = _swiopen;
     }
     return input;
+}
+
+u8 _swiopen(void)
+{
+    u16 mapSecId;
+
+    if (gUnknown_0203A144->unk_07a != 0)
+    {
+        return INPUT_EVENT_MOVE_CONT;
+    }
+    if (gUnknown_0203A144->unk_07b > 0)
+    {
+        gUnknown_0203A144->unk_054 ++;
+    }
+    if (gUnknown_0203A144->unk_07b < 0)
+    {
+        gUnknown_0203A144->unk_054 --;
+    }
+    if (gUnknown_0203A144->unk_07c > 0)
+    {
+        gUnknown_0203A144->unk_056 ++;
+    }
+    if (gUnknown_0203A144->unk_07c < 0)
+    {
+        gUnknown_0203A144->unk_056 --;
+    }
+    mapSecId = sub_812386C(gUnknown_0203A144->unk_054, gUnknown_0203A144->unk_056);
+    gUnknown_0203A144->unk_002 = get_flagnr_blue_points(mapSecId);
+    if (mapSecId != gUnknown_0203A144->mapSecId)
+    {
+        gUnknown_0203A144->mapSecId = mapSecId;
+        GetMapName(gUnknown_0203A144->mapSecName, gUnknown_0203A144->mapSecId, 16);
+    }
+    sub_8123FB0();
+    gUnknown_0203A144->inputCallback = sub_81230C4;
+    return INPUT_EVENT_MOVE_END;
 }

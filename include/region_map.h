@@ -252,7 +252,7 @@ struct RegionMap {
     /*0x079*/ u8 unk_079;
     /*0x07a*/ s8 unk_07a;
     /*0x07b*/ s8 unk_07b;
-    /*0x07c*/ u8 unk_07c;
+    /*0x07c*/ s8 unk_07c;
     /*0x07d*/ u8 unk_07d;
     /*0x07e*/ u8 unk_07e;
     /*0x07f*/ u8 unk_07f;
@@ -264,6 +264,16 @@ struct RegionMap {
     /*0x184*/ u8 unk_184[0x100];
     /*0x284*/ u8 unk_284[0x600];
 }; // size = 0x884
+
+enum
+{
+    INPUT_EVENT_NONE,
+    INPUT_EVENT_MOVE_START,
+    INPUT_EVENT_MOVE_CONT,
+    INPUT_EVENT_MOVE_END,
+    INPUT_EVENT_A_BUTTON,
+    INPUT_EVENT_B_BUTTON,
+};
 
 // Exported RAM declarations
 

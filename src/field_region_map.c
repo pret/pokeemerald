@@ -150,11 +150,11 @@ void sub_8170290(void)
         case 4:
             switch (sub_81230AC())
             {
-                case 3:
+                case INPUT_EVENT_MOVE_END:
                     sub_8170428();
                     break;
-                case 4:
-                case 5:
+                case INPUT_EVENT_A_BUTTON:
+                case INPUT_EVENT_B_BUTTON:
                     gUnknown_0203BCD0->state ++;
                     break;
             }
