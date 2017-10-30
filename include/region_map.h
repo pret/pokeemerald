@@ -226,28 +226,45 @@ struct UnkStruct_8122CF8 {
 };
 
 struct RegionMap {
-    /*0x000*/ u8 unk_00;
-    /*0x001*/ u8 unk_01;
-    /*0x002*/ bool8 unk_02;
-    /*0x003*/ u8 unk_03;
+    /*0x000*/ u16 mapSecId;
+    /*0x002*/ u8 unk_002;
+    /*0x003*/ u8 unk_003;
     /*0x004*/ u8 mapSecName[0x14];
     /*0x018*/ u8 (*inputCallback)(void);
-    /*0x01c*/ u8 filler_01c[0x5c];
+    /*0x01c*/ u32 unk_01c;
+    /*0x020*/ u32 unk_020;
+    /*0x024*/ u8 filler_024[0x30];
+    /*0x054*/ u16 unk_054;
+    /*0x056*/ u16 unk_056;
+    /*0x058*/ u8 filler_058[0x4];
+    /*0x05c*/ s16 unk_05c;
+    /*0x05e*/ s16 unk_05e;
+    /*0x060*/ u8 filler_060[0x4];
+    /*0x064*/ u16 unk_064;
+    /*0x066*/ u16 unk_066;
+    /*0x068*/ u8 filler_068[0xc];
+    /*0x074*/ u16 unk_074;
+    /*0x076*/ u16 unk_076;
     /*0x078*/ u8 unk_078;
-    /*0x079*/ bool8 unk_079;
-    /*0x07a*/ u8 filler_07a[6];
+    /*0x079*/ u8 unk_079;
+    /*0x07a*/ u8 unk_07a;
+    /*0x07b*/ u8 filler_07b[3];
+    /*0x07e*/ u8 unk_07e;
+    /*0x07f*/ u8 filler_07f[1];
     /*0x080*/ u8 unk_080;
     /*0x081*/ u8 unk_081;
     /*0x082*/ u8 unk_082;
     /*0x083*/ bool8 unk_083;
-    /*0x084*/ u8 filler_084[0x800];
+    /*0x084*/ u8 filler_084[0x100];
+    /*0x184*/ u8 unk_184[0x100];
+    /*0x284*/ u8 unk_284[0x600];
 }; // size = 0x884
 
 // Exported RAM declarations
 
 // Exported ROM declarations
 void GetMapName(u8 *, u16, u16);
-void sub_8122CDC(struct RegionMap *regionMap, bool8 argument);
+void sub_8122CDC(struct RegionMap *regionMap, u8 argument);
 void sub_8124288(u16 x, u16 y);
 void sub_81240D4(u16 x, u16 y);
 u8 sub_81230AC(void);

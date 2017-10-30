@@ -120,7 +120,7 @@ void sub_8170290(void)
     switch (gUnknown_0203BCD0->state)
     {
         case 0:
-            sub_8122CDC(&gUnknown_0203BCD0->regionMap, FALSE);
+            sub_8122CDC(&gUnknown_0203BCD0->regionMap, 0);
             sub_8124288(0, 0);
             sub_81240D4(1, 1);
             gUnknown_0203BCD0->state ++;
@@ -181,7 +181,7 @@ void sub_8170290(void)
 
 static void sub_8170428(void)
 {
-    if (gUnknown_0203BCD0->regionMap.unk_02)
+    if (gUnknown_0203BCD0->regionMap.unk_002 != 0)
     {
         FillWindowPixelBuffer(0, 0x11);
         PrintTextOnWindow(0, 1, gUnknown_0203BCD0->regionMap.mapSecName, 0, 1, 0, NULL);
