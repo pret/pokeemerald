@@ -32,6 +32,8 @@ u8 _swiopen(void);
 u8 sub_8123334(void);
 u16 sub_812386C(u16 x, u16 y);
 void sub_812378C(s16 x, s16 y);
+void sub_8124238(void);
+void sub_81243B0(void);
 
 // .rodata
 
@@ -344,8 +346,40 @@ u8 sub_8123334(void)
         gUnknown_0203A144->inputCallback = sub_8123254;
         return INPUT_EVENT_MOVE_END;
     }
+    return INPUT_EVENT_MOVE_CONT;
+}
+
+void sub_8123418(void)
+{
+    if (gUnknown_0203A144->zoomed == FALSE)
+    {
+        gUnknown_0203A144->scrollY = 0;
+        gUnknown_0203A144->scrollX = 0;
+        gUnknown_0203A144->unk_040 = 0;
+        gUnknown_0203A144->unk_03c = 0;
+        gUnknown_0203A144->unk_060 = gUnknown_0203A144->cursorPosX * 8 - 0x34;
+        gUnknown_0203A144->unk_062 = gUnknown_0203A144->cursorPosY * 8 - 0x44;
+        gUnknown_0203A144->unk_044 = (gUnknown_0203A144->unk_060 << 8) / 16;
+        gUnknown_0203A144->unk_048 = (gUnknown_0203A144->unk_062 << 8) / 16;
+        gUnknown_0203A144->unk_064 = gUnknown_0203A144->cursorPosX;
+        gUnknown_0203A144->unk_066 = gUnknown_0203A144->cursorPosY;
+        gUnknown_0203A144->unk_04c = 0x10000;
+        gUnknown_0203A144->unk_050 = -0x800;
+    }
     else
     {
-        return INPUT_EVENT_MOVE_CONT;
+        gUnknown_0203A144->unk_03c = gUnknown_0203A144->scrollX * 256;
+        gUnknown_0203A144->unk_040 = gUnknown_0203A144->scrollY * 256;
+        gUnknown_0203A144->unk_060 = 0;
+        gUnknown_0203A144->unk_062 = 0;
+        gUnknown_0203A144->unk_044 = -(gUnknown_0203A144->unk_03c / 16);
+        gUnknown_0203A144->unk_048 = -(gUnknown_0203A144->unk_040 / 16);
+        gUnknown_0203A144->cursorPosX = gUnknown_0203A144->unk_064;
+        gUnknown_0203A144->cursorPosY = gUnknown_0203A144->unk_066;
+        gUnknown_0203A144->unk_04c = 0x8000;
+        gUnknown_0203A144->unk_050 = 0x800;
     }
+    gUnknown_0203A144->unk_06e = 0;
+    sub_8124238();
+    sub_81243B0();
 }
