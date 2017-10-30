@@ -232,8 +232,8 @@ struct RegionMap {
     /*0x024*/ s32 bg2x;
     /*0x028*/ s32 bg2y;
     /*0x02c*/ u32 bg2pa;
-    /*0x030*/ u32 bg2pb;
     /*0x034*/ u32 bg2pc;
+    /*0x030*/ u32 bg2pb;
     /*0x038*/ u32 bg2pd;
     /*0x03c*/ s32 unk_03c;
     /*0x040*/ s32 unk_040;

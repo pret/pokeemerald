@@ -3,6 +3,7 @@
 #include "global.h"
 #include "main.h"
 #include "menu.h"
+#include "gpu_regs.h"
 #include "palette.h"
 #include "trig.h"
 #include "region_map.h"
@@ -454,17 +455,40 @@ void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, 
     s32 var4;
 
     gRegionMap->bg2pa = e * gSineTable[rotation + 64] >> 8;
-    gRegionMap->bg2pb = e * -gSineTable[rotation] >> 8;
-    gRegionMap->bg2pc = f * gSineTable[rotation] >> 8;
+    gRegionMap->bg2pc = e * -gSineTable[rotation] >> 8;
+    gRegionMap->bg2pb = f * gSineTable[rotation] >> 8;
     gRegionMap->bg2pd = f * gSineTable[rotation + 64] >> 8;
 
     var1 = (scrollX << 8) + (c << 8);
-    var2 = d * gRegionMap->bg2pc + gRegionMap->bg2pa * c;
+    var2 = d * gRegionMap->bg2pb + gRegionMap->bg2pa * c;
     gRegionMap->bg2x = var1 - var2;
 
     var3 = (scrollY << 8) + (d << 8);
-    var4 = gRegionMap->bg2pd * d + gRegionMap->bg2pb * c;
+    var4 = gRegionMap->bg2pd * d + gRegionMap->bg2pc * c;
     gRegionMap->bg2y = var3 - var4;
 
     gRegionMap->needUpdateVideoRegs = TRUE;
+}
+
+void sub_812378C(s16 x, s16 y)
+{
+    gRegionMap->bg2x = (x << 8) + 0x1c00;
+    gRegionMap->bg2y = (y << 8) + 0x2400;
+    gRegionMap->needUpdateVideoRegs = TRUE;
+}
+
+void sub_81237B4(void)
+{
+    if (gRegionMap->needUpdateVideoRegs)
+    {
+        SetGpuReg(REG_OFFSET_BG2PA, gRegionMap->bg2pa);
+        SetGpuReg(REG_OFFSET_BG2PB, gRegionMap->bg2pb);
+        SetGpuReg(REG_OFFSET_BG2PC, gRegionMap->bg2pc);
+        SetGpuReg(REG_OFFSET_BG2PD, gRegionMap->bg2pd);
+        SetGpuReg(REG_OFFSET_BG2X_L, gRegionMap->bg2x);
+        SetGpuReg(REG_OFFSET_BG2X_H, gRegionMap->bg2x >> 16);
+        SetGpuReg(REG_OFFSET_BG2Y_L, gRegionMap->bg2y);
+        SetGpuReg(REG_OFFSET_BG2Y_H, gRegionMap->bg2y >> 16);
+        gRegionMap->needUpdateVideoRegs = FALSE;
+    }
 }
