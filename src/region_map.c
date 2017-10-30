@@ -29,6 +29,7 @@ u8 get_flagnr_blue_points(u16 mapSecId);
 u16 sub_8123EB4(u16 mapSecId);
 void sub_8123FB0(void);
 u8 _swiopen(void);
+u8 sub_8123334(void);
 u16 sub_812386C(u16 x, u16 y);
 
 // .rodata
@@ -266,4 +267,47 @@ u8 _swiopen(void)
     sub_8123FB0();
     gUnknown_0203A144->inputCallback = sub_81230C4;
     return INPUT_EVENT_MOVE_END;
+}
+
+u8 sub_8123254(void)
+{
+    u8 input;
+
+    input = INPUT_EVENT_NONE;
+    gUnknown_0203A144->unk_06a = 0;
+    gUnknown_0203A144->unk_068 = 0;
+    if (gMain.heldKeys & DPAD_UP && gUnknown_0203A144->unk_05e > -0x34)
+    {
+        gUnknown_0203A144->unk_068 = -1;
+        input = INPUT_EVENT_MOVE_START;
+    }
+    if (gMain.heldKeys & DPAD_DOWN && gUnknown_0203A144->unk_05e < 0x3c)
+    {
+        gUnknown_0203A144->unk_068 = +1;
+        input = INPUT_EVENT_MOVE_START;
+    }
+    if (gMain.heldKeys & DPAD_LEFT && gUnknown_0203A144->unk_05c > -0x2c)
+    {
+        gUnknown_0203A144->unk_06a = -1;
+        input = INPUT_EVENT_MOVE_START;
+    }
+    if (gMain.heldKeys & DPAD_RIGHT && gUnknown_0203A144->unk_05c < 0xac)
+    {
+        gUnknown_0203A144->unk_06a = +1;
+        input = INPUT_EVENT_MOVE_START;
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        input = INPUT_EVENT_A_BUTTON;
+    }
+    if (gMain.newKeys & B_BUTTON)
+    {
+        input = INPUT_EVENT_B_BUTTON;
+    }
+    if (input == INPUT_EVENT_MOVE_START)
+    {
+        gUnknown_0203A144->inputCallback = sub_8123334;
+        gUnknown_0203A144->unk_06c = 0;
+    }
+    return input;
 }

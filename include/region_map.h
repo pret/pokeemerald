@@ -243,7 +243,10 @@ struct RegionMap {
     /*0x060*/ u8 filler_060[0x4];
     /*0x064*/ u16 unk_064;
     /*0x066*/ u16 unk_066;
-    /*0x068*/ u8 filler_068[0x8];
+    /*0x068*/ s16 unk_068;
+    /*0x06a*/ s16 unk_06a;
+    /*0x06c*/ u16 unk_06c;
+    /*0x06e*/ u8 filler_06e[2];
     /*0x070*/ u16 unk_070;
     /*0x072*/ u16 unk_072;
     /*0x074*/ u16 unk_074;
