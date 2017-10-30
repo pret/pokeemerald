@@ -140,8 +140,8 @@ bool8 sub_8122DB0(void)
         case 7:
             sub_8123FB0();
             sub_81237B4();
-            gUnknown_0203A144->unk_01c = 0;
-            gUnknown_0203A144->unk_020 = 0;
+            gUnknown_0203A144->unk_01c = NULL;
+            gUnknown_0203A144->unk_020 = NULL;
             gUnknown_0203A144->unk_07a = 0;
             gUnknown_0203A144->unk_07e = 0;
             if (gUnknown_0203A144->unk_083)
@@ -159,4 +159,31 @@ bool8 sub_8122DB0(void)
     }
     gUnknown_0203A144->unk_079 ++;
     return TRUE;
+}
+
+void sub_8123030(u16 a0, u32 a1)
+{
+    BlendPalettes(0x380, a1, a0);
+    CpuCopy16(gPlttBufferFaded + 0x70, gPlttBufferUnfaded + 0x70, 0x60);
+}
+
+void sub_812305C(void)
+{
+    if (gUnknown_0203A144->unk_01c != NULL)
+    {
+        DestroySprite(gUnknown_0203A144->unk_01c);
+        FreeSpriteTilesByTag(gUnknown_0203A144->unk_058);
+        FreeSpritePaletteByTag(gUnknown_0203A144->unk_05a);
+    }
+    if (gUnknown_0203A144->unk_020 != NULL)
+    {
+        DestroySprite(gUnknown_0203A144->unk_020);
+        FreeSpriteTilesByTag(gUnknown_0203A144->unk_070);
+        FreeSpritePaletteByTag(gUnknown_0203A144->unk_072);
+    }
+}
+
+u8 sub_81230AC(void)
+{
+    return gUnknown_0203A144->inputCallback();
 }
