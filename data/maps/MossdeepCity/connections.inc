@@ -6,6 +6,3 @@ MossdeepCity_MapConnectionsList: @ 84867C4
 MossdeepCity_MapConnections: @ 84867E8
 	.4byte 0x3
 	.4byte MossdeepCity_MapConnectionsList
-
-	.incbin "baserom.gba", 0x4867f0, 0x8
-
