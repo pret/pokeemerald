@@ -4,3 +4,5 @@
 	.equiv LAST_TALKED,      0x800F
 	.equiv CONTEST_RANK,     0x8010
 	.equiv CONTEST_CATEGORY, 0x8011
+	.equiv MON_BOX_ID,       0x8012
+	.equiv MON_BOX_POS,      0x8013
