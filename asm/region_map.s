@@ -5,80 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8123824
-sub_8123824: @ 8123824
-	push {r4,r5,lr}
-	sub sp, 0xC
-	lsls r0, 16
-	asrs r4, r0, 16
-	lsls r1, 16
-	asrs r5, r1, 16
-	movs r0, 0x80
-	lsls r0, 1
-	str r0, [sp]
-	str r0, [sp, 0x4]
-	movs r0, 0
-	str r0, [sp, 0x8]
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x38
-	movs r3, 0x48
-	bl CalcZoomScrollParams
-	bl sub_81237B4
-	ldr r0, =gRegionMap
-	ldr r2, [r0]
-	ldr r1, [r2, 0x20]
-	cmp r1, 0
-	beq _08123860
-	negs r0, r4
-	strh r0, [r1, 0x24]
-	ldr r1, [r2, 0x20]
-	negs r0, r5
-	strh r0, [r1, 0x26]
-_08123860:
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8123824
-
-	thumb_func_start sub_812386C
-sub_812386C: @ 812386C
-	push {lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	lsls r1, 16
-	ldr r0, =0xfffe0000
-	adds r1, r0
-	lsrs r2, r1, 16
-	cmp r2, 0xE
-	bhi _08123886
-	cmp r3, 0
-	beq _08123886
-	cmp r3, 0x1C
-	bls _08123890
-_08123886:
-	movs r0, 0xD5
-	b _081238A4
-	.pool
-_08123890:
-	subs r0, r3, 0x1
-	lsls r0, 16
-	lsrs r3, r0, 16
-	ldr r1, =gUnknown_085A096C
-	lsls r0, r2, 3
-	subs r0, r2
-	lsls r0, 2
-	adds r0, r3, r0
-	adds r0, r1
-	ldrb r0, [r0]
-_081238A4:
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_812386C
-
 	thumb_func_start sub_81238AC
 sub_81238AC: @ 81238AC
 	push {r4-r7,lr}
@@ -826,7 +752,7 @@ sub_8123E9C: @ 8123E9C
 	lsrs r0, 16
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_812386C
+	bl GetRegionMapSectionIdAt
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -1007,7 +933,7 @@ _08123FE6:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_812386C
+	bl GetRegionMapSectionIdAt
 	ldr r1, =gRegionMap
 	ldr r1, [r1]
 	lsls r0, 16
@@ -1063,7 +989,7 @@ _08124058:
 _0812405A:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_812386C
+	bl GetRegionMapSectionIdAt
 	ldr r1, =gRegionMap
 	ldr r1, [r1]
 	lsls r0, 16

@@ -10886,7 +10886,7 @@ sub_81CC6A4: @ 81CC6A4
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_81237B4
+	bl UpdateRegionMapVideoRegs
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CC6A4

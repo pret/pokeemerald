@@ -8,6 +8,13 @@
 #include "trig.h"
 #include "region_map.h"
 
+#define MAP_WIDTH 28
+#define MAP_HEIGHT 15
+#define MAPCURSOR_X_MIN 1
+#define MAPCURSOR_Y_MIN 2
+#define MAPCURSOR_X_MAX (MAPCURSOR_X_MIN + MAP_WIDTH - 1)
+#define MAPCURSOR_Y_MAX (MAPCURSOR_Y_MIN + MAP_HEIGHT - 1)
+
 // Static type declarations
 
 struct UnkStruct_0203A148 {
@@ -26,12 +33,12 @@ static u8 MoveRegionMapCursor_Full(void);
 static u8 ProcessRegionMapInput_Zoomed(void);
 static u8 MoveRegionMapCursor_Zoomed(void);
 void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
-void sub_81237B4(void);
+void UpdateRegionMapVideoRegs(void);
 void sub_81238AC(void);
 u8 get_flagnr_blue_points(u16 mapSecId);
 u16 sub_8123EB4(u16 mapSecId);
 void sub_8123FB0(void);
-u16 sub_812386C(u16 x, u16 y);
+u16 GetRegionMapSectionIdAt(u16 x, u16 y);
 void sub_812378C(s16 x, s16 y);
 void sub_8124238(void);
 void sub_81243B0(void);
@@ -39,11 +46,12 @@ void sub_81243DC(void);
 
 // .rodata
 
-extern const u8 gUnknown_0859F77C[];
-extern const u8 gUnknown_085A04E0[];
-extern const u16 gUnknown_0859F73C[];
 extern const u8 gUnknown_0859F60C[];
 extern const u8 gUnknown_0859F650[];
+extern const u16 gUnknown_0859F73C[];
+extern const u8 gUnknown_0859F77C[];
+extern const u8 gUnknown_085A04E0[];
+extern const u8 gUnknown_085A096C[];
 
 // .text
 
@@ -146,7 +154,7 @@ bool8 sub_8122DB0(void)
             break;
         case 7:
             sub_8123FB0();
-            sub_81237B4();
+            UpdateRegionMapVideoRegs();
             gRegionMap->cursorSprite = NULL;
             gRegionMap->playerIconSprite = NULL;
             gRegionMap->cursorMovementFrameCounter = 0;
@@ -202,22 +210,22 @@ static u8 ProcessRegionMapInput_Full(void)
     input = INPUT_EVENT_NONE;
     gRegionMap->cursorDeltaX = 0;
     gRegionMap->cursorDeltaY = 0;
-    if (gMain.heldKeys & DPAD_UP && gRegionMap->cursorPosY > 2)
+    if (gMain.heldKeys & DPAD_UP && gRegionMap->cursorPosY > MAPCURSOR_Y_MIN)
     {
         gRegionMap->cursorDeltaY = -1;
         input = INPUT_EVENT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_DOWN && gRegionMap->cursorPosY < 16)
+    if (gMain.heldKeys & DPAD_DOWN && gRegionMap->cursorPosY < MAPCURSOR_Y_MAX)
     {
         gRegionMap->cursorDeltaY = +1;
         input = INPUT_EVENT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_LEFT && gRegionMap->cursorPosX > 1)
+    if (gMain.heldKeys & DPAD_LEFT && gRegionMap->cursorPosX > MAPCURSOR_X_MIN)
     {
         gRegionMap->cursorDeltaX = -1;
         input = INPUT_EVENT_MOVE_START;
     }
-    if (gMain.heldKeys & DPAD_RIGHT && gRegionMap->cursorPosX < 28)
+    if (gMain.heldKeys & DPAD_RIGHT && gRegionMap->cursorPosX < MAPCURSOR_X_MAX)
     {
         gRegionMap->cursorDeltaX = +1;
         input = INPUT_EVENT_MOVE_START;
@@ -262,7 +270,7 @@ static u8 MoveRegionMapCursor_Full(void)
     {
         gRegionMap->cursorPosY --;
     }
-    mapSecId = sub_812386C(gRegionMap->cursorPosX, gRegionMap->cursorPosY);
+    mapSecId = GetRegionMapSectionIdAt(gRegionMap->cursorPosX, gRegionMap->cursorPosY);
     gRegionMap->unk_002 = get_flagnr_blue_points(mapSecId);
     if (mapSecId != gRegionMap->mapSecId)
     {
@@ -335,7 +343,7 @@ static u8 MoveRegionMapCursor_Zoomed(void)
         {
             gRegionMap->unk_064 = x;
             gRegionMap->unk_066 = y;
-            mapSecId = sub_812386C(x, y);
+            mapSecId = GetRegionMapSectionIdAt(x, y);
             gRegionMap->unk_002 = get_flagnr_blue_points(mapSecId);
             if (mapSecId != gRegionMap->mapSecId)
             {
@@ -477,7 +485,7 @@ void sub_812378C(s16 x, s16 y)
     gRegionMap->needUpdateVideoRegs = TRUE;
 }
 
-void sub_81237B4(void)
+void UpdateRegionMapVideoRegs(void)
 {
     if (gRegionMap->needUpdateVideoRegs)
     {
@@ -491,4 +499,26 @@ void sub_81237B4(void)
         SetGpuReg(REG_OFFSET_BG2Y_H, gRegionMap->bg2y >> 16);
         gRegionMap->needUpdateVideoRegs = FALSE;
     }
+}
+
+void sub_8123824(s16 x, s16 y)
+{
+    CalcZoomScrollParams(x, y, 0x38, 0x48, 0x100, 0x100, 0);
+    UpdateRegionMapVideoRegs();
+    if (gRegionMap->playerIconSprite != NULL)
+    {
+        gRegionMap->playerIconSprite->pos2.x = -x;
+        gRegionMap->playerIconSprite->pos2.y = -y;
+    }
+}
+
+u16 GetRegionMapSectionIdAt(u16 x, u16 y)
+{
+    if (y < MAPCURSOR_Y_MIN || y > MAPCURSOR_Y_MAX || x < MAPCURSOR_X_MIN || x > MAPCURSOR_X_MAX)
+    {
+        return MAPSEC_NONE2;
+    }
+    y -= MAPCURSOR_Y_MIN;
+    x -= MAPCURSOR_X_MIN;
+    return gUnknown_085A096C[x + y * MAP_WIDTH];
 }
