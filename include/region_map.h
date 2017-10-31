@@ -267,7 +267,7 @@ struct RegionMap {
     /*0x07c*/ s8 cursorDeltaY;
     /*0x07d*/ bool8 needUpdateVideoRegs;
     /*0x07e*/ bool8 blinkPlayerIcon;
-    /*0x07f*/ bool8 unk_07f;
+    /*0x07f*/ bool8 playerIsInCave;
     /*0x080*/ u8 bgNum;
     /*0x081*/ u8 charBaseIdx;
     /*0x082*/ u8 mapBaseIdx;

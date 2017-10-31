@@ -6,6 +6,8 @@
 #include "gpu_regs.h"
 #include "palette.h"
 #include "trig.h"
+#include "map_constants.h"
+#include "overworld.h"
 #include "region_map.h"
 
 #define MAP_WIDTH 28
@@ -21,6 +23,13 @@ struct UnkStruct_0203A148 {
     u8 filler_000[0xa74];
 };
 
+struct RegionMapLocation
+{
+    u8 x, y;
+    u8 width, height;
+    const u8 *regionMapSectionId;
+};
+
 // Static RAM declarations
 
 EWRAM_DATA struct RegionMap *gRegionMap = NULL;
@@ -34,12 +43,15 @@ static u8 ProcessRegionMapInput_Zoomed(void);
 static u8 MoveRegionMapCursor_Zoomed(void);
 void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
 void UpdateRegionMapVideoRegs(void);
-void sub_81238AC(void);
-u8 get_flagnr_blue_points(u16 mapSecId);
-u16 sub_8123EB4(u16 mapSecId);
-void sub_8123FB0(void);
 u16 GetRegionMapSectionIdAt(u16 x, u16 y);
 void sub_812378C(s16 x, s16 y);
+static void sub_81238AC(void);
+u8 get_flagnr_blue_points(u16 mapSecId);
+u16 sub_8123EB4(u16 mapSecId);
+void sub_8123F30(u16 *x, u16 *y);
+void sub_8123FB0(void);
+void sub_8123C00(void);
+bool32 sub_8123F74(u8 mapSecId);
 void sub_8124238(void);
 void sub_81243B0(void);
 void sub_81243DC(void);
@@ -52,6 +64,7 @@ extern const u16 gUnknown_0859F73C[];
 extern const u8 gUnknown_0859F77C[];
 extern const u8 gUnknown_085A04E0[];
 extern const u8 gUnknown_085A096C[];
+extern const struct RegionMapLocation gRegionMapEntries[];
 
 // .text
 
@@ -399,7 +412,9 @@ u8 sub_8123514(void)
     u8 r4;
 
     if (gRegionMap->unk_06e >= 16)
+    {
         return 0;
+    }
     gRegionMap->unk_06e ++;
     if (gRegionMap->unk_06e == 16)
     {
@@ -421,14 +436,12 @@ u8 sub_8123514(void)
         gRegionMap->scrollX = gRegionMap->unk_03c >> 8;
         gRegionMap->scrollY = gRegionMap->unk_040 >> 8;
         gRegionMap->unk_04c += gRegionMap->unk_050;
-        if ((gRegionMap->unk_044 < 0 && gRegionMap->scrollX < gRegionMap->unk_060)
-            || (gRegionMap->unk_044 > 0 && gRegionMap->scrollX > gRegionMap->unk_060))
+        if ((gRegionMap->unk_044 < 0 && gRegionMap->scrollX < gRegionMap->unk_060) || (gRegionMap->unk_044 > 0 && gRegionMap->scrollX > gRegionMap->unk_060))
         {
             gRegionMap->scrollX = gRegionMap->unk_060;
             gRegionMap->unk_044 = 0;
         }
-        if ((gRegionMap->unk_048 < 0 && gRegionMap->scrollY < gRegionMap->unk_062)
-            || (gRegionMap->unk_048 > 0 && gRegionMap->scrollY > gRegionMap->unk_062))
+        if ((gRegionMap->unk_048 < 0 && gRegionMap->scrollY < gRegionMap->unk_062) || (gRegionMap->unk_048 > 0 && gRegionMap->scrollY > gRegionMap->unk_062))
         {
             gRegionMap->scrollY = gRegionMap->unk_062;
             gRegionMap->unk_048 = 0;
@@ -521,4 +534,179 @@ u16 GetRegionMapSectionIdAt(u16 x, u16 y)
     y -= MAPCURSOR_Y_MIN;
     x -= MAPCURSOR_X_MIN;
     return gUnknown_085A096C[x + y * MAP_WIDTH];
+}
+
+static void sub_81238AC(void)
+{
+    const struct MapHeader *mapHeader;
+    u16 mapWidth;
+    u16 mapHeight;
+    u16 x;
+    u16 y;
+    u16 r1;
+    u16 r9;
+    struct WarpData *r4;
+
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_SS_TIDAL_CORRIDOR
+        && (gSaveBlock1Ptr->location.mapNum == MAP_ID_SS_TIDAL_CORRIDOR
+            || gSaveBlock1Ptr->location.mapNum == MAP_ID_SS_TIDAL_LOWER_DECK
+            || gSaveBlock1Ptr->location.mapNum == MAP_ID_SS_TIDAL_ROOMS))
+    {
+        sub_8123C00();
+        return;
+    }
+
+    switch (get_map_light_level_by_bank_and_number(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
+    {
+        default:
+        case 1:
+        case 2:
+        case 3:
+        case 5:
+        case 6:
+            gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
+            gRegionMap->playerIsInCave = FALSE;
+            mapWidth = gMapHeader.mapData->width;
+            mapHeight = gMapHeader.mapData->height;
+            x = gSaveBlock1Ptr->pos.x;
+            y = gSaveBlock1Ptr->pos.y;
+            if (gRegionMap->mapSecId == MAPSEC_UNDERWATER || gRegionMap->mapSecId == MAPSEC_UNDERWATER_MARINE_CAVE)
+            {
+                gRegionMap->playerIsInCave = TRUE;
+            }
+            break;
+        case 4:
+        case 7:
+            if (gMapHeader.flags & 0x02)
+            {
+                mapHeader = get_mapheader_by_bank_and_number(gSaveBlock1Ptr->warp4.mapGroup, gSaveBlock1Ptr->warp4.mapNum);
+                gRegionMap->mapSecId = mapHeader->regionMapSectionId;
+                gRegionMap->playerIsInCave = TRUE;
+                mapWidth = mapHeader->mapData->width;
+                mapHeight = mapHeader->mapData->height;
+                x = gSaveBlock1Ptr->warp4.x;
+                y = gSaveBlock1Ptr->warp4.y;
+            }
+            else
+            {
+                gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
+                gRegionMap->playerIsInCave = TRUE;
+                mapWidth = 1;
+                mapHeight = 1;
+                x = 1;
+                y = 1;
+            }
+            break;
+        case 9:
+            mapHeader = get_mapheader_by_bank_and_number((u16)gSaveBlock1Ptr->warp2.mapGroup, (u16)gSaveBlock1Ptr->warp2.mapNum);
+            gRegionMap->mapSecId = mapHeader->regionMapSectionId;
+            gRegionMap->playerIsInCave = TRUE;
+            mapWidth = mapHeader->mapData->width;
+            mapHeight = mapHeader->mapData->height;
+            x = gSaveBlock1Ptr->warp2.x;
+            y = gSaveBlock1Ptr->warp2.y;
+            break;
+        case 8:
+
+            gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
+            if (gRegionMap->mapSecId != MAPSEC_NONE)
+            {
+                r4 = &gSaveBlock1Ptr->warp4;
+                mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
+            }
+            else
+            {
+                r4 = &gSaveBlock1Ptr->warp2;
+                mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
+                gRegionMap->mapSecId = mapHeader->regionMapSectionId;
+            }
+            if (sub_8123F74(gRegionMap->mapSecId))
+            {
+                gRegionMap->playerIsInCave = TRUE;
+            }
+            else
+            {
+                gRegionMap->playerIsInCave = FALSE;
+            }
+            mapWidth = mapHeader->mapData->width;
+            mapHeight = mapHeader->mapData->height;
+            x = r4->x;
+            y = r4->y;
+            break;
+    }
+
+    r9 = x;
+
+    r1 = mapWidth / gRegionMapEntries[gRegionMap->mapSecId].width;
+    if (r1 == 0)
+    {
+        r1 = 1;
+    }
+    x /= r1;
+    if (x >= gRegionMapEntries[gRegionMap->mapSecId].width)
+    {
+        x = gRegionMapEntries[gRegionMap->mapSecId].width - 1;
+    }
+
+    r1 = mapHeight / gRegionMapEntries[gRegionMap->mapSecId].height;
+    if (r1 == 0)
+    {
+        r1 = 1;
+    }
+    y /= r1;
+    if (y >= gRegionMapEntries[gRegionMap->mapSecId].height)
+    {
+        y = gRegionMapEntries[gRegionMap->mapSecId].height - 1;
+    }
+
+    switch (gRegionMap->mapSecId)
+    {
+        case MAPSEC_ROUTE_114:
+            if (y != 0)
+            {
+                x = 0;
+            }
+            break;
+        case MAPSEC_ROUTE_126:
+        case MAPSEC_UNDERWATER_125:
+            x = 0;
+            if (gSaveBlock1Ptr->pos.x > 32)
+            {
+                x = 1;
+            }
+            if (gSaveBlock1Ptr->pos.x > 0x33)
+            {
+                x++;
+            }
+            y = 0;
+            if (gSaveBlock1Ptr->pos.y > 0x25)
+            {
+                y = 1;
+            }
+            if (gSaveBlock1Ptr->pos.y > 0x38)
+            {
+                y++;
+            }
+            break;
+        case MAPSEC_ROUTE_121:
+            x = 0;
+            if (r9 > 14)
+            {
+                x = 1;
+            }
+            if (r9 > 0x1C)
+            {
+                x++;
+            }
+            if (r9 > 0x36)
+            {
+                x++;
+            }
+            break;
+        case MAPSEC_UNDERWATER_MARINE_CAVE:
+            sub_8123F30(&gRegionMap->cursorPosX, &gRegionMap->cursorPosY);
+            return;
+    }
+    gRegionMap->cursorPosX = gRegionMapEntries[gRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
+    gRegionMap->cursorPosY = gRegionMapEntries[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
 }

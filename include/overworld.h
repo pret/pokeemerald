@@ -52,12 +52,13 @@ void Overworld_ChangeMusicTo(u16);
 bool32 is_c1_link_related_active(void);
 
 void strange_npc_table_clear(void);
-const struct MapHeader *get_mapheader_by_bank_and_number(u8, u8);
+const struct MapHeader *get_mapheader_by_bank_and_number(u16, u16);
 void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 void sub_8086230(void);
 void c2_exit_to_overworld_2_switch(void);
 bool32 sub_8087598(void);
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 void warp_in(void);
+u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
 
 #endif //GUARD_ROM4_H
