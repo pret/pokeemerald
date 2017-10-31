@@ -495,10 +495,10 @@ gBankInMenu: @ 20244B8
 gDoingBattleAnim: @ 20244B9
 	.space 0x3
 
-gUnknown_020244BC: @ 20244BC
+gTransformedPersonalities: @ 20244BC
 	.space 0x10
 
-gUnknown_020244CC: @ 20244CC
+gPlayerDpadHoldFrames: @ 20244CC
 	.space 0x4
 
 gBattleSpritesDataPtr: @ 20244D0

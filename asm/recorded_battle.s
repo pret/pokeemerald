@@ -312,8 +312,8 @@ _08185046:
 	.pool
 	thumb_func_end RecordedBattle_ClearBankAction
 
-	thumb_func_start sub_8185054
-sub_8185054: @ 8185054
+	thumb_func_start RecordedBattle_ReadBankAction
+RecordedBattle_ReadBankAction: @ 8185054
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -364,7 +364,7 @@ _081850C6:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8185054
+	thumb_func_end RecordedBattle_ReadBankAction
 
 	thumb_func_start sub_81850D0
 sub_81850D0: @ 81850D0
@@ -2274,7 +2274,7 @@ _0818611E:
 	b _081863EE
 _08186142:
 	adds r0, r5, 0
-	bl sub_8185054
+	bl RecordedBattle_ReadBankAction
 	movs r5, 0
 	mov r0, sp
 	adds r0, 0x4
@@ -2326,7 +2326,7 @@ _0818617E:
 _081861A6:
 	ldr r3, [sp, 0x4C]
 	lsrs r0, r3, 24
-	bl sub_8185054
+	bl RecordedBattle_ReadBankAction
 	strb r0, [r4]
 	ldrb r0, [r4]
 	lsls r0, 1

@@ -221,10 +221,10 @@ gBattleBankFunc: @ 3005D60
 gHealthBoxesIds: @ 3005D70
 	.space 0x4
 
-gUnknown_03005D74: @ 3005D74
+gMultiUsePlayerCursor: @ 3005D74
 	.space 0x4
 
-gUnknown_03005D78: @ 3005D78
+gNumberOfMovesToChoose: @ 3005D78
 	.space 0x4
 
 gUnknown_03005D7C: @ 3005D7C
