@@ -55,7 +55,7 @@ static u16 sub_8123F04(void);
 static void sub_8123F30(u16 *x, u16 *y);
 static bool32 sub_8123F74(u8 mapSecId);
 static void sub_8123FB0(void);
-bool8 sub_8124038(u16 y);
+static bool8 sub_8124038(u16 y);
 void sub_8124238(void);
 void sub_81243B0(void);
 void sub_81243DC(void);
@@ -74,6 +74,8 @@ extern const u16 gUnknown_085A1B84[];
 extern const u16 gUnknown_085A1B8A[];
 extern const struct UCoords16 gUnknown_085A1BAC[];
 extern const u8 gUnknown_085A1BCC[];
+extern const struct SpritePalette gUnknown_085A1C00;
+extern const struct SpriteTemplate gUnknown_085A1C08;
 
 // .text
 
@@ -936,4 +938,89 @@ static void sub_8123FB0(void)
         }
     }
     gRegionMap->unk_003 = unk_003;
+}
+
+static bool8 sub_8124038(u16 y)
+{
+    u16 x;
+
+    if (y -- == 0)
+    {
+        return 0;
+    }
+    for (x = MAPCURSOR_X_MIN; x <= MAPCURSOR_X_MAX; x ++)
+    {
+        if (GetRegionMapSectionIdAt(x, y) == gRegionMap->mapSecId)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static void sub_8124088(struct Sprite *sprite)
+{
+    if (gRegionMap->cursorMovementFrameCounter != 0)
+    {
+        sprite->pos1.x += 2 * gRegionMap->cursorDeltaX;
+        sprite->pos1.y += 2 * gRegionMap->cursorDeltaY;
+        gRegionMap->cursorMovementFrameCounter --;
+    }
+}
+
+static void TaskDummy8(struct Sprite *sprite)
+{
+
+}
+
+void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
+{
+    u8 spriteId;
+    struct SpriteTemplate template;
+    struct SpritePalette palette;
+    struct SpriteSheet sheet;
+
+    palette = gUnknown_085A1C00;
+    template = gUnknown_085A1C08;
+    sheet.tag = tileTag;
+    template.tileTag = tileTag;
+    gRegionMap->cursorTileTag = tileTag;
+    palette.tag = paletteTag;
+    template.paletteTag = paletteTag;
+    gRegionMap->cursorPaletteTag = paletteTag;
+    if (!gRegionMap->zoomed)
+    {
+        sheet.data = gRegionMap->cursorSmallImage;
+        sheet.size = sizeof(gRegionMap->cursorSmallImage);
+        template.callback = sub_8124088;
+    }
+    else
+    {
+        sheet.data = gRegionMap->cursorLargeImage;
+        sheet.size = sizeof(gRegionMap->cursorLargeImage);
+        template.callback = TaskDummy8;
+    }
+    LoadSpriteSheet(&sheet);
+    LoadSpritePalette(&palette);
+    spriteId = CreateSprite(&template, 0x38, 0x48, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        gRegionMap->cursorSprite = &gSprites[spriteId];
+        if (gRegionMap->zoomed == TRUE)
+        {
+            gRegionMap->cursorSprite->oam.size = 2;
+            gRegionMap->cursorSprite->pos1.x -= 8;
+            gRegionMap->cursorSprite->pos1.y -= 8;
+            StartSpriteAnim(gRegionMap->cursorSprite, 1);
+        }
+        else
+        {
+            gRegionMap->cursorSprite->oam.size = 1;
+            gRegionMap->cursorSprite->pos1.x = 8 * gRegionMap->cursorPosX + 4;
+            gRegionMap->cursorSprite->pos1.y = 8 * gRegionMap->cursorPosY + 4;
+        }
+        gRegionMap->cursorSprite->data1 = 2;
+        gRegionMap->cursorSprite->data2 = (IndexOfSpritePaletteTag(paletteTag) << 4) + 0x101;
+        gRegionMap->cursorSprite->data3 = 1;
+    }
 }

@@ -307,6 +307,6 @@ void FreeRegionMapIconResources(void);
 u16 sub_8123E9C(u16 x, u16 y);
 void GetMapName(u8 *, u16, u16);
 void sub_8124288(u16 x, u16 y);
-void CreateRegionMapCursor(u16 x, u16 y);
+void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
 
 #endif //GUARD_REGION_MAP_H
