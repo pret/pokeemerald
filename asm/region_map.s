@@ -5,52 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8124238
-sub_8124238: @ 8124238
-	push {r4,lr}
-	ldr r4, =gRegionMap
-	ldr r0, [r4]
-	ldr r0, [r0, 0x1C]
-	cmp r0, 0
-	beq _0812425C
-	bl DestroySprite
-	ldr r0, [r4]
-	adds r0, 0x58
-	ldrh r0, [r0]
-	bl FreeSpriteTilesByTag
-	ldr r0, [r4]
-	adds r0, 0x5A
-	ldrh r0, [r0]
-	bl FreeSpritePaletteByTag
-_0812425C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8124238
-
-	thumb_func_start sub_8124268
-sub_8124268: @ 8124268
-	ldr r0, =gRegionMap
-	ldr r0, [r0]
-	ldr r1, [r0, 0x1C]
-	movs r0, 0x1
-	strh r0, [r1, 0x34]
-	bx lr
-	.pool
-	thumb_func_end sub_8124268
-
-	thumb_func_start sub_8124278
-sub_8124278: @ 8124278
-	ldr r0, =gRegionMap
-	ldr r0, [r0]
-	ldr r1, [r0, 0x1C]
-	movs r0, 0
-	strh r0, [r1, 0x34]
-	bx lr
-	.pool
-	thumb_func_end sub_8124278
-
 	thumb_func_start sub_8124288
 sub_8124288: @ 8124288
 	push {r4-r6,lr}

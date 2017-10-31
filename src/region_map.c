@@ -56,7 +56,7 @@ static void sub_8123F30(u16 *x, u16 *y);
 static bool32 sub_8123F74(u8 mapSecId);
 static void sub_8123FB0(void);
 static bool8 sub_8124038(u16 y);
-void sub_8124238(void);
+static void sub_8124238(void);
 void sub_81243B0(void);
 void sub_81243DC(void);
 
@@ -1021,6 +1021,26 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
         }
         gRegionMap->cursorSprite->data1 = 2;
         gRegionMap->cursorSprite->data2 = (IndexOfSpritePaletteTag(paletteTag) << 4) + 0x101;
-        gRegionMap->cursorSprite->data3 = 1;
+        gRegionMap->cursorSprite->data3 = TRUE;
     }
+}
+
+static void sub_8124238(void)
+{
+    if (gRegionMap->cursorSprite != NULL)
+    {
+        DestroySprite(gRegionMap->cursorSprite);
+        FreeSpriteTilesByTag(gRegionMap->cursorTileTag);
+        FreeSpritePaletteByTag(gRegionMap->cursorPaletteTag);
+    }
+}
+
+void sub_8124268(void)
+{
+    gRegionMap->cursorSprite->data3 = TRUE;
+}
+
+void sub_8124278(void)
+{
+    gRegionMap->cursorSprite->data3 = FALSE;
 }
