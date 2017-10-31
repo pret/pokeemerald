@@ -167,8 +167,8 @@ enum
     CONTROLLER_LINKSTANDBYMSG,
     CONTROLLER_RESETACTIONMOVESELECTION,
     CONTROLLER_55,
-    /*new controllers should go after 55 and before 56*/
-    CONTROLLER_56,
+    /*new controllers should go here*/
+    CONTROLLER_TERMINATOR_NOP,
     CONTROLLER_CMDS_COUNT
 };
 
