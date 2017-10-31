@@ -85,7 +85,7 @@ static const struct SpriteTemplate sEvoSparkleSpriteTemplate =
     .callback = EvoSparkle_DummySpriteCb
 };
 
-static const s16 sEvoSparkleMatricies[] =
+static const s16 sEvoSparkleMatrices[] =
 {
     0x3C0, 0x380, 0x340, 0x300, 0x2C0, 0x280, 0x240, 0x200, 0x1C0,
     0x180, 0x140, 0x100, -4, 0x10, -3, 0x30, -2, 0x50,
@@ -102,7 +102,7 @@ static void SetEvoSparklesMatrices(void)
     u16 i;
     for (i = 0; i < 12; i++)
     {
-        SetOamMatrix(20 + i, sEvoSparkleMatricies[i], 0, 0, sEvoSparkleMatricies[i]);
+        SetOamMatrix(20 + i, sEvoSparkleMatrices[i], 0, 0, sEvoSparkleMatrices[i]);
     }
 }
 

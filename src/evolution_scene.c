@@ -67,7 +67,7 @@ extern const u32 gUnknown_085B482C[];
 extern const u32 gUnknown_085B4D10[];
 
 // strings
-extern const u8 gUnknown_085B58C4[];
+extern const u8 gText_ShedinjaJapaneseName2[];
 extern const u8 gText_PkmnIsEvolving[];
 extern const u8 gText_CongratsPkmnEvolved[];
 extern const u8 gText_BattleYesNoChoice[];
@@ -169,7 +169,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
 {
     u8 name[20];
     u16 currSpecies;
-    u32 TiD, PiD;
+    u32 trainerId, personality;
     const struct CompressedSpritePalette* pokePal;
     u8 ID;
 
@@ -216,12 +216,12 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
 
     // preEvo sprite
     currSpecies = GetMonData(mon, MON_DATA_SPECIES);
-    TiD = GetMonData(mon, MON_DATA_OT_ID);
-    PiD = GetMonData(mon, MON_DATA_PERSONALITY);
+    trainerId = GetMonData(mon, MON_DATA_OT_ID);
+    personality = GetMonData(mon, MON_DATA_PERSONALITY);
     DecompressPicFromTable_2(&gMonFrontPicTable[currSpecies],
                              gMonSpritesGfxPtr->sprites[1],
                              currSpecies);
-    pokePal = GetMonSpritePalStructFromOtIdPersonality(currSpecies, TiD, PiD);
+    pokePal = GetMonSpritePalStructFromOtIdPersonality(currSpecies, trainerId, personality);
     LoadCompressedPalette(pokePal->data, 0x110, 0x20);
 
     sub_806A068(currSpecies, 1);
@@ -236,7 +236,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     DecompressPicFromTable_2(&gMonFrontPicTable[speciesToEvolve],
                              gMonSpritesGfxPtr->sprites[3],
                              speciesToEvolve);
-    pokePal = GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, TiD, PiD);
+    pokePal = GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, trainerId, personality);
     LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
     sub_806A068(speciesToEvolve, 3);
@@ -272,12 +272,12 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     u8 ID;
     const struct CompressedSpritePalette* pokePal;
     u16 postEvoSpecies;
-    u32 TiD, PiD;
+    u32 trainerId, personality;
     struct Pokemon* Mon = &gPlayerParty[gTasks[sEvoStructPtr->evoTaskID].tPartyID];
 
     postEvoSpecies = gTasks[sEvoStructPtr->evoTaskID].tPostEvoSpecies;
-    TiD = GetMonData(Mon, MON_DATA_OT_ID);
-    PiD = GetMonData(Mon, MON_DATA_PERSONALITY);
+    trainerId = GetMonData(Mon, MON_DATA_OT_ID);
+    personality = GetMonData(Mon, MON_DATA_PERSONALITY);
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
@@ -313,7 +313,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
                              gMonSpritesGfxPtr->sprites[3],
                              postEvoSpecies);
-    pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, TiD, PiD);
+    pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, trainerId, personality);
 
     LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
@@ -380,12 +380,12 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
     case 4:
         {
             const struct CompressedSpritePalette* pokePal;
-            u32 TiD = GetMonData(Mon, MON_DATA_OT_ID);
-            u32 PiD = GetMonData(Mon, MON_DATA_PERSONALITY);
+            u32 trainerId = GetMonData(Mon, MON_DATA_OT_ID);
+            u32 personality = GetMonData(Mon, MON_DATA_PERSONALITY);
             DecompressPicFromTable_2(&gMonFrontPicTable[postEvoSpecies],
                                      gMonSpritesGfxPtr->sprites[3],
                                      postEvoSpecies);
-            pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, TiD, PiD);
+            pokePal = GetMonSpritePalStructFromOtIdPersonality(postEvoSpecies, trainerId, personality);
             LoadCompressedPalette(pokePal->data, 0x120, 0x20);
             gMain.state++;
         }
@@ -428,7 +428,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
 {
     u8 name[20];
     u16 currSpecies;
-    u32 TiD, PiD;
+    u32 trainerId, personality;
     const struct CompressedSpritePalette* pokePal;
     u8 ID;
 
@@ -440,8 +440,8 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
 
     // preEvo sprite
     currSpecies = GetMonData(mon, MON_DATA_SPECIES);
-    PiD = GetMonData(mon, MON_DATA_PERSONALITY);
-    TiD = GetMonData(mon, MON_DATA_OT_ID);
+    personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    trainerId = GetMonData(mon, MON_DATA_OT_ID);
 
     sEvoStructPtr = AllocZeroed(sizeof(struct EvoInfo));
     sEvoStructPtr->preEvoSpriteID = preEvoSpriteID;
@@ -450,7 +450,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, u8 preEvoSpri
                             gMonSpritesGfxPtr->sprites[1],
                             speciesToEvolve);
 
-    pokePal = GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, TiD, PiD);
+    pokePal = GetMonSpritePalStructFromOtIdPersonality(speciesToEvolve, trainerId, personality);
     LoadCompressedPalette(pokePal->data, 0x120, 0x20);
 
     sub_806A068(speciesToEvolve, 1);
@@ -511,8 +511,8 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
     {
         s32 i;
         struct Pokemon* Shedinja = &gPlayerParty[gPlayerPartyCount];
-        const struct EvolutionData* EvoTable;
-        const struct EvolutionData* Evos;
+        const struct EvolutionData* evoTable;
+        const struct EvolutionData* evos;
 
         CopyMon(&gPlayerParty[gPlayerPartyCount], mon, sizeof(struct Pokemon));
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, (&gEvolutionTable[preEvoSpecies].evolutions[1].targetSpecies));
@@ -534,15 +534,15 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
         CalculatePlayerPartyCount();
 
         // can't match it otherwise, ehh
-        EvoTable = gEvolutionTable;
-        Evos = EvoTable + preEvoSpecies;
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(Evos->evolutions[1].targetSpecies), FLAG_SET_SEEN);
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(Evos->evolutions[1].targetSpecies), FLAG_SET_CAUGHT);
+        evoTable = gEvolutionTable;
+        evos = EvoTable + preEvoSpecies;
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos->evolutions[1].targetSpecies), FLAG_SET_SEEN);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos->evolutions[1].targetSpecies), FLAG_SET_CAUGHT);
 
         if (GetMonData(Shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
             && GetMonData(Shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
             && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
-                SetMonData(Shedinja, MON_DATA_NICKNAME, gUnknown_085B58C4);
+                SetMonData(Shedinja, MON_DATA_NICKNAME, gText_ShedinjaJapaneseName2);
     }
 }
 
