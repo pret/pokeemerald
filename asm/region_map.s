@@ -5,66 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8123E9C
-sub_8123E9C: @ 8123E9C
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, 16
-	lsrs r1, 16
-	bl GetRegionMapSectionIdAt
-	lsls r0, 16
-	lsrs r0, 16
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8123E9C
-
-	thumb_func_start sub_8123EB4
-sub_8123EB4: @ 8123EB4
-	push {lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	movs r2, 0
-	ldr r1, =gUnknown_085A1B84
-_08123EBE:
-	ldrh r0, [r1]
-	cmp r0, r3
-	bne _08123ED4
-	bl sub_8123F04
-	lsls r0, 16
-	lsrs r0, 16
-	b _08123F00
-	.pool
-_08123ED4:
-	adds r1, 0x2
-	adds r2, 0x1
-	cmp r2, 0x2
-	bls _08123EBE
-	ldr r1, =gUnknown_085A1B24
-	ldrh r0, [r1]
-	cmp r0, 0xD5
-	beq _08123EFE
-	adds r2, r1, 0
-_08123EE6:
-	ldrh r0, [r2]
-	cmp r0, r3
-	bne _08123EF4
-	ldrh r0, [r1, 0x2]
-	b _08123F00
-	.pool
-_08123EF4:
-	adds r1, 0x4
-	adds r2, 0x4
-	ldrh r0, [r1]
-	cmp r0, 0xD5
-	bne _08123EE6
-_08123EFE:
-	adds r0, r3, 0
-_08123F00:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8123EB4
-
 	thumb_func_start sub_8123F04
 sub_8123F04: @ 8123F04
 	push {lr}

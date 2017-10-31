@@ -52,6 +52,7 @@ static void sub_81238AC(void);
 static void sub_8123C00(void);
 static u8 get_flagnr_blue_points(u16 mapSecId);
 u16 sub_8123EB4(u16 mapSecId);
+u16 sub_8123F04(void);
 void sub_8123F30(u16 *x, u16 *y);
 void sub_8123FB0(void);
 bool32 sub_8123F74(u8 mapSecId);
@@ -68,6 +69,8 @@ extern const u8 gUnknown_0859F77C[];
 extern const u8 gUnknown_085A04E0[];
 extern const u8 gUnknown_085A096C[];
 extern const struct RegionMapLocation gRegionMapEntries[];
+extern const u16 gUnknown_085A1B84[];
+extern const u16 gUnknown_085A1B24[][2];
 
 // .text
 
@@ -151,7 +154,7 @@ bool8 sub_8122DB0(void)
             gRegionMap->unk_074 = gRegionMap->cursorPosX;
             gRegionMap->unk_076 = gRegionMap->cursorPosY;
             gRegionMap->mapSecId = sub_8123EB4(gRegionMap->mapSecId);
-            gRegionMap->unk_002 = get_flagnr_blue_points(gRegionMap->mapSecId);
+            gRegionMap->iconDrawType = get_flagnr_blue_points(gRegionMap->mapSecId);
             GetMapName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
             break;
         case 6:
@@ -287,7 +290,7 @@ static u8 MoveRegionMapCursor_Full(void)
         gRegionMap->cursorPosY --;
     }
     mapSecId = GetRegionMapSectionIdAt(gRegionMap->cursorPosX, gRegionMap->cursorPosY);
-    gRegionMap->unk_002 = get_flagnr_blue_points(mapSecId);
+    gRegionMap->iconDrawType = get_flagnr_blue_points(mapSecId);
     if (mapSecId != gRegionMap->mapSecId)
     {
         gRegionMap->mapSecId = mapSecId;
@@ -360,7 +363,7 @@ static u8 MoveRegionMapCursor_Zoomed(void)
             gRegionMap->unk_064 = x;
             gRegionMap->unk_066 = y;
             mapSecId = GetRegionMapSectionIdAt(x, y);
-            gRegionMap->unk_002 = get_flagnr_blue_points(mapSecId);
+            gRegionMap->iconDrawType = get_flagnr_blue_points(mapSecId);
             if (mapSecId != gRegionMap->mapSecId)
             {
                 gRegionMap->mapSecId = mapSecId;
@@ -771,44 +774,70 @@ static u8 get_flagnr_blue_points(u16 mapSecId)
     switch (mapSecId)
     {
         case MAPSEC_NONE2:
-            return 0;
+            return MAPSECTYPE_NONE;
         case MAPSEC_LITTLEROOT_TOWN:
-            return FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_OLDALE_TOWN:
-            return FlagGet(FLAG_VISITED_OLDALE_TOWN) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_OLDALE_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_DEWFORD_TOWN:
-            return FlagGet(FLAG_VISITED_DEWFORD_TOWN) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_DEWFORD_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_LAVARIDGE_TOWN:
-            return FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_FALLARBOR_TOWN:
-            return FlagGet(FLAG_VISITED_FALLARBOR_TOWN) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_FALLARBOR_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_VERDANTURF_TOWN:
-            return FlagGet(FLAG_VISITED_VERDANTURF_TOWN) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_VERDANTURF_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_PACIFIDLOG_TOWN:
-            return FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_PETALBURG_CITY:
-            return FlagGet(FLAG_VISITED_PETALBURG_CITY) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_PETALBURG_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_SLATEPORT_CITY:
-            return FlagGet(FLAG_VISITED_SLATEPORT_CITY) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_SLATEPORT_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_MAUVILLE_CITY:
-            return FlagGet(FLAG_VISITED_MAUVILLE_CITY) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_MAUVILLE_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_RUSTBORO_CITY:
-            return FlagGet(FLAG_VISITED_RUSTBORO_CITY) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_RUSTBORO_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_FORTREE_CITY:
-            return FlagGet(FLAG_VISITED_FORTREE_CITY) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_FORTREE_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_LILYCOVE_CITY:
-            return FlagGet(FLAG_VISITED_LILYCOVE_CITY) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_LILYCOVE_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_MOSSDEEP_CITY:
-            return FlagGet(FLAG_VISITED_MOSSDEEP_CITY) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_MOSSDEEP_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_SOOTOPOLIS_CITY:
-            return FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_EVER_GRANDE_CITY:
-            return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? 2 : 3;
+            return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_BATTLE_FRONTIER:
-            return FlagGet(FLAG_UNLOCK_BATTLE_FRONTIER) ? 4 : 0;
+            return FlagGet(FLAG_UNLOCK_BATTLE_FRONTIER) ? MAPSECTYPE_BATTLE_FRONTIER : MAPSECTYPE_NONE;
         case MAPSEC_SOUTHERN_ISLAND:
-            return FlagGet(FLAG_UNLOCK_SOUTHERN_ISLAND) ? 1 : 0;
+            return FlagGet(FLAG_UNLOCK_SOUTHERN_ISLAND) ? MAPSECTYPE_PLAIN : MAPSECTYPE_NONE;
         default:
-            return 1;
+            return MAPSECTYPE_PLAIN;
     }
+}
+
+u16 sub_8123E9C(u16 x, u16 y)
+{
+    return GetRegionMapSectionIdAt(x, y);
+}
+
+u16 sub_8123EB4(u16 mapSecId)
+{
+    u32 i;
+
+    for (i = 0; i < 3; i ++)
+    {
+        if (gUnknown_085A1B84[i] == mapSecId)
+        {
+            return sub_8123F04();
+        }
+    }
+    for (i = 0; gUnknown_085A1B24[i][0] != MAPSEC_NONE2; i ++)
+    {
+        if (gUnknown_085A1B24[i][0] == mapSecId)
+        {
+            return gUnknown_085A1B24[i][1];
+        }
+    }
+    return mapSecId;
 }

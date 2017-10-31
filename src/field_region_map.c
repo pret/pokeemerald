@@ -181,7 +181,7 @@ void sub_8170290(void)
 
 static void sub_8170428(void)
 {
-    if (gUnknown_0203BCD0->regionMap.unk_002 != 0)
+    if (gUnknown_0203BCD0->regionMap.iconDrawType != 0)
     {
         FillWindowPixelBuffer(0, 0x11);
         PrintTextOnWindow(0, 1, gUnknown_0203BCD0->regionMap.mapSecName, 0, 1, 0, NULL);

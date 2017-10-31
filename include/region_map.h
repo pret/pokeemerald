@@ -224,7 +224,7 @@ enum {
 
 struct RegionMap {
     /*0x000*/ u16 mapSecId;
-    /*0x002*/ u8 unk_002;
+    /*0x002*/ u8 iconDrawType;
     /*0x003*/ u8 unk_003;
     /*0x004*/ u8 mapSecName[0x14];
     /*0x018*/ u8 (*inputCallback)(void);
@@ -287,16 +287,25 @@ enum
     INPUT_EVENT_B_BUTTON,
 };
 
+enum {
+    MAPSECTYPE_NONE,
+    MAPSECTYPE_PLAIN,
+    MAPSECTYPE_CITY_CANFLY,
+    MAPSECTYPE_CITY_CANTFLY,
+    MAPSECTYPE_BATTLE_FRONTIER
+};
+
 // Exported RAM declarations
 
 // Exported ROM declarations
 void sub_8122CF8(struct RegionMap *regionMap, struct BgTemplate *template, bool8 zoomed);
 bool8 sub_8122DB0(void);
-void GetMapName(u8 *, u16, u16);
 void InitRegionMap(struct RegionMap *regionMap, u8 argument);
-void sub_8124288(u16 x, u16 y);
-void CreateRegionMapCursor(u16 x, u16 y);
 u8 sub_81230AC(void);
 void FreeRegionMapIconResources(void);
+u16 sub_8123E9C(u16 x, u16 y);
+void GetMapName(u8 *, u16, u16);
+void sub_8124288(u16 x, u16 y);
+void CreateRegionMapCursor(u16 x, u16 y);
 
 #endif //GUARD_REGION_MAP_H
