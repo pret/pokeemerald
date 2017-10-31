@@ -15908,7 +15908,7 @@ sub_81B89AC: @ 81B89AC
 	str r0, [sp]
 	ldr r0, =sub_81B1370
 	str r0, [sp, 0x4]
-	ldr r0, =sub_8059D40
+	ldr r0, =SetCB2ToReshowScreenAfterMenu
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	adds r2, r4, 0
@@ -16828,7 +16828,7 @@ _081B9136:
 	thumb_func_start sub_81B9140
 sub_81B9140: @ 81B9140
 	push {lr}
-	ldr r0, =sub_8059D40
+	ldr r0, =SetCB2ToReshowScreenAfterMenu
 	bl SetMainCallback2
 	pop {r0}
 	bx r0

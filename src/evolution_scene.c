@@ -535,7 +535,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
 
         // can't match it otherwise, ehh
         evoTable = gEvolutionTable;
-        evos = EvoTable + preEvoSpecies;
+        evos = evoTable + preEvoSpecies;
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos->evolutions[1].targetSpecies), FLAG_SET_SEEN);
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(evos->evolutions[1].targetSpecies), FLAG_SET_CAUGHT);
 
@@ -837,7 +837,7 @@ static void Task_EvolutionScene(u8 taskID)
             }
             if (gMain.newKeys & A_BUTTON)
             {
-                HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
+                HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
                 PlaySE(SE_SELECT);
 
                 if (sEvoCursorPos != 0)
@@ -853,7 +853,7 @@ static void Task_EvolutionScene(u8 taskID)
             }
             if (gMain.newKeys & B_BUTTON)
             {
-                HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
+                HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
                 PlaySE(SE_SELECT);
                 gTasks[taskID].tLearnMoveState = gTasks[taskID].tData8;
             }

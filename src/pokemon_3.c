@@ -618,7 +618,7 @@ bool16 sub_806D82C(u8 id)
     return retVal;
 }
 
-s32 sub_806D864(u16 a1)
+s32 GetBankMultiplayerId(u16 a1)
 {
     s32 id;
     for (id = 0; id < MAX_LINK_PLAYERS; id++)
@@ -1477,7 +1477,7 @@ const u8* GetTrainerPartnerName(void)
     else
     {
         u8 id = GetMultiplayerId();
-        return gLinkPlayers[sub_806D864(gLinkPlayers[id].lp_field_18 ^ 2)].name;
+        return gLinkPlayers[GetBankMultiplayerId(gLinkPlayers[id].lp_field_18 ^ 2)].name;
     }
 }
 
@@ -1659,7 +1659,7 @@ u16 sub_806EFF0(u16 arg0)
     return gUnknown_0831F578[arg0];
 }
 
-u16 sub_806F000(u8 playerGender)
+u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
 {
     if (playerGender)
         return sub_806EFF0(0x3F);

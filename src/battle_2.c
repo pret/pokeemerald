@@ -238,7 +238,6 @@ static void sub_8038F34(void);
 static void sub_80392A8(void);
 static void sub_803937C(void);
 static void sub_803939C(void);
-void oac_poke_opponent(struct Sprite *sprite);
 static void sub_803980C(struct Sprite *sprite);
 static void sub_8039838(struct Sprite *sprite);
 static void sub_8039894(struct Sprite *sprite);
@@ -2287,7 +2286,7 @@ static void sub_803939C(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[CURSOR_POSITION] == 0)
             {
-                HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
+                HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
                 gBattleCommunication[1] = MoveRecordedBattleToSaveData();
                 gBattleCommunication[MULTIUSE_STATE] = 10;
             }
@@ -2305,7 +2304,7 @@ static void sub_803939C(void)
     case 6:
         if (sub_800A520() == TRUE)
         {
-            HandleBattleWindow(0x18, 8, 0x1D, 0xD, 1);
+            HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
             if (gMain.field_439_x4)
             {
                 sub_800ADF8();
@@ -4025,7 +4024,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     else
                     {
-                        EmitOpenBag(0, gBattleStruct->field_60[gActiveBank]);
+                        EmitChooseItem(0, gBattleStruct->field_60[gActiveBank]);
                         MarkBufferBankForExecution(gActiveBank);
                     }
                     break;
@@ -4070,7 +4069,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case ACTION_POKEBLOCK_CASE:
-                    EmitOpenBag(0, gBattleStruct->field_60[gActiveBank]);
+                    EmitChooseItem(0, gBattleStruct->field_60[gActiveBank]);
                     MarkBufferBankForExecution(gActiveBank);
                     break;
                 case ACTION_CANCEL_PARTNER:
