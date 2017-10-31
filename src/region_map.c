@@ -8,6 +8,7 @@
 #include "trig.h"
 #include "map_constants.h"
 #include "overworld.h"
+#include "rom6.h"
 #include "region_map.h"
 
 #define MAP_WIDTH 28
@@ -46,11 +47,11 @@ void UpdateRegionMapVideoRegs(void);
 u16 GetRegionMapSectionIdAt(u16 x, u16 y);
 void sub_812378C(s16 x, s16 y);
 static void sub_81238AC(void);
+static void sub_8123C00(void);
 u8 get_flagnr_blue_points(u16 mapSecId);
 u16 sub_8123EB4(u16 mapSecId);
 void sub_8123F30(u16 *x, u16 *y);
 void sub_8123FB0(void);
-void sub_8123C00(void);
 bool32 sub_8123F74(u8 mapSecId);
 void sub_8124238(void);
 void sub_81243B0(void);
@@ -707,6 +708,58 @@ static void sub_81238AC(void)
             sub_8123F30(&gRegionMap->cursorPosX, &gRegionMap->cursorPosY);
             return;
     }
+    gRegionMap->cursorPosX = gRegionMapEntries[gRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
+    gRegionMap->cursorPosY = gRegionMapEntries[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
+}
+
+static void sub_8123C00(void)
+{
+    u16 y;
+    u16 x;
+    u8 mapGroup;
+    u8 mapNum;
+    u16 r1;
+    s16 sp2;
+    s16 sp4;
+    const struct MapHeader *mapHeader;
+
+    y = 0;
+    x = 0;
+    switch (GetSSTidalLocation(&mapGroup, &mapNum, &sp2, &sp4))
+    {
+        case 1:
+            gRegionMap->mapSecId = MAPSEC_SLATEPORT_CITY;
+            break;
+        case 2:
+            gRegionMap->mapSecId = MAPSEC_LILYCOVE_CITY;
+            break;
+        case 3:
+            gRegionMap->mapSecId = MAPSEC_ROUTE_124;
+            break;
+        case 4:
+            gRegionMap->mapSecId = MAPSEC_ROUTE_131;
+            break;
+        default:
+        case 0:
+            mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
+
+            gRegionMap->mapSecId = mapHeader->regionMapSectionId;
+            r1 = mapHeader->mapData->width / gRegionMapEntries[gRegionMap->mapSecId].width;
+            if (r1 == 0)
+                r1 = 1;
+            x = sp2 / r1;
+            if (x >= gRegionMapEntries[gRegionMap->mapSecId].width)
+                x = gRegionMapEntries[gRegionMap->mapSecId].width - 1;
+
+            r1 = mapHeader->mapData->height / gRegionMapEntries[gRegionMap->mapSecId].height;
+            if (r1 == 0)
+                r1 = 1;
+            y = sp4 / r1;
+            if (y >= gRegionMapEntries[gRegionMap->mapSecId].height)
+                y = gRegionMapEntries[gRegionMap->mapSecId].height - 1;
+            break;
+    }
+    gRegionMap->playerIsInCave = FALSE;
     gRegionMap->cursorPosX = gRegionMapEntries[gRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
     gRegionMap->cursorPosY = gRegionMapEntries[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
 }
