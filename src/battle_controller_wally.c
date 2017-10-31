@@ -24,6 +24,7 @@
 #include "reshow_battle_screen.h"
 #include "rng.h"
 #include "pokeball.h"
+#include "data2.h"
 #include "party_menu.h"
 
 extern u32 gBattleExecBuffer;
@@ -135,7 +136,7 @@ static void SetWallyMonData(u8 monId);
 static void WallyDoMoveAnimation(void);
 static void sub_816AC04(u8 taskId);
 
-static void (*const sWallyBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
     WallyHandleGetMonData,
     WallyHandleGetRawMonData,
@@ -441,7 +442,7 @@ static void WallyBufferExecCompleted(void)
         u8 playerId = GetMultiplayerId();
 
         PrepareBufferDataTransferLink(2, 4, &playerId);
-        gBattleBufferA[gActiveBank][0] = CONTOLLER_CMDS_COUNT - 1;
+        gBattleBufferA[gActiveBank][0] = CONTROLLER_CMDS_COUNT - 1;
     }
     else
     {
@@ -459,7 +460,7 @@ static void WallyHandleGetMonData(void)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
-    u8 monsToCheck;
+    u8 monToCheck;
     s32 i;
 
     if (gBattleBufferA[gActiveBank][2] == 0)
@@ -468,12 +469,12 @@ static void WallyHandleGetMonData(void)
     }
     else
     {
-        monsToCheck = gBattleBufferA[gActiveBank][2];
+        monToCheck = gBattleBufferA[gActiveBank][2];
         for (i = 0; i < 6; i++)
         {
-            if (monsToCheck & 1)
+            if (monToCheck & 1)
                 size += CopyWallyMonData(i, monData + size);
-            monsToCheck >>= 1;
+            monToCheck >>= 1;
         }
     }
     EmitDataTransfer(1, size, monData);
@@ -793,7 +794,7 @@ static void WallyHandleGetRawMonData(void)
 
 static void WallyHandleSetMonData(void)
 {
-    u8 monsToCheck;
+    u8 monToCheck;
     u8 i;
 
     if (gBattleBufferA[gActiveBank][2] == 0)
@@ -802,12 +803,12 @@ static void WallyHandleSetMonData(void)
     }
     else
     {
-        monsToCheck = gBattleBufferA[gActiveBank][2];
+        monToCheck = gBattleBufferA[gActiveBank][2];
         for (i = 0; i < 6; i++)
         {
-            if (monsToCheck & 1)
+            if (monToCheck & 1)
                 SetWallyMonData(i);
-            monsToCheck >>= 1;
+            monToCheck >>= 1;
         }
     }
     WallyBufferExecCompleted();
@@ -1061,16 +1062,6 @@ static void WallyHandleReturnMonToBall(void)
         WallyBufferExecCompleted();
     }
 }
-
-// todo: get rid of it once the struct is declared in a header
-struct MonCoords
-{
-    // This would use a bitfield, but sub_8079F44
-    // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
-    u8 y_offset;
-};
-extern const struct MonCoords gTrainerBackPicCoords[];
 
 static void WallyHandleDrawTrainerPic(void)
 {

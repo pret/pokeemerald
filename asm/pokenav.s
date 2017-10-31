@@ -7890,7 +7890,7 @@ _081CAF34:
 	adds r0, r5, 0
 	bl sub_81D1BD0
 	adds r4, r0, 0
-	ldr r0, =gTrainerClassToFrontPicId
+	ldr r0, =gUnknown_0831F578
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	b _081CAF6C
@@ -28947,7 +28947,7 @@ sub_81D5588: @ 81D5588
 	adds r3, r0
 	ldrb r4, [r3, 0x1B]
 	bl sub_81D5710
-	ldr r0, =gTrainerClassToFrontPicId
+	ldr r0, =gUnknown_0831F578
 	adds r4, r0
 	ldrb r0, [r4]
 	pop {r4}

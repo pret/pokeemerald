@@ -894,7 +894,7 @@ void TrySetBehindSubstituteSpriteBit(u8 bank, u16 move);
 void DoStatusAnimation(bool8 isStatus2, u32 status);
 void DoSpecialBattleAnimation(u8 activeBank, u8 atkBank, u8 defBank, u8 tableId);
 bool8 DoBattleAnimationFromTable(u8 active, u8 atkBank, u8 defBank, u8 tableId, u16 argument);
-void SetBattleSpriteInvisibilityBitToSpriteInvisibility(u8 bank);
+void CopyBattleSpriteInvisibility(u8 bank);
 u16 ChooseMoveAndTargetInBattlePalace(void);
 void LoadBattleBarGfx(u8 arg0);
 bool8 mplay_80342A4(u8 bank);

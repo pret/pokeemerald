@@ -24,6 +24,7 @@
 #include "reshow_battle_screen.h"
 #include "rng.h"
 #include "pokeball.h"
+#include "data2.h"
 
 extern u32 gBattleExecBuffer;
 extern u8 gActiveBank;
@@ -169,7 +170,7 @@ static void PlayerDoMoveAnimation(void);
 static void task05_08033660(u8 taskId);
 static void sub_805CE38(void);
 
-static void (*const sPlayerBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
     PlayerHandleGetMonData,
     PlayerHandleGetRawMonData,
@@ -254,7 +255,7 @@ static void PlayerBufferExecCompleted(void)
         u8 playerId = GetMultiplayerId();
 
         PrepareBufferDataTransferLink(2, 4, &playerId);
-        gBattleBufferA[gActiveBank][0] = CONTOLLER_CMDS_COUNT - 1;
+        gBattleBufferA[gActiveBank][0] = CONTROLLER_CMDS_COUNT - 1;
     }
     else
     {
@@ -1099,7 +1100,7 @@ static void sub_8058EDC(void)
      && gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x1
      && gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
     {
-        SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);
+        CopyBattleSpriteInvisibility(gActiveBank);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80 = 0;
         gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x1 = 0;
         FreeSpriteTilesByTag(0x27F9);
@@ -1614,7 +1615,7 @@ static void PlayerHandleGetMonData(void)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
-    u8 monsToCheck;
+    u8 monToCheck;
     s32 i;
 
     if (gBattleBufferA[gActiveBank][2] == 0)
@@ -1623,12 +1624,12 @@ static void PlayerHandleGetMonData(void)
     }
     else
     {
-        monsToCheck = gBattleBufferA[gActiveBank][2];
+        monToCheck = gBattleBufferA[gActiveBank][2];
         for (i = 0; i < 6; i++)
         {
-            if (monsToCheck & 1)
+            if (monToCheck & 1)
                 size += CopyPlayerMonData(i, monData + size);
-            monsToCheck >>= 1;
+            monToCheck >>= 1;
         }
     }
     EmitDataTransfer(1, size, monData);
@@ -1957,7 +1958,7 @@ void PlayerHandleGetRawMonData(void)
 
 static void PlayerHandleSetMonData(void)
 {
-    u8 monsToCheck;
+    u8 monToCheck;
     u8 i;
 
     if (gBattleBufferA[gActiveBank][2] == 0)
@@ -1966,12 +1967,12 @@ static void PlayerHandleSetMonData(void)
     }
     else
     {
-        monsToCheck = gBattleBufferA[gActiveBank][2];
+        monToCheck = gBattleBufferA[gActiveBank][2];
         for (i = 0; i < 6; i++)
         {
-            if (monsToCheck & 1)
+            if (monToCheck & 1)
                 SetPlayerMonData(i);
-            monsToCheck >>= 1;
+            monToCheck >>= 1;
         }
     }
     PlayerBufferExecCompleted();
@@ -2291,17 +2292,6 @@ static void DoSwitchOutAnimation(void)
         break;
     }
 }
-
-// todo: get rid of it once the struct is declared in a header
-struct MonCoords
-{
-    // This would use a bitfield, but sub_8079F44
-    // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
-    u8 y_offset;
-};
-extern const struct MonCoords gTrainerBackPicCoords[];
-extern const struct MonCoords gTrainerFrontPicCoords[];
 
 // some explanation here
 // in emerald it's possible to have a tag battle in the battle frontier facilities with AI
@@ -3086,7 +3076,7 @@ static void PlayerHandleSpriteInvisibility(void)
     if (IsBankSpritePresent(gActiveBank))
     {
         gSprites[gBankSpriteIds[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
-        SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);
+        CopyBattleSpriteInvisibility(gActiveBank);
     }
     PlayerBufferExecCompleted();
 }

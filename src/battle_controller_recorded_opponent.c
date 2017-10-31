@@ -22,6 +22,7 @@
 #include "bg.h"
 #include "reshow_battle_screen.h"
 #include "pokeball.h"
+#include "data2.h"
 
 extern u32 gBattleExecBuffer;
 extern u8 gActiveBank;
@@ -133,7 +134,7 @@ static void sub_8189548(u8 taskId);
 static void sub_818962C(struct Sprite *sprite);
 static void sub_818975C(void);
 
-static void (*const sRecordedOpponentBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
     RecordedOpponentHandleGetMonData,
     RecordedOpponentHandleGetRawMonData,
@@ -504,7 +505,7 @@ static void sub_8186F94(void)
         UpdateHealthboxAttribute(gHealthBoxesIds[gActiveBank], &gEnemyParty[gBattlePartyID[gActiveBank]], HEALTHBOX_ALL);
         sub_8076918(gActiveBank);
         SetHealthboxSpriteVisible(gHealthBoxesIds[gActiveBank]);
-        SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);
+        CopyBattleSpriteInvisibility(gActiveBank);
         gBattleBankFunc[gActiveBank] = sub_8186EA4;
     }
 }
@@ -546,7 +547,7 @@ static void RecordedOpponentBufferExecCompleted(void)
         u8 playerId = GetMultiplayerId();
 
         PrepareBufferDataTransferLink(2, 4, &playerId);
-        gBattleBufferA[gActiveBank][0] = CONTOLLER_CMDS_COUNT - 1;
+        gBattleBufferA[gActiveBank][0] = CONTROLLER_CMDS_COUNT - 1;
     }
     else
     {
@@ -558,7 +559,7 @@ static void RecordedOpponentHandleGetMonData(void)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
-    u8 monsToCheck;
+    u8 monToCheck;
     s32 i;
 
     if (gBattleBufferA[gActiveBank][2] == 0)
@@ -567,12 +568,12 @@ static void RecordedOpponentHandleGetMonData(void)
     }
     else
     {
-        monsToCheck = gBattleBufferA[gActiveBank][2];
+        monToCheck = gBattleBufferA[gActiveBank][2];
         for (i = 0; i < 6; i++)
         {
-            if (monsToCheck & 1)
+            if (monToCheck & 1)
                 size += CopyRecordedOpponentMonData(i, monData + size);
-            monsToCheck >>= 1;
+            monToCheck >>= 1;
         }
     }
     EmitDataTransfer(1, size, monData);
@@ -892,7 +893,7 @@ static void RecordedOpponentHandleGetRawMonData(void)
 
 static void RecordedOpponentHandleSetMonData(void)
 {
-    u8 monsToCheck;
+    u8 monToCheck;
     u8 i;
 
     if (gBattleBufferA[gActiveBank][2] == 0)
@@ -901,12 +902,12 @@ static void RecordedOpponentHandleSetMonData(void)
     }
     else
     {
-        monsToCheck = gBattleBufferA[gActiveBank][2];
+        monToCheck = gBattleBufferA[gActiveBank][2];
         for (i = 0; i < 6; i++)
         {
-            if (monsToCheck & 1)
+            if (monToCheck & 1)
                 SetRecordedOpponentMonData(i);
-            monsToCheck >>= 1;
+            monToCheck >>= 1;
         }
     }
     RecordedOpponentBufferExecCompleted();
@@ -1238,16 +1239,6 @@ static void DoSwitchOutAnimation(void)
         break;
     }
 }
-
-// todo: get rid of it once the struct is declared in a header
-struct MonCoords
-{
-    // This would use a bitfield, but sub_8079F44
-    // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
-    u8 y_offset;
-};
-extern const struct MonCoords gTrainerFrontPicCoords[];
 
 static void RecordedOpponentHandleDrawTrainerPic(void)
 {
@@ -1791,7 +1782,7 @@ static void RecordedOpponentHandleSpriteInvisibility(void)
     if (IsBankSpritePresent(gActiveBank))
     {
         gSprites[gBankSpriteIds[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
-        SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);
+        CopyBattleSpriteInvisibility(gActiveBank);
     }
     RecordedOpponentBufferExecCompleted();
 }

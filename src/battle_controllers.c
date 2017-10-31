@@ -939,11 +939,11 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
     }
 }
 
-void EmitGetMonData(u8 bufferId, u8 requestId, u8 monsToCheck)
+void EmitGetMonData(u8 bufferId, u8 requestId, u8 monToCheck)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_GETMONDATA;
     gBattleBuffersTransferData[1] = requestId;
-    gBattleBuffersTransferData[2] = monsToCheck;
+    gBattleBuffersTransferData[2] = monToCheck;
     gBattleBuffersTransferData[3] = 0;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
@@ -957,13 +957,13 @@ void EmitGetRawMonData(u8 bufferId, u8 monId, u8 bytes)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitSetMonData(u8 bufferId, u8 requestId, u8 monsToCheck, u8 bytes, void *data)
+void EmitSetMonData(u8 bufferId, u8 requestId, u8 monToCheck, u8 bytes, void *data)
 {
     s32 i;
 
     gBattleBuffersTransferData[0] = CONTROLLER_SETMONDATA;
     gBattleBuffersTransferData[1] = requestId;
-    gBattleBuffersTransferData[2] = monsToCheck;
+    gBattleBuffersTransferData[2] = monToCheck;
     for (i = 0; i < bytes; i++)
         gBattleBuffersTransferData[3 + i] = *(u8*)(data++);
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 3 + bytes);

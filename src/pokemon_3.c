@@ -1652,11 +1652,11 @@ u8 sub_806EF84(u8 arg0, u8 arg1)
     return i;
 }
 
-extern const u8 gTrainerClassToFrontPicId[];
+extern const u8 gUnknown_0831F578[];
 
 u16 sub_806EFF0(u16 arg0)
 {
-    return gTrainerClassToFrontPicId[arg0];
+    return gUnknown_0831F578[arg0];
 }
 
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)

@@ -2229,8 +2229,8 @@ _0805E3EA:
 	.pool
 	thumb_func_end sub_805E394
 
-	thumb_func_start SetBattleSpriteInvisibilityBitToSpriteInvisibility
-SetBattleSpriteInvisibilityBitToSpriteInvisibility: @ 805E408
+	thumb_func_start CopyBattleSpriteInvisibility
+CopyBattleSpriteInvisibility: @ 805E408
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gBattleSpritesDataPtr
@@ -2258,7 +2258,7 @@ SetBattleSpriteInvisibilityBitToSpriteInvisibility: @ 805E408
 	strb r0, [r3]
 	bx lr
 	.pool
-	thumb_func_end SetBattleSpriteInvisibilityBitToSpriteInvisibility
+	thumb_func_end CopyBattleSpriteInvisibility
 
 	thumb_func_start sub_805E448
 sub_805E448: @ 805E448

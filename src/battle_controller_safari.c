@@ -18,6 +18,7 @@
 #include "bg.h"
 #include "reshow_battle_screen.h"
 #include "pokeball.h"
+#include "data2.h"
 
 extern u32 gBattleExecBuffer;
 extern u8 gActiveBank;
@@ -110,7 +111,7 @@ static void SafariBufferRunCommand(void);
 static void SafariBufferExecCompleted(void);
 static void CompleteWhenChosePokeblock(void);
 
-static void (*const sSafariBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
     SafariHandleGetMonData,
     SafariHandleGetRawMonData,
@@ -323,7 +324,7 @@ static void SafariBufferExecCompleted(void)
         u8 playerId = GetMultiplayerId();
 
         PrepareBufferDataTransferLink(2, 4, &playerId);
-        gBattleBufferA[gActiveBank][0] = CONTOLLER_CMDS_COUNT - 1;
+        gBattleBufferA[gActiveBank][0] = CONTROLLER_CMDS_COUNT - 1;
     }
     else
     {
@@ -371,16 +372,6 @@ static void SafariHandleReturnMonToBall(void)
 {
     SafariBufferExecCompleted();
 }
-
-// todo: get rid of it once the struct is declared in a header
-struct MonCoords
-{
-    // This would use a bitfield, but sub_8079F44
-    // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
-    u8 y_offset;
-};
-extern const struct MonCoords gTrainerBackPicCoords[];
 
 static void SafariHandleDrawTrainerPic(void)
 {

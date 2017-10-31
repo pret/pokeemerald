@@ -167,10 +167,11 @@ enum
     CONTROLLER_LINKSTANDBYMSG,
     CONTROLLER_RESETACTIONMOVESELECTION,
     CONTROLLER_55,
-    CONTROLLER_56
+    /*new controllers should go after 55 and before 56*/
+    CONTROLLER_56,
+    CONTROLLER_CMDS_COUNT
 };
 
-#define CONTOLLER_CMDS_COUNT CONTROLLER_56 + 1
 
 // general functions
 void HandleLinkBattleSetup(void);
@@ -180,9 +181,9 @@ void sub_8033648(void);
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data);
 
 // emitters
-void EmitGetMonData(u8 bufferId, u8 requestId, u8 monsToCheck);
+void EmitGetMonData(u8 bufferId, u8 requestId, u8 monToCheck);
 void EmitGetRawMonData(u8 bufferId, u8 monId, u8 bytes); // unused
-void EmitSetMonData(u8 bufferId, u8 requestId, u8 monsToCheck, u8 bytes, void *data);
+void EmitSetMonData(u8 bufferId, u8 requestId, u8 monToCheck, u8 bytes, void *data);
 void EmitSetRawMonData(u8 bufferId, u8 monId, u8 bytes, void *data); // unused
 void EmitLoadMonSprite(u8 bufferId);
 void EmitSwitchInAnim(u8 bufferId, u8 partyId, bool8 dontClearSubstituteBit);

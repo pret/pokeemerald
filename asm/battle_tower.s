@@ -1340,7 +1340,7 @@ GetFrontierTrainerFrontSpriteId: @ 8162AA0
 	lsls r0, 1
 	cmp r4, r0
 	bne _08162AD0
-	ldr r1, =gTrainerClassToFrontPicId
+	ldr r1, =gUnknown_0831F578
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000bed
@@ -1362,7 +1362,7 @@ _08162AE4:
 	ldr r0, =0x0000012b
 	cmp r4, r0
 	bhi _08162B08
-	ldr r2, =gTrainerClassToFrontPicId
+	ldr r2, =gUnknown_0831F578
 	ldr r0, =gUnknown_0203BC88
 	ldr r1, [r0]
 	movs r0, 0x34
@@ -1383,7 +1383,7 @@ _08162B08:
 	ands r0, r1
 	cmp r0, 0
 	beq _08162B38
-	ldr r4, =gTrainerClassToFrontPicId
+	ldr r4, =gUnknown_0831F578
 	bl sub_818649C
 	lsls r0, 24
 	lsrs r0, 24
@@ -1391,7 +1391,7 @@ _08162B08:
 	b _08162BC8
 	.pool
 _08162B38:
-	ldr r3, =gTrainerClassToFrontPicId
+	ldr r3, =gUnknown_0831F578
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0xfffffed4
@@ -1413,7 +1413,7 @@ _08162B64:
 	ands r0, r1
 	cmp r0, 0
 	bne _08162BB0
-	ldr r4, =gTrainerClassToFrontPicId
+	ldr r4, =gUnknown_0831F578
 	ldr r3, =gUnknown_08610970
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
@@ -1436,7 +1436,7 @@ _08162B64:
 	b _08162BC8
 	.pool
 _08162BB0:
-	ldr r5, =gTrainerClassToFrontPicId
+	ldr r5, =gUnknown_0831F578
 	ldr r4, =gUnknown_08610970
 	bl sub_81864A8
 	lsls r0, 24
@@ -5845,7 +5845,7 @@ _08165206:
 
 	thumb_func_start GetEreaderTrainerFrontSpriteId
 GetEreaderTrainerFrontSpriteId: @ 8165244
-	ldr r1, =gTrainerClassToFrontPicId
+	ldr r1, =gUnknown_0831F578
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000bed

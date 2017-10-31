@@ -21,6 +21,7 @@
 #include "bg.h"
 #include "reshow_battle_screen.h"
 #include "pokeball.h"
+#include "data2.h"
 
 extern u32 gBattleExecBuffer;
 extern u8 gActiveBank;
@@ -56,7 +57,7 @@ extern u16 gTrainerBattleOpponent_B;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct BattleMove gBattleMoves[];
-extern const u8 gTrainerClassToFrontPicId[];
+extern const u8 gUnknown_0831F578[];
 
 extern void sub_8172EF0(u8 bank, struct Pokemon *mon);
 extern void sub_806A068(u16, u8);
@@ -134,7 +135,7 @@ static void sub_8067618(u8 taskId);
 static void sub_80676FC(struct Sprite *sprite);
 static void sub_806782C(void);
 
-static void (*const sLinkOpponentBufferCommands[CONTOLLER_CMDS_COUNT])(void) =
+static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
     LinkOpponentHandleGetMonData,
     LinkOpponentHandleGetRawMonData,
@@ -519,7 +520,7 @@ static void sub_8064E50(void)
         UpdateHealthboxAttribute(gHealthBoxesIds[gActiveBank], &gEnemyParty[gBattlePartyID[gActiveBank]], HEALTHBOX_ALL);
         sub_8076918(gActiveBank);
         SetHealthboxSpriteVisible(gHealthBoxesIds[gActiveBank]);
-        SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);
+        CopyBattleSpriteInvisibility(gActiveBank);
         gBattleBankFunc[gActiveBank] = sub_8064D60;
     }
 }
@@ -561,7 +562,7 @@ static void LinkOpponentBufferExecCompleted(void)
         u8 playerId = GetMultiplayerId();
 
         PrepareBufferDataTransferLink(2, 4, &playerId);
-        gBattleBufferA[gActiveBank][0] = CONTOLLER_CMDS_COUNT - 1;
+        gBattleBufferA[gActiveBank][0] = CONTROLLER_CMDS_COUNT - 1;
     }
     else
     {
@@ -573,7 +574,7 @@ static void LinkOpponentHandleGetMonData(void)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
-    u8 monsToCheck;
+    u8 monToCheck;
     s32 i;
 
     if (gBattleBufferA[gActiveBank][2] == 0)
@@ -582,12 +583,12 @@ static void LinkOpponentHandleGetMonData(void)
     }
     else
     {
-        monsToCheck = gBattleBufferA[gActiveBank][2];
+        monToCheck = gBattleBufferA[gActiveBank][2];
         for (i = 0; i < 6; i++)
         {
-            if (monsToCheck & 1)
+            if (monToCheck & 1)
                 size += CopyLinkOpponentMonData(i, monData + size);
-            monsToCheck >>= 1;
+            monToCheck >>= 1;
         }
     }
     EmitDataTransfer(1, size, monData);
@@ -907,7 +908,7 @@ static void LinkOpponentHandleGetRawMonData(void)
 
 static void LinkOpponentHandleSetMonData(void)
 {
-    u8 monsToCheck;
+    u8 monToCheck;
     u8 i;
 
     if (gBattleBufferA[gActiveBank][2] == 0)
@@ -916,12 +917,12 @@ static void LinkOpponentHandleSetMonData(void)
     }
     else
     {
-        monsToCheck = gBattleBufferA[gActiveBank][2];
+        monToCheck = gBattleBufferA[gActiveBank][2];
         for (i = 0; i < 6; i++)
         {
-            if (monsToCheck & 1)
+            if (monToCheck & 1)
                 SetLinkOpponentMonData(i);
-            monsToCheck >>= 1;
+            monToCheck >>= 1;
         }
     }
     LinkOpponentBufferExecCompleted();
@@ -1166,8 +1167,6 @@ static void LinkOpponentHandleLoadMonSprite(void)
                                                sub_80A6138(gActiveBank),
                                                sub_80A82E4(gActiveBank));
 
-
-
     gSprites[gBankSpriteIds[gActiveBank]].pos2.x = -240;
     gSprites[gBankSpriteIds[gActiveBank]].data0 = gActiveBank;
     gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
@@ -1255,16 +1254,6 @@ static void DoSwitchOutAnimation(void)
     }
 }
 
-// todo: get rid of it once the struct is declared in a header
-struct MonCoords
-{
-    // This would use a bitfield, but sub_8079F44
-    // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
-    u8 y_offset;
-};
-extern const struct MonCoords gTrainerFrontPicCoords[];
-
 static void LinkOpponentHandleDrawTrainerPic(void)
 {
     s16 xPos;
@@ -1290,17 +1279,17 @@ static void LinkOpponentHandleDrawTrainerPic(void)
             || (gLinkPlayers[GetBankMultiplayerId(gActiveBank)].version & 0xFF) == VERSION_LEAF_GREEN)
             {
                 if (gLinkPlayers[GetBankMultiplayerId(gActiveBank)].gender != 0)
-                    trainerPicId = gTrainerClassToFrontPicId[0x4F];
+                    trainerPicId = gUnknown_0831F578[0x4F];
                 else
-                    trainerPicId = gTrainerClassToFrontPicId[0x4E];
+                    trainerPicId = gUnknown_0831F578[0x4E];
             }
             else if ((gLinkPlayers[GetBankMultiplayerId(gActiveBank)].version & 0xFF) == VERSION_RUBY
                      || (gLinkPlayers[GetBankMultiplayerId(gActiveBank)].version & 0xFF) == VERSION_SAPPHIRE)
             {
                 if (gLinkPlayers[GetBankMultiplayerId(gActiveBank)].gender != 0)
-                    trainerPicId = gTrainerClassToFrontPicId[0x51];
+                    trainerPicId = gUnknown_0831F578[0x51];
                 else
-                    trainerPicId = gTrainerClassToFrontPicId[0x50];
+                    trainerPicId = gUnknown_0831F578[0x50];
             }
             else
             {
@@ -1319,17 +1308,17 @@ static void LinkOpponentHandleDrawTrainerPic(void)
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_LEAF_GREEN)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != 0)
-                trainerPicId = gTrainerClassToFrontPicId[0x4F];
+                trainerPicId = gUnknown_0831F578[0x4F];
             else
-                trainerPicId = gTrainerClassToFrontPicId[0x4E];
+                trainerPicId = gUnknown_0831F578[0x4E];
         }
         else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_RUBY
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_SAPPHIRE)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != 0)
-                trainerPicId = gTrainerClassToFrontPicId[0x51];
+                trainerPicId = gUnknown_0831F578[0x51];
             else
-                trainerPicId = gTrainerClassToFrontPicId[0x50];
+                trainerPicId = gUnknown_0831F578[0x50];
         }
         else
         {
@@ -1849,7 +1838,7 @@ static void LinkOpponentHandleSpriteInvisibility(void)
     if (IsBankSpritePresent(gActiveBank))
     {
         gSprites[gBankSpriteIds[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
-        SetBattleSpriteInvisibilityBitToSpriteInvisibility(gActiveBank);
+        CopyBattleSpriteInvisibility(gActiveBank);
     }
     LinkOpponentBufferExecCompleted();
 }

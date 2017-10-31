@@ -1222,14 +1222,14 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
     }
 }
 
-extern const u8 gTrainerClassToFrontPicId[];
+extern const u8 gUnknown_0831F578[];
 extern const u8 gTrainerClassToNameIndex[];
 extern const u8 gSecretBaseTrainerClasses[][5];
 
 u8 GetSecretBaseTrainerPicIndex(void)
 {
     u8 trainerClass = gSecretBaseTrainerClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5];
-    return gTrainerClassToFrontPicId[trainerClass];
+    return gUnknown_0831F578[trainerClass];
 }
 
 u8 GetSecretBaseTrainerNameIndex(void)
