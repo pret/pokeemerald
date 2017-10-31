@@ -85,7 +85,7 @@ extern u16 gTrainerBattleOpponent_B;
 extern struct BattleEnigmaBerry gEnigmaBerries[BATTLE_BANKS_COUNT];
 extern void (*gPreBattleCallback1)(void);
 extern void (*gBattleMainFunc)(void);
-extern void (*gUnknown_030061E8)(void);
+extern void (*gCB2_AfterEvolution)(void);
 extern struct UnknownPokemonStruct2 gUnknown_02022FF8[3]; // what is it used for?
 extern struct UnknownPokemonStruct2* gUnknown_02023058; // what is it used for?
 extern u8 gUnknown_02039B28[]; // possibly a struct?
@@ -4938,7 +4938,7 @@ static void HandleEndTurn_FinishBattle(void)
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
-        gUnknown_030061E8 = BattleMainCB2;
+        gCB2_AfterEvolution = BattleMainCB2;
     }
     else
     {

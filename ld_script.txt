@@ -180,7 +180,7 @@ SECTIONS {
         asm/rom6.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
-        asm/evolution_scene.o(.text);
+        src/evolution_scene.o(.text);
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
@@ -225,7 +225,7 @@ SECTIONS {
         asm/pokeblock_feed.o(.text);
         src/clear_save_data_screen.o(.text);
         asm/intro_credits_graphics.o(.text);
-        asm/evolution_graphics.o(.text);
+        src/evolution_graphics.o(.text);
         asm/bard_music.o(.text);
         asm/fldeff_teleport.o(.text);
         asm/battle_link_817C95C.o(.text);
@@ -447,7 +447,7 @@ SECTIONS {
         data/pokeblock_feed.o(.rodata);
         src/clear_save_data_screen.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
-        data/evolution_graphics.o(.rodata);
+        src/evolution_graphics.o(.rodata);
         data/bard_music.o(.rodata);
         data/data_860A4AC.o(.rodata);
         src/battle_controller_recorded_opponent.o(.rodata);

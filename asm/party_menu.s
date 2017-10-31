@@ -13861,7 +13861,7 @@ sub_81B7810: @ 81B7810
 	cmp r4, 0
 	beq _081B7860
 	bl sub_81B06F4
-	ldr r0, =gUnknown_030061E8
+	ldr r0, =gCB2_AfterEvolution
 	ldr r1, [r6]
 	str r1, [r0]
 	ldrb r3, [r6, 0x9]
@@ -14307,7 +14307,7 @@ sub_81B7C74: @ 81B7C74
 	lsrs r5, r0, 24
 	movs r0, 0x5
 	bl PlaySE
-	ldr r2, =gUnknown_030061E8
+	ldr r2, =gCB2_AfterEvolution
 	ldr r1, =gUnknown_0203CEC8
 	ldr r0, [r1]
 	str r0, [r2]

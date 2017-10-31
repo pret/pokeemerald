@@ -1280,11 +1280,7 @@ gUnknown_0203AB78: @ 203AB78
 gUnknown_0203AB7C: @ 203AB7C
 	.space 0x4
 
-gUnknown_0203AB80: @ 203AB80
-	.space 0x4
-
-gUnknown_0203AB84: @ 203AB84
-	.space 0x4
+    .include "src/evolution_scene.o"
 
 gUnknown_0203AB88: @ 203AB88
 	.space 0x4

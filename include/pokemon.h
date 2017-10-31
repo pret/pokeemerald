@@ -620,7 +620,7 @@ void SetWildMonHeldItem(void);
 u16 GetMonEVCount(struct Pokemon *);
 
 const struct CompressedSpritePalette *sub_806E794(struct Pokemon *mon);
-const struct CompressedSpritePalette *sub_806E7CC(u16 species, u32 otId , u32 personality);
+const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
 bool32 IsHMMove2(u16 move);
 bool8 IsPokeSpriteNotFlipped(u16 species);
 bool8 IsMonShiny(struct Pokemon *mon);

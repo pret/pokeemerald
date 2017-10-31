@@ -229,6 +229,7 @@
 #define BATTLE_TERRAIN_ROCK         6
 #define BATTLE_TERRAIN_CAVE         7
 #define BATTLE_TERRAIN_INSIDE       8
+#define BATTLE_TERRAIN_PLAIN        9
 
 // array entries for battle communication
 #define MULTIUSE_STATE          0x0
