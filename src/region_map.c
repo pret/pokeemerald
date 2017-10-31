@@ -8,6 +8,8 @@
 #include "trig.h"
 #include "map_constants.h"
 #include "overworld.h"
+#include "flags.h"
+#include "event_data.h"
 #include "rom6.h"
 #include "region_map.h"
 
@@ -48,7 +50,7 @@ u16 GetRegionMapSectionIdAt(u16 x, u16 y);
 void sub_812378C(s16 x, s16 y);
 static void sub_81238AC(void);
 static void sub_8123C00(void);
-u8 get_flagnr_blue_points(u16 mapSecId);
+static u8 get_flagnr_blue_points(u16 mapSecId);
 u16 sub_8123EB4(u16 mapSecId);
 void sub_8123F30(u16 *x, u16 *y);
 void sub_8123FB0(void);
@@ -762,4 +764,51 @@ static void sub_8123C00(void)
     gRegionMap->playerIsInCave = FALSE;
     gRegionMap->cursorPosX = gRegionMapEntries[gRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
     gRegionMap->cursorPosY = gRegionMapEntries[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
+}
+
+static u8 get_flagnr_blue_points(u16 mapSecId)
+{
+    switch (mapSecId)
+    {
+        case MAPSEC_NONE2:
+            return 0;
+        case MAPSEC_LITTLEROOT_TOWN:
+            return FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) ? 2 : 3;
+        case MAPSEC_OLDALE_TOWN:
+            return FlagGet(FLAG_VISITED_OLDALE_TOWN) ? 2 : 3;
+        case MAPSEC_DEWFORD_TOWN:
+            return FlagGet(FLAG_VISITED_DEWFORD_TOWN) ? 2 : 3;
+        case MAPSEC_LAVARIDGE_TOWN:
+            return FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) ? 2 : 3;
+        case MAPSEC_FALLARBOR_TOWN:
+            return FlagGet(FLAG_VISITED_FALLARBOR_TOWN) ? 2 : 3;
+        case MAPSEC_VERDANTURF_TOWN:
+            return FlagGet(FLAG_VISITED_VERDANTURF_TOWN) ? 2 : 3;
+        case MAPSEC_PACIFIDLOG_TOWN:
+            return FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) ? 2 : 3;
+        case MAPSEC_PETALBURG_CITY:
+            return FlagGet(FLAG_VISITED_PETALBURG_CITY) ? 2 : 3;
+        case MAPSEC_SLATEPORT_CITY:
+            return FlagGet(FLAG_VISITED_SLATEPORT_CITY) ? 2 : 3;
+        case MAPSEC_MAUVILLE_CITY:
+            return FlagGet(FLAG_VISITED_MAUVILLE_CITY) ? 2 : 3;
+        case MAPSEC_RUSTBORO_CITY:
+            return FlagGet(FLAG_VISITED_RUSTBORO_CITY) ? 2 : 3;
+        case MAPSEC_FORTREE_CITY:
+            return FlagGet(FLAG_VISITED_FORTREE_CITY) ? 2 : 3;
+        case MAPSEC_LILYCOVE_CITY:
+            return FlagGet(FLAG_VISITED_LILYCOVE_CITY) ? 2 : 3;
+        case MAPSEC_MOSSDEEP_CITY:
+            return FlagGet(FLAG_VISITED_MOSSDEEP_CITY) ? 2 : 3;
+        case MAPSEC_SOOTOPOLIS_CITY:
+            return FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) ? 2 : 3;
+        case MAPSEC_EVER_GRANDE_CITY:
+            return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? 2 : 3;
+        case MAPSEC_BATTLE_FRONTIER:
+            return FlagGet(FLAG_UNLOCK_BATTLE_FRONTIER) ? 4 : 0;
+        case MAPSEC_SOUTHERN_ISLAND:
+            return FlagGet(FLAG_UNLOCK_SOUTHERN_ISLAND) ? 1 : 0;
+        default:
+            return 1;
+    }
 }
