@@ -44,16 +44,15 @@ static u8 ProcessRegionMapInput_Full(void);
 static u8 MoveRegionMapCursor_Full(void);
 static u8 ProcessRegionMapInput_Zoomed(void);
 static u8 MoveRegionMapCursor_Zoomed(void);
-void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
-void UpdateRegionMapVideoRegs(void);
+static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
 u16 GetRegionMapSectionIdAt(u16 x, u16 y);
-void sub_812378C(s16 x, s16 y);
+static void sub_812378C(s16 x, s16 y);
 static void sub_81238AC(void);
 static void sub_8123C00(void);
 static u8 get_flagnr_blue_points(u16 mapSecId);
 u16 sub_8123EB4(u16 mapSecId);
-u16 sub_8123F04(void);
-void sub_8123F30(u16 *x, u16 *y);
+static u16 sub_8123F04(void);
+static void sub_8123F30(u16 *x, u16 *y);
 void sub_8123FB0(void);
 bool32 sub_8123F74(u8 mapSecId);
 void sub_8124238(void);
@@ -73,6 +72,7 @@ extern const u16 gUnknown_085A1B24[][2];
 extern const u16 gUnknown_085A1B84[];
 extern const u16 gUnknown_085A1B8A[];
 extern const struct UCoords16 gUnknown_085A1BAC[];
+extern const u8 gUnknown_085A1BCC[];
 
 // .text
 
@@ -476,7 +476,7 @@ u8 sub_8123514(void)
     return r4;
 }
 
-void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation)
+static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation)
 {
     s32 var1;
     s32 var2;
@@ -499,7 +499,7 @@ void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, 
     gRegionMap->needUpdateVideoRegs = TRUE;
 }
 
-void sub_812378C(s16 x, s16 y)
+static void sub_812378C(s16 x, s16 y)
 {
     gRegionMap->bg2x = (x << 8) + 0x1c00;
     gRegionMap->bg2y = (y << 8) + 0x2400;
@@ -844,7 +844,7 @@ u16 sub_8123EB4(u16 mapSecId)
     return mapSecId;
 }
 
-u16 sub_8123F04(void)
+static u16 sub_8123F04(void)
 {
     s16 idx;
 
@@ -856,7 +856,7 @@ u16 sub_8123F04(void)
     return gUnknown_085A1B8A[idx];
 }
 
-void sub_8123F30(u16 *x, u16 *y)
+static void sub_8123F30(u16 *x, u16 *y)
 {
     u16 idx;
 
@@ -868,4 +868,23 @@ void sub_8123F30(u16 *x, u16 *y)
     idx -= 9;
     *x = gUnknown_085A1BAC[idx].x + MAPCURSOR_X_MIN;
     *y = gUnknown_085A1BAC[idx].y + MAPCURSOR_Y_MIN;
+}
+
+bool32 sub_8123F74(u8 mapSecId)
+{
+    int i;
+
+    for (i = 0; i == 0; i ++)
+    {
+        if (gUnknown_085A1BCC[i] == mapSecId)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+u16 sub_8123F9C(u16 mapSecId)
+{
+    return sub_8123EB4(mapSecId);
 }

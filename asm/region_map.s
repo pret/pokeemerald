@@ -5,43 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8123F74
-sub_8123F74: @ 8123F74
-	push {lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	movs r1, 0
-	ldr r3, =gUnknown_085A1BCC
-_08123F7E:
-	adds r0, r1, r3
-	ldrb r0, [r0]
-	cmp r0, r2
-	bne _08123F90
-	movs r0, 0x1
-	b _08123F98
-	.pool
-_08123F90:
-	adds r1, 0x1
-	cmp r1, 0
-	beq _08123F7E
-	movs r0, 0
-_08123F98:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8123F74
-
-	thumb_func_start sub_8123F9C
-sub_8123F9C: @ 8123F9C
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_8123EB4
-	lsls r0, 16
-	lsrs r0, 16
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8123F9C
-
 	thumb_func_start sub_8123FB0
 sub_8123FB0: @ 8123FB0
 	push {r4-r6,lr}

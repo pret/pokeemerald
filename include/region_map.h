@@ -300,6 +300,7 @@ enum {
 // Exported ROM declarations
 void sub_8122CF8(struct RegionMap *regionMap, struct BgTemplate *template, bool8 zoomed);
 bool8 sub_8122DB0(void);
+void UpdateRegionMapVideoRegs(void);
 void InitRegionMap(struct RegionMap *regionMap, u8 argument);
 u8 sub_81230AC(void);
 void FreeRegionMapIconResources(void);
