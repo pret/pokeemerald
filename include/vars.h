@@ -27,13 +27,14 @@
 #define VAR_POISON_STEP_COUNTER    0x402B
 #define VAR_RESET_RTC_ENABLE       0x402C
 
+#define VAR_0x4037                 0x4037
 #define VAR_DAYS                   0x4040
 
 #define VAR_DEPT_STORE_FLOOR       0x4043
 #define VAR_STORAGE_UNKNOWN        0x4036
 #define VAR_POKELOT_PRIZE          0x4045
 #define VAR_NATIONAL_DEX           0x4046
-#define VAR_SEEDOT_SIZE_RECORD  0x4047
+#define VAR_SEEDOT_SIZE_RECORD     0x4047
 #define VAR_ASH_GATHER_COUNT       0x4048
 #define VAR_BIRCH_STATE            0x4049
 #define VAR_CRUISE_STEP_COUNT      0x404A

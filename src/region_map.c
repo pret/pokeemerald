@@ -69,8 +69,10 @@ extern const u8 gUnknown_0859F77C[];
 extern const u8 gUnknown_085A04E0[];
 extern const u8 gUnknown_085A096C[];
 extern const struct RegionMapLocation gRegionMapEntries[];
-extern const u16 gUnknown_085A1B84[];
 extern const u16 gUnknown_085A1B24[][2];
+extern const u16 gUnknown_085A1B84[];
+extern const u16 gUnknown_085A1B8A[];
+extern const struct UCoords16 gUnknown_085A1BAC[];
 
 // .text
 
@@ -840,4 +842,30 @@ u16 sub_8123EB4(u16 mapSecId)
         }
     }
     return mapSecId;
+}
+
+u16 sub_8123F04(void)
+{
+    s16 idx;
+
+    idx = VarGet(VAR_0x4037) - 1;
+    if (idx < 0 || idx > 15)
+    {
+        idx = 0;
+    }
+    return gUnknown_085A1B8A[idx];
+}
+
+void sub_8123F30(u16 *x, u16 *y)
+{
+    u16 idx;
+
+    idx = VarGet(VAR_0x4037);
+    if (idx < 9 || idx > 16)
+    {
+        idx = 9;
+    }
+    idx -= 9;
+    *x = gUnknown_085A1BAC[idx].x + MAPCURSOR_X_MIN;
+    *y = gUnknown_085A1BAC[idx].y + MAPCURSOR_Y_MIN;
 }

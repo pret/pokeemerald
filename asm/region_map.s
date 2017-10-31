@@ -5,61 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8123F04
-sub_8123F04: @ 8123F04
-	push {lr}
-	ldr r0, =0x00004037
-	bl VarGet
-	subs r0, 0x1
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r1, 0xF
-	bls _08123F18
-	movs r1, 0
-_08123F18:
-	ldr r0, =gUnknown_085A1B8A
-	lsls r1, 16
-	asrs r1, 15
-	adds r1, r0
-	ldrh r0, [r1]
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8123F04
-
-	thumb_func_start sub_8123F30
-sub_8123F30: @ 8123F30
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldr r0, =0x00004037
-	bl VarGet
-	lsls r0, 16
-	lsrs r1, r0, 16
-	ldr r2, =0xfff70000
-	adds r0, r2
-	lsrs r0, 16
-	cmp r0, 0x7
-	bls _08123F4C
-	movs r1, 0x9
-_08123F4C:
-	subs r1, 0x9
-	lsls r1, 16
-	ldr r0, =gUnknown_085A1BAC
-	lsrs r1, 14
-	adds r1, r0
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r4]
-	ldrh r0, [r1, 0x2]
-	adds r0, 0x2
-	strh r0, [r5]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8123F30
-
 	thumb_func_start sub_8123F74
 sub_8123F74: @ 8123F74
 	push {lr}
