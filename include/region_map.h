@@ -258,8 +258,8 @@ struct RegionMap {
     /*0x06e*/ u16 unk_06e;
     /*0x070*/ u16 playerIconTileTag;
     /*0x072*/ u16 playerIconPaletteTag;
-    /*0x074*/ u16 unk_074;
-    /*0x076*/ u16 unk_076;
+    /*0x074*/ u16 playerIconSpritePosX;
+    /*0x076*/ u16 playerIconSpritePosY;
     /*0x078*/ bool8 zoomed;
     /*0x079*/ u8 initStep;
     /*0x07a*/ s8 cursorMovementFrameCounter;
@@ -305,8 +305,9 @@ void InitRegionMap(struct RegionMap *regionMap, u8 argument);
 u8 sub_81230AC(void);
 void FreeRegionMapIconResources(void);
 u16 sub_8123E9C(u16 x, u16 y);
-void GetMapName(u8 *, u16, u16);
 void sub_8124288(u16 x, u16 y);
 void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
+bool32 sub_8124668(u16 mapSecId);
+void GetMapName(u8 *, u16, u16);
 
 #endif //GUARD_REGION_MAP_H

@@ -59,6 +59,8 @@ static bool8 sub_8124038(u16 y);
 static void sub_8124238(void);
 void sub_81243B0(void);
 void sub_81243DC(void);
+void sub_812445C(struct Sprite *sprite);
+void sub_81244EC(struct Sprite *sprite);
 
 // .rodata
 
@@ -69,6 +71,10 @@ extern const u8 gUnknown_0859F77C[];
 extern const u8 gUnknown_085A04E0[];
 extern const u8 gUnknown_085A096C[];
 extern const struct RegionMapLocation gRegionMapEntries[];
+extern const u8 gUnknown_085A084C[];
+extern const u16 gUnknown_085A082C[];
+extern const u16 gUnknown_085A08CC[];
+extern const u8 gUnknown_085A08EC[];
 extern const u16 gUnknown_085A1B24[][2];
 extern const u16 gUnknown_085A1B84[];
 extern const u16 gUnknown_085A1B8A[];
@@ -76,6 +82,8 @@ extern const struct UCoords16 gUnknown_085A1BAC[];
 extern const u8 gUnknown_085A1BCC[];
 extern const struct SpritePalette gUnknown_085A1C00;
 extern const struct SpriteTemplate gUnknown_085A1C08;
+extern const struct OamData gUnknown_085A1C20;
+extern const union AnimCmd *const gUnknown_085A1C30[];
 
 // .text
 
@@ -111,8 +119,8 @@ void sub_8122D88(struct RegionMap *regionMap)
 {
     gRegionMap = regionMap;
     sub_81238AC();
-    gRegionMap->unk_074 = gRegionMap->cursorPosX;
-    gRegionMap->unk_076 = gRegionMap->cursorPosY;
+    gRegionMap->playerIconSpritePosX = gRegionMap->cursorPosX;
+    gRegionMap->playerIconSpritePosY = gRegionMap->cursorPosY;
 }
 
 bool8 sub_8122DB0(void)
@@ -156,8 +164,8 @@ bool8 sub_8122DB0(void)
             break;
         case 5:
             sub_81238AC();
-            gRegionMap->unk_074 = gRegionMap->cursorPosX;
-            gRegionMap->unk_076 = gRegionMap->cursorPosY;
+            gRegionMap->playerIconSpritePosX = gRegionMap->cursorPosX;
+            gRegionMap->playerIconSpritePosY = gRegionMap->cursorPosY;
             gRegionMap->mapSecId = sub_8123EB4(gRegionMap->mapSecId);
             gRegionMap->iconDrawType = get_flagnr_blue_points(gRegionMap->mapSecId);
             GetMapName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
@@ -1043,4 +1051,39 @@ void sub_8124268(void)
 void sub_8124278(void)
 {
     gRegionMap->cursorSprite->data3 = FALSE;
+}
+
+void sub_8124288(u16 tileTag, u16 paletteTag)
+{
+    u8 spriteId;
+    struct SpriteSheet sheet = {gUnknown_085A084C, 0x80, tileTag};
+    struct SpritePalette palette = {gUnknown_085A082C, paletteTag};
+    struct SpriteTemplate template = {tileTag, paletteTag, &gUnknown_085A1C20, gUnknown_085A1C30, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+
+    if (sub_8124668(gMapHeader.regionMapSectionId))
+    {
+        gRegionMap->playerIconSprite = NULL;
+        return;
+    }
+    if (gSaveBlock2Ptr->playerGender == FEMALE)
+    {
+        sheet.data = gUnknown_085A08EC;
+        palette.data = gUnknown_085A08CC;
+    }
+    LoadSpriteSheet(&sheet);
+    LoadSpritePalette(&palette);
+    spriteId = CreateSprite(&template, 0, 0, 1);
+    gRegionMap->playerIconSprite = &gSprites[spriteId];
+    if (!gRegionMap->zoomed)
+    {
+        gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 8 + 4;
+        gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 8 + 4;
+        gRegionMap->playerIconSprite->callback = sub_81244EC;
+    }
+    else
+    {
+        gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 16 - 0x30;
+        gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 16 - 0x42;
+        gRegionMap->playerIconSprite->callback = sub_812445C;
+    }
 }
