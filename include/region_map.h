@@ -93,7 +93,7 @@ enum {
     MAPSEC_INSIDE_OF_TRUCK,
     MAPSEC_SKY_PILLAR,
     MAPSEC_SECRET_BASE,
-    MAPSEC_NONE,
+    MAPSEC_UNK_0x57,
     MAPSEC_PALLET_TOWN,
     MAPSEC_VIRIDIAN_CITY,
     MAPSEC_PEWTER_CITY,
@@ -219,7 +219,7 @@ enum {
     MAPSEC_ALTERING_CAVE_2,
     MAPSEC_NAVEL_ROCK2,
     MAPSEC_TRAINER_HILL,
-    MAPSEC_NONE2
+    MAPSEC_NONE
 };
 
 struct RegionMap {
@@ -250,8 +250,8 @@ struct RegionMap {
     /*0x05e*/ s16 scrollY;
     /*0x060*/ s16 unk_060;
     /*0x062*/ s16 unk_062;
-    /*0x064*/ u16 unk_064;
-    /*0x066*/ u16 unk_066;
+    /*0x064*/ u16 zoomedCursorPosX;
+    /*0x066*/ u16 zoomedCursorPosY;
     /*0x068*/ s16 zoomedCursorDeltaY;
     /*0x06a*/ s16 zoomedCursorDeltaX;
     /*0x06c*/ u16 zoomedCursorMovementFrameCounter;

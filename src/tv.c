@@ -6435,7 +6435,7 @@ void DoTVShowTodaysRivalTrainer(void)
                 case MAPSEC_SECRET_BASE:
                     sTVShowState = 8;
                     break;
-                case MAPSEC_NONE:
+                case MAPSEC_UNK_0x57:
                     switch (show->rivalTrainer.mapDataId)
                     {
                         case 0x115 ... 0x117:
@@ -6633,7 +6633,7 @@ void DoTVShowHoennTreasureInvestigators(void)
     {
         case 0:
             StringCopy(gStringVar1, ItemId_GetItem(show->treasureInvestigators.item)->name);
-            if (show->treasureInvestigators.location == MAPSEC_NONE)
+            if (show->treasureInvestigators.location == MAPSEC_UNK_0x57)
             {
                 switch (show->treasureInvestigators.mapDataId)
                 {

@@ -53,8 +53,9 @@ static u8 get_flagnr_blue_points(u16 mapSecId);
 u16 sub_8123EB4(u16 mapSecId);
 static u16 sub_8123F04(void);
 static void sub_8123F30(u16 *x, u16 *y);
-void sub_8123FB0(void);
-bool32 sub_8123F74(u8 mapSecId);
+static bool32 sub_8123F74(u8 mapSecId);
+static void sub_8123FB0(void);
+bool8 sub_8124038(u16 y);
 void sub_8124238(void);
 void sub_81243B0(void);
 void sub_81243DC(void);
@@ -168,8 +169,8 @@ bool8 sub_8122DB0(void)
             {
                 gRegionMap->scrollX = gRegionMap->cursorPosX * 8 - 0x34;
                 gRegionMap->scrollY = gRegionMap->cursorPosY * 8 - 0x44;
-                gRegionMap->unk_064 = gRegionMap->cursorPosX;
-                gRegionMap->unk_066 = gRegionMap->cursorPosY;
+                gRegionMap->zoomedCursorPosX = gRegionMap->cursorPosX;
+                gRegionMap->zoomedCursorPosY = gRegionMap->cursorPosY;
                 CalcZoomScrollParams(gRegionMap->scrollX, gRegionMap->scrollY, 0x38, 0x48, 0x80, 0x80, 0);
             }
             break;
@@ -360,10 +361,10 @@ static u8 MoveRegionMapCursor_Zoomed(void)
     {
         x = (gRegionMap->scrollX + 0x2c) / 8 + 1;
         y = (gRegionMap->scrollY + 0x34) / 8 + 2;
-        if (x != gRegionMap->unk_064 || y != gRegionMap->unk_066)
+        if (x != gRegionMap->zoomedCursorPosX || y != gRegionMap->zoomedCursorPosY)
         {
-            gRegionMap->unk_064 = x;
-            gRegionMap->unk_066 = y;
+            gRegionMap->zoomedCursorPosX = x;
+            gRegionMap->zoomedCursorPosY = y;
             mapSecId = GetRegionMapSectionIdAt(x, y);
             gRegionMap->iconDrawType = get_flagnr_blue_points(mapSecId);
             if (mapSecId != gRegionMap->mapSecId)
@@ -392,8 +393,8 @@ void sub_8123418(void)
         gRegionMap->unk_062 = gRegionMap->cursorPosY * 8 - 0x44;
         gRegionMap->unk_044 = (gRegionMap->unk_060 << 8) / 16;
         gRegionMap->unk_048 = (gRegionMap->unk_062 << 8) / 16;
-        gRegionMap->unk_064 = gRegionMap->cursorPosX;
-        gRegionMap->unk_066 = gRegionMap->cursorPosY;
+        gRegionMap->zoomedCursorPosX = gRegionMap->cursorPosX;
+        gRegionMap->zoomedCursorPosY = gRegionMap->cursorPosY;
         gRegionMap->unk_04c = 0x10000;
         gRegionMap->unk_050 = -0x800;
     }
@@ -405,8 +406,8 @@ void sub_8123418(void)
         gRegionMap->unk_062 = 0;
         gRegionMap->unk_044 = -(gRegionMap->unk_03c / 16);
         gRegionMap->unk_048 = -(gRegionMap->unk_040 / 16);
-        gRegionMap->cursorPosX = gRegionMap->unk_064;
-        gRegionMap->cursorPosY = gRegionMap->unk_066;
+        gRegionMap->cursorPosX = gRegionMap->zoomedCursorPosX;
+        gRegionMap->cursorPosY = gRegionMap->zoomedCursorPosY;
         gRegionMap->unk_04c = 0x8000;
         gRegionMap->unk_050 = 0x800;
     }
@@ -537,7 +538,7 @@ u16 GetRegionMapSectionIdAt(u16 x, u16 y)
 {
     if (y < MAPCURSOR_Y_MIN || y > MAPCURSOR_Y_MAX || x < MAPCURSOR_X_MIN || x > MAPCURSOR_X_MAX)
     {
-        return MAPSEC_NONE2;
+        return MAPSEC_NONE;
     }
     y -= MAPCURSOR_Y_MIN;
     x -= MAPCURSOR_X_MIN;
@@ -617,7 +618,7 @@ static void sub_81238AC(void)
         case 8:
 
             gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
-            if (gRegionMap->mapSecId != MAPSEC_NONE)
+            if (gRegionMap->mapSecId != MAPSEC_UNK_0x57)
             {
                 r4 = &gSaveBlock1Ptr->warp4;
                 mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
@@ -775,7 +776,7 @@ static u8 get_flagnr_blue_points(u16 mapSecId)
 {
     switch (mapSecId)
     {
-        case MAPSEC_NONE2:
+        case MAPSEC_NONE:
             return MAPSECTYPE_NONE;
         case MAPSEC_LITTLEROOT_TOWN:
             return FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
@@ -834,7 +835,7 @@ u16 sub_8123EB4(u16 mapSecId)
             return sub_8123F04();
         }
     }
-    for (i = 0; gUnknown_085A1B24[i][0] != MAPSEC_NONE2; i ++)
+    for (i = 0; gUnknown_085A1B24[i][0] != MAPSEC_NONE; i ++)
     {
         if (gUnknown_085A1B24[i][0] == mapSecId)
         {
@@ -870,7 +871,7 @@ static void sub_8123F30(u16 *x, u16 *y)
     *y = gUnknown_085A1BAC[idx].y + MAPCURSOR_Y_MIN;
 }
 
-bool32 sub_8123F74(u8 mapSecId)
+static bool32 sub_8123F74(u8 mapSecId)
 {
     int i;
 
@@ -887,4 +888,52 @@ bool32 sub_8123F74(u8 mapSecId)
 u16 sub_8123F9C(u16 mapSecId)
 {
     return sub_8123EB4(mapSecId);
+}
+
+static void sub_8123FB0(void)
+{
+    u16 x;
+    u16 y;
+    u16 unk_003;
+
+    if (gRegionMap->mapSecId == MAPSEC_NONE)
+    {
+        gRegionMap->unk_003 = 0;
+        return;
+    }
+    if (!gRegionMap->zoomed)
+    {
+        x = gRegionMap->cursorPosX;
+        y = gRegionMap->cursorPosY;
+    }
+    else
+    {
+        x = gRegionMap->zoomedCursorPosX;
+        y = gRegionMap->zoomedCursorPosY;
+    }
+    unk_003 = 0;
+    while (1)
+    {
+        if (x <= MAPCURSOR_X_MIN)
+        {
+            if (sub_8124038(y))
+            {
+                y --;
+                x = MAPCURSOR_X_MAX + 1;
+            }
+            else
+            {
+                break;
+            }
+        }
+        else
+        {
+            x --;
+            if (GetRegionMapSectionIdAt(x, y) == gRegionMap->mapSecId)
+            {
+                unk_003 ++;
+            }
+        }
+    }
+    gRegionMap->unk_003 = unk_003;
 }
