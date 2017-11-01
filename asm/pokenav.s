@@ -10991,7 +10991,7 @@ _081CC784:
 	bne _081CC7AC
 	movs r0, 0x4
 	movs r1, 0x9
-	bl sub_8124288
+	bl CreateRegionMapPlayerIcon
 	movs r0, 0x5
 	movs r1, 0xA
 	bl CreateRegionMapCursor

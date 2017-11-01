@@ -5,94 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81243B0
-sub_81243B0: @ 81243B0
-	push {lr}
-	ldr r3, =gRegionMap
-	ldr r0, [r3]
-	ldr r2, [r0, 0x20]
-	cmp r2, 0
-	beq _081243CE
-	adds r2, 0x3E
-	ldrb r0, [r2]
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r2]
-	ldr r0, [r3]
-	ldr r1, [r0, 0x20]
-	ldr r0, =SpriteCallbackDummy
-	str r0, [r1, 0x1C]
-_081243CE:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81243B0
-
-	thumb_func_start sub_81243DC
-sub_81243DC: @ 81243DC
-	push {lr}
-	ldr r0, =gRegionMap
-	ldr r3, [r0]
-	ldr r1, [r3, 0x20]
-	cmp r1, 0
-	beq _08124452
-	adds r0, r3, 0
-	adds r0, 0x78
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _0812441C
-	adds r0, r3, 0
-	adds r0, 0x74
-	ldrh r0, [r0]
-	lsls r0, 4
-	subs r0, 0x30
-	strh r0, [r1, 0x20]
-	ldr r1, [r3, 0x20]
-	adds r0, r3, 0
-	adds r0, 0x76
-	ldrh r0, [r0]
-	lsls r0, 4
-	subs r0, 0x42
-	strh r0, [r1, 0x22]
-	ldr r1, [r3, 0x20]
-	ldr r0, =sub_812445C
-	b _08124444
-	.pool
-_0812441C:
-	adds r0, r3, 0
-	adds r0, 0x74
-	ldrh r0, [r0]
-	lsls r0, 3
-	adds r0, 0x4
-	movs r2, 0
-	strh r0, [r1, 0x20]
-	ldr r1, [r3, 0x20]
-	adds r0, r3, 0
-	adds r0, 0x76
-	ldrh r0, [r0]
-	lsls r0, 3
-	adds r0, 0x4
-	strh r0, [r1, 0x22]
-	ldr r0, [r3, 0x20]
-	strh r2, [r0, 0x24]
-	ldr r0, [r3, 0x20]
-	strh r2, [r0, 0x26]
-	ldr r1, [r3, 0x20]
-	ldr r0, =sub_81244EC
-_08124444:
-	str r0, [r1, 0x1C]
-	adds r1, 0x3E
-	ldrb r2, [r1]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1]
-_08124452:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81243DC
-
 	thumb_func_start sub_812445C
 sub_812445C: @ 812445C
 	push {r4,lr}
@@ -521,7 +433,7 @@ _0812479C:
 	bl CreateRegionMapCursor
 	movs r0, 0x1
 	movs r1, 0x1
-	bl sub_8124288
+	bl CreateRegionMapPlayerIcon
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x8]
 	strh r1, [r0, 0x6]

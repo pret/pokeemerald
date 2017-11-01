@@ -23,15 +23,15 @@ static EWRAM_DATA struct {
     u32 filler_004;
     struct RegionMap regionMap;
     u16 state;
-} *gUnknown_0203BCD0 = NULL;
+} *sFieldRegionMapHandler = NULL;
 
 // Static ROM declarations
 
-static void sub_81701C4(void);
-static void sub_8170260(void);
-static void sub_8170274(void);
-static void sub_8170290(void);
-static void sub_8170428(void);
+static void MCB2_InitRegionMapRegisters(void);
+static void VBCB_FieldUpdateRegionMap(void);
+static void MCB2_FieldUpdateRegionMap(void);
+static void FieldUpdateRegionMap(void);
+static void PrintRegionMapSecName(void);
 
 // .rodata
 
@@ -68,13 +68,13 @@ static const struct WindowTemplate gUnknown_085E5070[] = {
 void sub_817018C(MainCallback callback)
 {
     SetVBlankCallback(NULL);
-    gUnknown_0203BCD0 = malloc(sizeof(*gUnknown_0203BCD0));
-    gUnknown_0203BCD0->state = 0;
-    gUnknown_0203BCD0->callback = callback;
-    SetMainCallback2(sub_81701C4);
+    sFieldRegionMapHandler = malloc(sizeof(*sFieldRegionMapHandler));
+    sFieldRegionMapHandler->state = 0;
+    sFieldRegionMapHandler->callback = callback;
+    SetMainCallback2(MCB2_InitRegionMapRegisters);
 }
 
-static void sub_81701C4(void)
+static void MCB2_InitRegionMapRegisters(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_BG0HOFS, 0);
@@ -93,37 +93,37 @@ static void sub_81701C4(void)
     DeactivateAllTextPrinters();
     sub_809882C(0, 0x27, 0xd0);
     clear_scheduled_bg_copies_to_vram();
-    SetMainCallback2(sub_8170274);
-    SetVBlankCallback(sub_8170260);
+    SetMainCallback2(MCB2_FieldUpdateRegionMap);
+    SetVBlankCallback(VBCB_FieldUpdateRegionMap);
 }
 
-static void sub_8170260(void)
+static void VBCB_FieldUpdateRegionMap(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void sub_8170274(void)
+static void MCB2_FieldUpdateRegionMap(void)
 {
-    sub_8170290();
+    FieldUpdateRegionMap();
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
     do_scheduled_bg_tilemap_copies_to_vram();
 }
 
-void sub_8170290(void)
+static void FieldUpdateRegionMap(void)
 {
     u8 offset;
 
-    switch (gUnknown_0203BCD0->state)
+    switch (sFieldRegionMapHandler->state)
     {
         case 0:
-            InitRegionMap(&gUnknown_0203BCD0->regionMap, 0);
-            sub_8124288(0, 0);
+            InitRegionMap(&sFieldRegionMapHandler->regionMap, 0);
+            CreateRegionMapPlayerIcon(0, 0);
             CreateRegionMapCursor(1, 1);
-            gUnknown_0203BCD0->state ++;
+            sFieldRegionMapHandler->state ++;
             break;
         case 1:
             SetWindowBorderStyle(1, 0, 0x27, 0xd);
@@ -131,47 +131,47 @@ void sub_8170290(void)
             PrintTextOnWindow(1, 1, gText_Hoenn, offset, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
             SetWindowBorderStyle(0, 0, 0x27, 0xd);
-            sub_8170428();
+            PrintRegionMapSecName();
             BeginNormalPaletteFade(-1, 0, 16, 0, 0);
-            gUnknown_0203BCD0->state ++;
+            sFieldRegionMapHandler->state ++;
             break;
         case 2:
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
             ShowBg(0);
             ShowBg(2);
-            gUnknown_0203BCD0->state ++;
+            sFieldRegionMapHandler->state ++;
             break;
         case 3:
             if (!gPaletteFade.active)
             {
-                gUnknown_0203BCD0->state ++;
+                sFieldRegionMapHandler->state ++;
             }
             break;
         case 4:
             switch (sub_81230AC())
             {
                 case INPUT_EVENT_MOVE_END:
-                    sub_8170428();
+                    PrintRegionMapSecName();
                     break;
                 case INPUT_EVENT_A_BUTTON:
                 case INPUT_EVENT_B_BUTTON:
-                    gUnknown_0203BCD0->state ++;
+                    sFieldRegionMapHandler->state ++;
                     break;
             }
             break;
         case 5:
             BeginNormalPaletteFade(-1, 0, 0, 16, 0);
-            gUnknown_0203BCD0->state ++;
+            sFieldRegionMapHandler->state ++;
             break;
         case 6:
             if (!gPaletteFade.active)
             {
                 FreeRegionMapIconResources();
-                SetMainCallback2(gUnknown_0203BCD0->callback);
-                if (gUnknown_0203BCD0 != NULL)
+                SetMainCallback2(sFieldRegionMapHandler->callback);
+                if (sFieldRegionMapHandler != NULL)
                 {
-                    free(gUnknown_0203BCD0);
-                    gUnknown_0203BCD0 = NULL;
+                    free(sFieldRegionMapHandler);
+                    sFieldRegionMapHandler = NULL;
                 }
                 FreeAllWindowBuffers();
             }
@@ -179,12 +179,12 @@ void sub_8170290(void)
     }
 }
 
-static void sub_8170428(void)
+static void PrintRegionMapSecName(void)
 {
-    if (gUnknown_0203BCD0->regionMap.iconDrawType != 0)
+    if (sFieldRegionMapHandler->regionMap.iconDrawType != MAPSECTYPE_NONE)
     {
         FillWindowPixelBuffer(0, 0x11);
-        PrintTextOnWindow(0, 1, gUnknown_0203BCD0->regionMap.mapSecName, 0, 1, 0, NULL);
+        PrintTextOnWindow(0, 1, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);
         schedule_bg_copy_tilemap_to_vram(0);
     }
     else

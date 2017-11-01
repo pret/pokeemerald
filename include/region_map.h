@@ -225,7 +225,7 @@ enum {
 struct RegionMap {
     /*0x000*/ u16 mapSecId;
     /*0x002*/ u8 iconDrawType;
-    /*0x003*/ u8 unk_003;
+    /*0x003*/ u8 posWithinMapSec;
     /*0x004*/ u8 mapSecName[0x14];
     /*0x018*/ u8 (*inputCallback)(void);
     /*0x01c*/ struct Sprite *cursorSprite;
@@ -303,9 +303,10 @@ bool8 sub_8122DB0(void);
 void UpdateRegionMapVideoRegs(void);
 void InitRegionMap(struct RegionMap *regionMap, u8 argument);
 u8 sub_81230AC(void);
+bool8 sub_8123514(void);
 void FreeRegionMapIconResources(void);
-u16 sub_8123E9C(u16 x, u16 y);
-void sub_8124288(u16 x, u16 y);
+u16 GetRegionMapSectionIdAt(u16 x, u16 y);
+void CreateRegionMapPlayerIcon(u16 x, u16 y);
 void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
 bool32 sub_8124668(u16 mapSecId);
 void GetMapName(u8 *, u16, u16);

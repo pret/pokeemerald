@@ -45,20 +45,20 @@ static u8 MoveRegionMapCursor_Full(void);
 static u8 ProcessRegionMapInput_Zoomed(void);
 static u8 MoveRegionMapCursor_Zoomed(void);
 static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
-u16 GetRegionMapSectionIdAt(u16 x, u16 y);
-static void sub_812378C(s16 x, s16 y);
-static void sub_81238AC(void);
-static void sub_8123C00(void);
+static u16 GetRegionMapSectionIdAt_Internal(u16 x, u16 y);
+static void RegionMap_SetBG2XAndBG2Y(s16 x, s16 y);
+static void RegionMap_InitializeStateBasedOnPlayerLocation(void);
+static void RegionMap_InitializeStateBasedOnSSTidalLocation(void);
 static u8 get_flagnr_blue_points(u16 mapSecId);
-u16 sub_8123EB4(u16 mapSecId);
-static u16 sub_8123F04(void);
-static void sub_8123F30(u16 *x, u16 *y);
-static bool32 sub_8123F74(u8 mapSecId);
-static void sub_8123FB0(void);
-static bool8 sub_8124038(u16 y);
-static void sub_8124238(void);
-void sub_81243B0(void);
-void sub_81243DC(void);
+static u16 CorrectSpecialMapSecId_Internal(u16 mapSecId);
+static u16 RegionMap_GetTerraCaveMapSecId(void);
+static void RegionMap_GetMarineCaveCoords(u16 *x, u16 *y);
+static bool32 RegionMap_IsPlayerInCave(u8 mapSecId);
+static void RegionMap_GetPositionOfCursorWithinMapSection(void);
+static bool8 RegionMap_IsMapSecIdInNextRow(u16 y);
+static void FreeRegionMapCursorSprite(void);
+static void HideRegionMapPlayerIcon(void);
+static void UnhideRegionMapPlayerIcon(void);
 void sub_812445C(struct Sprite *sprite);
 void sub_81244EC(struct Sprite *sprite);
 
@@ -118,7 +118,7 @@ void sub_8122CF8(struct RegionMap *regionMap, struct BgTemplate *template, bool8
 void sub_8122D88(struct RegionMap *regionMap)
 {
     gRegionMap = regionMap;
-    sub_81238AC();
+    RegionMap_InitializeStateBasedOnPlayerLocation();
     gRegionMap->playerIconSpritePosX = gRegionMap->cursorPosX;
     gRegionMap->playerIconSpritePosY = gRegionMap->cursorPosY;
 }
@@ -163,10 +163,10 @@ bool8 sub_8122DB0(void)
             LZ77UnCompWram(gUnknown_0859F650, gRegionMap->cursorLargeImage);
             break;
         case 5:
-            sub_81238AC();
+            RegionMap_InitializeStateBasedOnPlayerLocation();
             gRegionMap->playerIconSpritePosX = gRegionMap->cursorPosX;
             gRegionMap->playerIconSpritePosY = gRegionMap->cursorPosY;
-            gRegionMap->mapSecId = sub_8123EB4(gRegionMap->mapSecId);
+            gRegionMap->mapSecId = CorrectSpecialMapSecId_Internal(gRegionMap->mapSecId);
             gRegionMap->iconDrawType = get_flagnr_blue_points(gRegionMap->mapSecId);
             GetMapName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
             break;
@@ -185,7 +185,7 @@ bool8 sub_8122DB0(void)
             }
             break;
         case 7:
-            sub_8123FB0();
+            RegionMap_GetPositionOfCursorWithinMapSection();
             UpdateRegionMapVideoRegs();
             gRegionMap->cursorSprite = NULL;
             gRegionMap->playerIconSprite = NULL;
@@ -302,14 +302,14 @@ static u8 MoveRegionMapCursor_Full(void)
     {
         gRegionMap->cursorPosY --;
     }
-    mapSecId = GetRegionMapSectionIdAt(gRegionMap->cursorPosX, gRegionMap->cursorPosY);
+    mapSecId = GetRegionMapSectionIdAt_Internal(gRegionMap->cursorPosX, gRegionMap->cursorPosY);
     gRegionMap->iconDrawType = get_flagnr_blue_points(mapSecId);
     if (mapSecId != gRegionMap->mapSecId)
     {
         gRegionMap->mapSecId = mapSecId;
         GetMapName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
     }
-    sub_8123FB0();
+    RegionMap_GetPositionOfCursorWithinMapSection();
     gRegionMap->inputCallback = ProcessRegionMapInput_Full;
     return INPUT_EVENT_MOVE_END;
 }
@@ -365,7 +365,7 @@ static u8 MoveRegionMapCursor_Zoomed(void)
 
     gRegionMap->scrollY += gRegionMap->zoomedCursorDeltaY;
     gRegionMap->scrollX += gRegionMap->zoomedCursorDeltaX;
-    sub_812378C(gRegionMap->scrollX, gRegionMap->scrollY);
+    RegionMap_SetBG2XAndBG2Y(gRegionMap->scrollX, gRegionMap->scrollY);
     gRegionMap->zoomedCursorMovementFrameCounter ++;
     if (gRegionMap->zoomedCursorMovementFrameCounter == 8)
     {
@@ -375,14 +375,14 @@ static u8 MoveRegionMapCursor_Zoomed(void)
         {
             gRegionMap->zoomedCursorPosX = x;
             gRegionMap->zoomedCursorPosY = y;
-            mapSecId = GetRegionMapSectionIdAt(x, y);
+            mapSecId = GetRegionMapSectionIdAt_Internal(x, y);
             gRegionMap->iconDrawType = get_flagnr_blue_points(mapSecId);
             if (mapSecId != gRegionMap->mapSecId)
             {
                 gRegionMap->mapSecId = mapSecId;
                 GetMapName(gRegionMap->mapSecName, gRegionMap->mapSecId, 16);
             }
-            sub_8123FB0();
+            RegionMap_GetPositionOfCursorWithinMapSection();
         }
         gRegionMap->zoomedCursorMovementFrameCounter = 0;
         gRegionMap->inputCallback = ProcessRegionMapInput_Zoomed;
@@ -422,13 +422,13 @@ void sub_8123418(void)
         gRegionMap->unk_050 = 0x800;
     }
     gRegionMap->unk_06e = 0;
-    sub_8124238();
-    sub_81243B0();
+    FreeRegionMapCursorSprite();
+    HideRegionMapPlayerIcon();
 }
 
-u8 sub_8123514(void)
+bool8 sub_8123514(void)
 {
-    u8 r4;
+    bool8 r4;
 
     if (gRegionMap->unk_06e >= 16)
     {
@@ -445,8 +445,8 @@ u8 sub_8123514(void)
         gRegionMap->zoomed = !gRegionMap->zoomed;
         gRegionMap->inputCallback = (gRegionMap->zoomed == FALSE) ? ProcessRegionMapInput_Full : ProcessRegionMapInput_Zoomed;
         CreateRegionMapCursor(gRegionMap->cursorTileTag, gRegionMap->cursorPaletteTag);
-        sub_81243DC();
-        r4 = 0;
+        UnhideRegionMapPlayerIcon();
+        r4 = FALSE;
     }
     else
     {
@@ -481,7 +481,7 @@ u8 sub_8123514(void)
                 gRegionMap->unk_050 = 0;
             }
         }
-        r4 = 1;
+        r4 = TRUE;
     }
     CalcZoomScrollParams(gRegionMap->scrollX, gRegionMap->scrollY, 0x38, 0x48, gRegionMap->unk_04c >> 8, gRegionMap->unk_04c >> 8, 0);
     return r4;
@@ -510,7 +510,7 @@ static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, 
     gRegionMap->needUpdateVideoRegs = TRUE;
 }
 
-static void sub_812378C(s16 x, s16 y)
+static void RegionMap_SetBG2XAndBG2Y(s16 x, s16 y)
 {
     gRegionMap->bg2x = (x << 8) + 0x1c00;
     gRegionMap->bg2y = (y << 8) + 0x2400;
@@ -533,7 +533,7 @@ void UpdateRegionMapVideoRegs(void)
     }
 }
 
-void sub_8123824(s16 x, s16 y)
+void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y)
 {
     CalcZoomScrollParams(x, y, 0x38, 0x48, 0x100, 0x100, 0);
     UpdateRegionMapVideoRegs();
@@ -544,7 +544,7 @@ void sub_8123824(s16 x, s16 y)
     }
 }
 
-u16 GetRegionMapSectionIdAt(u16 x, u16 y)
+static u16 GetRegionMapSectionIdAt_Internal(u16 x, u16 y)
 {
     if (y < MAPCURSOR_Y_MIN || y > MAPCURSOR_Y_MAX || x < MAPCURSOR_X_MIN || x > MAPCURSOR_X_MAX)
     {
@@ -555,7 +555,7 @@ u16 GetRegionMapSectionIdAt(u16 x, u16 y)
     return gUnknown_085A096C[x + y * MAP_WIDTH];
 }
 
-static void sub_81238AC(void)
+static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
 {
     const struct MapHeader *mapHeader;
     u16 mapWidth;
@@ -571,7 +571,7 @@ static void sub_81238AC(void)
             || gSaveBlock1Ptr->location.mapNum == MAP_ID_SS_TIDAL_LOWER_DECK
             || gSaveBlock1Ptr->location.mapNum == MAP_ID_SS_TIDAL_ROOMS))
     {
-        sub_8123C00();
+        RegionMap_InitializeStateBasedOnSSTidalLocation();
         return;
     }
 
@@ -639,7 +639,7 @@ static void sub_81238AC(void)
                 mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
                 gRegionMap->mapSecId = mapHeader->regionMapSectionId;
             }
-            if (sub_8123F74(gRegionMap->mapSecId))
+            if (RegionMap_IsPlayerInCave(gRegionMap->mapSecId))
             {
                 gRegionMap->playerIsInCave = TRUE;
             }
@@ -723,14 +723,14 @@ static void sub_81238AC(void)
             }
             break;
         case MAPSEC_UNDERWATER_MARINE_CAVE:
-            sub_8123F30(&gRegionMap->cursorPosX, &gRegionMap->cursorPosY);
+            RegionMap_GetMarineCaveCoords(&gRegionMap->cursorPosX, &gRegionMap->cursorPosY);
             return;
     }
     gRegionMap->cursorPosX = gRegionMapEntries[gRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
     gRegionMap->cursorPosY = gRegionMapEntries[gRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
 }
 
-static void sub_8123C00(void)
+static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
 {
     u16 y;
     u16 x;
@@ -829,12 +829,12 @@ static u8 get_flagnr_blue_points(u16 mapSecId)
     }
 }
 
-u16 sub_8123E9C(u16 x, u16 y)
+u16 GetRegionMapSectionIdAt(u16 x, u16 y)
 {
-    return GetRegionMapSectionIdAt(x, y);
+    return GetRegionMapSectionIdAt_Internal(x, y);
 }
 
-u16 sub_8123EB4(u16 mapSecId)
+static u16 CorrectSpecialMapSecId_Internal(u16 mapSecId)
 {
     u32 i;
 
@@ -842,7 +842,7 @@ u16 sub_8123EB4(u16 mapSecId)
     {
         if (gUnknown_085A1B84[i] == mapSecId)
         {
-            return sub_8123F04();
+            return RegionMap_GetTerraCaveMapSecId();
         }
     }
     for (i = 0; gUnknown_085A1B24[i][0] != MAPSEC_NONE; i ++)
@@ -855,7 +855,7 @@ u16 sub_8123EB4(u16 mapSecId)
     return mapSecId;
 }
 
-static u16 sub_8123F04(void)
+static u16 RegionMap_GetTerraCaveMapSecId(void)
 {
     s16 idx;
 
@@ -867,7 +867,7 @@ static u16 sub_8123F04(void)
     return gUnknown_085A1B8A[idx];
 }
 
-static void sub_8123F30(u16 *x, u16 *y)
+static void RegionMap_GetMarineCaveCoords(u16 *x, u16 *y)
 {
     u16 idx;
 
@@ -881,7 +881,7 @@ static void sub_8123F30(u16 *x, u16 *y)
     *y = gUnknown_085A1BAC[idx].y + MAPCURSOR_Y_MIN;
 }
 
-static bool32 sub_8123F74(u8 mapSecId)
+static bool32 RegionMap_IsPlayerInCave(u8 mapSecId)
 {
     int i;
 
@@ -895,20 +895,20 @@ static bool32 sub_8123F74(u8 mapSecId)
     return FALSE;
 }
 
-u16 sub_8123F9C(u16 mapSecId)
+u16 CorrectSpecialMapSecId(u16 mapSecId)
 {
-    return sub_8123EB4(mapSecId);
+    return CorrectSpecialMapSecId_Internal(mapSecId);
 }
 
-static void sub_8123FB0(void)
+static void RegionMap_GetPositionOfCursorWithinMapSection(void)
 {
     u16 x;
     u16 y;
-    u16 unk_003;
+    u16 posWithinMapSec;
 
     if (gRegionMap->mapSecId == MAPSEC_NONE)
     {
-        gRegionMap->unk_003 = 0;
+        gRegionMap->posWithinMapSec = 0;
         return;
     }
     if (!gRegionMap->zoomed)
@@ -921,12 +921,12 @@ static void sub_8123FB0(void)
         x = gRegionMap->zoomedCursorPosX;
         y = gRegionMap->zoomedCursorPosY;
     }
-    unk_003 = 0;
+    posWithinMapSec = 0;
     while (1)
     {
         if (x <= MAPCURSOR_X_MIN)
         {
-            if (sub_8124038(y))
+            if (RegionMap_IsMapSecIdInNextRow(y))
             {
                 y --;
                 x = MAPCURSOR_X_MAX + 1;
@@ -939,26 +939,26 @@ static void sub_8123FB0(void)
         else
         {
             x --;
-            if (GetRegionMapSectionIdAt(x, y) == gRegionMap->mapSecId)
+            if (GetRegionMapSectionIdAt_Internal(x, y) == gRegionMap->mapSecId)
             {
-                unk_003 ++;
+                posWithinMapSec ++;
             }
         }
     }
-    gRegionMap->unk_003 = unk_003;
+    gRegionMap->posWithinMapSec = posWithinMapSec;
 }
 
-static bool8 sub_8124038(u16 y)
+static bool8 RegionMap_IsMapSecIdInNextRow(u16 y)
 {
     u16 x;
 
     if (y -- == 0)
     {
-        return 0;
+        return FALSE;
     }
     for (x = MAPCURSOR_X_MIN; x <= MAPCURSOR_X_MAX; x ++)
     {
-        if (GetRegionMapSectionIdAt(x, y) == gRegionMap->mapSecId)
+        if (GetRegionMapSectionIdAt_Internal(x, y) == gRegionMap->mapSecId)
         {
             return TRUE;
         }
@@ -966,7 +966,7 @@ static bool8 sub_8124038(u16 y)
     return FALSE;
 }
 
-static void sub_8124088(struct Sprite *sprite)
+static void SpriteCallback_CursorFull(struct Sprite *sprite)
 {
     if (gRegionMap->cursorMovementFrameCounter != 0)
     {
@@ -976,7 +976,7 @@ static void sub_8124088(struct Sprite *sprite)
     }
 }
 
-static void TaskDummy8(struct Sprite *sprite)
+static void SpriteCallback_CursorZoomed(struct Sprite *sprite)
 {
 
 }
@@ -1000,13 +1000,13 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
     {
         sheet.data = gRegionMap->cursorSmallImage;
         sheet.size = sizeof(gRegionMap->cursorSmallImage);
-        template.callback = sub_8124088;
+        template.callback = SpriteCallback_CursorFull;
     }
     else
     {
         sheet.data = gRegionMap->cursorLargeImage;
         sheet.size = sizeof(gRegionMap->cursorLargeImage);
-        template.callback = TaskDummy8;
+        template.callback = SpriteCallback_CursorZoomed;
     }
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&palette);
@@ -1033,7 +1033,7 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
     }
 }
 
-static void sub_8124238(void)
+static void FreeRegionMapCursorSprite(void)
 {
     if (gRegionMap->cursorSprite != NULL)
     {
@@ -1053,7 +1053,7 @@ void sub_8124278(void)
     gRegionMap->cursorSprite->data3 = FALSE;
 }
 
-void sub_8124288(u16 tileTag, u16 paletteTag)
+void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
 {
     u8 spriteId;
     struct SpriteSheet sheet = {gUnknown_085A084C, 0x80, tileTag};
@@ -1085,5 +1085,37 @@ void sub_8124288(u16 tileTag, u16 paletteTag)
         gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 16 - 0x30;
         gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 16 - 0x42;
         gRegionMap->playerIconSprite->callback = sub_812445C;
+    }
+}
+
+static void HideRegionMapPlayerIcon(void)
+{
+    if (gRegionMap->playerIconSprite != NULL)
+    {
+        gRegionMap->playerIconSprite->invisible = TRUE;
+        gRegionMap->playerIconSprite->callback = SpriteCallbackDummy;
+    }
+}
+
+static void UnhideRegionMapPlayerIcon(void)
+{
+    if (gRegionMap->playerIconSprite != NULL)
+    {
+        if (gRegionMap->zoomed == TRUE)
+        {
+            gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 16 - 0x30;
+            gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 16 - 0x42;
+            gRegionMap->playerIconSprite->callback = sub_812445C;
+            gRegionMap->playerIconSprite->invisible = FALSE;
+        }
+        else
+        {
+            gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 8 + 4;
+            gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 8 + 4;
+            gRegionMap->playerIconSprite->pos2.x = 0;
+            gRegionMap->playerIconSprite->pos2.y = 0;
+            gRegionMap->playerIconSprite->callback = sub_81244EC;
+            gRegionMap->playerIconSprite->invisible = FALSE;
+        }
     }
 }
