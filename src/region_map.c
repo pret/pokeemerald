@@ -76,13 +76,14 @@ static void UnhideRegionMapPlayerIcon(void);
 static void RegionMapPlayerIconSpriteCallback_Zoomed(struct Sprite *sprite);
 static void RegionMapPlayerIconSpriteCallback_Full(struct Sprite *sprite);
 static void RegionMapPlayerIconSpriteCallback(struct Sprite *sprite);
-void sub_81248C0(void);
-void sub_81248D4(void);
-void sub_81248F4(void func(void));
+static void sub_81248C0(void);
+static void sub_81248D4(void);
+void sub_81248F4(void callback(void));
 void sub_8124904(void);
-void sub_8124A70(void);
-void sub_8124AD4(void);
+static void sub_8124A70(void);
+static void sub_8124AD4(void);
 void sub_8124BE4(void);
+void sub_8124CBC(struct Sprite *sprite);
 void sub_8124D14(void);
 
 // .rodata
@@ -120,6 +121,7 @@ extern const struct {
     u16 flag;
 } gUnknown_085A1EDC[];
 extern const struct SpritePalette gUnknown_085A1F10;
+extern const struct SpriteTemplate gUnknown_085A1F7C;
 
 // .text
 
@@ -1385,14 +1387,14 @@ void MCB2_FlyMap(void)
     }
 }
 
-void sub_81248C0(void)
+static void sub_81248C0(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_81248D4(void)
+static void sub_81248D4(void)
 {
     gUnknown_0203A148->unk_000();
     AnimateSprites();
@@ -1465,7 +1467,7 @@ void sub_8124904(void)
 }
 
 
-void sub_8124A70(void)
+static void sub_8124A70(void)
 {
     struct SpriteSheet sheet;
 
@@ -1477,4 +1479,52 @@ void sub_8124A70(void)
     LoadSpritePalette(&gUnknown_085A1F10);
     sub_8124AD4();
     sub_8124BE4();
+}
+
+static void sub_8124AD4(void)
+{
+    u16 canFlyFlag;
+    u16 i;
+    u16 x;
+    u16 y;
+    u16 width;
+    u16 height;
+    u16 shape;
+    u8 spriteId;
+
+    canFlyFlag = FLAG_VISITED_LITTLEROOT_TOWN;
+    for (i = 0; i < 16; i ++)
+    {
+        sub_8124630(i, &x, &y, &width, &height);
+        x = (x + 1) * 8 + 4;
+        y = (y + 2) * 8 + 4;
+        if (width == 2)
+        {
+            shape = ST_OAM_H_RECTANGLE;
+        }
+        else if (height == 2)
+        {
+            shape = ST_OAM_V_RECTANGLE;
+        }
+        else
+        {
+            shape = ST_OAM_SQUARE;
+        }
+        spriteId = CreateSprite(&gUnknown_085A1F7C, x, y, 10);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].oam.shape = shape;
+            if (FlagGet(canFlyFlag))
+            {
+                gSprites[spriteId].callback = sub_8124CBC;
+            }
+            else
+            {
+                shape += 3;
+            }
+            StartSpriteAnim(&gSprites[spriteId], shape);
+            gSprites[spriteId].data0 = i;
+        }
+        canFlyFlag ++;
+    }
 }
