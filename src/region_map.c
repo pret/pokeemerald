@@ -59,8 +59,9 @@ static bool8 RegionMap_IsMapSecIdInNextRow(u16 y);
 static void FreeRegionMapCursorSprite(void);
 static void HideRegionMapPlayerIcon(void);
 static void UnhideRegionMapPlayerIcon(void);
-void sub_812445C(struct Sprite *sprite);
-void sub_81244EC(struct Sprite *sprite);
+static void RegionMapPlayerIconSpriteCallback_Zoomed(struct Sprite *sprite);
+static void RegionMapPlayerIconSpriteCallback_Full(struct Sprite *sprite);
+static void RegionMapPlayerIconSpriteCallback(struct Sprite *sprite);
 
 // .rodata
 
@@ -1078,13 +1079,13 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     {
         gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 8 + 4;
         gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 8 + 4;
-        gRegionMap->playerIconSprite->callback = sub_81244EC;
+        gRegionMap->playerIconSprite->callback = RegionMapPlayerIconSpriteCallback_Full;
     }
     else
     {
         gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 16 - 0x30;
         gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 16 - 0x42;
-        gRegionMap->playerIconSprite->callback = sub_812445C;
+        gRegionMap->playerIconSprite->callback = RegionMapPlayerIconSpriteCallback_Zoomed;
     }
 }
 
@@ -1105,7 +1106,7 @@ static void UnhideRegionMapPlayerIcon(void)
         {
             gRegionMap->playerIconSprite->pos1.x = gRegionMap->playerIconSpritePosX * 16 - 0x30;
             gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 16 - 0x42;
-            gRegionMap->playerIconSprite->callback = sub_812445C;
+            gRegionMap->playerIconSprite->callback = RegionMapPlayerIconSpriteCallback_Zoomed;
             gRegionMap->playerIconSprite->invisible = FALSE;
         }
         else
@@ -1114,8 +1115,53 @@ static void UnhideRegionMapPlayerIcon(void)
             gRegionMap->playerIconSprite->pos1.y = gRegionMap->playerIconSpritePosY * 8 + 4;
             gRegionMap->playerIconSprite->pos2.x = 0;
             gRegionMap->playerIconSprite->pos2.y = 0;
-            gRegionMap->playerIconSprite->callback = sub_81244EC;
+            gRegionMap->playerIconSprite->callback = RegionMapPlayerIconSpriteCallback_Full;
             gRegionMap->playerIconSprite->invisible = FALSE;
         }
+    }
+}
+
+static void RegionMapPlayerIconSpriteCallback_Zoomed(struct Sprite *sprite)
+{
+    sprite->pos2.x = -2 * gRegionMap->scrollX;
+    sprite->pos2.y = -2 * gRegionMap->scrollY;
+    sprite->data0 = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
+    sprite->data1 = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
+    if (sprite->data0 < -8 || sprite->data0 > 0xa8 || sprite->data1 < -8 || sprite->data1 > 0xf8)
+    {
+        sprite->data2 = FALSE;
+    }
+    else
+    {
+        sprite->data2 = TRUE;
+    }
+    if (sprite->data2 == TRUE)
+    {
+        RegionMapPlayerIconSpriteCallback(sprite);
+    }
+    else
+    {
+        sprite->invisible = TRUE;
+    }
+}
+
+static void RegionMapPlayerIconSpriteCallback_Full(struct Sprite *sprite)
+{
+    RegionMapPlayerIconSpriteCallback(sprite);
+}
+
+static void RegionMapPlayerIconSpriteCallback(struct Sprite *sprite)
+{
+    if (gRegionMap->blinkPlayerIcon)
+    {
+        if (++ sprite->data7 > 16)
+        {
+            sprite->data7 = 0;
+            sprite->invisible = sprite->invisible ? FALSE : TRUE;
+        }
+    }
+    else
+    {
+        sprite->invisible = FALSE;
     }
 }
