@@ -5,44 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8124A70
-sub_8124A70: @ 8124A70
-	push {r4,r5,lr}
-	sub sp, 0x8
-	ldr r0, =gUnknown_085A1D68
-	ldr r5, =gUnknown_0203A148
-	ldr r1, [r5]
-	ldr r4, =0x0000088c
-	adds r1, r4
-	bl LZ77UnCompWram
-	ldr r0, [r5]
-	adds r0, r4
-	str r0, [sp]
-	ldr r1, =0xffff0000
-	ldr r0, [sp, 0x4]
-	ands r0, r1
-	movs r1, 0xE0
-	lsls r1, 1
-	orrs r0, r1
-	ldr r1, =0x0000ffff
-	ands r0, r1
-	movs r1, 0x80
-	lsls r1, 10
-	orrs r0, r1
-	str r0, [sp, 0x4]
-	mov r0, sp
-	bl LoadSpriteSheet
-	ldr r0, =gUnknown_085A1F10
-	bl LoadSpritePalette
-	bl sub_8124AD4
-	bl sub_8124BE4
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8124A70
-
 	thumb_func_start sub_8124AD4
 sub_8124AD4: @ 8124AD4
 	push {r4-r7,lr}

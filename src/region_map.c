@@ -46,7 +46,7 @@ EWRAM_DATA struct {
     /*0x004*/ u16 unk_004;
     /*0x006*/ u16 mapSecId;
     /*0x008*/ struct RegionMap regionMap;
-    /*0x88c*/ u8 filler_88c[0x1c0];
+    /*0x88c*/ u8 unk_88c[0x1c0];
     /*0xa4c*/ u8 unk_a4c[0x28];
 } *gUnknown_0203A148 = NULL; // a74
 
@@ -81,6 +81,8 @@ void sub_81248D4(void);
 void sub_81248F4(void func(void));
 void sub_8124904(void);
 void sub_8124A70(void);
+void sub_8124AD4(void);
+void sub_8124BE4(void);
 void sub_8124D14(void);
 
 // .rodata
@@ -106,16 +108,18 @@ extern const struct SpriteTemplate gUnknown_085A1C08;
 extern const struct OamData gUnknown_085A1C20;
 extern const union AnimCmd *const gUnknown_085A1C30[];
 extern const u8 gUnknown_085A1C34[];
-extern const struct BgTemplate gUnknown_085A1EE4[];
-extern const struct WindowTemplate gUnknown_085A1EF0[];
+extern const u16 gUnknown_085A1C38[];
 extern const u8 gUnknown_085A1C58[];
 extern const u8 gUnknown_085A1C90[];
-extern const u16 gUnknown_085A1C38[];
+extern const u8 gUnknown_085A1D68[];
+extern const struct BgTemplate gUnknown_085A1EE4[];
+extern const struct WindowTemplate gUnknown_085A1EF0[];
 extern const struct {
     const u8 *const *name;
     u16 mapSecId;
     u16 flag;
 } gUnknown_085A1EDC[];
+extern const struct SpritePalette gUnknown_085A1F10;
 
 // .text
 
@@ -1458,4 +1462,19 @@ void sub_8124904(void)
         schedule_bg_copy_tilemap_to_vram(0);
         gUnknown_03001180 = FALSE;
     }
+}
+
+
+void sub_8124A70(void)
+{
+    struct SpriteSheet sheet;
+
+    LZ77UnCompWram(gUnknown_085A1D68, gUnknown_0203A148->unk_88c);
+    sheet.data = gUnknown_0203A148->unk_88c;
+    sheet.size = 0x1c0;
+    sheet.tag = 2;
+    LoadSpriteSheet(&sheet);
+    LoadSpritePalette(&gUnknown_085A1F10);
+    sub_8124AD4();
+    sub_8124BE4();
 }
