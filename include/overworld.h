@@ -60,5 +60,6 @@ bool32 sub_8087598(void);
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 void warp_in(void);
 u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
+void sub_8086194(void);
 
 #endif //GUARD_ROM4_H

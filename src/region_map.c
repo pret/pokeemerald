@@ -3,6 +3,7 @@
 #include "global.h"
 #include "main.h"
 #include "menu.h"
+#include "malloc.h"
 #include "gpu_regs.h"
 #include "palette.h"
 #include "trig.h"
@@ -15,6 +16,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
+#include "text_window.h"
 #include "region_map.h"
 
 #define MAP_WIDTH 28
@@ -25,10 +27,6 @@
 #define MAPCURSOR_Y_MAX (MAPCURSOR_Y_MIN + MAP_HEIGHT - 1)
 
 // Static type declarations
-
-struct UnkStruct_0203A148 {
-    u8 filler_000[0xa74];
-};
 
 struct RegionMapLocation
 {
@@ -42,7 +40,15 @@ struct RegionMapLocation
 // Static RAM declarations
 
 EWRAM_DATA struct RegionMap *gRegionMap = NULL;
-EWRAM_DATA struct UnkStruct_0203A148 *gUnknown_0203A148 = NULL;
+EWRAM_DATA struct {
+    /*0x000*/ u8 filler_000[0x6];
+    /*0x006*/ u16 mapSecId;
+    /*0x008*/ struct RegionMap regionMap;
+    /*0x88c*/ u8 filler_88c[0x1c0];
+    /*0xa4c*/ u8 unk_a4c[0x28];
+} *gUnknown_0203A148 = NULL; // a74
+
+IWRAM_DATA bool32 gUnknown_03001180;
 
 // Static ROM declarations
 
@@ -68,6 +74,12 @@ static void UnhideRegionMapPlayerIcon(void);
 static void RegionMapPlayerIconSpriteCallback_Zoomed(struct Sprite *sprite);
 static void RegionMapPlayerIconSpriteCallback_Full(struct Sprite *sprite);
 static void RegionMapPlayerIconSpriteCallback(struct Sprite *sprite);
+void sub_81248C0(void);
+void sub_81248D4(void);
+void sub_81248F4(void func(void));
+void sub_8124904(void);
+void sub_8124A70(void);
+void sub_8124D14(void);
 
 // .rodata
 
@@ -92,6 +104,11 @@ extern const struct SpriteTemplate gUnknown_085A1C08;
 extern const struct OamData gUnknown_085A1C20;
 extern const union AnimCmd *const gUnknown_085A1C30[];
 extern const u8 gUnknown_085A1C34[];
+extern const struct BgTemplate gUnknown_085A1EE4[];
+extern const struct WindowTemplate gUnknown_085A1EF0[];
+extern const u8 gUnknown_085A1C58[];
+extern const u8 gUnknown_085A1C90[];
+extern const u16 gUnknown_085A1C38[];
 
 // .text
 
@@ -142,7 +159,7 @@ bool8 sub_8122DB0(void)
             }
             else
             {
-                LZ77UnCompVram(gUnknown_0859F77C, (u16 *)BG_SCREEN_ADDR(16));
+                LZ77UnCompVram(gUnknown_0859F77C, (u16 *)BG_CHAR_ADDR(2));
             }
             break;
         case 1:
@@ -1263,4 +1280,96 @@ bool32 sub_8124668(u8 mapSecId)
         }
     }
     return FALSE;
+}
+
+void MCB2_FlyMap(void)
+{
+    switch (gMain.state)
+    {
+        case 0:
+            SetVBlankCallback(NULL);
+            SetGpuReg(REG_OFFSET_DISPCNT, 0);
+            SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+            SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+            SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+            SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+            SetGpuReg(REG_OFFSET_BG2VOFS, 0);
+            SetGpuReg(REG_OFFSET_BG2HOFS, 0);
+            SetGpuReg(REG_OFFSET_BG3HOFS, 0);
+            SetGpuReg(REG_OFFSET_BG3VOFS, 0);
+            gUnknown_0203A148 = malloc(sizeof(*gUnknown_0203A148));
+            if (gUnknown_0203A148 == NULL)
+            {
+                SetMainCallback2(sub_8086194);
+            }
+            else
+            {
+                ResetPaletteFade();
+                ResetSpriteData();
+                FreeSpriteTileRanges();
+                FreeAllSpritePalettes();
+                gMain.state ++;
+            }
+            break;
+        case 1:
+            ResetBgsAndClearDma3BusyFlags(0);
+            InitBgsFromTemplates(1, gUnknown_085A1EE4, 3);
+            gMain.state ++;
+            break;
+        case 2:
+            InitWindows(gUnknown_085A1EF0);
+            DeactivateAllTextPrinters();
+            gMain.state ++;
+            break;
+        case 3:
+            sub_809882C(0, 0x65, 0xd0);
+            clear_scheduled_bg_copies_to_vram();
+            gMain.state ++;
+            break;
+        case 4:
+            InitRegionMap(&gUnknown_0203A148->regionMap, FALSE);
+            CreateRegionMapCursor(0, 0);
+            CreateRegionMapPlayerIcon(1, 1);
+            gUnknown_0203A148->mapSecId = gUnknown_0203A148->regionMap.mapSecId;
+            StringFill(gUnknown_0203A148->unk_a4c, CHAR_SPACE, 16);
+            gUnknown_03001180 = TRUE;
+            sub_8124904();
+            gMain.state ++;
+            break;
+        case 5:
+            LZ77UnCompVram(gUnknown_085A1C58, (u16 *)BG_CHAR_ADDR(3));
+            gMain.state ++;
+            break;
+        case 6:
+            LZ77UnCompVram(gUnknown_085A1C90, (u16 *)BG_SCREEN_ADDR(30));
+            gMain.state ++;
+            break;
+        case 7:
+            LoadPalette(gUnknown_085A1C38, 0x10, 0x20);
+            PutWindowTilemap(2);
+            FillWindowPixelBuffer(2, 0x00);
+            PrintTextOnWindow(2, 1, gText_FlyToWhere, 0, 1, 0, NULL);
+            schedule_bg_copy_tilemap_to_vram(0);
+            gMain.state ++;
+            break;
+        case 8:
+            sub_8124A70();
+            gMain.state ++;
+            break;
+        case 9:
+            BlendPalettes(-1, 16, 0);
+            SetVBlankCallback(sub_81248C0);
+            gMain.state ++;
+            break;
+        case 10:
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
+            SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+            ShowBg(0);
+            ShowBg(1);
+            ShowBg(2);
+            sub_81248F4(sub_8124D14);
+            SetMainCallback2(sub_81248D4);
+            gMain.state ++;
+            break;
+    }
 }

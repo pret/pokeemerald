@@ -9892,7 +9892,7 @@ _081B55E8:
 	.pool
 _081B5614:
 	ldr r1, =gUnknown_0203CEC8
-	ldr r0, =sub_8124690
+	ldr r0, =MCB2_FlyMap
 	b _081B5628
 	.pool
 _081B5624:
