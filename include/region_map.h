@@ -222,6 +222,24 @@ enum {
     MAPSEC_NONE
 };
 
+enum
+{
+    INPUT_EVENT_NONE,
+    INPUT_EVENT_MOVE_START,
+    INPUT_EVENT_MOVE_CONT,
+    INPUT_EVENT_MOVE_END,
+    INPUT_EVENT_A_BUTTON,
+    INPUT_EVENT_B_BUTTON,
+};
+
+enum {
+    MAPSECTYPE_NONE,
+    MAPSECTYPE_PLAIN,
+    MAPSECTYPE_CITY_CANFLY,
+    MAPSECTYPE_CITY_CANTFLY,
+    MAPSECTYPE_BATTLE_FRONTIER
+};
+
 struct RegionMap {
     /*0x000*/ u16 mapSecId;
     /*0x002*/ u8 iconDrawType;
@@ -276,24 +294,6 @@ struct RegionMap {
     /*0x184*/ u8 cursorSmallImage[0x100];
     /*0x284*/ u8 cursorLargeImage[0x600];
 }; // size = 0x884
-
-enum
-{
-    INPUT_EVENT_NONE,
-    INPUT_EVENT_MOVE_START,
-    INPUT_EVENT_MOVE_CONT,
-    INPUT_EVENT_MOVE_END,
-    INPUT_EVENT_A_BUTTON,
-    INPUT_EVENT_B_BUTTON,
-};
-
-enum {
-    MAPSECTYPE_NONE,
-    MAPSECTYPE_PLAIN,
-    MAPSECTYPE_CITY_CANFLY,
-    MAPSECTYPE_CITY_CANTFLY,
-    MAPSECTYPE_BATTLE_FRONTIER
-};
 
 // Exported RAM declarations
 

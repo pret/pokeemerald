@@ -14,6 +14,7 @@
 #include "rom6.h"
 #include "secret_base.h"
 #include "string_util.h"
+#include "international_string_util.h"
 #include "strings.h"
 #include "text.h"
 #include "text_window.h"
@@ -110,6 +111,11 @@ extern const struct WindowTemplate gUnknown_085A1EF0[];
 extern const u8 gUnknown_085A1C58[];
 extern const u8 gUnknown_085A1C90[];
 extern const u16 gUnknown_085A1C38[];
+extern const struct {
+    const u8 *const *name;
+    u16 mapSecId;
+    u16 flag;
+} gUnknown_085A1EDC[];
 
 // .text
 
@@ -1394,4 +1400,62 @@ void sub_81248F4(void callback(void))
 {
     gUnknown_0203A148->unk_000 = callback;
     gUnknown_0203A148->unk_004 = 0;
+}
+
+void sub_8124904(void)
+{
+    u16 i;
+    bool32 flag;
+    const u8 *name;
+
+    if (gUnknown_0203A148->regionMap.iconDrawType > MAPSECTYPE_NONE && gUnknown_0203A148->regionMap.iconDrawType <= MAPSECTYPE_BATTLE_FRONTIER)
+    {
+        flag = FALSE;
+        for (i = 0; i < 1; i ++)
+        {
+            if (gUnknown_0203A148->regionMap.mapSecId == gUnknown_085A1EDC[i].mapSecId)
+            {
+                if (FlagGet(gUnknown_085A1EDC[i].flag))
+                {
+                    StringLength(gUnknown_085A1EDC[i].name[gUnknown_0203A148->regionMap.posWithinMapSec]);
+                    flag = TRUE;
+                    sub_8198070(0, FALSE);
+                    SetWindowBorderStyle(1, FALSE, 0x65, 0x0d);
+                    PrintTextOnWindow(1, 1, gUnknown_0203A148->regionMap.mapSecName, 0, 1, 0, NULL);
+                    name = gUnknown_085A1EDC[i].name[gUnknown_0203A148->regionMap.posWithinMapSec];
+                    PrintTextOnWindow(1, 1, name, GetStringRightAlignXOffset(1, name, 0x60), 0x11, 0, NULL);
+                    schedule_bg_copy_tilemap_to_vram(0);
+                    gUnknown_03001180 = TRUE;
+                }
+                break;
+            }
+        }
+        if (!flag)
+        {
+            if (gUnknown_03001180 == TRUE)
+            {
+                sub_8198070(1, FALSE);
+                SetWindowBorderStyle(0, FALSE, 0x65, 0x0d);
+            }
+            else
+            {
+                FillWindowPixelBuffer(0, 0x11);
+            }
+            PrintTextOnWindow(0, 1, gUnknown_0203A148->regionMap.mapSecName, 0, 1, 0, NULL);
+            schedule_bg_copy_tilemap_to_vram(0);
+            gUnknown_03001180 = FALSE;
+        }
+    }
+    else
+    {
+        if (gUnknown_03001180 == TRUE)
+        {
+            sub_8198070(1, FALSE);
+            SetWindowBorderStyle(0, FALSE, 0x65, 0x0d);
+        }
+        FillWindowPixelBuffer(0, 0x11);
+        CopyWindowToVram(0, 2);
+        schedule_bg_copy_tilemap_to_vram(0);
+        gUnknown_03001180 = FALSE;
+    }
 }
