@@ -41,7 +41,8 @@ struct RegionMapLocation
 
 EWRAM_DATA struct RegionMap *gRegionMap = NULL;
 EWRAM_DATA struct {
-    /*0x000*/ u8 filler_000[0x6];
+    /*0x000*/ void (*unk_000)(void);
+    /*0x004*/ u16 unk_004;
     /*0x006*/ u16 mapSecId;
     /*0x008*/ struct RegionMap regionMap;
     /*0x88c*/ u8 filler_88c[0x1c0];
@@ -1372,4 +1373,25 @@ void MCB2_FlyMap(void)
             gMain.state ++;
             break;
     }
+}
+
+void sub_81248C0(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_81248D4(void)
+{
+    gUnknown_0203A148->unk_000();
+    AnimateSprites();
+    BuildOamBuffer();
+    do_scheduled_bg_tilemap_copies_to_vram();
+}
+
+void sub_81248F4(void callback(void))
+{
+    gUnknown_0203A148->unk_000 = callback;
+    gUnknown_0203A148->unk_004 = 0;
 }

@@ -5,42 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81248C0
-sub_81248C0: @ 81248C0
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81248C0
-
-	thumb_func_start sub_81248D4
-sub_81248D4: @ 81248D4
-	push {lr}
-	ldr r0, =gUnknown_0203A148
-	ldr r0, [r0]
-	ldr r0, [r0]
-	bl _call_via_r0
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl do_scheduled_bg_tilemap_copies_to_vram
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81248D4
-
-	thumb_func_start sub_81248F4
-sub_81248F4: @ 81248F4
-	ldr r1, =gUnknown_0203A148
-	ldr r1, [r1]
-	str r0, [r1]
-	movs r0, 0
-	strh r0, [r1, 0x4]
-	bx lr
-	.pool
-	thumb_func_end sub_81248F4
-
 	thumb_func_start sub_8124904
 sub_8124904: @ 8124904
 	push {r4-r7,lr}
