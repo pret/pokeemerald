@@ -82,7 +82,7 @@ void sub_81248F4(void callback(void));
 void sub_8124904(void);
 static void sub_8124A70(void);
 static void sub_8124AD4(void);
-void sub_8124BE4(void);
+static void sub_8124BE4(void);
 void sub_8124CBC(struct Sprite *sprite);
 void sub_8124D14(void);
 
@@ -121,6 +121,7 @@ extern const struct {
     u16 flag;
 } gUnknown_085A1EDC[];
 extern const struct SpritePalette gUnknown_085A1F10;
+extern const u16 gUnknown_085A1F18[][2];
 extern const struct SpriteTemplate gUnknown_085A1F7C;
 
 // .text
@@ -1496,8 +1497,8 @@ static void sub_8124AD4(void)
     for (i = 0; i < 16; i ++)
     {
         sub_8124630(i, &x, &y, &width, &height);
-        x = (x + 1) * 8 + 4;
-        y = (y + 2) * 8 + 4;
+        x = (x + MAPCURSOR_X_MIN) * 8 + 4;
+        y = (y + MAPCURSOR_Y_MIN) * 8 + 4;
         if (width == 2)
         {
             shape = ST_OAM_H_RECTANGLE;
@@ -1526,5 +1527,35 @@ static void sub_8124AD4(void)
             gSprites[spriteId].data0 = i;
         }
         canFlyFlag ++;
+    }
+}
+
+static void sub_8124BE4(void)
+{
+    u16 i;
+    u16 x;
+    u16 y;
+    u16 width;
+    u16 height;
+    u16 mapSecId;
+    u8 spriteId;
+
+    for (i = 0; gUnknown_085A1F18[i][1] != MAPSEC_NONE; i ++)
+    {
+        if (FlagGet(gUnknown_085A1F18[i][0]))
+        {
+            mapSecId = gUnknown_085A1F18[i][1];
+            sub_8124630(mapSecId, &x, &y, &width, &height);
+            x = (x + MAPCURSOR_X_MIN) * 8;
+            y = (y + MAPCURSOR_Y_MIN) * 8;
+            spriteId = CreateSprite(&gUnknown_085A1F7C, x, y, 10);
+            if (spriteId != MAX_SPRITES)
+            {
+                gSprites[spriteId].oam.size = 1;
+                gSprites[spriteId].callback = sub_8124CBC;
+                StartSpriteAnim(&gSprites[spriteId], 6);
+                gSprites[spriteId].data0 = mapSecId;
+            }
+        }
     }
 }
