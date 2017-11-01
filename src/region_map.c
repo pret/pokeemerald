@@ -13,6 +13,7 @@
 #include "rom6.h"
 #include "secret_base.h"
 #include "string_util.h"
+#include "strings.h"
 #include "text.h"
 #include "region_map.h"
 
@@ -632,7 +633,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
         case 8:
 
             gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
-            if (gRegionMap->mapSecId != MAPSEC_UNK_0x57)
+            if (gRegionMap->mapSecId != MAPSEC_SS_TIDAL)
             {
                 r4 = &gSaveBlock1Ptr->warp4;
                 mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
@@ -1207,4 +1208,29 @@ u8 *GetMapName(u8 *dest, u16 regionMapId, u16 padLength)
         *str = EOS;
     }
     return str;
+}
+
+u8 *sub_81245DC(u8 *dest, u16 mapSecId)
+{
+    switch (mapSecId)
+    {
+        case MAPSEC_SS_TIDAL:
+            return StringCopy(dest, gText_Ferry);
+        case MAPSEC_SECRET_BASE:
+            return StringCopy(dest, gText_SecretBase);
+        default:
+            return GetMapName(dest, mapSecId, 0);
+    }
+}
+
+u8 *sub_8124610(u8 *dest, u16 mapSecId)
+{
+    if (mapSecId == MAPSEC_AQUA_HIDEOUT_OLD)
+    {
+        return StringCopy(dest, gText_Hideout);
+    }
+    else
+    {
+        return sub_81245DC(dest, mapSecId);
+    }
 }

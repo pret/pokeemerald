@@ -5,50 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81245DC
-sub_81245DC: @ 81245DC
-	push {lr}
-	lsls r1, 16
-	lsrs r1, 16
-	cmp r1, 0x56
-	beq _081245F8
-	cmp r1, 0x57
-	bne _08124604
-	ldr r1, =gText_Ferry
-	bl StringCopy
-	b _0812460A
-	.pool
-_081245F8:
-	ldr r1, =gText_SecretBase
-	bl StringCopy
-	b _0812460A
-	.pool
-_08124604:
-	movs r2, 0
-	bl GetMapName
-_0812460A:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81245DC
-
-	thumb_func_start sub_8124610
-sub_8124610: @ 8124610
-	push {lr}
-	lsls r1, 16
-	lsrs r1, 16
-	cmp r1, 0x42
-	beq _08124620
-	bl sub_81245DC
-	b _08124626
-_08124620:
-	ldr r1, =gText_Hideout
-	bl StringCopy
-_08124626:
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8124610
-
 	thumb_func_start sub_8124630
 sub_8124630: @ 8124630
 	push {r4,r5,lr}

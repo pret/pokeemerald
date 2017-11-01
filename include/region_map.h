@@ -93,7 +93,7 @@ enum {
     MAPSEC_INSIDE_OF_TRUCK,
     MAPSEC_SKY_PILLAR,
     MAPSEC_SECRET_BASE,
-    MAPSEC_UNK_0x57,
+    MAPSEC_SS_TIDAL,
     MAPSEC_PALLET_TOWN,
     MAPSEC_VIRIDIAN_CITY,
     MAPSEC_PEWTER_CITY,
@@ -308,7 +308,7 @@ void FreeRegionMapIconResources(void);
 u16 GetRegionMapSectionIdAt(u16 x, u16 y);
 void CreateRegionMapPlayerIcon(u16 x, u16 y);
 void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
-bool32 sub_8124668(u16 mapSecId);
 u8 *GetMapName(u8 *, u16, u16);
+bool32 sub_8124668(u16 mapSecId);
 
 #endif //GUARD_REGION_MAP_H

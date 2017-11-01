@@ -71,5 +71,8 @@ extern const u8 gText_Decorate[];
 extern const u8 gText_PutAway[];
 extern const u8 gText_Toss2[];
 extern const u8 gText_Hoenn[];
+extern const u8 gText_Ferry[];
+extern const u8 gText_SecretBase[];
+extern const u8 gText_Hideout[];
 
 #endif //GUARD_STRINGS_H
