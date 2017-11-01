@@ -11,6 +11,9 @@
 #include "flags.h"
 #include "event_data.h"
 #include "rom6.h"
+#include "secret_base.h"
+#include "string_util.h"
+#include "text.h"
 #include "region_map.h"
 
 #define MAP_WIDTH 28
@@ -30,7 +33,7 @@ struct RegionMapLocation
 {
     u8 x, y;
     u8 width, height;
-    const u8 *regionMapSectionId;
+    const u8 *name;
 };
 
 // Static RAM declarations
@@ -1164,4 +1167,44 @@ static void RegionMapPlayerIconSpriteCallback(struct Sprite *sprite)
     {
         sprite->invisible = FALSE;
     }
+}
+
+void sub_812454C(void)
+{
+    if (gRegionMap->playerIsInCave)
+    {
+        gRegionMap->blinkPlayerIcon = TRUE;
+    }
+}
+
+u8 *GetMapName(u8 *dest, u16 regionMapId, u16 padLength)
+{
+    u8 *str;
+    u16 i;
+
+    if (regionMapId == MAPSEC_SECRET_BASE)
+    {
+        str = GetSecretBaseMapName(dest);
+    }
+    else if (regionMapId < MAPSEC_NONE)
+    {
+        str = StringCopy(dest, gRegionMapEntries[regionMapId].name);
+    }
+    else
+    {
+        if (padLength == 0)
+        {
+            padLength = 18;
+        }
+        return StringFill(dest, CHAR_SPACE, padLength);
+    }
+    if (padLength != 0)
+    {
+        for (i = str - dest; i < padLength; i ++)
+        {
+            *str++ = CHAR_SPACE;
+        }
+        *str = EOS;
+    }
+    return str;
 }
