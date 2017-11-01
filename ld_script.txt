@@ -169,7 +169,6 @@ SECTIONS {
         asm/dewford_trend.o(.text);
         src/heal_location.o(.text);
         src/region_map.o(.text);
-        asm/region_map.o(.text);
         asm/cute_sketch.o(.text);
         src/decoration.o(.text);
         asm/slot_machine.o(.text);

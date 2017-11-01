@@ -6,6 +6,7 @@
 #include "malloc.h"
 #include "gpu_regs.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "trig.h"
 #include "map_constants.h"
 #include "overworld.h"
@@ -18,6 +19,9 @@
 #include "strings.h"
 #include "text.h"
 #include "text_window.h"
+#include "songs.h"
+#include "m4a.h"
+#include "field_effect.h"
 #include "region_map.h"
 
 #define MAP_WIDTH 28
@@ -47,7 +51,8 @@ EWRAM_DATA struct {
     /*0x006*/ u16 mapSecId;
     /*0x008*/ struct RegionMap regionMap;
     /*0x88c*/ u8 unk_88c[0x1c0];
-    /*0xa4c*/ u8 unk_a4c[0x28];
+    /*0xa4c*/ u8 unk_a4c[0x26];
+    /*0xa72*/ bool8 unk_a72;
 } *gUnknown_0203A148 = NULL; // a74
 
 IWRAM_DATA bool32 gUnknown_03001180;
@@ -83,8 +88,10 @@ void sub_8124904(void);
 static void sub_8124A70(void);
 static void sub_8124AD4(void);
 static void sub_8124BE4(void);
-void sub_8124CBC(struct Sprite *sprite);
-void sub_8124D14(void);
+static void sub_8124CBC(struct Sprite *sprite);
+static void sub_8124D14(void);
+static void sub_8124D64(void);
+static void sub_8124E0C(void);
 
 // .rodata
 
@@ -123,6 +130,7 @@ extern const struct {
 extern const struct SpritePalette gUnknown_085A1F10;
 extern const u16 gUnknown_085A1F18[][2];
 extern const struct SpriteTemplate gUnknown_085A1F7C;
+extern const u8 gUnknown_085A1E3C[][3];
 
 // .text
 
@@ -1557,5 +1565,125 @@ static void sub_8124BE4(void)
                 gSprites[spriteId].data0 = mapSecId;
             }
         }
+    }
+}
+
+static void sub_8124CBC(struct Sprite *sprite)
+{
+    if (gUnknown_0203A148->regionMap.mapSecId == sprite->data0)
+    {
+        if (++ sprite->data1 > 16)
+        {
+            sprite->data1 = 0;
+            sprite->invisible = sprite->invisible ? FALSE : TRUE;
+        }
+    }
+    else
+    {
+        sprite->data1 = 16;
+        sprite->invisible = FALSE;
+    }
+}
+
+static void sub_8124D14(void)
+{
+    switch (gUnknown_0203A148->unk_004)
+    {
+        case 0:
+            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            gUnknown_0203A148->unk_004 ++;
+            break;
+        case 1:
+            if (!UpdatePaletteFade())
+            {
+                sub_81248F4(sub_8124D64);
+            }
+            break;
+    }
+}
+
+static void sub_8124D64(void)
+{
+    if (gUnknown_0203A148->unk_004 == 0)
+    {
+        switch (sub_81230AC())
+        {
+            case INPUT_EVENT_NONE:
+            case INPUT_EVENT_MOVE_START:
+            case INPUT_EVENT_MOVE_CONT:
+                break;
+            case INPUT_EVENT_MOVE_END:
+                sub_8124904();
+                break;
+            case INPUT_EVENT_A_BUTTON:
+                if (gUnknown_0203A148->regionMap.iconDrawType == MAPSECTYPE_CITY_CANFLY || gUnknown_0203A148->regionMap.iconDrawType == MAPSECTYPE_BATTLE_FRONTIER)
+                {
+                    m4aSongNumStart(SE_SELECT);
+                    gUnknown_0203A148->unk_a72 = TRUE;
+                    sub_81248F4(sub_8124E0C);
+                }
+                break;
+            case INPUT_EVENT_B_BUTTON:
+                m4aSongNumStart(SE_SELECT);
+                gUnknown_0203A148->unk_a72 = FALSE;
+                sub_81248F4(sub_8124E0C);
+                break;
+        }
+    }
+}
+
+static void sub_8124E0C(void)
+{
+    switch (gUnknown_0203A148->unk_004)
+    {
+        case 0:
+            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            gUnknown_0203A148->unk_004 ++;
+            break;
+        case 1:
+            if (!UpdatePaletteFade())
+            {
+                FreeRegionMapIconResources();
+                if (gUnknown_0203A148->unk_a72)
+                {
+                    switch (gUnknown_0203A148->regionMap.mapSecId)
+                    {
+                        case MAPSEC_SOUTHERN_ISLAND:
+                            sub_8084CCC(0x15);
+                            break;
+                        case MAPSEC_BATTLE_FRONTIER:
+                            sub_8084CCC(0x16);
+                            break;
+                        case MAPSEC_LITTLEROOT_TOWN:
+                            sub_8084CCC(gSaveBlock2Ptr->playerGender == MALE ? 0x0C : 0x0D);
+                            break;
+                        case MAPSEC_EVER_GRANDE_CITY:
+                            sub_8084CCC(FlagGet(SYS_POKEMON_LEAGUE_FLY) && gUnknown_0203A148->regionMap.posWithinMapSec == 0 ? 0x14 : 0x0B);
+                            break;
+                        default:
+                            if (gUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2] != 0)
+                            {
+                                sub_8084CCC(gUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2]);
+                            }
+                            else
+                            {
+                                warp1_set_2(gUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][0], gUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][1], -1);
+                            }
+                            break;
+                    }
+                    sub_80B69DC();
+                }
+                else
+                {
+                    SetMainCallback2(sub_81B58A8);
+                }
+                if (gUnknown_0203A148 != NULL)
+                {
+                    free(gUnknown_0203A148);
+                    gUnknown_0203A148 = NULL;
+                }
+                FreeAllWindowBuffers();
+            }
+            break;
     }
 }

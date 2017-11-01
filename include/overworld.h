@@ -61,5 +61,7 @@ void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 void warp_in(void);
 u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
 void sub_8086194(void);
+void sub_8084CCC(u8 spawn);
+void warp1_set_2(s8 grp, s8 num, s8 wrp);
 
 #endif //GUARD_ROM4_H
