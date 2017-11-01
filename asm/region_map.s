@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8124630
-sub_8124630: @ 8124630
-	push {r4,r5,lr}
-	ldr r5, [sp, 0xC]
-	lsls r0, 16
-	ldr r4, =gRegionMapEntries
-	lsrs r0, 13
-	adds r0, r4
-	ldrb r4, [r0]
-	strh r4, [r1]
-	ldrb r1, [r0, 0x1]
-	strh r1, [r2]
-	ldrb r1, [r0, 0x2]
-	strh r1, [r3]
-	ldrb r0, [r0, 0x3]
-	strh r0, [r5]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8124630
-
-	thumb_func_start sub_8124658
-sub_8124658: @ 8124658
-	ldr r0, =gRegionMap
-	ldr r0, [r0]
-	adds r0, 0x78
-	ldrb r0, [r0]
-	bx lr
-	.pool
-	thumb_func_end sub_8124658
-
-	thumb_func_start sub_8124668
-sub_8124668: @ 8124668
-	push {lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	movs r1, 0
-	ldr r3, =gUnknown_085A1C34
-_08124672:
-	adds r0, r1, r3
-	ldrb r0, [r0]
-	cmp r2, r0
-	bne _08124684
-	movs r0, 0x1
-	b _0812468C
-	.pool
-_08124684:
-	adds r1, 0x1
-	cmp r1, 0x2
-	bls _08124672
-	movs r0, 0
-_0812468C:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8124668
-
 	thumb_func_start sub_8124690
 sub_8124690: @ 8124690
 	push {r4,lr}

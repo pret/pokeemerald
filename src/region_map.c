@@ -32,8 +32,10 @@ struct UnkStruct_0203A148 {
 
 struct RegionMapLocation
 {
-    u8 x, y;
-    u8 width, height;
+    u8 x;
+    u8 y;
+    u8 width;
+    u8 height;
     const u8 *name;
 };
 
@@ -89,6 +91,7 @@ extern const struct SpritePalette gUnknown_085A1C00;
 extern const struct SpriteTemplate gUnknown_085A1C08;
 extern const struct OamData gUnknown_085A1C20;
 extern const union AnimCmd *const gUnknown_085A1C30[];
+extern const u8 gUnknown_085A1C34[];
 
 // .text
 
@@ -1233,4 +1236,31 @@ u8 *sub_8124610(u8 *dest, u16 mapSecId)
     {
         return sub_81245DC(dest, mapSecId);
     }
+}
+
+void sub_8124630(u16 mapSecId, u16 *x, u16 *y, u16 *width, u16 *height)
+{
+    *x = gRegionMapEntries[mapSecId].x;
+    *y = gRegionMapEntries[mapSecId].y;
+    *width = gRegionMapEntries[mapSecId].width;
+    *height = gRegionMapEntries[mapSecId].height;
+}
+
+bool8 sub_8124658(void)
+{
+    return gRegionMap->zoomed;
+}
+
+bool32 sub_8124668(u8 mapSecId)
+{
+    u32 i;
+
+    for (i = 0; i < 3; i ++)
+    {
+        if (mapSecId == gUnknown_085A1C34[i])
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
