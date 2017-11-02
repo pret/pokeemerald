@@ -126,10 +126,69 @@ static const u8 sRegionMap_MapSectionLayout[] = {
 
 #include "data/region_map/region_map_entries.h"
 
-extern const u16 gUnknown_085A1B24[][2];
-extern const u16 gUnknown_085A1B84[];
-extern const u16 gUnknown_085A1B8A[];
-extern const struct UCoords16 gUnknown_085A1BAC[];
+static const u16 sRegionMap_SpecialPlaceLocations[][2] = {
+    {MAPSEC_UNDERWATER_TERRA_CAVE, MAPSEC_ROUTE_105},
+    {MAPSEC_UNDERWATER_124, MAPSEC_ROUTE_124},
+    {MAPSEC_UNDERWATER_UNK1, MAPSEC_ROUTE_129},
+    {MAPSEC_UNDERWATER_125, MAPSEC_ROUTE_126},
+    {MAPSEC_UNDERWATER_126, MAPSEC_ROUTE_127},
+    {MAPSEC_UNDERWATER_127, MAPSEC_ROUTE_128},
+    {MAPSEC_UNDERWATER_129, MAPSEC_ROUTE_129},
+    {MAPSEC_UNDERWATER_SOOTOPOLIS, MAPSEC_SOOTOPOLIS_CITY},
+    {MAPSEC_UNDERWATER_128, MAPSEC_ROUTE_128},
+    {MAPSEC_AQUA_HIDEOUT, MAPSEC_LILYCOVE_CITY},
+    {MAPSEC_AQUA_HIDEOUT_OLD, MAPSEC_LILYCOVE_CITY},
+    {MAPSEC_MAGMA_HIDEOUT, MAPSEC_ROUTE_112},
+    {MAPSEC_UNDERWATER_SEALED_CHAMBER, MAPSEC_ROUTE_134},
+    {MAPSEC_PETALBURG_WOODS, MAPSEC_ROUTE_104},
+    {MAPSEC_JAGGED_PASS, MAPSEC_ROUTE_112},
+    {MAPSEC_MT_PYRE, MAPSEC_ROUTE_122},
+    {MAPSEC_SKY_PILLAR, MAPSEC_ROUTE_131},
+    {MAPSEC_MIRAGE_TOWER, MAPSEC_ROUTE_111},
+    {MAPSEC_TRAINER_HILL, MAPSEC_ROUTE_111},
+    {MAPSEC_DESERT_UNDERPASS, MAPSEC_ROUTE_114},
+    {MAPSEC_ALTERING_CAVE_2, MAPSEC_ROUTE_103},
+    {MAPSEC_ARTISAN_CAVE, MAPSEC_ROUTE_103},
+    {MAPSEC_ABANDONED_SHIP, MAPSEC_ROUTE_108},
+    {MAPSEC_NONE, MAPSEC_NONE}
+};
+
+static const u16 sRegionMap_MarineCaveMapSecIds[] = {
+    MAPSEC_MARINE_CAVE,
+    MAPSEC_UNDERWATER_MARINE_CAVE,
+    MAPSEC_UNDERWATER_MARINE_CAVE
+};
+
+static const u16 sTerraCaveMapSectionIds[] = {
+    MAPSEC_ROUTE_114,
+    MAPSEC_ROUTE_114,
+    MAPSEC_ROUTE_115,
+    MAPSEC_ROUTE_115,
+    MAPSEC_ROUTE_116,
+    MAPSEC_ROUTE_116,
+    MAPSEC_ROUTE_118,
+    MAPSEC_ROUTE_118,
+    MAPSEC_ROUTE_105,
+    MAPSEC_ROUTE_105,
+    MAPSEC_ROUTE_125,
+    MAPSEC_ROUTE_125,
+    MAPSEC_ROUTE_127,
+    MAPSEC_ROUTE_127,
+    MAPSEC_ROUTE_129,
+    MAPSEC_ROUTE_129
+};
+
+static const struct UCoords16 sTerraCaveLocationCoords[] = {
+    {0x00, 0x0a},
+    {0x00, 0x0c},
+    {0x18, 0x03},
+    {0x19, 0x04},
+    {0x19, 0x06},
+    {0x19, 0x07},
+    {0x18, 0x0a},
+    {0x18, 0x0a}
+};
+
 extern const u8 gUnknown_085A1BCC[];
 extern const struct SpritePalette gUnknown_085A1C00;
 extern const struct SpriteTemplate gUnknown_085A1C08;
@@ -656,7 +715,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             mapHeight = gMapHeader.mapData->height;
             x = gSaveBlock1Ptr->pos.x;
             y = gSaveBlock1Ptr->pos.y;
-            if (gRegionMap->mapSecId == MAPSEC_UNDERWATER || gRegionMap->mapSecId == MAPSEC_UNDERWATER_MARINE_CAVE)
+            if (gRegionMap->mapSecId == MAPSEC_UNDERWATER_128 || gRegionMap->mapSecId == MAPSEC_UNDERWATER_MARINE_CAVE)
             {
                 gRegionMap->playerIsInCave = TRUE;
             }
@@ -907,16 +966,16 @@ static u16 CorrectSpecialMapSecId_Internal(u16 mapSecId)
 
     for (i = 0; i < 3; i ++)
     {
-        if (gUnknown_085A1B84[i] == mapSecId)
+        if (sRegionMap_MarineCaveMapSecIds[i] == mapSecId)
         {
             return RegionMap_GetTerraCaveMapSecId();
         }
     }
-    for (i = 0; gUnknown_085A1B24[i][0] != MAPSEC_NONE; i ++)
+    for (i = 0; sRegionMap_SpecialPlaceLocations[i][0] != MAPSEC_NONE; i ++)
     {
-        if (gUnknown_085A1B24[i][0] == mapSecId)
+        if (sRegionMap_SpecialPlaceLocations[i][0] == mapSecId)
         {
-            return gUnknown_085A1B24[i][1];
+            return sRegionMap_SpecialPlaceLocations[i][1];
         }
     }
     return mapSecId;
@@ -931,7 +990,7 @@ static u16 RegionMap_GetTerraCaveMapSecId(void)
     {
         idx = 0;
     }
-    return gUnknown_085A1B8A[idx];
+    return sTerraCaveMapSectionIds[idx];
 }
 
 static void RegionMap_GetMarineCaveCoords(u16 *x, u16 *y)
@@ -944,8 +1003,8 @@ static void RegionMap_GetMarineCaveCoords(u16 *x, u16 *y)
         idx = 9;
     }
     idx -= 9;
-    *x = gUnknown_085A1BAC[idx].x + MAPCURSOR_X_MIN;
-    *y = gUnknown_085A1BAC[idx].y + MAPCURSOR_Y_MIN;
+    *x = sTerraCaveLocationCoords[idx].x + MAPCURSOR_X_MIN;
+    *y = sTerraCaveLocationCoords[idx].y + MAPCURSOR_Y_MIN;
 }
 
 static bool32 RegionMap_IsPlayerInCave(u8 mapSecId)
