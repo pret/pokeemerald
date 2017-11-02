@@ -44,8 +44,8 @@ struct RegionMapLocation
 
 // Static RAM declarations
 
-EWRAM_DATA struct RegionMap *gRegionMap = NULL;
-EWRAM_DATA struct {
+static EWRAM_DATA struct RegionMap *gRegionMap = NULL;
+static EWRAM_DATA struct {
     /*0x000*/ void (*unk_000)(void);
     /*0x004*/ u16 unk_004;
     /*0x006*/ u16 mapSecId;
@@ -55,7 +55,8 @@ EWRAM_DATA struct {
     /*0xa72*/ bool8 unk_a72;
 } *gUnknown_0203A148 = NULL; // a74
 
-IWRAM_DATA bool32 gUnknown_03001180;
+static bool32 gUnknown_03001180;
+static bool32 gUnknown_03001184;
 
 // Static ROM declarations
 
