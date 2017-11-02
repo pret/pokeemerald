@@ -5,64 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_811A868
-sub_811A868: @ 811A868
-	push {lr}
-	lsls r0, 16
-	lsrs r2, r0, 16
-	movs r0, 0
-	ldr r1, =gUnknown_08597530
-_0811A872:
-	ldrh r3, [r1]
-	cmp r2, r3
-	beq _0811A884
-	adds r1, 0x8
-	adds r0, 0x1
-	cmp r0, 0x3
-	bls _0811A872
-	movs r0, 0x1
-	negs r0, r0
-_0811A884:
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_811A868
-
-	thumb_func_start sub_811A88C
-sub_811A88C: @ 811A88C
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_811A868
-	adds r1, r0, 0
-	mvns r1, r1
-	negs r0, r1
-	orrs r0, r1
-	lsrs r0, 31
-	pop {r1}
-	bx r1
-	thumb_func_end sub_811A88C
-
-	thumb_func_start sub_811A8A4
-sub_811A8A4: @ 811A8A4
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_811A868
-	adds r4, r0, 0
-	bl ResetTasks
-	ldr r0, =gUnknown_08597530
-	lsls r4, 3
-	adds r0, 0x4
-	adds r4, r0
-	ldr r0, [r4]
-	bl sub_811A4D0
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_811A8A4
-
 	thumb_func_start sub_811A8CC
 sub_811A8CC: @ 811A8CC
 	push {lr}
