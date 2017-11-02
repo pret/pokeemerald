@@ -71,7 +71,7 @@ void sub_80EA120(u8 taskId);
 void sub_80EA13C(u8 taskId);
 void sub_80EA18C(u8 taskId);
 void task_pc_turn_off(u8 taskId);
-u8 sub_80EA20C(u8 sbId);
+u8 sub_80EA20C(u8 secretBaseRecordId);
 
 // .rodata
 
@@ -322,29 +322,29 @@ void sub_80E8E18(void)
 
 void sub_80E8EE0(struct MapEvents *events)
 {
-    u16 bgevidx;
-    u16 idx;
-    u16 jdx;
+    u16 bgEventIndex;
+    u16 i;
+    u16 j;
     s16 tile_id;
     s16 x;
     s16 y;
 
-    for (bgevidx = 0; bgevidx < events->bgEventCount; bgevidx ++)
+    for (bgEventIndex = 0; bgEventIndex < events->bgEventCount; bgEventIndex ++)
     {
-        if (events->bgEvents[bgevidx].kind == 8)
+        if (events->bgEvents[bgEventIndex].kind == 8)
         {
-            for (jdx = 0; jdx < 20; jdx ++)
+            for (j = 0; j < 20; j ++)
             {
-                if (gSaveBlock1Ptr->secretBases[jdx].secretBaseId == events->bgEvents[bgevidx].bgUnion.secretBaseId)
+                if (gSaveBlock1Ptr->secretBases[j].secretBaseId == events->bgEvents[bgEventIndex].bgUnion.secretBaseId)
                 {
-                    x = events->bgEvents[bgevidx].x + 7;
-                    y = events->bgEvents[bgevidx].y + 7;
+                    x = events->bgEvents[bgEventIndex].x + 7;
+                    y = events->bgEvents[bgEventIndex].y + 7;
                     tile_id = MapGridGetMetatileIdAt(x, y);
-                    for (idx = 0; idx < 7; idx ++)
+                    for (i = 0; i < 7; i ++)
                     {
-                        if (gUnknown_0858CFCC[idx].tile1 == tile_id)
+                        if (gUnknown_0858CFCC[i].tile1 == tile_id)
                         {
-                            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[idx].tile2 | 0xc00);
+                            MapGridSetMetatileIdAt(x, y, gUnknown_0858CFCC[i].tile2 | 0xc00);
                             break;
                         }
                     }
@@ -365,7 +365,7 @@ void sub_80E8F9C(void)
 
 void sub_80E8FD0(u8 taskId)
 {
-    u16 sbrId;
+    u16 secretBaseRecordId;
 
     switch (gTasks[taskId].data[0])
     {
@@ -376,10 +376,10 @@ void sub_80E8FD0(u8 taskId)
             }
             break;
         case 1:
-            sbrId = VarGet(VAR_0x4054);
-            if (gSaveBlock1Ptr->secretBases[sbrId].sbr_field_10 < 255)
+            secretBaseRecordId = VarGet(VAR_0x4054);
+            if (gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_10 < 255)
             {
-                gSaveBlock1Ptr->secretBases[sbrId].sbr_field_10 ++;
+                gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_10 ++;
             }
             sub_80E8F9C();
             warp_in();
@@ -503,7 +503,7 @@ void sub_80E933C(void)
     u8 metatile;
     u8 category;
     u8 permission;
-    u8 ndecor;
+    u8 nDecor;
     u16 curBase;
 
     objid = 0;
@@ -511,16 +511,16 @@ void sub_80E933C(void)
     {
         roomdecor = gSaveBlock1Ptr->playerRoomDecor;
         roomdecorpos = gSaveBlock1Ptr->playerRoomDecorPos;
-        ndecor = 12;
+        nDecor = 12;
     }
     else
     {
         curBase = VarGet(VAR_0x4054);
         roomdecor = gSaveBlock1Ptr->secretBases[curBase].decorations;
         roomdecorpos = gSaveBlock1Ptr->secretBases[curBase].decorationPos;
-        ndecor = 16;
+        nDecor = 16;
     }
-    for (decidx = 0; decidx < ndecor; decidx ++)
+    for (decidx = 0; decidx < nDecor; decidx ++)
     {
         if (roomdecor[decidx] != DECOR_NONE)
         {
@@ -571,15 +571,15 @@ void sub_80E933C(void)
 
 void sub_80E9578(void)
 {
-    u8 objIdx;
+    u8 objectEventIdx;
     u16 flagId;
 
-    for (objIdx = 0; objIdx < gMapHeader.events->mapObjectCount; objIdx ++)
+    for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->mapObjectCount; objectEventIdx ++)
     {
-        flagId = gMapHeader.events->mapObjects[objIdx].flagId;
+        flagId = gMapHeader.events->mapObjects[objectEventIdx].flagId;
         if (flagId >= 0xAE && flagId <= 0xBB)
         {
-            RemoveFieldObjectByLocalIdAndMap(gMapHeader.events->mapObjects[objIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            RemoveFieldObjectByLocalIdAndMap(gMapHeader.events->mapObjects[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
             FlagSet(flagId);
         }
     }
@@ -592,13 +592,13 @@ void sub_80E95D4(void)
 
 void sub_80E9608(struct Coords16 *coords, struct MapEvents *events)
 {
-    s16 bgevtidx;
+    s16 bgEventIdx;
 
-    for (bgevtidx = 0; bgevtidx < events->bgEventCount; bgevtidx ++)
+    for (bgEventIdx = 0; bgEventIdx < events->bgEventCount; bgEventIdx ++)
     {
-        if (events->bgEvents[bgevtidx].kind == 8 && coords->x == events->bgEvents[bgevtidx].x + 7 && coords->y == events->bgEvents[bgevtidx].y + 7)
+        if (events->bgEvents[bgEventIdx].kind == 8 && coords->x == events->bgEvents[bgEventIdx].x + 7 && coords->y == events->bgEvents[bgEventIdx].y + 7)
         {
-            sCurSecretBaseId = events->bgEvents[bgevtidx].bgUnion.secretBaseId;
+            sCurSecretBaseId = events->bgEvents[bgEventIdx].bgUnion.secretBaseId;
             break;
         }
     }
@@ -665,10 +665,10 @@ void sub_80E9744(void)
     }
 }
 
-u8 *sub_80E9780(u8 *dest, u8 sbId)
+u8 *sub_80E9780(u8 *dest, u8 secretBaseRecordId)
 {
-    *StringCopyN(dest, gSaveBlock1Ptr->secretBases[sbId].trainerName, sub_80E8DF4(gSaveBlock1Ptr->secretBases[sbId].trainerName)) = EOS;
-    ConvertInternationalString(dest, gSaveBlock1Ptr->secretBases[sbId].language);
+    *StringCopyN(dest, gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName, sub_80E8DF4(gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName)) = EOS;
+    ConvertInternationalString(dest, gSaveBlock1Ptr->secretBases[secretBaseRecordId].language);
     return StringAppend(dest, gText_ApostropheSBase);
 }
 
@@ -679,18 +679,18 @@ u8 *GetSecretBaseMapName(u8 *dest)
 
 void sub_80E980C(void)
 {
-    u8 sbId;
+    u8 secretBaseRecordId;
     const u8 *src;
 
-    sbId = VarGet(VAR_0x4054);
-    src = gSaveBlock1Ptr->secretBases[sbId].trainerName;
+    secretBaseRecordId = VarGet(VAR_0x4054);
+    src = gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName;
     *StringCopyN(gStringVar1, src, sub_80E8DF4(src)) = EOS;
-    ConvertInternationalString(gStringVar1, gSaveBlock1Ptr->secretBases[sbId].language);
+    ConvertInternationalString(gStringVar1, gSaveBlock1Ptr->secretBases[secretBaseRecordId].language);
 }
 
-bool8 sub_80E9878(u8 sbId)
+bool8 sub_80E9878(u8 secretBaseRecordId)
 {
-    if (gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_6 != 0)
+    if (gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_6 != 0)
     {
         return TRUE;
     }
@@ -998,18 +998,18 @@ void sub_80E9B70(void)
 
 u8 sub_80E9BA8(void)
 {
-    u8 tot;
+    u8 sum;
     s16 i;
 
-    tot = 0;
+    sum = 0;
     for (i = 1; i < 20; i ++)
     {
         if (sub_80E9878(i) == TRUE)
         {
-            tot ++;
+            sum ++;
         }
     }
-    return tot;
+    return sum;
 }
 
 void sub_80E9BDC(void)
@@ -1072,23 +1072,23 @@ void game_continue(u8 taskId)
 {
     s16 *data;
     u8 i;
-    u8 ct;
+    u8 count;
 
     data = gTasks[taskId].data;
-    ct = 0;
+    count = 0;
     for (i = 1; i < 20; i ++)
     {
         if (sub_80E9878(i))
         {
-            sub_80E9780(gUnknown_0203A020->names[ct], i);
-            gUnknown_0203A020->items[ct].unk_00 = gUnknown_0203A020->names[ct];
-            gUnknown_0203A020->items[ct].unk_04 = i;
-            ct ++;
+            sub_80E9780(gUnknown_0203A020->names[count], i);
+            gUnknown_0203A020->items[count].unk_00 = gUnknown_0203A020->names[count];
+            gUnknown_0203A020->items[count].unk_04 = i;
+            count ++;
         }
     }
-    gUnknown_0203A020->items[ct].unk_00 = gText_Cancel;
-    gUnknown_0203A020->items[ct].unk_04 = -2;
-    data[0] = ct + 1;
+    gUnknown_0203A020->items[count].unk_00 = gText_Cancel;
+    gUnknown_0203A020->items[count].unk_04 = -2;
+    data[0] = count + 1;
     if (data[0] < 8)
     {
         data[3] = data[0];
@@ -1277,9 +1277,9 @@ void task_pc_turn_off(u8 taskId)
     DestroyTask(taskId);
 }
 
-u8 sub_80EA20C(u8 sbId)
+u8 sub_80EA20C(u8 secretBaseRecordId)
 {
-    return (gSaveBlock1Ptr->secretBases[sbId].trainerId[0] % 5) + (gSaveBlock1Ptr->secretBases[sbId].gender * 5);
+    return (gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerId[0] % 5) + (gSaveBlock1Ptr->secretBases[secretBaseRecordId].gender * 5);
 }
 
 const u8 *sub_80EA250(void)
@@ -1340,10 +1340,10 @@ void sub_80EA30C(void)
 
 void sub_80EA354(void)
 {
-    u16 sbId;
+    u16 secretBaseRecordId;
     u8 i;
 
-    sbId = VarGet(VAR_0x4054);
+    secretBaseRecordId = VarGet(VAR_0x4054);
     if (!FlagGet(0x922))
     {
         for (i = 0; i < 20; i ++)
@@ -1352,8 +1352,8 @@ void sub_80EA354(void)
         }
         FlagSet(0x922);
     }
-    gSpecialVar_0x8004 = sub_80EA20C(sbId);
-    gScriptResult = gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_5;
+    gSpecialVar_0x8004 = sub_80EA20C(secretBaseRecordId);
+    gScriptResult = gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_5;
 }
 
 
@@ -1496,30 +1496,30 @@ void sub_80EA3E4(u8 taskId)
     }
 }
 
-void sub_80EA828(u8 sbId, struct SecretBaseRecord *base, u32 version, u32 language)
+void sub_80EA828(u8 secretBaseRecordId, struct SecretBaseRecord *base, u32 version, u32 language)
 {
-    int strlen;
+    int stringLength;
     u8 *name;
 
-    gSaveBlock1Ptr->secretBases[sbId] = *base;
-    gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_6 = 2;
+    gSaveBlock1Ptr->secretBases[secretBaseRecordId] = *base;
+    gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_6 = 2;
     if (version == VERSION_SAPPHIRE || version == VERSION_RUBY)
     {
-        gSaveBlock1Ptr->secretBases[sbId].language = LANGUAGE_ENGLISH;
+        gSaveBlock1Ptr->secretBases[secretBaseRecordId].language = LANGUAGE_ENGLISH;
     }
     if (version == VERSION_EMERALD && language == LANGUAGE_JAPANESE)
     {
-        name = gSaveBlock1Ptr->secretBases[sbId].trainerName;
-        for (strlen = 0; strlen < 7; strlen ++)
+        name = gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerName;
+        for (stringLength = 0; stringLength < 7; stringLength ++)
         {
-            if (name[strlen] == EOS)
+            if (name[stringLength] == EOS)
             {
                 break;
             }
         }
-        if (strlen > 5)
+        if (stringLength > 5)
         {
-            gSaveBlock1Ptr->secretBases[sbId].language = LANGUAGE_ENGLISH;
+            gSaveBlock1Ptr->secretBases[secretBaseRecordId].language = LANGUAGE_ENGLISH;
         }
     }
 }
@@ -1560,13 +1560,13 @@ bool8 sub_80EA950(struct SecretBaseRecord *sbr1, struct SecretBaseRecord *sbr2)
     return FALSE;
 }
 
-s16 sub_80EA990(u8 sbId)
+s16 sub_80EA990(u8 secretBaseRecordId)
 {
     s16 i;
 
     for (i = 0; i < 20; i ++)
     {
-        if (gSaveBlock1Ptr->secretBases[i].secretBaseId == sbId)
+        if (gSaveBlock1Ptr->secretBases[i].secretBaseId == secretBaseRecordId)
         {
             return i;
         }
@@ -1604,40 +1604,40 @@ u8 sub_80EAA18(void)
 
 u8 sub_80EAA64(struct SecretBaseRecord *base, u32 version, u32 language)
 {
-    s16 sbId;
+    s16 secretBaseRecordId;
 
     if (base->secretBaseId == 0)
     {
         return 0;
     }
-    sbId = sub_80EA990(base->secretBaseId);
-    if (sbId != 0)
+    secretBaseRecordId = sub_80EA990(base->secretBaseId);
+    if (secretBaseRecordId != 0)
     {
-        if (sbId != -1)
+        if (secretBaseRecordId != -1)
         {
-            if (gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_0 == 1)
+            if (gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_0 == 1)
             {
                 return 0;
             }
-            if (gSaveBlock1Ptr->secretBases[sbId].sbr_field_1_6 != 2 || base->sbr_field_1_0 == 1)
+            if (gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_6 != 2 || base->sbr_field_1_0 == 1)
             {
-                sub_80EA828(sbId, base, version, language);
-                return sbId;
+                sub_80EA828(secretBaseRecordId, base, version, language);
+                return secretBaseRecordId;
             }
         }
         else
         {
-            sbId = sub_80EA9D8();
-            if (sbId != 0)
+            secretBaseRecordId = sub_80EA9D8();
+            if (secretBaseRecordId != 0)
             {
-                sub_80EA828(sbId, base, version, language);
-                return sbId;
+                sub_80EA828(secretBaseRecordId, base, version, language);
+                return secretBaseRecordId;
             }
-            sbId = sub_80EAA18();
-            if (sbId != 0)
+            secretBaseRecordId = sub_80EAA18();
+            if (secretBaseRecordId != 0)
             {
-                sub_80EA828(sbId, base, version, language);
-                return sbId;
+                sub_80EA828(secretBaseRecordId, base, version, language);
+                return secretBaseRecordId;
             }
         }
     }
