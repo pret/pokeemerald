@@ -189,7 +189,10 @@ static const struct UCoords16 sTerraCaveLocationCoords[] = {
     {0x18, 0x0a}
 };
 
-extern const u8 gUnknown_085A1BCC[];
+static const u8 sRegionMap_MapSecAquaHideoutOld[] = {
+    MAPSEC_AQUA_HIDEOUT_OLD
+};
+
 extern const struct SpritePalette gUnknown_085A1C00;
 extern const struct SpriteTemplate gUnknown_085A1C08;
 extern const struct OamData gUnknown_085A1C20;
@@ -1009,11 +1012,11 @@ static void RegionMap_GetMarineCaveCoords(u16 *x, u16 *y)
 
 static bool32 RegionMap_IsPlayerInCave(u8 mapSecId)
 {
-    int i;
+    u32 i;
 
-    for (i = 0; i == 0; i ++)
+    for (i = 0; i < 1; i ++)
     {
-        if (gUnknown_085A1BCC[i] == mapSecId)
+        if (sRegionMap_MapSecAquaHideoutOld[i] == mapSecId)
         {
             return TRUE;
         }
