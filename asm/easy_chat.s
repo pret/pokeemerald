@@ -5,67 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_811A7E4
-sub_811A7E4: @ 811A7E4
-	push {lr}
-	bl UpdatePaletteFade
-	ldr r0, =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0811A804
-	cmp r0, 0x1
-	beq _0811A80E
-	b _0811A840
-	.pool
-_0811A804:
-	movs r0, 0x1
-	movs r1, 0
-	bl fade_screen
-	b _0811A840
-_0811A80E:
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0811A84E
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00003b58
-	adds r0, r1
-	ldr r1, =0x0000ffff
-	strh r1, [r0, 0x16]
-	bl overworld_free_bg_tilemaps
-	bl sub_811A8F0
-	b _0811A84E
-	.pool
-_0811A840:
-	ldr r1, =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_0811A84E:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_811A7E4
-
-	thumb_func_start sub_811A858
-sub_811A858: @ 811A858
-	push {lr}
-	ldr r0, =sub_811A7E4
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_811A858
-
 	thumb_func_start sub_811A868
 sub_811A868: @ 811A868
 	push {lr}

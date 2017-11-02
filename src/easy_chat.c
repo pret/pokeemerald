@@ -7,6 +7,7 @@
 #include "task.h"
 #include "main.h"
 #include "link.h"
+#include "field_weather.h"
 #include "window.h"
 #include "palette.h"
 #include "event_data.h"
@@ -26,18 +27,19 @@ static void sub_811A2C0(u8);
 static void sub_811A278(void);
 static bool8 sub_811A428(u8);
 static void sub_811A2FC(u8);
-/*static*/ u16 sub_811AAAC(void);
-/*static*/ bool32 sub_811A88C(u16);
-/*static*/ void sub_811C158(u16);
-/*static*/ bool8 sub_811C170(void);
-/*static*/ void sub_811A8A4(u16);
 /*static*/ void sub_811A4D0(MainCallback);
-bool8 sub_811F28C(void);
+/*static*/ bool32 sub_811A88C(u16);
+/*static*/ void sub_811A8A4(u16);
+void sub_811A8F0(void);
 bool8 sub_811A95C(u8, u32, u8);
+void sub_811AA90(void);
+/*static*/ u16 sub_811AAAC(void);
 bool8 sub_811BF8C(void);
 bool8 sub_811BFA4(void);
 void sub_811C13C(void);
-void sub_811AA90(void);
+/*static*/ void sub_811C158(u16);
+/*static*/ bool8 sub_811C170(void);
+bool8 sub_811F28C(void);
 void sub_811F2B8(void);
 
 // Static ROM declarations
@@ -304,3 +306,30 @@ void easy_chat_input_maybe(void)
     sub_811A20C(gSpecialVar_0x8004, words, sub_80861B0, sizeParam);
 }
 
+static void sub_811A7E4(void)
+{
+    LilycoveLady *lilycoveLady;
+
+    UpdatePaletteFade();
+    switch (gMain.state)
+    {
+        case 0:
+            fade_screen(1, 0);
+            break;
+        case 1:
+            if (!gPaletteFade.active)
+            {
+                lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
+                lilycoveLady->quiz.unk_016[0] = -1;
+                overworld_free_bg_tilemaps();
+                sub_811A8F0();
+            }
+            return;
+    }
+    gMain.state ++;
+}
+
+void sub_811A858(void)
+{
+    SetMainCallback2(sub_811A7E4);
+}
