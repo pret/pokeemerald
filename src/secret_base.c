@@ -496,57 +496,57 @@ void sub_80E9238(u8 flagIn)
 
 void sub_80E933C(void)
 {
-    u8 *roomdecor;
-    u8 *roomdecorpos;
-    u8 decidx;
-    u8 objid;
+    u8 *roomDecor;
+    u8 *roomDecorPos;
+    u8 decorIdx;
+    u8 objIdx;
     u8 metatile;
     u8 category;
     u8 permission;
     u8 nDecor;
     u16 curBase;
 
-    objid = 0;
+    objIdx = 0;
     if (!CurrentMapIsSecretBase())
     {
-        roomdecor = gSaveBlock1Ptr->playerRoomDecor;
-        roomdecorpos = gSaveBlock1Ptr->playerRoomDecorPos;
+        roomDecor = gSaveBlock1Ptr->playerRoomDecor;
+        roomDecorPos = gSaveBlock1Ptr->playerRoomDecorPos;
         nDecor = 12;
     }
     else
     {
         curBase = VarGet(VAR_0x4054);
-        roomdecor = gSaveBlock1Ptr->secretBases[curBase].decorations;
-        roomdecorpos = gSaveBlock1Ptr->secretBases[curBase].decorationPos;
+        roomDecor = gSaveBlock1Ptr->secretBases[curBase].decorations;
+        roomDecorPos = gSaveBlock1Ptr->secretBases[curBase].decorationPos;
         nDecor = 16;
     }
-    for (decidx = 0; decidx < nDecor; decidx ++)
+    for (decorIdx = 0; decorIdx < nDecor; decorIdx ++)
     {
-        if (roomdecor[decidx] != DECOR_NONE)
+        if (roomDecor[decorIdx] != DECOR_NONE)
         {
-            permission = gDecorations[roomdecor[decidx]].permission;
-            category = gDecorations[roomdecor[decidx]].category;
+            permission = gDecorations[roomDecor[decorIdx]].permission;
+            category = gDecorations[roomDecor[decorIdx]].category;
             if (permission == DECORPERM_SOLID_MAT)
             {
-                for (objid = 0; objid < gMapHeader.events->mapObjectCount; objid ++)
+                for (objIdx = 0; objIdx < gMapHeader.events->mapObjectCount; objIdx ++)
                 {
-                    if (gMapHeader.events->mapObjects[objid].flagId == gSpecialVar_0x8004 + 0xAE)
+                    if (gMapHeader.events->mapObjects[objIdx].flagId == gSpecialVar_0x8004 + 0xAE)
                     {
                         break;
                     }
                 }
-                if (objid == gMapHeader.events->mapObjectCount)
+                if (objIdx == gMapHeader.events->mapObjectCount)
                 {
                     continue;
                 }
-                gSpecialVar_0x8006 = roomdecorpos[decidx] >> 4;
-                gSpecialVar_0x8007 = roomdecorpos[decidx] & 0xF;
+                gSpecialVar_0x8006 = roomDecorPos[decorIdx] >> 4;
+                gSpecialVar_0x8007 = roomDecorPos[decorIdx] & 0xF;
                 metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
                 if (MetatileBehavior_IsMB_B5(metatile) == TRUE || MetatileBehavior_IsMB_C3(metatile) == TRUE)
                 {
-                    gScriptResult = gMapHeader.events->mapObjects[objid].graphicsId + VAR_0x3F20;
-                    VarSet(gScriptResult, gDecorations[roomdecor[decidx]].tiles[0]);
-                    gScriptResult = gMapHeader.events->mapObjects[objid].localId;
+                    gScriptResult = gMapHeader.events->mapObjects[objIdx].graphicsId + VAR_0x3F20;
+                    VarSet(gScriptResult, gDecorations[roomDecor[decorIdx]].tiles[0]);
+                    gScriptResult = gMapHeader.events->mapObjects[objIdx].localId;
                     FlagClear(gSpecialVar_0x8004 + 0xAE);
                     show_sprite(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
                     sub_808EBA8(gScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
