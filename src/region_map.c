@@ -75,6 +75,7 @@ static void RegionMap_GetMarineCaveCoords(u16 *x, u16 *y);
 static bool32 RegionMap_IsPlayerInCave(u8 mapSecId);
 static void RegionMap_GetPositionOfCursorWithinMapSection(void);
 static bool8 RegionMap_IsMapSecIdInNextRow(u16 y);
+static void SpriteCallback_CursorFull(struct Sprite *sprite);
 static void FreeRegionMapCursorSprite(void);
 static void HideRegionMapPlayerIcon(void);
 static void UnhideRegionMapPlayerIcon(void);
@@ -193,8 +194,41 @@ static const u8 sRegionMap_MapSecAquaHideoutOld[] = {
     MAPSEC_AQUA_HIDEOUT_OLD
 };
 
-extern const struct SpritePalette gUnknown_085A1C00;
-extern const struct SpriteTemplate gUnknown_085A1C08;
+static const struct OamData sRegionMapCursorOam = {
+    .size = 1, .priority = 1
+};
+
+static const union AnimCmd sRegionMapCursorAnim1[] = {
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(4, 20),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd sRegionMapCursorAnim2[] = {
+    ANIMCMD_FRAME( 0, 10),
+    ANIMCMD_FRAME(16, 10),
+    ANIMCMD_FRAME(32, 10),
+    ANIMCMD_FRAME(16, 10),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd *const sRegionMapCursorAnimTable[] = {
+    sRegionMapCursorAnim1,
+    sRegionMapCursorAnim2
+};
+
+static const struct SpritePalette sRegionMapCursorSpritePalette = { sRegionMapCursorPal, 0 };
+
+static const struct SpriteTemplate sRegionMapCursorSpriteTemplate = {
+    0,
+    0,
+    &sRegionMapCursorOam,
+    sRegionMapCursorAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallback_CursorFull
+};
+
 extern const struct OamData gUnknown_085A1C20;
 extern const union AnimCmd *const gUnknown_085A1C30[];
 extern const u8 gUnknown_085A1C34[];
@@ -1117,8 +1151,8 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
     struct SpritePalette palette;
     struct SpriteSheet sheet;
 
-    palette = gUnknown_085A1C00;
-    template = gUnknown_085A1C08;
+    palette = sRegionMapCursorSpritePalette;
+    template = sRegionMapCursorSpriteTemplate;
     sheet.tag = tileTag;
     template.tileTag = tileTag;
     gRegionMap->cursorTileTag = tileTag;
