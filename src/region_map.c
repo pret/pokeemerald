@@ -229,19 +229,103 @@ static const struct SpriteTemplate sRegionMapCursorSpriteTemplate = {
     SpriteCallback_CursorFull
 };
 
-extern const struct OamData gUnknown_085A1C20;
-extern const union AnimCmd *const gUnknown_085A1C30[];
-extern const u8 gUnknown_085A1C34[];
-extern const u16 gUnknown_085A1C38[];
-extern const u8 gUnknown_085A1C58[];
-extern const u8 gUnknown_085A1C90[];
-extern const u8 gUnknown_085A1D68[];
-extern const u8 gUnknown_085A1E3C[][3];
-extern const struct {
+static const struct OamData sRegionMapPlayerIconOam = {
+    .size = 1, .priority = 2
+};
+
+static const union AnimCmd sRegionMapPlayerIconAnim1[] = {
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sRegionMapPlayerIconAnimTable[] = {
+    sRegionMapPlayerIconAnim1
+};
+
+static const u8 sRegionMapEventSectionIds[] = {
+    MAPSEC_BIRTH_ISLAND_2,
+    MAPSEC_FARAWAY_ISLAND,
+    MAPSEC_NAVEL_ROCK2
+};
+
+static const u16 sRegionMapFramePal[] = INCBIN_U16("graphics/pokenav/map_frame.gbapal");
+
+static const u8 sRegionMapFrameGfxLZ[] = INCBIN_U8("graphics/pokenav/map_frame.4bpp.lz");
+
+static const u8 sRegionMapFrameTilemapLZ[] = INCBIN_U8("graphics/pokenav/map_frame.bin.lz");
+
+static const u16 Unknown_085A1D48[] = INCBIN_U16("graphics/pokenav/fly_target_icons.gbapal");
+
+static const u8 gUnknown_085A1D68[] = INCBIN_U8("graphics/pokenav/fly_target_icons.4bpp.lz");
+
+static const u8 gUnknown_085A1E3C[][3] = {
+    {MAP_GROUP_LITTLEROOT_TOWN, MAP_ID_LITTLEROOT_TOWN, 1},
+    {MAP_GROUP_OLDALE_TOWN, MAP_ID_OLDALE_TOWN, 14},
+    {MAP_GROUP_DEWFORD_TOWN, MAP_ID_DEWFORD_TOWN, 15},
+    {MAP_GROUP_LAVARIDGE_TOWN, MAP_ID_LAVARIDGE_TOWN, 16},
+    {MAP_GROUP_FALLARBOR_TOWN, MAP_ID_FALLARBOR_TOWN, 17},
+    {MAP_GROUP_VERDANTURF_TOWN, MAP_ID_VERDANTURF_TOWN, 18},
+    {MAP_GROUP_PACIFIDLOG_TOWN, MAP_ID_PACIFIDLOG_TOWN, 19},
+    {MAP_GROUP_PETALBURG_CITY, MAP_ID_PETALBURG_CITY, 3},
+    {MAP_GROUP_SLATEPORT_CITY, MAP_ID_SLATEPORT_CITY, 4},
+    {MAP_GROUP_MAUVILLE_CITY, MAP_ID_MAUVILLE_CITY, 5},
+    {MAP_GROUP_RUSTBORO_CITY, MAP_ID_RUSTBORO_CITY, 6},
+    {MAP_GROUP_FORTREE_CITY, MAP_ID_FORTREE_CITY, 7},
+    {MAP_GROUP_LILYCOVE_CITY, MAP_ID_LILYCOVE_CITY, 8},
+    {MAP_GROUP_MOSSDEEP_CITY, MAP_ID_MOSSDEEP_CITY, 9},
+    {MAP_GROUP_SOOTOPOLIS_CITY, MAP_ID_SOOTOPOLIS_CITY, 10},
+    {MAP_GROUP_EVER_GRANDE_CITY, MAP_ID_EVER_GRANDE_CITY, 11},
+    {MAP_GROUP_ROUTE101, MAP_ID_ROUTE101, 0},
+    {MAP_GROUP_ROUTE102, MAP_ID_ROUTE102, 0},
+    {MAP_GROUP_ROUTE103, MAP_ID_ROUTE103, 0},
+    {MAP_GROUP_ROUTE104, MAP_ID_ROUTE104, 0},
+    {MAP_GROUP_ROUTE105, MAP_ID_ROUTE105, 0},
+    {MAP_GROUP_ROUTE106, MAP_ID_ROUTE106, 0},
+    {MAP_GROUP_ROUTE107, MAP_ID_ROUTE107, 0},
+    {MAP_GROUP_ROUTE108, MAP_ID_ROUTE108, 0},
+    {MAP_GROUP_ROUTE109, MAP_ID_ROUTE109, 0},
+    {MAP_GROUP_ROUTE110, MAP_ID_ROUTE110, 0},
+    {MAP_GROUP_ROUTE111, MAP_ID_ROUTE111, 0},
+    {MAP_GROUP_ROUTE112, MAP_ID_ROUTE112, 0},
+    {MAP_GROUP_ROUTE113, MAP_ID_ROUTE113, 0},
+    {MAP_GROUP_ROUTE114, MAP_ID_ROUTE114, 0},
+    {MAP_GROUP_ROUTE115, MAP_ID_ROUTE115, 0},
+    {MAP_GROUP_ROUTE116, MAP_ID_ROUTE116, 0},
+    {MAP_GROUP_ROUTE117, MAP_ID_ROUTE117, 0},
+    {MAP_GROUP_ROUTE118, MAP_ID_ROUTE118, 0},
+    {MAP_GROUP_ROUTE119, MAP_ID_ROUTE119, 0},
+    {MAP_GROUP_ROUTE120, MAP_ID_ROUTE120, 0},
+    {MAP_GROUP_ROUTE121, MAP_ID_ROUTE121, 0},
+    {MAP_GROUP_ROUTE122, MAP_ID_ROUTE122, 0},
+    {MAP_GROUP_ROUTE123, MAP_ID_ROUTE123, 0},
+    {MAP_GROUP_ROUTE124, MAP_ID_ROUTE124, 0},
+    {MAP_GROUP_ROUTE125, MAP_ID_ROUTE125, 0},
+    {MAP_GROUP_ROUTE126, MAP_ID_ROUTE126, 0},
+    {MAP_GROUP_ROUTE127, MAP_ID_ROUTE127, 0},
+    {MAP_GROUP_ROUTE128, MAP_ID_ROUTE128, 0},
+    {MAP_GROUP_ROUTE129, MAP_ID_ROUTE129, 0},
+    {MAP_GROUP_ROUTE130, MAP_ID_ROUTE130, 0},
+    {MAP_GROUP_ROUTE131, MAP_ID_ROUTE131, 0},
+    {MAP_GROUP_ROUTE132, MAP_ID_ROUTE132, 0},
+    {MAP_GROUP_ROUTE133, MAP_ID_ROUTE133, 0},
+    {MAP_GROUP_ROUTE134, MAP_ID_ROUTE134, 0}
+};
+
+static const u8 *const gUnknown_085A1ED4[] = {
+    gUnknown_085EC782,
+    gUnknown_085EC791
+};
+
+static const struct {
     const u8 *const *name;
     u16 mapSecId;
     u16 flag;
-} gUnknown_085A1EDC[];
+} gUnknown_085A1EDC[] = {
+    gUnknown_085A1ED4,
+    MAPSEC_EVER_GRANDE_CITY,
+    SYS_POKEMON_LEAGUE_FLY
+};
+
 extern const struct BgTemplate gUnknown_085A1EE4[];
 extern const struct WindowTemplate gUnknown_085A1EF0[];
 extern const struct SpritePalette gUnknown_085A1F10;
@@ -1221,7 +1305,7 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     u8 spriteId;
     struct SpriteSheet sheet = {sRegionMapPlayerIcon_BrendanGfx, 0x80, tileTag};
     struct SpritePalette palette = {sRegionMapPlayerIcon_BrendanPal, paletteTag};
-    struct SpriteTemplate template = {tileTag, paletteTag, &gUnknown_085A1C20, gUnknown_085A1C30, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+    struct SpriteTemplate template = {tileTag, paletteTag, &sRegionMapPlayerIconOam, sRegionMapPlayerIconAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
     if (sub_8124668(gMapHeader.regionMapSectionId))
     {
@@ -1412,7 +1496,7 @@ bool32 sub_8124668(u8 mapSecId)
 
     for (i = 0; i < 3; i ++)
     {
-        if (mapSecId == gUnknown_085A1C34[i])
+        if (mapSecId == sRegionMapEventSectionIds[i])
         {
             return TRUE;
         }
@@ -1475,15 +1559,15 @@ void MCB2_FlyMap(void)
             gMain.state ++;
             break;
         case 5:
-            LZ77UnCompVram(gUnknown_085A1C58, (u16 *)BG_CHAR_ADDR(3));
+            LZ77UnCompVram(sRegionMapFrameGfxLZ, (u16 *)BG_CHAR_ADDR(3));
             gMain.state ++;
             break;
         case 6:
-            LZ77UnCompVram(gUnknown_085A1C90, (u16 *)BG_SCREEN_ADDR(30));
+            LZ77UnCompVram(sRegionMapFrameTilemapLZ, (u16 *)BG_SCREEN_ADDR(30));
             gMain.state ++;
             break;
         case 7:
-            LoadPalette(gUnknown_085A1C38, 0x10, 0x20);
+            LoadPalette(sRegionMapFramePal, 0x10, 0x20);
             PutWindowTilemap(2);
             FillWindowPixelBuffer(2, 0x00);
             PrintTextOnWindow(2, 1, gText_FlyToWhere, 0, 1, 0, NULL);

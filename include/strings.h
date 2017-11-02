@@ -75,5 +75,7 @@ extern const u8 gText_Ferry[];
 extern const u8 gText_SecretBase[];
 extern const u8 gText_Hideout[];
 extern const u8 gText_FlyToWhere[];
+extern const u8 gUnknown_085EC782[];
+extern const u8 gUnknown_085EC791[];
 
 #endif //GUARD_STRINGS_H
