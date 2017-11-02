@@ -30,7 +30,7 @@ static void sub_811A2FC(u8);
 /*static*/ void sub_811A4D0(MainCallback);
 static bool32 sub_811A88C(u16);
 static void sub_811A8A4(u16);
-void sub_811A8F0(void);
+static void sub_811A8F0(void);
 bool8 sub_811A95C(u8, u32, u8);
 void sub_811AA90(void);
 /*static*/ u16 sub_811AAAC(void);
@@ -365,4 +365,24 @@ static void sub_811A8A4(u16 word)
     i = sub_811A868(word);
     ResetTasks();
     sub_811A4D0(gUnknown_08597530[i].callback);
+}
+
+static void sub_811A8CC(void)
+{
+    sub_811A20C(0xF, gSaveBlock1Ptr->lilycoveLady.quiz.unk_016, sub_80861B0, 3);
+}
+
+static void sub_811A8F0(void)
+{
+    sub_811A20C(0x10, gSaveBlock1Ptr->lilycoveLady.quiz.unk_002, sub_80861B0, 3);
+}
+
+static void sub_811A914(void)
+{
+    sub_811A20C(0x12, gSaveBlock1Ptr->lilycoveLady.quiz.unk_014, sub_80861B0, 3);
+}
+
+static void sub_811A938(void)
+{
+    sub_811A20C(0x11, gSaveBlock1Ptr->lilycoveLady.quiz.unk_002, sub_80861B0, 3);
 }
