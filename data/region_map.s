@@ -4,36 +4,6 @@
 	.section .rodata
 	.align 2, 0
 
-gUnknown_0859F5EC:: @ 859F5EC
-	.incbin "graphics/unknown/unk_859f5ec.gbapal"
-
-gUnknown_0859F60C:: @ 859F60C
-	.incbin "baserom.gba", 0x59f60c, 0x44
-
-gUnknown_0859F650:: @ 859F650
-	.incbin "baserom.gba", 0x59f650, 0xec
-
-gUnknown_0859F73C:: @ 859F73C
-	.incbin "baserom.gba", 0x59f73c, 0x40
-
-gUnknown_0859F77C:: @ 859F77C
-	.incbin "baserom.gba", 0x59f77c, 0xd64
-
-gUnknown_085A04E0:: @ 85A04E0
-	.incbin "baserom.gba", 0x5a04e0, 0x34c
-
-gUnknown_085A082C:: @ 85A082C
-	.incbin "baserom.gba", 0x5a082c, 0x20
-
-gUnknown_085A084C:: @ 85A084C
-	.incbin "baserom.gba", 0x5a084c, 0x80
-
-gUnknown_085A08CC:: @ 85A08CC
-	.incbin "baserom.gba", 0x5a08cc, 0x20
-
-gUnknown_085A08EC:: @ 85A08EC
-	.incbin "baserom.gba", 0x5a08ec, 0x80
-
 gUnknown_085A096C:: @ 85A096C
 	.incbin "baserom.gba", 0x5a096c, 0x1a4
 

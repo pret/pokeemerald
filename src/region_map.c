@@ -83,8 +83,8 @@ static void RegionMapPlayerIconSpriteCallback_Full(struct Sprite *sprite);
 static void RegionMapPlayerIconSpriteCallback(struct Sprite *sprite);
 static void sub_81248C0(void);
 static void sub_81248D4(void);
-void sub_81248F4(void callback(void));
-void sub_8124904(void);
+static void sub_81248F4(void callback(void));
+static void sub_8124904(void);
 static void sub_8124A70(void);
 static void sub_8124AD4(void);
 static void sub_8124BE4(void);
@@ -95,17 +95,19 @@ static void sub_8124E0C(void);
 
 // .rodata
 
-extern const u8 gUnknown_0859F60C[];
-extern const u8 gUnknown_0859F650[];
-extern const u16 gUnknown_0859F73C[];
-extern const u8 gUnknown_0859F77C[];
-extern const u8 gUnknown_085A04E0[];
+static const u16 sRegionMapCursorPal[] = INCBIN_U16("graphics/pokenav/cursor.gbapal");
+static const u8 sRegionMapCursorSmallGfxLZ[] = INCBIN_U8("graphics/pokenav/cursor_small.4bpp.lz");
+static const u8 sRegionMapCursorLargeGfxLZ[] = INCBIN_U8("graphics/pokenav/cursor_large.4bpp.lz");
+static const u16 sRegionMapBkgnd_Pal[] = INCBIN_U16("graphics/pokenav/region_map.gbapal");
+static const u8 sRegionMapBkgnd_GfxLZ[] = INCBIN_U8("graphics/pokenav/region_map.8bpp.lz");
+static const u8 sRegionMapBkgnd_TilemapLZ[] = INCBIN_U8("graphics/pokenav/region_map_map.bin.lz");
+static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("graphics/pokenav/brendan_icon.gbapal");
+static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/brendan_icon.4bpp");
+static const u16 sRegionMapPlayerIcon_MayPal[] = INCBIN_U16("graphics/pokenav/may_icon.gbapal");
+static const u8 sRegionMapPlayerIcon_MayGfx[] = INCBIN_U8("graphics/pokenav/may_icon.4bpp");
+
 extern const u8 gUnknown_085A096C[];
 extern const struct RegionMapLocation gRegionMapEntries[];
-extern const u8 gUnknown_085A084C[];
-extern const u16 gUnknown_085A082C[];
-extern const u16 gUnknown_085A08CC[];
-extern const u8 gUnknown_085A08EC[];
 extern const u16 gUnknown_085A1B24[][2];
 extern const u16 gUnknown_085A1B84[];
 extern const u16 gUnknown_085A1B8A[];
@@ -120,17 +122,17 @@ extern const u16 gUnknown_085A1C38[];
 extern const u8 gUnknown_085A1C58[];
 extern const u8 gUnknown_085A1C90[];
 extern const u8 gUnknown_085A1D68[];
-extern const struct BgTemplate gUnknown_085A1EE4[];
-extern const struct WindowTemplate gUnknown_085A1EF0[];
+extern const u8 gUnknown_085A1E3C[][3];
 extern const struct {
     const u8 *const *name;
     u16 mapSecId;
     u16 flag;
 } gUnknown_085A1EDC[];
+extern const struct BgTemplate gUnknown_085A1EE4[];
+extern const struct WindowTemplate gUnknown_085A1EF0[];
 extern const struct SpritePalette gUnknown_085A1F10;
 extern const u16 gUnknown_085A1F18[][2];
 extern const struct SpriteTemplate gUnknown_085A1F7C;
-extern const u8 gUnknown_085A1E3C[][3];
 
 // .text
 
@@ -177,11 +179,11 @@ bool8 sub_8122DB0(void)
         case 0:
             if (gRegionMap->bgManaged)
             {
-                decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, gUnknown_0859F77C, 0, 0, 0);
+                decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, sRegionMapBkgnd_GfxLZ, 0, 0, 0);
             }
             else
             {
-                LZ77UnCompVram(gUnknown_0859F77C, (u16 *)BG_CHAR_ADDR(2));
+                LZ77UnCompVram(sRegionMapBkgnd_GfxLZ, (u16 *)BG_CHAR_ADDR(2));
             }
             break;
         case 1:
@@ -189,25 +191,25 @@ bool8 sub_8122DB0(void)
             {
                 if (!free_temp_tile_data_buffers_if_possible())
                 {
-                    decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, gUnknown_085A04E0, 0, 0, 1);
+                    decompress_and_copy_tile_data_to_vram(gRegionMap->bgNum, sRegionMapBkgnd_TilemapLZ, 0, 0, 1);
                 }
             }
             else
             {
-                LZ77UnCompVram(gUnknown_085A04E0, (u16 *)BG_SCREEN_ADDR(28));
+                LZ77UnCompVram(sRegionMapBkgnd_TilemapLZ, (u16 *)BG_SCREEN_ADDR(28));
             }
             break;
         case 2:
             if (!free_temp_tile_data_buffers_if_possible())
             {
-                LoadPalette(gUnknown_0859F73C, 0x70, 0x60);
+                LoadPalette(sRegionMapBkgnd_Pal, 0x70, 0x60);
             }
             break;
         case 3:
-            LZ77UnCompWram(gUnknown_0859F60C, gRegionMap->cursorSmallImage);
+            LZ77UnCompWram(sRegionMapCursorSmallGfxLZ, gRegionMap->cursorSmallImage);
             break;
         case 4:
-            LZ77UnCompWram(gUnknown_0859F650, gRegionMap->cursorLargeImage);
+            LZ77UnCompWram(sRegionMapCursorLargeGfxLZ, gRegionMap->cursorLargeImage);
             break;
         case 5:
             RegionMap_InitializeStateBasedOnPlayerLocation();
@@ -1103,8 +1105,8 @@ void sub_8124278(void)
 void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
 {
     u8 spriteId;
-    struct SpriteSheet sheet = {gUnknown_085A084C, 0x80, tileTag};
-    struct SpritePalette palette = {gUnknown_085A082C, paletteTag};
+    struct SpriteSheet sheet = {sRegionMapPlayerIcon_BrendanGfx, 0x80, tileTag};
+    struct SpritePalette palette = {sRegionMapPlayerIcon_BrendanPal, paletteTag};
     struct SpriteTemplate template = {tileTag, paletteTag, &gUnknown_085A1C20, gUnknown_085A1C30, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
     if (sub_8124668(gMapHeader.regionMapSectionId))
@@ -1114,8 +1116,8 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     }
     if (gSaveBlock2Ptr->playerGender == FEMALE)
     {
-        sheet.data = gUnknown_085A08EC;
-        palette.data = gUnknown_085A08CC;
+        sheet.data = sRegionMapPlayerIcon_MayGfx;
+        palette.data = sRegionMapPlayerIcon_MayPal;
     }
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&palette);
@@ -1411,13 +1413,13 @@ static void sub_81248D4(void)
     do_scheduled_bg_tilemap_copies_to_vram();
 }
 
-void sub_81248F4(void callback(void))
+static void sub_81248F4(void callback(void))
 {
     gUnknown_0203A148->unk_000 = callback;
     gUnknown_0203A148->unk_004 = 0;
 }
 
-void sub_8124904(void)
+static void sub_8124904(void)
 {
     u16 i;
     bool32 flag;

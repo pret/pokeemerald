@@ -4,6 +4,7 @@ monfrontdir := graphics/pokemon/anim_front_pics
 monpaldir := graphics/pokemon/palettes
 INTROGFXDIR := graphics/intro
 interfacedir := graphics/interface
+PKNAVGFXDIR := graphics/pokenav
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -290,3 +291,7 @@ $(INTROGFXDIR)/copyright.4bpp: $(INTROGFXDIR)/copyright.png
 
 $(interfacedir)/pkmnjump_bg.4bpp: $(interfacedir)/pkmnjump_bg.png
 	$(GFX) $< $@ -num_tiles 63
+
+
+$(PKNAVGFXDIR)/region_map.8bpp: $(PKNAVGFXDIR)/region_map.png
+	$(GFX) $< $@ -num_tiles 233
