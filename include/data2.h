@@ -10,6 +10,7 @@ struct MonCoords
 };
 
 extern struct MonCoords gTrainerBackPicCoords[];
+extern struct MonCoords gTrainerFrontPicCoords[];
 
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[][13];

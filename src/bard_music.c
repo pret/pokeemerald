@@ -20,7 +20,7 @@ const struct BardSound *GetWordSounds(u16 word)
     u32 subword;
     const struct BardSound (*ptr)[6];
 
-    if (IsECWordInValidRange(word))
+    if (ECWord_CheckIfOutsideOfValidRange(word))
     {
         return gBardSound_InvalidWord;
     }

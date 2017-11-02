@@ -1329,8 +1329,8 @@ _08162A8A:
 	.pool
 	thumb_func_end sub_81628A0
 
-	thumb_func_start sub_8162AA0
-sub_8162AA0: @ 8162AA0
+	thumb_func_start GetFrontierTrainerFrontSpriteId
+GetFrontierTrainerFrontSpriteId: @ 8162AA0
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -1454,7 +1454,7 @@ _08162BCA:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8162AA0
+	thumb_func_end GetFrontierTrainerFrontSpriteId
 
 	thumb_func_start GetFrontierOpponentClass
 GetFrontierOpponentClass: @ 8162BD8
@@ -5843,8 +5843,8 @@ _08165206:
 	.pool
 	thumb_func_end sub_816515C
 
-	thumb_func_start sub_8165244
-sub_8165244: @ 8165244
+	thumb_func_start GetEreaderTrainerFrontSpriteId
+GetEreaderTrainerFrontSpriteId: @ 8165244
 	ldr r1, =gUnknown_0831F578
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -5855,7 +5855,7 @@ sub_8165244: @ 8165244
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_8165244
+	thumb_func_end GetEreaderTrainerFrontSpriteId
 
 	thumb_func_start GetEreaderTrainerClassId
 GetEreaderTrainerClassId: @ 8165264

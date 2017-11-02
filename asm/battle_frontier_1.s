@@ -6956,7 +6956,7 @@ _08192574:
 	cmp r2, r0
 	bne _08192598
 	ldrb r0, [r1, 0x8]
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 	lsls r0, 16
 	lsrs r0, 16
 	b _081925B6
@@ -6971,7 +6971,7 @@ _08192598:
 	.pool
 _081925AC:
 	ldr r0, [sp, 0x24]
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 _081925B2:
 	lsls r0, 24
 	lsrs r0, 24
@@ -8535,7 +8535,7 @@ _081932A2:
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 	lsls r0, 16
 	lsrs r0, 16
 	mov r2, r8
@@ -8554,7 +8554,7 @@ _081932D4:
 _081932E4:
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 _081932EC:
 	lsls r0, 24
 	lsrs r0, 24
@@ -8621,7 +8621,7 @@ _0819335A:
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 	lsls r0, 16
 	lsrs r0, 16
 	b _081933B0
@@ -8642,7 +8642,7 @@ _08193388:
 _081933A4:
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl sub_8162AA0
+	bl GetFrontierTrainerFrontSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 _081933B0:
