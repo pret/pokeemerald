@@ -60,7 +60,7 @@ extern u8 gUnknown_02038440;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
-void DoBattleAnim(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim);
+void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim);
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
 void DestroyAnimSoundTask(u8 taskId);
@@ -75,5 +75,24 @@ s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 // battle_anim_80FE840.s
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value);
 void sub_8118FBC(u8 arg0, u8 arg1, u8 arg2, u8 bankIdentity, u8 arg4, void *arg5, u16 *arg6, u16 arg7);
+void HandleIntroSlide(u8 terrainId);
+
+// battle_anim_80A5C6C.s
+void sub_80A6EEC(struct Sprite *sprite);
+void sub_80A8278(void);
+void sub_80A6B30(struct UnknownAnimStruct2*);
+void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
+u8 sub_80A82E4(u8 bank);
+u8 sub_80A5C6C(u8 bank, u8 attributeId);
+bool8 IsBankSpritePresent(u8 bank);
+void sub_80A6C68(u8 arg0);
+u8 GetAnimBankSpriteId(u8 wantedBank);
+bool8 IsDoubleBattle(void);
+u8 sub_80A6D94(void);
+u8 sub_80A8364(u8);
+void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
+void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
+u8 sub_80A6138(u8 bank);
+u8 sub_80A82E4(u8 bank);
 
 #endif // GUARD_BATTLE_ANIM_H

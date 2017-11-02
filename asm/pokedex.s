@@ -7923,7 +7923,7 @@ _080BF982:
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x98

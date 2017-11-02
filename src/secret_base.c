@@ -704,7 +704,7 @@ u8 sub_80E98AC(struct Pokemon *pokemon)
     evTotal  = GetMonData(pokemon, MON_DATA_HP_EV);
     evTotal += GetMonData(pokemon, MON_DATA_ATK_EV);
     evTotal += GetMonData(pokemon, MON_DATA_DEF_EV);
-    evTotal += GetMonData(pokemon, MON_DATA_SPD_EV);
+    evTotal += GetMonData(pokemon, MON_DATA_SPEED_EV);
     evTotal += GetMonData(pokemon, MON_DATA_SPATK_EV);
     evTotal += GetMonData(pokemon, MON_DATA_SPDEF_EV);
     return evTotal / 6;

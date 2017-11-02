@@ -410,7 +410,7 @@ gUnknown_085B51E4:: @ 85B51E4
 gUnknown_085B5884:: @ 85B5884
 	.incbin "baserom.gba", 0x5b5884, 0x40
 
-gUnknown_085B58C4:: @ 85B58C4
+gText_ShedinjaJapaneseName2:: @ 85B58C4
 	.incbin "baserom.gba", 0x5b58c4, 0x5
 
 gUnknown_085B58C9:: @ 85B58C9

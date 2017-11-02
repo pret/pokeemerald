@@ -84,7 +84,7 @@ bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 bank)
     return FALSE;
 }
 
-u8 sub_8069F34(u8 bank)
+u8 GetDefaultMoveTarget(u8 bank)
 {
     u8 status = GetBankIdentity(bank) & 1;
 
@@ -194,6 +194,7 @@ void sub_806A1C0(u16 arg0, u8 bankIdentity)
         gUnknown_0202499C = gMonSpritesGfxPtr->templates[bankIdentity];
     else
         gUnknown_0202499C = gUnknown_08329D98[bankIdentity];
+
     gUnknown_0202499C.paletteTag = arg0;
     gUnknown_0202499C.anims = gUnknown_0830536C[arg0];
 }
@@ -1304,7 +1305,7 @@ void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex)
 }
 
 void sub_803FA70(u8 bank);
-void sub_805EF84(u8 bank, bool8);
+void ClearTemporarySpeciesSpriteData(u8 bank, bool8);
 
 extern struct BattlePokemon gBattleMons[4];
 
@@ -1360,5 +1361,5 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
 
     gBattleMons[bank].status2 = 0;
     sub_803FA70(bank);
-    sub_805EF84(bank, FALSE);
+    ClearTemporarySpeciesSpriteData(bank, FALSE);
 }

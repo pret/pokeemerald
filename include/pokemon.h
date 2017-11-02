@@ -620,7 +620,7 @@ void SetWildMonHeldItem(void);
 u16 GetMonEVCount(struct Pokemon *);
 
 const struct CompressedSpritePalette *sub_806E794(struct Pokemon *mon);
-const struct CompressedSpritePalette *sub_806E7CC(u16 species, u32 otId , u32 personality);
+const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
 bool32 IsHMMove2(u16 move);
 bool8 IsPokeSpriteNotFlipped(u16 species);
 bool8 IsMonShiny(struct Pokemon *mon);
@@ -629,7 +629,7 @@ bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies);
 bool8 IsTradedMon(struct Pokemon *mon);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
-s32 sub_806D864(u16 a1);
+s32 GetBankMultiplayerId(u16 a1);
 bool16 sub_806D82C(u8 id);
 u16 MonTryLearningNewMove(struct Pokemon* mon, bool8);
 void sub_8068AA4(void); // sets stats for deoxys
@@ -643,6 +643,11 @@ void PartySpreadPokerus(struct Pokemon *party);
 s8 GetMonFlavourRelation(struct Pokemon *mon, u8 a2);
 s8 GetFlavourRelationByPersonality(u32 personality, u8 a2);
 u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit);
+u8 GetDefaultMoveTarget(u8 atkBank);
+u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
+void sub_806A1C0(u16 arg0, u8 bankIdentity);
+void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity);
+u8 GetSecretBaseTrainerPicIndex(void);
 
 #include "sprite.h"
 

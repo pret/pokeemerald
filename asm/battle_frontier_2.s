@@ -20557,7 +20557,7 @@ _081A5306:
 	movs r1, 0
 	movs r2, 0x18
 	movs r3, 0xD
-	bl sub_8056A3C
+	bl HandleBattleWindow
 	b _081A553E
 	.pool
 _081A531C:
@@ -20582,29 +20582,29 @@ _081A5328:
 	ldr r4, =gDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0xF
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gText_Vs
 	movs r1, 0x10
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gText_OpponentMon1Name
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	adds r0, r4, 0
 	movs r1, 0x11
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gText_Mind
 	movs r1, 0x12
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gText_Skill
 	movs r1, 0x13
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gText_Body
 	movs r1, 0x14
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gText_Judgement
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	b _081A553E
 	.pool
 _081A53B4:
@@ -20688,7 +20688,7 @@ _081A5464:
 	bl BattleStringExpandPlaceholdersToDisplayedString
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x15
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldrb r0, [r5]
 	adds r0, 0x1
 	strb r0, [r5]
@@ -20733,7 +20733,7 @@ _081A54D4:
 	movs r1, 0
 	movs r2, 0x18
 	movs r3, 0xD
-	bl sub_8056A3C
+	bl HandleBattleWindow
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	ldr r0, =gMPlay_BGM

@@ -4348,7 +4348,7 @@ sub_8148218: @ 8148218
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
-	bl sub_806F000
+	bl PlayerGenderToFrontTrainerPicId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x88

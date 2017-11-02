@@ -1858,16 +1858,16 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 toCpy = gLinkPlayers[multiplayerID].name;
                 break;
             case B_TXT_1F: // link partner name?
-                toCpy = gLinkPlayers[sub_806D864(2 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
+                toCpy = gLinkPlayers[GetBankMultiplayerId(2 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
                 break;
             case B_TXT_20: // link opponent 1 name?
-                toCpy = gLinkPlayers[sub_806D864(1 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
+                toCpy = gLinkPlayers[GetBankMultiplayerId(1 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
                 break;
             case B_TXT_21: // link opponent 2 name?
-                toCpy = gLinkPlayers[sub_806D864(3 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
+                toCpy = gLinkPlayers[GetBankMultiplayerId(3 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
                 break;
             case B_TXT_22: // link scripting active name
-                toCpy = gLinkPlayers[sub_806D864(gBattleScripting.bank)].name;
+                toCpy = gLinkPlayers[GetBankMultiplayerId(gBattleScripting.bank)].name;
                 break;
             case B_TXT_PLAYER_NAME: // player name
                 if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
@@ -2209,7 +2209,7 @@ static void sub_814F950(u8* dst)
     }
 }
 
-void sub_814F9EC(const u8 *text, u8 arg1)
+void BattleHandleAddTextPrinter(const u8 *text, u8 arg1)
 {
     const u8 *r8 = gUnknown_085CD660[gBattleScripting.field_24];
     bool32 r9;
