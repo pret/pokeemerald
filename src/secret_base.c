@@ -716,49 +716,49 @@ void sub_80E9914(void)
 {
     u32 zero;
     u32 *personality;
-    u16 partyidx;
-    u16 moveidx;
-    u16 sbpartyidx;
+    u16 partyIdx;
+    u16 moveIdx;
+    u16 sbPartyIdx;
     u16 *species;
     u16 *items;
     u16 *moves;
     u8 *levels;
     u8 *evs;
 
-    sbpartyidx = 0;
+    sbPartyIdx = 0;
     personality = gSaveBlock1Ptr->secretBases[0].partyPersonality;
     if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0)
     {
-        partyidx = 0;
+        partyIdx = 0;
         moves = gSaveBlock1Ptr->secretBases[0].partyMoves;
         species = gSaveBlock1Ptr->secretBases[0].partySpecies;
         items = gSaveBlock1Ptr->secretBases[0].partyHeldItems;
         levels = gSaveBlock1Ptr->secretBases[0].partyLevels;
         evs = gSaveBlock1Ptr->secretBases[0].partyEVs;
         zero = 0;
-        for (partyidx = 0; partyidx < PARTY_SIZE; partyidx ++)
+        for (partyIdx = 0; partyIdx < PARTY_SIZE; partyIdx ++)
         {
-            for (moveidx = 0; moveidx < 4; moveidx ++)
+            for (moveIdx = 0; moveIdx < 4; moveIdx ++)
             {
-                moves[partyidx * 4 + moveidx] = zero;
+                moves[partyIdx * 4 + moveIdx] = zero;
             }
-            species[partyidx] = zero;
-            items[partyidx] = zero;
-            levels[partyidx] = zero;
-            personality[partyidx] = zero;
-            evs[partyidx] = zero;
-            if (GetMonData(&gPlayerParty[partyidx], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[partyidx], MON_DATA_IS_EGG))
+            species[partyIdx] = zero;
+            items[partyIdx] = zero;
+            levels[partyIdx] = zero;
+            personality[partyIdx] = zero;
+            evs[partyIdx] = zero;
+            if (GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[partyIdx], MON_DATA_IS_EGG))
             {
-                for (moveidx = 0; moveidx < 4; moveidx ++)
+                for (moveIdx = 0; moveIdx < 4; moveIdx ++)
                 {
-                    moves[sbpartyidx * 4 + moveidx] = GetMonData(&gPlayerParty[partyidx], MON_DATA_MOVE1 + moveidx);
+                    moves[sbPartyIdx * 4 + moveIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_MOVE1 + moveIdx);
                 }
-                species[sbpartyidx] = GetMonData(&gPlayerParty[partyidx], MON_DATA_SPECIES);
-                items[sbpartyidx] = GetMonData(&gPlayerParty[partyidx], MON_DATA_HELD_ITEM);
-                levels[sbpartyidx] = GetMonData(&gPlayerParty[partyidx], MON_DATA_LEVEL);
-                personality[sbpartyidx] = GetMonData(&gPlayerParty[partyidx], MON_DATA_PERSONALITY);
-                evs[sbpartyidx] = sub_80E98AC(&gPlayerParty[partyidx]);
-                sbpartyidx ++;
+                species[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
+                items[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_HELD_ITEM);
+                levels[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_LEVEL);
+                personality[sbPartyIdx] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
+                evs[sbPartyIdx] = sub_80E98AC(&gPlayerParty[partyIdx]);
+                sbPartyIdx ++;
             }
         }
     }
