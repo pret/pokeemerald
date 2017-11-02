@@ -1044,15 +1044,7 @@ gUnknown_0203A014: @ 203A014
 gUnknown_0203A018: @ 203A018
 	.space 0x4
 
-gUnknown_0203A01C: @ 203A01C
-	.space 0x1
-
-gUnknown_0203A01D: @ 203A01D
-	.space 0x3
-
-gUnknown_0203A020: @ 203A020
-	.space 0x4
-
+    .include "src/secret_base.o"
     .include "src/tv.o"
 
 gUnknown_0203A034: @ 203A034

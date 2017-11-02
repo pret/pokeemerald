@@ -238,12 +238,12 @@ extern struct SaveBlock2 *gSaveBlock2Ptr;
 
 struct SecretBaseRecord
 {
-    /*ID?*/ /*0x1A9C*/ u8 sbr_field_0;
+    /*0x1A9C*/ u8 secretBaseId;
     /*0x1A9D*/ u8 sbr_field_1_0:4;
     /*0x1A9D*/ u8 gender:1;
     /*0x1A9D*/ u8 sbr_field_1_5:1;
     /*0x1A9D*/ u8 sbr_field_1_6:2;
-    /*0x1A9E*/ u8 trainerName[7]; // 0xFF bytes?
+    /*0x1A9E*/ u8 trainerName[OT_NAME_LENGTH];
     /*0x1AA5*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 sbr_field_e;
@@ -251,10 +251,10 @@ struct SecretBaseRecord
     /*0x1AAD*/ u8 sbr_field_11;
     /*0x1AAE*/ u8 decorations[16];
     /*0x1ABE*/ u8 decorationPos[16];
-    /*0x1ACE*/ u32 partyPersonality[6];
-    /*0x1AE6*/ u16 partyMoves[6 * 4];
-    /*0x1B16*/ u16 partySpecies[6];
-    /*0x1B22*/ u16 partyHeldItems[6];
+    /*0x1AD0*/ u32 partyPersonality[6];
+    /*0x1AE8*/ u16 partyMoves[6 * 4];
+    /*0x1B18*/ u16 partySpecies[6];
+    /*0x1B24*/ u16 partyHeldItems[6];
     /*0x1B2E*/ u8 partyLevels[6];
     /*0x1B34*/ u8 partyEVs[6];
 };
