@@ -694,7 +694,7 @@ sub_80B5FE8: @ 80B5FE8
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl sub_806E7CC
+	bl GetMonSpritePalStructFromOtIdPersonality
 	mov r8, r0
 	lsls r4, 16
 	asrs r4, 16

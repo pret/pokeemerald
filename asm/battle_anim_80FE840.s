@@ -50443,8 +50443,8 @@ _081181CA:
 	bx r1
 	thumb_func_end sub_8118140
 
-	thumb_func_start battle_intro_launch
-battle_intro_launch: @ 81181D4
+	thumb_func_start HandleIntroSlide
+HandleIntroSlide: @ 81181D4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -50521,7 +50521,7 @@ _08118258:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end battle_intro_launch
+	thumb_func_end HandleIntroSlide
 
 	thumb_func_start sub_811828C
 sub_811828C: @ 811828C

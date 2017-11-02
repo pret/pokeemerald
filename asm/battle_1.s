@@ -1888,7 +1888,7 @@ sub_8035C4C: @ 8035C4C
 	bne _08035C68
 	ldr r0, =gText_Draw
 	movs r1, 0x15
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	b _08035D68
 	.pool
 _08035C68:
@@ -1964,10 +1964,10 @@ _08035CE2:
 _08035CFC:
 	ldr r0, =gText_Win
 	movs r1, 0x17
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gText_Loss
 	movs r1, 0x16
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	b _08035D68
 	.pool
 _08035D20:
@@ -1985,19 +1985,19 @@ _08035D20:
 _08035D36:
 	ldr r0, =gText_Win
 	movs r1, 0x16
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gText_Loss
 	movs r1, 0x17
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	b _08035D68
 	.pool
 _08035D58:
 	ldr r0, =gText_Win
 	movs r1, 0x17
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldr r0, =gText_Loss
 	movs r1, 0x16
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 _08035D68:
 	pop {r0}
 	bx r0
@@ -2068,14 +2068,14 @@ _08035DDC:
 _08035DE6:
 	adds r0, r1, 0
 	movs r1, 0x11
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x4
 	b _08035E14
 _08035DF4:
 	adds r0, r1, 0
 	movs r1, 0x12
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x4
 	str r0, [sp]
@@ -2085,7 +2085,7 @@ _08035DF4:
 _08035E08:
 	adds r0, r1, 0
 	movs r1, 0x13
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x8
 _08035E14:
@@ -2099,7 +2099,7 @@ _08035E1A:
 _08035E22:
 	adds r0, r1, 0
 	movs r1, 0x14
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	ldrb r1, [r4, 0x18]
 	movs r0, 0x8
 	str r0, [sp]
@@ -2139,14 +2139,14 @@ _08035E66:
 	adds r1, r0, r4
 	adds r0, r1, 0
 	movs r1, 0xF
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	lsls r0, r6, 3
 	subs r0, r6
 	lsls r0, 2
 	adds r1, r0, r4
 	adds r0, r1, 0
 	movs r1, 0x10
-	bl sub_814F9EC
+	bl BattleHandleAddTextPrinter
 	movs r4, 0x7
 	str r4, [sp]
 	adds r0, r7, 0
