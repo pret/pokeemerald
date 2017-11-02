@@ -62,6 +62,7 @@ SECTIONS {
         src/battle_script_commands.o(.text);
         asm/battle_5.o(.text);
         src/battle_controller_player.o(.text);
+        src/battle_7.o(.text);
         asm/battle_7.o(.text);
         src/battle_controller_opponent.o(.text);
         src/battle_ai_switch_items.o(.text);
