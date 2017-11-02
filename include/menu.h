@@ -21,6 +21,7 @@ void PrintMenuTable(u8 idx, u8 nstrs, const struct MenuAction *strs);
 void InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 idx, u8 nstrs,u8);
 u8 GetMenuCursorPos(void);
 s8 ProcessMenuInput(void);
+s8 ProcessMenuInputNoWrapAround(void);
 void blit_move_info_icon(u8 winId, u8 a2, u16 x, u16 y);
 void reset_temp_tile_data_buffers(void);
 int decompress_and_copy_tile_data_to_vram(u8 bg_id, const void *src, int size, u16 offset, u8 mode);

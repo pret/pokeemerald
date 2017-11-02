@@ -32,6 +32,7 @@ void Overworld_SetMapObjTemplateMovementType(u8, u8);
 
 void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
+void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void Overworld_SetHealLocationWarp(u8);
 void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
@@ -62,6 +63,9 @@ void warp_in(void);
 u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
 void sub_8086194(void);
 void sub_8084CCC(u8 spawn);
-void warp1_set_2(s8 grp, s8 num, s8 wrp);
+void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpNum);
+void c2_load_new_map(void);
+void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
+void mapldr_default(void);
 
 #endif //GUARD_ROM4_H

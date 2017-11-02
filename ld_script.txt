@@ -147,7 +147,7 @@ SECTIONS {
         src/money.o(.text);
         asm/contest_effect.o(.text);
         asm/record_mixing.o(.text);
-        asm/secret_base.o(.text);
+        src/secret_base.o(.text);
         src/tv.o(.text);
         asm/contest_link_80F57C4.o(.text);
         asm/script_pokemon_util_80F87D8.o(.text);
@@ -226,7 +226,7 @@ SECTIONS {
         src/clear_save_data_screen.o(.text);
         asm/intro_credits_graphics.o(.text);
         src/evolution_graphics.o(.text);
-        asm/bard_music.o(.text);
+        src/bard_music.o(.text);
         asm/fldeff_teleport.o(.text);
         asm/battle_link_817C95C.o(.text);
         asm/pokemon_animation.o(.text);
@@ -394,7 +394,7 @@ SECTIONS {
         src/money.o(.rodata);
         data/contest_effect.o(.rodata);
         data/record_mixing.o(.rodata);
-        data/secret_base.o(.rodata);
+        src/secret_base.o(.rodata);
         src/tv.o(.rodata);
         data/contest_link_80F57C4.o(.rodata);
         data/script_pokemon_util_80F87D8.o(.rodata);
@@ -448,7 +448,7 @@ SECTIONS {
         src/clear_save_data_screen.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
         src/evolution_graphics.o(.rodata);
-        data/bard_music.o(.rodata);
+        src/bard_music.o(.rodata);
         data/data_860A4AC.o(.rodata);
         src/battle_controller_recorded_opponent.o(.rodata);
         src/battle_controller_recorded_player.o(.rodata);

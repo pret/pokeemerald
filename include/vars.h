@@ -1,6 +1,8 @@
 #ifndef GUARD_VARS_H
 #define GUARD_VARS_H
 
+#define VAR_0x3F20                 0x3F20
+
 #define VAR_0x4000                 0x4000
 #define VAR_0x4001                 0x4001
 #define VAR_0x4002                 0x4002
@@ -62,6 +64,11 @@
 #define VAR_DAILY_PLANTED_BERRIES  0x40E9
 #define VAR_DAILY_PICKED_BERRIES   0x40EA
 #define VAR_DAILY_ROULETTE         0x40EB
+#define VAR_0x40EC                 0x40EC
+#define VAR_0x40ED                 0x40ED
+#define VAR_0x40EE                 0x40EE
+#define VAR_0x40EF                 0x40EF
+#define VAR_0x40F0                 0x40F0
 #define VAR_DAILY_BP               0x40F1
 
 #endif // GUARD_VARS_H

@@ -21,6 +21,7 @@
 #include "field_effect_helpers.h"
 #include "field_camera.h"
 #include "trainer_see.h"
+#include "decoration.h"
 #include "field_map_obj.h"
 
 #define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
@@ -1755,18 +1756,18 @@ void sub_808F254(u8 localId, u8 mapNum, u8 mapGroup)
     }
 }
 
-void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 action)
+void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat)
 {
     u8 mapObjectId;
 
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
     {
-        switch (action)
+        switch (decorCat)
         {
-            case 6:
+            case DECORCAT_DOLL:
                 sub_808F228(&gMapObjects[mapObjectId], gUnknown_082766A2);
                 break;
-            case 7:
+            case DECORCAT_CUSHION:
                 sub_808F228(&gMapObjects[mapObjectId], gUnknown_082766A6);
                 break;
         }
