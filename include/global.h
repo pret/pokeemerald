@@ -192,7 +192,9 @@ struct SaveBlock2
     /*0xAC*/ u32 encryptionKey;
 
         // TODO: fix and verify labels
-    /*0xB0*/ u8 field_B0[316];
+    /*0xB0*/ u8 field_B0[0x54];
+    /*0x104*/ u16 unk_104[1];
+    /*0x106*/ u8 filler_106[0xe6];
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
@@ -460,8 +462,8 @@ struct LilycoveLadyQuiz
     /*0x000*/ u8 id;
     /*0x001*/ u8 phase;
     /*0x002*/ u16 unk_002[9];
-    /*0x014*/ u16 unk_014;
-    /*0x016*/ u16 unk_016;
+    /*0x014*/ u16 unk_014[1];
+    /*0x016*/ u16 unk_016[1];
     /*0x018*/ u8 playerName[8];
     /*0x020*/ u16 playerTrainerId[4];
     /*0x028*/ u16 itemId;
@@ -496,7 +498,7 @@ struct LilycoveLadyContest
     /*0x00e*/ u8 language;
 };
 
-typedef union // TODO
+typedef union // 3b58
 {
     struct LilycoveLadyQuiz quiz;
     struct LilycoveLadyFavour favour;
@@ -579,13 +581,12 @@ struct SaveBlock1
     /*0x2BB0*/ u16 unk2BB0[6];
     /*0x2BBC*/ u16 unk2BBC[6];
     /*0x2BC8*/ u16 unk2BC8[6];
-    /*0x2BD4*/ u16 unk2BD4[3];
+    /*0x2BD4*/ u16 unk2BD4[6];
     /*0x2BE0*/ struct MailStruct mail[16];
     /*0x2E20*/ u8 additionalPhrases[5]; // bitfield for 33 additional phrases in easy chat system
     /*0x2E25*/ u8 unk2E25[3]; // possibly padding?
     /*0x2E28*/ OldMan oldMan;
     /*0x2e64*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
-    /*0x2e8c*/ u8 filler_2E8C[0x4];
     /*0x2e90*/ struct ContestWinner contestWinners[13]; // 0 - 5 used in contest hall, 6 - 7 unused?, 8 - 12 museum
     /*0x3030*/ struct DaycareData daycare;
     /*0x3150*/ struct LinkBattleRecord linkBattleRecords[5];

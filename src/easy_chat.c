@@ -6,6 +6,7 @@
 #include "overworld.h"
 #include "task.h"
 #include "main.h"
+#include "link.h"
 #include "window.h"
 #include "palette.h"
 #include "event_data.h"
@@ -14,11 +15,11 @@
 // Static type declarations
 
 #define EZCHAT_TASK_STATE        0
-#define EZCHAT_TASK_UNK01        1
-#define EZCHAT_TASK_UNK02        2
+#define EZCHAT_TASK_KIND        1
+#define EZCHAT_TASK_WORDS        2
 #define EZCHAT_TASK_MAINCALLBACK 4
 #define EZCHAT_TASK_UNK06        6
-#define EZCHAT_TASK_UNK07        7
+#define EZCHAT_TASK_SIZE        7
 
 // Static RAM declarations
 static void sub_811A2C0(u8);
@@ -45,15 +46,15 @@ void sub_811F2B8(void);
 
 // .text
 
-void sub_811A20C(u8 a0, u32 a1, MainCallback callback, u8 a3)
+void sub_811A20C(u8 kind, u16 *words, MainCallback callback, u8 sizeParam)
 {
     u8 taskId;
 
     ResetTasks();
     taskId = CreateTask(sub_811A2C0, 0);
-    gTasks[taskId].data[EZCHAT_TASK_UNK01] = a0;
-    gTasks[taskId].data[EZCHAT_TASK_UNK07] = a3;
-    SetWordTaskArg(taskId, EZCHAT_TASK_UNK02, a1);
+    gTasks[taskId].data[EZCHAT_TASK_KIND] = kind;
+    gTasks[taskId].data[EZCHAT_TASK_SIZE] = sizeParam;
+    SetWordTaskArg(taskId, EZCHAT_TASK_WORDS, (u32)words);
     SetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK, (u32)callback);
     SetMainCallback2(sub_811A278);
 }
@@ -176,7 +177,7 @@ static bool8 sub_811A428(u8 taskId)
             }
             break;
         case 2:
-            if (!sub_811A95C(data[EZCHAT_TASK_UNK01], GetWordTaskArg(taskId, EZCHAT_TASK_UNK02), data[EZCHAT_TASK_UNK07]))
+            if (!sub_811A95C(data[EZCHAT_TASK_KIND], GetWordTaskArg(taskId, EZCHAT_TASK_WORDS), data[EZCHAT_TASK_SIZE]))
             {
                 sub_811A4D0((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
             }
@@ -208,76 +209,98 @@ void sub_811A4D0(MainCallback callback)
     FreeAllWindowBuffers();
     SetMainCallback2(callback);
 }
-//
-//void easy_chat_input_maybe(void)
-//{
-//    u16 i;
-//    u16 *words;
-//    OldMan *oldMan;
-//    u8 sizeParam = 3;
-//    switch (gSpecialVar_0x8004)
-//    {
-//        case 0:
-//            words = gSaveBlock1Ptr->unk2BB0;
-//            break;
-//        case 1:
-//            words = gSaveBlock1Ptr->unk2BBC;
-//            break;
-//        case 2:
-//            words = gSaveBlock1Ptr->unk2BC8;
-//            break;
-//        case 3:
-//            words = gSaveBlock1Ptr->unk2BD4;
-//            break;
-//        case 4:
-//            words = gSaveBlock1Ptr->mail[gSpecialVar_0x8005].words;
-//            break;
-//        case 6:
-//            oldMan = &gSaveBlock1Ptr->oldMan;
-//            for (i=0; i<6; i++)
-//            {
-//                oldMan->oldMan1.mauvilleOldMan_ecArray2[i] = oldMan->oldMan1.mauvilleOldMan_ecArray[i];
-//            }
-//            words = oldMan->oldMan1.mauvilleOldMan_ecArray2;
-//            break;
-//        case 5:
-//            words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.var04;
-//            sizeParam = gSpecialVar_0x8006;
-//            break;
-//        case 7:
-//            words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.var1C[gSpecialVar_0x8006];
-//            sizeParam = 1;
-//            break;
-//        case 8:
-//            words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].recentHappenings.var02;
-//            sizeParam = 0;
-//            break;
-//        case 9:
-//            words = NULL;
-//            break;
-//        case 10:
-//            words = &gSaveBlock1Ptr->gabbyAndTyData.quote;
-//            *words = -1;
-//            sizeParam = 1;
-//            break;
-//        case 11:
-//            words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.var04[gSpecialVar_0x8006];
-//            sizeParam = 0;
-//            break;
-//        case 12:
-//            words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.var18;
-//            sizeParam = 1;
-//            break;
-//        case 13:
-//            words = (u16 *)gStringVar3;
-//            sub_811F88C(words, 2);
-//            break;
-//        case 14:
-//            words =
-//        default:
-//            return;
-//    }
-//    overworld_free_bg_tilemaps();
-//    sub_811A20C(gSpecialVar_0x8004, words, sub_80861B0, sizeParam);
-//}
+
+void easy_chat_input_maybe(void)
+{
+    int i;
+    u16 *words;
+    OldMan *oldMan;
+    u8 sizeParam = 3;
+    switch (gSpecialVar_0x8004)
+    {
+        case 0:
+            words = gSaveBlock1Ptr->unk2BB0;
+            break;
+        case 1:
+            words = gSaveBlock1Ptr->unk2BBC;
+            break;
+        case 2:
+            words = gSaveBlock1Ptr->unk2BC8;
+            break;
+        case 3:
+            words = gSaveBlock1Ptr->unk2BD4;
+            break;
+        case 4:
+            words = gSaveBlock1Ptr->mail[gSpecialVar_0x8005].words;
+            break;
+        case 6:
+            oldMan = &gSaveBlock1Ptr->oldMan;
+            for (i = 0; i < 6; i ++)
+            {
+                oldMan->oldMan1.mauvilleOldMan_ecArray2[i] = oldMan->oldMan1.mauvilleOldMan_ecArray[i];
+            }
+            words = oldMan->oldMan1.mauvilleOldMan_ecArray2;
+            break;
+        case 5:
+            words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.words;
+            sizeParam = gSpecialVar_0x8006;
+            break;
+        case 7:
+            words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.words[gSpecialVar_0x8006];
+            sizeParam = 1;
+            break;
+        case 8:
+            words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].unkShow04.words;
+            sizeParam = 0;
+            break;
+        case 9:
+            words = (u16 *)gStringVar3;
+            words[0] = gSaveBlock1Ptr->easyChatPairs[0].words[0];
+            words[1] = gSaveBlock1Ptr->easyChatPairs[0].words[1];
+            break;
+        case 10:
+            words = gSaveBlock1Ptr->gabbyAndTyData.quote;
+            *words = -1;
+            sizeParam = 1;
+            break;
+        case 11:
+            words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.words[gSpecialVar_0x8006];
+            sizeParam = 0;
+            break;
+        case 12:
+            words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.words18;
+            sizeParam = 1;
+            break;
+        case 13:
+            words = (u16 *)gStringVar3;
+            InitializeEasyChatWordArray(words, 2);
+            break;
+        case 14:
+            words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanClubSpecial.words;
+            words[0] = -1;
+            sizeParam = 2;
+            break;
+        case 15:
+            words = gSaveBlock1Ptr->lilycoveLady.quiz.unk_016;
+            break;
+        case 16:
+            return;
+        case 17:
+            words = gSaveBlock1Ptr->lilycoveLady.quiz.unk_002;
+            break;
+        case 18:
+            words = gSaveBlock1Ptr->lilycoveLady.quiz.unk_014;
+            break;
+        case 19:
+            words = gSaveBlock2Ptr->unk_104;
+            break;
+        case 20:
+            words = sub_801B058();
+            break;
+        default:
+            return;
+    }
+    overworld_free_bg_tilemaps();
+    sub_811A20C(gSpecialVar_0x8004, words, sub_80861B0, sizeParam);
+}
 
