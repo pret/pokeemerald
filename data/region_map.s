@@ -4,12 +4,6 @@
 	.section .rodata
 	.align 2, 0
 
-gUnknown_085A096C:: @ 85A096C
-	.incbin "baserom.gba", 0x5a096c, 0x1a4
-
-@ 85A0B10
-	.include "data/region_map_entries.inc"
-
 gUnknown_085A1B24:: @ 85A1B24
 	.incbin "baserom.gba", 0x5a1b24, 0x60
 
