@@ -145,30 +145,30 @@ static void SetControllersVariables(void)
 
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
-            gBattleBankFunc[0] = SetBankFuncToRecordedPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToRecordedPlayer;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[2] = SetBankFuncToPlayerPartnerBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToPlayerPartner;
             gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToOpponent;
             gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
         }
         else
         {
-            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToPlayer;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[2] = SetBankFuncToPlayerPartnerBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToPlayerPartner;
             gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToOpponent;
             gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
         }
 
@@ -189,15 +189,15 @@ static void SetControllersVariables(void)
         gBattleMainFunc = BeginBattleIntro;
 
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            gBattleBankFunc[0] = SetBankFuncToSafariBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToSafari;
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
-            gBattleBankFunc[0] = SetBankFuncToWallyBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToWally;
         else
-            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToPlayer;
 
         gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-        gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+        gBattleBankFunc[1] = SetControllerToOpponent;
         gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
         gNoOfAllBanks = 2;
@@ -210,20 +210,20 @@ static void SetControllersVariables(void)
                 {
                     gBattleMainFunc = BeginBattleIntro;
 
-                    gBattleBankFunc[0] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                    gBattleBankFunc[0] = SetControllerToRecordedPlayer;
                     gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-                    gBattleBankFunc[1] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                    gBattleBankFunc[1] = SetControllerToRecordedOpponent;
                     gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
                     gNoOfAllBanks = 2;
                 }
                 else // see how the banks are switched
                 {
-                    gBattleBankFunc[1] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                    gBattleBankFunc[1] = SetControllerToRecordedPlayer;
                     gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
 
-                    gBattleBankFunc[0] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                    gBattleBankFunc[0] = SetControllerToRecordedOpponent;
                     gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
 
                     gNoOfAllBanks = 2;
@@ -231,10 +231,10 @@ static void SetControllersVariables(void)
             }
             else
             {
-                gBattleBankFunc[0] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[0] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-                gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+                gBattleBankFunc[1] = SetControllerToOpponent;
                 gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
             }
         }
@@ -243,16 +243,16 @@ static void SetControllersVariables(void)
     {
         gBattleMainFunc = BeginBattleIntro;
 
-        gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+        gBattleBankFunc[0] = SetControllerToPlayer;
         gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-        gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+        gBattleBankFunc[1] = SetControllerToOpponent;
         gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-        gBattleBankFunc[2] = SetBankFuncToPlayerBufferRunCommand;
+        gBattleBankFunc[2] = SetControllerToPlayer;
         gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-        gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+        gBattleBankFunc[3] = SetControllerToOpponent;
         gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
 
         gNoOfAllBanks = 4;
@@ -263,16 +263,16 @@ static void SetControllersVariables(void)
             {
                 gBattleMainFunc = BeginBattleIntro;
 
-                gBattleBankFunc[0] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[0] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[0] = 0;
 
-                gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+                gBattleBankFunc[1] = SetControllerToOpponent;
                 gBanksByIdentity[1] = 1;
 
-                gBattleBankFunc[2] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[2] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[2] = 2;
 
-                gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+                gBattleBankFunc[3] = SetControllerToOpponent;
                 gBanksByIdentity[3] = 3;
 
                 gNoOfAllBanks = 4;
@@ -307,7 +307,7 @@ static void SetControllersVariables(void)
 
                     if (i == var)
                     {
-                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToRecordedPlayer;
                         switch (gLinkPlayers[i].lp_field_18)
                         {
                         case 0:
@@ -325,7 +325,7 @@ static void SetControllersVariables(void)
                     else if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[var].lp_field_18 & 1))
                             || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[var].lp_field_18 & 1)))
                     {
-                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToRecordedPlayer;
                         switch (gLinkPlayers[i].lp_field_18)
                         {
                         case 0:
@@ -342,7 +342,7 @@ static void SetControllersVariables(void)
                     }
                     else
                     {
-                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                        gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToRecordedOpponent;
                         switch (gLinkPlayers[i].lp_field_18)
                         {
                         case 0:
@@ -361,51 +361,51 @@ static void SetControllersVariables(void)
             }
             else if (gBattleTypeFlags & BATTLE_TYPE_WILD)
             {
-                gBattleBankFunc[0] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[0] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-                gBattleBankFunc[2] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[2] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
                 if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
                 {
-                  gBattleBankFunc[1] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                  gBattleBankFunc[1] = SetControllerToRecordedOpponent;
                   gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-                  gBattleBankFunc[3] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                  gBattleBankFunc[3] = SetControllerToRecordedOpponent;
                   gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
                 }
                 else
                 {
-                  gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+                  gBattleBankFunc[1] = SetControllerToOpponent;
                   gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-                  gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+                  gBattleBankFunc[3] = SetControllerToOpponent;
                   gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
                 }
             }
             else
             {
-                gBattleBankFunc[1] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[1] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
 
-                gBattleBankFunc[3] = SetBankFuncToRecordedPlayerBufferRunCommand;
+                gBattleBankFunc[3] = SetControllerToRecordedPlayer;
                 gBanksByIdentity[3] = IDENTITY_PLAYER_MON2;
 
                 if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
                 {
-                    gBattleBankFunc[0] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                    gBattleBankFunc[0] = SetControllerToRecordedOpponent;
                     gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
 
-                    gBattleBankFunc[2] = SetBankFuncToRecordedOpponentBufferRunCommand;
+                    gBattleBankFunc[2] = SetControllerToRecordedOpponent;
                     gBanksByIdentity[2] = IDENTITY_OPPONENT_MON2;
                 }
                 else
                 {
-                    gBattleBankFunc[0] = SetBankFuncToOpponentBufferRunCommand;
+                    gBattleBankFunc[0] = SetControllerToOpponent;
                     gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
 
-                    gBattleBankFunc[2] = SetBankFuncToOpponentBufferRunCommand;
+                    gBattleBankFunc[2] = SetControllerToOpponent;
                     gBanksByIdentity[2] = IDENTITY_OPPONENT_MON2;
                 }
             }
@@ -424,20 +424,20 @@ static void SetControllersVariablesInLinkBattle(void)
         {
             gBattleMainFunc = BeginBattleIntro;
 
-            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToPlayer;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToLinkOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
             gNoOfAllBanks = 2;
         }
         else
         {
-            gBattleBankFunc[1] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToPlayer;
             gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[0] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToLinkOpponent;
             gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
 
             gNoOfAllBanks = 2;
@@ -449,32 +449,32 @@ static void SetControllersVariablesInLinkBattle(void)
         {
             gBattleMainFunc = BeginBattleIntro;
 
-            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToPlayer;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToLinkOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[2] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToPlayer;
             gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[3] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToLinkOpponent;
             gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
 
             gNoOfAllBanks = 4;
         }
         else
         {
-            gBattleBankFunc[1] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToPlayer;
             gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[0] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToLinkOpponent;
             gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[3] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToPlayer;
             gBanksByIdentity[3] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[2] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToLinkOpponent;
             gBanksByIdentity[2] = IDENTITY_OPPONENT_MON2;
 
             gNoOfAllBanks = 4;
@@ -486,32 +486,32 @@ static void SetControllersVariablesInLinkBattle(void)
         {
             gBattleMainFunc = BeginBattleIntro;
 
-            gBattleBankFunc[0] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToPlayer;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[2] = SetBankFuncToLinkPartnerBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToLinkPartner;
             gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToOpponent;
             gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
 
             gNoOfAllBanks = 4;
         }
         else
         {
-            gBattleBankFunc[0] = SetBankFuncToLinkPartnerBufferRunCommand;
+            gBattleBankFunc[0] = SetControllerToLinkPartner;
             gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
 
-            gBattleBankFunc[1] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[1] = SetControllerToLinkOpponent;
             gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
 
-            gBattleBankFunc[2] = SetBankFuncToPlayerBufferRunCommand;
+            gBattleBankFunc[2] = SetControllerToPlayer;
             gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
 
-            gBattleBankFunc[3] = SetBankFuncToLinkOpponentBufferRunCommand;
+            gBattleBankFunc[3] = SetControllerToLinkOpponent;
             gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
 
             gNoOfAllBanks = 4;
@@ -549,7 +549,7 @@ static void SetControllersVariablesInLinkBattle(void)
 
             if (i == multiplayerId)
             {
-                gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToPlayerBufferRunCommand;
+                gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToPlayer;
                 switch (gLinkPlayers[i].lp_field_18)
                 {
                 case 0:
@@ -569,7 +569,7 @@ static void SetControllersVariablesInLinkBattle(void)
                 if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[multiplayerId].lp_field_18 & 1))
                  || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[multiplayerId].lp_field_18 & 1)))
                 {
-                    gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToLinkPartnerBufferRunCommand;
+                    gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToLinkPartner;
                     switch (gLinkPlayers[i].lp_field_18)
                     {
                     case 0:
@@ -586,7 +586,7 @@ static void SetControllersVariablesInLinkBattle(void)
                 }
                 else
                 {
-                    gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetBankFuncToLinkOpponentBufferRunCommand;
+                    gBattleBankFunc[gLinkPlayers[i].lp_field_18] = SetControllerToLinkOpponent;
                     switch (gLinkPlayers[i].lp_field_18)
                     {
                     case 0:
@@ -939,11 +939,11 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
     }
 }
 
-void EmitGetMonData(u8 bufferId, u8 arg1, u8 arg2)
+void EmitGetMonData(u8 bufferId, u8 requestId, u8 monToCheck)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_GETMONDATA;
-    gBattleBuffersTransferData[1] = arg1;
-    gBattleBuffersTransferData[2] = arg2;
+    gBattleBuffersTransferData[1] = requestId;
+    gBattleBuffersTransferData[2] = monToCheck;
     gBattleBuffersTransferData[3] = 0;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
@@ -957,13 +957,13 @@ void EmitGetRawMonData(u8 bufferId, u8 monId, u8 bytes)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitSetMonData(u8 bufferId, u8 request, u8 c, u8 bytes, void *data)
+void EmitSetMonData(u8 bufferId, u8 requestId, u8 monToCheck, u8 bytes, void *data)
 {
     s32 i;
 
     gBattleBuffersTransferData[0] = CONTROLLER_SETMONDATA;
-    gBattleBuffersTransferData[1] = request;
-    gBattleBuffersTransferData[2] = c;
+    gBattleBuffersTransferData[1] = requestId;
+    gBattleBuffersTransferData[2] = monToCheck;
     for (i = 0; i < bytes; i++)
         gBattleBuffersTransferData[3 + i] = *(u8*)(data++);
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 3 + bytes);
@@ -984,9 +984,9 @@ void EmitSetRawMonData(u8 bufferId, u8 monId, u8 bytes, void *data)
 void EmitLoadMonSprite(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_LOADMONSPRITE;
-    gBattleBuffersTransferData[1] = 4;
-    gBattleBuffersTransferData[2] = 4;
-    gBattleBuffersTransferData[3] = 4;
+    gBattleBuffersTransferData[1] = CONTROLLER_LOADMONSPRITE;
+    gBattleBuffersTransferData[2] = CONTROLLER_LOADMONSPRITE;
+    gBattleBuffersTransferData[3] = CONTROLLER_LOADMONSPRITE;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1009,60 +1009,60 @@ void EmitReturnMonToBall(u8 bufferId, u8 arg1)
 void EmitDrawTrainerPic(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_DRAWTRAINERPIC;
-    gBattleBuffersTransferData[1] = 7;
-    gBattleBuffersTransferData[2] = 7;
-    gBattleBuffersTransferData[3] = 7;
+    gBattleBuffersTransferData[1] = CONTROLLER_DRAWTRAINERPIC;
+    gBattleBuffersTransferData[2] = CONTROLLER_DRAWTRAINERPIC;
+    gBattleBuffersTransferData[3] = CONTROLLER_DRAWTRAINERPIC;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitTrainerSlide(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_TRAINERSLIDE;
-    gBattleBuffersTransferData[1] = 8;
-    gBattleBuffersTransferData[2] = 8;
-    gBattleBuffersTransferData[3] = 8;
+    gBattleBuffersTransferData[1] = CONTROLLER_TRAINERSLIDE;
+    gBattleBuffersTransferData[2] = CONTROLLER_TRAINERSLIDE;
+    gBattleBuffersTransferData[3] = CONTROLLER_TRAINERSLIDE;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitTrainerSlideBack(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_TRAINERSLIDEBACK;
-    gBattleBuffersTransferData[1] = 9;
-    gBattleBuffersTransferData[2] = 9;
-    gBattleBuffersTransferData[3] = 9;
+    gBattleBuffersTransferData[1] = CONTROLLER_TRAINERSLIDEBACK;
+    gBattleBuffersTransferData[2] = CONTROLLER_TRAINERSLIDEBACK;
+    gBattleBuffersTransferData[3] = CONTROLLER_TRAINERSLIDEBACK;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitFaintAnimation(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_FAINTANIMATION;
-    gBattleBuffersTransferData[1] = 10;
-    gBattleBuffersTransferData[2] = 10;
-    gBattleBuffersTransferData[3] = 10;
+    gBattleBuffersTransferData[1] = CONTROLLER_FAINTANIMATION;
+    gBattleBuffersTransferData[2] = CONTROLLER_FAINTANIMATION;
+    gBattleBuffersTransferData[3] = CONTROLLER_FAINTANIMATION;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitCmd11(u8 bufferId)
+void EmitPaletteFade(u8 bufferId)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_11;
-    gBattleBuffersTransferData[1] = 11;
-    gBattleBuffersTransferData[2] = 11;
-    gBattleBuffersTransferData[3] = 11;
+    gBattleBuffersTransferData[0] = CONTROLLER_PALETTEFADE;
+    gBattleBuffersTransferData[1] = CONTROLLER_PALETTEFADE;
+    gBattleBuffersTransferData[2] = CONTROLLER_PALETTEFADE;
+    gBattleBuffersTransferData[3] = CONTROLLER_PALETTEFADE;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitCmd12(u8 bufferId)
+void EmitSuccessBallThrowAnim(u8 bufferId)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_12;
-    gBattleBuffersTransferData[1] = 12;
-    gBattleBuffersTransferData[2] = 12;
-    gBattleBuffersTransferData[3] = 12;
+    gBattleBuffersTransferData[0] = CONTROLLER_SUCCESSBALLTHROWANIM;
+    gBattleBuffersTransferData[1] = CONTROLLER_SUCCESSBALLTHROWANIM;
+    gBattleBuffersTransferData[2] = CONTROLLER_SUCCESSBALLTHROWANIM;
+    gBattleBuffersTransferData[3] = CONTROLLER_SUCCESSBALLTHROWANIM;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitBallThrow(u8 bufferId, u8 caseId)
+void EmitBallThrowAnim(u8 bufferId, u8 caseId)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_BALLTHROW;
+    gBattleBuffersTransferData[0] = CONTROLLER_BALLTHROWANIM;
     gBattleBuffersTransferData[1] = caseId;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 2);
 }
@@ -1146,7 +1146,7 @@ void EmitPrintStringPlayerOnly(u8 bufferId, u16 stringID)
     struct StringInfoBattle* stringInfo;
 
     gBattleBuffersTransferData[0] = CONTROLLER_PRINTSTRINGPLAYERONLY;
-    gBattleBuffersTransferData[1] = 17;
+    gBattleBuffersTransferData[1] = CONTROLLER_PRINTSTRINGPLAYERONLY;
     gBattleBuffersTransferData[2] = stringID;
     gBattleBuffersTransferData[3] = (stringID & 0xFF00) >> 8;
 
@@ -1178,12 +1178,12 @@ void EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitCmd19(u8 bufferId)
+void EmitUnknownYesNoBox(u8 bufferId)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_19;
-    gBattleBuffersTransferData[1] = 19;
-    gBattleBuffersTransferData[2] = 19;
-    gBattleBuffersTransferData[3] = 19;
+    gBattleBuffersTransferData[0] = CONTROLLER_UNKNOWNYESNOBOX;
+    gBattleBuffersTransferData[1] = CONTROLLER_UNKNOWNYESNOBOX;
+    gBattleBuffersTransferData[2] = CONTROLLER_UNKNOWNYESNOBOX;
+    gBattleBuffersTransferData[3] = CONTROLLER_UNKNOWNYESNOBOX;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1200,7 +1200,7 @@ void EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct 
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, sizeof(*movePpData) + 4);
 }
 
-void EmitOpenBag(u8 bufferId, u8 *arg1)
+void EmitChooseItem(u8 bufferId, u8 *arg1)
 {
     s32 i;
 
@@ -1226,9 +1226,9 @@ void EmitChoosePokemon(u8 bufferId, u8 caseId, u8 arg2, u8 abilityId, u8* arg4)
 void EmitCmd23(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_23;
-    gBattleBuffersTransferData[1] = 23;
-    gBattleBuffersTransferData[2] = 23;
-    gBattleBuffersTransferData[3] = 23;
+    gBattleBuffersTransferData[1] = CONTROLLER_23;
+    gBattleBuffersTransferData[2] = CONTROLLER_23;
+    gBattleBuffersTransferData[3] = CONTROLLER_23;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1289,7 +1289,7 @@ void EmitDataTransfer(u8 bufferId, u16 size, void *data)
     s32 i;
 
     gBattleBuffersTransferData[0] = CONTROLLER_DATATRANSFER;
-    gBattleBuffersTransferData[1] = 29;
+    gBattleBuffersTransferData[1] = CONTROLLER_DATATRANSFER;
     gBattleBuffersTransferData[2] = size;
     gBattleBuffersTransferData[3] = (size & 0xFF00) >> 8;
     for (i = 0; i < size; i++)
@@ -1337,38 +1337,38 @@ void EmitCmd32(u8 bufferId, u16 size, void *data)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, size + 3);
 }
 
-void EmitCmd33(u8 bufferId, u8 arg1, u16 arg2)
+void EmitTwoReturnValues(u8 bufferId, u8 arg1, u16 arg2)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_33;
+    gBattleBuffersTransferData[0] = CONTROLLER_TWORETURNVALUES;
     gBattleBuffersTransferData[1] = arg1;
     gBattleBuffersTransferData[2] = arg2;
     gBattleBuffersTransferData[3] = (arg2 & 0xFF00) >> 8;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitCmd34(u8 bufferId, u8 b, u8 *c)
+void EmitChosenMonReturnValue(u8 bufferId, u8 b, u8 *c)
 {
     s32 i;
 
-    gBattleBuffersTransferData[0] = CONTROLLER_34;
+    gBattleBuffersTransferData[0] = CONTROLLER_CHOSENMONRETURNVALUE;
     gBattleBuffersTransferData[1] = b;
     for (i = 0; i < 3; i++)
         gBattleBuffersTransferData[2 + i] = c[i];
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 5);
 }
 
-void EmitCmd35(u8 bufferId, u16 b)
+void EmitOneReturnValue(u8 bufferId, u16 arg1)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_35;
-    gBattleBuffersTransferData[1] = b;
-    gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
+    gBattleBuffersTransferData[0] = CONTROLLER_ONERETURNVALUE;
+    gBattleBuffersTransferData[1] = arg1;
+    gBattleBuffersTransferData[2] = (arg1 & 0xFF00) >> 8;
     gBattleBuffersTransferData[3] = 0;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitCmd36(u8 bufferId, u16 b)
+void EmitOneReturnValue_Duplicate(u8 bufferId, u16 b)
 {
-    gBattleBuffersTransferData[0] = CONTROLLER_36;
+    gBattleBuffersTransferData[0] = CONTROLLER_ONERETURNVALUE_DUPLICATE;
     gBattleBuffersTransferData[1] = b;
     gBattleBuffersTransferData[2] = (b & 0xFF00) >> 8;
     gBattleBuffersTransferData[3] = 0;
@@ -1378,9 +1378,9 @@ void EmitCmd36(u8 bufferId, u16 b)
 void EmitCmd37(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_37;
-    gBattleBuffersTransferData[1] = 37;
-    gBattleBuffersTransferData[2] = 37;
-    gBattleBuffersTransferData[3] = 37;
+    gBattleBuffersTransferData[1] = CONTROLLER_37;
+    gBattleBuffersTransferData[2] = CONTROLLER_37;
+    gBattleBuffersTransferData[3] = CONTROLLER_37;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1394,36 +1394,36 @@ void EmitCmd38(u8 bufferId, u8 b)
 void EmitCmd39(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_39;
-    gBattleBuffersTransferData[1] = 39;
-    gBattleBuffersTransferData[2] = 39;
-    gBattleBuffersTransferData[3] = 39;
+    gBattleBuffersTransferData[1] = CONTROLLER_39;
+    gBattleBuffersTransferData[2] = CONTROLLER_39;
+    gBattleBuffersTransferData[3] = CONTROLLER_39;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitCmd40(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_40;
-    gBattleBuffersTransferData[1] = 40;
-    gBattleBuffersTransferData[2] = 40;
-    gBattleBuffersTransferData[3] = 40;
+    gBattleBuffersTransferData[1] = CONTROLLER_40;
+    gBattleBuffersTransferData[2] = CONTROLLER_40;
+    gBattleBuffersTransferData[3] = CONTROLLER_40;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitHitAnimation(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_HITANIMATION;
-    gBattleBuffersTransferData[1] = 41;
-    gBattleBuffersTransferData[2] = 41;
-    gBattleBuffersTransferData[3] = 41;
+    gBattleBuffersTransferData[1] = CONTROLLER_HITANIMATION;
+    gBattleBuffersTransferData[2] = CONTROLLER_HITANIMATION;
+    gBattleBuffersTransferData[3] = CONTROLLER_HITANIMATION;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitCmd42(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_42;
-    gBattleBuffersTransferData[1] = 42;
-    gBattleBuffersTransferData[2] = 42;
-    gBattleBuffersTransferData[3] = 42;
+    gBattleBuffersTransferData[1] = CONTROLLER_42;
+    gBattleBuffersTransferData[2] = CONTROLLER_42;
+    gBattleBuffersTransferData[3] = CONTROLLER_42;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1448,9 +1448,9 @@ void EmitPlayFanfareOrBGM(u8 bufferId, u16 songId, bool8 playBGM)
 void EmitFaintingCry(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_FAINTINGCRY;
-    gBattleBuffersTransferData[1] = 45;
-    gBattleBuffersTransferData[2] = 45;
-    gBattleBuffersTransferData[3] = 45;
+    gBattleBuffersTransferData[1] = CONTROLLER_FAINTINGCRY;
+    gBattleBuffersTransferData[2] = CONTROLLER_FAINTINGCRY;
+    gBattleBuffersTransferData[3] = CONTROLLER_FAINTINGCRY;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1464,9 +1464,9 @@ void EmitIntroSlide(u8 bufferId, u8 terrainId)
 void EmitIntroTrainerBallThrow(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_INTROTRAINERBALLTHROW;
-    gBattleBuffersTransferData[1] = 47;
-    gBattleBuffersTransferData[2] = 47;
-    gBattleBuffersTransferData[3] = 47;
+    gBattleBuffersTransferData[1] = CONTROLLER_INTROTRAINERBALLTHROW;
+    gBattleBuffersTransferData[2] = CONTROLLER_INTROTRAINERBALLTHROW;
+    gBattleBuffersTransferData[3] = CONTROLLER_INTROTRAINERBALLTHROW;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1477,7 +1477,7 @@ void EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8
     gBattleBuffersTransferData[0] = CONTROLLER_DRAWPARTYSTATUSSUMMARY;
     gBattleBuffersTransferData[1] = arg2 & 0x7F;
     gBattleBuffersTransferData[2] = (arg2 & 0x80) >> 7;
-    gBattleBuffersTransferData[3] = 48;
+    gBattleBuffersTransferData[3] = CONTROLLER_DRAWPARTYSTATUSSUMMARY;
     for (i = 0; i < (s32)(sizeof(struct HpAndStatus) * 6); i++)
         gBattleBuffersTransferData[4 + i] = *(i + (u8*)(hpAndStatus));
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, sizeof(struct HpAndStatus) * 6 + 4);
@@ -1486,18 +1486,18 @@ void EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus* hpAndStatus, u8
 void EmitCmd49(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_49;
-    gBattleBuffersTransferData[1] = 49;
-    gBattleBuffersTransferData[2] = 49;
-    gBattleBuffersTransferData[3] = 49;
+    gBattleBuffersTransferData[1] = CONTROLLER_49;
+    gBattleBuffersTransferData[2] = CONTROLLER_49;
+    gBattleBuffersTransferData[3] = CONTROLLER_49;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
 void EmitCmd50(u8 bufferId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_50;
-    gBattleBuffersTransferData[1] = 50;
-    gBattleBuffersTransferData[2] = 50;
-    gBattleBuffersTransferData[3] = 50;
+    gBattleBuffersTransferData[1] = CONTROLLER_50;
+    gBattleBuffersTransferData[2] = CONTROLLER_50;
+    gBattleBuffersTransferData[3] = CONTROLLER_50;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
@@ -1505,8 +1505,8 @@ void EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_SPRITEINVISIBILITY;
     gBattleBuffersTransferData[1] = isInvisible;
-    gBattleBuffersTransferData[2] = 51;
-    gBattleBuffersTransferData[3] = 51;
+    gBattleBuffersTransferData[2] = CONTROLLER_SPRITEINVISIBILITY;
+    gBattleBuffersTransferData[3] = CONTROLLER_SPRITEINVISIBILITY;
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 

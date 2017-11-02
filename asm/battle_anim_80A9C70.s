@@ -869,7 +869,7 @@ move_anim_start_t2: @ 80AA364
 	strb r4, [r0]
 	ldr r0, =gUnknown_082C92FC
 	movs r2, 0
-	bl DoBattleAnim
+	bl LaunchBattleAnimation
 	ldr r0, =task0A_80788BC
 	movs r1, 0xA
 	bl CreateTask

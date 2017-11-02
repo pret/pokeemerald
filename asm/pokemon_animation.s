@@ -4,6 +4,100 @@
 	.syntax unified
 
 	.text
+    
+
+	thumb_func_start nullsub_69
+nullsub_69: @ 817F3EC
+	bx lr
+	thumb_func_end nullsub_69
+
+	thumb_func_start sub_817F3F0
+sub_817F3F0: @ 817F3F0
+	push {r4-r6,lr}
+	mov r6, r9
+	mov r5, r8
+	push {r5,r6}
+	sub sp, 0x4
+	mov r9, r0
+	mov r8, r1
+	adds r5, r2, 0
+	adds r4, r3, 0
+	lsls r5, 16
+	negs r5, r5
+	lsls r4, 16
+	negs r4, r4
+	lsrs r4, 16
+	mov r0, r8
+	lsls r0, 16
+	asrs r0, 16
+	mov r8, r0
+	asrs r5, 16
+	adds r1, r5, 0
+	bl Cos
+	adds r6, r0, 0
+	lsls r4, 16
+	asrs r4, 16
+	mov r0, r8
+	adds r1, r4, 0
+	bl Sin
+	subs r6, r0
+	lsls r6, 16
+	lsrs r6, 16
+	mov r0, r8
+	adds r1, r4, 0
+	bl Cos
+	adds r2, r0, 0
+	mov r0, r8
+	adds r1, r5, 0
+	str r2, [sp]
+	bl Sin
+	ldr r2, [sp]
+	adds r2, r0
+	negs r5, r5
+	negs r4, r4
+	lsls r6, 16
+	asrs r6, 16
+	lsls r5, 16
+	asrs r5, 16
+	adds r6, r5
+	mov r0, r9
+	strh r6, [r0, 0x24]
+	lsls r2, 16
+	asrs r2, 16
+	lsls r4, 16
+	asrs r4, 16
+	adds r2, r4
+	strh r2, [r0, 0x26]
+	add sp, 0x4
+	pop {r3,r4}
+	mov r8, r3
+	mov r9, r4
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_817F3F0
+
+	thumb_func_start GetSpeciesBackAnimId
+GetSpeciesBackAnimId: @ 817F474
+	push {lr}
+	lsls r0, 16
+	lsrs r0, 16
+	ldr r1, =gUnknown_0860A8C8
+	adds r0, r1
+	ldrb r0, [r0]
+	cmp r0, 0
+	bne _0817F48C
+	movs r0, 0
+	b _0817F492
+	.pool
+_0817F48C:
+	subs r0, 0x1
+	lsls r0, 24
+	lsrs r0, 24
+_0817F492:
+	pop {r1}
+	bx r1
+	thumb_func_end GetSpeciesBackAnimId
 
 	thumb_func_start sub_817F498
 sub_817F498: @ 817F498

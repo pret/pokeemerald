@@ -47,14 +47,14 @@ sub_81AABB0: @ 81AABB0
 	lsls r0, 24
 	cmp r0, 0
 	bne _081AABCC
-	ldr r2, =sub_8059D50
+	ldr r2, =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x1
 	movs r1, 0x5
 	bl GoToBagMenu
 	b _081AABD4
 	.pool
 _081AABCC:
-	ldr r1, =sub_8059D50
+	ldr r1, =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x1
 	bl sub_81C4F98
 _081AABD4:
@@ -5634,7 +5634,7 @@ DoWallyTutorialBagMenu: @ 81ADD70
 	movs r0, 0x4
 	movs r1, 0x1
 	bl AddBagItem
-	ldr r2, =sub_8059D50
+	ldr r2, =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0xA
 	movs r1, 0
 	bl GoToBagMenu

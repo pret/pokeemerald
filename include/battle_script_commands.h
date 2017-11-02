@@ -25,6 +25,7 @@
 #define VARIOUS_GET_MOVE_TARGET                 3
 #define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6
+#define VARIOUS_EMIT_YESNOBOX                   13
 #define VARIOUS_WAIT_CRY                        18
 #define VARIOUS_RETURN_OPPONENT_MON1            19
 #define VARIOUS_RETURN_OPPONENT_MON2            20
@@ -41,15 +42,18 @@
 #define STAT_CHANGE_WORKED      0
 #define STAT_CHANGE_DIDNT_WORK  1
 
+#define WINDOW_CLEAR            0x1
+#define WINDOW_x80              0x80
+
 void AI_CalcDmg(u8 bankAtk, u8 bankDef);
 u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
 u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility);
 u8 BankGetTurnOrder(u8 bank);
 void SetMoveEffect(bool8 primary, u8 certain);
-void BattleDestroyCursorAt(u8 cursorPosition);
-void BattleCreateCursorAt(u8 cursorPosition);
+void BattleDestroyYesNoCursorAt(u8 cursorPosition);
+void BattleCreateYesNoCursorAt(u8 cursorPosition);
 void BufferMoveToLearnIntoBattleTextBuff2(void);
-void sub_8056A3C(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
+void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
 bool8 UproarWakeUpCheck(u8 bank);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
