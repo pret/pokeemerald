@@ -326,11 +326,86 @@ static const struct {
     SYS_POKEMON_LEAGUE_FLY
 };
 
-extern const struct BgTemplate gUnknown_085A1EE4[];
-extern const struct WindowTemplate gUnknown_085A1EF0[];
-extern const struct SpritePalette gUnknown_085A1F10;
-extern const u16 gUnknown_085A1F18[][2];
-extern const struct SpriteTemplate gUnknown_085A1F7C;
+static const struct BgTemplate gUnknown_085A1EE4[] = {
+    { .bg = 0, .charBaseIndex = 0, .mapBaseIndex = 31, .screenSize = 0, .paletteMode = 0, .priority = 0 },
+    { .bg = 1, .charBaseIndex = 3, .mapBaseIndex = 30, .screenSize = 0, .paletteMode = 0, .priority = 1 },
+    { .bg = 2, .charBaseIndex = 2, .mapBaseIndex = 28, .screenSize = 2, .paletteMode = 1, .priority = 2 }
+};
+
+static const struct WindowTemplate gUnknown_085A1EF0[] = {
+    { 0, 17, 17, 12,  2, 15, 0x01 },
+    { 0, 17, 15, 12,  4, 15, 0x19 },
+    { 0,  1, 18, 14,  2, 15, 0x49 },
+    DUMMY_WIN_TEMPLATE
+};
+
+static const struct SpritePalette gUnknown_085A1F10 = {
+    Unknown_085A1D48, 2
+};
+
+static const u16 gUnknown_085A1F18[][2] = {
+    {FLAG_UNLOCK_BATTLE_FRONTIER, MAPSEC_BATTLE_FRONTIER},
+    {-1, MAPSEC_NONE}
+};
+
+static const struct OamData gOamData_085A1F20 = {
+    .priority = 2
+};
+
+static const union AnimCmd gUnknown_085A1F28[] = {
+    ANIMCMD_FRAME( 0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_085A1F30[] = {
+    ANIMCMD_FRAME( 1, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_085A1F38[] = {
+    ANIMCMD_FRAME( 3, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_085A1F40[] = {
+    ANIMCMD_FRAME( 5, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_085A1F48[] = {
+    ANIMCMD_FRAME( 6, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_085A1F50[] = {
+    ANIMCMD_FRAME( 8, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd gUnknown_085A1F58[] = {
+    ANIMCMD_FRAME(10, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const gUnknown_085A1F60[] = {
+    gUnknown_085A1F28,
+    gUnknown_085A1F30,
+    gUnknown_085A1F38,
+    gUnknown_085A1F40,
+    gUnknown_085A1F48,
+    gUnknown_085A1F50,
+    gUnknown_085A1F58
+};
+
+static const struct SpriteTemplate gUnknown_085A1F7C = {
+    2,
+    2,
+    &gOamData_085A1F20,
+    gUnknown_085A1F60,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
 
 // .text
 
