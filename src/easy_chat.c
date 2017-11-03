@@ -65,12 +65,13 @@ u16 sub_811ACDC(void);
 u16 sub_811AE44(void);
 u16 sub_811AF00(void);
 u16 sub_811AF8C(void);
-u16 sub_811B040(void);
 u16 sub_811AFEC(void);
+u16 sub_811B040(void);
 u16 sub_811B08C(void);
 u16 sub_811B0BC(void);
 u16 sub_811B0E8(void);
 u16 sub_811B0F8(void);
+u8 sub_811BA68(void);
 u8 sub_811BCC8(u8);
 void sub_811BDF0(u8 *);
 bool8 sub_811BF8C(void);
@@ -523,4 +524,16 @@ static u16 sub_811AAAC(void)
             return sub_811B0F8();
     }
     return 0;
+}
+
+bool8 sub_811AB44(void)
+{
+    switch (sub_811BA68())
+    {
+        case 2:
+        case 7:
+        case 8:
+            return TRUE;
+    }
+    return FALSE;
 }

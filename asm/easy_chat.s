@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_811AB44
-sub_811AB44: @ 811AB44
-	push {lr}
-	bl sub_811BA68
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	beq _0811AB5E
-	cmp r0, 0x2
-	blt _0811AB62
-	cmp r0, 0x8
-	bgt _0811AB62
-	cmp r0, 0x7
-	blt _0811AB62
-_0811AB5E:
-	movs r0, 0x1
-	b _0811AB64
-_0811AB62:
-	movs r0, 0
-_0811AB64:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_811AB44
-
 	thumb_func_start sub_811AB68
 sub_811AB68: @ 811AB68
 	push {r4-r7,lr}
