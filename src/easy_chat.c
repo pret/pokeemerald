@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "malloc.h"
 #include "songs.h"
 #include "sound.h"
 #include "overworld.h"
@@ -23,6 +24,31 @@
 #define EZCHAT_TASK_SIZE        7
 
 // Static RAM declarations
+
+EWRAM_DATA struct {
+    u8 kind;
+    u8 unk_01;
+    u8 unk_02;
+    u8 unk_03;
+    u8 unk_04;
+    u8 unk_05;
+    u8 unk_06;
+    u8 unk_07;
+    u8 unk_08;
+    u8 unk_09;
+    u8 filler_0a[0x3];
+    u8 unk_0d;
+    u8 unk_0e[0x4];
+    u8 sizeParam;
+    u8 unk_13;
+    u8 unk_14[0x20];
+    const u8 *src;
+    const u16 *words;
+    u16 ecWordBuffer[9];
+} *gUnknown_0203A118 = NULL;
+
+// Static ROM declarations
+
 static void sub_811A2C0(u8);
 static void sub_811A278(void);
 static bool8 sub_811A428(u8);
@@ -31,9 +57,11 @@ static void sub_811A2FC(u8);
 static bool32 sub_811A88C(u16);
 static void sub_811A8A4(u16);
 static void sub_811A8F0(void);
-bool8 sub_811A95C(u8, u32, u8);
+static bool8 sub_811A95C(u8, u16 *, u8);
 void sub_811AA90(void);
 /*static*/ u16 sub_811AAAC(void);
+u8 sub_811BCC8(u8);
+void sub_811BDF0(u8 *);
 bool8 sub_811BF8C(void);
 bool8 sub_811BFA4(void);
 void sub_811C13C(void);
@@ -41,8 +69,7 @@ void sub_811C13C(void);
 /*static*/ bool8 sub_811C170(void);
 bool8 sub_811F28C(void);
 void sub_811F2B8(void);
-
-// Static ROM declarations
+u8 sub_811F3AC(void);
 
 // .rodata
 
@@ -50,6 +77,14 @@ extern const struct {
     u16 word;
     MainCallback callback;
 } gUnknown_08597530[4];
+extern const struct {
+    u8 unk_00;
+    u8 unk_01;
+    u8 unk_02;
+    u8 unk_03;
+    u8 *data;
+    u8 filler_08[16];
+} gUnknown_08597550[];
 
 // .text
 
@@ -184,7 +219,7 @@ static bool8 sub_811A428(u8 taskId)
             }
             break;
         case 2:
-            if (!sub_811A95C(data[EZCHAT_TASK_KIND], GetWordTaskArg(taskId, EZCHAT_TASK_WORDS), data[EZCHAT_TASK_SIZE]))
+            if (!sub_811A95C(data[EZCHAT_TASK_KIND], (u16 *)GetWordTaskArg(taskId, EZCHAT_TASK_WORDS), data[EZCHAT_TASK_SIZE]))
             {
                 sub_811A4D0((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
             }
@@ -385,4 +420,57 @@ static void sub_811A914(void)
 static void sub_811A938(void)
 {
     sub_811A20C(0x11, gSaveBlock1Ptr->lilycoveLady.quiz.unk_002, sub_80861B0, 3);
+}
+
+static bool8 sub_811A95C(u8 kind, u16 *words, u8 sizeParam)
+{
+    u8 r6;
+    int i;
+    
+    gUnknown_0203A118 = malloc(sizeof(*gUnknown_0203A118));
+    if (gUnknown_0203A118 == NULL)
+    {
+        return FALSE;
+    }
+    gUnknown_0203A118->kind = kind;
+    gUnknown_0203A118->words = words;
+    gUnknown_0203A118->unk_05 = 0;
+    gUnknown_0203A118->unk_06 = 0;
+    gUnknown_0203A118->unk_09 = 0;
+    gUnknown_0203A118->sizeParam = sizeParam;
+    gUnknown_0203A118->unk_13 = 0;
+    r6 = sub_811BCC8(kind);
+    if (kind == 0x10)
+    {
+        sub_811BDF0(gUnknown_0203A118->unk_14);
+        gUnknown_0203A118->src = gUnknown_0203A118->unk_14;
+        gUnknown_0203A118->unk_04 = 7;
+    }
+    else
+    {
+        gUnknown_0203A118->unk_04 = 0;
+        gUnknown_0203A118->src = gUnknown_08597550[r6].data;
+    }
+    gUnknown_0203A118->unk_02 = gUnknown_08597550[r6].unk_01;
+    gUnknown_0203A118->unk_03 = gUnknown_08597550[r6].unk_02;
+    gUnknown_0203A118->unk_07 = gUnknown_0203A118->unk_02 * gUnknown_0203A118->unk_03;
+    gUnknown_0203A118->unk_01 = r6;
+    if (gUnknown_0203A118->unk_07 > 9)
+    {
+        gUnknown_0203A118->unk_07 = 9;
+    }
+    if (words != NULL)
+    {
+        CpuCopy16(words, gUnknown_0203A118->ecWordBuffer, gUnknown_0203A118->unk_07 * sizeof(u16));
+    }
+    else
+    {
+        for (i = 0; i < gUnknown_0203A118->unk_07; i ++)
+        {
+            gUnknown_0203A118->ecWordBuffer[i] = -1;
+        }
+        gUnknown_0203A118->words = gUnknown_0203A118->ecWordBuffer;
+    }
+    gUnknown_0203A118->unk_0d = (sub_811F3AC() - 1) / 2 + 1;
+    return TRUE;
 }
