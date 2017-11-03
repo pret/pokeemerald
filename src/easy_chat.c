@@ -53,13 +53,24 @@ static void sub_811A2C0(u8);
 static void sub_811A278(void);
 static bool8 sub_811A428(u8);
 static void sub_811A2FC(u8);
-/*static*/ void sub_811A4D0(MainCallback);
+static void sub_811A4D0(MainCallback);
 static bool32 sub_811A88C(u16);
 static void sub_811A8A4(u16);
 static void sub_811A8F0(void);
-static bool8 sub_811A95C(u8, u16 *, u8);
-void sub_811AA90(void);
-/*static*/ u16 sub_811AAAC(void);
+static bool8 EasyChat_AllocateResources(u8, u16 *, u8);
+static void EasyChat_FreeResources(void);
+static u16 sub_811AAAC(void);
+u16 sub_811AB68(void);
+u16 sub_811ACDC(void);
+u16 sub_811AE44(void);
+u16 sub_811AF00(void);
+u16 sub_811AF8C(void);
+u16 sub_811B040(void);
+u16 sub_811AFEC(void);
+u16 sub_811B08C(void);
+u16 sub_811B0BC(void);
+u16 sub_811B0E8(void);
+u16 sub_811B0F8(void);
 u8 sub_811BCC8(u8);
 void sub_811BDF0(u8 *);
 bool8 sub_811BF8C(void);
@@ -219,7 +230,7 @@ static bool8 sub_811A428(u8 taskId)
             }
             break;
         case 2:
-            if (!sub_811A95C(data[EZCHAT_TASK_KIND], (u16 *)GetWordTaskArg(taskId, EZCHAT_TASK_WORDS), data[EZCHAT_TASK_SIZE]))
+            if (!EasyChat_AllocateResources(data[EZCHAT_TASK_KIND], (u16 *)GetWordTaskArg(taskId, EZCHAT_TASK_WORDS), data[EZCHAT_TASK_SIZE]))
             {
                 sub_811A4D0((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
             }
@@ -243,10 +254,10 @@ static bool8 sub_811A428(u8 taskId)
     return TRUE;
 }
 
-void sub_811A4D0(MainCallback callback)
+static void sub_811A4D0(MainCallback callback)
 {
     sub_811C13C();
-    sub_811AA90();
+    EasyChat_FreeResources();
     sub_811F2B8();
     FreeAllWindowBuffers();
     SetMainCallback2(callback);
@@ -422,7 +433,7 @@ static void sub_811A938(void)
     sub_811A20C(0x11, gSaveBlock1Ptr->lilycoveLady.quiz.unk_002, sub_80861B0, 3);
 }
 
-static bool8 sub_811A95C(u8 kind, u16 *words, u8 sizeParam)
+static bool8 EasyChat_AllocateResources(u8 kind, u16 *words, u8 sizeParam)
 {
     u8 r6;
     int i;
@@ -473,4 +484,43 @@ static bool8 sub_811A95C(u8 kind, u16 *words, u8 sizeParam)
     }
     gUnknown_0203A118->unk_0d = (sub_811F3AC() - 1) / 2 + 1;
     return TRUE;
+}
+
+static void EasyChat_FreeResources(void)
+{
+    if (gUnknown_0203A118 != NULL)
+    {
+        free(gUnknown_0203A118);
+        gUnknown_0203A118 = NULL;
+    }
+}
+
+static u16 sub_811AAAC(void)
+{
+    switch (gUnknown_0203A118->unk_04)
+    {
+        case 0:
+            return sub_811AB68();
+        case 1:
+            return sub_811ACDC();
+        case 2:
+            return sub_811AE44();
+        case 3:
+            return sub_811AF00();
+        case 4:
+            return sub_811AF8C();
+        case 5:
+            return sub_811B040();
+        case 6:
+            return sub_811AFEC();
+        case 7:
+            return sub_811B08C();
+        case 8:
+            return sub_811B0BC();
+        case 9:
+            return sub_811B0E8();
+        case 10:
+            return sub_811B0F8();
+    }
+    return 0;
 }
