@@ -160,7 +160,7 @@ void sub_80E6E24(void)
     sub_80E9914();
     sub_80F0BB8();
     sub_80E6BF8();
-    if (Link_AnyPartnersPlayingRubyOrSapphrie())
+    if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
         if (sub_800A03C() == FALSE)
         {
@@ -193,7 +193,7 @@ void sub_80E6E24(void)
 
 void sub_80E6F60(u32 a0)
 {
-    if (Link_AnyPartnersPlayingRubyOrSapphrie())
+    if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
         // Ruby/Sapphire
         sub_80E7B2C(gUnknown_0203A014[0].tvShows);
@@ -380,7 +380,7 @@ static void sub_80E7324(u8 taskId)
             task->data[0] = 0;
             task->data[5] = sub_80E7810();
             task->func = sub_80E756C;
-            if (Link_AnyPartnersPlayingRubyOrSapphrie())
+            if (Link_AnyPartnersPlayingRubyOrSapphire())
             {
                 sub_80E7808(gUnknown_0203A018, (u16 *)&task->data[2]);
                 taskId2 = CreateTask(sub_80E7630, 80);
@@ -574,4 +574,27 @@ void sub_80E7830(u32 *data)
             }
             break;
     }
+}
+
+void sub_80E78C4(OldMan *oldMan, size_t recordSize, u8 which)
+{
+    u8 version;
+    u16 language;
+    OldMan *dest;
+    u32 data[4];
+
+    sub_80E7830(data);
+    dest = (OldMan *)((void *)oldMan + recordSize * data[which]);
+    version = gLinkPlayers[data[which]].version;
+    language = gLinkPlayers[data[which]].language;
+    if (Link_AnyPartnersPlayingRubyOrSapphire())
+    {
+        sub_8120D34(dest, version, language);
+    }
+    else
+    {
+        sub_8120CD0(dest, version, language);
+    }
+    memcpy(gUnknown_03001140, (OldMan *)((void *)oldMan + recordSize * data[which]), sizeof(OldMan));
+    sub_8120670();
 }

@@ -1464,8 +1464,8 @@ _0800A060:
 	bx r1
 	thumb_func_end Link_HaveFourPlayersWithAtLeastOneRubyOrSapphire
 
-	thumb_func_start Link_AnyPartnersPlayingRubyOrSapphrie
-Link_AnyPartnersPlayingRubyOrSapphrie: @ 800A064
+	thumb_func_start Link_AnyPartnersPlayingRubyOrSapphire
+Link_AnyPartnersPlayingRubyOrSapphire: @ 800A064
 	push {lr}
 	movs r0, 0x2
 	movs r1, 0x1
@@ -1479,7 +1479,7 @@ _0800A076:
 _0800A078:
 	pop {r1}
 	bx r1
-	thumb_func_end Link_AnyPartnersPlayingRubyOrSapphrie
+	thumb_func_end Link_AnyPartnersPlayingRubyOrSapphire
 
 	thumb_func_start sub_800A07C
 sub_800A07C: @ 800A07C

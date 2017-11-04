@@ -194,7 +194,7 @@ void sub_8011BD0(void);
 u8 sub_800ABAC(void);
 u8 sub_800ABBC(void);
 void sub_800AC34(void);
-bool32 Link_AnyPartnersPlayingRubyOrSapphrie(void);
+bool32 Link_AnyPartnersPlayingRubyOrSapphire(void);
 bool32 sub_800A03C(void);
 void sub_8009628(u8);
 u8 sub_800AA48(void);

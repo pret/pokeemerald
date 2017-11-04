@@ -5,70 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E78C4
-sub_80E78C4: @ 80E78C4
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x10
-	mov r9, r0
-	mov r8, r1
-	lsls r2, 24
-	lsrs r7, r2, 24
-	mov r0, sp
-	bl sub_80E7830
-	lsls r0, r7, 2
-	add r0, sp
-	ldr r1, [r0]
-	mov r0, r8
-	muls r0, r1
-	mov r2, r9
-	adds r6, r2, r0
-	ldr r2, =gLinkPlayers
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r4, [r0]
-	ldrh r5, [r0, 0x1A]
-	bl Link_AnyPartnersPlayingRubyOrSapphrie
-	cmp r0, 0
-	beq _080E7910
-	adds r0, r6, 0
-	adds r1, r4, 0
-	adds r2, r5, 0
-	bl sub_8120D34
-	b _080E791A
-	.pool
-_080E7910:
-	adds r0, r6, 0
-	adds r1, r4, 0
-	adds r2, r5, 0
-	bl sub_8120CD0
-_080E791A:
-	ldr r0, =gUnknown_03001140
-	ldr r0, [r0]
-	lsls r1, r7, 2
-	add r1, sp
-	ldr r1, [r1]
-	mov r2, r8
-	muls r2, r1
-	adds r1, r2, 0
-	add r1, r9
-	movs r2, 0x40
-	bl memcpy
-	bl sub_8120670
-	add sp, 0x10
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E78C4
-
 	thumb_func_start sub_80E7948
 sub_80E7948: @ 80E7948
 	push {r4-r7,lr}
@@ -82,7 +18,7 @@ sub_80E7948: @ 80E7948
 	lsrs r6, r2, 24
 	mov r0, sp
 	bl sub_80E7830
-	bl Link_AnyPartnersPlayingRubyOrSapphrie
+	bl Link_AnyPartnersPlayingRubyOrSapphire
 	cmp r0, 0
 	beq _080E79AC
 	lsls r0, r6, 2
@@ -399,7 +335,7 @@ _080E7BB0:
 	mov r8, r0
 	cmp r0, 0x3
 	bls _080E7BB0
-	bl Link_AnyPartnersPlayingRubyOrSapphrie
+	bl Link_AnyPartnersPlayingRubyOrSapphire
 	str r0, [sp, 0x3C]
 	movs r2, 0
 	mov r8, r2
@@ -956,7 +892,7 @@ _080E8024:
 	.4byte _080E80EE
 	.4byte _080E80FA
 _080E804C:
-	bl Link_AnyPartnersPlayingRubyOrSapphrie
+	bl Link_AnyPartnersPlayingRubyOrSapphire
 	cmp r0, 0
 	bne _080E80F2
 	movs r0, 0x6
