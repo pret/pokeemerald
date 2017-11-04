@@ -94,6 +94,10 @@ void TaskDummy4(void *src);
 
 // .rodata
 
+extern const u8 gUnknown_0858CF8C[];
+extern const u8 gUnknown_0858CF8E[][3];
+extern const u8 gUnknown_0858CF94[][4];
+
 // .text
 
 void sub_80E6BE8(void)
@@ -540,4 +544,34 @@ static u8 sub_80E7810(void)
 static void *sub_80E7820(u8 id)
 {
     return gBlockRecvBuffer[id];
+}
+
+void sub_80E7830(u32 *data)
+{
+    u32 i;
+    u32 linkTrainerId;
+
+    switch ((u32)GetLinkPlayerCount())
+    {
+        case 2:
+            for (i = 0; i < 2; i ++)
+            {
+                data[i] = gUnknown_0858CF8C[i];
+            }
+            break;
+        case 3:
+            linkTrainerId = GetLinkPlayerTrainerId(0) % 2;
+            for (i = 0; i < 3; i ++)
+            {
+                data[i] = gUnknown_0858CF8E[linkTrainerId][i];
+            }
+            break;
+        case 4:
+            linkTrainerId = GetLinkPlayerTrainerId(0) % 9;
+            for (i = 0; i < 4; i ++)
+            {
+                data[i] = gUnknown_0858CF94[linkTrainerId][i];
+            }
+            break;
+    }
 }
