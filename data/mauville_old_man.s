@@ -5,8 +5,8 @@
 	.align 2, 0
 
 gUnknown_0859EFE4:: @ 859EFE4
-	.incbin "baserom.gba", 0x59efe4, 0xc
-
+	.2byte 0x2811, 0x1029, 0x1018, 0xE0D, 0x1A1A, 0x1A1D
+    
 gUnknown_0859EFF0:: @ 859EFF0
 	.incbin "baserom.gba", 0x59eff0, 0x20
 
