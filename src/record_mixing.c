@@ -3,6 +3,8 @@
 #include "global.h"
 #include "malloc.h"
 #include "task.h"
+#include "species.h"
+#include "pokemon.h"
 #include "cable_club.h"
 #include "link.h"
 #include "tv.h"
@@ -32,9 +34,7 @@ struct PlayerRecords {
     /* 0x1044 */ OldMan oldMan;
     /* 0x1084 */ struct EasyChatPair easyChatPair[5];
     /* 0x10ac */ u8 unk_10ac[0x78];
-    /* 0x1124 */ u8 unk_1124[0xa4];
-    /* 0x11c8 */ u16 unk_11c8;
-    /* 0x11ca */ u8 filler_11ca[0x46];
+    /* 0x1124 */ union BattleTowerRecord battleTowerRecord;
     /* 0x1210 */ u16 unk_1210;
     /* 0x1214 */ LilycoveLady lilycoveLady;
     /* 0x1254 */ u8 unk_1254[0x88];
@@ -73,8 +73,8 @@ static void *sub_80E77FC(const u16 *asShort);
 static void sub_80E7808(void *records, u16 *a1);
 static u8 sub_80E7810(void);
 static void *sub_80E7820(u8);
-void sub_80E78C4(OldMan *, size_t, u8);
-void sub_80E7948(void *, size_t, u8);
+static void sub_80E78C4(OldMan *, size_t, u8);
+static void sub_80E7948(union BattleTowerRecord *, size_t, u8);
 void sub_80E7A14(LilycoveLady *, size_t, u8);
 void sub_80E7B2C(TVShow *);
 void sub_80E7B60(void *, size_t, u8, TVShow *);
@@ -85,12 +85,12 @@ void sub_80E8468(void *, size_t, u8);
 void sub_80E89AC(void *, size_t, u8);
 void sub_80E89F8(void *dest);
 void sub_80E8A54(void *src);
-void sub_80E8AC0(void *);
+void sub_80E8AC0(union BattleTowerRecord *);
 void sub_80EAF80(struct SecretBaseRecord *, size_t, u8);
 void sub_80F01E8(void *, size_t, u8);
 void sub_80F0C7C(PokeNews *, size_t, u8);
 void sub_812287C(struct EasyChatPair *, size_t, u8);
-void TaskDummy4(void *src);
+void TaskDummy4(union BattleTowerRecord *src);
 
 // .rodata
 
@@ -128,10 +128,10 @@ void sub_80E6CA0(struct PlayerRecords *dest)
     memcpy(&dest->oldMan, gUnknown_03001140, sizeof(OldMan));
     memcpy(dest->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
     sub_80E89F8(dest->unk_10ac);
-    sub_81659DC(gUnknown_0300114C, dest->unk_1124);
+    sub_81659DC(gUnknown_0300114C, &dest->battleTowerRecord);
     if (GetMultiplayerId() == 0)
     {
-        dest->unk_11c8 = sub_81539D4();
+        dest->battleTowerRecord.ruby_sapphire.unk_11c8 = sub_81539D4();
     }
 }
 
@@ -147,11 +147,11 @@ void sub_80E6D54(struct PlayerRecords *dest)
     memcpy(dest->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
     sub_80E89F8(dest->unk_10ac);
     sub_80E8A54(dest->unk_10ac);
-    sub_81659DC(gUnknown_0300114C, dest->unk_1124);
-    TaskDummy4(dest->unk_1124);
+    sub_81659DC(gUnknown_0300114C, &dest->battleTowerRecord);
+    TaskDummy4(&dest->battleTowerRecord);
     if (GetMultiplayerId() == 0)
     {
-        dest->unk_11c8 = sub_81539D4();
+        dest->battleTowerRecord.ruby_sapphire.unk_11c8 = sub_81539D4();
     }
 }
 
@@ -180,8 +180,8 @@ void sub_80E6E24(void)
         memcpy(&gUnknown_0203A018->lilycoveLady, gUnknown_03001150, sizeof(LilycoveLady));
         memcpy(gUnknown_0203A018->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
         sub_80E89F8(gUnknown_0203A018->unk_10ac);
-        memcpy(gUnknown_0203A018->unk_1124, gUnknown_0300114C, 0xec);
-        sub_80E8AC0(gUnknown_0203A018->unk_1124);
+        memcpy(&gUnknown_0203A018->battleTowerRecord, gUnknown_0300114C, 0xec);
+        sub_80E8AC0(&gUnknown_0203A018->battleTowerRecord);
         if (GetMultiplayerId() == 0)
         {
             gUnknown_0203A018->unk_1210 = sub_81539D4();
@@ -199,12 +199,12 @@ void sub_80E6F60(u32 a0)
         sub_80E7B2C(gUnknown_0203A014[0].tvShows);
         sub_80EAF80(gUnknown_0203A014[0].secretBases, 0x1230, a0);
         sub_80E7B60(gUnknown_0203A014[0].unk_10ac, 0x1230, a0, gUnknown_0203A014[0].tvShows);
-        sub_80E7948(gUnknown_0203A014[0].unk_1124, 0x1230, a0);
+        sub_80E7948(&gUnknown_0203A014[0].battleTowerRecord, 0x1230, a0);
         sub_80F01E8(gUnknown_0203A014[0].tvShows, 0x1230, a0);
         sub_80F0C7C(gUnknown_0203A014[0].pokeNews, 0x1230, a0);
         sub_80E78C4(&gUnknown_0203A014[0].oldMan, 0x1230, a0);
         sub_812287C(gUnknown_0203A014[0].easyChatPair, 0x1230, a0);
-        sub_80E7F68(&gUnknown_0203A014[0].unk_11c8, a0);
+        sub_80E7F68(&gUnknown_0203A014[0].battleTowerRecord.ruby_sapphire.unk_11c8, a0);
     }
     else
     {
@@ -216,7 +216,7 @@ void sub_80E6F60(u32 a0)
         sub_80E78C4(&gUnknown_0203A014[0].oldMan, 0x1444, a0);
         sub_812287C(gUnknown_0203A014[0].easyChatPair, 0x1444, a0);
         sub_80E7B60(gUnknown_0203A014[0].unk_10ac, 0x1444, a0, gUnknown_0203A014[0].tvShows);
-        sub_80E7948(gUnknown_0203A014[0].unk_1124, 0x1444, a0);
+        sub_80E7948(&gUnknown_0203A014[0].battleTowerRecord, 0x1444, a0);
         sub_80E7F68(&gUnknown_0203A014[0].unk_1210, a0);
         sub_80E7A14(&gUnknown_0203A014[0].lilycoveLady, 0x1444, a0);
         sub_80E8468(gUnknown_0203A014[0].unk_1254, 0x1444, a0);
@@ -530,10 +530,10 @@ static void *sub_80E77FC(const u16 *asShort)
     return (void *)(asShort[0] | (asShort[1] << 16));
 }
 
-static void sub_80E7808(void *data, u16 *asShort)
+static void sub_80E7808(void *records, u16 *asShort)
 {
-    asShort[0] = (u32)data;
-    asShort[1] = ((u32)data >> 16);
+    asShort[0] = (u32)records;
+    asShort[1] = ((u32)records >> 16);
 }
 
 static u8 sub_80E7810(void)
@@ -576,17 +576,17 @@ void sub_80E7830(u32 *data)
     }
 }
 
-void sub_80E78C4(OldMan *oldMan, size_t recordSize, u8 which)
+static void sub_80E78C4(OldMan *oldMan, size_t recordSize, u8 which)
 {
     u8 version;
     u16 language;
     OldMan *dest;
-    u32 data[4];
+    u32 mixIndices[4];
 
-    sub_80E7830(data);
-    dest = (OldMan *)((void *)oldMan + recordSize * data[which]);
-    version = gLinkPlayers[data[which]].version;
-    language = gLinkPlayers[data[which]].language;
+    sub_80E7830(mixIndices);
+    dest = (OldMan *)((void *)oldMan + recordSize * mixIndices[which]);
+    version = gLinkPlayers[mixIndices[which]].version;
+    language = gLinkPlayers[mixIndices[which]].language;
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
         sub_8120D34(dest, version, language);
@@ -595,6 +595,40 @@ void sub_80E78C4(OldMan *oldMan, size_t recordSize, u8 which)
     {
         sub_8120CD0(dest, version, language);
     }
-    memcpy(gUnknown_03001140, (OldMan *)((void *)oldMan + recordSize * data[which]), sizeof(OldMan));
+    memcpy(gUnknown_03001140, (OldMan *)((void *)oldMan + recordSize * mixIndices[which]), sizeof(OldMan));
     sub_8120670();
+}
+
+static void sub_80E7948(union BattleTowerRecord *battleTowerRecord, size_t recordSize, u8 which)
+{
+    union BattleTowerRecord *r6;
+    struct UnknownPokemonStruct *btPokemon;
+    u32 mixIndices[4];
+    s32 i;
+
+    sub_80E7830(mixIndices);
+    if (Link_AnyPartnersPlayingRubyOrSapphire())
+    {
+        if (sub_816587C((union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * mixIndices[which]), (union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * which)) == TRUE)
+        {
+            r6 = (union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * which);
+            r6->emerald.language = gLinkPlayers[mixIndices[which]].language;
+            sub_8164F70(r6);
+        }
+    }
+    else
+    {
+        memcpy((union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * which), (union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * mixIndices[which]), sizeof(union BattleTowerRecord));
+        r6 = (union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * which);
+        for (i = 0; i < 4; i ++)
+        {
+            btPokemon = &r6->emerald.party[i];
+            if (btPokemon->species != SPECIES_NONE && IsStringJapanese(btPokemon->nickname))
+            {
+                ConvertInternationalString(btPokemon->nickname, LANGUAGE_JAPANESE);
+            }
+        }
+        sub_8164F70(r6);
+    }
+    sub_81628A0((union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * which));
 }
