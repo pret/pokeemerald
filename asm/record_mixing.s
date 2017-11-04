@@ -5,68 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E7A14
-sub_80E7A14: @ 80E7A14
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x10
-	mov r8, r0
-	adds r7, r1, 0
-	lsls r2, 24
-	lsrs r5, r2, 24
-	mov r0, sp
-	bl sub_80E7830
-	adds r0, r7, 0
-	muls r0, r5
-	add r0, r8
-	ldr r6, =gUnknown_03001150
-	ldr r1, [r6]
-	movs r2, 0x40
-	bl memcpy
-	bl GetLilycoveLadyId
-	lsls r0, 24
-	cmp r0, 0
-	bne _080E7A60
-	movs r0, 0x40
-	bl Alloc
-	adds r4, r0, 0
-	cmp r4, 0
-	beq _080E7A8A
-	ldr r1, [r6]
-	movs r2, 0x40
-	bl memcpy
-	b _080E7A62
-	.pool
-_080E7A60:
-	movs r4, 0
-_080E7A62:
-	ldr r0, =gUnknown_03001150
-	ldr r0, [r0]
-	lsls r1, r5, 2
-	add r1, sp
-	ldr r1, [r1]
-	muls r1, r7
-	add r1, r8
-	movs r2, 0x40
-	bl memcpy
-	bl sub_818DA78
-	cmp r4, 0
-	beq _080E7A8A
-	adds r0, r4, 0
-	bl sub_818E570
-	adds r0, r4, 0
-	bl Free
-_080E7A8A:
-	add sp, 0x10
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E7A14
-
 	thumb_func_start sub_80E7A9C
 sub_80E7A9C: @ 80E7A9C
 	ldrh r0, [r0, 0x20]

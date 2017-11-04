@@ -6,7 +6,7 @@ void SetLilycoveLady(void);
 void sub_818DA78(void);
 void sub_818DEF4(void);
 void sub_818E564(void);
-void sub_818E570(const struct LilycoveLadyQuiz *quiz);
+void sub_818E570(const LilycoveLady *lilycoveLady);
 bool8 sub_818E704(struct Pokeblock *pokeblock);
 void sub_818E7E0(u8 *dest1, u8 *dest2);
 void sub_818E81C(u8 *dest);

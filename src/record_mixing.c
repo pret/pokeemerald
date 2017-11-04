@@ -21,6 +21,7 @@
 #include "fldeff_80F9BCC.h"
 #include "script.h"
 #include "event_data.h"
+#include "lilycove_lady.h"
 #include "strings.h"
 #include "string_util.h"
 #include "record_mixing.h"
@@ -75,7 +76,7 @@ static u8 sub_80E7810(void);
 static void *sub_80E7820(u8);
 static void sub_80E78C4(OldMan *, size_t, u8);
 static void sub_80E7948(union BattleTowerRecord *, size_t, u8);
-void sub_80E7A14(LilycoveLady *, size_t, u8);
+static void sub_80E7A14(LilycoveLady *, size_t, u8);
 void sub_80E7B2C(TVShow *);
 void sub_80E7B60(void *, size_t, u8, TVShow *);
 void sub_80E7F68(void *, u8);
@@ -584,7 +585,7 @@ static void sub_80E78C4(OldMan *oldMan, size_t recordSize, u8 which)
     u32 mixIndices[4];
 
     sub_80E7830(mixIndices);
-    dest = (OldMan *)((void *)oldMan + recordSize * mixIndices[which]);
+    dest = (void *)oldMan + recordSize * mixIndices[which];
     version = gLinkPlayers[mixIndices[which]].version;
     language = gLinkPlayers[mixIndices[which]].language;
     if (Link_AnyPartnersPlayingRubyOrSapphire())
@@ -595,13 +596,13 @@ static void sub_80E78C4(OldMan *oldMan, size_t recordSize, u8 which)
     {
         sub_8120CD0(dest, version, language);
     }
-    memcpy(gUnknown_03001140, (OldMan *)((void *)oldMan + recordSize * mixIndices[which]), sizeof(OldMan));
+    memcpy(gUnknown_03001140, (void *)oldMan + recordSize * mixIndices[which], sizeof(OldMan));
     sub_8120670();
 }
 
 static void sub_80E7948(union BattleTowerRecord *battleTowerRecord, size_t recordSize, u8 which)
 {
-    union BattleTowerRecord *r6;
+    union BattleTowerRecord *dest;
     struct UnknownPokemonStruct *btPokemon;
     u32 mixIndices[4];
     s32 i;
@@ -609,26 +610,55 @@ static void sub_80E7948(union BattleTowerRecord *battleTowerRecord, size_t recor
     sub_80E7830(mixIndices);
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
-        if (sub_816587C((union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * mixIndices[which]), (union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * which)) == TRUE)
+        if (sub_816587C((void *)battleTowerRecord + recordSize * mixIndices[which], (void *)battleTowerRecord + recordSize * which) == TRUE)
         {
-            r6 = (union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * which);
-            r6->emerald.language = gLinkPlayers[mixIndices[which]].language;
-            sub_8164F70(r6);
+            dest = (void *)battleTowerRecord + recordSize * which;
+            dest->emerald.language = gLinkPlayers[mixIndices[which]].language;
+            sub_8164F70(dest);
         }
     }
     else
     {
-        memcpy((union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * which), (union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * mixIndices[which]), sizeof(union BattleTowerRecord));
-        r6 = (union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * which);
+        memcpy((void *)battleTowerRecord + recordSize * which, (void *)battleTowerRecord + recordSize * mixIndices[which], sizeof(union BattleTowerRecord));
+        dest = (void *)battleTowerRecord + recordSize * which;
         for (i = 0; i < 4; i ++)
         {
-            btPokemon = &r6->emerald.party[i];
+            btPokemon = &dest->emerald.party[i];
             if (btPokemon->species != SPECIES_NONE && IsStringJapanese(btPokemon->nickname))
             {
                 ConvertInternationalString(btPokemon->nickname, LANGUAGE_JAPANESE);
             }
         }
-        sub_8164F70(r6);
+        sub_8164F70(dest);
     }
-    sub_81628A0((union BattleTowerRecord *)((void *)battleTowerRecord + recordSize * which));
+    sub_81628A0((void *)battleTowerRecord + recordSize * which);
+}
+
+static void sub_80E7A14(LilycoveLady *lilycoveLady, size_t recordSize, u8 which)
+{
+    LilycoveLady *dest;
+    u32 mixIndices[4];
+
+    sub_80E7830(mixIndices);
+    memcpy((void *)lilycoveLady + recordSize * which, gUnknown_03001150, sizeof(LilycoveLady));
+    if (GetLilycoveLadyId() == 0)
+    {
+        dest = malloc(sizeof(LilycoveLady));
+        if (dest == NULL)
+        {
+            return;
+        }
+        memcpy(dest, gUnknown_03001150, sizeof(LilycoveLady));
+    }
+    else
+    {
+        dest = NULL;
+    }
+    memcpy(gUnknown_03001150, (void *)lilycoveLady + recordSize * mixIndices[which], sizeof(LilycoveLady));
+    sub_818DA78();
+    if (dest != NULL)
+    {
+        sub_818E570(dest);
+        free(dest);
+    }
 }
