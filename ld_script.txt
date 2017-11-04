@@ -85,6 +85,7 @@ SECTIONS {
         src/load_save.o(.text);
         asm/load_save.o(.text);
         asm/trade.o(.text);
+        src/berry_blender.o(.text);
         asm/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
@@ -348,7 +349,7 @@ SECTIONS {
         src/battle_interface.o(.rodata);
         data/pokeball.o(.rodata);
         data/trade.o(.rodata);
-        data/berry_blender.o(.rodata);
+        src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         data/rom4.o(.rodata);
         data/fieldmap.o(.rodata);
