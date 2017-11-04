@@ -68,11 +68,11 @@ static void sub_80E715C(u8 taskId);
 static void sub_80E7324(u8 taskId);
 static void sub_80E756C(u8 taskId);
 static void sub_80E7630(u8 taskId);
-void sub_80E77D4(u8 taskId);
-void *sub_80E77FC(s16 *asShort);
-u8 sub_80E7810(void);
-void *sub_80E7820(u8);
-void sub_80E7808(struct PlayerRecords *records, s16 *a1);
+static void sub_80E77D4(u8 taskId);
+static void *sub_80E77FC(const u16 *asShort);
+static void sub_80E7808(void *records, u16 *a1);
+static u8 sub_80E7810(void);
+static void *sub_80E7820(u8);
 void sub_80E78C4(OldMan *, size_t, u8);
 void sub_80E7948(void *, size_t, u8);
 void sub_80E7A14(LilycoveLady *, size_t, u8);
@@ -378,20 +378,20 @@ static void sub_80E7324(u8 taskId)
             task->func = sub_80E756C;
             if (Link_AnyPartnersPlayingRubyOrSapphrie())
             {
-                sub_80E7808(gUnknown_0203A018, &task->data[2]);
+                sub_80E7808(gUnknown_0203A018, (u16 *)&task->data[2]);
                 taskId2 = CreateTask(sub_80E7630, 80);
                 task->data[10] = taskId2;
                 gTasks[taskId2].data[0] = taskId;
-                sub_80E7808(gUnknown_0203A014, &gTasks[taskId2].data[5]);
+                sub_80E7808(gUnknown_0203A014, (u16 *)&gTasks[taskId2].data[5]);
                 gUnknown_0300115C = 0x1230;
             }
             else
             {
-                sub_80E7808(gUnknown_0203A018, &task->data[2]);
+                sub_80E7808(gUnknown_0203A018, (u16 *)&task->data[2]);
                 taskId2 = CreateTask(sub_80E7630, 80);
                 task->data[10] = taskId2;
                 gTasks[taskId2].data[0] = taskId;
-                sub_80E7808(gUnknown_0203A014, &gTasks[taskId2].data[5]);
+                sub_80E7808(gUnknown_0203A014, (u16 *)&gTasks[taskId2].data[5]);
                 gUnknown_0300115C = 0x1444;
             }
             break;
@@ -465,7 +465,7 @@ static void sub_80E7630(u8 taskId)
         {
             if ((status >> i) & 0x01)
             {
-                dest = sub_80E77FC(&task->data[5]) + task->data[i + 1] * 200 + gUnknown_0300115C * i;
+                dest = sub_80E77FC((u16 *)&task->data[5]) + task->data[i + 1] * 200 + gUnknown_0300115C * i;
                 src = sub_80E7820(i);
                 if ((task->data[i + 1] + 1) * 200 > gUnknown_0300115C)
                 {
@@ -489,4 +489,55 @@ static void sub_80E7630(u8 taskId)
     {
         DestroyTask(taskId);
     }
+}
+
+static void sub_80E776C(u8 taskId)
+{
+    struct Task *task;
+
+    task = &gTasks[taskId];
+    if (!gTasks[task->data[10]].isActive)
+    {
+        DestroyTask(taskId);
+    }
+}
+
+static void sub_80E77A0(u8 taskId)
+{
+    struct Task *task;
+
+    task = &gTasks[taskId];
+    task->func = sub_80E776C;
+    if (gUnknown_03001130 == TRUE)
+    {
+        sub_80E6F60(task->data[5]);
+    }
+}
+
+static void sub_80E77D4(u8 taskId)
+{
+    gTasks[taskId].func = sub_80E77A0;
+    gUnknown_03001130 = TRUE;
+}
+
+
+static void *sub_80E77FC(const u16 *asShort)
+{
+    return (void *)(asShort[0] | (asShort[1] << 16));
+}
+
+static void sub_80E7808(void *data, u16 *asShort)
+{
+    asShort[0] = (u32)data;
+    asShort[1] = ((u32)data >> 16);
+}
+
+static u8 sub_80E7810(void)
+{
+    return GetMultiplayerId();
+}
+
+static void *sub_80E7820(u8 id)
+{
+    return gBlockRecvBuffer[id];
 }
