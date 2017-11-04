@@ -20,6 +20,7 @@
 #include "script.h"
 #include "event_data.h"
 #include "strings.h"
+#include "string_util.h"
 #include "record_mixing.h"
 
 // Static type declarations
@@ -64,7 +65,11 @@ EWRAM_DATA struct PlayerRecords *gUnknown_0203A018 = NULL;
 // Static ROM declarations
 
 static void sub_80E715C(u8 taskId);
-void sub_80E7324(u8 taskId);
+static void sub_80E7324(u8 taskId);
+void sub_80E756C(u8 taskId);
+void sub_80E7630(u8 taskId);
+u8 sub_80E7810(void);
+void sub_80E7808(struct PlayerRecords *records, s16 *a1);
 void sub_80E78C4(OldMan *, size_t, u8);
 void sub_80E7948(void *, size_t, u8);
 void sub_80E7A14(LilycoveLady *, size_t, u8);
@@ -292,6 +297,106 @@ static void sub_80E715C(u8 taskId)
                 sub_8197434(0, 1);
                 DestroyTask(taskId);
                 EnableBothScriptContexts();
+            }
+            break;
+    }
+}
+
+static void sub_80E7324(u8 taskId)
+{
+    u8 r4;
+    u8 taskId2;
+    struct Task *task;
+
+    task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+        case 0:
+            sub_80E70F4(gText_MixingRecords);
+            task->data[8] = 0x708;
+            task->data[0] = 400;
+            sub_8009FAC();
+            break;
+        case 100:
+            if (++ task->data[12] > 20)
+            {
+                task->data[12] = 0;
+                task->data[0] = 101;
+            }
+            break;
+        case 101:
+            r4 = sub_800ABAC();
+            if (sub_800ABBC() == TRUE)
+            {
+                if (r4 == sub_800AA48())
+                {
+                    PlaySE(SE_PIN);
+                    task->data[0] = 201;
+                    task->data[12] = 0;
+                }
+            }
+            else
+            {
+                PlaySE(SE_BOO);
+                task->data[0] = 301;
+            }
+            break;
+        case 201:
+            if (sub_800AA48() == sub_800ABAC() && ++ task->data[12] > (sub_800ABAC() * 30))
+            {
+                sub_800A620();
+                task->data[0] = 1;
+            }
+            break;
+        case 301:
+            if (sub_800AA48() == sub_800ABAC())
+            {
+                task->data[0] = 1;
+            }
+            break;
+        case 400:
+            if (++ task->data[12] > 20)
+            {
+                task->data[0] = 1;
+                task->data[12] = 0;
+            }
+            break;
+        case 1:
+            if (gReceivedRemoteLinkPlayers != 0)
+            {
+                ConvertIntToDecimalStringN(gStringVar1, sub_80E7810(), STR_CONV_MODE_LEADING_ZEROS, 2);
+                task->data[0] = 5;
+            }
+            break;
+        case 2:
+            task->data[6] = sub_800ABAC();
+            task->data[0] = 0;
+            task->data[5] = sub_80E7810();
+            task->func = sub_80E756C;
+            if (Link_AnyPartnersPlayingRubyOrSapphrie())
+            {
+                sub_80E7808(gUnknown_0203A018, &task->data[2]);
+                taskId2 = CreateTask(sub_80E7630, 80);
+                task->data[10] = taskId2;
+                gTasks[taskId2].data[0] = taskId;
+                sub_80E7808(gUnknown_0203A014, &gTasks[taskId2].data[5]);
+                gUnknown_0300115C = 0x1230;
+            }
+            else
+            {
+                sub_80E7808(gUnknown_0203A018, &task->data[2]);
+                taskId2 = CreateTask(sub_80E7630, 80);
+                task->data[10] = taskId2;
+                gTasks[taskId2].data[0] = taskId;
+                sub_80E7808(gUnknown_0203A014, &gTasks[taskId2].data[5]);
+                gUnknown_0300115C = 0x1444;
+            }
+            break;
+        case 5:
+            if (++ task->data[10] > 60)
+            {
+                task->data[10] = 0;
+                task->data[0] = 2;
             }
             break;
     }
