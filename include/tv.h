@@ -13,5 +13,6 @@ void sub_80EE184(void);
 void sub_80EEA70(void);
 void sub_80F14F8(TVShow *shows);
 size_t sub_80EF370(int value);
+void sub_80F1208(TVShow *dest);
 
 #endif //GUARD_TV_H

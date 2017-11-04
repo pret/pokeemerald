@@ -7,6 +7,8 @@
 #include "tv.h"
 #include "battle_tower.h"
 #include "mystery_event_script.h"
+#include "secret_base.h"
+#include "mauville_old_man.h"
 #include "record_mixing.h"
 
 // Static type declarations
@@ -50,6 +52,8 @@ EWRAM_DATA struct RecordMixingData *gUnknown_0203A018 = NULL;
 
 void sub_80E715C(u8 taskId);
 void sub_80E89F8(void *dest);
+void sub_80E8A54(void *src);
+void TaskDummy4(void *src);
 
 // .rodata
 
@@ -84,6 +88,26 @@ void sub_80E6CA0(struct RecordMixingData *dest)
     memcpy(dest->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
     sub_80E89F8(dest->unk_10ac);
     sub_81659DC(gUnknown_0300114C, dest->unk_1124);
+    if (GetMultiplayerId() == 0)
+    {
+        dest->unk_11c8 = sub_81539D4();
+    }
+}
+
+void sub_80E6D54(struct RecordMixingData *dest)
+{
+    memcpy(dest->secretBases, gUnknown_03001134, sizeof(struct SecretBaseRecord) * 20);
+    sub_80EB18C(dest->secretBases);
+    memcpy(dest->tvShows, gUnknown_03001138, sizeof(TVShow) * 25);
+    sub_80F1208(dest->tvShows);
+    memcpy(dest->pokeNews, gUnknown_0300113C, sizeof(PokeNews) * 16);
+    memcpy(&dest->oldMan, gUnknown_03001140, sizeof(OldMan));
+    sub_8120B70(&dest->oldMan);
+    memcpy(dest->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
+    sub_80E89F8(dest->unk_10ac);
+    sub_80E8A54(dest->unk_10ac);
+    sub_81659DC(gUnknown_0300114C, dest->unk_1124);
+    TaskDummy4(dest->unk_1124);
     if (GetMultiplayerId() == 0)
     {
         dest->unk_11c8 = sub_81539D4();

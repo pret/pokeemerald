@@ -8,5 +8,6 @@
 // Exported ROM declarations
 void sub_80E9578(void);
 void sub_80E980C(void);
+void sub_80EB18C(struct SecretBaseRecord *dest);
 
 #endif //GUARD_SECRET_BASE_H
