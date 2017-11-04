@@ -69004,7 +69004,7 @@ _0802CA32:
 	ldrh r0, [r7]
 	ldr r1, [r7, 0x4]
 	ldr r2, [r7, 0x8]
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	str r0, [sp, 0x20]
 	add r0, sp, 0x20
 	ldr r1, [r0, 0x4]

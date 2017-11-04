@@ -4767,7 +4767,7 @@ static void HandleEndTurn_BattleWon(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
             && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000 | BATTLE_TYPE_EREADER_TRAINER))
     {
-        BattleMusicStop();
+        BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
 
         if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_3FE)
@@ -4777,7 +4777,7 @@ static void HandleEndTurn_BattleWon(void)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
-        BattleMusicStop();
+        BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
 
         switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)

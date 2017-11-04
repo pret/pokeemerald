@@ -4825,7 +4825,7 @@ _08172CC8:
 	ldrb r1, [r5, 0x1E]
 	adds r0, r2, 0
 	adds r2, r6, 0
-	bl refresh_graphics_maybe
+	bl LoadBattleMonGfxAndAnimate
 	ldrh r0, [r5, 0x1C]
 	adds r0, 0x1
 	strh r0, [r5, 0x1C]
@@ -5030,7 +5030,7 @@ _08172E4E:
 	movs r3, 0x1
 	bl RequestDma3Fill
 	ldrb r0, [r4]
-	bl sub_805E974
+	bl ClearBehindSubstituteBit
 	adds r0, r5, 0
 	bl DestroyAnimVisualTask
 _08172E84:

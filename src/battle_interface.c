@@ -2545,19 +2545,19 @@ u8 GetHPBarLevel(s16 hp, s16 maxhp)
 
     if (hp == maxhp)
     {
-        result = 4;
+        result = HP_BAR_FULL;
     }
     else
     {
         u8 fraction = GetScaledHPFraction(hp, maxhp, 48);
         if (fraction > 24)
-            result = 3;
+            result = HP_BAR_GREEN;
         else if (fraction > 9)
-            result = 2;
+            result = HP_BAR_YELLOW;
         else if (fraction > 0)
-            result = 1;
+            result = HP_BAR_RED;
         else
-            result = 0;
+            result = HP_BAR_EMPTY;
     }
 
     return result;

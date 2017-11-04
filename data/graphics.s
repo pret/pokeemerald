@@ -149,13 +149,13 @@ gUnknown_08C2A6D4:: @ 8C2A6D4
 gUnknown_08C2A6EC:: @ 8C2A6EC
 	.incbin "baserom.gba", 0xc2a6ec, 0x27d0
 
-gUnknown_08C2CEBC:: @ 8C2CEBC
+gSubstituteDollPal:: @ 8C2CEBC
 	.incbin "baserom.gba", 0xc2cebc, 0x24
 
-gUnknown_08C2CEE0:: @ 8C2CEE0
+gSubstituteDollGfx:: @ 8C2CEE0
 	.incbin "baserom.gba", 0xc2cee0, 0x240
 
-gUnknown_08C2D120:: @ 8C2D120
+gSubstituteDollTilemap:: @ 8C2D120
 	.incbin "baserom.gba", 0xc2d120, 0x600
 
 gUnknown_08C2D720:: @ 8C2D720

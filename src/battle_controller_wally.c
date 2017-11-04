@@ -369,7 +369,7 @@ static void sub_8168818(void)
         FreeSpritePaletteByTag(0x27F9);
 
         CreateTask(c3_0802FDF4, 10);
-        sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 
         WallyBufferExecCompleted();
     }
@@ -387,7 +387,7 @@ static void CompleteOnHealthbarDone(void)
     }
     else
     {
-        sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         WallyBufferExecCompleted();
     }
 }
@@ -1029,7 +1029,7 @@ static void SetWallyMonData(u8 monId)
         break;
     }
 
-    sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 }
 
 static void WallyHandleSetRawMonData(void)
@@ -1051,7 +1051,7 @@ static void WallyHandleReturnMonToBall(void)
 {
     if (gBattleBufferA[gActiveBank][1] == 0)
     {
-        DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SWITCH_OUT_PLAYER_MON);
+        InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SWITCH_OUT_PLAYER_MON);
         gBattleBankFunc[gActiveBank] = sub_8168A20;
     }
     else
@@ -1112,7 +1112,7 @@ static void WallyHandleSuccessBallThrowAnim(void)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
-    DoSpecialBattleAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnFinishedAnimation;
 }
 
@@ -1122,7 +1122,7 @@ static void WallyHandleBallThrowAnim(void)
 
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
-    DoSpecialBattleAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnFinishedAnimation;
 }
 
@@ -1163,7 +1163,7 @@ static void WallyDoMoveAnimation(void)
     case 0:
         if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute)
         {
-            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
+            InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
         }
         gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 1;
         break;
@@ -1182,7 +1182,7 @@ static void WallyDoMoveAnimation(void)
             sub_805EB9C(1);
             if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute)
             {
-                DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_MON_TO_SUBSTITUTE);
+                InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_MON_TO_SUBSTITUTE);
             }
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 3;
         }
@@ -1190,7 +1190,7 @@ static void WallyDoMoveAnimation(void)
     case 3:
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         {
-            sub_805E394();
+            CopyAllBattleSpritesInvisibilities();
             TrySetBehindSubstituteSpriteBit(gActiveBank, gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
             WallyBufferExecCompleted();
@@ -1429,7 +1429,7 @@ static void WallyHandlePlayFanfareOrBGM(void)
 {
     if (gBattleBufferA[gActiveBank][3])
     {
-        BattleMusicStop();
+        BattleStopLowHpSound();
         PlayBGM(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
     }
     else
@@ -1496,7 +1496,7 @@ static void sub_816AA80(u8 bank)
     sub_806A068(species, GetBankIdentity(bank));
     gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C,
                                         sub_80A5C6C(bank, 2),
-                                        sub_80A6138(bank),
+                                        GetBankSpriteDefault_Y(bank),
                                         sub_80A82E4(bank));
 
     gSprites[gUnknown_03005D7C[bank]].data1 = gBankSpriteIds[bank];
@@ -1565,7 +1565,7 @@ static void WallyHandleBattleAnimation(void)
     u8 animationId = gBattleBufferA[gActiveBank][1];
     u16 argument = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
 
-    if (DoBattleAnimationFromTable(gActiveBank, gActiveBank, gActiveBank, animationId, argument))
+    if (TryHandleLaunchBattleTableAnimation(gActiveBank, gActiveBank, gActiveBank, animationId, argument))
         WallyBufferExecCompleted();
     else
         gBattleBankFunc[gActiveBank] = CompleteOnFinishedBattleAnimation;

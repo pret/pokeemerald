@@ -13532,7 +13532,7 @@ _081CDBD0:
 	adds r0, r4, 0
 	mov r1, r8
 	adds r2, r5, 0
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	mov r2, r9
 	lsls r1, r2, 7
 	adds r1, r7, r1
@@ -24408,7 +24408,7 @@ _081D30C4:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	mov r1, r9
 	bl LZ77UnCompWram
 _081D311A:
