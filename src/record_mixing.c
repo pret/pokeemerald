@@ -66,8 +66,10 @@ EWRAM_DATA struct PlayerRecords *gUnknown_0203A018 = NULL;
 
 static void sub_80E715C(u8 taskId);
 static void sub_80E7324(u8 taskId);
-void sub_80E756C(u8 taskId);
+static void sub_80E756C(u8 taskId);
 void sub_80E7630(u8 taskId);
+void sub_80E77D4(u8 taskId);
+void *sub_80E77FC(s16 *asShort);
 u8 sub_80E7810(void);
 void sub_80E7808(struct PlayerRecords *records, s16 *a1);
 void sub_80E78C4(OldMan *, size_t, u8);
@@ -397,6 +399,48 @@ static void sub_80E7324(u8 taskId)
             {
                 task->data[10] = 0;
                 task->data[0] = 2;
+            }
+            break;
+    }
+}
+
+static void sub_80E756C(u8 taskId)
+{
+    struct Task *task;
+    void *dest;
+
+    task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+        case 0:
+            dest = sub_80E77FC(&task->data[2]) + task->data[4] * 200;
+            memcpy(gBlockSendBuffer, dest, 200);
+            task->data[0] ++;
+            break;
+        case 1:
+            if (GetMultiplayerId() == 0)
+            {
+                sub_800A4D8(1);
+            }
+            task->data[0] ++;
+            break;
+        case 2:
+            break;
+        case 3:
+            task->data[4] ++;
+            if (task->data[4] == gUnknown_0300115C / 200 + 1)
+            {
+                task->data[0] ++;
+            }
+            else
+            {
+                task->data[0] = 0;
+            }
+            break;
+        case 4:
+            if (!gTasks[task->data[10]].isActive)
+            {
+                task->func = sub_80E77D4;
             }
             break;
     }

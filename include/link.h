@@ -6,6 +6,8 @@
 #define QUEUE_CAPACITY 50
 #define BLOCK_BUFFER_SIZE 0x100
 
+#define gBlockSendBuffer gUnknown_020228C4 // FIXME
+
 #define LINK_STAT_LOCAL_ID               0x00000003
 #define LINK_STAT_PLAYER_COUNT           0x0000001C
 #define LINK_STAT_PLAYER_COUNT_SHIFT     2
@@ -197,5 +199,6 @@ bool32 sub_800A03C(void);
 void sub_8009628(u8);
 u8 sub_800AA48(void);
 void sub_8009FAC(void);
+void sub_800A4D8(u8);
 
 #endif // GUARD_LINK_H
