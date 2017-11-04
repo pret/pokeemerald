@@ -3,9 +3,25 @@
 #include "global.h"
 #include "task.h"
 #include "cable_club.h"
+#include "link.h"
+#include "tv.h"
+#include "battle_tower.h"
+#include "mystery_event_script.h"
 #include "record_mixing.h"
 
 // Static type declarations
+
+struct RecordMixingData {
+    struct SecretBaseRecord secretBases[20];
+    TVShow tvShows[25];
+    PokeNews pokeNews[16];
+    OldMan oldMan;
+    struct EasyChatPair easyChatPair[5];
+    u8 unk_10ac[0x78];
+    u8 unk_1124[0xa4];
+    u16 unk_11c8;
+    u8 unk_11ca[0x27a];
+};
 
 // Static RAM declarations
 
@@ -28,13 +44,12 @@ EWRAM_DATA struct DayCareMailRecordMixing gUnknown_02039F9C[2] = {};
 EWRAM_DATA struct {
     /*0x0000*/ u8 filler_0000[0x5110];
 } *gUnknown_0203A014 = NULL;
-EWRAM_DATA struct {
-    /*0x0000*/ u8 filler_0000[0x1444];
-} *gUnknown_0203A018 = NULL;
+EWRAM_DATA struct RecordMixingData *gUnknown_0203A018 = NULL;
 
 // Static ROM declarations
 
 void sub_80E715C(u8 taskId);
+void sub_80E89F8(void *dest);
 
 // .rodata
 
@@ -57,4 +72,20 @@ void sub_80E6BF8(void)
     gUnknown_03001150 = &gSaveBlock1Ptr->lilycoveLady;
     gUnknown_03001154 = gSaveBlock2Ptr->field_0DC;
     gUnknown_03001158 = gSaveBlock2Ptr->field_64C;
+}
+
+void sub_80E6CA0(struct RecordMixingData *dest)
+{
+    memcpy(dest->secretBases, gUnknown_03001134, sizeof(struct SecretBaseRecord) * 20);
+    memcpy(dest->tvShows, gUnknown_03001138, sizeof(TVShow) * 25);
+    sub_80F14F8(dest->tvShows);
+    memcpy(dest->pokeNews, gUnknown_0300113C, sizeof(PokeNews) * 16);
+    memcpy(&dest->oldMan, gUnknown_03001140, sizeof(OldMan));
+    memcpy(dest->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
+    sub_80E89F8(dest->unk_10ac);
+    sub_81659DC(gUnknown_0300114C, dest->unk_1124);
+    if (GetMultiplayerId() == 0)
+    {
+        dest->unk_11c8 = sub_81539D4();
+    }
 }

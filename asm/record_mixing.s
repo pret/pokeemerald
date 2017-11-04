@@ -5,67 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E6CA0
-sub_80E6CA0: @ 80E6CA0
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r0, =gUnknown_03001134
-	ldr r1, [r0]
-	movs r4, 0xC8
-	lsls r4, 4
-	adds r0, r5, 0
-	adds r2, r4, 0
-	bl memcpy
-	adds r4, r5, r4
-	ldr r0, =gUnknown_03001138
-	ldr r1, [r0]
-	movs r2, 0xE1
-	lsls r2, 2
-	adds r0, r4, 0
-	bl memcpy
-	adds r0, r4, 0
-	bl sub_80F14F8
-	ldr r1, =0x00001004
-	adds r0, r5, r1
-	ldr r1, =gUnknown_0300113C
-	ldr r1, [r1]
-	movs r2, 0x40
-	bl memcpy
-	ldr r2, =0x00001044
-	adds r0, r5, r2
-	ldr r1, =gUnknown_03001140
-	ldr r1, [r1]
-	movs r2, 0x40
-	bl memcpy
-	ldr r1, =0x00001084
-	adds r0, r5, r1
-	ldr r1, =gUnknown_03001144
-	ldr r1, [r1]
-	movs r2, 0x28
-	bl memcpy
-	ldr r2, =0x000010ac
-	adds r0, r5, r2
-	bl sub_80E89F8
-	ldr r0, =gUnknown_0300114C
-	ldr r0, [r0]
-	ldr r2, =0x00001124
-	adds r1, r5, r2
-	bl sub_81659DC
-	bl GetMultiplayerId
-	lsls r0, 24
-	cmp r0, 0
-	bne _080E6D1C
-	bl sub_81539D4
-	ldr r2, =0x000011c8
-	adds r1, r5, r2
-	strh r0, [r1]
-_080E6D1C:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E6CA0
-
 	thumb_func_start sub_80E6D54
 sub_80E6D54: @ 80E6D54
 	push {r4,r5,lr}
