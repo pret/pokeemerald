@@ -67,10 +67,11 @@ EWRAM_DATA struct PlayerRecords *gUnknown_0203A018 = NULL;
 static void sub_80E715C(u8 taskId);
 static void sub_80E7324(u8 taskId);
 static void sub_80E756C(u8 taskId);
-void sub_80E7630(u8 taskId);
+static void sub_80E7630(u8 taskId);
 void sub_80E77D4(u8 taskId);
 void *sub_80E77FC(s16 *asShort);
 u8 sub_80E7810(void);
+void *sub_80E7820(u8);
 void sub_80E7808(struct PlayerRecords *records, s16 *a1);
 void sub_80E78C4(OldMan *, size_t, u8);
 void sub_80E7948(void *, size_t, u8);
@@ -443,5 +444,49 @@ static void sub_80E756C(u8 taskId)
                 task->func = sub_80E77D4;
             }
             break;
+    }
+}
+
+static void sub_80E7630(u8 taskId)
+{
+    struct Task *task;
+    u8 status;
+    u8 counter;
+    u8 i;
+    void *dest;
+    void *src;
+
+    task = &gTasks[taskId];
+    status = GetBlockReceivedStatus();
+    counter = 0;
+    if (status == sub_800A9D8())
+    {
+        for (i = 0; i < GetLinkPlayerCount(); i ++)
+        {
+            if ((status >> i) & 0x01)
+            {
+                dest = sub_80E77FC(&task->data[5]) + task->data[i + 1] * 200 + gUnknown_0300115C * i;
+                src = sub_80E7820(i);
+                if ((task->data[i + 1] + 1) * 200 > gUnknown_0300115C)
+                {
+                    memcpy(dest, src, gUnknown_0300115C - task->data[i + 1] * 200);
+                }
+                else
+                {
+                    memcpy(dest, src, 200);
+                }
+                ResetBlockReceivedFlag(i);
+                task->data[i + 1] ++;
+                if (task->data[i + 1] == gUnknown_0300115C / 200 + 1)
+                {
+                    counter ++;
+                }
+            }
+        }
+        gTasks[task->data[0]].data[0] ++;
+    }
+    if (counter == GetLinkPlayerCount())
+    {
+        DestroyTask(taskId);
     }
 }

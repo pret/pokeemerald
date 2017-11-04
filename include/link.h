@@ -200,5 +200,6 @@ void sub_8009628(u8);
 u8 sub_800AA48(void);
 void sub_8009FAC(void);
 void sub_800A4D8(u8);
+u8 sub_800A9D8(void);
 
 #endif // GUARD_LINK_H
