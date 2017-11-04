@@ -883,7 +883,7 @@ _081207BC:
 	adds r0, r1
 	ldrh r4, [r0]
 	adds r0, r4, 0
-	bl sub_817C7F4
+	bl GetWordSounds
 	str r0, [r6, 0x30]
 	movs r1, 0x3
 	ands r1, r4
@@ -892,7 +892,7 @@ _081207BC:
 	ands r4, r0
 	adds r1, r4
 	adds r0, r6, 0
-	bl sub_817C858
+	bl GetWordPhonemes
 	ldrb r0, [r6]
 	adds r0, 0x1
 	strb r0, [r6]
