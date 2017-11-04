@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E6BE8
-sub_80E6BE8: @ 80E6BE8
-	push {lr}
-	ldr r0, =sub_80E715C
-	bl sub_80B37D4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E6BE8
-
-	thumb_func_start sub_80E6BF8
-sub_80E6BF8: @ 80E6BF8
-	push {r4,lr}
-	ldr r2, =gUnknown_03001134
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r3, =0x00001a9c
-	adds r0, r1, r3
-	str r0, [r2]
-	ldr r2, =gUnknown_03001138
-	ldr r4, =0x000027cc
-	adds r0, r1, r4
-	str r0, [r2]
-	ldr r2, =gUnknown_0300113C
-	ldr r3, =0x00002b50
-	adds r0, r1, r3
-	str r0, [r2]
-	ldr r2, =gUnknown_03001140
-	ldr r4, =0x00002e28
-	adds r0, r1, r4
-	str r0, [r2]
-	ldr r2, =gUnknown_03001144
-	ldr r3, =0x00002e68
-	adds r0, r1, r3
-	str r0, [r2]
-	ldr r2, =gUnknown_03001148
-	ldr r0, =gUnknown_02039F9C
-	str r0, [r2]
-	ldr r2, =gUnknown_0300114C
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldr r4, =0x0000064c
-	adds r3, r0, r4
-	str r3, [r2]
-	ldr r2, =gUnknown_03001150
-	ldr r4, =0x00003b58
-	adds r1, r4
-	str r1, [r2]
-	ldr r1, =gUnknown_03001154
-	adds r0, 0xDC
-	str r0, [r1]
-	ldr r0, =gUnknown_03001158
-	str r3, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E6BF8
-
 	thumb_func_start sub_80E6CA0
 sub_80E6CA0: @ 80E6CA0
 	push {r4,r5,lr}
