@@ -3,6 +3,7 @@
 
 void AllocateBattleSpritesData(void);
 void FreeBattleSpritesData(void);
+u16 ChooseMoveAndTargetInBattlePalace(void);
 void sub_805D714(struct Sprite *sprite);
 void sub_805D770(struct Sprite *sprite, bool8 arg1);
 void sub_805D7AC(struct Sprite *sprite);

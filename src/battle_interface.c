@@ -1239,11 +1239,11 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
             }
 
             ConvertIntToDecimalStringN(text + 6, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            RenderTextFont9(gMonSpritesGfxPtr->fontPixels, 9, text);
+            RenderTextFont9(gMonSpritesGfxPtr->barFontGfx, 9, text);
 
             for (i = 0; i < 3; i++)
             {
-                CpuCopy32(&gMonSpritesGfxPtr->fontPixels[i * 64 + 32],
+                CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[i * 64 + 32],
                           (void*)((OBJ_VRAM0) + 32 * (gSprites[healthboxSpriteId].oam.tileNum + var + i)),
                           0x20);
             }
@@ -1308,19 +1308,19 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
             txtPtr = ConvertIntToDecimalStringN(text + 6, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
             if (!maxOrCurrent)
                 StringCopy(txtPtr, gText_Slash);
-            RenderTextFont9(gMonSpritesGfxPtr->fontPixels, 9, text);
+            RenderTextFont9(gMonSpritesGfxPtr->barFontGfx, 9, text);
 
             for (i = var; i < var + 3; i++)
             {
                 if (i < 3)
                 {
-                    CpuCopy32(&gMonSpritesGfxPtr->fontPixels[((i - var) * 64) + 32],
+                    CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[((i - var) * 64) + 32],
                           (void*)((OBJ_VRAM0) + 32 * (1 + gSprites[r7].oam.tileNum + i)),
                           0x20);
                 }
                 else
                 {
-                    CpuCopy32(&gMonSpritesGfxPtr->fontPixels[((i - var) * 64) + 32],
+                    CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[((i - var) * 64) + 32],
                           (void*)((OBJ_VRAM0 + 0x20) + 32 * (i + gSprites[r7].oam.tileNum)),
                           0x20);
                 }
@@ -1328,7 +1328,7 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
 
             if (maxOrCurrent == HP_CURRENT)
             {
-                CpuCopy32(&gMonSpritesGfxPtr->fontPixels[224],
+                CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[224],
                           (void*)((OBJ_VRAM0) + ((gSprites[r7].oam.tileNum + 4) * 32)),
                           0x20);
                 CpuFill32(0, (void*)((OBJ_VRAM0) + (gSprites[r7].oam.tileNum * 32)), 0x20);
@@ -1350,15 +1350,15 @@ static void sub_80730D4(u8 healthboxSpriteId, struct Pokemon *mon)
 {
     u8 text[20];
     s32 j, var2;
-    u8 *fontPixels;
+    u8 *barFontGfx;
     u8 i, var, nature, healthboxSpriteId_2;
 
     memcpy(text, sUnknown_0832C3C4, sizeof(sUnknown_0832C3C4));
-    fontPixels = &gMonSpritesGfxPtr->fontPixels[0x520 + (GetBankIdentity(gSprites[healthboxSpriteId].data6) * 384)];
+    barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBankIdentity(gSprites[healthboxSpriteId].data6) * 384)];
     var = 5;
     nature = GetNature(mon);
     StringCopy(text + 6, gNatureNamePointers[nature]);
-    RenderTextFont9(fontPixels, 9, text);
+    RenderTextFont9(barFontGfx, 9, text);
 
     for (j = 6, i = 0; i < var; i++, j++)
     {
@@ -1371,18 +1371,18 @@ static void sub_80730D4(u8 healthboxSpriteId, struct Pokemon *mon)
         else
             elementId = 43;
 
-        CpuCopy32(GetHealthboxElementGfxPtr(elementId), fontPixels + (i * 64), 0x20);
+        CpuCopy32(GetHealthboxElementGfxPtr(elementId), barFontGfx + (i * 64), 0x20);
     }
 
     for (j = 1; j < var + 1; j++)
     {
         var2 = (gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * 32;
-        CpuCopy32(fontPixels, (void*)(OBJ_VRAM0) + (var2), 0x20);
-        fontPixels += 0x20;
+        CpuCopy32(barFontGfx, (void*)(OBJ_VRAM0) + (var2), 0x20);
+        barFontGfx += 0x20;
 
         var2 = (8 + gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * 32;
-        CpuCopy32(fontPixels, (void*)(OBJ_VRAM0) + (var2), 0x20);
-        fontPixels += 0x20;
+        CpuCopy32(barFontGfx, (void*)(OBJ_VRAM0) + (var2), 0x20);
+        barFontGfx += 0x20;
     }
 
     healthboxSpriteId_2 = gSprites[healthboxSpriteId].data5;
@@ -1390,20 +1390,20 @@ static void sub_80730D4(u8 healthboxSpriteId, struct Pokemon *mon)
     ConvertIntToDecimalStringN(text + 9, gBattleStruct->field_7B, STR_CONV_MODE_RIGHT_ALIGN, 2);
     text[5] = CHAR_SPACE;
     text[8] = CHAR_SLASH;
-    RenderTextFont9(gMonSpritesGfxPtr->fontPixels, 9, text);
+    RenderTextFont9(gMonSpritesGfxPtr->barFontGfx, 9, text);
 
     j = healthboxSpriteId_2; // needed to match for some reason
     for (j = 0; j < 5; j++)
     {
         if (j <= 1)
         {
-            CpuCopy32(&gMonSpritesGfxPtr->fontPixels[0x40 * j + 0x20],
+            CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[0x40 * j + 0x20],
                       (void*)(OBJ_VRAM0) + (gSprites[healthboxSpriteId_2].oam.tileNum + 2 + j) * 32,
                       32);
         }
         else
         {
-            CpuCopy32(&gMonSpritesGfxPtr->fontPixels[0x40 * j + 0x20],
+            CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[0x40 * j + 0x20],
                       (void*)(OBJ_VRAM0 + 0xC0) + (j + gSprites[healthboxSpriteId_2].oam.tileNum) * 32,
                       32);
         }
