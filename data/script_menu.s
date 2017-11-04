@@ -39,7 +39,7 @@ gUnknown_0858AC78:: @ 58AC78
 	.4byte gText_Exit, 0
 
 gUnknown_0858AC90:: @ 58AC90
-	.4byte gUnknown_085E8CCB, 0
+	.4byte gMenuText_Register, 0
 	.4byte gUnknown_085EAE12, 0
 	.4byte gUnknown_085EAE1B, 0
 	.4byte gText_Cancel2, 0

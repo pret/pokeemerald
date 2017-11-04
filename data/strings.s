@@ -534,25 +534,25 @@ gUnknown_085E8CAC:: @ 85E8CAC
 gText_FlyToWhere:: @ 85E8CB4
 	.string "FLY to where?$"
 
-gUnknown_085E8CC2:: @ 85E8CC2
+gMenuText_Use:: @ 85E8CC2
 	.string "USE$"
 
-gUnknown_085E8CC6:: @ 85E8CC6
+gMenuText_Toss:: @ 85E8CC6
 	.string "TOSS$"
 
-gUnknown_085E8CCB:: @ 85E8CCB
+gMenuText_Register:: @ 85E8CCB
 	.string "REGISTER$"
 
-gUnknown_085E8CD4:: @ 85E8CD4
+gMenuText_Give:: @ 85E8CD4
 	.string "GIVE$"
 
-gUnknown_085E8CD9:: @ 85E8CD9
+gMenuText_CheckTag:: @ 85E8CD9
 	.string "CHECK TAG$"
 
-gText_Confirm:: @ 85E8CE3
+gMenuText_Confirm:: @ 85E8CE3
 	.string "CONFIRM$"
 
-gUnknown_085E8CEB:: @ 85E8CEB
+gMenuText_Walk:: @ 85E8CEB
 	.string "WALK$"
 
 gText_Cancel:: @ 85E8CF0
@@ -561,7 +561,7 @@ gText_Cancel:: @ 85E8CF0
 gText_Cancel2:: @ 85E8CF7
 	.string "CANCEL$"
 
-gUnknown_085E8CFE:: @ 85E8CFE
+gMenuText_Show:: @ 85E8CFE
 	.string "SHOW$"
 
 gText_EmptyString2:: @ 85E8D03
@@ -582,13 +582,13 @@ gUnknown_085E8D15:: @ 85E8D15
 gUnknown_085E8D1A:: @ 85E8D1A
 	.string "STORE$"
 
-gUnknown_085E8D20:: @ 85E8D20
+gMenuText_Check:: @ 85E8D20
 	.string "CHECK$"
 
 gText_None:: @ 85E8D26
 	.string "NONE$"
 
-gUnknown_085E8D2B:: @ 85E8D2B
+gMenuText_Deselect:: @ 85E8D2B
 	.string "DESELECT$"
 
 gText_ThreeMarks:: @ 85E8D34
@@ -642,7 +642,7 @@ gText_GoBackPrevMenu:: @ 85E8D62
 gText_WhatWouldYouLike:: @ 85E8D80
 	.string "What would you like to do?$"
 
-gUnknown_085E8D9B:: @ 85E8D9B
+gMenuText_Give2:: @ 85E8D9B
 	.string "GIVE$"
 
 gText_xVar1:: @ 85E8DA0

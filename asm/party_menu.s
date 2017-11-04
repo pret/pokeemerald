@@ -4249,7 +4249,7 @@ _081B243E:
 	adds r0, r4, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r5, =gText_Confirm
+	ldr r5, =gMenuText_Confirm
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0x30
