@@ -64,5 +64,6 @@ void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpNum);
 void c2_load_new_map(void);
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 void mapldr_default(void);
+void sub_808729C(void);
 
 #endif //GUARD_ROM4_H

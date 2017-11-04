@@ -5,237 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E70F4
-sub_80E70F4: @ 80E70F4
-	push {r4,lr}
-	sub sp, 0xC
-	adds r4, r0, 0
-	movs r0, 0
-	movs r1, 0
-	bl sub_81973C4
-	movs r0, 0x1
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	movs r1, 0x1
-	adds r2, r4, 0
-	movs r3, 0
-	bl PrintTextOnWindow
-	movs r0, 0
-	movs r1, 0x3
-	bl CopyWindowToVram
-	add sp, 0xC
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80E70F4
-
-	thumb_func_start sub_80E7128
-sub_80E7128: @ 80E7128
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x32
-	bne _080E7150
-	movs r0, 0xE2
-	bl PlaySE
-	movs r0, 0
-	strh r0, [r4, 0x8]
-_080E7150:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E7128
-
-	thumb_func_start sub_80E715C
-sub_80E715C: @ 80E715C
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	ldr r1, =gTasks + 0x8
-	adds r5, r0, r1
-	movs r1, 0
-	ldrsh r0, [r5, r1]
-	cmp r0, 0x5
-	bls _080E7176
-	b _080E730A
-_080E7176:
-	lsls r0, 2
-	ldr r1, =_080E7188
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080E7188:
-	.4byte _080E71A0
-	.4byte _080E7218
-	.4byte _080E724C
-	.4byte _080E726C
-	.4byte _080E72AC
-	.4byte _080E72C0
-_080E71A0:
-	ldr r4, =gUnknown_0203A018
-	ldr r0, =0x00001444
-	bl Alloc
-	str r0, [r4]
-	ldr r4, =gUnknown_0203A014
-	ldr r0, =0x00005110
-	bl Alloc
-	str r0, [r4]
-	ldr r0, =gSpecialVar_0x8005
-	ldrb r0, [r0]
-	bl sub_8009628
-	movs r0, 0x80
-	lsls r0, 7
-	movs r1, 0x1
-	bl VarSet
-	ldr r1, =gUnknown_03001130
-	movs r0, 0
-	strb r0, [r1]
-	bl sub_80E6E24
-	bl sub_80FB00C
-	movs r0, 0x1
-	strh r0, [r5]
-	ldr r0, =sub_80E7324
-	movs r1, 0x50
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x14]
-	ldr r0, =sub_80E7128
-	movs r1, 0x51
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x1E]
-	b _080E730A
-	.pool
-_080E7218:
-	ldr r2, =gTasks
-	movs r0, 0x14
-	ldrsh r1, [r5, r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r2
-	ldrb r0, [r0, 0x4]
-	cmp r0, 0
-	bne _080E730A
-	movs r0, 0x2
-	strh r0, [r5]
-	ldr r0, =0x00000894
-	bl FlagSet
-	bl sub_80FB074
-	ldrb r0, [r5, 0x1E]
-	bl DestroyTask
-	b _080E730A
-	.pool
-_080E724C:
-	ldr r0, =sub_80E7FF8
-	movs r1, 0xA
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x14]
-	movs r0, 0x3
-	strh r0, [r5]
-	movs r0, 0xE0
-	bl PlaySE
-	b _080E730A
-	.pool
-_080E726C:
-	ldr r2, =gTasks
-	movs r0, 0x14
-	ldrsh r1, [r5, r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r2
-	ldrb r4, [r0, 0x4]
-	cmp r4, 0
-	bne _080E730A
-	movs r0, 0x4
-	strh r0, [r5]
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080E7296
-	bl sub_80B3050
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x14]
-_080E7296:
-	ldr r0, =gText_RecordMixingComplete
-	bl sub_80E70F4
-	strh r4, [r5, 0x10]
-	b _080E730A
-	.pool
-_080E72AC:
-	ldrh r0, [r5, 0x10]
-	adds r0, 0x1
-	strh r0, [r5, 0x10]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x3C
-	ble _080E730A
-	movs r0, 0x5
-	strh r0, [r5]
-	b _080E730A
-_080E72C0:
-	ldr r2, =gTasks
-	movs r0, 0x14
-	ldrsh r1, [r5, r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r2
-	ldrb r0, [r0, 0x4]
-	cmp r0, 0
-	bne _080E730A
-	ldr r0, =gUnknown_0203A014
-	ldr r0, [r0]
-	bl Free
-	ldr r0, =gUnknown_0203A018
-	ldr r0, [r0]
-	bl Free
-	bl sub_808729C
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080E72F8
-	ldr r0, =sub_80AF2B4
-	movs r1, 0xA
-	bl CreateTask
-_080E72F8:
-	movs r0, 0
-	movs r1, 0x1
-	bl sub_8197434
-	adds r0, r4, 0
-	bl DestroyTask
-	bl EnableBothScriptContexts
-_080E730A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E715C
-
 	thumb_func_start sub_80E7324
 sub_80E7324: @ 80E7324
 	push {r4-r6,lr}
@@ -431,7 +200,7 @@ _080E7490:
 	strh r0, [r5, 0x12]
 	ldr r0, =sub_80E756C
 	str r0, [r5]
-	bl sub_800A064
+	bl Link_AnyPartnersPlayingRubyOrSapphrie
 	cmp r0, 0
 	beq _080E7504
 	ldr r0, =gUnknown_0203A018
@@ -963,7 +732,7 @@ sub_80E78C4: @ 80E78C4
 	adds r0, r2
 	ldrb r4, [r0]
 	ldrh r5, [r0, 0x1A]
-	bl sub_800A064
+	bl Link_AnyPartnersPlayingRubyOrSapphrie
 	cmp r0, 0
 	beq _080E7910
 	adds r0, r6, 0
@@ -1013,7 +782,7 @@ sub_80E7948: @ 80E7948
 	lsrs r6, r2, 24
 	mov r0, sp
 	bl sub_80E7830
-	bl sub_800A064
+	bl Link_AnyPartnersPlayingRubyOrSapphrie
 	cmp r0, 0
 	beq _080E79AC
 	lsls r0, r6, 2
@@ -1330,7 +1099,7 @@ _080E7BB0:
 	mov r8, r0
 	cmp r0, 0x3
 	bls _080E7BB0
-	bl sub_800A064
+	bl Link_AnyPartnersPlayingRubyOrSapphrie
 	str r0, [sp, 0x3C]
 	movs r2, 0
 	mov r8, r2
@@ -1887,7 +1656,7 @@ _080E8024:
 	.4byte _080E80EE
 	.4byte _080E80FA
 _080E804C:
-	bl sub_800A064
+	bl Link_AnyPartnersPlayingRubyOrSapphrie
 	cmp r0, 0
 	bne _080E80F2
 	movs r0, 0x6

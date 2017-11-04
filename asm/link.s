@@ -1394,8 +1394,10 @@ _08009FF4:
 	bx r1
 	thumb_func_end GetLinkPlayerCount
 
-	thumb_func_start sub_8009FF8
-sub_8009FF8: @ 8009FF8
+	thumb_func_start LinkPartnerVersionCheck
+LinkPartnerVersionCheck: @ 8009FF8
+@ s32 LinkPartnerVersionCheck(u32 version1, u32 version2)
+@ returns 1 if any link partners are playing either version1 or version2, -1 if no link partners are playing either version1 or version2
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r5, r1, 0
@@ -1431,7 +1433,7 @@ _0800A034:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8009FF8
+	thumb_func_end LinkPartnerVersionCheck
 
 	thumb_func_start sub_800A03C
 sub_800A03C: @ 800A03C
@@ -1439,8 +1441,8 @@ sub_800A03C: @ 800A03C
 	bx lr
 	thumb_func_end sub_800A03C
 
-	thumb_func_start sub_800A040
-sub_800A040: @ 800A040
+	thumb_func_start Link_HaveFourPlayersWithAtLeastOneRubyOrSapphire
+Link_HaveFourPlayersWithAtLeastOneRubyOrSapphire: @ 800A040
 	push {lr}
 	bl GetLinkPlayerCount
 	lsls r0, 24
@@ -1449,7 +1451,7 @@ sub_800A040: @ 800A040
 	bne _0800A05A
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_8009FF8
+	bl LinkPartnerVersionCheck
 	cmp r0, 0
 	bge _0800A05E
 _0800A05A:
@@ -1460,14 +1462,14 @@ _0800A05E:
 _0800A060:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A040
+	thumb_func_end Link_HaveFourPlayersWithAtLeastOneRubyOrSapphire
 
-	thumb_func_start sub_800A064
-sub_800A064: @ 800A064
+	thumb_func_start Link_AnyPartnersPlayingRubyOrSapphrie
+Link_AnyPartnersPlayingRubyOrSapphrie: @ 800A064
 	push {lr}
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_8009FF8
+	bl LinkPartnerVersionCheck
 	cmp r0, 0
 	bge _0800A076
 	movs r0, 0
@@ -1477,14 +1479,14 @@ _0800A076:
 _0800A078:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_800A064
+	thumb_func_end Link_AnyPartnersPlayingRubyOrSapphrie
 
 	thumb_func_start sub_800A07C
 sub_800A07C: @ 800A07C
 	push {lr}
 	movs r0, 0x4
 	movs r1, 0x5
-	bl sub_8009FF8
+	bl LinkPartnerVersionCheck
 	adds r2, r0, 0
 	cmp r2, 0
 	blt _0800A0A4

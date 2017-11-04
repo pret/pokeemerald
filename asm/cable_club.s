@@ -795,7 +795,7 @@ sub_80B2A08: @ 80B2A08
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bne _080B2A38
-	bl sub_800A064
+	bl Link_AnyPartnersPlayingRubyOrSapphrie
 	cmp r0, 0
 	bne _080B2A4A
 	bl sub_800AC34
