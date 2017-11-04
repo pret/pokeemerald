@@ -9,5 +9,6 @@
 void sub_80E9578(void);
 void sub_80E980C(void);
 void sub_80EB18C(struct SecretBaseRecord *dest);
+void sub_80E9914(void);
 
 #endif //GUARD_SECRET_BASE_H

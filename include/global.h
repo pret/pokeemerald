@@ -490,12 +490,13 @@ struct LilycoveLadyContest
     /*0x00e*/ u8 language;
 };
 
-typedef union // TODO
+typedef union
 {
     struct LilycoveLadyQuiz quiz;
     struct LilycoveLadyFavour favour;
     struct LilycoveLadyContest contest;
     u8 id;
+    u8 pad[0x40];
 } LilycoveLady;
 
 struct WaldaPhrase
@@ -592,7 +593,7 @@ struct SaveBlock1
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[52];
     /*0x3B58*/ LilycoveLady lilycoveLady;
-    /*0x3B88*/ u8 filler_3B88[0x1E8];
+    /*0x3B98*/ u8 filler_3B88[0x1D8];
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88
 };

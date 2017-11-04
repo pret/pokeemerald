@@ -16,4 +16,6 @@ struct DayCareMailRecordMixing {
 
 // Exported ROM declarations
 
+void sub_80E8260(void *);
+
 #endif //GUARD_RECORD_MIXING_H

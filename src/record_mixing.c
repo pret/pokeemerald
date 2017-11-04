@@ -22,8 +22,13 @@ struct RecordMixingData {
     u8 unk_10ac[0x78];
     u8 unk_1124[0xa4];
     u16 unk_11c8;
-    u8 unk_11ca[0x27a];
-};
+    u8 filler_11ca[0x46];
+    u16 unk_1210;
+    u8 filler_1212[0x2];
+    LilycoveLady lilycoveLady;
+    u8 unk_1254[0x88];
+    u8 unk_12dc[0x168];
+}; // 1444
 
 // Static RAM declarations
 
@@ -54,6 +59,8 @@ void sub_80E715C(u8 taskId);
 void sub_80E89F8(void *dest);
 void sub_80E8A54(void *src);
 void TaskDummy4(void *src);
+void sub_80E8AC0(void *);
+void sub_80E8110(void *, void *);
 
 // .rodata
 
@@ -111,5 +118,41 @@ void sub_80E6D54(struct RecordMixingData *dest)
     if (GetMultiplayerId() == 0)
     {
         dest->unk_11c8 = sub_81539D4();
+    }
+}
+
+void sub_80E6E24(void)
+{
+    sub_80E9914();
+    sub_80F0BB8();
+    sub_80E6BF8();
+    if (sub_800A064())
+    {
+        if (sub_800A03C() == FALSE)
+        {
+            sub_80E6CA0(gUnknown_0203A018);
+        }
+        else
+        {
+            sub_80E6D54(gUnknown_0203A018);
+        }
+    }
+    else
+    {
+        memcpy(gUnknown_0203A018->secretBases, gUnknown_03001134, sizeof(struct SecretBaseRecord) * 20);
+        memcpy(gUnknown_0203A018->tvShows, gUnknown_03001138, sizeof(TVShow) * 25);
+        memcpy(gUnknown_0203A018->pokeNews, gUnknown_0300113C, sizeof(PokeNews) * 16);
+        memcpy(&gUnknown_0203A018->oldMan, gUnknown_03001140, sizeof(OldMan));
+        memcpy(&gUnknown_0203A018->lilycoveLady, gUnknown_03001150, sizeof(LilycoveLady));
+        memcpy(gUnknown_0203A018->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
+        sub_80E89F8(gUnknown_0203A018->unk_10ac);
+        memcpy(gUnknown_0203A018->unk_1124, gUnknown_0300114C, 0xec);
+        sub_80E8AC0(gUnknown_0203A018->unk_1124);
+        if (GetMultiplayerId() == 0)
+        {
+            gUnknown_0203A018->unk_1210 = sub_81539D4();
+        }
+        sub_80E8110(gUnknown_0203A018->unk_1254, gUnknown_03001154);
+        sub_80E8260(gUnknown_0203A018->unk_12dc);
     }
 }
