@@ -1404,7 +1404,7 @@ gUnknown_0203BCD0: @ 203BCD0
 gUnknown_0203BCD4: @ 203BCD4
 	.space 0x4
 
-gUnknown_0203BCD8: @ 203BCD8
+gHofMonsPtr: @ 203BCD8
 	.space 0x4
 
 gUnknown_0203BCDC: @ 203BCDC
@@ -1416,7 +1416,7 @@ gUnknown_0203BCE0: @ 203BCE0
 gUnknown_0203BCE2: @ 203BCE2
 	.space 0x2
 
-gUnknown_0203BCE4: @ 203BCE4
+HasHallOfFameRecords: @ 203BCE4
 	.space 0x1
 
 gUnknown_0203BCE5: @ 203BCE5

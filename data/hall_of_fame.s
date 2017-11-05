@@ -21,13 +21,13 @@ gUnknown_085E5394:: @ 85E5394
 gUnknown_085E53A4:: @ 85E53A4
 	.incbin "baserom.gba", 0x5e53a4, 0x10
 
-gUnknown_085E53B4:: @ 85E53B4
+sHallOfFame_MonsFullTeamPositions:: @ 85E53B4
 	.incbin "baserom.gba", 0x5e53b4, 0x6
 
 gUnknown_085E53BA:: @ 85E53BA
 	.incbin "baserom.gba", 0x5e53ba, 0x2a
 
-gUnknown_085E53E4:: @ 85E53E4
+sHallOfFame_MonsHalfTeamPositions:: @ 85E53E4
 	.incbin "baserom.gba", 0x5e53e4, 0x18
 
 gUnknown_085E53FC:: @ 85E53FC

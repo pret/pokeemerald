@@ -4043,12 +4043,12 @@ sub_8137734: @ 8137734
 	lsrs r1, r0, 24
 	cmp r1, 0x1
 	bne _08137760
-	ldr r0, =gUnknown_0203BCE4
+	ldr r0, =HasHallOfFameRecords
 	strb r1, [r0]
 	b _0813776C
 	.pool
 _08137760:
-	ldr r1, =gUnknown_0203BCE4
+	ldr r1, =HasHallOfFameRecords
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0

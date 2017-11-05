@@ -214,6 +214,7 @@ SECTIONS {
         src/reset_save_heap.o(.text);
         asm/field_region_map.o(.text);
         asm/battle_anim_8170478.o(.text);
+        src/hall_of_fame.o(.text);
         asm/hall_of_fame.o(.text);
         asm/credits.o(.text);
         src/lottery_corner.o(.text);
