@@ -4165,7 +4165,7 @@ _08137838:
 	movs r1, 0x43
 	bl sub_80EE4DC
 _0813785A:
-	ldr r0, =sub_8173694
+	ldr r0, =CB2_DoHallOfFameScreen
 	bl SetMainCallback2
 	movs r0, 0
 	add sp, 0x1C
@@ -4638,7 +4638,7 @@ sub_8137C10: @ 8137C10
 	thumb_func_start sub_8137C28
 sub_8137C28: @ 8137C28
 	push {lr}
-	ldr r0, =sub_8174194
+	ldr r0, =CB2_DoHallOfFamePC
 	bl SetMainCallback2
 	bl ScriptContext2_Enable
 	pop {r0}

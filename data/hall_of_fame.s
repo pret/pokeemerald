@@ -42,5 +42,5 @@ gUnknown_085E54E8:: @ 85E54E8
 gUnknown_085E5508:: @ 85E5508
 	.incbin "baserom.gba", 0x5e5508, 0x1cc
 
-gUnknown_085E56D4:: @ 85E56D4
+sDummyFameMon:: @ 85E56D4
 	.incbin "baserom.gba", 0x5e56d4, 0x1c
