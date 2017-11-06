@@ -76,20 +76,6 @@ extern u8 gReservedSpritePaletteCount;
 
 #define HALL_OF_FAME_MAX_TEAMS 50
 
-extern const u8 gUnknown_085E53FC[];
-extern const struct SpriteTemplate gUnknown_085E54D0;
-extern const struct BgTemplate gUnknown_085E5374[3];
-extern const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet;
-extern const struct CompressedSpritePalette sHallOfFame_ConfettiSpritePalette;
-extern const u16 gHallOfFame_Pal[];
-extern const u8 gUnknown_085E5388[];
-extern const u8 gUnknown_085E538C[];
-extern const struct HallofFameMon sDummyFameMon;
-extern const struct WindowTemplate gUnknown_085E5380;
-extern const s16 sHallOfFame_MonsFullTeamPositions[][4];
-extern const s16 sHallOfFame_MonsHalfTeamPositions[][4];
-extern const u32 gUnknown_085E5508[];
-
 // strings
 extern const u8 gText_SavingDontTurnOffPower[];
 extern const u8 gText_LeagueChamp[];
@@ -104,6 +90,10 @@ extern const u8 gText_Level[];
 extern const u8 gText_IDNumber[];
 extern const u8 gText_Name[];
 extern const u8 gText_MainMenuTime[];
+
+// graphics
+extern const u8 gContestConfetti_Gfx[];
+extern const u8 gContestConfetti_Pal[];
 
 extern void sub_81973C4(u8, u8);
 extern u16 AddTextPrinterParametrized(u8 windowId, u8 fontId, const u8 *str, u8 speed, void ( *callback)(u16, struct TextPrinter *), u8 fgColor, u8 bgColor, u8 shadowColor);
@@ -137,15 +127,15 @@ extern void sub_8152438(u8, void*);
 extern void sub_8152474(u8, u8, u8);
 extern void sub_81522D4(void);
 extern bool32 sub_81521C0(u8);
-extern u8 sub_81524C4(const void *arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, u8 arg5, s16 arg6);
+extern u8 sub_81524C4(const struct OamData *arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, u8 arg5, s16 arg6);
 
 // this file's functions
-void ClearVramOamPltt_LoadHofPal(void);
-void sub_8174F70(void);
-void sub_8174FAC(void);
-bool8 sub_81751FC(void);
+static void ClearVramOamPltt_LoadHofPal(void);
+static void sub_8174F70(void);
+static void sub_8174FAC(void);
+static bool8 sub_81751FC(void);
 static void SetCallback2AfterHallOfFameDisplay(void);
-bool8 sub_8175024(void);
+static bool8 sub_8175024(void);
 static void Task_Hof_InitMonData(u8 taskId);
 static void Task_Hof_InitTeamSaveData(u8 taskId);
 static void Task_Hof_SetMonDisplayTask(u8 taskId);
@@ -170,20 +160,363 @@ static void Task_HofPC_HandleInput(u8 taskId);
 static void Task_HofPC_HandlePaletteOnExit(u8 taskId);
 static void Task_HofPC_HandleExit(u8 taskId);
 static void Task_HofPC_ExitOnButtonPress(u8 taskId);
-void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite);
-void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u8 unused2);
-void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2);
-void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2);
-void sub_8175364(u8 taskId);
+static void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite);
+static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u8 unused2);
+static void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2);
+static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2);
+static void sub_8175364(u8 taskId);
+static void sub_81751A4(struct Sprite* sprite);
 
-void VBlankCB_HallOfFame(void)
+// const rom data
+static const struct BgTemplate sHof_BgTemplates[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+};
+
+static const struct WindowTemplate sHof_WindowTemplate = {0, 2, 2, 0xE, 6, 0xE, 1};
+
+static const u8 gUnknown_085E5388[] = {0, 1, 2, 0};
+
+static const u8 gUnknown_085E538C[] = {0, 2, 3, 0, 4, 5, 0, 0};
+
+static const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet =
+{
+    gContestConfetti_Gfx, 0x220, 1001
+};
+
+static const u8 sUnused0[8] = {};
+
+static const struct CompressedSpritePalette sHallOfFame_ConfettiSpritePalette =
+{
+    gContestConfetti_Pal, 1001
+};
+
+static const u8 sUnused1[8] = {};
+
+static const s16 sHallOfFame_MonsFullTeamPositions[6][4] =
+{
+    {120,   210,    120,    40},
+    {326,   220,    56,     40},
+    {-86,   220,    184,    40},
+    {120,   -62,    120,    88},
+    {-70,   -92,    200,    88},
+    {310,   -92,    40,     88}
+};
+
+static const s16 sHallOfFame_MonsHalfTeamPositions[3][4] =
+{
+    {120,   234,    120,    64},
+    {326,   244,    56,     64},
+    {-86,   244,    184,    64}
+};
+
+static const struct OamData sOamData_85E53FC =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_85E5404[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E540C[] =
+{
+    ANIMCMD_FRAME(1, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E5414[] =
+{
+    ANIMCMD_FRAME(2, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E541C[] =
+{
+    ANIMCMD_FRAME(3, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E5424[] =
+{
+    ANIMCMD_FRAME(4, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E542C[] =
+{
+    ANIMCMD_FRAME(5, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E5434[] =
+{
+    ANIMCMD_FRAME(6, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E543C[] =
+{
+    ANIMCMD_FRAME(7, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E5444[] =
+{
+    ANIMCMD_FRAME(8, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E544C[] =
+{
+    ANIMCMD_FRAME(9, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E5454[] =
+{
+    ANIMCMD_FRAME(10, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E545C[] =
+{
+    ANIMCMD_FRAME(11, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E5464[] =
+{
+    ANIMCMD_FRAME(12, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E546C[] =
+{
+    ANIMCMD_FRAME(13, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E5474[] =
+{
+    ANIMCMD_FRAME(14, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E547C[] =
+{
+    ANIMCMD_FRAME(15, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85E5484[] =
+{
+    ANIMCMD_FRAME(16, 30),
+    ANIMCMD_END
+};
+
+static const union AnimCmd * const sSpriteAnimTable_85E548C[] =
+{
+    sSpriteAnim_85E5404, sSpriteAnim_85E540C, sSpriteAnim_85E5414, sSpriteAnim_85E541C,
+    sSpriteAnim_85E5424, sSpriteAnim_85E542C, sSpriteAnim_85E5434, sSpriteAnim_85E543C,
+    sSpriteAnim_85E5444, sSpriteAnim_85E544C, sSpriteAnim_85E5454, sSpriteAnim_85E545C,
+    sSpriteAnim_85E5464, sSpriteAnim_85E546C, sSpriteAnim_85E5474, sSpriteAnim_85E547C,
+    sSpriteAnim_85E5484
+};
+
+static const struct SpriteTemplate sSpriteTemplate_85E54D0 =
+{
+    .tileTag = 1001,
+    .paletteTag = 1001,
+    .oam = &sOamData_85E53FC,
+    .anims = sSpriteAnimTable_85E548C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_81751A4
+};
+
+// todo: dump actual graphics
+static const u32 sHallOfFame_Pal[] =
+{
+    0, 0x109F63B0, 0x5B6E, 0, 0, 0, 0, 0x7FFF2108
+};
+
+// todo: dump actual graphics
+static const u32 sHallOfFame_Gfx[] =
+{
+    0x3A010,
+    0xF0000033,
+    0x11019001,
+    0x9001F011,
+    0x22220001,
+    0x44442222,
+    0xF0E04444,
+    0x70073007,
+    0x11113329,
+    0x13033331,
+    0x33333311,
+    0xF0030031,
+    0x1108049,
+    0x1111FFFF,
+    0x4913EEEE,
+    0xE10700F1,
+    0x110B00EE,
+    0x1D90EF,
+    0x1EFFF11E,
+    0x1EEEE11E,
+    0x1500EF4A,
+    0xB00EFEE,
+    0xF11F90FF,
+    0xFFF1FE01,
+    0xEEE1EEE1,
+    0xF1211200,
+    0x1E0300EE,
+    0x10E1EF11,
+    0x3B40D029,
+    0x1E7C00,
+    0xF3331178,
+    0x331100EF,
+    0x3331FEEF,
+    0x10E8F3EF,
+    0x105F9003,
+    0x7C003394,
+    0x3AE1133E,
+    0xC003EEE,
+    0x1800310,
+    0xEF8F10F1,
+    0xFEA30081,
+    0xE1FEEE1E,
+    0x33A300EF,
+    0x6800EEEF,
+    0x1EFE0130,
+    0x3009300,
+    0xF11EFF0A,
+    0xFFA1101E,
+    0x17EF0300,
+    0x80FEEEFE,
+    0x11313F,
+    0xD7006100,
+    0xEF332F,
+    0x8F00FF0A,
+    0x7B209F60,
+    0xEF440400,
+    0x3EFE2201,
+    0x33070013,
+    0xC0FE50F1,
+    0x110EF80,
+    0xFEF1EEF1,
+    0xF1EFFF00,
+    0xF1FEEEFF,
+    0x921EBF1,
+    0x111120A0,
+    0xF12601EE,
+    0x1107D00,
+    0x819100EB,
+    0xFE2D005D,
+    0x10FFB100,
+    0xFE3910AB,
+    0x9810B410,
+    0x3108F11,
+    0x89209F11,
+    0xA0EFF6A0,
+    0x1FE8D00,
+    0xE111F153,
+    0xF1AFE11E,
+    0x641011B3,
+    0x19110EF,
+    0x406FA07C,
+    0xA400CBB3,
+    0xEEFF0300,
+    0x611E2D01,
+    0x6314612F,
+    0x11470133,
+    0xE3EE3387,
+    0x23318810,
+    0x210170F7,
+    0x950087,
+    0xA00FF03,
+    0x1123FE0,
+    0xCC00F141,
+    0xFFFE1EEF,
+    0x8F3402EE,
+    0xF1EE1ED0,
+    0x10B7201E,
+    0x23CF0EE,
+    0x8301EF17,
+    0x1A011002,
+    0x20CC0133,
+    0x70A7017B,
+    0xF35701,
+    0x7C00EF80,
+    0xF1BA22EE,
+    0xDCED011D,
+    0x1009621,
+    0xE16000FE,
+    0xF1F9001F,
+    0xB42A5FE,
+    0x113FF1EE,
+    0xFEA702FF,
+    0xE04101,
+    0xD03F22BC,
+    1
+};
+
+static const struct HallofFameMon sDummyFameMon =
+{
+    0x3EA03EA, 0, 0, 0, {0}
+};
+
+static const u8 sUnused2[6] = {2, 1, 3, 6, 4, 5};
+
+// code
+static void VBlankCB_HallOfFame(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void CB2_HallOfFame(void)
+static void CB2_HallOfFame(void)
 {
     RunTasks();
     RunTextPrinters();
@@ -528,7 +861,7 @@ static void sub_8173EE4(u8 taskId)
     ShowBg(1);
     ShowBg(3);
     gTasks[taskId].tPlayerSpriteID = sub_818D8AC(sub_818D97C(gSaveBlock2Ptr->playerGender, 1), 1, 120, 72, 6, 0xFFFF);
-    AddWindow(&gUnknown_085E5380);
+    AddWindow(&sHof_WindowTemplate);
     sub_80987D4(1, gSaveBlock2Ptr->optionsWindowFrameType, 0x21D, 0xD0);
     LoadPalette(stdpal_get(1), 0xE0, 0x20);
     gTasks[taskId].tFrameCount = 120;
@@ -936,7 +1269,7 @@ static void Task_HofPC_ExitOnButtonPress(u8 taskId)
 #undef tPokesNo
 #undef tMonSpriteId
 
-void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2)
+static void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2)
 {
     FillWindowPixelBuffer(0, 0);
     PutWindowTilemap(0);
@@ -944,7 +1277,7 @@ void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2)
     CopyWindowToVram(0, 3);
 }
 
-void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u8 unused2)
+static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u8 unused2)
 {
     u8 text[30];
     u8 *stringPtr;
@@ -1026,7 +1359,7 @@ void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u8 unuse
     }
 }
 
-void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
+static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
 {
     u8 text[20];
     u32 width;
@@ -1072,7 +1405,7 @@ void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
     CopyWindowToVram(1, 3);
 }
 
-void ClearVramOamPltt_LoadHofPal(void)
+static void ClearVramOamPltt_LoadHofPal(void)
 {
     u32 vramOffset, oamOffset, plttOffset;
     u32 vramSize, oamSize, plttSize;
@@ -1100,10 +1433,10 @@ void ClearVramOamPltt_LoadHofPal(void)
     DmaFill16(3, 0, plttOffset, plttSize);
 
     ResetPaletteFade();
-    LoadPalette(gHallOfFame_Pal, 0, 0x20);
+    LoadPalette(sHallOfFame_Pal, 0, 0x20);
 }
 
-void sub_8174F70(void)
+static void sub_8174F70(void)
 {
     remove_some_task();
     ResetTasks();
@@ -1116,10 +1449,10 @@ void sub_8174F70(void)
     LoadCompressedObjectPalette(&sHallOfFame_ConfettiSpritePalette);
 }
 
-void sub_8174FAC(void)
+static void sub_8174FAC(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_085E5374, ARRAY_COUNT(gUnknown_085E5374));
+    InitBgsFromTemplates(0, sHof_BgTemplates, ARRAY_COUNT(sHof_BgTemplates));
     SetBgTilemapBuffer(1, gUnknown_0203BCDC->tilemap1);
     SetBgTilemapBuffer(3, gUnknown_0203BCDC->tilemap2);
     ChangeBgX(0, 0, 0);
@@ -1130,12 +1463,12 @@ void sub_8174FAC(void)
     ChangeBgY(3, 0, 0);
 }
 
-bool8 sub_8175024(void)
+static bool8 sub_8175024(void)
 {
     switch (gUnknown_0203BCDC->state)
     {
     case 0:
-        decompress_and_copy_tile_data_to_vram(1, gUnknown_085E5508, 0, 0, 0);
+        decompress_and_copy_tile_data_to_vram(1, sHallOfFame_Gfx, 0, 0, 0);
         break;
     case 1:
         if (free_temp_tile_data_buffers_if_possible())
@@ -1167,7 +1500,7 @@ bool8 sub_8175024(void)
     return TRUE;
 }
 
-void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite)
+static void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite)
 {
     if (sprite->pos1.x != sprite->tDestinationX
         || sprite->pos1.y != sprite->tDestinationY)
@@ -1219,7 +1552,7 @@ static void sub_81751A4(struct Sprite* sprite)
     }
 }
 
-bool8 sub_81751FC(void)
+static bool8 sub_81751FC(void)
 {
     u8 spriteID;
     struct Sprite* sprite;
@@ -1227,7 +1560,7 @@ bool8 sub_81751FC(void)
     s16 posX = Random() % 240;
     s16 posY = -(Random() % 8);
 
-    spriteID = CreateSprite(&gUnknown_085E54D0, posX, posY, 0);
+    spriteID = CreateSprite(&sSpriteTemplate_85E54D0, posX, posY, 0);
     sprite = &gSprites[spriteID];
 
     StartSpriteAnim(sprite, Random() % 17);
@@ -1253,7 +1586,7 @@ void sub_8175280(void)
     }
 }
 
-void sub_81752C0(void)
+static void sub_81752C0(void)
 {
     u8 taskId;
 
@@ -1290,7 +1623,7 @@ struct UnknownStruct912B4
     s16 field_28;
 };
 
-void sub_81752F4(struct UnknownStruct912B4 *unkStruct)
+static void sub_81752F4(struct UnknownStruct912B4 *unkStruct)
 {
     if (unkStruct->field_E > 110)
     {
@@ -1315,7 +1648,7 @@ void sub_81752F4(struct UnknownStruct912B4 *unkStruct)
     }
 }
 
-void sub_8175364(u8 taskId)
+static void sub_8175364(u8 taskId)
 {
     u32 var = 0;
     u16 *data = gTasks[taskId].data;
@@ -1336,7 +1669,7 @@ void sub_8175364(u8 taskId)
     case 1:
         if (data[1] != 0 && data[1] % 3 == 0)
         {
-            var = sub_81524C4(gUnknown_085E53FC, 0x3E9, 0x3E9, Random() % 240, -(Random() % 8), Random() % 0x11, var);
+            var = sub_81524C4(&sOamData_85E53FC, 0x3E9, 0x3E9, Random() % 240, -(Random() % 8), Random() % 0x11, var);
             if (var != 0xFF)
             {
                 sub_8152438(var, sub_81752F4);

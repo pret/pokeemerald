@@ -156,7 +156,31 @@ gUnknown_08C2CEE0:: @ 8C2CEE0
 	.incbin "baserom.gba", 0xc2cee0, 0x240
 
 gUnknown_08C2D120:: @ 8C2D120
-	.incbin "baserom.gba", 0xc2d120, 0x600
+	.incbin "baserom.gba", 0xc2d120, 552
+    
+gUnknown_08C2D348:: @ 8C2D348
+	.incbin "baserom.gba", 0xC2D348, 196
+    
+gUnknown_08C2D40C:: @ 8C2D40C
+	.incbin "baserom.gba", 0xC2D40C, 28
+    
+gContestConfetti_Gfx:: @ 8C2D428
+	.incbin "baserom.gba", 0xC2D428, 288
+    
+gContestConfetti_Pal:: @ 8C2D548
+	.incbin "baserom.gba", 0xC2D548, 40
+    
+gUnknown_08C2D570:: @ 8C2D570
+	.incbin "baserom.gba", 0xC2D570, 316
+    
+gUnknown_08C2D6AC:: @ 8C2D6AC
+	.incbin "baserom.gba", 0xC2D6AC, 36
+    
+gUnknown_08C2D6D0:: @ 8C2D6D0
+	.incbin "baserom.gba", 0xC2D6D0, 40
+    
+gUnknown_08C2D6F8:: @ 8C2D6F8
+	.incbin "baserom.gba", 0xC2D6F8, 40
 
 gUnknown_08C2D720:: @ 8C2D720
 	.incbin "baserom.gba", 0xc2d720, 0x210
