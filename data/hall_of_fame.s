@@ -15,10 +15,10 @@ gUnknown_085E5388:: @ 85E5388
 gUnknown_085E538C:: @ 85E538C
 	.incbin "baserom.gba", 0x5e538c, 0x8
 
-gUnknown_085E5394:: @ 85E5394
+sHallOfFame_ConfettiSpriteSheet:: @ 85E5394
 	.incbin "baserom.gba", 0x5e5394, 0x10
 
-gUnknown_085E53A4:: @ 85E53A4
+sHallOfFame_ConfettiSpritePalette:: @ 85E53A4
 	.incbin "baserom.gba", 0x5e53a4, 0x10
 
 sHallOfFame_MonsFullTeamPositions:: @ 85E53B4
@@ -36,7 +36,7 @@ gUnknown_085E53FC:: @ 85E53FC
 gUnknown_085E54D0:: @ 85E54D0
 	.incbin "baserom.gba", 0x5e54d0, 0x18
 
-gUnknown_085E54E8:: @ 85E54E8
+gHallOfFame_Pal:: @ 85E54E8
 	.incbin "baserom.gba", 0x5e54e8, 0x20
 
 gUnknown_085E5508:: @ 85E5508
