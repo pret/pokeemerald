@@ -31,3 +31,4 @@ data2old.s
 dump baserom msys code.txt
 *.lnk
 baserom.rar
+datadump/
