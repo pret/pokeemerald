@@ -40,7 +40,9 @@ gUnknown_08614274:: @ 8614274
 gUnknown_08614278:: @ 8614278
 @ replacing .incbin "baserom.gba", 0x00614278, 0x4
 .4byte 0x00700000
-	.incbin "baserom.gba", 0x61427C, 0x14		//found a pointer to this. added a new label
+
+gUnknown_0861427C:: @ 861427C
+	.incbin "baserom.gba", 0x61427C, 0x14
 
 gUnknown_08614290:: @ 8614290
 	.incbin "baserom.gba", 0x614290, 0x18

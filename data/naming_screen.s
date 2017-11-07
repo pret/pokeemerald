@@ -157,6 +157,8 @@ gUnknown_0858BFD8:: @ 858BFD8
 .4byte 0x858bfc0
 .4byte 0x858bfc0
 .4byte 0x858bfcc
+
+gUnknown_0858BFEC:: @ 858BFEC
 	.incbin "baserom.gba", 0x58bfec, 0x64
 	
 gUnknown_0858C050:: @ 858C050
