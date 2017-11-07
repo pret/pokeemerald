@@ -43,7 +43,7 @@ _081537FE:
 sub_8153804: @ 8153804
 	push {lr}
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08674C86
+	ldr r1, =gText_MysteryGiftCantBeUsed
 	bl StringExpandPlaceholders
 	movs r0, 0x3
 	bl SetMysteryEventScriptStatus
@@ -461,7 +461,7 @@ sub_8153AE8: @ 8153AE8
 	cmp r0, 0
 	bne _08153B54
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08674AE4
+	ldr r1, =gText_MysteryGiftBerry
 	b _08153B74
 	.pool
 _08153B54:
@@ -471,12 +471,12 @@ _08153B54:
 	cmp r0, 0
 	beq _08153B70
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08674B16
+	ldr r1, =gText_MysteryGiftBerryTransform
 	b _08153B74
 	.pool
 _08153B70:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08674B42
+	ldr r1, =gText_MysteryGiftBerryObtained
 _08153B74:
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -515,7 +515,7 @@ sub_8153BB0: @ 8153BB0
 	str r2, [r4, 0x8]
 	bl GiveGiftRibbonToParty
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08674B6A
+	ldr r1, =gText_MysteryGiftSpecialRibbon
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
@@ -584,7 +584,7 @@ sub_8153C4C: @ 8153C4C
 	adds r4, r0, 0
 	bl EnableNationalPokedex
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08674B9E
+	ldr r1, =gText_MysteryGiftNationalDex
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
@@ -605,7 +605,7 @@ sub_8153C70: @ 8153C70
 	str r1, [r4, 0x8]
 	bl sub_811EFC0
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08674BD4
+	ldr r1, =gText_MysteryGiftRareWord
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
@@ -685,7 +685,7 @@ _08153D22:
 	cmp r0, 0x6
 	bne _08153D4C
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08674C02
+	ldr r1, =gText_MysteryGiftFullParty
 	bl StringExpandPlaceholders
 	movs r0, 0x3
 	b _08153DB6
@@ -732,7 +732,7 @@ _08153DA4:
 	bl party_compaction
 	bl CalculatePlayerPartyCount
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08674BF0
+	ldr r1, =gText_MysteryGiftSentOver
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 _08153DB6:
@@ -765,7 +765,7 @@ sub_8153DD4: @ 8153DD4
 	bl memcpy
 	bl sub_81652B4
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08674C31
+	ldr r1, =gText_MysteryGiftNewTrainer
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
