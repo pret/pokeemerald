@@ -8,6 +8,8 @@
 #include "item.h"
 #include "task.h"
 #include "species.h"
+#include "save.h"
+#include "load_save.h"
 #include "pokemon.h"
 #include "cable_club.h"
 #include "link.h"
@@ -95,8 +97,8 @@ static void sub_80E7948(union BattleTowerRecord *, size_t, u8);
 static void sub_80E7A14(LilycoveLady *, size_t, u8);
 static void sub_80E7B2C(const u8 *);
 static void sub_80E7B60(struct UnkStruct_80E7B60 *, size_t, u8, TVShow *);
-void sub_80E7F68(u16 *item, u8 which);
-void sub_80E7FF8(u8 taskId);
+static void sub_80E7F68(u16 *item, u8 which);
+static void sub_80E7FF8(u8 taskId);
 void sub_80E8110(void *, void *);
 void sub_80E8468(void *, size_t, u8);
 void sub_80E89AC(void *, size_t, u8);
@@ -1440,5 +1442,85 @@ static void sub_80E7F68(u16 *item, u8 which)
         {
             VarSet(VAR_0x4001, ITEM_NONE);
         }
+    }
+}
+
+static void sub_80E7FF8(u8 taskId)
+{
+    struct Task *task;
+
+    task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+        case 0:
+            task->data[0] ++;
+            break;
+        case 1:
+            if (Link_AnyPartnersPlayingRubyOrSapphire())
+            {
+                task->data[0] ++;
+            }
+            else
+            {
+                task->data[0] = 6;
+            }
+            break;
+        case 2:
+            sub_8076D5C();
+            sub_8153430();
+            task->data[0] ++;
+            break;
+        case 3:
+            if (sub_8153474())
+            {
+                sav2_gender2_inplace_and_xFE();
+                task->data[0] = 4;
+                task->data[1] = 0;
+            }
+            break;
+        case 4:
+            if (++ task->data[1] > 10)
+            {
+                sub_800AC34();
+                task->data[0] ++;
+            }
+            break;
+        case 5:
+            if (gReceivedRemoteLinkPlayers == 0)
+            {
+                DestroyTask(taskId);
+            }
+            break;
+        case 6:
+            if (!sub_801048C(0))
+            {
+                CreateTask(sub_8153688, 5);
+                task->data[0] ++;
+            }
+            break;
+        case 7:
+            if (!FuncIsActiveTask(sub_8153688))
+            {
+                if (gLinkVSyncDisabled)
+                {
+                    sub_801048C(1);
+                    task->data[0] = 8;
+                }
+                else
+                {
+                    task->data[0] = 4;
+                }
+            }
+            break;
+        case 8:
+            sub_800ADF8();
+            task->data[0] ++;
+            break;
+        case 9:
+            if (sub_800A520())
+            {
+                DestroyTask(taskId);
+            }
+            break;
     }
 }

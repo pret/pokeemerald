@@ -92,5 +92,8 @@ u8 HandleSavingData(u8 saveType);
 //u8 unref_sub_8126080(u8 sector, u8 *data);
 u16 sub_815355C(void);
 u8 sub_81534D0(u8);
+u8 sub_8153430(void);
+bool8 sub_8153474(void);
+void sub_8153688(u8 taskId);
 
 #endif // GUARD_SAVE_H

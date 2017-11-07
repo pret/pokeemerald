@@ -19,6 +19,7 @@ void LoadSerializedGame(void);
 void LoadPlayerBag(void);
 void SavePlayerBag(void);
 void SetSaveBlocksPointers(u16);
-void MoveSaveBlocks_ResetHeap(void);
+void sub_8076D5C(void);
+void sav2_gender2_inplace_and_xFE(void);
 
 #endif // GUARD_LOAD_SAVE_H
