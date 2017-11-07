@@ -5,64 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80E7F68
-sub_80E7F68: @ 80E7F68
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r1, 24
-	cmp r1, 0
-	beq _080E7FEC
-	ldrh r0, [r4]
-	cmp r0, 0
-	beq _080E7FEC
-	bl GetPocketByItemId
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x5
-	bne _080E7FEC
-	ldrh r0, [r4]
-	movs r1, 0x1
-	bl CheckBagHasItem
-	lsls r0, 24
-	cmp r0, 0
-	bne _080E7FE4
-	ldrh r0, [r4]
-	movs r1, 0x1
-	bl CheckPCHasItem
-	lsls r0, 24
-	cmp r0, 0
-	bne _080E7FE4
-	ldrh r0, [r4]
-	movs r1, 0x1
-	bl AddBagItem
-	lsls r0, 24
-	cmp r0, 0
-	beq _080E7FE4
-	ldr r0, =0x00004001
-	ldrh r1, [r4]
-	bl VarSet
-	ldr r0, =gStringVar1
-	ldr r1, =gLinkPlayers + 8
-	bl StringCopy
-	ldrh r1, [r4]
-	ldr r0, =0x00000113
-	cmp r1, r0
-	bne _080E7FEC
-	ldr r0, =0x000008b3
-	bl FlagSet
-	b _080E7FEC
-	.pool
-_080E7FE4:
-	ldr r0, =0x00004001
-	movs r1, 0
-	bl VarSet
-_080E7FEC:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80E7F68
-
 	thumb_func_start sub_80E7FF8
 sub_80E7FF8: @ 80E7FF8
 	push {r4,r5,lr}

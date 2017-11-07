@@ -386,4 +386,13 @@ enum
     ITEM_OLD_SEA_MAP,    // 0x178
 };
 
+enum
+{
+    ITEMS_POCKET,
+    BALLS_POCKET,
+    TMHM_POCKET,
+    BERRIES_POCKET,
+    KEYITEMS_POCKET
+};
+
 #endif // GUARD_ITEMS_H

@@ -16,15 +16,6 @@ extern const u8 gUnknown_085897E4[][28]; // not sure what this one is
 bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 
-enum
-{
-    ITEMS_POCKET,
-    BALLS_POCKET,
-    TMHM_POCKET,
-    BERRIES_POCKET,
-    KEYITEMS_POCKET
-};
-
 u16 GetBagItemQuantity(u16* quantity)
 {
     return gSaveBlock2Ptr->encryptionKey ^ *quantity;

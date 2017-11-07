@@ -5,7 +5,7 @@
 #include "rng.h"
 #include "items.h"
 #include "text.h"
-
+#include "item.h"
 #include "task.h"
 #include "species.h"
 #include "pokemon.h"
@@ -32,13 +32,24 @@
 
 // Static type declarations
 
+struct PlayerRecordsRS {
+    struct SecretBaseRecord secretBases[20];
+    TVShow tvShows[25];
+    PokeNews pokeNews[16];
+    OldMan oldMan;
+    struct EasyChatPair easyChatPairs[5];
+    struct UnkStruct_80E7B60 dayCareMail;
+    struct RSBattleTowerRecord battleTowerRecord;
+    u16 filler11C8[0x32];
+};
+
 struct PlayerRecords {
     /* 0x0000 */ struct SecretBaseRecord secretBases[20];
     /* 0x0c80 */ TVShow tvShows[25];
     /* 0x1004 */ PokeNews pokeNews[16];
     /* 0x1044 */ OldMan oldMan;
     /* 0x1084 */ struct EasyChatPair easyChatPair[5];
-    /* 0x10ac */ struct UnkStruct_80E7B60 unk_10ac;
+    /* 0x10ac */ struct UnkStruct_80E7B60 dayCareMail;
     /* 0x1124 */ union BattleTowerRecord battleTowerRecord;
     /* 0x1210 */ u16 unk_1210;
     /* 0x1214 */ LilycoveLady lilycoveLady;
@@ -84,7 +95,7 @@ static void sub_80E7948(union BattleTowerRecord *, size_t, u8);
 static void sub_80E7A14(LilycoveLady *, size_t, u8);
 static void sub_80E7B2C(const u8 *);
 static void sub_80E7B60(struct UnkStruct_80E7B60 *, size_t, u8, TVShow *);
-void sub_80E7F68(void *, u8);
+void sub_80E7F68(u16 *item, u8 which);
 void sub_80E7FF8(u8 taskId);
 void sub_80E8110(void *, void *);
 void sub_80E8468(void *, size_t, u8);
@@ -136,7 +147,7 @@ void sub_80E6CA0(struct PlayerRecords *dest)
     memcpy(dest->pokeNews, gUnknown_0300113C, sizeof(PokeNews) * 16);
     memcpy(&dest->oldMan, gUnknown_03001140, sizeof(OldMan));
     memcpy(dest->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
-    sub_80E89F8(&dest->unk_10ac);
+    sub_80E89F8(&dest->dayCareMail);
     sub_81659DC(gUnknown_0300114C, &dest->battleTowerRecord);
     if (GetMultiplayerId() == 0)
     {
@@ -154,8 +165,8 @@ void sub_80E6D54(struct PlayerRecords *dest)
     memcpy(&dest->oldMan, gUnknown_03001140, sizeof(OldMan));
     sub_8120B70(&dest->oldMan);
     memcpy(dest->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
-    sub_80E89F8(&dest->unk_10ac);
-    sub_80E8A54(&dest->unk_10ac);
+    sub_80E89F8(&dest->dayCareMail);
+    sub_80E8A54(&dest->dayCareMail);
     sub_81659DC(gUnknown_0300114C, &dest->battleTowerRecord);
     TaskDummy4(&dest->battleTowerRecord);
     if (GetMultiplayerId() == 0)
@@ -188,7 +199,7 @@ void sub_80E6E24(void)
         memcpy(&gUnknown_0203A018->oldMan, gUnknown_03001140, sizeof(OldMan));
         memcpy(&gUnknown_0203A018->lilycoveLady, gUnknown_03001150, sizeof(LilycoveLady));
         memcpy(gUnknown_0203A018->easyChatPair, gUnknown_03001144, sizeof(struct EasyChatPair) * 5);
-        sub_80E89F8(&gUnknown_0203A018->unk_10ac);
+        sub_80E89F8(&gUnknown_0203A018->dayCareMail);
         memcpy(&gUnknown_0203A018->battleTowerRecord, gUnknown_0300114C, 0xec);
         sub_80E8AC0(&gUnknown_0203A018->battleTowerRecord);
         if (GetMultiplayerId() == 0)
@@ -200,36 +211,36 @@ void sub_80E6E24(void)
     }
 }
 
-void sub_80E6F60(u32 a0)
+void sub_80E6F60(u32 which)
 {
     if (Link_AnyPartnersPlayingRubyOrSapphire())
     {
         // Ruby/Sapphire
         sub_80E7B2C((void *)gUnknown_0203A014[0].tvShows);
-        sub_80EAF80(gUnknown_0203A014[0].secretBases, 0x1230, a0);
-        sub_80E7B60(&gUnknown_0203A014[0].unk_10ac, 0x1230, a0, gUnknown_0203A014[0].tvShows);
-        sub_80E7948(&gUnknown_0203A014[0].battleTowerRecord, 0x1230, a0);
-        sub_80F01E8(gUnknown_0203A014[0].tvShows, 0x1230, a0);
-        sub_80F0C7C(gUnknown_0203A014[0].pokeNews, 0x1230, a0);
-        sub_80E78C4(&gUnknown_0203A014[0].oldMan, 0x1230, a0);
-        sub_812287C(gUnknown_0203A014[0].easyChatPair, 0x1230, a0);
-        sub_80E7F68(&gUnknown_0203A014[0].battleTowerRecord.ruby_sapphire.unk_11c8, a0);
+        sub_80EAF80(gUnknown_0203A014[0].secretBases, sizeof(struct PlayerRecordsRS), which);
+        sub_80E7B60(&gUnknown_0203A014[0].dayCareMail, sizeof(struct PlayerRecordsRS), which, gUnknown_0203A014[0].tvShows);
+        sub_80E7948(&gUnknown_0203A014[0].battleTowerRecord, sizeof(struct PlayerRecordsRS), which);
+        sub_80F01E8(gUnknown_0203A014[0].tvShows, sizeof(struct PlayerRecordsRS), which);
+        sub_80F0C7C(gUnknown_0203A014[0].pokeNews, sizeof(struct PlayerRecordsRS), which);
+        sub_80E78C4(&gUnknown_0203A014[0].oldMan, sizeof(struct PlayerRecordsRS), which);
+        sub_812287C(gUnknown_0203A014[0].easyChatPair, sizeof(struct PlayerRecordsRS), which);
+        sub_80E7F68(&gUnknown_0203A014[0].battleTowerRecord.ruby_sapphire.unk_11c8, which);
     }
     else
     {
         // Emerald
         sub_80E7B2C((void *)gUnknown_0203A014[0].tvShows);
-        sub_80EAF80(gUnknown_0203A014[0].secretBases, 0x1444, a0);
-        sub_80F01E8(gUnknown_0203A014[0].tvShows, 0x1444, a0);
-        sub_80F0C7C(gUnknown_0203A014[0].pokeNews, 0x1444, a0);
-        sub_80E78C4(&gUnknown_0203A014[0].oldMan, 0x1444, a0);
-        sub_812287C(gUnknown_0203A014[0].easyChatPair, 0x1444, a0);
-        sub_80E7B60(&gUnknown_0203A014[0].unk_10ac, 0x1444, a0, gUnknown_0203A014[0].tvShows);
-        sub_80E7948(&gUnknown_0203A014[0].battleTowerRecord, 0x1444, a0);
-        sub_80E7F68(&gUnknown_0203A014[0].unk_1210, a0);
-        sub_80E7A14(&gUnknown_0203A014[0].lilycoveLady, 0x1444, a0);
-        sub_80E8468(gUnknown_0203A014[0].unk_1254, 0x1444, a0);
-        sub_80E89AC(gUnknown_0203A014[0].unk_12dc, 0x1444, a0);
+        sub_80EAF80(gUnknown_0203A014[0].secretBases, sizeof(struct PlayerRecords), which);
+        sub_80F01E8(gUnknown_0203A014[0].tvShows, sizeof(struct PlayerRecords), which);
+        sub_80F0C7C(gUnknown_0203A014[0].pokeNews, sizeof(struct PlayerRecords), which);
+        sub_80E78C4(&gUnknown_0203A014[0].oldMan, sizeof(struct PlayerRecords), which);
+        sub_812287C(gUnknown_0203A014[0].easyChatPair, sizeof(struct PlayerRecords), which);
+        sub_80E7B60(&gUnknown_0203A014[0].dayCareMail, sizeof(struct PlayerRecords), which, gUnknown_0203A014[0].tvShows);
+        sub_80E7948(&gUnknown_0203A014[0].battleTowerRecord, sizeof(struct PlayerRecords), which);
+        sub_80E7F68(&gUnknown_0203A014[0].unk_1210, which);
+        sub_80E7A14(&gUnknown_0203A014[0].lilycoveLady, sizeof(struct PlayerRecords), which);
+        sub_80E8468(gUnknown_0203A014[0].unk_1254, sizeof(struct PlayerRecords), which);
+        sub_80E89AC(gUnknown_0203A014[0].unk_12dc, sizeof(struct PlayerRecords), which);
     }
 }
 
@@ -396,7 +407,7 @@ static void sub_80E7324(u8 taskId)
                 task->data[10] = taskId2;
                 gTasks[taskId2].data[0] = taskId;
                 sub_80E7808(gUnknown_0203A014, (u16 *)&gTasks[taskId2].data[5]);
-                gUnknown_0300115C = 0x1230;
+                gUnknown_0300115C = sizeof(struct PlayerRecordsRS);
             }
             else
             {
@@ -405,7 +416,7 @@ static void sub_80E7324(u8 taskId)
                 task->data[10] = taskId2;
                 gTasks[taskId2].data[0] = taskId;
                 sub_80E7808(gUnknown_0203A014, (u16 *)&gTasks[taskId2].data[5]);
-                gUnknown_0300115C = 0x1444;
+                gUnknown_0300115C = sizeof(struct PlayerRecords);
             }
             break;
         case 5:
@@ -1411,3 +1422,23 @@ __attribute__((naked)) static void sub_80E7B60(struct UnkStruct_80E7B60 *src, si
                     "\t.pool");
 }
 #endif // NONMATCHING
+
+static void sub_80E7F68(u16 *item, u8 which)
+{
+    if (which != 0 && *item != ITEM_NONE && GetPocketByItemId(*item) == KEYITEMS_POCKET + 1)
+    {
+        if (!CheckBagHasItem(*item, 1) && !CheckPCHasItem(*item, 1) && AddBagItem(*item, 1))
+        {
+            VarSet(VAR_0x4001, *item);
+            StringCopy(gStringVar1, gLinkPlayers[0].name);
+            if (*item == ITEM_EON_TICKET)
+            {
+                FlagSet(SYS_HAS_EON_TICKET);
+            }
+        }
+        else
+        {
+            VarSet(VAR_0x4001, ITEM_NONE);
+        }
+    }
+}
