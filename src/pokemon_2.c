@@ -1086,10 +1086,10 @@ u8 SendMonToPC(struct Pokemon* mon)
             {
                 MonRestorePP(mon);
                 CopyMon(checkingMon, &mon->box, sizeof(mon->box));
-                gSpecialVar_0x8012 = boxNo;
-                gSpecialVar_0x8013 = boxPos;
+                gSpecialVar_MonBoxId = boxNo;
+                gSpecialVar_MonBoxPos = boxPos;
                 if (get_unknown_box_id() != boxNo)
-                    FlagClear(SYS_STORAGE_UNKNOWN_FLAG);
+                    FlagClear(FLAG_SYS_STORAGE_UNKNOWN_FLAG);
                 VarSet(VAR_STORAGE_UNKNOWN, boxNo);
                 return MON_GIVEN_TO_PC;
             }

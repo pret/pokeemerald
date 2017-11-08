@@ -974,13 +974,13 @@ task50_save_game: @ 809FFD0
 _0809FFEC:
 	cmp r1, 0x3
 	bgt _080A0000
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	b _080A0000
 	.pool
 _0809FFFC:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r1, [r0]
 _080A0000:
 	adds r0, r4, 0

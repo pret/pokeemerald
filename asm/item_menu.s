@@ -121,7 +121,7 @@ sub_81AAC28: @ 81AAC28
 	ldr r0, =gSpecialVar_0x8005
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r1, [r0]
 	pop {r0}
 	bx r0
@@ -135,7 +135,7 @@ sub_81AAC50: @ 81AAC50
 	movs r0, 0x7
 	movs r1, 0x5
 	bl GoToBagMenu
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	pop {r0}
@@ -150,7 +150,7 @@ sub_81AAC70: @ 81AAC70
 	movs r0, 0x8
 	movs r1, 0x5
 	bl GoToBagMenu
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	pop {r0}
@@ -5729,7 +5729,7 @@ unknown_ItemMenu_Show: @ 81ADE38
 	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	bl bag_menu_remove_some_window
@@ -5764,7 +5764,7 @@ unknown_ItemMenu_Give2: @ 81ADE8C
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	bl bag_menu_remove_some_window
@@ -5795,7 +5795,7 @@ unknown_ItemMenu_Confirm2: @ 81ADEDC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	bl bag_menu_remove_some_window

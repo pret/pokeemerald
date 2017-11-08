@@ -5238,7 +5238,7 @@ _081C6AF8:
 	bl Free
 	adds r0, r5, 0
 	bl Free
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	b _081C6BC6
@@ -5266,7 +5266,7 @@ _081C6B9C:
 	lsrs r6, r0, 24
 	cmp r6, 0x2
 	bls _081C6B9C
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r7, 0

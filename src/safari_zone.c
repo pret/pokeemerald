@@ -50,17 +50,17 @@ static void DecrementFeederStepCounters(void);
 
 bool32 GetSafariZoneFlag(void)
 {
-    return FlagGet(SYS_SAFARI_MODE);
+    return FlagGet(FLAG_SYS_SAFARI_MODE);
 }
 
 void SetSafariZoneFlag(void)
 {
-    FlagSet(SYS_SAFARI_MODE);
+    FlagSet(FLAG_SYS_SAFARI_MODE);
 }
 
 void ResetSafariZoneFlag(void)
 {
-    FlagClear(SYS_SAFARI_MODE);
+    FlagClear(FLAG_SYS_SAFARI_MODE);
 }
 
 void EnterSafariMode(void)
@@ -152,13 +152,13 @@ void GetPokeblockFeederInFront(void)
          && sPokeblockFeeders[i].x == x
          && sPokeblockFeeders[i].y == y)
         {
-            gScriptResult = i;
+            gSpecialVar_ScriptResult = i;
             StringCopy(gStringVar1, gPokeblockNames[sPokeblockFeeders[i].pokeblock.color]);
             return;
         }
     }
 
-    gScriptResult = -1;
+    gSpecialVar_ScriptResult = -1;
 }
 
 void GetPokeblockFeederWithinRange(void)
@@ -181,13 +181,13 @@ void GetPokeblockFeederWithinRange(void)
                 y *= -1;
             if ((x + y) <= 5)
             {
-                gScriptResult = i;
+                gSpecialVar_ScriptResult = i;
                 return;
             }
         }
     }
 
-    gScriptResult = -1;
+    gSpecialVar_ScriptResult = -1;
 }
 
 // unused
@@ -195,20 +195,20 @@ struct Pokeblock *SafariZoneGetPokeblockInFront(void)
 {
     GetPokeblockFeederInFront();
 
-    if (gScriptResult == 0xFFFF)
+    if (gSpecialVar_ScriptResult == 0xFFFF)
         return NULL;
     else
-        return &sPokeblockFeeders[gScriptResult].pokeblock;
+        return &sPokeblockFeeders[gSpecialVar_ScriptResult].pokeblock;
 }
 
 struct Pokeblock *SafariZoneGetActivePokeblock(void)
 {
     GetPokeblockFeederWithinRange();
 
-    if (gScriptResult == 0xFFFF)
+    if (gSpecialVar_ScriptResult == 0xFFFF)
         return NULL;
     else
-        return &sPokeblockFeeders[gScriptResult].pokeblock;
+        return &sPokeblockFeeders[gSpecialVar_ScriptResult].pokeblock;
 }
 
 void SafariZoneActivatePokeblockFeeder(u8 pkblId)
@@ -255,13 +255,13 @@ bool8 GetInFrontFeederPokeblockAndSteps(void)
 {
     GetPokeblockFeederInFront();
 
-    if (gScriptResult == 0xFFFF)
+    if (gSpecialVar_ScriptResult == 0xFFFF)
     {
         return FALSE;
     }
 
     ConvertIntToDecimalStringN(gStringVar2,
-        sPokeblockFeeders[gScriptResult].stepCounter,
+        sPokeblockFeeders[gSpecialVar_ScriptResult].stepCounter,
         STR_CONV_MODE_LEADING_ZEROS, 3);
 
     return TRUE;

@@ -1344,7 +1344,7 @@ sub_80B1158: @ 80B1158
 	sub sp, 0x8
 	ldr r0, =0x00004023
 	bl GetVarPointer
-	ldr r2, =gScriptResult
+	ldr r2, =gSpecialVar_ScriptResult
 	ldrh r1, [r2]
 	strh r1, [r0]
 	ldrh r0, [r2]
@@ -1669,7 +1669,7 @@ battle_80801F0: @ 80B13F8
 	ldrh r1, [r0]
 	cmp r1, 0
 	beq _080B141A
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_ScriptLastTalked
 	strh r1, [r0]
 	lsls r0, r1, 24
 	lsrs r0, 24
@@ -1793,7 +1793,7 @@ _080B153C:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_ScriptLastTalked
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 	ldr r1, =gTrainerBattleOpponent_A
@@ -1803,7 +1803,7 @@ _080B156C:
 	ldr r0, =gUnknown_08550014
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_ScriptLastTalked
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 _080B157C:
@@ -1833,7 +1833,7 @@ _080B15A8:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_ScriptLastTalked
 	ldrb r0, [r0]
 	bl battle_init
 	ldr r1, =gTrainerBattleOpponent_A
@@ -1843,7 +1843,7 @@ _080B15D8:
 	ldr r0, =gUnknown_08550014
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_ScriptLastTalked
 	ldrb r0, [r0]
 	bl battle_init
 	b _080B157C
@@ -1882,7 +1882,7 @@ SingleTrainerWantsBattle: @ 80B162C
 	lsrs r0, 24
 	ldr r2, =gSelectedMapObject
 	strb r0, [r2]
-	ldr r4, =gScriptLastTalked
+	ldr r4, =gSpecialVar_ScriptLastTalked
 	ldr r3, =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
@@ -1910,7 +1910,7 @@ TwoTrainersWantBattle: @ 80B1670
 	lsrs r0, 24
 	ldr r2, =gSelectedMapObject
 	strb r0, [r2]
-	ldr r4, =gScriptLastTalked
+	ldr r4, =gSpecialVar_ScriptLastTalked
 	ldr r3, =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
@@ -2332,7 +2332,7 @@ sub_80B1A14: @ 80B1A14
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _080B1A44
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_ScriptLastTalked
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 	lsls r0, 16
@@ -2370,7 +2370,7 @@ _080B1A7C:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _080B1AAC
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_ScriptLastTalked
 	ldrb r0, [r0]
 	bl battle_init
 	adds r1, r0, 0
@@ -3484,7 +3484,7 @@ CheckIfMultipleTrainersWantBattle: @ 80B22D8
 	ldr r1, =gUnknown_02038BF8
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	b _080B230A
 	.pool
@@ -3492,7 +3492,7 @@ _080B2300:
 	ldr r1, =gUnknown_02038BF8
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 _080B230A:
 	strh r0, [r1]

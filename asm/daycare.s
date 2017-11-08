@@ -3075,12 +3075,12 @@ c3_080469FC: @ 8071204
 	b _0807124E
 	.pool
 _0807123C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r1, [r0]
 	b _0807124E
 	.pool
 _08071248:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x2
 	strh r0, [r1]
 _0807124E:
@@ -3109,7 +3109,7 @@ _08071284:
 	ands r0, r2
 	cmp r0, 0
 	beq _080712B4
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r1, [r0]
 	ldrb r0, [r4, 0x8]
 	movs r1, 0

@@ -256,7 +256,7 @@ sub_8098574: @ 8098574
 	lsls r0, 2
 	ldr r1, =gMapObjects
 	adds r0, r1
-	ldr r1, =gScriptFacing
+	ldr r1, =gSpecialVar_ScriptFacing
 	ldrb r1, [r1]
 	bl FieldObjectFaceOppositeDirection
 	pop {r0}

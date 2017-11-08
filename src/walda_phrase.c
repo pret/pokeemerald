@@ -98,17 +98,17 @@ u16 TryGetWallpaperWithWaldaPhrase(void)
     u16 backgroundClr, foregroundClr;
     u8 patternId, iconId;
     u16 trainerId = ReadUnalignedWord(gSaveBlock2Ptr->playerTrainerId);
-    gScriptResult = TryCalculateWallpaper(&backgroundClr, &foregroundClr, &iconId, &patternId, trainerId, GetWaldaPhrasePtr());
+    gSpecialVar_ScriptResult = TryCalculateWallpaper(&backgroundClr, &foregroundClr, &iconId, &patternId, trainerId, GetWaldaPhrasePtr());
 
-    if (gScriptResult)
+    if (gSpecialVar_ScriptResult)
     {
         SetWaldaWallpaperPatternId(patternId);
         SetWaldaWallpaperIconId(iconId);
         SetWaldaWallpaperColors(backgroundClr, foregroundClr);
     }
 
-    SetWaldaWallpaperLockedOrUnlocked(gScriptResult);
-    return (bool8)(gScriptResult);
+    SetWaldaWallpaperLockedOrUnlocked(gSpecialVar_ScriptResult);
+    return (bool8)(gSpecialVar_ScriptResult);
 }
 
 static u8 GetLetterTableId(u8 letter)

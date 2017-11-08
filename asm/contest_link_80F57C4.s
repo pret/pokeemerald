@@ -548,7 +548,7 @@ _080F5D2A:
 	movs r0, 0x8
 	strh r0, [r1]
 	bl InterviewBefore
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080F5D58
@@ -4648,7 +4648,7 @@ sub_80F7F30: @ 80F7F30
 	ldrb r0, [r4]
 	bl sub_80DB09C
 _080F7F5E:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r5, [r0]
 	pop {r4,r5}
 	pop {r0}

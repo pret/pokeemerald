@@ -2133,10 +2133,10 @@ void sub_8129708(void)
     u16 i;
 
     gSpecialVar_0x8005 = 0;
-    gScriptResult = 0;
+    gSpecialVar_ScriptResult = 0;
     if (gSpecialVar_0x8004 == sCurDecorSelectedInRearrangement)
     {
-        gScriptResult = 1;
+        gSpecialVar_ScriptResult = 1;
     }
     else if (gDecorations[gUnknown_0203A17C.items[sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx]].permission == DECORPERM_SOLID_MAT)
     {

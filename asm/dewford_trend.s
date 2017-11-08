@@ -667,7 +667,7 @@ sub_81229C8: @ 81229C8
 	negs r0, r0
 	lsrs r4, r0, 31
 _08122A0C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r4, [r0]
 	pop {r4}
 	pop {r0}
@@ -677,7 +677,7 @@ _08122A0C:
 
 	thumb_func_start sub_8122A30
 sub_8122A30: @ 8122A30
-	ldr r2, =gScriptResult
+	ldr r2, =gSpecialVar_ScriptResult
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00002e6c

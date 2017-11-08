@@ -952,7 +952,7 @@ sub_80F8FA0: @ 80F8FA0
 	ands r0, r1
 	cmp r0, 0
 	bne _080F8FD8
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_ScriptResult
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
@@ -960,7 +960,7 @@ sub_80F8FA0: @ 80F8FA0
 	b _080F8FDE
 	.pool
 _080F8FD8:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x4
 	strh r0, [r1]
 _080F8FDE:
@@ -987,11 +987,11 @@ sub_80F8FE8: @ 80F8FE8
 	adds r0, r1
 	str r0, [r2]
 	lsrs r0, 16
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_ScriptResult
 	b _080F902A
 	.pool
 _080F9020:
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_ScriptResult
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -1376,7 +1376,7 @@ _080F9310:
 	cmp r1, 0x2
 	bne _080F9318
 _080F9314:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r1, [r0]
 _080F9318:
 	pop {r0}
@@ -1550,12 +1550,12 @@ sub_80F9460: @ 80F9460
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080F9478
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r1, [r0]
 	b _080F947E
 	.pool
 _080F9478:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _080F947E:
@@ -1590,12 +1590,12 @@ sub_80F94B8: @ 80F94B8
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080F94D0
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r1, [r0]
 	b _080F94D6
 	.pool
 _080F94D0:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _080F94D6:

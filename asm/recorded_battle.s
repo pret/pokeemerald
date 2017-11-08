@@ -334,7 +334,7 @@ sub_8185054: @ 8185054
 	cmp r0, 0xFF
 	bne _081850BC
 _0818507A:
-	ldr r2, =gScriptResult
+	ldr r2, =gSpecialVar_ScriptResult
 	ldr r1, =gBattleOutcome
 	movs r0, 0x5
 	strb r0, [r1]

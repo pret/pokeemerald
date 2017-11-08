@@ -74,7 +74,7 @@ sub_80E8B58: @ 80E8B58
 	thumb_func_start sub_80E8B6C
 sub_80E8B6C: @ 80E8B6C
 	push {r4,lr}
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	movs r1, 0
 	strh r1, [r0]
 	movs r3, 0
@@ -123,13 +123,13 @@ sub_80E8BC8: @ 80E8BC8
 	ldrb r1, [r0]
 	cmp r1, 0
 	beq _080E8BEC
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	b _080E8BF0
 	.pool
 _080E8BEC:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r1, [r0]
 _080E8BF0:
 	pop {r0}
@@ -1175,7 +1175,7 @@ _080E941E:
 	cmp r0, 0x1
 	bne _080E9554
 _080E9462:
-	ldr r6, =gScriptResult
+	ldr r6, =gSpecialVar_ScriptResult
 	mov r1, r9
 	ldr r0, [r1, 0x4]
 	ldr r1, [r0, 0x4]
@@ -1428,7 +1428,7 @@ sub_80E9680: @ 80E9680
 	push {lr}
 	bl sub_80E8B58
 	bl sub_80E8B6C
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080E969C
@@ -1527,12 +1527,12 @@ sub_80E9744: @ 80E9744
 	ldrb r1, [r1]
 	cmp r0, r1
 	beq _080E9770
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	b _080E9774
 	.pool
 _080E9770:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 _080E9774:
 	strh r0, [r1]
@@ -2079,7 +2079,7 @@ sub_80E9BDC: @ 80E9BDC
 	lsrs r1, r0, 24
 	cmp r1, 0x1
 	bne _080E9C04
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r1, [r0]
 	b _080E9C22
 	.pool
@@ -2089,12 +2089,12 @@ _080E9C04:
 	lsrs r0, 24
 	cmp r0, 0x9
 	bls _080E9C1C
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x2
 	b _080E9C20
 	.pool
 _080E9C1C:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 _080E9C20:
 	strh r0, [r1]
@@ -2920,7 +2920,7 @@ sub_80EA30C: @ 80EA30C
 	adds r1, r0
 	lsls r1, 5
 	adds r3, r1
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	ldrb r0, [r0]
 	ldr r1, =0x00001a9d
 	adds r3, r1
@@ -2981,7 +2981,7 @@ _080EA39A:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r2, =gScriptResult
+	ldr r2, =gSpecialVar_ScriptResult
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	lsls r0, r5, 2

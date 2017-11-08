@@ -3511,16 +3511,16 @@ u8 IsPokeDisobedient(void)
             return 0;
         if (!IsOtherTrainer(gBattleMons[gBankAttacker].otId, gBattleMons[gBankAttacker].otName))
             return 0;
-        if (FlagGet(BADGE08_GET))
+        if (FlagGet(FLAG_BADGE08_GET))
             return 0;
 
         obedienceLevel = 10;
 
-        if (FlagGet(BADGE02_GET))
+        if (FlagGet(FLAG_BADGE02_GET))
             obedienceLevel = 30;
-        if (FlagGet(BADGE04_GET))
+        if (FlagGet(FLAG_BADGE04_GET))
             obedienceLevel = 50;
-        if (FlagGet(BADGE06_GET))
+        if (FlagGet(FLAG_BADGE06_GET))
             obedienceLevel = 70;
     }
 

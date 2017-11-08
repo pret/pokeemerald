@@ -57,7 +57,7 @@ sub_81B99D4: @ 81B99D4
 
 	thumb_func_start sub_81B9A28
 sub_81B9A28: @ 81B9A28
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000e6a
@@ -196,12 +196,12 @@ sub_81B9B28: @ 81B9B28
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r5, [r0]
 	b _081B9B76
 	.pool
 _081B9B70:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 _081B9B76:
@@ -263,7 +263,7 @@ sub_81B9BA0: @ 81B9BA0
 
 	thumb_func_start sub_81B9BF4
 sub_81B9BF4: @ 81B9BF4
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000e6c
@@ -357,12 +357,12 @@ sub_81B9C98: @ 81B9C98
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r5, [r0]
 	b _081B9CE6
 	.pool
 _081B9CE0:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 _081B9CE6:
@@ -436,7 +436,7 @@ sub_81B9D28: @ 81B9D28
 
 	thumb_func_start sub_81B9D7C
 sub_81B9D7C: @ 81B9D7C
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000e6e
@@ -530,12 +530,12 @@ sub_81B9E20: @ 81B9E20
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r5, [r0]
 	b _081B9E6E
 	.pool
 _081B9E68:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 _081B9E6E:

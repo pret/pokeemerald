@@ -242,11 +242,11 @@ void sub_818D9C0(void)
     {
         lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
         VarSet(VAR_0x4011, gUnknown_0860B074[lilycoveLady->contest.category]);
-        gScriptResult = TRUE;
+        gSpecialVar_ScriptResult = TRUE;
     }
     else
     {
-        gScriptResult = FALSE;
+        gSpecialVar_ScriptResult = FALSE;
     }
 }
 
@@ -308,7 +308,7 @@ void SetLilycoveLadyRandomly(void)
 
 void sub_818DAEC(void)
 {
-    gScriptResult = GetLilycoveLadyId();
+    gSpecialVar_ScriptResult = GetLilycoveLadyId();
 }
 
 static u8 sub_818DB04(const u16 *data)

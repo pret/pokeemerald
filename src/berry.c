@@ -1169,7 +1169,7 @@ void FieldObjectInteractionGetBerryTreeData(void)
     id = FieldObjectGetBerryTreeId(gSelectedMapObject);
     berry = GetBerryTypeByBerryTreeId(id);
     ResetBerryTreeSparkleFlag(id);
-    unk = gScriptLastTalked;
+    unk = gSpecialVar_ScriptLastTalked;
     num = gSaveBlock1Ptr->location.mapNum;
     group = gSaveBlock1Ptr->location.mapGroup;
     if (sub_8092E9C(unk, num, group))
@@ -1219,7 +1219,7 @@ void FieldObjectInteractionPickBerryTree(void)
 void FieldObjectInteractionRemoveBerryTree(void)
 {
     RemoveBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject));
-    sub_8092EF0(gScriptLastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    sub_8092EF0(gSpecialVar_ScriptLastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 u8 PlayerHasBerries(void)

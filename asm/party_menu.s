@@ -1219,7 +1219,7 @@ sub_81B0BFC: @ 81B0BFC
 	ldrb r0, [r0, 0xB]
 	cmp r0, 0xC
 	bne _081B0C40
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gSpecialVar_0x8005
@@ -8135,7 +8135,7 @@ sub_81B4578: @ 81B4578
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	ldrh r7, [r0]
 	cmp r7, 0
 	bne _081B45F8
@@ -12928,7 +12928,7 @@ _081B6FC0:
 _081B6FDC:
 	cmp r0, 0x2
 	bne _081B6FE4
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r2, [r0]
 _081B6FE4:
 	adds r0, r5, 0
@@ -13324,7 +13324,7 @@ _081B7306:
 _081B7368:
 	cmp r0, 0x2
 	bne _081B7370
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r5, [r0]
 _081B7370:
 	ldr r0, =gTasks
@@ -14933,7 +14933,7 @@ sub_81B81A8: @ 81B81A8
 	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _081B8208
@@ -17381,7 +17381,7 @@ _081B95BA:
 	thumb_func_start sub_81B95E0
 sub_81B95E0: @ 81B95E0
 	push {r4,r5,lr}
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	movs r4, 0
@@ -17490,7 +17490,7 @@ sub_81B968C: @ 81B968C
 	thumb_func_start sub_81B96D0
 sub_81B96D0: @ 81B96D0
 	push {r4,r5,lr}
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	movs r4, 0
@@ -17741,13 +17741,13 @@ sub_81B98DC: @ 81B98DC
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _081B990C
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	b _081B9910
 	.pool
 _081B990C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_ScriptResult
 	strh r1, [r0]
 _081B9910:
 	pop {r0}
@@ -17760,7 +17760,7 @@ sub_81B9918: @ 81B9918
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gSpecialVar_0x8004
@@ -17813,7 +17813,7 @@ _081B9980:
 	bl sub_80D23A8
 	cmp r0, 0x1
 	beq _081B999C
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_ScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _081B999C:

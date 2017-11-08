@@ -184,7 +184,7 @@ sub_809C014: @ 809C014
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_ScriptLastTalked
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gSelectedMapObject
@@ -582,13 +582,13 @@ _0809C34C:
 	ble _0809C340
 	ldr r0, =gSelectedMapObject
 	strb r3, [r0]
-	ldr r1, =gScriptLastTalked
+	ldr r1, =gSpecialVar_ScriptLastTalked
 	adds r0, r2, r3
 	lsls r0, 2
 	adds r0, r5
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, =gScriptFacing
+	ldr r0, =gSpecialVar_ScriptFacing
 	strh r6, [r0]
 	adds r0, r3, 0
 	bl GetFieldObjectScriptPointerByFieldObjectId
@@ -668,13 +668,13 @@ _0809C400:
 _0809C40C:
 	ldr r0, =gSelectedMapObject
 	strb r4, [r0]
-	ldr r1, =gScriptLastTalked
+	ldr r1, =gSpecialVar_ScriptLastTalked
 	adds r0, r2, r4
 	lsls r0, 2
 	adds r0, r3
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, =gScriptFacing
+	ldr r0, =gSpecialVar_ScriptFacing
 	strh r7, [r0]
 	bl InTrainerHill
 	cmp r0, 0x1
@@ -687,7 +687,7 @@ _0809C43C:
 	bl GetFieldObjectScriptPointerByFieldObjectId
 _0809C442:
 	adds r1, r0, 0
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_ScriptLastTalked
 	ldrb r0, [r0]
 	bl GetRamScript
 	adds r1, r0, 0
