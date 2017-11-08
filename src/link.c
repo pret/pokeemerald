@@ -67,6 +67,24 @@ const u8 gWirelessLinkDisplayGfx[] = INCBIN_U8("graphics/interface/wireless_link
 const u8 gWirelessLinkDisplayTilemap[] = INCBIN_U8("graphics/interface/wireless_link_display.bin.lz");
 const u16 gLinkTestDigitsPal[] = INCBIN_U16("graphics/interface/link_test_digits.gbapal");
 const u16 gLinkTestDigitsGfx[] = INCBIN_U16("graphics/interface/link_test_digits.4bpp");
+const u8 unkstring_82ed160[] = _("{HIGHLIGHT TRANSPARENT}{COLOR WHITE}");
+const u16 g2BlankTilesGfx[] = INCBIN_U16("graphics/interface/blank_1x2.4bpp");
+const struct {
+    void *data;
+    u16 size;
+} gUnknown_082ED1A8[] = {
+    {gUnknown_020228C4, 200},
+    {gUnknown_020228C4, 200},
+    {gUnknown_020228C4, 100},
+    {gUnknown_020228C4, 220},
+    {gUnknown_020228C4,  40}
+};
+const u8 gUnknown_082ED1D0[] = {
+    REG_OFFSET_BG0CNT,
+    REG_OFFSET_BG1CNT,
+    REG_OFFSET_BG2CNT,
+    REG_OFFSET_BG3CNT
+};
 
 // .text
 
@@ -112,4 +130,14 @@ void sub_8009414(u8 a0, u8 a1, u8 a2, u8 a3, u16 a4)
     }
     SetGpuReg(REG_OFFSET_BG0HOFS + a1 * 4, 0);
     SetGpuReg(REG_OFFSET_BG0VOFS + a1 * 4, 0);
+}
+
+void sub_80094EC(u8 a0, u8 a1, u8 a2, u8 a3)
+{
+    LoadPalette(gLinkTestDigitsPal, a0 * 16, 0x20);
+    DmaCopy16(3, gLinkTestDigitsGfx, (u16 *)BG_CHAR_ADDR(a3), sizeof gLinkTestDigitsGfx);
+    gUnknown_03003130[0] = a2;
+    gUnknown_03003130[1] = a0;
+    gUnknown_03003130[2] = 0;
+    SetGpuReg(gUnknown_082ED1D0[a1], BGCNT_SCREENBASE(a2) | BGCNT_CHARBASE(a3));
 }

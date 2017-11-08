@@ -5,62 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80094EC
-sub_80094EC: @ 80094EC
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	mov r8, r0
-	adds r6, r1, 0
-	adds r4, r2, 0
-	adds r5, r3, 0
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	lsls r6, 24
-	lsrs r6, 24
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r0, =gLinkTestDigitsPal
-	mov r2, r8
-	lsls r1, r2, 4
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r2, =0x040000d4
-	ldr r0, =gLinkTestDigitsGfx
-	str r0, [r2]
-	lsls r0, r5, 14
-	movs r1, 0xC0
-	lsls r1, 19
-	adds r0, r1
-	str r0, [r2, 0x4]
-	ldr r0, =0x80000110
-	str r0, [r2, 0x8]
-	ldr r0, [r2, 0x8]
-	ldr r0, =gUnknown_03003130
-	str r4, [r0]
-	mov r1, r8
-	str r1, [r0, 0x4]
-	movs r1, 0
-	str r1, [r0, 0x8]
-	ldr r0, =gUnknown_082ED1D0
-	adds r6, r0
-	ldrb r0, [r6]
-	lsls r4, 8
-	lsls r5, 2
-	orrs r4, r5
-	adds r1, r4, 0
-	bl SetGpuReg
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80094EC
-
 	thumb_func_start sub_8009570
 sub_8009570: @ 8009570
 	push {r4,lr}

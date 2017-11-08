@@ -132,6 +132,7 @@ extern const struct BlockRequest sBlockRequestLookupTable[5];
 
 extern struct Link gLink;
 extern u16 gRecvCmds[CMD_LENGTH][MAX_LINK_PLAYERS];
+extern u8 gUnknown_020228C4[BLOCK_BUFFER_SIZE]; // gBlockSendBuffer
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
 extern u32 gLinkStatus;
