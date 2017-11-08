@@ -3,6 +3,8 @@
 #include "global.h"
 #include "librfu.h"
 #include "rng.h"
+#include "string_util.h"
+#include "event_data.h"
 #include "gpu_regs.h"
 #include "palette.h"
 #include "task.h"
@@ -56,6 +58,7 @@ IWRAM_DATA void *gUnknown_03000DAC;
 IWRAM_DATA bool32 gUnknown_03000DB0;
 
 u16 gUnknown_020229C6 = 0;
+struct LinkPlayer gUnknown_020229CC = {};
 
 // Static ROM declarations
 
@@ -177,4 +180,25 @@ void sub_8009570(void)
     sub_8009638();
     CreateTask(task00_link_test, 0);
     SetMainCallback2(c2_08009A8C);
+}
+
+void sub_8009628(u8 a0)
+{
+    gUnknown_020229CC.lp_field_18 = a0;
+}
+
+void sub_8009638(void)
+{
+    gUnknown_020229CC.trainerId = gSaveBlock2Ptr->playerTrainerId[0] | (gSaveBlock2Ptr->playerTrainerId[1] << 8) | (gSaveBlock2Ptr->playerTrainerId[2] << 16) | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+    StringCopy(gUnknown_020229CC.name, gSaveBlock2Ptr->playerName);
+    gUnknown_020229CC.gender = gSaveBlock2Ptr->playerGender;
+    gUnknown_020229CC.linkType = gUnknown_020229C6;
+    gUnknown_020229CC.language = gGameLanguage;
+    gUnknown_020229CC.version = gGameVersion + 0x4000;
+    gUnknown_020229CC.lp_field_2 = 0x8000;
+    gUnknown_020229CC.name[8] = IsNationalPokedexEnabled();
+    if (FlagGet(SYS_UNKNOWN_87F))
+    {
+        gUnknown_020229CC.name[8] |= 0x10;
+    }
 }
