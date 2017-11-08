@@ -3675,7 +3675,7 @@ sub_8177388: @ 8177388
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8133EDC
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r0, 16
 	bl SpeciesToNationalPokedexNum

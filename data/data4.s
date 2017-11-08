@@ -35,13 +35,13 @@ gUnknown_085B1DDC:: @ 85B1DDC
 gUnknown_085B1DE4:: @ 85B1DE4
 	.incbin "baserom.gba", 0x5b1de4, 0x8
 
-gUnknown_085B1DEC:: @ 85B1DEC
+sPokeballCoords:: @ 85B1DEC
 	.incbin "baserom.gba", 0x5b1dec, 0x6
 
-gUnknown_085B1DF2:: @ 85B1DF2
+gStarterChoose_LabelCoords:: @ 85B1DF2
 	.incbin "baserom.gba", 0x5b1df2, 0x6
 
-gUnknown_085B1DF8:: @ 85B1DF8
+sStarterMons:: @ 85B1DF8
 	.incbin "baserom.gba", 0x5b1df8, 0x8
 
 gUnknown_085B1E00:: @ 85B1E00
@@ -65,10 +65,10 @@ gUnknown_085B1EE8:: @ 85B1EE8
 gUnknown_085B1EF8:: @ 85B1EF8
 	.incbin "baserom.gba", 0x5b1ef8, 0x18
 
-gUnknown_085B1F10:: @ 85B1F10
+sSpriteTemplate_Hand:: @ 85B1F10
 	.incbin "baserom.gba", 0x5b1f10, 0x18
 
-gUnknown_085B1F28:: @ 85B1F28
+sSpriteTemplate_PokeBall:: @ 85B1F28
 	.incbin "baserom.gba", 0x5b1f28, 0x18
 
 gUnknown_085B1F40:: @ 85B1F40

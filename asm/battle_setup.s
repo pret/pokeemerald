@@ -1328,7 +1328,7 @@ _080B1120:
 	thumb_func_start sub_80B1138
 sub_80B1138: @ 80B1138
 	push {lr}
-	ldr r0, =set_256color_bg_bg0
+	ldr r0, =CB2_ChooseStarter
 	bl SetMainCallback2
 	ldr r1, =gMain
 	ldr r0, =sub_80B1158
@@ -1348,7 +1348,7 @@ sub_80B1158: @ 80B1158
 	ldrh r1, [r2]
 	strh r1, [r0]
 	ldrh r0, [r2]
-	bl sub_8133EDC
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0

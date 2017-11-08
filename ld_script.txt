@@ -175,7 +175,7 @@ SECTIONS {
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
         asm/trader.o(.text);
-        asm/starter_choose.o(.text);
+        src/starter_choose.o(.text);
         asm/wallclock.o(.text);
         asm/rom6.o(.text);
         asm/battle_records.o(.text);

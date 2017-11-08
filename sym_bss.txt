@@ -55,7 +55,7 @@ gUnknown_030011F6: @ 30011F6
 gUnknown_030011F7: @ 30011F7
 	.space 0x1
 
-gUnknown_030011F8: @ 30011F8
+sStarterChooseWindowId: @ 30011F8
 	.space 0x4
 
 gUnknown_030011FC: @ 30011FC

@@ -7673,7 +7673,7 @@ sub_81394D8: @ 81394D8
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8133EDC
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r6, r0, 16
 	bl CalculatePlayerPartyCount
