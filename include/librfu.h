@@ -106,3 +106,5 @@ struct RfuIntrStruct
 extern struct RfuStruct *gRfuState;
 
 void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
+void rfu_REQ_stopMode(void);
+void rfu_waitREQComplete(void);

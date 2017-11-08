@@ -5,22 +5,6 @@
 
 	.section .rodata
 
-	.align 2
-gWirelessLinkDisplayPal:: @ 82EC86C
-	.incbin "graphics/interface/wireless_link_display.gbapal"
-
-gWirelessLinkDisplayGfx:: @ 82EC88C
-	.incbin "graphics/interface/wireless_link_display.4bpp.lz"
-
-gWirelessLinkDisplayTilemap:: @ 82ECD34
-	.incbin "graphics/interface/wireless_link_display.bin.lz"
-
-gLinkTestDigitsPal:: @ 82ECF20
-	.incbin "graphics/interface/link_test_digits.gbapal"
-
-gLinkTestDigitsGfx:: @ 82ECF40
-	.incbin "graphics/interface/link_test_digits.4bpp"
-
 	.string "{HIGHLIGHT TRANSPARENT}{COLOR WHITE}$"
 
 	.align 2

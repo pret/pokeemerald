@@ -193,4 +193,8 @@ u8 sub_800ABAC(void);
 u8 sub_800ABBC(void);
 void sub_800AC34(void);
 
+void sub_80097E8(void);
+
+extern IWRAM_DATA u32 gUnknown_03003130[3]; // common
+
 #endif // GUARD_LINK_H
