@@ -196,6 +196,6 @@ void sub_800AC34(void);
 
 void sub_80097E8(void);
 
-extern IWRAM_DATA u32 gUnknown_03003130[3]; // common
+extern IWRAM_DATA struct LinkTestBGInfo gUnknown_03003130; // common
 
 #endif // GUARD_LINK_H

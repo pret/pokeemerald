@@ -2,6 +2,7 @@
 // Includes
 #include "global.h"
 #include "librfu.h"
+#include "rng.h"
 #include "gpu_regs.h"
 #include "palette.h"
 #include "task.h"
@@ -54,11 +55,18 @@ IWRAM_DATA void *gUnknown_03000DA8;
 IWRAM_DATA void *gUnknown_03000DAC;
 IWRAM_DATA bool32 gUnknown_03000DB0;
 
+u16 gUnknown_020229C6 = 0;
+
 // Static ROM declarations
 
-void sub_800E700(void);
-u32 sub_800BEC0(void);
+void sub_8009638(void);
+void sub_80096BC(void);
+void c2_08009A8C(void);
+void sub_800A2E0(void);
+void task00_link_test(u8 taskId);
 void sub_800B4A4(void);
+u32 sub_800BEC0(void);
+void sub_800E700(void);
 
 // .rodata
 
@@ -113,9 +121,9 @@ void sub_8009414(u8 a0, u8 a1, u8 a2, u8 a3, u16 a4)
 {
     LoadPalette(gLinkTestDigitsPal, a0 * 16, 0x20);
     DmaCopy16(3, gLinkTestDigitsGfx, (u16 *)BG_CHAR_ADDR(a3) + (16 * a4), sizeof gLinkTestDigitsGfx);
-    gUnknown_03003130[0] = a2;
-    gUnknown_03003130[1] = a0;
-    gUnknown_03003130[2] = a4;
+    gUnknown_03003130.screenBaseBlock = a2;
+    gUnknown_03003130.paletteNum = a0;
+    gUnknown_03003130.dummy_8 = a4;
     switch (a1)
     {
         case 1:
@@ -136,8 +144,37 @@ void sub_80094EC(u8 a0, u8 a1, u8 a2, u8 a3)
 {
     LoadPalette(gLinkTestDigitsPal, a0 * 16, 0x20);
     DmaCopy16(3, gLinkTestDigitsGfx, (u16 *)BG_CHAR_ADDR(a3), sizeof gLinkTestDigitsGfx);
-    gUnknown_03003130[0] = a2;
-    gUnknown_03003130[1] = a0;
-    gUnknown_03003130[2] = 0;
+    gUnknown_03003130.screenBaseBlock = a2;
+    gUnknown_03003130.paletteNum = a0;
+    gUnknown_03003130.dummy_8 = 0;
     SetGpuReg(gUnknown_082ED1D0[a1], BGCNT_SCREENBASE(a2) | BGCNT_CHARBASE(a3));
+}
+
+void sub_8009570(void)
+{
+    int i;
+
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    ResetTasks();
+    SetVBlankCallback(sub_80096BC);
+    sub_800A2E0();
+    gUnknown_020229C6 = 0x1111;
+    sub_8009734();
+    SeedRng(gMain.vblankCounter2);
+    for (i = 0; i < 4; i ++)
+    {
+        gSaveBlock2Ptr->playerTrainerId[i] = Random() % 256;
+    }
+    sub_8009414(0, 2, 4, 0, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
+    CreateTask(sub_8009404, 0);
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+    gUnknown_03000D60 = 0;
+    sub_8009638();
+    CreateTask(task00_link_test, 0);
+    SetMainCallback2(c2_08009A8C);
 }

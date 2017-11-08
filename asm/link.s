@@ -5,68 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8009570
-sub_8009570: @ 8009570
-	push {r4,lr}
-	sub sp, 0x4
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	bl ResetTasks
-	ldr r0, =sub_80096BC
-	bl SetVBlankCallback
-	bl sub_800A2E0
-	ldr r1, =gUnknown_020229C6
-	ldr r2, =0x00001111
-	adds r0, r2, 0
-	strh r0, [r1]
-	bl sub_8009734
-	ldr r0, =gMain
-	ldrh r0, [r0, 0x24]
-	bl SeedRng
-	movs r4, 0
-_080095A0:
-	bl Random
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	adds r1, 0xA
-	adds r1, r4
-	strb r0, [r1]
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _080095A0
-	movs r4, 0
-	str r4, [sp]
-	movs r0, 0
-	movs r1, 0x2
-	movs r2, 0x4
-	movs r3, 0
-	bl sub_8009414
-	movs r1, 0xAA
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	ldr r0, =sub_8009404
-	movs r1, 0
-	bl CreateTask
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	ldr r0, =gUnknown_03000D60
-	str r4, [r0]
-	bl sub_8009638
-	ldr r0, =task00_link_test
-	movs r1, 0
-	bl CreateTask
-	ldr r0, =c2_08009A8C
-	bl SetMainCallback2
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8009570
-
 	thumb_func_start sub_8009628
 sub_8009628: @ 8009628
 	lsls r0, 24
