@@ -50,7 +50,13 @@ extern bool8 gLinkVSyncDisabled;
 extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
 
-extern IWRAM_DATA u8 gUnknown_03002748;
+extern u16 gKeyRepeatStartDelay;
+extern u8 gUnknown_030022B4;
+extern u16 gKeyRepeatContinueDelay;
+extern IntrFunc gIntrTable[];
+extern u8 gUnknown_03002748;
+extern u32 IntrMain_Buffer[];
+extern u8 gPcmDmaCounter;
 
 void AgbMain(void);
 void SetMainCallback2(MainCallback callback);

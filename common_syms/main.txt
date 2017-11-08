@@ -1,0 +1,9 @@
+gKeyRepeatStartDelay
+gUnknown_030022B4
+gMain
+gKeyRepeatContinueDelay
+gSoftResetDisabled
+gIntrTable
+gUnknown_03002748
+IntrMain_Buffer
+gPcmDmaCounter

@@ -3180,7 +3180,7 @@ CB2_NewGame: @ 8085EF8
 	ldr r1, =gUnknown_03005DB0
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl do_load_map_stuff_loop
 	bl SetFieldVBlankCallback
 	ldr r0, =c1_overworld
@@ -3255,7 +3255,7 @@ c2_load_new_map: @ 8085FCC
 	thumb_func_start c2_load_new_map_2
 c2_load_new_map_2: @ 8085FFC
 	push {lr}
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl do_load_map_stuff_loop
 	bl SetFieldVBlankCallback
 	ldr r0, =c1_overworld
@@ -3317,7 +3317,7 @@ sub_8086074: @ 8086074
 	thumb_func_start c2_80567AC
 c2_80567AC: @ 8086098
 	push {lr}
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl map_loading_iteration_3
 	cmp r0, 0
 	beq _080860B8
@@ -3356,7 +3356,7 @@ _080860EA:
 	thumb_func_start c2_exit_to_overworld_2_local
 c2_exit_to_overworld_2_local: @ 80860F4
 	push {lr}
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl sub_8086638
 	cmp r0, 0
 	beq _0808610A
@@ -3375,7 +3375,7 @@ c2_exit_to_overworld_2_link: @ 8086118
 	bl sub_8087598
 	cmp r0, 0
 	bne _08086132
-	ldr r0, =gUnknown_030026F8
+	ldr r0, =gMain+0x438
 	bl map_loading_iteration_2_link
 	cmp r0, 0
 	beq _08086132

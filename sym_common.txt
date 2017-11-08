@@ -1,44 +1,5 @@
 	.space 0x8
-
-gKeyRepeatStartDelay: @ 30022B0
-	.space 0x4
-
-gUnknown_030022B4: @ 30022B4
-	.space 0xC
-
-gMain: @ 30022C0
-	.space 0x2C
-
-gUnknown_030022EC: @ 30022EC
-	.space 0xC
-
-gUnknown_030022F8: @ 30022F8
-	.space 0x200
-
-gUnknown_030024F8: @ 30024F8
-	.space 0x200
-
-gUnknown_030026F8: @ 30026F8
-	.space 0x4
-
-gKeyRepeatContinueDelay: @ 30026FC
-	.space 0x4
-
-gSoftResetDisabled: @ 3002700
-	.space 0x10
-
-gIntrTable: @ 3002710
-	.space 0x38
-
-gUnknown_03002748: @ 3002748
-	.space 0x8
-
-IntrMain_Buffer: @ 3002750
-	.space 0x800
-
-gPcmDmaCounter: @ 3002F50
-	.space 0x4
-
+	.include "main.o"
 	.include "bg.o"
 
     .align 4

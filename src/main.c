@@ -38,7 +38,6 @@ extern u8 gHeap[];
 extern struct SaveBlock2 gSaveblock2;
 extern struct PokemonStorage gPokemonStorage;
 extern u32 gBattleTypeFlags;
-extern u8 gUnknown_03002748;
 extern u32 *gUnknown_0203CF5C;
 
 void Timer3Intr(void);
@@ -79,19 +78,19 @@ const IntrFunc gIntrTableTemplate[] =
 
 static u16 gUnknown_03000000;
 
-extern u16 gKeyRepeatStartDelay;
-extern u8 gUnknown_030022B4;
-extern struct Main gMain;
-extern u16 gKeyRepeatContinueDelay;
-extern u8 gSoftResetDisabled;
-extern IntrFunc gIntrTable[INTR_COUNT];
-extern bool8 gLinkVSyncDisabled;
-extern u32 IntrMain_Buffer[0x200];
-extern u8 gPcmDmaCounter;
+u16 gKeyRepeatStartDelay;
+u8 gUnknown_030022B4;
+struct Main gMain;
+u16 gKeyRepeatContinueDelay;
+bool8 gSoftResetDisabled;
+IntrFunc gIntrTable[INTR_COUNT];
+u8 gUnknown_03002748;
+u32 IntrMain_Buffer[0x200];
+u8 gPcmDmaCounter;
 
-extern u16 gTrainerId;
+static EWRAM_DATA u16 gTrainerId = 0;
 
-EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
+//EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);

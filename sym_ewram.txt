@@ -1,8 +1,5 @@
     .include "src/decompress.o"
-
-gTrainerId: @ 2020000
-	.space 0x4
-
+	.include "src/main.o"
     .include "src/window.o"
     .include "src/text.o"
     .include "src/sprite.o"

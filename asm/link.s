@@ -3426,7 +3426,7 @@ HandleLinkConnection: @ 800B40C
 	bl sub_800B638
 	ldr r4, =gUnknown_030030E0
 	str r0, [r4]
-	ldr r0, =gUnknown_030022EC
+	ldr r0, =gMain+0x2c
 	bl sub_80099E0
 	ldr r0, [r4]
 	movs r1, 0x80
