@@ -57,6 +57,7 @@ IWRAM_DATA void *gUnknown_03000DA8;
 IWRAM_DATA void *gUnknown_03000DAC;
 IWRAM_DATA bool32 gUnknown_03000DB0;
 
+bool8 gUnknown_020229C4 = 0;
 u16 gUnknown_020229C6 = 0;
 struct LinkPlayer gUnknown_020229CC = {};
 
@@ -67,6 +68,8 @@ void sub_80096BC(void);
 void c2_08009A8C(void);
 void sub_800A2E0(void);
 void task00_link_test(u8 taskId);
+void sub_800A824(void);
+void sub_800B594(void);
 void sub_800B4A4(void);
 u32 sub_800BEC0(void);
 void sub_800E700(void);
@@ -200,5 +203,66 @@ void sub_8009638(void)
     if (FlagGet(SYS_UNKNOWN_87F))
     {
         gUnknown_020229CC.name[8] |= 0x10;
+    }
+}
+
+void sub_80096BC(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_80096D0(void)
+{
+    int i;
+
+    for (i = 0; i < 8; i ++)
+    {
+        gUnknown_03003110[i] = 0xefff;
+    }
+    gUnknown_020229C4 = TRUE;
+    sub_800B594();
+}
+
+void task02_080097CC(u8 taskId)
+{
+    if (++ gTasks[taskId].data[0] == 5)
+    {
+        gUnknown_03003144 = TRUE;
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8009734(void)
+{
+    int i;
+
+    if (!gLinkVSyncDisabled)
+    {
+        sub_800B628();
+        sub_80096D0();
+        gUnknown_03003140 = sub_800A824;
+        gUnknown_03002748 = 0;
+        gUnknown_0300306C = 0;
+        gUnknown_030030F8 = 0;
+        ResetBlockReceivedFlags();
+        sub_800A2E0();
+        gUnknown_03000D54 = 0;
+        gUnknown_030030E8 = 0;
+        gUnknown_030030E4 = 0;
+        gUnknown_030030F4 = 0;
+        CreateTask(task02_080097CC, 2);
+    }
+    else
+    {
+        sub_800E700();
+    }
+    gReceivedRemoteLinkPlayers = 0;
+    for (i = 0; i < 4; i ++)
+    {
+        gUnknown_03003078[i] = 1;
+        gUnknown_030030F0[i] = 0;
+        gUnknown_030030EC[i] = 0;
     }
 }

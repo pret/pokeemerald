@@ -194,8 +194,20 @@ u8 sub_800ABAC(void);
 u8 sub_800ABBC(void);
 void sub_800AC34(void);
 
+void sub_800B628(void);
 void sub_80097E8(void);
 
+extern IWRAM_DATA u8 gUnknown_0300306C;
+extern IWRAM_DATA u8 gUnknown_03003078[4];
+extern IWRAM_DATA u8 gUnknown_030030E4;
+extern IWRAM_DATA u8 gUnknown_030030E8;
+extern IWRAM_DATA u8 gUnknown_030030EC[4];
+extern IWRAM_DATA u8 gUnknown_030030F0[4];
+extern IWRAM_DATA u16 gUnknown_030030F4;
+extern IWRAM_DATA u8 gUnknown_030030F8;
+extern IWRAM_DATA u16 gUnknown_03003110[8];
 extern IWRAM_DATA struct LinkTestBGInfo gUnknown_03003130; // common
+extern IWRAM_DATA void (*gUnknown_03003140)(void);
+extern IWRAM_DATA bool8 gUnknown_03003144;
 
 #endif // GUARD_LINK_H

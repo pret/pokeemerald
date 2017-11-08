@@ -50,6 +50,8 @@ extern bool8 gLinkVSyncDisabled;
 extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
 
+extern IWRAM_DATA u8 gUnknown_03002748;
+
 void AgbMain(void);
 void SetMainCallback2(MainCallback callback);
 void InitKeys(void);
