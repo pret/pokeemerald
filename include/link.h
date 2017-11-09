@@ -196,6 +196,7 @@ void sub_800AC34(void);
 
 void sub_800B628(void);
 void sub_80097E8(void);
+void sub_800A994(u32 seed, u8 flags);
 
 extern u16 gUnknown_03003020[6];
 extern u32 gUnknown_0300302C;

@@ -1,6 +1,8 @@
 
 // Includes
 #include "global.h"
+#include "malloc.h"
+#include "save.h"
 #include "librfu.h"
 #include "rng.h"
 #include "string_util.h"
@@ -97,13 +99,15 @@ void sub_8009638(void);
 void sub_80096BC(void);
 void c2_08009A8C(void);
 void sub_800A2E0(void);
+void sub_800A2F4(void *heapptr, size_t src);
 void task00_link_test(u8 taskId);
 u16 sub_800A648(u16 *src, u16 size);
 void sub_800A6E8(u32 pos, u8 a0, u8 a1, u8 a2);
 void sub_800A824(void);
-void sub_800B594(void);
+void sub_800B330(bool8 flag);
 void sub_800B4A4(void);
 void sub_800B53C(void);
+void sub_800B594(void);
 u32 sub_800BEC0(void);
 void sub_800E700(void);
 void sub_800EDD4(void);
@@ -346,5 +350,37 @@ void sub_8009818(void)
                 }
             }
         }
+    }
+}
+
+void sub_8009900(void)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        gUnknown_03003144 = TRUE;
+    }
+    if (gMain.heldKeys & B_BUTTON)
+    {
+        sub_800A2F4(gHeap + 0x4000, 0x00002004);
+    }
+    if (gMain.newKeys & L_BUTTON)
+    {
+        BeginNormalPaletteFade(-1, 0, 16, 0, 2);
+    }
+    if (gMain.newKeys & START_BUTTON)
+    {
+        sub_800B330(1);
+    }
+    if (gMain.newKeys & R_BUTTON)
+    {
+        TrySavingData(1);
+    }
+    if (gMain.newKeys & SELECT_BUTTON)
+    {
+        sub_800AC34();
+    }
+    if (gUnknown_020223BC)
+    {
+        sub_800A994(gMain.vblankCounter2, gUnknown_03003140 ? gUnknown_03002748 : gUnknown_03002748 | 0x10);
     }
 }
