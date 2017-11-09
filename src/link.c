@@ -428,3 +428,20 @@ u16 sub_80099E0(const u16 *src)
     }
     return gUnknown_030030E0;
 }
+
+void sub_8009A58(u8 who)
+{
+    int i;
+    int count;
+
+    count = 0;
+    gUnknown_03003078[who] = FALSE;
+    for (i = 0; i < sub_800ABAC(); i ++)
+    {
+        count += gUnknown_03003078[i];
+    }
+    if (count == 0 && gReceivedRemoteLinkPlayers == 0)
+    {
+        gReceivedRemoteLinkPlayers = 1;
+    }
+}

@@ -5,45 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8009A58
-sub_8009A58: @ 8009A58
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	movs r5, 0
-	ldr r1, =gUnknown_03003078
-	adds r0, r1
-	strb r5, [r0]
-	movs r4, 0
-	adds r6, r1, 0
-	b _08009A78
-	.pool
-_08009A70:
-	adds r0, r4, r6
-	ldrb r0, [r0]
-	adds r5, r0
-	adds r4, 0x1
-_08009A78:
-	bl sub_800ABAC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r4, r0
-	blt _08009A70
-	cmp r5, 0
-	bne _08009A94
-	ldr r1, =gReceivedRemoteLinkPlayers
-	ldrb r0, [r1]
-	cmp r0, 0
-	bne _08009A94
-	movs r0, 0x1
-	strb r0, [r1]
-_08009A94:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8009A58
-
 	thumb_func_start sub_8009AA0
 sub_8009AA0: @ 8009AA0
 	push {r4-r7,lr}
