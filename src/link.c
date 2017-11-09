@@ -31,6 +31,13 @@ struct LinkTestBGInfo
     u32 dummy_C;
 };
 
+struct SIOCnt {
+    u32 cnt0_0:4;
+    u32 cnt0_2:2;
+};
+
+#define REG_SIOCNT_STRUCT (*(volatile struct SIOCnt *)REG_ADDR_SIOCNT)
+
 // Static RAM declarations
 
 IWRAM_DATA struct BlockTransfer gUnknown_03000D10;
@@ -98,12 +105,14 @@ struct LinkPlayer gUnknown_020229CC = {};
 void sub_8009638(void);
 void sub_80096BC(void);
 void c2_08009A8C(void);
+void sub_8009AA0(u8 unused);
 void sub_800A2E0(void);
 void sub_800A2F4(void *heapptr, size_t src);
 void task00_link_test(u8 taskId);
 u16 sub_800A648(u16 *src, u16 size);
 void sub_800A6E8(u32 pos, u8 a0, u8 a1, u8 a2);
 void sub_800A824(void);
+void sub_800AEB4(void);
 void sub_800B330(bool8 flag);
 void sub_800B4A4(void);
 void sub_800B53C(void);
@@ -316,7 +325,7 @@ void sub_80097E8(void)
     sub_800B53C();
 }
 
-void sub_8009818(void)
+static void sub_8009818(u8 nothing, u8 is, u8 used)
 {
     u8 i;
     u8 status;
@@ -383,4 +392,39 @@ void sub_8009900(void)
     {
         sub_800A994(gMain.vblankCounter2, gUnknown_03003140 ? gUnknown_03002748 : gUnknown_03002748 | 0x10);
     }
+}
+
+void c2_08009A8C(void)
+{
+    sub_8009900();
+    sub_8009818(1, 1, 0);
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+u16 sub_80099E0(const u16 *src)
+{
+    u8 i;
+
+    if (!gUnknown_020229C4)
+    {
+        return 0;
+    }
+    for (i = 0; i < 8; i ++)
+    {
+        gUnknown_03003110[i] = 0;
+    }
+    gUnknown_03003084 = *src;
+    if (gUnknown_030030E0 & 0x40)
+    {
+        sub_8009AA0(REG_SIOCNT_STRUCT.cnt0_2);
+        if (gUnknown_03003140 != NULL)
+        {
+            gUnknown_03003140();
+        }
+        sub_800AEB4();
+    }
+    return gUnknown_030030E0;
 }
