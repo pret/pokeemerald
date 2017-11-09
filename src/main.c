@@ -1,5 +1,6 @@
 #include "global.h"
 #include "main.h"
+#include "link.h"
 #include "m4a.h"
 #include "rtc.h"
 #include "rng.h"

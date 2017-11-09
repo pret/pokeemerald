@@ -197,17 +197,31 @@ void sub_800AC34(void);
 void sub_800B628(void);
 void sub_80097E8(void);
 
-extern IWRAM_DATA u8 gUnknown_0300306C;
-extern IWRAM_DATA u8 gUnknown_03003078[4];
-extern IWRAM_DATA u8 gUnknown_030030E4;
-extern IWRAM_DATA u8 gUnknown_030030E8;
-extern IWRAM_DATA u8 gUnknown_030030EC[4];
-extern IWRAM_DATA u8 gUnknown_030030F0[4];
-extern IWRAM_DATA u16 gUnknown_030030F4;
-extern IWRAM_DATA u8 gUnknown_030030F8;
-extern IWRAM_DATA u16 gUnknown_03003110[8];
-extern IWRAM_DATA struct LinkTestBGInfo gUnknown_03003130; // common
-extern IWRAM_DATA void (*gUnknown_03003140)(void);
-extern IWRAM_DATA bool8 gUnknown_03003144;
+extern u16 gUnknown_03003020[6];
+extern u32 gUnknown_0300302C;
+extern struct LinkPlayerBlock gUnknown_03003030;
+extern bool8 gUnknown_0300306C;
+extern u32 gUnknown_03003070;
+extern bool8 gUnknown_03003078[4];
+extern u8 gUnknown_0300307C[4];
+extern u16 gUnknown_03003084;
+extern u16 gUnknown_03003090[4][8];
+extern u32 gUnknown_030030E0;
+extern u8 gUnknown_030030E4;
+extern u8 gUnknown_030030E8;
+extern u8 gUnknown_030030EC[4];
+extern u8 gUnknown_030030F0[4];
+extern u16 gUnknown_030030F4;
+extern u8 gUnknown_030030F8;
+extern bool8 gLinkVSyncDisabled;
+extern bool8 gUnknown_03003100;
+extern u16 gUnknown_03003110[8];
+extern u8 gUnknown_03003120;
+extern struct LinkTestBGInfo gUnknown_03003130;
+extern void (*gUnknown_03003140)(void);
+extern bool8 gUnknown_03003144;
+extern u16 gUnknown_03003148[4];
+extern u8 gUnknown_03003150;
+extern u8 gUnknown_03003160;
 
 #endif // GUARD_LINK_H

@@ -37,13 +37,7 @@ gUnknown_03003084: @ 3003084
 	.space 0xC
 
 gUnknown_03003090: @ 3003090
-	.space 0x2
-
-gUnknown_03003092: @ 3003092
-	.space 0x2
-
-gUnknown_03003094: @ 3003094
-	.space 0x4C
+	.space 0x50
 
 gUnknown_030030E0: @ 30030E0
 	.space 0x4
@@ -100,10 +94,7 @@ gUnknown_03003160: @ 3003160
 	.space 0x10
 
 gUnknown_03003170: @ 3003170
-	.space 0x4
-
-gUnknown_03003174: @ 3003174
-	.space 0xFBC
+	.space 0xFC0
 
 gUnknown_03004130: @ 3004130
 	.space 0x4

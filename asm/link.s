@@ -5,130 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80097E8
-sub_80097E8: @ 80097E8
-	push {r4,lr}
-	ldr r0, =gReceivedRemoteLinkPlayers
-	movs r4, 0
-	strb r4, [r0]
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080097FC
-	bl sub_800EDD4
-_080097FC:
-	ldr r0, =gUnknown_020229C4
-	strb r4, [r0]
-	bl sub_800B53C
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80097E8
-
-	thumb_func_start sub_8009818
-sub_8009818: @ 8009818
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	ldr r5, =gUnknown_03000D64
-	ldr r4, =gUnknown_03000D10
-	ldrb r0, [r5]
-	ldrh r1, [r4]
-	cmp r0, r1
-	beq _0800983C
-	ldrh r0, [r4]
-	movs r1, 0x2
-	movs r2, 0x3
-	movs r3, 0x2
-	bl sub_800A6E8
-	ldrh r0, [r4]
-	strb r0, [r5]
-_0800983C:
-	movs r5, 0
-	ldr r7, =gUnknown_03000D20
-_08009840:
-	ldr r0, =gUnknown_03000D68
-	adds r6, r5, r0
-	lsls r0, r5, 1
-	adds r0, r5
-	lsls r0, 2
-	adds r4, r0, r7
-	ldrb r0, [r6]
-	ldrh r1, [r4]
-	cmp r0, r1
-	beq _08009868
-	ldrh r0, [r4]
-	adds r2, r5, 0x4
-	lsls r2, 24
-	lsrs r2, 24
-	movs r1, 0x2
-	movs r3, 0x2
-	bl sub_800A6E8
-	ldrh r0, [r4]
-	strb r0, [r6]
-_08009868:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x3
-	bls _08009840
-	bl GetBlockReceivedStatus
-	lsls r0, 24
-	lsrs r7, r0, 24
-	cmp r7, 0xF
-	bne _080098CE
-	movs r5, 0
-	ldr r0, =gUnknown_03000D20
-	mov r9, r0
-	ldr r1, =0x00000342
-	mov r8, r1
-_08009888:
-	adds r0, r7, 0
-	asrs r0, r5
-	movs r1, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080098C4
-	lsls r0, r5, 8
-	ldr r1, =gBlockRecvBuffer
-	adds r0, r1
-	lsls r4, r5, 1
-	adds r1, r4, r5
-	lsls r1, 2
-	add r1, r9
-	ldrh r1, [r1, 0x2]
-	bl sub_800A648
-	ldr r1, =gUnknown_03003148
-	adds r4, r1
-	movs r6, 0
-	strh r0, [r4]
-	adds r0, r5, 0
-	bl ResetBlockReceivedFlag
-	ldrh r0, [r4]
-	cmp r0, r8
-	beq _080098C4
-	ldr r0, =gUnknown_020223BC
-	strb r6, [r0]
-	ldr r0, =gUnknown_020223BD
-	strb r6, [r0]
-_080098C4:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x3
-	bls _08009888
-_080098CE:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8009818
-
 	thumb_func_start sub_8009900
 sub_8009900: @ 8009900
 	push {r4,r5,lr}
@@ -4258,7 +4134,7 @@ _0800BAFC:
 _0800BB00:
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r2, =gUnknown_03003174
+	ldr r2, =gUnknown_03003170+0x4
 	ldr r3, =0x04000120
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
@@ -12005,12 +11881,12 @@ _0800F920:
 	beq _0800F930
 	b _0800FC08
 _0800F930:
-	ldr r1, =gUnknown_03003092
+	ldr r1, =gUnknown_03003090+0x2
 	adds r0, r5, r1
 	ldrh r0, [r0]
 	ldr r2, =gUnknown_03005000
 	strb r0, [r2, 0xD]
-	ldr r3, =gUnknown_03003094
+	ldr r3, =gUnknown_03003090+0x4
 	adds r0, r5, r3
 	bl sub_800F74C
 	ldr r4, =gUnknown_03005CCE
@@ -12040,13 +11916,13 @@ _0800F982:
 	adds r0, 0x80
 	movs r2, 0
 	strh r4, [r0]
-	ldr r1, =gUnknown_03003092
+	ldr r1, =gUnknown_03003090+0x2
 	adds r0, r5, r1
 	ldrh r0, [r0]
 	adds r1, r3, 0
 	adds r1, 0x82
 	strh r0, [r1]
-	ldr r1, =gUnknown_03003094
+	ldr r1, =gUnknown_03003090+0x4
 	adds r0, r5, r1
 	ldrh r1, [r0]
 	adds r0, r3, 0
@@ -12176,7 +12052,7 @@ _0800FA90:
 	.pool
 _0800FAAC:
 	ldr r2, =gUnknown_082ED6B8
-	ldr r3, =gUnknown_03003092
+	ldr r3, =gUnknown_03003090+0x2
 	adds r0, r5, r3
 	ldrh r1, [r0]
 	lsls r1, 3
@@ -12200,7 +12076,7 @@ _0800FAE0:
 	movs r4, 0x80
 	lsls r4, 1
 	adds r0, r2, r4
-	ldr r3, =gUnknown_03003092
+	ldr r3, =gUnknown_03003090+0x2
 	adds r1, r5, r3
 	ldrh r0, [r0]
 	mov r6, r8
@@ -12228,7 +12104,7 @@ _0800FB10:
 	adds r6, 0x1
 	cmp r0, 0
 	beq _0800FC08
-	ldr r0, =gUnknown_03003092
+	ldr r0, =gUnknown_03003090+0x2
 	adds r4, r5, r0
 	ldrh r1, [r4]
 	ldr r0, =gUnknown_03007890
@@ -12239,7 +12115,7 @@ _0800FB10:
 	beq _0800FB48
 	strb r2, [r3]
 	bl sub_800D630
-	ldr r1, =gUnknown_03003094
+	ldr r1, =gUnknown_03003090+0x4
 	adds r0, r5, r1
 	ldrh r1, [r0]
 	ldr r2, =0x00000ce4
@@ -12260,11 +12136,11 @@ _0800FB78:
 	lsls r0, 8
 	bl sub_800FD14
 	ldr r1, =gUnknown_03003110
-	ldr r3, =gUnknown_03003092
+	ldr r3, =gUnknown_03003090+0x2
 	adds r0, r5, r3
 	ldrh r0, [r0]
 	strh r0, [r1, 0x2]
-	ldr r4, =gUnknown_03003094
+	ldr r4, =gUnknown_03003090+0x4
 	adds r0, r5, r4
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
@@ -12284,13 +12160,13 @@ _0800FBB0:
 	bne _0800FC44
 	ldr r0, =0x00000ce3
 	adds r2, r4, r0
-	ldr r1, =gUnknown_03003092
+	ldr r1, =gUnknown_03003090+0x2
 	adds r3, r5, r1
 	ldrb r1, [r3]
 	ldrb r0, [r2]
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r2, =gUnknown_03003094
+	ldr r2, =gUnknown_03003090+0x4
 	adds r0, r5, r2
 	ldrh r1, [r0]
 	ldr r2, =0x00000ce4
@@ -12305,7 +12181,7 @@ _0800FBF4:
 	mov r3, r8
 	lsls r1, r3, 1
 	adds r1, r0
-	ldr r4, =gUnknown_03003092
+	ldr r4, =gUnknown_03003090+0x2
 	adds r0, r5, r4
 	ldrh r0, [r0]
 	strh r0, [r1]

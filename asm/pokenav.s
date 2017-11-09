@@ -28090,7 +28090,7 @@ sub_81D4E60: @ 81D4E60
 	strh r0, [r1]
 	movs r0, 0
 	strh r0, [r2]
-	ldr r0, =gUnknown_03003174
+	ldr r0, =gUnknown_03003170+0x4
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [sp, 0x4]

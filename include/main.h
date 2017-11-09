@@ -42,17 +42,14 @@ struct Main
     /*0x439*/ u8 field_439_x4:1;
 };
 
-extern u8 gUnknown_3001764;
-extern struct Main gMain;
-extern bool8 gSoftResetDisabled;
-extern bool8 gLinkVSyncDisabled;
-
 extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
 
 extern u16 gKeyRepeatStartDelay;
 extern u8 gUnknown_030022B4;
+extern struct Main gMain;
 extern u16 gKeyRepeatContinueDelay;
+extern bool8 gSoftResetDisabled;
 extern IntrFunc gIntrTable[];
 extern u8 gUnknown_03002748;
 extern u32 IntrMain_Buffer[];

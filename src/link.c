@@ -57,7 +57,37 @@ IWRAM_DATA void *gUnknown_03000DA8;
 IWRAM_DATA void *gUnknown_03000DAC;
 IWRAM_DATA bool32 gUnknown_03000DB0;
 
-bool8 gUnknown_020229C4 = 0;
+u16 gUnknown_03003020[6];
+u32 gUnknown_0300302C;
+struct LinkPlayerBlock gUnknown_03003030;
+bool8 gUnknown_0300306C;
+u32 gUnknown_03003070;
+bool8 gUnknown_03003078[4];
+u8 gUnknown_0300307C[4];
+u16 gUnknown_03003084;
+u16 gUnknown_03003090[4][8];
+u32 gUnknown_030030E0;
+u8 gUnknown_030030E4;
+bool8 gUnknown_030030E8;
+u8 gUnknown_030030EC[4];
+u8 gUnknown_030030F0[4];
+u16 gUnknown_030030F4;
+u8 gUnknown_030030F8;
+bool8 gLinkVSyncDisabled;
+bool8 gUnknown_03003100;
+u16 gUnknown_03003110[8];
+u8 gUnknown_03003120;
+bool8 gReceivedRemoteLinkPlayers;
+struct LinkTestBGInfo gUnknown_03003130;
+void (*gUnknown_03003140)(void);
+bool8 gUnknown_03003144;
+u16 gUnknown_03003148[4];
+u8 gUnknown_03003150;
+u8 gUnknown_03003160;
+
+u8 gUnknown_020223BC = 0;
+u8 gUnknown_020223BD = 0;
+bool8 gUnknown_020229C4 = FALSE;
 u16 gUnknown_020229C6 = 0;
 struct LinkPlayer gUnknown_020229CC = {};
 
@@ -68,11 +98,15 @@ void sub_80096BC(void);
 void c2_08009A8C(void);
 void sub_800A2E0(void);
 void task00_link_test(u8 taskId);
+u16 sub_800A648(u16 *src, u16 size);
+void sub_800A6E8(u32 pos, u8 a0, u8 a1, u8 a2);
 void sub_800A824(void);
 void sub_800B594(void);
 void sub_800B4A4(void);
+void sub_800B53C(void);
 u32 sub_800BEC0(void);
 void sub_800E700(void);
+void sub_800EDD4(void);
 
 // .rodata
 
@@ -264,5 +298,53 @@ void sub_8009734(void)
         gUnknown_03003078[i] = 1;
         gUnknown_030030F0[i] = 0;
         gUnknown_030030EC[i] = 0;
+    }
+}
+
+void sub_80097E8(void)
+{
+    gReceivedRemoteLinkPlayers = FALSE;
+    if (gLinkVSyncDisabled)
+    {
+        sub_800EDD4();
+    }
+    gUnknown_020229C4 = FALSE;
+    sub_800B53C();
+}
+
+void sub_8009818(void)
+{
+    u8 i;
+    u8 status;
+
+    if (gUnknown_03000D64 != gUnknown_03000D10.pos)
+    {
+        sub_800A6E8(gUnknown_03000D10.pos, 2, 3, 2);
+        gUnknown_03000D64 = gUnknown_03000D10.pos;
+    }
+    for (i = 0; i < 4; i ++)
+    {
+        if (gUnknown_03000D68[i] != gUnknown_03000D20[i].pos)
+        {
+            sub_800A6E8(gUnknown_03000D20[i].pos, 2, i + 4, 2);
+            gUnknown_03000D68[i] = gUnknown_03000D20[i].pos;
+        }
+    }
+    status = GetBlockReceivedStatus();
+    if (status == 0xF) // 0b1111
+    {
+        for (i = 0; i < 4; i ++)
+        {
+            if ((status >> i) & 1)
+            {
+                gUnknown_03003148[i] = sub_800A648(gBlockRecvBuffer[i], gUnknown_03000D20[i].size);
+                ResetBlockReceivedFlag(i);
+                if (gUnknown_03003148[i] != 0x0342)
+                {
+                    gUnknown_020223BC = 0;
+                    gUnknown_020223BD = 0;
+                }
+            }
+        }
     }
 }
