@@ -693,7 +693,10 @@ BattleFrontier_BattlePikeRandomRoom1_Movement_25D9B0: @ 825D9B0
 	step_up
 	step_end
 
-	.incbin "baserom.gba", 0x25d9b3, 0x3
+BattleFrontier_BattlePikeRandomRoom1_Movement_25D9B3: @ 825D9B3
+	step_down
+	step_down
+	step_end
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25D9B6: @ 825D9B6
 	.string "Welcome…\n"
@@ -715,7 +718,27 @@ BattleFrontier_BattlePikeRandomRoom1_Text_25DABE: @ 825DABE
 	.string "The best of luck to you.\n"
 	.string "Farewell.$"
 
-	.incbin "baserom.gba", 0x25dae1, 0xf0
+BattleFrontier_BattlePikeRandomRoom1_Text_25DAE1: @ 825DAE1
+	.string "Excuse me…\p"
+	.string "Would you care for a battle?\n"
+	.string "I’ll restore your POKéMON if you win.$"
+
+BattleFrontier_BattlePikeRandomRoom1_Text_25DB2F: @ 825DB2F
+	.string "Very well…\n"
+	.string "Now, shall we?$"
+
+BattleFrontier_BattlePikeRandomRoom1_Text_25DB49: @ 825DB49
+	.string "I see…\n"
+	.string "How unsporting of you…$"
+
+BattleFrontier_BattlePikeRandomRoom1_Text_25DB67: @ 825DB67
+	.string "Magnificent…\p"
+	.string "As promised, I shall restore your\n"
+	.string "POKéMON to full health.$"
+
+BattleFrontier_BattlePikeRandomRoom1_Text_25DBAE: @ 825DBAE
+	.string "The best of luck to you.\n"
+	.string "Farewell.$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25DBD1: @ 825DBD1
 	.string "Oh, my!\p"
@@ -854,7 +877,12 @@ BattleFrontier_BattlePikeRandomRoom1_Text_25E238: @ 825E238
 	.string "Since you have chosen this room, I will\n"
 	.string "restore two POKéMON to full health…$"
 
-	.incbin "baserom.gba", 0x25e293, 0x7e
+BattleFrontier_BattlePikeRandomRoom1_Text_25E293: @ 825E293
+	.string "I welcome you…\p"
+	.string "Giggle…\n"
+	.string "You should thank your lucky stars…\p"
+	.string "Since you have chosen this room,\n"
+	.string "all your POKéMON will be restored…$"
 
 BattleFrontier_BattlePikeRandomRoom1_Text_25E311: @ 825E311
 	.string "I shall go fetch our master…$"

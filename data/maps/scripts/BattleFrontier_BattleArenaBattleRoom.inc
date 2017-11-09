@@ -524,7 +524,9 @@ BattleFrontier_BattleArenaBattleRoom_Movement_257C08: @ 8257C08
 	step_25
 	step_end
 
-	.incbin "baserom.gba", 0x257c0a, 0x2
+BattleFrontier_BattleArenaBattleRoom_Movement_257C0A: @ 8257C0A
+	step_28
+	step_end
 
 BattleFrontier_BattleArenaBattleRoom_MapScript2_257C0C: @ 8257C0C
 	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257C16
@@ -564,3 +566,147 @@ BattleFrontier_BattleArenaBattleRoom_Text_257C68: @ 8257C68
 	.string "Step forward, please!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_257C93: @ 8257C93
+FallarborTown_BattleTentBattleRoom_Text_257C93: @ 8257C93
+	.string "REFEREE: Set KO Tourney!\n"
+	.string "Begin!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257CB3: @ 8257CB3
+FallarborTown_BattleTentBattleRoom_Text_257CB3: @ 8257CB3
+	.string "REFEREE: The winner is {PLAYER}!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257CCE: @ 8257CCE
+FallarborTown_BattleTentBattleRoom_Text_257CCE: @ 8257CCE
+	.string "REFEREE: The winner is {STR_VAR_1}!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257CE9: @ 8257CE9
+FallarborTown_BattleTentBattleRoom_Text_257CE9: @ 8257CE9
+	.string "Your POKéMON will be restored to\n"
+	.string "full health.$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257D17: @ 8257D17
+FallarborTown_BattleTentBattleRoom_Text_257D17: @ 8257D17
+	.string "Next up, your second opponent!\n"
+	.string "Are you ready to move on?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257D50: @ 8257D50
+FallarborTown_BattleTentBattleRoom_Text_257D50: @ 8257D50
+	.string "Next up, your third opponent!\n"
+	.string "Are you ready to move on?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257D88: @ 8257D88
+	.string "Next up, your fourth opponent!\n"
+	.string "Are you ready to move on?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257DC1: @ 8257DC1
+	.string "Next up, your fifth opponent!\n"
+	.string "Are you ready to move on?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257DF9: @ 8257DF9
+	.string "Next up, your sixth opponent!\n"
+	.string "Are you ready to move on?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257E31: @ 8257E31
+	.string "Next up, your seventh opponent!\n"
+	.string "Are you ready to move on?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257E6B: @ 8257E6B
+FallarborTown_BattleTentBattleRoom_Text_257E6B: @ 8257E6B
+	.string "Would you like to save the game and\n"
+	.string "shut down now?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257E9E: @ 8257E9E
+FallarborTown_BattleTentBattleRoom_Text_257E9E: @ 8257E9E
+	.string "Would you like to retire from your\n"
+	.string "Set KO Tourney challenge?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257EDB: @ 8257EDB
+FallarborTown_BattleTentBattleRoom_Text_257EDB: @ 8257EDB
+	.string "I am saving your game data.\n"
+	.string "Please wait.$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257F04: @ 8257F04
+	.string "Would you like to record your last\n"
+	.string "battle on your FRONTIER PASS?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257F45: @ 8257F45
+	.string "My dear challenger!\p"
+	.string "Your skill level is truly astounding!\p"
+	.string "We now would like you to face our\n"
+	.string "leader, the ARENA TYCOON!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257FBB: @ 8257FBB
+	.string "A battle with the ARENA TYCOON!\n"
+	.string "Are you prepared?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257FED: @ 8257FED
+	.string "REFEREE: The ARENA TYCOON!\n"
+	.string "Make way for GRETA!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_25801C: @ 825801C
+	.string "GRETA: Hey!\n"
+	.string "Howdy!\p"
+	.string "…Wait, are you the challenger?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_25804E: @ 825804E
+	.string "Is that right? Hmm…\n"
+	.string "Hmhm…$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_258068: @ 8258068
+	.string "I don’t know how to say it, but…\n"
+	.string "To put it bluntly, you look pretty weak.\l"
+	.string "Are you sure you’re up for me?\p"
+	.string "Hmm…\p"
+	.string "Well, all right!\n"
+	.string "We’ll take things easy to start with!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_25810D: @ 825810D
+	.string "Okay! Let’s see you ignite my passion\n"
+	.string "for battle!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_25813F: @ 825813F
+	.string "GRETA: Ow, wait a second!\n"
+	.string "You are tough after all!\p"
+	.string "I like you!\n"
+	.string "Let’s see your FRONTIER PASS.$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_25819C: @ 825819C
+	.string "The Guts Symbol was embossed on\n"
+	.string "the FRONTIER PASS!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_2581CF: @ 82581CF
+	.string "Hmm…\p"
+	.string "It’s going to be fun the next time!\n"
+	.string "I’m looking forward to it!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_258213: @ 8258213
+	.string "GRETA: Hey! Howdy!\n"
+	.string "You finally won your way up to me!\p"
+	.string "I was getting worried waiting for you!\n"
+	.string "I was really looking forward to seeing\l"
+	.string "you again!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_2582A2: @ 82582A2
+	.string "… … …\n"
+	.string "So, are you ready?$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_2582BB: @ 82582BB
+	.string "I won’t allow a halfhearted effort!\n"
+	.string "Be ready for a thrashing!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_2582F9: @ 82582F9
+	.string "Come on, REFEREE!\n"
+	.string "Let’s get this started!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_258323: @ 8258323
+	.string "GRETA: Gaaah! Blown away!\n"
+	.string "Let’s see your FRONTIER PASS!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_25835B: @ 825835B
+	.string "The Guts Symbol took on\n"
+	.string "a golden shine!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_258383: @ 8258383
+	.string "Arrrgh!\n"
+	.string "This is so infuriating!\p"
+	.string "If we ever battle again, I won’t lose!\n"
+	.string "Don’t you forget it! Bye-bye!$"

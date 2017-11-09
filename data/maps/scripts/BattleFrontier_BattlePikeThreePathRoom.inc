@@ -338,3 +338,56 @@ BattleFrontier_BattlePikeThreePathRoom_Text_25CE08: @ 825CE08
 	.string "I am saving your data…\n"
 	.string "A little time, please…$"
 
+BattleFrontier_BattlePikeRandomRoom1_Text_25CE36: @ 825CE36
+BattleFrontier_BattlePikeRandomRoom3_Text_25CE36: @ 825CE36
+BattleFrontier_BattlePikeThreePathRoom_Text_25CE36: @ 825CE36
+	.string "The path is blocked!\n"
+	.string "And there is no turning back…$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25CE69: @ 825CE69
+	.string "I beg your pardon, but…\p"
+	.string "Are you perhaps finding it difficult\n"
+	.string "to choose your path?$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25CEBB: @ 825CEBB
+	.string "I see…\n"
+	.string "I apologize for my impertinence…$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25CEE3: @ 825CEE3
+	.string "Ah, let me see… There is something\n"
+	.string "about the path on the right…$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25CF23: @ 825CF23
+	.string "Ah, let me see… There is something\n"
+	.string "about the path in the center…$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25CF64: @ 825CF64
+	.string "Ah, let me see… There is something\n"
+	.string "about the path on the left…$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25CFA3: @ 825CFA3
+	.string "It seems to have the distinct aroma\n"
+	.string "of POKéMON wafting around it…$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25CFE5: @ 825CFE5
+	.string "Is it… A TRAINER?\n"
+	.string "I sense the presence of people…$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25D017: @ 825D017
+	.string "I seem to have heard something…\n"
+	.string "It may have been whispering…$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25D054: @ 825D054
+	.string "For some odd reason, I felt a wave\n"
+	.string "of nostalgia coming from it…$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25D094: @ 825D094
+	.string "I am sorry to say…\p"
+	.string "A terrifying event, yes, a horrible one,\n"
+	.string "is about to befall you…\p"
+	.string "I urge you to pay the utmost care\n"
+	.string "and prepare for the worst…$"
+
+BattleFrontier_BattlePikeThreePathRoom_Text_25D125: @ 825D125
+	.string "From every path I sense a dreadful\n"
+	.string "presence…$"

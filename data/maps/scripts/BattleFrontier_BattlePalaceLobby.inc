@@ -542,5 +542,7 @@ BattleFrontier_BattlePalaceLobby_Text_24E4F7: @ 824E4F7
 	.string "Your feat will be recorded.\n"
 	.string "I must ask you to briefly wait.$"
 
-	.incbin "baserom.gba", 0x24e533, 0x48
+BattleFrontier_BattlePalaceLobby_Text_24E533: @ 824E5333
+    .string "For the feat of your 7-win streak,\n"
+    .string "we present you with Battle Point(s).$"
 

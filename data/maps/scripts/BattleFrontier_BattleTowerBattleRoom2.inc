@@ -507,5 +507,27 @@ BattleFrontier_BattleTowerBattleRoom2_Text_24963C: @ 824963C
 	.string "The 7th set of opponents is next.\n"
 	.string "Are you ready?$"
 
-	.incbin "baserom.gba", 0x24966d, 0x120
+BattleFrontier_BattleTowerBattleRoom2_Text_24966D: @ 824966D
+	.string "The 2nd set of opponents is next.\n"
+	.string "Do your best!$"
+
+BattleFrontier_BattleTowerBattleRoom2_Text_24969D: @ 824969D
+	.string "The 3rd set of opponents is next.\n"
+	.string "Do your best!$"
+
+BattleFrontier_BattleTowerBattleRoom2_Text_2496CD: @ 82496CD
+	.string "The 4th set of opponents is next.\n"
+	.string "Do your best!$"
+
+BattleFrontier_BattleTowerBattleRoom2_Text_2496FD: @ 82496FD
+	.string "The 5th set of opponents is next.\n"
+	.string "Do your best!$"
+
+BattleFrontier_BattleTowerBattleRoom2_Text_24972D: @ 824972D
+	.string "The 6th set of opponents is next.\n"
+	.string "Do your best!$"
+
+BattleFrontier_BattleTowerBattleRoom2_Text_24975D: @ 824975D
+	.string "The 7th set of opponents is next.\n"
+	.string "Do your best!$"
 

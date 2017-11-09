@@ -19,8 +19,6 @@ gStdScripts:: @ 81DC2A0
 	.incbin "baserom.gba", 0x1dc2a0, 0x2c
 
 gStdScripts_End:: @ 81DC2CC
-
-gStdScripts_End:: @ 81DC2CC
 	map_script 3, PetalburgCity_MapScript1_1DC2D7
 	map_script 2, PetalburgCity_MapScript2_1DC31C
 	.byte 0
@@ -4018,24 +4016,200 @@ SkyPillar_Outside_Text_23953A: @ 823953A
 	.include "data/maps/scripts/SecretBase_YellowCave2.inc"
 	.include "data/maps/scripts/SecretBase_YellowCave3.inc"
 	.include "data/maps/scripts/SecretBase_YellowCave4.inc"
+
 gUnknown_0823B4BB:: @ 823B4BB
-	.incbin "baserom.gba", 0x23b4bb, 0x2d
+	lockall
+	playse 2
+	message Text_276805
+	dofieldeffect 61
+	waitstate
+	waitmessage
+	waitbuttonpress
+	playse 5
+	goto EventScript_23B4D3
+	end
+
+EventScript_23B4D3:: @ 823B4D3
+	message Text_27681A
+	waitmessage
+	checkflag FLAG_0x10C
+	goto_eq EventScript_23B4EF
+	goto EventScript_23B531
+	end
 
 gUnknown_0823B4E8:: @ 823B4E8
-	.incbin "baserom.gba", 0x23b4e8, 0xa1
+	lockall
+	goto EventScript_23B4D3
+	end
+
+EventScript_23B4EF:: @ 823B4EF
+	multichoice 0, 0, 6, 0
+	switch VAR_RESULT
+	case 0, EventScript_23B581
+	case 1, EventScript_23B568
+	case 2, EventScript_23B585
+	case 3, EventScript_23B66E
+	case 127, EventScript_23B66E
+	end
+
+EventScript_23B531:: @ 823B531
+	multichoice 0, 0, 5, 0
+	switch VAR_RESULT
+	case 0, EventScript_23B581
+	case 1, EventScript_23B568
+	case 2, EventScript_23B66E
+	case 127, EventScript_23B66E
+	end
+
+EventScript_23B568:: @ 823B568
+	msgbox Text_2766AA, 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq EventScript_23B4D3
+	closemessage
+	special sub_80E9AC0
+	releaseall
+	end
+
+EventScript_23B581:: @ 823B581
+	special sub_80E9C74
+	end
+
+EventScript_23B585:: @ 823B585
+	special sub_80E9C88
+	end
 
 gUnknown_0823B589:: @ 823B589
-	.incbin "baserom.gba", 0x23b589, 0x60
+	lockall
+	message Text_276805
+	playse 2
+	dofieldeffect 61
+	waitstate
+	waitmessage
+	waitbuttonpress
+	playse 5
+	goto EventScript_23B5A1
+	end
+
+EventScript_23B5A1:: @ 823B5A1
+	message Text_27681A
+	waitmessage
+	multichoice 0, 0, 7, 0
+	switch VAR_RESULT
+	case 0, EventScript_23B5F0
+	case 1, EventScript_23B585
+	case 2, EventScript_23B660
+	case 3, EventScript_23B66E
+	case 127, EventScript_23B66E
+	end
 
 gUnknown_0823B5E9:: @ 823B5E9
-	.incbin "baserom.gba", 0x23b5e9, 0x9b
+	lockall
+	goto EventScript_23B5A1
+	end
+
+EventScript_23B5F0:: @ 823B5F0
+	special sub_80E9BDC
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq EventScript_23B62F
+	compare_var_to_value VAR_RESULT, 2
+	goto_eq EventScript_23B652
+	special sub_80E980C
+	msgbox Text_276707, 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq EventScript_23B5A1
+	msgbox Text_2767D1, 3
+	special sub_80E9C2C
+	special sub_80FA57C
+	releaseall
+	end
+
+EventScript_23B62F:: @ 823B62F
+	msgbox Text_276731, 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq EventScript_23B5A1
+	msgbox Text_2767E9, 3
+	special sub_80E9C2C
+	special sub_80FA57C
+	releaseall
+	end
+
+EventScript_23B652:: @ 823B652
+	msgbox Text_27676F, 3
+	special sub_80FA57C
+	closemessage
+	releaseall
+	end
+
+EventScript_23B660:: @ 823B660
+	msgbox Text_276835, 4
+	goto EventScript_23B5A1
+	end
+
+EventScript_23B66E:: @ 823B66E
+	special sub_80FA57C
+	closemessage
+	releaseall
+	end
+
+EventScript_23B674:: @ 823B674
+	special sub_80EB498
+	end
+
+EventScript_23B678:: @ 823B678
+	special sub_80EB56C
+	end
+
+EventScript_23B67C:: @ 823B67C
+	special sub_80EB9E0
+	end
+
+EventScript_23B680:: @ 823B680
+	special sub_80EBB28
+	end
 
 gUnknown_0823B684:: @ 823B684
-	.incbin "baserom.gba", 0x23b684, 0x8
+	special sub_80EBE7C
+	dofieldeffect 52
+	waitstate
+	end
 
 gUnknown_0823B68C:: @ 823B68C
+	special sub_80FAC78
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq EventScript_23B6BC
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq EventScript_23B6C5
+	compare_var_to_value VAR_RESULT, 2
+	goto_eq EventScript_23B6CE
+	compare_var_to_value VAR_RESULT, 3
+	goto_eq EventScript_23B6D7
+	end
 
-	.incbin "baserom.gba", 0x23b68c, 0xcd
+EventScript_23B6BC:: @ 823B6BC
+	msgbox Text_27692B, 3
+	end
+
+EventScript_23B6C5:: @ 823B6C5
+	msgbox Text_276974, 3
+	end
+
+EventScript_23B6CE:: @ 823B6CE
+	msgbox Text_2769B8, 3
+	end
+
+EventScript_23B6D7:: @ 823B6D7
+	msgbox Text_2769FF, 3
+	end
+
+gText_23B6E0:: @ 823B6E0
+	.string "There’s a small indent in the wall.$"
+
+gText_23B704:: @ 823B704
+	.string "There’s a small indent in the wall.\p"
+	.string "Use the SECRET POWER?$"
+
+gText_23B73E:: @ 823B73E
+	.string "Discovered a small cavern!$"
 
 SecretBase_RedCave1_Text_23B759: @ 823B759
 	.string "Want to make your SECRET BASE here?$"
@@ -4058,317 +4232,6 @@ SecretBase_RedCave1_Text_23B759: @ 823B759
 	.include "data/maps/scripts/UnknownMap_25_34.inc"
 	.include "data/maps/scripts/InsideOfTruck.inc"
 	.include "data/maps/scripts/SSTidalCorridor.inc"
-gUnknown_0823C050:: @ 823C050
-
-	.incbin "baserom.gba", 0x23c050, 0x17
-
-SSTidalCorridor_EventScript_23C067:: @ 823C067
-	special sub_8137FB0
-	setvar VAR_PORTHOLE, 3
-	lockall
-	playse SE_PINPON
-	msgbox SSTidalCorridor_Text_23C4E3, 4
-	releaseall
-	end
-
-SSTidalCorridor_EventScript_23C07D:: @ 823C07D
-	special sub_8137FB0
-	setvar VAR_PORTHOLE, 8
-	lockall
-	playse SE_PINPON
-	msgbox SSTidalCorridor_Text_23C50F, 4
-	releaseall
-	end
-
-SSTidalRooms_EventScript_23C093:: @ 823C093
-	special sub_8137FB0
-	setvar VAR_PORTHOLE, 8
-	playse SE_PINPON
-	msgbox SSTidalRooms_Text_23C50F, 4
-	return
-
-SSTidalRooms_EventScript_23C0A7:: @ 823C0A7
-	switch VAR_PORTHOLE
-	case 2, SSTidalRooms_EventScript_23C03C
-	case 3, SSTidalRooms_EventScript_23C03C
-	case 6, SSTidalRooms_EventScript_23C028
-	case 7, SSTidalRooms_EventScript_23C093
-	return
-
-SSTidalCorridor_EventScript_23C0D9:: @ 823C0D9
-	msgbox SSTidalCorridor_Text_23C6EC, 2
-	end
-
-SSTidalCorridor_EventScript_23C0E2:: @ 823C0E2
-	lock
-	faceplayer
-	waitse
-	playmoncry SPECIES_WINGULL, 0
-	msgbox SSTidalCorridor_Text_23C7E1, 4
-	waitmoncry
-	release
-	end
-
-SSTidalCorridor_EventScript_23C0F5:: @ 823C0F5
-	msgbox SSTidalCorridor_Text_23C7F8, 3
-	end
-
-SSTidalCorridor_EventScript_23C0FE:: @ 823C0FE
-	msgbox SSTidalCorridor_Text_23C800, 3
-	end
-
-SSTidalCorridor_EventScript_23C107:: @ 823C107
-	msgbox SSTidalCorridor_Text_23C808, 3
-	end
-
-SSTidalCorridor_EventScript_23C110:: @ 823C110
-	msgbox SSTidalCorridor_Text_23C810, 3
-	end
-
-SSTidalCorridor_EventScript_23C119:: @ 823C119
-	lock
-	faceplayer
-	compare_var_to_value VAR_PORTHOLE, 4
-	goto_eq SSTidalCorridor_EventScript_23C13B
-	compare_var_to_value VAR_PORTHOLE, 8
-	goto_eq SSTidalCorridor_EventScript_23C15A
-	msgbox SSTidalCorridor_Text_23C596, 4
-	release
-	end
-
-SSTidalCorridor_EventScript_23C13B:: @ 823C13B
-	setrespawn 8
-	msgbox SSTidalCorridor_Text_23C64F, 4
-	checkflag FLAG_0x104
-	call_if 1, SSTidalCorridor_EventScript_23C179
-	warp LILYCOVE_CITY_HARBOR, 255, 8, 11
-	waitstate
-	release
-	end
-
-SSTidalCorridor_EventScript_23C15A:: @ 823C15A
-	setrespawn 4
-	msgbox SSTidalCorridor_Text_23C64F, 4
-	checkflag FLAG_0x104
-	call_if 1, SSTidalCorridor_EventScript_23C179
-	warp SLATEPORT_CITY_HARBOR, 255, 8, 11
-	waitstate
-	release
-	end
-
-SSTidalCorridor_EventScript_23C179:: @ 823C179
-	setflag FLAG_0x3B7
-	return
-
-SSTidalCorridor_EventScript_23C17D:: @ 823C17D
-	lockall
-	compare_var_to_value VAR_PORTHOLE, 2
-	goto_eq SSTidalCorridor_EventScript_23C19E
-	compare_var_to_value VAR_PORTHOLE, 7
-	goto_eq SSTidalCorridor_EventScript_23C19E
-	msgbox SSTidalCorridor_Text_23C6C3, 4
-	releaseall
-	end
-
-SSTidalCorridor_EventScript_23C19E:: @ 823C19E
-	special sub_80FB7A4
-	waitstate
-	end
-
-SSTidalCorridor_EventScript_23C1A3:: @ 823C1A3
-	lock
-	faceplayer
-	checkflag FLAG_0x0F7
-	goto_eq SSTidalCorridor_EventScript_23C1BD
-	call SSTidalCorridor_EventScript_23C1C7
-	msgbox SSTidalCorridor_Text_23C65E, 4
-	release
-	end
-
-SSTidalCorridor_EventScript_23C1BD:: @ 823C1BD
-	msgbox SSTidalCorridor_Text_23C6B0, 4
-	release
-	end
-
-SSTidalCorridor_EventScript_23C1C7:: @ 823C1C7
-	checktrainerflag TRAINER_PHILLIP
-	goto_if 0, SSTidalCorridor_EventScript_23C218
-	checktrainerflag TRAINER_LEONARD
-	goto_if 0, SSTidalCorridor_EventScript_23C218
-	checktrainerflag TRAINER_COLTON
-	goto_if 0, SSTidalCorridor_EventScript_23C218
-	checktrainerflag TRAINER_MICAH
-	goto_if 0, SSTidalCorridor_EventScript_23C218
-	checktrainerflag TRAINER_THOMAS
-	goto_if 0, SSTidalCorridor_EventScript_23C218
-	checktrainerflag TRAINER_LEA_AND_JED
-	goto_if 0, SSTidalCorridor_EventScript_23C218
-	checktrainerflag TRAINER_GARRET
-	goto_if 0, SSTidalCorridor_EventScript_23C218
-	checktrainerflag TRAINER_NAOMI
-	goto_if 0, SSTidalCorridor_EventScript_23C218
-	setflag FLAG_0x0F7
-	goto SSTidalCorridor_EventScript_23C1BD
-	return
-
-SSTidalCorridor_EventScript_23C218:: @ 823C218
-	return
-
-SSTidalCorridor_EventScript_23C219:: @ 823C219
-	lockall
-	applymovement 5, SSTidalCorridor_Movement_23C26D
-	waitmovement 0
-	applymovement 255, SSTidalCorridor_Movement_2725A8
-	waitmovement 0
-	msgbox SSTidalCorridor_Text_23C28F, 4
-	closemessage
-	applymovement 255, SSTidalCorridor_Movement_23C27D
-	applymovement 1, SSTidalCorridor_Movement_23C284
-	applymovement 5, SSTidalCorridor_Movement_23C275
-	waitmovement 0
-	playse SE_KAIDAN
-	waitse
-	removeobject 5
-	applymovement 1, SSTidalCorridor_Movement_23C28B
-	waitmovement 0
-	delay 30
-	setflag FLAG_0x1D0
-	setvar VAR_0x40D4, 1
-	releaseall
-	end
-
-SSTidalCorridor_Movement_23C26D: @ 823C26D
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
-
-SSTidalCorridor_Movement_23C275: @ 823C275
-	step_25
-	step_14
-	step_14
-	step_14
-	step_14
-	step_down
-	step_left
-	step_end
-
-SSTidalCorridor_Movement_23C27D: @ 823C27D
-	step_14
-	step_14
-	step_14
-	step_14
-	step_13
-	step_25
-	step_end
-
-SSTidalCorridor_Movement_23C284: @ 823C284
-	step_14
-	step_right
-	step_right
-	step_26
-	step_14
-	step_27
-	step_end
-
-SSTidalCorridor_Movement_23C28B: @ 823C28B
-	step_left
-	step_left
-	step_26
-	step_end
-
-SSTidalCorridor_Text_23C28F: @ 823C28F
-	.string "SCOTT: Well, hi, hi!\n"
-	.string "{PLAYER}{KUN}, {PLAYER}{KUN}!\p"
-	.string "Something’s come up, so I have to\n"
-	.string "disembark, but am I glad to see you!\p"
-	.string "Congratulations, LEAGUE CHAMPION!\p"
-	.string "There’s a place I’d like to invite\n"
-	.string "someone like you.\p"
-	.string "It’s the…\n"
-	.string "BATTLE FRONTIER!\p"
-	.string "What’s the place like?\n"
-	.string "You’ll understand when you see it!\p"
-	.string "I’ve spoken with the ship’s CAPTAIN\n"
-	.string "about this.\p"
-	.string "The next time you take a ferry,\n"
-	.string "you should be able to sail to\l"
-	.string "the BATTLE FRONTIER.\p"
-	.string "Okay, {PLAYER}{KUN}, I’ll be waiting for you\n"
-	.string "at the BATTLE FRONTIER!$"
-
-SSTidalCorridor_Text_23C462: @ 823C462
-SSTidalRooms_Text_23C462: @ 823C462
-	.string "This ferry is built to plow through\n"
-	.string "fast-running currents.\p"
-	.string "We hope you enjoy your voyage with us.\n"
-	.string "Feel free to explore the ship.$"
-
-SSTidalCorridor_Text_23C4E3: @ 823C4E3
-	.string "We hope you enjoy your voyage on\n"
-	.string "our ferry.$"
-
-SSTidalCorridor_Text_23C50F: @ 823C50F
-SSTidalRooms_Text_23C50F: @ 823C50F
-	.string "We have made land in SLATEPORT CITY.\n"
-	.string "Thank you for sailing with us.$"
-
-SSTidalRooms_Text_23C553: @ 823C553
-	.string "We have made land in LILYCOVE CITY.\n"
-	.string "Thank you for sailing with us.$"
-
-SSTidalCorridor_Text_23C596: @ 823C596
-	.string "It’ll be some time before we make land,\n"
-	.string "I reckon.\p"
-	.string "You can rest up in your cabin if you’d\n"
-	.string "like. Your cabin’s No. 2.\p"
-	.string "The bed in there is soft and plushy.\n"
-	.string "I can attest to how comfy it is!$"
-
-SSTidalCorridor_Text_23C64F: @ 823C64F
-	.string "We’ve arrived!$"
-
-SSTidalCorridor_Text_23C65E: @ 823C65E
-	.string "Go visit other cabins.\n"
-	.string "TRAINERS bored of the boat trip will\l"
-	.string "be itching to battle.$"
-
-SSTidalCorridor_Text_23C6B0: @ 823C6B0
-	.string "Enjoy your cruise!$"
-
-SSTidalCorridor_Text_23C6C3: @ 823C6C3
-	.string "The horizon spreads beyond\n"
-	.string "the porthole.$"
-
-SSTidalCorridor_Text_23C6EC: @ 823C6EC
-	.string "MR. BRINEY: Welcome aboard, {PLAYER}{KUN}!\p"
-	.string "They made me honorary captain of\n"
-	.string "the S.S. TIDAL!\p"
-	.string "You can call me CAPTAIN BRINEY now!\p"
-	.string "You know, I retired once before,\n"
-	.string "but when I saw this majestic ship…\p"
-	.string "Let me just say, it stirred my sleeping\n"
-	.string "soul as a sailor!$"
-
-SSTidalCorridor_Text_23C7E1: @ 823C7E1
-	.string "PEEKO: Pihyo pihyohyo…$"
-
-SSTidalCorridor_Text_23C7F8: @ 823C7F8
-	.string "Cabin 1$"
-
-SSTidalCorridor_Text_23C800: @ 823C800
-	.string "Cabin 2$"
-
-SSTidalCorridor_Text_23C808: @ 823C808
-	.string "Cabin 3$"
-
-SSTidalCorridor_Text_23C810: @ 823C810
-	.string "Cabin 4$"
-
 	.include "data/maps/scripts/SSTidalLowerDeck.inc"
 	.include "data/maps/scripts/SSTidalRooms.inc"
 	.include "data/maps/scripts/BattlePyramidSquare01.inc"
@@ -4394,555 +4257,10 @@ SSTidalCorridor_Text_23C810: @ 823C810
 	.include "data/maps/scripts/SafariZone_South.inc"
 	.include "data/maps/scripts/BattleFrontier_OutsideWest.inc"
 	.include "data/maps/scripts/BattleFrontier_BattleTowerLobby.inc"
-SlateportCity_BattleTentLobby_Text_23F68C: @ 823F68C
-	.string "{PLAYER} received the prize\n"
-	.string "{STR_VAR_1}.$"
-
-	.incbin "baserom.gba", 0x23f6a6, 0x51
-
-BattleFrontier_BattleTowerLobby_Text_23F6F7: @ 823F6F7
-	.string "Thank you for playing!\p"
-	.string "$"
-
-BattleFrontier_BattleTowerLobby_Text_23F70F: @ 823F70F
-	.string "Your record will be saved.\n"
-	.string "Please wait.$"
-
-BattleFrontier_BattleTowerLobby_Text_23F737: @ 823F737
-	.string "We’ve been waiting for you!\p"
-	.string "$"
-
-BattleFrontier_BattleTowerLobby_Text_23F754: @ 823F754
-	.string "Before entering a BATTLE ROOM, your\n"
-	.string "progress will be saved. Please wait.$"
-
-BattleFrontier_BattleTowerLobby_Text_23F79D: @ 823F79D
-	.string "You’re finally about to face the\n"
-	.string "50th TRAINER.\p"
-	.string "From here on, every time you beat seven\n"
-	.string "TRAINERS in a row, your POKéMON will\l"
-	.string "receive a commemorative RIBBON.\p"
-	.string "Good luck!$"
-
-BattleFrontier_BattleTowerLobby_Text_23F844: @ 823F844
-	.string "Here are some RIBBONS for beating\n"
-	.string "seven tough TRAINERS in a row.\p"
-	.string "{PLAYER} received some RIBBONS!$"
-
-BattleFrontier_BattleTowerLobby_Text_23F89F: @ 823F89F
-	.string "{PLAYER} put the RIBBONS on\n"
-	.string "the challenger POKéMON.$"
-
-BattleFrontier_BattleTowerLobby_Text_23F8CD: @ 823F8CD
-	.string "Excuse me, do you have a moment?\p"
-	.string "Can you describe your feelings when\n"
-	.string "you’re about to begin a BATTLE TOWER\l"
-	.string "match, or when you’ve either won or\l"
-	.string "lost a match?$"
-
-BattleFrontier_BattleTowerLobby_Text_23F969: @ 823F969
-	.string "Okay, what are your feelings when\n"
-	.string "you’re about to begin a match?$"
-
-BattleFrontier_BattleTowerLobby_Text_23F9AA: @ 823F9AA
-	.string "What do you feel when you’ve won\n"
-	.string "a match?$"
-
-BattleFrontier_BattleTowerLobby_Text_23F9D4: @ 823F9D4
-	.string "Can I hear about your feelings when\n"
-	.string "you have lost a match?$"
-
-BattleFrontier_BattleTowerLobby_Text_23FA0F: @ 823FA0F
-	.string "Oh, so you don’t think much about it?\n"
-	.string "You’re one cool customer.$"
-
-BattleFrontier_BattleTowerLobby_Text_23FA4F: @ 823FA4F
-	.string "Hunh? You changed your mind?\n"
-	.string "I guess you’re fickle.$"
-
-BattleFrontier_BattleTowerLobby_Text_23FA83: @ 823FA83
-	.string "Okay, so that’s how you feel?\n"
-	.string "That’s quite original.\p"
-	.string "Thanks!$"
-
-BattleFrontier_BattleTowerLobby_Text_23FAC0: @ 823FAC0
-	.string "The number of matches you win in a row\n"
-	.string "is recorded.\p"
-	.string "I’d better not get beaten in\n"
-	.string "an embarrassing way!$"
-
-BattleFrontier_BattleTowerLobby_Text_23FB26: @ 823FB26
-	.string "Once you’ve entered the BATTLE TOWER,\n"
-	.string "you can’t leave until you either lose\l"
-	.string "or you beat seven TRAINERS in a row.\p"
-	.string "You’d best be certain that you’re up\n"
-	.string "to the challenge.$"
-
-	.incbin "baserom.gba", 0x23fbce, 0x139
-
-BattleFrontier_BattleTowerLobby_Text_23FD07: @ 823FD07
-	.string "We look forward to seeing you on\n"
-	.string "another challenge!$"
-
-BattleFrontier_BattleTowerLobby_Text_23FD3B: @ 823FD3B
-	.string "The BATTLE ROOM offers two levels\n"
-	.string "of challenge, Level 50 and Open Level.\l"
-	.string "Which is your choice?$"
-
-	.incbin "baserom.gba", 0x23fd9a, 0x2d
-
-BattleFrontier_BattleTowerLobby_Text_23FDC7: @ 823FDC7
-	.string "Before entering a BATTLE ROOM, your\n"
-	.string "progress must be saved. Is that okay?$"
-
-BattleFrontier_BattleTowerLobby_Text_23FE11: @ 823FE11
-	.string "I will now show you to the\n"
-	.string "{STR_VAR_1} BATTLE ROOM.$"
-
-BattleFrontier_BattleTowerLobby_Text_23FE3C: @ 823FE3C
-	.string "Shall I record your last BATTLE TOWER\n"
-	.string "match on your FRONTIER PASS?$"
-
-	.incbin "baserom.gba", 0x23fe7f, 0x1a8
-
-BattleFrontier_BattleTowerLobby_Text_240027: @ 8240027
-	.string "Excuse me!\p"
-	.string "You don’t have three eligible POKéMON.\p"
-	.string "You must have three different POKéMON\n"
-	.string "of Level 50 or less to enter.\p"
-	.string "They also must be holding different\n"
-	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
-	.string "Please come see me when you are ready.$"
-
-BattleFrontier_BattleTowerLobby_Text_24010B: @ 824010B
-	.string "Excuse me!\p"
-	.string "You don’t have three eligible POKéMON.\p"
-	.string "You must have three different POKéMON\n"
-	.string "to enter.\p"
-	.string "They also must be holding different\n"
-	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
-	.string "Please come see me when you are ready.$"
-
-BattleFrontier_BattleTowerLobby_Text_2401DB: @ 82401DB
-	.string "Excuse me!\p"
-	.string "You don’t have four eligible POKéMON.\p"
-	.string "You must have four different POKéMON\n"
-	.string "of Level 50 or less to enter.\p"
-	.string "They also must be holding different\n"
-	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
-	.string "Please come see me when you are ready.$"
-
-BattleFrontier_BattleTowerLobby_Text_2402BD: @ 82402BD
-	.string "Excuse me!\p"
-	.string "You don’t have four eligible POKéMON.\p"
-	.string "You must have four different POKéMON\n"
-	.string "to enter.\p"
-	.string "They also must be holding different\n"
-	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
-	.string "Please come see me when you are ready.$"
-
-BattleFrontier_BattleTowerLobby_Text_24038B: @ 824038B
-	.string "Excuse me!\p"
-	.string "You don’t have two eligible POKéMON.\p"
-	.string "You must have two different POKéMON\n"
-	.string "of Level 50 or less to enter.\p"
-	.string "They also must be holding different\n"
-	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
-	.string "Please come see me when you are ready.$"
-
-BattleFrontier_BattleTowerLobby_Text_24046B: @ 824046B
-	.string "Excuse me!\p"
-	.string "You don’t have two eligible POKéMON.\p"
-	.string "You must have two different POKéMON\n"
-	.string "to enter.\p"
-	.string "They also must be holding different\n"
-	.string "kinds of items.\p"
-	.string "EGGS{STR_VAR_1} ineligible.\p"
-	.string "Please come see me when you are ready.$"
-
-BattleFrontier_BattleTowerLobby_Text_240537: @ 8240537
-	.string "Where the talents of TRAINERS\n"
-	.string "are put to the test!\p"
-	.string "Welcome to the BATTLE TOWER!\p"
-	.string "I am your guide to the SINGLE\n"
-	.string "BATTLE ROOMS.$"
-
-BattleFrontier_BattleTowerLobby_Text_2405B3: @ 82405B3
-	.string "Would you like to take the SINGLE\n"
-	.string "BATTLE ROOM challenge?$"
-
-BattleFrontier_BattleTowerLobby_Text_2405EC: @ 82405EC
-	.string "The BATTLE TOWER’s SINGLE BATTLE\n"
-	.string "ROOMS are facilities for conducting\l"
-	.string "SINGLE BATTLES with three POKéMON.\p"
-	.string "There are many SINGLE BATTLE ROOMS\n"
-	.string "in the BATTLE TOWER for team battles.\p"
-	.string "In each of the SINGLE BATTLE ROOMS,\n"
-	.string "seven TRAINERS await your challenge.\p"
-	.string "If you manage to defeat all seven,\n"
-	.string "you will earn Battle Points.\p"
-	.string "If you want to interrupt your\n"
-	.string "challenge, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
-	.string "you will be disqualified.$"
-
-BattleFrontier_BattleTowerLobby_Text_2407A6: @ 82407A6
-	.string "Now please select the three POKéMON\n"
-	.string "that are to be entered.$"
-
-BattleFrontier_BattleTowerLobby_Text_2407E2: @ 82407E2
-	.string "Where the talents of TRAINERS\n"
-	.string "are put to the test!\p"
-	.string "Welcome to the BATTLE TOWER!\p"
-	.string "I am your guide to the DOUBLE\n"
-	.string "BATTLE ROOMS.$"
-
-BattleFrontier_BattleTowerLobby_Text_24085E: @ 824085E
-	.string "Would you like to take the DOUBLE\n"
-	.string "BATTLE ROOM challenge?$"
-
-BattleFrontier_BattleTowerLobby_Text_240897: @ 8240897
-	.string "The BATTLE TOWER’s DOUBLE BATTLE\n"
-	.string "ROOMS are facilities for conducting\l"
-	.string "DOUBLE BATTLES with four POKéMON.\p"
-	.string "There are many DOUBLE BATTLE ROOMS\n"
-	.string "in the BATTLE TOWER for team battles.\p"
-	.string "In each of the DOUBLE BATTLE ROOMS,\n"
-	.string "seven TRAINERS await your challenge.\p"
-	.string "If you manage to defeat all seven,\n"
-	.string "you will earn Battle Points.\p"
-	.string "If you want to interrupt your\n"
-	.string "challenge, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
-	.string "you will be disqualified.$"
-
-BattleFrontier_BattleTowerLobby_Text_240A50: @ 8240A50
-	.string "Now please select the four POKéMON\n"
-	.string "that are to be entered.$"
-
-BattleFrontier_BattleTowerLobby_Text_240A8B: @ 8240A8B
-	.string "Where the talents of TRAINERS\n"
-	.string "are put to the test!\p"
-	.string "Welcome to the BATTLE TOWER!\p"
-	.string "I am your guide to the MULTI\n"
-	.string "BATTLE ROOMS.$"
-
-BattleFrontier_BattleTowerLobby_Text_240B06: @ 8240B06
-	.string "Would you like to take the MULTI\n"
-	.string "BATTLE ROOM challenge?$"
-
-BattleFrontier_BattleTowerLobby_Text_240B3E: @ 8240B3E
-	.string "The BATTLE TOWER’s MULTI BATTLE\n"
-	.string "ROOMS are facilities for conducting\l"
-	.string "MULTI BATTLES.\p"
-	.string "For MULTI BATTLES, you must partner\n"
-	.string "with a TRAINER in the TOWER and enter\l"
-	.string "with two POKéMON each.\p"
-	.string "Inside the TOWER is a room named\n"
-	.string "the BATTLE SALON where you may meet\l"
-	.string "other TRAINERS.\p"
-	.string "There, you must find a TRAINER to act\n"
-	.string "as your partner in MULTI BATTLES.\p"
-	.string "Once you have partnered up, you will\n"
-	.string "be shown to a MULTI BATTLE ROOM.\p"
-	.string "In the MULTI BATTLE ROOM, seven\n"
-	.string "tag teams await your challenge.\p"
-	.string "If you manage to defeat all seven\n"
-	.string "teams, you will earn Battle Points.\p"
-	.string "If you want to interrupt your\n"
-	.string "challenge, please save the game.\p"
-	.string "If you don’t save before interrupting,\n"
-	.string "you will be disqualified.$"
-
-BattleFrontier_BattleTowerLobby_Text_240DDB: @ 8240DDB
-	.string "Now please select the two POKéMON\n"
-	.string "that are to be entered.$"
-
-BattleFrontier_BattleTowerLobby_Text_240E15: @ 8240E15
-	.string "Where the talents of TRAINERS\n"
-	.string "are put to the test!\p"
-	.string "Welcome to the BATTLE TOWER!\p"
-	.string "I am your guide to the LINK MULTI\n"
-	.string "BATTLE ROOMS.$"
-
-BattleFrontier_BattleTowerLobby_Text_240E95: @ 8240E95
-	.string "Would you like to take the LINK MULTI\n"
-	.string "BATTLE ROOM challenge?$"
-
-BattleFrontier_BattleTowerLobby_Text_240ED2: @ 8240ED2
-	.string "The BATTLE TOWER’s MULTI BATTLE\n"
-	.string "ROOMS are facilities for conducting\l"
-	.string "MULTI BATTLES with a friend.\p"
-	.string "You must link with your friend using\n"
-	.string "Wireless Adapters or a Game Boy\l"
-	.string "Advance Game Link cable.\p"
-	.string "You must partner with your friend and\n"
-	.string "enter two different kinds of POKéMON.\p"
-	.string "There are many MULTI BATTLE ROOMS\n"
-	.string "in the BATTLE TOWER for team battles.\p"
-	.string "In a MULTI BATTLE ROOM, seven\n"
-	.string "tag teams await you and your friend\l"
-	.string "to make a tag-team challenge.\p"
-	.string "If you manage to defeat all seven\n"
-	.string "teams, you will earn Battle Points.\p"
-	.string "Please beware that unlike other ROOMS,\n"
-	.string "you may not interrupt your challenge.\p"
-	.string "Once you start, you must battle seven\n"
-	.string "MULTI BATTLES in a row nonstop.$"
-
-BattleFrontier_BattleTowerLobby_Text_24115E: @ 824115E
-	.string "Now please select the two POKéMON\n"
-	.string "that are to be entered.$"
-
-	.incbin "baserom.gba", 0x241198, 0xa8
-
-BattleFrontier_BattleTowerLobby_Text_241240: @ 8241240
-	.string "The LINK MULTI BATTLE ROOM challenge\n"
-	.string "is only for two linked players.$"
-
-BattleFrontier_BattleTowerLobby_Text_241285: @ 8241285
-	.string "Your friend has also selected\n"
-	.string "the POKéMON {STR_VAR_1}.$"
-
-BattleFrontier_BattleTowerLobby_Text_2412B3: @ 82412B3
-	.string "Your friend has also selected the\n"
-	.string "POKéMON {STR_VAR_1} and {STR_VAR_2}.$"
-
-BattleFrontier_BattleTowerLobby_Text_2412E8: @ 82412E8
-	.string "Your friend has chosen a different\n"
-	.string "battle level.$"
-
-	.incbin "baserom.gba", 0x241319, 0xc5
-
-BattleFrontier_BattleTowerLobby_Text_2413DE: @ 82413DE
-	.string "Please choose two POKéMON different\n"
-	.string "from your friend’s, match the level\l"
-	.string "you wish to enter, and register again.$"
-
-BattleFrontier_BattleTowerLobby_Text_24144D: @ 824144D
-	.string "I will save the game before\n"
-	.string "showing you in. Please wait.$"
-
-BattleFrontier_BattleTowerLobby_Text_241486: @ 8241486
-	.string "Congratulations!\n"
-	.string "You have defeated the SALON MAIDEN\l"
-	.string "and swept seven TRAINERS!$"
-
-BattleFrontier_BattleTowerLobby_Text_2414D4: @ 82414D4
-	.string "In recognition of your infinite talent,\n"
-	.string "we award you these Battle Point(s).$"
-
-BattleFrontier_BattleArenaLobby_Text_241520: @ 8241520
-BattleFrontier_BattleDomeLobby_Text_241520: @ 8241520
-BattleFrontier_BattleFactoryLobby_Text_241520: @ 8241520
-BattleFrontier_BattlePalaceLobby_Text_241520: @ 8241520
-BattleFrontier_BattlePikeLobby_Text_241520: @ 8241520
-BattleFrontier_BattlePyramidLobby_Text_241520: @ 8241520
-BattleFrontier_BattleTowerLobby_Text_241520: @ 8241520
-	.string "{PLAYER} obtained {STR_VAR_1} Battle Point(s).$"
-
-BattleFrontier_BattleTowerLobby_Text_241540: @ 8241540
-	.string "The BATTLE TOWER rules are listed.$"
-
-BattleFrontier_BattleTowerLobby_Text_241563: @ 8241563
-	.string "Which heading do you want to read?$"
-
-BattleFrontier_BattleTowerLobby_Text_241586: @ 8241586
-	.string "The BATTLE TOWER is a facility where\n"
-	.string "four types of battles are waged--\l"
-	.string "SINGLE BATTLE, DOUBLE BATTLE, MULTI\l"
-	.string "BATTLE, and LINK MULTI BATTLE.\p"
-	.string "For each of these types, there are\n"
-	.string "separate BATTLE ROOMS.\p"
-	.string "Please speak with a guide offering\n"
-	.string "the type of battle you wish to enter.$"
-
-BattleFrontier_BattleTowerLobby_Text_241693: @ 8241693
-	.string "Depending on the BATTLE ROOM you are\n"
-	.string "entering, you will be required to take\l"
-	.string "a certain number of POKéMON.\p"
-	.string "The SINGLE BATTLE mode requires\n"
-	.string "three POKéMON.\p"
-	.string "The DOUBLE BATTLE mode requires four,\n"
-	.string "and the MULTI modes both require two.$"
-
-BattleFrontier_BattleTowerLobby_Text_241777: @ 8241777
-	.string "The BATTLE SALON is where you must\n"
-	.string "find a partner to form a tag team for\l"
-	.string "the MULTI BATTLE ROOM challenge.\p"
-	.string "Choose the best partner for you by\n"
-	.string "examining other TRAINERS’\l"
-	.string "POKéMON and their moves.\p"
-	.string "You may choose a new tag partner\n"
-	.string "after winning seven straight matches.$"
-
-BattleFrontier_BattleTowerLobby_Text_24187E: @ 824187E
-	.string "The LINK MULTI BATTLE Mode is for two\n"
-	.string "friends to mount a challenge together.\p"
-	.string "You and your friend must be linked with\n"
-	.string "Wireless Adapters or a GBA Game Link\l"
-	.string "cable.\p"
-	.string "You must choose two POKéMON at\n"
-	.string "the registration counter.\p"
-	.string "These POKéMON must be different\n"
-	.string "from those of your friend.\p"
-	.string "You may not interrupt this challenge\n"
-	.string "in the middle, unlike other modes.$"
-
 	.include "data/maps/scripts/BattleFrontier_BattleTowerElevator.inc"
 	.include "data/maps/scripts/BattleFrontier_BattleTowerCorridor.inc"
 	.include "data/maps/scripts/BattleFrontier_BattleTowerBattleRoom.inc"
-BattleFrontier_BattleTowerBattleRoom2_Text_242217: @ 8242217
-BattleFrontier_BattleTowerBattleRoom_Text_242217: @ 8242217
-	.string "We will restore your POKéMON to\n"
-	.string "full health.$"
-
-	.incbin "baserom.gba", 0x242244, 0x33
-
-BattleFrontier_BattleTowerBattleRoom_Text_242277: @ 8242277
-	.string "You will be facing opponent no. 2.\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_2422A9: @ 82422A9
-	.string "You will be facing opponent no. 3.\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_2422DB: @ 82422DB
-	.string "You will be facing opponent no. 4.\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_24230D: @ 824230D
-	.string "You will be facing opponent no. 5.\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_24233F: @ 824233F
-	.string "You will be facing opponent no. 6.\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_242371: @ 8242371
-	.string "You will be facing opponent no. 7.\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleTowerBattleRoom2_Text_2423A3: @ 82423A3
-BattleFrontier_BattleTowerBattleRoom_Text_2423A3: @ 82423A3
-	.string "Record your battle on your\n"
-	.string "FRONTIER PASS?$"
-
-BattleFrontier_BattleTowerLobby_Text_2423CD: @ 82423CD
-	.string "{PLAYER}’s battle was recorded\n"
-	.string "on the FRONTIER PASS.$"
-
-BattleFrontier_BattleTowerBattleRoom2_Text_2423FC: @ 82423FC
-BattleFrontier_BattleTowerBattleRoom_Text_2423FC: @ 82423FC
-	.string "Would you like to save and\n"
-	.string "quit the game?$"
-
-BattleFrontier_BattleTowerBattleRoom2_Text_242426: @ 8242426
-BattleFrontier_BattleTowerBattleRoom_Text_242426: @ 8242426
-	.string "Saving your battle data.\n"
-	.string "Please wait.$"
-
-BattleFrontier_BattleTowerBattleRoom2_Text_24244C: @ 824244C
-BattleFrontier_BattleTowerBattleRoom_Text_24244C: @ 824244C
-	.string "Would you like to cancel your BATTLE\n"
-	.string "ROOM challenge?$"
-
-gText_BattleRecordCouldntBeSaved:: @ 8242481
-
-gText_BattleRecordCouldntBeSaved: @ 8242481
-	.string "There was an error of some sort.\n"
-	.string "Your record could not be saved.$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_2424C2: @ 82424C2
-	.string "Excuse me, but…\p"
-	.string "Our leader, the SALON MAIDEN, is on\n"
-	.string "her way here in hopes of battling you.\p"
-	.string "She should be arriving very shortly.$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_242542: @ 8242542
-	.string "You will be facing the SALON MAIDEN.\n"
-	.string "Are you prepared?$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_242579: @ 8242579
-	.string "Greetings…\n"
-	.string "My name is ANABEL.\p"
-	.string "I am the SALON MAIDEN, and I am in\n"
-	.string "charge of running the BATTLE TOWER…\p"
-	.string "I have heard several rumors\n"
-	.string "about you…\p"
-	.string "In all honesty, what I have heard does\n"
-	.string "not seem attractive in any way…\p"
-	.string "The reason I’ve come to see you…\n"
-	.string "Well, there is but one reason…$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_24268C: @ 824268C
-	.string "Let me see your talent in\n"
-	.string "its entirety…$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_2426B4: @ 82426B4
-	.string "ANABEL: Fufufu, nicely done…\p"
-	.string "Your FRONTIER PASS, please…\n"
-	.string "Your talent shall be recognized.$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_24270E: @ 824270E
-	.string "The Ability Symbol was embossed on\n"
-	.string "the FRONTIER PASS!$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_242744: @ 8242744
-	.string "… … … … … …\p"
-	.string "You have confidence in your POKéMON\n"
-	.string "battling talent, don’t you?\p"
-	.string "I urge you to keep battling and\n"
-	.string "keep on winning.\p"
-	.string "I will be waiting for you.\n"
-	.string "Until the next time we meet…$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_2427F9: @ 82427F9
-	.string "ANABEL: You really did come back to\n"
-	.string "see me…\p"
-	.string "… … … … … …\p"
-	.string "You’ve won straight matches to see me…\n"
-	.string "I won’t have to hold back against you…\p"
-	.string "It’s been too long now…\p"
-	.string "Too long since I’ve been able to battle\n"
-	.string "without thinking about anything…$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_2428E0: @ 82428E0
-	.string "Let’s begin, shall we?$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_2428F7: @ 82428F7
-	.string "ANABEL: Fufu, congratulations…\n"
-	.string "Your FRONTIER PASS, please…$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_242932: @ 8242932
-	.string "The Ability Symbol took on\n"
-	.string "a golden shine!$"
-
-BattleFrontier_BattleTowerBattleRoom_Text_24295D: @ 824295D
-	.string "That was fun…\p"
-	.string "I have never had a POKéMON battle\n"
-	.string "so enjoyable before…\p"
-	.string "I wish I could battle with you again…$"
-
 	.include "data/maps/scripts/SouthernIsland_Exterior.inc"
-BattleFrontier_OutsideWest_Movement_242A37: @ 8242A37
-	step_down
-	step_end
-
-BattleFrontier_OutsideWest_Movement_242A39: @ 8242A39
-	step_left
-	step_25
-	step_end
-
-SouthernIsland_Exterior_EventScript_242A3C:: @ 8242A3C
-	msgbox SouthernIsland_Exterior_Text_2A6AD5, 3
-	end
-
 	.include "data/maps/scripts/SouthernIsland_Interior.inc"
 	.include "data/maps/scripts/SafariZone_RestHouse.inc"
 	.include "data/maps/scripts/SafariZone_Northeast.inc"
@@ -5336,7 +4654,13 @@ BattleFrontier_OutsideWest_Text_24AB06: @ 824AB06
 	.string "The BATTLE FRONTIER…\n"
 	.string "I’ve long dreamed about a place like it.$"
 
-	.incbin "baserom.gba", 0x24ab44, 0x50
+BattleFrontier_OutsideWest_Text_24AB44: @ 824AB44
+	.string "The BATTLE DOME\n"
+	.string "Become the Unbeatable Superstar!$"
+
+BattleFrontier_OutsideWest_Text_24AB75: @ 824AB75
+	.string "The ??????\n"
+	.string "Under Construction!$"
 
 BattleFrontier_BattleDomeLobby_Text_24AB94: @ 824AB94
 	.string "When a TRAINER chains tournament\n"
@@ -6376,532 +5700,14 @@ gUnknown_08252CFB:: @ 8252CFB
 
 	.include "data/maps/scripts/BattleFrontier_BattlePyramidTop.inc"
 	.include "data/maps/scripts/BattleFrontier_BattleArenaLobby.inc"
-FallarborTown_BattleTentLobby_Text_256DB8: @ 8256DB8
-	.string "The Set KO Tourney’s rules are listed.$"
-
-BattleFrontier_BattleArenaLobby_Text_256DDF: @ 8256DDF
-FallarborTown_BattleTentLobby_Text_256DDF: @ 8256DDF
-	.string "Which heading do you want to read?$"
-
-BattleFrontier_BattleArenaLobby_Text_256E02: @ 8256E02
-FallarborTown_BattleTentLobby_Text_256E02: @ 8256E02
-	.string "The Set KO Tourney has special rules,\n"
-	.string "unlike standard battles.\p"
-	.string "First, one battle lasts only\n"
-	.string "three turns.\p"
-	.string "If the outcome is not decided after\n"
-	.string "three turns, it goes to judging.\p"
-	.string "The REFEREE will choose the winner\n"
-	.string "based on how the POKéMON battled.\p"
-	.string "Also, a POKéMON cannot be switched out\n"
-	.string "until its battle’s outcome is decided.$"
-
-BattleFrontier_BattleArenaLobby_Text_256F43: @ 8256F43
-FallarborTown_BattleTentLobby_Text_256F43: @ 8256F43
-	.string "The first judging factor is “Mind.”\n"
-	.string "This factor evaluates how aggressive\l"
-	.string "the battlers were.\p"
-	.string "The judging is based on how often\n"
-	.string "the TRAINERS ordered the use of\l"
-	.string "offensive moves.$"
-
-BattleFrontier_BattleArenaLobby_Text_256FF2: @ 8256FF2
-FallarborTown_BattleTentLobby_Text_256FF2: @ 8256FF2
-	.string "The second judging factor is “Skill.”\n"
-	.string "This factor evaluates how effectively\l"
-	.string "POKéMON moves were used.\p"
-	.string "If a move worked successfully,\n"
-	.string "the Skill rating goes up.\p"
-	.string "If a move failed, the Skill rating\n"
-	.string "is lowered.\p"
-	.string "If it was an offensive move, the Skill\n"
-	.string "rating goes up if the move was “super\l"
-	.string "effective” and goes down if it was\l"
-	.string "“not very effective.”\p"
-	.string "The Skill rating will not go up for\n"
-	.string "moves such as PROTECT and DETECT.\p"
-	.string "If the opponent used PROTECT or\n"
-	.string "DETECT, and your POKéMON failed to\l"
-	.string "hit with a move, its Skill rating will not\l"
-	.string "go down.$"
-
-BattleFrontier_BattleArenaLobby_Text_257202: @ 8257202
-FallarborTown_BattleTentLobby_Text_257202: @ 8257202
-	.string "The third judging factor is “Body.”\n"
-	.string "This factor is based on how much HP\l"
-	.string "remained at the end of a battle.\p"
-	.string "The rating takes into account how much\n"
-	.string "HP a POKéMON had at the start of\l"
-	.string "battle, and what remained at the end.$"
-
-BattleFrontier_BattleArenaLobby_Text_2572D9: @ 82572D9
-	.string "A victory snatched from the ARENA\n"
-	.string "TYCOON, and a seven-TRAINER sweep!\p"
-	.string "We congratulate you on your most\n"
-	.string "splendid challenge!$"
-
-BattleFrontier_BattleArenaLobby_Text_257353: @ 8257353
-	.string "My dear challenger, in recognition of\n"
-	.string "your indefatigable spirit, please\l"
-	.string "accept these Battle Point(s).$"
-
 	.include "data/maps/scripts/BattleFrontier_BattleArenaCorridor.inc"
 	.include "data/maps/scripts/BattleFrontier_BattleArenaBattleRoom.inc"
-FallarborTown_BattleTentBattleRoom_Text_257C93: @ 8257C93
-	.string "REFEREE: Set KO Tourney!\n"
-	.string "Begin!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257CB3: @ 8257CB3
-FallarborTown_BattleTentBattleRoom_Text_257CB3: @ 8257CB3
-	.string "REFEREE: The winner is {PLAYER}!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257CCE: @ 8257CCE
-FallarborTown_BattleTentBattleRoom_Text_257CCE: @ 8257CCE
-	.string "REFEREE: The winner is {STR_VAR_1}!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257CE9: @ 8257CE9
-FallarborTown_BattleTentBattleRoom_Text_257CE9: @ 8257CE9
-	.string "Your POKéMON will be restored to\n"
-	.string "full health.$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257D17: @ 8257D17
-FallarborTown_BattleTentBattleRoom_Text_257D17: @ 8257D17
-	.string "Next up, your second opponent!\n"
-	.string "Are you ready to move on?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257D50: @ 8257D50
-FallarborTown_BattleTentBattleRoom_Text_257D50: @ 8257D50
-	.string "Next up, your third opponent!\n"
-	.string "Are you ready to move on?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257D88: @ 8257D88
-	.string "Next up, your fourth opponent!\n"
-	.string "Are you ready to move on?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257DC1: @ 8257DC1
-	.string "Next up, your fifth opponent!\n"
-	.string "Are you ready to move on?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257DF9: @ 8257DF9
-	.string "Next up, your sixth opponent!\n"
-	.string "Are you ready to move on?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257E31: @ 8257E31
-	.string "Next up, your seventh opponent!\n"
-	.string "Are you ready to move on?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257E6B: @ 8257E6B
-FallarborTown_BattleTentBattleRoom_Text_257E6B: @ 8257E6B
-	.string "Would you like to save the game and\n"
-	.string "shut down now?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257E9E: @ 8257E9E
-FallarborTown_BattleTentBattleRoom_Text_257E9E: @ 8257E9E
-	.string "Would you like to retire from your\n"
-	.string "Set KO Tourney challenge?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257EDB: @ 8257EDB
-FallarborTown_BattleTentBattleRoom_Text_257EDB: @ 8257EDB
-	.string "I am saving your game data.\n"
-	.string "Please wait.$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257F04: @ 8257F04
-	.string "Would you like to record your last\n"
-	.string "battle on your FRONTIER PASS?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257F45: @ 8257F45
-	.string "My dear challenger!\p"
-	.string "Your skill level is truly astounding!\p"
-	.string "We now would like you to face our\n"
-	.string "leader, the ARENA TYCOON!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257FBB: @ 8257FBB
-	.string "A battle with the ARENA TYCOON!\n"
-	.string "Are you prepared?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_257FED: @ 8257FED
-	.string "REFEREE: The ARENA TYCOON!\n"
-	.string "Make way for GRETA!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_25801C: @ 825801C
-	.string "GRETA: Hey!\n"
-	.string "Howdy!\p"
-	.string "…Wait, are you the challenger?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_25804E: @ 825804E
-	.string "Is that right? Hmm…\n"
-	.string "Hmhm…$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_258068: @ 8258068
-	.string "I don’t know how to say it, but…\n"
-	.string "To put it bluntly, you look pretty weak.\l"
-	.string "Are you sure you’re up for me?\p"
-	.string "Hmm…\p"
-	.string "Well, all right!\n"
-	.string "We’ll take things easy to start with!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_25810D: @ 825810D
-	.string "Okay! Let’s see you ignite my passion\n"
-	.string "for battle!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_25813F: @ 825813F
-	.string "GRETA: Ow, wait a second!\n"
-	.string "You are tough after all!\p"
-	.string "I like you!\n"
-	.string "Let’s see your FRONTIER PASS.$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_25819C: @ 825819C
-	.string "The Guts Symbol was embossed on\n"
-	.string "the FRONTIER PASS!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_2581CF: @ 82581CF
-	.string "Hmm…\p"
-	.string "It’s going to be fun the next time!\n"
-	.string "I’m looking forward to it!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_258213: @ 8258213
-	.string "GRETA: Hey! Howdy!\n"
-	.string "You finally won your way up to me!\p"
-	.string "I was getting worried waiting for you!\n"
-	.string "I was really looking forward to seeing\l"
-	.string "you again!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_2582A2: @ 82582A2
-	.string "… … …\n"
-	.string "So, are you ready?$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_2582BB: @ 82582BB
-	.string "I won’t allow a halfhearted effort!\n"
-	.string "Be ready for a thrashing!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_2582F9: @ 82582F9
-	.string "Come on, REFEREE!\n"
-	.string "Let’s get this started!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_258323: @ 8258323
-	.string "GRETA: Gaaah! Blown away!\n"
-	.string "Let’s see your FRONTIER PASS!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_25835B: @ 825835B
-	.string "The Guts Symbol took on\n"
-	.string "a golden shine!$"
-
-BattleFrontier_BattleArenaBattleRoom_Text_258383: @ 8258383
-	.string "Arrrgh!\n"
-	.string "This is so infuriating!\p"
-	.string "If we ever battle again, I won’t lose!\n"
-	.string "Don’t you forget it! Bye-bye!$"
-
 	.include "data/maps/scripts/BattleFrontier_BattleFactoryLobby.inc"
-SlateportCity_BattleTentLobby_Text_259721: @ 8259721
-	.string "The Battle Swap rules are listed.$"
-
-BattleFrontier_BattleFactoryLobby_Text_259743: @ 8259743
-SlateportCity_BattleTentLobby_Text_259743: @ 8259743
-	.string "Which heading do you want to read?$"
-
-BattleFrontier_BattleFactoryLobby_Text_259766: @ 8259766
-	.string "In a Battle Swap event, you may use\n"
-	.string "only three POKéMON.\p"
-	.string "Whether you are renting or swapping,\n"
-	.string "your team may not have two or more\l"
-	.string "of the same POKéMON.$"
-
-BattleFrontier_BattleFactoryLobby_Text_2597FB: @ 82597FB
-	.string "You may swap POKéMON only with\n"
-	.string "the TRAINER you have just defeated.\p"
-	.string "You may swap for only those POKéMON\n"
-	.string "used by the beaten TRAINER.$"
-
-BattleFrontier_BattleFactoryLobby_Text_25987E: @ 825987E
-	.string "After every battle you win, you may\n"
-	.string "swap for one of your defeated\l"
-	.string "opponent’s POKéMON.\p"
-	.string "You will not be able to swap POKéMON\n"
-	.string "with the seventh TRAINER in the event.$"
-
-BattleFrontier_BattleFactoryLobby_Text_259920: @ 8259920
-	.string "There are two key points to be aware\n"
-	.string "of when swapping POKéMON.\p"
-	.string "First, when swapping, you can’t check\n"
-	.string "the stats of the POKéMON you are\l"
-	.string "about to receive.\p"
-	.string "Second, the POKéMON on your team\n"
-	.string "are lined up in sequence, depending on\l"
-	.string "the order in which you rented them.\p"
-	.string "This sequence remains unchanged\n"
-	.string "even when swaps are made.$"
-
-BattleFrontier_BattleFactoryLobby_Text_259A5E: @ 8259A5E
-	.string "In the Open Level, the rental POKéMON\n"
-	.string "and the opposing TRAINERS’ POKéMON\l"
-	.string "are all Level 100.$"
-
 	.include "data/maps/scripts/BattleFrontier_BattleFactoryPreBattleRoom.inc"
-SlateportCity_BattleTentCorridor_Text_25A1C8: @ 825A1C8
-	.string "First, we will hold your POKéMON for\n"
-	.string "safekeeping.\p"
-	.string "You may then choose from our\n"
-	.string "selection of POKéMON.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A22D: @ 825A22D
-SlateportCity_BattleTentCorridor_Text_25A22D: @ 825A22D
-	.string "Thank you for competing!\n"
-	.string "Let us restore your POKéMON!$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A263: @ 825A263
-SlateportCity_BattleTentCorridor_Text_25A263: @ 825A263
-	.string "The 2nd match is next!\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A289: @ 825A289
-SlateportCity_BattleTentCorridor_Text_25A289: @ 825A289
-	.string "The 3rd match is next!\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A2AF: @ 825A2AF
-	.string "The 4th match is next!\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A2D5: @ 825A2D5
-	.string "The 5th match is next!\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A2FB: @ 825A2FB
-	.string "The 6th match is next!\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A321: @ 825A321
-	.string "Finally, the 7th match is next!\n"
-	.string "Are you ready?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A350: @ 825A350
-SlateportCity_BattleTentCorridor_Text_25A350: @ 825A350
-	.string "Would you like to save and quit\n"
-	.string "the game?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A37A: @ 825A37A
-SlateportCity_BattleTentCorridor_Text_25A37A: @ 825A37A
-	.string "Would you like to retire from your\n"
-	.string "Battle Swap challenge?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3B4: @ 825A3B4
-	.string "I’ve conducted a little investigation\n"
-	.string "about your upcoming opponent.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3F8: @ 825A3F8
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the NORMAL type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A43E: @ 825A43E
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the FIRE type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A482: @ 825A482
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the WATER type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A4C7: @ 825A4C7
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the ELECTRIC type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A50F: @ 825A50F
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the GRASS type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A554: @ 825A554
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the ICE type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A597: @ 825A597
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the FIGHTING type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A5DF: @ 825A5DF
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the POISON type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A625: @ 825A625
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the GROUND type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A66B: @ 825A66B
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the FLYING type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A6B1: @ 825A6B1
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the PSYCHIC type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A6F8: @ 825A6F8
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the BUG type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A73B: @ 825A73B
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the ROCK type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A77F: @ 825A77F
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the GHOST type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A7C4: @ 825A7C4
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the DRAGON type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A80A: @ 825A80A
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the DARK type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A84E: @ 825A84E
-	.string "The TRAINER is apparently skilled\n"
-	.string "in the handling of the STEEL type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A893: @ 825A893
-	.string "The TRAINER appears to have no clear\n"
-	.string "favorites when it comes to type.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A8D9: @ 825A8D9
-	.string "The favorite battle style appears to\n"
-	.string "be slow and steady.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A912: @ 825A912
-	.string "The favorite battle style appears to\n"
-	.string "be one of endurance.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A94C: @ 825A94C
-	.string "The favorite battle style appears to\n"
-	.string "be high risk, high return.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A98C: @ 825A98C
-	.string "The favorite battle style appears to\n"
-	.string "depend on the battle’s flow.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25A9CE: @ 825A9CE
-	.string "The favorite battle style appears to\n"
-	.string "be one based on total preparation.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AA16: @ 825AA16
-	.string "The favorite battle style appears\n"
-	.string "to be weakening the foe to start.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AA5A: @ 825AA5A
-	.string "The favorite battle style appears to\n"
-	.string "be flexibly adaptable to the situation.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AAA7: @ 825AAA7
-	.string "The favorite battle style appears to\n"
-	.string "be impossible to predict.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AAE6: @ 825AAE6
-	.string "The favorite battle style appears to\n"
-	.string "be free-spirited and unrestrained.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB2E: @ 825AB2E
-SlateportCity_BattleTentCorridor_Text_25AB2E: @ 825AB2E
-	.string "Before starting the battle, would you\n"
-	.string "like to swap a POKéMON?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB6C: @ 825AB6C
-SlateportCity_BattleTentCorridor_Text_25AB6C: @ 825AB6C
-	.string "Thank you!\n"
-	.string "Your POKéMON swap is complete.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB96: @ 825AB96
-SlateportCity_BattleTentCorridor_Text_25AB96: @ 825AB96
-	.string "Right this way, please!$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25ABAE: @ 825ABAE
-SlateportCity_BattleTentCorridor_Text_25ABAE: @ 825ABAE
-	.string "I am saving your data.\n"
-	.string "Please wait.$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25ABD2: @ 825ABD2
-	.string "Would you like to record your latest\n"
-	.string "battle on your FRONTIER PASS?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC15: @ 825AC15
-	.string "Excuse me! Excuse me, please!\n"
-	.string "May I get you to wait a few moments?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC58: @ 825AC58
-	.string "…Uh-huh? What?! …Whoa!\n"
-	.string "Understood, sir! Will do!$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AC89: @ 825AC89
-	.string "Oh, my…\n"
-	.string "Sorry to keep you waiting!\p"
-	.string "I have a message from this facility’s\n"
-	.string "boss, the FACTORY HEAD.\p"
-	.string "He says, “We’re going to do it!\n"
-	.string "Come here right now!”$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AD20: @ 825AD20
-	.string "The FACTORY HEAD is demanding you.\n"
-	.string "Are you prepared to face him?$"
-
-BattleFrontier_BattleFactoryPreBattleRoom_Text_25AD61: @ 825AD61
-	.string "I’m terribly sorry, but I can’t tell you\n"
-	.string "anything about the FACTORY HEAD.$"
-
 	.include "data/maps/scripts/BattleFrontier_BattleFactoryBattleRoom.inc"
 	.include "data/maps/scripts/BattleFrontier_BattlePikeLobby.inc"
 	.include "data/maps/scripts/BattleFrontier_BattlePikeCorridor.inc"
 	.include "data/maps/scripts/BattleFrontier_BattlePikeThreePathRoom.inc"
-BattleFrontier_BattlePikeRandomRoom1_Text_25CE36: @ 825CE36
-BattleFrontier_BattlePikeRandomRoom3_Text_25CE36: @ 825CE36
-BattleFrontier_BattlePikeThreePathRoom_Text_25CE36: @ 825CE36
-	.string "The path is blocked!\n"
-	.string "And there is no turning back…$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25CE69: @ 825CE69
-	.string "I beg your pardon, but…\p"
-	.string "Are you perhaps finding it difficult\n"
-	.string "to choose your path?$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25CEBB: @ 825CEBB
-	.string "I see…\n"
-	.string "I apologize for my impertinence…$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25CEE3: @ 825CEE3
-	.string "Ah, let me see… There is something\n"
-	.string "about the path on the right…$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25CF23: @ 825CF23
-	.string "Ah, let me see… There is something\n"
-	.string "about the path in the center…$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25CF64: @ 825CF64
-	.string "Ah, let me see… There is something\n"
-	.string "about the path on the left…$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25CFA3: @ 825CFA3
-	.string "It seems to have the distinct aroma\n"
-	.string "of POKéMON wafting around it…$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25CFE5: @ 825CFE5
-	.string "Is it… A TRAINER?\n"
-	.string "I sense the presence of people…$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25D017: @ 825D017
-	.string "I seem to have heard something…\n"
-	.string "It may have been whispering…$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25D054: @ 825D054
-	.string "For some odd reason, I felt a wave\n"
-	.string "of nostalgia coming from it…$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25D094: @ 825D094
-	.string "I am sorry to say…\p"
-	.string "A terrifying event, yes, a horrible one,\n"
-	.string "is about to befall you…\p"
-	.string "I urge you to pay the utmost care\n"
-	.string "and prepare for the worst…$"
-
-BattleFrontier_BattlePikeThreePathRoom_Text_25D125: @ 825D125
-	.string "From every path I sense a dreadful\n"
-	.string "presence…$"
-
 	.include "data/maps/scripts/BattleFrontier_BattlePikeRandomRoom1.inc"
 	.include "data/maps/scripts/BattleFrontier_BattlePikeRandomRoom2.inc"
 	.include "data/maps/scripts/BattleFrontier_BattlePikeRandomRoom3.inc"
@@ -11298,7 +10104,69 @@ gUnknown_082766A2:: @ 82766A2
 
 gUnknown_082766A6:: @ 82766A6
 
-	.incbin "baserom.gba", 0x2766a6, 0x429
+
+	.incbin "baserom.gba", 0x2766a6, 0x4
+
+Text_2766AA: @ 82766AA
+	.string "All decorations and furniture in your\n"
+	.string "SECRET BASE will be returned to your PC.\p"
+	.string "Is that okay?$"
+
+
+Text_276707: @ 8276707
+	.string "Do you want to register\n"
+	.string "{STR_VAR_1}’s SECRET BASE?$"
+
+Text_276731: @ 8276731
+	.string "This data is already registered.\n"
+	.string "Would you like to delete it?$"
+
+Text_27676F: @ 827676F
+	.string "Up to 10 locations can be registered.\p"
+	.string "Delete a location if you want to\n"
+	.string "register another location.$"
+
+Text_2767D1: @ 82767D1
+	.string "Registration completed.$"
+
+Text_2767E9: @ 82767E9
+	.string "Data has been unregistered.$"
+
+Text_276805: @ 8276805
+	.string "{PLAYER} booted up the PC.$"
+
+Text_27681A: @ 827681A
+	.string "What would you like to do?$"
+
+
+Text_276835: @ 8276835
+	.string "Once registered, a SECRET BASE will not\n"
+	.string "disappear unless the other TRAINER\l"
+	.string "moves it to a different location.\p"
+	.string "If a SECRET BASE is deleted from the\n"
+	.string "registered list, another one may take\l"
+	.string "its place.\p"
+	.string "Up to ten SECRET BASE locations\n"
+	.string "may be registered.$"
+
+
+Text_27692B: @ 827692B
+	.string "A shield of {STR_VAR_2} that marks winning\n"
+	.string "{STR_VAR_1} times in a row at the BATTLE TOWER.$"
+
+Text_276974: @ 8276974
+	.string "A realistic toy TV. It could be easily\n"
+	.string "mistaken for the real thing.$"
+
+Text_2769B8: @ 82769B8
+	.string "A toy TV shaped like a SEEDOT.\n"
+	.string "It looks ready to roll away on its own…$"
+
+Text_2769FF: @ 82769FF
+	.string "A toy TV shaped like a SKITTY.\n"
+	.string "It looks ready to stroll away…$"
+
+	.incbin "baserom.gba", 0x276a3d, 0x92
 
 BattleFrontier_PokemonCenter_2F_MapScript1_276ACF: @ 8276ACF
 DewfordTown_PokemonCenter_2F_MapScript1_276ACF: @ 8276ACF

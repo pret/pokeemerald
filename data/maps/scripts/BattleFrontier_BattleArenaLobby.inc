@@ -507,7 +507,19 @@ BattleFrontier_BattleArenaLobby_Text_256931: @ 8256931
 	.string "Your achievement will be recorded.\n"
 	.string "Please wait while I save the game.$"
 
-	.incbin "baserom.gba", 0x256977, 0xb5
+BattleFrontier_BattleArenaLobby_Text_256977: @ 8256977
+	.string "In commemoration of your 7-win streak,\n"
+	.string "we present you with this prize.$"
+
+BattleFrontier_BattleArenaLobby_Text_2569BE: @ 82569BE
+	.string "{PLAYER} received the prize\n"
+	.string "{STR_VAR_1}.$"
+
+BattleFrontier_BattleArenaLobby_Text_2569D8: @ 82569D8
+	.string "Oh?\n"
+	.string "Your BAG seems to be full.\p"
+	.string "I urge you to clear space and\n"
+	.string "return for your prize.$"
 
 BattleFrontier_BattleArenaLobby_Text_256A2C: @ 8256A2C
 	.string "Thank you so much for participating!\p"
@@ -556,3 +568,71 @@ BattleFrontier_BattleArenaLobby_Text_256C9A: @ 8256C9A
 	.string "making an effective team.$"
 
 BattleFrontier_BattleArenaLobby_Text_256DB8: @ 8256DB8
+FallarborTown_BattleTentLobby_Text_256DB8: @ 8256DB8
+	.string "The Set KO Tourney’s rules are listed.$"
+
+BattleFrontier_BattleArenaLobby_Text_256DDF: @ 8256DDF
+FallarborTown_BattleTentLobby_Text_256DDF: @ 8256DDF
+	.string "Which heading do you want to read?$"
+
+BattleFrontier_BattleArenaLobby_Text_256E02: @ 8256E02
+FallarborTown_BattleTentLobby_Text_256E02: @ 8256E02
+	.string "The Set KO Tourney has special rules,\n"
+	.string "unlike standard battles.\p"
+	.string "First, one battle lasts only\n"
+	.string "three turns.\p"
+	.string "If the outcome is not decided after\n"
+	.string "three turns, it goes to judging.\p"
+	.string "The REFEREE will choose the winner\n"
+	.string "based on how the POKéMON battled.\p"
+	.string "Also, a POKéMON cannot be switched out\n"
+	.string "until its battle’s outcome is decided.$"
+
+BattleFrontier_BattleArenaLobby_Text_256F43: @ 8256F43
+FallarborTown_BattleTentLobby_Text_256F43: @ 8256F43
+	.string "The first judging factor is “Mind.”\n"
+	.string "This factor evaluates how aggressive\l"
+	.string "the battlers were.\p"
+	.string "The judging is based on how often\n"
+	.string "the TRAINERS ordered the use of\l"
+	.string "offensive moves.$"
+
+BattleFrontier_BattleArenaLobby_Text_256FF2: @ 8256FF2
+FallarborTown_BattleTentLobby_Text_256FF2: @ 8256FF2
+	.string "The second judging factor is “Skill.”\n"
+	.string "This factor evaluates how effectively\l"
+	.string "POKéMON moves were used.\p"
+	.string "If a move worked successfully,\n"
+	.string "the Skill rating goes up.\p"
+	.string "If a move failed, the Skill rating\n"
+	.string "is lowered.\p"
+	.string "If it was an offensive move, the Skill\n"
+	.string "rating goes up if the move was “super\l"
+	.string "effective” and goes down if it was\l"
+	.string "“not very effective.”\p"
+	.string "The Skill rating will not go up for\n"
+	.string "moves such as PROTECT and DETECT.\p"
+	.string "If the opponent used PROTECT or\n"
+	.string "DETECT, and your POKéMON failed to\l"
+	.string "hit with a move, its Skill rating will not\l"
+	.string "go down.$"
+
+BattleFrontier_BattleArenaLobby_Text_257202: @ 8257202
+FallarborTown_BattleTentLobby_Text_257202: @ 8257202
+	.string "The third judging factor is “Body.”\n"
+	.string "This factor is based on how much HP\l"
+	.string "remained at the end of a battle.\p"
+	.string "The rating takes into account how much\n"
+	.string "HP a POKéMON had at the start of\l"
+	.string "battle, and what remained at the end.$"
+
+BattleFrontier_BattleArenaLobby_Text_2572D9: @ 82572D9
+	.string "A victory snatched from the ARENA\n"
+	.string "TYCOON, and a seven-TRAINER sweep!\p"
+	.string "We congratulate you on your most\n"
+	.string "splendid challenge!$"
+
+BattleFrontier_BattleArenaLobby_Text_257353: @ 8257353
+	.string "My dear challenger, in recognition of\n"
+	.string "your indefatigable spirit, please\l"
+	.string "accept these Battle Point(s).$"

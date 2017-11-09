@@ -423,7 +423,15 @@ BattleFrontier_BattlePikeLobby_Text_25C1DF: @ 825C1DF
 	.string "I shall record your results.\n"
 	.string "Please wait…$"
 
-	.incbin "baserom.gba", 0x25c209, 0xd7
+BattleFrontier_BattlePikeLobby_Text_25C209: @ 825C209
+	.string "To commemorate your completion of\n"
+	.string "the Battle Choice challenge, we award\l"
+	.string "you these Battle Point(s)…$"
+
+BattleFrontier_BattlePikeLobby_Text_25C26C: @ 825C26C
+	.string "You appear to have reached the limit\n"
+	.string "for Battle Points…\pPlease exchange some Battle Points\n"
+	.string "for prizes, then return…$"
 
 BattleFrontier_BattlePikeLobby_Text_25C2E0: @ 825C2E0
 	.string "I beg your pardon, but…\p"
@@ -458,7 +466,12 @@ BattleFrontier_BattlePikeLobby_Text_25C4FD: @ 825C4FD
 	.string "abilities of POKéMON will be useful\l"
 	.string "here?$"
 
-	.incbin "baserom.gba", 0x25c558, 0xa3
+BattleFrontier_BattlePikeLobby_Text_25C558: @ 825C558
+	.string "What is this weird place?\n"
+	.string "I can’t figure it out at all!\p"
+	.string "I’ve taken the challenge a bunch\n"
+	.string "of times, but all I ever do is run into\l"
+	.string "TRAINERS whichever path I choose.$"
 
 BattleFrontier_BattlePikeLobby_Text_25C5FB: @ 825C5FB
 	.string "The Battle Choice’s rules are listed.$"

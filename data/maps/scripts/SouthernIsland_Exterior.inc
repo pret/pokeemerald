@@ -40,3 +40,16 @@ BattleFrontier_OutsideWest_EventScript_242A2C:: @ 8242A2C
 	waitmovement 0
 	return
 
+BattleFrontier_OutsideWest_Movement_242A37: @ 8242A37
+	step_down
+	step_end
+
+BattleFrontier_OutsideWest_Movement_242A39: @ 8242A39
+	step_left
+	step_25
+	step_end
+
+SouthernIsland_Exterior_EventScript_242A3C:: @ 8242A3C
+	msgbox SouthernIsland_Exterior_Text_2A6AD5, 3
+	end
+

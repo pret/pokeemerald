@@ -3,7 +3,14 @@ BattleFrontier_BattlePyramidLobby_MapScripts:: @ 8250716
 	map_script 4, BattleFrontier_BattlePyramidLobby_MapScript2_2497FB
 	.byte 0
 
-	.incbin "baserom.gba", 0x250721, 0x14
+BattleFrontier_BattlePyramidLobby_MapScript2_250721: @ 8250721
+	map_script_2 VAR_0x4001, 0, BattleFrontier_BattlePyramidLobby_EventScript_25072B
+	.2byte 0
+
+BattleFrontier_BattlePyramidLobby_EventScript_25072B: @ 825072B
+	setvar VAR_0x4001, 1
+	turnobject 255, 2
+	end
 
 BattleFrontier_BattlePyramidLobby_MapScript2_250735: @ 8250735
 	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePyramidLobby_EventScript_25075F
@@ -724,7 +731,9 @@ BattleFrontier_BattlePyramidLobby_Text_25197E: @ 825197E
 	.string "Please pick the items you’ll keep in the\n"
 	.string "BATTLE BAG, and with your POKéMON.$"
 
-	.incbin "baserom.gba", 0x2519ca, 0x2e
+BattleFrontier_BattlePyramidLobby_Text_2519CA: @ 82519CA
+	.string "{PLAYER} returned everything that\n"
+	.string "the POKéMON held.$"
 
 BattleFrontier_BattlePyramidLobby_Text_2519F8: @ 82519F8
 	.string "The BATTLE BAG you used will be kept\n"
@@ -736,7 +745,19 @@ BattleFrontier_BattlePyramidLobby_Text_251A77: @ 8251A77
 	.string "I must record your results.\n"
 	.string "Please wait.$"
 
-	.incbin "baserom.gba", 0x251aa0, 0xba
+BattleFrontier_BattlePyramidLobby_Text_251AA0: @ 8251AA0
+	.string "As a memento for conquering\n"
+	.string "the BATTLE PYRAMID, please take this.$"
+
+BattleFrontier_BattlePyramidLobby_Text_251AE2: @ 8251AE2
+	.string "{PLAYER} received the prize\n"
+	.string "{STR_VAR_1}.$"
+
+BattleFrontier_BattlePyramidLobby_Text_251AFC: @ 8251AFC
+	.string "…Ah…\n"
+	.string "Your BAG appears to be filled.\p"
+	.string "Please return after you’ve organized\n"
+	.string "your BAG’s contents.$"
 
 BattleFrontier_BattlePyramidLobby_Text_251B5A: @ 8251B5A
 	.string "How disappointing for you…\p"
@@ -748,7 +769,11 @@ BattleFrontier_BattlePyramidLobby_Text_251BB6: @ 8251BB6
 	.string "We look forward to your\n"
 	.string "next challenge!$"
 
-	.incbin "baserom.gba", 0x251bde, 0x5d
+BattleFrontier_BattlePyramidLobby_Text_251BDE: @ 8251BDE
+	.string "We have been looking forward to\n"
+	.string "your arrival!\p"
+	.string "Here is your prize for conquering\n"
+	.string "the PYRAMID.$"
 
 BattleFrontier_BattlePyramidLobby_Text_251C3B: @ 8251C3B
 	.string "Welcome…\p"

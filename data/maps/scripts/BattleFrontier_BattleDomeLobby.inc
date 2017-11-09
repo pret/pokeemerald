@@ -486,7 +486,15 @@ BattleFrontier_OutsideWest_EventScript_249E19:: @ 8249E19
 	msgbox BattleFrontier_OutsideWest_Text_24AB06, 2
 	end
 
-	.incbin "baserom.gba", 0x249e22, 0x12
+BattleFrontier_OutsideWest_EventScript_249E22:: @ 8249E22
+	loadword 0, BattleFrontier_OutsideWest_Text_24AB44
+	callstd 2
+	end
+
+BattleFrontier_OutsideWest_EventScript_249E2B:: @ 8249E2B
+	loadword 0, BattleFrontier_OutsideWest_Text_24AB75
+	callstd 2
+	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249E34:: @ 8249E34
 	lockall
@@ -606,5 +614,7 @@ BattleFrontier_BattleDomeLobby_Text_24A4E9: @ 824A4E9
 	.string "Congratulations for winning\n"
 	.string "your Battle Tournament!$"
 
-	.incbin "baserom.gba", 0x24a51d, 0x37
+BattleFrontier_BattleDomeLobby_Text_24A51D: @ 824A51D
+	.string "Here is your prize for your Battle\n"
+	.string "Tournament victory.$"
 

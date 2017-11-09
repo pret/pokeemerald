@@ -133,5 +133,20 @@ BattleFrontier_BattleDomeCorridor_Movement_24B1E6: @ 824B1E6
 	step_54
 	step_end
 
-	.incbin "baserom.gba", 0x24b1e9, 0x10
-
+BattleFrontier_BattleDomeCorridor_Movement_24B1E9: @ 824B1E9
+	step_up
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_up
+	step_54
+	step_end

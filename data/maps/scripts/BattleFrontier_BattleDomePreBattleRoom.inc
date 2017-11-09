@@ -343,7 +343,23 @@ BattleFrontier_BattleDomePreBattleRoom_Text_24B83F: @ 824B83F
 	.string "completed.\p"
 	.string "These are the teams that advanced!$"
 
-	.incbin "baserom.gba", 0x24b88d, 0x128
+BattleFrontier_BattleDomePreBattleRoom_Text_24B88D: @ 824B88D
+	.string "Congratulations for getting through\n"
+	.string "the 1st round.\p"
+	.string "The 2nd round is next.\n"
+	.string "Are you ready?$"
+
+BattleFrontier_BattleDomePreBattleRoom_Text_24B8E6: @ 824B8E6
+	.string "Congratulations for advancing\n"
+	.string "to the semifinals.\p"
+	.string "The best four teams meet in this round.\n"
+	.string "Are you ready?$"
+
+BattleFrontier_BattleDomePreBattleRoom_Text_24B94E: @ 824B94E
+	.string "Congratulations for advancing\n"
+	.string "to the final match.\p"
+	.string "You’re one win from the championship.\n"
+	.string "Are you ready?$"
 
 BattleFrontier_BattleDomePreBattleRoom_Text_24B9B5: @ 824B9B5
 	.string "{PLAYER}’s next opponent\n"

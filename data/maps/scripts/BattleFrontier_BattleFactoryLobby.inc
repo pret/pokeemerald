@@ -427,7 +427,9 @@ BattleFrontier_BattleFactoryLobby_Text_258C27: @ 8258C27
 	.string "Before you begin your challenge,\n"
 	.string "I need to save the game. Is that okay?$"
 
-	.incbin "baserom.gba", 0x258c6f, 0x42
+BattleFrontier_BattleFactoryLobby_Text_258C6F: @ 8258C6F
+	.string "Okay, I will hold your POKéMON for\n"
+	.string "safekeeping while you compete.$"
 
 BattleFrontier_BattleFactoryLobby_Text_258CB1: @ 8258CB1
 	.string "Please step this way.$"
@@ -439,13 +441,23 @@ BattleFrontier_BattleFactoryLobby_Text_258CC7: @ 8258CC7
 	.string "I must also save the event results.\n"
 	.string "Please wait.$"
 
-	.incbin "baserom.gba", 0x258d54, 0x3f
+BattleFrontier_BattleFactoryLobby_Text_258D54: @ 8258D54
+	.string "I will return your POKéMON in exchange\n"
+	.string "for our rental POKéMON.$"
 
 BattleFrontier_BattleFactoryLobby_Text_258D93: @ 8258D93
 	.string "Congratulations! You’ve won seven\n"
 	.string "straight Battle Swap matches!$"
 
-	.incbin "baserom.gba", 0x258dd3, 0xa4
+BattleFrontier_BattleFactoryLobby_Text_258DD3: @ 8258DD3
+	.string "In recognition of your 7-win streak,\n"
+	.string "we award you these Battle Point(s).$"
+
+BattleFrontier_BattleFactoryLobby_Text_258E1C: @ 8258E1C
+	.string "Oh, oh, oh!\p"
+	.string "Your Battle Points are maxed.\p"
+	.string "Please come back after using\n"
+	.string "some Battle Points.$"
 
 BattleFrontier_BattleFactoryLobby_Text_258E77: @ 8258E77
 	.string "We’ve been waiting for you!\p"
@@ -458,7 +470,12 @@ BattleFrontier_BattleFactoryLobby_Text_258ECA: @ 8258ECA
 	.string "As a result, you have been disqualified\n"
 	.string "from your challenge.$"
 
-	.incbin "baserom.gba", 0x258f55, 0x3e
+BattleFrontier_BattleFactoryLobby_Text_258F55: @ 8258F55
+	.string "We’ll return your personal POKéMON.$"
+
+BattleFrontier_BattleFactoryLobby_Text_258F79: @ 8258F79
+	.string "{PLAYER} received the prize\n"
+	.string "{STR_VAR_1}.$"
 
 BattleFrontier_BattleFactoryLobby_Text_258F93: @ 8258F93
 	.string "Where the intelligence of TRAINERS\n"
@@ -540,6 +557,55 @@ BattleFrontier_BattleFactoryLobby_Text_2595C4: @ 82595C4
 	.string "Well, I’m a full-grown man, but I have\n"
 	.string "trouble figuring out their hints.$"
 
-	.incbin "baserom.gba", 0x259658, 0xc9
+BattleFrontier_BattleFactoryLobby_Text_259658: @ 8259658
+	.string "Like, I’m really tough, but I get bored\n"
+	.string "really easily, so I just kept swapping\l"
+	.string "and battling over and over.\p"
+	.string "So anyway, when I kept entering\n"
+	.string "Battle Swap events, I noticed they\l"
+	.string "varied the rental POKéMON.$"
 
 BattleFrontier_BattleFactoryLobby_Text_259721: @ 8259721
+SlateportCity_BattleTentLobby_Text_259721: @ 8259721
+	.string "The Battle Swap rules are listed.$"
+
+BattleFrontier_BattleFactoryLobby_Text_259743: @ 8259743
+SlateportCity_BattleTentLobby_Text_259743: @ 8259743
+	.string "Which heading do you want to read?$"
+
+BattleFrontier_BattleFactoryLobby_Text_259766: @ 8259766
+	.string "In a Battle Swap event, you may use\n"
+	.string "only three POKéMON.\p"
+	.string "Whether you are renting or swapping,\n"
+	.string "your team may not have two or more\l"
+	.string "of the same POKéMON.$"
+
+BattleFrontier_BattleFactoryLobby_Text_2597FB: @ 82597FB
+	.string "You may swap POKéMON only with\n"
+	.string "the TRAINER you have just defeated.\p"
+	.string "You may swap for only those POKéMON\n"
+	.string "used by the beaten TRAINER.$"
+
+BattleFrontier_BattleFactoryLobby_Text_25987E: @ 825987E
+	.string "After every battle you win, you may\n"
+	.string "swap for one of your defeated\l"
+	.string "opponent’s POKéMON.\p"
+	.string "You will not be able to swap POKéMON\n"
+	.string "with the seventh TRAINER in the event.$"
+
+BattleFrontier_BattleFactoryLobby_Text_259920: @ 8259920
+	.string "There are two key points to be aware\n"
+	.string "of when swapping POKéMON.\p"
+	.string "First, when swapping, you can’t check\n"
+	.string "the stats of the POKéMON you are\l"
+	.string "about to receive.\p"
+	.string "Second, the POKéMON on your team\n"
+	.string "are lined up in sequence, depending on\l"
+	.string "the order in which you rented them.\p"
+	.string "This sequence remains unchanged\n"
+	.string "even when swaps are made.$"
+
+BattleFrontier_BattleFactoryLobby_Text_259A5E: @ 8259A5E
+	.string "In the Open Level, the rental POKéMON\n"
+	.string "and the opposing TRAINERS’ POKéMON\l"
+	.string "are all Level 100.$"

@@ -439,7 +439,24 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC: @ 824FEAC
 	step_00
 	step_end
 
-	.incbin "baserom.gba", 0x24feae, 0xd
+BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAE: @ 824FEAE
+	step_55
+	slow_step_down
+	slow_step_down
+	step_02
+	step_end
+
+BattleFrontier_BattlePalaceBattleRoom_Movement_24FEB3: @ 824FEB3
+	step_55
+	slow_step_down
+	step_end
+
+BattleFrontier_BattlePalaceBattleRoom_Movement_24FEB6: @ 824FEB6
+	slow_step_down
+	slow_step_down
+	slow_step_down
+	step_02
+	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FEBB:: @ 824FEBB
 	copyvar VAR_RESULT, VAR_0x40CE

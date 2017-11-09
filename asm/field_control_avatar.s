@@ -1470,7 +1470,7 @@ _0809CAF8:
 	bl CountSSTidalStep
 	cmp r0, 0x1
 	bne _0809CB1C
-	ldr r0, =gUnknown_0823C050
+	ldr r0, =SSTidalCorridor_EventScript_23C050
 	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool

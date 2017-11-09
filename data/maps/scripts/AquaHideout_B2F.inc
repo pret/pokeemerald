@@ -59,7 +59,12 @@ AquaHideout_B2F_Movement_233E80: @ 8233E80
 	step_left
 	step_end
 
-	.incbin "baserom.gba", 0x233e85, 0x5
+AquaHideout_B2F_Movement_233E85: @ 8233E85
+	step_right
+	step_right
+	step_right
+	step_right
+	step_end
 
 AquaHideout_B2F_EventScript_233E8A:: @ 8233E8A
 	trainerbattle 2, TRAINER_GRUNT_4, 0, AquaHideout_B2F_Text_2340B4, AquaHideout_B2F_Text_2340F0, AquaHideout_B2F_EventScript_233EA5
