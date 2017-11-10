@@ -535,7 +535,7 @@ _08084A8A:
 get_mapheader_by_bank_and_number: @ 8084A90
 	lsls r0, 16
 	lsls r1, 16
-	ldr r2, =gUnknown_08486578
+	ldr r2, =gMapGroups
 	lsrs r0, 14
 	adds r0, r2
 	ldr r0, [r0]

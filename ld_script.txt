@@ -351,6 +351,8 @@ SECTIONS {
         data/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         data/rom4.o(.rodata);
+        data/tilesets.o(.rodata);
+        data/maps.o(.rodata);
         data/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
         data/rom_8486FEC.o(.rodata);

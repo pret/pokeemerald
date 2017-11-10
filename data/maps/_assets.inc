@@ -1295,7 +1295,7 @@ FallarborTown_LeftoverRSContestHall_MapBlockdata: @ 8428098
 	.incbin "data/maps/FallarborTown_LeftoverRSContestHall/map.bin"
 
 	.align 2
-FallarborTown_LeftoverRSContestHall_MapAttributes: @ 82CF4A0
+FallarborTown_LeftoverRSContestHall_MapAttributes: @ 842838C
 	.4byte 0x15
 	.4byte 0x12
 	.4byte FallarborTown_LeftoverRSContestHall_MapBorder

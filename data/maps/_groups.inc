@@ -584,3 +584,40 @@ gMapGroup32: @ 8486568
 gMapGroup33: @ 8486574
 	.4byte Route124_DivingTreasureHuntersHouse
 
+	.align 2
+gMapGroups:: @ 8486578
+	.4byte gMapGroup0
+	.4byte gMapGroup1
+	.4byte gMapGroup2
+	.4byte gMapGroup3
+	.4byte gMapGroup4
+	.4byte gMapGroup5
+	.4byte gMapGroup6
+	.4byte gMapGroup7
+	.4byte gMapGroup8
+	.4byte gMapGroup9
+	.4byte gMapGroup10
+	.4byte gMapGroup11
+	.4byte gMapGroup12
+	.4byte gMapGroup13
+	.4byte gMapGroup14
+	.4byte gMapGroup15
+	.4byte gMapGroup16
+	.4byte gMapGroup17
+	.4byte gMapGroup18
+	.4byte gMapGroup19
+	.4byte gMapGroup20
+	.4byte gMapGroup21
+	.4byte gMapGroup22
+	.4byte gMapGroup23
+	.4byte gMapGroup24
+	.4byte gMapGroup25
+	.4byte gMapGroup26
+	.4byte gMapGroup27
+	.4byte gMapGroup28
+	.4byte gMapGroup29
+	.4byte gMapGroup30
+	.4byte gMapGroup31
+	.4byte gMapGroup32
+	.4byte gMapGroup33
+
