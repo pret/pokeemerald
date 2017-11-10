@@ -5,6 +5,7 @@
 #include "save.h"
 #include "librfu.h"
 #include "rng.h"
+#include "decompress.h"
 #include "string_util.h"
 #include "event_data.h"
 #include "gpu_regs.h"
@@ -42,14 +43,14 @@ struct SIOCnt {
 
 IWRAM_DATA struct BlockTransfer gUnknown_03000D10;
 IWRAM_DATA u32 link_c_unused_03000d1c;
-IWRAM_DATA struct BlockTransfer gUnknown_03000D20[4];
+IWRAM_DATA struct BlockTransfer gUnknown_03000D20[MAX_LINK_PLAYERS];
 IWRAM_DATA u32 gUnknown_03000D50;
 IWRAM_DATA u32 gUnknown_03000D54;
 IWRAM_DATA u8 gUnknown_03000D58;
 IWRAM_DATA u32 gUnknown_03000D5C;
 IWRAM_DATA u32 gUnknown_03000D60;
 IWRAM_DATA u8 gUnknown_03000D64;
-ALIGNED() IWRAM_DATA u8 gUnknown_03000D68[4];
+ALIGNED() IWRAM_DATA u8 gUnknown_03000D68[MAX_LINK_PLAYERS];
 IWRAM_DATA u8 gUnknown_03000D6C;
 IWRAM_DATA bool8 gUnknown_03000D6D;
 IWRAM_DATA u16 gUnknown_03000D6E;
@@ -71,15 +72,15 @@ u32 gUnknown_0300302C;
 struct LinkPlayerBlock gUnknown_03003030;
 bool8 gUnknown_0300306C;
 u32 gUnknown_03003070;
-bool8 gUnknown_03003078[4];
-u8 gUnknown_0300307C[4];
+bool8 gUnknown_03003078[MAX_LINK_PLAYERS];
+u8 gUnknown_0300307C[MAX_LINK_PLAYERS];
 u16 gUnknown_03003084;
-u16 gUnknown_03003090[4][8];
+u16 gUnknown_03003090[MAX_LINK_PLAYERS][8];
 u32 gUnknown_030030E0;
 u8 gUnknown_030030E4;
 bool8 gUnknown_030030E8;
-u8 gUnknown_030030EC[4];
-u8 gUnknown_030030F0[4];
+u8 gUnknown_030030EC[MAX_LINK_PLAYERS];
+u8 gUnknown_030030F0[MAX_LINK_PLAYERS];
 u16 gUnknown_030030F4;
 u8 gUnknown_030030F8;
 bool8 gLinkVSyncDisabled;
@@ -90,7 +91,7 @@ bool8 gReceivedRemoteLinkPlayers;
 struct LinkTestBGInfo gUnknown_03003130;
 void (*gUnknown_03003140)(void);
 bool8 gUnknown_03003144;
-u16 gUnknown_03003148[4];
+u16 gUnknown_03003148[MAX_LINK_PLAYERS];
 u8 gUnknown_03003150;
 u8 gUnknown_03003160;
 
@@ -104,17 +105,21 @@ struct LinkPlayer gUnknown_020229CC = {};
 
 void sub_8009638(void);
 void sub_80096BC(void);
-void c2_08009A8C(void);
-void sub_8009AA0(u8 unused);
+static void c2_08009A8C(void);
+static void sub_8009AA0(u8 unused);
 void sub_800A2E0(void);
 void sub_800A2F4(void *heapptr, size_t src);
+void sub_800A418(void);
 void task00_link_test(u8 taskId);
+void sub_800A588(u8 who);
 u16 sub_800A648(u16 *src, u16 size);
 void sub_800A6E8(u32 pos, u8 a0, u8 a1, u8 a2);
 void sub_800A824(void);
+void c2_800ACD4(void);
 void sub_800AEB4(void);
 void sub_800B330(bool8 flag);
 void sub_800B4A4(void);
+void sub_800B524(struct LinkPlayer *linkPlayer);
 void sub_800B53C(void);
 void sub_800B594(void);
 u32 sub_800BEC0(void);
@@ -130,10 +135,7 @@ const u16 gLinkTestDigitsPal[] = INCBIN_U16("graphics/interface/link_test_digits
 const u16 gLinkTestDigitsGfx[] = INCBIN_U16("graphics/interface/link_test_digits.4bpp");
 const u8 unkstring_82ed160[] = _("{HIGHLIGHT TRANSPARENT}{COLOR WHITE}");
 const u16 g2BlankTilesGfx[] = INCBIN_U16("graphics/interface/blank_1x2.4bpp");
-const struct {
-    void *data;
-    u16 size;
-} gUnknown_082ED1A8[] = {
+const struct BlockRequest gUnknown_082ED1A8[] = {
     {gUnknown_020228C4, 200},
     {gUnknown_020228C4, 200},
     {gUnknown_020228C4, 100},
@@ -146,6 +148,9 @@ const u8 gUnknown_082ED1D0[] = {
     REG_OFFSET_BG2CNT,
     REG_OFFSET_BG3CNT
 };
+const char gASCIIGameFreakInc[] = "GameFreak inc.";
+const char gASCIITestPrint[] = "TEST PRINT\nP0\nP1\nP2\nP3";
+
 
 // .text
 
@@ -215,7 +220,7 @@ void sub_8009570(void)
     gUnknown_020229C6 = 0x1111;
     sub_8009734();
     SeedRng(gMain.vblankCounter2);
-    for (i = 0; i < 4; i ++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i ++)
     {
         gSaveBlock2Ptr->playerTrainerId[i] = Random() % 256;
     }
@@ -306,7 +311,7 @@ void sub_8009734(void)
         sub_800E700();
     }
     gReceivedRemoteLinkPlayers = 0;
-    for (i = 0; i < 4; i ++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i ++)
     {
         gUnknown_03003078[i] = 1;
         gUnknown_030030F0[i] = 0;
@@ -335,7 +340,7 @@ static void sub_8009818(u8 nothing, u8 is, u8 used)
         sub_800A6E8(gUnknown_03000D10.pos, 2, 3, 2);
         gUnknown_03000D64 = gUnknown_03000D10.pos;
     }
-    for (i = 0; i < 4; i ++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i ++)
     {
         if (gUnknown_03000D68[i] != gUnknown_03000D20[i].pos)
         {
@@ -346,7 +351,7 @@ static void sub_8009818(u8 nothing, u8 is, u8 used)
     status = GetBlockReceivedStatus();
     if (status == 0xF) // 0b1111
     {
-        for (i = 0; i < 4; i ++)
+        for (i = 0; i < MAX_LINK_PLAYERS; i ++)
         {
             if ((status >> i) & 1)
             {
@@ -394,7 +399,7 @@ void sub_8009900(void)
     }
 }
 
-void c2_08009A8C(void)
+static void c2_08009A8C(void)
 {
     sub_8009900();
     sub_8009818(1, 1, 0);
@@ -443,5 +448,127 @@ void sub_8009A58(u8 who)
     if (count == 0 && gReceivedRemoteLinkPlayers == 0)
     {
         gReceivedRemoteLinkPlayers = 1;
+    }
+}
+
+static void sub_8009AA0(u8 unused)
+{
+    u16 i;
+
+    for (i = 0; i < MAX_LINK_PLAYERS; i ++)
+    {
+        gUnknown_03003020[i] = 0;
+        if (gUnknown_03003090[i][0] == 0)
+        {
+            continue;
+        }
+        switch (gUnknown_03003090[i][0])
+        {
+            case 0x2222:
+            {
+                struct LinkPlayerBlock *block;
+
+                sub_8009638();
+                block = &gUnknown_03003030;
+                block->linkPlayer = gUnknown_020229CC;
+                memcpy(block->magic1, gASCIIGameFreakInc, sizeof(block->magic1) - 1);
+                memcpy(block->magic2, gASCIIGameFreakInc, sizeof(block->magic2) - 1);
+                sub_800A2F4(block, sizeof(*block));
+                break;
+            }
+            case 0x4444:
+                gUnknown_03003020[i] = gUnknown_03003090[i][1];
+                break;
+            case 0x5555:
+                gUnknown_030030E8 = 1;
+                break;
+            case 0x5566:
+                gUnknown_030030E8 = 1;
+                break;
+            case 0xBBBB:
+            {
+                struct BlockTransfer *blockRecv;
+
+                blockRecv = &gUnknown_03000D20[i];
+                blockRecv->pos = 0;
+                blockRecv->size = gUnknown_03003090[i][1];
+                blockRecv->multiplayerId = gUnknown_03003090[i][2];
+                break;
+            }
+            case 0x8888:
+            {
+                if (gUnknown_03000D20[i].size > BLOCK_BUFFER_SIZE)
+                {
+                    u16 *buffer;
+                    u16 j;
+
+                    buffer = (u16 *)gDecompressionBuffer;
+                    for (j = 0; j < CMD_LENGTH - 1; j ++)
+                    {
+                        buffer[(gUnknown_03000D20[i].pos / 2) + j] = gUnknown_03003090[i][j + 1];
+                    }
+                }
+                else
+                {
+                    u16 j;
+
+                    for (j = 0; j < CMD_LENGTH - 1; j ++)
+                    {
+                        gBlockRecvBuffer[i][(gUnknown_03000D20[i].pos / 2) + j] = gUnknown_03003090[i][j + 1];
+                    }
+                }
+
+                gUnknown_03000D20[i].pos += (CMD_LENGTH - 1) * 2;
+
+                if (gUnknown_03000D20[i].pos >= gUnknown_03000D20[i].size)
+                {
+                    if (gUnknown_03003078[i] == TRUE)
+                    {
+                        struct LinkPlayerBlock *block;
+                        struct LinkPlayer *linkPlayer;
+
+                        block = (struct LinkPlayerBlock *)&gBlockRecvBuffer[i];
+                        linkPlayer = &gLinkPlayers[i];
+                        *linkPlayer = block->linkPlayer;
+                        if ((linkPlayer->version & 0xFF) == VERSION_RUBY || (linkPlayer->version & 0xFF) == VERSION_SAPPHIRE)
+                        {
+                            linkPlayer->name[10] = 0;
+                            linkPlayer->name[9] = 0;
+                            linkPlayer->name[8] = 0;
+                        }
+                        sub_800B524(linkPlayer);
+                        if (strcmp(block->magic1, gASCIIGameFreakInc) != 0
+                            || strcmp(block->magic2, gASCIIGameFreakInc) != 0)
+                        {
+                            SetMainCallback2(c2_800ACD4);
+                        }
+                        else
+                        {
+                            sub_8009A58(i);
+                        }
+                    }
+                    else
+                    {
+                        sub_800A588(i);
+                    }
+                }
+            }
+                break;
+            case 0x5FFF:
+                gUnknown_030030F0[i] = 1;
+                break;
+            case 0x2FFE:
+                gUnknown_030030EC[i] = 1;
+                break;
+            case 0xAAAA:
+                sub_800A418();
+                break;
+            case 0xCCCC:
+                SendBlock(0, gUnknown_082ED1A8[gUnknown_03003090[i][1]].address, gUnknown_082ED1A8[gUnknown_03003090[i][1]].size);
+                break;
+            case 0xCAFE:
+                gUnknown_03003020[i] = gUnknown_03003090[i][1];
+                break;
+        }
     }
 }

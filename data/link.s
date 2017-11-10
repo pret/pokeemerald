@@ -7,13 +7,6 @@
 
 	.align 2
 
-gASCIIGameFreakInc:: @ 82ED1D4
-	.ascii "GameFreak inc."
-
-	.align 2
-gASCIITestPrint:: @ 82ED1E4
-	.ascii "TEST PRINT\nP0\nP1\nP2\nP3"
-
 	.align 2
 gUnknown_082ED1FC:: @ 82ED1FC BgTemplate
 	.4byte 0x000001F8
