@@ -5,5 +5,15 @@ FallarborTown_PokemonCenter_2F_MapScripts:: @ 8200EEB
 	map_script 3, FallarborTown_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
-	.incbin "baserom.gba", 0x200f00, 0x12
+FallarborTown_PokemonCenter_2F_EventScript_200F00:: @ 8200F00
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+FallarborTown_PokemonCenter_2F_EventScript_200F06:: @ 8200F06
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+FallarborTown_PokemonCenter_2F_EventScript_200F0C:: @ 8200F0C
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
 

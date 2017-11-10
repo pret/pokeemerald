@@ -86,3 +86,6 @@ AbandonedShip_Corridors_B1F_Text_237F4B: @ 8237F4B
 	.string "but the door opened.$"
 
 AbandonedShip_Corridors_B1F_Text_237FA5: @ 8237FA5
+AbandonedShip_HiddenFloorCorridors_Text_237FA5: @ 8237FA5
+	.string "The door is open.$"
+

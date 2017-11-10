@@ -28,5 +28,9 @@ DesertUnderpass_EventScript_23AF68:: @ 823AF68
 	release
 	end
 
-	.incbin "baserom.gba", 0x23af79, 0x34
+DesertUnderpass_Text_23AF79:: @ 823AF79
+	.string "{PLAYER} found the ROOT FOSSIL.$"
+
+DesertUnderpass_Text_23AF93:: @ 823AF93
+	.string "{PLAYER} found the CLAW FOSSIL.$"
 

@@ -11,8 +11,7 @@ VerdanturfTown_Mart_EventScript_202587:: @ 8202587
 	release
 	end
 
-	.incbin "baserom.gba", 0x20259e, 0x2
-
+	.align 2
 VerdanturfTown_Mart_Pokemart_2025A0: @ 82025A0
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_NEST_BALL

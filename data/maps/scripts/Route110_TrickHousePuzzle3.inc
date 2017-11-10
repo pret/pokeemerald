@@ -316,7 +316,12 @@ Route110_TrickHousePuzzle3_EventScript_26C5F2:: @ 826C5F2
 	msgbox Route110_TrickHousePuzzle3_Text_26C80C, 6
 	end
 
-	.incbin "baserom.gba", 0x26c609, 0x6d
+Route110_TrickHousePuzzle3_Text_26C609: @ 826C609
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is coveted.”\n"
+	.string "… … … … … … … …\p"
+	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle3_Text_26C676: @ 826C676
 	.string "I keep coming back to this same place!$"

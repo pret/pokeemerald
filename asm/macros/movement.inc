@@ -110,8 +110,9 @@
 	enum_start 0x91
 	create_movement step_91
 	create_movement step_92
-
-	enum_start 0x96
+	create_movement step_93
+	create_movement step_94
+	create_movement step_95
 	create_movement step_96
 
 	enum_start 0xfe

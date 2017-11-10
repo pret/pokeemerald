@@ -348,7 +348,49 @@ Route124_DivingTreasureHuntersHouse_Text_271217: @ 8271217
 	.string "{CLEAR_TO}{0x0a}Wanted item{CLEAR_TO}{0x7c}Trade item\n"
 	.string "{CLEAR_TO}{0x08}GREEN SHARD{CLEAR_TO}{0x59}{0x7B}{0x7C}{CLEAR_TO}{0x7b}LEAF STONE$"
 
-	.incbin "baserom.gba", 0x271315, 0x3a
+Route124_DivingTreasureHuntersHouse_Text_271315: @ 8271315
+	lock
+	faceplayer
+	message 0x0
+	waitmessage
+	waitbuttonpress
+	release
+	return
+
+Route124_DivingTreasureHuntersHouse_Text_271320: @ 8271320
+	lockall
+	message 0x0
+	waitmessage
+	waitbuttonpress
+	releaseall
+	return
+
+Route124_DivingTreasureHuntersHouse_Text_27132A: @ 827132A
+	message 0x0
+	waitmessage
+	waitbuttonpress
+	return
+
+Route124_DivingTreasureHuntersHouse_Text_271332: @ 8271332
+	message 0x0
+	waitmessage
+	yesnobox 20, 8
+	return
+
+Route124_DivingTreasureHuntersHouse_Text_27133C: @ 827133C
+	message 0x0
+	playfanfare BGM_ME_BATTLE_POINTS
+	waitfanfare
+	waitmessage
+	return
+
+Route124_DivingTreasureHuntersHouse_Text_271347: @ 8271347
+	pokenavcall 0x0
+	waitmessage
+	return
+
+Route124_DivingTreasureHuntersHouse_Text_27134E: @ 827134E
+	return
 
 BattleFrontier_BattleArenaLobby_EventScript_27134F:: @ 827134F
 BattleFrontier_BattleDomeLobby_EventScript_27134F:: @ 827134F

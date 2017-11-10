@@ -47,7 +47,30 @@ Route110_TrickHousePuzzle7_EventScript_26E126:: @ 826E126
 	setmetatile 7, 5, 575, 1
 	return
 
-	.incbin "baserom.gba", 0x26e139, 0x5f
+Route110_TrickHousePuzzle7_EventScript_26E139:: @ 826E139
+	setmetatile 13, 17, 611, 0
+	setmetatile 12, 16, 574, 1
+	return
+
+Route110_TrickHousePuzzle7_EventScript_26E14C:: @ 826E14C
+	setmetatile 12, 13, 609, 0
+	setmetatile 12, 11, 574, 1
+	return
+
+Route110_TrickHousePuzzle7_EventScript_26E15F:: @ 826E15F
+	setmetatile 7, 12, 611, 0
+	setmetatile 5, 10, 574, 1
+	return
+
+Route110_TrickHousePuzzle7_EventScript_26E172:: @ 826E172
+	setmetatile 6, 6, 635, 0
+	setmetatile 4, 4, 574, 1
+	return
+
+Route110_TrickHousePuzzle7_EventScript_26E185:: @ 826E185
+	setmetatile 8, 4, 608, 0
+	setmetatile 7, 5, 574, 1
+	return
 
 Route110_TrickHousePuzzle7_MapScript1_26E198: @ 826E198
 	compare_var_to_value VAR_0x40B6, 1
@@ -87,7 +110,138 @@ Route110_TrickHousePuzzle7_EventScript_26E1E2:: @ 826E1E2
 	goto Route110_TrickHousePuzzle7_EventScript_26A3E5
 	end
 
-	.incbin "baserom.gba", 0x26e1ed, 0x12e
+Route110_TrickHousePuzzle7_EventScript_26E1ED:: @ 826E1ED
+	lockall
+	setvar VAR_0x40B6, 1
+	warpteleport ROUTE_110_TRICK_HOUSE_PUZZLE_7, 255, 3, 19
+	waitstate
+	releaseall
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E1FE:: @ 826E1FE
+	lockall
+	delay 32
+	checkflag FLAG_0x0C2
+	call_if 0, Route110_TrickHousePuzzle7_EventScript_26E0DA
+	checkflag FLAG_0x0C2
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E139
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	checkflag FLAG_0x0C2
+	goto_if 0, Route110_TrickHousePuzzle7_EventScript_26E2E9
+	checkflag FLAG_0x0C2
+	goto_eq Route110_TrickHousePuzzle7_EventScript_26E2EE
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E22D:: @ 826E22D
+	lockall
+	delay 32
+	checkflag FLAG_0x0C3
+	call_if 0, Route110_TrickHousePuzzle7_EventScript_26E0ED
+	checkflag FLAG_0x0C3
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E14C
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	checkflag FLAG_0x0C3
+	goto_if 0, Route110_TrickHousePuzzle7_EventScript_26E2F3
+	checkflag FLAG_0x0C3
+	goto_eq Route110_TrickHousePuzzle7_EventScript_26E2F8
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E25C:: @ 826E25C
+	lockall
+	delay 32
+	checkflag FLAG_0x0C4
+	call_if 0, Route110_TrickHousePuzzle7_EventScript_26E100
+	checkflag FLAG_0x0C4
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E15F
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	checkflag FLAG_0x0C4
+	goto_if 0, Route110_TrickHousePuzzle7_EventScript_26E2FD
+	checkflag FLAG_0x0C4
+	goto_eq Route110_TrickHousePuzzle7_EventScript_26E302
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E28B:: @ 826E28B
+	lockall
+	delay 32
+	checkflag FLAG_0x0C5
+	call_if 0, Route110_TrickHousePuzzle7_EventScript_26E113
+	checkflag FLAG_0x0C5
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E172
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	checkflag FLAG_0x0C5
+	goto_if 0, Route110_TrickHousePuzzle7_EventScript_26E307
+	checkflag FLAG_0x0C5
+	goto_eq Route110_TrickHousePuzzle7_EventScript_26E30C
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E2BA:: @ 826E2BA
+	lockall
+	delay 32
+	checkflag FLAG_0x0C6
+	call_if 0, Route110_TrickHousePuzzle7_EventScript_26E126
+	checkflag FLAG_0x0C6
+	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E185
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	checkflag FLAG_0x0C6
+	goto_if 0, Route110_TrickHousePuzzle7_EventScript_26E311
+	checkflag FLAG_0x0C6
+	goto_eq Route110_TrickHousePuzzle7_EventScript_26E316
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E2E9:: @ 826E2E9
+	setflag FLAG_0x0C2
+	releaseall
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E2EE:: @ 826E2EE
+	clearflag FLAG_0x0C2
+	releaseall
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E2F3:: @ 826E2F3
+	setflag FLAG_0x0C3
+	releaseall
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E2F8:: @ 826E2F8
+	clearflag FLAG_0x0C3
+	releaseall
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E2FD:: @ 826E2FD
+	setflag FLAG_0x0C4
+	releaseall
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E302:: @ 826E302
+	clearflag FLAG_0x0C4
+	releaseall
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E307:: @ 826E307
+	setflag FLAG_0x0C5
+	releaseall
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E30C:: @ 826E30C
+	clearflag FLAG_0x0C5
+	releaseall
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E311:: @ 826E311
+	setflag FLAG_0x0C6
+	releaseall
+	end
+
+Route110_TrickHousePuzzle7_EventScript_26E316:: @ 826E316
+	clearflag FLAG_0x0C6
+	releaseall
+	end
 
 Route110_TrickHousePuzzle7_EventScript_26E31B:: @ 826E31B
 	playse SE_MU_PACHI
@@ -137,7 +291,17 @@ Route110_TrickHousePuzzle7_EventScript_26E35D:: @ 826E35D
 	mossdeepgym4
 	end
 
-	.incbin "baserom.gba", 0x26e373, 0x16
+Route110_TrickHousePuzzle7_EventScript_26E373:: @ 826E373
+	playse SE_MU_PACHI
+	waitse
+	playse SE_TU_SAA
+	mossdeepgym3 1
+	mossdeepgym1 4
+	waitmovement 0
+	mossdeepgym2
+	waitmovement 0
+	mossdeepgym4
+	end
 
 Route110_TrickHousePuzzle7_EventScript_26E389:: @ 826E389
 	trainerbattle 0, TRAINER_JOSHUA, 0, Route110_TrickHousePuzzle7_Text_26E481, Route110_TrickHousePuzzle7_Text_26E4C1
@@ -169,7 +333,12 @@ Route110_TrickHousePuzzle7_EventScript_26E3FC:: @ 826E3FC
 	msgbox Route110_TrickHousePuzzle7_Text_26E7C4, 6
 	end
 
-	.incbin "baserom.gba", 0x26e413, 0x6e
+Route110_TrickHousePuzzle7_EventScript_26E413:: @ 826E413
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is huggable.”\n"
+	.string "… … … … … … … …\p"
+	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle7_Text_26E481: @ 826E481
 	.string "The TRICK MASTER always vanishes\n"

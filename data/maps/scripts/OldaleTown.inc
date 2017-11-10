@@ -130,7 +130,21 @@ OldaleTown_Movement_1E8FE2: @ 81E8FE2
 	step_25
 	step_end
 
-	.incbin "baserom.gba", 0x1e8feb, 0xe
+OldaleTown_Movement_1E8FEB: @ 81E8FEB
+	step_up
+	step_up
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_up
+	step_up
+	step_up
+	step_up
+	step_13
+	step_25
+	step_end
 
 OldaleTown_Movement_1E8FF9: @ 81E8FF9
 	step_right
@@ -164,7 +178,19 @@ OldaleTown_Movement_1E900B: @ 81E900B
 	step_up
 	step_end
 
-	.incbin "baserom.gba", 0x1e9013, 0xc
+OldaleTown_Movement_1E9013: @ 81E9013
+	step_left
+	step_up
+	step_up
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_up
+	step_up
+	step_up
+	step_end
 
 OldaleTown_EventScript_1E901F:: @ 81E901F
 	lock

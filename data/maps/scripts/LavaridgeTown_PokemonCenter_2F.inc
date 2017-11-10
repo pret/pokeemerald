@@ -5,5 +5,15 @@ LavaridgeTown_PokemonCenter_2F_MapScripts:: @ 81FFC97
 	map_script 3, LavaridgeTown_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
-	.incbin "baserom.gba", 0x1ffcac, 0x12
+LavaridgeTown_PokemonCenter_2F_EventScript_1FFCAC:: @ 81FFCAC
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+LavaridgeTown_PokemonCenter_2F_EventScript_1FFCB2:: @ 81FFCB2
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+LavaridgeTown_PokemonCenter_2F_EventScript_1FFCB8:: @ 81FFCB8
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
 

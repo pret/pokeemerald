@@ -19,8 +19,7 @@ FortreeCity_DecorationShop_EventScript_218020:: @ 8218020
 	release
 	end
 
-	.incbin "baserom.gba", 0x218037, 0x1
-
+    .align 2
 FortreeCity_DecorationShop_PokemartDecor_218038: @ 8218038
 	.2byte 1
 	.2byte 2
@@ -44,8 +43,7 @@ FortreeCity_DecorationShop_EventScript_21804C:: @ 821804C
 	release
 	end
 
-	.incbin "baserom.gba", 0x218063, 0x1
-
+	.align 2
 FortreeCity_DecorationShop_PokemartDecor_218064: @ 8218064
 	.2byte 10
 	.2byte 11

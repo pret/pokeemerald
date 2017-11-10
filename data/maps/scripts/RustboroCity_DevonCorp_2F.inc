@@ -388,7 +388,9 @@ RustboroCity_DevonCorp_2F_Text_2122CB: @ 82122CB
 	.string "{PLAYER} received {STR_VAR_2} from\n"
 	.string "the DEVON RESEARCHER.$"
 
-	.incbin "baserom.gba", 0x2122f5, 0x43
+RustboroCity_DevonCorp_2F_Text_2122F5: @ 82122F5
+	.string "Uh-oh, you’ve got too many POKéMON.\n"
+	.string "You have no room for this one.$"
 
 RustboroCity_DevonCorp_2F_Text_212338: @ 8212338
 	.string "I’m trying to develop a new feature\n"

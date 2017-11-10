@@ -156,14 +156,19 @@ SeafloorCavern_Room9_Movement_23502A: @ 823502A
 	step_right
 	step_end
 
-	.incbin "baserom.gba", 0x235032, 0x3
+SeafloorCavern_Room9_Movement_235032: @ 8235032
+	step_left
+	step_left
+	step_end
 
 SeafloorCavern_Room9_Movement_235035: @ 8235035
 	step_left
 	step_14
 	step_end
 
-	.incbin "baserom.gba", 0x235038, 0x2
+SeafloorCavern_Room9_Movement_235038: @ 8235038
+	step_right
+	step_end
 
 SeafloorCavern_Room9_Movement_23503A: @ 823503A
 	step_01

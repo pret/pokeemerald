@@ -74,7 +74,21 @@ Route104_EventScript_1ECCB3:: @ 81ECCB3
 	waitmovement 0
 	goto Route104_EventScript_1ECD33
 
-	.incbin "baserom.gba", 0x1ecd11, 0x22
+Route104_EventScript_1ECD11:: @ 81ECD11
+	checkplayergender
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq Route104_EventScript_1ECD29
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq Route104_EventScript_1ECD2E
+	return
+
+Route104_EventScript_1ECD29:: @ 81ECD29
+	playbgm BGM_GIRL_SUP, 1
+	return
+
+Route104_EventScript_1ECD2E:: @ 81ECD2E
+	playbgm BGM_BOY_SUP, 1
+	return
 
 Route104_EventScript_1ECD33:: @ 81ECD33
 	checkplayergender

@@ -5,7 +5,17 @@ MauvilleCity_PokemonCenter_2F_MapScripts:: @ 8211008
 	map_script 3, MauvilleCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
-	.incbin "baserom.gba", 0x21101d, 0x12
+MauvilleCity_PokemonCenter_2F_EventScript_21101D:: @ 821101D
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+MauvilleCity_PokemonCenter_2F_EventScript_211023:: @ 8211023
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+MauvilleCity_PokemonCenter_2F_EventScript_211029:: @ 8211029
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
 
 MauvilleCity_PokemonCenter_2F_EventScript_21102F:: @ 821102F
 	msgbox MauvilleCity_PokemonCenter_2F_Text_211038, 2

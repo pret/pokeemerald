@@ -667,3 +667,603 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C652:: @ 824C652
 	createvobject 34, 31, 8, 2, 3, 1
 	return
 
+BattleFrontier_BattleArenaBattleRoom_Movement_24C773: @ 824C773
+BattleFrontier_BattleDomeBattleRoom_Movement_24C773: @ 824C773
+	step_54
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C775: @ 824C775
+	step_55
+	step_14
+	step_up
+	step_up
+	step_up
+	step_right
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C77B: @ 824C77B
+	step_right
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C77D: @ 824C77D
+	step_up
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C77F: @ 824C77F
+	step_55
+	step_14
+	step_up
+	step_up
+	step_up
+	step_right
+	step_right
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C787: @ 824C787
+	step_right
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C789: @ 824C789
+	step_left
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C78B: @ 824C78B
+	step_01
+	step_54
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C78E: @ 824C78E
+	step_55
+	step_up
+	step_up
+	step_up
+	step_02
+	step_13
+	step_12
+	step_00
+	step_13
+	step_12
+	step_03
+	step_13
+	step_12
+	step_01
+	step_13
+	step_12
+	step_02
+	step_14
+	step_16
+	step_16
+	step_02
+	step_13
+	step_12
+	step_00
+	step_13
+	step_12
+	step_03
+	step_13
+	step_12
+	step_01
+	step_13
+	step_12
+	step_02
+	fast_step_left
+	step_41
+	step_01
+	step_40
+	fast_step_left
+	fast_step_left
+	step_41
+	step_03
+	step_40
+	fast_step_left
+	step_41
+	step_00
+	step_11
+	step_02
+	step_13
+	step_12
+	step_01
+	step_13
+	step_12
+	step_03
+	step_13
+	step_12
+	step_00
+	step_13
+	step_12
+	step_02
+	step_12
+	step_01
+	step_12
+	step_03
+	step_12
+	step_00
+	step_12
+	step_02
+	step_11
+	step_01
+	step_11
+	step_03
+	step_11
+	step_00
+	step_11
+	step_02
+	step_40
+	step_right
+	slow_step_right
+	step_right
+	slow_step_right
+	step_41
+	step_01
+	step_14
+	step_47
+	step_47
+	step_14
+	step_right
+	step_right
+	step_right
+	step_47
+	step_14
+	step_right
+	step_down
+	step_down
+	step_02
+	step_11
+	step_01
+	step_11
+	step_03
+	step_11
+	step_00
+	step_11
+	step_02
+	step_12
+	step_left
+	step_left
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C7F9: @ 824C7F9
+	step_14
+	step_14
+	step_left
+	step_left
+	step_28
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_right
+	step_right
+	step_25
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C829: @ 824C829
+	step_left
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C82B: @ 824C82B
+	step_left
+	step_left
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_EventScript_24C82E:: @ 824C82E
+	turnvobject 0, 4
+	turnvobject 2, 4
+	turnvobject 4, 4
+	turnvobject 6, 4
+	turnvobject 8, 4
+	turnvobject 10, 3
+	turnvobject 12, 3
+	turnvobject 14, 3
+	turnvobject 16, 3
+	turnvobject 18, 3
+	turnvobject 20, 4
+	turnvobject 22, 4
+	turnvobject 24, 4
+	turnvobject 26, 4
+	turnvobject 28, 4
+	turnvobject 30, 4
+	delay 20
+	turnvobject 0, 1
+	turnvobject 2, 1
+	turnvobject 4, 1
+	turnvobject 6, 1
+	turnvobject 8, 1
+	turnvobject 10, 1
+	turnvobject 12, 1
+	turnvobject 14, 1
+	turnvobject 16, 1
+	turnvobject 18, 1
+	turnvobject 20, 1
+	turnvobject 22, 1
+	turnvobject 24, 1
+	turnvobject 26, 1
+	turnvobject 28, 1
+	turnvobject 30, 1
+	delay 20
+	turnvobject 1, 4
+	turnvobject 3, 4
+	turnvobject 5, 4
+	turnvobject 7, 4
+	turnvobject 9, 4
+	turnvobject 11, 3
+	turnvobject 13, 3
+	turnvobject 15, 3
+	turnvobject 17, 3
+	turnvobject 19, 3
+	turnvobject 21, 4
+	turnvobject 23, 4
+	turnvobject 25, 4
+	turnvobject 27, 3
+	turnvobject 31, 3
+	delay 20
+	turnvobject 1, 1
+	turnvobject 3, 1
+	turnvobject 5, 1
+	turnvobject 7, 1
+	turnvobject 9, 1
+	turnvobject 11, 1
+	turnvobject 13, 1
+	turnvobject 15, 1
+	turnvobject 17, 1
+	turnvobject 19, 1
+	turnvobject 21, 1
+	turnvobject 23, 1
+	turnvobject 25, 1
+	turnvobject 27, 1
+	turnvobject 31, 1
+	delay 20
+	return
+
+BattleFrontier_BattleDomeBattleRoom_EventScript_24C8F5:: @ 824C8F5
+BattleFrontier_BattleDomePreBattleRoom_EventScript_24C8F5:: @ 824C8F5
+	copyvar VAR_RESULT, VAR_0x40CE
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24C90F
+	warp BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 255, 5, 11
+	waitstate
+	end
+
+BattleFrontier_BattleDomePreBattleRoom_EventScript_24C90F:: @ 824C90F
+	warp BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 255, 17, 11
+	waitstate
+	end
+
+BattleFrontier_BattleDomeBattleRoom_EventScript_24C919:: @ 824C919
+	random 2
+	copyvar VAR_0x400D, VAR_RESULT
+	compare_var_to_value VAR_0x400D, 0
+	goto_eq BattleFrontier_BattleDomeBattleRoom_EventScript_27374E
+	setobjectxyperm 6, 2, 0
+	setobjectmovementtype 6, 10
+	return
+
+BattleFrontier_BattleDomeBattleRoom_EventScript_24C938:: @ 824C938
+	compare_var_to_value VAR_0x400D, 0
+	goto_eq BattleFrontier_BattleDomeBattleRoom_EventScript_27374E
+	applymovement 6, BattleFrontier_BattleDomeBattleRoom_Movement_24C95E
+	return
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C94B: @ 824C94B
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_13
+	step_51
+	step_46
+	step_12
+	step_46
+	step_50
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C95E: @ 824C95E
+	step_down
+	step_down
+	step_right
+	step_right
+	step_25
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C964: @ 824C964
+	step_right
+	step_right
+	step_right
+	step_right
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C969: @ 824C969
+	step_27
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Movement_24C96B: @ 824C96B
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
+
+BattleFrontier_BattleDomeBattleRoom_Text_24C970: @ 824C970
+	.string "{PLAYER} has entered the BATTLE DOME!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24C990: @ 824C990
+	.string "{STR_VAR_1}\n"
+	.string "match!\p"
+	.string "{PLAYER} versus {STR_VAR_2}!\p"
+	.string "Let the battle begin!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24C9BE: @ 824C9BE
+	.string "{PLAYER} is the winner!\n"
+	.string "Congratulations!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24C9E1: @ 824C9E1
+	.string "{STR_VAR_2} is the winner!\n"
+	.string "Congratulations!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CA04: @ 824CA04
+	.string "{PLAYER} is the Level 50\n"
+	.string "Battle Tournament Champion!\p"
+	.string "Congratulations!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CA44: @ 824CA44
+	.string "{PLAYER} is the Open Level\n"
+	.string "Battle Tournament Champion!\p"
+	.string "Congratulations!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CA86: @ 824CA86
+	.string "What an unbelievable finish!\n"
+	.string "We have a double knockout!\p"
+	.string "In this event, the Battle Tournament\n"
+	.string "rules call for a REFEREE’S decision.\p"
+	.string "Please wait while the judging\n"
+	.string "is under way.$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CB34: @ 824CB34
+	.string "The REFEREES have reached\n"
+	.string "a decision!\p"
+	.string "The winner is…\n"
+	.string "Oh, my goodness!\l"
+	.string "The winner is {STR_VAR_1}!\l"
+	.string "Congratulations!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CB9D: @ 824CB9D
+	.string "The REFEREES have reached\n"
+	.string "a decision!\p"
+	.string "The winner is…\n"
+	.string "Oh, my goodness!\l"
+	.string "The winner is {PLAYER}!\l"
+	.string "Congratulations!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CC06: @ 824CC06
+	.string "The bright new hope!\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CC1C: @ 824CC1C
+	.string "The rising star!\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CC2E: @ 824CC2E
+	.string "Will this TRAINER race to\n"
+	.string "the championship?\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CC5B: @ 824CC5B
+	.string "Can the feat of a championship\n"
+	.string "on the first try be achieved?\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CC99: @ 824CC99
+	.string "Can the loss of the last match\n"
+	.string "be avenged?\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CCC5: @ 824CCC5
+	.string "The TRAINER is on fire for\n"
+	.string "the first championship try!\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CCFD: @ 824CCFD
+	.string "A win here means this TRAINER\n"
+	.string "advances to the final!\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CD33: @ 824CD33
+	.string "Will the long-held dream of\n"
+	.string "a championship finally come true?\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CD72: @ 824CD72
+	.string "The invincible champion!\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CD8C: @ 824CD8C
+	.string "Can anyone hope to beat this\n"
+	.string "TRAINER?\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CDB3: @ 824CDB3
+	.string "Do battles exist solely for\n"
+	.string "this TRAINER?\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CDDE: @ 824CDDE
+	.string "The current champion aiming to\n"
+	.string "retain the title!\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CE10: @ 824CE10
+	.string "The former champion has returned!\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CE33: @ 824CE33
+	.string "The former toughness has returned!\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CE57: @ 824CE57
+	.string "Will this TRAINER do as expected\n"
+	.string "and advance to the finals?\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CE94: @ 824CE94
+	.string "Will the former champ regain\n"
+	.string "lost glory?\p"
+	.string "$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CEBE: @ 824CEBE
+	.string "Feel the glow of a true master!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CEDE: @ 824CEDE
+	.string "And now… The TRAINER standing in\n"
+	.string "{PLAYER}’s record-setting path…\p"
+	.string "Yes! The one and only!\n"
+	.string "The BATTLE DOME COMMISSIONER!\l"
+	.string "Our very own DOME ACE!\l"
+	.string "Make way for TUCKER!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CF7A: @ 824CF7A
+	.string "Spectators: TUCKER! TUCKER!\n"
+	.string "TUCKER! TUCKER! TUCKER!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24CFAE: @ 824CFAE
+	.string "TUCKER: Ahahah!\p"
+	.string "Do you hear it? This crowd!\n"
+	.string "They’re all itching to see our match!\p"
+	.string "Ahahah!\p"
+	.string "I bet you’re twitching all over from\n"
+	.string "the tension of getting to battle me!\p"
+	.string "But don’t you worry about a thing!\p"
+	.string "I’m the no. 1 star of the BATTLE DOME!\n"
+	.string "I, TUCKER the DOME ACE, will bathe you\l"
+	.string "in my brilliant glow!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D0D9: @ 824D0D9
+	.string "Your strategy!\n"
+	.string "Let’s see it!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D0F6: @ 824D0F6
+	.string "Unbelievable! It’s incredible!\n"
+	.string "The victor is {PLAYER}!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D127: @ 824D127
+	.string "The winner is TUCKER!\n"
+	.string "The DOME ACE has prevailed!\p"
+	.string "Congratulations, TUCKER!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D172: @ 824D172
+	.string "TUCKER: Rules are rules!\n"
+	.string "Let me see your FRONTIER PASS.$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D1AA: @ 824D1AA
+	.string "The Tactics Symbol was embossed on\n"
+	.string "the FRONTIER PASS!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D1E0: @ 824D1E0
+	.string "… … … … … …\p"
+	.string "I sorely underestimated you. I won’t\n"
+	.string "make the same mistake next time…$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D232: @ 824D232
+	.string "Can the win streak be stretched?\n"
+	.string "The confidence is there!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D26C: @ 824D26C
+	.string "Ladies and gentlemen!\n"
+	.string "Boys, girls, and POKéMON!\p"
+	.string "Finally!\n"
+	.string "Finally, the legend has returned!\p"
+	.string "Yes, the name of that legend!\n"
+	.string "Our very own DOME ACE!\l"
+	.string "It’s none other than TUCKER!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D319: @ 824D319
+	.string "TUCKER: Ah…\n"
+	.string "The pummeling roar of the crowd…\l"
+	.string "Their furnace-like heat of excitement…\l"
+	.string "This is a wonderful place…\p"
+	.string "To the crowd, I am the DOME ACE…\n"
+	.string "I represent their hopes and dreams…\l"
+	.string "I must never fade from their sight…\p"
+	.string "I must burn!\n"
+	.string "Brighter and more brilliant!\l"
+	.string "I must light all that gather here!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D43E: @ 824D43E
+	.string "I will unleash all the power that\n"
+	.string "I possess! Right here and now!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D47F: @ 824D47F
+	.string "TUCKER: You’re genuinely fantastic!\p"
+	.string "Never before! I haven’t ever lost in the\n"
+	.string "times I’ve had to unleash my power.\p"
+	.string "Yes, quite fantastic!\n"
+	.string "Your FRONTIER PASS, please?$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D522: @ 824D522
+	.string "The Tactics Symbol took on\n"
+	.string "a golden shine!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D54D: @ 824D54D
+	.string "You’re strong, but above all,\n"
+	.string "you have a unique charm!\p"
+	.string "In you, I see a definite potential for\n"
+	.string "a superstar like me.\p"
+	.string "I will very much look forward to\n"
+	.string "our next encounter!$"
+
+	.incbin "baserom.gba", 0x24d5f5, 0x82
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D677: @ 824D677
+	.string "The final match!\p"
+	.string "{PLAYER} versus the DOME ACE, TUCKER!\p"
+	.string "Let the battle begin!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D6BE: @ 824D6BE
+	.string "The REFEREES have reached\n"
+	.string "a decision!\p"
+	.string "The winner is…\n"
+	.string "Oh, my goodness!\l"
+	.string "The winner is our very own DOME ACE!\l"
+	.string "It’s TUCKER!\p"
+	.string "Congratulations! And thank you!\n"
+	.string "Let’s hear it for the DOME ACE, TUCKER!$"

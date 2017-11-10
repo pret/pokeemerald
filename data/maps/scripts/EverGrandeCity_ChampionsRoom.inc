@@ -29,8 +29,8 @@ EverGrandeCity_ChampionsRoom_EventScript_228A1E:: @ 8228A1E
 	waitmovement 0
 	setvar VAR_0x4001, 1
 	goto EverGrandeCity_ChampionsRoom_EventScript_228A45
-
-	.incbin "baserom.gba", 0x228a40, 0x2
+    releaseall
+    end
 
 EverGrandeCity_ChampionsRoom_Movement_228A42: @ 8228A42
 	step_up

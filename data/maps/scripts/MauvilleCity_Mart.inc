@@ -11,8 +11,7 @@ MauvilleCity_Mart_EventScript_2110E6:: @ 82110E6
 	release
 	end
 
-	.incbin "baserom.gba", 0x2110fd, 0x3
-
+	.align 2
 MauvilleCity_Mart_Pokemart_211100: @ 8211100
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL

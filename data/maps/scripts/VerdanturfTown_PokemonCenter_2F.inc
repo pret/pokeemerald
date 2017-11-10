@@ -5,5 +5,15 @@ VerdanturfTown_PokemonCenter_2F_MapScripts:: @ 8202897
 	map_script 3, VerdanturfTown_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
-	.incbin "baserom.gba", 0x2028ac, 0x12
+VerdanturfTown_PokemonCenter_2F_EventScript_2028AC:: @ 82028AC
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+VerdanturfTown_PokemonCenter_2F_EventScript_2028B2:: @ 82028B2
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+VerdanturfTown_PokemonCenter_2F_EventScript_2028B8:: @ 82028B8
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
 

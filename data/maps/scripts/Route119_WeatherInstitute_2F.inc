@@ -297,7 +297,9 @@ Route119_WeatherInstitute_2F_Text_270650: @ 8270650
 	.string "It might be an odd way of thanking you,\n"
 	.string "but take this POKéMON.$"
 
-	.incbin "baserom.gba", 0x2706b2, 0x36
+Route119_WeatherInstitute_2F_Text_2706B2: @ 82706B2
+	.string "Hm? You don’t seem to have any room\n"
+	.string "for this POKéMON.$"
 
 Route119_WeatherInstitute_2F_Text_2706E8: @ 82706E8
 	.string "{PLAYER} received CASTFORM!$"

@@ -389,7 +389,31 @@ LilycoveCity_Harbor_EventScript_21E557:: @ 821E557
 	goto LilycoveCity_Harbor_EventScript_21E09F
 	end
 
-	.incbin "baserom.gba", 0x21e56b, 0x55
+LilycoveCity_Harbor_EventScript_21E56B:: @ 821E56B
+	msgbox LilycoveCity_Harbor_Text_21E792, 4
+	release
+	end
+
+LilycoveCity_Harbor_EventScript_21E575:: @ 821E575
+	msgbox LilycoveCity_Harbor_Text_21E864, 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
+	setvar VAR_PORTHOLE, 5
+	call LilycoveCity_Harbor_EventScript_21E5CC
+	warp SS_TIDAL_CORRIDOR, 255, 1, 10
+	waitstate
+	release
+	end
+
+LilycoveCity_Harbor_EventScript_21E59D:: @ 821E59D
+	msgbox LilycoveCity_Harbor_Text_21E880, 5
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
+	call LilycoveCity_Harbor_EventScript_21E5CC
+	warp BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
+	waitstate
+	release
+	end
 
 LilycoveCity_Harbor_EventScript_21E5C0:: @ 821E5C0
 	message LilycoveCity_Harbor_Text_21E8CC
@@ -438,7 +462,9 @@ LilycoveCity_Harbor_Movement_21E633: @ 821E633
 	step_up
 	step_end
 
-	.incbin "baserom.gba", 0x21e635, 0x2
+LilycoveCity_Harbor_Movement_21E635: @ 821E635
+	step_up
+	step_end
 
 LilycoveCity_Harbor_EventScript_21E637:: @ 821E637
 	lock
@@ -561,7 +587,12 @@ LilycoveCity_Harbor_Text_21E758: @ 821E758
 	.string "Hello, are you here for the ferry?\n"
 	.string "May I see your TICKET?$"
 
-	.incbin "baserom.gba", 0x21e792, 0x5b
+
+LilycoveCity_Harbor_Text_21E792: @ 821E792
+	.string "{PLAYER} doesn’t have the TICKET…\p"
+	.string "I’m terribly sorry.\p"
+	.string "You must have a TICKET to board\n"
+	.string "the ferry.$"
 
 LilycoveCity_Harbor_Text_21E7ED: @ 821E7ED
 	.string "{PLAYER} flashed the TICKET.\p"

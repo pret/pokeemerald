@@ -3547,11 +3547,11 @@ _08163E2C:
 	ldr r4, =gUnknown_02038BFC
 	movs r0, 0
 	strb r0, [r4]
-	ldr r0, =gUnknown_08224158
+	ldr r0, =MossdeepCity_SpaceCenter_2F_EventScript_224157 + 1
 	bl BattleSetup_ConfigureTrainerBattle
 	movs r0, 0x1
 	strb r0, [r4]
-	ldr r0, =gUnknown_08224167
+	ldr r0, =MossdeepCity_SpaceCenter_2F_EventScript_224166 + 1
 	bl BattleSetup_ConfigureTrainerBattle
 	ldr r0, =gPartnerTrainerId
 	strh r5, [r0]

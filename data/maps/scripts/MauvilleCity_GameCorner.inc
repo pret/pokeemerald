@@ -22,7 +22,13 @@ MauvilleCity_GameCorner_EventScript_20FBE5:: @ 820FBE5
 	goto MauvilleCity_GameCorner_EventScript_20FCD1
 	end
 
-	.incbin "baserom.gba", 0x20fc0c, 0x27
+MauvilleCity_GameCorner_EventScript_20FC0C:: @ 820FC0C
+	multichoicedefault 15, 0, 49, 1, 0
+	switch VAR_RESULT
+	case 0, MauvilleCity_GameCorner_EventScript_20FC33
+	case 1, MauvilleCity_GameCorner_EventScript_20FC75
+	goto MauvilleCity_GameCorner_EventScript_20FCD1
+	end
 
 MauvilleCity_GameCorner_EventScript_20FC33:: @ 820FC33
 	checkcoins VAR_0x4001
@@ -714,7 +720,9 @@ MauvilleCity_GameCorner_Text_210646: @ 8210646
 MauvilleCity_GameCorner_Text_210673: @ 8210673
 	.string "You don’t have enough COINS.$"
 
-	.incbin "baserom.gba", 0x210690, 0x2f
+MauvilleCity_GameCorner_Text_210690: @ 8210690
+	.string "There isn’t any room available for\n"
+	.string "placing {STR_VAR_1}.$"
 
 MauvilleCity_GameCorner_Text_2106BF: @ 82106BF
 	.string "Oh, is that so? \n"
@@ -727,7 +735,8 @@ MauvilleCity_GameCorner_Text_210705: @ 8210705
 MauvilleCity_GameCorner_Text_21071B: @ 821071B
 	.string "Here you go!$"
 
-	.incbin "baserom.gba", 0x210728, 0x28
+MauvilleCity_GameCorner_Text_210728: @ 8210728
+	.string "Oh, you can’t carry any more than that.$"
 
 MauvilleCity_GameCorner_Text_210750: @ 8210750
 	.string "I made a mistake and got two of\n"

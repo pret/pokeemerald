@@ -242,7 +242,9 @@ LilycoveCity_LilycoveMuseum_1F_Text_219311: @ 8219311
 	.string "small characters of an ancient,\l"
 	.string "unreadable language.$"
 
-	.incbin "baserom.gba", 0x21938c, 0x28
+LilycoveCity_LilycoveMuseum_1F_Text_21938C: @ 821938C
+	.string "Hmmm…\n"
+	.string "What works of great magnificence…$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_2193B4: @ 82193B4
 	.string "Battling with POKéMON is fun,\n"

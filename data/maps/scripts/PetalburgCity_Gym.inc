@@ -674,7 +674,16 @@ PetalburgCity_Gym_Movement_2050D0: @ 82050D0
 	step_up
 	step_end
 
-	.incbin "baserom.gba", 0x2050d8, 0x9
+PetalburgCity_Gym_Movement_2050D8: @ 82050D8
+	step_26
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_13
+	step_25
+	step_end
 
 PetalburgCity_Gym_Movement_2050E1: @ 82050E1
 	step_14
@@ -1613,7 +1622,9 @@ PetalburgCity_Gym_Text_20721E: @ 820721E
 	.string "“SPEED ROOM,” the sign says.\p"
 	.string "Do you want to go through?$"
 
-	.incbin "baserom.gba", 0x207256, 0x2a
+PetalburgCity_Gym_Text_207256: @ 8207256
+	.string "This door appears to be locked\n"
+	.string "right now…$"
 
 PetalburgCity_Gym_Text_207280: @ 8207280
 	.string "“ACCURACY ROOM,” the sign says.\p"

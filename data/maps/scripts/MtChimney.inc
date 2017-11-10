@@ -195,7 +195,208 @@ MtChimney_Movement_22EF9C: @ 822EF9C
 	step_down
 	step_end
 
-	.incbin "baserom.gba", 0x22efa6, 0xad
+MtChimney_Movement_22EFA6: @ 822EFA6
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_end
+
+MtChimney_Movement_22EFB8: @ 822EFB8
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_down
+	step_end
+
+MtChimney_Movement_22EFC1: @ 822EFC1
+	step_right
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
+
+MtChimney_Movement_22EFD0: @ 822EFD0
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_end
+
+MtChimney_Movement_22EFE9: @ 822EFE9
+	step_14
+	step_14
+	step_14
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_down
+	step_end
+
+MtChimney_Movement_22EFF4: @ 822EFF4
+	step_14
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
+
+MtChimney_Movement_22F004: @ 822F004
+	step_14
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_end
+
+MtChimney_Movement_22F015: @ 822F015
+	step_14
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_25
+	step_end
+
+MtChimney_Movement_22F01D: @ 822F01D
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
+
+MtChimney_Movement_22F02B: @ 822F02B
+	step_down
+	step_end
+
+MtChimney_Movement_22F02D: @ 822F02D
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
+
+MtChimney_Movement_22F035: @ 822F035
+	step_14
+	step_14
+	step_27
+	step_14
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
+
+MtChimney_Movement_22F03F: @ 822F03F
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_27
+	step_14
+	step_down
+	step_down
+	step_end
+
+MtChimney_Movement_22F04A: @ 822F04A
+	step_40
+	step_17
+	step_41
+	step_03
+	step_end
+
+MtChimney_Movement_22F04F: @ 822F04F
+	step_left
+	step_28
+	step_14
+	step_end
 
 MtChimney_EventScript_22F053:: @ 822F053
 	msgbox MtChimney_Text_22FD1F, 3

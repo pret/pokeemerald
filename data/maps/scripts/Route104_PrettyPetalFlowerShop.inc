@@ -57,8 +57,7 @@ Route104_PrettyPetalFlowerShop_EventScript_22A3E4:: @ 822A3E4
 	release
 	end
 
-	.incbin "baserom.gba", 0x22a3f9, 0x3
-
+	.align 2
 Route104_PrettyPetalFlowerShop_Pokemart_22A3FC: @ 822A3FC
 	.2byte ITEM_FULL_RESTORE
 	.2byte ITEM_MAX_POTION

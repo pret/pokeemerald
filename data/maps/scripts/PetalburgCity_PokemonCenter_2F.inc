@@ -5,5 +5,15 @@ PetalburgCity_PokemonCenter_2F_MapScripts:: @ 8207D41
 	map_script 3, PetalburgCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
-	.incbin "baserom.gba", 0x207d56, 0x12
+PetalburgCity_PokemonCenter_2F_EventScript_207D56:: @ 8207D56
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+PetalburgCity_PokemonCenter_2F_EventScript_207D5C:: @ 8207D5C
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+PetalburgCity_PokemonCenter_2F_EventScript_207D62:: @ 8207D62
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
 

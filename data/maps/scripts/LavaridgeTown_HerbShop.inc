@@ -11,8 +11,7 @@ LavaridgeTown_HerbShop_EventScript_1FE4D7:: @ 81FE4D7
 	release
 	end
 
-	.incbin "baserom.gba", 0x1fe4ee, 0x2
-
+	.align 2
 LavaridgeTown_HerbShop_Pokemart_1FE4F0: @ 81FE4F0
 	.2byte ITEM_ENERGY_POWDER
 	.2byte ITEM_ENERGY_ROOT

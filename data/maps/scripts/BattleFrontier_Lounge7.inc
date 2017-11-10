@@ -380,5 +380,103 @@ BattleFrontier_Lounge7_Text_265D17: @ 8265D17
 	.string "but feel this…\p"
 	.string "Time is so cruel…$"
 
-	.incbin "baserom.gba", 0x265e30, 0x3aa
+BattleFrontier_Lounge7_Text_265E30: @ 8265E30
+	.string "Recovers up to\n"
+	.string "half the user’s\n"
+	.string "maximum HP.$"
+
+BattleFrontier_Lounge7_Text_265E5B: @ 8265E5B
+	.string "Inflicts damage\n"
+	.string "identical to the\n"
+	.string "user’s level.$"
+
+BattleFrontier_Lounge7_Text_265E8A: @ 8265E8A
+	.string "Recovers half the\n"
+	.string "damage inflicted\n"
+	.string "on a sleeping foe.$"
+
+BattleFrontier_Lounge7_Text_265EC0: @ 8265EC0
+	.string "A strong punch\n"
+	.string "thrown with\n"
+	.string "incredible power.$"
+
+BattleFrontier_Lounge7_Text_265EED: @ 8265EED
+	.string "An extremely\n"
+	.string "powerful kick with\n"
+	.string "intense force.$"
+
+BattleFrontier_Lounge7_Text_265F1C: @ 8265F1C
+	.string "A full-body slam\n"
+	.string "that may cause\n"
+	.string "paralysis.$"
+
+BattleFrontier_Lounge7_Text_265F47: @ 8265F47
+	.string "Large boulders\n"
+	.string "are hurled. May\n"
+	.string "cause flinching.$"
+
+BattleFrontier_Lounge7_Text_265F77: @ 8265F77
+	.string "Retaliates any\n"
+	.string "physical hit with\n"
+	.string "double the power.$"
+
+BattleFrontier_Lounge7_Text_265FAA: @ 8265FAA
+	.string "A weak jolt of\n"
+	.string "electricity that\n"
+	.string "paralyzes the foe.$"
+
+BattleFrontier_Lounge7_Text_265FDD: @ 8265FDD
+	.string "A fighting dance\n"
+	.string "that sharply\n"
+	.string "raises ATTACK.$"
+
+BattleFrontier_Lounge7_Text_26600A: @ 826600A
+	.string "Curls up to con-\n"
+	.string "ceal weak spots\n"
+	.string "and raise DEFENSE.$"
+
+BattleFrontier_Lounge7_Text_26603E: @ 826603E
+	.string "A loud attack\n"
+	.string "that can be used\n"
+	.string "only while asleep.$"
+
+BattleFrontier_Lounge7_Text_266070: @ 8266070
+	.string "Hurls mud in the\n"
+	.string "foe’s face to re-\n"
+	.string "duce its accuracy.$"
+
+BattleFrontier_Lounge7_Text_2660A6: @ 82660A6
+	.string "Sprays star-\n"
+	.string "shaped rays\n"
+	.string "that never miss.$"
+
+BattleFrontier_Lounge7_Text_2660D0: @ 82660D0
+	.string "A chilling attack\n"
+	.string "that lowers the\n"
+	.string "foe’s SPEED.$"
+
+BattleFrontier_Lounge7_Text_2660FF: @ 82660FF
+	.string "Endures any at-\n"
+	.string "tack for 1 turn,\n"
+	.string "leaving 1HP.$"
+
+BattleFrontier_Lounge7_Text_26612D: @ 826612D
+	.string "Copies the foe’s\n"
+	.string "effect(s) and\n"
+	.string "gives to the user.$"
+
+BattleFrontier_Lounge7_Text_26615F: @ 826615F
+	.string "An icy punch\n"
+	.string "that may\n"
+	.string "freeze the foe.$"
+
+BattleFrontier_Lounge7_Text_266185: @ 8266185
+	.string "An electrified\n"
+	.string "punch that may\n"
+	.string "paralyze the foe.$"
+
+BattleFrontier_Lounge7_Text_2661B5: @ 82661B5
+	.string "A fiery punch\n"
+	.string "that may burn\n"
+	.string "the foe.$"
 

@@ -11,8 +11,7 @@ BattleFrontier_Mart_EventScript_267ACC:: @ 8267ACC
 	release
 	end
 
-	.incbin "baserom.gba", 0x267ae3, 0x1
-
+	.align 2
 BattleFrontier_Mart_Pokemart_267AE4: @ 8267AE4
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION

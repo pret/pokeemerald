@@ -22,4 +22,3 @@ SecretBase_RedCave1_MapScript2_23B4AE: @ 823B4AE
 SecretBase_RedCave1_MapScript1_23B4B8: @ 823B4B8
 	setstepcallback 6
 	end
-

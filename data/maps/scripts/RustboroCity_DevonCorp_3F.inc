@@ -72,7 +72,12 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	releaseall
 	end
 
-	.incbin "baserom.gba", 0x21252f, 0x5
+RustboroCity_DevonCorp_3F_Movement_21252F: @ 821252F
+	step_up
+	step_up
+	step_up
+	step_27
+	step_end
 
 RustboroCity_DevonCorp_3F_Movement_212534: @ 8212534
 	step_right

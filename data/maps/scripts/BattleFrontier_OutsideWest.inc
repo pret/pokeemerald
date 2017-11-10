@@ -88,7 +88,13 @@ BattleFrontier_OutsideWest_EventScript_23D4F4:: @ 823D4F4
 	msgbox BattleFrontier_OutsideWest_Text_23D772, 3
 	end
 
-	.incbin "baserom.gba", 0x23d4fd, 0x12
+BattleFrontier_OutsideWest_EventScript_23D4FD:: @ 823D4FD
+	msgbox BattleFrontier_OutsideWest_Text_23D7A6, 2
+	end
+
+BattleFrontier_OutsideWest_EventScript_23D506:: @ 823D4FD
+	msgbox BattleFrontier_OutsideWest_Text_23D9DD, 2
+	end
 
 BattleFrontier_OutsideWest_EventScript_23D50F:: @ 823D50F
 	msgbox BattleFrontier_OutsideWest_Text_23D99C, 2
@@ -239,7 +245,9 @@ BattleFrontier_OutsideWest_EventScript_23D667:: @ 823D667
 	msgbox BattleFrontier_OutsideWest_Text_23DE15, 2
 	end
 
-	.incbin "baserom.gba", 0x23d670, 0x9
+BattleFrontier_OutsideWest_EventScript_23D670:: @ 823D670
+	msgbox BattleFrontier_OutsideWest_Text_23DF7D, 2
+	end
 
 BattleFrontier_OutsideWest_EventScript_23D679:: @ 823D679
 	msgbox BattleFrontier_OutsideWest_Text_23DEFD, 2
@@ -311,7 +319,10 @@ BattleFrontier_OutsideWest_Text_23D772: @ 823D772
 	.string "This is the BATTLE PIKE!\n"
 	.string "Choose one of three paths!$"
 
-	.incbin "baserom.gba", 0x23d7a6, 0x62
+BattleFrontier_OutsideWest_Text_23D7A6: @ 823D7A6
+	.string "This is the BATTLE TOWER.\p"
+	.string "TRAINERS bring their best-raised\n"
+	.string "POKéMON for elimination-style matches.$"
 
 BattleFrontier_OutsideWest_Text_23D808: @ 823D808
 	.string "Hello, are you here for the ferry?\n"
@@ -349,7 +360,11 @@ BattleFrontier_OutsideWest_Text_23D99C: @ 823D99C
 	.string "But here…\l"
 	.string "I’ve been useless!$"
 
-	.incbin "baserom.gba", 0x23d9dd, 0x83
+BattleFrontier_OutsideWest_Text_23D9DD: @ 823D9DD
+	.string "I want to go to the BATTLE TOWER,\n"
+	.string "but I can’t find it even though I have\l"
+	.string "a map of the BATTLE FRONTIER.\p"
+	.string "This place is just too big!$"
 
 BattleFrontier_OutsideWest_Text_23DA60: @ 823DA60
 	.string "I wanted to take a challenge as soon\n"
@@ -424,7 +439,10 @@ BattleFrontier_OutsideWest_Text_23DEFD: @ 823DEFD
 	.string "Let us both win our way up and meet\l"
 	.string "in challenges.$"
 
-	.incbin "baserom.gba", 0x23df7d, 0x42
+BattleFrontier_OutsideWest_Text_23DF7D: @ 823DF7D
+	.string "Grandpa, over here!\n"
+	.string "The BATTLE DOME is here!\l"
+	.string "Go get ’em, Grandpa!$"
 
 BattleFrontier_OutsideWest_Text_23DFBF: @ 823DFBF
 	.string "Ah, so this here is the BATTLE DOME?\n"

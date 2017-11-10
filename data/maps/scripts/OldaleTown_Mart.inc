@@ -28,8 +28,7 @@ OldaleTown_Mart_EventScript_1FC26C:: @ 81FC26C
 	release
 	end
 
-	.incbin "baserom.gba", 0x1fc27b, 0x1
-
+	.align 2
 OldaleTown_Mart_Pokemart_1FC27C: @ 81FC27C
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION

@@ -299,7 +299,8 @@ Route110_EventScript_1EF604:: @ 81EF604
 	msgbox Route110_Text_298579, 6
 	end
 
-	.incbin "baserom.gba", 0x1ef61b, 0x1
+Route110_EventScript_1EF61B:: @ 81EF61B
+	end
 
 Route110_EventScript_1EF61C:: @ 81EF61C
 	trainerbattle 0, TRAINER_KALEB, 0, Route110_Text_2986ED, Route110_Text_298735

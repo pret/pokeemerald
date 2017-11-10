@@ -239,5 +239,74 @@ LittlerootTown_BrendansHouse_2F_Movement_1F8604: @ 81F8604
 	step_26
 	step_end
 
-	.incbin "baserom.gba", 0x1f8609, 0x4
+LittlerootTown_BrendansHouse_2F_Movement_1F8609: @ 81F8609
+	step_14
+	step_14
+	step_27
+	step_end
 
+gUnknown_081F860D:: @ 81F860D
+	lockall
+	checkplayergender
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F8626
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq LittlerootTown_BrendansHouse_2F_EventScript_1F864C
+	end
+
+LittlerootTown_BrendansHouse_2F_EventScript_1F8626:: @ 81F8626
+	setvar VAR_0x8004, 1
+	special sp0D9_ComputerRelated
+	playse SE_PC_ON
+	msgbox gUnknown_08272D87, 4
+	special sub_816AE58
+	waitstate
+	releaseall
+	end
+
+gUnknown_081F863F:: @ 81F863F
+	.incbin "baserom.gba", 0x1f863f, 0xd
+
+LittlerootTown_BrendansHouse_2F_EventScript_1F864C:: @ 81F864C
+	msgbox gUnknown_08272CD5, 4
+	releaseall
+	end
+
+LittlerootTown_BrendansHouse_2F_EventScript_1F8656:: @ 81F8656
+LittlerootTown_MaysHouse_2F_EventScript_1F8656:: @ 81F8656
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F877F, 3
+	end
+
+LittlerootTown_BrendansHouse_2F_EventScript_1F865F:: @ 81F865F
+LittlerootTown_MaysHouse_2F_EventScript_1F865F:: @ 81F865F
+	msgbox LittlerootTown_BrendansHouse_2F_Text_1F884F, 3
+	end
+
+LittlerootTown_BrendansHouse_2F_Text_1F8668: @ 81F8668
+	.string "The clock is stopped…\p"
+	.string "Better set it and start it!$"
+
+LittlerootTown_BrendansHouse_2F_Text_1F869A: @ 81F869A
+	.string "MOM: {PLAYER}, how do you like your\n"
+	.string "new room?\p"
+	.string "Good! Everything’s put away neatly!\p"
+	.string "They finished moving everything in\n"
+	.string "downstairs, too.\p"
+	.string "POKéMON movers are so convenient!\p"
+	.string "Oh, you should make sure that\n"
+	.string "everything’s all there on your desk.$"
+
+LittlerootTown_BrendansHouse_2F_Text_1F877F: @ 81F877F
+	.string "{PLAYER} flipped open the notebook.\p"
+	.string "ADVENTURE RULE NO. 1\n"
+	.string "Open the MENU with START.\p"
+	.string "ADVENTURE RULE NO. 2\n"
+	.string "Record your progress with SAVE.\p"
+	.string "The remaining pages are blank…$"
+
+	.incbin "baserom.gba", 0x1f8820, 0x2f
+
+LittlerootTown_BrendansHouse_2F_Text_1F884F: @ 81F884F
+	.string "It’s a Nintendo GameCube.\p"
+	.string "A Game Boy Advance is connected to\n"
+	.string "serve as the Controller.$"

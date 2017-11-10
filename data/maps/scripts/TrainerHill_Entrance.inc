@@ -11,7 +11,8 @@ TrainerHill_Entrance_MapScript1_2680C6: @ 82680C6
 	getplayerxy VAR_0x400D, VAR_RESULT
 	end
 
-	.incbin "baserom.gba", 0x2680cf, 0x1
+TrainerHill_Entrance_MapScript1_2680CF: @ 82680CF
+	end
 
 TrainerHill_Entrance_MapScript1_2680D0: @ 82680D0
 	setvar VAR_0x8004, 4
@@ -223,7 +224,9 @@ TrainerHill_Entrance_Movement_268381: @ 8268381
 	step_down
 	step_end
 
-	.incbin "baserom.gba", 0x268383, 0x2
+TrainerHill_Entrance_Movement_268383: @ 8268383
+	step_01
+	step_end
 
 TrainerHill_Entrance_Movement_268385: @ 8268385
 	step_down
@@ -270,8 +273,7 @@ TrainerHill_Entrance_EventScript_2683C7:: @ 82683C7
 	release
 	end
 
-	.incbin "baserom.gba", 0x2683e7, 0x1
-
+	.align 2
 TrainerHill_Entrance_Pokemart_2683E8: @ 82683E8
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_ANTIDOTE
@@ -294,8 +296,7 @@ TrainerHill_Entrance_EventScript_268402:: @ 8268402
 	release
 	end
 
-	.incbin "baserom.gba", 0x268411, 0x3
-
+	.align 2
 TrainerHill_Entrance_Pokemart_268414: @ 8268414
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION
@@ -388,5 +389,81 @@ TrainerHill_Entrance_Text_2687C3: @ 82687C3
 	.string "neither Exp. Points nor money will\l"
 	.string "be awarded.$"
 
-	.incbin "baserom.gba", 0x26890d, 0x79
+TrainerHill_Entrance_Text_26890D: @ 826890D
+	.string "Oh, I’m sorry, but you appear to have\n"
+	.string "only one POKéMON with you.\p"
+	.string "You will need at least two POKéMON\n"
+	.string "to enter this event.$"
 
+TrainerHill_Roof_Text_268986: @ 8268986
+	.string "Hm! Hm!\p"
+	.string "You finally came!\n"
+	.string "Yes, you have arrived!\p"
+	.string "Wait! Don’t say it!\n"
+	.string "I know why you came all the way\l"
+	.string "here by yourself!\p"
+	.string "You wanted to see me, the owner\n"
+	.string "of the TRAINER HILL, because…\p"
+	.string "You want to form a tag team with me!\n"
+	.string "Wa-hoo!\p"
+	.string "…Uh?\n"
+	.string "That’s not it?\p"
+	.string "Anyway, I watched you on your way up.\n"
+	.string "Marvelous battling! Bravo, indeed!$"
+
+TrainerHill_Roof_Text_268AC5: @ 8268AC5
+	.string "For a marvelous someone like you,\n"
+	.string "I have the most marvelous gift!$"
+
+TrainerHill_Roof_Text_268B07: @ 8268B07
+	.string "Oh, no, full up with things!\n"
+	.string "You’ll be back later for this!$"
+
+TrainerHill_Roof_Text_268B43: @ 8268B43
+	.string "Oh, hold on here! Did you possibly get\n"
+	.string "here marvelously quickly?\p"
+	.string "How splendid! You needn’t have\n"
+	.string "hurried so to see me!\p"
+	.string "That is so delightful. I’ll have the Time\n"
+	.string "Board at the reception updated!$"
+
+TrainerHill_Roof_Text_268C03: @ 8268C03
+	.string "But, oh…\n"
+	.string "You weren’t very quick getting here.$"
+
+TrainerHill_Roof_Text_268C31: @ 8268C31
+	.string "Perhaps it would please me more if you\n"
+	.string "arrived zippier next time.\p"
+	.string "Then, I should be pleased to form\n"
+	.string "a tag team with you!\p"
+	.string "Until we meet again, amigo!$"
+
+	.incbin "baserom.gba", 0x268cc6, 0x94
+
+TrainerHill_Entrance_Text_268D5A: @ 8268D5A
+	.string "Who knows what sort of TRAINERS\n"
+	.string "and POKéMON combos are ahead?\p"
+	.string "All I know is that I’ll knock aside\n"
+	.string "anyone that stands in my way!$"
+
+TrainerHill_Entrance_Text_268DDA: @ 8268DDA
+	.string "I heard tough TRAINERS come to this\n"
+	.string "TRAINER HILL from all over.\p"
+	.string "I can’t wait to test the waters!\p"
+	.string "I’ll knock aside anyone that stands\n"
+	.string "in my way!$"
+
+TrainerHill_Entrance_Text_268E6A: @ 8268E6A
+	.string "Do you see the Time Board over there?\p"
+	.string "My friends and I are trying to see who\n"
+	.string "can reach the top in the least time.$"
+
+TrainerHill_Entrance_Text_268EDC: @ 8268EDC
+	.string "Do you know when they’re opening\n"
+	.string "this place up?\p"
+	.string "I’m waiting here to be the first\n"
+	.string "challenger ever!$"
+
+TrainerHill_Elevator_Text_268F3E: @ 8268F3E
+	.string "Would you like to return to\n"
+	.string "the reception counter?$"

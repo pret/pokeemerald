@@ -225,7 +225,9 @@ FallarborTown_BattleTentBattleRoom_Movement_200B96: @ 8200B96
 	step_27
 	step_end
 
-	.incbin "baserom.gba", 0x200b9c, 0x2
+FallarborTown_BattleTentBattleRoom_Movement_200B9C: @ 8200B9C
+	step_left
+	step_end
 
 FallarborTown_BattleTentBattleRoom_Movement_200B9E: @ 8200B9E
 	step_up

@@ -618,3 +618,157 @@ BattleFrontier_BattleDomeLobby_Text_24A51D: @ 824A51D
 	.string "Here is your prize for your Battle\n"
 	.string "Tournament victory.$"
 
+VerdanturfTown_BattleTentLobby_Text_24A554: @ 824A554
+	.string "{PLAYER} received the prize\n"
+	.string "{STR_VAR_1}.$"
+
+	.incbin "baserom.gba", 0x24a56e, 0x51
+
+BattleFrontier_BattleDomeLobby_Text_24A5BF: @ 824A5BF
+	.string "Thank you for playing!$"
+
+BattleFrontier_BattleDomeLobby_Text_24A5D6: @ 824A5D6
+	.string "Your record will be saved.\n"
+	.string "Please wait.$"
+
+BattleFrontier_BattleDomeLobby_Text_24A5FE: @ 824A5FE
+	.string "We’ve been waiting for you!$"
+
+BattleFrontier_BattleDomeLobby_Text_24A61A: @ 824A61A
+	.string "Before I show you to the BATTLE DOME,\n"
+	.string "I must save the data. Is that okay?$"
+
+BattleFrontier_BattleDomeLobby_Text_24A664: @ 824A664
+	.string "Where the strategies of TRAINERS\n"
+	.string "are put to the test!\p"
+	.string "Welcome to the BATTLE DOME!\p"
+	.string "I am your guide to the DOUBLE BATTLE\n"
+	.string "Tournament.$"
+
+BattleFrontier_BattleDomeLobby_Text_24A6E7: @ 824A6E7
+	.string "Would you like to challenge\n"
+	.string "the DOUBLE BATTLE Tournament?$"
+
+BattleFrontier_BattleDomeLobby_Text_24A721: @ 824A721
+	.string "The DOUBLE BATTLE Tournament\n"
+	.string "is exactly as the name suggests--\l"
+	.string "a tournament of DOUBLE BATTLES.\p"
+	.string "All participating TRAINERS must\n"
+	.string "enter three POKéMON each.\p"
+	.string "In each battle, one of the three\n"
+	.string "POKéMON must be held in reserve.\p"
+	.string "The remaining two POKéMON must take\n"
+	.string "part in a DOUBLE BATTLE.\p"
+	.string "Choose the two battling POKéMON after\n"
+	.string "examining the opponent’s trio.\p"
+	.string "You win the tournament by defeating\n"
+	.string "four TRAINERS.\p"
+	.string "Battle Points are awarded to\n"
+	.string "the tournament winner.\p"
+	.string "If you want to interrupt your\n"
+	.string "tournament, please save the game.\p"
+	.string "If you don’t save before interrupting,\n"
+	.string "you will be disqualified.$"
+
+BattleFrontier_BattleDomeLobby_Text_24A966: @ 824A966
+	.string "They’re the results of the last\n"
+	.string "Level 50 SINGLE BATTLE Tournament.$"
+
+BattleFrontier_BattleDomeLobby_Text_24A9A9: @ 824A9A9
+	.string "They’re the results of the last\n"
+	.string "Level 50 DOUBLE BATTLE Tournament.$"
+
+BattleFrontier_BattleDomeLobby_Text_24A9EC: @ 824A9EC
+	.string "They’re the results of the last\n"
+	.string "Open Level SINGLE BATTLE Tournament.$"
+
+BattleFrontier_BattleDomeLobby_Text_24AA31: @ 824AA31
+	.string "They’re the results of the last\n"
+	.string "Open Level DOUBLE BATTLE Tournament.$"
+
+BattleFrontier_BattleDomeLobby_Text_24AA76: @ 824AA76
+	.string "Did you see it?\n"
+	.string "The last Battle Tournament?\p"
+	.string "The winner, {STR_VAR_1}, was seriously\n"
+	.string "tough.\p"
+	.string "You should check out the results\n"
+	.string "on the monitor beside the PC.$"
+
+BattleFrontier_OutsideWest_Text_24AB06: @ 824AB06
+	.string "The BATTLE FRONTIER…\n"
+	.string "I’ve long dreamed about a place like it.$"
+
+BattleFrontier_OutsideWest_Text_24AB44: @ 824AB44
+	.string "The BATTLE DOME\n"
+	.string "Become the Unbeatable Superstar!$"
+
+BattleFrontier_OutsideWest_Text_24AB75: @ 824AB75
+	.string "The ??????\n"
+	.string "Under Construction!$"
+
+BattleFrontier_BattleDomeLobby_Text_24AB94: @ 824AB94
+	.string "When a TRAINER chains tournament\n"
+	.string "wins at the BATTLE DOME, he or she\l"
+	.string "gains a reputation as a star.\p"
+	.string "Tough TRAINERS are drawn by that\n"
+	.string "reputation to the BATTLE DOME.\p"
+	.string "A true superstar is a TRAINER who\n"
+	.string "can keep winning tournaments.$"
+
+BattleFrontier_BattleDomeLobby_Text_24AC76: @ 824AC76
+	.string "I ran into one of the tournament\n"
+	.string "favorites in the very first round.\p"
+	.string "Of course I got trashed…$"
+
+BattleFrontier_BattleDomeLobby_Text_24ACD3: @ 824ACD3
+	.string "I would’ve won if I’d kept this POKéMON\n"
+	.string "held in reserve.\p"
+	.string "You need to check your opponent’s\n"
+	.string "POKéMON carefully before choosing\l"
+	.string "your battling POKéMON.$"
+
+BattleFrontier_BattleDomeLobby_Text_24AD67: @ 824AD67
+	.string "Congratulations!\p"
+	.string "You defeated the DOME ACE and won\n"
+	.string "the Battle Tournament!$"
+
+BattleFrontier_BattleDomeLobby_Text_24ADB1: @ 824ADB1
+	.string "In recognition of your strategy--\n"
+	.string "a thing of beauty it was, too--\l"
+	.string "we award you these Battle Point(s)!$"
+
+BattleFrontier_BattleDomeLobby_Text_24AE17: @ 824AE17
+	.string "Would you like to record your\n"
+	.string "last BATTLE DOME match on your\l"
+	.string "FRONTIER PASS?$"
+
+BattleFrontier_BattleDomeLobby_Text_24AE63: @ 824AE63
+	.string "The Battle Tournament rules\n"
+	.string "are listed.$"
+
+BattleFrontier_BattleDomeLobby_Text_24AE8B: @ 824AE8B
+	.string "Which heading do you want to read?$"
+
+BattleFrontier_BattleDomeLobby_Text_24AEAE: @ 824AEAE
+	.string "The tournament matchups are drawn up\n"
+	.string "based on the toughness of POKéMON\l"
+	.string "held by TRAINERS.\p"
+	.string "The matchups avoid having tough\n"
+	.string "TRAINERS face each other right away.$"
+
+BattleFrontier_BattleDomeLobby_Text_24AF4C: @ 824AF4C
+	.string "The tournament chart, or as we call it,\n"
+	.string "the “Tree,” is available for viewing\l"
+	.string "in the Waiting Room from any guide.\p"
+	.string "The Tournament Tree will provide\n"
+	.string "several kinds of data.\p"
+	.string "The data on view includes the previous\n"
+	.string "tournament’s results, the POKéMON held\l"
+	.string "by TRAINERS, and the battle styles of\l"
+	.string "TRAINERS.$"
+
+BattleFrontier_BattleDomeLobby_Text_24B073: @ 824B073
+	.string "If battling POKéMON faint at the same\n"
+	.string "time--a double KO--in a tournament\l"
+	.string "match, the REFEREES will review\l"
+	.string "the match and declare the winner.$"

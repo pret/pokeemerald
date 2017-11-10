@@ -113,7 +113,95 @@ MossdeepCity_Gym_EventScript_22097E:: @ 822097E
 	msgbox MossdeepCity_Gym_Text_221E45, 6
 	end
 
-	.incbin "baserom.gba", 0x220999, 0x158
+MossdeepCity_Gym_EventScript_220999:: @ 8220999
+	lockall
+	checkflag FLAG_0x064
+	goto_eq MossdeepCity_Gym_EventScript_2209D0
+	setflag FLAG_0x064
+	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	waitmovement 0
+	setmetatile 5, 5, 516, 0
+	setmetatile 2, 7, 569, 1
+	goto MossdeepCity_Gym_EventScript_2209C8
+	end
+
+MossdeepCity_Gym_EventScript_2209C8:: @ 82209C8
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	releaseall
+	end
+
+MossdeepCity_Gym_EventScript_2209D0:: @ 82209D0
+	clearflag FLAG_0x064
+	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	waitmovement 0
+	setmetatile 5, 5, 524, 0
+	setmetatile 2, 7, 568, 1
+	goto MossdeepCity_Gym_EventScript_2209C8
+	end
+
+MossdeepCity_Gym_EventScript_2209F5:: @ 82209F5
+	lockall
+	checkflag FLAG_0x065
+	goto_eq MossdeepCity_Gym_EventScript_220A24
+	setflag FLAG_0x065
+	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	waitmovement 0
+	setmetatile 8, 14, 516, 0
+	setmetatile 8, 10, 569, 1
+	goto MossdeepCity_Gym_EventScript_2209C8
+	end
+
+MossdeepCity_Gym_EventScript_220A24:: @ 8220A24
+	clearflag FLAG_0x065
+	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	waitmovement 0
+	setmetatile 8, 14, 517, 0
+	setmetatile 8, 10, 568, 1
+	goto MossdeepCity_Gym_EventScript_2209C8
+	end
+
+MossdeepCity_Gym_EventScript_220A49:: @ 8220A49
+	lockall
+	checkflag FLAG_0x066
+	goto_eq MossdeepCity_Gym_EventScript_220A78
+	setflag FLAG_0x066
+	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	waitmovement 0
+	setmetatile 15, 17, 524, 0
+	setmetatile 17, 15, 569, 1
+	goto MossdeepCity_Gym_EventScript_2209C8
+	end
+
+MossdeepCity_Gym_EventScript_220A78:: @ 8220A78
+	clearflag FLAG_0x066
+	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	waitmovement 0
+	setmetatile 15, 17, 516, 0
+	setmetatile 17, 15, 568, 1
+	goto MossdeepCity_Gym_EventScript_2209C8
+	end
+
+MossdeepCity_Gym_EventScript_220A9D:: @ 8220A9D
+	lockall
+	checkflag FLAG_0x067
+	goto_eq MossdeepCity_Gym_EventScript_220ACC
+	setflag FLAG_0x067
+	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	waitmovement 0
+	setmetatile 1, 23, 525, 0
+	setmetatile 5, 24, 569, 1
+	goto MossdeepCity_Gym_EventScript_2209C8
+	end
+
+MossdeepCity_Gym_EventScript_220ACC:: @ 8220ACC
+	clearflag FLAG_0x067
+	applymovement 255, MossdeepCity_Gym_Movement_220C30
+	waitmovement 0
+	setmetatile 1, 23, 516, 0
+	setmetatile 5, 24, 568, 1
+	goto MossdeepCity_Gym_EventScript_2209C8
+	end
 
 MossdeepCity_Gym_EventScript_220AF1:: @ 8220AF1
 	lockall
@@ -196,7 +284,10 @@ MossdeepCity_Gym_EventScript_220C26:: @ 8220C26
 	release
 	end
 
-	.incbin "baserom.gba", 0x220c30, 0x3
+MossdeepCity_Gym_Movement_220C30: @ 8220C30
+	step_14
+	step_14
+	step_end
 
 MossdeepCity_Gym_EventScript_220C33:: @ 8220C33
 	lockall

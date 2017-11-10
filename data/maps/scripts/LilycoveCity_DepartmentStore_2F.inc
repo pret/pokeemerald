@@ -23,8 +23,7 @@ LilycoveCity_DepartmentStore_2F_EventScript_21FB48:: @ 821FB48
 	release
 	end
 
-	.incbin "baserom.gba", 0x21fb5f, 0x1
-
+	.align 2
 LilycoveCity_DepartmentStore_2F_Pokemart_21FB60: @ 821FB60
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
@@ -51,8 +50,7 @@ LilycoveCity_DepartmentStore_2F_EventScript_21FB7A:: @ 821FB7A
 	release
 	end
 
-	.incbin "baserom.gba", 0x21fb91, 0x3
-
+	.align 2
 LilycoveCity_DepartmentStore_2F_Pokemart_21FB94: @ 821FB94
 	.2byte ITEM_POTION
 	.2byte ITEM_SUPER_POTION

@@ -11,8 +11,7 @@ MossdeepCity_Mart_EventScript_2223C8:: @ 82223C8
 	release
 	end
 
-	.incbin "baserom.gba", 0x2223df, 0x1
-
+	.align 2
 MossdeepCity_Mart_Pokemart_2223E0: @ 82223E0
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_NET_BALL

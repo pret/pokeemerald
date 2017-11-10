@@ -23,8 +23,7 @@ LilycoveCity_DepartmentStore_4F_EventScript_21FE06:: @ 821FE06
 	release
 	end
 
-	.incbin "baserom.gba", 0x21fe1d, 0x3
-
+	.align 2
 LilycoveCity_DepartmentStore_4F_Pokemart_21FE20: @ 821FE20
 	.2byte ITEM_TM38
 	.2byte ITEM_TM25
@@ -44,8 +43,7 @@ LilycoveCity_DepartmentStore_4F_EventScript_21FE2C:: @ 821FE2C
 	release
 	end
 
-	.incbin "baserom.gba", 0x21fe43, 0x1
-
+	.align 2
 LilycoveCity_DepartmentStore_4F_Pokemart_21FE44: @ 821FE44
 	.2byte ITEM_TM17
 	.2byte ITEM_TM20

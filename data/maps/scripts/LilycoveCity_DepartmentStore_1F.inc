@@ -178,5 +178,16 @@ LilycoveCity_DepartmentStore_1F_Text_21F98A: @ 821F98A
 	.string "5F: POKé DOLL FLOOR\p"
 	.string "ROOFTOP: ROOFTOP PLAZA$"
 
-	.incbin "baserom.gba", 0x21fa13, 0x119
+LilycoveCity_DepartmentStore_1F_Text_21FA13: @ 821FA13
+	.string "Wireless Communication is a\n"
+	.string "lot of fun, isn’t it?\p"
+	.string "I think it lets you do things that\n"
+	.string "weren’t possible before.\p"
+	.string "For instance, you can now trade\n"
+	.string "with people you couldn’t before.\p"
+	.string "I think it’s going to be exciting!$"
+
+LilycoveCity_DepartmentStore_1F_Text_21FAE5: @ 821FAE5
+	.string "I want to spread the word about how\n"
+	.string "fun Wireless Communication can be.$"
 

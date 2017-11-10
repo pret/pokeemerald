@@ -1456,7 +1456,7 @@ _0809CAE4:
 	bl sub_81381F8
 	cmp r0, 0x1
 	bne _0809CAF8
-	ldr r0, =gUnknown_08224175
+	ldr r0, =MossdeepCity_SpaceCenter_2F_EventScript_224175
 	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool

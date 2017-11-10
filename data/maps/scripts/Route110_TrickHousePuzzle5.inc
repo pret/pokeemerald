@@ -199,7 +199,11 @@ Route110_TrickHousePuzzle5_EventScript_26CCC7:: @ 826CCC7
 	goto Route110_TrickHousePuzzle5_EventScript_26CE73
 	end
 
-	.incbin "baserom.gba", 0x26ccd3, 0xc
+Route110_TrickHousePuzzle5_EventScript_26CCD3:: @ 826CCD3
+	lockall
+	setvar VAR_0x4009, 5
+	goto Route110_TrickHousePuzzle5_EventScript_26CE73
+	end
 
 Route110_TrickHousePuzzle5_EventScript_26CCDF:: @ 826CCDF
 	lockall
@@ -522,7 +526,18 @@ Route110_TrickHousePuzzle5_EventScript_26D25C:: @ 826D25C
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4B5
 	return
 
-	.incbin "baserom.gba", 0x26d294, 0x38
+Route110_TrickHousePuzzle5_EventScript_26D294:: @ 826D294
+	compare_var_to_value VAR_0x4008, 1
+	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4C0
+	compare_var_to_value VAR_0x4008, 2
+	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4CB
+	compare_var_to_value VAR_0x4008, 3
+	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4D6
+	compare_var_to_value VAR_0x4008, 4
+	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4E1
+	compare_var_to_value VAR_0x4008, 5
+	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4EC
+	return
 
 Route110_TrickHousePuzzle5_EventScript_26D2CC:: @ 826D2CC
 	compare_var_to_value VAR_0x4008, 1
@@ -689,7 +704,30 @@ Route110_TrickHousePuzzle5_EventScript_26D4B5:: @ 826D4B5
 	waitmovement 0
 	return
 
-	.incbin "baserom.gba", 0x26d4c0, 0x37
+Route110_TrickHousePuzzle5_EventScript_26D4C0:: @ 826D4C0
+	applymovement 1, Movement_26D618
+	waitmovement 0
+	return
+
+Route110_TrickHousePuzzle5_EventScript_26D4CB:: @ 826D4CB
+	applymovement 2, Movement_26D618
+	waitmovement 0
+	return
+
+Route110_TrickHousePuzzle5_EventScript_26D4D6:: @ 826D4D6
+	applymovement 3, Movement_26D618
+	waitmovement 0
+	return
+
+Route110_TrickHousePuzzle5_EventScript_26D4E1:: @ 826D4E1
+	applymovement 4, Movement_26D618
+	waitmovement 0
+	return
+
+Route110_TrickHousePuzzle5_EventScript_26D4EC:: @ 826D4EC
+	applymovement 5, Movement_26D618
+	waitmovement 0
+	return
 
 Route110_TrickHousePuzzle5_EventScript_26D4F7:: @ 826D4F7
 	applymovement 1, Route110_TrickHousePuzzle5_Movement_26D61E
@@ -838,7 +876,14 @@ Route110_TrickHousePuzzle5_Movement_26D613: @ 826D613
 	step_left
 	step_end
 
-	.incbin "baserom.gba", 0x26d618, 0x6
+
+Movement_26D618: @ 826D618
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
 
 Route110_TrickHousePuzzle5_Movement_26D61E: @ 826D61E
 	step_right
@@ -870,3 +915,172 @@ Route110_TrickHousePuzzle5_Movement_26D62C: @ 826D62C
 	step_right
 	step_end
 
+Route110_TrickHouseEntrance_Movement_26D632: @ 826D632
+Route110_TrickHousePuzzle5_Movement_26D632: @ 826D632
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_00
+	step_end
+
+	.incbin "baserom.gba", 0x26d660, 0x6e
+
+Route110_TrickHousePuzzle5_Text_26D6CE: @ 826D6CE
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 1 AM I!\p"
+	.string "IF YOU ANSWER QUIZZES CORRECTLY,\n"
+	.string "THEN YOU WILL GO TO MECHADOLL 5.\l"
+	.string "THEN YOU CAN OBTAIN THE SECRET CODE.$"
+
+Route110_TrickHousePuzzle5_Text_26D757: @ 826D757
+	.string "MECHADOLL 1 QUIZ.\p"
+	.string "One of these POKéMON is not found\n"
+	.string "on ROUTE 110. Which one is it?$"
+
+Route110_TrickHousePuzzle5_Text_26D7AA: @ 826D7AA
+	.string "MECHADOLL 1 QUIZ.\p"
+	.string "One of these POKéMON is not of the\n"
+	.string "WATER type. Which one is it?$"
+
+Route110_TrickHousePuzzle5_Text_26D7FC: @ 826D7FC
+	.string "MECHADOLL 1 QUIZ.\p"
+	.string "One of these POKéMON does not use\n"
+	.string "LEECH LIFE. Which one is it?$"
+
+Route110_TrickHousePuzzle5_Text_26D84D: @ 826D84D
+	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
+	.string "GO THROUGH. PLEASE.$"
+
+Route110_TrickHousePuzzle5_Text_26D883: @ 826D883
+	.string "BZZZT. DISAPPOINTMENT.\n"
+	.string "ERROR.$"
+
+Route110_TrickHousePuzzle5_Text_26D8A1: @ 826D8A1
+	.string "WAHAHAHAHA! WAHAHAHAHA!\n"
+	.string "CLICKETY-CLACK!$"
+
+Route110_TrickHousePuzzle5_Text_26D8C9: @ 826D8C9
+	.string "YOUR NEXT CHALLENGE WE WAIT FOR.$"
+
+Route110_TrickHousePuzzle5_Text_26D8EA: @ 826D8EA
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 2 AM I!\p"
+	.string "MECHADOLL 1’S QUIZ DIFFICULTY LEVEL\n"
+	.string "IS SET TOO LOW.$"
+
+Route110_TrickHousePuzzle5_Text_26D940: @ 826D940
+	.string "MECHADOLL 2 QUIZ.\p"
+	.string "Which of these POKéMON did WALLY\n"
+	.string "borrow from your father?$"
+
+Route110_TrickHousePuzzle5_Text_26D98C: @ 826D98C
+	.string "MECHADOLL 2 QUIZ.\p"
+	.string "Which of these POKéMON was chasing\n"
+	.string "PROF. BIRCH?$"
+
+Route110_TrickHousePuzzle5_Text_26D9CE: @ 826D9CE
+	.string "MECHADOLL 2 QUIZ.\p"
+	.string "Which of these POKéMON did TEAM AQUA\n"
+	.string "use in PETALBURG FOREST?$"
+
+Route110_TrickHousePuzzle5_Text_26DA1E: @ 826DA1E
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 3 AM I!\p"
+	.string "MATTERS OF MONEY ARE MY SOLE FOCUS.$"
+
+Route110_TrickHousePuzzle5_Text_26DA64: @ 826DA64
+	.string "MECHADOLL 3 QUIZ.\p"
+	.string "Which costs more?\n"
+	.string "Three HARBOR MAILS or one BURN HEAL?$"
+
+Route110_TrickHousePuzzle5_Text_26DAAD: @ 826DAAD
+	.string "MECHADOLL 3 QUIZ.\p"
+	.string "Sell one GREAT BALL and buy\n"
+	.string "one POTION. How much money remains?$"
+
+Route110_TrickHousePuzzle5_Text_26DAFF: @ 826DAFF
+	.string "MECHADOLL 3 QUIZ.\p"
+	.string "Do one REPEL and SODA POP cost\n"
+	.string "more than one SUPER POTION?$"
+
+Route110_TrickHousePuzzle5_Text_26DB4C: @ 826DB4C
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 4 THAT IS ME!\p"
+	.string "MY QUIZ IS AN OBJECT OF BEAUTY.$"
+
+Route110_TrickHousePuzzle5_Text_26DB94: @ 826DB94
+	.string "MECHADOLL 4 QUIZ.\p"
+	.string "In SEASHORE HOUSE, were there more men\n"
+	.string "or women?$"
+
+Route110_TrickHousePuzzle5_Text_26DBD7: @ 826DBD7
+	.string "MECHADOLL 4 QUIZ.\p"
+	.string "In LAVARIDGE TOWN, were there more\n"
+	.string "elderly men or elderly women?$"
+
+Route110_TrickHousePuzzle5_Text_26DC2A: @ 826DC2A
+	.string "MECHADOLL 4 QUIZ.\p"
+	.string "In the TRAINER’S SCHOOL, how many\n"
+	.string "girl students were there?$"
+
+Route110_TrickHousePuzzle5_Text_26DC78: @ 826DC78
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 5 AM I!\p"
+	.string "THE MASTER’S BEST AND PROUDEST\n"
+	.string "ACHIEVEMENT AM I.$"
+
+Route110_TrickHousePuzzle5_Text_26DCCB: @ 826DCCB
+	.string "MECHADOLL 5 QUIZ.\p"
+	.string "In SLATEPORT’s POKéMON FAN CLUB,\n"
+	.string "how many POKéMON were there?$"
+
+Route110_TrickHousePuzzle5_Text_26DD1B: @ 826DD1B
+	.string "MECHADOLL 5 QUIZ.\p"
+	.string "In FORTREE CITY, how many\n"
+	.string "tree houses were there?$"
+
+Route110_TrickHousePuzzle5_Text_26DD5F: @ 826DD5F
+	.string "MECHADOLL 5 QUIZ.\p"
+	.string "On the CYCLING ROAD, how many\n"
+	.string "TRIATHLETES were there?$"

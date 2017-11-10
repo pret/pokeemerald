@@ -117,7 +117,15 @@ RustboroCity_Movement_1E0852: @ 81E0852
 	step_14
 	step_end
 
-	.incbin "baserom.gba", 0x1e0855, 0x8
+RustboroCity_Movement_1E0855: @ 81E0855
+	step_14
+	step_left
+	step_down
+	step_down
+	step_right
+	step_26
+	step_14
+	step_end
 
 RustboroCity_Movement_1E085D: @ 81E085D
 	step_up
@@ -196,7 +204,9 @@ RustboroCity_EventScript_1E08F5:: @ 81E08F5
 	msgbox RustboroCity_Text_1E2167, 3
 	end
 
-	.incbin "baserom.gba", 0x1e08fe, 0x9
+RustboroCity_EventScript_1E08FE:: @ 81E08FE
+	msgbox RustboroCity_Text_1E21B3, 3
+	end
 
 RustboroCity_EventScript_1E0907:: @ 81E0907
 	msgbox RustboroCity_Text_1E220B, 3
@@ -306,7 +316,60 @@ RustboroCity_EventScript_1E09CD:: @ 81E09CD
 	releaseall
 	end
 
-	.incbin "baserom.gba", 0x1e0a3b, 0x65
+RustboroCity_EventScript_1E0A3B:: @ 81E0A3B
+	msgbox RustboroCity_Text_1E1904, 4
+	return
+
+RustboroCity_EventScript_1E0A44:: @ 81E0A44
+	msgbox RustboroCity_Text_1E194D, 4
+	return
+
+RustboroCity_EventScript_1E0A4D:: @ 81E0A4D
+	applymovement 9, RustboroCity_Movement_1E0AC1
+	waitmovement 0
+	return
+
+RustboroCity_EventScript_1E0A58:: @ 81E0A58
+	applymovement 9, RustboroCity_Movement_1E0AC5
+	waitmovement 0
+	return
+
+RustboroCity_EventScript_1E0A63:: @ 81E0A63
+	applymovement 9, RustboroCity_Movement_1E0ACA
+	waitmovement 0
+	return
+
+RustboroCity_EventScript_1E0A6E:: @ 81E0A6E
+	applymovement 9, RustboroCity_Movement_1E0ACF
+	waitmovement 0
+	return
+
+RustboroCity_EventScript_1E0A79:: @ 81E0A79
+	applymovement 9, RustboroCity_Movement_1E0AD5
+	waitmovement 0
+	applymovement 255, RustboroCity_Movement_2725A6
+	waitmovement 0
+	return
+
+RustboroCity_Movement_1E0A8E: @ 81E0A8E
+	step_30
+	step_30
+	step_18
+	step_18
+	step_18
+	step_18
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_end
 
 RustboroCity_Movement_1E0AA0: @ 81E0AA0
 	step_30
@@ -347,7 +410,43 @@ RustboroCity_Movement_1E0AB9: @ 81E0AB9
 	step_up
 	step_end
 
-	.incbin "baserom.gba", 0x1e0ac1, 0x1c
+RustboroCity_Movement_1E0AC1: @ 81E0AC1
+	step_down
+	step_right
+	step_right
+	step_end
+
+RustboroCity_Movement_1E0AC5: @ 81E0AC5
+	step_down
+	step_down
+	step_right
+	step_right
+	step_end
+
+RustboroCity_Movement_1E0ACA: @ 81E0ACA
+	step_down
+	step_down
+	step_right
+	step_right
+	step_end
+
+RustboroCity_Movement_1E0ACF: @ 81E0ACF
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_end
+
+RustboroCity_Movement_1E0AD5: @ 81E0AD5
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_25
+	step_end
 
 RustboroCity_EventScript_1E0ADD:: @ 81E0ADD
 	lock
@@ -1155,7 +1254,10 @@ RustboroCity_Text_1E2167: @ 81E2167
 	.string "LEADER: ROXANNE\p"
 	.string "“The ROCK-loving honors student!”$"
 
-	.incbin "baserom.gba", 0x1e21b3, 0x58
+RustboroCity_Text_1E21B3: @ 81E21B3
+	.string "DEVON CORP. BRANCH OFFICE\p"
+	.string "“Access limited to DEVON employees\n"
+	.string "and authorized personnel.”$"
 
 RustboroCity_Text_1E220B: @ 81E220B
 	.string "RUSTBORO CITY\p"

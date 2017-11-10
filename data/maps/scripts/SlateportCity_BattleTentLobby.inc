@@ -235,7 +235,12 @@ SlateportCity_BattleTentLobby_EventScript_208A2E:: @ 8208A2E
 	release
 	end
 
-	.incbin "baserom.gba", 0x208a38, 0x5
+SlateportCity_BattleTentLobby_Movement_208A38:: @ 8208A38
+	step_up
+	step_up
+	step_up
+	step_54
+	step_end
 
 SlateportCity_BattleTentLobby_EventScript_208A3D:: @ 8208A3D
 	lock

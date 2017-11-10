@@ -137,3 +137,34 @@ SkyPillar_Outside_Movement_2393EB: @ 82393EB
 SkyPillar_Outside_EventScript_2393F8:: @ 82393F8
 	end
 
+gUnknown_082393F9:: @ 82393F9
+	.incbin "baserom.gba", 0x2393f9, 0x1d
+
+SkyPillar_Outside_Text_239416: @ 8239416
+	.string "WALLACE: Oh, my, I’m terribly sorry!\p"
+	.string "In my haste, I didn’t notice that\n"
+	.string "I’d left you behind!\p"
+	.string "I’ve opened the locked door of\n"
+	.string "the SKY PILLAR.\p"
+	.string "{PLAYER}{KUN}, let’s be on our way!$"
+
+SkyPillar_Outside_Text_2394BC: @ 82394BC
+	.string "WALLACE: It’s an earthquake!\p"
+	.string "There’s not a moment to waste!\n"
+	.string "We’ve got to hurry!$"
+
+SkyPillar_Outside_Text_23950C: @ 823950C
+	.string "WALLACE: Hmm…\n"
+	.string "The situation is getting worse…$"
+
+SkyPillar_Outside_Text_23953A: @ 823953A
+	.string "WALLACE: This isn’t good…\p"
+	.string "The weather distortion is spreading\n"
+	.string "even here…\p"
+	.string "{PLAYER}{KUN}.\p"
+	.string "RAYQUAZA should be farther up\n"
+	.string "from here.\p"
+	.string "I’m worried about SOOTOPOLIS.\n"
+	.string "I’ve got to go back.\p"
+	.string "Everything is in your hands now.\n"
+	.string "Don’t fail us!$"

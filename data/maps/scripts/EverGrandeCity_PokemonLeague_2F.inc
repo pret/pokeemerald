@@ -5,5 +5,15 @@ EverGrandeCity_PokemonLeague_2F_MapScripts:: @ 8229D07
 	map_script 3, EverGrandeCity_PokemonLeague_2F_MapScript1_276ACF
 	.byte 0
 
-	.incbin "baserom.gba", 0x229d1c, 0x12
+EverGrandeCity_PokemonLeague_2F_EventScript_229D1C:: @ 8229D1C
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+EverGrandeCity_PokemonLeague_2F_EventScript_229D22:: @ 8229D22
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+EverGrandeCity_PokemonLeague_2F_EventScript_229D28:: @ 8229D28
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
 

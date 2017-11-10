@@ -13,8 +13,7 @@ PetalburgCity_Mart_EventScript_207D69:: @ 8207D69
 	release
 	end
 
-	.incbin "baserom.gba", 0x207d89, 0x3
-
+	.align 2
 PetalburgCity_Mart_Pokemart_207D8C: @ 8207D8C
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION
@@ -37,8 +36,7 @@ PetalburgCity_Mart_EventScript_207DA6:: @ 8207DA6
 	release
 	end
 
-	.incbin "baserom.gba", 0x207db5, 0x3
-
+	.align 2
 PetalburgCity_Mart_Pokemart_207DB8: @ 8207DB8
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL

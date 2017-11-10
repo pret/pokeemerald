@@ -531,3 +531,8 @@ BattleFrontier_BattleTowerBattleRoom2_Text_24975D: @ 824975D
 	.string "The 7th set of opponents is next.\n"
 	.string "Do your best!$"
 
+gText_LinkStandby3:: @ 824978D
+	.string "Link standby…$"
+
+gUnknown_0824979B:: @ 824979B
+	.incbin "baserom.gba", 0x24979b, 0x47

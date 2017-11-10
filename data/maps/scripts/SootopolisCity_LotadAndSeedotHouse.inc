@@ -133,7 +133,8 @@ SootopolisCity_LotadAndSeedotHouse_Text_227480: @ 8227480
 	.string "Thanks for showing me.\n"
 	.string "This is my thanks!$"
 
-	.incbin "baserom.gba", 0x22750e, 0x16
+SootopolisCity_LotadAndSeedotHouse_Text_22750E: @ 822750E
+	.string "{PLAYER} received a POTION.$"
 
 SootopolisCity_LotadAndSeedotHouse_Text_227524: @ 8227524
 	.string "Hunh?\n"
@@ -179,7 +180,8 @@ SootopolisCity_LotadAndSeedotHouse_Text_22776C: @ 822776C
 	.string "Thanks for showing me!\n"
 	.string "This is my thanks!$"
 
-	.incbin "baserom.gba", 0x2277f4, 0x16
+SootopolisCity_LotadAndSeedotHouse_Text_2277F4: @ 82277F4
+	.string "{PLAYER} received a POTION.$"
 
 SootopolisCity_LotadAndSeedotHouse_Text_22780A: @ 822780A
 	.string "Hunh?\n"

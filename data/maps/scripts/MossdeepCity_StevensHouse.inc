@@ -148,7 +148,10 @@ MossdeepCity_StevensHouse_EventScript_22291B:: @ 822291B
 	releaseall
 	end
 
-	.incbin "baserom.gba", 0x222926, 0x10
+MossdeepCity_StevensHouse_EventScript_222926:: @ 8222926
+	giveitem_std ITEM_HM08, 1, 1
+	setflag FLAG_0x07B
+	end
 
 MossdeepCity_StevensHouse_Text_222936: @ 8222936
 	.string "STEVEN: {PLAYER}{KUN}…\p"
@@ -186,7 +189,8 @@ MossdeepCity_StevensHouse_Text_222B9E: @ 8222B9E
 MossdeepCity_StevensHouse_Text_222BED: @ 8222BED
 	.string "{PLAYER} obtained a BELDUM.$"
 
-	.incbin "baserom.gba", 0x222c03, 0x27
+MossdeepCity_StevensHouse_Text_222C03: @ 8222C03
+	.string "There is no space for another POKéMON.$"
 
 MossdeepCity_StevensHouse_Text_222C2A: @ 8222C2A
 	.string "{PLAYER} left the POKé BALL where\n"

@@ -186,7 +186,8 @@ SootopolisCity_MysteryEventsHouse_1F_Text_227B46: @ 8227B46
 	.string "my only amusement is watching young\l"
 	.string "TRAINERS battle.$"
 
-	.incbin "baserom.gba", 0x227bdd, 0x1f
+SootopolisCity_MysteryEventsHouse_1F_Text_227BDD: @ 8227BDD
+	.string "The door appears to be locked.$"
 
 SootopolisCity_MysteryEventsHouse_1F_Text_227BFC: @ 8227BFC
 	.string "A TRAINER named {STR_VAR_1}\n"
@@ -211,5 +212,28 @@ SootopolisCity_MysteryEventsHouse_1F_Text_227CEB: @ 8227CEB
 SootopolisCity_MysteryEventsHouse_1F_Text_227D21: @ 8227D21
 	.string "I hope to see a good match!$"
 
-	.incbin "baserom.gba", 0x227d3d, 0x3
+SootopolisCity_MysteryEventsHouse_1F_Text_227D3D: @ 8227D3D
+	.string "{STR_VAR_1}$"
+
+SootopolisCity_MysteryEventsHouse_B1F_Text_227D40: @ 8227D40
+	.string "The match ended up a draw.$"
+
+SootopolisCity_MysteryEventsHouse_1F_Text_227D5B: @ 8227D5B
+	.string "So, it became a standoff.\p"
+	.string "It was a brilliant match in which\n"
+	.string "neither side conceded a step!$"
+
+	.incbin "baserom.gba", 0x227db5, 0x3
+
+SootopolisCity_MysteryEventsHouse_1F_Text_227DB8: @ 8227DB8
+	.string "That was superlative!\p"
+	.string "Why, it was like seeing myself in\n"
+	.string "my youth again!$"
+
+	.incbin "baserom.gba", 0x227e00, 0x3
+
+SootopolisCity_MysteryEventsHouse_1F_Text_227E03: @ 8227E03
+	.string "Ah, too bad for you!\p"
+	.string "But it was a good match.\n"
+	.string "I hope you can win next time.$"
 

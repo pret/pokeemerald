@@ -5,5 +5,15 @@ SlateportCity_PokemonCenter_2F_MapScripts:: @ 820DC21
 	map_script 3, SlateportCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
-	.incbin "baserom.gba", 0x20dc36, 0x12
+SlateportCity_PokemonCenter_2F_EventScript_20DC36:: @ 820DC36
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+SlateportCity_PokemonCenter_2F_EventScript_20DC3C:: @ 820DC3C
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+SlateportCity_PokemonCenter_2F_EventScript_20DC42:: @ 820DC42
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
 

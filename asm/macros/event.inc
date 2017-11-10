@@ -645,6 +645,12 @@
 	.elseif \type == 9
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
+	.elseif \type == 10
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
+	.elseif \type == 11
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
 	.endif
 	.endm
 

@@ -11,8 +11,7 @@ FortreeCity_Mart_EventScript_217666:: @ 8217666
 	release
 	end
 
-	.incbin "baserom.gba", 0x21767d, 0x3
-
+	.align 2
 FortreeCity_Mart_Pokemart_217680: @ 8217680
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_ULTRA_BALL

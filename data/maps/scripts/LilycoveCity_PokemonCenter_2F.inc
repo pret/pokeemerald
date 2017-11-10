@@ -5,5 +5,15 @@ LilycoveCity_PokemonCenter_2F_MapScripts:: @ 821C75D
 	map_script 3, LilycoveCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
-	.incbin "baserom.gba", 0x21c772, 0x12
+LilycoveCity_PokemonCenter_2F_EventScript_21C772:: @ 821C772
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+LilycoveCity_PokemonCenter_2F_EventScript_21C778:: @ 821C778
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+LilycoveCity_PokemonCenter_2F_EventScript_21C77E:: @ 821C77E
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
 

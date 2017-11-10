@@ -149,7 +149,15 @@ Route111_EventScript_1F0EA7:: @ 81F0EA7
 	releaseall
 	end
 
-	.incbin "baserom.gba", 0x1f0eb1, 0x8
+Route111_Movement_1F0EB1:: @ 81F0EB1
+	step_94
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_end
 
 Route111_EventScript_1F0EB9:: @ 81F0EB9
 	lock
@@ -172,7 +180,11 @@ Route111_EventScript_1F0EF4:: @ 81F0EF4
 	release
 	end
 
-	.incbin "baserom.gba", 0x1f0efe, 0xc
+Route111_EventScript_1F0EFE:: @ 81F0EFE
+	lockall
+	setvar VAR_0x8004, 0
+	goto Route111_EventScript_1F0F2E
+	end
 
 Route111_EventScript_1F0F0A:: @ 81F0F0A
 	lockall
@@ -186,7 +198,11 @@ Route111_EventScript_1F0F16:: @ 81F0F16
 	goto Route111_EventScript_1F0F2E
 	end
 
-	.incbin "baserom.gba", 0x1f0f22, 0xc
+Route111_EventScript_1F0F22:: @ 81F0F22
+	lockall
+	setvar VAR_0x8004, 3
+	goto Route111_EventScript_1F0F2E
+	end
 
 Route111_EventScript_1F0F2E:: @ 81F0F2E
 	checkitem ITEM_GO_GOGGLES, 1

@@ -23,8 +23,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_21FFA6:: @ 821FFA6
 	release
 	end
 
-	.incbin "baserom.gba", 0x21ffbd, 0x3
-
+	.align 2
 LilycoveCity_DepartmentStore_5F_Pokemart_21FFC0: @ 821FFC0
 	.2byte ITEM_X_DEFEND
 	.2byte ITEM_X_SPEED
@@ -52,8 +51,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_21FFDC:: @ 821FFDC
 	release
 	end
 
-	.incbin "baserom.gba", 0x21fff3, 0x1
-
+	.align 2
 LilycoveCity_DepartmentStore_5F_Pokemart_21FFF4: @ 821FFF4
 	.2byte 101
 	.2byte 102
@@ -78,8 +76,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_22000A:: @ 822000A
 	release
 	end
 
-	.incbin "baserom.gba", 0x220021, 0x3
-
+	.align 2
 LilycoveCity_DepartmentStore_5F_Pokemart_220024: @ 8220024
 	.2byte ITEM_CARBOS
 	.2byte ITEM_CALCIUM
@@ -104,8 +101,7 @@ LilycoveCity_DepartmentStore_5F_EventScript_22003A:: @ 822003A
 	release
 	end
 
-	.incbin "baserom.gba", 0x220051, 0x3
-
+	.align 2
 LilycoveCity_DepartmentStore_5F_Pokemart_220054: @ 8220054
 	.2byte 59
 	.2byte 60

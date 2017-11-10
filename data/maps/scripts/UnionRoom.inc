@@ -98,5 +98,10 @@ UnionRoom_EventScript_23D236:: @ 823D236
 	release
 	end
 
-	.incbin "baserom.gba", 0x23d240, 0x9
+UnionRoom_EventScript_23D240:: @ 823D240
+	lockall
+	setvar VAR_RESULT, 10
+	waitstate
+	releaseall
+	end
 

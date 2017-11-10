@@ -39,8 +39,7 @@ RustboroCity_Mart_EventScript_214F48:: @ 8214F48
 	release
 	end
 
-	.incbin "baserom.gba", 0x214f57, 0x1
-
+	.align 2
 RustboroCity_Mart_Pokemart_214F58: @ 8214F58
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_TIMER_BALL

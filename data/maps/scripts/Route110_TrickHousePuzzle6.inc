@@ -42,7 +42,12 @@ Route110_TrickHousePuzzle6_EventScript_26DE0F:: @ 826DE0F
 	msgbox Route110_TrickHousePuzzle6_Text_26E048, 6
 	end
 
-	.incbin "baserom.gba", 0x26de26, 0x6d
+Route110_TrickHousePuzzle6_Text_26DE26: @ 826DE26
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is my life.”\n"
+	.string "… … … … … … … …\p"
+	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle6_Text_26DE93: @ 826DE93
 	.string "When I heard there was a strange\n"

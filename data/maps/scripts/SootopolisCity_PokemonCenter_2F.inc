@@ -5,5 +5,15 @@ SootopolisCity_PokemonCenter_2F_MapScripts:: @ 822676D
 	map_script 3, SootopolisCity_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
-	.incbin "baserom.gba", 0x226782, 0x12
+SootopolisCity_PokemonCenter_2F_EventScript_226782:: @ 8226782
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+SootopolisCity_PokemonCenter_2F_EventScript_226788:: @ 8226788
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+SootopolisCity_PokemonCenter_2F_EventScript_22678E:: @ 822678E
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
 

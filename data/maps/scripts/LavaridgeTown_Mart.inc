@@ -11,8 +11,7 @@ LavaridgeTown_Mart_EventScript_1FF9CE:: @ 81FF9CE
 	release
 	end
 
-	.incbin "baserom.gba", 0x1ff9e5, 0x3
-
+	.align 2
 LavaridgeTown_Mart_Pokemart_1FF9E8: @ 81FF9E8
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION

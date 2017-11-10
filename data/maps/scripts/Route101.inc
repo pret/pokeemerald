@@ -122,7 +122,8 @@ Route101_Movement_1EBDB5: @ 81EBDB5
 	step_16
 	step_end
 
-	.incbin "baserom.gba", 0x1ebdbc, 0x1
+Route101_Movement_1EBDBC: @ 81EBDBC
+	step_end
 
 Route101_Movement_1EBDBD: @ 81EBDBD
 	step_23
@@ -181,7 +182,8 @@ Route101_Movement_1EBDE7: @ 81EBDE7
 	step_16
 	step_end
 
-	.incbin "baserom.gba", 0x1ebdee, 0x1
+Route101_Movement_1EBDEE: @ 81EBDEE
+	step_end
 
 Route101_Movement_1EBDEF: @ 81EBDEF
 	step_24
@@ -190,7 +192,16 @@ Route101_Movement_1EBDEF: @ 81EBDEF
 	step_24
 	step_end
 
-	.incbin "baserom.gba", 0x1ebdf4, 0x7
+Route101_Movement_1EBDF4: @ 81EBDF4
+	step_up
+	step_up
+	step_end
+
+Route101_Movement_1EBDF7: @ 81EBDF7
+	step_up
+	step_left
+	step_up
+	step_end
 
 Route101_EventScript_1EBDFB:: @ 81EBDFB
 	msgbox Route101_Text_1EBFDD, 2

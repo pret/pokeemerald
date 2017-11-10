@@ -185,7 +185,24 @@ RusturfTunnel_Movement_22D02F: @ 822D02F
 	step_28
 	step_end
 
-	.incbin "baserom.gba", 0x22d035, 0xd
+RusturfTunnel_Movement_22D035: @ 822D035
+	step_left
+	step_28
+	step_end
+
+RusturfTunnel_Movement_22D038: @ 822D038
+	step_down
+	step_26
+	step_13
+	step_28
+	step_end
+
+RusturfTunnel_Movement_22D03D: @ 822D03D
+	step_up
+	step_25
+	step_13
+	step_28
+	step_end
 
 RusturfTunnel_Movement_22D042: @ 822D042
 	step_left

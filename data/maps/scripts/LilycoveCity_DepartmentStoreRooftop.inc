@@ -28,8 +28,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22022F:: @ 822022F
 	release
 	end
 
-	.incbin "baserom.gba", 0x220246, 0x2
-
+	.align 2
 LilycoveCity_DepartmentStoreRooftop_PokemartDecor_220248: @ 8220248
 	.2byte 39
 	.2byte 35

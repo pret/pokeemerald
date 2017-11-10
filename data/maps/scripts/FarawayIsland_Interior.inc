@@ -192,3 +192,5 @@ FarawayIsland_Interior_EventScript_267ED0:: @ 8267ED0
 	waitmovement 0
 	return
 
+gUnknown_08267EDB:: @ 8267EDB
+	.incbin "baserom.gba", 0x267edb, 0x3a

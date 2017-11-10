@@ -32,8 +32,7 @@ LilycoveCity_DepartmentStore_3F_EventScript_21FC8C:: @ 821FC8C
 	release
 	end
 
-	.incbin "baserom.gba", 0x21fca3, 0x1
-
+	.align 2
 LilycoveCity_DepartmentStore_3F_Pokemart_21FCA4: @ 821FCA4
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_SPECIAL

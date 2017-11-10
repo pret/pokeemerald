@@ -77,7 +77,10 @@ BattleFrontier_ReceptionGate_Movement_2662D7: @ 82662D7
 	step_28
 	step_end
 
-	.incbin "baserom.gba", 0x2662dd, 0x3
+BattleFrontier_ReceptionGate_Movement_2662DD: @ 82662DD
+	step_down
+	step_down
+	step_end
 
 BattleFrontier_ReceptionGate_Movement_2662E0: @ 82662E0
 	step_down

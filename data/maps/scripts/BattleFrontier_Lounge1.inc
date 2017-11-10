@@ -241,7 +241,10 @@ BattleFrontier_Lounge1_Text_25EE37: @ 825EE37
 	.string "You should always be eager to learn\n"
 	.string "from the experiences of your elders!$"
 
-	.incbin "baserom.gba", 0x25eea6, 0x50
+BattleFrontier_Lounge1_Text_25EEA6: @ 825EEA6
+	.string "Yes, what is it now?\p"
+	.string "I have business that needs tending!\n"
+	.string "Save it for next time!$"
 
 BattleFrontier_Lounge1_Text_25EEF6: @ 825EEF6
 	.string "Ah, youngster! Do your POKéMON’s\n"

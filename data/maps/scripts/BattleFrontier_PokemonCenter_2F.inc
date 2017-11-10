@@ -5,5 +5,15 @@ BattleFrontier_PokemonCenter_2F_MapScripts:: @ 8267AA4
 	map_script 3, BattleFrontier_PokemonCenter_2F_MapScript1_276ACF
 	.byte 0
 
-	.incbin "baserom.gba", 0x267ab9, 0x12
+BattleFrontier_PokemonCenter_2F_EventScript_267AB9:: @ 8267AB9
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+BattleFrontier_PokemonCenter_2F_EventScript_267ABF:: @ 8267ABF
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+BattleFrontier_PokemonCenter_2F_EventScript_267AC5:: @ 8267AC5
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
 

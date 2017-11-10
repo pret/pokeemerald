@@ -129,7 +129,21 @@ SlateportCity_OceanicMuseum_2F_Movement_20BCC2: @ 820BCC2
 	step_27
 	step_end
 
-	.incbin "baserom.gba", 0x20bcc8, 0xe
+SlateportCity_OceanicMuseum_2F_Movement_20BCC8: @ 820BCC8
+	step_up
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_up
+	step_up
+	step_left
+	step_left
+	step_up
+	step_up
+	step_13
+	step_end
 
 SlateportCity_OceanicMuseum_2F_Movement_20BCD6: @ 820BCD6
 	step_right

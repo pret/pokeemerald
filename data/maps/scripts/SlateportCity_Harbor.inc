@@ -111,7 +111,12 @@ SlateportCity_Harbor_Movement_20CAC8: @ 820CAC8
 	step_54
 	step_end
 
-	.incbin "baserom.gba", 0x20cacd, 0x5
+SlateportCity_Harbor_Movement_20CACD: @ 820CACD
+	step_14
+	step_14
+	step_43
+	step_54
+	step_end
 
 SlateportCity_Harbor_Movement_20CAD2: @ 820CAD2
 	step_14
@@ -189,7 +194,10 @@ SlateportCity_Harbor_EventScript_20CB50:: @ 820CB50
 	case 127, SlateportCity_Harbor_EventScript_20CC2D
 	end
 
-	.incbin "baserom.gba", 0x20cb88, 0xa
+SlateportCity_Harbor_EventScript_20CB88:: @ 820CB88
+	msgbox SlateportCity_Harbor_Text_20CEC1, 4
+	release
+	end
 
 SlateportCity_Harbor_EventScript_20CB92:: @ 820CB92
 	msgbox SlateportCity_Harbor_Text_20CF93, 5
@@ -407,7 +415,12 @@ SlateportCity_Harbor_Text_20CE87: @ 820CE87
 	.string "Hello, are you here for the ferry?\n"
 	.string "May I see your TICKET?$"
 
-	.incbin "baserom.gba", 0x20cec1, 0x5b
+
+SlateportCity_Harbor_Text_20CEC1: @ 820CEC1
+	.string "{PLAYER} doesn’t have the TICKET…\p"
+	.string "I’m terribly sorry.\p"
+	.string "You must have a TICKET to board\n"
+	.string "the ferry.$"
 
 SlateportCity_Harbor_Text_20CF1C: @ 820CF1C
 	.string "{PLAYER} flashed the TICKET.\p"

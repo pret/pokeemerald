@@ -124,3 +124,39 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BD5:: @ 8252BD5
 	special sub_81A8E7C
 	return
 
+gUnknown_08252BE8:: @ 8252BE8
+	.incbin "baserom.gba", 0x252be8, 0x67
+
+gUnknown_08252C4F:: @ 8252C4F
+	trainerbattle 9, TRAINER_PHILLIP, 0, BattlePyramidSquare01_Text_252C8D, BattlePyramidSquare01_Text_252C8D
+	setvar VAR_0x8004, 10
+	special sub_81A8E7C
+	waitmessage
+	waitbuttonpress
+	closemessage
+	releaseall
+	end
+
+gUnknown_08252C6A:: @ 8252C6A
+	setvar VAR_0x8004, 7
+	special sub_81A8E7C
+	callstd 1
+	compare_var_to_value VAR_0x8007, 0
+	goto_eq BattlePyramidSquare01_EventScript_252C87
+	setvar VAR_0x8004, 8
+	special sub_81A8E7C
+
+BattlePyramidSquare01_EventScript_252C87:: @ 8252C87
+	end
+
+gUnknown_08252C88:: @ 8252C88
+	.incbin "baserom.gba", 0x252c88, 0x5
+
+BattlePyramidSquare01_Text_252C8D: @ 8252C8D
+	.string "This is a sample message.$"
+
+gUnknown_08252CA7:: @ 8252CA7
+	.incbin "baserom.gba", 0x252ca7, 0x54
+
+gUnknown_08252CFB:: @ 8252CFB
+	.incbin "baserom.gba", 0x252cfb, 0x23a6
