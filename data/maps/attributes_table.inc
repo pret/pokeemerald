@@ -1,5 +1,5 @@
     .align 2
-gUnknown_08481DD4:: @ 8481DD4
+gMapAttributes:: @ 8481DD4
 	.4byte PetalburgCity_MapAttributes
 	.4byte SlateportCity_MapAttributes
 	.4byte MauvilleCity_MapAttributes

@@ -18,5 +18,3 @@
 	.include "constants/field_object_constants.inc"
 	.include "constants/contest_move_effects.inc"
 	.include "constants/songs.inc"
-	.include "constants/flags.inc"
-	.include "constants/vars.inc"

@@ -419,7 +419,7 @@ get_mapdata_header: @ 80849A8
 	b _080849C6
 	.pool
 _080849BC:
-	ldr r0, =gUnknown_08481DD4
+	ldr r0, =gMapAttributes
 	subs r1, 0x1
 	lsls r1, 2
 	adds r1, r0

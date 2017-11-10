@@ -373,6 +373,8 @@ SECTIONS {
         data/battle_anims.o(.rodata);
         src/battle_anim.o(.rodata);
         data/rom_8525F58.o(.rodata);
+        data/map_events.o(.rodata);
+        data/battle_anim_80A9C70.o(.rodata);
         data/title_screen.o(.rodata);
         data/field_screen.o(.rodata);
         data/battle_setup.o(.rodata);

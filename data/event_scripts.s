@@ -1,14 +1,13 @@
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
+	.include "constants/variables.inc"
+	.include "constants/flags.inc"
 
 	.section script_data, "aw", %progbits
 
 @ 81DB67C
 	.include "data/event_script_command_function_table.inc"
-
-gScriptCmdTableEnd:: @ 81DBA08
-	.incbin "baserom.gba", 0x1dba08, 0x4
 
 gSpecialVars:: @ 81DBA0C
 	.incbin "baserom.gba", 0x1dba0c, 0x58
