@@ -51,6 +51,7 @@ enum LanguageId {
     LANGUAGE_GERMAN = 5,
 };
 
+#define GAME_VERSION (VERSION_EMERALD)
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 
 enum

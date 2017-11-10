@@ -101,6 +101,7 @@ u8 gUnknown_020223BC = 0;
 u8 gUnknown_020223BD = 0;
 bool8 gUnknown_020229C4 = FALSE;
 u16 gUnknown_020229C6 = 0;
+u16 gUnknown_020229C8 = 0;
 struct LinkPlayer gUnknown_020229CC = {};
 
 // Static ROM declarations
@@ -131,6 +132,7 @@ void sub_800EDD4(void);
 bool32 sub_800F7E4(void);
 void sub_800F804(void);
 void Rfu_set_zero(void);
+u8 sub_80104F4(void);
 
 // .rodata
 
@@ -698,4 +700,71 @@ void sub_8009FAC(void)
     {
         gUnknown_03003140 = NULL;
     }
+}
+
+u8 GetLinkPlayerCount(void)
+{
+    if (gLinkVSyncDisabled)
+    {
+        return sub_80104F4();
+    }
+    return EXTRACT_PLAYER_COUNT(gUnknown_030030E0);
+}
+
+int sub_8009FF8(u32 version1, u32 version2)
+{
+    int i;
+    u8 nPlayers;
+
+    nPlayers = GetLinkPlayerCount();
+    for (i = 0; i < nPlayers; i ++)
+    {
+        if ((gLinkPlayers[i].version & 0xFF) == version1 || (gLinkPlayers[i].version & 0xFF) == version2)
+        {
+            return 1;
+        }
+    }
+    return -1;
+}
+
+u32 sub_800A03C(void)
+{
+    return 2;
+}
+
+bool32 sub_800A040(void)
+{
+    if (GetLinkPlayerCount() != 4 || sub_8009FF8(VERSION_RUBY, VERSION_SAPPHIRE) < 0)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool32 sub_800A064(void)
+{
+    if (sub_8009FF8(VERSION_RUBY, VERSION_SAPPHIRE) >= 0)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 sub_800A07C(void)
+{
+    int i;
+
+    i = sub_8009FF8(VERSION_FIRE_RED, VERSION_LEAF_GREEN);
+    if (i >= 0 && gLinkPlayers[i].language == LANGUAGE_JAPANESE)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_800A0AC(void)
+{
+    gUnknown_03000D5C = 0;
+    gUnknown_020229C8 = 0;
+    sub_8009734();
 }
