@@ -8,6 +8,8 @@
 #include "decompress.h"
 #include "string_util.h"
 #include "event_data.h"
+#include "item_menu.h"
+#include "overworld.h"
 #include "gpu_regs.h"
 #include "palette.h"
 #include "task.h"
@@ -570,5 +572,72 @@ static void sub_8009AA0(u8 unused)
                 gUnknown_03003020[i] = gUnknown_03003090[i][1];
                 break;
         }
+    }
+}
+
+void sub_8009D90(u16 command)
+{
+    switch (command)
+    {
+        case 0x2222:
+            gUnknown_03003110[0] = 0x2222;
+            gUnknown_03003110[1] = gUnknown_020229C6;
+            break;
+        case 0x2ffe:
+            gUnknown_03003110[0] = 0x2ffe;
+            break;
+        case 0x4444:
+            gUnknown_03003110[0] = 0x4444;
+            gUnknown_03003110[1] = gMain.heldKeys;
+            break;
+        case 0x5555:
+            gUnknown_03003110[0] = 0x5555;
+            break;
+        case 0x6666:
+            gUnknown_03003110[0] = 0x6666;
+            gUnknown_03003110[1] = 0;
+            break;
+        case 0x7777:
+        {
+            u8 i;
+
+            gUnknown_03003110[0] = 0x7777;
+            for (i = 0; i < 5; i ++)
+            {
+                gUnknown_03003110[i + 1] = 0xEE;
+            }
+            break;
+        }
+        case 0xbbbb:
+            gUnknown_03003110[0] = 0xbbbb;
+            gUnknown_03003110[1] = gUnknown_03000D10.size;
+            gUnknown_03003110[2] = gUnknown_03000D10.multiplayerId + 0x80;
+            break;
+        case 0xaaaa:
+            gUnknown_03003110[0] = 0xaaaa;
+            break;
+        case 0xaaab:
+            gUnknown_03003110[0] = 0xaaab;
+            gUnknown_03003110[1] = gScriptItemId;
+            break;
+        case 0xcccc:
+            gUnknown_03003110[0] = 0xcccc;
+            gUnknown_03003110[1] = gUnknown_03003150;
+            break;
+        case 0x5fff:
+            gUnknown_03003110[0] = 0x5fff;
+            gUnknown_03003110[1] = gUnknown_030030F4;
+            break;
+        case 0x5566:
+            gUnknown_03003110[0] = 0x5566;
+            break;
+        case 0xcafe:
+            if (gUnknown_03005DA8 == 0 || gUnknown_030022B4)
+            {
+                break;
+            }
+            gUnknown_03003110[0] = 0xcafe;
+            gUnknown_03003110[1] = gUnknown_03005DA8;
+            break;
     }
 }

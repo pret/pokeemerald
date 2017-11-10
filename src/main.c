@@ -80,7 +80,7 @@ const IntrFunc gIntrTableTemplate[] =
 static u16 gUnknown_03000000;
 
 u16 gKeyRepeatStartDelay;
-u8 gUnknown_030022B4;
+bool8 gUnknown_030022B4;
 struct Main gMain;
 u16 gKeyRepeatContinueDelay;
 bool8 gSoftResetDisabled;
@@ -129,7 +129,7 @@ void AgbMain()
     if (gFlashMemoryPresent != TRUE)
         SetMainCallback2(NULL);
 
-    gUnknown_030022B4 = 0;
+    gUnknown_030022B4 = FALSE;
     gUnknown_03000000 = 0xFC0;
 
     for (;;)
@@ -147,22 +147,22 @@ void AgbMain()
 
         if (sub_8087634() == 1)
         {
-            gUnknown_030022B4 = 1;
+            gUnknown_030022B4 = TRUE;
             UpdateLinkAndCallCallbacks();
-            gUnknown_030022B4 = 0;
+            gUnknown_030022B4 = FALSE;
         }
         else
         {
-            gUnknown_030022B4 = 0;
+            gUnknown_030022B4 = FALSE;
             UpdateLinkAndCallCallbacks();
 
             if (sub_80875C8() == 1)
             {
                 gMain.newKeys = 0;
                 ClearSpriteCopyRequests();
-                gUnknown_030022B4 = 1;
+                gUnknown_030022B4 = TRUE;
                 UpdateLinkAndCallCallbacks();
-                gUnknown_030022B4 = 0;
+                gUnknown_030022B4 = FALSE;
             }
         }
 

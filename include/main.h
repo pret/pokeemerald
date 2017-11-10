@@ -46,7 +46,7 @@ extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
 
 extern u16 gKeyRepeatStartDelay;
-extern u8 gUnknown_030022B4;
+extern bool8 gUnknown_030022B4;
 extern struct Main gMain;
 extern u16 gKeyRepeatContinueDelay;
 extern bool8 gSoftResetDisabled;

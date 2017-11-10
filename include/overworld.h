@@ -51,6 +51,7 @@ void Overworld_ChangeMusicToDefault(void);
 void Overworld_ChangeMusicTo(u16);
 
 bool32 is_c1_link_related_active(void);
+extern u16 gUnknown_03005DA8;
 
 void strange_npc_table_clear(void);
 const struct MapHeader *get_mapheader_by_bank_and_number(u8, u8);

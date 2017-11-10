@@ -5,6 +5,8 @@
 
 // Exported RAM declarations
 
+extern u16 gScriptItemId;
+
 // Exported ROM declarations
 void sub_81AAC50(void);
 void sub_81AAC70(void);
