@@ -1,0 +1,82 @@
+Route110_TrickHousePuzzle6_MapScripts:: @ 826DDA7
+	map_script 3, Route110_TrickHousePuzzle6_MapScript1_26DDB2
+	map_script 4, Route110_TrickHousePuzzle6_MapScript2_26DDB6
+	.byte 0
+
+Route110_TrickHousePuzzle6_MapScript1_26DDB2: @ 826DDB2
+	special sub_80FBE90
+	end
+
+Route110_TrickHousePuzzle6_MapScript2_26DDB6: @ 826DDB6
+	map_script_2 VAR_0x4000, 16384, Route110_TrickHousePuzzle6_EventScript_26DDC0
+	.2byte 0
+
+Route110_TrickHousePuzzle6_EventScript_26DDC0:: @ 826DDC0
+	special sub_80FBED0
+	end
+
+Route110_TrickHousePuzzle6_EventScript_26DDC4:: @ 826DDC4
+	lockall
+	compare_var_to_value VAR_0x40B0, 0
+	goto_eq Route110_TrickHousePuzzle6_EventScript_26DDD6
+	goto Route110_TrickHousePuzzle6_EventScript_26A3DB
+	end
+
+Route110_TrickHousePuzzle6_EventScript_26DDD6:: @ 826DDD6
+	setvar VAR_0x40B0, 1
+	goto Route110_TrickHousePuzzle6_EventScript_26A3E5
+	end
+
+Route110_TrickHousePuzzle6_EventScript_26DDE1:: @ 826DDE1
+	trainerbattle 0, TRAINER_SOPHIA, 0, Route110_TrickHousePuzzle6_Text_26DE93, Route110_TrickHousePuzzle6_Text_26DED2
+	msgbox Route110_TrickHousePuzzle6_Text_26DEF3, 6
+	end
+
+Route110_TrickHousePuzzle6_EventScript_26DDF8:: @ 826DDF8
+	trainerbattle 0, TRAINER_BENNY, 0, Route110_TrickHousePuzzle6_Text_26DF55, Route110_TrickHousePuzzle6_Text_26DF8D
+	msgbox Route110_TrickHousePuzzle6_Text_26DFA0, 6
+	end
+
+Route110_TrickHousePuzzle6_EventScript_26DE0F:: @ 826DE0F
+	trainerbattle 0, TRAINER_SEBASTIAN, 0, Route110_TrickHousePuzzle6_Text_26DFD7, Route110_TrickHousePuzzle6_Text_26E004
+	msgbox Route110_TrickHousePuzzle6_Text_26E048, 6
+	end
+
+	.incbin "baserom.gba", 0x26de26, 0x6d
+
+Route110_TrickHousePuzzle6_Text_26DE93: @ 826DE93
+	.string "When I heard there was a strange\n"
+	.string "house, I had to check it out.$"
+
+Route110_TrickHousePuzzle6_Text_26DED2: @ 826DED2
+	.string "I’ve discovered a tough TRAINER!$"
+
+Route110_TrickHousePuzzle6_Text_26DEF3: @ 826DEF3
+	.string "I’m sure having a good time checking\n"
+	.string "this place out.\p"
+	.string "It’s a challenge I’ve found worth\n"
+	.string "repeating!$"
+
+Route110_TrickHousePuzzle6_Text_26DF55: @ 826DF55
+	.string "Maybe I could get my BIRD POKéMON\n"
+	.string "to fly over the wall…$"
+
+Route110_TrickHousePuzzle6_Text_26DF8D: @ 826DF8D
+	.string "Gwaaah! I blew it!$"
+
+Route110_TrickHousePuzzle6_Text_26DFA0: @ 826DFA0
+	.string "Ehehehe… I guess I lost because\n"
+	.string "I was trying to cheat.$"
+
+Route110_TrickHousePuzzle6_Text_26DFD7: @ 826DFD7
+	.string "I’m getting dizzy from these rotating\n"
+	.string "doors…$"
+
+Route110_TrickHousePuzzle6_Text_26E004: @ 826E004
+	.string "Everything’s spinning around and\n"
+	.string "around. I can’t take this anymore…$"
+
+Route110_TrickHousePuzzle6_Text_26E048: @ 826E048
+	.string "You don’t seem to be affected at all.\n"
+	.string "Or do you have your poker face on?$"
+

@@ -1,0 +1,392 @@
+TrainerHill_Entrance_MapScripts:: @ 82680AC
+	map_script 5, TrainerHill_Entrance_MapScript1_2680D0
+	map_script 7, TrainerHill_Entrance_MapScript1_26811B
+	map_script 3, TrainerHill_Entrance_MapScript1_2680C6
+	map_script 1, TrainerHill_Entrance_MapScript1_268128
+	map_script 2, TrainerHill_Entrance_MapScript2_26813E
+	.byte 0
+
+TrainerHill_Entrance_MapScript1_2680C6: @ 82680C6
+	setflag FLAG_0x8E2
+	getplayerxy VAR_0x400D, VAR_RESULT
+	end
+
+	.incbin "baserom.gba", 0x2680cf, 0x1
+
+TrainerHill_Entrance_MapScript1_2680D0: @ 82680D0
+	setvar VAR_0x8004, 4
+	special sp194_trainer_tower
+	setvar VAR_0x4000, 0
+	setvar VAR_0x8004, 9
+	special sp194_trainer_tower
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq TrainerHill_Entrance_EventScript_2680FF
+	setobjectxy 255, 9, 6
+	applymovement 255, TrainerHill_Entrance_Movement_26837F
+	end
+
+TrainerHill_Entrance_EventScript_2680FF:: @ 82680FF
+	setvar VAR_0x8004, 16
+	special sp194_trainer_tower
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq TrainerHill_Entrance_EventScript_26811A
+	applymovement 255, TrainerHill_Entrance_Movement_26837F
+	end
+
+TrainerHill_Entrance_EventScript_26811A:: @ 826811A
+	end
+
+TrainerHill_Entrance_MapScript1_26811B: @ 826811B
+	addobject 2
+	addobject 1
+	addobject 5
+	addobject 4
+	end
+
+TrainerHill_Entrance_MapScript1_268128: @ 8268128
+	compare_var_to_value VAR_0x400D, 17
+	call_if 1, TrainerHill_Entrance_EventScript_268134
+	end
+
+TrainerHill_Entrance_EventScript_268134:: @ 8268134
+	setmetatile 17, 10, 775, 0
+	return
+
+TrainerHill_Entrance_MapScript2_26813E: @ 826813E
+	map_script_2 VAR_0x4000, 0, TrainerHill_Entrance_EventScript_268182
+	map_script_2 VAR_0x400D, 17, TrainerHill_Entrance_EventScript_268160
+	map_script_2 VAR_0x4005, 1, TrainerHill_Entrance_EventScript_268229
+	map_script_2 VAR_0x4001, 1, TrainerHill_Entrance_EventScript_2C83DF
+	.2byte 0
+
+TrainerHill_Entrance_EventScript_268160:: @ 8268160
+	lockall
+	applymovement 255, TrainerHill_Entrance_Movement_268385
+	waitmovement 0
+	setmetatile 17, 10, 820, 1
+	special DrawWholeMapView
+	playse SE_TK_KASYA
+	waitse
+	setvar VAR_0x400D, 0
+	releaseall
+	end
+
+TrainerHill_Entrance_EventScript_268182:: @ 8268182
+	setvar VAR_0x4000, 1
+	setvar VAR_0x8004, 6
+	special sp194_trainer_tower
+	switch VAR_RESULT
+	case 0, TrainerHill_Entrance_EventScript_2681B5
+	case 1, TrainerHill_Entrance_EventScript_2681CA
+	case 2, TrainerHill_Entrance_EventScript_2681EE
+
+TrainerHill_Entrance_EventScript_2681B5:: @ 82681B5
+	lockall
+	applymovement 255, TrainerHill_Entrance_Movement_26837F
+	msgbox TrainerHill_Entrance_Text_268689, 4
+	goto TrainerHill_Entrance_EventScript_2681DA
+
+TrainerHill_Entrance_EventScript_2681CA:: @ 82681CA
+	lockall
+	applymovement 255, TrainerHill_Entrance_Movement_26837F
+	msgbox TrainerHill_Entrance_Text_268712, 4
+
+TrainerHill_Entrance_EventScript_2681DA:: @ 82681DA
+	closemessage
+	applymovement 255, TrainerHill_Entrance_Movement_268381
+	waitmovement 0
+	setvar VAR_0x40D6, 0
+	special sp000_heal_pokemon
+	releaseall
+
+TrainerHill_Entrance_EventScript_2681EE:: @ 82681EE
+	end
+
+TrainerHill_Entrance_EventScript_2681EF:: @ 82681EF
+	setvar VAR_0x800B, 2
+	call TrainerHill_Entrance_EventScript_27191E
+	waitmessage
+	waitbuttonpress
+	release
+	end
+
+TrainerHill_Entrance_EventScript_2681FD:: @ 82681FD
+	lock
+	faceplayer
+	setvar VAR_0x8004, 10
+	special sp194_trainer_tower
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq TrainerHill_Entrance_EventScript_26821F
+	msgbox TrainerHill_Entrance_Text_2686F4, 4
+	goto TrainerHill_Entrance_EventScript_268227
+
+TrainerHill_Entrance_EventScript_26821F:: @ 826821F
+	msgbox TrainerHill_Entrance_Text_2687AC, 4
+
+TrainerHill_Entrance_EventScript_268227:: @ 8268227
+	release
+	end
+
+TrainerHill_Entrance_EventScript_268229:: @ 8268229
+	lockall
+	applymovement 255, TrainerHill_Entrance_Movement_26837F
+	checkflag FLAG_SYS_GAME_CLEAR
+	goto_if 0, TrainerHill_Entrance_EventScript_26836A
+	msgbox TrainerHill_Entrance_Text_2684C6, 4
+	setvar VAR_0x8004, 13
+	special sp194_trainer_tower
+	compare_var_to_value VAR_RESULT, 0
+	call_if 1, TrainerHill_Entrance_EventScript_26832E
+	setvar VAR_0x8004, 8
+	special sp194_trainer_tower
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq TrainerHill_Entrance_EventScript_268275
+	msgbox TrainerHill_Entrance_Text_268564, 4
+	goto TrainerHill_Entrance_EventScript_26827D
+
+TrainerHill_Entrance_EventScript_268275:: @ 8268275
+	msgbox TrainerHill_Entrance_Text_26859E, 4
+
+TrainerHill_Entrance_EventScript_26827D:: @ 826827D
+	message TrainerHill_Entrance_Text_2685F8
+	waitmessage
+	multichoice 15, 6, 17, 0
+	switch VAR_RESULT
+	case 0, TrainerHill_Entrance_EventScript_2682C8
+	case 1, TrainerHill_Entrance_EventScript_268314
+	case 2, TrainerHill_Entrance_EventScript_2682BA
+	case 127, TrainerHill_Entrance_EventScript_268314
+	end
+
+TrainerHill_Entrance_EventScript_2682BA:: @ 82682BA
+	msgbox TrainerHill_Entrance_Text_2687C3, 4
+	goto TrainerHill_Entrance_EventScript_26827D
+	end
+
+TrainerHill_Entrance_EventScript_2682C8:: @ 82682C8
+	multichoice 13, 2, 113, 0
+	switch VAR_RESULT
+	case 4, TrainerHill_Entrance_EventScript_268314
+	case 127, TrainerHill_Entrance_EventScript_268314
+	setvar VAR_0x8004, 17
+	copyvar VAR_0x8005, VAR_RESULT
+	special sp194_trainer_tower
+	setvar VAR_0x40D6, 1
+	setvar VAR_0x4005, 0
+	special sp000_heal_pokemon
+	msgbox TrainerHill_Entrance_Text_26862A, 4
+	setvar VAR_0x8004, 0
+	special sp194_trainer_tower
+	releaseall
+	end
+
+TrainerHill_Entrance_EventScript_268314:: @ 8268314
+	setvar VAR_0x4005, 0
+	msgbox TrainerHill_Entrance_Text_26866F, 4
+	closemessage
+	applymovement 255, TrainerHill_Entrance_Movement_268381
+	waitmovement 0
+	releaseall
+	end
+
+TrainerHill_Entrance_EventScript_26832E:: @ 826832E
+	msgbox TrainerHill_Entrance_Text_26851C, 4
+	setvar VAR_0x8004, 14
+	special sp194_trainer_tower
+	setvar VAR_0x4005, 1
+	call TrainerHill_Entrance_EventScript_27134F
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq TrainerHill_Entrance_EventScript_26835C
+	setvar VAR_0x8004, 14
+	special sp194_trainer_tower
+	return
+
+TrainerHill_Entrance_EventScript_26835C:: @ 826835C
+	setvar VAR_0x8004, 15
+	special sp194_trainer_tower
+	goto TrainerHill_Entrance_EventScript_268314
+	end
+
+TrainerHill_Entrance_EventScript_26836A:: @ 826836A
+	msgbox TrainerHill_Entrance_Text_268430, 4
+	closemessage
+	applymovement 255, TrainerHill_Entrance_Movement_268381
+	waitmovement 0
+	releaseall
+	end
+
+TrainerHill_Entrance_Movement_26837F: @ 826837F
+	step_03
+	step_end
+
+TrainerHill_Entrance_Movement_268381: @ 8268381
+	step_down
+	step_end
+
+	.incbin "baserom.gba", 0x268383, 0x2
+
+TrainerHill_Entrance_Movement_268385: @ 8268385
+	step_down
+	step_down
+	step_end
+
+TrainerHill_Entrance_EventScript_268388:: @ 8268388
+	lockall
+	fadescreen 1
+	special sub_813C904
+	waitstate
+	releaseall
+	end
+
+TrainerHill_Entrance_EventScript_268391:: @ 8268391
+	checkflag FLAG_SYS_GAME_CLEAR
+	goto_if 0, TrainerHill_Entrance_EventScript_2683A3
+	msgbox TrainerHill_Entrance_Text_268D5A, 2
+	end
+
+TrainerHill_Entrance_EventScript_2683A3:: @ 82683A3
+	msgbox TrainerHill_Entrance_Text_268DDA, 2
+	end
+
+TrainerHill_Entrance_EventScript_2683AC:: @ 82683AC
+	checkflag FLAG_SYS_GAME_CLEAR
+	goto_if 0, TrainerHill_Entrance_EventScript_2683BE
+	msgbox TrainerHill_Entrance_Text_268E6A, 2
+	end
+
+TrainerHill_Entrance_EventScript_2683BE:: @ 82683BE
+	msgbox TrainerHill_Entrance_Text_268EDC, 2
+	end
+
+TrainerHill_Entrance_EventScript_2683C7:: @ 82683C7
+	lock
+	faceplayer
+	message gUnknown_08272A21
+	waitmessage
+	checkflag FLAG_SYS_GAME_CLEAR
+	goto_eq TrainerHill_Entrance_EventScript_268402
+	pokemart TrainerHill_Entrance_Pokemart_2683E8
+	msgbox gUnknown_08272A3F, 4
+	release
+	end
+
+	.incbin "baserom.gba", 0x2683e7, 0x1
+
+TrainerHill_Entrance_Pokemart_2683E8: @ 82683E8
+	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_ANTIDOTE
+	.2byte ITEM_PARALYZE_HEAL
+	.2byte ITEM_AWAKENING
+	.2byte ITEM_X_SPEED
+	.2byte ITEM_X_SPECIAL
+	.2byte ITEM_X_ATTACK
+	.2byte ITEM_X_DEFEND
+	.2byte ITEM_DIRE_HIT
+	.2byte ITEM_GUARD_SPEC
+	.2byte ITEM_X_ACCURACY
+	.2byte ITEM_NONE
+	release
+	end
+
+TrainerHill_Entrance_EventScript_268402:: @ 8268402
+	pokemart TrainerHill_Entrance_Pokemart_268414
+	msgbox gUnknown_08272A3F, 4
+	release
+	end
+
+	.incbin "baserom.gba", 0x268411, 0x3
+
+TrainerHill_Entrance_Pokemart_268414: @ 8268414
+	.2byte ITEM_HYPER_POTION
+	.2byte ITEM_MAX_POTION
+	.2byte ITEM_FULL_RESTORE
+	.2byte ITEM_FULL_HEAL
+	.2byte ITEM_REVIVE
+	.2byte ITEM_X_SPEED
+	.2byte ITEM_X_SPECIAL
+	.2byte ITEM_X_ATTACK
+	.2byte ITEM_X_DEFEND
+	.2byte ITEM_DIRE_HIT
+	.2byte ITEM_GUARD_SPEC
+	.2byte ITEM_X_ACCURACY
+	.2byte ITEM_NONE
+	release
+	end
+
+TrainerHill_Entrance_Text_268430: @ 8268430
+	.string "This is the TRAINER HILL where\n"
+	.string "you may enjoy tag battles with many\l"
+	.string "TRAINERS.\p"
+	.string "Unfortunately, we’re still getting\n"
+	.string "things ready. Please come back later!$"
+
+TrainerHill_Entrance_Text_2684C6: @ 82684C6
+	.string "Welcome!\p"
+	.string "This is the TRAINER HILL where\n"
+	.string "you may enjoy tag battles with many\l"
+	.string "TRAINERS!$"
+
+TrainerHill_Entrance_Text_26851C: @ 826851C
+	.string "Is this your first visit here?\p"
+	.string "Before you enter, please save\n"
+	.string "your game.$"
+
+TrainerHill_Entrance_Text_268564: @ 8268564
+	.string "Let’s see…\n"
+	.string "The TRAINERS here now are…\p"
+	.string "Up to floor no. {STR_VAR_1}.$"
+
+TrainerHill_Entrance_Text_26859E: @ 826859E
+	.string "Let’s see…\n"
+	.string "The TRAINERS here now are…\p"
+	.string "There appear to be TRAINERS gathered\n"
+	.string "in every room.$"
+
+TrainerHill_Entrance_Text_2685F8: @ 82685F8
+	.string "Would you like to challenge the\n"
+	.string "waiting TRAINERS?$"
+
+TrainerHill_Entrance_Text_26862A: @ 826862A
+	.string "I will time your progress.\n"
+	.string "Best of luck!\p"
+	.string "On your marks…\p"
+	.string "Get set…\p"
+	.string "Go!$"
+
+TrainerHill_Entrance_Text_26866F: @ 826866F
+	.string "Please do visit us again!$"
+
+TrainerHill_Entrance_Text_268689: @ 8268689
+	.string "That was too bad.\p"
+	.string "I think you put in a tremendous\n"
+	.string "effort in your battling.\p"
+	.string "Please come back and try again!$"
+
+TrainerHill_Entrance_Text_2686F4: @ 82686F4
+	.string "I hope you give it your best.$"
+
+TrainerHill_Entrance_Text_268712: @ 8268712
+	.string "When the TRAINERS switch places,\n"
+	.string "the movement can be hectic.\p"
+	.string "To avoid the stampede, we moved\n"
+	.string "the reception counter here.\p"
+	.string "I’m sorry for the inconvenience.$"
+
+TrainerHill_Entrance_Text_2687AC: @ 82687AC
+	.string "Thank you for playing!$"
+
+TrainerHill_Entrance_Text_2687C3: @ 82687C3
+	.string "Here at the TRAINER HILL, we conduct\n"
+	.string "an event called the Time Attack.\p"
+	.string "It is a race that measures how long\n"
+	.string "you take to reach our owner on\l"
+	.string "the rooftop from this counter.\p"
+	.string "The fastest times are posted on\n"
+	.string "the Time Board--try competing with\l"
+	.string "your friends.\p"
+	.string "In TRAINER battles along the way,\n"
+	.string "neither Exp. Points nor money will\l"
+	.string "be awarded.$"
+
+	.incbin "baserom.gba", 0x26890d, 0x79
+

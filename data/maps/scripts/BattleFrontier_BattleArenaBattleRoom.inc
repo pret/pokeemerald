@@ -1,0 +1,566 @@
+BattleFrontier_BattleArenaBattleRoom_MapScripts:: @ 8257487
+	map_script 3, BattleFrontier_BattleArenaBattleRoom_MapScript1_2574A0
+	map_script 2, BattleFrontier_BattleArenaBattleRoom_MapScript2_2574D2
+	map_script 4, BattleFrontier_BattleArenaBattleRoom_MapScript2_257C0C
+	map_script 5, BattleFrontier_BattleArenaBattleRoom_MapScript1_25749C
+	.byte 0
+
+BattleFrontier_BattleArenaBattleRoom_MapScript1_25749C: @ 825749C
+	special sub_8139980
+	end
+
+BattleFrontier_BattleArenaBattleRoom_MapScript1_2574A0: @ 82574A0
+	setvar VAR_0x8004, 5
+	special sub_81A1780
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_2574AE
+	end
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_2574AE:: @ 82574AE
+	checkplayergender
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_2574C6
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_2574CC
+	return
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_2574C6:: @ 82574C6
+	setvar VAR_0x4011, 100
+	return
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_2574CC:: @ 82574CC
+	setvar VAR_0x4011, 105
+	return
+
+BattleFrontier_BattleArenaBattleRoom_MapScript2_2574D2: @ 82574D2
+	map_script_2 VAR_0x4000, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_2574DC
+	.2byte 0
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_2574DC:: @ 82574DC
+	lockall
+	showobjectat 8, BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM
+	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BE2
+	waitmovement 0
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 2
+	special sub_81A1780
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25752E
+	applymovement 5, BattleFrontier_BattleArenaBattleRoom_Movement_257C08
+	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BEB
+	setvar VAR_0x4002, 1
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 6
+	setvar VAR_0x8006, 1
+	special sub_81A1780
+	goto BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_25752E:: @ 825752E
+	setvar VAR_0x8004, 3
+	special sub_8161F74
+	addobject 7
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BEF
+	waitmovement 0
+	applymovement 9, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	playse SE_W187
+	waitse
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257C3D, 4
+	closemessage
+	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BE5
+	waitmovement 0
+	applymovement 9, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	playse SE_W187
+	waitse
+	waitmovement 0
+	setvar VAR_0x8004, 6
+	special sub_81A5238
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257C68, 4
+	closemessage
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF2
+	waitmovement 0
+	applymovement 9, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	playse SE_W187
+	waitse
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257C93, 4
+	closemessage
+	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BE5
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF2
+	waitmovement 0
+	setvar VAR_0x8004, 5
+	special sub_8195960
+	msgbox 0x2021fc4, 4
+	waitmessage
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_257B6C
+	switch VAR_RESULT
+	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_257630
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_2575DB:: @ 82575DB
+	applymovement 9, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	applymovement 1, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	applymovement 2, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	applymovement 3, BattleFrontier_BattleArenaBattleRoom_Movement_257C05
+	applymovement 4, BattleFrontier_BattleArenaBattleRoom_Movement_257C05
+	playse SE_W173
+	waitse
+	waitmovement 0
+	setvar VAR_0x8004, 6
+	special sub_81A5238
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257CCE, 4
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257615:: @ 8257615
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 0
+	setvar VAR_0x8006, 4
+	special sub_81A1780
+	warp BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
+	waitstate
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257630:: @ 8257630
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_257BA9
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 2
+	special sub_81A1780
+	addvar VAR_RESULT, 1
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 2
+	copyvar VAR_0x8006, VAR_RESULT
+	special sub_81A1780
+	switch VAR_RESULT
+	case 7, BattleFrontier_BattleArenaBattleRoom_EventScript_257852
+	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BE7
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BFA
+	waitmovement 0
+	removeobject 7
+	applymovement 5, BattleFrontier_BattleArenaBattleRoom_Movement_257C08
+	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BEB
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257CE9, 4
+	special copy_player_party_from_sav1
+	special copy_player_party_to_sav1
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, 3
+	special sub_81A1780
+	playfanfare BGM_ME_ASA
+	waitfanfare
+	special sp000_heal_pokemon
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0:: @ 82576B0
+	setvar VAR_0x8004, 9
+	special sub_81A1780
+	copyvar VAR_0x400F, VAR_RESULT
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, BattleFrontier_BattleArenaBattleRoom_EventScript_2578BC
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 2
+	special sub_81A1780
+	compare_var_to_value VAR_RESULT, 1
+	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_257870
+	compare_var_to_value VAR_RESULT, 2
+	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_257877
+	compare_var_to_value VAR_RESULT, 3
+	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_25787E
+	compare_var_to_value VAR_RESULT, 4
+	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_257885
+	compare_var_to_value VAR_RESULT, 5
+	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_25788C
+	compare_var_to_value VAR_RESULT, 6
+	call_if 1, BattleFrontier_BattleArenaBattleRoom_EventScript_257893
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8E0
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257768
+	multichoice 19, 4, 103, 1
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_25783A
+	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_25779E
+	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_2577DA
+	case 3, BattleFrontier_BattleArenaBattleRoom_EventScript_257808
+	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257768:: @ 8257768
+	multichoice 20, 6, 104, 1
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_25783A
+	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_2577DA
+	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_257808
+	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_25779E:: @ 825779E
+	message BattleFrontier_BattleArenaBattleRoom_Text_257F04
+	waitmessage
+	multichoicedefault 20, 8, 94, 1, 0
+	switch VAR_RESULT
+	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_2577D0
+	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_2577D0:: @ 82577D0
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8B4
+	goto BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_2577DA:: @ 82577DA
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257E6B, 5
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_25789A
+	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257808:: @ 8257808
+	message BattleFrontier_BattleArenaBattleRoom_Text_257E9E
+	waitmessage
+	multichoicedefault 20, 8, 94, 1, 0
+	switch VAR_RESULT
+	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257615
+	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_25783A:: @ 825783A
+	closemessage
+	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BED
+	applymovement 5, BattleFrontier_BattleArenaBattleRoom_Movement_257BED
+	waitmovement 0
+	goto BattleFrontier_BattleArenaBattleRoom_EventScript_25752E
+	waitstate
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257852:: @ 8257852
+	delay 60
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 0
+	setvar VAR_0x8006, 3
+	special sub_81A1780
+	warp BATTLE_FRONTIER_BATTLE_ARENA_LOBBY, 255, 7, 8
+	waitstate
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257870:: @ 8257870
+	message BattleFrontier_BattleArenaBattleRoom_Text_257D17
+	waitmessage
+	return
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257877:: @ 8257877
+	message BattleFrontier_BattleArenaBattleRoom_Text_257D50
+	waitmessage
+	return
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_25787E:: @ 825787E
+	message BattleFrontier_BattleArenaBattleRoom_Text_257D88
+	waitmessage
+	return
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257885:: @ 8257885
+	message BattleFrontier_BattleArenaBattleRoom_Text_257DC1
+	waitmessage
+	return
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_25788C:: @ 825788C
+	message BattleFrontier_BattleArenaBattleRoom_Text_257DF9
+	waitmessage
+	return
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257893:: @ 8257893
+	message BattleFrontier_BattleArenaBattleRoom_Text_257E31
+	waitmessage
+	return
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_25789A:: @ 825789A
+	message BattleFrontier_BattleArenaBattleRoom_Text_257EDB
+	waitmessage
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, 2
+	special sub_81A5238
+	playse SE_SAVE
+	waitse
+	fadescreen 1
+	setvar VAR_0x8004, 4
+	special sub_81A1780
+	end
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_2578BC:: @ 82578BC
+	compare_var_to_value VAR_0x4002, 1
+	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257F45, 4
+	setvar VAR_0x4002, 1
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4:: @ 82578D4
+	message BattleFrontier_BattleArenaBattleRoom_Text_257FBB
+	waitmessage
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_23E8E0
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_25792B
+	multichoice 19, 4, 103, 1
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257961
+	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_25779E
+	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_2577DA
+	case 3, BattleFrontier_BattleArenaBattleRoom_EventScript_257808
+	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_25792B:: @ 825792B
+	multichoice 20, 6, 104, 1
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257961
+	case 1, BattleFrontier_BattleArenaBattleRoom_EventScript_2577DA
+	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_257808
+	case 127, BattleFrontier_BattleArenaBattleRoom_EventScript_2578D4
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257961:: @ 8257961
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_242170
+	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BED
+	applymovement 5, BattleFrontier_BattleArenaBattleRoom_Movement_257BED
+	waitmovement 0
+	applymovement 9, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	playse SE_W187
+	waitse
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257C3D, 4
+	closemessage
+	applymovement 8, BattleFrontier_BattleArenaBattleRoom_Movement_257BE4
+	waitmovement 0
+	applymovement 9, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	playse SE_W187
+	waitse
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257FED, 4
+	closemessage
+	addobject 7
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF4
+	waitmovement 0
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF2
+	waitmovement 0
+	switch VAR_0x400F
+	case 2, BattleFrontier_BattleArenaBattleRoom_EventScript_257AA5
+	case 3, BattleFrontier_BattleArenaBattleRoom_EventScript_257A3F
+	case 4, BattleFrontier_BattleArenaBattleRoom_EventScript_257AF8
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 7
+	special sub_81A1780
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, BattleFrontier_BattleArenaBattleRoom_EventScript_257A3F
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_25801C, 4
+	closemessage
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 7
+	special sub_81A1780
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257C30
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_25804E, 4
+	closemessage
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257C3A
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_258068, 4
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257A3F:: @ 8257A3F
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_25810D, 4
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_257B5E
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257A5C
+	goto BattleFrontier_BattleArenaBattleRoom_EventScript_2575DB
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257A5C:: @ 8257A5C
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_257BA9
+	setvar VAR_0x8004, 12
+	special sub_81A1780
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, BattleFrontier_BattleArenaBattleRoom_EventScript_257852
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF1
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_25813F, 4
+	playfanfare BGM_ME_BATTLE_SYMBOL
+	message BattleFrontier_BattleArenaBattleRoom_Text_25819C
+	waitmessage
+	waitfanfare
+	setvar VAR_0x8004, 13
+	special sub_81A1780
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_2581CF, 4
+	goto BattleFrontier_BattleArenaBattleRoom_EventScript_257852
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257AA5:: @ 8257AA5
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 7
+	special sub_81A1780
+	compare_var_to_value VAR_RESULT, 0
+	goto_if 5, BattleFrontier_BattleArenaBattleRoom_EventScript_257AF8
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_258213, 4
+	closemessage
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 7
+	special sub_81A1780
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257C30
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_2582A2, 4
+	closemessage
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257C3A
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_2582BB, 4
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257AF8:: @ 8257AF8
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_2582F9, 4
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_257B5E
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257B15
+	goto BattleFrontier_BattleArenaBattleRoom_EventScript_2575DB
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257B15:: @ 8257B15
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_257BA9
+	setvar VAR_0x8004, 12
+	special sub_81A1780
+	compare_var_to_value VAR_RESULT, 2
+	goto_eq BattleFrontier_BattleArenaBattleRoom_EventScript_257852
+	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF1
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_258323, 4
+	playfanfare BGM_ME_BATTLE_SYMBOL
+	message BattleFrontier_BattleArenaBattleRoom_Text_25835B
+	waitmessage
+	waitfanfare
+	setvar VAR_0x8004, 13
+	special sub_81A1780
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_258383, 4
+	goto BattleFrontier_BattleArenaBattleRoom_EventScript_257852
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257B5E:: @ 8257B5E
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257C93, 4
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_257B6C
+	return
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257B6C:: @ 8257B6C
+FallarborTown_BattleTentBattleRoom_EventScript_257B6C:: @ 8257B6C
+	closemessage
+	setvar VAR_0x4002, 0
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 6
+	setvar VAR_0x8006, 0
+	special sub_81A1780
+	special sp000_heal_pokemon
+	setvar VAR_0x8004, 5
+	setvar VAR_0x8005, 0
+	special sub_8163AC4
+	waitstate
+	setvar VAR_0x8004, 18
+	special sub_81A1780
+	special sp000_heal_pokemon
+	setvar VAR_0x8004, 21
+	special sub_81A1780
+	return
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257BA9:: @ 8257BA9
+	applymovement 9, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	applymovement 1, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	applymovement 2, BattleFrontier_BattleArenaBattleRoom_Movement_257C02
+	applymovement 3, BattleFrontier_BattleArenaBattleRoom_Movement_257C05
+	applymovement 4, BattleFrontier_BattleArenaBattleRoom_Movement_257C05
+	playse SE_BAN
+	waitse
+	waitmovement 0
+	msgbox BattleFrontier_BattleArenaBattleRoom_Text_257CB3, 4
+	closemessage
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_241EBA
+	return
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BE2: @ 8257BE2
+	step_right
+	step_right
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BE4: @ 8257BE4
+	step_right
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BE5: @ 8257BE5
+	step_right
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BE7: @ 8257BE7
+	step_left
+	step_left
+	step_28
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BEB: @ 8257BEB
+	step_26
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BED: @ 8257BED
+	step_28
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BEF: @ 8257BEF
+	step_left
+	step_left
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BF1: @ 8257BF1
+	step_left
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BF2: @ 8257BF2
+	step_left
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BF4: @ 8257BF4
+	step_17
+	step_17
+	step_17
+	step_17
+	step_17
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257BFA: @ 8257BFA
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257C02: @ 8257C02
+	step_51
+	step_46
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257C05: @ 8257C05
+	step_51
+	step_47
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257C08: @ 8257C08
+	step_25
+	step_end
+
+	.incbin "baserom.gba", 0x257c0a, 0x2
+
+BattleFrontier_BattleArenaBattleRoom_MapScript2_257C0C: @ 8257C0C
+	map_script_2 VAR_0x4001, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_257C16
+	.2byte 0
+
+BattleFrontier_BattleArenaBattleRoom_EventScript_257C16:: @ 8257C16
+	hideobjectat 8, BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM
+	removeobject 7
+	call BattleFrontier_BattleArenaBattleRoom_EventScript_24BCDC
+	applymovement 255, BattleFrontier_BattleArenaBattleRoom_Movement_24C773
+	setvar VAR_0x4001, 1
+	end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257C30: @ 8257C30
+	step_down
+	step_27
+	step_14
+	step_14
+	step_14
+	step_14
+	step_up
+	step_up
+	step_27
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Movement_257C3A: @ 8257C3A
+	step_down
+	step_27
+	step_end
+
+BattleFrontier_BattleArenaBattleRoom_Text_257C3D: @ 8257C3D
+	.string "REFEREE: TRAINER {PLAYER}!\n"
+	.string "Step forward, please!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257C68: @ 8257C68
+	.string "REFEREE: TRAINER {STR_VAR_1}!\n"
+	.string "Step forward, please!$"
+
+BattleFrontier_BattleArenaBattleRoom_Text_257C93: @ 8257C93

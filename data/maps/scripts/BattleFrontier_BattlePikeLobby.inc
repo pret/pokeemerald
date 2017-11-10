@@ -1,0 +1,484 @@
+BattleFrontier_BattlePikeLobby_MapScripts:: @ 825B6C6
+	map_script 2, BattleFrontier_BattlePikeLobby_MapScript2_25B6D1
+	map_script 4, BattleFrontier_BattlePikeLobby_MapScript2_25B6F3
+	.byte 0
+
+BattleFrontier_BattlePikeLobby_MapScript2_25B6D1: @ 825B6D1
+	map_script_2 VAR_0x4000, 0, BattleFrontier_BattlePikeLobby_EventScript_25B707
+	map_script_2 VAR_0x4000, 1, BattleFrontier_BattlePikeLobby_EventScript_25B710
+	map_script_2 VAR_0x4000, 3, BattleFrontier_BattlePikeLobby_EventScript_25B762
+	map_script_2 VAR_0x4000, 4, BattleFrontier_BattlePikeLobby_EventScript_25B806
+	.2byte 0
+
+BattleFrontier_BattlePikeLobby_MapScript2_25B6F3: @ 825B6F3
+	map_script_2 VAR_0x4001, 0, BattleFrontier_BattlePikeLobby_EventScript_25B6FD
+	.2byte 0
+
+BattleFrontier_BattlePikeLobby_EventScript_25B6FD:: @ 825B6FD
+	setvar VAR_0x4001, 1
+	turnobject 255, 2
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25B707:: @ 825B707
+	setvar VAR_0x8004, 0
+	special sub_81A1780
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25B710:: @ 825B710
+	special sp000_heal_pokemon
+	setvar VAR_0x8004, 27
+	special sub_81A703C
+	lockall
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C2E0, 4
+	closemessage
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 1
+	setvar VAR_0x8006, 0
+	special sub_81A703C
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 4
+	setvar VAR_0x8006, 0
+	special sub_81A703C
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 0
+	setvar VAR_0x8006, 0
+	special sub_81A1780
+	setvar VAR_0x4000, 255
+	releaseall
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25B762:: @ 825B762
+	lockall
+	setvar VAR_0x8004, 10
+	special sub_81A1780
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25B784
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C18A, 4
+	waitmessage
+	goto BattleFrontier_BattlePikeLobby_EventScript_25B78D
+
+BattleFrontier_BattlePikeLobby_EventScript_25B784:: @ 825B784
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C383, 4
+	waitmessage
+
+BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C3D9, 4
+	setvar VAR_0x8004, 11
+	special sub_81A1780
+	msgbox BattleFrontier_BattlePikeLobby_Text_241520, 9
+	setvar VAR_0x8004, 8
+	special sub_81A1780
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 3
+	special sub_81A703C
+	addvar VAR_RESULT, 1
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 3
+	copyvar VAR_0x8006, VAR_RESULT
+	special sub_81A703C
+	special copy_player_party_from_sav1
+	special sp000_heal_pokemon
+	setvar VAR_0x8004, 27
+	special sub_81A703C
+	message BattleFrontier_BattlePikeLobby_Text_25C1DF
+	waitmessage
+	setvar VAR_0x8004, 8
+	setvar VAR_0x8005, 0
+	special sub_81A703C
+	playse SE_SAVE
+	waitse
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4
+	closemessage
+	setvar VAR_0x4000, 255
+	releaseall
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
+	lockall
+	message BattleFrontier_BattlePikeLobby_Text_25C146
+	waitmessage
+	setvar VAR_0x8004, 8
+	special sub_81A1780
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 2
+	setvar VAR_0x8006, 0
+	special sub_81A1780
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 4
+	setvar VAR_0x8006, 0
+	special sub_81A703C
+	special copy_player_party_from_sav1
+	special sp000_heal_pokemon
+	setvar VAR_0x8004, 27
+	special sub_81A703C
+	setvar VAR_0x8004, 8
+	setvar VAR_0x8005, 0
+	special sub_81A703C
+	playse SE_SAVE
+	waitse
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4
+	closemessage
+	setvar VAR_0x4000, 255
+	releaseall
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25B868:: @ 825B868
+	lock
+	faceplayer
+	setvar VAR_FRONTIER_FACILITY, 5
+	setvar VAR_0x40CE, 0
+	special copy_player_party_to_sav1
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BB52, 4
+
+BattleFrontier_BattlePikeLobby_EventScript_25B87F:: @ 825B87F
+	message BattleFrontier_BattlePikeLobby_Text_25BBC1
+	waitmessage
+	multichoice 17, 6, 23, 0
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattlePikeLobby_EventScript_25B8BB
+	case 1, BattleFrontier_BattlePikeLobby_EventScript_25BA1A
+	case 2, BattleFrontier_BattlePikeLobby_EventScript_25BA76
+	case 127, BattleFrontier_BattlePikeLobby_EventScript_25BA76
+
+BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
+	message BattleFrontier_BattlePikeLobby_Text_25BE35
+	waitmessage
+	multichoice 17, 6, 24, 0
+	switch VAR_RESULT
+	case 2, BattleFrontier_BattlePikeLobby_EventScript_25BA76
+	case 127, BattleFrontier_BattlePikeLobby_EventScript_25BA76
+	setvar VAR_0x8004, 15
+	special sub_81A1780
+	compare_var_to_value VAR_0x8004, 1
+	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA27
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 1
+	copyvar VAR_0x8006, VAR_RESULT
+	special sub_81A1780
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C094, 4
+	fadescreen 1
+	call BattleFrontier_BattlePikeLobby_EventScript_23F2B7
+	copyvar VAR_0x8004, VAR_RESULT
+	setvar VAR_0x8005, 3
+	special sub_80F9490
+	waitstate
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA73
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C0D8, 5
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattlePikeLobby_EventScript_25BA73
+	case 1, BattleFrontier_BattlePikeLobby_EventScript_25B95C
+	case 127, BattleFrontier_BattlePikeLobby_EventScript_25BA73
+
+BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
+	setvar VAR_0x4000, 0
+	setvar VAR_0x4001, 0
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 4
+	special sub_81A1780
+	setvar VAR_0x8004, 28
+	special sub_81A703C
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 0
+	setvar VAR_0x8006, 1
+	special sub_81A1780
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 4
+	setvar VAR_0x8006, 1
+	special sub_81A703C
+	setvar VAR_0x8004, 26
+	special sub_81A703C
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 3
+	setvar VAR_0x8006, 0
+	special sub_81A1780
+	special copy_player_party_from_sav1
+	closemessage
+	delay 2
+	call BattleFrontier_BattlePikeLobby_EventScript_27134F
+	setvar VAR_0x4000, 255
+	setvar VAR_0x8004, 26
+	special sub_81A703C
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA5C
+	special copy_player_party_to_sav1
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, 3
+	special sub_81A1780
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C130, 4
+	closemessage
+	setvar VAR_0x8004, 5
+	special sub_81A1780
+	call BattleFrontier_BattlePikeLobby_EventScript_25BA94
+	special sp000_heal_pokemon
+	call BattleFrontier_BattlePikeLobby_EventScript_25BB49
+	warpsilent BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 255, 6, 7
+	setvar VAR_0x4000, 0
+	waitstate
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BA1A:: @ 825BA1A
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BBF5, 4
+	goto BattleFrontier_BattlePikeLobby_EventScript_25B87F
+
+BattleFrontier_BattlePikeLobby_EventScript_25BA27:: @ 825BA27
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattlePikeLobby_EventScript_25BA42
+	case 1, BattleFrontier_BattlePikeLobby_EventScript_25BA4F
+
+BattleFrontier_BattlePikeLobby_EventScript_25BA42:: @ 825BA42
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BE8C, 4
+	goto BattleFrontier_BattlePikeLobby_EventScript_25BA7E
+
+BattleFrontier_BattlePikeLobby_EventScript_25BA4F:: @ 825BA4F
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BF9A, 4
+	goto BattleFrontier_BattlePikeLobby_EventScript_25BA7E
+
+BattleFrontier_BattlePikeLobby_EventScript_25BA5C:: @ 825BA5C
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 0
+	setvar VAR_0x8006, 0
+	special sub_81A1780
+	goto BattleFrontier_BattlePikeLobby_EventScript_25BA76
+
+BattleFrontier_BattlePikeLobby_EventScript_25BA73:: @ 825BA73
+	special copy_player_party_from_sav1
+
+BattleFrontier_BattlePikeLobby_EventScript_25BA76:: @ 825BA76
+	msgbox BattleFrontier_BattlePikeLobby_Text_25BE02, 4
+
+BattleFrontier_BattlePikeLobby_EventScript_25BA7E:: @ 825BA7E
+	release
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BA80:: @ 825BA80
+	lockall
+	setvar VAR_0x8004, 7
+	setvar VAR_0x8005, 5
+	special sub_81A1780
+	waitbuttonpress
+	special sub_813C5A0
+	releaseall
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BA94:: @ 825BA94
+	applymovement 1, BattleFrontier_BattlePikeLobby_Movement_25BAA7
+	applymovement 255, BattleFrontier_BattlePikeLobby_Movement_25BAA6
+	waitmovement 0
+	return
+
+BattleFrontier_BattlePikeLobby_Movement_25BAA6: @ 825BAA6
+	step_up
+
+BattleFrontier_BattlePikeLobby_Movement_25BAA7: @ 825BAA7
+	step_up
+	step_up
+	step_54
+	step_end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BAAB:: @ 825BAAB
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C422, 2
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BAB4:: @ 825BAB4
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C4A5, 2
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BABD:: @ 825BABD
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C4FD, 2
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BAC6:: @ 825BAC6
+	lockall
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C5FB, 4
+	goto BattleFrontier_BattlePikeLobby_EventScript_25BAD5
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BAD5:: @ 825BAD5
+	message BattleFrontier_BattlePikeLobby_Text_25C621
+	waitmessage
+	multichoice 16, 4, 102, 0
+	switch VAR_RESULT
+	case 0, BattleFrontier_BattlePikeLobby_EventScript_25BB1D
+	case 1, BattleFrontier_BattlePikeLobby_EventScript_25BB2B
+	case 2, BattleFrontier_BattlePikeLobby_EventScript_25BB39
+	case 3, BattleFrontier_BattlePikeLobby_EventScript_25BB47
+	case 127, BattleFrontier_BattlePikeLobby_EventScript_25BB47
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BB1D:: @ 825BB1D
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C644, 4
+	goto BattleFrontier_BattlePikeLobby_EventScript_25BAD5
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BB2B:: @ 825BB2B
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C68A, 4
+	goto BattleFrontier_BattlePikeLobby_EventScript_25BAD5
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BB39:: @ 825BB39
+	msgbox BattleFrontier_BattlePikeLobby_Text_25C6EB, 4
+	goto BattleFrontier_BattlePikeLobby_EventScript_25BAD5
+	end
+
+BattleFrontier_BattlePikeLobby_EventScript_25BB47:: @ 825BB47
+	releaseall
+	end
+
+BattleFrontier_BattlePikeCorridor_EventScript_25BB49:: @ 825BB49
+BattleFrontier_BattlePikeLobby_EventScript_25BB49:: @ 825BB49
+BattleFrontier_BattlePikeRandomRoom1_EventScript_25BB49:: @ 825BB49
+BattleFrontier_BattlePikeThreePathRoom_EventScript_25BB49:: @ 825BB49
+	playse 267
+	special sub_813B880
+	waitstate
+	waitse
+	return
+
+BattleFrontier_BattlePikeLobby_Text_25BB52: @ 825BB52
+	.string "Where the luck of TRAINERS\n"
+	.string "is put to the test…\p"
+	.string "Welcome to the BATTLE PIKE…\p"
+	.string "I am your guide to the BATTLE PIKE…$"
+
+BattleFrontier_BattlePikeLobby_Text_25BBC1: @ 825BBC1
+	.string "Would you like to take the Battle\n"
+	.string "Choice challenge?$"
+
+BattleFrontier_BattlePikeLobby_Text_25BBF5: @ 825BBF5
+	.string "Here we conduct an event we call\n"
+	.string "the Battle Choice.\p"
+	.string "The Battle Choice rules are very\n"
+	.string "simple…\p"
+	.string "Choose one of three paths and make\n"
+	.string "your way to the goal room at the end\l"
+	.string "of the BATTLE PIKE. It’s that simple.\p"
+	.string "However, what happens on the chosen\n"
+	.string "path depends entirely on the luck\l"
+	.string "of the challenger…\p"
+	.string "If you reach the goal, you will be\n"
+	.string "rewarded with Battle Points.\p"
+	.string "If you want to interrupt your\n"
+	.string "challenge, please have a word with\l"
+	.string "our staff in the big rooms on the way.\p"
+	.string "If you don’t save before interrupting,\n"
+	.string "you will be disqualified.$"
+
+BattleFrontier_BattlePikeLobby_Text_25BE02: @ 825BE02
+	.string "We look forward to seeing you\n"
+	.string "on another occasion…$"
+
+BattleFrontier_BattlePikeLobby_Text_25BE35: @ 825BE35
+	.string "You have the choice of two courses,\n"
+	.string "Level 50 and Open Level.\l"
+	.string "Which will you challenge?$"
+
+BattleFrontier_BattlePikeLobby_Text_25BE8C: @ 825BE8C
+	.string "I beg your pardon, but…\p"
+	.string "You do not have three eligible\n"
+	.string "POKéMON for the Battle Choice event.\p"
+	.string "You must have three different POKéMON\n"
+	.string "of Level 50 or less to enter.\p"
+	.string "They also must be holding different\n"
+	.string "kinds of items.\p"
+	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "Please come see me when\n"
+	.string "you are ready…$"
+
+BattleFrontier_BattlePikeLobby_Text_25BF9A: @ 825BF9A
+	.string "I beg your pardon, but…\p"
+	.string "You do not have three eligible\n"
+	.string "POKéMON for the Battle Choice event.\p"
+	.string "You must have three different\n"
+	.string "POKéMON to enter.\p"
+	.string "They also must be holding different\n"
+	.string "kinds of items.\p"
+	.string "EGGS{STR_VAR_1} ineligible.\p"
+	.string "Please come see me when\n"
+	.string "you are ready…$"
+
+BattleFrontier_BattlePikeLobby_Text_25C094: @ 825C094
+	.string "Please choose the three POKéMON\n"
+	.string "you wish to enter in the challenge…$"
+
+BattleFrontier_BattlePikeLobby_Text_25C0D8: @ 825C0D8
+	.string "Before starting your Battle Choice\n"
+	.string "challenge, I must save the game.\l"
+	.string "Is that acceptable?$"
+
+BattleFrontier_BattlePikeLobby_Text_25C130: @ 825C130
+	.string "Please step this way…$"
+
+BattleFrontier_BattlePikeLobby_Text_25C146: @ 825C146
+	.string "Your challenge has ended…\p"
+	.string "I shall record your results.\n"
+	.string "Please wait…$"
+
+BattleFrontier_BattlePikeLobby_Text_25C18A: @ 825C18A
+	.string "You have completed the challenge…\p"
+	.string "I must say… You seem to possess luck\n"
+	.string "in abundance…$"
+
+BattleFrontier_BattlePikeLobby_Text_25C1DF: @ 825C1DF
+	.string "I shall record your results.\n"
+	.string "Please wait…$"
+
+	.incbin "baserom.gba", 0x25c209, 0xd7
+
+BattleFrontier_BattlePikeLobby_Text_25C2E0: @ 825C2E0
+	.string "I beg your pardon, but…\p"
+	.string "You failed to save before you quit\n"
+	.string "your challenge the last time.\p"
+	.string "Because of that, your challenge so far\n"
+	.string "has been disqualified. I am sorry…$"
+
+BattleFrontier_BattlePikeLobby_Text_25C383: @ 825C383
+	.string "Congratulations…\p"
+	.string "You have snatched victory from the\n"
+	.string "PIKE QUEEN and cleared the event…$"
+
+BattleFrontier_BattlePikeLobby_Text_25C3D9: @ 825C3D9
+	.string "In recognition of your amazing luck,\n"
+	.string "we award you these Battle Point(s)…$"
+
+BattleFrontier_BattlePikeLobby_Text_25C422: @ 825C422
+	.string "Arrgh! I blew my chance!\n"
+	.string "I was one room away from the goal!\p"
+	.string "In this place, you’d better watch out\n"
+	.string "for poison, freezing, and so on.$"
+
+BattleFrontier_BattlePikeLobby_Text_25C4A5: @ 825C4A5
+	.string "I’ve completed the challenge 10 times\n"
+	.string "now, but I’ve never had to battle\l"
+	.string "a TRAINER once.$"
+
+BattleFrontier_BattlePikeLobby_Text_25C4FD: @ 825C4FD
+	.string "Listen! Listen!\p"
+	.string "Don’t you think that the special\n"
+	.string "abilities of POKéMON will be useful\l"
+	.string "here?$"
+
+	.incbin "baserom.gba", 0x25c558, 0xa3
+
+BattleFrontier_BattlePikeLobby_Text_25C5FB: @ 825C5FB
+	.string "The Battle Choice’s rules are listed.$"
+
+BattleFrontier_BattlePikeLobby_Text_25C621: @ 825C621
+	.string "Which heading do you want to read?$"
+
+BattleFrontier_BattlePikeLobby_Text_25C644: @ 825C644
+	.string "The BAG and POKéNAV may not be used\n"
+	.string "during a Battle Choice challenge.$"
+
+BattleFrontier_BattlePikeLobby_Text_25C68A: @ 825C68A
+	.string "During a Battle Choice challenge,\n"
+	.string "any BERRY or HERB held by POKéMON\l"
+	.string "will be effective only once.$"
+
+BattleFrontier_BattlePikeLobby_Text_25C6EB: @ 825C6EB
+	.string "During a Battle Choice challenge,\n"
+	.string "the sequence of POKéMON cannot be\l"
+	.string "changed.\p"
+	.string "The sequence must be set before\n"
+	.string "starting your challenge.$"
+

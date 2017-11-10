@@ -1,0 +1,346 @@
+EverGrandeCity_ChampionsRoom_MapScripts:: @ 82289EF
+	map_script 3, EverGrandeCity_ChampionsRoom_MapScript1_2289FF
+	map_script 4, EverGrandeCity_ChampionsRoom_MapScript2_228A05
+	map_script 2, EverGrandeCity_ChampionsRoom_MapScript2_228A14
+	.byte 0
+
+EverGrandeCity_ChampionsRoom_MapScript1_2289FF: @ 82289FF
+	call EverGrandeCity_ChampionsRoom_EventScript_271ED7
+	end
+
+EverGrandeCity_ChampionsRoom_MapScript2_228A05: @ 8228A05
+	map_script_2 VAR_0x4001, 0, EverGrandeCity_ChampionsRoom_EventScript_228A0F
+	.2byte 0
+
+EverGrandeCity_ChampionsRoom_EventScript_228A0F:: @ 8228A0F
+	turnobject 255, 2
+	end
+
+EverGrandeCity_ChampionsRoom_MapScript2_228A14: @ 8228A14
+	map_script_2 VAR_0x4001, 0, EverGrandeCity_ChampionsRoom_EventScript_228A1E
+	.2byte 0
+
+EverGrandeCity_ChampionsRoom_EventScript_228A1E:: @ 8228A1E
+	lockall
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_2725C1
+	waitmovement 0
+	delay 40
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_228A42
+	waitmovement 0
+	setvar VAR_0x4001, 1
+	goto EverGrandeCity_ChampionsRoom_EventScript_228A45
+
+	.incbin "baserom.gba", 0x228a40, 0x2
+
+EverGrandeCity_ChampionsRoom_Movement_228A42: @ 8228A42
+	step_up
+	step_up
+	step_end
+
+EverGrandeCity_ChampionsRoom_EventScript_228A45:: @ 8228A45
+	playbgm BGM_DAIGO, 0
+	msgbox EverGrandeCity_ChampionsRoom_Text_228C4C, 4
+	trainerbattle 3, TRAINER_WALLACE, 0, EverGrandeCity_ChampionsRoom_Text_228EAC
+	goto EverGrandeCity_ChampionsRoom_EventScript_228A61
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_228A61:: @ 8228A61
+	playse SE_DOOR
+	setmetatile 6, 1, 838, 0
+	setmetatile 6, 2, 839, 0
+	special DrawWholeMapView
+	msgbox EverGrandeCity_ChampionsRoom_Text_228F66, 4
+	closemessage
+	playse SE_DOOR
+	checkplayergender
+	compare_var_to_value VAR_RESULT, 0
+	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228ABC
+	compare_var_to_value VAR_RESULT, 1
+	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228AC1
+	addobject 2
+	call EverGrandeCity_ChampionsRoom_EventScript_228BFD
+	checkplayergender
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq EverGrandeCity_ChampionsRoom_EventScript_228AC6
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq EverGrandeCity_ChampionsRoom_EventScript_228AFB
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_228ABC:: @ 8228ABC
+	playbgm BGM_GIRL_SUP, 0
+	return
+
+EverGrandeCity_ChampionsRoom_EventScript_228AC1:: @ 8228AC1
+	playbgm BGM_BOY_SUP, 0
+	return
+
+EverGrandeCity_ChampionsRoom_EventScript_228AC6:: @ 8228AC6
+	msgbox EverGrandeCity_ChampionsRoom_Text_2290CA, 4
+	delay 40
+	playse SE_PIN
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_272598
+	waitmovement 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_27259A
+	waitmovement 0
+	call EverGrandeCity_ChampionsRoom_EventScript_228C12
+	msgbox EverGrandeCity_ChampionsRoom_Text_22910B, 4
+	goto EverGrandeCity_ChampionsRoom_EventScript_228B30
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_228AFB:: @ 8228AFB
+	msgbox EverGrandeCity_ChampionsRoom_Text_229152, 4
+	delay 40
+	playse SE_PIN
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_272598
+	waitmovement 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_27259A
+	waitmovement 0
+	call EverGrandeCity_ChampionsRoom_EventScript_228C12
+	msgbox EverGrandeCity_ChampionsRoom_Text_2291A2, 4
+	goto EverGrandeCity_ChampionsRoom_EventScript_228B30
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
+	closemessage
+	addobject 3
+	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_228C43
+	waitmovement 0
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_2725A8
+	waitmovement 0
+	msgbox EverGrandeCity_ChampionsRoom_Text_2291E6, 4
+	call EverGrandeCity_ChampionsRoom_EventScript_272184
+	msgbox EverGrandeCity_ChampionsRoom_Text_22934D, 4
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_2725A6
+	waitmovement 0
+	delay 20
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_2725AA
+	waitmovement 0
+	msgbox EverGrandeCity_ChampionsRoom_Text_229399, 4
+	closemessage
+	delay 30
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_228C3B
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_228C1D
+	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_2725A6
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_228C38
+	waitmovement 0
+	delay 20
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_2725AA
+	waitmovement 0
+	msgbox EverGrandeCity_ChampionsRoom_Text_2293EB, 4
+	checkplayergender
+	compare_var_to_value VAR_RESULT, 0
+	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228BEB
+	compare_var_to_value VAR_RESULT, 1
+	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228BF4
+	closemessage
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_228C3F
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_228C20
+	waitmovement 0
+	setflag FLAG_0x30D
+	warp EVER_GRANDE_CITY_HALL_OF_FAME, 255, 7, 16
+	waitstate
+	releaseall
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_228BEB:: @ 8228BEB
+	msgbox EverGrandeCity_ChampionsRoom_Text_229479, 4
+	return
+
+EverGrandeCity_ChampionsRoom_EventScript_228BF4:: @ 8228BF4
+	msgbox EverGrandeCity_ChampionsRoom_Text_2294F5, 4
+	return
+
+EverGrandeCity_ChampionsRoom_EventScript_228BFD:: @ 8228BFD
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_228C26
+	waitmovement 0
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_2725A4
+	waitmovement 0
+	return
+
+EverGrandeCity_ChampionsRoom_EventScript_228C12:: @ 8228C12
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_228C2F
+	waitmovement 0
+	return
+
+EverGrandeCity_ChampionsRoom_Movement_228C1D: @ 8228C1D
+	step_up
+	step_up
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_228C20: @ 8228C20
+	step_up
+	step_14
+	step_up
+	step_13
+	step_54
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_228C26: @ 8228C26
+	step_up
+	step_up
+	step_up
+	step_up
+	step_up
+	step_left
+	step_up
+	step_28
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_228C2F: @ 8228C2F
+	step_26
+	step_14
+	step_28
+	step_14
+	step_26
+	step_13
+	step_28
+	step_14
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_228C38: @ 8228C38
+	step_right
+	step_up
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_228C3B: @ 8228C3B
+	step_up
+	step_up
+	step_25
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_228C3F: @ 8228C3F
+	step_up
+	step_13
+	step_54
+	step_end
+
+EverGrandeCity_ChampionsRoom_Movement_228C43: @ 8228C43
+	step_up
+	step_up
+	step_up
+	step_up
+	step_up
+	step_right
+	step_up
+	step_27
+	step_end
+
+EverGrandeCity_ChampionsRoom_Text_228C4C: @ 8228C4C
+	.string "WALLACE: Welcome, {PLAYER}{KUN}.\p"
+	.string "That incident in SOOTOPOLIS CITY…\n"
+	.string "That was superb work, putting an end\l"
+	.string "to that crisis all by yourself.\p"
+	.string "Oops!\p"
+	.string "It wouldn’t be fair to say that you\n"
+	.string "alone ended the crisis.\p"
+	.string "You overcame that difficult situation\n"
+	.string "by working as one with your POKéMON.\p"
+	.string "We TRAINERS raise POKéMON by giving\n"
+	.string "them items and by teaching them new\l"
+	.string "techniques for battle.\p"
+	.string "But we ourselves also learn many\n"
+	.string "things from POKéMON.\p"
+	.string "And this is where your achievements\n"
+	.string "are put to the test against what\l"
+	.string "others like you have achieved.\p"
+	.string "Now!\p"
+	.string "Who can most elegantly dance with\n"
+	.string "their POKéMON in HOENN?\p"
+	.string "Show me right here and now!$"
+
+EverGrandeCity_ChampionsRoom_Text_228EAC: @ 8228EAC
+	.string "I, the CHAMPION, fall in defeat…\p"
+	.string "That was wonderful work.\n"
+	.string "You were elegant, infuriatingly so.\l"
+	.string "And yet it was utterly glorious!\p"
+	.string "Kudos to you, {PLAYER}{KUN}!\p"
+	.string "You are a truly noble POKéMON\n"
+	.string "TRAINER!$"
+
+EverGrandeCity_ChampionsRoom_Text_228F66: @ 8228F66
+	.string "WALLACE: The POKéMON you sent into\n"
+	.string "battle…\p"
+	.string "At times they danced like a spring\n"
+	.string "breeze, and at times they struck\l"
+	.string "like lightning.\p"
+	.string "It was with light, yet surefooted,\n"
+	.string "elegance that you led your POKéMON.\p"
+	.string "Even I felt bedazzled by your\n"
+	.string "masterful performance!\p"
+	.string "You now stand at the glorious peak\n"
+	.string "of the POKéMON LEAGUE.\p"
+	.string "I now proclaim you to be the new\n"
+	.string "HOENN region…$"
+
+EverGrandeCity_ChampionsRoom_Text_2290CA: @ 82290CA
+	.string "MAY: {PLAYER}{KUN}!\p"
+	.string "Here’s some advice before you challenge\n"
+	.string "the CHAMPION…$"
+
+EverGrandeCity_ChampionsRoom_Text_22910B: @ 822910B
+	.string "MAY: Huh?\n"
+	.string "What, what, what?\p"
+	.string "{PLAYER}{KUN}…\n"
+	.string "Could it be that…\l"
+	.string "It’s already over?$"
+
+EverGrandeCity_ChampionsRoom_Text_229152: @ 8229152
+	.string "BRENDAN: {PLAYER}!\p"
+	.string "How would you like some advice before\n"
+	.string "you challenge the CHAMPION?…$"
+
+EverGrandeCity_ChampionsRoom_Text_2291A2: @ 82291A2
+	.string "BRENDAN: {PLAYER}…\p"
+	.string "Are you trying to tell me…\n"
+	.string "You’ve beaten the CHAMPION?$"
+
+EverGrandeCity_ChampionsRoom_Text_2291E6: @ 82291E6
+	.string "PROF. BIRCH: See?\n"
+	.string "What did I tell you, {RIVAL}?\p"
+	.string "Didn’t I tell you that you don’t need\n"
+	.string "to worry about {PLAYER}{KUN}?\p"
+	.string "… … … … … … … …\n"
+	.string "{PLAYER}{KUN}, you’ve finally done it.\p"
+	.string "When I heard that you defeated your\n"
+	.string "own father at the PETALBURG GYM,\l"
+	.string "I thought perhaps you had a chance…\p"
+	.string "But to think you’ve actually become\n"
+	.string "the CHAMPION!\p"
+	.string "Ah, yes!\p"
+	.string "What became of your POKéDEX?\n"
+	.string "Here, let me see.$"
+
+EverGrandeCity_ChampionsRoom_Text_22934D: @ 822934D
+	.string "PROF. BIRCH: Anyways,\n"
+	.string "congratulations!\p"
+	.string "Now, go proudly into the final room!$"
+
+EverGrandeCity_ChampionsRoom_Text_229399: @ 8229399
+	.string "WALLACE: {PLAYER}{KUN}…\p"
+	.string "No, let me rephrase that properly.\p"
+	.string "The new CHAMPION!\p"
+	.string "Come with me.$"
+
+EverGrandeCity_ChampionsRoom_Text_2293EB: @ 82293EB
+	.string "WALLACE: I’m sorry, but…\p"
+	.string "From here on, only those TRAINERS who\n"
+	.string "have become CHAMPIONS may enter.\p"
+	.string "You’ll have to wait outside with\n"
+	.string "PROF. BIRCH.$"
+
+EverGrandeCity_ChampionsRoom_Text_229479: @ 8229479
+	.string "MAY: Groan…\p"
+	.string "… … … … … … … …\n"
+	.string "… … … … … … … …\p"
+	.string "I’m just joking! That’s okay!\n"
+	.string "That’s the rule!\p"
+	.string "{PLAYER}{KUN}!\n"
+	.string "Honestly, congratulations!$"
+
+EverGrandeCity_ChampionsRoom_Text_2294F5: @ 82294F5
+	.string "BRENDAN: Whaaaat?! … … … … …\n"
+	.string "… … … … … … … …\p"
+	.string "It can’t be helped if that’s the rule.\p"
+	.string "{PLAYER}, way to go!\n"
+	.string "Congratulations!$"
+
