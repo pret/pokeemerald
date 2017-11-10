@@ -927,8 +927,9 @@ SootopolisCity_EventScript_1E6154:: @ 81E6154
 	msgbox SootopolisCity_Text_1E65C8, 3
 	end
 
-gUnknown_081E615D:: @ 81E615D
-	.incbin "baserom.gba", 0x1e615d, 0x9
+SootopolisCity_EventScript_1E615D:: @ 81E615D
+	msgbox SootopolisCity_Text_1E6604, 3
+	end
 
 SootopolisCity_EventScript_1E6166:: @ 81E6166
 	lockall
@@ -1452,7 +1453,13 @@ SootopolisCity_EventScript_1E654C:: @ 81E654C
 	releaseall
 	end
 
-	.incbin "baserom.gba", 0x1e656b, 0x4
+SootopolisCity_Movement_1E656B:: @ 81E656B
+	step_98
+	step_end
+
+SootopolisCity_Movement_1E656D:: @ 81E656D
+	step_9A
+	step_end
 
 SootopolisCity_Text_1E656F: @ 81E656F
 	.string "SOOTOPOLIS CITY POKéMON GYM\n"
@@ -1465,7 +1472,9 @@ SootopolisCity_Text_1E65C8: @ 81E65C8
 	.string "“The mystical city where history\n"
 	.string "slumbers.”$"
 
-	.incbin "baserom.gba", 0x1e6604, 0x14
+
+SootopolisCity_Text_1E6604: @ 81E6604
+	.string "The door is closed.$"
 
 SootopolisCity_Text_1E6618: @ 81E6618
 	.string "Diving in the sea. Climbing up and\n"

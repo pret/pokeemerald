@@ -95,8 +95,20 @@ RustboroCity_Gym_EventScript_213071:: @ 8213071
 	releaseall
 	end
 
-gUnknown_0821307B:: @ 821307B
-	.incbin "baserom.gba", 0x21307b, 0x22
+RustboroCity_Gym_EventScript_21307B:: @ 821307B
+	lockall
+	pokenavcall RustboroCity_Gym_Text_213A76
+	waitmessage
+	delay 30
+	playfanfare BGM_ME_MATCH_CALL
+	msgbox RustboroCity_Gym_Text_213C01, 4
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_0x1D3
+	clearflag FLAG_0x080
+	releaseall
+	end
 
 RustboroCity_Gym_Text_21309D: @ 821309D
 	.string "Yo, how’s it going?\p"
@@ -226,7 +238,27 @@ RustboroCity_Gym_Text_213A3B: @ 8213A3B
 	.string "ROXANNE’S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
-	.incbin "baserom.gba", 0x213a76, 0x1b9
+
+RustboroCity_Gym_Text_213A76: @ 8213A76
+	.string "… … … … … …\n"
+	.string "… … … … … Beep!\p"
+	.string "ROXANNE: Oh, hello, {PLAYER}?\n"
+	.string "This is ROXANNE of RUSTBORO CITY.\p"
+	.string "I heard from BRAWLY that you’re\n"
+	.string "moving up through the ranks of\l"
+	.string "TRAINERS at an incredible clip.\p"
+	.string "Well, I’d rather not think that\n"
+	.string "I can’t beat you.\p"
+	.string "I promise, I will shape up my GYM\n"
+	.string "so that you may challenge us again.\p"
+	.string "I hope you’ll be looking forward to\n"
+	.string "that occasion as much as me!\p"
+	.string "… … … … … …\n"
+	.string "… … … … … Click!$"
+
+RustboroCity_Gym_Text_213C01: @ 8213C01
+	.string "Registered GYM LEADER ROXANNE\n"
+	.string "in the POKéNAV.$"
 
 RustboroCity_Gym_Text_213C2F: @ 8213C2F
 	.string "ROXANNE: I’m so glad to see you again.\n"

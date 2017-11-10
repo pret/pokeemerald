@@ -597,9 +597,111 @@ Route110_TrickHouseEntrance_EventScript_26A220:: @ 826A220
 	releaseall
 	end
 
-gUnknown_0826A22A:: @ 826A22A
+Route110_TrickHouseEntrance_EventScript_26A22A:: @ 826A22A
+	lockall
+	switch VAR_0x4044
+	case 0, Route110_TrickHouseEntrance_EventScript_26A289
+	case 1, Route110_TrickHouseEntrance_EventScript_26A2B2
+	case 2, Route110_TrickHouseEntrance_EventScript_26A2DB
+	case 3, Route110_TrickHouseEntrance_EventScript_26A304
+	case 4, Route110_TrickHouseEntrance_EventScript_26A32D
+	case 5, Route110_TrickHouseEntrance_EventScript_26A356
+	case 6, Route110_TrickHouseEntrance_EventScript_26A37F
+	case 7, Route110_TrickHouseEntrance_EventScript_26A3A8
+	end
 
-	.incbin "baserom.gba", 0x26a22a, 0x1b1
+Route110_TrickHouseEntrance_EventScript_26A289:: @ 826A289
+	compare_var_to_value VAR_0x40AB, 0
+	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	msgbox Route110_TrickHousePuzzle1_Text_26B98D, 4
+	playse SE_PIN
+	setvar VAR_0x40AB, 2
+	setmetatile 13, 1, 523, 0
+	special DrawWholeMapView
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_26A2B2:: @ 826A2B2
+	compare_var_to_value VAR_0x40AC, 0
+	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	msgbox Route110_TrickHousePuzzle2_Text_26BCBA, 4
+	playse SE_PIN
+	setvar VAR_0x40AC, 2
+	setmetatile 13, 1, 523, 0
+	special DrawWholeMapView
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_26A2DB:: @ 826A2DB
+	compare_var_to_value VAR_0x40AD, 0
+	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	msgbox Route110_TrickHousePuzzle3_Text_26C609, 4
+	playse SE_PIN
+	setvar VAR_0x40AD, 2
+	setmetatile 13, 1, 523, 0
+	special DrawWholeMapView
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_26A304:: @ 826A304
+	compare_var_to_value VAR_0x40AE, 0
+	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	msgbox Route110_TrickHousePuzzle4_Text_26C8C3, 4
+	playse SE_PIN
+	setvar VAR_0x40AE, 2
+	setmetatile 13, 1, 523, 0
+	special DrawWholeMapView
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_26A32D:: @ 826A32D
+	compare_var_to_value VAR_0x40AF, 0
+	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	msgbox Route110_TrickHousePuzzle5_Text_26D660, 4
+	playse SE_PIN
+	setvar VAR_0x40AF, 2
+	setmetatile 13, 1, 523, 0
+	special DrawWholeMapView
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_26A356:: @ 826A356
+	compare_var_to_value VAR_0x40B0, 0
+	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	msgbox Route110_TrickHousePuzzle6_Text_26DE26, 4
+	playse SE_PIN
+	setvar VAR_0x40B0, 2
+	setmetatile 13, 1, 523, 0
+	special DrawWholeMapView
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_26A37F:: @ 826A37F
+	compare_var_to_value VAR_0x40B1, 0
+	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	msgbox Route110_TrickHousePuzzle7_EventScript_26E413, 4
+	playse SE_PIN
+	setvar VAR_0x40B1, 2
+	setmetatile 13, 1, 523, 0
+	special DrawWholeMapView
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_26A3A8:: @ 826A3A8
+	compare_var_to_value VAR_0x40B2, 0
+	goto_eq Route110_TrickHouseEntrance_EventScript_26A3D1
+	msgbox Route110_TrickHousePuzzle8_EventScript_26E864, 4
+	playse SE_PIN
+	setvar VAR_0x40B2, 2
+	setmetatile 13, 1, 523, 0
+	special DrawWholeMapView
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_26A3D1:: @ 826A3D1
+	msgbox Route110_TrickHouseEntrance_Text_26AC4F, 4
+	releaseall
+	end
 
 Route110_TrickHousePuzzle1_EventScript_26A3DB:: @ 826A3DB
 Route110_TrickHousePuzzle2_EventScript_26A3DB:: @ 826A3DB
@@ -793,4 +895,7 @@ Route110_TrickHousePuzzle1_Text_26ABFB: @ 826ABFB
 Route110_TrickHousePuzzle1_Text_26AC2F: @ 826AC2F
 	.string "A secret code is written on it.$"
 
-	.incbin "baserom.gba", 0x26ac4f, 0x60
+Route110_TrickHouseEntrance_Text_26AC4F: @ 826AC4F
+	.string "The door is locked.\p"
+	.string "…On closer inspection, this is written\n"
+	.string "on it: “Write the secret code here.”$"

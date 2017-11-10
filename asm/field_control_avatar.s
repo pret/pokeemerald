@@ -836,7 +836,7 @@ _0809C574:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C58C
-	ldr r0, =gUnknown_081E615D
+	ldr r0, =SootopolisCity_EventScript_1E615D
 	b _0809C7E4
 	.pool
 _0809C58C:
@@ -846,7 +846,7 @@ _0809C58C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C5A4
-	ldr r0, =gUnknown_082393F9
+	ldr r0, =SkyPillar_Outside_EventScript_2393F9
 	b _0809C7E4
 	.pool
 _0809C5A4:
@@ -874,7 +874,7 @@ _0809C5CC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C5E4
-	ldr r0, =gUnknown_0826A22A
+	ldr r0, =Route110_TrickHouseEntrance_EventScript_26A22A
 	b _0809C7E4
 	.pool
 _0809C5E4:
@@ -1310,7 +1310,7 @@ _0809C988:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C9A4
-	ldr r0, =gUnknown_08252BE8
+	ldr r0, =BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8
 _0809C996:
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
@@ -1416,7 +1416,7 @@ _0809CA7C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809CA94
-	ldr r0, =gUnknown_08238EAF
+	ldr r0, =IslandCave_EventScript_238EAF
 	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
@@ -1424,7 +1424,7 @@ _0809CA94:
 	bl is_tile_that_overrides_player_control
 	cmp r0, 0x1
 	bne _0809CAA8
-	ldr r0, =gUnknown_081DF7BA
+	ldr r0, =MauvilleCity_EventScript_1DF7BA
 	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
@@ -1432,7 +1432,7 @@ _0809CAA8:
 	bl sub_8138120
 	cmp r0, 0x1
 	bne _0809CABC
-	ldr r0, =gUnknown_081F49EC
+	ldr r0, =Route119_EventScript_1F49EC
 	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
@@ -1440,7 +1440,7 @@ _0809CABC:
 	bl sub_8138168
 	cmp r0, 0x1
 	bne _0809CAD0
-	ldr r0, =gUnknown_081FA4D6
+	ldr r0, =LittlerootTown_ProfessorBirchsLab_EventScript_1FA4D6
 	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
@@ -1448,7 +1448,7 @@ _0809CAD0:
 	bl sub_81381B0
 	cmp r0, 0x1
 	bne _0809CAE4
-	ldr r0, =gUnknown_0821307B
+	ldr r0, =RustboroCity_Gym_EventScript_21307B
 	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool

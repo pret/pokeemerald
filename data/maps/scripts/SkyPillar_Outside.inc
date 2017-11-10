@@ -137,8 +137,12 @@ SkyPillar_Outside_Movement_2393EB: @ 82393EB
 SkyPillar_Outside_EventScript_2393F8:: @ 82393F8
 	end
 
-gUnknown_082393F9:: @ 82393F9
-	.incbin "baserom.gba", 0x2393f9, 0x1d
+SkyPillar_Outside_EventScript_2393F9:: @ 82393F9
+	msgbox SkyPillar_Outside_Text_239402, 3
+	end
+
+SkyPillar_Outside_Text_239402: @ 8239402
+	.string "The door is closed.$"
 
 SkyPillar_Outside_Text_239416: @ 8239416
 	.string "WALLACE: Oh, my, I’m terribly sorry!\p"

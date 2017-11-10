@@ -114,6 +114,10 @@
 	create_movement step_94
 	create_movement step_95
 	create_movement step_96
+	create_movement step_97
+	create_movement step_98
+	create_movement step_99
+	create_movement step_9A
 
 	enum_start 0xfe
 	create_movement step_end

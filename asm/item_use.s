@@ -1787,7 +1787,7 @@ sub_80FDE7C: @ 80FDE7C
 	lsls r4, 24
 	lsrs r4, 24
 	bl ScriptContext2_Enable
-	ldr r0, =gUnknown_08242CFC
+	ldr r0, =BattleFrontier_OutsideEast_EventScript_242CFC
 	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask

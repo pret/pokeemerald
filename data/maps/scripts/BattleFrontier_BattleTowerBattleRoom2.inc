@@ -534,5 +534,7 @@ BattleFrontier_BattleTowerBattleRoom2_Text_24975D: @ 824975D
 gText_LinkStandby3:: @ 824978D
 	.string "Link standby…$"
 
-gUnknown_0824979B:: @ 824979B
-	.incbin "baserom.gba", 0x24979b, 0x47
+gText_YourPartnerHasRetired:: @ 824979B
+	.string "Your partner has retired.\p"
+	.string "Your BATTLE ROOM challenge\n"
+	.string "will be canceled.$"

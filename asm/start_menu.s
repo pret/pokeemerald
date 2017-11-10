@@ -868,7 +868,7 @@ _0809FF00:
 	bl sub_8197DF8
 	bl sub_80984F4
 	bl ScriptContext2_Disable
-	ldr r0, =gUnknown_08252C88
+	ldr r0, =BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0809FF22
@@ -1089,7 +1089,7 @@ sub_80A00A0: @ 80A00A0
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A00D4
-	ldr r0, =gUnknown_08252CA7
+	ldr r0, =BattleFrontier_BattlePyramidEmptySquare_Text_252CA7
 	ldr r1, =sub_80A00EC
 	bl sub_809FF98
 	b _080A00DC

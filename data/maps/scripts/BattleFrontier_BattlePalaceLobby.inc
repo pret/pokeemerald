@@ -569,7 +569,9 @@ VerdanturfTown_BattleTentLobby_Text_24E636: @ 824E636
 	.string "As a result, your challenge has been\n"
 	.string "disqualified. It is most unfortunate.$"
 
-	.incbin "baserom.gba", 0x24e6c9, 0x1a
+BattleFrontier_BattlePalaceLobby_Text_24E6C9: @ 824E6C9
+	.string "{PLAYER} received the prize\n"
+	.string "{STR_VAR_1}.$"
 
 BattleFrontier_BattlePalaceLobby_Text_24E6E3: @ 824E6E3
 	.string "For a hardy fellow like me,\n"

@@ -124,11 +124,36 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BD5:: @ 8252BD5
 	special sub_81A8E7C
 	return
 
-gUnknown_08252BE8:: @ 8252BE8
-	.incbin "baserom.gba", 0x252be8, 0x67
+BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
+	call BattleFrontier_BattlePalaceBattleRoom_EventScript_241EBA
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, 2
+	special sub_81A1780
+	addvar VAR_RESULT, 1
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 2
+	copyvar VAR_0x8006, VAR_RESULT
+	special sub_81A1780
+	compare_var_to_value VAR_RESULT, 7
+	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45
+	setvar VAR_0x8004, 6
+	special sub_81A8E7C
+	setvar VAR_0x8004, 2
+	setvar VAR_0x8005, 0
+	setvar VAR_0x8006, 0
+	special sub_81A1780
+	setvar VAR_RESULT, 0
+	warp BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE, 255, 1, 1
+	waitstate
+	end
 
-gUnknown_08252C4F:: @ 8252C4F
-	trainerbattle 9, TRAINER_PHILLIP, 0, BattlePyramidSquare01_Text_252C8D, BattlePyramidSquare01_Text_252C8D
+BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45:: @ 8252C45
+	warp BATTLE_FRONTIER_BATTLE_PYRAMID_TOP, 255, 17, 17
+	waitstate
+	end
+
+BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F:: @ 8252C4F
+	trainerbattle 9, TRAINER_PHILLIP, 0, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D, BattleFrontier_BattlePyramidEmptySquare_Text_252C8D
 	setvar VAR_0x8004, 10
 	special sub_81A8E7C
 	waitmessage
@@ -137,26 +162,28 @@ gUnknown_08252C4F:: @ 8252C4F
 	releaseall
 	end
 
-gUnknown_08252C6A:: @ 8252C6A
+BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A:: @ 8252C6A
 	setvar VAR_0x8004, 7
 	special sub_81A8E7C
 	callstd 1
 	compare_var_to_value VAR_0x8007, 0
-	goto_eq BattlePyramidSquare01_EventScript_252C87
+	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C87
 	setvar VAR_0x8004, 8
 	special sub_81A8E7C
 
-BattlePyramidSquare01_EventScript_252C87:: @ 8252C87
+BattleFrontier_BattlePyramidEmptySquare_EventScript_252C87:: @ 8252C87
 	end
 
-gUnknown_08252C88:: @ 8252C88
-	.incbin "baserom.gba", 0x252c88, 0x5
+BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88:: @ 8252C88
+	goto BattleFrontier_BattlePyramidTop_EventScript_252B42
 
-BattlePyramidSquare01_Text_252C8D: @ 8252C8D
+BattleFrontier_BattlePyramidEmptySquare_Text_252C8D: @ 8252C8D
 	.string "This is a sample message.$"
 
-gUnknown_08252CA7:: @ 8252CA7
-	.incbin "baserom.gba", 0x252ca7, 0x54
+BattleFrontier_BattlePyramidEmptySquare_Text_252CA7:: @ 8252CA7
+	.string "Your BATTLE PYRAMID quest will be\n"
+	.string "saved so that you may quit for now.\l"
+	.string "Is that okay?$"
 
 gUnknown_08252CFB:: @ 8252CFB
 	.incbin "baserom.gba", 0x252cfb, 0x23a6

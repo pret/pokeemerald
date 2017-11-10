@@ -964,7 +964,12 @@ Route110_TrickHousePuzzle5_Movement_26D632: @ 826D632
 	step_00
 	step_end
 
-	.incbin "baserom.gba", 0x26d660, 0x6e
+Route110_TrickHousePuzzle5_Text_26D660: @ 826D660
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is a genius.”\n"
+	.string "… … … … … … … …\p"
+	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle5_Text_26D6CE: @ 826D6CE
 	.string "CLICKETY-CLACK…\n"

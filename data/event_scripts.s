@@ -17757,7 +17757,7 @@ LilycoveCity_DepartmentStore_1F_Text_2A64B1: @ 82A64B1
 
 LilycoveCity_DepartmentStore_1F_Text_2A64C8: @ 82A64C8
 	.string "Please pick a LOTO TICKET.\n"
-	.string "…{PAUSE 0x8}{PAUSE 0x8}{PAUSE 0x8}{PAUSE 0x8}…{PAUSE 0x8}{PAUSE 0x8}{PAUSE 0x8}{PAUSE 0x8}…{PAUSE 0x8}{PAUSE 0x8}{PAUSE 0x8}{PAUSE 0x8}$"
+	.string "…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
 LilycoveCity_DepartmentStore_1F_Text_2A650B: @ 82A650B
 	.string "The LOTO TICKET number is {STR_VAR_1}.\p"

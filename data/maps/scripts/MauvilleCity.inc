@@ -457,8 +457,20 @@ MauvilleCity_EventScript_1DF7B0:: @ 81DF7B0
 	release
 	end
 
-gUnknown_081DF7BA:: @ 81DF7BA
-	.incbin "baserom.gba", 0x1df7ba, 0x22
+MauvilleCity_EventScript_1DF7BA:: @ 81DF7BA
+	lockall
+	pokenavcall MauvilleCity_Text_1DFDFB
+	waitmessage
+	delay 30
+	playfanfare BGM_ME_MATCH_CALL
+	msgbox MauvilleCity_Text_1DFEB4, 4
+	waitfanfare
+	closemessage
+	delay 30
+	setflag FLAG_0x0D6
+	clearflag FLAG_0x088
+	releaseall
+	end
 
 MauvilleCity_Text_1DF7DC: @ 81DF7DC
 	.string "UNCLE: It’s because of POKéMON that\n"
@@ -545,7 +557,21 @@ MauvilleCity_Text_1DFD34: @ 81DFD34
 	.string "sometime?\l"
 	.string "I’m sure WALLY would enjoy it.$"
 
-	.incbin "baserom.gba", 0x1dfdfb, 0xda
+
+MauvilleCity_Text_1DFDFB: @ 81DFDFB
+	.string "… … … … … …\n"
+	.string "… … … … … Beep!\p"
+	.string "WALLY: Oh, hello, {PLAYER}!\p"
+	.string "I just wanted to tell you that\n"
+	.string "my uncle bought me a POKéNAV!\p"
+	.string "Now I can get in touch with you\n"
+	.string "anytime, {PLAYER}!\p"
+	.string "… … … … … …\n"
+	.string "… … … … … Click!$"
+
+MauvilleCity_Text_1DFEB4: @ 81DFEB4
+	.string "Registered WALLY\n"
+	.string "in the POKéNAV.$"
 
 MauvilleCity_Text_1DFED5: @ 81DFED5
 	.string "SCOTT: Hehe…\n"

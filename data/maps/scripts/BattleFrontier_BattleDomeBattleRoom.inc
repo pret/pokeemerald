@@ -1251,7 +1251,15 @@ BattleFrontier_BattleDomeBattleRoom_Text_24D54D: @ 824D54D
 	.string "I will very much look forward to\n"
 	.string "our next encounter!$"
 
-	.incbin "baserom.gba", 0x24d5f5, 0x82
+BattleFrontier_BattleDomeBattleRoom_Text_24D5F5: @ 824D5F5
+	.string "{PLAYER} is the Level 50\n"
+	.string "Battle Tournament Champion!\p"
+	.string "Congratulations!$"
+
+BattleFrontier_BattleDomeBattleRoom_Text_24D635: @ 824D635
+	.string "{PLAYER} is the Open Level\n"
+	.string "Battle Tournament Champion!\p"
+	.string "Congratulations!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_24D677: @ 824D677
 	.string "The final match!\p"

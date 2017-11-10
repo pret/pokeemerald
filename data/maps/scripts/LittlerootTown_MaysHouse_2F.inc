@@ -325,9 +325,12 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9576:: @ 81F9576
 	releaseall
 	end
 
-gUnknown_081F958F:: @ 81F958F
-
-	.incbin "baserom.gba", 0x1f958f, 0xd
+LittlerootTown_MaysHouse_2F_EventScript_1F958F:: @ 81F958F
+	setvar VAR_0x8004, 2
+	playse SE_PC_OFF
+	special sub_8138E20
+	releaseall
+	end
 
 LittlerootTown_MaysHouse_2F_Text_1F959C: @ 81F959C
 	.string "Huh?\n"

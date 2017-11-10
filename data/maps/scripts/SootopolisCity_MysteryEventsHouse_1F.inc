@@ -223,14 +223,16 @@ SootopolisCity_MysteryEventsHouse_1F_Text_227D5B: @ 8227D5B
 	.string "It was a brilliant match in which\n"
 	.string "neither side conceded a step!$"
 
-	.incbin "baserom.gba", 0x227db5, 0x3
+SootopolisCity_MysteryEventsHouse_1F_Text_227DB5: @ 8227DB5
+	.string "{STR_VAR_1}$"
 
 SootopolisCity_MysteryEventsHouse_1F_Text_227DB8: @ 8227DB8
 	.string "That was superlative!\p"
 	.string "Why, it was like seeing myself in\n"
 	.string "my youth again!$"
 
-	.incbin "baserom.gba", 0x227e00, 0x3
+SootopolisCity_MysteryEventsHouse_1F_Text_227E00: @ 8227E00
+	.string "{STR_VAR_1}$"
 
 SootopolisCity_MysteryEventsHouse_1F_Text_227E03: @ 8227E03
 	.string "Ah, too bad for you!\p"

@@ -622,7 +622,10 @@ VerdanturfTown_BattleTentLobby_Text_24A554: @ 824A554
 	.string "{PLAYER} received the prize\n"
 	.string "{STR_VAR_1}.$"
 
-	.incbin "baserom.gba", 0x24a56e, 0x51
+VerdanturfTown_BattleTentLobby_Text_24A56E: @ 824A56E
+	.string "Oh, your BAG appears to be full.\p"
+	.string "Please make room in your BAG, then come\n"
+	.string "see me.$"
 
 BattleFrontier_BattleDomeLobby_Text_24A5BF: @ 824A5BF
 	.string "Thank you for playing!$"

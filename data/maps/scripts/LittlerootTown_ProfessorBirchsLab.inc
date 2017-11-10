@@ -687,8 +687,13 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA4CD:: @ 81FA4CD
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB148, 3
 	end
 
-gUnknown_081FA4D6:: @ 81FA4D6
-	.incbin "baserom.gba", 0x1fa4d6, 0xc
+LittlerootTown_ProfessorBirchsLab_EventScript_1FA4D6:: @ 81FA4D6
+	lockall
+	pokenavcall LittlerootTown_ProfessorBirchsLab_Text_1FBD1A
+	waitmessage
+	clearflag FLAG_0x072
+	releaseall
+	end
 
 LittlerootTown_ProfessorBirchsLab_Text_1FA4E2: @ 81FA4E2
 	.string "Hunh? PROF. BIRCH?\p"
@@ -954,13 +959,17 @@ LittlerootTown_ProfessorBirchsLab_Text_1FB959: @ 81FB959
 	.string "you decide.\p"
 	.string "They’re all invaluable POKéMON.$"
 
-	.incbin "baserom.gba", 0x1fb9a8, 0x2f
+LittlerootTown_ProfessorBirchsLab_Text_1FB9A8: @ 81FB9A8
+	.string "PROF. BIRCH: I see!\n"
+	.string "You picked a fine POKéMON!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_1FB9D7: @ 81FB9D7
 	.string "{PLAYER} received the {STR_VAR_1}\n"
 	.string "from PROF. BIRCH!$"
 
-	.incbin "baserom.gba", 0x1fb9fc, 0x30
+LittlerootTown_ProfessorBirchsLab_Text_1FB9FC: @ 81FB9FC
+	.string "Want to give a nickname to\n"
+	.string "the {STR_VAR_1} you received?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_1FBA2C: @ 81FBA2C
 	.string "PROF. BIRCH: Listen, {PLAYER}{KUN}.\n"
@@ -975,7 +984,9 @@ LittlerootTown_ProfessorBirchsLab_Text_1FBAF8: @ 81FBAF8
 	.string "You received the promised POKéMON.\n"
 	.string "Better leave the others alone.$"
 
-	.incbin "baserom.gba", 0x1fbb3a, 0x2e
+LittlerootTown_ProfessorBirchsLab_Text_1FBB3A: @ 81FBB3A
+	.string "Oh, you don’t have any room for\n"
+	.string "this POKéMON.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_1FBB68: @ 81FBB68
 	.string "MAY: {PLAYER}{KUN}, after this…\n"
@@ -1001,4 +1012,19 @@ LittlerootTown_ProfessorBirchsLab_Text_1FBCD2: @ 81FBCD2
 	.string "Have you gone out to that place,\l"
 	.string "the BATTLE FRONTIER?$"
 
-	.incbin "baserom.gba", 0x1fbd1a, 0x16b
+LittlerootTown_ProfessorBirchsLab_Text_1FBD1A: @ 81FBD1A
+	.string "… … … … … …\n"
+	.string "… … … … … Beep!\p"
+	.string "SCOTT: Hi, hi, {PLAYER}!\n"
+	.string "It’s me, SCOTT.\p"
+	.string "I’m aboard the S.S. TIDAL now.\n"
+	.string "It feels great to be on the sea!\p"
+	.string "By the way…\p"
+	.string "There’s this place that I’d like to\n"
+	.string "invite you to for a visit.\p"
+	.string "If you’re interested, board a ferry\n"
+	.string "at either SLATEPORT or LILYCOVE.\p"
+	.string "I’ll fill you in on the details when\n"
+	.string "we meet. I’ll be waiting!\p"
+	.string "… … … … … …\n"
+	.string "… … … … … Click!$"

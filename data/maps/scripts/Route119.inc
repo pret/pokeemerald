@@ -493,8 +493,14 @@ Route119_EventScript_1F49E3:: @ 81F49E3
 	msgbox Route119_Text_1F5339, 3
 	end
 
-gUnknown_081F49EC:: @ 81F49EC
-	.incbin "baserom.gba", 0x1f49ec, 0x11
+Route119_EventScript_1F49EC:: @ 81F49EC
+	lockall
+	pokenavcall Route119_Text_1F4FBA
+	waitmessage
+	clearflag FLAG_0x08A
+	addvar VAR_0x40D1, 1
+	releaseall
+	end
 
 Route119_Text_1F49FD: @ 81F49FD
 	.string "MAY: {PLAYER}{KUN}!\n"
@@ -568,7 +574,21 @@ Route119_Text_1F4E60: @ 81F4E60
 	.string "I expect that you’ll do well at the GYM.\n"
 	.string "Well, I’ll be seeing you!$"
 
-	.incbin "baserom.gba", 0x1f4fba, 0x131
+
+Route119_Text_1F4FBA: @ 81F4FBA
+	.string "… … … … … …\n"
+	.string "… … … … … Beep!\p"
+	.string "SCOTT: Hiya, {PLAYER}{KUN}, it’s me!\p"
+	.string "Just as I thought, you won at\n"
+	.string "the FORTREE GYM.\p"
+	.string "Your strength…\n"
+	.string "Perhaps you really are the TRAINER\l"
+	.string "that I’ve been searching for.\p"
+	.string "Remember, you have a fan in me.\n"
+	.string "I’ll be cheering from the sidelines.\l"
+	.string "Keep up the great work!\p"
+	.string "… … … … … …\n"
+	.string "… … … … … Click!$"
 
 Route119_Text_1F50EB: @ 81F50EB
 	.string "We’re standing lookout here.\p"

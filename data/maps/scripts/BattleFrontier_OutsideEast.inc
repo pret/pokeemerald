@@ -114,8 +114,41 @@ BattleFrontier_OutsideEast_EventScript_242CEA:: @ 8242CEA
 	release
 	end
 
-gUnknown_08242CFC:: @ 8242CFC
-	.incbin "baserom.gba", 0x242cfc, 0x6d
+BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
+	lock
+	faceplayer
+	special sub_80FAFF8
+	waitstate
+	waitse
+	playse 269
+	applymovement 14, BattleFrontier_OutsideEast_Movement_242D69
+	waitmovement 0
+	msgbox gUnknown_082731BD, 4
+	closemessage
+	waitse
+	playmoncry SPECIES_SUDOWOODO, 2
+	delay 40
+	waitmoncry
+	setvar VAR_LAST_TALKED, 14
+	setwildbattle SPECIES_SUDOWOODO, 40, ITEM_NONE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	dowildbattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, sub_8138B80
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq BattleFrontier_OutsideEast_EventScript_242D60
+	compare_var_to_value VAR_RESULT, 4
+	goto_eq BattleFrontier_OutsideEast_EventScript_242D60
+	compare_var_to_value VAR_RESULT, 5
+	goto_eq BattleFrontier_OutsideEast_EventScript_242D60
+	setflag FLAG_0x1C6
+	release
+	end
+
+BattleFrontier_OutsideEast_EventScript_242D60:: @ 8242D60
+	setflag FLAG_0x1C6
+	goto IslandCave_EventScript_27376D
+	end
 
 BattleFrontier_OutsideEast_Movement_242D69: @ 8242D69
 	step_03

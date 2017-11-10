@@ -386,7 +386,19 @@ LittlerootTown_BrendansHouse_1F_Text_1F7EC6: @ 81F7EC6
 	.string "INTERVIEWER: …We brought you this\n"
 	.string "report from in front of PETALBURG GYM.$"
 
-	.incbin "baserom.gba", 0x1f7f0f, 0xff
+LittlerootTown_BrendansHouse_1F_Text_1F7F0F: @ 81F7F0F
+	.string "There is a movie on TV.\p"
+	.string "Two men are dancing on a big piano\n"
+	.string "keyboard.\p"
+	.string "Better get going!$"
+
+LittlerootTown_BrendansHouse_1F_Text_1F7F66: @ 81F7F66
+	.string "It’s the instruction booklet for the\n"
+	.string "RUNNING SHOES.\p"
+	.string "“Press the B Button to run while\n"
+	.string "wearing your RUNNING SHOES.\p"
+	.string "“Lace up your RUNNING SHOES and hit\n"
+	.string "the road running!”$"
 
 LittlerootTown_BrendansHouse_1F_Text_1F800E: @ 81F800E
 	.string "DAD: Hm?\p"

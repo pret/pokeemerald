@@ -11777,7 +11777,7 @@ _0813B728:
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	bne _0813B790
-	ldr r0, =gUnknown_0824979B
+	ldr r0, =gText_YourPartnerHasRetired
 	bl ShowFieldAutoScrollMessage
 	b _0813B790
 	.pool
@@ -11786,7 +11786,7 @@ _0813B74C:
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	bne _0813B790
-	ldr r0, =gUnknown_0824979B
+	ldr r0, =gText_YourPartnerHasRetired
 	bl ShowFieldAutoScrollMessage
 	b _0813B790
 	.pool

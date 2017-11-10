@@ -264,8 +264,12 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8626:: @ 81F8626
 	releaseall
 	end
 
-gUnknown_081F863F:: @ 81F863F
-	.incbin "baserom.gba", 0x1f863f, 0xd
+LittlerootTown_BrendansHouse_2F_EventScript_1F863F:: @ 81F863F
+	setvar VAR_0x8004, 1
+	playse SE_PC_OFF
+	special sub_8138E20
+	releaseall
+	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F864C:: @ 81F864C
 	msgbox gUnknown_08272CD5, 4
@@ -304,7 +308,9 @@ LittlerootTown_BrendansHouse_2F_Text_1F877F: @ 81F877F
 	.string "Record your progress with SAVE.\p"
 	.string "The remaining pages are blank…$"
 
-	.incbin "baserom.gba", 0x1f8820, 0x2f
+LittlerootTown_BrendansHouse_2F_Text_1F8820: @ 81F8820
+	.string "{PLAYER} took a closer look at the\n"
+	.string "HOENN region map.$"
 
 LittlerootTown_BrendansHouse_2F_Text_1F884F: @ 81F884F
 	.string "It’s a Nintendo GameCube.\p"

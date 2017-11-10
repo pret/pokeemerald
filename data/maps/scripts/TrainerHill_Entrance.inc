@@ -438,7 +438,14 @@ TrainerHill_Roof_Text_268C31: @ 8268C31
 	.string "a tag team with you!\p"
 	.string "Until we meet again, amigo!$"
 
-	.incbin "baserom.gba", 0x268cc6, 0x94
+TrainerHill_Roof_Text_268CC6: @ 8268CC6
+	.string "I had the TRAINER HILL built for but\n"
+	.string "one reason and one only!\p"
+	.string "To find the most suitable partner\n"
+	.string "with whom I may form a tag team!$"
+
+TrainerHill_Entrance_Text_268D47: @ 8268D47
+	.string "{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.$"
 
 TrainerHill_Entrance_Text_268D5A: @ 8268D5A
 	.string "Who knows what sort of TRAINERS\n"

@@ -1323,7 +1323,7 @@ _080D41D4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080D422A
-	ldr r0, =gUnknown_08267EDB
+	ldr r0, =FarawayIsland_Interior_EventScript_267EDB
 	bl ScriptContext1_SetupScript
 _080D422A:
 	pop {r4-r6}

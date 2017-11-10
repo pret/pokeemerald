@@ -41,8 +41,17 @@ IslandCave_EventScript_238EAB:: @ 8238EAB
 	clearflag FLAG_0x3A8
 	return
 
-gUnknown_08238EAF:: @ 8238EAF
-	.incbin "baserom.gba", 0x238eaf, 0x40
+IslandCave_EventScript_238EAF:: @ 8238EAF
+	setmetatile 7, 19, 554, 1
+	setmetatile 8, 19, 555, 1
+	setmetatile 9, 19, 556, 1
+	setmetatile 7, 20, 562, 1
+	setmetatile 8, 20, 563, 0
+	setmetatile 9, 20, 564, 1
+	special DrawWholeMapView
+	playse SE_BAN
+	setflag FLAG_SYS_BRAILLE_WAIT
+	end
 
 IslandCave_EventScript_238EEF:: @ 8238EEF
 	lockall

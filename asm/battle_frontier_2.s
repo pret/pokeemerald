@@ -29815,7 +29815,7 @@ _081A9F7A:
 	thumb_func_start sub_81A9F80
 sub_81A9F80: @ 81A9F80
 	push {lr}
-	ldr r0, =gUnknown_08252C88
+	ldr r0, =BattleFrontier_BattlePyramidEmptySquare_EventScript_252C88
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -30241,8 +30241,8 @@ sub_81AA2F8: @ 81AA2F8
 	push {r4,r5,lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
-	ldr r5, =gUnknown_08252C4F
-	ldr r4, =gUnknown_08252C6A
+	ldr r5, =BattleFrontier_BattlePyramidEmptySquare_EventScript_252C4F
+	ldr r4, =BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A
 	movs r2, 0xC8
 	lsls r2, 4
 	adds r1, r0, r2
