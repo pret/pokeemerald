@@ -764,7 +764,21 @@ Route129_MapAttributes: @ 84166A4
 	.4byte gTileset_Mossdeep
 
 	.align 2
-	.incbin "baserom.gba", 0x4166bc, 0x1920
+UnknownMapBorder_08417FC4: @ 84166BC
+	.incbin "data/maps/UnknownMap_08417FC4/border.bin"
+
+	.align 2
+UnknownMapBlockdata_08417FC4: @ 84166C4
+	.incbin "data/maps/UnknownMap_08417FC4/map.bin"
+
+	.align 2
+UnknownMapAttributes_08417FC4: @ 8417FC4
+	.4byte 0x50
+	.4byte 0x28
+	.4byte UnknownMapBorder_08417FC4
+	.4byte UnknownMapBlockdata_08417FC4
+	.4byte gTileset_General
+	.4byte gTileset_Cave
 
 	.align 2
 Route131_MapBorder: @ 8417FDC
@@ -899,7 +913,7 @@ LittlerootTown_BrendansHouse_1F_MapAttributes: @ 84268CC
 	.4byte 0x9
 	.4byte LittlerootTown_BrendansHouse_1F_MapBorder
 	.4byte LittlerootTown_BrendansHouse_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BrendansMaysHouse
 
 	.align 2
@@ -916,7 +930,7 @@ LittlerootTown_BrendansHouse_2F_MapAttributes: @ 842697C
 	.4byte 0x8
 	.4byte LittlerootTown_BrendansHouse_2F_MapBorder
 	.4byte LittlerootTown_BrendansHouse_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BrendansMaysHouse
 
 	.align 2
@@ -933,7 +947,7 @@ LittlerootTown_MaysHouse_1F_MapAttributes: @ 8426A64
 	.4byte 0x9
 	.4byte LittlerootTown_MaysHouse_1F_MapBorder
 	.4byte LittlerootTown_MaysHouse_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BrendansMaysHouse
 
 	.align 2
@@ -950,7 +964,7 @@ LittlerootTown_MaysHouse_2F_MapAttributes: @ 8426B14
 	.4byte 0x8
 	.4byte LittlerootTown_MaysHouse_2F_MapBorder
 	.4byte LittlerootTown_MaysHouse_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BrendansMaysHouse
 
 	.align 2
@@ -967,7 +981,7 @@ LittlerootTown_ProfessorBirchsLab_MapAttributes: @ 8426C88
 	.4byte 0xd
 	.4byte LittlerootTown_ProfessorBirchsLab_MapBorder
 	.4byte LittlerootTown_ProfessorBirchsLab_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Lab
 
 	.align 2
@@ -992,7 +1006,7 @@ VerdanturfTown_House_MapAttributes: @ 8426D5C
 	.4byte 0x9
 	.4byte OldaleTown_House1_MapBorder
 	.4byte OldaleTown_House1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1020,7 +1034,7 @@ VerdanturfTown_FriendshipRatersHouse_MapAttributes: @ 8426E2C
 	.4byte 0x8
 	.4byte OldaleTown_House2_MapBorder
 	.4byte OldaleTown_House2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1051,7 +1065,7 @@ VerdanturfTown_PokemonCenter_1F_MapAttributes: @ 8426F48
 	.4byte 0x9
 	.4byte OldaleTown_PokemonCenter_1F_MapBorder
 	.4byte OldaleTown_PokemonCenter_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_PokemonCenter
 
 	.align 2
@@ -1084,7 +1098,7 @@ VerdanturfTown_PokemonCenter_2F_MapAttributes: @ 8427080
 	.4byte 0xa
 	.4byte OldaleTown_PokemonCenter_2F_MapBorder
 	.4byte OldaleTown_PokemonCenter_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_PokemonCenter
 
 	.align 2
@@ -1113,7 +1127,7 @@ VerdanturfTown_Mart_MapAttributes: @ 8427150
 	.4byte 0x8
 	.4byte OldaleTown_Mart_MapBorder
 	.4byte OldaleTown_Mart_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
 	.align 2
@@ -1132,7 +1146,7 @@ Route111_OldLadysRestStop_MapAttributes: @ 8427210
 	.4byte 0x8
 	.4byte DewfordTown_House1_MapBorder
 	.4byte DewfordTown_House1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1149,7 +1163,7 @@ DewfordTown_Gym_MapAttributes: @ 8427620
 	.4byte 0x1c
 	.4byte DewfordTown_Gym_MapBorder
 	.4byte DewfordTown_Gym_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_DewfordGym
 
 	.align 2
@@ -1166,7 +1180,7 @@ DewfordTown_Hall_MapAttributes: @ 8427774
 	.4byte 0x9
 	.4byte DewfordTown_Hall_MapBorder
 	.4byte DewfordTown_Hall_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1184,7 +1198,7 @@ Route113_GlassWorkshop_MapAttributes: @ 8427848
 	.4byte 0x9
 	.4byte DewfordTown_House2_MapBorder
 	.4byte DewfordTown_House2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1201,7 +1215,7 @@ LavaridgeTown_HerbShop_MapAttributes: @ 8427918
 	.4byte 0x8
 	.4byte LavaridgeTown_HerbShop_MapBorder
 	.4byte LavaridgeTown_HerbShop_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
 	.align 2
@@ -1218,7 +1232,7 @@ LavaridgeTown_Gym_1F_MapAttributes: @ 8427BC0
 	.4byte 0x13
 	.4byte LavaridgeTown_Gym_1F_MapBorder
 	.4byte LavaridgeTown_Gym_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_LavaridgeGym
 
 	.align 2
@@ -1235,7 +1249,7 @@ LavaridgeTown_Gym_B1F_MapAttributes: @ 8427E68
 	.4byte 0x13
 	.4byte LavaridgeTown_Gym_B1F_MapBorder
 	.4byte LavaridgeTown_Gym_B1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_LavaridgeGym
 
 	.align 2
@@ -1252,11 +1266,42 @@ LavaridgeTown_PokemonCenter_1F_MapAttributes: @ 8427F84
 	.4byte 0x9
 	.4byte LavaridgeTown_PokemonCenter_1F_MapBorder
 	.4byte LavaridgeTown_PokemonCenter_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_PokemonCenter
 
 	.align 2
-	.incbin "baserom.gba", 0x427f9c, 0x408
+FallarborTown_LeftoverRSContestLobby_MapBorder: @ 8427F9C
+	.incbin "data/maps/FallarborTown_LeftoverRSContestLobby/border.bin"
+
+	.align 2
+FallarborTown_LeftoverRSContestLobby_MapBlockdata: @ 8427FA4
+	.incbin "data/maps/FallarborTown_LeftoverRSContestLobby/map.bin"
+
+	.align 2
+FallarborTown_LeftoverRSContestLobby_MapAttributes: @ 8428078
+	.4byte 0xf
+	.4byte 0x7
+	.4byte FallarborTown_LeftoverRSContestLobby_MapBorder
+	.4byte FallarborTown_LeftoverRSContestLobby_MapBlockdata
+	.4byte gTileset_Building
+	.4byte gTileset_Contest
+
+	.align 2
+FallarborTown_LeftoverRSContestHall_MapBorder: @ 8428090
+	.incbin "data/maps/FallarborTown_LeftoverRSContestHall/border.bin"
+
+	.align 2
+FallarborTown_LeftoverRSContestHall_MapBlockdata: @ 8428098
+	.incbin "data/maps/FallarborTown_LeftoverRSContestHall/map.bin"
+
+	.align 2
+FallarborTown_LeftoverRSContestHall_MapAttributes: @ 82CF4A0
+	.4byte 0x15
+	.4byte 0x12
+	.4byte FallarborTown_LeftoverRSContestHall_MapBorder
+	.4byte FallarborTown_LeftoverRSContestHall_MapBlockdata
+	.4byte gTileset_Building
+	.4byte gTileset_Contest
 
 	.align 2
 LilycoveCity_House2_MapBorder: @ 84283A4
@@ -1272,11 +1317,25 @@ LilycoveCity_House2_MapAttributes: @ 842842C
 	.4byte 0x8
 	.4byte LilycoveCity_House2_MapBorder
 	.4byte LilycoveCity_House2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
-	.incbin "baserom.gba", 0x428444, 0x24
+UnknownMapBorder_08428450: @ 8428444
+	.incbin "data/maps/UnknownMap_08428450/border.bin"
+
+	.align 2
+UnknownMapBlockdata_08428450: @ 842844C
+	.incbin "data/maps/UnknownMap_08428450/map.bin"
+
+	.align 2
+UnknownMapAttributes_08428450: @ 8428450
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_08428450
+	.4byte UnknownMapBlockdata_08428450
+	.4byte gTileset_Building
+	.4byte gTileset_Contest
 
 	.align 2
 VerdanturfTown_WandasHouse_MapBorder: @ 8428468
@@ -1292,7 +1351,7 @@ VerdanturfTown_WandasHouse_MapAttributes: @ 8428580
 	.4byte 0x8
 	.4byte VerdanturfTown_WandasHouse_MapBorder
 	.4byte VerdanturfTown_WandasHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1311,7 +1370,7 @@ PacifidlogTown_House5_MapAttributes: @ 8428654
 	.4byte 0x9
 	.4byte PacifidlogTown_House1_MapBorder
 	.4byte PacifidlogTown_House1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1329,7 +1388,7 @@ PacifidlogTown_House4_MapAttributes: @ 8428728
 	.4byte 0x9
 	.4byte PacifidlogTown_House2_MapBorder
 	.4byte PacifidlogTown_House2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1346,7 +1405,7 @@ PetalburgCity_Gym_MapAttributes: @ 8428F28
 	.4byte 0x70
 	.4byte PetalburgCity_Gym_MapBorder
 	.4byte PetalburgCity_Gym_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_PetalburgGym
 
 	.align 2
@@ -1365,7 +1424,7 @@ SlateportCity_House1_MapAttributes: @ 8428FE8
 	.4byte 0x8
 	.4byte PetalburgCity_House2_MapBorder
 	.4byte PetalburgCity_House2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1403,7 +1462,38 @@ SlateportCity_SternsShipyard_2F_MapAttributes: @ 84294A0
 	.4byte gTileset_Facility
 
 	.align 2
-	.incbin "baserom.gba", 0x4294b8, 0x48
+UnknownMapBorder_084294C4: @ 84294B8
+	.incbin "data/maps/UnknownMap_084294C4/border.bin"
+
+	.align 2
+UnknownMapBlockdata_084294C4: @ 84294C0
+	.incbin "data/maps/UnknownMap_084294C4/map.bin"
+
+	.align 2
+UnknownMapAttributes_084294C4: @ 84294C4
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_084294C4
+	.4byte UnknownMapBlockdata_084294C4
+	.4byte gTileset_Building
+	.4byte gTileset_Contest
+
+	.align 2
+UnknownMapBorder_084294E8: @ 84294DC
+	.incbin "data/maps/UnknownMap_084294E8/border.bin"
+
+	.align 2
+UnknownMapBlockdata_084294E8: @ 84294E4
+	.incbin "data/maps/UnknownMap_084294E8/map.bin"
+
+	.align 2
+UnknownMapAttributes_084294E8: @ 84294E8
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_084294E8
+	.4byte UnknownMapBlockdata_084294E8
+	.4byte gTileset_Building
+	.4byte gTileset_Contest
 
 	.align 2
 SlateportCity_PokemonFanClub_MapBorder: @ 8429500
@@ -1419,7 +1509,7 @@ SlateportCity_PokemonFanClub_MapAttributes: @ 842963C
 	.4byte 0xb
 	.4byte SlateportCity_PokemonFanClub_MapBorder
 	.4byte SlateportCity_PokemonFanClub_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_PokemonFanClub
 
 	.align 2
@@ -1436,7 +1526,7 @@ SlateportCity_OceanicMuseum_1F_MapAttributes: @ 84297C4
 	.4byte 0x9
 	.4byte SlateportCity_OceanicMuseum_1F_MapBorder
 	.4byte SlateportCity_OceanicMuseum_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_OceanicMuseum
 
 	.align 2
@@ -1453,7 +1543,7 @@ SlateportCity_OceanicMuseum_2F_MapAttributes: @ 842994C
 	.4byte 0x9
 	.4byte SlateportCity_OceanicMuseum_2F_MapBorder
 	.4byte SlateportCity_OceanicMuseum_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_OceanicMuseum
 
 	.align 2
@@ -1488,7 +1578,7 @@ MauvilleCity_Gym_MapAttributes: @ 8429E00
 	.4byte 0x15
 	.4byte MauvilleCity_Gym_MapBorder
 	.4byte MauvilleCity_Gym_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_MauvilleGym
 
 	.align 2
@@ -1522,7 +1612,7 @@ MauvilleCity_GameCorner_MapAttributes: @ 842A0FC
 	.4byte 0xb
 	.4byte MauvilleCity_GameCorner_MapBorder
 	.4byte MauvilleCity_GameCorner_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_MauvilleGameCorner
 
 	.align 2
@@ -1539,7 +1629,7 @@ RustboroCity_DevonCorp_1F_MapAttributes: @ 842A274
 	.4byte 0x9
 	.4byte RustboroCity_DevonCorp_1F_MapBorder
 	.4byte RustboroCity_DevonCorp_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Facility
 
 	.align 2
@@ -1573,7 +1663,7 @@ RustboroCity_Gym_MapAttributes: @ 842A5C4
 	.4byte 0x14
 	.4byte RustboroCity_Gym_MapBorder
 	.4byte RustboroCity_Gym_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_RustboroGym
 
 	.align 2
@@ -1590,7 +1680,7 @@ RustboroCity_PokemonSchool_MapAttributes: @ 842A6EC
 	.4byte 0xb
 	.4byte RustboroCity_PokemonSchool_MapBorder
 	.4byte RustboroCity_PokemonSchool_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_PokemonSchool
 
 	.align 2
@@ -1608,7 +1698,7 @@ RustboroCity_House3_MapAttributes: @ 842A7E4
 	.4byte 0x9
 	.4byte RustboroCity_House2_MapBorder
 	.4byte RustboroCity_House2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1625,7 +1715,7 @@ RustboroCity_House1_MapAttributes: @ 842A8D4
 	.4byte 0x8
 	.4byte RustboroCity_House1_MapBorder
 	.4byte RustboroCity_House1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1642,7 +1732,7 @@ RustboroCity_CuttersHouse_MapAttributes: @ 842A9BC
 	.4byte 0x9
 	.4byte RustboroCity_CuttersHouse_MapBorder
 	.4byte RustboroCity_CuttersHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1661,7 +1751,7 @@ FortreeCity_House5_MapAttributes: @ 842AA3C
 	.4byte 0x6
 	.4byte FortreeCity_House1_MapBorder
 	.4byte FortreeCity_House1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1678,7 +1768,7 @@ FortreeCity_Gym_MapAttributes: @ 842AE44
 	.4byte 0x19
 	.4byte FortreeCity_Gym_MapBorder
 	.4byte FortreeCity_Gym_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_FortreeGym
 
 	.align 2
@@ -1696,7 +1786,7 @@ FortreeCity_House4_MapAttributes: @ 842AEC4
 	.4byte 0x6
 	.4byte FortreeCity_House2_MapBorder
 	.4byte FortreeCity_House2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1713,7 +1803,7 @@ Route104_MrBrineysHouse_MapAttributes: @ 842AFBC
 	.4byte 0x9
 	.4byte Route104_MrBrineysHouse_MapBorder
 	.4byte Route104_MrBrineysHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1730,7 +1820,7 @@ LilycoveCity_LilycoveMuseum_1F_MapAttributes: @ 842B228
 	.4byte 0xe
 	.4byte LilycoveCity_LilycoveMuseum_1F_MapBorder
 	.4byte LilycoveCity_LilycoveMuseum_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_LilycoveMuseum
 
 	.align 2
@@ -1747,7 +1837,7 @@ LilycoveCity_LilycoveMuseum_2F_MapAttributes: @ 842B484
 	.4byte 0xd
 	.4byte LilycoveCity_LilycoveMuseum_2F_MapBorder
 	.4byte LilycoveCity_LilycoveMuseum_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_LilycoveMuseum
 
 	.align 2
@@ -1764,7 +1854,7 @@ LilycoveCity_ContestLobby_MapAttributes: @ 842B78C
 	.4byte 0xc
 	.4byte LilycoveCity_ContestLobby_MapBorder
 	.4byte LilycoveCity_ContestLobby_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Contest
 
 	.align 2
@@ -1781,7 +1871,7 @@ LilycoveCity_ContestHall_MapAttributes: @ 842C4D4
 	.4byte 0x21
 	.4byte LilycoveCity_ContestHall_MapBorder
 	.4byte LilycoveCity_ContestHall_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Contest
 
 	.align 2
@@ -1798,7 +1888,7 @@ LilycoveCity_PokemonTrainerFanClub_MapAttributes: @ 842C644
 	.4byte 0xe
 	.4byte LilycoveCity_PokemonTrainerFanClub_MapBorder
 	.4byte LilycoveCity_PokemonTrainerFanClub_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -1815,7 +1905,7 @@ MossdeepCity_Gym_MapAttributes: @ 842CDB4
 	.4byte 0x24
 	.4byte MossdeepCity_Gym_MapBorder
 	.4byte MossdeepCity_Gym_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_MossdeepGym
 
 	.align 2
@@ -1832,7 +1922,7 @@ SootopolisCity_Gym_1F_MapAttributes: @ 842D148
 	.4byte 0x1a
 	.4byte SootopolisCity_Gym_1F_MapBorder
 	.4byte SootopolisCity_Gym_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_SootopolisGym
 
 	.align 2
@@ -1849,7 +1939,7 @@ SootopolisCity_Gym_B1F_MapAttributes: @ 842D4DC
 	.4byte 0x1a
 	.4byte SootopolisCity_Gym_B1F_MapBorder
 	.4byte SootopolisCity_Gym_B1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_SootopolisGym
 
 	.align 2
@@ -1866,7 +1956,7 @@ EverGrandeCity_SidneysRoom_MapAttributes: @ 842D668
 	.4byte 0xe
 	.4byte EverGrandeCity_SidneysRoom_MapBorder
 	.4byte EverGrandeCity_SidneysRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_EliteFour
 
 	.align 2
@@ -1883,7 +1973,7 @@ EverGrandeCity_PhoebesRoom_MapAttributes: @ 842D7F4
 	.4byte 0xe
 	.4byte EverGrandeCity_PhoebesRoom_MapBorder
 	.4byte EverGrandeCity_PhoebesRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_EliteFour
 
 	.align 2
@@ -1900,7 +1990,7 @@ EverGrandeCity_GlaciasRoom_MapAttributes: @ 842D980
 	.4byte 0xe
 	.4byte EverGrandeCity_GlaciasRoom_MapBorder
 	.4byte EverGrandeCity_GlaciasRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_EliteFour
 
 	.align 2
@@ -1917,7 +2007,7 @@ EverGrandeCity_DrakesRoom_MapAttributes: @ 842DB0C
 	.4byte 0xe
 	.4byte EverGrandeCity_DrakesRoom_MapBorder
 	.4byte EverGrandeCity_DrakesRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_EliteFour
 
 	.align 2
@@ -1934,7 +2024,7 @@ EverGrandeCity_ChampionsRoom_MapAttributes: @ 842DC80
 	.4byte 0xd
 	.4byte EverGrandeCity_ChampionsRoom_MapBorder
 	.4byte EverGrandeCity_ChampionsRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_EliteFour
 
 	.align 2
@@ -1954,7 +2044,7 @@ EverGrandeCity_Hall5_MapAttributes: @ 842DDC0
 	.4byte 0xd
 	.4byte EverGrandeCity_Hall1_MapBorder
 	.4byte EverGrandeCity_Hall1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_EliteFour
 
 	.align 2
@@ -1972,7 +2062,7 @@ Route104_PrototypePrettyPetalFlowerShop_MapAttributes: @ 842DEF0
 	.4byte 0x9
 	.4byte Route104_PrettyPetalFlowerShop_MapBorder
 	.4byte Route104_PrettyPetalFlowerShop_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_PrettyPetalFlowerShop
 
 	.align 2
@@ -2007,7 +2097,7 @@ Route114_FossilManiacsHouse_MapAttributes: @ 842E108
 	.4byte 0x8
 	.4byte Route114_FossilManiacsHouse_MapBorder
 	.4byte Route114_FossilManiacsHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -2041,7 +2131,7 @@ Route114_LanettesHouse_MapAttributes: @ 842E49C
 	.4byte 0x8
 	.4byte Route114_LanettesHouse_MapBorder
 	.4byte Route114_LanettesHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Lab
 
 	.align 2
@@ -2058,7 +2148,7 @@ Route116_TunnelersRestHouse_MapAttributes: @ 842E570
 	.4byte 0x9
 	.4byte Route116_TunnelersRestHouse_MapBorder
 	.4byte Route116_TunnelersRestHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -2075,7 +2165,7 @@ Route117_PokemonDayCare_MapAttributes: @ 842E668
 	.4byte 0x9
 	.4byte Route117_PokemonDayCare_MapBorder
 	.4byte Route117_PokemonDayCare_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_PokemonDayCare
 
 	.align 2
@@ -2092,7 +2182,7 @@ Route121_SafariZoneEntrance_MapAttributes: @ 842E880
 	.4byte 0xe
 	.4byte Route121_SafariZoneEntrance_MapBorder
 	.4byte Route121_SafariZoneEntrance_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
 	.align 2
@@ -2861,7 +2951,240 @@ ShoalCave_HighTideInnerRoom_MapAttributes: @ 843E69C
 	.4byte gTileset_Cave
 
 	.align 2
-	.incbin "baserom.gba", 0x43e6b4, 0x1f8
+UnknownMapBorder_0843E6C0: @ 843E6B4
+	.incbin "data/maps/UnknownMap_0843E6C0/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E6C0: @ 843E6BC
+	.incbin "data/maps/UnknownMap_0843E6C0/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E6C0: @ 843E6C0
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E6C0
+	.4byte UnknownMapBlockdata_0843E6C0
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E6E4: @ 843E6D8
+	.incbin "data/maps/UnknownMap_0843E6E4/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E6E4: @ 843E6E0
+	.incbin "data/maps/UnknownMap_0843E6E4/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E6E4: @ 843E6E4
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E6E4
+	.4byte UnknownMapBlockdata_0843E6E4
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E708: @ 843E6FC
+	.incbin "data/maps/UnknownMap_0843E708/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E708: @ 843E704
+	.incbin "data/maps/UnknownMap_0843E708/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E708: @ 843E708
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E708
+	.4byte UnknownMapBlockdata_0843E708
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E72C: @ 843E720
+	.incbin "data/maps/UnknownMap_0843E72C/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E72C: @ 843E728
+	.incbin "data/maps/UnknownMap_0843E72C/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E72C: @ 843E72C
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E72C
+	.4byte UnknownMapBlockdata_0843E72C
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E750: @ 843E744
+	.incbin "data/maps/UnknownMap_0843E750/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E750: @ 843E74C
+	.incbin "data/maps/UnknownMap_0843E750/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E750: @ 843E750
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E750
+	.4byte UnknownMapBlockdata_0843E750
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E774: @ 843E768
+	.incbin "data/maps/UnknownMap_0843E774/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E774: @ 843E770
+	.incbin "data/maps/UnknownMap_0843E774/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E774: @ 843E774
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E774
+	.4byte UnknownMapBlockdata_0843E774
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E798: @ 843E78C
+	.incbin "data/maps/UnknownMap_0843E798/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E798: @ 843E794
+	.incbin "data/maps/UnknownMap_0843E798/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E798: @ 843E798
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E798
+	.4byte UnknownMapBlockdata_0843E798
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E7BC: @ 843E7B0
+	.incbin "data/maps/UnknownMap_0843E7BC/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E7BC: @ 843E7B8
+	.incbin "data/maps/UnknownMap_0843E7BC/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E7BC: @ 843E7BC
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E7BC
+	.4byte UnknownMapBlockdata_0843E7BC
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E7E0: @ 843E7D4
+	.incbin "data/maps/UnknownMap_0843E7E0/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E7E0: @ 843E7DC
+	.incbin "data/maps/UnknownMap_0843E7E0/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E7E0: @ 843E7E0
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E7E0
+	.4byte UnknownMapBlockdata_0843E7E0
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E804: @ 843E7F8
+	.incbin "data/maps/UnknownMap_0843E804/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E804: @ 843E800
+	.incbin "data/maps/UnknownMap_0843E804/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E804: @ 843E804
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E804
+	.4byte UnknownMapBlockdata_0843E804
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E828: @ 843E81C
+	.incbin "data/maps/UnknownMap_0843E828/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E828: @ 843E824
+	.incbin "data/maps/UnknownMap_0843E828/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E828: @ 843E828
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E828
+	.4byte UnknownMapBlockdata_0843E828
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E84C: @ 843E840
+	.incbin "data/maps/UnknownMap_0843E84C/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E84C: @ 843E848
+	.incbin "data/maps/UnknownMap_0843E84C/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E84C: @ 843E84C
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E84C
+	.4byte UnknownMapBlockdata_0843E84C
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+	.align 2
+UnknownMapBorder_0843E870: @ 843E864
+	.incbin "data/maps/UnknownMap_0843E870/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0843E870: @ 843E86C
+	.incbin "data/maps/UnknownMap_0843E870/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E870: @ 843E870
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E870
+	.4byte UnknownMapBlockdata_0843E870
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+UnknownMapBorder_0843E894: @ 843E888
+	.incbin "data/maps/UnknownMap_0843E894/border.bin"
+
+UnknownMapBlockdata_0843E894: @ 843E890
+	.incbin "data/maps/UnknownMap_0843E894/map.bin"
+
+	.align 2
+UnknownMapAttributes_0843E894: @ 843E894
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_0843E894
+	.4byte UnknownMapBlockdata_0843E894
+	.4byte gTileset_General
+	.4byte gTileset_Cave
 
 	.align 2
 NewMauville_Entrance_MapBorder: @ 843E8AC
@@ -3506,7 +3829,7 @@ SingleBattleColosseum_MapAttributes: @ 8442448
 	.4byte 0x9
 	.4byte SingleBattleColosseum_MapBorder
 	.4byte SingleBattleColosseum_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_CableClub
 
 	.align 2
@@ -3523,7 +3846,7 @@ TradeCenter_MapAttributes: @ 8442540
 	.4byte 0x9
 	.4byte TradeCenter_MapBorder
 	.4byte TradeCenter_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_CableClub
 
 	.align 2
@@ -3540,7 +3863,7 @@ RecordCorner_MapAttributes: @ 84426F0
 	.4byte 0xa
 	.4byte RecordCorner_MapBorder
 	.4byte RecordCorner_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_CableClub
 
 	.align 2
@@ -3557,7 +3880,7 @@ DoubleBattleColosseum_MapAttributes: @ 844280C
 	.4byte 0x9
 	.4byte DoubleBattleColosseum_MapBorder
 	.4byte DoubleBattleColosseum_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_CableClub
 
 	.align 2
@@ -3591,7 +3914,7 @@ UnknownMap_25_29_MapAttributes: @ 844299C
 	.4byte 0x1
 	.4byte UnknownMap_25_29_MapBorder
 	.4byte UnknownMap_25_29_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Contest
 
 	.align 2
@@ -3608,7 +3931,7 @@ UnknownMap_25_30_MapAttributes: @ 84429C0
 	.4byte 0x1
 	.4byte UnknownMap_25_30_MapBorder
 	.4byte UnknownMap_25_30_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Contest
 
 	.align 2
@@ -3625,7 +3948,7 @@ UnknownMap_25_31_MapAttributes: @ 84429E4
 	.4byte 0x1
 	.4byte UnknownMap_25_31_MapBorder
 	.4byte UnknownMap_25_31_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Contest
 
 	.align 2
@@ -3642,7 +3965,7 @@ UnknownMap_25_32_MapAttributes: @ 8442A08
 	.4byte 0x1
 	.4byte UnknownMap_25_32_MapBorder
 	.4byte UnknownMap_25_32_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Contest
 
 	.align 2
@@ -3659,7 +3982,7 @@ UnknownMap_25_33_MapAttributes: @ 8442A2C
 	.4byte 0x1
 	.4byte UnknownMap_25_33_MapBorder
 	.4byte UnknownMap_25_33_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Contest
 
 	.align 2
@@ -3676,7 +3999,7 @@ UnknownMap_25_34_MapAttributes: @ 8442A50
 	.4byte 0x1
 	.4byte UnknownMap_25_34_MapBorder
 	.4byte UnknownMap_25_34_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Contest
 
 	.align 2
@@ -3850,7 +4173,21 @@ SafariZone_South_MapAttributes: @ 8446440
 	.4byte gTileset_Lilycove
 
 	.align 2
-	.incbin "baserom.gba", 0x446458, 0xbe8
+UnknownMapBorder_08447028: @ 8446458
+	.incbin "data/maps/UnknownMap_08447028/border.bin"
+
+	.align 2
+UnknownMapBlockdata_08447028: @ 8446460
+	.incbin "data/maps/UnknownMap_08447028/map.bin"
+
+	.align 2
+UnknownMapAttributes_08447028: @ 8447028
+	.4byte 0x3A
+	.4byte 0x1A
+	.4byte UnknownMapBorder_08447028
+	.4byte UnknownMapBlockdata_08447028
+	.4byte gTileset_General
+	.4byte 0
 
 	.align 2
 Route109_SeashoreHouse_MapBorder: @ 8447040
@@ -3866,7 +4203,7 @@ Route109_SeashoreHouse_MapAttributes: @ 8447174
 	.4byte 0xa
 	.4byte Route109_SeashoreHouse_MapBorder
 	.4byte Route109_SeashoreHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_SeashoreHouse
 
 	.align 2
@@ -3883,7 +4220,7 @@ Route110_TrickHouseEntrance_MapAttributes: @ 8447254
 	.4byte 0x8
 	.4byte Route110_TrickHouseEntrance_MapBorder
 	.4byte Route110_TrickHouseEntrance_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -3900,7 +4237,7 @@ Route110_TrickHouseEnd_MapAttributes: @ 8447334
 	.4byte 0x8
 	.4byte Route110_TrickHouseEnd_MapBorder
 	.4byte Route110_TrickHouseEnd_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -3917,7 +4254,7 @@ Route110_TrickHouseCorridor_MapAttributes: @ 8447624
 	.4byte 0x18
 	.4byte Route110_TrickHouseCorridor_MapBorder
 	.4byte Route110_TrickHouseCorridor_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -3934,7 +4271,7 @@ Route110_TrickHousePuzzle1_MapAttributes: @ 84478D8
 	.4byte 0x16
 	.4byte Route110_TrickHousePuzzle1_MapBorder
 	.4byte Route110_TrickHousePuzzle1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrickHousePuzzle
 
 	.align 2
@@ -3951,7 +4288,7 @@ Route110_TrickHousePuzzle2_MapAttributes: @ 8447B8C
 	.4byte 0x16
 	.4byte Route110_TrickHousePuzzle2_MapBorder
 	.4byte Route110_TrickHousePuzzle2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrickHousePuzzle
 
 	.align 2
@@ -3968,7 +4305,7 @@ Route110_TrickHousePuzzle3_MapAttributes: @ 8447E40
 	.4byte 0x16
 	.4byte Route110_TrickHousePuzzle3_MapBorder
 	.4byte Route110_TrickHousePuzzle3_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrickHousePuzzle
 
 	.align 2
@@ -3985,7 +4322,7 @@ Route110_TrickHousePuzzle4_MapAttributes: @ 84480F4
 	.4byte 0x16
 	.4byte Route110_TrickHousePuzzle4_MapBorder
 	.4byte Route110_TrickHousePuzzle4_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrickHousePuzzle
 
 	.align 2
@@ -4002,7 +4339,7 @@ Route110_TrickHousePuzzle5_MapAttributes: @ 84483A8
 	.4byte 0x16
 	.4byte Route110_TrickHousePuzzle5_MapBorder
 	.4byte Route110_TrickHousePuzzle5_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrickHousePuzzle
 
 	.align 2
@@ -4019,7 +4356,7 @@ Route110_TrickHousePuzzle6_MapAttributes: @ 844865C
 	.4byte 0x16
 	.4byte Route110_TrickHousePuzzle6_MapBorder
 	.4byte Route110_TrickHousePuzzle6_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrickHousePuzzle
 
 	.align 2
@@ -4036,7 +4373,7 @@ Route110_TrickHousePuzzle7_MapAttributes: @ 8448910
 	.4byte 0x16
 	.4byte Route110_TrickHousePuzzle7_MapBorder
 	.4byte Route110_TrickHousePuzzle7_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrickHousePuzzle
 
 	.align 2
@@ -4053,7 +4390,7 @@ Route110_TrickHousePuzzle8_MapAttributes: @ 8448BC4
 	.4byte 0x16
 	.4byte Route110_TrickHousePuzzle8_MapBorder
 	.4byte Route110_TrickHousePuzzle8_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrickHousePuzzle
 
 	.align 2
@@ -4070,7 +4407,7 @@ FortreeCity_DecorationShop_MapAttributes: @ 8448C44
 	.4byte 0x6
 	.4byte FortreeCity_DecorationShop_MapBorder
 	.4byte FortreeCity_DecorationShop_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4088,7 +4425,7 @@ Route110_SeasideCyclingRoadEntrance2_MapAttributes: @ 8448D18
 	.4byte 0x6
 	.4byte Route110_SeasideCyclingRoadEntrance1_MapBorder
 	.4byte Route110_SeasideCyclingRoadEntrance1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
 	.align 2
@@ -4105,7 +4442,7 @@ LilycoveCity_DepartmentStore_1F_MapAttributes: @ 8448E58
 	.4byte 0x8
 	.4byte LilycoveCity_DepartmentStore_1F_MapBorder
 	.4byte LilycoveCity_DepartmentStore_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
 	.align 2
@@ -4122,7 +4459,7 @@ LilycoveCity_DepartmentStore_2F_MapAttributes: @ 8448F98
 	.4byte 0x8
 	.4byte LilycoveCity_DepartmentStore_2F_MapBorder
 	.4byte LilycoveCity_DepartmentStore_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
 	.align 2
@@ -4139,7 +4476,7 @@ LilycoveCity_DepartmentStore_3F_MapAttributes: @ 84490D8
 	.4byte 0x8
 	.4byte LilycoveCity_DepartmentStore_3F_MapBorder
 	.4byte LilycoveCity_DepartmentStore_3F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
 	.align 2
@@ -4156,7 +4493,7 @@ LilycoveCity_DepartmentStore_4F_MapAttributes: @ 8449218
 	.4byte 0x8
 	.4byte LilycoveCity_DepartmentStore_4F_MapBorder
 	.4byte LilycoveCity_DepartmentStore_4F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
 	.align 2
@@ -4173,7 +4510,7 @@ LilycoveCity_DepartmentStore_5F_MapAttributes: @ 8449358
 	.4byte 0x8
 	.4byte LilycoveCity_DepartmentStore_5F_MapBorder
 	.4byte LilycoveCity_DepartmentStore_5F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
 	.align 2
@@ -4190,7 +4527,7 @@ LilycoveCity_DepartmentStoreRooftop_MapAttributes: @ 8449528
 	.4byte 0xc
 	.4byte LilycoveCity_DepartmentStoreRooftop_MapBorder
 	.4byte LilycoveCity_DepartmentStoreRooftop_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Shop
 
 	.align 2
@@ -4224,7 +4561,7 @@ BattleFrontier_BattleTowerLobby_MapAttributes: @ 844B05C
 	.4byte 0xa
 	.4byte BattleFrontier_BattleTowerLobby_MapBorder
 	.4byte BattleFrontier_BattleTowerLobby_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
@@ -4259,7 +4596,7 @@ TrainerHill_Elevator_MapAttributes: @ 844D064
 	.4byte 0x7
 	.4byte BattleFrontier_BattleTowerElevator_MapBorder
 	.4byte BattleFrontier_BattleTowerElevator_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
@@ -4276,7 +4613,7 @@ BattleFrontier_BattleTowerCorridor_MapAttributes: @ 844D130
 	.4byte 0x5
 	.4byte BattleFrontier_BattleTowerCorridor_MapBorder
 	.4byte BattleFrontier_BattleTowerCorridor_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
@@ -4294,7 +4631,7 @@ BattleFrontier_BattleTowerBattleRoom_MapAttributes: @ 844D204
 	.4byte 0x9
 	.4byte BattleFrontier_BattleTowerBattleRoom_MapBorder
 	.4byte BattleFrontier_BattleTowerBattleRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
@@ -4311,7 +4648,7 @@ RustboroCity_DevonCorp_3F_MapAttributes: @ 844D37C
 	.4byte 0x9
 	.4byte RustboroCity_DevonCorp_3F_MapBorder
 	.4byte RustboroCity_DevonCorp_3F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Facility
 
 	.align 2
@@ -4328,7 +4665,7 @@ EverGrandeCity_PokemonLeague_1F_MapAttributes: @ 844D564
 	.4byte 0xc
 	.4byte EverGrandeCity_PokemonLeague_1F_MapBorder
 	.4byte EverGrandeCity_PokemonLeague_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_PokemonCenter
 
 	.align 2
@@ -4345,7 +4682,7 @@ Route119_WeatherInstitute_1F_MapAttributes: @ 844D78C
 	.4byte 0xd
 	.4byte Route119_WeatherInstitute_1F_MapBorder
 	.4byte Route119_WeatherInstitute_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Lab
 
 	.align 2
@@ -4362,7 +4699,7 @@ Route119_WeatherInstitute_2F_MapAttributes: @ 844D964
 	.4byte 0xb
 	.4byte Route119_WeatherInstitute_2F_MapBorder
 	.4byte Route119_WeatherInstitute_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_Lab
 
 	.align 2
@@ -4379,7 +4716,7 @@ LilycoveCity_DepartmentStoreElevator_MapAttributes: @ 844D9C0
 	.4byte 0x6
 	.4byte LilycoveCity_DepartmentStoreElevator_MapBorder
 	.4byte LilycoveCity_DepartmentStoreElevator_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
@@ -4736,7 +5073,7 @@ RustboroCity_Flat2_1F_MapAttributes: @ 8456BBC
 	.4byte 0x9
 	.4byte RustboroCity_Flat2_1F_MapBorder
 	.4byte RustboroCity_Flat2_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4753,7 +5090,7 @@ RustboroCity_Flat2_2F_MapAttributes: @ 8456CD8
 	.4byte 0x9
 	.4byte RustboroCity_Flat2_2F_MapBorder
 	.4byte RustboroCity_Flat2_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4770,7 +5107,7 @@ RustboroCity_Flat2_3F_MapAttributes: @ 8456DF4
 	.4byte 0x9
 	.4byte RustboroCity_Flat2_3F_MapBorder
 	.4byte RustboroCity_Flat2_3F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4787,7 +5124,7 @@ SootopolisCity_LotadAndSeedotHouse_MapAttributes: @ 8456E84
 	.4byte 0x7
 	.4byte SootopolisCity_LotadAndSeedotHouse_MapBorder
 	.4byte SootopolisCity_LotadAndSeedotHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4804,7 +5141,7 @@ EverGrandeCity_HallOfFame_MapAttributes: @ 84570A4
 	.4byte 0x11
 	.4byte EverGrandeCity_HallOfFame_MapBorder
 	.4byte EverGrandeCity_HallOfFame_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_CableClub
 
 	.align 2
@@ -4821,7 +5158,7 @@ LilycoveCity_CoveLilyMotel_1F_MapAttributes: @ 845719C
 	.4byte 0x9
 	.4byte LilycoveCity_CoveLilyMotel_1F_MapBorder
 	.4byte LilycoveCity_CoveLilyMotel_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4838,7 +5175,7 @@ LilycoveCity_CoveLilyMotel_2F_MapAttributes: @ 8457294
 	.4byte 0x9
 	.4byte LilycoveCity_CoveLilyMotel_2F_MapBorder
 	.4byte LilycoveCity_CoveLilyMotel_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4855,7 +5192,7 @@ Route124_DivingTreasureHuntersHouse_MapAttributes: @ 8457368
 	.4byte 0x9
 	.4byte Route124_DivingTreasureHuntersHouse_MapBorder
 	.4byte Route124_DivingTreasureHuntersHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4923,7 +5260,7 @@ MossdeepCity_GameCorner_1F_MapAttributes: @ 8459638
 	.4byte 0xa
 	.4byte MossdeepCity_GameCorner_1F_MapBorder
 	.4byte MossdeepCity_GameCorner_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_MossdeepGameCorner
 
 	.align 2
@@ -4940,7 +5277,7 @@ MossdeepCity_GameCorner_B1F_MapAttributes: @ 8459730
 	.4byte 0x9
 	.4byte MossdeepCity_GameCorner_B1F_MapBorder
 	.4byte MossdeepCity_GameCorner_B1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4959,7 +5296,7 @@ SootopolisCity_House7_MapAttributes: @ 84597C0
 	.4byte 0x7
 	.4byte SootopolisCity_House1_MapBorder
 	.4byte SootopolisCity_House1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4977,7 +5314,7 @@ SootopolisCity_House5_MapAttributes: @ 8459850
 	.4byte 0x7
 	.4byte SootopolisCity_House2_MapBorder
 	.4byte SootopolisCity_House2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -4995,7 +5332,7 @@ SootopolisCity_House6_MapAttributes: @ 84598E0
 	.4byte 0x7
 	.4byte SootopolisCity_House3_MapBorder
 	.4byte SootopolisCity_House3_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -5033,7 +5370,21 @@ ScorchedSlab_MapAttributes: @ 845A0A0
 	.4byte gTileset_Cave
 
 	.align 2
-	.incbin "baserom.gba", 0x45a0b8, 0x2f4
+UnknownMapBorder_0845A394: @ 845A0B8
+	.incbin "data/maps/UnknownMap_0845A394/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0845A394: @ 845A0C0
+	.incbin "data/maps/UnknownMap_0845A394/map.bin"
+	
+	.align 2
+UnknownMapAttributes_0845A394: @ 845A394
+	.4byte 0x13
+	.4byte 0x13
+	.4byte UnknownMapBorder_0845A394
+	.4byte UnknownMapBlockdata_0845A394
+	.4byte gTileset_General
+	.4byte gTileset_Cave
 
 	.align 2
 RustboroCity_Flat1_1F_MapBorder: @ 845A3AC
@@ -5049,7 +5400,7 @@ RustboroCity_Flat1_1F_MapAttributes: @ 845A494
 	.4byte 0x8
 	.4byte RustboroCity_Flat1_1F_MapBorder
 	.4byte RustboroCity_Flat1_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -5066,7 +5417,7 @@ RustboroCity_Flat1_2F_MapAttributes: @ 845A594
 	.4byte 0x8
 	.4byte RustboroCity_Flat1_2F_MapBorder
 	.4byte RustboroCity_Flat1_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -5083,7 +5434,7 @@ EverGrandeCity_Hall4_MapAttributes: @ 845A8A0
 	.4byte 0x22
 	.4byte EverGrandeCity_Hall4_MapBorder
 	.4byte EverGrandeCity_Hall4_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_EliteFour
 
 	.align 2
@@ -5138,7 +5489,21 @@ AquaHideout_UnusedRubyMap3_MapAttributes: @ 845C190
 	.4byte gTileset_Facility
 
 	.align 2
-	.incbin "baserom.gba", 0x45c1a8, 0x12e0
+UnknownMapBorder_0845D470: @ 845C1A8
+	.incbin "data/maps/UnknownMap_0845D470/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0845D470: @ 845C1B0
+	.incbin "data/maps/UnknownMap_0845D470/map.bin"
+	
+	.align 2
+UnknownMapAttributes_0845D470: @ 845D470
+	.4byte 0x3C
+	.4byte 0x28
+	.4byte UnknownMapBorder_0845D470
+	.4byte UnknownMapBlockdata_0845D470
+	.4byte gTileset_General
+	.4byte gTileset_Pacifidlog
 
 	.align 2
 SkyPillar_Entrance_MapBorder: @ 845D488
@@ -5243,7 +5608,21 @@ SkyPillar_4F_MapAttributes: @ 845E2E0
 	.4byte gTileset_Pacifidlog
 
 	.align 2
-	.incbin "baserom.gba", 0x45e2f8, 0x9d4
+UnknownMapBorder_0845ECB4: @ 845E2F8
+	.incbin "data/maps/UnknownMap_0845ECB4/border.bin"
+	
+	.align 2
+UnknownMapBlockdata_0845ECB4: @ 845E300
+	.incbin "data/maps/UnknownMap_0845ECB4/map.bin"
+	
+	.align 2
+UnknownMapAttributes_0845ECB4: @ 845ECB4
+	.4byte 0x1B
+	.4byte 0x2E
+	.4byte UnknownMapBorder_0845ECB4
+	.4byte UnknownMapBlockdata_0845ECB4
+	.4byte gTileset_General
+	.4byte gTileset_Cave
 
 	.align 2
 MossdeepCity_StevensHouse_MapBorder: @ 845ECCC
@@ -5259,7 +5638,7 @@ MossdeepCity_StevensHouse_MapAttributes: @ 845ED84
 	.4byte 0x8
 	.4byte MossdeepCity_StevensHouse_MapBorder
 	.4byte MossdeepCity_StevensHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -5293,7 +5672,7 @@ SafariZone_RestHouse_MapAttributes: @ 845F328
 	.4byte 0x9
 	.4byte SafariZone_RestHouse_MapBorder
 	.4byte SafariZone_RestHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
 	.align 2
@@ -5344,7 +5723,7 @@ BattleFrontier_BattleDomeLobby_MapAttributes: @ 845FD30
 	.4byte 0x11
 	.4byte BattleFrontier_BattleDomeLobby_MapBorder
 	.4byte BattleFrontier_BattleDomeLobby_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleDome
 
 	.align 2
@@ -5361,7 +5740,7 @@ BattleFrontier_BattleDomeCorridor_MapAttributes: @ 845FFF0
 	.4byte 0x7
 	.4byte BattleFrontier_BattleDomeCorridor_MapBorder
 	.4byte BattleFrontier_BattleDomeCorridor_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleDome
 
 	.align 2
@@ -5378,7 +5757,7 @@ BattleFrontier_BattleDomePreBattleRoom_MapAttributes: @ 84600A0
 	.4byte 0x8
 	.4byte BattleFrontier_BattleDomePreBattleRoom_MapBorder
 	.4byte BattleFrontier_BattleDomePreBattleRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleDome
 
 	.align 2
@@ -5395,7 +5774,7 @@ BattleFrontier_BattleDomeBattleRoom_MapAttributes: @ 8460250
 	.4byte 0xa
 	.4byte BattleFrontier_BattleDomeBattleRoom_MapBorder
 	.4byte BattleFrontier_BattleDomeBattleRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleDome
 
 	.align 2
@@ -5514,7 +5893,7 @@ BattleFrontier_BattlePalaceLobby_MapAttributes: @ 8463AA4
 	.4byte 0xc
 	.4byte BattleFrontier_BattlePalaceLobby_MapBorder
 	.4byte BattleFrontier_BattlePalaceLobby_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePalace
 
 	.align 2
@@ -5582,7 +5961,7 @@ BattleFrontier_BattleFactoryLobby_MapAttributes: @ 8466874
 	.4byte 0xc
 	.4byte BattleFrontier_BattleFactoryLobby_MapBorder
 	.4byte BattleFrontier_BattleFactoryLobby_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFactory
 
 	.align 2
@@ -5599,7 +5978,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_MapAttributes: @ 8466A70
 	.4byte 0xe
 	.4byte BattleFrontier_BattleFactoryPreBattleRoom_MapBorder
 	.4byte BattleFrontier_BattleFactoryPreBattleRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFactory
 
 	.align 2
@@ -5616,7 +5995,7 @@ BattleFrontier_BattleFactoryBattleRoom_MapAttributes: @ 8466BC8
 	.4byte 0xc
 	.4byte BattleFrontier_BattleFactoryBattleRoom_MapBorder
 	.4byte BattleFrontier_BattleFactoryBattleRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFactory
 
 	.align 2
@@ -5633,7 +6012,7 @@ BattleFrontier_BattlePikeLobby_MapAttributes: @ 8466D08
 	.4byte 0xd
 	.4byte BattleFrontier_BattlePikeLobby_MapBorder
 	.4byte BattleFrontier_BattlePikeLobby_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePike
 
 	.align 2
@@ -5650,7 +6029,7 @@ BattleFrontier_BattlePikeCorridor_MapAttributes: @ 8466E08
 	.4byte 0x8
 	.4byte BattleFrontier_BattlePikeCorridor_MapBorder
 	.4byte BattleFrontier_BattlePikeCorridor_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePike
 
 	.align 2
@@ -5667,7 +6046,7 @@ BattleFrontier_BattlePikeThreePathRoom_MapAttributes: @ 8466F48
 	.4byte 0xb
 	.4byte BattleFrontier_BattlePikeThreePathRoom_MapBorder
 	.4byte BattleFrontier_BattlePikeThreePathRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePike
 
 	.align 2
@@ -5684,7 +6063,7 @@ BattleFrontier_BattlePikeRandomRoom1_MapAttributes: @ 8466FF8
 	.4byte 0x8
 	.4byte BattleFrontier_BattlePikeRandomRoom1_MapBorder
 	.4byte BattleFrontier_BattlePikeRandomRoom1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePike
 
 	.align 2
@@ -5701,7 +6080,7 @@ BattleFrontier_BattlePikeRandomRoom2_MapAttributes: @ 8467068
 	.4byte 0x8
 	.4byte BattleFrontier_BattlePikeRandomRoom2_MapBorder
 	.4byte BattleFrontier_BattlePikeRandomRoom2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePike
 
 	.align 2
@@ -5718,7 +6097,7 @@ BattleFrontier_BattleArenaLobby_MapAttributes: @ 8467228
 	.4byte 0xd
 	.4byte BattleFrontier_BattleArenaLobby_MapBorder
 	.4byte BattleFrontier_BattleArenaLobby_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleArena
 
 	.align 2
@@ -5735,7 +6114,7 @@ BattleFrontier_BattleArenaCorridor_MapAttributes: @ 8467440
 	.4byte 0xe
 	.4byte BattleFrontier_BattleArenaCorridor_MapBorder
 	.4byte BattleFrontier_BattleArenaCorridor_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleArena
 
 	.align 2
@@ -5752,11 +6131,25 @@ BattleFrontier_BattleArenaBattleRoom_MapAttributes: @ 84675C0
 	.4byte 0xb
 	.4byte BattleFrontier_BattleArenaBattleRoom_MapBorder
 	.4byte BattleFrontier_BattleArenaBattleRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleArena
 
 	.align 2
-	.incbin "baserom.gba", 0x4675d8, 0x1c40
+UnknownMapBorder_08469200: @ 84675D8
+	.incbin "data/maps/UnknownMap_08469200/border.bin"
+
+	.align 2
+UnknownMapBlockdata_08469200: @ 84675E0
+	.incbin "data/maps/UnknownMap_08469200/map.bin"
+
+	.align 2
+UnknownMapAttributes_08469200: @ 8469200
+	.4byte 0x3C
+	.4byte 0x3C
+	.4byte UnknownMapBorder_08469200
+	.4byte UnknownMapBlockdata_08469200
+	.4byte gTileset_General
+	.4byte gTileset_Sootopolis
 
 	.align 2
 BattleFrontier_BattlePikeRandomRoom3_MapBorder: @ 8469218
@@ -5772,11 +6165,25 @@ BattleFrontier_BattlePikeRandomRoom3_MapAttributes: @ 8469388
 	.4byte 0x14
 	.4byte BattleFrontier_BattlePikeRandomRoom3_MapBorder
 	.4byte BattleFrontier_BattlePikeRandomRoom3_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePike
 
 	.align 2
-	.incbin "baserom.gba", 0x4693a0, 0x24
+UnknownMapBorder_084693AC: @ 84693A0
+	.incbin "data/maps/UnknownMap_084693AC/border.bin"
+
+	.align 2
+UnknownMapBlockdata_084693AC: @ 84693A8
+	.incbin "data/maps/UnknownMap_084693AC/map.bin"
+
+	.align 2
+UnknownMapAttributes_084693AC: @ 84693AC
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_084693AC
+	.4byte UnknownMapBlockdata_084693AC
+	.4byte gTileset_Building
+	.4byte gTileset_BattlePike
 
 	.align 2
 BattleFrontier_BattlePyramidLobby_MapBorder: @ 84693C4
@@ -5792,7 +6199,7 @@ BattleFrontier_BattlePyramidLobby_MapAttributes: @ 84695E8
 	.4byte 0x12
 	.4byte BattleFrontier_BattlePyramidLobby_MapBorder
 	.4byte BattleFrontier_BattlePyramidLobby_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5809,7 +6216,7 @@ BattleFrontier_BattlePyramidEmptySquare_MapAttributes: @ 8469688
 	.4byte 0x8
 	.4byte BattleFrontier_BattlePyramidEmptySquare_MapBorder
 	.4byte BattleFrontier_BattlePyramidEmptySquare_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5826,7 +6233,7 @@ BattlePyramidSquare01_MapAttributes: @ 8469728
 	.4byte 0x8
 	.4byte BattlePyramidSquare01_MapBorder
 	.4byte BattlePyramidSquare01_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5843,7 +6250,7 @@ BattlePyramidSquare02_MapAttributes: @ 84697C8
 	.4byte 0x8
 	.4byte BattlePyramidSquare02_MapBorder
 	.4byte BattlePyramidSquare02_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5860,7 +6267,7 @@ BattlePyramidSquare03_MapAttributes: @ 8469868
 	.4byte 0x8
 	.4byte BattlePyramidSquare03_MapBorder
 	.4byte BattlePyramidSquare03_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5877,7 +6284,7 @@ BattlePyramidSquare04_MapAttributes: @ 8469908
 	.4byte 0x8
 	.4byte BattlePyramidSquare04_MapBorder
 	.4byte BattlePyramidSquare04_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5894,7 +6301,7 @@ BattlePyramidSquare05_MapAttributes: @ 84699A8
 	.4byte 0x8
 	.4byte BattlePyramidSquare05_MapBorder
 	.4byte BattlePyramidSquare05_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5911,7 +6318,7 @@ BattlePyramidSquare06_MapAttributes: @ 8469A48
 	.4byte 0x8
 	.4byte BattlePyramidSquare06_MapBorder
 	.4byte BattlePyramidSquare06_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5928,7 +6335,7 @@ BattlePyramidSquare07_MapAttributes: @ 8469AE8
 	.4byte 0x8
 	.4byte BattlePyramidSquare07_MapBorder
 	.4byte BattlePyramidSquare07_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5945,7 +6352,7 @@ BattlePyramidSquare08_MapAttributes: @ 8469B88
 	.4byte 0x8
 	.4byte BattlePyramidSquare08_MapBorder
 	.4byte BattlePyramidSquare08_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5962,7 +6369,7 @@ BattlePyramidSquare09_MapAttributes: @ 8469C28
 	.4byte 0x8
 	.4byte BattlePyramidSquare09_MapBorder
 	.4byte BattlePyramidSquare09_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5979,7 +6386,7 @@ BattlePyramidSquare10_MapAttributes: @ 8469CC8
 	.4byte 0x8
 	.4byte BattlePyramidSquare10_MapBorder
 	.4byte BattlePyramidSquare10_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -5996,7 +6403,7 @@ BattlePyramidSquare11_MapAttributes: @ 8469D68
 	.4byte 0x8
 	.4byte BattlePyramidSquare11_MapBorder
 	.4byte BattlePyramidSquare11_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -6013,7 +6420,7 @@ BattlePyramidSquare12_MapAttributes: @ 8469E08
 	.4byte 0x8
 	.4byte BattlePyramidSquare12_MapBorder
 	.4byte BattlePyramidSquare12_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -6030,7 +6437,7 @@ BattlePyramidSquare13_MapAttributes: @ 8469EA8
 	.4byte 0x8
 	.4byte BattlePyramidSquare13_MapBorder
 	.4byte BattlePyramidSquare13_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -6047,7 +6454,7 @@ BattlePyramidSquare14_MapAttributes: @ 8469F48
 	.4byte 0x8
 	.4byte BattlePyramidSquare14_MapBorder
 	.4byte BattlePyramidSquare14_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -6064,7 +6471,7 @@ BattlePyramidSquare15_MapAttributes: @ 8469FE8
 	.4byte 0x8
 	.4byte BattlePyramidSquare15_MapBorder
 	.4byte BattlePyramidSquare15_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -6081,7 +6488,7 @@ BattlePyramidSquare16_MapAttributes: @ 846A088
 	.4byte 0x8
 	.4byte BattlePyramidSquare16_MapBorder
 	.4byte BattlePyramidSquare16_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -6098,7 +6505,7 @@ BattleFrontier_BattlePyramidTop_MapAttributes: @ 846A6C4
 	.4byte 0x17
 	.4byte BattleFrontier_BattlePyramidTop_MapBorder
 	.4byte BattleFrontier_BattlePyramidTop_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattlePyramid
 
 	.align 2
@@ -6202,7 +6609,7 @@ VerdanturfTown_BattleTentLobby_MapAttributes: @ 846C004
 	.4byte 0xa
 	.4byte FallarborTown_BattleTentLobby_MapBorder
 	.4byte FallarborTown_BattleTentLobby_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleTent
 
 	.align 2
@@ -6221,7 +6628,7 @@ VerdanturfTown_BattleTentCorridor_MapAttributes: @ 846C074
 	.4byte 0x8
 	.4byte FallarborTown_BattleTentCorridor_MapBorder
 	.4byte FallarborTown_BattleTentCorridor_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleTent
 
 	.align 2
@@ -6239,7 +6646,7 @@ SlateportCity_BattleTentBattleRoom_MapAttributes: @ 846C148
 	.4byte 0x9
 	.4byte FallarborTown_BattleTentBattleRoom_MapBorder
 	.4byte FallarborTown_BattleTentBattleRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleTent
 
 	.align 2
@@ -6307,7 +6714,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapAttributes: @ 846DF2C
 	.4byte 0xf
 	.4byte BattleFrontier_BattleTowerMultiBattleRoom_MapBorder
 	.4byte BattleFrontier_BattleTowerMultiBattleRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
@@ -6324,11 +6731,25 @@ BattleFrontier_BattleTowerCorridor2_MapAttributes: @ 846DFF8
 	.4byte 0x5
 	.4byte BattleFrontier_BattleTowerCorridor2_MapBorder
 	.4byte BattleFrontier_BattleTowerCorridor2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
-	.incbin "baserom.gba", 0x46e010, 0x2be0
+UnknownMapBorder_08470BD8: @ 846E010
+	.incbin "data/maps/UnknownMap_08470BD8/border.bin"
+
+	.align 2
+UnknownMapBlockdata_08470BD8: @ 846E018
+	.incbin "data/maps/UnknownMap_08470BD8/map.bin"
+
+	.align 2
+UnknownMapAttributes_08470BD8: @ 8470BD8
+	.4byte 0x28
+	.4byte 0x8C
+	.4byte UnknownMapBorder_08470BD8
+	.4byte UnknownMapBlockdata_08470BD8
+	.4byte gTileset_General
+	.4byte gTileset_Mauville
 
 	.align 2
 UnionRoom_MapBorder: @ 8470BF0
@@ -6344,7 +6765,7 @@ UnionRoom_MapAttributes: @ 8470D60
 	.4byte 0xc
 	.4byte UnionRoom_MapBorder
 	.4byte UnionRoom_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_UnionRoom
 
 	.align 2
@@ -6395,7 +6816,7 @@ BattleFrontier_RankingHall_MapAttributes: @ 8472CF8
 	.4byte 0xf
 	.4byte BattleFrontier_RankingHall_MapBorder
 	.4byte BattleFrontier_RankingHall_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontierRankingHall
 
 	.align 2
@@ -6413,7 +6834,7 @@ BattleFrontier_Lounge5_MapAttributes: @ 8472DE8
 	.4byte 0x8
 	.4byte BattleFrontier_Lounge2_MapBorder
 	.4byte BattleFrontier_Lounge2_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
@@ -6430,7 +6851,7 @@ BattleFrontier_BattlePointExchangeServiceCorner_MapAttributes: @ 8472F54
 	.4byte 0xb
 	.4byte BattleFrontier_BattlePointExchangeServiceCorner_MapBorder
 	.4byte BattleFrontier_BattlePointExchangeServiceCorner_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
@@ -6703,7 +7124,7 @@ TrainerHill_Entrance_MapAttributes: @ 847C634
 	.4byte 0x11
 	.4byte TrainerHill_Entrance_MapBorder
 	.4byte TrainerHill_Entrance_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrainerHill
 
 	.align 2
@@ -6720,7 +7141,7 @@ TrainerHill_1F_MapAttributes: @ 847C8F4
 	.4byte 0x15
 	.4byte TrainerHill_1F_MapBorder
 	.4byte TrainerHill_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrainerHill
 
 	.align 2
@@ -6737,7 +7158,7 @@ TrainerHill_2F_MapAttributes: @ 847CBB4
 	.4byte 0x15
 	.4byte TrainerHill_2F_MapBorder
 	.4byte TrainerHill_2F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrainerHill
 
 	.align 2
@@ -6754,7 +7175,7 @@ TrainerHill_3F_MapAttributes: @ 847CE74
 	.4byte 0x15
 	.4byte TrainerHill_3F_MapBorder
 	.4byte TrainerHill_3F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrainerHill
 
 	.align 2
@@ -6771,7 +7192,7 @@ TrainerHill_4F_MapAttributes: @ 847D134
 	.4byte 0x15
 	.4byte TrainerHill_4F_MapBorder
 	.4byte TrainerHill_4F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrainerHill
 
 	.align 2
@@ -6788,7 +7209,7 @@ TrainerHill_Roof_MapAttributes: @ 847D474
 	.4byte 0x10
 	.4byte TrainerHill_Roof_MapBorder
 	.4byte TrainerHill_Roof_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_TrainerHill
 
 	.align 2
@@ -6977,7 +7398,7 @@ BattleFrontier_Lounge9_MapAttributes: @ 8480418
 	.4byte 0xa
 	.4byte BattleFrontier_Lounge1_MapBorder
 	.4byte BattleFrontier_Lounge1_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
@@ -6994,7 +7415,7 @@ BattleFrontier_ScottsHouse_MapAttributes: @ 8480498
 	.4byte 0x8
 	.4byte BattleFrontier_ScottsHouse_MapBorder
 	.4byte BattleFrontier_ScottsHouse_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_BattleFrontier
 
 	.align 2
@@ -7015,7 +7436,123 @@ MeteorFalls_StevensCave_MapAttributes: @ 8480C38
 	.4byte gTileset_MeteorFalls
 
 	.align 2
-	.incbin "baserom.gba", 0x480c50, 0xeec
+UnknownMapBorder_08480DAC: @ 8480C50
+	.incbin "data/maps/UnknownMap_08480DAC/border.bin"
+
+	.align 2
+UnknownMapBlockdata_08480DAC: @ 8480C58
+	.incbin "data/maps/UnknownMap_08480DAC/map.bin"
+
+	.align 2
+UnknownMapAttributes_08480DAC: @ 8480DAC
+	.4byte 0xD
+	.4byte 0xD
+	.4byte UnknownMapBorder_08480DAC
+	.4byte UnknownMapBlockdata_08480DAC
+	.4byte gTileset_Building
+	.4byte gTileset_Lab
+
+	.align 2
+UnknownMapBorder_08480F54: @ 8480DC4
+	.incbin "data/maps/UnknownMap_08480F54/border.bin"
+
+	.align 2
+UnknownMapBlockdata_08480F54: @ 8480DCC
+	.incbin "data/maps/UnknownMap_08480F54/map.bin"
+
+	.align 2
+UnknownMapAttributes_08480F54: @ 8480F54
+	.4byte 0xE
+	.4byte 0xE
+	.4byte UnknownMapBorder_08480F54
+	.4byte UnknownMapBlockdata_08480F54
+	.4byte gTileset_General
+	.4byte gTileset_Pacifidlog
+
+	.align 2
+UnknownMapBorder_084810FC: @ 8480F6C
+	.incbin "data/maps/UnknownMap_084810FC/border.bin"
+
+	.align 2
+UnknownMapBlockdata_084810FC: @ 8480F74
+	.incbin "data/maps/UnknownMap_084810FC/map.bin"
+
+	.align 2
+UnknownMapAttributes_084810FC: @ 84810FC
+	.4byte 0xE
+	.4byte 0xE
+	.4byte UnknownMapBorder_084810FC
+	.4byte UnknownMapBlockdata_084810FC
+	.4byte gTileset_General
+	.4byte gTileset_Pacifidlog
+
+	.align 2
+UnknownMapBorder_084812A4: @ 8480F6C
+	.incbin "data/maps/UnknownMap_084812A4/border.bin"
+
+	.align 2
+UnknownMapBlockdata_084812A4: @ 8480F74
+	.incbin "data/maps/UnknownMap_084812A4/map.bin"
+
+	.align 2
+UnknownMapAttributes_084812A4: @ 84812A4
+	.4byte 0xE
+	.4byte 0xE
+	.4byte UnknownMapBorder_084812A4
+	.4byte UnknownMapBlockdata_084812A4
+	.4byte gTileset_General
+	.4byte gTileset_Pacifidlog
+
+	.align 2
+UnknownMapBorder_0848144C: @ 848144C
+	.incbin "data/maps/UnknownMap_0848144C/border.bin"
+
+	.align 2
+UnknownMapBlockdata_0848144C: @ 848144C
+	.incbin "data/maps/UnknownMap_0848144C/map.bin"
+
+	.align 2
+UnknownMapAttributes_0848144C: @ 848144C
+	.4byte 0xE
+	.4byte 0xE
+	.4byte UnknownMapBorder_0848144C
+	.4byte UnknownMapBlockdata_0848144C
+	.4byte gTileset_General
+	.4byte gTileset_Pacifidlog
+
+	.align 2
+UnknownMapBorder_084815F4: @ 848144C
+	.incbin "data/maps/UnknownMap_084815F4/border.bin"
+
+	.align 2
+UnknownMapBlockdata_084815F4: @ 848144C
+	.incbin "data/maps/UnknownMap_084815F4/map.bin"
+
+	.align 2
+UnknownMapAttributes_084815F4: @ 84815F4
+	.4byte 0xE
+	.4byte 0xE
+	.4byte UnknownMapBorder_084815F4
+	.4byte UnknownMapBlockdata_084815F4
+	.4byte gTileset_General
+	.4byte gTileset_Pacifidlog
+
+	.align 2
+UnknownMapBorder_08481B24: @ 848160C
+	.incbin "data/maps/UnknownMap_08481B24/border.bin"
+
+	.align 2
+UnknownMapBlockdata_08481B24: @ 8481614
+	.incbin "data/maps/UnknownMap_08481B24/map.bin"
+
+	.align 2
+UnknownMapAttributes_08481B24: @ 8481B24
+	.4byte 0x1B
+	.4byte 0x18
+	.4byte UnknownMapBorder_08481B24
+	.4byte UnknownMapBlockdata_08481B24
+	.4byte gTileset_General
+	.4byte gTileset_Pacifidlog
 
 	.align 2
 SootopolisCity_MysteryEventsHouse_1F_MapBorder: @ 8481B3C
@@ -7031,7 +7568,7 @@ SootopolisCity_MysteryEventsHouse_1F_MapAttributes: @ 8481BF4
 	.4byte 0x8
 	.4byte SootopolisCity_MysteryEventsHouse_1F_MapBorder
 	.4byte SootopolisCity_MysteryEventsHouse_1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_MysteryEventsHouse
 
 	.align 2
@@ -7048,8 +7585,22 @@ SootopolisCity_MysteryEventsHouse_B1F_MapAttributes: @ 8481CEC
 	.4byte 0x9
 	.4byte SootopolisCity_MysteryEventsHouse_B1F_MapBorder
 	.4byte SootopolisCity_MysteryEventsHouse_B1F_MapBlockdata
-	.4byte gTileset_InsideBuilding
+	.4byte gTileset_Building
 	.4byte gTileset_MysteryEventsHouse
 
 	.align 2
-	.incbin "baserom.gba", 0x481d04, 0xd0
+UnknownMapBorder_08481DBC: @ 8481D04
+	.incbin "data/maps/UnknownMap_08481DBC/border.bin"
+
+	.align 2
+UnknownMapBlockdata_08481DBC: @ 8481D0C
+	.incbin "data/maps/UnknownMap_08481DBC/map.bin"
+
+	.align 2
+UnknownMapAttributes_08481DBC: @ 8481DBC
+	.4byte 0xB
+	.4byte 0x8
+	.4byte UnknownMapBorder_08481DBC
+	.4byte UnknownMapBlockdata_08481DBC
+	.4byte gTileset_Building
+	.4byte gTileset_MysteryEventsHouse

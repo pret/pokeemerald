@@ -1415,7 +1415,7 @@ sub_80A035C: @ 80A035C
 	movs r1, 0
 	bl sub_819746C
 	bl remove_start_menu_window_maybe
-	ldr r0, =gUnknown_08252CFB
+	ldr r0, =BattleFrontier_BattlePyramidEmptySquare_Text_252CFB
 	ldr r1, =sub_80A0388
 	bl sub_809FF98
 	movs r0, 0

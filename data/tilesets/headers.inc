@@ -175,7 +175,7 @@ gTileset_BattleFrontierOutsideEast:: @ 83DF86C
 	.4byte TilesetCb_BattleFrontierOutsideEast
 
 	.align 2
-gTileset_InsideBuilding:: @ 83DF884
+gTileset_Building:: @ 83DF884
 	.byte TRUE @ is compressed
 	.byte FALSE @ is secondary tileset
 	.2byte 0 @ padding

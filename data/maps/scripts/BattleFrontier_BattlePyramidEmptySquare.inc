@@ -185,5 +185,474 @@ BattleFrontier_BattlePyramidEmptySquare_Text_252CA7:: @ 8252CA7
 	.string "saved so that you may quit for now.\l"
 	.string "Is that okay?$"
 
-gUnknown_08252CFB:: @ 8252CFB
-	.incbin "baserom.gba", 0x252cfb, 0x23a6
+BattleFrontier_BattlePyramidEmptySquare_Text_252CFB:: @ 8252CFB
+	.string "Are you sure you want to quit your\n"
+	.string "PYRAMID quest?$"
+
+	.string "This floor’s exit is in\n"
+	.string "that direction: {UP_ARROW}$"
+
+	.string "This floor’s exit is in\n"
+	.string "that direction: {LEFT_ARROW}$"
+
+	.string "This floor’s exit is in\n"
+	.string "that direction: {RIGHT_ARROW}$"
+
+	.string "This floor’s exit is in\n"
+	.string "that direction: {DOWN_ARROW}$"
+
+	.string "The exit on this floor is in\n"
+	.string "the {UP_ARROW} direction.$"
+
+	.string "The exit on this floor is in\n"
+	.string "the {LEFT_ARROW} direction.$"
+
+	.string "The exit on this floor is in\n"
+	.string "the {RIGHT_ARROW} direction.$"
+
+	.string "The exit on this floor is in\n"
+	.string "the {DOWN_ARROW} direction.$"
+
+	.string "The exit is over\n"
+	.string "that {UP_ARROW} way.$"
+
+	.string "The exit is over\n"
+	.string "that {LEFT_ARROW} way.$"
+
+	.string "The exit is over\n"
+	.string "that {RIGHT_ARROW} way.$"
+
+	.string "The exit is over\n"
+	.string "that {DOWN_ARROW} way.$"
+
+	.string "On this floor, the exit is somewhere\n"
+	.string "in the {UP_ARROW} direction.$"
+
+	.string "On this floor, the exit is somewhere\n"
+	.string "in the {LEFT_ARROW} direction.$"
+
+	.string "On this floor, the exit is somewhere\n"
+	.string "in the {RIGHT_ARROW} direction.$"
+
+	.string "On this floor, the exit is somewhere\n"
+	.string "in the {DOWN_ARROW} direction.$"
+
+	.string "The exit?\n"
+	.string "It’s that {UP_ARROW} way.$"
+
+	.string "The exit?\n"
+	.string "It’s that {LEFT_ARROW} way.$"
+
+	.string "The exit?\n"
+	.string "It’s that {RIGHT_ARROW} way.$"
+
+	.string "The exit?\n"
+	.string "It’s that {DOWN_ARROW} way.$"
+
+	.string "The exit happens to be in\n"
+	.string "the {UP_ARROW} direction.$"
+
+	.string "The exit happens to be in\n"
+	.string "the {LEFT_ARROW} direction.$"
+
+	.string "The exit happens to be in\n"
+	.string "the {RIGHT_ARROW} direction.$"
+
+	.string "The exit happens to be in\n"
+	.string "the {DOWN_ARROW} direction.$"
+
+	.string "Are you looking for items?\p"
+	.string "There are eight items left to\n"
+	.string "be found.$"
+
+	.string "Are you looking for items?\p"
+	.string "There are seven items left to\n"
+	.string "be found.$"
+
+	.string "Are you looking for items?\p"
+	.string "There are six items left to\n"
+	.string "be found.$"
+
+	.string "Are you looking for items?\p"
+	.string "There are five items left to\n"
+	.string "be found.$"
+
+	.string "Are you looking for items?\p"
+	.string "There are four items left to\n"
+	.string "be found.$"
+
+	.string "Are you looking for items?\p"
+	.string "There are three items left to\n"
+	.string "be found.$"
+
+	.string "Are you looking for items?\p"
+	.string "There are two items left to\n"
+	.string "be found.$"
+
+	.string "Are you looking for items?\p"
+	.string "There is one item left to\n"
+	.string "be found.$"
+
+	.string "Are you looking for items?\p"
+	.string "There isn’t anything left to\n"
+	.string "be found!$"
+
+	.string "Because you won, I’ll tell you\n"
+	.string "a little secret!\p"
+	.string "There are eight items\n"
+	.string "lying around here.$"
+
+	.string "Because you won, I’ll tell you\n"
+	.string "a little secret!\p"
+	.string "There are seven items left\n"
+	.string "lying around here.$"
+
+	.string "Because you won, I’ll tell you\n"
+	.string "a little secret!\p"
+	.string "There are six items left\n"
+	.string "lying around here.$"
+
+	.string "Because you won, I’ll tell you\n"
+	.string "a little secret!\p"
+	.string "There are five items left\n"
+	.string "lying around here.$"
+
+	.string "Because you won, I’ll tell you\n"
+	.string "a little secret!\p"
+	.string "There are four items left\n"
+	.string "lying around here.$"
+
+	.string "Because you won, I’ll tell you\n"
+	.string "a little secret!\p"
+	.string "There are three items left\n"
+	.string "lying around here.$"
+
+	.string "Because you won, I’ll tell you\n"
+	.string "a little secret!\p"
+	.string "There are two items left\n"
+	.string "lying around here.$"
+
+	.string "Because you won, I’ll tell you\n"
+	.string "a little secret!\p"
+	.string "There is just one item\n"
+	.string "lying around here.$"
+
+	.string "Because you won, I’ll tell you\n"
+	.string "a little secret!\p"
+	.string "There isn’t anything left\n"
+	.string "lying around here.$"
+
+	.string "How’s your stock of items holding up?\p"
+	.string "I reckon there are eight items left\n"
+	.string "waiting to be found on this floor.$"
+
+	.string "How’s your stock of items holding up?\p"
+	.string "I reckon there are seven items left\n"
+	.string "waiting to be found on this floor.$"
+
+	.string "How’s your stock of items holding up?\p"
+	.string "I reckon there are six items left\n"
+	.string "waiting to be found on this floor.$"
+
+	.string "How’s your stock of items holding up?\p"
+	.string "I reckon there are five items left\n"
+	.string "waiting to be found on this floor.$"
+
+	.string "How’s your stock of items holding up?\p"
+	.string "I reckon there are four items left\n"
+	.string "waiting to be found on this floor.$"
+
+	.string "How’s your stock of items holding up?\p"
+	.string "I reckon there are three items left\n"
+	.string "waiting to be found on this floor.$"
+
+	.string "How’s your stock of items holding up?\p"
+	.string "I reckon there are two items left\n"
+	.string "waiting to be found on this floor.$"
+
+	.string "How’s your stock of items holding up?\p"
+	.string "I reckon there’s but one item left\n"
+	.string "waiting to be found on this floor.$"
+
+	.string "How’s your stock of items holding up?\p"
+	.string "I reckon there are no more items\n"
+	.string "waiting to be found on this floor.\l"
+	.string "You take care now!$"
+
+	.string "You’re strong, so you’ve earned\n"
+	.string "a hint!\p"
+	.string "There appear to be eight more\n"
+	.string "items on the ground.$"
+
+	.string "You’re strong, so you’ve earned\n"
+	.string "a hint!\p"
+	.string "There appear to be seven more\n"
+	.string "items on the ground.$"
+
+	.string "You’re strong, so you’ve earned\n"
+	.string "a hint!\p"
+	.string "There appear to be six more\n"
+	.string "items on the ground.$"
+
+	.string "You’re strong, so you’ve earned\n"
+	.string "a hint!\p"
+	.string "There appear to be five more\n"
+	.string "items on the ground.$"
+
+	.string "You’re strong, so you’ve earned\n"
+	.string "a hint!\p"
+	.string "There appear to be four more\n"
+	.string "items on the ground.$"
+
+	.string "You’re strong, so you’ve earned\n"
+	.string "a hint!\p"
+	.string "There appear to be three more\n"
+	.string "items on the ground.$"
+
+	.string "You’re strong, so you’ve earned\n"
+	.string "a hint!\p"
+	.string "There appear to be two more\n"
+	.string "items on the ground.$"
+
+	.string "You’re strong, so you’ve earned\n"
+	.string "a hint!\p"
+	.string "There appears to be only one more\n"
+	.string "item on the ground.$"
+
+	.string "You’re strong, so you’ve earned\n"
+	.string "a hint!\p"
+	.string "There appear to be no more\n"
+	.string "items on the ground.$"
+
+	.string "On this floor of the PYRAMID,\n"
+	.string "I hear there are eight items…$"
+
+	.string "On this floor of the PYRAMID,\n"
+	.string "I hear there are seven items…$"
+
+	.string "On this floor of the PYRAMID,\n"
+	.string "I hear there are six items…$"
+
+	.string "On this floor of the PYRAMID,\n"
+	.string "I hear there are five items…$"
+
+	.string "On this floor of the PYRAMID,\n"
+	.string "I hear there are four items…$"
+
+	.string "On this floor of the PYRAMID,\n"
+	.string "I hear there are three items…$"
+
+	.string "On this floor of the PYRAMID,\n"
+	.string "I hear there are two items…$"
+
+	.string "On this floor of the PYRAMID,\n"
+	.string "I hear there is one item…$"
+
+	.string "On this floor of the PYRAMID,\n"
+	.string "I hear there are no items…$"
+
+	.string "Have you collected any items?\p"
+	.string "I believe there are eight more\n"
+	.string "items on this floor.$"
+
+	.string "Have you collected any items?\p"
+	.string "I believe there are seven more\n"
+	.string "items on this floor.$"
+
+	.string "Have you collected any items?\p"
+	.string "I believe there are six more\n"
+	.string "items on this floor.$"
+
+	.string "Have you collected any items?\p"
+	.string "I believe there are five more\n"
+	.string "items on this floor.$"
+
+	.string "Have you collected any items?\p"
+	.string "I believe there are four more\n"
+	.string "items on this floor.$"
+
+	.string "Have you collected any items?\p"
+	.string "I believe there are three more\n"
+	.string "items on this floor.$"
+
+	.string "Have you collected any items?\p"
+	.string "I believe there are two more\n"
+	.string "items on this floor.$"
+
+	.string "Have you collected any items?\p"
+	.string "I believe there is one more\n"
+	.string "item on this floor.$"
+
+	.string "Have you collected any items?\p"
+	.string "I believe there are no more\n"
+	.string "items on this floor.$"
+
+	.string "You were really awesome!\p"
+	.string "But there are still seven tough\n"
+	.string "TRAINERS other than me!$"
+
+	.string "You were really awesome!\p"
+	.string "But there are still six tough\n"
+	.string "TRAINERS other than me!$"
+
+	.string "You were really awesome!\p"
+	.string "But there are still five tough\n"
+	.string "TRAINERS other than me!$"
+
+	.string "You were really awesome!\p"
+	.string "But there are still four tough\n"
+	.string "TRAINERS other than me!$"
+
+	.string "You were really awesome!\p"
+	.string "But there are still three tough\n"
+	.string "TRAINERS other than me!$"
+
+	.string "You were really awesome!\p"
+	.string "But there are still two tough\n"
+	.string "TRAINERS other than me!$"
+
+	.string "You were really awesome!\p"
+	.string "But there’s still one tough\n"
+	.string "TRAINER other than me!$"
+
+	.string "You were really awesome!\p"
+	.string "There’s no one left that\n"
+	.string "can beat you!$"
+
+	.string "This is so upsetting!\p"
+	.string "But there are seven TRAINERS left!\n"
+	.string "Someone will humble you!$"
+
+	.string "This is so upsetting!\p"
+	.string "But there are six TRAINERS left!\n"
+	.string "Someone will humble you!$"
+
+	.string "This is so upsetting!\p"
+	.string "But there are five TRAINERS left!\n"
+	.string "Someone will humble you!$"
+
+	.string "This is so upsetting!\p"
+	.string "But there are four TRAINERS left!\n"
+	.string "Someone will humble you!$"
+
+	.string "This is so upsetting!\p"
+	.string "But there are three TRAINERS left!\n"
+	.string "Someone will humble you!$"
+
+	.string "This is so upsetting!\p"
+	.string "But there are two TRAINERS left!\n"
+	.string "Someone will humble you!$"
+
+	.string "This is so upsetting!\p"
+	.string "But there’s one TRAINER left!\n"
+	.string "I’m sure you will be humbled!$"
+
+	.string "This is so upsetting!\p"
+	.string "But there are no more TRAINERS\n"
+	.string "who can engage you!$"
+
+	.string "That’s pretty impressive!\p"
+	.string "But there are seven more TRAINERS\n"
+	.string "on this floor. Can you beat them all?$"
+
+	.string "That’s pretty impressive!\p"
+	.string "But there are six more TRAINERS\n"
+	.string "on this floor. Can you beat them all?$"
+
+	.string "That’s pretty impressive!\p"
+	.string "But there are five more TRAINERS\n"
+	.string "on this floor. Can you beat them all?$"
+
+	.string "That’s pretty impressive!\p"
+	.string "But there are four more TRAINERS\n"
+	.string "on this floor. Can you beat them all?$"
+
+	.string "That’s pretty impressive!\p"
+	.string "But there are three more TRAINERS\n"
+	.string "on this floor. Can you beat them all?$"
+
+	.string "That’s pretty impressive!\p"
+	.string "But there are two more TRAINERS\n"
+	.string "on this floor. Can you beat them both?$"
+
+	.string "That’s pretty impressive!\p"
+	.string "But there’s still one more TRAINER\n"
+	.string "on this floor. Can you prevail?$"
+
+	.string "That’s pretty impressive!\p"
+	.string "You’ve gone through all the TRAINERS\n"
+	.string "on this floor.$"
+
+	.string "Maybe you could sweep through\n"
+	.string "the seven TRAINERS left on this floor.$"
+
+	.string "Maybe you could sweep through\n"
+	.string "the six TRAINERS left on this floor.$"
+
+	.string "Maybe you could sweep through\n"
+	.string "the five TRAINERS left on this floor.$"
+
+	.string "Maybe you could sweep through\n"
+	.string "the four TRAINERS left on this floor.$"
+
+	.string "Maybe you could sweep through\n"
+	.string "the three TRAINERS left on this floor.$"
+
+	.string "Maybe you could sweep through\n"
+	.string "the two TRAINERS left on this floor.$"
+
+	.string "Maybe you could complete your sweep\n"
+	.string "with the one TRAINER left on this floor.$"
+
+	.string "There isn’t a single person left who\n"
+	.string "can defeat you now…$"
+
+	.string "You may have what it takes to beat\n"
+	.string "the seven expert TRAINERS who remain.$"
+
+	.string "You may have what it takes to beat\n"
+	.string "the six expert TRAINERS who remain.$"
+
+	.string "You may have what it takes to beat\n"
+	.string "the five expert TRAINERS who remain.$"
+
+	.string "You may have what it takes to beat\n"
+	.string "the four expert TRAINERS who remain.$"
+
+	.string "You may have what it takes to beat\n"
+	.string "the three expert TRAINERS who remain.$"
+
+	.string "You may have what it takes to beat\n"
+	.string "the two expert TRAINERS who remain.$"
+
+	.string "You may have what it takes to beat\n"
+	.string "the one expert TRAINER who remains.$"
+
+	.string "Your skills are beyond reproach.\p"
+	.string "There are no more TRAINERS here\n"
+	.string "who have any chance of beating you.$"
+
+	.string "Can you keep winning against\n"
+	.string "the seven remaining TRAINERS?$"
+
+	.string "Can you keep winning against\n"
+	.string "the six remaining TRAINERS?$"
+
+	.string "Can you keep winning against\n"
+	.string "the five remaining TRAINERS?$"
+
+	.string "Can you keep winning against\n"
+	.string "the four remaining TRAINERS?$"
+
+	.string "Can you keep winning against\n"
+	.string "the three remaining TRAINERS?$"
+
+	.string "Can you keep winning against\n"
+	.string "the two remaining TRAINERS?$"
+
+	.string "Can you keep winning against\n"
+	.string "the last remaining TRAINER?$"
+
+	.string "There aren’t any TRAINERS left that\n"
+	.string "can take you on now…$"
+
