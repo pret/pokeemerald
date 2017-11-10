@@ -1087,7 +1087,7 @@ _081C4750:
 	ldrh r0, [r5, 0x2]
 	ldr r1, [r5, 0x48]
 	ldr r2, [r5, 0xC]
-	bl sub_806E7CC
+	bl GetMonSpritePalStructFromOtIdPersonality
 	adds r4, r0, 0
 	bl LoadCompressedObjectPalette
 	ldrh r0, [r4, 0x4]
@@ -2035,7 +2035,7 @@ sub_81C4EFC: @ 81C4EFC
 	thumb_func_start sub_81C4F10
 sub_81C4F10: @ 81C4F10
 	push {lr}
-	ldr r1, =sub_8059D50
+	ldr r1, =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x1
 	bl sub_81C4F98
 	pop {r0}

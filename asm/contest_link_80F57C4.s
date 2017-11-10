@@ -1415,7 +1415,7 @@ _080F64F2:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_806E7CC
+	bl GetMonSpritePalStructFromOtIdPersonality
 	adds r4, r0, 0
 	bl LoadCompressedObjectPalette
 	adds r0, r6, 0

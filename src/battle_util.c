@@ -1729,7 +1729,7 @@ bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
             if (GetBankSide(bank) == SIDE_PLAYER)
             {
                 party = gPlayerParty;
-                r7 = sub_806D864(bank);
+                r7 = GetBankMultiplayerId(bank);
                 r6 = sub_806D82C(r7);
             }
             else
@@ -1748,7 +1748,7 @@ bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
         }
         else
         {
-            r7 = sub_806D864(bank);
+            r7 = GetBankMultiplayerId(bank);
             if (GetBankSide(bank) == SIDE_PLAYER)
                 party = gPlayerParty;
             else

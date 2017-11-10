@@ -124,7 +124,7 @@ static void sub_818D0C4(u16 species, u32 otId, u32 personality, u8 paletteSlot, 
         else
         {
             gUnknown_0203CCEC.paletteTag = paletteTag;
-            LoadCompressedObjectPalette(sub_806E7CC(species, otId, personality));
+            LoadCompressedObjectPalette(GetMonSpritePalStructFromOtIdPersonality(species, otId, personality));
         }
     }
     else
