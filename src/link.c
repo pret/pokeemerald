@@ -109,6 +109,7 @@ void sub_8009638(void);
 void sub_80096BC(void);
 static void c2_08009A8C(void);
 static void sub_8009AA0(u8 unused);
+void sub_8009F70(void);
 void sub_800A2E0(void);
 void sub_800A2F4(void *heapptr, size_t src);
 void sub_800A418(void);
@@ -127,6 +128,9 @@ void sub_800B594(void);
 u32 sub_800BEC0(void);
 void sub_800E700(void);
 void sub_800EDD4(void);
+bool32 sub_800F7E4(void);
+void sub_800F804(void);
+void Rfu_set_zero(void);
 
 // .rodata
 
@@ -639,5 +643,59 @@ void sub_8009D90(u16 command)
             gUnknown_03003110[0] = 0xcafe;
             gUnknown_03003110[1] = gUnknown_03005DA8;
             break;
+    }
+}
+
+void sub_8009F18(void)
+{
+    if (gLinkVSyncDisabled)
+    {
+        sub_800F804();
+    }
+    gUnknown_03003140 = sub_8009F70;
+}
+
+bool32 sub_8009F3C(void)
+{
+    if (gLinkVSyncDisabled)
+    {
+        return sub_800F7E4();
+    }
+    if (gUnknown_03003140 == sub_8009F70)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_8009F70(void)
+{
+    if (gReceivedRemoteLinkPlayers == TRUE)
+    {
+        sub_8009D90(0xcafe);
+    }
+}
+
+void sub_8009F8C(void)
+{
+    if (gLinkVSyncDisabled)
+    {
+        Rfu_set_zero();
+    }
+    else
+    {
+        gUnknown_03003140 = NULL;
+    }
+}
+
+void sub_8009FAC(void)
+{
+    if (gLinkVSyncDisabled)
+    {
+        Rfu_set_zero();
+    }
+    else
+    {
+        gUnknown_03003140 = NULL;
     }
 }
