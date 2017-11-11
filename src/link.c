@@ -22,7 +22,7 @@ struct BlockTransfer
 {
     u16 pos;
     u16 size;
-    const void *src;
+    const u8 *src;
     bool8 active;
     u8 multiplayerId;
 };
@@ -114,7 +114,9 @@ static void sub_8009AA0(u8 unused);
 static void sub_8009F70(void);
 static void sub_800A2E0(void);
 bool32 sub_800A2F4(const void *src, size_t size);
-void sub_800A364(void);
+static void sub_800A364(void);
+static void sub_800A388(void);
+void sub_800A3EC(void);
 void sub_800A418(void);
 void task00_link_test(u8 taskId);
 void sub_800A588(u8 who);
@@ -920,4 +922,31 @@ bool32 sub_800A2F4(const void *src, size_t size)
     gUnknown_03003140 = sub_800A364;
     gUnknown_03000D50 = 0;
     return TRUE;
+}
+
+static void sub_800A364(void)
+{
+    if (++ gUnknown_03000D50 > 2)
+    {
+        gUnknown_03003140 = sub_800A388;
+    }
+}
+
+static void sub_800A388(void)
+{
+    int i;
+    const u8 *src;
+
+    src = gUnknown_03000D10.src;
+    gUnknown_03003110[0] = 0x8888;
+    for (i = 0; i < 7; i ++)
+    {
+        gUnknown_03003110[i + 1] = (src[gUnknown_03000D10.pos + i * 2 + 1] << 8) | src[gUnknown_03000D10.pos + i * 2];
+    }
+    gUnknown_03000D10.pos += 14;
+    if (gUnknown_03000D10.size <= gUnknown_03000D10.pos)
+    {
+        gUnknown_03000D10.active = FALSE;
+        gUnknown_03003140 = sub_800A3EC;
+    }
 }
