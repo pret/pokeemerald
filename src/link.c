@@ -1125,7 +1125,7 @@ u16 sub_800A648(const u16 *data, u16 size)
     return chksum;
 }
 
-void sub_800A678(u8 a0, u8 a1, u8 a2)
+void sub_800A678(char a0, u8 a1, u8 a2)
 {
     u16 *vAddr;
 
@@ -1133,7 +1133,7 @@ void sub_800A678(u8 a0, u8 a1, u8 a2)
     vAddr[a2 * 32 + a1] = (gUnknown_03003130.paletteNum << 12) | (a0 + 1 + gUnknown_03003130.dummy_8);
 }
 
-void sub_800A6B0(u8 a0, u8 a1, u8 a2)
+void sub_800A6B0(char a0, u8 a1, u8 a2)
 {
     u16 *vAddr;
 
@@ -1143,7 +1143,7 @@ void sub_800A6B0(u8 a0, u8 a1, u8 a2)
 
 void sub_800A6E8(u32 a0, u8 a1, u8 a2, u8 a3)
 {
-    u8 sp[32 / 2];
+    char sp[32 / 2];
     int i;
 
     for (i = 0; i < a3; i ++)
@@ -1160,7 +1160,7 @@ void sub_800A6E8(u32 a0, u8 a1, u8 a2, u8 a3)
 
 void sub_800A73C(int a0, u8 a1, u8 a2, u8 a3)
 {
-    u8 sp[32 / 2];
+    char sp[32 / 2];
     int sp10;
     int i;
 
@@ -1182,6 +1182,29 @@ void sub_800A73C(int a0, u8 a1, u8 a2, u8 a3)
     }
     if (sp10 != -1)
     {
-        sub_800A678(10, sp10, a2);
+        sub_800A678(*"\n", sp10, a2);
+    }
+}
+
+void sub_800A7DC(const char *a0, u8 a1, u8 a2)
+{
+    int r6;
+    int i;
+    int r5;
+
+    r5 = 0;
+    r6 = 0;
+    for (i = 0; a0[i] != 0; a0 ++)
+    {
+        if (a0[i] == *"\n")
+        {
+            r5 ++;
+            r6 = 0;
+        }
+        else
+        {
+            sub_800A6B0(a0[i], a1 + r6, a2 + r5);
+            r6 ++;
+        }
     }
 }

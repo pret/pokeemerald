@@ -5,48 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800A7DC
-sub_800A7DC: @ 800A7DC
-	push {r4-r7,lr}
-	adds r3, r0, 0
-	lsls r1, 24
-	lsrs r7, r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	movs r6, 0
-	ldrb r0, [r3]
-	cmp r0, 0
-	beq _0800A81C
-	adds r4, r3, 0
-	lsls r5, r2, 24
-_0800A7F4:
-	ldrb r0, [r4]
-	cmp r0, 0xA
-	bne _0800A804
-	movs r0, 0x80
-	lsls r0, 17
-	adds r5, r0
-	movs r6, 0
-	b _0800A814
-_0800A804:
-	ldrb r0, [r4]
-	adds r1, r7, r6
-	lsls r1, 24
-	lsrs r1, 24
-	lsrs r2, r5, 24
-	bl sub_800A6B0
-	adds r6, 0x1
-_0800A814:
-	adds r4, 0x1
-	ldrb r0, [r4]
-	cmp r0, 0
-	bne _0800A7F4
-_0800A81C:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_800A7DC
-
 	thumb_func_start sub_800A824
 sub_800A824: @ 800A824
 	push {lr}
