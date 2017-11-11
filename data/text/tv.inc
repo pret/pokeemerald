@@ -1,3 +1,48 @@
+LilycoveCity_ContestLobby_Text_27EF15: @ 827EF15
+	.string "Oh, hello! You were in a POKéMON\n"
+	.string "CONTEST, weren’t you?\l"
+	.string "It’s easy to tell from your POKéMON.\p"
+	.string "I’m a reporter. I’m working on a story\n"
+	.string "on POKéMON CONTESTS.\p"
+	.string "If I may, would you be willing to answer\n"
+	.string "a few questions?$"
+
+LilycoveCity_ContestLobby_Text_27EFE7: @ 827EFE7
+	.string "Oh, you will?\n"
+	.string "Thank you.\p"
+	.string "Briefly, how would you describe the\n"
+	.string "CONTEST you just entered?$"
+
+LilycoveCity_ContestLobby_Text_27F03E: @ 827F03E
+	.string "Ah, I see.\n"
+	.string "That’s a very edifying comment.\p"
+	.string "You get a good feel for what\n"
+	.string "the CONTEST was like.\p"
+	.string "I’ve got one last question.\p"
+	.string "When you hear the word “{STR_VAR_2},”\n"
+	.string "what image do you get?$"
+
+LilycoveCity_ContestLobby_Text_27F0EC: @ 827F0EC
+	.string "I see!\p"
+	.string "So that’s how you imagine the concept\n"
+	.string "of “{STR_VAR_2}” to be.\p"
+	.string "Thank you!\n"
+	.string "You’ve given me some good ideas.\p"
+	.string "I think I can write a good story on\n"
+	.string "POKéMON CONTESTS now.\p"
+	.string "Maybe, just maybe, this story will even\n"
+	.string "make it to television.\l"
+	.string "I hope you’ll look forward to it!$"
+
+LilycoveCity_ContestLobby_Text_27F1EF: @ 827F1EF
+	.string "Oh, too bad…\p"
+	.string "Well, if you come across a good story,\n"
+	.string "please do share it with me.$"
+
+LilycoveCity_ContestLobby_Text_27F23F: @ 827F23F
+	.string "I’ll be looking forward to your next\n"
+	.string "POKéMON CONTEST.$"
+
 gTVBravoTrainerText00:: @ 0827F275
 	.string "Yeah!\n"
 	.string "It’s BRAVO TRAINER time!\p"

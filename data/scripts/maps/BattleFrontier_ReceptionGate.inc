@@ -4,7 +4,7 @@ BattleFrontier_ReceptionGate_MapScripts:: @ 82661DA
 	.byte 0
 
 BattleFrontier_ReceptionGate_MapScript1_2661E5: @ 82661E5
-	setflag FLAG_0x8A8
+	setflag FLAG_UNLOCK_BATTLE_FRONTIER
 	end
 
 BattleFrontier_ReceptionGate_MapScript2_2661E9: @ 82661E9

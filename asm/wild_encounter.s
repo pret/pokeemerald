@@ -2026,7 +2026,7 @@ sub_80B5870: @ 80B5870
 	bl VarSet
 	cmp r4, 0
 	bne _080B58C4
-	ldr r0, =EventScript_2A4B2A
+	ldr r0, =EventScript_RepelWoreOff
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _080B58C6

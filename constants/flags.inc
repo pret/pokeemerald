@@ -1365,8 +1365,8 @@
 	.equiv FLAG_0x8A5,                      CODE_FLAGS + 0x45
 	.equiv FLAG_0x8A6,                      CODE_FLAGS + 0x46
 	.equiv FLAG_0x8A7,                      CODE_FLAGS + 0x47
-	.equiv FLAG_0x8A8,                      CODE_FLAGS + 0x48
-	.equiv FLAG_0x8A9,                      CODE_FLAGS + 0x49
+	.equiv FLAG_UNLOCK_BATTLE_FRONTIER,     CODE_FLAGS + 0x48
+	.equiv FLAG_UNLOCK_SOUTHERN_ISLAND,     CODE_FLAGS + 0x49
 	.equiv FLAG_0x8AA,                      CODE_FLAGS + 0x4A
 
 	.equiv FLAG_SYS_PC_LANETTE,             CODE_FLAGS + 0x4B
