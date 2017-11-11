@@ -1157,3 +1157,31 @@ void sub_800A6E8(u32 a0, u8 a1, u8 a2, u8 a3)
         a1 ++;
     }
 }
+
+void sub_800A73C(int a0, u8 a1, u8 a2, u8 a3)
+{
+    u8 sp[32 / 2];
+    int sp10;
+    int i;
+
+    sp10 = -1;
+    if (a0 < 0)
+    {
+        sp10 = a1;
+        a0 = -a0;
+    }
+    for (i = 0; i < a3; i ++)
+    {
+        sp[i] = a0 % 10;
+        a0 /= 10;
+    }
+    for (i = a3 - 1; i >= 0; i --)
+    {
+        sub_800A678(sp[i], a1, a2);
+        a1 ++;
+    }
+    if (sp10 != -1)
+    {
+        sub_800A678(10, sp10, a2);
+    }
+}
