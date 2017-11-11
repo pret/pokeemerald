@@ -9526,22 +9526,22 @@ static void atkC0_recoverbasedonsunlight(void)
 #ifdef NONMATCHING
 static void atkC1_hidden_power_calc(void)
 {
-    s32 powerBits;
-    s32 typeBits;
+    u32 powerBits = 0;
+    u32 typeBits = 0;
 
-    powerBits = ((gBattleMons[gBankAttacker].hpIV & 2) >> 1)
-                  | ((gBattleMons[gBankAttacker].attackIV & 2) << 0)
-                  | ((gBattleMons[gBankAttacker].defenseIV & 2) << 1)
-                  | ((gBattleMons[gBankAttacker].speedIV & 2) << 2)
-                  | ((gBattleMons[gBankAttacker].spAttackIV & 2) << 3)
-                  | ((gBattleMons[gBankAttacker].spDefenseIV & 2) << 4);
+    powerBits |= ((gBattleMons[gBankAttacker].hpIV & 2) >> 1);
+    powerBits |= ((gBattleMons[gBankAttacker].attackIV & 2) << 0);
+    powerBits |= ((gBattleMons[gBankAttacker].defenseIV & 2) << 1);
+    powerBits |= ((gBattleMons[gBankAttacker].speedIV & 2) << 2);
+    powerBits |= ((gBattleMons[gBankAttacker].spAttackIV & 2) << 3);
+    powerBits |= ((gBattleMons[gBankAttacker].spDefenseIV & 2) << 4);
 
-    typeBits = ((gBattleMons[gBankAttacker].hpIV & 1) << 0)
-                  | ((gBattleMons[gBankAttacker].attackIV & 1) << 1)
-                  | ((gBattleMons[gBankAttacker].defenseIV & 1) << 2)
-                  | ((gBattleMons[gBankAttacker].speedIV & 1) << 3)
-                  | ((gBattleMons[gBankAttacker].spAttackIV & 1) << 4)
-                  | ((gBattleMons[gBankAttacker].spDefenseIV & 1) << 5);
+    typeBits |= ((gBattleMons[gBankAttacker].hpIV & 1) << 0);
+    typeBits |= ((gBattleMons[gBankAttacker].attackIV & 1) << 1);
+    typeBits |= ((gBattleMons[gBankAttacker].defenseIV & 1) << 2);
+    typeBits |= ((gBattleMons[gBankAttacker].speedIV & 1) << 3);
+    typeBits |= ((gBattleMons[gBankAttacker].spAttackIV & 1) << 4);
+    typeBits |= ((gBattleMons[gBankAttacker].spDefenseIV & 1) << 5);
 
     gDynamicBasePower = (40 * powerBits) / 63 + 30;
 
