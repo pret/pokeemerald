@@ -5,69 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800A2E0
-sub_800A2E0: @ 800A2E0
-	ldr r1, =gUnknown_03000D10
-	movs r0, 0
-	strb r0, [r1, 0x8]
-	strh r0, [r1]
-	strh r0, [r1, 0x2]
-	str r0, [r1, 0x4]
-	bx lr
-	.pool
-	thumb_func_end sub_800A2E0
-
-	thumb_func_start sub_800A2F4
-sub_800A2F4: @ 800A2F4
-	push {r4-r7,lr}
-	adds r7, r0, 0
-	adds r6, r1, 0
-	ldr r4, =gUnknown_03000D10
-	ldrb r5, [r4, 0x8]
-	cmp r5, 0
-	beq _0800A30C
-	movs r0, 0
-	b _0800A34A
-	.pool
-_0800A30C:
-	bl GetMultiplayerId
-	strb r0, [r4, 0x9]
-	movs r0, 0x1
-	strb r0, [r4, 0x8]
-	strh r6, [r4, 0x2]
-	strh r5, [r4]
-	adds r0, 0xFF
-	cmp r6, r0
-	bls _0800A324
-	str r7, [r4, 0x4]
-	b _0800A336
-_0800A324:
-	ldr r5, =gUnknown_020228C4
-	cmp r7, r5
-	beq _0800A334
-	adds r0, r5, 0
-	adds r1, r7, 0
-	adds r2, r6, 0
-	bl memcpy
-_0800A334:
-	str r5, [r4, 0x4]
-_0800A336:
-	ldr r0, =0x0000bbbb
-	bl sub_8009D90
-	ldr r1, =gUnknown_03003140
-	ldr r0, =sub_800A364
-	str r0, [r1]
-	ldr r1, =gUnknown_03000D50
-	movs r0, 0
-	str r0, [r1]
-	movs r0, 0x1
-_0800A34A:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_800A2F4
-
 	thumb_func_start sub_800A364
 sub_800A364: @ 800A364
 	push {lr}

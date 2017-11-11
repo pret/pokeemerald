@@ -22,7 +22,7 @@ struct BlockTransfer
 {
     u16 pos;
     u16 size;
-    void *src;
+    const void *src;
     bool8 active;
     u8 multiplayerId;
 };
@@ -111,9 +111,10 @@ void sub_8009638(void);
 void sub_80096BC(void);
 static void c2_08009A8C(void);
 static void sub_8009AA0(u8 unused);
-void sub_8009F70(void);
-void sub_800A2E0(void);
-void sub_800A2F4(void *heapptr, size_t src);
+static void sub_8009F70(void);
+static void sub_800A2E0(void);
+bool32 sub_800A2F4(const void *src, size_t size);
+void sub_800A364(void);
 void sub_800A418(void);
 void task00_link_test(u8 taskId);
 void sub_800A588(u8 who);
@@ -671,7 +672,7 @@ bool32 sub_8009F3C(void)
     return FALSE;
 }
 
-void sub_8009F70(void)
+static void sub_8009F70(void)
 {
     if (gReceivedRemoteLinkPlayers == TRUE)
     {
@@ -883,4 +884,40 @@ void sub_800A2BC(void)
     {
         gLinkPlayers[i] = (struct LinkPlayer){};
     }
+}
+
+static void sub_800A2E0(void)
+{
+    gUnknown_03000D10.active = FALSE;
+    gUnknown_03000D10.pos = 0;
+    gUnknown_03000D10.size = 0;
+    gUnknown_03000D10.src = NULL;
+}
+
+bool32 sub_800A2F4(const void *src, size_t size)
+{
+    if (gUnknown_03000D10.active)
+    {
+        return FALSE;
+    }
+    gUnknown_03000D10.multiplayerId = GetMultiplayerId();
+    gUnknown_03000D10.active = TRUE;
+    gUnknown_03000D10.size = size;
+    gUnknown_03000D10.pos = 0;
+    if (size > 0x100)
+    {
+        gUnknown_03000D10.src = src;
+    }
+    else
+    {
+        if (src != gUnknown_020228C4)
+        {
+            memcpy(gUnknown_020228C4, src, size);
+        }
+        gUnknown_03000D10.src = gUnknown_020228C4;
+    }
+    sub_8009D90(0xbbbb);
+    gUnknown_03003140 = sub_800A364;
+    gUnknown_03000D50 = 0;
+    return TRUE;
 }
