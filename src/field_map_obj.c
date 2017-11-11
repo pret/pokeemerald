@@ -1765,10 +1765,10 @@ void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat)
         switch (decorCat)
         {
             case DECORCAT_DOLL:
-                sub_808F228(&gMapObjects[mapObjectId], gUnknown_082766A2);
+                sub_808F228(&gMapObjects[mapObjectId], EventScript_2766A2);
                 break;
             case DECORCAT_CUSHION:
-                sub_808F228(&gMapObjects[mapObjectId], gUnknown_082766A6);
+                sub_808F228(&gMapObjects[mapObjectId], EventScript_2766A6);
                 break;
         }
     }

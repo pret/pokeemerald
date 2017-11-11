@@ -175,14 +175,14 @@ void sub_80E8B6C(void)
 {
     u16 i;
 
-    gSpecialVar_ScriptResult = FALSE;
+    gSpecialVar_Result = FALSE;
     for (i = 0; i < 20; i ++)
     {
         if (sCurSecretBaseId != gSaveBlock1Ptr->secretBases[i].secretBaseId)
         {
             continue;
         }
-        gSpecialVar_ScriptResult = TRUE;
+        gSpecialVar_Result = TRUE;
         VarSet(VAR_0x4054, i);
         break;
     }
@@ -192,11 +192,11 @@ void sub_80E8BC8(void)
 {
     if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0)
     {
-        gSpecialVar_ScriptResult = TRUE;
+        gSpecialVar_Result = TRUE;
     }
     else
     {
-        gSpecialVar_ScriptResult = FALSE;
+        gSpecialVar_Result = FALSE;
     }
 }
 
@@ -544,22 +544,22 @@ void sub_80E933C(void)
                 metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
                 if (MetatileBehavior_IsMB_B5(metatile) == TRUE || MetatileBehavior_IsMB_C3(metatile) == TRUE)
                 {
-                    gSpecialVar_ScriptResult = gMapHeader.events->mapObjects[objIdx].graphicsId + VAR_0x3F20;
-                    VarSet(gSpecialVar_ScriptResult, gDecorations[roomDecor[decorIdx]].tiles[0]);
-                    gSpecialVar_ScriptResult = gMapHeader.events->mapObjects[objIdx].localId;
+                    gSpecialVar_Result = gMapHeader.events->mapObjects[objIdx].graphicsId + VAR_0x3F20;
+                    VarSet(gSpecialVar_Result, gDecorations[roomDecor[decorIdx]].tiles[0]);
+                    gSpecialVar_Result = gMapHeader.events->mapObjects[objIdx].localId;
                     FlagClear(gSpecialVar_0x8004 + 0xAE);
-                    show_sprite(gSpecialVar_ScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-                    sub_808EBA8(gSpecialVar_ScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-                    sub_808F254(gSpecialVar_ScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+                    show_sprite(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+                    sub_808EBA8(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
+                    sub_808F254(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
                     if (CurrentMapIsSecretBase() == TRUE && VarGet(VAR_0x4054) != 0)
                     {
                         if (category == DECORCAT_DOLL)
                         {
-                            sub_808F28C(gSpecialVar_ScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, DECORCAT_DOLL);
+                            sub_808F28C(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, DECORCAT_DOLL);
                         }
                         else if (category == DECORCAT_CUSHION)
                         {
-                            sub_808F28C(gSpecialVar_ScriptResult, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, DECORCAT_CUSHION);
+                            sub_808F28C(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, DECORCAT_CUSHION);
                         }
                     }
                     gSpecialVar_0x8004 ++;
@@ -608,14 +608,14 @@ void sub_80E9668(struct Coords16 *coords, struct MapEvents *events)
 {
     sub_80E9608(coords, events);
     sub_80E8B6C();
-    ScriptContext1_SetupScript(gUnknown_08275BB7);
+    ScriptContext1_SetupScript(EventScript_275BB7);
 }
 
 bool8 sub_80E9680(void)
 {
     sub_80E8B58();
     sub_80E8B6C();
-    if (gSpecialVar_ScriptResult == TRUE)
+    if (gSpecialVar_Result == TRUE)
     {
         return FALSE;
     }
@@ -657,11 +657,11 @@ void sub_80E9744(void)
 {
     if (gSaveBlock1Ptr->secretBases[0].secretBaseId != sCurSecretBaseId)
     {
-        gSpecialVar_ScriptResult = TRUE;
+        gSpecialVar_Result = TRUE;
     }
     else
     {
-        gSpecialVar_ScriptResult = FALSE;
+        gSpecialVar_Result = FALSE;
     }
 }
 
@@ -1016,15 +1016,15 @@ void sub_80E9BDC(void)
 {
     if (sub_80E9878(VarGet(VAR_0x4054)) == TRUE)
     {
-        gSpecialVar_ScriptResult = 1;
+        gSpecialVar_Result = 1;
     }
     else if (sub_80E9BA8() > 9)
     {
-        gSpecialVar_ScriptResult = 2;
+        gSpecialVar_Result = 2;
     }
     else
     {
-        gSpecialVar_ScriptResult = 0;
+        gSpecialVar_Result = 0;
     }
 }
 
@@ -1289,41 +1289,41 @@ const u8 *sub_80EA250(void)
     param = sub_80EA20C(VarGet(VAR_0x4054));
     if (param == 0)
     {
-        return gUnknown_08274966;
+        return SecretBase_RedCave1_Text_274966;
     }
     if (param == 1)
     {
-        return gUnknown_08274D13;
+        return SecretBase_RedCave1_Text_274D13;
     }
     if (param == 2)
     {
-        return gUnknown_08274FFE;
+        return SecretBase_RedCave1_Text_274FFE;
     }
     if (param == 3)
     {
-        return gUnknown_08275367;
+        return SecretBase_RedCave1_Text_275367;
     }
     if (param == 4)
     {
-        return gUnknown_082756C7;
+        return SecretBase_RedCave1_Text_2756C7;
     }
     if (param == 5)
     {
-        return gUnknown_08274B24;
+        return SecretBase_RedCave1_Text_274B24;
     }
     if (param == 6)
     {
-        return gUnknown_08274E75;
+        return SecretBase_RedCave1_Text_274E75;
     }
     if (param == 7)
     {
-        return gUnknown_082751E1;
+        return SecretBase_RedCave1_Text_2751E1;
     }
     if (param == 8)
     {
-        return gUnknown_082754F6;
+        return SecretBase_RedCave1_Text_2754F6;
     }
-    return gUnknown_082758CC;
+    return SecretBase_RedCave1_Text_2758CC;
 }
 
 void sub_80EA2E4(void)
@@ -1335,7 +1335,7 @@ void sub_80EA2E4(void)
 
 void sub_80EA30C(void)
 {
-    gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gSpecialVar_ScriptResult;
+    gSaveBlock1Ptr->secretBases[VarGet(VAR_0x4054)].sbr_field_1_5 = gSpecialVar_Result;
 }
 
 void sub_80EA354(void)
@@ -1353,7 +1353,7 @@ void sub_80EA354(void)
         FlagSet(0x922);
     }
     gSpecialVar_0x8004 = sub_80EA20C(secretBaseRecordId);
-    gSpecialVar_ScriptResult = gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_5;
+    gSpecialVar_Result = gSaveBlock1Ptr->secretBases[secretBaseRecordId].sbr_field_1_5;
 }
 
 

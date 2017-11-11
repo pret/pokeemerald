@@ -425,7 +425,7 @@ sub_80D3A9C: @ 80D3A9C
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_08290705
+	ldr r0, =Route103_EventScript_290705
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0

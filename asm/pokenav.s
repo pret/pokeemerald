@@ -27683,7 +27683,7 @@ _081D4AF8:
 	movs r2, 0x80
 	orrs r1, r2
 	strb r1, [r0]
-	ldr r0, =gSpecialVar_ScriptFacing
+	ldr r0, =gSpecialVar_Facing
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _081D4B3A
@@ -29323,7 +29323,7 @@ _081D5854:
 sub_81D58D8: @ 81D58D8
 	push {lr}
 	bl sub_80008E8
-	ldr r3, =gSpecialVar_ScriptResult
+	ldr r3, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r3]
 	ldr r0, =gSaveBlock1Ptr
@@ -29381,7 +29381,7 @@ sub_81D5924: @ 81D5924
 	cmp r4, 0
 	beq _081D596C
 _081D5952:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 	strh r0, [r1]
 	b _081D59C0
@@ -29413,12 +29413,12 @@ _081D596C:
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1]
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r4, [r0]
 	b _081D59C0
 	.pool
 _081D59BC:
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r6, [r0]
 _081D59C0:
 	pop {r3}
@@ -29444,7 +29444,7 @@ sub_81D59D0: @ 81D59D0
 	lsrs r5, r0, 24
 	cmp r5, 0
 	beq _081D59FC
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r3, [r0]
 	b _081D5A4E
 	.pool
@@ -29473,12 +29473,12 @@ _081D59FC:
 	adds r2, r0
 	ldr r0, [r2]
 	str r0, [r1]
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r5, [r0]
 	b _081D5A4E
 	.pool
 _081D5A48:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _081D5A4E:
@@ -29556,7 +29556,7 @@ sub_81D5AD0: @ 81D5AD0
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	b _081D5B20
 	.pool
@@ -29569,12 +29569,12 @@ _081D5B00:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	b _081D5B20
 	.pool
 _081D5B1C:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 _081D5B20:
 	strh r0, [r1]
@@ -29653,12 +29653,12 @@ sub_81D5BBC: @ 81D5BBC
 	movs r2, 0
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	b _081D5BF0
 	.pool
 _081D5BEC:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 _081D5BF0:
 	strh r0, [r1]
@@ -29672,7 +29672,7 @@ _081D5BF0:
 sub_81D5C00: @ 81D5C00
 	push {lr}
 	bl sub_81D56B0
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	bl sub_81D5710
@@ -29721,12 +29721,12 @@ sub_81D5C5C: @ 81D5C5C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _081D5C74
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	b _081D5C7A
 	.pool
 _081D5C74:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _081D5C7A:
@@ -30022,7 +30022,7 @@ _081D5E64:
 	movs r1, 0xF
 	ands r0, r1
 	strh r0, [r5, 0xE]
-	ldr r0, =gUnknown_082C83F0
+	ldr r0, =EventScript_2C83F0
 	str r0, [r5, 0x10]
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -30487,7 +30487,7 @@ _081D62A2:
 
 	thumb_func_start sub_81D62AC
 sub_81D62AC: @ 81D62AC
-	ldr r0, =gUnknown_082C83F0
+	ldr r0, =EventScript_2C83F0
 	bx lr
 	.pool
 	thumb_func_end sub_81D62AC
@@ -30495,7 +30495,7 @@ sub_81D62AC: @ 81D62AC
 	thumb_func_start sub_81D62B4
 sub_81D62B4: @ 81D62B4
 	push {lr}
-	ldr r0, =gSpecialVar_ScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	ldrh r1, [r0]
 	movs r0, 0x5
 	bl sub_81D572C
@@ -30772,7 +30772,7 @@ _081D64D4:
 
 	thumb_func_start sub_81D64DC
 sub_81D64DC: @ 81D64DC
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000ef9
@@ -30825,7 +30825,7 @@ sub_81D6534: @ 81D6534
 	cmp r0, 0x6
 	beq _081D6560
 	bl sub_81D5C00
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _081D6560
@@ -30851,12 +30851,12 @@ sub_81D6568: @ 81D6568
 	ands r0, r1
 	cmp r0, 0
 	beq _081D6590
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	b _081D6594
 	.pool
 _081D6590:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 _081D6594:
 	strh r0, [r1]

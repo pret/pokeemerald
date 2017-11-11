@@ -1611,7 +1611,7 @@ void BattleMainCB2(void)
 
     if (gMain.heldKeys & B_BUTTON && gBattleTypeFlags & BATTLE_TYPE_RECORDED && sub_8186450())
     {
-        gSpecialVar_ScriptResult = gBattleOutcome = BATTLE_PLAYER_TELEPORTED;
+        gSpecialVar_Result = gBattleOutcome = BATTLE_PLAYER_TELEPORTED;
         ResetPaletteFadeControl();
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         SetMainCallback2(CB2_QuitRecordedBattle);
@@ -4750,7 +4750,7 @@ static void HandleEndTurn_BattleWon(void)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
     {
-        gSpecialVar_ScriptResult = gBattleOutcome;
+        gSpecialVar_Result = gBattleOutcome;
         gBattleTextBuff1[0] = gBattleOutcome;
         gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
         gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
@@ -5012,7 +5012,7 @@ static void ReturnFromBattleToOverworld(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK && gReceivedRemoteLinkPlayers != 0)
         return;
 
-    gSpecialVar_ScriptResult = gBattleOutcome;
+    gSpecialVar_Result = gBattleOutcome;
     gMain.inBattle = 0;
     gMain.callback1 = gPreBattleCallback1;
 

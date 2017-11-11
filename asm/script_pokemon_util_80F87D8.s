@@ -83,7 +83,7 @@ sub_80F8850: @ 80F8850
 	thumb_func_start sub_80F8864
 sub_80F8864: @ 80F8864
 	push {lr}
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080F88A4
@@ -157,7 +157,7 @@ sub_80F88E8: @ 80F88E8
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F8930
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	bne _080F8930
@@ -601,7 +601,7 @@ sub_80F8C7C: @ 80F8C7C
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080F8D18
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	bne _080F8D18
@@ -952,7 +952,7 @@ sub_80F8FA0: @ 80F8FA0
 	ands r0, r1
 	cmp r0, 0
 	bne _080F8FD8
-	ldr r4, =gSpecialVar_ScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
@@ -960,7 +960,7 @@ sub_80F8FA0: @ 80F8FA0
 	b _080F8FDE
 	.pool
 _080F8FD8:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x4
 	strh r0, [r1]
 _080F8FDE:
@@ -987,11 +987,11 @@ sub_80F8FE8: @ 80F8FE8
 	adds r0, r1
 	str r0, [r2]
 	lsrs r0, 16
-	ldr r4, =gSpecialVar_ScriptResult
+	ldr r4, =gSpecialVar_Result
 	b _080F902A
 	.pool
 _080F9020:
-	ldr r4, =gSpecialVar_ScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -1376,7 +1376,7 @@ _080F9310:
 	cmp r1, 0x2
 	bne _080F9318
 _080F9314:
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 _080F9318:
 	pop {r0}
@@ -1550,12 +1550,12 @@ sub_80F9460: @ 80F9460
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080F9478
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	b _080F947E
 	.pool
 _080F9478:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _080F947E:
@@ -1590,12 +1590,12 @@ sub_80F94B8: @ 80F94B8
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080F94D0
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	b _080F94D6
 	.pool
 _080F94D0:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _080F94D6:

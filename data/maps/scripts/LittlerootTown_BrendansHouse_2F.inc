@@ -51,7 +51,7 @@ LittlerootTown_BrendansHouse_2F_MapScript2_1F846A: @ 81F846A
 LittlerootTown_BrendansHouse_2F_EventScript_1F8474:: @ 81F8474
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 0
-	goto_eq gUnknown_08275D0C
+	goto_eq EventScript_275D0C
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8481:: @ 81F8481

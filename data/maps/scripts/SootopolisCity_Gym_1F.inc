@@ -105,7 +105,7 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 	msgbox SootopolisCity_Gym_1F_Text_2255BE, 4
 	setflag FLAG_0x4F7
 	setflag FLAG_BADGE08_GET
-	setflag TRAINERS_FLAG_NO
+	setflag FLAG_0x356
 	setflag FLAG_0x3CD
 	setflag FLAG_0x330
 	setvar VAR_0x405E, 6

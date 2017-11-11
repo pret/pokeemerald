@@ -52,7 +52,7 @@ LittlerootTown_MaysHouse_2F_MapScript2_1F931D: @ 81F931D
 LittlerootTown_MaysHouse_2F_EventScript_1F9327:: @ 81F9327
 	checkplayergender
 	compare_var_to_value VAR_RESULT, 1
-	goto_eq gUnknown_08275D0C
+	goto_eq EventScript_275D0C
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_1F9334:: @ 81F9334

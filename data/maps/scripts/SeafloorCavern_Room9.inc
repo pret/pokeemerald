@@ -123,7 +123,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	clearflag FLAG_0x3CD
 	clearflag FLAG_0x33A
 	clearflag FLAG_0x33B
-	clearflag TRAINERS_FLAG_NO
+	clearflag FLAG_0x356
 	clearflag FLAG_0x3E6
 	clearflag FLAG_0x3E5
 	setflag FLAG_0x347

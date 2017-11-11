@@ -3585,7 +3585,7 @@ _081C5C5C:
 _081C5C88:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	strh r4, [r0]
 	adds r0, r5, 0
 	bl sub_81C5B14
@@ -3594,7 +3594,7 @@ _081C5C88:
 _081C5CA0:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r2, =gScriptItemId
+	ldr r2, =gSpecialVar_ItemId
 	mov r12, r2
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
@@ -3681,7 +3681,7 @@ sub_81C5D20: @ 81C5D20
 	b _081C5DD8
 	.pool
 _081C5D74:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl ItemId_GetBattleUsage
 	lsls r0, 24
@@ -3722,7 +3722,7 @@ _081C5DCE:
 _081C5DD8:
 	strb r0, [r1]
 _081C5DDA:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4195,7 +4195,7 @@ sub_81C61E0: @ 81C61E0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl ItemId_GetPocket
 	lsls r0, 24
@@ -4315,7 +4315,7 @@ sub_81C62C4: @ 81C62C4
 	b _081C6334
 	.pool
 _081C62F4:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4362,7 +4362,7 @@ sub_81C6350: @ 81C6350
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4577,7 +4577,7 @@ sub_81C654C: @ 81C654C
 	lsls r4, 3
 	ldr r5, =gTasks + 0x8
 	adds r6, r4, r5
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4635,7 +4635,7 @@ sub_81C65CC: @ 81C65CC
 	beq _081C662E
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r4, 0x10]
 	bl RemovePyramidBagItem
@@ -4671,7 +4671,7 @@ sub_81C6648: @ 81C6648
 	lsrs r4, r0, 24
 	adds r6, r4, 0
 	bl sub_81C61A8
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	bl itemid_is_mail
 	lsls r0, 24
@@ -4713,7 +4713,7 @@ sub_81C66AC: @ 81C66AC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4785,7 +4785,7 @@ sub_81C674C: @ 81C674C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	bl itemid_80BF6D8_mail_related
 	lsls r0, 24
@@ -4820,7 +4820,7 @@ sub_81C679C: @ 81C679C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl ItemId_GetBattleFunc
 	cmp r0, 0
@@ -5238,7 +5238,7 @@ _081C6AF8:
 	bl Free
 	adds r0, r5, 0
 	bl Free
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	b _081C6BC6
@@ -5266,7 +5266,7 @@ _081C6B9C:
 	lsrs r6, r0, 24
 	cmp r6, 0x2
 	bls _081C6B9C
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r7, 0

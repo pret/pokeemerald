@@ -165,11 +165,11 @@ bool8 HasAtLeastOneBerry(void)
     {
         if (CheckBagHasItem(i, 1) == TRUE)
         {
-            gSpecialVar_ScriptResult = 1;
+            gSpecialVar_Result = 1;
             return TRUE;
         }
     }
-    gSpecialVar_ScriptResult = 0;
+    gSpecialVar_Result = 0;
     return FALSE;
 }
 

@@ -929,7 +929,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F2B7:: @ 823F2B7
 
 BattleFrontier_BattleTowerLobby_EventScript_23F2C5:: @ 823F2C5
 	setvar VAR_0x8004, 9
-	message gUnknown_08278091
+	message OldaleTown_PokemonCenter_2F_Text_278091
 	waitmessage
 	setvar VAR_0x8005, 0
 	special sub_80B2DA4

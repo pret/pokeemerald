@@ -20,10 +20,10 @@ struct PokeblockFeeder
 extern u8 gBattleOutcome;
 extern void* gFieldCallback;
 
-extern u8 gUnknown_082A4B8A[];
-extern u8 gUnknown_082A4B6F[];
-extern u8 gUnknown_082A4B4C[];
-extern u8 gUnknown_082A4B9B[];
+extern u8 EventScript_2A4B8A[];
+extern u8 EventScript_2A4B6F[];
+extern u8 EventScript_2A4B4C[];
+extern u8 EventScript_2A4B9B[];
 extern const u8* const gPokeblockNames[];
 
 extern void sub_80EE44C(u8, u8);
@@ -94,7 +94,7 @@ bool8 SafariZoneTakeStep(void)
     sSafariZoneStepCounter--;
     if (sSafariZoneStepCounter == 0)
     {
-        ScriptContext1_SetupScript(gUnknown_082A4B8A);
+        ScriptContext1_SetupScript(EventScript_2A4B8A);
         return TRUE;
     }
     return FALSE;
@@ -102,7 +102,7 @@ bool8 SafariZoneTakeStep(void)
 
 void SafariZoneRetirePrompt(void)
 {
-    ScriptContext1_SetupScript(gUnknown_082A4B6F);
+    ScriptContext1_SetupScript(EventScript_2A4B6F);
 }
 
 void sub_80FC190(void)
@@ -116,14 +116,14 @@ void sub_80FC190(void)
     }
     else if (gBattleOutcome == BATTLE_SAFARI_OUT_OF_BALLS)
     {
-        ScriptContext2_RunNewScript(gUnknown_082A4B4C);
+        ScriptContext2_RunNewScript(EventScript_2A4B4C);
         warp_in();
         gFieldCallback = sub_80AF6F0;
         SetMainCallback2(c2_load_new_map);
     }
     else if (gBattleOutcome == BATTLE_CAUGHT)
     {
-        ScriptContext1_SetupScript(gUnknown_082A4B9B);
+        ScriptContext1_SetupScript(EventScript_2A4B9B);
         ScriptContext1_Stop();
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
     }
@@ -152,13 +152,13 @@ void GetPokeblockFeederInFront(void)
          && sPokeblockFeeders[i].x == x
          && sPokeblockFeeders[i].y == y)
         {
-            gSpecialVar_ScriptResult = i;
+            gSpecialVar_Result = i;
             StringCopy(gStringVar1, gPokeblockNames[sPokeblockFeeders[i].pokeblock.color]);
             return;
         }
     }
 
-    gSpecialVar_ScriptResult = -1;
+    gSpecialVar_Result = -1;
 }
 
 void GetPokeblockFeederWithinRange(void)
@@ -181,13 +181,13 @@ void GetPokeblockFeederWithinRange(void)
                 y *= -1;
             if ((x + y) <= 5)
             {
-                gSpecialVar_ScriptResult = i;
+                gSpecialVar_Result = i;
                 return;
             }
         }
     }
 
-    gSpecialVar_ScriptResult = -1;
+    gSpecialVar_Result = -1;
 }
 
 // unused
@@ -195,20 +195,20 @@ struct Pokeblock *SafariZoneGetPokeblockInFront(void)
 {
     GetPokeblockFeederInFront();
 
-    if (gSpecialVar_ScriptResult == 0xFFFF)
+    if (gSpecialVar_Result == 0xFFFF)
         return NULL;
     else
-        return &sPokeblockFeeders[gSpecialVar_ScriptResult].pokeblock;
+        return &sPokeblockFeeders[gSpecialVar_Result].pokeblock;
 }
 
 struct Pokeblock *SafariZoneGetActivePokeblock(void)
 {
     GetPokeblockFeederWithinRange();
 
-    if (gSpecialVar_ScriptResult == 0xFFFF)
+    if (gSpecialVar_Result == 0xFFFF)
         return NULL;
     else
-        return &sPokeblockFeeders[gSpecialVar_ScriptResult].pokeblock;
+        return &sPokeblockFeeders[gSpecialVar_Result].pokeblock;
 }
 
 void SafariZoneActivatePokeblockFeeder(u8 pkblId)
@@ -255,13 +255,13 @@ bool8 GetInFrontFeederPokeblockAndSteps(void)
 {
     GetPokeblockFeederInFront();
 
-    if (gSpecialVar_ScriptResult == 0xFFFF)
+    if (gSpecialVar_Result == 0xFFFF)
     {
         return FALSE;
     }
 
     ConvertIntToDecimalStringN(gStringVar2,
-        sPokeblockFeeders[gSpecialVar_ScriptResult].stepCounter,
+        sPokeblockFeeders[gSpecialVar_Result].stepCounter,
         STR_CONV_MODE_LEADING_ZEROS, 3);
 
     return TRUE;

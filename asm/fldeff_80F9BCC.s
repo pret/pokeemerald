@@ -563,7 +563,7 @@ _080F9FFE:
 sub_80FA004: @ 80FA004
 	push {r4,lr}
 	bl sub_80E8BC8
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080FA0AE
@@ -647,7 +647,7 @@ sub_80FA0DC: @ 80FA0DC
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_08275A86
+	ldr r0, =EventScript_275A86
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -782,7 +782,7 @@ sub_80FA1E8: @ 80FA1E8
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_08275ADF
+	ldr r0, =EventScript_275ADF
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -955,7 +955,7 @@ sub_80FA34C: @ 80FA34C
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_08275B38
+	ldr r0, =EventScript_275B38
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -2063,7 +2063,7 @@ _080FACC2:
 	ldr r0, =gStringVar2
 	ldr r1, =gText_Gold
 	bl StringCopy
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =0x00004054
@@ -2087,7 +2087,7 @@ _080FAD14:
 	ldr r0, =gStringVar2
 	ldr r1, =gText_Silver
 	bl StringCopy
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =0x00004054
@@ -2103,12 +2103,12 @@ _080FAD14:
 	b _080FAD8A
 	.pool
 _080FAD60:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	b _080FAD70
 	.pool
 _080FAD6C:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 _080FAD70:
 	strh r0, [r1]
@@ -2131,7 +2131,7 @@ _080FAD8A:
 	b _080FADCE
 	.pool
 _080FADA4:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x3
 	strh r0, [r1]
 	ldr r0, =0x00004054

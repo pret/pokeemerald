@@ -1628,12 +1628,12 @@ rock_smash_wild_pokemon_encounter: @ 80B550C
 	bne _080B5568
 	bl sub_80B0698
 _080B5554:
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r4, [r0]
 	b _080B556E
 	.pool
 _080B5568:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 _080B556E:
@@ -2026,7 +2026,7 @@ sub_80B5870: @ 80B5870
 	bl VarSet
 	cmp r4, 0
 	bne _080B58C4
-	ldr r0, =gUnknown_082A4B2A
+	ldr r0, =EventScript_2A4B2A
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _080B58C6

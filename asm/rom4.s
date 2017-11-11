@@ -8,7 +8,7 @@
 	thumb_func_start sub_8084620
 sub_8084620: @ 8084620
 	push {r4,lr}
-	ldr r0, =gUnknown_08271857
+	ldr r0, =EverGrandeCity_HallOfFame_EventScript_271857
 	bl ScriptContext2_RunNewScript
 	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
@@ -64,7 +64,7 @@ sub_808469C: @ 808469C
 	bl FlagClear
 	ldr r0, =0x00000888
 	bl FlagClear
-	ldr r0, =gUnknown_08271862
+	ldr r0, =EverGrandeCity_HallOfFame_EventScript_271862
 	bl ScriptContext2_RunNewScript
 	pop {r0}
 	bx r0

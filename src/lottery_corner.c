@@ -42,7 +42,7 @@ void SetRandomLotteryNumber(u16 i)
 void RetrieveLotteryNumber(void)
 {
     u16 lottoNumber = GetLotteryNumber();
-    gSpecialVar_ScriptResult = lottoNumber;
+    gSpecialVar_Result = lottoNumber;
 }
 
 void PickLotteryCornerTicket(void)
@@ -66,7 +66,7 @@ void PickLotteryCornerTicket(void)
             if (!GetMonData(pkmn, MON_DATA_IS_EGG))
             {
                 u32 otId = GetMonData(pkmn, MON_DATA_OT_ID);
-                u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_ScriptResult, otId);
+                u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
                 if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {
@@ -90,7 +90,7 @@ void PickLotteryCornerTicket(void)
             !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_IS_EGG))
             {
                 u32 otId = GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_OT_ID);
-                u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_ScriptResult, otId);
+                u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
                 if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {

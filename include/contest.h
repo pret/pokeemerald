@@ -12,8 +12,8 @@ struct ContestStruct_02039E00
 
 extern struct ContestStruct_02039E00 gUnknown_02039E00[4];
 extern u8 gUnknown_02039F24;
-extern u16 gScriptContestCategory;
-extern u8 gUnknown_02039F2E;
+extern u16 gSpecialVar_ContestCategory;
+extern u8 gSpecialVar_ContestRank;
 extern u8 gUnknown_02039F30;
 
 struct ContestStruct_field_18

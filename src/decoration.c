@@ -1600,7 +1600,7 @@ void sub_81289F0(u8 taskId)
     {
         sCurDecorMapX = gTasks[taskId].data[0] - 7;
         sCurDecorMapY = gTasks[taskId].data[1] - 7;
-        ScriptContext1_SetupScript(gUnknown_08275D1F);
+        ScriptContext1_SetupScript(EventScript_275D1F);
     }
     gSprites[sDecor_CameraSpriteObjectIdx1].pos1.y += 2;
     if (gMapHeader.regionMapSectionId == REGION_MAP_SECRET_BASE)
@@ -1700,7 +1700,7 @@ void sub_8128C64(u8 taskId)
             data[2] ++;
             break;
         case 1:
-            ScriptContext1_SetupScript(gUnknown_08275D0C);
+            ScriptContext1_SetupScript(EventScript_275D0C);
             data[2] ++;
             break;
         case 2:
@@ -2133,10 +2133,10 @@ void sub_8129708(void)
     u16 i;
 
     gSpecialVar_0x8005 = 0;
-    gSpecialVar_ScriptResult = 0;
+    gSpecialVar_Result = 0;
     if (gSpecialVar_0x8004 == sCurDecorSelectedInRearrangement)
     {
-        gSpecialVar_ScriptResult = 1;
+        gSpecialVar_Result = 1;
     }
     else if (gDecorations[gUnknown_0203A17C.items[sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx]].permission == DECORPERM_SOLID_MAT)
     {
@@ -2206,7 +2206,7 @@ void sub_81298EC(u8 taskId)
         case 1:
             if (!gPaletteFade.active) {
                 DrawWholeMapView();
-                ScriptContext1_SetupScript(gUnknown_08275D2E);
+                ScriptContext1_SetupScript(EventScript_275D2E);
                 sub_8197434(0, 1);
                 gTasks[taskId].data[2] = 2;
             }
@@ -2691,7 +2691,7 @@ void sub_812A2C4(u8 taskId)
             data[2] ++;
             break;
         case 1:
-            ScriptContext1_SetupScript(gUnknown_08275D0C);
+            ScriptContext1_SetupScript(EventScript_275D0C);
             data[2] ++;
             break;
         case 2:

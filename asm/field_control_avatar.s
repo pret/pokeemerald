@@ -184,7 +184,7 @@ sub_809C014: @ 809C014
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
-	ldr r0, =gSpecialVar_ScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gSelectedMapObject
@@ -443,13 +443,13 @@ _0809C214:
 	ldr r0, =gUnknown_0823B589
 	cmp r4, r0
 	beq _0809C244
-	ldr r0, =gUnknown_082766A2
+	ldr r0, =EventScript_2766A2
 	cmp r4, r0
 	beq _0809C244
-	ldr r0, =gUnknown_082766A6
+	ldr r0, =EventScript_2766A6
 	cmp r4, r0
 	beq _0809C244
-	ldr r0, =gUnknown_08271D92
+	ldr r0, =EventScript_271D92
 	cmp r4, r0
 	beq _0809C244
 	movs r0, 0x5
@@ -582,13 +582,13 @@ _0809C34C:
 	ble _0809C340
 	ldr r0, =gSelectedMapObject
 	strb r3, [r0]
-	ldr r1, =gSpecialVar_ScriptLastTalked
+	ldr r1, =gSpecialVar_LastTalked
 	adds r0, r2, r3
 	lsls r0, 2
 	adds r0, r5
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, =gSpecialVar_ScriptFacing
+	ldr r0, =gSpecialVar_Facing
 	strh r6, [r0]
 	adds r0, r3, 0
 	bl GetFieldObjectScriptPointerByFieldObjectId
@@ -668,13 +668,13 @@ _0809C400:
 _0809C40C:
 	ldr r0, =gSelectedMapObject
 	strb r4, [r0]
-	ldr r1, =gSpecialVar_ScriptLastTalked
+	ldr r1, =gSpecialVar_LastTalked
 	adds r0, r2, r4
 	lsls r0, 2
 	adds r0, r3
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, =gSpecialVar_ScriptFacing
+	ldr r0, =gSpecialVar_Facing
 	strh r7, [r0]
 	bl InTrainerHill
 	cmp r0, 0x1
@@ -687,7 +687,7 @@ _0809C43C:
 	bl GetFieldObjectScriptPointerByFieldObjectId
 _0809C442:
 	adds r1, r0, 0
-	ldr r0, =gSpecialVar_ScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	ldrb r0, [r0]
 	bl GetRamScript
 	adds r1, r0, 0
@@ -721,7 +721,7 @@ TryGetInvisibleMapObjectScript: @ 809C458
 	ldr r2, [r0, 0x8]
 	cmp r2, 0
 	bne _0809C490
-	ldr r0, =gUnknown_082C8436
+	ldr r0, =EventScript_2C8436
 	b _0809C532
 	.pool
 _0809C490:
@@ -778,7 +778,7 @@ _0809C4E2:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0809C4CC
-	ldr r0, =gUnknown_08271CB7
+	ldr r0, =EventScript_271CB7
 	b _0809C532
 	.pool
 _0809C510:
@@ -790,7 +790,7 @@ _0809C510:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C4CC
-	ldr r0, =gUnknown_082759F1
+	ldr r0, =EventScript_2759F1
 	b _0809C532
 	.pool
 _0809C530:
@@ -816,7 +816,7 @@ TryGetMetatileBehaviorScript: @ 809C538
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C55C
-	ldr r0, =gUnknown_0827EE0B
+	ldr r0, =EventScript_27EE0B
 	b _0809C7E4
 	.pool
 _0809C55C:
@@ -826,7 +826,7 @@ _0809C55C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C574
-	ldr r0, =gUnknown_08271D92
+	ldr r0, =EventScript_271D92
 	b _0809C7E4
 	.pool
 _0809C574:
@@ -864,7 +864,7 @@ _0809C5B4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C5CC
-	ldr r0, =gUnknown_082A4BAC
+	ldr r0, =EventScript_2A4BAC
 	b _0809C7E4
 	.pool
 _0809C5CC:
@@ -884,7 +884,7 @@ _0809C5E4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C5FC
-	ldr r0, =gUnknown_0827208F
+	ldr r0, =EventScript_27208F
 	b _0809C7E4
 	.pool
 _0809C5FC:
@@ -894,7 +894,7 @@ _0809C5FC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C614
-	ldr r0, =gUnknown_08292DE5
+	ldr r0, =EventScript_292DE5
 	b _0809C7E4
 	.pool
 _0809C614:
@@ -904,7 +904,7 @@ _0809C614:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C62C
-	ldr r0, =gUnknown_082725CE
+	ldr r0, =EventScript_2725CE
 	b _0809C7E4
 	.pool
 _0809C62C:
@@ -914,7 +914,7 @@ _0809C62C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C644
-	ldr r0, =gUnknown_082725D7
+	ldr r0, =EventScript_2725D7
 	b _0809C7E4
 	.pool
 _0809C644:
@@ -924,7 +924,7 @@ _0809C644:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C65C
-	ldr r0, =gUnknown_082725E0
+	ldr r0, =EventScript_2725E0
 	b _0809C7E4
 	.pool
 _0809C65C:
@@ -934,7 +934,7 @@ _0809C65C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C674
-	ldr r0, =gUnknown_082725E9
+	ldr r0, =EventScript_2725E9
 	b _0809C7E4
 	.pool
 _0809C674:
@@ -944,7 +944,7 @@ _0809C674:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C68C
-	ldr r0, =gUnknown_082725F2
+	ldr r0, =EventScript_2725F2
 	b _0809C7E4
 	.pool
 _0809C68C:
@@ -954,7 +954,7 @@ _0809C68C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C6A4
-	ldr r0, =gUnknown_082725FB
+	ldr r0, =EventScript_2725FB
 	b _0809C7E4
 	.pool
 _0809C6A4:
@@ -964,7 +964,7 @@ _0809C6A4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C6BC
-	ldr r0, =gUnknown_08272604
+	ldr r0, =EventScript_272604
 	b _0809C7E4
 	.pool
 _0809C6BC:
@@ -975,7 +975,7 @@ _0809C6BC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C6D4
-	ldr r0, =gUnknown_08277B8A
+	ldr r0, =OldaleTown_PokemonCenter_2F_EventScript_277B8A
 	b _0809C7E4
 	.pool
 _0809C6D4:
@@ -997,7 +997,7 @@ _0809C6EC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C704
-	ldr r0, =gUnknown_0827381B
+	ldr r0, =EventScript_27381B
 	b _0809C7E4
 	.pool
 _0809C704:
@@ -1007,7 +1007,7 @@ _0809C704:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C71C
-	ldr r0, =gUnknown_082C8393
+	ldr r0, =TrainerHill_1F_EventScript_2C8393
 	b _0809C7E4
 	.pool
 _0809C71C:
@@ -1125,7 +1125,7 @@ TryGetFieldMoveScript: @ 809C7EC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C824
-	ldr r0, =gUnknown_08271EA0
+	ldr r0, =EventScript_271EA0
 	b _0809C862
 	.pool
 _0809C824:
@@ -1146,11 +1146,11 @@ _0809C824:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C858
-	ldr r0, =gUnknown_08290A49
+	ldr r0, =EventScript_290A49
 	b _0809C862
 	.pool
 _0809C858:
-	ldr r0, =gUnknown_08290A83
+	ldr r0, =EventScript_290A83
 	b _0809C862
 	.pool
 _0809C860:
@@ -1174,7 +1174,7 @@ sub_809C868: @ 809C868
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _0809C894
-	ldr r0, =gUnknown_08290B0F
+	ldr r0, =EventScript_290B0F
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0809C896
@@ -1203,7 +1203,7 @@ sub_809C89C: @ 809C89C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809C8D4
-	ldr r0, =gUnknown_08290B5A
+	ldr r0, =EventScript_290B5A
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0809C8D6
@@ -1385,7 +1385,7 @@ _0809CA04:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809CA48
-	ldr r0, =gUnknown_082736BC
+	ldr r0, =EventScript_2736BC
 	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
@@ -1396,7 +1396,7 @@ _0809CA48:
 	beq _0809CA64
 	movs r0, 0xD
 	bl IncrementGameStat
-	ldr r0, =gUnknown_08291FC0
+	ldr r0, =Route117_PokemonDayCare_EventScript_291FC0
 	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool

@@ -136,7 +136,7 @@ _0818EAC8:
 	.4byte _0818ECD0
 	.4byte _0818ECF4
 _0818EAF0:
-	ldr r3, =gSpecialVar_ScriptResult
+	ldr r3, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	lsls r1, r5, 1
@@ -150,7 +150,7 @@ _0818EAF0:
 	b _0818ED10
 	.pool
 _0818EB14:
-	ldr r4, =gSpecialVar_ScriptResult
+	ldr r4, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldr r3, =0x00000cdc
@@ -170,7 +170,7 @@ _0818EB14:
 	b _0818ED10
 	.pool
 _0818EB48:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -180,7 +180,7 @@ _0818EB48:
 	b _0818ECBE
 	.pool
 _0818EB64:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -190,7 +190,7 @@ _0818EB64:
 	b _0818ECBE
 	.pool
 _0818EB80:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -198,7 +198,7 @@ _0818EB80:
 	b _0818ECBA
 	.pool
 _0818EB98:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -216,7 +216,7 @@ _0818EBB4:
 	bne _0818EC04
 	cmp r5, 0
 	beq _0818EBE8
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -226,7 +226,7 @@ _0818EBB4:
 	b _0818ECBE
 	.pool
 _0818EBE8:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -238,7 +238,7 @@ _0818EBE8:
 _0818EC04:
 	cmp r5, 0
 	beq _0818EC24
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -248,7 +248,7 @@ _0818EC04:
 	b _0818ECBE
 	.pool
 _0818EC24:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -266,7 +266,7 @@ _0818EC40:
 	bne _0818EC90
 	cmp r5, 0
 	beq _0818EC74
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -277,7 +277,7 @@ _0818EC40:
 	b _0818ED10
 	.pool
 _0818EC74:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -289,7 +289,7 @@ _0818EC74:
 _0818EC90:
 	cmp r5, 0
 	beq _0818ECB0
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000d08
@@ -299,7 +299,7 @@ _0818EC90:
 	b _0818ECBE
 	.pool
 _0818ECB0:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d08
@@ -328,7 +328,7 @@ _0818ECD0:
 	b _0818ED10
 	.pool
 _0818ECF4:
-	ldr r2, =gSpecialVar_ScriptResult
+	ldr r2, =gSpecialVar_Result
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r3, =0x00000d0a
@@ -11707,12 +11707,12 @@ sub_8194EC0: @ 8194EC0
 	bl sub_8195358
 	cmp r4, r0
 	ble _08194EE8
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	b _08194EEC
 	.pool
 _08194EE8:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 _08194EEC:
 	strh r0, [r1]
@@ -13130,7 +13130,7 @@ _08195A74:
 	beq _08195AB0
 	b _08195AD0
 _08195A7A:
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldr r1, [r5]
 	ldr r2, =0x00000dc6
 	adds r1, r2
@@ -13139,7 +13139,7 @@ _08195A7A:
 	b _08195AD0
 	.pool
 _08195A90:
-	ldr r3, =gSpecialVar_ScriptResult
+	ldr r3, =gSpecialVar_Result
 	ldr r0, [r5]
 	lsls r1, r7, 1
 	lsls r2, r6, 2
@@ -13152,7 +13152,7 @@ _08195A90:
 	b _08195AD0
 	.pool
 _08195AB0:
-	ldr r4, =gSpecialVar_ScriptResult
+	ldr r4, =gSpecialVar_Result
 	ldr r2, [r5]
 	ldr r0, =0x00000cdc
 	adds r2, r0
@@ -13285,7 +13285,7 @@ sub_8195BB0: @ 8195BB0
 	ldrh r0, [r2]
 	cmp r0, 0x31
 	bhi _08195C00
-	ldr r4, =gSpecialVar_ScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -13297,12 +13297,12 @@ sub_8195BB0: @ 8195BB0
 _08195C00:
 	cmp r0, 0x62
 	bhi _08195C10
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x3
 	b _08195C14
 	.pool
 _08195C10:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x4
 _08195C14:
 	strh r0, [r1]
@@ -13517,12 +13517,12 @@ sub_8195DB8: @ 8195DB8
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r5, [r0]
 	b _08195E06
 	.pool
 _08195E00:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 _08195E06:

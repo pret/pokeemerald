@@ -132,12 +132,12 @@ _08162094:
 	lsls r1, 24
 	lsrs r1, 24
 	bl sub_8164FCC
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	strh r0, [r1]
 	b _081620E8
 	.pool
 _081620A8:
-	ldr r4, =gSpecialVar_ScriptResult
+	ldr r4, =gSpecialVar_Result
 	ldr r2, [r5]
 	ldr r0, =0x00000cdc
 	adds r2, r0
@@ -294,7 +294,7 @@ _081621EE:
 	adds r0, 0x1
 	strh r0, [r1]
 	bl sub_8163E90
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, [r5]
 	adds r0, r4
 	ldrh r0, [r0]
@@ -4714,7 +4714,7 @@ sub_8164828: @ 8164828
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
-	ldr r0, =gSpecialVar_ScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	ldrh r0, [r0]
 	subs r5, r0, 0x2
 	ldr r0, =gSaveBlock2Ptr
@@ -5076,7 +5076,7 @@ sub_8164B74: @ 8164B74
 	adds r0, r2
 	ldrh r6, [r0]
 	bl GetMultiplayerId
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x6
 	bls _08164BAC
@@ -5126,7 +5126,7 @@ _08164C18:
 	mov r1, sp
 	movs r2, 0x4
 	bl SendBlock
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	b _08164DB4
 	.pool
@@ -5204,7 +5204,7 @@ _08164CB0:
 	mov r4, r8
 	cmp r4, 0xD
 	ble _08164C68
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 	b _08164DB4
 	.pool
@@ -5222,7 +5222,7 @@ _08164CE0:
 	adds r1, r3
 	movs r2, 0x28
 	bl SendBlock
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x3
 	b _08164DB4
 	.pool
@@ -5268,13 +5268,13 @@ _08164D14:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08164DB0
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x4
 	b _08164DB4
 	.pool
 _08164D98:
 	bl sub_800AC34
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x5
 	b _08164DB4
 	.pool
@@ -5284,7 +5284,7 @@ _08164DA8:
 	cmp r0, 0
 	bne _08164DB6
 _08164DB0:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x6
 _08164DB4:
 	strh r0, [r1]
@@ -5625,7 +5625,7 @@ sub_816502C: @ 816502C
 	movs r0, 0x45
 	mov r10, r0
 _0816506A:
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	mov r9, r1
 	movs r0, 0
 	strh r0, [r1]
@@ -5681,7 +5681,7 @@ _081650D4:
 	cmp r6, r8
 	blt _0816508C
 _081650DC:
-	ldr r0, =gSpecialVar_ScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08165132
@@ -5901,7 +5901,7 @@ _08165294:
 	thumb_func_start sub_81652B4
 sub_81652B4: @ 81652B4
 	push {r4-r6,lr}
-	ldr r2, =gSpecialVar_ScriptResult
+	ldr r2, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r2]
 	ldr r1, =gSaveBlock2Ptr
@@ -5943,7 +5943,7 @@ _081652F2:
 	ldr r3, =0x00000bec
 	adds r0, r1, r3
 	bl sub_816534C
-	ldr r1, =gSpecialVar_ScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _08165316:

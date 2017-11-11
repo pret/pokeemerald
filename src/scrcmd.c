@@ -69,9 +69,9 @@ extern u16 gSpecialVar_0x8001;
 extern u16 gSpecialVar_0x8002;
 extern u16 gSpecialVar_0x8004;
 
-extern u16 gSpecialVar_ScriptResult;
+extern u16 gSpecialVar_Result;
 
-extern u16 gScriptContestCategory;
+extern u16 gSpecialVar_ContestCategory;
 
 IWRAM_DATA u8 gUnknown_03000F30;
 
@@ -491,7 +491,7 @@ bool8 ScrCmd_random(struct ScriptContext *ctx)
 {
     u16 max = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = Random() % max;
+    gSpecialVar_Result = Random() % max;
     return FALSE;
 }
 
@@ -500,7 +500,7 @@ bool8 ScrCmd_giveitem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = AddBagItem(itemId, (u8)quantity);
+    gSpecialVar_Result = AddBagItem(itemId, (u8)quantity);
     return FALSE;
 }
 
@@ -509,7 +509,7 @@ bool8 ScrCmd_takeitem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = RemoveBagItem(itemId, (u8)quantity);
+    gSpecialVar_Result = RemoveBagItem(itemId, (u8)quantity);
     return FALSE;
 }
 
@@ -518,7 +518,7 @@ bool8 ScrCmd_checkitemspace(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = CheckBagHasSpace(itemId, (u8)quantity);
+    gSpecialVar_Result = CheckBagHasSpace(itemId, (u8)quantity);
     return FALSE;
 }
 
@@ -527,7 +527,7 @@ bool8 ScrCmd_checkitem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = CheckBagHasItem(itemId, (u8)quantity);
+    gSpecialVar_Result = CheckBagHasItem(itemId, (u8)quantity);
     return FALSE;
 }
 
@@ -535,7 +535,7 @@ bool8 ScrCmd_checkitemtype(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = GetPocketByItemId(itemId);
+    gSpecialVar_Result = GetPocketByItemId(itemId);
     return FALSE;
 }
 
@@ -544,7 +544,7 @@ bool8 ScrCmd_givepcitem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = AddPCItem(itemId, quantity);
+    gSpecialVar_Result = AddPCItem(itemId, quantity);
     return FALSE;
 }
 
@@ -553,7 +553,7 @@ bool8 ScrCmd_checkpcitem(struct ScriptContext *ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = CheckPCHasItem(itemId, quantity);
+    gSpecialVar_Result = CheckPCHasItem(itemId, quantity);
     return FALSE;
 }
 
@@ -561,7 +561,7 @@ bool8 ScrCmd_givedecoration(struct ScriptContext *ctx)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = DecorationAdd(decorId);
+    gSpecialVar_Result = DecorationAdd(decorId);
     return FALSE;
 }
 
@@ -569,7 +569,7 @@ bool8 ScrCmd_takedecoration(struct ScriptContext *ctx)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = DecorationRemove(decorId);
+    gSpecialVar_Result = DecorationRemove(decorId);
     return FALSE;
 }
 
@@ -577,7 +577,7 @@ bool8 ScrCmd_checkdecorspace(struct ScriptContext *ctx)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = DecorationCheckSpace(decorId);
+    gSpecialVar_Result = DecorationCheckSpace(decorId);
     return FALSE;
 }
 
@@ -585,7 +585,7 @@ bool8 ScrCmd_checkdecor(struct ScriptContext *ctx)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = CheckHasDecoration(decorId);
+    gSpecialVar_Result = CheckHasDecoration(decorId);
     return FALSE;
 }
 
@@ -909,7 +909,7 @@ bool8 ScrCmd_getplayerxy(struct ScriptContext *ctx)
 
 bool8 ScrCmd_getpartysize(struct ScriptContext *ctx)
 {
-    gSpecialVar_ScriptResult = CalculatePlayerPartyCount();
+    gSpecialVar_Result = CalculatePlayerPartyCount();
     return FALSE;
 }
 
@@ -1835,7 +1835,7 @@ bool8 ScrCmd_givemon(struct ScriptContext *ctx)
     u32 unkParam2 = ScriptReadWord(ctx);
     u8 unkParam3 = ScriptReadByte(ctx);
 
-    gSpecialVar_ScriptResult = ScriptGiveMon(species, level, item, unkParam1, unkParam2, unkParam3);
+    gSpecialVar_Result = ScriptGiveMon(species, level, item, unkParam1, unkParam2, unkParam3);
     return FALSE;
 }
 
@@ -1843,7 +1843,7 @@ bool8 ScrCmd_giveegg(struct ScriptContext *ctx)
 {
     u16 species = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = ScriptGiveEgg(species);
+    gSpecialVar_Result = ScriptGiveEgg(species);
     return FALSE;
 }
 
@@ -1862,7 +1862,7 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
     u8 i;
     u16 moveId = ScriptReadHalfword(ctx);
 
-    gSpecialVar_ScriptResult = 6;
+    gSpecialVar_Result = 6;
     for (i = 0; i < 6; i++)
     {
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
@@ -1871,7 +1871,7 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
         // UB: GetMonData() arguments don't match function definition
         if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && pokemon_has_move(&gPlayerParty[i], moveId) == TRUE)
         {
-            gSpecialVar_ScriptResult = i;
+            gSpecialVar_Result = i;
             gSpecialVar_0x8004 = species;
             break;
         }
@@ -1905,7 +1905,7 @@ bool8 ScrCmd_checkmoney(struct ScriptContext *ctx)
     u8 ignore = ScriptReadByte(ctx);
 
     if (!ignore)
-        gSpecialVar_ScriptResult = IsEnoughMoney(&gSaveBlock1Ptr->money, amount);
+        gSpecialVar_Result = IsEnoughMoney(&gSaveBlock1Ptr->money, amount);
     return FALSE;
 }
 
@@ -2085,7 +2085,7 @@ bool8 ScrCmd_getpricereduction(struct ScriptContext *ctx)
 {
     u16 value = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = GetPriceReduction(value);
+    gSpecialVar_Result = GetPriceReduction(value);
     return FALSE;
 }
 
@@ -2113,7 +2113,7 @@ bool8 ScrCmd_showcontestresults(struct ScriptContext *ctx)
 
 bool8 ScrCmd_contestlinktransfer(struct ScriptContext *ctx)
 {
-    sub_80F84C4(gScriptContestCategory);
+    sub_80F84C4(gSpecialVar_ContestCategory);
     ScriptContext1_Stop();
     return TRUE;
 }
@@ -2160,7 +2160,7 @@ bool8 ScrCmd_setrespawn(struct ScriptContext *ctx)
 
 bool8 ScrCmd_checkplayergender(struct ScriptContext *ctx)
 {
-    gSpecialVar_ScriptResult = gSaveBlock2Ptr->playerGender;
+    gSpecialVar_Result = gSaveBlock2Ptr->playerGender;
     return FALSE;
 }
 
@@ -2285,9 +2285,9 @@ bool8 ScrCmd_givecoins(struct ScriptContext *ctx)
     u16 coins = VarGet(ScriptReadHalfword(ctx));
 
     if (GiveCoins(coins) == TRUE)
-        gSpecialVar_ScriptResult = 0;
+        gSpecialVar_Result = 0;
     else
-        gSpecialVar_ScriptResult = 1;
+        gSpecialVar_Result = 1;
     return FALSE;
 }
 
@@ -2296,9 +2296,9 @@ bool8 ScrCmd_takecoins(struct ScriptContext *ctx)
     u16 coins = VarGet(ScriptReadHalfword(ctx));
 
     if (TakeCoins(coins) == TRUE)
-        gSpecialVar_ScriptResult = 0;
+        gSpecialVar_Result = 0;
     else
-        gSpecialVar_ScriptResult = 1;
+        gSpecialVar_Result = 1;
     return FALSE;
 }
 
@@ -2367,7 +2367,7 @@ bool8 ScrCmd_checkmonobedience(struct ScriptContext *ctx)
 {
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_ScriptResult = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OBEDIENCE, NULL);
+    gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OBEDIENCE, NULL);
     return FALSE;
 }
 

@@ -45,7 +45,7 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 extern u16 gPartnerTrainerId;
 extern struct SpriteTemplate gUnknown_0202499C;
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
-extern u16 gScriptItemId;
+extern u16 gSpecialVar_ItemId;
 extern u8 gUnknown_03005D7C[BATTLE_BANKS_COUNT];
 extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
 extern u8 gBattleOutcome;
@@ -314,7 +314,7 @@ static void CompleteOnChosenItem(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        EmitOneReturnValue(1, gScriptItemId);
+        EmitOneReturnValue(1, gSpecialVar_ItemId);
         WallyBufferExecCompleted();
     }
 }
