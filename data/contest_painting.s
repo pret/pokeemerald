@@ -46,7 +46,12 @@ gUnknown_085B02B0:: @ 85B02B0
 	.incbin "baserom.gba", 0x5b02b0, 0x524
 
 gUnknown_085B07D4:: @ 85B07D4
-	.incbin "baserom.gba", 0x5b07d4, 0x14
+@ replacing .incbin "baserom.gba", 0x005b07d4, 0x14
+.4byte 0x827ea1f
+.4byte 0x827ea2b
+.4byte 0x827ea36
+.4byte 0x827ea41
+.4byte 0x827ea4d
 
 gUnknown_085B07E8:: @ 85B07E8
 	.incbin "baserom.gba", 0x5b07e8, 0x4
@@ -55,10 +60,27 @@ gUnknown_085B07EC:: @ 85B07EC
 	.incbin "baserom.gba", 0x5b07ec, 0x8
 
 gUnknown_085B07F4:: @ 85B07F4
-	.incbin "baserom.gba", 0x5b07f4, 0x3c
+@ replacing .incbin "baserom.gba", 0x005b07f4, 0x3c
+.4byte 0x827ea7f
+.4byte 0x827eaa6
+.4byte 0x827eace
+.4byte 0x827eafa
+.4byte 0x827eb27
+.4byte 0x827eb47
+.4byte 0x827eb79
+.4byte 0x827eb91
+.4byte 0x827ebb2
+.4byte 0x827ebd7
+.4byte 0x827ec03
+.4byte 0x827ec28
+.4byte 0x827ec4e
+.4byte 0x827ec73
+.4byte 0x827ec9a
 
 gUnknown_085B0830:: @ 85B0830
-	.incbin "baserom.gba", 0x5b0830, 0x8
+@ replacing .incbin "baserom.gba", 0x005b0830, 0x8
+.4byte 0xc0003000, 0x00000000
 
 gUnknown_085B0838:: @ 85B0838
 	.incbin "baserom.gba", 0x5b0838, 0x4
+
