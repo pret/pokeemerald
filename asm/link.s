@@ -5,207 +5,10 @@
 
 	.text
 
-	thumb_func_start sub_800A44C
-sub_800A44C: @ 800A44C
-	ldr r0, =gUnknown_020223C0
-	ldr r0, [r0]
-	bx lr
-	.pool
-	thumb_func_end sub_800A44C
-
-	thumb_func_start sub_800A458
-sub_800A458: @ 800A458
-	push {lr}
-	ldr r0, =0x0000aaaa
-	bl sub_8009D90
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800A458
-
-	thumb_func_start GetMultiplayerId
-GetMultiplayerId: @ 800A468
-	push {lr}
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0800A484
-	ldr r0, =0x04000128
-	ldr r0, [r0]
-	lsls r0, 26
-	lsrs r0, 30
-	b _0800A48C
-	.pool
-_0800A484:
-	bl rfu_get_multiplayer_id
-	lsls r0, 24
-	lsrs r0, 24
-_0800A48C:
-	pop {r1}
-	bx r1
-	thumb_func_end GetMultiplayerId
-
-	thumb_func_start bitmask_all_link_players_but_self
-bitmask_all_link_players_but_self: @ 800A490
-	push {lr}
-	bl GetMultiplayerId
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	movs r0, 0x1
-	lsls r0, r1
-	movs r1, 0xF
-	eors r0, r1
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end bitmask_all_link_players_but_self
-
-	thumb_func_start SendBlock
-SendBlock: @ 800A4AC
-	push {lr}
-	adds r3, r1, 0
-	lsls r2, 16
-	lsrs r1, r2, 16
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0800A4C8
-	adds r0, r3, 0
-	bl sub_800A2F4
-	b _0800A4CE
-	.pool
-_0800A4C8:
-	adds r0, r3, 0
-	bl sub_800FE84
-_0800A4CE:
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end SendBlock
-
-	thumb_func_start sub_800A4D8
-sub_800A4D8: @ 800A4D8
-	push {lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	adds r2, r1, 0
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _0800A4F8
-	adds r0, r1, 0
-	bl sub_8010100
-	lsls r0, 24
-	lsrs r0, 24
-	b _0800A514
-	.pool
-_0800A4F8:
-	ldr r0, =gUnknown_03003140
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _0800A508
-	movs r0, 0
-	b _0800A514
-	.pool
-_0800A508:
-	ldr r0, =gUnknown_03003150
-	strb r2, [r0]
-	ldr r0, =0x0000cccc
-	bl sub_8009D90
-	movs r0, 0x1
-_0800A514:
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_800A4D8
-
-	thumb_func_start sub_800A520
-sub_800A520: @ 800A520
-	push {lr}
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _0800A538
-	bl sub_8010500
-	lsls r0, 24
-	lsrs r0, 24
-	b _0800A546
-	.pool
-_0800A538:
-	movs r1, 0
-	ldr r0, =gUnknown_03003140
-	ldr r0, [r0]
-	cmp r0, 0
-	bne _0800A544
-	movs r1, 0x1
-_0800A544:
-	adds r0, r1, 0
-_0800A546:
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_800A520
-
-	thumb_func_start GetBlockReceivedStatus
-GetBlockReceivedStatus: @ 800A550
-	push {lr}
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0800A57C
-	ldr r2, =gUnknown_0300307C
-	ldrb r0, [r2, 0x3]
-	lsls r0, 3
-	ldrb r1, [r2, 0x2]
-	lsls r1, 2
-	orrs r0, r1
-	ldrb r1, [r2, 0x1]
-	lsls r1, 1
-	orrs r0, r1
-	ldrb r1, [r2]
-	orrs r0, r1
-	b _0800A580
-	.pool
-_0800A57C:
-	bl sub_800FCD8
-_0800A580:
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end GetBlockReceivedStatus
-
-	thumb_func_start sub_800A588
-sub_800A588: @ 800A588
-	push {lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _0800A5A4
-	adds r0, r1, 0
-	bl sub_800F6FC
-	b _0800A5AC
-	.pool
-_0800A5A4:
-	ldr r0, =gUnknown_0300307C
-	adds r0, r1, r0
-	movs r1, 0x1
-	strb r1, [r0]
-_0800A5AC:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800A588
-
 	thumb_func_start ResetBlockReceivedFlags
 ResetBlockReceivedFlags: @ 800A5B4
 	push {r4,lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A5D4
@@ -240,7 +43,7 @@ ResetBlockReceivedFlag: @ 800A5EC
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A608
@@ -986,7 +789,7 @@ sub_800ABAC: @ 800ABAC
 	thumb_func_start sub_800ABBC
 sub_800ABBC: @ 800ABBC
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800ABDC
@@ -1019,7 +822,7 @@ sub_800ABF4: @ 800ABF4
 	push {lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AC0C
@@ -1046,7 +849,7 @@ _0800AC20:
 	thumb_func_start sub_800AC34
 sub_800AC34: @ 800AC34
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AC48
@@ -1144,7 +947,7 @@ _0800ACF4:
 	thumb_func_start sub_800AD10
 sub_800AD10: @ 800AD10
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AD24
@@ -1248,7 +1051,7 @@ _0800ADDA:
 	thumb_func_start sub_800ADF8
 sub_800ADF8: @ 800ADF8
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AE0C
@@ -1415,7 +1218,7 @@ c2_800ACD4: @ 800AF30
 	bl FillPalette
 	bl ResetTasks
 	bl remove_some_task
-	ldr r1, =gLinkVSyncDisabled
+	ldr r1, =gSerialIsRFU
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _0800AF8C
@@ -1669,7 +1472,7 @@ _0800B20C:
 	bl PlaySE
 	b _0800B260
 _0800B214:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _0800B244
@@ -1708,7 +1511,7 @@ _0800B260:
 	ldrb r1, [r1]
 	cmp r1, 0xA0
 	bne _0800B2D0
-	ldr r4, =gLinkVSyncDisabled
+	ldr r4, =gSerialIsRFU
 	ldrb r2, [r4]
 	cmp r2, 0x1
 	bne _0800B2A8
@@ -1910,7 +1713,7 @@ _0800B3F4:
 	thumb_func_start HandleLinkConnection
 HandleLinkConnection: @ 800B40C
 	push {r4,r5,lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B45C
@@ -1965,7 +1768,7 @@ sub_800B488: @ 800B488
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B498
-	ldr r1, =gLinkVSyncDisabled
+	ldr r1, =gSerialIsRFU
 	movs r0, 0x1
 	strb r0, [r1]
 _0800B498:
@@ -1981,7 +1784,7 @@ sub_800B4A4: @ 800B4A4
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0800B4B2
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	strb r1, [r0]
 _0800B4B2:
 	pop {r0}
@@ -1996,7 +1799,7 @@ sub_800B4C0: @ 800B4C0
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0800B4CE
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	strb r1, [r0]
 _0800B4CE:
 	pop {r0}
@@ -2007,7 +1810,7 @@ _0800B4CE:
 	thumb_func_start sub_800B4DC
 sub_800B4DC: @ 800B4DC
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B4FC
@@ -2041,7 +1844,7 @@ _0800B514:
 
 	thumb_func_start sub_800B518
 sub_800B518: @ 800B518
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	bx lr
 	.pool

@@ -1712,7 +1712,7 @@ _080A05AC:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080A0620

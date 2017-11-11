@@ -29,6 +29,8 @@
 #define MASTER_HANDSHAKE 0x8FFF
 #define SLAVE_HANDSHAKE  0xB9A0
 
+#define SIO_MULTI_CNT ((volatile struct SioMultiCnt *)REG_ADDR_SIOCNT)
+
 enum
 {
     LINK_STATE_START0,
@@ -142,7 +144,7 @@ extern u8 gShouldAdvanceLinkState;
 extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
-extern bool8 gLinkVSyncDisabled;
+extern bool8 gSerialIsRFU;
 
 void Task_DestroySelf(u8);
 void OpenLink(void);
@@ -162,7 +164,7 @@ void sub_8007E24(void);
 void sub_8007E4C(void);
 u8 GetMultiplayerId(void);
 u8 bitmask_all_link_players_but_self(void);
-bool8 SendBlock(u8, void *, u16);
+bool8 SendBlock(u8, const void *, u16);
 u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);
 void ResetBlockReceivedFlag(u8);
@@ -183,7 +185,6 @@ u8 GetLinkPlayerCount(void);
 
 void sub_800E0E8(void);
 bool8 sub_800A520(void);
-bool8 sub_8010500(void);
 void sub_800DFB4(u8, u8);
 void sub_800ADF8(void);
 void sub_800B488(void);
@@ -215,7 +216,7 @@ extern u8 gUnknown_030030EC[4];
 extern u8 gUnknown_030030F0[4];
 extern u16 gUnknown_030030F4;
 extern u8 gUnknown_030030F8;
-extern bool8 gLinkVSyncDisabled;
+extern bool8 gSerialIsRFU;
 extern bool8 gUnknown_03003100;
 extern u16 gUnknown_03003110[8];
 extern u8 gUnknown_03003120;

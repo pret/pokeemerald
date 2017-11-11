@@ -59,7 +59,7 @@ void HandleLinkBattleSetup(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        if (gLinkVSyncDisabled)
+        if (gSerialIsRFU)
             sub_800B488();
         if (!gReceivedRemoteLinkPlayers)
             sub_8009734();
@@ -780,7 +780,7 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
             gTasks[taskId].data[11]++;
         break;
     case 2:
-        if (gLinkVSyncDisabled)
+        if (gSerialIsRFU)
         {
             gTasks[taskId].data[11]++;
         }

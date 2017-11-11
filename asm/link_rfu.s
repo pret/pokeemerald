@@ -4737,7 +4737,7 @@ sub_800E3A8: @ 800E3A8
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x20
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800E3BE
@@ -9820,7 +9820,7 @@ sub_8010DB4: @ 8010DB4
 	cmp r0, 0
 	beq _08010DE4
 _08010DDE:
-	ldr r1, =gLinkVSyncDisabled
+	ldr r1, =gSerialIsRFU
 	movs r0, 0x2
 	strb r0, [r1]
 _08010DE4:

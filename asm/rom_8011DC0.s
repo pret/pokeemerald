@@ -28592,7 +28592,7 @@ sub_8020C70: @ 8020C70
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08020C8E
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08020CAC

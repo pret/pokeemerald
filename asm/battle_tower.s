@@ -5264,7 +5264,7 @@ _08164D14:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08164DB0
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08164DB0
@@ -5302,7 +5302,7 @@ _08164DB6:
 	thumb_func_start sub_8164DCC
 sub_8164DCC: @ 8164DCC
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08164DDA

@@ -60,7 +60,7 @@ gUnknown_030030F4: @ 30030F4
 gUnknown_030030F8: @ 30030F8
 	.space 0x4
 
-gLinkVSyncDisabled: @ 30030FC
+gSerialIsRFU: @ 30030FC
 	.space 0x4
 
 gUnknown_03003100: @ 3003100

@@ -336,7 +336,7 @@ extern void ProcessDma3Requests(void);
 
 static void VBlankIntr(void)
 {
-    if (gLinkVSyncDisabled != FALSE)
+    if (gSerialIsRFU != FALSE)
         LinkVSync();
     else if (gUnknown_03002748 == FALSE)
         sub_800B9B8();

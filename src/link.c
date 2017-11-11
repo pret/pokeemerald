@@ -16,6 +16,7 @@
 #include "palette.h"
 #include "task.h"
 #include "trade.h"
+#include "link_rfu.h"
 #include "link.h"
 
 // Static type declarations
@@ -36,13 +37,6 @@ struct LinkTestBGInfo
     u32 dummy_8;
     u32 dummy_C;
 };
-
-struct SIOCnt {
-    u32 cnt0_0:4;
-    u32 cnt0_2:2;
-};
-
-#define REG_SIOCNT_STRUCT (*(volatile struct SIOCnt *)REG_ADDR_SIOCNT)
 
 // Static RAM declarations
 
@@ -88,7 +82,7 @@ u8 gUnknown_030030EC[MAX_LINK_PLAYERS];
 u8 gUnknown_030030F0[MAX_LINK_PLAYERS];
 u16 gUnknown_030030F4;
 u8 gUnknown_030030F8;
-bool8 gLinkVSyncDisabled;
+bool8 gSerialIsRFU;
 bool8 gUnknown_03003100;
 u16 gUnknown_03003110[8];
 u8 gUnknown_03003120;
@@ -136,16 +130,6 @@ void sub_800B4A4(void);
 void sub_800B524(struct LinkPlayer *linkPlayer);
 void sub_800B53C(void);
 void sub_800B594(void);
-
-// rfu
-u32 sub_800BEC0(void);
-void sub_800E700(void);
-void sub_800EDD4(void);
-bool32 sub_800F7E4(void);
-void sub_800F804(void);
-void sub_800F850(void);
-void Rfu_set_zero(void);
-u8 sub_80104F4(void);
 
 // .rodata
 
@@ -333,7 +317,7 @@ void sub_8009734(void)
 {
     int i;
 
-    if (!gLinkVSyncDisabled)
+    if (!gSerialIsRFU)
     {
         sub_800B628();
         sub_80096D0();
@@ -365,7 +349,7 @@ void sub_8009734(void)
 void sub_80097E8(void)
 {
     gReceivedRemoteLinkPlayers = FALSE;
-    if (gLinkVSyncDisabled)
+    if (gSerialIsRFU)
     {
         sub_800EDD4();
     }
@@ -467,7 +451,7 @@ u16 sub_80099E0(const u16 *src)
     gUnknown_03003084 = *src;
     if (gUnknown_030030E0 & 0x40)
     {
-        sub_8009AA0(REG_SIOCNT_STRUCT.cnt0_2);
+        sub_8009AA0(SIO_MULTI_CNT->id);
         if (gUnknown_03003140 != NULL)
         {
             gUnknown_03003140();
@@ -685,7 +669,7 @@ void sub_8009D90(u16 command)
 
 void sub_8009F18(void)
 {
-    if (gLinkVSyncDisabled)
+    if (gSerialIsRFU)
     {
         sub_800F804();
     }
@@ -694,7 +678,7 @@ void sub_8009F18(void)
 
 bool32 sub_8009F3C(void)
 {
-    if (gLinkVSyncDisabled)
+    if (gSerialIsRFU)
     {
         return sub_800F7E4();
     }
@@ -715,7 +699,7 @@ static void sub_8009F70(void)
 
 void sub_8009F8C(void)
 {
-    if (gLinkVSyncDisabled)
+    if (gSerialIsRFU)
     {
         Rfu_set_zero();
     }
@@ -727,7 +711,7 @@ void sub_8009F8C(void)
 
 void sub_8009FAC(void)
 {
-    if (gLinkVSyncDisabled)
+    if (gSerialIsRFU)
     {
         Rfu_set_zero();
     }
@@ -739,7 +723,7 @@ void sub_8009FAC(void)
 
 u8 GetLinkPlayerCount(void)
 {
-    if (gLinkVSyncDisabled)
+    if (gSerialIsRFU)
     {
         return sub_80104F4();
     }
@@ -997,12 +981,93 @@ void sub_800A3F8(void)
 void sub_800A418(void)
 {
     gUnknown_020223C0 = 0;
-    if (gLinkVSyncDisabled)
+    if (gSerialIsRFU)
     {
         sub_800F850();
     }
     else
     {
         gUnknown_03003140 = sub_800A3F8;
+    }
+}
+
+u32 sub_800A44C(void)
+{
+    return gUnknown_020223C0;
+}
+
+void sub_800A458(void)
+{
+    sub_8009D90(0xaaaa);
+}
+
+u8 GetMultiplayerId(void)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        return rfu_get_multiplayer_id();
+    }
+    return SIO_MULTI_CNT->id;
+}
+
+u8 bitmask_all_link_players_but_self(void)
+{
+    u8 mpId;
+
+    mpId = GetMultiplayerId();
+    return ((1 << MAX_LINK_PLAYERS) - 1) ^ (1 << mpId);
+}
+
+bool8 SendBlock(u8 unused, const void *src, u16 size)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        return sub_800FE84(src, size);
+    }
+    return sub_800A2F4(src, size);
+}
+
+bool8 sub_800A4D8(u8 a0)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        return sub_8010100(a0);
+    }
+    if (gUnknown_03003140 == NULL)
+    {
+        gUnknown_03003150 = a0;
+        sub_8009D90(0xcccc);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_800A520(void)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        return sub_8010500();
+    }
+    return gUnknown_03003140 == NULL;
+}
+
+u8 GetBlockReceivedStatus(void)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        return sub_800FCD8();
+    }
+    return (gUnknown_0300307C[3] << 3) | (gUnknown_0300307C[2] << 2) | (gUnknown_0300307C[1] << 1) | (gUnknown_0300307C[0] << 0);
+}
+
+void sub_800A588(u8 who)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        sub_800F6FC(who);
+    }
+    else
+    {
+        gUnknown_0300307C[who] = TRUE;
     }
 }

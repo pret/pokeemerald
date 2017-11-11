@@ -3395,7 +3395,7 @@ c2_8056854: @ 8086140
 	ldr r0, =c1_link_related
 	bl set_callback1
 	bl sub_8086C2C
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086174
@@ -3586,7 +3586,7 @@ sub_808631C: @ 808631C
 	bne _0808632E
 	bl sub_80097E8
 _0808632E:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086348
@@ -3768,7 +3768,7 @@ _080864DA:
 	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
 	b _08086506
 _080864E0:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086506
@@ -4056,7 +4056,7 @@ _08086766:
 	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
 	b _08086792
 _0808676C:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086792
@@ -4565,7 +4565,7 @@ _08086BCA:
 	thumb_func_start c1_link_related
 c1_link_related: @ 8086BD8
 	push {r4,lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086BF2
@@ -4631,7 +4631,7 @@ c1_link_related_func_set: @ 8086C50
 	thumb_func_start sub_8086C64
 sub_8086C64: @ 8086C64
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086C82
@@ -5029,7 +5029,7 @@ _08086FC0:
 	movs r0, 0x11
 	strh r0, [r1]
 _08086FC6:
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08086FFC
@@ -5926,7 +5926,7 @@ _08087666:
 	thumb_func_start sub_808766C
 sub_808766C: @ 808766C
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08087688
@@ -5946,7 +5946,7 @@ _0808768A:
 	thumb_func_start sub_8087690
 sub_8087690: @ 8087690
 	push {lr}
-	ldr r0, =gLinkVSyncDisabled
+	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080876B0
