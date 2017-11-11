@@ -122,7 +122,6 @@ bool32 sub_800A2F4(const void *src, size_t size);
 static void sub_800A364(void);
 static void sub_800A388(void);
 static void sub_800A3EC(void);
-void sub_800A418(void);
 void task00_link_test(u8 taskId);
 void sub_800A588(u8 who);
 u16 sub_800A648(u16 *src, u16 size);
@@ -135,11 +134,14 @@ void sub_800B4A4(void);
 void sub_800B524(struct LinkPlayer *linkPlayer);
 void sub_800B53C(void);
 void sub_800B594(void);
+
+// rfu
 u32 sub_800BEC0(void);
 void sub_800E700(void);
 void sub_800EDD4(void);
 bool32 sub_800F7E4(void);
 void sub_800F804(void);
+void sub_800F850(void);
 void Rfu_set_zero(void);
 u8 sub_80104F4(void);
 
@@ -966,4 +968,17 @@ void sub_800A3F8(void)
     GetMultiplayerId();
     sub_8009D90(0x4444);
     gUnknown_020223C0 ++;
+}
+
+void sub_800A418(void)
+{
+    gUnknown_020223C0 = 0;
+    if (gLinkVSyncDisabled)
+    {
+        sub_800F850();
+    }
+    else
+    {
+        gUnknown_03003140 = sub_800A3F8;
+    }
 }

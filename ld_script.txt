@@ -53,6 +53,8 @@ SECTIONS {
         src/string_util.o(.text);
         src/link.o(.text);
         asm/link.o(.text);
+        asm/link_rfu.o(.text);
+        asm/rom_8011DC0.o(.text);
         src/rtc.o(.text);
         asm/main_menu.o(.text);
         src/battle_controllers.o(.text);
@@ -330,6 +332,8 @@ SECTIONS {
         src/string_util.o(.rodata);
         src/link.o(.rodata);
         data/link.o(.rodata);
+        data/link_rfu.o(.rodata);
+        data/rom_8011DC0.o(.rodata);
         src/rtc.o(.rodata);
         data/main_menu.o(.rodata);
         data/battle_1.o(.rodata);
