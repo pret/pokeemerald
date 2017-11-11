@@ -84,7 +84,7 @@ _081789AC:
 	movs r0, 0x50
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =sub_8009404
+	ldr r0, =Task_DestroySelf
 	movs r1, 0
 	bl CreateTask
 	bl StopMapMusic
@@ -232,15 +232,15 @@ _08178B56:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00005501
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_8009734
+	bl OpenLink
 	b _08178E58
 	.pool
 _08178B80:
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r1, [r0]
 	movs r0, 0x20
 	ands r0, r1
@@ -327,7 +327,7 @@ _08178C38:
 _08178C42:
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_80097E8
+	bl CloseLink
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r4, r0
@@ -345,7 +345,7 @@ _08178C54:
 _08178C68:
 	movs r0, 0x2
 	movs r1, 0x2
-	bl sub_800A0C8
+	bl GetLinkPlayerDataExchangeStatusTimed
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -383,7 +383,7 @@ _08178CAC:
 	b _08178E34
 	.pool
 _08178CCC:
-	bl sub_80097E8
+	bl CloseLink
 _08178CD0:
 	ldr r4, =gStringVar4
 	adds r0, r4, 0
@@ -416,7 +416,7 @@ _08178D00:
 _08178D0E:
 	movs r0, 0x5
 	bl PlaySE
-	bl sub_80097E8
+	bl CloseLink
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r4, r2
@@ -560,7 +560,7 @@ _08178E48:
 	bne _08178E58
 	bl DoSoftReset
 _08178E58:
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -570,7 +570,7 @@ _08178E58:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08178E98
-	bl sub_80097E8
+	bl CloseLink
 	ldr r4, =gStringVar4
 	adds r0, r4, 0
 	movs r1, 0x1

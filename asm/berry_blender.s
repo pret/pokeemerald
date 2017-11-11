@@ -1021,7 +1021,7 @@ _0808003C:
 	.4byte _08080508
 _08080094:
 	bl sub_8080588
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00004422
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1193,7 +1193,7 @@ _080801F8:
 	ldr r1, =gScriptItemId
 	ldrh r1, [r1]
 	bl sub_807FE14
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, [r4]
 	adds r1, r5
 	movs r2, 0x10
@@ -2063,7 +2063,7 @@ _08080950:
 	bl sub_8080674
 	movs r4, 0
 	movs r6, 0
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	mov r12, r0
 	movs r7, 0x92
 	lsls r7, 1
@@ -2571,9 +2571,9 @@ _08080DAE:
 	thumb_func_start sub_8080DF8
 sub_8080DF8: @ 8080DF8
 	push {lr}
-	ldr r3, =gUnknown_03003110
+	ldr r3, =gSendCmd
 	movs r0, 0
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	movs r2, 0x3
 _08080E02:
 	strh r0, [r3]
@@ -2608,7 +2608,7 @@ sub_8080E20: @ 8080E20
 	ldrsh r1, [r2, r4]
 	cmp r0, r1
 	ble _08080E58
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	movs r4, 0xC
 	ldrsh r1, [r2, r4]
 	lsls r1, 4
@@ -2704,12 +2704,12 @@ _08080ED8:
 	bgt _08080F40
 	cmp r1, 0x4B
 	bls _08080F2C
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00004523
 	b _08080F30
 	.pool
 _08080F2C:
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00005432
 _08080F30:
 	strh r0, [r1, 0x14]
@@ -2728,7 +2728,7 @@ _08080F40:
 	lsrs r0, 24
 	cmp r0, 0x3B
 	bhi _08080F68
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00005432
 	b _08080F9E
 	.pool
@@ -2745,7 +2745,7 @@ _08080F6E:
 	lsrs r0, 24
 	cmp r0, 0x13
 	bhi _08080F8C
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00005432
 	b _08080F9E
 	.pool
@@ -2758,7 +2758,7 @@ _08080F90:
 	bl sub_8080E6C
 	b _08080FA0
 _08080F9A:
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00004523
 _08080F9E:
 	strh r0, [r1, 0x14]
@@ -2847,13 +2847,13 @@ sub_8080FD0: @ 8080FD0
 	bgt _08081088
 	cmp r2, 0x42
 	bls _08081078
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00004523
 	strh r0, [r1, 0x24]
 	b _080810B0
 	.pool
 _08081078:
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00005432
 	strh r0, [r1, 0x24]
 	b _080810B0
@@ -2861,7 +2861,7 @@ _08081078:
 _08081088:
 	cmp r2, 0x41
 	bls _08081092
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00004523
 	strh r0, [r1, 0x24]
 _08081092:
@@ -2871,7 +2871,7 @@ _08081092:
 	lsrs r0, 24
 	cmp r0, 0x18
 	bhi _080810A4
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00005432
 	strh r0, [r1, 0x24]
 _080810A4:
@@ -2889,7 +2889,7 @@ _080810B0:
 	b _080810EC
 	.pool
 _080810CC:
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	ldr r1, =0x00004523
 	strh r1, [r0, 0x24]
 	movs r0, 0x1
@@ -2972,13 +2972,13 @@ sub_80810F8: @ 80810F8
 	bgt _080811AC
 	cmp r2, 0x58
 	bls _0808119C
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00004523
 	strh r0, [r1, 0x34]
 	b _080811DE
 	.pool
 _0808119C:
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00005432
 	strh r0, [r1, 0x34]
 	b _080811DE
@@ -2986,7 +2986,7 @@ _0808119C:
 _080811AC:
 	cmp r2, 0x3C
 	bls _080811C0
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00004523
 	b _080811D0
 	.pool
@@ -2997,7 +2997,7 @@ _080811C0:
 	lsrs r0, 24
 	cmp r0, 0x4
 	bhi _080811D2
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r0, =0x00005432
 _080811D0:
 	strh r0, [r1, 0x34]
@@ -3016,7 +3016,7 @@ _080811DE:
 	b _08081218
 	.pool
 _080811F8:
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	ldr r1, =0x00004523
 	strh r1, [r0, 0x34]
 	movs r0, 0x1
@@ -3063,7 +3063,7 @@ sub_8081224: @ 8081224
 	ldrsh r0, [r2, r1]
 	cmp r0, 0
 	bne _0808127E
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	ldr r1, =0x00004523
 	strh r1, [r0, 0x14]
 	movs r0, 0x1
@@ -3370,9 +3370,9 @@ sub_80814F4: @ 80814F4
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0808153C
-	ldr r3, =gUnknown_03003110
+	ldr r3, =gSendCmd
 	ldrh r0, [r3, 0x4]
-	ldr r2, =gUnknown_03003090
+	ldr r2, =gRecvCmds
 	cmp r0, 0
 	beq _0808151C
 	movs r1, 0
@@ -3381,7 +3381,7 @@ sub_80814F4: @ 80814F4
 	strh r0, [r2]
 	strh r1, [r3, 0x4]
 _0808151C:
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	ldr r3, =0x00004444
 	adds r1, r2, 0
 	adds r1, 0x10
@@ -3409,7 +3409,7 @@ _0808153C:
 	blt _0808154C
 	b _080816F6
 _0808154C:
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	adds r2, r0, 0
 	adds r2, 0x20
 	str r2, [sp]
@@ -3605,7 +3605,7 @@ _080816F6:
 	cmp r7, r0
 	bge _08081722
 	movs r2, 0
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 _08081710:
 	strh r2, [r1]
 	strh r2, [r1, 0x4]
@@ -3711,19 +3711,19 @@ _080817BA:
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _08081810
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	ldr r0, =0x00004523
 	b _08081828
 	.pool
 _08081810:
 	cmp r0, 0x1
 	bne _08081824
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	ldr r0, =0x00005432
 	b _08081828
 	.pool
 _08081824:
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	ldr r0, =0x00002345
 _08081828:
 	strh r0, [r1, 0x4]
@@ -3804,7 +3804,7 @@ _080818B4:
 	lsls r5, 1
 	adds r1, r5
 	ldrh r1, [r1]
-	bl sub_800A994
+	bl SetLinkDebugValues
 	bl sub_80814F4
 	ldr r0, [r4]
 	adds r0, r5
@@ -4804,7 +4804,7 @@ _08082078:
 	lsls r0, 16
 	cmp r0, 0
 	bgt _080820C6
-	bl sub_8009F8C
+	bl ClearLinkCallback
 	ldr r2, [r4]
 	adds r1, r2, 0
 	adds r1, 0x4C
@@ -5176,7 +5176,7 @@ _0808239E:
 	b _0808249E
 	.pool
 _080823B0:
-	ldr r6, =gUnknown_03003110
+	ldr r6, =gSendCmd
 	adds r0, r6, 0
 	bl sub_8081F94
 	ldr r4, =gUnknown_020322A4
@@ -5972,7 +5972,7 @@ sub_8082AD4: @ 8082AD4
 	bne _08082AE0
 	b _08082CA4
 _08082AE0:
-	ldr r4, =gUnknown_03003090
+	ldr r4, =gRecvCmds
 	ldrh r0, [r4]
 	ldr r1, =0x00002fff
 	movs r2, 0xBC
@@ -6051,7 +6051,7 @@ _08082B8A:
 	b _08082BF4
 	.pool
 _08082B9C:
-	ldr r6, =gUnknown_03003090
+	ldr r6, =gRecvCmds
 	lsls r4, r5, 4
 	adds r0, r4, r6
 	ldrh r0, [r0]
@@ -6146,7 +6146,7 @@ _08082C4E:
 	cmp r0, r4
 	beq _08082C48
 _08082C6A:
-	ldr r4, =gUnknown_03003110
+	ldr r4, =gSendCmd
 	adds r0, r4, 0
 	bl sub_8081F94
 	bl GetLinkPlayerCount
@@ -6269,7 +6269,7 @@ _08082D3C:
 	ldrh r1, [r2]
 	adds r0, r1
 	strh r0, [r2]
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	movs r4, 0x8B
 	lsls r4, 1
 	adds r0, r3, r4
@@ -6284,7 +6284,7 @@ _08082D3C:
 	b _08082DEA
 	.pool
 _08082D90:
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8

@@ -80,12 +80,12 @@ const IntrFunc gIntrTableTemplate[] =
 static u16 gUnknown_03000000;
 
 u16 gKeyRepeatStartDelay;
-bool8 gUnknown_030022B4;
+bool8 gLinkTransferringData;
 struct Main gMain;
 u16 gKeyRepeatContinueDelay;
 bool8 gSoftResetDisabled;
 IntrFunc gIntrTable[INTR_COUNT];
-u8 gUnknown_03002748;
+u8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
 u8 gPcmDmaCounter;
 
@@ -129,7 +129,7 @@ void AgbMain()
     if (gFlashMemoryPresent != TRUE)
         SetMainCallback2(NULL);
 
-    gUnknown_030022B4 = FALSE;
+    gLinkTransferringData = FALSE;
     gUnknown_03000000 = 0xFC0;
 
     for (;;)
@@ -147,22 +147,22 @@ void AgbMain()
 
         if (sub_8087634() == 1)
         {
-            gUnknown_030022B4 = TRUE;
+            gLinkTransferringData = TRUE;
             UpdateLinkAndCallCallbacks();
-            gUnknown_030022B4 = FALSE;
+            gLinkTransferringData = FALSE;
         }
         else
         {
-            gUnknown_030022B4 = FALSE;
+            gLinkTransferringData = FALSE;
             UpdateLinkAndCallCallbacks();
 
             if (sub_80875C8() == 1)
             {
                 gMain.newKeys = 0;
                 ClearSpriteCopyRequests();
-                gUnknown_030022B4 = TRUE;
+                gLinkTransferringData = TRUE;
                 UpdateLinkAndCallCallbacks();
-                gUnknown_030022B4 = FALSE;
+                gLinkTransferringData = FALSE;
             }
         }
 
@@ -338,7 +338,7 @@ static void VBlankIntr(void)
 {
     if (gSerialIsRFU != FALSE)
         LinkVSync();
-    else if (gUnknown_03002748 == FALSE)
+    else if (gLinkVSyncDisabled == FALSE)
         sub_800B9B8();
 
     gMain.vblankCounter1++;

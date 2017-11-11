@@ -59,6 +59,9 @@ enum
     EXCHANGE_COMPLETE,
     EXCHANGE_TIMED_OUT,
     EXCHANGE_IN_PROGRESS,
+    EXCHANGE_STAT_4,
+    EXCHANGE_STAT_5,
+    EXCHANGE_STAT_6
 };
 
 enum
@@ -146,8 +149,8 @@ struct BlockRequest
 extern const struct BlockRequest sBlockRequestLookupTable[5];
 
 extern struct Link gLink;
-extern u16 gRecvCmds[CMD_LENGTH][MAX_LINK_PLAYERS];
-extern u8 gUnknown_020228C4[BLOCK_BUFFER_SIZE]; // gBlockSendBuffer
+extern u16 gRecvCmds[MAX_LINK_PLAYERS][CMD_LENGTH];
+extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE]; // gBlockSendBuffer
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
 extern u32 gLinkStatus;
@@ -162,14 +165,14 @@ extern bool8 gSerialIsRFU;
 void Task_DestroySelf(u8);
 void OpenLink(void);
 void CloseLink(void);
-u16 LinkMain2(u16 *);
+u16 LinkMain2(const u16 *);
 void sub_8007B14(void);
 bool32 sub_8007B24(void);
 void ClearLinkCallback(void);
 void ClearLinkCallback_2(void);
 u8 GetLinkPlayerCount(void);
 void OpenLinkTimed(void);
-u8 GetLinkPlayerDataExchangeStatusTimed(void);
+u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper);
 bool8 IsLinkPlayerDataExchangeComplete(void);
 u32 GetLinkPlayerTrainerId(u8);
 void ResetLinkPlayers(void);
@@ -181,7 +184,6 @@ bool8 SendBlock(u8, const void *, u16);
 u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);
 void ResetBlockReceivedFlag(u8);
-void SetLinkDebugValues(u32, u32);
 u8 GetLinkPlayerCount_2(void);
 bool8 IsLinkMaster(void);
 void CB2_LinkError(void);
@@ -201,43 +203,44 @@ bool8 sub_800A520(void);
 void sub_800DFB4(u8, u8);
 void sub_800ADF8(void);
 void sub_800B488(void);
-void sub_8009734(void);
 void sub_800A620(void);
 void sub_8011BD0(void);
 u8 sub_800ABAC(void);
 u8 sub_800ABBC(void);
 void sub_800AC34(void);
 
-void sub_800B628(void);
-void sub_80097E8(void);
-void sub_800A994(u32 seed, u8 flags);
+void SetLinkDebugValues(u32 seed, u32 flags);
 void sub_800A418(void);
+void SetSuppressLinkErrorMessage(bool8 flag);
+void sub_800B524(struct LinkPlayer *linkPlayer);
+u8 sub_800B2E8(void);
+u8 sub_800B320(void);
+u8 sub_800B33C(void);
 
 extern u16 gUnknown_03003020[6];
 extern u32 gUnknown_0300302C;
-extern struct LinkPlayerBlock gUnknown_03003030;
-extern bool8 gUnknown_0300306C;
+extern struct LinkPlayerBlock gLocalLinkPlayerBlock;
+extern bool8 gLinkErrorOccurred;
 extern u32 gUnknown_03003070;
 extern bool8 gUnknown_03003078[4];
 extern u8 gUnknown_0300307C[4];
-extern u16 gUnknown_03003084;
-extern u16 gUnknown_03003090[4][8];
-extern u32 gUnknown_030030E0;
+extern u16 gLinkHeldKeys;
+extern u32 gLinkStatus;
 extern u8 gUnknown_030030E4;
 extern u8 gUnknown_030030E8;
 extern u8 gUnknown_030030EC[4];
 extern u8 gUnknown_030030F0[4];
 extern u16 gUnknown_030030F4;
-extern u8 gUnknown_030030F8;
+extern u8 gSuppressLinkErrorMessage;
 extern bool8 gSerialIsRFU;
 extern bool8 gUnknown_03003100;
-extern u16 gUnknown_03003110[8];
 extern u8 gUnknown_03003120;
-extern struct LinkTestBGInfo gUnknown_03003130;
-extern void (*gUnknown_03003140)(void);
-extern bool8 gUnknown_03003144;
-extern u16 gUnknown_03003148[4];
-extern u8 gUnknown_03003150;
+extern struct LinkTestBGInfo gLinkTestBGInfo;
+extern void (*gLinkCallback)(void);
+extern bool8 gShouldAdvanceLinkState;
+extern u16 gLinkTestBlockChecksums[4];
+extern u8 gBlockRequestType;
 extern u8 gUnknown_03003160;
+extern u8 gUnknown_03004130;
 
 #endif // GUARD_LINK_H

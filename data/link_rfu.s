@@ -162,15 +162,15 @@ gUnknown_082ED6A5:: @ 82ED6A5
 
 	.align 2
 gUnknown_082ED6B8:: @ 82ED6B8
-    .4byte gUnknown_020228C4
+    .4byte gBlockSendBuffer
 	.4byte 0x000000c8
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x000000c8
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x00000064
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x000000dc
-    .4byte gUnknown_020228C4
+    .4byte gBlockSendBuffer
 	.4byte 0x00000028
 
 	.align 2

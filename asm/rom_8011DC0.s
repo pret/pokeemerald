@@ -70,7 +70,7 @@ sub_8011E2C: @ 8011E2C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r6, =gUnknown_03003110
+	ldr r6, =gSendCmd
 	ldrh r0, [r6]
 	cmp r0, 0
 	bne _08011E7A
@@ -1244,7 +1244,7 @@ _08012848:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	ldrb r1, [r4]
 	movs r0, 0xF
 	ands r0, r1
@@ -2752,7 +2752,7 @@ _08013590:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C5C
 	movs r0, 0x70
 	bl AllocZeroed
@@ -3500,7 +3500,7 @@ _08013CD0:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C5C
 	movs r0, 0x1
 	bl sub_80111B0
@@ -3934,7 +3934,7 @@ _08013FFC:
 	b _0801405A
 	.pool
 _08014038:
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00002be0
@@ -4505,7 +4505,7 @@ _080145D8:
 	.pool
 _080145F4:
 	bl overworld_free_bg_tilemaps
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	bl sp000_heal_pokemon
@@ -4524,7 +4524,7 @@ _08014620:
 	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	movs r0, 0x2
@@ -4540,7 +4540,7 @@ _0801464C:
 	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	movs r0, 0x5
@@ -4552,7 +4552,7 @@ _0801464C:
 	b _080146B0
 	.pool
 _08014678:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	bl overworld_free_bg_tilemaps
@@ -4565,7 +4565,7 @@ _08014678:
 	b _080146B0
 	.pool
 _08014698:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	bl overworld_free_bg_tilemaps
@@ -4605,7 +4605,7 @@ _080146F6:
 	bl sub_801DD98
 	b _08014764
 _080146FC:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0
 	bl sub_80143E4
 	ldr r0, =sub_80141A4
@@ -4675,7 +4675,7 @@ sub_8014790: @ 8014790
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r7, r0, r1
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	mov r9, r0
 	movs r1, 0
 	ldrsh r0, [r7, r1]
@@ -4999,7 +4999,7 @@ _08014AB0:
 	movs r1, 0
 	bl sub_8010FA0
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	movs r0, 0x2
 	bl sub_8011C10
 	movs r0, 0x1
@@ -5537,7 +5537,7 @@ _08014FA4:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C5C
 	movs r0, 0x70
 	bl AllocZeroed
@@ -5925,7 +5925,7 @@ _08015358:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C5C
 	movs r0, 0x70
 	bl AllocZeroed
@@ -6475,7 +6475,7 @@ _08015878:
 	ldrh r2, [r2, 0xC]
 	bl sub_8010FCC
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C84
 	ldr r0, [r6, 0x8]
 	movs r1, 0x1
@@ -6822,7 +6822,7 @@ _08015BBE:
 	bne _08015BCA
 	bl _08016878
 _08015BCA:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	ldr r0, =sub_80140E0
@@ -7349,7 +7349,7 @@ _080160DA:
 	bne _080160E4
 	b _08016878
 _080160E4:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	ldr r0, =sub_80140E0
@@ -8184,7 +8184,7 @@ _08016894:
 sub_801689C: @ 801689C
 	push {r4,r5,lr}
 	adds r2, r0, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrh r5, [r3, 0x12]
 	adds r4, r5, 0
 	cmp r4, 0
@@ -8325,7 +8325,7 @@ _080169BE:
 	movs r2, 0
 	bl sub_8010F84
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	bl sub_8011C84
 	movs r0, 0x1
 	bl sub_80111B0
@@ -11147,7 +11147,7 @@ _08017FC6:
 sub_8017FD8: @ 8017FD8
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	ldrh r1, [r0, 0x2]
 	cmp r1, 0
 	beq _08017FFC
@@ -14200,7 +14200,7 @@ _080198FE:
 	b _08019922
 	.pool
 _0801990C:
-	bl sub_80097E8
+	bl CloseLink
 	ldr r0, [r5, 0x10]
 	bl Free
 	adds r0, r4, 0
@@ -16823,7 +16823,7 @@ _0801AE48:
 	beq _0801AE54
 	b _0801AFAE
 _0801AE54:
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x20
@@ -16840,7 +16840,7 @@ _0801AE78:
 	movs r0, 0x51
 _0801AE7A:
 	strb r0, [r4]
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0x20
 	bl SendBlock
@@ -33351,7 +33351,7 @@ sub_802339C: @ 802339C
 	mov r10, r3
 _080233C0:
 	lsls r0, r7, 4
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	adds r2, r0, r1
 	ldrh r1, [r2]
 	movs r0, 0xFF
@@ -33960,7 +33960,7 @@ sub_802385C: @ 802385C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrb r0, [r5, 0x9]
 	cmp r4, r0
 	bcs _08023880
@@ -42728,7 +42728,7 @@ sub_8027DD0: @ 8027DD0
 sub_8027DFC: @ 8027DFC
 	push {lr}
 	adds r2, r0, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -43184,7 +43184,7 @@ sub_8028164: @ 8028164
 	mov r9, r0
 	adds r2, r7, 0
 	adds r2, 0x14
-	ldr r4, =gUnknown_03003090
+	ldr r4, =gRecvCmds
 	ldrh r0, [r4]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -43397,7 +43397,7 @@ sub_8028318: @ 8028318
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r4, r1, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -43449,7 +43449,7 @@ sub_8028350: @ 8028350
 sub_8028374: @ 8028374
 	push {lr}
 	adds r2, r0, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -54921,7 +54921,7 @@ sub_802E0D0: @ 802E0D0
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r1, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	lsls r2, r0, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -55048,7 +55048,7 @@ sub_802E1BC: @ 802E1BC
 	sub sp, 0xC
 	adds r5, r0, 0
 	adds r4, r1, 0
-	ldr r2, =gUnknown_03003090
+	ldr r2, =gRecvCmds
 	ldrh r0, [r2]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -55138,7 +55138,7 @@ sub_802E264: @ 802E264
 	adds r4, r0, 0
 	adds r5, r2, 0
 	adds r6, r3, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	lsls r2, r1, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -55193,7 +55193,7 @@ sub_802E2D0: @ 802E2D0
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	lsls r2, r1, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -56187,7 +56187,7 @@ sub_802EAB0: @ 802EAB0
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0802EB14
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldrh r0, [r1, 0x2]
 	ldr r5, =0x00007fff
 	cmp r0, r5

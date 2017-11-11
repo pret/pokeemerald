@@ -5084,13 +5084,13 @@ _0800E64A:
 	adds r0, r4, 0
 	bl sub_800D724
 	strh r5, [r7]
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	ldr r2, =0x01000008
 	adds r0, r7, 0
 	bl CpuSet
 	mov r0, r8
 	strh r5, [r0]
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r2, =0x01000028
 	bl CpuSet
 	mov r0, r9
@@ -5143,7 +5143,7 @@ sub_800E700: @ 800E700
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _0800E732
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	strh r1, [r0]
 	bl sub_800AAF4
 	movs r0, 0
@@ -6115,7 +6115,7 @@ sub_800EFB0: @ 800EFB0
 	push {r4-r7,lr}
 	sub sp, 0x4
 	movs r2, 0
-	ldr r7, =gUnknown_03003090
+	ldr r7, =gRecvCmds
 	ldr r0, =gUnknown_03005000
 	adds r6, r7, 0
 	ldr r1, =0x00000c87
@@ -6160,8 +6160,8 @@ _0800EFD0:
 	thumb_func_start sub_800F014
 sub_800F014: @ 800F014
 	push {lr}
-	ldr r3, =gUnknown_03003110
-	ldr r2, =gUnknown_03003090
+	ldr r3, =gSendCmd
+	ldr r2, =gRecvCmds
 	movs r1, 0x6
 _0800F01C:
 	ldrh r0, [r3]
@@ -6171,7 +6171,7 @@ _0800F01C:
 	subs r1, 0x1
 	cmp r1, 0
 	bge _0800F01C
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	movs r2, 0
 	adds r0, r1, 0
 	adds r0, 0xC
@@ -6250,7 +6250,7 @@ _0800F0C4:
 	.pool
 _0800F0CC:
 	movs r3, 0
-	ldr r4, =gUnknown_03003090
+	ldr r4, =gRecvCmds
 _0800F0D0:
 	movs r2, 0
 	lsls r0, r3, 4
@@ -6518,7 +6518,7 @@ _0800F2E0:
 	str r2, [sp, 0x4]
 	adds r5, 0x1
 	str r5, [sp]
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	mov r9, r1
 	adds r5, r3, 0
 	adds r7, r4, 0
@@ -6745,7 +6745,7 @@ sub_800F4F0: @ 800F4F0
 	mov r1, sp
 	bl sub_800D934
 	movs r1, 0
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	mov r12, r0
 _0800F506:
 	movs r4, 0
@@ -6849,7 +6849,7 @@ _0800F5C0:
 	ldrb r1, [r2]
 	strb r0, [r2]
 	bl sub_8010528
-	ldr r5, =gUnknown_03003110
+	ldr r5, =gSendCmd
 	add r4, sp, 0x48
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -7069,7 +7069,7 @@ rfu_func_080F97B8: @ 800F794
 	ldrh r2, [r3]
 	cmp r2, 0
 	beq _0800F7C6
-	ldr r0, =gUnknown_030022B4
+	ldr r0, =gLinkTransferringData
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0800F7C6
@@ -7143,7 +7143,7 @@ sub_800F820: @ 800F820
 	cmp r0, 0
 	bne _0800F83C
 	bl sub_8082D18
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	strh r0, [r1, 0xC]
 _0800F83C:
 	ldr r1, =gUnknown_020223C0
@@ -7182,7 +7182,7 @@ sub_800F86C: @ 800F86C
 _0800F87A:
 	mov r1, r8
 	lsls r0, r1, 4
-	ldr r2, =gUnknown_03003090
+	ldr r2, =gRecvCmds
 	adds r1, r0, r2
 	ldrh r7, [r1]
 	movs r3, 0xFF
@@ -7282,12 +7282,12 @@ _0800F920:
 	beq _0800F930
 	b _0800FC08
 _0800F930:
-	ldr r1, =gUnknown_03003090+0x2
+	ldr r1, =gRecvCmds+0x2
 	adds r0, r5, r1
 	ldrh r0, [r0]
 	ldr r2, =gUnknown_03005000
 	strb r0, [r2, 0xD]
-	ldr r3, =gUnknown_03003090+0x4
+	ldr r3, =gRecvCmds+0x4
 	adds r0, r5, r3
 	bl sub_800F74C
 	ldr r4, =gUnknown_03005CCE
@@ -7317,13 +7317,13 @@ _0800F982:
 	adds r0, 0x80
 	movs r2, 0
 	strh r4, [r0]
-	ldr r1, =gUnknown_03003090+0x2
+	ldr r1, =gRecvCmds+0x2
 	adds r0, r5, r1
 	ldrh r0, [r0]
 	adds r1, r3, 0
 	adds r1, 0x82
 	strh r0, [r1]
-	ldr r1, =gUnknown_03003090+0x4
+	ldr r1, =gRecvCmds+0x4
 	adds r0, r5, r1
 	ldrh r1, [r0]
 	adds r0, r3, 0
@@ -7392,7 +7392,7 @@ _0800FA0E:
 	adds r2, r4, 0x1
 	lsls r0, r2, 1
 	adds r0, r3
-	ldr r4, =gUnknown_03003090
+	ldr r4, =gRecvCmds
 	adds r0, r4
 	ldrh r0, [r0]
 	strh r0, [r1]
@@ -7453,7 +7453,7 @@ _0800FA90:
 	.pool
 _0800FAAC:
 	ldr r2, =gUnknown_082ED6B8
-	ldr r3, =gUnknown_03003090+0x2
+	ldr r3, =gRecvCmds+0x2
 	adds r0, r5, r3
 	ldrh r1, [r0]
 	lsls r1, 3
@@ -7477,7 +7477,7 @@ _0800FAE0:
 	movs r4, 0x80
 	lsls r4, 1
 	adds r0, r2, r4
-	ldr r3, =gUnknown_03003090+0x2
+	ldr r3, =gRecvCmds+0x2
 	adds r1, r5, r3
 	ldrh r0, [r0]
 	mov r6, r8
@@ -7505,7 +7505,7 @@ _0800FB10:
 	adds r6, 0x1
 	cmp r0, 0
 	beq _0800FC08
-	ldr r0, =gUnknown_03003090+0x2
+	ldr r0, =gRecvCmds+0x2
 	adds r4, r5, r0
 	ldrh r1, [r4]
 	ldr r0, =gUnknown_03007890
@@ -7516,14 +7516,14 @@ _0800FB10:
 	beq _0800FB48
 	strb r2, [r3]
 	bl sub_800D630
-	ldr r1, =gUnknown_03003090+0x4
+	ldr r1, =gRecvCmds+0x4
 	adds r0, r5, r1
 	ldrh r1, [r0]
 	ldr r2, =0x00000ce4
 	adds r0, r7, r2
 	strb r1, [r0]
 _0800FB48:
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	adds r0, 0x6
 	adds r0, r5, r0
 	ldrh r0, [r0]
@@ -7536,16 +7536,16 @@ _0800FB78:
 	movs r0, 0xEE
 	lsls r0, 8
 	bl sub_800FD14
-	ldr r1, =gUnknown_03003110
-	ldr r3, =gUnknown_03003090+0x2
+	ldr r1, =gSendCmd
+	ldr r3, =gRecvCmds+0x2
 	adds r0, r5, r3
 	ldrh r0, [r0]
 	strh r0, [r1, 0x2]
-	ldr r4, =gUnknown_03003090+0x4
+	ldr r4, =gRecvCmds+0x4
 	adds r0, r5, r4
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	adds r0, 0x6
 	adds r0, r5, r0
 	ldrh r0, [r0]
@@ -7561,13 +7561,13 @@ _0800FBB0:
 	bne _0800FC44
 	ldr r0, =0x00000ce3
 	adds r2, r4, r0
-	ldr r1, =gUnknown_03003090+0x2
+	ldr r1, =gRecvCmds+0x2
 	adds r3, r5, r1
 	ldrb r1, [r3]
 	ldrb r0, [r2]
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r2, =gUnknown_03003090+0x4
+	ldr r2, =gRecvCmds+0x4
 	adds r0, r5, r2
 	ldrh r1, [r0]
 	ldr r2, =0x00000ce4
@@ -7582,7 +7582,7 @@ _0800FBF4:
 	mov r3, r8
 	lsls r1, r3, 1
 	adds r1, r0
-	ldr r4, =gUnknown_03003090+0x2
+	ldr r4, =gRecvCmds+0x2
 	adds r0, r5, r4
 	ldrh r0, [r0]
 	strh r0, [r1]
@@ -7747,7 +7747,7 @@ sub_800FD14: @ 800FD14
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r5, =gUnknown_03003110
+	ldr r5, =gSendCmd
 	strh r1, [r5]
 	movs r0, 0xF0
 	lsls r0, 7
@@ -7900,7 +7900,7 @@ _0800FE46:
 sub_800FE50: @ 800FE50
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0800FE76
@@ -7934,7 +7934,7 @@ sub_800FE84: @ 800FE84
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _0800FEB8
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0800FEB8
@@ -7986,7 +7986,7 @@ _0800FEC8:
 	str r7, [r5, 0x70]
 	b _0800FF1C
 _0800FF0A:
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	cmp r7, r4
 	beq _0800FF1A
 	adds r0, r4, 0
@@ -8019,7 +8019,7 @@ _0800FF32:
 	thumb_func_start rfufunc_80F9F44
 rfufunc_80F9F44: @ 800FF4C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0800FFA0
@@ -8044,7 +8044,7 @@ rfufunc_80F9F44: @ 800FF4C
 	.pool
 _0800FF84:
 	bl GetMultiplayerId
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	lsls r0, 24
 	lsrs r0, 20
 	adds r0, r1
@@ -8070,7 +8070,7 @@ sub_800FFB0: @ 800FFB0
 	ldr r0, =gUnknown_03005000
 	mov r12, r0
 	ldr r5, [r0, 0x70]
-	ldr r3, =gUnknown_03003110
+	ldr r3, =gSendCmd
 	mov r2, r12
 	adds r2, 0x6C
 	ldrh r1, [r2]
@@ -8139,7 +8139,7 @@ rfufunc_80FA020: @ 8010028
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0
 	bne _080100F0
-	ldr r3, =gUnknown_03003110
+	ldr r3, =gSendCmd
 	adds r2, r5, 0
 	adds r2, 0x6E
 	ldrh r0, [r2]
@@ -8150,7 +8150,7 @@ rfufunc_80FA020: @ 8010028
 	strh r0, [r3]
 	movs r4, 0
 	mov r9, r5
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	mov r12, r0
 	lsls r5, r6, 4
 	adds r7, r2, 0
@@ -8376,7 +8376,7 @@ _08010220:
 	thumb_func_start sub_801022C
 sub_801022C: @ 801022C
 	push {r4,lr}
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801024E
@@ -8531,7 +8531,7 @@ sub_8010358: @ 8010358
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801037A
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801037A
@@ -8560,7 +8560,7 @@ sub_8010390: @ 8010390
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801041E
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801041E
@@ -8603,7 +8603,7 @@ _080103FA:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801041E
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801041E
@@ -9241,7 +9241,7 @@ _080108F0:
 	b _080109D2
 	.pool
 _08010904:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080109D2
@@ -9513,7 +9513,7 @@ _08010B28:
 	.4byte _08010C0A
 	.4byte _08010C94
 _08010B40:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08010B4A
@@ -9527,7 +9527,7 @@ _08010B4A:
 	b _08010C4A
 	.pool
 _08010B60:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08010B6A
@@ -9571,7 +9571,7 @@ _08010B8C:
 	b _08010C4A
 	.pool
 _08010BC0:
-	ldr r5, =gUnknown_020228C4
+	ldr r5, =gBlockSendBuffer
 	adds r1, r5, 0
 	ldr r0, =gUnknown_082ED7EC
 	ldm r0!, {r2-r4}
@@ -9609,7 +9609,7 @@ _08010BE2:
 	adds r0, 0x1
 	strh r0, [r1, 0x8]
 _08010C0A:
-	ldr r5, =gUnknown_020228C4
+	ldr r5, =gBlockSendBuffer
 	ldr r1, =gUnknown_03005000
 	ldrb r0, [r1, 0xD]
 	strb r0, [r5, 0xF]
@@ -9633,7 +9633,7 @@ _08010C20:
 	mov r1, r12
 	movs r2, 0x8C
 	bl memcpy
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0xA0
 	bl SendBlock
@@ -9758,7 +9758,7 @@ _08010D56:
 	cmp r0, 0
 	beq _08010DA6
 	bl sub_800B348
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0x3C
 	bl SendBlock
@@ -9824,7 +9824,7 @@ _08010DDE:
 	movs r0, 0x2
 	strb r0, [r1]
 _08010DE4:
-	ldr r4, =c2_800ACD4
+	ldr r4, =CB2_LinkError
 	adds r0, r4, 0
 	bl SetMainCallback2
 	ldr r0, =gMain
@@ -9862,7 +9862,7 @@ _08010E20:
 	ldrb r1, [r0]
 	movs r1, 0x2
 	strb r1, [r0]
-	bl sub_80097E8
+	bl CloseLink
 	b _08010E8E
 	.pool
 _08010E5C:
@@ -11412,7 +11412,7 @@ sub_8011AC8: @ 8011AC8
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r2, =0x05000014
 	mov r0, sp
 	bl CpuSet
@@ -11445,12 +11445,12 @@ sub_8011AFC: @ 8011AFC
 	lsls r0, 24
 	cmp r0, 0
 	beq _08011B70
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
 	bl sub_800B488
-	bl sub_8009734
+	bl OpenLink
 	ldr r0, =gMain
 	ldrh r0, [r0, 0x24]
 	bl SeedRng

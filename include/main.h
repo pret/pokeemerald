@@ -46,12 +46,12 @@ extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
 
 extern u16 gKeyRepeatStartDelay;
-extern bool8 gUnknown_030022B4;
+extern bool8 gLinkTransferringData;
 extern struct Main gMain;
 extern u16 gKeyRepeatContinueDelay;
 extern bool8 gSoftResetDisabled;
 extern IntrFunc gIntrTable[];
-extern u8 gUnknown_03002748;
+extern u8 gLinkVSyncDisabled;
 extern u32 IntrMain_Buffer[];
 extern u8 gPcmDmaCounter;
 

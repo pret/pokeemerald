@@ -143,7 +143,7 @@ sub_80B2478: @ 80B2478
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_800A0C8
+	bl GetLinkPlayerDataExchangeStatusTimed
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -244,7 +244,7 @@ sub_80B252C: @ 80B252C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080B2570
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	strh r1, [r0]
 	ldr r1, =gTasks
 	lsls r0, r4, 2
@@ -274,7 +274,7 @@ sub_80B2578: @ 80B2578
 	cmp r0, 0
 	beq _080B258E
 	movs r0, 0x1
-	bl sub_800B330
+	bl SetSuppressLinkErrorMessage
 _080B258E:
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -286,7 +286,7 @@ _080B258E:
 	b _080B25BA
 	.pool
 _080B25A4:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	movs r0, 0
 	strh r0, [r1]
 	ldr r1, =gTasks
@@ -374,9 +374,9 @@ sub_80B2634: @ 80B2634
 	ldrsh r2, [r4, r3]
 	cmp r2, 0
 	bne _080B266C
-	bl sub_800A0AC
+	bl OpenLinkTimed
 	bl sub_800AB98
-	bl sub_800A2BC
+	bl ResetLinkPlayers
 	ldr r0, =gUnknown_08550594
 	bl AddWindow
 	strh r0, [r4, 0xA]
@@ -418,7 +418,7 @@ sub_80B2688: @ 80B2688
 	cmp r5, 0x1
 	bls _080B26FC
 	movs r0, 0x1
-	bl sub_800B330
+	bl SetSuppressLinkErrorMessage
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -729,7 +729,7 @@ _080B297C:
 	cmp r2, 0x9
 	bne _080B2994
 _080B2984:
-	bl sub_80097E8
+	bl CloseLink
 	bl HideFieldMessageBox
 	ldr r0, =sub_80B2CB0
 	b _080B29E4
@@ -743,7 +743,7 @@ _080B2994:
 	strb r0, [r1]
 	ldrb r0, [r4]
 	bl sub_800AA04
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	adds r0, r4, 0
 	bl sub_80C30A4
 	ldr r0, =gUnknown_0203CEF8
@@ -812,7 +812,7 @@ _080B2A42:
 	cmp r0, 0x9
 	bne _080B2A6C
 _080B2A4A:
-	bl sub_80097E8
+	bl CloseLink
 _080B2A4E:
 	bl HideFieldMessageBox
 	ldr r0, =gTasks
@@ -833,7 +833,7 @@ _080B2A6C:
 	strb r0, [r1]
 	ldrb r0, [r4]
 	bl sub_800AA04
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	adds r0, r4, 0
 	bl sub_80C30A4
 	ldr r0, =gUnknown_0203CEF8
@@ -964,7 +964,7 @@ task_map_chg_seq_0807EC34: @ 80B2B94
 	ldrh r0, [r5]
 	cmp r0, 0x1
 	bne _080B2C10
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	ldrh r2, [r0]
 	ldr r0, =0x00002266
 	cmp r2, r0
@@ -1065,7 +1065,7 @@ _080B2C7E:
 	cmp r4, r0
 	bcc _080B2C5C
 	movs r0, 0
-	bl sub_800B330
+	bl SetSuppressLinkErrorMessage
 	bl ResetBlockReceivedFlags
 	ldr r0, =gScriptResult
 	adds r1, r5, 0
@@ -1215,20 +1215,20 @@ _080B2DC0:
 	b _080B2E34
 _080B2DCA:
 	movs r3, 0x2
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r4, =0x00002233
 	b _080B2E30
 	.pool
 _080B2DDC:
 	movs r3, 0x2
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r4, =0x00002244
 	b _080B2E30
 	.pool
 _080B2DEC:
 	movs r3, 0x4
 	movs r2, 0x4
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r4, =0x00002255
 	b _080B2E30
 	.pool
@@ -1243,12 +1243,12 @@ _080B2E00:
 	ands r0, r1
 	cmp r0, 0
 	bne _080B2E2C
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r4, =0x00002266
 	b _080B2E30
 	.pool
 _080B2E2C:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r4, =0x00002277
 _080B2E30:
 	adds r0, r4, 0
@@ -1266,7 +1266,7 @@ _080B2E34:
 	thumb_func_start sub_80B2E4C
 sub_80B2E4C: @ 80B2E4C
 	push {lr}
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001133
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1287,7 +1287,7 @@ sub_80B2E74: @ 80B2E74
 	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00003311
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1454,7 +1454,7 @@ _080B2FC6:
 	thumb_func_start sub_80B2FD8
 sub_80B2FD8: @ 80B2FD8
 	push {lr}
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00004411
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1472,7 +1472,7 @@ sub_80B2FD8: @ 80B2FD8
 	thumb_func_start sub_80B3000
 sub_80B3000: @ 80B3000
 	push {lr}
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00006601
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1490,7 +1490,7 @@ sub_80B3000: @ 80B3000
 	thumb_func_start sub_80B3028
 sub_80B3028: @ 80B3028
 	push {lr}
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00006602
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1540,17 +1540,17 @@ _080B3084:
 	.4byte _080B3128
 	.4byte _080B30D8
 _080B30A8:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002233
 	b _080B3124
 	.pool
 _080B30B8:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002244
 	b _080B3124
 	.pool
 _080B30C8:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002255
 	b _080B3124
 	.pool
@@ -1564,22 +1564,22 @@ _080B30D8:
 	ands r0, r1
 	cmp r0, 0
 	bne _080B3100
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002266
 	b _080B3124
 	.pool
 _080B3100:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002277
 	b _080B3124
 	.pool
 _080B3110:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001111
 	b _080B3124
 	.pool
 _080B3120:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00003322
 _080B3124:
 	adds r0, r2, 0
@@ -1610,8 +1610,8 @@ sub_80B3144: @ 80B3144
 	ldrsh r2, [r4, r3]
 	cmp r2, 0
 	bne _080B3178
-	bl sub_8009734
-	bl sub_800A2BC
+	bl OpenLink
+	bl ResetLinkPlayers
 	ldr r0, =task00_08081A90
 	movs r1, 0x50
 	bl CreateTask
@@ -1710,7 +1710,7 @@ sub_80B3220: @ 80B3220
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080B3248
-	bl sub_800A23C
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1809,11 +1809,11 @@ _080B32F8:
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl sub_8009FAC
+	bl ClearLinkCallback_2
 	b _080B3346
 	.pool
 _080B3318:
@@ -1922,11 +1922,11 @@ _080B3408:
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	ldr r2, =0x00002211
 	adds r1, r2, 0
 	strh r1, [r0]
-	bl sub_8009FAC
+	bl ClearLinkCallback_2
 	movs r0, 0x1
 	strh r0, [r6]
 	b _080B3532
@@ -1945,7 +1945,7 @@ _080B343A:
 	b _080B3532
 	.pool
 _080B3444:
-	ldr r1, =gUnknown_020229CC
+	ldr r1, =gLocalLinkPlayer
 	movs r0, 0
 	movs r2, 0x1C
 	bl SendBlock
@@ -2400,7 +2400,7 @@ _080B382E:
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
-	bl sub_8009FAC
+	bl ClearLinkCallback_2
 	b _080B3864
 _080B3840:
 	ldr r0, =gPaletteFade
@@ -2548,7 +2548,7 @@ nullsub_37: @ 80B3964
 	thumb_func_start sub_80B3968
 sub_80B3968: @ 80B3968
 	push {lr}
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -2651,8 +2651,8 @@ task00_08081A90: @ 80B3A30
 	lsls r0, 17
 	cmp r1, r0
 	ble _080B3A62
-	bl sub_80097E8
-	ldr r0, =c2_800ACD4
+	bl CloseLink
+	ldr r0, =CB2_LinkError
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -2669,8 +2669,8 @@ _080B3A62:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B3A86
-	bl sub_80097E8
-	ldr r0, =c2_800ACD4
+	bl CloseLink
+	ldr r0, =CB2_LinkError
 	bl SetMainCallback2
 _080B3A86:
 	adds r0, r4, 0
@@ -2761,7 +2761,7 @@ _080B3B2A:
 	b _080B3BB8
 	.pool
 _080B3B40:
-	bl sub_8009734
+	bl OpenLink
 	ldr r0, =task00_08081A90
 	movs r1, 0x1
 	bl CreateTask
@@ -2808,7 +2808,7 @@ _080B3B9E:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080B3BB8
-	bl sub_800A23C
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2829,7 +2829,7 @@ sub_80B3BC4: @ 80B3BC4
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B3BD6
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002288
 	adds r0, r2, 0
 	strh r0, [r1]

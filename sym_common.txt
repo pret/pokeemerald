@@ -18,10 +18,10 @@ gUnknown_03003020: @ 3003020
 gUnknown_0300302C: @ 300302C
 	.space 0x4
 
-gUnknown_03003030: @ 3003030
+gLocalLinkPlayerBlock: @ 3003030
 	.space 0x3C
 
-gUnknown_0300306C: @ 300306C
+gLinkErrorOccurred: @ 300306C
 	.space 0x4
 
 gUnknown_03003070: @ 3003070
@@ -33,13 +33,13 @@ gUnknown_03003078: @ 3003078
 gUnknown_0300307C: @ 300307C
 	.space 0x8
 
-gUnknown_03003084: @ 3003084
+gLinkHeldKeys: @ 3003084
 	.space 0xC
 
-gUnknown_03003090: @ 3003090
+gRecvCmds: @ 3003090
 	.space 0x50
 
-gUnknown_030030E0: @ 30030E0
+gLinkStatus: @ 30030E0
 	.space 0x4
 
 gUnknown_030030E4: @ 30030E4
@@ -57,7 +57,7 @@ gUnknown_030030F0: @ 30030F0
 gUnknown_030030F4: @ 30030F4
 	.space 0x4
 
-gUnknown_030030F8: @ 30030F8
+gSuppressLinkErrorMessage: @ 30030F8
 	.space 0x4
 
 gSerialIsRFU: @ 30030FC
@@ -66,7 +66,7 @@ gSerialIsRFU: @ 30030FC
 gUnknown_03003100: @ 3003100
 	.space 0x10
 
-gUnknown_03003110: @ 3003110
+gSendCmd: @ 3003110
 	.space 0x10
 
 gUnknown_03003120: @ 3003120
@@ -75,25 +75,25 @@ gUnknown_03003120: @ 3003120
 gReceivedRemoteLinkPlayers: @ 3003124
 	.space 0xC
 
-gUnknown_03003130: @ 3003130
+gLinkTestBGInfo: @ 3003130
 	.space 0x10
 
-gUnknown_03003140: @ 3003140
+gLinkCallback: @ 3003140
 	.space 0x4
 
-gUnknown_03003144: @ 3003144
+gShouldAdvanceLinkState: @ 3003144
 	.space 0x4
 
-gUnknown_03003148: @ 3003148
+gLinkTestBlockChecksums: @ 3003148
 	.space 0x8
 
-gUnknown_03003150: @ 3003150
+gBlockRequestType: @ 3003150
 	.space 0x10
 
 gUnknown_03003160: @ 3003160
 	.space 0x10
 
-gUnknown_03003170: @ 3003170
+gLink: @ 3003170
 	.space 0xFC0
 
 gUnknown_03004130: @ 3004130

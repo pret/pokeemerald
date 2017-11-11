@@ -5,163 +5,15 @@
 
 	.text
 
-	thumb_func_start sub_800A824
-sub_800A824: @ 800A824
-	push {lr}
-	ldr r0, =gUnknown_030030E0
-	ldr r0, [r0]
-	movs r1, 0x20
-	ands r0, r1
-	cmp r0, 0
-_0800A830:
-	beq _0800A838
-	ldr r0, =0x00002222
-	bl sub_8009D90
-_0800A838:
-	ldr r1, =gUnknown_03003140
-	movs r0, 0
-	str r0, [r1]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800A824
-
-	thumb_func_start task00_link_test
-task00_link_test: @ 800A850
-	push {r4-r6,lr}
-	sub sp, 0x20
-	ldr r1, =gASCIITestPrint
-	mov r0, sp
-	bl strcpy
-	mov r0, sp
-	movs r1, 0x5
-	movs r2, 0x2
-	bl sub_800A7DC
-	ldr r0, =gUnknown_03003144
-	ldrb r0, [r0]
-	movs r1, 0x2
-	movs r2, 0x1
-	movs r3, 0x2
-	bl sub_800A6E8
-	ldr r4, =gUnknown_030030E0
-	ldr r0, [r4]
-	movs r1, 0xF
-	movs r2, 0x1
-	movs r3, 0x8
-	bl sub_800A6E8
-	ldr r0, =gUnknown_03003170
-	ldrb r0, [r0, 0x1]
-	movs r1, 0x2
-	movs r2, 0xA
-	movs r3, 0x2
-	bl sub_800A6E8
-	ldr r0, [r4]
-	movs r1, 0x1C
-	ands r0, r1
-	lsrs r0, 2
-	movs r1, 0xF
-	movs r2, 0xA
-	movs r3, 0x2
-	bl sub_800A6E8
-	bl GetMultiplayerId
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0xF
-	movs r2, 0xC
-	movs r3, 0x2
-	bl sub_800A6E8
-	ldr r0, =gUnknown_03003160
-	ldrb r0, [r0]
-	movs r1, 0x19
-	movs r2, 0x1
-	movs r3, 0x2
-	bl sub_800A6E8
-	ldr r0, =gUnknown_03004130
-	ldrb r0, [r0]
-	movs r1, 0x19
-	movs r2, 0x2
-	movs r3, 0x2
-	bl sub_800A6E8
-	bl GetBlockReceivedStatus
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0xF
-	movs r2, 0x5
-	movs r3, 0x2
-	bl sub_800A6E8
-	ldr r0, =gUnknown_0300302C
-	ldr r0, [r0]
-	movs r1, 0x2
-	movs r2, 0xC
-	movs r3, 0x8
-	bl sub_800A6E8
-	ldr r0, =gUnknown_03003070
-	ldr r0, [r0]
-	movs r1, 0x2
-	movs r2, 0xD
-	movs r3, 0x8
-	bl sub_800A6E8
-	bl sub_800B2E8
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x19
-	movs r2, 0x5
-	movs r3, 0x1
-	bl sub_800A6E8
-	bl sub_800B2F8
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x19
-	movs r2, 0x6
-	movs r3, 0x1
-	bl sub_800A6E8
-	bl sub_800B320
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x19
-	movs r2, 0x7
-	movs r3, 0x1
-	bl sub_800A6E8
-	bl sub_800B33C
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x19
-	movs r2, 0x8
-	movs r3, 0x1
-	bl sub_800A6E8
-	movs r6, 0
-	movs r5, 0x80
-	lsls r5, 19
-	ldr r4, =gUnknown_03003148
-_0800A94E:
-	ldrh r0, [r4]
-	lsrs r2, r5, 24
-	movs r1, 0xA
-	movs r3, 0x4
-	bl sub_800A6E8
-	movs r0, 0x80
-	lsls r0, 17
-	adds r5, r0
-	adds r4, 0x2
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _0800A94E
-	add sp, 0x20
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end task00_link_test
-
-	thumb_func_start sub_800A994
-sub_800A994: @ 800A994
+	thumb_func_start SetLinkDebugValues
+SetLinkDebugValues: @ 800A994
 	ldr r2, =gUnknown_0300302C
 	str r0, [r2]
 	ldr r0, =gUnknown_03003070
 	str r1, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_800A994
+	thumb_func_end SetLinkDebugValues
 
 	thumb_func_start sub_800A9A8
 sub_800A9A8: @ 800A9A8
@@ -281,7 +133,7 @@ sub_800AA60: @ 800AA60
 	ldr r0, =gUnknown_02022A74
 	ldr r2, =0x00002288
 	mov r8, r2
-	ldr r7, =gUnknown_020229C6
+	ldr r7, =gLinkType
 	mov r6, r12
 	adds r6, 0x14
 	adds r5, r0, 0x4
@@ -393,11 +245,11 @@ _0800AB36:
 	cmp r0, 0
 	beq _0800AB6A
 _0800AB5A:
-	ldr r1, =gUnknown_0300306C
+	ldr r1, =gLinkErrorOccurred
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_80097E8
-	ldr r0, =c2_800ACD4
+	bl CloseLink
+	ldr r0, =CB2_LinkError
 	bl SetMainCallback2
 _0800AB6A:
 	adds r0, r4, 0x1
@@ -429,7 +281,7 @@ sub_800AB98: @ 800AB98
 
 	thumb_func_start sub_800ABAC
 sub_800ABAC: @ 800ABAC
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r0, [r0]
 	movs r1, 0x1C
 	ands r0, r1
@@ -445,7 +297,7 @@ sub_800ABBC: @ 800ABBC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800ABDC
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r0, [r0]
 	lsrs r0, 5
 	movs r1, 0x1
@@ -482,7 +334,7 @@ sub_800ABF4: @ 800ABF4
 	b _0800AC20
 	.pool
 _0800AC0C:
-	ldr r2, =gUnknown_03003140
+	ldr r2, =gLinkCallback
 	ldr r1, [r2]
 	cmp r1, 0
 	bne _0800AC20
@@ -509,7 +361,7 @@ sub_800AC34: @ 800AC34
 	b _0800AC70
 	.pool
 _0800AC48:
-	ldr r2, =gUnknown_03003140
+	ldr r2, =gLinkCallback
 	ldr r1, [r2]
 	cmp r1, 0
 	beq _0800AC64
@@ -540,8 +392,8 @@ sub_800AC80: @ 800AC80
 	cmp r0, 0
 	bne _0800AC96
 	ldr r0, =0x00005fff
-	bl sub_8009D90
-	ldr r1, =gUnknown_03003140
+	bl BuildSendCmd
+	ldr r1, =gLinkCallback
 	ldr r0, =sub_800ACAC
 	str r0, [r1]
 _0800AC96:
@@ -580,11 +432,11 @@ _0800ACD0:
 	negs r1, r1
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, =gUnknown_03002748
+	ldr r0, =gLinkVSyncDisabled
 	movs r4, 0x1
 	strb r4, [r0]
-	bl sub_80097E8
-	ldr r1, =gUnknown_03003140
+	bl CloseLink
+	ldr r1, =gLinkCallback
 	movs r0, 0
 	str r0, [r1]
 	ldr r0, =gUnknown_030030E4
@@ -607,7 +459,7 @@ sub_800AD10: @ 800AD10
 	b _0800AD4C
 	.pool
 _0800AD24:
-	ldr r2, =gUnknown_03003140
+	ldr r2, =gLinkCallback
 	ldr r1, [r2]
 	cmp r1, 0
 	beq _0800AD40
@@ -638,8 +490,8 @@ sub_800AD5C: @ 800AD5C
 	cmp r0, 0
 	bne _0800AD72
 	ldr r0, =0x00005fff
-	bl sub_8009D90
-	ldr r1, =gUnknown_03003140
+	bl BuildSendCmd
+	ldr r1, =gLinkCallback
 	ldr r0, =sub_800AD88
 	str r0, [r1]
 _0800AD72:
@@ -684,11 +536,11 @@ _0800ADB6:
 	negs r1, r1
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, =gUnknown_03002748
+	ldr r0, =gLinkVSyncDisabled
 	movs r4, 0x1
 	strb r4, [r0]
-	bl sub_80097E8
-	ldr r1, =gUnknown_03003140
+	bl CloseLink
+	ldr r1, =gLinkCallback
 	movs r0, 0
 	str r0, [r1]
 	ldr r0, =gUnknown_030030E4
@@ -711,7 +563,7 @@ sub_800ADF8: @ 800ADF8
 	b _0800AE1E
 	.pool
 _0800AE0C:
-	ldr r1, =gUnknown_03003140
+	ldr r1, =gLinkCallback
 	ldr r0, [r1]
 	cmp r0, 0
 	bne _0800AE18
@@ -735,8 +587,8 @@ sub_800AE30: @ 800AE30
 	cmp r0, 0
 	bne _0800AE46
 	ldr r0, =0x00002ffe
-	bl sub_8009D90
-	ldr r1, =gUnknown_03003140
+	bl BuildSendCmd
+	ldr r1, =gLinkCallback
 	ldr r0, =sub_800AE5C
 	str r0, [r1]
 _0800AE46:
@@ -772,7 +624,7 @@ _0800AE86:
 	cmp r1, r2
 	bne _0800AEA4
 	movs r1, 0
-	ldr r4, =gUnknown_03003140
+	ldr r4, =gLinkCallback
 	ldr r3, =gUnknown_030030EC
 	movs r2, 0
 _0800AE92:
@@ -795,18 +647,18 @@ _0800AEA4:
 	thumb_func_start sub_800AEB4
 sub_800AEB4: @ 800AEB4
 	push {lr}
-	ldr r0, =gUnknown_020229C4
+	ldr r0, =gLinkOpen
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800AEF4
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r2, [r0]
 	movs r0, 0xFE
 	lsls r0, 11
 	ands r0, r2
 	cmp r0, 0
 	beq _0800AEF4
-	ldr r0, =gUnknown_030030F8
+	ldr r0, =gSuppressLinkErrorMessage
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800AEEA
@@ -818,13 +670,13 @@ sub_800AEB4: @ 800AEB4
 	ldr r0, =gUnknown_03003160
 	ldrb r0, [r0]
 	strb r0, [r1, 0x5]
-	ldr r0, =c2_800ACD4
+	ldr r0, =CB2_LinkError
 	bl SetMainCallback2
 _0800AEEA:
-	ldr r1, =gUnknown_0300306C
+	ldr r1, =gLinkErrorOccurred
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_80097E8
+	bl CloseLink
 _0800AEF4:
 	pop {r0}
 	bx r0
@@ -845,8 +697,8 @@ sub_800AF18: @ 800AF18
 	.pool
 	thumb_func_end sub_800AF18
 
-	thumb_func_start c2_800ACD4
-c2_800ACD4: @ 800AF30
+	thumb_func_start CB2_LinkError
+CB2_LinkError: @ 800AF30
 	push {r4,lr}
 	movs r0, 0
 	movs r1, 0
@@ -935,7 +787,7 @@ _0800AF8C:
 	ldr r1, =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =sub_8009404
+	ldr r0, =Task_DestroySelf
 	movs r1, 0
 	bl CreateTask
 	bl StopMapMusic
@@ -953,7 +805,7 @@ _0800B03C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end c2_800ACD4
+	thumb_func_end CB2_LinkError
 
 	thumb_func_start sub_800B080
 sub_800B080: @ 800B080
@@ -1251,7 +1103,7 @@ _0800B314:
 
 	thumb_func_start sub_800B320
 sub_800B320: @ 800B320
-	ldr r0, =gUnknown_030030E0
+	ldr r0, =gLinkStatus
 	ldr r0, [r0]
 	lsrs r0, 6
 	movs r1, 0x1
@@ -1260,17 +1112,17 @@ sub_800B320: @ 800B320
 	.pool
 	thumb_func_end sub_800B320
 
-	thumb_func_start sub_800B330
-sub_800B330: @ 800B330
-	ldr r1, =gUnknown_030030F8
+	thumb_func_start SetSuppressLinkErrorMessage
+SetSuppressLinkErrorMessage: @ 800B330
+	ldr r1, =gSuppressLinkErrorMessage
 	strb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_800B330
+	thumb_func_end SetSuppressLinkErrorMessage
 
 	thumb_func_start sub_800B33C
 sub_800B33C: @ 800B33C
-	ldr r0, =gUnknown_0300306C
+	ldr r0, =gLinkErrorOccurred
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -1279,11 +1131,11 @@ sub_800B33C: @ 800B33C
 	thumb_func_start sub_800B348
 sub_800B348: @ 800B348
 	push {r4-r6,lr}
-	bl sub_8009638
-	ldr r1, =gUnknown_03003030
+	bl InitLocalLinkPlayer
+	ldr r1, =gLocalLinkPlayerBlock
 	adds r2, r1, 0
 	adds r2, 0x10
-	ldr r0, =gUnknown_020229CC
+	ldr r0, =gLocalLinkPlayer
 	ldm r0!, {r3-r5}
 	stm r2!, {r3-r5}
 	ldm r0!, {r3,r4,r6}
@@ -1307,7 +1159,7 @@ sub_800B348: @ 800B348
 	strh r2, [r0]
 	ldrb r2, [r3, 0x2]
 	strb r2, [r0, 0x2]
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r2, 0x3C
 	bl memcpy
 	pop {r4-r6}
@@ -1353,7 +1205,7 @@ sub_800B3A4: @ 800B3A4
 	cmp r0, 0
 	beq _0800B3F4
 _0800B3EE:
-	ldr r0, =c2_800ACD4
+	ldr r0, =CB2_LinkError
 	bl SetMainCallback2
 _0800B3F4:
 	pop {r4-r6}
@@ -1369,14 +1221,14 @@ HandleLinkConnection: @ 800B40C
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B45C
-	ldr r0, =gUnknown_03003144
-	ldr r1, =gUnknown_03003110
-	ldr r2, =gUnknown_03003090
+	ldr r0, =gShouldAdvanceLinkState
+	ldr r1, =gSendCmd
+	ldr r2, =gRecvCmds
 	bl sub_800B638
-	ldr r4, =gUnknown_030030E0
+	ldr r4, =gLinkStatus
 	str r0, [r4]
 	ldr r0, =gMain+0x2c
-	bl sub_80099E0
+	bl LinkMain2
 	ldr r0, [r4]
 	movs r1, 0x80
 	lsls r1, 1
@@ -1466,7 +1318,7 @@ sub_800B4DC: @ 800B4DC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B4FC
-	ldr r0, =gUnknown_03003170
+	ldr r0, =gLink
 	ldr r1, =0x00000fbd
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1516,8 +1368,8 @@ sub_800B524: @ 800B524
 	bx r0
 	thumb_func_end sub_800B524
 
-	thumb_func_start sub_800B53C
-sub_800B53C: @ 800B53C
+	thumb_func_start DisableSerial
+DisableSerial: @ 800B53C
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0xC0
@@ -1541,7 +1393,7 @@ sub_800B53C: @ 800B53C
 	str r0, [r2]
 	str r1, [r2, 0x4]
 	str r0, [sp]
-	ldr r1, =gUnknown_03003170
+	ldr r1, =gLink
 	ldr r2, =0x050003f0
 	mov r0, sp
 	bl CpuSet
@@ -1549,10 +1401,10 @@ sub_800B53C: @ 800B53C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_800B53C
+	thumb_func_end DisableSerial
 
-	thumb_func_start sub_800B594
-sub_800B594: @ 800B594
+	thumb_func_start EnableSerial
+EnableSerial: @ 800B594
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r0, 0xC0
@@ -1576,7 +1428,7 @@ sub_800B594: @ 800B594
 	strh r4, [r0]
 	movs r5, 0
 	str r5, [sp]
-	ldr r1, =gUnknown_03003170
+	ldr r1, =gLink
 	ldr r2, =0x050003f0
 	mov r0, sp
 	bl CpuSet
@@ -1599,16 +1451,16 @@ sub_800B594: @ 800B594
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_800B594
+	thumb_func_end EnableSerial
 
-	thumb_func_start sub_800B628
-sub_800B628: @ 800B628
+	thumb_func_start ResetSerial
+ResetSerial: @ 800B628
 	push {lr}
-	bl sub_800B594
-	bl sub_800B53C
+	bl EnableSerial
+	bl DisableSerial
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800B628
+	thumb_func_end ResetSerial
 
 	thumb_func_start sub_800B638
 sub_800B638: @ 800B638
@@ -1616,7 +1468,7 @@ sub_800B638: @ 800B638
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r6, r2, 0
-	ldr r0, =gUnknown_03003170
+	ldr r0, =gLink
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x4
 	bhi _0800B6EA
@@ -1634,8 +1486,8 @@ _0800B65C:
 	.4byte _0800B6D4
 	.4byte _0800B6DE
 _0800B670:
-	bl sub_800B53C
-	ldr r1, =gUnknown_03003170
+	bl DisableSerial
+	ldr r1, =gLink
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
 	b _0800B6EA
@@ -1644,8 +1496,8 @@ _0800B680:
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _0800B6EA
-	bl sub_800B594
-	ldr r1, =gUnknown_03003170
+	bl EnableSerial
+	ldr r1, =gLink
 	movs r0, 0x2
 	strb r0, [r1, 0x1]
 	b _0800B6EA
@@ -1659,7 +1511,7 @@ _0800B698:
 	bl sub_800B764
 	b _0800B6EA
 _0800B6A8:
-	ldr r2, =gUnknown_03003170
+	ldr r2, =gLink
 	ldrb r0, [r2]
 	cmp r0, 0x8
 	bne _0800B6EA
@@ -1670,7 +1522,7 @@ _0800B6A8:
 	b _0800B6EA
 	.pool
 _0800B6C0:
-	ldr r0, =gUnknown_03003170
+	ldr r0, =gLink
 	movs r1, 0
 	strb r1, [r0, 0x1]
 	ldr r0, =0x0400012a
@@ -1679,7 +1531,7 @@ _0800B6C0:
 	.pool
 _0800B6D4:
 	bl sub_800B790
-	ldr r1, =gUnknown_03003170
+	ldr r1, =gLink
 	movs r0, 0x4
 	strb r0, [r1, 0x1]
 _0800B6DE:
@@ -1690,7 +1542,7 @@ _0800B6DE:
 _0800B6EA:
 	movs r0, 0
 	strb r0, [r4]
-	ldr r1, =gUnknown_03003170
+	ldr r1, =gLink
 	ldrb r2, [r1, 0x2]
 	ldrb r0, [r1, 0x3]
 	lsls r0, 2
@@ -1762,7 +1614,7 @@ sub_800B764: @ 800B764
 	ldr r1, [r0]
 	movs r0, 0xC
 	ands r1, r0
-	ldr r2, =gUnknown_03003170
+	ldr r2, =gLink
 	cmp r1, 0x8
 	bne _0800B788
 	ldrb r0, [r2, 0x2]
@@ -1782,7 +1634,7 @@ _0800B78C:
 	thumb_func_start sub_800B790
 sub_800B790: @ 800B790
 	push {lr}
-	ldr r0, =gUnknown_03003170
+	ldr r0, =gLink
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800B7AE
@@ -1815,7 +1667,7 @@ sub_800B7C0: @ 800B7C0
 	strh r0, [r2]
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_03003170
+	ldr r1, =gLink
 	ldr r4, =0x00000339
 	adds r0, r1, r4
 	ldrb r4, [r0]
@@ -1920,7 +1772,7 @@ sub_800B8A8: @ 800B8A8
 	strh r0, [r2]
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_03003170
+	ldr r1, =gLink
 	ldr r3, =0x00000fbd
 	adds r0, r1, r3
 	ldrb r0, [r0]
@@ -2042,7 +1894,7 @@ _0800B990:
 	thumb_func_start sub_800B9B8
 sub_800B9B8: @ 800B9B8
 	push {r4,lr}
-	ldr r3, =gUnknown_03003170
+	ldr r3, =gLink
 	ldrb r4, [r3]
 	cmp r4, 0
 	beq _0800B9F4
@@ -2114,7 +1966,7 @@ Timer3Intr: @ 800BA28
 	thumb_func_start sub_800BA38
 sub_800BA38: @ 800BA38
 	push {r4,lr}
-	ldr r4, =gUnknown_03003170
+	ldr r4, =gLink
 	ldr r0, =0x04000128
 	ldr r1, [r0]
 	lsls r0, r1, 26
@@ -2150,7 +2002,7 @@ _0800BA86:
 	movs r0, 0x4
 	strb r0, [r4, 0x1]
 _0800BA8A:
-	ldr r3, =gUnknown_03003170
+	ldr r3, =gLink
 	ldrb r0, [r3, 0xD]
 	adds r0, 0x1
 	movs r2, 0
@@ -2192,7 +2044,7 @@ sub_800BAD0: @ 800BAD0
 	push {r6,r7}
 	movs r5, 0
 	ldr r6, =0x0000ffff
-	ldr r0, =gUnknown_03003170
+	ldr r0, =gLink
 	ldrb r1, [r0, 0xE]
 	adds r7, r0, 0
 	cmp r1, 0x1
@@ -2207,7 +2059,7 @@ _0800BAFC:
 _0800BB00:
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r2, =gUnknown_03003170+0x4
+	ldr r2, =gLink+0x4
 	ldr r3, =0x04000120
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
@@ -2313,7 +2165,7 @@ sub_800BBCC: @ 800BBCC
 	ldr r0, [r0]
 	str r0, [sp]
 	str r1, [sp, 0x4]
-	ldr r0, =gUnknown_03003170
+	ldr r0, =gLink
 	ldrb r1, [r0, 0x16]
 	adds r6, r0, 0
 	cmp r1, 0
@@ -2447,7 +2299,7 @@ _0800BCD0:
 	thumb_func_start sub_800BCE4
 sub_800BCE4: @ 800BCE4
 	push {r4,lr}
-	ldr r0, =gUnknown_03003170
+	ldr r0, =gLink
 	ldrb r1, [r0, 0x16]
 	adds r4, r0, 0
 	cmp r1, 0x8
@@ -2533,7 +2385,7 @@ _0800BD8C:
 	thumb_func_start sub_800BD98
 sub_800BD98: @ 800BD98
 	push {lr}
-	ldr r0, =gUnknown_03003170
+	ldr r0, =gLink
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800BDB4
@@ -2555,7 +2407,7 @@ _0800BDB4:
 	thumb_func_start sub_800BDCC
 sub_800BDCC: @ 800BDCC
 	push {lr}
-	ldr r1, =gUnknown_03003170
+	ldr r1, =gLink
 	ldrb r0, [r1, 0x17]
 	cmp r0, 0x8
 	bne _0800BDE4
@@ -2582,7 +2434,7 @@ _0800BDF4:
 	thumb_func_start sub_800BDFC
 sub_800BDFC: @ 800BDFC
 	push {r4-r6,lr}
-	ldr r1, =gUnknown_03003170
+	ldr r1, =gLink
 	ldr r2, =0x00000339
 	adds r0, r1, r2
 	movs r2, 0
@@ -2624,7 +2476,7 @@ _0800BE22:
 	thumb_func_start sub_800BE50
 sub_800BE50: @ 800BE50
 	push {r4-r7,lr}
-	ldr r1, =gUnknown_03003170
+	ldr r1, =gLink
 	ldr r2, =0x00000fbd
 	adds r0, r1, r2
 	movs r2, 0

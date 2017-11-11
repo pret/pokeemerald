@@ -1,9 +1,9 @@
 gKeyRepeatStartDelay
-gUnknown_030022B4
+gLinkTransferringData
 gMain
 gKeyRepeatContinueDelay
 gSoftResetDisabled
 gIntrTable
-gUnknown_03002748
+gLinkVSyncDisabled
 IntrMain_Buffer
 gPcmDmaCounter

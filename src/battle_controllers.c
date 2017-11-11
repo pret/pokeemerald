@@ -62,7 +62,7 @@ void HandleLinkBattleSetup(void)
         if (gSerialIsRFU)
             sub_800B488();
         if (!gReceivedRemoteLinkPlayers)
-            sub_8009734();
+            OpenLink();
         CreateTask(task00_08081A90, 0);
         CreateTasksForSendRecvLinkBuffers();
     }

@@ -747,7 +747,7 @@ _080E7384:
 	movs r0, 0xC8
 	lsls r0, 1
 	strh r0, [r5, 0x8]
-	bl sub_8009FAC
+	bl ClearLinkCallback_2
 	b _080E7566
 	.pool
 _080E73A0:
@@ -993,7 +993,7 @@ _080E75AC:
 	movs r0, 0xC8
 	muls r0, r2
 	adds r1, r0
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r2, 0xC8
 	bl memcpy
 	b _080E75FC

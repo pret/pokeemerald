@@ -3584,7 +3584,7 @@ sub_808631C: @ 808631C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808632E
-	bl sub_80097E8
+	bl CloseLink
 _0808632E:
 	ldr r0, =gSerialIsRFU
 	ldrb r0, [r0]
@@ -5950,7 +5950,7 @@ sub_8087690: @ 8087690
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080876B0
-	ldr r0, =gUnknown_03003170
+	ldr r0, =gLink
 	ldr r1, =0x00000339
 	adds r0, r1
 	ldrb r0, [r0]
