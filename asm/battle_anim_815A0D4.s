@@ -3006,7 +3006,7 @@ _0815B8A8:
 	lsls r2, 3
 	adds r2, r3
 	ldrb r2, [r2, 0x1C]
-	bl sub_805E448
+	bl HandleSpeciesGfxDataChange
 	ldrb r1, [r5]
 	mov r0, sp
 	bl sub_80A6BFC
@@ -3310,7 +3310,7 @@ sub_815BB58: @ 815BB58
 	ldr r1, =gAnimBankTarget
 	ldrb r1, [r1]
 	movs r2, 0x1
-	bl sub_805E448
+	bl HandleSpeciesGfxDataChange
 	adds r0, r4, 0
 	bl DestroyAnimVisualTask
 	pop {r4}
@@ -10129,7 +10129,7 @@ _0815F2AC:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
-	bl refresh_graphics_maybe
+	bl LoadBattleMonGfxAndAnimate
 	bl IsContest
 	lsls r0, 24
 	cmp r0, 0

@@ -8824,7 +8824,7 @@ _080C0168:
 	adds r3, r5
 	ldrb r4, [r3, 0x5]
 	lsrs r4, 4
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	lsls r4, 4
 	movs r2, 0x80
 	lsls r2, 1

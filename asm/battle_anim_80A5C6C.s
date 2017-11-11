@@ -586,8 +586,8 @@ _080A612E:
 	bx r1
 	thumb_func_end sub_80A60AC
 
-	thumb_func_start sub_80A6138
-sub_80A6138: @ 80A6138
+	thumb_func_start GetBankSpriteDefault_Y
+GetBankSpriteDefault_Y: @ 80A6138
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -597,10 +597,10 @@ sub_80A6138: @ 80A6138
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A6138
+	thumb_func_end GetBankSpriteDefault_Y
 
-	thumb_func_start sub_80A614C
-sub_80A614C: @ 80A614C
+	thumb_func_start GetSubstituteSpriteDefault_Y
+GetSubstituteSpriteDefault_Y: @ 80A614C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -633,7 +633,7 @@ _080A6180:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A614C
+	thumb_func_end GetSubstituteSpriteDefault_Y
 
 	thumb_func_start sub_80A6190
 sub_80A6190: @ 80A6190
@@ -5180,7 +5180,7 @@ _080A8412:
 	adds r0, r6, 0
 	ldr r1, [sp, 0x3C]
 	mov r2, r8
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	lsls r1, r5, 20
 	movs r2, 0x80
 	lsls r2, 17
@@ -5243,7 +5243,7 @@ _080A84B0:
 	adds r0, r6, 0
 	ldr r1, [sp, 0x3C]
 	mov r2, r8
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	lsls r1, r5, 20
 	movs r3, 0x80
 	lsls r3, 17
