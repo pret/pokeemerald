@@ -1132,3 +1132,28 @@ void sub_800A678(u8 a0, u8 a1, u8 a2)
     vAddr = (u16 *)BG_SCREEN_ADDR(gUnknown_03003130.screenBaseBlock);
     vAddr[a2 * 32 + a1] = (gUnknown_03003130.paletteNum << 12) | (a0 + 1 + gUnknown_03003130.dummy_8);
 }
+
+void sub_800A6B0(u8 a0, u8 a1, u8 a2)
+{
+    u16 *vAddr;
+
+    vAddr = (u16 *)BG_SCREEN_ADDR(gUnknown_03003130.screenBaseBlock);
+    vAddr[a2 * 32 + a1] = (gUnknown_03003130.paletteNum << 12) | (a0 + gUnknown_03003130.dummy_8);
+}
+
+void sub_800A6E8(u32 a0, u8 a1, u8 a2, u8 a3)
+{
+    u8 sp[32 / 2];
+    int i;
+
+    for (i = 0; i < a3; i ++)
+    {
+        sp[i] = a0 & 0xf;
+        a0 >>= 4;
+    }
+    for (i = a3 - 1; i >= 0; i --)
+    {
+        sub_800A678(sp[i], a1, a2);
+        a1 ++;
+    }
+}
