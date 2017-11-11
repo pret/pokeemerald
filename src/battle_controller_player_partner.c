@@ -327,7 +327,7 @@ static void CompleteOnHealthbarDone(void)
     }
     else
     {
-        sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         PlayerPartnerBufferExecCompleted();
     }
 }
@@ -469,7 +469,7 @@ static void sub_81BB628(u8 taskId)
     if (IsDoubleBattle() == TRUE && monIndex == gBattlePartyID[bank ^ BIT_MON])
         bank ^= BIT_MON;
 
-    DoSpecialBattleAnimation(bank, bank, bank, B_ANIM_LVL_UP);
+    InitAndLaunchSpecialAnimation(bank, bank, bank, B_ANIM_LVL_UP);
     gTasks[taskId].func = sub_81BB688;
 }
 
@@ -560,7 +560,7 @@ static void sub_81BB92C(void)
     {
         CopyBattleSpriteInvisibility(gActiveBank);
         if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute)
-            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_MON_TO_SUBSTITUTE);
+            InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_MON_TO_SUBSTITUTE);
 
         gBattleBankFunc[gActiveBank] = sub_81BB9A0;
     }
@@ -586,7 +586,7 @@ static void sub_81BB9F4(void)
         FreeSpritePaletteByTag(0x27F9);
 
         CreateTask(c3_0802FDF4, 10);
-        sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], 0);
         UpdateHealthboxAttribute(gHealthBoxesIds[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], HEALTHBOX_ALL);
         sub_8076918(gActiveBank);
@@ -1213,7 +1213,7 @@ static void SetPlayerPartnerMonData(u8 monId)
         break;
     }
 
-    sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 }
 
 static void PlayerPartnerHandleSetRawMonData(void)
@@ -1237,7 +1237,7 @@ static void PlayerPartnerHandleLoadMonSprite(void)
 
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
                                                sub_80A5C6C(gActiveBank, 2),
-                                               sub_80A6138(gActiveBank),
+                                               GetBankSpriteDefault_Y(gActiveBank),
                                                sub_80A82E4(gActiveBank));
     gSprites[gBankSpriteIds[gActiveBank]].pos2.x = -240;
     gSprites[gBankSpriteIds[gActiveBank]].data0 = gActiveBank;
@@ -1268,7 +1268,7 @@ static void sub_81BD0E4(u8 bank, bool8 dontClearSubstituteBit)
     gBankSpriteIds[bank] = CreateSprite(
       &gUnknown_0202499C,
       sub_80A5C6C(bank, 2),
-      sub_80A6138(bank),
+      GetBankSpriteDefault_Y(bank),
       sub_80A82E4(bank));
 
     gSprites[gUnknown_03005D7C[bank]].data1 = gBankSpriteIds[bank];
@@ -1308,7 +1308,7 @@ static void DoSwitchOutAnimation(void)
     {
     case 0:
         if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute)
-            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
+            InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
 
         gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 1;
         break;
@@ -1316,7 +1316,7 @@ static void DoSwitchOutAnimation(void)
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
-            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SWITCH_OUT_PLAYER_MON);
+            InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SWITCH_OUT_PLAYER_MON);
             gBattleBankFunc[gActiveBank] = sub_81BB828;
         }
         break;
@@ -1395,7 +1395,7 @@ static void PlayerPartnerHandleFaintAnimation(void)
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState == 0)
     {
         if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute)
-            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
+            InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
         gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState++;
     }
     else
@@ -1403,7 +1403,7 @@ static void PlayerPartnerHandleFaintAnimation(void)
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         {
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
-            sub_805E990(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+            HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
             PlaySE12WithPanning(SE_POKE_DEAD, PAN_SIDE_PLAYER);
             gSprites[gBankSpriteIds[gActiveBank]].data1 = 0;
             gSprites[gBankSpriteIds[gActiveBank]].data2 = 5;
@@ -1470,7 +1470,7 @@ static void PlayerPartnerDoMoveAnimation(void)
             && !gBattleSpritesDataPtr->bankData[gActiveBank].flag_x8)
         {
             gBattleSpritesDataPtr->bankData[gActiveBank].flag_x8 = 1;
-            DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
+            InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_SUBSTITUTE_TO_MON);
         }
         gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 1;
         break;
@@ -1489,7 +1489,7 @@ static void PlayerPartnerDoMoveAnimation(void)
             sub_805EB9C(1);
             if (gBattleSpritesDataPtr->bankData[gActiveBank].behindSubstitute && multihit < 2)
             {
-                DoSpecialBattleAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_MON_TO_SUBSTITUTE);
+                InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, gActiveBank, B_ANIM_MON_TO_SUBSTITUTE);
                 gBattleSpritesDataPtr->bankData[gActiveBank].flag_x8 = 0;
             }
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 3;
@@ -1498,7 +1498,7 @@ static void PlayerPartnerDoMoveAnimation(void)
     case 3:
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive)
         {
-            sub_805E394();
+            CopyAllBattleSpritesInvisibilities();
             TrySetBehindSubstituteSpriteBit(gActiveBank, gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
             PlayerPartnerBufferExecCompleted();
@@ -1661,7 +1661,7 @@ static void PlayerPartnerHandleStatusAnimation(void)
 {
     if (!mplay_80342A4(gActiveBank))
     {
-        DoStatusAnimation(gBattleBufferA[gActiveBank][1],
+        InitAndLaunchChosenStatusAnimation(gBattleBufferA[gActiveBank][1],
                         gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8) | (gBattleBufferA[gActiveBank][4] << 16) | (gBattleBufferA[gActiveBank][5] << 24));
         gBattleBankFunc[gActiveBank] = CompleteOnFinishedStatusAnimation;
     }
@@ -1773,7 +1773,7 @@ static void PlayerPartnerHandlePlayFanfareOrBGM(void)
 {
     if (gBattleBufferA[gActiveBank][3])
     {
-        BattleMusicStop();
+        BattleStopLowHpSound();
         PlayBGM(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
     }
     else
@@ -1929,7 +1929,7 @@ static void PlayerPartnerHandleBattleAnimation(void)
         u8 animationId = gBattleBufferA[gActiveBank][1];
         u16 argument = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
 
-        if (DoBattleAnimationFromTable(gActiveBank, gActiveBank, gActiveBank, animationId, argument))
+        if (TryHandleLaunchBattleTableAnimation(gActiveBank, gActiveBank, gActiveBank, animationId, argument))
             PlayerPartnerBufferExecCompleted();
         else
             gBattleBankFunc[gActiveBank] = CompleteOnFinishedBattleAnimation;
