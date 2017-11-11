@@ -3,6 +3,8 @@
 #include "global.h"
 #include "malloc.h"
 #include "save.h"
+#include "bg.h"
+#include "window.h"
 #include "librfu.h"
 #include "rng.h"
 #include "decompress.h"
@@ -169,7 +171,29 @@ const u8 gUnknown_082ED1D0[] = {
 };
 const char gASCIIGameFreakInc[] = "GameFreak inc.";
 const char gASCIITestPrint[] = "TEST PRINT\nP0\nP1\nP2\nP3";
-
+const struct BgTemplate gUnknown_082ED1FC[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .priority = 0
+    }, {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 8,
+        .priority = 1
+    }
+};
+const struct WindowTemplate gUnknown_082ED204[] = {
+    {0x00, 0x00, 0x00, 0x1E, 0x05, 0x0F, 0x0002},
+    {0x00, 0x00, 0x06, 0x1E, 0x07, 0x0F, 0x0098},
+    {0x00, 0x00, 0x0D, 0x1E, 0x07, 0x0F, 0x016A},
+    DUMMY_WIN_TEMPLATE
+};
+const u8 gUnknown_082ED224[] = {
+    0x00, 0x01, 0x02, 0x00,
+    0xff, 0xfe, 0xff, 0x00
+};
 
 // .text
 
