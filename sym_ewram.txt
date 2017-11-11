@@ -18,42 +18,7 @@ gStringVar4: @ 2021FC4
 	.space 0x3E8
 
 	.include "src/string_util.o"
-
-gUnknown_020223BC: @ 20223BC
-	.space 0x1
-
-gUnknown_020223BD: @ 20223BD
-	.space 0x3
-
-gUnknown_020223C0: @ 20223C0
-	.space 0x4
-
-gBlockRecvBuffer: @ 20223C4
-	.space 0x500
-
-gUnknown_020228C4: @ 20228C4 gBlockSendBuffer
-	.space 0x100
-
-gUnknown_020229C4: @ 20229C4
-	.space 0x2
-
-gUnknown_020229C6: @ 20229C6
-	.space 0x2
-
-gUnknown_020229C8: @ 20229C8
-	.space 0x4
-
-gUnknown_020229CC: @ 20229CC
-	.space 0x1C
-
-gLinkPlayers: @ 20229E8
-	.space 0x24
-    
-gUnknown_02022A0C: @ 2022A0C
-	.space 0x68
-
-gUnknown_02022A74: @ 2022A74
-	.space 0x8C
+	.include "src/link.o"
 
 gUnknown_02022B00: @ 2022B00
 	.space 0x8
@@ -175,6 +140,7 @@ gUnknown_02022CFC: @ 2022CFC
 gUnknown_02022D00: @ 2022D00
 	.space 0x4
 
+@ src/main_menu.c
 gUnknown_02022D04: @ 2022D04
 	.space 0x2
 
@@ -193,8 +159,7 @@ gUnknown_02022D0A: @ 2022D0A
 gUnknown_02022D0C: @ 2022D0C
 	.space 0x4
 
-gBattleBuffersTransferData: @ 2022D10
-	.space 0x100
+	.include "src/battle_controllers.o"
 
 gUnknown_02022E10: @ 2022E10
 	.space 0x4

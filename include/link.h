@@ -136,7 +136,7 @@ extern u8 gUnknown_020228C4[BLOCK_BUFFER_SIZE]; // gBlockSendBuffer
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
 extern u32 gLinkStatus;
-extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
+extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS + 1][BLOCK_BUFFER_SIZE / 2];
 extern u16 gSendCmd[CMD_LENGTH];
 extern u8 gShouldAdvanceLinkState;
 extern struct LinkPlayer gLinkPlayers[];

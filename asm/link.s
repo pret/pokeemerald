@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800A3EC
-sub_800A3EC: @ 800A3EC
-	ldr r1, =gUnknown_03003140
-	movs r0, 0
-	str r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end sub_800A3EC
-
-	thumb_func_start sub_800A3F8
-sub_800A3F8: @ 800A3F8
-	push {lr}
-	bl GetMultiplayerId
-	ldr r0, =0x00004444
-	bl sub_8009D90
-	ldr r1, =gUnknown_020223C0
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800A3F8
-
 	thumb_func_start sub_800A418
 sub_800A418: @ 800A418
 	push {lr}
@@ -22370,7 +22346,7 @@ _08016118:
 	movs r0, 0x21
 	strb r0, [r6, 0x14]
 	ldr r0, =gStringVar1
-	ldr r4, =gUnknown_02022A0C
+	ldr r4, =gLinkPlayers + 0x1C + 0x08 @ &gLinkPlayers[1].name
 	adds r1, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
@@ -29144,7 +29120,7 @@ _08019870:
 _08019884:
 	bl task_add_05_task_del_08FA224_when_no_RfuFunc
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_02022A0C
+	ldr r1, =gLinkPlayers + 0x1C + 0x08 @ &gLinkPlayers[1].name
 	bl StringCopy
 	movs r0, 0x22
 	strb r0, [r5, 0x8]

@@ -98,12 +98,17 @@ u16 gUnknown_03003148[MAX_LINK_PLAYERS];
 u8 gUnknown_03003150;
 u8 gUnknown_03003160;
 
-u8 gUnknown_020223BC = 0;
-u8 gUnknown_020223BD = 0;
-bool8 gUnknown_020229C4 = FALSE;
-u16 gUnknown_020229C6 = 0;
-u16 gUnknown_020229C8 = 0;
-struct LinkPlayer gUnknown_020229CC = {};
+EWRAM_DATA u8 gUnknown_020223BC = 0;
+EWRAM_DATA u8 gUnknown_020223BD = 0;
+EWRAM_DATA u32 gUnknown_020223C0 = 0;
+EWRAM_DATA u16 gBlockRecvBuffer[MAX_LINK_PLAYERS + 1][BLOCK_BUFFER_SIZE / 2] = {};
+EWRAM_DATA u8 gUnknown_020228C4[BLOCK_BUFFER_SIZE] = {};
+EWRAM_DATA bool8 gUnknown_020229C4 = FALSE;
+EWRAM_DATA u16 gUnknown_020229C6 = 0;
+EWRAM_DATA u16 gUnknown_020229C8 = 0;
+EWRAM_DATA struct LinkPlayer gUnknown_020229CC = {};
+EWRAM_DATA struct LinkPlayer gLinkPlayers[MAX_LINK_PLAYERS + 1] = {};
+EWRAM_DATA struct LinkPlayer gUnknown_02022A74[MAX_LINK_PLAYERS + 1] = {};
 
 // Static ROM declarations
 
@@ -116,7 +121,7 @@ static void sub_800A2E0(void);
 bool32 sub_800A2F4(const void *src, size_t size);
 static void sub_800A364(void);
 static void sub_800A388(void);
-void sub_800A3EC(void);
+static void sub_800A3EC(void);
 void sub_800A418(void);
 void task00_link_test(u8 taskId);
 void sub_800A588(u8 who);
@@ -949,4 +954,16 @@ static void sub_800A388(void)
         gUnknown_03000D10.active = FALSE;
         gUnknown_03003140 = sub_800A3EC;
     }
+}
+
+static void sub_800A3EC(void)
+{
+    gUnknown_03003140 = NULL;
+}
+
+void sub_800A3F8(void)
+{
+    GetMultiplayerId();
+    sub_8009D90(0x4444);
+    gUnknown_020223C0 ++;
 }
