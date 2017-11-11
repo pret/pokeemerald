@@ -8542,13 +8542,11 @@ static void atk9D_mimicattackcopy(void)
     }
 }
 
-#ifdef NONMATCHING
 static void atk9E_metronome(void)
 {
     while (1)
     {
-        const u16 *move;
-        s32 i, j;
+        s32 i;
 
         gCurrentMove = (Random() & 0x1FF) + 1;
         if (gCurrentMove > LAST_MOVE_INDEX)
@@ -8556,101 +8554,25 @@ static void atk9E_metronome(void)
 
         for (i = 0; i < 4; i++); // ?
 
-        for (move = sMovesForbiddenToCopy; ; move++)
+        i = -1;
+        while (1)
         {
-            if (*move == gCurrentMove)
+            i++;
+            if (sMovesForbiddenToCopy[i] == gCurrentMove)
                 break;
-            if (*move == METRONOME_FORBIDDEN_END)
+            if (sMovesForbiddenToCopy[i] == METRONOME_FORBIDDEN_END)
                 break;
         }
 
-        if (*move == METRONOME_FORBIDDEN_END)
-            break;
+        if (sMovesForbiddenToCopy[i] == METRONOME_FORBIDDEN_END)
+        {
+            gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
+            gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
+            gBankTarget = GetMoveTarget(gCurrentMove, 0);
+            return;
+        }
     }
-
-    gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
-    gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
-    gBankTarget = GetMoveTarget(gCurrentMove, 0);
 }
-
-#else
-__attribute__((naked))
-static void atk9E_metronome(void)
-{
-    asm(
-    "\n\
-    .syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	ldr r7, =gCurrentMove\n\
-	movs r6, 0xB1\n\
-	lsls r6, 1\n\
-	ldr r5, =sMovesForbiddenToCopy\n\
-	ldr r0, =gBattlescriptCurrInstr\n\
-	mov r8, r0\n\
-_080524EE:\n\
-	bl Random\n\
-	ldr r2, =0x000001ff\n\
-	adds r1, r2, 0\n\
-	ands r0, r1\n\
-	adds r0, 0x1\n\
-	strh r0, [r7]\n\
-	cmp r0, r6\n\
-	bhi _080524EE\n\
-	movs r0, 0x3\n\
-_08052502:\n\
-	subs r0, 0x1\n\
-	cmp r0, 0\n\
-	bge _08052502\n\
-	ldr r4, =gCurrentMove\n\
-	ldrh r2, [r4]\n\
-	ldr r3, =0x0000ffff\n\
-	subs r0, r5, 0x2\n\
-_08052510:\n\
-	adds r0, 0x2\n\
-	ldrh r1, [r0]\n\
-	cmp r1, r2\n\
-	beq _0805251C\n\
-	cmp r1, r3\n\
-	bne _08052510\n\
-_0805251C:\n\
-	ldr r0, =0x0000ffff\n\
-	cmp r1, r0\n\
-	bne _080524EE\n\
-	ldr r2, =gHitMarker\n\
-	ldr r0, [r2]\n\
-	ldr r1, =0xfffffbff\n\
-	ands r0, r1\n\
-	str r0, [r2]\n\
-	ldr r3, =gBattleScriptsForMoveEffects\n\
-	ldr r2, =gBattleMoves\n\
-	ldrh r1, [r4]\n\
-	lsls r0, r1, 1\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r2\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 2\n\
-	adds r0, r3\n\
-	ldr r0, [r0]\n\
-	mov r1, r8\n\
-	str r0, [r1]\n\
-	ldrh r0, [r4]\n\
-	movs r1, 0\n\
-	bl GetMoveTarget\n\
-	ldr r1, =gBankTarget\n\
-	strb r0, [r1]\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .pool\n\
-    .syntax divided");
-}
-
-#endif // NONMATCHING
 
 static void atk9F_dmgtolevel(void)
 {
