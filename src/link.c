@@ -67,14 +67,16 @@ IWRAM_DATA void *gUnknown_03000DAC;
 IWRAM_DATA bool32 gUnknown_03000DB0;
 
 u16 gUnknown_03003020[6];
-u32 gUnknown_0300302C;
+u32 gLinkDebugSeed;
 struct LinkPlayerBlock gLocalLinkPlayerBlock;
 bool8 gLinkErrorOccurred;
-u32 gUnknown_03003070;
+u32 gLinkDebugFlags;
+u32 gUnknown_03003074;
 bool8 gUnknown_03003078[MAX_LINK_PLAYERS];
 u8 gUnknown_0300307C[MAX_LINK_PLAYERS];
+u32 gFiller_03003080;
 u16 gLinkHeldKeys;
-u16 gRecvCmds[MAX_LINK_PLAYERS][8];
+u16 gRecvCmds[MAX_RFU_PLAYERS][8];
 u32 gLinkStatus;
 u8 gUnknown_030030E4;
 bool8 gUnknown_030030E8;
@@ -92,9 +94,15 @@ void (*gLinkCallback)(void);
 bool8 gShouldAdvanceLinkState;
 u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
 u8 gBlockRequestType;
+u32 gFiller_03003154;
+u32 gFiller_03003158;
+u32 gFiller_0300315c;
 u8 gUnknown_03003160;
 struct Link gLink;
 u8 gUnknown_03004130;
+u16 gUnknown_03004134;
+u32 gFiller_03004138;
+u32 gFiller_0300413C;
 
 EWRAM_DATA u8 gLinkTestDebugValuesEnabled = 0;
 EWRAM_DATA u8 gUnknown_020223BD = 0;
@@ -124,7 +132,7 @@ static void SetBlockReceivedFlag(u8 who);
 static u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size);
 static void LinkTest_prnthex(u32 pos, u8 a0, u8 a1, u8 a2);
 static void LinkCB_RequestPlayerDataExchange(void);
-static void task00_link_test(u8 taskId);
+static void Task_PrintTestData(u8 taskId);
 void sub_800AEB4(void);
 u8 sub_800B2F8(void);
 void sub_800B4A4(void);
@@ -260,7 +268,7 @@ void LinkTestScreen(void)
     UpdatePaletteFade();
     gUnknown_03000D60 = 0;
     InitLocalLinkPlayer();
-    CreateTask(task00_link_test, 0);
+    CreateTask(Task_PrintTestData, 0);
     SetMainCallback2(CB2_LinkTest);
 }
 
@@ -1218,7 +1226,7 @@ static void LinkCB_RequestPlayerDataExchange(void)
     gLinkCallback = NULL;
 }
 
-static void task00_link_test(u8 taskId)
+static void Task_PrintTestData(u8 taskId)
 {
     char sp[32];
     int i;
@@ -1233,8 +1241,8 @@ static void task00_link_test(u8 taskId)
     LinkTest_prnthex(gUnknown_03003160, 25, 1, 2);
     LinkTest_prnthex(gUnknown_03004130, 25, 2, 2);
     LinkTest_prnthex(GetBlockReceivedStatus(), 15, 5, 2);
-    LinkTest_prnthex(gUnknown_0300302C, 2, 12, 8);
-    LinkTest_prnthex(gUnknown_03003070, 2, 13, 8);
+    LinkTest_prnthex(gLinkDebugSeed, 2, 12, 8);
+    LinkTest_prnthex(gLinkDebugFlags, 2, 13, 8);
     LinkTest_prnthex(sub_800B2E8(), 25, 5, 1);
     LinkTest_prnthex(sub_800B2F8(), 25, 6, 1);
     LinkTest_prnthex(sub_800B320(), 25, 7, 1);
@@ -1243,4 +1251,10 @@ static void task00_link_test(u8 taskId)
     {
         LinkTest_prnthex(gLinkTestBlockChecksums[i], 10, 4 + i, 4);
     }
+}
+
+void SetLinkDebugValues(u32 seed, u32 flags)
+{
+    gLinkDebugSeed = seed;
+    gLinkDebugFlags = flags;
 }

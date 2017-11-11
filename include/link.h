@@ -149,7 +149,7 @@ struct BlockRequest
 extern const struct BlockRequest sBlockRequestLookupTable[5];
 
 extern struct Link gLink;
-extern u16 gRecvCmds[MAX_LINK_PLAYERS][CMD_LENGTH];
+extern u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE]; // gBlockSendBuffer
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
@@ -218,18 +218,18 @@ u8 sub_800B320(void);
 u8 sub_800B33C(void);
 
 extern u16 gUnknown_03003020[6];
-extern u32 gUnknown_0300302C;
+extern u32 gLinkDebugSeed;
 extern struct LinkPlayerBlock gLocalLinkPlayerBlock;
 extern bool8 gLinkErrorOccurred;
-extern u32 gUnknown_03003070;
-extern bool8 gUnknown_03003078[4];
-extern u8 gUnknown_0300307C[4];
+extern u32 gLinkDebugFlags;
+extern bool8 gUnknown_03003078[MAX_LINK_PLAYERS];
+extern u8 gUnknown_0300307C[MAX_LINK_PLAYERS];
 extern u16 gLinkHeldKeys;
 extern u32 gLinkStatus;
 extern u8 gUnknown_030030E4;
 extern u8 gUnknown_030030E8;
-extern u8 gUnknown_030030EC[4];
-extern u8 gUnknown_030030F0[4];
+extern u8 gUnknown_030030EC[MAX_LINK_PLAYERS];
+extern u8 gUnknown_030030F0[MAX_LINK_PLAYERS];
 extern u16 gUnknown_030030F4;
 extern u8 gSuppressLinkErrorMessage;
 extern bool8 gSerialIsRFU;
@@ -238,9 +238,17 @@ extern u8 gUnknown_03003120;
 extern struct LinkTestBGInfo gLinkTestBGInfo;
 extern void (*gLinkCallback)(void);
 extern bool8 gShouldAdvanceLinkState;
-extern u16 gLinkTestBlockChecksums[4];
+extern u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
 extern u8 gBlockRequestType;
 extern u8 gUnknown_03003160;
 extern u8 gUnknown_03004130;
+extern u16 gUnknown_03004134;
+extern u32 gUnknown_03003074;
+extern u32 gFiller_03003154;
+extern u32 gFiller_03003158;
+extern u32 gFiller_0300315c;
+extern u32 gFiller_03004138;
+extern u32 gFiller_0300413C;
+extern u32 gFiller_03003080;
 
 #endif // GUARD_LINK_H

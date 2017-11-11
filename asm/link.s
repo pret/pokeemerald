@@ -5,16 +5,6 @@
 
 	.text
 
-	thumb_func_start SetLinkDebugValues
-SetLinkDebugValues: @ 800A994
-	ldr r2, =gUnknown_0300302C
-	str r0, [r2]
-	ldr r0, =gUnknown_03003070
-	str r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end SetLinkDebugValues
-
 	thumb_func_start sub_800A9A8
 sub_800A9A8: @ 800A9A8
 	push {r4,lr}
