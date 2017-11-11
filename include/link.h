@@ -2,6 +2,7 @@
 #define GUARD_LINK_H
 
 #define MAX_LINK_PLAYERS 4
+#define MAX_RFU_PLAYERS 5
 #define CMD_LENGTH 8
 #define QUEUE_CAPACITY 50
 #define BLOCK_BUFFER_SIZE 0x100
@@ -25,6 +26,18 @@
 (((status) >> LINK_STAT_CONN_ESTABLISHED_SHIFT) & 1)
 #define EXTRACT_RECEIVED_NOTHING(status) \
 (((status) >> LINK_STAT_RECEIVED_NOTHING_SHIFT) & 1)
+
+struct LinkStatus
+{
+    u32 localId:2;
+    u32 playerCount:3;
+    u32 master:1;
+    u32 connEstablished:1;
+    u32 unused_7:1;
+    u32 receivedNothing:1;
+    u32 unused_9:7;
+    u32 errors:7;
+};
 
 #define MASTER_HANDSHAKE 0x8FFF
 #define SLAVE_HANDSHAKE  0xB9A0
@@ -138,7 +151,7 @@ extern u8 gUnknown_020228C4[BLOCK_BUFFER_SIZE]; // gBlockSendBuffer
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
 extern u32 gLinkStatus;
-extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS + 1][BLOCK_BUFFER_SIZE / 2];
+extern u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 extern u16 gSendCmd[CMD_LENGTH];
 extern u8 gShouldAdvanceLinkState;
 extern struct LinkPlayer gLinkPlayers[];

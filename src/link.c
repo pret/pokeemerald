@@ -97,14 +97,14 @@ u8 gUnknown_03003160;
 EWRAM_DATA u8 gUnknown_020223BC = 0;
 EWRAM_DATA u8 gUnknown_020223BD = 0;
 EWRAM_DATA u32 gUnknown_020223C0 = 0;
-EWRAM_DATA u16 gBlockRecvBuffer[MAX_LINK_PLAYERS + 1][BLOCK_BUFFER_SIZE / 2] = {};
+EWRAM_DATA u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2] = {};
 EWRAM_DATA u8 gUnknown_020228C4[BLOCK_BUFFER_SIZE] = {};
 EWRAM_DATA bool8 gUnknown_020229C4 = FALSE;
 EWRAM_DATA u16 gUnknown_020229C6 = 0;
 EWRAM_DATA u16 gUnknown_020229C8 = 0;
 EWRAM_DATA struct LinkPlayer gUnknown_020229CC = {};
-EWRAM_DATA struct LinkPlayer gLinkPlayers[MAX_LINK_PLAYERS + 1] = {};
-EWRAM_DATA struct LinkPlayer gUnknown_02022A74[MAX_LINK_PLAYERS + 1] = {};
+EWRAM_DATA struct LinkPlayer gLinkPlayers[MAX_RFU_PLAYERS] = {};
+EWRAM_DATA struct LinkPlayer gUnknown_02022A74[MAX_RFU_PLAYERS] = {};
 
 // Static ROM declarations
 
@@ -120,7 +120,7 @@ static void sub_800A388(void);
 static void sub_800A3EC(void);
 void task00_link_test(u8 taskId);
 void sub_800A588(u8 who);
-u16 sub_800A648(u16 *src, u16 size);
+u16 sub_800A648(const u16 *src, u16 size);
 void sub_800A6E8(u32 pos, u8 a0, u8 a1, u8 a2);
 void sub_800A824(void);
 void c2_800ACD4(void);
@@ -449,7 +449,7 @@ u16 sub_80099E0(const u16 *src)
         gUnknown_03003110[i] = 0;
     }
     gUnknown_03003084 = *src;
-    if (gUnknown_030030E0 & 0x40)
+    if (gUnknown_030030E0 & LINK_STAT_CONN_ESTABLISHED)
     {
         sub_8009AA0(SIO_MULTI_CNT->id);
         if (gUnknown_03003140 != NULL)
@@ -627,7 +627,7 @@ void sub_8009D90(u16 command)
             u8 i;
 
             gUnknown_03003110[0] = 0x7777;
-            for (i = 0; i < 5; i ++)
+            for (i = 0; i < MAX_RFU_PLAYERS; i ++)
             {
                 gUnknown_03003110[i + 1] = 0xEE;
             }
@@ -1070,4 +1070,65 @@ void sub_800A588(u8 who)
     {
         gUnknown_0300307C[who] = TRUE;
     }
+}
+
+void ResetBlockReceivedFlags(void)
+{
+    int i;
+    
+    if (gSerialIsRFU == TRUE)
+    {
+        for (i = 0; i < MAX_RFU_PLAYERS; i ++)
+        {
+            sub_800F728(i);
+        }
+    }
+    else
+    {
+        for (i = 0; i < MAX_LINK_PLAYERS; i ++)
+        {
+            gUnknown_0300307C[i] = FALSE;
+        }
+    }
+}
+
+void ResetBlockReceivedFlag(u8 who)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        sub_800F728(who);
+    }
+    else if (gUnknown_0300307C[who])
+    {
+        gUnknown_0300307C[who] = FALSE;
+    }
+}
+
+void sub_800A620(void)
+{
+    if ((gUnknown_030030E0 & LINK_STAT_MASTER) && EXTRACT_PLAYER_COUNT(gUnknown_030030E0) > 1)
+    {
+        gUnknown_03003144 = TRUE;
+    }
+}
+
+u16 sub_800A648(const u16 *data, u16 size)
+{
+    u16 chksum;
+    u16 i;
+
+    chksum = 0;
+    for (i = 0; i < size / 2; i ++)
+    {
+        chksum += data[i];
+    }
+    return chksum;
+}
+
+void sub_800A678(u8 a0, u8 a1, u8 a2)
+{
+    u16 *vAddr;
+
+    vAddr = (u16 *)BG_SCREEN_ADDR(gUnknown_03003130.screenBaseBlock);
+    vAddr[a2 * 32 + a1] = (gUnknown_03003130.paletteNum << 12) | (a0 + 1 + gUnknown_03003130.dummy_8);
 }
