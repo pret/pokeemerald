@@ -1250,3 +1250,51 @@ void SetLinkDebugValues(u32 seed, u32 flags)
     gLinkDebugSeed = seed;
     gLinkDebugFlags = flags;
 }
+
+u8 sub_800A9A8(void)
+{
+    int i;
+    u8 flags;
+
+    flags = 0;
+    for (i = 0; i < gUnknown_03003100; i ++)
+    {
+        flags |= (1 << i);
+    }
+    return flags;
+}
+
+u8 sub_800A9D8(void)
+{
+    int i;
+    u8 flags;
+
+    flags = 0;
+    for (i = 0; i < GetLinkPlayerCount(); i ++)
+    {
+        flags |= (1 << i);
+    }
+    return flags;
+}
+
+void sub_800AA04(u8 a0)
+{
+    int i;
+
+    gUnknown_03003100 = a0;
+    gUnknown_03003120 = GetMultiplayerId();
+    for (i = 0; i < MAX_RFU_PLAYERS; i ++)
+    {
+        gUnknown_02022A74[i] = gLinkPlayers[i];
+    }
+}
+
+u8 sub_800AA48(void)
+{
+    return gUnknown_03003100;
+}
+
+u8 sub_800AA54(void)
+{
+    return gUnknown_03003120;
+}
