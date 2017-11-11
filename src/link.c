@@ -13,6 +13,7 @@
 #include "gpu_regs.h"
 #include "palette.h"
 #include "task.h"
+#include "trade.h"
 #include "link.h"
 
 // Static type declarations
@@ -767,4 +768,77 @@ void sub_800A0AC(void)
     gUnknown_03000D5C = 0;
     gUnknown_020229C8 = 0;
     sub_8009734();
+}
+
+u8 sub_800A0C8(int lower, int upper)
+{
+    int i;
+    int count;
+    u32 index;
+    u8 cmpVal;
+    u32 linkType1;
+    u32 linkType2;
+
+    count = 0;
+    if (gReceivedRemoteLinkPlayers == TRUE)
+    {
+        cmpVal = sub_800ABAC();
+        if (lower > cmpVal || cmpVal > upper)
+        {
+            gUnknown_03000D5C = 6;
+            return 6;
+        }
+        else
+        {
+            if (GetLinkPlayerCount() == 0)
+            {
+                gUnknown_0300306C = TRUE;
+                sub_80097E8();
+            }
+            for (i = 0, index = 0; i < GetLinkPlayerCount(); index ++, i ++)
+            {
+                if (gLinkPlayers[index].linkType == gLinkPlayers[0].linkType)
+                {
+                    count ++;
+                }
+            }
+            if (count == GetLinkPlayerCount())
+            {
+                if (gLinkPlayers[0].linkType == 0x1133)
+                {
+                    switch (sub_807A728())
+                    {
+                        case 1:
+                            gUnknown_03000D5C = 4;
+                            break;
+                        case 2:
+                            gUnknown_03000D5C = 5;
+                            break;
+                        case 0:
+                            gUnknown_03000D5C = 1;
+                            break;
+                    }
+                }
+                else
+                {
+                    gUnknown_03000D5C = 1;
+                }
+            }
+            else
+            {
+                gUnknown_03000D5C = 3;
+                linkType1 = gLinkPlayers[GetMultiplayerId()].linkType;
+                linkType2 = gLinkPlayers[GetMultiplayerId() ^ 1].linkType;
+                if ((linkType1 == 0x2266 && linkType2 == 0x2277) || (linkType1 == 0x2277 && linkType2 == 0x2266))
+                {
+                    gSpecialVar_0x8005 = 3;
+                }
+            }
+        }
+    }
+    else if (++ gUnknown_020229C8 > 600)
+    {
+        gUnknown_03000D5C = 2;
+    }
+    return gUnknown_03000D5C;
 }
