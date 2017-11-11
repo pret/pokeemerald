@@ -842,3 +842,45 @@ u8 sub_800A0C8(int lower, int upper)
     }
     return gUnknown_03000D5C;
 }
+
+bool8 sub_800A23C(void)
+{
+    u8 i;
+    u8 count;
+    bool8 retval;
+
+    count = 0;
+    for (i = 0; i < GetLinkPlayerCount(); i ++)
+    {
+        if (gLinkPlayers[i].linkType == gLinkPlayers[0].linkType)
+        {
+            count ++;
+        }
+    }
+    if (count == GetLinkPlayerCount())
+    {
+        retval = TRUE;
+        gUnknown_03000D5C = 1;
+    }
+    else
+    {
+        retval = FALSE;
+        gUnknown_03000D5C = 3;
+    }
+    return retval;
+}
+
+u32 GetLinkPlayerTrainerId(u8 who)
+{
+    return gLinkPlayers[who].trainerId;
+}
+
+void sub_800A2BC(void)
+{
+    int i;
+
+    for (i = 0; i <= MAX_LINK_PLAYERS; i ++)
+    {
+        gLinkPlayers[i] = (struct LinkPlayer){};
+    }
+}
