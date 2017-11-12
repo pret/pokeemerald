@@ -1581,7 +1581,7 @@ static void PlayerPartnerHandleChoosePokemon(void)
         }
     }
 
-    *(gBattleStruct->field_5C + gActiveBank) = chosenMonId;
+    *(gBattleStruct->monToSwitchIntoId + gActiveBank) = chosenMonId;
     EmitChosenMonReturnValue(1, chosenMonId, NULL);
     PlayerPartnerBufferExecCompleted();
 }

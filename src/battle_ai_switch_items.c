@@ -38,7 +38,7 @@ static bool8 ShouldSwitchIfPerishSong(void)
     if (gStatuses3[gActiveBank] & STATUS3_PERISH_SONG
         && gDisableStructs[gActiveBank].perishSong1 == 0)
     {
-        *(gBattleStruct->field_294 + gActiveBank) = 6;
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
         EmitTwoReturnValues(1, ACTION_SWITCH, 0);
         return TRUE;
     }
@@ -120,7 +120,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             if (moveFlags & MOVESTATUS_SUPEREFFECTIVE && Random() % 3 < 2)
             {
                 // we found a mon
-                *(gBattleStruct->field_294 + gActiveBank) = i;
+                *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = i;
                 EmitTwoReturnValues(1, ACTION_SWITCH, 0);
                 return TRUE;
             }
@@ -206,9 +206,9 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
         if (i == gBattlePartyID[bankIn2])
             continue;
-        if (i == *(gBattleStruct->field_5C + bankIn1))
+        if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
-        if (i == *(gBattleStruct->field_5C + bankIn2))
+        if (i == *(gBattleStruct->monToSwitchIntoId + bankIn2))
             continue;
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
@@ -220,7 +220,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         if (absorbingTypeAbility == monAbility && Random() & 1)
         {
             // we found a mon
-            *(gBattleStruct->field_294 + gActiveBank) = i;
+            *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = i;
             EmitTwoReturnValues(1, ACTION_SWITCH, 0);
             return TRUE;
         }
@@ -240,13 +240,13 @@ static bool8 ShouldSwitchIfNaturalCure(void)
 
     if ((gUnknown_02024250[gActiveBank] == 0 || gUnknown_02024250[gActiveBank] == 0xFFFF) && Random() & 1)
     {
-        *(gBattleStruct->field_294 + gActiveBank) = 6;
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
         EmitTwoReturnValues(1, ACTION_SWITCH, 0);
         return TRUE;
     }
     else if (gBattleMoves[gUnknown_02024250[gActiveBank]].power == 0 && Random() & 1)
     {
-        *(gBattleStruct->field_294 + gActiveBank) = 6;
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
         EmitTwoReturnValues(1, ACTION_SWITCH, 0);
         return TRUE;
     }
@@ -257,7 +257,7 @@ static bool8 ShouldSwitchIfNaturalCure(void)
         return TRUE;
     if (Random() & 1)
     {
-        *(gBattleStruct->field_294 + gActiveBank) = 6;
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
         EmitTwoReturnValues(1, ACTION_SWITCH, 0);
         return TRUE;
     }
@@ -400,9 +400,9 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
             continue;
         if (i == gBattlePartyID[bankIn2])
             continue;
-        if (i == *(gBattleStruct->field_5C + bankIn1))
+        if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
-        if (i == *(gBattleStruct->field_5C + bankIn2))
+        if (i == *(gBattleStruct->monToSwitchIntoId + bankIn2))
             continue;
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
@@ -425,7 +425,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
                 moveFlags = AI_TypeCalc(move, gBattleMons[bankIn1].species, gBattleMons[bankIn1].ability);
                 if (moveFlags & MOVESTATUS_SUPEREFFECTIVE && Random() % moduloPercent == 0)
                 {
-                    *(gBattleStruct->field_294 + gActiveBank) = i;
+                    *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = i;
                     EmitTwoReturnValues(1, ACTION_SWITCH, 0);
                     return TRUE;
                 }
@@ -508,9 +508,9 @@ static bool8 ShouldSwitch(void)
             continue;
         if (i == gBattlePartyID[bankIn2])
             continue;
-        if (i == *(gBattleStruct->field_5C + bankIn1))
+        if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
-        if (i == *(gBattleStruct->field_5C + bankIn2))
+        if (i == *(gBattleStruct->monToSwitchIntoId + bankIn2))
             continue;
 
         availableToSwitch++;
@@ -554,7 +554,7 @@ void AI_TrySwitchOrUseItem(void)
     {
         if (ShouldSwitch())
         {
-            if (*(gBattleStruct->field_294 + gActiveBank) == 6)
+            if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) == 6)
             {
                 s32 monToSwitchId = GetMostSuitableMonToSwitchInto();
                 if (monToSwitchId == 6)
@@ -590,19 +590,19 @@ void AI_TrySwitchOrUseItem(void)
                             continue;
                         if (monToSwitchId == gBattlePartyID[bankIn2])
                             continue;
-                        if (monToSwitchId == *(gBattleStruct->field_5C + bankIn1))
+                        if (monToSwitchId == *(gBattleStruct->monToSwitchIntoId + bankIn1))
                             continue;
-                        if (monToSwitchId == *(gBattleStruct->field_5C + bankIn2))
+                        if (monToSwitchId == *(gBattleStruct->monToSwitchIntoId + bankIn2))
                             continue;
 
                         break;
                     }
                 }
 
-                *(gBattleStruct->field_294 + gActiveBank) = monToSwitchId;
+                *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = monToSwitchId;
             }
 
-            *(gBattleStruct->field_5C + gActiveBank) = *(gBattleStruct->field_294 + gActiveBank);
+            *(gBattleStruct->monToSwitchIntoId + gActiveBank) = *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank);
             return;
         }
         else if (ShouldUseItem())
@@ -614,28 +614,25 @@ void AI_TrySwitchOrUseItem(void)
     EmitTwoReturnValues(1, ACTION_USE_MOVE, (gActiveBank ^ BIT_SIDE) << 8);
 }
 
-#define TYPE_FORESIGHT  0xFE
-#define TYPE_ENDTABLE   0xFF
-
 static void ModulateByTypeEffectiveness(u8 atkType, u8 defType1, u8 defType2, u8 *var)
 {
     s32 i = 0;
 
-    while (gTypeEffectiveness[i] != TYPE_ENDTABLE)
+    while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
     {
-        if (gTypeEffectiveness[i] == TYPE_FORESIGHT)
+        if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
         {
             i += 3;
             continue;
         }
-        else if (gTypeEffectiveness[i] == atkType)
+        else if (TYPE_EFFECT_ATK_TYPE(i) == atkType)
         {
             // check type1
-            if (gTypeEffectiveness[i + 1] == defType1)
-                *var = (*var * gTypeEffectiveness[i + 2]) / 10;
+            if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
+                *var = (*var * TYPE_EFFECT_MULTIPLIER(i)) / 10;
             // check type2
-            if (gTypeEffectiveness[i + 1] == defType2 && defType1 != defType2)
-                *var = (*var * gTypeEffectiveness[i + 2]) / 10;
+            if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
+                *var = (*var * TYPE_EFFECT_MULTIPLIER(i)) / 10;
         }
         i += 3;
     }
@@ -654,8 +651,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
     u8 invalidMons;
     u16 move;
 
-    if (*(gBattleStruct->field_5C + gActiveBank) != 6)
-        return *(gBattleStruct->field_5C + gActiveBank);
+    if (*(gBattleStruct->monToSwitchIntoId + gActiveBank) != 6)
+        return *(gBattleStruct->monToSwitchIntoId + gActiveBank);
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
         return gBattlePartyID[gActiveBank] + 1;
 
@@ -711,8 +708,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
                 && !(gBitTable[i] & invalidMons)
                 && gBattlePartyID[bankIn1] != i
                 && gBattlePartyID[bankIn2] != i
-                && i != *(gBattleStruct->field_5C + bankIn1)
-                && i != *(gBattleStruct->field_5C + bankIn2))
+                && i != *(gBattleStruct->monToSwitchIntoId + bankIn1)
+                && i != *(gBattleStruct->monToSwitchIntoId + bankIn2))
             {
                 u8 type1 = gBaseStats[species].type1;
                 u8 type2 = gBaseStats[species].type2;
@@ -771,9 +768,9 @@ u8 GetMostSuitableMonToSwitchInto(void)
             continue;
         if (gBattlePartyID[bankIn2] == i)
             continue;
-        if (i == *(gBattleStruct->field_5C + bankIn1))
+        if (i == *(gBattleStruct->monToSwitchIntoId + bankIn1))
             continue;
-        if (i == *(gBattleStruct->field_5C + bankIn2))
+        if (i == *(gBattleStruct->monToSwitchIntoId + bankIn2))
             continue;
 
         for (j = 0; j < 4; j++)

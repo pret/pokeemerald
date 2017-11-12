@@ -5330,7 +5330,7 @@ static void atk4C_get_switched_mon_data(void)
 
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
 
-    gBattlePartyID[gActiveBank] = *(gBattleStruct->field_5C + gActiveBank);
+    gBattlePartyID[gActiveBank] = *(gBattleStruct->monToSwitchIntoId + gActiveBank);
 
     EmitGetMonData(0, REQUEST_ALL_BATTLE, gBitTable[gBattlePartyID[gActiveBank]]);
     MarkBufferBankForExecution(gActiveBank);
@@ -5574,7 +5574,7 @@ static void atk4F_jump_if_cannot_switch(void)
 static void sub_804CF10(u8 arg0)
 {
     *(gBattleStruct->field_58 + gActiveBank) = gBattlePartyID[gActiveBank];
-    *(gBattleStruct->field_5C + gActiveBank) = 6;
+    *(gBattleStruct->monToSwitchIntoId + gActiveBank) = 6;
     gBattleStruct->field_93 &= ~(gBitTable[gActiveBank]);
 
     EmitChoosePokemon(0, 1, arg0, 0, gBattleStruct->field_60[gActiveBank]);
@@ -5638,7 +5638,7 @@ static void atk50_openpartyscreen(void)
                 }
                 else if (!gSpecialStatuses[gActiveBank].flag40)
                 {
-                    sub_804CF10(gBattleStruct->field_5C[2]);
+                    sub_804CF10(gBattleStruct->monToSwitchIntoId[2]);
                     gSpecialStatuses[gActiveBank].flag40 = 1;
                 }
                 else
@@ -5660,7 +5660,7 @@ static void atk50_openpartyscreen(void)
                 }
                 else if (!gSpecialStatuses[gActiveBank].flag40)
                 {
-                    sub_804CF10(gBattleStruct->field_5C[0]);
+                    sub_804CF10(gBattleStruct->monToSwitchIntoId[0]);
                     gSpecialStatuses[gActiveBank].flag40 = 1;
                 }
                 else if (!(flags & 1))
@@ -5681,7 +5681,7 @@ static void atk50_openpartyscreen(void)
                 }
                 else if (!gSpecialStatuses[gActiveBank].flag40)
                 {
-                    sub_804CF10(gBattleStruct->field_5C[3]);
+                    sub_804CF10(gBattleStruct->monToSwitchIntoId[3]);
                     gSpecialStatuses[gActiveBank].flag40 = 1;
                 }
                 else
@@ -5703,7 +5703,7 @@ static void atk50_openpartyscreen(void)
                 }
                 else if (!gSpecialStatuses[gActiveBank].flag40)
                 {
-                    sub_804CF10(gBattleStruct->field_5C[1]);
+                    sub_804CF10(gBattleStruct->monToSwitchIntoId[1]);
                     gSpecialStatuses[gActiveBank].flag40 = 1;
                 }
                 else if (!(flags & 2))
@@ -5766,7 +5766,7 @@ static void atk50_openpartyscreen(void)
                     }
                     else if (!gSpecialStatuses[gActiveBank].flag40)
                     {
-                        sub_804CF10(gBattleStruct->field_5C[0]);
+                        sub_804CF10(gBattleStruct->monToSwitchIntoId[0]);
                         gSpecialStatuses[gActiveBank].flag40 = 1;
                     }
                 }
@@ -5782,7 +5782,7 @@ static void atk50_openpartyscreen(void)
                     }
                     else if (!gSpecialStatuses[gActiveBank].flag40)
                     {
-                        sub_804CF10(gBattleStruct->field_5C[1]);
+                        sub_804CF10(gBattleStruct->monToSwitchIntoId[1]);
                         gSpecialStatuses[gActiveBank].flag40 = 1;
                     }
                 }
@@ -5836,10 +5836,10 @@ static void atk50_openpartyscreen(void)
         {
             gActiveBank = bank;
             *(gBattleStruct->field_58 + gActiveBank) = gBattlePartyID[gActiveBank];
-            *(gBattleStruct->field_5C + gActiveBank) = 6;
+            *(gBattleStruct->monToSwitchIntoId + gActiveBank) = 6;
             gBattleStruct->field_93 &= ~(gBitTable[gActiveBank]);
 
-            EmitChoosePokemon(0, hitmarkerFaintBits, *(gBattleStruct->field_5C + (gActiveBank ^ 2)), 0, gBattleStruct->field_60[gActiveBank]);
+            EmitChoosePokemon(0, hitmarkerFaintBits, *(gBattleStruct->monToSwitchIntoId + (gActiveBank ^ 2)), 0, gBattleStruct->field_60[gActiveBank]);
             MarkBufferBankForExecution(gActiveBank);
 
             gBattlescriptCurrInstr += 6;
@@ -5886,7 +5886,7 @@ static void atk51_switch_handle_order(void)
         {
             if (gBattleBufferB[i][0] == 0x22)
             {
-                *(gBattleStruct->field_5C + i) = gBattleBufferB[i][1];
+                *(gBattleStruct->monToSwitchIntoId + i) = gBattleBufferB[i][1];
                 if (!(gBattleStruct->field_93 & gBitTable[i]))
                 {
                     RecordedBattle_SetBankAction(i, gBattleBufferB[i][1]);
@@ -5908,7 +5908,7 @@ static void atk51_switch_handle_order(void)
         // fall through
     case 3:
         gBattleCommunication[0] = gBattleBufferB[gActiveBank][1];
-        *(gBattleStruct->field_5C + gActiveBank) = gBattleBufferB[gActiveBank][1];
+        *(gBattleStruct->monToSwitchIntoId + gActiveBank) = gBattleBufferB[gActiveBank][1];
 
         if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
@@ -5922,7 +5922,7 @@ static void atk51_switch_handle_order(void)
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
-            sub_80571DC(gActiveBank, *(gBattleStruct->field_5C + gActiveBank));
+            sub_80571DC(gActiveBank, *(gBattleStruct->monToSwitchIntoId + gActiveBank));
         }
         else
         {
@@ -8029,7 +8029,7 @@ static void atk8F_forcerandomswitch(void)
                        || GetMonData(&party[i], MON_DATA_IS_EGG) == TRUE
                        || GetMonData(&party[i], MON_DATA_HP) == 0);
             }
-            *(gBattleStruct->field_5C + gBankTarget) = i;
+            *(gBattleStruct->monToSwitchIntoId + gBankTarget) = i;
 
             if (!sub_81B1250())
                 sub_803BDA0(gBankTarget);

@@ -623,7 +623,7 @@ struct BattleStruct
     u8 sentInPokes;
     bool8 selectionScriptFinished[BATTLE_BANKS_COUNT];
     u8 field_58[4];
-    u8 field_5C[4];
+    u8 monToSwitchIntoId[BATTLE_BANKS_COUNT];
     u8 field_60[4][3];
     u8 runTries;
     u8 caughtMonNick[11];
@@ -695,7 +695,7 @@ struct BattleStruct
     u8 field_1A4[96];
     u8 field_204[104];
     u8 field_26C[40];
-    u8 field_294[4];
+    u8 AI_monToSwitchIntoId[BATTLE_BANKS_COUNT];
     u8 field_298[8];
     u8 field_2A0;
     u8 field_2A1;

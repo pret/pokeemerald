@@ -1168,7 +1168,7 @@ static void OpponentHandleLoadMonSprite(void)
 
 static void OpponentHandleSwitchInAnim(void)
 {
-    *(gBattleStruct->field_5C + gActiveBank) = 6;
+    *(gBattleStruct->monToSwitchIntoId + gActiveBank) = 6;
     gBattlePartyID[gActiveBank] = gBattleBufferA[gActiveBank][1];
     sub_80613DC(gActiveBank, gBattleBufferA[gActiveBank][2]);
     gBattleBankFunc[gActiveBank] = sub_805FDF0;
@@ -1627,7 +1627,7 @@ static void OpponentHandleChoosePokemon(void)
 {
     s32 chosenMonId;
 
-    if (*(gBattleStruct->field_294 + gActiveBank) == 6)
+    if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) == 6)
     {
         chosenMonId = GetMostSuitableMonToSwitchInto();
 
@@ -1670,12 +1670,12 @@ static void OpponentHandleChoosePokemon(void)
     }
     else
     {
-        chosenMonId = *(gBattleStruct->field_294 + gActiveBank);
-        *(gBattleStruct->field_294 + gActiveBank) = 6;
+        chosenMonId = *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank);
+        *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
     }
 
 
-    *(gBattleStruct->field_5C + gActiveBank) = chosenMonId;
+    *(gBattleStruct->monToSwitchIntoId + gActiveBank) = chosenMonId;
     EmitChosenMonReturnValue(1, chosenMonId, NULL);
     OpponentBufferExecCompleted();
 }
