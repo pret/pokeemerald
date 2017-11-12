@@ -1455,25 +1455,6 @@ gUnknown_0203BD28: @ 203BD28
 	.space 0x4
 
     .include "src/recorded_battle.o"
-
-gUnknown_0203CCD0: @ 203CCD0
-	.space 0x1
-
-gUnknown_0203CCD1: @ 203CCD1
-	.space 0x8
-
-gUnknown_0203CCD9: @ 203CCD9
-	.space 0x1
-
-gUnknown_0203CCDA: @ 203CCDA
-	.space 0x2
-
-gUnknown_0203CCDC: @ 203CCDC
-	.space 0xC
-
-gUnknown_0203CCE8: @ 203CCE8
-	.space 0x4
-
     .include "src/battle_dome_cards.o"
     .include "src/lilycove_lady.o"
 

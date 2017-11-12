@@ -7,6 +7,7 @@
 #include "event_data.h"
 #include "link.h"
 #include "string_util.h"
+#include "palette.h"
 
 #define BANK_RECORD_SIZE 664
 
@@ -42,10 +43,17 @@ EWRAM_DATA struct Pokemon sSavedPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
 EWRAM_DATA u16 gUnknown_0203CC70[8] = {0};
 EWRAM_DATA struct PlayerInfo sRecordedBattle_Players[BATTLE_BANKS_COUNT] = {0};
-
-extern u8 gUnknown_0203CCD0;
+EWRAM_DATA u8 gUnknown_0203CCD0 = 0;
+EWRAM_DATA u8 gUnknown_0203CCD1[8] = {0};
+EWRAM_DATA u8 gUnknown_0203CCD9 = 0;
+EWRAM_DATA u8 gUnknown_0203CCDA = 0;
+EWRAM_DATA u16 gUnknown_0203CCDC[6] = {0};
+EWRAM_DATA u8 gUnknown_0203CCE8 = 0;
 
 extern u32 sub_81A513C(void);
+
+// this file's functions
+static u8 sub_8185278(u8 *arg0, u8 *arg1, u8 *arg2);
 
 void sub_8184DA4(u8 arg0)
 {
@@ -129,4 +137,107 @@ void sub_8184E58(void)
         for (i = 0; i < PLAYER_NAME_LENGTH; i++)
             sRecordedBattle_Players[0].name[i] = gSaveBlock2Ptr->playerName[i];
     }
+}
+
+void RecordedBattle_SetBankAction(u8 bank, u8 action)
+{
+    if (sRecordedBytesNo[bank] < BANK_RECORD_SIZE && gUnknown_0203C7AC != 2)
+    {
+        sBattleRecords[bank][sRecordedBytesNo[bank]++] = action;
+    }
+}
+
+void RecordedBattle_ClearBankAction(u8 bank, u8 bytesToClear)
+{
+    s32 i;
+
+    for (i = 0; i < bytesToClear; i++)
+    {
+        sRecordedBytesNo[bank]--;
+        sBattleRecords[bank][sRecordedBytesNo[bank]] |= 0xFF;
+        if (sRecordedBytesNo[bank] == 0)
+            break;
+    }
+}
+
+u8 RecordedBattle_ReadBankAction(u8 bank)
+{
+    // trying to read past array or invalid action byte, battle is over
+    if (sRecordedBytesNo[bank] >= BANK_RECORD_SIZE || sBattleRecords[bank][sRecordedBytesNo[bank]] == 0xFF)
+    {
+        gScriptResult = gBattleOutcome = BATTLE_PLAYER_TELEPORTED; // hah
+        ResetPaletteFadeControl();
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        SetMainCallback2(CB2_QuitRecordedBattle);
+        return 0xFF;
+    }
+    else
+    {
+        return sBattleRecords[bank][sRecordedBytesNo[bank]++];
+    }
+}
+
+u8 sub_81850D0(void)
+{
+    return gUnknown_0203C7AC;
+}
+
+u8 sub_81850DC(u8 *arg0)
+{
+    u8 i, j;
+    u8 ret = 0;
+
+    for (i = 0; i < BATTLE_BANKS_COUNT; i++)
+    {
+        if (sRecordedBytesNo[i] != gUnknown_0203C79C[i])
+        {
+            arg0[ret++] = i;
+            arg0[ret++] = sRecordedBytesNo[i] - gUnknown_0203C79C[i];
+
+            for (j = 0; j < sRecordedBytesNo[i] - gUnknown_0203C79C[i]; j++)
+            {
+                arg0[ret++] = sBattleRecords[i][gUnknown_0203C79C[i] + j];
+            }
+
+            gUnknown_0203C79C[i] = sRecordedBytesNo[i];
+        }
+    }
+
+    return ret;
+}
+
+void sub_81851A8(u8 *arg0)
+{
+    s32 i;
+    u8 var1 = 2;
+    u8 var2;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
+        return;
+
+    for (i = 0; i < GetLinkPlayerCount(); i++)
+    {
+        if ((gLinkPlayers[i].version & 0xFF) != VERSION_EMERALD)
+            return;
+    }
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
+    {
+        for (var2 = *arg0; var2 != 0;)
+        {
+            u8 unkVar = sub_8185278(arg0, &var1, &var2);
+            u8 unkVar2 = sub_8185278(arg0, &var1, &var2);
+
+            for (i = 0; i < unkVar2; i++)
+            {
+                sBattleRecords[unkVar][gUnknown_0203C7A4[unkVar]++] = sub_8185278(arg0, &var1, &var2);
+            }
+        }
+    }
+}
+
+static u8 sub_8185278(u8 *arg0, u8 *arg1, u8 *arg2)
+{
+    (*arg2)--;
+    return arg0[(*arg1)++];
 }
