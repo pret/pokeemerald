@@ -49,7 +49,7 @@ static const u8 sUnusedText_LinkPartnerNotFound[] = _("Link partner(s) not found
 
 const u8 gText_BerryBlenderStart[] = _("Starting up the BERRY BLENDER.\pPlease select a BERRY from your BAG\nto put in the BERRY BLENDER.\p");
 const u8 gText_NewParagraph[] = _("\p");
-const u8 gText_wasMade[] = _(" was made!");
+const u8 gText_WasMade[] = _(" was made!");
 static const u8 sText_Mister[] = _("MISTER");
 static const u8 sText_Laddie[] = _("LADDIE");
 static const u8 sText_Lassie[] = _("LASSIE");
@@ -67,14 +67,14 @@ const u8* const sBlenderOpponentsNames[] =
     sText_Miss
 };
 
-static const u8 sText_PressA_ToStart[] = _("Press the A Button to start.");
+static const u8 sText_PressAToStart[] = _("Press the A Button to start.");
 static const u8 sText_PleaseWaitAWhile[] = _("Please wait a while.");
 const u8 sText_CommunicationStandby[] = _("Communication standby…");
 const u8 sText_WouldLikeToBlendAnotherBerry[] = _("Would you like to blend another BERRY?");
 const u8 sText_RunOutOfBerriesForBlending[] = _("You’ve run out of BERRIES for\nblending in the BERRY BLENDER.\p");
 const u8 sText_YourPokeblockCaseIsFull[] = _("Your {POKEBLOCK} CASE is full.\p");
-const u8 sText_hasNoBerriesToPut[] = _(" has no BERRIES to put in\nthe BERRY BLENDER.");
-const u8 sText_someonesPokeblockCaseIsFull[] = _("’s {POKEBLOCK} CASE is full.\p");
+const u8 sText_HasNoBerriesToPut[] = _(" has no BERRIES to put in\nthe BERRY BLENDER.");
+const u8 ApostropheSPokeblockCaseIsFull[] = _("’s {POKEBLOCK} CASE is full.\p");
 const u8 sText_BlendingResults[] = _("RESULTS OF BLENDING");
 static const u8 sText_BerryUsed[] = _("BERRY USED");
 const u8 sText_SpaceBerry[] = _(" BERRY");

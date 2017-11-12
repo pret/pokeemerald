@@ -16,21 +16,21 @@ gUnknown_08613F9C:: @ 8613F9C
 	.4byte 0x7003011
 
 gUnknown_08613FB4:: @ 8613FB4
-	.4byte gMenuText_Use, ItemMenu_UseOutOfBattle
-	.4byte gMenuText_Toss, ItemMenu_Toss
-	.4byte gMenuText_Register, ItemMenu_Register
-	.4byte gMenuText_Give, ItemMenu_Give
-	.4byte gText_Cancel2, ItemMenu_Cancel
-	.4byte gMenuText_Use, ItemMenu_UseInBattle
-	.4byte gMenuText_Check, ItemMenu_UseOutOfBattle
-	.4byte gMenuText_Walk, ItemMenu_UseOutOfBattle
-	.4byte gMenuText_Deselect, ItemMenu_Register
-	.4byte gMenuText_CheckTag, ItemMenu_CheckTag
-	.4byte gMenuText_Confirm, unknown_ItemMenu_Confirm
-	.4byte gMenuText_Show, unknown_ItemMenu_Show
-	.4byte gMenuText_Give2, unknown_ItemMenu_Give2
-	.4byte gMenuText_Confirm, unknown_ItemMenu_Confirm2
-    .4byte gText_EmptyString2, 0
+    .4byte gMenuText_Use, ItemMenu_UseOutOfBattle
+    .4byte gMenuText_Toss, ItemMenu_Toss
+    .4byte gMenuText_Register, ItemMenu_Register
+    .4byte gMenuText_Give, ItemMenu_Give
+    .4byte gText_Cancel2, ItemMenu_Cancel
+    .4byte gMenuText_Use, ItemMenu_UseInBattle
+    .4byte gMenuText_Check, ItemMenu_UseOutOfBattle
+    .4byte gMenuText_Walk, ItemMenu_UseOutOfBattle
+    .4byte gMenuText_Deselect, ItemMenu_Register
+    .4byte gMenuText_CheckTag, ItemMenu_CheckTag
+    .4byte gMenuText_Confirm, unknown_ItemMenu_Confirm
+    .4byte gMenuText_Show, unknown_ItemMenu_Show
+    .4byte gMenuText_Give2, unknown_ItemMenu_Give2
+    .4byte gMenuText_Confirm, unknown_ItemMenu_Confirm2
+    .4byte gText_EmptyString2, NULL
 
 gUnknown_0861402C:: @ 861402C
 	.byte 0, 3, 1, 4
@@ -68,7 +68,7 @@ gUnknown_0861404D:: @ 861404D
 gUnknown_0861404F:: @ 861404F
 	.byte 13, 4
 
-.align 2
+    .align 2
 gUnknown_08614054:: @ 8614054
 	.4byte unknown_item_menu_type
 	.4byte unknown_item_menu_type
@@ -80,10 +80,10 @@ gUnknown_08614054:: @ 8614054
 	.4byte unknown_item_menu_type
 	.4byte unknown_item_menu_type
 	.4byte unknown_item_menu_type
-	.4byte 0
+	.4byte NULL
 	.4byte item_menu_type_b
 
-.align 2
+    .align 2
 gUnknown_08614084:: @ 8614084
 	.4byte BagMenuActuallyToss
 	.4byte BagMenuCancelToss
@@ -92,7 +92,7 @@ gUnknown_0861408C:: @ 861408C
 	.4byte sub_81AD84C
 	.4byte sub_81AD6FC
 
-@probably a struct
+@ probably a struct
 gUnknown_08614094:: @ 8614094
 	.4byte 0x1101C00
 	.4byte 0xFFFF1064

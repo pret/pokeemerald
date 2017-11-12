@@ -1226,7 +1226,7 @@ gBerryBlenderCountdownNumbersTiles:: @ 8DC9F88
 gBerryBlenderStartTiles:: @ 8DCA588
 	.incbin "baserom.gba" , 0xdca588, 1024
     
-    .space 512
+    .space 0x200
     
    .align 2
 gBerryBlenderArrowTiles:: @ 8DCAB88

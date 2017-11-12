@@ -18,4 +18,3 @@ gSaveSectionOffsets:: @ 85CDC00
     .2byte 0x5D00, 0xF80
     .2byte 0x6C80, 0xF80
     .2byte 0x7C00, 0x7D0
-    

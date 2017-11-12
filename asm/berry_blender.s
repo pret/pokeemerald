@@ -5555,7 +5555,7 @@ _080826EC:
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =sText_someonesPokeblockCaseIsFull
+	ldr r1, =ApostropheSPokeblockCaseIsFull
 	b _08082740
 	.pool
 _0808271C:
@@ -5575,7 +5575,7 @@ _0808271C:
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =sText_hasNoBerriesToPut
+	ldr r1, =sText_HasNoBerriesToPut
 _08082740:
 	adds r0, r4, 0
 	bl StringAppend
@@ -7682,7 +7682,7 @@ sub_80838AC: @ 80838AC
 	ldr r1, [r0]
 	adds r0, r6, 0
 	bl StringCopy
-	ldr r1, =gText_wasMade
+	ldr r1, =gText_WasMade
 	adds r0, r6, 0
 	bl StringAppend
 	ldr r1, =sText_NewLine
