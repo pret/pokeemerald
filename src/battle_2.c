@@ -353,7 +353,7 @@ static const u8 sUnknown_0831BCF3[] = {4, 4, 4, 4};
 void CB2_InitBattle(void)
 {
     MoveSaveBlocks_ResetHeap();
-    AllocateBattleResrouces();
+    AllocateBattleResources();
     AllocateBattleSpritesData();
     AllocateMonSpritesGfx();
     sub_8185F84();

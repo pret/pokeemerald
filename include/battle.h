@@ -7,6 +7,7 @@
 #include "battle_2.h"
 #include "battle_ai_switch_items.h"
 #include "battle_gfx_sfx_util.h"
+#include "battle_util2.h"
 
 /*
     Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
@@ -870,13 +871,6 @@ bool8 LoadChosenBattleElement(u8 caseId);
 void DrawMainBattleBackground(void);
 void task00_0800F6FC(u8 taskId);
 
-// battle_5
-void AllocateBattleResrouces(void);
-void FreeBattleResources(void);
-void AdjustFriendshipOnBattleFaint(u8 bank);
-void sub_80571DC(u8 bank, u8 arg1);
-u32 sub_805725C(u8 bank);
-
 enum
 {
     BACK_PIC_BRENDAN,
@@ -978,6 +972,9 @@ extern struct BattleSpriteData *gBattleSpritesDataPtr;
 
 extern u8 *gLinkBattleSendBuffer;
 extern u8 *gLinkBattleRecvBuffer;
+
+extern u8 *gUnknown_0202305C;
+extern u8 *gUnknown_02023060;
 
 // Move this somewhere else
 
