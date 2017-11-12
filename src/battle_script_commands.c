@@ -120,8 +120,6 @@ struct TrainerMoney
 extern const struct BattleMove gBattleMoves[];
 extern const struct BaseStats gBaseStats[];
 extern const u8 gTypeEffectiveness[336];
-extern const u16 gMissStringIds[];
-extern const u16 gTrappingMoves[];
 extern const struct TrainerMoney gTrainerMoneyTable[];
 extern const u8* const gBattleScriptsForMoveEffects[];
 
@@ -9180,8 +9178,8 @@ static void atkB2_setperishsong(void)
         else
         {
             gStatuses3[i] |= STATUS3_PERISH_SONG;
-            gDisableStructs[i].perishSong1 = 3;
-            gDisableStructs[i].perishSong2 = 3;
+            gDisableStructs[i].perishSongTimer1 = 3;
+            gDisableStructs[i].perishSongTimer2 = 3;
         }
     }
 

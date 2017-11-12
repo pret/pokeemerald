@@ -1292,9 +1292,9 @@ bool8 sub_8041364(void)
                 gBattleTextBuff1[1] = 1;
                 gBattleTextBuff1[2] = 1;
                 gBattleTextBuff1[3] = 1;
-                gBattleTextBuff1[4] = gDisableStructs[gActiveBank].perishSong1;
+                gBattleTextBuff1[4] = gDisableStructs[gActiveBank].perishSongTimer1;
                 gBattleTextBuff1[5] = EOS;
-                if (gDisableStructs[gActiveBank].perishSong1 == 0)
+                if (gDisableStructs[gActiveBank].perishSongTimer1 == 0)
                 {
                     gStatuses3[gActiveBank] &= ~STATUS3_PERISH_SONG;
                     gBattleMoveDamage = gBattleMons[gActiveBank].hp;
@@ -1302,7 +1302,7 @@ bool8 sub_8041364(void)
                 }
                 else
                 {
-                    gDisableStructs[gActiveBank].perishSong1--;
+                    gDisableStructs[gActiveBank].perishSongTimer1--;
                     gBattlescriptCurrInstr = gUnknown_082DAF20;
                 }
                 BattleScriptExecute(gBattlescriptCurrInstr);

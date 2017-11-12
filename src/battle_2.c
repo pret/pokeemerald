@@ -2935,8 +2935,8 @@ void SwitchInClearSetData(void)
     {
         gDisableStructs[gActiveBank].substituteHP = disableStructCopy.substituteHP;
         gDisableStructs[gActiveBank].bankWithSureHit = disableStructCopy.bankWithSureHit;
-        gDisableStructs[gActiveBank].perishSong1 = disableStructCopy.perishSong1;
-        gDisableStructs[gActiveBank].perishSong2 = disableStructCopy.perishSong2;
+        gDisableStructs[gActiveBank].perishSongTimer1 = disableStructCopy.perishSongTimer1;
+        gDisableStructs[gActiveBank].perishSongTimer2 = disableStructCopy.perishSongTimer2;
         gDisableStructs[gActiveBank].bankPreventingEscape = disableStructCopy.bankPreventingEscape;
     }
 

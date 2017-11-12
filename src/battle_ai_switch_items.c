@@ -36,7 +36,7 @@ static bool8 ShouldUseItem(void);
 static bool8 ShouldSwitchIfPerishSong(void)
 {
     if (gStatuses3[gActiveBank] & STATUS3_PERISH_SONG
-        && gDisableStructs[gActiveBank].perishSong1 == 0)
+        && gDisableStructs[gActiveBank].perishSongTimer1 == 0)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
         EmitTwoReturnValues(1, ACTION_SWITCH, 0);
