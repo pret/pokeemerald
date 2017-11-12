@@ -5737,7 +5737,7 @@ BattleFrontier_BattleTowerLobby_EventScript_28CB96:: @ 828CB96
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC7A
 	copyvar VAR_0x8009, VAR_0x8006
-	msgbox BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F704, 5
+	msgbox BattleFrontier_BattleTowerLobby_Text_27F704, 5
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CBD8
 	compare_var_to_value VAR_RESULT, 0
@@ -5745,7 +5745,7 @@ BattleFrontier_BattleTowerLobby_EventScript_28CB96:: @ 828CB96
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
-	message BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F7BA
+	message BattleFrontier_BattleTowerLobby_Text_27F7BA
 	waitmessage
 	multichoice 20, 8, 45, 1
 	copyvar VAR_0x8008, VAR_RESULT
@@ -5753,7 +5753,7 @@ BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_28CC38
 	compare_var_to_value VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_28CC41
-	msgbox BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F97A, 4
+	msgbox BattleFrontier_BattleTowerLobby_Text_27F97A, 4
 	setvar VAR_0x8004, 12
 	copyvar VAR_0x8005, VAR_0x8009
 	call BattleFrontier_BattleTowerLobby_EventScript_271E7C
@@ -5766,22 +5766,22 @@ BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC2E:: @ 828CC2E
-	msgbox BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F84C, 4
+	msgbox BattleFrontier_BattleTowerLobby_Text_27F84C, 4
 	release
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC38:: @ 828CC38
-	msgbox BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F8AE, 4
+	msgbox BattleFrontier_BattleTowerLobby_Text_27F8AE, 4
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC41:: @ 828CC41
-	msgbox BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F921, 4
+	msgbox BattleFrontier_BattleTowerLobby_Text_27F921, 4
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC4A:: @ 828CC4A
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC70
-	msgbox BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F9FD, 4
+	msgbox BattleFrontier_BattleTowerLobby_Text_27F9FD, 4
 	setflag FLAG_0x002
 	copyvar VAR_0x8004, VAR_0x8008
 	setvar VAR_0x8005, 7
@@ -5789,12 +5789,12 @@ BattleFrontier_BattleTowerLobby_EventScript_28CC4A:: @ 828CC4A
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC70:: @ 828CC70
-	msgbox BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27FA6F, 4
+	msgbox BattleFrontier_BattleTowerLobby_Text_27FA6F, 4
 	release
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC7A:: @ 828CC7A
-	msgbox BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27FAF3, 4
+	msgbox BattleFrontier_BattleTowerLobby_Text_27FAF3, 4
 	release
 	end
 

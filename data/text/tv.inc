@@ -108,7 +108,7 @@ gTVBravoTrainerText07:: @ 0827F65C
 gTVBravoTrainerText08:: @ 0827F6E6
 	.string "Introducing the TRAINER’s {STR_VAR_1}!$"
 
-BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F704:: @ 0827F704
+BattleFrontier_BattleTowerLobby_Text_27F704:: @ 0827F704
 	.string "Hello! You’re the TRAINER who just had\n"
 	.string "a battle, right?\p"
 	.string "I’m gathering interviews with TRAINERS\n"
@@ -116,7 +116,7 @@ BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F704:: @ 0827F704
 	.string "May I get a few words from you about\n"
 	.string "your impressions on battling?$"
 
-BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F7BA:: @ 0827F7BA
+BattleFrontier_BattleTowerLobby_Text_27F7BA:: @ 0827F7BA
 	.string "You will? Really?\n"
 	.string "Thank you!\l"
 	.string "Then, uh…\p"
@@ -125,44 +125,44 @@ BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F7BA:: @ 0827F7BA
 	.string "Were you satisfied with the battle?\n"
 	.string "Or are you unhappy?$"
 
-BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F84C:: @ 0827F84C
+BattleFrontier_BattleTowerLobby_Text_27F84C:: @ 0827F84C
 	.string "Oh…\n"
 	.string "Sorry we disturbed you.\p"
 	.string "Please give us an interview the next\n"
 	.string "time you visit the BATTLE TOWER.$"
 
-BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F8AE:: @ 0827F8AE
+BattleFrontier_BattleTowerLobby_Text_27F8AE:: @ 0827F8AE
 	.string "Well, of course!\p"
 	.string "That unmistakable look of satisfaction\n"
 	.string "on your face…\p"
 	.string "It’s obvious that you’ve had a great\n"
 	.string "battle.$"
 
-BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F921:: @ 0827F921
+BattleFrontier_BattleTowerLobby_Text_27F921:: @ 0827F921
 	.string "Oh, I see…\p"
 	.string "Well, it certainly is difficult to make a\n"
 	.string "battle turn out exactly as planned.$"
 
-BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F97A:: @ 0827F97A
+BattleFrontier_BattleTowerLobby_Text_27F97A:: @ 0827F97A
 	.string "Oh, oh, may I ask one more question?\p"
 	.string "If you were to describe your\n"
 	.string "impressions about this battle with\l"
 	.string "one saying, what would it be?$"
 
-BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27F9FD:: @ 0827F9FD
+BattleFrontier_BattleTowerLobby_Text_27F9FD:: @ 0827F9FD
 	.string "Oh, that is stunningly cool!\p"
 	.string "That’s a great line!\n"
 	.string "I hope you’ll do great next time, too.\p"
 	.string "I hope to see you again!$"
 
-BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27FA6F:: @ 0827FA6F
+BattleFrontier_BattleTowerLobby_Text_27FA6F:: @ 0827FA6F
 	.string "Oh, I see…\p"
 	.string "Still, being the silent type is also\n"
 	.string "cool, isn’t it?\p"
 	.string "I hope you’ll give me the opportunity\n"
 	.string "to share your thoughts again!$"
 
-BATTLE_FRONTIER_BATTLE_TOWER_LOBBY_Text_27FAF3:: @ 0827FAF3
+BattleFrontier_BattleTowerLobby_Text_27FAF3:: @ 0827FAF3
 	.string "I’ll be looking forward to your\n"
 	.string "next battle!$"
 
@@ -612,44 +612,44 @@ gTV3CheersForPokeblocksText05:: @ 08281B93
 	.string "Tune in next time!\n"
 	.string "Our slogan is “3 CHEERS FOR {POKEBLOCK}S!”$"
 
-LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281BCB:: @ 8281BCB
+LilycoveCity_PokemonTrainerFanClub_Text_281BCB:: @ 8281BCB
 	.string "Hi, there!\p"
 	.string "I’m a big fan of {STR_VAR_1}.\n"
 	.string "What’s your opinion of {STR_VAR_1}?$"
 
-LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281C06:: @ 8281C06
+LilycoveCity_PokemonTrainerFanClub_Text_281C06:: @ 8281C06
 	.string "I see, I see. That’s what you think\n"
 	.string "about the TRAINER.$"
 
-LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281C3D:: @ 8281C3D
+LilycoveCity_PokemonTrainerFanClub_Text_281C3D:: @ 8281C3D
 	.string "Have you completely forgotten\n"
 	.string "about {STR_VAR_1}?$"
 
-LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281C65:: @ 8281C65
+LilycoveCity_PokemonTrainerFanClub_Text_281C65:: @ 8281C65
 	.string "I’m a big fan of {STR_VAR_1}.\n"
 	.string "What’s your opinion of {STR_VAR_1}?$"
 
-LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281C95:: @ 8281C95
+LilycoveCity_PokemonTrainerFanClub_Text_281C95:: @ 8281C95
 	.string "How strong would you rate {STR_VAR_1}\n"
 	.string "on a scale of one hundred?$"
 
-LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281CCD:: @ 8281CCD
+LilycoveCity_PokemonTrainerFanClub_Text_281CCD:: @ 8281CCD
 	.string "Have you completely forgotten\n"
 	.string "about {STR_VAR_1}?$"
 
-LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281CF5:: @ 8281CF5
+LilycoveCity_PokemonTrainerFanClub_Text_281CF5:: @ 8281CF5
 	.string "Oh, I see!\n"
 	.string "You should meet {STR_VAR_1} sometime.\l"
 	.string "I’m sure you’ll become a fan, too!$"
 
-LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281D40:: @ 8281D40
+LilycoveCity_PokemonTrainerFanClub_Text_281D40:: @ 8281D40
 	.string "I see, I see.\p"
 	.string "Thank you!\n"
 	.string "That’s very useful to know.\p"
 	.string "I’ll share this information with other\n"
 	.string "{STR_VAR_1} fans and discuss it.$"
 
-LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB_Text_281DB4:: @ 8281DB4
+LilycoveCity_PokemonTrainerFanClub_Text_281DB4:: @ 8281DB4
 	.string "There’s going to be a TV special on\n"
 	.string "{STR_VAR_1} very soon.\p"
 	.string "I hope you catch it!$"
