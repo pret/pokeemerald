@@ -6,8 +6,72 @@
 	.text
 
 
-
-
+    thumb_func_start sub_80C7128
+sub_80C7128: @ 80C7128
+	push {r4-r7,lr}
+	mov r7, r9
+	mov r6, r8
+	push {r6,r7}
+	adds r6, r0, 0
+	adds r7, r3, 0
+	ldr r5, [sp, 0x1C]
+	ldr r4, [sp, 0x20]
+	ldr r0, [sp, 0x24]
+	mov r9, r0
+	ldr r0, [sp, 0x28]
+	ldr r3, [sp, 0x2C]
+	lsls r1, 16
+	lsrs r1, 16
+	lsls r2, 16
+	lsls r5, 16
+	lsrs r5, 16
+	lsls r4, 16
+	lsrs r4, 16
+	lsls r0, 16
+	lsrs r0, 16
+	mov r8, r0
+	lsls r3, 16
+	lsrs r3, 16
+	mov r0, r9
+	lsls r0, 17
+	mov r9, r0
+	lsrs r2, 11
+	adds r2, r1
+	lsls r2, 1
+	adds r6, r2
+	adds r0, r4, 0
+	muls r0, r3
+	adds r0, r5
+	lsls r0, 1
+	adds r7, r0
+	movs r4, 0
+	cmp r4, r8
+	bcs _080C7198
+	mov r0, r9
+	lsrs r0, 1
+	mov r9, r0
+	lsls r5, r3, 1
+_080C717E:
+	adds r0, r7, 0
+	adds r1, r6, 0
+	mov r3, r9
+	lsrs r2, r3, 16
+	bl CpuSet
+	adds r6, 0x40
+	adds r7, r5
+	adds r0, r4, 0x1
+	lsls r0, 16
+	lsrs r4, r0, 16
+	cmp r4, r8
+	bcc _080C717E
+_080C7198:
+	pop {r3,r4}
+	mov r8, r3
+	mov r9, r4
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80C7128
 
 	thumb_func_start sub_80C71A4
 sub_80C71A4: @ 80C71A4

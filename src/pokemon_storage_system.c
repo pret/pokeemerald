@@ -99,6 +99,7 @@ static u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
     return str;
 }
 
+/* can't match
 static void sub_80C7128(u16 *dst, u16 dstToAdd, u16 dstToMul, const u16 *src, u16 srcToAdd, u16 srcToMul, u32 size, u16 count, u16 srcBy)
 {
     u16 i;
@@ -118,4 +119,4 @@ static void sub_80C7128(u16 *dst, u16 dstToAdd, u16 dstToMul, const u16 *src, u1
             src += srcBy;
         }
     }
-}
+}*/
