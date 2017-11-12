@@ -167,9 +167,11 @@ struct BerryCrush
     u32 unk;
 };
 
+#define PLAYER_NAME_LENGTH  8
+
 struct SaveBlock2
 {
-    /*0x00*/ u8 playerName[8];
+    /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
     /*0x09*/ u8 specialSaveWarp;
     /*0x0A*/ u8 playerTrainerId[4];

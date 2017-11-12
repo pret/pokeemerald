@@ -5,236 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8184DA4
-sub_8184DA4: @ 8184DA4
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	lsls r0, 24
-	lsrs r0, 24
-	mov r12, r0
-	ldr r0, =gUnknown_0203C7AC
-	mov r1, r12
-	strb r1, [r0]
-	ldr r1, =gUnknown_0203CCD0
-	movs r0, 0
-	strb r0, [r1]
-	movs r2, 0
-	movs r7, 0
-	ldr r3, =gUnknown_0203C7BC
-	mov r10, r3
-	ldr r6, =gUnknown_0203C794
-	mov r9, r6
-	ldr r0, =gUnknown_0203BD34
-	mov r8, r0
-_08184DD0:
-	lsls r0, r2, 1
-	mov r3, r9
-	adds r1, r0, r3
-	strh r7, [r1]
-	ldr r6, =gUnknown_0203C79C
-	adds r1, r0, r6
-	strh r7, [r1]
-	ldr r1, =gUnknown_0203C7A4
-	adds r0, r1
-	strh r7, [r0]
-	adds r4, r2, 0x1
-	mov r3, r12
-	cmp r3, 0x1
-	bne _08184E1C
-	ldr r5, =gBattleTypeFlags
-	movs r3, 0xFF
-	movs r1, 0xA6
-	lsls r1, 2
-	adds r0, r2, 0
-	muls r0, r1
-	mov r6, r8
-	adds r2, r0, r6
-_08184DFC:
-	ldrb r0, [r2]
-	orrs r0, r3
-	strb r0, [r2]
-	adds r2, 0x1
-	subs r1, 0x1
-	cmp r1, 0
-	bne _08184DFC
-	ldr r0, [r5]
-	ldr r1, =gUnknown_0203C7B8
-	str r0, [r1]
-	ldr r3, =gBattleResources
-	ldr r0, [r3]
-	ldr r0, [r0, 0x14]
-	ldr r0, [r0, 0xC]
-	mov r6, r10
-	str r0, [r6]
-_08184E1C:
-	adds r2, r4, 0
-	cmp r2, 0x3
-	ble _08184DD0
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8184DA4
-
-	thumb_func_start sub_8184E58
-sub_8184E58: @ 8184E58
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x20
-	ldr r0, =gUnknown_0203C7AC
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08184EA0
-	ldr r1, =gRecordedBattleRngSeed
-	ldr r0, =gRngValue
-	ldr r0, [r0]
-	str r0, [r1]
-	ldr r4, =gUnknown_0203C7AE
-	ldr r0, =0x000040cf
-	bl VarGet
-	strb r0, [r4]
-	ldr r4, =gUnknown_0203C7AF
-	bl sub_81A513C
-	strb r0, [r4]
-	b _08184EAC
-	.pool
-_08184EA0:
-	cmp r0, 0x2
-	bne _08184EAC
-	ldr r0, =gRngValue
-	ldr r1, =gRecordedBattleRngSeed
-	ldr r1, [r1]
-	str r1, [r0]
-_08184EAC:
-	ldr r0, =gBattleTypeFlags
-	ldr r5, [r0]
-	movs r0, 0x2
-	ands r5, r0
-	cmp r5, 0
-	beq _08184F64
-	bl GetMultiplayerId
-	ldr r1, =gUnknown_0203C7B4
-	strb r0, [r1]
-	bl GetLinkPlayerCount
-	lsls r0, 24
-	lsrs r0, 24
-	mov r10, r0
-	movs r5, 0
-	ldr r0, =gUnknown_0203CC80
-	mov r9, r0
-	ldr r6, =gLinkPlayers
-	movs r0, 0x8
-	adds r0, r6
-	mov r8, r0
-	mov r7, r9
-	adds r7, 0x4
-_08184EDC:
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r4, r0, 2
-	mov r0, r9
-	adds r2, r4, r0
-	lsls r0, r5, 3
-	subs r0, r5
-	lsls r3, r0, 2
-	adds r0, r6, 0x4
-	adds r0, r3, r0
-	ldr r0, [r0]
-	str r0, [r2]
-	adds r1, r3, r6
-	ldrb r0, [r1, 0x13]
-	strb r0, [r2, 0xC]
-	ldrh r0, [r1, 0x18]
-	strh r0, [r2, 0xE]
-	ldrh r0, [r1, 0x1A]
-	strh r0, [r2, 0x10]
-	cmp r5, r10
-	bge _08184F3C
-	mov r0, r8
-	adds r1, r3, r0
-	mov r0, sp
-	bl StringCopy
-	mov r0, sp
-	bl StripExtCtrlCodes
-	adds r0, r4, r7
-	mov r1, sp
-	bl StringCopy
-	adds r5, 0x1
-	b _08184F56
-	.pool
-_08184F3C:
-	adds r5, 0x1
-	ldr r0, =gLinkPlayers + 8
-	adds r1, r3, r0
-	ldr r0, =gUnknown_0203CC84
-	adds r2, r4, r0
-	movs r3, 0x7
-_08184F48:
-	ldrb r0, [r1]
-	strb r0, [r2]
-	adds r1, 0x1
-	adds r2, 0x1
-	subs r3, 0x1
-	cmp r3, 0
-	bge _08184F48
-_08184F56:
-	cmp r5, 0x3
-	ble _08184EDC
-	b _08184FA0
-	.pool
-_08184F64:
-	ldr r3, =gUnknown_0203CC80
-	ldr r4, =gSaveBlock2Ptr
-	ldr r2, [r4]
-	ldrb r1, [r2, 0xA]
-	ldrb r0, [r2, 0xB]
-	lsls r0, 8
-	orrs r1, r0
-	ldrb r0, [r2, 0xC]
-	lsls r0, 16
-	orrs r1, r0
-	ldrb r0, [r2, 0xD]
-	lsls r0, 24
-	orrs r1, r0
-	str r1, [r3]
-	ldrb r0, [r2, 0x8]
-	strb r0, [r3, 0xC]
-	strh r5, [r3, 0xE]
-	ldr r0, =gGameLanguage
-	ldrb r0, [r0]
-	strh r0, [r3, 0x10]
-	movs r5, 0
-	adds r3, 0x4
-_08184F90:
-	adds r0, r5, r3
-	ldr r1, [r4]
-	adds r1, r5
-	ldrb r1, [r1]
-	strb r1, [r0]
-	adds r5, 0x1
-	cmp r5, 0x7
-	ble _08184F90
-_08184FA0:
-	add sp, 0x20
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8184E58
 
 	thumb_func_start RecordedBattle_SetBankAction
 RecordedBattle_SetBankAction: @ 8184FBC
@@ -243,7 +13,7 @@ RecordedBattle_SetBankAction: @ 8184FBC
 	lsrs r5, r0, 24
 	lsls r1, 24
 	lsrs r6, r1, 24
-	ldr r1, =gUnknown_0203C794
+	ldr r1, =sRecordedBytesNo
 	lsls r0, r5, 1
 	adds r4, r0, r1
 	ldrh r2, [r4]
@@ -255,7 +25,7 @@ RecordedBattle_SetBankAction: @ 8184FBC
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _08184FF0
-	ldr r1, =gUnknown_0203BD34
+	ldr r1, =sBattleRecords
 	adds r0, r2, 0x1
 	strh r0, [r4]
 	movs r0, 0xA6
@@ -281,10 +51,10 @@ RecordedBattle_ClearBankAction: @ 8185008
 	movs r3, 0
 	cmp r3, r4
 	bge _08185046
-	ldr r0, =gUnknown_0203C794
+	ldr r0, =sRecordedBytesNo
 	lsls r1, r5, 1
 	adds r2, r1, r0
-	ldr r7, =gUnknown_0203BD34
+	ldr r7, =sBattleRecords
 	movs r0, 0xA6
 	lsls r0, 2
 	muls r5, r0
@@ -318,14 +88,14 @@ RecordedBattle_ReadBankAction: @ 8185054
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r1, =gUnknown_0203C794
+	ldr r1, =sRecordedBytesNo
 	lsls r0, r3, 1
 	adds r2, r0, r1
 	ldrh r1, [r2]
 	ldr r0, =0x00000297
 	cmp r1, r0
 	bhi _0818507A
-	ldr r4, =gUnknown_0203BD34
+	ldr r4, =sBattleRecords
 	adds r0, 0x1
 	muls r3, r0
 	adds r0, r1, r3
@@ -389,7 +159,7 @@ sub_81850DC: @ 81850DC
 _081850F0:
 	mov r1, r12
 	lsls r3, r1, 1
-	ldr r0, =gUnknown_0203C794
+	ldr r0, =sRecordedBytesNo
 	adds r5, r3, r0
 	ldr r1, =gUnknown_0203C79C
 	adds r6, r3, r1
@@ -423,7 +193,7 @@ _081850F0:
 	subs r0, r1
 	cmp r4, r0
 	bge _08185172
-	ldr r1, =gUnknown_0203BD34
+	ldr r1, =sBattleRecords
 	mov r10, r1
 	ldr r6, =gUnknown_0203C79C
 	movs r0, 0xA6
@@ -446,7 +216,7 @@ _08185146:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =gUnknown_0203C794
+	ldr r1, =sRecordedBytesNo
 	adds r0, r3, r1
 	ldrh r1, [r0]
 	ldrh r0, [r2]
@@ -456,7 +226,7 @@ _08185146:
 _08185172:
 	ldr r0, =gUnknown_0203C79C
 	add r0, r9
-	ldr r1, =gUnknown_0203C794
+	ldr r1, =sRecordedBytesNo
 	add r1, r9
 	ldrh r1, [r1]
 	strh r1, [r0]
@@ -539,7 +309,7 @@ _08185202:
 	lsrs r2, r0, 24
 	cmp r2, 0
 	beq _08185256
-	ldr r3, =gUnknown_0203BD34
+	ldr r3, =sBattleRecords
 	ldr r0, =gUnknown_0203C7A4
 	lsls r1, r6, 1
 	adds r4, r1, r0
@@ -705,7 +475,7 @@ _0818535E:
 	adds r4, r6, 0
 	muls r4, r0
 	adds r5, r7, r4
-	ldr r1, =gUnknown_0203C7C0
+	ldr r1, =sSavedPlayerParty
 	adds r1, r4, r1
 	adds r0, r5, 0
 	movs r2, 0x64
@@ -713,7 +483,7 @@ _0818535E:
 	movs r1, 0x96
 	lsls r1, 2
 	adds r5, r1
-	ldr r0, =gUnknown_0203CA18
+	ldr r0, =sSavedOpponentParty
 	adds r4, r0
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -729,7 +499,7 @@ _0818535E:
 	lsls r3, 3
 	adds r3, r7, r3
 	str r3, [sp, 0x8]
-	ldr r5, =gUnknown_0203CC80
+	ldr r5, =sRecordedBattle_Players
 	mov r8, r6
 	mov r12, r6
 	movs r4, 0x96
@@ -740,7 +510,7 @@ _0818535E:
 	adds r4, r7, r0
 _081853AC:
 	lsls r1, r6, 3
-	ldr r0, =gUnknown_0203CC80
+	ldr r0, =sRecordedBattle_Players
 	adds r0, 0x4
 	mov r3, r8
 	adds r2, r3, r0
@@ -782,7 +552,7 @@ _081853BA:
 	ldr r5, =gRecordedBattleRngSeed
 	ldr r0, [r5]
 	str r0, [r1]
-	ldr r0, =gUnknown_0203C7B8
+	ldr r0, =sRecordedBattle_BattleFlags
 	ldr r2, [r0]
 	movs r0, 0x2
 	ands r0, r2
@@ -812,7 +582,7 @@ _08185454:
 	ands r2, r0
 	cmp r2, 0
 	beq _081854E2
-	ldr r2, =gUnknown_0203CC80
+	ldr r2, =sRecordedBattle_Players
 	ldrh r0, [r2, 0xE]
 	cmp r0, 0x1
 	beq _081854A8
@@ -834,7 +604,7 @@ _0818547E:
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_0203CC80
+	ldr r4, =sRecordedBattle_Players
 	adds r0, r4
 	ldrh r1, [r0, 0xE]
 	movs r0, 0x1
@@ -851,7 +621,7 @@ _081854A8:
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_0203CC80
+	ldr r1, =sRecordedBattle_Players
 	adds r0, r1
 	ldrh r1, [r0, 0xE]
 	movs r0, 0x1
@@ -939,7 +709,7 @@ _081854E2:
 	movs r2, 0xA0
 	lsls r2, 3
 	adds r1, r7, r2
-	ldr r3, =gUnknown_0203C7BC
+	ldr r3, =sRecordedBattle_AI_Scripts
 	ldr r0, [r3]
 	str r0, [r1]
 	ldr r4, =0xfffffed4
@@ -1413,7 +1183,7 @@ _081859C0:
 	movs r6, 0
 	ldr r3, =0x00000297
 	mov r10, r3
-	ldr r4, =gUnknown_0203BD34
+	ldr r4, =sBattleRecords
 	mov r9, r4
 	movs r5, 0xA6
 	lsls r5, 2
@@ -1549,7 +1319,7 @@ sub_8185AB0: @ 8185AB0
 	ldr r0, =gPartnerTrainerId
 	strh r1, [r0]
 	bl sub_8185EFC
-	ldr r0, =gUnknown_0203C7B0
+	ldr r0, =sRecordedBattle_Callback2
 	ldr r0, [r0]
 	bl SetMainCallback2
 	pop {r0}
@@ -1765,7 +1535,7 @@ _08185C2A:
 	lsls r1, 28
 	lsrs r1, 29
 	strb r1, [r0]
-	ldr r1, =gUnknown_0203C7BC
+	ldr r1, =sRecordedBattle_AI_Scripts
 	movs r2, 0xA0
 	lsls r2, 3
 	adds r0, r7, r2
@@ -1838,7 +1608,7 @@ _08185D1C:
 	movs r6, 0
 	ldr r2, =0x00000297
 	mov r10, r2
-	ldr r3, =gUnknown_0203BD34
+	ldr r3, =sBattleRecords
 	mov r9, r3
 	movs r0, 0xA6
 	lsls r0, 2
@@ -1902,7 +1672,7 @@ sub_8185E24: @ 8185E24
 	adds r1, r2
 	movs r0, 0x80
 	strh r0, [r1, 0x8]
-	ldr r0, =gUnknown_0203C7B0
+	ldr r0, =sRecordedBattle_Callback2
 	str r5, [r0]
 	movs r0, 0
 	bl PlayMapChosenOrBattleBGM
@@ -1947,7 +1717,7 @@ sub_8185EAC: @ 8185EAC
 sub_8185EB8: @ 8185EB8
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r6, =gUnknown_0203C7C0
+	ldr r6, =sSavedPlayerParty
 _08185EBE:
 	movs r0, 0x64
 	adds r4, r5, 0
@@ -1957,7 +1727,7 @@ _08185EBE:
 	adds r1, r4, r1
 	movs r2, 0x64
 	bl memcpy
-	ldr r0, =gUnknown_0203CA18
+	ldr r0, =sSavedOpponentParty
 	adds r0, r4, r0
 	ldr r1, =gEnemyParty
 	adds r4, r1
@@ -1983,13 +1753,13 @@ _08185F02:
 	adds r4, r5, 0
 	muls r4, r0
 	adds r0, r4, r6
-	ldr r1, =gUnknown_0203C7C0
+	ldr r1, =sSavedPlayerParty
 	adds r1, r4, r1
 	movs r2, 0x64
 	bl memcpy
 	ldr r0, =gEnemyParty
 	adds r0, r4, r0
-	ldr r1, =gUnknown_0203CA18
+	ldr r1, =sSavedOpponentParty
 	adds r4, r1
 	adds r1, r4, 0
 	movs r2, 0x64
@@ -2254,8 +2024,8 @@ _08186118:
 	ble _081860DE
 	b _081863EE
 _0818611E:
-	ldr r3, =gUnknown_0203BD34
-	ldr r1, =gUnknown_0203C794
+	ldr r3, =sBattleRecords
+	ldr r1, =sRecordedBytesNo
 	mov r4, r10
 	lsls r2, r4, 1
 	adds r1, r2, r1
@@ -2640,7 +2410,7 @@ _081863FC:
 
 	thumb_func_start GetAiScriptsInRecordedBattle
 GetAiScriptsInRecordedBattle: @ 8186438
-	ldr r0, =gUnknown_0203C7BC
+	ldr r0, =sRecordedBattle_AI_Scripts
 	ldr r0, [r0]
 	bx lr
 	.pool
