@@ -5,41 +5,6 @@
 
 	.text
 
-	thumb_func_start DisableSerial
-DisableSerial: @ 800B53C
-	push {lr}
-	sub sp, 0x4
-	movs r0, 0xC0
-	bl DisableInterrupts
-	ldr r1, =0x04000128
-	movs r2, 0x80
-	lsls r2, 6
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r0, =0x0400010e
-	movs r2, 0
-	strh r2, [r0]
-	adds r1, 0xDA
-	movs r0, 0xC0
-	strh r0, [r1]
-	ldr r0, =0x0400012a
-	strh r2, [r0]
-	ldr r2, =0x04000120
-	movs r0, 0
-	movs r1, 0
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	str r0, [sp]
-	ldr r1, =gLink
-	ldr r2, =0x050003f0
-	mov r0, sp
-	bl CpuSet
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end DisableSerial
-
 	thumb_func_start EnableSerial
 EnableSerial: @ 800B594
 	push {r4,r5,lr}

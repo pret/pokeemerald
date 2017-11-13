@@ -1895,3 +1895,14 @@ void sub_800B524(struct LinkPlayer *player)
     player->name[10] = player->name[8];
     ConvertInternationalString(player->name, player->language);
 }
+
+void DisableSerial(void)
+{
+    DisableInterrupts(INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
+    REG_SIOCNT = SIO_MULTI_MODE;
+    REG_TMCNT_H(3) = 0;
+    REG_IF = INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL;
+    REG_SIOMLT_SEND = 0;
+    REG_SIOMLT_RECV = 0;
+    CpuFill32(0, &gLink, sizeof(gLink));
+}
