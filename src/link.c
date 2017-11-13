@@ -1785,3 +1785,30 @@ bool8 sub_800B33C(void)
 {
     return gLinkErrorOccurred;
 }
+
+void sub_800B348(void)
+{
+    struct LinkPlayerBlock *block;
+
+    InitLocalLinkPlayer();
+    block = &gLocalLinkPlayerBlock;
+    block->linkPlayer = gLocalLinkPlayer;
+    memcpy(block->magic1, gASCIIGameFreakInc, sizeof(block->magic1) - 1);
+    memcpy(block->magic2, gASCIIGameFreakInc, sizeof(block->magic2) - 1);
+    memcpy(gBlockSendBuffer, block, sizeof(*block));
+}
+
+void sub_800B3A4(u8 who)
+{
+    struct LinkPlayerBlock *block;
+    struct LinkPlayer *player;
+
+    block = (struct LinkPlayerBlock *)gBlockRecvBuffer[who];
+    player = &gLinkPlayers[who];
+    *player = block->linkPlayer;
+    sub_800B524(player);
+    if (strcmp(block->magic1, gASCIIGameFreakInc) != 0 || strcmp(block->magic2, gASCIIGameFreakInc) != 0)
+    {
+        SetMainCallback2(CB2_LinkError);
+    }
+}
