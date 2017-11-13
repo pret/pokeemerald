@@ -21,5 +21,7 @@ u8 sub_80104F4(void);
 u8 rfu_get_multiplayer_id(void);
 bool8 sub_8010100(u8 a0);
 bool8 sub_8010500(void);
+bool8 Rfu_IsMaster(void);
+void task_add_05_task_del_08FA224_when_no_RfuFunc(void);
 
 #endif //GUARD_LINK_RFU_H

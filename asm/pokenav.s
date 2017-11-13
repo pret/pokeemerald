@@ -28128,7 +28128,7 @@ _081D4EBA:
 	thumb_func_start sub_81D4EC0
 sub_81D4EC0: @ 81D4EC0
 	push {lr}
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4EDC
@@ -28186,7 +28186,7 @@ _081D4F20:
 	.4byte _081D4FEC
 	.4byte _081D4FF8
 _081D4F38:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4F88

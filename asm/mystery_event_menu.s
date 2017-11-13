@@ -566,7 +566,7 @@ _08178E58:
 	ands r0, r1
 	cmp r0, 0
 	beq _08178E98
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	bne _08178E98

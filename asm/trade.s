@@ -473,7 +473,7 @@ _0807758C:
 	bcs _080775A0
 	b _08077B46
 _080775A0:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _080775D8
@@ -7367,7 +7367,7 @@ _0807AFAC:
 	b _0807B0E4
 	.pool
 _0807AFBC:
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807AFC8

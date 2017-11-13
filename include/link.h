@@ -205,7 +205,7 @@ void sub_800ADF8(void);
 void sub_800B488(void);
 void sub_800A620(void);
 void sub_8011BD0(void);
-u8 sub_800ABBC(void);
+u8 IsLinkMaster(void);
 void sub_800AC34(void);
 
 void SetLinkDebugValues(u32 seed, u32 flags);

@@ -793,7 +793,7 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
 
             if (GetLinkPlayerCount_2() >= var)
             {
-                if (sub_800ABBC())
+                if (IsLinkMaster())
                 {
                     sub_800A620();
                     gTasks[taskId].data[11]++;

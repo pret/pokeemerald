@@ -426,7 +426,7 @@ sub_80B2688: @ 80B2688
 	adds r4, r0, r1
 	movs r0, 0
 	strh r0, [r4, 0xE]
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1645,7 +1645,7 @@ sub_80B3194: @ 80B3194
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080B31DA
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2786,7 +2786,7 @@ _080B3B68:
 	lsls r0, 24
 	cmp r4, r0
 	bcc _080B3BB8
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B3B96

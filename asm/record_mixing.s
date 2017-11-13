@@ -768,7 +768,7 @@ _080E73B8:
 	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800ABBC
+	bl IsLinkMaster
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

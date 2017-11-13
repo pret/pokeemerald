@@ -107,6 +107,12 @@ EWRAM_DATA u16 gLinkTimeOutCounter = 0;
 EWRAM_DATA struct LinkPlayer gLocalLinkPlayer = {};
 EWRAM_DATA struct LinkPlayer gLinkPlayers[MAX_RFU_PLAYERS] = {};
 EWRAM_DATA struct LinkPlayer gSavedLinkPlayers[MAX_RFU_PLAYERS] = {};
+EWRAM_DATA struct {
+    u32 status;
+    u8 unk_04;
+} gUnknown_02022B00 = {};
+EWRAM_DATA u16 gUnknown_02022B08 = 0;
+EWRAM_DATA void *gUnknown_02022B0C = NULL;
 
 // Static ROM declarations
 
@@ -125,6 +131,7 @@ static u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size);
 static void LinkTest_prnthex(u32 pos, u8 a0, u8 a1, u8 a2);
 static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8 taskId);
+void sub_800AC80(void);
 void sub_800AEB4(void);
 u8 sub_800B2F8(void);
 void sub_800B4A4(void);
@@ -1367,4 +1374,56 @@ void sub_800AB98(void)
 u8 GetLinkPlayerCount_2(void)
 {
     return EXTRACT_PLAYER_COUNT(gLinkStatus);
+}
+
+bool8 IsLinkMaster(void)
+{
+    if (gSerialIsRFU)
+    {
+        return Rfu_IsMaster();
+    }
+    return EXTRACT_MASTER(gLinkStatus);
+}
+
+u8 sub_800ABE8(void)
+{
+    return gUnknown_03000D58;
+}
+
+void sub_800ABF4(u16 a0)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        task_add_05_task_del_08FA224_when_no_RfuFunc();
+    }
+    else
+    {
+        if (gLinkCallback == NULL)
+        {
+            gLinkCallback = sub_800AC80;
+            gUnknown_030030E4 = 0;
+            gUnknown_030030F4 = a0;
+        }
+    }
+}
+
+void sub_800AC34(void)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        task_add_05_task_del_08FA224_when_no_RfuFunc();
+    }
+    else
+    {
+        if (gLinkCallback != NULL)
+        {
+            gUnknown_02022B08 ++;
+        }
+        else
+        {
+            gLinkCallback = sub_800AC80;
+            gUnknown_030030E4 = 0;
+            gUnknown_030030F4 = 0;
+        }
+    }
 }

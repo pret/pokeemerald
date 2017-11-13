@@ -7537,13 +7537,13 @@ sub_8011A9C: @ 8011A9C
 	.pool
 	thumb_func_end sub_8011A9C
 
-	thumb_func_start sub_8011AB0
-sub_8011AB0: @ 8011AB0
+	thumb_func_start Rfu_IsMaster
+Rfu_IsMaster: @ 8011AB0
 	ldr r0, =gUnknown_03005000
 	ldrb r0, [r0, 0xC]
 	bx lr
 	.pool
-	thumb_func_end sub_8011AB0
+	thumb_func_end Rfu_IsMaster
 
 	thumb_func_start LinkVSync
 LinkVSync: @ 8011ABC
