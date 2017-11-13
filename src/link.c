@@ -16,6 +16,7 @@
 #include "palette.h"
 #include "task.h"
 #include "trade.h"
+#include "battle.h"
 #include "link_rfu.h"
 #include "link.h"
 
@@ -131,7 +132,9 @@ static u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size);
 static void LinkTest_prnthex(u32 pos, u8 a0, u8 a1, u8 a2);
 static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8 taskId);
-void sub_800AC80(void);
+static void sub_800AC80(void);
+static void sub_800ACAC(void);
+void sub_800AD5C(void);
 void sub_800AEB4(void);
 u8 sub_800B2F8(void);
 void sub_800B4A4(void);
@@ -1422,6 +1425,61 @@ void sub_800AC34(void)
         else
         {
             gLinkCallback = sub_800AC80;
+            gUnknown_030030E4 = 0;
+            gUnknown_030030F4 = 0;
+        }
+    }
+}
+
+static void sub_800AC80(void)
+{
+    if (gUnknown_03004130 == 0)
+    {
+        BuildSendCmd(0x5fff);
+        gLinkCallback = sub_800ACAC;
+    }
+}
+
+static void sub_800ACAC(void)
+{
+    int i;
+    unsigned count;
+    u8 linkPlayerCount;
+
+    linkPlayerCount = GetLinkPlayerCount();
+    count = 0;
+    for (i = 0; i < linkPlayerCount; i ++)
+    {
+        if (gUnknown_030030F0[i])
+        {
+            count ++;
+        }
+    }
+    if (count == linkPlayerCount)
+    {
+        gBattleTypeFlags &= ~BATTLE_TYPE_20;
+        gLinkVSyncDisabled = TRUE;
+        CloseLink();
+        gLinkCallback = NULL;
+        gUnknown_030030E4 = 1;
+    }
+}
+
+void sub_800AD10(void)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        task_add_05_task_del_08FA224_when_no_RfuFunc();
+    }
+    else
+    {
+        if (gLinkCallback != NULL)
+        {
+            gUnknown_02022B08 ++;
+        }
+        else
+        {
+            gLinkCallback = sub_800AD5C;
             gUnknown_030030E4 = 0;
             gUnknown_030030F4 = 0;
         }
