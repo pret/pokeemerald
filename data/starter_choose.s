@@ -32,7 +32,7 @@ sPokeballCoords:: @ 85B1DEC
 gStarterChoose_LabelCoords:: @ 85B1DF2
 	.incbin "baserom.gba", 0x5b1df2, 0x6
 
-sStarterMons:: @ 85B1DF8
+sStarterMon:: @ 85B1DF8
 	.incbin "baserom.gba", 0x5b1df8, 0x8
 
 gUnknown_085B1E00:: @ 85B1E00

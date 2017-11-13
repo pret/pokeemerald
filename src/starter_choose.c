@@ -25,8 +25,6 @@
 #define STARTER_PKMN_POS_X 120
 #define STARTER_PKMN_POS_Y 64
 
-extern u16 sStarterChooseWindowId;
-
 // graphics
 extern const u32 gBirchHelpGfx[];
 extern const u32 gBirchBagTilemap[];
@@ -37,7 +35,7 @@ extern const u16 gBirchBagGrassPal[];
 extern const u8 gText_BirchInTrouble[];
 extern const u8 gText_ConfirmStarterChoice[];
 
-extern const u16 sStarterMons[STARTER_MON_COUNT];
+extern const u16 sStarterMon[STARTER_MON_COUNT];
 extern const struct BgTemplate gUnknown_085B1E00[3];
 extern const struct WindowTemplate gUnknown_085B1DCC[];
 extern const struct WindowTemplate gUnknown_085B1DDC;
@@ -78,11 +76,13 @@ static void CreateStarterPokemonLabel(u8 selection);
 static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y);
 static void StarterPokemonSpriteCallback(struct Sprite *sprite);
 
+static IWRAM_DATA u16 sStarterChooseWindowId;
+
 u16 GetStarterPokemon(u16 chosenStarterId)
 {
     if (chosenStarterId > STARTER_MON_COUNT)
         chosenStarterId = 0;
-    return sStarterMons[chosenStarterId];
+    return sStarterMon[chosenStarterId];
 }
 
 static void VblankCB_StarterChoose(void)
