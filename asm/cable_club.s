@@ -205,7 +205,7 @@ sub_80B24F8: @ 80B24F8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -239,7 +239,7 @@ sub_80B252C: @ 80B252C
 	ands r0, r1
 	cmp r0, 0
 	beq _080B2570
-	bl sub_800B320
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -269,7 +269,7 @@ sub_80B2578: @ 80B2578
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800B320
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B258E
@@ -309,7 +309,7 @@ sub_80B25CC: @ 80B25CC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800B2E8
+	bl GetSioMultiSI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

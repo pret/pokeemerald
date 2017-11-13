@@ -12856,7 +12856,7 @@ _0807E4AE:
 _0807E4B2:
 	strb r0, [r1]
 _0807E4B4:
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807E4C2
@@ -14099,7 +14099,7 @@ _0807F028:
 	ldr r0, =c2_080543C4
 	bl SetMainCallback2
 _0807F03A:
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F048
@@ -14883,7 +14883,7 @@ _0807F6F8:
 	ldr r0, =c2_080543C4
 	bl SetMainCallback2
 _0807F70C:
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F71A

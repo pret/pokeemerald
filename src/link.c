@@ -78,7 +78,7 @@ bool8 gUnknown_03003078[MAX_LINK_PLAYERS];
 u8 gUnknown_0300307C[MAX_LINK_PLAYERS];
 u32 gFiller_03003080;
 u16 gLinkHeldKeys;
-u16 gRecvCmds[MAX_RFU_PLAYERS][8];
+u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
 u32 gLinkStatus;
 bool8 gUnknown_030030E4;
 bool8 gUnknown_030030E8;
@@ -88,12 +88,12 @@ u16 gUnknown_030030F4;
 u8 gSuppressLinkErrorMessage;
 bool8 gWirelessCommType;
 bool8 gSavedLinkPlayerCount;
-u16 gSendCmd[8];
+u16 gSendCmd[CMD_LENGTH];
 u8 gSavedMultiplayerId;
 bool8 gReceivedRemoteLinkPlayers;
 struct LinkTestBGInfo gLinkTestBGInfo;
 void (*gLinkCallback)(void);
-bool8 gShouldAdvanceLinkState;
+u8 gShouldAdvanceLinkState;
 u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
 u8 gBlockRequestType;
 u32 gFiller_03003154;
@@ -149,13 +149,18 @@ static void sub_800AD5C(void);
 static void sub_800AD88(void);
 static void sub_800AE30(void);
 static void sub_800AE5C(void);
-static void sub_800AEB4(void);
-static void sub_800B1A0(void);
-static bool8 sub_800B2F8(void);
-u32 sub_800B638(bool8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[8]);
+static void CheckErrorStatus(void);
+static void CB2_PrintErrorMessage(void);
+static bool8 IsSioMultiMaster(void);
+u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENGTH]);
 static void sub_800B4A4(void);
 void DisableSerial(void);
 void EnableSerial(void);
+
+void sub_800B764(void);
+void sub_800B790(void);
+void sub_800B7C0(u16 *queue);
+void sub_800B8A8(u16 (*queue)[CMD_LENGTH]);
 
 // .rodata
 
@@ -334,7 +339,7 @@ void Task_TriggerHandshake(u8 taskId)
 {
     if (++ gTasks[taskId].data[0] == 5)
     {
-        gShouldAdvanceLinkState = TRUE;
+        gShouldAdvanceLinkState = 1;
         DestroyTask(taskId);
     }
 }
@@ -424,7 +429,7 @@ void LinkTestProcessKeyInput(void)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        gShouldAdvanceLinkState = TRUE;
+        gShouldAdvanceLinkState = 1;
     }
     if (gMain.heldKeys & B_BUTTON)
     {
@@ -482,7 +487,7 @@ u16 LinkMain2(const u16 *heldKeys)
         {
             gLinkCallback();
         }
-        sub_800AEB4();
+        CheckErrorStatus();
     }
     return gLinkStatus;
 }
@@ -1134,7 +1139,7 @@ void sub_800A620(void)
 {
     if ((gLinkStatus & LINK_STAT_MASTER) && EXTRACT_PLAYER_COUNT(gLinkStatus) > 1)
     {
-        gShouldAdvanceLinkState = TRUE;
+        gShouldAdvanceLinkState = 1;
     }
 }
 
@@ -1261,10 +1266,10 @@ static void Task_PrintTestData(u8 taskId)
     LinkTest_prnthex(GetBlockReceivedStatus(), 15, 5, 2);
     LinkTest_prnthex(gLinkDebugSeed, 2, 12, 8);
     LinkTest_prnthex(gLinkDebugFlags, 2, 13, 8);
-    LinkTest_prnthex(sub_800B2E8(), 25, 5, 1);
-    LinkTest_prnthex(sub_800B2F8(), 25, 6, 1);
-    LinkTest_prnthex(sub_800B320(), 25, 7, 1);
-    LinkTest_prnthex(sub_800B33C(), 25, 8, 1);
+    LinkTest_prnthex(GetSioMultiSI(), 25, 5, 1);
+    LinkTest_prnthex(IsSioMultiMaster(), 25, 6, 1);
+    LinkTest_prnthex(IsLinkConnectionEstablished(), 25, 7, 1);
+    LinkTest_prnthex(HasLinkErrorOccurred(), 25, 8, 1);
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         LinkTest_prnthex(gLinkTestBlockChecksums[i], 10, 4 + i, 4);
@@ -1588,7 +1593,7 @@ static void sub_800AE5C(void)
     }
 }
 
-static void sub_800AEB4(void)
+static void CheckErrorStatus(void)
 {
     if (gLinkOpen && EXTRACT_LINK_ERRORS(gLinkStatus))
     {
@@ -1660,7 +1665,7 @@ void CB2_LinkError(void)
         AnimateSprites();
         BuildOamBuffer();
         UpdatePaletteFade();
-        SetMainCallback2(sub_800B1A0);
+        SetMainCallback2(CB2_PrintErrorMessage);
     }
 }
 
@@ -1693,7 +1698,7 @@ static void sub_800B138(void)
     CopyWindowToVram(2, 3);
 }
 
-static void sub_800B1A0(void)
+static void CB2_PrintErrorMessage(void)
 {
     switch (gMain.state)
     {
@@ -1762,17 +1767,17 @@ static void sub_800B1A0(void)
     }
 }
 
-bool8 sub_800B2E8(void)
+bool8 GetSioMultiSI(void)
 {
     return (REG_SIOCNT & 0x04) != 0;
 }
 
-static bool8 sub_800B2F8(void)
+static bool8 IsSioMultiMaster(void)
 {
     return (REG_SIOCNT & 0x8) && !(REG_SIOCNT & 0x04);
 }
 
-bool8 sub_800B320(void)
+bool8 IsLinkConnectionEstablished(void)
 {
     return EXTRACT_CONN_ESTABLISHED(gLinkStatus);
 }
@@ -1782,7 +1787,7 @@ void SetSuppressLinkErrorMessage(bool8 flag)
     gSuppressLinkErrorMessage = flag;
 }
 
-bool8 sub_800B33C(void)
+bool8 HasLinkErrorOccurred(void)
 {
     return gLinkErrorOccurred;
 }
@@ -1821,7 +1826,7 @@ bool8 HandleLinkConnection(void)
 
     if (gWirelessCommType == 0)
     {
-        gLinkStatus = sub_800B638(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
+        gLinkStatus = LinkMain1(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
         LinkMain2(&gMain.heldKeys);
         if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && sub_808766C() == TRUE)
         {
@@ -1929,4 +1934,100 @@ void ResetSerial(void)
 {
     EnableSerial();
     DisableSerial();
+}
+
+u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENGTH])
+{
+    u32 retVal;
+    u32 retVal2;
+
+    switch (gLink.state)
+    {
+        case LINK_STATE_START0:
+            DisableSerial();
+            gLink.state = 1;
+            break;
+        case LINK_STATE_START1:
+            if (*shouldAdvanceLinkState == 1)
+            {
+                EnableSerial();
+                gLink.state = 2;
+            }
+            break;
+        case LINK_STATE_HANDSHAKE:
+            switch (*shouldAdvanceLinkState)
+            {
+                default:
+                    sub_800B764();
+                    break;
+                case 1:
+                    if (gLink.isMaster == 8 && gLink.playerCount > 1)
+                    {
+                        gLink.handshakeAsMaster = TRUE;
+                    }
+                    break;
+                case 2:
+                    gLink.state = LINK_STATE_START0;
+                    REG_SIOMLT_SEND = 0;
+                    break;
+            }
+            break;
+        case LINK_STATE_INIT_TIMER:
+            sub_800B790();
+            gLink.state = LINK_STATE_CONN_ESTABLISHED;
+            // fallthrough
+        case LINK_STATE_CONN_ESTABLISHED:
+            sub_800B7C0(sendCmd);
+            sub_800B8A8(recvCmds);
+            break;
+    }
+    *shouldAdvanceLinkState = 0;
+    retVal = gLink.localId;
+    retVal |= (gLink.playerCount << 2);
+    if (gLink.isMaster == 8)
+    {
+        retVal |= 0x20;
+    }
+    {
+        u32 receivedNothing = gLink.receivedNothing << 8;
+        u32 link_field_F = gLink.link_field_F << 9;
+        u32 hardwareError = gLink.hardwareError << 12;
+        u32 badChecksum = gLink.badChecksum << 13;
+        u32 queueFull = gLink.queueFull << 14;
+        u32 val;
+
+        if (gLink.state == LINK_STATE_CONN_ESTABLISHED)
+        {
+            val = 0x40;
+            val |= receivedNothing;
+            val |= retVal;
+            val |= link_field_F;
+            val |= hardwareError;
+            val |= badChecksum;
+            val |= queueFull;
+        }
+        else
+        {
+            val = retVal;
+            val |= receivedNothing;
+            val |= link_field_F;
+            val |= hardwareError;
+            val |= badChecksum;
+            val |= queueFull;
+        }
+
+        retVal = val;
+    }
+
+    if (gLink.lag == LAG_MASTER)
+        retVal |= 0x10000;
+
+    if (gLink.localId > 3)
+        retVal |= 0x20000;
+
+    retVal2 = retVal;
+    if (gLink.lag == LAG_SLAVE)
+        retVal2 |= 0x40000;
+
+    return retVal2;
 }

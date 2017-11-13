@@ -153,7 +153,6 @@ extern const struct BlockRequest sBlockRequestLookupTable[5];
 
 extern struct Link gLink;
 extern u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
-extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE]; // gBlockSendBuffer
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
 extern u32 gLinkStatus;
@@ -194,7 +193,7 @@ bool8 IsLinkConnectionEstablished(void);
 void SetSuppressLinkErrorMessage(bool8);
 bool8 HasLinkErrorOccurred(void);
 void ResetSerial(void);
-u32 LinkMain1(u8 *, u16 *, u16[CMD_LENGTH][MAX_LINK_PLAYERS]);
+u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENGTH]);
 void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
@@ -213,9 +212,7 @@ void SetLinkDebugValues(u32 seed, u32 flags);
 void sub_800A418(void);
 void SetSuppressLinkErrorMessage(bool8 flag);
 void sub_800B524(struct LinkPlayer *linkPlayer);
-u8 sub_800B2E8(void);
-u8 sub_800B320(void);
-u8 sub_800B33C(void);
+u8 GetSioMultiSI(void);
 void sub_800B9B8(void);
 
 extern u16 gUnknown_03003020[6];

@@ -333,7 +333,7 @@ _08178C42:
 	adds r1, r4, r0
 	b _08178D1E
 _08178C54:
-	bl sub_800B320
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	cmp r0, 0
 	beq _08178D00

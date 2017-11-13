@@ -28157,7 +28157,7 @@ sub_81D4EE4: @ 81D4EE4
 	lsrs r0, 24
 	cmp r0, 0x2
 	bhi _081D4F08
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4F08
@@ -28248,7 +28248,7 @@ _081D4FA0:
 	movs r0, 0x5
 	b _081D500E
 _081D4FB6:
-	bl sub_800B320
+	bl IsLinkConnectionEstablished
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D500C
@@ -28665,7 +28665,7 @@ _081D5360:
 	strb r0, [r4, 0x8]
 	b _081D548A
 _081D536A:
-	bl sub_800B33C
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D537A
