@@ -5,52 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800B488
-sub_800B488: @ 800B488
-	push {lr}
-	ldr r0, =gReceivedRemoteLinkPlayers
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0800B498
-	ldr r1, =gWirelessCommType
-	movs r0, 0x1
-	strb r0, [r1]
-_0800B498:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800B488
-
-	thumb_func_start sub_800B4A4
-sub_800B4A4: @ 800B4A4
-	push {lr}
-	ldr r0, =gReceivedRemoteLinkPlayers
-	ldrb r1, [r0]
-	cmp r1, 0
-	bne _0800B4B2
-	ldr r0, =gWirelessCommType
-	strb r1, [r0]
-_0800B4B2:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800B4A4
-
-	thumb_func_start sub_800B4C0
-sub_800B4C0: @ 800B4C0
-	push {lr}
-	ldr r0, =gReceivedRemoteLinkPlayers
-	ldrb r1, [r0]
-	cmp r1, 0
-	bne _0800B4CE
-	ldr r0, =gWirelessCommType
-	strb r1, [r0]
-_0800B4CE:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800B4C0
-
 	thumb_func_start sub_800B4DC
 sub_800B4DC: @ 800B4DC
 	push {lr}

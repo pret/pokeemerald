@@ -151,9 +151,9 @@ static void sub_800AE30(void);
 static void sub_800AE5C(void);
 static void sub_800AEB4(void);
 static void sub_800B1A0(void);
-u8 sub_800B2F8(void);
+static bool8 sub_800B2F8(void);
 u32 sub_800B638(bool8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[8]);
-void sub_800B4A4(void);
+static void sub_800B4A4(void);
 void DisableSerial(void);
 void EnableSerial(void);
 
@@ -1767,7 +1767,7 @@ bool8 sub_800B2E8(void)
     return (REG_SIOCNT & 0x04) != 0;
 }
 
-bool8 sub_800B2F8(void)
+static bool8 sub_800B2F8(void)
 {
     return (REG_SIOCNT & 0x8) && !(REG_SIOCNT & 0x04);
 }
@@ -1841,4 +1841,28 @@ bool8 HandleLinkConnection(void)
         }
     }
     return FALSE;
+}
+
+void sub_800B488(void)
+{
+    if (gReceivedRemoteLinkPlayers == 0)
+    {
+        gWirelessCommType = 1;
+    }
+}
+
+static void sub_800B4A4(void)
+{
+    if (gReceivedRemoteLinkPlayers == 0)
+    {
+        gWirelessCommType = 0;
+    }
+}
+
+void sub_800B4C0(void)
+{
+    if (gReceivedRemoteLinkPlayers == 0)
+    {
+        gWirelessCommType = 0;
+    }
 }
