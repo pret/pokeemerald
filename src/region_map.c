@@ -935,7 +935,7 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
         case 8:
 
             gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
-            if (gRegionMap->mapSecId != MAPSEC_SS_TIDAL)
+            if (gRegionMap->mapSecId != MAPSEC_DYNAMIC)
             {
                 storedWarp = &gSaveBlock1Ptr->warp4;
                 mapHeader = get_mapheader_by_bank_and_number(storedWarp->mapGroup, storedWarp->mapNum);
@@ -1516,7 +1516,7 @@ u8 *sub_81245DC(u8 *dest, u16 mapSecId)
 {
     switch (mapSecId)
     {
-        case MAPSEC_SS_TIDAL:
+        case MAPSEC_DYNAMIC:
             return StringCopy(dest, gText_Ferry);
         case MAPSEC_SECRET_BASE:
             return StringCopy(dest, gText_SecretBase);
