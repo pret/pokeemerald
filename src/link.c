@@ -1331,3 +1331,29 @@ bool8 sub_800AA60(void)
     }
     return FALSE;
 }
+
+void sub_800AAF4(void)
+{
+    int i;
+
+    // Clearly not what was meant to be written, but here it is anyway.
+    for (i = 0; i < 4; i ++)
+    {
+        CpuSet(&gSavedLinkPlayers[i], NULL, sizeof(struct LinkPlayer));
+    }
+}
+
+void sub_800AB18(void)
+{
+    u8 i;
+
+    for (i = 0; i < gSavedLinkPlayerCount; i ++)
+    {
+        if (gSavedLinkPlayers[i].trainerId != gLinkPlayers[i].trainerId || StringCompare(gSavedLinkPlayers[i].name, gLinkPlayers[i].name) != 0)
+        {
+            gLinkErrorOccurred = TRUE;
+            CloseLink();
+            SetMainCallback2(CB2_LinkError);
+        }
+    }
+}
