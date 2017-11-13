@@ -1197,8 +1197,44 @@ gUnknown_08DC9608:: @ 8DC9608
 	.incbin "baserom.gba", 0xdc9608, 0x20
 
 gUnknown_08DC9628:: @ 8DC9628
-	.incbin "baserom.gba", 0xdc9628, 0x2788
+	.incbin "baserom.gba", 0xdc9628, 0x320
+    
+gBerryBlenderMiscPalette:: @ 8DCAB88
+	.incbin "graphics/berry_blender/misc.gbapal"
+    
+gBerryBlenderArrowPalette:: @ 8DC9948
+	.incbin "graphics/berry_blender/arrow.gbapal"
 
+gUnknown_8DC9988:: @ 8DC9988
+    .incbin "baserom.gba", 0xdc9988, 0x200
+    
+	.align 2
+gBerryBlenderMarubatsuTiles:: @ 8DC9B88
+	.incbin "graphics/berry_blender/marubatsu.4bpp"
+    
+	.align 2
+gBerryBlenderParticlesTiles:: @ 8E90818
+	.incbin "graphics/berry_blender/particles.4bpp"
+    
+	.space 0x120
+
+	.align 2
+gBerryBlenderCountdownNumbersTiles:: @ 8DC9F88
+	.incbin "graphics/berry_blender/countdown_numbers.4bpp"
+    
+	.align 2
+gBerryBlenderStartTiles:: @ 8DCA588
+	.incbin "graphics/berry_blender/start.4bpp"
+    
+    .space 0x200
+    
+   .align 2
+gBerryBlenderArrowTiles:: @ 8DCAB88
+	.incbin "graphics/berry_blender/arrow.4bpp"
+
+gUnknown_08DCB388:: @ 8DCB388
+	.incbin "baserom.gba", 0xdcb388, 0xA28
+    
 gUnknown_08DCBDB0:: @ 8DCBDB0
 	.incbin "baserom.gba", 0xdcbdb0, 0x20
 
