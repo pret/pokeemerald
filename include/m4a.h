@@ -20,5 +20,6 @@ void m4aMPlayImmInit(struct MusicPlayerInfo *mplayInfo);
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_SE3;
+extern struct SoundInfo gSoundInfo;
 
 #endif //GUARD_M4A_H

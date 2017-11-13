@@ -1,49 +1,29 @@
 #include "global.h"
-#include "main.h"
+#include "crt0.h"
+#include "malloc.h"
 #include "link.h"
+#include "link_rfu.h"
+#include "librfu.h"
 #include "m4a.h"
+#include "bg.h"
 #include "rtc.h"
+#include "unknown_task.h"
 #include "rng.h"
+#include "overworld.h"
+#include "play_time.h"
 #include "dma3.h"
 #include "gba/flash_internal.h"
+#include "load_save.h"
+#include "gpu_regs.h"
+#include "agb_flash.h"
+#include "sound.h"
 #include "battle.h"
+#include "battle_controllers.h"
+#include "text.h"
+#include "intro.h"
+#include "main.h"
 
-extern u16 GetGpuReg(u8);
-extern void SetGpuReg(u8, u16);
-extern void LinkVSync(void);
-extern void sub_800E174(void);
-extern void sub_800B9B8(void);
-extern void InitGpuRegManager(void);
-extern void sub_800E6D0(void);
-extern void CheckForFlashMemory(void);
-extern void InitMapMusic(void);
-extern void ResetBgs(void);
-extern void SetDefaultFontsPointer(void);
-extern void InitHeap(void *heapStart, u32 heapSize); // malloc.h
-extern void rfu_REQ_stopMode(void);
-extern void rfu_waitREQComplete(void);
-extern bool32 sub_8087634(void);
-extern bool32 sub_80875C8(void);
-extern void ClearSpriteCopyRequests(void);
-extern void PlayTimeCounter_Update(void);
-extern void MapMusicMain(void);
-extern void EnableInterrupts(u16);
-extern void sub_8033648(void);
-extern u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
-extern void remove_some_task(void);
-
-extern struct SoundInfo gSoundInfo;
-extern u32 gFlashMemoryPresent;
-extern u32 IntrMain[];
-extern u8 gHeap[];
-extern struct SaveBlock2 gSaveblock2;
-extern struct PokemonStorage gPokemonStorage;
-extern u32 gBattleTypeFlags;
 extern u32 *gUnknown_0203CF5C;
-
-void Timer3Intr(void);
-bool8 HandleLinkConnection(void);
-void c2_copyright_1(void);
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);

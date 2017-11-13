@@ -159,7 +159,6 @@ extern u16 gLinkType;
 extern u32 gLinkStatus;
 extern u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 extern u16 gSendCmd[CMD_LENGTH];
-extern u8 gShouldAdvanceLinkState;
 extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
@@ -200,7 +199,6 @@ void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
 u8 GetLinkPlayerCount(void);
-
 void sub_800E0E8(void);
 bool8 sub_800A520(void);
 void sub_800DFB4(u8, u8);
@@ -210,7 +208,7 @@ void sub_800A620(void);
 void sub_8011BD0(void);
 u8 IsLinkMaster(void);
 void sub_800AC34(void);
-
+bool8 HandleLinkConnection(void);
 void SetLinkDebugValues(u32 seed, u32 flags);
 void sub_800A418(void);
 void SetSuppressLinkErrorMessage(bool8 flag);
@@ -218,6 +216,7 @@ void sub_800B524(struct LinkPlayer *linkPlayer);
 u8 sub_800B2E8(void);
 u8 sub_800B320(void);
 u8 sub_800B33C(void);
+void sub_800B9B8(void);
 
 extern u16 gUnknown_03003020[6];
 extern u32 gLinkDebugSeed;

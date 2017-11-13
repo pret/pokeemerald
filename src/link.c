@@ -152,6 +152,7 @@ static void sub_800AE5C(void);
 static void sub_800AEB4(void);
 static void sub_800B1A0(void);
 u8 sub_800B2F8(void);
+u32 sub_800B638(bool8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[8]);
 void sub_800B4A4(void);
 void DisableSerial(void);
 void EnableSerial(void);
@@ -1811,4 +1812,33 @@ void sub_800B3A4(u8 who)
     {
         SetMainCallback2(CB2_LinkError);
     }
+}
+
+bool8 HandleLinkConnection(void)
+{
+    bool32 r4;
+    bool32 r5;
+
+    if (gWirelessCommType == 0)
+    {
+        gLinkStatus = sub_800B638(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
+        LinkMain2(&gMain.heldKeys);
+        if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && sub_808766C() == TRUE)
+        {
+            return TRUE;
+        }
+    }
+    else
+    {
+        r4 = sub_8010EC0();
+        r5 = sub_8010F1C();
+        if (sub_808766C() == TRUE)
+        {
+            if (r4 == TRUE || sub_800F0B8() || r5)
+            {
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
 }

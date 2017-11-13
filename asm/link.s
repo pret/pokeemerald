@@ -5,57 +5,6 @@
 
 	.text
 
-	thumb_func_start HandleLinkConnection
-HandleLinkConnection: @ 800B40C
-	push {r4,r5,lr}
-	ldr r0, =gWirelessCommType
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0800B45C
-	ldr r0, =gShouldAdvanceLinkState
-	ldr r1, =gSendCmd
-	ldr r2, =gRecvCmds
-	bl sub_800B638
-	ldr r4, =gLinkStatus
-	str r0, [r4]
-	ldr r0, =gMain+0x2c
-	bl LinkMain2
-	ldr r0, [r4]
-	movs r1, 0x80
-	lsls r1, 1
-	ands r0, r1
-	cmp r0, 0
-	beq _0800B480
-	bl sub_808766C
-	cmp r0, 0x1
-	bne _0800B480
-_0800B43E:
-	movs r0, 0x1
-	b _0800B482
-	.pool
-_0800B45C:
-	bl sub_8010EC0
-	adds r4, r0, 0
-	bl sub_8010F1C
-	adds r5, r0, 0
-	bl sub_808766C
-	cmp r0, 0x1
-	bne _0800B480
-	cmp r4, 0x1
-	beq _0800B43E
-	bl sub_800F0B8
-	cmp r0, 0
-	bne _0800B43E
-	cmp r5, 0
-	bne _0800B43E
-_0800B480:
-	movs r0, 0
-_0800B482:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end HandleLinkConnection
-
 	thumb_func_start sub_800B488
 sub_800B488: @ 800B488
 	push {lr}
