@@ -4,6 +4,8 @@
 #include "text.h"
 #include "task.h"
 
+extern const u16 gUnknown_0860F074[];
+
 void sub_81973A4(void);
 void sub_81973C4(u8, u8);
 void sub_819746C(u8 windowId, bool8 copyToVram);

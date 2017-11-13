@@ -5,169 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800AEB4
-sub_800AEB4: @ 800AEB4
-	push {lr}
-	ldr r0, =gLinkOpen
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0800AEF4
-	ldr r0, =gLinkStatus
-	ldr r2, [r0]
-	movs r0, 0xFE
-	lsls r0, 11
-	ands r0, r2
-	cmp r0, 0
-	beq _0800AEF4
-	ldr r0, =gSuppressLinkErrorMessage
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0800AEEA
-	ldr r1, =gUnknown_02022B00
-	str r2, [r1]
-	ldr r0, =gUnknown_03004130
-	ldrb r0, [r0]
-	strb r0, [r1, 0x4]
-	ldr r0, =gUnknown_03003160
-	ldrb r0, [r0]
-	strb r0, [r1, 0x5]
-	ldr r0, =CB2_LinkError
-	bl SetMainCallback2
-_0800AEEA:
-	ldr r1, =gLinkErrorOccurred
-	movs r0, 0x1
-	strb r0, [r1]
-	bl CloseLink
-_0800AEF4:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800AEB4
-
-	thumb_func_start sub_800AF18
-sub_800AF18: @ 800AF18
-	push {r4,lr}
-	ldr r4, =gUnknown_02022B00
-	str r0, [r4]
-	strb r1, [r4, 0x5]
-	strb r2, [r4, 0x4]
-	strb r3, [r4, 0x6]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800AF18
-
-	thumb_func_start CB2_LinkError
-CB2_LinkError: @ 800AF30
-	push {r4,lr}
-	movs r0, 0
-	movs r1, 0
-	bl SetGpuReg
-	ldr r0, =gMPlay_SE1
-	bl m4aMPlayStop
-	ldr r0, =gMPlay_SE2
-	bl m4aMPlayStop
-	ldr r0, =gMPlay_SE3
-	bl m4aMPlayStop
-	ldr r0, =0x02000000
-	movs r1, 0xE0
-	lsls r1, 9
-	bl InitHeap
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	bl ResetPaletteFadeControl
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0x2
-	bl FillPalette
-	bl ResetTasks
-	bl remove_some_task
-	ldr r1, =gSerialIsRFU
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _0800AF8C
-	ldr r0, =gUnknown_02022B00
-	ldrb r0, [r0, 0x6]
-	cmp r0, 0
-	bne _0800AF88
-	movs r0, 0x3
-	strb r0, [r1]
-_0800AF88:
-	bl sub_800E604
-_0800AF8C:
-	ldr r0, =sub_80096BC
-	bl SetVBlankCallback
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, =gUnknown_082ED1FC
-	movs r0, 0
-	movs r2, 0x2
-	bl InitBgsFromTemplates
-	ldr r4, =gUnknown_02022B0C
-	movs r0, 0x80
-	lsls r0, 4
-	bl Alloc
-	adds r1, r0, 0
-	str r1, [r4]
-	movs r0, 0x1
-	bl SetBgTilemapBuffer
-	ldr r0, =gUnknown_082ED204
-	bl InitWindows
-	lsls r0, 16
-	cmp r0, 0
-	beq _0800B03C
-	bl DeactivateAllTextPrinters
-	bl reset_temp_tile_data_buffers
-	movs r0, 0x50
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x52
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x10
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x12
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x14
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x16
-	movs r1, 0
-	bl SetGpuReg
-	movs r1, 0xE0
-	lsls r1, 8
-	movs r0, 0
-	bl ClearGpuRegBits
-	ldr r0, =gUnknown_0860F074
-	movs r1, 0xF0
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r1, =gSoftResetDisabled
-	movs r0, 0
-	strb r0, [r1]
-	ldr r0, =Task_DestroySelf
-	movs r1, 0
-	bl CreateTask
-	bl StopMapMusic
-	ldr r1, =gMain
-	movs r0, 0
-	str r0, [r1]
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	ldr r0, =sub_800B1A0
-	bl SetMainCallback2
-_0800B03C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end CB2_LinkError
-
 	thumb_func_start sub_800B080
 sub_800B080: @ 800B080
 	push {r4,r5,lr}
@@ -311,7 +148,7 @@ _0800B1D2:
 	beq _0800B214
 	b _0800B260
 _0800B1D8:
-	ldr r0, =gUnknown_02022B00
+	ldr r0, =sLinkErrorBuffer
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
 	beq _0800B1EC
@@ -324,7 +161,7 @@ _0800B1EC:
 _0800B1F2:
 	movs r0, 0
 	bl ShowBg
-	ldr r0, =gUnknown_02022B00
+	ldr r0, =sLinkErrorBuffer
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
 	beq _0800B260
@@ -388,7 +225,7 @@ _0800B260:
 	bl PlaySE
 	movs r0, 0
 	strb r0, [r4]
-	ldr r1, =gUnknown_02022B00
+	ldr r1, =sLinkErrorBuffer
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl sub_81700F8
@@ -803,9 +640,9 @@ EnableSerial: @ 800B594
 	strb r4, [r0]
 	ldr r0, =gUnknown_03000D73
 	strb r4, [r0]
-	ldr r0, =gUnknown_03003160
+	ldr r0, =gLastSendQueueCount
 	strb r4, [r0]
-	ldr r0, =gUnknown_03004130
+	ldr r0, =gLastRecvQueueCount
 	strb r4, [r0]
 	add sp, 0x4
 	pop {r4,r5}
@@ -1051,7 +888,7 @@ _0800B7FE:
 	movs r2, 0
 	ldr r4, =gUnknown_03000D6E
 	mov r9, r4
-	ldr r1, =gUnknown_03003160
+	ldr r1, =gLastSendQueueCount
 	mov r10, r1
 	lsls r5, r0, 1
 	movs r0, 0x18
@@ -1084,7 +921,7 @@ _0800B850:
 	strb r0, [r6, 0x12]
 	ldr r2, =gUnknown_03000D6E
 	mov r9, r2
-	ldr r4, =gUnknown_03003160
+	ldr r4, =gLastSendQueueCount
 	mov r10, r4
 _0800B85C:
 	mov r1, r9
@@ -1374,7 +1211,7 @@ _0800BA8A:
 	asrs r0, 24
 	cmp r0, 0x8
 	bne _0800BAAA
-	ldr r0, =gUnknown_03004130
+	ldr r0, =gLastRecvQueueCount
 	ldr r2, =0x00000fbd
 	adds r1, r3, r2
 	ldrb r1, [r1]

@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "m4a.h"
 #include "malloc.h"
 #include "save.h"
 #include "bg.h"
@@ -15,6 +16,11 @@
 #include "gpu_regs.h"
 #include "palette.h"
 #include "task.h"
+#include "unknown_task.h"
+#include "menu.h"
+#include "new_menu_helpers.h"
+#include "text.h"
+#include "sound.h"
 #include "trade.h"
 #include "battle.h"
 #include "link_rfu.h"
@@ -90,9 +96,9 @@ u8 gBlockRequestType;
 u32 gFiller_03003154;
 u32 gFiller_03003158;
 u32 gFiller_0300315c;
-u8 gUnknown_03003160;
+u8 gLastSendQueueCount;
 struct Link gLink;
-u8 gUnknown_03004130;
+u8 gLastRecvQueueCount;
 u16 gUnknown_03004134;
 u32 gFiller_03004138;
 u32 gFiller_0300413C;
@@ -110,8 +116,10 @@ EWRAM_DATA struct LinkPlayer gLinkPlayers[MAX_RFU_PLAYERS] = {};
 EWRAM_DATA struct LinkPlayer gSavedLinkPlayers[MAX_RFU_PLAYERS] = {};
 EWRAM_DATA struct {
     u32 status;
-    u8 unk_04;
-} gUnknown_02022B00 = {};
+    u8 lastRecvQueueCount;
+    u8 lastSendQueueCount;
+    u8 unk_06;
+} sLinkErrorBuffer = {};
 EWRAM_DATA u16 gUnknown_02022B08 = 0;
 EWRAM_DATA void *gUnknown_02022B0C = NULL;
 
@@ -138,7 +146,8 @@ static void sub_800AD5C(void);
 static void sub_800AD88(void);
 static void sub_800AE30(void);
 static void sub_800AE5C(void);
-void sub_800AEB4(void);
+static void sub_800AEB4(void);
+void sub_800B1A0(void);
 u8 sub_800B2F8(void);
 void sub_800B4A4(void);
 void DisableSerial(void);
@@ -1243,8 +1252,8 @@ static void Task_PrintTestData(u8 taskId)
     LinkTest_prnthex(gLink.state, 2, 10, 2);
     LinkTest_prnthex(EXTRACT_PLAYER_COUNT(gLinkStatus), 15, 10, 2);
     LinkTest_prnthex(GetMultiplayerId(), 15, 12, 2);
-    LinkTest_prnthex(gUnknown_03003160, 25, 1, 2);
-    LinkTest_prnthex(gUnknown_03004130, 25, 2, 2);
+    LinkTest_prnthex(gLastSendQueueCount, 25, 1, 2);
+    LinkTest_prnthex(gLastRecvQueueCount, 25, 2, 2);
     LinkTest_prnthex(GetBlockReceivedStatus(), 15, 5, 2);
     LinkTest_prnthex(gLinkDebugSeed, 2, 12, 8);
     LinkTest_prnthex(gLinkDebugFlags, 2, 13, 8);
@@ -1436,7 +1445,7 @@ void sub_800AC34(void)
 
 static void sub_800AC80(void)
 {
-    if (gUnknown_03004130 == 0)
+    if (gLastRecvQueueCount == 0)
     {
         BuildSendCmd(0x5fff);
         gLinkCallback = sub_800ACAC;
@@ -1491,7 +1500,7 @@ void sub_800AD10(void)
 
 static void sub_800AD5C(void)
 {
-    if (gUnknown_03004130 == 0)
+    if (gLastRecvQueueCount == 0)
     {
         BuildSendCmd(0x5fff);
         gLinkCallback = sub_800AD88;
@@ -1545,7 +1554,7 @@ void sub_800ADF8(void)
 
 static void sub_800AE30(void)
 {
-    if (gUnknown_03004130 == 0)
+    if (gLastRecvQueueCount == 0)
     {
         BuildSendCmd(0x2ffe);
         gLinkCallback = sub_800AE5C;
@@ -1572,5 +1581,81 @@ static void sub_800AE5C(void)
             gUnknown_030030EC[i] = FALSE;
         }
         gLinkCallback = NULL;
+    }
+}
+
+static void sub_800AEB4(void)
+{
+    if (gLinkOpen && EXTRACT_LINK_ERRORS(gLinkStatus))
+    {
+        if (!gSuppressLinkErrorMessage)
+        {
+            sLinkErrorBuffer.status = gLinkStatus;
+            sLinkErrorBuffer.lastRecvQueueCount = gLastRecvQueueCount;
+            sLinkErrorBuffer.lastSendQueueCount = gLastSendQueueCount;
+            SetMainCallback2(CB2_LinkError);
+        }
+        gLinkErrorOccurred = TRUE;
+        CloseLink();
+    }
+}
+
+void sub_800AF18(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06)
+{
+    sLinkErrorBuffer.status = status;
+    sLinkErrorBuffer.lastSendQueueCount = lastSendQueueCount;
+    sLinkErrorBuffer.lastRecvQueueCount = lastRecvQueueCount;
+    sLinkErrorBuffer.unk_06 = unk_06;
+}
+
+void CB2_LinkError(void)
+{
+    u8 *tilemapBuffer;
+
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    m4aMPlayStop(&gMPlay_SE1);
+    m4aMPlayStop(&gMPlay_SE2);
+    m4aMPlayStop(&gMPlay_SE3);
+    InitHeap(gHeap, HEAP_SIZE);
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    ResetPaletteFadeControl();
+    FillPalette(0, 0, 2);
+    ResetTasks();
+    remove_some_task();
+    if (gSerialIsRFU)
+    {
+        if (!sLinkErrorBuffer.unk_06)
+        {
+            gSerialIsRFU = 3;
+        }
+        sub_800E604();
+    }
+    SetVBlankCallback(sub_80096BC);
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, gUnknown_082ED1FC, 2);
+    gUnknown_02022B0C = tilemapBuffer = malloc(0x800);
+    SetBgTilemapBuffer(1, tilemapBuffer);
+    if (InitWindows(gUnknown_082ED204))
+    {
+        DeactivateAllTextPrinters();
+        reset_temp_tile_data_buffers();
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+        SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+        SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
+        LoadPalette(gUnknown_0860F074, 0xf0, 0x20);
+        gSoftResetDisabled = FALSE;
+        CreateTask(Task_DestroySelf, 0);
+        StopMapMusic();
+        gMain.callback1 = NULL;
+        RunTasks();
+        AnimateSprites();
+        BuildOamBuffer();
+        UpdatePaletteFade();
+        SetMainCallback2(sub_800B1A0);
     }
 }

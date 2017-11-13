@@ -17,6 +17,7 @@
 #define LINK_STAT_RECEIVED_NOTHING       0x00000100
 #define LINK_STAT_RECEIVED_NOTHING_SHIFT 8
 #define LINK_STAT_ERRORS                 0x0007F000
+#define LINK_STAT_ERRORS_SHIFT           12
 
 #define EXTRACT_PLAYER_COUNT(status) \
 (((status) & LINK_STAT_PLAYER_COUNT) >> LINK_STAT_PLAYER_COUNT_SHIFT)
@@ -26,6 +27,8 @@
 (((status) >> LINK_STAT_CONN_ESTABLISHED_SHIFT) & 1)
 #define EXTRACT_RECEIVED_NOTHING(status) \
 (((status) >> LINK_STAT_RECEIVED_NOTHING_SHIFT) & 1)
+#define EXTRACT_LINK_ERRORS(status) \
+(((status) & LINK_STAT_ERRORS) >> LINK_STAT_ERRORS_SHIFT)
 
 struct LinkStatus
 {
@@ -239,8 +242,8 @@ extern void (*gLinkCallback)(void);
 extern bool8 gShouldAdvanceLinkState;
 extern u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
 extern u8 gBlockRequestType;
-extern u8 gUnknown_03003160;
-extern u8 gUnknown_03004130;
+extern u8 gLastSendQueueCount;
+extern u8 gLastRecvQueueCount;
 extern u16 gUnknown_03004134;
 extern u32 gUnknown_03003074;
 extern u32 gFiller_03003154;

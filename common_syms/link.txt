@@ -29,9 +29,9 @@ gBlockRequestType
 gFiller_03003154
 gFiller_03003158
 gFiller_0300315c
-gUnknown_03003160
+gLastSendQueueCount
 gLink
-gUnknown_03004130
+gLastRecvQueueCount
 gUnknown_03004134
 gFiller_03004138
 gFiller_0300413C
