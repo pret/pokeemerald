@@ -77,7 +77,7 @@ u8 gUnknown_030030F0[MAX_LINK_PLAYERS];
 u16 gUnknown_030030F4;
 u8 gSuppressLinkErrorMessage;
 bool8 gSerialIsRFU;
-bool8 gUnknown_03003100;
+bool8 gSavedLinkPlayerCount;
 u16 gSendCmd[8];
 u8 gUnknown_03003120;
 bool8 gReceivedRemoteLinkPlayers;
@@ -106,7 +106,7 @@ EWRAM_DATA u16 gLinkType = 0;
 EWRAM_DATA u16 gLinkTimeOutCounter = 0;
 EWRAM_DATA struct LinkPlayer gLocalLinkPlayer = {};
 EWRAM_DATA struct LinkPlayer gLinkPlayers[MAX_RFU_PLAYERS] = {};
-EWRAM_DATA struct LinkPlayer gUnknown_02022A74[MAX_RFU_PLAYERS] = {};
+EWRAM_DATA struct LinkPlayer gSavedLinkPlayers[MAX_RFU_PLAYERS] = {};
 
 // Static ROM declarations
 
@@ -1257,7 +1257,7 @@ u8 sub_800A9A8(void)
     u8 flags;
 
     flags = 0;
-    for (i = 0; i < gUnknown_03003100; i ++)
+    for (i = 0; i < gSavedLinkPlayerCount; i ++)
     {
         flags |= (1 << i);
     }
@@ -1281,20 +1281,53 @@ void sub_800AA04(u8 a0)
 {
     int i;
 
-    gUnknown_03003100 = a0;
+    gSavedLinkPlayerCount = a0;
     gUnknown_03003120 = GetMultiplayerId();
     for (i = 0; i < MAX_RFU_PLAYERS; i ++)
     {
-        gUnknown_02022A74[i] = gLinkPlayers[i];
+        gSavedLinkPlayers[i] = gLinkPlayers[i];
     }
 }
 
 u8 sub_800AA48(void)
 {
-    return gUnknown_03003100;
+    return gSavedLinkPlayerCount;
 }
 
 u8 sub_800AA54(void)
 {
     return gUnknown_03003120;
+}
+
+bool8 sub_800AA60(void)
+{
+    int i;
+    unsigned count;
+
+    count = 0;
+    for (i = 0; i < gSavedLinkPlayerCount; i ++)
+    {
+        if (gLinkPlayers[i].trainerId == gSavedLinkPlayers[i].trainerId)
+        {
+            if (gLinkType == 0x2288)
+            {
+                if (gLinkType == gLinkPlayers[i].linkType)
+                {
+                    count ++;
+                }
+            }
+            else
+            {
+                count ++;
+            }
+        }
+    }
+    if (count == gSavedLinkPlayerCount)
+    {
+        if (sub_800ABAC() == gSavedLinkPlayerCount)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
 }

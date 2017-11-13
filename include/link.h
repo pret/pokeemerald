@@ -233,7 +233,7 @@ extern u8 gUnknown_030030F0[MAX_LINK_PLAYERS];
 extern u16 gUnknown_030030F4;
 extern u8 gSuppressLinkErrorMessage;
 extern bool8 gSerialIsRFU;
-extern bool8 gUnknown_03003100;
+extern bool8 gSavedLinkPlayerCount;
 extern u8 gUnknown_03003120;
 extern struct LinkTestBGInfo gLinkTestBGInfo;
 extern void (*gLinkCallback)(void);

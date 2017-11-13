@@ -17,7 +17,7 @@ gUnknown_030030F0
 gUnknown_030030F4
 gSuppressLinkErrorMessage
 gSerialIsRFU
-gUnknown_03003100
+gSavedLinkPlayerCount
 gSendCmd
 gUnknown_03003120
 gReceivedRemoteLinkPlayers

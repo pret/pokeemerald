@@ -5,83 +5,10 @@
 
 	.text
 
-	thumb_func_start sub_800AA60
-sub_800AA60: @ 800AA60
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	movs r3, 0
-	ldr r0, =gUnknown_03003100
-	ldrb r1, [r0]
-	mov r9, r0
-	cmp r3, r1
-	bge _0800AAB4
-	ldr r0, =gLinkPlayers
-	mov r12, r0
-	ldr r0, =gUnknown_02022A74
-	ldr r2, =0x00002288
-	mov r8, r2
-	ldr r7, =gLinkType
-	mov r6, r12
-	adds r6, 0x14
-	adds r5, r0, 0x4
-	movs r4, 0
-	adds r2, r1, 0
-_0800AA8A:
-	mov r0, r12
-	adds r0, 0x4
-	adds r0, r4, r0
-	ldr r1, [r0]
-	ldr r0, [r5]
-	cmp r1, r0
-	bne _0800AAA8
-	ldrh r0, [r7]
-	cmp r0, r8
-	bne _0800AAA6
-	adds r1, r0, 0
-	ldr r0, [r6]
-	cmp r1, r0
-	bne _0800AAA8
-_0800AAA6:
-	adds r3, 0x1
-_0800AAA8:
-	adds r6, 0x1C
-	adds r5, 0x1C
-	adds r4, 0x1C
-	subs r2, 0x1
-	cmp r2, 0
-	bne _0800AA8A
-_0800AAB4:
-	mov r0, r9
-	ldrb r0, [r0]
-	cmp r3, r0
-	bne _0800AAE4
-	bl sub_800ABAC
-	lsls r0, 24
-	lsrs r0, 24
-	mov r1, r9
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _0800AAE4
-	movs r0, 0x1
-	b _0800AAE6
-	.pool
-_0800AAE4:
-	movs r0, 0
-_0800AAE6:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_800AA60
-
 	thumb_func_start sub_800AAF4
 sub_800AAF4: @ 800AAF4
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_02022A74
+	ldr r5, =gSavedLinkPlayers
 	movs r4, 0x3
 _0800AAFA:
 	adds r0, r5, 0
@@ -104,11 +31,11 @@ sub_800AB18: @ 800AB18
 	mov r7, r8
 	push {r7}
 	movs r4, 0
-	ldr r0, =gUnknown_03003100
+	ldr r0, =gSavedLinkPlayerCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _0800AB78
-	ldr r6, =gUnknown_02022A74
+	ldr r6, =gSavedLinkPlayers
 	ldr r5, =gLinkPlayers
 	movs r0, 0x8
 	adds r0, r6
@@ -144,7 +71,7 @@ _0800AB6A:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_03003100
+	ldr r0, =gSavedLinkPlayerCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _0800AB36
@@ -159,7 +86,7 @@ _0800AB78:
 
 	thumb_func_start sub_800AB98
 sub_800AB98: @ 800AB98
-	ldr r0, =gUnknown_03003100
+	ldr r0, =gSavedLinkPlayerCount
 	movs r1, 0
 	strb r1, [r0]
 	ldr r0, =gUnknown_03003120
