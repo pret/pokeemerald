@@ -5,67 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800B2E8
-sub_800B2E8: @ 800B2E8
-	ldr r0, =0x04000128
-	ldrh r0, [r0]
-	lsrs r0, 2
-	movs r1, 0x1
-	ands r0, r1
-	bx lr
-	.pool
-	thumb_func_end sub_800B2E8
-
-	thumb_func_start sub_800B2F8
-sub_800B2F8: @ 800B2F8
-	push {lr}
-	movs r3, 0
-	ldr r2, =0x04000128
-	ldrh r1, [r2]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _0800B314
-	ldrh r1, [r2]
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	bne _0800B314
-	movs r3, 0x1
-_0800B314:
-	adds r0, r3, 0
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_800B2F8
-
-	thumb_func_start sub_800B320
-sub_800B320: @ 800B320
-	ldr r0, =gLinkStatus
-	ldr r0, [r0]
-	lsrs r0, 6
-	movs r1, 0x1
-	ands r0, r1
-	bx lr
-	.pool
-	thumb_func_end sub_800B320
-
-	thumb_func_start SetSuppressLinkErrorMessage
-SetSuppressLinkErrorMessage: @ 800B330
-	ldr r1, =gSuppressLinkErrorMessage
-	strb r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end SetSuppressLinkErrorMessage
-
-	thumb_func_start sub_800B33C
-sub_800B33C: @ 800B33C
-	ldr r0, =gLinkErrorOccurred
-	ldrb r0, [r0]
-	bx lr
-	.pool
-	thumb_func_end sub_800B33C
-
 	thumb_func_start sub_800B348
 sub_800B348: @ 800B348
 	push {r4-r6,lr}

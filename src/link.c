@@ -1663,7 +1663,7 @@ void CB2_LinkError(void)
     }
 }
 
-void sub_800B080(void)
+static void sub_800B080(void)
 {
     LoadBgTiles(0, g2BlankTilesGfx, 0x20, 0);
     copy_decompressed_tile_data_to_vram_autofree(1, gWirelessLinkDisplayGfx, FALSE, 0, 0);
@@ -1680,7 +1680,7 @@ void sub_800B080(void)
     CopyWindowToVram(2, 3);
 }
 
-void sub_800B138(void)
+static void sub_800B138(void)
 {
     LoadBgTiles(0, g2BlankTilesGfx, 0x20, 0);
     FillWindowPixelBuffer(1, 0x00);
@@ -1759,4 +1759,29 @@ static void sub_800B1A0(void)
     {
         gMain.state ++;
     }
+}
+
+bool8 sub_800B2E8(void)
+{
+    return (REG_SIOCNT & 0x04) != 0;
+}
+
+bool8 sub_800B2F8(void)
+{
+    return (REG_SIOCNT & 0x8) && !(REG_SIOCNT & 0x04);
+}
+
+bool8 sub_800B320(void)
+{
+    return EXTRACT_CONN_ESTABLISHED(gLinkStatus);
+}
+
+void SetSuppressLinkErrorMessage(bool8 flag)
+{
+    gSuppressLinkErrorMessage = flag;
+}
+
+bool8 sub_800B33C(void)
+{
+    return gLinkErrorOccurred;
 }
