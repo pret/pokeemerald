@@ -11823,7 +11823,7 @@ _0813B790:
 	b _0813B7C6
 	.pool
 _0813B7A8:
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0813B7B4

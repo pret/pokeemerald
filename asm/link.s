@@ -5,197 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800B138
-sub_800B138: @ 800B138
-	push {lr}
-	sub sp, 0xC
-	ldr r1, =g2BlankTilesGfx
-	movs r0, 0
-	movs r2, 0x20
-	movs r3, 0
-	bl LoadBgTiles
-	movs r0, 0x1
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	movs r0, 0x2
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_082ED224
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	ldr r0, =gText_CommErrorCheckConnections
-	str r0, [sp, 0x8]
-	movs r0, 0x1
-	movs r1, 0x3
-	movs r2, 0x2
-	movs r3, 0
-	bl box_print
-	movs r0, 0x1
-	bl PutWindowTilemap
-	movs r0, 0x2
-	bl PutWindowTilemap
-	movs r0, 0x1
-	movs r1, 0
-	bl CopyWindowToVram
-	movs r0, 0x2
-	movs r1, 0x3
-	bl CopyWindowToVram
-	add sp, 0xC
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800B138
-
-	thumb_func_start sub_800B1A0
-sub_800B1A0: @ 800B1A0
-	push {r4,lr}
-	sub sp, 0xC
-	ldr r0, =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1E
-	beq _0800B20C
-	cmp r0, 0x1E
-	bgt _0800B1C4
-	cmp r0, 0
-	beq _0800B1D8
-	cmp r0, 0x2
-	beq _0800B1F2
-	b _0800B260
-	.pool
-_0800B1C4:
-	cmp r0, 0x5A
-	beq _0800B20C
-	cmp r0, 0x5A
-	bgt _0800B1D2
-	cmp r0, 0x3C
-	beq _0800B20C
-	b _0800B260
-_0800B1D2:
-	cmp r0, 0x82
-	beq _0800B214
-	b _0800B260
-_0800B1D8:
-	ldr r0, =sLinkErrorBuffer
-	ldrb r0, [r0, 0x6]
-	cmp r0, 0
-	beq _0800B1EC
-	bl sub_800B080
-	b _0800B260
-	.pool
-_0800B1EC:
-	bl sub_800B138
-	b _0800B260
-_0800B1F2:
-	movs r0, 0
-	bl ShowBg
-	ldr r0, =sLinkErrorBuffer
-	ldrb r0, [r0, 0x6]
-	cmp r0, 0
-	beq _0800B260
-	movs r0, 0x1
-	bl ShowBg
-	b _0800B260
-	.pool
-_0800B20C:
-	movs r0, 0x16
-	bl PlaySE
-	b _0800B260
-_0800B214:
-	ldr r0, =gSerialIsRFU
-	ldrb r0, [r0]
-	cmp r0, 0x2
-	bne _0800B244
-	ldr r0, =gUnknown_082ED224
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	ldr r0, =gText_ABtnTitleScreen
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r1, 0x3
-	movs r2, 0x2
-	movs r3, 0x14
-	bl box_print
-	b _0800B260
-	.pool
-_0800B244:
-	cmp r0, 0x1
-	bne _0800B260
-	ldr r0, =gUnknown_082ED224
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	ldr r0, =gText_ABtnRegistrationCounter
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r1, 0x3
-	movs r2, 0x2
-	movs r3, 0x14
-	bl box_print
-_0800B260:
-	ldr r0, =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r0, r2
-	ldrb r1, [r1]
-	cmp r1, 0xA0
-	bne _0800B2D0
-	ldr r4, =gSerialIsRFU
-	ldrb r2, [r4]
-	cmp r2, 0x1
-	bne _0800B2A8
-	ldrh r0, [r0, 0x2E]
-	ands r2, r0
-	cmp r2, 0
-	beq _0800B2C2
-	movs r0, 0x15
-	bl PlaySE
-	movs r0, 0
-	strb r0, [r4]
-	ldr r1, =sLinkErrorBuffer
-	movs r0, 0
-	strb r0, [r1, 0x6]
-	bl sub_81700F8
-	b _0800B2C2
-	.pool
-_0800B2A8:
-	cmp r2, 0x2
-	bne _0800B2C2
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _0800B2C2
-	bl rfu_REQ_stopMode
-	bl rfu_waitREQComplete
-	bl DoSoftReset
-_0800B2C2:
-	ldr r0, =gMain
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r0, r2
-	ldrb r1, [r1]
-	cmp r1, 0xA0
-	beq _0800B2DC
-_0800B2D0:
-	movs r2, 0x87
-	lsls r2, 3
-	adds r1, r0, r2
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_0800B2DC:
-	add sp, 0xC
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800B1A0
-
 	thumb_func_start sub_800B2E8
 sub_800B2E8: @ 800B2E8
 	ldr r0, =0x04000128
@@ -346,7 +155,7 @@ _0800B3F4:
 	thumb_func_start HandleLinkConnection
 HandleLinkConnection: @ 800B40C
 	push {r4,r5,lr}
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B45C
@@ -401,7 +210,7 @@ sub_800B488: @ 800B488
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B498
-	ldr r1, =gSerialIsRFU
+	ldr r1, =gWirelessCommType
 	movs r0, 0x1
 	strb r0, [r1]
 _0800B498:
@@ -417,7 +226,7 @@ sub_800B4A4: @ 800B4A4
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0800B4B2
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	strb r1, [r0]
 _0800B4B2:
 	pop {r0}
@@ -432,7 +241,7 @@ sub_800B4C0: @ 800B4C0
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0800B4CE
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	strb r1, [r0]
 _0800B4CE:
 	pop {r0}
@@ -443,7 +252,7 @@ _0800B4CE:
 	thumb_func_start sub_800B4DC
 sub_800B4DC: @ 800B4DC
 	push {lr}
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B4FC
@@ -477,7 +286,7 @@ _0800B514:
 
 	thumb_func_start sub_800B518
 sub_800B518: @ 800B518
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	bx lr
 	.pool

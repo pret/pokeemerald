@@ -16,7 +16,7 @@ gUnknown_030030EC
 gUnknown_030030F0
 gUnknown_030030F4
 gSuppressLinkErrorMessage
-gSerialIsRFU
+gWirelessCommType
 gSavedLinkPlayerCount
 gSendCmd
 gSavedMultiplayerId

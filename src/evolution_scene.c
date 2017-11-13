@@ -402,7 +402,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         }
         break;
     case 6:
-        if (gSerialIsRFU)
+        if (gWirelessCommType)
         {
             sub_800E0E8();
             sub_800DFB4(0, 0);
@@ -1185,7 +1185,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         case 5:
             if (!gPaletteFade.active)
             {
-                if (gSerialIsRFU)
+                if (gWirelessCommType)
                     sub_800E084();
 
                 Free(GetBgTilemapBuffer(3));

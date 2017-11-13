@@ -163,7 +163,7 @@ extern u8 gShouldAdvanceLinkState;
 extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
-extern bool8 gSerialIsRFU;
+extern bool8 gWirelessCommType;
 
 void Task_DestroySelf(u8);
 void OpenLink(void);
@@ -234,7 +234,7 @@ extern u8 gUnknown_030030EC[MAX_LINK_PLAYERS];
 extern u8 gUnknown_030030F0[MAX_LINK_PLAYERS];
 extern u16 gUnknown_030030F4;
 extern u8 gSuppressLinkErrorMessage;
-extern bool8 gSerialIsRFU;
+extern bool8 gWirelessCommType;
 extern bool8 gSavedLinkPlayerCount;
 extern u8 gSavedMultiplayerId;
 extern struct LinkTestBGInfo gLinkTestBGInfo;

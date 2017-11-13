@@ -2172,7 +2172,7 @@ sub_80B360C: @ 80B360C
 	movs r5, 0x1
 	eors r0, r5
 	bl sub_813C2A0
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B36B2
@@ -2512,7 +2512,7 @@ _080B391C:
 	thumb_func_start sub_80B3924
 sub_80B3924: @ 80B3924
 	push {lr}
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B3940
@@ -2552,7 +2552,7 @@ sub_80B3968: @ 80B3968
 	ldr r2, =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B3994
@@ -2661,7 +2661,7 @@ _080B3A62:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B3AA6
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B3AA0
@@ -2752,7 +2752,7 @@ _080B3B20:
 	beq _080B3B9E
 	b _080B3BB8
 _080B3B2A:
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B3B40
@@ -2825,7 +2825,7 @@ _080B3BB8:
 	thumb_func_start sub_80B3BC4
 sub_80B3BC4: @ 80B3BC4
 	push {lr}
-	ldr r0, =gSerialIsRFU
+	ldr r0, =gWirelessCommType
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B3BD6

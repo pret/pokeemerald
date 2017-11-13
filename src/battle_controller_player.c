@@ -896,7 +896,7 @@ static void HandleMoveSwitchting(void)
 
 static void sub_80586F8(void)
 {
-    if (gSerialIsRFU == 0)
+    if (gWirelessCommType == 0)
     {
         if (gReceivedRemoteLinkPlayers == 0)
         {
@@ -932,7 +932,7 @@ void sub_80587B0(void)
         {
             if (sub_800A520())
             {
-                if (gSerialIsRFU == 0)
+                if (gWirelessCommType == 0)
                     sub_800AC34();
                 else
                     sub_800ADF8();

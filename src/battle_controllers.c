@@ -59,7 +59,7 @@ void HandleLinkBattleSetup(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        if (gSerialIsRFU)
+        if (gWirelessCommType)
             sub_800B488();
         if (!gReceivedRemoteLinkPlayers)
             OpenLink();
@@ -780,7 +780,7 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
             gTasks[taskId].data[11]++;
         break;
     case 2:
-        if (gSerialIsRFU)
+        if (gWirelessCommType)
         {
             gTasks[taskId].data[11]++;
         }

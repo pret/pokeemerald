@@ -3,6 +3,7 @@
 #include "global.h"
 #include "m4a.h"
 #include "malloc.h"
+#include "reset_save_heap.h"
 #include "save.h"
 #include "bg.h"
 #include "window.h"
@@ -21,6 +22,7 @@
 #include "new_menu_helpers.h"
 #include "text.h"
 #include "strings.h"
+#include "songs.h"
 #include "sound.h"
 #include "trade.h"
 #include "battle.h"
@@ -84,7 +86,7 @@ bool8 gUnknown_030030EC[MAX_LINK_PLAYERS];
 bool8 gUnknown_030030F0[MAX_LINK_PLAYERS];
 u16 gUnknown_030030F4;
 u8 gSuppressLinkErrorMessage;
-bool8 gSerialIsRFU;
+bool8 gWirelessCommType;
 bool8 gSavedLinkPlayerCount;
 u16 gSendCmd[8];
 u8 gSavedMultiplayerId;
@@ -148,7 +150,7 @@ static void sub_800AD88(void);
 static void sub_800AE30(void);
 static void sub_800AE5C(void);
 static void sub_800AEB4(void);
-void sub_800B1A0(void);
+static void sub_800B1A0(void);
 u8 sub_800B2F8(void);
 void sub_800B4A4(void);
 void DisableSerial(void);
@@ -340,7 +342,7 @@ void OpenLink(void)
 {
     int i;
 
-    if (!gSerialIsRFU)
+    if (!gWirelessCommType)
     {
         ResetSerial();
         InitLink();
@@ -372,7 +374,7 @@ void OpenLink(void)
 void CloseLink(void)
 {
     gReceivedRemoteLinkPlayers = FALSE;
-    if (gSerialIsRFU)
+    if (gWirelessCommType)
     {
         sub_800EDD4();
     }
@@ -692,7 +694,7 @@ void BuildSendCmd(u16 command)
 
 void sub_8009F18(void)
 {
-    if (gSerialIsRFU)
+    if (gWirelessCommType)
     {
         sub_800F804();
     }
@@ -701,7 +703,7 @@ void sub_8009F18(void)
 
 bool32 sub_8009F3C(void)
 {
-    if (gSerialIsRFU)
+    if (gWirelessCommType)
     {
         return sub_800F7E4();
     }
@@ -722,7 +724,7 @@ static void sub_8009F70(void)
 
 void ClearLinkCallback(void)
 {
-    if (gSerialIsRFU)
+    if (gWirelessCommType)
     {
         Rfu_set_zero();
     }
@@ -734,7 +736,7 @@ void ClearLinkCallback(void)
 
 void ClearLinkCallback_2(void)
 {
-    if (gSerialIsRFU)
+    if (gWirelessCommType)
     {
         Rfu_set_zero();
     }
@@ -746,7 +748,7 @@ void ClearLinkCallback_2(void)
 
 u8 GetLinkPlayerCount(void)
 {
-    if (gSerialIsRFU)
+    if (gWirelessCommType)
     {
         return sub_80104F4();
     }
@@ -1004,7 +1006,7 @@ static void sub_800A3F8(void)
 void sub_800A418(void)
 {
     gUnknown_020223C0 = 0;
-    if (gSerialIsRFU)
+    if (gWirelessCommType)
     {
         sub_800F850();
     }
@@ -1026,7 +1028,7 @@ void sub_800A458(void)
 
 u8 GetMultiplayerId(void)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         return rfu_get_multiplayer_id();
     }
@@ -1043,7 +1045,7 @@ u8 bitmask_all_link_players_but_self(void)
 
 bool8 SendBlock(u8 unused, const void *src, u16 size)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         return sub_800FE84(src, size);
     }
@@ -1052,7 +1054,7 @@ bool8 SendBlock(u8 unused, const void *src, u16 size)
 
 bool8 sub_800A4D8(u8 a0)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         return sub_8010100(a0);
     }
@@ -1067,7 +1069,7 @@ bool8 sub_800A4D8(u8 a0)
 
 bool8 sub_800A520(void)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         return sub_8010500();
     }
@@ -1076,7 +1078,7 @@ bool8 sub_800A520(void)
 
 u8 GetBlockReceivedStatus(void)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         return sub_800FCD8();
     }
@@ -1085,7 +1087,7 @@ u8 GetBlockReceivedStatus(void)
 
 static void SetBlockReceivedFlag(u8 who)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         sub_800F6FC(who);
     }
@@ -1099,7 +1101,7 @@ void ResetBlockReceivedFlags(void)
 {
     int i;
     
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         for (i = 0; i < MAX_RFU_PLAYERS; i ++)
         {
@@ -1117,7 +1119,7 @@ void ResetBlockReceivedFlags(void)
 
 void ResetBlockReceivedFlag(u8 who)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         sub_800F728(who);
     }
@@ -1394,7 +1396,7 @@ u8 GetLinkPlayerCount_2(void)
 
 bool8 IsLinkMaster(void)
 {
-    if (gSerialIsRFU)
+    if (gWirelessCommType)
     {
         return Rfu_IsMaster();
     }
@@ -1408,7 +1410,7 @@ u8 sub_800ABE8(void)
 
 void sub_800ABF4(u16 a0)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         task_add_05_task_del_08FA224_when_no_RfuFunc();
     }
@@ -1425,7 +1427,7 @@ void sub_800ABF4(u16 a0)
 
 void sub_800AC34(void)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         task_add_05_task_del_08FA224_when_no_RfuFunc();
     }
@@ -1480,7 +1482,7 @@ static void sub_800ACAC(void)
 
 void sub_800AD10(void)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         task_add_05_task_del_08FA224_when_no_RfuFunc();
     }
@@ -1539,7 +1541,7 @@ static void sub_800AD88(void)
 
 void sub_800ADF8(void)
 {
-    if (gSerialIsRFU == TRUE)
+    if (gWirelessCommType == TRUE)
     {
         sub_8010434();
     }
@@ -1624,11 +1626,11 @@ void CB2_LinkError(void)
     FillPalette(0, 0, 2);
     ResetTasks();
     remove_some_task();
-    if (gSerialIsRFU)
+    if (gWirelessCommType)
     {
         if (!sLinkErrorBuffer.unk_06)
         {
-            gSerialIsRFU = 3;
+            gWirelessCommType = 3;
         }
         sub_800E604();
     }
@@ -1676,4 +1678,85 @@ void sub_800B080(void)
     PutWindowTilemap(2);
     CopyWindowToVram(0, 0);
     CopyWindowToVram(2, 3);
+}
+
+void sub_800B138(void)
+{
+    LoadBgTiles(0, g2BlankTilesGfx, 0x20, 0);
+    FillWindowPixelBuffer(1, 0x00);
+    FillWindowPixelBuffer(2, 0x00);
+    box_print(1, 3, 2, 0, gUnknown_082ED224, 0, gText_CommErrorCheckConnections);
+    PutWindowTilemap(1);
+    PutWindowTilemap(2);
+    CopyWindowToVram(1, 0);
+    CopyWindowToVram(2, 3);
+}
+
+static void sub_800B1A0(void)
+{
+    switch (gMain.state)
+    {
+        case  00:
+            if (sLinkErrorBuffer.unk_06)
+            {
+                sub_800B080();
+            }
+            else
+            {
+                sub_800B138();
+            }
+            break;
+        case  02:
+            ShowBg(0);
+            if (sLinkErrorBuffer.unk_06)
+            {
+                ShowBg(1);
+            }
+            break;
+        case  30:
+            PlaySE(SE_BOO);
+            break;
+        case  60:
+            PlaySE(SE_BOO);
+            break;
+        case  90:
+            PlaySE(SE_BOO);
+            break;
+        case 130:
+            if (gWirelessCommType == 2)
+            {
+                box_print(0, 3, 2, 20, gUnknown_082ED224, 0, gText_ABtnTitleScreen);
+            }
+            else if (gWirelessCommType == 1)
+            {
+                box_print(0, 3, 2, 20, gUnknown_082ED224, 0, gText_ABtnRegistrationCounter);
+            }
+            break;
+    }
+    if (gMain.state == 160)
+    {
+        if (gWirelessCommType == 1)
+        {
+            if (gMain.newKeys & A_BUTTON)
+            {
+                PlaySE(SE_PIN);
+                gWirelessCommType = 0;
+                sLinkErrorBuffer.unk_06 = 0;
+                sub_81700F8();
+            }
+        }
+        else if (gWirelessCommType == 2)
+        {
+            if (gMain.newKeys & A_BUTTON)
+            {
+                rfu_REQ_stopMode();
+                rfu_waitREQComplete();
+                DoSoftReset();
+            }
+        }
+    }
+    if (gMain.state != 160)
+    {
+        gMain.state ++;
+    }
 }
