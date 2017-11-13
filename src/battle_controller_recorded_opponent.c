@@ -1261,7 +1261,7 @@ static void RecordedOpponentHandleDrawTrainerPic(void)
         }
         else
         {
-            trainerPicId = PlayerGenderToFrontTrainerPicId(sub_8185F40());
+            trainerPicId = PlayerGenderToFrontTrainerPicId(GetActiveBankLinkPlayerGender());
         }
     }
     else

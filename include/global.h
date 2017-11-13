@@ -169,6 +169,26 @@ struct BerryCrush
 
 #define PLAYER_NAME_LENGTH  8
 
+struct UnknownSaveBlock2Struct
+{
+    u8 field_0;
+    u8 field_1;
+    u8 field_2[2];
+    u8 field_4[8];
+    u8 field_C[16];
+    u16 field_1C[6];
+    u16 field_28[6];
+    u8 field_34[176];
+    u8 field_E4;
+    u8 field_E5;
+    u8 field_E6;
+    u8 field_E7;
+    u8 field_E8;
+    u8 field_E9;
+    u8 field_EA;
+    u8 field_EB;
+}; // sizeof = 0xEC
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
@@ -203,7 +223,8 @@ struct SaveBlock2
 
         // All below could be a one giant struct
 
-    /*0x64C*/ u8 field_64C[0x588];
+    /*0x64C*/ u8 field_64C[236];
+    /*0x738*/ struct UnknownSaveBlock2Struct field_738[5]; // No idea here, it's probably wrong, no clue.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
     /*0xBD8*/ u8 field_BD8[11];
@@ -220,7 +241,7 @@ struct SaveBlock2
     /*0xCAA*/ u16 field_CAA[0x2e];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
-    /*0xd08*/ u8 filler_D08[0x112];
+    /*0xD08*/ u8 filler_D08[0x112];
     /*0xE1A*/ u16 battlePyramidFloor; // possibly?
     /*0xE1C*/ u8 field_E1C[16];
     /*0xE2C*/ struct PyramidBag pyramidBag;

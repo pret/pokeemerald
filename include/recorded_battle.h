@@ -12,13 +12,14 @@ void RecordedBattle_ClearBankAction(u8 bank, u8 bytesToClear);
 void sub_8185F90(u16 arg0);
 bool8 sub_8186450(void);
 u8 sub_8185FAC(void);
-u8 sub_8185FB8(void);
-u8 MoveRecordedBattleToSaveData(void);
+u8 GetBattleStyleInRecordedBattle(void);
+u32 MoveRecordedBattleToSaveData(void);
 void sub_818603C(u8);
-void sub_8185FD0(void);
+void RecordedBattle_CopyBankMoves(void);
 void sub_8186444(void);
 void sub_8185EB8(void);
 u8 sub_81850DC(u8 *arg0);
-u8 sub_8185F40(void);
+u8 GetActiveBankLinkPlayerGender(void);
+void RecordedBattle_SaveParties(void);
 
 #endif // GUARD_RECORDED_BATTLE_H
