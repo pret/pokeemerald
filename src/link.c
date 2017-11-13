@@ -71,10 +71,10 @@ u32 gFiller_03003080;
 u16 gLinkHeldKeys;
 u16 gRecvCmds[MAX_RFU_PLAYERS][8];
 u32 gLinkStatus;
-u8 gUnknown_030030E4;
+bool8 gUnknown_030030E4;
 bool8 gUnknown_030030E8;
-u8 gUnknown_030030EC[MAX_LINK_PLAYERS];
-u8 gUnknown_030030F0[MAX_LINK_PLAYERS];
+bool8 gUnknown_030030EC[MAX_LINK_PLAYERS];
+bool8 gUnknown_030030F0[MAX_LINK_PLAYERS];
 u16 gUnknown_030030F4;
 u8 gSuppressLinkErrorMessage;
 bool8 gSerialIsRFU;
@@ -136,6 +136,8 @@ static void sub_800AC80(void);
 static void sub_800ACAC(void);
 static void sub_800AD5C(void);
 static void sub_800AD88(void);
+static void sub_800AE30(void);
+static void sub_800AE5C(void);
 void sub_800AEB4(void);
 u8 sub_800B2F8(void);
 void sub_800B4A4(void);
@@ -339,8 +341,8 @@ void OpenLink(void)
         ResetBlockReceivedFlags();
         ResetBlockSend();
         gUnknown_03000D54 = 0;
-        gUnknown_030030E8 = 0;
-        gUnknown_030030E4 = 0;
+        gUnknown_030030E8 = FALSE;
+        gUnknown_030030E4 = FALSE;
         gUnknown_030030F4 = 0;
         CreateTask(Task_TriggerHandshake, 2);
     }
@@ -351,9 +353,9 @@ void OpenLink(void)
     gReceivedRemoteLinkPlayers = 0;
     for (i = 0; i < MAX_LINK_PLAYERS; i ++)
     {
-        gUnknown_03003078[i] = 1;
-        gUnknown_030030F0[i] = 0;
-        gUnknown_030030EC[i] = 0;
+        gUnknown_03003078[i] = TRUE;
+        gUnknown_030030F0[i] = FALSE;
+        gUnknown_030030EC[i] = FALSE;
     }
 }
 
@@ -518,10 +520,10 @@ static void ProcessRecvCmds(u8 unused)
                 gUnknown_03003020[i] = gRecvCmds[i][1];
                 break;
             case 0x5555:
-                gUnknown_030030E8 = 1;
+                gUnknown_030030E8 = TRUE;
                 break;
             case 0x5566:
-                gUnknown_030030E8 = 1;
+                gUnknown_030030E8 = TRUE;
                 break;
             case 0xBBBB:
             {
@@ -593,10 +595,10 @@ static void ProcessRecvCmds(u8 unused)
             }
                 break;
             case 0x5FFF:
-                gUnknown_030030F0[i] = 1;
+                gUnknown_030030F0[i] = TRUE;
                 break;
             case 0x2FFE:
-                gUnknown_030030EC[i] = 1;
+                gUnknown_030030EC[i] = TRUE;
                 break;
             case 0xAAAA:
                 sub_800A418();
@@ -1405,7 +1407,7 @@ void sub_800ABF4(u16 a0)
         if (gLinkCallback == NULL)
         {
             gLinkCallback = sub_800AC80;
-            gUnknown_030030E4 = 0;
+            gUnknown_030030E4 = FALSE;
             gUnknown_030030F4 = a0;
         }
     }
@@ -1426,7 +1428,7 @@ void sub_800AC34(void)
         else
         {
             gLinkCallback = sub_800AC80;
-            gUnknown_030030E4 = 0;
+            gUnknown_030030E4 = FALSE;
             gUnknown_030030F4 = 0;
         }
     }
@@ -1462,7 +1464,7 @@ static void sub_800ACAC(void)
         gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = NULL;
-        gUnknown_030030E4 = 1;
+        gUnknown_030030E4 = TRUE;
     }
 }
 
@@ -1481,7 +1483,7 @@ void sub_800AD10(void)
         else
         {
             gLinkCallback = sub_800AD5C;
-            gUnknown_030030E4 = 0;
+            gUnknown_030030E4 = FALSE;
             gUnknown_030030F4 = 0;
         }
     }
@@ -1521,6 +1523,54 @@ static void sub_800AD88(void)
         gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = NULL;
-        gUnknown_030030E4 = 1;
+        gUnknown_030030E4 = TRUE;
+    }
+}
+
+void sub_800ADF8(void)
+{
+    if (gSerialIsRFU == TRUE)
+    {
+        sub_8010434();
+    }
+    else
+    {
+        if (gLinkCallback == NULL)
+        {
+            gLinkCallback = sub_800AE30;
+        }
+        gUnknown_030030E4 = FALSE;
+    }
+}
+
+static void sub_800AE30(void)
+{
+    if (gUnknown_03004130 == 0)
+    {
+        BuildSendCmd(0x2ffe);
+        gLinkCallback = sub_800AE5C;
+    }
+}
+
+static void sub_800AE5C(void)
+{
+    u8 i;
+    u8 linkPlayerCount;
+
+    linkPlayerCount = GetLinkPlayerCount();
+    for (i = 0; i < linkPlayerCount; i ++)
+    {
+        if (!gUnknown_030030EC[i])
+        {
+            break;
+        }
+    }
+    if (i == linkPlayerCount)
+    {
+        for (i = 0; i < MAX_LINK_PLAYERS; i ++)
+        {
+            gUnknown_030030EC[i] = FALSE;
+        }
+        gLinkCallback = NULL;
     }
 }

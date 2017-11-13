@@ -23,5 +23,6 @@ bool8 sub_8010100(u8 a0);
 bool8 sub_8010500(void);
 bool8 Rfu_IsMaster(void);
 void task_add_05_task_del_08FA224_when_no_RfuFunc(void);
+void sub_8010434(void);
 
 #endif //GUARD_LINK_RFU_H
