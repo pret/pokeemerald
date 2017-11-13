@@ -289,7 +289,7 @@ $(INTROGFXDIR)/copyright.4bpp: $(INTROGFXDIR)/copyright.png
 	$(GFX) $< $@ -num_tiles 39
     
 $(interfacedir)/pkmnjump_bg.4bpp: $(interfacedir)/pkmnjump_bg.png
-    $(GFX) $< $@ -num_tiles 63
+	$(GFX) $< $@ -num_tiles 63
 
 graphics/misc/japanese_hof.4bpp: graphics/misc/japanese_hof.png
 	$(GFX) $< $@ -num_tiles 29
