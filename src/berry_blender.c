@@ -37,7 +37,7 @@ const u8 sBlenderCenterMap[] = INCBIN_U8("graphics/berry_blender/center_map.bin"
 const u16 sBlenderOuterPal[] = INCBIN_U16("graphics/berry_blender/outer.gbapal");
 
 // unreferenced pals?
-static const u16 sUnknownPal_0[] = INCBIN_U16("graphics/unknown/8339514.gbapal");
+static const u16 sUnknownPal_0[] = INCBIN_U16("graphics/unknown/unknown_339514.gbapal");
 static const u16 sUnknownArray_1[224] = {0};
 
 // unused text?
