@@ -3149,10 +3149,10 @@ gText_SelectTheAnswer:: @ 85EC752
 gText_LyricsCantBeDeleted:: @ 85EC765
 	.string "The lyrics can’t be deleted.$"
 
-gUnknown_085EC782:: @ 85EC782
+gText_PokemonLeague:: @ 85EC782
 	.string "POKéMON LEAGUE$"
 
-gUnknown_085EC791:: @ 85EC791
+gText_PokemonCenter:: @ 85EC791
 	.string "POKéMON CENTER$"
 
 gText_GetsAPokeBlockQuestion:: @ 85EC7A0

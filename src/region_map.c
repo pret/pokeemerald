@@ -108,51 +108,35 @@ static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/
 static const u16 sRegionMapPlayerIcon_MayPal[] = INCBIN_U16("graphics/pokenav/may_icon.gbapal");
 static const u8 sRegionMapPlayerIcon_MayGfx[] = INCBIN_U8("graphics/pokenav/may_icon.4bpp");
 
-static const u8 sRegionMap_MapSectionLayout[] = {
-    MAPSEC_NONE, MAPSEC_ROUTE_114, MAPSEC_ROUTE_114, MAPSEC_FALLARBOR_TOWN, MAPSEC_ROUTE_113, MAPSEC_ROUTE_113, MAPSEC_ROUTE_113, MAPSEC_ROUTE_113, MAPSEC_ROUTE_111, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_119, MAPSEC_FORTREE_CITY, MAPSEC_ROUTE_120, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_NONE, MAPSEC_ROUTE_114, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_MT_CHIMNEY, MAPSEC_MT_CHIMNEY, MAPSEC_ROUTE_111, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_119, MAPSEC_NONE, MAPSEC_ROUTE_120, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_ROUTE_115, MAPSEC_ROUTE_114, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_MT_CHIMNEY, MAPSEC_MT_CHIMNEY, MAPSEC_ROUTE_111, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_119, MAPSEC_NONE, MAPSEC_ROUTE_120, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_SAFARI_ZONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_ROUTE_115, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_LAVARIDGE_TOWN, MAPSEC_ROUTE_112, MAPSEC_ROUTE_112, MAPSEC_ROUTE_111, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_119, MAPSEC_NONE, MAPSEC_ROUTE_120, MAPSEC_ROUTE_121, MAPSEC_ROUTE_121, MAPSEC_ROUTE_121, MAPSEC_ROUTE_121, MAPSEC_LILYCOVE_CITY, MAPSEC_LILYCOVE_CITY, MAPSEC_ROUTE_124, MAPSEC_ROUTE_124, MAPSEC_ROUTE_124, MAPSEC_ROUTE_124, MAPSEC_ROUTE_125, MAPSEC_ROUTE_125, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_ROUTE_115, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_111, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_119, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_122, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_124, MAPSEC_ROUTE_124, MAPSEC_ROUTE_124, MAPSEC_ROUTE_124, MAPSEC_ROUTE_125, MAPSEC_ROUTE_125, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_RUSTBORO_CITY, MAPSEC_ROUTE_116, MAPSEC_ROUTE_116, MAPSEC_ROUTE_116, MAPSEC_ROUTE_116, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_111, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_119, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_122, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_124, MAPSEC_ROUTE_124, MAPSEC_ROUTE_124, MAPSEC_ROUTE_124, MAPSEC_MOSSDEEP_CITY, MAPSEC_MOSSDEEP_CITY, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_RUSTBORO_CITY, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_VERDANTURF_TOWN, MAPSEC_ROUTE_117, MAPSEC_ROUTE_117, MAPSEC_ROUTE_117, MAPSEC_MAUVILLE_CITY, MAPSEC_MAUVILLE_CITY, MAPSEC_ROUTE_118, MAPSEC_ROUTE_118, MAPSEC_ROUTE_123, MAPSEC_ROUTE_123, MAPSEC_ROUTE_123, MAPSEC_ROUTE_123, MAPSEC_ROUTE_123, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_126, MAPSEC_ROUTE_126, MAPSEC_ROUTE_126, MAPSEC_ROUTE_127, MAPSEC_ROUTE_127, MAPSEC_ROUTE_127, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_ROUTE_104, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_110, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_126, MAPSEC_SOOTOPOLIS_CITY, MAPSEC_ROUTE_126, MAPSEC_ROUTE_127, MAPSEC_ROUTE_127, MAPSEC_ROUTE_127, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_ROUTE_104, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_103, MAPSEC_ROUTE_103, MAPSEC_ROUTE_103, MAPSEC_ROUTE_103, MAPSEC_ROUTE_110, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_126, MAPSEC_ROUTE_126, MAPSEC_ROUTE_126, MAPSEC_ROUTE_127, MAPSEC_ROUTE_127, MAPSEC_ROUTE_127, MAPSEC_NONE, MAPSEC_EVER_GRANDE_CITY,
-    MAPSEC_ROUTE_104, MAPSEC_PETALBURG_CITY, MAPSEC_ROUTE_102, MAPSEC_ROUTE_102, MAPSEC_OLDALE_TOWN, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_110, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_128, MAPSEC_ROUTE_128, MAPSEC_ROUTE_128, MAPSEC_ROUTE_128, MAPSEC_EVER_GRANDE_CITY,
-    MAPSEC_ROUTE_105, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_101, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_SLATEPORT_CITY, MAPSEC_ROUTE_134, MAPSEC_ROUTE_134, MAPSEC_ROUTE_134, MAPSEC_ROUTE_133, MAPSEC_ROUTE_133, MAPSEC_ROUTE_133, MAPSEC_ROUTE_132, MAPSEC_ROUTE_132, MAPSEC_PACIFIDLOG_TOWN, MAPSEC_ROUTE_131, MAPSEC_ROUTE_131, MAPSEC_ROUTE_131, MAPSEC_ROUTE_130, MAPSEC_ROUTE_130, MAPSEC_ROUTE_130, MAPSEC_ROUTE_129, MAPSEC_ROUTE_129, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_ROUTE_105, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_LITTLEROOT_TOWN, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_SLATEPORT_CITY, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_ROUTE_105, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_109, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_BATTLE_FRONTIER, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_ROUTE_106, MAPSEC_ROUTE_106, MAPSEC_ROUTE_106, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_ROUTE_109, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE,
-    MAPSEC_NONE, MAPSEC_NONE, MAPSEC_DEWFORD_TOWN, MAPSEC_ROUTE_107, MAPSEC_ROUTE_107, MAPSEC_ROUTE_107, MAPSEC_ROUTE_108, MAPSEC_ROUTE_108, MAPSEC_ROUTE_109, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_SOUTHERN_ISLAND, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE
-};
+static const u8 sRegionMap_MapSectionLayout[] = INCBIN_U8("graphics/pokenav/region_map_section_layout.bin");
 
 #include "data/region_map/region_map_entries.h"
 
 static const u16 sRegionMap_SpecialPlaceLocations[][2] = {
-    {MAPSEC_UNDERWATER_TERRA_CAVE, MAPSEC_ROUTE_105},
-    {MAPSEC_UNDERWATER_124, MAPSEC_ROUTE_124},
-    {MAPSEC_UNDERWATER_UNK1, MAPSEC_ROUTE_129},
-    {MAPSEC_UNDERWATER_125, MAPSEC_ROUTE_126},
-    {MAPSEC_UNDERWATER_126, MAPSEC_ROUTE_127},
-    {MAPSEC_UNDERWATER_127, MAPSEC_ROUTE_128},
-    {MAPSEC_UNDERWATER_129, MAPSEC_ROUTE_129},
-    {MAPSEC_UNDERWATER_SOOTOPOLIS, MAPSEC_SOOTOPOLIS_CITY},
-    {MAPSEC_UNDERWATER_128, MAPSEC_ROUTE_128},
-    {MAPSEC_AQUA_HIDEOUT, MAPSEC_LILYCOVE_CITY},
-    {MAPSEC_AQUA_HIDEOUT_OLD, MAPSEC_LILYCOVE_CITY},
-    {MAPSEC_MAGMA_HIDEOUT, MAPSEC_ROUTE_112},
+    {MAPSEC_UNDERWATER_TERRA_CAVE,     MAPSEC_ROUTE_105},
+    {MAPSEC_UNDERWATER_124,            MAPSEC_ROUTE_124},
+    {MAPSEC_UNDERWATER_UNK1,           MAPSEC_ROUTE_129},
+    {MAPSEC_UNDERWATER_125,            MAPSEC_ROUTE_126},
+    {MAPSEC_UNDERWATER_126,            MAPSEC_ROUTE_127},
+    {MAPSEC_UNDERWATER_127,            MAPSEC_ROUTE_128},
+    {MAPSEC_UNDERWATER_129,            MAPSEC_ROUTE_129},
+    {MAPSEC_UNDERWATER_SOOTOPOLIS,     MAPSEC_SOOTOPOLIS_CITY},
+    {MAPSEC_UNDERWATER_128,            MAPSEC_ROUTE_128},
+    {MAPSEC_AQUA_HIDEOUT,              MAPSEC_LILYCOVE_CITY},
+    {MAPSEC_AQUA_HIDEOUT_OLD,          MAPSEC_LILYCOVE_CITY},
+    {MAPSEC_MAGMA_HIDEOUT,             MAPSEC_ROUTE_112},
     {MAPSEC_UNDERWATER_SEALED_CHAMBER, MAPSEC_ROUTE_134},
-    {MAPSEC_PETALBURG_WOODS, MAPSEC_ROUTE_104},
-    {MAPSEC_JAGGED_PASS, MAPSEC_ROUTE_112},
-    {MAPSEC_MT_PYRE, MAPSEC_ROUTE_122},
-    {MAPSEC_SKY_PILLAR, MAPSEC_ROUTE_131},
-    {MAPSEC_MIRAGE_TOWER, MAPSEC_ROUTE_111},
-    {MAPSEC_TRAINER_HILL, MAPSEC_ROUTE_111},
-    {MAPSEC_DESERT_UNDERPASS, MAPSEC_ROUTE_114},
-    {MAPSEC_ALTERING_CAVE_2, MAPSEC_ROUTE_103},
-    {MAPSEC_ARTISAN_CAVE, MAPSEC_ROUTE_103},
-    {MAPSEC_ABANDONED_SHIP, MAPSEC_ROUTE_108},
-    {MAPSEC_NONE, MAPSEC_NONE}
+    {MAPSEC_PETALBURG_WOODS,           MAPSEC_ROUTE_104},
+    {MAPSEC_JAGGED_PASS,               MAPSEC_ROUTE_112},
+    {MAPSEC_MT_PYRE,                   MAPSEC_ROUTE_122},
+    {MAPSEC_SKY_PILLAR,                MAPSEC_ROUTE_131},
+    {MAPSEC_MIRAGE_TOWER,              MAPSEC_ROUTE_111},
+    {MAPSEC_TRAINER_HILL,              MAPSEC_ROUTE_111},
+    {MAPSEC_DESERT_UNDERPASS,          MAPSEC_ROUTE_114},
+    {MAPSEC_ALTERING_CAVE_2,           MAPSEC_ROUTE_103},
+    {MAPSEC_ARTISAN_CAVE,              MAPSEC_ROUTE_103},
+    {MAPSEC_ABANDONED_SHIP,            MAPSEC_ROUTE_108},
+    {MAPSEC_NONE,                      MAPSEC_NONE}
 };
 
 static const u16 sRegionMap_MarineCaveMapSecIds[] = {
@@ -313,8 +297,8 @@ static const u8 gUnknown_085A1E3C[][3] = {
 };
 
 static const u8 *const gUnknown_085A1ED4[] = {
-    gUnknown_085EC782,
-    gUnknown_085EC791
+    gText_PokemonLeague,
+    gText_PokemonCenter
 };
 
 static const struct {
@@ -733,8 +717,8 @@ void sub_8123418(void)
     }
     else
     {
-        gRegionMap->unk_03c = gRegionMap->scrollX * 256;
-        gRegionMap->unk_040 = gRegionMap->scrollY * 256;
+        gRegionMap->unk_03c = gRegionMap->scrollX * 0x100;
+        gRegionMap->unk_040 = gRegionMap->scrollY * 0x100;
         gRegionMap->unk_060 = 0;
         gRegionMap->unk_062 = 0;
         gRegionMap->unk_044 = -(gRegionMap->unk_03c / 16);
@@ -751,7 +735,7 @@ void sub_8123418(void)
 
 bool8 sub_8123514(void)
 {
-    bool8 r4;
+    bool8 retVal;
 
     if (gRegionMap->unk_06e >= 16)
     {
@@ -769,7 +753,7 @@ bool8 sub_8123514(void)
         gRegionMap->inputCallback = (gRegionMap->zoomed == FALSE) ? ProcessRegionMapInput_Full : ProcessRegionMapInput_Zoomed;
         CreateRegionMapCursor(gRegionMap->cursorTileTag, gRegionMap->cursorPaletteTag);
         UnhideRegionMapPlayerIcon();
-        r4 = FALSE;
+        retVal = FALSE;
     }
     else
     {
@@ -804,10 +788,10 @@ bool8 sub_8123514(void)
                 gRegionMap->unk_050 = 0;
             }
         }
-        r4 = TRUE;
+        retVal = TRUE;
     }
     CalcZoomScrollParams(gRegionMap->scrollX, gRegionMap->scrollY, 0x38, 0x48, gRegionMap->unk_04c >> 8, gRegionMap->unk_04c >> 8, 0);
-    return r4;
+    return retVal;
 }
 
 static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation)
@@ -885,9 +869,9 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
     u16 mapHeight;
     u16 x;
     u16 y;
-    u16 r1;
-    u16 r9;
-    struct WarpData *r4;
+    u16 dimensionScale;
+    u16 xOnMap;
+    struct WarpData *storedWarp;
 
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_SS_TIDAL_CORRIDOR
         && (gSaveBlock1Ptr->location.mapNum == MAP_ID_SS_TIDAL_CORRIDOR
@@ -953,13 +937,13 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             gRegionMap->mapSecId = gMapHeader.regionMapSectionId;
             if (gRegionMap->mapSecId != MAPSEC_SS_TIDAL)
             {
-                r4 = &gSaveBlock1Ptr->warp4;
-                mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
+                storedWarp = &gSaveBlock1Ptr->warp4;
+                mapHeader = get_mapheader_by_bank_and_number(storedWarp->mapGroup, storedWarp->mapNum);
             }
             else
             {
-                r4 = &gSaveBlock1Ptr->warp2;
-                mapHeader = get_mapheader_by_bank_and_number(r4->mapGroup, r4->mapNum);
+                storedWarp = &gSaveBlock1Ptr->warp2;
+                mapHeader = get_mapheader_by_bank_and_number(storedWarp->mapGroup, storedWarp->mapNum);
                 gRegionMap->mapSecId = mapHeader->regionMapSectionId;
             }
             if (RegionMap_IsPlayerInCave(gRegionMap->mapSecId))
@@ -972,30 +956,30 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             }
             mapWidth = mapHeader->mapData->width;
             mapHeight = mapHeader->mapData->height;
-            x = r4->x;
-            y = r4->y;
+            x = storedWarp->x;
+            y = storedWarp->y;
             break;
     }
 
-    r9 = x;
+    xOnMap = x;
 
-    r1 = mapWidth / gRegionMapEntries[gRegionMap->mapSecId].width;
-    if (r1 == 0)
+    dimensionScale = mapWidth / gRegionMapEntries[gRegionMap->mapSecId].width;
+    if (dimensionScale == 0)
     {
-        r1 = 1;
+        dimensionScale = 1;
     }
-    x /= r1;
+    x /= dimensionScale;
     if (x >= gRegionMapEntries[gRegionMap->mapSecId].width)
     {
         x = gRegionMapEntries[gRegionMap->mapSecId].width - 1;
     }
 
-    r1 = mapHeight / gRegionMapEntries[gRegionMap->mapSecId].height;
-    if (r1 == 0)
+    dimensionScale = mapHeight / gRegionMapEntries[gRegionMap->mapSecId].height;
+    if (dimensionScale == 0)
     {
-        r1 = 1;
+        dimensionScale = 1;
     }
-    y /= r1;
+    y /= dimensionScale;
     if (y >= gRegionMapEntries[gRegionMap->mapSecId].height)
     {
         y = gRegionMapEntries[gRegionMap->mapSecId].height - 1;
@@ -1032,15 +1016,15 @@ static void RegionMap_InitializeStateBasedOnPlayerLocation(void)
             break;
         case MAPSEC_ROUTE_121:
             x = 0;
-            if (r9 > 14)
+            if (xOnMap > 14)
             {
                 x = 1;
             }
-            if (r9 > 0x1C)
+            if (xOnMap > 0x1C)
             {
                 x++;
             }
-            if (r9 > 0x36)
+            if (xOnMap > 0x36)
             {
                 x++;
             }
@@ -1059,14 +1043,14 @@ static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
     u16 x;
     u8 mapGroup;
     u8 mapNum;
-    u16 r1;
-    s16 sp2;
-    s16 sp4;
+    u16 dimensionScale;
+    s16 xOnMap;
+    s16 yOnMap;
     const struct MapHeader *mapHeader;
 
     y = 0;
     x = 0;
-    switch (GetSSTidalLocation(&mapGroup, &mapNum, &sp2, &sp4))
+    switch (GetSSTidalLocation(&mapGroup, &mapNum, &xOnMap, &yOnMap))
     {
         case 1:
             gRegionMap->mapSecId = MAPSEC_SLATEPORT_CITY;
@@ -1085,17 +1069,17 @@ static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
             mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
 
             gRegionMap->mapSecId = mapHeader->regionMapSectionId;
-            r1 = mapHeader->mapData->width / gRegionMapEntries[gRegionMap->mapSecId].width;
-            if (r1 == 0)
-                r1 = 1;
-            x = sp2 / r1;
+            dimensionScale = mapHeader->mapData->width / gRegionMapEntries[gRegionMap->mapSecId].width;
+            if (dimensionScale == 0)
+                dimensionScale = 1;
+            x = xOnMap / dimensionScale;
             if (x >= gRegionMapEntries[gRegionMap->mapSecId].width)
                 x = gRegionMapEntries[gRegionMap->mapSecId].width - 1;
 
-            r1 = mapHeader->mapData->height / gRegionMapEntries[gRegionMap->mapSecId].height;
-            if (r1 == 0)
-                r1 = 1;
-            y = sp4 / r1;
+            dimensionScale = mapHeader->mapData->height / gRegionMapEntries[gRegionMap->mapSecId].height;
+            if (dimensionScale == 0)
+                dimensionScale = 1;
+            y = yOnMap / dimensionScale;
             if (y >= gRegionMapEntries[gRegionMap->mapSecId].height)
                 y = gRegionMapEntries[gRegionMap->mapSecId].height - 1;
             break;
