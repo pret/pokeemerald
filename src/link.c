@@ -1906,3 +1906,27 @@ void DisableSerial(void)
     REG_SIOMLT_RECV = 0;
     CpuFill32(0, &gLink, sizeof(gLink));
 }
+
+void EnableSerial(void)
+{
+    DisableInterrupts(INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
+    REG_RCNT = 0;
+    REG_SIOCNT = SIO_MULTI_MODE;
+    REG_SIOCNT |= SIO_115200_BPS | SIO_INTR_ENABLE;
+    EnableInterrupts(INTR_FLAG_SERIAL);
+    REG_SIOMLT_SEND = 0;
+    CpuFill32(0, &gLink, sizeof(gLink));
+    gUnknown_03000D6C = 0;
+    gUnknown_03000D6E = 0;
+    gUnknown_03000D70 = 0;
+    gUnknown_03000D72 = 0;
+    gUnknown_03000D73 = 0;
+    gLastSendQueueCount = 0;
+    gLastRecvQueueCount = 0;
+}
+
+void ResetSerial(void)
+{
+    EnableSerial();
+    DisableSerial();
+}

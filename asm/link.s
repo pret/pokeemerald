@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start EnableSerial
-EnableSerial: @ 800B594
-	push {r4,r5,lr}
-	sub sp, 0x4
-	movs r0, 0xC0
-	bl DisableInterrupts
-	ldr r0, =0x04000134
-	movs r4, 0
-	strh r4, [r0]
-	ldr r2, =0x04000128
-	movs r1, 0x80
-	lsls r1, 6
-	adds r0, r1, 0
-	strh r0, [r2]
-	ldrh r0, [r2]
-	ldr r3, =0x00004003
-	adds r1, r3, 0
-	orrs r0, r1
-	strh r0, [r2]
-	movs r0, 0x80
-	bl EnableInterrupts
-	ldr r0, =0x0400012a
-	strh r4, [r0]
-	movs r5, 0
-	str r5, [sp]
-	ldr r1, =gLink
-	ldr r2, =0x050003f0
-	mov r0, sp
-	bl CpuSet
-	ldr r0, =gUnknown_03000D6C
-	strb r4, [r0]
-	ldr r0, =gUnknown_03000D6E
-	strh r5, [r0]
-	ldr r0, =gUnknown_03000D70
-	strh r5, [r0]
-	ldr r0, =gUnknown_03000D72
-	strb r4, [r0]
-	ldr r0, =gUnknown_03000D73
-	strb r4, [r0]
-	ldr r0, =gLastSendQueueCount
-	strb r4, [r0]
-	ldr r0, =gLastRecvQueueCount
-	strb r4, [r0]
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end EnableSerial
-
-	thumb_func_start ResetSerial
-ResetSerial: @ 800B628
-	push {lr}
-	bl EnableSerial
-	bl DisableSerial
-	pop {r0}
-	bx r0
-	thumb_func_end ResetSerial
-
 	thumb_func_start sub_800B638
 sub_800B638: @ 800B638
 	push {r4-r7,lr}
