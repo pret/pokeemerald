@@ -75,9 +75,6 @@ extern const u8 gText_PkmnStoppedEvolving[];
 extern const u8 gText_EllipsisQuestionMark[];
 extern const u8 gText_CommunicationStandby5[];
 
-extern void copy_decompressed_tile_data_to_vram_autofree(u8 arg0, const void *arg1, bool32 arg2, u16 arg3, u8 arg4);
-extern u32 sub_80391E0(u8, u8);
-extern void SpriteCallbackDummy_2(struct Sprite *sprite);
 extern void sub_80356D0(void);
 extern void sub_807B154(void);
 extern void sub_806A068(u16, u8);

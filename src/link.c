@@ -20,6 +20,7 @@
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "text.h"
+#include "strings.h"
 #include "sound.h"
 #include "trade.h"
 #include "battle.h"
@@ -1658,4 +1659,21 @@ void CB2_LinkError(void)
         UpdatePaletteFade();
         SetMainCallback2(sub_800B1A0);
     }
+}
+
+void sub_800B080(void)
+{
+    LoadBgTiles(0, g2BlankTilesGfx, 0x20, 0);
+    copy_decompressed_tile_data_to_vram_autofree(1, gWirelessLinkDisplayGfx, FALSE, 0, 0);
+    CopyToBgTilemapBuffer(1, gWirelessLinkDisplayTilemap, 0, 0);
+    CopyBgTilemapBufferToVram(1);
+    LoadPalette(gWirelessLinkDisplayPal, 0, 0x20);
+    FillWindowPixelBuffer(0, 0x00);
+    FillWindowPixelBuffer(2, 0x00);
+    box_print(0, 3, 2, 6, gUnknown_082ED224, 0, gText_CommErrorEllipsis);
+    box_print(2, 3, 2, 1, gUnknown_082ED224, 0, gText_MoveCloserToLinkPartner);
+    PutWindowTilemap(0);
+    PutWindowTilemap(2);
+    CopyWindowToVram(0, 0);
+    CopyWindowToVram(2, 3);
 }
