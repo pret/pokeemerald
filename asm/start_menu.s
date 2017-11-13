@@ -1683,7 +1683,7 @@ _080A05AC:
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_082C8959
+	ldr r2, =gText_SavingDontTurnOffPower
 	movs r4, 0
 	str r4, [sp]
 	movs r0, 0x2

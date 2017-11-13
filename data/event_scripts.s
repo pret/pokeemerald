@@ -1029,7 +1029,7 @@ gUnknown_082C8845:: @ 82C8845
 gUnknown_082C892A:: @ 82C892A
 	.incbin "baserom.gba", 0x2c892a, 0x2f
 
-gUnknown_082C8959:: @ 82C8959
+gText_SavingDontTurnOffPower:: @ 82C8959
 	.incbin "baserom.gba", 0x2c8959, 0x22
 
 gUnknown_082C897B:: @ 82C897B

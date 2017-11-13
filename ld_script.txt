@@ -215,7 +215,7 @@ SECTIONS {
         src/reset_save_heap.o(.text);
         asm/field_region_map.o(.text);
         asm/battle_anim_8170478.o(.text);
-        asm/hall_of_fame.o(.text);
+        src/hall_of_fame.o(.text);
         asm/credits.o(.text);
         src/lottery_corner.o(.text);
         src/diploma.o(.text);
@@ -436,7 +436,7 @@ SECTIONS {
         data/intro.o(.rodata);
         data/field_region_map.o(.rodata);
         data/battle_anim_8170478.o(.rodata);
-        data/hall_of_fame.o(.rodata);
+        src/hall_of_fame.o(.rodata);
         data/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
         src/diploma.o(.rodata);
