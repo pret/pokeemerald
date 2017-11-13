@@ -5,28 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800AB98
-sub_800AB98: @ 800AB98
-	ldr r0, =gSavedLinkPlayerCount
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, =gUnknown_03003120
-	strb r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end sub_800AB98
-
-	thumb_func_start sub_800ABAC
-sub_800ABAC: @ 800ABAC
-	ldr r0, =gLinkStatus
-	ldr r0, [r0]
-	movs r1, 0x1C
-	ands r0, r1
-	lsrs r0, 2
-	bx lr
-	.pool
-	thumb_func_end sub_800ABAC
-
 	thumb_func_start sub_800ABBC
 sub_800ABBC: @ 800ABBC
 	push {lr}

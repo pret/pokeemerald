@@ -79,7 +79,7 @@ u8 gSuppressLinkErrorMessage;
 bool8 gSerialIsRFU;
 bool8 gSavedLinkPlayerCount;
 u16 gSendCmd[8];
-u8 gUnknown_03003120;
+u8 gSavedMultiplayerId;
 bool8 gReceivedRemoteLinkPlayers;
 struct LinkTestBGInfo gLinkTestBGInfo;
 void (*gLinkCallback)(void);
@@ -468,7 +468,7 @@ void HandleReceiveRemoteLinkPlayer(u8 who)
 
     count = 0;
     gUnknown_03003078[who] = FALSE;
-    for (i = 0; i < sub_800ABAC(); i ++)
+    for (i = 0; i < GetLinkPlayerCount_2(); i ++)
     {
         count += gUnknown_03003078[i];
     }
@@ -800,7 +800,7 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
     count = 0;
     if (gReceivedRemoteLinkPlayers == TRUE)
     {
-        cmpVal = sub_800ABAC();
+        cmpVal = GetLinkPlayerCount_2();
         if (lower > cmpVal || cmpVal > upper)
         {
             sPlayerDataExchangeStatus = EXCHANGE_STAT_6;
@@ -1282,7 +1282,7 @@ void sub_800AA04(u8 a0)
     int i;
 
     gSavedLinkPlayerCount = a0;
-    gUnknown_03003120 = GetMultiplayerId();
+    gSavedMultiplayerId = GetMultiplayerId();
     for (i = 0; i < MAX_RFU_PLAYERS; i ++)
     {
         gSavedLinkPlayers[i] = gLinkPlayers[i];
@@ -1296,7 +1296,7 @@ u8 sub_800AA48(void)
 
 u8 sub_800AA54(void)
 {
-    return gUnknown_03003120;
+    return gSavedMultiplayerId;
 }
 
 bool8 sub_800AA60(void)
@@ -1324,7 +1324,7 @@ bool8 sub_800AA60(void)
     }
     if (count == gSavedLinkPlayerCount)
     {
-        if (sub_800ABAC() == gSavedLinkPlayerCount)
+        if (GetLinkPlayerCount_2() == gSavedLinkPlayerCount)
         {
             return TRUE;
         }
@@ -1356,4 +1356,15 @@ void sub_800AB18(void)
             SetMainCallback2(CB2_LinkError);
         }
     }
+}
+
+void sub_800AB98(void)
+{
+    gSavedLinkPlayerCount = 0;
+    gSavedMultiplayerId = 0;
+}
+
+u8 GetLinkPlayerCount_2(void)
+{
+    return EXTRACT_PLAYER_COUNT(gLinkStatus);
 }

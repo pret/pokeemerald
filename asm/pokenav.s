@@ -28132,7 +28132,7 @@ sub_81D4EC0: @ 81D4EC0
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4EDC
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -28190,7 +28190,7 @@ _081D4F38:
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D4F88
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -28212,7 +28212,7 @@ _081D4F54:
 	strb r0, [r4]
 	b _081D500C
 _081D4F6C:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -28506,7 +28506,7 @@ _081D51D0:
 	b _081D535A
 	.pool
 _081D51F4:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

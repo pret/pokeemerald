@@ -791,7 +791,7 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
             else
                 var = (gBattleTypeFlags & BATTLE_TYPE_MULTI) ? 4 : 2;
 
-            if (sub_800ABAC() >= var)
+            if (GetLinkPlayerCount_2() >= var)
             {
                 if (sub_800ABBC())
                 {

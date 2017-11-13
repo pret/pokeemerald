@@ -464,7 +464,7 @@ _0807757A:
 	b _08077B22
 	.pool
 _0807758C:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24
@@ -7373,7 +7373,7 @@ _0807AFBC:
 	bne _0807AFC8
 	b _0807B0DC
 _0807AFC8:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24

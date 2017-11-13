@@ -178,7 +178,7 @@ _080B24C8:
 	b _080B24F2
 _080B24CC:
 	ldr r4, =gStringVar1
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -404,7 +404,7 @@ sub_80B2688: @ 80B2688
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -506,7 +506,7 @@ sub_80B275C: @ 80B275C
 	mov r9, r0
 	mov r7, r8
 	add r7, r9
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -585,7 +585,7 @@ sub_80B2804: @ 80B2804
 	bne _080B2898
 	bl sub_800AA48
 	adds r4, r0, 0
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -652,7 +652,7 @@ sub_80B28A8: @ 80B28A8
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080B290A
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24
@@ -735,7 +735,7 @@ _080B2984:
 	b _080B29E4
 	.pool
 _080B2994:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	ldr r4, =gUnknown_03005DB8
 	strb r0, [r4]
 	bl GetMultiplayerId
@@ -825,7 +825,7 @@ _080B2A4E:
 	b _080B2ACE
 	.pool
 _080B2A6C:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	ldr r4, =gUnknown_03005DB8
 	strb r0, [r4]
 	bl GetMultiplayerId
@@ -1640,7 +1640,7 @@ sub_80B3194: @ 80B3194
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1681,7 +1681,7 @@ sub_80B31E8: @ 80B31E8
 	lsrs r5, r0, 24
 	bl sub_800AA48
 	adds r4, r0, 0
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -2779,7 +2779,7 @@ _080B3B54:
 	strh r0, [r5, 0x2]
 	b _080B3B96
 _080B3B68:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800AA48
 	lsls r4, 24

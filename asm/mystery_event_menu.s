@@ -282,7 +282,7 @@ _08178BCC:
 _08178BDA:
 	b _08178E34
 _08178BDC:
-	bl sub_800ABAC
+	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x2

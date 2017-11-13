@@ -19,7 +19,7 @@ gSuppressLinkErrorMessage
 gSerialIsRFU
 gSavedLinkPlayerCount
 gSendCmd
-gUnknown_03003120
+gSavedMultiplayerId
 gReceivedRemoteLinkPlayers
 gLinkTestBGInfo
 gLinkCallback

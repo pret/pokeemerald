@@ -205,7 +205,6 @@ void sub_800ADF8(void);
 void sub_800B488(void);
 void sub_800A620(void);
 void sub_8011BD0(void);
-u8 sub_800ABAC(void);
 u8 sub_800ABBC(void);
 void sub_800AC34(void);
 
@@ -234,7 +233,7 @@ extern u16 gUnknown_030030F4;
 extern u8 gSuppressLinkErrorMessage;
 extern bool8 gSerialIsRFU;
 extern bool8 gSavedLinkPlayerCount;
-extern u8 gUnknown_03003120;
+extern u8 gSavedMultiplayerId;
 extern struct LinkTestBGInfo gLinkTestBGInfo;
 extern void (*gLinkCallback)(void);
 extern bool8 gShouldAdvanceLinkState;
