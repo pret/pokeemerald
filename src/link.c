@@ -134,7 +134,8 @@ static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8 taskId);
 static void sub_800AC80(void);
 static void sub_800ACAC(void);
-void sub_800AD5C(void);
+static void sub_800AD5C(void);
+static void sub_800AD88(void);
 void sub_800AEB4(void);
 u8 sub_800B2F8(void);
 void sub_800B4A4(void);
@@ -1483,5 +1484,43 @@ void sub_800AD10(void)
             gUnknown_030030E4 = 0;
             gUnknown_030030F4 = 0;
         }
+    }
+}
+
+static void sub_800AD5C(void)
+{
+    if (gUnknown_03004130 == 0)
+    {
+        BuildSendCmd(0x5fff);
+        gLinkCallback = sub_800AD88;
+    }
+}
+
+static void sub_800AD88(void)
+{
+    int i;
+    unsigned count;
+    u8 linkPlayerCount;
+
+    linkPlayerCount = GetLinkPlayerCount();
+    count = 0;
+    for (i = 0; i < linkPlayerCount; i ++)
+    {
+        if (gLinkPlayers[i].language == LANGUAGE_JAPANESE)
+        {
+            count ++;
+        }
+        else if (gUnknown_030030F0[i])
+        {
+            count ++;
+        }
+    }
+    if (count == linkPlayerCount)
+    {
+        gBattleTypeFlags &= ~BATTLE_TYPE_20;
+        gLinkVSyncDisabled = TRUE;
+        CloseLink();
+        gLinkCallback = NULL;
+        gUnknown_030030E4 = 1;
     }
 }
