@@ -5555,7 +5555,7 @@ _080826EC:
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =ApostropheSPokeblockCaseIsFull
+	ldr r1, =sText_ApostropheSPokeblockCaseIsFull
 	b _08082740
 	.pool
 _0808271C:
