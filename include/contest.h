@@ -20,6 +20,12 @@ struct ContestStruct_field_18
 {
     // unknown size
     u16 field_0;
+    u16 field_2;
+    u16 field_4;
+    u16 field_6;
+    u32 field_8;
+    u32 field_C;
+    u32 field_10;
 };
 
 struct ContestResources
