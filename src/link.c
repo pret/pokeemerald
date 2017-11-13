@@ -1866,3 +1866,32 @@ void sub_800B4C0(void)
         gWirelessCommType = 0;
     }
 }
+
+u32 sub_800B4DC(void)
+{
+    if (gWirelessCommType != 0)
+    {
+        return sub_80124D4();
+    }
+    return gLink.recvQueue.count;
+}
+
+bool8 sub_800B504(void)
+{
+    if (sub_800B4DC() > 2)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+u8 sub_800B518(void)
+{
+    return gWirelessCommType;
+}
+
+void sub_800B524(struct LinkPlayer *player)
+{
+    player->name[10] = player->name[8];
+    ConvertInternationalString(player->name, player->language);
+}

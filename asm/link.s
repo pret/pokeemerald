@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800B4DC
-sub_800B4DC: @ 800B4DC
-	push {lr}
-	ldr r0, =gWirelessCommType
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0800B4FC
-	ldr r0, =gLink
-	ldr r1, =0x00000fbd
-	adds r0, r1
-	ldrb r0, [r0]
-	b _0800B500
-	.pool
-_0800B4FC:
-	bl sub_80124D4
-_0800B500:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_800B4DC
-
-	thumb_func_start sub_800B504
-sub_800B504: @ 800B504
-	push {lr}
-	bl sub_800B4DC
-	cmp r0, 0x2
-	bhi _0800B512
-	movs r0, 0
-	b _0800B514
-_0800B512:
-	movs r0, 0x1
-_0800B514:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_800B504
-
-	thumb_func_start sub_800B518
-sub_800B518: @ 800B518
-	ldr r0, =gWirelessCommType
-	ldrb r0, [r0]
-	bx lr
-	.pool
-	thumb_func_end sub_800B518
-
-	thumb_func_start sub_800B524
-sub_800B524: @ 800B524
-	push {lr}
-	ldrb r1, [r0, 0x10]
-	strb r1, [r0, 0x12]
-	adds r2, r0, 0
-	adds r2, 0x8
-	ldrb r1, [r0, 0x1A]
-	adds r0, r2, 0
-	bl ConvertInternationalString
-	pop {r0}
-	bx r0
-	thumb_func_end sub_800B524
-
 	thumb_func_start DisableSerial
 DisableSerial: @ 800B53C
 	push {lr}

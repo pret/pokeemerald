@@ -104,9 +104,9 @@ struct LinkPlayerBlock
 
 struct SendQueue
 {
-    u16 data[CMD_LENGTH][QUEUE_CAPACITY];
-    u8 pos;
-    u8 count;
+    /* 0x000 */ u16 data[CMD_LENGTH][QUEUE_CAPACITY];
+    /* 0x320 */ u8 pos;
+    /* 0x321 */ u8 count;
 };
 
 struct RecvQueue
@@ -118,29 +118,29 @@ struct RecvQueue
 
 struct Link
 {
-    u8 isMaster; // 0: slave, 8: master
-    u8 state;
-    u8 localId; // local multi-player ID
-    u8 playerCount;
-    u16 tempRecvBuffer[4];
-    bool8 receivedNothing;
-    s8 serialIntrCounter;
-    bool8 handshakeAsMaster;
-    u8 link_field_F;
+    /* 0x000 */ u8 isMaster; // 0: slave, 8: master
+    /* 0x001 */ u8 state;
+    /* 0x002 */ u8 localId; // local multi-player ID
+    /* 0x003 */ u8 playerCount;
+    /* 0x004 */ u16 tempRecvBuffer[4];
+    /* 0x00c */ bool8 receivedNothing;
+    /* 0x00d */ s8 serialIntrCounter;
+    /* 0x00e */ bool8 handshakeAsMaster;
+    /* 0x00f */ u8 link_field_F;
 
     // error conditions
-    bool8 hardwareError; // hardware reported an error
-    bool8 badChecksum; // checksum didn't match between devices
-    u8 queueFull; // send or recv queue out of space
-    u8 lag; // connection is lagging
+    /* 0x010 */ bool8 hardwareError; // hardware reported an error
+    /* 0x011 */ bool8 badChecksum; // checksum didn't match between devices
+    /* 0x012 */ u8 queueFull; // send or recv queue out of space
+    /* 0x013 */ u8 lag; // connection is lagging
 
-    u16 checksum;
+    /* 0x014 */ u16 checksum;
 
-    u8 sendCmdIndex;
-    u8 recvCmdIndex;
+    /* 0x016 */ u8 sendCmdIndex;
+    /* 0x017 */ u8 recvCmdIndex;
 
-    struct SendQueue sendQueue;
-    struct RecvQueue recvQueue;
+    /* 0x018 */ struct SendQueue sendQueue;
+    /* 0x33c */ struct RecvQueue recvQueue;
 };
 
 struct BlockRequest

@@ -30,5 +30,6 @@ void sub_800E6D0(void);
 bool32 sub_8010EC0(void);
 bool32 sub_8010F1C(void);
 bool32 sub_800F0B8(void);
+u32 sub_80124D4(void);
 
 #endif //GUARD_LINK_RFU_H
