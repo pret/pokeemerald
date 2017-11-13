@@ -141,7 +141,6 @@ extern u8 gLastUsedAbility;
 extern u8 gUnknown_0203CF00[];
 extern const u8* gBattlescriptPtrsForSelection[BATTLE_BANKS_COUNT];
 extern const u8* gBattlescriptCurrInstr;
-extern u32 gBattlePalaceMoveSelectionRngValue;
 extern u8 gActionsByTurnOrder[BATTLE_BANKS_COUNT];
 extern u8 gCurrentTurnActionNumber;
 extern u16 gDynamicBasePower;

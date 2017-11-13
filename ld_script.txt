@@ -231,7 +231,6 @@ SECTIONS {
         asm/battle_link_817C95C.o(.text);
         asm/pokemon_animation.o(.text);
         src/recorded_battle.o(.text);
-        asm/recorded_battle.o(.text);
         src/battle_controller_recorded_opponent.o(.text);
         src/battle_controller_recorded_player.o(.text);
         src/battle_dome_cards.o(.text);

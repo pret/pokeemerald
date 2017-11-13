@@ -81,31 +81,31 @@ struct RecordedBattleSave
 
 EWRAM_DATA u32 gRecordedBattleRngSeed = 0;
 EWRAM_DATA u32 gBattlePalaceMoveSelectionRngValue = 0;
-EWRAM_DATA u8 sBattleRecords[BATTLE_BANKS_COUNT][BANK_RECORD_SIZE] = {0};
-EWRAM_DATA u16 sRecordedBytesNo[BATTLE_BANKS_COUNT] = {0};
-EWRAM_DATA u16 gUnknown_0203C79C[4] = {0};
-EWRAM_DATA u16 gUnknown_0203C7A4[4] = {0};
-EWRAM_DATA u8 gUnknown_0203C7AC = 0;
-EWRAM_DATA u8 gUnknown_0203C7AD = 0;
-EWRAM_DATA u8 gUnknown_0203C7AE = 0;
-EWRAM_DATA u8 gUnknown_0203C7AF = 0;
-EWRAM_DATA MainCallback sCallback2_AfterRecordedBattle = NULL;
+EWRAM_DATA static u8 sBattleRecords[BATTLE_BANKS_COUNT][BANK_RECORD_SIZE] = {0};
+EWRAM_DATA static u16 sRecordedBytesNo[BATTLE_BANKS_COUNT] = {0};
+EWRAM_DATA static u16 sUnknown_0203C79C[4] = {0};
+EWRAM_DATA static u16 sUnknown_0203C7A4[4] = {0};
+EWRAM_DATA static u8 sUnknown_0203C7AC = 0;
+EWRAM_DATA static u8 sUnknown_0203C7AD = 0;
+EWRAM_DATA static u8 sUnknown_0203C7AE = 0;
+EWRAM_DATA static u8 sUnknown_0203C7AF = 0;
+EWRAM_DATA static MainCallback sCallback2_AfterRecordedBattle = NULL;
 EWRAM_DATA u8 gUnknown_0203C7B4 = 0;
-EWRAM_DATA u8 gUnknown_0203C7B5 = 0;
-EWRAM_DATA u8 sRecordedBattle_BattleStyle = 0;
-EWRAM_DATA u8 sRecordedBattle_TextSpeed = 0;
-EWRAM_DATA u32 sRecordedBattle_BattleFlags = 0;
-EWRAM_DATA u32 sRecordedBattle_AI_Scripts = 0;
-EWRAM_DATA struct Pokemon sSavedPlayerParty[PARTY_SIZE] = {0};
-EWRAM_DATA struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
-EWRAM_DATA u16 sRecordedBattle_PlayerMonMoves[2][4] = {0};
-EWRAM_DATA struct PlayerInfo sRecordedBattle_Players[BATTLE_BANKS_COUNT] = {0};
-EWRAM_DATA u8 gUnknown_0203CCD0 = 0;
-EWRAM_DATA u8 gUnknown_0203CCD1[8] = {0};
-EWRAM_DATA u8 gUnknown_0203CCD9 = 0;
-EWRAM_DATA u8 gUnknown_0203CCDA = 0;
-EWRAM_DATA u16 gUnknown_0203CCDC[6] = {0};
-EWRAM_DATA u8 gUnknown_0203CCE8 = 0;
+EWRAM_DATA static u8 sUnknown_0203C7B5 = 0;
+EWRAM_DATA static u8 sRecordedBattle_BattleStyle = 0;
+EWRAM_DATA static u8 sRecordedBattle_TextSpeed = 0;
+EWRAM_DATA static u32 sRecordedBattle_BattleFlags = 0;
+EWRAM_DATA static u32 sRecordedBattle_AI_Scripts = 0;
+EWRAM_DATA static struct Pokemon sSavedPlayerParty[PARTY_SIZE] = {0};
+EWRAM_DATA static struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
+EWRAM_DATA static u16 sRecordedBattle_PlayerMonMoves[2][4] = {0};
+EWRAM_DATA static struct PlayerInfo sRecordedBattle_Players[BATTLE_BANKS_COUNT] = {0};
+EWRAM_DATA static u8 sUnknown_0203CCD0 = 0;
+EWRAM_DATA static u8 sUnknown_0203CCD1[8] = {0};
+EWRAM_DATA static u8 sUnknown_0203CCD9 = 0;
+EWRAM_DATA static u8 sUnknown_0203CCDA = 0;
+EWRAM_DATA static u16 sUnknown_0203CCDC[6] = {0};
+EWRAM_DATA static u8 sUnknown_0203CCE8 = 0;
 
 extern u32 sub_81A513C(void);
 extern void PlayMapChosenOrBattleBGM(bool8);
@@ -113,21 +113,21 @@ extern void PlayMapChosenOrBattleBGM(bool8);
 // this file's functions
 static u8 sub_8185278(u8 *arg0, u8 *arg1, u8 *arg2);
 static bool32 AllocTryCopyRecordedBattleSaveData(struct RecordedBattleSave *dst);
-void RecordedBattle_RestoreSavedParties(void);
+static void RecordedBattle_RestoreSavedParties(void);
 static void CB2_RecordedBattle(void);
 
 void sub_8184DA4(u8 arg0)
 {
     s32 i, j;
 
-    gUnknown_0203C7AC = arg0;
-    gUnknown_0203CCD0 = 0;
+    sUnknown_0203C7AC = arg0;
+    sUnknown_0203CCD0 = 0;
 
     for (i = 0; i < BATTLE_BANKS_COUNT; i++)
     {
         sRecordedBytesNo[i] = 0;
-        gUnknown_0203C79C[i] = 0;
-        gUnknown_0203C7A4[i] = 0;
+        sUnknown_0203C79C[i] = 0;
+        sUnknown_0203C7A4[i] = 0;
 
         if (arg0 == 1)
         {
@@ -145,13 +145,13 @@ void sub_8184E58(void)
 {
     s32 i, j;
 
-    if (gUnknown_0203C7AC == 1)
+    if (sUnknown_0203C7AC == 1)
     {
         gRecordedBattleRngSeed = gRngValue;
-        gUnknown_0203C7AE = VarGet(VAR_FRONTIER_FACILITY);
-        gUnknown_0203C7AF = sub_81A513C();
+        sUnknown_0203C7AE = VarGet(VAR_FRONTIER_FACILITY);
+        sUnknown_0203C7AF = sub_81A513C();
     }
-    else if (gUnknown_0203C7AC == 2)
+    else if (sUnknown_0203C7AC == 2)
     {
         gRngValue = gRecordedBattleRngSeed;
     }
@@ -202,7 +202,7 @@ void sub_8184E58(void)
 
 void RecordedBattle_SetBankAction(u8 bank, u8 action)
 {
-    if (sRecordedBytesNo[bank] < BANK_RECORD_SIZE && gUnknown_0203C7AC != 2)
+    if (sRecordedBytesNo[bank] < BANK_RECORD_SIZE && sUnknown_0203C7AC != 2)
     {
         sBattleRecords[bank][sRecordedBytesNo[bank]++] = action;
     }
@@ -240,7 +240,7 @@ u8 RecordedBattle_ReadBankAction(u8 bank)
 
 u8 sub_81850D0(void)
 {
-    return gUnknown_0203C7AC;
+    return sUnknown_0203C7AC;
 }
 
 u8 sub_81850DC(u8 *arg0)
@@ -250,17 +250,17 @@ u8 sub_81850DC(u8 *arg0)
 
     for (i = 0; i < BATTLE_BANKS_COUNT; i++)
     {
-        if (sRecordedBytesNo[i] != gUnknown_0203C79C[i])
+        if (sRecordedBytesNo[i] != sUnknown_0203C79C[i])
         {
             arg0[ret++] = i;
-            arg0[ret++] = sRecordedBytesNo[i] - gUnknown_0203C79C[i];
+            arg0[ret++] = sRecordedBytesNo[i] - sUnknown_0203C79C[i];
 
-            for (j = 0; j < sRecordedBytesNo[i] - gUnknown_0203C79C[i]; j++)
+            for (j = 0; j < sRecordedBytesNo[i] - sUnknown_0203C79C[i]; j++)
             {
-                arg0[ret++] = sBattleRecords[i][gUnknown_0203C79C[i] + j];
+                arg0[ret++] = sBattleRecords[i][sUnknown_0203C79C[i] + j];
             }
 
-            gUnknown_0203C79C[i] = sRecordedBytesNo[i];
+            sUnknown_0203C79C[i] = sRecordedBytesNo[i];
         }
     }
 
@@ -291,7 +291,7 @@ void sub_81851A8(u8 *arg0)
 
             for (i = 0; i < unkVar2; i++)
             {
-                sBattleRecords[unkVar][gUnknown_0203C7A4[unkVar]++] = sub_8185278(arg0, &var1, &var2);
+                sBattleRecords[unkVar][sUnknown_0203C7A4[unkVar]++] = sub_8185278(arg0, &var1, &var2);
             }
         }
     }
@@ -311,7 +311,7 @@ bool32 CanCopyRecordedBattleSaveData(void)
     return ret;
 }
 
-bool32 IsRecordedBattleSaveValid(struct RecordedBattleSave *save)
+static bool32 IsRecordedBattleSaveValid(struct RecordedBattleSave *save)
 {
     if (save->battleFlags == 0)
         return FALSE;
@@ -323,7 +323,7 @@ bool32 IsRecordedBattleSaveValid(struct RecordedBattleSave *save)
     return TRUE;
 }
 
-bool32 sub_81852F0(struct RecordedBattleSave *battleSave, struct RecordedBattleSave *saveSection)
+static bool32 sub_81852F0(struct RecordedBattleSave *battleSave, struct RecordedBattleSave *saveSection)
 {
     memset(saveSection, 0, sizeof(struct SaveSection));
     memcpy(saveSection, battleSave, sizeof(*battleSave));
@@ -400,8 +400,8 @@ u32 MoveRecordedBattleToSaveData(void)
     battleSave->partnerId = gPartnerTrainerId;
     battleSave->field_4FA = gUnknown_0203C7B4;
     battleSave->field_4FC = gSaveBlock2Ptr->field_CA9_b;
-    battleSave->field_4FD = gUnknown_0203C7AE;
-    battleSave->field_4FE = gUnknown_0203C7AF;
+    battleSave->field_4FD = sUnknown_0203C7AE;
+    battleSave->field_4FE = sUnknown_0203C7AF;
     battleSave->battleStyle = gSaveBlock2Ptr->optionsBattleStyle;
     battleSave->textSpeed = gSaveBlock2Ptr->optionsTextSpeed;
     battleSave->AI_scripts = sRecordedBattle_AI_Scripts;
@@ -415,7 +415,7 @@ u32 MoveRecordedBattleToSaveData(void)
         }
         battleSave->field_50C = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_A - 300].field_1;
 
-        if (gUnknown_0203CCE8 == 1)
+        if (sUnknown_0203CCE8 == 1)
         {
             for (i = 0; i < 6; i++)
             {
@@ -439,7 +439,7 @@ u32 MoveRecordedBattleToSaveData(void)
         }
         battleSave->field_50C = gSaveBlock2Ptr->field_738[gTrainerBattleOpponent_B - 300].field_1;
 
-        if (gUnknown_0203CCE8 == 1)
+        if (sUnknown_0203CCE8 == 1)
         {
             for (i = 0; i < 6; i++)
             {
@@ -463,7 +463,7 @@ u32 MoveRecordedBattleToSaveData(void)
         }
         battleSave->field_50C = gSaveBlock2Ptr->field_738[gPartnerTrainerId - 300].field_1;
 
-        if (gUnknown_0203CCE8 == 1)
+        if (sUnknown_0203CCE8 == 1)
         {
             for (i = 0; i < 6; i++)
             {
@@ -709,12 +709,12 @@ _081854E2:\n\
 	ldr r5, =0x000004fc\n\
 	adds r1, r7, r5\n\
 	strb r0, [r1]\n\
-	ldr r0, =gUnknown_0203C7AE\n\
+	ldr r0, =sUnknown_0203C7AE\n\
 	ldrb r1, [r0]\n\
 	adds r2, 0x3\n\
 	adds r0, r7, r2\n\
 	strb r1, [r0]\n\
-	ldr r3, =gUnknown_0203C7AF\n\
+	ldr r3, =sUnknown_0203C7AF\n\
 	ldrb r1, [r3]\n\
 	ldr r4, =0x000004fe\n\
 	adds r0, r7, r4\n\
@@ -799,7 +799,7 @@ _08185592:\n\
 	ldr r5, =0x0000050c\n\
 	adds r0, r7, r5\n\
 	strb r1, [r0]\n\
-	ldr r1, =gUnknown_0203CCE8\n\
+	ldr r1, =sUnknown_0203CCE8\n\
 	ldrb r0, [r1]\n\
 	cmp r0, 0x1\n\
 	bne _08185664\n\
@@ -925,7 +925,7 @@ _081856E6:\n\
 	ldr r5, =0x0000050c\n\
 	adds r0, r7, r5\n\
 	strb r1, [r0]\n\
-	ldr r1, =gUnknown_0203CCE8\n\
+	ldr r1, =sUnknown_0203CCE8\n\
 	ldrb r0, [r1]\n\
 	cmp r0, 0x1\n\
 	bne _08185784\n\
@@ -1278,7 +1278,7 @@ _08185A14:\n\
 }
 #endif // NONMATCHING
 
-bool32 TryCopyRecordedBattleSaveData(struct RecordedBattleSave *dst, struct SaveSection *saveBuffer)
+static bool32 TryCopyRecordedBattleSaveData(struct RecordedBattleSave *dst, struct SaveSection *saveBuffer)
 {
     if (TryCopySpecialSaveSection(SECTION_ID_RECORDED_BATTLE, (void*)(saveBuffer)) != 1)
         return FALSE;
@@ -1302,7 +1302,7 @@ static bool32 AllocTryCopyRecordedBattleSaveData(struct RecordedBattleSave *dst)
 
 static void CB2_RecordedBattleEnd(void)
 {
-    gSaveBlock2Ptr->frontierChosenLvl = gUnknown_0203C7AD;
+    gSaveBlock2Ptr->frontierChosenLvl = sUnknown_0203C7AD;
     gBattleOutcome = 0;
     gBattleTypeFlags = 0;
     gTrainerBattleOpponent_A = 0;
@@ -1362,26 +1362,26 @@ static void SetRecordedBattleVarsFromSave(struct RecordedBattleSave *src)
     gTrainerBattleOpponent_B = src->opponentB;
     gPartnerTrainerId = src->partnerId;
     gUnknown_0203C7B4 = src->field_4FA;
-    gUnknown_0203C7AD = gSaveBlock2Ptr->frontierChosenLvl;
-    gUnknown_0203C7AE = src->field_4FD;
-    gUnknown_0203C7AF = src->field_4FE;
+    sUnknown_0203C7AD = gSaveBlock2Ptr->frontierChosenLvl;
+    sUnknown_0203C7AE = src->field_4FD;
+    sUnknown_0203C7AF = src->field_4FE;
     sRecordedBattle_BattleStyle = src->battleStyle;
     sRecordedBattle_TextSpeed = src->textSpeed;
     sRecordedBattle_AI_Scripts = src->AI_scripts;
 
     for (i = 0; i < 8; i++)
     {
-        gUnknown_0203CCD1[i] = src->field_504[i];
+        sUnknown_0203CCD1[i] = src->field_504[i];
     }
 
-    gUnknown_0203CCD9 = src->field_50C;
-    gUnknown_0203CCDA = src->field_50D;
+    sUnknown_0203CCD9 = src->field_50C;
+    sUnknown_0203CCDA = src->field_50D;
     gUnknown_03001278 = src->field_51A;
     gUnknown_03001279 = src->field_51B;
 
     for (i = 0; i < 6; i++)
     {
-        gUnknown_0203CCDC[i] = src->field_50E[i];
+        sUnknown_0203CCDC[i] = src->field_50E[i];
     }
 
     gSaveBlock2Ptr->frontierChosenLvl = src->field_4FC;
@@ -1426,12 +1426,12 @@ static void CB2_RecordedBattle(void)
 
 u8 sub_8185EA0(void)
 {
-    return gUnknown_0203C7AE;
+    return sUnknown_0203C7AE;
 }
 
 u8 sub_8185EAC(void)
 {
-    return gUnknown_0203C7AF;
+    return sUnknown_0203C7AF;
 }
 
 void RecordedBattle_SaveParties(void)
@@ -1445,7 +1445,7 @@ void RecordedBattle_SaveParties(void)
     }
 }
 
-void RecordedBattle_RestoreSavedParties(void)
+static void RecordedBattle_RestoreSavedParties(void)
 {
     s32 i;
 
@@ -1474,17 +1474,17 @@ u8 GetActiveBankLinkPlayerGender(void)
 
 void sub_8185F84(void)
 {
-    gUnknown_0203C7B5 = 0;
+    sUnknown_0203C7B5 = 0;
 }
 
 void sub_8185F90(u16 arg0)
 {
-    gUnknown_0203C7B5 |= (arg0 & 0x8000) >> 0xF;
+    sUnknown_0203C7B5 |= (arg0 & 0x8000) >> 0xF;
 }
 
 u8 sub_8185FAC(void)
 {
-    return gUnknown_0203C7B5;
+    return sUnknown_0203C7B5;
 }
 
 u8 GetBattleStyleInRecordedBattle(void)
@@ -1505,7 +1505,7 @@ void RecordedBattle_CopyBankMoves(void)
         return;
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
         return;
-    if (gUnknown_0203C7AC == 2)
+    if (sUnknown_0203C7AC == 2)
         return;
 
     for (i = 0; i < 4; i++)
@@ -1617,4 +1617,60 @@ void sub_818603C(u8 arg0)
             }
         }
     }
+}
+
+u32 GetAiScriptsInRecordedBattle(void)
+{
+    return sRecordedBattle_AI_Scripts;
+}
+
+void sub_8186444(void)
+{
+    sUnknown_0203CCD0 = 1;
+}
+
+bool8 sub_8186450(void)
+{
+    return (sUnknown_0203CCD0 == 0);
+}
+
+void sub_8186468(u8 *dst)
+{
+    s32 i;
+
+    for (i = 0; i < 8; i++)
+        dst[i] = sUnknown_0203CCD1[i];
+
+    dst[7] = EOS;
+    ConvertInternationalString(dst, gUnknown_03001278);
+}
+
+u8 sub_818649C(void)
+{
+    return sUnknown_0203CCD9;
+}
+
+u8 sub_81864A8(void)
+{
+    return sUnknown_0203CCDA;
+}
+
+u8 sub_81864B4(void)
+{
+    return gUnknown_03001278;
+}
+
+u8 sub_81864C0(void)
+{
+    return gUnknown_03001279;
+}
+
+void sub_81864CC(void)
+{
+    sUnknown_0203CCE8 = gBattleOutcome;
+}
+
+u16 *sub_81864E0(void)
+{
+    return sUnknown_0203CCDC;
 }
