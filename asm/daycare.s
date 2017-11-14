@@ -7,137 +7,6 @@
 
 
 
-
-	thumb_func_start sub_8070AC4
-sub_8070AC4: @ 8070AC4
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r6, r0, 0
-	movs r7, 0
-	movs r5, 0
-_08070ACE:
-	movs r0, 0x8C
-	adds r4, r5, 0
-	muls r4, r0
-	adds r0, r6, r4
-	movs r1, 0x5
-	bl GetBoxMonData
-	cmp r0, 0
-	beq _08070AEE
-	adds r1, r6, 0
-	adds r1, 0x88
-	adds r1, r4
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	adds r7, 0x1
-_08070AEE:
-	adds r5, 0x1
-	cmp r5, 0x1
-	bls _08070ACE
-	movs r1, 0x8C
-	lsls r1, 1
-	adds r0, r6, r1
-	ldr r0, [r0]
-	cmp r0, 0
-	bne _08070B34
-	cmp r7, 0x2
-	bne _08070B34
-	subs r1, 0x4
-	adds r0, r6, r1
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	bne _08070B34
-	adds r0, r6, 0
-	bl daycare_relationship_score
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x64
-	muls r0, r1
-	ldr r1, =0x0000ffff
-	bl __udivsi3
-	cmp r4, r0
-	bls _08070B34
-	bl TriggerPendingDaycareEgg
-_08070B34:
-	movs r0, 0x8E
-	lsls r0, 1
-	adds r1, r6, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	bne _08070BC0
-	bl GetEggStepsToSubtract
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r5, 0
-	ldr r0, =gPlayerPartyCount
-	ldrb r0, [r0]
-	cmp r5, r0
-	bcs _08070BC0
-	ldr r4, =gPlayerParty
-_08070B5C:
-	adds r0, r4, 0
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	beq _08070BB4
-	adds r0, r4, 0
-	movs r1, 0x4
-	bl GetMonData
-	cmp r0, 0
-	bne _08070BB4
-	adds r0, r4, 0
-	movs r1, 0x20
-	bl GetMonData
-	adds r1, r0, 0
-	str r1, [sp]
-	cmp r0, 0
-	beq _08070BA8
-	cmp r0, r6
-	bcc _08070B98
-	subs r0, r6
-	b _08070B9A
-	.pool
-_08070B98:
-	subs r0, r1, 0x1
-_08070B9A:
-	str r0, [sp]
-	adds r0, r4, 0
-	movs r1, 0x20
-	mov r2, sp
-	bl SetMonData
-	b _08070BB4
-_08070BA8:
-	ldr r0, =gSpecialVar_0x8004
-	strh r5, [r0]
-	movs r0, 0x1
-	b _08070BC2
-	.pool
-_08070BB4:
-	adds r4, 0x64
-	adds r5, 0x1
-	ldr r0, =gPlayerPartyCount
-	ldrb r0, [r0]
-	cmp r5, r0
-	bcc _08070B5C
-_08070BC0:
-	movs r0, 0
-_08070BC2:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8070AC4
-
 	thumb_func_start sub_8070BD0
 sub_8070BD0: @ 8070BD0
 	push {lr}
@@ -145,7 +14,7 @@ sub_8070BD0: @ 8070BD0
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
-	bl sub_8070AC4
+	bl _DoEggActions_CheckHatch
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -332,8 +201,8 @@ _08070D46:
 	bx r1
 	thumb_func_end sub_8070D1C
 
-	thumb_func_start daycare_relationship_score
-daycare_relationship_score: @ 8070D4C
+	thumb_func_start GetDaycareCompatibilityScore
+GetDaycareCompatibilityScore: @ 8070D4C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -481,7 +350,7 @@ _08070E5C:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end daycare_relationship_score
+	thumb_func_end GetDaycareCompatibilityScore
 
 	thumb_func_start daycare_relationship_score_from_savegame
 daycare_relationship_score_from_savegame: @ 8070E6C
@@ -490,7 +359,7 @@ daycare_relationship_score_from_savegame: @ 8070E6C
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
-	bl daycare_relationship_score
+	bl GetDaycareCompatibilityScore
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}

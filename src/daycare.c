@@ -10,6 +10,7 @@
 #include "rng.h"
 #include "main.h"
 #include "moves.h"
+#include "egg_hatch.h"
 
 #define EGG_MOVES_ARRAY_COUNT           10
 #define EGG_LVL_UP_MOVES_ARRAY_COUNT    50
@@ -22,6 +23,7 @@ extern u16 ItemIdToBattleMoveId(u16);
 // this file's functions
 static void ClearDaycareMonMisc(struct DaycareMiscMon *misc);
 void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare);
+u8 GetDaycareCompatibilityScore(struct DayCare *daycare);
 
 // RAM buffers used to assist with BuildEggMoveset()
 EWRAM_DATA static u16 sHatchedEggLevelUpMoves[EGG_LVL_UP_MOVES_ARRAY_COUNT] = {0};
@@ -817,4 +819,55 @@ void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare
 void GiveEggFromDaycare(void)
 {
     _GiveEggFromDaycare(&gSaveBlock1Ptr->daycare);
+}
+
+bool8 _DoEggActions_CheckHatch(struct DayCare *daycare)
+{
+    u32 i, validEggs = 0;
+
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
+    {
+        if (GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SANITY_BIT2))
+            daycare->mons[i].steps++, validEggs++;
+    }
+
+    // try to trigger poke sex
+    if (daycare->offspringPersonality == 0 && validEggs == 2 && (daycare->mons[1].steps & 0xFF) == 0xFF)
+    {
+        u8 loveScore = GetDaycareCompatibilityScore(daycare);
+        if (loveScore > (Random() * 100u) / USHRT_MAX)
+            TriggerPendingDaycareEgg();
+    }
+
+    if (++daycare->stepCounter == 255) // hatch an egg
+    {
+        u32 steps;
+        u8 toSub = GetEggStepsToSubtract();
+
+        for (i = 0; i < gPlayerPartyCount; i++)
+        {
+            if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+                continue;
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_BIT1))
+                continue;
+
+            steps = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
+            if (steps != 0) // subtract needed steps
+            {
+                if (steps >= toSub)
+                    steps -= toSub;
+                else
+                    steps -= 1;
+
+                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &steps);
+            }
+            else // hatch the egg
+            {
+                gSpecialVar_0x8004 = i;
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE; // no hatching
 }

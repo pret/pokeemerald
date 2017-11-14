@@ -1,6 +1,6 @@
-#ifndef GUARD_DAYCARE
-#define GUARD_DAYCARE
+#ifndef GUARD_DAYCARE_H
+#define GUARD_DAYCARE_H
 
 #define EGG_HATCH_LEVEL 5
 
-#endif // GUARD_DAYCARE
+#endif // GUARD_DAYCARE_H
