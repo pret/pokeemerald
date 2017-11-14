@@ -5,80 +5,17 @@
 
 	.text
 
-	thumb_func_start sub_800B9B8
-sub_800B9B8: @ 800B9B8
-	push {r4,lr}
-	ldr r3, =gLink
-	ldrb r4, [r3]
-	cmp r4, 0
-	beq _0800B9F4
-	ldrb r0, [r3, 0x1]
-	cmp r0, 0x2
-	beq _0800B9EE
-	cmp r0, 0x4
-	bne _0800BA1E
-	movs r0, 0xD
-	ldrsb r0, [r3, r0]
-	cmp r0, 0x8
-	bgt _0800B9E4
-	ldrb r0, [r3, 0x10]
-	cmp r0, 0x1
-	beq _0800B9EE
-	movs r0, 0x1
-	strb r0, [r3, 0x13]
-	b _0800BA1E
-	.pool
-_0800B9E4:
-	ldrb r0, [r3, 0x13]
-	cmp r0, 0x1
-	beq _0800BA1E
-	movs r0, 0
-	strb r0, [r3, 0xD]
-_0800B9EE:
-	bl sub_800BAC0
-	b _0800BA1E
-_0800B9F4:
-	ldrb r2, [r3, 0x1]
-	cmp r2, 0x4
-	beq _0800B9FE
-	cmp r2, 0x2
-	bne _0800BA1E
-_0800B9FE:
-	ldr r1, =gUnknown_03000D6C
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xA
-	bls _0800BA1E
-	cmp r2, 0x4
-	bne _0800BA16
-	movs r0, 0x2
-	strb r0, [r3, 0x13]
-_0800BA16:
-	cmp r2, 0x2
-	bne _0800BA1E
-	strb r4, [r3, 0x3]
-	strb r4, [r3, 0xF]
-_0800BA1E:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800B9B8
-
 	thumb_func_start Timer3Intr
 Timer3Intr: @ 800BA28
 	push {lr}
-	bl sub_800BD98
-	bl sub_800BAC0
+	bl StopTimer
+	bl StartTransfer
 	pop {r0}
 	bx r0
 	thumb_func_end Timer3Intr
 
-	thumb_func_start sub_800BA38
-sub_800BA38: @ 800BA38
+	thumb_func_start SerialCB
+SerialCB: @ 800BA38
 	push {r4,lr}
 	ldr r4, =gLink
 	ldr r0, =0x04000128
@@ -121,7 +58,7 @@ _0800BA8A:
 	adds r0, 0x1
 	movs r2, 0
 	strb r0, [r3, 0xD]
-	ldr r1, =gUnknown_03000D6C
+	ldr r1, =sNumVBlanksWithoutSerialIntr
 	strb r2, [r1]
 	lsls r0, 24
 	asrs r0, 24
@@ -137,10 +74,10 @@ _0800BAAA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_800BA38
+	thumb_func_end SerialCB
 
-	thumb_func_start sub_800BAC0
-sub_800BAC0: @ 800BAC0
+	thumb_func_start StartTransfer
+StartTransfer: @ 800BAC0
 	ldr r0, =0x04000128
 	ldrh r1, [r0]
 	movs r2, 0x80
@@ -148,7 +85,7 @@ sub_800BAC0: @ 800BAC0
 	strh r1, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_800BAC0
+	thumb_func_end StartTransfer
 
 	thumb_func_start sub_800BAD0
 sub_800BAD0: @ 800BAD0
@@ -496,8 +433,8 @@ _0800BD8C:
 	.pool
 	thumb_func_end sub_800BCE4
 
-	thumb_func_start sub_800BD98
-sub_800BD98: @ 800BD98
+	thumb_func_start StopTimer
+StopTimer: @ 800BD98
 	push {lr}
 	ldr r0, =gLink
 	ldrb r0, [r0]
@@ -516,7 +453,7 @@ _0800BDB4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_800BD98
+	thumb_func_end StopTimer
 
 	thumb_func_start sub_800BDCC
 sub_800BDCC: @ 800BDCC

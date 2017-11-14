@@ -282,7 +282,7 @@ _0816CE6C:
 	.pool
 _0816CE8C:
 	bl GameCubeMultiBoot_Quit
-	ldr r0, =sub_800BA38
+	ldr r0, =SerialCB
 	bl SetSerialCallback
 _0816CE96:
 	movs r0, 0

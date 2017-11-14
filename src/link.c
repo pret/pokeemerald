@@ -60,7 +60,7 @@ IWRAM_DATA u32 sPlayerDataExchangeStatus;
 IWRAM_DATA u32 gUnknown_03000D60;
 IWRAM_DATA u8 sLinkTestLastBlockSendPos;
 ALIGNED() IWRAM_DATA u8 sLinkTestLastBlockRecvPos[MAX_LINK_PLAYERS];
-IWRAM_DATA u8 gUnknown_03000D6C;
+IWRAM_DATA u8 sNumVBlanksWithoutSerialIntr;
 IWRAM_DATA bool8 gUnknown_03000D6D;
 IWRAM_DATA u16 sSendNonzeroCheck;
 IWRAM_DATA u16 gUnknown_03000D70;
@@ -159,6 +159,7 @@ static void CheckMasterOrSlave(void);
 static void InitTimer(void);
 static void EnqueueSendCmd(u16 *sendCmd);
 static void DequeueRecvCmds(u16 (*recvCmds)[CMD_LENGTH]);
+void StartTransfer(void);
 
 // .rodata
 
@@ -1919,7 +1920,7 @@ static void EnableSerial(void)
     EnableInterrupts(INTR_FLAG_SERIAL);
     REG_SIOMLT_SEND = 0;
     CpuFill32(0, &gLink, sizeof(gLink));
-    gUnknown_03000D6C = 0;
+    sNumVBlanksWithoutSerialIntr = 0;
     sSendNonzeroCheck = 0;
     gUnknown_03000D70 = 0;
     gUnknown_03000D72 = 0;
@@ -2134,5 +2135,51 @@ static void DequeueRecvCmds(u16 (*recvCmds)[CMD_LENGTH])
         gLink.receivedNothing = FALSE;
     }
     REG_IME = gLinkSavedIme;
+}
+
+void LinkVSync(void)
+{
+    if (gLink.isMaster)
+    {
+        switch (gLink.state)
+        {
+            case LINK_STATE_CONN_ESTABLISHED:
+                if (gLink.serialIntrCounter < 9)
+                {
+                    if (gLink.hardwareError != TRUE)
+                    {
+                        gLink.lag = LAG_MASTER;
+                    }
+                    else
+                    {
+                        StartTransfer();
+                    }
+                }
+                else if (gLink.lag != LAG_MASTER)
+                {
+                    gLink.serialIntrCounter = 0;
+                    StartTransfer();
+                }
+                break;
+            case LINK_STATE_HANDSHAKE:
+                StartTransfer();
+                break;
+        }
+    }
+    else if (gLink.state == LINK_STATE_CONN_ESTABLISHED || gLink.state == LINK_STATE_HANDSHAKE)
+    {
+        if (++ sNumVBlanksWithoutSerialIntr > 10)
+        {
+            if (gLink.state == LINK_STATE_CONN_ESTABLISHED)
+            {
+                gLink.lag = LAG_SLAVE;
+            }
+            if (gLink.state == LINK_STATE_HANDSHAKE)
+            {
+                gLink.playerCount = 0;
+                gLink.link_field_F = FALSE;
+            }
+        }
+    }
 }
 

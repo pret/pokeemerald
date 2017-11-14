@@ -316,10 +316,10 @@ extern void ProcessDma3Requests(void);
 
 static void VBlankIntr(void)
 {
-    if (gWirelessCommType != FALSE)
-        LinkVSync();
+    if (gWirelessCommType != 0)
+        RfuVSync();
     else if (gLinkVSyncDisabled == FALSE)
-        sub_800B9B8();
+        LinkVSync();
 
     gMain.vblankCounter1++;
 

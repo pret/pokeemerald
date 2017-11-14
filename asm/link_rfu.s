@@ -7545,13 +7545,13 @@ Rfu_IsMaster: @ 8011AB0
 	.pool
 	thumb_func_end Rfu_IsMaster
 
-	thumb_func_start LinkVSync
-LinkVSync: @ 8011ABC
+	thumb_func_start RfuVSync
+RfuVSync: @ 8011ABC
 	push {lr}
 	bl rfu_syncVBlank_
 	pop {r0}
 	bx r0
-	thumb_func_end LinkVSync
+	thumb_func_end RfuVSync
 
 	thumb_func_start sub_8011AC8
 sub_8011AC8: @ 8011AC8
