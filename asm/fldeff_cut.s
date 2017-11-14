@@ -32,7 +32,7 @@ _080D3754:
 	ldr r0, =gUnknown_0203AB40
 	adds r1, r0, 0x2
 	bl PlayerGetDestCoords
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -384,7 +384,7 @@ hm2_ruin_valley: @ 80D3A50
 	push {lr}
 	movs r0, 0x1
 	bl FieldEffectStart
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -420,7 +420,7 @@ sub_80D3A6C: @ 80D3A6C
 	thumb_func_start sub_80D3A9C
 sub_80D3A9C: @ 80D3A9C
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24

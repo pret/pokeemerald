@@ -23,7 +23,7 @@ hm2_sweet_scent: @ 8159F10
 	push {lr}
 	movs r0, 0x33
 	bl FieldEffectStart
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24

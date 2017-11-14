@@ -7,8 +7,6 @@
 
 
 
-@ 832ADD8
-	.include "data/egg_moves.inc"
 
 	.align 2
 gUnknown_0832B6C0:: @ 832B6C0

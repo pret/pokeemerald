@@ -197,12 +197,12 @@ gSpecials:: @ 81DBA64
 	def_special sp0B8_daycare
 	def_special sp0B9_daycare_relationship_comment
 	def_special sub_8070C58
-	def_special daycare_send_selected_pokemon
+	def_special StoreSelectedPokemonInDaycare
 	def_special sub_8071330
 	def_special sub_80712C0
-	def_special sub_806FF30
-	def_special sub_806FED8
-	def_special sub_806FDC4
+	def_special GetNumLevelsGainedFromDaycare
+	def_special GetDaycareCost
+	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special sub_8071614

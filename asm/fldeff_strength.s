@@ -18,7 +18,7 @@ hm_prepare_rocksmash: @ 8145DC4
 	b _08145DF2
 _08145DD8:
 	ldr r4, =gScriptResult
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -39,7 +39,7 @@ _08145DF2:
 	thumb_func_start sub_8145E0C
 sub_8145E0C: @ 8145E0C
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24

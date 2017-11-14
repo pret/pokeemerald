@@ -509,9 +509,11 @@ struct Evolution
     u16 targetSpecies;
 };
 
+#define EVOS_PER_MON 5
+
 struct EvolutionData
 {
-    struct Evolution evolutions[5];
+    struct Evolution evolutions[EVOS_PER_MON];
 };
 
 extern u8 gPlayerPartyCount;
@@ -648,6 +650,8 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
 void sub_806A1C0(u16 arg0, u8 bankIdentity);
 void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity);
 u8 GetSecretBaseTrainerPicIndex(void);
+bool8 TryIncrementMonLevel(struct Pokemon *mon);
+void BoxMonToMon(struct BoxPokemon *srcMon, struct Pokemon *dstMon);
 
 #include "sprite.h"
 

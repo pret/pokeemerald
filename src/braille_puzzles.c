@@ -13,7 +13,7 @@ extern void DrawWholeMapView(); // field_camera
 extern void SetCameraPanningCallback(void ( *callback)()); // field_camera
 extern void InstallCameraPanAheadCallback(void);
 extern void SetCameraPanning(s16 x, s16 y);
-extern u8 brm_get_pokemon_selection(void);
+extern u8 GetCursorSelectionMonId(void);
 extern void FieldEffectActiveListRemove(u8 id); // field_effect
 extern u8 oei_task_add(void);
 
@@ -220,7 +220,7 @@ bool8 ShouldDoBrailleStrengthEffect(void)
 
 void sub_8179834(void)
 {
-    gFieldEffectArguments[0] = brm_get_pokemon_selection();
+    gFieldEffectArguments[0] = GetCursorSelectionMonId();
     FieldEffectStart(FLDEFF_USE_FLY_ANCIENT_TOMB);
 }
 
@@ -256,7 +256,7 @@ bool8 ShouldDoBrailleFlyEffect(void)
 
 void sub_8179918(void)
 {
-    gFieldEffectArguments[0] = brm_get_pokemon_selection();
+    gFieldEffectArguments[0] = GetCursorSelectionMonId();
     FieldEffectStart(FLDEFF_USE_FLY_ANCIENT_TOMB);
 }
 

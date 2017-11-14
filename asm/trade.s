@@ -7948,7 +7948,7 @@ sub_807B4D0: @ 807B4D0
 	adds r1, r2
 	ldr r0, [r0]
 	adds r0, r1
-	bl sub_80D439C
+	bl ClearMailStruct
 _0807B52A:
 	ldr r4, =gUnknown_020322A0
 	ldr r0, [r4]
@@ -7985,7 +7985,7 @@ _0807B566:
 	ldr r0, =gUnknown_020321C0
 	adds r1, r0
 	adds r0, r7, 0
-	bl sub_80D460C
+	bl GiveMailToMon2
 _0807B57C:
 	mov r0, r9
 	bl sub_807B464
