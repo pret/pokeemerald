@@ -1492,8 +1492,8 @@ static void RecordedPlayerHandleChooseItem(void)
 
 static void RecordedPlayerHandleChoosePokemon(void)
 {
-    *(gBattleStruct->field_5C + gActiveBank) = RecordedBattle_ReadBankAction(gActiveBank);
-    EmitChosenMonReturnValue(1, *(gBattleStruct->field_5C + gActiveBank), NULL);
+    *(gBattleStruct->monToSwitchIntoId + gActiveBank) = RecordedBattle_ReadBankAction(gActiveBank);
+    EmitChosenMonReturnValue(1, *(gBattleStruct->monToSwitchIntoId + gActiveBank), NULL);
     RecordedPlayerBufferExecCompleted();
 }
 
