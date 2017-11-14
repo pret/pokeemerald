@@ -193,8 +193,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_8138B80
 	def_special sp0B5_daycare
 	def_special sp0B6_daycare
-	def_special sub_8070728
-	def_special sp0B8_daycare
+	def_special RejectEggFromDayCare
+	def_special GiveEggFromDaycare
 	def_special sp0B9_daycare_relationship_comment
 	def_special sub_8070C58
 	def_special StoreSelectedPokemonInDaycare

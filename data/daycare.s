@@ -18,5 +18,5 @@ gUnknown_0832B6E0:: @ 832B6E0
 gUnknown_0832B6F8:: @ 832B6F8
 	.incbin "baserom.gba", 0x32b6f8, 0x10
 
-gEggName:: @ 832B708
+sJapaneseEggNickname:: @ 832B708
 	.string "タマゴ$" @ "tamago" ("egg" in Japanese)

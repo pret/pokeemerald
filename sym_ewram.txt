@@ -544,23 +544,7 @@ gUnknown_020249B4: @ 20249B4
 	.space 0x8
 
 	.include "src/rng.o"
-
-	.align 2
-gUnknown_020249C4: @ 20249C4
-	.space 0x64
-
-gUnknown_02024A28: @ 2024A28
-	.space 0x8
-
-gUnknown_02024A30: @ 2024A30
-	.space 0x8
-
-gUnknown_02024A38: @ 2024A38
-	.space 0x14
-
-gUnknown_02024A4C: @ 2024A4C
-	.space 0x8
-
+	.include "src/daycare.o"
     .include "src/load_save.o"
 
 gUnknown_02031C58: @ 2031C58

@@ -1343,7 +1343,7 @@ ScriptGiveEgg: @ 80F92C8
 	lsrs r1, 16
 	mov r0, sp
 	movs r2, 0x1
-	bl sub_8070954
+	bl CreateEgg
 	add r2, sp, 0x64
 	movs r0, 0x1
 	strb r0, [r2]

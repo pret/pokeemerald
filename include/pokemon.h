@@ -652,6 +652,7 @@ void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity);
 u8 GetSecretBaseTrainerPicIndex(void);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
 void BoxMonToMon(struct BoxPokemon *srcMon, struct Pokemon *dstMon);
+u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
 
 #include "sprite.h"
 
