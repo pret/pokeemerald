@@ -3725,7 +3725,7 @@ _0800FBB0:
 	b _0800FC08
 	.pool
 _0800FBF4:
-	ldr r0, =gUnknown_03003020
+	ldr r0, =gLinkPartnersHeldKeys
 	mov r3, r8
 	lsls r1, r3, 1
 	adds r1, r0

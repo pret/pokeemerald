@@ -7,6 +7,9 @@
 #define QUEUE_CAPACITY 50
 #define BLOCK_BUFFER_SIZE 0x100
 
+#define LINK_SLAVE 0
+#define LINK_MASTER 8
+
 #define LINK_STAT_LOCAL_ID               0x00000003
 #define LINK_STAT_PLAYER_COUNT           0x0000001C
 #define LINK_STAT_PLAYER_COUNT_SHIFT     2
@@ -16,8 +19,23 @@
 #define LINK_STAT_CONN_ESTABLISHED_SHIFT 6
 #define LINK_STAT_RECEIVED_NOTHING       0x00000100
 #define LINK_STAT_RECEIVED_NOTHING_SHIFT 8
+#define LINK_STAT_UNK_FLAG_9             0x00000200
+#define LINK_STAT_UNK_FLAG_9_SHIFT       9
 #define LINK_STAT_ERRORS                 0x0007F000
 #define LINK_STAT_ERRORS_SHIFT           12
+
+#define LINK_STAT_ERROR_HARDWARE         0x00001000
+#define LINK_STAT_ERROR_HARDWARE_SHIFT   12
+#define LINK_STAT_ERROR_CHECKSUM         0x00002000
+#define LINK_STAT_ERROR_CHECKSUM_SHIFT   13
+#define LINK_STAT_ERROR_QUEUE_FULL       0x00004000
+#define LINK_STAT_ERROR_QUEUE_FULL_SHIFT 14
+#define LINK_STAT_ERROR_LAG_MASTER       0x00010000
+#define LINK_STAT_ERROR_LAG_MASTER_SHIFT 16
+#define LINK_STAT_ERROR_INVALID_ID       0x00020000
+#define LINK_STAT_ERROR_INVALID_ID_SHIFT 17
+#define LINK_STAT_ERROR_LAG_SLAVE        0x00040000
+#define LINK_STAT_ERROR_LAG_SLAVE_SHIFT  18
 
 #define EXTRACT_PLAYER_COUNT(status) \
 (((status) & LINK_STAT_PLAYER_COUNT) >> LINK_STAT_PLAYER_COUNT_SHIFT)
@@ -29,6 +47,21 @@
 (((status) >> LINK_STAT_RECEIVED_NOTHING_SHIFT) & 1)
 #define EXTRACT_LINK_ERRORS(status) \
 (((status) & LINK_STAT_ERRORS) >> LINK_STAT_ERRORS_SHIFT)
+
+#define LINKCMD_SEND_LINK_TYPE 0x2222
+#define LINKCMD_0x2FFE             0x2FFE
+#define LINKCMD_SEND_HELD_KEYS     0x4444
+#define LINKCMD_0x5555             0x5555
+#define LINKCMD_0x5566             0x5566
+#define LINKCMD_0x5FFF             0x5FFF
+#define LINKCMD_0x6666             0x6666
+#define LINKCMD_0x7777             0x7777
+#define LINKCMD_CONT_BLOCK         0x8888
+#define LINKCMD_0xAAAA             0xAAAA
+#define LINKCMD_0xAAAB             0xAAAB
+#define LINKCMD_INIT_BLOCK         0xBBBB
+#define LINKCMD_SEND_HELD_KEYS_2   0xCAFE
+#define LINKCMD_0xCCCC             0xCCCC
 
 struct LinkStatus
 {
@@ -215,13 +248,13 @@ void sub_800B524(struct LinkPlayer *linkPlayer);
 u8 GetSioMultiSI(void);
 void sub_800B9B8(void);
 
-extern u16 gUnknown_03003020[6];
+extern u16 gLinkPartnersHeldKeys[6];
 extern u32 gLinkDebugSeed;
 extern struct LinkPlayerBlock gLocalLinkPlayerBlock;
 extern bool8 gLinkErrorOccurred;
 extern u32 gLinkDebugFlags;
-extern bool8 gUnknown_03003078[MAX_LINK_PLAYERS];
-extern u8 gUnknown_0300307C[MAX_LINK_PLAYERS];
+extern bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS];
+extern u8 gBlockReceivedStatus[MAX_LINK_PLAYERS];
 extern u16 gLinkHeldKeys;
 extern u32 gLinkStatus;
 extern u8 gUnknown_030030E4;
@@ -240,8 +273,8 @@ extern u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
 extern u8 gBlockRequestType;
 extern u8 gLastSendQueueCount;
 extern u8 gLastRecvQueueCount;
-extern u16 gUnknown_03004134;
-extern u32 gUnknown_03003074;
+extern u16 gLinkSavedIme;
+extern u32 gFiller_03003074;
 extern u32 gFiller_03003154;
 extern u32 gFiller_03003158;
 extern u32 gFiller_0300315c;

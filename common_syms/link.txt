@@ -1,11 +1,11 @@
-gUnknown_03003020
+gLinkPartnersHeldKeys
 gLinkDebugSeed
 gLocalLinkPlayerBlock
 gLinkErrorOccurred
 gLinkDebugFlags
-gUnknown_03003074
-gUnknown_03003078
-gUnknown_0300307C
+gFiller_03003074
+gRemoteLinkPlayersNotReceived
+gBlockReceivedStatus
 gFiller_03003080
 gLinkHeldKeys
 gRecvCmds
@@ -32,6 +32,6 @@ gFiller_0300315c
 gLastSendQueueCount
 gLink
 gLastRecvQueueCount
-gUnknown_03004134
+gLinkSavedIme
 gFiller_03004138
 gFiller_0300413C

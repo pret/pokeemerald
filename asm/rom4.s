@@ -4578,7 +4578,7 @@ c1_link_related: @ 8086BD8
 _08086BF2:
 	ldr r0, =gUnknown_03005DB4
 	ldrb r4, [r0]
-	ldr r0, =gUnknown_03003020
+	ldr r0, =gLinkPartnersHeldKeys
 	adds r1, r4, 0
 	bl sub_8086F38
 	ldr r0, =gUnknown_03000E14
@@ -4610,7 +4610,7 @@ sub_8086C2C: @ 8086C2C
 	thumb_func_start sub_8086C40
 sub_8086C40: @ 8086C40
 	push {lr}
-	ldr r0, =gUnknown_03003020
+	ldr r0, =gLinkPartnersHeldKeys
 	bl sub_808709C
 	pop {r0}
 	bx r0
