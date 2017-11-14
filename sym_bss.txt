@@ -56,7 +56,8 @@ gUnknown_030011F7: @ 30011F7
 	.space 0x1
 
     .include "src/starter_choose.o"
-    .space 0x2
+    
+    .align 0x2
 
 gUnknown_030011FC: @ 30011FC
 	.space 0x2
