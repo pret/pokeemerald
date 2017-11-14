@@ -2311,7 +2311,7 @@ _080BC870:
 	movs r2, 0xBE
 	bl LoadPalette
 _080BC87A:
-	bl sub_8098C64
+	bl GetOverworldTextboxPalettePtr
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -8950,7 +8950,7 @@ _080C028E:
 	add r4, sp, 0x10
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_81DB468
+	bl CopyMonCategoryText
 	adds r0, r4, 0
 	b _080C02AE
 	.pool

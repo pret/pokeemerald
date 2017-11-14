@@ -386,7 +386,7 @@ bool8 sub_81215EC(void)
             CopyBgTilemapBufferToVram(2);
             break;
         case 12:
-            LoadPalette(sub_8098C64(), 240, 32);
+            LoadPalette(GetOverworldTextboxPalettePtr(), 240, 32);
             gPlttBufferUnfaded[250] = gUnknown_0859F2B8[gUnknown_0203A134->mailType].color10;
             gPlttBufferFaded[250] = gUnknown_0859F2B8[gUnknown_0203A134->mailType].color10;
             gPlttBufferUnfaded[251] = gUnknown_0859F2B8[gUnknown_0203A134->mailType].color12;

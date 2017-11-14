@@ -52,8 +52,8 @@ _081DB462:
 	bx r1
 	thumb_func_end sub_81DB41C
 
-	thumb_func_start sub_81DB468
-sub_81DB468: @ 81DB468
+	thumb_func_start CopyMonCategoryText
+CopyMonCategoryText: @ 81DB468
 	push {lr}
 	adds r2, r0, 0
 	adds r0, r1, 0
@@ -70,7 +70,7 @@ sub_81DB468: @ 81DB468
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81DB468
+	thumb_func_end CopyMonCategoryText
 
 	thumb_func_start sub_81DB494
 sub_81DB494: @ 81DB494
