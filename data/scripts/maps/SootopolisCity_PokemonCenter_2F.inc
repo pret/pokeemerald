@@ -1,0 +1,19 @@
+SootopolisCity_PokemonCenter_2F_MapScripts:: @ 822676D
+	map_script 2, SootopolisCity_PokemonCenter_2F_MapScript2_276C3B
+	map_script 4, SootopolisCity_PokemonCenter_2F_MapScript2_276B6C
+	map_script 1, SootopolisCity_PokemonCenter_2F_MapScript1_276BBE
+	map_script 3, SootopolisCity_PokemonCenter_2F_MapScript1_276ACF
+	.byte 0
+
+SootopolisCity_PokemonCenter_2F_EventScript_226782:: @ 8226782
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+SootopolisCity_PokemonCenter_2F_EventScript_226788:: @ 8226788
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+SootopolisCity_PokemonCenter_2F_EventScript_22678E:: @ 822678E
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
+

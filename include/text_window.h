@@ -16,7 +16,7 @@ void sub_8098858(u8 windowId, u16 tileNum, u8 palNum);
 void sub_80989E0(u8 windowId, u16 tileNum, u8 palNum);
 void rbox_fill_rectangle(u8 windowId);
 const u16* stdpal_get(u8 id);
-const u16* sub_8098C64(void);
+const u16* GetOverworldTextboxPalettePtr(void);
 void sub_8098C6C(u8 bg, u16 destOffset, u8 palOffset);
 
 #endif // GUARD_TEXT_WINDOW_H

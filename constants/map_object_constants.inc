@@ -39,7 +39,7 @@
 	.set MAP_OBJ_GFX_SCHOOL_KID_M,               38
 	.set MAP_OBJ_GFX_MANIAC,                     39
 	.set MAP_OBJ_GFX_HEX_MANIAC,                 40
-	.set MAP_OBJ_GFX_RAYQUAZA,                    41
+	.set MAP_OBJ_GFX_RAYQUAZA_1,                 41
 	.set MAP_OBJ_GFX_SWIMMER_M,                  42
 	.set MAP_OBJ_GFX_SWIMMER_F,                  43
 	.set MAP_OBJ_GFX_BLACK_BELT,                 44
@@ -68,12 +68,12 @@
 	.set MAP_OBJ_GFX_REPORTER_M,                 67
 	.set MAP_OBJ_GFX_REPORTER_F,                 68
 	.set MAP_OBJ_GFX_BARD,                       69
-	.set MAP_OBJ_GFX_HIPSTER,                    70
-	.set MAP_OBJ_GFX_TRADER,                     71
-	.set MAP_OBJ_GFX_STORYTELLER,                72
-	.set MAP_OBJ_GFX_GIDDY,                      73
-	.set MAP_OBJ_GFX_UNUSED_MAUVILLE_OLD_MAN_1,  74
-	.set MAP_OBJ_GFX_UNUSED_MAUVILLE_OLD_MAN_2,  75
+	.set MAP_OBJ_GFX_ANABEL,                     70
+	.set MAP_OBJ_GFX_TUCKER,                     71
+	.set MAP_OBJ_GFX_GRETA,                      72
+	.set MAP_OBJ_GFX_SPENSER,                    73
+	.set MAP_OBJ_GFX_NOLAND,                     74
+	.set MAP_OBJ_GFX_LUCY,                       75
 	.set MAP_OBJ_GFX_UNUSED_NATU_DOLL,           76
 	.set MAP_OBJ_GFX_UNUSED_MAGNEMITE_DOLL,      77
 	.set MAP_OBJ_GFX_UNUSED_SQUIRTLE_DOLL,       78
@@ -93,10 +93,10 @@
 	.set MAP_OBJ_GFX_MAY_SURFING,                92
 	.set MAP_OBJ_GFX_MAY_FIELD_MOVE,             93
 	.set MAP_OBJ_GFX_TRUCK,                      94
-	.set MAP_OBJ_GFX_MACHOKE_CARRYING_BOX,       95
-	.set MAP_OBJ_GFX_MACHOKE_FACING_AWAY,        96
+	.set MAP_OBJ_GFX_VIGAROTH_CARRYING_BOX,      95
+	.set MAP_OBJ_GFX_VIGAROTH_FACING_AWAY,       96
 	.set MAP_OBJ_GFX_BIRCHS_BAG,                 97
-	.set MAP_OBJ_GFX_ZIGZAGOON,                  98
+	.set MAP_OBJ_GFX_ZIGZAGOON_1,                98
 	.set MAP_OBJ_GFX_ARTIST,                     99
 	.set MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL,      100
 	.set MAP_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE,   101
@@ -205,8 +205,8 @@
 	.set MAP_OBJ_GFX_KECLEON_1,                 204
 	.set MAP_OBJ_GFX_KYOGRE_2,                  205
 	.set MAP_OBJ_GFX_GROUDON_2,                 206
-	.set MAP_OBJ_GFX_RAYQUAZA_2,                  207
-	.set MAP_OBJ_GFX_ZIGZAGOON_2,                 208
+	.set MAP_OBJ_GFX_RAYQUAZA_2,                207
+	.set MAP_OBJ_GFX_ZIGZAGOON_2,               208
 	.set MAP_OBJ_GFX_PIKACHU,                   209
 	.set MAP_OBJ_GFX_AZUMARILL,                 210
 	.set MAP_OBJ_GFX_WINGULL,                   211
@@ -216,6 +216,34 @@
 	.set MAP_OBJ_GFX_MOM,                       215
 	.set MAP_OBJ_GFX_LINK_BRENDAN,              216
 	.set MAP_OBJ_GFX_LINK_MAY,                  217
+	.set MAP_OBJ_GFX_JUAN,                      218
+	.set MAP_OBJ_GFX_SCOTT,                     219
+	.set MAP_OBJ_GFX_POOCHYENA,                 220
+	.set MAP_OBJ_GFX_KYOGRE_3,                  221
+	.set MAP_OBJ_GFX_GROUDON_3,                 222
+	.set MAP_OBJ_GFX_MYSTERY_GIFT_MAN,          223
+	.set MAP_OBJ_GFX_TRICK_HOUSE_STATUE,        224
+	.set MAP_OBJ_GFX_KIRLIA,                    225
+	.set MAP_OBJ_GFX_DUSCLOPS,                  226
+	.set MAP_OBJ_GFX_UNION_ROOM_NURSE,          227
+	.set MAP_OBJ_GFX_SUDOWOODO,                 228
+	.set MAP_OBJ_GFX_MEW,                       229
+	.set MAP_OBJ_GFX_RED,                       230
+	.set MAP_OBJ_GFX_LEAF,                      231
+	.set MAP_OBJ_GFX_DEOXYS,                    232
+	.set MAP_OBJ_GFX_DEOXYS_TRIANGLE,           233
+	.set MAP_OBJ_GFX_BRANDON,                   234
+	.set MAP_OBJ_GFX_LINK_RS_BRENDAN,           235
+	.set MAP_OBJ_GFX_LINK_RS_MAY,               236
+	.set MAP_OBJ_GFX_LUGIA,                     237
+	.set MAP_OBJ_GFX_HOOH,                      238
+	.set MAP_OBJ_GFX_BARD_2,                    239
+	.set MAP_OBJ_GFX_HIPSTER,                   240
+	.set MAP_OBJ_GFX_TRADER,                    241
+	.set MAP_OBJ_GFX_STORYTELLER,               242
+	.set MAP_OBJ_GFX_GIDDY,                     243
+	.set MAP_OBJ_GFX_PLACEHOLDER_1,             244
+	.set MAP_OBJ_GFX_PLACEHOLDER_2,             245
 
 	.set SHADOW_SIZE_S,  0
 	.set SHADOW_SIZE_M,  1

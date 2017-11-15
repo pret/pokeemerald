@@ -14,7 +14,7 @@ extern void CB2_ChooseBerry(void);
 extern const u8* GetFieldObjectScriptPointerForComparison(void);
 extern bool8 sub_8092E9C(u8, u8, u8);
 
-extern u16 gScriptItemId;
+extern u16 gSpecialVar_ItemId;
 
 extern const u8 BerryTreeScript[];
 
@@ -1169,7 +1169,7 @@ void FieldObjectInteractionGetBerryTreeData(void)
     id = FieldObjectGetBerryTreeId(gSelectedMapObject);
     berry = GetBerryTypeByBerryTreeId(id);
     ResetBerryTreeSparkleFlag(id);
-    unk = gScriptLastTalked;
+    unk = gSpecialVar_LastTalked;
     num = gSaveBlock1Ptr->location.mapNum;
     group = gSaveBlock1Ptr->location.mapGroup;
     if (sub_8092E9C(unk, num, group))
@@ -1202,7 +1202,7 @@ void Bag_ChooseBerry(void)
 
 void FieldObjectInteractionPlantBerryTree(void)
 {
-    u8 berry = ItemIdToBerryType(gScriptItemId);
+    u8 berry = ItemIdToBerryType(gSpecialVar_ItemId);
 
     PlantBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject), berry, 1, TRUE);
     FieldObjectInteractionGetBerryTreeData();
@@ -1219,7 +1219,7 @@ void FieldObjectInteractionPickBerryTree(void)
 void FieldObjectInteractionRemoveBerryTree(void)
 {
     RemoveBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject));
-    sub_8092EF0(gScriptLastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    sub_8092EF0(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 u8 PlayerHasBerries(void)

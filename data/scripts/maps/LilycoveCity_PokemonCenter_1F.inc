@@ -1,0 +1,68 @@
+LilycoveCity_PokemonCenter_1F_MapScripts:: @ 821C5B2
+	map_script 3, LilycoveCity_PokemonCenter_1F_MapScript1_21C5BD
+	map_script 5, LilycoveCity_PokemonCenter_1F_MapScript1_277C30
+	.byte 0
+
+LilycoveCity_PokemonCenter_1F_MapScript1_21C5BD: @ 821C5BD
+	setrespawn 8
+	goto LilycoveCity_PokemonCenter_1F_EventScript_21C5C6
+	end
+
+LilycoveCity_PokemonCenter_1F_EventScript_21C5C6:: @ 821C5C6
+	special sub_818D9C0
+	compare_var_to_value VAR_RESULT, 0
+	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_21C5E0
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_21C5E4
+	end
+
+LilycoveCity_PokemonCenter_1F_EventScript_21C5E0:: @ 821C5E0
+	setflag FLAG_0x3E1
+	end
+
+LilycoveCity_PokemonCenter_1F_EventScript_21C5E4:: @ 821C5E4
+	clearflag FLAG_0x3E1
+	end
+
+LilycoveCity_PokemonCenter_1F_EventScript_21C5E8:: @ 821C5E8
+	setvar VAR_0x800B, 1
+	call LilycoveCity_PokemonCenter_1F_EventScript_27191E
+	waitmessage
+	waitbuttonpress
+	release
+	end
+
+LilycoveCity_PokemonCenter_1F_EventScript_21C5F6:: @ 821C5F6
+	msgbox LilycoveCity_PokemonCenter_1F_Text_21C61E, 2
+	end
+
+LilycoveCity_PokemonCenter_1F_EventScript_21C5FF:: @ 821C5FF
+	lock
+	faceplayer
+	checkflag FLAG_BADGE07_GET
+	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_21C614
+	msgbox LilycoveCity_PokemonCenter_1F_Text_21C69D, 4
+	release
+	end
+
+LilycoveCity_PokemonCenter_1F_EventScript_21C614:: @ 821C614
+	msgbox LilycoveCity_PokemonCenter_1F_Text_21C6F6, 4
+	release
+	end
+
+LilycoveCity_PokemonCenter_1F_Text_21C61E: @ 821C61E
+	.string "I wonder how many kinds of POKéMON\n"
+	.string "there are in the world.\p"
+	.string "It’d be great to cross seas and\n"
+	.string "trade POKéMON with people far away.$"
+
+LilycoveCity_PokemonCenter_1F_Text_21C69D: @ 821C69D
+	.string "I’ve been hearing about some rotten\n"
+	.string "scoundrels who steal POKéMON and rip\l"
+	.string "off METEORITES.$"
+
+LilycoveCity_PokemonCenter_1F_Text_21C6F6: @ 821C6F6
+	.string "Those rotten scoundrels who steal\n"
+	.string "POKéMON and rip off METEORITES…\p"
+	.string "I haven’t seen them around recently.$"
+

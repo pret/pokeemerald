@@ -7,6 +7,7 @@
 #include "battle_2.h"
 #include "battle_ai_switch_items.h"
 #include "battle_gfx_sfx_util.h"
+#include "battle_util2.h"
 
 /*
     Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
@@ -253,10 +254,20 @@
 #define MOVE_TARGET_FOES_AND_ALLY   0x20
 #define MOVE_TARGET_OPPONENTS_FIELD 0x40
 
+// defines for the u8 array gTypeEffectiveness
+#define TYPE_EFFECT_ATK_TYPE(i)((gTypeEffectiveness[i + 0]))
+#define TYPE_EFFECT_DEF_TYPE(i)((gTypeEffectiveness[i + 1]))
+#define TYPE_EFFECT_MULTIPLIER(i)((gTypeEffectiveness[i + 2]))
+
+// defines for the gTypeEffectiveness multipliers
 #define TYPE_MUL_NO_EFFECT          0
 #define TYPE_MUL_NOT_EFFECTIVE      5
 #define TYPE_MUL_NORMAL             10
 #define TYPE_MUL_SUPER_EFFECTIVE    20
+
+// special type table Ids
+#define TYPE_FORESIGHT  0xFE
+#define TYPE_ENDTABLE   0xFF
 
 #define BS_GET_TARGET                   0
 #define BS_GET_ATTACKER                 1
@@ -362,8 +373,8 @@ struct DisableStruct
     /*0x0D*/ u8 unkD;
     /*0x0E*/ u8 encoreTimer1 : 4;
     /*0x0E*/ u8 encoreTimer2 : 4;
-    /*0x0F*/ u8 perishSong1 : 4;
-    /*0x0F*/ u8 perishSong2 : 4;
+    /*0x0F*/ u8 perishSongTimer1 : 4;
+    /*0x0F*/ u8 perishSongTimer2 : 4;
     /*0x10*/ u8 furyCutterCounter;
     /*0x11*/ u8 rolloutCounter1 : 4;
     /*0x11*/ u8 rolloutCounter2 : 4;
@@ -612,7 +623,7 @@ struct BattleStruct
     u8 sentInPokes;
     bool8 selectionScriptFinished[BATTLE_BANKS_COUNT];
     u8 field_58[4];
-    u8 field_5C[4];
+    u8 monToSwitchIntoId[BATTLE_BANKS_COUNT];
     u8 field_60[4][3];
     u8 runTries;
     u8 caughtMonNick[11];
@@ -684,7 +695,7 @@ struct BattleStruct
     u8 field_1A4[96];
     u8 field_204[104];
     u8 field_26C[40];
-    u8 field_294[4];
+    u8 AI_monToSwitchIntoId[BATTLE_BANKS_COUNT];
     u8 field_298[8];
     u8 field_2A0;
     u8 field_2A1;
@@ -870,13 +881,6 @@ bool8 LoadChosenBattleElement(u8 caseId);
 void DrawMainBattleBackground(void);
 void task00_0800F6FC(u8 taskId);
 
-// battle_5
-void AllocateBattleResrouces(void);
-void FreeBattleResources(void);
-void AdjustFriendshipOnBattleFaint(u8 bank);
-void sub_80571DC(u8 bank, u8 arg1);
-u32 sub_805725C(u8 bank);
-
 enum
 {
     BACK_PIC_BRENDAN,
@@ -978,6 +982,9 @@ extern struct BattleSpriteData *gBattleSpritesDataPtr;
 
 extern u8 *gLinkBattleSendBuffer;
 extern u8 *gLinkBattleRecvBuffer;
+
+extern u8 *gUnknown_0202305C;
+extern u8 *gUnknown_02023060;
 
 // Move this somewhere else
 

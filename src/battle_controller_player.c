@@ -46,7 +46,7 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 extern u16 gPartnerTrainerId;
 extern struct SpriteTemplate gUnknown_0202499C;
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
-extern u16 gScriptItemId;
+extern u16 gSpecialVar_ItemId;
 extern u8 gUnknown_0203CEE8;
 extern u8 gUnknown_0203CEE9;
 extern u8 gUnknown_0203CF00[];
@@ -1416,7 +1416,7 @@ static void CompleteWhenChoseItem(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        EmitOneReturnValue(1, gScriptItemId);
+        EmitOneReturnValue(1, gSpecialVar_ItemId);
         PlayerBufferExecCompleted();
     }
 }

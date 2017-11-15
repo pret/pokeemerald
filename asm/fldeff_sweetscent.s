@@ -205,7 +205,7 @@ sub_815A090: @ 815A090
 	lsls r2, 1
 	bl CpuFastSet
 	bl sub_80AC3E4
-	ldr r0, =gUnknown_08290CAE
+	ldr r0, =EventScript_290CAE
 	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask

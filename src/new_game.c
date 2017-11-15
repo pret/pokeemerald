@@ -59,7 +59,7 @@ extern void ResetContestLinkResults(void);
 extern void ResetPokeJumpResults(void);
 extern void SetBerryPowder(u32* powder, u32 newValue);
 
-extern u8 gUnknown_082715DE[];
+extern u8 EventScript_2715DE[];
 
 void WriteUnalignedWord(u32 var, u8 *dataPtr)
 {
@@ -198,7 +198,7 @@ void NewGameInitData(void)
     ResetFanClub();
     ResetLotteryCorner();
     WarpToTruck();
-    ScriptContext2_RunNewScript(gUnknown_082715DE);
+    ScriptContext2_RunNewScript(EventScript_2715DE);
     ResetMiniGamesResults();
     copy_strings_to_sav1();
 	SetLilycoveLady();
