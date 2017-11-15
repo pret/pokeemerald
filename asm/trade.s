@@ -5112,7 +5112,7 @@ _08079DDE:
 _08079DF0:
 	add r0, sp, 0xC
 	movs r1, 0
-	bl sub_8070ECC
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	movs r2, 0x83
 	cmp r0, 0
@@ -5122,7 +5122,7 @@ _08079DF0:
 _08079E04:
 	add r0, sp, 0xC
 	movs r1, 0xFE
-	bl sub_8070ECC
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	movs r2, 0x83
 	cmp r0, 0

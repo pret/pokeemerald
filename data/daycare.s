@@ -9,13 +9,13 @@
 
 
 	.align 2
-gUnknown_0832B6C0:: @ 832B6C0
+sDaycareLevelMenuWindowTemplate:: @ 832B6C0
 	.incbin "baserom.gba", 0x32b6c0, 0x20
 
-gUnknown_0832B6E0:: @ 832B6E0
+sDaycareListMenuLevelTemplate:: @ 832B6E0
 	.incbin "baserom.gba", 0x32b6e0, 0x18
 
-gUnknown_0832B6F8:: @ 832B6F8
+sCompatibilityMessages:: @ 832B6F8
 	.incbin "baserom.gba", 0x32b6f8, 0x10
 
 sJapaneseEggNickname:: @ 832B708

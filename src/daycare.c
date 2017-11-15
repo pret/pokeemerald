@@ -11,6 +11,13 @@
 #include "main.h"
 #include "moves.h"
 #include "egg_hatch.h"
+#include "text.h"
+#include "menu.h"
+#include "international_string_util.h"
+#include "script.h"
+#include "task.h"
+#include "window.h"
+#include "list_menu.h"
 
 #define EGG_MOVES_ARRAY_COUNT           10
 #define EGG_LVL_UP_MOVES_ARRAY_COUNT    50
@@ -19,6 +26,12 @@ extern u16 gMoveToLearn;
 
 extern u8 GetCursorSelectionMonId(void);
 extern u16 ItemIdToBattleMoveId(u16);
+extern s32 ListMenuHandleInput(u8);
+extern void sub_81AE6C8(u8, u16*, u16*);
+extern void sub_819746C(u8, bool8);
+extern void sub_81973FC(u8, bool8);
+extern void sub_81B9328(void);
+extern void c2_exit_to_overworld_2_switch(void);
 
 // this file's functions
 static void ClearDaycareMonMisc(struct DaycareMiscMon *misc);
@@ -34,6 +47,9 @@ EWRAM_DATA static u16 sHatchedEggMotherMoves[4] = {0};
 
 #include "data/pokemon/egg_moves.h"
 
+extern const struct WindowTemplate sDaycareLevelMenuWindowTemplate;
+extern const struct ListMenuTemplate sDaycareListMenuLevelTemplate;
+extern const u8 *sCompatibilityMessages[];
 extern const u8 sJapaneseEggNickname[];
 
 u8 *GetMonNick(struct Pokemon *mon, u8 *dest)
@@ -821,7 +837,7 @@ void GiveEggFromDaycare(void)
     _GiveEggFromDaycare(&gSaveBlock1Ptr->daycare);
 }
 
-bool8 _DoEggActions_CheckHatch(struct DayCare *daycare)
+static bool8 _DoEggActions_CheckHatch(struct DayCare *daycare)
 {
     u32 i, validEggs = 0;
 
@@ -870,4 +886,387 @@ bool8 _DoEggActions_CheckHatch(struct DayCare *daycare)
     }
 
     return FALSE; // no hatching
+}
+
+bool8 DoEggActions_CheckHatch(void)
+{
+    return _DoEggActions_CheckHatch(&gSaveBlock1Ptr->daycare);
+}
+
+static bool8 IsEggPending(struct DayCare *daycare)
+{
+    return (daycare->offspringPersonality != 0);
+}
+
+// gStringVar1 = first mon's nickname
+// gStringVar2 = second mon's nickname
+// gStringVar3 = first mon trainer's name
+void _GetDaycareMonNicknames(struct DayCare *daycare)
+{
+    u8 text[12];
+    if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_SPECIES) != 0)
+    {
+        GetBoxMonNick(&daycare->mons[0].mon, gStringVar1);
+        GetBoxMonData(&daycare->mons[0].mon, MON_DATA_OT_NAME, text);
+        StringCopy(gStringVar3, text);
+    }
+
+    if (GetBoxMonData(&daycare->mons[1].mon, MON_DATA_SPECIES) != 0)
+    {
+        GetBoxMonNick(&daycare->mons[1].mon, gStringVar2);
+    }
+}
+
+u16 GetSelectedMonNickAndSpecies(void)
+{
+    GetBoxMonNick(&gPlayerParty[GetCursorSelectionMonId()].box, gStringVar1);
+    return GetBoxMonData(&gPlayerParty[GetCursorSelectionMonId()].box, MON_DATA_SPECIES);
+}
+
+void GetDaycareMonNicknames(void)
+{
+    _GetDaycareMonNicknames(&gSaveBlock1Ptr->daycare);
+}
+
+u8 GetDaycareState(void)
+{
+    // The daycare can be in 4 possible states:
+    //   0: default state--no deposited mons, no egg
+    //   1: there is an egg waiting for the player to pick it up
+    //   2: there is a single pokemon in the daycare
+    //   3: there are two pokemon in the daycare, no egg
+
+    u8 numMons;
+    if (IsEggPending(&gSaveBlock1Ptr->daycare))
+    {
+        // There is an Egg waiting for the player.
+        return 1;
+    }
+
+    numMons = CountPokemonInDaycare(&gSaveBlock1Ptr->daycare);
+    if (numMons != 0)
+    {
+        return numMons + 1;
+    }
+
+    return 0;
+}
+
+u8 GetDaycarePokemonCount(void)
+{
+    u8 ret = CountPokemonInDaycare(&gSaveBlock1Ptr->daycare);
+    if (ret)
+        return ret;
+
+    return 0;
+}
+
+static bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
+{
+    // Determine if the two given egg group lists contain any of the
+    // same egg groups.
+    s32 i, j;
+
+    for (i = 0; i < 2; i++)
+    {
+        for (j = 0; j < 2; j++)
+        {
+            if (eggGroups1[i] == eggGroups2[j])
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
+{
+    u32 i;
+    u16 eggGroups[2][2];
+    u16 species[2];
+    u32 trainerIds[2];
+    u32 genders[2];
+
+    for (i = 0; i < 2; i++)
+    {
+        u32 personality;
+
+        species[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SPECIES);
+        trainerIds[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_OT_ID);
+        personality = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_PERSONALITY);
+        genders[i] = GetGenderFromSpeciesAndPersonality(species[i], personality);
+        eggGroups[i][0] = gBaseStats[species[i]].eggGroup1;
+        eggGroups[i][1] = gBaseStats[species[i]].eggGroup2;
+    }
+
+    // check unbreedable egg group
+    if (eggGroups[0][0] == EGG_GROUP_UNDISCOVERED || eggGroups[1][0] == EGG_GROUP_UNDISCOVERED)
+        return 0;
+    // two Ditto can't breed
+    if (eggGroups[0][0] == EGG_GROUP_DITTO && eggGroups[1][0] == EGG_GROUP_DITTO)
+        return 0;
+
+    // now that we checked, one ditto can breed with any other mon
+    if (eggGroups[0][0] == EGG_GROUP_DITTO || eggGroups[1][0] == EGG_GROUP_DITTO)
+    {
+        if (trainerIds[0] == trainerIds[1]) // same trainer
+            return 20;
+
+        return 50; // different trainers, more chance of poke sex
+    }
+    else
+    {
+        if (genders[0] == genders[1]) // no homo
+            return 0;
+        if (genders[0] == MON_GENDERLESS || genders[1] == MON_GENDERLESS)
+            return 0;
+        if (!EggGroupsOverlap(eggGroups[0], eggGroups[1])) // not compatible with each other
+            return 0;
+
+        if (species[0] == species[1]) // same species
+        {
+            if (trainerIds[0] == trainerIds[1]) // same species and trainer
+                return 50;
+
+            return 70; // different trainers, same species
+        }
+        else
+        {
+            if (trainerIds[0] != trainerIds[1]) // different trainers, different species
+                return 50;
+
+            return 20; // different species, same trainer
+        }
+    }
+}
+
+u8 GetDaycareCompatibilityScoreFromSave(void)
+{
+    return GetDaycareCompatibilityScore(&gSaveBlock1Ptr->daycare);
+}
+
+void SetDaycareCompatibilityString(void)
+{
+    u8 whichString;
+    u8 relationshipScore;
+
+    relationshipScore = GetDaycareCompatibilityScoreFromSave();
+    whichString = 0;
+    if (relationshipScore == 0)
+        whichString = 3;
+    if (relationshipScore == 20)
+        whichString = 2;
+    if (relationshipScore == 50)
+        whichString = 1;
+    if (relationshipScore == 70)
+        whichString = 0;
+
+    StringCopy(gStringVar4, sCompatibilityMessages[whichString]);
+}
+
+bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio)
+{
+    u8 i;
+    u8 symbolsCount[2]; // male, female
+    symbolsCount[0] = symbolsCount[1] = 0;
+
+    for (i = 0; name[i] != EOS; i++)
+    {
+        if (name[i] == CHAR_MALE)
+            symbolsCount[0]++;
+        if (name[i] == CHAR_FEMALE)
+            symbolsCount[1]++;
+    }
+
+    if (genderRatio == MON_MALE   && symbolsCount[0] != 0 && symbolsCount[1] == 0)
+        return TRUE;
+    if (genderRatio == MON_FEMALE && symbolsCount[1] != 0 && symbolsCount[0] == 0)
+        return TRUE;
+
+    return FALSE;
+}
+
+extern const u8 gText_MaleSymbol4[];
+extern const u8 gText_FemaleSymbol4[];
+extern const u8 gText_GenderlessSymbol[];
+extern const u8 gText_NewLine2[];
+extern const u8 gText_Exit4[];
+extern const u8 gText_Lv[];
+
+static u8 *AppendGenderSymbol(u8 *name, u8 gender)
+{
+    if (gender == MON_MALE)
+    {
+        if (!NameHasGenderSymbol(name, MON_MALE))
+            return StringAppend(name, gText_MaleSymbol4);
+    }
+    else if (gender == MON_FEMALE)
+    {
+        if (!NameHasGenderSymbol(name, MON_FEMALE))
+            return StringAppend(name, gText_FemaleSymbol4);
+    }
+
+    return StringAppend(name, gText_GenderlessSymbol);
+}
+
+u8 *AppendMonGenderSymbol(u8 *name, struct BoxPokemon *boxMon)
+{
+    return AppendGenderSymbol(name, GetBoxMonGender(boxMon));
+}
+
+static void GetDaycareLevelMenuText(struct DayCare *daycare, u8 *dest)
+{
+    u8 monNames[2][20];
+    u8 i;
+
+    *dest = EOS;
+    for (i = 0; i < 2; i++)
+    {
+        GetBoxMonNick(&daycare->mons[i].mon, monNames[i]);
+        AppendMonGenderSymbol(monNames[i], &daycare->mons[i].mon);
+    }
+
+    StringCopy(dest, monNames[0]);
+    StringAppend(dest, gText_NewLine2);
+    StringAppend(dest, monNames[1]);
+    StringAppend(dest, gText_NewLine2);
+    StringAppend(dest, gText_Exit4);
+}
+
+static void GetDaycareLevelMenuLevelText(struct DayCare *daycare, u8 *dest)
+{
+    u8 i;
+    u8 level;
+    u8 text[20];
+
+    *dest = EOS;
+    for (i = 0; i < 2; i++)
+    {
+        StringAppend(dest, gText_Lv);
+        level = GetLevelAfterDaycareSteps(&daycare->mons[i].mon, daycare->mons[i].steps);
+        ConvertIntToDecimalStringN(text, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringAppend(dest, text);
+        StringAppend(dest, gText_NewLine2);
+    }
+}
+
+void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
+{
+    struct TextSubPrinter printer;
+
+    printer.current_text_offset = text;
+    printer.windowId = windowId;
+    printer.fontId = 1;
+    printer.x = x;
+    printer.y = y;
+    printer.currentX = x;
+    printer.currentY = y;
+    printer.fontColor_l = 0;
+    gTextFlags.flag_1 = 0;
+    printer.letterSpacing = 0;
+    printer.lineSpacing = 1;
+    printer.fontColor_h = 2;
+    printer.bgColor = 1;
+    printer.shadowColor = 3;
+
+    AddTextPrinter(&printer, 0xFF, NULL);
+}
+
+void DaycarePrintMonNick(struct DayCare *daycare, u8 windowId, u32 daycareSlotId, u32 y)
+{
+    u8 nick[POKEMON_NAME_LENGTH * 2];
+
+    GetBoxMonNick(&daycare->mons[daycareSlotId].mon, nick);
+    AppendMonGenderSymbol(nick, &daycare->mons[daycareSlotId].mon);
+    DaycareAddTextPrinter(windowId, nick, 8, y);
+}
+
+void DaycarePrintMonLvl(struct DayCare *daycare, u8 windowId, u32 daycareSlotId, u32 y)
+{
+    u8 level;
+    u32 x;
+    u8 lvlText[12];
+    u8 intText[8];
+
+    StringCopy(lvlText, gText_Lv);
+    level = GetLevelAfterDaycareSteps(&daycare->mons[daycareSlotId].mon, daycare->mons[daycareSlotId].steps);
+    ConvertIntToDecimalStringN(intText, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(lvlText, intText);
+    x = GetStringRightAlignXOffset(1, lvlText, 112);
+    DaycareAddTextPrinter(windowId, lvlText, x, y);
+}
+
+void DaycarePrintMonInfo(u8 windowId, u32 daycareSlotId, u8 y)
+{
+    if (daycareSlotId < DAYCARE_MON_COUNT)
+    {
+        DaycarePrintMonNick(&gSaveBlock1Ptr->daycare, windowId, daycareSlotId, y);
+        DaycarePrintMonLvl(&gSaveBlock1Ptr->daycare, windowId, daycareSlotId, y);
+    }
+}
+
+#define tMenuListTaskId     data[0]
+#define tWindowId           data[1]
+
+void Task_HandleDaycareLevelMenuInput(u8 taskId)
+{
+    u32 var = ListMenuHandleInput(gTasks[taskId].tMenuListTaskId);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        switch (var)
+        {
+        case 0:
+        case 1:
+            gSpecialVar_Result = var;
+            break;
+        case 5:
+            gSpecialVar_Result = 2;
+            break;
+        }
+        sub_81AE6C8(gTasks[taskId].tMenuListTaskId, NULL, NULL);
+        sub_819746C(gTasks[taskId].tWindowId, TRUE);
+        RemoveWindow(gTasks[taskId].tWindowId);
+        DestroyTask(taskId);
+        EnableBothScriptContexts();
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        gSpecialVar_Result = 2;
+        sub_81AE6C8(gTasks[taskId].tMenuListTaskId, NULL, NULL);
+        sub_819746C(gTasks[taskId].tWindowId, TRUE);
+        RemoveWindow(gTasks[taskId].tWindowId);
+        DestroyTask(taskId);
+        EnableBothScriptContexts();
+    }
+}
+
+void ShowDaycareLevelMenu(void)
+{
+    struct ListMenuTemplate menuTemplate;
+    u8 windowId;
+    u8 listMenuTaskId;
+    u8 daycareMenuTaskId;
+
+    windowId = AddWindow(&sDaycareLevelMenuWindowTemplate);
+    sub_81973FC(windowId, FALSE);
+
+    menuTemplate = sDaycareListMenuLevelTemplate;
+    menuTemplate.unk_10 = windowId;
+    listMenuTaskId = ListMenuInit(&menuTemplate, 0, 0);
+
+    CopyWindowToVram(windowId, 3);
+
+    daycareMenuTaskId = CreateTask(Task_HandleDaycareLevelMenuInput, 3);
+    gTasks[daycareMenuTaskId].tMenuListTaskId = listMenuTaskId;
+    gTasks[daycareMenuTaskId].tWindowId = windowId;
+}
+
+#undef tMenuListTaskId
+#undef tWindowId
+
+void ChooseSendDaycareMon(void)
+{
+    sub_81B9328();
+    gMain.savedCallback = c2_exit_to_overworld_2_switch;
 }

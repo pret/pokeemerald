@@ -1,8 +1,8 @@
 Route117_EventScript_291C18:: @ 8291C18
 	lock
 	faceplayer
-	special sp0B5_daycare
-	specialvar VAR_RESULT, sp0B6_daycare
+	special GetDaycareMonNicknames
+	specialvar VAR_RESULT, GetDaycareState
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route117_EventScript_291C4D
 	compare_var_to_value VAR_RESULT, 2
@@ -56,7 +56,7 @@ Route117_EventScript_291CC8:: @ 8291CC8
 	return
 
 Route117_EventScript_291CD1:: @ 8291CD1
-	special sp0B5_daycare
+	special GetDaycareMonNicknames
 	msgbox Route117_Text_292114, 4
 	setvar VAR_0x8004, 0
 	call Route117_EventScript_291CB7
@@ -64,9 +64,9 @@ Route117_EventScript_291CD1:: @ 8291CD1
 	end
 
 Route117_EventScript_291CE8:: @ 8291CE8
-	special sp0B5_daycare
+	special GetDaycareMonNicknames
 	msgbox Route117_Text_292299, 4
-	special sp0B9_daycare_relationship_comment
+	special SetDaycareCompatibilityString
 	special sub_8138AC0
 	waitmessage
 	waitbuttonpress
@@ -80,7 +80,7 @@ Route117_EventScript_291CE8:: @ 8291CE8
 Route117_PokemonDayCare_EventScript_291D11:: @ 8291D11
 	lock
 	faceplayer
-	specialvar VAR_RESULT, sp0B6_daycare
+	specialvar VAR_RESULT, GetDaycareState
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route117_PokemonDayCare_EventScript_291E0B
 	compare_var_to_value VAR_RESULT, 2
@@ -103,21 +103,21 @@ Route117_PokemonDayCare_EventScript_291D56:: @ 8291D56
 	goto_eq Route117_PokemonDayCare_EventScript_291E01
 	msgbox Route117_PokemonDayCare_Text_292349, 4
 	fadescreen 1
-	special sub_8071330
+	special ChooseSendDaycareMon
 	waitstate
 	compare_var_to_value VAR_0x8004, 255
 	goto_eq Route117_PokemonDayCare_EventScript_291DCA
 	specialvar VAR_RESULT, sub_80C70AC
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq Route117_PokemonDayCare_EventScript_291DF7
-	specialvar VAR_0x8005, sub_8070C58
+	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies
 	waitse
 	playmoncry VAR_0x8005, 0
 	msgbox Route117_PokemonDayCare_Text_292370, 4
 	waitmoncry
 	special StoreSelectedPokemonInDaycare
 	incrementgamestat 47
-	specialvar VAR_RESULT, sp0B6_daycare
+	specialvar VAR_RESULT, GetDaycareState
 	compare_var_to_value VAR_RESULT, 2
 	goto_eq Route117_PokemonDayCare_EventScript_291DD4
 	release
@@ -182,11 +182,11 @@ Route117_PokemonDayCare_EventScript_291E6D:: @ 8291E6D
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare_var_to_value VAR_RESULT, 6
 	goto_eq Route117_PokemonDayCare_EventScript_291F3D
-	specialvar VAR_RESULT, sp0B6_daycare
+	specialvar VAR_RESULT, GetDaycareState
 	setvar VAR_0x8004, 0
 	compare_var_to_value VAR_RESULT, 2
 	goto_eq Route117_PokemonDayCare_EventScript_291EAC
-	special sub_80712C0
+	special ShowDaycareLevelMenu
 	waitstate
 	copyvar VAR_0x8004, VAR_RESULT
 	compare_var_to_value VAR_RESULT, 2
@@ -221,7 +221,7 @@ Route117_PokemonDayCare_EventScript_291EE2:: @ 8291EE2
 	playmoncry VAR_RESULT, 0
 	msgbox Route117_PokemonDayCare_Text_292593, 4
 	waitmoncry
-	specialvar VAR_RESULT, sp0B6_daycare
+	specialvar VAR_RESULT, GetDaycareState
 	compare_var_to_value VAR_RESULT, 2
 	goto_eq Route117_PokemonDayCare_EventScript_291F24
 	goto Route117_PokemonDayCare_EventScript_291DCA
@@ -278,7 +278,7 @@ Route117_PokemonDayCare_EventScript_291F5C:: @ 8291F5C
 	end
 
 Route117_PokemonDayCare_EventScript_291F95:: @ 8291F95
-	special sub_80712C0
+	special ShowDaycareLevelMenu
 	waitstate
 	compare_var_to_value VAR_RESULT, 2
 	goto_eq Route117_PokemonDayCare_EventScript_291DCA

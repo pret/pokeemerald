@@ -191,15 +191,15 @@ gSpecials:: @ 81DBA64
 	def_special GabbyAndTyGetLastBattleTrivia
 	def_special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	def_special sub_8138B80
-	def_special sp0B5_daycare
-	def_special sp0B6_daycare
+	def_special GetDaycareMonNicknames
+	def_special GetDaycareState
 	def_special RejectEggFromDayCare
 	def_special GiveEggFromDaycare
-	def_special sp0B9_daycare_relationship_comment
-	def_special sub_8070C58
+	def_special SetDaycareCompatibilityString
+	def_special GetSelectedMonNickAndSpecies
 	def_special StoreSelectedPokemonInDaycare
-	def_special sub_8071330
-	def_special sub_80712C0
+	def_special ChooseSendDaycareMon
+	def_special ShowDaycareLevelMenu
 	def_special GetNumLevelsGainedFromDaycare
 	def_special GetDaycareCost
 	def_special TakePokemonFromDaycare
