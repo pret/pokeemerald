@@ -6313,7 +6313,7 @@ _080DAE1E:
 	movs r0, 0x4
 	b _080DAE9A
 _080DAE2E:
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080DAE82
@@ -6358,7 +6358,7 @@ _080DAE82:
 	movs r0, 0
 	b _080DAE9A
 _080DAE86:
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	adds r2, r1, 0
 	ldrh r1, [r0]
 	movs r0, 0x2
@@ -8456,7 +8456,7 @@ sub_80DBED4: @ 80DBED4
 	adds r0, r1
 	ldrb r1, [r0]
 	lsls r1, 1
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	lsls r0, 3
 	adds r1, r0
@@ -11805,7 +11805,7 @@ sub_80DD9F0: @ 80DD9F0
 	ldrb r1, [r0, 0x1]
 	lsls r1, 29
 	lsrs r1, 29
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r2, [r0]
 	lsls r0, r2, 2
 	adds r0, r2
@@ -14260,7 +14260,7 @@ _080DEDE6:
 	b _080DEF90
 	.pool
 _080DEE00:
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080DEE4C
@@ -14369,7 +14369,7 @@ _080DEEF4:
 	mov r2, r10
 	ldr r0, [r2]
 	adds r0, r7
-	ldr r1, =gUnknown_02039F2E
+	ldr r1, =gSpecialVar_ContestRank
 	ldrh r1, [r1]
 	ldr r3, =0x00002eae
 	adds r0, r3
@@ -14383,7 +14383,7 @@ _080DEF02:
 	mov r2, r9
 	lsls r1, r2, 5
 	adds r0, r1
-	ldr r1, =gScriptContestCategory
+	ldr r1, =gSpecialVar_ContestCategory
 	ldrh r1, [r1]
 	ldr r3, =0x00002e9a
 	adds r0, r3
@@ -14485,7 +14485,7 @@ _080DEFE6:
 	b _080DF03A
 	.pool
 _080DEFF8:
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080DF038

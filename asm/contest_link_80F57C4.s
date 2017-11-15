@@ -548,7 +548,7 @@ _080F5D2A:
 	movs r0, 0x8
 	strh r0, [r1]
 	bl InterviewBefore
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080F5D58
@@ -556,7 +556,7 @@ _080F5D2A:
 _080F5D58:
 	movs r0, 0x2
 	bl sub_813BADC
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrb r0, [r0]
 	bl sub_80DEDA8
 	movs r0, 0xFE
@@ -673,7 +673,7 @@ _080F5E78:
 	movs r0, 0x25
 	bl IncrementGameStat
 _080F5E92:
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrb r0, [r0]
 	bl sub_80DEDA8
 	movs r0, 0xFE
@@ -2972,7 +2972,7 @@ sub_80F71C8: @ 80F71C8
 	b _080F7240
 	.pool
 _080F71F8:
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r2, [r0]
 	cmp r2, 0
 	bne _080F720C
@@ -3008,7 +3008,7 @@ _080F7236:
 	bl CopyToBgTilemapBufferRect
 	movs r5, 0xF
 _080F7240:
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080F725C
@@ -4640,15 +4640,15 @@ sub_80F7F30: @ 80F7F30
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _080F7F5E
-	ldr r4, =gScriptContestCategory
+	ldr r4, =gSpecialVar_ContestCategory
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_02039F2E
+	ldr r1, =gSpecialVar_ContestRank
 	ldrb r1, [r1]
 	bl sub_80DAB8C
 	ldrb r0, [r4]
 	bl sub_80DB09C
 _080F7F5E:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r5, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -4666,7 +4666,7 @@ sub_80F7F7C: @ 80F7F7C
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r2, r1, r0
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080F7FEE
@@ -4704,7 +4704,7 @@ _080F7FDC:
 	movs r1, 0x36
 _080F7FE0:
 	bl GetMonData
-	ldr r1, =gUnknown_02039F2E
+	ldr r1, =gSpecialVar_ContestRank
 	ldrh r1, [r1]
 	cmp r0, r1
 	bls _080F7FEE
@@ -4730,7 +4730,7 @@ sub_80F7FFC: @ 80F7FFC
 	beq _080F8010
 	b _080F8250
 _080F8010:
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bls _080F801A
@@ -4762,7 +4762,7 @@ _080F8048:
 	lsrs r1, r0, 24
 	mov r0, sp
 	strb r1, [r0]
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r1, r0
 	bls _080F806C
@@ -4812,7 +4812,7 @@ _080F80B8:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bls _080F80DC
@@ -4861,7 +4861,7 @@ _080F8124:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bls _080F8148
@@ -4908,7 +4908,7 @@ _080F8190:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bhi _080F8250
@@ -4951,7 +4951,7 @@ _080F81F8:
 	strb r0, [r4]
 	mov r0, sp
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_02039F2E
+	ldr r0, =gSpecialVar_ContestRank
 	ldrh r0, [r0]
 	cmp r2, r0
 	bhi _080F8250
@@ -5488,7 +5488,7 @@ _080F8678:
 	bl sub_80F86E0
 	ldr r1, =gUnknown_02039F2B
 	strb r0, [r1]
-	ldr r0, =gScriptContestCategory
+	ldr r0, =gSpecialVar_ContestCategory
 	ldrb r0, [r0]
 	bl sub_80DB09C
 	ldr r1, =sub_80FCF40

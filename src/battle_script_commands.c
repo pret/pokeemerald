@@ -10845,7 +10845,7 @@ static void atkF0_give_caught_mon(void)
             gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         }
 
-        if (FlagGet(SYS_PC_LANETTE))
+        if (FlagGet(FLAG_SYS_PC_LANETTE))
             gBattleCommunication[MULTISTRING_CHOOSER]++;
     }
 

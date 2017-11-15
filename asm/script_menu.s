@@ -24,7 +24,7 @@ ScriptMenu_Multichoice: @ 80E1E08
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E1E4C
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	movs r1, 0xFF
 	strh r1, [r0]
 	movs r0, 0
@@ -70,7 +70,7 @@ ScriptMenu_MultichoiceWithDefault: @ 80E1E58
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E1EA8
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0xFF
 	strh r0, [r1]
 	str r4, [sp]
@@ -358,13 +358,13 @@ _080E20B8:
 	bne _080E20FC
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x7F
 	strh r0, [r1]
 	b _080E20EC
 	.pool
 _080E20E8:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 _080E20EC:
 	ldrb r0, [r5, 0xC]
@@ -389,7 +389,7 @@ ScriptMenu_YesNo: @ 80E2108
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2138
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl sub_8197930
@@ -410,7 +410,7 @@ _080E213A:
 	thumb_func_start sub_80E2140
 sub_80E2140: @ 80E2140
 	push {lr}
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0xFF
 	beq _080E2154
@@ -465,12 +465,12 @@ _080E219C:
 _080E21A4:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	b _080E21B8
 	.pool
 _080E21B4:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 _080E21B8:
 	strh r0, [r1]
@@ -517,7 +517,7 @@ ScriptMenu_MultichoiceGrid: @ 80E21D0
 	b _080E22E8
 	.pool
 _080E2210:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	movs r1, 0xFF
 	strh r1, [r0]
 	movs r2, 0
@@ -655,13 +655,13 @@ sub_80E2308: @ 80E2308
 	bne _080E2360
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x7F
 	strh r0, [r1]
 	b _080E2350
 	.pool
 _080E234C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 _080E2350:
 	ldrb r0, [r5, 0xC]
@@ -686,7 +686,7 @@ sp109_CreatePCMenu: @ 80E236C
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2394
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl CreatePCMenu
@@ -893,7 +893,7 @@ sub_80E2548: @ 80E2548
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2570
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl sub_80E2578
@@ -1266,7 +1266,7 @@ _080E2860:
 	thumb_func_start sub_80E2878
 sub_80E2878: @ 80E2878
 	push {lr}
-	ldr r2, =gScriptResult
+	ldr r2, =gSpecialVar_Result
 	ldrh r0, [r2]
 	cmp r0, 0x7F
 	beq _080E288C
@@ -1648,7 +1648,7 @@ sp106_CreateStartMenu: @ 80E2B7C
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2BA4
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl CreateStartMenu

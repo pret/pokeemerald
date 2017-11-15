@@ -70,7 +70,7 @@ $(tilesetdir)/secondary/battle_frontier_outside_west/tiles.4bpp: $(tilesetdir)/s
 $(tilesetdir)/secondary/battle_frontier_outside_east/tiles.4bpp: $(tilesetdir)/secondary/battle_frontier_outside_east/tiles.png
 	$(GFX) $< $@ -num_tiles 508
 
-$(tilesetdir)/primary/inside_building/tiles.4bpp: $(tilesetdir)/primary/inside_building/tiles.png
+$(tilesetdir)/primary/building/tiles.4bpp: $(tilesetdir)/primary/building/tiles.png
 	$(GFX) $< $@ -num_tiles 502
 
 $(tilesetdir)/secondary/shop/tiles.4bpp: $(tilesetdir)/secondary/shop/tiles.png

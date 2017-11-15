@@ -335,7 +335,7 @@ _08133CCA:
 sub_8133CD8: @ 8133CD8
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r2, =0x00002e59
 	adds r0, r2
 	ldrb r0, [r0]
@@ -348,7 +348,7 @@ sub_8133CD8: @ 8133CD8
 sub_8133CF4: @ 8133CF4
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =gScriptResult
+	ldr r5, =gSpecialVar_Result
 _08133CFA:
 	adds r0, r4, 0
 	bl CountDecorationCategoryN
@@ -365,7 +365,7 @@ _08133D10:
 	lsrs r4, r0, 24
 	cmp r4, 0x7
 	bls _08133CFA
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 _08133D20:
@@ -378,7 +378,7 @@ _08133D20:
 	thumb_func_start sub_8133D2C
 sub_8133D2C: @ 8133D2C
 	push {r4-r6,lr}
-	ldr r6, =gScriptResult
+	ldr r6, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r6]
 	ldr r4, =gDecorations

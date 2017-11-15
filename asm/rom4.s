@@ -8,7 +8,7 @@
 	thumb_func_start sub_8084620
 sub_8084620: @ 8084620
 	push {r4,lr}
-	ldr r0, =gUnknown_08271857
+	ldr r0, =EverGrandeCity_HallOfFame_EventScript_271857
 	bl ScriptContext2_RunNewScript
 	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
@@ -64,7 +64,7 @@ sub_808469C: @ 808469C
 	bl FlagClear
 	ldr r0, =0x00000888
 	bl FlagClear
-	ldr r0, =gUnknown_08271862
+	ldr r0, =EverGrandeCity_HallOfFame_EventScript_271862
 	bl ScriptContext2_RunNewScript
 	pop {r0}
 	bx r0
@@ -419,7 +419,7 @@ get_mapdata_header: @ 80849A8
 	b _080849C6
 	.pool
 _080849BC:
-	ldr r0, =gUnknown_08481DD4
+	ldr r0, =gMapAttributes
 	subs r1, 0x1
 	lsls r1, 2
 	adds r1, r0
@@ -535,7 +535,7 @@ _08084A8A:
 get_mapheader_by_bank_and_number: @ 8084A90
 	lsls r0, 16
 	lsls r1, 16
-	ldr r2, =gUnknown_08486578
+	ldr r2, =gMapGroups
 	lsrs r0, 14
 	adds r0, r2
 	ldr r0, [r0]

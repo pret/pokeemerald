@@ -978,10 +978,10 @@ gUnknown_02039F2A: @ 2039F2A
 gUnknown_02039F2B: @ 2039F2B
 	.space 0x1
 
-gScriptContestCategory: @ 2039F2C
+gSpecialVar_ContestCategory: @ 2039F2C
 	.space 0x2
 
-gUnknown_02039F2E: @ 2039F2E
+gSpecialVar_ContestRank: @ 2039F2E
 	.space 0x2
 
 gUnknown_02039F30: @ 2039F30
@@ -1642,7 +1642,7 @@ gUnknown_0203CE74: @ 203CE74
 gUnknown_0203CE78: @ 203CE78
 	.space 0x4
 
-gScriptItemId: @ 203CE7C
+gSpecialVar_ItemId: @ 203CE7C
 	.space 0x4
 
 gUnknown_0203CE80: @ 203CE80

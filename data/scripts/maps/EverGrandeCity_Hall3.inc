@@ -1,0 +1,12 @@
+EverGrandeCity_Hall3_MapScripts:: @ 8229593
+	map_script 4, EverGrandeCity_Hall3_MapScript2_229599
+	.byte 0
+
+EverGrandeCity_Hall3_MapScript2_229599: @ 8229599
+	map_script_2 VAR_0x4001, 0, EverGrandeCity_Hall3_EventScript_2295A3
+	.2byte 0
+
+EverGrandeCity_Hall3_EventScript_2295A3:: @ 82295A3
+	turnobject 255, 2
+	end
+

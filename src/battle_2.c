@@ -43,6 +43,7 @@
 #include "tv.h"
 #include "safari_zone.h"
 #include "battle_string_ids.h"
+#include "data2.h"
 
 struct UnknownStruct6
 {
@@ -509,7 +510,7 @@ static void sub_8036A5C(void)
 
     gBattleStruct->field_182 = r6;
     *(&gBattleStruct->field_183) = r6 >> 8;
-    gBattleStruct->field_183 |= FlagGet(SYS_FRONTIER_PASS) << 7;
+    gBattleStruct->field_183 |= FlagGet(FLAG_SYS_FRONTIER_PASS) << 7;
 }
 
 static void SetPlayerBerryDataInBattleStruct(void)
@@ -1610,7 +1611,7 @@ void BattleMainCB2(void)
 
     if (gMain.heldKeys & B_BUTTON && gBattleTypeFlags & BATTLE_TYPE_RECORDED && sub_8186450())
     {
-        gScriptResult = gBattleOutcome = BATTLE_PLAYER_TELEPORTED;
+        gSpecialVar_Result = gBattleOutcome = BATTLE_PLAYER_TELEPORTED;
         ResetPaletteFadeControl();
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         SetMainCallback2(CB2_QuitRecordedBattle);
@@ -2068,7 +2069,7 @@ static void sub_8038F34(void)
 
             if (!gSaveBlock2Ptr->field_CA9_b && i == monsCount)
             {
-                if (FlagGet(SYS_FRONTIER_PASS))
+                if (FlagGet(FLAG_SYS_FRONTIER_PASS))
                 {
                     FreeAllWindowBuffers();
                     SetMainCallback2(sub_80392A8);
@@ -2476,15 +2477,6 @@ static void sub_80398D0(struct Sprite *sprite)
         }
     }
 }
-
-// to get rid of once the struct is declared in a header
-struct MonCoords
-{
-    // This would use a bitfield, but sub_8079F44
-    // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
-    u8 y_offset;
-};
 
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
@@ -4435,7 +4427,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves)
 
     // badge boost
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_FRONTIER))
-        && FlagGet(BADGE03_GET)
+        && FlagGet(FLAG_BADGE03_GET)
         && GetBankSide(bank1) == SIDE_PLAYER)
     {
         speedBank1 = (speedBank1 * 110) / 100;
@@ -4469,7 +4461,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves)
 
     // badge boost
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_FRONTIER))
-        && FlagGet(BADGE03_GET)
+        && FlagGet(FLAG_BADGE03_GET)
         && GetBankSide(bank2) == SIDE_PLAYER)
     {
         speedBank2 = (speedBank2 * 110) / 100;
@@ -4758,7 +4750,7 @@ static void HandleEndTurn_BattleWon(void)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
     {
-        gScriptResult = gBattleOutcome;
+        gSpecialVar_Result = gBattleOutcome;
         gBattleTextBuff1[0] = gBattleOutcome;
         gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
         gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
@@ -5020,7 +5012,7 @@ static void ReturnFromBattleToOverworld(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK && gReceivedRemoteLinkPlayers != 0)
         return;
 
-    gScriptResult = gBattleOutcome;
+    gSpecialVar_Result = gBattleOutcome;
     gMain.inBattle = 0;
     gMain.callback1 = gPreBattleCallback1;
 
