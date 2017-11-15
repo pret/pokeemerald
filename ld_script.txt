@@ -344,7 +344,6 @@ SECTIONS {
         src/trig.o(.rodata);
         src/util.o(.rodata);
         src/daycare.o(.rodata);
-        data/daycare.o(.rodata);
         src/egg_hatch.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
         src/battle_interface.o(.rodata);

@@ -1099,9 +1099,9 @@ void game_continue(u8 taskId)
     }
     gUnknown_03006310 = gUnknown_0858D07C;
     gUnknown_03006310.unk_10 = data[6];
-    gUnknown_03006310.unk_0c = data[0];
-    gUnknown_03006310.unk_00 = gUnknown_0203A020->items;
-    gUnknown_03006310.unk_0e = data[3];
+    gUnknown_03006310.totalItems = data[0];
+    gUnknown_03006310.items = gUnknown_0203A020->items;
+    gUnknown_03006310.maxShowed = data[3];
 }
 
 void sub_80E9DEC(u32 a0, bool8 flag, struct ListMenu *menu)
@@ -1866,7 +1866,7 @@ void sub_80EAF80(void *records, size_t recordSize, u8 linkIdx)
 {
     struct SecretBaseRecordMixer mixers[3];
     u16 i;
-    
+
     if (FlagGet(0x60))
     {
         switch (GetLinkPlayerCount())
