@@ -65,7 +65,7 @@ IWRAM_DATA bool8 gUnknown_03000D6D;
 IWRAM_DATA u16 sSendNonzeroCheck;
 IWRAM_DATA u16 gUnknown_03000D70;
 IWRAM_DATA u8 gUnknown_03000D72;
-IWRAM_DATA u8 gUnknown_03000D73;
+IWRAM_DATA u8 sHandshakePlayerCount;
 IWRAM_DATA u8 gUnknown_03000D74;
 
 u16 gLinkPartnersHeldKeys[6];
@@ -159,7 +159,12 @@ static void CheckMasterOrSlave(void);
 static void InitTimer(void);
 static void EnqueueSendCmd(u16 *sendCmd);
 static void DequeueRecvCmds(u16 (*recvCmds)[CMD_LENGTH]);
-void StartTransfer(void);
+static void StartTransfer(void);
+static bool8 DoHandshake(void);
+void DoRecv(void);
+void DoSend(void);
+void StopTimer(void);
+void SendRecvDone(void);
 
 // .rodata
 
@@ -1924,7 +1929,7 @@ static void EnableSerial(void)
     sSendNonzeroCheck = 0;
     gUnknown_03000D70 = 0;
     gUnknown_03000D72 = 0;
-    gUnknown_03000D73 = 0;
+    sHandshakePlayerCount = 0;
     gLastSendQueueCount = 0;
     gLastRecvQueueCount = 0;
 }
@@ -2183,3 +2188,102 @@ void LinkVSync(void)
     }
 }
 
+void Timer3Intr(void)
+{
+    StopTimer();
+    StartTransfer();
+}
+
+void SerialCB(void)
+{
+    gLink.localId = SIO_MULTI_CNT->id;
+    switch (gLink.state)
+    {
+        case LINK_STATE_CONN_ESTABLISHED:
+            gLink.hardwareError = SIO_MULTI_CNT->error;
+            DoRecv();
+            DoSend();
+            SendRecvDone();
+            break;
+        case LINK_STATE_HANDSHAKE:
+            if (DoHandshake())
+            {
+                if (gLink.isMaster)
+                {
+                    gLink.state = LINK_STATE_INIT_TIMER;
+                    gLink.serialIntrCounter = 8;
+                }
+                else
+                {
+                    gLink.state = LINK_STATE_CONN_ESTABLISHED;
+                }
+            }
+            break;
+    }
+    gLink.serialIntrCounter ++;
+    sNumVBlanksWithoutSerialIntr = 0;
+    if (gLink.serialIntrCounter == 8)
+    {
+        gLastRecvQueueCount = gLink.recvQueue.count;
+    }
+}
+
+static void StartTransfer(void)
+{
+    REG_SIOCNT |= SIO_START;
+}
+
+static bool8 DoHandshake(void)
+{
+    u8 i;
+    u8 playerCount;
+    u16 minRecv;
+
+    playerCount = 0;
+    minRecv = 0xFFFF;
+    if (gLink.handshakeAsMaster == TRUE)
+    {
+        REG_SIOMLT_SEND = MASTER_HANDSHAKE;
+    }
+    else
+    {
+        REG_SIOMLT_SEND = SLAVE_HANDSHAKE;
+    }
+    *(u64 *)gLink.tempRecvBuffer = REG_SIOMLT_RECV;
+    REG_SIOMLT_RECV = 0;
+    gLink.handshakeAsMaster = FALSE;
+    for (i = 0; i < 4; i ++)
+    {
+        if ((gLink.tempRecvBuffer[i] & ~0x3) == SLAVE_HANDSHAKE || gLink.tempRecvBuffer[i] == MASTER_HANDSHAKE)
+        {
+            playerCount ++;
+            if (minRecv > gLink.tempRecvBuffer[i] && gLink.tempRecvBuffer[i] != 0)
+            {
+                minRecv = gLink.tempRecvBuffer[i];
+            }
+        }
+        else
+        {
+            if (gLink.tempRecvBuffer[i] != 0xFFFF)
+            {
+                playerCount = 0;
+            }
+            break;
+        }
+    }
+    gLink.playerCount = playerCount;
+    if (gLink.playerCount > 1 && gLink.playerCount == sHandshakePlayerCount && gLink.tempRecvBuffer[0] == MASTER_HANDSHAKE)
+    {
+        return TRUE;
+    }
+    if (gLink.playerCount > 1)
+    {
+        gLink.link_field_F = (minRecv & 3) + 1;
+    }
+    else
+    {
+        gLink.link_field_F = 0;
+    }
+    sHandshakePlayerCount = gLink.playerCount;
+    return FALSE;
+}

@@ -5,208 +5,8 @@
 
 	.text
 
-	thumb_func_start Timer3Intr
-Timer3Intr: @ 800BA28
-	push {lr}
-	bl StopTimer
-	bl StartTransfer
-	pop {r0}
-	bx r0
-	thumb_func_end Timer3Intr
-
-	thumb_func_start SerialCB
-SerialCB: @ 800BA38
-	push {r4,lr}
-	ldr r4, =gLink
-	ldr r0, =0x04000128
-	ldr r1, [r0]
-	lsls r0, r1, 26
-	lsrs r0, 30
-	strb r0, [r4, 0x2]
-	ldrb r0, [r4, 0x1]
-	cmp r0, 0x2
-	beq _0800BA6C
-	cmp r0, 0x4
-	bne _0800BA8A
-	lsls r0, r1, 25
-	lsrs r0, 31
-	strb r0, [r4, 0x10]
-	bl sub_800BBCC
-	bl sub_800BCE4
-	bl sub_800BDCC
-	b _0800BA8A
-	.pool
-_0800BA6C:
-	bl sub_800BAD0
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800BA8A
-	ldrb r0, [r4]
-	cmp r0, 0
-	beq _0800BA86
-	movs r0, 0x3
-	strb r0, [r4, 0x1]
-	movs r0, 0x8
-	strb r0, [r4, 0xD]
-	b _0800BA8A
-_0800BA86:
-	movs r0, 0x4
-	strb r0, [r4, 0x1]
-_0800BA8A:
-	ldr r3, =gLink
-	ldrb r0, [r3, 0xD]
-	adds r0, 0x1
-	movs r2, 0
-	strb r0, [r3, 0xD]
-	ldr r1, =sNumVBlanksWithoutSerialIntr
-	strb r2, [r1]
-	lsls r0, 24
-	asrs r0, 24
-	cmp r0, 0x8
-	bne _0800BAAA
-	ldr r0, =gLastRecvQueueCount
-	ldr r2, =0x00000fbd
-	adds r1, r3, r2
-	ldrb r1, [r1]
-	strb r1, [r0]
-_0800BAAA:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end SerialCB
-
-	thumb_func_start StartTransfer
-StartTransfer: @ 800BAC0
-	ldr r0, =0x04000128
-	ldrh r1, [r0]
-	movs r2, 0x80
-	orrs r1, r2
-	strh r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end StartTransfer
-
-	thumb_func_start sub_800BAD0
-sub_800BAD0: @ 800BAD0
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	movs r5, 0
-	ldr r6, =0x0000ffff
-	ldr r0, =gLink
-	ldrb r1, [r0, 0xE]
-	adds r7, r0, 0
-	cmp r1, 0x1
-	bne _0800BAFC
-	ldr r1, =0x0400012a
-	ldr r2, =0x00008fff
-	b _0800BB00
-	.pool
-_0800BAFC:
-	ldr r1, =0x0400012a
-	ldr r2, =0x0000b9a0
-_0800BB00:
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r2, =gLink+0x4
-	ldr r3, =0x04000120
-	ldr r0, [r3]
-	ldr r1, [r3, 0x4]
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	movs r0, 0
-	movs r1, 0
-	str r0, [r3]
-	str r1, [r3, 0x4]
-	strb r0, [r2, 0xA]
-	movs r4, 0
-	ldr r0, =gUnknown_03000D73
-	mov r9, r0
-	mov r8, r2
-	ldr r2, =0x00008fff
-	ldr r1, =0x0000ffff
-	mov r12, r1
-_0800BB28:
-	lsls r0, r4, 1
-	add r0, r8
-	ldrh r3, [r0]
-	movs r0, 0x4
-	negs r0, r0
-	ands r0, r3
-	ldr r1, =0x0000b9a0
-	cmp r0, r1
-	beq _0800BB40
-	adds r0, r3, 0
-	cmp r0, r2
-	bne _0800BB70
-_0800BB40:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r0, r3, 0
-	cmp r6, r0
-	bls _0800BB78
-	cmp r0, 0
-	beq _0800BB78
-	adds r6, r3, 0
-	b _0800BB78
-	.pool
-_0800BB70:
-	cmp r0, r12
-	beq _0800BB82
-	movs r5, 0
-	b _0800BB82
-_0800BB78:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x3
-	bls _0800BB28
-_0800BB82:
-	strb r5, [r7, 0x3]
-	adds r0, r5, 0
-	cmp r0, 0x1
-	bls _0800BBB2
-	mov r2, r9
-	ldrb r2, [r2]
-	cmp r0, r2
-	bne _0800BBA4
-	ldrh r1, [r7, 0x4]
-	ldr r0, =0x00008fff
-	cmp r1, r0
-	bne _0800BBA4
-	movs r0, 0x1
-	b _0800BBBE
-	.pool
-_0800BBA4:
-	ldrb r0, [r7, 0x3]
-	cmp r0, 0x1
-	bls _0800BBB2
-	movs r0, 0x3
-	ands r6, r0
-	adds r0, r6, 0x1
-	b _0800BBB4
-_0800BBB2:
-	movs r0, 0
-_0800BBB4:
-	strb r0, [r7, 0xF]
-	ldrb r0, [r7, 0x3]
-	mov r1, r9
-	strb r0, [r1]
-	movs r0, 0
-_0800BBBE:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_800BAD0
-
-	thumb_func_start sub_800BBCC
-sub_800BBCC: @ 800BBCC
+	thumb_func_start DoRecv
+DoRecv: @ 800BBCC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -345,10 +145,10 @@ _0800BCD0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_800BBCC
+	thumb_func_end DoRecv
 
-	thumb_func_start sub_800BCE4
-sub_800BCE4: @ 800BCE4
+	thumb_func_start DoSend
+DoSend: @ 800BCE4
 	push {r4,lr}
 	ldr r0, =gLink
 	ldrb r1, [r0, 0x16]
@@ -431,7 +231,7 @@ _0800BD8C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_800BCE4
+	thumb_func_end DoSend
 
 	thumb_func_start StopTimer
 StopTimer: @ 800BD98
@@ -455,8 +255,8 @@ _0800BDB4:
 	.pool
 	thumb_func_end StopTimer
 
-	thumb_func_start sub_800BDCC
-sub_800BDCC: @ 800BDCC
+	thumb_func_start SendRecvDone
+SendRecvDone: @ 800BDCC
 	push {lr}
 	ldr r1, =gLink
 	ldrb r0, [r1, 0x17]
@@ -480,7 +280,7 @@ _0800BDF4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_800BDCC
+	thumb_func_end SendRecvDone
 
 	thumb_func_start sub_800BDFC
 sub_800BDFC: @ 800BDFC
