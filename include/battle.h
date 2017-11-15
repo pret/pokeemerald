@@ -6,6 +6,8 @@
 #include "battle_script_commands.h"
 #include "battle_2.h"
 #include "battle_ai_switch_items.h"
+#include "battle_gfx_sfx_util.h"
+#include "battle_util2.h"
 
 /*
     Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
@@ -252,10 +254,20 @@
 #define MOVE_TARGET_FOES_AND_ALLY   0x20
 #define MOVE_TARGET_OPPONENTS_FIELD 0x40
 
+// defines for the u8 array gTypeEffectiveness
+#define TYPE_EFFECT_ATK_TYPE(i)((gTypeEffectiveness[i + 0]))
+#define TYPE_EFFECT_DEF_TYPE(i)((gTypeEffectiveness[i + 1]))
+#define TYPE_EFFECT_MULTIPLIER(i)((gTypeEffectiveness[i + 2]))
+
+// defines for the gTypeEffectiveness multipliers
 #define TYPE_MUL_NO_EFFECT          0
 #define TYPE_MUL_NOT_EFFECTIVE      5
 #define TYPE_MUL_NORMAL             10
 #define TYPE_MUL_SUPER_EFFECTIVE    20
+
+// special type table Ids
+#define TYPE_FORESIGHT  0xFE
+#define TYPE_ENDTABLE   0xFF
 
 #define BS_GET_TARGET                   0
 #define BS_GET_ATTACKER                 1
@@ -361,8 +373,8 @@ struct DisableStruct
     /*0x0D*/ u8 unkD;
     /*0x0E*/ u8 encoreTimer1 : 4;
     /*0x0E*/ u8 encoreTimer2 : 4;
-    /*0x0F*/ u8 perishSong1 : 4;
-    /*0x0F*/ u8 perishSong2 : 4;
+    /*0x0F*/ u8 perishSongTimer1 : 4;
+    /*0x0F*/ u8 perishSongTimer2 : 4;
     /*0x10*/ u8 furyCutterCounter;
     /*0x11*/ u8 rolloutCounter1 : 4;
     /*0x11*/ u8 rolloutCounter2 : 4;
@@ -611,7 +623,7 @@ struct BattleStruct
     u8 sentInPokes;
     bool8 selectionScriptFinished[BATTLE_BANKS_COUNT];
     u8 field_58[4];
-    u8 field_5C[4];
+    u8 monToSwitchIntoId[BATTLE_BANKS_COUNT];
     u8 field_60[4][3];
     u8 runTries;
     u8 caughtMonNick[11];
@@ -670,7 +682,7 @@ struct BattleStruct
     u8 fillerDC[0xDF-0xDC];
     u8 field_DF;
     u8 mirrorMoveArrays[32];
-    u16 castformPalette[4][16];
+    u16 castformPalette[BATTLE_BANKS_COUNT][16];
     u8 field_180;
     u8 field_181;
     u8 field_182;
@@ -683,7 +695,7 @@ struct BattleStruct
     u8 field_1A4[96];
     u8 field_204[104];
     u8 field_26C[40];
-    u8 field_294[4];
+    u8 AI_monToSwitchIntoId[BATTLE_BANKS_COUNT];
     u8 field_298[8];
     u8 field_2A0;
     u8 field_2A1;
@@ -807,6 +819,18 @@ extern struct BattleStruct* gBattleStruct;
 #define B_ANIM_SUBSTITUTE_TO_MON        0x5
 #define B_ANIM_MON_TO_SUBSTITUTE        0x6
 
+// status animation table
+#define B_ANIM_STATUS_PSN               0x0
+#define B_ANIM_STATUS_CONFUSION         0x1
+#define B_ANIM_STATUS_BRN               0x2
+#define B_ANIM_STATUS_INFATUATION       0x3
+#define B_ANIM_STATUS_SLP               0x4
+#define B_ANIM_STATUS_PRZ               0x5
+#define B_ANIM_STATUS_FRZ               0x6
+#define B_ANIM_STATUS_CURSED            0x7
+#define B_ANIM_STATUS_NIGHTMARE         0x8
+#define B_ANIM_STATUS_WRAPPED           0x9
+
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
@@ -857,50 +881,6 @@ bool8 LoadChosenBattleElement(u8 caseId);
 void DrawMainBattleBackground(void);
 void task00_0800F6FC(u8 taskId);
 
-// battle_5
-void AllocateBattleResrouces(void);
-void FreeBattleResources(void);
-void AdjustFriendshipOnBattleFaint(u8 bank);
-void sub_80571DC(u8 bank, u8 arg1);
-u32 sub_805725C(u8 bank);
-
-// battle 7
-void AllocateBattleSpritesData(void);
-void FreeBattleSpritesData(void);
-void AllocateMonSpritesGfx(void);
-void FreeMonSpritesGfx(void);
-void BattleMusicStop(void);
-void sub_805E990(struct Pokemon *mon, u8 bank);
-void sub_805EF14(void);
-bool8 BattleInitAllSprites(u8 *state1, u8 *state2);
-void sub_805E350(void);
-bool8 BattleLoadAllHealthBoxesGfx(u8 state);
-void LoadAndCreateEnemyShadowSprites(void);
-void SetBankEnemyShadowSpriteCallback(u8 bank, u16 species);
-void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 bank);
-void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank);
-void BattleLoadSubstituteSpriteGfx(u8 bank, bool8 arg1);
-void nullsub_24(u16 arg0);
-void nullsub_25(u8 arg0);
-void ClearTemporarySpeciesSpriteData(u8 bank, bool8 dontClearSubstitute);
-void sub_805D714(struct Sprite *sprite);
-void DecompressTrainerBackPic(u16 backPicId, u8 bank);
-void DecompressTrainerFrontPic(u16 frontPicId, u8 bank);
-void FreeTrainerFrontPicPalette(u16 frontPicId);
-void sub_805D7AC(struct Sprite *sprite);
-bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn);
-void sub_805EB9C(u8 arg0);
-void sub_805E394(void);
-void TrySetBehindSubstituteSpriteBit(u8 bank, u16 move);
-void DoStatusAnimation(bool8 isStatus2, u32 status);
-void DoSpecialBattleAnimation(u8 activeBank, u8 atkBank, u8 defBank, u8 tableId);
-bool8 DoBattleAnimationFromTable(u8 active, u8 atkBank, u8 defBank, u8 tableId, u16 argument);
-void CopyBattleSpriteInvisibility(u8 bank);
-u16 ChooseMoveAndTargetInBattlePalace(void);
-void LoadBattleBarGfx(u8 arg0);
-bool8 mplay_80342A4(u8 bank);
-void sub_805EEE0(u8 bank);
-
 enum
 {
     BACK_PIC_BRENDAN,
@@ -921,7 +901,7 @@ u8 GetBankByIdentity(u8 bank);
 struct BattleSpriteInfo
 {
     u16 invisible : 1; // 0x1
-    u16 flag_x2 : 1; // 0x2
+    u16 lowHpSong : 1; // 0x2
     u16 behindSubstitute : 1; // 0x4
     u16 flag_x8 : 1; // 0x8
     u16 hpNumbersNoBars : 1; // 0x10
@@ -930,7 +910,7 @@ struct BattleSpriteInfo
 
 struct BattleAnimationInfo
 {
-    u16 field; // to fill up later
+    u16 animArg; // to fill up later
     u8 field_2;
     u8 field_3;
     u8 field_4;
@@ -944,6 +924,12 @@ struct BattleAnimationInfo
     u8 field_9_x20 : 1;
     u8 field_9_x40 : 1;
     u8 field_9_x80 : 1;
+    u8 field_A;
+    u8 field_B;
+    u8 field_C;
+    u8 field_D;
+    u8 field_E;
+    u8 field_F;
 };
 
 struct BattleHealthboxInfo
@@ -966,7 +952,7 @@ struct BattleHealthboxInfo
     u8 animationState;
     u8 field_5;
     u8 field_6;
-    u8 field_7;
+    u8 shadowSpriteId;
     u8 field_8;
     u8 field_9;
     u8 field_A;
@@ -997,6 +983,9 @@ extern struct BattleSpriteData *gBattleSpritesDataPtr;
 extern u8 *gLinkBattleSendBuffer;
 extern u8 *gLinkBattleRecvBuffer;
 
+extern u8 *gUnknown_0202305C;
+extern u8 *gUnknown_02023060;
+
 // Move this somewhere else
 
 #include "sprite.h"
@@ -1006,8 +995,11 @@ struct MonSpritesGfx
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
     void* sprites[4];
     struct SpriteTemplate templates[4];
-    u8 field_74[0x100];
-    u8 *fontPixels;
+    struct SpriteFrameImage field_74[4][4];
+    u8 field_F4[0x80];
+    u8 *barFontGfx;
+    void *field_178;
+    void *field_17C;
 };
 
 extern struct BattleSpritesGfx* gMonSpritesGfx;

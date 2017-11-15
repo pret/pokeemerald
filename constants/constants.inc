@@ -17,3 +17,4 @@
 	.include "constants/berry_constants.inc"
 	.include "constants/field_object_constants.inc"
 	.include "constants/contest_move_effects.inc"
+	.include "constants/songs.inc"

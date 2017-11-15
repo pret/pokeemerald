@@ -1907,7 +1907,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 HANDLE_NICKNAME_STRING_CASE(gBattleScripting.bank, *(&gBattleStruct->field_52))
                 break;
             case B_TXT_PC_CREATOR_NAME: // lanette pc
-                if (FlagGet(SYS_PC_LANETTE))
+                if (FlagGet(FLAG_SYS_PC_LANETTE))
                     toCpy = gText_Lanettes;
                 else
                     toCpy = gText_Someones;

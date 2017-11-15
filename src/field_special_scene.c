@@ -354,7 +354,7 @@ void sub_80FB768(void)
 
 void sub_80FB7A4(void)
 {
-    FlagSet(SYS_CRUISE_MODE);
+    FlagSet(FLAG_SYS_CRUISE_MODE);
     FlagSet(0x4001);
     FlagSet(0x4000);
     saved_warp2_set(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);

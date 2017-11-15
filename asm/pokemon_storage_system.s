@@ -2252,7 +2252,7 @@ _080C8230:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080C825C
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080C825C
@@ -5458,7 +5458,7 @@ _080C9F56:
 sub_80C9F6C: @ 80C9F6C
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	mov r0, sp
 	strh r1, [r0]
@@ -14656,7 +14656,7 @@ _080CEC86:
 	adds r1, r3
 	str r0, [r1]
 	adds r0, r6, 0
-	bl pokemon_get_pal
+	bl GetMonFrontSpritePal
 	ldr r1, [r4]
 	ldr r2, =0x00000cdc
 	adds r1, r2
@@ -14759,7 +14759,7 @@ _080CED7E:
 	adds r1, r4
 	ldrh r0, [r1]
 	mov r1, r9
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	ldr r1, [r5]
 	ldr r3, =0x00000cdc
 	adds r2, r1, r3

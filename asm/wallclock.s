@@ -153,7 +153,7 @@ _081348FC:
 	movs r2, 0x20
 	bl LoadPalette
 _08134906:
-	bl sub_8098C64
+	bl GetOverworldTextboxPalettePtr
 	movs r1, 0xE0
 	movs r2, 0x20
 	bl LoadPalette

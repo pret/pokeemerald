@@ -308,7 +308,7 @@ static const struct {
 } gUnknown_085A1EDC[] = {
     gUnknown_085A1ED4,
     MAPSEC_EVER_GRANDE_CITY,
-    SYS_POKEMON_LEAGUE_FLY
+    FLAG_SYS_POKEMON_LEAGUE_FLY
 };
 
 static const struct BgTemplate gUnknown_085A1EE4[] = {
@@ -1918,7 +1918,7 @@ static void sub_8124E0C(void)
                             sub_8084CCC(gSaveBlock2Ptr->playerGender == MALE ? 0x0C : 0x0D);
                             break;
                         case MAPSEC_EVER_GRANDE_CITY:
-                            sub_8084CCC(FlagGet(SYS_POKEMON_LEAGUE_FLY) && gUnknown_0203A148->regionMap.posWithinMapSec == 0 ? 0x14 : 0x0B);
+                            sub_8084CCC(FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && gUnknown_0203A148->regionMap.posWithinMapSec == 0 ? 0x14 : 0x0B);
                             break;
                         default:
                             if (gUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2] != 0)
