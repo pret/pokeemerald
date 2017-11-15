@@ -1,0 +1,771 @@
+PetalburgCity_MapScript1_1DC2D7: @ 81DC2D7
+	setflag FLAG_VISITED_PETALBURG_CITY
+	compare_var_to_value VAR_0x4057, 0
+	call_if 1, PetalburgCity_EventScript_1DC307
+	compare_var_to_value VAR_0x4057, 2
+	call_if 1, PetalburgCity_EventScript_1DC30F
+	compare_var_to_value VAR_0x4057, 4
+	call_if 1, PetalburgCity_EventScript_1DC30F
+	compare_var_to_value VAR_0x4085, 8
+	call_if 1, PetalburgCity_EventScript_1DC316
+	end
+
+PetalburgCity_EventScript_1DC307:: @ 81DC307
+	setobjectxyperm 8, 5, 11
+	return
+
+PetalburgCity_EventScript_1DC30F:: @ 81DC30F
+	setflag FLAG_SPECIAL_FLAG_0x4000
+	savebgm BGM_TSURETEK
+	return
+
+PetalburgCity_EventScript_1DC316:: @ 81DC316
+	setvar VAR_0x4085, 7
+	return
+
+PetalburgCity_MapScript2_1DC31C: @ 81DC31C
+	map_script_2 VAR_0x4057, 2, PetalburgCity_EventScript_1DC32E
+	map_script_2 VAR_0x4057, 4, PetalburgCity_EventScript_1DC390
+	.2byte 0
+
+PetalburgCity_EventScript_1DC32E:: @ 81DC32E
+	lockall
+	special copy_player_party_to_sav1
+	special sub_813946C
+	applymovement 2, PetalburgCity_Movement_1DC451
+	applymovement 255, PetalburgCity_Movement_1DC430
+	waitmovement 0
+	msgbox PetalburgCity_Text_1EC1F8, 4
+	special sub_80B086C
+	waitstate
+	msgbox PetalburgCity_Text_1EC271, 4
+	applymovementat 2, PetalburgCity_Movement_2725A4, PETALBURG_CITY
+	waitmovementat 2, PETALBURG_CITY
+	msgbox PetalburgCity_Text_1EC297, 4
+	closemessage
+	clearflag FLAG_SPECIAL_FLAG_0x4000
+	setvar VAR_0x4057, 3
+	fadedefaultbgm
+	clearflag FLAG_SPECIAL_FLAG_0x4001
+	special copy_player_party_from_sav1
+	setvar VAR_0x4085, 1
+	warp PETALBURG_CITY_GYM, 255, 4, 108
+	waitstate
+	releaseall
+	end
+
+PetalburgCity_EventScript_1DC390:: @ 81DC390
+	lockall
+	setflag FLAG_SPECIAL_FLAG_0x4000
+	applymovement 5, PetalburgCity_Movement_1DC41B
+	applymovement 255, PetalburgCity_Movement_1DC406
+	waitmovement 0
+	setvar VAR_0x8004, 7
+	setvar VAR_0x8005, 5
+	opendoor VAR_0x8004, VAR_0x8005
+	waitdooranim
+	applymovement 5, PetalburgCity_Movement_1DC42D
+	applymovement 255, PetalburgCity_Movement_1DC418
+	waitmovement 0
+	setflag FLAG_0x33E
+	hideobjectat 255, PETALBURG_CITY
+	closedoor VAR_0x8004, VAR_0x8005
+	waitdooranim
+	clearflag FLAG_SPECIAL_FLAG_0x4000
+	fadedefaultbgm
+	clearflag FLAG_SPECIAL_FLAG_0x4001
+	warp PETALBURG_CITY_WALLYS_HOUSE, 255, 2, 4
+	waitstate
+	releaseall
+	end
+
+PetalburgCity_EventScript_1DC3E6:: @ 81DC3E6
+	lock
+	faceplayer
+	msgbox PetalburgCity_Text_1DC985, 4
+	closemessage
+	applymovement 3, PetalburgCity_Movement_2725A2
+	waitmovement 0
+	release
+	end
+
+PetalburgCity_EventScript_1DC3FD:: @ 81DC3FD
+	msgbox PetalburgCity_Text_1DC837, 2
+	end
+
+PetalburgCity_Movement_1DC406: @ 81DC406
+	step_13
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_up
+	step_up
+	step_up
+	step_up
+	step_up
+	step_end
+
+PetalburgCity_Movement_1DC418: @ 81DC418
+	step_up
+	step_up
+	step_end
+
+PetalburgCity_Movement_1DC41B: @ 81DC41B
+	step_13
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_up
+	step_up
+	step_up
+	step_up
+	step_up
+	step_up
+	step_end
+
+PetalburgCity_Movement_1DC42D: @ 81DC42D
+	step_up
+	step_54
+	step_end
+
+PetalburgCity_Movement_1DC430: @ 81DC430
+	step_13
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_up
+	step_28
+	step_end
+
+PetalburgCity_Movement_1DC451: @ 81DC451
+	step_13
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_up
+	step_right
+	step_14
+	step_26
+	step_14
+	step_14
+	step_28
+	step_end
+
+PetalburgCity_EventScript_1DC476:: @ 81DC476
+	msgbox PetalburgCity_Text_1DCAAA, 3
+	end
+
+PetalburgCity_EventScript_1DC47F:: @ 81DC47F
+	msgbox PetalburgCity_Text_1DCAF1, 3
+	end
+
+PetalburgCity_EventScript_1DC488:: @ 81DC488
+	msgbox PetalburgCity_Text_1DCA30, 2
+	end
+
+PetalburgCity_EventScript_1DC491:: @ 81DC491
+	msgbox PetalburgCity_Text_1DCB23, 3
+	end
+
+PetalburgCity_EventScript_1DC49A:: @ 81DC49A
+	lockall
+	setvar VAR_0x8008, 0
+	goto PetalburgCity_EventScript_1DC4CA
+	end
+
+PetalburgCity_EventScript_1DC4A6:: @ 81DC4A6
+	lockall
+	setvar VAR_0x8008, 1
+	goto PetalburgCity_EventScript_1DC4CA
+	end
+
+PetalburgCity_EventScript_1DC4B2:: @ 81DC4B2
+	lockall
+	setvar VAR_0x8008, 2
+	goto PetalburgCity_EventScript_1DC4CA
+	end
+
+PetalburgCity_EventScript_1DC4BE:: @ 81DC4BE
+	lockall
+	setvar VAR_0x8008, 3
+	goto PetalburgCity_EventScript_1DC4CA
+	end
+
+PetalburgCity_EventScript_1DC4CA:: @ 81DC4CA
+	applymovement 8, PetalburgCity_Movement_27259E
+	waitmovement 0
+	playbgm BGM_TSURETEK, 0
+	playse SE_PIN
+	applymovement 8, PetalburgCity_Movement_272598
+	waitmovement 0
+	applymovement 8, PetalburgCity_Movement_27259A
+	waitmovement 0
+	compare_var_to_value VAR_0x8008, 0
+	call_if 1, PetalburgCity_EventScript_1DC57F
+	compare_var_to_value VAR_0x8008, 1
+	call_if 1, PetalburgCity_EventScript_1DC594
+	compare_var_to_value VAR_0x8008, 2
+	call_if 1, PetalburgCity_EventScript_1DC59F
+	compare_var_to_value VAR_0x8008, 3
+	call_if 1, PetalburgCity_EventScript_1DC5B4
+	msgbox PetalburgCity_Text_1DC881, 4
+	closemessage
+	compare_var_to_value VAR_0x8008, 0
+	call_if 1, PetalburgCity_EventScript_1DC5C9
+	compare_var_to_value VAR_0x8008, 1
+	call_if 1, PetalburgCity_EventScript_1DC5DB
+	compare_var_to_value VAR_0x8008, 2
+	call_if 1, PetalburgCity_EventScript_1DC5ED
+	compare_var_to_value VAR_0x8008, 3
+	call_if 1, PetalburgCity_EventScript_1DC5FF
+	msgbox PetalburgCity_Text_1DC91B, 4
+	applymovement 8, PetalburgCity_Movement_2725A8
+	applymovement 255, PetalburgCity_Movement_2725A8
+	waitmovement 0
+	msgbox PetalburgCity_Text_1DC93E, 4
+	closemessage
+	applymovement 8, PetalburgCity_Movement_1DC658
+	waitmovement 0
+	fadedefaultbgm
+	releaseall
+	end
+
+PetalburgCity_EventScript_1DC57F:: @ 81DC57F
+	applymovement 8, PetalburgCity_Movement_1DC615
+	waitmovement 0
+	applymovement 255, PetalburgCity_Movement_2725AA
+	waitmovement 0
+	return
+
+PetalburgCity_EventScript_1DC594:: @ 81DC594
+	applymovement 8, PetalburgCity_Movement_1DC61A
+	waitmovement 0
+	return
+
+PetalburgCity_EventScript_1DC59F:: @ 81DC59F
+	applymovement 8, PetalburgCity_Movement_1DC61D
+	waitmovement 0
+	applymovement 255, PetalburgCity_Movement_2725A6
+	waitmovement 0
+	return
+
+PetalburgCity_EventScript_1DC5B4:: @ 81DC5B4
+	applymovement 8, PetalburgCity_Movement_1DC622
+	waitmovement 0
+	applymovement 255, PetalburgCity_Movement_2725A6
+	waitmovement 0
+	return
+
+PetalburgCity_EventScript_1DC5C9:: @ 81DC5C9
+	applymovement 8, PetalburgCity_Movement_1DC628
+	applymovement 255, PetalburgCity_Movement_1DC665
+	waitmovement 0
+	return
+
+PetalburgCity_EventScript_1DC5DB:: @ 81DC5DB
+	applymovement 8, PetalburgCity_Movement_1DC633
+	applymovement 255, PetalburgCity_Movement_1DC66F
+	waitmovement 0
+	return
+
+PetalburgCity_EventScript_1DC5ED:: @ 81DC5ED
+	applymovement 8, PetalburgCity_Movement_1DC641
+	applymovement 255, PetalburgCity_Movement_1DC67C
+	waitmovement 0
+	return
+
+PetalburgCity_EventScript_1DC5FF:: @ 81DC5FF
+	applymovement 8, PetalburgCity_Movement_1DC64C
+	applymovement 255, PetalburgCity_Movement_1DC686
+	waitmovement 0
+	return
+
+PetalburgCity_Movement_1DC611:: @ 81DC611
+	step_14
+	step_14
+	step_14
+	step_end
+
+PetalburgCity_Movement_1DC615: @ 81DC615
+	step_right
+	step_right
+	step_right
+	step_26
+	step_end
+
+PetalburgCity_Movement_1DC61A: @ 81DC61A
+	step_right
+	step_right
+	step_end
+
+PetalburgCity_Movement_1DC61D: @ 81DC61D
+	step_right
+	step_right
+	step_right
+	step_25
+	step_end
+
+PetalburgCity_Movement_1DC622: @ 81DC622
+	step_down
+	step_right
+	step_right
+	step_right
+	step_25
+	step_end
+
+PetalburgCity_Movement_1DC628: @ 81DC628
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_right
+	step_26
+	step_end
+
+PetalburgCity_Movement_1DC633: @ 81DC633
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_up
+	step_right
+	step_26
+	step_end
+
+PetalburgCity_Movement_1DC641: @ 81DC641
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_right
+	step_26
+	step_end
+
+PetalburgCity_Movement_1DC64C: @ 81DC64C
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_up
+	step_right
+	step_26
+	step_end
+
+PetalburgCity_Movement_1DC658: @ 81DC658
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
+
+PetalburgCity_Movement_1DC665: @ 81DC665
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_end
+
+PetalburgCity_Movement_1DC66F: @ 81DC66F
+	step_14
+	step_14
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_up
+	step_end
+
+PetalburgCity_Movement_1DC67C: @ 81DC67C
+	step_up
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_end
+
+PetalburgCity_Movement_1DC686: @ 81DC686
+	step_up
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_up
+	step_up
+	step_end
+
+PetalburgCity_EventScript_1DC691:: @ 81DC691
+	lockall
+	addobject 9
+	setvar VAR_0x8008, 0
+	setobjectxy 9, 13, 10
+	goto PetalburgCity_EventScript_1DC6E9
+	end
+
+PetalburgCity_EventScript_1DC6A7:: @ 81DC6A7
+	lockall
+	addobject 9
+	setvar VAR_0x8008, 1
+	setobjectxy 9, 13, 11
+	goto PetalburgCity_EventScript_1DC6E9
+	end
+
+PetalburgCity_EventScript_1DC6BD:: @ 81DC6BD
+	lockall
+	addobject 9
+	setvar VAR_0x8008, 2
+	setobjectxy 9, 13, 12
+	goto PetalburgCity_EventScript_1DC6E9
+	end
+
+PetalburgCity_EventScript_1DC6D3:: @ 81DC6D3
+	lockall
+	addobject 9
+	setvar VAR_0x8008, 3
+	setobjectxy 9, 13, 13
+	goto PetalburgCity_EventScript_1DC6E9
+	end
+
+PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
+	applymovement 9, PetalburgCity_Movement_1DC7D6
+	waitmovement 0
+	playse SE_PIN
+	applymovement 9, PetalburgCity_Movement_272598
+	waitmovement 0
+	applymovement 9, PetalburgCity_Movement_27259A
+	waitmovement 0
+	applymovement 9, PetalburgCity_Movement_1DC7DB
+	waitmovement 0
+	applymovement 255, PetalburgCity_Movement_2725A8
+	waitmovement 0
+	setvar VAR_0x40D1, 1
+	msgbox PetalburgCity_Text_1DCB31, 4
+	closemessage
+	applymovement 9, PetalburgCity_Movement_2725A8
+	waitmovement 0
+	delay 30
+	msgbox PetalburgCity_Text_1DCB82, 4
+	closemessage
+	applymovement 9, PetalburgCity_Movement_2725A4
+	waitmovement 0
+	delay 30
+	msgbox PetalburgCity_Text_1DCC09, 4
+	closemessage
+	compare_var_to_value VAR_0x8008, 0
+	call_if 1, PetalburgCity_EventScript_1DC78E
+	compare_var_to_value VAR_0x8008, 1
+	call_if 1, PetalburgCity_EventScript_1DC7A0
+	compare_var_to_value VAR_0x8008, 2
+	call_if 1, PetalburgCity_EventScript_1DC7B2
+	compare_var_to_value VAR_0x8008, 3
+	call_if 1, PetalburgCity_EventScript_1DC7C4
+	setvar VAR_0x40C9, 1
+	removeobject 9
+	releaseall
+	end
+
+PetalburgCity_EventScript_1DC78E:: @ 81DC78E
+	applymovement 255, PetalburgCity_Movement_1DC7EE
+	applymovement 9, PetalburgCity_Movement_1DC7E0
+	waitmovement 0
+	return
+
+PetalburgCity_EventScript_1DC7A0:: @ 81DC7A0
+	applymovement 255, PetalburgCity_Movement_1DC802
+	applymovement 9, PetalburgCity_Movement_1DC7F5
+	waitmovement 0
+	return
+
+PetalburgCity_EventScript_1DC7B2:: @ 81DC7B2
+	applymovement 255, PetalburgCity_Movement_1DC815
+	applymovement 9, PetalburgCity_Movement_1DC808
+	waitmovement 0
+	return
+
+PetalburgCity_EventScript_1DC7C4:: @ 81DC7C4
+	applymovement 255, PetalburgCity_Movement_1DC828
+	applymovement 9, PetalburgCity_Movement_1DC81B
+	waitmovement 0
+	return
+
+PetalburgCity_Movement_1DC7D6: @ 81DC7D6
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
+
+PetalburgCity_Movement_1DC7DB: @ 81DC7DB
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
+
+PetalburgCity_Movement_1DC7E0: @ 81DC7E0
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
+
+PetalburgCity_Movement_1DC7EE: @ 81DC7EE
+	step_14
+	step_25
+	step_14
+	step_14
+	step_13
+	step_27
+	step_end
+
+PetalburgCity_Movement_1DC7F5: @ 81DC7F5
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
+
+PetalburgCity_Movement_1DC802: @ 81DC802
+	step_14
+	step_25
+	step_14
+	step_13
+	step_27
+	step_end
+
+PetalburgCity_Movement_1DC808: @ 81DC808
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
+
+PetalburgCity_Movement_1DC815: @ 81DC815
+	step_14
+	step_25
+	step_14
+	step_13
+	step_27
+	step_end
+
+PetalburgCity_Movement_1DC81B: @ 81DC81B
+	step_up
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
+
+PetalburgCity_Movement_1DC828: @ 81DC828
+	step_14
+	step_26
+	step_14
+	step_13
+	step_27
+	step_end
+
+PetalburgCity_EventScript_1DC82E:: @ 81DC82E
+	msgbox PetalburgCity_Text_1DC881, 2
+	end
+
+PetalburgCity_Text_1DC837: @ 81DC837
+	.string "Where has our WALLY gone?\p"
+	.string "We have to leave for VERDANTURF TOWN\n"
+	.string "very soon…$"
+
+PetalburgCity_Text_1DC881: @ 81DC881
+	.string "Hiya! Are you maybe…\n"
+	.string "A rookie TRAINER?\p"
+	.string "Do you know what POKéMON TRAINERS\n"
+	.string "do when they reach a new town?\p"
+	.string "They first check what kind of GYM\n"
+	.string "is in the town.$"
+
+PetalburgCity_Text_1DC91B: @ 81DC91B
+	.string "See? This is PETALBURG CITY’s GYM.$"
+
+PetalburgCity_Text_1DC93E: @ 81DC93E
+	.string "This is the GYM’s sign. Look for it\n"
+	.string "whenever you’re looking for a GYM.$"
+
+PetalburgCity_Text_1DC985: @ 81DC985
+	.string "My face is reflected in the water.\p"
+	.string "It’s a shining grin full of hope…\p"
+	.string "Or it could be a look of somber silence\n"
+	.string "struggling with fear…\p"
+	.string "What do you see reflected in your face?$"
+
+PetalburgCity_Text_1DCA30: @ 81DCA30
+	.string "Let’s say you have six POKéMON.\n"
+	.string "If you catch another one…\p"
+	.string "It is automatically sent to a STORAGE\n"
+	.string "BOX over a PC connection.$"
+
+PetalburgCity_Text_1DCAAA: @ 81DCAAA
+	.string "PETALBURG CITY POKéMON GYM\n"
+	.string "LEADER: NORMAN\l"
+	.string "“A man in pursuit of power!”$"
+
+PetalburgCity_Text_1DCAF1: @ 81DCAF1
+	.string "PETALBURG CITY\n"
+	.string "“Where people mingle with nature.”$"
+
+PetalburgCity_Text_1DCB23: @ 81DCB23
+	.string "WALLY’S HOUSE$"
+
+PetalburgCity_Text_1DCB31: @ 81DCB31
+	.string "Excuse me!\p"
+	.string "Let me guess, from the way you’re\n"
+	.string "dressed, are you a POKéMON TRAINER?$"
+
+PetalburgCity_Text_1DCB82: @ 81DCB82
+	.string "… … … … … …\p"
+	.string "Well, maybe not.\n"
+	.string "Your clothes aren’t all that dirty.\p"
+	.string "You’re either a rookie TRAINER,\n"
+	.string "or maybe you’re just an ordinary kid.$"
+
+PetalburgCity_Text_1DCC09: @ 81DCC09
+	.string "I’m roaming the land in search of\n"
+	.string "talented TRAINERS.\p"
+	.string "I’m sorry to have taken your time.$"

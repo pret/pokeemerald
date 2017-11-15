@@ -60,7 +60,7 @@ SECTIONS {
         src/battle_2.o(.text);
         src/battle_util.o(.text);
         src/battle_script_commands.o(.text);
-        asm/battle_5.o(.text);
+        src/battle_util2.o(.text);
         src/battle_controller_player.o(.text);
         src/battle_gfx_sfx_util.o(.text);
         src/battle_controller_opponent.o(.text);
@@ -176,7 +176,7 @@ SECTIONS {
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
         asm/trader.o(.text);
-        asm/starter_choose.o(.text);
+        src/starter_choose.o(.text);
         asm/wallclock.o(.text);
         asm/rom6.o(.text);
         asm/battle_records.o(.text);
@@ -352,6 +352,8 @@ SECTIONS {
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         data/rom4.o(.rodata);
+        data/tilesets.o(.rodata);
+        data/maps.o(.rodata);
         data/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
         data/rom_8486FEC.o(.rodata);
@@ -372,6 +374,8 @@ SECTIONS {
         data/battle_anims.o(.rodata);
         src/battle_anim.o(.rodata);
         data/rom_8525F58.o(.rodata);
+        data/map_events.o(.rodata);
+        data/battle_anim_80A9C70.o(.rodata);
         data/title_screen.o(.rodata);
         data/field_screen.o(.rodata);
         data/battle_setup.o(.rodata);
@@ -419,6 +423,8 @@ SECTIONS {
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/data4.o(.rodata);
+        data/starter_choose.o(.rodata);
+        data/data4c.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);

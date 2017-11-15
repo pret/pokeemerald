@@ -17,7 +17,7 @@ hm_prepare_rocksmash: @ 8145DC4
 	movs r0, 0
 	b _08145DF2
 _08145DD8:
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl brm_get_pokemon_selection
 	lsls r0, 24
 	lsrs r0, 24
@@ -44,7 +44,7 @@ sub_8145E0C: @ 8145E0C
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_082908FD
+	ldr r0, =FieryPath_EventScript_2908FD
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0

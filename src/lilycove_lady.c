@@ -226,7 +226,7 @@ static EWRAM_DATA struct LilycoveLadyFavour *gUnknown_0203CD64 = NULL;
 static EWRAM_DATA struct LilycoveLadyQuiz *gUnknown_0203CD68 = NULL;
 static EWRAM_DATA struct LilycoveLadyContest *gUnknown_0203CD6C = NULL;
 
-extern EWRAM_DATA u16 gScriptItemId;
+extern EWRAM_DATA u16 gSpecialVar_ItemId;
 
 u8 GetLilycoveLadyId(void)
 {
@@ -242,11 +242,11 @@ void sub_818D9C0(void)
     {
         lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
         VarSet(VAR_0x4011, gUnknown_0860B074[lilycoveLady->contest.category]);
-        gScriptResult = TRUE;
+        gSpecialVar_Result = TRUE;
     }
     else
     {
-        gScriptResult = FALSE;
+        gSpecialVar_Result = FALSE;
     }
 }
 
@@ -308,7 +308,7 @@ void SetLilycoveLadyRandomly(void)
 
 void sub_818DAEC(void)
 {
-    gScriptResult = GetLilycoveLadyId();
+    gSpecialVar_Result = GetLilycoveLadyId();
 }
 
 static u8 sub_818DB04(const u16 *data)
@@ -459,7 +459,7 @@ static bool8 sub_818DD84(u16 itemId)
 
 bool8 sub_818DE44(void)
 {
-    return sub_818DD84(gScriptItemId);
+    return sub_818DD84(gSpecialVar_ItemId);
 }
 
 bool8 sub_818DE5C(void)
@@ -845,7 +845,7 @@ void sub_818E47C(void)
 
 void sub_818E490(void)
 {
-    RemoveBagItem(gScriptItemId, 1);
+    RemoveBagItem(gSpecialVar_ItemId, 1);
 }
 
 void sub_818E4A4(void)
@@ -853,7 +853,7 @@ void sub_818E4A4(void)
     u8 i;
 
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->itemId = gScriptItemId;
+    gUnknown_0203CD68->itemId = gSpecialVar_ItemId;
     for (i = 0; i < 4; i ++)
     {
         gUnknown_0203CD68->playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];

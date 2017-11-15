@@ -1,0 +1,19 @@
+BattleFrontier_PokemonCenter_2F_MapScripts:: @ 8267AA4
+	map_script 2, BattleFrontier_PokemonCenter_2F_MapScript2_276C3B
+	map_script 4, BattleFrontier_PokemonCenter_2F_MapScript2_276B6C
+	map_script 1, BattleFrontier_PokemonCenter_2F_MapScript1_276BBE
+	map_script 3, BattleFrontier_PokemonCenter_2F_MapScript1_276ACF
+	.byte 0
+
+BattleFrontier_PokemonCenter_2F_EventScript_267AB9:: @ 8267AB9
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+BattleFrontier_PokemonCenter_2F_EventScript_267ABF:: @ 8267ABF
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+BattleFrontier_PokemonCenter_2F_EventScript_267AC5:: @ 8267AC5
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
+

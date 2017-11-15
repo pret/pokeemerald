@@ -2,7 +2,7 @@
 #define GUARD_POKEDEX_H
 
 void ResetPokedex(void);
-const u8 *GetPokemonCategory(u16);
+void CopyMonCategoryText(u16 species, u8 *dst);
 u16 GetPokedexHeightWeight(u16 dexNum, u8 data);
 u16 GetNationalPokedexCount(u8);
 u16 GetHoennPokedexCount(u8);
