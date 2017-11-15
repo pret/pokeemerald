@@ -4043,12 +4043,12 @@ sub_8137734: @ 8137734
 	lsrs r1, r0, 24
 	cmp r1, 0x1
 	bne _08137760
-	ldr r0, =gUnknown_0203BCE4
+	ldr r0, =gHasHallOfFameRecords
 	strb r1, [r0]
 	b _0813776C
 	.pool
 _08137760:
-	ldr r1, =gUnknown_0203BCE4
+	ldr r1, =gHasHallOfFameRecords
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
@@ -4165,7 +4165,7 @@ _08137838:
 	movs r1, 0x43
 	bl sub_80EE4DC
 _0813785A:
-	ldr r0, =sub_8173694
+	ldr r0, =CB2_DoHallOfFameScreen
 	bl SetMainCallback2
 	movs r0, 0
 	add sp, 0x1C
@@ -4638,7 +4638,7 @@ sub_8137C10: @ 8137C10
 	thumb_func_start sub_8137C28
 sub_8137C28: @ 8137C28
 	push {lr}
-	ldr r0, =sub_8174194
+	ldr r0, =CB2_DoHallOfFamePC
 	bl SetMainCallback2
 	bl ScriptContext2_Enable
 	pop {r0}
@@ -7673,7 +7673,7 @@ sub_81394D8: @ 81394D8
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8133EDC
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r6, r0, 16
 	bl CalculatePlayerPartyCount

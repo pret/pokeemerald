@@ -345,26 +345,26 @@ gTilesetPalettes_BattleFrontierOutsideEast:: @ 834F984
 
 	.align 2
 gTilesetTiles_InsideBuilding:: @ 834FB84
-	.incbin "data/tilesets/primary/inside_building/tiles.4bpp.lz"
+	.incbin "data/tilesets/primary/building/tiles.4bpp.lz"
 
 	.align 2
 gTilesetPalettes_InsideBuilding:: @ 83508BC
-	.incbin "data/tilesets/primary/inside_building/palettes/00.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/01.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/02.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/03.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/04.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/05.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/06.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/07.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/08.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/09.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/10.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/11.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/12.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/13.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/14.gbapal"
-	.incbin "data/tilesets/primary/inside_building/palettes/15.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/00.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/01.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/02.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/03.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/04.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/05.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/06.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/07.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/08.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/09.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/10.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/11.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/12.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/13.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/14.gbapal"
+	.incbin "data/tilesets/primary/building/palettes/15.gbapal"
 
 	.align 2
 gTilesetTiles_Shop:: @ 8350ABC

@@ -6763,7 +6763,7 @@ _080DB1CC:
 	adds r0, r5, 0
 	adds r1, r7, 0
 	adds r2, r6, 0
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	movs r1, 0x90
 	lsls r1, 1
 	movs r2, 0x20

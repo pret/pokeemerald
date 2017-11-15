@@ -14656,7 +14656,7 @@ _080CEC86:
 	adds r1, r3
 	str r0, [r1]
 	adds r0, r6, 0
-	bl pokemon_get_pal
+	bl GetMonFrontSpritePal
 	ldr r1, [r4]
 	ldr r2, =0x00000cdc
 	adds r1, r2
@@ -14759,7 +14759,7 @@ _080CED7E:
 	adds r1, r4
 	ldrh r0, [r1]
 	mov r1, r9
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	ldr r1, [r5]
 	ldr r3, =0x00000cdc
 	adds r2, r1, r3

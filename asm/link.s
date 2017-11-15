@@ -52022,7 +52022,7 @@ _080241A6:
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
-	ldr r2, =gUnknown_082C8959
+	ldr r2, =gText_SavingDontTurnOffPower
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -64112,7 +64112,7 @@ _0802A3AE:
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
-	ldr r2, =gUnknown_082C8959
+	ldr r2, =gText_SavingDontTurnOffPower
 	str r4, [sp]
 	movs r0, 0x2
 	str r0, [sp, 0x4]
@@ -69004,7 +69004,7 @@ _0802CA32:
 	ldrh r0, [r7]
 	ldr r1, [r7, 0x4]
 	ldr r2, [r7, 0x8]
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	str r0, [sp, 0x20]
 	add r0, sp, 0x20
 	ldr r1, [r0, 0x4]
@@ -70355,7 +70355,7 @@ _0802D516:
 	strh r0, [r1, 0x12]
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_082C8959
+	ldr r2, =gText_SavingDontTurnOffPower
 	movs r1, 0x1
 	str r1, [sp]
 	movs r1, 0xFF

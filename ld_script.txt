@@ -60,9 +60,9 @@ SECTIONS {
         src/battle_2.o(.text);
         src/battle_util.o(.text);
         src/battle_script_commands.o(.text);
-        asm/battle_5.o(.text);
+        src/battle_util2.o(.text);
         src/battle_controller_player.o(.text);
-        asm/battle_7.o(.text);
+        src/battle_gfx_sfx_util.o(.text);
         src/battle_controller_opponent.o(.text);
         src/battle_ai_switch_items.o(.text);
         src/battle_controller_link_opponent.o(.text);
@@ -85,6 +85,7 @@ SECTIONS {
         src/load_save.o(.text);
         asm/load_save.o(.text);
         asm/trade.o(.text);
+        src/berry_blender.o(.text);
         asm/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
@@ -175,7 +176,7 @@ SECTIONS {
         asm/contest_painting.o(.text);
         src/battle_ai_script_commands.o(.text);
         asm/trader.o(.text);
-        asm/starter_choose.o(.text);
+        src/starter_choose.o(.text);
         asm/wallclock.o(.text);
         asm/rom6.o(.text);
         asm/battle_records.o(.text);
@@ -214,7 +215,7 @@ SECTIONS {
         src/reset_save_heap.o(.text);
         asm/field_region_map.o(.text);
         asm/battle_anim_8170478.o(.text);
-        asm/hall_of_fame.o(.text);
+        src/hall_of_fame.o(.text);
         asm/credits.o(.text);
         src/lottery_corner.o(.text);
         src/diploma.o(.text);
@@ -344,11 +345,11 @@ SECTIONS {
         src/util.o(.rodata);
         data/daycare.o(.rodata);
         src/egg_hatch.o(.rodata);
-        data/battle_7.o(.rodata);
+        src/battle_gfx_sfx_util.o(.rodata);
         src/battle_interface.o(.rodata);
         data/pokeball.o(.rodata);
         data/trade.o(.rodata);
-        data/berry_blender.o(.rodata);
+        src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         data/rom4.o(.rodata);
         data/tilesets.o(.rodata);
@@ -422,6 +423,8 @@ SECTIONS {
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/data4.o(.rodata);
+        data/starter_choose.o(.rodata);
+        data/data4c.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
@@ -439,7 +442,7 @@ SECTIONS {
         data/intro.o(.rodata);
         data/field_region_map.o(.rodata);
         data/battle_anim_8170478.o(.rodata);
-        data/hall_of_fame.o(.rodata);
+        src/hall_of_fame.o(.rodata);
         data/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
         src/diploma.o(.rodata);

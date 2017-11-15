@@ -572,7 +572,7 @@ sub_81302E8: @ 81302E8
 	ldr r1, [r0, 0x4]
 	ldr r2, [r0]
 	adds r0, r5, 0
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	ldr r7, =gUnknown_030061C4
 	ldr r1, [r7]
 	bl LZDecompressVram

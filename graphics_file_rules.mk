@@ -70,7 +70,7 @@ $(tilesetdir)/secondary/battle_frontier_outside_west/tiles.4bpp: $(tilesetdir)/s
 $(tilesetdir)/secondary/battle_frontier_outside_east/tiles.4bpp: $(tilesetdir)/secondary/battle_frontier_outside_east/tiles.png
 	$(GFX) $< $@ -num_tiles 508
 
-$(tilesetdir)/primary/inside_building/tiles.4bpp: $(tilesetdir)/primary/inside_building/tiles.png
+$(tilesetdir)/primary/building/tiles.4bpp: $(tilesetdir)/primary/building/tiles.png
 	$(GFX) $< $@ -num_tiles 502
 
 $(tilesetdir)/secondary/shop/tiles.4bpp: $(tilesetdir)/secondary/shop/tiles.png
@@ -287,6 +287,9 @@ graphics/title_screen/pokemon_logo.gbapal: graphics/title_screen/pokemon_logo.pa
 
 $(INTROGFXDIR)/copyright.4bpp: $(INTROGFXDIR)/copyright.png
 	$(GFX) $< $@ -num_tiles 39
-
+    
 $(interfacedir)/pkmnjump_bg.4bpp: $(interfacedir)/pkmnjump_bg.png
 	$(GFX) $< $@ -num_tiles 63
+
+graphics/misc/japanese_hof.4bpp: graphics/misc/japanese_hof.png
+	$(GFX) $< $@ -num_tiles 29

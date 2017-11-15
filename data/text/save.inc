@@ -27,6 +27,6 @@ gUnknown_082C892A:: @ 82C892A
 	.string "Please exchange the\n"
 	.string "backup memory.$"
 
-gUnknown_082C8959:: @ 82C8959
+gText_SavingDontTurnOffPower:: @ 82C8959
 	.string "SAVING…\n"
 	.string "DON’T TURN OFF THE POWER.$"

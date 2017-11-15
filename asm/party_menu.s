@@ -4211,7 +4211,7 @@ _081B23E8:
 	movs r1, 0x4F
 	movs r2, 0xD0
 	bl sub_809882C
-	bl sub_8098C64
+	bl GetOverworldTextboxPalettePtr
 	movs r1, 0xE0
 	movs r2, 0x20
 	bl LoadPalette
@@ -4249,7 +4249,7 @@ _081B243E:
 	adds r0, r4, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r5, =gText_Confirm
+	ldr r5, =gMenuText_Confirm
 	movs r0, 0
 	adds r1, r5, 0
 	movs r2, 0x30

@@ -4,61 +4,100 @@
 	.section .rodata
 
 gUnknown_08613F90:: @ 8613F90
-	.incbin "baserom.gba", 0x613f90, 0xc
+	.4byte 0x11F0, 0x1E1, 0x21DE
 
+@ possibly a struct
 gUnknown_08613F9C:: @ 8613F9C
-	.incbin "baserom.gba", 0x613f9c, 0x18
+	.4byte 0
+	.4byte bag_menu_change_item_callback
+	.4byte sub_81AB520
+	.4byte 0
+	.4byte 0x80000
+	.4byte 0x7003011
 
 gUnknown_08613FB4:: @ 8613FB4
-	.incbin "baserom.gba", 0x613fb4, 0x78
+    .4byte gMenuText_Use, ItemMenu_UseOutOfBattle
+    .4byte gMenuText_Toss, ItemMenu_Toss
+    .4byte gMenuText_Register, ItemMenu_Register
+    .4byte gMenuText_Give, ItemMenu_Give
+    .4byte gText_Cancel2, ItemMenu_Cancel
+    .4byte gMenuText_Use, ItemMenu_UseInBattle
+    .4byte gMenuText_Check, ItemMenu_UseOutOfBattle
+    .4byte gMenuText_Walk, ItemMenu_UseOutOfBattle
+    .4byte gMenuText_Deselect, ItemMenu_Register
+    .4byte gMenuText_CheckTag, ItemMenu_CheckTag
+    .4byte gMenuText_Confirm, unknown_ItemMenu_Confirm
+    .4byte gMenuText_Show, unknown_ItemMenu_Show
+    .4byte gMenuText_Give2, unknown_ItemMenu_Give2
+    .4byte gMenuText_Confirm, unknown_ItemMenu_Confirm2
+    .4byte gText_EmptyString2, NULL
 
 gUnknown_0861402C:: @ 861402C
-	.incbin "baserom.gba", 0x61402c, 0x4
+	.byte 0, 3, 1, 4
 
 gUnknown_08614030:: @ 8614030
-	.incbin "baserom.gba", 0x614030, 0x4
+	.byte 0, 2, 14, 4
 
 gUnknown_08614034:: @ 8614034
-	.incbin "baserom.gba", 0x614034, 0x4
+	.byte 3, 14, 1, 4
 
 gUnknown_08614038:: @ 8614038
-	.incbin "baserom.gba", 0x614038, 0x4
+	.byte 0, 3, 14, 4
 
 gUnknown_0861403C:: @ 861403C
-	.incbin "baserom.gba", 0x61403c, 0x6
+	.byte 9, 14, 0, 3, 1, 4
 
 gUnknown_08614042:: @ 8614042
-	.incbin "baserom.gba", 0x614042, 0x2
+	.byte 5, 4
 
 gUnknown_08614044:: @ 8614044
-	.incbin "baserom.gba", 0x614044, 0x2
+	.byte 3, 4
 
 gUnknown_08614046:: @ 8614046
-	.incbin "baserom.gba", 0x614046, 0x1
+	.byte 4
 
 gUnknown_08614047:: @ 8614047
-	.incbin "baserom.gba", 0x614047, 0x4
+	.byte 10, 9, 14, 4
 
 gUnknown_0861404B:: @ 861404B
-	.incbin "baserom.gba", 0x61404b, 0x2
+	.byte 11, 4
 
 gUnknown_0861404D:: @ 861404D
-	.incbin "baserom.gba", 0x61404d, 0x2
+	.byte 12, 4
 
 gUnknown_0861404F:: @ 861404F
-	.incbin "baserom.gba", 0x61404f, 0x5
+	.byte 13, 4
 
+    .align 2
 gUnknown_08614054:: @ 8614054
-	.incbin "baserom.gba", 0x614054, 0x30
+	.4byte unknown_item_menu_type
+	.4byte unknown_item_menu_type
+	.4byte item_menu_type_2
+	.4byte display_sell_item_ask_str
+	.4byte unknown_ItemMenu_Confirm
+	.4byte unknown_item_menu_type
+	.4byte display_deposit_item_ask_str
+	.4byte unknown_item_menu_type
+	.4byte unknown_item_menu_type
+	.4byte unknown_item_menu_type
+	.4byte NULL
+	.4byte item_menu_type_b
 
+    .align 2
 gUnknown_08614084:: @ 8614084
-	.incbin "baserom.gba", 0x614084, 0x8
+	.4byte BagMenuActuallyToss
+	.4byte BagMenuCancelToss
 
 gUnknown_0861408C:: @ 861408C
-	.incbin "baserom.gba", 0x61408c, 0x8
+	.4byte sub_81AD84C
+	.4byte sub_81AD6FC
 
+@ probably a struct
 gUnknown_08614094:: @ 8614094
-	.incbin "baserom.gba", 0x614094, 0x10
+	.4byte 0x1101C00
+	.4byte 0xFFFF1064
+	.4byte 0x6FFFFF
+	.4byte 0x6F
 
 gUnknown_086140A4:: @ 86140A4
 	.incbin "baserom.gba", 0x6140a4, 0xc0

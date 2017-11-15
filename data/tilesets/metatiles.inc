@@ -128,11 +128,11 @@ gMetatileAttributes_BattleFrontierOutsideEast:: @ 83AF782
 
 	.align 1
 gMetatiles_InsideBuilding:: @ 83AFB7E
-	.incbin "data/tilesets/primary/inside_building/metatiles.bin"
+	.incbin "data/tilesets/primary/building/metatiles.bin"
 
 	.align 1
 gMetatileAttributes_InsideBuilding:: @ 83AFBFE
-	.incbin "data/tilesets/primary/inside_building/metatile_attributes.bin"
+	.incbin "data/tilesets/primary/building/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_Shop:: @ 83AFC0E

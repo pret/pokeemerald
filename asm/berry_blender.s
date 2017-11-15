@@ -127,7 +127,7 @@ _0807F824:
 	b _0807F966
 	.pool
 _0807F854:
-	ldr r1, =gUnknown_083390F4
+	ldr r1, =sBlenderCenterMap
 	movs r2, 0x80
 	lsls r2, 3
 	movs r0, 0x2
@@ -135,7 +135,7 @@ _0807F854:
 	bl CopyToBgTilemapBuffer
 	movs r0, 0x2
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gUnknown_083390D4
+	ldr r0, =sBlenderCenterPal
 	movs r2, 0x80
 	lsls r2, 1
 	movs r1, 0
@@ -216,14 +216,14 @@ _0807F910:
 	b _0807F966
 	.pool
 _0807F940:
-	ldr r0, =gUnknown_083394F4
+	ldr r0, =sBlenderOuterPal
 	movs r1, 0x80
 	movs r2, 0x20
 	bl LoadPalette
 	b _0807F962
 	.pool
 _0807F950:
-	ldr r0, =gUnknown_08339AC0
+	ldr r0, =sSpriteSheet_BlenderArrow
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08339BD8
 	bl LoadSpriteSheet
@@ -243,9 +243,9 @@ _0807F980:
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08339C58
 	bl LoadSpriteSheet
-	ldr r0, =gUnknown_08339AD0
+	ldr r0, =sSpritePal_BlenderArrow
 	bl LoadSpritePalette
-	ldr r0, =gUnknown_08339AC8
+	ldr r0, =sSpritePal_BlenderMisc
 	bl LoadSpritePalette
 	ldr r4, =gUnknown_020322A4
 	ldr r0, [r4]
@@ -482,12 +482,12 @@ _0807FBAC:
 	b _0807FCE2
 _0807FBB8:
 	movs r4, 0
-	ldr r5, =gUnknown_083399C8
+	ldr r5, =sBlenderSyncArrowsPos
 	ldr r6, =gUnknown_020322A4
 _0807FBBE:
 	ldrb r1, [r5]
 	ldrb r2, [r5, 0x1]
-	ldr r0, =gUnknown_08339AD8
+	ldr r0, =sBlenderSyncArrow_SpriteTemplate
 	movs r3, 0x1
 	bl CreateSprite
 	ldr r1, [r6]
@@ -553,7 +553,7 @@ _0807FC64:
 	ldr r4, [r6]
 	ldr r0, =0x000011b8
 	adds r4, r0
-	ldr r5, =gUnknown_0833973A
+	ldr r5, =gText_BerryBlenderStart
 	bl sav2_get_text_speed
 	adds r2, r0, 0
 	lsls r2, 24
@@ -833,7 +833,7 @@ _0807FE7C:
 	bne _0807FEC8
 	adds r0, r4, 0
 	adds r0, 0x1C
-	ldr r1, =gUnknown_083397D0
+	ldr r1, =sBlenderOpponentsNames
 	ldr r1, [r1, 0xC]
 	bl StringCopy
 	b _0807FED4
@@ -841,7 +841,7 @@ _0807FE7C:
 _0807FEC8:
 	adds r0, r4, 0
 	adds r0, 0x1C
-	ldr r1, =gUnknown_083397D0
+	ldr r1, =sBlenderOpponentsNames
 	ldr r1, [r1]
 	bl StringCopy
 _0807FED4:
@@ -866,7 +866,7 @@ _0807FEE8:
 	bl StringCopy
 	adds r0, r6, 0
 	adds r0, 0x1C
-	ldr r4, =gUnknown_083397D0
+	ldr r4, =sBlenderOpponentsNames
 	ldr r1, [r4, 0x10]
 	bl StringCopy
 	adds r0, r6, 0
@@ -896,7 +896,7 @@ _0807FF3C:
 	bl StringCopy
 	adds r0, r5, 0
 	adds r0, 0x1C
-	ldr r4, =gUnknown_083397D0
+	ldr r4, =sBlenderOpponentsNames
 	ldr r1, [r4, 0x14]
 	bl StringCopy
 	adds r0, r5, 0
@@ -1086,12 +1086,12 @@ _0808010C:
 	.pool
 _08080120:
 	movs r5, 0
-	ldr r4, =gUnknown_083399C8
+	ldr r4, =sBlenderSyncArrowsPos
 	ldr r6, =gUnknown_020322A4
 _08080126:
 	ldrb r1, [r4]
 	ldrb r2, [r4, 0x1]
-	ldr r0, =gUnknown_08339AD8
+	ldr r0, =sBlenderSyncArrow_SpriteTemplate
 	movs r3, 0x1
 	bl CreateSprite
 	ldr r1, [r6]
@@ -1160,7 +1160,7 @@ _080801C8:
 	ldr r0, [r4]
 	ldr r3, =0x000011b8
 	adds r0, r3
-	ldr r1, =gUnknown_0833981A
+	ldr r1, =sText_CommunicationStandby
 	movs r2, 0
 	bl sub_808417C
 	ldr r1, [r4]
@@ -2121,12 +2121,12 @@ _080809F0:
 	.pool
 _08080A04:
 	movs r4, 0
-	ldr r5, =gUnknown_083399C8
+	ldr r5, =sBlenderSyncArrowsPos
 	ldr r6, =gUnknown_020322A4
 _08080A0A:
 	ldrb r1, [r5]
 	ldrb r2, [r5, 0x1]
-	ldr r0, =gUnknown_08339AD8
+	ldr r0, =sBlenderSyncArrow_SpriteTemplate
 	movs r3, 0x1
 	bl CreateSprite
 	ldr r1, [r6]
@@ -3095,7 +3095,7 @@ sub_8081288: @ 8081288
 	mov r8, r7
 	lsls r1, 24
 	ldr r0, =gUnknown_08339B40
-	ldr r4, =gUnknown_083399C8
+	ldr r4, =sBlenderSyncArrowsPos
 	lsrs r1, 23
 	adds r2, r1, r4
 	ldrb r6, [r2]
@@ -5062,7 +5062,7 @@ _080822B0:
 	ldr r4, [r6]
 	ldr r5, =0x000011b8
 	adds r4, r5
-	ldr r5, =gUnknown_08339831
+	ldr r5, =sText_WouldLikeToBlendAnotherBerry
 	bl sav2_get_text_speed
 	adds r2, r0, 0
 	lsls r2, 24
@@ -5263,7 +5263,7 @@ _0808246C:
 	ldr r4, [r6]
 	ldr r0, =0x000011b8
 	adds r4, r0
-	ldr r5, =gUnknown_0833981A
+	ldr r5, =sText_CommunicationStandby
 	bl sav2_get_text_speed
 	adds r2, r0, 0
 	lsls r2, 24
@@ -5555,7 +5555,7 @@ _080826EC:
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =gUnknown_083398DD
+	ldr r1, =sText_ApostropheSPokeblockCaseIsFull
 	b _08082740
 	.pool
 _0808271C:
@@ -5575,7 +5575,7 @@ _0808271C:
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =gUnknown_083398B0
+	ldr r1, =sText_HasNoBerriesToPut
 _08082740:
 	adds r0, r4, 0
 	bl StringAppend
@@ -5856,7 +5856,7 @@ _080829AA:
 	adds r0, r1
 	strh r2, [r0]
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08339896
+	ldr r1, =sText_YourPokeblockCaseIsFull
 	bl StringCopy
 	b _08082A92
 	.pool
@@ -5872,7 +5872,7 @@ _080829D4:
 	adds r0, r1
 	strh r2, [r0]
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_08339858
+	ldr r1, =sText_RunOutOfBerriesForBlending
 	bl StringCopy
 	b _08082A92
 	.pool
@@ -7276,7 +7276,7 @@ _080834DE:
 	b _08083854
 	.pool
 _08083518:
-	ldr r4, =gUnknown_083398F5
+	ldr r4, =sText_BlendingResults
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0xA8
@@ -7329,7 +7329,7 @@ _08083564:
 	bl ConvertIntToDecimalStringN
 	ldr r0, [r7]
 	adds r0, 0x9F
-	ldr r1, =gUnknown_08339941
+	ldr r1, =sText_Dot
 	bl StringAppend
 	ldr r0, [r7]
 	adds r0, 0x9F
@@ -7374,7 +7374,7 @@ _08083564:
 	bl ConvertInternationalString
 	ldr r0, [r7]
 	adds r0, 0x9F
-	ldr r1, =gUnknown_08339914
+	ldr r1, =sText_SpaceBerry
 	bl StringAppend
 	ldr r1, [r7]
 	adds r1, 0x9F
@@ -7397,7 +7397,7 @@ _08083564:
 	cmp r6, r0
 	bcc _08083564
 _0808361A:
-	ldr r1, =gUnknown_0833992E
+	ldr r1, =sText_MaximumSpeed
 	movs r3, 0xFF
 	mov r10, r3
 	str r3, [sp]
@@ -7425,7 +7425,7 @@ _0808361A:
 	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, 0x9F
-	ldr r1, =gUnknown_08339941
+	ldr r1, =sText_Dot
 	bl StringAppend
 	ldr r0, [r6]
 	adds r0, 0x4E
@@ -7445,7 +7445,7 @@ _0808361A:
 	bl StringAppend
 	ldr r0, [r6]
 	adds r0, 0x9F
-	ldr r1, =gUnknown_0833993C
+	ldr r1, =sText_RPM
 	bl StringAppend
 	ldr r1, [r6]
 	adds r1, 0x9F
@@ -7463,7 +7463,7 @@ _0808361A:
 	movs r0, 0x5
 	movs r3, 0x51
 	bl sub_80840D4
-	ldr r1, =gUnknown_0833991B
+	ldr r1, =sText_Time
 	mov r2, r10
 	str r2, [sp]
 	mov r3, r9
@@ -7499,7 +7499,7 @@ _0808361A:
 	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, 0x9F
-	ldr r1, =gUnknown_08339921
+	ldr r1, =sText_Min
 	bl StringAppend
 	adds r1, r4, 0
 	movs r2, 0x2
@@ -7507,7 +7507,7 @@ _0808361A:
 	bl ConvertIntToDecimalStringN
 	ldr r0, [r6]
 	adds r0, 0x9F
-	ldr r1, =gUnknown_08339928
+	ldr r1, =sText_Sec
 	bl StringAppend
 	ldr r1, [r6]
 	adds r1, 0x9F
@@ -7682,10 +7682,10 @@ sub_80838AC: @ 80838AC
 	ldr r1, [r0]
 	adds r0, r6, 0
 	bl StringCopy
-	ldr r1, =gUnknown_0833979D
+	ldr r1, =gText_WasMade
 	adds r0, r6, 0
 	bl StringAppend
-	ldr r1, =gUnknown_08339943
+	ldr r1, =sText_NewLine
 	adds r0, r6, 0
 	bl StringAppend
 	adds r0, r5, 0
@@ -7698,7 +7698,7 @@ sub_80838AC: @ 80838AC
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, =gUnknown_0833994F
+	ldr r1, =sText_TheLevelIs
 	adds r0, r6, 0
 	bl StringAppend
 	mov r0, sp
@@ -7709,7 +7709,7 @@ sub_80838AC: @ 80838AC
 	adds r0, r6, 0
 	mov r1, sp
 	bl StringAppend
-	ldr r1, =gUnknown_0833995D
+	ldr r1, =sText_TheFeelIs
 	adds r0, r6, 0
 	bl StringAppend
 	mov r0, sp
@@ -7720,10 +7720,10 @@ sub_80838AC: @ 80838AC
 	adds r0, r6, 0
 	mov r1, sp
 	bl StringAppend
-	ldr r1, =gUnknown_08339970
+	ldr r1, =sText_Dot2
 	adds r0, r6, 0
 	bl StringAppend
-	ldr r1, =gUnknown_0833979B
+	ldr r1, =gText_NewParagraph
 	adds r0, r6, 0
 	bl StringAppend
 	add sp, 0xC
@@ -8041,7 +8041,7 @@ _08083B9A:
 	movs r2, 0x1
 	movs r3, 0xD
 	bl SetWindowBorderStyle
-	ldr r4, =gUnknown_08339947
+	ldr r4, =sText_Ranking
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0xA8
@@ -8161,7 +8161,7 @@ _08083C84:
 	bl ConvertIntToDecimalStringN
 	ldr r0, [r7]
 	adds r0, 0x9F
-	ldr r1, =gUnknown_08339941
+	ldr r1, =sText_Dot
 	bl StringAppend
 	ldr r0, [r7]
 	adds r0, 0x9F
@@ -8395,7 +8395,7 @@ _08083E8A:
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	adds r5, r0, 0
-	ldr r1, =gUnknown_08339941
+	ldr r1, =sText_Dot
 	bl StringAppend
 	adds r5, r0, 0
 	adds r0, r4, 0
@@ -8407,7 +8407,7 @@ _08083E8A:
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	adds r5, r0, 0
-	ldr r1, =gUnknown_0833993C
+	ldr r1, =sText_RPM
 	bl StringAppend
 	movs r0, 0x1
 	add r1, sp, 0xC

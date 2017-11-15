@@ -15,6 +15,15 @@ enum
     EXP_BAR
 };
 
+enum
+{
+    HP_BAR_EMPTY,
+    HP_BAR_RED,
+    HP_BAR_YELLOW,
+    HP_BAR_GREEN,
+    HP_BAR_FULL,
+};
+
 #define TAG_HEALTHBOX_PLAYER1_TILE      0xD6FF
 #define TAG_HEALTHBOX_PLAYER2_TILE      0xD700
 #define TAG_HEALTHBOX_OPPONENT1_TILE    0xD701

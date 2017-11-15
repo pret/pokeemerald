@@ -855,8 +855,8 @@ _080AA352:
 	.pool
 	thumb_func_end sub_80AA18C
 
-	thumb_func_start move_anim_start_t2
-move_anim_start_t2: @ 80AA364
+	thumb_func_start LaunchStatusAnimation
+LaunchStatusAnimation: @ 80AA364
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -885,7 +885,7 @@ move_anim_start_t2: @ 80AA364
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end move_anim_start_t2
+	thumb_func_end LaunchStatusAnimation
 
 	thumb_func_start task0A_80788BC
 task0A_80788BC: @ 80AA3B4

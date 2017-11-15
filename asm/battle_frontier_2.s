@@ -2801,7 +2801,7 @@ sub_819BCF8: @ 819BCF8
 	lsls r0, 16
 	lsrs r0, 16
 	add r1, sp, 0xC
-	bl sub_81DB468
+	bl CopyMonCategoryText
 	movs r0, 0x1
 	add r1, sp, 0xC
 	movs r2, 0x76
@@ -8831,7 +8831,7 @@ _0819EFF2:
 	lsls r0, 16
 	lsrs r0, 16
 	add r1, sp, 0xC
-	bl sub_81DB468
+	bl CopyMonCategoryText
 	movs r0, 0x1
 	add r1, sp, 0xC
 	movs r2, 0x76
