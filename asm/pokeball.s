@@ -936,7 +936,7 @@ _08075B9E:
 	.pool
 _08075BB4:
 	adds r0, r3, 0
-	bl sub_805F110
+	bl ShouldPlayNormalPokeCry
 	cmp r0, 0x1
 	bne _08075BCC
 	lsls r1, r5, 24
@@ -976,7 +976,7 @@ _08075BF8:
 	cmp r0, 0
 	bne _08075CBA
 	adds r0, r3, 0
-	bl sub_805F110
+	bl ShouldPlayNormalPokeCry
 	cmp r0, 0x1
 	bne _08075C22
 	lsls r1, r5, 24
@@ -1066,7 +1066,7 @@ _08075CBA:
 	b _08075D04
 _08075CC0:
 	adds r0, r3, 0
-	bl sub_805F110
+	bl ShouldPlayNormalPokeCry
 	cmp r0, 0x1
 	bne _08075CD8
 	lsls r1, r5, 24

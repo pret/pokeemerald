@@ -683,7 +683,16 @@ gUnknown_0827E8DA:: @ 827E8DA
 	.incbin "baserom.gba", 0x27e8da, 0x132
 
 gUnknown_0827EA0C:: @ 827EA0C
-	.incbin "baserom.gba", 0x27ea0c, 0x2b0
+	.incbin "baserom.gba", 0x27ea0c, 0x13
+	
+@ 827EA1F
+	.include "data/text/contest_rank_text.inc"
+
+gUnknown_0827EA52:: @ 827EA52
+	.incbin "baserom.gba", 0x27ea52, 0x2d
+
+@ 827EA7F
+	.include "data/text/contest_painting_descriptions.inc"
 
 gUnknown_0827ECBC:: @ 27ECBC
 	.incbin "baserom.gba", 0x27ecbc, 0x7
@@ -1029,7 +1038,7 @@ gUnknown_082C8845:: @ 82C8845
 gUnknown_082C892A:: @ 82C892A
 	.incbin "baserom.gba", 0x2c892a, 0x2f
 
-gUnknown_082C8959:: @ 82C8959
+gText_SavingDontTurnOffPower:: @ 82C8959
 	.incbin "baserom.gba", 0x2c8959, 0x22
 
 gUnknown_082C897B:: @ 82C897B

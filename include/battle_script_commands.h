@@ -57,6 +57,6 @@ void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
 bool8 UproarWakeUpCheck(u8 bank);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
-extern const u8 gUnknown_0831C494[];
+extern const u8 gUnknown_0831C494[][4];
 
 #endif // GUARD_BATTLE_SCRIPT_COMMANDS_H

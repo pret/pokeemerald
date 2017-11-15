@@ -13814,7 +13814,7 @@ _0807ED98:
 	movs r0, 0x32
 	strb r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_082C8959
+	ldr r1, =gText_SavingDontTurnOffPower
 _0807EDA6:
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
@@ -14668,7 +14668,7 @@ _0807F50A:
 	movs r1, 0x3
 	strb r1, [r0]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_082C8959
+	ldr r1, =gText_SavingDontTurnOffPower
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
