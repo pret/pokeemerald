@@ -130,6 +130,7 @@ SECTIONS {
         asm/option_menu.o(.text);
         asm/pokedex.o(.text);
         asm/trainer_card.o(.text);
+        src/pokemon_storage_system.o(.text);
         asm/pokemon_storage_system.o(.text);
         asm/pokemon_icon.o(.text);
         asm/script_movement.o(.text);
