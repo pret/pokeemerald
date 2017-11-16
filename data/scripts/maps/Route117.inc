@@ -1,0 +1,232 @@
+Route117_MapScripts:: @ 81F397D
+	map_script 3, Route117_MapScript1_1F3983
+	.byte 0
+
+Route117_MapScript1_1F3983: @ 81F3983
+	call Route117_EventScript_1F3989
+	end
+
+Route117_EventScript_1F3989:: @ 81F3989
+	checkflag FLAG_0x086
+	goto_if 0, Route117_EventScript_1F3999
+	setobjectxyperm 3, 47, 6
+
+Route117_EventScript_1F3999:: @ 81F3999
+	return
+
+Route117_EventScript_1F399A:: @ 81F399A
+	msgbox Route117_Text_1F3CFD, 2
+	end
+
+Route117_EventScript_1F39A3:: @ 81F39A3
+	msgbox Route117_Text_1F3D41, 2
+	end
+
+Route117_EventScript_1F39AC:: @ 81F39AC
+	msgbox Route117_Text_1F3C7C, 2
+	end
+
+Route117_EventScript_1F39B5:: @ 81F39B5
+	msgbox Route117_Text_1F3D58, 3
+	end
+
+Route117_EventScript_1F39BE:: @ 81F39BE
+	msgbox Route117_Text_1F3D74, 3
+	end
+
+Route117_EventScript_1F39C7:: @ 81F39C7
+	msgbox Route117_Text_1F3D8E, 3
+	end
+
+Route117_EventScript_1F39D0:: @ 81F39D0
+	trainerbattle 2, TRAINER_ISAAC_1, 0, Route117_Text_29C43F, Route117_Text_29C47A, Route117_EventScript_1F39FC
+	specialvar VAR_RESULT, sub_80B226C
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq Route117_EventScript_1F3A1B
+	msgbox Route117_Text_29C498, 4
+	release
+	end
+
+Route117_EventScript_1F39FC:: @ 81F39FC
+	special sub_80B4808
+	waitmovement 0
+	msgbox Route117_Text_29C508, 4
+	setvar VAR_0x8004, 538
+	special sub_81D1C20
+	setorcopyvar VAR_0x8000, 538
+	callstd 8
+	release
+	end
+
+Route117_EventScript_1F3A1B:: @ 81F3A1B
+	trainerbattle 5, TRAINER_ISAAC_1, 0, Route117_Text_29C549, Route117_Text_29C58B
+	msgbox Route117_Text_29C5D0, 6
+	end
+
+Route117_EventScript_1F3A32:: @ 81F3A32
+	trainerbattle 2, TRAINER_LYDIA_1, 0, Route117_Text_29C612, Route117_Text_29C659, Route117_EventScript_1F3A5E
+	specialvar VAR_RESULT, sub_80B226C
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq Route117_EventScript_1F3A7D
+	msgbox Route117_Text_29C679, 4
+	release
+	end
+
+Route117_EventScript_1F3A5E:: @ 81F3A5E
+	special sub_80B4808
+	waitmovement 0
+	msgbox Route117_Text_29C6BC, 4
+	setvar VAR_0x8004, 545
+	special sub_81D1C20
+	setorcopyvar VAR_0x8000, 545
+	callstd 8
+	release
+	end
+
+Route117_EventScript_1F3A7D:: @ 81F3A7D
+	trainerbattle 5, TRAINER_LYDIA_1, 0, Route117_Text_29C6FD, Route117_Text_29C73E
+	msgbox Route117_Text_29C75A, 6
+	end
+
+Route117_EventScript_1F3A94:: @ 81F3A94
+	trainerbattle 2, TRAINER_DYLAN_1, 0, Route117_Text_29C7A5, Route117_Text_29C7EB, Route117_EventScript_1F3AC0
+	specialvar VAR_RESULT, sub_80B226C
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq Route117_EventScript_1F3ADF
+	msgbox Route117_Text_29C800, 4
+	release
+	end
+
+Route117_EventScript_1F3AC0:: @ 81F3AC0
+	special sub_80B4808
+	waitmovement 0
+	msgbox Route117_Text_29C846, 4
+	setvar VAR_0x8004, 364
+	special sub_81D1C20
+	setorcopyvar VAR_0x8000, 364
+	callstd 8
+	release
+	end
+
+Route117_EventScript_1F3ADF:: @ 81F3ADF
+	trainerbattle 5, TRAINER_DYLAN_1, 0, Route117_Text_29C880, Route117_Text_29C8E3
+	msgbox Route117_Text_29C8FE, 6
+	end
+
+Route117_EventScript_1F3AF6:: @ 81F3AF6
+	trainerbattle 2, TRAINER_MARIA_1, 0, Route117_Text_29C955, Route117_Text_29C9A6, Route117_EventScript_1F3B22
+	specialvar VAR_RESULT, sub_80B226C
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq Route117_EventScript_1F3B41
+	msgbox Route117_Text_29C9D0, 4
+	release
+	end
+
+Route117_EventScript_1F3B22:: @ 81F3B22
+	special sub_80B4808
+	waitmovement 0
+	msgbox Route117_Text_29CA32, 4
+	setvar VAR_0x8004, 369
+	special sub_81D1C20
+	setorcopyvar VAR_0x8000, 369
+	callstd 8
+	release
+	end
+
+Route117_EventScript_1F3B41:: @ 81F3B41
+	trainerbattle 5, TRAINER_MARIA_1, 0, Route117_Text_29CA7C, Route117_Text_29CACC
+	msgbox Route117_Text_29CAF6, 6
+	end
+
+Route117_EventScript_1F3B58:: @ 81F3B58
+	trainerbattle 0, TRAINER_DEREK, 0, Route117_Text_29CB32, Route117_Text_29CB87
+	msgbox Route117_Text_29CBAD, 6
+	end
+
+Route117_EventScript_1F3B6F:: @ 81F3B6F
+	trainerbattle 6, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CC4A, Route117_Text_29CC8E, Route117_Text_29CD61, Route117_EventScript_1F3B9F
+	specialvar VAR_RESULT, sub_80B226C
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq Route117_EventScript_1F3BB8
+	msgbox Route117_Text_29CCCB, 4
+	release
+	end
+
+Route117_EventScript_1F3B9F:: @ 81F3B9F
+	msgbox Route117_Text_29CD1D, 4
+	setvar VAR_0x8004, 287
+	special sub_81D1C20
+	setorcopyvar VAR_0x8000, 287
+	callstd 8
+	release
+	end
+
+Route117_EventScript_1F3BB8:: @ 81F3BB8
+	trainerbattle 7, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CEB6, Route117_Text_29CEF6, Route117_Text_29CF6E
+	msgbox Route117_Text_29CF1C, 6
+	end
+
+Route117_EventScript_1F3BD3:: @ 81F3BD3
+	trainerbattle 6, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CD9D, Route117_Text_29CDE9, Route117_Text_29CE52, Route117_EventScript_1F3C03
+	specialvar VAR_RESULT, sub_80B226C
+	compare_var_to_value VAR_RESULT, 1
+	goto_eq Route117_EventScript_1F3C1C
+	msgbox Route117_Text_29CE17, 4
+	release
+	end
+
+Route117_EventScript_1F3C03:: @ 81F3C03
+	msgbox Route117_Text_29CD1D, 4
+	setvar VAR_0x8004, 287
+	special sub_81D1C20
+	setorcopyvar VAR_0x8000, 287
+	callstd 8
+	release
+	end
+
+Route117_EventScript_1F3C1C:: @ 81F3C1C
+	trainerbattle 7, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CFAA, Route117_Text_29CFED, Route117_Text_29D053
+	msgbox Route117_Text_29CFFE, 6
+	end
+
+Route117_EventScript_1F3C37:: @ 81F3C37
+	trainerbattle 0, TRAINER_MELINA, 0, Route117_Text_29D0B7, Route117_Text_29D0F1
+	msgbox Route117_Text_29D10E, 6
+	end
+
+Route117_EventScript_1F3C4E:: @ 81F3C4E
+	trainerbattle 0, TRAINER_BRANDI, 0, Route117_Text_29D14B, Route117_Text_29D189
+	msgbox Route117_Text_29D196, 6
+	end
+
+Route117_EventScript_1F3C65:: @ 81F3C65
+	trainerbattle 0, TRAINER_AISHA, 0, Route117_Text_29D1D1, Route117_Text_29D206
+	msgbox Route117_Text_29D24C, 6
+	end
+
+Route117_Text_1F3C7C: @ 81F3C7C
+	.string "I left my POKéMON at the DAY CARE.\p"
+	.string "When I got it back, it had a new move\n"
+	.string "that I didn’t teach it.\l"
+	.string "I was really, really surprised.$"
+
+Route117_Text_1F3CFD: @ 81F3CFD
+	.string "What do you think?\n"
+	.string "Aren’t these flowers pretty?\p"
+	.string "I planted them all!$"
+
+Route117_Text_1F3D41: @ 81F3D41
+	.string "The air is tasty here!$"
+
+Route117_Text_1F3D58: @ 81F3D58
+	.string "ROUTE 117\n"
+	.string "{0x7B} VERDANTURF TOWN$"
+
+Route117_Text_1F3D74: @ 81F3D74
+	.string "ROUTE 117\n"
+	.string "{0x7C} MAUVILLE CITY$"
+
+Route117_Text_1F3D8E: @ 81F3D8E
+	.string "POKéMON DAY CARE\n"
+	.string "“Let us raise your POKéMON.”$"
+

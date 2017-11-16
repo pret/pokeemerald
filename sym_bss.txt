@@ -36,8 +36,7 @@ gUnknown_03001178: @ 3001178
 gUnknown_0300117C: @ 300117C
 	.space 0x4
 
-gUnknown_03001180: @ 3001180
-	.space 0x8
+	.include "src/region_map.o"
 
 gUnknown_03001188: @ 3001188
 	.space 0x68
@@ -57,8 +56,9 @@ gUnknown_030011F6: @ 30011F6
 gUnknown_030011F7: @ 30011F7
 	.space 0x1
 
-gUnknown_030011F8: @ 30011F8
-	.space 0x4
+    .include "src/starter_choose.o"
+    
+    .align 0x2
 
 gUnknown_030011FC: @ 30011FC
 	.space 0x2

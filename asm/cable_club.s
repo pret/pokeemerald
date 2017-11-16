@@ -433,7 +433,7 @@ sub_80B2688: @ 80B2688
 	bne _080B26EC
 	movs r0, 0x15
 	bl PlaySE
-	ldr r0, =gUnknown_082780B3
+	ldr r0, =OldaleTown_PokemonCenter_2F_Text_2780B3
 	bl ShowFieldAutoScrollMessage
 	ldr r0, =sub_80B270C
 	b _080B26FA
@@ -441,7 +441,7 @@ sub_80B2688: @ 80B2688
 _080B26EC:
 	movs r0, 0x16
 	bl PlaySE
-	ldr r0, =gUnknown_08278131
+	ldr r0, =OldaleTown_PokemonCenter_2F_Text_278131
 	bl ShowFieldAutoScrollMessage
 	ldr r0, =sub_80B2918
 _080B26FA:
@@ -544,7 +544,7 @@ sub_80B275C: @ 80B275C
 	movs r2, 0
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
-	ldr r0, =gUnknown_082780F2
+	ldr r0, =OldaleTown_PokemonCenter_2F_Text_2780F2
 	bl ShowFieldAutoScrollMessage
 	mov r0, r9
 	subs r0, 0x8
@@ -597,7 +597,7 @@ sub_80B2804: @ 80B2804
 	cmp r0, 0
 	beq _080B2878
 _080B2852:
-	ldr r0, =gUnknown_082780B3
+	ldr r0, =OldaleTown_PokemonCenter_2F_Text_2780B3
 	bl ShowFieldAutoScrollMessage
 	ldr r1, =gTasks
 	lsls r0, r5, 2
@@ -663,7 +663,7 @@ sub_80B28A8: @ 80B28A8
 	b _080B2908
 	.pool
 _080B28F4:
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl sub_80B2478
@@ -703,7 +703,7 @@ sub_80B2918: @ 80B2918
 	bl sub_80B24F8
 	cmp r0, 0x1
 	beq _080B29E6
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl sub_80B2478
@@ -791,7 +791,7 @@ sub_80B2A08: @ 80B2A08
 	bl sub_80B24F8
 	cmp r0, 0x1
 	beq _080B2ACE
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bne _080B2A38
@@ -1067,7 +1067,7 @@ _080B2C7E:
 	movs r0, 0
 	bl SetSuppressLinkErrorMessage
 	bl ResetBlockReceivedFlags
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	adds r1, r5, 0
 	bl task_map_chg_seq_0807EC34
 _080B2C9C:
@@ -1111,7 +1111,7 @@ sub_80B2CEC: @ 80B2CEC
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x5
 	strh r0, [r1]
 	ldr r0, =gTasks
@@ -1139,7 +1139,7 @@ sub_80B2D2C: @ 80B2D2C
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x6
 	strh r0, [r1]
 	ldr r0, =gTasks
@@ -1284,7 +1284,7 @@ sub_80B2E4C: @ 80B2E4C
 	thumb_func_start sub_80B2E74
 sub_80B2E74: @ 80B2E74
 	push {lr}
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	ldr r1, =gLinkType
@@ -1353,7 +1353,7 @@ sub_80B2EE4: @ 80B2EE4
 	b _080B2FC6
 	.pool
 _080B2F0C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _080B2FA8
@@ -1415,7 +1415,7 @@ _080B2F74:
 _080B2F82:
 	cmp r7, 0
 	beq _080B2FA8
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0xC
 	strh r0, [r1]
 	bl sub_800AD10
@@ -2296,7 +2296,7 @@ _080B3750:
 	beq _080B37B8
 	b _080B37CC
 _080B375A:
-	ldr r0, =gUnknown_08278091
+	ldr r0, =OldaleTown_PokemonCenter_2F_Text_278091
 	bl ShowFieldMessage
 	movs r0, 0x1
 	strh r0, [r5, 0x8]

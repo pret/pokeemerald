@@ -314,7 +314,7 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
     gLocalLinkPlayer.name[8] = IsNationalPokedexEnabled();
-    if (FlagGet(SYS_UNKNOWN_87F))
+    if (FlagGet(FLAG_SYS_UNKNOWN_87F))
     {
         gLocalLinkPlayer.name[8] |= 0x10;
     }
@@ -678,7 +678,7 @@ static void BuildSendCmd(u16 command)
             break;
         case LINKCMD_0xAAAB:
             gSendCmd[0] = LINKCMD_0xAAAB;
-            gSendCmd[1] = gScriptItemId;
+            gSendCmd[1] = gSpecialVar_ItemId;
             break;
         case LINKCMD_0xCCCC:
             gSendCmd[0] = LINKCMD_0xCCCC;

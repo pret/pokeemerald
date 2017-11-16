@@ -5,224 +5,8 @@
 
 	.text
 
-	thumb_func_start CountMonsInBox
-CountMonsInBox: @ 80C6FA0
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r4, 0
-	movs r5, 0
-_080C6FAA:
-	lsls r1, r4, 24
-	lsrs r1, 24
-	adds r0, r6, 0
-	movs r2, 0xB
-	bl GetBoxMonDataFromAnyBox
-	cmp r0, 0
-	beq _080C6FC0
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-_080C6FC0:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x1D
-	bls _080C6FAA
-	lsls r0, r5, 24
-	lsrs r0, 24
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end CountMonsInBox
 
-	thumb_func_start sub_80C6FD4
-sub_80C6FD4: @ 80C6FD4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r4, 0
-_080C6FDC:
-	lsls r1, r4, 24
-	lsrs r1, 24
-	adds r0, r5, 0
-	movs r2, 0xB
-	bl GetBoxMonDataFromAnyBox
-	cmp r0, 0
-	bne _080C6FF2
-	lsls r0, r4, 16
-	asrs r0, 16
-	b _080C7000
-_080C6FF2:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x1D
-	bls _080C6FDC
-	movs r0, 0x1
-	negs r0, r0
-_080C7000:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C6FD4
-
-	thumb_func_start sub_80C7008
-sub_80C7008: @ 80C7008
-	push {r4-r6,lr}
-	movs r5, 0
-	movs r6, 0
-_080C700E:
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl GetMonData
-	cmp r0, 0
-	beq _080C7036
-	adds r0, r4, 0
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	bne _080C7036
-	adds r0, r6, 0x1
-	lsls r0, 16
-	lsrs r6, r0, 16
-_080C7036:
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-	cmp r5, 0x5
-	bls _080C700E
-	lsls r0, r6, 24
-	lsrs r0, 24
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80C7008
-
-	thumb_func_start sub_80C7050
-sub_80C7050: @ 80C7050
-	push {r4-r7,lr}
-	lsls r0, 24
-	movs r5, 0
-	movs r6, 0
-	lsrs r7, r0, 24
-_080C705A:
-	cmp r5, r7
-	beq _080C7092
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl GetMonData
-	cmp r0, 0
-	beq _080C7092
-	adds r0, r4, 0
-	movs r1, 0x2D
-	bl GetMonData
-	cmp r0, 0
-	bne _080C7092
-	adds r0, r4, 0
-	movs r1, 0x39
-	bl GetMonData
-	cmp r0, 0
-	beq _080C7092
-	adds r0, r6, 0x1
-	lsls r0, 16
-	lsrs r6, r0, 16
-_080C7092:
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-	cmp r5, 0x5
-	bls _080C705A
-	lsls r0, r6, 24
-	lsrs r0, 24
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80C7050
-
-	thumb_func_start sub_80C70AC
-sub_80C70AC: @ 80C70AC
-	push {lr}
-	ldr r0, =gSpecialVar_0x8004
-	ldrb r0, [r0]
-	bl sub_80C7050
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80C70AC
-
-	thumb_func_start sub_80C70C4
-sub_80C70C4: @ 80C70C4
-	push {r4,r5,lr}
-	movs r4, 0
-	movs r5, 0
-_080C70CA:
-	movs r0, 0x64
-	muls r0, r4
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0xB
-	bl GetMonData
-	cmp r0, 0
-	beq _080C70E2
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-_080C70E2:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x5
-	bls _080C70CA
-	lsls r0, r5, 24
-	lsrs r0, 24
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80C70C4
-
-	thumb_func_start sub_80C70FC
-sub_80C70FC: @ 80C70FC
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r4, r2, 16
-	lsrs r4, 16
-	bl StringCopy
-	adds r1, r0, 0
-	adds r5, r4
-	cmp r1, r5
-	bcs _080C711A
-	movs r0, 0
-_080C7112:
-	strb r0, [r1]
-	adds r1, 0x1
-	cmp r1, r5
-	bcc _080C7112
-_080C711A:
-	movs r0, 0xFF
-	strb r0, [r1]
-	adds r0, r1, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C70FC
-
-	thumb_func_start sub_80C7128
+    thumb_func_start sub_80C7128
 sub_80C7128: @ 80C7128
 	push {r4-r7,lr}
 	mov r7, r9
@@ -578,7 +362,7 @@ _080C73F6:
 	ldrsh r4, [r5, r3]
 	cmp r4, 0
 	bne _080C7428
-	bl sub_80C70C4
+	bl CountPartyMons
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -601,7 +385,7 @@ _080C7428:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x1
 	bne _080C745C
-	bl sub_80C70C4
+	bl CountPartyMons
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
@@ -2252,7 +2036,7 @@ _080C8230:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080C825C
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080C825C
@@ -5458,7 +5242,7 @@ _080C9F56:
 sub_80C9F6C: @ 80C9F6C
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	mov r0, sp
 	strh r1, [r0]
@@ -13381,7 +13165,7 @@ sub_80CE19C: @ 80CE19C
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r6, 0
-	bl sub_80C6FD4
+	bl GetFirstFreeBoxSpot
 	lsls r0, 16
 	lsrs r4, r0, 16
 	asrs r0, 16
@@ -14127,7 +13911,7 @@ _080CE838:
 	ldr r2, =0x00002187
 	adds r1, r2
 	strb r0, [r1]
-	bl sub_80C70C4
+	bl CountPartyMons
 	ldr r1, [r4]
 	subs r0, 0x1
 	ldr r2, =0x00002186
@@ -14347,7 +14131,7 @@ sub_80CEA30: @ 80CEA30
 	bne _080CEA64
 	ldr r0, =gUnknown_02039D79
 	ldrb r0, [r0]
-	bl sub_80C7050
+	bl CountPartyAliveNonEggMonsExcept
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CEA64
@@ -14376,7 +14160,7 @@ sub_80CEA6C: @ 80CEA6C
 	bne _080CEAAC
 	ldr r0, =gUnknown_02039D79
 	ldrb r0, [r0]
-	bl sub_80C7050
+	bl CountPartyAliveNonEggMonsExcept
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CEAAC
@@ -14656,7 +14440,7 @@ _080CEC86:
 	adds r1, r3
 	str r0, [r1]
 	adds r0, r6, 0
-	bl pokemon_get_pal
+	bl GetMonFrontSpritePal
 	ldr r1, [r4]
 	ldr r2, =0x00000cdc
 	adds r1, r2
@@ -14759,7 +14543,7 @@ _080CED7E:
 	adds r1, r4
 	ldrh r0, [r1]
 	mov r1, r9
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	ldr r1, [r5]
 	ldr r3, =0x00000cdc
 	adds r2, r1, r3

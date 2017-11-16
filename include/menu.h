@@ -30,5 +30,7 @@ u64 sub_8198A50(struct WindowTemplate*, u8, u8, u8, u8, u8, u8, u16); // returns
 void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
 s8 sub_8198C58(void);
 void copy_decompressed_tile_data_to_vram_autofree(u8 arg0, const void *arg1, bool32 arg2, u16 arg3, u8 arg4);
+void do_scheduled_bg_tilemap_copies_to_vram(void);
+void clear_scheduled_bg_copies_to_vram(void);
 
 #endif // GUARD_MENU_H

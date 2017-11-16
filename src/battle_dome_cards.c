@@ -119,7 +119,7 @@ static void sub_818D0C4(u16 species, u32 otId, u32 personality, u8 paletteSlot, 
         if (paletteTag == 0xFFFF)
         {
             gUnknown_0203CCEC.paletteTag |= 0xFFFF;
-            LoadCompressedPalette(species_and_otid_get_pal(species, otId, personality), 0x100 + paletteSlot * 0x10, 0x20);
+            LoadCompressedPalette(GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x100 + paletteSlot * 0x10, 0x20);
         }
         else
         {
@@ -146,7 +146,7 @@ static void sub_818D180(u16 species, u32 otId, u32 personality, u8 paletteSlot, 
 {
     if (!isTrainer)
     {
-        LoadCompressedPalette(species_and_otid_get_pal(species, otId, personality), paletteSlot * 0x10, 0x20);
+        LoadCompressedPalette(GetFrontSpritePalFromSpeciesAndPersonality(species, otId, personality), paletteSlot * 0x10, 0x20);
     }
     else
     {

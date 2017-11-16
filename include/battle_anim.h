@@ -92,7 +92,11 @@ u8 sub_80A6D94(void);
 u8 sub_80A8364(u8);
 void StoreSpriteCallbackInData6(struct Sprite *sprite, void (*spriteCallback)(struct Sprite*));
 void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
-u8 sub_80A6138(u8 bank);
+u8 GetBankSpriteDefault_Y(u8 bank);
 u8 sub_80A82E4(u8 bank);
+u8 GetSubstituteSpriteDefault_Y(u8 bank);
+
+// battle_anim_80A9C70.s
+void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
 
 #endif // GUARD_BATTLE_ANIM_H

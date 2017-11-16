@@ -33,7 +33,7 @@ extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
 extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern struct SpriteTemplate gUnknown_0202499C;
-extern u16 gScriptItemId;
+extern u16 gSpecialVar_ItemId;
 extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
 extern u8 gBattleOutcome;
 extern u16 gBattle_BG0_X;
@@ -305,7 +305,7 @@ static void CompleteWhenChosePokeblock(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        EmitOneReturnValue(1, gScriptItemId);
+        EmitOneReturnValue(1, gSpecialVar_ItemId);
         SafariBufferExecCompleted();
     }
 }
@@ -413,7 +413,7 @@ static void SafariHandleSuccessBallThrowAnim(void)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
-    DoSpecialBattleAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnSpecialAnimDone;
 }
 
@@ -423,7 +423,7 @@ static void SafariHandleBallThrowAnim(void)
 
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
-    DoSpecialBattleAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnSpecialAnimDone;
 }
 
@@ -624,7 +624,7 @@ static void SafariHandlePlayFanfareOrBGM(void)
 {
     if (gBattleBufferA[gActiveBank][3])
     {
-        BattleMusicStop();
+        BattleStopLowHpSound();
         PlayBGM(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
     }
     else
@@ -683,7 +683,7 @@ static void SafariHandleBattleAnimation(void)
     u8 animationId = gBattleBufferA[gActiveBank][1];
     u16 argument = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
 
-    if (DoBattleAnimationFromTable(gActiveBank, gActiveBank, gActiveBank, animationId, argument))
+    if (TryHandleLaunchBattleTableAnimation(gActiveBank, gActiveBank, gActiveBank, animationId, argument))
         SafariBufferExecCompleted();
     else
         gBattleBankFunc[gActiveBank] = CompleteOnFinishedBattleAnimation;

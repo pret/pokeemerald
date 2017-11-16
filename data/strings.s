@@ -534,25 +534,25 @@ gUnknown_085E8CAC:: @ 85E8CAC
 gText_FlyToWhere:: @ 85E8CB4
 	.string "FLY to where?$"
 
-gUnknown_085E8CC2:: @ 85E8CC2
+gMenuText_Use:: @ 85E8CC2
 	.string "USE$"
 
-gUnknown_085E8CC6:: @ 85E8CC6
+gMenuText_Toss:: @ 85E8CC6
 	.string "TOSS$"
 
-gUnknown_085E8CCB:: @ 85E8CCB
+gMenuText_Register:: @ 85E8CCB
 	.string "REGISTER$"
 
-gUnknown_085E8CD4:: @ 85E8CD4
+gMenuText_Give:: @ 85E8CD4
 	.string "GIVE$"
 
-gUnknown_085E8CD9:: @ 85E8CD9
+gMenuText_CheckTag:: @ 85E8CD9
 	.string "CHECK TAG$"
 
-gText_Confirm:: @ 85E8CE3
+gMenuText_Confirm:: @ 85E8CE3
 	.string "CONFIRM$"
 
-gUnknown_085E8CEB:: @ 85E8CEB
+gMenuText_Walk:: @ 85E8CEB
 	.string "WALK$"
 
 gText_Cancel:: @ 85E8CF0
@@ -561,7 +561,7 @@ gText_Cancel:: @ 85E8CF0
 gText_Cancel2:: @ 85E8CF7
 	.string "CANCEL$"
 
-gUnknown_085E8CFE:: @ 85E8CFE
+gMenuText_Show:: @ 85E8CFE
 	.string "SHOW$"
 
 gText_EmptyString2:: @ 85E8D03
@@ -582,13 +582,13 @@ gUnknown_085E8D15:: @ 85E8D15
 gUnknown_085E8D1A:: @ 85E8D1A
 	.string "STORE$"
 
-gUnknown_085E8D20:: @ 85E8D20
+gMenuText_Check:: @ 85E8D20
 	.string "CHECK$"
 
 gText_None:: @ 85E8D26
 	.string "NONE$"
 
-gUnknown_085E8D2B:: @ 85E8D2B
+gMenuText_Deselect:: @ 85E8D2B
 	.string "DESELECT$"
 
 gText_ThreeMarks:: @ 85E8D34
@@ -642,7 +642,7 @@ gText_GoBackPrevMenu:: @ 85E8D62
 gText_WhatWouldYouLike:: @ 85E8D80
 	.string "What would you like to do?$"
 
-gUnknown_085E8D9B:: @ 85E8D9B
+gMenuText_Give2:: @ 85E8D9B
 	.string "GIVE$"
 
 gText_xVar1:: @ 85E8DA0
@@ -1946,7 +1946,7 @@ gUnknown_085EB057:: @ 85EB057
 gUnknown_085EB062:: @ 85EB062
 	.string "GREEN SHARD$"
 
-gUnknown_085EB06E:: @ 85EB06E
+gText_BattleFrontier:: @ 85EB06E
 	.string "BATTLE FRONTIER$"
 
 gUnknown_085EB07E:: @ 85EB07E
@@ -1985,46 +1985,46 @@ gText_Smart:: @ 85EB0F9
 gText_Tough:: @ 85EB0FF
 	.string "TOUGH$"
 
-gUnknown_085EB105:: @ 85EB105
+gText_Normal:: @ 85EB105
 	.string "NORMAL$"
 
-gUnknown_085EB10C:: @ 85EB10C
+gText_Super:: @ 85EB10C
 	.string "SUPER$"
 
-gUnknown_085EB112:: @ 85EB112
+gText_Hyper:: @ 85EB112
 	.string "HYPER$"
 
-gUnknown_085EB118:: @ 85EB118
+gText_Master:: @ 85EB118
 	.string "MASTER$"
 
-gUnknown_085EB11F:: @ 85EB11F
+gText_Cool2:: @ 85EB11F
 	.string "COOL$"
 
-gUnknown_085EB124:: @ 85EB124
+gText_Beauty2:: @ 85EB124
 	.string "BEAUTY$"
 
-gUnknown_085EB12B:: @ 85EB12B
+gText_Cute2:: @ 85EB12B
 	.string "CUTE$"
 
-gUnknown_085EB130:: @ 85EB130
+gText_Smart2:: @ 85EB130
 	.string "SMART$"
 
-gUnknown_085EB136:: @ 85EB136
+gText_Tough2:: @ 85EB136
 	.string "TOUGH$"
 
-gUnknown_085EB13C:: @ 85EB13C
+gText_Items:: @ 85EB13C
 	.string "ITEMS$"
 
-gUnknown_085EB142:: @ 85EB142
+gText_Key_Items:: @ 85EB142
 	.string "KEY ITEMS$"
 
-gUnknown_085EB14C:: @ 85EB14C
+gText_Poke_Balls:: @ 85EB14C
 	.string "POKé BALLS$"
 
-gUnknown_085EB157:: @ 85EB157
+gText_TMs_Hms:: @ 85EB157
 	.string "TMs & HMs$"
 
-gUnknown_085EB161:: @ 85EB161
+gText_Berries2:: @ 85EB161
 	.string "BERRIES$"
 
 gText_SomeonesPC:: @ 85EB169
@@ -2042,58 +2042,58 @@ gText_HallOfFame:: @ 85EB18B
 gText_LogOff:: @ 85EB198
 	.string "LOG OFF$"
 
-gUnknown_085EB1A0:: @ 85EB1A0
+gText_Opponent:: @ 85EB1A0
 	.string "OPPONENT$"
 
-gUnknown_085EB1A9:: @ 85EB1A9
+gText_Tourney_Tree:: @ 85EB1A9
 	.string "TOURNEY TREE$"
 
-gUnknown_085EB1B6:: @ 85EB1B6
+gText_ReadyToStart:: @ 85EB1B6
 	.string "READY TO START$"
 
-gUnknown_085EB1C5:: @ 85EB1C5
+gText_NormalRank:: @ 85EB1C5
 	.string "NORMAL RANK$"
 
-gUnknown_085EB1D1:: @ 85EB1D1
+gText_SuperRank:: @ 85EB1D1
 	.string "SUPER RANK$"
 
-gUnknown_085EB1DC:: @ 85EB1DC
+gText_HyperRank:: @ 85EB1DC
 	.string "HYPER RANK$"
 
-gUnknown_085EB1E7:: @ 85EB1E7
+gText_MasterRank:: @ 85EB1E7
 	.string "MASTER RANK$"
 
-gUnknown_085EB1F3:: @ 85EB1F3
+gText_Single2:: @ 85EB1F3
 	.string "SINGLE$"
 
-gUnknown_085EB1FA:: @ 85EB1FA
+gText_Double2:: @ 85EB1FA
 	.string "DOUBLE$"
 
-gUnknown_085EB201:: @ 85EB201
+gText_Multi:: @ 85EB201
 	.string "MULTI$"
 
-gUnknown_085EB207:: @ 85EB207
+gText_MultiLink:: @ 85EB207
 	.string "MULTI-LINK$"
 
-gUnknown_085EB212:: @ 85EB212
+gText_BattleBag:: @ 85EB212
 	.string "BATTLE BAG$"
 
-gUnknown_085EB21D:: @ 85EB21D
+gText_HeldItem:: @ 85EB21D
 	.string "HELD ITEM$"
 
-gUnknown_085EB227:: @ 85EB227
+gText_LinkContest:: @ 85EB227
 	.string "LINK CONTEST$"
 
-gUnknown_085EB234:: @ 85EB234
+gText_AboutE_Mode:: @ 85EB234
 	.string "ABOUT E-MODE$"
 
-gUnknown_085EB241:: @ 85EB241
+gText_AboutG_Mode:: @ 85EB241
 	.string "ABOUT G-MODE$"
 
-gUnknown_085EB24E:: @ 85EB24E
+gText_E_Mode:: @ 85EB24E
 	.string "E-MODE$"
 
-gUnknown_085EB255:: @ 85EB255
+gText_G_Mode:: @ 85EB255
 	.string "G-MODE$"
 
 gText_MenuOptionPokedex:: @ 85EB25C
@@ -2138,16 +2138,16 @@ gUnknown_085EB29A:: @ 85EB29A
 gUnknown_085EB2A3:: @ 85EB2A3
 	.string "BLUE TENT$"
 
-gUnknown_085EB2AD:: @ 85EB2AD
+gText_SouthernIsland:: @ 85EB2AD
 	.string "SOUTHERN ISLAND$"
 
-gUnknown_085EB2BD:: @ 85EB2BD
+gText_BirthIsland:: @ 85EB2BD
 	.string "BIRTH ISLAND$"
 
-gUnknown_085EB2CA:: @ 85EB2CA
+gText_FarawayIsland:: @ 85EB2CA
 	.string "FARAWAY ISLAND$"
 
-gUnknown_085EB2D9:: @ 85EB2D9
+gText_NavelRock:: @ 85EB2D9
 	.string "NAVEL ROCK$"
 
 gUnknown_085EB2E4:: @ 85EB2E4
@@ -2477,22 +2477,22 @@ gUnknown_085EB77D:: @ 85EB77D
 gUnknown_085EB78A:: @ 85EB78A
 	.string "EXCHANGE SERVICE$"
 
-gUnknown_085EB79B:: @ 85EB79B
+gText_LilycoveCity:: @ 85EB79B
 	.string "LILYCOVE CITY$"
 
-gUnknown_085EB7A9:: @ 85EB7A9
+gText_SlateportCity:: @ 85EB7A9
 	.string "SLATEPORT CITY$"
 
-gUnknown_085EB7B8:: @ 85EB7B8
+gText_CaveOfOrigin:: @ 85EB7B8
 	.string "CAVE OF ORIGIN$"
 
-gUnknown_085EB7C7:: @ 85EB7C7
+gText_MtPyre:: @ 85EB7C7
 	.string "MT. PYRE$"
 
-gUnknown_085EB7D0:: @ 85EB7D0
+gText_SkyPillar:: @ 85EB7D0
 	.string "SKY PILLAR$"
 
-gUnknown_085EB7DB:: @ 85EB7DB
+gText_DontRemember:: @ 85EB7DB
 	.string "Don’t remember$"
 
 gText_Exit:: @ 85EB7EA
@@ -3149,10 +3149,10 @@ gText_SelectTheAnswer:: @ 85EC752
 gText_LyricsCantBeDeleted:: @ 85EC765
 	.string "The lyrics can’t be deleted.$"
 
-gUnknown_085EC782:: @ 85EC782
+gText_PokemonLeague:: @ 85EC782
 	.string "POKéMON LEAGUE$"
 
-gUnknown_085EC791:: @ 85EC791
+gText_PokemonCenter:: @ 85EC791
 	.string "POKéMON CENTER$"
 
 gText_GetsAPokeBlockQuestion:: @ 85EC7A0
@@ -3563,25 +3563,25 @@ gText_BattleTower:: @ 85ED0D3
 gText_WSlashStraightSlash:: @ 85ED0E0
 	.string "W/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GREY}{SHADOW LIGHT_GREY}  STRAIGHT/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}$"
 
-gUnknown_085ED104:: @ 85ED104
+gText_BattleTower2:: @ 85ED104
 	.string "BATTLE TOWER$"
 
-gUnknown_085ED111:: @ 85ED111
+gText_BattleDome:: @ 85ED111
 	.string "BATTLE DOME$"
 
-gUnknown_085ED11D:: @ 85ED11D
+gText_BattlePalace:: @ 85ED11D
 	.string "BATTLE PALACE$"
 
-gUnknown_085ED12B:: @ 85ED12B
+gText_BattleFactory:: @ 85ED12B
 	.string "BATTLE FACTORY$"
 
-gUnknown_085ED13A:: @ 85ED13A
+gText_BattleArena:: @ 85ED13A
 	.string "BATTLE ARENA$"
 
-gUnknown_085ED147:: @ 85ED147
+gText_BattlePike:: @ 85ED147
 	.string "BATTLE PIKE$"
 
-gUnknown_085ED153:: @ 85ED153
+gText_BattlePyramid:: @ 85ED153
 	.string "BATTLE PYRAMID$"
 
 	.align 2

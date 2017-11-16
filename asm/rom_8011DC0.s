@@ -283,7 +283,7 @@ BerryBlenderLinkBecomeLeader: @ 801273C
 	movs r0, 0
 	strb r0, [r1, 0xC]
 	strb r0, [r1, 0xD]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -1130,7 +1130,7 @@ _08012EE6:
 	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x5
 	strh r0, [r1]
 	b _08012F50
@@ -1139,7 +1139,7 @@ _08012EFC:
 	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x8
 	strh r0, [r1]
 	b _08012F50
@@ -1808,7 +1808,7 @@ BerryBlenderLinkJoinGroup: @ 80134A4
 	movs r0, 0
 	strb r0, [r1, 0x8]
 	strb r0, [r1, 0x9]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -2433,13 +2433,13 @@ _08013AE4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08013B82
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	movs r1, 0x6
 	b _08013B58
 	.pool
 _08013B14:
 	bl sub_800E084
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	movs r1, 0x5
 	b _08013B58
 	.pool
@@ -2465,7 +2465,7 @@ _08013B4A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08013B82
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	movs r1, 0x8
 _08013B58:
 	strh r1, [r0]
@@ -3783,7 +3783,7 @@ _0801474C:
 _08014764:
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	ldr r0, =gUnknown_02022C2C
@@ -3839,7 +3839,7 @@ _080147CC:
 	.4byte _08014992
 	.4byte _0801499C
 _080147F0:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	ldr r0, =gUnknown_02022C2C
@@ -3983,7 +3983,7 @@ _0801494A:
 	bl sub_80B2AF4
 	cmp r0, 0
 	beq _08014980
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	movs r1, 0xB
 	strh r1, [r0]
 	movs r0, 0x7
@@ -4074,7 +4074,7 @@ sub_8014A00: @ 8014A00
 	strb r2, [r1, 0xC]
 	strb r2, [r1, 0xD]
 	strb r4, [r1, 0x18]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r2, [r0]
 	pop {r4}
 	pop {r0}
@@ -4534,7 +4534,7 @@ _08014E4E:
 	beq _08014EF2
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x5
 	strh r0, [r1]
 	b _08014EF2
@@ -4623,7 +4623,7 @@ sub_8014EFC: @ 8014EFC
 	strb r2, [r1, 0x9]
 	subs r4, 0x15
 	strb r4, [r1, 0x12]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r2, [r0]
 	pop {r4}
 	pop {r0}
@@ -4964,7 +4964,7 @@ _0801526A:
 	adds r0, r6, 0
 	bl DestroyTask
 	bl sub_800EDD4
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x5
 	strh r0, [r1]
 	b _080152A0
@@ -5012,7 +5012,7 @@ sub_80152A8: @ 80152A8
 	strb r2, [r1, 0x9]
 	subs r4, 0x15
 	strb r4, [r1, 0x12]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r2, [r0]
 	pop {r4}
 	pop {r0}
@@ -5336,7 +5336,7 @@ _080155C2:
 	adds r0, r4, 0
 	bl DestroyTask
 	bl sub_800EDD4
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x5
 	strh r0, [r1]
 	b _08015604
@@ -5380,7 +5380,7 @@ UnionRoomSpecial: @ 801560C
 	strb r1, [r0, 0x16]
 	strh r1, [r0, 0x10]
 	strh r1, [r0, 0x12]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	movs r0, 0xD0
 	movs r1, 0x1
@@ -5623,7 +5623,7 @@ _08015878:
 	ldr r0, [r6, 0xC]
 	movs r1, 0x4
 	bl sub_80175EC
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x3
@@ -5725,7 +5725,7 @@ _080159A0:
 	movs r0, 0x4
 	bl _08016876
 _080159A6:
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _08015A0A
@@ -7308,7 +7308,7 @@ var_800D_set_xB: @ 8016884
 	bl InUnionRoom
 	cmp r0, 0x1
 	bne _08016894
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0xB
 	strh r0, [r1]
 _08016894:
@@ -12730,7 +12730,7 @@ _0801940C:
 	b _08019922
 	.pool
 _0801942C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	beq _08019436
@@ -13231,7 +13231,7 @@ _080197F8:
 	b _08019922
 	.pool
 _08019810:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	beq _0801981A
@@ -21691,7 +21691,7 @@ _0801DC10:
 	thumb_func_start sub_801DC20
 sub_801DC20: @ 801DC20
 	push {r4-r6,lr}
-	ldr r6, =gScriptResult
+	ldr r6, =gSpecialVar_Result
 	bl sub_801B044
 	adds r4, r0, 0
 	bl IsMysteryEventEnabled
@@ -27844,7 +27844,7 @@ _08020D74:
 sub_8020D8C: @ 8020D8C
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r1, =gScriptItemId
+	ldr r1, =gSpecialVar_ItemId
 	ldrh r0, [r1]
 	subs r0, 0x85
 	lsls r0, 16
@@ -27865,7 +27865,7 @@ _08020DB0:
 	ldrb r0, [r2, 0x8]
 	lsls r0, 5
 	adds r0, r2, r0
-	ldr r1, =gScriptItemId
+	ldr r1, =gSpecialVar_ItemId
 	ldrh r1, [r1]
 	subs r1, 0x85
 	adds r0, 0xA4
@@ -34261,7 +34261,7 @@ _080241A6:
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
-	ldr r2, =gUnknown_082C8959
+	ldr r2, =gText_SavingDontTurnOffPower
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -41429,7 +41429,7 @@ sub_8027A48: @ 8027A48
 sub_8027A5C: @ 8027A5C
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r6, =gScriptResult
+	ldr r6, =gSpecialVar_Result
 _08027A62:
 	movs r0, 0x64
 	adds r1, r5, 0
@@ -41454,7 +41454,7 @@ _08027A94:
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _08027A62
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 _08027AA0:
@@ -46351,7 +46351,7 @@ _0802A3AE:
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
-	ldr r2, =gUnknown_082C8959
+	ldr r2, =gText_SavingDontTurnOffPower
 	str r4, [sp]
 	movs r0, 0x2
 	str r0, [sp, 0x4]
@@ -51101,7 +51101,7 @@ _0802C924:
 	bl sub_802C908
 	cmp r0, 0
 	beq _0802C95C
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	b _0802C966
 	.pool
@@ -51109,7 +51109,7 @@ _0802C95C:
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _0802C924
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 _0802C966:
 	strh r0, [r1]
@@ -51243,7 +51243,7 @@ _0802CA32:
 	ldrh r0, [r7]
 	ldr r1, [r7, 0x4]
 	ldr r2, [r7, 0x8]
-	bl species_and_otid_get_pal
+	bl GetFrontSpritePalFromSpeciesAndPersonality
 	str r0, [sp, 0x20]
 	add r0, sp, 0x20
 	ldr r1, [r0, 0x4]
@@ -52594,7 +52594,7 @@ _0802D516:
 	strh r0, [r1, 0x12]
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_082C8959
+	ldr r2, =gText_SavingDontTurnOffPower
 	movs r1, 0x1
 	str r1, [sp]
 	movs r1, 0xFF
