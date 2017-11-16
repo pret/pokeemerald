@@ -18,5 +18,5 @@ gUnknown_08553A14:: @ 8553A14
 gUnknown_08553A78:: @ 8553A78
 	.incbin "baserom.gba", 0x553a78, 0x4
 
-gUnknown_08553A7C:: @ 8553A7C
+gRoute119WaterTileData:: @ 8553A7C
 	.incbin "baserom.gba", 0x553a7c, 0x14

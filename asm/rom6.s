@@ -2779,7 +2779,7 @@ sub_8136C8C: @ 8136C8C
 	adds r2, r6
 	ldr r1, [r5]
 	adds r1, r2
-	bl sub_8136FE4
+	bl PokeblockGetGain
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -3177,8 +3177,8 @@ _08136FDE:
 	bx r1
 	thumb_func_end sub_8136F9C
 
-	thumb_func_start sub_8136FE4
-sub_8136FE4: @ 8136FE4
+	thumb_func_start PokeblockGetGain
+PokeblockGetGain: @ 8136FE4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3227,7 +3227,7 @@ _0813702A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8136FE4
+	thumb_func_end PokeblockGetGain
 
 	thumb_func_start sub_8137044
 sub_8137044: @ 8137044
@@ -3261,7 +3261,7 @@ _08137074:
 	ldr r0, =gUnknown_085B2720
 	adds r1, r0
 	adds r0, r5, 0
-	bl sub_8136FE4
+	bl PokeblockGetGain
 	lsls r0, 16
 	cmp r0, 0
 	ble _081370A0

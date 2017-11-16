@@ -30,6 +30,7 @@
 #define VAR_RESET_RTC_ENABLE       0x402C
 
 #define VAR_0x4037                 0x4037
+#define VAR_ALTERING_CAVE_WILD_SET 0x403E
 #define VAR_DAYS                   0x4040
 
 #define VAR_DEPT_STORE_FLOOR       0x4043
