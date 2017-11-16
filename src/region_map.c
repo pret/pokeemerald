@@ -506,12 +506,12 @@ bool8 sub_8122DB0(void)
                 SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_PRIORITY, 1);
                 SetBgAttribute(gRegionMap->bgNum, BG_CTRL_ATTR_SCREENSIZE, 1);
             }
-            gRegionMap->initStep ++;
+            gRegionMap->initStep++;
             return FALSE;
         default:
             return FALSE;
     }
-    gRegionMap->initStep ++;
+    gRegionMap->initStep++;
     return TRUE;
 }
 
@@ -595,19 +595,19 @@ static u8 MoveRegionMapCursor_Full(void)
     }
     if (gRegionMap->cursorDeltaX > 0)
     {
-        gRegionMap->cursorPosX ++;
+        gRegionMap->cursorPosX++;
     }
     if (gRegionMap->cursorDeltaX < 0)
     {
-        gRegionMap->cursorPosX --;
+        gRegionMap->cursorPosX--;
     }
     if (gRegionMap->cursorDeltaY > 0)
     {
-        gRegionMap->cursorPosY ++;
+        gRegionMap->cursorPosY++;
     }
     if (gRegionMap->cursorDeltaY < 0)
     {
-        gRegionMap->cursorPosY --;
+        gRegionMap->cursorPosY--;
     }
     mapSecId = GetRegionMapSectionIdAt_Internal(gRegionMap->cursorPosX, gRegionMap->cursorPosY);
     gRegionMap->iconDrawType = get_flagnr_blue_points(mapSecId);
@@ -673,7 +673,7 @@ static u8 MoveRegionMapCursor_Zoomed(void)
     gRegionMap->scrollY += gRegionMap->zoomedCursorDeltaY;
     gRegionMap->scrollX += gRegionMap->zoomedCursorDeltaX;
     RegionMap_SetBG2XAndBG2Y(gRegionMap->scrollX, gRegionMap->scrollY);
-    gRegionMap->zoomedCursorMovementFrameCounter ++;
+    gRegionMap->zoomedCursorMovementFrameCounter++;
     if (gRegionMap->zoomedCursorMovementFrameCounter == 8)
     {
         x = (gRegionMap->scrollX + 0x2c) / 8 + 1;
@@ -741,7 +741,7 @@ bool8 sub_8123514(void)
     {
         return 0;
     }
-    gRegionMap->unk_06e ++;
+    gRegionMap->unk_06e++;
     if (gRegionMap->unk_06e == 16)
     {
         gRegionMap->unk_044 = 0;
@@ -1145,14 +1145,14 @@ static u16 CorrectSpecialMapSecId_Internal(u16 mapSecId)
 {
     u32 i;
 
-    for (i = 0; i < 3; i ++)
+    for (i = 0; i < 3; i++)
     {
         if (sRegionMap_MarineCaveMapSecIds[i] == mapSecId)
         {
             return RegionMap_GetTerraCaveMapSecId();
         }
     }
-    for (i = 0; sRegionMap_SpecialPlaceLocations[i][0] != MAPSEC_NONE; i ++)
+    for (i = 0; sRegionMap_SpecialPlaceLocations[i][0] != MAPSEC_NONE; i++)
     {
         if (sRegionMap_SpecialPlaceLocations[i][0] == mapSecId)
         {
@@ -1192,7 +1192,7 @@ static bool32 RegionMap_IsPlayerInCave(u8 mapSecId)
 {
     u32 i;
 
-    for (i = 0; i < 1; i ++)
+    for (i = 0; i < 1; i++)
     {
         if (sRegionMap_MapSecAquaHideoutOld[i] == mapSecId)
         {
@@ -1235,7 +1235,7 @@ static void RegionMap_GetPositionOfCursorWithinMapSection(void)
         {
             if (RegionMap_IsMapSecIdInNextRow(y))
             {
-                y --;
+                y--;
                 x = MAPCURSOR_X_MAX + 1;
             }
             else
@@ -1245,10 +1245,10 @@ static void RegionMap_GetPositionOfCursorWithinMapSection(void)
         }
         else
         {
-            x --;
+            x--;
             if (GetRegionMapSectionIdAt_Internal(x, y) == gRegionMap->mapSecId)
             {
-                posWithinMapSec ++;
+                posWithinMapSec++;
             }
         }
     }
@@ -1259,11 +1259,11 @@ static bool8 RegionMap_IsMapSecIdInNextRow(u16 y)
 {
     u16 x;
 
-    if (y -- == 0)
+    if (y-- == 0)
     {
         return FALSE;
     }
-    for (x = MAPCURSOR_X_MIN; x <= MAPCURSOR_X_MAX; x ++)
+    for (x = MAPCURSOR_X_MIN; x <= MAPCURSOR_X_MAX; x++)
     {
         if (GetRegionMapSectionIdAt_Internal(x, y) == gRegionMap->mapSecId)
         {
@@ -1279,7 +1279,7 @@ static void SpriteCallback_CursorFull(struct Sprite *sprite)
     {
         sprite->pos1.x += 2 * gRegionMap->cursorDeltaX;
         sprite->pos1.y += 2 * gRegionMap->cursorDeltaY;
-        gRegionMap->cursorMovementFrameCounter --;
+        gRegionMap->cursorMovementFrameCounter--;
     }
 }
 
@@ -1460,7 +1460,7 @@ static void RegionMapPlayerIconSpriteCallback(struct Sprite *sprite)
 {
     if (gRegionMap->blinkPlayerIcon)
     {
-        if (++ sprite->data7 > 16)
+        if (++sprite->data7 > 16)
         {
             sprite->data7 = 0;
             sprite->invisible = sprite->invisible ? FALSE : TRUE;
@@ -1503,7 +1503,7 @@ u8 *GetMapName(u8 *dest, u16 regionMapId, u16 padLength)
     }
     if (padLength != 0)
     {
-        for (i = str - dest; i < padLength; i ++)
+        for (i = str - dest; i < padLength; i++)
         {
             *str++ = CHAR_SPACE;
         }
@@ -1554,7 +1554,7 @@ bool32 sub_8124668(u8 mapSecId)
 {
     u32 i;
 
-    for (i = 0; i < 3; i ++)
+    for (i = 0; i < 3; i++)
     {
         if (mapSecId == sRegionMapEventSectionIds[i])
         {
@@ -1590,23 +1590,23 @@ void MCB2_FlyMap(void)
                 ResetSpriteData();
                 FreeSpriteTileRanges();
                 FreeAllSpritePalettes();
-                gMain.state ++;
+                gMain.state++;
             }
             break;
         case 1:
             ResetBgsAndClearDma3BusyFlags(0);
             InitBgsFromTemplates(1, gUnknown_085A1EE4, 3);
-            gMain.state ++;
+            gMain.state++;
             break;
         case 2:
             InitWindows(gUnknown_085A1EF0);
             DeactivateAllTextPrinters();
-            gMain.state ++;
+            gMain.state++;
             break;
         case 3:
             sub_809882C(0, 0x65, 0xd0);
             clear_scheduled_bg_copies_to_vram();
-            gMain.state ++;
+            gMain.state++;
             break;
         case 4:
             InitRegionMap(&gUnknown_0203A148->regionMap, FALSE);
@@ -1616,15 +1616,15 @@ void MCB2_FlyMap(void)
             StringFill(gUnknown_0203A148->unk_a4c, CHAR_SPACE, 16);
             gUnknown_03001180 = TRUE;
             sub_8124904();
-            gMain.state ++;
+            gMain.state++;
             break;
         case 5:
             LZ77UnCompVram(sRegionMapFrameGfxLZ, (u16 *)BG_CHAR_ADDR(3));
-            gMain.state ++;
+            gMain.state++;
             break;
         case 6:
             LZ77UnCompVram(sRegionMapFrameTilemapLZ, (u16 *)BG_SCREEN_ADDR(30));
-            gMain.state ++;
+            gMain.state++;
             break;
         case 7:
             LoadPalette(sRegionMapFramePal, 0x10, 0x20);
@@ -1632,16 +1632,16 @@ void MCB2_FlyMap(void)
             FillWindowPixelBuffer(2, 0x00);
             PrintTextOnWindow(2, 1, gText_FlyToWhere, 0, 1, 0, NULL);
             schedule_bg_copy_tilemap_to_vram(0);
-            gMain.state ++;
+            gMain.state++;
             break;
         case 8:
             sub_8124A70();
-            gMain.state ++;
+            gMain.state++;
             break;
         case 9:
             BlendPalettes(-1, 16, 0);
             SetVBlankCallback(sub_81248C0);
-            gMain.state ++;
+            gMain.state++;
             break;
         case 10:
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -1651,7 +1651,7 @@ void MCB2_FlyMap(void)
             ShowBg(2);
             sub_81248F4(sub_8124D14);
             SetMainCallback2(sub_81248D4);
-            gMain.state ++;
+            gMain.state++;
             break;
     }
 }
@@ -1686,7 +1686,7 @@ static void sub_8124904(void)
     if (gUnknown_0203A148->regionMap.iconDrawType > MAPSECTYPE_NONE && gUnknown_0203A148->regionMap.iconDrawType <= MAPSECTYPE_BATTLE_FRONTIER)
     {
         flag = FALSE;
-        for (i = 0; i < 1; i ++)
+        for (i = 0; i < 1; i++)
         {
             if (gUnknown_0203A148->regionMap.mapSecId == gUnknown_085A1EDC[i].mapSecId)
             {
@@ -1762,7 +1762,7 @@ static void sub_8124AD4(void)
     u8 spriteId;
 
     canFlyFlag = FLAG_VISITED_LITTLEROOT_TOWN;
-    for (i = 0; i < 16; i ++)
+    for (i = 0; i < 16; i++)
     {
         sub_8124630(i, &x, &y, &width, &height);
         x = (x + MAPCURSOR_X_MIN) * 8 + 4;
@@ -1794,7 +1794,7 @@ static void sub_8124AD4(void)
             StartSpriteAnim(&gSprites[spriteId], shape);
             gSprites[spriteId].data0 = i;
         }
-        canFlyFlag ++;
+        canFlyFlag++;
     }
 }
 
@@ -1808,7 +1808,7 @@ static void sub_8124BE4(void)
     u16 mapSecId;
     u8 spriteId;
 
-    for (i = 0; gUnknown_085A1F18[i][1] != MAPSEC_NONE; i ++)
+    for (i = 0; gUnknown_085A1F18[i][1] != MAPSEC_NONE; i++)
     {
         if (FlagGet(gUnknown_085A1F18[i][0]))
         {
@@ -1832,7 +1832,7 @@ static void sub_8124CBC(struct Sprite *sprite)
 {
     if (gUnknown_0203A148->regionMap.mapSecId == sprite->data0)
     {
-        if (++ sprite->data1 > 16)
+        if (++sprite->data1 > 16)
         {
             sprite->data1 = 0;
             sprite->invisible = sprite->invisible ? FALSE : TRUE;
@@ -1851,7 +1851,7 @@ static void sub_8124D14(void)
     {
         case 0:
             BeginNormalPaletteFade(-1, 0, 16, 0, 0);
-            gUnknown_0203A148->unk_004 ++;
+            gUnknown_0203A148->unk_004++;
             break;
         case 1:
             if (!UpdatePaletteFade())
@@ -1898,7 +1898,7 @@ static void sub_8124E0C(void)
     {
         case 0:
             BeginNormalPaletteFade(-1, 0, 0, 16, 0);
-            gUnknown_0203A148->unk_004 ++;
+            gUnknown_0203A148->unk_004++;
             break;
         case 1:
             if (!UpdatePaletteFade())

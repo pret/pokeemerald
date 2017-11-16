@@ -121,7 +121,7 @@ static void FieldUpdateRegionMap(void)
             InitRegionMap(&sFieldRegionMapHandler->regionMap, 0);
             CreateRegionMapPlayerIcon(0, 0);
             CreateRegionMapCursor(1, 1);
-            sFieldRegionMapHandler->state ++;
+            sFieldRegionMapHandler->state++;
             break;
         case 1:
             SetWindowBorderStyle(1, 0, 0x27, 0xd);
@@ -131,18 +131,18 @@ static void FieldUpdateRegionMap(void)
             SetWindowBorderStyle(0, 0, 0x27, 0xd);
             PrintRegionMapSecName();
             BeginNormalPaletteFade(-1, 0, 16, 0, 0);
-            sFieldRegionMapHandler->state ++;
+            sFieldRegionMapHandler->state++;
             break;
         case 2:
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
             ShowBg(0);
             ShowBg(2);
-            sFieldRegionMapHandler->state ++;
+            sFieldRegionMapHandler->state++;
             break;
         case 3:
             if (!gPaletteFade.active)
             {
-                sFieldRegionMapHandler->state ++;
+                sFieldRegionMapHandler->state++;
             }
             break;
         case 4:
@@ -153,13 +153,13 @@ static void FieldUpdateRegionMap(void)
                     break;
                 case INPUT_EVENT_A_BUTTON:
                 case INPUT_EVENT_B_BUTTON:
-                    sFieldRegionMapHandler->state ++;
+                    sFieldRegionMapHandler->state++;
                     break;
             }
             break;
         case 5:
             BeginNormalPaletteFade(-1, 0, 0, 16, 0);
-            sFieldRegionMapHandler->state ++;
+            sFieldRegionMapHandler->state++;
             break;
         case 6:
             if (!gPaletteFade.active)

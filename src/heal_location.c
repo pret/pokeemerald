@@ -47,7 +47,7 @@ static u32 GetHealLocationIndexFromMapGroupAndNum(u16 mapGroup, u16 mapNum)
 {
     u32 i;
 
-    for (i = 0; i < NUM_HEAL_LOCATIONS; i ++)
+    for (i = 0; i < NUM_HEAL_LOCATIONS; i++)
     {
         if (sHealLocations[i].group == mapGroup && sHealLocations[i].map == mapNum)
         {
