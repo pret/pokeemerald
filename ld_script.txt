@@ -169,8 +169,8 @@ SECTIONS {
         src/mail.o(.text);
         asm/menu_helpers.o(.text);
         asm/dewford_trend.o(.text);
-        asm/heal_location.o(.text);
-        asm/region_map.o(.text);
+        src/heal_location.o(.text);
+        src/region_map.o(.text);
         asm/cute_sketch.o(.text);
         src/decoration.o(.text);
         asm/slot_machine.o(.text);
@@ -214,7 +214,7 @@ SECTIONS {
         asm/player_pc.o(.text);
         asm/intro.o(.text);
         src/reset_save_heap.o(.text);
-        asm/field_region_map.o(.text);
+        src/field_region_map.o(.text);
         asm/battle_anim_8170478.o(.text);
         src/hall_of_fame.o(.text);
         asm/credits.o(.text);
@@ -416,8 +416,8 @@ SECTIONS {
         data/mauville_old_man.o(.rodata);
         src/mail.o(.rodata);
         data/menu_helpers.o(.rodata);
-        data/heal_location.o(.rodata);
-        data/region_map.o(.rodata);
+        src/heal_location.o(.rodata);
+        src/region_map.o(.rodata);
         data/cute_sketch.o(.rodata);
         src/decoration.o(.rodata);
         data/slot_machine.o(.rodata);
@@ -441,7 +441,7 @@ SECTIONS {
         src/battle_controller_wally.o(.rodata);
         data/player_pc.o(.rodata);
         data/intro.o(.rodata);
-        data/field_region_map.o(.rodata);
+        src/field_region_map.o(.rodata);
         data/battle_anim_8170478.o(.rodata);
         src/hall_of_fame.o(.rodata);
         data/credits.o(.rodata);

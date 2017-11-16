@@ -10864,7 +10864,7 @@ sub_81CC670: @ 81CC670
 	movs r0, 0x4
 	bl sub_81C763C
 	adds r4, r0, 0
-	bl sub_812305C
+	bl FreeRegionMapIconResources
 	bl sub_81CC9EC
 	ldrb r0, [r4, 0x8]
 	bl RemoveWindow
@@ -10886,7 +10886,7 @@ sub_81CC6A4: @ 81CC6A4
 	bl TransferPlttBuffer
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl sub_81237B4
+	bl UpdateRegionMapVideoRegs
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CC6A4
@@ -10991,10 +10991,10 @@ _081CC784:
 	bne _081CC7AC
 	movs r0, 0x4
 	movs r1, 0x9
-	bl sub_8124288
+	bl CreateRegionMapPlayerIcon
 	movs r0, 0x5
 	movs r1, 0xA
-	bl sub_81240D4
+	bl CreateRegionMapCursor
 	bl sub_812454C
 	b _081CC77C
 _081CC7AC:

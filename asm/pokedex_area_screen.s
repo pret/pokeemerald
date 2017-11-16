@@ -362,7 +362,7 @@ sub_813CD04: @ 813CD04
 	adds r1, r3, 0
 	bl get_mapheader_by_bank_and_number
 	ldrb r0, [r0, 0x14]
-	bl sub_8123F9C
+	bl CorrectSpecialMapSecId
 	ldr r2, [r4]
 	movs r1, 0x88
 	lsls r1, 1
@@ -653,7 +653,7 @@ _0813CF5A:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	str r3, [sp]
-	bl sub_8123E9C
+	bl GetRegionMapSectionIdAt
 	ldr r3, [sp]
 	ldr r2, [r3]
 	mov r7, r9
@@ -1338,11 +1338,11 @@ _0813D4F8:
 	bl sub_8122D88
 	movs r0, 0x1
 	movs r1, 0x1
-	bl sub_8124288
+	bl CreateRegionMapPlayerIcon
 	movs r1, 0x8
 	negs r1, r1
 	movs r0, 0
-	bl sub_8123824
+	bl PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs
 	b _0813D584
 	.pool
 _0813D520:
