@@ -23,7 +23,7 @@ const struct TilesPal* sub_8098758(u8 id)
 void copy_textbox_border_tile_patterns_to_vram(u8 windowId, u16 destOffset, u8 palOffset)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_PRIORITY), gUnknown_08DDD748, 0x1C0, destOffset);
-    LoadPalette(sub_8098C64(), palOffset, 0x20);
+    LoadPalette(GetOverworldTextboxPalettePtr(), palOffset, 0x20);
 }
 
 void box_border_load_tiles_and_pal(u8 windowId, u16 destOffset, u8 palOffset)
@@ -113,7 +113,7 @@ const u16* stdpal_get(u8 id)
     return &gUnknown_0851017C[id];
 }
 
-const u16* sub_8098C64(void)
+const u16* GetOverworldTextboxPalettePtr(void)
 {
     return gUnknown_08DDD728;
 }

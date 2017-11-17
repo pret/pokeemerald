@@ -1,0 +1,19 @@
+RustboroCity_PokemonCenter_2F_MapScripts:: @ 8214EDE
+	map_script 2, RustboroCity_PokemonCenter_2F_MapScript2_276C3B
+	map_script 4, RustboroCity_PokemonCenter_2F_MapScript2_276B6C
+	map_script 1, RustboroCity_PokemonCenter_2F_MapScript1_276BBE
+	map_script 3, RustboroCity_PokemonCenter_2F_MapScript1_276ACF
+	.byte 0
+
+RustboroCity_PokemonCenter_2F_EventScript_214EF3:: @ 8214EF3
+	call OldaleTown_PokemonCenter_2F_EventScript_276EB7
+	end
+
+RustboroCity_PokemonCenter_2F_EventScript_214EF9:: @ 8214EF9
+	call OldaleTown_PokemonCenter_2F_EventScript_2770B2
+	end
+
+RustboroCity_PokemonCenter_2F_EventScript_214EFF:: @ 8214EFF
+	call OldaleTown_PokemonCenter_2F_EventScript_2771DB
+	end
+

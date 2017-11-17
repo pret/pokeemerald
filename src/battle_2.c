@@ -43,6 +43,7 @@
 #include "tv.h"
 #include "safari_zone.h"
 #include "battle_string_ids.h"
+#include "data2.h"
 
 struct UnknownStruct6
 {
@@ -352,7 +353,7 @@ static const u8 sUnknown_0831BCF3[] = {4, 4, 4, 4};
 void CB2_InitBattle(void)
 {
     MoveSaveBlocks_ResetHeap();
-    AllocateBattleResrouces();
+    AllocateBattleResources();
     AllocateBattleSpritesData();
     AllocateMonSpritesGfx();
     sub_8185F84();
@@ -508,7 +509,7 @@ static void sub_8036A5C(void)
 
     gBattleStruct->field_182 = r6;
     *(&gBattleStruct->field_183) = r6 >> 8;
-    gBattleStruct->field_183 |= FlagGet(SYS_FRONTIER_PASS) << 7;
+    gBattleStruct->field_183 |= FlagGet(FLAG_SYS_FRONTIER_PASS) << 7;
 }
 
 static void SetPlayerBerryDataInBattleStruct(void)
@@ -1609,7 +1610,7 @@ void BattleMainCB2(void)
 
     if (gMain.heldKeys & B_BUTTON && gBattleTypeFlags & BATTLE_TYPE_RECORDED && sub_8186450())
     {
-        gScriptResult = gBattleOutcome = BATTLE_PLAYER_TELEPORTED;
+        gSpecialVar_Result = gBattleOutcome = BATTLE_PLAYER_TELEPORTED;
         ResetPaletteFadeControl();
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         SetMainCallback2(CB2_QuitRecordedBattle);
@@ -2067,7 +2068,7 @@ static void sub_8038F34(void)
 
             if (!gSaveBlock2Ptr->field_CA9_b && i == monsCount)
             {
-                if (FlagGet(SYS_FRONTIER_PASS))
+                if (FlagGet(FLAG_SYS_FRONTIER_PASS))
                 {
                     FreeAllWindowBuffers();
                     SetMainCallback2(sub_80392A8);
@@ -2476,15 +2477,6 @@ static void sub_80398D0(struct Sprite *sprite)
     }
 }
 
-// to get rid of once the struct is declared in a header
-struct MonCoords
-{
-    // This would use a bitfield, but sub_8079F44
-    // uses it as a u8 and casting won't match.
-    u8 coords; // u8 x:4, y:4;
-    u8 y_offset;
-};
-
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
 
@@ -2852,9 +2844,9 @@ static void BattleStartClearSetData(void)
         *(i + 3 * 8 + (u8*)(gBattleStruct->mirrorMoveArrays) + 0) = 0;
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < BATTLE_BANKS_COUNT; i++)
     {
-        *(gBattleStruct->field_294 + i) = 6;
+        *(gBattleStruct->AI_monToSwitchIntoId + i) = 6;
     }
 
     gBattleStruct->field_DF = 0;
@@ -2934,8 +2926,8 @@ void SwitchInClearSetData(void)
     {
         gDisableStructs[gActiveBank].substituteHP = disableStructCopy.substituteHP;
         gDisableStructs[gActiveBank].bankWithSureHit = disableStructCopy.bankWithSureHit;
-        gDisableStructs[gActiveBank].perishSong1 = disableStructCopy.perishSong1;
-        gDisableStructs[gActiveBank].perishSong2 = disableStructCopy.perishSong2;
+        gDisableStructs[gActiveBank].perishSongTimer1 = disableStructCopy.perishSongTimer1;
+        gDisableStructs[gActiveBank].perishSongTimer2 = disableStructCopy.perishSongTimer2;
         gDisableStructs[gActiveBank].bankPreventingEscape = disableStructCopy.bankPreventingEscape;
     }
 
@@ -3681,7 +3673,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     }
     for (i = 0; i < BATTLE_BANKS_COUNT; i++)
     {
-        *(gBattleStruct->field_5C + i) = 6;
+        *(gBattleStruct->monToSwitchIntoId + i) = 6;
         gActionForBanks[i] = ACTION_INIT_VALUE;
         gChosenMovesByBanks[i] = MOVE_NONE;
     }
@@ -3792,7 +3784,7 @@ void BattleTurnPassed(void)
     }
 
     for (i = 0; i < 4; i++)
-        *(gBattleStruct->field_5C + i) = 6;
+        *(gBattleStruct->monToSwitchIntoId + i) = 6;
 
     *(&gBattleStruct->field_91) = gAbsentBankFlags;
     BattleHandleAddTextPrinter(gText_EmptyString3, 0);
@@ -3883,7 +3875,7 @@ void sub_803BDA0(u8 bank)
         gUnknown_0203CF00[i] = *(bank * 3 + i + (u8*)(gBattleStruct->field_60));
 
     r4 = pokemon_order_func(gBattlePartyID[bank]);
-    r1 = pokemon_order_func(*(gBattleStruct->field_5C + bank));
+    r1 = pokemon_order_func(*(gBattleStruct->monToSwitchIntoId + bank));
     sub_81B8FB0(r4, r1);
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -3931,7 +3923,7 @@ static void HandleTurnActionSelectionState(void)
             gBattleCommunication[gActiveBank] = STATE_BEFORE_ACTION_CHOSEN;
             break;
         case STATE_BEFORE_ACTION_CHOSEN: // choose an action
-            *(gBattleStruct->field_5C + gActiveBank) = 6;
+            *(gBattleStruct->monToSwitchIntoId + gActiveBank) = 6;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI
                 || !(identity & BIT_MON)
                 || gBattleStruct->field_91 & gBitTable[GetBankByIdentity(identity ^ BIT_MON)]
@@ -4049,9 +4041,9 @@ static void HandleTurnActionSelectionState(void)
                     else
                     {
                         if (gActiveBank == 2 && gActionForBanks[0] == ACTION_SWITCH)
-                            EmitChoosePokemon(0, 0, *(gBattleStruct->field_5C + 0), ABILITY_NONE, gBattleStruct->field_60[gActiveBank]);
+                            EmitChoosePokemon(0, 0, *(gBattleStruct->monToSwitchIntoId + 0), ABILITY_NONE, gBattleStruct->field_60[gActiveBank]);
                         else if (gActiveBank == 3 && gActionForBanks[1] == ACTION_SWITCH)
-                            EmitChoosePokemon(0, 0, *(gBattleStruct->field_5C + 1), ABILITY_NONE, gBattleStruct->field_60[gActiveBank]);
+                            EmitChoosePokemon(0, 0, *(gBattleStruct->monToSwitchIntoId + 1), ABILITY_NONE, gBattleStruct->field_60[gActiveBank]);
                         else
                             EmitChoosePokemon(0, 0, 6, ABILITY_NONE, gBattleStruct->field_60[gActiveBank]);
                     }
@@ -4338,7 +4330,7 @@ static void HandleTurnActionSelectionState(void)
             for (i = 0; i < gNoOfAllBanks; i++)
             {
                 if (gActionForBanks[i] == ACTION_SWITCH)
-                    sub_80571DC(i, *(gBattleStruct->field_5C + i));
+                    sub_80571DC(i, *(gBattleStruct->monToSwitchIntoId + i));
             }
         }
     }
@@ -4362,7 +4354,7 @@ static bool8 sub_803CDB8(void)
 
 static void sub_803CDF8(void)
 {
-    *(gBattleStruct->field_5C + gActiveBank) = gBattleBufferB[gActiveBank][1];
+    *(gBattleStruct->monToSwitchIntoId + gActiveBank) = gBattleBufferB[gActiveBank][1];
     RecordedBattle_SetBankAction(gActiveBank, gBattleBufferB[gActiveBank][1]);
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
@@ -4434,7 +4426,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves)
 
     // badge boost
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_FRONTIER))
-        && FlagGet(BADGE03_GET)
+        && FlagGet(FLAG_BADGE03_GET)
         && GetBankSide(bank1) == SIDE_PLAYER)
     {
         speedBank1 = (speedBank1 * 110) / 100;
@@ -4468,7 +4460,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves)
 
     // badge boost
     if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000 | BATTLE_TYPE_FRONTIER))
-        && FlagGet(BADGE03_GET)
+        && FlagGet(FLAG_BADGE03_GET)
         && GetBankSide(bank2) == SIDE_PLAYER)
     {
         speedBank2 = (speedBank2 * 110) / 100;
@@ -4757,7 +4749,7 @@ static void HandleEndTurn_BattleWon(void)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
     {
-        gScriptResult = gBattleOutcome;
+        gSpecialVar_Result = gBattleOutcome;
         gBattleTextBuff1[0] = gBattleOutcome;
         gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
         gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
@@ -5019,7 +5011,7 @@ static void ReturnFromBattleToOverworld(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK && gReceivedRemoteLinkPlayers != 0)
         return;
 
-    gScriptResult = gBattleOutcome;
+    gSpecialVar_Result = gBattleOutcome;
     gMain.inBattle = 0;
     gMain.callback1 = gPreBattleCallback1;
 
@@ -5617,7 +5609,7 @@ static void HandleAction_NothingIsFainted(void)
 
 static void HandleAction_ActionFinished(void)
 {
-    *(gBattleStruct->field_5C + gBanksByTurnOrder[gCurrentTurnActionNumber]) = 6;
+    *(gBattleStruct->monToSwitchIntoId + gBanksByTurnOrder[gCurrentTurnActionNumber]) = 6;
     gCurrentTurnActionNumber++;
     gCurrentActionFuncId = gActionsByTurnOrder[gCurrentTurnActionNumber];
     SpecialStatusesClear();

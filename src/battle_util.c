@@ -1292,9 +1292,9 @@ bool8 sub_8041364(void)
                 gBattleTextBuff1[1] = 1;
                 gBattleTextBuff1[2] = 1;
                 gBattleTextBuff1[3] = 1;
-                gBattleTextBuff1[4] = gDisableStructs[gActiveBank].perishSong1;
+                gBattleTextBuff1[4] = gDisableStructs[gActiveBank].perishSongTimer1;
                 gBattleTextBuff1[5] = EOS;
-                if (gDisableStructs[gActiveBank].perishSong1 == 0)
+                if (gDisableStructs[gActiveBank].perishSongTimer1 == 0)
                 {
                     gStatuses3[gActiveBank] &= ~STATUS3_PERISH_SONG;
                     gBattleMoveDamage = gBattleMons[gActiveBank].hp;
@@ -1302,7 +1302,7 @@ bool8 sub_8041364(void)
                 }
                 else
                 {
-                    gDisableStructs[gActiveBank].perishSong1--;
+                    gDisableStructs[gActiveBank].perishSongTimer1--;
                     gBattlescriptCurrInstr = gUnknown_082DAF20;
                 }
                 BattleScriptExecute(gBattlescriptCurrInstr);
@@ -1805,7 +1805,7 @@ bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
              && GetMonData(&party[i], MON_DATA_SPECIES2) != 0
              && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
             // FIXME: Using index[array] instead of array[index] is BAD!
-             && i != r1 && i != r2 && i != r7[gBattleStruct->field_5C] && i != r6[gBattleStruct->field_5C])
+             && i != r1 && i != r2 && i != r7[gBattleStruct->monToSwitchIntoId] && i != r6[gBattleStruct->monToSwitchIntoId])
                 break;
         }
         return (i == 6);
@@ -3511,16 +3511,16 @@ u8 IsPokeDisobedient(void)
             return 0;
         if (!IsOtherTrainer(gBattleMons[gBankAttacker].otId, gBattleMons[gBankAttacker].otName))
             return 0;
-        if (FlagGet(BADGE08_GET))
+        if (FlagGet(FLAG_BADGE08_GET))
             return 0;
 
         obedienceLevel = 10;
 
-        if (FlagGet(BADGE02_GET))
+        if (FlagGet(FLAG_BADGE02_GET))
             obedienceLevel = 30;
-        if (FlagGet(BADGE04_GET))
+        if (FlagGet(FLAG_BADGE04_GET))
             obedienceLevel = 50;
-        if (FlagGet(BADGE06_GET))
+        if (FlagGet(FLAG_BADGE06_GET))
             obedienceLevel = 70;
     }
 

@@ -121,7 +121,7 @@ sub_81AAC28: @ 81AAC28
 	ldr r0, =gSpecialVar_0x8005
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	pop {r0}
 	bx r0
@@ -135,7 +135,7 @@ sub_81AAC50: @ 81AAC50
 	movs r0, 0x7
 	movs r1, 0x5
 	bl GoToBagMenu
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	pop {r0}
@@ -150,7 +150,7 @@ sub_81AAC70: @ 81AAC70
 	movs r0, 0x8
 	movs r1, 0x5
 	bl GoToBagMenu
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	pop {r0}
@@ -2181,7 +2181,7 @@ _081ABE32:
 _081ABE40:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	mov r1, r10
 	strh r1, [r0]
 	ldr r0, =gTasks + 0x8
@@ -2215,7 +2215,7 @@ _081ABE68:
 	lsrs r0, 24
 	adds r1, r4, 0
 	bl BagGetItemIdByPocketPosition
-	ldr r1, =gScriptItemId
+	ldr r1, =gSpecialVar_ItemId
 	strh r0, [r1]
 	ldr r1, =gUnknown_08614054
 	ldrb r0, [r5, 0x4]
@@ -3125,7 +3125,7 @@ _081AC668:
 	.4byte _081AC70C
 	.4byte _081AC690
 _081AC690:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl ItemId_GetBattleUsage
 	lsls r0, 24
@@ -3170,7 +3170,7 @@ _081AC6E8:
 	b _081ACA10
 	.pool
 _081AC70C:
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -3205,7 +3205,7 @@ _081AC748:
 	b _081ACA10
 	.pool
 _081AC76C:
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -3240,7 +3240,7 @@ _081AC7A8:
 	b _081ACA10
 	.pool
 _081AC7CC:
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -3288,7 +3288,7 @@ _081AC840:
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0x4
 	beq _081AC856
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl sub_8122148
 	lsls r0, 24
@@ -3358,7 +3358,7 @@ _081AC8D4:
 	ldr r1, =gUnknown_0861402C
 	movs r2, 0x4
 	bl memcpy
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl itemid_is_mail
 	lsls r0, 24
@@ -3396,7 +3396,7 @@ _081AC92C:
 	ldr r0, [r0]
 	ldr r1, =0x00000496
 	adds r0, r1
-	ldr r2, =gScriptItemId
+	ldr r2, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r2]
 	cmp r0, r1
@@ -3472,7 +3472,7 @@ _081ACA12:
 	bne _081ACA50
 	movs r0, 0x1
 	bl ClearWindowTilemap
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl PrintTMHMMoveData
 	movs r0, 0x3
@@ -3484,7 +3484,7 @@ _081ACA12:
 	b _081ACA86
 	.pool
 _081ACA50:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -3985,7 +3985,7 @@ ItemMenu_UseOutOfBattle: @ 81ACE7C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	bl ItemId_GetFieldFunc
 	cmp r0, 0
@@ -4015,7 +4015,7 @@ _081ACEB8:
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0x3
 	beq _081ACEE8
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl ItemId_GetFieldFunc
 	adds r1, r0, 0
@@ -4055,7 +4055,7 @@ ItemMenu_Toss: @ 81ACEF4
 	b _081ACF6A
 	.pool
 _081ACF24:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4105,7 +4105,7 @@ BagMenuConfirmToss: @ 81ACF88
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4242,7 +4242,7 @@ BagMenuActuallyToss: @ 81AD0CC
 	lsls r4, 3
 	ldr r5, =gTasks + 0x8
 	adds r6, r4, r5
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4312,7 +4312,7 @@ Task_ActuallyToss: @ 81AD150
 	beq _081AD1CE
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldrh r1, [r5, 0x10]
 	bl RemoveBagItem
@@ -4369,7 +4369,7 @@ ItemMenu_Register: @ 81AD1EC
 	ldr r0, [r0]
 	ldr r2, =0x00000496
 	adds r1, r0, r2
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r2, [r0]
 	ldrh r0, [r1]
 	cmp r0, r2
@@ -4412,7 +4412,7 @@ ItemMenu_Give: @ 81AD278
 	lsrs r4, r0, 24
 	adds r6, r4, 0
 	bl bag_menu_remove_some_window
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	bl itemid_80BF6D8_mail_related
 	lsls r0, 24
@@ -4476,7 +4476,7 @@ bag_menu_print_cant_be_held_msg: @ 81AD30C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -4567,7 +4567,7 @@ ItemMenu_UseInBattle: @ 81AD3DC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl ItemId_GetBattleFunc
 	cmp r0, 0
@@ -4601,7 +4601,7 @@ item_menu_type_2: @ 81AD41C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl itemid_80BF6D8_mail_related
 	lsls r0, 24
@@ -4662,7 +4662,7 @@ item_menu_type_b: @ 81AD4B4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
 	bl itemid_is_mail
 	lsls r0, 24
@@ -4751,7 +4751,7 @@ _081AD550:
 	bl player_bitmagic
 	bl sub_808B864
 	bl sub_808BCF4
-	ldr r2, =gScriptItemId
+	ldr r2, =gSpecialVar_ItemId
 	ldr r0, [r4]
 	adds r0, r5
 	ldrh r1, [r0]
@@ -4775,7 +4775,7 @@ _081AD5C4:
 	adds r0, r5
 	strh r7, [r0]
 _081AD5CA:
-	ldr r0, =gUnknown_082736B3
+	ldr r0, =EventScript_2736B3
 	bl ScriptContext1_SetupScript
 _081AD5D0:
 	movs r0, 0x1
@@ -4798,7 +4798,7 @@ display_sell_item_ask_str: @ 81AD5DC
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r6, =gScriptItemId
+	ldr r6, =gSpecialVar_ItemId
 	ldrh r0, [r6]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -4861,7 +4861,7 @@ sub_81AD680: @ 81AD680
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
 	ldr r6, =gStringVar1
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -4944,7 +4944,7 @@ sub_81AD730: @ 81AD730
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -4996,7 +4996,7 @@ sub_81AD794: @ 81AD794
 	ldrb r4, [r0]
 	movs r2, 0x10
 	ldrsh r5, [r6, r2]
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -5061,7 +5061,7 @@ sub_81AD84C: @ 81AD84C
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r6, =gScriptItemId
+	ldr r6, =gSpecialVar_ItemId
 	ldrh r0, [r6]
 	ldr r1, =gStringVar2
 	bl CopyItemName
@@ -5122,7 +5122,7 @@ sub_81AD8C8: @ 81AD8C8
 	adds r5, r0
 	movs r0, 0x5F
 	bl PlaySE
-	ldr r2, =gScriptItemId
+	ldr r2, =gSpecialVar_ItemId
 	mov r8, r2
 	ldrh r0, [r2]
 	mov r3, r10
@@ -5241,7 +5241,7 @@ display_deposit_item_ask_str: @ 81AD9EC
 	b _081ADA5E
 	.pool
 _081ADA18:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -5366,7 +5366,7 @@ sub_81ADB14: @ 81ADB14
 	movs r0, 0x1
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r4, =gScriptItemId
+	ldr r4, =gSpecialVar_ItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -5690,7 +5690,7 @@ _081ADDEC:
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl bag_menu_print_cursor_
-	ldr r1, =gScriptItemId
+	ldr r1, =gSpecialVar_ItemId
 	movs r0, 0x4
 	strh r0, [r1]
 	adds r0, r5, 0
@@ -5726,10 +5726,10 @@ unknown_ItemMenu_Show: @ 81ADE38
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r1, =gSpecialVar_0x8005
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	bl bag_menu_remove_some_window
@@ -5760,11 +5760,11 @@ unknown_ItemMenu_Give2: @ 81ADE8C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	bl bag_menu_remove_some_window
@@ -5795,7 +5795,7 @@ unknown_ItemMenu_Confirm2: @ 81ADEDC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	bl bag_menu_remove_some_window

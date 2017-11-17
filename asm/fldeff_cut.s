@@ -425,7 +425,7 @@ sub_80D3A9C: @ 80D3A9C
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_08290705
+	ldr r0, =Route103_EventScript_290705
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -1323,7 +1323,7 @@ _080D41D4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080D422A
-	ldr r0, =gUnknown_08267EDB
+	ldr r0, =FarawayIsland_Interior_EventScript_267EDB
 	bl ScriptContext1_SetupScript
 _080D422A:
 	pop {r4-r6}

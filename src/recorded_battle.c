@@ -230,7 +230,7 @@ u8 RecordedBattle_ReadBankAction(u8 bank)
         ResetPaletteFadeControl();
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         SetMainCallback2(CB2_QuitRecordedBattle);
-        return 0xFF;
+        return -1;
     }
     else
     {

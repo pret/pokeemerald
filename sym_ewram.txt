@@ -978,10 +978,10 @@ gUnknown_02039F2A: @ 2039F2A
 gUnknown_02039F2B: @ 2039F2B
 	.space 0x1
 
-gScriptContestCategory: @ 2039F2C
+gSpecialVar_ContestCategory: @ 2039F2C
 	.space 0x2
 
-gUnknown_02039F2E: @ 2039F2E
+gSpecialVar_ContestRank: @ 2039F2E
 	.space 0x2
 
 gUnknown_02039F30: @ 2039F30
@@ -1105,12 +1105,7 @@ gUnknown_0203A138: @ 203A138
 gUnknown_0203A140: @ 203A140
 	.space 0x4
 
-gUnknown_0203A144: @ 203A144
-	.space 0x4
-
-gUnknown_0203A148: @ 203A148
-	.space 0x4
-
+	.include "src/region_map.o"
     .include "src/decoration.o"
     .align 2
 
@@ -1398,17 +1393,12 @@ gUnknown_0203BCC8: @ 203BCC8
 gUnknown_0203BCCC: @ 203BCCC
 	.space 0x4
 
-gUnknown_0203BCD0: @ 203BCD0
-	.space 0x4
+	.include "src/field_region_map.o"
 
 gUnknown_0203BCD4: @ 203BCD4
 	.space 0x4
 
-gUnknown_0203BCD8: @ 203BCD8
-	.space 0x4
-
-gUnknown_0203BCDC: @ 203BCDC
-	.space 0x4
+    .include "src/hall_of_fame.o"
 
 gUnknown_0203BCE0: @ 203BCE0
 	.space 0x2
@@ -1416,7 +1406,7 @@ gUnknown_0203BCE0: @ 203BCE0
 gUnknown_0203BCE2: @ 203BCE2
 	.space 0x2
 
-gUnknown_0203BCE4: @ 203BCE4
+gHasHallOfFameRecords: @ 203BCE4
 	.space 0x1
 
 gUnknown_0203BCE5: @ 203BCE5
@@ -1563,7 +1553,7 @@ gUnknown_0203CE74: @ 203CE74
 gUnknown_0203CE78: @ 203CE78
 	.space 0x4
 
-gScriptItemId: @ 203CE7C
+gSpecialVar_ItemId: @ 203CE7C
 	.space 0x4
 
 gUnknown_0203CE80: @ 203CE80

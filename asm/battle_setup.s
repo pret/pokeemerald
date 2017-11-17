@@ -1328,7 +1328,7 @@ _080B1120:
 	thumb_func_start sub_80B1138
 sub_80B1138: @ 80B1138
 	push {lr}
-	ldr r0, =set_256color_bg_bg0
+	ldr r0, =CB2_ChooseStarter
 	bl SetMainCallback2
 	ldr r1, =gMain
 	ldr r0, =sub_80B1158
@@ -1344,11 +1344,11 @@ sub_80B1158: @ 80B1158
 	sub sp, 0x8
 	ldr r0, =0x00004023
 	bl GetVarPointer
-	ldr r2, =gScriptResult
+	ldr r2, =gSpecialVar_Result
 	ldrh r1, [r2]
 	strh r1, [r0]
 	ldrh r0, [r2]
-	bl sub_8133EDC
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
@@ -1669,7 +1669,7 @@ battle_80801F0: @ 80B13F8
 	ldrh r1, [r0]
 	cmp r1, 0
 	beq _080B141A
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	strh r1, [r0]
 	lsls r0, r1, 24
 	lsrs r0, 24
@@ -1728,7 +1728,7 @@ _080B1494:
 	ldr r0, =gUnknown_0854FF84
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	ldr r0, =gUnknown_082713C2
+	ldr r0, =EventScript_2713C2
 	b _080B161E
 	.pool
 _080B14A8:
@@ -1757,7 +1757,7 @@ _080B14D6:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r0, =gUnknown_0827138A
+	ldr r0, =EventScript_27138A
 	b _080B161E
 	.pool
 _080B14EC:
@@ -1769,7 +1769,7 @@ _080B14EC:
 	ldrh r0, [r4]
 	bl sub_80B2234
 	strh r0, [r4]
-	ldr r0, =gUnknown_082713F8
+	ldr r0, =EventScript_2713F8
 	b _080B161E
 	.pool
 _080B1514:
@@ -1781,7 +1781,7 @@ _080B1514:
 	ldrh r0, [r4]
 	bl sub_80B2234
 	strh r0, [r4]
-	ldr r0, =gUnknown_082713D1
+	ldr r0, =EventScript_2713D1
 	b _080B161E
 	.pool
 _080B153C:
@@ -1793,7 +1793,7 @@ _080B153C:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 	ldr r1, =gTrainerBattleOpponent_A
@@ -1803,7 +1803,7 @@ _080B156C:
 	ldr r0, =gUnknown_08550014
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 _080B157C:
@@ -1833,7 +1833,7 @@ _080B15A8:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	ldrb r0, [r0]
 	bl battle_init
 	ldr r1, =gTrainerBattleOpponent_A
@@ -1843,7 +1843,7 @@ _080B15D8:
 	ldr r0, =gUnknown_08550014
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	ldrb r0, [r0]
 	bl battle_init
 	b _080B157C
@@ -1866,7 +1866,7 @@ _080B1616:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 _080B161C:
-	ldr r0, =gUnknown_08271362
+	ldr r0, =EventScript_271362
 _080B161E:
 	pop {r4,r5}
 	pop {r1}
@@ -1882,7 +1882,7 @@ SingleTrainerWantsBattle: @ 80B162C
 	lsrs r0, 24
 	ldr r2, =gSelectedMapObject
 	strb r0, [r2]
-	ldr r4, =gScriptLastTalked
+	ldr r4, =gSpecialVar_LastTalked
 	ldr r3, =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
@@ -1893,7 +1893,7 @@ SingleTrainerWantsBattle: @ 80B162C
 	adds r1, 0x1
 	adds r0, r1, 0
 	bl BattleSetup_ConfigureTrainerBattle
-	ldr r0, =gUnknown_08271354
+	ldr r0, =EventScript_271354
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
 	pop {r4}
@@ -1910,7 +1910,7 @@ TwoTrainersWantBattle: @ 80B1670
 	lsrs r0, 24
 	ldr r2, =gSelectedMapObject
 	strb r0, [r2]
-	ldr r4, =gScriptLastTalked
+	ldr r4, =gSpecialVar_LastTalked
 	ldr r3, =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
@@ -1931,7 +1931,7 @@ TwoTrainersWantBattle: @ 80B1670
 @ void TwoTrainersWantBattleExecuteScript()
 TwoTrainersWantBattleExecuteScript: @ 80B16A4
 	push {lr}
-	ldr r0, =gUnknown_08271354
+	ldr r0, =EventScript_271354
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
 	pop {r0}
@@ -2332,7 +2332,7 @@ sub_80B1A14: @ 80B1A14
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _080B1A44
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 	lsls r0, 16
@@ -2370,7 +2370,7 @@ _080B1A7C:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _080B1AAC
-	ldr r0, =gScriptLastTalked
+	ldr r0, =gSpecialVar_LastTalked
 	ldrb r0, [r0]
 	bl battle_init
 	adds r1, r0, 0
@@ -2420,7 +2420,7 @@ BattleSetup_GetScriptAddrAfterBattle: @ 80B1AF8
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _080B1B04
-	ldr r0, =gUnknown_082C8436
+	ldr r0, =EventScript_2C8436
 _080B1B04:
 	pop {r1}
 	bx r1
@@ -2457,7 +2457,7 @@ _080B1B3C:
 	b _080B1B56
 	.pool
 _080B1B54:
-	ldr r0, =gUnknown_082742E6
+	ldr r0, =LavaridgeTown_Gym_1F_EventScript_2742E6
 _080B1B56:
 	pop {r1}
 	bx r1
@@ -3484,7 +3484,7 @@ CheckIfMultipleTrainersWantBattle: @ 80B22D8
 	ldr r1, =gUnknown_02038BF8
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	b _080B230A
 	.pool
@@ -3492,7 +3492,7 @@ _080B2300:
 	ldr r1, =gUnknown_02038BF8
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 _080B230A:
 	strh r0, [r1]

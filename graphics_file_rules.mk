@@ -4,6 +4,8 @@ monfrontdir := graphics/pokemon/anim_front_pics
 monpaldir := graphics/pokemon/palettes
 INTROGFXDIR := graphics/intro
 interfacedir := graphics/interface
+PKNAVGFXDIR := graphics/pokenav
+MISCGFXDIR := graphics/misc
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -70,7 +72,7 @@ $(tilesetdir)/secondary/battle_frontier_outside_west/tiles.4bpp: $(tilesetdir)/s
 $(tilesetdir)/secondary/battle_frontier_outside_east/tiles.4bpp: $(tilesetdir)/secondary/battle_frontier_outside_east/tiles.png
 	$(GFX) $< $@ -num_tiles 508
 
-$(tilesetdir)/primary/inside_building/tiles.4bpp: $(tilesetdir)/primary/inside_building/tiles.png
+$(tilesetdir)/primary/building/tiles.4bpp: $(tilesetdir)/primary/building/tiles.png
 	$(GFX) $< $@ -num_tiles 502
 
 $(tilesetdir)/secondary/shop/tiles.4bpp: $(tilesetdir)/secondary/shop/tiles.png
@@ -287,6 +289,11 @@ graphics/title_screen/pokemon_logo.gbapal: graphics/title_screen/pokemon_logo.pa
 
 $(INTROGFXDIR)/copyright.4bpp: $(INTROGFXDIR)/copyright.png
 	$(GFX) $< $@ -num_tiles 39
-
+    
 $(interfacedir)/pkmnjump_bg.4bpp: $(interfacedir)/pkmnjump_bg.png
 	$(GFX) $< $@ -num_tiles 63
+
+$(PKNAVGFXDIR)/region_map.8bpp: $(PKNAVGFXDIR)/region_map.png
+	$(GFX) $< $@ -num_tiles 233
+$(MISCGFXDIR)/japanese_hof.4bpp: $(MISCGFXDIR)/japanese_hof.png
+	$(GFX) $< $@ -num_tiles 29
