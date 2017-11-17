@@ -1246,7 +1246,7 @@ sub_809C8DC: @ 809C8DC
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0809C92E
-	bl sub_80B5870
+	bl UpdateRepelCounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

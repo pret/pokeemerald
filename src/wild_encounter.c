@@ -13,28 +13,43 @@
 #include "pokeblock.h"
 #include "battle_setup.h"
 #include "roamer.h"
+#include "game_stat.h"
+#include "tv.h"
+#include "link.h"
+#include "script.h"
+#include "items.h"
 
-EWRAM_DATA u8 sWildEncountersDisabled = 0;
-EWRAM_DATA u32 sFeebasRngValue = 0;
+extern const u8 EventScript_RepelWoreOff[];
 
-#define NUM_FEEBAS_SPOTS 6
+#define NUM_FEEBAS_SPOTS    6
+
+#define LAND_WILD_COUNT     12
+#define WATER_WILD_COUNT    5
+#define ROCK_WILD_COUNT     5
+#define FISH_WILD_COUNT     10
 
 extern const u16 gRoute119WaterTileData[];
 extern const struct WildPokemonHeader gBattlePikeWildMonHeaders[];
 extern const struct WildPokemonHeader gBattlePyramidWildMonHeaders[];
+extern const struct WildPokemon gWildFeebasRoute119Data;
 
 extern u8 GetBattlePikeWildMonHeaderId(void);
 extern bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate);
 extern void GenerateBattlePyramidWildMon(void);
+extern bool8 InBattlePike(void);
+extern bool8 InBattlePyramid(void);
 
 // this file's functions
-u16 FeebasRandom(void);
-void FeebasSeedRng(u16 seed);
-bool8 IsWildLevelAllowedByRepel(u8 level);
-void ApplyFluteEncounterRateMod(u32 *encRate);
-void ApplyCleanseTagEncounterRateMod(u32 *encRate);
-bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u8 ability, u8 *monIndex);
-bool8 IsAbilityAllowingEncounter(u8 level);
+static u16 FeebasRandom(void);
+static void FeebasSeedRng(u16 seed);
+static bool8 IsWildLevelAllowedByRepel(u8 level);
+static void ApplyFluteEncounterRateMod(u32 *encRate);
+static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
+static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u8 ability, u8 *monIndex);
+static bool8 IsAbilityAllowingEncounter(u8 level);
+
+EWRAM_DATA u8 sWildEncountersDisabled = 0;
+EWRAM_DATA u32 sFeebasRngValue = 0;
 
 void DisableWildEncounters(bool8 disabled)
 {
@@ -118,13 +133,13 @@ bool8 CheckFeebas(void)
     return FALSE;
 }
 
-u16 FeebasRandom(void)
+static u16 FeebasRandom(void)
 {
     sFeebasRngValue = 12345 + 0x41C64E6D * sFeebasRngValue;
     return sFeebasRngValue >> 16;
 }
 
-void FeebasSeedRng(u16 seed)
+static void FeebasSeedRng(u16 seed)
 {
     sFeebasRngValue = seed;
 }
@@ -418,7 +433,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, u8 
     return TRUE;
 }
 
-u16 GenerateFishingWildMon(struct WildPokemonInfo *wildMonInfo, u8 rod)
+u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 rod)
 {
     u8 wildMonIndex = ChooseWildMonIndex_Fishing(rod);
     u8 level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
@@ -735,4 +750,186 @@ bool8 DoesCurrentMapHaveFishingMons(void)
         return TRUE;
     else
         return FALSE;
+}
+
+void FishingWildEncounter(u8 rod)
+{
+    u16 species;
+
+    if (CheckFeebas() == TRUE)
+    {
+        u8 level = ChooseWildMonLevel(&gWildFeebasRoute119Data);
+
+        species = gWildFeebasRoute119Data.species;
+        CreateWildMon(species, level);
+    }
+    else
+    {
+        species = GenerateFishingWildMon(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
+    }
+    IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
+    SetPokemonAnglerSpecies(species);
+    BattleSetup_StartWildBattle();
+}
+
+u16 GetLocalWildMon(bool8 *isWaterMon)
+{
+    u16 headerId;
+    const struct WildPokemonInfo *landMonsInfo;
+    const struct WildPokemonInfo *waterMonsInfo;
+
+    *isWaterMon = FALSE;
+    headerId = GetCurrentMapWildMonHeaderId();
+    if (headerId == 0xFFFF)
+        return SPECIES_NONE;
+    landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
+    waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
+    // Neither
+    if (landMonsInfo == NULL && waterMonsInfo == NULL)
+        return SPECIES_NONE;
+    // Land Pokemon
+    if (landMonsInfo != NULL && waterMonsInfo == NULL)
+        return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+    // Water Pokemon
+    if (landMonsInfo == NULL && waterMonsInfo != NULL)
+    {
+        *isWaterMon = TRUE;
+        return waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+    }
+    // Either land or water Pokemon
+    if ((Random() % 100) < 80)
+    {
+        return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+    }
+    else
+    {
+        *isWaterMon = TRUE;
+        return waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+    }
+}
+
+u16 GetLocalWaterMon(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != 0xFFFF)
+    {
+        const struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
+
+        if (waterMonsInfo)
+            return waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
+    }
+    return SPECIES_NONE;
+}
+
+bool8 UpdateRepelCounter(void)
+{
+    u16 steps;
+
+    if (InBattlePike() || InBattlePyramid())
+        return FALSE;
+    if (InUnionRoom() == TRUE)
+        return FALSE;
+
+    steps = VarGet(VAR_REPEL_STEP_COUNT);
+
+    if (steps != 0)
+    {
+        steps--;
+        VarSet(VAR_REPEL_STEP_COUNT, steps);
+        if (steps == 0)
+        {
+            ScriptContext1_SetupScript(EventScript_RepelWoreOff);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static bool8 IsWildLevelAllowedByRepel(u8 wildLevel)
+{
+    u8 i;
+
+    if (!VarGet(VAR_REPEL_STEP_COUNT))
+        return TRUE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            u8 ourLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+
+            if (wildLevel < ourLevel)
+                return FALSE;
+            else
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static bool8 IsAbilityAllowingEncounter(u8 level)
+{
+    u8 ability;
+
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
+        return TRUE;
+
+    ability = GetMonAbility(&gPlayerParty[0]);
+    if (ability == ABILITY_KEEN_EYE || ability == ABILITY_INTIMIDATE)
+    {
+        u8 playerMonLevel = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL);
+        if (playerMonLevel > 5 && level <= playerMonLevel - 5 && !(Random() % 2))
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 TryGetRandomWildMonIndexByType(const struct WildPokemon *wildMon, u8 type, u8 numMon, u8 *monIndex)
+{
+    u8 validIndexes[numMon]; // variable length array, an interesting feature
+    u8 i, validMonCount;
+
+    for (i = 0; i < numMon; i++)
+        validIndexes[i] = 0;
+
+    for (validMonCount = 0, i = 0; i < numMon; i++)
+    {
+        if (gBaseStats[wildMon[i].species].type1 == type || gBaseStats[wildMon[i].species].type2 == type)
+            validIndexes[validMonCount++] = i;
+    }
+
+    if (validMonCount == 0 || validMonCount == numMon)
+        return FALSE;
+
+    *monIndex = validIndexes[Random() % validMonCount];
+    return TRUE;
+}
+
+static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u8 ability, u8 *monIndex)
+{
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
+        return FALSE;
+    if (GetMonAbility(&gPlayerParty[0]) != ability)
+        return FALSE;
+    if (Random() % 2 != 0)
+        return FALSE;
+
+    return TryGetRandomWildMonIndexByType(wildMon, type, LAND_WILD_COUNT, monIndex);
+}
+
+static void ApplyFluteEncounterRateMod(u32 *encRate)
+{
+    if (FlagGet(FLAG_SYS_ENC_UP_ITEM) == TRUE)
+        *encRate += *encRate / 2;
+    else if (FlagGet(FLAG_SYS_ENC_DOWN_ITEM) == TRUE)
+        *encRate = *encRate / 2;
+}
+
+static void ApplyCleanseTagEncounterRateMod(u32 *encRate)
+{
+    if (GetMonData(&gPlayerParty[0], MON_DATA_HELD_ITEM) == ITEM_CLEANSE_TAG)
+        *encRate = *encRate * 2 / 3;
 }

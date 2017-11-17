@@ -15,7 +15,7 @@ gBattlePyramidWildMonHeaders:: @ 8553894
 gBattlePikeWildMonHeaders:: @ 8553A14
 	.incbin "baserom.gba", 0x553a14, 0x64
 
-gUnknown_08553A78:: @ 8553A78
+gWildFeebasRoute119Data:: @ 8553A78
 	.incbin "baserom.gba", 0x553a78, 0x4
 
 gRoute119WaterTileData:: @ 8553A7C

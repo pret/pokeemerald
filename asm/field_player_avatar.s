@@ -4640,7 +4640,7 @@ _0808CD58:
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80B5734
+	bl FishingWildEncounter
 	movs r0, 0x1
 	bl sub_80ED950
 	ldr r0, =Task_Fish
