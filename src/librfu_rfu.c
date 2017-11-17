@@ -3,31 +3,7 @@
 
 #include "librfu.h"
 
-struct RfuUnk1
-{
-    u8 unk_0[0x14];
-    u32 unk_14;
-    u32 unk_18;
-    struct RfuIntrStruct unk_1c;
-};
-
-struct RfuUnk2
-{
-    u8 unk_0[0x68];
-    u32 unk_68;
-    u32 unk_6c;
-    u8 unk_70[0x70];
-};
-
-struct RfuUnk3
-{
-    u32 unk_0;
-    u32 unk_4;
-    u8 unk_8[0xD4];
-    u32 unk_dc;
-};
-
-extern u32 *gUnknown_03007890;
+extern struct RfuUnk5 *gUnknown_03007890;
 extern u32 *gUnknown_03007894;
 extern struct RfuUnk3* gUnknown_03007898;
 extern struct RfuUnk2* gUnknown_03007880[4];

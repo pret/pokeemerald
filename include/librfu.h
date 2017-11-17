@@ -103,9 +103,47 @@ struct RfuIntrStruct
     u8 block2[0x30];
 };
 
+struct RfuUnk1
+{
+    u8 unk_0[0x14];
+    u32 unk_14;
+    u32 unk_18;
+    struct RfuIntrStruct unk_1c;
+};
+
+struct RfuUnk2
+{
+    u8 unk_0[0x68];
+    u32 unk_68;
+    u32 unk_6c;
+    u8 unk_70[0x70];
+};
+
+struct RfuUnk3
+{
+    u32 unk_0;
+    u32 unk_4;
+    u8 unk_8[0xD4];
+    u32 unk_dc;
+};
+
+struct RfuUnk5
+{
+    u8 unk_00;
+};
+
 extern struct RfuStruct *gRfuState;
+
+extern struct RfuUnk5 *gUnknown_03007890;
+extern u32 *gUnknown_03007894;
+extern struct RfuUnk3* gUnknown_03007898;
+extern struct RfuUnk2* gUnknown_03007880[4];
+extern struct RfuUnk1* gUnknown_03007870[4];
+extern void* sub_82E53F4;
+extern void rfu_STC_clearAPIVariables(void);
 
 void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void rfu_REQ_stopMode(void);
 void rfu_waitREQComplete(void);
 u32 rfu_REQBN_softReset_and_checkID(void);
+void rfu_REQ_sendData(u8);

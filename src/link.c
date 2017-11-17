@@ -2447,7 +2447,6 @@ void ResetRecvBuffer(void)
 u32 sub_800BEC0(void)
 {
     u32 r4;
-    u8 r2;
 
     r4 = rfu_REQBN_softReset_and_checkID();
     if (r4 == 0x8001)
@@ -2466,4 +2465,23 @@ u32 sub_800BEC0(void)
     gUnknown_03004140.unk_06 = -1;
     sub_800D610();
     return r4;
+}
+
+void rfu_REQ_sendData_wrapper(u8 r2)
+{
+    u8 val;
+    if (!gUnknown_03007890->unk_00)
+    {
+        val = gUnknown_03004140.unk_02;
+        r2 = 0;
+        if (val == 1)
+        {
+            r2 = 1;
+        }
+    }
+    else
+    {
+        gUnknown_03004140.unk_03 = 0;
+    }
+    rfu_REQ_sendData(r2);
 }

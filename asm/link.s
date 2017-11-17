@@ -7,37 +7,6 @@
 
 // RFU; bss indicates that no file boundary exists here
 
-	thumb_func_start rfu_REQ_sendData_wrapper
-rfu_REQ_sendData_wrapper: @ 800BF0C
-	push {lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r0, =gUnknown_03007890
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0800BF34
-	ldr r0, =gUnknown_03004140
-	ldrb r0, [r0, 0x2]
-	movs r2, 0
-	cmp r0, 0x1
-	bne _0800BF3C
-	movs r2, 0x1
-	b _0800BF3C
-	.pool
-_0800BF34:
-	ldr r0, =gUnknown_03004140
-	ldrb r1, [r0, 0x3]
-	movs r1, 0
-	strb r1, [r0, 0x3]
-_0800BF3C:
-	adds r0, r2, 0
-	bl rfu_REQ_sendData
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end rfu_REQ_sendData_wrapper
-
 	thumb_func_start sub_800BF4C
 sub_800BF4C: @ 800BF4C
 	push {r4-r6,lr}
