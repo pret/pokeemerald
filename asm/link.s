@@ -7,55 +7,6 @@
 
 // RFU; bss indicates that no file boundary exists here
 
-	thumb_func_start sub_800BFA0
-sub_800BFA0: @ 800BFA0
-	push {r4,lr}
-	sub sp, 0x4
-	mov r1, sp
-	movs r0, 0
-	strh r0, [r1]
-	ldr r4, =gUnknown_03004140
-	ldr r2, =0x01000020
-	mov r0, sp
-	adds r1, r4, 0
-	bl CpuSet
-	movs r0, 0xFF
-	strb r0, [r4, 0x6]
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800BFA0
-
-	thumb_func_start sub_800BFCC
-sub_800BFCC: @ 800BFCC
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_800C000
-	ldr r1, =gUnknown_03004140
-	movs r2, 0x1
-	strb r2, [r1, 0x4]
-	movs r0, 0x2
-	strb r0, [r1, 0x5]
-	str r4, [r1, 0x3C]
-	ldrb r0, [r4, 0x11]
-	strb r0, [r1, 0x9]
-	ldrh r0, [r4, 0x12]
-	strh r0, [r1, 0x32]
-	ldrh r0, [r4, 0x14]
-	strh r0, [r1, 0x18]
-	ldrb r0, [r4, 0x10]
-	cmp r0, 0
-	beq _0800BFF4
-	strb r2, [r1, 0xB]
-_0800BFF4:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800BFCC
-
 	thumb_func_start sub_800C000
 sub_800C000: @ 800C000
 	push {r4,r5,lr}

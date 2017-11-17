@@ -172,6 +172,7 @@ static void SendRecvDone(void);
 void sub_800D610(void);
 void sub_800CEB0(u16 unk0);
 void sub_800C7B4(u16 unk0, u16 unk1);
+void sub_800C000(void);
 
 // .rodata
 
@@ -2501,4 +2502,25 @@ int sub_800BF4C(void (*func1)(u8), void (*func2)(void))
     rfu_setMSCCallback(sub_800CEB0);
     rfu_setREQCallback(sub_800C7B4);
     return 0;
+}
+
+void sub_800BFA0(void)
+{
+    CpuFill16(0, &gUnknown_03004140, sizeof(gUnknown_03004140) - 2 * sizeof(void *));
+    gUnknown_03004140.unk_06 = -1;
+}
+
+void sub_800BFCC(struct UnkLinkRfuStruct_02022B2C *unk0)
+{
+    sub_800C000();
+    gUnknown_03004140.unk_04 = 1;
+    gUnknown_03004140.unk_05 = 2;
+    gUnknown_03004140.unk_3c = unk0;
+    gUnknown_03004140.unk_09 = unk0->unk_11;
+    gUnknown_03004140.unk_32 = unk0->unk_12;
+    gUnknown_03004140.unk_18 = unk0->unk_14;
+    if (unk0->unk_10)
+    {
+        gUnknown_03004140.unk_0b = 1;
+    }
 }

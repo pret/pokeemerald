@@ -3,6 +3,15 @@
 
 // Exported type declarations
 
+struct UnkLinkRfuStruct_02022B2C
+{
+    u8 filler_00[16];
+    u8 unk_10;
+    u8 unk_11;
+    u16 unk_12;
+    u16 unk_14;
+};
+
 struct UnkRfuStruct_1 {
     u8 unk_00;
     u8 unk_01;
@@ -13,9 +22,17 @@ struct UnkRfuStruct_1 {
     u8 unk_06;
     u8 unk_07;
     u8 unk_08;
-    u8 filler_09[4];
+    u8 unk_09;
+    u8 unk_0a;
+    u8 unk_0b;
+    u8 unk_0c;
     u8 unk_0d;
-    u8 filler_0e[0x32];
+    u8 filler_0e[10];
+    u16 unk_18;
+    u8 filler_1a[0x18];
+    u16 unk_32;
+    u8 filler_34[8];
+    struct UnkLinkRfuStruct_02022B2C *unk_3c;
     void (*unk_40)(u8);
     void (*unk_44)(void);
 };
