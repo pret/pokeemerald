@@ -434,7 +434,9 @@ static u16 GetEggSpecies(u16 species)
 static s32 GetSlotToInheritNature(struct DayCare *daycare)
 {
     u32 species[DAYCARE_MON_COUNT];
-    s32 i, slot = -1, dittoCount;
+    s32 i;
+    s32 dittoCount;
+    s32 slot = -1;
 
     // search for female gender
     for (i = 0; i < DAYCARE_MON_COUNT; i++)

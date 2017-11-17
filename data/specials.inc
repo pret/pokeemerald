@@ -142,8 +142,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_8122A30
 	def_special sub_80D6EDC
 	def_special CalculatePlayerPartyCount
-	def_special sub_80C7008
-	def_special sub_80C70AC
+	def_special CountPartyNonEggMons
+	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	def_special sub_80F88E8
 	def_special sub_80F88DC
 	def_special sub_80F8864
@@ -534,4 +534,3 @@ gSpecials:: @ 81DBA64
 	def_special sub_813C5A0
 	def_special sub_8139C10
 	def_special sub_80B3BC4
-

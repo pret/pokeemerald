@@ -1601,7 +1601,7 @@ void sub_81289F0(u8 taskId)
         ScriptContext1_SetupScript(EventScript_275D1F);
     }
     gSprites[sDecor_CameraSpriteObjectIdx1].pos1.y += 2;
-    if (gMapHeader.regionMapSectionId == REGION_MAP_SECRET_BASE)
+    if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
     {
         TV_PutSecretBaseVisitOnTheAir();
     }
@@ -2220,7 +2220,7 @@ void sub_81298EC(u8 taskId)
             {
                 StringExpandPlaceholders(gStringVar4, gText_DecorationReturnedToPC);
                 DisplayItemMessageOnField(taskId, gStringVar4, sub_8129D64);
-                if (gMapHeader.regionMapSectionId == REGION_MAP_SECRET_BASE)
+                if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
                 {
                     TV_PutSecretBaseVisitOnTheAir();
                 }

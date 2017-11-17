@@ -21,7 +21,7 @@ Route117_EventScript_291C4D:: @ 8291C4D
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route117_EventScript_291C83
 	msgbox Route117_Text_292149, 4
-	clearflag FLAG_0x086
+	clearflag FLAG_PENDING_DAYCARE_EGG
 	special RejectEggFromDayCare
 	release
 	end
@@ -41,7 +41,7 @@ Route117_EventScript_291C9D:: @ 8291C9D
 	waitbuttonpress
 	msgbox Route117_Text_2921CF, 4
 	special GiveEggFromDaycare
-	clearflag FLAG_0x086
+	clearflag FLAG_PENDING_DAYCARE_EGG
 	release
 	end
 
@@ -95,7 +95,7 @@ Route117_PokemonDayCare_EventScript_291D11:: @ 8291D11
 	end
 
 Route117_PokemonDayCare_EventScript_291D56:: @ 8291D56
-	specialvar VAR_RESULT, sub_80C7008
+	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route117_PokemonDayCare_EventScript_291DED
 	specialvar VAR_RESULT, sub_80722E0
@@ -107,7 +107,7 @@ Route117_PokemonDayCare_EventScript_291D56:: @ 8291D56
 	waitstate
 	compare_var_to_value VAR_0x8004, 255
 	goto_eq Route117_PokemonDayCare_EventScript_291DCA
-	specialvar VAR_RESULT, sub_80C70AC
+	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq Route117_PokemonDayCare_EventScript_291DF7
 	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies

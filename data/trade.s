@@ -20,10 +20,10 @@ gUnknown_0832DABC:: @ 832DABC
 	.incbin "baserom.gba", 0x32dabc, 0xb
 
 gText_MaleSymbol4:: @ 832DAC7
-	.incbin "baserom.gba", 0x32dac7, 0x2
+	.string "♂$"
 
 gText_FemaleSymbol4:: @ 832DAC9
-	.incbin "baserom.gba", 0x32dac9, 0x2
+	.string "♀$"
 
 gText_GenderlessSymbol:: @ 832DACB
 	.incbin "baserom.gba", 0x32dacb, 0x7

@@ -77,7 +77,7 @@ extern void CreateYesNoMenu(const struct WindowTemplate*, u16, u8, u8);
 extern void DoNamingScreen(u8, const u8*, u16, u8, u32, MainCallback);
 extern void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor* colors, s8 speed, u8 *str);
 extern u16 sub_80D22D0(void);
-extern u8 sub_80C7050(u8);
+extern u8 CountPartyAliveNonEggMonsExcept(u8);
 
 static void Task_EggHatch(u8 taskID);
 static void CB2_EggHatch_0(void);
@@ -890,6 +890,6 @@ u8 GetEggStepsToSubtract(void)
 u16 sub_80722E0(void)
 {
     u16 value = sub_80D22D0();
-    value += sub_80C7050(6);
+    value += CountPartyAliveNonEggMonsExcept(6);
     return value;
 }
