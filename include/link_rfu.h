@@ -3,7 +3,23 @@
 
 // Exported type declarations
 
+struct UnkRfuStruct_1 {
+    u8 unk_00;
+    u8 unk_01;
+    u8 unk_02;
+    u8 unk_03;
+    u8 unk_04;
+    u8 unk_05;
+    u8 unk_06;
+    u8 unk_07;
+    u8 unk_08;
+    u8 filler_09[4];
+    u8 unk_0d;
+};
+
 // Exported RAM declarations
+
+extern struct UnkRfuStruct_1 gUnknown_03004140;
 
 // Exported ROM declarations
 u32 sub_800BEC0(void);

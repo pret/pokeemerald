@@ -1,8 +1,12 @@
 
 // Includes
 #include "global.h"
+#include "link.h"
+#include "link_rfu.h"
 
 // Static type declarations
+
+struct UnkRfuStruct_1 gUnknown_03004140;
 
 // Static RAM declarations
 IWRAM_DATA u8 gUnknown_03000D78[8];

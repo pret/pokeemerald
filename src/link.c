@@ -143,12 +143,14 @@ static u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size);
 static void LinkTest_prnthex(u32 pos, u8 a0, u8 a1, u8 a2);
 static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8 taskId);
+
 static void sub_800AC80(void);
 static void sub_800ACAC(void);
 static void sub_800AD5C(void);
 static void sub_800AD88(void);
 static void sub_800AE30(void);
 static void sub_800AE5C(void);
+
 static void CheckErrorStatus(void);
 static void CB2_PrintErrorMessage(void);
 static bool8 IsSioMultiMaster(void);
@@ -159,12 +161,15 @@ static void CheckMasterOrSlave(void);
 static void InitTimer(void);
 static void EnqueueSendCmd(u16 *sendCmd);
 static void DequeueRecvCmds(u16 (*recvCmds)[CMD_LENGTH]);
+
 static void StartTransfer(void);
 static bool8 DoHandshake(void);
 static void DoRecv(void);
 static void DoSend(void);
 static void StopTimer(void);
 static void SendRecvDone(void);
+
+void sub_800D610(void);
 
 // .rodata
 
@@ -2435,4 +2440,30 @@ void ResetRecvBuffer(void)
             }
         }
     }
+}
+
+// rfu
+
+u32 sub_800BEC0(void)
+{
+    u32 r4;
+    u8 r2;
+
+    r4 = rfu_REQBN_softReset_and_checkID();
+    if (r4 == 0x8001)
+    {
+        gUnknown_03004140.unk_08 = 1;
+    }
+    if (gUnknown_03004140.unk_04 != 0x17 && gUnknown_03004140.unk_04 != 0x01)
+    {
+        gUnknown_03004140.unk_05 = 0;
+        gUnknown_03004140.unk_04 = 0;
+    }
+    gUnknown_03004140.unk_07 = 0;
+    gUnknown_03004140.unk_0d = 0;
+    gUnknown_03004140.unk_01 = 0;
+    gUnknown_03004140.unk_00 = 0;
+    gUnknown_03004140.unk_06 = -1;
+    sub_800D610();
+    return r4;
 }

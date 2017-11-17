@@ -7,44 +7,6 @@
 
 // RFU; bss indicates that no file boundary exists here
 
-	thumb_func_start sub_800BEC0
-sub_800BEC0: @ 800BEC0
-	push {r4,lr}
-	bl rfu_REQBN_softReset_and_checkID
-	adds r4, r0, 0
-	ldr r0, =0x00008001
-	cmp r4, r0
-	bne _0800BED4
-	ldr r1, =gUnknown_03004140
-	movs r0, 0x1
-	strb r0, [r1, 0x8]
-_0800BED4:
-	ldr r0, =gUnknown_03004140
-	ldrb r2, [r0, 0x4]
-	adds r1, r0, 0
-	cmp r2, 0x17
-	beq _0800BEE8
-	cmp r2, 0x1
-	beq _0800BEE8
-	movs r0, 0
-	strb r0, [r1, 0x5]
-	strb r0, [r1, 0x4]
-_0800BEE8:
-	movs r0, 0
-	strb r0, [r1, 0x7]
-	strb r0, [r1, 0xD]
-	strb r0, [r1, 0x1]
-	strb r0, [r1]
-	movs r0, 0xFF
-	strb r0, [r1, 0x6]
-	bl sub_800D610
-	adds r0, r4, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_800BEC0
-
 	thumb_func_start rfu_REQ_sendData_wrapper
 rfu_REQ_sendData_wrapper: @ 800BF0C
 	push {lr}
