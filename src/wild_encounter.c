@@ -11,6 +11,8 @@
 #include "event_data.h"
 #include "safari_zone.h"
 #include "pokeblock.h"
+#include "battle_setup.h"
+#include "roamer.h"
 
 EWRAM_DATA u8 sWildEncountersDisabled = 0;
 EWRAM_DATA u32 sFeebasRngValue = 0;
@@ -18,6 +20,12 @@ EWRAM_DATA u32 sFeebasRngValue = 0;
 #define NUM_FEEBAS_SPOTS 6
 
 extern const u16 gRoute119WaterTileData[];
+extern const struct WildPokemonHeader gBattlePikeWildMonHeaders[];
+extern const struct WildPokemonHeader gBattlePyramidWildMonHeaders[];
+
+extern u8 GetBattlePikeWildMonHeaderId(void);
+extern bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate);
+extern void GenerateBattlePyramidWildMon(void);
 
 // this file's functions
 u16 FeebasRandom(void);
@@ -374,7 +382,7 @@ enum
 #define WILD_CHECK_REPEL    0x1
 #define WILD_CHECK_KEEN_EYE 0x2
 
-bool8 TryGenerateWildMon(struct WildPokemonInfo *wildMonInfo, u8 area, u8 flags)
+bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, u8 flags)
 {
     u8 wildMonIndex = 0;
     u8 level;
@@ -480,4 +488,251 @@ bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
     if (encounterRate > 2880)
         encounterRate = 2880;
     return DoWildEncounterRateDiceRoll(encounterRate);
+}
+
+bool8 DoGlobalWildEncounterDiceRoll(void)
+{
+    if (Random() % 100 >= 60)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+bool8 AreLegendariesInSootopolisPreventingEncounters(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP_SOOTOPOLIS_CITY
+        || gSaveBlock1Ptr->location.mapNum != MAP_ID_SOOTOPOLIS_CITY)
+    {
+        return FALSE;
+    }
+
+    return FlagGet(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
+}
+
+bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavior)
+{
+    u16 headerId;
+    struct Roamer *roamer;
+
+    if (sWildEncountersDisabled == TRUE)
+        return FALSE;
+
+    headerId = GetCurrentMapWildMonHeaderId();
+    if (headerId == 0xFFFF) // invalid
+    {
+        if (gMapHeader.mapDataId == 0x166)
+        {
+            headerId = GetBattlePikeWildMonHeaderId();
+            if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
+                return FALSE;
+            if (DoWildEncounterRateTest(gBattlePikeWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
+                return FALSE;
+            if (TryGenerateWildMon(gBattlePikeWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE) != TRUE)
+                return FALSE;
+            if (!TryGenerateBattlePikeWildMon(TRUE))
+                return FALSE;
+
+            BattleSetup_StartBattlePikeWildBattle();
+            return TRUE;
+        }
+        if (gMapHeader.mapDataId == 0x169)
+        {
+            headerId = gSaveBlock2Ptr->battlePyramidWildHeaderId;
+            if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
+                return FALSE;
+            if (DoWildEncounterRateTest(gBattlePyramidWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
+                return FALSE;
+            if (TryGenerateWildMon(gBattlePyramidWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE) != TRUE)
+                return FALSE;
+
+            GenerateBattlePyramidWildMon();
+            BattleSetup_StartWildBattle();
+            return TRUE;
+        }
+    }
+    else
+    {
+        if (MetatileBehavior_IsLandWildEncounter(currMetaTileBehavior) == TRUE)
+        {
+            if (gWildMonHeaders[headerId].landMonsInfo == NULL)
+                return FALSE;
+            if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
+                return FALSE;
+            if (DoWildEncounterRateTest(gWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
+                return FALSE;
+
+            if (TryStartRoamerEncounter() == TRUE)
+            {
+                roamer = &gSaveBlock1Ptr->roamer;
+                if (!IsWildLevelAllowedByRepel(roamer->level))
+                    return FALSE;
+
+                BattleSetup_StartRoamerBattle();
+                return TRUE;
+            }
+            else
+            {
+                if (DoMassOutbreakEncounterTest() == TRUE && SetUpMassOutbreakEncounter(WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                {
+                    BattleSetup_StartWildBattle();
+                    return TRUE;
+                }
+
+                // try a regular wild land encounter
+                if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                {
+                    BattleSetup_StartWildBattle();
+                    return TRUE;
+                }
+
+                return FALSE;
+            }
+        }
+        else if (MetatileBehavior_IsWaterWildEncounter(currMetaTileBehavior) == TRUE
+                 || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridge(currMetaTileBehavior) == TRUE))
+        {
+            if (AreLegendariesInSootopolisPreventingEncounters() == TRUE)
+                return FALSE;
+            if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
+                return FALSE;
+            if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
+                return FALSE;
+            if (DoWildEncounterRateTest(gWildMonHeaders[headerId].waterMonsInfo->encounterRate, FALSE) != TRUE)
+                return FALSE;
+
+            if (TryStartRoamerEncounter() == TRUE)
+            {
+                roamer = &gSaveBlock1Ptr->roamer;
+                if (!IsWildLevelAllowedByRepel(roamer->level))
+                    return FALSE;
+
+                BattleSetup_StartRoamerBattle();
+                return TRUE;
+            }
+            else // try a regular surfing encounter
+            {
+                if (TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                {
+                    BattleSetup_StartWildBattle();
+                    return TRUE;
+                }
+
+                return FALSE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+void RockSmashWildEncounter(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != 0xFFFF)
+    {
+        const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
+
+        if (wildPokemonInfo == NULL)
+        {
+            gSpecialVar_Result = FALSE;
+        }
+        else if (DoWildEncounterRateTest(wildPokemonInfo->encounterRate, 1) == TRUE
+         && TryGenerateWildMon(wildPokemonInfo, 2, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+        {
+            BattleSetup_StartWildBattle();
+            gSpecialVar_Result = TRUE;
+        }
+        else
+        {
+            gSpecialVar_Result = FALSE;
+        }
+    }
+    else
+    {
+        gSpecialVar_Result = FALSE;
+    }
+}
+
+bool8 SweetScentWildEncounter(void)
+{
+    s16 x, y;
+    u16 headerId;
+
+    PlayerGetDestCoords(&x, &y);
+    headerId = GetCurrentMapWildMonHeaderId();
+    if (headerId == 0xFFFF) // invalid
+    {
+        if (gMapHeader.mapDataId == 0x166)
+        {
+            headerId = GetBattlePikeWildMonHeaderId();
+            if (TryGenerateWildMon(gBattlePikeWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)
+                return FALSE;
+
+            TryGenerateBattlePikeWildMon(FALSE);
+            BattleSetup_StartBattlePikeWildBattle();
+            return TRUE;
+        }
+        if (gMapHeader.mapDataId == 0x169)
+        {
+            headerId = gSaveBlock2Ptr->battlePyramidWildHeaderId;
+            if (TryGenerateWildMon(gBattlePyramidWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)
+                return FALSE;
+
+            GenerateBattlePyramidWildMon();
+            BattleSetup_StartWildBattle();
+            return TRUE;
+        }
+    }
+    else
+    {
+        if (MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
+        {
+            if (gWildMonHeaders[headerId].landMonsInfo == NULL)
+                return FALSE;
+
+            if (TryStartRoamerEncounter() == TRUE)
+            {
+                BattleSetup_StartRoamerBattle();
+                return TRUE;
+            }
+
+            if (DoMassOutbreakEncounterTest() == TRUE)
+                SetUpMassOutbreakEncounter(0);
+            else
+                TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
+
+            BattleSetup_StartWildBattle();
+            return TRUE;
+        }
+        else if (MetatileBehavior_IsWaterWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
+        {
+            if (AreLegendariesInSootopolisPreventingEncounters() == TRUE)
+                return FALSE;
+            if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
+                return FALSE;
+
+            if (TryStartRoamerEncounter() == TRUE)
+            {
+                BattleSetup_StartRoamerBattle();
+                return TRUE;
+            }
+
+            TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, 0);
+            BattleSetup_StartWildBattle();
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 DoesCurrentMapHaveFishingMons(void)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+
+    if (headerId != 0xFFFF && gWildMonHeaders[headerId].fishingMonsInfo != NULL)
+        return TRUE;
+    else
+        return FALSE;
 }

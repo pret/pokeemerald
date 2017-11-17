@@ -9,10 +9,10 @@
 
 	.incbin "baserom.gba", 0x55370c, 0x188
 
-gUnknown_08553894:: @ 8553894
+gBattlePyramidWildMonHeaders:: @ 8553894
 	.incbin "baserom.gba", 0x553894, 0x180
 
-gUnknown_08553A14:: @ 8553A14
+gBattlePikeWildMonHeaders:: @ 8553A14
 	.incbin "baserom.gba", 0x553a14, 0x64
 
 gUnknown_08553A78:: @ 8553A78

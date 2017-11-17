@@ -181,7 +181,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813BF60
 	def_special sub_813BA60
 	def_special sub_813BF7C
-	def_special rock_smash_wild_pokemon_encounter
+	def_special RockSmashWildEncounter
 	def_special GabbyAndTyGetBattleNum
 	def_special GabbyAndTyAfterInterview
 	def_special GabbyAndTyBeforeInterview

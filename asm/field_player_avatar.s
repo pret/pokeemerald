@@ -4316,7 +4316,7 @@ fish5: @ 808CABC
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
 	movs r6, 0
-	bl GetFishingWildMonListHeader
+	bl DoesCurrentMapHaveFishingMons
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808CADC

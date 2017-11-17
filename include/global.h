@@ -215,7 +215,9 @@ struct SaveBlock2
     /*0xCA9*/ u8 field_CA9_d : 1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e : 1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
-    /*0xCAA*/ u16 field_CAA[0x2e];
+    /*0xCAA*/ u16 field_CAA[4];
+    /*0xCB2*/ u16 battlePyramidWildHeaderId;
+    /*0xCB4*/ u8 field_CB4[88];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
     /*0xd08*/ u8 filler_D08[0x112];
@@ -590,7 +592,7 @@ struct SaveBlock1
     /*0x3030*/ struct DaycareData daycare;
     /*0x3150*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x31A0*/ u8 unk_31A0;
-    /*0x31A1*/ u8 filler_31A1[7];
+    /*0x31A1*/ u8 filler_31A1[3];
     /*0x31A8*/ u8 giftRibbons[52];
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
