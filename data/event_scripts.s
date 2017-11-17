@@ -12223,232 +12223,346 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thank you, my mentor!\n"
 	.string "I apologize for my skepticism!$"
 
+gBattleDomeOpponentPotential1::
 	.string "The best candidate to be a champ!$"
 
+gBattleDomeOpponentPotential2::
 	.string "A sure-finalist team.$"
 
+gBattleDomeOpponentPotential3::
 	.string "A likely top-three finisher.$"
-
+	
+gBattleDomeOpponentPotential4::
 	.string "A candidate to finish first.$"
 
+gBattleDomeOpponentPotential5::
 	.string "A team with top-class potential.$"
 
+gBattleDomeOpponentPotential6::
 	.string "The dark horse team this tournament.$"
 
+gBattleDomeOpponentPotential7::
 	.string "A better-than-average team.$"
 
+gBattleDomeOpponentPotential8::
 	.string "This tournament’s average team.$"
 
+gBattleDomeOpponentPotential9::
 	.string "A team with average potential.$"
 
+gBattleDomeOpponentPotential10::
 	.string "A weaker-than-average team.$"
 
+gBattleDomeOpponentPotential11::
 	.string "A team looking for its first win.$"
 
+gBattleDomeOpponentPotential12::
 	.string "One win will make this team proud.$"
 
+gBattleDomeOpponentPotential13::
 	.string "Overall, a weak team.$"
 
+gBattleDomeOpponentPotential14::
 	.string "A team with very low potential.$"
 
+gBattleDomeOpponentPotential15::
 	.string "A team unlikely to win the tournament.$"
 
+gBattleDomeOpponentPotential16::
 	.string "The team most unlikely to win.$"
 
+gBattleDomeOpponentPotential17::
 	.string "The perfect, invincible superstar!$"
 
+gBattleDomeOpponentStyle1::	
 	.string "Willing to risk total disaster at times.$"
 
+gBattleDomeOpponentStyle2::
 	.string "Skilled at enduring long battles.$"
 
+gBattleDomeOpponentStyle3::
 	.string "Varies tactics to suit the opponent.$"
 
+gBattleDomeOpponentStyle4::
 	.string "Has a tough winning pattern.$"
 
+gBattleDomeOpponentStyle5::
 	.string "Occasionally uses a very rare move.$"
 
+gBattleDomeOpponentStyle6::
 	.string "Uses startling and disruptive moves.$"
 
+gBattleDomeOpponentStyle7::
 	.string "Constantly watches HP in battle.$"
 
+gBattleDomeOpponentStyle8::
 	.string "Good at storing then loosing power.$"
 
+gBattleDomeOpponentStyle9::
 	.string "Skilled at enfeebling foes.$"
 
+gBattleDomeOpponentStyle10::
 	.string "Prefers tactics that rely on luck.$"
 
+gBattleDomeOpponentStyle11::
 	.string "Attacks with a regal atmosphere.$"
 
+gBattleDomeOpponentStyle12::
 	.string "Attacks with powerful, low-PP moves.$"
 
+gBattleDomeOpponentStyle13::
 	.string "Skilled at enfeebling, then attacking.$"
 
+gBattleDomeOpponentStyle14::
 	.string "Battles while enduring all attacks.$"
 
+gBattleDomeOpponentStyle15::
 	.string "Skilled at upsetting foes emotionally.$"
 
+gBattleDomeOpponentStyle16::
 	.string "Uses strong and straightforward moves.$"
 
+gBattleDomeOpponentStyle17::
 	.string "Aggressively uses strong moves.$"
 
+gBattleDomeOpponentStyle18::
 	.string "Battles while cleverly dodging attacks.$"
 
+gBattleDomeOpponentStyle19::
 	.string "Skilled at using upsetting attacks.$"
 
+gBattleDomeOpponentStyle20::
 	.string "Uses many popular moves.$"
 
+gBattleDomeOpponentStyle21::
 	.string "Has moves for powerful combinations.$"
 
+gBattleDomeOpponentStyle22::
 	.string "Uses high-probability attacks.$"
 
+gBattleDomeOpponentStyle23::
 	.string "Aggressively uses spectacular moves.$"
 
+gBattleDomeOpponentStyle24::
 	.string "Emphasizes offense over defense.$"
 
+gBattleDomeOpponentStyle25::
 	.string "Emphasizes defense over offense.$"
 
+gBattleDomeOpponentStyle26::
 	.string "Attacks quickly with strong moves.$"
 
+gBattleDomeOpponentStyle27::
 	.string "Often uses moves with added effects.$"
 
+gBattleDomeOpponentStyle28::
 	.string "Uses a well-balanced mix of moves.$"
 
+gBattleDomeOpponentStyleUnused1::
 	.string "This is sample message 1.$"
 
+gBattleDomeOpponentStyleUnused2::
 	.string "This is sample message 2.$"
 
+gBattleDomeOpponentStyleUnused3::
 	.string "This is sample message 3.$"
 
+gBattleDomeOpponentStyleUnused4::
 	.string "This is sample message 4.$"
 
+gBattleDomeOpponentStats1::
 	.string "Emphasizes HP and ATTACK.$"
 
+gBattleDomeOpponentStats2::
 	.string "Emphasizes HP and DEFENSE.$"
 
+gBattleDomeOpponentStats3::
 	.string "Emphasizes HP and SPEED.$"
 
+gBattleDomeOpponentStats4::
 	.string "Emphasizes HP and SP. ATTACK.$"
 
+gBattleDomeOpponentStats5::
 	.string "Emphasizes HP and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats6::
 	.string "Emphasizes ATTACK and DEFENSE.$"
 
+gBattleDomeOpponentStats7::
 	.string "Emphasizes ATTACK and SPEED.$"
 
+gBattleDomeOpponentStats8::
 	.string "Emphasizes ATTACK and SP. ATTACK.$"
 
+gBattleDomeOpponentStats9::
 	.string "Emphasizes ATTACK and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats10::
 	.string "Emphasizes DEFENSE and SPEED.$"
 
+gBattleDomeOpponentStats11::
 	.string "Emphasizes DEFENSE and SP. ATTACK.$"
 
+gBattleDomeOpponentStats12::
 	.string "Emphasizes DEFENSE and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats13::
 	.string "Emphasizes SPEED and SP. ATTACK.$"
 
+gBattleDomeOpponentStats14::
 	.string "Emphasizes SPEED and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats15::
 	.string "Emphasizes SP. ATTACK and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats16::
 	.string "Emphasizes HP.$"
 
+gBattleDomeOpponentStats17::
 	.string "Emphasizes ATTACK.$"
 
+gBattleDomeOpponentStats18::
 	.string "Emphasizes DEFENSE.$"
 
+gBattleDomeOpponentStats19::
 	.string "Emphasizes SPEED.$"
 
+gBattleDomeOpponentStats20::
 	.string "Emphasizes SP. ATTACK.$"
 
+gBattleDomeOpponentStats21::
 	.string "Emphasizes SP. DEFENSE.$"
 
+gBattleDomeOpponentStats22::
 	.string "Neglects HP and ATTACK.$"
 
+gBattleDomeOpponentStats23::
 	.string "Neglects HP and DEFENSE.$"
 
+gBattleDomeOpponentStats24::
 	.string "Neglects HP and SPEED.$"
 
+gBattleDomeOpponentStats25::
 	.string "Neglects HP and SP. ATTACK.$"
 
+gBattleDomeOpponentStats26::
 	.string "Neglects HP and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats27::
 	.string "Neglects ATTACK and DEFENSE.$"
 
+gBattleDomeOpponentStats28::
 	.string "Neglects ATTACK and SPEED.$"
 
+gBattleDomeOpponentStats29::
 	.string "Neglects ATTACK and SP. ATTACK.$"
 
+gBattleDomeOpponentStats30::
 	.string "Neglects ATTACK and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats31::
 	.string "Neglects DEFENSE and SPEED.$"
 
+gBattleDomeOpponentStats32::
 	.string "Neglects DEFENSE and SP. ATTACK.$"
 
+gBattleDomeOpponentStats33::
 	.string "Neglects DEFENSE and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats34::
 	.string "Neglects SPEED and SP. ATTACK.$"
 
+gBattleDomeOpponentStats35::
 	.string "Neglects SPEED and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats36::
 	.string "Neglects SP. ATTACK and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats37::
 	.string "Neglects HP.$"
 
+gBattleDomeOpponentStats38::
 	.string "Neglects ATTACK.$"
 
+gBattleDomeOpponentStats39::
 	.string "Neglects DEFENSE.$"
 
+gBattleDomeOpponentStats40::
 	.string "Neglects SPEED.$"
 
+gBattleDomeOpponentStats41::
 	.string "Neglects SP. ATTACK.$"
 
+gBattleDomeOpponentStats42::
 	.string "Neglects SP. DEFENSE.$"
 
+gBattleDomeOpponentStats43::
 	.string "Raises POKéMON in a well-balanced way.$"
 
+gBattleDomeWinStrings1::
 	.string "Let the battle begin!$"
 
+gBattleDomeWinStrings2::
 	.string "{STR_VAR_1} won using {STR_VAR_2}!$"
 
+gBattleDomeWinStrings3::
 	.string "{STR_VAR_1} became the champ!$"
 
+gBattleDomeWinStrings4::
 	.string "{STR_VAR_1} won by default!$"
 
+gBattleDomeWinStrings5::
 	.string "{STR_VAR_1} won outright by default!$"
 
+gBattleDomeWinStrings6::
 	.string "{STR_VAR_1} won without using a move!$"
 
+gBattleDomeWinStrings7::
 	.string "{STR_VAR_1} won outright with no moves!$"
 
+gBattleDomeMatchNumber1::
 	.string "Round 1, Match 1$"
 
+gBattleDomeMatchNumber2::
 	.string "Round 1, Match 2$"
 
+gBattleDomeMatchNumber3::
 	.string "Round 1, Match 3$"
 
+gBattleDomeMatchNumber4::
 	.string "Round 1, Match 4$"
 
+gBattleDomeMatchNumber5::
 	.string "Round 1, Match 5$"
 
+gBattleDomeMatchNumber6::
 	.string "Round 1, Match 6$"
 
+gBattleDomeMatchNumber7::
 	.string "Round 1, Match 7$"
 
+gBattleDomeMatchNumber8::
 	.string "Round 1, Match 8$"
 
+gBattleDomeMatchNumber9::
 	.string "Round 2, Match 1$"
 
+gBattleDomeMatchNumber10::
 	.string "Round 2, Match 2$"
 
+gBattleDomeMatchNumber11::
 	.string "Round 2, Match 3$"
 
+gBattleDomeMatchNumber12::
 	.string "Round 2, Match 4$"
 
+gBattleDomeMatchNumber13::
 	.string "Semifinal Match 1$"
 
+gBattleDomeMatchNumber14::
 	.string "Semifinal Match 2$"
 
+gBattleDomeMatchNumber15::
 	.string "Final Match$"
 
 BattleFrontier_BattlePikeRandomRoom1_MapScripts_2C3E1B: @ 82C3E1B

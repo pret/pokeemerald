@@ -1058,7 +1058,7 @@ OldaleTown_PokemonCenter_2F_EventScript_27759F:: @ 827759F
 	end
 
 OldaleTown_PokemonCenter_2F_EventScript_277626:: @ 8277626
-	specialvar VAR_RESULT, sub_80C7008
+	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare_var_to_value VAR_RESULT, 2
 	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_27764C
 	specialvar VAR_RESULT, sub_80F9370

@@ -7383,12 +7383,12 @@ _08192932:
 	ldr r1, [sp, 0x24]
 	cmp r1, r0
 	bne _08192980
-	ldr r0, =gUnknown_0860D1D0
+	ldr r0, =gBattleDomePotentialPointers
 	ldr r0, [r0, 0x40]
 	b _0819298A
 	.pool
 _08192980:
-	ldr r0, =gUnknown_0860D1D0
+	ldr r0, =gBattleDomePotentialPointers
 	ldr r2, [sp, 0x20]
 	lsls r1, r2, 2
 	adds r1, r0
@@ -7503,7 +7503,7 @@ _08192A58:
 	cmp r7, 0x2
 	ble _081929AE
 	movs r7, 0
-	ldr r2, =gUnknown_0860D214
+	ldr r2, =gBattleDomeOpponentStylePointers
 	mov r9, r2
 	ldr r3, =gUnknown_0860C988
 	mov r10, r3
@@ -8071,7 +8071,7 @@ _08192ED0:
 	movs r7, 0x2A
 _08192ED2:
 	lsls r0, r7, 2
-	ldr r3, =gUnknown_0860D294
+	ldr r3, =gBattleDomeOpponentStatsPointers
 	adds r0, r3
 	ldr r0, [r0]
 	str r0, [sp, 0xC]
@@ -9029,7 +9029,7 @@ _081936A0:
 	movs r0, 0xD0
 	strb r0, [r1, 0xD]
 	ldr r4, =gStringVar4
-	ldr r0, =gUnknown_0860D38C
+	ldr r0, =gBattleDomeWinStringsPointers
 	ldr r7, [sp, 0x70]
 	adds r0, r7, r0
 	ldr r1, [r0]
@@ -9167,7 +9167,7 @@ _08193802:
 	bl AddTextPrinter
 	add r0, sp, 0xC
 	strb r6, [r0, 0xA]
-	ldr r0, =gUnknown_0860D350
+	ldr r0, =gBattleDomeMatchNumberPointers
 	ldr r1, [sp, 0x58]
 	adds r0, r1, r0
 	ldr r0, [r0]
