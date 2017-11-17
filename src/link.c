@@ -61,10 +61,10 @@ IWRAM_DATA u32 gUnknown_03000D60;
 IWRAM_DATA u8 sLinkTestLastBlockSendPos;
 ALIGNED() IWRAM_DATA u8 sLinkTestLastBlockRecvPos[MAX_LINK_PLAYERS];
 IWRAM_DATA u8 sNumVBlanksWithoutSerialIntr;
-IWRAM_DATA bool8 gUnknown_03000D6D;
+IWRAM_DATA bool8 sSendBufferEmpty;
 IWRAM_DATA u16 sSendNonzeroCheck;
-IWRAM_DATA u16 gUnknown_03000D70;
-IWRAM_DATA u8 gUnknown_03000D72;
+IWRAM_DATA u16 sRecvNonzeroCheck;
+IWRAM_DATA u8 sChecksumAvailable;
 IWRAM_DATA u8 sHandshakePlayerCount;
 IWRAM_DATA u8 gUnknown_03000D74;
 
@@ -161,10 +161,10 @@ static void EnqueueSendCmd(u16 *sendCmd);
 static void DequeueRecvCmds(u16 (*recvCmds)[CMD_LENGTH]);
 static void StartTransfer(void);
 static bool8 DoHandshake(void);
-void DoRecv(void);
-void DoSend(void);
-void StopTimer(void);
-void SendRecvDone(void);
+static void DoRecv(void);
+static void DoSend(void);
+static void StopTimer(void);
+static void SendRecvDone(void);
 
 // .rodata
 
@@ -282,7 +282,7 @@ void LinkTestScreen(void)
     gLinkType = 0x1111;
     OpenLink();
     SeedRng(gMain.vblankCounter2);
-    for (i = 0; i < MAX_LINK_PLAYERS; i ++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         gSaveBlock2Ptr->playerTrainerId[i] = Random() % 256;
     }
@@ -331,7 +331,7 @@ static void InitLink(void)
 {
     int i;
 
-    for (i = 0; i < 8; i ++)
+    for (i = 0; i < 8; i++)
     {
         gSendCmd[i] = 0xefff;
     }
@@ -341,7 +341,7 @@ static void InitLink(void)
 
 static void Task_TriggerHandshake(u8 taskId)
 {
-    if (++ gTasks[taskId].data[0] == 5)
+    if (++gTasks[taskId].data[0] == 5)
     {
         gShouldAdvanceLinkState = 1;
         DestroyTask(taskId);
@@ -373,7 +373,7 @@ void OpenLink(void)
         sub_800E700();
     }
     gReceivedRemoteLinkPlayers = 0;
-    for (i = 0; i < MAX_LINK_PLAYERS; i ++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         gRemoteLinkPlayersNotReceived[i] = TRUE;
         gUnknown_030030F0[i] = FALSE;
@@ -402,7 +402,7 @@ static void TestBlockTransfer(u8 nothing, u8 is, u8 used)
         LinkTest_prnthex(sBlockSend.pos, 2, 3, 2);
         sLinkTestLastBlockSendPos = sBlockSend.pos;
     }
-    for (i = 0; i < MAX_LINK_PLAYERS; i ++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         if (sLinkTestLastBlockRecvPos[i] != sBlockRecv[i].pos)
         {
@@ -413,7 +413,7 @@ static void TestBlockTransfer(u8 nothing, u8 is, u8 used)
     status = GetBlockReceivedStatus();
     if (status == 0xF) // 0b1111
     {
-        for (i = 0; i < MAX_LINK_PLAYERS; i ++)
+        for (i = 0; i < MAX_LINK_PLAYERS; i++)
         {
             if ((status >> i) & 1)
             {
@@ -479,7 +479,7 @@ u16 LinkMain2(const u16 *heldKeys)
     {
         return 0;
     }
-    for (i = 0; i < 8; i ++)
+    for (i = 0; i < 8; i++)
     {
         gSendCmd[i] = 0;
     }
@@ -503,7 +503,7 @@ static void HandleReceiveRemoteLinkPlayer(u8 who)
 
     count = 0;
     gRemoteLinkPlayersNotReceived[who] = FALSE;
-    for (i = 0; i < GetLinkPlayerCount_2(); i ++)
+    for (i = 0; i < GetLinkPlayerCount_2(); i++)
     {
         count += gRemoteLinkPlayersNotReceived[i];
     }
@@ -517,7 +517,7 @@ static void ProcessRecvCmds(u8 unused)
 {
     u16 i;
 
-    for (i = 0; i < MAX_LINK_PLAYERS; i ++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         gLinkPartnersHeldKeys[i] = 0;
         if (gRecvCmds[i][0] == 0)
@@ -565,7 +565,7 @@ static void ProcessRecvCmds(u8 unused)
                     u16 j;
 
                     buffer = (u16 *)gDecompressionBuffer;
-                    for (j = 0; j < CMD_LENGTH - 1; j ++)
+                    for (j = 0; j < CMD_LENGTH - 1; j++)
                     {
                         buffer[(sBlockRecv[i].pos / 2) + j] = gRecvCmds[i][j + 1];
                     }
@@ -574,7 +574,7 @@ static void ProcessRecvCmds(u8 unused)
                 {
                     u16 j;
 
-                    for (j = 0; j < CMD_LENGTH - 1; j ++)
+                    for (j = 0; j < CMD_LENGTH - 1; j++)
                     {
                         gBlockRecvBuffer[i][(sBlockRecv[i].pos / 2) + j] = gRecvCmds[i][j + 1];
                     }
@@ -662,7 +662,7 @@ static void BuildSendCmd(u16 command)
             u8 i;
 
             gSendCmd[0] = LINKCMD_0x7777;
-            for (i = 0; i < 5; i ++)
+            for (i = 0; i < 5; i++)
             {
                 gSendCmd[i + 1] = 0xEE;
             }
@@ -771,7 +771,7 @@ static int sub_8009FF8(u32 version1, u32 version2)
     u8 nPlayers;
 
     nPlayers = GetLinkPlayerCount();
-    for (i = 0; i < nPlayers; i ++)
+    for (i = 0; i < nPlayers; i++)
     {
         if ((gLinkPlayers[i].version & 0xFF) == version1 || (gLinkPlayers[i].version & 0xFF) == version2)
         {
@@ -848,11 +848,11 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
                 gLinkErrorOccurred = TRUE;
                 CloseLink();
             }
-            for (i = 0, index = 0; i < GetLinkPlayerCount(); index ++, i ++)
+            for (i = 0, index = 0; i < GetLinkPlayerCount(); index++, i++)
             {
                 if (gLinkPlayers[index].linkType == gLinkPlayers[0].linkType)
                 {
-                    count ++;
+                    count++;
                 }
             }
             if (count == GetLinkPlayerCount())
@@ -889,7 +889,7 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
             }
         }
     }
-    else if (++ gLinkTimeOutCounter > 600)
+    else if (++gLinkTimeOutCounter > 600)
     {
         sPlayerDataExchangeStatus = EXCHANGE_TIMED_OUT;
     }
@@ -903,11 +903,11 @@ bool8 IsLinkPlayerDataExchangeComplete(void)
     bool8 retval;
 
     count = 0;
-    for (i = 0; i < GetLinkPlayerCount(); i ++)
+    for (i = 0; i < GetLinkPlayerCount(); i++)
     {
         if (gLinkPlayers[i].linkType == gLinkPlayers[0].linkType)
         {
-            count ++;
+            count++;
         }
     }
     if (count == GetLinkPlayerCount())
@@ -932,7 +932,7 @@ void ResetLinkPlayers(void)
 {
     int i;
 
-    for (i = 0; i <= MAX_LINK_PLAYERS; i ++)
+    for (i = 0; i <= MAX_LINK_PLAYERS; i++)
     {
         gLinkPlayers[i] = (struct LinkPlayer){};
     }
@@ -976,7 +976,7 @@ static bool32 InitBlockSend(const void *src, size_t size)
 
 static void LinkCB_BlockSendBegin(void)
 {
-    if (++ sBlockSendDelayCounter > 2)
+    if (++sBlockSendDelayCounter > 2)
     {
         gLinkCallback = LinkCB_BlockSend;
     }
@@ -989,7 +989,7 @@ static void LinkCB_BlockSend(void)
 
     src = sBlockSend.src;
     gSendCmd[0] = LINKCMD_CONT_BLOCK;
-    for (i = 0; i < 7; i ++)
+    for (i = 0; i < 7; i++)
     {
         gSendCmd[i + 1] = (src[sBlockSend.pos + i * 2 + 1] << 8) | src[sBlockSend.pos + i * 2];
     }
@@ -1010,7 +1010,7 @@ static void sub_800A3F8(void)
 {
     GetMultiplayerId();
     BuildSendCmd(LINKCMD_SEND_HELD_KEYS);
-    gUnknown_020223C0 ++;
+    gUnknown_020223C0++;
 }
 
 void sub_800A418(void)
@@ -1113,14 +1113,14 @@ void ResetBlockReceivedFlags(void)
     
     if (gWirelessCommType == TRUE)
     {
-        for (i = 0; i < MAX_RFU_PLAYERS; i ++)
+        for (i = 0; i < MAX_RFU_PLAYERS; i++)
         {
             sub_800F728(i);
         }
     }
     else
     {
-        for (i = 0; i < MAX_LINK_PLAYERS; i ++)
+        for (i = 0; i < MAX_LINK_PLAYERS; i++)
         {
             gBlockReceivedStatus[i] = FALSE;
         }
@@ -1153,7 +1153,7 @@ static u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size)
     u16 i;
 
     chksum = 0;
-    for (i = 0; i < size / 2; i ++)
+    for (i = 0; i < size / 2; i++)
     {
         chksum += src[i];
     }
@@ -1181,15 +1181,15 @@ static void LinkTest_prnthex(u32 pos, u8 a0, u8 a1, u8 a2)
     char sp[32 / 2];
     int i;
 
-    for (i = 0; i < a2; i ++)
+    for (i = 0; i < a2; i++)
     {
         sp[i] = pos & 0xf;
         pos >>= 4;
     }
-    for (i = a2 - 1; i >= 0; i --)
+    for (i = a2 - 1; i >= 0; i--)
     {
         LinkTest_prnthexchar(sp[i], a0, a1);
-        a0 ++;
+        a0++;
     }
 }
 
@@ -1205,15 +1205,15 @@ static void LinkTest_prntint(int a0, u8 a1, u8 a2, u8 a3)
         sp10 = a1;
         a0 = -a0;
     }
-    for (i = 0; i < a3; i ++)
+    for (i = 0; i < a3; i++)
     {
         sp[i] = a0 % 10;
         a0 /= 10;
     }
-    for (i = a3 - 1; i >= 0; i --)
+    for (i = a3 - 1; i >= 0; i--)
     {
         LinkTest_prnthexchar(sp[i], a1, a2);
-        a1 ++;
+        a1++;
     }
     if (sp10 != -1)
     {
@@ -1229,17 +1229,17 @@ static void LinkTest_prntstr(const char *a0, u8 a1, u8 a2)
 
     r5 = 0;
     r6 = 0;
-    for (i = 0; a0[i] != 0; a0 ++)
+    for (i = 0; a0[i] != 0; a0++)
     {
         if (a0[i] == *"\n")
         {
-            r5 ++;
+            r5++;
             r6 = 0;
         }
         else
         {
             LinkTest_prntchar(a0[i], a1 + r6, a2 + r5);
-            r6 ++;
+            r6++;
         }
     }
 }
@@ -1292,7 +1292,7 @@ u8 sub_800A9A8(void)
     u8 flags;
 
     flags = 0;
-    for (i = 0; i < gSavedLinkPlayerCount; i ++)
+    for (i = 0; i < gSavedLinkPlayerCount; i++)
     {
         flags |= (1 << i);
     }
@@ -1305,7 +1305,7 @@ u8 sub_800A9D8(void)
     u8 flags;
 
     flags = 0;
-    for (i = 0; i < GetLinkPlayerCount(); i ++)
+    for (i = 0; i < GetLinkPlayerCount(); i++)
     {
         flags |= (1 << i);
     }
@@ -1318,7 +1318,7 @@ void sub_800AA04(u8 a0)
 
     gSavedLinkPlayerCount = a0;
     gSavedMultiplayerId = GetMultiplayerId();
-    for (i = 0; i < MAX_RFU_PLAYERS; i ++)
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         gSavedLinkPlayers[i] = gLinkPlayers[i];
     }
@@ -1340,7 +1340,7 @@ bool8 sub_800AA60(void)
     unsigned count;
 
     count = 0;
-    for (i = 0; i < gSavedLinkPlayerCount; i ++)
+    for (i = 0; i < gSavedLinkPlayerCount; i++)
     {
         if (gLinkPlayers[i].trainerId == gSavedLinkPlayers[i].trainerId)
         {
@@ -1348,12 +1348,12 @@ bool8 sub_800AA60(void)
             {
                 if (gLinkType == gLinkPlayers[i].linkType)
                 {
-                    count ++;
+                    count++;
                 }
             }
             else
             {
-                count ++;
+                count++;
             }
         }
     }
@@ -1372,7 +1372,7 @@ void sub_800AAF4(void)
     int i;
 
     // Clearly not what was meant to be written, but here it is anyway.
-    for (i = 0; i < 4; i ++)
+    for (i = 0; i < 4; i++)
     {
         CpuSet(&gSavedLinkPlayers[i], NULL, sizeof(struct LinkPlayer));
     }
@@ -1382,7 +1382,7 @@ void sub_800AB18(void)
 {
     u8 i;
 
-    for (i = 0; i < gSavedLinkPlayerCount; i ++)
+    for (i = 0; i < gSavedLinkPlayerCount; i++)
     {
         if (gSavedLinkPlayers[i].trainerId != gLinkPlayers[i].trainerId || StringCompare(gSavedLinkPlayers[i].name, gLinkPlayers[i].name) != 0)
         {
@@ -1445,7 +1445,7 @@ void sub_800AC34(void)
     {
         if (gLinkCallback != NULL)
         {
-            gUnknown_02022B08 ++;
+            gUnknown_02022B08++;
         }
         else
         {
@@ -1473,11 +1473,11 @@ static void sub_800ACAC(void)
 
     linkPlayerCount = GetLinkPlayerCount();
     count = 0;
-    for (i = 0; i < linkPlayerCount; i ++)
+    for (i = 0; i < linkPlayerCount; i++)
     {
         if (gUnknown_030030F0[i])
         {
-            count ++;
+            count++;
         }
     }
     if (count == linkPlayerCount)
@@ -1500,7 +1500,7 @@ void sub_800AD10(void)
     {
         if (gLinkCallback != NULL)
         {
-            gUnknown_02022B08 ++;
+            gUnknown_02022B08++;
         }
         else
         {
@@ -1528,15 +1528,15 @@ static void sub_800AD88(void)
 
     linkPlayerCount = GetLinkPlayerCount();
     count = 0;
-    for (i = 0; i < linkPlayerCount; i ++)
+    for (i = 0; i < linkPlayerCount; i++)
     {
         if (gLinkPlayers[i].language == LANGUAGE_JAPANESE)
         {
-            count ++;
+            count++;
         }
         else if (gUnknown_030030F0[i])
         {
-            count ++;
+            count++;
         }
     }
     if (count == linkPlayerCount)
@@ -1580,7 +1580,7 @@ static void sub_800AE5C(void)
     u8 linkPlayerCount;
 
     linkPlayerCount = GetLinkPlayerCount();
-    for (i = 0; i < linkPlayerCount; i ++)
+    for (i = 0; i < linkPlayerCount; i++)
     {
         if (!gUnknown_030030EC[i])
         {
@@ -1589,7 +1589,7 @@ static void sub_800AE5C(void)
     }
     if (i == linkPlayerCount)
     {
-        for (i = 0; i < MAX_LINK_PLAYERS; i ++)
+        for (i = 0; i < MAX_LINK_PLAYERS; i++)
         {
             gUnknown_030030EC[i] = FALSE;
         }
@@ -1767,7 +1767,7 @@ static void CB2_PrintErrorMessage(void)
     }
     if (gMain.state != 160)
     {
-        gMain.state ++;
+        gMain.state++;
     }
 }
 
@@ -1927,8 +1927,8 @@ static void EnableSerial(void)
     CpuFill32(0, &gLink, sizeof(gLink));
     sNumVBlanksWithoutSerialIntr = 0;
     sSendNonzeroCheck = 0;
-    gUnknown_03000D70 = 0;
-    gUnknown_03000D72 = 0;
+    sRecvNonzeroCheck = 0;
+    sChecksumAvailable = 0;
     sHandshakePlayerCount = 0;
     gLastSendQueueCount = 0;
     gLastRecvQueueCount = 0;
@@ -2061,7 +2061,7 @@ static void InitTimer(void)
 {
     if (gLink.isMaster)
     {
-        REG_TM3CNT_L = 0xFF3B;
+        REG_TM3CNT_L = -197;
         REG_TM3CNT_H = TIMER_64CLK | TIMER_INTR_ENABLE;
         EnableInterrupts(INTR_FLAG_TIMER3);
     }
@@ -2081,7 +2081,7 @@ static void EnqueueSendCmd(u16 *sendCmd)
         {
             offset -= QUEUE_CAPACITY;
         }
-        for (i = 0; i < CMD_LENGTH; i ++)
+        for (i = 0; i < CMD_LENGTH; i++)
         {
             sSendNonzeroCheck |= *sendCmd;
             gLink.sendQueue.data[i][offset] = *sendCmd;
@@ -2095,7 +2095,7 @@ static void EnqueueSendCmd(u16 *sendCmd)
     }
     if (sSendNonzeroCheck)
     {
-        gLink.sendQueue.count ++;
+        gLink.sendQueue.count++;
         sSendNonzeroCheck = 0;
     }
     REG_IME = gLinkSavedIme;
@@ -2112,9 +2112,9 @@ static void DequeueRecvCmds(u16 (*recvCmds)[CMD_LENGTH])
     REG_IME = 0;
     if (gLink.recvQueue.count == 0)
     {
-        for (i = 0; i < gLink.playerCount; i ++)
+        for (i = 0; i < gLink.playerCount; i++)
         {
-            for (j = 0; j < CMD_LENGTH; j ++)
+            for (j = 0; j < CMD_LENGTH; j++)
             {
                 recvCmds[i][j] = 0;
             }
@@ -2124,15 +2124,15 @@ static void DequeueRecvCmds(u16 (*recvCmds)[CMD_LENGTH])
     }
     else
     {
-        for (i = 0; i < gLink.playerCount; i ++)
+        for (i = 0; i < gLink.playerCount; i++)
         {
-            for (j = 0; j < CMD_LENGTH; j ++)
+            for (j = 0; j < CMD_LENGTH; j++)
             {
                 recvCmds[i][j] = gLink.recvQueue.data[i][j][gLink.recvQueue.pos];
             }
         }
-        gLink.recvQueue.count --;
-        gLink.recvQueue.pos ++;
+        gLink.recvQueue.count--;
+        gLink.recvQueue.pos++;
         if (gLink.recvQueue.pos >= QUEUE_CAPACITY)
         {
             gLink.recvQueue.pos = 0;
@@ -2141,6 +2141,8 @@ static void DequeueRecvCmds(u16 (*recvCmds)[CMD_LENGTH])
     }
     REG_IME = gLinkSavedIme;
 }
+
+// link_intr.c
 
 void LinkVSync(void)
 {
@@ -2173,7 +2175,7 @@ void LinkVSync(void)
     }
     else if (gLink.state == LINK_STATE_CONN_ESTABLISHED || gLink.state == LINK_STATE_HANDSHAKE)
     {
-        if (++ sNumVBlanksWithoutSerialIntr > 10)
+        if (++sNumVBlanksWithoutSerialIntr > 10)
         {
             if (gLink.state == LINK_STATE_CONN_ESTABLISHED)
             {
@@ -2220,7 +2222,7 @@ void SerialCB(void)
             }
             break;
     }
-    gLink.serialIntrCounter ++;
+    gLink.serialIntrCounter++;
     sNumVBlanksWithoutSerialIntr = 0;
     if (gLink.serialIntrCounter == 8)
     {
@@ -2252,11 +2254,11 @@ static bool8 DoHandshake(void)
     *(u64 *)gLink.tempRecvBuffer = REG_SIOMLT_RECV;
     REG_SIOMLT_RECV = 0;
     gLink.handshakeAsMaster = FALSE;
-    for (i = 0; i < 4; i ++)
+    for (i = 0; i < 4; i++)
     {
         if ((gLink.tempRecvBuffer[i] & ~0x3) == SLAVE_HANDSHAKE || gLink.tempRecvBuffer[i] == MASTER_HANDSHAKE)
         {
-            playerCount ++;
+            playerCount++;
             if (minRecv > gLink.tempRecvBuffer[i] && gLink.tempRecvBuffer[i] != 0)
             {
                 minRecv = gLink.tempRecvBuffer[i];
@@ -2286,4 +2288,111 @@ static bool8 DoHandshake(void)
     }
     sHandshakePlayerCount = gLink.playerCount;
     return FALSE;
+}
+
+static void DoRecv(void)
+{
+    u16 recv[4];
+    u8 i;
+    u8 index;
+
+    *(u64 *)recv = REG_SIOMLT_RECV;
+    if (gLink.sendCmdIndex == 0)
+    {
+        for (i = 0; i < gLink.playerCount; i++)
+        {
+            if (gLink.checksum != recv[i] && sChecksumAvailable)
+            {
+                gLink.badChecksum = TRUE;
+            }
+        }
+        gLink.checksum = 0;
+        sChecksumAvailable = TRUE;
+    }
+    else
+    {
+        index = gLink.recvQueue.pos + gLink.recvQueue.count;
+        if (index >= QUEUE_CAPACITY)
+        {
+            index -= QUEUE_CAPACITY;
+        }
+        if (gLink.recvQueue.count < QUEUE_CAPACITY)
+        {
+            for (i = 0; i < gLink.playerCount; i++)
+            {
+                gLink.checksum += recv[i];
+                sRecvNonzeroCheck |= recv[i];
+                gLink.recvQueue.data[i][gLink.recvCmdIndex][index] = recv[i];
+            }
+        }
+        else
+        {
+            gLink.queueFull = QUEUE_FULL_RECV;
+        }
+        gLink.recvCmdIndex++;
+        if (gLink.recvCmdIndex == CMD_LENGTH && sRecvNonzeroCheck)
+        {
+            gLink.recvQueue.count++;
+            sRecvNonzeroCheck = 0;
+        }
+    }
+}
+
+static void DoSend(void)
+{
+    if (gLink.sendCmdIndex == CMD_LENGTH)
+    {
+        REG_SIOMLT_SEND = gLink.checksum;
+        if (!sSendBufferEmpty)
+        {
+            gLink.sendQueue.count--;
+            gLink.sendQueue.pos++;
+            if (gLink.sendQueue.pos >= QUEUE_CAPACITY)
+            {
+                gLink.sendQueue.pos = 0;
+            }
+        }
+        else
+        {
+            sSendBufferEmpty = FALSE;
+        }
+    }
+    else
+    {
+        if (!sSendBufferEmpty && gLink.sendQueue.count == 0)
+        {
+            sSendBufferEmpty = TRUE;
+        }
+        if (sSendBufferEmpty)
+        {
+            REG_SIOMLT_SEND = 0;
+        }
+        else
+        {
+            REG_SIOMLT_SEND = gLink.sendQueue.data[gLink.sendCmdIndex][gLink.sendQueue.pos];
+        }
+        gLink.sendCmdIndex++;
+    }
+}
+
+static void StopTimer(void)
+{
+    if (gLink.isMaster)
+    {
+        REG_TM3CNT_H &= ~TIMER_ENABLE;
+        REG_TM3CNT_L = -197;
+    }
+}
+
+static void SendRecvDone(void)
+{
+    if (gLink.recvCmdIndex == CMD_LENGTH)
+    {
+        gLink.sendCmdIndex = 0;
+        gLink.recvCmdIndex = 0;
+    }
+    else if (gLink.isMaster)
+    {
+        REG_TM3CNT_H |= TIMER_ENABLE;
+    }
 }
