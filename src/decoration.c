@@ -1,5 +1,3 @@
-
-// Includes
 #include "global.h"
 #include "decompress.h"
 #include "malloc.h"
@@ -68,27 +66,27 @@ struct DecorRearrangementDataBuffer {
 // Static RAM declarations
 
 EWRAM_DATA u8 *gCurDecorInventoryItems = NULL;
-EWRAM_DATA u8 sSecretBasePCMenuCursorPos = 0;
-EWRAM_DATA u8 sCurDecorCatCount = 0;
-EWRAM_DATA u8 sSecretBaseItemsIndicesBuffer[16] = {};
-EWRAM_DATA u8 sPlayerRoomItemsIndicesBuffer[12] = {};
-EWRAM_DATA u16 sSecretBasePCSelectDecorLineNo = 0;
-EWRAM_DATA u16 sSecretBasePCSelectDecorPageNo = 0;
+EWRAM_DATA static u8 sSecretBasePCMenuCursorPos = 0;
+EWRAM_DATA static u8 sCurDecorCatCount = 0;
+EWRAM_DATA static u8 sSecretBaseItemsIndicesBuffer[16] = {};
+EWRAM_DATA static u8 sPlayerRoomItemsIndicesBuffer[12] = {};
+EWRAM_DATA static u16 sSecretBasePCSelectDecorLineNo = 0;
+EWRAM_DATA static u16 sSecretBasePCSelectDecorPageNo = 0;
 EWRAM_DATA u8 gCurDecorationIndex = 0;
-EWRAM_DATA u8 sCurDecorationCategory = DECORCAT_DESK;
-EWRAM_DATA u32 filler_0203a174[2] = {};
+EWRAM_DATA static u8 sCurDecorationCategory = DECORCAT_DESK;
+EWRAM_DATA static u32 filler_0203a174[2] = {};
 EWRAM_DATA struct DecorPCPointers gUnknown_0203A17C = {};
-EWRAM_DATA u8 sDecorMenuWindowIndices[4] = {};
+EWRAM_DATA static u8 sDecorMenuWindowIndices[4] = {};
 EWRAM_DATA struct DecorPCBuffer *sDecorPCBuffer = NULL;
 EWRAM_DATA struct PlaceDecorationGraphicsDataBuffer sPlaceDecorationGraphicsDataBuffer = {};
-EWRAM_DATA u16 sCurDecorMapX = 0;
-EWRAM_DATA u16 sCurDecorMapY = 0;
-EWRAM_DATA u8 sDecor_CameraSpriteObjectIdx1 = 0;
-EWRAM_DATA u8 sDecor_CameraSpriteObjectIdx2 = 0;
-EWRAM_DATA u8 sDecorationLastDirectionMoved = 0;
-EWRAM_DATA struct OamData sDecorSelectorOam = {};
-EWRAM_DATA struct DecorRearrangementDataBuffer sDecorRearrangementDataBuffer[16] = {};
-EWRAM_DATA u8 sCurDecorSelectedInRearrangement = 0;
+EWRAM_DATA static u16 sCurDecorMapX = 0;
+EWRAM_DATA static u16 sCurDecorMapY = 0;
+EWRAM_DATA static u8 sDecor_CameraSpriteObjectIdx1 = 0;
+EWRAM_DATA static u8 sDecor_CameraSpriteObjectIdx2 = 0;
+EWRAM_DATA static u8 sDecorationLastDirectionMoved = 0;
+EWRAM_DATA static struct OamData sDecorSelectorOam = {};
+EWRAM_DATA static struct DecorRearrangementDataBuffer sDecorRearrangementDataBuffer[16] = {};
+EWRAM_DATA static u8 sCurDecorSelectedInRearrangement = 0;
 
 // Static ROM declarations
 
@@ -800,9 +798,9 @@ void sub_8127330(u8 taskId)
     sDecorPCBuffer->items[i].unk_04 = -2;
     gUnknown_03006310 = gUnknown_085A6BD0;
     gUnknown_03006310.unk_10 = sDecorMenuWindowIndices[1];
-    gUnknown_03006310.unk_0c = sDecorPCBuffer->unk_520;
-    gUnknown_03006310.unk_00 = sDecorPCBuffer->items;
-    gUnknown_03006310.unk_0e = sDecorPCBuffer->unk_521;
+    gUnknown_03006310.totalItems = sDecorPCBuffer->unk_520;
+    gUnknown_03006310.items = sDecorPCBuffer->items;
+    gUnknown_03006310.maxShowed = sDecorPCBuffer->unk_521;
 }
 
 void sub_8127454(u8 *dest, u16 decorId)
@@ -1603,7 +1601,7 @@ void sub_81289F0(u8 taskId)
         ScriptContext1_SetupScript(EventScript_275D1F);
     }
     gSprites[sDecor_CameraSpriteObjectIdx1].pos1.y += 2;
-    if (gMapHeader.regionMapSectionId == REGION_MAP_SECRET_BASE)
+    if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
     {
         TV_PutSecretBaseVisitOnTheAir();
     }
@@ -2222,7 +2220,7 @@ void sub_81298EC(u8 taskId)
             {
                 StringExpandPlaceholders(gStringVar4, gText_DecorationReturnedToPC);
                 DisplayItemMessageOnField(taskId, gStringVar4, sub_8129D64);
-                if (gMapHeader.regionMapSectionId == REGION_MAP_SECRET_BASE)
+                if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
                 {
                     TV_PutSecretBaseVisitOnTheAir();
                 }

@@ -2111,13 +2111,13 @@ _081B134C:
 	bx r0
 	thumb_func_end c3_0811FAB4
 
-	thumb_func_start brm_get_pokemon_selection
-brm_get_pokemon_selection: @ 81B1354
+	thumb_func_start GetCursorSelectionMonId
+GetCursorSelectionMonId: @ 81B1354
 	ldr r0, =gUnknown_0203CEC8
 	ldrb r0, [r0, 0x9]
 	bx lr
 	.pool
-	thumb_func_end brm_get_pokemon_selection
+	thumb_func_end GetCursorSelectionMonId
 
 	thumb_func_start sub_81B1360
 sub_81B1360: @ 81B1360
@@ -8140,7 +8140,7 @@ sub_81B4578: @ 81B4578
 	cmp r7, 0
 	bne _081B45F8
 	adds r0, r5, 0
-	bl sub_80D4680
+	bl TakeMailFromMon
 	ldr r4, =gUnknown_0203CEFC
 	adds r0, r5, 0
 	movs r1, 0xC
@@ -8925,7 +8925,7 @@ _081B4CBE:
 	ldrsb r0, [r1, r0]
 	muls r0, r7
 	adds r0, r6
-	bl sub_80D4680
+	bl TakeMailFromMon
 	ldr r0, =gText_MailTakenFromPkmn
 	movs r1, 0
 	bl sub_81B1B5C
@@ -9892,7 +9892,7 @@ _081B55E8:
 	.pool
 _081B5614:
 	ldr r1, =gUnknown_0203CEC8
-	ldr r0, =sub_8124690
+	ldr r0, =MCB2_FlyMap
 	b _081B5628
 	.pool
 _081B5624:
@@ -10134,7 +10134,7 @@ _081B57FE:
 	thumb_func_start hm_surf_run_dp02scr
 hm_surf_run_dp02scr: @ 81B5804
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -10238,7 +10238,7 @@ sub_81B58A8: @ 81B58A8
 	thumb_func_start hm2_waterfall
 hm2_waterfall: @ 81B58D4
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -10298,7 +10298,7 @@ _081B594E:
 	thumb_func_start sub_81B5958
 sub_81B5958: @ 81B5958
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -14938,7 +14938,7 @@ sub_81B81A8: @ 81B81A8
 	cmp r0, 0
 	bne _081B8208
 	adds r0, r5, 0
-	bl sub_80D4680
+	bl TakeMailFromMon
 	ldr r4, =gUnknown_0203CEFC
 	adds r0, r5, 0
 	movs r1, 0xC
@@ -15281,9 +15281,9 @@ sub_81B8474: @ 81B8474
 _081B84DC:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80D460C
+	bl GiveMailToMon2
 	adds r0, r4, 0
-	bl sub_80D439C
+	bl ClearMailStruct
 	ldr r0, =gText_MailTransferredFromMailbox
 	movs r1, 0x1
 	bl sub_81B1B5C
@@ -15994,7 +15994,7 @@ sub_81B8A7C: @ 81B8A7C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl sub_81B1250
@@ -17113,7 +17113,7 @@ sub_81B9354: @ 81B9354
 sub_81B9390: @ 81B9390
 	push {r4,lr}
 	ldr r4, =gSpecialVar_0x8004
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -17218,7 +17218,7 @@ _081B945C:
 	thumb_func_start sub_81B9470
 sub_81B9470: @ 81B9470
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r2, =gUnknown_02039F24
 	strb r0, [r2]
 	lsls r0, 24
@@ -17345,7 +17345,7 @@ _081B9574:
 sub_81B9588: @ 81B9588
 	push {r4,r5,lr}
 	ldr r5, =gSpecialVar_0x8004
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]

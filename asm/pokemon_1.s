@@ -1310,8 +1310,8 @@ _08068FF4:
 	bx r0
 	thumb_func_end CalculateMonStats
 
-	thumb_func_start sub_8069004
-sub_8069004: @ 8069004
+	thumb_func_start BoxMonToMon
+BoxMonToMon: @ 8069004
 	push {r4,lr}
 	sub sp, 0x4
 	adds r2, r0, 0
@@ -1346,7 +1346,7 @@ sub_8069004: @ 8069004
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069004
+	thumb_func_end BoxMonToMon
 
 	thumb_func_start GetLevelFromMonExp
 GetLevelFromMonExp: @ 8069054

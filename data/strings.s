@@ -3149,10 +3149,10 @@ gText_SelectTheAnswer:: @ 85EC752
 gText_LyricsCantBeDeleted:: @ 85EC765
 	.string "The lyrics can’t be deleted.$"
 
-gUnknown_085EC782:: @ 85EC782
+gText_PokemonLeague:: @ 85EC782
 	.string "POKéMON LEAGUE$"
 
-gUnknown_085EC791:: @ 85EC791
+gText_PokemonCenter:: @ 85EC791
 	.string "POKéMON CENTER$"
 
 gText_GetsAPokeBlockQuestion:: @ 85EC7A0
@@ -5121,16 +5121,16 @@ gText_YouDontHaveThreeCoins:: @ 85EF734
 gText_ReelTimeHelp:: @ 85EF750
 	.string "REEL TIME\nHere’s your chance to take\naim and nail marks!\nReel Time continues for the\nawarded number of spins.\nIt all ends on a Big Bonus.$"
 
-gUnknown_085EF7DA:: @ 85EF7DA
+gDaycareText_GetAlongVeryWell:: @ 85EF7DA
 	.string "The two seem to get along\nvery well.$"
 
-gUnknown_085EF7FF:: @ 85EF7FF
+gDaycareText_GetAlong:: @ 85EF7FF
 	.string "The two seem to get along.$"
 
-gUnknown_085EF81A:: @ 85EF81A
+gDaycareText_DontLikeOther:: @ 85EF81A
 	.string "The two don’t seem to like\neach other much.$"
 
-gUnknown_085EF846:: @ 85EF846
+gDaycareText_PlayOther:: @ 85EF846
 	.string "The two prefer to play with other\nPOKéMON than each other.$"
 
 gText_NewLine2:: @ 85EF881

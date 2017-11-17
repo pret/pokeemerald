@@ -11,4 +11,4 @@ gUnknown_0859F51C:: @ 859F51C
 	.incbin "baserom.gba", 0x59f51c, 0x8
 
 gUnknown_0859F524:: @ 859F524
-	.incbin "baserom.gba", 0x59f524, 0x10
+	.incbin "baserom.gba", 0x59f524, 0x18
