@@ -15,6 +15,9 @@ struct UnkRfuStruct_1 {
     u8 unk_08;
     u8 filler_09[4];
     u8 unk_0d;
+    u8 filler_0e[0x32];
+    void (*unk_40)(u8);
+    void (*unk_44)(void);
 };
 
 // Exported RAM declarations

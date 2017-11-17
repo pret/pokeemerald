@@ -7,42 +7,6 @@
 
 // RFU; bss indicates that no file boundary exists here
 
-	thumb_func_start sub_800BF4C
-sub_800BF4C: @ 800BF4C
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	cmp r5, 0
-	beq _0800BF94
-	mov r1, sp
-	movs r0, 0
-	strh r0, [r1]
-	ldr r4, =gUnknown_03004140
-	ldr r2, =0x01000024
-	mov r0, sp
-	adds r1, r4, 0
-	bl CpuSet
-	movs r0, 0xFF
-	strb r0, [r4, 0x6]
-	str r5, [r4, 0x40]
-	str r6, [r4, 0x44]
-	ldr r0, =sub_800CEB0
-	bl rfu_setMSCCallback
-	ldr r0, =sub_800C7B4
-	bl rfu_setREQCallback
-	movs r0, 0
-	b _0800BF96
-	.pool
-_0800BF94:
-	movs r0, 0x4
-_0800BF96:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_800BF4C
-
 	thumb_func_start sub_800BFA0
 sub_800BFA0: @ 800BFA0
 	push {r4,lr}

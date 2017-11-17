@@ -170,6 +170,8 @@ static void StopTimer(void);
 static void SendRecvDone(void);
 
 void sub_800D610(void);
+void sub_800CEB0(u16 unk0);
+void sub_800C7B4(u16 unk0, u16 unk1);
 
 // .rodata
 
@@ -2484,4 +2486,19 @@ void rfu_REQ_sendData_wrapper(u8 r2)
         gUnknown_03004140.unk_03 = 0;
     }
     rfu_REQ_sendData(r2);
+}
+
+int sub_800BF4C(void (*func1)(u8), void (*func2)(void))
+{
+    if (func1 == NULL)
+    {
+        return 4;
+    }
+    CpuFill16(0, &gUnknown_03004140, sizeof(gUnknown_03004140));
+    gUnknown_03004140.unk_06 = -1;
+    gUnknown_03004140.unk_40 = func1;
+    gUnknown_03004140.unk_44 = func2;
+    rfu_setMSCCallback(sub_800CEB0);
+    rfu_setREQCallback(sub_800C7B4);
+    return 0;
 }
