@@ -7,7 +7,7 @@ Route117_MapScript1_1F3983: @ 81F3983
 	end
 
 Route117_EventScript_1F3989:: @ 81F3989
-	checkflag FLAG_0x086
+	checkflag FLAG_PENDING_DAYCARE_EGG
 	goto_if 0, Route117_EventScript_1F3999
 	setobjectxyperm 3, 47, 6
 

@@ -77,7 +77,7 @@ SECTIONS {
         src/rng.o(.text);
         src/util.o(.text);
         src/blend_palette.o(.text);
-        asm/daycare.o(.text);
+        src/daycare.o(.text);
         src/egg_hatch.o(.text);
         src/battle_interface.o(.text);
         asm/smokescreen.o(.text);
@@ -344,7 +344,7 @@ SECTIONS {
         data/data2c.o(.rodata);
         src/trig.o(.rodata);
         src/util.o(.rodata);
-        data/daycare.o(.rodata);
+        src/daycare.o(.rodata);
         src/egg_hatch.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
         src/battle_interface.o(.rodata);

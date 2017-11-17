@@ -642,7 +642,7 @@ _080FA0C4:
 	thumb_func_start sub_80FA0DC
 sub_80FA0DC: @ 80FA0DC
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -777,7 +777,7 @@ sub_80FA1D8: @ 80FA1D8
 	thumb_func_start sub_80FA1E8
 sub_80FA1E8: @ 80FA1E8
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -950,7 +950,7 @@ sub_80FA33C: @ 80FA33C
 	thumb_func_start sub_80FA34C
 sub_80FA34C: @ 80FA34C
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24

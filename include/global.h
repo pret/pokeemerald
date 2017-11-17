@@ -426,30 +426,52 @@ struct ContestWinner
     u8 contestRank;
 };
 
+struct DaycareMiscMon
+{
+    struct MailStruct mail;
+    u8 OT_name[OT_NAME_LENGTH + 1];
+    u8 monName[POKEMON_NAME_LENGTH + 1];
+    u8 gameLanguage:4;
+    u8 monLanguage:4;
+};
+
 struct DaycareMon
 {
     struct BoxPokemon mon;
-    struct MailStruct mail;
-    u8 OT_name[OT_NAME_LENGTH + 1];
-    u8 monName[11];
-    u8 language_maybe : 4;
-    u8 unknown : 4;
-    u32 stepsTaken;
+    struct DaycareMiscMon misc;
+    u32 steps;
 };
 
-struct DaycareData
+#define DAYCARE_MON_COUNT   2
+
+struct DayCare
 {
-    struct DaycareMon mons[2];
+    struct DaycareMon mons[DAYCARE_MON_COUNT];
     u32 offspringPersonality;
     u8 stepCounter;
+};
+
+struct DayCareMail
+{
+    /*0x00*/ struct MailStruct message;
+    /*0x24*/ u8 names[19];
+};
+
+struct RecordMixingDayCareMail
+{
+    struct DayCareMail mail[DAYCARE_MON_COUNT];
+    u32 numDaycareMons;
+    bool16 holdsItem[DAYCARE_MON_COUNT];
 };
 
 #define MAP_OBJECTS_COUNT  16
 #define BERRY_TREES_COUNT  128
 #define FLAGS_COUNT        300
 #define VARS_COUNT         256
+#define MAIL_COUNT         16
 
-enum {
+enum
+{
     LILYCOVE_LADY_QUIZ,
     LILYCOVE_LADY_FAVOUR,
     LILYCOVE_LADY_CONTEST
@@ -579,15 +601,14 @@ struct SaveBlock1
     /*0x2BB0*/ u16 unk2BB0[6];
     /*0x2BBC*/ u16 unk2BBC[6];
     /*0x2BC8*/ u16 unk2BC8[6];
-    /*0x2BD4*/ u16 unk2BD4[3];
-    /*0x2BE0*/ struct MailStruct mail[16];
+    /*0x2BD4*/ u16 unk2BD4[6];
+    /*0x2BE0*/ struct MailStruct mail[MAIL_COUNT];
     /*0x2E20*/ u8 additionalPhrases[5]; // bitfield for 33 additional phrases in easy chat system
     /*0x2E25*/ u8 unk2E25[3]; // possibly padding?
     /*0x2E28*/ OldMan oldMan;
     /*0x2e64*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
-    /*0x2e8c*/ u8 filler_2E8C[0x4];
     /*0x2e90*/ struct ContestWinner contestWinners[13]; // 0 - 5 used in contest hall, 6 - 7 unused?, 8 - 12 museum
-    /*0x3030*/ struct DaycareData daycare;
+    /*0x3030*/ struct DayCare daycare;
     /*0x3150*/ struct LinkBattleRecord linkBattleRecords[5];
     /*0x31A0*/ u8 unk_31A0;
     /*0x31A1*/ u8 filler_31A1[7];

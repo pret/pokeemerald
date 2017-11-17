@@ -263,7 +263,7 @@ sub_8135654: @ 8135654
 	cmp r0, 0
 	beq _0813568C
 	ldr r4, =gSpecialVar_Result
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -302,7 +302,7 @@ _081356AC:
 	thumb_func_start sub_81356C4
 sub_81356C4: @ 81356C4
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -379,7 +379,7 @@ hm2_dig: @ 8135760
 	bl flagmods_08054D70
 	movs r0, 0x26
 	bl FieldEffectStart
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -3334,7 +3334,7 @@ sub_81370FC: @ 81370FC
 	cmp r0, 0
 	beq _08137134
 	ldr r4, =gSpecialVar_Result
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -3380,7 +3380,7 @@ hm2_flash: @ 8137178
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24

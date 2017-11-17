@@ -38,7 +38,7 @@ hm_teleport_run_dp02scr: @ 817C8FC
 	bl sub_808469C
 	movs r0, 0x3F
 	bl FieldEffectStart
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
