@@ -1771,6 +1771,8 @@ static void CB2_PrintErrorMessage(void)
     }
 }
 
+// TODO: there might be a file boundary here, let's name it
+
 bool8 GetSioMultiSI(void)
 {
     return (REG_SIOCNT & 0x04) != 0;
@@ -1939,6 +1941,8 @@ void ResetSerial(void)
     EnableSerial();
     DisableSerial();
 }
+
+// link_main1.c
 
 u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENGTH])
 {
@@ -2394,5 +2398,41 @@ static void SendRecvDone(void)
     else if (gLink.isMaster)
     {
         REG_TM3CNT_H |= TIMER_ENABLE;
+    }
+}
+
+void ResetSendBuffer(void)
+{
+    u8 i;
+    u8 j;
+
+    gLink.sendQueue.count = 0;
+    gLink.sendQueue.pos = 0;
+    for (i = 0; i < CMD_LENGTH; i++)
+    {
+        for (j = 0; j < QUEUE_CAPACITY; j++)
+        {
+            gLink.sendQueue.data[i][j] = 0xEFFF;
+        }
+    }
+}
+
+void ResetRecvBuffer(void)
+{
+    u8 i;
+    u8 j;
+    u8 k;
+
+    gLink.recvQueue.count = 0;
+    gLink.recvQueue.pos = 0;
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
+    {
+        for (j = 0; j < CMD_LENGTH; j++)
+        {
+            for (k = 0; k < QUEUE_CAPACITY; k++)
+            {
+                gLink.recvQueue.data[i][j][k] = 0xEFFF;
+            }
+        }
     }
 }
