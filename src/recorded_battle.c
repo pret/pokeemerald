@@ -226,7 +226,7 @@ u8 RecordedBattle_ReadBankAction(u8 bank)
     // trying to read past array or invalid action byte, battle is over
     if (sRecordedBytesNo[bank] >= BANK_RECORD_SIZE || sBattleRecords[bank][sRecordedBytesNo[bank]] == 0xFF)
     {
-        gScriptResult = gBattleOutcome = BATTLE_PLAYER_TELEPORTED; // hah
+        gSpecialVar_Result = gBattleOutcome = BATTLE_PLAYER_TELEPORTED; // hah
         ResetPaletteFadeControl();
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         SetMainCallback2(CB2_QuitRecordedBattle);
