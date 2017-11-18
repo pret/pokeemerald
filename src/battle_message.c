@@ -59,7 +59,7 @@ extern const u8* GetTrainer2LoseText(void); // battle_setup
 extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 extern s32 GetStringCenterAlignXOffsetWithLetterSpacing(u8 fontId, const u8 *str, s32 totalWidth, s16 letterSpacing);
 extern u8 sub_8185FC4(void);
-extern u8 sav2_get_text_speed(void);
+extern u8 GetPlayerTextSpeed(void);
 
 // this file's functions
 static void sub_814F8F8(u8 *textPtr);
@@ -2266,7 +2266,7 @@ void BattleHandleAddTextPrinter(const u8 *text, u8 arg1)
         else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             speed = sRecordedBattleTextSpeeds[sub_8185FC4()];
         else
-            speed = sav2_get_text_speed();
+            speed = GetPlayerTextSpeed();
 
         gTextFlags.flag_0 = 1;
     }

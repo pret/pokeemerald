@@ -2,6 +2,7 @@
 #define GUARD_FLAGS_H
 
 #define FLAG_PENDING_DAYCARE_EGG    0x86
+#define FLAG_340 0x340
 
 #define FLAG_TRAINER_FLAG_START  0x500
 

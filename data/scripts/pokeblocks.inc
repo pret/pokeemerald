@@ -303,7 +303,7 @@ LilycoveCity_ContestLobby_EventScript_293CEE:: @ 8293CEE
 LilycoveCity_ContestLobby_EventScript_293D2C:: @ 8293D2C
 	copyvar VAR_0x8004, VAR_0x8009
 	fadescreen 1
-	special sub_807FA80
+	special DoBerryBlending
 	waitstate
 	releaseall
 	end
@@ -635,7 +635,7 @@ LilycoveCity_ContestLobby_EventScript_294147:: @ 8294147
 	removeobject 239
 	removeobject 238
 	removeobject 237
-	special sub_807FA80
+	special DoBerryBlending
 	waitstate
 	releaseall
 	end

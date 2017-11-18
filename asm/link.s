@@ -206,7 +206,7 @@ sub_8009570: @ 8009570
 	ldr r0, =sub_80096BC
 	bl SetVBlankCallback
 	bl sub_800A2E0
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -291,7 +291,7 @@ sub_8009638: @ 8009638
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x8]
 	strb r0, [r5, 0x13]
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	ldrh r0, [r0]
 	str r0, [r5, 0x14]
 	ldr r0, =gGameLanguage
@@ -1185,7 +1185,7 @@ _08009E2C:
 _08009E38:
 	ldr r0, =gUnknown_03003110
 	strh r2, [r0]
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldrh r1, [r1]
 	b _08009F04
 	.pool
@@ -1814,7 +1814,7 @@ _0800A30C:
 	str r7, [r4, 0x4]
 	b _0800A336
 _0800A324:
-	ldr r5, =gUnknown_020228C4
+	ldr r5, =gBlockSendBuffer
 	cmp r7, r5
 	beq _0800A334
 	adds r0, r5, 0
@@ -2772,7 +2772,7 @@ sub_800AA60: @ 800AA60
 	ldr r0, =gUnknown_02022A74
 	ldr r2, =0x00002288
 	mov r8, r2
-	ldr r7, =gUnknown_020229C6
+	ldr r7, =gLinkType
 	mov r6, r12
 	adds r6, 0x14
 	adds r5, r0, 0x4
@@ -3798,7 +3798,7 @@ sub_800B348: @ 800B348
 	strh r2, [r0]
 	ldrb r2, [r3, 0x2]
 	strb r2, [r0, 0x2]
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r2, 0x3C
 	bl memcpy
 	pop {r4-r6}
@@ -10306,7 +10306,7 @@ sub_800E700: @ 800E700
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _0800E732
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	strh r1, [r0]
 	bl sub_800AAF4
 	movs r0, 0
@@ -13149,7 +13149,7 @@ _0800FEC8:
 	str r7, [r5, 0x70]
 	b _0800FF1C
 _0800FF0A:
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	cmp r7, r4
 	beq _0800FF1A
 	adds r0, r4, 0
@@ -14734,7 +14734,7 @@ _08010B8C:
 	b _08010C4A
 	.pool
 _08010BC0:
-	ldr r5, =gUnknown_020228C4
+	ldr r5, =gBlockSendBuffer
 	adds r1, r5, 0
 	ldr r0, =gUnknown_082ED7EC
 	ldm r0!, {r2-r4}
@@ -14772,7 +14772,7 @@ _08010BE2:
 	adds r0, 0x1
 	strh r0, [r1, 0x8]
 _08010C0A:
-	ldr r5, =gUnknown_020228C4
+	ldr r5, =gBlockSendBuffer
 	ldr r1, =gUnknown_03005000
 	ldrb r0, [r1, 0xD]
 	strb r0, [r5, 0xF]
@@ -14796,7 +14796,7 @@ _08010C20:
 	mov r1, r12
 	movs r2, 0x8C
 	bl memcpy
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0xA0
 	bl SendBlock
@@ -14921,7 +14921,7 @@ _08010D56:
 	cmp r0, 0
 	beq _08010DA6
 	bl sub_800B348
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0x3C
 	bl SendBlock
@@ -16608,7 +16608,7 @@ sub_8011AFC: @ 8011AFC
 	lsls r0, 24
 	cmp r0, 0
 	beq _08011B70
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -20832,7 +20832,7 @@ _08013FFC:
 	b _0801405A
 	.pool
 _08014038:
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00002be0
@@ -21403,7 +21403,7 @@ _080145D8:
 	.pool
 _080145F4:
 	bl overworld_free_bg_tilemaps
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	bl sp000_heal_pokemon
@@ -21422,7 +21422,7 @@ _08014620:
 	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	movs r0, 0x2
@@ -21438,7 +21438,7 @@ _0801464C:
 	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	movs r0, 0x5
@@ -21450,7 +21450,7 @@ _0801464C:
 	b _080146B0
 	.pool
 _08014678:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	bl overworld_free_bg_tilemaps
@@ -21463,7 +21463,7 @@ _08014678:
 	b _080146B0
 	.pool
 _08014698:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	bl overworld_free_bg_tilemaps
@@ -21503,7 +21503,7 @@ _080146F6:
 	bl sub_801DD98
 	b _08014764
 _080146FC:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0
 	bl sub_80143E4
 	ldr r0, =sub_80141A4
@@ -21573,7 +21573,7 @@ sub_8014790: @ 8014790
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r7, r0, r1
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	mov r9, r0
 	movs r1, 0
 	ldrsh r0, [r7, r1]
@@ -23720,7 +23720,7 @@ _08015BBE:
 	bne _08015BCA
 	bl _08016878
 _08015BCA:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	ldr r0, =sub_80140E0
@@ -24247,7 +24247,7 @@ _080160DA:
 	bne _080160E4
 	b _08016878
 _080160E4:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	ldr r0, =sub_80140E0
@@ -33721,7 +33721,7 @@ _0801AE48:
 	beq _0801AE54
 	b _0801AFAE
 _0801AE54:
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x20
@@ -33738,7 +33738,7 @@ _0801AE78:
 	movs r0, 0x51
 _0801AE7A:
 	strb r0, [r4]
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0x20
 	bl SendBlock

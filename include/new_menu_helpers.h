@@ -13,5 +13,6 @@ void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
 void sub_8197434(u8 a0, u8 a1);
 void SetStandardWindowBorderStyle(u8 a0, u8 a1);
 void sub_8197930(void);
+u8 GetPlayerTextSpeed(void);
 
 #endif // GUARD_NEW_MENU_HELPERS_H

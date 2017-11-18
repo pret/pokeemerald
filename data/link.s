@@ -28,15 +28,15 @@ g2BlankTilesGfx:: @ 82ED168
 	.incbin "graphics/interface/blank_1x2.4bpp"
 
 gUnknown_082ED1A8:: @ 82ED1A8
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x000000C8
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x000000C8
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x00000064
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x000000DC
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x00000028
 
 gUnknown_082ED1D0:: @ 82ED1D0
@@ -224,15 +224,15 @@ gUnknown_082ED6A5:: @ 82ED6A5
 
 	.align 2
 gUnknown_082ED6B8:: @ 82ED6B8
-    .4byte gUnknown_020228C4
+    .4byte gBlockSendBuffer
 	.4byte 0x000000c8
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x000000c8
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x00000064
-	.4byte gUnknown_020228C4
+	.4byte gBlockSendBuffer
 	.4byte 0x000000dc
-    .4byte gUnknown_020228C4
+    .4byte gBlockSendBuffer
 	.4byte 0x00000028
 
 	.align 2

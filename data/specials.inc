@@ -171,7 +171,7 @@ gSpecials:: @ 81DBA64
 	def_special ChangePokemonNickname
 	def_special sub_81B94B0
 	def_special sub_8136EF4
-	def_special sub_807FA80
+	def_special DoBerryBlending
 	def_special sub_8142BC8
 	def_special sub_813BD60
 	def_special sub_813BCA8

@@ -10207,7 +10207,7 @@ sub_81CC158: @ 81CC158
 	adds r1, 0xF
 	bl sub_81CAF78
 	adds r5, r0, 0
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r2, [r4, 0x14]
@@ -23751,7 +23751,7 @@ sub_81D2BF4: @ 81D2BF4
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -28068,7 +28068,7 @@ sub_81D4E30: @ 81D4E30
 	lsls r2, 6
 	movs r1, 0
 	bl memset
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00005503
 	adds r0, r2, 0
 	strh r0, [r1]

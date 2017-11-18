@@ -2601,7 +2601,7 @@ sub_8136AB4: @ 8136AB4
 	ldr r1, =gText_ThrowAwayVar1
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2657,7 +2657,7 @@ sub_8136B78: @ 8136B78
 	ldr r1, =gText_Var1ThrownAway
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1

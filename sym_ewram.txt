@@ -34,13 +34,13 @@ gUnknown_020223C0: @ 20223C0
 gBlockRecvBuffer: @ 20223C4
 	.space 0x500
 
-gUnknown_020228C4: @ 20228C4 gBlockSendBuffer
+gBlockSendBuffer: @ 20228C4 gBlockSendBuffer
 	.space 0x100
 
 gUnknown_020229C4: @ 20229C4
 	.space 0x2
 
-gUnknown_020229C6: @ 20229C6
+gLinkType: @ 20229C6
 	.space 0x2
 
 gUnknown_020229C8: @ 20229C8
@@ -571,7 +571,7 @@ gUnknown_0203229C: @ 203229C
 gUnknown_020322A0: @ 20322A0
 	.space 0x4
 
-gUnknown_020322A4: @ 20322A4
+sBerryBlenderData: @ 20322A4
 	.space 0x4
 
 gUnknown_020322A8: @ 20322A8
