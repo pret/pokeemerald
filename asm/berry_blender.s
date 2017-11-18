@@ -7,1773 +7,7 @@
 
 
 
-	thumb_func_start sub_8080588
-sub_8080588: @ 8080588
-	push {r4,lr}
-	movs r0, 0
-	movs r1, 0
-	bl SetGpuReg
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	bl ResetTasks
-	ldr r0, =VBlankCB0_BerryBlender
-	bl SetVBlankCallback
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, =sBerryBlenderBgTemplates
-	movs r0, 0x1
-	movs r2, 0x3
-	bl InitBgsFromTemplates
-	ldr r4, =sBerryBlenderData
-	ldr r1, [r4]
-	movs r0, 0xDC
-	lsls r0, 1
-	adds r1, r0
-	movs r0, 0x1
-	bl SetBgTilemapBuffer
-	ldr r1, [r4]
-	ldr r3, =0x000009b8
-	adds r1, r3
-	movs r0, 0x2
-	bl SetBgTilemapBuffer
-	movs r0, 0
-	movs r1, 0x1
-	movs r2, 0xD0
-	bl sub_809882C
-	movs r0, 0
-	movs r1, 0x14
-	movs r2, 0xF0
-	bl copy_textbox_border_tile_patterns_to_vram
-	bl InitBerryBlenderWindows
-	ldr r2, [r4]
-	adds r0, r2, 0
-	adds r0, 0x44
-	movs r1, 0
-	strh r1, [r0]
-	adds r0, 0x8
-	strh r1, [r0]
-	subs r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x4
-	strh r1, [r0]
-	movs r3, 0x8E
-	lsls r3, 1
-	adds r0, r2, r3
-	strh r1, [r0]
-	adds r3, 0x2
-	adds r0, r2, r3
-	strh r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8080588
 
-	thumb_func_start task_tutorial_oak_boy_girl
-task_tutorial_oak_boy_girl: @ 8080624
-	push {lr}
-	lsls r0, 16
-	lsls r1, 24
-	lsrs r0, 24
-	adds r2, r0, 0
-	adds r2, 0x18
-	ldr r0, =sBerryBlenderData
-	ldr r0, [r0]
-	lsrs r1, 23
-	adds r0, 0x96
-	adds r0, r1
-	ldrb r0, [r0]
-	ldr r1, =gUnknown_083399E7
-	adds r0, r1
-	ldrb r1, [r0]
-	cmp r2, r1
-	bcc _0808066C
-	adds r0, r1, 0
-	adds r0, 0x30
-	cmp r2, r0
-	bcs _0808066C
-	subs r0, 0x1C
-	cmp r2, r0
-	bcc _08080668
-	adds r0, 0x8
-	cmp r2, r0
-	bcs _08080668
-	movs r0, 0x2
-	b _0808066E
-	.pool
-_08080668:
-	movs r0, 0x1
-	b _0808066E
-_0808066C:
-	movs r0, 0
-_0808066E:
-	pop {r1}
-	bx r1
-	thumb_func_end task_tutorial_oak_boy_girl
-
-	thumb_func_start sub_8080674
-sub_8080674: @ 8080674
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	lsls r0, 16
-	lsrs r5, r0, 16
-	lsls r1, 24
-	lsrs r1, 24
-	movs r6, 0
-	cmp r5, 0xAF
-	bne _080806AC
-	movs r4, 0
-	subs r7, r1, 0x1
-	adds r2, 0x9
-_08080690:
-	adds r0, r2, r6
-	adds r1, r2, r4
-	ldrb r0, [r0]
-	ldrb r1, [r1]
-	cmp r0, r1
-	bls _0808069E
-	adds r6, r4, 0
-_0808069E:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0x4
-	bls _08080690
-	adds r0, r6, 0x5
-	b _080806C4
-_080806AC:
-	adds r0, r5, 0
-	subs r0, 0x85
-	lsls r0, 16
-	lsrs r6, r0, 16
-	subs r7, r1, 0x1
-	cmp r6, 0x4
-	bls _080806C8
-	adds r0, r6, 0
-	movs r1, 0x5
-	bl __umodsi3
-	adds r0, 0x5
-_080806C4:
-	lsls r0, 16
-	lsrs r6, r0, 16
-_080806C8:
-	movs r4, 0
-	cmp r4, r7
-	bge _08080734
-	ldr r0, =gUnknown_08339CA0
-	mov r9, r0
-	adds r0, r5, 0
-	subs r0, 0xA3
-	lsls r0, 16
-	lsrs r0, 16
-	mov r8, r0
-_080806DC:
-	lsls r0, r6, 1
-	adds r0, r6
-	adds r0, r4, r0
-	add r0, r9
-	ldrb r5, [r0]
-	movs r0, 0xD0
-	lsls r0, 2
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808071A
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	cmp r0, 0x1
-	bne _0808071A
-	adds r0, r6, 0
-	movs r1, 0x5
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r6, r0, 16
-	ldr r0, =gUnknown_08339CBE
-	adds r0, r6, r0
-	ldrb r5, [r0]
-	mov r0, r8
-	cmp r0, 0x4
-	bhi _0808071A
-	subs r0, r5, 0x5
-	lsls r0, 16
-	lsrs r5, r0, 16
-_0808071A:
-	adds r4, 0x1
-	lsls r0, r4, 24
-	lsrs r0, 24
-	adds r1, r5, 0
-	adds r1, 0x85
-	lsls r1, 16
-	lsrs r1, 16
-	bl sub_8082FDC
-	lsls r4, 16
-	lsrs r4, 16
-	cmp r4, r7
-	blt _080806DC
-_08080734:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8080674
-
-	thumb_func_start sub_808074C
-sub_808074C: @ 808074C
-	push {r4-r7,lr}
-	movs r4, 0
-	ldr r7, =sBerryBlenderData
-	movs r6, 0xFF
-	ldr r5, =gUnknown_083399D0
-_08080756:
-	ldr r3, [r7]
-	lsls r2, r4, 1
-	adds r0, r3, 0
-	adds r0, 0x96
-	adds r0, r2
-	strh r6, [r0]
-	adds r1, r3, 0
-	adds r1, 0x8E
-	adds r1, r2
-	adds r0, r3, 0
-	adds r0, 0x7C
-	ldrb r0, [r0]
-	subs r0, 0x2
-	lsls r0, 2
-	adds r0, r4, r0
-	adds r0, r5
-	ldrb r0, [r0]
-	strh r0, [r1]
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _08080756
-	movs r3, 0
-	ldr r7, =sBerryBlenderData
-_08080784:
-	movs r4, 0
-	adds r6, r3, 0x1
-	lsls r5, r3, 1
-_0808078A:
-	ldr r2, [r7]
-	lsls r0, r4, 1
-	adds r1, r2, 0
-	adds r1, 0x8E
-	adds r1, r0
-	ldrh r0, [r1]
-	cmp r0, r3
-	bne _080807A2
-	adds r0, r2, 0
-	adds r0, 0x96
-	adds r0, r5
-	strh r4, [r0]
-_080807A2:
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _0808078A
-	adds r3, r6, 0
-	cmp r3, 0x3
-	ble _08080784
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808074C
-
-	thumb_func_start sub_80807BC
-sub_80807BC: @ 80807BC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x1C
-	movs r0, 0
-	mov r10, r0
-	ldr r0, =gReceivedRemoteLinkPlayers
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080807DE
-	bl GetMultiplayerId
-	lsls r0, 24
-	lsrs r0, 24
-	mov r10, r0
-_080807DE:
-	movs r6, 0
-	ldr r7, =sBerryBlenderData
-	mov r8, r6
-_080807E4:
-	ldr r2, [r7]
-	lsls r5, r6, 1
-	adds r0, r2, 0
-	adds r0, 0x8E
-	adds r3, r0, r5
-	ldrh r0, [r3]
-	cmp r0, 0xFF
-	beq _080808B6
-	adds r1, r2, 0
-	adds r1, 0x50
-	ldrh r3, [r3]
-	adds r1, r3
-	adds r0, r2, 0
-	adds r0, 0x54
-	adds r0, r6
-	ldrb r0, [r0]
-	movs r2, 0
-	mov r9, r2
-	strb r0, [r1]
-	ldr r0, [r7]
-	adds r1, r0, 0
-	adds r1, 0x8E
-	adds r1, r5
-	adds r0, 0x50
-	ldrh r1, [r1]
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gSprites
-	adds r0, r1
-	mov r1, r8
-	lsrs r4, r1, 24
-	adds r1, r4, 0
-	bl StartSpriteAnim
-	add r1, sp, 0x8
-	movs r0, 0xFF
-	strb r0, [r1]
-	ldr r0, [r7]
-	adds r0, 0x8E
-	adds r0, r5
-	ldrh r0, [r0]
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	ldr r0, =gLinkPlayers + 8
-	adds r1, r0
-	add r0, sp, 0x8
-	bl StringCopy
-	movs r0, 0x1
-	add r1, sp, 0x8
-	movs r2, 0x38
-	bl GetStringCenterAlignXOffset
-	adds r2, r0, 0
-	ldr r0, [r7]
-	adds r0, 0x8E
-	adds r0, r5
-	mov r5, r8
-	ldrh r0, [r0]
-	cmp r10, r0
-	bne _08080890
-	lsls r2, 24
-	lsrs r2, 24
-	mov r0, r9
-	str r0, [sp]
-	movs r0, 0x2
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	add r1, sp, 0x8
-	movs r3, 0x1
-	bl sub_80840D4
-	b _080808A6
-	.pool
-_08080890:
-	lsls r2, 24
-	lsrs r2, 24
-	mov r1, r9
-	str r1, [sp]
-	movs r0, 0x1
-	str r0, [sp, 0x4]
-	adds r0, r4, 0
-	add r1, sp, 0x8
-	movs r3, 0x1
-	bl sub_80840D4
-_080808A6:
-	lsrs r4, r5, 24
-	adds r0, r4, 0
-	bl PutWindowTilemap
-	adds r0, r4, 0
-	movs r1, 0x3
-	bl CopyWindowToVram
-_080808B6:
-	movs r2, 0x80
-	lsls r2, 17
-	add r8, r2
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _080807E4
-	add sp, 0x1C
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80807BC
-
-	thumb_func_start sub_80808D4
-sub_80808D4: @ 80808D4
-	push {r4-r7,lr}
-	sub sp, 0x4
-	ldr r1, =sBerryBlenderData
-	ldr r0, [r1]
-	ldrb r0, [r0]
-	adds r2, r1, 0
-	cmp r0, 0x15
-	bls _080808E6
-	b _08080DAE
-_080808E6:
-	lsls r0, 2
-	ldr r1, =_080808F8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080808F8:
-	.4byte _08080950
-	.4byte _080809E4
-	.4byte _08080A04
-	.4byte _08080A58
-	.4byte _08080A84
-	.4byte _08080DAE
-	.4byte _08080DAE
-	.4byte _08080DAE
-	.4byte _08080ABC
-	.4byte _08080DAE
-	.4byte _08080DAE
-	.4byte _08080AEC
-	.4byte _08080B3C
-	.4byte _08080BB0
-	.4byte _08080BDC
-	.4byte _08080C78
-	.4byte _08080CA0
-	.4byte _08080DAE
-	.4byte _08080CAE
-	.4byte _08080CAE
-	.4byte _08080CAE
-	.4byte _08080CC4
-_08080950:
-	bl sub_800B4C0
-	bl sub_8080588
-	ldr r4, =gSpecialVar_ItemId
-	ldrh r1, [r4]
-	movs r0, 0
-	bl sub_8082FDC
-	ldr r5, =sBerryBlenderData
-	ldr r0, [r5]
-	movs r6, 0xAC
-	lsls r6, 1
-	adds r0, r6
-	ldrh r1, [r4]
-	bl Blender_CopyBerryData
-	ldrh r0, [r4]
-	ldr r2, [r5]
-	adds r1, r2, 0
-	adds r1, 0x7C
-	ldrb r1, [r1]
-	adds r2, r6
-	bl sub_8080674
-	movs r4, 0
-	movs r6, 0
-	ldr r0, =gLinkType
-	mov r12, r0
-	movs r7, 0x92
-	lsls r7, 1
-_0808098E:
-	ldr r0, [r5]
-	lsls r1, r4, 1
-	adds r0, 0x64
-	adds r0, r1
-	strh r6, [r0]
-	adds r3, r4, 0x1
-	adds r1, r4
-	lsls r1, 1
-	movs r2, 0x2
-_080809A0:
-	ldr r0, [r5]
-	adds r0, r7
-	adds r0, r1
-	strh r6, [r0]
-	adds r1, 0x2
-	subs r2, 0x1
-	cmp r2, 0
-	bge _080809A0
-	adds r4, r3, 0
-	cmp r4, 0x3
-	ble _0808098E
-	ldr r4, =sBerryBlenderData
-	ldr r3, [r4]
-	adds r1, r3, 0
-	adds r1, 0x70
-	movs r2, 0
-	movs r0, 0
-	strh r0, [r1]
-	strb r2, [r3, 0x1]
-	ldr r1, =0x00004422
-	adds r0, r1, 0
-	mov r2, r12
-	strh r0, [r2]
-	ldr r1, [r4]
-	b _08080CB2
-	.pool
-_080809E4:
-	bl LoadBerryBlenderGfx
-	lsls r0, 24
-	cmp r0, 0
-	bne _080809F0
-	b _08080DAE
-_080809F0:
-	ldr r0, =sBerryBlenderData
-	ldr r1, [r0]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	bl sub_8082D28
-	b _08080DAE
-	.pool
-_08080A04:
-	movs r4, 0
-	ldr r5, =sBlenderSyncArrowsPos
-	ldr r6, =sBerryBlenderData
-_08080A0A:
-	ldrb r1, [r5]
-	ldrb r2, [r5, 0x1]
-	ldr r0, =sBlenderSyncArrow_SpriteTemplate
-	movs r3, 0x1
-	bl CreateSprite
-	ldr r1, [r6]
-	adds r1, 0x54
-	adds r1, r4
-	strb r0, [r1]
-	ldr r0, [r6]
-	adds r0, 0x54
-	adds r0, r4
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gSprites
-	adds r0, r1
-	adds r1, r4, 0
-	adds r1, 0x8
-	lsls r1, 24
-	lsrs r1, 24
-	bl StartSpriteAnim
-	adds r5, 0x2
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _08080A0A
-	b _08080CAE
-	.pool
-_08080A58:
-	movs r0, 0x1
-	negs r0, r0
-	movs r4, 0
-	str r4, [sp]
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r2, =sBerryBlenderData
-	ldr r1, [r2]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r0, [r2]
-	movs r3, 0x84
-	lsls r3, 1
-	adds r0, r3
-	str r4, [r0]
-	b _08080DAE
-	.pool
-_08080A84:
-	ldr r4, =sBerryBlenderData
-	ldr r1, [r4]
-	movs r5, 0x84
-	lsls r5, 1
-	adds r1, r5
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	cmp r0, 0x2
-	bne _08080A9C
-	bl sub_807F9D0
-_08080A9C:
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08080AAA
-	b _08080DAE
-_08080AAA:
-	ldr r1, [r4]
-	movs r0, 0x8
-	strb r0, [r1]
-	b _08080DAE
-	.pool
-_08080ABC:
-	ldr r2, =sBerryBlenderData
-	ldr r1, [r2]
-	movs r3, 0
-	movs r0, 0xB
-	strb r0, [r1]
-	ldr r0, [r2]
-	movs r1, 0x8A
-	lsls r1, 1
-	adds r0, r1
-	strb r3, [r0]
-	b _08080DAE
-	.pool
-_08080AD8:
-	lsls r1, 1
-	adds r0, r3, 0
-	adds r0, 0x74
-	adds r0, r1
-	ldrh r0, [r0]
-	lsls r1, r4, 24
-	lsrs r1, 24
-	bl sub_807FD90
-	b _08080B16
-_08080AEC:
-	movs r4, 0
-	ldr r2, =gUnknown_083399D0
-	ldr r0, =sBerryBlenderData
-	ldr r3, [r0]
-	adds r0, r3, 0
-	adds r0, 0x7C
-	ldrb r0, [r0]
-	subs r0, 0x2
-	lsls r0, 2
-	movs r5, 0x8A
-	lsls r5, 1
-	adds r1, r3, r5
-	ldrb r1, [r1]
-	adds r0, r2
-_08080B08:
-	ldrb r2, [r0]
-	cmp r1, r2
-	beq _08080AD8
-	adds r0, 0x1
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _08080B08
-_08080B16:
-	ldr r3, =sBerryBlenderData
-	ldr r1, [r3]
-	movs r5, 0x84
-	lsls r5, 1
-	adds r2, r1, r5
-	movs r0, 0
-	str r0, [r2]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r1, [r3]
-	movs r0, 0x8A
-	lsls r0, 1
-	adds r1, r0
-	b _08080CB2
-	.pool
-_08080B3C:
-	ldr r3, [r2]
-	movs r2, 0x84
-	lsls r2, 1
-	adds r1, r3, r2
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	cmp r0, 0x3C
-	bgt _08080B50
-	b _08080DAE
-_08080B50:
-	movs r5, 0x8A
-	lsls r5, 1
-	adds r0, r3, r5
-	adds r4, r3, 0
-	adds r4, 0x7C
-	ldrb r0, [r0]
-	ldrb r1, [r4]
-	cmp r0, r1
-	bcc _08080B94
-	ldr r2, =gUnknown_083399DC
-	ldr r1, =gUnknown_083399E4
-	ldrb r0, [r4]
-	subs r0, 0x2
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 1
-	adds r0, r2
-	ldr r2, =0xffffa800
-	adds r1, r2, 0
-	ldrh r0, [r0]
-	adds r1, r0
-	adds r0, r3, 0
-	adds r0, 0x4A
-	strh r1, [r0]
-	ldrb r0, [r3]
-	adds r0, 0x1
-	b _08080B98
-	.pool
-_08080B94:
-	ldrb r0, [r3]
-	subs r0, 0x1
-_08080B98:
-	strb r0, [r3]
-	ldr r0, =sBerryBlenderData
-	ldr r0, [r0]
-	movs r3, 0x84
-	lsls r3, 1
-	adds r0, r3
-	movs r1, 0
-	str r1, [r0]
-	b _08080DAE
-	.pool
-_08080BB0:
-	ldr r4, =sBerryBlenderData
-	ldr r1, [r4]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	bl sub_808074C
-	movs r0, 0x2B
-	bl PlaySE
-	ldr r0, [r4]
-	movs r5, 0xA0
-	lsls r5, 1
-	adds r0, r5
-	bl sub_8082CB4
-	movs r0, 0x2
-	bl ShowBg
-	b _08080DAE
-	.pool
-_08080BDC:
-	movs r1, 0x80
-	lsls r1, 3
-	movs r0, 0
-	bl SetGpuRegBits
-	ldr r4, =sBerryBlenderData
-	ldr r2, [r4]
-	adds r1, r2, 0
-	adds r1, 0x4A
-	movs r3, 0x80
-	lsls r3, 2
-	adds r0, r3, 0
-	ldrh r5, [r1]
-	adds r0, r5
-	strh r0, [r1]
-	movs r0, 0x8D
-	lsls r0, 1
-	adds r1, r2, r0
-	ldrh r0, [r1]
-	adds r0, 0x4
-	strh r0, [r1]
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0xFF
-	bls _08080C5C
-	ldrb r0, [r2]
-	adds r0, 0x1
-	strb r0, [r2]
-	ldr r3, [r4]
-	movs r2, 0x8D
-	lsls r2, 1
-	adds r1, r3, r2
-	movs r0, 0x80
-	lsls r0, 1
-	strh r0, [r1]
-	ldr r2, =gUnknown_083399DC
-	ldr r1, =gUnknown_083399E4
-	adds r0, r3, 0
-	adds r0, 0x7C
-	ldrb r0, [r0]
-	subs r0, 0x2
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 1
-	adds r0, r2
-	ldrh r1, [r0]
-	adds r0, r3, 0
-	adds r0, 0x4A
-	strh r1, [r0]
-	movs r0, 0xC
-	movs r1, 0x2
-	bl SetGpuRegBits
-	ldr r0, [r4]
-	movs r3, 0x84
-	lsls r3, 1
-	adds r0, r3
-	movs r1, 0
-	str r1, [r0]
-	movs r0, 0x34
-	bl PlaySE
-	bl sub_80807BC
-_08080C5C:
-	ldr r0, [r4]
-	movs r5, 0xA0
-	lsls r5, 1
-	adds r0, r5
-	bl sub_8082CB4
-	b _08080DAE
-	.pool
-_08080C78:
-	bl sub_8083380
-	lsls r0, 24
-	cmp r0, 0
-	beq _08080C8C
-	ldr r0, =sBerryBlenderData
-	ldr r1, [r0]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_08080C8C:
-	ldr r0, =sBerryBlenderData
-	ldr r0, [r0]
-	movs r1, 0xA0
-	lsls r1, 1
-	adds r0, r1
-	bl sub_8082CB4
-	b _08080DAE
-	.pool
-_08080CA0:
-	ldr r0, =gUnknown_08339C2C
-	movs r2, 0x10
-	negs r2, r2
-	movs r1, 0x78
-	movs r3, 0x3
-	bl CreateSprite
-_08080CAE:
-	ldr r0, =sBerryBlenderData
-	ldr r1, [r0]
-_08080CB2:
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _08080DAE
-	.pool
-_08080CC4:
-	bl sub_8080DF8
-	ldr r5, =sBerryBlenderData
-	ldr r4, [r5]
-	adds r1, r4, 0
-	adds r1, 0x4C
-	movs r3, 0
-	movs r2, 0
-	movs r0, 0x80
-	strh r0, [r1]
-	movs r1, 0x82
-	lsls r1, 1
-	adds r0, r4, r1
-	str r2, [r0]
-	ldr r2, =0x00000123
-	adds r0, r4, r2
-	strb r3, [r0]
-	ldr r0, [r5]
-	adds r0, 0x72
-	strb r3, [r0]
-	ldr r0, =sub_8081898
-	bl SetMainCallback2
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	cmp r0, 0x1
-	bne _08080D44
-	movs r0, 0xD0
-	lsls r0, 2
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	bne _08080D30
-	ldr r0, =sub_8081224
-	movs r1, 0xA
-	bl CreateTask
-	ldr r1, [r5]
-	movs r3, 0x90
-	lsls r3, 1
-	adds r1, r3
-	b _08080D42
-	.pool
-_08080D30:
-	ldr r0, =gUnknown_083399EC
-	ldr r0, [r0]
-	movs r1, 0xA
-	bl CreateTask
-	ldr r1, [r5]
-	movs r5, 0x90
-	lsls r5, 1
-	adds r1, r5
-_08080D42:
-	strb r0, [r1]
-_08080D44:
-	ldr r1, =gSpecialVar_0x8004
-	ldrh r0, [r1]
-	cmp r0, 0x1
-	bls _08080D80
-	movs r4, 0
-	ldrh r1, [r1]
-	cmp r4, r1
-	bge _08080D80
-	movs r5, 0xA0
-	lsls r5, 20
-	ldr r6, =gUnknown_083399EC
-_08080D5A:
-	ldm r6!, {r0}
-	lsrs r1, r5, 24
-	bl CreateTask
-	ldr r1, =sBerryBlenderData
-	ldr r1, [r1]
-	movs r2, 0x90
-	lsls r2, 1
-	adds r1, r2
-	adds r1, r4
-	strb r0, [r1]
-	movs r3, 0x80
-	lsls r3, 17
-	adds r5, r3
-	adds r4, 0x1
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	cmp r4, r0
-	blt _08080D5A
-_08080D80:
-	bl GetCurrentMapMusic
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r4, =0x00000193
-	cmp r0, r4
-	beq _08080D9E
-	bl GetCurrentMapMusic
-	ldr r1, =sBerryBlenderData
-	ldr r1, [r1]
-	movs r5, 0xAA
-	lsls r5, 1
-	adds r1, r5
-	strh r0, [r1]
-_08080D9E:
-	adds r0, r4, 0
-	bl PlayBGM
-	movs r0, 0x35
-	bl PlaySE
-	bl Blender_ControlHitPitch
-_08080DAE:
-	ldr r0, =sBerryBlenderData
-	ldr r1, [r0]
-	movs r2, 0x8E
-	lsls r2, 1
-	adds r0, r1, r2
-	movs r3, 0
-	ldrsh r0, [r0, r3]
-	movs r5, 0x8F
-	lsls r5, 1
-	adds r1, r5
-	movs r2, 0
-	ldrsh r1, [r1, r2]
-	bl Blender_DummiedOutFunc
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl RunTextPrinters
-	bl UpdatePaletteFade
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80808D4
-
-	thumb_func_start sub_8080DF8
-sub_8080DF8: @ 8080DF8
-	push {lr}
-	ldr r3, =gUnknown_03003110
-	movs r0, 0
-	ldr r1, =gUnknown_03003090
-	movs r2, 0x3
-_08080E02:
-	strh r0, [r3]
-	strh r0, [r3, 0x4]
-	strh r0, [r1]
-	strh r0, [r1, 0x4]
-	adds r1, 0x10
-	subs r2, 0x1
-	cmp r2, 0
-	bge _08080E02
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8080DF8
-
-	thumb_func_start sub_8080E20
-sub_8080E20: @ 8080E20
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r3, r0, 24
-	ldr r1, =gTasks
-	lsls r0, r3, 2
-	adds r0, r3
-	lsls r0, 3
-	adds r2, r0, r1
-	ldrh r0, [r2, 0x8]
-	adds r0, 0x1
-	strh r0, [r2, 0x8]
-	lsls r0, 16
-	asrs r0, 16
-	movs r4, 0xA
-	ldrsh r1, [r2, r4]
-	cmp r0, r1
-	ble _08080E58
-	ldr r0, =gUnknown_03003090
-	movs r4, 0xC
-	ldrsh r1, [r2, r4]
-	lsls r1, 4
-	adds r0, 0x4
-	adds r1, r0
-	ldr r0, =0x00002345
-	strh r0, [r1]
-	adds r0, r3, 0
-	bl DestroyTask
-_08080E58:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8080E20
-
-	thumb_func_start sub_8080E6C
-sub_8080E6C: @ 8080E6C
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, =sub_8080E20
-	movs r1, 0x50
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	strh r4, [r1, 0xA]
-	strh r5, [r1, 0xC]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8080E6C
-
-	thumb_func_start sub_8080EA4
-sub_8080EA4: @ 8080EA4
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r4, =sBerryBlenderData
-	ldr r0, [r4]
-	adds r0, 0x4A
-	ldrh r0, [r0]
-	movs r1, 0x1
-	bl task_tutorial_oak_boy_girl
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	beq _08080EC2
-	b _08080FB8
-_08080EC2:
-	ldr r2, =gTasks
-	lsls r1, r5, 2
-	adds r0, r1, r5
-	lsls r0, 3
-	adds r0, r2
-	movs r2, 0x8
-	ldrsh r0, [r0, r2]
-	adds r6, r1, 0
-	cmp r0, 0
-	beq _08080ED8
-	b _08080FC6
-_08080ED8:
-	ldr r0, [r4]
-	ldr r1, =0x00000123
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08080F9A
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r1, =0x0000028f
-	bl __udivsi3
-	lsls r0, 24
-	lsrs r1, r0, 24
-	adds r3, r1, 0
-	ldr r0, [r4]
-	adds r0, 0x4C
-	movs r4, 0
-	ldrsh r2, [r0, r4]
-	ldr r0, =0x000001f3
-	cmp r2, r0
-	bgt _08080F40
-	cmp r1, 0x4B
-	bls _08080F2C
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00004523
-	b _08080F30
-	.pool
-_08080F2C:
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00005432
-_08080F30:
-	strh r0, [r1, 0x14]
-	ldr r0, =0x00005432
-	b _08080F9E
-	.pool
-_08080F40:
-	ldr r0, =0x000005db
-	cmp r2, r0
-	bgt _08080F6E
-	cmp r1, 0x50
-	bhi _08080F9A
-	adds r0, r1, 0
-	subs r0, 0x15
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x3B
-	bhi _08080F68
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00005432
-	b _08080F9E
-	.pool
-_08080F68:
-	cmp r1, 0x9
-	bhi _08080FA0
-	b _08080F90
-_08080F6E:
-	cmp r1, 0x5A
-	bhi _08080F9A
-	adds r0, r1, 0
-	subs r0, 0x47
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x13
-	bhi _08080F8C
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00005432
-	b _08080F9E
-	.pool
-_08080F8C:
-	cmp r3, 0x1D
-	bhi _08080FA0
-_08080F90:
-	movs r0, 0x1
-	movs r1, 0x5
-	bl sub_8080E6C
-	b _08080FA0
-_08080F9A:
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00004523
-_08080F9E:
-	strh r0, [r1, 0x14]
-_08080FA0:
-	ldr r0, =gTasks
-	adds r1, r6, r5
-	lsls r1, 3
-	adds r1, r0
-	movs r0, 0x1
-	b _08080FC4
-	.pool
-_08080FB8:
-	ldr r0, =gTasks
-	lsls r1, r5, 2
-	adds r1, r5
-	lsls r1, 3
-	adds r1, r0
-	movs r0, 0
-_08080FC4:
-	strh r0, [r1, 0x8]
-_08080FC6:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8080EA4
-
-	thumb_func_start sub_8080FD0
-sub_8080FD0: @ 8080FD0
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r6, =sBerryBlenderData
-	ldr r3, [r6]
-	adds r0, r3, 0
-	adds r0, 0x4A
-	ldrh r0, [r0]
-	movs r1, 0xC0
-	lsls r1, 5
-	adds r0, r1
-	ldr r1, =0x0000ffff
-	ands r0, r1
-	adds r1, r3, 0
-	adds r1, 0x9A
-	ldrb r1, [r1]
-	lsrs r2, r0, 8
-	ldr r0, =gUnknown_083399E7
-	adds r1, r0
-	ldrb r1, [r1]
-	adds r0, r1, 0
-	adds r0, 0x14
-	cmp r2, r0
-	bls _080810E0
-	adds r0, 0x14
-	cmp r2, r0
-	bcs _080810E0
-	ldr r2, =gTasks
-	lsls r1, r4, 2
-	adds r0, r1, r4
-	lsls r0, 3
-	adds r2, r0, r2
-	movs r5, 0x8
-	ldrsh r0, [r2, r5]
-	adds r5, r1, 0
-	cmp r0, 0
-	bne _080810EE
-	ldr r1, =0x00000123
-	adds r0, r3, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080810CC
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r1, =0x0000028f
-	bl __udivsi3
-	lsls r0, 24
-	lsrs r2, r0, 24
-	adds r3, r2, 0
-	ldr r0, [r6]
-	adds r0, 0x4C
-	movs r6, 0
-	ldrsh r1, [r0, r6]
-	ldr r0, =0x000001f3
-	cmp r1, r0
-	bgt _08081088
-	cmp r2, 0x42
-	bls _08081078
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00004523
-	strh r0, [r1, 0x24]
-	b _080810B0
-	.pool
-_08081078:
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00005432
-	strh r0, [r1, 0x24]
-	b _080810B0
-	.pool
-_08081088:
-	cmp r2, 0x41
-	bls _08081092
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00004523
-	strh r0, [r1, 0x24]
-_08081092:
-	adds r0, r2, 0
-	subs r0, 0x29
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x18
-	bhi _080810A4
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00005432
-	strh r0, [r1, 0x24]
-_080810A4:
-	cmp r3, 0x9
-	bhi _080810B0
-	movs r0, 0x2
-	movs r1, 0x5
-	bl sub_8080E6C
-_080810B0:
-	ldr r0, =gTasks
-	adds r1, r5, r4
-	lsls r1, 3
-	adds r1, r0
-	movs r0, 0x1
-	b _080810EC
-	.pool
-_080810CC:
-	ldr r0, =gUnknown_03003090
-	ldr r1, =0x00004523
-	strh r1, [r0, 0x24]
-	movs r0, 0x1
-	strh r0, [r2, 0x8]
-	b _080810EE
-	.pool
-_080810E0:
-	ldr r0, =gTasks
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	movs r0, 0
-_080810EC:
-	strh r0, [r1, 0x8]
-_080810EE:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8080FD0
-
-	thumb_func_start sub_80810F8
-sub_80810F8: @ 80810F8
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r5, =sBerryBlenderData
-	ldr r3, [r5]
-	adds r0, r3, 0
-	adds r0, 0x4A
-	ldrh r0, [r0]
-	movs r1, 0xC0
-	lsls r1, 5
-	adds r0, r1
-	ldr r1, =0x0000ffff
-	ands r0, r1
-	adds r1, r3, 0
-	adds r1, 0x9C
-	ldrb r1, [r1]
-	lsrs r2, r0, 8
-	ldr r0, =gUnknown_083399E7
-	adds r1, r0
-	ldrb r1, [r1]
-	adds r0, r1, 0
-	adds r0, 0x14
-	cmp r2, r0
-	bls _0808120C
-	adds r0, 0x14
-	cmp r2, r0
-	bcs _0808120C
-	ldr r2, =gTasks
-	lsls r1, r4, 2
-	adds r0, r1, r4
-	lsls r0, 3
-	adds r2, r0, r2
-	movs r6, 0x8
-	ldrsh r0, [r2, r6]
-	adds r6, r1, 0
-	cmp r0, 0
-	bne _0808121A
-	ldr r1, =0x00000123
-	adds r0, r3, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080811F8
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r1, =0x0000028f
-	bl __udivsi3
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r0, [r5]
-	adds r0, 0x4C
-	movs r3, 0
-	ldrsh r1, [r0, r3]
-	ldr r0, =0x000001f3
-	cmp r1, r0
-	bgt _080811AC
-	cmp r2, 0x58
-	bls _0808119C
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00004523
-	strh r0, [r1, 0x34]
-	b _080811DE
-	.pool
-_0808119C:
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00005432
-	strh r0, [r1, 0x34]
-	b _080811DE
-	.pool
-_080811AC:
-	cmp r2, 0x3C
-	bls _080811C0
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00004523
-	b _080811D0
-	.pool
-_080811C0:
-	adds r0, r2, 0
-	subs r0, 0x38
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x4
-	bhi _080811D2
-	ldr r1, =gUnknown_03003090
-	ldr r0, =0x00005432
-_080811D0:
-	strh r0, [r1, 0x34]
-_080811D2:
-	cmp r2, 0x4
-	bhi _080811DE
-	movs r0, 0x3
-	movs r1, 0x5
-	bl sub_8080E6C
-_080811DE:
-	ldr r0, =gTasks
-	adds r1, r6, r4
-	lsls r1, 3
-	adds r1, r0
-	movs r0, 0x1
-	b _08081218
-	.pool
-_080811F8:
-	ldr r0, =gUnknown_03003090
-	ldr r1, =0x00004523
-	strh r1, [r0, 0x34]
-	movs r0, 0x1
-	strh r0, [r2, 0x8]
-	b _0808121A
-	.pool
-_0808120C:
-	ldr r0, =gTasks
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	movs r0, 0
-_08081218:
-	strh r0, [r1, 0x8]
-_0808121A:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80810F8
-
-	thumb_func_start sub_8081224
-sub_8081224: @ 8081224
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, =sBerryBlenderData
-	ldr r0, [r0]
-	adds r0, 0x4A
-	ldrh r0, [r0]
-	movs r1, 0x1
-	bl task_tutorial_oak_boy_girl
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	bne _08081270
-	ldr r0, =gTasks
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r2, r1, r0
-	movs r1, 0x8
-	ldrsh r0, [r2, r1]
-	cmp r0, 0
-	bne _0808127E
-	ldr r0, =gUnknown_03003090
-	ldr r1, =0x00004523
-	strh r1, [r0, 0x14]
-	movs r0, 0x1
-	strh r0, [r2, 0x8]
-	b _0808127E
-	.pool
-_08081270:
-	ldr r0, =gTasks
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	movs r0, 0
-	strh r0, [r1, 0x8]
-_0808127E:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8081224
-
-	thumb_func_start sub_8081288
-sub_8081288: @ 8081288
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 16
-	lsrs r7, r0, 16
-	mov r8, r7
-	lsls r1, 24
-	ldr r0, =gUnknown_08339B40
-	ldr r4, =sBlenderSyncArrowsPos
-	lsrs r1, 23
-	adds r2, r1, r4
-	ldrb r6, [r2]
-	ldr r5, =gUnknown_083399C0
-	adds r2, r1, r5
-	movs r3, 0
-	ldrsb r3, [r2, r3]
-	lsls r2, r3, 2
-	adds r2, r3
-	lsls r2, 1
-	subs r6, r2
-	adds r4, 0x1
-	adds r4, r1, r4
-	ldrb r2, [r4]
-	adds r5, 0x1
-	adds r1, r5
-	movs r3, 0
-	ldrsb r3, [r1, r3]
-	lsls r1, r3, 2
-	adds r1, r3
-	lsls r1, 1
-	subs r2, r1
-	adds r1, r6, 0
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r1, r0, 24
-	adds r2, r1, 0
-	ldr r0, =0x00004523
-	cmp r7, r0
-	bne _08081314
-	lsls r4, r1, 4
-	adds r4, r1
-	lsls r4, 2
-	ldr r5, =gSprites
-	adds r0, r4, r5
-	movs r1, 0x2
-	bl StartSpriteAnim
-	adds r5, 0x1C
-	adds r4, r5
-	ldr r0, =sub_8082F9C
-	str r0, [r4]
-	movs r0, 0x28
-	bl PlaySE
-	b _08081358
-	.pool
-_08081314:
-	ldr r0, =0x00005432
-	cmp r7, r0
-	bne _0808133C
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gSprites
-	adds r0, r1
-	movs r1, 0
-	bl StartSpriteAnim
-	movs r0, 0x1F
-	bl PlaySE
-	b _08081358
-	.pool
-_0808133C:
-	ldr r0, =0x00002345
-	cmp r8, r0
-	bne _08081358
-	lsls r0, r2, 4
-	adds r0, r2
-	lsls r0, 2
-	ldr r1, =gSprites
-	adds r0, r1
-	movs r1, 0x1
-	bl StartSpriteAnim
-	movs r0, 0x20
-	bl PlaySE
-_08081358:
-	bl sub_8082E84
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8081288
-
-	thumb_func_start sub_8081370
-sub_8081370: @ 8081370
-	push {r4-r7,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	adds r5, r4, 0
-	bl Blender_ControlHitPitch
-	ldr r0, =0x00004523
-	cmp r4, r0
-	beq _080813A4
-	cmp r4, r0
-	bgt _08081398
-	ldr r0, =0x00002345
-	cmp r4, r0
-	beq _08081474
-	b _080814A0
-	.pool
-_08081398:
-	ldr r0, =0x00005432
-	cmp r5, r0
-	beq _0808143C
-	b _080814A0
-	.pool
-_080813A4:
-	ldr r7, =sBerryBlenderData
-	ldr r4, [r7]
-	adds r5, r4, 0
-	adds r5, 0x4C
-	ldrh r6, [r5]
-	movs r0, 0
-	ldrsh r1, [r5, r0]
-	ldr r0, =0x000005db
-	cmp r1, r0
-	bgt _080813E0
-	ldr r1, =gUnknown_08339CC3
-	adds r0, r4, 0
-	adds r0, 0x7C
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0xC0
-	lsls r0, 1
-	bl __divsi3
-	adds r0, r6, r0
-	strh r0, [r5]
-	b _080814A0
-	.pool
-_080813E0:
-	ldr r1, =gUnknown_08339CC3
-	adds r0, r4, 0
-	adds r0, 0x7C
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x80
-	bl __divsi3
-	adds r0, r6, r0
-	strh r0, [r5]
-	movs r1, 0x8E
-	lsls r1, 1
-	adds r4, r1
-	movs r1, 0
-	ldrsh r0, [r5, r1]
-	movs r1, 0x64
-	bl __divsi3
-	adds r1, r0, 0
-	subs r1, 0xA
-	lsls r1, 16
-	lsrs r1, 16
-	adds r0, r4, 0
-	bl sub_80832BC
-	ldr r0, [r7]
-	movs r1, 0x8F
-	lsls r1, 1
-	adds r4, r0, r1
-	adds r0, 0x4C
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	movs r1, 0x64
-	bl __divsi3
-	adds r1, r0, 0
-	subs r1, 0xA
-	lsls r1, 16
-	lsrs r1, 16
-	adds r0, r4, 0
-	bl sub_80832BC
-	b _080814A0
-	.pool
-_0808143C:
-	ldr r0, =sBerryBlenderData
-	ldr r2, [r0]
-	adds r4, r2, 0
-	adds r4, 0x4C
-	ldrh r5, [r4]
-	movs r0, 0
-	ldrsh r1, [r4, r0]
-	ldr r0, =0x000005db
-	cmp r1, r0
-	bgt _080814A0
-	ldr r1, =gUnknown_08339CC3
-	adds r0, r2, 0
-	adds r0, 0x7C
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x80
-	lsls r0, 1
-	bl __divsi3
-	adds r0, r5, r0
-	b _0808149E
-	.pool
-_08081474:
-	ldr r0, =sBerryBlenderData
-	ldr r0, [r0]
-	adds r4, r0, 0
-	adds r4, 0x4C
-	ldr r1, =gUnknown_08339CC3
-	adds r0, 0x7C
-	ldrb r0, [r0]
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x80
-	lsls r0, 1
-	bl __divsi3
-	ldrh r1, [r4]
-	subs r1, r0
-	strh r1, [r4]
-	lsls r1, 16
-	asrs r1, 16
-	cmp r1, 0x7F
-	bgt _080814A0
-	movs r0, 0x80
-_0808149E:
-	strh r0, [r4]
-_080814A0:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8081370
-
-	thumb_func_start sub_80814B0
-sub_80814B0: @ 80814B0
-	push {lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	lsls r1, 16
-	lsrs r1, 16
-	lsls r2, 16
-	lsrs r2, 16
-	ldr r0, =gReceivedRemoteLinkPlayers
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080814E4
-	ldr r0, =gLinkVSyncDisabled
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080814E4
-	movs r0, 0xFF
-	lsls r0, 8
-	ands r0, r3
-	cmp r0, r2
-	bne _080814EC
-	movs r0, 0x1
-	b _080814EE
-	.pool
-_080814E4:
-	cmp r3, r1
-	bne _080814EC
-	movs r0, 0x1
-	b _080814EE
-_080814EC:
-	movs r0, 0
-_080814EE:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80814B0
 
 	thumb_func_start sub_80814F4
 sub_80814F4: @ 80814F4
@@ -1787,9 +21,9 @@ sub_80814F4: @ 80814F4
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0808153C
-	ldr r3, =gUnknown_03003110
+	ldr r3, =gSendCmd
 	ldrh r0, [r3, 0x4]
-	ldr r2, =gUnknown_03003090
+	ldr r2, =gRecvCmds
 	cmp r0, 0
 	beq _0808151C
 	movs r1, 0
@@ -1798,7 +32,7 @@ sub_80814F4: @ 80814F4
 	strh r0, [r2]
 	strh r1, [r3, 0x4]
 _0808151C:
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	ldr r3, =0x00004444
 	adds r1, r2, 0
 	adds r1, 0x10
@@ -1826,7 +60,7 @@ _0808153C:
 	blt _0808154C
 	b _080816F6
 _0808154C:
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	adds r2, r0, 0
 	adds r2, 0x20
 	str r2, [sp]
@@ -2022,7 +256,7 @@ _080816F6:
 	cmp r7, r0
 	bge _08081722
 	movs r2, 0
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 _08081710:
 	strh r2, [r1]
 	strh r2, [r1, 0x4]
@@ -2123,24 +357,24 @@ _080817BA:
 	adds r0, 0x4A
 	ldrh r0, [r0]
 	adds r1, r6, 0
-	bl task_tutorial_oak_boy_girl
+	bl sub_8080624
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _08081810
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	ldr r0, =0x00004523
 	b _08081828
 	.pool
 _08081810:
 	cmp r0, 0x1
 	bne _08081824
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	ldr r0, =0x00005432
 	b _08081828
 	.pool
 _08081824:
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	ldr r0, =0x00002345
 _08081828:
 	strh r0, [r1, 0x4]
@@ -3593,7 +1827,7 @@ _0808239E:
 	b _0808249E
 	.pool
 _080823B0:
-	ldr r6, =gUnknown_03003110
+	ldr r6, =gSendCmd
 	adds r0, r6, 0
 	bl sub_8081F94
 	ldr r4, =sBerryBlenderData
@@ -4389,7 +2623,7 @@ sub_8082AD4: @ 8082AD4
 	bne _08082AE0
 	b _08082CA4
 _08082AE0:
-	ldr r4, =gUnknown_03003090
+	ldr r4, =gRecvCmds
 	ldrh r0, [r4]
 	ldr r1, =0x00002fff
 	movs r2, 0xBC
@@ -4468,7 +2702,7 @@ _08082B8A:
 	b _08082BF4
 	.pool
 _08082B9C:
-	ldr r6, =gUnknown_03003090
+	ldr r6, =gRecvCmds
 	lsls r4, r5, 4
 	adds r0, r4, r6
 	ldrh r0, [r0]
@@ -4563,7 +2797,7 @@ _08082C4E:
 	cmp r0, r4
 	beq _08082C48
 _08082C6A:
-	ldr r4, =gUnknown_03003110
+	ldr r4, =gSendCmd
 	adds r0, r4, 0
 	bl sub_8081F94
 	bl GetLinkPlayerCount
@@ -4686,7 +2920,7 @@ _08082D3C:
 	ldrh r1, [r2]
 	adds r0, r1
 	strh r0, [r2]
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	movs r4, 0x8B
 	lsls r4, 1
 	adds r0, r3, r4
@@ -4701,7 +2935,7 @@ _08082D3C:
 	b _08082DEA
 	.pool
 _08082D90:
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -4993,8 +3227,8 @@ _08082FD4:
 	.pool
 	thumb_func_end sub_8082F9C
 
-	thumb_func_start sub_8082FDC
-sub_8082FDC: @ 8082FDC
+	thumb_func_start Blender_SetBankBerryData
+Blender_SetBankBerryData: @ 8082FDC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -5018,7 +3252,7 @@ sub_8082FDC: @ 8082FDC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8082FDC
+	thumb_func_end Blender_SetBankBerryData
 
 	thumb_func_start sub_8083010
 sub_8083010: @ 8083010
@@ -5707,7 +3941,7 @@ _08083518:
 	movs r0, 0x5
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r1, =sBerryBlenderData
 	ldr r0, [r1]
 	adds r2, r0, 0
@@ -5772,7 +4006,7 @@ _08083564:
 	movs r0, 0x5
 	movs r2, 0x8
 	adds r3, r6, 0
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r1, [r7]
 	adds r0, r1, 0
 	adds r0, 0x9F
@@ -5802,7 +4036,7 @@ _08083564:
 	movs r0, 0x5
 	movs r2, 0x54
 	adds r3, r6, 0
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	movs r1, 0x10
 	add r9, r1
 	mov r2, r8
@@ -5824,7 +4058,7 @@ _0808361A:
 	movs r0, 0x5
 	movs r2, 0
 	movs r3, 0x51
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r6, =sBerryBlenderData
 	ldr r0, [r6]
 	adds r4, r0, 0
@@ -5879,7 +4113,7 @@ _0808361A:
 	str r0, [sp, 0x4]
 	movs r0, 0x5
 	movs r3, 0x51
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r1, =sText_Time
 	mov r2, r10
 	str r2, [sp]
@@ -5888,7 +4122,7 @@ _0808361A:
 	movs r0, 0x5
 	movs r2, 0
 	movs r3, 0x61
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r5, [r6]
 	movs r1, 0x82
 	lsls r1, 1
@@ -5941,7 +4175,7 @@ _0808361A:
 	str r0, [sp, 0x4]
 	movs r0, 0x5
 	movs r3, 0x61
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r1, [r6]
 	movs r3, 0x84
 	lsls r3, 1
@@ -6473,7 +4707,7 @@ _08083B9A:
 	movs r0, 0x5
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r1, =gUnknown_08339B40
 	mov r8, r1
 	mov r0, r8
@@ -6604,7 +4838,7 @@ _08083C84:
 	movs r0, 0x5
 	movs r2, 0
 	adds r3, r6, 0
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r1, [r7]
 	adds r0, r1, 0
 	adds r0, 0x9F
@@ -6628,7 +4862,7 @@ _08083C84:
 	movs r0, 0x5
 	movs r2, 0x4E
 	adds r3, r6, 0
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r1, [r7]
 	adds r0, r1, 0
 	adds r0, 0x9F
@@ -6649,7 +4883,7 @@ _08083C84:
 	movs r0, 0x5
 	movs r2, 0x6E
 	adds r3, r6, 0
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r1, [r7]
 	adds r0, r1, 0
 	adds r0, 0x9F
@@ -6670,7 +4904,7 @@ _08083C84:
 	movs r0, 0x5
 	movs r2, 0x8E
 	adds r3, r6, 0
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	ldr r1, [sp, 0x8]
 	adds r1, 0x10
 	str r1, [sp, 0x8]
@@ -7054,8 +5288,8 @@ _080840C6:
 	bx r1
 	thumb_func_end sub_8083F94
 
-	thumb_func_start sub_80840D4
-sub_80840D4: @ 80840D4
+	thumb_func_start Blender_AddTextPrinter
+Blender_AddTextPrinter: @ 80840D4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -7145,7 +5379,7 @@ _08084148:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80840D4
+	thumb_func_end Blender_AddTextPrinter
 
 	thumb_func_start Blender_PrintText
 Blender_PrintText: @ 808417C
@@ -7173,7 +5407,7 @@ _08084194:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_80840D4
+	bl Blender_AddTextPrinter
 	movs r0, 0x4
 	bl PutWindowTilemap
 	movs r0, 0x4

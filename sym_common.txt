@@ -75,7 +75,7 @@ gUnknown_0300307C: @ 300307C
 gUnknown_03003084: @ 3003084
 	.space 0xC
 
-gUnknown_03003090: @ 3003090
+gRecvCmds: @ 3003090
 	.space 0x2
 
 gUnknown_03003092: @ 3003092
@@ -111,7 +111,7 @@ gLinkVSyncDisabled: @ 30030FC
 gUnknown_03003100: @ 3003100
 	.space 0x10
 
-gUnknown_03003110: @ 3003110
+gSendCmd: @ 3003110
 	.space 0x10
 
 gUnknown_03003120: @ 3003120

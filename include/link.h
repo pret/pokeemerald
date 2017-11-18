@@ -2,6 +2,7 @@
 #define GUARD_LINK_H
 
 #define MAX_LINK_PLAYERS 4
+#define MAX_RFU_PLAYERS 5
 #define CMD_LENGTH 8
 #define QUEUE_CAPACITY 50
 #define BLOCK_BUFFER_SIZE 0x100
@@ -131,7 +132,7 @@ struct BlockRequest
 extern const struct BlockRequest sBlockRequestLookupTable[5];
 
 extern struct Link gLink;
-extern u16 gRecvCmds[CMD_LENGTH][MAX_LINK_PLAYERS];
+extern u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
 extern u32 gLinkStatus;
