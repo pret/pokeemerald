@@ -52,6 +52,7 @@ SECTIONS {
         src/sprite.o(.text);
         src/string_util.o(.text);
         src/link.o(.text);
+        src/link_rfu.o(.text);
         asm/link.o(.text);
         asm/link_rfu.o(.text);
         asm/rom_8011DC0.o(.text);

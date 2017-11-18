@@ -5,8 +5,6 @@
 
 	.text
 
-// RFU; bss indicates that no file boundary exists here
-
 	thumb_func_start sub_800C12C
 sub_800C12C: @ 800C12C
 	push {r4-r7,lr}
