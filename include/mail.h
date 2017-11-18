@@ -16,4 +16,10 @@
                               || itemId == ITEM_FAB_MAIL            \
                               || itemId == ITEM_RETRO_MAIL))
 
+
+bool8 MonHasMail(struct Pokemon *mon);
+void TakeMailFromMon(struct Pokemon *mon);
+u8 GiveMailToMon2(struct Pokemon *mon, struct MailStruct *mail);
+void ClearMailStruct(struct MailStruct *mail);
+
 #endif // GUARD_MAIL_H

@@ -1390,7 +1390,7 @@ _0809CA04:
 	b _0809CB28
 	.pool
 _0809CA48:
-	bl sub_8070BD0
+	bl DoEggActions_CheckHatch
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809CA64

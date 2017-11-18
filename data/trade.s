@@ -19,13 +19,13 @@ gUnknown_0832D2BC:: @ 832D2BC
 gUnknown_0832DABC:: @ 832DABC
 	.incbin "baserom.gba", 0x32dabc, 0xb
 
-gUnknown_0832DAC7:: @ 832DAC7
-	.incbin "baserom.gba", 0x32dac7, 0x2
+gText_MaleSymbol4:: @ 832DAC7
+	.string "♂$"
 
-gUnknown_0832DAC9:: @ 832DAC9
-	.incbin "baserom.gba", 0x32dac9, 0x2
+gText_FemaleSymbol4:: @ 832DAC9
+	.string "♀$"
 
-gUnknown_0832DACB:: @ 832DACB
+gText_GenderlessSymbol:: @ 832DACB
 	.incbin "baserom.gba", 0x32dacb, 0x7
 
 gUnknown_0832DAD2:: @ 832DAD2

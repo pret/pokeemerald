@@ -3323,7 +3323,7 @@ _080C8E38:
 	b _080C8EA0
 	.pool
 _080C8E4C:
-	bl party_compaction
+	bl CompactPartySlots
 	bl sub_80CB950
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
@@ -3483,7 +3483,7 @@ _080C8FA4:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C8FD0
-	bl party_compaction
+	bl CompactPartySlots
 	bl sub_80CB950
 	b _080C905C
 	.pool
@@ -4237,7 +4237,7 @@ sub_80C9670: @ 80C9670
 	b _080C96AE
 	.pool
 _080C9688:
-	bl party_compaction
+	bl CompactPartySlots
 	bl sub_80CB950
 	ldr r1, [r4]
 	ldrb r0, [r1]
@@ -6351,7 +6351,7 @@ _080CA94C:
 	movs r1, 0
 	strb r1, [r0]
 	bl sub_80CBB9C
-	bl party_compaction
+	bl CompactPartySlots
 	movs r0, 0x2
 	str r0, [sp]
 	movs r1, 0
@@ -13977,8 +13977,8 @@ _080CE900:
 	.pool
 	thumb_func_end sub_80CE8E4
 
-	thumb_func_start party_compaction
-party_compaction: @ 80CE90C
+	thumb_func_start CompactPartySlots
+CompactPartySlots: @ 80CE90C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -14055,7 +14055,7 @@ _080CE992:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end party_compaction
+	thumb_func_end CompactPartySlots
 
 	thumb_func_start sub_80CE9A8
 sub_80CE9A8: @ 80CE9A8
@@ -20826,7 +20826,7 @@ sub_80D2054: @ 80D2054
 	lsls r1, 4
 	adds r0, r1
 	adds r1, r5, 0
-	bl sub_8069004
+	bl BoxMonToMon
 _080D2088:
 	pop {r4,r5}
 	pop {r0}

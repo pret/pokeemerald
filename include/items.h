@@ -386,4 +386,7 @@ enum
     ITEM_OLD_SEA_MAP,    // 0x178
 };
 
+#define NUM_TECHNICAL_MACHINES 50
+#define NUM_HIDDEN_MACHINES 8
+
 #endif // GUARD_ITEMS_H

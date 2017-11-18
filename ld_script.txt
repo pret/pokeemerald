@@ -77,7 +77,7 @@ SECTIONS {
         src/rng.o(.text);
         src/util.o(.text);
         src/blend_palette.o(.text);
-        asm/daycare.o(.text);
+        src/daycare.o(.text);
         src/egg_hatch.o(.text);
         src/battle_interface.o(.text);
         asm/smokescreen.o(.text);
@@ -232,7 +232,7 @@ SECTIONS {
         asm/fldeff_teleport.o(.text);
         asm/battle_link_817C95C.o(.text);
         asm/pokemon_animation.o(.text);
-        asm/recorded_battle.o(.text);
+        src/recorded_battle.o(.text);
         src/battle_controller_recorded_opponent.o(.text);
         src/battle_controller_recorded_player.o(.text);
         src/battle_dome_cards.o(.text);
@@ -344,7 +344,7 @@ SECTIONS {
         data/data2c.o(.rodata);
         src/trig.o(.rodata);
         src/util.o(.rodata);
-        data/daycare.o(.rodata);
+        src/daycare.o(.rodata);
         src/egg_hatch.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
         src/battle_interface.o(.rodata);

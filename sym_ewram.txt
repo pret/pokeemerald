@@ -544,23 +544,7 @@ gUnknown_020249B4: @ 20249B4
 	.space 0x8
 
 	.include "src/rng.o"
-
-	.align 2
-gUnknown_020249C4: @ 20249C4
-	.space 0x64
-
-gUnknown_02024A28: @ 2024A28
-	.space 0x8
-
-gUnknown_02024A30: @ 2024A30
-	.space 0x8
-
-gUnknown_02024A38: @ 2024A38
-	.space 0x14
-
-gUnknown_02024A4C: @ 2024A4C
-	.space 0x8
-
+	.include "src/daycare.o"
     .include "src/load_save.o"
 
 gUnknown_02031C58: @ 2031C58
@@ -1440,90 +1424,7 @@ gUnknown_0203BD26: @ 203BD26
 gUnknown_0203BD28: @ 203BD28
 	.space 0x4
 
-gRecordedBattleRngSeed: @ 203BD2C
-	.space 0x4
-
-gBattlePalaceMoveSelectionRngValue: @ 203BD30
-	.space 0x4
-
-gUnknown_0203BD34: @ 203BD34
-	.space 0xA60
-
-gUnknown_0203C794: @ 203C794
-	.space 0x8
-
-gUnknown_0203C79C: @ 203C79C
-	.space 0x8
-
-gUnknown_0203C7A4: @ 203C7A4
-	.space 0x8
-
-gUnknown_0203C7AC: @ 203C7AC
-	.space 0x1
-
-gUnknown_0203C7AD: @ 203C7AD
-	.space 0x1
-
-gUnknown_0203C7AE: @ 203C7AE
-	.space 0x1
-
-gUnknown_0203C7AF: @ 203C7AF
-	.space 0x1
-
-gUnknown_0203C7B0: @ 203C7B0
-	.space 0x4
-
-gUnknown_0203C7B4: @ 203C7B4
-	.space 0x1
-
-gUnknown_0203C7B5: @ 203C7B5
-	.space 0x1
-
-gUnknown_0203C7B6: @ 203C7B6
-	.space 0x1
-
-gUnknown_0203C7B7: @ 203C7B7
-	.space 0x1
-
-gUnknown_0203C7B8: @ 203C7B8
-	.space 0x4
-
-gUnknown_0203C7BC: @ 203C7BC
-	.space 0x4
-
-gUnknown_0203C7C0: @ 203C7C0
-	.space 0x258
-
-gUnknown_0203CA18: @ 203CA18
-	.space 0x258
-
-gUnknown_0203CC70: @ 203CC70
-	.space 0x10
-
-gUnknown_0203CC80: @ 203CC80
-	.space 0x4
-
-gUnknown_0203CC84: @ 203CC84
-	.space 0x4C
-
-gUnknown_0203CCD0: @ 203CCD0
-	.space 0x1
-
-gUnknown_0203CCD1: @ 203CCD1
-	.space 0x8
-
-gUnknown_0203CCD9: @ 203CCD9
-	.space 0x1
-
-gUnknown_0203CCDA: @ 203CCDA
-	.space 0x2
-
-gUnknown_0203CCDC: @ 203CCDC
-	.space 0xC
-
-gUnknown_0203CCE8: @ 203CCE8
-	.space 0x4
-
+    .include "src/recorded_battle.o"
     .include "src/battle_dome_cards.o"
     .include "src/lilycove_lady.o"
 

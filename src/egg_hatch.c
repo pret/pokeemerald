@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokemon.h"
+#include "egg_hatch.h"
 #include "pokedex.h"
 #include "items.h"
 #include "script.h"
@@ -23,6 +24,7 @@
 #include "m4a.h"
 #include "window.h"
 #include "abilities.h"
+#include "daycare.h"
 #include "battle.h" // to get rid of later
 
 struct EggHatchData
@@ -327,7 +329,7 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     pokerus = GetMonData(egg, MON_DATA_POKERUS);
     obedience = GetMonData(egg, MON_DATA_OBEDIENCE);
 
-    CreateMon(temp, species, 5, 32, TRUE, personality, 0, 0);
+    CreateMon(temp, species, EGG_HATCH_LEVEL, 32, TRUE, personality, 0, 0);
 
     for (i = 0; i < 4; i++)
     {
@@ -393,19 +395,19 @@ void ScriptHatchMon(void)
     AddHatchedMonToParty(gSpecialVar_0x8004);
 }
 
-static bool8 sub_807158C(struct DaycareData* daycare, u8 daycareId)
+static bool8 sub_807158C(struct DayCare *daycare, u8 daycareId)
 {
     u8 nick[0x20];
-    struct DaycareMon* daycareMon = &daycare->mons[daycareId];
+    struct DaycareMon *daycareMon = &daycare->mons[daycareId];
 
     GetBoxMonNick(&daycareMon->mon, nick);
-    if (daycareMon->mail.itemId != 0
-        && (StringCompareWithoutExtCtrlCodes(nick, daycareMon->monName) != 0
-            || StringCompareWithoutExtCtrlCodes(gSaveBlock2Ptr->playerName, daycareMon->OT_name) != 0))
+    if (daycareMon->misc.mail.itemId != 0
+        && (StringCompareWithoutExtCtrlCodes(nick, daycareMon->misc.monName) != 0
+            || StringCompareWithoutExtCtrlCodes(gSaveBlock2Ptr->playerName, daycareMon->misc.OT_name) != 0))
     {
         StringCopy(gStringVar1, nick);
-        TVShowConvertInternationalString(gStringVar2, daycareMon->OT_name, daycareMon->language_maybe);
-        TVShowConvertInternationalString(gStringVar3, daycareMon->monName, daycareMon->unknown);
+        TVShowConvertInternationalString(gStringVar2, daycareMon->misc.OT_name, daycareMon->misc.gameLanguage);
+        TVShowConvertInternationalString(gStringVar3, daycareMon->misc.monName, daycareMon->misc.monLanguage);
         return TRUE;
     }
     return FALSE;
