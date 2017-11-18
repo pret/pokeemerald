@@ -14,10 +14,10 @@ gUnknown_03002F70: @ 3002F70
 	.include "link.o"
 
 gUnknown_03004140: @ 3004140
-	.space 0x10
+	.space 0x48
 
-gUnknown_03004150: @ 3004150
-	.space 0x40
+gUnknown_03004188: @ 3004150
+	.space 0x8
 
 gUnknown_03004190: @ 3004190
 	.space 0xE70

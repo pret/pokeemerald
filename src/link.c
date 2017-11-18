@@ -174,6 +174,8 @@ void sub_800CEB0(u16 unk0);
 void sub_800C7B4(u16 unk0, u16 unk1);
 void sub_800C000(void);
 
+void sub_800D30C(u8 a0, u8 a1);
+
 // .rodata
 
 ALIGNED(4) const u16 gWirelessLinkDisplayPal[] = INCBIN_U16("graphics/interface/wireless_link_display.gbapal");
@@ -2523,4 +2525,87 @@ void sub_800BFCC(struct UnkLinkRfuStruct_02022B2C *unk0)
     {
         gUnknown_03004140.unk_0b = 1;
     }
+}
+
+void sub_800C000(void)
+{
+    u8 i;
+
+    gUnknown_03004140.unk_05 = 0;
+    gUnknown_03004140.unk_04 = 0;
+    gUnknown_03004140.unk_06 = -1;
+    gUnknown_03004140.unk_07 = 0;
+    gUnknown_03004140.unk_10 = 0;
+    gUnknown_03004140.unk_0c = 0;
+    gUnknown_03004140.unk_24 = 0;
+    gUnknown_03004140.unk_30 = 0;
+    for (i = 0; i < 4; i++)
+    {
+        gUnknown_03004140.unk_28[i] = 0;
+        gUnknown_03004140.unk_34[i] = 0;
+    }
+}
+
+void sub_800C048(void)
+{
+    gUnknown_03004140.unk_04 = 0x15;
+}
+
+u8 sub_800C054(u8 r5, u16 r7, u16 r8, u16 *r6)
+{
+    u8 i;
+    u16 *buffer;
+
+    if (gUnknown_03004140.unk_04 != 0 && (gUnknown_03004140.unk_04 != 0x08 || r5 != 1))
+    {
+        gUnknown_03004140.unk_14 = 1;
+        sub_800D30C(0xf3, 0x01);
+        return 1;
+    }
+    if (!rfu_getMasterSlave())
+    {
+        gUnknown_03004140.unk_14 = 2;
+        sub_800D30C(0xf3, 0x01);
+        return 2;
+    }
+    for (i = 0, buffer = r6; i < 16; i++)
+    {
+        if (*buffer++ == 0xFFFF)
+        {
+            break;
+        }
+    }
+    if (i == 16)
+    {
+        gUnknown_03004140.unk_14 = 4;
+        sub_800D30C(0xf3, 0x01);
+        return 4;
+    }
+    if (r5 > 1)
+    {
+        gUnknown_03004140.unk_07 = 1;
+        r5 = 1;
+        r7 = 0;
+    }
+    else
+    {
+        gUnknown_03004140.unk_07 = 0;
+    }
+    if (r5 != 0)
+    {
+        gUnknown_03004140.unk_04 = 5;
+    }
+    else
+    {
+        gUnknown_03004140.unk_04 = 9;
+        if (gUnknown_03004140.unk_0b)
+        {
+            gUnknown_03004140.unk_0b = 2;
+        }
+    }
+    gUnknown_03004140.unk_06 = r5;
+    gUnknown_03004140.unk_1a = r7;
+    gUnknown_03004140.unk_26 = r8;
+    gUnknown_03004140.unk_20 = r6;
+    return 0;
 }

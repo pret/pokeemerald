@@ -7,167 +7,6 @@
 
 // RFU; bss indicates that no file boundary exists here
 
-	thumb_func_start sub_800C000
-sub_800C000: @ 800C000
-	push {r4,r5,lr}
-	ldr r2, =gUnknown_03004140
-	movs r0, 0
-	strb r0, [r2, 0x5]
-	strb r0, [r2, 0x4]
-	movs r1, 0xFF
-	strb r1, [r2, 0x6]
-	strb r0, [r2, 0x7]
-	strb r0, [r2, 0x10]
-	strb r0, [r2, 0xC]
-	adds r1, r2, 0
-	adds r1, 0x24
-	strb r0, [r1]
-	adds r1, 0xC
-	strb r0, [r1]
-	movs r3, 0
-	adds r5, r2, 0
-	adds r5, 0x28
-	movs r4, 0
-	adds r2, 0x34
-_0800C028:
-	lsls r1, r3, 1
-	adds r0, r1, r5
-	strh r4, [r0]
-	adds r1, r2
-	strh r4, [r1]
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	cmp r3, 0x3
-	bls _0800C028
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800C000
-
-	thumb_func_start sub_800C048
-sub_800C048: @ 800C048
-	ldr r1, =gUnknown_03004140
-	movs r0, 0x15
-	strb r0, [r1, 0x4]
-	bx lr
-	.pool
-	thumb_func_end sub_800C048
-
-	thumb_func_start sub_800C054
-sub_800C054: @ 800C054
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r6, r3, 0
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r1, 16
-	lsrs r7, r1, 16
-	lsls r2, 16
-	lsrs r2, 16
-	mov r8, r2
-	ldr r1, =gUnknown_03004140
-	ldrb r0, [r1, 0x4]
-	cmp r0, 0
-	beq _0800C090
-	cmp r0, 0x8
-	bne _0800C07A
-	cmp r5, 0x1
-	beq _0800C090
-_0800C07A:
-	movs r0, 0x1
-	strh r0, [r1, 0x14]
-	movs r0, 0xF3
-	movs r1, 0x1
-	bl sub_800D30C
-	movs r0, 0x1
-	b _0800C122
-	.pool
-_0800C090:
-	bl rfu_getMasterSlave
-	lsls r0, 24
-	cmp r0, 0
-	bne _0800C0B0
-	ldr r1, =gUnknown_03004140
-	movs r0, 0x2
-	strh r0, [r1, 0x14]
-	movs r0, 0xF3
-	movs r1, 0x1
-	bl sub_800D30C
-	movs r0, 0x2
-	b _0800C122
-	.pool
-_0800C0B0:
-	movs r2, 0
-	ldrh r0, [r6]
-	ldr r4, =0x0000ffff
-	adds r1, r6, 0x2
-	ldr r3, =gUnknown_03004140
-	cmp r0, r4
-	beq _0800C0D0
-_0800C0BE:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0xF
-	bhi _0800C0D0
-	ldrh r0, [r1]
-	adds r1, 0x2
-	cmp r0, r4
-	bne _0800C0BE
-_0800C0D0:
-	cmp r2, 0x10
-	bne _0800C0EC
-	movs r0, 0x4
-	strh r0, [r3, 0x14]
-	movs r0, 0xF3
-	movs r1, 0x1
-	bl sub_800D30C
-	movs r0, 0x4
-	b _0800C122
-	.pool
-_0800C0EC:
-	cmp r5, 0x1
-	bls _0800C0FA
-	movs r0, 0x1
-	strb r0, [r3, 0x7]
-	movs r5, 0x1
-	movs r7, 0
-	b _0800C0FE
-_0800C0FA:
-	movs r0, 0
-	strb r0, [r3, 0x7]
-_0800C0FE:
-	cmp r5, 0
-	beq _0800C108
-	movs r0, 0x5
-	strb r0, [r3, 0x4]
-	b _0800C116
-_0800C108:
-	movs r0, 0x9
-	strb r0, [r3, 0x4]
-	ldrb r0, [r3, 0xB]
-	cmp r0, 0
-	beq _0800C116
-	movs r0, 0x2
-	strb r0, [r3, 0xB]
-_0800C116:
-	strb r5, [r3, 0x6]
-	strh r7, [r3, 0x1A]
-	mov r0, r8
-	strh r0, [r3, 0x26]
-	str r6, [r3, 0x20]
-	movs r0, 0
-_0800C122:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_800C054
-
 	thumb_func_start sub_800C12C
 sub_800C12C: @ 800C12C
 	push {r4-r7,lr}
@@ -1255,7 +1094,7 @@ _0800CA0C:
 _0800CA18:
 	cmp r6, 0
 	bne _0800CA3C
-	ldr r4, =gUnknown_03004150
+	ldr r4, =gUnknown_03004140+0x10
 	mov r0, sp
 	adds r1, r4, 0
 	bl rfu_getConnectParentStatus
@@ -1293,7 +1132,7 @@ _0800CA60:
 	beq _0800CA66
 	b _0800CC8A
 _0800CA66:
-	ldr r4, =gUnknown_03004150
+	ldr r4, =gUnknown_03004140+0x10
 	mov r0, sp
 	adds r1, r4, 0
 	bl rfu_getConnectParentStatus

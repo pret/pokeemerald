@@ -149,3 +149,4 @@ u32 rfu_REQBN_softReset_and_checkID(void);
 void rfu_REQ_sendData(u8);
 void rfu_setMSCCallback(void (*func)(u16));
 void rfu_setREQCallback(void (*func)(u16, u16));
+bool8 rfu_getMasterSlave(void);

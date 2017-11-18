@@ -27,11 +27,22 @@ struct UnkRfuStruct_1 {
     u8 unk_0b;
     u8 unk_0c;
     u8 unk_0d;
-    u8 filler_0e[10];
+    u8 filler_0e[2];
+    u8 unk_10;
+    u8 filler_11[3];
+    u16 unk_14;
+    u8 filler_16[2];
     u16 unk_18;
-    u8 filler_1a[0x18];
+    u16 unk_1a;
+    u8 filler_1c[4];
+    u16 *unk_20;
+    u8 unk_24;
+    u16 unk_26;
+    u16 unk_28[4];
+    u8 unk_30;
+    // aligned
     u16 unk_32;
-    u8 filler_34[8];
+    u16 unk_34[4];
     struct UnkLinkRfuStruct_02022B2C *unk_3c;
     void (*unk_40)(u8);
     void (*unk_44)(void);
