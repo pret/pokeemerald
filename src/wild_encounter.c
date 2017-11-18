@@ -23,11 +23,6 @@ extern const u8 EventScript_RepelWoreOff[];
 
 #define NUM_FEEBAS_SPOTS    6
 
-#define LAND_WILD_COUNT     12
-#define WATER_WILD_COUNT    5
-#define ROCK_WILD_COUNT     5
-#define FISH_WILD_COUNT     10
-
 extern const u16 gRoute119WaterTileData[];
 extern const struct WildPokemonHeader gBattlePikeWildMonHeaders[];
 extern const struct WildPokemonHeader gBattlePyramidWildMonHeaders[];
@@ -56,7 +51,7 @@ void DisableWildEncounters(bool8 disabled)
     sWildEncountersDisabled = disabled;
 }
 
-u16 GetRoute119WaterTileNum(s16 x, s16 y, u8 section)
+static u16 GetRoute119WaterTileNum(s16 x, s16 y, u8 section)
 {
     u16 xCur;
     u16 yCur;
@@ -80,7 +75,7 @@ u16 GetRoute119WaterTileNum(s16 x, s16 y, u8 section)
     return tileNum + 1;
 }
 
-bool8 CheckFeebas(void)
+static bool8 CheckFeebas(void)
 {
     u8 i;
     u16 feebasSpots[NUM_FEEBAS_SPOTS];
@@ -144,7 +139,7 @@ static void FeebasSeedRng(u16 seed)
     sFeebasRngValue = seed;
 }
 
-u8 ChooseWildMonIndex_Land(void)
+static u8 ChooseWildMonIndex_Land(void)
 {
     u8 rand = Random() % 100;
 
@@ -174,7 +169,7 @@ u8 ChooseWildMonIndex_Land(void)
         return 11;
 }
 
-u8 ChooseWildMonIndex_WaterRock(void)
+static u8 ChooseWildMonIndex_WaterRock(void)
 {
     u8 rand = Random() % 100;
 
@@ -197,7 +192,7 @@ enum
     SUPER_ROD
 };
 
-u8 ChooseWildMonIndex_Fishing(u8 rod)
+static u8 ChooseWildMonIndex_Fishing(u8 rod)
 {
     u8 wildMonIndex = 0;
     u8 rand = Random() % 100;
@@ -234,7 +229,7 @@ u8 ChooseWildMonIndex_Fishing(u8 rod)
     return wildMonIndex;
 }
 
-u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
+static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 {
     u8 min;
     u8 max;
@@ -272,7 +267,7 @@ u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     return min + rand;
 }
 
-u16 GetCurrentMapWildMonHeaderId(void)
+static u16 GetCurrentMapWildMonHeaderId(void)
 {
     u16 i;
 
@@ -302,7 +297,7 @@ u16 GetCurrentMapWildMonHeaderId(void)
     return -1;
 }
 
-u8 PickWildMonNature(void)
+static u8 PickWildMonNature(void)
 {
     u8 i;
     u8 j;
@@ -348,7 +343,7 @@ u8 PickWildMonNature(void)
     return Random() % 25;
 }
 
-void CreateWildMon(u16 species, u8 level)
+static void CreateWildMon(u16 species, u8 level)
 {
     bool32 checkCuteCharm;
 
@@ -397,7 +392,7 @@ enum
 #define WILD_CHECK_REPEL    0x1
 #define WILD_CHECK_KEEN_EYE 0x2
 
-bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, u8 flags)
+static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, u8 flags)
 {
     u8 wildMonIndex = 0;
     u8 level;
@@ -433,7 +428,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, u8 
     return TRUE;
 }
 
-u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 rod)
+static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 rod)
 {
     u8 wildMonIndex = ChooseWildMonIndex_Fishing(rod);
     u8 level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
@@ -442,7 +437,7 @@ u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 rod)
     return wildMonInfo->wildPokemon[wildMonIndex].species;
 }
 
-bool8 SetUpMassOutbreakEncounter(u8 flags)
+static bool8 SetUpMassOutbreakEncounter(u8 flags)
 {
     u16 i;
 
@@ -456,7 +451,7 @@ bool8 SetUpMassOutbreakEncounter(u8 flags)
     return TRUE;
 }
 
-bool8 DoMassOutbreakEncounterTest(void)
+static bool8 DoMassOutbreakEncounterTest(void)
 {
     if (gSaveBlock1Ptr->outbreakPokemonSpecies != 0
      && gSaveBlock1Ptr->location.mapNum == gSaveBlock1Ptr->outbreakLocationMapNum
@@ -468,7 +463,7 @@ bool8 DoMassOutbreakEncounterTest(void)
     return FALSE;
 }
 
-bool8 DoWildEncounterRateDiceRoll(u16 encounterRate)
+static bool8 DoWildEncounterRateDiceRoll(u16 encounterRate)
 {
     if (Random() % 2880 < encounterRate)
         return TRUE;
@@ -476,7 +471,7 @@ bool8 DoWildEncounterRateDiceRoll(u16 encounterRate)
         return FALSE;
 }
 
-bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
+static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
 {
     encounterRate *= 16;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
@@ -505,7 +500,7 @@ bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
     return DoWildEncounterRateDiceRoll(encounterRate);
 }
 
-bool8 DoGlobalWildEncounterDiceRoll(void)
+static bool8 DoGlobalWildEncounterDiceRoll(void)
 {
     if (Random() % 100 >= 60)
         return FALSE;
@@ -513,7 +508,7 @@ bool8 DoGlobalWildEncounterDiceRoll(void)
         return TRUE;
 }
 
-bool8 AreLegendariesInSootopolisPreventingEncounters(void)
+static bool8 AreLegendariesInSootopolisPreventingEncounters(void)
 {
     if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP_SOOTOPOLIS_CITY
         || gSaveBlock1Ptr->location.mapNum != MAP_ID_SOOTOPOLIS_CITY)
