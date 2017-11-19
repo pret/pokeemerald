@@ -132,7 +132,7 @@ struct RfuUnk5
     u8 unk_00;
     u8 filler_01[2];
     u8 unk_03;
-    u8 filler_04[4];
+    u8 unk_04[4];
     u8 unk_08;
     u8 filler_09[11];
     u16 unk_14;

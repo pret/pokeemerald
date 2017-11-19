@@ -5,62 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800C210
-sub_800C210: @ 800C210
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldr r6, =gUnknown_03004140
-	adds r3, r6, 0
-	adds r3, 0x30
-	ldrb r2, [r3]
-	adds r0, r1, 0
-	ands r0, r2
-	cmp r0, 0
-	beq _0800C26C
-	adds r0, r2, 0
-	bics r0, r1
-	strb r0, [r3]
-	movs r4, 0
-	ldr r7, =gUnknown_03007890
-	movs r5, 0x1
-	adds r3, 0x4
-	movs r2, 0
-_0800C236:
-	adds r0, r1, 0
-	asrs r0, r4
-	ands r0, r5
-	cmp r0, 0
-	beq _0800C246
-	lsls r0, r4, 1
-	adds r0, r3
-	strh r2, [r0]
-_0800C246:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x3
-	bls _0800C236
-	ldr r0, [r7]
-	ldrb r4, [r0, 0x3]
-	ands r4, r1
-	cmp r4, 0
-	beq _0800C260
-	adds r0, r4, 0
-	bl sub_800D334
-_0800C260:
-	ldr r0, =gUnknown_03004140
-	strh r4, [r0, 0x14]
-	movs r0, 0x33
-	adds r1, r4, 0
-	bl sub_800D30C
-_0800C26C:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800C210
-
 	thumb_func_start sub_800C27C
 sub_800C27C: @ 800C27C
 	push {r4,r5,lr}

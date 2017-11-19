@@ -25,6 +25,7 @@ void sub_800C000(void);
 void sub_800CEB0(u16 unk0);
 void sub_800C7B4(u16 unk0, u16 unk1);
 void sub_800D30C(u8 a0, u8 a1);
+void sub_800D334(u8 a0);
 void sub_800D610(void);
 
 // .rodata
@@ -209,7 +210,7 @@ u8 sub_800C12C(u16 r6, u16 r8)
         sub_800D30C(0xF3, 0x01);
         return 2;
     }
-    for (i = 0; i < gUnknown_03007890->unk_08; i ++)
+    for (i = 0; i < gUnknown_03007890->unk_08; i++)
     {
         tmp = &gUnknown_03007890[i];
         if (tmp->unk_14 == r6)
@@ -240,4 +241,28 @@ u8 sub_800C12C(u16 r6, u16 r8)
         gUnknown_03004140.unk_07 = 7;
     }
     return 0;
+}
+
+void sub_800C210(u8 a0)
+{
+    u8 i;
+
+    if (a0 & gUnknown_03004140.unk_30)
+    {
+        gUnknown_03004140.unk_30 &= ~a0;
+        for (i = 0; i < 4; i++)
+        {
+            if ((a0 >> i) & 1)
+            {
+                gUnknown_03004140.unk_34[i] = 0;
+            }
+        }
+        i = gUnknown_03007890->unk_03 & a0;
+        if (i)
+        {
+            sub_800D334(i);
+        }
+        gUnknown_03004140.unk_14 = i;
+        sub_800D30C(0x33, i);
+    }
 }
