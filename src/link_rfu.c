@@ -266,3 +266,85 @@ void sub_800C210(u8 a0)
         sub_800D30C(0x33, i);
     }
 }
+
+void sub_800C27C(bool8 a0)
+{
+    u8 r2;
+
+    r2 = 0;
+    gUnknown_03004140.unk_07 = 0;
+    if (a0)
+    {
+        sub_800C000();
+        gUnknown_03004140.unk_04 = 23;
+    }
+    else
+    {
+        switch (gUnknown_03004140.unk_04)
+        {
+            case 5:
+                gUnknown_03004140.unk_04 = 8;
+                gUnknown_03004140.unk_05 = 0;
+                r2 = 0x13;
+                break;
+            case 6:
+                gUnknown_03004140.unk_04 = 7;
+                gUnknown_03004140.unk_05 = 8;
+                break;
+            case 7:
+                gUnknown_03004140.unk_04 = 7;
+                gUnknown_03004140.unk_05 = 8;
+                break;
+            case 8:
+                break;
+            case 9:
+                gUnknown_03004140.unk_05 = 0;
+                gUnknown_03004140.unk_04 = 0;
+                r2 = 0x21;
+                break;
+            case 10:
+                gUnknown_03004140.unk_04 = 11;
+                gUnknown_03004140.unk_05 = 0;
+                break;
+            case 11:
+                gUnknown_03004140.unk_04 = 11;
+                gUnknown_03004140.unk_05 = 0;
+                break;
+            case 12:
+                gUnknown_03004140.unk_05 = 0;
+                gUnknown_03004140.unk_04 = 0;
+                r2 = 0x23;
+                break;
+            case 13:
+                gUnknown_03004140.unk_04 = 14;
+                break;
+            case 14:
+                gUnknown_03004140.unk_04 = 14;
+                break;
+            case 15:
+                break;
+            case 16:
+                gUnknown_03004140.unk_04 = gUnknown_03004140.unk_11;
+                gUnknown_03004140.unk_05 = gUnknown_03004140.unk_12;
+                sub_800D334(gUnknown_03007890->unk_03);
+                gUnknown_03004140.unk_14 = gUnknown_03007890->unk_03;
+                sub_800D30C(0x33, 0x01);
+                return;
+            case 17:
+                gUnknown_03004140.unk_04 = 18;
+                break;
+            case 18:
+                gUnknown_03004140.unk_04 = 18;
+                break;
+            default:
+                gUnknown_03004140.unk_05 = 0;
+                gUnknown_03004140.unk_04 = 0;
+                r2 = 0x43;
+                break;
+        }
+        if (gUnknown_03004140.unk_04 == 0)
+        {
+            sub_800D30C(r2, 0);
+        }
+    }
+}

@@ -48,7 +48,9 @@ struct UnkRfuStruct_1 {
     u8 unk_0d;
     u8 filler_0e[2];
     u8 unk_10;
-    u8 filler_11[3];
+    u8 unk_11;
+    u8 unk_12;
+    // aligned
     u16 unk_14;
     u8 filler_16[2];
     u16 unk_18;
