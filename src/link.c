@@ -2438,5 +2438,3 @@ void ResetRecvBuffer(void)
         }
     }
 }
-
-// rfu

@@ -32,47 +32,55 @@ struct UnkLinkRfuStruct_02022B2C
 };
 
 struct UnkRfuStruct_1 {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02;
-    vu8 unk_03;
-    u8 unk_04;
-    u8 unk_05;
-    u8 unk_06;
-    u8 unk_07;
-    u8 unk_08;
-    u8 unk_09;
-    u8 unk_0a;
-    u8 unk_0b;
-    u8 unk_0c;
-    u8 unk_0d;
-    u8 filler_0e[2];
-    u8 unk_10;
-    u8 unk_11;
-    u8 unk_12;
+    /* 0x000 */ u8 unk_00;
+    /* 0x001 */ u8 unk_01;
+    /* 0x002 */ u8 unk_02;
+    /* 0x003 */ vu8 unk_03;
+    /* 0x004 */ u8 unk_04;
+    /* 0x005 */ u8 unk_05;
+    /* 0x006 */ u8 unk_06;
+    /* 0x007 */ u8 unk_07;
+    /* 0x008 */ u8 unk_08;
+    /* 0x009 */ u8 unk_09;
+    /* 0x00a */ u8 unk_0a;
+    /* 0x00b */ u8 unk_0b;
+    /* 0x00c */ u8 unk_0c;
+    /* 0x00d */ u8 unk_0d;
+    /* 0x00e */ u8 filler_0e[2];
+    /* 0x010 */ u8 unk_10;
+    /* 0x011 */ u8 unk_11;
+    /* 0x012 */ u8 unk_12;
     // aligned
-    u16 unk_14;
-    u8 filler_16[2];
-    u16 unk_18;
-    u16 unk_1a;
-    u8 filler_1c[2];
-    u16 unk_1e;
-    u16 *unk_20;
-    u8 unk_24;
-    u16 unk_26;
-    u16 unk_28[4];
-    u8 unk_30;
+    /* 0x014 */ u16 unk_14;
+    /* 0x016 */ u8 filler_16[2];
+    /* 0x018 */ u16 unk_18;
+    /* 0x01a */ u16 unk_1a;
+    /* 0x01c */ u8 filler_1c[2];
+    /* 0x01e */ u16 unk_1e;
+    /* 0x020 */ u16 *unk_20;
+    /* 0x024 */ u8 unk_24;
+    /* 0x026 */ u16 unk_26;
+    /* 0x028 */ u16 unk_28[4];
+    /* 0x030 */ u8 unk_30;
     // aligned
-    u16 unk_32;
-    u16 unk_34[4];
-    struct UnkLinkRfuStruct_02022B2C *unk_3c;
-    void (*unk_40)(u8);
-    void (*unk_44)(void);
+    /* 0x032 */ u16 unk_32;
+    /* 0x034 */ u16 unk_34[4];
+    /* 0x03c */ struct UnkLinkRfuStruct_02022B2C *unk_3c;
+    /* 0x040 */ void (*unk_40)(u8);
+    /* 0x044 */ void (*unk_44)(void);
+    /* 0x048 */ u8 filler_48[0xe78];
+};
+
+struct UnkRfuStruct_2 {
+    /* 0x000 */ u8 filler_00[13];
+    /* 0x00d */ u8 playerCount;
+    /* 0x00e */ u8 filler_0e[0xcea];
 };
 
 // Exported RAM declarations
 
 extern struct UnkRfuStruct_1 gUnknown_03004140;
+extern struct UnkRfuStruct_2 gUnknown_03005000;
 
 // Exported ROM declarations
 u32 sub_800BEC0(void);

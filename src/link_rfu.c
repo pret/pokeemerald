@@ -7,9 +7,11 @@
 
 // Static type declarations
 
-struct UnkRfuStruct_1 gUnknown_03004140;
-
 // Static RAM declarations
+
+struct UnkRfuStruct_1 gUnknown_03004140;
+struct UnkRfuStruct_2 gUnknown_03005000;
+
 IWRAM_DATA u8 gUnknown_03000D74;
 ALIGNED(4) IWRAM_DATA u8 gUnknown_03000D78[8];
 IWRAM_DATA u8 gUnknown_03000D80[16];
@@ -80,7 +82,7 @@ int sub_800BF4C(void (*func1)(u8), void (*func2)(void))
     {
         return 4;
     }
-    CpuFill16(0, &gUnknown_03004140, sizeof(gUnknown_03004140));
+    CpuFill16(0, &gUnknown_03004140, offsetof(struct UnkRfuStruct_1, filler_48));
     gUnknown_03004140.unk_06 = -1;
     gUnknown_03004140.unk_40 = func1;
     gUnknown_03004140.unk_44 = func2;
@@ -91,7 +93,7 @@ int sub_800BF4C(void (*func1)(u8), void (*func2)(void))
 
 void sub_800BFA0(void)
 {
-    CpuFill16(0, &gUnknown_03004140, sizeof(gUnknown_03004140) - 2 * sizeof(void *));
+    CpuFill16(0, &gUnknown_03004140, offsetof(struct UnkRfuStruct_1, unk_40));
     gUnknown_03004140.unk_06 = -1;
 }
 

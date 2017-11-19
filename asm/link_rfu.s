@@ -4470,7 +4470,7 @@ _0800E64A:
 	cmp r4, 0
 	bge _0800E64A
 	movs r5, 0
-	ldr r4, =gUnknown_0300506C
+	ldr r4, =gUnknown_03005000+0x6C
 	adds r0, r4, 0
 	bl sub_800FCC4
 	adds r0, r4, 0
@@ -4530,7 +4530,7 @@ sub_800E6D0: @ 800E6D0
 	thumb_func_start sub_800E700
 sub_800E700: @ 800E700
 	push {r4,lr}
-	ldr r0, =gUnknown_03004190
+	ldr r0, =gUnknown_03004140+0x50
 	ldr r1, =0x00000e64
 	ldr r4, =gIntrTable + 0x4
 	adds r2, r4, 0
@@ -4692,7 +4692,7 @@ sub_800E88C: @ 800E88C
 	bne _0800E8CC
 	movs r3, 0
 	movs r5, 0x1
-	ldr r1, =gUnknown_03005CDE
+	ldr r1, =gUnknown_03005000+0xCDE
 _0800E8A6:
 	adds r0, r2, 0
 	ands r0, r5
@@ -4717,7 +4717,7 @@ _0800E8CC:
 	mvns r0, r1
 	mov r12, r0
 	movs r7, 0x1
-	ldr r4, =gUnknown_03005CDE
+	ldr r4, =gUnknown_03005000+0xCDE
 _0800E8D6:
 	adds r2, r1, 0
 	ands r2, r7
@@ -4733,14 +4733,14 @@ _0800E8E2:
 	cmp r3, 0x3
 	bls _0800E8D6
 	movs r4, 0x4
-	ldr r0, =gUnknown_03005CDE
+	ldr r0, =gUnknown_03005000+0xCDE
 	ldrb r7, [r0]
 _0800E8F4:
 	movs r3, 0
 	subs r1, r4, 0x1
 	cmp r7, r4
 	beq _0800E910
-	ldr r2, =gUnknown_03005CDE
+	ldr r2, =gUnknown_03005000+0xCDE
 _0800E8FE:
 	adds r0, r3, 0x1
 	lsls r0, 24
@@ -4764,7 +4764,7 @@ _0800E916:
 	ands r5, r0
 	movs r3, 0
 	movs r2, 0x1
-	ldr r1, =gUnknown_03005CDE
+	ldr r1, =gUnknown_03005000+0xCDE
 _0800E928:
 	adds r0, r5, 0
 	ands r0, r2
@@ -4949,7 +4949,7 @@ _0800EABC:
 	lsls r2, r4, 3
 	subs r2, r4
 	lsls r2, 1
-	ldr r0, =gUnknown_03005014
+	ldr r0, =gUnknown_03005000+0x14
 	adds r2, r0
 	movs r0, 0x10
 	adds r1, r4, 0
@@ -4976,7 +4976,7 @@ sub_800EAFC: @ 800EAFC
 	push {r4-r6,lr}
 	ldr r0, =gUnknown_03004140
 	ldrb r5, [r0]
-	ldr r4, =gUnknown_03005C87
+	ldr r4, =gUnknown_03005000+0xC87
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x46
@@ -5905,7 +5905,7 @@ _0800F2E0:
 	movs r0, 0x1F
 	ands r0, r1
 	strb r0, [r2]
-	ldr r2, =gUnknown_03005CDE
+	ldr r2, =gUnknown_03005000+0xCDE
 	adds r0, r5, r2
 	ldrb r0, [r0]
 	movs r6, 0
@@ -6138,7 +6138,7 @@ sub_800F4F0: @ 800F4F0
 	mov r7, r8
 	push {r7}
 	sub sp, 0x58
-	ldr r0, =gUnknown_03005124
+	ldr r0, =gUnknown_03005000+0x124
 	mov r1, sp
 	bl sub_800D934
 	movs r1, 0
@@ -6344,7 +6344,7 @@ _0800F6A0:
 	adds r4, 0x1
 	cmp r4, 0x6
 	ble _0800F6A0
-	ldr r0, =gUnknown_030059E8
+	ldr r0, =gUnknown_03005000+0x9E8
 	mov r1, r12
 	bl sub_800D888
 	movs r1, 0x1
@@ -6356,7 +6356,7 @@ _0800F6A0:
 _0800F6C8:
 	adds r1, r7, 0
 	adds r5, r6, 0
-	ldr r3, =gUnknown_0300506E
+	ldr r3, =gUnknown_03005000+0x6E
 	ldrh r3, [r3]
 	cmp r5, r3
 	blt _0800F65A
@@ -6687,7 +6687,7 @@ _0800F930:
 	ldr r3, =gRecvCmds+0x4
 	adds r0, r5, r3
 	bl sub_800F74C
-	ldr r4, =gUnknown_03005CCE
+	ldr r4, =gUnknown_03005000+0xCCE
 	strb r0, [r4]
 	b _0800FC08
 	.pool
@@ -6863,7 +6863,7 @@ _0800FAAC:
 	b _0800FC04
 	.pool
 _0800FAD0:
-	ldr r1, =gUnknown_030050E4
+	ldr r1, =gUnknown_03005000+0xE4
 	add r1, r8
 	movs r0, 0x1
 	strb r0, [r1]
@@ -7266,7 +7266,7 @@ _0800FE14:
 	.pool
 _0800FE20:
 	movs r4, 0
-	ldr r3, =gUnknown_030050F2
+	ldr r3, =gUnknown_03005000+0xF2
 _0800FE24:
 	adds r2, r4, 0x1
 	lsls r1, r2, 1
@@ -7304,7 +7304,7 @@ sub_800FE50: @ 800FE50
 	bl sub_8011A80
 	cmp r0, 0
 	bne _0800FE76
-	ldr r0, =gUnknown_030050F2
+	ldr r0, =gUnknown_03005000+0xF2
 	adds r1, r4, 0
 	movs r2, 0xC
 	bl memcpy
@@ -8255,7 +8255,7 @@ sub_80105EC: @ 80105EC
 	push {r4-r6,lr}
 	movs r3, 0
 	movs r1, 0
-	ldr r5, =gUnknown_03005CD5
+	ldr r5, =gUnknown_03005000+0xCD5
 	movs r6, 0x1
 	movs r4, 0
 _080105F8:
@@ -8280,7 +8280,7 @@ _0801060C:
 	bl rfu_waitREQComplete
 _08010620:
 	movs r1, 0
-	ldr r2, =gUnknown_03005CD5
+	ldr r2, =gUnknown_03005000+0xCD5
 _08010624:
 	adds r0, r1, r2
 	ldrb r0, [r0]
@@ -8756,7 +8756,7 @@ sub_80109E8: @ 80109E8
 	lsrs r2, r0, 16
 	movs r1, 0
 	movs r5, 0x1
-	ldr r4, =gUnknown_03005CDE
+	ldr r4, =gUnknown_03005000+0xCDE
 	movs r3, 0
 _080109F6:
 	adds r0, r2, 0
@@ -11163,7 +11163,7 @@ sub_8011DE0: @ 8011DE0
 	beq _08011E20
 	movs r3, 0
 	movs r2, 0
-	ldr r5, =gUnknown_03005CDE
+	ldr r5, =gUnknown_03005000+0xCDE
 	adds r6, r5, 0x4
 _08011DF0:
 	adds r0, r2, r5
@@ -11444,7 +11444,7 @@ _08012032:
 	bne _0801202E
 	cmp r5, 0x44
 	bne _08012092
-	ldr r5, =gUnknown_0300510A
+	ldr r5, =gUnknown_03005000+0x10A
 	ldrh r0, [r5, 0x8]
 	ldr r3, =0x000003ff
 	adds r2, r3, 0
@@ -11686,7 +11686,7 @@ sub_8012240: @ 8012240
 	movs r1, 0
 	ldr r0, =gUnknown_03004140
 	ldrb r2, [r0]
-	ldr r4, =gUnknown_03005CD1
+	ldr r4, =gUnknown_03005000+0xCD1
 	movs r3, 0x1
 _0801224C:
 	adds r0, r2, 0
