@@ -25722,7 +25722,7 @@ sub_81D3AD8: @ 81D3AD8
 	adds r5, r0, 0
 	adds r4, r1, 0
 	movs r0, 0x1E
-	bl sub_81535DC
+	bl TryCopySpecialSaveSection
 	cmp r0, 0x1
 	bne _081D3B04
 	ldr r2, =0x00000ee8

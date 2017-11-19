@@ -8,7 +8,7 @@
 	thumb_func_start hm_prepare_dive_probably
 hm_prepare_dive_probably: @ 8161508
 	push {r4-r6,lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0x64
@@ -20,7 +20,7 @@ hm_prepare_dive_probably: @ 8161508
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r6
@@ -59,7 +59,7 @@ sub_8161560: @ 8161560
 	strb r1, [r0, 0xB]
 	ldrb r1, [r0, 0x9]
 	strb r1, [r0, 0xA]
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1

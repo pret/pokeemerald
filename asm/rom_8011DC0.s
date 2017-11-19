@@ -3754,7 +3754,7 @@ _08014714:
 	movs r1, 0x5
 	movs r2, 0x1
 	bl sub_8014290
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =c2_load_new_map
@@ -3775,7 +3775,7 @@ _0801474C:
 	movs r1, 0x5
 	movs r2, 0x1
 	bl sub_8014290
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =c2_load_new_map
@@ -5645,7 +5645,7 @@ _080158E0:
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _080159A0
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrh r0, [r4]
@@ -5673,7 +5673,7 @@ _08015900:
 	b _0801598E
 	.pool
 _0801592C:
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
@@ -5707,7 +5707,7 @@ _0801596C:
 	ldr r1, =gUnknown_02022C2C
 	movs r0, 0x44
 	strb r0, [r1]
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0

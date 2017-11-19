@@ -3607,7 +3607,7 @@ sub_80E89F8: @ 80E89F8
 	ldr r1, =0x00003030
 	adds r0, r1
 	adds r1, r5, 0
-	bl sub_806FA9C
+	bl InitDaycareMailRecordMixing
 	ldr r0, =gUnknown_03001148
 	ldr r1, [r0]
 	adds r0, r6, 0

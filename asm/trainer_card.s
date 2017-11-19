@@ -5000,7 +5000,7 @@ _080C5240:
 	adds r0, r2
 	ldrh r0, [r0]
 	strh r0, [r1, 0x6]
-	bl sub_8185290
+	bl CanCopyRecordedBattleSaveData
 	ldr r3, [r5]
 	movs r1, 0x1
 	ands r0, r1
@@ -5825,7 +5825,7 @@ _080C5970:
 	strh r0, [r1, 0x6]
 	bl sub_80C52E4
 	ldr r0, =sub_80C58D4
-	bl sub_8185E24
+	bl PlayRecordedBattle
 	b _080C599A
 	.pool
 _080C5994:

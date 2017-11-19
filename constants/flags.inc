@@ -131,7 +131,7 @@
 	.equiv FLAG_0x083,              0x83
 	.equiv FLAG_0x084,              0x84
 	.equiv FLAG_0x085,              0x85
-	.equiv FLAG_0x086,              0x86
+	.equiv FLAG_PENDING_DAYCARE_EGG,              0x86
 	.equiv FLAG_0x087,              0x87
 	.equiv FLAG_0x088,              0x88
 	.equiv FLAG_0x089,              0x89

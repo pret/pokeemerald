@@ -5112,7 +5112,7 @@ _08079DDE:
 _08079DF0:
 	add r0, sp, 0xC
 	movs r1, 0
-	bl sub_8070ECC
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	movs r2, 0x83
 	cmp r0, 0
@@ -5122,7 +5122,7 @@ _08079DF0:
 _08079E04:
 	add r0, sp, 0xC
 	movs r1, 0xFE
-	bl sub_8070ECC
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	movs r2, 0x83
 	cmp r0, 0
@@ -7948,7 +7948,7 @@ sub_807B4D0: @ 807B4D0
 	adds r1, r2
 	ldr r0, [r0]
 	adds r0, r1
-	bl sub_80D439C
+	bl ClearMailStruct
 _0807B52A:
 	ldr r4, =gUnknown_020322A0
 	ldr r0, [r4]
@@ -7985,7 +7985,7 @@ _0807B566:
 	ldr r0, =gUnknown_020321C0
 	adds r1, r0
 	adds r0, r7, 0
-	bl sub_80D460C
+	bl GiveMailToMon2
 _0807B57C:
 	mov r0, r9
 	bl sub_807B464

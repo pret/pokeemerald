@@ -111,7 +111,7 @@ void sub_8032768(void)
         sub_8184DA4(2);
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        sub_8185EB8();
+        RecordedBattle_SaveParties();
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         SetControllersVariablesInLinkBattle();
