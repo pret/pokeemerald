@@ -157,3 +157,4 @@ void rfu_REQ_sendData(u8);
 void rfu_setMSCCallback(void (*func)(u16));
 void rfu_setREQCallback(void (*func)(u16, u16));
 bool8 rfu_getMasterSlave(void);
+void rfu_REQBN_watchLink(u16 a0, u8 *a1, u8 *a2, u8 *a3);

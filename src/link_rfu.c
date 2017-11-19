@@ -350,3 +350,95 @@ void sub_800C27C(bool8 a0)
         }
     }
 }
+
+bool8 sub_800C36C(u16 a0)
+{
+    bool8 retVal;
+    u8 i;
+    u8 sp0;
+    u8 sp1;
+    u8 sp2;
+    u8 flags;
+
+    retVal = FALSE;
+    rfu_REQBN_watchLink(a0, &sp0, &sp1, &sp2);
+    if (sp0)
+    {
+        gUnknown_03004140.unk_14 = sp0;
+        gUnknown_03004140.unk_16 = sp1;
+        if (gUnknown_03004140.unk_09)
+        {
+            gUnknown_03004140.unk_0a = 1;
+            if (gUnknown_03004140.unk_06 == 0 && sp1 == 0)
+            {
+                gUnknown_03004140.unk_0a = 4;
+            }
+            if (gUnknown_03004140.unk_0a == 1)
+            {
+                for (i = 0; i < 4; i++)
+                {
+                    if ((sp0 >> i) & 1)
+                    {
+                        gUnknown_03004140.unk_30 |= (1 << i);
+                        gUnknown_03004140.unk_34[i] = gUnknown_03004140.unk_32;
+                    }
+                }
+                sub_800D30C(0x31, 0x01);
+            }
+            else
+            {
+                gUnknown_03004140.unk_0a = 0;
+                sub_800D334(sp0);
+                retVal = TRUE;
+                sub_800D30C(0x33, 0x01);
+            }
+        }
+        else
+        {
+            sub_800D334(sp0);
+            retVal = TRUE;
+            sub_800D30C(0x30, 0x02);
+        }
+        sub_800D610();
+    }
+    if (gUnknown_03007890->unk_00 == 1)
+    {
+        if (sp2)
+        {
+            for (i = 0; i < 4; i++)
+            {
+                if ((gUnknown_03004140.unk_30 >> i) & 1 && (sp2 >> i) & 1)
+                {
+                    gUnknown_03004140.unk_34[i] = 0;
+                }
+            }
+            gUnknown_03004140.unk_30 &= ~sp2;
+            gUnknown_03004140.unk_14 = sp2;
+            sub_800D30C(0x32, 0x01);
+        }
+        if (gUnknown_03004140.unk_30)
+        {
+            flags = 0;
+            for (i = 0; i < 4; i++)
+            {
+                if ((gUnknown_03004140.unk_30 >> i) & 1 && gUnknown_03004140.unk_34[i] && --gUnknown_03004140.unk_34[i] == 0)
+                {
+                    gUnknown_03004140.unk_30 &= ~(1 << i);
+                    flags |= (1 << i);
+                }
+            }
+            if (flags)
+            {
+                sub_800D334(flags);
+                retVal = TRUE;
+                gUnknown_03004140.unk_14 = flags;
+                sub_800D30C(0x33, 0x01);
+            }
+        }
+        if (!gUnknown_03004140.unk_30)
+        {
+            gUnknown_03004140.unk_0a = 0;
+        }
+    }
+    return retVal;
+}

@@ -52,7 +52,7 @@ struct UnkRfuStruct_1 {
     /* 0x012 */ u8 unk_12;
     // aligned
     /* 0x014 */ u16 unk_14;
-    /* 0x016 */ u8 filler_16[2];
+    /* 0x016 */ u16 unk_16;
     /* 0x018 */ u16 unk_18;
     /* 0x01a */ u16 unk_1a;
     /* 0x01c */ u8 filler_1c[2];
