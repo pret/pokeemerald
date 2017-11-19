@@ -15,6 +15,10 @@ ALIGNED(4) IWRAM_DATA u8 gUnknown_03000D78[8];
 IWRAM_DATA u8 gUnknown_03000D80[16];
 IWRAM_DATA u16 gUnknown_03000D90[8];
 
+EWRAM_DATA u8 gUnknown_02022B10 = 0;
+EWRAM_DATA struct UnkLinkRfuStruct_02022B14 gUnknown_02022B14 = {};
+EWRAM_DATA struct UnkLinkRfuStruct_02022B2C gUnknown_02022B2C = {};
+
 // Static ROM declarations
 
 void sub_800C000(void);

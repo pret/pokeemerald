@@ -3,6 +3,25 @@
 
 // Exported type declarations
 
+struct UnkLinkRfuStruct_02022B14
+{
+    u8 unk_00_0:4;
+    u8 unk_00_4:1;
+    u8 unk_00_5:1;
+    u8 unk_00_6:2;
+    u8 filler_01[2];
+    u8 unk_03[4];
+    u16 unk_08_0:10;
+    u16 unk_09_2:6;
+    u8 unk_0a_0:7;
+    u8 unk_0a_7:1;
+    u8 unk_0b_0:1;
+    u8 unk_0b_1:7;
+    u8 unk_0c;
+    u8 unk_0d;
+    u8 filler_0e[8];
+};
+
 struct UnkLinkRfuStruct_02022B2C
 {
     u8 filler_00[16];
