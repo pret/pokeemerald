@@ -62,7 +62,7 @@ struct UnkRfuStruct_1 {
     /* 0x016 */ u16 unk_16;
     /* 0x018 */ u16 unk_18;
     /* 0x01a */ u16 unk_1a;
-    /* 0x01c */ u8 filler_1c[2];
+    /* 0x01c */ u16 unk_1c;
     /* 0x01e */ u16 unk_1e;
     /* 0x020 */ u16 *unk_20;
     /* 0x024 */ u8 unk_24;
