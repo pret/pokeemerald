@@ -5,31 +5,33 @@
 
 // Exported RAM declarations
 
-struct ListMenuItem {
+struct ListMenuItem
+{
     const u8 *unk_00;
     s32 unk_04;
 };
 
 struct ListMenu;
 
-struct ListMenuTemplate {
-    struct ListMenuItem *unk_00;
+struct ListMenuTemplate
+{
+    const struct ListMenuItem *items;
     void (* unk_04)(u32, bool8, struct ListMenu *);
     void (* unk_08)(u8, s32, u8);
-    u16 unk_0c;
-    u16 unk_0e;
+    u16 totalItems;
+    u16 maxShowed;
     u8 unk_10;
     u8 unk_11;
     u8 unk_12;
-    u8 unk_13;
-    u32 unk_14_0:4;
-    u32 unk_14_4:4;
-    u32 unk_15_0:4;
-    u32 unk_15_4:4;
-    u32 unk_16_0:1;
-    u32 unk_16_1:6;
-    u32 unk_16_7:1;
-    u32 unk_17_0:6;
+    u8 cursor_Y;
+    u32 upText_Y:4; // x1, x2, x4, x8 = xF
+    u32 cursorColor:4; // x10, x20, x40, x80 = xF0
+    u32 fillColor:4; // x100, x200, x400, x800 = xF00
+    u32 cursorShadowColor:4; // x1000, x2000, x4000, x8000 = xF000
+    u32 unk_16_0:1; // x10000
+    u32 spaceBetweenItems:6; // x20000, x40000, x80000, x100000, x200000, x400000 = x7E0000
+    u32 unk_16_7:1; // x800000
+    u32 unk_17_0:6; // x1000000, x2000000, x4000000, x8000000, x10000000, x20000000 = x3F000000
 };
 
 struct ListMenu {

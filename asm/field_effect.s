@@ -1988,7 +1988,7 @@ task00_8084310: @ 80B6A24
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B6A8A
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24

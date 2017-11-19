@@ -1444,7 +1444,7 @@ _0816BA68:
 	adds r0, r6, 0
 	bl DisplayItemMessageOnField
 	adds r0, r5, 0
-	bl sub_80D439C
+	bl ClearMailStruct
 	bl sub_816B54C
 	ldrb r0, [r4, 0x5]
 	subs r0, 0x1

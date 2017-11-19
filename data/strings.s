@@ -5122,16 +5122,16 @@ gText_YouDontHaveThreeCoins:: @ 85EF734
 gText_ReelTimeHelp:: @ 85EF750
 	.string "REEL TIME\nHere’s your chance to take\naim and nail marks!\nReel Time continues for the\nawarded number of spins.\nIt all ends on a Big Bonus.$"
 
-gUnknown_085EF7DA:: @ 85EF7DA
+gDaycareText_GetAlongVeryWell:: @ 85EF7DA
 	.string "The two seem to get along\nvery well.$"
 
-gUnknown_085EF7FF:: @ 85EF7FF
+gDaycareText_GetAlong:: @ 85EF7FF
 	.string "The two seem to get along.$"
 
-gUnknown_085EF81A:: @ 85EF81A
+gDaycareText_DontLikeOther:: @ 85EF81A
 	.string "The two don’t seem to like\neach other much.$"
 
-gUnknown_085EF846:: @ 85EF846
+gDaycareText_PlayOther:: @ 85EF846
 	.string "The two prefer to play with other\nPOKéMON than each other.$"
 
 gText_NewLine2:: @ 85EF881
