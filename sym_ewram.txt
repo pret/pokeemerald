@@ -570,18 +570,8 @@ gUnknown_0203229C: @ 203229C
 
 gUnknown_020322A0: @ 20322A0
 	.space 0x4
-
-sBerryBlenderData: @ 20322A4
-	.space 0x4
-
-gUnknown_020322A8: @ 20322A8
-	.space 0x14
-
-gUnknown_020322BC: @ 20322BC
-	.space 0x14
-
-gUnknown_020322D0: @ 20322D0
-	.space 0x4
+    
+    .include "src/berry_blender.o"
 
 gDifferentSaveFile: @ 20322D4
 	.space 0x1
@@ -1242,7 +1232,7 @@ gUnknown_0203AB6F: @ 203AB6F
 gUnknown_0203AB70: @ 203AB70
 	.space 0x4
 
-gUnknown_0203AB74: @ 203AB74
+gResultsWindowId: @ 203AB74
 	.space 0x4
 
 gUnknown_0203AB78: @ 203AB78

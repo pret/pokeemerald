@@ -1,6 +1,6 @@
 #include "global.h"
-#include "international_string_util.h"
 #include "text.h"
+#include "international_string_util.h"
 
 extern s32 convert_pixel_width_to_tile_width(s32 a0); // script menu
 

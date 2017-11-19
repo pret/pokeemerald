@@ -646,7 +646,7 @@ _08009976:
 	orrs r1, r0
 _08009990:
 	adds r0, r2, 0
-	bl sub_800A994
+	bl SetLinkDebugValues
 _08009996:
 	add sp, 0x4
 	pop {r4,r5}
@@ -2644,15 +2644,15 @@ _0800A94E:
 	.pool
 	thumb_func_end task00_link_test
 
-	thumb_func_start sub_800A994
-sub_800A994: @ 800A994
+	thumb_func_start SetLinkDebugValues
+SetLinkDebugValues: @ 800A994
 	ldr r2, =gUnknown_0300302C
 	str r0, [r2]
 	ldr r0, =gUnknown_03003070
 	str r1, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_800A994
+	thumb_func_end SetLinkDebugValues
 
 	thumb_func_start sub_800A9A8
 sub_800A9A8: @ 800A9A8
@@ -12305,7 +12305,7 @@ sub_800F820: @ 800F820
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800F83C
-	bl sub_8082D18
+	bl GetBlenderArrowPosition
 	ldr r1, =gSendCmd
 	strh r0, [r1, 0xC]
 _0800F83C:
