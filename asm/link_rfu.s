@@ -2450,6 +2450,8 @@ _0800D6C2:
 	bx r0
 	thumb_func_end sub_800D658
 
+@ file boundary?
+
 	thumb_func_start sub_800D6C8
 sub_800D6C8: @ 800D6C8
 	push {r4,r5,lr}
@@ -4414,6 +4416,8 @@ _0800E5C0:
 	bx r0
 	.pool
 	thumb_func_end sub_800E5AC
+
+@ file boundary?
 
 	thumb_func_start nullsub_5
 nullsub_5: @ 800E5FC
