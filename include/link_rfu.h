@@ -24,7 +24,13 @@ struct UnkLinkRfuStruct_02022B14
 
 struct UnkLinkRfuStruct_02022B2C
 {
-    u8 filler_00[16];
+    u8 unk_00;
+    u8 unk_01;
+    u16 unk_02;
+    u8 unk_04;
+    u16 unk_06;
+    u32 unk_08;
+    u32 unk_0c;
     u8 unk_10;
     u8 unk_11;
     u16 unk_12;
@@ -46,7 +52,8 @@ struct UnkRfuStruct_1 {
     /* 0x00b */ u8 unk_0b;
     /* 0x00c */ u8 unk_0c;
     /* 0x00d */ u8 unk_0d;
-    /* 0x00e */ u8 filler_0e[2];
+    /* 0x00e */ u8 unk_0e;
+    /* 0x00f */ u8 unk_0f;
     /* 0x010 */ u8 unk_10;
     /* 0x011 */ u8 unk_11;
     /* 0x012 */ u8 unk_12;

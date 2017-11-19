@@ -29,6 +29,11 @@ void sub_800C7B4(u16 unk0, u16 unk1);
 void sub_800D30C(u8 a0, u8 a1);
 void sub_800D334(u8 a0);
 void sub_800D610(void);
+void sub_800C744(u32 a0);
+void sub_800CF34(void);
+void sub_800D158(void);
+void sub_800D268(void);
+void sub_800D434(void);
 
 // .rodata
 
@@ -441,4 +446,126 @@ bool8 sub_800C36C(u16 a0)
         }
     }
     return retVal;
+}
+
+void rfu_syncVBlank_(void)
+{
+    if (rfu_syncVBlank())
+    {
+        sub_800D30C(0xF1, 0x00);
+        sub_800D610();
+    }
+}
+
+void sub_800C54C(u32 a0)
+{
+    u8 r2;
+
+    if (gUnknown_03004140.unk_40 == NULL && gUnknown_03004140.unk_04 != 0)
+    {
+        gUnknown_03004140.unk_04 = 0;
+    }
+    else
+    {
+        if (gUnknown_03004140.unk_07 != 0)
+        {
+            sub_800C744(a0);
+        }
+        do {
+
+            if (gUnknown_03004140.unk_04 != 0)
+            {
+                rfu_waitREQComplete();
+                gUnknown_03004140.unk_0e = 1;
+                switch (gUnknown_03004140.unk_04)
+                {
+                    case 23:
+                        r2 = sub_800BEC0() == 0x8001 ? 0x44 : 0xFF;
+                        gUnknown_03004140.unk_04 = gUnknown_03004140.unk_05 = 0;
+                        sub_800D30C(r2, 0);
+                        break;
+                    case 1:
+                        if (sub_800BEC0() == 0x8001)
+                        {
+                            gUnknown_03004140.unk_04 = gUnknown_03004140.unk_05;
+                            gUnknown_03004140.unk_05 = 3;
+                        }
+                        else
+                        {
+                            gUnknown_03004140.unk_04 = gUnknown_03004140.unk_05 = 0;
+                            sub_800D30C(0xFF, 0);
+                        }
+                        break;
+                    case 2:
+                        rfu_REQ_reset();
+                        break;
+                    case 3:
+                        rfu_REQ_configSystem(gUnknown_03004140.unk_3c->unk_02, gUnknown_03004140.unk_3c->unk_00, gUnknown_03004140.unk_3c->unk_01);
+                        break;
+                    case 4:
+                        rfu_REQ_configGameData(gUnknown_03004140.unk_3c->unk_04, gUnknown_03004140.unk_3c->unk_06, gUnknown_03004140.unk_3c->unk_08, gUnknown_03004140.unk_3c->unk_0c);
+                        break;
+                    case 5:
+                        rfu_REQ_startSearchChild();
+                        break;
+                    case 6:
+                        rfu_REQ_pollSearchChild();
+                        break;
+                    case 7:
+                        rfu_REQ_endSearchChild();
+                        break;
+                    case 8:
+                        break;
+                    case 9:
+                        rfu_REQ_startSearchParent();
+                        break;
+                    case 10:
+                        rfu_REQ_pollSearchParent();
+                        break;
+                    case 11:
+                        rfu_REQ_endSearchParent();
+                        break;
+                    case 12:
+                        rfu_REQ_startConnectParent(gUnknown_03004140.unk_1e);
+                        break;
+                    case 13:
+                        rfu_REQ_pollConnectParent();
+                        break;
+                    case 14:
+                        rfu_REQ_endConnectParent();
+                        break;
+                    case 15:
+                        break;
+                    case 16:
+                        rfu_REQ_CHILD_startConnectRecovery(gUnknown_03007890->unk_03);
+                        break;
+                    case 17:
+                        rfu_REQ_CHILD_pollConnectRecovery();
+                        break;
+                    case 18:
+                        rfu_REQ_CHILD_endConnectRecovery();
+                        break;
+                    case 19:
+                        rfu_REQ_changeMasterSlave();
+                        break;
+                    case 20:
+                        break;
+                    case 21:
+                        rfu_REQ_stopMode();
+                        break;
+                    case 22:
+                        break;
+                }
+                rfu_waitREQComplete();
+                gUnknown_03004140.unk_0e = 0;
+            }
+        } while (gUnknown_03004140.unk_04 == 18 || gUnknown_03004140.unk_04 == 19);
+        if (gUnknown_03007890->unk_00 != 1 || !sub_800C36C(0))
+        {
+            sub_800CF34();
+            sub_800D158();
+            sub_800D268();
+            sub_800D434();
+        }
+    }
 }
