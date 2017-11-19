@@ -142,7 +142,6 @@ extern u8 gLastUsedAbility;
 extern u8 gUnknown_0203CF00[];
 extern const u8* gBattlescriptPtrsForSelection[BATTLE_BANKS_COUNT];
 extern const u8* gBattlescriptCurrInstr;
-extern u32 gBattlePalaceMoveSelectionRngValue;
 extern u8 gActionsByTurnOrder[BATTLE_BANKS_COUNT];
 extern u8 gCurrentTurnActionNumber;
 extern u16 gDynamicBasePower;
@@ -2803,7 +2802,7 @@ static void BattleStartClearSetData(void)
         if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlock2Ptr->optionsBattleSceneOff == TRUE)
             gHitMarker |= HITMARKER_NO_ANIMATIONS;
     }
-    else if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)) && sub_8185FB8())
+    else if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)) && GetBattleStyleInRecordedBattle())
         gHitMarker |= HITMARKER_NO_ANIMATIONS;
 
     gBattleScripting.battleStyle = gSaveBlock2Ptr->optionsBattleStyle;
@@ -3920,7 +3919,7 @@ static void HandleTurnActionSelectionState(void)
         switch (gBattleCommunication[gActiveBank])
         {
         case STATE_TURN_START_RECORD: // recorded battle related on start of every turn
-            sub_8185FD0();
+            RecordedBattle_CopyBankMoves();
             gBattleCommunication[gActiveBank] = STATE_BEFORE_ACTION_CHOSEN;
             break;
         case STATE_BEFORE_ACTION_CHOSEN: // choose an action

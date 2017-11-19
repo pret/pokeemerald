@@ -797,7 +797,7 @@ u16 sub_815355C(void)
     return 0;
 }
 
-u32 sub_81535DC(u8 sector, u8* dst)
+u32 TryCopySpecialSaveSection(u8 sector, u8* dst)
 {
     s32 i;
     s32 size;
@@ -826,6 +826,7 @@ u32 sub_8153634(u8 sector, u8* src)
 
     if (sector != 30 && sector != 31)
         return 0xFF;
+
     savDataBuffer = &gSaveDataBuffer;
     *(u32*)(savDataBuffer) = 0xB39D;
 

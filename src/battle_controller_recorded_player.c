@@ -1229,7 +1229,7 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
     if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            trainerPicId = sub_8185F40();
+            trainerPicId = GetActiveBankLinkPlayerGender();
         else
             trainerPicId = gLinkPlayers[gUnknown_0203C7B4].gender;
     }
