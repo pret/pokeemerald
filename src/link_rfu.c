@@ -191,3 +191,53 @@ u8 sub_800C054(u8 r5, u16 r7, u16 r8, u16 *r6)
     gUnknown_03004140.unk_20 = r6;
     return 0;
 }
+
+u8 sub_800C12C(u16 r6, u16 r8)
+{
+    u8 i;
+    struct RfuUnk5 *tmp;
+
+    if (gUnknown_03004140.unk_04 != 0 && (gUnknown_03004140.unk_04 < 9 || gUnknown_03004140.unk_04 > 11))
+    {
+        gUnknown_03004140.unk_14 = 1;
+        sub_800D30C(0xF3, 0x01);
+        return 1;
+    }
+    if (!rfu_getMasterSlave())
+    {
+        gUnknown_03004140.unk_14 = 2;
+        sub_800D30C(0xF3, 0x01);
+        return 2;
+    }
+    for (i = 0; i < gUnknown_03007890->unk_08; i ++)
+    {
+        tmp = &gUnknown_03007890[i];
+        if (tmp->unk_14 == r6)
+        {
+            break;
+        }
+    }
+    if (gUnknown_03007890->unk_08 == 0 || i == gUnknown_03007890->unk_08)
+    {
+        gUnknown_03004140.unk_14 = 3;
+        sub_800D30C(0xF3, 0x01);
+        return 3;
+    }
+    if (gUnknown_03004140.unk_04 == 0 || gUnknown_03004140.unk_04 == 9)
+    {
+        gUnknown_03004140.unk_04 = 12;
+        gUnknown_03004140.unk_05 = 13;
+    }
+    else
+    {
+        gUnknown_03004140.unk_04 = 11;
+        gUnknown_03004140.unk_05 = 12;
+    }
+    gUnknown_03004140.unk_1e = r6;
+    gUnknown_03004140.unk_1a = r8;
+    if (gUnknown_03004140.unk_07 != 0)
+    {
+        gUnknown_03004140.unk_07 = 7;
+    }
+    return 0;
+}

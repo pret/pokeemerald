@@ -53,7 +53,8 @@ struct UnkRfuStruct_1 {
     u8 filler_16[2];
     u16 unk_18;
     u16 unk_1a;
-    u8 filler_1c[4];
+    u8 filler_1c[2];
+    u16 unk_1e;
     u16 *unk_20;
     u8 unk_24;
     u16 unk_26;

@@ -3,14 +3,6 @@
 
 #include "librfu.h"
 
-extern struct RfuUnk5 *gUnknown_03007890;
-extern u32 *gUnknown_03007894;
-extern struct RfuUnk3* gUnknown_03007898;
-extern struct RfuUnk2* gUnknown_03007880[4];
-extern struct RfuUnk1* gUnknown_03007870[4];
-extern void* sub_82E53F4;
-extern void rfu_STC_clearAPIVariables(void);
-
 // Nonmatching, only register differences
 /*u16 rfu_initializeAPI(u32 *unk0, u16 unk1, IntrFunc *interrupt, bool8 copyInterruptToRam)
 {
