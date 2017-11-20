@@ -4,6 +4,9 @@
 void BattleSetup_StartScriptedWildBattle(void);
 u8 BattleSetup_GetTerrainId(void);
 u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data);
+void BattleSetup_StartBattlePikeWildBattle(void);
+void BattleSetup_StartWildBattle(void);
+void BattleSetup_StartRoamerBattle(void);
 
 u8 HasTrainerAlreadyBeenFought(u16);
 void trainer_flag_set(u16);

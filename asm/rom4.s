@@ -2675,12 +2675,12 @@ sub_8085B2C: @ 8085B2C
 	ldr r1, =gUnknown_02032306
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sub_80B582C
+	bl GetLocalWaterMon
 	b _08085B62
 	.pool
 _08085B5C:
 	ldr r0, =gUnknown_02032306
-	bl wild_pokemon_rand_for_map
+	bl GetLocalWildMon
 _08085B62:
 	ldr r1, =gUnknown_02032304
 	strh r0, [r1]

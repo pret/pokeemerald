@@ -80,7 +80,7 @@
 	.equiv FLAG_0x050,              0x50
 	.equiv FLAG_0x051,              0x51
 	.equiv FLAG_0x052,              0x52
-	.equiv FLAG_0x053,              0x53
+	.equiv FLAG_LEGENDARIES_IN_SOOTOPOLIS,              0x53
 	.equiv FLAG_0x054,              0x54
 	.equiv FLAG_0x055,              0x55
 	.equiv FLAG_0x056,              0x56
