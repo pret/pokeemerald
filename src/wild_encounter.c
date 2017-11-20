@@ -81,7 +81,7 @@ static bool8 CheckFeebas(void)
     u16 feebasSpots[NUM_FEEBAS_SPOTS];
     s16 x;
     s16 y;
-    u8 route119section = 0;
+    u8 route119Section = 0;
     u16 waterTileNum;
 
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_ROUTE119
@@ -93,16 +93,16 @@ static bool8 CheckFeebas(void)
 
 #ifdef NONMATCHING
         if (y >= gRoute119WaterTileData[3 * 1 + 0] && y <= gRoute119WaterTileData[3 * 1 + 1])
-            route119section = 1;
+            route119Section = 1;
         if (y >= gRoute119WaterTileData[3 * 2 + 0] && y <= gRoute119WaterTileData[3 * 2 + 1])
-            route119section = 2;
+            route119Section = 2;
 #else
         {
             register const u16 *arr asm("r0");
             if (y >= (arr = gRoute119WaterTileData)[3 * 1 + 0] && y <= arr[3 * 1 + 1])
-                route119section = 1;
+                route119Section = 1;
             if (y >= arr[3 * 2 + 0] && y <= arr[3 * 2 + 1])
-                route119section = 2;
+                route119Section = 2;
         }
 #endif
 
@@ -118,7 +118,7 @@ static bool8 CheckFeebas(void)
             if (feebasSpots[i] < 1 || feebasSpots[i] >= 4)
                 i++;
         }
-        waterTileNum = GetRoute119WaterTileNum(x, y, route119section);
+        waterTileNum = GetRoute119WaterTileNum(x, y, route119Section);
         for (i = 0; i < NUM_FEEBAS_SPOTS; i++)
         {
             if (waterTileNum == feebasSpots[i])
@@ -128,9 +128,12 @@ static bool8 CheckFeebas(void)
     return FALSE;
 }
 
+// The number 1103515245 comes from the example implementation of rand and srand
+// in the ISO C standard.
+
 static u16 FeebasRandom(void)
 {
-    sFeebasRngValue = 12345 + 0x41C64E6D * sFeebasRngValue;
+    sFeebasRngValue = (1103515245 * sFeebasRngValue) + 12345;
     return sFeebasRngValue >> 16;
 }
 
@@ -145,25 +148,25 @@ static u8 ChooseWildMonIndex_Land(void)
 
     if (rand < 20)                  // 20% chance
         return 0;
-    if (rand >= 20 && rand < 40)    // 20% chance
+    else if (rand >= 20 && rand < 40)    // 20% chance
         return 1;
-    if (rand >= 40 && rand < 50)    // 10% chance
+    else if (rand >= 40 && rand < 50)    // 10% chance
         return 2;
-    if (rand >= 50 && rand < 60)    // 10% chance
+    else if (rand >= 50 && rand < 60)    // 10% chance
         return 3;
-    if (rand >= 60 && rand < 70)    // 10% chance
+    else if (rand >= 60 && rand < 70)    // 10% chance
         return 4;
-    if (rand >= 70 && rand < 80)    // 10% chance
+    else if (rand >= 70 && rand < 80)    // 10% chance
         return 5;
-    if (rand >= 80 && rand < 85)    // 5% chance
+    else if (rand >= 80 && rand < 85)    // 5% chance
         return 6;
-    if (rand >= 85 && rand < 90)    // 5% chance
+    else if (rand >= 85 && rand < 90)    // 5% chance
         return 7;
-    if (rand >= 90 && rand < 94)    // 4% chance
+    else if (rand >= 90 && rand < 94)    // 4% chance
         return 8;
-    if (rand >= 94 && rand < 98)    // 4% chance
+    else if (rand >= 94 && rand < 98)    // 4% chance
         return 9;
-    if (rand == 98)                 // 1% chance
+    else if (rand == 98)                 // 1% chance
         return 10;
     else                            // 1% chance
         return 11;
@@ -175,11 +178,11 @@ static u8 ChooseWildMonIndex_WaterRock(void)
 
     if (rand < 60)                  // 60% chance
         return 0;
-    if (rand >= 60 && rand < 90)    // 30% chance
+    else if (rand >= 60 && rand < 90)    // 30% chance
         return 1;
-    if (rand >= 90 && rand < 95)    // 5% chance
+    else if (rand >= 90 && rand < 95)    // 5% chance
         return 2;
-    if (rand >= 95 && rand < 99)    // 4% chance
+    else if (rand >= 95 && rand < 99)    // 4% chance
         return 3;
     else                            // 1% chance
         return 4;
@@ -535,11 +538,11 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
             headerId = GetBattlePikeWildMonHeaderId();
             if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
                 return FALSE;
-            if (DoWildEncounterRateTest(gBattlePikeWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
+            else if (DoWildEncounterRateTest(gBattlePikeWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
-            if (TryGenerateWildMon(gBattlePikeWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE) != TRUE)
+            else if (TryGenerateWildMon(gBattlePikeWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE) != TRUE)
                 return FALSE;
-            if (!TryGenerateBattlePikeWildMon(TRUE))
+            else if (!TryGenerateBattlePikeWildMon(TRUE))
                 return FALSE;
 
             BattleSetup_StartBattlePikeWildBattle();
@@ -550,9 +553,9 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
             headerId = gSaveBlock2Ptr->battlePyramidWildHeaderId;
             if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
                 return FALSE;
-            if (DoWildEncounterRateTest(gBattlePyramidWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
+            else if (DoWildEncounterRateTest(gBattlePyramidWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
-            if (TryGenerateWildMon(gBattlePyramidWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE) != TRUE)
+            else if (TryGenerateWildMon(gBattlePyramidWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE) != TRUE)
                 return FALSE;
 
             GenerateBattlePyramidWildMon();
@@ -566,9 +569,9 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
         {
             if (gWildMonHeaders[headerId].landMonsInfo == NULL)
                 return FALSE;
-            if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
+            else if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
                 return FALSE;
-            if (DoWildEncounterRateTest(gWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
+            else if (DoWildEncounterRateTest(gWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
 
             if (TryStartRoamerEncounter() == TRUE)
@@ -603,11 +606,11 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
         {
             if (AreLegendariesInSootopolisPreventingEncounters() == TRUE)
                 return FALSE;
-            if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
+            else if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
                 return FALSE;
-            if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
+            else if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
                 return FALSE;
-            if (DoWildEncounterRateTest(gWildMonHeaders[headerId].waterMonsInfo->encounterRate, FALSE) != TRUE)
+            else if (DoWildEncounterRateTest(gWildMonHeaders[headerId].waterMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
 
             if (TryStartRoamerEncounter() == TRUE)
@@ -783,10 +786,10 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     if (landMonsInfo == NULL && waterMonsInfo == NULL)
         return SPECIES_NONE;
     // Land Pokemon
-    if (landMonsInfo != NULL && waterMonsInfo == NULL)
+    else if (landMonsInfo != NULL && waterMonsInfo == NULL)
         return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
     // Water Pokemon
-    if (landMonsInfo == NULL && waterMonsInfo != NULL)
+    else if (landMonsInfo == NULL && waterMonsInfo != NULL)
     {
         *isWaterMon = TRUE;
         return waterMonsInfo->wildPokemon[ChooseWildMonIndex_WaterRock()].species;
@@ -907,9 +910,9 @@ static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildM
 {
     if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
         return FALSE;
-    if (GetMonAbility(&gPlayerParty[0]) != ability)
+    else if (GetMonAbility(&gPlayerParty[0]) != ability)
         return FALSE;
-    if (Random() % 2 != 0)
+    else if (Random() % 2 != 0)
         return FALSE;
 
     return TryGetRandomWildMonIndexByType(wildMon, type, LAND_WILD_COUNT, monIndex);

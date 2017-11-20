@@ -127,7 +127,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	clearflag FLAG_0x3E6
 	clearflag FLAG_0x3E5
 	setflag FLAG_0x347
-	setflag FLAG_0x053
+	setflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
 	clearflag FLAG_0x3B0
 	clearflag FLAG_0x3B1
 	setflag FLAG_SYS_WEATHER_CTRL
