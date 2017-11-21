@@ -130,7 +130,8 @@ struct RfuUnk3
 struct RfuUnk5
 {
     u8 unk_00;
-    u8 filler_01[2];
+    u8 unk_01;
+    u8 unk_02;
     u8 unk_03;
     u8 unk_04[4];
     u8 unk_08;
@@ -175,3 +176,10 @@ void rfu_REQ_CHILD_startConnectRecovery(u8);
 void rfu_REQ_CHILD_pollConnectRecovery(void);
 void rfu_REQ_CHILD_endConnectRecovery(void);
 void rfu_REQ_changeMasterSlave(void);
+void rfu_REQ_RFUStatus(void);
+void rfu_getRFUStatus(u8 *status);
+u8 *rfu_getSTWIRecvBuffer(void);
+u8 rfu_NI_CHILD_setSendGameName(u8 a0, u8 a1);
+void rfu_clearSlot(u8 a0, u8 a1);
+bool16 rfu_CHILD_getConnectRecoveryStatus(u8 *status);
+bool16 rfu_getConnectParentStatus(u8 *status, u8 *a1);

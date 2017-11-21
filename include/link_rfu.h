@@ -40,7 +40,7 @@ struct UnkLinkRfuStruct_02022B2C
 struct UnkRfuStruct_1 {
     /* 0x000 */ u8 unk_00;
     /* 0x001 */ u8 unk_01;
-    /* 0x002 */ u8 unk_02;
+    /* 0x002 */ vu8 unk_02;
     /* 0x003 */ vu8 unk_03;
     /* 0x004 */ u8 unk_04;
     /* 0x005 */ u8 unk_05;
