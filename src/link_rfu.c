@@ -84,7 +84,7 @@ void rfu_REQ_sendData_wrapper(u8 r2)
     rfu_REQ_sendData(r2);
 }
 
-int sub_800BF4C(void (*func1)(u8), void (*func2)(void))
+int sub_800BF4C(void (*func1)(u8), void (*func2)(u16))
 {
     if (func1 == NULL)
     {
@@ -975,4 +975,43 @@ void sub_800C7B4(u16 r8, u16 r6)
         sub_800D30C(0xf2, 0x00);
         sub_800D610();
     }
+}
+
+void sub_800CEB0(u16 r6)
+{
+    u8 r7;
+    u8 sp0;
+
+    r7 = gUnknown_03004140.unk_0e;
+    gUnknown_03004140.unk_0e = 0;
+    gUnknown_03004140.unk_0f = 1;
+    if (gUnknown_03007890->unk_00 == 0)
+    {
+        sub_800C36C(r6);
+        if (gUnknown_03004140.unk_02 != 1)
+        {
+            sub_800D610();
+            gUnknown_03004140.unk_0f = 0;
+            gUnknown_03004140.unk_0e = r7;
+            return;
+        }
+    }
+    else
+    {
+        if (!rfu_UNI_PARENT_getDRAC_ACK(&sp0))
+        {
+            gUnknown_03004140.unk_03 |= sp0;
+        }
+    }
+    if (gUnknown_03004140.unk_44 != NULL)
+    {
+        gUnknown_03004140.unk_44(r6);
+        rfu_waitREQComplete();
+        if (gUnknown_03004140.unk_02 == 2)
+        {
+            sub_800D610();
+        }
+    }
+    gUnknown_03004140.unk_0f = 0;
+    gUnknown_03004140.unk_0e = r7;
 }
