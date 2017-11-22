@@ -1092,233 +1092,249 @@ gUnknown_0860DEA8:: @ 860DEA8
 gUnknown_0860DEB8:: @ 860DEB8 //struct
 	.incbin "baserom.gba", 0x60deb8, 0x500
 	
-gUnknown_0860e3b8:: @ 860E3B8
-	.4byte 0x082a971c, 0x00ff0200
-	.4byte 0x082a9798, 0x00ff0200
-	.4byte 0x082a9813, 0x00ff0200
-	.4byte 0x082a98a8, 0x00ff0200
-	.4byte 0x082a9977, 0x00ff0200
-	.4byte 0x082a99fd, 0x00ff0200
-	.4byte 0x082a9a78, 0x00ff0200
-	.4byte 0x082a9ae8, 0x00ff0200
-	.4byte 0x082a9ba7, 0x00ff0200
-	.4byte 0x082a9c36, 0x00ff0200
-	.4byte 0x082a9cc8, 0x00ff0200
-	.4byte 0x082a9d44, 0x00ff0200
-	.4byte 0x082a9dd7, 0x00ff0200
-	.4byte 0x082a9e70, 0x00ff0200
-	.4byte 0x082a9efd, 0x00ff0200
+gUnknown_0860E3B8:: @ 860E3B8
+	.4byte BattleFrontier_PokeNav_2A971C, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9798, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9813, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A98A8, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9977, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A99FD, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9A78, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9AE8, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9BA7, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9C36, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9CC8, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9D44, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9DD7, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9E70, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2A9EFD, 0x00ff0200
 
-gUnknown_0860e430:: @ 860E430
-	.4byte 0x082a9fab, 0x00ffff00
-	.4byte 0x082aa028, 0x00ffff00
-	.4byte 0x082aa099, 0x00ffff00
-	.4byte 0x082aa100, 0x00ffff00
-	.4byte 0x082aa188, 0x00ffff00
-	.4byte 0x082aa214, 0x00ffff00
-	.4byte 0x082aa2a1, 0x00ffff00
-	.4byte 0x082aa31b, 0x00ffff00
-	.4byte 0x082aa3a8, 0x00ffff00
-	.4byte 0x082aa442, 0x00ffff00
-	.4byte 0x082aa4c5, 0x00ffff00
-	.4byte 0x082aa520, 0x00ffff00
-	.4byte 0x082aa5ad, 0x00ffff00
-	.4byte 0x082aa64d, 0x00ffff00
+gUnknown_0860E430:: @ 860E430
+	.4byte BattleFrontier_PokeNav_2A9FAB, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA028, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA099, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA100, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA188, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA214, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA2A1, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA31B, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA3A8, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA442, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA4C5, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA520, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA5AD, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AA64D, 0x00ffff00
 
-gUnknown_0860e4a0:: @ 860E4A0
-	.4byte 0x082aa6af, 0x00ff0300
-	.4byte 0x082aa730, 0x00ff0300
-	.4byte 0x082aa77a, 0x00ff0300
-	.4byte 0x082aa81c, 0x00ff0300
-	.4byte 0x082aa88c, 0x00ff0300
-	.4byte 0x082aa934, 0x00ff0300
-	.4byte 0x082aa9d3, 0x00ff0300
-	.4byte 0x082aaa40, 0x00ff0300
-	.4byte 0x082aaae4, 0x00ff0300
-	.4byte 0x082aab8c, 0x00ff0300
-	.4byte 0x082aac25, 0x00ff0300
-	.4byte 0x082aac9d, 0x00ff0300
-	.4byte 0x082aad41, 0x00ff0300
-	.4byte 0x082aae00, 0x00ff0300
-	.4byte 0x082aae7f, 0x00ff0100
-	.4byte 0x082aaef1, 0x00ff0100
-	.4byte 0x082aaf69, 0x00ff0100
-	.4byte 0x082ab010, 0x00ff0100
-	.4byte 0x082ab076, 0x00ff0100
-	.4byte 0x082ab11a, 0x00ff0100
-	.4byte 0x082ab1b4, 0x00ff0100
-	.4byte 0x082ab23d, 0x00ff0100
-	.4byte 0x082ab2e9, 0x00ff0100
-	.4byte 0x082ab382, 0x00ff0100
-	.4byte 0x082ab410, 0x00ff0100
-	.4byte 0x082ab4b0, 0x00ff0100
-	.4byte 0x082ab538, 0x00ff0100
-	.4byte 0x082ab5e4, 0x00ff0100
-	.4byte 0x082ab670, 0x00ff0100
-	.4byte 0x082ab6cd, 0x00ff0100
-	.4byte 0x082ab73c, 0x00ff0100
-	.4byte 0x082ab808, 0x00ff0100
-	.4byte 0x082ab8b7, 0x00ff0100
-	.4byte 0x082ab95d, 0x00ff0100
-	.4byte 0x082aba03, 0x00ff0100
-	.4byte 0x082aba9f, 0x00ff0100
-	.4byte 0x082abb62, 0x00ff0100
-	.4byte 0x082abc26, 0x00ff0100
-	.4byte 0x082abce9, 0x00ff0100
-	.4byte 0x082abda2, 0x00ff0100
-	.4byte 0x082abe5e, 0x00ff0100
-	.4byte 0x082abf36, 0x00ff0100
-	.4byte 0x082ac009, 0x00ff0100
-	.4byte 0x082ac0bd, 0x00ffff00
-	.4byte 0x082ac18c, 0x00ffff00
-	.4byte 0x082ac228, 0x00ffff00
-	.4byte 0x082ac30c, 0x00ffff00
-	.4byte 0x082ac3b6, 0x00ffff00
-	.4byte 0x082ac446, 0x00ffff00
-	.4byte 0x082ac5c7, 0x00ffff00
-	.4byte 0x082ac682, 0x00ffff00
-	.4byte 0x082ac755, 0x00ffff00
-	.4byte 0x082ac82c, 0x00ffff00
-	.4byte 0x082ac914, 0x00ffff00
-	.4byte 0x082aca59, 0x00ff0200
-	.4byte 0x082acb02, 0x00ffff00
-	.4byte 0x082acc3f, 0x00ffff00
-	.4byte 0x082acd2f, 0x00ffff00
-	.4byte 0x082ace1e, 0x00ffff00
-	.4byte 0x082acf32, 0x00ff0300
-	.4byte 0x082acfbe, 0x00ffff00
-	.4byte 0x082ad0ac, 0x00ffff00
-	.4byte 0x082ad194, 0x00ffff00
-	.4byte 0x082ad1df, 0x00ffff00
-	.4byte 0x082ad2a8, 0x00ffff00
-	.4byte 0x082ad34f, 0x00ffff00
-	.4byte 0x082ad44e, 0x00ffff00
-	.4byte 0x082ad53a, 0x00ffff00
-	.4byte 0x082ad642, 0x00ffff00
-	.4byte 0x082ad801, 0x00ff0300
-	.4byte 0x082ad92e, 0x00ff0300
-	.4byte 0x082ada8f, 0x00ffff00
-	.4byte 0x082adb9b, 0x00ffff00
-	.4byte 0x082adc92, 0x00ffff00
-	.4byte 0x082ade08, 0x00ffff00
-	.4byte 0x082adf07, 0x00ffff00
-	.4byte 0x082ae0d9, 0x00ffff00
-	.4byte 0x082ae1fd, 0x00ffff00
-	.4byte 0x082ae327, 0x00ffff00
-	.4byte 0x082ae3da, 0x00ffff00
-	.4byte 0x082ae489, 0x00ffff00
-	.4byte 0x082ae5cd, 0x00ffff00
-	.4byte 0x082ae698, 0x00ffff00
-	.4byte 0x082ae704, 0x00ff0300
-	.4byte 0x082ae78f, 0x00ffff00
-	.4byte 0x082ae859, 0x00ff0300
-	.4byte 0x082ae8e6, 0x00ffff00
-	.4byte 0x082ae998, 0x00ffff00
-	.4byte 0x082aea8f, 0x00ffff00
-	.4byte 0x082aeb77, 0x00ffff00
-	.4byte 0x082aebfa, 0x00ffff00
-	.4byte 0x082aecc1, 0x00ffff00
-	.4byte 0x082aed52, 0x00ff0100
-	.4byte 0x082aee35, 0x00ff0300
-	.4byte 0x082aeef4, 0x00ffff00
-	.4byte 0x082aefda, 0x00ffff00
-	.4byte 0x082af0e7, 0x00ff0100
-	.4byte 0x082af1b8, 0x00ffff00
-	.4byte 0x082af2c4, 0x00ffff00
-	.4byte 0x082af371, 0x00ffff00
-	.4byte 0x082af480, 0x00ffff00
-	.4byte 0x082af671, 0x00ffff00
-	.4byte 0x082af7d8, 0x00ffff00
-	.4byte 0x082af8f7, 0x00ffff00
-	.4byte 0x082afa39, 0x00ffff00
-	.4byte 0x082afb26, 0x00ffff00
-	.4byte 0x082afc07, 0x00050400
-	.4byte 0x082afc78, 0x00050400
-	.4byte 0x082afcff, 0x00050400
-	.4byte 0x082afda7, 0x00050400
-	.4byte 0x082afe3d, 0x00050400
-	.4byte 0x082afeca, 0x00050400
-	.4byte 0x082aff64, 0x00050400
-	.4byte 0x082afff0, 0x00050400
-	.4byte 0x082b00b5, 0x00050400
-	.4byte 0x082b0129, 0x00050400
-	.4byte 0x082b01a5, 0x00050400
-	.4byte 0x082b0232, 0x00050400
-	.4byte 0x082b02d9, 0x00050400
-	.4byte 0x082b0366, 0x00050400
-	.4byte 0x082b03e6, 0x00050400
-	.4byte 0x082b0457, 0x00050400
-	.4byte 0x082b04de, 0x00050400
-	.4byte 0x082b0586, 0x00050400
-	.4byte 0x082b061c, 0x00050400
-	.4byte 0x082b06a3, 0x00050400
-	.4byte 0x082b073b, 0x00050400
-	.4byte 0x082b07c7, 0x00050400
-	.4byte 0x082b0894, 0x00050400
-	.4byte 0x082b0908, 0x00050400
-	.4byte 0x082b0984, 0x00050400
-	.4byte 0x082b0a11, 0x00050400
-	.4byte 0x082b0ab8, 0x00050400
-	.4byte 0x082b0b45, 0x00050400
-	.4byte 0x082b0bc5, 0x00050400
-	.4byte 0x082b0c4a, 0x00050400
-	.4byte 0x082b0cc7, 0x00050400
-	.4byte 0x082b0d4a, 0x00050400
-	.4byte 0x082b0dc8, 0x00050400
-	.4byte 0x082b0e35, 0x00050400
-	.4byte 0x082b0ed1, 0x00050400
-	.4byte 0x082b0f72, 0x00050400
-	.4byte 0x082b102a, 0x00050400
-	.4byte 0x082b10a7, 0x00050400
-	.4byte 0x082b1121, 0x00050400
-	.4byte 0x082b11d3, 0x00050400
-	.4byte 0x082b124d, 0x00050400
-	.4byte 0x082b12d0, 0x00050400
-	.4byte 0x082b1347, 0x00050400
-	.4byte 0x082b13b1, 0x00050400
-	.4byte 0x082b142b, 0x00050400
-	.4byte 0x082b14b4, 0x00050400
-	.4byte 0x082b1525, 0x00050400
-	.4byte 0x082b158e, 0x00050400
-	.4byte 0x082b1622, 0x00050400
-	.4byte 0x082b169d, 0x00050400
-	.4byte 0x082b1775, 0x00050400
-	.4byte 0x082b17f8, 0x00050400
-	.4byte 0x082b1877, 0x00050400
-	.4byte 0x082b1946, 0x00050400
-	.4byte 0x082b19c7, 0x00050400
-	.4byte 0x082b1a4c, 0x00050400
-	.4byte 0x082b1aca, 0x00050400
-	.4byte 0x082b1b50, 0x00050400
-	.4byte 0x082b1be4, 0x00050400
-	.4byte 0x082b1c6a, 0x00050400
-	.4byte 0x082b1ccf, 0x00050400
-	.4byte 0x082b1d38, 0x00050400
-	.4byte 0x082b1dcd, 0x00050400
-	.4byte 0x082b1e4b, 0x00050400
-	.4byte 0x082b1f24, 0x00050400
-	.4byte 0x082b1fa8, 0x00050400
-	.4byte 0x082b2022, 0x00050400
-	.4byte 0x082b20f3, 0x00050400
-	.4byte 0x082b2175, 0x00050400
-	.4byte 0x082b21fc, 0x00050400
+gUnknown_0860E4A0:: @ 860E4A0
+	.4byte BattleFrontier_PokeNav_2AA6AF, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AA730, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AA77A, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AA81C, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AA88C, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AA934, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AA9D3, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AAA40, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AAAE4, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AAB8C, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AAC25, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AAC9D, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AAD41, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AAE00, 0x00ff0300
+	
+gUnknown_0860E510:: @ 860E510
+	.4byte BattleFrontier_PokeNav_2AAE7F, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AAEF1, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AAF69, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB010, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB076, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB11A, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB1B4, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB23D, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB2E9, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB382, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB410, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB4B0, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB538, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB5E4, 0x00ff0100
+	
+gUnknown_0860E580:: @ 860E580
+	.4byte BattleFrontier_PokeNav_2AB670, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB6CD, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB73C, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB808, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB8B7, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AB95D, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2ABA03, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2ABA9F, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2ABB62, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2ABC26, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2ABCE9, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2ABDA2, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2ABE5E, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2ABF36, 0x00ff0100
+
+gUnknown_0860E5F0:: @ 860E5F0
+	.4byte BattleFrontier_PokeNav_2AC009, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AC0BD, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AC18C, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AC228, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AC30C, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AC3B6, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AC446, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AC5C7, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AC682, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AC755, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AC82C, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AC914, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2ACA59, 0x00ff0200
+	.4byte BattleFrontier_PokeNav_2ACB02, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2ACC3F, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2ACD2F, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2ACE1E, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2ACF32, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2ACFBE, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AD0AC, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AD194, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AD1DF, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AD2A8, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AD34F, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AD44E, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AD53A, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AD642, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AD801, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AD92E, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2ADA8F, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2ADB9B, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2ADC92, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2ADE08, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2ADF07, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AE0D9, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AE1FD, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AE327, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AE3DA, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AE489, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AE5CD, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AE698, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AE704, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AE78F, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AE859, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AE8E6, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AE998, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AEA8F, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AEB77, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AEBFA, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AECC1, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AED52, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AEE35, 0x00ff0300
+	.4byte BattleFrontier_PokeNav_2AEEF4, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AEFDA, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AF0E7, 0x00ff0100
+	.4byte BattleFrontier_PokeNav_2AF1B8, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AF2C4, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AF371, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AF480, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AF671, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AF7D8, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AF8F7, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AFA39, 0x00ffff00
+	.4byte BattleFrontier_PokeNav_2AFB26, 0x00ffff00
+
+gUnknown_0860E7F0:: @860E7F0
+	.4byte BattleFrontier_PokeNav_2AFC07, 0x00050400
+	.4byte BattleFrontier_PokeNav_2AFC78, 0x00050400
+	.4byte BattleFrontier_PokeNav_2AFCFF, 0x00050400
+	.4byte BattleFrontier_PokeNav_2AFDA7, 0x00050400
+	.4byte BattleFrontier_PokeNav_2AFE3D, 0x00050400
+	.4byte BattleFrontier_PokeNav_2AFECA, 0x00050400
+	.4byte BattleFrontier_PokeNav_2AFF64, 0x00050400
+	.4byte BattleFrontier_PokeNav_2AFFF0, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B00B5, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0129, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B01A5, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0232, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B02D9, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0366, 0x00050400
+
+gUnknown_0860E860:: @860E860
+	.4byte BattleFrontier_PokeNav_2B03E6, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0457, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B04DE, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0586, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B061C, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B06A3, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B073B, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B07C7, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0894, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0908, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0984, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0A11, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0AB8, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0B45, 0x00050400
+
+gUnknown_0860E8D0:: @860E8D0
+	.4byte BattleFrontier_PokeNav_2B0BC5, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0C4A, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0CC7, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0D4A, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0DC8, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0E35, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0ED1, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B0F72, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B102A, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B10A7, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1121, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B11D3, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B124D, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B12D0, 0x00050400
+
+gUnknown_0860E940:: @860E940
+	.4byte BattleFrontier_PokeNav_2B1347, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B13B1, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B142B, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B14B4, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1525, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B158E, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1622, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B169D, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1775, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B17F8, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1877, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1946, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B19C7, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1A4C, 0x00050400
+
+gUnknown_0860E9B0:: @860E9B0
+	.4byte BattleFrontier_PokeNav_2B1ACA, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1B50, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1BE4, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1C6A, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1CCF, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1D38, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1DCD, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1E4B, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1F24, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B1FA8, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B2022, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B20F3, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B2175, 0x00050400
+	.4byte BattleFrontier_PokeNav_2B21FC, 0x00050400
 
 gUnknown_0860EA20:: @ 860EA20
-	.4byte gUnknown_0860e3b8
-	.4byte gUnknown_0860e430
-	.4byte gUnknown_0860e4a0
+	.4byte gUnknown_0860E3B8
+	.4byte gUnknown_0860E430
+	.4byte gUnknown_0860E4A0
 
 gUnknown_0860EA2C:: @ 860EA2C
-.4byte 0x860e510
-.4byte 0x860e580
+	.4byte gUnknown_0860E510
+	.4byte gUnknown_0860E580
 
 gUnknown_0860EA34:: @ 860EA34
-.4byte 0x860e5f0
-.4byte 0x860e7f0
-.4byte 0x860e860
-.4byte 0x860e8d0
-.4byte 0x860e940
-.4byte 0x860e9b0
+	.4byte gUnknown_0860E5F0
+	.4byte gUnknown_0860E7F0
+	.4byte gUnknown_0860E860
+	.4byte gUnknown_0860E8D0
+	.4byte gUnknown_0860E940
+	.4byte gUnknown_0860E9B0
 
 gUnknown_0860EA4C:: @ 860EA4C
 	.incbin "baserom.gba", 0x60ea4c, 0x20
@@ -1366,39 +1382,39 @@ gUnknown_0860EFC4:: @ 860EFC4
 	.2byte 0x0033, 0x0000, 0xfa84, 0x085e, 0x011f, 0x0000, 0xfa8a, 0x085e
 
 gUnknown_0860EFF4:: @ 860EFF4
-.4byte 0x85ed104
-.4byte 0x85ed111
-.4byte 0x85ed11d
-.4byte 0x85ed13a
-.4byte 0x85ed147
-.4byte 0x85ed12b
-.4byte 0x85ed153
+	.4byte gText_BattleTower2
+	.4byte gText_BattleDome
+	.4byte gText_BattlePalace
+	.4byte gText_BattleArena
+	.4byte gText_BattlePike
+	.4byte gText_BattleFactory
+	.4byte gText_BattlePyramid
 
 gUnknown_0860F010:: @ 860F010
-.4byte 0x8680867
-.4byte 0x86a0869
-.4byte 0x86c086b
-.4byte 0x86e086d
+	.4byte gUnknown_08680867
+	.4byte gUnknown_086A0869
+	.4byte gUnknown_086C086B
+	.4byte gUnknown_086E086D
 
 gUnknown_0860F020:: @ 860F020
-.4byte 0x82a5d6c
-.4byte 0x82a5dab
-.4byte 0x82a5df1
-.4byte 0x82a5e34
-.4byte 0x82a5e83
-.4byte 0x82a5eb9
-.4byte 0x82a5ef4
-.4byte 0x82a5f39
-.4byte 0x82a5f82
-.4byte 0x82a5fb9
-.4byte 0x82a6018
-.4byte 0x82a6061
-.4byte 0x82a609c
-.4byte 0x82a60d5
-.4byte 0x82a6124
-.4byte 0x82a616f
-.4byte 0x82a61d6
-.4byte 0x82a623a
-.4byte 0x82a6287
-.4byte 0x82a62c9
-.4byte 0x82a6312
+	.4byte gUnknown_082A5D6C
+	.4byte gUnknown_082A5DAB
+	.4byte gUnknown_082A5DF1
+	.4byte gUnknown_082A5E34
+	.4byte gUnknown_082A5E83
+	.4byte gUnknown_082A5EB9
+	.4byte gUnknown_082A5EF4
+	.4byte gUnknown_082A5F39
+	.4byte gUnknown_082A5F82
+	.4byte gUnknown_082A5FB9
+	.4byte gUnknown_082A6018
+	.4byte gUnknown_082A6061
+	.4byte gUnknown_082A609C
+	.4byte gUnknown_082A60D5
+	.4byte gUnknown_082A6124
+	.4byte gUnknown_082A616F
+	.4byte gUnknown_082A61D6
+	.4byte gUnknown_082A623A
+	.4byte gUnknown_082A6287
+	.4byte gUnknown_082A62C9
+	.4byte gUnknown_082A6312
