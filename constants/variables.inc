@@ -60,7 +60,7 @@
 	.equiv VAR_0x403B,                  0x403B
 	.equiv VAR_0x403C,                  0x403C
 	.equiv VAR_0x403D,                  0x403D
-	.equiv VAR_0x403E,                  0x403E
+	.equiv VAR_ALTERING_CAVE_WILD_SET,                  0x403E
 	.equiv VAR_0x403F,                  0x403F
 	.equiv VAR_DAYS,                    0x4040
 	.equiv VAR_0x4041,                  0x4041

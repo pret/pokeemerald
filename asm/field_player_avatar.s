@@ -4316,7 +4316,7 @@ fish5: @ 808CABC
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
 	movs r6, 0
-	bl GetFishingWildMonListHeader
+	bl DoesCurrentMapHaveFishingMons
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808CADC
@@ -4640,7 +4640,7 @@ _0808CD58:
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80B5734
+	bl FishingWildEncounter
 	movs r0, 0x1
 	bl sub_80ED950
 	ldr r0, =Task_Fish

@@ -25426,8 +25426,8 @@ sub_81A7B84: @ 81A7B84
 	.pool
 	thumb_func_end sub_81A7B84
 
-	thumb_func_start sub_81A7B90
-sub_81A7B90: @ 81A7B90
+	thumb_func_start TryGenerateBattlePikeWildMon
+TryGenerateBattlePikeWildMon: @ 81A7B90
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -25437,7 +25437,7 @@ sub_81A7B90: @ 81A7B90
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	bl sub_81A7D00
+	bl GetBattlePikeWildMonHeaderId
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r7, =gSaveBlock2Ptr
@@ -25596,10 +25596,10 @@ _081A7CE2:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81A7B90
+	thumb_func_end TryGenerateBattlePikeWildMon
 
-	thumb_func_start sub_81A7D00
-sub_81A7D00: @ 81A7D00
+	thumb_func_start GetBattlePikeWildMonHeaderId
+GetBattlePikeWildMonHeaderId: @ 81A7D00
 	push {lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
@@ -25638,7 +25638,7 @@ _081A7D4C:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81A7D00
+	thumb_func_end GetBattlePikeWildMonHeaderId
 
 	thumb_func_start sub_81A7D54
 sub_81A7D54: @ 81A7D54
@@ -29386,8 +29386,8 @@ _081A9B86:
 	.pool
 	thumb_func_end sub_81A9B44
 
-	thumb_func_start sub_81A9C04
-sub_81A9C04: @ 81A9C04
+	thumb_func_start GenerateBattlePyramidWildMon
+GenerateBattlePyramidWildMon: @ 81A9C04
 	push {r4-r6,lr}
 	sub sp, 0x14
 	ldr r0, =gSaveBlock2Ptr
@@ -29627,7 +29627,7 @@ _081A9E0C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81A9C04
+	thumb_func_end GenerateBattlePyramidWildMon
 
 	thumb_func_start sub_81A9E28
 sub_81A9E28: @ 81A9E28
