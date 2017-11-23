@@ -32,7 +32,7 @@ u8 *UnkTextUtil_StringExpandPlaceholders(u8 *dest, const u8 *src)
 {
     while (*src != EOS)
     {
-        if (*src != 0xF7)
+        if (*src != CHAR_SPECIAL_F7)
         {
             *dest++ = *src++;
         }
