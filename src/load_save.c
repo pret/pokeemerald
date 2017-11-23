@@ -1,4 +1,4 @@
-#include "global.h"
+#include "global.h"    
 #include "gba/flash_internal.h"
 #include "load_save.h"
 #include "main.h"
@@ -10,10 +10,26 @@ extern void* gUnknown_0203CF5C;
 extern bool16 IdentifyFlash(void);
 extern void SetBagItemsPointers(void);
 extern void SetDecorationInventoriesPointers(void);
+extern void ApplyNewEncyprtionKeyToGameStats(u32 key);
+extern void ApplyNewEncyprtionKeyToBagItems(u32 newKey);
+extern void ApplyNewEncyprtionKeyToBagItems_(u32 key);
+extern void ApplyNewEncyprtionKeyToBerryPowder(u32 key);
+extern void sub_8084FAC(int unused);
 
-void ApplyNewEncyprtionKeyToAllEncryptedData(u32 encryptionKey);
+// this is probably wrong or misleading due to it being used in ResetHeap...
+extern void InitHeap(void *pointer, u32 size);
 
 #define SAVEBLOCK_MOVE_RANGE    128
+
+struct LoadedSaveData
+{
+ /*0x0000*/ struct ItemSlot items[30];
+ /*0x0078*/ struct ItemSlot keyItems[30];
+ /*0x00F0*/ struct ItemSlot pokeBalls[16];
+ /*0x0130*/ struct ItemSlot TMsHMs[64];
+ /*0x0230*/ struct ItemSlot berries[46];
+ /*0x02E8*/ struct MailStruct mail[16];
+};
 
 EWRAM_DATA struct SaveBlock2 gSaveblock2 = {0};
 EWRAM_DATA u8 gSaveblock2_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
@@ -24,7 +40,10 @@ EWRAM_DATA u8 gSaveblock1_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
 EWRAM_DATA u8 gSaveblock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
-extern void InitHeap(void *pointer, u32 size);
+EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
+EWRAM_DATA u32 gLastEncryptionKey = {0};
+
+void ApplyNewEncyprtionKeyToAllEncryptedData(u32 encryptionKey);
 
 void CheckForFlashMemory(void)
 {
@@ -233,3 +252,164 @@ void MoveSaveBlocks_ResetHeap(void)
     .syntax divided\n");
 }
 #endif
+
+u8 sav2_x1_query_bit1(void)
+{
+    return gSaveBlock2Ptr->specialSaveWarp & 1;
+}
+
+void sav2_x9_clear_bit1(void)
+{
+    gSaveBlock2Ptr->specialSaveWarp &= ~1;
+}
+
+void sub_8076D48(void)
+{
+    gSaveBlock2Ptr->specialSaveWarp |= 1;
+}
+
+void sub_8076D5C(void)
+{
+    sub_8084FAC(0);
+    gSaveBlock2Ptr->specialSaveWarp |= 1;
+}
+
+void sav2_gender2_inplace_and_xFE(void)
+{
+    gSaveBlock2Ptr->specialSaveWarp &= ~1;
+}
+
+void copy_player_party_to_sav1(void) // SavePlayerParty
+{
+    int i;
+
+    gSaveBlock1Ptr->playerPartyCount = gPlayerPartyCount;
+
+    for (i = 0; i < 6; i++)
+        gSaveBlock1Ptr->playerParty[i] = gPlayerParty[i];
+}
+
+void copy_player_party_from_sav1(void) // LoadPlayerParty
+{
+    int i;
+
+    gPlayerPartyCount = gSaveBlock1Ptr->playerPartyCount;
+
+    for (i = 0; i < 6; i++)
+        gPlayerParty[i] = gSaveBlock1Ptr->playerParty[i];
+}
+
+void save_serialize_npcs(void) // SaveMapObjects
+{
+    int i;
+
+    for (i = 0; i < 16; i++)
+        gSaveBlock1Ptr->mapObjects[i] = gMapObjects[i];
+}
+
+void save_deserialize_npcs(void) // LoadMapObjects
+{
+    int i;
+
+    for (i = 0; i < 16; i++)
+        gMapObjects[i] = gSaveBlock1Ptr->mapObjects[i];
+}
+
+void SaveSerializedGame(void)
+{
+    copy_player_party_to_sav1();
+    save_serialize_npcs();
+}
+
+void LoadSerializedGame(void)
+{
+    copy_player_party_from_sav1();
+    save_deserialize_npcs();
+}
+
+void copy_bags_and_unk_data_from_save_blocks(void)
+{
+    int i;
+    
+    // load player items.
+    for (i = 0; i < 30; i++)
+        gLoadedSaveData.items[i] = gSaveBlock1Ptr->bagPocket_Items[i];
+
+    // load player key items.
+    for (i = 0; i < 30; i++)
+        gLoadedSaveData.keyItems[i] = gSaveBlock1Ptr->bagPocket_KeyItems[i];
+
+    // load player pokeballs.
+    for (i = 0; i < 16; i++)
+        gLoadedSaveData.pokeBalls[i] = gSaveBlock1Ptr->bagPocket_PokeBalls[i];
+
+    // load player TMs and HMs.
+    for (i = 0; i < 64; i++)
+        gLoadedSaveData.TMsHMs[i] = gSaveBlock1Ptr->bagPocket_TMHM[i];
+
+    // load player berries.
+    for (i = 0; i < 46; i++)
+        gLoadedSaveData.berries[i] = gSaveBlock1Ptr->bagPocket_Berries[i];
+
+    // load mail.
+    for (i = 0; i < 16; i++)
+        gLoadedSaveData.mail[i] = gSaveBlock1Ptr->mail[i];
+
+    gLastEncryptionKey = gSaveBlock2Ptr->encryptionKey;
+}
+
+void copy_bags_and_unk_data_to_save_blocks(void)
+{
+    int i;
+    u32 encryptionKeyBackup;
+
+    // save player items.
+    for (i = 0; i < 30; i++)
+        gSaveBlock1Ptr->bagPocket_Items[i] = gLoadedSaveData.items[i];
+
+    // save player key items.
+    for (i = 0; i < 30; i++)
+        gSaveBlock1Ptr->bagPocket_KeyItems[i] = gLoadedSaveData.keyItems[i];
+
+    // save player pokeballs.
+    for (i = 0; i < 16; i++)
+        gSaveBlock1Ptr->bagPocket_PokeBalls[i] = gLoadedSaveData.pokeBalls[i];
+
+    // save player TMs and HMs.
+    for (i = 0; i < 64; i++)
+        gSaveBlock1Ptr->bagPocket_TMHM[i] = gLoadedSaveData.TMsHMs[i];
+
+    // save player berries.
+    for (i = 0; i < 46; i++)
+        gSaveBlock1Ptr->bagPocket_Berries[i] = gLoadedSaveData.berries[i];
+
+    // save mail.
+    for (i = 0; i < 16; i++)
+        gSaveBlock1Ptr->mail[i] = gLoadedSaveData.mail[i];
+
+    encryptionKeyBackup = gSaveBlock2Ptr->encryptionKey;
+    gSaveBlock2Ptr->encryptionKey = gLastEncryptionKey;
+    ApplyNewEncyprtionKeyToBagItems(encryptionKeyBackup);
+    gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup; // updated twice?
+}
+
+void ApplyNewEncyprtionKeyToHword(u16 *hWord, u32 newKey)
+{
+    *hWord ^= gSaveBlock2Ptr->encryptionKey;
+    *hWord ^= newKey;
+}
+
+void ApplyNewEncyprtionKeyToWord(u32 *word, u32 newKey)
+{
+    *word ^= gSaveBlock2Ptr->encryptionKey;
+    *word ^= newKey;
+}
+
+void ApplyNewEncyprtionKeyToAllEncryptedData(u32 encryptionKey)
+{
+    ApplyNewEncyprtionKeyToGameStats(encryptionKey);
+    ApplyNewEncyprtionKeyToBagItems_(encryptionKey);
+    ApplyNewEncyprtionKeyToBerryPowder(encryptionKey);
+    ApplyNewEncyprtionKeyToWord(&gSaveBlock1Ptr->money, encryptionKey);
+    ApplyNewEncyprtionKeyToHword(&gSaveBlock1Ptr->coins, encryptionKey);
+}

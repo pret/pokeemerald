@@ -547,12 +547,6 @@ gUnknown_020249B4: @ 20249B4
 	.include "src/daycare.o"
     .include "src/load_save.o"
 
-gUnknown_02031C58: @ 2031C58
-	.space 0x528
-
-gUnknown_02032180: @ 2032180
-	.space 0x4
-
 gUnknown_02032184: @ 2032184
 	.space 0x4
 
