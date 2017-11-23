@@ -13,7 +13,7 @@ extern void CopyWindowToVram(u8 windowId, u8 mode);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
 extern void PlaySE(u16 songNum);
-extern u8* sub_81AFC74(u8 a1);
+extern u8* UnkTextUtil_GetPtrI(u8 a1);
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
 EWRAM_DATA struct TextPrinter gTextPrinters[NUM_TEXT_PRINTERS] = {0};
@@ -2932,7 +2932,7 @@ u32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 }
             case 0xF7:
                 if (bufferPointer == NULL)
-                    bufferPointer = sub_81AFC74(*++str);
+                    bufferPointer = UnkTextUtil_GetPtrI(*++str);
                 while (*bufferPointer != 0xFF)
                 {
                     glyphWidth = func(*bufferPointer++, isJapanese);
