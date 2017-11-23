@@ -10,17 +10,17 @@ gUnknown_08589A08:: @ 8589A08
 	.4byte BuyMenuReturnToItemList
 
 gUnknown_08589A10:: @ 8589A10
-	.4byte 0x85e93c7
+	.4byte gUnknown_085E93C7
 	.4byte HandleShopMenuBuy
-	.4byte 0x85e93cb
+	.4byte gUnknown_085E93CB
 	.4byte HandleShopMenuSell
-	.4byte 0x85e93d0
+	.4byte gUnknown_085E93D0
 	.4byte HandleShopMenuQuit
 
 gUnknown_08589A28:: @ 8589A28
-	.4byte 0x85e93c7
+	.4byte gUnknown_085E93C7
 	.4byte HandleShopMenuBuy
-	.4byte 0x85e93d0
+	.4byte gUnknown_085E93D0
 	.4byte HandleShopMenuQuit
 
 gUnknown_08589A38:: @ 8589A38
