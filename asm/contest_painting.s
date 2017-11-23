@@ -386,7 +386,7 @@ sub_813010C: @ 813010C
 	ldr r1, =gText_Space
 	adds r0, r4, 0
 	bl StringAppend
-	ldr r1, =gUnknown_085B07D4
+	ldr r1, =gContestRankTextPointers
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x1E]
 	lsls r0, 2
@@ -415,7 +415,7 @@ _08130190:
 	adds r1, 0xB
 	bl StringCopy
 	ldr r0, =gStringVar4
-	ldr r2, =gUnknown_085B07F4
+	ldr r2, =gContestPaintingDescriptionPointers
 	lsls r1, r5, 2
 	adds r1, r2
 	ldr r1, [r1]
