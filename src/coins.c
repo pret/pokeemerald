@@ -2,18 +2,15 @@
 #include "coins.h"
 #include "text.h"
 #include "window.h"
-#include "text_window.h"
+#include "strings.h"
 #include "string_util.h"
+#include "new_menu_helpers.h"
 #include "menu.h"
 #include "international_string_util.h"
 
 #define MAX_COINS 9999
 
 EWRAM_DATA u8 sCoinsWindowId = 0;
-
-extern void sub_819746C(u8 windowId, bool8 copyToVram);
-
-extern const u8 gText_Coins[];
 
 void PrintCoinsString(u32 coinAmount)
 {
