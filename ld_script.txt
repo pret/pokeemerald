@@ -178,6 +178,7 @@ SECTIONS {
         src/battle_ai_script_commands.o(.text);
         asm/trader.o(.text);
         src/starter_choose.o(.text);
+        src/wallclock.o(.text);
         asm/wallclock.o(.text);
         asm/rom6.o(.text);
         asm/battle_records.o(.text);
@@ -425,6 +426,7 @@ SECTIONS {
         src/battle_ai_script_commands.o(.rodata);
         data/data4.o(.rodata);
         data/starter_choose.o(.rodata);
+        data/wallclock.o(.rodata);
         data/data4c.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
