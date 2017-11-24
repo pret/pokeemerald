@@ -251,7 +251,7 @@ SECTIONS {
         asm/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
-        asm/unk_81BAD84.o(.text);
+        src/unk_81BAD84.o(.text);
         src/battle_controller_player_partner.o(.text);
         asm/fldeff_groundshake.o(.text);
         asm/fossil_specials.o(.text);
