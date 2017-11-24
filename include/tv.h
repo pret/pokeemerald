@@ -14,5 +14,6 @@ void sub_80EEA70(void);
 void sub_80F14F8(TVShow *shows);
 size_t sub_80EF370(int value);
 void SetPokemonAnglerSpecies(u16 species);
+void sub_80ED888(u16 days);
 
 #endif //GUARD_TV_H

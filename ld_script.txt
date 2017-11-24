@@ -107,7 +107,7 @@ SECTIONS {
         src/event_data.o(.text);
         asm/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
-        asm/clock.o(.text);
+        src/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
         src/start_menu.o(.text);
         asm/start_menu.o(.text);
