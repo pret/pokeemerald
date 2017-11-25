@@ -5,57 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8134EA4
-sub_8134EA4: @ 8134EA4
-	push {r4,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gTasks
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 3
-	adds r4, r1
-	movs r1, 0xC
-	ldrsh r0, [r4, r1]
-	movs r2, 0xE
-	ldrsh r1, [r4, r2]
-	bl RtcInitLocalTimeOffset
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r0, =c2_080111BC
-	str r0, [r4]
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8134EA4
-
-	thumb_func_start c2_080111BC
-c2_080111BC: @ 8134EE8
-	push {lr}
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08134F02
-	bl FreeAllWindowBuffers
-	ldr r0, =gMain
-	ldr r0, [r0, 0x8]
-	bl SetMainCallback2
-_08134F02:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end c2_080111BC
-
 	thumb_func_start sub_8134F10
 sub_8134F10: @ 8134F10
 	push {lr}

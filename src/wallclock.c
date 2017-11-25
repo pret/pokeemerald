@@ -28,7 +28,8 @@ static void sub_8134CB8(u8 taskId);
 static void sub_8134CE8(u8 taskId);
 static void sub_8134DC4(u8 taskId);
 static void c3_80BF560(u8 taskId);
-void sub_8134EA4(u8 taskId);
+static void sub_8134EA4(u8 taskId);
+static void c2_080111BC(u8 taskId);
 void sub_8134F10(u8 taskId);
 u16 sub_8134FFC(u16 a0, u8 a1, u8 a2);
 void sub_813504C(u8 taskId, u8 a1);
@@ -745,5 +746,21 @@ static void c3_80BF560(u8 taskId)
             ClearWindowTilemap(0);
             gTasks[taskId].func = sub_8134CE8;
             break;
+    }
+}
+
+static void sub_8134EA4(u8 taskId)
+{
+    RtcInitLocalTimeOffset(gTasks[taskId].data[2], gTasks[taskId].data[3]);
+    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    gTasks[taskId].func = c2_080111BC;
+}
+
+static void c2_080111BC(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        FreeAllWindowBuffers();
+        SetMainCallback2(gMain.savedCallback);
     }
 }
