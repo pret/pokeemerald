@@ -34,7 +34,7 @@ static void sub_8134F10(u8 taskId);
 static void sub_8134F40(u8 taskId);
 static void sub_8134F78(u8 taskId);
 static void sub_8134FB0(u8 taskId);
-u16 sub_8134FFC(u16 a0, u8 a1, u8 a2);
+static u16 sub_8134FFC(u16 a0, u8 a1, u8 a2);
 void sub_813504C(u8 taskId, u8 a1);
 void sub_8135130(u8 taskId);
 void sub_81351AC(struct Sprite *sprite);
@@ -797,4 +797,38 @@ static void sub_8134FB0(u8 taskId)
     {
         SetMainCallback2(gMain.savedCallback);
     }
+}
+
+static u8 sub_8134FD4(u16 a0)
+{
+    if (a0 > 60)
+    {
+        return 6;
+    }
+    if (a0 > 30)
+    {
+        return 3;
+    }
+    if (a0 > 10)
+    {
+        return 2;
+    }
+    return 1;
+}
+
+static u16 sub_8134FFC(u16 a0, u8 a1, u8 a2)
+{
+    u8 r1 = sub_8134FD4(a2);
+    switch (a1)
+    {
+        case 1:
+            if (a0) a0 -= r1;
+            else a0 = 360 - r1;
+            break;
+        case 2:
+            if (a0 < 360 - r1) a0 += r1;
+            else a0 = 0;
+            break;
+    }
+    return a0;
 }
