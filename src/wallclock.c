@@ -30,7 +30,10 @@ static void sub_8134DC4(u8 taskId);
 static void c3_80BF560(u8 taskId);
 static void sub_8134EA4(u8 taskId);
 static void c2_080111BC(u8 taskId);
-void sub_8134F10(u8 taskId);
+static void sub_8134F10(u8 taskId);
+static void sub_8134F40(u8 taskId);
+static void sub_8134F78(u8 taskId);
+static void sub_8134FB0(u8 taskId);
 u16 sub_8134FFC(u16 a0, u8 a1, u8 a2);
 void sub_813504C(u8 taskId, u8 a1);
 void sub_8135130(u8 taskId);
@@ -761,6 +764,37 @@ static void c2_080111BC(u8 taskId)
     if (!gPaletteFade.active)
     {
         FreeAllWindowBuffers();
+        SetMainCallback2(gMain.savedCallback);
+    }
+}
+
+static void sub_8134F10(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        gTasks[taskId].func = sub_8134F40;
+    }
+}
+
+static void sub_8134F40(u8 taskId)
+{
+    sub_8135130(taskId);
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        gTasks[taskId].func = sub_8134F78;
+    }
+}
+
+static void sub_8134F78(u8 taskId)
+{
+    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_8134FB0;
+}
+
+static void sub_8134FB0(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
         SetMainCallback2(gMain.savedCallback);
     }
 }
