@@ -379,12 +379,12 @@ sub_816B148: @ 816B148
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _0816B174
-	ldr r0, =gUnknown_081F863F
+	ldr r0, =LittlerootTown_BrendansHouse_2F_EventScript_1F863F
 	bl ScriptContext1_SetupScript
 	b _0816B184
 	.pool
 _0816B174:
-	ldr r0, =gUnknown_081F958F
+	ldr r0, =LittlerootTown_MaysHouse_2F_EventScript_1F958F
 	bl ScriptContext1_SetupScript
 	b _0816B184
 	.pool
@@ -1444,7 +1444,7 @@ _0816BA68:
 	adds r0, r6, 0
 	bl DisplayItemMessageOnField
 	adds r0, r5, 0
-	bl sub_80D439C
+	bl ClearMailStruct
 	bl sub_816B54C
 	ldrb r0, [r4, 0x5]
 	subs r0, 0x1

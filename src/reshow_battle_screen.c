@@ -37,8 +37,8 @@ extern const union AnimCmd * const * const gMonAnimationsSpriteAnimsPtrTable[];
 extern void dp12_8087EA4(void);
 extern void trs_config(void);
 extern bool8 IsDoubleBattle(void);
-extern u8 sub_80A614C(u8 bank);
-extern u8 sub_80A6138(u8 bank);
+extern u8 GetSubstituteSpriteDefault_Y(u8 bank);
+extern u8 GetBankSpriteDefault_Y(u8 bank);
 extern u8 sub_80A82E4(u8 bank);
 extern void sub_806A068(u16 species, u8 bankIdentity);
 extern void sub_806A12C(u16 backPicId, u8 bankIdentity);
@@ -104,7 +104,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         gReservedSpritePaletteCount = 4;
         break;
     case 5:
-        sub_805E350();
+        ClearSpritesHealthboxAnimData();
         break;
     case 6:
         if (BattleLoadAllHealthBoxesGfx(gBattleScripting.reshowHelperState))
@@ -217,7 +217,7 @@ static bool8 LoadBankSpriteGfx(u8 bank)
             if (!gBattleSpritesDataPtr->bankData[bank].behindSubstitute)
                 BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlePartyID[bank]], bank);
             else
-                BattleLoadSubstituteSpriteGfx(bank, FALSE);
+                BattleLoadSubstituteOrMonSpriteGfx(bank, FALSE);
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
             DecompressTrainerBackPic(gSaveBlock2Ptr->playerGender, bank);
@@ -226,7 +226,7 @@ static bool8 LoadBankSpriteGfx(u8 bank)
         else if (!gBattleSpritesDataPtr->bankData[bank].behindSubstitute)
             BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlePartyID[bank]], bank);
         else
-            BattleLoadSubstituteSpriteGfx(bank, FALSE);
+            BattleLoadSubstituteOrMonSpriteGfx(bank, FALSE);
 
         gBattleScripting.reshowHelperState = 0;
     }
@@ -250,9 +250,9 @@ static void CreateBankSprite(u8 bank)
         u8 posY;
 
         if (gBattleSpritesDataPtr->bankData[bank].behindSubstitute)
-            posY = sub_80A614C(bank);
+            posY = GetSubstituteSpriteDefault_Y(bank);
         else
-            posY = sub_80A6138(bank);
+            posY = GetBankSpriteDefault_Y(bank);
 
         if (GetBankSide(bank) != SIDE_PLAYER)
         {

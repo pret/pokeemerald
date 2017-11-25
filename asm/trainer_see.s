@@ -1300,7 +1300,7 @@ sub_80B45D0: @ 80B45D0
 	bne _080B460C
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	bl UnfreezeMapObjects
@@ -1313,7 +1313,7 @@ _080B460C:
 	movs r0, 0
 	strb r0, [r1]
 _080B4610:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 _080B4616:

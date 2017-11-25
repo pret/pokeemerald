@@ -727,9 +727,9 @@ _08153D86:
 	beq _08153DA4
 	adds r0, r7, 0
 	mov r1, sp
-	bl sub_80D460C
+	bl GiveMailToMon2
 _08153DA4:
-	bl party_compaction
+	bl CompactPartySlots
 	bl CalculatePlayerPartyCount
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_08674BF0

@@ -97,7 +97,6 @@ extern u8 gUnknown_08D97D0C;
 extern void reset_temp_tile_data_buffers();
 extern void decompress_and_copy_tile_data_to_vram(u8 a, void* tiledata, u8 b, u8 c, u8 d);
 extern u8 free_temp_tile_data_buffers_if_possible();
-extern void sub_8069004(struct BoxPokemon* a, void* b);
 extern void sub_81C1E20(u8 taskId);
 extern u8 *GetMonNickname(struct Pokemon *mon, u8 *dest);
 extern u16 SpeciesToPokedexNum(u16 species);
@@ -667,7 +666,7 @@ void sub_81C0098(struct Pokemon *mon)
     else
     {
         struct BoxPokemon *boxMon = gUnknown_0203CF1C->unk0->boxMon;
-        sub_8069004(&boxMon[gUnknown_0203CF1C->unk40BE], mon);
+        BoxMonToMon(&boxMon[gUnknown_0203CF1C->unk40BE], mon);
     }
 }
 
@@ -1810,7 +1809,7 @@ void sub_81C171C(u8 taskId)
 void sub_81C174C(u8 taskId)
 {
     s16* data = gTasks[taskId].data;
-    
+
     if (sub_81221EC() != 1)
     {
         if (gPaletteFade.active != 1)
@@ -1857,7 +1856,7 @@ void sub_81C174C(u8 taskId)
                 gUnknown_0203CF21 = 4;
                 gSpecialVar_0x8005 = 4;
                 sub_81C044C(taskId);
-            }   
+            }
         }
     }
 }
@@ -1907,7 +1906,7 @@ void sub_81C1940(u8 taskId)
         {
             if (gUnknown_0203CF1C->unk40C0 != 2)
             {
-                
+
                 ClearWindowTilemap(19);
                 if (!gSprites[gUnknown_0203CF1C->unk40D5].invisible)
                     ClearWindowTilemap(13);
@@ -2224,7 +2223,7 @@ void sub_81C1E20(u8 taskId)
         {
             if (gUnknown_0203CF1C->unk40C0 == 2)
                 PutWindowTilemap(14);
-            
+
         }
         else
         {
@@ -2277,7 +2276,7 @@ void sub_81C1F80(u8 taskId)
                 PutWindowTilemap(15);
             sub_81C240C(data[2]);
         }
-        else 
+        else
         {
             if (!gSprites[gUnknown_0203CF1C->unk40D5].invisible)
             {
@@ -3645,7 +3644,7 @@ void sub_81C3D54(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s16 dataa = data[0] - 1;
-    
+
     switch (dataa)
     {
         case 0:

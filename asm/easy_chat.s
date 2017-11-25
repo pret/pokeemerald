@@ -583,7 +583,7 @@ _0811AFAC:
 	b _0811AFE6
 	.pool
 _0811AFC0:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	ldr r0, =gUnknown_0203A118
 	ldr r0, [r0]
@@ -633,7 +633,7 @@ _0811B00C:
 	.pool
 _0811B020:
 	bl sub_811BE9C
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl sub_811B4EC
 	strh r0, [r4]
 	bl sub_811B3E4
@@ -784,7 +784,7 @@ _0811B118:
 	b _0811B14A
 	.pool
 _0811B134:
-	ldr r4, =gScriptResult
+	ldr r4, =gSpecialVar_Result
 	bl sub_811B4EC
 	strh r0, [r4]
 	bl sub_811B3E4

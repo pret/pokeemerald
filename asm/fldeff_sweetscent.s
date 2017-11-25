@@ -23,7 +23,7 @@ hm2_sweet_scent: @ 8159F10
 	push {lr}
 	movs r0, 0x33
 	bl FieldEffectStart
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -205,7 +205,7 @@ sub_815A090: @ 815A090
 	lsls r2, 1
 	bl CpuFastSet
 	bl sub_80AC3E4
-	ldr r0, =gUnknown_08290CAE
+	ldr r0, =EventScript_290CAE
 	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask

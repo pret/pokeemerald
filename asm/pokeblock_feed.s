@@ -380,7 +380,7 @@ _08179EEC:
 	b _08179F5E
 	.pool
 _08179F00:
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrb r0, [r0]
 	bl sub_8179FEC
 	ldr r0, =gUnknown_0203BD1C
@@ -692,7 +692,7 @@ sub_817A1C4: @ 817A1C4
 	ldr r0, =gPlayerParty
 	adds r5, r0
 	ldr r1, =gSaveBlock1Ptr
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
 	lsls r0, 3
 	ldr r2, =0x00000848
@@ -704,7 +704,7 @@ sub_817A1C4: @ 817A1C4
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
-	bl sub_8136FE4
+	bl PokeblockGetGain
 	ldr r6, =gUnknown_0203BC9E
 	strh r0, [r6]
 	ldr r1, =gStringVar1

@@ -509,9 +509,11 @@ struct Evolution
     u16 targetSpecies;
 };
 
+#define EVOS_PER_MON 5
+
 struct EvolutionData
 {
-    struct Evolution evolutions[5];
+    struct Evolution evolutions[EVOS_PER_MON];
 };
 
 extern u8 gPlayerPartyCount;
@@ -612,8 +614,8 @@ u32 CanMonLearnTMHM(struct Pokemon *, u8);
 u32 CanSpeciesLearnTMHM(u16 species, u8 tm);
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves);
 void ClearBattleMonForms(void);
-const u8 *pokemon_get_pal(struct Pokemon *mon);
-const u8 *species_and_otid_get_pal(u16, u32, u32);
+const u8 *GetMonFrontSpritePal(struct Pokemon *mon);
+const u8 *GetFrontSpritePalFromSpeciesAndPersonality(u16, u32, u32);
 const struct CompressedSpritePalette *sub_80409C8(u16, u32, u32);
 bool8 IsOtherTrainer(u32, u8 *);
 void SetWildMonHeldItem(void);
@@ -648,6 +650,9 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
 void sub_806A1C0(u16 arg0, u8 bankIdentity);
 void sub_806A12C(u16 trainerSpriteId, u8 bankIdentity);
 u8 GetSecretBaseTrainerPicIndex(void);
+bool8 TryIncrementMonLevel(struct Pokemon *mon);
+void BoxMonToMon(struct BoxPokemon *srcMon, struct Pokemon *dstMon);
+u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
 
 #include "sprite.h"
 

@@ -69,9 +69,10 @@ enum FieldEffectScriptIdx
     FLDEFF_USE_TELEPORT
 };
 
+extern u32 gFieldEffectArguments[8];
+
 u8 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);
-
-extern u32 gFieldEffectArguments[8];
+void sub_80B69DC(void);
 
 #endif //GUARD_FIELD_EFFECTS_H

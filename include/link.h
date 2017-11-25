@@ -68,7 +68,7 @@ struct LinkPlayer
     /* 0x08 */ u8 name[11];
     /* 0x13 */ u8 gender;
     /* 0x14 */ u32 linkType;
-    /* 0x18 */ u16 lp_field_18;
+    /* 0x18 */ u16 lp_field_18; // battle bank in battles
     /* 0x1A */ u16 language;
 };
 
@@ -179,6 +179,7 @@ void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
 u8 GetLinkPlayerCount(void);
+bool32 InUnionRoom(void);
 
 void sub_800E0E8(void);
 bool8 sub_800A520(void);

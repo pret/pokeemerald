@@ -23,6 +23,7 @@ enum
 };
 
 void ClearPokeblocks(void);
+s16 PokeblockGetGain(u8, const struct Pokeblock *);
 
 /*
 void sub_810B96C(void);
@@ -32,7 +33,6 @@ s16 GetPokeblockData(const struct Pokeblock *, u8);
 u8 sub_810C9E8(struct Pokeblock *);
 void sub_810BA7C(u8);
 bool8 PokeblockClearIfExists(u8);
-s16 PokeblockGetGain(u8, const struct Pokeblock *);
 u8 sub_810CB68(u8, u8*);
 void PokeblockCopyName(struct Pokeblock *pokeblock, u8 *dest);
 void CB2_PreparePokeblockFeedScene(void);

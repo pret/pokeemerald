@@ -18,7 +18,7 @@ _080D4372:
 	adds r1, r0
 	ldr r0, [r5]
 	adds r0, r1
-	bl sub_80D439C
+	bl ClearMailStruct
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -30,8 +30,8 @@ _080D4372:
 	.pool
 	thumb_func_end ClearMailData
 
-	thumb_func_start sub_80D439C
-sub_80D439C: @ 80D439C
+	thumb_func_start ClearMailStruct
+ClearMailStruct: @ 80D439C
 	push {r4-r6,lr}
 	adds r3, r0, 0
 	ldr r0, =0x0000ffff
@@ -76,10 +76,10 @@ _080D43D6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D439C
+	thumb_func_end ClearMailStruct
 
-	thumb_func_start sub_80D43F0
-sub_80D43F0: @ 80D43F0
+	thumb_func_start MonHasMail
+MonHasMail: @ 80D43F0
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0xC
@@ -103,7 +103,7 @@ _080D441A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D43F0
+	thumb_func_end MonHasMail
 
 	thumb_func_start sub_80D4420
 sub_80D4420: @ 80D4420
@@ -349,8 +349,8 @@ _080D4606:
 	bx r1
 	thumb_func_end sub_80D45E8
 
-	thumb_func_start sub_80D460C
-sub_80D460C: @ 80D460C
+	thumb_func_start GiveMailToMon2
+GiveMailToMon2: @ 80D460C
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r6, r0, 0
@@ -401,7 +401,7 @@ _080D4672:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D460C
+	thumb_func_end GiveMailToMon2
 
 	thumb_func_start sub_80D467C
 sub_80D467C: @ 80D467C
@@ -409,12 +409,12 @@ sub_80D467C: @ 80D467C
 	bx lr
 	thumb_func_end sub_80D467C
 
-	thumb_func_start sub_80D4680
-sub_80D4680: @ 80D4680
+	thumb_func_start TakeMailFromMon
+TakeMailFromMon: @ 80D4680
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
-	bl sub_80D43F0
+	bl MonHasMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D46D2
@@ -454,7 +454,7 @@ _080D46D2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D4680
+	thumb_func_end TakeMailFromMon
 
 	thumb_func_start sub_80D46E0
 sub_80D46E0: @ 80D46E0

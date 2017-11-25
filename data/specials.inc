@@ -142,8 +142,8 @@ gSpecials:: @ 81DBA64
 	def_special sub_8122A30
 	def_special sub_80D6EDC
 	def_special CalculatePlayerPartyCount
-	def_special sub_80C7008
-	def_special sub_80C70AC
+	def_special CountPartyNonEggMons
+	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	def_special sub_80F88E8
 	def_special sub_80F88DC
 	def_special sub_80F8864
@@ -181,7 +181,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_813BF60
 	def_special sub_813BA60
 	def_special sub_813BF7C
-	def_special rock_smash_wild_pokemon_encounter
+	def_special RockSmashWildEncounter
 	def_special GabbyAndTyGetBattleNum
 	def_special GabbyAndTyAfterInterview
 	def_special GabbyAndTyBeforeInterview
@@ -191,18 +191,18 @@ gSpecials:: @ 81DBA64
 	def_special GabbyAndTyGetLastBattleTrivia
 	def_special GabbyAndTySetScriptVarsToFieldObjectLocalIds
 	def_special sub_8138B80
-	def_special sp0B5_daycare
-	def_special sp0B6_daycare
-	def_special sub_8070728
-	def_special sp0B8_daycare
-	def_special sp0B9_daycare_relationship_comment
-	def_special sub_8070C58
-	def_special daycare_send_selected_pokemon
-	def_special sub_8071330
-	def_special sub_80712C0
-	def_special sub_806FF30
-	def_special sub_806FED8
-	def_special sub_806FDC4
+	def_special GetDaycareMonNicknames
+	def_special GetDaycareState
+	def_special RejectEggFromDayCare
+	def_special GiveEggFromDaycare
+	def_special SetDaycareCompatibilityString
+	def_special GetSelectedMonNickAndSpecies
+	def_special StoreSelectedPokemonInDaycare
+	def_special ChooseSendDaycareMon
+	def_special ShowDaycareLevelMenu
+	def_special GetNumLevelsGainedFromDaycare
+	def_special GetDaycareCost
+	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special sub_8071614
@@ -534,4 +534,3 @@ gSpecials:: @ 81DBA64
 	def_special sub_813C5A0
 	def_special sub_8139C10
 	def_special sub_80B3BC4
-

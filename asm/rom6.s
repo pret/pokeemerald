@@ -31,7 +31,7 @@ npc_before_player_of_type: @ 8135424
 	ldrb r0, [r2, 0x5]
 	cmp r0, r5
 	bne _08135470
-	ldr r1, =gScriptLastTalked
+	ldr r1, =gSpecialVar_LastTalked
 	ldrb r0, [r2, 0x8]
 	strh r0, [r1]
 	movs r0, 0x1
@@ -262,8 +262,8 @@ sub_8135654: @ 8135654
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813568C
-	ldr r4, =gScriptResult
-	bl brm_get_pokemon_selection
+	ldr r4, =gSpecialVar_Result
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -302,12 +302,12 @@ _081356AC:
 	thumb_func_start sub_81356C4
 sub_81356C4: @ 81356C4
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_082907F0
+	ldr r0, =Route111_EventScript_2907F0
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -379,7 +379,7 @@ hm2_dig: @ 8135760
 	bl flagmods_08054D70
 	movs r0, 0x26
 	bl FieldEffectStart
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -2136,11 +2136,11 @@ _081366B6:
 _081366D0:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldr r2, =0x0000ffff
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	mov r1, r9
 	strh r1, [r0]
 	adds r0, r7, 0
@@ -2150,7 +2150,7 @@ _081366D0:
 _081366F8:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	strh r4, [r0]
 	adds r0, r7, 0
 	bl sub_8136938
@@ -2541,7 +2541,7 @@ sub_8136A50: @ 8136A50
 sub_8136A74: @ 8136A74
 	push {lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrh r1, [r0]
 	lsls r1, 3
 	ldr r0, =0x00000848
@@ -2586,7 +2586,7 @@ sub_8136AB4: @ 8136AB4
 	ldr r3, =gPokeblockNames
 	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
-	ldr r1, =gScriptItemId
+	ldr r1, =gSpecialVar_ItemId
 	ldrh r1, [r1]
 	lsls r1, 3
 	adds r2, r1
@@ -2689,7 +2689,7 @@ sub_8136BC0: @ 8136BC0
 	ands r0, r1
 	cmp r0, 0
 	beq _08136C36
-	ldr r0, =gScriptItemId
+	ldr r0, =gSpecialVar_ItemId
 	ldrb r0, [r0]
 	bl sub_8136F68
 	movs r0, 0x5
@@ -2772,14 +2772,14 @@ sub_8136C8C: @ 8136C8C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =gSaveBlock1Ptr
-	ldr r7, =gScriptItemId
+	ldr r7, =gSpecialVar_ItemId
 	ldrh r2, [r7]
 	lsls r2, 3
 	ldr r6, =0x00000848
 	adds r2, r6
 	ldr r1, [r5]
 	adds r1, r2
-	bl sub_8136FE4
+	bl PokeblockGetGain
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2836,7 +2836,7 @@ sub_8136D2C: @ 8136D2C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrb r0, [r5]
 	bl SafariZoneActivatePokeblockFeeder
 	ldr r0, =gStringVar1
@@ -2853,7 +2853,7 @@ sub_8136D2C: @ 8136D2C
 	adds r1, r3
 	ldr r1, [r1]
 	bl StringCopy
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldrh r0, [r5]
 	strh r0, [r1]
 	lsls r0, 24
@@ -2877,7 +2877,7 @@ sub_8136D90: @ 8136D90
 	lsrs r4, 24
 	ldr r6, =gSpecialVar_0x8004
 	ldr r0, =gSaveBlock1Ptr
-	ldr r5, =gScriptItemId
+	ldr r5, =gSpecialVar_ItemId
 	ldrh r1, [r5]
 	lsls r1, 3
 	ldr r2, =0x00000848
@@ -2888,7 +2888,7 @@ sub_8136D90: @ 8136D90
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6]
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldrh r0, [r5]
 	strh r0, [r1]
 	lsls r0, 24
@@ -3177,8 +3177,8 @@ _08136FDE:
 	bx r1
 	thumb_func_end sub_8136F9C
 
-	thumb_func_start sub_8136FE4
-sub_8136FE4: @ 8136FE4
+	thumb_func_start PokeblockGetGain
+PokeblockGetGain: @ 8136FE4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3227,7 +3227,7 @@ _0813702A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8136FE4
+	thumb_func_end PokeblockGetGain
 
 	thumb_func_start sub_8137044
 sub_8137044: @ 8137044
@@ -3261,7 +3261,7 @@ _08137074:
 	ldr r0, =gUnknown_085B2720
 	adds r1, r0
 	adds r0, r5, 0
-	bl sub_8136FE4
+	bl PokeblockGetGain
 	lsls r0, 16
 	cmp r0, 0
 	ble _081370A0
@@ -3333,8 +3333,8 @@ sub_81370FC: @ 81370FC
 	lsls r0, 24
 	cmp r0, 0
 	beq _08137134
-	ldr r4, =gScriptResult
-	bl brm_get_pokemon_selection
+	ldr r4, =gSpecialVar_Result
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -3380,7 +3380,7 @@ hm2_flash: @ 8137178
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -3407,7 +3407,7 @@ sub_81371B4: @ 81371B4
 	bl PlaySE
 	ldr r0, =0x00000888
 	bl FlagSet
-	ldr r0, =gUnknown_082926F8
+	ldr r0, =EventScript_2926F8
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -4043,12 +4043,12 @@ sub_8137734: @ 8137734
 	lsrs r1, r0, 24
 	cmp r1, 0x1
 	bne _08137760
-	ldr r0, =gUnknown_0203BCE4
+	ldr r0, =gHasHallOfFameRecords
 	strb r1, [r0]
 	b _0813776C
 	.pool
 _08137760:
-	ldr r1, =gUnknown_0203BCE4
+	ldr r1, =gHasHallOfFameRecords
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r4, 0
@@ -4165,7 +4165,7 @@ _08137838:
 	movs r1, 0x43
 	bl sub_80EE4DC
 _0813785A:
-	ldr r0, =sub_8173694
+	ldr r0, =CB2_DoHallOfFameScreen
 	bl SetMainCallback2
 	movs r0, 0
 	add sp, 0x1C
@@ -4638,7 +4638,7 @@ sub_8137C10: @ 8137C10
 	thumb_func_start sub_8137C28
 sub_8137C28: @ 8137C28
 	push {lr}
-	ldr r0, =sub_8174194
+	ldr r0, =CB2_DoHallOfFamePC
 	bl SetMainCallback2
 	bl ScriptContext2_Enable
 	pop {r0}
@@ -4899,7 +4899,7 @@ _08137E58:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08137E5C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r4, [r0]
 	pop {r4-r7}
 	pop {r0}
@@ -7214,7 +7214,7 @@ _081390E6:
 	cmp r0, 0xC
 	bne _0813913C
 _08139128:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	b _0813914A
 	.pool
@@ -7224,7 +7224,7 @@ _0813913C:
 	lsrs r5, r0, 24
 	cmp r5, 0x5
 	bls _081390E6
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 _0813914A:
 	strh r0, [r1]
@@ -7673,7 +7673,7 @@ sub_81394D8: @ 81394D8
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8133EDC
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r6, r0, 16
 	bl CalculatePlayerPartyCount
@@ -8044,7 +8044,7 @@ _081397BE:
 	thumb_func_start sub_81397C4
 sub_81397C4: @ 81397C4
 	push {r4,r5,lr}
-	ldr r2, =gScriptResult
+	ldr r2, =gSpecialVar_Result
 	ldrh r1, [r2]
 	ldr r0, =0x0000270f
 	cmp r1, r0
@@ -8123,7 +8123,7 @@ _08139862:
 	thumb_func_start sub_813986C
 sub_813986C: @ 813986C
 	push {lr}
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _081398B8
@@ -9381,7 +9381,7 @@ _0813A2BE:
 	strh r4, [r3, 0x26]
 	b _0813A2D2
 _0813A2C6:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x7F
 	strh r0, [r1]
 	adds r0, r4, 0
@@ -9649,7 +9649,7 @@ sub_813A4EC: @ 813A4EC
 	b _0813A566
 	.pool
 _0813A51C:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x7F
 	strh r0, [r1]
 	movs r0, 0x5
@@ -9657,7 +9657,7 @@ _0813A51C:
 	b _0813A54C
 	.pool
 _0813A530:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r4, [r0]
 	movs r0, 0x5
 	bl PlaySE
@@ -10930,7 +10930,7 @@ task_deoxys_sound: @ 813AFDC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0813B004
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x3
 	b _0813B06A
 	.pool
@@ -10961,7 +10961,7 @@ _0813B004:
 	mov r0, r8
 	movs r1, 0
 	bl VarSet
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
 	b _0813B070
@@ -10971,7 +10971,7 @@ _0813B05C:
 	bne _0813B080
 	ldr r0, =0x000008d4
 	bl FlagSet
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 _0813B06A:
 	strh r0, [r1]
@@ -10991,7 +10991,7 @@ _0813B080:
 	ldr r0, =0x00004035
 	adds r1, r5, 0
 	bl VarSet
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x1
 	strh r0, [r1]
 	adds r0, r7, 0
@@ -11684,7 +11684,7 @@ _0813B62E:
 	ldrh r1, [r5]
 	cmp r1, 0x1
 	bne _0813B668
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	strh r1, [r0]
 	b _0813B790
 	.pool
@@ -11698,7 +11698,7 @@ _0813B668:
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _0813B68C
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x2
 	b _0813B6AC
 	.pool
@@ -11710,12 +11710,12 @@ _0813B68C:
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0813B6A8
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0x3
 	b _0813B6AC
 	.pool
 _0813B6A8:
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 _0813B6AC:
 	strh r0, [r1]
@@ -11736,7 +11736,7 @@ _0813B6C2:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	movs r2, 0x2
 	bl SendBlock
 	b _0813B708
@@ -11751,7 +11751,7 @@ _0813B6E4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813B790
-	ldr r1, =gScriptResult
+	ldr r1, =gSpecialVar_Result
 	ldr r0, =gBlockRecvBuffer
 	ldrh r0, [r0]
 	strh r0, [r1]
@@ -11773,20 +11773,20 @@ _0813B728:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B74C
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	bne _0813B790
-	ldr r0, =gUnknown_0824979B
+	ldr r0, =gText_YourPartnerHasRetired
 	bl ShowFieldAutoScrollMessage
 	b _0813B790
 	.pool
 _0813B74C:
-	ldr r0, =gScriptResult
+	ldr r0, =gSpecialVar_Result
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	bne _0813B790
-	ldr r0, =gUnknown_0824979B
+	ldr r0, =gText_YourPartnerHasRetired
 	bl ShowFieldAutoScrollMessage
 	b _0813B790
 	.pool
@@ -12041,7 +12041,7 @@ _0813B94E:
 	thumb_func_start sub_813B968
 sub_813B968: @ 813B968
 	push {r4,r5,lr}
-	ldr r5, =gScriptResult
+	ldr r5, =gSpecialVar_Result
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	movs r1, 0x7

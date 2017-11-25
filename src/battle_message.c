@@ -58,7 +58,7 @@ extern const u8* GetTrainer1LoseText(void); // battle_setup
 extern const u8* GetTrainer2LoseText(void); // battle_setup
 extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 extern s32 GetStringCenterAlignXOffsetWithLetterSpacing(u8 fontId, const u8 *str, s32 totalWidth, s16 letterSpacing);
-extern u8 sub_8185FC4(void);
+extern u8 GetTextSpeedInRecordedBattle(void);
 extern u8 sav2_get_text_speed(void);
 
 // this file's functions
@@ -1907,7 +1907,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 HANDLE_NICKNAME_STRING_CASE(gBattleScripting.bank, *(&gBattleStruct->field_52))
                 break;
             case B_TXT_PC_CREATOR_NAME: // lanette pc
-                if (FlagGet(SYS_PC_LANETTE))
+                if (FlagGet(FLAG_SYS_PC_LANETTE))
                     toCpy = gText_Lanettes;
                 else
                     toCpy = gText_Someones;
@@ -2264,7 +2264,7 @@ void BattleHandleAddTextPrinter(const u8 *text, u8 arg1)
         if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
             speed = 1;
         else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            speed = sRecordedBattleTextSpeeds[sub_8185FC4()];
+            speed = sRecordedBattleTextSpeeds[GetTextSpeedInRecordedBattle()];
         else
             speed = sav2_get_text_speed();
 

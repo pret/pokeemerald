@@ -32,7 +32,7 @@ _080D3754:
 	ldr r0, =gUnknown_0203AB40
 	adds r1, r0, 0x2
 	bl PlayerGetDestCoords
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -384,7 +384,7 @@ hm2_ruin_valley: @ 80D3A50
 	push {lr}
 	movs r0, 0x1
 	bl FieldEffectStart
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
@@ -420,12 +420,12 @@ sub_80D3A6C: @ 80D3A6C
 	thumb_func_start sub_80D3A9C
 sub_80D3A9C: @ 80D3A9C
 	push {lr}
-	bl brm_get_pokemon_selection
+	bl GetCursorSelectionMonId
 	ldr r1, =gFieldEffectArguments
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, =gUnknown_08290705
+	ldr r0, =Route103_EventScript_290705
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
@@ -1323,7 +1323,7 @@ _080D41D4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080D422A
-	ldr r0, =gUnknown_08267EDB
+	ldr r0, =FarawayIsland_Interior_EventScript_267EDB
 	bl ScriptContext1_SetupScript
 _080D422A:
 	pop {r4-r6}

@@ -52,7 +52,7 @@ gUnknown_0831C688:: @ 831C688
 	spr_template 0xd6eb, 0xd6eb, gUnknown_0831C630, gUnknown_0831C678, NULL, gDummySpriteAffineAnimTable, sub_80753B4
 
 	.align 2
-gUnknown_0831C6A0:: @ 831C6A0
+gSpriteSheet_EnemyShadow:: @ 831C6A0
 	obj_tiles gUnknown_08D8FBC0, 0x0080, 0xd759
 
 	.align 2
@@ -60,5 +60,5 @@ gUnknown_0831C6A8:: @ 831C6A8
 	.byte 0x00, 0x40, 0x00, 0x40, 0x00, 0x0c, 0x00, 0x00
 
 	.align 2
-gUnknown_0831C6B0:: @ 831C6B0
-	spr_template 0xd759, 0xd6ff, gUnknown_0831C6A8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_805EE48
+gSpriteTemplate_EnemyShadow:: @ 831C6B0
+	spr_template 0xd759, 0xd6ff, gUnknown_0831C6A8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCB_SetInvisible
