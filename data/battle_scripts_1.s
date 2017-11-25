@@ -614,7 +614,7 @@ BattleScript_82D8DFD::
 	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_82D8E74
 BattleScript_82D8E1F::
 	movevaluescleanup
-	copyarray cEFFECT_CHOOSER, sFIELD_16, 0x1
+	copybyte cEFFECT_CHOOSER, sFIELD_16
 	critcalc
 	damagecalc
 	typecalc
@@ -714,7 +714,7 @@ BattleScript_AlreadyPoisoned::
 	goto BattleScript_MoveEnd
 
 BattleScript_82D8F63::
-	copyarray gEffectBank, gBankTarget, 0x1
+	copybyte gEffectBank, gBankTarget
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_PSNPrevention
 	goto BattleScript_MoveEnd
@@ -804,7 +804,7 @@ BattleScript_82D906F::
 	orword gHitMarker, HITMARKER_x8000000
 	setmoveeffect EFFECT_CHARGING | AFFECTS_USER
 	seteffectprimary
-	copyarray cMULTISTRING_CHOOSER, sFIELD_F, 0x1
+	copybyte cMULTISTRING_CHOOSER, sFIELD_F
 	printfromtable 0x85CC8B0
 	waitmessage 0x40
 	return
@@ -1036,7 +1036,7 @@ BattleScript_82D9351::
 	goto BattleScript_MoveEnd
 
 BattleScript_82D9362::
-	copyarray gEffectBank, gBankTarget, 0x1
+	copybyte gEffectBank, gBankTarget
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_PRLZPrevention
 	goto BattleScript_MoveEnd
@@ -1254,7 +1254,7 @@ BattleScript_EffectPainSplit::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate ATTACKER
 	datahpupdate ATTACKER
-	copyarray gBattleMoveDamage, sPAINSPLIT_HP, 0x4
+	copyword gBattleMoveDamage, sPAINSPLIT_HP
 	healthbarupdate TARGET
 	datahpupdate TARGET
 	printstring STRINGID_SHAREDPAIN
@@ -1503,7 +1503,7 @@ BattleScript_EffectCurse::
 	jumpifstat ATTACKER, NOT_EQUAL, ATK, 0xC, BattleScript_82D9892
 	jumpifstat ATTACKER, EQUAL, DEF, 0xC, BattleScript_ButItFailed
 BattleScript_82D9892::
-	copyarray gBankTarget, gBankAttacker, 0x1
+	copybyte gBankTarget, gBankAttacker
 	setbyte sANIM_TURN, 0x1
 	attackanimation
 	waitanimation
@@ -1525,7 +1525,7 @@ BattleScript_82D98E0::
 	goto BattleScript_MoveEnd
 
 BattleScript_82D98E5::
-	jumpifarraynotequal gBankAttacker, gBankTarget, 0x1, BattleScript_82D98F6
+	jumpifbytenotequal gBankAttacker, gBankTarget, BattleScript_82D98F6
 	various ATTACKER, VARIOUS_GET_MOVE_TARGET
 BattleScript_82D98F6::
 	attackcanceler
@@ -1593,7 +1593,7 @@ BattleScript_PerishSongLoop::
 	jumpifability SCRIPTING_BANK, ABILITY_SOUNDPROOF, BattleScript_PerishSongNotAffected
 BattleScript_PerishSongLoopIncrement::
 	addbyte sBANK, 0x1
-	jumpifarraynotequal sBANK, gNoOfAllBanks, 0x1, BattleScript_PerishSongLoop
+	jumpifbytenotequal sBANK, gNoOfAllBanks, BattleScript_PerishSongLoop
 	goto BattleScript_MoveEnd
 
 BattleScript_PerishSongNotAffected::
@@ -1682,6 +1682,7 @@ BattleScript_EffectPresent::
 	ppreduce
 	typecalc
 	presentdamagecalculation
+
 BattleScript_EffectSafeguard::
 	attackcanceler
 	attackstring
@@ -1984,7 +1985,6 @@ BattleScript_BeatUpAttack::
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
 	goto BattleScript_BeatUpLoop
-
 BattleScript_BeatUpEnd::
 	end
 
@@ -2208,7 +2208,7 @@ BattleScript_EffectWillOWisp::
 	goto BattleScript_MoveEnd
 
 BattleScript_82DA0A1::
-	copyarray gEffectBank, gBankTarget, 0x1
+	copybyte gEffectBank, gBankTarget
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_BRNPrevention
 	goto BattleScript_MoveEnd
@@ -2485,7 +2485,7 @@ BattleScript_EffectYawn::
 	goto BattleScript_MoveEnd
 
 BattleScript_82DA378::
-	copyarray sBANK, sFIELD_15, 0x1
+	copybyte sBANK, sFIELD_15
 BattleScript_82DA382::
 	pause 0x20
 	printstring STRINGID_PKMNSXMADEITINEFFECTIVE
@@ -2501,21 +2501,18 @@ BattleScript_EffectEndeavor::
 	attackstring
 	ppreduce
 	setdamagetohealthdifference BattleScript_ButItFailed
-	copyarray gHpDealt, gBattleMoveDamage, 0x4
+	copyword gHpDealt, gBattleMoveDamage
 	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
 	typecalc
 	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED, BattleScript_HitFromAtkAnimation
 	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
-	copyarray gBattleMoveDamage, gHpDealt, 0x4
+	copyword gBattleMoveDamage, gHpDealt
 	adjustsetdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectEruption::
 	scaledamagebyhealthratio
 	goto BattleScript_EffectHit
-
-
-
 
 BattleScript_EffectSkillSwap::
 	attackcanceler
@@ -2563,7 +2560,6 @@ BattleScript_EffectGrudge::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-
 BattleScript_EffectSnatch::
 	attackcanceler
 	trysetsnatch BattleScript_ButItFailedAtkStringPpReduce
@@ -2600,7 +2596,7 @@ BattleScript_EffectTeeterDance::
 BattleScript_82DA47B::
 	movevaluescleanup
 	setmoveeffect EFFECT_CONFUSION
-	jumpifarrayequal gBankAttacker, gBankTarget, 0x1, BattleScript_82DA4D0
+	jumpifbyteequal gBankAttacker, gBankTarget, BattleScript_82DA4D0
 	jumpifability TARGET, ABILITY_OWN_TEMPO, BattleScript_82DA4E5
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_82DA501
 	jumpifstatus2 TARGET, STATUS2_CONFUSION, BattleScript_82DA50F
@@ -2617,7 +2613,7 @@ BattleScript_82DA4C7::
 	moveend 0x2, 0x10
 BattleScript_82DA4D0::
 	addbyte gBankTarget, 0x1
-	jumpifarraynotequal gBankTarget, gNoOfAllBanks, 0x1, BattleScript_82DA47B
+	jumpifbytenotequal gBankTarget, gNoOfAllBanks, BattleScript_82DA47B
 	end
 
 BattleScript_82DA4E5::
@@ -2665,7 +2661,6 @@ BattleScript_EffectPoisonFang::
 	setmoveeffect EFFECT_TOXIC
 	goto BattleScript_EffectHit
 
-
 BattleScript_EffectWeatherBall::
 	setweatherballtype
 	goto BattleScript_EffectHit
@@ -2701,7 +2696,6 @@ BattleScript_82DA5A7::
 	waitmessage 0x40
 BattleScript_82DA5CA::
 	goto BattleScript_MoveEnd
-
 
 BattleScript_82DA5CF::
 	pause 0x20
@@ -2934,7 +2928,7 @@ BattleScript_82DA908::
 	switchinanim GBANK_1, 0x0
 	waitstate
 	switchineffects 5
-	jumpifarraynotequal gBank1, gNoOfAllBanks, 0x1, BattleScript_82DA908
+	jumpifbytenotequal gBank1, gNoOfAllBanks, BattleScript_82DA908
 BattleScript_82DA92C::
 	end2
 
@@ -2969,7 +2963,7 @@ BattleScript_LocalBattleLost::
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID, BattleScript_82DA9C9
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_x4000000, BattleScript_82DA9C9
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_EREADER_TRAINER, BattleScript_82DA9BD
-	jumpifhalfword EQUAL, 0x2038BCA, 0x400, BattleScript_82DA9BD
+	jumpifhalfword EQUAL, gTrainerBattleOpponent_A, 0x400, BattleScript_82DA9BD
 BattleScript_82DA9B1::
 	printstring STRINGID_PLAYERWHITEOUT
 	waitmessage 0x40
@@ -3249,7 +3243,7 @@ BattleScript_82DAC5F::
 BattleScript_82DACA0::
 	jumpifbyte NOT_EQUAL, gBattleOutcome, 0, BattleScript_82DACBF
 	addbyte gBattleCommunication, 0x1
-	jumpifarraynotequal gBattleCommunication, gNoOfAllBanks, 0x1, BattleScript_82DAC5F
+	jumpifbytenotequal gBattleCommunication, gNoOfAllBanks, BattleScript_82DAC5F
 BattleScript_82DACBF::
 	bicword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
 	end2
@@ -3298,7 +3292,7 @@ BattleScript_LeechSeedTurnDrain::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate ATTACKER
 	datahpupdate ATTACKER
-	copyarray gBattleMoveDamage, gHpDealt, 0x4
+	copyword gBattleMoveDamage, gHpDealt
 	jumpifability ATTACKER, ABILITY_LIQUID_OOZE, BattleScript_82DAD47
 	manipulatedamage ATK80_DMG_CHANGE_SIGN
 	setbyte cMULTISTRING_CHOOSER, 0x3
@@ -3330,7 +3324,7 @@ BattleScript_BideAttack::
 	accuracycheck BattleScript_MoveMissed, ACC_CURR_MOVE
 	typecalc
 	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
-	copyarray gBattleMoveDamage, sBIDE_DMG, 0x4
+	copyword gBattleMoveDamage, sBIDE_DMG
 	adjustsetdamage
 	setbyte sANIM_TURN, 0x1
 	attackanimation
@@ -3528,7 +3522,7 @@ BattleScript_RapidSpinAway::
 BattleScript_WrapFree::
 	printstring STRINGID_PKMNGOTFREE
 	waitmessage 0x40
-	copyarray gBankTarget, sBANK, 0x1
+	copybyte gBankTarget, sBANK
 	return
 
 BattleScript_LeechSeedFree::
@@ -4042,7 +4036,7 @@ BattleScript_82DB48D::
 BattleScript_82DB493::
 	trycastformdatachange
 	addbyte sBANK, 0x1
-	jumpifarraynotequal sBANK, gNoOfAllBanks, 0x1, BattleScript_82DB493
+	jumpifbytenotequal sBANK, gNoOfAllBanks, BattleScript_82DB493
 	return
 
 BattleScript_CastformChange::
@@ -4484,7 +4478,7 @@ BattleScript_82DB887::
 	waitmessage 0x40
 BattleScript_82DB89D::
 	addbyte gBattleCommunication + 1, 0x1
-	jumpifarraynotequal gBattleCommunication + 1, gNoOfAllBanks, 0x1, BattleScript_82DB887
+	jumpifbytenotequal gBattleCommunication + 1, gNoOfAllBanks, BattleScript_82DB887
 	setbyte gBattleCommunication, 0x0
 	setbyte gBattleCommunication + 1, 0x0
 	end2

@@ -1237,3 +1237,19 @@
 	setbyte \dst + 2, (\value >> 16) & 0xFF
 	setbyte \dst + 3, (\value >> 24) & 0xFF
 	.endm
+	
+	.macro copybyte dst, src
+	copyarray \dst, \src, 0x1
+	.endm
+	
+	.macro copyword dst, src
+	copyarray \dst, \src, 0x4
+	.endm
+	
+	.macro jumpifbytenotequal byte1, byte2, jumpptr
+	jumpifarraynotequal \byte1, \byte2, 0x1, \jumpptr
+	.endm
+	
+	.macro jumpifbyteequal byte1, byte2, jumpptr
+	jumpifarrayequal \byte1, \byte2, 0x1, \jumpptr
+	.endm
