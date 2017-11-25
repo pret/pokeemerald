@@ -427,7 +427,6 @@ SECTIONS {
         data/data4.o(.rodata);
         data/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
-        data/wallclock.o(.rodata);
         data/data4c.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
