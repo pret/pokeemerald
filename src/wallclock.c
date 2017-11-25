@@ -48,8 +48,8 @@ static bool32 MoveClockHand(u8 taskId, u8 command);
 static void _12HourClockFixAMPM(u8 taskId, u8 command);
 static void sub_8135130(u8 taskId);
 static void sub_81351AC(struct Sprite *sprite);
-void sub_8135244(struct Sprite *sprite);
-void sub_81352DC(struct Sprite *sprite);
+static void sub_8135244(struct Sprite *sprite);
+static void sub_81352DC(struct Sprite *sprite);
 void sub_8135380(struct Sprite *sprite);
 
 // rodata
@@ -956,4 +956,54 @@ static void sub_81351AC(struct Sprite *sprite)
     }
     sprite->pos2.x = xhat;
     sprite->pos2.y = yhat;
+}
+
+static void sub_8135244(struct Sprite *sprite)
+{
+    u16 angle = gTasks[sprite->data0].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE];
+    s16 sin = Sin2(angle) / 16;
+    s16 cos = Cos2(angle) / 16;
+    u16 xhat;
+    u16 yhat;
+    SetOamMatrix(1, cos, sin, -sin, cos);
+    xhat = gUnknown_085B22D0[angle][0];
+    yhat = gUnknown_085B22D0[angle][1];
+    if (xhat > 0x80)
+    {
+        xhat |= 0xff00;
+    }
+    if (yhat > 0x80)
+    {
+        yhat |= 0xff00;
+    }
+    sprite->pos2.x = xhat;
+    sprite->pos2.y = yhat;
+}
+
+static void sub_81352DC(struct Sprite *sprite)
+{
+    if (gTasks[sprite->data0].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM])
+    {
+        if ((u16)(sprite->data1 - 60) < 30)
+        {
+            sprite->data1 += 5;
+        }
+        if (sprite->data1 < 60)
+        {
+            sprite->data1++;
+        }
+    }
+    else
+    {
+        if ((u16)(sprite->data1 - 46) < 30)
+        {
+            sprite->data1 -= 5;
+        }
+        if (sprite->data1 > 75)
+        {
+            sprite->data1--;
+        }
+    }
+    sprite->pos2.x = Cos2(sprite->data1) * 30 / 0x1000;
+    sprite->pos2.y = Sin2(sprite->data1) * 30 / 0x1000;
 }
