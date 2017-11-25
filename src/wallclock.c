@@ -23,6 +23,8 @@
 
 void sub_8134C9C(void);
 void sub_8134CB8(u8 taskId);
+void sub_8134F10(u8 taskId);
+void sub_8135130(u8 taskId);
 void sub_81351AC(struct Sprite *sprite);
 void sub_8135244(struct Sprite *sprite);
 void sub_81352DC(struct Sprite *sprite);
@@ -238,12 +240,53 @@ void Cb2_StartWallClock(void)
     gSprites[spriteId].oam.matrixNum = 1;
     spriteId = CreateSprite(&gUnknown_085B22A0, 0x78, 0x50, 2);
     gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 0x2d;
+    gSprites[spriteId].data1 = 45;
     spriteId = CreateSprite(&gUnknown_085B22B8, 0x78, 0x50, 2);
     gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 0x5a;
+    gSprites[spriteId].data1 = 90;
     sub_813498C();
     PrintTextOnWindow(1, 1, gText_Confirm3, 0, 1, 0, NULL);
+    PutWindowTilemap(1);
+    schedule_bg_copy_tilemap_to_vram(2);
+}
+
+void Cb2_ViewWallClock(void)
+{
+    u8 taskId;
+    u8 spriteId;
+    u8 r10;
+    u8 spc;
+
+    LoadWallClockGraphics();
+    LZ77UnCompVram(gUnknown_08DCC908, (u16 *)BG_SCREEN_ADDR(7));
+    taskId = CreateTask(sub_8134F10, 0);
+    sub_8135130(taskId);
+    if (gTasks[taskId].data[5] == 0)
+    {
+        r10 = 45;
+        spc = 90;
+    }
+    else
+    {
+        r10 = 90;
+        spc = 135;
+    }
+    spriteId = CreateSprite(&gUnknown_085B2250, 0x78, 0x50, 1);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
+    gSprites[spriteId].oam.matrixNum = 0;
+    spriteId = CreateSprite(&gUnknown_085B2268, 0x78, 0x50, 0);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
+    gSprites[spriteId].oam.matrixNum = 1;
+    spriteId = CreateSprite(&gUnknown_085B22A0, 0x78, 0x50, 2);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data1 = r10;
+    spriteId = CreateSprite(&gUnknown_085B22B8, 0x78, 0x50, 2);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data1 = spc;
+    sub_813498C();
+    PrintTextOnWindow(1, 1, gText_Cancel4, 0, 1, 0, NULL);
     PutWindowTilemap(1);
     schedule_bg_copy_tilemap_to_vram(2);
 }

@@ -94,6 +94,7 @@ extern const u8 gUnknown_08DBA12C[];
 extern const u8 gUnknown_08DCC05C[];
 extern const u16 gUnknown_08DCC01C[];
 extern const u16 gUnknown_08DCC03C[];
-extern const u16 gUnknown_08DCC648[];
+extern const u8 gUnknown_08DCC648[];
+extern const u8 gUnknown_08DCC908[];
 
 #endif //GUARD_GRAPHICS_H
