@@ -14,11 +14,19 @@
 #include "menu.h"
 #include "unknown_task.h"
 #include "task.h"
+#include "strings.h"
 #include "decompress.h"
 
 // static types
 
 // static declarations
+
+void sub_8134C9C(void);
+void sub_8134CB8(u8 taskId);
+void sub_81351AC(struct Sprite *sprite);
+void sub_8135244(struct Sprite *sprite);
+void sub_81352DC(struct Sprite *sprite);
+void sub_8135380(struct Sprite *sprite);
 
 // rodata
 
@@ -61,10 +69,84 @@ const struct SpritePalette gUnknown_085B2218[] = {
     { gUnknown_08DCC03C, 0x1001 },
     {}
 };
+static const struct OamData Unknown_085B2230 = {
+    .y = 0xa0,
+    .size = 3,
+    .priority = 1
+};
+static const union AnimCmd Unknown_085B2238[] = {
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END
+};
+static const union AnimCmd Unknown_085B2240[] = {
+    ANIMCMD_FRAME(64, 30),
+    ANIMCMD_END
+};
+static const union AnimCmd *const gUnknown_085B2248[] = {
+    Unknown_085B2238
+};
+static const union AnimCmd *const gUnknown_085B224C[] = {
+    Unknown_085B2240
+};
+const struct SpriteTemplate gUnknown_085B2250 = {
+    0x1000,
+    0x1000,
+    &Unknown_085B2230,
+    gUnknown_085B2248,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    sub_81351AC
+};
+const struct SpriteTemplate gUnknown_085B2268 = {
+    0x1000,
+    0x1000,
+    &Unknown_085B2230,
+    gUnknown_085B224C,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    sub_8135244
+};
+static const struct OamData Unknown_085B2280 = {
+    .y = 0xa0,
+    .size = 1,
+    .priority = 3
+};
+static const union AnimCmd Unknown_085B2288[] = {
+    ANIMCMD_FRAME(0x84, 30),
+    ANIMCMD_END
+};
+static const union AnimCmd Unknown_085B2290[] = {
+    ANIMCMD_FRAME(0x80, 30),
+    ANIMCMD_END
+};
+static const union AnimCmd *const gUnknown_085B2298[] = {
+    Unknown_085B2288
+};
+static const union AnimCmd *const gUnknown_085B229C[] = {
+    Unknown_085B2290
+};
+const struct SpriteTemplate gUnknown_085B22A0 = {
+    0x1000,
+    0x1000,
+    &Unknown_085B2280,
+    gUnknown_085B2298,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    sub_81352DC
+};
+const struct SpriteTemplate gUnknown_085B22B8 = {
+    0x1000,
+    0x1000,
+    &Unknown_085B2280,
+    gUnknown_085B229C,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    sub_8135380
+};
 
 // text
 
-void sub_81347B4(void)
+static void sub_81347B4(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -114,4 +196,54 @@ void LoadWallClockGraphics(void)
     FreeAllSpritePalettes();
     LoadCompressedObjectPic(&gUnknown_085B2208);
     LoadSpritePalettes(gUnknown_085B2218);
+}
+
+void sub_813498C(void)
+{
+    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    EnableInterrupts(INTR_FLAG_VBLANK);
+    SetVBlankCallback(sub_81347B4);
+    SetMainCallback2(sub_8134C9C);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0x0000);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0x0000);
+    SetGpuReg(REG_OFFSET_BLDY, 0x0000);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+    ShowBg(0);
+    ShowBg(2);
+    ShowBg(3);
+}
+
+void Cb2_StartWallClock(void)
+{
+    u8 taskId;
+    u8 spriteId;
+
+    LoadWallClockGraphics();
+    LZ77UnCompVram(gUnknown_08DCC648, (u16 *)BG_SCREEN_ADDR(7));
+    taskId = CreateTask(sub_8134CB8, 0);
+    gTasks[taskId].data[2] = 10;
+    gTasks[taskId].data[3] = 0;
+    gTasks[taskId].data[4] = 0;
+    gTasks[taskId].data[5] = 0;
+    gTasks[taskId].data[6] = 0;
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 0x12c;
+    spriteId = CreateSprite(&gUnknown_085B2250, 0x78, 0x50, 1);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
+    gSprites[spriteId].oam.matrixNum = 0;
+    spriteId = CreateSprite(&gUnknown_085B2268, 0x78, 0x50, 0);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
+    gSprites[spriteId].oam.matrixNum = 1;
+    spriteId = CreateSprite(&gUnknown_085B22A0, 0x78, 0x50, 2);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data1 = 0x2d;
+    spriteId = CreateSprite(&gUnknown_085B22B8, 0x78, 0x50, 2);
+    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data1 = 0x5a;
+    sub_813498C();
+    PrintTextOnWindow(1, 1, gText_Confirm3, 0, 1, 0, NULL);
+    PutWindowTilemap(1);
+    schedule_bg_copy_tilemap_to_vram(2);
 }
