@@ -31,12 +31,14 @@ EWRAM_DATA struct {
     u8 unk_02;
     u8 unk_03;
     u8 unk_04;
-    u8 unk_05;
-    u8 unk_06;
+    s8 unk_05;
+    s8 unk_06;
     u8 unk_07;
     u8 unk_08;
     u8 unk_09;
-    u8 filler_0a[0x3];
+    u8 unk_0a;
+    u8 unk_0b;
+    u8 unk_0c;
     u8 unk_0d;
     u8 unk_0e[0x4];
     u8 sizeParam;
@@ -60,7 +62,7 @@ static void sub_811A8F0(void);
 static bool8 EasyChat_AllocateResources(u8, u16 *, u8);
 static void EasyChat_FreeResources(void);
 static u16 sub_811AAAC(void);
-u16 sub_811AB68(void);
+static u16 sub_811AB68(void);
 u16 sub_811ACDC(void);
 u16 sub_811AE44(void);
 u16 sub_811AF00(void);
@@ -71,9 +73,12 @@ u16 sub_811B08C(void);
 u16 sub_811B0BC(void);
 u16 sub_811B0E8(void);
 u16 sub_811B0F8(void);
+u16 sub_811B150(void);
+u16 sub_811B1B4(void);
 u8 sub_811BA68(void);
 u8 sub_811BCC8(u8);
 void sub_811BDF0(u8 *);
+void sub_811BF78(void);
 bool8 sub_811BF8C(void);
 bool8 sub_811BFA4(void);
 void sub_811C13C(void);
@@ -526,7 +531,7 @@ static u16 sub_811AAAC(void)
     return 0;
 }
 
-bool8 sub_811AB44(void)
+bool32 sub_811AB44(void)
 {
     switch (sub_811BA68())
     {
@@ -537,3 +542,270 @@ bool8 sub_811AB44(void)
     }
     return FALSE;
 }
+
+#ifdef NONMATCHING
+static u16 sub_811AB68(void)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        sub_811BF78();
+        gUnknown_0203A118->unk_04 = 2;
+        gUnknown_0203A118->unk_0a = 0;
+        gUnknown_0203A118->unk_0b = 0;
+        gUnknown_0203A118->unk_0c = 0;
+        return 9;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    { // FIXME: See note below
+        return sub_811B150();
+    }
+    else if (gMain.newKeys & START_BUTTON)
+    { // FIXME: See note below
+        return sub_811B1B4();
+    }
+    else if (gMain.newKeys & DPAD_UP)
+    {
+        gUnknown_0203A118->unk_06--;
+    }
+    else if (gMain.newKeys & DPAD_LEFT)
+    { // FIXME: See note below
+        gUnknown_0203A118->unk_05--;
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    { // FIXME: See note below
+        gUnknown_0203A118->unk_06++;
+    }
+    else if (gMain.newKeys & DPAD_RIGHT)
+    { // FIXME: See note below
+        gUnknown_0203A118->unk_05++;
+    }
+    else
+    {
+        return 0;
+    }
+    if (gUnknown_0203A118->unk_06 < 0)
+    {
+        gUnknown_0203A118->unk_06 = gUnknown_08597550[gUnknown_0203A118->unk_01].unk_02;
+    }
+    if (gUnknown_0203A118->unk_06 > gUnknown_08597550[gUnknown_0203A118->unk_01].unk_02)
+    {
+        gUnknown_0203A118->unk_06 = 0;
+    }
+    if (gUnknown_0203A118->unk_06 == gUnknown_08597550[gUnknown_0203A118->unk_01].unk_02)
+    {
+        if (gUnknown_0203A118->unk_05 > 2)
+        {
+            gUnknown_0203A118->unk_05 = 2;
+        }
+        gUnknown_0203A118->unk_04 = 1;
+        return 3;
+    }
+    /*
+     * FIXME: right, down, left, b, and start
+     * should be inserted here, but aren't
+     */
+    if (gUnknown_0203A118->unk_05 < 0)
+    {
+        gUnknown_0203A118->unk_05 = gUnknown_08597550[gUnknown_0203A118->unk_01].unk_01 - 1;
+    }
+    if (gUnknown_0203A118->unk_05 >= gUnknown_08597550[gUnknown_0203A118->unk_01].unk_01)
+    {
+        gUnknown_0203A118->unk_05 = 0;
+    }
+    if (sub_811AB44() && gUnknown_0203A118->unk_05 == 1 && gUnknown_0203A118->unk_06 == 4)
+    {
+        gUnknown_0203A118->unk_05 = 0;
+    }
+    return 2;
+}
+#else
+__attribute__((naked)) static u16 sub_811AB68(void)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tldr r0, =gMain\n"
+                    "\tldrh r1, [r0, 0x2E]\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0811ABB8\n"
+                    "\tbl sub_811BF78\n"
+                    "\tldr r1, =gUnknown_0203A118\n"
+                    "\tldr r3, [r1]\n"
+                    "\tmovs r2, 0\n"
+                    "\tmovs r0, 0x2\n"
+                    "\tstrb r0, [r3, 0x4]\n"
+                    "\tldr r0, [r1]\n"
+                    "\tstrb r2, [r0, 0xA]\n"
+                    "\tldr r0, [r1]\n"
+                    "\tstrb r2, [r0, 0xB]\n"
+                    "\tldr r0, [r1]\n"
+                    "\tstrb r2, [r0, 0xC]\n"
+                    "\tmovs r0, 0x9\n"
+                    "\tb _0811ACCC_return_r0\n"
+                    "\t.pool\n"
+                    "_0811AB9C:\n"
+                    "\tmovs r0, 0x20\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _0811AC68_dpad_left\n"
+                    "\tmovs r0, 0x80\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _0811AC58_dpad_down\n"
+                    "\tmovs r0, 0x10\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _0811AC48_dpad_right\n"
+                    "\tmovs r0, 0\n"
+                    "\tb _0811ACCC_return_r0\n"
+                    "_0811ABB8:\n"
+                    "\tmovs r0, 0x2\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _0811AC78_b_button\n"
+                    "\tmovs r0, 0x8\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _0811AC7E_start_button\n"
+                    "\tmovs r0, 0x40\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0811AB9C\n"
+                    "\tldr r2, =gUnknown_0203A118\n"
+                    "\tldr r1, [r2]\n"
+                    "\tldrb r0, [r1, 0x6]\n"
+                    "\tsubs r0, 0x1\n"
+                    "_0811ABD8:\n"
+                    "\tstrb r0, [r1, 0x6]\n"
+                    "_0811ABDA:\n"
+                    "\tadds r7, r2, 0\n"
+                    "\tadds r4, r7, 0\n"
+                    "\tldr r2, [r4]\n"
+                    "\tmovs r0, 0x6\n"
+                    "\tldrsb r0, [r2, r0]\n"
+                    "\tldr r6, =gUnknown_08597550\n"
+                    "\tcmp r0, 0\n"
+                    "\tbge _0811ABF8\n"
+                    "\tldrb r0, [r2, 0x1]\n"
+                    "\tlsls r1, r0, 1\n"
+                    "\tadds r1, r0\n"
+                    "\tlsls r1, 3\n"
+                    "\tadds r1, r6\n"
+                    "\tldrb r0, [r1, 0x2]\n"
+                    "\tstrb r0, [r2, 0x6]\n"
+                    "_0811ABF8:\n"
+                    "\tldr r3, [r4]\n"
+                    "\tmovs r2, 0x6\n"
+                    "\tldrsb r2, [r3, r2]\n"
+                    "\tadds r5, r6, 0\n"
+                    "\tldrb r1, [r3, 0x1]\n"
+                    "\tlsls r0, r1, 1\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r0, r5\n"
+                    "\tldrb r0, [r0, 0x2]\n"
+                    "\tcmp r2, r0\n"
+                    "\tble _0811AC14\n"
+                    "\tmovs r0, 0\n"
+                    "\tstrb r0, [r3, 0x6]\n"
+                    "_0811AC14:\n"
+                    "\tldr r3, [r4]\n"
+                    "\tmovs r2, 0x6\n"
+                    "\tldrsb r2, [r3, r2]\n"
+                    "\tldrb r1, [r3, 0x1]\n"
+                    "\tlsls r0, r1, 1\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r1, r0, r5\n"
+                    "\tldrb r0, [r1, 0x2]\n"
+                    "\tcmp r2, r0\n"
+                    "\tbne _0811AC88\n"
+                    "\tmovs r0, 0x5\n"
+                    "\tldrsb r0, [r3, r0]\n"
+                    "\tcmp r0, 0x2\n"
+                    "\tble _0811AC36\n"
+                    "\tmovs r0, 0x2\n"
+                    "\tstrb r0, [r3, 0x5]\n"
+                    "_0811AC36:\n"
+                    "\tldr r1, [r4]\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tstrb r0, [r1, 0x4]\n"
+                    "\tmovs r0, 0x3\n"
+                    "\tb _0811ACCC_return_r0\n"
+                    "\t.pool\n"
+                    "_0811AC48_dpad_right:\n"
+                    "\tldr r2, =gUnknown_0203A118\n"
+                    "\tldr r1, [r2]\n"
+                    "\tldrb r0, [r1, 0x5]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r1, 0x5]\n"
+                    "\tb _0811ABDA\n"
+                    "\t.pool\n"
+                    "_0811AC58_dpad_down:\n"
+                    "\tldr r2, =gUnknown_0203A118\n"
+                    "\tldr r1, [r2]\n"
+                    "\tldrb r0, [r1, 0x6]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tb _0811ABD8\n"
+                    "\t.pool\n"
+                    "_0811AC68_dpad_left:\n"
+                    "\tldr r2, =gUnknown_0203A118\n"
+                    "\tldr r1, [r2]\n"
+                    "\tldrb r0, [r1, 0x5]\n"
+                    "\tsubs r0, 0x1\n"
+                    "\tstrb r0, [r1, 0x5]\n"
+                    "\tb _0811ABDA\n"
+                    "\t.pool\n"
+                    "_0811AC78_b_button:\n"
+                    "\tbl sub_811B150\n"
+                    "\tb _0811AC82\n"
+                    "_0811AC7E_start_button:\n"
+                    "\tbl sub_811B1B4\n"
+                    "_0811AC82:\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r0, 16\n"
+                    "\tb _0811ACCC_return_r0\n"
+                    "_0811AC88:\n"
+                    "\tmovs r0, 0x5\n"
+                    "\tldrsb r0, [r3, r0]\n"
+                    "\tcmp r0, 0\n"
+                    "\tbge _0811AC96\n"
+                    "\tldrb r0, [r1, 0x1]\n"
+                    "\tsubs r0, 0x1\n"
+                    "\tstrb r0, [r3, 0x5]\n"
+                    "_0811AC96:\n"
+                    "\tldr r3, [r4]\n"
+                    "\tmovs r2, 0x5\n"
+                    "\tldrsb r2, [r3, r2]\n"
+                    "\tldrb r1, [r3, 0x1]\n"
+                    "\tlsls r0, r1, 1\n"
+                    "\tadds r0, r1\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r0, r6\n"
+                    "\tldrb r0, [r0, 0x1]\n"
+                    "\tcmp r2, r0\n"
+                    "\tblt _0811ACB0\n"
+                    "\tmovs r0, 0\n"
+                    "\tstrb r0, [r3, 0x5]\n"
+                    "_0811ACB0:\n"
+                    "\tbl sub_811AB44\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0811ACCA\n"
+                    "\tldr r2, [r7]\n"
+                    "\tldr r0, [r2, 0x4]\n"
+                    "\tldr r1, =0x00ffff00\n"
+                    "\tands r0, r1\n"
+                    "\tldr r1, =0x00040100\n"
+                    "\tcmp r0, r1\n"
+                    "\tbne _0811ACCA\n"
+                    "\tmovs r0, 0\n"
+                    "\tstrb r0, [r2, 0x5]\n"
+                    "_0811ACCA:\n"
+                    "\tmovs r0, 0x2\n"
+                    "_0811ACCC_return_r0:\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r1}\n"
+                    "\tbx r1\n"
+                    "\t.pool");
+}
+#endif
