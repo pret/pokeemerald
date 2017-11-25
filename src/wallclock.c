@@ -34,8 +34,9 @@ static void sub_8134F10(u8 taskId);
 static void sub_8134F40(u8 taskId);
 static void sub_8134F78(u8 taskId);
 static void sub_8134FB0(u8 taskId);
-static u16 sub_8134FFC(u16 a0, u8 a1, u8 a2);
-void sub_813504C(u8 taskId, u8 a1);
+static u16 sub_8134FFC(u16 a0, u8 command, u8 a2);
+static bool32 sub_813504C(u8 taskId, u8 command);
+void sub_81350E8(u8 taskId, u8 command);
 void sub_8135130(u8 taskId);
 void sub_81351AC(struct Sprite *sprite);
 void sub_8135244(struct Sprite *sprite);
@@ -816,10 +817,10 @@ static u8 sub_8134FD4(u16 a0)
     return 1;
 }
 
-static u16 sub_8134FFC(u16 a0, u8 a1, u8 a2)
+static u16 sub_8134FFC(u16 a0, u8 command, u8 a2)
 {
     u8 r1 = sub_8134FD4(a2);
-    switch (a1)
+    switch (command)
     {
         case 1:
             if (a0) a0 -= r1;
@@ -831,4 +832,50 @@ static u16 sub_8134FFC(u16 a0, u8 a1, u8 a2)
             break;
     }
     return a0;
+}
+
+static bool32 sub_813504C(u8 taskId, u8 command)
+{
+    switch (command)
+    {
+        case 1:
+            if (gTasks[taskId].data[3] > 0)
+            {
+                gTasks[taskId].data[3]--;
+            }
+            else
+            {
+                gTasks[taskId].data[3] = 59;
+                if (gTasks[taskId].data[2] > 0)
+                {
+                    gTasks[taskId].data[2]--;
+                }
+                else
+                {
+                    gTasks[taskId].data[2] = 23;
+                }
+                sub_81350E8(taskId, command);
+            }
+            break;
+        case 2:
+            if (gTasks[taskId].data[3] < 59)
+            {
+                gTasks[taskId].data[3]++;
+            }
+            else
+            {
+                gTasks[taskId].data[3] = 0;
+                if (gTasks[taskId].data[2] < 23)
+                {
+                    gTasks[taskId].data[2]++;
+                }
+                else
+                {
+                    gTasks[taskId].data[2] = 0;
+                }
+                sub_81350E8(taskId, command);
+            }
+            break;
+    }
+    return FALSE;
 }
