@@ -17,6 +17,7 @@
 #include "strings.h"
 #include "sound.h"
 #include "songs.h"
+#include "trig.h"
 #include "decompress.h"
 
 // static types
@@ -45,8 +46,8 @@ static void sub_8134FB0(u8 taskId);
 static u16 GetClockHandAngle(u16 a0, u8 command, u8 a2);
 static bool32 MoveClockHand(u8 taskId, u8 command);
 static void _12HourClockFixAMPM(u8 taskId, u8 command);
-void sub_8135130(u8 taskId);
-void sub_81351AC(struct Sprite *sprite);
+static void sub_8135130(u8 taskId);
+static void sub_81351AC(struct Sprite *sprite);
 void sub_8135244(struct Sprite *sprite);
 void sub_81352DC(struct Sprite *sprite);
 void sub_8135380(struct Sprite *sprite);
@@ -916,4 +917,43 @@ static void _12HourClockFixAMPM(u8 taskId, u8 command)
             }
             break;
     }
+}
+
+static void sub_8135130(u8 taskId)
+{
+    RtcCalcLocalTime();
+    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] = gLocalTime.hours;
+    gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] = gLocalTime.minutes;
+    gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] * 6;
+    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE] = (gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] % 12) * 30 + (gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] / 10) * 5;
+    if (gLocalTime.hours < 12)
+    {
+        gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = FALSE;
+    }
+    else
+    {
+        gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = TRUE;
+    }
+}
+
+static void sub_81351AC(struct Sprite *sprite)
+{
+    u16 angle = gTasks[sprite->data0].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE];
+    s16 sin = Sin2(angle) / 16;
+    s16 cos = Cos2(angle) / 16;
+    u16 xhat;
+    u16 yhat;
+    SetOamMatrix(0, cos, sin, -sin, cos);
+    xhat = gUnknown_085B22D0[angle][0];
+    yhat = gUnknown_085B22D0[angle][1];
+    if (xhat > 0x80)
+    {
+        xhat |= 0xff00;
+    }
+    if (yhat > 0x80)
+    {
+        yhat |= 0xff00;
+    }
+    sprite->pos2.x = xhat;
+    sprite->pos2.y = yhat;
 }
