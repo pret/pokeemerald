@@ -1230,3 +1230,10 @@
 	.macro chosenstatus2animation bank, status
 	chosenstatusanimation \bank 0x1 \status
 	.endm
+	
+	.macro setword dst, value
+	setbyte \dst, \value & 0xFF
+	setbyte \dst + 1, (\value >> 8) & 0xFF
+	setbyte \dst + 2, (\value >> 16) & 0xFF
+	setbyte \dst + 3, (\value >> 24) & 0xFF
+	.endm

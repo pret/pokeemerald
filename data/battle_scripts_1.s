@@ -826,10 +826,7 @@ BattleScript_EffectDragonRage::
 	ppreduce
 	typecalc
 	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
-	setbyte gBattleMoveDamage, 0x28
-	setbyte gBattleMoveDamage + 1, 0x0
-	setbyte gBattleMoveDamage + 2, 0x0
-	setbyte gBattleMoveDamage + 3, 0x0
+	setword gBattleMoveDamage, 40
 	adjustsetdamage
 	goto BattleScript_HitFromAtkAnimation
 
@@ -1740,10 +1737,7 @@ BattleScript_EffectSonicboom::
 	ppreduce
 	typecalc
 	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
-	setbyte gBattleMoveDamage, 0x14
-	setbyte gBattleMoveDamage + 1, 0x0
-	setbyte gBattleMoveDamage + 2, 0x0
-	setbyte gBattleMoveDamage + 3, 0x0
+	setword gBattleMoveDamage, 20
 	adjustsetdamage
 	goto BattleScript_HitFromAtkAnimation
 
