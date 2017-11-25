@@ -8783,7 +8783,7 @@ static bool8 IsTwoTurnsMove(u16 move)
         || gBattleMoves[move].effect == EFFECT_RAZOR_WIND
         || gBattleMoves[move].effect == EFFECT_SKY_ATTACK
         || gBattleMoves[move].effect == EFFECT_SOLARBEAM
-        || gBattleMoves[move].effect == EFFECT_FLY
+        || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
         || gBattleMoves[move].effect == EFFECT_BIDE)
         return TRUE;
     else
@@ -8810,7 +8810,7 @@ static u8 AttacksThisTurn(u8 bank, u16 move) // Note: returns 1 if it's a chargi
         || gBattleMoves[move].effect == EFFECT_RAZOR_WIND
         || gBattleMoves[move].effect == EFFECT_SKY_ATTACK
         || gBattleMoves[move].effect == EFFECT_SOLARBEAM
-        || gBattleMoves[move].effect == EFFECT_FLY
+        || gBattleMoves[move].effect == EFFECT_SEMI_INVULNERABLE
         || gBattleMoves[move].effect == EFFECT_BIDE)
     {
         if ((gHitMarker & HITMARKER_x8000000))

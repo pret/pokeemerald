@@ -38,9 +38,9 @@ gBattlescriptsForRunningByItem:: @ 82DBD54
 
 	.align 2
 gBattlescriptsForSafariActions:: @ 82DBD58
-	.4byte BattleScript_82DBEBD
-	.4byte BattleScript_82DBEC4
-	.4byte BattleScript_82DBECD
+	.4byte BattleScript_ActionWatchesCarefully
+	.4byte BattleScript_ActionGetNear
+	.4byte BattleScript_ActionThrowPokeblock
 	.4byte BattleScript_82DBEE3
 
 BattleScript_82DBD68::
@@ -73,10 +73,9 @@ BattleScript_82DBDA5::
 	setbyte gBattleCommunication, 0x0
 	trygivecaughtmonnick BattleScript_82DBDC2
 	givecaughtmon
-	printfromtable 0x85CC97A
+	printfromtable gCaughtMonStringIds
 	waitmessage 0x40
 	goto BattleScript_82DBDC3
-
 BattleScript_82DBDC2::
 	givecaughtmon
 BattleScript_82DBDC3::
@@ -89,7 +88,7 @@ BattleScript_WallyBallThrow::
 	finishturn
 
 BattleScript_ShakeBallThrow::
-	printfromtable 0x85CC912
+	printfromtable gBallEscapeStringIds
 	waitmessage 0x40
 	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_SAFARI, BattleScript_82DBE01
 	jumpifbyte NOT_EQUAL, gNumSafariBalls, 0x0, BattleScript_82DBE01
@@ -136,7 +135,7 @@ BattleScript_82DBE4B::
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 0x40
 	useitemonopponent
-	printfromtable 0x85CC94E
+	printfromtable gTrainerItemCuredStatusStringIds
 	waitmessage 0x40
 	updatestatusicon ATTACKER
 	setbyte sMOVEEND_STATE, 0xF
@@ -150,7 +149,7 @@ BattleScript_82DBE6F::
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 0x40
 	useitemonopponent
-	printfromtable 0x85CC89C
+	printfromtable gStatUpStringIds
 	waitmessage 0x40
 	setbyte sMOVEEND_STATE, 0xF
 	moveend 0x1, 0x0
@@ -163,7 +162,7 @@ BattleScript_82DBE91::
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 0x40
 	useitemonopponent
-	printfromtable 0x85CC8CC
+	printfromtable gMistUsedStringIds
 	waitmessage 0x40
 	setbyte sMOVEEND_STATE, 0xF
 	moveend 0x1, 0x0
@@ -174,21 +173,21 @@ BattleScript_RunByUsingItem::
 	setbyte gBattleOutcome, RAN
 	finishturn
 
-BattleScript_82DBEBD::
+BattleScript_ActionWatchesCarefully::
 	printstring STRINGID_PKMNWATCHINGCAREFULLY
 	waitmessage 0x40
 	end2
 
-BattleScript_82DBEC4::
-	printfromtable 0x85CC944
+BattleScript_ActionGetNear::
+	printfromtable gSafariGetNearStringIds
 	waitmessage 0x40
 	end2
 
-BattleScript_82DBECD::
+BattleScript_ActionThrowPokeblock::
 	printstring STRINGID_THREWPOKEBLOCKATPKMN
 	waitmessage 0x40
 	playanimation ATTACKER, ANIM_x4, NULL
-	printfromtable 0x85CC948
+	printfromtable gSafariPokeblockResultStringIds
 	waitmessage 0x40
 	end2
 

@@ -846,7 +846,7 @@ struct BattleScripting
     s32 bideDmg;
     u8 multihitString[6];
     u8 dmgMultiplier;
-    u8 field_F;
+    u8 twoTurnsMoveStringId;
     u8 animArg1;
     u8 animArg2;
     u8 tripleKickPower;

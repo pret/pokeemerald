@@ -141,7 +141,7 @@
 	.equiv sBIDE_DMG, gBattleScripting + 4
 	.equiv sMULTIHIT_STRING, gBattleScripting + 8
 	.equiv sDMG_MULTIPLIER, gBattleScripting + 0xE
-	.equiv sFIELD_F, gBattleScripting + 0xF
+	.equiv sTWOTURN_STRINGID, gBattleScripting + 0xF
 	.equiv sANIM_ARG1, gBattleScripting + 0x10
 	.equiv sANIM_ARG2, gBattleScripting + 0x11
 	.equiv sTRIPLE_KICK_POWER, gBattleScripting + 0x12
