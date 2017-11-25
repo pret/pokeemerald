@@ -179,7 +179,6 @@ SECTIONS {
         asm/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
-        asm/wallclock.o(.text);
         asm/rom6.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);

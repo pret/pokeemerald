@@ -50,7 +50,7 @@ static void sub_8135130(u8 taskId);
 static void sub_81351AC(struct Sprite *sprite);
 static void sub_8135244(struct Sprite *sprite);
 static void sub_81352DC(struct Sprite *sprite);
-void sub_8135380(struct Sprite *sprite);
+static void sub_8135380(struct Sprite *sprite);
 
 // rodata
 
@@ -1000,6 +1000,34 @@ static void sub_81352DC(struct Sprite *sprite)
             sprite->data1 -= 5;
         }
         if (sprite->data1 > 75)
+        {
+            sprite->data1--;
+        }
+    }
+    sprite->pos2.x = Cos2(sprite->data1) * 30 / 0x1000;
+    sprite->pos2.y = Sin2(sprite->data1) * 30 / 0x1000;
+}
+
+static void sub_8135380(struct Sprite *sprite)
+{
+    if (gTasks[sprite->data0].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM])
+    {
+        if ((u16)(sprite->data1 - 105) < 30)
+        {
+            sprite->data1 += 5;
+        }
+        if (sprite->data1 < 105)
+        {
+            sprite->data1++;
+        }
+    }
+    else
+    {
+        if ((u16)(sprite->data1 - 91) < 30)
+        {
+            sprite->data1 -= 5;
+        }
+        if (sprite->data1 > 120)
         {
             sprite->data1--;
         }
