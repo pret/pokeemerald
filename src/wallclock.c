@@ -30,6 +30,9 @@
 #define WALL_CLOCK_TASK_12HRCLOCK_AM_PM    5
 #define WALL_CLOCK_TASK_SET_SPEED          6
 
+#define TAG_GFX_WALL_CLOCK_HAND 0x1000
+#define TAG_PAL_WALL_CLOCK_HAND 0x1000
+
 // static declarations
 
 static void sub_8134C9C(void);
@@ -54,17 +57,17 @@ static void sub_8135380(struct Sprite *sprite);
 
 // rodata
 
-const u8 gUnknown_085B1F58[] = INCBIN_U8("graphics/wallclock/graphics_85b1f58.4bpp.lz");
-const u16 gUnknown_085B21D4[] = INCBIN_U16("graphics/wallclock/palette_85b21d4.gbapal");
-const struct WindowTemplate gUnknown_085B21DC[] = {
+static const u8 gUnknown_085B1F58[] = INCBIN_U8("graphics/wallclock/graphics_85b1f58.4bpp.lz");
+static const u16 gUnknown_085B21D4[] = INCBIN_U16("graphics/wallclock/palette_85b21d4.gbapal");
+static const struct WindowTemplate gUnknown_085B21DC[] = {
     { 0x00, 0x03, 0x11, 0x18, 0x02, 0x0e, 0x200 },
     { 0x02, 0x18, 0x10, 0x06, 0x02, 0x0c, 0x230 },
     DUMMY_WIN_TEMPLATE
 };
-const struct WindowTemplate gUnknown_085B21F4 = {
+static const struct WindowTemplate gUnknown_085B21F4 = {
     0x00, 0x18, 0x09, 0x05, 0x04, 0x0e, 0x23c
 };
-const struct BgTemplate gUnknown_085B21FC[] = {
+static const struct BgTemplate gUnknown_085B21FC[] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -84,12 +87,12 @@ const struct BgTemplate gUnknown_085B21FC[] = {
         .priority = 2
     }
 };
-const struct CompressedSpriteSheet gUnknown_085B2208 = {
-    gUnknown_085B1F58, 0x2000, 0x1000
+static const struct CompressedSpriteSheet gUnknown_085B2208 = {
+    gUnknown_085B1F58, 0x2000, TAG_GFX_WALL_CLOCK_HAND
 };
-const u32 filler_85B2210[2] = {};
-const struct SpritePalette gUnknown_085B2218[] = {
-    { gUnknown_08DCC01C, 0x1000 },
+static const u32 filler_85B2210[2] = {};
+static const struct SpritePalette gUnknown_085B2218[] = {
+    { gUnknown_08DCC01C, TAG_PAL_WALL_CLOCK_HAND },
     { gUnknown_08DCC03C, 0x1001 },
     {}
 };
@@ -112,18 +115,18 @@ static const union AnimCmd *const gUnknown_085B2248[] = {
 static const union AnimCmd *const gUnknown_085B224C[] = {
     Unknown_085B2240
 };
-const struct SpriteTemplate gUnknown_085B2250 = {
-    0x1000,
-    0x1000,
+static const struct SpriteTemplate gUnknown_085B2250 = {
+    TAG_GFX_WALL_CLOCK_HAND,
+    TAG_PAL_WALL_CLOCK_HAND,
     &Unknown_085B2230,
     gUnknown_085B2248,
     NULL,
     gDummySpriteAffineAnimTable,
     sub_81351AC
 };
-const struct SpriteTemplate gUnknown_085B2268 = {
-    0x1000,
-    0x1000,
+static const struct SpriteTemplate gUnknown_085B2268 = {
+    TAG_GFX_WALL_CLOCK_HAND,
+    TAG_PAL_WALL_CLOCK_HAND,
     &Unknown_085B2230,
     gUnknown_085B224C,
     NULL,
@@ -149,25 +152,25 @@ static const union AnimCmd *const gUnknown_085B2298[] = {
 static const union AnimCmd *const gUnknown_085B229C[] = {
     Unknown_085B2290
 };
-const struct SpriteTemplate gUnknown_085B22A0 = {
-    0x1000,
-    0x1000,
+static const struct SpriteTemplate gUnknown_085B22A0 = {
+    TAG_GFX_WALL_CLOCK_HAND,
+    TAG_PAL_WALL_CLOCK_HAND,
     &Unknown_085B2280,
     gUnknown_085B2298,
     NULL,
     gDummySpriteAffineAnimTable,
     sub_81352DC
 };
-const struct SpriteTemplate gUnknown_085B22B8 = {
-    0x1000,
-    0x1000,
+static const struct SpriteTemplate gUnknown_085B22B8 = {
+    TAG_GFX_WALL_CLOCK_HAND,
+    TAG_PAL_WALL_CLOCK_HAND,
     &Unknown_085B2280,
     gUnknown_085B229C,
     NULL,
     gDummySpriteAffineAnimTable,
     sub_8135380
 };
-const s8 gUnknown_085B22D0[][2] = {
+static const s8 sClockHandCoords[][2] = {
     { 0x00, -0x18},
     { 0x01, -0x19},
     { 0x01, -0x19},
@@ -944,8 +947,8 @@ static void sub_81351AC(struct Sprite *sprite)
     u16 xhat;
     u16 yhat;
     SetOamMatrix(0, cos, sin, -sin, cos);
-    xhat = gUnknown_085B22D0[angle][0];
-    yhat = gUnknown_085B22D0[angle][1];
+    xhat = sClockHandCoords[angle][0];
+    yhat = sClockHandCoords[angle][1];
     if (xhat > 0x80)
     {
         xhat |= 0xff00;
@@ -966,8 +969,8 @@ static void sub_8135244(struct Sprite *sprite)
     u16 xhat;
     u16 yhat;
     SetOamMatrix(1, cos, sin, -sin, cos);
-    xhat = gUnknown_085B22D0[angle][0];
-    yhat = gUnknown_085B22D0[angle][1];
+    xhat = sClockHandCoords[angle][0];
+    yhat = sClockHandCoords[angle][1];
     if (xhat > 0x80)
     {
         xhat |= 0xff00;
@@ -984,7 +987,7 @@ static void sub_81352DC(struct Sprite *sprite)
 {
     if (gTasks[sprite->data0].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM])
     {
-        if ((u16)(sprite->data1 - 60) < 30)
+        if (sprite->data1 >= 60 && sprite->data1 < 90)
         {
             sprite->data1 += 5;
         }
@@ -995,7 +998,7 @@ static void sub_81352DC(struct Sprite *sprite)
     }
     else
     {
-        if ((u16)(sprite->data1 - 46) < 30)
+        if (sprite->data1 >= 46 && sprite->data1 < 76)
         {
             sprite->data1 -= 5;
         }
@@ -1012,7 +1015,7 @@ static void sub_8135380(struct Sprite *sprite)
 {
     if (gTasks[sprite->data0].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM])
     {
-        if ((u16)(sprite->data1 - 105) < 30)
+        if (sprite->data1 >= 105 && sprite->data1 < 135)
         {
             sprite->data1 += 5;
         }
@@ -1023,7 +1026,7 @@ static void sub_8135380(struct Sprite *sprite)
     }
     else
     {
-        if ((u16)(sprite->data1 - 91) < 30)
+        if (sprite->data1 >= 91 && sprite->data1 < 121)
         {
             sprite->data1 -= 5;
         }
