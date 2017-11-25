@@ -22,11 +22,45 @@
 
 // rodata
 
-extern const u16 gUnknown_085B21D4[];
-extern const struct BgTemplate gUnknown_085B21FC[];
-extern const struct WindowTemplate gUnknown_085B21DC[];
-extern const struct CompressedSpriteSheet gUnknown_085B2208;
-extern const struct SpritePalette gUnknown_085B2218;
+const u8 gUnknown_085B1F58[] = INCBIN_U8("graphics/wallclock/graphics_85b1f58.4bpp.lz");
+const u16 gUnknown_085B21D4[] = INCBIN_U16("graphics/wallclock/palette_85b21d4.gbapal");
+const struct WindowTemplate gUnknown_085B21DC[] = {
+    { 0x00, 0x03, 0x11, 0x18, 0x02, 0x0e, 0x200 },
+    { 0x02, 0x18, 0x10, 0x06, 0x02, 0x0c, 0x230 },
+    DUMMY_WIN_TEMPLATE
+};
+const struct WindowTemplate gUnknown_085B21F4 = {
+    0x00, 0x18, 0x09, 0x05, 0x04, 0x0e, 0x23c
+};
+const struct BgTemplate gUnknown_085B21FC[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .priority = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 8,
+        .priority = 1
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 7,
+        .priority = 2
+    }
+};
+const struct CompressedSpriteSheet gUnknown_085B2208 = {
+    gUnknown_085B1F58, 0x2000, 0x1000
+};
+const u32 filler_85B2210[2] = {};
+const struct SpritePalette gUnknown_085B2218[] = {
+    { gUnknown_08DCC01C, 0x1000 },
+    { gUnknown_08DCC03C, 0x1001 },
+    {}
+};
 
 // text
 
@@ -79,5 +113,5 @@ void LoadWallClockGraphics(void)
     ResetPaletteFade();
     FreeAllSpritePalettes();
     LoadCompressedObjectPic(&gUnknown_085B2208);
-    LoadSpritePalettes(&gUnknown_085B2218);
+    LoadSpritePalettes(gUnknown_085B2218);
 }
