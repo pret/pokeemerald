@@ -21,6 +21,14 @@
 
 // static types
 
+#define WALL_CLOCK_TASK_MINUTE_HAND_ANGLE  0
+#define WALL_CLOCK_TASK_HOUR_HAND_ANGLE    1
+#define WALL_CLOCK_TASK_HOUR               2
+#define WALL_CLOCK_TASK_MINUTE             3
+#define WALL_CLOCK_TASK_SET_COMMAND        4
+#define WALL_CLOCK_TASK_12HRCLOCK_AM_PM    5
+#define WALL_CLOCK_TASK_SET_SPEED          6
+
 // static declarations
 
 static void sub_8134C9C(void);
@@ -34,9 +42,9 @@ static void sub_8134F10(u8 taskId);
 static void sub_8134F40(u8 taskId);
 static void sub_8134F78(u8 taskId);
 static void sub_8134FB0(u8 taskId);
-static u16 sub_8134FFC(u16 a0, u8 command, u8 a2);
-static bool32 sub_813504C(u8 taskId, u8 command);
-void sub_81350E8(u8 taskId, u8 command);
+static u16 GetClockHandAngle(u16 a0, u8 command, u8 a2);
+static bool32 MoveClockHand(u8 taskId, u8 command);
+static void _12HourClockFixAMPM(u8 taskId, u8 command);
 void sub_8135130(u8 taskId);
 void sub_81351AC(struct Sprite *sprite);
 void sub_8135244(struct Sprite *sprite);
@@ -598,13 +606,13 @@ void Cb2_StartWallClock(void)
     LoadWallClockGraphics();
     LZ77UnCompVram(gUnknown_08DCC648, (u16 *)BG_SCREEN_ADDR(7));
     taskId = CreateTask(sub_8134CB8, 0);
-    gTasks[taskId].data[2] = 10;
-    gTasks[taskId].data[3] = 0;
-    gTasks[taskId].data[4] = 0;
-    gTasks[taskId].data[5] = 0;
-    gTasks[taskId].data[6] = 0;
-    gTasks[taskId].data[0] = 0;
-    gTasks[taskId].data[1] = 0x12c;
+    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] = 10;
+    gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] = 0;
+    gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND] = 0;
+    gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = 0;
+    gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED] = 0;
+    gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = 0;
+    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE] = 0x12c;
     spriteId = CreateSprite(&gUnknown_085B2250, 0x78, 0x50, 1);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
@@ -636,7 +644,7 @@ void Cb2_ViewWallClock(void)
     LZ77UnCompVram(gUnknown_08DCC908, (u16 *)BG_SCREEN_ADDR(7));
     taskId = CreateTask(sub_8134F10, 0);
     sub_8135130(taskId);
-    if (gTasks[taskId].data[5] == 0)
+    if (gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] == 0)
     {
         r10 = 45;
         spc = 90;
@@ -685,41 +693,41 @@ static void sub_8134CB8(u8 taskId)
 
 static void sub_8134CE8(u8 taskId)
 {
-    if (gTasks[taskId].data[0] % 6)
+    if (gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] % 6)
     {
-        gTasks[taskId].data[0] = sub_8134FFC(gTasks[taskId].data[0], gTasks[taskId].data[4], gTasks[taskId].data[6]);
+        gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = GetClockHandAngle(gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE], gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND], gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED]);
     }
     else
     {
-        gTasks[taskId].data[0] = gTasks[taskId].data[3] * 6;
-        gTasks[taskId].data[1] = (gTasks[taskId].data[2] % 12) * 30 + (gTasks[taskId].data[3] / 10) * 5;
+        gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] * 6;
+        gTasks[taskId].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE] = (gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] % 12) * 30 + (gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] / 10) * 5;
         if (gMain.newKeys & A_BUTTON)
         {
             gTasks[taskId].func = sub_8134DC4;
         }
         else
         {
-            gTasks[taskId].data[4] = 0;
+            gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND] = 0;
             if (gMain.heldKeys & DPAD_LEFT)
             {
-                gTasks[taskId].data[4] = 1;
+                gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND] = 1;
             }
             if (gMain.heldKeys & DPAD_RIGHT)
             {
-                gTasks[taskId].data[4] = 2;
+                gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND] = 2;
             }
-            if (gTasks[taskId].data[4] != 0)
+            if (gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND] != 0)
             {
-                if (gTasks[taskId].data[6] <= 0xFE)
+                if (gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED] <= 0xFE)
                 {
-                    gTasks[taskId].data[6]++;
+                    gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED]++;
                 }
-                gTasks[taskId].data[0] = sub_8134FFC(gTasks[taskId].data[0], gTasks[taskId].data[4], gTasks[taskId].data[6]);
-                sub_813504C(taskId, gTasks[taskId].data[4]);
+                gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = GetClockHandAngle(gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE], gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND], gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED]);
+                MoveClockHand(taskId, gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND]);
             }
             else
             {
-                gTasks[taskId].data[6] = 0;
+                gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED] = 0;
             }
         }
     }
@@ -755,7 +763,7 @@ static void c3_80BF560(u8 taskId)
 
 static void sub_8134EA4(u8 taskId)
 {
-    RtcInitLocalTimeOffset(gTasks[taskId].data[2], gTasks[taskId].data[3]);
+    RtcInitLocalTimeOffset(gTasks[taskId].data[WALL_CLOCK_TASK_HOUR], gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE]);
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     gTasks[taskId].func = c2_080111BC;
 }
@@ -800,7 +808,7 @@ static void sub_8134FB0(u8 taskId)
     }
 }
 
-static u8 sub_8134FD4(u16 a0)
+static u8 GetClockHandAngleChange(u16 a0)
 {
     if (a0 > 60)
     {
@@ -817,9 +825,9 @@ static u8 sub_8134FD4(u16 a0)
     return 1;
 }
 
-static u16 sub_8134FFC(u16 a0, u8 command, u8 a2)
+static u16 GetClockHandAngle(u16 a0, u8 command, u8 a2)
 {
-    u8 r1 = sub_8134FD4(a2);
+    u8 r1 = GetClockHandAngleChange(a2);
     switch (command)
     {
         case 1:
@@ -834,48 +842,78 @@ static u16 sub_8134FFC(u16 a0, u8 command, u8 a2)
     return a0;
 }
 
-static bool32 sub_813504C(u8 taskId, u8 command)
+static bool32 MoveClockHand(u8 taskId, u8 command)
 {
     switch (command)
     {
         case 1:
-            if (gTasks[taskId].data[3] > 0)
+            if (gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] > 0)
             {
-                gTasks[taskId].data[3]--;
+                gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE]--;
             }
             else
             {
-                gTasks[taskId].data[3] = 59;
-                if (gTasks[taskId].data[2] > 0)
+                gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] = 59;
+                if (gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] > 0)
                 {
-                    gTasks[taskId].data[2]--;
+                    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR]--;
                 }
                 else
                 {
-                    gTasks[taskId].data[2] = 23;
+                    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] = 23;
                 }
-                sub_81350E8(taskId, command);
+                _12HourClockFixAMPM(taskId, command);
             }
             break;
         case 2:
-            if (gTasks[taskId].data[3] < 59)
+            if (gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] < 59)
             {
-                gTasks[taskId].data[3]++;
+                gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE]++;
             }
             else
             {
-                gTasks[taskId].data[3] = 0;
-                if (gTasks[taskId].data[2] < 23)
+                gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] = 0;
+                if (gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] < 23)
                 {
-                    gTasks[taskId].data[2]++;
+                    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR]++;
                 }
                 else
                 {
-                    gTasks[taskId].data[2] = 0;
+                    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] = 0;
                 }
-                sub_81350E8(taskId, command);
+                _12HourClockFixAMPM(taskId, command);
             }
             break;
     }
     return FALSE;
+}
+
+static void _12HourClockFixAMPM(u8 taskId, u8 command)
+{
+    u8 hours = gTasks[taskId].data[WALL_CLOCK_TASK_HOUR];
+    switch (command)
+    {
+        case 1:
+            switch (hours)
+            {
+                case 11:
+                    gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = FALSE;
+                    break;
+                case 23:
+                    gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = TRUE;
+                    break;
+            }
+            break;
+        case 2:
+            switch (hours)
+            {
+                case 0:
+                    gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = FALSE;
+                    break;
+                case 12:
+                    gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = TRUE;
+                    break;
+            }
+            break;
+    }
 }

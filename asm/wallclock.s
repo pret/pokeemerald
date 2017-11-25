@@ -5,50 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81350E8
-sub_81350E8: @ 81350E8
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r3, r1, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	ldrb r0, [r1, 0xC]
-	cmp r3, 0x1
-	beq _0813510C
-	cmp r3, 0x2
-	beq _0813511E
-	b _0813512A
-	.pool
-_0813510C:
-	cmp r0, 0xB
-	beq _08135116
-	cmp r0, 0x17
-	beq _0813511A
-	b _0813512A
-_08135116:
-	movs r0, 0
-	b _08135128
-_0813511A:
-	strh r3, [r1, 0x12]
-	b _0813512A
-_0813511E:
-	cmp r0, 0
-	beq _08135128
-	cmp r0, 0xC
-	bne _0813512A
-	movs r0, 0x1
-_08135128:
-	strh r0, [r1, 0x12]
-_0813512A:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81350E8
-
 	thumb_func_start sub_8135130
 sub_8135130: @ 8135130
 	push {r4-r6,lr}
