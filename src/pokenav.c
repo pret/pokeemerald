@@ -31,11 +31,13 @@ static void sub_81C742C(u8 taskId);
 bool32 sub_81C756C(int a0);
 bool32 sub_81C75D4(void);
 unsigned sub_81C75E0(void);
+void sub_81C75F4(void);
 void sub_81C7650(int i);
 void sub_81C76C4(void);
 bool32 sub_81C76FC(void);
 void sub_81C7710(void);
 bool32 sub_81C7738(void);
+void sub_81C7834(u32 a0, u32 a1);
 void sub_81C7850(unsigned a0);
 bool32 sub_81C786C(void);
 void sub_81C9430(void);
@@ -43,7 +45,11 @@ void sub_81C9430(void);
 // rodata
 
 extern const struct {
-    u8 filler_00[0x14];
+    bool32 (*unk_00)(void);
+    int unk_04;
+    bool32 (*unk_08)(void);
+    u32 unk_0c;
+    u32 unk_10;
     void (*unk_14)(void);
     void (*unk_18)(void);
 } gUnknown_0861F3EC[];
@@ -180,7 +186,7 @@ static void sub_81C742C(u8 taskId)
         case 1:
             if (!sub_81C76FC())
             {
-                sub_81C756C(0x186a0);
+                sub_81C756C(100000);
                 data[0] = 4;
             }
             break;
@@ -198,7 +204,7 @@ static void sub_81C742C(u8 taskId)
                 sub_81C7710();
                 data[0] = 5;
             }
-            else if (value >= 0x186a0)
+            else if (value >= 100000)
             {
                 gUnknown_0861F3EC[gUnknown_0203CF40->unk_04].unk_18();
                 gUnknown_0861F3EC[gUnknown_0203CF40->unk_04].unk_14();
@@ -243,4 +249,18 @@ static void sub_81C742C(u8 taskId)
             }
             break;
     }
+}
+
+bool32 sub_81C756C(int a0)
+{
+    int v0 = a0 - 100000;
+    sub_81C75F4();
+    if (gUnknown_0861F3EC[v0].unk_00() && gUnknown_0861F3EC[v0].unk_08())
+    {
+        sub_81C7834(gUnknown_0861F3EC[v0].unk_0c, gUnknown_0861F3EC[v0].unk_10);
+        gUnknown_0203CF40->unk_00 = gUnknown_0861F3EC[v0].unk_04;
+        gUnknown_0203CF40->unk_04 = v0;
+        return TRUE;
+    }
+    return FALSE;
 }
