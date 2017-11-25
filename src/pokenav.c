@@ -5,7 +5,11 @@
 #include "palette.h"
 #include "overworld.h"
 #include "field_weather.h"
+#include "songs.h"
+#include "sound.h"
 #include "pokemon_storage_system.h"
+#include "pokemon_summary_screen.h"
+#include "window.h"
 #include "pokenav.h"
 
 // static types
@@ -18,6 +22,12 @@ struct PokenavStruct_203CF40 {
     bool32 anyMonsHaveRibbons;
     void *unk_10[19];
 }; // size=0x5c
+
+struct PokenavStruct_81C76C4 {
+    u8 filler_000[12];
+    unsigned unk_00c;
+    u8 filler_010[0x81c];
+};
 
 // static declarations
 
@@ -34,13 +44,15 @@ bool32 sub_81C75D4(void);
 unsigned sub_81C75E0(void);
 void sub_81C75F4(void);
 void sub_81C7650(int i);
-void sub_81C76C4(void);
+bool32 sub_81C76C4(void);
 bool32 sub_81C76FC(void);
 void sub_81C7710(void);
 bool32 sub_81C7738(void);
+int sub_81C7764(int a0);
 void sub_81C7834(u32 (*a0)(void), u32 (*a1)(void));
 void sub_81C7850(unsigned a0);
 bool32 sub_81C786C(void);
+void sub_81C7C94(void);
 bool32 sub_81C9298(void);
 bool32 sub_81C92CC(void);
 bool32 sub_81C9304(void);
@@ -53,6 +65,7 @@ bool32 sub_81C9940(void);
 bool32 sub_81C9990(void);
 bool32 sub_81C99C0(void);
 void sub_81C99D4(void);
+void sub_81CAADC(void);
 bool32 sub_81CAAE8(void);
 bool32 sub_81CAB24(void);
 void sub_81CAB38(void);
@@ -371,7 +384,7 @@ void *sub_81C761C(int i, size_t size)
     return gUnknown_0203CF40->unk_10[i];
 }
 
-void *sub_81C763C(int i)
+struct PokenavStruct_81C76C4 *sub_81C763C(int i)
 {
     return gUnknown_0203CF40->unk_10[i];
 }
@@ -411,4 +424,41 @@ u16 sub_81C76AC(void)
 bool32 sub_81C76B8(void)
 {
     return gUnknown_0203CF40->anyMonsHaveRibbons;
+}
+
+bool32 sub_81C76C4(void)
+{
+    struct PokenavStruct_81C76C4 *v0 = sub_81C761C(0, sizeof(struct PokenavStruct_81C76C4));
+    if (v0 == NULL)
+    {
+        return FALSE;
+    }
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    v0->unk_00c = sub_81C7078(sub_81C7764, 1);
+    return TRUE;
+}
+
+u32 sub_81C76FC(void)
+{
+    return sub_81C70D8(sub_81C763C(0)->unk_00c);
+}
+
+void sub_81C7710(void)
+{
+    PlaySE(SE_PN_OFF);
+    sub_81CAADC();
+    BeginNormalPaletteFade(-1, -1, 0, 16, 0);
+}
+
+bool32 sub_81C7738(void)
+{
+    if (!gPaletteFade.active)
+    {
+        sub_81C99D4();
+        sub_81C7C94();
+        FreeAllWindowBuffers();
+        return FALSE;
+    }
+    return TRUE;
 }
