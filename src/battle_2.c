@@ -6,6 +6,7 @@
 #include "gpu_regs.h"
 #include "unknown_task.h"
 #include "battle_setup.h"
+#include "battle_scripts.h"
 #include "pokemon.h"
 #include "palette.h"
 #include "task.h"
@@ -177,31 +178,6 @@ extern const u8 gText_Burn[];
 extern const u8 gText_Ice[];
 extern const u8 gText_Confusion[];
 extern const u8 gText_Love[];
-
-// battlescripts
-extern const u8 gUnknown_082DB8BE[];
-extern const u8 gUnknown_082DB881[];
-extern const u8 BattleScript_ActionSelectionItemsCantBeUsed[];
-extern const u8 gUnknown_082DAB11[];
-extern const u8 gUnknown_082DB9BA[];
-extern const u8 gUnknown_082DAAFE[];
-extern const u8 gUnknown_082DAB0B[];
-extern const u8 BattleScript_FocusPunchSetUp[];
-extern const u8 BattleScript_LinkBattleWonOrLost[];
-extern const u8 BattleScript_FrontierTrainerBattleWon[];
-extern const u8 BattleScript_LocalTrainerBattleWon[];
-extern const u8 BattleScript_PayDayMoneyAndPickUpItems[];
-extern const u8 BattleScript_LocalBattleLost[];
-extern const u8 gUnknown_082DB9C8[];
-extern const u8 gUnknown_082DAA0B[];
-extern const u8 gUnknown_082DB9C1[];
-extern const u8 BattleScript_RanAwayUsingMonAbility[];
-extern const u8 BattleScript_SmokeBallEscape[];
-extern const u8 BattleScript_GotAwaySafely[];
-extern const u8 BattleScript_WildMonFled[];
-extern const u8 BattleScript_MoveUsedLoafingAround[];
-extern const u8 BattleScript_ActionSwitch[];
-extern const u8 BattleScript_PrintFailedToRunString[];
 
 // functions
 extern void dp12_8087EA4(void);
@@ -3704,7 +3680,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
         StopCryAndClearCrySongs();
-        BattleScriptExecute(gUnknown_082DB8BE);
+        BattleScriptExecute(BattleScript_82DB8BE);
     }
 }
 
@@ -3792,9 +3768,9 @@ void BattleTurnPassed(void)
     gRandomTurnNumber = Random();
 
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-        BattleScriptExecute(gUnknown_082DB881);
+        BattleScriptExecute(BattleScript_82DB881);
     else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->field_DA == 0)
-        BattleScriptExecute(gUnknown_082DB8BE);
+        BattleScriptExecute(BattleScript_82DB8BE);
 }
 
 u8 IsRunningFromBattleImpossible(void)
@@ -4052,7 +4028,7 @@ static void HandleTurnActionSelectionState(void)
                 case ACTION_SAFARI_ZONE_BALL:
                     if (IsPlayerPartyAndPokemonStorageFull())
                     {
-                        gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DAB11;
+                        gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DAB11;
                         gBattleCommunication[gActiveBank] = STATE_SELECTION_SCRIPT;
                         *(gBattleStruct->selectionScriptFinished + gActiveBank) = FALSE;
                         *(gBattleStruct->stateIdAfterSelScript + gActiveBank) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4107,7 +4083,7 @@ static void HandleTurnActionSelectionState(void)
                     && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000)
                     && gBattleBufferB[gActiveBank][1] == ACTION_RUN)
                 {
-                    gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB9BA;
+                    gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB9BA;
                     gBattleCommunication[gActiveBank] = 8;
                     *(gBattleStruct->selectionScriptFinished + gActiveBank) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + gActiveBank) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4117,13 +4093,13 @@ static void HandleTurnActionSelectionState(void)
                          && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
                          && gBattleBufferB[gActiveBank][1] == ACTION_RUN)
                 {
-                    BattleScriptExecute(gUnknown_082DAAFE);
+                    BattleScriptExecute(BattleScript_82DAAFE);
                     gBattleCommunication[gActiveBank] = 1;
                 }
                 else if (IsRunningFromBattleImpossible() != 0
                          && gBattleBufferB[gActiveBank][1] == ACTION_RUN)
                 {
-                    gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DAB0B;
+                    gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DAB0B;
                     gBattleCommunication[gActiveBank] = STATE_SELECTION_SCRIPT;
                     *(gBattleStruct->selectionScriptFinished + gActiveBank) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + gActiveBank) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4811,13 +4787,13 @@ static void HandleEndTurn_BattleLost(void)
         {
             if (gBattleOutcome & BATTLE_OUTCOME_BIT_x80)
             {
-                gBattlescriptCurrInstr = gUnknown_082DB9C8;
+                gBattlescriptCurrInstr = BattleScript_82DB9C8;
                 gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
                 gSaveBlock2Ptr->field_CA9_b = 1;
             }
             else
             {
-                gBattlescriptCurrInstr = gUnknown_082DAA0B;
+                gBattlescriptCurrInstr = BattleScript_82DAA0B;
                 gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
             }
         }
@@ -4843,13 +4819,13 @@ static void HandleEndTurn_RanFromBattle(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        gBattlescriptCurrInstr = gUnknown_082DB9C1;
+        gBattlescriptCurrInstr = BattleScript_82DB9C1;
         gBattleOutcome = BATTLE_FORFEITED;
         gSaveBlock2Ptr->field_CA9_b = 1;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
     {
-        gBattlescriptCurrInstr = gUnknown_082DB9C1;
+        gBattlescriptCurrInstr = BattleScript_82DB9C1;
         gBattleOutcome = BATTLE_FORFEITED;
     }
     else

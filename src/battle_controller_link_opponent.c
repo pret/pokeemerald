@@ -82,7 +82,7 @@ static void LinkOpponentHandleBallThrowAnim(void);
 static void LinkOpponentHandlePause(void);
 static void LinkOpponentHandleMoveAnimation(void);
 static void LinkOpponentHandlePrintString(void);
-static void LinkOpponentHandlePrintStringPlayerOnly(void);
+static void LinkOpponentHandlePrintSelectionString(void);
 static void LinkOpponentHandleChooseAction(void);
 static void LinkOpponentHandleUnknownYesNoBox(void);
 static void LinkOpponentHandleChooseMove(void);
@@ -108,7 +108,7 @@ static void LinkOpponentHandleCmd39(void);
 static void LinkOpponentHandleCmd40(void);
 static void LinkOpponentHandleHitAnimation(void);
 static void LinkOpponentHandleCmd42(void);
-static void LinkOpponentHandleEffectivenessSound(void);
+static void LinkOpponentHandlePlaySE(void);
 static void LinkOpponentHandlePlayFanfareOrBGM(void);
 static void LinkOpponentHandleFaintingCry(void);
 static void LinkOpponentHandleIntroSlide(void);
@@ -154,7 +154,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentHandlePause,
     LinkOpponentHandleMoveAnimation,
     LinkOpponentHandlePrintString,
-    LinkOpponentHandlePrintStringPlayerOnly,
+    LinkOpponentHandlePrintSelectionString,
     LinkOpponentHandleChooseAction,
     LinkOpponentHandleUnknownYesNoBox,
     LinkOpponentHandleChooseMove,
@@ -180,7 +180,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkOpponentHandleCmd40,
     LinkOpponentHandleHitAnimation,
     LinkOpponentHandleCmd42,
-    LinkOpponentHandleEffectivenessSound,
+    LinkOpponentHandlePlaySE,
     LinkOpponentHandlePlayFanfareOrBGM,
     LinkOpponentHandleFaintingCry,
     LinkOpponentHandleIntroSlide,
@@ -1505,7 +1505,7 @@ static void LinkOpponentHandlePrintString(void)
     sub_817C95C(*stringId);
 }
 
-static void LinkOpponentHandlePrintStringPlayerOnly(void)
+static void LinkOpponentHandlePrintSelectionString(void)
 {
     LinkOpponentBufferExecCompleted();
 }
@@ -1681,7 +1681,7 @@ static void LinkOpponentHandleCmd42(void)
     LinkOpponentBufferExecCompleted();
 }
 
-static void LinkOpponentHandleEffectivenessSound(void)
+static void LinkOpponentHandlePlaySE(void)
 {
     s8 pan;
 

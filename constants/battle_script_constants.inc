@@ -1,0 +1,170 @@
+@ animation ids
+	.set ANIM_CASTFORM_CHANGE, 0x0
+	.set ANIM_STATS_CHANGE, 0x1
+	.set ANIM_SUBSTITUTE_FADE, 0x2
+	.set ANIM_SUBSTITUTE_APPEAR, 0x3
+	.set ANIM_x4, 0x4
+	.set ANIM_ITEM_KNOCKOFF, 0x5
+	.set ANIM_TURN_TRAP, 0x6
+	.set ANIM_ITEM_EFFECT, 0x7
+	.set ANIM_SMOKEBALL_ESCAPE, 0x8
+	.set ANIM_HANGED_ON, 0x9
+	.set ANIM_RAIN_CONTINUES, 0xA
+	.set ANIM_SUN_CONTINUES, 0xB
+	.set ANIM_SANDSTORM_CONTINUES, 0xC
+	.set ANIM_HAIL_CONTINUES, 0xD
+	.set ANIM_LEECH_SEED_DRAIN, 0xE
+	.set ANIM_MON_HIT, 0xF
+	.set ANIM_ITEM_STEAL, 0x10
+	.set ANIM_SNATCH_MOVE, 0x11
+	.set ANIM_FUTURE_SIGHT_HIT, 0x12
+	.set ANIM_x13, 0x13
+	.set ANIM_x14, 0x14
+	.set ANIM_INGRAIN_HEAL, 0x15
+	.set ANIM_WISH_HEAL, 0x16
+		
+@ atk 80
+	.set ATK80_DMG_CHANGE_SIGN, 0x0
+	.set ATK80_DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP, 0x1
+	.set ATK80_DMG_DOUBLED, 0x2
+	
+@ compare operands
+	.set EQUAL, 0x0
+	.set NOT_EQUAL, 0x1
+	.set GREATER_THAN, 0x2
+	.set LESS_THAN, 0x3
+	.set COMMON_BITS, 0x4
+	.set NO_COMMON_BITS, 0x5
+	
+@ move effects
+	.set EFFECT_SLEEP, 0x1
+	.set EFFECT_POISON, 0x2
+	.set EFFECT_BURN, 0x3
+	.set EFFECT_FREEZE, 0x4
+	.set EFFECT_PARALYSIS, 0x5
+	.set EFFECT_TOXIC, 0x6
+	.set EFFECT_CONFUSION, 0x7
+	.set EFFECT_FLINCH, 0x8
+	.set EFFECT_TRI_ATTACK, 0x9
+	.set EFFECT_UPROAR, 0xA
+	.set EFFECT_PAYDAY, 0xB
+	.set EFFECT_CHARGING, 0xC
+	.set EFFECT_WRAP, 0xD
+	.set EFFECT_RECOIL_25, 0xE
+	.set EFFECT_ATK_PLUS_1, 0xF
+	.set EFFECT_DEF_PLUS_1, 0x10
+	.set EFFECT_SPD_PLUS_1, 0x11
+	.set EFFECT_SP_ATK_PLUS_1, 0x12
+	.set EFFECT_SP_DEF_PLUS_1, 0x13
+	.set EFFECT_ACC_PLUS_1, 0x14
+	.set EFFECT_EVS_PLUS_1, 0x15
+	.set EFFECT_ATK_MINUS_1, 0x16
+	.set EFFECT_DEF_MINUS_1, 0x17
+	.set EFFECT_SPD_MINUS_1, 0x18
+	.set EFFECT_SP_ATK_MINUS_1, 0x19
+	.set EFFECT_SP_DEF_MINUS_1, 0x1A
+	.set EFFECT_ACC_MINUS_1, 0x1B
+	.set EFFECT_EVS_MINUS_1, 0x1C
+	.set EFFECT_RECHARGE, 0x1D
+	.set EFFECT_RAGE, 0x1E
+	.set EFFECT_STEAL_ITEM, 0x1F
+	.set EFFECT_PREVENT_ESCAPE, 0x20
+	.set EFFECT_NIGHTMARE, 0x21
+	.set EFFECT_ALL_STATS_UP, 0x22
+	.set EFFECT_RAPIDSPIN, 0x23
+	.set EFFECT_REMOVE_PARALYSIS, 0x24
+	.set EFFECT_ATK_DEF_DOWN, 0x25
+	.set EFFECT_RECOIL_33_PARALYSIS, 0x26
+	.set EFFECT_ATK_PLUS_2, 0x27
+	.set EFFECT_DEF_PLUS_2, 0x28
+	.set EFFECT_SPD_PLUS_2, 0x29
+	.set EFFECT_SP_ATK_PLUS_2, 0x2A
+	.set EFFECT_SP_DEF_PLUS_2, 0x2B
+	.set EFFECT_ACC_PLUS_2, 0x2C
+	.set EFFECT_EVS_PLUS_2, 0x2D
+	.set EFFECT_ATK_MINUS_2, 0x2E
+	.set EFFECT_DEF_MINUS_2, 0x2F
+	.set EFFECT_SPD_MINUS_2, 0x30
+	.set EFFECT_SP_ATK_MINUS_2, 0x31
+	.set EFFECT_SP_DEF_MINUS_2, 0x32
+	.set EFFECT_ACC_MINUS_2, 0x33
+	.set EFFECT_EVS_MINUS_2, 0x34
+	.set EFFECT_THRASH, 0x35
+	.set EFFECT_KNOCK_OFF, 0x36
+	.set EFFECT_NOTHING_37, 0x37
+	.set EFFECT_NOTHING_38, 0x38
+	.set EFFECT_NOTHING_39, 0x39
+	.set EFFECT_NOTHING_3A, 0x3A
+	.set EFFECT_SP_ATK_TWO_DOWN, 0x3B
+	.set EFFECT_NOTHING_3C, 0x3C
+	.set EFFECT_NOTHING_3D, 0x3D
+	.set EFFECT_NOTHING_3E, 0x3E
+	.set EFFECT_NOTHING_3F, 0x3F
+	
+	.set AFFECTS_USER, 0x40
+	.set CERTAIN, 0x80
+	
+@ accuracy calc
+	.set NO_ACC_CALC, 0xFFFE
+	.set NO_ACC_CALC_CHECK_LOCK_ON, 0xFFFF
+	.set ACC_CURR_MOVE, 0x0
+
+@ bank values
+	.set TARGET, 0x0
+	.set ATTACKER, 0x1
+	.set EFFECT_BANK, 0x2
+	.set GBANK_1, 0x3
+	.set ATTACKER_WITH_PARTNER, 0x4 @ only for cmd98
+	.set BANK0, 0x7
+	.set SCRIPTING_BANK, 0xA
+	.set OPPONENT1, 0xC
+	
+@ various
+	.set VARIOUS_CANCEL_MULTI_TURN_MOVES, 0
+	.set VARIOUS_SET_MAGIC_COAT_TARGET, 1
+	.set VARIOUS_IS_RUNNING_IMPOSSIBLE, 2
+	.set VARIOUS_GET_MOVE_TARGET, 3
+	.set VARIOUS_RESET_INTIMIDATE_TRACE_BITS, 5
+	.set VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP, 6
+	.set VARIOUS_EMIT_YESNOBOX, 13
+	.set VARIOUS_WAIT_CRY, 18
+	.set VARIOUS_RETURN_OPPONENT_MON1, 19
+	.set VARIOUS_RETURN_OPPONENT_MON2, 20
+	.set VARIOUS_SET_TELEPORT_OUTCOME, 25
+	.set VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC, 26
+	
+@ jumpifcant switch flag argument
+	.set ATK4F_DONT_CHECK_STATUSES, 0x80
+
+@ battle scripting struct
+	.equiv sPAINSPLIT_HP, gBattleScripting
+	.equiv sBIDE_DMG, gBattleScripting + 4
+	.equiv sMULTIHIT_STRING, gBattleScripting + 8
+	.equiv sDMG_MULTIPLIER, gBattleScripting + 0xE
+	.equiv sFIELD_F, gBattleScripting + 0xF
+	.equiv sANIM_ARG1, gBattleScripting + 0x10
+	.equiv sANIM_ARG2, gBattleScripting + 0x11
+	.equiv sTRIPLE_KICK_POWER, gBattleScripting + 0x12
+	.equiv sFIELD_13, gBattleScripting + 0x13
+	.equiv sMOVEEND_STATE, gBattleScripting + 0x14
+	.equiv sFIELD_15, gBattleScripting + 0x15
+	.equiv sFIELD_16, gBattleScripting + 0x16
+	.equiv sBANK, gBattleScripting + 0x17
+	.equiv sANIM_TURN, gBattleScripting + 0x18
+	.equiv sANIM_TARGETS_HIT, gBattleScripting + 0x19
+	.equiv sSTATCHANGER, gBattleScripting + 0x1A
+	.equiv sFIELD_1B, gBattleScripting + 0x1B
+	.equiv sGIVEEXP_STATE, gBattleScripting + 0x1C
+	.equiv sBATTLE_STYLE, gBattleScripting + 0x1D
+	.equiv sLVLBOX_STATE, gBattleScripting + 0x1E
+	.equiv sLEARNMOVE_STATE, gBattleScripting + 0x1F
+	.equiv sFIELD_20, gBattleScripting + 0x20
+	.equiv sRESHOW_MAIN_STATE, gBattleScripting + 0x21
+	.equiv sRESHOW_HELPER_STATE, gBattleScripting + 0x22
+	.equiv sFIELD_23, gBattleScripting + 0x23
+	.equiv sFIELD_24, gBattleScripting + 0x24
+	.equiv sMULTIPLAYER_ID, gBattleScripting + 0x25
+
+@ battle communication struct
+	.equiv cEFFECT_CHOOSER, gBattleCommunication + 3
+	.equiv cMULTISTRING_CHOOSER, gBattleCommunication + 5

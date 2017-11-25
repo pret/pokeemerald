@@ -1140,10 +1140,10 @@ void EmitPrintString(u8 bufferId, u16 stringID)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, sizeof(struct StringInfoBattle) + 4);
 }
 
-void EmitPrintStringPlayerOnly(u8 bufferId, u16 stringID)
+void EmitPrintSelectionString(u8 bufferId, u16 stringID)
 {
     s32 i;
-    struct StringInfoBattle* stringInfo;
+    struct StringInfoBattle *stringInfo;
 
     gBattleBuffersTransferData[0] = CONTROLLER_PRINTSTRINGPLAYERONLY;
     gBattleBuffersTransferData[1] = CONTROLLER_PRINTSTRINGPLAYERONLY;
@@ -1427,7 +1427,7 @@ void EmitCmd42(u8 bufferId)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitEffectivenessSound(u8 bufferId, u16 songId)
+void EmitPlaySE(u8 bufferId, u16 songId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_EFFECTIVENESSSOUND;
     gBattleBuffersTransferData[1] = songId;

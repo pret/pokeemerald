@@ -9,6 +9,7 @@
 #include "items.h"
 #include "util.h"
 #include "battle_move_effects.h"
+#include "battle_scripts.h"
 #include "rng.h"
 #include "text.h"
 #include "string_util.h"
@@ -60,119 +61,6 @@ extern u8 gSentPokesToOpponent[2];
 
 extern const struct BattleMove gBattleMoves[];
 
-// scripts
-extern const u8 gUnknown_082DAE2A[];
-extern const u8 gUnknown_082DAE1F[];
-extern const u8 gUnknown_082DB089[];
-extern const u8 gUnknown_082DB098[];
-extern const u8 gUnknown_082DB0AF[];
-extern const u8 gUnknown_082DB0A0[];
-extern const u8 gUnknown_082DB185[];
-extern const u8 gUnknown_082DB181[];
-extern const u8 gUnknown_082DB812[];
-extern const u8 gUnknown_082DB076[];
-extern const u8 BattleScript_NoMovesLeft[];
-extern const u8 gUnknown_082DACFA[];
-extern const u8 gUnknown_082DAD0B[];
-extern const u8 gUnknown_082DACC9[];
-extern const u8 gUnknown_082DAC47[];
-extern const u8 gUnknown_082DACE0[];
-extern const u8 gUnknown_082DACD2[];
-extern const u8 BattleScript_WishComesTrue[];
-extern const u8 gUnknown_082DACC9[];
-extern const u8 gUnknown_082DAC2C[];
-extern const u8 BattleScript_IngrainTurnHeal[];
-extern const u8 BattleScript_LeechSeedTurnDrain[];
-extern const u8 BattleScript_PoisonTurnDmg[];
-extern const u8 BattleScript_BurnTurnDmg[];
-extern const u8 BattleScript_NightmareTurnDmg[];
-extern const u8 BattleScript_CurseTurnDmg[];
-extern const u8 BattleScript_WrapTurnDmg[];
-extern const u8 BattleScript_WrapEnds[];
-extern const u8 gUnknown_082DB234[];
-extern const u8 gUnknown_082DB2A6[];
-extern const u8 BattleScript_ThrashConfuses[];
-extern const u8 BattleScript_DisabledNoMore[];
-extern const u8 BattleScript_EncoredNoMore[];
-extern const u8 BattleScript_YawnMakesAsleep[];
-extern const u8 gUnknown_082DAFE4[];
-extern const u8 gUnknown_082DB8F3[];
-extern const u8 gUnknown_082DAF05[];
-extern const u8 gUnknown_082DAF20[];
-extern const u8 gUnknown_082DA7C4[];
-extern const u8 gUnknown_082DA7CD[];
-extern const u8 BattleScript_MoveUsedWokeUp[];
-extern const u8 BattleScript_MoveUsedIsAsleep[];
-extern const u8 BattleScript_MoveUsedIsFrozen[];
-extern const u8 BattleScript_MoveUsedUnfroze[];
-extern const u8 BattleScript_MoveUsedLoafingAround[];
-extern const u8 BattleScript_MoveUsedMustRecharge[];
-extern const u8 BattleScript_MoveUsedFlinched[];
-extern const u8 BattleScript_MoveUsedIsDisabled[];
-extern const u8 BattleScript_MoveUsedIsTaunted[];
-extern const u8 BattleScript_MoveUsedIsImprisoned[];
-extern const u8 BattleScript_MoveUsedIsConfused[];
-extern const u8 BattleScript_MoveUsedIsConfusedNoMore[];
-extern const u8 BattleScript_MoveUsedIsParalyzed[];
-extern const u8 BattleScript_MoveUsedIsParalyzedCantAttack[];
-extern const u8 BattleScript_MoveUsedIsInLove[];
-extern const u8 BattleScript_BideStoringEnergy[];
-extern const u8 BattleScript_BideAttack[];
-extern const u8 BattleScript_BideNoEnergyToAttack[];
-extern const u8 gUnknown_082DACE7[];
-extern const u8 BattleScript_DrizzleActivates[];
-extern const u8 BattleScript_SandstreamActivates[];
-extern const u8 BattleScript_DroughtActivates[];
-extern const u8 BattleScript_CastformChange[];
-extern const u8 BattleScript_RainDishActivates[];
-extern const u8 BattleScript_ShedSkinActivates[];
-extern const u8 BattleScript_SpeedBoostActivates[];
-extern const u8 BattleScript_SoundproofProtected[];
-extern const u8 BattleScript_MoveHPDrain[];
-extern const u8 BattleScript_MoveHPDrain_PPLoss[];
-extern const u8 BattleScript_FlashFireBoost[];
-extern const u8 BattleScript_FlashFireBoost_PPLoss[];
-extern const u8 gUnknown_082DB592[];
-extern const u8 gUnknown_082DB591[];
-extern const u8 BattleScript_ColorChangeActivates[];
-extern const u8 BattleScript_RoughSkinActivates[];
-extern const u8 BattleScript_ApplySecondaryEffect[];
-extern const u8 BattleScript_CuteCharmActivates[];
-extern const u8 gUnknown_082DB68C[];
-extern const u8 BattleScript_SynchronizeActivates[];
-extern const u8 gUnknown_082DB4B8[];
-extern const u8 gUnknown_082DB4C1[];
-extern const u8 BattleScript_TraceActivates[];
-
-extern const u8 BattleScript_WhiteHerbEnd2[];
-extern const u8 BattleScript_WhiteHerbRet[];
-extern const u8 BattleScript_ItemHealHP_RemoveItem[];
-extern const u8 BattleScript_BerryPPHealEnd2[];
-extern const u8 BattleScript_ItemHealHP_End2[];
-extern const u8 BattleScript_BerryConfuseHealEnd2[];
-extern const u8 BattleScript_BerryStatRaiseEnd2[];
-extern const u8 BattleScript_BerryFocusEnergyEnd2[];
-extern const u8 BattleScript_BerryCurePrlzEnd2[];
-extern const u8 BattleScript_BerryCurePsnEnd2[];
-extern const u8 BattleScript_BerryCureBrnEnd2[];
-extern const u8 BattleScript_BerryCureFrzEnd2[];
-extern const u8 BattleScript_BerryCureSlpEnd2[];
-extern const u8 BattleScript_BerryCureConfusionEnd2[];
-extern const u8 BattleScript_BerryCureChosenStatusEnd2[];
-extern const u8 BattleScript_BerryCureParRet[];
-extern const u8 BattleScript_BerryCurePsnRet[];
-extern const u8 BattleScript_BerryCureBrnRet[];
-extern const u8 BattleScript_BerryCureFrzRet[];
-extern const u8 BattleScript_BerryCureSlpRet[];
-extern const u8 BattleScript_BerryCureConfusionRet[];
-extern const u8 BattleScript_BerryCureChosenStatusRet[];
-extern const u8 BattleScript_ItemHealHP_Ret[];
-
-extern const u8 gUnknown_082DB695[]; //disobedient while asleep
-extern const u8 gUnknown_082DB6A5[]; //disobedient, uses a random move
-extern const u8 gUnknown_082DB6D9[]; //disobedient, went to sleep
-extern const u8 gUnknown_082DB6F0[]; //disobedient, hits itself
-
 extern u8 weather_get_current(void);
 
 // rom const data
@@ -196,13 +84,13 @@ u8 GetBattleBank(u8 caseId)
     case BS_GET_EFFECT_BANK:
         ret = gEffectBank;
         break;
-    case 7:
+    case BS_GET_BANK_0:
         ret = 0;
         break;
     case BS_GET_SCRIPTING_BANK:
         ret = gBattleScripting.bank;
         break;
-    case 3:
+    case BS_GET_gBank1:
         ret = gBank1;
         break;
     case 5:
@@ -474,12 +362,12 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gUnknown_02024230[gActiveBank] = gUnknown_082DAE2A;
+            gUnknown_02024230[gActiveBank] = BattleScript_82DAE2A;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DAE1F;
+            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DAE1F;
             limitations = 1;
         }
     }
@@ -489,12 +377,12 @@ u8 TrySetCantSelectMoveBattleScript(void)
         CancelMultiTurnMoves(gActiveBank);
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gUnknown_02024230[gActiveBank] = gUnknown_082DB098;
+            gUnknown_02024230[gActiveBank] = BattleScript_82DB098;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB089;
+            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB089;
             limitations++;
         }
     }
@@ -504,12 +392,12 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gUnknown_02024230[gActiveBank] = gUnknown_082DB0AF;
+            gUnknown_02024230[gActiveBank] = BattleScript_82DB0AF;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB0A0;
+            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB0A0;
             limitations++;
         }
     }
@@ -519,12 +407,12 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gUnknown_02024230[gActiveBank] = gUnknown_082DB185;
+            gUnknown_02024230[gActiveBank] = BattleScript_82DB185;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB181;
+            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB181;
             limitations++;
         }
     }
@@ -546,7 +434,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB812;
+            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB812;
             limitations++;
         }
     }
@@ -559,7 +447,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = gUnknown_082DB076;
+            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB076;
             limitations++;
         }
     }
@@ -694,7 +582,7 @@ u8 UpdateTurnCounters(void)
                     if (--gSideTimers[sideBank].reflectTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_REFLECT;
-                        BattleScriptExecute(gUnknown_082DACFA);
+                        BattleScriptExecute(BattleScript_82DACFA);
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 2;
                         gBattleTextBuff1[2] = MOVE_REFLECT;
@@ -723,7 +611,7 @@ u8 UpdateTurnCounters(void)
                     if (--gSideTimers[sideBank].lightscreenTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_LIGHTSCREEN;
-                        BattleScriptExecute(gUnknown_082DACFA);
+                        BattleScriptExecute(BattleScript_82DACFA);
                         gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 2;
@@ -752,7 +640,7 @@ u8 UpdateTurnCounters(void)
                  && --gSideTimers[sideBank].mistTimer == 0)
                 {
                     gSideAffecting[sideBank] &= ~SIDE_STATUS_MIST;
-                    BattleScriptExecute(gUnknown_082DACFA);
+                    BattleScriptExecute(BattleScript_82DACFA);
                     gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
                     gBattleTextBuff1[0] = 0xFD;
                     gBattleTextBuff1[1] = 2;
@@ -781,7 +669,7 @@ u8 UpdateTurnCounters(void)
                     if (--gSideTimers[sideBank].safeguardTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_SAFEGUARD;
-                        BattleScriptExecute(gUnknown_082DAD0B);
+                        BattleScriptExecute(BattleScript_82DAD0B);
                         effect++;
                     }
                 }
@@ -836,7 +724,7 @@ u8 UpdateTurnCounters(void)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                 else
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                BattleScriptExecute(gUnknown_082DAC2C);
+                BattleScriptExecute(BattleScript_82DAC2C);
                 effect++;
             }
             gBattleStruct->turncountersTracker++;
@@ -847,10 +735,10 @@ u8 UpdateTurnCounters(void)
                 if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~WEATHER_SANDSTORM_TEMPORARY;
-                    gBattlescriptCurrInstr = gUnknown_082DACC9;
+                    gBattlescriptCurrInstr = BattleScript_82DACC9;
                 }
                 else
-                    gBattlescriptCurrInstr = gUnknown_082DAC47;
+                    gBattlescriptCurrInstr = BattleScript_82DAC47;
 
                 gBattleScripting.animArg1 = 0xC;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -865,10 +753,10 @@ u8 UpdateTurnCounters(void)
                 if (!(gBattleWeather & WEATHER_SUN_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~WEATHER_SUN_TEMPORARY;
-                    gBattlescriptCurrInstr = gUnknown_082DACE0;
+                    gBattlescriptCurrInstr = BattleScript_82DACE0;
                 }
                 else
-                    gBattlescriptCurrInstr = gUnknown_082DACD2;
+                    gBattlescriptCurrInstr = BattleScript_82DACD2;
 
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
@@ -881,10 +769,10 @@ u8 UpdateTurnCounters(void)
                 if (--gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~WEATHER_HAIL;
-                    gBattlescriptCurrInstr = gUnknown_082DACC9;
+                    gBattlescriptCurrInstr = BattleScript_82DACC9;
                 }
                 else
-                    gBattlescriptCurrInstr = gUnknown_082DAC47;
+                    gBattlescriptCurrInstr = BattleScript_82DAC47;
 
                 gBattleScripting.animArg1 = 0xD;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;
@@ -1075,7 +963,7 @@ u8 TurnBasedEffects(void)
                             gBattleMons[gBankAttacker].status1 &= ~(STATUS_SLEEP);
                             gBattleMons[gBankAttacker].status2 &= ~(STATUS2_NIGHTMARE);
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                            BattleScriptExecute(gUnknown_082DB234);
+                            BattleScriptExecute(BattleScript_82DB234);
                             gActiveBank = gBankAttacker;
                             EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
                             MarkBufferBankForExecution(gActiveBank);
@@ -1106,7 +994,7 @@ u8 TurnBasedEffects(void)
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                             CancelMultiTurnMoves(gActiveBank);
                         }
-                        BattleScriptExecute(gUnknown_082DB2A6);
+                        BattleScriptExecute(BattleScript_82DB2A6);
                         effect = 1;
                     }
                 }
@@ -1259,7 +1147,7 @@ bool8 sub_8041364(void)
                 gBankAttacker = gWishFutureKnock.futureSightAttacker[gActiveBank];
                 gBattleMoveDamage = gWishFutureKnock.futureSightDmg[gActiveBank];
                 gSpecialStatuses[gBankTarget].moveturnLostHP = 0xFFFF;
-                BattleScriptExecute(gUnknown_082DAFE4);
+                BattleScriptExecute(BattleScript_82DAFE4);
 
                 if (gWishFutureKnock.futureSightCounter[gActiveBank] == 0
                  && gWishFutureKnock.futureSightCounter[gActiveBank ^ 2] == 0)
@@ -1298,12 +1186,12 @@ bool8 sub_8041364(void)
                 {
                     gStatuses3[gActiveBank] &= ~STATUS3_PERISH_SONG;
                     gBattleMoveDamage = gBattleMons[gActiveBank].hp;
-                    gBattlescriptCurrInstr = gUnknown_082DAF05;
+                    gBattlescriptCurrInstr = BattleScript_82DAF05;
                 }
                 else
                 {
                     gDisableStructs[gActiveBank].perishSongTimer1--;
-                    gBattlescriptCurrInstr = gUnknown_082DAF20;
+                    gBattlescriptCurrInstr = BattleScript_82DAF20;
                 }
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 return 1;
@@ -1326,8 +1214,8 @@ bool8 sub_8041364(void)
             for (i = 0; i < 2; i++)
                 CancelMultiTurnMoves(i);
 
-            gBattlescriptCurrInstr = gUnknown_082DB8F3;
-            BattleScriptExecute(gUnknown_082DB8F3);
+            gBattlescriptCurrInstr = BattleScript_82DB8F3;
+            BattleScriptExecute(BattleScript_82DB8F3);
             gBattleStruct->field_1A0++;
             return 1;
         }
@@ -1367,7 +1255,7 @@ bool8 sub_8041728(void)
                  && !(gBattleStruct->field_DF & gBitTable[gBattlePartyID[gBattleStruct->field_4E]])
                  && !(gAbsentBankFlags & gBitTable[gBattleStruct->field_4E]))
                 {
-                    BattleScriptExecute(gUnknown_082DA7C4);
+                    BattleScriptExecute(BattleScript_82DA7C4);
                     gBattleStruct->field_4D = 2;
                     return TRUE;
                 }
@@ -1392,7 +1280,7 @@ bool8 sub_8041728(void)
                 if (gBattleMons[gBattleStruct->field_4E].hp == 0
                  && !(gAbsentBankFlags & gBitTable[gBattleStruct->field_4E]))
                 {
-                    BattleScriptExecute(gUnknown_082DA7CD);
+                    BattleScriptExecute(BattleScript_82DA7CD);
                     gBattleStruct->field_4D = 5;
                     return TRUE;
                 }
@@ -1961,7 +1849,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 if (effect)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = weather_get_current();
-                    BattleScriptPushCursorAndCallback(gUnknown_082DACE7);
+                    BattleScriptPushCursorAndCallback(BattleScript_82DACE7);
                 }
                 break;
             case ABILITY_DRIZZLE:
@@ -2167,9 +2055,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (gBattleMons[bank].maxHP == gBattleMons[bank].hp)
                     {
                         if ((gProtectStructs[gBankAttacker].notFirstStrike))
-                            gBattlescriptCurrInstr = gUnknown_082DB592;
+                            gBattlescriptCurrInstr = BattleScript_82DB592;
                         else
-                            gBattlescriptCurrInstr = gUnknown_082DB591;
+                            gBattlescriptCurrInstr = BattleScript_82DB591;
                     }
                     else
                     {
@@ -2380,7 +2268,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         }
 
                         BattleScriptPushCursor();
-                        gBattlescriptCurrInstr = gUnknown_082DB68C;
+                        gBattlescriptCurrInstr = BattleScript_82DB68C;
                         gBattleScripting.bank = bank;
                         gActiveBank = bank;
                         EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
@@ -2445,7 +2333,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 {
                     gLastUsedAbility = ABILITY_INTIMIDATE;
                     gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
-                    BattleScriptPushCursorAndCallback(gUnknown_082DB4B8);
+                    BattleScriptPushCursorAndCallback(BattleScript_82DB4B8);
                     gBattleStruct->intimidateBank = i;
                     effect++;
                     break;
@@ -2517,7 +2405,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     gLastUsedAbility = ABILITY_INTIMIDATE;
                     gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
                     BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = gUnknown_082DB4C1;
+                    gBattlescriptCurrInstr = BattleScript_82DB4C1;
                     gBattleStruct->intimidateBank = i;
                     effect++;
                     break;
@@ -3536,7 +3424,7 @@ u8 IsPokeDisobedient(void)
         gBattleMons[gBankAttacker].status2 &= ~(STATUS2_RAGE);
     if (gBattleMons[gBankAttacker].status1 & STATUS_SLEEP && (gCurrentMove == MOVE_SNORE || gCurrentMove == MOVE_SLEEP_TALK))
     {
-        gBattlescriptCurrInstr = gUnknown_082DB695;
+        gBattlescriptCurrInstr = BattleScript_82DB695;
         return 1;
     }
 
@@ -3559,7 +3447,7 @@ u8 IsPokeDisobedient(void)
             } while (gBitTable[gCurrMovePos] & calc);
 
             gRandomMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
-            gBattlescriptCurrInstr = gUnknown_082DB6A5;
+            gBattlescriptCurrInstr = BattleScript_82DB6A5;
             gBankTarget = GetMoveTarget(gRandomMove, 0);
             gHitMarker |= HITMARKER_x200000;
             return 2;
@@ -3581,7 +3469,7 @@ u8 IsPokeDisobedient(void)
             }
             if (i == gNoOfAllBanks)
             {
-                gBattlescriptCurrInstr = gUnknown_082DB6D9;
+                gBattlescriptCurrInstr = BattleScript_82DB6D9;
                 return 1;
             }
         }
@@ -3590,7 +3478,7 @@ u8 IsPokeDisobedient(void)
         {
             gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBankAttacker], &gBattleMons[gBankAttacker], MOVE_POUND, 0, 40, 0, gBankAttacker, gBankAttacker);
             gBankTarget = gBankAttacker;
-            gBattlescriptCurrInstr = gUnknown_082DB6F0;
+            gBattlescriptCurrInstr = BattleScript_82DB6F0;
             gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
             return 2;
         }

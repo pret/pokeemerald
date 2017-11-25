@@ -66,7 +66,7 @@ static void SafariHandleBallThrowAnim(void);
 static void SafariHandlePause(void);
 static void SafariHandleMoveAnimation(void);
 static void SafariHandlePrintString(void);
-static void SafariHandlePrintStringPlayerOnly(void);
+static void SafariHandlePrintSelectionString(void);
 static void SafariHandleChooseAction(void);
 static void SafariHandleUnknownYesNoBox(void);
 static void SafariHandleChooseMove(void);
@@ -92,7 +92,7 @@ static void SafariHandleCmd39(void);
 static void SafariHandleCmd40(void);
 static void SafariHandleHitAnimation(void);
 static void SafariHandleCmd42(void);
-static void SafariHandleEffectivenessSound(void);
+static void SafariHandlePlaySE(void);
 static void SafariHandlePlayFanfareOrBGM(void);
 static void SafariHandleFaintingCry(void);
 static void SafariHandleIntroSlide(void);
@@ -130,7 +130,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     SafariHandlePause,
     SafariHandleMoveAnimation,
     SafariHandlePrintString,
-    SafariHandlePrintStringPlayerOnly,
+    SafariHandlePrintSelectionString,
     SafariHandleChooseAction,
     SafariHandleUnknownYesNoBox,
     SafariHandleChooseMove,
@@ -156,7 +156,7 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     SafariHandleCmd40,
     SafariHandleHitAnimation,
     SafariHandleCmd42,
-    SafariHandleEffectivenessSound,
+    SafariHandlePlaySE,
     SafariHandlePlayFanfareOrBGM,
     SafariHandleFaintingCry,
     SafariHandleIntroSlide,
@@ -449,7 +449,7 @@ static void SafariHandlePrintString(void)
     gBattleBankFunc[gActiveBank] = CompleteOnInactiveTextPrinter;
 }
 
-static void SafariHandlePrintStringPlayerOnly(void)
+static void SafariHandlePrintSelectionString(void)
 {
     if (GetBankSide(gActiveBank) == SIDE_PLAYER)
         SafariHandlePrintString();
@@ -607,7 +607,7 @@ static void SafariHandleCmd42(void)
     SafariBufferExecCompleted();
 }
 
-static void SafariHandleEffectivenessSound(void)
+static void SafariHandlePlaySE(void)
 {
     s8 pan;
 

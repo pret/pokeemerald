@@ -3,6 +3,7 @@
 #include "battle_move_effects.h"
 #include "battle_message.h"
 #include "battle_ai_script_commands.h"
+#include "battle_scripts.h"
 #include "moves.h"
 #include "abilities.h"
 #include "item.h"
@@ -146,88 +147,6 @@ extern u8 sub_813B21C(void);
 extern u16 get_unknown_box_id(void);
 extern void sub_80356D0(void);
 
-// BattleScripts
-extern const u8 BattleScript_MoveEnd[];
-extern const u8 BattleScript_NoPPForMove[];
-extern const u8 BattleScript_MagicCoatBounce[];
-extern const u8 BattleScript_TookAttack[];
-extern const u8 BattleScript_SnatchedMove[];
-extern const u8 BattleScript_Pausex20[];
-extern const u8 BattleScript_SubstituteFade[];
-extern const u8 BattleScript_HangedOnMsg[];
-extern const u8 BattleScript_OneHitKOMsg[];
-extern const u8 BattleScript_EnduredMsg[];
-extern const u8 BattleScript_PSNPrevention[];
-extern const u8 BattleScript_BRNPrevention[];
-extern const u8 BattleScript_PRLZPrevention[];
-extern const u8 BattleScript_FlinchPrevention[];
-extern const u8 BattleScript_StatUp[];
-extern const u8 BattleScript_StatDown[];
-extern const u8 BattleScript_NoItemSteal[];
-extern const u8 BattleScript_ItemSteal[];
-extern const u8 BattleScript_RapidSpinAway[];
-extern const u8 BattleScript_TargetPRLZHeal[];
-extern const u8 BattleScript_KnockedOff[];
-extern const u8 BattleScript_StickyHoldActivates[];
-extern const u8 BattleScript_AllStatsUp[];
-extern const u8 BattleScript_AtkDefDown[];
-extern const u8 BattleScript_SAtkDown2[];
-extern const u8 BattleScript_LevelUp[];
-extern const u8 BattleScript_WrapFree[];
-extern const u8 BattleScript_LeechSeedFree[];
-extern const u8 BattleScript_SpikesFree[];
-extern const u8 BattleScript_ButItFailed[];
-extern const u8 BattleScript_ObliviousPreventsAttraction[];
-extern const u8 BattleScript_MistProtected[];
-extern const u8 BattleScript_AbilityNoStatLoss[];
-extern const u8 BattleScript_AbilityNoSpecificStatLoss[];
-extern const u8 BattleScript_TrainerBallBlock[];
-extern const u8 BattleScript_WallyBallThrow[];
-extern const u8 BattleScript_SuccessBallThrow[];
-extern const u8 BattleScript_ShakeBallThrow[];
-extern const u8 BattleScript_FaintAttacker[];
-extern const u8 BattleScript_FaintTarget[];
-extern const u8 BattleScript_DestinyBondTakesLife[];
-extern const u8 BattleScript_GrudgeTakesPp[];
-extern const u8 BattleScript_RageIsBuilding[];
-extern const u8 BattleScript_DefrostedViaFireMove[];
-extern const u8 gUnknown_082DB87D[];
-extern const u8 gUnknown_082DAE90[];
-extern const u8 gUnknown_082DAE59[];
-extern const u8 gUnknown_082DAEC7[];
-extern const u8 BattleScript_MoveEffectSleep[];
-extern const u8 BattleScript_MoveEffectPoison[];
-extern const u8 BattleScript_MoveEffectBurn[];
-extern const u8 BattleScript_MoveEffectFreeze[];
-extern const u8 BattleScript_MoveEffectParalysis[];
-extern const u8 BattleScript_MoveEffectToxic[];
-extern const u8 BattleScript_MoveEffectConfusion[];
-extern const u8 BattleScript_MoveEffectUproar[];
-extern const u8 BattleScript_MoveEffectPayDay[];
-extern const u8 BattleScript_MoveEffectWrap[];
-extern const u8 BattleScript_MoveEffectRecoil33[];
-extern const u8 BattleScript_DampStopsExplosion[];
-extern const u8 BattleScript_MistProtected[];
-extern const u8 BattleScript_AbilityNoStatLoss[];
-extern const u8 BattleScript_AbilityNoSpecificStatLoss[];
-extern const u8 BattleScript_ButItFailed[];
-extern const u8 gUnknown_082DADD8[];
-extern const u8 BattleScript_PrintPayDayMoneyString[];
-extern const u8 BattleScript_SturdyPreventsOHKO[];
-extern const u8 BattleScript_ObliviousPreventsAttraction[];
-extern const u8 BattleScript_PauseEffectivenessSoundResultMsgEndMove[];
-extern const u8 BattleScript_CastformChange[];
-extern const u8 BattleScript_TrainerBallBlock[];
-extern const u8 BattleScript_WallyBallThrow[];
-extern const u8 BattleScript_SuccessBallThrow[];
-extern const u8 BattleScript_ShakeBallThrow[];
-extern const u8 BattleScript_PresentDamageTarget[];
-extern const u8 BattleScript_AlreadyAtFullHp[];
-extern const u8 BattleScript_PresentHealTarget[];
-extern const u8 BattleScript_WrapFree[];
-extern const u8 BattleScript_LeechSeedFree[];
-extern const u8 BattleScript_SpikesFree[];
-
 // strings
 extern const u8 gText_BattleYesNoChoice[];
 
@@ -247,7 +166,7 @@ extern const u8 gText_BattleYesNoChoice[];
 
 // this file's functions
 static bool8 IsTwoTurnsMove(u16 move);
-static void DestinyBondFlagUpdate(void);
+static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 bank, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
 static void CheckWonderGuardAndLevitate(void);
 static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8, const u8* BS_ptr);
@@ -267,29 +186,29 @@ static void atk01_accuracycheck(void);
 static void atk02_attackstring(void);
 static void atk03_ppreduce(void);
 static void atk04_critcalc(void);
-static void atk05_damagecalc1(void);
+static void atk05_damagecalc(void);
 static void atk06_typecalc(void);
-static void atk07_dmg_adjustment(void);
-static void atk08_dmg_adjustment2(void);
+static void atk07_adjustnormaldamage(void);
+static void atk08_adjustnormaldamage2(void);
 static void atk09_attackanimation(void);
 static void atk0A_waitanimation(void);
 static void atk0B_healthbarupdate(void);
 static void atk0C_datahpupdate(void);
 static void atk0D_critmessage(void);
-static void atk0E_effectiveness_sound(void);
+static void atk0E_effectivenesssound(void);
 static void atk0F_resultmessage(void);
 static void atk10_printstring(void);
-static void atk11_printstring_playeronly(void);
+static void atk11_printselectionstring(void);
 static void atk12_waitmessage(void);
 static void atk13_printfromtable(void);
-static void atk14_printfromtable_playeronly(void);
+static void atk14_printselectionstringfromtable(void);
 static void atk15_seteffectwithchance(void);
 static void atk16_seteffectprimary(void);
 static void atk17_seteffectsecondary(void);
-static void atk18_status_effect_clear(void);
-static void atk19_faint_pokemon(void);
-static void atk1A_faint_animation(void);
-static void atk1B_faint_effects_clear(void);
+static void atk18_clearstatusfromeffect(void);
+static void atk19_tryfaintmon(void);
+static void atk1A_dofaintanimation(void);
+static void atk1B_cleareffectsonfaint(void);
 static void atk1C_jumpifstatus(void);
 static void atk1D_jumpifstatus2(void);
 static void atk1E_jumpifability(void);
@@ -299,9 +218,9 @@ static void atk21_jumpifstatus3(void);
 static void atk22_jumpiftype(void);
 static void atk23_getexp(void);
 static void atk24(void);
-static void atk25_move_values_cleanup(void);
-static void atk26_set_multihit(void);
-static void atk27_decrement_multihit(void);
+static void atk25_movevaluescleanup(void);
+static void atk26_setmultihit(void);
+static void atk27_decrementmultihit(void);
 static void atk28_goto(void);
 static void atk29_jumpifbyte(void);
 static void atk2A_jumpifhalfword(void);
@@ -312,7 +231,7 @@ static void atk2E_setbyte(void);
 static void atk2F_addbyte(void);
 static void atk30_subbyte(void);
 static void atk31_copyarray(void);
-static void atk32_copyarray_withindex(void);
+static void atk32_copyarraywithindex(void);
 static void atk33_orbyte(void);
 static void atk34_orhalfword(void);
 static void atk35_orword(void);
@@ -326,75 +245,75 @@ static void atk3C_return(void);
 static void atk3D_end(void);
 static void atk3E_end2(void);
 static void atk3F_end3(void);
-static void atk40_jump_if_move_affected_by_protect(void);
+static void atk40_jumpifaffectedbyprotect(void);
 static void atk41_call(void);
 static void atk42_jumpiftype2(void);
 static void atk43_jumpifabilitypresent(void);
-static void atk44_end_selection_script(void);
+static void atk44_endselectionscript(void);
 static void atk45_playanimation(void);
 static void atk46_playanimation2(void);
 static void atk47_setgraphicalstatchangevalues(void);
 static void atk48_playstatchangeanimation(void);
 static void atk49_moveend(void);
 static void atk4A_typecalc2(void);
-static void atk4B_return_atk_to_ball(void);
-static void atk4C_get_switched_mon_data(void);
-static void atk4D_switch_data_update(void);
-static void atk4E_switchin_anim(void);
-static void atk4F_jump_if_cannot_switch(void);
+static void atk4B_returnatktoball(void);
+static void atk4C_getswitchedmondata(void);
+static void atk4D_switchindataupdate(void);
+static void atk4E_switchinanim(void);
+static void atk4F_jumpifcantswitch(void);
 static void atk50_openpartyscreen(void);
-static void atk51_switch_handle_order(void);
-static void atk52_switch_in_effects(void);
-static void atk53_trainer_slide(void);
-static void atk54_effectiveness_sound(void);
-static void atk55_play_fanfare(void);
-static void atk56_fainting_cry(void);
+static void atk51_switchhandleorder(void);
+static void atk52_switchineffects(void);
+static void atk53_trainerslidein(void);
+static void atk54_playse(void);
+static void atk55_fanfare(void);
+static void atk56_playfaintcry(void);
 static void atk57(void);
-static void atk58_return_to_ball(void);
-static void atk59_learnmove_inbattle(void);
+static void atk58_returntoball(void);
+static void atk59_handlelearnnewmove(void);
 static void atk5A_yesnoboxlearnmove(void);
 static void atk5B_yesnoboxstoplearningmove(void);
 static void atk5C_hitanimation(void);
 static void atk5D_getmoneyreward(void);
-static void atk5E_8025A70(void);
-static void atk5F_8025B24(void);
-static void atk60_increment_gamestat(void);
-static void atk61_draw_party_status_summary(void);
-static void atk62_08025C6C(void);
+static void atk5E(void);
+static void atk5F(void);
+static void atk60_incrementgamestat(void);
+static void atk61_drawpartystatussummary(void);
+static void atk62(void);
 static void atk63_jumptorandomattack(void);
 static void atk64_statusanimation(void);
 static void atk65_status2animation(void);
 static void atk66_chosenstatusanimation(void);
 static void atk67_yesnobox(void);
-static void atk68_cancel_everyones_actions(void);
-static void atk69_dmg_adjustment3(void);
+static void atk68_cancelallactions(void);
+static void atk69_adjustsetdamage(void);
 static void atk6A_removeitem(void);
 static void atk6B_atknameinbuff1(void);
-static void atk6C_draw_lvlupbox(void);
-static void atk6D_reset_sentpokes_value(void);
-static void atk6E_set_atk_to_player0(void);
-static void atk6F_set_visible(void);
-static void atk70_record_last_used_ability(void);
-static void atk71_buffer_move_to_learn(void);
-static void atk72_jump_if_run_attempt_success(void);
-static void atk73_hp_thresholds(void);
-static void atk74_hp_thresholds2(void);
-static void atk75_item_effect_on_opponent(void);
+static void atk6C_drawlvlupbox(void);
+static void atk6D_resetsentmonsvalue(void);
+static void atk6E_setatktoplayer0(void);
+static void atk6F_makevisible(void);
+static void atk70_recordlastability(void);
+static void atk71_buffermovetolearn(void);
+static void atk72_jumpifplayerran(void);
+static void atk73_hpthresholds(void);
+static void atk74_hpthresholds2(void);
+static void atk75_useitemonopponent(void);
 static void atk76_various(void);
-static void atk77_set_protect_like(void);
+static void atk77_setprotectlike(void);
 static void atk78_faintifabilitynotdamp(void);
 static void atk79_setatkhptozero(void);
-static void atk7A_jumpwhiletargetvalid(void);
-static void atk7B_healhalfHP_if_possible(void);
+static void atk7A_jumpifnexttargetvalid(void);
+static void atk7B_tryhealhalfhealth(void);
 static void atk7C_trymirrormove(void);
-static void atk7D_set_rain(void);
+static void atk7D_setrain(void);
 static void atk7E_setreflect(void);
 static void atk7F_setseeded(void);
 static void atk80_manipulatedamage(void);
-static void atk81_setrest(void);
+static void atk81_trysetrest(void);
 static void atk82_jumpifnotfirstturn(void);
 static void atk83_nop(void);
-static void atk84_jump_if_cant_sleep(void);
+static void atk84_jumpifcantmakeasleep(void);
 static void atk85_stockpile(void);
 static void atk86_stockpiletobasedamage(void);
 static void atk87_stockpiletohpheal(void);
@@ -403,22 +322,22 @@ static void atk89_statbuffchange(void);
 static void atk8A_normalisebuffs(void);
 static void atk8B_setbide(void);
 static void atk8C_confuseifrepeatingattackends(void);
-static void atk8D_setmultihit_counter(void);
-static void atk8E_init_multihit_string(void);
+static void atk8D_setmultihitcounter(void);
+static void atk8E_initmultihitstring(void);
 static void atk8F_forcerandomswitch(void);
-static void atk90_conversion_type_change(void);
+static void atk90_tryconversiontypechange(void);
 static void atk91_givepaydaymoney(void);
 static void atk92_setlightscreen(void);
-static void atk93_ko_move(void);
+static void atk93_tryKO(void);
 static void atk94_damagetohalftargethp(void);
 static void atk95_setsandstorm(void);
 static void atk96_weatherdamage(void);
-static void atk97_try_infatuation(void);
-static void atk98_status_icon_update(void);
+static void atk97_tryinfatuating(void);
+static void atk98_updatestatusicon(void);
 static void atk99_setmist(void);
-static void atk9A_set_focusenergy(void);
+static void atk9A_setfocusenergy(void);
 static void atk9B_transformdataexecution(void);
-static void atk9C_set_substitute(void);
+static void atk9C_setsubstitute(void);
 static void atk9D_mimicattackcopy(void);
 static void atk9E_metronome(void);
 static void atk9F_dmgtolevel(void);
@@ -426,39 +345,39 @@ static void atkA0_psywavedamageeffect(void);
 static void atkA1_counterdamagecalculator(void);
 static void atkA2_mirrorcoatdamagecalculator(void);
 static void atkA3_disablelastusedattack(void);
-static void atkA4_setencore(void);
+static void atkA4_trysetencore(void);
 static void atkA5_painsplitdmgcalc(void);
 static void atkA6_settypetorandomresistance(void);
 static void atkA7_setalwayshitflag(void);
 static void atkA8_copymovepermanently(void);
 static void atkA9_sleeptalk_choose_move(void);
-static void atkAA_set_destinybond(void);
-static void atkAB_DestinyBondFlagUpdate(void);
+static void atkAA_setdestinybond(void);
+static void atkAB_trysetdestinybondtohappen(void);
 static void atkAC_remaininghptopower(void);
-static void atkAD_spite_ppreduce(void);
-static void atkAE_heal_party_status(void);
+static void atkAD_tryspiteppreduce(void);
+static void atkAE_healpartystatus(void);
 static void atkAF_cursetarget(void);
-static void atkB0_set_spikes(void);
-static void atkB1_set_foresight(void);
-static void atkB2_setperishsong(void);
+static void atkB0_trysetspikes(void);
+static void atkB1_setforesight(void);
+static void atkB2_trysetperishsong(void);
 static void atkB3_rolloutdamagecalculation(void);
 static void atkB4_jumpifconfusedandstatmaxed(void);
 static void atkB5_furycuttercalc(void);
 static void atkB6_happinesstodamagecalculation(void);
 static void atkB7_presentdamagecalculation(void);
-static void atkB8_set_safeguard(void);
+static void atkB8_setsafeguard(void);
 static void atkB9_magnitudedamagecalculation(void);
 static void atkBA_jumpifnopursuitswitchdmg(void);
 static void atkBB_setsunny(void);
 static void atkBC_maxattackhalvehp(void);
 static void atkBD_copyfoestats(void);
 static void atkBE_rapidspinfree(void);
-static void atkBF_set_defense_curl(void);
+static void atkBF_setdefensecurlbit(void);
 static void atkC0_recoverbasedonsunlight(void);
-static void atkC1_hidden_power_calc(void);
-static void atkC2_selectnexttarget(void);
-static void atkC3_setfutureattack(void);
-static void atkC4_beat_up(void);
+static void atkC1_hiddenpowercalc(void);
+static void atkC2_selectfirstvalidtarget(void);
+static void atkC3_trysetfutureattack(void);
+static void atkC4_trydobeatup(void);
 static void atkC5_setsemiinvulnerablebit(void);
 static void atkC6_clearsemiinvulnerablebit(void);
 static void atkC7_setminimize(void);
@@ -471,46 +390,46 @@ static void atkCD_cureifburnedparalysedorpoisoned(void);
 static void atkCE_settorment(void);
 static void atkCF_jumpifnodamage(void);
 static void atkD0_settaunt(void);
-static void atkD1_set_helpinghand(void);
-static void atkD2_swap_items(void);
-static void atkD3_copy_ability(void);
-static void atkD4_wish_effect(void);
-static void atkD5_setroots(void);
+static void atkD1_trysethelpinghand(void);
+static void atkD2_tryswapitems(void);
+static void atkD3_trycopyability(void);
+static void atkD4_trywish(void);
+static void atkD5_trysetroots(void);
 static void atkD6_doubledamagedealtifdamaged(void);
 static void atkD7_setyawn(void);
 static void atkD8_setdamagetohealthdifference(void);
 static void atkD9_scaledamagebyhealthratio(void);
-static void atkDA_abilityswap(void);
-static void atkDB_imprisoneffect(void);
-static void atkDC_setgrudge(void);
+static void atkDA_tryswapabilities(void);
+static void atkDB_tryimprision(void);
+static void atkDC_trysetgrudge(void);
 static void atkDD_weightdamagecalculation(void);
 static void atkDE_asistattackselect(void);
-static void atkDF_setmagiccoat(void);
-static void atkE0_setstealstatchange(void);
-static void atkE1_intimidate_string_loader(void);
-static void atkE2_switchout_abilities(void);
+static void atkDF_trysetmagiccoat(void);
+static void atkE0_trysetsnatch(void);
+static void atkE1_trygetintimidatetarget(void);
+static void atkE2_switchoutabilities(void);
 static void atkE3_jumpifhasnohp(void);
 static void atkE4_getsecretpowereffect(void);
 static void atkE5_pickup(void);
-static void atkE6_castform_change_animation(void);
-static void atkE7_castform_data_change(void);
+static void atkE6_docastformchangeanimation(void);
+static void atkE7_trycastformdatachange(void);
 static void atkE8_settypebasedhalvers(void);
 static void atkE9_setweatherballtype(void);
-static void atkEA_recycleitem(void);
+static void atkEA_tryrecycleitem(void);
 static void atkEB_settypetoterrain(void);
-static void atkEC_pursuit_sth(void);
-static void atkED_802B4B4(void);
+static void atkEC_pursuitrelated(void);
+static void atkEF_snatchsetbanks(void);
 static void atkEE_removelightscreenreflect(void);
 static void atkEF_pokeball_catch_calculation(void);
-static void atkF0_give_caught_mon(void);
-static void atkF1_set_caught_mon_dex_flags(void);
-static void atkF2_display_dex_info(void);
-static void atkF3_nickname_caught_poke(void);
+static void atkF0_givecaughtmon(void);
+static void atkF1_trysetcaughtmondexflags(void);
+static void atkF2_displaydexinfo(void);
+static void atkF3_trygivecaughtmonnick(void);
 static void atkF4_subattackerhpbydmg(void);
 static void atkF5_removeattackerstatus1(void);
-static void atkF6_action_finished(void);
-static void atkF7_turn_finished(void);
-static void atkF8_trainer_slide_back(void);
+static void atkF6_finishaction(void);
+static void atkF7_finishturn(void);
+static void atkF8_trainerslideout(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -519,29 +438,29 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk02_attackstring,
     atk03_ppreduce,
     atk04_critcalc,
-    atk05_damagecalc1,
+    atk05_damagecalc,
     atk06_typecalc,
-    atk07_dmg_adjustment,
-    atk08_dmg_adjustment2,
+    atk07_adjustnormaldamage,
+    atk08_adjustnormaldamage2,
     atk09_attackanimation,
     atk0A_waitanimation,
     atk0B_healthbarupdate,
     atk0C_datahpupdate,
     atk0D_critmessage,
-    atk0E_effectiveness_sound,
+    atk0E_effectivenesssound,
     atk0F_resultmessage,
     atk10_printstring,
-    atk11_printstring_playeronly,
+    atk11_printselectionstring,
     atk12_waitmessage,
     atk13_printfromtable,
-    atk14_printfromtable_playeronly,
+    atk14_printselectionstringfromtable,
     atk15_seteffectwithchance,
     atk16_seteffectprimary,
     atk17_seteffectsecondary,
-    atk18_status_effect_clear,
-    atk19_faint_pokemon,
-    atk1A_faint_animation,
-    atk1B_faint_effects_clear,
+    atk18_clearstatusfromeffect,
+    atk19_tryfaintmon,
+    atk1A_dofaintanimation,
+    atk1B_cleareffectsonfaint,
     atk1C_jumpifstatus,
     atk1D_jumpifstatus2,
     atk1E_jumpifability,
@@ -551,9 +470,9 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk22_jumpiftype,
     atk23_getexp,
     atk24,
-    atk25_move_values_cleanup,
-    atk26_set_multihit,
-    atk27_decrement_multihit,
+    atk25_movevaluescleanup,
+    atk26_setmultihit,
+    atk27_decrementmultihit,
     atk28_goto,
     atk29_jumpifbyte,
     atk2A_jumpifhalfword,
@@ -564,7 +483,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk2F_addbyte,
     atk30_subbyte,
     atk31_copyarray,
-    atk32_copyarray_withindex,
+    atk32_copyarraywithindex,
     atk33_orbyte,
     atk34_orhalfword,
     atk35_orword,
@@ -578,75 +497,75 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk3D_end,
     atk3E_end2,
     atk3F_end3,
-    atk40_jump_if_move_affected_by_protect,
+    atk40_jumpifaffectedbyprotect,
     atk41_call,
     atk42_jumpiftype2,
     atk43_jumpifabilitypresent,
-    atk44_end_selection_script,
+    atk44_endselectionscript,
     atk45_playanimation,
     atk46_playanimation2,
     atk47_setgraphicalstatchangevalues,
     atk48_playstatchangeanimation,
     atk49_moveend,
     atk4A_typecalc2,
-    atk4B_return_atk_to_ball,
-    atk4C_get_switched_mon_data,
-    atk4D_switch_data_update,
-    atk4E_switchin_anim,
-    atk4F_jump_if_cannot_switch,
+    atk4B_returnatktoball,
+    atk4C_getswitchedmondata,
+    atk4D_switchindataupdate,
+    atk4E_switchinanim,
+    atk4F_jumpifcantswitch,
     atk50_openpartyscreen,
-    atk51_switch_handle_order,
-    atk52_switch_in_effects,
-    atk53_trainer_slide,
-    atk54_effectiveness_sound,
-    atk55_play_fanfare,
-    atk56_fainting_cry,
+    atk51_switchhandleorder,
+    atk52_switchineffects,
+    atk53_trainerslidein,
+    atk54_playse,
+    atk55_fanfare,
+    atk56_playfaintcry,
     atk57,
-    atk58_return_to_ball,
-    atk59_learnmove_inbattle,
+    atk58_returntoball,
+    atk59_handlelearnnewmove,
     atk5A_yesnoboxlearnmove,
     atk5B_yesnoboxstoplearningmove,
     atk5C_hitanimation,
     atk5D_getmoneyreward,
-    atk5E_8025A70,
-    atk5F_8025B24,
-    atk60_increment_gamestat,
-    atk61_draw_party_status_summary,
-    atk62_08025C6C,
+    atk5E,
+    atk5F,
+    atk60_incrementgamestat,
+    atk61_drawpartystatussummary,
+    atk62,
     atk63_jumptorandomattack,
     atk64_statusanimation,
     atk65_status2animation,
     atk66_chosenstatusanimation,
     atk67_yesnobox,
-    atk68_cancel_everyones_actions,
-    atk69_dmg_adjustment3,
+    atk68_cancelallactions,
+    atk69_adjustsetdamage,
     atk6A_removeitem,
     atk6B_atknameinbuff1,
-    atk6C_draw_lvlupbox,
-    atk6D_reset_sentpokes_value,
-    atk6E_set_atk_to_player0,
-    atk6F_set_visible,
-    atk70_record_last_used_ability,
-    atk71_buffer_move_to_learn,
-    atk72_jump_if_run_attempt_success,
-    atk73_hp_thresholds,
-    atk74_hp_thresholds2,
-    atk75_item_effect_on_opponent,
+    atk6C_drawlvlupbox,
+    atk6D_resetsentmonsvalue,
+    atk6E_setatktoplayer0,
+    atk6F_makevisible,
+    atk70_recordlastability,
+    atk71_buffermovetolearn,
+    atk72_jumpifplayerran,
+    atk73_hpthresholds,
+    atk74_hpthresholds2,
+    atk75_useitemonopponent,
     atk76_various,
-    atk77_set_protect_like,
+    atk77_setprotectlike,
     atk78_faintifabilitynotdamp,
     atk79_setatkhptozero,
-    atk7A_jumpwhiletargetvalid,
-    atk7B_healhalfHP_if_possible,
+    atk7A_jumpifnexttargetvalid,
+    atk7B_tryhealhalfhealth,
     atk7C_trymirrormove,
-    atk7D_set_rain,
+    atk7D_setrain,
     atk7E_setreflect,
     atk7F_setseeded,
     atk80_manipulatedamage,
-    atk81_setrest,
+    atk81_trysetrest,
     atk82_jumpifnotfirstturn,
     atk83_nop,
-    atk84_jump_if_cant_sleep,
+    atk84_jumpifcantmakeasleep,
     atk85_stockpile,
     atk86_stockpiletobasedamage,
     atk87_stockpiletohpheal,
@@ -655,22 +574,22 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk8A_normalisebuffs,
     atk8B_setbide,
     atk8C_confuseifrepeatingattackends,
-    atk8D_setmultihit_counter,
-    atk8E_init_multihit_string,
+    atk8D_setmultihitcounter,
+    atk8E_initmultihitstring,
     atk8F_forcerandomswitch,
-    atk90_conversion_type_change,
+    atk90_tryconversiontypechange,
     atk91_givepaydaymoney,
     atk92_setlightscreen,
-    atk93_ko_move,
+    atk93_tryKO,
     atk94_damagetohalftargethp,
     atk95_setsandstorm,
     atk96_weatherdamage,
-    atk97_try_infatuation,
-    atk98_status_icon_update,
+    atk97_tryinfatuating,
+    atk98_updatestatusicon,
     atk99_setmist,
-    atk9A_set_focusenergy,
+    atk9A_setfocusenergy,
     atk9B_transformdataexecution,
-    atk9C_set_substitute,
+    atk9C_setsubstitute,
     atk9D_mimicattackcopy,
     atk9E_metronome,
     atk9F_dmgtolevel,
@@ -678,39 +597,39 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkA1_counterdamagecalculator,
     atkA2_mirrorcoatdamagecalculator,
     atkA3_disablelastusedattack,
-    atkA4_setencore,
+    atkA4_trysetencore,
     atkA5_painsplitdmgcalc,
     atkA6_settypetorandomresistance,
     atkA7_setalwayshitflag,
     atkA8_copymovepermanently,
     atkA9_sleeptalk_choose_move,
-    atkAA_set_destinybond,
-    atkAB_DestinyBondFlagUpdate,
+    atkAA_setdestinybond,
+    atkAB_trysetdestinybondtohappen,
     atkAC_remaininghptopower,
-    atkAD_spite_ppreduce,
-    atkAE_heal_party_status,
+    atkAD_tryspiteppreduce,
+    atkAE_healpartystatus,
     atkAF_cursetarget,
-    atkB0_set_spikes,
-    atkB1_set_foresight,
-    atkB2_setperishsong,
+    atkB0_trysetspikes,
+    atkB1_setforesight,
+    atkB2_trysetperishsong,
     atkB3_rolloutdamagecalculation,
     atkB4_jumpifconfusedandstatmaxed,
     atkB5_furycuttercalc,
     atkB6_happinesstodamagecalculation,
     atkB7_presentdamagecalculation,
-    atkB8_set_safeguard,
+    atkB8_setsafeguard,
     atkB9_magnitudedamagecalculation,
     atkBA_jumpifnopursuitswitchdmg,
     atkBB_setsunny,
     atkBC_maxattackhalvehp,
     atkBD_copyfoestats,
     atkBE_rapidspinfree,
-    atkBF_set_defense_curl,
+    atkBF_setdefensecurlbit,
     atkC0_recoverbasedonsunlight,
-    atkC1_hidden_power_calc,
-    atkC2_selectnexttarget,
-    atkC3_setfutureattack,
-    atkC4_beat_up,
+    atkC1_hiddenpowercalc,
+    atkC2_selectfirstvalidtarget,
+    atkC3_trysetfutureattack,
+    atkC4_trydobeatup,
     atkC5_setsemiinvulnerablebit,
     atkC6_clearsemiinvulnerablebit,
     atkC7_setminimize,
@@ -723,46 +642,46 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkCE_settorment,
     atkCF_jumpifnodamage,
     atkD0_settaunt,
-    atkD1_set_helpinghand,
-    atkD2_swap_items,
-    atkD3_copy_ability,
-    atkD4_wish_effect,
-    atkD5_setroots,
+    atkD1_trysethelpinghand,
+    atkD2_tryswapitems,
+    atkD3_trycopyability,
+    atkD4_trywish,
+    atkD5_trysetroots,
     atkD6_doubledamagedealtifdamaged,
     atkD7_setyawn,
     atkD8_setdamagetohealthdifference,
     atkD9_scaledamagebyhealthratio,
-    atkDA_abilityswap,
-    atkDB_imprisoneffect,
-    atkDC_setgrudge,
+    atkDA_tryswapabilities,
+    atkDB_tryimprision,
+    atkDC_trysetgrudge,
     atkDD_weightdamagecalculation,
     atkDE_asistattackselect,
-    atkDF_setmagiccoat,
-    atkE0_setstealstatchange,
-    atkE1_intimidate_string_loader,
-    atkE2_switchout_abilities,
+    atkDF_trysetmagiccoat,
+    atkE0_trysetsnatch,
+    atkE1_trygetintimidatetarget,
+    atkE2_switchoutabilities,
     atkE3_jumpifhasnohp,
     atkE4_getsecretpowereffect,
     atkE5_pickup,
-    atkE6_castform_change_animation,
-    atkE7_castform_data_change,
+    atkE6_docastformchangeanimation,
+    atkE7_trycastformdatachange,
     atkE8_settypebasedhalvers,
     atkE9_setweatherballtype,
-    atkEA_recycleitem,
+    atkEA_tryrecycleitem,
     atkEB_settypetoterrain,
-    atkEC_pursuit_sth,
-    atkED_802B4B4,
+    atkEC_pursuitrelated,
+    atkEF_snatchsetbanks,
     atkEE_removelightscreenreflect,
     atkEF_pokeball_catch_calculation,
-    atkF0_give_caught_mon,
-    atkF1_set_caught_mon_dex_flags,
-    atkF2_display_dex_info,
-    atkF3_nickname_caught_poke,
+    atkF0_givecaughtmon,
+    atkF1_trysetcaughtmondexflags,
+    atkF2_displaydexinfo,
+    atkF3_trygivecaughtmonnick,
     atkF4_subattackerhpbydmg,
     atkF5_removeattackerstatus1,
-    atkF6_action_finished,
-    atkF7_turn_finished,
-    atkF8_trainer_slide_back
+    atkF6_finishaction,
+    atkF7_finishturn,
+    atkF8_trainerslideout
 };
 
 struct StatFractions
@@ -1208,14 +1127,14 @@ static void JumpIfMoveFailed(u8 adder, u16 move)
     }
     else
     {
-        DestinyBondFlagUpdate();
+        TrySetDestinyBondToHappen();
         if (AbilityBattleEffects(ABILITYEFFECT_ABSORBING, gBankTarget, 0, 0, move))
             return;
     }
     gBattlescriptCurrInstr = BS_ptr;
 }
 
-static void atk40_jump_if_move_affected_by_protect(void)
+static void atk40_jumpifaffectedbyprotect(void)
 {
     if (TARGET_PROTECT_AFFECTED)
     {
@@ -1476,7 +1395,7 @@ static void atk04_critcalc(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk05_damagecalc1(void)
+static void atk05_damagecalc(void)
 {
     u16 sideStatus = gSideAffecting[GET_BANK_SIDE(gBankTarget)];
     gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBankAttacker], &gBattleMons[gBankTarget], gCurrentMove,
@@ -1843,7 +1762,7 @@ static void Unused_ApplyRandomDmgMultiplier(void)
     ApplyRandomDmgMultiplier();
 }
 
-static void atk07_dmg_adjustment(void)
+static void atk07_adjustnormaldamage(void)
 {
     u8 holdEffect, quality;
 
@@ -1891,7 +1810,7 @@ static void atk07_dmg_adjustment(void)
         gBattlescriptCurrInstr++;
 }
 
-static void atk08_dmg_adjustment2(void) // The same as 0x7 except it doesn't check for false swipe move effect.
+static void atk08_adjustnormaldamage2(void) // The same as 0x7 except it doesn't check for false swipe move effect.
 {
     u8 holdEffect, quality;
 
@@ -2172,7 +2091,7 @@ static void atk0D_critmessage(void)
     }
 }
 
-static void atk0E_effectiveness_sound(void)
+static void atk0E_effectivenesssound(void)
 {
     if (gBattleExecBuffer)
         return;
@@ -2183,11 +2102,11 @@ static void atk0E_effectiveness_sound(void)
         switch (gBattleMoveFlags & (u8)(~(MOVESTATUS_MISSED)))
         {
         case MOVESTATUS_SUPEREFFECTIVE:
-            EmitEffectivenessSound(0, SE_KOUKA_H);
+            EmitPlaySE(0, SE_KOUKA_H);
             MarkBufferBankForExecution(gActiveBank);
             break;
         case MOVESTATUS_NOTVERYEFFECTIVE:
-            EmitEffectivenessSound(0, SE_KOUKA_L);
+            EmitPlaySE(0, SE_KOUKA_L);
             MarkBufferBankForExecution(gActiveBank);
             break;
         case MOVESTATUS_NOTAFFECTED:
@@ -2200,17 +2119,17 @@ static void atk0E_effectiveness_sound(void)
         default:
             if (gBattleMoveFlags & MOVESTATUS_SUPEREFFECTIVE)
             {
-                EmitEffectivenessSound(0, SE_KOUKA_H);
+                EmitPlaySE(0, SE_KOUKA_H);
                 MarkBufferBankForExecution(gActiveBank);
             }
             else if (gBattleMoveFlags & MOVESTATUS_NOTVERYEFFECTIVE)
             {
-                EmitEffectivenessSound(0, SE_KOUKA_L);
+                EmitPlaySE(0, SE_KOUKA_L);
                 MarkBufferBankForExecution(gActiveBank);
             }
             else if (!(gBattleMoveFlags & (MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED)))
             {
-                EmitEffectivenessSound(0, SE_KOUKA_M);
+                EmitPlaySE(0, SE_KOUKA_M);
                 MarkBufferBankForExecution(gActiveBank);
             }
             break;
@@ -2319,11 +2238,11 @@ static void atk10_printstring(void)
     }
 }
 
-static void atk11_printstring_playeronly(void)
+static void atk11_printselectionstring(void)
 {
     gActiveBank = gBankAttacker;
 
-    EmitPrintStringPlayerOnly(0, BS2ScriptRead16(gBattlescriptCurrInstr + 1));
+    EmitPrintSelectionString(0, BS2ScriptRead16(gBattlescriptCurrInstr + 1));
     MarkBufferBankForExecution(gActiveBank);
 
     gBattlescriptCurrInstr += 3;
@@ -2365,7 +2284,7 @@ static void atk13_printfromtable(void)
     }
 }
 
-static void atk14_printfromtable_playeronly(void)
+static void atk14_printselectionstringfromtable(void)
 {
     if (gBattleExecBuffer == 0)
     {
@@ -2373,7 +2292,7 @@ static void atk14_printfromtable_playeronly(void)
         ptr += gBattleCommunication[MULTISTRING_CHOOSER];
 
         gActiveBank = gBankAttacker;
-        EmitPrintStringPlayerOnly(0, *ptr);
+        EmitPrintSelectionString(0, *ptr);
         MarkBufferBankForExecution(gActiveBank);
 
         gBattlescriptCurrInstr += 5;
@@ -3134,7 +3053,7 @@ static void atk17_seteffectsecondary(void)
     SetMoveEffect(FALSE, 0);
 }
 
-static void atk18_status_effect_clear(void)
+static void atk18_clearstatusfromeffect(void)
 {
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
 
@@ -3148,7 +3067,7 @@ static void atk18_status_effect_clear(void)
     gBattleScripting.field_16 = 0;
 }
 
-static void atk19_faint_pokemon(void)
+static void atk19_tryfaintmon(void)
 {
     const u8 *BS_ptr;
 
@@ -3235,7 +3154,7 @@ static void atk19_faint_pokemon(void)
     }
 }
 
-static void atk1A_faint_animation(void)
+static void atk1A_dofaintanimation(void)
 {
     if (gBattleExecBuffer == 0)
     {
@@ -3246,7 +3165,7 @@ static void atk1A_faint_animation(void)
     }
 }
 
-static void atk1B_faint_effects_clear(void)
+static void atk1B_cleareffectsonfaint(void)
 {
     if (gBattleExecBuffer == 0)
     {
@@ -4098,19 +4017,19 @@ static void MoveValuesCleanUp(void)
     gHitMarker &= ~(HITMARKER_SYNCHRONISE_EFFECT);
 }
 
-static void atk25_move_values_cleanup(void)
+static void atk25_movevaluescleanup(void)
 {
     MoveValuesCleanUp();
     gBattlescriptCurrInstr += 1;
 }
 
-static void atk26_set_multihit(void)
+static void atk26_setmultihit(void)
 {
     gMultiHitCounter = gBattlescriptCurrInstr[1];
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk27_decrement_multihit(void)
+static void atk27_decrementmultihit(void)
 {
     if (--gMultiHitCounter == 0)
         gBattlescriptCurrInstr += 5;
@@ -4320,7 +4239,7 @@ static void atk31_copyarray(void)
     gBattlescriptCurrInstr += 10;
 }
 
-static void atk32_copyarray_withindex(void)
+static void atk32_copyarraywithindex(void)
 {
     u8* dest = BS2ScriptReadPtr(gBattlescriptCurrInstr + 1);
     const u8* src = BS2ScriptReadPtr(gBattlescriptCurrInstr + 5);
@@ -4470,7 +4389,7 @@ static void atk43_jumpifabilitypresent(void)
         gBattlescriptCurrInstr += 6;
 }
 
-static void atk44_end_selection_script(void)
+static void atk44_endselectionscript(void)
 {
     *(gBankAttacker + gBattleStruct->selectionScriptFinished) = TRUE;
 }
@@ -5190,7 +5109,7 @@ static void atk49_moveend(void)
                     gBattleScripting.atk49_state = 0;
                     MoveValuesCleanUp();
                     BattleScriptPush(gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect]);
-                    gBattlescriptCurrInstr = gUnknown_082DB87D;
+                    gBattlescriptCurrInstr = BattleScript_82DB87D;
                     return;
                 }
                 else
@@ -5310,7 +5229,7 @@ static void atk4A_typecalc2(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk4B_return_atk_to_ball(void)
+static void atk4B_returnatktoball(void)
 {
     gActiveBank = gBankAttacker;
     if (!(gHitMarker & HITMARKER_FAINTED(gActiveBank)))
@@ -5321,7 +5240,7 @@ static void atk4B_return_atk_to_ball(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk4C_get_switched_mon_data(void)
+static void atk4C_getswitchedmondata(void)
 {
     if (gBattleExecBuffer)
         return;
@@ -5336,7 +5255,7 @@ static void atk4C_get_switched_mon_data(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk4D_switch_data_update(void)
+static void atk4D_switchindataupdate(void)
 {
     struct BattlePokemon oldData;
     s32 i;
@@ -5389,7 +5308,7 @@ static void atk4D_switch_data_update(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk4E_switchin_anim(void)
+static void atk4E_switchinanim(void)
 {
     if (gBattleExecBuffer)
         return;
@@ -5415,7 +5334,7 @@ static void atk4E_switchin_anim(void)
         sub_81A56B4();
 }
 
-static void atk4F_jump_if_cannot_switch(void)
+static void atk4F_jumpifcantswitch(void)
 {
     s32 val = 0;
     s32 compareVar = 0;
@@ -5869,7 +5788,7 @@ static void atk50_openpartyscreen(void)
     }
 }
 
-static void atk51_switch_handle_order(void)
+static void atk51_switchhandleorder(void)
 {
     s32 i;
     if (gBattleExecBuffer)
@@ -5936,7 +5855,7 @@ static void atk51_switch_handle_order(void)
     gBattlescriptCurrInstr += 3;
 }
 
-static void atk52_switch_in_effects(void)
+static void atk52_switchineffects(void)
 {
     s32 i;
 
@@ -5967,12 +5886,12 @@ static void atk52_switch_in_effects(void)
         gBattleScripting.bank = gActiveBank;
         BattleScriptPushCursor();
 
-        if (gBattlescriptCurrInstr[1] == 0)
-            gBattlescriptCurrInstr = gUnknown_082DAE90;
-        else if (gBattlescriptCurrInstr[1] == 1)
-            gBattlescriptCurrInstr = gUnknown_082DAE59;
+        if (gBattlescriptCurrInstr[1] == BS_GET_TARGET)
+            gBattlescriptCurrInstr = BattleScript_SpikesOnTarget;
+        else if (gBattlescriptCurrInstr[1] == BS_GET_ATTACKER)
+            gBattlescriptCurrInstr = BattleScript_SpikesOnAttacker;
         else
-            gBattlescriptCurrInstr = gUnknown_082DAEC7;
+            gBattlescriptCurrInstr = BattleScript_SpikesOngBank1;
     }
     else
     {
@@ -6017,7 +5936,7 @@ static void atk52_switch_in_effects(void)
     }
 }
 
-static void atk53_trainer_slide(void)
+static void atk53_trainerslidein(void)
 {
     gActiveBank = GetBankByIdentity(gBattlescriptCurrInstr[1]);
     EmitTrainerSlide(0);
@@ -6026,16 +5945,16 @@ static void atk53_trainer_slide(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk54_effectiveness_sound(void)
+static void atk54_playse(void)
 {
     gActiveBank = gBankAttacker;
-    EmitEffectivenessSound(0, BS2ScriptRead16(gBattlescriptCurrInstr + 1));
+    EmitPlaySE(0, BS2ScriptRead16(gBattlescriptCurrInstr + 1));
     MarkBufferBankForExecution(gActiveBank);
 
     gBattlescriptCurrInstr += 3;
 }
 
-static void atk55_play_fanfare(void)
+static void atk55_fanfare(void)
 {
     gActiveBank = gBankAttacker;
     EmitPlayFanfareOrBGM(0, BS2ScriptRead16(gBattlescriptCurrInstr + 1), FALSE);
@@ -6044,7 +5963,7 @@ static void atk55_play_fanfare(void)
     gBattlescriptCurrInstr += 3;
 }
 
-static void atk56_fainting_cry(void)
+static void atk56_playfaintcry(void)
 {
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
     EmitFaintingCry(0);
@@ -6055,14 +5974,14 @@ static void atk56_fainting_cry(void)
 
 static void atk57(void)
 {
-    gActiveBank = GetBankByIdentity(0);
+    gActiveBank = GetBankByIdentity(IDENTITY_PLAYER_MON1);
     EmitCmd55(0, gBattleOutcome);
     MarkBufferBankForExecution(gActiveBank);
 
     gBattlescriptCurrInstr += 1;
 }
 
-static void atk58_return_to_ball(void)
+static void atk58_returntoball(void)
 {
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
     EmitReturnMonToBall(0, 1);
@@ -6071,7 +5990,7 @@ static void atk58_return_to_ball(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk59_learnmove_inbattle(void)
+static void atk59_handlelearnnewmove(void)
 {
     const u8* jumpPtr1 = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     const u8* jumpPtr2 = BSScriptReadPtr(gBattlescriptCurrInstr + 5);
@@ -6367,7 +6286,7 @@ static void atk5D_getmoneyreward(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk5E_8025A70(void)
+static void atk5E(void)
 {
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
 
@@ -6394,7 +6313,7 @@ static void atk5E_8025A70(void)
     }
 }
 
-static void atk5F_8025B24(void)
+static void atk5F(void)
 {
     gActiveBank = gBankAttacker;
     gBankAttacker = gBankTarget;
@@ -6408,7 +6327,7 @@ static void atk5F_8025B24(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk60_increment_gamestat(void)
+static void atk60_incrementgamestat(void)
 {
     if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
         IncrementGameStat(gBattlescriptCurrInstr[1]);
@@ -6416,7 +6335,7 @@ static void atk60_increment_gamestat(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk61_draw_party_status_summary(void)
+static void atk61_drawpartystatussummary(void)
 {
     s32 i;
     struct Pokemon* party;
@@ -6453,7 +6372,7 @@ static void atk61_draw_party_status_summary(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk62_08025C6C(void)
+static void atk62(void)
 {
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
     EmitCmd49(0);
@@ -6569,7 +6488,7 @@ static void atk67_yesnobox(void)
     }
 }
 
-static void atk68_cancel_everyones_actions(void)
+static void atk68_cancelallactions(void)
 {
     s32 i;
 
@@ -6579,7 +6498,7 @@ static void atk68_cancel_everyones_actions(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk69_dmg_adjustment3(void) // The same as 0x7, except there's no random damage multiplier.
+static void atk69_adjustsetdamage(void) // The same as 0x7, except there's no random damage multiplier.
 {
     u8 holdEffect, quality;
 
@@ -6648,7 +6567,7 @@ static void atk6B_atknameinbuff1(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk6C_draw_lvlupbox(void)
+static void atk6C_drawlvlupbox(void)
 {
     if (gBattleScripting.atk6C_state == 0)
     {
@@ -6922,19 +6841,19 @@ static bool32 IsMonGettingExpSentOut(void)
     return FALSE;
 }
 
-static void atk6D_reset_sentpokes_value(void)
+static void atk6D_resetsentmonsvalue(void)
 {
     ResetSentPokesToOpponentValue();
     gBattlescriptCurrInstr++;
 }
 
-static void atk6E_set_atk_to_player0(void)
+static void atk6E_setatktoplayer0(void)
 {
     gBankAttacker = GetBankByIdentity(0);
     gBattlescriptCurrInstr++;
 }
 
-static void atk6F_set_visible(void)
+static void atk6F_makevisible(void)
 {
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
     EmitSpriteInvisibility(0, FALSE);
@@ -6943,7 +6862,7 @@ static void atk6F_set_visible(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk70_record_last_used_ability(void)
+static void atk70_recordlastability(void)
 {
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
     RecordAbilityBattle(gActiveBank, gLastUsedAbility);
@@ -6955,13 +6874,13 @@ void BufferMoveToLearnIntoBattleTextBuff2(void)
     PREPARE_MOVE_BUFFER(gBattleTextBuff2, gMoveToLearn);
 }
 
-static void atk71_buffer_move_to_learn(void)
+static void atk71_buffermovetolearn(void)
 {
     BufferMoveToLearnIntoBattleTextBuff2();
     gBattlescriptCurrInstr++;
 }
 
-static void atk72_jump_if_run_attempt_success(void)
+static void atk72_jumpifplayerran(void)
 {
     if (TryRunFromBattle(gBank1))
         gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
@@ -6969,7 +6888,7 @@ static void atk72_jump_if_run_attempt_success(void)
         gBattlescriptCurrInstr += 5;
 }
 
-static void atk73_hp_thresholds(void)
+static void atk73_hpthresholds(void)
 {
     u8 opposingBank;
     s32 result;
@@ -6996,7 +6915,7 @@ static void atk73_hp_thresholds(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk74_hp_thresholds2(void)
+static void atk74_hpthresholds2(void)
 {
     u8 opposingBank;
     s32 result;
@@ -7022,7 +6941,7 @@ static void atk74_hp_thresholds2(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk75_item_effect_on_opponent(void)
+static void atk75_useitemonopponent(void)
 {
     gBankInMenu = gBankAttacker;
     ExecuteTableBasedItemEffect(&gEnemyParty[gBattlePartyID[gBankAttacker]], gLastUsedItem, gBattlePartyID[gBankAttacker], 0, 1);
@@ -7044,13 +6963,13 @@ static void atk76_various(void)
         break;
     case VARIOUS_SET_MAGIC_COAT_TARGET:
         gBankAttacker = gBankTarget;
-        side = GetBankSide(gBankAttacker) ^ 1;
+        side = GetBankSide(gBankAttacker) ^ BIT_SIDE;
         if (gSideTimers[side].followmeTimer != 0 && gBattleMons[gSideTimers[side].followmeTarget].hp != 0)
             gBankTarget = gSideTimers[side].followmeTarget;
         else
             gBankTarget = gActiveBank;
         break;
-    case VARIOUS_CAN_RUN_FROM_BATTLE:
+    case VARIOUS_IS_RUNNING_IMPOSSIBLE:
         gBattleCommunication[0] = IsRunningFromBattleImpossible();
         break;
     case VARIOUS_GET_MOVE_TARGET:
@@ -7209,7 +7128,7 @@ static void atk76_various(void)
     gBattlescriptCurrInstr += 3;
 }
 
-static void atk77_set_protect_like(void) // protect and endure
+static void atk77_setprotectlike(void) // protect and endure
 {
     bool8 notLastTurn = TRUE;
     u16 lastMove = gUnknown_02024260[gBankAttacker];
@@ -7292,9 +7211,9 @@ static void atk79_setatkhptozero(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk7A_jumpwhiletargetvalid(void) // Used by intimidate to loop through all targets.
+static void atk7A_jumpifnexttargetvalid(void)
 {
-    const u8* jumpPtr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
+    const u8 *jumpPtr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
@@ -7312,10 +7231,12 @@ static void atk7A_jumpwhiletargetvalid(void) // Used by intimidate to loop throu
             gBattlescriptCurrInstr = jumpPtr;
     }
     else
+    {
         gBattlescriptCurrInstr += 5;
+    }
 }
 
-static void atk7B_healhalfHP_if_possible(void)
+static void atk7B_tryhealhalfhealth(void)
 {
     const u8* failPtr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
 
@@ -7383,7 +7304,7 @@ static void atk7C_trymirrormove(void)
     }
 }
 
-static void atk7D_set_rain(void)
+static void atk7D_setrain(void)
 {
     if (gBattleWeather & WEATHER_RAIN_ANY)
     {
@@ -7464,9 +7385,9 @@ static void atk80_manipulatedamage(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk81_setrest(void)
+static void atk81_trysetrest(void)
 {
-    const u8* failJump = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
+    const u8 *failJump = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     gActiveBank = gBankTarget = gBankAttacker;
     gBattleMoveDamage = gBattleMons[gBankTarget].maxHP * (-1);
 
@@ -7530,9 +7451,9 @@ bool8 UproarWakeUpCheck(u8 bank)
         return TRUE;
 }
 
-static void atk84_jump_if_cant_sleep(void)
+static void atk84_jumpifcantmakeasleep(void)
 {
-    const u8* jumpPtr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
+    const u8 *jumpPtr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
 
     if (UproarWakeUpCheck(gBankTarget))
     {
@@ -7844,7 +7765,7 @@ static void atk8C_confuseifrepeatingattackends(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk8D_setmultihit_counter(void)
+static void atk8D_setmultihitcounter(void)
 {
     if (gBattlescriptCurrInstr[1])
     {
@@ -7862,7 +7783,7 @@ static void atk8D_setmultihit_counter(void)
     gBattlescriptCurrInstr += 2;
 }
 
-static void atk8E_init_multihit_string(void)
+static void atk8E_initmultihitstring(void)
 {
     PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
 
@@ -7886,7 +7807,7 @@ static bool8 sub_8051064(void)
         *(gBattleStruct->field_58 + gBankTarget) = gBattlePartyID[gBankTarget];
     }
 
-    gBattlescriptCurrInstr = gUnknown_082DADD8;
+    gBattlescriptCurrInstr = BattleScript_82DADD8;
     return TRUE;
 }
 
@@ -8051,7 +7972,7 @@ static void atk8F_forcerandomswitch(void)
     }
 }
 
-static void atk90_conversion_type_change(void) // randomly changes user's type to one of its moves' type
+static void atk90_tryconversiontypechange(void) // randomly changes user's type to one of its moves' type
 {
     u8 validMoves = 0;
     u8 moveChecked;
@@ -8155,7 +8076,7 @@ static void atk92_setlightscreen(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk93_ko_move(void)
+static void atk93_tryKO(void)
 {
     u8 holdEffect, param;
 
@@ -8319,7 +8240,7 @@ static void atk96_weatherdamage(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk97_try_infatuation(void)
+static void atk97_tryinfatuating(void)
 {
     struct Pokemon *monAttacker, *monTarget;
     u16 speciesAttacker, speciesTarget;
@@ -8364,7 +8285,7 @@ static void atk97_try_infatuation(void)
     }
 }
 
-static void atk98_status_icon_update(void)
+static void atk98_updatestatusicon(void)
 {
     if (gBattleExecBuffer)
         return;
@@ -8414,7 +8335,7 @@ static void atk99_setmist(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atk9A_set_focusenergy(void)
+static void atk9A_setfocusenergy(void)
 {
     if (gBattleMons[gBankAttacker].status2 & STATUS2_FOCUS_ENERGY)
     {
@@ -8473,7 +8394,7 @@ static void atk9B_transformdataexecution(void)
     }
 }
 
-static void atk9C_set_substitute(void)
+static void atk9C_setsubstitute(void)
 {
     u32 hp = gBattleMons[gBankAttacker].maxHP / 4;
     if (gBattleMons[gBankAttacker].maxHP / 4 == 0)
@@ -8673,7 +8594,7 @@ static void atkA3_disablelastusedattack(void)
     }
 }
 
-static void atkA4_setencore(void)
+static void atkA4_trysetencore(void)
 {
     s32 i;
 
@@ -8937,13 +8858,13 @@ static void atkA9_sleeptalk_choose_move(void)
     }
 }
 
-static void atkAA_set_destinybond(void)
+static void atkAA_setdestinybond(void)
 {
     gBattleMons[gBankAttacker].status2 |= STATUS2_DESTINY_BOND;
     gBattlescriptCurrInstr++;
 }
 
-static void DestinyBondFlagUpdate(void)
+static void TrySetDestinyBondToHappen(void)
 {
     u8 sideAttacker = GetBankSide(gBankAttacker);
     u8 sideTarget = GetBankSide(gBankTarget);
@@ -8955,9 +8876,9 @@ static void DestinyBondFlagUpdate(void)
     }
 }
 
-static void atkAB_DestinyBondFlagUpdate(void)
+static void atkAB_trysetdestinybondtohappen(void)
 {
-    DestinyBondFlagUpdate();
+    TrySetDestinyBondToHappen();
     gBattlescriptCurrInstr++;
 }
 
@@ -8976,7 +8897,7 @@ static void atkAC_remaininghptopower(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkAD_spite_ppreduce(void)
+static void atkAD_tryspiteppreduce(void)
 {
     if (gLastUsedMovesByBanks[gBankTarget] != 0
         && gLastUsedMovesByBanks[gBankTarget] != 0xFFFF)
@@ -9027,7 +8948,7 @@ static void atkAD_spite_ppreduce(void)
     }
 }
 
-static void atkAE_heal_party_status(void)
+static void atkAE_healpartystatus(void)
 {
     u32 zero = 0;
     u8 toHeal = 0;
@@ -9140,7 +9061,7 @@ static void atkAF_cursetarget(void)
     }
 }
 
-static void atkB0_set_spikes(void)
+static void atkB0_trysetspikes(void)
 {
     u8 targetSide = GetBankSide(gBankAttacker) ^ BIT_SIDE;
 
@@ -9157,13 +9078,13 @@ static void atkB0_set_spikes(void)
     }
 }
 
-static void atkB1_set_foresight(void)
+static void atkB1_setforesight(void)
 {
     gBattleMons[gBankTarget].status2 |= STATUS2_FORESIGHT;
     gBattlescriptCurrInstr++;
 }
 
-static void atkB2_setperishsong(void)
+static void atkB2_trysetperishsong(void)
 {
     s32 i;
     s32 notAffectedCount = 0;
@@ -9196,7 +9117,7 @@ static void atkB3_rolloutdamagecalculation(void)
     if (gBattleMoveFlags & MOVESTATUS_NOEFFECT)
     {
         CancelMultiTurnMoves(gBankAttacker);
-        gBattlescriptCurrInstr = BattleScript_PauseEffectivenessSoundResultMsgEndMove;
+        gBattlescriptCurrInstr = BattleScript_MoveMissedPause;
     }
     else
     {
@@ -9240,7 +9161,7 @@ static void atkB5_furycuttercalc(void)
     if (gBattleMoveFlags & MOVESTATUS_NOEFFECT)
     {
         gDisableStructs[gBankAttacker].furyCutterCounter = 0;
-        gBattlescriptCurrInstr = BattleScript_PauseEffectivenessSoundResultMsgEndMove;
+        gBattlescriptCurrInstr = BattleScript_MoveMissedPause;
     }
     else
     {
@@ -9286,7 +9207,7 @@ static void atkB7_presentdamagecalculation(void)
         gBattleMoveDamage *= -1;
     }
     if (rand < 204)
-        gBattlescriptCurrInstr = BattleScript_PresentDamageTarget;
+        gBattlescriptCurrInstr = BattleScript_HitFromCritCalc;
     else if (gBattleMons[gBankTarget].maxHP == gBattleMons[gBankTarget].hp)
         gBattlescriptCurrInstr = BattleScript_AlreadyAtFullHp;
     else
@@ -9296,7 +9217,7 @@ static void atkB7_presentdamagecalculation(void)
     }
 }
 
-static void atkB8_set_safeguard(void)
+static void atkB8_setsafeguard(void)
 {
     if (gSideAffecting[GET_BANK_SIDE(gBankAttacker)] & SIDE_STATUS_SAFEGUARD)
     {
@@ -9501,7 +9422,7 @@ static void atkBE_rapidspinfree(void)
     }
 }
 
-static void atkBF_set_defense_curl(void)
+static void atkBF_setdefensecurlbit(void)
 {
     gBattleMons[gBankAttacker].status2 |= STATUS2_DEFENSE_CURL;
     gBattlescriptCurrInstr++;
@@ -9533,7 +9454,7 @@ static void atkC0_recoverbasedonsunlight(void)
 }
 
 #ifdef NONMATCHING
-static void atkC1_hidden_power_calc(void)
+static void atkC1_hiddenpowercalc(void)
 {
     u32 powerBits = 0;
     u32 typeBits = 0;
@@ -9564,7 +9485,7 @@ static void atkC1_hidden_power_calc(void)
 
 #else
 __attribute__((naked))
-static void atkC1_hidden_power_calc(void)
+static void atkC1_hiddenpowercalc(void)
 {
     asm(".syntax unified\n\
         	push {r4-r7,lr}\n\
@@ -9707,7 +9628,7 @@ _080544F0:\n\
 }
 #endif // NONMATCHING
 
-static void atkC2_selectnexttarget(void)
+static void atkC2_selectfirstvalidtarget(void)
 {
     for (gBankTarget = 0; gBankTarget < gNoOfAllBanks; gBankTarget++)
     {
@@ -9719,7 +9640,7 @@ static void atkC2_selectnexttarget(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkC3_setfutureattack(void)
+static void atkC3_trysetfutureattack(void)
 {
     if (gWishFutureKnock.futureSightCounter[gBankTarget] != 0)
     {
@@ -9747,9 +9668,9 @@ static void atkC3_setfutureattack(void)
     }
 }
 
-static void atkC4_beat_up(void)
+static void atkC4_trydobeatup(void)
 {
-    struct Pokemon* party;
+    struct Pokemon *party;
 
     if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
         party = gPlayerParty;
@@ -9950,7 +9871,7 @@ static void atkD0_settaunt(void)
     }
 }
 
-static void atkD1_set_helpinghand(void)
+static void atkD1_trysethelpinghand(void)
 {
     gBankTarget = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ BIT_MON);
 
@@ -9968,7 +9889,7 @@ static void atkD1_set_helpinghand(void)
     }
 }
 
-static void atkD2_swap_items(void) // trick
+static void atkD2_tryswapitems(void) // trick
 {
     // opponent can't swap items with player in regular battles
     if (gBattleTypeFlags & BATTLE_TYPE_x4000000
@@ -10055,7 +9976,7 @@ static void atkD2_swap_items(void) // trick
     }
 }
 
-static void atkD3_copy_ability(void) // role play
+static void atkD3_trycopyability(void) // role play
 {
     if (gBattleMons[gBankTarget].ability != 0
         && gBattleMons[gBankTarget].ability != ABILITY_WONDER_GUARD)
@@ -10070,7 +9991,7 @@ static void atkD3_copy_ability(void) // role play
     }
 }
 
-static void atkD4_wish_effect(void)
+static void atkD4_trywish(void)
 {
     switch (gBattlescriptCurrInstr[1])
     {
@@ -10103,7 +10024,7 @@ static void atkD4_wish_effect(void)
     }
 }
 
-static void atkD5_setroots(void) // ingrain
+static void atkD5_trysetroots(void) // ingrain
 {
     if (gStatuses3[gBankAttacker] & STATUS3_ROOTED)
     {
@@ -10168,7 +10089,7 @@ static void atkD9_scaledamagebyhealthratio(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkDA_abilityswap(void) // skill swap
+static void atkDA_tryswapabilities(void) // skill swap
 {
     if ((gBattleMons[gBankAttacker].ability == 0
          && gBattleMons[gBankTarget].ability == 0)
@@ -10188,7 +10109,7 @@ static void atkDA_abilityswap(void) // skill swap
     }
 }
 
-static void atkDB_imprisoneffect(void)
+static void atkDB_tryimprision(void)
 {
     if ((gStatuses3[gBankAttacker] & STATUS3_IMPRISONED_OTHERS))
     {
@@ -10230,7 +10151,7 @@ static void atkDB_imprisoneffect(void)
     }
 }
 
-static void atkDC_setgrudge(void)
+static void atkDC_trysetgrudge(void)
 {
     if (gStatuses3[gBankAttacker] & STATUS3_GRUDGE)
     {
@@ -10313,7 +10234,7 @@ static void atkDE_asistattackselect(void)
     }
 }
 
-static void atkDF_setmagiccoat(void)
+static void atkDF_trysetmagiccoat(void)
 {
     gBankTarget = gBankAttacker;
     gSpecialStatuses[gBankAttacker].flag20 = 1;
@@ -10328,7 +10249,7 @@ static void atkDF_setmagiccoat(void)
     }
 }
 
-static void atkE0_setstealstatchange(void) // snatch
+static void atkE0_trysetsnatch(void) // snatch
 {
     gSpecialStatuses[gBankAttacker].flag20 = 1;
     if (gCurrentTurnActionNumber == gNoOfAllBanks - 1) // moves last turn
@@ -10342,7 +10263,7 @@ static void atkE0_setstealstatchange(void) // snatch
     }
 }
 
-static void atkE1_intimidate_string_loader(void)
+static void atkE1_trygetintimidatetarget(void)
 {
     u8 side;
 
@@ -10365,7 +10286,7 @@ static void atkE1_intimidate_string_loader(void)
         gBattlescriptCurrInstr += 5;
 }
 
-static void atkE2_switchout_abilities(void)
+static void atkE2_switchoutabilities(void)
 {
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
 
@@ -10502,7 +10423,7 @@ static void atkE5_pickup(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkE6_castform_change_animation(void)
+static void atkE6_docastformchangeanimation(void)
 {
     gActiveBank = gBattleScripting.bank;
 
@@ -10515,7 +10436,7 @@ static void atkE6_castform_change_animation(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkE7_castform_data_change(void)
+static void atkE7_trycastformdatachange(void)
 {
     u8 form;
 
@@ -10578,7 +10499,7 @@ static void atkE9_setweatherballtype(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkEA_recycleitem(void)
+static void atkEA_tryrecycleitem(void)
 {
     u16 *usedHeldItem;
 
@@ -10619,7 +10540,7 @@ static void atkEB_settypetoterrain(void)
     }
 }
 
-static void atkEC_pursuit_sth(void)
+static void atkEC_pursuitrelated(void)
 {
     gActiveBank = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ BIT_MON);
 
@@ -10641,7 +10562,7 @@ static void atkEC_pursuit_sth(void)
     }
 }
 
-static void atkED_802B4B4(void)
+static void atkEF_snatchsetbanks(void)
 {
     gEffectBank = gBankAttacker;
 
@@ -10827,7 +10748,7 @@ static void atkEF_pokeball_catch_calculation(void)
     }
 }
 
-static void atkF0_give_caught_mon(void)
+static void atkF0_givecaughtmon(void)
 {
     if (GiveMonToPlayer(&gEnemyParty[gBattlePartyID[gBankAttacker ^ BIT_SIDE]]) != MON_GIVEN_TO_PARTY)
     {
@@ -10856,7 +10777,7 @@ static void atkF0_give_caught_mon(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkF1_set_caught_mon_dex_flags(void)
+static void atkF1_trysetcaughtmondexflags(void)
 {
     u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
     u32 personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY, NULL);
@@ -10872,7 +10793,7 @@ static void atkF1_set_caught_mon_dex_flags(void)
     }
 }
 
-static void atkF2_display_dex_info(void)
+static void atkF2_displaydexinfo(void)
 {
     u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
 
@@ -10991,7 +10912,7 @@ void BattleDestroyYesNoCursorAt(u8 cursorPosition)
     CopyBgTilemapBufferToVram(0);
 }
 
-static void atkF3_nickname_caught_poke(void)
+static void atkF3_trygivecaughtmonnick(void)
 {
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
@@ -11079,18 +11000,18 @@ static void atkF5_removeattackerstatus1(void)
     gBattlescriptCurrInstr++;
 }
 
-static void atkF6_action_finished(void)
+static void atkF6_finishaction(void)
 {
     gCurrentActionFuncId = ACTION_FINISHED;
 }
 
-static void atkF7_turn_finished(void)
+static void atkF7_finishturn(void)
 {
     gCurrentActionFuncId = ACTION_FINISHED;
     gCurrentTurnActionNumber = gNoOfAllBanks;
 }
 
-static void atkF8_trainer_slide_back(void)
+static void atkF8_trainerslideout(void)
 {
     gActiveBank = GetBankByIdentity(gBattlescriptCurrInstr[1]);
     EmitTrainerSlideBack(0);

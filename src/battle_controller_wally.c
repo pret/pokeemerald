@@ -86,7 +86,7 @@ static void WallyHandleBallThrowAnim(void);
 static void WallyHandlePause(void);
 static void WallyHandleMoveAnimation(void);
 static void WallyHandlePrintString(void);
-static void WallyHandlePrintStringPlayerOnly(void);
+static void WallyHandlePrintSelectionString(void);
 static void WallyHandleChooseAction(void);
 static void WallyHandleUnknownYesNoBox(void);
 static void WallyHandleChooseMove(void);
@@ -112,7 +112,7 @@ static void WallyHandleCmd39(void);
 static void WallyHandleCmd40(void);
 static void WallyHandleHitAnimation(void);
 static void WallyHandleCmd42(void);
-static void WallyHandleEffectivenessSound(void);
+static void WallyHandlePlaySE(void);
 static void WallyHandlePlayFanfareOrBGM(void);
 static void WallyHandleFaintingCry(void);
 static void WallyHandleIntroSlide(void);
@@ -155,7 +155,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     WallyHandlePause,
     WallyHandleMoveAnimation,
     WallyHandlePrintString,
-    WallyHandlePrintStringPlayerOnly,
+    WallyHandlePrintSelectionString,
     WallyHandleChooseAction,
     WallyHandleUnknownYesNoBox,
     WallyHandleChooseMove,
@@ -181,7 +181,7 @@ static void (*const sWallyBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     WallyHandleCmd40,
     WallyHandleHitAnimation,
     WallyHandleCmd42,
-    WallyHandleEffectivenessSound,
+    WallyHandlePlaySE,
     WallyHandlePlayFanfareOrBGM,
     WallyHandleFaintingCry,
     WallyHandleIntroSlide,
@@ -1211,7 +1211,7 @@ static void WallyHandlePrintString(void)
     gBattleBankFunc[gActiveBank] = CompleteOnInactiveTextPrinter;
 }
 
-static void WallyHandlePrintStringPlayerOnly(void)
+static void WallyHandlePrintSelectionString(void)
 {
     if (GetBankSide(gActiveBank) == SIDE_PLAYER)
         WallyHandlePrintString();
@@ -1419,7 +1419,7 @@ static void WallyHandleCmd42(void)
     WallyBufferExecCompleted();
 }
 
-static void WallyHandleEffectivenessSound(void)
+static void WallyHandlePlaySE(void)
 {
     PlaySE(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
     WallyBufferExecCompleted();
