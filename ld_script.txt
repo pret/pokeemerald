@@ -478,6 +478,7 @@ SECTIONS {
         data/fossil_special_fldeff_groundshake.o(.rodata);
         src/berry_fix_program.o(.rodata);
         data/pokemon_summary_screen.o(.rodata);
+        src/pokenav.o(.rodata);
         data/pokenav.o(.rodata);
         data/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);

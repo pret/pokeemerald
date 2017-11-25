@@ -14,6 +14,7 @@ struct PokenavStruct_203CF40 {
     unsigned (*unk_00)(void);
     int unk_04;
     bool16 unk_08;
+    u16 unk_0a;
     bool32 anyMonsHaveRibbons;
     void *unk_10[19];
 }; // size=0x5c
@@ -37,22 +38,96 @@ void sub_81C76C4(void);
 bool32 sub_81C76FC(void);
 void sub_81C7710(void);
 bool32 sub_81C7738(void);
-void sub_81C7834(u32 a0, u32 a1);
+void sub_81C7834(u32 (*a0)(void), u32 (*a1)(void));
 void sub_81C7850(unsigned a0);
 bool32 sub_81C786C(void);
+bool32 sub_81C9298(void);
+bool32 sub_81C92CC(void);
+bool32 sub_81C9304(void);
+bool32 sub_81C9338(void);
+bool32 sub_81C9368(void);
+bool32 sub_81C941C(void);
+bool32 sub_81C9924(void);
 void sub_81C9430(void);
+bool32 sub_81C9940(void);
+bool32 sub_81C9990(void);
+bool32 sub_81C99C0(void);
+void sub_81C99D4(void);
+bool32 sub_81CAAE8(void);
+bool32 sub_81CAB24(void);
+void sub_81CAB38(void);
+bool32 sub_81CB260(void);
+bool32 sub_81CB29C(void);
+bool32 sub_81CB2CC(void);
+void sub_81CB2E0(void);
+bool32 sub_81CC4D4(void);
+void sub_81CC524(void);
+bool32 sub_81CC554(void);
+bool32 sub_81CC5F4(void);
+bool32 sub_81CC62C(void);
+bool32 sub_81CC65C(void);
+void sub_81CC670(void);
+bool32 sub_81CCFD8(void);
+bool32 sub_81CD024(void);
+bool32 sub_81CD070(void);
+void sub_81CD1C0(void);
+bool32 sub_81CDDD4(void);
+bool32 sub_81CDE2C(void);
+bool32 sub_81CDE64(void);
+void sub_81CECA0(void);
+bool32 sub_81CEF3C(void);
+bool32 sub_81CEF98(void);
+bool32 sub_81CEFDC(void);
+void sub_81CEFF0(void);
+bool32 sub_81CF330(void);
+bool32 sub_81CF368(void);
+bool32 sub_81CF3A0(void);
+bool32 sub_81CF3D0(void);
+void sub_81CF3F8(void);
+bool32 sub_81CF9BC(void);
+bool32 sub_81CFA04(void);
+bool32 sub_81CFA34(void);
+void sub_81CFA48(void);
+bool32 sub_81CFDD0(void);
+bool32 sub_81CFE08(void);
+bool32 sub_81CFE40(void);
+bool32 sub_81CFE70(void);
+void sub_81CFE98(void);
+bool32 sub_81D0450(void);
+bool32 sub_81D04A0(void);
+void sub_81D04B8(void);
+bool32 sub_81D0978(void);
+bool32 sub_81D09B0(void);
+bool32 sub_81D09E0(void);
+void sub_81D09F4(void);
 
 // rodata
 
-extern const struct {
+const struct {
     bool32 (*unk_00)(void);
     unsigned (*unk_04)(void);
     bool32 (*unk_08)(void);
-    u32 unk_0c;
-    u32 unk_10;
+    u32 (*unk_0c)(void);
+    u32 (*unk_10)(void);
     void (*unk_14)(void);
     void (*unk_18)(void);
-} gUnknown_0861F3EC[];
+} gUnknown_0861F3EC[] = {
+    {sub_81C9298, sub_81C941C, sub_81C9924, sub_81C9990, sub_81C99C0, sub_81C9430, sub_81C99D4},
+    {sub_81C9298, sub_81C941C, sub_81C9940, sub_81C9990, sub_81C99C0, sub_81C9430, sub_81C99D4},
+    {sub_81C9338, sub_81C941C, sub_81C9940, sub_81C9990, sub_81C99C0, sub_81C9430, sub_81C99D4},
+    {sub_81C9368, sub_81C941C, sub_81C9940, sub_81C9990, sub_81C99C0, sub_81C9430, sub_81C99D4},
+    {sub_81C92CC, sub_81C941C, sub_81C9940, sub_81C9990, sub_81C99C0, sub_81C9430, sub_81C99D4},
+    {sub_81C9304, sub_81C941C, sub_81C9940, sub_81C9990, sub_81C99C0, sub_81C9430, sub_81C99D4},
+    {sub_81CC4D4, sub_81CC554, sub_81CC5F4, sub_81CC62C, sub_81CC65C, sub_81CC524, sub_81CC670},
+    {sub_81CCFD8, sub_81CD070, sub_81CDDD4, sub_81CDE2C, sub_81CDE64, sub_81CD1C0, sub_81CECA0},
+    {sub_81CEF3C, sub_81CEFDC, sub_81CF330, sub_81CF3A0, sub_81CF3D0, sub_81CEFF0, sub_81CF3F8},
+    {sub_81CD024, sub_81CD070, sub_81CDDD4, sub_81CDE2C, sub_81CDE64, sub_81CD1C0, sub_81CECA0},
+    {sub_81CEF98, sub_81CEFDC, sub_81CF368, sub_81CF3A0, sub_81CF3D0, sub_81CEFF0, sub_81CF3F8},
+    {sub_81CAAE8, sub_81CAB24, sub_81CB260, sub_81CB29C, sub_81CB2CC, sub_81CAB38, sub_81CB2E0},
+    {sub_81CF9BC, sub_81CFA34, sub_81CFDD0, sub_81CFE40, sub_81CFE70, sub_81CFA48, sub_81CFE98},
+    {sub_81D0450, sub_81D04A0, sub_81D0978, sub_81D09B0, sub_81D09E0, sub_81D04B8, sub_81D09F4},
+    {sub_81CFA04, sub_81CFA34, sub_81CFE08, sub_81CFE40, sub_81CFE70, sub_81CFA48, sub_81CFE98}
+};
 
 // text
 
@@ -308,4 +383,32 @@ void sub_81C7650(int i)
         free(gUnknown_0203CF40->unk_10[i]);
         gUnknown_0203CF40->unk_10[i] = NULL;
     }
+}
+
+bool16 sub_81C767C(void)
+{
+    return gUnknown_0203CF40->unk_08;
+}
+
+void sub_81C7688(bool16 flag)
+{
+    gUnknown_0203CF40->unk_08 = flag;
+}
+
+void sub_81C7694(unsigned a0)
+{
+    if (a0 > 4)
+    {
+        a0 = 0;
+    }
+    gUnknown_0203CF40->unk_0a = a0;
+}
+
+u16 sub_81C76AC(void)
+{
+    return gUnknown_0203CF40->unk_0a;
+}
+bool32 sub_81C76B8(void)
+{
+    return gUnknown_0203CF40->anyMonsHaveRibbons;
 }

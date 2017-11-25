@@ -5,58 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C767C
-sub_81C767C: @ 81C767C
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldrh r0, [r0, 0x8]
-	bx lr
-	.pool
-	thumb_func_end sub_81C767C
-
-	thumb_func_start sub_81C7688
-sub_81C7688: @ 81C7688
-	ldr r1, =gUnknown_0203CF40
-	ldr r1, [r1]
-	strh r0, [r1, 0x8]
-	bx lr
-	.pool
-	thumb_func_end sub_81C7688
-
-	thumb_func_start sub_81C7694
-sub_81C7694: @ 81C7694
-	push {lr}
-	adds r1, r0, 0
-	cmp r1, 0x4
-	bls _081C769E
-	movs r1, 0
-_081C769E:
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	strh r1, [r0, 0xA]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7694
-
-	thumb_func_start sub_81C76AC
-sub_81C76AC: @ 81C76AC
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldrh r0, [r0, 0xA]
-	bx lr
-	.pool
-	thumb_func_end sub_81C76AC
-
-	thumb_func_start sub_81C76B8
-sub_81C76B8: @ 81C76B8
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldr r0, [r0, 0xC]
-	bx lr
-	.pool
-	thumb_func_end sub_81C76B8
-
 	thumb_func_start sub_81C76C4
 sub_81C76C4: @ 81C76C4
 	push {r4,lr}
