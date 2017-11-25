@@ -274,3 +274,38 @@ unsigned sub_81C75E0(void)
 {
     return gUnknown_0203CF40->unk_00();
 }
+
+void sub_81C75F4(void)
+{
+    InitKeys();
+}
+
+void c3args_set_0toR1_1to0(void (*callback)(void))
+{
+    SetVBlankCallback(callback);
+}
+
+void sub_81C760C(void)
+{
+    SetVBlankCallback(sub_81C7418);
+}
+
+void *sub_81C761C(int i, size_t size)
+{
+    gUnknown_0203CF40->unk_10[i] = malloc(size);
+    return gUnknown_0203CF40->unk_10[i];
+}
+
+void *sub_81C763C(int i)
+{
+    return gUnknown_0203CF40->unk_10[i];
+}
+
+void sub_81C7650(int i)
+{
+    if (gUnknown_0203CF40->unk_10[i] != NULL)
+    {
+        free(gUnknown_0203CF40->unk_10[i]);
+        gUnknown_0203CF40->unk_10[i] = NULL;
+    }
+}
