@@ -5,26 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C75D4
-sub_81C75D4: @ 81C75D4
-	push {lr}
-	bl sub_81C786C
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C75D4
-
-	thumb_func_start sub_81C75E0
-sub_81C75E0: @ 81C75E0
-	push {lr}
-	ldr r0, =gUnknown_0203CF40
-	ldr r0, [r0]
-	ldr r0, [r0]
-	bl _call_via_r0
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81C75E0
-
 	thumb_func_start sub_81C75F4
 sub_81C75F4: @ 81C75F4
 	push {lr}

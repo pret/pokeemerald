@@ -11,7 +11,7 @@
 // static types
 
 struct PokenavStruct_203CF40 {
-    int unk_00;
+    unsigned (*unk_00)(void);
     int unk_04;
     bool16 unk_08;
     bool32 anyMonsHaveRibbons;
@@ -28,7 +28,7 @@ static bool32 sub_81C7388(void);
 static void sub_81C7400(void);
 void sub_81C7418(void);
 static void sub_81C742C(u8 taskId);
-bool32 sub_81C756C(int a0);
+bool32 sub_81C756C(unsigned a0);
 bool32 sub_81C75D4(void);
 unsigned sub_81C75E0(void);
 void sub_81C75F4(void);
@@ -46,7 +46,7 @@ void sub_81C9430(void);
 
 extern const struct {
     bool32 (*unk_00)(void);
-    int unk_04;
+    unsigned (*unk_04)(void);
     bool32 (*unk_08)(void);
     u32 unk_0c;
     u32 unk_10;
@@ -129,7 +129,7 @@ static void sub_81C7360(struct PokenavStruct_203CF40 *data)
     data->unk_08 = FALSE;
     data->unk_04 = 0;
     data->anyMonsHaveRibbons = sub_81C7388();
-    data->unk_00 = 0;
+    data->unk_00 = NULL;
 }
 
 static bool32 sub_81C7388(void)
@@ -251,9 +251,9 @@ static void sub_81C742C(u8 taskId)
     }
 }
 
-bool32 sub_81C756C(int a0)
+bool32 sub_81C756C(unsigned a0)
 {
-    int v0 = a0 - 100000;
+    unsigned v0 = a0 - 100000;
     sub_81C75F4();
     if (gUnknown_0861F3EC[v0].unk_00() && gUnknown_0861F3EC[v0].unk_08())
     {
@@ -263,4 +263,14 @@ bool32 sub_81C756C(int a0)
         return TRUE;
     }
     return FALSE;
+}
+
+bool32 sub_81C75D4(void)
+{
+    return sub_81C786C();
+}
+
+unsigned sub_81C75E0(void)
+{
+    return gUnknown_0203CF40->unk_00();
 }
