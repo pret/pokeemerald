@@ -84,5 +84,6 @@ extern const u8 gText_RegisteredDataDeleted[];
 extern const u8 gUnknown_085EA79D[];
 extern const u8 gText_Confirm3[];
 extern const u8 gText_Cancel4[];
+extern const u8 gText_IsThisTheCorrectTime[];
 
 #endif //GUARD_STRINGS_H

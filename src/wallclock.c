@@ -15,6 +15,8 @@
 #include "unknown_task.h"
 #include "task.h"
 #include "strings.h"
+#include "sound.h"
+#include "songs.h"
 #include "decompress.h"
 
 // static types
@@ -23,8 +25,10 @@
 
 static void sub_8134C9C(void);
 static void sub_8134CB8(u8 taskId);
-void sub_8134DC4(u8 taskId);
-void sub_8134CE8(u8 taskId);
+static void sub_8134CE8(u8 taskId);
+static void sub_8134DC4(u8 taskId);
+static void c3_80BF560(u8 taskId);
+void sub_8134EA4(u8 taskId);
 void sub_8134F10(u8 taskId);
 u16 sub_8134FFC(u16 a0, u8 a1, u8 a2);
 void sub_813504C(u8 taskId, u8 a1);
@@ -674,7 +678,7 @@ static void sub_8134CB8(u8 taskId)
     }
 }
 
-void sub_8134CE8(u8 taskId)
+static void sub_8134CE8(u8 taskId)
 {
     if (gTasks[taskId].data[0] % 6)
     {
@@ -713,5 +717,33 @@ void sub_8134CE8(u8 taskId)
                 gTasks[taskId].data[6] = 0;
             }
         }
+    }
+}
+
+static void sub_8134DC4(u8 taskId)
+{
+    SetWindowBorderStyle(0, FALSE, 0x250, 0x0d);
+    PrintTextOnWindow(0, 1, gText_IsThisTheCorrectTime, 0, 1, 0, NULL);
+    PutWindowTilemap(0);
+    schedule_bg_copy_tilemap_to_vram(0);
+    CreateYesNoMenu(&gUnknown_085B21F4, 0x250, 0x0d, 1);
+    gTasks[taskId].func = c3_80BF560;
+}
+
+static void c3_80BF560(u8 taskId)
+{
+    switch (sub_8198C58())
+    {
+        case 0:
+            PlaySE(SE_SELECT);
+            gTasks[taskId].func = sub_8134EA4;
+            break;
+        case 1:
+        case -1:
+            PlaySE(SE_SELECT);
+            sub_8198070(0, FALSE);
+            ClearWindowTilemap(0);
+            gTasks[taskId].func = sub_8134CE8;
+            break;
     }
 }
