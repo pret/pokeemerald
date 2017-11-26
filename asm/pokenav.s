@@ -5,28 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C7990
-sub_81C7990: @ 81C7990
-	push {lr}
-	sub sp, 0x4
-	adds r3, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	mov r0, sp
-	strh r1, [r0]
-	lsls r3, 5
-	ldr r0, =gPlttBufferFaded + 0x200
-	adds r3, r0
-	ldr r2, =0x01000010
-	mov r0, sp
-	adds r1, r3, 0
-	bl CpuSet
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7990
-
 	thumb_func_start sub_81C79BC
 sub_81C79BC: @ 81C79BC
 	push {r4-r7,lr}

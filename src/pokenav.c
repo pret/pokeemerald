@@ -605,3 +605,8 @@ void sub_81C795C(struct SpritePalette *palettes)
         palettes++;
     }
 }
+
+void sub_81C7990(u32 offset, u16 value)
+{
+    CpuFill16(value, gPlttBufferFaded + offset * 16 + 0x100, 0x20);
+}
