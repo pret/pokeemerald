@@ -5,48 +5,6 @@
 
 	.text
 
-	thumb_func_start atk47_cmd47
-atk47_cmd47: @ 81C78D4
-	push {lr}
-	cmp r0, 0x1
-	beq _081C78EA
-	cmp r0, 0x1
-	bgt _081C78E4
-	cmp r0, 0
-	beq _081C78EA
-	b _081C7914
-_081C78E4:
-	cmp r0, 0x2
-	beq _081C78EE
-	b _081C7914
-_081C78EA:
-	movs r0, 0
-	b _081C7916
-_081C78EE:
-	movs r1, 0xC0
-	lsls r1, 1
-	movs r0, 0
-	movs r2, 0x1
-	bl ChangeBgY
-	ldr r1, =0x00001fff
-	cmp r0, r1
-	bhi _081C7908
-	movs r0, 0x2
-	b _081C7916
-	.pool
-_081C7908:
-	movs r1, 0x80
-	lsls r1, 6
-	movs r0, 0
-	movs r2, 0
-	bl ChangeBgY
-_081C7914:
-	movs r0, 0x4
-_081C7916:
-	pop {r1}
-	bx r1
-	thumb_func_end atk47_cmd47
-
 	thumb_func_start sub_81C791C
 sub_81C791C: @ 81C791C
 	push {lr}

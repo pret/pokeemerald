@@ -558,3 +558,23 @@ bool32 sub_81C78C0(void)
     struct PokenavStruct_81C76C4 *ptr = sub_81C763C(0);
     return sub_81C70D8(ptr->unk_00c);
 }
+
+int atk47_cmd47(int a0)
+{
+    switch (a0)
+    {
+        case 0:
+            return 0;
+        case 1:
+            return 0;
+        case 2:
+            if (ChangeBgY(0, 0x180, 1) < 0x2000)
+            {
+                return 2;
+            }
+            ChangeBgY(0, 0x2000, 0);
+            return 4;
+        default:
+            return 4;
+    }
+}
