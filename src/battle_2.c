@@ -120,7 +120,7 @@ extern u32 gBattleExecBuffer;
 extern u8 gMultiHitCounter;
 extern u8 gBattleMoveFlags;
 extern s32 gBattleMoveDamage;
-extern const u8* gSelectionBattleScripts[BATTLE_BANKS_COUNT];
+extern const u8* gPalaceSelectionBattleScripts[BATTLE_BANKS_COUNT];
 extern u16 gOriginallyLastPrintedMoves[BATTLE_BANKS_COUNT];
 extern u16 gOriginallyLastMoves[BATTLE_BANKS_COUNT];
 extern u16 gLastLandedMoves[BATTLE_BANKS_COUNT];
@@ -141,7 +141,7 @@ extern u16 gChosenMovesByBanks[BATTLE_BANKS_COUNT];
 extern u8 gCurrentActionFuncId;
 extern u8 gLastUsedAbility;
 extern u8 gUnknown_0203CF00[];
-extern const u8* gBattlescriptPtrsForSelection[BATTLE_BANKS_COUNT];
+extern const u8* gSelectionBattleScripts[BATTLE_BANKS_COUNT];
 extern const u8* gBattlescriptCurrInstr;
 extern u8 gActionsByTurnOrder[BATTLE_BANKS_COUNT];
 extern u8 gCurrentTurnActionNumber;
@@ -2751,7 +2751,7 @@ static void BattleStartClearSetData(void)
         gLockedMoves[i] = 0;
         gOriginallyLastPrintedMoves[i] = 0;
         gBattleResources->flags->flags[i] = 0;
-        gSelectionBattleScripts[i] = 0;
+        gPalaceSelectionBattleScripts[i] = 0;
     }
 
     for (i = 0; i < 2; i++)
@@ -3983,7 +3983,7 @@ static void HandleTurnActionSelectionState(void)
                                             | BATTLE_TYPE_x2000000))
                     {
                         RecordedBattle_ClearBankAction(gActiveBank, 1);
-                        gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_ActionSelectionItemsCantBeUsed;
+                        gSelectionBattleScripts[gActiveBank] = BattleScript_ActionSelectionItemsCantBeUsed;
                         gBattleCommunication[gActiveBank] = STATE_SELECTION_SCRIPT;
                         *(gBattleStruct->selectionScriptFinished + gActiveBank) = FALSE;
                         *(gBattleStruct->stateIdAfterSelScript + gActiveBank) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4028,7 +4028,7 @@ static void HandleTurnActionSelectionState(void)
                 case ACTION_SAFARI_ZONE_BALL:
                     if (IsPlayerPartyAndPokemonStorageFull())
                     {
-                        gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DAB11;
+                        gSelectionBattleScripts[gActiveBank] = BattleScript_PrintFullBox;
                         gBattleCommunication[gActiveBank] = STATE_SELECTION_SCRIPT;
                         *(gBattleStruct->selectionScriptFinished + gActiveBank) = FALSE;
                         *(gBattleStruct->stateIdAfterSelScript + gActiveBank) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4083,7 +4083,7 @@ static void HandleTurnActionSelectionState(void)
                     && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000)
                     && gBattleBufferB[gActiveBank][1] == ACTION_RUN)
                 {
-                    gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB9BA;
+                    gSelectionBattleScripts[gActiveBank] = BattleScript_82DB9BA;
                     gBattleCommunication[gActiveBank] = 8;
                     *(gBattleStruct->selectionScriptFinished + gActiveBank) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + gActiveBank) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4099,7 +4099,7 @@ static void HandleTurnActionSelectionState(void)
                 else if (IsRunningFromBattleImpossible() != 0
                          && gBattleBufferB[gActiveBank][1] == ACTION_RUN)
                 {
-                    gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DAB0B;
+                    gSelectionBattleScripts[gActiveBank] = BattleScript_82DAB0B;
                     gBattleCommunication[gActiveBank] = STATE_SELECTION_SCRIPT;
                     *(gBattleStruct->selectionScriptFinished + gActiveBank) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + gActiveBank) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4252,12 +4252,12 @@ static void HandleTurnActionSelectionState(void)
             else
             {
                 gBankAttacker = gActiveBank;
-                gBattlescriptCurrInstr = gBattlescriptPtrsForSelection[gActiveBank];
+                gBattlescriptCurrInstr = gSelectionBattleScripts[gActiveBank];
                 if (!(gBattleExecBuffer & ((gBitTable[gActiveBank]) | (0xF0000000) | (gBitTable[gActiveBank] << 4) | (gBitTable[gActiveBank] << 8) | (gBitTable[gActiveBank] << 0xC))))
                 {
                     gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
                 }
-                gBattlescriptPtrsForSelection[gActiveBank] = gBattlescriptCurrInstr;
+                gSelectionBattleScripts[gActiveBank] = gBattlescriptCurrInstr;
             }
             break;
         case STATE_WAIT_SET_BEFORE_ACTION:
@@ -4284,12 +4284,12 @@ static void HandleTurnActionSelectionState(void)
             else
             {
                 gBankAttacker = gActiveBank;
-                gBattlescriptCurrInstr = gBattlescriptPtrsForSelection[gActiveBank];
+                gBattlescriptCurrInstr = gSelectionBattleScripts[gActiveBank];
                 if (!(gBattleExecBuffer & ((gBitTable[gActiveBank]) | (0xF0000000) | (gBitTable[gActiveBank] << 4) | (gBitTable[gActiveBank] << 8) | (gBitTable[gActiveBank] << 0xC))))
                 {
                     gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
                 }
-                gBattlescriptPtrsForSelection[gActiveBank] = gBattlescriptCurrInstr;
+                gSelectionBattleScripts[gActiveBank] = gBattlescriptCurrInstr;
             }
             break;
         }
@@ -5217,11 +5217,11 @@ static void HandleAction_UseMove(void)
             gCurrentActionFuncId = 12;
             return;
         }
-        else if (gSelectionBattleScripts[gBankAttacker] != NULL)
+        else if (gPalaceSelectionBattleScripts[gBankAttacker] != NULL)
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = 4;
-            gBattlescriptCurrInstr = gSelectionBattleScripts[gBankAttacker];
-            gSelectionBattleScripts[gBankAttacker] = NULL;
+            gBattlescriptCurrInstr = gPalaceSelectionBattleScripts[gBankAttacker];
+            gPalaceSelectionBattleScripts[gBankAttacker] = NULL;
         }
         else
         {

@@ -363,10 +363,10 @@ gBattlescriptCurrInstr: @ 2024214
 gActionForBanks: @ 202421C
 	.space 0x4
 
-gBattlescriptPtrsForSelection: @ 2024220
+gSelectionBattleScripts: @ 2024220
 	.space 0x10
 
-gSelectionBattleScripts: @ 2024230
+gPalaceSelectionBattleScripts: @ 2024230
 	.space 0x10
 
 gOriginallyLastPrintedMoves: @ 2024240

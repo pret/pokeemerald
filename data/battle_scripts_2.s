@@ -58,7 +58,7 @@ BattleScript_SafariBallThrow::
 	handleballthrow
 
 BattleScript_SuccessBallThrow::
-	jumpifhalfword EQUAL, gLastUsedItem, 0x5, BattleScript_82DBD92
+	jumpifhalfword EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_82DBD92
 	incrementgamestat 0xB
 BattleScript_82DBD92::
 	printstring STRINGID_GOTCHAPKMNCAUGHT

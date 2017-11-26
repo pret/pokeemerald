@@ -22,8 +22,8 @@
 #include "link.h"
 
 extern const u8* gBattlescriptCurrInstr;
-extern const u8* gBattlescriptPtrsForSelection[BATTLE_BANKS_COUNT];
 extern const u8* gSelectionBattleScripts[BATTLE_BANKS_COUNT];
+extern const u8* gPalaceSelectionBattleScripts[BATTLE_BANKS_COUNT];
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern u8 gActiveBank;
 extern u8 gStringBank;
@@ -363,12 +363,12 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gSelectionBattleScripts[gActiveBank] = BattleScript_82DAE2A;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DAE2A;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DAE1F;
+            gSelectionBattleScripts[gActiveBank] = BattleScript_SelectingDisabledMove;
             limitations = 1;
         }
     }
@@ -378,12 +378,12 @@ u8 TrySetCantSelectMoveBattleScript(void)
         CancelMultiTurnMoves(gActiveBank);
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gSelectionBattleScripts[gActiveBank] = BattleScript_82DB098;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DB098;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB089;
+            gSelectionBattleScripts[gActiveBank] = BattleScript_SelectingTormentedMove;
             limitations++;
         }
     }
@@ -393,12 +393,12 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gSelectionBattleScripts[gActiveBank] = BattleScript_82DB0AF;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DB0AF;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB0A0;
+            gSelectionBattleScripts[gActiveBank] = BattleScript_SelectingNotAllowedMoveTaunt;
             limitations++;
         }
     }
@@ -408,12 +408,12 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gSelectionBattleScripts[gActiveBank] = BattleScript_82DB185;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DB185;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB181;
+            gSelectionBattleScripts[gActiveBank] = BattleScript_SelectingImprisionedMove;
             limitations++;
         }
     }
@@ -435,7 +435,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB812;
+            gSelectionBattleScripts[gActiveBank] = BattleScript_SelectingNotAllowedMoveChoiceItem;
             limitations++;
         }
     }
@@ -448,7 +448,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
         else
         {
-            gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_82DB076;
+            gSelectionBattleScripts[gActiveBank] = BattleScript_SelectingMoveWithNoPP;
             limitations++;
         }
     }
@@ -499,7 +499,7 @@ bool8 AreAllMovesUnusable(void)
     if (unusable == 0xF) // all moves are unusable
     {
         gProtectStructs[gActiveBank].onlyStruggle = 1;
-        gBattlescriptPtrsForSelection[gActiveBank] = BattleScript_NoMovesLeft;
+        gSelectionBattleScripts[gActiveBank] = BattleScript_NoMovesLeft;
     }
     else
     {
@@ -583,7 +583,7 @@ u8 UpdateTurnCounters(void)
                     if (--gSideTimers[sideBank].reflectTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_REFLECT;
-                        BattleScriptExecute(BattleScript_82DACFA);
+                        BattleScriptExecute(BattleScript_SideStatusWoreOff);
                         PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_REFLECT);
                         effect++;
                     }
@@ -608,7 +608,7 @@ u8 UpdateTurnCounters(void)
                     if (--gSideTimers[sideBank].lightscreenTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_LIGHTSCREEN;
-                        BattleScriptExecute(BattleScript_82DACFA);
+                        BattleScriptExecute(BattleScript_SideStatusWoreOff);
                         gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
                         PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_LIGHT_SCREEN);
                         effect++;
@@ -633,7 +633,7 @@ u8 UpdateTurnCounters(void)
                  && --gSideTimers[sideBank].mistTimer == 0)
                 {
                     gSideAffecting[sideBank] &= ~SIDE_STATUS_MIST;
-                    BattleScriptExecute(BattleScript_82DACFA);
+                    BattleScriptExecute(BattleScript_SideStatusWoreOff);
                     gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_MIST);
                     effect++;
@@ -658,7 +658,7 @@ u8 UpdateTurnCounters(void)
                     if (--gSideTimers[sideBank].safeguardTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_SAFEGUARD;
-                        BattleScriptExecute(BattleScript_82DAD0B);
+                        BattleScriptExecute(BattleScript_SafeguardEnds);
                         effect++;
                     }
                 }
@@ -710,10 +710,15 @@ u8 UpdateTurnCounters(void)
                         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 }
                 else if (gBattleWeather & WEATHER_RAIN_DOWNPOUR)
+                {
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                }
                 else
+                {
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                BattleScriptExecute(BattleScript_82DAC2C);
+                }
+
+                BattleScriptExecute(BattleScript_RainContinuesOrEnds);
                 effect++;
             }
             gBattleStruct->turncountersTracker++;
@@ -724,12 +729,14 @@ u8 UpdateTurnCounters(void)
                 if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~WEATHER_SANDSTORM_TEMPORARY;
-                    gBattlescriptCurrInstr = BattleScript_82DACC9;
+                    gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
                 }
                 else
-                    gBattlescriptCurrInstr = BattleScript_82DAC47;
+                {
+                    gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
+                }
 
-                gBattleScripting.animArg1 = 0xC;
+                gBattleScripting.animArg1 = B_ANIM_SANDSTORM_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
@@ -742,10 +749,12 @@ u8 UpdateTurnCounters(void)
                 if (!(gBattleWeather & WEATHER_SUN_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~WEATHER_SUN_TEMPORARY;
-                    gBattlescriptCurrInstr = BattleScript_82DACE0;
+                    gBattlescriptCurrInstr = BattleScript_SunlightFaded;
                 }
                 else
-                    gBattlescriptCurrInstr = BattleScript_82DACD2;
+                {
+                    gBattlescriptCurrInstr = BattleScript_SunlightContinues;
+                }
 
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
@@ -758,12 +767,13 @@ u8 UpdateTurnCounters(void)
                 if (--gWishFutureKnock.weatherDuration == 0)
                 {
                     gBattleWeather &= ~WEATHER_HAIL;
-                    gBattlescriptCurrInstr = BattleScript_82DACC9;
+                    gBattlescriptCurrInstr = BattleScript_SandStormHailEnds;
                 }
                 else
                 {
-                    gBattlescriptCurrInstr = BattleScript_82DAC47;
+                    gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
                 }
+
                 gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                 BattleScriptExecute(gBattlescriptCurrInstr);
@@ -1828,7 +1838,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 if (effect)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = weather_get_current();
-                    BattleScriptPushCursorAndCallback(BattleScript_82DACE7);
+                    BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
                 }
                 break;
             case ABILITY_DRIZZLE:
@@ -2034,9 +2044,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (gBattleMons[bank].maxHP == gBattleMons[bank].hp)
                     {
                         if ((gProtectStructs[gBankAttacker].notFirstStrike))
-                            gBattlescriptCurrInstr = BattleScript_82DB592;
+                            gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless;
                         else
-                            gBattlescriptCurrInstr = BattleScript_82DB591;
+                            gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless_PPLoss;
                     }
                     else
                     {
@@ -2174,86 +2184,84 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_IMMUNITY: // 5
+            for (bank = 0; bank < gNoOfAllBanks; bank++)
             {
-                for (bank = 0; bank < gNoOfAllBanks; bank++)
+                switch (gBattleMons[bank].ability)
                 {
-                    switch (gBattleMons[bank].ability)
+                case ABILITY_IMMUNITY:
+                    if (gBattleMons[bank].status1 & (STATUS_POISON | STATUS_TOXIC_POISON | STATUS_TOXIC_COUNTER))
                     {
-                    case ABILITY_IMMUNITY:
-                        if (gBattleMons[bank].status1 & (STATUS_POISON | STATUS_TOXIC_POISON | STATUS_TOXIC_COUNTER))
-                        {
-                            StringCopy(gBattleTextBuff1, gStatusConditionString_PoisonJpn);
-                            effect = 1;
-                        }
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_PoisonJpn);
+                        effect = 1;
+                    }
+                    break;
+                case ABILITY_OWN_TEMPO:
+                    if (gBattleMons[bank].status2 & STATUS2_CONFUSION)
+                    {
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_ConfusionJpn);
+                        effect = 2;
+                    }
+                    break;
+                case ABILITY_LIMBER:
+                    if (gBattleMons[bank].status1 & STATUS_PARALYSIS)
+                    {
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_ParalysisJpn);
+                        effect = 1;
+                    }
+                    break;
+                case ABILITY_INSOMNIA:
+                case ABILITY_VITAL_SPIRIT:
+                    if (gBattleMons[bank].status1 & STATUS_SLEEP)
+                    {
+                        gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE);
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_SleepJpn);
+                        effect = 1;
+                    }
+                    break;
+                case ABILITY_WATER_VEIL:
+                    if (gBattleMons[bank].status1 & STATUS_BURN)
+                    {
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
+                        effect = 1;
+                    }
+                    break;
+                case ABILITY_MAGMA_ARMOR:
+                    if (gBattleMons[bank].status1 & STATUS_FREEZE)
+                    {
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
+                        effect = 1;
+                    }
+                    break;
+                case ABILITY_OBLIVIOUS:
+                    if (gBattleMons[bank].status2 & STATUS2_INFATUATION)
+                    {
+                        StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
+                        effect = 3;
+                    }
+                    break;
+                }
+                if (effect)
+                {
+                    switch (effect)
+                    {
+                    case 1: // status cleared
+                        gBattleMons[bank].status1 = 0;
                         break;
-                    case ABILITY_OWN_TEMPO:
-                        if (gBattleMons[bank].status2 & STATUS2_CONFUSION)
-                        {
-                            StringCopy(gBattleTextBuff1, gStatusConditionString_ConfusionJpn);
-                            effect = 2;
-                        }
+                    case 2: // get rid of confusion
+                        gBattleMons[bank].status2 &= ~(STATUS2_CONFUSION);
                         break;
-                    case ABILITY_LIMBER:
-                        if (gBattleMons[bank].status1 & STATUS_PARALYSIS)
-                        {
-                            StringCopy(gBattleTextBuff1, gStatusConditionString_ParalysisJpn);
-                            effect = 1;
-                        }
-                        break;
-                    case ABILITY_INSOMNIA:
-                    case ABILITY_VITAL_SPIRIT:
-                        if (gBattleMons[bank].status1 & STATUS_SLEEP)
-                        {
-                            gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE);
-                            StringCopy(gBattleTextBuff1, gStatusConditionString_SleepJpn);
-                            effect = 1;
-                        }
-                        break;
-                    case ABILITY_WATER_VEIL:
-                        if (gBattleMons[bank].status1 & STATUS_BURN)
-                        {
-                            StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
-                            effect = 1;
-                        }
-                        break;
-                    case ABILITY_MAGMA_ARMOR:
-                        if (gBattleMons[bank].status1 & STATUS_FREEZE)
-                        {
-                            StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
-                            effect = 1;
-                        }
-                        break;
-                    case ABILITY_OBLIVIOUS:
-                        if (gBattleMons[bank].status2 & STATUS2_INFATUATION)
-                        {
-                            StringCopy(gBattleTextBuff1, gStatusConditionString_LoveJpn);
-                            effect = 3;
-                        }
+                    case 3: // get rid of infatuation
+                        gBattleMons[bank].status2 &= ~(STATUS2_INFATUATION);
                         break;
                     }
-                    if (effect)
-                    {
-                        switch (effect)
-                        {
-                        case 1: // status cleared
-                            gBattleMons[bank].status1 = 0;
-                            break;
-                        case 2: // get rid of confusion
-                            gBattleMons[bank].status2 &= ~(STATUS2_CONFUSION);
-                            break;
-                        case 3: // get rid of infatuation
-                            gBattleMons[bank].status2 &= ~(STATUS2_INFATUATION);
-                            break;
-                        }
 
-                        BattleScriptPushCursor();
-                        gBattlescriptCurrInstr = BattleScript_82DB68C;
-                        gBattleScripting.bank = bank;
-                        gActiveBank = bank;
-                        EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
-                        MarkBufferBankForExecution(gActiveBank);
-                        return effect;
-                    }
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
+                    gBattleScripting.bank = bank;
+                    gActiveBank = bank;
+                    EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
+                    MarkBufferBankForExecution(gActiveBank);
+                    return effect;
                 }
             }
             break;
@@ -3387,7 +3395,7 @@ u8 IsPokeDisobedient(void)
             } while (gBitTable[gCurrMovePos] & calc);
 
             gRandomMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
-            gBattlescriptCurrInstr = BattleScript_82DB6A5;
+            gBattlescriptCurrInstr = BattleScript_IgnoresAndUsesRandomMove;
             gBankTarget = GetMoveTarget(gRandomMove, 0);
             gHitMarker |= HITMARKER_x200000;
             return 2;
@@ -3409,7 +3417,7 @@ u8 IsPokeDisobedient(void)
             }
             if (i == gNoOfAllBanks)
             {
-                gBattlescriptCurrInstr = BattleScript_82DB6D9;
+                gBattlescriptCurrInstr = BattleScript_IgnoresAndFallsAsleep;
                 return 1;
             }
         }
