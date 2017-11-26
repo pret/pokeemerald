@@ -23,7 +23,7 @@
 
 extern const u8* gBattlescriptCurrInstr;
 extern const u8* gBattlescriptPtrsForSelection[BATTLE_BANKS_COUNT];
-extern const u8* gUnknown_02024230[BATTLE_BANKS_COUNT];
+extern const u8* gSelectionBattleScripts[BATTLE_BANKS_COUNT];
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern u8 gActiveBank;
 extern u8 gStringBank;
@@ -43,7 +43,7 @@ extern s32 gBattleMoveDamage;
 extern struct BattleEnigmaBerry gEnigmaBerries[BATTLE_BANKS_COUNT];
 extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
 extern u32 gBattleTypeFlags;
-extern u16 gLastUsedMovesByBanks[BATTLE_BANKS_COUNT];
+extern u16 gOriginallyLastMoves[BATTLE_BANKS_COUNT];
 extern u32 gHitMarker;
 extern u8 gEffectBank;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
@@ -363,7 +363,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gUnknown_02024230[gActiveBank] = BattleScript_82DAE2A;
+            gSelectionBattleScripts[gActiveBank] = BattleScript_82DAE2A;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -373,12 +373,12 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
     }
 
-    if (move == gLastUsedMovesByBanks[gActiveBank] && move != MOVE_STRUGGLE && (gBattleMons[gActiveBank].status2 & STATUS2_TORMENT))
+    if (move == gOriginallyLastMoves[gActiveBank] && move != MOVE_STRUGGLE && (gBattleMons[gActiveBank].status2 & STATUS2_TORMENT))
     {
         CancelMultiTurnMoves(gActiveBank);
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gUnknown_02024230[gActiveBank] = BattleScript_82DB098;
+            gSelectionBattleScripts[gActiveBank] = BattleScript_82DB098;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -393,7 +393,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gUnknown_02024230[gActiveBank] = BattleScript_82DB0AF;
+            gSelectionBattleScripts[gActiveBank] = BattleScript_82DB0AF;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -408,7 +408,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gUnknown_02024230[gActiveBank] = BattleScript_82DB185;
+            gSelectionBattleScripts[gActiveBank] = BattleScript_82DB185;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -477,7 +477,7 @@ u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check)
             unusableMoves |= gBitTable[i];
         if (gBattleMons[bank].moves[i] == gDisableStructs[bank].disabledMove && check & MOVE_LIMITATION_DISABLED)
             unusableMoves |= gBitTable[i];
-        if (gBattleMons[bank].moves[i] == gLastUsedMovesByBanks[bank] && check & MOVE_LIMITATION_TORMENTED && gBattleMons[bank].status2 & STATUS2_TORMENT)
+        if (gBattleMons[bank].moves[i] == gOriginallyLastMoves[bank] && check & MOVE_LIMITATION_TORMENTED && gBattleMons[bank].status2 & STATUS2_TORMENT)
             unusableMoves |= gBitTable[i];
         if (gDisableStructs[bank].tauntTimer1 && check & MOVE_LIMITATION_TAUNT && gBattleMoves[gBattleMons[bank].moves[i]].power == 0)
             unusableMoves |= gBitTable[i];

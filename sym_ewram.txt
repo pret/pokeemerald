@@ -366,28 +366,28 @@ gActionForBanks: @ 202421C
 gBattlescriptPtrsForSelection: @ 2024220
 	.space 0x10
 
-gUnknown_02024230: @ 2024230
+gSelectionBattleScripts: @ 2024230
 	.space 0x10
 
-gUnknownMovesUsedByBanks: @ 2024240
+gOriginallyLastPrintedMoves: @ 2024240
 	.space 0x8
 
-gLastUsedMovesByBanks: @ 2024248
+gOriginallyLastMoves: @ 2024248
 	.space 0x8
 
-gTurnMovesHitWith: @ 2024250
+gLastLandedMoves: @ 2024250
 	.space 0x8
 
-gUnknown_02024258: @ 2024258
+gLastHitByType: @ 2024258
 	.space 0x8
 
-gUnknown_02024260: @ 2024260
+gLastMoves: @ 2024260
 	.space 0x8
 
 gLockedMoves: @ 2024268
 	.space 0x8
 
-gTurnMovesHitBy: @ 2024270
+gLastHitBy: @ 2024270
 	.space 0x4
 
 gChosenMovesByBanks: @ 2024274

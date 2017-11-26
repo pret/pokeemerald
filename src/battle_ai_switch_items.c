@@ -16,8 +16,8 @@ extern u32 gBattleTypeFlags;
 extern u32 gStatuses3[BATTLE_BANKS_COUNT];
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
-extern u16 gTurnMovesHitWith[BATTLE_BANKS_COUNT];
-extern u8 gTurnMovesHitBy[BATTLE_BANKS_COUNT];
+extern u16 gLastLandedMoves[BATTLE_BANKS_COUNT];
+extern u8 gLastHitBy[BATTLE_BANKS_COUNT];
 extern u16 gDynamicBasePower;
 extern u8 gBattleMoveFlags;
 extern u8 gCritMultiplier;
@@ -141,11 +141,11 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
 
     if (HasSuperEffectiveMoveAgainstOpponents(TRUE) && Random() % 3 != 0)
         return FALSE;
-    if (gTurnMovesHitWith[gActiveBank] == 0)
+    if (gLastLandedMoves[gActiveBank] == 0)
         return FALSE;
-    if (gTurnMovesHitWith[gActiveBank] == 0xFFFF)
+    if (gLastLandedMoves[gActiveBank] == 0xFFFF)
         return FALSE;
-    if (gBattleMoves[gTurnMovesHitWith[gActiveBank]].power == 0)
+    if (gBattleMoves[gLastLandedMoves[gActiveBank]].power == 0)
         return FALSE;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -162,11 +162,11 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         bankIn2 = gActiveBank;
     }
 
-    if (gBattleMoves[gTurnMovesHitWith[gActiveBank]].type == TYPE_FIRE)
+    if (gBattleMoves[gLastLandedMoves[gActiveBank]].type == TYPE_FIRE)
         absorbingTypeAbility = ABILITY_FLASH_FIRE;
-    else if (gBattleMoves[gTurnMovesHitWith[gActiveBank]].type == TYPE_WATER)
+    else if (gBattleMoves[gLastLandedMoves[gActiveBank]].type == TYPE_WATER)
         absorbingTypeAbility = ABILITY_WATER_ABSORB;
-    else if (gBattleMoves[gTurnMovesHitWith[gActiveBank]].type == TYPE_ELECTRIC)
+    else if (gBattleMoves[gLastLandedMoves[gActiveBank]].type == TYPE_ELECTRIC)
         absorbingTypeAbility = ABILITY_VOLT_ABSORB;
     else
         return FALSE;
@@ -238,13 +238,13 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if (gBattleMons[gActiveBank].hp < gBattleMons[gActiveBank].maxHP / 2)
         return FALSE;
 
-    if ((gTurnMovesHitWith[gActiveBank] == 0 || gTurnMovesHitWith[gActiveBank] == 0xFFFF) && Random() & 1)
+    if ((gLastLandedMoves[gActiveBank] == 0 || gLastLandedMoves[gActiveBank] == 0xFFFF) && Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
         EmitTwoReturnValues(1, ACTION_SWITCH, 0);
         return TRUE;
     }
-    else if (gBattleMoves[gTurnMovesHitWith[gActiveBank]].power == 0 && Random() & 1)
+    else if (gBattleMoves[gLastLandedMoves[gActiveBank]].power == 0 && Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBank) = 6;
         EmitTwoReturnValues(1, ACTION_SWITCH, 0);
@@ -345,13 +345,13 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
     u16 move;
     u8 moveFlags;
 
-    if (gTurnMovesHitWith[gActiveBank] == 0)
+    if (gLastLandedMoves[gActiveBank] == 0)
         return FALSE;
-    if (gTurnMovesHitWith[gActiveBank] == 0xFFFF)
+    if (gLastLandedMoves[gActiveBank] == 0xFFFF)
         return FALSE;
-    if (gTurnMovesHitBy[gActiveBank] == 0xFF)
+    if (gLastHitBy[gActiveBank] == 0xFF)
         return FALSE;
-    if (gBattleMoves[gTurnMovesHitWith[gActiveBank]].power == 0)
+    if (gBattleMoves[gLastLandedMoves[gActiveBank]].power == 0)
         return FALSE;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -411,10 +411,10 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
         else
             monAbility = gBaseStats[species].ability1;
 
-        moveFlags = AI_TypeCalc(gTurnMovesHitWith[gActiveBank], species, monAbility);
+        moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBank], species, monAbility);
         if (moveFlags & flags)
         {
-            bankIn1 = gTurnMovesHitBy[gActiveBank];
+            bankIn1 = gLastHitBy[gActiveBank];
 
             for (j = 0; j < 4; j++)
             {

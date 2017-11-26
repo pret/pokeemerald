@@ -120,14 +120,14 @@ extern u32 gBattleExecBuffer;
 extern u8 gMultiHitCounter;
 extern u8 gBattleMoveFlags;
 extern s32 gBattleMoveDamage;
-extern const u8* gUnknown_02024230[BATTLE_BANKS_COUNT];
-extern u16 gUnknownMovesUsedByBanks[BATTLE_BANKS_COUNT];
-extern u16 gLastUsedMovesByBanks[BATTLE_BANKS_COUNT];
-extern u16 gTurnMovesHitWith[BATTLE_BANKS_COUNT];
-extern u16 gUnknown_02024258[BATTLE_BANKS_COUNT];
-extern u16 gUnknown_02024260[BATTLE_BANKS_COUNT];
+extern const u8* gSelectionBattleScripts[BATTLE_BANKS_COUNT];
+extern u16 gOriginallyLastPrintedMoves[BATTLE_BANKS_COUNT];
+extern u16 gOriginallyLastMoves[BATTLE_BANKS_COUNT];
+extern u16 gLastLandedMoves[BATTLE_BANKS_COUNT];
+extern u16 gLastHitByType[BATTLE_BANKS_COUNT];
+extern u16 gLastMoves[BATTLE_BANKS_COUNT];
 extern u16 gLockedMoves[BATTLE_BANKS_COUNT];
-extern u8 gTurnMovesHitBy[BATTLE_BANKS_COUNT];
+extern u8 gLastHitBy[BATTLE_BANKS_COUNT];
 extern u8 gUnknown_02024284[BATTLE_BANKS_COUNT];
 extern u32 gStatuses3[BATTLE_BANKS_COUNT];
 extern u16 gSideAffecting[2];
@@ -2743,15 +2743,15 @@ static void BattleStartClearSetData(void)
 
         gDisableStructs[i].isFirstTurn = 2;
         gUnknown_02024284[i] = 0;
-        gLastUsedMovesByBanks[i] = 0;
-        gTurnMovesHitWith[i] = 0;
-        gUnknown_02024258[i] = 0;
-        gUnknown_02024260[i] = 0;
-        gTurnMovesHitBy[i] = 0xFF;
+        gOriginallyLastMoves[i] = 0;
+        gLastLandedMoves[i] = 0;
+        gLastHitByType[i] = 0;
+        gLastMoves[i] = 0;
+        gLastHitBy[i] = 0xFF;
         gLockedMoves[i] = 0;
-        gUnknownMovesUsedByBanks[i] = 0;
+        gOriginallyLastPrintedMoves[i] = 0;
         gBattleResources->flags->flags[i] = 0;
-        gUnknown_02024230[i] = 0;
+        gSelectionBattleScripts[i] = 0;
     }
 
     for (i = 0; i < 2; i++)
@@ -2908,14 +2908,14 @@ void SwitchInClearSetData(void)
     }
 
     gBattleMoveFlags = 0;
-    gDisableStructs[gActiveBank].isFirstTurn= 2;
+    gDisableStructs[gActiveBank].isFirstTurn = 2;
     gDisableStructs[gActiveBank].truantUnknownBit = disableStructCopy.truantUnknownBit;
-    gLastUsedMovesByBanks[gActiveBank] = 0;
-    gTurnMovesHitWith[gActiveBank] = 0;
-    gUnknown_02024258[gActiveBank] = 0;
-    gUnknown_02024260[gActiveBank] = 0;
-    gUnknownMovesUsedByBanks[gActiveBank] = 0;
-    gTurnMovesHitBy[gActiveBank] = 0xFF;
+    gOriginallyLastMoves[gActiveBank] = 0;
+    gLastLandedMoves[gActiveBank] = 0;
+    gLastHitByType[gActiveBank] = 0;
+    gLastMoves[gActiveBank] = 0;
+    gOriginallyLastPrintedMoves[gActiveBank] = 0;
+    gLastHitBy[gActiveBank] = 0xFF;
 
     *(gBattleStruct->mirrorMoves + gActiveBank * 2 + 0) = 0;
     *(gBattleStruct->mirrorMoves + gActiveBank * 2 + 1) = 0;
@@ -3002,12 +3002,12 @@ void FaintClearSetData(void)
 
     gDisableStructs[gActiveBank].isFirstTurn = 2;
 
-    gLastUsedMovesByBanks[gActiveBank] = 0;
-    gTurnMovesHitWith[gActiveBank] = 0;
-    gUnknown_02024258[gActiveBank] = 0;
-    gUnknown_02024260[gActiveBank] = 0;
-    gUnknownMovesUsedByBanks[gActiveBank] = 0;
-    gTurnMovesHitBy[gActiveBank] = 0xFF;
+    gOriginallyLastMoves[gActiveBank] = 0;
+    gLastLandedMoves[gActiveBank] = 0;
+    gLastHitByType[gActiveBank] = 0;
+    gLastMoves[gActiveBank] = 0;
+    gOriginallyLastPrintedMoves[gActiveBank] = 0;
+    gLastHitBy[gActiveBank] = 0xFF;
 
     *(u8*)((u8*)(&gBattleStruct->choicedMove[gActiveBank]) + 0) = 0;
     *(u8*)((u8*)(&gBattleStruct->choicedMove[gActiveBank]) + 1) = 0;
@@ -3189,7 +3189,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
@@ -3207,7 +3207,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
         EmitDrawPartyStatusSummary(0, hpStatus, 0x80);
         MarkBufferBankForExecution(gActiveBank);
 
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
              || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
@@ -5217,11 +5217,11 @@ static void HandleAction_UseMove(void)
             gCurrentActionFuncId = 12;
             return;
         }
-        else if (gUnknown_02024230[gBankAttacker] != NULL)
+        else if (gSelectionBattleScripts[gBankAttacker] != NULL)
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = 4;
-            gBattlescriptCurrInstr = gUnknown_02024230[gBankAttacker];
-            gUnknown_02024230[gBankAttacker] = NULL;
+            gBattlescriptCurrInstr = gSelectionBattleScripts[gBankAttacker];
+            gSelectionBattleScripts[gBankAttacker] = NULL;
         }
         else
         {
@@ -5600,8 +5600,8 @@ static void HandleAction_ActionFinished(void)
     gBattleMoveFlags = 0;
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
-    gTurnMovesHitWith[gBankAttacker] = 0;
-    gUnknown_02024258[gBankAttacker] = 0;
+    gLastLandedMoves[gBankAttacker] = 0;
+    gLastHitByType[gBankAttacker] = 0;
     gBattleStruct->dynamicMoveType = 0;
     gDynamicBasePower = 0;
     gBattleScripting.atk49_state = 0;

@@ -197,7 +197,7 @@
 struct StringInfoBattle
 {
     u16 currentMove;
-    u16 lastMove;
+    u16 originallyUsedMove;
     u16 lastItem;
     u8 lastAbility;
     u8 scrActive;

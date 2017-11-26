@@ -1120,7 +1120,7 @@ void EmitPrintString(u8 bufferId, u16 stringID)
 
     stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
-    stringInfo->lastMove = gOriginallyUsedMove;
+    stringInfo->originallyUsedMove = gOriginallyUsedMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = gBattleScripting.bank;
@@ -1152,7 +1152,7 @@ void EmitPrintSelectionString(u8 bufferId, u16 stringID)
 
     stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
-    stringInfo->lastMove = gOriginallyUsedMove;
+    stringInfo->originallyUsedMove = gOriginallyUsedMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = gBattleScripting.bank;

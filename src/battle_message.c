@@ -1916,11 +1916,11 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 else
                     toCpy = gMoveNames[gStringInfo->currentMove];
                 break;
-            case B_TXT_LAST_MOVE: // last used move name
-                if (gStringInfo->lastMove > LAST_MOVE_INDEX)
+            case B_TXT_LAST_MOVE: // originally used move name
+                if (gStringInfo->originallyUsedMove > LAST_MOVE_INDEX)
                     toCpy = gText_UnknownMoveTypes[gBattleStruct->stringMoveType];
                 else
-                    toCpy = gMoveNames[gStringInfo->lastMove];
+                    toCpy = gMoveNames[gStringInfo->originallyUsedMove];
                 break;
             case B_TXT_LAST_ITEM: // last used item
                 if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
