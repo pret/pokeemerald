@@ -28,7 +28,9 @@ struct PokenavStruct_203CF40 {
 }; // size=0x5c
 
 struct PokenavStruct_81C76C4 {
-    u8 filler_000[12];
+    void (*unk_000)(u32);
+    u32 (*unk_004)(void);
+    u32 unk_008;
     unsigned unk_00c;
     u8 filler_010[0x1c];
     u8 unk_2c[0x800];
@@ -42,21 +44,23 @@ static void sub_81C72BC(void);
 static void sub_81C7360(struct PokenavStruct_203CF40 *data);
 static bool32 sub_81C7388(void);
 static void sub_81C7400(void);
-void sub_81C7418(void);
+static void sub_81C7418(void);
 static void sub_81C742C(u8 taskId);
-bool32 sub_81C756C(unsigned a0);
-bool32 sub_81C75D4(void);
-unsigned sub_81C75E0(void);
-void sub_81C75F4(void);
+static bool32 sub_81C756C(unsigned a0);
+static bool32 sub_81C75D4(void);
+static unsigned sub_81C75E0(void);
+static void sub_81C75F4(void);
 void sub_81C7650(int i);
-bool32 sub_81C76C4(void);
-bool32 sub_81C76FC(void);
-void sub_81C7710(void);
-bool32 sub_81C7738(void);
-int sub_81C7764(int a0);
-void sub_81C7834(u32 (*a0)(void), u32 (*a1)(void));
-void sub_81C7850(unsigned a0);
-bool32 sub_81C786C(void);
+static bool32 sub_81C76C4(void);
+static u32 sub_81C76FC(void);
+static void sub_81C7710(void);
+static bool32 sub_81C7738(void);
+static int sub_81C7764(int a0);
+static void sub_81C7834(void (*func0)(u32), u32 (*func1)(void));
+static void sub_81C7850(unsigned arg);
+static u32 sub_81C786C(void);
+int atk47_cmd47(int a0);
+int sub_81C791C(int a0);
 void sub_81C7C94(void);
 bool32 sub_81C9298(void);
 bool32 sub_81C92CC(void);
@@ -67,7 +71,7 @@ bool32 sub_81C941C(void);
 bool32 sub_81C9924(void);
 void sub_81C9430(void);
 bool32 sub_81C9940(void);
-bool32 sub_81C9990(void);
+void sub_81C9990(u32 a0);
 bool32 sub_81C99C0(void);
 void sub_81C99D4(void);
 void sub_81CAADC(void);
@@ -75,14 +79,14 @@ bool32 sub_81CAAE8(void);
 bool32 sub_81CAB24(void);
 void sub_81CAB38(void);
 bool32 sub_81CB260(void);
-bool32 sub_81CB29C(void);
+void sub_81CB29C(u32);
 bool32 sub_81CB2CC(void);
 void sub_81CB2E0(void);
 bool32 sub_81CC4D4(void);
 void sub_81CC524(void);
 bool32 sub_81CC554(void);
 bool32 sub_81CC5F4(void);
-bool32 sub_81CC62C(void);
+void sub_81CC62C(u32);
 bool32 sub_81CC65C(void);
 void sub_81CC670(void);
 bool32 sub_81CCFD8(void);
@@ -90,7 +94,7 @@ bool32 sub_81CD024(void);
 bool32 sub_81CD070(void);
 void sub_81CD1C0(void);
 bool32 sub_81CDDD4(void);
-bool32 sub_81CDE2C(void);
+void sub_81CDE2C(u32);
 bool32 sub_81CDE64(void);
 void sub_81CECA0(void);
 bool32 sub_81CEF3C(void);
@@ -99,7 +103,7 @@ bool32 sub_81CEFDC(void);
 void sub_81CEFF0(void);
 bool32 sub_81CF330(void);
 bool32 sub_81CF368(void);
-bool32 sub_81CF3A0(void);
+void sub_81CF3A0(u32);
 bool32 sub_81CF3D0(void);
 void sub_81CF3F8(void);
 bool32 sub_81CF9BC(void);
@@ -108,14 +112,14 @@ bool32 sub_81CFA34(void);
 void sub_81CFA48(void);
 bool32 sub_81CFDD0(void);
 bool32 sub_81CFE08(void);
-bool32 sub_81CFE40(void);
+void sub_81CFE40(u32);
 bool32 sub_81CFE70(void);
 void sub_81CFE98(void);
 bool32 sub_81D0450(void);
 bool32 sub_81D04A0(void);
 void sub_81D04B8(void);
 bool32 sub_81D0978(void);
-bool32 sub_81D09B0(void);
+void sub_81D09B0(u32 a0);
 bool32 sub_81D09E0(void);
 void sub_81D09F4(void);
 void sub_81C7944(const u16 *src, unsigned offset, u16 size);
@@ -129,7 +133,7 @@ const struct {
     bool32 (*unk_00)(void);
     unsigned (*unk_04)(void);
     bool32 (*unk_08)(void);
-    u32 (*unk_0c)(void);
+    void (*unk_0c)(u32);
     u32 (*unk_10)(void);
     void (*unk_14)(void);
     void (*unk_18)(void);
@@ -264,7 +268,7 @@ static void sub_81C7400(void)
     UpdatePaletteFade();
 }
 
-void sub_81C7418(void)
+static void sub_81C7418(void)
 {
     TransferPlttBuffer();
     LoadOam();
@@ -350,7 +354,7 @@ static void sub_81C742C(u8 taskId)
     }
 }
 
-bool32 sub_81C756C(unsigned a0)
+static bool32 sub_81C756C(unsigned a0)
 {
     unsigned v0 = a0 - 100000;
     sub_81C75F4();
@@ -364,17 +368,17 @@ bool32 sub_81C756C(unsigned a0)
     return FALSE;
 }
 
-bool32 sub_81C75D4(void)
+static bool32 sub_81C75D4(void)
 {
     return sub_81C786C();
 }
 
-unsigned sub_81C75E0(void)
+static unsigned sub_81C75E0(void)
 {
     return gUnknown_0203CF40->unk_00();
 }
 
-void sub_81C75F4(void)
+static void sub_81C75F4(void)
 {
     InitKeys();
 }
@@ -437,7 +441,7 @@ bool32 sub_81C76B8(void)
     return gUnknown_0203CF40->anyMonsHaveRibbons;
 }
 
-bool32 sub_81C76C4(void)
+static bool32 sub_81C76C4(void)
 {
     struct PokenavStruct_81C76C4 *v0 = sub_81C761C(0, sizeof(struct PokenavStruct_81C76C4));
     if (v0 == NULL)
@@ -450,19 +454,19 @@ bool32 sub_81C76C4(void)
     return TRUE;
 }
 
-u32 sub_81C76FC(void)
+static u32 sub_81C76FC(void)
 {
     return sub_81C70D8(sub_81C763C(0)->unk_00c);
 }
 
-void sub_81C7710(void)
+static void sub_81C7710(void)
 {
     PlaySE(SE_PN_OFF);
     sub_81CAADC();
     BeginNormalPaletteFade(-1, -1, 0, 16, 0);
 }
 
-bool32 sub_81C7738(void)
+static bool32 sub_81C7738(void)
 {
     if (!gPaletteFade.active)
     {
@@ -474,7 +478,7 @@ bool32 sub_81C7738(void)
     return TRUE;
 }
 
-int sub_81C7764(int a0)
+static int sub_81C7764(int a0)
 {
     struct PokenavStruct_81C76C4 *ptr;
     switch (a0)
@@ -514,4 +518,43 @@ int sub_81C7764(int a0)
         default:
             return 4;
     }
+}
+
+static void sub_81C7834(void (*func0)(u32), u32 (*func1)(void))
+{
+    struct PokenavStruct_81C76C4 *ptr = sub_81C763C(0);
+    ptr->unk_000 = func0;
+    ptr->unk_004 = func1;
+    ptr->unk_008 = 0;
+}
+
+static void sub_81C7850(u32 arg)
+{
+    struct PokenavStruct_81C76C4 *ptr = sub_81C763C(0);
+    ptr->unk_008 = 0;
+    ptr->unk_000(arg);
+}
+
+static u32 sub_81C786C(void)
+{
+    struct PokenavStruct_81C76C4 *ptr = sub_81C763C(0);
+    return ptr->unk_004();
+}
+
+void sub_81C7880(void)
+{
+    struct PokenavStruct_81C76C4 *ptr = sub_81C763C(0);
+    ptr->unk_00c = sub_81C7078(atk47_cmd47, 4);
+}
+
+void sub_81C78A0(void)
+{
+    struct PokenavStruct_81C76C4 *ptr = sub_81C763C(0);
+    ptr->unk_00c = sub_81C7078(sub_81C791C, 4);
+}
+
+bool32 sub_81C78C0(void)
+{
+    struct PokenavStruct_81C76C4 *ptr = sub_81C763C(0);
+    return sub_81C70D8(ptr->unk_00c);
 }
