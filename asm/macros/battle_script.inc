@@ -1231,6 +1231,11 @@
 	chosenstatusanimation \bank 0x1 \status
 	.endm
 	
+	.macro sethword dst, value
+	setbyte \dst, \value & 0xFF
+	setbyte \dst + 1, (\value >> 8) & 0xFF
+	.endm
+	
 	.macro setword dst, value
 	setbyte \dst, \value & 0xFF
 	setbyte \dst + 1, (\value >> 8) & 0xFF
@@ -1240,6 +1245,10 @@
 	
 	.macro copybyte dst, src
 	copyarray \dst, \src, 0x1
+	.endm
+	
+	.macro copyhword dst, src
+	copyarray \dst, \src, 0x2
 	.endm
 	
 	.macro copyword dst, src

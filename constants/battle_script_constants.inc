@@ -145,7 +145,6 @@
 	.equiv sANIM_ARG1, gBattleScripting + 0x10
 	.equiv sANIM_ARG2, gBattleScripting + 0x11
 	.equiv sTRIPLE_KICK_POWER, gBattleScripting + 0x12
-	.equiv sFIELD_13, gBattleScripting + 0x13
 	.equiv sMOVEEND_STATE, gBattleScripting + 0x14
 	.equiv sFIELD_15, gBattleScripting + 0x15
 	.equiv sFIELD_16, gBattleScripting + 0x16

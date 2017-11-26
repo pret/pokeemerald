@@ -459,7 +459,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check)
 {
     u8 holdEffect;
-    u16* choicedMove = &gBattleStruct->choicedMove[bank];
+    u16 *choicedMove = &gBattleStruct->choicedMove[bank];
     s32 i;
 
     if (gBattleMons[bank].item == ITEM_ENIGMA_BERRY)
@@ -584,11 +584,7 @@ u8 UpdateTurnCounters(void)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_REFLECT;
                         BattleScriptExecute(BattleScript_82DACFA);
-                        gBattleTextBuff1[0] = 0xFD;
-                        gBattleTextBuff1[1] = 2;
-                        gBattleTextBuff1[2] = MOVE_REFLECT;
-                        gBattleTextBuff1[3] = MOVE_REFLECT >> 8;
-                        gBattleTextBuff1[4] = EOS;
+                        PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_REFLECT);
                         effect++;
                     }
                 }
@@ -614,11 +610,7 @@ u8 UpdateTurnCounters(void)
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_LIGHTSCREEN;
                         BattleScriptExecute(BattleScript_82DACFA);
                         gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
-                        gBattleTextBuff1[0] = 0xFD;
-                        gBattleTextBuff1[1] = 2;
-                        gBattleTextBuff1[2] = MOVE_LIGHT_SCREEN;
-                        gBattleTextBuff1[3] = MOVE_LIGHT_SCREEN >> 8;
-                        gBattleTextBuff1[4] = EOS;
+                        PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_LIGHT_SCREEN);
                         effect++;
                     }
                 }
@@ -643,11 +635,7 @@ u8 UpdateTurnCounters(void)
                     gSideAffecting[sideBank] &= ~SIDE_STATUS_MIST;
                     BattleScriptExecute(BattleScript_82DACFA);
                     gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
-                    gBattleTextBuff1[0] = 0xFD;
-                    gBattleTextBuff1[1] = 2;
-                    gBattleTextBuff1[2] = MOVE_MIST;
-                    gBattleTextBuff1[3] = MOVE_MIST >> 8;
-                    gBattleTextBuff1[4] = EOS;
+                    PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_MIST);
                     effect++;
                 }
                 gBattleStruct->turnSideTracker++;
@@ -773,9 +761,10 @@ u8 UpdateTurnCounters(void)
                     gBattlescriptCurrInstr = BattleScript_82DACC9;
                 }
                 else
+                {
                     gBattlescriptCurrInstr = BattleScript_82DAC47;
-
-                gBattleScripting.animArg1 = 0xD;
+                }
+                gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
@@ -870,7 +859,7 @@ u8 TurnBasedEffects(void)
                     gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 16;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
-                    if ((gBattleMons[gActiveBank].status1 & 0xF00) != 0xF00) //not 16 turns
+                    if ((gBattleMons[gActiveBank].status1 & 0xF00) != 0xF00) // not 16 turns
                         gBattleMons[gActiveBank].status1 += 0x100;
                     gBattleMoveDamage *= (gBattleMons[gActiveBank].status1 & 0xF00) >> 8;
                     BattleScriptExecute(BattleScript_PoisonTurnDmg);
@@ -929,8 +918,8 @@ u8 TurnBasedEffects(void)
                         // This is the only way I could get this array access to match.
                         gBattleScripting.animArg1 = *(gBattleStruct->wrappedMove + gActiveBank * 2 + 0);
                         gBattleScripting.animArg2 = *(gBattleStruct->wrappedMove + gActiveBank * 2 + 1);
-                        gBattleTextBuff1[0] = 0xFD;
-                        gBattleTextBuff1[1] = 2;
+                        gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
+                        gBattleTextBuff1[1] = B_BUFF_MOVE;
                         gBattleTextBuff1[2] = *(gBattleStruct->wrappedMove + gActiveBank * 2 + 0);
                         gBattleTextBuff1[3] = *(gBattleStruct->wrappedMove + gActiveBank * 2 + 1);
                         gBattleTextBuff1[4] = EOS;
@@ -941,8 +930,8 @@ u8 TurnBasedEffects(void)
                     }
                     else  // broke free
                     {
-                        gBattleTextBuff1[0] = 0xFD;
-                        gBattleTextBuff1[1] = 2;
+                        gBattleTextBuff1[0] = B_BUFF_PLACEHOLDER_BEGIN;
+                        gBattleTextBuff1[1] = B_BUFF_MOVE;
                         gBattleTextBuff1[2] = *(gBattleStruct->wrappedMove + gActiveBank * 2 + 0);
                         gBattleTextBuff1[3] = *(gBattleStruct->wrappedMove + gActiveBank * 2 + 1);
                         gBattleTextBuff1[4] = EOS;
@@ -1014,7 +1003,7 @@ u8 TurnBasedEffects(void)
                         gBattleMons[gActiveBank].status2 &= ~(STATUS2_MULTIPLETURNS);
                         if (!(gBattleMons[gActiveBank].status2 & STATUS2_CONFUSION))
                         {
-                            gBattleCommunication[MOVE_EFFECT_BYTE] = 0x47;
+                            gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_CONFUSION | MOVE_EFFECT_AFFECTS_USER;
                             SetMoveEffect(1, 0);
                             if (gBattleMons[gActiveBank].status2 & STATUS2_CONFUSION)
                                 BattleScriptExecute(BattleScript_ThrashConfuses);
@@ -1139,11 +1128,8 @@ bool8 sub_8041364(void)
                 else
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
 
-                gBattleTextBuff1[0] = 0xFD;
-                gBattleTextBuff1[1] = 2;
-                gBattleTextBuff1[2] = gWishFutureKnock.futureSightMove[gActiveBank];
-                gBattleTextBuff1[3] = gWishFutureKnock.futureSightMove[gActiveBank] >> 8;
-                gBattleTextBuff1[4] = EOS;
+                PREPARE_MOVE_BUFFER(gBattleTextBuff1, gWishFutureKnock.futureSightMove[gActiveBank]);
+
                 gBankTarget = gActiveBank;
                 gBankAttacker = gWishFutureKnock.futureSightAttacker[gActiveBank];
                 gBattleMoveDamage = gWishFutureKnock.futureSightDmg[gActiveBank];
@@ -1151,11 +1137,11 @@ bool8 sub_8041364(void)
                 BattleScriptExecute(BattleScript_82DAFE4);
 
                 if (gWishFutureKnock.futureSightCounter[gActiveBank] == 0
-                 && gWishFutureKnock.futureSightCounter[gActiveBank ^ 2] == 0)
+                 && gWishFutureKnock.futureSightCounter[gActiveBank ^ BIT_MON] == 0)
                 {
-                    gSideAffecting[GetBankIdentity(gBankTarget) & 1] &= ~SIDE_STATUS_FUTUREATTACK;
+                    gSideAffecting[GET_BANK_SIDE(gBankTarget)] &= ~(SIDE_STATUS_FUTUREATTACK);
                 }
-                return 1;
+                return TRUE;
             }
         }
         // Why do I have to keep doing this to match?
@@ -1177,12 +1163,7 @@ bool8 sub_8041364(void)
             gBattleStruct->field_1A1++;
             if (gStatuses3[gActiveBank] & STATUS3_PERISH_SONG)
             {
-                gBattleTextBuff1[0] = 0xFD;
-                gBattleTextBuff1[1] = 1;
-                gBattleTextBuff1[2] = 1;
-                gBattleTextBuff1[3] = 1;
-                gBattleTextBuff1[4] = gDisableStructs[gActiveBank].perishSongTimer1;
-                gBattleTextBuff1[5] = EOS;
+                PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 1, gDisableStructs[gActiveBank].perishSongTimer1);
                 if (gDisableStructs[gActiveBank].perishSongTimer1 == 0)
                 {
                     gStatuses3[gActiveBank] &= ~STATUS3_PERISH_SONG;
@@ -1195,7 +1176,7 @@ bool8 sub_8041364(void)
                     gBattlescriptCurrInstr = BattleScript_82DAF20;
                 }
                 BattleScriptExecute(gBattlescriptCurrInstr);
-                return 1;
+                return TRUE;
             }
         }
         // Hm...
@@ -1218,14 +1199,14 @@ bool8 sub_8041364(void)
             gBattlescriptCurrInstr = BattleScript_82DB8F3;
             BattleScriptExecute(BattleScript_82DB8F3);
             gBattleStruct->field_1A0++;
-            return 1;
+            return TRUE;
         }
         break;
     }
 
     gHitMarker &= ~(HITMARKER_GRUDGE | HITMARKER_x20);
 
-    return 0;
+    return FALSE;
 }
 
 #define sub_8041728_MAX_CASE 7
@@ -1572,7 +1553,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             }
             gBattleStruct->atkCancellerTracker++;
             break;
-        case 14: // last case
+        case ATKCANCELLER_MAX_CASE:
             break;
         }
 
@@ -1674,14 +1655,14 @@ bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
     {
         if (GetBankSide(bank) == SIDE_OPPONENT)
         {
-            r7 = GetBankByIdentity(1);
-            r6 = GetBankByIdentity(3);
+            r7 = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+            r6 = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
             party = gEnemyParty;
         }
         else
         {
-            r7 = GetBankByIdentity(0);
-            r6 = GetBankByIdentity(2);
+            r7 = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+            r6 = GetBankByIdentity(IDENTITY_PLAYER_MON2);
             party = gPlayerParty;
         }
         if (r1 == 6)
@@ -1799,10 +1780,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
         else
             move = gCurrentMove;
 
-        if (gBattleStruct->dynamicMoveType)
-            moveType = gBattleStruct->dynamicMoveType & 0x3F;
-        else
-            moveType = gBattleMoves[move].type;
+        GET_MOVE_TYPE(move, moveType);
 
         switch (caseID)
         {
@@ -2525,7 +2503,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
     return effect;
 }
 
-void BattleScriptExecute(const u8* BS_ptr)
+void BattleScriptExecute(const u8 *BS_ptr)
 {
     gBattlescriptCurrInstr = BS_ptr;
     BATTLE_CALLBACKS_STACK->function[BATTLE_CALLBACKS_STACK->size++] = gBattleMainFunc;
@@ -2533,7 +2511,7 @@ void BattleScriptExecute(const u8* BS_ptr)
     gCurrentActionFuncId = 0;
 }
 
-void BattleScriptPushCursorAndCallback(const u8* BS_ptr)
+void BattleScriptPushCursorAndCallback(const u8 *BS_ptr)
 {
     BattleScriptPushCursor();
     gBattlescriptCurrInstr = BS_ptr;
@@ -3265,7 +3243,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
     switch (moveTarget)
     {
     case MOVE_TARGET_SELECTED:
-        side = GetBankSide(gBankAttacker) ^ 1;
+        side = GetBankSide(gBankAttacker) ^ BIT_SIDE;
         if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
             targetBank = gSideTimers[side].followmeTarget;
         else
@@ -3279,7 +3257,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
                 && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIDE, gBankAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
                 && gBattleMons[targetBank].ability != ABILITY_LIGHTNING_ROD)
             {
-                targetBank ^= 2;
+                targetBank ^= BIT_MON;
                 RecordAbilityBattle(targetBank, gBattleMons[targetBank].ability);
                 gSpecialStatuses[targetBank].lightningRodRedirected = 1;
             }
@@ -3289,12 +3267,12 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
     case MOVE_TARGET_BOTH:
     case MOVE_TARGET_FOES_AND_ALLY:
     case MOVE_TARGET_OPPONENTS_FIELD:
-        targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & 1) ^ 1);
+        targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & BIT_SIDE) ^ BIT_SIDE);
         if (gAbsentBankFlags & gBitTable[targetBank])
-            targetBank ^= 2;
+            targetBank ^= BIT_MON;
         break;
     case MOVE_TARGET_RANDOM:
-        side = GetBankSide(gBankAttacker) ^ 1;
+        side = GetBankSide(gBankAttacker) ^ BIT_SIDE;
         if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
             targetBank = gSideTimers[side].followmeTarget;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & MOVE_TARGET_RANDOM)
@@ -3302,22 +3280,22 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
             if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
             {
                 if (Random() & 1)
-                    targetBank = GetBankByIdentity(1);
+                    targetBank = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
                 else
-                    targetBank = GetBankByIdentity(3);
+                    targetBank = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
             }
             else
             {
                 if (Random() & 1)
-                    targetBank = GetBankByIdentity(0);
+                    targetBank = GetBankByIdentity(IDENTITY_PLAYER_MON1);
                 else
-                    targetBank = GetBankByIdentity(2);
+                    targetBank = GetBankByIdentity(IDENTITY_PLAYER_MON2);
             }
             if (gAbsentBankFlags & gBitTable[targetBank])
-                targetBank ^= 2;
+                targetBank ^= BIT_MON;
         }
         else
-            targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & 1) ^ 1);
+            targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & BIT_SIDE) ^ BIT_SIDE);
         break;
     case MOVE_TARGET_USER:
     case MOVE_TARGET_x10:
@@ -3325,11 +3303,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
         break;
     }
 
-    #ifndef NONMATCHING
-        MEME_ACCESS_U8(BattleStruct, gBattleStruct, gBankAttacker, moveTarget, targetBank);
-    #else
-        gBattleStruct->moveTarget[gBankAttacker] = targetBank;
-    #endif // NONMATCHING
+    *(gBattleStruct->moveTarget + gBankAttacker) = targetBank;
 
     return targetBank;
 }

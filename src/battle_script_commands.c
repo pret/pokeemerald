@@ -74,10 +74,10 @@ extern u8 gCurrentActionFuncId;
 extern u32 gHitMarker;
 extern u8 gBattleMoveFlags;
 extern u8 gBattleCommunication[];
-extern u16 gUnknown_02024250[4];
+extern u16 gTurnMovesHitWith[4];
 extern u16 gUnknown_02024258[4];
 extern u16 gUnknown_02024260[4];
-extern u8 gUnknown_02024270[4];
+extern u8 gTurnMovesHitBy[4];
 extern u8 gStringBank;
 extern u16 gDynamicBasePower;
 extern u16 gLastUsedItem;
@@ -99,7 +99,7 @@ extern u8 gCurrentTurnActionNumber;
 extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
 extern u16 gLockedMoves[BATTLE_BANKS_COUNT];
 extern u16 gPartnerTrainerId;
-extern u16 gLastUsedMove;
+extern u16 gOriginallyUsedMove;
 extern u16 gUnknownMovesUsedByBanks[BATTLE_BANKS_COUNT];
 extern u16 gLastUsedMovesByBanks[BATTLE_BANKS_COUNT];
 extern u16 gTrainerBattleOpponent_A;
@@ -1105,7 +1105,7 @@ static void atk00_attackcanceler(void)
     {
         CancelMultiTurnMoves(gBankAttacker);
         gBattleMoveFlags |= MOVESTATUS_MISSED;
-        gUnknown_02024250[gBankTarget] = 0;
+        gTurnMovesHitWith[gBankTarget] = 0;
         gUnknown_02024258[gBankTarget] = 0;
         gBattleCommunication[6] = 1;
         gBattlescriptCurrInstr++;
@@ -1121,7 +1121,7 @@ static void JumpIfMoveFailed(u8 adder, u16 move)
     const void* BS_ptr = gBattlescriptCurrInstr + adder;
     if (gBattleMoveFlags & MOVESTATUS_NOEFFECT)
     {
-        gUnknown_02024250[gBankTarget] = 0;
+        gTurnMovesHitWith[gBankTarget] = 0;
         gUnknown_02024258[gBankTarget] = 0;
         BS_ptr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     }
@@ -1484,7 +1484,7 @@ static void atk06_typecalc(void)
     {
         gLastUsedAbility = gBattleMons[gBankTarget].ability;
         gBattleMoveFlags |= (MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED);
-        gUnknown_02024250[gBankTarget] = 0;
+        gTurnMovesHitWith[gBankTarget] = 0;
         gUnknown_02024258[gBankTarget] = 0;
         gBattleCommunication[6] = moveType;
         RecordAbilityBattle(gBankTarget, gLastUsedAbility);
@@ -1520,7 +1520,7 @@ static void atk06_typecalc(void)
     {
         gLastUsedAbility = ABILITY_WONDER_GUARD;
         gBattleMoveFlags |= MOVESTATUS_MISSED;
-        gUnknown_02024250[gBankTarget] = 0;
+        gTurnMovesHitWith[gBankTarget] = 0;
         gUnknown_02024258[gBankTarget] = 0;
         gBattleCommunication[6] = 3;
         RecordAbilityBattle(gBankTarget, gLastUsedAbility);
@@ -4860,10 +4860,10 @@ static void atk49_moveend(void)
 
     effect = FALSE;
 
-    if (gLastUsedMove == 0xFFFF)
+    if (gOriginallyUsedMove == 0xFFFF)
         lastMove = 0;
     else
-        lastMove = gLastUsedMove;
+        lastMove = gOriginallyUsedMove;
 
     arg1 = gBattlescriptCurrInstr[1];
     arg2 = gBattlescriptCurrInstr[2];
@@ -4934,14 +4934,14 @@ static void atk49_moveend(void)
             break;
         case 6: // update choice band move
             if (!(gHitMarker & HITMARKER_OBEYS) || holdEffectAtk != HOLD_EFFECT_CHOICE_BAND
-                || gLastUsedMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
+                || gOriginallyUsedMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
                     goto LOOP;
-            if (gLastUsedMove == MOVE_BATON_PASS && !(gBattleMoveFlags & MOVESTATUS_FAILED))
+            if (gOriginallyUsedMove == MOVE_BATON_PASS && !(gBattleMoveFlags & MOVESTATUS_FAILED))
             {
                 gBattleScripting.atk49_state++;
                 break;
             }
-            *choicedMoveAtk = gLastUsedMove;
+            *choicedMoveAtk = gOriginallyUsedMove;
             LOOP:
             {
                 for (i = 0; i < 4; i++)
@@ -5036,7 +5036,7 @@ static void atk49_moveend(void)
             }
             if (gHitMarker & HITMARKER_ATTACKSTRING_PRINTED)
             {
-                gUnknownMovesUsedByBanks[gBankAttacker] = gLastUsedMove;
+                gUnknownMovesUsedByBanks[gBankAttacker] = gOriginallyUsedMove;
             }
             if (!(gAbsentBankFlags & gBitTable[gBankAttacker])
                 && !(gBattleStruct->field_91 & gBitTable[gBankAttacker])
@@ -5044,7 +5044,7 @@ static void atk49_moveend(void)
             {
                 if (gHitMarker & HITMARKER_OBEYS)
                 {
-                    gLastUsedMovesByBanks[gBankAttacker] = gLastUsedMove;
+                    gLastUsedMovesByBanks[gBankAttacker] = gOriginallyUsedMove;
                     gUnknown_02024260[gBankAttacker] = gCurrentMove;
                 }
                 else
@@ -5054,23 +5054,23 @@ static void atk49_moveend(void)
                 }
 
                 if (!(gHitMarker & HITMARKER_FAINTED(gBankTarget)))
-                    gUnknown_02024270[gBankTarget] = gBankAttacker;
+                    gTurnMovesHitBy[gBankTarget] = gBankAttacker;
 
                 if (gHitMarker & HITMARKER_OBEYS && !(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
                 {
-                    if (gLastUsedMove == 0xFFFF)
+                    if (gOriginallyUsedMove == 0xFFFF)
                     {
-                        gUnknown_02024250[gBankTarget] = gLastUsedMove;
+                        gTurnMovesHitWith[gBankTarget] = gOriginallyUsedMove;
                     }
                     else
                     {
-                        gUnknown_02024250[gBankTarget] = gCurrentMove;
+                        gTurnMovesHitWith[gBankTarget] = gCurrentMove;
                         GET_MOVE_TYPE(gCurrentMove, gUnknown_02024258[gBankTarget]);
                     }
                 }
                 else
                 {
-                    gUnknown_02024250[gBankTarget] = 0xFFFF;
+                    gTurnMovesHitWith[gBankTarget] = 0xFFFF;
                 }
             }
             gBattleScripting.atk49_state++;
@@ -5083,16 +5083,16 @@ static void atk49_moveend(void)
             {
                 u8 target, attacker;
 
-                *(gBattleStruct->mirrorMoves + gBankTarget * 2 + 0) = gLastUsedMove;
-                *(gBattleStruct->mirrorMoves + gBankTarget * 2 + 1) = gLastUsedMove >> 8;
+                *(gBattleStruct->mirrorMoves + gBankTarget * 2 + 0) = gOriginallyUsedMove;
+                *(gBattleStruct->mirrorMoves + gBankTarget * 2 + 1) = gOriginallyUsedMove >> 8;
 
                 target = gBankTarget;
                 attacker = gBankAttacker;
-                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->mirrorMoveArrays) + 0) = gLastUsedMove;
+                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->mirrorMoveArrays) + 0) = gOriginallyUsedMove;
 
                 target = gBankTarget;
                 attacker = gBankAttacker;
-                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->mirrorMoveArrays) + 1) = gLastUsedMove >> 8;
+                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->mirrorMoveArrays) + 1) = gOriginallyUsedMove >> 8;
             }
             gBattleScripting.atk49_state++;
             break;
@@ -5144,7 +5144,7 @@ static void atk4A_typecalc2(void)
     {
         gLastUsedAbility = gBattleMons[gBankTarget].ability;
         gBattleMoveFlags |= (MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED);
-        gUnknown_02024250[gBankTarget] = 0;
+        gTurnMovesHitWith[gBankTarget] = 0;
         gBattleCommunication[6] = moveType;
         RecordAbilityBattle(gBankTarget, gLastUsedAbility);
     }
@@ -5219,7 +5219,7 @@ static void atk4A_typecalc2(void)
     {
         gLastUsedAbility = ABILITY_WONDER_GUARD;
         gBattleMoveFlags |= MOVESTATUS_MISSED;
-        gUnknown_02024250[gBankTarget] = 0;
+        gTurnMovesHitWith[gBankTarget] = 0;
         gBattleCommunication[6] = 3;
         RecordAbilityBattle(gBankTarget, gLastUsedAbility);
     }
@@ -5452,10 +5452,10 @@ static void atk4F_jumpifcantswitch(void)
     {
         if (GetBankSide(gActiveBank) == SIDE_OPPONENT)
         {
-            r7 = GetBankByIdentity(1);
+            r7 = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
 
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                compareVar = GetBankByIdentity(3);
+                compareVar = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
             else
                 compareVar = r7;
 
@@ -5463,10 +5463,10 @@ static void atk4F_jumpifcantswitch(void)
         }
         else
         {
-            r7 = GetBankByIdentity(0);
+            r7 = GetBankByIdentity(IDENTITY_PLAYER_MON1);
 
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                compareVar = GetBankByIdentity(2);
+                compareVar = GetBankByIdentity(IDENTITY_PLAYER_MON2);
             else
                 compareVar = r7;
 
@@ -6009,7 +6009,7 @@ static void atk59_handlelearnnewmove(void)
     }
     else
     {
-        gActiveBank = GetBankByIdentity(0);
+        gActiveBank = GetBankByIdentity(IDENTITY_PLAYER_MON1);
 
         if (gBattlePartyID[gActiveBank] == gBattleStruct->expGetterId
             && !(gBattleMons[gActiveBank].status2 & STATUS2_TRANSFORMED))
@@ -6018,7 +6018,7 @@ static void atk59_handlelearnnewmove(void)
         }
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {
-            gActiveBank = GetBankByIdentity(2);
+            gActiveBank = GetBankByIdentity(IDENTITY_PLAYER_MON2);
             if (gBattlePartyID[gActiveBank] == gBattleStruct->expGetterId
                 && !(gBattleMons[gActiveBank].status2 & STATUS2_TRANSFORMED))
             {
@@ -6386,7 +6386,7 @@ static void atk63_jumptorandomattack(void)
     if (gBattlescriptCurrInstr[1] != 0)
         gCurrentMove = gRandomMove;
     else
-        gLastUsedMove = gCurrentMove = gRandomMove;
+        gOriginallyUsedMove = gCurrentMove = gRandomMove;
 
     gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
 }
@@ -6849,7 +6849,7 @@ static void atk6D_resetsentmonsvalue(void)
 
 static void atk6E_setatktoplayer0(void)
 {
-    gBankAttacker = GetBankByIdentity(0);
+    gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
     gBattlescriptCurrInstr++;
 }
 
@@ -8352,7 +8352,7 @@ static void atk9A_setfocusenergy(void)
 
 static void atk9B_transformdataexecution(void)
 {
-    gLastUsedMove = 0xFFFF;
+    gOriginallyUsedMove = 0xFFFF;
     gBattlescriptCurrInstr++;
     if (gBattleMons[gBankTarget].status2 & STATUS2_TRANSFORMED
         || gStatuses3[gBankTarget] & STATUS3_SEMI_INVULNERABLE)
@@ -8432,7 +8432,7 @@ static bool8 IsMoveUncopyableByMimic(u16 move)
 
 static void atk9D_mimicattackcopy(void)
 {
-    gLastUsedMove = 0xFFFF;
+    gOriginallyUsedMove = 0xFFFF;
 
     if (IsMoveUncopyableByMimic(gLastUsedMovesByBanks[gBankTarget])
         || gBattleMons[gBankAttacker].status2 & STATUS2_TRANSFORMED
@@ -8652,13 +8652,13 @@ static void atkA5_painsplitdmgcalc(void)
 
 static void atkA6_settypetorandomresistance(void) // conversion 2
 {
-    if (gUnknown_02024250[gBankAttacker] == 0
-        || gUnknown_02024250[gBankAttacker] == 0xFFFF)
+    if (gTurnMovesHitWith[gBankAttacker] == 0
+        || gTurnMovesHitWith[gBankAttacker] == 0xFFFF)
     {
         gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     }
-    else if (IsTwoTurnsMove(gUnknown_02024250[gBankAttacker])
-            && gBattleMons[gUnknown_02024270[gBankAttacker]].status2 & STATUS2_MULTIPLETURNS)
+    else if (IsTwoTurnsMove(gTurnMovesHitWith[gBankAttacker])
+            && gBattleMons[gTurnMovesHitBy[gBankAttacker]].status2 & STATUS2_MULTIPLETURNS)
     {
         gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     }
@@ -8726,7 +8726,7 @@ static void atkA7_setalwayshitflag(void)
 
 static void atkA8_copymovepermanently(void) // sketch
 {
-    gLastUsedMove = 0xFFFF;
+    gOriginallyUsedMove = 0xFFFF;
 
     if (!(gBattleMons[gBankAttacker].status2 & STATUS2_TRANSFORMED)
         && gUnknownMovesUsedByBanks[gBankTarget] != MOVE_STRUGGLE
@@ -9024,7 +9024,7 @@ static void atkAE_healpartystatus(void)
         gBattleMons[gBankAttacker].status1 = 0;
         gBattleMons[gBankAttacker].status2 &= ~(STATUS2_NIGHTMARE);
 
-        gActiveBank = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ 2);
+        gActiveBank = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ BIT_MON);
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
             && !(gAbsentBankFlags & gBitTable[gActiveBank]))
         {

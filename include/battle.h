@@ -706,13 +706,6 @@ struct BattleStruct
 
 extern struct BattleStruct* gBattleStruct;
 
-#define MEME_ACCESS_U8(structName, structPtr, arrayId, offsetField, value)      \
-{                                                                               \
-    u8* var2 = (u8*)((u32)(arrayId));                                           \
-    var2 = (u32)(structPtr) + var2;                                             \
-    var2[offsetof(struct structName, offsetField)] = value;                     \
-}
-
 #define GET_MOVE_TYPE(move, typeArg)                        \
 {                                                           \
     if (gBattleStruct->dynamicMoveType)                     \
@@ -850,8 +843,7 @@ struct BattleScripting
     u8 twoTurnsMoveStringId;
     u8 animArg1;
     u8 animArg2;
-    u8 tripleKickPower;
-    u8 field_13;
+    u16 tripleKickPower;
     u8 atk49_state;
     u8 field_15;
     u8 field_16;

@@ -299,8 +299,8 @@ BattleScript_EffectSleep::
 	attackstring
 	ppreduce
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
-	jumpifstatus TARGET, STATUS_SLEEP, BattleScript_82D8AB0
-	jumpifcantmakeasleep BattleScript_82D8ACF
+	jumpifstatus TARGET, STATUS_SLEEP, BattleScript_AlreadyAsleep
+	jumpifcantmakeasleep BattleScript_CantMakeAsleep
 	jumpifstatus TARGET, STATUS_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
@@ -310,20 +310,20 @@ BattleScript_EffectSleep::
 	seteffectprimary
 	goto BattleScript_MoveEnd
 
-BattleScript_82D8AB0::
+BattleScript_AlreadyAsleep::
 	various ATTACKER, 0x17
 	pause 0x20
 	printstring STRINGID_PKMNALREADYASLEEP
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_82D8AC1::
+BattleScript_WasntAffected::
 	pause 0x20
 	printstring STRINGID_PKMNWASNTAFFECTED
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_82D8ACF::
+BattleScript_CantMakeAsleep::
 	pause 0x20
 	printfromtable gUproarAwakeStringIds
 	waitmessage 0x40
@@ -446,7 +446,7 @@ BattleScript_82D8C0E::
 	attackstring
 	ppreduce
 	waitmessage 0x40
-	goto BattleScript_82D8AC1
+	goto BattleScript_WasntAffected
 BattleScript_82D8C18::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
@@ -628,7 +628,7 @@ BattleScript_EffectMultiHit::
 BattleScript_82D8DFD::
 	jumpifhasnohp ATTACKER, BattleScript_82D8E93
 	jumpifhasnohp TARGET, BattleScript_82D8E74
-	jumpifhalfword EQUAL, gLastUsedMove, 0xD6, BattleScript_82D8E1F
+	jumpifhalfword EQUAL, gOriginallyUsedMove, MOVE_SLEEP_TALK, BattleScript_82D8E1F
 	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_82D8E74
 BattleScript_82D8E1F::
 	movevaluescleanup
@@ -655,7 +655,6 @@ BattleScript_82D8E1F::
 	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_ENDURED, BattleScript_82D8E74
 	decrementmultihit BattleScript_82D8DFD
 	goto BattleScript_82D8E74
-
 BattleScript_82D8E71::
 	pause 0x20
 BattleScript_82D8E74::
@@ -927,7 +926,7 @@ BattleScript_EffectConfuse::
 	ppreduce
 	jumpifability TARGET, ABILITY_OWN_TEMPO, BattleScript_OwnTempoPrevents
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
-	jumpifstatus2 TARGET, STATUS2_CONFUSION, BattleScript_82D9201
+	jumpifstatus2 TARGET, STATUS2_CONFUSION, BattleScript_AlreadyConfused
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	attackanimation
@@ -938,7 +937,7 @@ BattleScript_EffectConfuse::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_82D9201::
+BattleScript_AlreadyConfused::
 	various ATTACKER, 0x17
 	pause 0x20
 	printstring STRINGID_PKMNALREADYCONFUSED
@@ -1033,7 +1032,7 @@ BattleScript_EffectParalyze::
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
 	typecalc
 	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED, BattleScript_ButItFailed
-	jumpifstatus TARGET, STATUS_PARALYSIS, BattleScript_82D9351
+	jumpifstatus TARGET, STATUS_PARALYSIS, BattleScript_AlreadyParalyzed
 	jumpifstatus TARGET, STATUS_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
@@ -1045,7 +1044,7 @@ BattleScript_EffectParalyze::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_82D9351::
+BattleScript_AlreadyParalyzed::
 	various ATTACKER, 0x17
 	pause 0x20
 	printstring STRINGID_PKMNISALREADYPARALYZED
@@ -1282,7 +1281,7 @@ BattleScript_EffectSnore::
 	ppreduce
 	goto BattleScript_ButItFailed
 BattleScript_82D95CE::
-	jumpifhalfword EQUAL, gLastUsedMove, 0xD6, BattleScript_82D95E2
+	jumpifhalfword EQUAL, gOriginallyUsedMove, MOVE_SLEEP_TALK, BattleScript_82D95E2
 	printstring STRINGID_PKMNFASTASLEEP
 	waitmessage 0x40
 	statusanimation ATTACKER
@@ -1406,26 +1405,25 @@ BattleScript_EffectTripleKick::
 	attackcanceler
 	attackstring
 	ppreduce
-	setbyte sTRIPLE_KICK_POWER, 0x0
-	setbyte sFIELD_13, 0x0
+	sethword sTRIPLE_KICK_POWER, 0x0
 	initmultihitstring
 	setmultihit 0x3
-BattleScript_82D9718::
-	jumpifhasnohp ATTACKER, BattleScript_82D97D7
-	jumpifhasnohp TARGET, BattleScript_82D9799
-	jumpifhalfword EQUAL, gLastUsedMove, 0xD6, BattleScript_82D973A
-	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_82D9799
+BattleScript_TripleKickLoop::
+	jumpifhasnohp ATTACKER, BattleScript_TripleKickEnd
+	jumpifhasnohp TARGET, BattleScript_TripleKickNoMoreHits
+	jumpifhalfword EQUAL, gOriginallyUsedMove, MOVE_SLEEP_TALK, BattleScript_82D973A
+	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_TripleKickNoMoreHits
 BattleScript_82D973A::
-	accuracycheck BattleScript_82D9799, ACC_CURR_MOVE
+	accuracycheck BattleScript_TripleKickNoMoreHits, ACC_CURR_MOVE
 	movevaluescleanup
-	addbyte sTRIPLE_KICK_POWER, 0xA
+	addbyte sTRIPLE_KICK_POWER, 10
 	addbyte sMULTIHIT_STRING + 4, 0x1
-	copyarray gDynamicBasePower, sTRIPLE_KICK_POWER, 0x2
+	copyhword gDynamicBasePower, sTRIPLE_KICK_POWER
 	critcalc
 	damagecalc
 	typecalc
 	adjustnormaldamage
-	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED, BattleScript_82D9799
+	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED, BattleScript_TripleKickNoMoreHits
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -1439,22 +1437,22 @@ BattleScript_82D973A::
 	waitmessage 0x1
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
-	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_ENDURED, BattleScript_82D97AD
-	decrementmultihit BattleScript_82D9718
-	goto BattleScript_82D97AD
-BattleScript_82D9799::
+	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_ENDURED, BattleScript_TripleKickPrintStrings
+	decrementmultihit BattleScript_TripleKickLoop
+	goto BattleScript_TripleKickPrintStrings
+BattleScript_TripleKickNoMoreHits::
 	pause 0x20
-	jumpifbyte EQUAL, sMULTIHIT_STRING + 4, 0x0, BattleScript_82D97AD
+	jumpifbyte EQUAL, sMULTIHIT_STRING + 4, 0x0, BattleScript_TripleKickPrintStrings
 	bicbyte gBattleMoveFlags, MOVESTATUS_MISSED
-BattleScript_82D97AD::
+BattleScript_TripleKickPrintStrings::
 	resultmessage
 	waitmessage 0x40
-	jumpifbyte EQUAL, sMULTIHIT_STRING + 4, 0x0, BattleScript_82D97D7
-	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_NOTAFFECTED, BattleScript_82D97D7
+	jumpifbyte EQUAL, sMULTIHIT_STRING + 4, 0x0, BattleScript_TripleKickEnd
+	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_NOTAFFECTED, BattleScript_TripleKickEnd
 	copyarray gBattleTextBuff1, sMULTIHIT_STRING, 0x6
 	printstring STRINGID_HITXTIMES
 	waitmessage 0x40
-BattleScript_82D97D7::
+BattleScript_TripleKickEnd::
 	seteffectwithchance
 	tryfaintmon TARGET, FALSE, NULL
 	setbyte sMOVEEND_STATE, 0xE
@@ -3545,7 +3543,6 @@ BattleScript_82DAFE4::
 	jumpifbyte NOT_EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_82DB001
 	accuracycheck BattleScript_82DB058, MOVE_FUTURE_SIGHT
 	goto BattleScript_82DB008
-
 BattleScript_82DB001::
 	accuracycheck BattleScript_82DB058, MOVE_DOOM_DESIRE
 BattleScript_82DB008::
@@ -3553,7 +3550,6 @@ BattleScript_82DB008::
 	jumpifbyte NOT_EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_82DB020
 	playanimation ATTACKER, ANIM_FUTURE_SIGHT_HIT, NULL
 	goto BattleScript_82DB027
-
 BattleScript_82DB020::
 	playanimation ATTACKER, ANIM_x13, NULL
 BattleScript_82DB027::

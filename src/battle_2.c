@@ -123,11 +123,11 @@ extern s32 gBattleMoveDamage;
 extern const u8* gUnknown_02024230[BATTLE_BANKS_COUNT];
 extern u16 gUnknownMovesUsedByBanks[BATTLE_BANKS_COUNT];
 extern u16 gLastUsedMovesByBanks[BATTLE_BANKS_COUNT];
-extern u16 gUnknown_02024250[BATTLE_BANKS_COUNT];
+extern u16 gTurnMovesHitWith[BATTLE_BANKS_COUNT];
 extern u16 gUnknown_02024258[BATTLE_BANKS_COUNT];
 extern u16 gUnknown_02024260[BATTLE_BANKS_COUNT];
 extern u16 gLockedMoves[BATTLE_BANKS_COUNT];
-extern u8 gUnknown_02024270[BATTLE_BANKS_COUNT];
+extern u8 gTurnMovesHitBy[BATTLE_BANKS_COUNT];
 extern u8 gUnknown_02024284[BATTLE_BANKS_COUNT];
 extern u32 gStatuses3[BATTLE_BANKS_COUNT];
 extern u16 gSideAffecting[2];
@@ -149,7 +149,7 @@ extern u16 gDynamicBasePower;
 extern u8 gCritMultiplier;
 extern u8 gCurrMovePos;
 extern u8 gUnknown_020241E9;
-extern u16 gLastUsedMove;
+extern u16 gOriginallyUsedMove;
 
 extern const struct BattleMove gBattleMoves[];
 extern const u16 gUnknown_08C004E0[]; // battle textbox palette
@@ -461,7 +461,7 @@ static void sub_8036A5C(void)
     u32 status = 0;
     s32 i;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
         hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);
@@ -1878,7 +1878,7 @@ static void sub_8038B94(u8 taskId)
     }
 
     r7 = 0;
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         u16 species = GetMonData(&sp4[i], MON_DATA_SPECIES2);
         u16 hp = GetMonData(&sp4[i], MON_DATA_HP);
@@ -1902,7 +1902,7 @@ static void sub_8038B94(u8 taskId)
     gTasks[taskId].data[3] = r7;
 
     r7 = 0;
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         u16 species = GetMonData(&sp8[i], MON_DATA_SPECIES2);
         u16 hp = GetMonData(&sp8[i], MON_DATA_HP);
@@ -2741,13 +2741,13 @@ static void BattleStartClearSetData(void)
         for (j = 0; j < sizeof(struct DisableStruct); j++)
             dataPtr[j] = 0;
 
-        gDisableStructs[i].isFirstTurn= 2;
+        gDisableStructs[i].isFirstTurn = 2;
         gUnknown_02024284[i] = 0;
         gLastUsedMovesByBanks[i] = 0;
-        gUnknown_02024250[i] = 0;
+        gTurnMovesHitWith[i] = 0;
         gUnknown_02024258[i] = 0;
         gUnknown_02024260[i] = 0;
-        gUnknown_02024270[i] = 0xFF;
+        gTurnMovesHitBy[i] = 0xFF;
         gLockedMoves[i] = 0;
         gUnknownMovesUsedByBanks[i] = 0;
         gBattleResources->flags->flags[i] = 0;
@@ -2911,11 +2911,11 @@ void SwitchInClearSetData(void)
     gDisableStructs[gActiveBank].isFirstTurn= 2;
     gDisableStructs[gActiveBank].truantUnknownBit = disableStructCopy.truantUnknownBit;
     gLastUsedMovesByBanks[gActiveBank] = 0;
-    gUnknown_02024250[gActiveBank] = 0;
+    gTurnMovesHitWith[gActiveBank] = 0;
     gUnknown_02024258[gActiveBank] = 0;
     gUnknown_02024260[gActiveBank] = 0;
     gUnknownMovesUsedByBanks[gActiveBank] = 0;
-    gUnknown_02024270[gActiveBank] = 0xFF;
+    gTurnMovesHitBy[gActiveBank] = 0xFF;
 
     *(gBattleStruct->mirrorMoves + gActiveBank * 2 + 0) = 0;
     *(gBattleStruct->mirrorMoves + gActiveBank * 2 + 1) = 0;
@@ -3003,11 +3003,11 @@ void FaintClearSetData(void)
     gDisableStructs[gActiveBank].isFirstTurn = 2;
 
     gLastUsedMovesByBanks[gActiveBank] = 0;
-    gUnknown_02024250[gActiveBank] = 0;
+    gTurnMovesHitWith[gActiveBank] = 0;
     gUnknown_02024258[gActiveBank] = 0;
     gUnknown_02024260[gActiveBank] = 0;
     gUnknownMovesUsedByBanks[gActiveBank] = 0;
-    gUnknown_02024270[gActiveBank] = 0xFF;
+    gTurnMovesHitBy[gActiveBank] = 0xFF;
 
     *(u8*)((u8*)(&gBattleStruct->choicedMove[gActiveBank]) + 0) = 0;
     *(u8*)((u8*)(&gBattleStruct->choicedMove[gActiveBank]) + 1) = 0;
@@ -5048,19 +5048,19 @@ static void HandleAction_UseMove(void)
     if (gProtectStructs[gBankAttacker].onlyStruggle)
     {
         gProtectStructs[gBankAttacker].onlyStruggle = 0;
-        gCurrentMove = gLastUsedMove = MOVE_STRUGGLE;
+        gCurrentMove = gOriginallyUsedMove = MOVE_STRUGGLE;
         gHitMarker |= HITMARKER_NO_PPDEDUCT;
         *(gBattleStruct->moveTarget + gBankAttacker) = GetMoveTarget(MOVE_STRUGGLE, 0);
     }
     else if (gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS || gBattleMons[gBankAttacker].status2 & STATUS2_RECHARGE)
     {
-        gCurrentMove = gLastUsedMove = gLockedMoves[gBankAttacker];
+        gCurrentMove = gOriginallyUsedMove = gLockedMoves[gBankAttacker];
     }
     // encore forces you to use the same move
     else if (gDisableStructs[gBankAttacker].encoredMove != MOVE_NONE
              && gDisableStructs[gBankAttacker].encoredMove == gBattleMons[gBankAttacker].moves[gDisableStructs[gBankAttacker].encoredMovePos])
     {
-        gCurrentMove = gLastUsedMove = gDisableStructs[gBankAttacker].encoredMove;
+        gCurrentMove = gOriginallyUsedMove = gDisableStructs[gBankAttacker].encoredMove;
         gCurrMovePos = gUnknown_020241E9 = gDisableStructs[gBankAttacker].encoredMovePos;
         *(gBattleStruct->moveTarget + gBankAttacker) = GetMoveTarget(gCurrentMove, 0);
     }
@@ -5069,7 +5069,7 @@ static void HandleAction_UseMove(void)
              && gDisableStructs[gBankAttacker].encoredMove != gBattleMons[gBankAttacker].moves[gDisableStructs[gBankAttacker].encoredMovePos])
     {
         gCurrMovePos = gUnknown_020241E9 = gDisableStructs[gBankAttacker].encoredMovePos;
-        gCurrentMove = gLastUsedMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
+        gCurrentMove = gOriginallyUsedMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
         gDisableStructs[gBankAttacker].encoredMove = MOVE_NONE;
         gDisableStructs[gBankAttacker].encoredMovePos = 0;
         gDisableStructs[gBankAttacker].encoreTimer1 = 0;
@@ -5077,12 +5077,12 @@ static void HandleAction_UseMove(void)
     }
     else if (gBattleMons[gBankAttacker].moves[gCurrMovePos] != gChosenMovesByBanks[gBankAttacker])
     {
-        gCurrentMove = gLastUsedMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
+        gCurrentMove = gOriginallyUsedMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
         *(gBattleStruct->moveTarget + gBankAttacker) = GetMoveTarget(gCurrentMove, 0);
     }
     else
     {
-        gCurrentMove = gLastUsedMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
+        gCurrentMove = gOriginallyUsedMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
     }
 
     if (gBattleMons[gBankAttacker].hp != 0)
@@ -5122,7 +5122,7 @@ static void HandleAction_UseMove(void)
         }
         if (var == 4)
         {
-            if (gBattleMoves[gLastUsedMove].target & MOVE_TARGET_RANDOM)
+            if (gBattleMoves[gOriginallyUsedMove].target & MOVE_TARGET_RANDOM)
             {
                 if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
                 {
@@ -5167,7 +5167,7 @@ static void HandleAction_UseMove(void)
         }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-             && gBattleMoves[gLastUsedMove].target & MOVE_TARGET_RANDOM)
+             && gBattleMoves[gOriginallyUsedMove].target & MOVE_TARGET_RANDOM)
     {
         if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
         {
@@ -5600,7 +5600,7 @@ static void HandleAction_ActionFinished(void)
     gBattleMoveFlags = 0;
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
-    gUnknown_02024250[gBankAttacker] = 0;
+    gTurnMovesHitWith[gBankAttacker] = 0;
     gUnknown_02024258[gBankAttacker] = 0;
     gBattleStruct->dynamicMoveType = 0;
     gDynamicBasePower = 0;

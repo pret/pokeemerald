@@ -312,7 +312,7 @@ gUnknown_020241E9: @ 20241E9
 gCurrentMove: @ 20241EA
 	.space 0x2
 
-gLastUsedMove: @ 20241EC
+gOriginallyUsedMove: @ 20241EC
 	.space 0x2
 
 gRandomMove: @ 20241EE
@@ -375,7 +375,7 @@ gUnknownMovesUsedByBanks: @ 2024240
 gLastUsedMovesByBanks: @ 2024248
 	.space 0x8
 
-gUnknown_02024250: @ 2024250
+gTurnMovesHitWith: @ 2024250
 	.space 0x8
 
 gUnknown_02024258: @ 2024258
@@ -387,7 +387,7 @@ gUnknown_02024260: @ 2024260
 gLockedMoves: @ 2024268
 	.space 0x8
 
-gUnknown_02024270: @ 2024270
+gTurnMovesHitBy: @ 2024270
 	.space 0x4
 
 gChosenMovesByBanks: @ 2024274
