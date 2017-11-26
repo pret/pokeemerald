@@ -214,7 +214,7 @@ static void atk1D_jumpifstatus2(void);
 static void atk1E_jumpifability(void);
 static void atk1F_jumpifsideaffecting(void);
 static void atk20_jumpifstat(void);
-static void atk21_jumpifstatus3(void);
+static void atk21_jumpifstatus3condition(void);
 static void atk22_jumpiftype(void);
 static void atk23_getexp(void);
 static void atk24(void);
@@ -466,7 +466,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atk1E_jumpifability,
     atk1F_jumpifsideaffecting,
     atk20_jumpifstat,
-    atk21_jumpifstatus3,
+    atk21_jumpifstatus3condition,
     atk22_jumpiftype,
     atk23_getexp,
     atk24,
@@ -3314,10 +3314,10 @@ static void atk20_jumpifstat(void)
         gBattlescriptCurrInstr += 9;
 }
 
-static void atk21_jumpifstatus3(void)
+static void atk21_jumpifstatus3condition(void)
 {
     u32 flags;
-    const u8* jumpPtr;
+    const u8 *jumpPtr;
 
     gActiveBank = GetBattleBank(gBattlescriptCurrInstr[1]);
     flags = BS2ScriptRead32(gBattlescriptCurrInstr + 2);
@@ -7557,9 +7557,9 @@ static void atk88_negativedamage(void)
     gBattlescriptCurrInstr++;
 }
 
-static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8* BS_ptr)
+static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
 {
-    bool8 certain = 0;
+    bool8 certain = FALSE;
     bool8 notProtectAffected = FALSE;
     u32 index;
 
@@ -7667,15 +7667,15 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8* BS_ptr)
             if (statValue == -2)
             {
                 gBattleTextBuff2[1] = B_BUFF_STRING;
-                gBattleTextBuff2[2] = 0xD3; // harshly
-                gBattleTextBuff2[3] = 0xD3 >> 8;
+                gBattleTextBuff2[2] = STRINGID_STATHARSHLY;
+                gBattleTextBuff2[3] = STRINGID_STATHARSHLY >> 8;
                 index = 4;
             }
             gBattleTextBuff2[index] = B_BUFF_STRING;
             index++;
-            gBattleTextBuff2[index] = 0xD4; // fell
+            gBattleTextBuff2[index] = STRINGID_STATFELL;
             index++;
-            gBattleTextBuff2[index] = 0xD4 >> 8;
+            gBattleTextBuff2[index] = STRINGID_STATFELL >> 8;
             index++;
             gBattleTextBuff2[index] = B_BUFF_EOS;
 
@@ -7694,15 +7694,15 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8* BS_ptr)
         if (statValue == 2)
         {
             gBattleTextBuff2[1] = B_BUFF_STRING;
-            gBattleTextBuff2[2] = 0xD1; // sharply
-            gBattleTextBuff2[3] = 0xD1 >> 8;
+            gBattleTextBuff2[2] = STRINGID_STATSHARPLY;
+            gBattleTextBuff2[3] = STRINGID_STATSHARPLY >> 8;
             index = 4;
         }
         gBattleTextBuff2[index] = B_BUFF_STRING;
         index++;
-        gBattleTextBuff2[index] = 0xD2; // rose
+        gBattleTextBuff2[index] = STRINGID_STATROSE;
         index++;
-        gBattleTextBuff2[index] = 0xD2 >> 8;
+        gBattleTextBuff2[index] = STRINGID_STATROSE >> 8;
         index++;
         gBattleTextBuff2[index] = B_BUFF_EOS;
 

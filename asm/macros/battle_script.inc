@@ -163,7 +163,7 @@
 	.4byte \param4
 	.endm
 
-	.macro jumpifstatus3 bank, status3, param2, param3
+	.macro jumpifstatus3condition bank, status3, param2, param3
 	.byte 0x21
 	.byte \bank
 	.4byte \status3
@@ -1252,4 +1252,20 @@
 	
 	.macro jumpifbyteequal byte1, byte2, jumpptr
 	jumpifarrayequal \byte1, \byte2, 0x1, \jumpptr
+	.endm
+	
+	.macro jumpifmove move, jumpptr
+	jumpifhalfword EQUAL, gCurrentMove, \move, \jumpptr
+	.endm
+
+	.macro jumpifnotmove move, jumpptr
+	jumpifhalfword NOT_EQUAL, gCurrentMove, \move, \jumpptr
+	.endm
+	
+	.macro jumpifstatus3 bank, status, jumpptr
+	jumpifstatus3condition \bank, \status, 0x0, \jumpptr
+	.endm
+	
+	.macro jumpifnostatus3 bank, status, jumpptr
+	jumpifstatus3condition \bank, \status, 0x1, \jumpptr
 	.endm

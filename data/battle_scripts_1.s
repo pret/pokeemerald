@@ -246,8 +246,8 @@ BattleScript_EffectUnused83::
 BattleScript_EffectUnused8d::
 BattleScript_EffectUnusedA3::
 BattleScript_EffectHit::
-	jumpifhalfword NOT_EQUAL, gCurrentMove, MOVE_SURF, BattleScript_HitFromAtkCanceler
-	jumpifstatus3 TARGET, STATUS3_UNDERWATER, 0x1, BattleScript_HitFromAtkCanceler
+	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
+	jumpifnostatus3 TARGET, STATUS3_UNDERWATER, BattleScript_HitFromAtkCanceler
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
 	setbyte sDMG_MULTIPLIER, 0x2
 BattleScript_HitFromAtkCanceler::
@@ -507,7 +507,7 @@ BattleScript_EffectStatUp::
 BattleScript_EffectStatUpAfterAtkCanceler::
 	attackstring
 	ppreduce
-	statbuffchange 0x41, BattleScript_StatUpEnd
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_StatUpEnd
 	jumpifbyte NOT_EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_StatUpAttackAnim
 	pause 0x20
 	goto BattleScript_StatUpPrintString
@@ -611,7 +611,7 @@ BattleScript_EffectRoar::
 	attackstring
 	ppreduce
 	jumpifability TARGET, ABILITY_SUCTION_CUPS, BattleScript_82DB5B9
-	jumpifstatus3 TARGET, STATUS3_ROOTED, 0x0, BattleScript_82DB109
+	jumpifstatus3 TARGET, STATUS3_ROOTED, BattleScript_82DB109
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_ARENA, BattleScript_ButItFailed
@@ -808,7 +808,7 @@ BattleScript_82D9040::
 	setbyte sANIM_TURN, 0x1
 	clearstatusfromeffect ATTACKER
 	orword gHitMarker, HITMARKER_NO_PPDEDUCT
-	jumpifhalfword NOT_EQUAL, gCurrentMove, MOVE_SKY_ATTACK, BattleScript_HitFromAccCheck
+	jumpifnotmove MOVE_SKY_ATTACK, BattleScript_HitFromAccCheck
 	setmoveeffect EFFECT_FLINCH
 	goto BattleScript_HitFromAccCheck
 
@@ -848,8 +848,8 @@ BattleScript_EffectDragonRage::
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectTrap::
-	jumpifhalfword NOT_EQUAL, gCurrentMove, MOVE_WHIRLPOOL, BattleScript_82D9105
-	jumpifstatus3 TARGET, STATUS3_UNDERWATER, 0x1, BattleScript_82D9105
+	jumpifnotmove MOVE_WHIRLPOOL, BattleScript_82D9105
+	jumpifnostatus3 TARGET, STATUS3_UNDERWATER, BattleScript_82D9105
 	orword gHitMarker, HITMARKER_IGNORE_UNDERWATER
 	setbyte sDMG_MULTIPLIER, 0x2
 BattleScript_82D9105::
@@ -917,7 +917,7 @@ BattleScript_EffectFocusEnergy::
 
 BattleScript_EffectRecoil::
 	setmoveeffect EFFECT_RECOIL_25 | AFFECTS_USER | CERTAIN
-	jumpifhalfword NOT_EQUAL, gCurrentMove, MOVE_STRUGGLE, BattleScript_EffectHit
+	jumpifnotmove MOVE_STRUGGLE, BattleScript_EffectHit
 	incrementgamestat 0x1B
 	goto BattleScript_EffectHit
 
@@ -1389,7 +1389,7 @@ BattleScript_EffectHealBell::
 	waitanimation
 	printfromtable gPartyStatusHealStringIds
 	waitmessage 0x40
-	jumpifhalfword NOT_EQUAL, gCurrentMove, MOVE_HEAL_BELL, BattleScript_82D96FE
+	jumpifnotmove MOVE_HEAL_BELL, BattleScript_82D96FE
 	jumpifbyte NO_COMMON_BITS, cMULTISTRING_CHOOSER, 0x1, BattleScript_82D96ED
 	printstring STRINGID_PKMNSXBLOCKSY
 	waitmessage 0x40
@@ -1517,17 +1517,17 @@ BattleScript_CurseTrySpeed::
 	attackanimation
 	waitanimation
 	setstatchanger SPEED, 1, TRUE
-	statbuffchange 0x41, BattleScript_CurseTryAttack
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_CurseTryAttack
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
 BattleScript_CurseTryAttack::
 	setstatchanger ATK, 1, FALSE
-	statbuffchange 0x41, BattleScript_CurseTryDefence
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_CurseTryDefence
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_CurseTryDefence::
 	setstatchanger DEF, 1, FALSE
-	statbuffchange 0x41, BattleScript_CurseEnd
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_CurseEnd
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_CurseEnd::
@@ -1838,7 +1838,7 @@ BattleScript_EffectSkullBash::
 	setbyte sTWOTURN_STRINGID, 0x2
 	call BattleScriptFirstChargingTurn
 	setstatchanger DEF, 1, FALSE
-	statbuffchange 0x41, BattleScript_82D9C16
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82D9C16
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82D9C16
 	setgraphicalstatchangevalues
 	playanimation ATTACKER, ANIM_STATS_CHANGE, sANIM_ARG1
@@ -1848,7 +1848,7 @@ BattleScript_82D9C16::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectTwister::
-	jumpifstatus3 TARGET, STATUS3_ON_AIR, 0x1, BattleScript_82D9C35
+	jumpifnostatus3 TARGET, STATUS3_ON_AIR, BattleScript_82D9C35
 	orword gHitMarker, HITMARKER_IGNORE_ON_AIR
 	setbyte sDMG_MULTIPLIER, 0x2
 BattleScript_82D9C35::
@@ -1862,7 +1862,7 @@ BattleScript_EffectEarthquake::
 	selectfirstvalidtarget
 BattleScript_82D9C44::
 	movevaluescleanup
-	jumpifstatus3 TARGET, STATUS3_UNDERGROUND, 0x1, BattleScript_82D9C64
+	jumpifnostatus3 TARGET, STATUS3_UNDERGROUND, BattleScript_82D9C64
 	orword gHitMarker, HITMARKER_IGNORE_UNDERGROUND
 	setbyte sDMG_MULTIPLIER, 0x2
 	goto BattleScript_82D9C73
@@ -1918,13 +1918,13 @@ BattleScript_EffectFutureSight::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectGust::
-	jumpifstatus3 TARGET, STATUS3_ON_AIR, 0x1, BattleScript_EffectHit
+	jumpifnostatus3 TARGET, STATUS3_ON_AIR, BattleScript_EffectHit
 	orword gHitMarker, HITMARKER_IGNORE_ON_AIR
 	setbyte sDMG_MULTIPLIER, 0x2
 	goto BattleScript_EffectHit
 
 BattleScript_EffectStomp::
-	jumpifstatus3 TARGET, STATUS3_MINIMIZED, 0x1, BattleScript_82D9C35
+	jumpifnostatus3 TARGET, STATUS3_MINIMIZED, BattleScript_82D9C35
 	setbyte sDMG_MULTIPLIER, 0x2
 	goto BattleScript_82D9C35
 
@@ -2002,9 +2002,9 @@ BattleScript_BeatUpEnd::
 BattleScript_EffectSemiInvulnerable::
 	jumpifstatus2 ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_SecondTurnSemiInvulnerable
 	jumpifword COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_SecondTurnSemiInvulnerable
-	jumpifhalfword EQUAL, gCurrentMove, MOVE_FLY, BattleScript_FirstTurnFly
-	jumpifhalfword EQUAL, gCurrentMove, MOVE_DIVE, BattleScript_FirstTurnDive
-	jumpifhalfword EQUAL, gCurrentMove, MOVE_BOUNCE, BattleScript_FirstTurnBounce
+	jumpifmove MOVE_FLY, BattleScript_FirstTurnFly
+	jumpifmove MOVE_DIVE, BattleScript_FirstTurnDive
+	jumpifmove MOVE_BOUNCE, BattleScript_FirstTurnBounce
 	setbyte sTWOTURN_STRINGID, 0x5
 	goto BattleScript_FirstTurnSemiInvulnerable
 
@@ -2029,7 +2029,7 @@ BattleScript_SecondTurnSemiInvulnerable::
 	setbyte sANIM_TURN, 0x1
 	clearstatusfromeffect ATTACKER
 	orword gHitMarker, HITMARKER_NO_PPDEDUCT
-	jumpifhalfword NOT_EQUAL, gCurrentMove, MOVE_BOUNCE, BattleScript_82D9EA3
+	jumpifnotmove MOVE_BOUNCE, BattleScript_82D9EA3
 	setmoveeffect EFFECT_PARALYSIS
 BattleScript_82D9EA3::
 	accuracycheck BattleScript_SemiInvulnerableMiss, ACC_CURR_MOVE
@@ -2046,7 +2046,7 @@ BattleScript_EffectDefenseCurl::
 	ppreduce
 	setdefensecurlbit
 	setstatchanger DEF, 1, FALSE
-	statbuffchange 0x41, BattleScript_82D9ED3
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82D9ED3
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_StatUpPrintString
 	attackanimation
 	waitanimation
@@ -2724,13 +2724,13 @@ BattleScript_82DA5F8::
 	setbyte sFIELD_1B, 0x0
 	playstatchangeanimation ATTACKER, 0x24, 0x0
 	setstatchanger DEF, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DA623
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DA623
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DA623
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_82DA623::
 	setstatchanger SPDEF, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DA642
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DA642
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DA642
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
@@ -2753,13 +2753,13 @@ BattleScript_82DA66A::
 	setbyte sFIELD_1B, 0x0
 	playstatchangeanimation ATTACKER, 0x6, 0x0
 	setstatchanger ATK, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DA695
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DA695
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DA695
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_82DA695::
 	setstatchanger DEF, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DA6B4
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DA6B4
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DA6B4
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
@@ -2778,13 +2778,13 @@ BattleScript_82DA6CE::
 	setbyte sFIELD_1B, 0x0
 	playstatchangeanimation ATTACKER, 0x30, 0x0
 	setstatchanger SPATK, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DA6F9
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DA6F9
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DA6F9
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_82DA6F9::
 	setstatchanger SPDEF, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DA718
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DA718
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DA718
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
@@ -2810,13 +2810,13 @@ BattleScript_82DA746::
 	setbyte sFIELD_1B, 0x0
 	playstatchangeanimation ATTACKER, 0xA, 0x0
 	setstatchanger ATK, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DA771
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DA771
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DA771
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_82DA771::
 	setstatchanger SPEED, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DA790
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DA790
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DA790
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
@@ -3493,27 +3493,27 @@ BattleScript_82DAF54::
 	setbyte sFIELD_1B, 0x0
 	playstatchangeanimation ATTACKER, 0x3E, 0x0
 	setstatchanger ATK, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DAF72
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DAF72
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_82DAF72::
 	setstatchanger DEF, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DAF86
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DAF86
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_82DAF86::
 	setstatchanger SPEED, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DAF9A
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DAF9A
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_82DAF9A::
 	setstatchanger SPATK, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DAFAE
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DAFAE
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_82DAFAE::
 	setstatchanger SPDEF, 1, FALSE
-	statbuffchange 0x41, BattleScript_82DAFC2
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DAFC2
 	printfromtable gStatUpStringIds
 	waitmessage 0x40
 BattleScript_82DAFC2::
@@ -3664,14 +3664,14 @@ BattleScript_AtkDefDown::
 	playstatchangeanimation ATTACKER, 0x6, 0xD
 	playstatchangeanimation ATTACKER, 0x2, 0x9
 	setstatchanger ATK, 1, TRUE
-	statbuffchange 0xC1, BattleScript_82DB144
+	statbuffchange AFFECTS_USER | CERTAIN | 0x1, BattleScript_82DB144
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DB144
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
 BattleScript_82DB144::
 	playstatchangeanimation ATTACKER, 0x4, 0x9
 	setstatchanger DEF, 1, TRUE
-	statbuffchange 0xC1, BattleScript_82DB167
+	statbuffchange AFFECTS_USER | CERTAIN | 0x1, BattleScript_82DB167
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DB167
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
@@ -3737,7 +3737,7 @@ BattleScript_SAtkDown2::
 	setbyte sFIELD_1B, 0x0
 	playstatchangeanimation ATTACKER, 0x10, 0xB
 	setstatchanger SPATK, 2, TRUE
-	statbuffchange 0xC1, BattleScript_82DB1FE
+	statbuffchange AFFECTS_USER | CERTAIN | 0x1, BattleScript_82DB1FE
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x2, BattleScript_82DB1FE
 	printfromtable gStatDownStringIds
 	waitmessage 0x40
@@ -3974,7 +3974,7 @@ BattleScript_MoveEffectConfusion::
 	return
 
 BattleScript_MoveEffectRecoil33::
-	jumpifhalfword EQUAL, gCurrentMove, MOVE_STRUGGLE, BattleScript_DoRecoil33
+	jumpifmove MOVE_STRUGGLE, BattleScript_DoRecoil33
 	jumpifability ATTACKER, ABILITY_ROCK_HEAD, BattleScript_Recoil33End
 BattleScript_DoRecoil33::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
@@ -4450,7 +4450,7 @@ BattleScript_BerryConfuseHealEnd2::
 
 BattleScript_BerryStatRaiseEnd2::
 	playanimation ATTACKER, ANIM_ITEM_EFFECT, NULL
-	statbuffchange 0x41, BattleScript_82DB85B
+	statbuffchange AFFECTS_USER | 0x1, BattleScript_82DB85B
 BattleScript_82DB85B::
 	setbyte cMULTISTRING_CHOOSER, 0x4
 	call BattleScript_StatUp
