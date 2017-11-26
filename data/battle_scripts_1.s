@@ -3087,7 +3087,7 @@ BattleScript_WildMonFled::
 	waitmessage 0x40
 	end2
 
-BattleScript_82DAAFE::
+BattleScript_PrintCantRunFromTrainer::
 	printstring STRINGID_NORUNNINGFROMTRAINERS
 	end2
 
@@ -3096,7 +3096,7 @@ BattleScript_PrintFailedToRunString::
 	waitmessage 0x40
 	end2
 
-BattleScript_82DAB0B::
+BattleScript_PrintCantEscapeFromBattle::
 	printselectionstringfromtable gNoEscapeStringIds
 	endselectionscript
 
@@ -3463,7 +3463,7 @@ BattleScript_82DAEFE::
 	waitmessage 0x40
 	return
 
-BattleScript_82DAF05::
+BattleScript_PerishSongTakesLife::
 	printstring STRINGID_PKMNPERISHCOUNTFELL
 	waitmessage 0x40
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
@@ -3472,7 +3472,7 @@ BattleScript_82DAF05::
 	tryfaintmon ATTACKER, FALSE, NULL
 	end2
 
-BattleScript_82DAF20::
+BattleScript_PerishSongCountGoesDown::
 	printstring STRINGID_PKMNPERISHCOUNTFELL
 	waitmessage 0x40
 	end2
@@ -3533,7 +3533,7 @@ BattleScript_SpikesFree::
 	waitmessage 0x40
 	return
 
-BattleScript_82DAFE4::
+BattleScript_MonTookFutureAttack::
 	printstring STRINGID_PKMNTOOKATTACK
 	waitmessage 0x40
 	jumpifbyte NOT_EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_82DB001
@@ -3565,7 +3565,6 @@ BattleScript_82DB03F::
 	moveend 0x2, 0xE
 	setbyte gBattleMoveFlags, 0
 	end2
-
 BattleScript_82DB058::
 	pause 0x20
 	setbyte gBattleMoveFlags, 0
@@ -3757,7 +3756,7 @@ BattleScript_MoveUsedWokeUp::
 	updatestatusicon ATTACKER
 	return
 
-BattleScript_82DB234::
+BattleScript_MonWokeUpInUproar::
 	printstring STRINGID_PKMNWOKEUPINUPROAR
 	waitmessage 0x40
 	updatestatusicon ATTACKER
@@ -3812,8 +3811,8 @@ BattleScript_MoveUsedFlinched::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_82DB2A6::
-	printfromtable gUproarOvetTurnStringIds
+BattleScript_PrintUproarOverTurns::
+	printfromtable gUproarOverTurnStringIds
 	waitmessage 0x40
 	end2
 
@@ -4575,7 +4574,7 @@ BattleScript_82DB992::
 	various ATTACKER, 0xC
 	end2
 
-BattleScript_82DB9BA::
+BattleScript_AskIfWantsToForfeitMatch::
 	printselectionstring STRINGID_QUESTIONFORFEITMATCH
 	various ATTACKER, VARIOUS_EMIT_YESNOBOX
 	endselectionscript

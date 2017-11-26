@@ -964,7 +964,7 @@ const u16 gRestUsedStringIds[] =
     STRINGID_PKMNWENTTOSLEEP, STRINGID_PKMNSLEPTHEALTHY
 };
 
-const u16 gUproarOvetTurnStringIds[] =
+const u16 gUproarOverTurnStringIds[] =
 {
     STRINGID_PKMNMAKINGUPROAR, STRINGID_PKMNCALMEDDOWN
 };

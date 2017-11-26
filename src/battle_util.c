@@ -963,7 +963,7 @@ u8 TurnBasedEffects(void)
                             gBattleMons[gBankAttacker].status1 &= ~(STATUS_SLEEP);
                             gBattleMons[gBankAttacker].status2 &= ~(STATUS2_NIGHTMARE);
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                            BattleScriptExecute(BattleScript_82DB234);
+                            BattleScriptExecute(BattleScript_MonWokeUpInUproar);
                             gActiveBank = gBankAttacker;
                             EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
                             MarkBufferBankForExecution(gActiveBank);
@@ -994,7 +994,7 @@ u8 TurnBasedEffects(void)
                             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                             CancelMultiTurnMoves(gActiveBank);
                         }
-                        BattleScriptExecute(BattleScript_82DB2A6);
+                        BattleScriptExecute(BattleScript_PrintUproarOverTurns);
                         effect = 1;
                     }
                 }
@@ -1144,7 +1144,7 @@ bool8 sub_8041364(void)
                 gBankAttacker = gWishFutureKnock.futureSightAttacker[gActiveBank];
                 gBattleMoveDamage = gWishFutureKnock.futureSightDmg[gActiveBank];
                 gSpecialStatuses[gBankTarget].moveturnLostHP = 0xFFFF;
-                BattleScriptExecute(BattleScript_82DAFE4);
+                BattleScriptExecute(BattleScript_MonTookFutureAttack);
 
                 if (gWishFutureKnock.futureSightCounter[gActiveBank] == 0
                  && gWishFutureKnock.futureSightCounter[gActiveBank ^ BIT_MON] == 0)
@@ -1178,12 +1178,12 @@ bool8 sub_8041364(void)
                 {
                     gStatuses3[gActiveBank] &= ~STATUS3_PERISH_SONG;
                     gBattleMoveDamage = gBattleMons[gActiveBank].hp;
-                    gBattlescriptCurrInstr = BattleScript_82DAF05;
+                    gBattlescriptCurrInstr = BattleScript_PerishSongTakesLife;
                 }
                 else
                 {
                     gDisableStructs[gActiveBank].perishSongTimer1--;
-                    gBattlescriptCurrInstr = BattleScript_82DAF20;
+                    gBattlescriptCurrInstr = BattleScript_PerishSongCountGoesDown;
                 }
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 return TRUE;

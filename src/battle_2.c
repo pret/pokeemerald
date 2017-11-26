@@ -4083,7 +4083,7 @@ static void HandleTurnActionSelectionState(void)
                     && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000)
                     && gBattleBufferB[gActiveBank][1] == ACTION_RUN)
                 {
-                    gSelectionBattleScripts[gActiveBank] = BattleScript_82DB9BA;
+                    gSelectionBattleScripts[gActiveBank] = BattleScript_AskIfWantsToForfeitMatch;
                     gBattleCommunication[gActiveBank] = 8;
                     *(gBattleStruct->selectionScriptFinished + gActiveBank) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + gActiveBank) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4093,13 +4093,13 @@ static void HandleTurnActionSelectionState(void)
                          && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
                          && gBattleBufferB[gActiveBank][1] == ACTION_RUN)
                 {
-                    BattleScriptExecute(BattleScript_82DAAFE);
+                    BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
                     gBattleCommunication[gActiveBank] = 1;
                 }
-                else if (IsRunningFromBattleImpossible() != 0
+                else if (IsRunningFromBattleImpossible()
                          && gBattleBufferB[gActiveBank][1] == ACTION_RUN)
                 {
-                    gSelectionBattleScripts[gActiveBank] = BattleScript_82DAB0B;
+                    gSelectionBattleScripts[gActiveBank] = BattleScript_PrintCantEscapeFromBattle;
                     gBattleCommunication[gActiveBank] = STATE_SELECTION_SCRIPT;
                     *(gBattleStruct->selectionScriptFinished + gActiveBank) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + gActiveBank) = STATE_BEFORE_ACTION_CHOSEN;
