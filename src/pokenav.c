@@ -2,6 +2,11 @@
 #include "malloc.h"
 #include "main.h"
 #include "task.h"
+#include "gpu_regs.h"
+#include "bg.h"
+#include "window.h"
+#include "menu.h"
+#include "graphics.h"
 #include "palette.h"
 #include "overworld.h"
 #include "field_weather.h"
@@ -9,7 +14,6 @@
 #include "sound.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
-#include "window.h"
 #include "pokenav.h"
 
 // static types
@@ -26,7 +30,8 @@ struct PokenavStruct_203CF40 {
 struct PokenavStruct_81C76C4 {
     u8 filler_000[12];
     unsigned unk_00c;
-    u8 filler_010[0x81c];
+    u8 filler_010[0x1c];
+    u8 unk_2c[0x800];
 };
 
 // static declarations
@@ -113,6 +118,10 @@ bool32 sub_81D0978(void);
 bool32 sub_81D09B0(void);
 bool32 sub_81D09E0(void);
 void sub_81D09F4(void);
+void sub_81C7944(const u16 *src, unsigned offset, u16 size);
+void sub_81C7B74(void);
+void sub_81C7C28(void);
+void sub_81C7D28(void);
 
 // rodata
 
@@ -141,6 +150,8 @@ const struct {
     {sub_81D0450, sub_81D04A0, sub_81D0978, sub_81D09B0, sub_81D09E0, sub_81D04B8, sub_81D09F4},
     {sub_81CFA04, sub_81CFA34, sub_81CFE08, sub_81CFE40, sub_81CFE70, sub_81CFA48, sub_81CFE98}
 };
+
+extern const struct BgTemplate gUnknown_0861FA04[1];
 
 // text
 
@@ -461,4 +472,46 @@ bool32 sub_81C7738(void)
         return FALSE;
     }
     return TRUE;
+}
+
+int sub_81C7764(int a0)
+{
+    struct PokenavStruct_81C76C4 *ptr;
+    switch (a0)
+    {
+        case 0:
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+            FreeAllWindowBuffers();
+            ResetBgsAndClearDma3BusyFlags(0);
+            InitBgsFromTemplates(0, gUnknown_0861FA04, 1);
+            sub_8199D98();
+            reset_temp_tile_data_buffers();
+            return 1;
+        case 1:
+            ptr = sub_81C763C(0);
+            decompress_and_copy_tile_data_to_vram(0, gUnknown_08DC7B80, 0, 0, 0);
+            SetBgTilemapBuffer(0, ptr->unk_2c);
+            CopyToBgTilemapBuffer(0, gUnknown_08DC7D84, 0, 0);
+            sub_81C7944(gUnknown_08DC7B60, 0x00, 0x20);
+            CopyBgTilemapBufferToVram(0);
+            return 0;
+        case 2:
+            if (free_temp_tile_data_buffers_if_possible())
+            {
+                return 2;
+            }
+            sub_81C7B74();
+            return 0;
+        case 3:
+            if (IsDma3ManagerBusyWithBgCopy())
+            {
+                return 2;
+            }
+            sub_81C7C28();
+            sub_81C7D28();
+            ShowBg(0);
+            return 4;
+        default:
+            return 4;
+    }
 }

@@ -31,5 +31,6 @@ void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirs
 s8 sub_8198C58(void);
 void do_scheduled_bg_tilemap_copies_to_vram(void);
 void clear_scheduled_bg_copies_to_vram(void);
+void sub_8199D98(void);
 
 #endif // GUARD_MENU_H
