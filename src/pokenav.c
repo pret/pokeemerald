@@ -593,3 +593,15 @@ void sub_81C7944(const u16 *src, ptrdiff_t offset, size_t size)
 {
     CpuCopy16(src, gPlttBufferUnfaded + offset, size);
 }
+
+void sub_81C795C(struct SpritePalette *palettes)
+{
+    u32 paletteSlot;
+
+    while (palettes->data != NULL && (paletteSlot = AllocSpritePalette(palettes->tag)) != 0xFF)
+    {
+        paletteSlot = 16 * paletteSlot + 0x100;
+        sub_81C7944(palettes->data, paletteSlot, 0x20);
+        palettes++;
+    }
+}

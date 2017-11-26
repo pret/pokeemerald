@@ -5,36 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C795C
-sub_81C795C: @ 81C795C
-	push {r4,lr}
-	adds r4, r0, 0
-	b _081C7974
-_081C7962:
-	lsls r0, r1, 4
-	movs r2, 0x80
-	lsls r2, 1
-	adds r1, r0, r2
-	ldr r0, [r4]
-	movs r2, 0x20
-	bl sub_81C7944
-	adds r4, 0x8
-_081C7974:
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _081C7988
-	ldrh r0, [r4, 0x4]
-	bl AllocSpritePalette
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xFF
-	bne _081C7962
-_081C7988:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81C795C
-
 	thumb_func_start sub_81C7990
 sub_81C7990: @ 81C7990
 	push {lr}
