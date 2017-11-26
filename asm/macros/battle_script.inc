@@ -850,7 +850,7 @@
 	.4byte \param0
 	.endm
 
-	.macro sleeptalk_choose_move param0
+	.macro trychoosesleeptalkmove param0
 	.byte 0xa9
 	.4byte \param0
 	.endm
@@ -1171,7 +1171,7 @@
 	.byte 0xee
 	.endm
 
-	.macro pokeball_catch_calculation
+	.macro handleballthrow
 	.byte 0xef
 	.endm
 

@@ -9,19 +9,19 @@
 
 	.align 2
 gBattlescriptsForBallThrow:: @ 82DBD08
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD7E
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD68
-	.4byte BattleScript_82DBD68
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_SafariBallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
+	.4byte BattleScript_BallThrow
 
 	.align 2
 gUnknown_082DBD3C:: @ 82DBD3C
@@ -43,19 +43,19 @@ gBattlescriptsForSafariActions:: @ 82DBD58
 	.4byte BattleScript_ActionThrowPokeblock
 	.4byte BattleScript_82DBEE3
 
-BattleScript_82DBD68::
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_WALLY_TUTORIAL, BattleScript_82DBD7A
+BattleScript_BallThrow::
+	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_WALLY_TUTORIAL, BattleScript_BallThrowByWally
 	printstring STRINGID_PLAYERUSEDITEM
-	pokeball_catch_calculation
+	handleballthrow
 
-BattleScript_82DBD7A::
+BattleScript_BallThrowByWally::
 	printstring STRINGID_WALLYUSEDITEM
-	pokeball_catch_calculation
+	handleballthrow
 
-BattleScript_82DBD7E::
+BattleScript_SafariBallThrow::
 	printstring STRINGID_PLAYERUSEDITEM
 	updatestatusicon ATTACKER
-	pokeball_catch_calculation
+	handleballthrow
 
 BattleScript_SuccessBallThrow::
 	jumpifhalfword EQUAL, gLastUsedItem, 0x5, BattleScript_82DBD92
@@ -114,7 +114,7 @@ BattleScript_82DBE12::
 BattleScript_82DBE1C::
 	printstring STRINGID_EMPTYSTRING3
 	pause 0x30
-	playse 0x1
+	playse SE_KAIFUKU
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 0x40
 	useitemonopponent
@@ -131,7 +131,7 @@ BattleScript_82DBE1C::
 BattleScript_82DBE4B::
 	printstring STRINGID_EMPTYSTRING3
 	pause 0x30
-	playse 0x1
+	playse SE_KAIFUKU
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 0x40
 	useitemonopponent
@@ -145,7 +145,7 @@ BattleScript_82DBE4B::
 BattleScript_82DBE6F::
 	printstring STRINGID_EMPTYSTRING3
 	pause 0x30
-	playse 0x1
+	playse SE_KAIFUKU
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 0x40
 	useitemonopponent
@@ -158,7 +158,7 @@ BattleScript_82DBE6F::
 BattleScript_82DBE91::
 	printstring STRINGID_EMPTYSTRING3
 	pause 0x30
-	playse 0x1
+	playse SE_KAIFUKU
 	printstring STRINGID_TRAINER1USEDITEM
 	waitmessage 0x40
 	useitemonopponent
@@ -169,7 +169,7 @@ BattleScript_82DBE91::
 	finishaction
 
 BattleScript_RunByUsingItem::
-	playse 0x11
+	playse SE_NIGERU
 	setbyte gBattleOutcome, RAN
 	finishturn
 

@@ -350,7 +350,7 @@ static void atkA5_painsplitdmgcalc(void);
 static void atkA6_settypetorandomresistance(void);
 static void atkA7_setalwayshitflag(void);
 static void atkA8_copymovepermanently(void);
-static void atkA9_sleeptalk_choose_move(void);
+static void atkA9_trychoosesleeptalkmove(void);
 static void atkAA_setdestinybond(void);
 static void atkAB_trysetdestinybondtohappen(void);
 static void atkAC_remaininghptopower(void);
@@ -420,7 +420,7 @@ static void atkEB_settypetoterrain(void);
 static void atkEC_pursuitrelated(void);
 static void atkEF_snatchsetbanks(void);
 static void atkEE_removelightscreenreflect(void);
-static void atkEF_pokeball_catch_calculation(void);
+static void atkEF_handleballthrow(void);
 static void atkF0_givecaughtmon(void);
 static void atkF1_trysetcaughtmondexflags(void);
 static void atkF2_displaydexinfo(void);
@@ -602,7 +602,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkA6_settypetorandomresistance,
     atkA7_setalwayshitflag,
     atkA8_copymovepermanently,
-    atkA9_sleeptalk_choose_move,
+    atkA9_trychoosesleeptalkmove,
     atkAA_setdestinybond,
     atkAB_trysetdestinybondtohappen,
     atkAC_remaininghptopower,
@@ -672,7 +672,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     atkEC_pursuitrelated,
     atkEF_snatchsetbanks,
     atkEE_removelightscreenreflect,
-    atkEF_pokeball_catch_calculation,
+    atkEF_handleballthrow,
     atkF0_givecaughtmon,
     atkF1_trysetcaughtmondexflags,
     atkF2_displaydexinfo,
@@ -8819,7 +8819,7 @@ static u8 AttacksThisTurn(u8 bank, u16 move) // Note: returns 1 if it's a chargi
     return 2;
 }
 
-static void atkA9_sleeptalk_choose_move(void)
+static void atkA9_trychoosesleeptalkmove(void)
 {
     s32 i;
     u8 unusableMovesBits = 0;
@@ -10597,7 +10597,7 @@ static void atkEE_removelightscreenreflect(void) // brick break
     gBattlescriptCurrInstr++;
 }
 
-static void atkEF_pokeball_catch_calculation(void)
+static void atkEF_handleballthrow(void)
 {
     u8 ballMultiplier = 0;
 
