@@ -22,13 +22,12 @@ enum
     PBLOCK_FEEL,
 };
 
-// rom6
 void ClearPokeblocks(void);
 s8 GetFirstFreePokeblockSlot(void);
-
 bool32 AddPokeblock(struct Pokeblock *pokeblock);
 u8 GetHighestPokeblocksFlavourLevel(const struct Pokeblock *pokeblock);
 u8 GetPokeblocksFeel(const struct Pokeblock *pokeblock);
 u8 GetPokeblocksFlavour(const struct Pokeblock *pokeblock);
+s16 PokeblockGetGain(u8, const struct Pokeblock *);
 
 #endif // GUARD_POKEBLOCK_H

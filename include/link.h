@@ -180,6 +180,7 @@ void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
 u8 GetLinkPlayerCount(void);
+bool32 InUnionRoom(void);
 
 void sub_800E0E8(void);
 bool8 sub_800A520(void);

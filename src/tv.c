@@ -1883,7 +1883,7 @@ void PutFishingAdviceShowOnTheAir(void)
     }
 }
 
-void sub_80EDA3C(u16 species)
+void SetPokemonAnglerSpecies(u16 species)
 {
     sPokemonAnglerSpecies = species;
 }

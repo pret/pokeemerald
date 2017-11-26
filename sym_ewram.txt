@@ -763,11 +763,7 @@ gUnknown_02038BF9: @ 2038BF9
 gUnknown_02038BFC: @ 2038BFC
 	.space 0x4
 
-gUnknown_02038C00: @ 2038C00
-	.space 0x4
-
-gUnknown_02038C04: @ 2038C04
-	.space 0x4
+    .include "src/wild_encounter.o"
 
 gFieldEffectArguments: @ 2038C08
 	.space 0x20
