@@ -5,43 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81C791C
-sub_81C791C: @ 81C791C
-	push {lr}
-	movs r1, 0xC0
-	lsls r1, 1
-	movs r0, 0
-	movs r2, 0x2
-	bl ChangeBgY
-	cmp r0, 0
-	ble _081C7932
-	movs r0, 0x2
-	b _081C793E
-_081C7932:
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgY
-	movs r0, 0x4
-_081C793E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81C791C
-
-	thumb_func_start sub_81C7944
-sub_81C7944: @ 81C7944
-	push {lr}
-	lsls r1, 1
-	ldr r3, =gPlttBufferUnfaded
-	adds r1, r3
-	lsls r2, 10
-	lsrs r2, 11
-	bl CpuSet
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81C7944
-
 	thumb_func_start sub_81C795C
 sub_81C795C: @ 81C795C
 	push {r4,lr}

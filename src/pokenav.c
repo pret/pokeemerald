@@ -59,8 +59,8 @@ static int sub_81C7764(int a0);
 static void sub_81C7834(void (*func0)(u32), u32 (*func1)(void));
 static void sub_81C7850(unsigned arg);
 static u32 sub_81C786C(void);
-int atk47_cmd47(int a0);
-int sub_81C791C(int a0);
+static int atk47_cmd47(int a0);
+static int sub_81C791C(int a0);
 void sub_81C7C94(void);
 bool32 sub_81C9298(void);
 bool32 sub_81C92CC(void);
@@ -122,7 +122,7 @@ bool32 sub_81D0978(void);
 void sub_81D09B0(u32 a0);
 bool32 sub_81D09E0(void);
 void sub_81D09F4(void);
-void sub_81C7944(const u16 *src, unsigned offset, u16 size);
+void sub_81C7944(const u16 *src, ptrdiff_t offset, size_t size);
 void sub_81C7B74(void);
 void sub_81C7C28(void);
 void sub_81C7D28(void);
@@ -559,7 +559,7 @@ bool32 sub_81C78C0(void)
     return sub_81C70D8(ptr->unk_00c);
 }
 
-int atk47_cmd47(int a0)
+static int atk47_cmd47(int a0)
 {
     switch (a0)
     {
@@ -577,4 +577,19 @@ int atk47_cmd47(int a0)
         default:
             return 4;
     }
+}
+
+static int sub_81C791C(int a0)
+{
+    if ((int)ChangeBgY(0, 0x180, 2) <= 0)
+    {
+        ChangeBgY(0, 0, 0);
+        return 4;
+    }
+    return 2;
+}
+
+void sub_81C7944(const u16 *src, ptrdiff_t offset, size_t size)
+{
+    CpuCopy16(src, gPlttBufferUnfaded + offset, size);
 }
