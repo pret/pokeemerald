@@ -76,7 +76,7 @@ extern u8 gBattleMoveFlags;
 extern u8 gBattleCommunication[];
 extern u16 gLastLandedMoves[4];
 extern u16 gLastHitByType[4];
-extern u16 gLastMoves[4];
+extern u16 gLastResultingMoves[4];
 extern u8 gLastHitBy[4];
 extern u8 gStringBank;
 extern u16 gDynamicBasePower;
@@ -99,9 +99,9 @@ extern u8 gCurrentTurnActionNumber;
 extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
 extern u16 gLockedMoves[BATTLE_BANKS_COUNT];
 extern u16 gPartnerTrainerId;
-extern u16 gOriginallyUsedMove;
-extern u16 gOriginallyLastPrintedMoves[BATTLE_BANKS_COUNT];
-extern u16 gOriginallyLastMoves[BATTLE_BANKS_COUNT];
+extern u16 gChosenMove;
+extern u16 gLastPrintedMoves[BATTLE_BANKS_COUNT];
+extern u16 gLastMoves[BATTLE_BANKS_COUNT];
 extern u16 gTrainerBattleOpponent_A;
 extern u16 gTrainerBattleOpponent_B;
 extern u8 gUnknown_020241E9;
@@ -4860,10 +4860,10 @@ static void atk49_moveend(void)
 
     effect = FALSE;
 
-    if (gOriginallyUsedMove == 0xFFFF)
+    if (gChosenMove == 0xFFFF)
         originallyUsedMove = 0;
     else
-        originallyUsedMove = gOriginallyUsedMove;
+        originallyUsedMove = gChosenMove;
 
     arg1 = gBattlescriptCurrInstr[1];
     arg2 = gBattlescriptCurrInstr[2];
@@ -4934,14 +4934,14 @@ static void atk49_moveend(void)
             break;
         case 6: // update choice band move
             if (!(gHitMarker & HITMARKER_OBEYS) || holdEffectAtk != HOLD_EFFECT_CHOICE_BAND
-                || gOriginallyUsedMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
+                || gChosenMove == MOVE_STRUGGLE || (*choicedMoveAtk != 0 && *choicedMoveAtk != 0xFFFF))
                     goto LOOP;
-            if (gOriginallyUsedMove == MOVE_BATON_PASS && !(gBattleMoveFlags & MOVESTATUS_FAILED))
+            if (gChosenMove == MOVE_BATON_PASS && !(gBattleMoveFlags & MOVESTATUS_FAILED))
             {
                 gBattleScripting.atk49_state++;
                 break;
             }
-            *choicedMoveAtk = gOriginallyUsedMove;
+            *choicedMoveAtk = gChosenMove;
             LOOP:
             {
                 for (i = 0; i < 4; i++)
@@ -5036,7 +5036,7 @@ static void atk49_moveend(void)
             }
             if (gHitMarker & HITMARKER_ATTACKSTRING_PRINTED)
             {
-                gOriginallyLastPrintedMoves[gBankAttacker] = gOriginallyUsedMove;
+                gLastPrintedMoves[gBankAttacker] = gChosenMove;
             }
             if (!(gAbsentBankFlags & gBitTable[gBankAttacker])
                 && !(gBattleStruct->field_91 & gBitTable[gBankAttacker])
@@ -5044,13 +5044,13 @@ static void atk49_moveend(void)
             {
                 if (gHitMarker & HITMARKER_OBEYS)
                 {
-                    gOriginallyLastMoves[gBankAttacker] = gOriginallyUsedMove;
-                    gLastMoves[gBankAttacker] = gCurrentMove;
+                    gLastMoves[gBankAttacker] = gChosenMove;
+                    gLastResultingMoves[gBankAttacker] = gCurrentMove;
                 }
                 else
                 {
-                    gOriginallyLastMoves[gBankAttacker] = 0xFFFF;
                     gLastMoves[gBankAttacker] = 0xFFFF;
+                    gLastResultingMoves[gBankAttacker] = 0xFFFF;
                 }
 
                 if (!(gHitMarker & HITMARKER_FAINTED(gBankTarget)))
@@ -5058,9 +5058,9 @@ static void atk49_moveend(void)
 
                 if (gHitMarker & HITMARKER_OBEYS && !(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
                 {
-                    if (gOriginallyUsedMove == 0xFFFF)
+                    if (gChosenMove == 0xFFFF)
                     {
-                        gLastLandedMoves[gBankTarget] = gOriginallyUsedMove;
+                        gLastLandedMoves[gBankTarget] = gChosenMove;
                     }
                     else
                     {
@@ -5083,16 +5083,16 @@ static void atk49_moveend(void)
             {
                 u8 target, attacker;
 
-                *(gBattleStruct->mirrorMoves + gBankTarget * 2 + 0) = gOriginallyUsedMove;
-                *(gBattleStruct->mirrorMoves + gBankTarget * 2 + 1) = gOriginallyUsedMove >> 8;
+                *(gBattleStruct->mirrorMoves + gBankTarget * 2 + 0) = gChosenMove;
+                *(gBattleStruct->mirrorMoves + gBankTarget * 2 + 1) = gChosenMove >> 8;
 
                 target = gBankTarget;
                 attacker = gBankAttacker;
-                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->mirrorMoveArrays) + 0) = gOriginallyUsedMove;
+                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->mirrorMoveArrays) + 0) = gChosenMove;
 
                 target = gBankTarget;
                 attacker = gBankAttacker;
-                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->mirrorMoveArrays) + 1) = gOriginallyUsedMove >> 8;
+                *(attacker * 2 + target * 8 + (u8*)(gBattleStruct->mirrorMoveArrays) + 1) = gChosenMove >> 8;
             }
             gBattleScripting.atk49_state++;
             break;
@@ -6386,7 +6386,7 @@ static void atk63_jumptorandomattack(void)
     if (gBattlescriptCurrInstr[1] != 0)
         gCurrentMove = gRandomMove;
     else
-        gOriginallyUsedMove = gCurrentMove = gRandomMove;
+        gChosenMove = gCurrentMove = gRandomMove;
 
     gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
 }
@@ -7131,7 +7131,7 @@ static void atk76_various(void)
 static void atk77_setprotectlike(void) // protect and endure
 {
     bool8 notLastTurn = TRUE;
-    u16 lastMove = gLastMoves[gBankAttacker];
+    u16 lastMove = gLastResultingMoves[gBankAttacker];
 
     if (lastMove != MOVE_PROTECT && lastMove != MOVE_DETECT && lastMove != MOVE_ENDURE)
         gDisableStructs[gBankAttacker].protectUses = 0;
@@ -8352,7 +8352,7 @@ static void atk9A_setfocusenergy(void)
 
 static void atk9B_transformdataexecution(void)
 {
-    gOriginallyUsedMove = 0xFFFF;
+    gChosenMove = 0xFFFF;
     gBattlescriptCurrInstr++;
     if (gBattleMons[gBankTarget].status2 & STATUS2_TRANSFORMED
         || gStatuses3[gBankTarget] & STATUS3_SEMI_INVULNERABLE)
@@ -8432,12 +8432,12 @@ static bool8 IsMoveUncopyableByMimic(u16 move)
 
 static void atk9D_mimicattackcopy(void)
 {
-    gOriginallyUsedMove = 0xFFFF;
+    gChosenMove = 0xFFFF;
 
-    if (IsMoveUncopyableByMimic(gOriginallyLastMoves[gBankTarget])
+    if (IsMoveUncopyableByMimic(gLastMoves[gBankTarget])
         || gBattleMons[gBankAttacker].status2 & STATUS2_TRANSFORMED
-        || gOriginallyLastMoves[gBankTarget] == 0
-        || gOriginallyLastMoves[gBankTarget] == 0xFFFF)
+        || gLastMoves[gBankTarget] == 0
+        || gLastMoves[gBankTarget] == 0xFFFF)
     {
         gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
     }
@@ -8447,20 +8447,20 @@ static void atk9D_mimicattackcopy(void)
 
         for (i = 0; i < 4; i++)
         {
-            if (gBattleMons[gBankAttacker].moves[i] == gOriginallyLastMoves[gBankTarget])
+            if (gBattleMons[gBankAttacker].moves[i] == gLastMoves[gBankTarget])
                 break;
         }
 
         if (i == 4)
         {
-            gBattleMons[gBankAttacker].moves[gCurrMovePos] = gOriginallyLastMoves[gBankTarget];
-            if (gBattleMoves[gOriginallyLastMoves[gBankTarget]].pp < 5)
-                gBattleMons[gBankAttacker].pp[gCurrMovePos] = gBattleMoves[gOriginallyLastMoves[gBankTarget]].pp;
+            gBattleMons[gBankAttacker].moves[gCurrMovePos] = gLastMoves[gBankTarget];
+            if (gBattleMoves[gLastMoves[gBankTarget]].pp < 5)
+                gBattleMons[gBankAttacker].pp[gCurrMovePos] = gBattleMoves[gLastMoves[gBankTarget]].pp;
             else
                 gBattleMons[gBankAttacker].pp[gCurrMovePos] = 5;
 
 
-            PREPARE_MOVE_BUFFER(gBattleTextBuff1, gOriginallyLastMoves[gBankTarget])
+            PREPARE_MOVE_BUFFER(gBattleTextBuff1, gLastMoves[gBankTarget])
 
             gDisableStructs[gBankAttacker].unk18_b |= gBitTable[gCurrMovePos];
             gBattlescriptCurrInstr += 5;
@@ -8575,7 +8575,7 @@ static void atkA3_disablelastusedattack(void)
 
     for (i = 0; i < 4; i++)
     {
-        if (gBattleMons[gBankTarget].moves[i] == gOriginallyLastMoves[gBankTarget])
+        if (gBattleMons[gBankTarget].moves[i] == gLastMoves[gBankTarget])
             break;
     }
     if (gDisableStructs[gBankTarget].disabledMove == 0
@@ -8600,13 +8600,13 @@ static void atkA4_trysetencore(void)
 
     for (i = 0; i < 4; i++)
     {
-        if (gBattleMons[gBankTarget].moves[i] == gOriginallyLastMoves[gBankTarget])
+        if (gBattleMons[gBankTarget].moves[i] == gLastMoves[gBankTarget])
             break;
     }
 
-    if (gOriginallyLastMoves[gBankTarget] == MOVE_STRUGGLE
-        || gOriginallyLastMoves[gBankTarget] == MOVE_ENCORE
-        || gOriginallyLastMoves[gBankTarget] == MOVE_MIRROR_MOVE)
+    if (gLastMoves[gBankTarget] == MOVE_STRUGGLE
+        || gLastMoves[gBankTarget] == MOVE_ENCORE
+        || gLastMoves[gBankTarget] == MOVE_MIRROR_MOVE)
     {
         i = 4;
     }
@@ -8726,13 +8726,13 @@ static void atkA7_setalwayshitflag(void)
 
 static void atkA8_copymovepermanently(void) // sketch
 {
-    gOriginallyUsedMove = 0xFFFF;
+    gChosenMove = 0xFFFF;
 
     if (!(gBattleMons[gBankAttacker].status2 & STATUS2_TRANSFORMED)
-        && gOriginallyLastPrintedMoves[gBankTarget] != MOVE_STRUGGLE
-        && gOriginallyLastPrintedMoves[gBankTarget] != 0
-        && gOriginallyLastPrintedMoves[gBankTarget] != 0xFFFF
-        && gOriginallyLastPrintedMoves[gBankTarget] != MOVE_SKETCH)
+        && gLastPrintedMoves[gBankTarget] != MOVE_STRUGGLE
+        && gLastPrintedMoves[gBankTarget] != 0
+        && gLastPrintedMoves[gBankTarget] != 0xFFFF
+        && gLastPrintedMoves[gBankTarget] != MOVE_SKETCH)
     {
         s32 i;
 
@@ -8740,7 +8740,7 @@ static void atkA8_copymovepermanently(void) // sketch
         {
             if (gBattleMons[gBankAttacker].moves[i] == MOVE_SKETCH)
                 continue;
-            if (gBattleMons[gBankAttacker].moves[i] == gOriginallyLastPrintedMoves[gBankTarget])
+            if (gBattleMons[gBankAttacker].moves[i] == gLastPrintedMoves[gBankTarget])
                 break;
         }
 
@@ -8752,8 +8752,8 @@ static void atkA8_copymovepermanently(void) // sketch
         {
             struct MovePpInfo movePpData;
 
-            gBattleMons[gBankAttacker].moves[gCurrMovePos] = gOriginallyLastPrintedMoves[gBankTarget];
-            gBattleMons[gBankAttacker].pp[gCurrMovePos] = gBattleMoves[gOriginallyLastPrintedMoves[gBankTarget]].pp;
+            gBattleMons[gBankAttacker].moves[gCurrMovePos] = gLastPrintedMoves[gBankTarget];
+            gBattleMons[gBankAttacker].pp[gCurrMovePos] = gBattleMoves[gLastPrintedMoves[gBankTarget]].pp;
             gActiveBank = gBankAttacker;
 
             for (i = 0; i < 4; i++)
@@ -8766,7 +8766,7 @@ static void atkA8_copymovepermanently(void) // sketch
             EmitSetMonData(0, REQUEST_MOVES_PP_BATTLE, 0, sizeof(struct MovePpInfo), &movePpData);
             MarkBufferBankForExecution(gActiveBank);
 
-            PREPARE_MOVE_BUFFER(gBattleTextBuff1, gOriginallyLastPrintedMoves[gBankTarget])
+            PREPARE_MOVE_BUFFER(gBattleTextBuff1, gLastPrintedMoves[gBankTarget])
 
             gBattlescriptCurrInstr += 5;
         }
@@ -8899,14 +8899,14 @@ static void atkAC_remaininghptopower(void)
 
 static void atkAD_tryspiteppreduce(void)
 {
-    if (gOriginallyLastMoves[gBankTarget] != 0
-        && gOriginallyLastMoves[gBankTarget] != 0xFFFF)
+    if (gLastMoves[gBankTarget] != 0
+        && gLastMoves[gBankTarget] != 0xFFFF)
     {
         s32 i;
 
         for (i = 0; i < 4; i++)
         {
-            if (gOriginallyLastMoves[gBankTarget] == gBattleMons[gBankTarget].moves[i])
+            if (gLastMoves[gBankTarget] == gBattleMons[gBankTarget].moves[i])
                 break;
         }
 
@@ -8916,7 +8916,7 @@ static void atkAD_tryspiteppreduce(void)
             if (gBattleMons[gBankTarget].pp[i] < ppToDeduct)
                 ppToDeduct = gBattleMons[gBankTarget].pp[i];
 
-            PREPARE_MOVE_BUFFER(gBattleTextBuff1, gOriginallyLastMoves[gBankTarget])
+            PREPARE_MOVE_BUFFER(gBattleTextBuff1, gLastMoves[gBankTarget])
 
             ConvertIntToDecimalStringN(gBattleTextBuff2, ppToDeduct, 0, 1);
 

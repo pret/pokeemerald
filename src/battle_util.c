@@ -43,7 +43,7 @@ extern s32 gBattleMoveDamage;
 extern struct BattleEnigmaBerry gEnigmaBerries[BATTLE_BANKS_COUNT];
 extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
 extern u32 gBattleTypeFlags;
-extern u16 gOriginallyLastMoves[BATTLE_BANKS_COUNT];
+extern u16 gLastMoves[BATTLE_BANKS_COUNT];
 extern u32 gHitMarker;
 extern u8 gEffectBank;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
@@ -373,7 +373,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
     }
 
-    if (move == gOriginallyLastMoves[gActiveBank] && move != MOVE_STRUGGLE && (gBattleMons[gActiveBank].status2 & STATUS2_TORMENT))
+    if (move == gLastMoves[gActiveBank] && move != MOVE_STRUGGLE && (gBattleMons[gActiveBank].status2 & STATUS2_TORMENT))
     {
         CancelMultiTurnMoves(gActiveBank);
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
@@ -477,7 +477,7 @@ u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check)
             unusableMoves |= gBitTable[i];
         if (gBattleMons[bank].moves[i] == gDisableStructs[bank].disabledMove && check & MOVE_LIMITATION_DISABLED)
             unusableMoves |= gBitTable[i];
-        if (gBattleMons[bank].moves[i] == gOriginallyLastMoves[bank] && check & MOVE_LIMITATION_TORMENTED && gBattleMons[bank].status2 & STATUS2_TORMENT)
+        if (gBattleMons[bank].moves[i] == gLastMoves[bank] && check & MOVE_LIMITATION_TORMENTED && gBattleMons[bank].status2 & STATUS2_TORMENT)
             unusableMoves |= gBitTable[i];
         if (gDisableStructs[bank].tauntTimer1 && check & MOVE_LIMITATION_TAUNT && gBattleMoves[gBattleMons[bank].moves[i]].power == 0)
             unusableMoves |= gBitTable[i];

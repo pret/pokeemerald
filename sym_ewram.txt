@@ -312,7 +312,7 @@ gUnknown_020241E9: @ 20241E9
 gCurrentMove: @ 20241EA
 	.space 0x2
 
-gOriginallyUsedMove: @ 20241EC
+gChosenMove: @ 20241EC
 	.space 0x2
 
 gRandomMove: @ 20241EE
@@ -369,10 +369,10 @@ gSelectionBattleScripts: @ 2024220
 gPalaceSelectionBattleScripts: @ 2024230
 	.space 0x10
 
-gOriginallyLastPrintedMoves: @ 2024240
+gLastPrintedMoves: @ 2024240
 	.space 0x8
 
-gOriginallyLastMoves: @ 2024248
+gLastMoves: @ 2024248
 	.space 0x8
 
 gLastLandedMoves: @ 2024250
@@ -381,7 +381,7 @@ gLastLandedMoves: @ 2024250
 gLastHitByType: @ 2024258
 	.space 0x8
 
-gLastMoves: @ 2024260
+gLastResultingMoves: @ 2024260
 	.space 0x8
 
 gLockedMoves: @ 2024268

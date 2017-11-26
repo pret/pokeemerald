@@ -628,7 +628,7 @@ BattleScript_EffectMultiHit::
 BattleScript_82D8DFD::
 	jumpifhasnohp ATTACKER, BattleScript_82D8E93
 	jumpifhasnohp TARGET, BattleScript_82D8E74
-	jumpifhalfword EQUAL, gOriginallyUsedMove, MOVE_SLEEP_TALK, BattleScript_82D8E1F
+	jumpifhalfword EQUAL, gChosenMove, MOVE_SLEEP_TALK, BattleScript_82D8E1F
 	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_82D8E74
 BattleScript_82D8E1F::
 	movevaluescleanup
@@ -1281,7 +1281,7 @@ BattleScript_EffectSnore::
 	ppreduce
 	goto BattleScript_ButItFailed
 BattleScript_SnoreIsAsleep::
-	jumpifhalfword EQUAL, gOriginallyUsedMove, MOVE_SLEEP_TALK, BattleScript_DoSnore
+	jumpifhalfword EQUAL, gChosenMove, MOVE_SLEEP_TALK, BattleScript_DoSnore
 	printstring STRINGID_PKMNFASTASLEEP
 	waitmessage 0x40
 	statusanimation ATTACKER
@@ -1411,7 +1411,7 @@ BattleScript_EffectTripleKick::
 BattleScript_TripleKickLoop::
 	jumpifhasnohp ATTACKER, BattleScript_TripleKickEnd
 	jumpifhasnohp TARGET, BattleScript_TripleKickNoMoreHits
-	jumpifhalfword EQUAL, gOriginallyUsedMove, MOVE_SLEEP_TALK, BattleScript_DoTripleKickAttack
+	jumpifhalfword EQUAL, gChosenMove, MOVE_SLEEP_TALK, BattleScript_DoTripleKickAttack
 	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_TripleKickNoMoreHits
 BattleScript_DoTripleKickAttack::
 	accuracycheck BattleScript_TripleKickNoMoreHits, ACC_CURR_MOVE

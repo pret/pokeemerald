@@ -38,7 +38,7 @@ extern u8 gEffectBank;
 extern u16 gBattleWeather;
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern u16 gCurrentMove;
-extern u16 gOriginallyUsedMove;
+extern u16 gChosenMove;
 extern u16 gLastUsedItem;
 extern u8 gBattleOutcome;
 extern u8 gLastUsedAbility;
@@ -1120,7 +1120,7 @@ void EmitPrintString(u8 bufferId, u16 stringID)
 
     stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
-    stringInfo->originallyUsedMove = gOriginallyUsedMove;
+    stringInfo->originallyUsedMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = gBattleScripting.bank;
@@ -1152,7 +1152,7 @@ void EmitPrintSelectionString(u8 bufferId, u16 stringID)
 
     stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
-    stringInfo->originallyUsedMove = gOriginallyUsedMove;
+    stringInfo->originallyUsedMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = gBattleScripting.bank;

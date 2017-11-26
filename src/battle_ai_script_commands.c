@@ -58,7 +58,7 @@ extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern u16 gCurrentMove;
 extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
-extern u16 gOriginallyLastMoves[BATTLE_BANKS_COUNT];
+extern u16 gLastMoves[BATTLE_BANKS_COUNT];
 extern u16 gTrainerBattleOpponent_A;
 extern u16 gTrainerBattleOpponent_B;
 extern u32 gStatuses3[BATTLE_BANKS_COUNT];
@@ -633,12 +633,12 @@ static void RecordLastUsedMoveByTarget(void)
 
     for (i = 0; i < 4; i++)
     {
-        if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] == gOriginallyLastMoves[gBankTarget])
+        if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] == gLastMoves[gBankTarget])
             break;
-        if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] != gOriginallyLastMoves[gBankTarget]  // HACK: This redundant condition is a hack to make the asm match.
+        if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] != gLastMoves[gBankTarget]  // HACK: This redundant condition is a hack to make the asm match.
          && gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] == 0)
         {
-            gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] = gOriginallyLastMoves[gBankTarget];
+            gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] = gLastMoves[gBankTarget];
             break;
         }
     }
@@ -1252,9 +1252,9 @@ static void BattleAICmd_is_most_powerful_move(void)
 static void BattleAICmd_get_last_used_bank_move(void)
 {
     if (gAIScriptPtr[1] == AI_USER)
-        AI_THINKING_STRUCT->funcResult = gOriginallyLastMoves[sBank_AI];
+        AI_THINKING_STRUCT->funcResult = gLastMoves[sBank_AI];
     else
-        AI_THINKING_STRUCT->funcResult = gOriginallyLastMoves[gBankTarget];
+        AI_THINKING_STRUCT->funcResult = gLastMoves[gBankTarget];
 
     gAIScriptPtr += 2;
 }
