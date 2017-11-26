@@ -5992,8 +5992,8 @@ static void atk58_returntoball(void)
 
 static void atk59_handlelearnnewmove(void)
 {
-    const u8* jumpPtr1 = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
-    const u8* jumpPtr2 = BSScriptReadPtr(gBattlescriptCurrInstr + 5);
+    const u8 *jumpPtr1 = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
+    const u8 *jumpPtr2 = BSScriptReadPtr(gBattlescriptCurrInstr + 5);
 
     u16 ret = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterId], gBattlescriptCurrInstr[9]);
     while (ret == 0xFFFE)

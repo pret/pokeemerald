@@ -1214,6 +1214,115 @@
 	.byte \param0
 	.endm
 	
+@ various command changed to more readable macros
+	.macro cancelmultiturnmoves bank
+	various \bank, VARIOUS_CANCEL_MULTI_TURN_MOVES
+	.endm
+	
+	.macro setmagiccoattarget bank
+	various \bank, VARIOUS_SET_MAGIC_COAT_TARGET
+	.endm
+	
+	.macro getifcantrunfrombattle bank
+	various \bank, VARIOUS_IS_RUNNING_IMPOSSIBLE
+	.endm
+	
+	.macro getmovetarget bank
+	various \bank, VARIOUS_GET_MOVE_TARGET
+	.endm
+	
+	.macro various4 bank
+	various \bank, 4
+	.endm
+	
+	.macro resetintrimidatetracebits bank
+	various \bank, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
+	.endm
+	
+	.macro updatechoicemoveonlvlup bank
+	various \bank, VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP
+	.endm
+	
+	.macro various7 bank
+	various \bank, 7
+	.endm
+	
+	.macro various8 bank
+	various \bank, 8
+	.endm
+	
+	.macro various9 bank
+	various \bank, 9
+	.endm
+	
+	.macro various10 bank
+	various \bank, 10
+	.endm
+	
+	.macro various11 bank
+	various \bank, 11
+	.endm
+	
+	.macro various12 bank
+	various \bank, 12
+	.endm
+	
+	.macro forfeityesnobox bank
+	various \bank, VARIOUS_EMIT_YESNOBOX
+	.endm
+	
+	.macro various14 bank
+	various \bank, 14
+	.endm
+	
+	.macro various15 bank
+	various \bank, 15
+	.endm
+	
+	.macro various16 bank
+	various \bank, 16
+	.endm
+	
+	.macro various17 bank
+	various \bank, 17
+	.endm
+	
+	.macro waitcry bank
+	various \bank, VARIOUS_WAIT_CRY
+	.endm
+	
+	.macro returnopponentmon1toball bank
+	various \bank, VARIOUS_RETURN_OPPONENT_MON1
+	.endm
+	
+	.macro returnopponentmon2toball bank
+	various \bank, VARIOUS_RETURN_OPPONENT_MON2
+	.endm
+	
+	.macro various21 bank
+	various \bank, 21
+	.endm
+	
+	.macro various22 bank
+	various \bank, 22
+	.endm
+	
+	.macro various23 bank
+	various \bank, 23
+	.endm
+	
+	.macro various24 bank
+	various \bank, 24
+	.endm
+	
+	.macro setoutcomeonteleport bank
+	various \bank, VARIOUS_SET_TELEPORT_OUTCOME
+	.endm
+	
+	.macro playtrainerdefeatbgm bank
+	various \bank, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
+	.endm
+	
 @ helpful macros
 	.macro setstatchanger stat, stages, down
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

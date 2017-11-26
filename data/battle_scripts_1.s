@@ -311,7 +311,7 @@ BattleScript_EffectSleep::
 	goto BattleScript_MoveEnd
 
 BattleScript_AlreadyAsleep::
-	various ATTACKER, 0x17
+	various23 ATTACKER
 	pause 0x20
 	printstring STRINGID_PKMNALREADYASLEEP
 	waitmessage 0x40
@@ -724,7 +724,7 @@ BattleScript_EffectToxic::
 	goto BattleScript_MoveEnd
 
 BattleScript_AlreadyPoisoned::
-	various ATTACKER, 0x17
+	various23 ATTACKER
 	pause 0x40
 	printstring STRINGID_PKMNALREADYPOISONED
 	waitmessage 0x40
@@ -772,7 +772,7 @@ BattleScript_RestCantSleep::
 	goto BattleScript_MoveEnd
 
 BattleScript_RestIsAlreadyAsleep::
-	various ATTACKER, 0x17
+	various23 ATTACKER
 	pause 0x20
 	printstring STRINGID_PKMNALREADYASLEEP2
 	waitmessage 0x40
@@ -938,7 +938,7 @@ BattleScript_EffectConfuse::
 	goto BattleScript_MoveEnd
 
 BattleScript_AlreadyConfused::
-	various ATTACKER, 0x17
+	various23 ATTACKER
 	pause 0x20
 	printstring STRINGID_PKMNALREADYCONFUSED
 	waitmessage 0x40
@@ -1045,7 +1045,7 @@ BattleScript_EffectParalyze::
 	goto BattleScript_MoveEnd
 
 BattleScript_AlreadyParalyzed::
-	various ATTACKER, 0x17
+	various23 ATTACKER
 	pause 0x20
 	printstring STRINGID_PKMNISALREADYPARALYZED
 	waitmessage 0x40
@@ -1122,7 +1122,7 @@ BattleScript_SubstituteString::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 BattleScript_AlreadyHasSubstitute::
-	various ATTACKER, 0x17
+	various23 ATTACKER
 	pause 0x20
 	printstring STRINGID_PKMNHASSUBSTITUTE
 	waitmessage 0x40
@@ -1532,7 +1532,7 @@ BattleScript_CurseEnd::
 	goto BattleScript_MoveEnd
 BattleScript_GhostCurse::
 	jumpifbytenotequal gBankAttacker, gBankTarget, BattleScript_DoGhostCurse
-	various ATTACKER, VARIOUS_GET_MOVE_TARGET
+	getmovetarget ATTACKER
 BattleScript_DoGhostCurse::
 	attackcanceler
 	attackstring
@@ -1951,14 +1951,14 @@ BattleScript_EffectTeleport::
 	attackstring
 	ppreduce
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TRAINER, BattleScript_ButItFailed
-	various ATTACKER, VARIOUS_IS_RUNNING_IMPOSSIBLE
+	getifcantrunfrombattle ATTACKER
 	jumpifbyte EQUAL, gBattleCommunication, 0x1, BattleScript_ButItFailed
 	jumpifbyte EQUAL, gBattleCommunication, 0x2, BattleScript_82DA382
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNFLEDFROMBATTLE
 	waitmessage 0x40
-	various ATTACKER, VARIOUS_SET_TELEPORT_OUTCOME
+	setoutcomeonteleport ATTACKER
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectBeatUp::
@@ -2220,7 +2220,7 @@ BattleScript_WaterVeilPrevents::
 	goto BattleScript_MoveEnd
 
 BattleScript_AlreadyBurned::
-	various ATTACKER, 0x17
+	various23 ATTACKER
 	pause 0x20
 	printstring STRINGID_PKMNALREADYHASBURN
 	waitmessage 0x40
@@ -2638,7 +2638,7 @@ BattleScript_82DA501::
 	goto BattleScript_82DA4C7
 
 BattleScript_82DA50F::
-	various ATTACKER, 0x17
+	various23 ATTACKER
 	pause 0x20
 	printstring STRINGID_PKMNALREADYCONFUSED
 	waitmessage 0x40
@@ -2882,7 +2882,7 @@ BattleScript_82DA816::
 	switchhandleorder ATTACKER, 0x2
 	jumpifbyte EQUAL, gBattleCommunication, 0x6, BattleScript_82DA8D0
 	atknameinbuff1
-	various ATTACKER, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
+	resetintrimidatetracebits ATTACKER
 	hpthresholds2 ATTACKER
 	printstring STRINGID_RETURNMON
 	switchoutabilities ATTACKER
@@ -2908,7 +2908,7 @@ BattleScript_82DA8D0::
 	atk62 GBANK_1
 	switchinanim GBANK_1, 0x0
 	waitstate
-	various ATTACKER, 0x7
+	various7 ATTACKER
 	switchineffects GBANK_1
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_DOUBLE, BattleScript_82DA8F5
 	cancelallactions
@@ -2978,9 +2978,9 @@ BattleScript_CheckDomeDrew::
 	jumpifbyte EQUAL, gBattleOutcome, DREW, BattleScript_LocalBattleLostEnd_
 BattleScript_LocalBattleLostPrintTrainersWinText::
 	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TRAINER, BattleScript_LocalBattleLostPrintWhiteOut
-	various ATTACKER, VARIOUS_RETURN_OPPONENT_MON1
+	returnopponentmon1toball ATTACKER
 	waitstate
-	various ATTACKER, VARIOUS_RETURN_OPPONENT_MON2
+	returnopponentmon2toball ATTACKER
 	waitstate
 	trainerslidein ATTACKER
 	waitstate
@@ -2997,9 +2997,9 @@ BattleScript_LocalBattleLostEnd_::
 	end2
 
 BattleScript_82DAA0B::
-	various ATTACKER, VARIOUS_RETURN_OPPONENT_MON1
+	returnopponentmon1toball ATTACKER
 	waitstate
-	various ATTACKER, VARIOUS_RETURN_OPPONENT_MON2
+	returnopponentmon2toball ATTACKER
 	waitstate
 	trainerslidein ATTACKER
 	waitstate
@@ -3026,7 +3026,7 @@ BattleScript_LinkBattleWonOrLostWaitEnd::
 	end2
 
 BattleScript_82DAA5C::
-	various ATTACKER, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
+	playtrainerdefeatbgm ATTACKER
 	printstring STRINGID_BATTLEEND
 	waitmessage 0x40
 	trainerslidein ATTACKER
@@ -3164,7 +3164,7 @@ BattleScript_82DAB77::
 	tryfaintmon TARGET, FALSE, NULL
 	setbyte sMOVEEND_STATE, 0x3
 	moveend 0x2, 0x6
-	various TARGET, 0x4
+	various4 TARGET
 	jumpifbyte EQUAL, gBattleCommunication, 0x0, BattleScript_82DABB8
 	setbyte sGIVEEXP_STATE, 0x0
 	getexp TARGET
@@ -3207,7 +3207,7 @@ BattleScript_LearnedNewMove::
 	fanfare BGM_FANFA1
 	printstring STRINGID_PKMNLEARNEDMOVE
 	waitmessage 0x40
-	various ATTACKER, VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP
+	updatechoicemoveonlvlup ATTACKER
 	goto BattleScript_TryLearnMoveLoop
 BattleScript_LearnMoveReturn::
 	return
@@ -3352,7 +3352,7 @@ BattleScript_82DADD8::
 	returntoball TARGET
 	waitstate
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TRAINER, BattleScript_82DADF1
-	various ATTACKER, VARIOUS_SET_TELEPORT_OUTCOME
+	setoutcomeonteleport ATTACKER
 	finishaction
 
 BattleScript_82DADF1::
@@ -3700,7 +3700,7 @@ BattleScript_MagicCoatBounce::
 	printstring STRINGID_PKMNMOVEBOUNCED
 	waitmessage 0x40
 	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_x800000
-	various ATTACKER, VARIOUS_SET_MAGIC_COAT_TARGET
+	setmagiccoattarget ATTACKER
 	return
 
 BattleScript_SnatchedMove::
@@ -3803,7 +3803,7 @@ BattleScript_MoveUsedIsParalyzed::
 	printstring STRINGID_PKMNISPARALYZED
 	waitmessage 0x40
 	statusanimation ATTACKER
-	various ATTACKER, VARIOUS_CANCEL_MULTI_TURN_MOVES
+	cancelmultiturnmoves ATTACKER
 	goto BattleScript_MoveEnd
 
 BattleScript_MoveUsedFlinched::
@@ -3828,7 +3828,7 @@ BattleScript_MoveUsedIsConfused::
 	status2animation ATTACKER, STATUS2_CONFUSION
 	jumpifbyte EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_82DB2FF
 BattleScript_82DB2D4::
-	various ATTACKER, VARIOUS_CANCEL_MULTI_TURN_MOVES
+	cancelmultiturnmoves ATTACKER
 	adjustnormaldamage2
 	printstring STRINGID_ITHURTCONFUSION
 	waitmessage 0x40
@@ -4263,7 +4263,7 @@ BattleScript_IgnoresAndUsesRandomMove::
 BattleScript_MoveUsedLoafingAround::
 	jumpifbyte NOT_EQUAL, cMULTISTRING_CHOOSER, 0x4, BattleScript_82DB6C7
 	setbyte gBattleCommunication, 0x0
-	various ATTACKER, 0x18
+	various24 ATTACKER
 	setbyte cMULTISTRING_CHOOSER, 0x4
 BattleScript_82DB6C7::
 	printfromtable gInobedientStringIds
@@ -4466,7 +4466,7 @@ BattleScript_82DB87D::
 BattleScript_82DB881::
 	setbyte gBattleCommunication + 1, 0x0
 BattleScript_82DB887::
-	various ATTACKER, 0x8
+	various8 ATTACKER
 	jumpifbyte NOT_EQUAL, gBattleCommunication, 0x1, BattleScript_82DB89D
 	printfromtable gStringIds_85CCF0A
 	waitmessage 0x40
@@ -4478,26 +4478,26 @@ BattleScript_82DB89D::
 	end2
 
 BattleScript_82DB8BE::
-	various ATTACKER, VARIOUS_WAIT_CRY
-	various ATTACKER, 0x15
+	waitcry ATTACKER
+	various21 ATTACKER
 	playse 0x109
 	pause 0x8
 	playse 0x109
-	various ATTACKER, 0xE
-	various 8, 0x10
-	various 8, 0x11
+	various14 ATTACKER
+	various16 8
+	various17 8
 	pause 0x40
-	various ATTACKER, 0xF
-	various ATTACKER, 0x16
+	various15 ATTACKER
+	various22 ATTACKER
 	end2
 	
 BattleScript_82DB8E0::
 	playse SE_PINPON
-	various ATTACKER, 0xE
-	various TARGET, 0x10
-	various TARGET, 0x11
+	various14 ATTACKER
+	various16 TARGET
+	various17 TARGET
 	pause 0x40
-	various ATTACKER, 0xF
+	various15 ATTACKER
 	end2
 
 BattleScript_82DB8F3::
@@ -4505,78 +4505,78 @@ BattleScript_82DB8F3::
 	waitstate
 	makevisible OPPONENT1
 	waitstate
-	various ATTACKER, 0x15
+	various21 ATTACKER
 	playse 0x109
 	pause 0x8
 	playse 0x109
 	pause 0x40
-	various ATTACKER, 0xE
-	various ATTACKER, 0x10
-	various ATTACKER, 0x11
+	various14 ATTACKER
+	various16 ATTACKER
+	various17 ATTACKER
 	pause 0x40
 	setbyte gBattleCommunication, 0x0
-	various ATTACKER, 0x9
+	various9 ATTACKER
 	pause 0x40
-	various ATTACKER, 0x9
-	various EFFECT_BANK, 0x10
-	various EFFECT_BANK, 0x11
-	various ATTACKER, 0x9
-	various GBANK_1, 0x10
-	various GBANK_1, 0x11
-	various ATTACKER, 0x9
-	various 4, 0x10
-	various 4, 0x11
-	various ATTACKER, 0x9
+	various9 ATTACKER
+	various16 EFFECT_BANK
+	various17 EFFECT_BANK
+	various9 ATTACKER
+	various16 GBANK_1
+	various17 GBANK_1
+	various9 ATTACKER
+	various16 0x4
+	various17 0x4
+	various9 ATTACKER
 	jumpifbyte EQUAL, gBattleCommunication + 1, 0x3, BattleScript_82DB973
 	jumpifbyte EQUAL, gBattleCommunication + 1, 0x4, BattleScript_82DB992
-	various 5, 0x10
-	various 5, 0x11
-	various ATTACKER, 0x9
-	various ATTACKER, 0xF
+	various16 0x5
+	various17 0x5
+	various9 ATTACKER
+	various15 ATTACKER
 	printstring STRINGID_DEFEATEDOPPONENTBYREFEREE
 	waitmessage 0x40
 	playfaintcry OPPONENT1
-	various ATTACKER, VARIOUS_WAIT_CRY
+	waitcry ATTACKER
 	dofaintanimation OPPONENT1
 	cleareffectsonfaint OPPONENT1
-	various ATTACKER, 0xA
+	various10 ATTACKER
 	end2
 
 BattleScript_82DB973::
-	various 6, 0x10
-	various 6, 0x11
-	various ATTACKER, 0x9
-	various ATTACKER, 0xF
+	various16 0x6
+	various17 0x6
+	various9 ATTACKER
+	various15 ATTACKER
 	printstring STRINGID_LOSTTOOPPONENTBYREFEREE
 	waitmessage 0x40
 	playfaintcry 11
-	various ATTACKER, VARIOUS_WAIT_CRY
+	waitcry ATTACKER
 	dofaintanimation 11
 	cleareffectsonfaint 11
-	various ATTACKER, 0xB
+	various11 ATTACKER
 	end2
 
 BattleScript_82DB992::
-	various BANK0, 0x10
-	various BANK0, 0x11
-	various ATTACKER, 0x9
-	various ATTACKER, 0xF
+	various16 BANK0
+	various17 BANK0
+	various9 ATTACKER
+	various15 ATTACKER
 	printstring STRINGID_TIEDOPPONENTBYREFEREE
 	waitmessage 0x40
 	playfaintcry 11
-	various ATTACKER, VARIOUS_WAIT_CRY
+	waitcry ATTACKER
 	dofaintanimation 11
 	cleareffectsonfaint 11
 	playfaintcry OPPONENT1
-	various ATTACKER, VARIOUS_WAIT_CRY
+	waitcry ATTACKER
 	dofaintanimation OPPONENT1
 	cleareffectsonfaint OPPONENT1
-	various ATTACKER, 0xC
+	various12 ATTACKER
 	end2
 
 BattleScript_AskIfWantsToForfeitMatch::
 	printselectionstring STRINGID_QUESTIONFORFEITMATCH
-	various ATTACKER, VARIOUS_EMIT_YESNOBOX
+	forfeityesnobox ATTACKER
 	endselectionscript
 
 BattleScript_82DB9C1::
