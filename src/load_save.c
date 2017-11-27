@@ -10,10 +10,10 @@ extern void* gUnknown_0203CF5C;
 extern bool16 IdentifyFlash(void);
 extern void SetBagItemsPointers(void);
 extern void SetDecorationInventoriesPointers(void);
-extern void ApplyNewEncyprtionKeyToGameStats(u32 key);
-extern void ApplyNewEncyprtionKeyToBagItems(u32 newKey);
-extern void ApplyNewEncyprtionKeyToBagItems_(u32 key);
-extern void ApplyNewEncyprtionKeyToBerryPowder(u32 key);
+extern void ApplyNewEncryptionKeyToGameStats(u32 key);
+extern void ApplyNewEncryptionKeyToBagItems(u32 newKey);
+extern void ApplyNewEncryptionKeyToBagItems_(u32 key);
+extern void ApplyNewEncryptionKeyToBerryPowder(u32 key);
 extern void sub_8084FAC(int unused);
 
 // this is probably wrong or misleading due to it being used in ResetHeap...
@@ -43,7 +43,7 @@ EWRAM_DATA u8 gSaveblock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 EWRAM_DATA u32 gLastEncryptionKey = {0};
 
-void ApplyNewEncyprtionKeyToAllEncryptedData(u32 encryptionKey);
+void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
 void CheckForFlashMemory(void)
 {
@@ -150,7 +150,7 @@ void MoveSaveBlocks_ResetHeap(void)
 
     // create a new encryption key
     encryptionKey = (Random() << 0x10) + (Random());
-    ApplyNewEncyprtionKeyToAllEncryptedData(encryptionKey);
+    ApplyNewEncryptionKeyToAllEncryptedData(encryptionKey);
     gSaveBlock2Ptr->encryptionKey = encryptionKey;
 }
 #else
@@ -235,7 +235,7 @@ void MoveSaveBlocks_ResetHeap(void)
     lsrs r0, 16\n\
     adds r4, r0\n\
     adds r0, r4, 0\n\
-    bl ApplyNewEncyprtionKeyToAllEncryptedData\n\
+    bl ApplyNewEncryptionKeyToAllEncryptedData\n\
     ldr r1, =gSaveBlock2Ptr\n\
     ldr r0, [r1]\n\
     adds r0, 0xAC\n\
@@ -389,27 +389,27 @@ void copy_bags_and_unk_data_to_save_blocks(void)
 
     encryptionKeyBackup = gSaveBlock2Ptr->encryptionKey;
     gSaveBlock2Ptr->encryptionKey = gLastEncryptionKey;
-    ApplyNewEncyprtionKeyToBagItems(encryptionKeyBackup);
+    ApplyNewEncryptionKeyToBagItems(encryptionKeyBackup);
     gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup; // updated twice?
 }
 
-void ApplyNewEncyprtionKeyToHword(u16 *hWord, u32 newKey)
+void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey)
 {
     *hWord ^= gSaveBlock2Ptr->encryptionKey;
     *hWord ^= newKey;
 }
 
-void ApplyNewEncyprtionKeyToWord(u32 *word, u32 newKey)
+void ApplyNewEncryptionKeyToWord(u32 *word, u32 newKey)
 {
     *word ^= gSaveBlock2Ptr->encryptionKey;
     *word ^= newKey;
 }
 
-void ApplyNewEncyprtionKeyToAllEncryptedData(u32 encryptionKey)
+void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey)
 {
-    ApplyNewEncyprtionKeyToGameStats(encryptionKey);
-    ApplyNewEncyprtionKeyToBagItems_(encryptionKey);
-    ApplyNewEncyprtionKeyToBerryPowder(encryptionKey);
-    ApplyNewEncyprtionKeyToWord(&gSaveBlock1Ptr->money, encryptionKey);
-    ApplyNewEncyprtionKeyToHword(&gSaveBlock1Ptr->coins, encryptionKey);
+    ApplyNewEncryptionKeyToGameStats(encryptionKey);
+    ApplyNewEncryptionKeyToBagItems_(encryptionKey);
+    ApplyNewEncryptionKeyToBerryPowder(encryptionKey);
+    ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->money, encryptionKey);
+    ApplyNewEncryptionKeyToHword(&gSaveBlock1Ptr->coins, encryptionKey);
 }
