@@ -5,7 +5,7 @@
 #include "text.h"
 #include "event_data.h"
 
-extern void ApplyNewEncyprtionKeyToHword(u16* hword, u32 newKey);
+extern void ApplyNewEncryptionKeyToHword(u16* hword, u32 newKey);
 extern bool8 InBattlePyramid(void);
 
 extern const u8 gText_PokeBalls[];
@@ -45,19 +45,19 @@ void SetBagItemId(u16* slot, u16 newItemId)
     *slot = newItemId;
 }
 
-void ApplyNewEncyprtionKeyToBagItems(u32 newKey)
+void ApplyNewEncryptionKeyToBagItems(u32 newKey)
 {
     u32 pocket, item;
     for (pocket = 0; pocket < 5; pocket++)
     {
         for (item = 0; item < gBagPockets[pocket].capacity; item++)
-            ApplyNewEncyprtionKeyToHword(&(gBagPockets[pocket].itemSlots[item].quantity), newKey);
+            ApplyNewEncryptionKeyToHword(&(gBagPockets[pocket].itemSlots[item].quantity), newKey);
     }
 }
 
-void ApplyNewEncyprtionKeyToBagItems_(u32 newKey) // really GF?
+void ApplyNewEncryptionKeyToBagItems_(u32 newKey) // really GF?
 {
-    ApplyNewEncyprtionKeyToBagItems(newKey);
+    ApplyNewEncryptionKeyToBagItems(newKey);
 }
 
 // TODO: move those max values to defines

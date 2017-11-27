@@ -83,7 +83,6 @@ SECTIONS {
         asm/smokescreen.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
-        asm/load_save.o(.text);
         asm/trade.o(.text);
         src/berry_blender.o(.text);
         src/play_time.o(.text);

@@ -52672,8 +52672,8 @@ SetBerryPowder: @ 802467C
 	.pool
 	thumb_func_end SetBerryPowder
 
-	thumb_func_start ApplyNewEncyprtionKeyToBerryPowder
-ApplyNewEncyprtionKeyToBerryPowder: @ 8024690
+	thumb_func_start ApplyNewEncryptionKeyToBerryPowder
+ApplyNewEncryptionKeyToBerryPowder: @ 8024690
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, =gSaveBlock2Ptr
@@ -52681,11 +52681,11 @@ ApplyNewEncyprtionKeyToBerryPowder: @ 8024690
 	movs r2, 0xFA
 	lsls r2, 1
 	adds r0, r2
-	bl ApplyNewEncyprtionKeyToWord
+	bl ApplyNewEncryptionKeyToWord
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end ApplyNewEncyprtionKeyToBerryPowder
+	thumb_func_end ApplyNewEncryptionKeyToBerryPowder
 
 	thumb_func_start sub_80246AC
 sub_80246AC: @ 80246AC
