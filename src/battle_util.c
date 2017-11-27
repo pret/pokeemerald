@@ -20,6 +20,7 @@
 #include "event_data.h"
 #include "calculate_base_damage.h"
 #include "link.h"
+#include "berry.h"
 
 extern const u8* gBattlescriptCurrInstr;
 extern const u8* gSelectionBattleScripts[BATTLE_BANKS_COUNT];
@@ -2537,15 +2538,6 @@ enum
     ITEM_STATS_CHANGE, // 5
 };
 
-enum
-{
-    FLAVOR_SPICY, // 0
-    FLAVOR_DRY, // 1
-    FLAVOR_SWEET, // 2
-    FLAVOR_BITTER, // 3
-    FLAVOR_SOUR, // 4
-};
-
 u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
 {
     int i = 0;
@@ -2707,7 +2699,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             case HOLD_EFFECT_CONFUSE_SPICY:
                 if (gBattleMons[bank].hp <= gBattleMons[bank].maxHP / 2 && !moveTurn)
                 {
-                    PREPARE_FLAVOUR_BUFFER(gBattleTextBuff1, FLAVOR_SPICY);
+                    PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_SPICY);
 
                     gBattleMoveDamage = gBattleMons[bank].maxHP / bankQuality;
                     if (gBattleMoveDamage == 0)
@@ -2725,7 +2717,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             case HOLD_EFFECT_CONFUSE_DRY:
                 if (gBattleMons[bank].hp <= gBattleMons[bank].maxHP / 2 && !moveTurn)
                 {
-                    PREPARE_FLAVOUR_BUFFER(gBattleTextBuff1, FLAVOR_DRY);
+                    PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_DRY);
 
                     gBattleMoveDamage = gBattleMons[bank].maxHP / bankQuality;
                     if (gBattleMoveDamage == 0)
@@ -2743,7 +2735,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             case HOLD_EFFECT_CONFUSE_SWEET:
                 if (gBattleMons[bank].hp <= gBattleMons[bank].maxHP / 2 && !moveTurn)
                 {
-                    PREPARE_FLAVOUR_BUFFER(gBattleTextBuff1, FLAVOR_SWEET);
+                    PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_SWEET);
 
                     gBattleMoveDamage = gBattleMons[bank].maxHP / bankQuality;
                     if (gBattleMoveDamage == 0)
@@ -2761,7 +2753,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             case HOLD_EFFECT_CONFUSE_BITTER:
                 if (gBattleMons[bank].hp <= gBattleMons[bank].maxHP / 2 && !moveTurn)
                 {
-                    PREPARE_FLAVOUR_BUFFER(gBattleTextBuff1, FLAVOR_BITTER);
+                    PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_BITTER);
 
                     gBattleMoveDamage = gBattleMons[bank].maxHP / bankQuality;
                     if (gBattleMoveDamage == 0)
@@ -2779,7 +2771,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             case HOLD_EFFECT_CONFUSE_SOUR:
                 if (gBattleMons[bank].hp <= gBattleMons[bank].maxHP / 2 && !moveTurn)
                 {
-                    PREPARE_FLAVOUR_BUFFER(gBattleTextBuff1, FLAVOR_SOUR);
+                    PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, FLAVOR_SOUR);
 
                     gBattleMoveDamage = gBattleMons[bank].maxHP / bankQuality;
                     if (gBattleMoveDamage == 0)
