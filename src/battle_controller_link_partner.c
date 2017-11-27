@@ -78,7 +78,7 @@ static void LinkPartnerHandleBallThrowAnim(void);
 static void LinkPartnerHandlePause(void);
 static void LinkPartnerHandleMoveAnimation(void);
 static void LinkPartnerHandlePrintString(void);
-static void LinkPartnerHandlePrintStringPlayerOnly(void);
+static void LinkPartnerHandlePrintSelectionString(void);
 static void LinkPartnerHandleChooseAction(void);
 static void LinkPartnerHandleUnknownYesNoBox(void);
 static void LinkPartnerHandleChooseMove(void);
@@ -104,7 +104,7 @@ static void LinkPartnerHandleCmd39(void);
 static void LinkPartnerHandleCmd40(void);
 static void LinkPartnerHandleHitAnimation(void);
 static void LinkPartnerHandleCmd42(void);
-static void LinkPartnerHandleEffectivenessSound(void);
+static void LinkPartnerHandlePlaySE(void);
 static void LinkPartnerHandlePlayFanfareOrBGM(void);
 static void LinkPartnerHandleFaintingCry(void);
 static void LinkPartnerHandleIntroSlide(void);
@@ -149,7 +149,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkPartnerHandlePause,
     LinkPartnerHandleMoveAnimation,
     LinkPartnerHandlePrintString,
-    LinkPartnerHandlePrintStringPlayerOnly,
+    LinkPartnerHandlePrintSelectionString,
     LinkPartnerHandleChooseAction,
     LinkPartnerHandleUnknownYesNoBox,
     LinkPartnerHandleChooseMove,
@@ -175,7 +175,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     LinkPartnerHandleCmd40,
     LinkPartnerHandleHitAnimation,
     LinkPartnerHandleCmd42,
-    LinkPartnerHandleEffectivenessSound,
+    LinkPartnerHandlePlaySE,
     LinkPartnerHandlePlayFanfareOrBGM,
     LinkPartnerHandleFaintingCry,
     LinkPartnerHandleIntroSlide,
@@ -1327,7 +1327,7 @@ static void LinkPartnerHandlePrintString(void)
     sub_817C95C(*stringId);
 }
 
-static void LinkPartnerHandlePrintStringPlayerOnly(void)
+static void LinkPartnerHandlePrintSelectionString(void)
 {
     LinkPartnerBufferExecCompleted();
 }
@@ -1503,7 +1503,7 @@ static void LinkPartnerHandleCmd42(void)
     LinkPartnerBufferExecCompleted();
 }
 
-static void LinkPartnerHandleEffectivenessSound(void)
+static void LinkPartnerHandlePlaySE(void)
 {
     s8 pan;
 

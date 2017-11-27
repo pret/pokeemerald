@@ -83,7 +83,7 @@ static void OpponentHandleBallThrow(void);
 static void OpponentHandlePause(void);
 static void OpponentHandleMoveAnimation(void);
 static void OpponentHandlePrintString(void);
-static void OpponentHandlePrintStringPlayerOnly(void);
+static void OpponentHandlePrintSelectionString(void);
 static void OpponentHandleChooseAction(void);
 static void OpponentHandleUnknownYesNoBox(void);
 static void OpponentHandleChooseMove(void);
@@ -109,7 +109,7 @@ static void OpponentHandleCmd39(void);
 static void OpponentHandleCmd40(void);
 static void OpponentHandleHitAnimation(void);
 static void OpponentHandleCmd42(void);
-static void OpponentHandleEffectivenessSound(void);
+static void OpponentHandlePlaySE(void);
 static void OpponentHandlePlayFanfareOrBGM(void);
 static void OpponentHandleFaintingCry(void);
 static void OpponentHandleIntroSlide(void);
@@ -155,7 +155,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     OpponentHandlePause,
     OpponentHandleMoveAnimation,
     OpponentHandlePrintString,
-    OpponentHandlePrintStringPlayerOnly,
+    OpponentHandlePrintSelectionString,
     OpponentHandleChooseAction,
     OpponentHandleUnknownYesNoBox,
     OpponentHandleChooseMove,
@@ -181,7 +181,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     OpponentHandleCmd40,
     OpponentHandleHitAnimation,
     OpponentHandleCmd42,
-    OpponentHandleEffectivenessSound,
+    OpponentHandlePlaySE,
     OpponentHandlePlayFanfareOrBGM,
     OpponentHandleFaintingCry,
     OpponentHandleIntroSlide,
@@ -1537,7 +1537,7 @@ static void OpponentHandlePrintString(void)
     sub_81A57E4(gActiveBank, *stringId);
 }
 
-static void OpponentHandlePrintStringPlayerOnly(void)
+static void OpponentHandlePrintSelectionString(void)
 {
     OpponentBufferExecCompleted();
 }
@@ -1826,7 +1826,7 @@ static void OpponentHandleCmd42(void)
     OpponentBufferExecCompleted();
 }
 
-static void OpponentHandleEffectivenessSound(void)
+static void OpponentHandlePlaySE(void)
 {
     s8 pan;
 

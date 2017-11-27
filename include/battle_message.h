@@ -74,6 +74,14 @@
 #define B_BUFF_PLACEHOLDER_BEGIN        0xFD
 #define B_BUFF_EOS                      0xFF
 
+#define PREPARE_FLAVOUR_BUFFER(textVar, flavourId)                          \
+{                                                                           \
+    textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
+    textVar[1] = B_BUFF_NEGATIVE_FLAVOUR;                                   \
+    textVar[2] = flavourId;                                                 \
+    textVar[3] = B_BUFF_EOS;                                                \
+}
+
 #define PREPARE_STAT_BUFFER(textVar, statId)                                \
 {                                                                           \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
@@ -189,7 +197,7 @@
 struct StringInfoBattle
 {
     u16 currentMove;
-    u16 lastMove;
+    u16 originallyUsedMove;
     u16 lastItem;
     u8 lastAbility;
     u8 scrActive;
