@@ -1769,7 +1769,7 @@ _0816721C:
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	mov r0, r10
-	bl GetMonFlavourRelation
+	bl GetMonFlavorRelation
 	lsls r0, 24
 	asrs r2, r0, 24
 	cmp r0, r9

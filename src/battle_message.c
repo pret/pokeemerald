@@ -2118,7 +2118,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             StringGetEnd10(dst);
             srcID += 3;
             break;
-        case B_BUFF_NEGATIVE_FLAVOUR: // flavour table
+        case B_BUFF_NEGATIVE_FLAVOR: // flavor table
             StringAppend(dst, gPokeblockWasTooXStringTable[src[srcID + 1]]);
             srcID += 2;
             break;

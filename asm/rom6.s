@@ -1223,7 +1223,7 @@ sub_8135F04: @ 8135F04
 	adds r4, 0x1
 	ldr r6, =gStringVar1
 	adds r0, r5, 0
-	bl GetHighestPokeblocksFlavourLevel
+	bl GetHighestPokeblocksFlavorLevel
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2995,8 +2995,8 @@ _08136E8C:
 	bx r0
 	thumb_func_end ClearPokeblocks
 
-	thumb_func_start GetHighestPokeblocksFlavourLevel
-GetHighestPokeblocksFlavourLevel: @ 8136EA4
+	thumb_func_start GetHighestPokeblocksFlavorLevel
+GetHighestPokeblocksFlavorLevel: @ 8136EA4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r1, 0x1
@@ -3024,7 +3024,7 @@ _08136ECC:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end GetHighestPokeblocksFlavourLevel
+	thumb_func_end GetHighestPokeblocksFlavorLevel
 
 	thumb_func_start GetPokeblocksFeel
 GetPokeblocksFeel: @ 8136EDC
@@ -3287,8 +3287,8 @@ _081370AC:
 	bx r1
 	thumb_func_end sub_8137068
 
-	thumb_func_start GetPokeblocksFlavour
-GetPokeblocksFlavour: @ 81370B4
+	thumb_func_start GetPokeblocksFlavor
+GetPokeblocksFlavor: @ 81370B4
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	movs r7, 0
@@ -3324,7 +3324,7 @@ _081370E2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end GetPokeblocksFlavour
+	thumb_func_end GetPokeblocksFlavor
 
 	thumb_func_start sub_81370FC
 sub_81370FC: @ 81370FC

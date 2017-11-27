@@ -67,7 +67,7 @@
 #define B_BUFF_STAT                     5
 #define B_BUFF_SPECIES                  6
 #define B_BUFF_MON_NICK                 7
-#define B_BUFF_NEGATIVE_FLAVOUR         8
+#define B_BUFF_NEGATIVE_FLAVOR         8
 #define B_BUFF_ABILITY                  9
 #define B_BUFF_ITEM                     10
 
