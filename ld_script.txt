@@ -86,7 +86,6 @@ SECTIONS {
         asm/load_save.o(.text);
         asm/trade.o(.text);
         src/berry_blender.o(.text);
-        asm/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
         asm/rom4.o(.text);

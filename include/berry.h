@@ -11,6 +11,16 @@ enum
     BERRY_FIRMNESS_SUPER_HARD,
 };
 
+enum
+{
+    FLAVOR_SPICY,
+    FLAVOR_DRY,
+    FLAVOR_SWEET,
+    FLAVOR_BITTER,
+    FLAVOR_SOUR,
+    FLAVOR_COUNT
+};
+
 #define NUM_BERRIES 44
 
 extern const u8 *const gBerryTreeFieldObjectGraphicsIdTablePointers[NUM_BERRIES];

@@ -5547,7 +5547,7 @@ DisplayItemMessageInBattlePyramid: @ 81C6DD8
 	movs r0, 0x2
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1

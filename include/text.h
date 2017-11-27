@@ -85,6 +85,8 @@
 
 #define NUM_TEXT_PRINTERS 32
 
+#define TEXT_SPEED_FF 0xFF
+
 struct TextPrinterSubStruct
 {
     u8 font_type:4;  // 0x14

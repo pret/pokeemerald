@@ -401,7 +401,7 @@ _080774B2:
 	ldrb r2, [r0]
 	cmp r2, 0
 	bne _0807754C
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r5, =0x00001122
 	adds r0, r5, 0
 	strh r0, [r1]
@@ -2142,7 +2142,7 @@ _08078484:
 	.4byte _080786F0
 	.4byte _08078720
 _080784DC:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gPlayerParty
 	movs r2, 0xC8
 	bl sub_8078438
@@ -2208,7 +2208,7 @@ _08078552:
 	b _080787A2
 	.pool
 _0807857C:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gPlayerParty + 200
 	movs r2, 0xC8
 	bl sub_8078438
@@ -2247,7 +2247,7 @@ _080785B6:
 	b _080787A2
 	.pool
 _080785E0:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gPlayerParty + 400
 	movs r2, 0xC8
 	bl sub_8078438
@@ -2286,7 +2286,7 @@ _0807861A:
 	b _080787A2
 	.pool
 _08078644:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, =0x00002be0
@@ -2328,7 +2328,7 @@ _0807868A:
 	b _080787A2
 	.pool
 _080786B4:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, =0x000031a8
@@ -7258,7 +7258,7 @@ _0807AEAC:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0807AEC0
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001144
 	adds r0, r2, 0
 	strh r0, [r1]

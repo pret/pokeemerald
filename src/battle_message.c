@@ -59,7 +59,7 @@ extern const u8* GetTrainer2LoseText(void); // battle_setup
 extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 extern s32 GetStringCenterAlignXOffsetWithLetterSpacing(u8 fontId, const u8 *str, s32 totalWidth, s16 letterSpacing);
 extern u8 GetTextSpeedInRecordedBattle(void);
-extern u8 sav2_get_text_speed(void);
+extern u8 GetPlayerTextSpeed(void);
 
 // this file's functions
 static void sub_814F8F8(u8 *textPtr);
@@ -2118,7 +2118,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             StringGetEnd10(dst);
             srcID += 3;
             break;
-        case B_BUFF_NEGATIVE_FLAVOUR: // flavour table
+        case B_BUFF_NEGATIVE_FLAVOR: // flavor table
             StringAppend(dst, gPokeblockWasTooXStringTable[src[srcID + 1]]);
             srcID += 2;
             break;
@@ -2266,7 +2266,7 @@ void BattleHandleAddTextPrinter(const u8 *text, u8 arg1)
         else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             speed = sRecordedBattleTextSpeeds[GetTextSpeedInRecordedBattle()];
         else
-            speed = sav2_get_text_speed();
+            speed = GetPlayerTextSpeed();
 
         gTextFlags.flag_0 = 1;
     }

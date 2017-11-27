@@ -2844,7 +2844,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    if (GetFlavourRelationByPersonality(gBattleMons[bank].personality, FLAVOR_SPICY) < 0)
+                    if (GetFlavorRelationByPersonality(gBattleMons[bank].personality, FLAVOR_SPICY) < 0)
                         BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
                     else
                         BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
@@ -2864,7 +2864,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    if (GetFlavourRelationByPersonality(gBattleMons[bank].personality, FLAVOR_DRY) < 0)
+                    if (GetFlavorRelationByPersonality(gBattleMons[bank].personality, FLAVOR_DRY) < 0)
                         BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
                     else
                         BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
@@ -2884,7 +2884,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    if (GetFlavourRelationByPersonality(gBattleMons[bank].personality, FLAVOR_SWEET) < 0)
+                    if (GetFlavorRelationByPersonality(gBattleMons[bank].personality, FLAVOR_SWEET) < 0)
                         BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
                     else
                         BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
@@ -2904,7 +2904,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    if (GetFlavourRelationByPersonality(gBattleMons[bank].personality, FLAVOR_BITTER) < 0)
+                    if (GetFlavorRelationByPersonality(gBattleMons[bank].personality, FLAVOR_BITTER) < 0)
                         BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
                     else
                         BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
@@ -2924,7 +2924,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     if (gBattleMons[bank].hp + gBattleMoveDamage > gBattleMons[bank].maxHP)
                         gBattleMoveDamage = gBattleMons[bank].maxHP - gBattleMons[bank].hp;
                     gBattleMoveDamage *= -1;
-                    if (GetFlavourRelationByPersonality(gBattleMons[bank].personality, FLAVOR_SOUR) < 0)
+                    if (GetFlavorRelationByPersonality(gBattleMons[bank].personality, FLAVOR_SOUR) < 0)
                         BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);
                     else
                         BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);
