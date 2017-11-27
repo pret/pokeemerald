@@ -74,10 +74,10 @@
 #define B_BUFF_PLACEHOLDER_BEGIN        0xFD
 #define B_BUFF_EOS                      0xFF
 
-#define PREPARE_FLAVOUR_BUFFER(textVar, flavourId)                          \
+#define PREPARE_FLAVOR_BUFFER(textVar, flavourId)                          \
 {                                                                           \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
-    textVar[1] = B_BUFF_NEGATIVE_FLAVOUR;                                   \
+    textVar[1] = B_BUFF_NEGATIVE_FLAVOR;                                   \
     textVar[2] = flavourId;                                                 \
     textVar[3] = B_BUFF_EOS;                                                \
 }
