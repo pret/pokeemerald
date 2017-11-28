@@ -5100,7 +5100,7 @@ sub_800F820: @ 800F820
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800F83C
-	bl sub_8082D18
+	bl GetBlenderArrowPosition
 	ldr r1, =gSendCmd
 	strh r0, [r1, 0xC]
 _0800F83C:

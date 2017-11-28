@@ -239,7 +239,9 @@ struct SaveBlock2
     /*0xCA9*/ u8 field_CA9_d : 1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e : 1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
-    /*0xCAA*/ u16 field_CAA[0x2e];
+    /*0xCAA*/ u16 field_CAA[4];
+    /*0xCB2*/ u16 battlePyramidWildHeaderId;
+    /*0xCB4*/ u8 field_CB4[82];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
     /*0xD08*/ u8 filler_D08[0x112];

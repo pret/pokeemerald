@@ -57,8 +57,6 @@ extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
 extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];
 
-extern u8* GetMonNick(struct Pokemon* mon, u8* dst);
-extern u8* GetBoxMonNick(struct BoxPokemon* boxMon, u8* dst);
 extern u8 sav1_map_get_name(void);
 extern void TVShowConvertInternationalString(u8* str1, u8* str2, u8);
 extern void sub_806A068(u16, u8);
@@ -69,7 +67,6 @@ extern void remove_some_task(void);
 extern void c2_exit_to_overworld_2_switch(void);
 extern void play_some_sound(void);
 extern void DoNamingScreen(u8, const u8*, u16, u8, u32, MainCallback);
-extern void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor* colors, s8 speed, u8 *str);
 extern u16 sub_80D22D0(void);
 extern u8 CountPartyAliveNonEggMonsExcept(u8);
 

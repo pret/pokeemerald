@@ -102,7 +102,7 @@ static void PlayerHandleBallThrowAnim(void);
 static void PlayerHandlePause(void);
 static void PlayerHandleMoveAnimation(void);
 static void PlayerHandlePrintString(void);
-static void PlayerHandlePrintStringPlayerOnly(void);
+static void PlayerHandlePrintSelectionString(void);
 static void PlayerHandleChooseAction(void);
 static void PlayerHandleUnknownYesNoBox(void);
 static void PlayerHandleChooseMove(void);
@@ -128,7 +128,7 @@ static void PlayerHandleCmd39(void);
 static void PlayerHandleCmd40(void);
 static void PlayerHandleHitAnimation(void);
 static void PlayerHandleCmd42(void);
-static void PlayerHandleEffectivenessSound(void);
+static void PlayerHandlePlaySE(void);
 static void PlayerHandlePlayFanfareOrBGM(void);
 static void PlayerHandleFaintingCry(void);
 static void PlayerHandleIntroSlide(void);
@@ -189,7 +189,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     PlayerHandlePause,
     PlayerHandleMoveAnimation,
     PlayerHandlePrintString,
-    PlayerHandlePrintStringPlayerOnly,
+    PlayerHandlePrintSelectionString,
     PlayerHandleChooseAction,
     PlayerHandleUnknownYesNoBox,
     PlayerHandleChooseMove,
@@ -215,7 +215,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     PlayerHandleCmd40,
     PlayerHandleHitAnimation,
     PlayerHandleCmd42,
-    PlayerHandleEffectivenessSound,
+    PlayerHandlePlaySE,
     PlayerHandlePlayFanfareOrBGM,
     PlayerHandleFaintingCry,
     PlayerHandleIntroSlide,
@@ -2576,7 +2576,7 @@ static void PlayerHandlePrintString(void)
     sub_81A57E4(gActiveBank, *stringId);
 }
 
-static void PlayerHandlePrintStringPlayerOnly(void)
+static void PlayerHandlePrintSelectionString(void)
 {
     if (GetBankSide(gActiveBank) == SIDE_PLAYER)
         PlayerHandlePrintString();
@@ -2913,7 +2913,7 @@ static void PlayerHandleCmd42(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleEffectivenessSound(void)
+static void PlayerHandlePlaySE(void)
 {
     s8 pan;
 

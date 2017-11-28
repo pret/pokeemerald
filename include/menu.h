@@ -1,6 +1,7 @@
 #ifndef GUARD_MENU_H
 #define GUARD_MENU_H
 
+#include "text.h"
 #include "window.h"
 
 struct MenuAction
@@ -32,5 +33,7 @@ s8 sub_8198C58(void);
 void copy_decompressed_tile_data_to_vram_autofree(u8 arg0, const void *arg1, bool32 arg2, u16 arg3, u8 arg4);
 void do_scheduled_bg_tilemap_copies_to_vram(void);
 void clear_scheduled_bg_copies_to_vram(void);
+void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, s8 speed, const u8 *str);
+void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u16 a3);
 
 #endif // GUARD_MENU_H

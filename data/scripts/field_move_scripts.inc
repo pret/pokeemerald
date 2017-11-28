@@ -116,7 +116,7 @@ Route111_EventScript_2907FB:: @ 82907FB
 	specialvar VAR_RESULT, sub_81393FC
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route111_EventScript_290829
-	special rock_smash_wild_pokemon_encounter
+	special RockSmashWildEncounter
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq Route111_EventScript_290829
 	waitstate

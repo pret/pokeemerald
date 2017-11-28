@@ -1863,7 +1863,7 @@ DisplayItemMessage: @ 81ABB4C
 	strh r0, [r4, 0x14]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r4, 0x14]

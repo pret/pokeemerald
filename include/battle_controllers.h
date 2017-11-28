@@ -198,7 +198,7 @@ void EmitBallThrowAnim(u8 bufferId, u8 caseId);
 void EmitPause(u8 bufferId, u8 toWait, void *data); // unused
 void EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct *disableStructPtr, u8 multihit);
 void EmitPrintString(u8 bufferId, u16 stringId);
-void EmitPrintStringPlayerOnly(u8 bufferId, u16 stringId);
+void EmitPrintSelectionString(u8 bufferId, u16 stringId);
 void EmitChooseAction(u8 bufferId, u8 arg1, u16 arg2);
 void EmitUnknownYesNoBox(u8 bufferId);
 void EmitChooseMove(u8 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct *movePpData);
@@ -224,7 +224,7 @@ void EmitCmd39(u8 bufferId); // unused
 void EmitCmd40(u8 bufferId); // unused
 void EmitHitAnimation(u8 bufferId);
 void EmitCmd42(u8 bufferId);
-void EmitEffectivenessSound(u8 bufferId, u16 songId);
+void EmitPlaySE(u8 bufferId, u16 songId);
 void EmitPlayFanfareOrBGM(u8 bufferId, u16 songId, bool8 playBGM);
 void EmitFaintingCry(u8 bufferId);
 void EmitIntroSlide(u8 bufferId, u8 terrainId);

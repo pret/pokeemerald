@@ -1223,7 +1223,7 @@ sub_8135F04: @ 8135F04
 	adds r4, 0x1
 	ldr r6, =gStringVar1
 	adds r0, r5, 0
-	bl sub_8136EA4
+	bl GetHighestPokeblocksFlavorLevel
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1364,7 +1364,7 @@ _08136032:
 	bls _08136002
 	ldr r4, =gStringVar1
 	mov r0, r8
-	bl sub_8136EDC
+	bl GetPokeblocksFeel
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2601,7 +2601,7 @@ sub_8136AB4: @ 8136AB4
 	ldr r1, =gText_ThrowAwayVar1
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2657,7 +2657,7 @@ sub_8136B78: @ 8136B78
 	ldr r1, =gText_Var1ThrownAway
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2779,7 +2779,7 @@ sub_8136C8C: @ 8136C8C
 	adds r2, r6
 	ldr r1, [r5]
 	adds r1, r2
-	bl sub_8136FE4
+	bl PokeblockGetGain
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2995,8 +2995,8 @@ _08136E8C:
 	bx r0
 	thumb_func_end ClearPokeblocks
 
-	thumb_func_start sub_8136EA4
-sub_8136EA4: @ 8136EA4
+	thumb_func_start GetHighestPokeblocksFlavorLevel
+GetHighestPokeblocksFlavorLevel: @ 8136EA4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r1, 0x1
@@ -3024,10 +3024,10 @@ _08136ECC:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8136EA4
+	thumb_func_end GetHighestPokeblocksFlavorLevel
 
-	thumb_func_start sub_8136EDC
-sub_8136EDC: @ 8136EDC
+	thumb_func_start GetPokeblocksFeel
+GetPokeblocksFeel: @ 8136EDC
 	push {lr}
 	movs r1, 0x6
 	bl sub_8136F9C
@@ -3039,10 +3039,10 @@ sub_8136EDC: @ 8136EDC
 _08136EEE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8136EDC
+	thumb_func_end GetPokeblocksFeel
 
-	thumb_func_start sub_8136EF4
-sub_8136EF4: @ 8136EF4
+	thumb_func_start GetFirstFreePokeblockSlot
+GetFirstFreePokeblockSlot: @ 8136EF4
 	push {lr}
 	movs r1, 0
 	ldr r0, =gSaveBlock1Ptr
@@ -3070,13 +3070,13 @@ _08136F18:
 _08136F26:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8136EF4
+	thumb_func_end GetFirstFreePokeblockSlot
 
-	thumb_func_start sub_8136F2C
-sub_8136F2C: @ 8136F2C
+	thumb_func_start AddPokeblock
+AddPokeblock: @ 8136F2C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8136EF4
+	bl GetFirstFreePokeblockSlot
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x1
@@ -3102,7 +3102,7 @@ _08136F62:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8136F2C
+	thumb_func_end AddPokeblock
 
 	thumb_func_start sub_8136F68
 sub_8136F68: @ 8136F68
@@ -3177,8 +3177,8 @@ _08136FDE:
 	bx r1
 	thumb_func_end sub_8136F9C
 
-	thumb_func_start sub_8136FE4
-sub_8136FE4: @ 8136FE4
+	thumb_func_start PokeblockGetGain
+PokeblockGetGain: @ 8136FE4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3227,7 +3227,7 @@ _0813702A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8136FE4
+	thumb_func_end PokeblockGetGain
 
 	thumb_func_start sub_8137044
 sub_8137044: @ 8137044
@@ -3261,7 +3261,7 @@ _08137074:
 	ldr r0, =gUnknown_085B2720
 	adds r1, r0
 	adds r0, r5, 0
-	bl sub_8136FE4
+	bl PokeblockGetGain
 	lsls r0, 16
 	cmp r0, 0
 	ble _081370A0
@@ -3287,8 +3287,8 @@ _081370AC:
 	bx r1
 	thumb_func_end sub_8137068
 
-	thumb_func_start sub_81370B4
-sub_81370B4: @ 81370B4
+	thumb_func_start GetPokeblocksFlavor
+GetPokeblocksFlavor: @ 81370B4
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	movs r7, 0
@@ -3324,7 +3324,7 @@ _081370E2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81370B4
+	thumb_func_end GetPokeblocksFlavor
 
 	thumb_func_start sub_81370FC
 sub_81370FC: @ 81370FC

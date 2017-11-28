@@ -29,5 +29,6 @@ void LoadSpecialPokePic_2(const struct CompressedSpriteSheet *src, void *dest, s
 void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic);
 
 extern u8 gDecompressionBuffer[];
+u32 sub_8034974(const u8 *ptr);
 
 #endif // GUARD_DECOMPRESS_H

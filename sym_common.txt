@@ -60,7 +60,7 @@ gSaveBlock2Ptr: @ 3005D90
 gPokemonStoragePtr: @ 3005D94
 	.space 0x4
 
-gUnknown_03005D98: @ 3005D98
+gInGameOpponentsNo: @ 3005D98
 	.space 0x4
 
 gUnknown_03005D9C: @ 3005D9C
