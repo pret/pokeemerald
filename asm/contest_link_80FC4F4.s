@@ -284,7 +284,7 @@ _080FC6FE:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC7F4
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gUnknown_02039F25
 	ldrb r1, [r1]
 	lsls r1, 6
@@ -297,7 +297,7 @@ _080FC6FE:
 	b _080FC7F4
 	.pool
 _080FC738:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	ldr r1, =gUnknown_02039F25
 	ldrb r1, [r1]
 	lsls r1, 6
@@ -487,7 +487,7 @@ _080FC8D8:
 	beq _080FC954
 	b _080FC96E
 _080FC8DE:
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	ldrh r0, [r4, 0x1A]
 	strb r0, [r1]
 	bl GetMultiplayerId
@@ -1142,7 +1142,7 @@ _080FCE8C:
 	beq _080FCEFC
 	b _080FCF16
 _080FCE92:
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	movs r0, 0x6E
 	strb r0, [r1]
 	bl GetMultiplayerId

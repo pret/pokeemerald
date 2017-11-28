@@ -1,6 +1,7 @@
 #include "global.h"
 #include "decompress.h"
 #include "malloc.h"
+#include "text.h"
 #include "string_util.h"
 #include "international_string_util.h"
 #include "script.h"

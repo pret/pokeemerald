@@ -272,6 +272,8 @@
 #define BS_GET_TARGET                   0
 #define BS_GET_ATTACKER                 1
 #define BS_GET_EFFECT_BANK              2
+#define BS_GET_gBank1   3
+#define BS_GET_BANK_0   7
 #define BS_ATTACKER_WITH_PARTNER        4 // for atk98_status_icon_update
 #define BS_GET_ATTACKER_SIDE            8 // for atk1E_jumpifability
 #define BS_GET_NOT_ATTACKER_SIDE        9 // for atk1E_jumpifability
@@ -704,13 +706,6 @@ struct BattleStruct
 
 extern struct BattleStruct* gBattleStruct;
 
-#define MEME_ACCESS_U8(structName, structPtr, arrayId, offsetField, value)      \
-{                                                                               \
-    u8* var2 = (u8*)((u32)(arrayId));                                           \
-    var2 = (u32)(structPtr) + var2;                                             \
-    var2[offsetof(struct structName, offsetField)] = value;                     \
-}
-
 #define GET_MOVE_TYPE(move, typeArg)                        \
 {                                                           \
     if (gBattleStruct->dynamicMoveType)                     \
@@ -835,8 +830,9 @@ extern struct BattleStruct* gBattleStruct;
 #define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
 
-#define SET_STAT_BUFF_ID(n)((n & 0xF))
 #define SET_STAT_BUFF_VALUE(n)(((s8)(((s8)(n) << 4)) & 0xF0))
+
+#define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + (stage << 4) + (goesDown << 7))
 
 struct BattleScripting
 {
@@ -844,11 +840,10 @@ struct BattleScripting
     s32 bideDmg;
     u8 multihitString[6];
     u8 dmgMultiplier;
-    u8 field_F;
+    u8 twoTurnsMoveStringId;
     u8 animArg1;
     u8 animArg2;
-    u8 field_12;
-    u8 field_13;
+    u16 tripleKickPower;
     u8 atk49_state;
     u8 field_15;
     u8 field_16;

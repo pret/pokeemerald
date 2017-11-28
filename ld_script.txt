@@ -83,10 +83,8 @@ SECTIONS {
         asm/smokescreen.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
-        asm/load_save.o(.text);
         asm/trade.o(.text);
         src/berry_blender.o(.text);
-        asm/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
         asm/rom4.o(.text);
@@ -243,7 +241,7 @@ SECTIONS {
         asm/item_menu.o(.text);
         asm/list_menu.o(.text);
         asm/menu_indicators.o(.text);
-        asm/unk_text_util.o(.text);
+        src/unk_text_util.o(.text);
         src/save_location.o(.text);
         asm/item_icon.o(.text);
         asm/party_menu.o(.text);

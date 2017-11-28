@@ -81,7 +81,7 @@ static void RecordedPlayerHandleBallThrowAnim(void);
 static void RecordedPlayerHandlePause(void);
 static void RecordedPlayerHandleMoveAnimation(void);
 static void RecordedPlayerHandlePrintString(void);
-static void RecordedPlayerHandlePrintStringPlayerOnly(void);
+static void RecordedPlayerHandlePrintSelectionString(void);
 static void RecordedPlayerHandleChooseAction(void);
 static void RecordedPlayerHandleUnknownYesNoBox(void);
 static void RecordedPlayerHandleChooseMove(void);
@@ -107,7 +107,7 @@ static void RecordedPlayerHandleCmd39(void);
 static void RecordedPlayerHandleCmd40(void);
 static void RecordedPlayerHandleHitAnimation(void);
 static void RecordedPlayerHandleCmd42(void);
-static void RecordedPlayerHandleEffectivenessSound(void);
+static void RecordedPlayerHandlePlaySE(void);
 static void RecordedPlayerHandlePlayFanfareOrBGM(void);
 static void RecordedPlayerHandleFaintingCry(void);
 static void RecordedPlayerHandleIntroSlide(void);
@@ -152,7 +152,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     RecordedPlayerHandlePause,
     RecordedPlayerHandleMoveAnimation,
     RecordedPlayerHandlePrintString,
-    RecordedPlayerHandlePrintStringPlayerOnly,
+    RecordedPlayerHandlePrintSelectionString,
     RecordedPlayerHandleChooseAction,
     RecordedPlayerHandleUnknownYesNoBox,
     RecordedPlayerHandleChooseMove,
@@ -178,7 +178,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) 
     RecordedPlayerHandleCmd40,
     RecordedPlayerHandleHitAnimation,
     RecordedPlayerHandleCmd42,
-    RecordedPlayerHandleEffectivenessSound,
+    RecordedPlayerHandlePlaySE,
     RecordedPlayerHandlePlayFanfareOrBGM,
     RecordedPlayerHandleFaintingCry,
     RecordedPlayerHandleIntroSlide,
@@ -1437,7 +1437,7 @@ static void RecordedPlayerHandlePrintString(void)
     gBattleBankFunc[gActiveBank] = CompleteOnInactiveTextPrinter;
 }
 
-static void RecordedPlayerHandlePrintStringPlayerOnly(void)
+static void RecordedPlayerHandlePrintSelectionString(void)
 {
     RecordedPlayerBufferExecCompleted();
 }
@@ -1644,7 +1644,7 @@ static void RecordedPlayerHandleCmd42(void)
     RecordedPlayerBufferExecCompleted();
 }
 
-static void RecordedPlayerHandleEffectivenessSound(void)
+static void RecordedPlayerHandlePlaySE(void)
 {
     s8 pan;
 

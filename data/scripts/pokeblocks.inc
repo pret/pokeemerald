@@ -290,7 +290,7 @@ LilycoveCity_ContestLobby_EventScript_293CEE:: @ 8293CEE
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293D43
-	specialvar VAR_RESULT, sub_8136EF4
+	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare_var_to_value VAR_RESULT, 65535
 	goto_eq LilycoveCity_ContestLobby_EventScript_293D39
 	specialvar VAR_RESULT, PlayerHasBerries
@@ -303,7 +303,7 @@ LilycoveCity_ContestLobby_EventScript_293CEE:: @ 8293CEE
 LilycoveCity_ContestLobby_EventScript_293D2C:: @ 8293D2C
 	copyvar VAR_0x8004, VAR_0x8009
 	fadescreen 1
-	special sub_807FA80
+	special DoBerryBlending
 	waitstate
 	releaseall
 	end
@@ -365,7 +365,7 @@ LilycoveCity_ContestLobby_EventScript_293DC6:: @ 8293DC6
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293E14
 	msgbox LilycoveCity_ContestLobby_Text_293237, 4
-	specialvar VAR_RESULT, sub_8136EF4
+	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare_var_to_value VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_293D91
 	compare_var_to_value VAR_RESULT, 65535
@@ -431,7 +431,7 @@ LilycoveCity_ContestLobby_EventScript_293EA3:: @ 8293EA3
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293EF1
 	msgbox LilycoveCity_ContestLobby_Text_29354E, 4
-	specialvar VAR_RESULT, sub_8136EF4
+	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare_var_to_value VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_293E6E
 	compare_var_to_value VAR_RESULT, 65535
@@ -470,7 +470,7 @@ LilycoveCity_ContestLobby_EventScript_293F28:: @ 8293F28
 	specialvar VAR_RESULT, PlayerHasBerries
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293F1E
-	specialvar VAR_RESULT, sub_8136EF4
+	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare_var_to_value VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_293F64
 	compare_var_to_value VAR_RESULT, 65535
@@ -536,7 +536,7 @@ LilycoveCity_ContestLobby_EventScript_293FF8:: @ 8293FF8
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_294028
-	specialvar VAR_RESULT, sub_8136EF4
+	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare_var_to_value VAR_RESULT, 65535
 	goto_eq LilycoveCity_ContestLobby_EventScript_294028
 	dodailyevents
@@ -570,7 +570,7 @@ LilycoveCity_ContestLobby_EventScript_294055:: @ 8294055
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_29416C
-	specialvar VAR_RESULT, sub_8136EF4
+	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
 	compare_var_to_value VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_294092
 	compare_var_to_value VAR_RESULT, 65535
@@ -635,7 +635,7 @@ LilycoveCity_ContestLobby_EventScript_294147:: @ 8294147
 	removeobject 239
 	removeobject 238
 	removeobject 237
-	special sub_807FA80
+	special DoBerryBlending
 	waitstate
 	releaseall
 	end

@@ -38,7 +38,7 @@ extern u8 gEffectBank;
 extern u16 gBattleWeather;
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern u16 gCurrentMove;
-extern u16 gLastUsedMove;
+extern u16 gChosenMove;
 extern u16 gLastUsedItem;
 extern u8 gBattleOutcome;
 extern u8 gLastUsedAbility;
@@ -1120,7 +1120,7 @@ void EmitPrintString(u8 bufferId, u16 stringID)
 
     stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
-    stringInfo->lastMove = gLastUsedMove;
+    stringInfo->originallyUsedMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = gBattleScripting.bank;
@@ -1140,10 +1140,10 @@ void EmitPrintString(u8 bufferId, u16 stringID)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, sizeof(struct StringInfoBattle) + 4);
 }
 
-void EmitPrintStringPlayerOnly(u8 bufferId, u16 stringID)
+void EmitPrintSelectionString(u8 bufferId, u16 stringID)
 {
     s32 i;
-    struct StringInfoBattle* stringInfo;
+    struct StringInfoBattle *stringInfo;
 
     gBattleBuffersTransferData[0] = CONTROLLER_PRINTSTRINGPLAYERONLY;
     gBattleBuffersTransferData[1] = CONTROLLER_PRINTSTRINGPLAYERONLY;
@@ -1152,7 +1152,7 @@ void EmitPrintStringPlayerOnly(u8 bufferId, u16 stringID)
 
     stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
-    stringInfo->lastMove = gLastUsedMove;
+    stringInfo->originallyUsedMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = gBattleScripting.bank;
@@ -1427,7 +1427,7 @@ void EmitCmd42(u8 bufferId)
     PrepareBufferDataTransfer(bufferId, gBattleBuffersTransferData, 4);
 }
 
-void EmitEffectivenessSound(u8 bufferId, u16 songId)
+void EmitPlaySE(u8 bufferId, u16 songId)
 {
     gBattleBuffersTransferData[0] = CONTROLLER_EFFECTIVENESSSOUND;
     gBattleBuffersTransferData[1] = songId;

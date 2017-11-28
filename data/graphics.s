@@ -682,7 +682,7 @@ gMonIcon_Egg:: @ 8D8FC74
 
 	.incbin "baserom.gba", 0xd90074, 0x1524
 
-gUnknown_08D91598:: @ 8D91598
+sBlenderCenterGfx:: @ 8D91598
 	.incbin "baserom.gba", 0xd91598, 0x820
 
 gUnknown_08D91DB8:: @ 8D91DB8

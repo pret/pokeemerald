@@ -1,7 +1,7 @@
 #include "global.h"
 #include "task.h"
-#include "menu.h"
 #include "text.h"
+#include "menu.h"
 #include "sound.h"
 #include "main.h"
 #include "save.h"

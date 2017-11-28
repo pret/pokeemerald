@@ -1,6 +1,7 @@
 #ifndef GUARD_FLAGS_H
 #define GUARD_FLAGS_H
 
+#define FLAG_340 0x340
 #define FLAG_LEGENDARIES_IN_SOOTOPOLIS  0x53
 #define FLAG_PENDING_DAYCARE_EGG        0x86
 
