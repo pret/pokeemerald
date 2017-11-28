@@ -67,12 +67,20 @@
 #define B_BUFF_STAT                     5
 #define B_BUFF_SPECIES                  6
 #define B_BUFF_MON_NICK                 7
-#define B_BUFF_NEGATIVE_FLAVOUR         8
+#define B_BUFF_NEGATIVE_FLAVOR          8
 #define B_BUFF_ABILITY                  9
 #define B_BUFF_ITEM                     10
 
 #define B_BUFF_PLACEHOLDER_BEGIN        0xFD
 #define B_BUFF_EOS                      0xFF
+
+#define PREPARE_FLAVOR_BUFFER(textVar, flavorId)                            \
+{                                                                           \
+    textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
+    textVar[1] = B_BUFF_NEGATIVE_FLAVOR;                                    \
+    textVar[2] = flavorId;                                                  \
+    textVar[3] = B_BUFF_EOS;                                                \
+}
 
 #define PREPARE_STAT_BUFFER(textVar, statId)                                \
 {                                                                           \
@@ -189,7 +197,7 @@
 struct StringInfoBattle
 {
     u16 currentMove;
-    u16 lastMove;
+    u16 originallyUsedMove;
     u16 lastItem;
     u8 lastAbility;
     u8 scrActive;

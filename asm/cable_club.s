@@ -244,7 +244,7 @@ sub_80B252C: @ 80B252C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080B2570
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	strh r1, [r0]
 	ldr r1, =gTasks
 	lsls r0, r4, 2
@@ -286,7 +286,7 @@ _080B258E:
 	b _080B25BA
 	.pool
 _080B25A4:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	movs r0, 0
 	strh r0, [r1]
 	ldr r1, =gTasks
@@ -743,7 +743,7 @@ _080B2994:
 	strb r0, [r1]
 	ldrb r0, [r4]
 	bl sub_800AA04
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	adds r0, r4, 0
 	bl sub_80C30A4
 	ldr r0, =gUnknown_0203CEF8
@@ -833,7 +833,7 @@ _080B2A6C:
 	strb r0, [r1]
 	ldrb r0, [r4]
 	bl sub_800AA04
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	adds r0, r4, 0
 	bl sub_80C30A4
 	ldr r0, =gUnknown_0203CEF8
@@ -964,7 +964,7 @@ task_map_chg_seq_0807EC34: @ 80B2B94
 	ldrh r0, [r5]
 	cmp r0, 0x1
 	bne _080B2C10
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	ldrh r2, [r0]
 	ldr r0, =0x00002266
 	cmp r2, r0
@@ -1215,20 +1215,20 @@ _080B2DC0:
 	b _080B2E34
 _080B2DCA:
 	movs r3, 0x2
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r4, =0x00002233
 	b _080B2E30
 	.pool
 _080B2DDC:
 	movs r3, 0x2
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r4, =0x00002244
 	b _080B2E30
 	.pool
 _080B2DEC:
 	movs r3, 0x4
 	movs r2, 0x4
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r4, =0x00002255
 	b _080B2E30
 	.pool
@@ -1243,12 +1243,12 @@ _080B2E00:
 	ands r0, r1
 	cmp r0, 0
 	bne _080B2E2C
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r4, =0x00002266
 	b _080B2E30
 	.pool
 _080B2E2C:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r4, =0x00002277
 _080B2E30:
 	adds r0, r4, 0
@@ -1266,7 +1266,7 @@ _080B2E34:
 	thumb_func_start sub_80B2E4C
 sub_80B2E4C: @ 80B2E4C
 	push {lr}
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001133
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1287,7 +1287,7 @@ sub_80B2E74: @ 80B2E74
 	ldr r1, =gSpecialVar_Result
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00003311
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1454,7 +1454,7 @@ _080B2FC6:
 	thumb_func_start sub_80B2FD8
 sub_80B2FD8: @ 80B2FD8
 	push {lr}
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00004411
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1472,7 +1472,7 @@ sub_80B2FD8: @ 80B2FD8
 	thumb_func_start sub_80B3000
 sub_80B3000: @ 80B3000
 	push {lr}
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00006601
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1490,7 +1490,7 @@ sub_80B3000: @ 80B3000
 	thumb_func_start sub_80B3028
 sub_80B3028: @ 80B3028
 	push {lr}
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00006602
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1540,17 +1540,17 @@ _080B3084:
 	.4byte _080B3128
 	.4byte _080B30D8
 _080B30A8:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002233
 	b _080B3124
 	.pool
 _080B30B8:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002244
 	b _080B3124
 	.pool
 _080B30C8:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002255
 	b _080B3124
 	.pool
@@ -1564,22 +1564,22 @@ _080B30D8:
 	ands r0, r1
 	cmp r0, 0
 	bne _080B3100
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002266
 	b _080B3124
 	.pool
 _080B3100:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002277
 	b _080B3124
 	.pool
 _080B3110:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001111
 	b _080B3124
 	.pool
 _080B3120:
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00003322
 _080B3124:
 	adds r0, r2, 0
@@ -1809,7 +1809,7 @@ _080B32F8:
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -1922,7 +1922,7 @@ _080B3408:
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	ldr r2, =0x00002211
 	adds r1, r2, 0
 	strh r1, [r0]
@@ -2548,7 +2548,7 @@ nullsub_37: @ 80B3964
 	thumb_func_start sub_80B3968
 sub_80B3968: @ 80B3968
 	push {lr}
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002211
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -2829,7 +2829,7 @@ sub_80B3BC4: @ 80B3BC4
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B3BD6
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00002288
 	adds r0, r2, 0
 	strh r0, [r1]

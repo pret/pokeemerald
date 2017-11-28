@@ -993,7 +993,7 @@ _080E75AC:
 	movs r0, 0xC8
 	muls r0, r2
 	adds r1, r0
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r2, 0xC8
 	bl memcpy
 	b _080E75FC

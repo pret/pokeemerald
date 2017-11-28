@@ -185,7 +185,7 @@ AddTextPrinterForMessage: @ 81972C4
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r3]
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -222,7 +222,7 @@ AddTextPrinterForMessage_2: @ 8197310
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r3]
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -945,7 +945,7 @@ DisplayItemMessageOnField: @ 81978EC
 	lsls r4, 24
 	lsrs r4, 24
 	bl sub_81973A4
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0x80
@@ -1021,8 +1021,8 @@ _0819798A:
 	bx r1
 	thumb_func_end sub_8197964
 
-	thumb_func_start sav2_get_text_speed
-sav2_get_text_speed: @ 8197990
+	thumb_func_start GetPlayerTextSpeed
+GetPlayerTextSpeed: @ 8197990
 	push {lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
@@ -1045,7 +1045,7 @@ _081979AC:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sav2_get_text_speed
+	thumb_func_end GetPlayerTextSpeed
 
 	thumb_func_start sub_81979C4
 sub_81979C4: @ 81979C4

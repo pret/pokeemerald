@@ -212,17 +212,17 @@ _081C3FEC:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r0, 0x1
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_0861CE97
 	adds r0, r4, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x2C
@@ -5547,7 +5547,7 @@ DisplayItemMessageInBattlePyramid: @ 81C6DD8
 	movs r0, 0x2
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1

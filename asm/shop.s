@@ -1219,7 +1219,7 @@ BuyMenuDisplayMessage: @ 80E04E8
 	adds r6, r2, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1

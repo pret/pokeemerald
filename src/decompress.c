@@ -459,10 +459,9 @@ _08034964:\n\
         .syntax divided");
 }
 
-u32 sub_8034974(void* ptr)
+u32 sub_8034974(const u8 *ptr)
 {
-    u8* ptr_ = (u8*)(ptr);
-    return (ptr_[3] << 16) | (ptr_[2] << 8) | (ptr_[1]);
+    return (ptr[3] << 16) | (ptr[2] << 8) | (ptr[1]);
 }
 
 bool8 LoadCompressedObjectPicUsingHeap(const struct CompressedSpriteSheet* src)

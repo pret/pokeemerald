@@ -232,7 +232,7 @@ _08178B56:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00005501
 	adds r0, r2, 0
 	strh r0, [r1]

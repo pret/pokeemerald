@@ -1,5 +1,3 @@
-
-// Includes
 #include "global.h"
 #include "gpu_regs.h"
 #include "multiboot.h"
@@ -10,6 +8,7 @@
 #include "task.h"
 #include "unknown_task.h"
 #include "window.h"
+#include "text.h"
 #include "menu.h"
 #include "m4a.h"
 
