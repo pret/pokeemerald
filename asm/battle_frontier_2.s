@@ -14280,7 +14280,7 @@ sub_81A1C4C: @ 81A1C4C
 	adds r3, r0, 0
 	lsls r0, r5, 3
 	adds r5, r0, 0x1
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	ldrb r0, [r0]
 	lsls r3, 24
 	lsrs r3, 24
@@ -14306,7 +14306,7 @@ sub_81A1C90: @ 81A1C90
 	push {r4,lr}
 	sub sp, 0x34
 	adds r2, r0, 0
-	ldr r3, =gUnknown_0203AB74
+	ldr r3, =gResultsWindowId
 	movs r1, 0xAE
 	mov r0, sp
 	adds r0, 0x2F
@@ -14361,7 +14361,7 @@ sub_81A1CD8: @ 81A1CD8
 	lsls r0, 24
 	lsrs r0, 24
 	adds r7, r0, 0
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r10, r0
 	ldrb r0, [r0]
 	str r7, [sp]
@@ -14580,7 +14580,7 @@ sub_81A1EA8: @ 81A1EA8
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r4, =gUnknown_0203AB74
+	ldr r4, =gResultsWindowId
 	ldr r0, =gUnknown_08611C74
 	bl AddWindow
 	strb r0, [r4]
@@ -14621,7 +14621,7 @@ _081A1F28:
 	ldr r0, =gStringVar4
 	movs r1, 0x2
 	bl sub_81A1C4C
-	ldr r6, =gUnknown_0203AB74
+	ldr r6, =gResultsWindowId
 	ldrb r0, [r6]
 	ldr r2, =gText_Lv502
 	movs r1, 0x31
@@ -14734,7 +14734,7 @@ sub_81A2008: @ 81A2008
 	lsrs r6, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r10, r0
 	ldrb r0, [r0]
 	str r5, [sp]
@@ -14868,7 +14868,7 @@ sub_81A2134: @ 81A2134
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r4, =gUnknown_0203AB74
+	ldr r4, =gResultsWindowId
 	ldr r0, =gUnknown_08611C74
 	bl AddWindow
 	strb r0, [r4]
@@ -14893,7 +14893,7 @@ _081A2184:
 	ldr r0, =gStringVar4
 	movs r1, 0
 	bl sub_81A1C4C
-	ldr r1, =gUnknown_0203AB74
+	ldr r1, =gResultsWindowId
 	ldrb r0, [r1]
 	ldr r2, =gText_Lv502
 	movs r6, 0x21
@@ -14905,7 +14905,7 @@ _081A2184:
 	movs r1, 0x1
 	movs r3, 0x8
 	bl PrintTextOnWindow
-	ldr r1, =gUnknown_0203AB74
+	ldr r1, =gResultsWindowId
 	ldrb r0, [r1]
 	ldr r2, =gText_OpenLv
 	movs r1, 0x61
@@ -14988,10 +14988,10 @@ _081A2184:
 	mov r1, r8
 	movs r3, 0x40
 	bl sub_81A2008
-	ldr r1, =gUnknown_0203AB74
+	ldr r1, =gResultsWindowId
 	ldrb r0, [r1]
 	bl PutWindowTilemap
-	ldr r1, =gUnknown_0203AB74
+	ldr r1, =gResultsWindowId
 	ldrb r0, [r1]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -15027,7 +15027,7 @@ sub_81A22B8: @ 81A22B8
 	lsls r0, 24
 	lsrs r0, 24
 	adds r7, r0, 0
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r10, r0
 	ldrb r0, [r0]
 	str r7, [sp]
@@ -15221,7 +15221,7 @@ sub_81A2460: @ 81A2460
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r4, =gUnknown_0203AB74
+	ldr r4, =gResultsWindowId
 	ldr r0, =gUnknown_08611C74
 	bl AddWindow
 	strb r0, [r4]
@@ -15246,7 +15246,7 @@ _081A24B0:
 	ldr r0, =gStringVar4
 	movs r1, 0x2
 	bl sub_81A1C4C
-	ldr r6, =gUnknown_0203AB74
+	ldr r6, =gResultsWindowId
 	ldrb r0, [r6]
 	ldr r2, =gText_Lv502
 	movs r1, 0x31
@@ -15356,7 +15356,7 @@ sub_81A258C: @ 81A258C
 	lsrs r6, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r10, r0
 	ldrb r0, [r0]
 	str r5, [sp]
@@ -15469,7 +15469,7 @@ sub_81A2698: @ 81A2698
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0xC
-	ldr r6, =gUnknown_0203AB74
+	ldr r6, =gResultsWindowId
 	ldr r0, =gUnknown_08611C74
 	bl AddWindow
 	strb r0, [r6]
@@ -15608,7 +15608,7 @@ sub_81A27E8: @ 81A27E8
 	lsls r0, 24
 	lsrs r0, 24
 	adds r7, r0, 0
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r10, r0
 	ldrb r0, [r0]
 	str r7, [sp]
@@ -15772,7 +15772,7 @@ _081A2956:
 sub_81A2968: @ 81A2968
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r5, =gUnknown_0203AB74
+	ldr r5, =gResultsWindowId
 	ldr r0, =gUnknown_08611C74
 	bl AddWindow
 	strb r0, [r5]
@@ -15871,7 +15871,7 @@ sub_81A2A28: @ 81A2A28
 	lsls r0, 24
 	lsrs r0, 24
 	adds r6, r0, 0
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r10, r0
 	ldrb r0, [r0]
 	str r6, [sp]
@@ -16147,7 +16147,7 @@ sub_81A2C94: @ 81A2C94
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r4, =gUnknown_0203AB74
+	ldr r4, =gResultsWindowId
 	ldr r0, =gUnknown_08611C74
 	bl AddWindow
 	strb r0, [r4]
@@ -16172,7 +16172,7 @@ _081A2CE0:
 	ldr r0, =gStringVar4
 	movs r1, 0
 	bl sub_81A1C4C
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r8, r0
 	ldrb r0, [r0]
 	ldr r2, =gText_Lv502
@@ -16276,7 +16276,7 @@ sub_81A2DB4: @ 81A2DB4
 	lsls r0, 24
 	lsrs r0, 24
 	adds r7, r0, 0
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r10, r0
 	ldrb r0, [r0]
 	str r7, [sp]
@@ -16442,7 +16442,7 @@ _081A2F26:
 sub_81A2F38: @ 81A2F38
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r5, =gUnknown_0203AB74
+	ldr r5, =gResultsWindowId
 	ldr r0, =gUnknown_08611C74
 	bl AddWindow
 	strb r0, [r5]
@@ -16520,7 +16520,7 @@ sub_81A2FF8: @ 81A2FF8
 	mov r6, r8
 	push {r6,r7}
 	sub sp, 0xC
-	ldr r4, =gUnknown_0203AB74
+	ldr r4, =gResultsWindowId
 	ldr r0, =gUnknown_08611C7C
 	bl AddWindow
 	strb r0, [r4]
@@ -16686,7 +16686,7 @@ _081A315C:
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
-	ldr r6, =gUnknown_0203AB74
+	ldr r6, =gResultsWindowId
 	ldrb r0, [r6]
 	movs r1, 0x26
 	adds r3, r5, 0
@@ -18962,7 +18962,7 @@ sub_81A4594: @ 81A4594
 	sub sp, 0x2C
 	mov r8, r1
 	adds r6, r3, 0
-	ldr r1, =gUnknown_0203AB74
+	ldr r1, =gResultsWindowId
 	ldrb r5, [r1]
 	lsls r4, r0, 1
 	adds r4, r0
@@ -18998,7 +18998,7 @@ sub_81A4594: @ 81A4594
 	ldrb r2, [r6, 0xE]
 	add r0, sp, 0xC
 	bl TVShowConvertInternationalString
-	ldr r1, =gUnknown_0203AB74
+	ldr r1, =gResultsWindowId
 	ldrb r0, [r1]
 	mov r3, r8
 	adds r3, 0x2
@@ -19038,7 +19038,7 @@ _081A4618:
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r1, =gUnknown_0203AB74
+	ldr r1, =gResultsWindowId
 	ldrb r0, [r1]
 	str r7, [sp]
 	mov r1, r10
@@ -19072,7 +19072,7 @@ sub_81A4684: @ 81A4684
 	adds r7, r1, 0
 	mov r10, r2
 	adds r5, r3, 0
-	ldr r1, =gUnknown_0203AB74
+	ldr r1, =gResultsWindowId
 	ldrb r0, [r1]
 	lsls r2, r6, 1
 	adds r2, r6
@@ -19112,7 +19112,7 @@ sub_81A4684: @ 81A4684
 	ldrb r2, [r5, 0x1A]
 	add r0, sp, 0xC
 	bl TVShowConvertInternationalString
-	ldr r1, =gUnknown_0203AB74
+	ldr r1, =gResultsWindowId
 	ldrb r0, [r1]
 	adds r3, r7, 0x2
 	lsls r3, 27
@@ -19147,7 +19147,7 @@ _081A4734:
 	adds r1, r4, 0
 	bl StringCopy
 _081A473C:
-	ldr r2, =gUnknown_0203AB74
+	ldr r2, =gResultsWindowId
 	mov r9, r2
 	ldrb r0, [r2]
 	adds r3, r7, 0x4
@@ -19468,7 +19468,7 @@ sub_81A4998: @ 81A4998
 	ldr r1, [r5]
 	adds r0, r6, 0
 	bl StringExpandPlaceholders
-	ldr r0, =gUnknown_0203AB74
+	ldr r0, =gResultsWindowId
 	mov r8, r0
 	ldrb r0, [r0]
 	movs r1, 0x1
@@ -19567,7 +19567,7 @@ _081A4A90:
 	thumb_func_start sub_81A4AA0
 sub_81A4AA0: @ 81A4AA0
 	push {r4,lr}
-	ldr r4, =gUnknown_0203AB74
+	ldr r4, =gResultsWindowId
 	ldr r0, =gUnknown_08611C84
 	bl AddWindow
 	strb r0, [r4]
@@ -19595,7 +19595,7 @@ sub_81A4AA0: @ 81A4AA0
 	thumb_func_start sub_81A4AE8
 sub_81A4AE8: @ 81A4AE8
 	push {r4,lr}
-	ldr r4, =gUnknown_0203AB74
+	ldr r4, =gResultsWindowId
 	ldrb r0, [r4]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

@@ -1297,13 +1297,13 @@ bool8 IsPokeSpriteNotFlipped(u16 species)
     return gBaseStats[species].noFlip;
 }
 
-s8 GetMonFlavourRelation(struct Pokemon *mon, u8 a2)
+s8 GetMonFlavorRelation(struct Pokemon *mon, u8 a2)
 {
     u8 nature = GetNature(mon);
     return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
 }
 
-s8 GetFlavourRelationByPersonality(u32 personality, u8 a2)
+s8 GetFlavorRelationByPersonality(u32 personality, u8 a2)
 {
     u8 nature = GetNatureFromPersonality(personality);
     return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];

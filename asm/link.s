@@ -206,7 +206,7 @@ sub_8009570: @ 8009570
 	ldr r0, =sub_80096BC
 	bl SetVBlankCallback
 	bl sub_800A2E0
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -291,7 +291,7 @@ sub_8009638: @ 8009638
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x8]
 	strb r0, [r5, 0x13]
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	ldrh r0, [r0]
 	str r0, [r5, 0x14]
 	ldr r0, =gGameLanguage
@@ -339,7 +339,7 @@ sub_80096BC: @ 80096BC
 sub_80096D0: @ 80096D0
 	push {lr}
 	ldr r3, =gUnknown_020229C4
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	ldr r2, =0x0000efff
 	adds r0, r1, 0
 	adds r0, 0xE
@@ -646,7 +646,7 @@ _08009976:
 	orrs r1, r0
 _08009990:
 	adds r0, r2, 0
-	bl sub_800A994
+	bl SetLinkDebugValues
 _08009996:
 	add sp, 0x4
 	pop {r4,r5}
@@ -685,7 +685,7 @@ sub_80099E0: @ 80099E0
 _080099F4:
 	movs r1, 0
 	ldr r5, =gUnknown_03003084
-	ldr r3, =gUnknown_03003110
+	ldr r3, =gSendCmd
 	movs r2, 0
 _080099FC:
 	lsls r0, r1, 1
@@ -781,7 +781,7 @@ _08009AAE:
 	movs r0, 0
 	strh r0, [r3]
 	lsls r4, r6, 4
-	ldr r5, =gUnknown_03003090
+	ldr r5, =gRecvCmds
 	adds r2, r4, r5
 	ldrh r0, [r2]
 	mov r12, r1
@@ -901,12 +901,12 @@ _08009BC4:
 	adds r1, r0
 	movs r2, 0
 	strh r2, [r1]
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r0, [r0]
 	strh r0, [r1, 0x2]
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	adds r0, 0x4
 	adds r0, r4, r0
 	ldrh r0, [r0]
@@ -930,7 +930,7 @@ _08009BF0:
 	mov r8, r0
 	movs r2, 0
 	adds r5, r3, 0
-	ldr r7, =gUnknown_03003090
+	ldr r7, =gRecvCmds
 	adds r3, r4, 0
 _08009C14:
 	ldrh r1, [r5]
@@ -955,7 +955,7 @@ _08009C40:
 	ldr r1, =gBlockRecvBuffer
 	mov r9, r1
 	adds r7, r3, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	mov r8, r3
 	lsls r5, r6, 8
 	adds r3, r4, 0
@@ -1069,7 +1069,7 @@ _08009D38:
 	b _08009D6E
 _08009D3E:
 	ldr r3, =gUnknown_082ED1A8
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r2, [r0]
@@ -1084,7 +1084,7 @@ _08009D3E:
 	b _08009D6E
 	.pool
 _08009D64:
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r0, [r0]
@@ -1183,26 +1183,26 @@ _08009E2C:
 	b _08009F06
 	.pool
 _08009E38:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	strh r2, [r0]
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldrh r1, [r1]
 	b _08009F04
 	.pool
 _08009E4C:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	strh r2, [r0]
 	ldr r1, =gMain
 	ldrh r1, [r1, 0x2C]
 	b _08009F04
 	.pool
 _08009E60:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	movs r1, 0
 	b _08009F02
 	.pool
 _08009E6C:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	strh r2, [r0]
 	movs r1, 0
 	adds r3, r0, 0
@@ -1219,7 +1219,7 @@ _08009E76:
 	b _08009F06
 	.pool
 _08009E8C:
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	strh r2, [r1]
 	ldr r2, =gUnknown_03000D10
 	ldrh r0, [r2, 0x2]
@@ -1230,28 +1230,28 @@ _08009E8C:
 	b _08009F06
 	.pool
 _08009EA8:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	strh r2, [r0]
 	ldr r1, =gSpecialVar_ItemId
 	ldrh r1, [r1]
 	b _08009F04
 	.pool
 _08009EBC:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	strh r2, [r0]
 	ldr r1, =gUnknown_03003150
 	ldrb r1, [r1]
 	b _08009F04
 	.pool
 _08009ED0:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	strh r2, [r0]
 	ldr r1, =gUnknown_030030F4
 	ldrh r1, [r1]
 	b _08009F04
 	.pool
 _08009EE4:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	strh r2, [r0]
 	b _08009F06
 	.pool
@@ -1264,7 +1264,7 @@ _08009EF0:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08009F06
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 _08009F02:
 	strh r2, [r0]
 _08009F04:
@@ -1814,7 +1814,7 @@ _0800A30C:
 	str r7, [r4, 0x4]
 	b _0800A336
 _0800A324:
-	ldr r5, =gUnknown_020228C4
+	ldr r5, =gBlockSendBuffer
 	cmp r7, r5
 	beq _0800A334
 	adds r0, r5, 0
@@ -1863,7 +1863,7 @@ sub_800A388: @ 800A388
 	push {r4-r6,lr}
 	ldr r0, =gUnknown_03000D10
 	ldr r5, [r0, 0x4]
-	ldr r2, =gUnknown_03003110
+	ldr r2, =gSendCmd
 	ldr r1, =0x00008888
 	strh r1, [r2]
 	movs r3, 0
@@ -2644,15 +2644,15 @@ _0800A94E:
 	.pool
 	thumb_func_end task00_link_test
 
-	thumb_func_start sub_800A994
-sub_800A994: @ 800A994
+	thumb_func_start SetLinkDebugValues
+SetLinkDebugValues: @ 800A994
 	ldr r2, =gUnknown_0300302C
 	str r0, [r2]
 	ldr r0, =gUnknown_03003070
 	str r1, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_800A994
+	thumb_func_end SetLinkDebugValues
 
 	thumb_func_start sub_800A9A8
 sub_800A9A8: @ 800A9A8
@@ -2772,7 +2772,7 @@ sub_800AA60: @ 800AA60
 	ldr r0, =gUnknown_02022A74
 	ldr r2, =0x00002288
 	mov r8, r2
-	ldr r7, =gUnknown_020229C6
+	ldr r7, =gLinkType
 	mov r6, r12
 	adds r6, 0x14
 	adds r5, r0, 0x4
@@ -3798,7 +3798,7 @@ sub_800B348: @ 800B348
 	strh r2, [r0]
 	ldrb r2, [r3, 0x2]
 	strb r2, [r0, 0x2]
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r2, 0x3C
 	bl memcpy
 	pop {r4-r6}
@@ -3861,8 +3861,8 @@ HandleLinkConnection: @ 800B40C
 	cmp r0, 0
 	bne _0800B45C
 	ldr r0, =gUnknown_03003144
-	ldr r1, =gUnknown_03003110
-	ldr r2, =gUnknown_03003090
+	ldr r1, =gSendCmd
+	ldr r2, =gRecvCmds
 	bl sub_800B638
 	ldr r4, =gUnknown_030030E0
 	str r0, [r4]
@@ -10247,13 +10247,13 @@ _0800E64A:
 	adds r0, r4, 0
 	bl sub_800D724
 	strh r5, [r7]
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	ldr r2, =0x01000008
 	adds r0, r7, 0
 	bl CpuSet
 	mov r0, r8
 	strh r5, [r0]
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r2, =0x01000028
 	bl CpuSet
 	mov r0, r9
@@ -10306,7 +10306,7 @@ sub_800E700: @ 800E700
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _0800E732
-	ldr r0, =gUnknown_020229C6
+	ldr r0, =gLinkType
 	strh r1, [r0]
 	bl sub_800AAF4
 	movs r0, 0
@@ -11278,7 +11278,7 @@ sub_800EFB0: @ 800EFB0
 	push {r4-r7,lr}
 	sub sp, 0x4
 	movs r2, 0
-	ldr r7, =gUnknown_03003090
+	ldr r7, =gRecvCmds
 	ldr r0, =gUnknown_03005000
 	adds r6, r7, 0
 	ldr r1, =0x00000c87
@@ -11323,8 +11323,8 @@ _0800EFD0:
 	thumb_func_start sub_800F014
 sub_800F014: @ 800F014
 	push {lr}
-	ldr r3, =gUnknown_03003110
-	ldr r2, =gUnknown_03003090
+	ldr r3, =gSendCmd
+	ldr r2, =gRecvCmds
 	movs r1, 0x6
 _0800F01C:
 	ldrh r0, [r3]
@@ -11334,7 +11334,7 @@ _0800F01C:
 	subs r1, 0x1
 	cmp r1, 0
 	bge _0800F01C
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	movs r2, 0
 	adds r0, r1, 0
 	adds r0, 0xC
@@ -11413,7 +11413,7 @@ _0800F0C4:
 	.pool
 _0800F0CC:
 	movs r3, 0
-	ldr r4, =gUnknown_03003090
+	ldr r4, =gRecvCmds
 _0800F0D0:
 	movs r2, 0
 	lsls r0, r3, 4
@@ -11681,7 +11681,7 @@ _0800F2E0:
 	str r2, [sp, 0x4]
 	adds r5, 0x1
 	str r5, [sp]
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	mov r9, r1
 	adds r5, r3, 0
 	adds r7, r4, 0
@@ -11908,7 +11908,7 @@ sub_800F4F0: @ 800F4F0
 	mov r1, sp
 	bl sub_800D934
 	movs r1, 0
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	mov r12, r0
 _0800F506:
 	movs r4, 0
@@ -12012,7 +12012,7 @@ _0800F5C0:
 	ldrb r1, [r2]
 	strb r0, [r2]
 	bl sub_8010528
-	ldr r5, =gUnknown_03003110
+	ldr r5, =gSendCmd
 	add r4, sp, 0x48
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -12305,8 +12305,8 @@ sub_800F820: @ 800F820
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800F83C
-	bl sub_8082D18
-	ldr r1, =gUnknown_03003110
+	bl GetBlenderArrowPosition
+	ldr r1, =gSendCmd
 	strh r0, [r1, 0xC]
 _0800F83C:
 	ldr r1, =gUnknown_020223C0
@@ -12345,7 +12345,7 @@ sub_800F86C: @ 800F86C
 _0800F87A:
 	mov r1, r8
 	lsls r0, r1, 4
-	ldr r2, =gUnknown_03003090
+	ldr r2, =gRecvCmds
 	adds r1, r0, r2
 	ldrh r7, [r1]
 	movs r3, 0xFF
@@ -12555,7 +12555,7 @@ _0800FA0E:
 	adds r2, r4, 0x1
 	lsls r0, r2, 1
 	adds r0, r3
-	ldr r4, =gUnknown_03003090
+	ldr r4, =gRecvCmds
 	adds r0, r4
 	ldrh r0, [r0]
 	strh r0, [r1]
@@ -12686,7 +12686,7 @@ _0800FB10:
 	adds r0, r7, r2
 	strb r1, [r0]
 _0800FB48:
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	adds r0, 0x6
 	adds r0, r5, r0
 	ldrh r0, [r0]
@@ -12699,7 +12699,7 @@ _0800FB78:
 	movs r0, 0xEE
 	lsls r0, 8
 	bl sub_800FD14
-	ldr r1, =gUnknown_03003110
+	ldr r1, =gSendCmd
 	ldr r3, =gUnknown_03003092
 	adds r0, r5, r3
 	ldrh r0, [r0]
@@ -12708,7 +12708,7 @@ _0800FB78:
 	adds r0, r5, r4
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	adds r0, 0x6
 	adds r0, r5, r0
 	ldrh r0, [r0]
@@ -12910,7 +12910,7 @@ sub_800FD14: @ 800FD14
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r5, =gUnknown_03003110
+	ldr r5, =gSendCmd
 	strh r1, [r5]
 	movs r0, 0xF0
 	lsls r0, 7
@@ -13063,7 +13063,7 @@ _0800FE46:
 sub_800FE50: @ 800FE50
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0800FE76
@@ -13097,7 +13097,7 @@ sub_800FE84: @ 800FE84
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _0800FEB8
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0800FEB8
@@ -13149,7 +13149,7 @@ _0800FEC8:
 	str r7, [r5, 0x70]
 	b _0800FF1C
 _0800FF0A:
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	cmp r7, r4
 	beq _0800FF1A
 	adds r0, r4, 0
@@ -13182,7 +13182,7 @@ _0800FF32:
 	thumb_func_start rfufunc_80F9F44
 rfufunc_80F9F44: @ 800FF4C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0800FFA0
@@ -13207,7 +13207,7 @@ rfufunc_80F9F44: @ 800FF4C
 	.pool
 _0800FF84:
 	bl GetMultiplayerId
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	lsls r0, 24
 	lsrs r0, 20
 	adds r0, r1
@@ -13233,7 +13233,7 @@ sub_800FFB0: @ 800FFB0
 	ldr r0, =gUnknown_03005000
 	mov r12, r0
 	ldr r5, [r0, 0x70]
-	ldr r3, =gUnknown_03003110
+	ldr r3, =gSendCmd
 	mov r2, r12
 	adds r2, 0x6C
 	ldrh r1, [r2]
@@ -13302,7 +13302,7 @@ rfufunc_80FA020: @ 8010028
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0
 	bne _080100F0
-	ldr r3, =gUnknown_03003110
+	ldr r3, =gSendCmd
 	adds r2, r5, 0
 	adds r2, 0x6E
 	ldrh r0, [r2]
@@ -13313,7 +13313,7 @@ rfufunc_80FA020: @ 8010028
 	strh r0, [r3]
 	movs r4, 0
 	mov r9, r5
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	mov r12, r0
 	lsls r5, r6, 4
 	adds r7, r2, 0
@@ -13539,7 +13539,7 @@ _08010220:
 	thumb_func_start sub_801022C
 sub_801022C: @ 801022C
 	push {r4,lr}
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801024E
@@ -13694,7 +13694,7 @@ sub_8010358: @ 8010358
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801037A
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801037A
@@ -13723,7 +13723,7 @@ sub_8010390: @ 8010390
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801041E
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801041E
@@ -13766,7 +13766,7 @@ _080103FA:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801041E
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801041E
@@ -14404,7 +14404,7 @@ _080108F0:
 	b _080109D2
 	.pool
 _08010904:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080109D2
@@ -14676,7 +14676,7 @@ _08010B28:
 	.4byte _08010C0A
 	.4byte _08010C94
 _08010B40:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08010B4A
@@ -14690,7 +14690,7 @@ _08010B4A:
 	b _08010C4A
 	.pool
 _08010B60:
-	ldr r0, =gUnknown_03003110
+	ldr r0, =gSendCmd
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08010B6A
@@ -14734,7 +14734,7 @@ _08010B8C:
 	b _08010C4A
 	.pool
 _08010BC0:
-	ldr r5, =gUnknown_020228C4
+	ldr r5, =gBlockSendBuffer
 	adds r1, r5, 0
 	ldr r0, =gUnknown_082ED7EC
 	ldm r0!, {r2-r4}
@@ -14772,7 +14772,7 @@ _08010BE2:
 	adds r0, 0x1
 	strh r0, [r1, 0x8]
 _08010C0A:
-	ldr r5, =gUnknown_020228C4
+	ldr r5, =gBlockSendBuffer
 	ldr r1, =gUnknown_03005000
 	ldrb r0, [r1, 0xD]
 	strb r0, [r5, 0xF]
@@ -14796,7 +14796,7 @@ _08010C20:
 	mov r1, r12
 	movs r2, 0x8C
 	bl memcpy
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0xA0
 	bl SendBlock
@@ -14921,7 +14921,7 @@ _08010D56:
 	cmp r0, 0
 	beq _08010DA6
 	bl sub_800B348
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0x3C
 	bl SendBlock
@@ -16575,7 +16575,7 @@ sub_8011AC8: @ 8011AC8
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldr r2, =0x05000014
 	mov r0, sp
 	bl CpuSet
@@ -16608,7 +16608,7 @@ sub_8011AFC: @ 8011AFC
 	lsls r0, 24
 	cmp r0, 0
 	beq _08011B70
-	ldr r1, =gUnknown_020229C6
+	ldr r1, =gLinkType
 	ldr r2, =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -16968,7 +16968,7 @@ sub_8011E2C: @ 8011E2C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r6, =gUnknown_03003110
+	ldr r6, =gSendCmd
 	ldrh r0, [r6]
 	cmp r0, 0
 	bne _08011E7A
@@ -20832,7 +20832,7 @@ _08013FFC:
 	b _0801405A
 	.pool
 _08014038:
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00002be0
@@ -21403,7 +21403,7 @@ _080145D8:
 	.pool
 _080145F4:
 	bl overworld_free_bg_tilemaps
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	bl sp000_heal_pokemon
@@ -21422,7 +21422,7 @@ _08014620:
 	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	movs r0, 0x2
@@ -21438,7 +21438,7 @@ _0801464C:
 	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	movs r0, 0x5
@@ -21450,7 +21450,7 @@ _0801464C:
 	b _080146B0
 	.pool
 _08014678:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	bl overworld_free_bg_tilemaps
@@ -21463,7 +21463,7 @@ _08014678:
 	b _080146B0
 	.pool
 _08014698:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	bl overworld_free_bg_tilemaps
@@ -21503,7 +21503,7 @@ _080146F6:
 	bl sub_801DD98
 	b _08014764
 _080146FC:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0
 	bl sub_80143E4
 	ldr r0, =sub_80141A4
@@ -21573,7 +21573,7 @@ sub_8014790: @ 8014790
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r7, r0, r1
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	mov r9, r0
 	movs r1, 0
 	ldrsh r0, [r7, r1]
@@ -23720,7 +23720,7 @@ _08015BBE:
 	bne _08015BCA
 	bl _08016878
 _08015BCA:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	ldr r0, =sub_80140E0
@@ -24247,7 +24247,7 @@ _080160DA:
 	bne _080160E4
 	b _08016878
 _080160E4:
-	ldr r0, =gUnknown_020228C4
+	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
 	ldr r0, =sub_80140E0
@@ -25082,7 +25082,7 @@ _08016894:
 sub_801689C: @ 801689C
 	push {r4,r5,lr}
 	adds r2, r0, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrh r5, [r3, 0x12]
 	adds r4, r5, 0
 	cmp r4, 0
@@ -28007,14 +28007,14 @@ _08017F8A:
 	lsls r0, r4, 24
 	lsrs r0, 24
 	adds r1, r5, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	adds r5, 0x10
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _08017F8A
 	ldr r1, =gUnknown_082EE47C
 	adds r0, r7, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08017FB4
 	.pool
 _08017FAC:
@@ -28045,7 +28045,7 @@ _08017FC6:
 sub_8017FD8: @ 8017FD8
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, =gUnknown_03003090
+	ldr r0, =gRecvCmds
 	ldrh r1, [r0, 0x2]
 	cmp r1, 0
 	beq _08017FFC
@@ -28379,7 +28379,7 @@ sub_8018220: @ 8018220
 	ldr r0, =gUnknown_02039B58
 	adds r1, r0
 	mov r8, r1
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	mov r6, r9
 	adds r6, 0xC0
 	bl sub_8068BB0
@@ -28393,11 +28393,11 @@ sub_8018220: @ 8018220
 	bl StringCopy
 	movs r0, 0
 	adds r1, r6, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	mov r1, r8
 	adds r1, 0x30
 	movs r0, 0x1
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r4, 0xBA
 	lsls r4, 1
 	add r4, r9
@@ -28411,7 +28411,7 @@ sub_8018220: @ 8018220
 	bl StringCopy
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	mov r5, r9
 	adds r5, 0xDE
 	mov r0, r8
@@ -28422,7 +28422,7 @@ sub_8018220: @ 8018220
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x3
 	adds r1, r5, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r2, 0xED
 	add r2, r9
 	mov r10, r2
@@ -28442,16 +28442,16 @@ sub_8018220: @ 8018220
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x4
 	mov r1, r10
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r0, 0x5
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r4, 0xD2
 	lsls r4, 1
 	add r4, r9
 	ldr r1, =gUnknown_082EFF64
 	adds r0, r4, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	ldr r0, =gStringVar4
 	adds r1, r4, 0
 	bl StringCopy
@@ -28468,7 +28468,7 @@ _0801830C:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	adds r1, r6, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	mov r2, r8
 	ldrh r1, [r2, 0x16]
 	cmp r1, r4
@@ -28483,7 +28483,7 @@ _08018328:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x2
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	mov r0, r8
 	ldrh r1, [r0, 0x20]
 	adds r0, r5, 0
@@ -28492,7 +28492,7 @@ _08018328:
 	bl ConvertIntToDecimalStringN
 	movs r0, 0x3
 	adds r1, r5, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r7, 0
 	movs r6, 0x80
 	lsls r6, 19
@@ -28505,7 +28505,7 @@ _08018360:
 	bl CopyEasyChatWord
 	lsrs r0, r6, 24
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r2, 0x80
 	lsls r2, 17
 	adds r6, r2
@@ -28519,7 +28519,7 @@ _08018360:
 	add r4, r9
 	ldr r1, =gUnknown_082EFFA4
 	adds r0, r4, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	ldr r5, =gStringVar4
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -28529,7 +28529,7 @@ _08018360:
 	bne _080183D0
 	ldr r1, =gUnknown_082F0020
 	adds r0, r4, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -28546,7 +28546,7 @@ _080183D0:
 	adds r1, r0
 	ldr r1, [r1]
 	adds r0, r4, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StringAppend
@@ -32659,7 +32659,7 @@ sub_801A43C: @ 801A43C
 	bl LoadPalette
 	movs r0, 0xF0
 	bl sub_81978B0
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	movs r0, 0x20
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -33721,7 +33721,7 @@ _0801AE48:
 	beq _0801AE54
 	b _0801AFAE
 _0801AE54:
-	ldr r4, =gUnknown_020228C4
+	ldr r4, =gBlockSendBuffer
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x20
@@ -33738,7 +33738,7 @@ _0801AE78:
 	movs r0, 0x51
 _0801AE7A:
 	strb r0, [r4]
-	ldr r1, =gUnknown_020228C4
+	ldr r1, =gBlockSendBuffer
 	movs r0, 0
 	movs r2, 0x20
 	bl SendBlock
@@ -41936,10 +41936,10 @@ _0801F020:
 	ldrb r1, [r4, 0x8]
 	cmp r0, r1
 	beq _0801F0A8
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r1, =gText_F700JoinedChat
 	b _0801F094
 	.pool
@@ -41976,14 +41976,14 @@ _0801F07A:
 	ldrb r5, [r5]
 	cmp r0, r5
 	beq _0801F0A8
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	movs r0, 0
 	adds r1, r4, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r1, =gText_F700LeftChat
 _0801F094:
 	adds r0, r6, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r0, 0x1
 	b _0801F0AA
 	.pool
@@ -43456,11 +43456,11 @@ sub_801FBF8: @ 801FBF8
 	beq _0801FC38
 	b _0801FC42
 _0801FC08:
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	bl sub_801F1D0
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r0, 0x5
 	movs r1, 0
 	bl sub_801FF18
@@ -43617,11 +43617,11 @@ sub_801FD30: @ 801FD30
 	beq _0801FD74
 	b _0801FD7E
 _0801FD40:
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	movs r0, 0x9
 	movs r1, 0
 	bl sub_801FF18
@@ -43925,7 +43925,7 @@ _0801FF98:
 	adds r0, r1, 0
 	adds r0, 0x22
 	ldr r1, [r4]
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	ldr r0, [r5]
 	adds r6, r0, 0
 	adds r6, 0x22
@@ -47204,7 +47204,7 @@ _08021A92:
 	lsls r4, 2
 	str r4, [sp, 0x24]
 _08021A98:
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	ldr r0, [sp, 0x10]
 	cmp r0, 0x1
 	beq _08021B48
@@ -47463,10 +47463,10 @@ _08021CC8:
 	ldr r0, [sp, 0xC]
 	adds r1, r0, r1
 	movs r0, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r0, =gStringVar4
 	adds r1, r4, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	ldr r1, [sp, 0xC]
 	movs r2, 0xDD
 	lsls r2, 1
@@ -50249,7 +50249,7 @@ sub_802339C: @ 802339C
 	mov r10, r3
 _080233C0:
 	lsls r0, r7, 4
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	adds r2, r0, r1
 	ldrh r1, [r2]
 	movs r0, 0xFF
@@ -50858,7 +50858,7 @@ sub_802385C: @ 802385C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrb r0, [r5, 0x9]
 	cmp r4, r0
 	bcs _08023880
@@ -52672,8 +52672,8 @@ SetBerryPowder: @ 802467C
 	.pool
 	thumb_func_end SetBerryPowder
 
-	thumb_func_start ApplyNewEncyprtionKeyToBerryPowder
-ApplyNewEncyprtionKeyToBerryPowder: @ 8024690
+	thumb_func_start ApplyNewEncryptionKeyToBerryPowder
+ApplyNewEncryptionKeyToBerryPowder: @ 8024690
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, =gSaveBlock2Ptr
@@ -52681,11 +52681,11 @@ ApplyNewEncyprtionKeyToBerryPowder: @ 8024690
 	movs r2, 0xFA
 	lsls r2, 1
 	adds r0, r2
-	bl ApplyNewEncyprtionKeyToWord
+	bl ApplyNewEncryptionKeyToWord
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end ApplyNewEncyprtionKeyToBerryPowder
+	thumb_func_end ApplyNewEncryptionKeyToBerryPowder
 
 	thumb_func_start sub_80246AC
 sub_80246AC: @ 80246AC
@@ -59626,7 +59626,7 @@ sub_8027DD0: @ 8027DD0
 sub_8027DFC: @ 8027DFC
 	push {lr}
 	adds r2, r0, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -60082,7 +60082,7 @@ sub_8028164: @ 8028164
 	mov r9, r0
 	adds r2, r7, 0
 	adds r2, 0x14
-	ldr r4, =gUnknown_03003090
+	ldr r4, =gRecvCmds
 	ldrh r0, [r4]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -60295,7 +60295,7 @@ sub_8028318: @ 8028318
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r4, r1, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -60347,7 +60347,7 @@ sub_8028350: @ 8028350
 sub_8028374: @ 8028374
 	push {lr}
 	adds r2, r0, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -63514,7 +63514,7 @@ _08029DA0:
 	movs r1, 0x1
 	adds r2, r5, 0
 	bl PrintTextOnWindow
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	bl sub_802762C
 	lsls r0, 16
 	lsrs r0, 16
@@ -63523,11 +63523,11 @@ _08029DA0:
 	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r7, =gStringVar4
 	ldr r1, =gText_FirstPlacePrize
 	adds r0, r7, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	ldr r0, [r4]
 	add r0, r10
 	ldrb r0, [r0]
@@ -63548,7 +63548,7 @@ _08029DA0:
 	beq _08029EC8
 	cmp r4, 0x3
 	beq _08029EC8
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	bl sub_802762C
 	lsls r0, 16
 	lsrs r0, 16
@@ -63556,12 +63556,12 @@ _08029DA0:
 	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	cmp r4, 0x2
 	bne _08029E9C
 	ldr r1, =gText_CantHoldAnyMore
 	adds r0, r7, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	b _08029EA8
 	.pool
 _08029E9C:
@@ -63569,7 +63569,7 @@ _08029E9C:
 	bne _08029EA8
 	ldr r1, =gText_FilledStorageSpace
 	adds r0, r7, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 _08029EA8:
 	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
@@ -70729,19 +70729,19 @@ sub_802D7E8: @ 802D7E8
 	movs r2, 0
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	ldr r1, [r5]
 	adds r1, 0x26
 	movs r0, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r1, [r5]
 	adds r1, 0x66
 	movs r0, 0x1
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r0, [r5]
 	adds r0, 0xA6
 	ldr r1, =gText_AwesomeWonF701F700
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x8
 	movs r2, 0x16
@@ -70786,15 +70786,15 @@ sub_802D884: @ 802D884
 	ldr r1, [r4]
 	adds r1, 0x26
 	bl CopyItemName
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	ldr r1, [r4]
 	adds r1, 0x26
 	movs r0, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r0, [r4]
 	adds r0, 0xA6
 	ldr r1, =gText_FilledStorageSpace2
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x8
 	movs r2, 0x16
@@ -70839,15 +70839,15 @@ sub_802D8FC: @ 802D8FC
 	ldr r1, [r4]
 	adds r1, 0x26
 	bl CopyItemName
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	ldr r1, [r4]
 	adds r1, 0x26
 	movs r0, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	ldr r0, [r4]
 	adds r0, 0xA6
 	ldr r1, =gText_CantHoldMore
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	movs r0, 0x4
 	movs r1, 0x9
 	movs r2, 0x16
@@ -71819,7 +71819,7 @@ sub_802E0D0: @ 802E0D0
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r1, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	lsls r2, r0, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -71946,7 +71946,7 @@ sub_802E1BC: @ 802E1BC
 	sub sp, 0xC
 	adds r5, r0, 0
 	adds r4, r1, 0
-	ldr r2, =gUnknown_03003090
+	ldr r2, =gRecvCmds
 	ldrh r0, [r2]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -72036,7 +72036,7 @@ sub_802E264: @ 802E264
 	adds r4, r0, 0
 	adds r5, r2, 0
 	adds r6, r3, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	lsls r2, r1, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -72091,7 +72091,7 @@ sub_802E2D0: @ 802E2D0
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
-	ldr r3, =gUnknown_03003090
+	ldr r3, =gRecvCmds
 	lsls r2, r1, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -73085,7 +73085,7 @@ sub_802EAB0: @ 802EAB0
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0802EB14
-	ldr r1, =gUnknown_03003090
+	ldr r1, =gRecvCmds
 	ldrh r0, [r1, 0x2]
 	ldr r5, =0x00007fff
 	cmp r0, r5
