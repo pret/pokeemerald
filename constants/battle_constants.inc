@@ -19,7 +19,7 @@
     .set BATTLE_TYPE_PALACE,          0x20000
     .set BATTLE_TYPE_ARENA,          0x40000
     .set BATTLE_TYPE_FACTORY,         0x80000
-    .set BATTLE_TYPE_x100000,         0x100000
+    .set BATTLE_TYPE_PIKE,         0x100000
     .set BATTLE_TYPE_PYRAMID,         0x200000
     .set BATTLE_TYPE_INGAME_PARTNER,  0x400000
     .set BATTLE_TYPE_x800000,         0x800000

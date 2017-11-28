@@ -2275,8 +2275,8 @@ overworld_posion_effect: @ 80FAEA8
 	.pool
 	thumb_func_end overworld_posion_effect
 
-	thumb_func_start c3_80A0DD8_is_running
-c3_80A0DD8_is_running: @ 80FAEC0
+	thumb_func_start FieldPoisonEffectIsRunning
+FieldPoisonEffectIsRunning: @ 80FAEC0
 	push {lr}
 	ldr r0, =task50_overworld_posion_effect
 	bl FuncIsActiveTask
@@ -2285,7 +2285,7 @@ c3_80A0DD8_is_running: @ 80FAEC0
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end c3_80A0DD8_is_running
+	thumb_func_end FieldPoisonEffectIsRunning
 
 	thumb_func_start sub_80FAED4
 sub_80FAED4: @ 80FAED4

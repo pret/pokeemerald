@@ -14,6 +14,7 @@
 #define VAR_0x4008                 0x4008
 #define VAR_0x4009                 0x4009
 #define VAR_0x400A                 0x400A
+#define VAR_0x400E                 0x400E
 #define VAR_0x4010                 0x4010
 #define VAR_0x4011                 0x4011
 #define VAR_0x401F                 0x401F

@@ -4748,7 +4748,7 @@ _081AD550:
 	cmp r6, 0x1
 	bne _081AD5C4
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
 	ldr r2, =gSpecialVar_ItemId

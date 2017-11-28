@@ -87,7 +87,7 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	compare_var_to_value VAR_0x40D5, 0
 	call_if 5, SouthernIsland_Interior_EventScript_242BB7
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B08EC
+	special BattleSetup_StartLatiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80

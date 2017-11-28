@@ -3534,7 +3534,7 @@ _08163E10:
 	bl sub_80B100C
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8145EF4
+	bl BattleTransition_StartOnField
 	b _08163E68
 	.pool
 _08163E2C:
@@ -3561,7 +3561,7 @@ _08163E2C:
 	movs r0, 0
 	bl PlayMapChosenOrBattleBGM
 	movs r0, 0x12
-	bl sub_8145EF4
+	bl BattleTransition_StartOnField
 _08163E68:
 	add sp, 0x4
 	pop {r4-r6}

@@ -1531,8 +1531,8 @@ _0809CB72:
 	.pool
 	thumb_func_end AdjustFriendship_step
 
-	thumb_func_start overworld_poison_timer_set
-overworld_poison_timer_set: @ 809CB80
+	thumb_func_start ResetPoisonStepCounter
+ResetPoisonStepCounter: @ 809CB80
 	push {lr}
 	ldr r0, =0x0000402b
 	movs r1, 0
@@ -1540,7 +1540,7 @@ overworld_poison_timer_set: @ 809CB80
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end overworld_poison_timer_set
+	thumb_func_end ResetPoisonStepCounter
 
 	thumb_func_start overworld_poison_step
 overworld_poison_step: @ 809CB94

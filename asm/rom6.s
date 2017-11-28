@@ -4180,7 +4180,7 @@ _0813785A:
 	thumb_func_start sp0C8_whiteout_maybe
 sp0C8_whiteout_maybe: @ 813787C
 	push {lr}
-	ldr r0, =c2_whiteout
+	ldr r0, =CB2_WhiteOut
 	bl SetMainCallback2
 	movs r0, 0
 	pop {r1}

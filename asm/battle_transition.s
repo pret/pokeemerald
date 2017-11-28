@@ -57,8 +57,8 @@ TestBattleTransition: @ 8145EDC
 	.pool
 	thumb_func_end TestBattleTransition
 
-	thumb_func_start sub_8145EF4
-sub_8145EF4: @ 8145EF4
+	thumb_func_start BattleTransition_StartOnField
+BattleTransition_StartOnField: @ 8145EF4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -69,7 +69,7 @@ sub_8145EF4: @ 8145EF4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8145EF4
+	thumb_func_end BattleTransition_StartOnField
 
 	thumb_func_start sub_8145F10
 sub_8145F10: @ 8145F10

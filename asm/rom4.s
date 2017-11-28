@@ -1880,15 +1880,15 @@ _080854FE:
 	.pool
 	thumb_func_end Overworld_SetFlashLevel
 
-	thumb_func_start sav1_get_flash_used_on_map
-sav1_get_flash_used_on_map: @ 8085514
+	thumb_func_start Overworld_GetFlashLevel
+Overworld_GetFlashLevel: @ 8085514
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x30
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sav1_get_flash_used_on_map
+	thumb_func_end Overworld_GetFlashLevel
 
 	thumb_func_start sub_8085524
 sub_8085524: @ 8085524
@@ -2133,7 +2133,7 @@ sav1_map_get_music: @ 80856D4
 	lsls r0, 5
 	cmp r1, r0
 	bne _080856FC
-	bl sav1_get_weather_probably
+	bl GetSav1Weather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x8
@@ -3192,8 +3192,8 @@ CB2_NewGame: @ 8085EF8
 	.pool
 	thumb_func_end CB2_NewGame
 
-	thumb_func_start c2_whiteout
-c2_whiteout: @ 8085F58
+	thumb_func_start CB2_WhiteOut
+CB2_WhiteOut: @ 8085F58
 	push {lr}
 	sub sp, 0x4
 	ldr r1, =gMain
@@ -3232,7 +3232,7 @@ _08085FB0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end c2_whiteout
+	thumb_func_end CB2_WhiteOut
 
 	thumb_func_start c2_load_new_map
 c2_load_new_map: @ 8085FCC
@@ -3661,7 +3661,7 @@ sub_80863B0: @ 80863B0
 	b _080863F0
 	.pool
 _080863D4:
-	bl sav1_get_flash_used_on_map
+	bl Overworld_GetFlashLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0

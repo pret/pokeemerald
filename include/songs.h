@@ -372,20 +372,20 @@ enum
     BGM_BATTLE_DOME_TOURNAMENT,
     BGM_BATTLE_PIKE,
     BGM_BATTLE_FACTORY,
-    BGM_BATTLE_LEGENDARY,
-    BGM_BATTLE_FRONTIER_BRAIN,
-    BGM_BATTLE_MEW,
-    BGM_BATTLE_DOME, // end of the human-readable names
+    /*0x1D6*/ BGM_BATTLE_LEGENDARY,
+    /*0x1D7*/ BGM_BATTLE_FRONTIER_BRAIN,
+    /*0x1D8*/ BGM_BATTLE_MEW,
+    /*0x1D9*/ BGM_BATTLE_DOME, // end of the human-readable names
     /*0x1DA*/ BGM_BATTLE27, // wild
-    BGM_BATTLE31, // aqua/magma grunt
-    BGM_BATTLE20, // trainer
-    BGM_BATTLE32, // gym leader
-    BGM_BATTLE33, // champion
-    BGM_BATTLE36, // regi
-    BGM_BATTLE34, // weather trio
-    BGM_BATTLE35, // rival
-    BGM_BATTLE38, // elite four
-    BGM_BATTLE30, // aqua/magma leader
+    /*0x1DB*/ BGM_BATTLE31, // aqua/magma grunt
+    /*0x1DC*/ BGM_BATTLE20, // trainer
+    /*0x1DD*/ BGM_BATTLE32, // gym leader
+    /*0x1DE*/ BGM_BATTLE33, // champion
+    /*0x1DF*/ BGM_BATTLE36, // regi
+    /*0x1E0*/ BGM_BATTLE34, // weather trio
+    /*0x1E1*/ BGM_BATTLE35, // rival
+    /*0x1E2*/ BGM_BATTLE38, // elite four
+    /*0x1E3*/ BGM_BATTLE30, // aqua/magma leader
     /*0x1E4*/ BGM_FRLG_FOLLOW_ME, // FR/LG names not known, human-readable again!
     BGM_FRLG_GAMECORNER,
     BGM_FRLG_ROCKET_HIDEOUT,
@@ -453,14 +453,14 @@ enum
     BGM_FRLG_ISLAND_FOUR,
     BGM_FRLG_ISLAND_SIX,
     BGM_FRLG_FLUTE,
-    BGM_FRLG_BATTLE_DEOXYS,
-    BGM_FRLG_BATTLE_MEWTWO,
-    BGM_FRLG_BATTLE_LEGENDARY,
-    BGM_FRLG_LEADER_EYE,
-    BGM_FRLG_DEOXYS_EYE,
-    BGM_FRLG_TRAINER_TOWER,
-    BGM_FRLG_HALL_OF_FAME_PALLET_TOWN,
-    /*0x22E*/BGM_FRLG_TEACHY_TV,
+    /*0x227*/ BGM_FRLG_BATTLE_DEOXYS,
+    /*0x228*/ BGM_FRLG_BATTLE_MEWTWO,
+    /*0x229*/ BGM_FRLG_BATTLE_LEGENDARY,
+    /*0x22A*/ BGM_FRLG_LEADER_EYE,
+    /*0x22B*/ BGM_FRLG_DEOXYS_EYE,
+    /*0x22C*/ BGM_FRLG_TRAINER_TOWER,
+    /*0x22D*/ BGM_FRLG_HALL_OF_FAME_PALLET_TOWN,
+    /*0x22E*/ BGM_FRLG_TEACHY_TV,
 };
 
 #endif // GUARD_SONGS_H

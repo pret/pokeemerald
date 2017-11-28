@@ -13887,7 +13887,7 @@ task_prev_quest: @ 81960A8
 	cmp r0, 0
 	bne _081960C2
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
 _081960C2:

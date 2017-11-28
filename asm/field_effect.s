@@ -1961,7 +1961,7 @@ mapldr_080842E8: @ 80B69FC
 	movs r1, 0
 	bl CreateTask
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
@@ -2057,7 +2057,7 @@ mapldr_08084390: @ 80B6AA4
 	bl FieldObjectTurn
 _080B6AE6:
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
@@ -2116,7 +2116,7 @@ sub_80B6B68: @ 80B6B68
 	bl sub_8085784
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r0, =sub_80B6B94
 	movs r1, 0
 	bl CreateTask
@@ -2534,7 +2534,7 @@ _080B6E9A:
 sub_80B6EC0: @ 80B6EC0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl CameraObjectReset2
 	ldrb r0, [r4, 0xA]
 	bl sub_80E1558
@@ -3476,7 +3476,7 @@ sub_80B764C: @ 80B764C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl CameraObjectReset2
 	movs r0, 0
 	bl SetCameraPanningCallback
@@ -3807,7 +3807,7 @@ sub_80B78EC: @ 80B78EC
 	adds r5, r0, 0
 	adds r4, r1, 0
 	bl CameraObjectReset2
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -4055,7 +4055,7 @@ sub_80B7AE8: @ 80B7AE8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl CameraObjectReset2
 	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
@@ -4287,7 +4287,7 @@ _080B7CC4:
 sub_80B7CC8: @ 80B7CC8
 	push {lr}
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r0, =sub_80B7CE4
 	movs r1, 0x50
 	bl CreateTask
@@ -4461,7 +4461,7 @@ mapldr_080859D4: @ 80B7E48
 	bl sub_8085784
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
@@ -4672,7 +4672,7 @@ sub_80B800C: @ 80B800C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl CameraObjectReset2
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -4906,7 +4906,7 @@ mapldr_08085D88: @ 80B8200
 	bl sub_8085784
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
@@ -6334,7 +6334,7 @@ sub_80B8DB4: @ 80B8DB4
 	push {r6}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r5, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r5, 0x6]

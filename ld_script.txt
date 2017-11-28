@@ -119,6 +119,7 @@ SECTIONS {
         asm/battle_anim_80A9C70.o(.text);
         asm/title_screen.o(.text);
         asm/field_screen.o(.text);
+        src/battle_setup.o(.text);
         asm/battle_setup.o(.text);
         asm/cable_club.o(.text);
         asm/trainer_see.o(.text);
@@ -377,6 +378,7 @@ SECTIONS {
         data/battle_anim_80A9C70.o(.rodata);
         data/title_screen.o(.rodata);
         data/field_screen.o(.rodata);
+        src/battle_setup.o(.rodata);
         data/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         data/trainer_see.o(.rodata);

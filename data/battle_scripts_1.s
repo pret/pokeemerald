@@ -2868,7 +2868,7 @@ BattleScript_82DA816::
 	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TRAINER, BattleScript_82DA8D0
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_LINK, BattleScript_82DA8D0
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_x2000000, BattleScript_82DA8D0
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID, BattleScript_82DA8D0
+	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID, BattleScript_82DA8D0
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_DOUBLE, BattleScript_82DA8D0
 	jumpifword COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_82DA8D0
 	jumpifbyte EQUAL, sBATTLE_STYLE, 0x1, BattleScript_82DA8D0
@@ -2963,7 +2963,7 @@ BattleScript_PayDayMoneyAndPickUpItems::
 
 BattleScript_LocalBattleLost::
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_DOME, BattleScript_CheckDomeDrew
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID, BattleScript_LocalBattleLostPrintTrainersWinText
+	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID, BattleScript_LocalBattleLostPrintTrainersWinText
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_x4000000, BattleScript_LocalBattleLostPrintTrainersWinText
 	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_EREADER_TRAINER, BattleScript_LocalBattleLostEnd
 	jumpifhalfword EQUAL, gTrainerBattleOpponent_A, 0x400, BattleScript_LocalBattleLostEnd

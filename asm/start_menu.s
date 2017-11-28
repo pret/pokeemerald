@@ -356,7 +356,7 @@ sub_809FA9C: @ 809FA9C
 	bl is_c1_link_related_active
 	cmp r0, 0
 	bne _0809FAB2
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
 _0809FAB2:
