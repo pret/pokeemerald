@@ -34,13 +34,13 @@ gUnknown_020223C0: @ 20223C0
 gBlockRecvBuffer: @ 20223C4
 	.space 0x500
 
-gUnknown_020228C4: @ 20228C4 gBlockSendBuffer
+gBlockSendBuffer: @ 20228C4 gBlockSendBuffer
 	.space 0x100
 
 gUnknown_020229C4: @ 20229C4
 	.space 0x2
 
-gUnknown_020229C6: @ 20229C6
+gLinkType: @ 20229C6
 	.space 0x2
 
 gUnknown_020229C8: @ 20229C8
@@ -312,7 +312,7 @@ gUnknown_020241E9: @ 20241E9
 gCurrentMove: @ 20241EA
 	.space 0x2
 
-gLastUsedMove: @ 20241EC
+gChosenMove: @ 20241EC
 	.space 0x2
 
 gRandomMove: @ 20241EE
@@ -363,31 +363,31 @@ gBattlescriptCurrInstr: @ 2024214
 gActionForBanks: @ 202421C
 	.space 0x4
 
-gBattlescriptPtrsForSelection: @ 2024220
+gSelectionBattleScripts: @ 2024220
 	.space 0x10
 
-gUnknown_02024230: @ 2024230
+gPalaceSelectionBattleScripts: @ 2024230
 	.space 0x10
 
-gUnknownMovesUsedByBanks: @ 2024240
+gLastPrintedMoves: @ 2024240
 	.space 0x8
 
-gLastUsedMovesByBanks: @ 2024248
+gLastMoves: @ 2024248
 	.space 0x8
 
-gUnknown_02024250: @ 2024250
+gLastLandedMoves: @ 2024250
 	.space 0x8
 
-gUnknown_02024258: @ 2024258
+gLastHitByType: @ 2024258
 	.space 0x8
 
-gUnknown_02024260: @ 2024260
+gLastResultingMoves: @ 2024260
 	.space 0x8
 
 gLockedMoves: @ 2024268
 	.space 0x8
 
-gUnknown_02024270: @ 2024270
+gLastHitBy: @ 2024270
 	.space 0x4
 
 gChosenMovesByBanks: @ 2024274
@@ -547,12 +547,6 @@ gUnknown_020249B4: @ 20249B4
 	.include "src/daycare.o"
     .include "src/load_save.o"
 
-gUnknown_02031C58: @ 2031C58
-	.space 0x528
-
-gUnknown_02032180: @ 2032180
-	.space 0x4
-
 gUnknown_02032184: @ 2032184
 	.space 0x4
 
@@ -570,18 +564,8 @@ gUnknown_0203229C: @ 203229C
 
 gUnknown_020322A0: @ 20322A0
 	.space 0x4
-
-gUnknown_020322A4: @ 20322A4
-	.space 0x4
-
-gUnknown_020322A8: @ 20322A8
-	.space 0x14
-
-gUnknown_020322BC: @ 20322BC
-	.space 0x14
-
-gUnknown_020322D0: @ 20322D0
-	.space 0x4
+    
+    .include "src/berry_blender.o"
 
 gDifferentSaveFile: @ 20322D4
 	.space 0x1
@@ -1238,7 +1222,7 @@ gUnknown_0203AB6F: @ 203AB6F
 gUnknown_0203AB70: @ 203AB70
 	.space 0x4
 
-gUnknown_0203AB74: @ 203AB74
+gResultsWindowId: @ 203AB74
 	.space 0x4
 
 gUnknown_0203AB78: @ 203AB78
@@ -1545,8 +1529,7 @@ gUnknown_0203CE84: @ 203CE84
 gUnknown_0203CE8C: @ 203CE8C
 	.space 0x10
 
-gUnknown_0203CE9C: @ 203CE9C
-	.space 0x20
+    .include "src/unk_text_util.o"
 
 gUnknown_0203CEBC: @ 203CEBC
 	.space 0x4

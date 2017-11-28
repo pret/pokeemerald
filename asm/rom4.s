@@ -238,8 +238,8 @@ _08084854:
 	.pool
 	thumb_func_end sav12_xor_set
 
-	thumb_func_start ApplyNewEncyprtionKeyToGameStats
-ApplyNewEncyprtionKeyToGameStats: @ 8084864
+	thumb_func_start ApplyNewEncryptionKeyToGameStats
+ApplyNewEncryptionKeyToGameStats: @ 8084864
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
@@ -251,7 +251,7 @@ _0808486C:
 	ldr r0, [r6]
 	adds r0, r1
 	adds r1, r5, 0
-	bl ApplyNewEncyprtionKeyToWord
+	bl ApplyNewEncryptionKeyToWord
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -261,7 +261,7 @@ _0808486C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end ApplyNewEncyprtionKeyToGameStats
+	thumb_func_end ApplyNewEncryptionKeyToGameStats
 
 	thumb_func_start CopyFieldObjectTemplatesToSav1
 @ void CopyFieldObjectTemplatesToSav1()

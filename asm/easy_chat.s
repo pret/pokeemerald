@@ -3691,7 +3691,7 @@ sub_811BDF0: @ 811BDF0
 	adds r6, r0, 0
 	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
-	bl sub_81AFBF0
+	bl UnkTextUtil_Reset
 	ldr r0, =0x00003b70
 	adds r5, r4, r0
 	adds r0, r5, 0
@@ -3707,17 +3707,17 @@ sub_811BDF0: @ 811BDF0
 	bl TVShowConvertInternationalString
 	movs r0, 0
 	mov r1, sp
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 	b _0811BE3C
 	.pool
 _0811BE34:
 	ldr r1, =gText_Lady
 	movs r0, 0
-	bl sub_81AFC0C
+	bl UnkTextUtil_SetPtrI
 _0811BE3C:
 	ldr r1, =gText_F700sQuiz
 	adds r0, r6, 0
-	bl sub_81AFC28
+	bl UnkTextUtil_StringExpandPlaceholders
 	add sp, 0x20
 	pop {r4-r6}
 	pop {r0}

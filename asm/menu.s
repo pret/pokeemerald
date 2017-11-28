@@ -22,7 +22,7 @@ AddTextPrinterWithCallbackForMessage: @ 8197A9C
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r3]
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
