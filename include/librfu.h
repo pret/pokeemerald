@@ -113,7 +113,11 @@ struct RfuUnk1
 
 struct RfuUnk2
 {
-    u8 unk_0[0x68];
+    u8 unk_0[0x34];
+    u16 unk_34;
+    u8 fill_36[0x2b];
+    u8 unk_61;
+    u8 fill_62[6];
     u32 unk_68;
     u32 unk_6c;
     u8 unk_70[0x70];
@@ -133,11 +137,15 @@ struct RfuUnk5
     u8 unk_01;
     u8 unk_02;
     u8 unk_03;
-    u8 unk_04[4];
+    u8 unk_04;
+    u8 unk_05;
+    u8 unk_06;
+    u8 unk_07;
     u8 unk_08;
     u8 filler_09[11];
     u16 unk_14;
-    u8 filler_16[10];
+    u8 filler_16[2];
+    u16 unk_18[4];
 };
 
 extern struct RfuStruct *gRfuState;
