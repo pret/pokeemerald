@@ -91,5 +91,23 @@ extern const u8 gUnknown_08DB9F08[];
 extern const u8 gUnknown_08DB9FFC[];
 extern const u8 gUnknown_08DBA020[];
 extern const u8 gUnknown_08DBA12C[];
+extern const u8 gUnknown_08DD87C0[];
+extern const u8 gUnknown_08DD8EE0[];
+extern const u16 gUnknown_08DD8780[];
+extern const u8 gUnknown_08DD90E0[];
+extern const u8 gUnknown_08DD9718[];
+extern const u16 gUnknown_08DD9080[];
+extern const u8 gUnknown_08DD98B4[];
+extern const u8 gUnknown_08DD9E58[];
+extern const u16 gUnknown_08DD9874[];
+extern const u8 gUnknown_08DDA02C[];
+extern const u8 gUnknown_08DDA63C[];
+extern const u16 gUnknown_08DD9FEC[];
+extern const u8 gUnknown_08DDA840[];
+extern const u8 gUnknown_08DDAE40[];
+extern const u16 gUnknown_08DDA800[];
+extern const u8 gUnknown_08DDB020[];
+extern const u8 gUnknown_08DDB2C4[];
+extern const u16 gUnknown_08DDAFE0[];
 
 #endif //GUARD_GRAPHICS_H

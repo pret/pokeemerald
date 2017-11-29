@@ -184,7 +184,6 @@ SECTIONS {
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
-        asm/coins.o(.text);
         asm/landmark.o(.text);
         asm/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
@@ -249,7 +248,7 @@ SECTIONS {
         asm/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
-        asm/unk_81BAD84.o(.text);
+        src/unk_81BAD84.o(.text);
         src/battle_controller_player_partner.o(.text);
         asm/fldeff_groundshake.o(.text);
         asm/fossil_specials.o(.text);
@@ -470,7 +469,7 @@ SECTIONS {
         data/party_menu.o(.rodata);
         data/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
-        data/unk_81BAD84.o(.rodata);
+        src/unk_81BAD84.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
         data/fossil_special_fldeff_groundshake.o(.rodata);
         src/berry_fix_program.o(.rodata);
