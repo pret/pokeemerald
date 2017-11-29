@@ -18,12 +18,6 @@ extern u16 gSpecialVar_ItemId;
 
 extern const u8 BerryTreeScript[];
 
-#define BERRY_NAME_LENGTH 6
-
-#define FIRST_BERRY ITEM_CHERI_BERRY
-#define LAST_BERRY ITEM_ENIGMA_BERRY
-
-
 static const u8 sBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
 static const u8 sBerryDescriptionPart2_Cheri[] = _("The bright red BERRY is very spicy.");
 static const u8 sBerryDescriptionPart1_Chesto[] = _("The BERRY’s thick skin and fruit are");
@@ -1062,28 +1056,28 @@ u8 GetStageByBerryTreeId(u8 id)
 
 u8 ItemIdToBerryType(u16 item)
 {
-    u16 berry = item - FIRST_BERRY;
+    u16 berry = item - FIRST_BERRY_INDEX;
 
-    if (berry > LAST_BERRY - FIRST_BERRY)
+    if (berry > LAST_BERRY_INDEX - FIRST_BERRY_INDEX)
         return 1;
     else
-        return item - FIRST_BERRY + 1;
+        return ITEM_TO_BERRY(item);
 }
 
 u16 BerryTypeToItemId(u16 berry)
 {
     u16 item = berry - 1;
 
-    if (item > LAST_BERRY - FIRST_BERRY)
-        return FIRST_BERRY;
+    if (item > LAST_BERRY_INDEX - FIRST_BERRY_INDEX)
+        return FIRST_BERRY_INDEX;
     else
-        return berry + FIRST_BERRY - 1;
+        return berry + FIRST_BERRY_INDEX - 1;
 }
 
 void GetBerryNameByBerryType(u8 berry, u8 *string)
 {
-    memcpy(string, GetBerryInfo(berry)->name, BERRY_NAME_LENGTH);
-    string[BERRY_NAME_LENGTH] = EOS;
+    memcpy(string, GetBerryInfo(berry)->name, BERRY_NAME_COUNT - 1);
+    string[BERRY_NAME_COUNT - 1] = EOS;
 }
 
 void GetBerryCountStringByBerryType(u8 berry, u8* dest, u32 berryCount)

@@ -1,7 +1,6 @@
-
-// Includes
 #include "global.h"
 #include "main.h"
+#include "text.h"
 #include "menu.h"
 #include "malloc.h"
 #include "gpu_regs.h"
@@ -17,7 +16,6 @@
 #include "string_util.h"
 #include "international_string_util.h"
 #include "strings.h"
-#include "text.h"
 #include "text_window.h"
 #include "songs.h"
 #include "m4a.h"

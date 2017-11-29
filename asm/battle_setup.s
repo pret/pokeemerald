@@ -82,8 +82,8 @@ task_add_01_battle_start: @ 80B065C
 	.pool
 	thumb_func_end task_add_01_battle_start
 
-	thumb_func_start sub_80B0698
-sub_80B0698: @ 80B0698
+	thumb_func_start BattleSetup_StartWildBattle
+BattleSetup_StartWildBattle: @ 80B0698
 	push {lr}
 	bl GetSafariZoneFlag
 	cmp r0, 0
@@ -95,15 +95,15 @@ _080B06A8:
 _080B06AC:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80B0698
+	thumb_func_end BattleSetup_StartWildBattle
 
-	thumb_func_start sub_80B06B0
-sub_80B06B0: @ 80B06B0
+	thumb_func_start BattleSetup_StartBattlePikeWildBattle
+BattleSetup_StartBattlePikeWildBattle: @ 80B06B0
 	push {lr}
 	bl sub_80B07B4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80B06B0
+	thumb_func_end BattleSetup_StartBattlePikeWildBattle
 
 	thumb_func_start sub_80B06BC
 sub_80B06BC: @ 80B06BC
@@ -147,8 +147,8 @@ _080B06F2:
 	.pool
 	thumb_func_end sub_80B06BC
 
-	thumb_func_start sub_80B072C
-sub_80B072C: @ 80B072C
+	thumb_func_start BattleSetup_StartRoamerBattle
+BattleSetup_StartRoamerBattle: @ 80B072C
 	push {lr}
 	bl ScriptContext2_Enable
 	bl player_bitmagic
@@ -174,7 +174,7 @@ sub_80B072C: @ 80B072C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80B072C
+	thumb_func_end BattleSetup_StartRoamerBattle
 
 	thumb_func_start sub_80B077C
 sub_80B077C: @ 80B077C

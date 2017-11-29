@@ -15,6 +15,7 @@
 #include "sound.h"
 #include "species.h"
 #include "sprite.h"
+#include "unk_text_util.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
@@ -166,9 +167,7 @@ extern s32 GetStringCenterAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
 extern s32 GetStringRightAlignXOffset(u8 fontId, u8 *str, s32 totalWidth);
 extern bool8 sub_81A6BF4();
 extern bool8 sub_81B9E94();
-extern void sub_81AFBF0();
-extern u8 sub_81AFC0C(u8 a, u8 *b);
-extern void sub_81AFC28(u8 *a, u8 *b);
+extern void UnkTextUtil_Reset();
 extern void sub_8124610(u8 *a, u8 b);
 extern int GetPlayerIDAsU32();
 extern u8 GetCurrentPpToMaxPpState(u8 a, u8 b);
@@ -2993,12 +2992,12 @@ void sub_81C307C()
 {
     struct PokeSummary *sum = &gUnknown_0203CF1C->summary;
     u8 *text;
-    sub_81AFBF0();
-    sub_81AFC0C(0, gUnknown_0861CE74);
-    sub_81AFC0C(1, gUnknown_0861CE7B);
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, gUnknown_0861CE74);
+    UnkTextUtil_SetPtrI(1, gUnknown_0861CE7B);
     sub_81C31C0();
     if (sub_81A6BF4() == TRUE || sub_81B9E94() == TRUE || sub_81C3304() == TRUE)
-        sub_81AFC28(gStringVar4, gText_XNature);
+        UnkTextUtil_StringExpandPlaceholders(gStringVar4, gText_XNature);
     else
     {
         u8 *alloced1 = Alloc(32);
@@ -3007,7 +3006,7 @@ void sub_81C307C()
         if (sum->metLocation <= 0xD4)
         {
             sub_8124610(alloced2, sum->metLocation);
-            sub_81AFC0C(4, alloced2);
+            UnkTextUtil_SetPtrI(4, alloced2);
         }
         if (sub_81C3220() == 1)
         {
@@ -3022,7 +3021,7 @@ void sub_81C307C()
             text = (sum->metLocation > 0xD4) ? gText_XNatureObtainedInTrade : gText_XNatureProbablyMetAt;
         else
             text = gText_XNatureObtainedInTrade;
-        sub_81AFC28(gStringVar4, text);
+        UnkTextUtil_StringExpandPlaceholders(gStringVar4, text);
         Free(alloced1);
         Free(alloced2);
     }
@@ -3036,8 +3035,8 @@ void sub_81C3194()
 void sub_81C31C0()
 {
     struct UnkSummaryStruct *sumStruct = gUnknown_0203CF1C;
-    sub_81AFC0C(2, gNatureNamePointers[sumStruct->summary.nature]);
-    sub_81AFC0C(5, gText_EmptyString5);
+    UnkTextUtil_SetPtrI(2, gNatureNamePointers[sumStruct->summary.nature]);
+    UnkTextUtil_SetPtrI(5, gText_EmptyString5);
 }
 
 void sub_81C31F0(u8 *a)
@@ -3046,7 +3045,7 @@ void sub_81C31F0(u8 *a)
     if (level == 0)
         level = 5;
     ConvertIntToDecimalStringN(a, level, 0, 3);
-    sub_81AFC0C(3, a);
+    UnkTextUtil_SetPtrI(3, a);
 }
 
 u8 sub_81C3220()
@@ -3301,12 +3300,12 @@ void sub_81C3710()
     ConvertIntToDecimalStringN(alloced2, gUnknown_0203CF1C->summary.maxHP, 1, 3);
     ConvertIntToDecimalStringN(alloced3, gUnknown_0203CF1C->summary.atk, 1, 7);
     ConvertIntToDecimalStringN(alloced4, gUnknown_0203CF1C->summary.def, 1, 7);
-    sub_81AFBF0();
-    sub_81AFC0C(0, alloced1);
-    sub_81AFC0C(1, alloced2);
-    sub_81AFC0C(2, alloced3);
-    sub_81AFC0C(3, alloced4);
-    sub_81AFC28(gStringVar4, gUnknown_0861CE82);
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, alloced1);
+    UnkTextUtil_SetPtrI(1, alloced2);
+    UnkTextUtil_SetPtrI(2, alloced3);
+    UnkTextUtil_SetPtrI(3, alloced4);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_0861CE82);
     Free(alloced1);
     Free(alloced2);
     Free(alloced3);
@@ -3323,11 +3322,11 @@ void sub_81C3808()
     ConvertIntToDecimalStringN(gStringVar1, gUnknown_0203CF1C->summary.spatk, 1, 3);
     ConvertIntToDecimalStringN(gStringVar2, gUnknown_0203CF1C->summary.spdef, 1, 3);
     ConvertIntToDecimalStringN(gStringVar3, gUnknown_0203CF1C->summary.speed, 1, 3);
-    sub_81AFBF0();
-    sub_81AFC0C(0, gStringVar1);
-    sub_81AFC0C(1, gStringVar2);
-    sub_81AFC0C(2, gStringVar3);
-    sub_81AFC28(gStringVar4, gUnknown_0861CE8E);
+    UnkTextUtil_Reset();
+    UnkTextUtil_SetPtrI(0, gStringVar1);
+    UnkTextUtil_SetPtrI(1, gStringVar2);
+    UnkTextUtil_SetPtrI(2, gStringVar3);
+    UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_0861CE8E);
 }
 
 void sub_81C3890()
@@ -3436,10 +3435,10 @@ void sub_81C3B08(u8 a)
         sub_81C25A4(r8, gMoveNames[move], 0, (a<<4) + 1, 0, 1);
         ConvertIntToDecimalStringN(gStringVar1, r10->summary.pp[a], 1, 2);
         ConvertIntToDecimalStringN(gStringVar2, r6, 1, 2);
-        sub_81AFBF0();
-        sub_81AFC0C(0, gStringVar1);
-        sub_81AFC0C(1, gStringVar2);
-        sub_81AFC28(gStringVar4, gUnknown_0861CE97);
+        UnkTextUtil_Reset();
+        UnkTextUtil_SetPtrI(0, gStringVar1);
+        UnkTextUtil_SetPtrI(1, gStringVar2);
+        UnkTextUtil_StringExpandPlaceholders(gStringVar4, gUnknown_0861CE97);
         text = gStringVar4;
         r5 = GetCurrentPpToMaxPpState(r10->summary.pp[a], r6) + 9;
         offset = GetStringRightAlignXOffset(1, text, 0x2C);
@@ -3531,17 +3530,17 @@ void sub_81C3B08(u8 a)
 	movs r2, 0x1\n\
 	movs r3, 0x2\n\
 	bl ConvertIntToDecimalStringN\n\
-	bl sub_81AFBF0\n\
+	bl UnkTextUtil_Reset\n\
 	movs r0, 0\n\
 	mov r1, r8\n\
-	bl sub_81AFC0C\n\
+	bl UnkTextUtil_SetPtrI\n\
 	movs r0, 0x1\n\
 	adds r1, r4, 0\n\
-	bl sub_81AFC0C\n\
+	bl UnkTextUtil_SetPtrI\n\
 	ldr r4, =gStringVar4\n\
 	ldr r1, =gUnknown_0861CE97\n\
 	adds r0, r4, 0\n\
-	bl sub_81AFC28\n\
+	bl UnkTextUtil_StringExpandPlaceholders\n\
 	adds r7, r4, 0\n\
 	ldrb r0, [r5]\n\
 	adds r1, r6, 0\n\

@@ -14067,7 +14067,7 @@ _080DEC80:
 	b _080DEC9C
 	.pool
 _080DEC94:
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	lsls r0, 24
 	lsrs r1, r0, 24
 _080DEC9C:

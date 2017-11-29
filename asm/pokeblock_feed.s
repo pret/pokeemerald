@@ -704,7 +704,7 @@ sub_817A1C4: @ 817A1C4
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
-	bl sub_8136FE4
+	bl PokeblockGetGain
 	ldr r6, =gUnknown_0203BC9E
 	strh r0, [r6]
 	ldr r1, =gStringVar1
@@ -740,7 +740,7 @@ _0817A268:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	bl sav2_get_text_speed
+	bl GetPlayerTextSpeed
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24

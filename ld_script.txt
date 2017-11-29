@@ -83,10 +83,8 @@ SECTIONS {
         asm/smokescreen.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
-        asm/load_save.o(.text);
         asm/trade.o(.text);
         src/berry_blender.o(.text);
-        asm/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
         asm/rom4.o(.text);
@@ -124,7 +122,7 @@ SECTIONS {
         asm/battle_setup.o(.text);
         asm/cable_club.o(.text);
         asm/trainer_see.o(.text);
-        asm/wild_encounter.o(.text);
+        src/wild_encounter.o(.text);
         asm/field_effect.o(.text);
         asm/unknown_task.o(.text);
         asm/option_menu.o(.text);
@@ -186,7 +184,6 @@ SECTIONS {
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
-        asm/coins.o(.text);
         asm/landmark.o(.text);
         asm/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
@@ -232,7 +229,7 @@ SECTIONS {
         asm/fldeff_teleport.o(.text);
         asm/battle_link_817C95C.o(.text);
         asm/pokemon_animation.o(.text);
-        asm/recorded_battle.o(.text);
+        src/recorded_battle.o(.text);
         src/battle_controller_recorded_opponent.o(.text);
         src/battle_controller_recorded_player.o(.text);
         src/battle_dome_cards.o(.text);
@@ -244,14 +241,14 @@ SECTIONS {
         asm/item_menu.o(.text);
         asm/list_menu.o(.text);
         asm/menu_indicators.o(.text);
-        asm/unk_text_util.o(.text);
+        src/unk_text_util.o(.text);
         src/save_location.o(.text);
         asm/item_icon.o(.text);
         asm/party_menu.o(.text);
         asm/battle_tent.o(.text);
         src/unk_text_util_2.o(.text);
         src/multiboot.o(.text);
-        asm/unk_81BAD84.o(.text);
+        src/unk_81BAD84.o(.text);
         src/battle_controller_player_partner.o(.text);
         asm/fldeff_groundshake.o(.text);
         asm/fossil_specials.o(.text);
@@ -472,7 +469,7 @@ SECTIONS {
         data/party_menu.o(.rodata);
         data/battle_tent.o(.rodata);
         src/unk_text_util_2.o(.rodata);
-        data/unk_81BAD84.o(.rodata);
+        src/unk_81BAD84.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
         data/fossil_special_fldeff_groundshake.o(.rodata);
         src/berry_fix_program.o(.rodata);

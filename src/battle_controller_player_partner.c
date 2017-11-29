@@ -78,7 +78,7 @@ static void PlayerPartnerHandleBallThrowAnim(void);
 static void PlayerPartnerHandlePause(void);
 static void PlayerPartnerHandleMoveAnimation(void);
 static void PlayerPartnerHandlePrintString(void);
-static void PlayerPartnerHandlePrintStringPlayerOnly(void);
+static void PlayerPartnerHandlePrintSelectionString(void);
 static void PlayerPartnerHandleChooseAction(void);
 static void PlayerPartnerHandleUnknownYesNoBox(void);
 static void PlayerPartnerHandleChooseMove(void);
@@ -104,7 +104,7 @@ static void PlayerPartnerHandleCmd39(void);
 static void PlayerPartnerHandleCmd40(void);
 static void PlayerPartnerHandleHitAnimation(void);
 static void PlayerPartnerHandleCmd42(void);
-static void PlayerPartnerHandleEffectivenessSound(void);
+static void PlayerPartnerHandlePlaySE(void);
 static void PlayerPartnerHandlePlayFanfareOrBGM(void);
 static void PlayerPartnerHandleFaintingCry(void);
 static void PlayerPartnerHandleIntroSlide(void);
@@ -155,7 +155,7 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     PlayerPartnerHandlePause,
     PlayerPartnerHandleMoveAnimation,
     PlayerPartnerHandlePrintString,
-    PlayerPartnerHandlePrintStringPlayerOnly,
+    PlayerPartnerHandlePrintSelectionString,
     PlayerPartnerHandleChooseAction,
     PlayerPartnerHandleUnknownYesNoBox,
     PlayerPartnerHandleChooseMove,
@@ -181,7 +181,7 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     PlayerPartnerHandleCmd40,
     PlayerPartnerHandleHitAnimation,
     PlayerPartnerHandleCmd42,
-    PlayerPartnerHandleEffectivenessSound,
+    PlayerPartnerHandlePlaySE,
     PlayerPartnerHandlePlayFanfareOrBGM,
     PlayerPartnerHandleFaintingCry,
     PlayerPartnerHandleIntroSlide,
@@ -1519,7 +1519,7 @@ static void PlayerPartnerHandlePrintString(void)
     gBattleBankFunc[gActiveBank] = CompleteOnInactiveTextPrinter2;
 }
 
-static void PlayerPartnerHandlePrintStringPlayerOnly(void)
+static void PlayerPartnerHandlePrintSelectionString(void)
 {
     PlayerPartnerBufferExecCompleted();
 }
@@ -1756,7 +1756,7 @@ static void PlayerPartnerHandleCmd42(void)
     PlayerPartnerBufferExecCompleted();
 }
 
-static void PlayerPartnerHandleEffectivenessSound(void)
+static void PlayerPartnerHandlePlaySE(void)
 {
     s8 pan;
 

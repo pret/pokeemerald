@@ -1,6 +1,10 @@
 #ifndef GUARD_BATTLE_SCRIPT_COMMANDS_H
 #define GUARD_BATTLE_SCRIPT_COMMANDS_H
 
+#define NO_ACC_CALC 0xFFFE
+#define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
+#define ACC_CURR_MOVE 0
+
 #define CMP_EQUAL               0x0
 #define CMP_NOT_EQUAL           0x1
 #define CMP_GREATER_THAN        0x2
@@ -21,7 +25,7 @@
 
 #define VARIOUS_CANCEL_MULTI_TURN_MOVES         0
 #define VARIOUS_SET_MAGIC_COAT_TARGET           1
-#define VARIOUS_CAN_RUN_FROM_BATTLE             2
+#define VARIOUS_IS_RUNNING_IMPOSSIBLE           2
 #define VARIOUS_GET_MOVE_TARGET                 3
 #define VARIOUS_RESET_INTIMIDATE_TRACE_BITS     5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP    6

@@ -65,6 +65,7 @@
 #define CHAR_x              0xEC
 #define CHAR_y              0xED
 #define CHAR_z              0xEE
+#define CHAR_SPECIAL_F7     0xF7
 #define CHAR_SPECIAL_F9     0xF9
 #define CHAR_COLON          0xF0
 #define CHAR_PROMPT_SCROLL  0xFA // waits for button press and scrolls dialog
@@ -84,6 +85,8 @@
 #define EXT_CTRL_CODE_ENG   0x16
 
 #define NUM_TEXT_PRINTERS 32
+
+#define TEXT_SPEED_FF 0xFF
 
 struct TextPrinterSubStruct
 {

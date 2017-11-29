@@ -81,7 +81,7 @@ static void RecordedOpponentHandleBallThrowAnim(void);
 static void RecordedOpponentHandlePause(void);
 static void RecordedOpponentHandleMoveAnimation(void);
 static void RecordedOpponentHandlePrintString(void);
-static void RecordedOpponentHandlePrintStringPlayerOnly(void);
+static void RecordedOpponentHandlePrintSelectionString(void);
 static void RecordedOpponentHandleChooseAction(void);
 static void RecordedOpponentHandleUnknownYesNoBox(void);
 static void RecordedOpponentHandleChooseMove(void);
@@ -107,7 +107,7 @@ static void RecordedOpponentHandleCmd39(void);
 static void RecordedOpponentHandleCmd40(void);
 static void RecordedOpponentHandleHitAnimation(void);
 static void RecordedOpponentHandleCmd42(void);
-static void RecordedOpponentHandleEffectivenessSound(void);
+static void RecordedOpponentHandlePlaySE(void);
 static void RecordedOpponentHandlePlayFanfareOrBGM(void);
 static void RecordedOpponentHandleFaintingCry(void);
 static void RecordedOpponentHandleIntroSlide(void);
@@ -153,7 +153,7 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void
     RecordedOpponentHandlePause,
     RecordedOpponentHandleMoveAnimation,
     RecordedOpponentHandlePrintString,
-    RecordedOpponentHandlePrintStringPlayerOnly,
+    RecordedOpponentHandlePrintSelectionString,
     RecordedOpponentHandleChooseAction,
     RecordedOpponentHandleUnknownYesNoBox,
     RecordedOpponentHandleChooseMove,
@@ -179,7 +179,7 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void
     RecordedOpponentHandleCmd40,
     RecordedOpponentHandleHitAnimation,
     RecordedOpponentHandleCmd42,
-    RecordedOpponentHandleEffectivenessSound,
+    RecordedOpponentHandlePlaySE,
     RecordedOpponentHandlePlayFanfareOrBGM,
     RecordedOpponentHandleFaintingCry,
     RecordedOpponentHandleIntroSlide,
@@ -1261,7 +1261,7 @@ static void RecordedOpponentHandleDrawTrainerPic(void)
         }
         else
         {
-            trainerPicId = PlayerGenderToFrontTrainerPicId(sub_8185F40());
+            trainerPicId = PlayerGenderToFrontTrainerPicId(GetActiveBankLinkPlayerGender());
         }
     }
     else
@@ -1435,7 +1435,7 @@ static void RecordedOpponentHandlePrintString(void)
     gBattleBankFunc[gActiveBank] = CompleteOnInactiveTextPrinter;
 }
 
-static void RecordedOpponentHandlePrintStringPlayerOnly(void)
+static void RecordedOpponentHandlePrintSelectionString(void)
 {
     RecordedOpponentBufferExecCompleted();
 }
@@ -1625,7 +1625,7 @@ static void RecordedOpponentHandleCmd42(void)
     RecordedOpponentBufferExecCompleted();
 }
 
-static void RecordedOpponentHandleEffectivenessSound(void)
+static void RecordedOpponentHandlePlaySE(void)
 {
     s8 pan;
 

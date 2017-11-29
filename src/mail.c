@@ -1,14 +1,12 @@
-
-// Includes
 #include "global.h"
 #include "main.h"
 #include "overworld.h"
 #include "task.h"
 #include "unknown_task.h"
 #include "palette.h"
+#include "text.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "text.h"
 #include "text_window.h"
 #include "string_util.h"
 #include "international_string_util.h"

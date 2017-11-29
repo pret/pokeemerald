@@ -1246,7 +1246,7 @@ sub_809C8DC: @ 809C8DC
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0809C92E
-	bl sub_80B5870
+	bl UpdateRepelCounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1607,7 +1607,7 @@ _0809CC0C:
 	ldr r5, =gUnknown_020375D6
 	ldrh r1, [r5]
 	adds r0, r4, 0
-	bl is_it_battle_time_2
+	bl StandardWildEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

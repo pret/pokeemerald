@@ -2,6 +2,7 @@
 #define GUARD_LINK_H
 
 #define MAX_LINK_PLAYERS 4
+#define MAX_RFU_PLAYERS 5
 #define CMD_LENGTH 8
 #define QUEUE_CAPACITY 50
 #define BLOCK_BUFFER_SIZE 0x100
@@ -68,7 +69,7 @@ struct LinkPlayer
     /* 0x08 */ u8 name[11];
     /* 0x13 */ u8 gender;
     /* 0x14 */ u32 linkType;
-    /* 0x18 */ u16 lp_field_18;
+    /* 0x18 */ u16 lp_field_18; // battle bank in battles
     /* 0x1A */ u16 language;
 };
 
@@ -131,7 +132,7 @@ struct BlockRequest
 extern const struct BlockRequest sBlockRequestLookupTable[5];
 
 extern struct Link gLink;
-extern u16 gRecvCmds[CMD_LENGTH][MAX_LINK_PLAYERS];
+extern u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gLinkType;
 extern u32 gLinkStatus;
@@ -179,6 +180,7 @@ void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
 u8 GetLinkPlayerCount(void);
+bool32 InUnionRoom(void);
 
 void sub_800E0E8(void);
 bool8 sub_800A520(void);

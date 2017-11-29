@@ -167,9 +167,31 @@ struct BerryCrush
     u32 unk;
 };
 
+#define PLAYER_NAME_LENGTH  8
+
+struct UnknownSaveBlock2Struct
+{
+    u8 field_0;
+    u8 field_1;
+    u8 field_2[2];
+    u8 field_4[8];
+    u8 field_C[16];
+    u16 field_1C[6];
+    u16 field_28[6];
+    u8 field_34[176];
+    u8 field_E4;
+    u8 field_E5;
+    u8 field_E6;
+    u8 field_E7;
+    u8 field_E8;
+    u8 field_E9;
+    u8 field_EA;
+    u8 field_EB;
+}; // sizeof = 0xEC
+
 struct SaveBlock2
 {
-    /*0x00*/ u8 playerName[8];
+    /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
     /*0x09*/ u8 specialSaveWarp;
     /*0x0A*/ u8 playerTrainerId[4];
@@ -201,7 +223,8 @@ struct SaveBlock2
 
         // All below could be a one giant struct
 
-    /*0x64C*/ u8 field_64C[0x588];
+    /*0x64C*/ u8 field_64C[236];
+    /*0x738*/ struct UnknownSaveBlock2Struct field_738[5]; // No idea here, it's probably wrong, no clue.
     /*0xBD4*/ u16 field_BD4;
     /*0xBD6*/ u16 field_BD6;
     /*0xBD8*/ u8 field_BD8[11];
@@ -215,10 +238,12 @@ struct SaveBlock2
     /*0xCA9*/ u8 field_CA9_d : 1;   // 0x20
     /*0xCA9*/ u8 field_CA9_e : 1;   // 0x40
     /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
-    /*0xCAA*/ u16 field_CAA[0x2e];
+    /*0xCAA*/ u16 field_CAA[4];
+    /*0xCB2*/ u16 battlePyramidWildHeaderId;
+    /*0xCB4*/ u8 field_CB4[82];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
-    /*0xd08*/ u8 filler_D08[0x112];
+    /*0xD08*/ u8 filler_D08[0x112];
     /*0xE1A*/ u16 battlePyramidFloor; // possibly?
     /*0xE1C*/ u8 field_E1C[16];
     /*0xE2C*/ struct PyramidBag pyramidBag;
