@@ -166,7 +166,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_8085784
 	def_special Special_StartWallClock
 	def_special Special_ViewWallClock
-	def_special sub_80B1138
+	def_special ChooseStarter
 	def_special StartWallyTutorialBattle
 	def_special ChangePokemonNickname
 	def_special sub_81B94B0

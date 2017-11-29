@@ -17,6 +17,12 @@
 #include "fieldmap.h"
 #include "trainer_classes.h"
 #include "trainer_ids.h"
+#include "rng.h"
+#include "starter_choose.h"
+#include "script_pokemon_80F8.h"
+#include "items.h"
+#include "palette.h"
+#include "window.h"
 
 extern bool8 InBattlePyramid(void);
 extern bool8 InBattlePike(void);
@@ -30,16 +36,18 @@ extern void sub_808BCF4(void);
 extern void sub_80EECC8(void);
 extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 extern void c2_exit_to_overworld_2_switch(void);
+extern void Overworld_ClearSavedMusic(void);
 extern void CB2_WhiteOut(void);
 extern void sub_80AF6F0(void);
+extern void PlayBattleBGM(void);
+extern void sub_81DA57C(void);
 extern u8 GetSav1Weather(void);
 extern u8 Overworld_GetFlashLevel(void);
 
 extern u32 gBattleTypeFlags;
 extern u8 gBattleOutcome;
 extern void (*gFieldCallback)(void);
-extern u16 gTrainerBattleOpponent_A;
-extern u16 gTrainerBattleOpponent_B;
+extern u8 gApproachingTrainerId;
 
 // this file's functions
 void DoBattlePikeWildBattle(void);
@@ -49,10 +57,29 @@ void CB2_EndWildBattle(void);
 void CB2_EndScriptedWildBattle(void);
 u8 GetWildBattleTransition(void);
 u8 GetTrainerBattleTransition(void);
-u8 sub_80B100C(u8 arg0);
+u8 sub_80B100C(s32 arg0);
 void sub_80B1218(void);
 void sub_80B1234(void);
-bool32 IsPlayerDefeated(u8 battleOutcome);
+void CB2_GiveStarter(void);
+void CB2_StartFirstBattle(void);
+void CB2_EndFirstBattle(void);
+bool32 IsPlayerDefeated(u32 battleOutcome);
+
+// ewram data
+EWRAM_DATA u16 sTrainerBattleMode = 0;
+EWRAM_DATA u16 gTrainerBattleOpponent_A = 0;
+EWRAM_DATA u16 gTrainerBattleOpponent_B = 0;
+EWRAM_DATA u16 gPartnerTrainerId = 0;
+EWRAM_DATA u16 sTrainerMapObjectLocalId = 0;
+EWRAM_DATA u8 *sTrainerAIntroSpeech = NULL;
+EWRAM_DATA u8 *sTrainerBIntroSpeech = NULL;
+EWRAM_DATA u8 *sTrainerADefeatSpeech = NULL;
+EWRAM_DATA u8 *sTrainerBDefeatSpeech = NULL;
+EWRAM_DATA u8 *sTrainerVictorySpeech = NULL;
+EWRAM_DATA u8 *sTrainerCannotBattleSpeech = NULL;
+EWRAM_DATA u8 *gUnknown_02038BEC = NULL;
+EWRAM_DATA u8 *gUnknown_02038BF0 = NULL;
+EWRAM_DATA u8 *gUnknown_02038BF4 = NULL;
 
 // const rom data
 
@@ -72,6 +99,21 @@ static const u8 sBattleTransitionTable_Trainer[][2] =
     {B_TRANSITION_SHUFFLE,         B_TRANSITION_BIG_POKEBALL},  // Cave
     {B_TRANSITION_BLUR,            B_TRANSITION_GRID_SQUARES},  // Cave with flash used
     {B_TRANSITION_SWIRL,           B_TRANSITION_RIPPLE},        // Water
+};
+
+static const u8 sUnknown_0854FE98[] =
+{
+    0x1d, 0x1e, 0x1f, 0x20, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29
+};
+
+static const u8 sUnknown_0854FEA4[] =
+{
+    0x1f, 0x20, 0x21
+};
+
+static const u8 sUnknown_0854FEA7[] =
+{
+    0x1d, 0x1f, 0x20, 0x21
 };
 
 #define tState data[0]
@@ -579,8 +621,184 @@ u8 GetTrainerBattleTransition(void)
     transitionType = GetBattleTransitionTypeByMap();
     enemyLevel = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent_A, minPartyCount);
     playerLevel = GetSumOfPlayerPartyLevel(minPartyCount);
-    if (enemyLevel < playerLevel) // is wild mon level than the player's mon level?
+
+    if (enemyLevel < playerLevel)
         return sBattleTransitionTable_Trainer[transitionType][0];
     else
         return sBattleTransitionTable_Trainer[transitionType][1];
+}
+
+u8 sub_80B100C(s32 arg0)
+{
+    u16 var;
+    u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
+    u8 playerLevel = GetSumOfPlayerPartyLevel(1);
+
+    if (enemyLevel < playerLevel)
+    {
+        switch (arg0)
+        {
+        case 11:
+        case 12:
+        case 13:
+            return B_TRANSITION_POKEBALLS_TRAIL;
+        case 10:
+            return sUnknown_0854FEA4[Random() % ARRAY_COUNT(sUnknown_0854FEA4)];
+        case 3:
+            return sUnknown_0854FEA7[Random() % ARRAY_COUNT(sUnknown_0854FEA7)];
+        }
+
+        if (VarGet(VAR_0x40CE) != 3)
+            return sUnknown_0854FE98[Random() % ARRAY_COUNT(sUnknown_0854FE98)];
+    }
+    else
+    {
+        switch (arg0)
+        {
+        case 11:
+        case 12:
+        case 13:
+            return B_TRANSITION_BIG_POKEBALL;
+        case 10:
+            return sUnknown_0854FEA4[Random() % ARRAY_COUNT(sUnknown_0854FEA4)];
+        case 3:
+            return sUnknown_0854FEA7[Random() % ARRAY_COUNT(sUnknown_0854FEA7)];
+        }
+
+        if (VarGet(VAR_0x40CE) != 3)
+            return sUnknown_0854FE98[Random() % ARRAY_COUNT(sUnknown_0854FE98)];
+    }
+
+    var = gSaveBlock2Ptr->field_CB4[gSaveBlock2Ptr->battlePyramidWildHeaderId * 2 + 0]
+        + gSaveBlock2Ptr->field_CB4[gSaveBlock2Ptr->battlePyramidWildHeaderId * 2 + 1];
+
+    return sUnknown_0854FE98[var % ARRAY_COUNT(sUnknown_0854FE98)];
+}
+
+void ChooseStarter(void)
+{
+    SetMainCallback2(CB2_ChooseStarter);
+    gMain.savedCallback = CB2_GiveStarter;
+}
+
+void CB2_GiveStarter(void)
+{
+    u16 starterMon;
+
+    *GetVarPointer(VAR_STARTER_ID) = gSpecialVar_Result;
+    starterMon = GetStarterPokemon(gSpecialVar_Result);
+    ScriptGiveMon(starterMon, 5, 0, 0, 0, 0);
+    ResetTasks();
+    PlayBattleBGM();
+    SetMainCallback2(CB2_StartFirstBattle);
+    BattleTransition_Start(B_TRANSITION_BLUR);
+}
+
+void CB2_StartFirstBattle(void)
+{
+    UpdatePaletteFade();
+    RunTasks();
+
+    if (IsBattleTransitionDone() == TRUE)
+    {
+        gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
+        gMain.savedCallback = CB2_EndFirstBattle;
+        FreeAllWindowBuffers();
+        SetMainCallback2(CB2_InitBattle);
+        prev_quest_postbuffer_cursor_backup_reset();
+        ResetPoisonStepCounter();
+        IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+        IncrementGameStat(GAME_STAT_WILD_BATTLES);
+        sub_80EECC8();
+        sub_80B1218();
+    }
+}
+
+void CB2_EndFirstBattle(void)
+{
+    Overworld_ClearSavedMusic();
+    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+}
+
+void sub_80B1218(void)
+{
+    if (GetGameStat(GAME_STAT_WILD_BATTLES) % 60 == 0)
+        sub_81DA57C();
+}
+
+void sub_80B1234(void)
+{
+    if (GetGameStat(GAME_STAT_TRAINER_BATTLES) % 20 == 0)
+        sub_81DA57C();
+}
+
+// why not just use the macros? maybe its because they didnt want to uncast const every time?
+u32 TrainerBattleLoadArg32(const u8 *ptr)
+{
+    return T1_READ_32(ptr);
+}
+
+u16 TrainerBattleLoadArg16(const u8 *ptr)
+{
+    return T1_READ_16(ptr);
+}
+
+u8 TrainerBattleLoadArg8(const u8 *ptr)
+{
+    return T1_READ_8(ptr);
+}
+
+u16 GetTrainerAFlag(void)
+{
+    return FLAG_TRAINER_FLAG_START + gTrainerBattleOpponent_A;
+}
+
+u16 GetTrainerBFlag(void)
+{
+    return FLAG_TRAINER_FLAG_START + gTrainerBattleOpponent_B;
+}
+
+bool32 IsPlayerDefeated(u32 battleOutcome)
+{
+    switch (battleOutcome)
+    {
+    case BATTLE_LOST:
+    case BATTLE_DREW:
+        return TRUE;
+    case BATTLE_WON:
+    case BATTLE_RAN:
+    case BATTLE_PLAYER_TELEPORTED:
+    case BATTLE_POKE_FLED:
+    case BATTLE_CAUGHT:
+        return FALSE;
+    default:
+        return FALSE;
+    }
+}
+
+void ResetTrainerOpponentIds(void)
+{
+    gTrainerBattleOpponent_A = 0;
+    gTrainerBattleOpponent_B = 0;
+}
+
+void InitTrainerBattleVariables(void)
+{
+    sTrainerBattleMode = 0;
+    if (gApproachingTrainerId == 0)
+    {
+        sTrainerAIntroSpeech = NULL;
+        sTrainerADefeatSpeech = NULL;
+        gUnknown_02038BF0 = NULL;
+    }
+    else
+    {
+        sTrainerBIntroSpeech = NULL;
+        sTrainerBDefeatSpeech = NULL;
+        gUnknown_02038BF4 = NULL;
+    }
+    sTrainerMapObjectLocalId = 0;
+    sTrainerVictorySpeech = NULL;
+    sTrainerCannotBattleSpeech = NULL;
+    gUnknown_02038BEC = NULL;
 }

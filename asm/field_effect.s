@@ -6295,7 +6295,7 @@ sub_80B8D44: @ 80B8D44
 	ldr r0, =gFieldEffectArguments
 	ldr r0, [r0]
 	strh r0, [r1, 0x26]
-	bl sav1_reset_battle_music_maybe
+	bl Overworld_ClearSavedMusic
 	ldr r0, =0x0000016d
 	bl Overworld_ChangeMusicTo
 	movs r0, 0

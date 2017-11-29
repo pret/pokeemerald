@@ -1386,7 +1386,7 @@ _080850C8:
 	bl sub_80AEDBC
 	bl sub_8085B2C
 	bl update_sav1_flash_used_on_map
-	bl sav1_reset_battle_music_maybe
+	bl Overworld_ClearSavedMusic
 	bl mapheader_run_script_with_tag_x3
 	bl not_trainer_hill_battle_pyramid
 	ldr r0, [r4]
@@ -1491,7 +1491,7 @@ _080851EE:
 	bl FlagClear
 _08085200:
 	bl update_sav1_flash_used_on_map
-	bl sav1_reset_battle_music_maybe
+	bl Overworld_ClearSavedMusic
 	bl mapheader_run_script_with_tag_x3
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMoveToOtherLocationSet
@@ -2272,15 +2272,15 @@ Overworld_SetSavedMusic: @ 80857F4
 	.pool
 	thumb_func_end Overworld_SetSavedMusic
 
-	thumb_func_start sav1_reset_battle_music_maybe
-sav1_reset_battle_music_maybe: @ 8085800
+	thumb_func_start Overworld_ClearSavedMusic
+Overworld_ClearSavedMusic: @ 8085800
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0
 	strh r0, [r1, 0x2C]
 	bx lr
 	.pool
-	thumb_func_end sav1_reset_battle_music_maybe
+	thumb_func_end Overworld_ClearSavedMusic
 
 	thumb_func_start sub_8085810
 sub_8085810: @ 8085810

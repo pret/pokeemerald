@@ -4,96 +4,88 @@
     .section .rodata
     .align 2, 0
 
-gUnknown_0854FE98:: @ 854FE98
-	.byte 0x1d, 0x1e, 0x1f, 0x20, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29
-
-gUnknown_0854FEA4:: @ 854FEA4
-	.byte 0x1f, 0x20, 0x21
-
-gUnknown_0854FEA7:: @ 854FEA7
-	.byte 0x1d, 0x1f, 0x20, 0x21, 0x00
 
 	.align 2
 gUnknown_0854FEAC:: @ 854FEAC
-	.4byte gUnknown_02038BC8, 0x00000000
+	.4byte sTrainerBattleMode, 0x00000000
 	.4byte gTrainerBattleOpponent_A, 0x00000001
-	.4byte gUnknown_02038BD0, 0x00000001
-	.4byte gUnknown_02038BD4, 0x00000002
-	.4byte gUnknown_02038BDC, 0x00000002
-	.4byte gUnknown_02038BE4, 0x00000005
-	.4byte gUnknown_02038BE8, 0x00000005
+	.4byte sTrainerMapObjectLocalId, 0x00000001
+	.4byte sTrainerAIntroSpeech, 0x00000002
+	.4byte sTrainerADefeatSpeech, 0x00000002
+	.4byte sTrainerVictorySpeech, 0x00000005
+	.4byte sTrainerCannotBattleSpeech, 0x00000005
 	.4byte gUnknown_02038BF0, 0x00000005
 	.4byte gUnknown_02038BEC, 0x00000006
 
 	.align 2
 gUnknown_0854FEF4:: @ 854FEF4
-	.4byte gUnknown_02038BC8, 0x00000000
+	.4byte sTrainerBattleMode, 0x00000000
 	.4byte gTrainerBattleOpponent_A, 0x00000001
-	.4byte gUnknown_02038BD0, 0x00000001
-	.4byte gUnknown_02038BD4, 0x00000002
-	.4byte gUnknown_02038BDC, 0x00000002
-	.4byte gUnknown_02038BE4, 0x00000005
-	.4byte gUnknown_02038BE8, 0x00000005
+	.4byte sTrainerMapObjectLocalId, 0x00000001
+	.4byte sTrainerAIntroSpeech, 0x00000002
+	.4byte sTrainerADefeatSpeech, 0x00000002
+	.4byte sTrainerVictorySpeech, 0x00000005
+	.4byte sTrainerCannotBattleSpeech, 0x00000005
 	.4byte gUnknown_02038BF0, 0x00000002
 	.4byte gUnknown_02038BEC, 0x00000006
 
 	.align 2
 gUnknown_0854FF3C:: @ 854FF3C
-	.4byte gUnknown_02038BC8, 0x00000000
+	.4byte sTrainerBattleMode, 0x00000000
 	.4byte gTrainerBattleOpponent_A, 0x00000001
-	.4byte gUnknown_02038BD0, 0x00000001
-	.4byte gUnknown_02038BD4, 0x00000002
-	.4byte gUnknown_02038BDC, 0x00000002
-	.4byte gUnknown_02038BE4, 0x00000005
-	.4byte gUnknown_02038BE8, 0x00000002
+	.4byte sTrainerMapObjectLocalId, 0x00000001
+	.4byte sTrainerAIntroSpeech, 0x00000002
+	.4byte sTrainerADefeatSpeech, 0x00000002
+	.4byte sTrainerVictorySpeech, 0x00000005
+	.4byte sTrainerCannotBattleSpeech, 0x00000002
 	.4byte gUnknown_02038BF0, 0x00000005
 	.4byte gUnknown_02038BEC, 0x00000006
 
 	.align 2
 gUnknown_0854FF84:: @ 854FF84
-	.4byte gUnknown_02038BC8, 0x00000000
+	.4byte sTrainerBattleMode, 0x00000000
 	.4byte gTrainerBattleOpponent_A, 0x00000001
-	.4byte gUnknown_02038BD0, 0x00000001
-	.4byte gUnknown_02038BD4, 0x00000005
-	.4byte gUnknown_02038BDC, 0x00000002
-	.4byte gUnknown_02038BE4, 0x00000005
-	.4byte gUnknown_02038BE8, 0x00000005
+	.4byte sTrainerMapObjectLocalId, 0x00000001
+	.4byte sTrainerAIntroSpeech, 0x00000005
+	.4byte sTrainerADefeatSpeech, 0x00000002
+	.4byte sTrainerVictorySpeech, 0x00000005
+	.4byte sTrainerCannotBattleSpeech, 0x00000005
 	.4byte gUnknown_02038BF0, 0x00000005
 	.4byte gUnknown_02038BEC, 0x00000006
 
 	.align 2
 gUnknown_0854FFCC:: @ 854FFCC
-	.4byte gUnknown_02038BC8, 0x00000000
+	.4byte sTrainerBattleMode, 0x00000000
 	.4byte gTrainerBattleOpponent_A, 0x00000001
-	.4byte gUnknown_02038BD0, 0x00000001
-	.4byte gUnknown_02038BD4, 0x00000002
-	.4byte gUnknown_02038BDC, 0x00000002
-	.4byte gUnknown_02038BE4, 0x00000005
-	.4byte gUnknown_02038BE8, 0x00000002
+	.4byte sTrainerMapObjectLocalId, 0x00000001
+	.4byte sTrainerAIntroSpeech, 0x00000002
+	.4byte sTrainerADefeatSpeech, 0x00000002
+	.4byte sTrainerVictorySpeech, 0x00000005
+	.4byte sTrainerCannotBattleSpeech, 0x00000002
 	.4byte gUnknown_02038BF0, 0x00000002
 	.4byte gUnknown_02038BEC, 0x00000006
 
 	.align 2
 gUnknown_08550014:: @ 8550014
-	.4byte gUnknown_02038BC8, 0x00000000
+	.4byte sTrainerBattleMode, 0x00000000
 	.4byte gTrainerBattleOpponent_B, 0x00000001
-	.4byte gUnknown_02038BD0, 0x00000001
-	.4byte gUnknown_02038BD8, 0x00000002
-	.4byte gUnknown_02038BE0, 0x00000002
-	.4byte gUnknown_02038BE4, 0x00000005
-	.4byte gUnknown_02038BE8, 0x00000005
+	.4byte sTrainerMapObjectLocalId, 0x00000001
+	.4byte sTrainerBIntroSpeech, 0x00000002
+	.4byte sTrainerBDefeatSpeech, 0x00000002
+	.4byte sTrainerVictorySpeech, 0x00000005
+	.4byte sTrainerCannotBattleSpeech, 0x00000005
 	.4byte gUnknown_02038BF4, 0x00000005
 	.4byte gUnknown_02038BEC, 0x00000006
 
 	.align 2
 gUnknown_0855005C:: @ 855005C
-	.4byte gUnknown_02038BC8, 0x00000000
+	.4byte sTrainerBattleMode, 0x00000000
 	.4byte gTrainerBattleOpponent_B, 0x00000001
-	.4byte gUnknown_02038BD0, 0x00000001
-	.4byte gUnknown_02038BD8, 0x00000002
-	.4byte gUnknown_02038BE0, 0x00000002
-	.4byte gUnknown_02038BE4, 0x00000005
-	.4byte gUnknown_02038BE8, 0x00000005
+	.4byte sTrainerMapObjectLocalId, 0x00000001
+	.4byte sTrainerBIntroSpeech, 0x00000002
+	.4byte sTrainerBDefeatSpeech, 0x00000002
+	.4byte sTrainerVictorySpeech, 0x00000005
+	.4byte sTrainerCannotBattleSpeech, 0x00000005
 	.4byte gUnknown_02038BF4, 0x00000002
 	.4byte gUnknown_02038BEC, 0x00000006
 

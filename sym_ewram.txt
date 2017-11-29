@@ -706,47 +706,7 @@ gUnknown_02038BC4: @ 2038BC4
 gUnknown_02038BC6: @ 2038BC6
 	.space 0x2
 
-gUnknown_02038BC8: @ 2038BC8
-	.space 0x2
-
-gTrainerBattleOpponent_A: @ 2038BCA
-	.space 0x2
-
-gTrainerBattleOpponent_B: @ 2038BCC
-	.space 0x2
-
-gPartnerTrainerId: @ 2038BCE
-	.space 0x2
-
-gUnknown_02038BD0: @ 2038BD0
-	.space 0x4
-
-gUnknown_02038BD4: @ 2038BD4
-	.space 0x4
-
-gUnknown_02038BD8: @ 2038BD8
-	.space 0x4
-
-gUnknown_02038BDC: @ 2038BDC
-	.space 0x4
-
-gUnknown_02038BE0: @ 2038BE0
-	.space 0x4
-
-gUnknown_02038BE4: @ 2038BE4
-	.space 0x4
-
-gUnknown_02038BE8: @ 2038BE8
-	.space 0x4
-
-gUnknown_02038BEC: @ 2038BEC
-	.space 0x4
-
-gUnknown_02038BF0: @ 2038BF0
-	.space 0x4
-
-gUnknown_02038BF4: @ 2038BF4
-	.space 0x4
+	.include "src/battle_setup.o"
 
 gUnknown_02038BF8: @ 2038BF8
 	.space 0x1
@@ -754,7 +714,7 @@ gUnknown_02038BF8: @ 2038BF8
 gUnknown_02038BF9: @ 2038BF9
 	.space 0x3
 
-gUnknown_02038BFC: @ 2038BFC
+gApproachingTrainerId: @ 2038BFC
 	.space 0x4
 
     .include "src/wild_encounter.o"

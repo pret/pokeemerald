@@ -9,405 +9,7 @@
 
 
 
-	thumb_func_start sub_80B100C
-sub_80B100C: @ 80B100C
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r0, =gEnemyParty
-	movs r1, 0x38
-	bl GetMonData
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x1
-	bl GetSumOfPlayerPartyLevel
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r4, r0
-	bcs _080B1090
-	cmp r5, 0xA
-	beq _080B1048
-	cmp r5, 0xA
-	bgt _080B1040
-	cmp r5, 0x3
-	beq _080B105C
-	b _080B106C
-	.pool
-_080B1040:
-	cmp r5, 0xD
-	bgt _080B106C
-	movs r0, 0x4
-	b _080B1120
-_080B1048:
-	ldr r4, =gUnknown_0854FEA4
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x3
-	b _080B1114
-	.pool
-_080B105C:
-	ldr r4, =gUnknown_0854FEA7
-	bl Random
-	ands r5, r0
-	lsls r0, r5, 16
-	b _080B111A
-	.pool
-_080B106C:
-	ldr r0, =0x000040ce
-	bl VarGet
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x3
-	beq _080B10EC
-	ldr r4, =gUnknown_0854FE98
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	b _080B1112
-	.pool
-_080B1090:
-	cmp r5, 0xA
-	beq _080B10A6
-	cmp r5, 0xA
-	bgt _080B109E
-	cmp r5, 0x3
-	beq _080B10B8
-	b _080B10C8
-_080B109E:
-	cmp r5, 0xD
-	bgt _080B10C8
-	movs r0, 0x3
-	b _080B1120
-_080B10A6:
-	ldr r4, =gUnknown_0854FEA4
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x3
-	b _080B1114
-	.pool
-_080B10B8:
-	ldr r4, =gUnknown_0854FEA7
-	bl Random
-	ands r5, r0
-	lsls r0, r5, 16
-	b _080B111A
-	.pool
-_080B10C8:
-	ldr r0, =0x000040ce
-	bl VarGet
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x3
-	beq _080B10EC
-	ldr r4, =gUnknown_0854FE98
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	b _080B1112
-	.pool
-_080B10EC:
-	ldr r0, =gSaveBlock2Ptr
-	ldr r1, [r0]
-	ldr r2, =0x00000cb2
-	adds r0, r1, r2
-	ldrh r0, [r0]
-	lsls r2, r0, 2
-	ldr r3, =0x00000cb4
-	adds r1, r3
-	adds r2, r1, r2
-	lsls r0, 1
-	adds r0, 0x1
-	lsls r0, 1
-	adds r1, r0
-	ldrh r0, [r1]
-	ldrh r2, [r2]
-	adds r0, r2
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r4, =gUnknown_0854FE98
-_080B1112:
-	movs r1, 0xC
-_080B1114:
-	bl __umodsi3
-	lsls r0, 16
-_080B111A:
-	lsrs r0, 16
-	adds r0, r4
-	ldrb r0, [r0]
-_080B1120:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80B100C
 
-	thumb_func_start sub_80B1138
-sub_80B1138: @ 80B1138
-	push {lr}
-	ldr r0, =CB2_ChooseStarter
-	bl SetMainCallback2
-	ldr r1, =gMain
-	ldr r0, =sub_80B1158
-	str r0, [r1, 0x8]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80B1138
-
-	thumb_func_start sub_80B1158
-sub_80B1158: @ 80B1158
-	push {lr}
-	sub sp, 0x8
-	ldr r0, =0x00004023
-	bl GetVarPointer
-	ldr r2, =gSpecialVar_Result
-	ldrh r1, [r2]
-	strh r1, [r0]
-	ldrh r0, [r2]
-	bl GetStarterPokemon
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0
-	str r1, [sp]
-	str r1, [sp, 0x4]
-	movs r1, 0x5
-	movs r2, 0
-	movs r3, 0
-	bl ScriptGiveMon
-	bl ResetTasks
-	bl PlayBattleBGM
-	ldr r0, =sub_80B11A8
-	bl SetMainCallback2
-	movs r0, 0
-	bl sub_8145F10
-	add sp, 0x8
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80B1158
-
-	thumb_func_start sub_80B11A8
-sub_80B11A8: @ 80B11A8
-	push {lr}
-	bl UpdatePaletteFade
-	bl RunTasks
-	bl IsBattleTransitionDone
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080B11F0
-	ldr r1, =gBattleTypeFlags
-	movs r0, 0x10
-	str r0, [r1]
-	ldr r1, =gMain
-	ldr r0, =sub_80B1204
-	str r0, [r1, 0x8]
-	bl FreeAllWindowBuffers
-	ldr r0, =CB2_InitBattle
-	bl SetMainCallback2
-	bl prev_quest_postbuffer_cursor_backup_reset
-	bl ResetPoisonStepCounter
-	movs r0, 0x7
-	bl IncrementGameStat
-	movs r0, 0x8
-	bl IncrementGameStat
-	bl sub_80EECC8
-	bl sub_80B1218
-_080B11F0:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80B11A8
-
-	thumb_func_start sub_80B1204
-sub_80B1204: @ 80B1204
-	push {lr}
-	bl sav1_reset_battle_music_maybe
-	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80B1204
-
-	thumb_func_start sub_80B1218
-sub_80B1218: @ 80B1218
-	push {lr}
-	movs r0, 0x8
-	bl GetGameStat
-	movs r1, 0x3C
-	bl __umodsi3
-	cmp r0, 0
-	bne _080B122E
-	bl sub_81DA57C
-_080B122E:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80B1218
-
-	thumb_func_start sub_80B1234
-sub_80B1234: @ 80B1234
-	push {lr}
-	movs r0, 0x9
-	bl GetGameStat
-	movs r1, 0x14
-	bl __umodsi3
-	cmp r0, 0
-	bne _080B124A
-	bl sub_81DA57C
-_080B124A:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80B1234
-
-	thumb_func_start TrainerBattleLoadArg32
-@ u32 TrainerBattleLoadArg32(u8 *arg)
-TrainerBattleLoadArg32: @ 80B1250
-	adds r2, r0, 0
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	lsls r1, 8
-	orrs r0, r1
-	ldrb r1, [r2, 0x2]
-	lsls r1, 16
-	orrs r0, r1
-	ldrb r1, [r2, 0x3]
-	lsls r1, 24
-	orrs r0, r1
-	bx lr
-	thumb_func_end TrainerBattleLoadArg32
-
-	thumb_func_start TrainerBattleLoadArg16
-@ u16 TrainerBattleLoadArg16(u8 *arg)
-TrainerBattleLoadArg16: @ 80B1268
-	adds r1, r0, 0
-	ldrb r0, [r1]
-	ldrb r1, [r1, 0x1]
-	lsls r1, 8
-	orrs r0, r1
-	bx lr
-	thumb_func_end TrainerBattleLoadArg16
-
-	thumb_func_start TrainerBattleLoadArg8
-@ u8 TrainerBattleLoadArg8(u8 *arg)
-TrainerBattleLoadArg8: @ 80B1274
-	ldrb r0, [r0]
-	bx lr
-	thumb_func_end TrainerBattleLoadArg8
-
-	thumb_func_start trainerflag_opponent
-trainerflag_opponent: @ 80B1278
-	ldr r1, =gTrainerBattleOpponent_A
-	movs r2, 0xA0
-	lsls r2, 3
-	adds r0, r2, 0
-	ldrh r1, [r1]
-	adds r0, r1
-	lsls r0, 16
-	lsrs r0, 16
-	bx lr
-	.pool
-	thumb_func_end trainerflag_opponent
-
-	thumb_func_start sub_80B1290
-sub_80B1290: @ 80B1290
-	ldr r1, =gTrainerBattleOpponent_B
-	movs r2, 0xA0
-	lsls r2, 3
-	adds r0, r2, 0
-	ldrh r1, [r1]
-	adds r0, r1
-	lsls r0, 16
-	lsrs r0, 16
-	bx lr
-	.pool
-	thumb_func_end sub_80B1290
-
-	thumb_func_start IsPlayerDefeated
-IsPlayerDefeated: @ 80B12A8
-	push {lr}
-	subs r0, 0x1
-	cmp r0, 0x6
-	bhi _080B12E0
-	lsls r0, 2
-	ldr r1, =_080B12C0
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080B12C0:
-	.4byte _080B12E0
-	.4byte _080B12DC
-	.4byte _080B12DC
-	.4byte _080B12E0
-	.4byte _080B12E0
-	.4byte _080B12E0
-	.4byte _080B12E0
-_080B12DC:
-	movs r0, 0x1
-	b _080B12E2
-_080B12E0:
-	movs r0, 0
-_080B12E2:
-	pop {r1}
-	bx r1
-	thumb_func_end IsPlayerDefeated
-
-	thumb_func_start ResetTrainerOpponentIds
-ResetTrainerOpponentIds: @ 80B12E8
-	ldr r0, =gTrainerBattleOpponent_A
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, =gTrainerBattleOpponent_B
-	strh r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end ResetTrainerOpponentIds
-
-	thumb_func_start InitTrainerBattleVariables
-@ void InitTrainerBattleVariables()
-InitTrainerBattleVariables: @ 80B12FC
-	push {lr}
-	ldr r0, =gUnknown_02038BC8
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, =gUnknown_02038BFC
-	ldrb r1, [r0]
-	cmp r1, 0
-	bne _080B132C
-	ldr r0, =gUnknown_02038BD4
-	str r1, [r0]
-	ldr r0, =gUnknown_02038BDC
-	str r1, [r0]
-	ldr r0, =gUnknown_02038BF0
-	b _080B1338
-	.pool
-_080B132C:
-	ldr r0, =gUnknown_02038BD8
-	movs r1, 0
-	str r1, [r0]
-	ldr r0, =gUnknown_02038BE0
-	str r1, [r0]
-	ldr r0, =gUnknown_02038BF4
-_080B1338:
-	str r1, [r0]
-	ldr r1, =gUnknown_02038BD0
-	movs r0, 0
-	strh r0, [r1]
-	ldr r0, =gUnknown_02038BE4
-	movs r1, 0
-	str r1, [r0]
-	ldr r0, =gUnknown_02038BE8
-	str r1, [r0]
-	ldr r0, =gUnknown_02038BEC
-	str r1, [r0]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end InitTrainerBattleVariables
 
 	thumb_func_start TrainerBattleLoadArgs
 @ void TrainerBattleLoadArgs(struct TrainerBattleArgSpec *argSpecs, u8 *args)
@@ -483,7 +85,7 @@ _080B13EC:
 	thumb_func_start battle_80801F0
 battle_80801F0: @ 80B13F8
 	push {lr}
-	ldr r0, =gUnknown_02038BD0
+	ldr r0, =sTrainerMapObjectLocalId
 	ldrh r1, [r0]
 	cmp r1, 0
 	beq _080B141A
@@ -510,7 +112,7 @@ BattleSetup_ConfigureTrainerBattle: @ 80B1430
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl InitTrainerBattleVariables
-	ldr r4, =gUnknown_02038BC8
+	ldr r4, =sTrainerBattleMode
 	adds r0, r5, 0
 	bl TrainerBattleLoadArg8
 	lsls r0, 24
@@ -554,7 +156,7 @@ _080B14A8:
 	b _080B14D6
 	.pool
 _080B14B0:
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B14C4
@@ -603,7 +205,7 @@ _080B1514:
 	b _080B161E
 	.pool
 _080B153C:
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B156C
@@ -643,7 +245,7 @@ _080B159A:
 	b _080B161E
 	.pool
 _080B15A8:
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B15D8
@@ -667,7 +269,7 @@ _080B15D8:
 	b _080B157C
 	.pool
 _080B15F4:
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B1614
@@ -802,7 +404,7 @@ sub_80B16D8: @ 80B16D8
 
 	thumb_func_start sub_80B170C
 sub_80B170C: @ 80B170C
-	ldr r0, =gUnknown_02038BC8
+	ldr r0, =sTrainerBattleMode
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -825,7 +427,7 @@ _080B1734:
 	bl InTrainerHill
 	cmp r0, 0
 	bne _080B174A
-	bl trainerflag_opponent
+	bl GetTrainerAFlag
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagGet
@@ -849,12 +451,12 @@ rom_npc_set_flag_for_script_id: @ 80B1760
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080B1776
-	bl sub_80B1290
+	bl GetTrainerBFlag
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagSet
 _080B1776:
-	bl trainerflag_opponent
+	bl GetTrainerAFlag
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagSet
@@ -866,7 +468,7 @@ _080B1776:
 	thumb_func_start sub_80B178C
 sub_80B178C: @ 80B178C
 	push {lr}
-	bl trainerflag_opponent
+	bl GetTrainerAFlag
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagSet
@@ -1161,7 +763,7 @@ sub_80B1A14: @ 80B1A14
 _080B1A44:
 	ldr r3, =gMapObjects
 	ldr r2, =gUnknown_03006090
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1201,7 +803,7 @@ _080B1A7C:
 _080B1AAC:
 	ldr r3, =gMapObjects
 	ldr r2, =gUnknown_03006090
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1295,7 +897,7 @@ special_trainer_unable_to_battle: @ 80B1B60
 @ void SetUpTrainerEncounterMusic()
 SetUpTrainerEncounterMusic: @ 80B1B70
 	push {lr}
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B1B88
@@ -1306,7 +908,7 @@ _080B1B88:
 	ldr r0, =gTrainerBattleOpponent_B
 _080B1B8A:
 	ldrh r1, [r0]
-	ldr r0, =gUnknown_02038BC8
+	ldr r0, =sTrainerBattleMode
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080B1C62
@@ -1418,15 +1020,15 @@ _080B1C74:
 	thumb_func_start sub_80B1C7C
 sub_80B1C7C: @ 80B1C7C
 	push {lr}
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B1C94
-	ldr r0, =gUnknown_02038BD8
+	ldr r0, =sTrainerBIntroSpeech
 	b _080B1C96
 	.pool
 _080B1C94:
-	ldr r0, =gUnknown_02038BD4
+	ldr r0, =sTrainerAIntroSpeech
 _080B1C96:
 	ldr r0, [r0]
 	bl ReturnEmptyStringIfNull
@@ -1448,7 +1050,7 @@ GetTrainer1LoseText: @ 80B1CA4
 	b _080B1CC0
 	.pool
 _080B1CBC:
-	ldr r0, =gUnknown_02038BDC
+	ldr r0, =sTrainerADefeatSpeech
 	ldr r0, [r0]
 _080B1CC0:
 	ldr r4, =gStringVar4
@@ -1467,7 +1069,7 @@ _080B1CC0:
 GetTrainer2LoseText: @ 80B1CE0
 	push {r4,lr}
 	ldr r4, =gStringVar4
-	ldr r0, =gUnknown_02038BE0
+	ldr r0, =sTrainerBDefeatSpeech
 	ldr r0, [r0]
 	bl ReturnEmptyStringIfNull
 	adds r1, r0, 0
@@ -1483,7 +1085,7 @@ GetTrainer2LoseText: @ 80B1CE0
 	thumb_func_start sub_80B1D04
 sub_80B1D04: @ 80B1D04
 	push {lr}
-	ldr r0, =gUnknown_02038BE4
+	ldr r0, =sTrainerVictorySpeech
 	ldr r0, [r0]
 	bl ReturnEmptyStringIfNull
 	pop {r1}
@@ -1494,7 +1096,7 @@ sub_80B1D04: @ 80B1D04
 	thumb_func_start sub_80B1D18
 sub_80B1D18: @ 80B1D18
 	push {lr}
-	ldr r0, =gUnknown_02038BE8
+	ldr r0, =sTrainerCannotBattleSpeech
 	ldr r0, [r0]
 	bl ReturnEmptyStringIfNull
 	pop {r1}

@@ -71,15 +71,15 @@ BattleTransition_StartOnField: @ 8145EF4
 	.pool
 	thumb_func_end BattleTransition_StartOnField
 
-	thumb_func_start sub_8145F10
-sub_8145F10: @ 8145F10
+	thumb_func_start BattleTransition_Start
+BattleTransition_Start: @ 8145F10
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
 	bl LaunchBattleTransitionTask
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8145F10
+	thumb_func_end BattleTransition_Start
 
 	thumb_func_start IsBattleTransitionDone
 IsBattleTransitionDone: @ 8145F20

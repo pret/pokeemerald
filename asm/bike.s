@@ -2004,7 +2004,7 @@ GetOnOffBike: @ 811A080
 	beq _0811A0B0
 	movs r0, 0x1
 	bl SetPlayerAvatarTransitionFlags
-	bl sav1_reset_battle_music_maybe
+	bl Overworld_ClearSavedMusic
 	bl sub_8085784
 	b _0811A0C4
 	.pool

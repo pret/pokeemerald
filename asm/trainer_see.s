@@ -12,7 +12,7 @@ CheckForTrainersWantingBattle: @ 80B3BE8
 	ldr r0, =gUnknown_030060A8
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	strb r1, [r0]
 	movs r4, 0
 	ldr r6, =gMapObjects
@@ -89,7 +89,7 @@ _080B3C88:
 	bcs _080B3CC6
 	ldr r6, =gUnknown_03006090
 	adds r7, r6, 0x4
-	ldr r5, =gUnknown_02038BFC
+	ldr r5, =gApproachingTrainerId
 _080B3CA0:
 	lsls r1, r4, 1
 	adds r1, r4
@@ -111,7 +111,7 @@ _080B3CA0:
 	bcc _080B3CA0
 _080B3CC6:
 	bl TwoTrainersWantBattleExecuteScript
-	ldr r1, =gUnknown_02038BFC
+	ldr r1, =gApproachingTrainerId
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, =gUnknown_030060AC
@@ -645,7 +645,7 @@ TrainerApproachPlayer: @ 80B406C
 sub_80B40C8: @ 80B40C8
 	push {r4,r5,lr}
 	adds r2, r0, 0
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B40E4
@@ -1294,7 +1294,7 @@ sub_80B45D0: @ 80B45D0
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080B4610
-	ldr r1, =gUnknown_02038BFC
+	ldr r1, =gApproachingTrainerId
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080B460C
@@ -1531,7 +1531,7 @@ _080B47B2:
 	thumb_func_start sub_80B47BC
 sub_80B47BC: @ 80B47BC
 	push {lr}
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B47D4
