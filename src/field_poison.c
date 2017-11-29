@@ -10,7 +10,9 @@
 #include "pokenav.h"
 #include "event_data.h"
 #include "script.h"
+#include "battle.h"
 #include "fldeff_80F9BCC.h"
+#include "field_poison.h"
 
 static bool32 sub_80F9568(struct Pokemon *pokemon)
 {
@@ -39,11 +41,8 @@ static bool32 sub_80F958C(void)
 
 static void sub_80F95C0(u8 partyIdx)
 {
-    struct Pokemon *pokemon;
-    unsigned status;
-
-    pokemon = &gPlayerParty[partyIdx];
-    status = 0;
+    struct Pokemon *pokemon = gPlayerParty + partyIdx;
+    unsigned int status = STATUS_NONE;
     AdjustFriendship(pokemon, 0x07);
     SetMonData(pokemon, MON_DATA_STATUS, &status);
     GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
@@ -52,10 +51,8 @@ static void sub_80F95C0(u8 partyIdx)
 
 static bool32 sub_80F960C(u8 partyIdx)
 {
-    struct Pokemon *pokemon;
-
-    pokemon = &gPlayerParty[partyIdx];
-    if (sub_80F9568(pokemon) && GetMonData(pokemon, MON_DATA_HP) == 0 && pokemon_ailments_get_primary(GetMonData(pokemon, MON_DATA_STATUS)) == 1)
+    struct Pokemon *pokemon = gPlayerParty + partyIdx;
+    if (sub_80F9568(pokemon) && GetMonData(pokemon, MON_DATA_HP) == 0 && pokemon_ailments_get_primary(GetMonData(pokemon, MON_DATA_STATUS)) == AILMENT_PSN)
     {
         return TRUE;
     }
@@ -64,9 +61,7 @@ static bool32 sub_80F960C(u8 partyIdx)
 
 static void sub_80F9654(u8 taskId)
 {
-    s16 *data;
-
-    data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     switch (data[0])
     {
         case 0:
@@ -116,42 +111,38 @@ void sub_80F972C(void)
     ScriptContext1_Stop();
 }
 
-unsigned overworld_poison(void)
+unsigned int overworld_poison(void)
 {
     int i;
-    unsigned cnt1;
-    unsigned cnt2;
-    unsigned hp;
-    struct Pokemon *pokemon;
-
-    pokemon = gPlayerParty;
-    cnt2 = 0;
-    cnt1 = 0;
+    unsigned int hp;
+    struct Pokemon *pokemon = gPlayerParty;
+    unsigned int numPoisoned = 0;
+    unsigned int numFainted = 0;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(pokemon, MON_DATA_SANITY_BIT2) && pokemon_ailments_get_primary(GetMonData(pokemon, MON_DATA_STATUS)) == 1)
+        if (GetMonData(pokemon, MON_DATA_SANITY_BIT2) && pokemon_ailments_get_primary(GetMonData(pokemon, MON_DATA_STATUS)) == AILMENT_PSN)
         {
             hp = GetMonData(pokemon, MON_DATA_HP);
             if (hp == 0 || --hp == 0)
             {
-                cnt1++;
+                numFainted++;
             }
             SetMonData(pokemon, MON_DATA_HP, &hp);
-            cnt2++;
+            numPoisoned++;
         }
         pokemon++;
     }
-    if (cnt1 != 0 || cnt2 != 0)
+    if (numFainted != 0 || numPoisoned != 0)
     {
         overworld_poison_effect();
     }
-    if (cnt1 != 0)
+    if (numFainted != 0)
     {
-        return 2;
+        return FLDPSN_FNT;
     }
-    if (cnt2 != 0)
+    if (numPoisoned != 0)
     {
-        return 1;
+        return FLDPSN_PSN;
     }
-    return 0;
+    return FLDPSN_NONE;
 }

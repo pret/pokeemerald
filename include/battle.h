@@ -88,6 +88,7 @@
 
 #define BATTLE_OUTCOME_BIT_x80      0x80
 
+#define STATUS_NONE             0x0
 #define STATUS_SLEEP            0x7
 #define STATUS_POISON           0x8
 #define STATUS_BURN             0x10
