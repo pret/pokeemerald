@@ -48,7 +48,11 @@ enum
 enum LanguageId {
     LANGUAGE_JAPANESE = 1,
     LANGUAGE_ENGLISH = 2,
+    LANGUAGE_FRENCH = 3,
+    LANGUAGE_ITALIAN = 4,
     LANGUAGE_GERMAN = 5,
+    // 6 goes unused but the theory is it was meant to be Korean
+    LANGUAGE_SPANISH = 7,
 };
 
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
