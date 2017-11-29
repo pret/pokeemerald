@@ -24,14 +24,15 @@ EWRAM_DATA struct UnkLinkRfuStruct_02022B2C gUnknown_02022B2C = {};
 // Static ROM declarations
 
 void sub_800C000(void);
-void sub_800CEB0(u16 unk0);
-void sub_800C7B4(u16 unk0, u16 unk1);
+void sub_800CEB0(u16 r6);
+void sub_800C7B4(u16 r8, u16 r6);
 void sub_800D30C(u8 a0, u8 a1);
 void sub_800D334(u8 a0);
 void sub_800D610(void);
+void sub_800D630(void);
 void sub_800C744(u32 a0);
 void sub_800CF34(void);
-void sub_800D158(void);
+static void sub_800D158(void);
 void sub_800D20C(void);
 void sub_800D268(void);
 u8 sub_800D294(void);
@@ -1409,3 +1410,35 @@ __attribute__((naked)) void sub_800CF34(void)
                     "\tbx r0");
 }
 #endif
+
+static void sub_800D158(void)
+{
+    u16 imeBak = REG_IME;
+    REG_IME = 0;
+    if (gUnknown_03004140.unk_04 == 15)
+    {
+        if (--gUnknown_03004140.unk_28[gUnknown_03004140.unk_10] == 0 || gUnknown_03007880[gUnknown_03004140.unk_10]->unk_0 == 0x27)
+        {
+            sub_800D630();
+            gUnknown_03004140.unk_04 = 24;
+            rfu_clearSlot(4, gUnknown_03004140.unk_10);
+            gUnknown_03004140.unk_24 &= ~(1 << gUnknown_03004140.unk_10);
+            gUnknown_03004140.unk_28[gUnknown_03004140.unk_10] = 0;
+        }
+    }
+    REG_IME = imeBak;
+    if (gUnknown_03004140.unk_04 == 24)
+    {
+        if (gUnknown_03004140.unk_02 == 1)
+        {
+            sub_800D630();
+        }
+        if (gUnknown_03004140.unk_02 == 0)
+        {
+            gUnknown_03004140.unk_04 = gUnknown_03004140.unk_05 = 0;
+            sub_800D334(gUnknown_03007890[0].unk_02 | gUnknown_03007890[0].unk_03);
+            gUnknown_03004140.unk_14 = 0;
+            sub_800D30C(0x25, 0x01);
+        }
+    }
+}
