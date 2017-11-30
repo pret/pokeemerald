@@ -1331,3 +1331,34 @@ u8 sub_800D550(u8 a0, u16 a1)
     REG_IME = imeBak;
     return 0;
 }
+
+u8 sub_800D594(u16 a0)
+{
+    if (gUnknown_03007890->unk_04 | gUnknown_03007890->unk_05)
+    {
+        gUnknown_03004140.unk_14 = 6;
+        sub_800D30C(0xf3, 0x01);
+        return 6;
+    }
+    gUnknown_03004140.unk_18 = a0;
+    return 0;
+}
+
+u8 sub_800D5D0(u8 a0)
+{
+    if (gUnknown_03004140.unk_04 == 9 || gUnknown_03004140.unk_04 == 10 || gUnknown_03004140.unk_04 == 11)
+    {
+        gUnknown_03004140.unk_14 = 7;
+        sub_800D30C(0xf3, 0x01);
+        return 7;
+    }
+    if (a0)
+    {
+        gUnknown_03004140.unk_0b = 1;
+    }
+    else
+    {
+        gUnknown_03004140.unk_0b = 0;
+    }
+    return 0;
+}
