@@ -117,11 +117,13 @@ struct RfuUnk1
 struct RfuUnk2
 {
     u16 unk_0;
-    u8 fill_2[0x18];
+    u16 unk_2;
+    u8 fill_4[0x16];
     u8 unk_1a;
     u8 fill_1b[0x19];
     u16 unk_34;
-    u8 fill_36[0x18];
+    u16 unk_36;
+    u8 fill_38[0x16];
     u8 unk_4e;
     u8 fill_4f[0x12];
     u8 unk_61;

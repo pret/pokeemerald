@@ -35,7 +35,7 @@ static u8 sub_800D294(void);
 void sub_800D30C(u8 a0, u8 a1);
 static void sub_800D334(u8 a0);
 static void sub_800D358(u8 a0);
-void sub_800D434(void);
+static void sub_800D434(void);
 void sub_800D610(void);
 void sub_800D630(void);
 
@@ -1259,6 +1259,48 @@ static void sub_800D358(u8 a0)
             if (gUnknown_03007870[i]->unk_0 == 0x8024 && a0 & gUnknown_03007870[i]->unk_3)
             {
                 gUnknown_03007870[i]->unk_3 &= ~a0;
+            }
+        }
+    }
+}
+
+static void sub_800D434(void)
+{
+    u8 i;
+    u8 j;
+    u8 flags;
+
+    if (gUnknown_03004140.unk_18)
+    {
+        if (gUnknown_03007890->unk_04)
+        {
+            for (i = 0; i < 4; i ++)
+            {
+                if (gUnknown_03007880[i]->unk_0 & 0x8000)
+                {
+                    flags = 0;
+                    for (j = 0; j < 4; j++)
+                    {
+                        if ((gUnknown_03007880[i]->unk_1a >> j) & 1 && gUnknown_03007880[j]->unk_2 > gUnknown_03004140.unk_18)
+                        {
+                            flags |= (1 << j);
+                        }
+                        if (flags)
+                        {
+                            rfu_changeSendTarget(0x20, i, flags ^ gUnknown_03007880[i]->unk_1a);
+                        }
+                    }
+                }
+            }
+        }
+        if (gUnknown_03007890->unk_05)
+        {
+            for (i = 0; i < 4; i++)
+            {
+                if (gUnknown_03007880[i]->unk_34 & 0x8000 && gUnknown_03007880[i]->unk_36 > gUnknown_03004140.unk_18)
+                {
+                    rfu_NI_stopReceivingData(i);
+                }
             }
         }
     }
