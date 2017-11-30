@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800D52C
-sub_800D52C: @ 800D52C
-	push {lr}
-	ldr r1, =gUnknown_03004140
-	str r0, [r1, 0x44]
-	ldr r0, =sub_800CEB0
-	bl rfu_setMSCCallback
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800D52C
-
-	thumb_func_start sub_800D544
-sub_800D544: @ 800D544
-	ldr r1, =gUnknown_03004140
-	str r0, [r1, 0x40]
-	bx lr
-	.pool
-	thumb_func_end sub_800D544
-
-	thumb_func_start sub_800D550
-sub_800D550: @ 800D550
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 16
-	lsrs r5, r1, 16
-	ldr r0, =gUnknown_03004140
-	ldrb r1, [r0, 0x9]
-	adds r3, r0, 0
-	cmp r1, 0
-	beq _0800D578
-	cmp r4, 0
-	bne _0800D578
-	adds r0, 0x30
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0800D578
-	movs r0, 0x5
-	b _0800D588
-	.pool
-_0800D578:
-	ldr r2, =0x04000208
-	ldrh r1, [r2]
-	movs r0, 0
-	strh r0, [r2]
-	strb r4, [r3, 0x9]
-	strh r5, [r3, 0x32]
-	strh r1, [r2]
-	movs r0, 0
-_0800D588:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_800D550
-
 	thumb_func_start sub_800D594
 sub_800D594: @ 800D594
 	push {lr}

@@ -26,7 +26,7 @@ EWRAM_DATA struct UnkLinkRfuStruct_02022B2C gUnknown_02022B2C = {};
 static void sub_800C000(void);
 static void sub_800C7B4(u16 r8, u16 r6);
 static void sub_800C744(u32 a0);
-void sub_800CEB0(u16 r6);
+static void sub_800CEB0(u16 r6);
 static void sub_800CF34(void);
 static void sub_800D158(void);
 static void sub_800D20C(void);
@@ -977,7 +977,7 @@ static void sub_800C7B4(u16 r8, u16 r6)
     }
 }
 
-void sub_800CEB0(u16 r6)
+static void sub_800CEB0(u16 r6)
 {
     u8 r7;
     u8 sp0;
@@ -1304,4 +1304,30 @@ static void sub_800D434(void)
             }
         }
     }
+}
+
+void sub_800D52C(void (*func)(u16))
+{
+    gUnknown_03004140.unk_44 = func;
+    rfu_setMSCCallback(sub_800CEB0);
+}
+
+void sub_800D544(void (*func)(u8, u8))
+{
+    gUnknown_03004140.unk_40 = func;
+}
+
+u8 sub_800D550(u8 a0, u16 a1)
+{
+    u16 imeBak;
+    if (gUnknown_03004140.unk_09 && a0 == 0 && gUnknown_03004140.unk_30)
+    {
+        return 5;
+    }
+    imeBak = REG_IME;
+    REG_IME = 0;
+    gUnknown_03004140.unk_09 = a0;
+    gUnknown_03004140.unk_32 = a1;
+    REG_IME = imeBak;
+    return 0;
 }
