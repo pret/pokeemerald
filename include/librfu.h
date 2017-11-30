@@ -105,7 +105,10 @@ struct RfuIntrStruct
 
 struct RfuUnk1
 {
-    u8 unk_0[0x14];
+    u16 unk_0;
+    u8 unk_2;
+    u8 unk_3;
+    u8 fill_4[0x10];
     u32 unk_14;
     u32 unk_18;
     struct RfuIntrStruct unk_1c;
@@ -114,9 +117,13 @@ struct RfuUnk1
 struct RfuUnk2
 {
     u16 unk_0;
-    u8 fill_2[0x32];
+    u8 fill_2[0x18];
+    u8 unk_1a;
+    u8 fill_1b[0x19];
     u16 unk_34;
-    u8 fill_36[0x2b];
+    u8 fill_36[0x18];
+    u8 unk_4e;
+    u8 fill_4f[0x12];
     u8 unk_61;
     u8 fill_62[6];
     u32 unk_68;
@@ -132,14 +139,6 @@ struct RfuUnk3
     u32 unk_dc;
 };
 
-struct RfuUnkSub
-{
-    u16 unk_00;
-    u8 unk_02;
-    u16 unk_04;
-    u8 filler_06[26];
-};
-
 struct RfuUnk5
 {
     u8 unk_00;
@@ -152,7 +151,12 @@ struct RfuUnk5
     u8 unk_07;
     u8 unk_08;
     u8 filler_09[11];
-    struct RfuUnkSub unk_14[4];
+    struct RfuUnk5Sub {
+        u16 unk_00;
+        u8 unk_02;
+        u16 unk_04;
+        u8 filler_06[26];
+    } unk_14[4];
 };
 
 extern struct RfuStruct *gRfuState;
@@ -199,3 +203,6 @@ void rfu_clearSlot(u8 a0, u8 a1);
 bool16 rfu_CHILD_getConnectRecoveryStatus(u8 *status);
 bool16 rfu_getConnectParentStatus(u8 *status, u8 *a1);
 bool16 rfu_UNI_PARENT_getDRAC_ACK(u8 *a0);
+void rfu_REQ_disconnect(u8 who);
+void rfu_changeSendTarget(u8 a0, u8 who, u8 a2);
+void rfu_NI_stopReceivingData(u8 who);

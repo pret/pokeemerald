@@ -73,7 +73,7 @@ struct UnkRfuStruct_1 {
     /* 0x032 */ u16 unk_32;
     /* 0x034 */ u16 unk_34[4];
     /* 0x03c */ struct UnkLinkRfuStruct_02022B2C *unk_3c;
-    /* 0x040 */ void (*unk_40)(u8);
+    /* 0x040 */ void (*unk_40)(u8, u8);
     /* 0x044 */ void (*unk_44)(u16);
     /* 0x048 */ u8 filler_48[0xe78];
 };

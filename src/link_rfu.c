@@ -24,20 +24,20 @@ EWRAM_DATA struct UnkLinkRfuStruct_02022B2C gUnknown_02022B2C = {};
 // Static ROM declarations
 
 static void sub_800C000(void);
-void sub_800CEB0(u16 r6);
-void sub_800C7B4(u16 r8, u16 r6);
-void sub_800D30C(u8 a0, u8 a1);
-void sub_800D334(u8 a0);
-void sub_800D610(void);
-void sub_800D630(void);
+static void sub_800C7B4(u16 r8, u16 r6);
 static void sub_800C744(u32 a0);
+void sub_800CEB0(u16 r6);
 static void sub_800CF34(void);
 static void sub_800D158(void);
 static void sub_800D20C(void);
 static void sub_800D268(void);
 static u8 sub_800D294(void);
-void sub_800D358(void);
+void sub_800D30C(u8 a0, u8 a1);
+static void sub_800D334(u8 a0);
+static void sub_800D358(u8 a0);
 void sub_800D434(void);
+void sub_800D610(void);
+void sub_800D630(void);
 
 // .rodata
 
@@ -85,7 +85,7 @@ void rfu_REQ_sendData_wrapper(u8 r2)
     rfu_REQ_sendData(r2);
 }
 
-int sub_800BF4C(void (*func1)(u8), void (*func2)(u16))
+int sub_800BF4C(void (*func1)(u8, u8), void (*func2)(u16))
 {
     if (func1 == NULL)
     {
@@ -613,7 +613,7 @@ static void sub_800C744(u32 a0)
     }
 }
 
-void sub_800C7B4(u16 r8, u16 r6)
+static void sub_800C7B4(u16 r8, u16 r6)
 {
     u8 sp0;
     register u8 *stwiRecvBuffer asm("r0");
@@ -870,7 +870,7 @@ void sub_800C7B4(u16 r8, u16 r6)
             {
                 stwiRecvBuffer = rfu_getSTWIRecvBuffer();
                 gUnknown_03004140.unk_14 = stwiRecvBuffer[8];
-                sub_800D358();
+                sub_800D358(gUnknown_03004140.unk_14);
                 if (gUnknown_03004140.unk_30)
                 {
                     gUnknown_03004140.unk_30 &= ~gUnknown_03004140.unk_14;
@@ -1207,4 +1207,59 @@ static u8 sub_800D294(void)
         }
     }
     return flags;
+}
+
+void sub_800D30C(u8 a0, u8 a1)
+{
+    if (gUnknown_03004140.unk_40 != NULL)
+    {
+        gUnknown_03004140.unk_40(a0, a1);
+    }
+    gUnknown_03004140.unk_14 = gUnknown_03004140.unk_16 = 0;
+}
+
+static void sub_800D334(u8 a0)
+{
+    u8 unk_0e_bak = gUnknown_03004140.unk_0e;
+    gUnknown_03004140.unk_0e = 1;
+    rfu_REQ_disconnect(a0);
+    rfu_waitREQComplete();
+    gUnknown_03004140.unk_0e = unk_0e_bak;
+}
+
+static void sub_800D358(u8 a0)
+{
+    u8 i;
+
+    if (gUnknown_03007890->unk_04)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            if (gUnknown_03007880[i]->unk_0 & 0x8000 && gUnknown_03007880[i]->unk_1a & a0)
+            {
+                rfu_changeSendTarget(0x20, i, gUnknown_03007880[i]->unk_1a & ~a0);
+            }
+        }
+    }
+    if (gUnknown_03007890->unk_05)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            if (gUnknown_03007880[i]->unk_34 & 0x8000 && gUnknown_03007880[i]->unk_4e & a0)
+            {
+                rfu_NI_stopReceivingData(i);
+            }
+        }
+    }
+    if (gUnknown_03007890->unk_06)
+    {
+        gUnknown_03007890->unk_06 &= ~a0;
+        for (i = 0; i < 4; i++)
+        {
+            if (gUnknown_03007870[i]->unk_0 == 0x8024 && a0 & gUnknown_03007870[i]->unk_3)
+            {
+                gUnknown_03007870[i]->unk_3 &= ~a0;
+            }
+        }
+    }
 }
