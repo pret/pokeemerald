@@ -1413,3 +1413,59 @@ void sub_800D658(void)
         }
     }
 }
+
+// TODO: Is there a file boundary here?
+
+void sub_800D6C8(struct UnkRfuStruct_2_Sub_124 *ptr)
+{
+    int i;
+    int j;
+
+    for (i = 0; i < 32; i++)
+    {
+        for (j = 0; j < 70; j++)
+        {
+            ptr->unk_00[i][j] = 0;
+        }
+    }
+    ptr->unk_8c1 = 0;
+    ptr->unk_8c0 = 0;
+    ptr->unk_8c2 = 0;
+    ptr->unk_8c3 = 0;
+}
+
+void sub_800D724(struct UnkRfuStruct_2_Sub_9e8 *ptr)
+{
+    int i;
+    int j;
+
+    for (i = 0; i < 40; i++)
+    {
+        for (j = 0; j < 14; j++)
+        {
+            ptr->unk_00[i][j] = 0;
+        }
+    }
+    ptr->unk_231 = 0;
+    ptr->unk_230 = 0;
+    ptr->unk_232 = 0;
+    ptr->unk_233 = 0;
+}
+
+void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr)
+{
+    int i;
+    int j;
+
+    for (i = 0; i < 2; i++)
+    {
+        for (j = 0; j < 256; j++)
+        {
+            ptr->unk_00[i][j] = 0;
+        }
+    }
+    ptr->unk_201 = 0;
+    ptr->unk_200 = 0;
+    ptr->unk_202 = 0;
+    ptr->unk_203 = 0;
+}

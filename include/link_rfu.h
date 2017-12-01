@@ -78,11 +78,39 @@ struct UnkRfuStruct_1 {
     /* 0x048 */ u8 filler_48[0xe78];
 };
 
+struct UnkRfuStruct_2_Sub_124 {
+    /* 0x000 */ u8 unk_00[32][70];
+    /* 0x8c0 */ vu8 unk_8c0;
+    /* 0x8c1 */ vu8 unk_8c1;
+    /* 0x8c2 */ vu8 unk_8c2;
+    /* 0x8c3 */ vu8 unk_8c3;
+};
+
+struct UnkRfuStruct_2_Sub_9e8 {
+    /* 0x000 */ u8 unk_00[40][14];
+    /* 0x230 */ vu8 unk_230;
+    /* 0x231 */ vu8 unk_231;
+    /* 0x232 */ vu8 unk_232;
+    /* 0x233 */ vu8 unk_233;
+};
+
+struct UnkRfuStruct_Sub_Unused {
+    /* 0x000 */ u8 unk_00[2][256];
+    /* 0x200 */ vu8 unk_200;
+    /* 0x201 */ vu8 unk_201;
+    /* 0x202 */ vu8 unk_202;
+    /* 0x203 */ vu8 unk_203;
+};
+
 struct UnkRfuStruct_2 {
     /* 0x000 */ u8 filler_00[13];
     /* 0x00d */ u8 playerCount;
-    /* 0x00e */ u8 filler_0e[0xcea];
-};
+    /* 0x00e */ u8 filler_0e[0x5e];
+    /* 0x06c */ u8 filler_6c[0xb8];
+    /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
+    /* 0x9e8 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
+    /* 0xc1c */ u8 filler_c1c[0xdc];
+}; // size = 0xcf8
 
 // Exported RAM declarations
 
