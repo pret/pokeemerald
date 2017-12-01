@@ -279,7 +279,7 @@ PetalburgWoods_EventScript_22E26D:: @ 822E26D
 
 PetalburgWoods_EventScript_22E284:: @ 822E284
 	trainerbattle 2, TRAINER_JAMES_1, 0, PetalburgWoods_Text_22E827, PetalburgWoods_Text_22E86B, PetalburgWoods_EventScript_22E2C5
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq PetalburgWoods_EventScript_22E31B
 	setvar VAR_0x8004, 621

@@ -663,11 +663,11 @@
 	.byte 0x5d
 	.endm
 
-	.macro ontrainerbattleend 
+	.macro gotobattleendscript 
 	.byte 0x5e
 	.endm
 
-	.macro ontrainerbattleendgoto 
+	.macro gototrainerscript 
 	.byte 0x5f
 	.endm
 

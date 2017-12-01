@@ -259,7 +259,7 @@ Route116_EventScript_1F2EA0:: @ 81F2EA0
 
 Route116_EventScript_1F2EB7:: @ 81F2EB7
 	trainerbattle 2, TRAINER_JERRY_1, 0, Route116_Text_29BD0C, Route116_Text_29BD66, Route116_EventScript_1F2EF8
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2F4E
 	setvar VAR_0x8004, 273
@@ -320,7 +320,7 @@ Route116_EventScript_1F2F7C:: @ 81F2F7C
 
 Route116_EventScript_1F2F93:: @ 81F2F93
 	trainerbattle 2, TRAINER_KAREN_1, 0, Route116_Text_29BFC5, Route116_Text_29BFFA, Route116_EventScript_1F2FD4
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F302A
 	setvar VAR_0x8004, 280

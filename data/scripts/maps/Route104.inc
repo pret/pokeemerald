@@ -882,7 +882,7 @@ Route104_EventScript_1ED376:: @ 81ED376
 
 Route104_EventScript_1ED38D:: @ 81ED38D
 	trainerbattle 2, TRAINER_HALEY_1, 0, Route104_Text_29563A, Route104_Text_29566F, Route104_EventScript_1ED3CE
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route104_EventScript_1ED424
 	setvar VAR_0x8004, 604
@@ -933,7 +933,7 @@ Route104_EventScript_1ED424:: @ 81ED424
 
 Route104_EventScript_1ED43B:: @ 81ED43B
 	trainerbattle 2, TRAINER_WINSTON_1, 0, Route104_Text_295870, Route104_Text_2958AD, Route104_EventScript_1ED47C
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route104_EventScript_1ED4D2
 	setvar VAR_0x8004, 136
@@ -984,7 +984,7 @@ Route104_EventScript_1ED4D2:: @ 81ED4D2
 
 Route104_EventScript_1ED4E9:: @ 81ED4E9
 	trainerbattle 2, TRAINER_CINDY_1, 0, Route104_Text_295A7E, Route104_Text_295ABB, Route104_EventScript_1ED52A
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route104_EventScript_1ED580
 	setvar VAR_0x8004, 114

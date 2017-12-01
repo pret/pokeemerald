@@ -14,7 +14,7 @@ enum // TRANSITION_MUGSHOT
     MUGSHOT_PHOEBE,
     MUGSHOT_GLACIA,
     MUGSHOT_DRAKE,
-    MUGSHOT_STEVEN,
+    MUGSHOT_CHAMPION,
 };
 
 #define MUGSHOTS_NO             5
@@ -38,7 +38,7 @@ enum // TRANSITION_MUGSHOT
 #define B_TRANSITION_PHOEBE                 13
 #define B_TRANSITION_GLACIA                 14
 #define B_TRANSITION_DRAKE                  15
-#define B_TRANSITION_STEVEN                 16
+#define B_TRANSITION_CHAMPION               16
 // added in Emerald
 #define B_TRANSITION_AQUA                   17
 #define B_TRANSITION_MAGMA                  18
@@ -48,5 +48,22 @@ enum // TRANSITION_MUGSHOT
 #define B_TRANSITION_KYORGE                 22
 #define B_TRANSITION_GROUDON                23
 #define B_TRANSITION_RAYQUAZA               24
+#define B_TRANSITION_25                     25
+#define B_TRANSITION_26                     26
+#define B_TRANSITION_27                     27
+#define B_TRANSITION_28                     28
+#define B_TRANSITION_29                     29
+#define B_TRANSITION_30                     30
+#define B_TRANSITION_31                     31
+#define B_TRANSITION_32                     32
+#define B_TRANSITION_33                     33
+#define B_TRANSITION_34                     34
+#define B_TRANSITION_35                     35
+#define B_TRANSITION_36                     36
+#define B_TRANSITION_37                     37
+#define B_TRANSITION_38                     38
+#define B_TRANSITION_39                     39
+#define B_TRANSITION_40                     40
+#define B_TRANSITION_41                     41
 
 #endif // GUARD_BATTLE_TRANSITION_H

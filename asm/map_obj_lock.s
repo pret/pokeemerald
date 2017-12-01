@@ -348,7 +348,7 @@ sub_8098630: @ 8098630
 	bl sub_80B47E0
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030060A8
+	ldr r0, =gNoOfApproachingTrainers
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080986E0

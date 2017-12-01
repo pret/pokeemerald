@@ -50,7 +50,7 @@ MossdeepCity_Gym_EventScript_220885:: @ 8220885
 
 MossdeepCity_Gym_EventScript_220898:: @ 8220898
 	trainerbattle 8, TRAINER_TATE_AND_LIZA_1, 0, MossdeepCity_Gym_Text_221783, MossdeepCity_Gym_Text_2218EC, MossdeepCity_Gym_Text_221BCE, MossdeepCity_Gym_EventScript_2208D1
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq MossdeepCity_Gym_EventScript_22097E
 	checkflag FLAG_0x0AB

@@ -63,7 +63,7 @@ Route105_EventScript_1EE2BD:: @ 81EE2BD
 
 Route105_EventScript_1EE2D4:: @ 81EE2D4
 	trainerbattle 2, TRAINER_ANDRES_1, 0, Route105_Text_2960A9, Route105_Text_2960DB, Route105_EventScript_1EE300
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route105_EventScript_1EE31F
 	msgbox Route105_Text_2960FA, 4

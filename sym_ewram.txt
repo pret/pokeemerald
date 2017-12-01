@@ -708,11 +708,7 @@ gUnknown_02038BC6: @ 2038BC6
 
 	.include "src/battle_setup.o"
 
-gUnknown_02038BF8: @ 2038BF8
-	.space 0x1
-
-gUnknown_02038BF9: @ 2038BF9
-	.space 0x3
+.align 2
 
 gApproachingTrainerId: @ 2038BFC
 	.space 0x4

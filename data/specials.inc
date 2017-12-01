@@ -61,17 +61,17 @@ gSpecials:: @ 81DBA64
 	def_special FieldObjectInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
-	def_special sub_80B170C
-	def_special sub_80B1A14
-	def_special special_trainer_unable_to_battle
-	def_special check_trainer_flag
+	def_special GetTrainerBattleMode
+	def_special ShowTrainerIntroSpeech
+	def_special ShowTrainerCantBattleSpeech
+	def_special GetTrainerFlag
 	def_special sub_80B45AC
 	def_special SetUpTrainerEncounterMusic
-	def_special sub_80B226C
-	def_special sub_80B22A0
-	def_special sub_80B19EC
+	def_special ShouldTryRematchBattle
+	def_special IsTrainerReadyForRematch
+	def_special BattleSetup_StartRematchBattle
 	def_special sub_80C7578
-	def_special sub_80F92F8
+	def_special HasEnoughMonsForDoubleBattle
 	def_special TurnOffTVScreen
 	def_special DoTVShow
 	def_special DoPokeNews
@@ -415,7 +415,7 @@ gSpecials:: @ 81DBA64
 	def_special PutLilycoveContestLadyShowOnTheAir
 	def_special sub_813B880
 	def_special sub_81A085C
-	def_special CheckIfMultipleTrainersWantBattle
+	def_special ShouldTryGetTrainerScript
 	def_special AddMapNamePopUpWindowTask
 	def_special AddMapNamePopUpWindowTask
 	def_special sub_81BE994

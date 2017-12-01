@@ -48,7 +48,7 @@ Route125_EventScript_1F67E9:: @ 81F67E9
 
 Route125_EventScript_1F6800:: @ 81F6800
 	trainerbattle 2, TRAINER_ERNEST_1, 0, Route125_Text_2A16FC, Route125_Text_2A173A, Route125_EventScript_1F682C
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route125_EventScript_1F684B
 	msgbox Route125_Text_2A1755, 4

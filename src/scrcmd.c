@@ -656,7 +656,7 @@ bool8 ScrCmd_fadescreenspeed(struct ScriptContext *ctx)
 bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
 {
     u8 mode = ScriptReadByte(ctx);
-    
+
     switch (mode)
     {
         case 1:
@@ -1445,7 +1445,7 @@ bool8 ScrCmd_drawboxtext(struct ScriptContext *ctx)
     u8 top = ScriptReadByte(ctx);
     u8 multichoiceId = ScriptReadByte(ctx);
     u8 ignoreBPress = ScriptReadByte(ctx);
-    
+
     /*if (Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
         ScriptContext1_Stop();
@@ -1501,31 +1501,31 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     u8 y;
 
     StringExpandPlaceholders(gStringVar4, ptr + 6);
-    
+
     width = GetStringWidth(6, gStringVar4, -1) / 8;
-    
+
     if (width > 0x1C)
         width = 0x1C;
-    
+
     for (i = 0, height = 4; gStringVar4[i] != 0xFF;)
     {
         if (gStringVar4[i++] == 0xFE)
             height += 3;
     }
-    
+
     if (height > 0x12)
         height = 0x12;
-    
+
     x = width + 2;
     temp1 = (0x1E - x) / 2;
     x = temp1 + 1;
     temp1 = ((x - temp1 - 1) * 8 + 3);
-    
+
     y = height + 2;
     temp2 = (0x14 - y) / 2;
     y = temp2 + 2;
     temp2 = ((y - temp2 - 1) * 8);
-    
+
     sub_8198A50(&template1, 0, x, y, width, height, 0xF, 0x1);
     template2 = template1;
     gUnknown_03000F30 = AddWindow(&template2);
@@ -1924,7 +1924,7 @@ bool8 ScrCmd_hidemoneybox(struct ScriptContext *ctx)
 {
     /*u8 x = ScriptReadByte(ctx);
     u8 y = ScriptReadByte(ctx);*/
-    
+
     HideMoneyBox();
     return FALSE;
 }
@@ -1979,13 +1979,13 @@ bool8 ScrCmd_dotrainerbattle(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_ontrainerbattleend(struct ScriptContext *ctx)
+bool8 ScrCmd_gotobattleendscript(struct ScriptContext *ctx)
 {
     ctx->scriptPtr = BattleSetup_GetScriptAddrAfterBattle();
     return FALSE;
 }
 
-bool8 ScrCmd_ontrainerbattleendgoto(struct ScriptContext *ctx)
+bool8 ScrCmd_gototrainerscript(struct ScriptContext *ctx)
 {
     ctx->scriptPtr = BattleSetup_GetTrainerPostBattleScript();
     return FALSE;
@@ -1995,7 +1995,7 @@ bool8 ScrCmd_checktrainerflag(struct ScriptContext *ctx)
 {
     u16 index = VarGet(ScriptReadHalfword(ctx));
 
-    ctx->comparisonResult = HasTrainerAlreadyBeenFought(index);
+    ctx->comparisonResult = HasTrainerBeenFought(index);
     return FALSE;
 }
 
@@ -2003,7 +2003,7 @@ bool8 ScrCmd_settrainerflag(struct ScriptContext *ctx)
 {
     u16 index = VarGet(ScriptReadHalfword(ctx));
 
-    trainer_flag_set(index);
+    SetTrainerFlag(index);
     return FALSE;
 }
 
@@ -2011,7 +2011,7 @@ bool8 ScrCmd_cleartrainerflag(struct ScriptContext *ctx)
 {
     u16 index = VarGet(ScriptReadHalfword(ctx));
 
-    trainer_flag_clear(index);
+    ClearTrainerFlag(index);
     return FALSE;
 }
 
@@ -2374,7 +2374,7 @@ bool8 ScrCmd_checkmonobedience(struct ScriptContext *ctx)
 bool8 ScrCmd_cmdCF(struct ScriptContext *ctx)
 {
     const u8* v1 = sub_8099244();
-    
+
     if (v1)
     {
         ((u8*)gUnknown_020375C0) = ctx->scriptPtr;

@@ -1381,7 +1381,7 @@ _080850C8:
 	bl prev_quest_postbuffer_cursor_backup_reset
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_80B21B4
+	bl TryUpdateRandomTrainerRematches
 	bl DoTimeBasedEvents
 	bl sub_80AEDBC
 	bl sub_8085B2C
@@ -1478,7 +1478,7 @@ _080851A2:
 	asrs r1, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_80B21B4
+	bl TryUpdateRandomTrainerRematches
 	cmp r7, 0x1
 	beq _080851EE
 	bl DoTimeBasedEvents

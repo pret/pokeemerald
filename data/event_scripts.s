@@ -842,101 +842,101 @@ EventScript_271356:: @ 8271356
 	special SetUpTrainerEncounterMusic
 	special sub_80B45AC
 	waitstate
-	goto EventScript_27143C
+	goto EventScript_ShowTrainerIntroMsg
 
 EventScript_271362:: @ 8271362
 	lock
 	faceplayer
-	applymovement 0x800F, Movement_27143A
+	applymovement VAR_LAST_TALKED, Movement_27143A
 	waitmovement 0
-	specialvar VAR_RESULT, check_trainer_flag
+	specialvar VAR_RESULT, GetTrainerFlag
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 5, EventScript_271389
 	special SetUpTrainerEncounterMusic
 	special sub_80B16D8
-	goto EventScript_27143C
+	goto EventScript_ShowTrainerIntroMsg
 
 EventScript_271389:: @ 8271389
-	ontrainerbattleend
+	gotobattleendscript
 
-EventScript_27138A:: @ 827138A
+EventScript_TryDoDoubleTrainerBattle:: @ 827138A
 	lock
 	faceplayer
 	call EventScript_27142F
-	specialvar VAR_RESULT, check_trainer_flag
+	specialvar VAR_RESULT, GetTrainerFlag
 	compare_var_to_value VAR_RESULT, 0
 	goto_if 5, EventScript_2713C1
-	special sub_80F92F8
+	special HasEnoughMonsForDoubleBattle
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 5, EventScript_2713BA
+	goto_if 5, EventScript_NotEnoughMonsForDoubleBattle
 	special SetUpTrainerEncounterMusic
 	special sub_80B16D8
-	goto EventScript_27143C
+	goto EventScript_ShowTrainerIntroMsg
 
-EventScript_2713BA:: @ 82713BA
-	special special_trainer_unable_to_battle
+EventScript_NotEnoughMonsForDoubleBattle:: @ 82713BA
+	special ShowTrainerCantBattleSpeech
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
 EventScript_2713C1:: @ 82713C1
-	ontrainerbattleend
+	gotobattleendscript
 
 EventScript_2713C2:: @ 82713C2
-	applymovement 0x800F, Movement_27143A
+	applymovement VAR_LAST_TALKED, Movement_27143A
 	waitmovement 0
 	special SetUpTrainerEncounterMusic
 	trainerbattlebegin
-	ontrainerbattleend
+	gotobattleendscript
 
 EventScript_2713D1:: @ 82713D1
 	call EventScript_27142F
-	specialvar VAR_RESULT, sub_80B22A0
+	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq EventScript_2713F7
 	special SetUpTrainerEncounterMusic
 	special sub_80B16D8
-	special sub_80B1A14
+	special ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
-	special sub_80B19EC
+	special BattleSetup_StartRematchBattle
 	waitstate
 	releaseall
 	end
 
 EventScript_2713F7:: @ 82713F7
-	ontrainerbattleend
+	gotobattleendscript
 
-EventScript_2713F8:: @ 82713F8
-	specialvar VAR_RESULT, sub_80B22A0
+EventScript_TryDoDoubleRematchBattle:: @ 82713F8
+	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq EventScript_271427
-	special sub_80F92F8
+	special HasEnoughMonsForDoubleBattle
 	compare_var_to_value VAR_RESULT, 0
-	goto_if 5, EventScript_271428
+	goto_if 5, EventScript_NotEnoughMonsForDoubleRematchBattle
 	special SetUpTrainerEncounterMusic
 	special sub_80B16D8
-	special sub_80B1A14
+	special ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
-	special sub_80B19EC
+	special BattleSetup_StartRematchBattle
 	waitstate
 	releaseall
 	end
 
 EventScript_271427:: @ 8271427
-	ontrainerbattleend
+	gotobattleendscript
 
-EventScript_271428:: @ 8271428
-	special special_trainer_unable_to_battle
+EventScript_NotEnoughMonsForDoubleRematchBattle:: @ 8271428
+	special ShowTrainerCantBattleSpeech
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
 EventScript_27142F:: @ 827142F
-	applymovement 0x800F, Movement_27143A
+	applymovement VAR_LAST_TALKED, Movement_27143A
 	waitmovement 0
 	return
 
@@ -944,18 +944,18 @@ Movement_27143A: @ 827143A
 	step_59
 	step_end
 
-EventScript_27143C:: @ 827143C
-	special sub_80B1A14
+EventScript_ShowTrainerIntroMsg:: @ 827143C
+	special ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
 	special sub_80B45D0
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq EventScript_271356
-	goto EventScript_271454
+	goto EventScript_DoTrainerBattle
 
-EventScript_271454:: @ 8271454
+EventScript_DoTrainerBattle:: @ 8271454
 	trainerbattlebegin
-	specialvar VAR_RESULT, sub_80B170C
+	specialvar VAR_RESULT, GetTrainerBattleMode
 	compare_var_to_value VAR_RESULT, 0
 	goto_eq EventScript_271491
 	compare_var_to_value VAR_RESULT, 2
@@ -968,7 +968,7 @@ EventScript_271454:: @ 8271454
 	goto_eq EventScript_271491
 
 EventScript_271491:: @ 8271491
-	ontrainerbattleendgoto
+	gototrainerscript
 	releaseall
 	end
 
@@ -4082,15 +4082,15 @@ Std_8:: @ 82742C9
 	delay 30
 	return
 
-LavaridgeTown_Gym_1F_EventScript_2742E6:: @ 82742E6
-	special CheckIfMultipleTrainersWantBattle
+EventScript_TryGetTrainerScript:: @ 82742E6
+	special ShouldTryGetTrainerScript
 	compare_var_to_value VAR_RESULT, 1
-	goto_eq LavaridgeTown_Gym_1F_EventScript_2742F6
+	goto_eq EventScript_GotoTrainerScript
 	releaseall
 	end
 
-LavaridgeTown_Gym_1F_EventScript_2742F6:: @ 82742F6
-	ontrainerbattleendgoto
+EventScript_GotoTrainerScript:: @ 82742F6
+	gototrainerscript
 	releaseall
 	end
 
@@ -13969,12 +13969,12 @@ EventScript_2C83F0:: @ 82C83F0
 	closemessage
 	end
 
-Text_2C840A:: @ 82C840A
+Text_ThisIsATestSignpostMsg:: @ 82C840A
 	.string "This is a test message.\n"
 	.string "This is a signpost.$"
 
-EventScript_2C8436:: @ 82C8436
-	msgbox Text_2C840A, 3
+EventScript_TestSignpostMsg:: @ 82C8436
+	msgbox Text_ThisIsATestSignpostMsg, 3
 	end
 
 	.string "It’s very disappointing…$"

@@ -94,8 +94,8 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_turnobject
 	.4byte ScrCmd_trainerbattle
 	.4byte ScrCmd_dotrainerbattle
-	.4byte ScrCmd_ontrainerbattleend
-	.4byte ScrCmd_ontrainerbattleendgoto
+	.4byte ScrCmd_gotobattleendscript
+	.4byte ScrCmd_gototrainerscript
 	.4byte ScrCmd_checktrainerflag
 	.4byte ScrCmd_settrainerflag
 	.4byte ScrCmd_cleartrainerflag

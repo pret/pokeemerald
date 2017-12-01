@@ -63,7 +63,7 @@ Route127_EventScript_1F6ABF:: @ 81F6ABF
 
 Route127_EventScript_1F6AD6:: @ 81F6AD6
 	trainerbattle 2, TRAINER_KOJI_1, 0, Route127_Text_2A264D, Route127_Text_2A2685, Route127_EventScript_1F6B02
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route127_EventScript_1F6B21
 	msgbox Route127_Text_2A26AC, 4

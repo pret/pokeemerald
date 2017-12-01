@@ -87,7 +87,7 @@ SootopolisCity_Gym_1F_Movement_224F42: @ 8224F42
 
 SootopolisCity_Gym_1F_EventScript_224F44:: @ 8224F44
 	trainerbattle 1, TRAINER_JUAN_1, 0, SootopolisCity_Gym_1F_Text_225268, SootopolisCity_Gym_1F_Text_225432, SootopolisCity_Gym_1F_EventScript_224F82
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq SootopolisCity_Gym_1F_EventScript_225025
 	checkflag FLAG_0x0AC

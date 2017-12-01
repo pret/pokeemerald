@@ -488,7 +488,7 @@ MtChimney_EventScript_22F141:: @ 822F141
 
 MtChimney_EventScript_22F14A:: @ 822F14A
 	trainerbattle 2, TRAINER_SHELBY_1, 0, MtChimney_Text_23001D, MtChimney_Text_230076, MtChimney_EventScript_22F176
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq MtChimney_EventScript_22F195
 	msgbox MtChimney_Text_2300A2, 4
@@ -533,7 +533,7 @@ MtChimney_EventScript_22F1F1:: @ 822F1F1
 
 MtChimney_EventScript_22F208:: @ 822F208
 	trainerbattle 2, TRAINER_SAWYER_1, 0, MtChimney_Text_2304B3, MtChimney_Text_2304F7, MtChimney_EventScript_22F234
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq MtChimney_EventScript_22F253
 	msgbox MtChimney_Text_230519, 4

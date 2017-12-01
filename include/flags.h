@@ -1,9 +1,12 @@
 #ifndef GUARD_FLAGS_H
 #define GUARD_FLAGS_H
 
-#define FLAG_340 0x340
 #define FLAG_LEGENDARIES_IN_SOOTOPOLIS  0x53
 #define FLAG_PENDING_DAYCARE_EGG        0x86
+#define FLAG_7E                         0x7E
+#define FLAG_HAS_MATCH_CALL             0x12F
+#define FLAG_MATCH_CALL_REGISTERED      0x15C
+#define FLAG_340                        0x340
 
 #define FLAG_TRAINER_FLAG_START  0x500
 

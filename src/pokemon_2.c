@@ -1155,7 +1155,7 @@ u8 GetMonsStateToDoubles_2(void)
     s32 aliveCount = 0;
     s32 i;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL);
         if (species != SPECIES_EGG && species != SPECIES_NONE

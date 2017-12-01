@@ -721,7 +721,7 @@ TryGetInvisibleMapObjectScript: @ 809C458
 	ldr r2, [r0, 0x8]
 	cmp r2, 0
 	bne _0809C490
-	ldr r0, =EventScript_2C8436
+	ldr r0, =EventScript_TestSignpostMsg
 	b _0809C532
 	.pool
 _0809C490:
@@ -1365,7 +1365,7 @@ per_step_scripts: @ 809C9F4
 	bne _0809CA04
 	b _0809CB24
 _0809CA04:
-	bl sub_80B215C
+	bl IncrementRematchStepCounter
 	bl AdjustFriendship_step
 	bl sub_81D4998
 	ldr r0, =gPlayerAvatar
