@@ -32,11 +32,11 @@ static void sub_800D158(void);
 static void sub_800D20C(void);
 static void sub_800D268(void);
 static u8 sub_800D294(void);
-void sub_800D30C(u8 a0, u8 a1);
+static void sub_800D30C(u8 a0, u8 a1);
 static void sub_800D334(u8 a0);
 static void sub_800D358(u8 a0);
 static void sub_800D434(void);
-void sub_800D610(void);
+static void sub_800D610(void);
 void sub_800D630(void);
 
 // .rodata
@@ -1209,7 +1209,7 @@ static u8 sub_800D294(void)
     return flags;
 }
 
-void sub_800D30C(u8 a0, u8 a1)
+static void sub_800D30C(u8 a0, u8 a1)
 {
     if (gUnknown_03004140.unk_40 != NULL)
     {
@@ -1361,4 +1361,55 @@ u8 sub_800D5D0(u8 a0)
         gUnknown_03004140.unk_0b = 0;
     }
     return 0;
+}
+
+static void sub_800D610(void)
+{
+    if (gUnknown_03004140.unk_02)
+    {
+        gUnknown_03004140.unk_02 = 0;
+        sub_800D30C(0x45, 0x00);
+    }
+}
+
+void sub_800D630(void)
+{
+    if (gUnknown_03004140.unk_02 == 0)
+    {
+        sub_800D30C(0x45, 0x00);
+    }
+    else if (gUnknown_03004140.unk_02 == 1)
+    {
+        gUnknown_03004140.unk_02 = 2;
+    }
+}
+
+void sub_800D658(void)
+{
+    if (gUnknown_03004140.unk_07)
+    {
+        switch (gUnknown_03004140.unk_04)
+        {
+            case 5:
+                gUnknown_03004140.unk_07 = 3;
+                gUnknown_03004140.unk_04 = 9;
+                break;
+            case 6:
+                gUnknown_03004140.unk_07 = 2;
+                gUnknown_03004140.unk_1a = 1;
+                break;
+            case 7:
+            case 8:
+                gUnknown_03004140.unk_07 = 2;
+                break;
+            case 9:
+            case 10:
+                gUnknown_03004140.unk_1a = 40;
+                break;
+            case 11:
+                gUnknown_03004140.unk_1a = 40;
+                gUnknown_03004140.unk_04 = 10;
+                break;
+        }
+    }
 }
