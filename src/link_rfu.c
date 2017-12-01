@@ -1509,3 +1509,90 @@ void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
         q1->unk_8c3 = 1;
     }
 }
+
+void sub_800D888(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
+{
+    int i;
+    u16 imeBak;
+
+    if (q1->unk_232 < 40)
+    {
+        imeBak = REG_IME;
+        REG_IME = 0;
+        for (i = 0; i < 14; i++)
+        {
+            if (q2[i] != 0)
+            {
+                break;
+            }
+        }
+        if (i != 14)
+        {
+            for (i = 0; i < 14; i++)
+            {
+                q1->unk_00[q1->unk_230][i] = q2[i];
+            }
+            q1->unk_230++;
+            q1->unk_230 %= 40;
+            q1->unk_232++;
+            for (i = 0; i < 14; i++)
+            {
+                q2[i] = 0;
+            }
+        }
+        REG_IME = imeBak;
+    }
+    else
+    {
+        q1->unk_233 = 1;
+    }
+}
+
+bool8 sub_800D934(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
+{
+    u16 imeBak;
+    int i;
+
+    imeBak = REG_IME;
+    REG_IME = 0;
+    if (q1->unk_8c0 == q1->unk_8c1 || q1->unk_8c3 != 0)
+    {
+        for (i = 0; i < 70; i++)
+        {
+            q2[i] = 0;
+        }
+        REG_IME = imeBak;
+        return FALSE;
+    }
+    for (i = 0; i < 70; i++)
+    {
+        q2[i] = q1->unk_00[q1->unk_8c1][i];
+    }
+    q1->unk_8c1++;
+    q1->unk_8c1 %= 32;
+    q1->unk_8c2--;
+    REG_IME = imeBak;
+    return TRUE;
+}
+
+bool8 sub_800D9DC(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
+{
+    int i;
+    u16 imeBak;
+
+    if (q1->unk_230 == q1->unk_231 || q1->unk_233 != 0)
+    {
+        return FALSE;
+    }
+    imeBak = REG_IME;
+    REG_IME = 0;
+    for (i = 0; i < 14; i++)
+    {
+        q2[i] = q1->unk_00[q1->unk_231][i];
+    }
+    q1->unk_231++;
+    q1->unk_231 %= 40;
+    q1->unk_232--;
+    REG_IME = imeBak;
+    return TRUE;
+}
