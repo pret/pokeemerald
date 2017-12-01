@@ -82,6 +82,7 @@ extern const u8 gText_NoRegistry[];
 extern const u8 gText_OkayToDeleteFromRegistry[];
 extern const u8 gText_RegisteredDataDeleted[];
 extern const u8 gUnknown_085EA79D[];
+extern const u8 gText_PkmnFainted3[];
 extern const u8 gText_Coins[];
 
 #endif //GUARD_STRINGS_H
