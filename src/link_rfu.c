@@ -1469,3 +1469,43 @@ void sub_800D780(struct UnkRfuStruct_Sub_Unused *ptr)
     ptr->unk_202 = 0;
     ptr->unk_203 = 0;
 }
+
+void sub_800D7D8(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2)
+{
+    int i;
+    u16 imeBak;
+    u8 count;
+
+    if (q1->unk_8c2 < 32)
+    {
+        imeBak = REG_IME;
+        REG_IME = 0;
+        count = 0;
+        for (i = 0; i < 70; i += 14)
+        {
+            if (q2[i] == 0 && q2[i + 1] == 0)
+            {
+                count++;
+            }
+        }
+        if (count != 5)
+        {
+            for (i = 0; i < 70; i++)
+            {
+                q1->unk_00[q1->unk_8c0][i] = q2[i];
+            }
+            q1->unk_8c0++;
+            q1->unk_8c0 %= 32;
+            q1->unk_8c2++;
+            for (i = 0; i < 70; i++)
+            {
+                q2[i] = 0;
+            }
+        }
+        REG_IME = imeBak;
+    }
+    else
+    {
+        q1->unk_8c3 = 1;
+    }
+}

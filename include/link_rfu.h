@@ -109,7 +109,8 @@ struct UnkRfuStruct_2 {
     /* 0x06c */ u8 filler_6c[0xb8];
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
     /* 0x9e8 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
-    /* 0xc1c */ u8 filler_c1c[0xdc];
+    /* 0xc1c */ u8 filler_c1c[0x23];
+    /* 0xc3f */ u8 filler_c3f[0xb9];
 }; // size = 0xcf8
 
 // Exported RAM declarations
