@@ -6383,7 +6383,7 @@ static void atk62(void)
 
 static void atk63_jumptorandomattack(void)
 {
-    if (gBattlescriptCurrInstr[1] != 0)
+    if (gBattlescriptCurrInstr[1])
         gCurrentMove = gRandomMove;
     else
         gChosenMove = gCurrentMove = gRandomMove;
@@ -7790,7 +7790,7 @@ static void atk8E_initmultihitstring(void)
     gBattlescriptCurrInstr++;
 }
 
-static bool8 sub_8051064(void)
+static bool8 TryDoForceSwitchOut(void)
 {
     if (gBattleMons[gBankAttacker].level >= gBattleMons[gBankTarget].level)
     {
@@ -7807,7 +7807,7 @@ static bool8 sub_8051064(void)
         *(gBattleStruct->field_58 + gBankTarget) = gBattlePartyID[gBankTarget];
     }
 
-    gBattlescriptCurrInstr = BattleScript_82DADD8;
+    gBattlescriptCurrInstr = BattleScript_SuccessForceOut;
     return TRUE;
 }
 
@@ -7935,7 +7935,7 @@ static void atk8F_forcerandomswitch(void)
         }
         else
         {
-            if (sub_8051064())
+            if (TryDoForceSwitchOut())
             {
                 do
                 {
@@ -7968,7 +7968,7 @@ static void atk8F_forcerandomswitch(void)
     }
     else
     {
-        sub_8051064();
+        TryDoForceSwitchOut();
     }
 }
 
@@ -9306,7 +9306,7 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
             gBankTarget = GetBankByIdentity(IDENTITY_PLAYER_MON2);
     }
 
-    if (gActionForBanks[gBankTarget] == 0
+    if (gActionForBanks[gBankTarget] == ACTION_USE_MOVE
         && gBankAttacker == *(gBattleStruct->moveTarget + gBankTarget)
         && !(gBattleMons[gBankTarget].status1 & (STATUS_SLEEP | STATUS_FREEZE))
         && gBattleMons[gBankAttacker].hp

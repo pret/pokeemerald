@@ -414,7 +414,7 @@ extern const u8 BattleScript_82DAD4D[];
 extern const u8 BattleScript_BideStoringEnergy[];
 extern const u8 BattleScript_BideAttack[];
 extern const u8 BattleScript_BideNoEnergyToAttack[];
-extern const u8 BattleScript_82DADD8[];
+extern const u8 BattleScript_SuccessForceOut[];
 extern const u8 BattleScript_82DADF1[];
 extern const u8 BattleScript_MistProtected[];
 extern const u8 BattleScript_RageIsBuilding[];

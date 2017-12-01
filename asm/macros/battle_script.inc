@@ -422,10 +422,10 @@
 	.byte \bank
 	.endm
 
-	.macro switchinanim bank, param1
+	.macro switchinanim bank, dontclearsubstitutebit
 	.byte 0x4e
 	.byte \bank
-	.byte \param1
+	.byte \dontclearsubstitutebit
 	.endm
 
 	.macro jumpifcantswitch bank, param1
@@ -1386,4 +1386,8 @@
 	
 	.macro jumpifnostatus3 bank, status, jumpptr
 	jumpifstatus3condition \bank, \status, 0x1, \jumpptr
+	.endm
+	
+	.macro jumpifmovehadnoeffect jumpptr
+	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED, \jumpptr
 	.endm
