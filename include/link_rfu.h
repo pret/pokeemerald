@@ -94,6 +94,13 @@ struct UnkRfuStruct_2_Sub_9e8 {
     /* 0x233 */ vu8 unk_233;
 };
 
+struct UnkRfuStruct_2_Sub_c1c {
+    /* 0x00 */ u8 unk_00[2][14];
+    /* 0x1c */ vu8 unk_1c;
+    /* 0x1d */ vu8 unk_1d;
+    /* 0x1e */ vu8 unk_1e;
+};
+
 struct UnkRfuStruct_Sub_Unused {
     /* 0x000 */ u8 unk_00[2][256];
     /* 0x200 */ vu8 unk_200;
@@ -109,7 +116,8 @@ struct UnkRfuStruct_2 {
     /* 0x06c */ u8 filler_6c[0xb8];
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
     /* 0x9e8 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
-    /* 0xc1c */ u8 filler_c1c[0x23];
+    /* 0xc1c */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
+    /* 0xc3c */ u8 filler_c3c[3];
     /* 0xc3f */ u8 filler_c3f[0xb9];
 }; // size = 0xcf8
 

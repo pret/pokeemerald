@@ -38,6 +38,7 @@ static void sub_800D358(u8 a0);
 static void sub_800D434(void);
 static void sub_800D610(void);
 void sub_800D630(void);
+bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
 
 // .rodata
 
@@ -1595,4 +1596,72 @@ bool8 sub_800D9DC(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2)
     q1->unk_232--;
     REG_IME = imeBak;
     return TRUE;
+}
+
+void sub_800DA68(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2)
+{
+    int i;
+
+    if (q2[1] == 0)
+    {
+        sub_800DAC8(q1, NULL);
+    }
+    else
+    {
+        for (i = 0; i < 14; i++)
+        {
+            q1->unk_00[q1->unk_1c][i] = q2[i];
+        }
+        q1->unk_1c++;
+        q1->unk_1c %= 2;
+        if (q1->unk_1e < 2)
+        {
+            q1->unk_1e++;
+        }
+        else
+        {
+            q1->unk_1d = q1->unk_1c;
+        }
+    }
+}
+
+bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2)
+{
+    int i;
+
+    if (q1->unk_1e == 0)
+    {
+        return FALSE;
+    }
+    if (q2 != NULL)
+    {
+        for (i = 0; i < 14; i++)
+        {
+            q2[i] = q1->unk_00[q1->unk_1d][i];
+        }
+    }
+    q1->unk_1d++;
+    q1->unk_1d %= 2;
+    q1->unk_1e--;
+    return TRUE;
+}
+
+void sub_800DB18(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
+{
+    int i;
+
+    if (q1->unk_202 < 2)
+    {
+        for (i = 0; i < 256; i++)
+        {
+            q1->unk_00[q1->unk_200][i] = q2[i];
+        }
+        q1->unk_200++;
+        q1->unk_200 %= 2;
+        q1->unk_202++;
+    }
+    else
+    {
+        q1->unk_203 = 1;
+    }
 }
