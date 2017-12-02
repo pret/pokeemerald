@@ -3668,10 +3668,10 @@ static void TryDoEventsBeforeFirstTurn(void)
 
     *(&gBattleStruct->turnEffectsTracker) = 0;
     *(&gBattleStruct->turnEffectsBank) = 0;
-    *(&gBattleStruct->field_1A0) = 0;
-    *(&gBattleStruct->field_1A1) = 0;
+    *(&gBattleStruct->wishPerishSongState) = 0;
+    *(&gBattleStruct->wishPerishSongBank) = 0;
     gBattleScripting.atk49_state = 0;
-    gBattleStruct->field_4D = 0;
+    gBattleStruct->faintedActionsState = 0;
     gBattleStruct->turncountersTracker = 0;
     gBattleMoveFlags = 0;
 
@@ -3701,8 +3701,8 @@ static void HandleEndTurn_ContinueBattle(void)
         }
         gBattleStruct->turnEffectsTracker = 0;
         gBattleStruct->turnEffectsBank = 0;
-        gBattleStruct->field_1A0 = 0;
-        gBattleStruct->field_1A1 = 0;
+        gBattleStruct->wishPerishSongState = 0;
+        gBattleStruct->wishPerishSongBank = 0;
         gBattleStruct->turncountersTracker = 0;
         gBattleMoveFlags = 0;
     }
@@ -3720,10 +3720,10 @@ void BattleTurnPassed(void)
         if (TurnBasedEffects() != 0)
             return;
     }
-    if (sub_8041728() != 0)
+    if (HandleFaintedMonActions() != 0)
         return;
-    gBattleStruct->field_4D = 0;
-    if (sub_8041364() != 0)
+    gBattleStruct->faintedActionsState = 0;
+    if (HandleWishPerishSongOnTurnEnd() != 0)
         return;
 
     TurnValuesCleanUp(FALSE);
@@ -5565,9 +5565,9 @@ static void HandleAction_Action9(void)
 
 static void HandleAction_Action11(void)
 {
-    if (!sub_8041728())
+    if (!HandleFaintedMonActions())
     {
-        gBattleStruct->field_4D = 0;
+        gBattleStruct->faintedActionsState = 0;
         gCurrentActionFuncId = ACTION_FINISHED;
     }
 }

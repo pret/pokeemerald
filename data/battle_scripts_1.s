@@ -614,7 +614,7 @@ BattleScript_EffectRoar::
 	jumpifstatus3 TARGET, STATUS3_ROOTED, BattleScript_82DB109
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_ARENA, BattleScript_ButItFailed
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed
 	forcerandomswitch BattleScript_ButItFailed
 
 BattleScript_EffectMultiHit::
@@ -1716,7 +1716,7 @@ BattleScript_EffectBatonPass::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_ARENA, BattleScript_ButItFailed
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed
 	jumpifcantswitch ATK4F_DONT_CHECK_STATUSES | ATTACKER, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
@@ -1949,7 +1949,7 @@ BattleScript_EffectTeleport::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TRAINER, BattleScript_ButItFailed
+	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_ButItFailed
 	getifcantrunfrombattle ATTACKER
 	jumpifbyte EQUAL, gBattleCommunication, 0x1, BattleScript_ButItFailed
 	jumpifbyte EQUAL, gBattleCommunication, 0x2, BattleScript_82DA382
@@ -2845,41 +2845,41 @@ BattleScript_FaintTarget::
 	printstring STRINGID_TARGETFAINTED
 	return
 
-BattleScript_82DA7C4::
+BattleScript_GiveExp::
 	setbyte sGIVEEXP_STATE, 0x0
 	getexp TARGET
 	end2
 	
-BattleScript_82DA7CD::
+BattleScript_HandleFaintedMon::
 	atk24 BattleScript_82DA8F6
-	jumpifbyte NOT_EQUAL, gBattleOutcome, 0, BattleScript_82DA8F5
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TRAINER, BattleScript_82DA816
-	jumpifword NO_COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_82DA816
+	jumpifbyte NOT_EQUAL, gBattleOutcome, 0, BattleScript_FaintedMonEnd
+	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonTryChooseAnother
+	jumpifword NO_COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_FaintedMonTryChooseAnother
 	printstring STRINGID_USENEXTPKMN
 	setbyte gBattleCommunication, 0x0
 	yesnobox
-	jumpifbyte EQUAL, gBattleCommunication + 1, 0x0, BattleScript_82DA816
-	jumpifplayerran BattleScript_82DA8F5
+	jumpifbyte EQUAL, gBattleCommunication + 1, 0x0, BattleScript_FaintedMonTryChooseAnother
+	jumpifplayerran BattleScript_FaintedMonEnd
 	printstring STRINGID_CANTESCAPE2
-BattleScript_82DA816::
-	openpartyscreen 0x3, BattleScript_82DA8F5
+BattleScript_FaintedMonTryChooseAnother::
+	openpartyscreen 0x3, BattleScript_FaintedMonEnd
 	switchhandleorder GBANK_1, 0x2
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TRAINER, BattleScript_82DA8D0
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_LINK, BattleScript_82DA8D0
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_x2000000, BattleScript_82DA8D0
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID, BattleScript_82DA8D0
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_DOUBLE, BattleScript_82DA8D0
-	jumpifword COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_82DA8D0
-	jumpifbyte EQUAL, sBATTLE_STYLE, 0x1, BattleScript_82DA8D0
-	jumpifcantswitch 11, BattleScript_82DA8D0
+	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonChooseAnother
+	jumpifbattletype BATTLE_TYPE_LINK, BattleScript_FaintedMonChooseAnother
+	jumpifbattletype BATTLE_TYPE_x2000000, BattleScript_FaintedMonChooseAnother
+	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID, BattleScript_FaintedMonChooseAnother
+	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonChooseAnother
+	jumpifword COMMON_BITS, gHitMarker, HITMARKER_x400000, BattleScript_FaintedMonChooseAnother
+	jumpifbyte EQUAL, sBATTLE_STYLE, 0x1, BattleScript_FaintedMonChooseAnother
+	jumpifcantswitch 11, BattleScript_FaintedMonChooseAnother
 	printstring STRINGID_ENEMYABOUTTOSWITCHPKMN
 	setbyte gBattleCommunication, 0x0
 	yesnobox
-	jumpifbyte EQUAL, gBattleCommunication + 1, 0x1, BattleScript_82DA8D0
+	jumpifbyte EQUAL, gBattleCommunication + 1, 0x1, BattleScript_FaintedMonChooseAnother
 	setatktoplayer0
-	openpartyscreen 0x81, BattleScript_82DA8D0
+	openpartyscreen 0x81, BattleScript_FaintedMonChooseAnother
 	switchhandleorder ATTACKER, 0x2
-	jumpifbyte EQUAL, gBattleCommunication, 0x6, BattleScript_82DA8D0
+	jumpifbyte EQUAL, gBattleCommunication, 0x6, BattleScript_FaintedMonChooseAnother
 	atknameinbuff1
 	resetintrimidatetracebits ATTACKER
 	hpthresholds2 ATTACKER
@@ -2898,7 +2898,7 @@ BattleScript_82DA816::
 	waitstate
 	switchineffects ATTACKER
 	resetsentmonsvalue
-BattleScript_82DA8D0::
+BattleScript_FaintedMonChooseAnother::
 	drawpartystatussummary GBANK_1
 	getswitchedmondata GBANK_1
 	switchindataupdate GBANK_1
@@ -2909,9 +2909,9 @@ BattleScript_82DA8D0::
 	waitstate
 	various7 ATTACKER
 	switchineffects GBANK_1
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_DOUBLE, BattleScript_82DA8F5
+	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonEnd
 	cancelallactions
-BattleScript_82DA8F5::
+BattleScript_FaintedMonEnd::
 	end2
 
 BattleScript_82DA8F6::
@@ -2936,7 +2936,7 @@ BattleScript_82DA92C::
 	end2
 
 BattleScript_LocalTrainerBattleWon::
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalTwoTrainersDefeated
+	jumpifbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalTwoTrainersDefeated
 	printstring STRINGID_PLAYERDEFEATEDTRAINER1
 	goto BattleScript_LocalBattleWonLoseTexts
 BattleScript_LocalTwoTrainersDefeated::
@@ -2945,7 +2945,7 @@ BattleScript_LocalBattleWonLoseTexts::
 	trainerslidein ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1LOSETEXT
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalBattleWonReward
+	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalBattleWonReward
 	trainerslideout IDENTITY_OPPONENT_MON1
 	waitstate
 	trainerslidein GBANK_1
@@ -2961,10 +2961,10 @@ BattleScript_PayDayMoneyAndPickUpItems::
 	end2
 
 BattleScript_LocalBattleLost::
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_DOME, BattleScript_CheckDomeDrew
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID, BattleScript_LocalBattleLostPrintTrainersWinText
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_x4000000, BattleScript_LocalBattleLostPrintTrainersWinText
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_EREADER_TRAINER, BattleScript_LocalBattleLostEnd
+	jumpifbattletype BATTLE_TYPE_DOME, BattleScript_CheckDomeDrew
+	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID, BattleScript_LocalBattleLostPrintTrainersWinText
+	jumpifbattletype BATTLE_TYPE_x4000000, BattleScript_LocalBattleLostPrintTrainersWinText
+	jumpifbattletype BATTLE_TYPE_EREADER_TRAINER, BattleScript_LocalBattleLostEnd
 	jumpifhalfword EQUAL, gTrainerBattleOpponent_A, 0x400, BattleScript_LocalBattleLostEnd
 BattleScript_LocalBattleLostPrintWhiteOut::
 	printstring STRINGID_PLAYERWHITEOUT
@@ -2976,7 +2976,7 @@ BattleScript_LocalBattleLostEnd::
 BattleScript_CheckDomeDrew::
 	jumpifbyte EQUAL, gBattleOutcome, DREW, BattleScript_LocalBattleLostEnd_
 BattleScript_LocalBattleLostPrintTrainersWinText::
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TRAINER, BattleScript_LocalBattleLostPrintWhiteOut
+	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_LocalBattleLostPrintWhiteOut
 	returnopponentmon1toball ATTACKER
 	waitstate
 	returnopponentmon2toball ATTACKER
@@ -2984,8 +2984,8 @@ BattleScript_LocalBattleLostPrintTrainersWinText::
 	trainerslidein ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1WINTEXT
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_x800000, BattleScript_LocalBattleLostDoTrainer2WinText
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalBattleLostEnd_
+	jumpifbattletype BATTLE_TYPE_x800000, BattleScript_LocalBattleLostDoTrainer2WinText
+	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalBattleLostEnd_
 BattleScript_LocalBattleLostDoTrainer2WinText::
 	trainerslideout IDENTITY_OPPONENT_MON1
 	waitstate
@@ -3008,17 +3008,17 @@ BattleScript_82DAA0B::
 	trainerslidein GBANK_1
 	waitstate
 	printstring STRINGID_TRAINER2WINTEXT
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_RECORDED, BattleScript_82DAA31
+	jumpifbattletype BATTLE_TYPE_RECORDED, BattleScript_82DAA31
 	atk57
 BattleScript_82DAA31::
 	waitmessage 0x40
 	end2
 
 BattleScript_LinkBattleWonOrLost::
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_BATTLE_TOWER, BattleScript_82DAA5C
+	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER, BattleScript_82DAA5C
 	printstring STRINGID_BATTLEEND
 	waitmessage 0x40
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_RECORDED, BattleScript_LinkBattleWonOrLostWaitEnd
+	jumpifbattletype BATTLE_TYPE_RECORDED, BattleScript_LinkBattleWonOrLostWaitEnd
 	atk57
 BattleScript_LinkBattleWonOrLostWaitEnd::
 	waitmessage 0x40
@@ -3036,15 +3036,15 @@ BattleScript_82DAA5C::
 	trainerslidein GBANK_1
 	waitstate
 	printstring STRINGID_TRAINER2LOSETEXT
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_RECORDED, BattleScript_82DAA83
+	jumpifbattletype BATTLE_TYPE_RECORDED, BattleScript_82DAA83
 	atk57
 BattleScript_82DAA83::
 	waitmessage 0x40
 	end2
 
 BattleScript_FrontierTrainerBattleWon::
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TRAINER, BattleScript_PayDayMoneyAndPickUpItems
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TWO_OPPONENTS, BattleScript_82DAAAB
+	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_PayDayMoneyAndPickUpItems
+	jumpifbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_82DAAAB
 	printstring STRINGID_PLAYERDEFEATEDTRAINER1
 	goto BattleScript_82DAAAE
 BattleScript_82DAAAB::
@@ -3053,14 +3053,14 @@ BattleScript_82DAAAE::
 	trainerslidein ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1LOSETEXT
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TWO_OPPONENTS, BattleScript_82DAACB
+	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_82DAACB
 	trainerslideout IDENTITY_OPPONENT_MON1
 	waitstate
 	trainerslidein GBANK_1
 	waitstate
 	printstring STRINGID_TRAINER2LOSETEXT
 BattleScript_82DAACB::
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_PYRAMID, BattleScript_82DAADA
+	jumpifnotbattletype BATTLE_TYPE_PYRAMID, BattleScript_82DAADA
 	pickup
 BattleScript_82DAADA::
 	end2
@@ -3107,7 +3107,7 @@ BattleScript_ActionSwitch::
 	hpthresholds2 ATTACKER
 	printstring STRINGID_RETURNMON
 	setbyte sDMG_MULTIPLIER, 0x2
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_DOUBLE, BattleScript_PursuitSwitchDmgSetMultihit
+	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_PursuitSwitchDmgSetMultihit
 	setmultihit 0x1
 	goto BattleScript_PursuitSwitchDmgLoop
 BattleScript_PursuitSwitchDmgSetMultihit::
@@ -3349,7 +3349,7 @@ BattleScript_SuccessForceOut::
 	switchoutabilities TARGET
 	returntoball TARGET
 	waitstate
-	jumpifword COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_TRAINER, BattleScript_TrainerBattleForceOut
+	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_TrainerBattleForceOut
 	setoutcomeonteleport ATTACKER
 	finishaction
 
@@ -3422,7 +3422,7 @@ BattleScript_SpikesOnAttackerFainted::
 	getexp ATTACKER
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x0, 0x0
-	goto BattleScript_82DA7CD
+	goto BattleScript_HandleFaintedMon
 
 BattleScript_SpikesOnTarget::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
@@ -3438,7 +3438,7 @@ BattleScript_SpikesOnTargetFainted::
 	getexp TARGET
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x0, 0x0
-	goto BattleScript_82DA7CD
+	goto BattleScript_HandleFaintedMon
 
 BattleScript_SpikesOngBank1::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
@@ -3454,7 +3454,7 @@ BattleScript_SpikesOngBank1Fainted::
 	getexp GBANK_1
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x0, 0x0
-	goto BattleScript_82DA7CD
+	goto BattleScript_HandleFaintedMon
 
 BattleScript_PrintHurtBySpikes::
 	printstring STRINGID_PKMNHURTBYSPIKES

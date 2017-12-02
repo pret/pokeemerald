@@ -1053,7 +1053,7 @@ static void atk00_attackcanceler(void)
 
     if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS))
     {
-        i = IsPokeDisobedient(); // why use the 'i' variable...?
+        i = IsMonDisobedient(); // why use the 'i' variable...?
         switch (i)
         {
         case 0:

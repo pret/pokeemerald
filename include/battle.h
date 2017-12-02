@@ -618,8 +618,8 @@ struct BattleStruct
     u8 moneyMultiplier;
     u8 field_4B;
     u8 switchInAbilitiesCounter;
-    u8 field_4D;
-    u8 field_4E;
+    u8 faintedActionsState;
+    u8 faintedActionsBank;
     u8 field_4F;
     u16 expValue;
     u8 field_52;
@@ -691,8 +691,8 @@ struct BattleStruct
     u8 field_182;
     u8 field_183;
     struct BattleEnigmaBerry battleEnigmaBerry;
-    u8 field_1A0;
-    u8 field_1A1;
+    u8 wishPerishSongState;
+    u8 wishPerishSongBank;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
     u8 field_1A4[96];

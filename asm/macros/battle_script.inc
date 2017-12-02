@@ -1391,3 +1391,11 @@
 	.macro jumpifmovehadnoeffect jumpptr
 	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED, \jumpptr
 	.endm
+	
+	.macro jumpifbattletype flags, jumpptr
+	jumpifword COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
+	.endm
+	
+	.macro jumpifnotbattletype flags, jumpptr
+	jumpifword NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
+	.endm
