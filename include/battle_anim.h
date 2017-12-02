@@ -80,6 +80,7 @@ void HandleIntroSlide(u8 terrainId);
 // battle_anim_80A5C6C.s
 void sub_80A6EEC(struct Sprite *sprite);
 void sub_80A68D4(struct Sprite *sprite);
+void sub_80A6F3C(struct Sprite *sprite);
 void sub_80A8278(void);
 void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
@@ -112,6 +113,6 @@ void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
 // battle_anim_8170478.s
 u8 ItemIdToBallId(u16 itemId);
 u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
-u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 bank, u8 arg2, u8 ballId);
+u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 bank, u32 arg2, u8 ballId);
 
 #endif // GUARD_BATTLE_ANIM_H

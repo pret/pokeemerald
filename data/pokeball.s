@@ -4,10 +4,10 @@
 	.section .rodata
 	.align 2, 0
 
-gUnknown_0832C400:: @ 832C400
+sBallSpriteSheets:: @ 832C400
 	.incbin "baserom.gba", 0x32c400, 0x60
 
-gUnknown_0832C460:: @ 832C460
+sBallSpritePalettes:: @ 832C460
 	.incbin "baserom.gba", 0x32c460, 0x128
 
 gBallSpriteTemplates:: @ 832C588

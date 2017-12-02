@@ -1,4 +1,5 @@
 #include "global.h"
+#include "pokemon.h"
 #include "sprite.h"
 #include "pokeball.h"
 #include "battle.h"
@@ -9,13 +10,19 @@
 #include "trig.h"
 #include "main.h"
 #include "m4a.h"
+#include "decompress.h"
+#include "species.h"
+#include "util.h"
 
 extern bool8 gDoingBattleAnim;
 extern u8 gActiveBank;
 extern u8 gBankTarget;
 extern u16 gBattlePartyID[];
 extern u8 gBankSpriteIds[];
+extern u8 gHealthBoxesIds[];
 extern struct MusicPlayerInfo gMPlay_BGM;
+
+extern const u32 gOpenPokeballGfx[];
 
 // this file's functions
 void Task_DoPokeballSendOutAnim(u8 taskId);
@@ -29,12 +36,23 @@ void sub_80757E4(struct Sprite *sprite);
 void sub_8075838(struct Sprite *sprite);
 void sub_8075930(struct Sprite *sprite);
 void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite);
+void SpriteCB_ReleaseMon2FromBall(struct Sprite *sprite);
 void sub_8075970(struct Sprite *sprite);
 void HandleBallAnimEnd(struct Sprite *sprite);
 void sub_8075FB4(struct Sprite *sprite);
 void sub_80760F8(struct Sprite *sprite);
+void sub_8076524(struct Sprite *sprite);
+void sub_80765E0(struct Sprite *sprite);
+void sub_80767D4(struct Sprite *sprite);
+void sub_807687C(struct Sprite *sprite);
+void sub_80768F0(struct Sprite *sprite);
+void sub_80769A8(struct Sprite *sprite);
+void sub_80769CC(struct Sprite *sprite);
+void SpriteCB_HitAnimHealthoxEffect(struct Sprite *sprite);
 u16 GetBankPokeballItemId(u8 bank);
 
+extern const struct CompressedSpriteSheet sBallSpriteSheets[];
+extern const struct CompressedSpritePalette sBallSpritePalettes[];
 extern const struct SpriteTemplate gBallSpriteTemplates[];
 
 #define tFrames         data[0]
@@ -58,12 +76,6 @@ u8 DoPokeballSendOutAnimation(s16 pan, u8 kindOfThrow)
     return 0;
 }
 
-#define sData0          data[0]
-#define sData1          data[1]
-#define sData2          data[2]
-#define sData3          data[3]
-#define sData4          data[4]
-#define sData5          data[5]
 #define sBank           data[6]
 
 void Task_DoPokeballSendOutAnim(u8 taskId)
@@ -107,7 +119,7 @@ void Task_DoPokeballSendOutAnim(u8 taskId)
         gSprites[ballSpriteId].pos1.x = GetBankPosition(bank, BANK_X_POS);
         gSprites[ballSpriteId].pos1.y = GetBankPosition(bank, BANK_Y_POS) + 24;
         gBankTarget = bank;
-        gSprites[ballSpriteId].sData0 = 0;
+        gSprites[ballSpriteId].data[0] = 0;
         gSprites[ballSpriteId].callback = SpriteCB_OpponentMonSendOut;
         break;
     default:
@@ -124,10 +136,10 @@ void Task_DoPokeballSendOutAnim(u8 taskId)
     }
 
     // this will perform an unused ball throw animation
-    gSprites[ballSpriteId].sData0 = 0x22;
-    gSprites[ballSpriteId].sData2 = GetBankPosition(gBankTarget, BANK_X_POS);
-    gSprites[ballSpriteId].sData4 = GetBankPosition(gBankTarget, BANK_Y_POS) - 16;
-    gSprites[ballSpriteId].sData5 = -40;
+    gSprites[ballSpriteId].data[0] = 0x22;
+    gSprites[ballSpriteId].data[2] = GetBankPosition(gBankTarget, BANK_X_POS);
+    gSprites[ballSpriteId].data[4] = GetBankPosition(gBankTarget, BANK_Y_POS) - 16;
+    gSprites[ballSpriteId].data[5] = -40;
     sub_80A68D4(&gSprites[ballSpriteId]);
     gSprites[ballSpriteId].oam.affineParam = taskId;
     gTasks[taskId].tOpponentBank = gBankTarget;
@@ -150,10 +162,10 @@ void SpriteCB_TestBallThrow(struct Sprite *sprite)
         sprite->pos1.y += sprite->pos2.y;
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
-        sprite->sData5 = 0;
+        sprite->data[5] = 0;
         ballId = ItemIdToBallId(GetBankPokeballItemId(opponentBank));
         LaunchBallStarsTask(sprite->pos1.x, sprite->pos1.y - 5, 1, 0x1C, ballId);
-        sprite->sData0 = LaunchBallFadeMonTask(FALSE, opponentBank, 14, ballId);
+        sprite->data[0] = LaunchBallFadeMonTask(FALSE, opponentBank, 14, ballId);
         sprite->sBank = opponentBank;
         sprite->data[7] = noOfShakes;
         DestroyTask(taskId);
@@ -174,9 +186,9 @@ void sub_80756D4(struct Sprite *sprite)
 
 void sub_80756E0(struct Sprite *sprite)
 {
-    if (++sprite->sData5 == 10)
+    if (++sprite->data[5] == 10)
     {
-        sprite->sData5 = 0;
+        sprite->data[5] = 0;
         sprite->callback = sub_807574C;
         StartSpriteAffineAnim(&gSprites[gBankSpriteIds[sprite->sBank]], 2);
         AnimateSprite(&gSprites[gBankSpriteIds[sprite->sBank]]);
@@ -189,17 +201,17 @@ void sub_807574C(struct Sprite *sprite)
     sprite->data[5]++;
     if (sprite->data[5] == 11)
         PlaySE(SE_SUIKOMU);
-    if (gSprites[gBankSpriteIds[sprite->data[6]]].affineAnimEnded)
+    if (gSprites[gBankSpriteIds[sprite->sBank]].affineAnimEnded)
     {
         StartSpriteAnim(sprite, 2);
-        gSprites[gBankSpriteIds[sprite->data[6]]].invisible = TRUE;
+        gSprites[gBankSpriteIds[sprite->sBank]].invisible = TRUE;
         sprite->data[5] = 0;
         sprite->callback = sub_80757E4;
     }
     else
     {
-        gSprites[gBankSpriteIds[sprite->data[6]]].data[1] += 0x60;
-        gSprites[gBankSpriteIds[sprite->data[6]]].pos2.y = -gSprites[gBankSpriteIds[sprite->data[6]]].data[1] >> 8;
+        gSprites[gBankSpriteIds[sprite->sBank]].data[1] += 0x60;
+        gSprites[gBankSpriteIds[sprite->sBank]].pos2.y = -gSprites[gBankSpriteIds[sprite->sBank]].data[1] >> 8;
     }
 }
 
@@ -464,7 +476,7 @@ void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
     StartSpriteAnim(sprite, 1);
     ballId = ItemIdToBallId(GetBankPokeballItemId(bank));
     LaunchBallStarsTask(sprite->pos1.x, sprite->pos1.y - 5, 1, 0x1C, ballId);
-    sprite->sData0 = LaunchBallFadeMonTask(1, sprite->sBank, 14, ballId);
+    sprite->data[0] = LaunchBallFadeMonTask(1, sprite->sBank, 14, ballId);
     sprite->callback = HandleBallAnimEnd;
 
     if (gMain.inBattle)
@@ -628,10 +640,375 @@ void SpriteCB_PlayerMonSendOut_1(struct Sprite *sprite)
     sprite->callback = SpriteCB_PlayerMonSendOut_2;
 }
 
-#undef sData0
-#undef sData1
-#undef sData2
-#undef sData3
-#undef sData4
-#undef sData5
+#define HIBYTE(x) (((x) >> 8) & 0xFF)
+
+void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
+{
+    u32 r6;
+    u32 r7;
+
+    if (HIBYTE(sprite->data[7]) >= 35 && HIBYTE(sprite->data[7]) < 80)
+    {
+        s16 r4;
+
+        if ((sprite->oam.affineParam & 0xFF00) == 0)
+        {
+            r6 = sprite->data[1] & 1;
+            r7 = sprite->data[2] & 1;
+            sprite->data[1] = ((sprite->data[1] / 3) & ~1) | r6;
+            sprite->data[2] = ((sprite->data[2] / 3) & ~1) | r7;
+            StartSpriteAffineAnim(sprite, 4);
+        }
+        r4 = sprite->data[0];
+        sub_80A6F3C(sprite);
+        sprite->data[7] += sprite->sBank / 3;
+        sprite->pos2.y += Sin(HIBYTE(sprite->data[7]), sprite->data[5]);
+        sprite->oam.affineParam += 0x100;
+        if ((sprite->oam.affineParam >> 8) % 3 != 0)
+            sprite->data[0] = r4;
+        else
+            sprite->data[0] = r4 - 1;
+        if (HIBYTE(sprite->data[7]) >= 80)
+        {
+            r6 = sprite->data[1] & 1;
+            r7 = sprite->data[2] & 1;
+            sprite->data[1] = ((sprite->data[1] * 3) & ~1) | r6;
+            sprite->data[2] = ((sprite->data[2] * 3) & ~1) | r7;
+        }
+    }
+    else
+    {
+        if (AnimateBallThrow(sprite))
+        {
+            sprite->pos1.x += sprite->pos2.x;
+            sprite->pos1.y += sprite->pos2.y;
+            sprite->pos2.y = 0;
+            sprite->pos2.x = 0;
+            sprite->sBank = sprite->oam.affineParam & 0xFF;
+            sprite->data[0] = 0;
+
+            if (IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1
+             && sprite->sBank == GetBankByIdentity(IDENTITY_PLAYER_MON2))
+                sprite->callback = SpriteCB_ReleaseMon2FromBall;
+            else
+                sprite->callback = SpriteCB_ReleaseMonFromBall;
+
+            StartSpriteAffineAnim(sprite, 0);
+        }
+    }
+}
+
+void SpriteCB_ReleaseMon2FromBall(struct Sprite *sprite)
+{
+    if (sprite->data[0]++ > 24)
+    {
+        sprite->data[0] = 0;
+        sprite->callback = SpriteCB_ReleaseMonFromBall;
+    }
+}
+
+void SpriteCB_OpponentMonSendOut(struct Sprite *sprite)
+{
+    sprite->data[0]++;
+    if (sprite->data[0] > 15)
+    {
+        sprite->data[0] = 0;
+        if (IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1
+         && sprite->sBank == GetBankByIdentity(IDENTITY_OPPONENT_MON2))
+            sprite->callback = SpriteCB_ReleaseMon2FromBall;
+        else
+            sprite->callback = SpriteCB_ReleaseMonFromBall;
+    }
+}
+
 #undef sBank
+
+u8 LaunchBallStarsTaskForPokeball(u8 x, u8 y, u8 kindOfStars, u8 d)
+{
+    return LaunchBallStarsTask(x, y, kindOfStars, d, 0);
+}
+
+u8 LaunchBallFadeMonTaskForPokeball(bool8 unFadeLater, u8 bank, u32 arg2)
+{
+    return LaunchBallFadeMonTask(unFadeLater, bank, arg2, 0);
+}
+
+void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 bank, u8 x, u8 y, u8 oamPriority, u8 subpriortiy, u8 g, u32 h, u16 species)
+{
+    u8 spriteId;
+
+    LoadCompressedObjectPicUsingHeap(&sBallSpriteSheets[0]);
+    LoadCompressedObjectPaletteUsingHeap(&sBallSpritePalettes[0]);
+    spriteId = CreateSprite(&gBallSpriteTemplates[0], x, y, subpriortiy);
+
+    gSprites[spriteId].data[0] = monSpriteId;
+    gSprites[spriteId].data[5] = gSprites[monSpriteId].pos1.x;
+    gSprites[spriteId].data[6] = gSprites[monSpriteId].pos1.y;
+
+    gSprites[monSpriteId].pos1.x = x;
+    gSprites[monSpriteId].pos1.y = y;
+    gSprites[monSpriteId].data[7] = species;
+
+    gSprites[spriteId].data[1] = g;
+    gSprites[spriteId].data[2] = bank;
+    gSprites[spriteId].data[3] = h;
+    gSprites[spriteId].data[4] = h >> 0x10;
+    gSprites[spriteId].oam.priority = oamPriority;
+    gSprites[spriteId].callback = sub_8076524;
+
+    gSprites[monSpriteId].invisible = TRUE;
+}
+
+void sub_8076524(struct Sprite *sprite)
+{
+    if (sprite->data[1] == 0)
+    {
+        u8 r5;
+        u8 r7 = sprite->data[0];
+        u8 bank = sprite->data[2];
+        u32 r4 = (u16)sprite->data[3] | ((u16)sprite->data[4] << 16);
+
+        if (sprite->subpriority != 0)
+            r5 = sprite->subpriority - 1;
+        else
+            r5 = 0;
+
+        StartSpriteAnim(sprite, 1);
+        LaunchBallStarsTaskForPokeball(sprite->pos1.x, sprite->pos1.y - 5, sprite->oam.priority, r5);
+        sprite->data[1] = LaunchBallFadeMonTaskForPokeball(1, bank, r4);
+        sprite->callback = sub_80765E0;
+        gSprites[r7].invisible = FALSE;
+        StartSpriteAffineAnim(&gSprites[r7], 1);
+        AnimateSprite(&gSprites[r7]);
+        gSprites[r7].data[1] = 0x1000;
+        sprite->data[7] = 0;
+    }
+    else
+    {
+        sprite->data[1]--;
+    }
+}
+
+void sub_80765E0(struct Sprite *sprite)
+{
+    bool8 r12 = FALSE;
+    bool8 r6 = FALSE;
+    u8 monSpriteId = sprite->data[0];
+    u16 var1;
+    u16 var2;
+
+    if (sprite->animEnded)
+        sprite->invisible = TRUE;
+    if (gSprites[monSpriteId].affineAnimEnded)
+    {
+        StartSpriteAffineAnim(&gSprites[monSpriteId], 0);
+        r12 = TRUE;
+    }
+    var1 = (sprite->data[5] - sprite->pos1.x) * sprite->data[7] / 128 + sprite->pos1.x;
+    var2 = (sprite->data[6] - sprite->pos1.y) * sprite->data[7] / 128 + sprite->pos1.y;
+    gSprites[monSpriteId].pos1.x = var1;
+    gSprites[monSpriteId].pos1.y = var2;
+    if (sprite->data[7] < 128)
+    {
+        s16 sine = -(gSineTable[(u8)sprite->data[7]] / 8);
+
+        sprite->data[7] += 4;
+        gSprites[monSpriteId].pos2.x = sine;
+        gSprites[monSpriteId].pos2.y = sine;
+    }
+    else
+    {
+        gSprites[monSpriteId].pos1.x = sprite->data[5];
+        gSprites[monSpriteId].pos1.y = sprite->data[6];
+        gSprites[monSpriteId].pos2.x = 0;
+        gSprites[monSpriteId].pos2.y = 0;
+        r6 = TRUE;
+    }
+    if (sprite->animEnded && r12 && r6)
+    {
+        if (gSprites[monSpriteId].data[7] == SPECIES_EGG)
+            DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].data[7], TRUE, 0);
+        else
+            DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].data[7], FALSE, 0);
+
+        DestroySpriteAndFreeResources(sprite);
+    }
+}
+
+u8 sub_807671C(u8 a, u8 b, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 g, u32 h)
+{
+    u8 spriteId;
+
+    LoadCompressedObjectPicUsingHeap(&sBallSpriteSheets[0]);
+    LoadCompressedObjectPaletteUsingHeap(&sBallSpritePalettes[0]);
+    spriteId = CreateSprite(&gBallSpriteTemplates[0], x, y, subPriority);
+    gSprites[spriteId].data[0] = a;
+    gSprites[spriteId].data[1] = g;
+    gSprites[spriteId].data[2] = b;
+    gSprites[spriteId].data[3] = h;
+    gSprites[spriteId].data[4] = h >> 16;
+    gSprites[spriteId].oam.priority = oamPriority;
+    gSprites[spriteId].callback = sub_80767D4;
+    return spriteId;
+}
+
+void sub_80767D4(struct Sprite *sprite)
+{
+    if (sprite->data[1] == 0)
+    {
+        u8 r6;
+        u8 r7 = sprite->data[0];
+        u8 r8 = sprite->data[2];
+        u32 r5 = (u16)sprite->data[3] | ((u16)sprite->data[4] << 16);
+
+        if (sprite->subpriority != 0)
+            r6 = sprite->subpriority - 1;
+        else
+            r6 = 0;
+
+        StartSpriteAnim(sprite, 1);
+        LaunchBallStarsTaskForPokeball(sprite->pos1.x, sprite->pos1.y - 5, sprite->oam.priority, r6);
+        sprite->data[1] = LaunchBallFadeMonTaskForPokeball(1, r8, r5);
+        sprite->callback = sub_807687C;
+        StartSpriteAffineAnim(&gSprites[r7], 2);
+        AnimateSprite(&gSprites[r7]);
+        gSprites[r7].data[1] = 0;
+    }
+    else
+    {
+        sprite->data[1]--;
+    }
+}
+
+void sub_807687C(struct Sprite *sprite)
+{
+    u8 r1;
+
+    sprite->data[5]++;
+    if (sprite->data[5] == 11)
+        PlaySE(SE_SUIKOMU);
+    r1 = sprite->data[0];
+    if (gSprites[r1].affineAnimEnded)
+    {
+        StartSpriteAnim(sprite, 2);
+        gSprites[r1].invisible = TRUE;
+        sprite->data[5] = 0;
+        sprite->callback = sub_80768F0;
+    }
+    else
+    {
+        gSprites[r1].data[1] += 96;
+        gSprites[r1].pos2.y = -gSprites[r1].data[1] >> 8;
+    }
+}
+
+void sub_80768F0(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+        sprite->callback = SpriteCallbackDummy;
+}
+
+static void DestroySpriteAndFreeResources_(struct Sprite *sprite)
+{
+    DestroySpriteAndFreeResources(sprite);
+}
+
+void sub_8076918(u8 bank)
+{
+    struct Sprite *healthboxSprite = &gSprites[gHealthBoxesIds[bank]];
+
+    healthboxSprite->data[0] = 5;
+    healthboxSprite->data[1] = 0;
+    healthboxSprite->pos2.x = 0x73;
+    healthboxSprite->pos2.y = 0;
+    healthboxSprite->callback = sub_80769CC;
+    if (GetBankSide(bank) != SIDE_PLAYER)
+    {
+        healthboxSprite->data[0] = -healthboxSprite->data[0];
+        healthboxSprite->data[1] = -healthboxSprite->data[1];
+        healthboxSprite->pos2.x = -healthboxSprite->pos2.x;
+        healthboxSprite->pos2.y = -healthboxSprite->pos2.y;
+    }
+    gSprites[healthboxSprite->data[5]].callback(&gSprites[healthboxSprite->data[5]]);
+    if (GetBankIdentity(bank) == IDENTITY_PLAYER_MON2)
+        healthboxSprite->callback = sub_80769A8;
+}
+
+void sub_80769A8(struct Sprite *sprite)
+{
+    sprite->data[1]++;
+    if (sprite->data[1] == 20)
+    {
+        sprite->data[1] = 0;
+        sprite->callback = sub_80769CC;
+    }
+}
+
+void sub_80769CC(struct Sprite *sprite)
+{
+    sprite->pos2.x -= sprite->data[0];
+    sprite->pos2.y -= sprite->data[1];
+    if (sprite->pos2.x == 0 && sprite->pos2.y == 0)
+        sprite->callback = SpriteCallbackDummy;
+}
+
+void DoHitAnimHealthboxEffect(u8 bank)
+{
+    u8 spriteId;
+
+    spriteId = CreateInvisibleSpriteWithCallback(SpriteCB_HitAnimHealthoxEffect);
+    gSprites[spriteId].data[0] = 1;
+    gSprites[spriteId].data[1] = gHealthBoxesIds[bank];
+    gSprites[spriteId].callback = SpriteCB_HitAnimHealthoxEffect;
+}
+
+void SpriteCB_HitAnimHealthoxEffect(struct Sprite *sprite)
+{
+    u8 r1 = sprite->data[1];
+
+    gSprites[r1].pos2.y = sprite->data[0];
+    sprite->data[0] = -sprite->data[0];
+    sprite->data[2]++;
+    if (sprite->data[2] == 21)
+    {
+        gSprites[r1].pos2.x = 0;
+        gSprites[r1].pos2.y = 0;
+        DestroySprite(sprite);
+    }
+}
+
+void LoadBallGfx(u8 ballId)
+{
+    u16 var;
+
+    if (GetSpriteTileStartByTag(sBallSpriteSheets[ballId].tag) == 0xFFFF)
+    {
+        LoadCompressedObjectPicUsingHeap(&sBallSpriteSheets[ballId]);
+        LoadCompressedObjectPaletteUsingHeap(&sBallSpritePalettes[ballId]);
+    }
+    switch (ballId)
+    {
+    case BALL_DIVE:
+    case BALL_LUXURY:
+    case BALL_PREMIER:
+        break;
+    default:
+        var = GetSpriteTileStartByTag(sBallSpriteSheets[ballId].tag);
+        LZDecompressVram(gOpenPokeballGfx, (void *)(VRAM + 0x10100 + var * 32));
+        break;
+    }
+}
+
+void FreeBallGfx(u8 ballId)
+{
+    FreeSpriteTilesByTag(sBallSpriteSheets[ballId].tag);
+    FreeSpritePaletteByTag(sBallSpritePalettes[ballId].tag);
+}
+
+u16 GetBankPokeballItemId(u8 bank)
+{
+    if (GetBankSide(bank) == SIDE_PLAYER)
+        return GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_POKEBALL);
+    else
+        return GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_POKEBALL);
+}

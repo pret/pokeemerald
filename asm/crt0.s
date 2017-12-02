@@ -68,8 +68,8 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte gAbilityDescriptionPointers
 	.4byte gItems
 	.4byte gBattleMoves
-	.4byte gUnknown_0832C400
-	.4byte gUnknown_0832C460
+	.4byte sBallSpriteSheets
+	.4byte sBallSpritePalettes
 
 	.4byte 0x000000a8, 0x00000864, 0x0000089b
 

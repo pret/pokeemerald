@@ -21,7 +21,7 @@ gUnknown_08C01644:: @ 8C01644
 gUnknown_08C01724:: @ 8C01724
 	.incbin "baserom.gba", 0xc01724, 0xBDC
 
-gUnknown_08C02300:: @ 8C02300
+gOpenPokeballGfx:: @ 8C02300
 	.incbin "baserom.gba", 0xc02300, 0x7c
 
 gUnknown_08C0237C:: @ 8C0237C
