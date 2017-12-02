@@ -81,6 +81,7 @@ SECTIONS {
         src/egg_hatch.o(.text);
         src/battle_interface.o(.text);
         asm/smokescreen.o(.text);
+        src/pokeball.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
         asm/trade.o(.text);

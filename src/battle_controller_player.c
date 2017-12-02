@@ -1023,12 +1023,12 @@ static void sub_8058B40(void)
     bool32 r9 = FALSE;
     bool32 r8 = FALSE;
 
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive)
         sub_8172EF0(gActiveBank, &gPlayerParty[gBattlePartyID[gActiveBank]]);
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x8)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].ballAnimActive)
         sub_8172EF0(gActiveBank ^ BIT_MON, &gPlayerParty[gBattlePartyID[gActiveBank ^ BIT_MON]]);
 
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x8)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].ballAnimActive)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x80)
         {
@@ -1127,13 +1127,13 @@ static void sub_8058FC0(void)
 static void sub_805902C(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80
-        && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
+        && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive)
     {
         sub_8172EF0(gActiveBank, &gPlayerParty[gBattlePartyID[gActiveBank]]);
     }
 
     if (gSprites[gUnknown_03005D7C[gActiveBank]].callback == SpriteCallbackDummy
-     && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
+     && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive)
     {
         DestroySprite(&gSprites[gUnknown_03005D7C[gActiveBank]]);
         UpdateHealthboxAttribute(gHealthBoxesIds[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], HEALTHBOX_ALL);
@@ -2237,7 +2237,7 @@ static void sub_805B258(u8 bank, bool8 dontClearSubstituteBit)
 
     gBankSpriteIds[bank] = CreateSprite(
       &gUnknown_0202499C,
-      sub_80A5C6C(bank, 2),
+      GetBankPosition(bank, 2),
       GetBankSpriteDefault_Y(bank),
       sub_80A82E4(bank));
 
@@ -2253,7 +2253,7 @@ static void sub_805B258(u8 bank, bool8 dontClearSubstituteBit)
     gSprites[gBankSpriteIds[bank]].invisible = TRUE;
     gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
 
-    gSprites[gUnknown_03005D7C[bank]].data0 = sub_80753E8(0, 0xFF);
+    gSprites[gUnknown_03005D7C[bank]].data0 = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
 }
 
 static void PlayerHandleReturnMonToBall(void)

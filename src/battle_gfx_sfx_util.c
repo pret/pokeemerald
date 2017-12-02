@@ -1143,13 +1143,13 @@ void LoadAndCreateEnemyShadowSprites(void)
     LoadCompressedObjectPic(&gSpriteSheet_EnemyShadow);
 
     bank = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
-    gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, sub_80A5C6C(bank, 0), sub_80A5C6C(bank, 1) + 29, 0xC8);
+    gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBankPosition(bank, 0), GetBankPosition(bank, 1) + 29, 0xC8);
     gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].data0 = bank;
 
     if (IsDoubleBattle())
     {
         bank = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
-        gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, sub_80A5C6C(bank, 0), sub_80A5C6C(bank, 1) + 29, 0xC8);
+        gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBankPosition(bank, 0), GetBankPosition(bank, 1) + 29, 0xC8);
         gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].data0 = bank;
     }
 }

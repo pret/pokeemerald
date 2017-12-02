@@ -423,7 +423,7 @@ static void ScriptCmd_createsprite(void)
     if (subpriority < 3)
         subpriority = 3;
 
-    CreateSpriteAndAnimate(template, sub_80A5C6C(gAnimBankTarget, 2), sub_80A5C6C(gAnimBankTarget, 3), subpriority);
+    CreateSpriteAndAnimate(template, GetBankPosition(gAnimBankTarget, 2), GetBankPosition(gAnimBankTarget, 3), subpriority);
     gAnimVisualTaskCount++;
 }
 

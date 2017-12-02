@@ -282,8 +282,8 @@ static void sub_81BAF48(void)
 
 static void sub_81BB02C(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8
-        && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x8
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive
+        && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].ballAnimActive
         && gSprites[gUnknown_03005D7C[gActiveBank]].callback == SpriteCallbackDummy
         && gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy
         && ++gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_9 != 1)
@@ -599,13 +599,13 @@ static void sub_81BB9F4(void)
 static void sub_81BBAE8(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80
-        && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
+        && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive)
     {
         sub_8172EF0(gActiveBank, &gPlayerParty[gBattlePartyID[gActiveBank]]);
     }
 
     if (gSprites[gUnknown_03005D7C[gActiveBank]].callback == SpriteCallbackDummy
-     && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
+     && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive)
     {
         DestroySprite(&gSprites[gUnknown_03005D7C[gActiveBank]]);
         gBattleBankFunc[gActiveBank] = sub_81BB9F4;
@@ -1236,7 +1236,7 @@ static void PlayerPartnerHandleLoadMonSprite(void)
     sub_806A068(species, GetBankIdentity(gActiveBank));
 
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
-                                               sub_80A5C6C(gActiveBank, 2),
+                                               GetBankPosition(gActiveBank, 2),
                                                GetBankSpriteDefault_Y(gActiveBank),
                                                sub_80A82E4(gActiveBank));
     gSprites[gBankSpriteIds[gActiveBank]].pos2.x = -240;
@@ -1267,7 +1267,7 @@ static void sub_81BD0E4(u8 bank, bool8 dontClearSubstituteBit)
 
     gBankSpriteIds[bank] = CreateSprite(
       &gUnknown_0202499C,
-      sub_80A5C6C(bank, 2),
+      GetBankPosition(bank, 2),
       GetBankSpriteDefault_Y(bank),
       sub_80A82E4(bank));
 
@@ -1283,7 +1283,7 @@ static void sub_81BD0E4(u8 bank, bool8 dontClearSubstituteBit)
     gSprites[gBankSpriteIds[bank]].invisible = TRUE;
     gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
 
-    gSprites[gUnknown_03005D7C[bank]].data0 = sub_80753E8(0, 0xFF);
+    gSprites[gUnknown_03005D7C[bank]].data0 = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
 }
 
 static void PlayerPartnerHandleReturnMonToBall(void)

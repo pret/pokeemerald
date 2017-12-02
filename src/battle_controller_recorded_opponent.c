@@ -298,12 +298,12 @@ static void sub_818686C(void)
     bool32 r9 = FALSE;
     bool32 r8 = FALSE;
 
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive)
         sub_8172EF0(gActiveBank, &gEnemyParty[gBattlePartyID[gActiveBank]]);
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x8)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].ballAnimActive)
         sub_8172EF0(gActiveBank ^ BIT_MON, &gEnemyParty[gBattlePartyID[gActiveBank ^ BIT_MON]]);
 
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x8)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].ballAnimActive)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x80)
         {
@@ -512,14 +512,14 @@ static void sub_8186F94(void)
 
 static void sub_8187084(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive
         && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80)
     {
         sub_8172EF0(gActiveBank, &gEnemyParty[gBattlePartyID[gActiveBank]]);
     }
 
     if (gSprites[gUnknown_03005D7C[gActiveBank]].callback == SpriteCallbackDummy
-        && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
+        && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive)
     {
         DestroySprite(&gSprites[gUnknown_03005D7C[gActiveBank]]);
         SetBankEnemyShadowSpriteCallback(gActiveBank, GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES));
@@ -1148,7 +1148,7 @@ static void RecordedOpponentHandleLoadMonSprite(void)
     sub_806A068(species, GetBankIdentity(gActiveBank));
 
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
-                                               sub_80A5C6C(gActiveBank, 2),
+                                               GetBankPosition(gActiveBank, 2),
                                                GetBankSpriteDefault_Y(gActiveBank),
                                                sub_80A82E4(gActiveBank));
 
@@ -1183,7 +1183,7 @@ static void sub_81885D8(u8 bank, bool8 dontClearSubstituteBit)
     sub_806A068(species, GetBankIdentity(bank));
 
     gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C,
-                                        sub_80A5C6C(bank, 2),
+                                        GetBankPosition(bank, 2),
                                         GetBankSpriteDefault_Y(bank),
                                         sub_80A82E4(bank));
 
@@ -1199,7 +1199,7 @@ static void sub_81885D8(u8 bank, bool8 dontClearSubstituteBit)
     gSprites[gBankSpriteIds[bank]].invisible = TRUE;
     gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
 
-    gSprites[gUnknown_03005D7C[bank]].data0 = sub_80753E8(0, 0xFE);
+    gSprites[gUnknown_03005D7C[bank]].data0 = DoPokeballSendOutAnimation(0, POKEBALL_OPPONENT_SENDOUT);
 }
 
 static void RecordedOpponentHandleReturnMonToBall(void)
