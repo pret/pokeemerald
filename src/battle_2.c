@@ -160,7 +160,7 @@ extern const u8 gStatStageRatios[][2];
 extern const u8 * const gBattleScriptsForMoveEffects[];
 extern const u8 * const gBattlescriptsForBallThrow[];
 extern const u8 * const gBattlescriptsForRunningByItem[];
-extern const u8 * const gUnknown_082DBD3C[];
+extern const u8 * const gBattlescriptsForUsingItem[];
 extern const u8 * const gBattlescriptsForSafariActions[];
 
 // strings
@@ -4692,7 +4692,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     gBattleMainFunc = RunTurnActionsFunctions;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
-    gBattleScripting.field_16 = 0;
+    gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
 }
 
@@ -4701,7 +4701,7 @@ static void RunTurnActionsFunctions(void)
     if (gBattleOutcome != 0)
         gCurrentActionFuncId = 12;
 
-    *(&gBattleStruct->field_4B) = gCurrentTurnActionNumber;
+    *(&gBattleStruct->savedTurnActionNumber) = gCurrentTurnActionNumber;
     sTurnActionsFuncsTable[gCurrentActionFuncId]();
 
     if (gCurrentTurnActionNumber >= gNoOfAllBanks) // everyone did their actions, turn finished
@@ -4711,7 +4711,7 @@ static void RunTurnActionsFunctions(void)
     }
     else
     {
-        if (gBattleStruct->field_4B != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another bank
+        if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another bank
         {
             gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
             gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
@@ -5276,7 +5276,7 @@ static void HandleAction_UseItem(void)
     }
     else if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
     {
-        gBattlescriptCurrInstr = gUnknown_082DBD3C[0];
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[0];
     }
     else
     {
@@ -5332,7 +5332,7 @@ static void HandleAction_UseItem(void)
             break;
         }
 
-        gBattlescriptCurrInstr = gUnknown_082DBD3C[*(gBattleStruct->AI_itemType + gBankAttacker / 2)];
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + gBankAttacker / 2)];
     }
     gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
 }
@@ -5607,6 +5607,6 @@ static void HandleAction_ActionFinished(void)
     gBattleScripting.atk49_state = 0;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
-    gBattleScripting.field_16 = 0;
+    gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
 }

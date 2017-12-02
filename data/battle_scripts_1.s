@@ -624,19 +624,19 @@ BattleScript_EffectMultiHit::
 	ppreduce
 	setmultihitcounter 0x0
 	initmultihitstring
-	setbyte sFIELD_16, 0x0
-BattleScript_82D8DFD::
-	jumpifhasnohp ATTACKER, BattleScript_82D8E93
-	jumpifhasnohp TARGET, BattleScript_82D8E74
-	jumpifhalfword EQUAL, gChosenMove, MOVE_SLEEP_TALK, BattleScript_82D8E1F
-	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_82D8E74
-BattleScript_82D8E1F::
+	setbyte sMULTIHIT_EFFECT, 0x0
+BattleScript_MultiHitLoop::
+	jumpifhasnohp ATTACKER, BattleScript_MultiHitEnd
+	jumpifhasnohp TARGET, BattleScript_MultiHitPrintStrings
+	jumpifhalfword EQUAL, gChosenMove, MOVE_SLEEP_TALK, BattleScript_DoMultiHit
+	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_MultiHitPrintStrings
+BattleScript_DoMultiHit::
 	movevaluescleanup
-	copybyte cEFFECT_CHOOSER, sFIELD_16
+	copybyte cEFFECT_CHOOSER, sMULTIHIT_EFFECT
 	critcalc
 	damagecalc
 	typecalc
-	jumpifmovehadnoeffect BattleScript_82D8E71
+	jumpifmovehadnoeffect BattleScript_MultiHitNoMoreHits
 	adjustnormaldamage
 	attackanimation
 	waitanimation
@@ -652,19 +652,19 @@ BattleScript_82D8E1F::
 	addbyte sMULTIHIT_STRING + 4, 0x1
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
-	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_ENDURED, BattleScript_82D8E74
-	decrementmultihit BattleScript_82D8DFD
-	goto BattleScript_82D8E74
-BattleScript_82D8E71::
+	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_ENDURED, BattleScript_MultiHitPrintStrings
+	decrementmultihit BattleScript_MultiHitLoop
+	goto BattleScript_MultiHitPrintStrings
+BattleScript_MultiHitNoMoreHits::
 	pause 0x20
-BattleScript_82D8E74::
+BattleScript_MultiHitPrintStrings::
 	resultmessage
 	waitmessage 0x40
-	jumpifmovehadnoeffect BattleScript_82D8E93
+	jumpifmovehadnoeffect BattleScript_MultiHitEnd
 	copyarray gBattleTextBuff1, sMULTIHIT_STRING, 0x6
 	printstring STRINGID_HITXTIMES
 	waitmessage 0x40
-BattleScript_82D8E93::
+BattleScript_MultiHitEnd::
 	seteffectwithchance
 	tryfaintmon TARGET, FALSE, NULL
 	setbyte sMOVEEND_STATE, 0x2
@@ -862,8 +862,8 @@ BattleScript_EffectDoubleHit::
 	ppreduce
 	setmultihitcounter 0x2
 	initmultihitstring
-	setbyte sFIELD_16, 0x0
-	goto BattleScript_82D8DFD
+	setbyte sMULTIHIT_EFFECT, 0x0
+	goto BattleScript_MultiHitLoop
 
 BattleScript_EffectRecoilIfMiss::
 	attackcanceler
@@ -1094,12 +1094,12 @@ BattleScript_EffectConfuseHit::
 BattleScript_EffectTwineedle::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	setbyte sFIELD_16, 0x2
+	setbyte sMULTIHIT_EFFECT, EFFECT_POISON
 	attackstring
 	ppreduce
 	setmultihitcounter 0x2
 	initmultihitstring
-	goto BattleScript_82D8DFD
+	goto BattleScript_MultiHitLoop
 
 BattleScript_EffectSubstitute::
 	attackcanceler
@@ -1952,7 +1952,7 @@ BattleScript_EffectTeleport::
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_ButItFailed
 	getifcantrunfrombattle ATTACKER
 	jumpifbyte EQUAL, gBattleCommunication, 0x1, BattleScript_ButItFailed
-	jumpifbyte EQUAL, gBattleCommunication, 0x2, BattleScript_82DA382
+	jumpifbyte EQUAL, gBattleCommunication, 0x2, BattleScript_PrintAbilityMadeIneffective
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNFLEDFROMBATTLE
@@ -2474,8 +2474,8 @@ BattleScript_EffectYawn::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifability TARGET, ABILITY_VITAL_SPIRIT, BattleScript_82DA378
-	jumpifability TARGET, ABILITY_INSOMNIA, BattleScript_82DA378
+	jumpifability TARGET, ABILITY_VITAL_SPIRIT, BattleScript_PrintBankAbilityMadeIneffective
+	jumpifability TARGET, ABILITY_INSOMNIA, BattleScript_PrintBankAbilityMadeIneffective
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
 	jumpifsideaffecting TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
@@ -2486,9 +2486,9 @@ BattleScript_EffectYawn::
 	printstring STRINGID_PKMNWASMADEDROWSY
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
-BattleScript_82DA378::
-	copybyte sBANK, sFIELD_15
-BattleScript_82DA382::
+BattleScript_PrintBankAbilityMadeIneffective::
+	copybyte sBANK, sBANK_WITH_ABILITY
+BattleScript_PrintAbilityMadeIneffective::
 	pause 0x20
 	printstring STRINGID_PKMNSXMADEITINEFFECTIVE
 	waitmessage 0x40

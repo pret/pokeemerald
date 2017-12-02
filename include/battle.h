@@ -616,7 +616,7 @@ struct BattleStruct
     u8 focusPunchBank;
     u8 field_49;
     u8 moneyMultiplier;
-    u8 field_4B;
+    u8 savedTurnActionNumber;
     u8 switchInAbilitiesCounter;
     u8 faintedActionsState;
     u8 faintedActionsBank;
@@ -846,8 +846,8 @@ struct BattleScripting
     u8 animArg2;
     u16 tripleKickPower;
     u8 atk49_state;
-    u8 field_15;
-    u8 field_16;
+    u8 bankWithAbility;
+    u8 multihitMoveEffect;
     u8 bank;
     u8 animTurn;
     u8 animTargetsHit;

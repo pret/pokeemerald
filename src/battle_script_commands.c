@@ -3040,7 +3040,7 @@ static void atk15_seteffectwithchance(void)
     }
 
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
-    gBattleScripting.field_16 = 0;
+    gBattleScripting.multihitMoveEffect = 0;
 }
 
 static void atk16_seteffectprimary(void)
@@ -3064,7 +3064,7 @@ static void atk18_clearstatusfromeffect(void)
 
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattlescriptCurrInstr += 2;
-    gBattleScripting.field_16 = 0;
+    gBattleScripting.multihitMoveEffect = 0;
 }
 
 static void atk19_tryfaintmon(void)
@@ -3221,7 +3221,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jumpPtr;
             RecordAbilityBattle(bank - 1, gLastUsedAbility);
-            gBattleScripting.field_15 = bank - 1;
+            gBattleScripting.bankWithAbility = bank - 1;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -3234,7 +3234,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jumpPtr;
             RecordAbilityBattle(bank - 1, gLastUsedAbility);
-            gBattleScripting.field_15 = bank - 1;
+            gBattleScripting.bankWithAbility = bank - 1;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -3247,7 +3247,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jumpPtr;
             RecordAbilityBattle(bank, gLastUsedAbility);
-            gBattleScripting.field_15 = bank;
+            gBattleScripting.bankWithAbility = bank;
         }
         else
             gBattlescriptCurrInstr += 7;

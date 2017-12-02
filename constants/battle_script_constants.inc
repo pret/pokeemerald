@@ -146,8 +146,8 @@
 	.equiv sANIM_ARG2, gBattleScripting + 0x11
 	.equiv sTRIPLE_KICK_POWER, gBattleScripting + 0x12
 	.equiv sMOVEEND_STATE, gBattleScripting + 0x14
-	.equiv sFIELD_15, gBattleScripting + 0x15
-	.equiv sFIELD_16, gBattleScripting + 0x16
+	.equiv sBANK_WITH_ABILITY, gBattleScripting + 0x15
+	.equiv sMULTIHIT_EFFECT, gBattleScripting + 0x16
 	.equiv sBANK, gBattleScripting + 0x17
 	.equiv sANIM_TURN, gBattleScripting + 0x18
 	.equiv sANIM_TARGETS_HIT, gBattleScripting + 0x19
