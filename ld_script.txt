@@ -345,7 +345,7 @@ SECTIONS {
         src/egg_hatch.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
         src/battle_interface.o(.rodata);
-        data/pokeball.o(.rodata);
+        src/pokeball.o(.rodata);
         data/trade.o(.rodata);
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
