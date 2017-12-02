@@ -90,12 +90,12 @@ BattleScript_WallyBallThrow::
 BattleScript_ShakeBallThrow::
 	printfromtable gBallEscapeStringIds
 	waitmessage 0x40
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_SAFARI, BattleScript_82DBE01
-	jumpifbyte NOT_EQUAL, gNumSafariBalls, 0x0, BattleScript_82DBE01
+	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_SAFARI, BattleScript_ShakeBallThrowEnd
+	jumpifbyte NOT_EQUAL, gNumSafariBalls, 0x0, BattleScript_ShakeBallThrowEnd
 	printstring STRINGID_OUTOFSAFARIBALLS
 	waitmessage 0x40
 	setbyte gBattleOutcome, OUT_OF_BALLS
-BattleScript_82DBE01::
+BattleScript_ShakeBallThrowEnd::
 	finishaction
 
 BattleScript_TrainerBallBlock::

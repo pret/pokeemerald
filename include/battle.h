@@ -86,7 +86,7 @@
 #define BATTLE_FORFEITED            0x9
 #define BATTLE_OPPONENT_TELEPORTED  0xA
 
-#define BATTLE_OUTCOME_BIT_x80      0x80
+#define OUTCOME_LINK_BATTLE_RUN      0x80
 
 #define STATUS_NONE             0x0
 #define STATUS_SLEEP            0x7
@@ -801,7 +801,7 @@ extern struct BattleStruct* gBattleStruct;
 #define B_ANIM_ITEM_STEAL               0x10
 #define B_ANIM_SNATCH_MOVE              0x11
 #define B_ANIM_FUTURE_SIGHT_HIT         0x12
-#define B_ANIM_x13                      0x13
+#define B_ANIM_DOOM_DESIRE_HIT          0x13
 #define B_ANIM_x14                      0x14
 #define B_ANIM_INGRAIN_HEAL             0x15
 #define B_ANIM_WISH_HEAL                0x16

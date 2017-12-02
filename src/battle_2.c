@@ -2872,7 +2872,7 @@ void SwitchInClearSetData(void)
              && (gStatuses3[i] & STATUS3_ALWAYS_HITS) != 0
              && (gDisableStructs[i].bankWithSureHit == gActiveBank))
             {
-                gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
+                gStatuses3[i] &= ~(STATUS3_ALWAYS_HITS);
                 gStatuses3[i] |= 0x10;
             }
         }
@@ -4729,7 +4729,7 @@ static void HandleEndTurn_BattleWon(void)
         gBattleTextBuff1[0] = gBattleOutcome;
         gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
         gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-        gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+        gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
             && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000 | BATTLE_TYPE_EREADER_TRAINER))
@@ -4785,16 +4785,16 @@ static void HandleEndTurn_BattleLost(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
         {
-            if (gBattleOutcome & BATTLE_OUTCOME_BIT_x80)
+            if (gBattleOutcome & OUTCOME_LINK_BATTLE_RUN)
             {
-                gBattlescriptCurrInstr = BattleScript_82DB9C8;
-                gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+                gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeitedLinkBattle;
+                gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
                 gSaveBlock2Ptr->field_CA9_b = 1;
             }
             else
             {
                 gBattlescriptCurrInstr = BattleScript_82DAA0B;
-                gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+                gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
             }
         }
         else
@@ -4802,7 +4802,7 @@ static void HandleEndTurn_BattleLost(void)
             gBattleTextBuff1[0] = gBattleOutcome;
             gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
             gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-            gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+            gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
         }
     }
     else
@@ -4819,13 +4819,13 @@ static void HandleEndTurn_RanFromBattle(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        gBattlescriptCurrInstr = BattleScript_82DB9C1;
+        gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = BATTLE_FORFEITED;
         gSaveBlock2Ptr->field_CA9_b = 1;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
     {
-        gBattlescriptCurrInstr = BattleScript_82DB9C1;
+        gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = BATTLE_FORFEITED;
     }
     else
@@ -5439,7 +5439,7 @@ static void HandleAction_Run(void)
             }
         }
 
-        gBattleOutcome |= BATTLE_OUTCOME_BIT_x80;
+        gBattleOutcome |= OUTCOME_LINK_BATTLE_RUN;
         gSaveBlock2Ptr->field_CA9_b = 1;
     }
     else

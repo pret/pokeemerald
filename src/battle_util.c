@@ -364,7 +364,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DAE2A;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_SelectingDisabledMoveInPalace;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -379,7 +379,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         CancelMultiTurnMoves(gActiveBank);
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DB098;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_SelectingTormentedMoveInPalace;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -394,7 +394,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DB0AF;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_SelectingNotAllowedMoveTauntInPalace;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -409,7 +409,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DB185;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_SelectingImprisionedMoveInPalace;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -1313,7 +1313,7 @@ void TryClearRageStatuses(void)
 u8 AtkCanceller_UnableToUseMove(void)
 {
     u8 effect = 0;
-    s32* bideDmg = &gBattleScripting.bideDmg;
+    s32 *bideDmg = &gBattleScripting.bideDmg;
     do
     {
         switch (gBattleStruct->atkCancellerTracker)

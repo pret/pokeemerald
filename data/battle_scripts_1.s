@@ -610,8 +610,8 @@ BattleScript_EffectRoar::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifability TARGET, ABILITY_SUCTION_CUPS, BattleScript_82DB5B9
-	jumpifstatus3 TARGET, STATUS3_ROOTED, BattleScript_82DB109
+	jumpifability TARGET, ABILITY_SUCTION_CUPS, BattleScript_AbilityPreventsPhasingOut
+	jumpifstatus3 TARGET, STATUS3_ROOTED, BattleScript_PrintMonIsRooted
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
 	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ButItFailed
@@ -1710,7 +1710,7 @@ BattleScript_EffectMagnitude::
 	pause 0x20
 	printstring STRINGID_MAGNITUDESTRENGTH
 	waitmessage 0x40
-	goto BattleScript_82D9C44
+	goto BattleScript_HitsAllWithUndergroundBonusLoop
 
 BattleScript_EffectBatonPass::
 	attackcanceler
@@ -1857,17 +1857,17 @@ BattleScript_EffectEarthquake::
 	attackstring
 	ppreduce
 	selectfirstvalidtarget
-BattleScript_82D9C44::
+BattleScript_HitsAllWithUndergroundBonusLoop::
 	movevaluescleanup
-	jumpifnostatus3 TARGET, STATUS3_UNDERGROUND, BattleScript_82D9C64
+	jumpifnostatus3 TARGET, STATUS3_UNDERGROUND, BattleScript_HitsAllNoUndergroundBonus
 	orword gHitMarker, HITMARKER_IGNORE_UNDERGROUND
 	setbyte sDMG_MULTIPLIER, 0x2
-	goto BattleScript_82D9C73
-BattleScript_82D9C64::
+	goto BattleScript_DoHitAllWithUndergroundBonus
+BattleScript_HitsAllNoUndergroundBonus::
 	bicword gHitMarker, HITMARKER_IGNORE_UNDERGROUND
 	setbyte sDMG_MULTIPLIER, 0x1
-BattleScript_82D9C73::
-	accuracycheck BattleScript_82D9CAC, ACC_CURR_MOVE
+BattleScript_DoHitAllWithUndergroundBonus::
+	accuracycheck BattleScript_HitAllWithUndergroundBonusMissed, ACC_CURR_MOVE
 	critcalc
 	damagecalc
 	typecalc
@@ -1888,9 +1888,9 @@ BattleScript_82D9C73::
 	tryfaintmon TARGET, FALSE, NULL
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
-	jumpifnexttargetvalid BattleScript_82D9C44
+	jumpifnexttargetvalid BattleScript_HitsAllWithUndergroundBonusLoop
 	end
-BattleScript_82D9CAC::
+BattleScript_HitAllWithUndergroundBonusMissed::
 	pause 0x20
 	typecalc
 	effectivenesssound
@@ -1898,7 +1898,7 @@ BattleScript_82D9CAC::
 	waitmessage 0x40
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
-	jumpifnexttargetvalid BattleScript_82D9C44
+	jumpifnexttargetvalid BattleScript_HitsAllWithUndergroundBonusLoop
 	end
 
 BattleScript_EffectFutureSight::
@@ -2289,10 +2289,10 @@ BattleScript_EffectFocusPunch::
 BattleScript_EffectSmellingsalt::
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHit
 	setmoveeffect EFFECT_REMOVE_PARALYSIS | CERTAIN
-	jumpifstatus TARGET, STATUS_PARALYSIS, BattleScript_82DA1BA
+	jumpifstatus TARGET, STATUS_PARALYSIS, BattleScript_SmellingsaltDoubleDmg
 	goto BattleScript_EffectHit
 
-BattleScript_82DA1BA::
+BattleScript_SmellingsaltDoubleDmg::
 	setbyte sDMG_MULTIPLIER, 0x2
 	goto BattleScript_EffectHit
 
@@ -3289,14 +3289,13 @@ BattleScript_LeechSeedTurnDrain::
 	healthbarupdate ATTACKER
 	datahpupdate ATTACKER
 	copyword gBattleMoveDamage, gHpDealt
-	jumpifability ATTACKER, ABILITY_LIQUID_OOZE, BattleScript_82DAD47
+	jumpifability ATTACKER, ABILITY_LIQUID_OOZE, BattleScript_LeechSeedTurnPrintLiquidOoze
 	manipulatedamage ATK80_DMG_CHANGE_SIGN
 	setbyte cMULTISTRING_CHOOSER, 0x3
-	goto BattleScript_82DAD4D
-
-BattleScript_82DAD47::
+	goto BattleScript_LeechSeedTurnPrintAndUpdateHp
+BattleScript_LeechSeedTurnPrintLiquidOoze::
 	setbyte cMULTISTRING_CHOOSER, 0x4
-BattleScript_82DAD4D::
+BattleScript_LeechSeedTurnPrintAndUpdateHp::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate TARGET
 	datahpupdate TARGET
@@ -3387,9 +3386,9 @@ BattleScript_DisabledNoMore::
 	waitmessage 0x40
 	end2
 
-BattleScript_82DAE2A::
+BattleScript_SelectingDisabledMoveInPalace::
 	printstring STRINGID_PKMNMOVEISDISABLED
-BattleScript_82DAE2D::
+BattleScript_SelectingUnusableMoveInPalace::
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
 	end
@@ -3534,19 +3533,19 @@ BattleScript_SpikesFree::
 BattleScript_MonTookFutureAttack::
 	printstring STRINGID_PKMNTOOKATTACK
 	waitmessage 0x40
-	jumpifbyte NOT_EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_82DB001
-	accuracycheck BattleScript_82DB058, MOVE_FUTURE_SIGHT
-	goto BattleScript_82DB008
-BattleScript_82DB001::
-	accuracycheck BattleScript_82DB058, MOVE_DOOM_DESIRE
-BattleScript_82DB008::
+	jumpifbyte NOT_EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_CheckDoomDesireMiss
+	accuracycheck BattleScript_FutureAttackMiss, MOVE_FUTURE_SIGHT
+	goto BattleScript_FutureAttackAnimate
+BattleScript_CheckDoomDesireMiss::
+	accuracycheck BattleScript_FutureAttackMiss, MOVE_DOOM_DESIRE
+BattleScript_FutureAttackAnimate::
 	adjustnormaldamage2
-	jumpifbyte NOT_EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_82DB020
+	jumpifbyte NOT_EQUAL, cMULTISTRING_CHOOSER, 0x0, BattleScript_FutureHitAnimDoomDesire
 	playanimation ATTACKER, ANIM_FUTURE_SIGHT_HIT, NULL
-	goto BattleScript_82DB027
-BattleScript_82DB020::
-	playanimation ATTACKER, ANIM_x13, NULL
-BattleScript_82DB027::
+	goto BattleScript_DoFutureAttackHit
+BattleScript_FutureHitAnimDoomDesire::
+	playanimation ATTACKER, ANIM_DOOM_DESIRE_HIT, NULL
+BattleScript_DoFutureAttackHit::
 	effectivenesssound
 	hitanimation TARGET
 	waitstate
@@ -3555,15 +3554,16 @@ BattleScript_82DB027::
 	resultmessage
 	waitmessage 0x40
 	tryfaintmon TARGET, FALSE, NULL
-	atk24 BattleScript_82DB03F
-BattleScript_82DB03F::
+	atk24 BattleScript_FutureAttackEnd
+BattleScript_FutureAttackEnd::
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x1, 0x0
 	setbyte sMOVEEND_STATE, 0xB
 	moveend 0x2, 0xE
 	setbyte gBattleMoveFlags, 0
 	end2
-BattleScript_82DB058::
+
+BattleScript_FutureAttackMiss::
 	pause 0x20
 	setbyte gBattleMoveFlags, 0
 	orbyte gBattleMoveFlags, MOVESTATUS_FAILED
@@ -3591,14 +3591,14 @@ BattleScript_SelectingTormentedMove::
 	printselectionstring STRINGID_PKMNCANTUSEMOVETORMENT
 	endselectionscript
 
-BattleScript_82DB08D::
+BattleScript_MoveUsedIsTormented::
 	printstring STRINGID_PKMNCANTUSEMOVETORMENT
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_82DB098::
+BattleScript_SelectingTormentedMoveInPalace::
 	printstring STRINGID_PKMNCANTUSEMOVETORMENT
-	goto BattleScript_82DAE2D
+	goto BattleScript_SelectingUnusableMoveInPalace
 
 BattleScript_SelectingNotAllowedMoveTaunt::
 	printselectionstring STRINGID_PKMNCANTUSEMOVETAUNT
@@ -3609,12 +3609,12 @@ BattleScript_MoveUsedIsTaunted::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_82DB0AF::
+BattleScript_SelectingNotAllowedMoveTauntInPalace::
 	printstring STRINGID_PKMNCANTUSEMOVETAUNT
-	goto BattleScript_82DAE2D
+	goto BattleScript_SelectingUnusableMoveInPalace
 
 BattleScript_WishComesTrue::
-	trywish 0x1, BattleScript_82DB0DE
+	trywish 0x1, BattleScript_WishButFullHp
 	playanimation TARGET, ANIM_WISH_HEAL, NULL
 	printstring STRINGID_PKMNWISHCAMETRUE
 	waitmessage 0x40
@@ -3625,7 +3625,7 @@ BattleScript_WishComesTrue::
 	waitmessage 0x40
 	end2
 
-BattleScript_82DB0DE::
+BattleScript_WishButFullHp::
 	printstring STRINGID_PKMNWISHCAMETRUE
 	waitmessage 0x40
 	pause 0x20
@@ -3642,7 +3642,7 @@ BattleScript_IngrainTurnHeal::
 	datahpupdate ATTACKER
 	end2
 
-BattleScript_82DB109::
+BattleScript_PrintMonIsRooted::
 	pause 0x20
 	printstring STRINGID_PKMNANCHOREDITSELF
 	waitmessage 0x40
@@ -3682,9 +3682,9 @@ BattleScript_SelectingImprisionedMove::
 	printselectionstring STRINGID_PKMNCANTUSEMOVESEALED
 	endselectionscript
 
-BattleScript_82DB185::
+BattleScript_SelectingImprisionedMoveInPalace::
 	printstring STRINGID_PKMNCANTUSEMOVESEALED
-	goto BattleScript_82DAE2D
+	goto BattleScript_SelectingUnusableMoveInPalace
 
 BattleScript_GrudgeTakesPp::
 	printstring STRINGID_PKMNLOSTPPGRUDGE
@@ -4135,7 +4135,7 @@ BattleScript_FlashFireBoost::
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
-BattleScript_82DB5B9::
+BattleScript_AbilityPreventsPhasingOut::
 	pause 0x20
 	printstring STRINGID_PKMNANCHORSITSELFWITH
 	waitmessage 0x40
@@ -4577,12 +4577,12 @@ BattleScript_AskIfWantsToForfeitMatch::
 	forfeityesnobox ATTACKER
 	endselectionscript
 
-BattleScript_82DB9C1::
+BattleScript_PrintPlayerForfeited::
 	printstring STRINGID_FORFEITEDMATCH
 	waitmessage 0x40
 	end2
 
-BattleScript_82DB9C8::
+BattleScript_PrintPlayerForfeitedLinkBattle::
 	printstring STRINGID_FORFEITEDMATCH
 	waitmessage 0x40
 	atk57
