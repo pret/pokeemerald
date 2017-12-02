@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "rng.h"
 #include "link.h"
 #include "librfu.h"
 #include "link_rfu.h"
@@ -1663,5 +1664,67 @@ void sub_800DB18(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
     else
     {
         q1->unk_203 = 1;
+    }
+}
+
+bool8 sub_800DB84(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
+{
+    int i;
+
+    if (q1->unk_200 == q1->unk_201 || q1->unk_203)
+    {
+        return FALSE;
+    }
+    for (i = 0; i < 256; i++)
+    {
+        q2[i] = q1->unk_00[q1->unk_201][i];
+    }
+    q1->unk_201++;
+    q1->unk_201 %= 2;
+    q1->unk_202--;
+    return TRUE;
+}
+
+void sub_800DBF8(struct UnkRfuStruct_Sub_Unused2 *q1, u8 mode)
+{
+    int i;
+    u8 rval;
+    u16 r5 = 0;
+    switch (mode)
+    {
+        case 0:
+            for (i = 0; i < 200; i++)
+            {
+                q1->unk_00[i] = i + 1;
+                r5 += i + 1;
+            }
+            *((u16 *)(q1->unk_00 + i)) = r5;
+            break;
+        case 1:
+            for (i = 0; i < 100; i++)
+            {
+                q1->unk_00[i] = i + 1;
+                r5 += i + 1;
+            }
+            *((u16 *)(q1->unk_00 + 200)) = r5;
+            break;
+        case 2:
+            for (i = 0; i < 200; i++)
+            {
+                rval = Random();
+                q1->unk_00[i] = rval;
+                r5 += rval;
+            }
+            *((u16 *)(q1->unk_00 + i)) = r5;
+            break;
+        case 3:
+            for (i = 0; i < 200; i++)
+            {
+                q1->unk_00[i] = i + 1 + gUnknown_03000D74;
+                r5 += (i + 1 + gUnknown_03000D74) & 0xFF;
+            }
+            *((u16 *)(q1->unk_00 + i)) = r5;
+            gUnknown_03000D74++;
+            break;
     }
 }

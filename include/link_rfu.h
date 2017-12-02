@@ -109,6 +109,11 @@ struct UnkRfuStruct_Sub_Unused {
     /* 0x203 */ vu8 unk_203;
 };
 
+struct UnkRfuStruct_Sub_Unused2 {
+    /* 0x000 */ u8 unk_00[200];
+    /* 0x0c8 */ u16 unk_c8;
+};
+
 struct UnkRfuStruct_2 {
     /* 0x000 */ u8 filler_00[13];
     /* 0x00d */ u8 playerCount;
