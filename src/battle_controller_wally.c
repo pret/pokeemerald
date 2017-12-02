@@ -396,18 +396,18 @@ static void DoHitAnimBlinkSpriteEffect(void)
 {
     u8 spriteId = gBankSpriteIds[gActiveBank];
 
-    if (gSprites[spriteId].data1 == 32)
+    if (gSprites[spriteId].data[1] == 32)
     {
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         gSprites[spriteId].invisible = 0;
         gDoingBattleAnim = FALSE;
         WallyBufferExecCompleted();
     }
     else
     {
-        if ((gSprites[spriteId].data1 % 4) == 0)
+        if ((gSprites[spriteId].data[1] % 4) == 0)
             gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data1++;
+        gSprites[spriteId].data[1]++;
     }
 }
 
@@ -1073,7 +1073,7 @@ static void WallyHandleDrawTrainerPic(void)
                                                30);
     gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 240;
-    gSprites[gBankSpriteIds[gActiveBank]].data0 = -2;
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = -2;
     gSprites[gBankSpriteIds[gActiveBank]].callback = sub_805D7AC;
     gBattleBankFunc[gActiveBank] = CompleteOnBankSpriteCallbackDummy;
 }
@@ -1088,7 +1088,7 @@ static void WallyHandleTrainerSlide(void)
                                                30);
     gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gBankSpriteIds[gActiveBank]].pos2.x = -96;
-    gSprites[gBankSpriteIds[gActiveBank]].data0 = 2;
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = 2;
     gSprites[gBankSpriteIds[gActiveBank]].callback = sub_805D7AC;
     gBattleBankFunc[gActiveBank] = CompleteOnBankSpriteCallbackDummy2;
 }
@@ -1408,7 +1408,7 @@ static void WallyHandleHitAnimation(void)
     else
     {
         gDoingBattleAnim = TRUE;
-        gSprites[gBankSpriteIds[gActiveBank]].data1 = 0;
+        gSprites[gBankSpriteIds[gActiveBank]].data[1] = 0;
         DoHitAnimHealthboxEffect(gActiveBank);
         gBattleBankFunc[gActiveBank] = DoHitAnimBlinkSpriteEffect;
     }
@@ -1462,11 +1462,11 @@ static void WallyHandleIntroTrainerBallThrow(void)
 
     oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBank]]);
 
-    gSprites[gBankSpriteIds[gActiveBank]].data0 = 50;
-    gSprites[gBankSpriteIds[gActiveBank]].data2 = -40;
-    gSprites[gBankSpriteIds[gActiveBank]].data4 = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = 50;
+    gSprites[gBankSpriteIds[gActiveBank]].data[2] = -40;
+    gSprites[gBankSpriteIds[gActiveBank]].data[4] = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
     gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80A6EEC;
-    gSprites[gBankSpriteIds[gActiveBank]].data5 = gActiveBank;
+    gSprites[gBankSpriteIds[gActiveBank]].data[5] = gActiveBank;
 
     StoreSpriteCallbackInData6(&gSprites[gBankSpriteIds[gActiveBank]], sub_805CC00);
     StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], 1);
@@ -1499,17 +1499,17 @@ static void sub_816AA80(u8 bank)
                                         GetBankSpriteDefault_Y(bank),
                                         sub_80A82E4(bank));
 
-    gSprites[gUnknown_03005D7C[bank]].data1 = gBankSpriteIds[bank];
-    gSprites[gUnknown_03005D7C[bank]].data2 = bank;
+    gSprites[gUnknown_03005D7C[bank]].data[1] = gBankSpriteIds[bank];
+    gSprites[gUnknown_03005D7C[bank]].data[2] = bank;
 
-    gSprites[gBankSpriteIds[bank]].data0 = bank;
-    gSprites[gBankSpriteIds[bank]].data2 = species;
+    gSprites[gBankSpriteIds[bank]].data[0] = bank;
+    gSprites[gBankSpriteIds[bank]].data[2] = species;
     gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
 
     StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], gBattleMonForms[bank]);
     gSprites[gBankSpriteIds[bank]].invisible = TRUE;
     gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
-    gSprites[gUnknown_03005D7C[bank]].data0 = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
+    gSprites[gUnknown_03005D7C[bank]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
 }
 
 static void sub_816AC04(u8 taskId)

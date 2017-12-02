@@ -1620,7 +1620,7 @@ void CB2_QuitRecordedBattle(void)
 
 void sub_8038528(struct Sprite* sprite)
 {
-    sprite->data0 = 0;
+    sprite->data[0] = 0;
     sprite->callback = sub_8038538;
 }
 
@@ -1628,42 +1628,42 @@ static void sub_8038538(struct Sprite *sprite)
 {
     u16 *arr = (u16*)(gDecompressionBuffer);
 
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
-        sprite->data0++;
-        sprite->data1 = 0;
-        sprite->data2 = 0x281;
-        sprite->data3 = 0;
-        sprite->data4 = 1;
+        sprite->data[0]++;
+        sprite->data[1] = 0;
+        sprite->data[2] = 0x281;
+        sprite->data[3] = 0;
+        sprite->data[4] = 1;
         // fall through
     case 1:
-        sprite->data4--;
-        if (sprite->data4 == 0)
+        sprite->data[4]--;
+        if (sprite->data[4] == 0)
         {
             s32 i;
             s32 r2;
             s32 r0;
 
-            sprite->data4 = 2;
-            r2 = sprite->data1 + sprite->data3 * 32;
-            r0 = sprite->data2 - sprite->data3 * 32;
+            sprite->data[4] = 2;
+            r2 = sprite->data[1] + sprite->data[3] * 32;
+            r0 = sprite->data[2] - sprite->data[3] * 32;
             for (i = 0; i < 29; i += 2)
             {
                 arr[r2 + i] = 0x3D;
                 arr[r0 + i] = 0x3D;
             }
-            sprite->data3++;
-            if (sprite->data3 == 21)
+            sprite->data[3]++;
+            if (sprite->data[3] == 21)
             {
-                sprite->data0++;
-                sprite->data1 = 32;
+                sprite->data[0]++;
+                sprite->data[1] = 32;
             }
         }
         break;
     case 2:
-        sprite->data1--;
-        if (sprite->data1 == 20)
+        sprite->data[1]--;
+        if (sprite->data[1] == 20)
             SetMainCallback2(CB2_InitBattle);
         break;
     }
@@ -1824,12 +1824,12 @@ void nullsub_17(void)
 
 static void sub_8038B04(struct Sprite *sprite)
 {
-    if (sprite->data0 != 0)
-        sprite->pos1.x = sprite->data1 + ((sprite->data2 & 0xFF00) >> 8);
+    if (sprite->data[0] != 0)
+        sprite->pos1.x = sprite->data[1] + ((sprite->data[2] & 0xFF00) >> 8);
     else
-        sprite->pos1.x = sprite->data1 - ((sprite->data2 & 0xFF00) >> 8);
+        sprite->pos1.x = sprite->data[1] - ((sprite->data[2] & 0xFF00) >> 8);
 
-    sprite->data2 += 0x180;
+    sprite->data[2] += 0x180;
 
     if (sprite->affineAnimEnded)
     {
@@ -2382,8 +2382,8 @@ u32 sub_80397C4(u32 setId, u32 tableId)
     return gUnknown_0831ABA0[setId][tableId].width * 8;
 }
 
-#define tBank               data0
-#define tSpeciesId          data2
+#define tBank               data[0]
+#define tSpeciesId          data[2]
 
 void oac_poke_opponent(struct Sprite *sprite)
 {
@@ -2431,20 +2431,20 @@ void SpriteCallbackDummy_2(struct Sprite *sprite)
 
 static void sub_80398BC(struct Sprite *sprite) // unused?
 {
-    sprite->data3 = 6;
-    sprite->data4 = 1;
+    sprite->data[3] = 6;
+    sprite->data[4] = 1;
     sprite->callback = sub_80398D0;
 }
 
 static void sub_80398D0(struct Sprite *sprite)
 {
-    sprite->data4--;
-    if (sprite->data4 == 0)
+    sprite->data[4]--;
+    if (sprite->data[4] == 0)
     {
-        sprite->data4 = 8;
+        sprite->data[4] = 8;
         sprite->invisible ^= 1;
-        sprite->data3--;
-        if (sprite->data3 == 0)
+        sprite->data[3]--;
+        if (sprite->data[3] == 0)
         {
             sprite->invisible = FALSE;
             sprite->callback = SpriteCallbackDummy_2;
@@ -2495,8 +2495,8 @@ void sub_8039934(struct Sprite *sprite)
         yOffset = gMonFrontPicCoords[species].y_offset;
     }
 
-    sprite->data3 = 8 - yOffset / 8;
-    sprite->data4 = 1;
+    sprite->data[3] = 8 - yOffset / 8;
+    sprite->data[4] = 1;
     sprite->callback = sub_8039A48;
 }
 
@@ -2504,20 +2504,20 @@ static void sub_8039A48(struct Sprite *sprite)
 {
     s32 i;
 
-    sprite->data4--;
-    if (sprite->data4 == 0)
+    sprite->data[4]--;
+    if (sprite->data[4] == 0)
     {
-        sprite->data4 = 2;
+        sprite->data[4] = 2;
         sprite->pos2.y += 8;
-        sprite->data3--;
-        if (sprite->data3 < 0)
+        sprite->data[3]--;
+        if (sprite->data[3] < 0)
         {
             FreeSpriteOamMatrix(sprite);
             DestroySprite(sprite);
         }
         else
         {
-            u8 *dst = (u8 *)gMonSpritesGfxPtr->sprites[GetBankIdentity(sprite->tBank)] + (gBattleMonForms[sprite->tBank] << 11) + (sprite->data3 << 8);
+            u8 *dst = (u8 *)gMonSpritesGfxPtr->sprites[GetBankIdentity(sprite->tBank)] + (gBattleMonForms[sprite->tBank] << 11) + (sprite->data[3] << 8);
 
             for (i = 0; i < 0x100; i++)
                 *(dst++) = 0;
@@ -2529,25 +2529,25 @@ static void sub_8039A48(struct Sprite *sprite)
 
 void sub_8039AD8(struct Sprite *sprite)
 {
-    sprite->data3 = 8;
-    sprite->data4 = sprite->invisible;
+    sprite->data[3] = 8;
+    sprite->data[4] = sprite->invisible;
     sprite->callback = sub_8039AF4;
 }
 
 static void sub_8039AF4(struct Sprite *sprite)
 {
-    sprite->data3--;
-    if (sprite->data3 == 0)
+    sprite->data[3]--;
+    if (sprite->data[3] == 0)
     {
         sprite->invisible ^= 1;
-        sprite->data3 = 8;
+        sprite->data[3] = 8;
     }
 }
 
 void sub_8039B2C(struct Sprite *sprite)
 {
-    sprite->invisible = sprite->data4;
-    sprite->data4 = FALSE;
+    sprite->invisible = sprite->data[4];
+    sprite->data[4] = FALSE;
     sprite->callback = SpriteCallbackDummy_2;
 }
 
@@ -2577,7 +2577,7 @@ static void oac_poke_ally_(struct Sprite *sprite)
         if (sprite->pos2.x == 0)
         {
             sprite->callback = SpriteCallbackDummy_3;
-            sprite->data1 = 0;
+            sprite->data[1] = 0;
         }
     }
 }
@@ -2595,8 +2595,8 @@ void sub_8039C00(struct Sprite *sprite)
 {
     if (!(gUnknown_020243FC & 1))
     {
-        sprite->pos2.x += sprite->data1;
-        sprite->pos2.y += sprite->data2;
+        sprite->pos2.x += sprite->data[1];
+        sprite->pos2.y += sprite->data[2];
     }
 }
 
@@ -2622,19 +2622,19 @@ void dp11b_obj_instanciate(u8 bank, u8 b, s8 c, s8 d)
         spriteId2 = gHealthBoxesIds[bank];
         gBattleSpritesDataPtr->healthBoxesData[bank].field_2 = bounceHealthBoxSpriteId;
         gBattleSpritesDataPtr->healthBoxesData[bank].flag_x2 = 1;
-        gSprites[bounceHealthBoxSpriteId].data0 = 0x80;
+        gSprites[bounceHealthBoxSpriteId].data[0] = 0x80;
     }
     else
     {
         spriteId2 = gBankSpriteIds[bank];
         gBattleSpritesDataPtr->healthBoxesData[bank].field_3 = bounceHealthBoxSpriteId;
         gBattleSpritesDataPtr->healthBoxesData[bank].flag_x4 = 1;
-        gSprites[bounceHealthBoxSpriteId].data0 = 0xC0;
+        gSprites[bounceHealthBoxSpriteId].data[0] = 0xC0;
     }
-    gSprites[bounceHealthBoxSpriteId].data1 = c;
-    gSprites[bounceHealthBoxSpriteId].data2 = d;
-    gSprites[bounceHealthBoxSpriteId].data3 = spriteId2;
-    gSprites[bounceHealthBoxSpriteId].data4 = b;
+    gSprites[bounceHealthBoxSpriteId].data[1] = c;
+    gSprites[bounceHealthBoxSpriteId].data[2] = d;
+    gSprites[bounceHealthBoxSpriteId].data[3] = spriteId2;
+    gSprites[bounceHealthBoxSpriteId].data[4] = b;
     gSprites[spriteId2].pos2.x = 0;
     gSprites[spriteId2].pos2.y = 0;
 }
@@ -2648,7 +2648,7 @@ void dp11b_obj_free(u8 bank, bool8 b)
         if (!gBattleSpritesDataPtr->healthBoxesData[bank].flag_x2)
             return;
 
-        r4 = gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_2].data3;
+        r4 = gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_2].data[3];
         DestroySprite(&gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_2]);
         gBattleSpritesDataPtr->healthBoxesData[bank].flag_x2 = 0;
     }
@@ -2657,7 +2657,7 @@ void dp11b_obj_free(u8 bank, bool8 b)
         if (!gBattleSpritesDataPtr->healthBoxesData[bank].flag_x4)
             return;
 
-        r4 = gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_3].data3;
+        r4 = gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_3].data[3];
         DestroySprite(&gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_3]);
         gBattleSpritesDataPtr->healthBoxesData[bank].flag_x4 = 0;
     }
@@ -2667,16 +2667,16 @@ void dp11b_obj_free(u8 bank, bool8 b)
 
 static void SpriteCB_HealthBoxBounce(struct Sprite *sprite)
 {
-    u8 spriteId = sprite->data3;
+    u8 spriteId = sprite->data[3];
     s32 var;
 
-    if (sprite->data4 == 1)
-        var = sprite->data0;
+    if (sprite->data[4] == 1)
+        var = sprite->data[0];
     else
-        var = sprite->data0;
+        var = sprite->data[0];
 
-    gSprites[spriteId].pos2.y = Sin(var, sprite->data2) + sprite->data2;
-    sprite->data0 = (sprite->data0 + sprite->data1) & 0xFF;
+    gSprites[spriteId].pos2.y = Sin(var, sprite->data[2]) + sprite->data[2];
+    sprite->data[0] = (sprite->data[0] + sprite->data[1]) & 0xFF;
 }
 
 void sub_8039E44(struct Sprite *sprite)

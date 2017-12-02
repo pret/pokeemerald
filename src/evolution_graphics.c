@@ -112,18 +112,18 @@ static void SpriteCB_PreEvoSparkleSet1(struct Sprite* sprite)
     {
         u8 matrixNum;
 
-        sprite->pos1.y = 88 - (sprite->data7 * sprite->data7) / 80;
-        sprite->pos2.y = Sin((u8)(sprite->data6), sprite->data5) / 4;
-        sprite->pos2.x = Cos((u8)(sprite->data6), sprite->data5);
-        sprite->data6 += 4;
-        if (sprite->data7 & 1)
-            sprite->data5--;
-        sprite->data7++;
+        sprite->pos1.y = 88 - (sprite->data[7] * sprite->data[7]) / 80;
+        sprite->pos2.y = Sin((u8)(sprite->data[6]), sprite->data[5]) / 4;
+        sprite->pos2.x = Cos((u8)(sprite->data[6]), sprite->data[5]);
+        sprite->data[6] += 4;
+        if (sprite->data[7] & 1)
+            sprite->data[5]--;
+        sprite->data[7]++;
         if (sprite->pos2.y > 0)
             sprite->subpriority = 1;
         else
             sprite->subpriority = 20;
-        matrixNum = sprite->data5 / 4 + 20;
+        matrixNum = sprite->data[5] / 4 + 20;
         if (matrixNum > 31)
             matrixNum = 31;
         sprite->oam.matrixNum = matrixNum;
@@ -137,9 +137,9 @@ static void CreatePreEvoSparkleSet1(u8 arg0)
     u8 spriteID = CreateSprite(&sEvoSparkleSpriteTemplate, 120, 88, 0);
     if (spriteID != MAX_SPRITES)
     {
-        gSprites[spriteID].data5 = 48;
-        gSprites[spriteID].data6 = arg0;
-        gSprites[spriteID].data7 = 0;
+        gSprites[spriteID].data[5] = 48;
+        gSprites[spriteID].data[6] = arg0;
+        gSprites[spriteID].data[7] = 0;
         gSprites[spriteID].oam.affineMode = 1;
         gSprites[spriteID].oam.matrixNum = 31;
         gSprites[spriteID].callback = SpriteCB_PreEvoSparkleSet1;
@@ -150,11 +150,11 @@ static void SpriteCB_PreEvoSparkleSet2(struct Sprite* sprite)
 {
     if (sprite->pos1.y < 88)
     {
-        sprite->pos1.y = 8 + (sprite->data7 * sprite->data7) / 5;
-        sprite->pos2.y = Sin((u8)(sprite->data6), sprite->data5) / 4;
-        sprite->pos2.x = Cos((u8)(sprite->data6), sprite->data5);
-        sprite->data5 = 8 + Sin((u8)(sprite->data7 * 4), 40);
-        sprite->data7++;
+        sprite->pos1.y = 8 + (sprite->data[7] * sprite->data[7]) / 5;
+        sprite->pos2.y = Sin((u8)(sprite->data[6]), sprite->data[5]) / 4;
+        sprite->pos2.x = Cos((u8)(sprite->data[6]), sprite->data[5]);
+        sprite->data[5] = 8 + Sin((u8)(sprite->data[7] * 4), 40);
+        sprite->data[7]++;
     }
     else
         DestroySprite(sprite);
@@ -165,9 +165,9 @@ static void CreatePreEvoSparkleSet2(u8 arg0)
     u8 spriteID = CreateSprite(&sEvoSparkleSpriteTemplate, 120, 8, 0);
     if (spriteID != MAX_SPRITES)
     {
-        gSprites[spriteID].data5 = 8;
-        gSprites[spriteID].data6 = arg0;
-        gSprites[spriteID].data7 = 0;
+        gSprites[spriteID].data[5] = 8;
+        gSprites[spriteID].data[6] = arg0;
+        gSprites[spriteID].data[7] = 0;
         gSprites[spriteID].oam.affineMode = 1;
         gSprites[spriteID].oam.matrixNum = 25;
         gSprites[spriteID].subpriority = 1;
@@ -177,12 +177,12 @@ static void CreatePreEvoSparkleSet2(u8 arg0)
 
 static void SpriteCB_PostEvoSparkleSet1(struct Sprite* sprite)
 {
-    if (sprite->data5 > 8)
+    if (sprite->data[5] > 8)
     {
-        sprite->pos2.y = Sin((u8)(sprite->data6), sprite->data5);
-        sprite->pos2.x = Cos((u8)(sprite->data6), sprite->data5);
-        sprite->data5 -= sprite->data3;
-        sprite->data6 += 4;
+        sprite->pos2.y = Sin((u8)(sprite->data[6]), sprite->data[5]);
+        sprite->pos2.x = Cos((u8)(sprite->data[6]), sprite->data[5]);
+        sprite->data[5] -= sprite->data[3];
+        sprite->data[6] += 4;
     }
     else
         DestroySprite(sprite);
@@ -193,10 +193,10 @@ static void CreatePostEvoSparkleSet1(u8 arg0, u8 arg1)
     u8 spriteID = CreateSprite(&sEvoSparkleSpriteTemplate, 120, 56, 0);
     if (spriteID != MAX_SPRITES)
     {
-        gSprites[spriteID].data3 = arg1;
-        gSprites[spriteID].data5 = 120;
-        gSprites[spriteID].data6 = arg0;
-        gSprites[spriteID].data7 = 0;
+        gSprites[spriteID].data[3] = arg1;
+        gSprites[spriteID].data[5] = 120;
+        gSprites[spriteID].data[6] = arg0;
+        gSprites[spriteID].data[7] = 0;
         gSprites[spriteID].oam.affineMode = 1;
         gSprites[spriteID].oam.matrixNum = 31;
         gSprites[spriteID].subpriority = 1;
@@ -206,29 +206,29 @@ static void CreatePostEvoSparkleSet1(u8 arg0, u8 arg1)
 
 static void SpriteCB_PostEvoSparkleSet2(struct Sprite* sprite)
 {
-    if (!(sprite->data7 & 3))
+    if (!(sprite->data[7] & 3))
         sprite->pos1.y++;
-    if (sprite->data6 < 128)
+    if (sprite->data[6] < 128)
     {
         u8 matrixNum;
 
-        sprite->pos2.y = -Sin((u8)(sprite->data6), sprite->data5);
-        sprite->pos1.x = 120 + (sprite->data3 * sprite->data7) / 3;
-        sprite->data6++;
-        matrixNum = 31 - (sprite->data6 * 12 / 128);
-        if (sprite->data6 > 64)
+        sprite->pos2.y = -Sin((u8)(sprite->data[6]), sprite->data[5]);
+        sprite->pos1.x = 120 + (sprite->data[3] * sprite->data[7]) / 3;
+        sprite->data[6]++;
+        matrixNum = 31 - (sprite->data[6] * 12 / 128);
+        if (sprite->data[6] > 64)
             sprite->subpriority = 1;
         else
         {
             sprite->invisible = 0;
             sprite->subpriority = 20;
-            if (sprite->data6 > 112 && sprite->data6 & 1)
+            if (sprite->data[6] > 112 && sprite->data[6] & 1)
                 sprite->invisible = 1;
         }
         if (matrixNum < 20)
             matrixNum = 20;
         sprite->oam.matrixNum = matrixNum;
-        sprite->data7++;
+        sprite->data[7]++;
     }
     else
         DestroySprite(sprite);
@@ -239,9 +239,9 @@ static void CreatePostEvoSparkleSet2(u8 arg0)
     u8 spriteID = CreateSprite(&sEvoSparkleSpriteTemplate, 120, 56, 0);
     if (spriteID != MAX_SPRITES)
     {
-        gSprites[spriteID].data3 = 3 - (Random() % 7);
-        gSprites[spriteID].data5 = 48 + (Random() & 0x3F);
-        gSprites[spriteID].data7 = 0;
+        gSprites[spriteID].data[3] = 3 - (Random() % 7);
+        gSprites[spriteID].data[5] = 48 + (Random() & 0x3F);
+        gSprites[spriteID].data[7] = 0;
         gSprites[spriteID].oam.affineMode = 1;
         gSprites[spriteID].oam.matrixNum = 31;
         gSprites[spriteID].subpriority = 20;
