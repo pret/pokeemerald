@@ -113,8 +113,8 @@ _081DB4D4:
 	bx r1
 	thumb_func_end sub_81DB494
 
-	thumb_func_start sub_81DB4DC
-sub_81DB4DC: @ 81DB4DC
+	thumb_func_start PadNameString
+PadNameString: @ 81DB4DC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -156,7 +156,7 @@ _081DB51E:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81DB4DC
+	thumb_func_end PadNameString
 
 	thumb_func_start sub_81DB52C
 sub_81DB52C: @ 81DB52C
