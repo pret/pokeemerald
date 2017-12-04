@@ -45,6 +45,8 @@ static void sub_800D610(void);
 void sub_800D630(void);
 bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
 bool32 sub_8010454(u16 a0);
+u8 sub_8011A74(void);
+u8 sub_8012224(void);
 
 // .rodata
 
@@ -2138,12 +2140,84 @@ u8 sub_800E124(void)
     return 0;
 }
 
-void sub_800E15C(struct Sprite *sprite, int val)
+void sub_800E15C(struct Sprite *sprite, int signalStrengthAnimNum)
 {
-    if (sprite->data2 != val)
+    if (sprite->data2 != signalStrengthAnimNum)
     {
-        sprite->data2 = val;
+        sprite->data2 = signalStrengthAnimNum;
         sprite->data3 = 0;
         sprite->data4 = 0;
+    }
+}
+
+void sub_800E174(void)
+{
+    if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].data7 == 0x1234)
+    {
+        struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
+        u8 signalStrength = 255;
+        u8 i = 0;
+        if (gUnknown_03007890->unk_00 == 1)
+        {
+            for (i = 0; i < GetLinkPlayerCount() - 1; i++)
+            {
+                if (signalStrength >= sub_800DD1C(i + 1))
+                {
+                    signalStrength = sub_800DD1C(i + 1);
+                }
+            }
+        }
+        else
+        {
+            signalStrength = sub_800E124();
+        }
+        if (sub_8012224() == TRUE)
+        {
+            sprite->data0 = 4;
+        }
+        else if (signalStrength < 25)
+        {
+            sprite->data0 = 3;
+        }
+        else if (signalStrength >= 25 && signalStrength < 127)
+        {
+            sprite->data0 = 2;
+        }
+        else if (signalStrength >= 127 && signalStrength < 229)
+        {
+            sprite->data0 = 1;
+        }
+        else if (signalStrength >= 229)
+        {
+            sprite->data0 = 0;
+        }
+        if (sprite->data0 != sprite->data1)
+        {
+            sub_800E15C(sprite, sprite->data0);
+            sprite->data1 = sprite->data0;
+        }
+        if (sprite->anims[sprite->data2][sprite->data4].frame.duration < sprite->data3)
+        {
+            sprite->data4++;
+            sprite->data3 = 0;
+            if (sprite->anims[sprite->data2][sprite->data4].type == -2)
+            {
+                sprite->data4 = 0;
+            }
+        }
+        else
+        {
+            sprite->data3++;
+        }
+        gMain.oamBuffer[125] = sWirelessStatusIndicatorOamData;
+        gMain.oamBuffer[125].x = sprite->pos1.x + sprite->centerToCornerVecX;
+        gMain.oamBuffer[125].y = sprite->pos1.y + sprite->centerToCornerVecY;
+        gMain.oamBuffer[125].paletteNum = sprite->oam.paletteNum;
+        gMain.oamBuffer[125].tileNum = sprite->data6 + sprite->anims[sprite->data2][sprite->data4].frame.imageValue;
+        CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));
+        if (sub_8011A74() == 1)
+        {
+            sub_800E084();
+        }
     }
 }
