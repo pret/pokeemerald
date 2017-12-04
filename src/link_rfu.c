@@ -2,6 +2,7 @@
 // Includes
 #include "global.h"
 #include "rng.h"
+#include "decompress.h"
 #include "text.h"
 #include "event_data.h"
 #include "link.h"
@@ -163,7 +164,7 @@ static const union AnimCmd *const sWirelessStatusIndicatorAnims[] = {
     sWirelessStatusIndicatorAnim3,
     sWirelessStatusIndicatorAnim4
 };
-const struct SpriteSheet sWirelessStatusIndicatorSpriteSheet = {
+const struct CompressedSpriteSheet sWirelessStatusIndicatorSpriteSheet = {
     gWirelessLinkIconPic, 0x0380, 0xD431
 };
 const struct SpritePalette sWirelessStatusIndicatorSpritePalette = {
@@ -2098,5 +2099,51 @@ void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
         gSprites[gWirelessStatusIndicatorSpriteId].data7 = 0x1234;
         gSprites[gWirelessStatusIndicatorSpriteId].data6 = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
         gSprites[gWirelessStatusIndicatorSpriteId].invisible = TRUE;
+    }
+}
+
+void sub_800E084(void)
+{
+    if (gSprites[gWirelessStatusIndicatorSpriteId].data7 == 0x1234)
+    {
+        gSprites[gWirelessStatusIndicatorSpriteId].data7 = 0;
+        DestroySprite(&gSprites[gWirelessStatusIndicatorSpriteId]);
+        gMain.oamBuffer[125] = gDummyOamData;
+        CpuCopy16(&gDummyOamData, (struct OamData *)OAM + 125, sizeof(struct OamData));
+    }
+}
+
+void sub_800E0E8(void)
+{
+    if (GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag) == 0xFFFF)
+    {
+        LoadCompressedObjectPic(&sWirelessStatusIndicatorSpriteSheet);
+    }
+    LoadSpritePalette(&sWirelessStatusIndicatorSpritePalette);
+    gWirelessStatusIndicatorSpriteId = 0xFF;
+}
+
+u8 sub_800E124(void)
+{
+    u8 i;
+    u8 flags = gUnknown_03007890->unk_02;
+    for (i = 0; i < 4; i++)
+    {
+        if (flags & 1)
+        {
+            return gUnknown_03007890->unk_0a[i];
+        }
+        flags >>= 1;
+    }
+    return 0;
+}
+
+void sub_800E15C(struct Sprite *sprite, int val)
+{
+    if (sprite->data2 != val)
+    {
+        sprite->data2 = val;
+        sprite->data3 = 0;
+        sprite->data4 = 0;
     }
 }
