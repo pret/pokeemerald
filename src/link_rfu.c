@@ -21,7 +21,8 @@ IWRAM_DATA u8 gUnknown_03000D80[16];
 IWRAM_DATA u16 gUnknown_03000D90[8];
 
 EWRAM_DATA u8 gUnknown_02022B10 = 0;
-EWRAM_DATA struct UnkLinkRfuStruct_02022B14 gUnknown_02022B14 = {};
+EWRAM_DATA ALIGNED(4) struct UnkLinkRfuStruct_02022B14 gUnknown_02022B14 = {};
+EWRAM_DATA ALIGNED(2) u8 gUnknown_02022B22[8] = {};
 EWRAM_DATA struct UnkLinkRfuStruct_02022B2C gUnknown_02022B2C = {};
 
 // Static ROM declarations
@@ -42,6 +43,7 @@ static void sub_800D434(void);
 static void sub_800D610(void);
 void sub_800D630(void);
 bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
+bool32 sub_8010454(u16 a0);
 
 // .rodata
 
@@ -1952,4 +1954,62 @@ void sub_800DD94(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, int r
     data->unk_00_7 = FlagGet(FLAG_SYS_UNKNOWN_87F);
     data->unk_01_0 = IsNationalPokedexEnabled();
     data->unk_01_1 = FlagGet(FLAG_SYS_GAME_CLEAR);
+}
+
+bool8 sub_800DE7C(void *buff1, void *buff2, u8 idx)
+{
+    bool8 retVal;
+
+    if (gUnknown_03004140.unk_06 == 1)
+    {
+        retVal = TRUE;
+        if (sub_8010454(gUnknown_03007890->unk_14[idx].unk_04) && ((gUnknown_03007890->unk_07 >> idx) & 1))
+        {
+            memcpy(buff1, gUnknown_03007890->unk_14[idx].unk_06, 13);
+            memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, 8);
+        }
+        else
+        {
+            memset(buff1, 0, 13);
+            memset(buff2, 0, 8);
+        }
+    }
+    else
+    {
+        retVal = FALSE;
+        if (sub_8010454(gUnknown_03007890->unk_14[idx].unk_04))
+        {
+            memcpy(buff1, gUnknown_03007890->unk_14[idx].unk_06, 13);
+            memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, 8);
+        }
+        else
+        {
+            memset(buff1, 0, 13);
+            memset(buff2, 0, 8);
+        }
+    }
+    return retVal;
+}
+
+bool8 sub_800DF34(void *buff1, void *buff2, u8 idx)
+{
+    bool8 retVal = FALSE;
+    if (gUnknown_03007890->unk_14[idx].unk_04 == 0x7F7D)
+    {
+        memcpy(buff1, gUnknown_03007890->unk_14[idx].unk_06, 13);
+        memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, 8);
+        retVal = TRUE;
+    }
+    else
+    {
+        memset(buff1, 0, 13);
+        memset(buff2, 0, 8);
+    }
+    return retVal;
+}
+
+void sub_800DF90(void *buff1, void *buff2)
+{
+    memcpy(buff1, &gUnknown_02022B14, 13);
+    memcpy(buff2, gUnknown_02022B22, 8);
 }
