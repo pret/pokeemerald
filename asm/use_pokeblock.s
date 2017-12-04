@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8166204
-sub_8166204: @ 8166204
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	adds r6, r1, 0
-	ldr r4, =gUnknown_0203BCAC
-	ldr r0, =0x0000806c
-	bl AllocZeroed
-	str r0, [r4]
-	ldr r1, =gUnknown_0203BC90
-	ldr r2, =0x00007fd0
-	adds r0, r2
-	str r0, [r1]
-	str r5, [r0, 0x8]
-	str r6, [r0, 0x4]
-	ldr r0, =sub_8166380
-	bl launch_c3_walk_stairs_and_run_once
-	ldr r0, =sub_816631C
-	bl SetMainCallback2
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8166204
 
 	thumb_func_start sub_816624C
 sub_816624C: @ 816624C
@@ -63,7 +39,7 @@ _08166284:
 	adds r0, 0x56
 	strb r1, [r0]
 	ldr r0, =sub_8166380
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 	ldr r0, =sub_81662C0
 	bl SetMainCallback2
 	pop {r4,r5}
@@ -144,8 +120,8 @@ sub_8166340: @ 8166340
 	.pool
 	thumb_func_end sub_8166340
 
-	thumb_func_start launch_c3_walk_stairs_and_run_once
-launch_c3_walk_stairs_and_run_once: @ 816636C
+	thumb_func_start sub_816636C
+sub_816636C: @ 816636C
 	ldr r1, =gUnknown_0203BC90
 	ldr r1, [r1]
 	str r0, [r1]
@@ -154,7 +130,7 @@ launch_c3_walk_stairs_and_run_once: @ 816636C
 	strb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end launch_c3_walk_stairs_and_run_once
+	thumb_func_end sub_816636C
 
 	thumb_func_start sub_8166380
 sub_8166380: @ 8166380
@@ -338,7 +314,7 @@ _08166540:
 	.pool
 _08166550:
 	ldr r0, =map_warp_consider_1_to_outside_or_stair_or_dive
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 _08166556:
 	add sp, 0x4
 	pop {r4,r5}
@@ -424,7 +400,7 @@ _081665C0:
 	bl sub_81D3480
 _0816660A:
 	ldr r0, =sub_8166634
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 _08166610:
 	add sp, 0x4
 	pop {r4}
@@ -567,7 +543,7 @@ _0816675C:
 	.pool
 _08166788:
 	ldr r0, =sub_8166BEC
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 	b _0816680E
 	.pool
 _08166794:
@@ -611,7 +587,7 @@ _081667CC:
 	.pool
 _081667E8:
 	ldr r0, =sub_816681C
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 	b _0816680E
 	.pool
 _081667F4:
@@ -837,7 +813,7 @@ _081669F4:
 	adds r0, r1
 	bl sub_81D3464
 	ldr r0, =sub_8166A34
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 	ldr r0, =sub_816631C
 	bl SetMainCallback2
 _08166A18:
@@ -1020,7 +996,7 @@ _08166BB6:
 	ldrb r0, [r0]
 	bl sub_8136F68
 	ldr r0, =sub_8166BEC
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 _08166BDA:
 	pop {r4-r6}
 	pop {r0}

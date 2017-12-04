@@ -206,6 +206,7 @@ SECTIONS {
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
+        src/use_pokeblock.o(.text);
         asm/use_pokeblock.o(.text);
         src/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
