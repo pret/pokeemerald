@@ -17,7 +17,7 @@ extern void SetPlayerAvatarTransitionFlags(u8);
 
 
 // 817C8BC
-bool8 SetUpFieldMove_Teleport()
+bool8 SetUpFieldMove_Teleport(void)
 {
     if (is_light_level_1_2_3_or_6(gMapHeader.mapType) == TRUE)
     {
@@ -29,7 +29,7 @@ bool8 SetUpFieldMove_Teleport()
 }
 
 // 817C8FC
-void hm_teleport_run_dp02scr()
+void hm_teleport_run_dp02scr(void)
 {
     sub_808469C();
     FieldEffectStart(0x3F);
@@ -37,7 +37,7 @@ void hm_teleport_run_dp02scr()
 }
 
 // 817C91C
-u8 FldEff_UseTeleport()
+u8 FldEff_UseTeleport(void)
 {
     u8 taskID = oei_task_add();
     gTasks[taskID].data[8] = (u32)sub_817C94C >> 16;
@@ -46,7 +46,7 @@ u8 FldEff_UseTeleport()
     return 0;
 }
 
-void sub_817C94C()
+void sub_817C94C(void)
 {
     FieldEffectActiveListRemove(0x3F);
     sub_80B7FC8();
