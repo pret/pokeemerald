@@ -331,6 +331,7 @@ SECTIONS {
         data/io_reg.o(.rodata);
         src/string_util.o(.rodata);
         src/link.o(.rodata);
+        src/link_rfu.o(.rodata);
         data/link_rfu.o(.rodata);
         data/rom_8011DC0.o(.rodata);
         src/rtc.o(.rodata);

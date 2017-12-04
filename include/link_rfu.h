@@ -5,17 +5,22 @@
 
 struct UnkLinkRfuStruct_02022B14
 {
-    u8 unk_00_0:4;
-    u8 unk_00_4:1;
-    u8 unk_00_5:1;
-    u8 unk_00_6:2;
-    u8 filler_01[2];
-    u8 unk_03[4];
+    u16 unk_00_0:4;
+    u16 unk_00_4:1;
+    u16 unk_00_5:1;
+    u16 unk_00_6:1;
+    u16 unk_00_7:1;
+    u16 unk_01_0:1;
+    u16 unk_01_1:1;
+    u16 unk_01_2:4;
+    u16 unk_01_6:2;
+    u8 playerTrainerId[2];
+    u8 unk_04[4];
     u16 unk_08_0:10;
     u16 unk_09_2:6;
     u8 unk_0a_0:7;
     u8 unk_0a_7:1;
-    u8 unk_0b_0:1;
+    u8 playerGender:1;
     u8 unk_0b_1:7;
     u8 unk_0c;
     u8 unk_0d;
@@ -107,11 +112,6 @@ struct UnkRfuStruct_Sub_Unused {
     /* 0x201 */ vu8 unk_201;
     /* 0x202 */ vu8 unk_202;
     /* 0x203 */ vu8 unk_203;
-};
-
-struct UnkRfuStruct_Sub_Unused2 {
-    /* 0x000 */ u8 unk_00[200];
-    /* 0x0c8 */ u16 unk_c8;
 };
 
 struct UnkRfuStruct_2 {
