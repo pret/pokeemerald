@@ -198,7 +198,7 @@ _080C2836:
 	bl sub_800E0E8
 	movs r0, 0xE6
 	movs r1, 0x96
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 _080C2852:
 	movs r6, 0x1
 	negs r6, r6

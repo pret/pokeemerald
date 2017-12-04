@@ -736,7 +736,7 @@ static void CB2_HandleStartBattle(void)
                     gBattleCommunication[MULTIUSE_STATE] = 2;
                 }
                 if (gWirelessCommType)
-                    sub_800DFB4(0, 0);
+                    CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
         else
@@ -938,7 +938,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
                 }
 
                 if (gWirelessCommType)
-                    sub_800DFB4(0, 0);
+                    CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
         else
@@ -1325,7 +1325,7 @@ static void CB2_HandleStartMultiBattle(void)
                     gBattleCommunication[MULTIUSE_STATE]++;
                 }
                 if (gWirelessCommType)
-                    sub_800DFB4(0, 0);
+                    CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
         else

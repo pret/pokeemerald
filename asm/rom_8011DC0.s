@@ -764,7 +764,7 @@ _08012BF6:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	movs r0, 0x5
 	strb r0, [r6, 0x19]
 	ldrb r1, [r6, 0x13]
@@ -2540,7 +2540,7 @@ sub_8013BD8: @ 8013BD8
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	ldrb r0, [r4, 0xE]
 	bl sub_81AE70C
 	ldr r0, =gStringVar1
@@ -4319,7 +4319,7 @@ _08014C82:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	ldr r1, [r5]
 	ldrb r0, [r5, 0x13]
 	lsls r0, 5
@@ -4816,7 +4816,7 @@ _080150D6:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	ldrb r0, [r7, 0xE]
 	bl sub_81AE70C
 	ldr r0, =gStringVar1
@@ -5188,7 +5188,7 @@ _08015452:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	ldr r0, [r5]
 	adds r4, r0, 0
 	adds r4, 0x10
@@ -22061,7 +22061,7 @@ _0801DEC8:
 	bl sub_800E0E8
 	movs r0, 0xE8
 	movs r1, 0x96
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 _0801DF04:
 	add sp, 0x4
 	pop {r4-r6}
@@ -28419,7 +28419,7 @@ _08021278:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	adds r0, r5, 0
 	bl sub_8022730
 	ldr r0, =gSpriteCoordOffsetY
@@ -35628,7 +35628,7 @@ _08024C5A:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	b _08024D20
 	.pool
 _08024C80:
@@ -47465,7 +47465,7 @@ _0802AD0C:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	ldr r1, [r4]
 	b _0802ADC0
 	.pool

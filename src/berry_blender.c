@@ -956,7 +956,7 @@ static void sub_807FAC8(void)
             if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
             {
                 sub_800E0E8();
-                sub_800DFB4(0, 0);
+                CreateWirelessStatusIndicatorSprite(0, 0);
             }
             SetVBlankCallback(VBlankCB0_BerryBlender);
             sBerryBlenderData->mainState++;
@@ -1162,7 +1162,7 @@ static void sub_8080018(void)
         if (gReceivedRemoteLinkPlayers != 0 && gWirelessCommType)
         {
             sub_800E0E8();
-            sub_800DFB4(0, 0);
+            CreateWirelessStatusIndicatorSprite(0, 0);
         }
         sBerryBlenderData->mainState++;
         break;

@@ -4,52 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_082ED570:: @ 82ED570
-	.byte 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00
-
-	.align 2
-gUnknown_082ED578:: @ 82ED578
-	.2byte 0x0004, 0x0005, 0x0008, 0x0005, 0x000c, 0x0005, 0x0010, 0x000a
-	.2byte 0x000c, 0x0005, 0x0008, 0x0005, 0xfffe, 0x0000
-
-	.align 2
-gUnknown_082ED594:: @ 82ED594
-	.2byte 0x0004, 0x0005, 0x0008, 0x0005, 0x000c, 0x000a, 0x0008, 0x0005
-	.2byte 0xfffe, 0x0000
-
-	.align 2
-gUnknown_082ED5A8:: @ 82ED5A8
-	.2byte 0x0004, 0x0005, 0x0008, 0x0005, 0xfffe, 0x0000
-
-	.align 2
-gUnknown_082ED5B4:: @ 82ED5B4
-	.2byte 0x0004, 0x000a, 0x0014, 0x000a, 0xfffe, 0x0000
-
-	.align 2
-gUnknown_082ED5C0:: @ 82ED5C0
-	.2byte 0x0018, 0x000a, 0x0004, 0x000a, 0xfffe, 0x0000
-
-	.align 2
-gUnknown_082ED5CC:: @ 82ED5CC
-	.4byte gUnknown_082ED578
-	.4byte gUnknown_082ED594
-	.4byte gUnknown_082ED5A8
-	.4byte gUnknown_082ED5B4
-	.4byte gUnknown_082ED5C0
-
-	.align 2
-gUnknown_082ED5E0:: @ 82ED5E0
-	obj_tiles gWirelessLinkIconPic, 0x0380, 0xD431
-
-	.align 2
-gUnknown_082ED5E8:: @ 82ED5E8
-	obj_pal gWirelessLinkIconPalette, 0xD432
-
-	.align 2
-gUnknown_082ED5F0:: @ 82ED5F0
-	spr_template 0xD431, 0xD432, gUnknown_082ED570, gUnknown_082ED5CC, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-	.align 2
 gUnknown_082ED608:: @ 82ED608
 	.byte 0x04, 0x20, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00
 	.byte 0x14, 0x2b, 0x02, 0x02, 0x22, 0x2b, 0x02, 0x02

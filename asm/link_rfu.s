@@ -7,98 +7,11 @@
 
 @ file boundary?
 
-	thumb_func_start sub_800DFB4
-sub_800DFB4: @ 800DFB4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r3, r0, 24
-	lsls r1, 24
-	lsrs r2, r1, 24
-	cmp r3, 0
-	bne _0800DFCA
-	cmp r2, 0
-	bne _0800DFCA
-	movs r3, 0xE7
-	movs r2, 0x8
-_0800DFCA:
-	ldr r0, =gUnknown_03007890
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _0800E024
-	ldr r0, =gUnknown_082ED5F0
-	adds r1, r3, 0
-	movs r3, 0
-	bl CreateSprite
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r0, =gSprites
-	lsls r4, r5, 4
-	adds r4, r5
-	lsls r4, 2
-	adds r4, r0
-	ldr r0, =0x00001234
-	strh r0, [r4, 0x3C]
-	ldr r0, =gUnknown_082ED5E0
-	ldrh r0, [r0, 0x6]
-	bl GetSpriteTileStartByTag
-	strh r0, [r4, 0x3A]
-	adds r4, 0x3E
-	ldrb r0, [r4]
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r4]
-	ldr r0, =gUnknown_02022B10
-	strb r5, [r0]
-	b _0800E06A
-	.pool
-_0800E024:
-	ldr r0, =gUnknown_082ED5F0
-	adds r1, r3, 0
-	movs r3, 0
-	bl CreateSprite
-	ldr r4, =gUnknown_02022B10
-	strb r0, [r4]
-	ldr r5, =gSprites
-	ldrb r1, [r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, =0x00001234
-	strh r1, [r0, 0x3C]
-	ldr r0, =gUnknown_082ED5E0
-	ldrh r0, [r0, 0x6]
-	bl GetSpriteTileStartByTag
-	ldrb r2, [r4]
-	lsls r1, r2, 4
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r5
-	strh r0, [r1, 0x3A]
-	ldrb r1, [r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-_0800E06A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800DFB4
-
 	thumb_func_start sub_800E084
 sub_800E084: @ 800E084
 	push {r4,lr}
 	ldr r4, =gSprites
-	ldr r3, =gUnknown_02022B10
+	ldr r3, =gWirelessStatusIndicatorSpriteId
 	ldrb r1, [r3]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -139,7 +52,7 @@ _0800E0CA:
 	thumb_func_start sub_800E0E8
 sub_800E0E8: @ 800E0E8
 	push {r4,lr}
-	ldr r4, =gUnknown_082ED5E0
+	ldr r4, =sWirelessStatusIndicatorSpriteSheet
 	ldrh r0, [r4, 0x6]
 	bl GetSpriteTileStartByTag
 	lsls r0, 16
@@ -149,9 +62,9 @@ sub_800E0E8: @ 800E0E8
 	adds r0, r4, 0
 	bl LoadCompressedObjectPic
 _0800E100:
-	ldr r0, =gUnknown_082ED5E8
+	ldr r0, =sWirelessStatusIndicatorSpritePalette
 	bl LoadSpritePalette
-	ldr r1, =gUnknown_02022B10
+	ldr r1, =gWirelessStatusIndicatorSpriteId
 	movs r0, 0xFF
 	strb r0, [r1]
 	pop {r4}
@@ -215,7 +128,7 @@ sub_800E174: @ 800E174
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r1, =gUnknown_02022B10
+	ldr r1, =gWirelessStatusIndicatorSpriteId
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	bne _0800E184
@@ -377,7 +290,7 @@ _0800E2B2:
 	movs r1, 0x84
 	lsls r1, 3
 	adds r0, r4, r1
-	ldr r1, =gUnknown_082ED570
+	ldr r1, =sWirelessStatusIndicatorOamData
 	ldr r2, [r1, 0x4]
 	ldr r1, [r1]
 	str r1, [r0]

@@ -3775,7 +3775,7 @@ _080864E0:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	b _08086506
 	.pool
 _080864FC:
@@ -4063,7 +4063,7 @@ _0808676C:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	b _08086792
 	.pool
 _08086788:

@@ -563,7 +563,7 @@ _0807765C:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 	b _08077B46
 	.pool
 _08077680:
@@ -1189,7 +1189,7 @@ _08077C3C:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 _08077C50:
 	ldr r1, =gMain
 	movs r3, 0x87
@@ -7514,7 +7514,7 @@ _0807B0F0:
 	bl sub_800E0E8
 	movs r0, 0
 	movs r1, 0
-	bl sub_800DFB4
+	bl CreateWirelessStatusIndicatorSprite
 _0807B110:
 	ldr r0, =sub_807EA2C
 	bl SetMainCallback2

@@ -234,7 +234,7 @@ u8 GetLinkPlayerCount(void);
 bool32 InUnionRoom(void);
 void sub_800E0E8(void);
 bool8 sub_800A520(void);
-void sub_800DFB4(u8, u8);
+void CreateWirelessStatusIndicatorSprite(u8, u8);
 void sub_800ADF8(void);
 void sub_800B488(void);
 void sub_800A620(void);

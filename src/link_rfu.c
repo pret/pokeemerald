@@ -20,7 +20,7 @@ ALIGNED(4) IWRAM_DATA u8 gUnknown_03000D78[8];
 IWRAM_DATA u8 gUnknown_03000D80[16];
 IWRAM_DATA u16 gUnknown_03000D90[8];
 
-EWRAM_DATA u8 gUnknown_02022B10 = 0;
+EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 EWRAM_DATA ALIGNED(4) struct UnkLinkRfuStruct_02022B14 gUnknown_02022B14 = {};
 EWRAM_DATA ALIGNED(2) u8 gUnknown_02022B22[8] = {};
 EWRAM_DATA struct UnkLinkRfuStruct_02022B2C gUnknown_02022B2C = {};
@@ -49,7 +49,7 @@ bool32 sub_8010454(u16 a0);
 
 const u16 gWirelessLinkIconPalette[] = INCBIN_U16("graphics/interface/wireless_link_icon.gbapal");
 const u8 gWirelessLinkIconPic[] = INCBIN_U8("graphics/interface/wireless_link_icon.4bpp.lz");
-const u8 gUnknown_082ED370[] = {
+const u8 sWireless_ASCIItoRSETable[] = {
     0xff, 0x95, 0x96, 0x97, 0x98, 0x99, 0x9a, 0x37,
     0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f,
     0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47,
@@ -83,7 +83,7 @@ const u8 gUnknown_082ED370[] = {
     0x2c, 0x2e, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c,
     0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94
 };
-const u8 gUnknown_082ED470[] = {
+const u8 sWireless_RSEtoASCIITable[] = {
     0x20, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c,
     0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
     0x95, 0x96, 0x97, 0x98, 0x99, 0x9a, 0x9b, 0x9c,
@@ -116,6 +116,67 @@ const u8 gUnknown_082ED470[] = {
     0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7a, 0x20,
     0x20, 0x2b, 0x5b, 0x5c, 0x5d, 0x5e, 0x5f, 0x20,
     0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00
+};
+const struct OamData sWirelessStatusIndicatorOamData = {
+    .size = 1
+};
+static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
+    // 3 bars
+    ANIMCMD_FRAME( 4,  5),
+    ANIMCMD_FRAME( 8,  5),
+    ANIMCMD_FRAME(12,  5),
+    ANIMCMD_FRAME(16, 10),
+    ANIMCMD_FRAME(12,  5),
+    ANIMCMD_FRAME( 8,  5),
+    ANIMCMD_JUMP(0)
+};
+static const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
+    // 2 bars
+    ANIMCMD_FRAME( 4,  5),
+    ANIMCMD_FRAME( 8,  5),
+    ANIMCMD_FRAME(12, 10),
+    ANIMCMD_FRAME( 8,  5),
+    ANIMCMD_JUMP(0)
+};
+static const union AnimCmd sWirelessStatusIndicatorAnim2[] = {
+    // 1 bar
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_JUMP(0)
+};
+static const union AnimCmd sWirelessStatusIndicatorAnim3[] = {
+    // searching
+    ANIMCMD_FRAME( 4, 10),
+    ANIMCMD_FRAME(20, 10),
+    ANIMCMD_JUMP(0)
+};
+static const union AnimCmd sWirelessStatusIndicatorAnim4[] = {
+    // error
+    ANIMCMD_FRAME(24, 10),
+    ANIMCMD_FRAME( 4, 10),
+    ANIMCMD_JUMP(0)
+};
+static const union AnimCmd *const sWirelessStatusIndicatorAnims[] = {
+    sWirelessStatusIndicatorAnim0,
+    sWirelessStatusIndicatorAnim1,
+    sWirelessStatusIndicatorAnim2,
+    sWirelessStatusIndicatorAnim3,
+    sWirelessStatusIndicatorAnim4
+};
+const struct SpriteSheet sWirelessStatusIndicatorSpriteSheet = {
+    gWirelessLinkIconPic, 0x0380, 0xD431
+};
+const struct SpritePalette sWirelessStatusIndicatorSpritePalette = {
+    gWirelessLinkIconPalette, 0xD432
+};
+static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
+    0xD431,
+    0xD432,
+    &sWirelessStatusIndicatorOamData,
+    sWirelessStatusIndicatorAnims,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
 };
 
 // .text
@@ -1810,7 +1871,7 @@ void PkmnStrToASCII(u8 *q1, const u8 *q2)
 
     for (i = 0; q2[i] != EOS; i++)
     {
-        q1[i] = gUnknown_082ED470[q2[i]];
+        q1[i] = sWireless_RSEtoASCIITable[q2[i]];
     }
     q1[i] = 0;
 }
@@ -1821,7 +1882,7 @@ void ASCIIToPkmnStr(u8 *q1, const u8 *q2)
 
     for (i = 0; q2[i] != 0; i++)
     {
-        q1[i] = gUnknown_082ED370[q2[i]];
+        q1[i] = sWireless_ASCIItoRSETable[q2[i]];
     }
     q1[i] = EOS;
 }
@@ -2012,4 +2073,30 @@ void sub_800DF90(void *buff1, void *buff2)
 {
     memcpy(buff1, &gUnknown_02022B14, 13);
     memcpy(buff2, gUnknown_02022B22, 8);
+}
+
+void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
+{
+    u8 sprId;
+
+    if (x == 0 && y == 0)
+    {
+        x = 0xE7;
+        y = 0x08;
+    }
+    if (gUnknown_03007890->unk_00 == 1)
+    {
+        sprId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
+        gSprites[sprId].data7 = 0x1234;
+        gSprites[sprId].data6 = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
+        gSprites[sprId].invisible = TRUE;
+        gWirelessStatusIndicatorSpriteId = sprId;
+    }
+    else
+    {
+        gWirelessStatusIndicatorSpriteId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
+        gSprites[gWirelessStatusIndicatorSpriteId].data7 = 0x1234;
+        gSprites[gWirelessStatusIndicatorSpriteId].data6 = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
+        gSprites[gWirelessStatusIndicatorSpriteId].invisible = TRUE;
+    }
 }
