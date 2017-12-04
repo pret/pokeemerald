@@ -13,6 +13,8 @@ extern void sub_817C94C(void);
 extern u8 oei_task_add(void);
 extern void FieldEffectActiveListRemove(u8 id);
 extern void sub_80B7FC8(void);
+extern void SetPlayerAvatarTransitionFlags(u8);
+
 
 // 817C8BC
 bool8 SetUpFieldMove_Teleport()
@@ -34,7 +36,6 @@ void hm_teleport_run_dp02scr()
     gFieldEffectArguments[0] = (u32)GetCursorSelectionMonId();
 }
 
-extern void SetPlayerAvatarTransitionFlags(u8);
 // 817C91C
 u8 FldEff_UseTeleport()
 {
