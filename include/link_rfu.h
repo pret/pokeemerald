@@ -67,7 +67,7 @@ struct UnkRfuStruct_1 {
     /* 0x01a */ u16 unk_1a;
     /* 0x01c */ u16 unk_1c;
     /* 0x01e */ u16 unk_1e;
-    /* 0x020 */ u16 *unk_20;
+    /* 0x020 */ const u16 *unk_20;
     /* 0x024 */ u8 unk_24;
     /* 0x026 */ u16 unk_26;
     /* 0x028 */ u16 unk_28[4];
@@ -126,7 +126,9 @@ struct UnkRfuStruct_Sub_Unused {
 };
 
 struct UnkRfuStruct_2 {
-    /* 0x000 */ u8 filler_00[12];
+    /* 0x000 */ u8 filler_00[4];
+    /* 0x004 */ u16 unk_04;
+    /* 0x006 */ u8 filler_06[6];
     /* 0x00c */ u8 unk_0c;
     /* 0x00d */ u8 playerCount;
     /* 0x00e */ u8 filler_0e[0x5e];
@@ -139,7 +141,9 @@ struct UnkRfuStruct_2 {
     /* 0x9e8 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
     /* 0xc1c */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
     /* 0xc3c */ u8 filler_c3c[3];
-    /* 0xc3f */ u8 filler_c3f[0xb5];
+    /* 0xc3f */ u8 filler_c3f[0x9c];
+    /* 0xcdb */ vu8 unk_cdb;
+    /* 0xcdc */ u8 filler_cdc[0x18];
 }; // size = 0xcf4
 
 // Exported RAM declarations
@@ -174,5 +178,7 @@ bool32 sub_8010F1C(void);
 bool32 sub_800F0B8(void);
 u32 sub_80124D4(void);
 void RfuVSync(void);
+void sub_80111B0(bool32 a0);
+u8 sub_8011A74(void);
 
 #endif //GUARD_LINK_RFU_H

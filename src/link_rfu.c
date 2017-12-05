@@ -2,6 +2,7 @@
 // Includes
 #include "global.h"
 #include "malloc.h"
+#include "task.h"
 #include "rng.h"
 #include "decompress.h"
 #include "text.h"
@@ -46,10 +47,13 @@ static void sub_800D434(void);
 static void sub_800D610(void);
 void sub_800D630(void);
 bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
+void sub_800EDBC(u16 a0);
+void sub_800EAB4(void);
+void sub_800EAFC(void);
 void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
 bool32 sub_8010454(u16 a0);
-void sub_80111B0(bool32 a0);
-u8 sub_8011A74(void);
+void sub_8010750(void);
+void sub_801084C(u8 taskId);
 u8 sub_8012224(void);
 
 // .rodata
@@ -186,6 +190,8 @@ static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
     SpriteCallbackDummy
 };
 
+extern const u16 gUnknown_082ED6E0[4];
+
 // .text
 
 u32 sub_800BEC0(void)
@@ -290,10 +296,10 @@ void sub_800C048(void)
     gUnknown_03004140.unk_04 = 0x15;
 }
 
-u8 sub_800C054(u8 r5, u16 r7, u16 r8, u16 *r6)
+u8 sub_800C054(u8 r5, u16 r7, u16 r8, const u16 *r6)
 {
     u8 i;
-    u16 *buffer;
+    const u16 *buffer;
 
     if (gUnknown_03004140.unk_04 != 0 && (gUnknown_03004140.unk_04 != 0x08 || r5 != 1))
     {
@@ -1168,7 +1174,7 @@ static void sub_800CF34(void)
     u8 i;
     u8 r5;
     u8 r4;
-    u16 *ptr;
+    const u16 *ptr;
 
     if (gUnknown_03004140.unk_04 == 5 || gUnknown_03004140.unk_04 == 6 || gUnknown_03004140.unk_04 == 7 || gUnknown_03004140.unk_04 == 8)
     {
@@ -1338,7 +1344,7 @@ static void sub_800D268(void)
 static u8 sub_800D294(void)
 {
     u8 i;
-    u16 *ptr;
+    const u16 *ptr;
     u8 flags = 0x00;
 
     for (i = 0; i < gUnknown_03007890->unk_08; i++)
@@ -2379,5 +2385,43 @@ void sub_800E700(void)
         sub_80111B0(0);
         sub_800E604();
         rfu_setTimerInterrupt(3, gIntrTable + 2);
+    }
+}
+
+void sub_800E748(u8 taskId)
+{
+    sub_8010750();
+    switch (gUnknown_03005000.unk_04)
+    {
+        case 0:
+            sub_800BFCC(&gUnknown_02022B2C);
+            gUnknown_03005000.unk_04 = 1;
+            gTasks[taskId].data[1] = 1;
+            break;
+        case 1:
+            break;
+        case 2:
+            sub_800C054(gUnknown_03005000.unk_0c, 0, 240, gUnknown_082ED6E0);
+            gUnknown_03005000.unk_04 = 3;
+            gTasks[taskId].data[1] = 6;
+            break;
+        case 3:
+            break;
+        case 4:
+            sub_800C27C(FALSE);
+            gUnknown_03005000.unk_04 = 5;
+            break;
+        case 5:
+            break;
+        case 18:
+            gUnknown_03005000.unk_cdb = 0;
+            sub_800D52C(sub_800EDBC);
+            sub_800EAB4();
+            sub_800EAFC();
+            gUnknown_03005000.unk_04 = 20;
+            gTasks[taskId].data[1] = 8;
+            CreateTask(sub_801084C, 5);
+            DestroyTask(taskId);
+            break;
     }
 }
