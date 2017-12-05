@@ -886,7 +886,7 @@ _08170C08:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -907,13 +907,13 @@ _08170C44:
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	ldr r2, =gSprites
@@ -934,7 +934,7 @@ _08170C44:
 	mov r0, r8
 	str r0, [sp]
 	adds r0, r4, 0
-	bl sub_8171D98
+	bl LaunchBallStarsTask
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x1C]
@@ -950,7 +950,7 @@ _08170C44:
 	ldrb r1, [r5]
 	movs r0, 0
 	mov r3, r8
-	bl sub_81729E8
+	bl LaunchBallFadeMonTask
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x1E]
@@ -998,10 +998,10 @@ sub_8170CFC: @ 8170CFC
 	lsrs r4, 24
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8076A78
+	bl LoadBallGfx
 	adds r0, r4, 0
 	bl DestroyAnimVisualTask
 	pop {r4}
@@ -1018,10 +1018,10 @@ sub_8170D24: @ 8170D24
 	lsrs r4, 24
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8076AE8
+	bl FreeBallGfx
 	adds r0, r4, 0
 	bl DestroyAnimVisualTask
 	pop {r4}
@@ -1057,8 +1057,8 @@ _08170D74:
 	.pool
 	thumb_func_end sub_8170D4C
 
-	thumb_func_start ball_number_to_ball_processing_index
-ball_number_to_ball_processing_index: @ 8170D84
+	thumb_func_start ItemIdToBallId
+ItemIdToBallId: @ 8170D84
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1123,7 +1123,7 @@ _08170DFC:
 _08170DFE:
 	pop {r1}
 	bx r1
-	thumb_func_end ball_number_to_ball_processing_index
+	thumb_func_end ItemIdToBallId
 
 	thumb_func_start sub_8170E04
 sub_8170E04: @ 8170E04
@@ -1138,14 +1138,14 @@ sub_8170E04: @ 8170E04
 	mov r10, r0
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, =gUnknown_0832C588
+	ldr r1, =gBallSpriteTemplates
 	adds r0, r1
 	movs r1, 0x20
 	movs r2, 0x50
@@ -1166,14 +1166,14 @@ sub_8170E04: @ 8170E04
 	mov r8, r2
 	ldrb r0, [r2]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x30]
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -1278,7 +1278,7 @@ _08170F50:
 _08170F54:
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1294,7 +1294,7 @@ _08170F54:
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =gUnknown_0832C588
+	ldr r1, =gBallSpriteTemplates
 	adds r0, r1
 	adds r1, r6, 0
 	adds r1, 0x20
@@ -1317,14 +1317,14 @@ _08170F54:
 	mov r8, r1
 	ldrb r0, [r1]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x30]
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -1487,7 +1487,7 @@ sub_8171134: @ 8171134
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _081711D2
@@ -1532,7 +1532,7 @@ _08171188:
 	str r0, [r4, 0x1C]
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0xB
@@ -1549,13 +1549,13 @@ _08171188:
 	str r5, [sp]
 	movs r2, 0x1
 	movs r3, 0x1C
-	bl sub_8171D98
+	bl LaunchBallStarsTask
 	ldr r0, =gAnimBankTarget
 	ldrb r1, [r0]
 	movs r0, 0
 	movs r2, 0xE
 	adds r3, r5, 0
-	bl sub_81729E8
+	bl LaunchBallFadeMonTask
 _081711D2:
 	add sp, 0x4
 	pop {r4,r5}
@@ -2671,7 +2671,7 @@ sub_8171AAC: @ 8171AAC
 	orrs r0, r1
 	strb r0, [r3]
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _08171ADC
@@ -2697,7 +2697,7 @@ sub_8171AE4: @ 8171AE4
 	str r0, [r4, 0x1C]
 	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0xB
@@ -2714,13 +2714,13 @@ sub_8171AE4: @ 8171AE4
 	str r5, [sp]
 	movs r2, 0x1
 	movs r3, 0x1C
-	bl sub_8171D98
+	bl LaunchBallStarsTask
 	ldr r0, =gAnimBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x1
 	movs r2, 0xE
 	adds r3, r5, 0
-	bl sub_81729E8
+	bl LaunchBallFadeMonTask
 _08171B36:
 	ldr r6, =gSprites
 	ldr r5, =gBankSpriteIds
@@ -3007,8 +3007,8 @@ _08171D86:
 	.pool
 	thumb_func_end sub_8171D60
 
-	thumb_func_start sub_8171D98
-sub_8171D98: @ 8171D98
+	thumb_func_start LaunchBallStarsTask
+LaunchBallStarsTask: @ 8171D98
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -3070,7 +3070,7 @@ sub_8171D98: @ 8171D98
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8171D98
+	thumb_func_end LaunchBallStarsTask
 
 	thumb_func_start sub_8171E20
 sub_8171E20: @ 8171E20
@@ -4476,8 +4476,8 @@ _081729E2:
 	bx r0
 	thumb_func_end sub_8172944
 
-	thumb_func_start sub_81729E8
-sub_81729E8: @ 81729E8
+	thumb_func_start LaunchBallFadeMonTask
+LaunchBallFadeMonTask: @ 81729E8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4563,7 +4563,7 @@ _08172A7E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81729E8
+	thumb_func_end LaunchBallFadeMonTask
 
 	thumb_func_start sub_8172AB0
 sub_8172AB0: @ 8172AB0
@@ -5234,12 +5234,12 @@ _0817303A:
 	ldrb r0, [r4, 0x8]
 	mov r8, r0
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r0, r8
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0x1E
@@ -5579,7 +5579,7 @@ sub_817330C: @ 817330C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r5, =gBattleAnimArgs
 	lsrs r0, 24
@@ -5591,7 +5591,7 @@ sub_817330C: @ 817330C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x6]
@@ -5652,7 +5652,7 @@ _081733C0:
 sub_81733D4: @ 81733D4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _081733F6

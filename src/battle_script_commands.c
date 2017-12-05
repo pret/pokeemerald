@@ -6782,8 +6782,8 @@ static bool8 sub_804F344(void)
     return (gBattle_BG2_X != 0x1A0);
 }
 
-#define sDestroy                    data0
-#define sSavedLvlUpBoxXPosition     data1
+#define sDestroy                    data[0]
+#define sSavedLvlUpBoxXPosition     data[1]
 
 static void PutMonIconOnLvlUpBox(void)
 {

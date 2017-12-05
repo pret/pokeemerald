@@ -933,7 +933,7 @@ struct BattleHealthboxInfo
     u8 flag_x1 : 1;
     u8 flag_x2 : 1;
     u8 flag_x4 : 1;
-    u8 flag_x8 : 1;
+    u8 ballAnimActive : 1; // 0x8
     u8 statusAnimActive : 1; // x10
     u8 animFromTableActive : 1; // x20
     u8 specialAnimActive : 1; //x40

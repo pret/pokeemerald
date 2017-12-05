@@ -10445,7 +10445,7 @@ _0807CD1C:
 	str r2, [sp, 0x10]
 	movs r2, 0x78
 	movs r3, 0x54
-	bl sub_8076438
+	bl CreatePokeballSpriteToReleaseMon
 	ldr r0, [r7]
 	adds r0, 0xD3
 	ldrb r1, [r0]
@@ -12550,7 +12550,7 @@ _0807E168:
 	str r2, [sp, 0x10]
 	movs r2, 0x78
 	movs r3, 0x54
-	bl sub_8076438
+	bl CreatePokeballSpriteToReleaseMon
 	ldr r0, [r7]
 	adds r0, 0xD3
 	ldrb r1, [r0]

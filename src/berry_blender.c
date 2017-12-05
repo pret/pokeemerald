@@ -1002,35 +1002,35 @@ static void sub_807FAC8(void)
 
 static void sub_807FD08(struct Sprite* sprite)
 {
-    sprite->data1 += sprite->data6;
-    sprite->data2 -= sprite->data4;
-    sprite->data2 += sprite->data7;
-    sprite->data0 += sprite->data7;
-    sprite->data4--;
+    sprite->data[1] += sprite->data[6];
+    sprite->data[2] -= sprite->data[4];
+    sprite->data[2] += sprite->data[7];
+    sprite->data[0] += sprite->data[7];
+    sprite->data[4]--;
 
-    if (sprite->data0 < sprite->data2)
+    if (sprite->data[0] < sprite->data[2])
     {
-        sprite->data3 = sprite->data4 = sprite->data3 - 1;
+        sprite->data[3] = sprite->data[4] = sprite->data[3] - 1;
 
-        if (++sprite->data5 > 3)
+        if (++sprite->data[5] > 3)
             DestroySprite(sprite);
         else
             PlaySE(SE_TB_KARA);
     }
-    sprite->pos1.x = sprite->data1;
-    sprite->pos1.y = sprite->data2;
+    sprite->pos1.x = sprite->data[1];
+    sprite->pos1.y = sprite->data[2];
 }
 
 static void sub_807FD64(struct Sprite* sprite, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
 {
-    sprite->data0 = a3;
-    sprite->data1 = a2;
-    sprite->data2 = a3;
-    sprite->data3 = a4;
-    sprite->data4 = 10;
-    sprite->data5 = 0;
-    sprite->data6 = a5;
-    sprite->data7 = a6;
+    sprite->data[0] = a3;
+    sprite->data[1] = a2;
+    sprite->data[2] = a3;
+    sprite->data[3] = a4;
+    sprite->data[4] = 10;
+    sprite->data[5] = 0;
+    sprite->data[6] = a5;
+    sprite->data[7] = a6;
     sprite->callback = sub_807FD08;
 }
 
@@ -2909,10 +2909,10 @@ static void BerryBlender_SetBackgroundsPos(void)
 
 static void sub_8082E3C(struct Sprite* sprite)
 {
-    sprite->data2 += sprite->data0;
-    sprite->data3 += sprite->data1;
-    sprite->pos2.x = sprite->data2 / 8;
-    sprite->pos2.y = sprite->data3 / 8;
+    sprite->data[2] += sprite->data[0];
+    sprite->data[3] += sprite->data[1];
+    sprite->pos2.x = sprite->data[2] / 8;
+    sprite->pos2.y = sprite->data[3] / 8;
 
     if (sprite->animEnded)
         DestroySprite(sprite);
@@ -2935,8 +2935,8 @@ static void sub_8082E84(void)
         y = gSineTable[(rand & 0xFF)] / 4;
 
         spriteId = CreateSprite(&sUnknown_08339BE0, x + 120, y + 80, 1);
-        gSprites[spriteId].data0 = 16 - (Random() % 32);
-        gSprites[spriteId].data1 = 16 - (Random() % 32);
+        gSprites[spriteId].data[0] = 16 - (Random() % 32);
+        gSprites[spriteId].data[1] = 16 - (Random() % 32);
 
         gSprites[spriteId].callback = sub_8082E3C;
     }
@@ -2944,8 +2944,8 @@ static void sub_8082E84(void)
 
 static void sub_8082F68(struct Sprite* sprite)
 {
-    sprite->data0++;
-    sprite->pos2.y = -(sprite->data0 / 3);
+    sprite->data[0]++;
+    sprite->pos2.y = -(sprite->data[0] / 3);
 
     if (sprite->animEnded)
         DestroySprite(sprite);
@@ -2953,8 +2953,8 @@ static void sub_8082F68(struct Sprite* sprite)
 
 static void sub_8082F9C(struct Sprite* sprite)
 {
-    sprite->data0++;
-    sprite->pos2.y = -(sprite->data0 * 2);
+    sprite->data[0]++;
+    sprite->pos2.y = -(sprite->data[0] * 2);
 
     if (sprite->pos2.y < -12)
         sprite->pos2.y = -12;
@@ -2970,68 +2970,68 @@ static void Blender_SetBankBerryData(u8 bank, u16 itemId)
 
 static void sub_8083010(struct Sprite* sprite)
 {
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
-        sprite->data1 += 8;
-        if (sprite->data1 > 88)
+        sprite->data[1] += 8;
+        if (sprite->data[1] > 88)
         {
-            sprite->data1 = 88;
-            sprite->data0++;
+            sprite->data[1] = 88;
+            sprite->data[0]++;
             PlaySE(SE_KON);
         }
         break;
     case 1:
-        sprite->data2 += 1;
-        if (sprite->data2 > 20)
+        sprite->data[2] += 1;
+        if (sprite->data[2] > 20)
         {
-            sprite->data0++;
-            sprite->data2 = 0;
+            sprite->data[0]++;
+            sprite->data[2] = 0;
         }
         break;
     case 2:
-        sprite->data1 += 4;
-        if (sprite->data1 > 176)
+        sprite->data[1] += 4;
+        if (sprite->data[1] > 176)
         {
-            if (++sprite->data3 == 3)
+            if (++sprite->data[3] == 3)
             {
                 DestroySprite(sprite);
                 CreateSprite(&sUnknown_08339C60, 120, -20, 2);
             }
             else
             {
-                sprite->data0 = 0;
-                sprite->data1 = -16;
-                StartSpriteAnim(sprite, sprite->data3);
+                sprite->data[0] = 0;
+                sprite->data[1] = -16;
+                StartSpriteAnim(sprite, sprite->data[3]);
             }
         }
         break;
     }
 
-    sprite->pos2.y = sprite->data1;
+    sprite->pos2.y = sprite->data[1];
 }
 
 static void sub_80830C0(struct Sprite* sprite)
 {
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
-        sprite->data1 += 8;
-        if (sprite->data1 > 92)
+        sprite->data[1] += 8;
+        if (sprite->data[1] > 92)
         {
-            sprite->data1 = 92;
-            sprite->data0++;
+            sprite->data[1] = 92;
+            sprite->data[0]++;
             PlaySE(SE_PIN);
         }
         break;
     case 1:
-        sprite->data2 += 1;
-        if (sprite->data2 > 20)
-            sprite->data0++;
+        sprite->data[2] += 1;
+        if (sprite->data[2] > 20)
+            sprite->data[0]++;
         break;
     case 2:
-        sprite->data1 += 4;
-        if (sprite->data1 > 176)
+        sprite->data[1] += 4;
+        if (sprite->data[1] > 176)
         {
             sBerryBlenderData->mainState++;
             DestroySprite(sprite);
@@ -3039,7 +3039,7 @@ static void sub_80830C0(struct Sprite* sprite)
         break;
     }
 
-    sprite->pos2.y = sprite->data1;
+    sprite->pos2.y = sprite->data[1];
 }
 
 static void sub_8083140(u16 a0, u16 a1)
