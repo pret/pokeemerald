@@ -1,7 +1,7 @@
 #ifndef GUARD_EVENT_DATA_H
 #define GUARD_EVENT_DATA_H
 
-#include "flags.h"
+#include "constants/flags.h"
 #include "vars.h"
 
 void InitEventData(void);

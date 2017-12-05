@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/items.h"
 #include "main.h"
 #include "overworld.h"
 #include "task.h"

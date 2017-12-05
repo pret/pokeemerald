@@ -5,7 +5,7 @@
 #include "moves.h"
 #include "text.h"
 #include "string_util.h"
-#include "items.h"
+#include "constants/items.h"
 #include "event_data.h"
 #include "link.h"
 #include "item.h"

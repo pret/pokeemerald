@@ -6,7 +6,7 @@
 #include "species.h"
 #include "task.h"
 #include "field_effect.h"
-#include "flags.h"
+#include "constants/flags.h"
 
 extern void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatileId); // fieldmap
 extern void DrawWholeMapView(); // field_camera

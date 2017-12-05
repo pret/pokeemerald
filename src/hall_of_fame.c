@@ -15,7 +15,7 @@
 #include "window.h"
 #include "bg.h"
 #include "species.h"
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "blend_palette.h"
 #include "string_util.h"
 #include "m4a.h"
@@ -24,6 +24,7 @@
 #include "trig.h"
 #include "rng.h"
 #include "event_data.h"
+#include "overworld.h"
 
 struct HallofFameMon
 {

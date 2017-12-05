@@ -3,7 +3,7 @@
 #include "daycare.h"
 #include "string_util.h"
 #include "species.h"
-#include "items.h"
+#include "constants/items.h"
 #include "mail.h"
 #include "pokemon_storage_system.h"
 #include "event_data.h"

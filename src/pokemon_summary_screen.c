@@ -3,7 +3,7 @@
 #include "bg.h"
 #include "decompress.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"

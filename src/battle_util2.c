@@ -4,7 +4,7 @@
 #include "malloc.h"
 #include "pokemon.h"
 #include "event_data.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "rng.h"
 
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];

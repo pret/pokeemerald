@@ -1,13 +1,13 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_controllers.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "moves.h"
 #include "pokemon.h"
 #include "species.h"
 #include "rng.h"
 #include "util.h"
-#include "items.h"
+#include "constants/items.h"
 #include "pokemon_item_effects.h"
 
 extern u8 gActiveBank;
