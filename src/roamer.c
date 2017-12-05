@@ -1,7 +1,7 @@
 #include "global.h"
 #include "roamer.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "species.h"
 #include "event_data.h"
 

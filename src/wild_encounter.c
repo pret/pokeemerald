@@ -4,7 +4,7 @@
 #include "species.h"
 #include "metatile_behavior.h"
 #include "fieldmap.h"
-#include "rng.h"
+#include "random.h"
 #include "map_constants.h"
 #include "field_player_avatar.h"
 #include "abilities.h"

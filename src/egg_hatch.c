@@ -16,7 +16,7 @@
 #include "string_util.h"
 #include "menu.h"
 #include "trig.h"
-#include "rng.h"
+#include "random.h"
 #include "malloc.h"
 #include "dma3.h"
 #include "gpu_regs.h"

@@ -2,7 +2,7 @@
 #include "evolution_graphics.h"
 #include "sprite.h"
 #include "trig.h"
-#include "rng.h"
+#include "random.h"
 #include "decompress.h"
 #include "task.h"
 #include "sound.h"

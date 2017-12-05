@@ -6,7 +6,7 @@
 #include "battle_interface.h"
 #include "main.h"
 #include "malloc.h"
-#include "rng.h"
+#include "random.h"
 #include "util.h"
 #include "pokemon.h"
 #include "moves.h"

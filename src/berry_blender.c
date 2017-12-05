@@ -23,7 +23,7 @@
 #include "items.h"
 #include "string_util.h"
 #include "international_string_util.h"
-#include "rng.h"
+#include "random.h"
 #include "menu.h"
 #include "pokeblock.h"
 #include "trig.h"

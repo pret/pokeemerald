@@ -1,5 +1,5 @@
-#ifndef GUARD_RNG_H
-#define GUARD_RNG_H
+#ifndef GUARD_RANDOM_H
+#define GUARD_RANDOM_H
 
 extern u32 gRngValue;
 extern u32 gRng2Value;
@@ -15,4 +15,4 @@ u16 Random2(void);
 void SeedRng(u16 seed);
 void SeedRng2(u16 seed);
 
-#endif // GUARD_RNG_H
+#endif // GUARD_RANDOM_H

@@ -4,7 +4,7 @@
 #include "malloc.h"
 #include "sprite.h"
 #include "overworld.h"
-#include "rng.h"
+#include "random.h"
 #include "event_scripts.h"
 #include "berry.h"
 #include "palette.h"

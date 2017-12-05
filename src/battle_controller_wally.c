@@ -22,7 +22,7 @@
 #include "string_util.h"
 #include "bg.h"
 #include "reshow_battle_screen.h"
-#include "rng.h"
+#include "random.h"
 #include "pokeball.h"
 #include "data2.h"
 #include "party_menu.h"

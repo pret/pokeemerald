@@ -10,7 +10,7 @@
 #include "util.h"
 #include "battle_move_effects.h"
 #include "battle_scripts.h"
-#include "rng.h"
+#include "random.h"
 #include "text.h"
 #include "string_util.h"
 #include "battle_message.h"

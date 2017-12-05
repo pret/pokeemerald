@@ -74,7 +74,7 @@ SECTIONS {
         src/pokemon_3.o(.text);
         asm/pokemon_3.o(.text);
         src/trig.o(.text);
-        src/rng.o(.text);
+        src/random.o(.text);
         src/util.o(.text);
         src/blend_palette.o(.text);
         src/daycare.o(.text);
@@ -87,7 +87,7 @@ SECTIONS {
         src/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
-        asm/rom4.o(.text);
+        asm/overworld.o(.text);
         asm/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
         asm/field_camera.o(.text);
@@ -349,7 +349,7 @@ SECTIONS {
         data/trade.o(.rodata);
         src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
-        data/rom4.o(.rodata);
+        data/overworld.o(.rodata);
         data/tilesets.o(.rodata);
         data/maps.o(.rodata);
         data/fieldmap.o(.rodata);

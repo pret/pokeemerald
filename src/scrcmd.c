@@ -34,7 +34,7 @@
 #include "party_menu.h"
 #include "pokemon_3.h"
 #include "pokemon_storage_system.h"
-#include "rng.h"
+#include "random.h"
 #include "overworld.h"
 #include "rtc.h"
 #include "script.h"

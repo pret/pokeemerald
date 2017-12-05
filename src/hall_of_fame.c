@@ -22,7 +22,7 @@
 #include "international_string_util.h"
 #include "unknown_task.h"
 #include "trig.h"
-#include "rng.h"
+#include "random.h"
 #include "event_data.h"
 
 struct HallofFameMon

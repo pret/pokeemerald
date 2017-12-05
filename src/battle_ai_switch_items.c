@@ -5,7 +5,7 @@
 #include "moves.h"
 #include "pokemon.h"
 #include "species.h"
-#include "rng.h"
+#include "random.h"
 #include "util.h"
 #include "items.h"
 #include "pokemon_item_effects.h"

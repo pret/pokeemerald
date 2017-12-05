@@ -4,7 +4,7 @@
 #include "battle.h"
 #include "species.h"
 #include "abilities.h"
-#include "rng.h"
+#include "random.h"
 #include "item.h"
 #include "battle_move_effects.h"
 #include "moves.h"

@@ -25,7 +25,7 @@
 #include "event_data.h"
 #include "m4a.h"
 #include "window.h"
-#include "rng.h"
+#include "random.h"
 #include "songs.h"
 #include "sound.h"
 #include "battle_message.h"
