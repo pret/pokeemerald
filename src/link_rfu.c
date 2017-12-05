@@ -1,9 +1,11 @@
 
 // Includes
 #include "global.h"
+#include "malloc.h"
 #include "rng.h"
 #include "decompress.h"
 #include "text.h"
+#include "string_util.h"
 #include "event_data.h"
 #include "link.h"
 #include "librfu.h"
@@ -2219,5 +2221,74 @@ void sub_800E174(void)
         {
             sub_800E084();
         }
+    }
+}
+
+void sub_800E378(struct UnkSaveSubstruct_3b98 *dest, u32 trainerId, const u8 *name)
+{
+    dest->trainerId = trainerId;
+    StringCopy(dest->trainerName, name);
+}
+
+bool32 sub_800E388(const u8 *name)
+{
+    int i;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (name[i] != 0)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_800E3A8(void)
+{
+    if (gWirelessCommType != 0)
+    {
+        int i;
+        int j;
+        int cnt;
+        int sp0[5];
+        struct UnkSaveSubstruct_3b98 *sp14 = calloc(20, sizeof(struct UnkSaveSubstruct_3b98));
+        for (i = 0; i < GetLinkPlayerCount(); i++)
+        {
+            sp0[i] = -1;
+            for (j = 0; j < 20; j++)
+            {
+                if ((u16)gLinkPlayers[i].trainerId ==  gSaveBlock1Ptr->unk_3B98[j].trainerId && StringCompare(gLinkPlayers[i].name, gSaveBlock1Ptr->unk_3B98[j].trainerName) == 0)
+                {
+                    sp0[i] = j;
+                }
+            }
+        }
+        cnt = 0;
+        for (i = 0; i < GetLinkPlayerCount(); i++)
+        {
+            if (i != GetMultiplayerId() && gLinkPlayers[i].language != LANGUAGE_JAPANESE)
+            {
+                sub_800E378(&sp14[cnt], (u16)gLinkPlayers[i].trainerId, gLinkPlayers[i].name);
+                if (sp0[i] >= 0)
+                {
+                    memset(gSaveBlock1Ptr->unk_3B98[sp0[i]].trainerName, 0, 8);
+                }
+                cnt++;
+            }
+        }
+        for (i = 0; i < 20; i++)
+        {
+            if (sub_800E388(gSaveBlock1Ptr->unk_3B98[i].trainerName))
+            {
+                sub_800E378(&sp14[cnt], gSaveBlock1Ptr->unk_3B98[i].trainerId, gSaveBlock1Ptr->unk_3B98[i].trainerName);
+                if (++cnt >= 20)
+                {
+                    break;
+                }
+            }
+        }
+        memcpy(gSaveBlock1Ptr->unk_3B98, sp14, 20 * sizeof(struct UnkSaveSubstruct_3b98));
+        free(sp14);
     }
 }
