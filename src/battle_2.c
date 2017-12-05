@@ -160,7 +160,7 @@ extern const u8 gStatStageRatios[][2];
 extern const u8 * const gBattleScriptsForMoveEffects[];
 extern const u8 * const gBattlescriptsForBallThrow[];
 extern const u8 * const gBattlescriptsForRunningByItem[];
-extern const u8 * const gUnknown_082DBD3C[];
+extern const u8 * const gBattlescriptsForUsingItem[];
 extern const u8 * const gBattlescriptsForSafariActions[];
 
 // strings
@@ -2872,7 +2872,7 @@ void SwitchInClearSetData(void)
              && (gStatuses3[i] & STATUS3_ALWAYS_HITS) != 0
              && (gDisableStructs[i].bankWithSureHit == gActiveBank))
             {
-                gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
+                gStatuses3[i] &= ~(STATUS3_ALWAYS_HITS);
                 gStatuses3[i] |= 0x10;
             }
         }
@@ -3668,10 +3668,10 @@ static void TryDoEventsBeforeFirstTurn(void)
 
     *(&gBattleStruct->turnEffectsTracker) = 0;
     *(&gBattleStruct->turnEffectsBank) = 0;
-    *(&gBattleStruct->field_1A0) = 0;
-    *(&gBattleStruct->field_1A1) = 0;
+    *(&gBattleStruct->wishPerishSongState) = 0;
+    *(&gBattleStruct->wishPerishSongBank) = 0;
     gBattleScripting.atk49_state = 0;
-    gBattleStruct->field_4D = 0;
+    gBattleStruct->faintedActionsState = 0;
     gBattleStruct->turncountersTracker = 0;
     gBattleMoveFlags = 0;
 
@@ -3701,8 +3701,8 @@ static void HandleEndTurn_ContinueBattle(void)
         }
         gBattleStruct->turnEffectsTracker = 0;
         gBattleStruct->turnEffectsBank = 0;
-        gBattleStruct->field_1A0 = 0;
-        gBattleStruct->field_1A1 = 0;
+        gBattleStruct->wishPerishSongState = 0;
+        gBattleStruct->wishPerishSongBank = 0;
         gBattleStruct->turncountersTracker = 0;
         gBattleMoveFlags = 0;
     }
@@ -3720,10 +3720,10 @@ void BattleTurnPassed(void)
         if (TurnBasedEffects() != 0)
             return;
     }
-    if (sub_8041728() != 0)
+    if (HandleFaintedMonActions() != 0)
         return;
-    gBattleStruct->field_4D = 0;
-    if (sub_8041364() != 0)
+    gBattleStruct->faintedActionsState = 0;
+    if (HandleWishPerishSongOnTurnEnd() != 0)
         return;
 
     TurnValuesCleanUp(FALSE);
@@ -4692,7 +4692,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     gBattleMainFunc = RunTurnActionsFunctions;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
-    gBattleScripting.field_16 = 0;
+    gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
 }
 
@@ -4701,7 +4701,7 @@ static void RunTurnActionsFunctions(void)
     if (gBattleOutcome != 0)
         gCurrentActionFuncId = 12;
 
-    *(&gBattleStruct->field_4B) = gCurrentTurnActionNumber;
+    *(&gBattleStruct->savedTurnActionNumber) = gCurrentTurnActionNumber;
     sTurnActionsFuncsTable[gCurrentActionFuncId]();
 
     if (gCurrentTurnActionNumber >= gNoOfAllBanks) // everyone did their actions, turn finished
@@ -4711,7 +4711,7 @@ static void RunTurnActionsFunctions(void)
     }
     else
     {
-        if (gBattleStruct->field_4B != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another bank
+        if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another bank
         {
             gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
             gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
@@ -4729,7 +4729,7 @@ static void HandleEndTurn_BattleWon(void)
         gBattleTextBuff1[0] = gBattleOutcome;
         gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
         gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-        gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+        gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
             && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000 | BATTLE_TYPE_EREADER_TRAINER))
@@ -4785,16 +4785,16 @@ static void HandleEndTurn_BattleLost(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
         {
-            if (gBattleOutcome & BATTLE_OUTCOME_BIT_x80)
+            if (gBattleOutcome & OUTCOME_LINK_BATTLE_RUN)
             {
-                gBattlescriptCurrInstr = BattleScript_82DB9C8;
-                gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+                gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeitedLinkBattle;
+                gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
                 gSaveBlock2Ptr->field_CA9_b = 1;
             }
             else
             {
                 gBattlescriptCurrInstr = BattleScript_82DAA0B;
-                gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+                gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
             }
         }
         else
@@ -4802,7 +4802,7 @@ static void HandleEndTurn_BattleLost(void)
             gBattleTextBuff1[0] = gBattleOutcome;
             gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
             gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-            gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+            gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
         }
     }
     else
@@ -4819,13 +4819,13 @@ static void HandleEndTurn_RanFromBattle(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        gBattlescriptCurrInstr = BattleScript_82DB9C1;
+        gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = BATTLE_FORFEITED;
         gSaveBlock2Ptr->field_CA9_b = 1;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
     {
-        gBattlescriptCurrInstr = BattleScript_82DB9C1;
+        gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = BATTLE_FORFEITED;
     }
     else
@@ -5276,7 +5276,7 @@ static void HandleAction_UseItem(void)
     }
     else if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
     {
-        gBattlescriptCurrInstr = gUnknown_082DBD3C[0];
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[0];
     }
     else
     {
@@ -5332,7 +5332,7 @@ static void HandleAction_UseItem(void)
             break;
         }
 
-        gBattlescriptCurrInstr = gUnknown_082DBD3C[*(gBattleStruct->AI_itemType + gBankAttacker / 2)];
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + gBankAttacker / 2)];
     }
     gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
 }
@@ -5439,7 +5439,7 @@ static void HandleAction_Run(void)
             }
         }
 
-        gBattleOutcome |= BATTLE_OUTCOME_BIT_x80;
+        gBattleOutcome |= OUTCOME_LINK_BATTLE_RUN;
         gSaveBlock2Ptr->field_CA9_b = 1;
     }
     else
@@ -5565,9 +5565,9 @@ static void HandleAction_Action9(void)
 
 static void HandleAction_Action11(void)
 {
-    if (!sub_8041728())
+    if (!HandleFaintedMonActions())
     {
-        gBattleStruct->field_4D = 0;
+        gBattleStruct->faintedActionsState = 0;
         gCurrentActionFuncId = ACTION_FINISHED;
     }
 }
@@ -5607,6 +5607,6 @@ static void HandleAction_ActionFinished(void)
     gBattleScripting.atk49_state = 0;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
-    gBattleScripting.field_16 = 0;
+    gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
 }
