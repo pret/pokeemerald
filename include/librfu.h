@@ -211,3 +211,5 @@ bool16 rfu_UNI_PARENT_getDRAC_ACK(u8 *a0);
 void rfu_REQ_disconnect(u8 who);
 void rfu_changeSendTarget(u8 a0, u8 who, u8 a2);
 void rfu_NI_stopReceivingData(u8 who);
+u16 rfu_initializeAPI(u32 *unk0, u16 unk1, IntrFunc *interrupt, bool8 copyInterruptToRam);
+void rfu_setTimerInterrupt(u8 which, IntrFunc *intr);

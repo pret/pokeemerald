@@ -5,57 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800E6D0
-sub_800E6D0: @ 800E6D0
-	push {r4-r6,lr}
-	ldr r4, =gIntrTable
-	ldr r5, [r4, 0x4]
-	ldr r6, [r4, 0x8]
-	bl sub_800E700
-	bl rfu_REQ_stopMode
-	bl rfu_waitREQComplete
-	ldr r1, =0x04000208
-	movs r0, 0
-	strh r0, [r1]
-	str r5, [r4, 0x4]
-	str r6, [r4, 0x8]
-	movs r0, 0x1
-	strh r0, [r1]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800E6D0
-
-	thumb_func_start sub_800E700
-sub_800E700: @ 800E700
-	push {r4,lr}
-	ldr r0, =gUnknown_03004140+0x50
-	ldr r1, =0x00000e64
-	ldr r4, =gIntrTable + 0x4
-	adds r2, r4, 0
-	movs r3, 0x1
-	bl rfu_initializeAPI
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r1, 0
-	bne _0800E732
-	ldr r0, =gLinkType
-	strh r1, [r0]
-	bl sub_800AAF4
-	movs r0, 0
-	bl sub_80111B0
-	bl sub_800E604
-	adds r1, r4, 0x4
-	movs r0, 0x3
-	bl rfu_setTimerInterrupt
-_0800E732:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_800E700
-
 	thumb_func_start sub_800E748
 sub_800E748: @ 800E748
 	push {r4,r5,lr}

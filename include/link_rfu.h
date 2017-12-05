@@ -78,7 +78,9 @@ struct UnkRfuStruct_1 {
     /* 0x03c */ struct UnkLinkRfuStruct_02022B2C *unk_3c;
     /* 0x040 */ void (*unk_40)(u8, u8);
     /* 0x044 */ void (*unk_44)(u16);
-    /* 0x048 */ u8 filler_48[0xe78];
+    /* 0x048 */ u8 filler_48[8];
+    /* 0x050 */ u32 unk_50[0x399];
+    /* 0xeb4 */ u8 filler_e64[12];
 };
 
 struct UnkRfuStruct_2_Sub_6c {

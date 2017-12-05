@@ -48,6 +48,7 @@ void sub_800D630(void);
 bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
 void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
 bool32 sub_8010454(u16 a0);
+void sub_80111B0(bool32 a0);
 u8 sub_8011A74(void);
 u8 sub_8012224(void);
 
@@ -2354,4 +2355,29 @@ void sub_800E604(void)
     CpuFill16(0, gSendCmd, sizeof gSendCmd);
     CpuFill16(0, gRecvCmds, sizeof gRecvCmds);
     CpuFill16(0, gLinkPlayers, sizeof gLinkPlayers)
+}
+
+void sub_800E6D0(void)
+{
+    IntrFunc serialIntr = gIntrTable[1];
+    IntrFunc timerIntr = gIntrTable[2];
+    sub_800E700();
+    rfu_REQ_stopMode();
+    rfu_waitREQComplete();
+    REG_IME = 0;
+    gIntrTable[1] = serialIntr;
+    gIntrTable[2] = timerIntr;
+    REG_IME = INTR_FLAG_VBLANK;
+}
+
+void sub_800E700(void)
+{
+    if (!rfu_initializeAPI(gUnknown_03004140.unk_50, sizeof gUnknown_03004140.unk_50, gIntrTable + 1, TRUE))
+    {
+        gLinkType = 0;
+        sub_800AAF4();
+        sub_80111B0(0);
+        sub_800E604();
+        rfu_setTimerInterrupt(3, gIntrTable + 2);
+    }
 }
