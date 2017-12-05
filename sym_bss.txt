@@ -2,32 +2,32 @@
 	.include "src/malloc.o"
 	.include "src/dma3_manager.o"
 	.include "src/gpu_regs.o"
-    .include "src/bg.o"
+	.include "src/bg.o"
 	.include "src/text.o"
 	.include "src/sprite.o"
-    .include "src/link.o"
-    .include "src/rtc.o"
-    .include "src/main_menu.o"
-    .include "src/battle_1.o"
-    .include "src/egg_hatch.o"
-    .include "src/berry_blender.o"
-    .include "src/play_time.o"
-    .include "src/rom4.o"
-    .include "src/field_camera.o"
-    .include "src/script.o"
-    .include "src/scrcmd.o"
-    .include "src/tileset_anims.o"
-    .include "src/palette.o"
-    .include "src/sound.o"
-    .include "src/field_screen.o"
-    .include "src/field_effect.o"
-    .include "src/pokemon_storage_system.o"
-    .include "src/fldeff_cut.o"
-    .include "src/script_menu.o"
-    .include "src/record_mixing.o"
-    .include "src/tv.o"
+	.include "src/link.o"
+	.include "src/rtc.o"
+	.include "src/main_menu.o"
+	.include "src/battle_1.o"
+	.include "src/egg_hatch.o"
+	.include "src/berry_blender.o"
+	.include "src/play_time.o"
+	.include "src/overworld.o"
+	.include "src/field_camera.o"
+	.include "src/script.o"
+	.include "src/scrcmd.o"
+	.include "src/tileset_anims.o"
+	.include "src/palette.o"
+	.include "src/sound.o"
+	.include "src/field_screen.o"
+	.include "src/field_effect.o"
+	.include "src/pokemon_storage_system.o"
+	.include "src/fldeff_cut.o"
+	.include "src/script_menu.o"
+	.include "src/record_mixing.o"
+	.include "src/tv.o"
 
-    .space 1 @ TODO: define this u32 in mauville_old_man
+	.space 1 @ TODO: define this u32 in mauville_old_man
 gUnknown_03001178: @ 3001178
 	.space 0x4
 
@@ -54,9 +54,9 @@ gUnknown_030011F6: @ 30011F6
 gUnknown_030011F7: @ 30011F7
 	.space 0x1
 
-    .include "src/starter_choose.o"
-    
-    .align 0x2
+	.include "src/starter_choose.o"
+	
+	.align 0x2
 
 gUnknown_030011FC: @ 30011FC
 	.space 0x2
@@ -138,7 +138,7 @@ gUnknown_03001298: @ 3001298
 gUnknown_030012A8: @ 30012A8
 	.space 0x10
 
-    .include "src/berry_fix_program.o"
+	.include "src/berry_fix_program.o"
 
 gUnknown_030012BC: @ 30012BC
 	.space 0x4

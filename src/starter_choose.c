@@ -170,20 +170,20 @@ void CB2_ChooseStarter(void)
 
     // Create hand sprite
     spriteId = CreateSprite(&sSpriteTemplate_Hand, 120, 56, 2);
-    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data[0] = taskId;
 
     // Create three Pokeball sprites
     spriteId = CreateSprite(&sSpriteTemplate_PokeBall, sPokeballCoords[0][0], sPokeballCoords[0][1], 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 0;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 0;
 
     spriteId = CreateSprite(&sSpriteTemplate_PokeBall, sPokeballCoords[1][0], sPokeballCoords[1][1], 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 1;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 1;
 
     spriteId = CreateSprite(&sSpriteTemplate_PokeBall, sPokeballCoords[2][0], sPokeballCoords[2][1], 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 2;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 2;
 
     sStarterChooseWindowId = 0xFF;
 }
@@ -363,15 +363,15 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
 
 static void sub_81346DC(struct Sprite *sprite)
 {
-    sprite->pos1.x = gUnknown_085B1E28[gTasks[sprite->data0].tStarterSelection][0];
-    sprite->pos1.y = gUnknown_085B1E28[gTasks[sprite->data0].tStarterSelection][1];
-    sprite->pos2.y = Sin(sprite->data1, 8);
-    sprite->data1 = (u8)(sprite->data1) + 4;
+    sprite->pos1.x = gUnknown_085B1E28[gTasks[sprite->data[0]].tStarterSelection][0];
+    sprite->pos1.y = gUnknown_085B1E28[gTasks[sprite->data[0]].tStarterSelection][1];
+    sprite->pos2.y = Sin(sprite->data[1], 8);
+    sprite->data[1] = (u8)(sprite->data[1]) + 4;
 }
 
 static void sub_813473C(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data0].tStarterSelection == sprite->data1)
+    if (gTasks[sprite->data[0]].tStarterSelection == sprite->data[1])
         StartSpriteAnimIfDifferent(sprite, 1);
     else
         StartSpriteAnimIfDifferent(sprite, 0);

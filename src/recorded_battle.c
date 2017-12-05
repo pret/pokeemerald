@@ -3,7 +3,7 @@
 #include "recorded_battle.h"
 #include "main.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 #include "event_data.h"
 #include "link.h"
 #include "string_util.h"

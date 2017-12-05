@@ -6,7 +6,7 @@
 #include "battle_interface.h"
 #include "main.h"
 #include "malloc.h"
-#include "rng.h"
+#include "random.h"
 #include "util.h"
 #include "pokemon.h"
 #include "moves.h"
@@ -332,7 +332,7 @@ static u16 BattlePalaceGetTargetRetValue(void)
 
 void sub_805D714(struct Sprite *sprite)
 {
-    u8 spriteId = sprite->data1;
+    u8 spriteId = sprite->data[1];
 
     if (!gSprites[spriteId].affineAnimEnded)
         return;
@@ -367,7 +367,7 @@ void sub_805D7AC(struct Sprite *sprite)
 {
     if (!(gUnknown_020243FC & 1))
     {
-        sprite->pos2.x += sprite->data0;
+        sprite->pos2.x += sprite->data[0];
         if (sprite->pos2.x == 0)
         {
             if (sprite->pos2.y != 0)
@@ -1134,7 +1134,7 @@ void sub_805EB9C(u8 affineMode)
     }
 }
 
-#define tBank data0
+#define tBank data[0]
 
 void LoadAndCreateEnemyShadowSprites(void)
 {
@@ -1143,14 +1143,14 @@ void LoadAndCreateEnemyShadowSprites(void)
     LoadCompressedObjectPic(&gSpriteSheet_EnemyShadow);
 
     bank = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
-    gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, sub_80A5C6C(bank, 0), sub_80A5C6C(bank, 1) + 29, 0xC8);
-    gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].data0 = bank;
+    gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBankPosition(bank, 0), GetBankPosition(bank, 1) + 29, 0xC8);
+    gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].data[0] = bank;
 
     if (IsDoubleBattle())
     {
         bank = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
-        gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, sub_80A5C6C(bank, 0), sub_80A5C6C(bank, 1) + 29, 0xC8);
-        gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].data0 = bank;
+        gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBankPosition(bank, 0), GetBankPosition(bank, 1) + 29, 0xC8);
+        gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].data[0] = bank;
     }
 }
 

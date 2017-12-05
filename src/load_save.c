@@ -3,7 +3,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 
 extern void* gUnknown_0203CF5C;
 

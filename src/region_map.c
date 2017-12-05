@@ -1332,9 +1332,9 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
             gRegionMap->cursorSprite->pos1.x = 8 * gRegionMap->cursorPosX + 4;
             gRegionMap->cursorSprite->pos1.y = 8 * gRegionMap->cursorPosY + 4;
         }
-        gRegionMap->cursorSprite->data1 = 2;
-        gRegionMap->cursorSprite->data2 = (IndexOfSpritePaletteTag(paletteTag) << 4) + 0x101;
-        gRegionMap->cursorSprite->data3 = TRUE;
+        gRegionMap->cursorSprite->data[1] = 2;
+        gRegionMap->cursorSprite->data[2] = (IndexOfSpritePaletteTag(paletteTag) << 4) + 0x101;
+        gRegionMap->cursorSprite->data[3] = TRUE;
     }
 }
 
@@ -1350,12 +1350,12 @@ static void FreeRegionMapCursorSprite(void)
 
 void sub_8124268(void)
 {
-    gRegionMap->cursorSprite->data3 = TRUE;
+    gRegionMap->cursorSprite->data[3] = TRUE;
 }
 
 void sub_8124278(void)
 {
-    gRegionMap->cursorSprite->data3 = FALSE;
+    gRegionMap->cursorSprite->data[3] = FALSE;
 }
 
 void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
@@ -1429,17 +1429,17 @@ static void RegionMapPlayerIconSpriteCallback_Zoomed(struct Sprite *sprite)
 {
     sprite->pos2.x = -2 * gRegionMap->scrollX;
     sprite->pos2.y = -2 * gRegionMap->scrollY;
-    sprite->data0 = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
-    sprite->data1 = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
-    if (sprite->data0 < -8 || sprite->data0 > 0xa8 || sprite->data1 < -8 || sprite->data1 > 0xf8)
+    sprite->data[0] = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
+    sprite->data[1] = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
+    if (sprite->data[0] < -8 || sprite->data[0] > 0xa8 || sprite->data[1] < -8 || sprite->data[1] > 0xf8)
     {
-        sprite->data2 = FALSE;
+        sprite->data[2] = FALSE;
     }
     else
     {
-        sprite->data2 = TRUE;
+        sprite->data[2] = TRUE;
     }
-    if (sprite->data2 == TRUE)
+    if (sprite->data[2] == TRUE)
     {
         RegionMapPlayerIconSpriteCallback(sprite);
     }
@@ -1458,9 +1458,9 @@ static void RegionMapPlayerIconSpriteCallback(struct Sprite *sprite)
 {
     if (gRegionMap->blinkPlayerIcon)
     {
-        if (++sprite->data7 > 16)
+        if (++sprite->data[7] > 16)
         {
-            sprite->data7 = 0;
+            sprite->data[7] = 0;
             sprite->invisible = sprite->invisible ? FALSE : TRUE;
         }
     }
@@ -1790,7 +1790,7 @@ static void sub_8124AD4(void)
                 shape += 3;
             }
             StartSpriteAnim(&gSprites[spriteId], shape);
-            gSprites[spriteId].data0 = i;
+            gSprites[spriteId].data[0] = i;
         }
         canFlyFlag++;
     }
@@ -1820,7 +1820,7 @@ static void sub_8124BE4(void)
                 gSprites[spriteId].oam.size = 1;
                 gSprites[spriteId].callback = sub_8124CBC;
                 StartSpriteAnim(&gSprites[spriteId], 6);
-                gSprites[spriteId].data0 = mapSecId;
+                gSprites[spriteId].data[0] = mapSecId;
             }
         }
     }
@@ -1828,17 +1828,17 @@ static void sub_8124BE4(void)
 
 static void sub_8124CBC(struct Sprite *sprite)
 {
-    if (gUnknown_0203A148->regionMap.mapSecId == sprite->data0)
+    if (gUnknown_0203A148->regionMap.mapSecId == sprite->data[0])
     {
-        if (++sprite->data1 > 16)
+        if (++sprite->data[1] > 16)
         {
-            sprite->data1 = 0;
+            sprite->data[1] = 0;
             sprite->invisible = sprite->invisible ? FALSE : TRUE;
         }
     }
     else
     {
-        sprite->data1 = 16;
+        sprite->data[1] = 16;
         sprite->invisible = FALSE;
     }
 }

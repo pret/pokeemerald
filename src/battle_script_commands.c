@@ -12,7 +12,7 @@
 #include "util.h"
 #include "pokemon.h"
 #include "calculate_base_damage.h"
-#include "rng.h"
+#include "random.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "species.h"
@@ -1053,7 +1053,7 @@ static void atk00_attackcanceler(void)
 
     if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS))
     {
-        i = IsPokeDisobedient(); // why use the 'i' variable...?
+        i = IsMonDisobedient(); // why use the 'i' variable...?
         switch (i)
         {
         case 0:
@@ -3040,7 +3040,7 @@ static void atk15_seteffectwithchance(void)
     }
 
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
-    gBattleScripting.field_16 = 0;
+    gBattleScripting.multihitMoveEffect = 0;
 }
 
 static void atk16_seteffectprimary(void)
@@ -3064,7 +3064,7 @@ static void atk18_clearstatusfromeffect(void)
 
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattlescriptCurrInstr += 2;
-    gBattleScripting.field_16 = 0;
+    gBattleScripting.multihitMoveEffect = 0;
 }
 
 static void atk19_tryfaintmon(void)
@@ -3221,7 +3221,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jumpPtr;
             RecordAbilityBattle(bank - 1, gLastUsedAbility);
-            gBattleScripting.field_15 = bank - 1;
+            gBattleScripting.bankWithAbility = bank - 1;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -3234,7 +3234,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jumpPtr;
             RecordAbilityBattle(bank - 1, gLastUsedAbility);
-            gBattleScripting.field_15 = bank - 1;
+            gBattleScripting.bankWithAbility = bank - 1;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -3247,7 +3247,7 @@ static void atk1E_jumpifability(void)
             gLastUsedAbility = ability;
             gBattlescriptCurrInstr = jumpPtr;
             RecordAbilityBattle(bank, gLastUsedAbility);
-            gBattleScripting.field_15 = bank;
+            gBattleScripting.bankWithAbility = bank;
         }
         else
             gBattlescriptCurrInstr += 7;
@@ -6383,7 +6383,7 @@ static void atk62(void)
 
 static void atk63_jumptorandomattack(void)
 {
-    if (gBattlescriptCurrInstr[1] != 0)
+    if (gBattlescriptCurrInstr[1])
         gCurrentMove = gRandomMove;
     else
         gChosenMove = gCurrentMove = gRandomMove;
@@ -6782,8 +6782,8 @@ static bool8 sub_804F344(void)
     return (gBattle_BG2_X != 0x1A0);
 }
 
-#define sDestroy                    data0
-#define sSavedLvlUpBoxXPosition     data1
+#define sDestroy                    data[0]
+#define sSavedLvlUpBoxXPosition     data[1]
 
 static void PutMonIconOnLvlUpBox(void)
 {
@@ -7790,7 +7790,7 @@ static void atk8E_initmultihitstring(void)
     gBattlescriptCurrInstr++;
 }
 
-static bool8 sub_8051064(void)
+static bool8 TryDoForceSwitchOut(void)
 {
     if (gBattleMons[gBankAttacker].level >= gBattleMons[gBankTarget].level)
     {
@@ -7807,7 +7807,7 @@ static bool8 sub_8051064(void)
         *(gBattleStruct->field_58 + gBankTarget) = gBattlePartyID[gBankTarget];
     }
 
-    gBattlescriptCurrInstr = BattleScript_82DADD8;
+    gBattlescriptCurrInstr = BattleScript_SuccessForceOut;
     return TRUE;
 }
 
@@ -7935,7 +7935,7 @@ static void atk8F_forcerandomswitch(void)
         }
         else
         {
-            if (sub_8051064())
+            if (TryDoForceSwitchOut())
             {
                 do
                 {
@@ -7968,7 +7968,7 @@ static void atk8F_forcerandomswitch(void)
     }
     else
     {
-        sub_8051064();
+        TryDoForceSwitchOut();
     }
 }
 
@@ -9306,7 +9306,7 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
             gBankTarget = GetBankByIdentity(IDENTITY_PLAYER_MON2);
     }
 
-    if (gActionForBanks[gBankTarget] == 0
+    if (gActionForBanks[gBankTarget] == ACTION_USE_MOVE
         && gBankAttacker == *(gBattleStruct->moveTarget + gBankTarget)
         && !(gBattleMons[gBankTarget].status1 & (STATUS_SLEEP | STATUS_FREEZE))
         && gBattleMons[gBankAttacker].hp

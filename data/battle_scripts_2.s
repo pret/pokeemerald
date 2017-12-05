@@ -24,13 +24,13 @@ gBattlescriptsForBallThrow:: @ 82DBD08
 	.4byte BattleScript_BallThrow
 
 	.align 2
-gUnknown_082DBD3C:: @ 82DBD3C
-	.4byte BattleScript_82DBE12
-	.4byte BattleScript_82DBE1C
-	.4byte BattleScript_82DBE1C
-	.4byte BattleScript_82DBE4B
-	.4byte BattleScript_82DBE6F
-	.4byte BattleScript_82DBE91
+gBattlescriptsForUsingItem:: @ 82DBD3C
+	.4byte BattleScript_PlayerUsesItem
+	.4byte BattleScript_OpponentUsesHealItem
+	.4byte BattleScript_OpponentUsesHealItem
+	.4byte BattleScript_OpponentUsesStatusCureItem
+	.4byte BattleScript_OpponentUsesXItem
+	.4byte BattleScript_OpponentUsesGuardSpecs
 
 	.align 2
 gBattlescriptsForRunningByItem:: @ 82DBD54
@@ -58,27 +58,27 @@ BattleScript_SafariBallThrow::
 	handleballthrow
 
 BattleScript_SuccessBallThrow::
-	jumpifhalfword EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_82DBD92
+	jumpifhalfword EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_PrintCaughtMonInfo
 	incrementgamestat 0xB
-BattleScript_82DBD92::
+BattleScript_PrintCaughtMonInfo::
 	printstring STRINGID_GOTCHAPKMNCAUGHT
-	trysetcaughtmondexflags BattleScript_82DBDA5
+	trysetcaughtmondexflags BattleScript_TryNicknameCaughtMon
 	printstring STRINGID_PKMNDATAADDEDTODEX
 	waitstate
 	setbyte gBattleCommunication, 0x0
 	displaydexinfo
-BattleScript_82DBDA5::
+BattleScript_TryNicknameCaughtMon::
 	printstring STRINGID_GIVENICKNAMECAPTURED
 	waitstate
 	setbyte gBattleCommunication, 0x0
-	trygivecaughtmonnick BattleScript_82DBDC2
+	trygivecaughtmonnick BattleScript_GiveCaughtMonEnd
 	givecaughtmon
 	printfromtable gCaughtMonStringIds
 	waitmessage 0x40
-	goto BattleScript_82DBDC3
-BattleScript_82DBDC2::
+	goto BattleScript_SuccessBallThrowEnd
+BattleScript_GiveCaughtMonEnd::
 	givecaughtmon
-BattleScript_82DBDC3::
+BattleScript_SuccessBallThrowEnd::
 	setbyte gBattleOutcome, CAUGHT
 	finishturn
 
@@ -90,12 +90,12 @@ BattleScript_WallyBallThrow::
 BattleScript_ShakeBallThrow::
 	printfromtable gBallEscapeStringIds
 	waitmessage 0x40
-	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_SAFARI, BattleScript_82DBE01
-	jumpifbyte NOT_EQUAL, gNumSafariBalls, 0x0, BattleScript_82DBE01
+	jumpifword NO_COMMON_BITS, gBattleTypeFlags, BATTLE_TYPE_SAFARI, BattleScript_ShakeBallThrowEnd
+	jumpifbyte NOT_EQUAL, gNumSafariBalls, 0x0, BattleScript_ShakeBallThrowEnd
 	printstring STRINGID_OUTOFSAFARIBALLS
 	waitmessage 0x40
 	setbyte gBattleOutcome, OUT_OF_BALLS
-BattleScript_82DBE01::
+BattleScript_ShakeBallThrowEnd::
 	finishaction
 
 BattleScript_TrainerBallBlock::
@@ -106,12 +106,12 @@ BattleScript_TrainerBallBlock::
 	waitmessage 0x40
 	finishaction
 
-BattleScript_82DBE12::
+BattleScript_PlayerUsesItem::
 	setbyte sMOVEEND_STATE, 0xF
 	moveend 0x1, 0x0
 	end
 
-BattleScript_82DBE1C::
+BattleScript_OpponentUsesHealItem::
 	printstring STRINGID_EMPTYSTRING3
 	pause 0x30
 	playse SE_KAIFUKU
@@ -128,7 +128,7 @@ BattleScript_82DBE1C::
 	moveend 0x1, 0x0
 	finishaction
 
-BattleScript_82DBE4B::
+BattleScript_OpponentUsesStatusCureItem::
 	printstring STRINGID_EMPTYSTRING3
 	pause 0x30
 	playse SE_KAIFUKU
@@ -142,7 +142,7 @@ BattleScript_82DBE4B::
 	moveend 0x1, 0x0
 	finishaction
 
-BattleScript_82DBE6F::
+BattleScript_OpponentUsesXItem::
 	printstring STRINGID_EMPTYSTRING3
 	pause 0x30
 	playse SE_KAIFUKU
@@ -155,7 +155,7 @@ BattleScript_82DBE6F::
 	moveend 0x1, 0x0
 	finishaction
 
-BattleScript_82DBE91::
+BattleScript_OpponentUsesGuardSpecs::
 	printstring STRINGID_EMPTYSTRING3
 	pause 0x30
 	playse SE_KAIFUKU

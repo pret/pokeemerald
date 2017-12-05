@@ -384,7 +384,7 @@ static void SafariHandleDrawTrainerPic(void)
       30);
     gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 240;
-    gSprites[gBankSpriteIds[gActiveBank]].data0 = -2;
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = -2;
     gSprites[gBankSpriteIds[gActiveBank]].callback = sub_805D7AC;
     gBattleBankFunc[gActiveBank] = CompleteOnBankSpriteCallbackDummy;
 }

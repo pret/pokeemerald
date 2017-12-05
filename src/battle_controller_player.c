@@ -22,7 +22,7 @@
 #include "string_util.h"
 #include "bg.h"
 #include "reshow_battle_screen.h"
-#include "rng.h"
+#include "random.h"
 #include "pokeball.h"
 #include "data2.h"
 
@@ -1023,12 +1023,12 @@ static void sub_8058B40(void)
     bool32 r9 = FALSE;
     bool32 r8 = FALSE;
 
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive)
         sub_8172EF0(gActiveBank, &gPlayerParty[gBattlePartyID[gActiveBank]]);
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x8)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x80 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].ballAnimActive)
         sub_8172EF0(gActiveBank ^ BIT_MON, &gPlayerParty[gBattlePartyID[gActiveBank ^ BIT_MON]]);
 
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8 && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x8)
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].ballAnimActive)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x80)
         {
@@ -1127,13 +1127,13 @@ static void sub_8058FC0(void)
 static void sub_805902C(void)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80
-        && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
+        && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive)
     {
         sub_8172EF0(gActiveBank, &gPlayerParty[gBattlePartyID[gActiveBank]]);
     }
 
     if (gSprites[gUnknown_03005D7C[gActiveBank]].callback == SpriteCallbackDummy
-     && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x8)
+     && !gBattleSpritesDataPtr->healthBoxesData[gActiveBank].ballAnimActive)
     {
         DestroySprite(&gSprites[gUnknown_03005D7C[gActiveBank]]);
         UpdateHealthboxAttribute(gHealthBoxesIds[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], HEALTHBOX_ALL);
@@ -1431,18 +1431,18 @@ static void DoHitAnimBlinkSpriteEffect(void)
 {
     u8 spriteId = gBankSpriteIds[gActiveBank];
 
-    if (gSprites[spriteId].data1 == 32)
+    if (gSprites[spriteId].data[1] == 32)
     {
-        gSprites[spriteId].data1 = 0;
+        gSprites[spriteId].data[1] = 0;
         gSprites[spriteId].invisible = 0;
         gDoingBattleAnim = FALSE;
         PlayerBufferExecCompleted();
     }
     else
     {
-        if ((gSprites[spriteId].data1 % 4) == 0)
+        if ((gSprites[spriteId].data[1] % 4) == 0)
             gSprites[spriteId].invisible ^= 1;
-        gSprites[spriteId].data1++;
+        gSprites[spriteId].data[1]++;
     }
 }
 
@@ -2237,15 +2237,15 @@ static void sub_805B258(u8 bank, bool8 dontClearSubstituteBit)
 
     gBankSpriteIds[bank] = CreateSprite(
       &gUnknown_0202499C,
-      sub_80A5C6C(bank, 2),
+      GetBankPosition(bank, 2),
       GetBankSpriteDefault_Y(bank),
       sub_80A82E4(bank));
 
-    gSprites[gUnknown_03005D7C[bank]].data1 = gBankSpriteIds[bank];
-    gSprites[gUnknown_03005D7C[bank]].data2 = bank;
+    gSprites[gUnknown_03005D7C[bank]].data[1] = gBankSpriteIds[bank];
+    gSprites[gUnknown_03005D7C[bank]].data[2] = bank;
 
-    gSprites[gBankSpriteIds[bank]].data0 = bank;
-    gSprites[gBankSpriteIds[bank]].data2 = species;
+    gSprites[gBankSpriteIds[bank]].data[0] = bank;
+    gSprites[gBankSpriteIds[bank]].data[2] = species;
     gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
 
     StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], gBattleMonForms[bank]);
@@ -2253,7 +2253,7 @@ static void sub_805B258(u8 bank, bool8 dontClearSubstituteBit)
     gSprites[gBankSpriteIds[bank]].invisible = TRUE;
     gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
 
-    gSprites[gUnknown_03005D7C[bank]].data0 = sub_80753E8(0, 0xFF);
+    gSprites[gUnknown_03005D7C[bank]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
 }
 
 static void PlayerHandleReturnMonToBall(void)
@@ -2358,7 +2358,7 @@ static void PlayerHandleDrawTrainerPic(void)
         gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
         gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 240;
         gSprites[gBankSpriteIds[gActiveBank]].pos2.y = 48;
-        gSprites[gBankSpriteIds[gActiveBank]].data0 = -2;
+        gSprites[gBankSpriteIds[gActiveBank]].data[0] = -2;
         gSprites[gBankSpriteIds[gActiveBank]].callback = sub_805D7AC;
         gSprites[gBankSpriteIds[gActiveBank]].oam.affineMode = 0;
         gSprites[gBankSpriteIds[gActiveBank]].hFlip = 1;
@@ -2372,7 +2372,7 @@ static void PlayerHandleDrawTrainerPic(void)
 
         gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
         gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 240;
-        gSprites[gBankSpriteIds[gActiveBank]].data0 = -2;
+        gSprites[gBankSpriteIds[gActiveBank]].data[0] = -2;
         gSprites[gBankSpriteIds[gActiveBank]].callback = sub_805D7AC;
     }
 
@@ -2411,7 +2411,7 @@ static void PlayerHandleTrainerSlide(void)
 
     gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
     gSprites[gBankSpriteIds[gActiveBank]].pos2.x = -96;
-    gSprites[gBankSpriteIds[gActiveBank]].data0 = 2;
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = 2;
     gSprites[gBankSpriteIds[gActiveBank]].callback = sub_805D7AC;
 
     gBattleBankFunc[gActiveBank] = CompleteOnBankSpriteCallbackDummy2;
@@ -2420,9 +2420,9 @@ static void PlayerHandleTrainerSlide(void)
 static void PlayerHandleTrainerSlideBack(void)
 {
     oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBank]]);
-    gSprites[gBankSpriteIds[gActiveBank]].data0 = 50;
-    gSprites[gBankSpriteIds[gActiveBank]].data2 = -40;
-    gSprites[gBankSpriteIds[gActiveBank]].data4 = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = 50;
+    gSprites[gBankSpriteIds[gActiveBank]].data[2] = -40;
+    gSprites[gBankSpriteIds[gActiveBank]].data[4] = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
     gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80A6EEC;
     StoreSpriteCallbackInData6(&gSprites[gBankSpriteIds[gActiveBank]], SpriteCallbackDummy);
     StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], 1);
@@ -2444,8 +2444,8 @@ static void PlayerHandleFaintAnimation(void)
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].animationState = 0;
             HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
             PlaySE12WithPanning(SE_POKE_DEAD, PAN_SIDE_PLAYER);
-            gSprites[gBankSpriteIds[gActiveBank]].data1 = 0;
-            gSprites[gBankSpriteIds[gActiveBank]].data2 = 5;
+            gSprites[gBankSpriteIds[gActiveBank]].data[1] = 0;
+            gSprites[gBankSpriteIds[gActiveBank]].data[2] = 5;
             gSprites[gBankSpriteIds[gActiveBank]].callback = sub_8039C00;
             gBattleBankFunc[gActiveBank] = sub_80596A8;
         }
@@ -2902,7 +2902,7 @@ static void PlayerHandleHitAnimation(void)
     else
     {
         gDoingBattleAnim = TRUE;
-        gSprites[gBankSpriteIds[gActiveBank]].data1 = 0;
+        gSprites[gBankSpriteIds[gActiveBank]].data[1] = 0;
         DoHitAnimHealthboxEffect(gActiveBank);
         gBattleBankFunc[gActiveBank] = DoHitAnimBlinkSpriteEffect;
     }
@@ -2963,11 +2963,11 @@ static void PlayerHandleIntroTrainerBallThrow(void)
 
     oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBank]]);
 
-    gSprites[gBankSpriteIds[gActiveBank]].data0 = 50;
-    gSprites[gBankSpriteIds[gActiveBank]].data2 = -40;
-    gSprites[gBankSpriteIds[gActiveBank]].data4 = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = 50;
+    gSprites[gBankSpriteIds[gActiveBank]].data[2] = -40;
+    gSprites[gBankSpriteIds[gActiveBank]].data[4] = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
     gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80A6EEC;
-    gSprites[gBankSpriteIds[gActiveBank]].data5 = gActiveBank;
+    gSprites[gBankSpriteIds[gActiveBank]].data[5] = gActiveBank;
 
     StoreSpriteCallbackInData6(&gSprites[gBankSpriteIds[gActiveBank]], sub_805CC00);
     StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], 1);
@@ -2988,7 +2988,7 @@ static void PlayerHandleIntroTrainerBallThrow(void)
 
 void sub_805CC00(struct Sprite *sprite)
 {
-    u8 bank = sprite->data5;
+    u8 bank = sprite->data[5];
 
     FreeSpriteOamMatrix(sprite);
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));

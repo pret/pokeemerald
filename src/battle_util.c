@@ -10,7 +10,7 @@
 #include "util.h"
 #include "constants/battle_move_effects.h"
 #include "battle_scripts.h"
-#include "rng.h"
+#include "random.h"
 #include "text.h"
 #include "string_util.h"
 #include "battle_message.h"
@@ -364,7 +364,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DAE2A;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_SelectingDisabledMoveInPalace;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -379,7 +379,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         CancelMultiTurnMoves(gActiveBank);
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DB098;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_SelectingTormentedMoveInPalace;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -394,7 +394,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DB0AF;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_SelectingNotAllowedMoveTauntInPalace;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -409,7 +409,7 @@ u8 TrySetCantSelectMoveBattleScript(void)
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_82DB185;
+            gPalaceSelectionBattleScripts[gActiveBank] = BattleScript_SelectingImprisionedMoveInPalace;
             gProtectStructs[gActiveBank].flag_x10 = 1;
         }
         else
@@ -1113,23 +1113,23 @@ u8 TurnBasedEffects(void)
     return 0;
 }
 
-bool8 sub_8041364(void)
+bool8 HandleWishPerishSongOnTurnEnd(void)
 {
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
 
-    switch (gBattleStruct->field_1A0)
+    switch (gBattleStruct->wishPerishSongState)
     {
     case 0:
-        while (gBattleStruct->field_1A1 < gNoOfAllBanks)
+        while (gBattleStruct->wishPerishSongBank < gNoOfAllBanks)
         {
-            gActiveBank = gBattleStruct->field_1A1;
+            gActiveBank = gBattleStruct->wishPerishSongBank;
             if (gAbsentBankFlags & gBitTable[gActiveBank])
             {
-                gBattleStruct->field_1A1++;
+                gBattleStruct->wishPerishSongBank++;
                 continue;
             }
 
-            gBattleStruct->field_1A1++;
+            gBattleStruct->wishPerishSongBank++;
             if (gWishFutureKnock.futureSightCounter[gActiveBank] != 0
              && --gWishFutureKnock.futureSightCounter[gActiveBank] == 0
              && gBattleMons[gActiveBank].hp != 0)
@@ -1157,21 +1157,21 @@ bool8 sub_8041364(void)
         }
         // Why do I have to keep doing this to match?
         {
-            u8* var = &gBattleStruct->field_1A0;
-            *var = 1;
-            gBattleStruct->field_1A1 = 0;
+            u8 *state = &gBattleStruct->wishPerishSongState;
+            *state = 1;
+            gBattleStruct->wishPerishSongBank = 0;
         }
         // fall through
     case 1:
-        while (gBattleStruct->field_1A1 < gNoOfAllBanks)
+        while (gBattleStruct->wishPerishSongBank < gNoOfAllBanks)
         {
-            gActiveBank = gBankAttacker = gBanksByTurnOrder[gBattleStruct->field_1A1];
+            gActiveBank = gBankAttacker = gBanksByTurnOrder[gBattleStruct->wishPerishSongBank];
             if (gAbsentBankFlags & gBitTable[gActiveBank])
             {
-                gBattleStruct->field_1A1++;
+                gBattleStruct->wishPerishSongBank++;
                 continue;
             }
-            gBattleStruct->field_1A1++;
+            gBattleStruct->wishPerishSongBank++;
             if (gStatuses3[gActiveBank] & STATUS3_PERISH_SONG)
             {
                 PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 1, gDisableStructs[gActiveBank].perishSongTimer1);
@@ -1192,9 +1192,9 @@ bool8 sub_8041364(void)
         }
         // Hm...
         {
-            u8* var = &gBattleStruct->field_1A0;
-            *var = 2;
-            gBattleStruct->field_1A1 = 0;
+            u8 *state = &gBattleStruct->wishPerishSongState;
+            *state = 2;
+            gBattleStruct->wishPerishSongBank = 0;
         }
         // fall through
     case 2:
@@ -1209,7 +1209,7 @@ bool8 sub_8041364(void)
 
             gBattlescriptCurrInstr = BattleScript_82DB8F3;
             BattleScriptExecute(BattleScript_82DB8F3);
-            gBattleStruct->field_1A0++;
+            gBattleStruct->wishPerishSongState++;
             return TRUE;
         }
         break;
@@ -1220,20 +1220,20 @@ bool8 sub_8041364(void)
     return FALSE;
 }
 
-#define sub_8041728_MAX_CASE 7
+#define FAINTED_ACTIONS_MAX_CASE 7
 
-bool8 sub_8041728(void)
+bool8 HandleFaintedMonActions(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         return FALSE;
     do
     {
         int i;
-        switch (gBattleStruct->field_4D)
+        switch (gBattleStruct->faintedActionsState)
         {
         case 0:
-            gBattleStruct->field_4E = 0;
-            gBattleStruct->field_4D++;
+            gBattleStruct->faintedActionsBank = 0;
+            gBattleStruct->faintedActionsState++;
             for (i = 0; i < gNoOfAllBanks; i++)
             {
                 if (gAbsentBankFlags & gBitTable[i] && !sub_80423F4(i, 6, 6))
@@ -1243,58 +1243,58 @@ bool8 sub_8041728(void)
         case 1:
             do
             {
-                gBank1 = gBankTarget = gBattleStruct->field_4E;
-                if (gBattleMons[gBattleStruct->field_4E].hp == 0
-                 && !(gBattleStruct->field_DF & gBitTable[gBattlePartyID[gBattleStruct->field_4E]])
-                 && !(gAbsentBankFlags & gBitTable[gBattleStruct->field_4E]))
+                gBank1 = gBankTarget = gBattleStruct->faintedActionsBank;
+                if (gBattleMons[gBattleStruct->faintedActionsBank].hp == 0
+                 && !(gBattleStruct->field_DF & gBitTable[gBattlePartyID[gBattleStruct->faintedActionsBank]])
+                 && !(gAbsentBankFlags & gBitTable[gBattleStruct->faintedActionsBank]))
                 {
-                    BattleScriptExecute(BattleScript_82DA7C4);
-                    gBattleStruct->field_4D = 2;
+                    BattleScriptExecute(BattleScript_GiveExp);
+                    gBattleStruct->faintedActionsState = 2;
                     return TRUE;
                 }
-            } while (++gBattleStruct->field_4E != gNoOfAllBanks);
-            gBattleStruct->field_4D = 3;
+            } while (++gBattleStruct->faintedActionsBank != gNoOfAllBanks);
+            gBattleStruct->faintedActionsState = 3;
             break;
         case 2:
             sub_803F9EC(gBank1);
-            if (++gBattleStruct->field_4E == gNoOfAllBanks)
-                gBattleStruct->field_4D = 3;
+            if (++gBattleStruct->faintedActionsBank == gNoOfAllBanks)
+                gBattleStruct->faintedActionsState = 3;
             else
-                gBattleStruct->field_4D = 1;
+                gBattleStruct->faintedActionsState = 1;
             break;
         case 3:
-            gBattleStruct->field_4E = 0;
-            gBattleStruct->field_4D++;
+            gBattleStruct->faintedActionsBank = 0;
+            gBattleStruct->faintedActionsState++;
             // fall through
         case 4:
             do
             {
-                gBank1 = gBankTarget = gBattleStruct->field_4E;
-                if (gBattleMons[gBattleStruct->field_4E].hp == 0
-                 && !(gAbsentBankFlags & gBitTable[gBattleStruct->field_4E]))
+                gBank1 = gBankTarget = gBattleStruct->faintedActionsBank;
+                if (gBattleMons[gBattleStruct->faintedActionsBank].hp == 0
+                 && !(gAbsentBankFlags & gBitTable[gBattleStruct->faintedActionsBank]))
                 {
-                    BattleScriptExecute(BattleScript_82DA7CD);
-                    gBattleStruct->field_4D = 5;
+                    BattleScriptExecute(BattleScript_HandleFaintedMon);
+                    gBattleStruct->faintedActionsState = 5;
                     return TRUE;
                 }
-            } while (++gBattleStruct->field_4E != gNoOfAllBanks);
-            gBattleStruct->field_4D = 6;
+            } while (++gBattleStruct->faintedActionsBank != gNoOfAllBanks);
+            gBattleStruct->faintedActionsState = 6;
             break;
         case 5:
-            if (++gBattleStruct->field_4E == gNoOfAllBanks)
-                gBattleStruct->field_4D = 6;
+            if (++gBattleStruct->faintedActionsBank == gNoOfAllBanks)
+                gBattleStruct->faintedActionsState = 6;
             else
-                gBattleStruct->field_4D = 4;
+                gBattleStruct->faintedActionsState = 4;
             break;
         case 6:
             if (AbilityBattleEffects(ABILITYEFFECT_INTIMIDATE1, 0, 0, 0, 0) || AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0) || ItemBattleEffects(1, 0, 1) || AbilityBattleEffects(ABILITYEFFECT_FORECAST, 0, 0, 0, 0))
                 return TRUE;
-            gBattleStruct->field_4D++;
+            gBattleStruct->faintedActionsState++;
             break;
-        case 7:
+        case FAINTED_ACTIONS_MAX_CASE:
             break;
         }
-    } while (gBattleStruct->field_4D != sub_8041728_MAX_CASE);
+    } while (gBattleStruct->faintedActionsState != FAINTED_ACTIONS_MAX_CASE);
     return FALSE;
 }
 
@@ -1313,7 +1313,7 @@ void TryClearRageStatuses(void)
 u8 AtkCanceller_UnableToUseMove(void)
 {
     u8 effect = 0;
-    s32* bideDmg = &gBattleScripting.bideDmg;
+    s32 *bideDmg = &gBattleScripting.bideDmg;
     do
     {
         switch (gBattleStruct->atkCancellerTracker)
@@ -3182,7 +3182,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     && gBattleMoves[gCurrentMove].flags & FLAG_KINGSROCK_AFFECTED
                     && gBattleMons[gBankTarget].hp)
                 {
-                    gBattleCommunication[MOVE_EFFECT_BYTE] = 8;
+                    gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_FLINCH;
                     BattleScriptPushCursor();
                     SetMoveEffect(0, 0);
                     BattleScriptPop();
@@ -3318,7 +3318,7 @@ static bool32 HasObedientBitSet(u8 bank)
     return GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_OBEDIENCE, NULL);
 }
 
-u8 IsPokeDisobedient(void)
+u8 IsMonDisobedient(void)
 {
     s32 rnd;
     s32 calc;

@@ -22,7 +22,7 @@
 #include "international_string_util.h"
 #include "unknown_task.h"
 #include "trig.h"
-#include "rng.h"
+#include "random.h"
 #include "event_data.h"
 #include "overworld.h"
 
@@ -581,9 +581,9 @@ static void Task_Hof_SetMonDisplayTask(u8 taskId)
     gTasks[taskId].func = Task_Hof_DisplayMon;
 }
 
-#define tDestinationX  data1
-#define tDestinationY  data2
-#define tSpecies       data7
+#define tDestinationX  data[1]
+#define tDestinationY  data[2]
+#define tSpecies       data[7]
 
 static void Task_Hof_DisplayMon(u8 taskId)
 {
@@ -614,7 +614,7 @@ static void Task_Hof_DisplayMon(u8 taskId)
     spriteId = sub_818D3E4(currMon->species, currMon->tid, currMon->personality, 1, xPos, yPos, currMonId, 0xFFFF);
     gSprites[spriteId].tDestinationX = field4;
     gSprites[spriteId].tDestinationY = field6;
-    gSprites[spriteId].data0 = 0;
+    gSprites[spriteId].data[0] = 0;
     gSprites[spriteId].tSpecies = currMon->species;
     gSprites[spriteId].callback = SpriteCB_GetOnScreenAndAnimate;
     gTasks[taskId].tMonSpriteId(currMonId) = spriteId;
@@ -1405,13 +1405,13 @@ static void sub_81751A4(struct Sprite* sprite)
         u8 tableID;
 
         sprite->pos2.y++;
-        sprite->pos2.y += sprite->data1;
+        sprite->pos2.y += sprite->data[1];
 
-        tableID = sprite->data0;
+        tableID = sprite->data[0];
         rand = (Random() % 4) + 8;
         sprite->pos2.x = rand * gSineTable[tableID] / 256;
 
-        sprite->data0 += 4;
+        sprite->data[0] += 4;
     }
 }
 
@@ -1429,9 +1429,9 @@ static bool8 sub_81751FC(void)
     StartSpriteAnim(sprite, Random() % 17);
 
     if (Random() & 3)
-        sprite->data1 = 0;
+        sprite->data[1] = 0;
     else
-        sprite->data1 = 1;
+        sprite->data[1] = 1;
 
     return FALSE;
 }
