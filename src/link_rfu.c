@@ -46,6 +46,7 @@ static void sub_800D434(void);
 static void sub_800D610(void);
 void sub_800D630(void);
 bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
+void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
 bool32 sub_8010454(u16 a0);
 u8 sub_8011A74(void);
 u8 sub_8012224(void);
@@ -2291,4 +2292,66 @@ void sub_800E3A8(void)
         memcpy(gSaveBlock1Ptr->unk_3B98, sp14, 20 * sizeof(struct UnkSaveSubstruct_3b98));
         free(sp14);
     }
+}
+
+bool32 sub_800E540(u16 id, u8 *name)
+{
+    int i;
+
+    for (i = 0; i < 20; i++)
+    {
+        if (StringCompare(gSaveBlock1Ptr->unk_3B98[i].trainerName, name) == 0 && gSaveBlock1Ptr->unk_3B98[i].trainerId == id)
+        {
+            return TRUE;
+        }
+        if (!sub_800E388(gSaveBlock1Ptr->unk_3B98[i].trainerName))
+        {
+            return FALSE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_800E5AC(void)
+{
+    int i;
+
+    for (i = 0; i < 20; i++)
+    {
+        gSaveBlock1Ptr->unk_3B98[i].trainerId = 0;
+        CpuFill16(0, gSaveBlock1Ptr->unk_3B98[i].trainerName, 8);
+    }
+}
+
+void nullsub_5(void *unused_0, u8 unused_1, u8 unused_2)
+{
+    // debug?
+}
+
+void nullsub_13(u8 unused_0, u8 unused_1, u8 unused_2, u8 unused_3)
+{
+
+}
+
+void sub_800E604(void)
+{
+    int i;
+    u8 unk_ee_bak = gUnknown_03005000.unk_ee;
+    CpuFill16(0, &gUnknown_03005000, sizeof gUnknown_03005000);
+    gUnknown_03005000.unk_ee = unk_ee_bak;
+    gUnknown_03005000.unk_0c = 0xFF;
+    if (gUnknown_03005000.unk_ee != 4)
+    {
+        gUnknown_03005000.unk_ee = 0;
+    }
+    for (i = 0; i < 5; i++)
+    {
+        sub_800FCC4(gUnknown_03005000.unk_80 + i);
+    }
+    sub_800FCC4(&gUnknown_03005000.unk_6c);
+    sub_800D6C8(&gUnknown_03005000.unk_124);
+    sub_800D724(&gUnknown_03005000.unk_9e8);
+    CpuFill16(0, gSendCmd, sizeof gSendCmd);
+    CpuFill16(0, gRecvCmds, sizeof gRecvCmds);
+    CpuFill16(0, gLinkPlayers, sizeof gLinkPlayers)
 }
