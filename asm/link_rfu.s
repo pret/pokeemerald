@@ -5,17 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_800E87C
-sub_800E87C: @ 800E87C
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gUnknown_082ED6A5
-	adds r0, r1
-	ldrb r0, [r0]
-	bx lr
-	.pool
-	thumb_func_end sub_800E87C
-
 	thumb_func_start sub_800E88C
 sub_800E88C: @ 800E88C
 	push {r4-r7,lr}

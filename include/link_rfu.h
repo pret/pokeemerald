@@ -32,8 +32,8 @@ struct UnkLinkRfuStruct_02022B2C
     u16 unk_02;
     u8 unk_04;
     u16 unk_06;
-    u32 unk_08;
-    u32 unk_0c;
+    struct UnkLinkRfuStruct_02022B14 *unk_08;
+    u8 *unk_0c;
     u8 unk_10;
     u8 unk_11;
     u16 unk_12;
@@ -75,7 +75,7 @@ struct UnkRfuStruct_1 {
     // aligned
     /* 0x032 */ u16 unk_32;
     /* 0x034 */ u16 unk_34[4];
-    /* 0x03c */ struct UnkLinkRfuStruct_02022B2C *unk_3c;
+    /* 0x03c */ const struct UnkLinkRfuStruct_02022B2C *unk_3c;
     /* 0x040 */ void (*unk_40)(u8, u8);
     /* 0x044 */ void (*unk_44)(u16);
     /* 0x048 */ u8 filler_48[8];

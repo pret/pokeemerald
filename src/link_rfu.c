@@ -54,6 +54,8 @@ void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
 bool32 sub_8010454(u16 a0);
 void sub_8010750(void);
 void sub_801084C(u8 taskId);
+void sub_8010AAC(u8 taskId);
+void sub_8010D0C(u8 taskId);
 u8 sub_8012224(void);
 
 // .rodata
@@ -190,7 +192,98 @@ static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
     SpriteCallbackDummy
 };
 
-extern const u16 gUnknown_082ED6E0[4];
+const struct UnkLinkRfuStruct_02022B2C gUnknown_082ED608 = {
+    0x04, 0x20, 0x00, 0x00, 0x02,
+    &gUnknown_02022B14,
+    gUnknown_02022B22,
+    0x01, 0x00, 0x258, 0x12c
+};
+const u8 gUnknown_082ED620[] = {
+    0, 3, 2, 1, 0
+};
+const u32 gUnknown_082ED628[] = {
+    0x000000,
+    0x000001,
+    0x000003,
+    0x000007,
+    0x00000f,
+    0x00001f,
+    0x00003f,
+    0x00007f,
+    0x0000ff,
+    0x0001ff,
+    0x0003ff,
+    0x0007ff,
+    0x000fff,
+    0x001fff,
+    0x003fff,
+    0x007fff,
+    0x00ffff,
+    0x01ffff,
+    0x03ffff,
+    0x07ffff,
+    0x0fffff,
+    0x1fffff,
+    0x3fffff,
+    0x7fffff,
+    0xffffff
+};
+const u8 gUnknown_082ED68C[] = {
+    0, 0, 1,
+    1, 2, 2,
+    2, 2, 3
+};
+const u8 gUnknown_082ED695[] = {
+    0, 1, 1, 2,
+    1, 2, 2, 3,
+    1, 2, 2, 3,
+    2, 3, 3, 4
+};
+const u8 gUnknown_082ED6A5[] = {
+    0, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0
+};
+const struct {
+    u8 *buffer;
+    u16 size;
+} gUnknown_082ED6B8[] = {
+    { gBlockSendBuffer, 200 },
+    { gBlockSendBuffer, 200 },
+    { gBlockSendBuffer, 100 },
+    { gBlockSendBuffer, 220 },
+    { gBlockSendBuffer,  40 }
+};
+const u16 gUnknown_082ED6E0[] = {
+    0x0002, 0x7f7d, 0x0000, 0xffff
+};
+
+const char sUnref_082ED6E8[][15] = {
+    "RFU WAIT",
+    "RFU BOOT",
+    "RFU ERROR",
+    "RFU RESET",
+    "RFU CONFIG",
+    "RFU START",
+    "RFU SC POLL",
+    "RFU SP POLL",
+    "RFU START",
+    "RFU SEND ERR",
+    "RFU CP POLL"
+};
+const char sUnref_082ED6E9[][16] = {
+    "              ",
+    "RECOVER START ",
+    "DISSCONECT    ",
+    "RECOVER SUUSES",
+    "RECOVER FAILED"
+};
+const TaskFunc gUnknown_082ED7E0[] = {
+    sub_801084C,
+    sub_8010AAC,
+    sub_8010D0C
+};
+const char gUnknown_082ED7EC[] = "PokemonSioInfo";
+const char gUnknown_082ED7FC[] = "LINK LOSS DISCONNECT!";
+const char gUnknown_082ED814[] = "LINK LOSS RECOVERY NOW";
 
 // .text
 
@@ -257,7 +350,7 @@ void sub_800BFA0(void)
     gUnknown_03004140.unk_06 = -1;
 }
 
-void sub_800BFCC(struct UnkLinkRfuStruct_02022B2C *unk0)
+void sub_800BFCC(const struct UnkLinkRfuStruct_02022B2C *unk0)
 {
     sub_800C000();
     gUnknown_03004140.unk_04 = 1;
@@ -2424,4 +2517,9 @@ void sub_800E748(u8 taskId)
             DestroyTask(taskId);
             break;
     }
+}
+
+u8 sub_800E87C(u8 idx)
+{
+    return gUnknown_082ED6A5[idx];
 }

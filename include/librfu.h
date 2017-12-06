@@ -174,6 +174,8 @@ extern struct RfuUnk1* gUnknown_03007870[4];
 extern void* sub_82E53F4;
 extern void rfu_STC_clearAPIVariables(void);
 
+struct UnkLinkRfuStruct_02022B14;
+
 void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void rfu_REQ_stopMode(void);
 void rfu_waitREQComplete(void);
@@ -186,7 +188,7 @@ void rfu_REQBN_watchLink(u16 a0, u8 *a1, u8 *a2, u8 *a3);
 bool16 rfu_syncVBlank(void);
 void rfu_REQ_reset(void);
 void rfu_REQ_configSystem(u16, u8, u8);
-void rfu_REQ_configGameData(u8, u16, u32, u32);
+void rfu_REQ_configGameData(u8, u16, struct UnkLinkRfuStruct_02022B14 *, u8 *);
 void rfu_REQ_startSearchChild(void);
 void rfu_REQ_pollSearchChild(void);
 void rfu_REQ_endSearchChild(void);
