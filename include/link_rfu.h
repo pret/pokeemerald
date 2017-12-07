@@ -40,6 +40,13 @@ struct UnkLinkRfuStruct_02022B2C
     u16 unk_14;
 };
 
+struct UnkLinkRfuStruct_02022B44
+{
+    u8 fill_00[15];
+    u8 unk_0f;
+    u8 fill_10[0xcc];
+};
+
 struct UnkRfuStruct_1 {
     /* 0x000 */ u8 unk_00;
     /* 0x001 */ u8 unk_01;
@@ -131,7 +138,9 @@ struct UnkRfuStruct_2 {
     /* 0x006 */ u8 filler_06[6];
     /* 0x00c */ u8 unk_0c;
     /* 0x00d */ u8 playerCount;
-    /* 0x00e */ u8 filler_0e[0x5e];
+    /* 0x00e */ u8 filler_0e[0x3e];
+    /* 0x04c */ u8 unk_4c[14 * 2];
+    /* 0x068 */ u8 filler_68[4];
     /* 0x06c */ struct UnkRfuStruct_2_Sub_6c unk_6c;
     /* 0x080 */ struct UnkRfuStruct_2_Sub_6c unk_80[5];
     /* 0x0e4 */ u8 filler_e4[10];
@@ -140,12 +149,16 @@ struct UnkRfuStruct_2 {
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
     /* 0x9e8 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
     /* 0xc1c */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
-    /* 0xc3c */ u8 filler_c3c[3];
-    /* 0xc3f */ u8 filler_c3f[0x9c];
+    /* 0xc3c */ u8 filler_c3c[2];
+    /* 0xc3e */ vu8 unk_c3e;
+    /* 0xc3f */ u8 unk_c3f[70 * 2];
+    /* 0xccb */ u8 filler_ccb[16];
     /* 0xcdb */ vu8 unk_cdb;
     /* 0xcdc */ u8 filler_cdc[2];
     /* 0xcde */ u8 unk_cde[4];
-    /* 0xce2 */ u8 filler_ce2[18];
+    /* 0xce2 */ u8 filler_ce2[2];
+    /* 0xce4 */ u8 unk_ce4;
+    /* 0xce5 */ u8 filler_ce5[15];
 }; // size = 0xcf4
 
 // Exported RAM declarations

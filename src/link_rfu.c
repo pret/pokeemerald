@@ -28,6 +28,7 @@ EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 EWRAM_DATA ALIGNED(4) struct UnkLinkRfuStruct_02022B14 gUnknown_02022B14 = {};
 EWRAM_DATA ALIGNED(2) u8 gUnknown_02022B22[8] = {};
 EWRAM_DATA struct UnkLinkRfuStruct_02022B2C gUnknown_02022B2C = {};
+EWRAM_DATA struct UnkLinkRfuStruct_02022B44 gUnknown_02022B44 = {};
 
 // Static ROM declarations
 
@@ -53,10 +54,12 @@ void sub_800EAFC(void);
 void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
 bool32 sub_8010454(u16 a0);
 void sub_8010750(void);
+int sub_80107A0(void);
 void sub_801084C(u8 taskId);
 void sub_8010AAC(u8 taskId);
 void sub_8010D0C(u8 taskId);
 u8 sub_8012224(void);
+void sub_801227C(void);
 
 // .rodata
 
@@ -2564,6 +2567,60 @@ void sub_800E88C(int r2, int r5)
             {
                 gUnknown_03005000.unk_cde[i] = r6++;
             }
+        }
+    }
+}
+
+void sub_800E94C(u8 taskId)
+{
+    switch (gUnknown_03005000.unk_04)
+    {
+        case 0:
+            sub_800BFCC(&gUnknown_082ED608);
+            gUnknown_03005000.unk_04 = 1;
+            gTasks[taskId].data[1] = 1;
+            break;
+        case 1:
+            break;
+        case 6:
+            sub_800C054(gUnknown_03005000.unk_0c, 0, 0xf0, gUnknown_082ED6E0);
+            gUnknown_03005000.unk_04 = 7;
+            gTasks[taskId].data[1] = 7;
+            break;
+        case 7:
+            break;
+        case 9:
+            gTasks[taskId].data[1] = 10;
+            break;
+        case 11:
+            switch (sub_80107A0())
+            {
+                case 5:
+                    gUnknown_03005000.unk_04 = 12;
+                    break;
+                case 6:
+                case 9:
+                    sub_800D630();
+                    gUnknown_03005000.unk_ce4 = 2;
+                    DestroyTask(taskId);
+                    break;
+            }
+            break;
+        case 12:
+        {
+            u8 r5 = 1 << gUnknown_03005000.unk_c3e;
+            rfu_clearSlot(12, gUnknown_03005000.unk_c3e);
+            rfu_setRecvBuffer(16, gUnknown_03005000.unk_c3e, gUnknown_03005000.unk_c3f, 70);
+            rfu_UNI_setSendData(r5, gUnknown_03005000.unk_4c, 14);
+            gTasks[taskId].data[1] = 8;
+            DestroyTask(taskId);
+            if (gUnknown_02022B44.unk_0f == 0)
+            {
+                sub_801227C();
+                gUnknown_02022B44.unk_0f++;
+            }
+            CreateTask(sub_801084C, 5);
+            break;
         }
     }
 }

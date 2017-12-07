@@ -21,9 +21,6 @@ gStringVar4: @ 2021FC4
 	.include "src/link.o"
 	.include "src/link_rfu.o"
 
-gUnknown_02022B44: @ 2022B44
-	.space 0xDC
-
 gUnknown_02022C20: @ 2022C20
 	.space 0xC
 
