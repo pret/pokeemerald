@@ -2523,3 +2523,47 @@ u8 sub_800E87C(u8 idx)
 {
     return gUnknown_082ED6A5[idx];
 }
+
+void sub_800E88C(int r2, int r5)
+{
+    u8 i;
+    u8 r4 = 1;
+    int r1 = r2;
+    int r6 = 0;
+    if (r5 == -1)
+    {
+        for (i = 0; i < 4; r2 >>= 1, i++)
+        {
+            if (r2 & 1)
+            {
+                gUnknown_03005000.unk_cde[i] = r4;
+                r4++;
+            }
+        }
+    }
+    else
+    {
+        for (i = 0; i < 4; r1 >>= 1, i++)
+        {
+            if (!(r1 & 1))
+            {
+                gUnknown_03005000.unk_cde[i] = 0;
+            }
+        }
+        for (r4 = 4; r4 != 0; r4--)
+        {
+            for (i = 0; i < 4 && gUnknown_03005000.unk_cde[i] != r4; i++);
+            if (i == 4)
+            {
+                r6 = r4;
+            }
+        }
+        for (r5 &= ~r2, i = 0; i < 4; r5 >>= 1, i++)
+        {
+            if (r5 & 1)
+            {
+                gUnknown_03005000.unk_cde[i] = r6++;
+            }
+        }
+    }
+}

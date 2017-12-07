@@ -143,7 +143,9 @@ struct UnkRfuStruct_2 {
     /* 0xc3c */ u8 filler_c3c[3];
     /* 0xc3f */ u8 filler_c3f[0x9c];
     /* 0xcdb */ vu8 unk_cdb;
-    /* 0xcdc */ u8 filler_cdc[0x18];
+    /* 0xcdc */ u8 filler_cdc[2];
+    /* 0xcde */ u8 unk_cde[4];
+    /* 0xce2 */ u8 filler_ce2[18];
 }; // size = 0xcf4
 
 // Exported RAM declarations
