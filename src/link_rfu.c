@@ -2624,3 +2624,28 @@ void sub_800E94C(u8 taskId)
         }
     }
 }
+
+void sub_800EAB4(void)
+{
+    u8 i;
+    u8 r5 = gUnknown_03004140.unk_00;
+    for (i = 0; i < 4; i++)
+    {
+        if (r5 & 1)
+        {
+            rfu_setRecvBuffer(16, i, gUnknown_03005000.unk_14[i], 14);
+            rfu_clearSlot(3, i);
+        }
+        r5 >>= 1;
+    }
+}
+
+void sub_800EAFC(void)
+{
+    u8 r5 = gUnknown_03004140.unk_00;
+    rfu_UNI_setSendData(r5, gUnknown_03005000.unk_c87, 70);
+    gUnknown_03005000.unk_cda = sub_800E87C(r5);
+    gUnknown_03005000.unk_ce2 = r5;
+    sub_800E88C(r5, -1);
+    gUnknown_03005000.unk_0c = 1;
+}
