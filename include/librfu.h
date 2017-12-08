@@ -108,7 +108,8 @@ struct RfuUnk1
     u16 unk_0;
     u8 unk_2;
     u8 unk_3;
-    u8 fill_4[0x10];
+    u8 fill_4[14];
+    u8 unk_12;
     u32 unk_14;
     u32 unk_18;
     struct RfuIntrStruct unk_1c;
@@ -217,3 +218,6 @@ u16 rfu_initializeAPI(u32 *unk0, u16 unk1, IntrFunc *interrupt, bool8 copyInterr
 void rfu_setTimerInterrupt(u8 which, IntrFunc *intr);
 void rfu_setRecvBuffer(u8 a0, u8 a1, void *a2, size_t a3);
 bool16 rfu_UNI_setSendData(u8 flag, void *ptr, u8 size);
+void rfu_REQ_recvData(void);
+void rfu_UNI_readySendData(u8 a0);
+void rfu_UNI_clearRecvNewDataFlag(u8 a0);

@@ -48,10 +48,11 @@ static void sub_800D434(void);
 static void sub_800D610(void);
 void sub_800D630(void);
 bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
-void sub_800EDBC(u16 a0);
-void sub_800EAB4(void);
-void sub_800EAFC(void);
-void sub_800ED34(u16 a0);
+static void sub_800EAB4(void);
+static void sub_800EAFC(void);
+void sub_800ED34(u16 unused);
+static void sub_800EDBC(u16 unused);
+void sub_800F048(void);
 struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void);
 void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
 bool32 sub_8010454(u16 a0);
@@ -2629,7 +2630,7 @@ void sub_800E94C(u8 taskId)
     }
 }
 
-void sub_800EAB4(void)
+static void sub_800EAB4(void)
 {
     u8 i;
     u8 r5 = gUnknown_03004140.unk_00;
@@ -2644,7 +2645,7 @@ void sub_800EAB4(void)
     }
 }
 
-void sub_800EAFC(void)
+static void sub_800EAFC(void)
 {
     u8 r5 = gUnknown_03004140.unk_00;
     rfu_UNI_setSendData(r5, gUnknown_03005000.unk_c87, 70);
@@ -2713,4 +2714,41 @@ void sub_800EB44(u8 taskId)
             DestroyTask(taskId);
             break;
     }
+}
+
+void sub_800ED10(void)
+{
+    sub_800C054(1, 0, 240, gUnknown_082ED6E0);
+}
+
+void sub_800ED28(void)
+{
+    sub_800C27C(FALSE);
+}
+
+void sub_800ED34(u16 unused)
+{
+    int i;
+
+    for (i = 0; i < 14; i++)
+    {
+        gUnknown_03005000.unk_4c[0][i] = 0;
+    }
+    rfu_REQ_recvData();
+    rfu_waitREQComplete();
+    if (gUnknown_03007870[gUnknown_03005000.unk_c3e]->unk_12)
+    {
+        gUnknown_03005000.unk_cd0++;
+        sub_800D7D8(&gUnknown_03005000.unk_124, gUnknown_03005000.unk_c3f);
+        gUnknown_02022B44.unk_06++;
+        sub_800F048();
+        rfu_UNI_readySendData(gUnknown_03005000.unk_c3e);
+        rfu_UNI_clearRecvNewDataFlag(gUnknown_03005000.unk_c3e);
+    }
+    rfu_REQ_sendData_wrapper(1);
+}
+
+static void sub_800EDBC(u16 unused)
+{
+    gUnknown_03005000.unk_cdb = 1;
 }
