@@ -216,4 +216,4 @@ void rfu_NI_stopReceivingData(u8 who);
 u16 rfu_initializeAPI(u32 *unk0, u16 unk1, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void rfu_setTimerInterrupt(u8 which, IntrFunc *intr);
 void rfu_setRecvBuffer(u8 a0, u8 a1, void *a2, size_t a3);
-void rfu_UNI_setSendData(u8 flag, void *ptr, u8 size);
+bool16 rfu_UNI_setSendData(u8 flag, void *ptr, u8 size);

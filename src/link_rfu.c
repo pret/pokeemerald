@@ -51,6 +51,8 @@ bool8 sub_800DAC8(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
 void sub_800EDBC(u16 a0);
 void sub_800EAB4(void);
 void sub_800EAFC(void);
+void sub_800ED34(u16 a0);
+struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void);
 void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
 bool32 sub_8010454(u16 a0);
 void sub_8010750(void);
@@ -58,6 +60,8 @@ int sub_80107A0(void);
 void sub_801084C(u8 taskId);
 void sub_8010AAC(u8 taskId);
 void sub_8010D0C(u8 taskId);
+void sub_8011068(u8 a0);
+void sub_8011A64(u8 a0, u8 a1);
 u8 sub_8012224(void);
 void sub_801227C(void);
 
@@ -2648,4 +2652,65 @@ void sub_800EAFC(void)
     gUnknown_03005000.unk_ce2 = r5;
     sub_800E88C(r5, -1);
     gUnknown_03005000.unk_0c = 1;
+}
+
+void sub_800EB44(u8 taskId)
+{
+    if (sub_800F7DC()->unk_0a_0 == 0x54 && sub_8011A74() == 4)
+    {
+        rfu_REQ_disconnect(gUnknown_03004140.unk_00);
+        rfu_waitREQComplete();
+        sub_8011A64(0, 0);
+    }
+    switch (gUnknown_03005000.unk_04)
+    {
+        case 0:
+            sub_800BFCC(&gUnknown_02022B2C);
+            gUnknown_03005000.unk_04 = 1;
+            gTasks[taskId].data[1] = 1;
+            break;
+        case 1:
+            break;
+        case 17:
+            sub_800C054(2, 0, 240, gUnknown_082ED6E0);
+            sub_800D52C(sub_800ED34);
+            gUnknown_03005000.unk_04 = 18;
+            break;
+        case 18:
+            break;
+        case 13:
+            if (rfu_UNI_setSendData(1 << gUnknown_03005000.unk_c3e, gUnknown_03005000.unk_4c, 14) == 0)
+            {
+                gUnknown_03005000.unk_0c = 0;
+                DestroyTask(taskId);
+                if (gTasks[taskId].data[7])
+                {
+                    CreateTask(sub_8010D0C, 1);
+                }
+                else
+                {
+                    CreateTask(sub_801084C, 5);
+                }
+            }
+            break;
+        case 14:
+            sub_800C27C(0);
+            gUnknown_03005000.unk_04 = 15;
+            break;
+        case 15:
+            break;
+        case 16:
+            gUnknown_03005000.unk_cdb = 0;
+            sub_800D52C(sub_800EDBC);
+            sub_8011068(1);
+            sub_800EAB4();
+            sub_800EAFC();
+            gUnknown_03005000.unk_04 = 20;
+            gTasks[taskId].data[1] = 8;
+            gUnknown_03005000.unk_0c = 1;
+            CreateTask(sub_801084C, 5);
+            gUnknown_03005000.unk_ce8 = 1;
+            DestroyTask(taskId);
+            break;
+    }
 }
