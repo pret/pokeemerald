@@ -142,7 +142,9 @@ struct UnkRfuStruct_2 {
     /* 0x00d */ u8 playerCount;
     /* 0x00e */ u8 filler_0e[6];
     /* 0x014 */ u8 unk_14[4][14];
-    /* 0x04c */ u8 unk_4c[2][14];
+    /* 0x04c */ u8 unk_4c[14];
+    /* 0x05a */ u8 filler_5a[13];
+    /* 0x067 */ u8 unk_67;
     /* 0x068 */ u8 filler_68[4];
     /* 0x06c */ struct UnkRfuStruct_2_Sub_6c unk_6c;
     /* 0x080 */ struct UnkRfuStruct_2_Sub_6c unk_80[5];

@@ -2732,7 +2732,7 @@ void sub_800ED34(u16 unused)
 
     for (i = 0; i < 14; i++)
     {
-        gUnknown_03005000.unk_4c[0][i] = 0;
+        gUnknown_03005000.unk_4c[i] = 0;
     }
     rfu_REQ_recvData();
     rfu_waitREQComplete();
@@ -2751,4 +2751,42 @@ void sub_800ED34(u16 unused)
 static void sub_800EDBC(u16 unused)
 {
     gUnknown_03005000.unk_cdb = 1;
+}
+
+void sub_800EDD4(void)
+{
+    u8 i;
+
+    sub_800C048();
+    if (gUnknown_03005000.unk_0c == 1)
+    {
+        if (FuncIsActiveTask(sub_800E748) == TRUE)
+        {
+            DestroyTask(gUnknown_03005000.unk_67);
+            sub_800E604();
+        }
+    }
+    else if (gUnknown_03005000.unk_0c == 0)
+    {
+        if (FuncIsActiveTask(sub_800E94C) == TRUE)
+        {
+            DestroyTask(gUnknown_03005000.unk_67);
+            sub_800E604();
+        }
+    }
+    else if (gUnknown_03005000.unk_0c == 2)
+    {
+        if (FuncIsActiveTask(sub_800EB44) == TRUE)
+        {
+            DestroyTask(gUnknown_03005000.unk_67);
+            sub_800E604();
+        }
+    }
+    for (i = 0; i < 3; i++)
+    {
+        if (FuncIsActiveTask(gUnknown_082ED7E0[i]) == TRUE)
+        {
+            DestroyTask(FindTaskIdByFunc(gUnknown_082ED7E0[i]));
+        }
+    }
 }
