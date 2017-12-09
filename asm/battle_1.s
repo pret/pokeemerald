@@ -1433,13 +1433,13 @@ DrawMainBattleBackground: @ 8035770
 	ands r0, r1
 	cmp r0, 0
 	beq _080357B0
-	ldr r0, =gUnknown_08D7C440
+	ldr r0, =gBattleTerrainTiles_Building
 	ldr r1, =0x06008000
 	bl LZDecompressVram
 	ldr r0, =gUnknown_08D7CA28
 	ldr r1, =0x0600d000
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D7C9EC
+	ldr r0, =gBattleTerrainPalette_Frontier
 	b _08035A52
 	.pool
 _080357B0:
@@ -1502,7 +1502,7 @@ _0803584C:
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x20
 	bne _08035898
-	ldr r0, =gUnknown_08D7C440
+	ldr r0, =gBattleTerrainTiles_Building
 	ldr r1, =0x06008000
 	bl LZDecompressVram
 	ldr r0, =gUnknown_08D7CA28
@@ -1576,7 +1576,7 @@ _08035904:
 	b _08035A52
 	.pool
 _08035950:
-	ldr r0, =gUnknown_08D7C440
+	ldr r0, =gBattleTerrainTiles_Building
 	ldr r1, =0x06008000
 	bl LZDecompressVram
 	ldr r0, =gUnknown_08D7CA28
@@ -1650,13 +1650,13 @@ _08035A52:
 	b _08035A8A
 	.pool
 _08035A70:
-	ldr r0, =gUnknown_08D7C440
+	ldr r0, =gBattleTerrainTiles_Building
 	ldr r1, =0x06008000
 	bl LZDecompressVram
 	ldr r0, =gUnknown_08D7CA28
 	ldr r1, =0x0600d000
 	bl LZDecompressVram
-	ldr r0, =gUnknown_08D7C9EC
+	ldr r0, =gBattleTerrainPalette_Frontier
 	movs r1, 0x20
 	movs r2, 0x60
 	bl LoadCompressedPalette
@@ -2813,7 +2813,7 @@ _08036510:
 	b _0803651A
 	.pool
 _08036518:
-	ldr r0, =gUnknown_08D7C440
+	ldr r0, =gBattleTerrainTiles_Building
 _0803651A:
 	ldr r1, =0x06008000
 	bl LZDecompressVram
@@ -3043,7 +3043,7 @@ _08036738:
 	b _08036742
 	.pool
 _08036740:
-	ldr r0, =gUnknown_08D7C9EC
+	ldr r0, =gBattleTerrainPalette_Frontier
 _08036742:
 	movs r1, 0x20
 	movs r2, 0x60

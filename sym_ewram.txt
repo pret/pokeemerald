@@ -1315,10 +1315,10 @@ gUnknown_0203BC94: @ 203BC94
 gUnknown_0203BC98: @ 203BC98
 	.space 0x4
 
-gUnknown_0203BC9C: @ 203BC9C
+gPokeblockMonId: @ 203BC9C
 	.space 0x2
 
-gUnknown_0203BC9E: @ 203BC9E
+gPokeblockGain: @ 203BC9E
 	.space 0x2
 
 gUnknown_0203BCA0: @ 203BCA0
@@ -1393,10 +1393,10 @@ gUnknown_0203BCF8: @ 203BCF8
 gBraillePuzzleCallbackFlag: @ 203BD14
 	.space 0x4
 
-gUnknown_0203BD18: @ 203BD18
+sPokeblockFeed: @ 203BD18
 	.space 0x4
 
-gUnknown_0203BD1C: @ 203BD1C
+sPokeblockSpritePal: @ 203BD1C
 	.space 0x8
 
 gUnknown_0203BD24: @ 203BD24

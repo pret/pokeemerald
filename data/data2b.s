@@ -4803,14 +4803,14 @@ gBattleTerrainTable:: @ 831ABA8
 	.4byte gUnknown_08D7C10C
 
 	@ building
-	.4byte gUnknown_08D7C440
+	.4byte gBattleTerrainTiles_Building
 	.4byte gUnknown_08D7CA28
 	.4byte gUnknown_08D820D4
 	.4byte gUnknown_08D824E4
 	.4byte gUnknown_08D7DEB4
 
 	@ plain
-	.4byte gUnknown_08D7C440
+	.4byte gBattleTerrainTiles_Building
 	.4byte gUnknown_08D7CA28
 	.4byte gUnknown_08D820D4
 	.4byte gUnknown_08D824E4

@@ -425,8 +425,8 @@ _08140618:
 	bl SetVBlankCallback
 	bl remove_some_task
 	bl SetVBlankHBlankCallbacksToNull
-	bl sub_8121DA0
-	bl sub_8121E10
+	bl ResetVramOamAndBgCntRegs
+	bl ResetAllBgsCoordinates
 	b _081407F8
 _08140630:
 	bl sub_8140388
@@ -3258,8 +3258,8 @@ sub_8141E7C: @ 8141E7C
 	ldr r0, =gSpriteCoordOffsetY
 	strh r4, [r0]
 	strh r4, [r1]
-	bl sub_8121DA0
-	bl sub_8121E10
+	bl ResetVramOamAndBgCntRegs
+	bl ResetAllBgsCoordinates
 	movs r0, 0x50
 	movs r1, 0
 	bl SetGpuReg

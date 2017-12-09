@@ -175,14 +175,14 @@ sub_8160740: @ 8160740
 	thumb_func_start sub_81607EC
 sub_81607EC: @ 81607EC
 	push {lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_085CEC28
 	movs r0, 0
 	movs r2, 0x2
 	bl InitBgsFromTemplates
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0

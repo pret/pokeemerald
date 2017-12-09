@@ -2351,7 +2351,7 @@ _081C51D6:
 	thumb_func_start sub_81C51DC
 sub_81C51DC: @ 81C51DC
 	push {lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0861F2B4
@@ -2363,7 +2363,7 @@ sub_81C51DC: @ 81C51DC
 	adds r1, 0x4
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r1, 0x82

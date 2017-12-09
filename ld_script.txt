@@ -222,6 +222,7 @@ SECTIONS {
         asm/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
         src/braille_puzzles.o(.text);
+        src/pokeblock_feed.o(.text);
         asm/pokeblock_feed.o(.text);
         src/clear_save_data_screen.o(.text);
         asm/intro_credits_graphics.o(.text);

@@ -728,7 +728,7 @@ _08135A9A:
 	movs r0, 0x38
 	movs r1, 0x40
 	movs r2, 0
-	bl sub_8136444
+	bl CreatePokeblockCaseSprite
 	ldr r1, =gUnknown_0203AB50
 	ldr r1, [r1]
 	ldr r2, =0x00000e74
@@ -859,7 +859,7 @@ _08135BD2:
 	thumb_func_start sub_8135BDC
 sub_8135BDC: @ 8135BDC
 	push {lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_085B2620
@@ -870,7 +870,7 @@ sub_8135BDC: @ 8135BDC
 	ldr r1, [r0]
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r1, 0x82
@@ -949,12 +949,12 @@ _08135CBC:
 	b _08135CDE
 	.pool
 _08135CCC:
-	ldr r0, =gUnknown_085B26F4
+	ldr r0, =gPokeblockCase_SpriteSheet
 	bl LoadCompressedObjectPic
 	b _08135CDE
 	.pool
 _08135CD8:
-	ldr r0, =gUnknown_085B26FC
+	ldr r0, =gPokeblockCase_SpritePal
 	bl LoadCompressedObjectPalette
 _08135CDE:
 	ldr r0, =gUnknown_0203AB50
@@ -1313,7 +1313,7 @@ _08136002:
 	lsls r1, r4, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl sub_8136F9C
+	bl GetPokeblockData
 	lsls r0, 16
 	adds r7, r4, 0
 	cmp r0, 0
@@ -1842,8 +1842,8 @@ _08136436:
 	.pool
 	thumb_func_end sub_8136418
 
-	thumb_func_start sub_8136444
-sub_8136444: @ 8136444
+	thumb_func_start CreatePokeblockCaseSprite
+CreatePokeblockCaseSprite: @ 8136444
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1864,7 +1864,7 @@ sub_8136444: @ 8136444
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8136444
+	thumb_func_end CreatePokeblockCaseSprite
 
 	thumb_func_start sub_8136470
 sub_8136470: @ 8136470
@@ -2549,7 +2549,7 @@ sub_8136A74: @ 8136A74
 	ldr r0, [r2]
 	adds r0, r1
 	ldr r1, =sub_8136AA0
-	bl sub_8166204
+	bl ChooseMonToGivePokeblock
 	pop {r0}
 	bx r0
 	.pool
@@ -3000,7 +3000,7 @@ GetHighestPokeblocksFlavorLevel: @ 8136EA4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r1, 0x1
-	bl sub_8136F9C
+	bl GetPokeblockData
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r1, 0x1
@@ -3010,7 +3010,7 @@ _08136EB4:
 	lsrs r4, r0, 24
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8136F9C
+	bl GetPokeblockData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -3030,7 +3030,7 @@ _08136ECC:
 GetPokeblocksFeel: @ 8136EDC
 	push {lr}
 	movs r1, 0x6
-	bl sub_8136F9C
+	bl GetPokeblockData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x63
@@ -3130,8 +3130,8 @@ _08136F96:
 	bx r1
 	thumb_func_end sub_8136F68
 
-	thumb_func_start sub_8136F9C
-sub_8136F9C: @ 8136F9C
+	thumb_func_start GetPokeblockData
+GetPokeblockData: @ 8136F9C
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -3175,7 +3175,7 @@ _08136FDC:
 _08136FDE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8136F9C
+	thumb_func_end GetPokeblockData
 
 	thumb_func_start PokeblockGetGain
 PokeblockGetGain: @ 8136FE4
@@ -3198,7 +3198,7 @@ _08136FFE:
 	lsrs r5, r0, 24
 	mov r0, r8
 	adds r1, r5, 0
-	bl sub_8136F9C
+	bl GetPokeblockData
 	lsls r0, 16
 	asrs r1, r0, 16
 	cmp r1, 0
@@ -3229,12 +3229,12 @@ _0813702A:
 	.pool
 	thumb_func_end PokeblockGetGain
 
-	thumb_func_start sub_8137044
-sub_8137044: @ 8137044
+	thumb_func_start PokeblockCopyName
+PokeblockCopyName: @ 8137044
 	push {r4,lr}
 	adds r4, r1, 0
 	movs r1, 0
-	bl sub_8136F9C
+	bl GetPokeblockData
 	lsls r0, 24
 	ldr r1, =gPokeblockNames
 	lsrs r0, 22
@@ -3246,7 +3246,7 @@ sub_8137044: @ 8137044
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8137044
+	thumb_func_end PokeblockCopyName
 
 	thumb_func_start sub_8137068
 sub_8137068: @ 8137068
@@ -3298,13 +3298,13 @@ _081370BC:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_8136F9C
+	bl GetPokeblockData
 	adds r4, r0, 0
 	adds r1, r6, 0x1
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_8136F9C
+	bl GetPokeblockData
 	lsls r4, 16
 	lsls r0, 16
 	lsls r1, r6, 16

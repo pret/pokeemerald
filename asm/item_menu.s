@@ -568,7 +568,7 @@ _081AB046:
 	thumb_func_start bag_menu_init_bgs
 bag_menu_init_bgs: @ 81AB050
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	ldr r4, =gUnknown_0203CE54
 	ldr r0, [r4]
 	adds r0, 0x4
@@ -586,7 +586,7 @@ bag_menu_init_bgs: @ 81AB050
 	adds r1, 0x4
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r1, 0x82

@@ -68,10 +68,10 @@ gUnknown_085B26A4:: @ 85B26A4
 gUnknown_085B26F0:: @ 85B26F0
 	.incbin "baserom.gba", 0x5b26f0, 0x4
 
-gUnknown_085B26F4:: @ 85B26F4
+gPokeblockCase_SpriteSheet:: @ 85B26F4
 	.incbin "baserom.gba", 0x5b26f4, 0x8
 
-gUnknown_085B26FC:: @ 85B26FC
+gPokeblockCase_SpritePal:: @ 85B26FC
 	.incbin "baserom.gba", 0x5b26fc, 0x8
 
 gUnknown_085B2704:: @ 85B2704

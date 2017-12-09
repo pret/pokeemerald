@@ -331,10 +331,10 @@ gUnknown_08D7C154:: @ 8D7C154
 gUnknown_08D7C404:: @ 8D7C404
 	.incbin "baserom.gba", 0xd7c404, 0x3c
 
-gUnknown_08D7C440:: @ 8D7C440
+gBattleTerrainTiles_Building:: @ 8D7C440
 	.incbin "baserom.gba", 0xd7c440, 0x5ac
 
-gUnknown_08D7C9EC:: @ 8D7C9EC
+gBattleTerrainPalette_Frontier:: @ 8D7C9EC
 	.incbin "baserom.gba", 0xd7c9ec, 0x3c
 
 gUnknown_08D7CA28:: @ 8D7CA28
