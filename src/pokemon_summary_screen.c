@@ -937,7 +937,7 @@ void sub_81C0704(u8 taskId)
         gUnknown_0203CF1C->unk40D3 = sub_81C45F4(&gUnknown_0203CF1C->currentMon, &data[1]);
         if (gUnknown_0203CF1C->unk40D3 == 0xFF)
             return;
-        gSprites[gUnknown_0203CF1C->unk40D3].data2 = 1;
+        gSprites[gUnknown_0203CF1C->unk40D3].data[2] = 1;
         sub_81C0E24();
         data[1] = 0;
         break;
@@ -952,7 +952,7 @@ void sub_81C0704(u8 taskId)
         sub_81C2524();
         break;
     case 12:
-        gSprites[gUnknown_0203CF1C->unk40D3].data2 = 0;
+        gSprites[gUnknown_0203CF1C->unk40D3].data[2] = 0;
         break;
     default:
         if (sub_81221EC() == 0 && FuncIsActiveTask(sub_81C20F0) == 0)

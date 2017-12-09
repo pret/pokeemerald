@@ -18,7 +18,7 @@
 	.set ANIM_ITEM_STEAL, 0x10
 	.set ANIM_SNATCH_MOVE, 0x11
 	.set ANIM_FUTURE_SIGHT_HIT, 0x12
-	.set ANIM_x13, 0x13
+	.set ANIM_DOOM_DESIRE_HIT, 0x13
 	.set ANIM_x14, 0x14
 	.set ANIM_INGRAIN_HEAL, 0x15
 	.set ANIM_WISH_HEAL, 0x16
@@ -146,8 +146,8 @@
 	.equiv sANIM_ARG2, gBattleScripting + 0x11
 	.equiv sTRIPLE_KICK_POWER, gBattleScripting + 0x12
 	.equiv sMOVEEND_STATE, gBattleScripting + 0x14
-	.equiv sFIELD_15, gBattleScripting + 0x15
-	.equiv sFIELD_16, gBattleScripting + 0x16
+	.equiv sBANK_WITH_ABILITY, gBattleScripting + 0x15
+	.equiv sMULTIHIT_EFFECT, gBattleScripting + 0x16
 	.equiv sBANK, gBattleScripting + 0x17
 	.equiv sANIM_TURN, gBattleScripting + 0x18
 	.equiv sANIM_TARGETS_HIT, gBattleScripting + 0x19

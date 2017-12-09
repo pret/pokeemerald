@@ -4,7 +4,7 @@
 #include "rtc.h"
 #include "overworld.h"
 #include "map_constants.h"
-#include "rng.h"
+#include "random.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "field_camera.h"

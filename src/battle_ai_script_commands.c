@@ -4,7 +4,7 @@
 #include "battle.h"
 #include "species.h"
 #include "abilities.h"
-#include "rng.h"
+#include "random.h"
 #include "item.h"
 #include "battle_move_effects.h"
 #include "moves.h"
@@ -12,7 +12,6 @@
 
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
-#define AIScriptRead8(ptr) ((ptr)[0])
 #define AIScriptReadPtr(ptr) (const u8*) AIScriptRead32(ptr)
 
 #define AI_ACTION_DONE          0x0001

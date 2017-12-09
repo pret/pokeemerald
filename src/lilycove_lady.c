@@ -8,7 +8,7 @@
 #include "rom6.h"
 #include "event_data.h"
 #include "script.h"
-#include "rng.h"
+#include "random.h"
 #include "string_util.h"
 #include "item.h"
 #include "items.h"

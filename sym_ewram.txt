@@ -543,7 +543,7 @@ gUnknown_0202499C: @ 202499C
 gUnknown_020249B4: @ 20249B4
 	.space 0x8
 
-	.include "src/rng.o"
+	.include "src/random.o"
 	.include "src/daycare.o"
     .include "src/load_save.o"
 

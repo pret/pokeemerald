@@ -10,7 +10,7 @@
 #include "species.h"
 #include "link.h"
 #include "hold_effects.h"
-#include "rng.h"
+#include "random.h"
 #include "trainer_classes.h"
 #include "trainer_ids.h"
 #include "songs.h"

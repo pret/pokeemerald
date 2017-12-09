@@ -5,19 +5,15 @@
 #include "pokemon.h"
 #include "event_data.h"
 #include "abilities.h"
-#include "rng.h"
+#include "random.h"
+#include "battle_scripts.h"
 
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern u8 gUnknown_0203CF00[];
-extern const u8* gBattlescriptCurrInstr;
+extern const u8 *gBattlescriptCurrInstr;
 extern u8 gBattleCommunication[];
 extern u8 gActiveBank;
-
-extern const u8 BattleScript_MoveUsedWokeUp[];
-extern const u8 BattleScript_MoveUsedIsFrozen[];
-extern const u8 BattleScript_MoveUsedUnfroze[];
-extern const u8 BattleScript_MoveUsedIsAsleep[];
 
 extern void sub_81D55D0(void);
 extern void sub_81D5694(void);

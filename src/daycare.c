@@ -7,7 +7,7 @@
 #include "mail.h"
 #include "pokemon_storage_system.h"
 #include "event_data.h"
-#include "rng.h"
+#include "random.h"
 #include "main.h"
 #include "moves.h"
 #include "egg_hatch.h"

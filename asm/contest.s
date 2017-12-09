@@ -13829,13 +13829,13 @@ sub_80DEA5C: @ 80DEA5C
 	strh r0, [r4, 0x26]
 	movs r0, 0x3
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	movs r0, 0x3
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]

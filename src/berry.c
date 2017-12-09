@@ -4,7 +4,7 @@
 #include "item.h"
 #include "items.h"
 #include "text.h"
-#include "rng.h"
+#include "random.h"
 #include "event_data.h"
 #include "fieldmap.h"
 
