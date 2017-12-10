@@ -1393,11 +1393,7 @@ gUnknown_0203BCF8: @ 203BCF8
 gBraillePuzzleCallbackFlag: @ 203BD14
 	.space 0x4
 
-sPokeblockFeed: @ 203BD18
-	.space 0x4
-
-sPokeblockSpritePal: @ 203BD1C
-	.space 0x8
+	.include "src/pokeblock_feed.o"
 
 gUnknown_0203BD24: @ 203BD24
 	.space 0x2

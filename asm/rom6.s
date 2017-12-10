@@ -919,7 +919,7 @@ _08135C64:
 	.4byte _08135CFC
 _08135C7C:
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08D9B2B4
+	ldr r1, =gMenuPokeblock_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -934,7 +934,7 @@ _08135C98:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08135D18
-	ldr r0, =gUnknown_08D9B7C8
+	ldr r0, =gMenuPokeblockDevice_Gfx
 	ldr r4, =gUnknown_0203AB50
 	ldr r1, [r4]
 	bl LZDecompressWram
@@ -942,7 +942,7 @@ _08135C98:
 	b _08135CE2
 	.pool
 _08135CBC:
-	ldr r0, =gUnknown_08D9B470
+	ldr r0, =gMenuPokeblock_Pal
 	movs r1, 0
 	movs r2, 0xC0
 	bl LoadCompressedPalette

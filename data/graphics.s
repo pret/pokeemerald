@@ -880,13 +880,13 @@ gBuyMenuFrame_Tilemap:: @ 8D9B0F0
 gMenuMoneyGfx:: @ 8D9B230
     .incbin "baserom.gba", 0xd9b230, 0x84
 
-gUnknown_08D9B2B4:: @ 8D9B2B4
+gMenuPokeblock_Gfx:: @ 8D9B2B4
 	.incbin "baserom.gba", 0xd9b2b4, 0x1bc
 
-gUnknown_08D9B470:: @ 8D9B470
+gMenuPokeblock_Pal:: @ 8D9B470
 	.incbin "baserom.gba", 0xd9b470, 0x358
 
-gUnknown_08D9B7C8:: @ 8D9B7C8
+gMenuPokeblockDevice_Gfx:: @ 8D9B7C8
 	.incbin "baserom.gba", 0xd9b7c8, 0x27c
 
 gUnknown_08D9BA44:: @ 8D9BA44
