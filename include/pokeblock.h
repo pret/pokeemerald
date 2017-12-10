@@ -25,6 +25,9 @@ enum
 };
 
 // use pokeblock
+extern u8 gPokeblockMonId;
+extern s16 gPokeblockGain;
+
 void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void));
 
 // pokeblock feed

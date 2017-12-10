@@ -1,10 +1,7 @@
-//
-// Created by scott on 10/21/2017.
-//
-
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
 
+// interface pokeballs
 extern const u8 gInterfaceGfx_PokeBall[];
 extern const u8 gInterfacePal_PokeBall[];
 extern const u8 gInterfaceGfx_GreatBall[];
@@ -30,6 +27,23 @@ extern const u8 gInterfacePal_LuxuryBall[];
 extern const u8 gInterfaceGfx_PremierBall[];
 extern const u8 gInterfacePal_PremierBall[];
 extern const u8 gOpenPokeballGfx[];
+
+// pokeblock
+extern const u8 gPokeblockRed_Pal[];
+extern const u8 gPokeblockBlue_Pal[];
+extern const u8 gPokeblockPink_Pal[];
+extern const u8 gPokeblockGreen_Pal[];
+extern const u8 gPokeblockYellow_Pal[];
+extern const u8 gPokeblockPurple_Pal[];
+extern const u8 gPokeblockIndigo_Pal[];
+extern const u8 gPokeblockBrown_Pal[];
+extern const u8 gPokeblockLiteBlue_Pal[];
+extern const u8 gPokeblockOlive_Pal[];
+extern const u8 gPokeblockGray_Pal[];
+extern const u8 gPokeblockBlack_Pal[];
+extern const u8 gPokeblockWhite_Pal[];
+extern const u8 gPokeblockGold_Pal[];
+extern const u8 gPokeblock_Gfx[];
 
 extern const u8 gItemIcon_QuestionMark[];
 extern const u8 gItemIconPalette_QuestionMark[];

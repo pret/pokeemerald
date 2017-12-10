@@ -1306,32 +1306,7 @@ gUnknown_0203BC88: @ 203BC88
 gUnknown_0203BC8C: @ 203BC8C
 	.space 0x4
 
-gUnknown_0203BC90: @ 203BC90
-	.space 0x4
-
-gUnknown_0203BC94: @ 203BC94
-	.space 0x4
-
-gUnknown_0203BC98: @ 203BC98
-	.space 0x4
-
-gPokeblockMonId: @ 203BC9C
-	.space 0x2
-
-gPokeblockGain: @ 203BC9E
-	.space 0x2
-
-gUnknown_0203BCA0: @ 203BCA0
-	.space 0x4
-
-gUnknown_0203BCA4: @ 203BCA4
-	.space 0x4
-
-gUnknown_0203BCA8: @ 203BCA8
-	.space 0x4
-
-gUnknown_0203BCAC: @ 203BCAC
-	.space 0x4
+	.include "src/use_pokeblock.o"
 
 gUnknown_0203BCB0: @ 203BCB0
 	.space 0x4

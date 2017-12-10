@@ -887,7 +887,67 @@ gMenuPokeblock_Pal:: @ 8D9B470
 	.incbin "baserom.gba", 0xd9b470, 0x358
 
 gMenuPokeblockDevice_Gfx:: @ 8D9B7C8
-	.incbin "baserom.gba", 0xd9b7c8, 0x27c
+	.incbin "baserom.gba", 0xd9b7c8, 0x148
+	
+	.align 2
+gPokeblock_Gfx::
+	.incbin "graphics/pokeblock/pokeblock.4bpp.lz"
+
+	.align 2
+gPokeblockRed_Pal::
+	.incbin "graphics/pokeblock/red.gbapal.lz"
+
+	.align 2
+gPokeblockBlue_Pal::
+	.incbin "graphics/pokeblock/blue.gbapal.lz"
+
+	.align 2
+gPokeblockPink_Pal::
+	.incbin "graphics/pokeblock/pink.gbapal.lz"
+
+	.align 2
+gPokeblockGreen_Pal::
+	.incbin "graphics/pokeblock/green.gbapal.lz"
+
+	.align 2
+gPokeblockYellow_Pal::
+	.incbin "graphics/pokeblock/yellow.gbapal.lz"
+
+	.align 2
+gPokeblockPurple_Pal::
+	.incbin "graphics/pokeblock/purple.gbapal.lz"
+
+	.align 2
+gPokeblockIndigo_Pal::
+	.incbin "graphics/pokeblock/indigo.gbapal.lz"
+
+	.align 2
+gPokeblockBrown_Pal::
+	.incbin "graphics/pokeblock/brown.gbapal.lz"
+
+	.align 2
+gPokeblockLiteBlue_Pal::
+	.incbin "graphics/pokeblock/liteblue.gbapal.lz"
+
+	.align 2
+gPokeblockOlive_Pal::
+	.incbin "graphics/pokeblock/olive.gbapal.lz"
+
+	.align 2
+gPokeblockGray_Pal::
+	.incbin "graphics/pokeblock/gray.gbapal.lz"
+
+	.align 2
+gPokeblockBlack_Pal::
+	.incbin "graphics/pokeblock/black.gbapal.lz"
+
+	.align 2
+gPokeblockWhite_Pal::
+	.incbin "graphics/pokeblock/white.gbapal.lz"
+
+	.align 2
+gPokeblockGold_Pal::
+	.incbin "graphics/pokeblock/gold.gbapal.lz"
 
 gUnknown_08D9BA44:: @ 8D9BA44
 	.incbin "baserom.gba", 0xd9ba44, 0x100

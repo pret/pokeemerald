@@ -37,12 +37,6 @@ struct UsePokeblockStruct
     struct UsePokeblockSubStruct info;
 };
 
-extern struct UsePokeblockStruct *gUnknown_0203BCAC;
-extern struct UsePokeblockSubStruct *gUnknown_0203BC90;
-extern struct Pokeblock *gUnknown_0203BC98;
-extern void (*gUnknown_0203BC94)(void);
-extern u8 gPokeblockMonId;
-
 extern u16 gKeyRepeatStartDelay;
 
 // this file's functions
@@ -63,6 +57,17 @@ void sub_8167BA0(u16 arg0, u8 copyToVramMode);
 
 extern const struct BgTemplate gUnknown_085DFCCC[4];
 extern const struct WindowTemplate gUnknown_085DFCDC[];
+
+// ram variables
+EWRAM_DATA struct UsePokeblockSubStruct *gUnknown_0203BC90 = NULL;
+EWRAM_DATA void (*gUnknown_0203BC94)(void) = NULL;
+EWRAM_DATA struct Pokeblock *gUnknown_0203BC98 = NULL;
+EWRAM_DATA u8 gPokeblockMonId = 0;
+EWRAM_DATA s16 gPokeblockGain = 0;
+EWRAM_DATA void *gUnknown_0203BCA0 = NULL;
+EWRAM_DATA void *gUnknown_0203BCA4 = NULL;
+EWRAM_DATA void *gUnknown_0203BCA8 = NULL;
+EWRAM_DATA struct UsePokeblockStruct *gUnknown_0203BCAC = NULL;
 
 void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void))
 {

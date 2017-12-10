@@ -21,6 +21,7 @@
 #include "m4a.h"
 #include "sound.h"
 #include "trig.h"
+#include "graphics.h"
 #include "battle.h" // to get rid of once gMonSpritesGfxPtr is put elsewhere
 
 struct PokeblockFeedStruct
@@ -45,12 +46,10 @@ struct PokeblockFeedStruct
     u8 pokeblockSpriteId;
     s16 field_1060[15];
     s16 loadGfxState;
-    u8 somefield[2];
+    u8 unused;
 };
 
-extern u8 gPokeblockMonId;
 extern u16 gSpecialVar_ItemId;
-extern s16 gPokeblockGain;
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern struct SpriteTemplate gUnknown_0202499C;
 
@@ -58,16 +57,9 @@ extern const u8 gBattleTerrainPalette_Frontier[];
 extern const u8 gBattleTerrainTiles_Building[];
 extern const u8 gUnknown_08D9BA44[];
 extern const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet;
-extern const struct CompressedSpriteSheet gPokeblock_SpriteSheet;
 extern const struct CompressedSpritePalette gPokeblockCase_SpritePal;
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
-extern const u8 *sPokeblocksPals[];
-extern const union AffineAnimCmd * const sSpriteAffineAnimTable_85F05B0[];
-extern const union AffineAnimCmd * const sSpriteAffineAnimTable_85F0664[];
-extern const union AffineAnimCmd * const sSpriteAffineAnimTable_85F0668[];
-extern const union AffineAnimCmd * const sSpriteAffineAnimTable_85F066C[];
-extern const struct SpriteTemplate sThrownPokeblockSpriteTemplate;
 
 extern bool8 sub_81221EC(void);
 extern void sub_806A068(u16, u8);
@@ -95,6 +87,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon);
 static u8 CreatePokeblockSprite(void);
 static u8 CreatePokeblockCaseSpriteForFeeding(void);
 static u8 CreateMonSprite(struct Pokemon *mon);
+static void SpriteCB_ThrownPokeblock(struct Sprite* sprite);
 
 // ram variables
 EWRAM_DATA static struct PokeblockFeedStruct *sPokeblockFeed = NULL;
@@ -399,6 +392,136 @@ static const struct WindowTemplate sWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
+static const u8* const sPokeblocksPals[] =
+{
+    gPokeblockRed_Pal,
+    gPokeblockBlue_Pal,
+    gPokeblockPink_Pal,
+    gPokeblockGreen_Pal,
+    gPokeblockYellow_Pal,
+    gPokeblockPurple_Pal,
+    gPokeblockIndigo_Pal,
+    gPokeblockBrown_Pal,
+    gPokeblockLiteBlue_Pal,
+    gPokeblockOlive_Pal,
+    gPokeblockGray_Pal,
+    gPokeblockBlack_Pal,
+    gPokeblockWhite_Pal,
+    gPokeblockGold_Pal
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_84120DC[] =
+{
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_MonNoFlip[] =
+{
+    sSpriteAffineAnim_84120DC
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_84120F0[] =
+{
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 16, 1),
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_8412148[] =
+{
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -16, 1),
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_85F0664[] =
+{
+    sSpriteAffineAnim_84120DC
+};
+
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_85F0668[] =
+{
+    sSpriteAffineAnim_84120F0
+};
+
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_85F066C[] =
+{
+    sSpriteAffineAnim_8412148
+};
+
+static const struct OamData sThrownPokeblockOamData =
+{
+    .y = 0,
+    .affineMode = 3,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sThrownPokeblockSpriteAnim[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sThrownPokeblockAnimTable[] =
+{
+    sThrownPokeblockSpriteAnim,
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_84121C0[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(-8, -8, 0, 1),
+    AFFINEANIMCMD_JUMP(1)
+};
+
+static const union AffineAnimCmd *const sThrownPokeblockAffineAnimTable[] =
+{
+    sSpriteAffineAnim_84121C0
+};
+
+static const struct CompressedSpriteSheet sPokeblock_SpriteSheet =
+{
+    gPokeblock_Gfx, 0x20, TAG_POKEBLOCK_GFX
+};
+
+static const struct SpriteTemplate sThrownPokeblockSpriteTemplate =
+{
+    .tileTag = TAG_POKEBLOCK_GFX,
+    .paletteTag = TAG_POKEBLOCK_GFX,
+    .oam = &sThrownPokeblockOamData,
+    .anims = sThrownPokeblockAnimTable,
+    .images = NULL,
+    .affineAnims = sThrownPokeblockAffineAnimTable,
+    .callback = SpriteCB_ThrownPokeblock
+};
+
 // code
 static void CB2_PokeblockFeed(void)
 {
@@ -554,7 +677,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         sPokeblockFeed->loadGfxState++;
         break;
     case 4:
-        LoadCompressedObjectPic(&gPokeblock_SpriteSheet);
+        LoadCompressedObjectPic(&sPokeblock_SpriteSheet);
         sPokeblockFeed->loadGfxState++;
         break;
     case 5:
@@ -600,6 +723,8 @@ static void SetPokeblockSpritePal(u8 pokeblockCaseId)
     sPokeblockSpritePal.data = sPokeblocksPals[colorId - 1];
     sPokeblockSpritePal.tag = TAG_POKEBLOCK_GFX;
 }
+
+// defines for task data fields
 
 #define tFrames     data[0]
 #define tData1      data[1]
@@ -697,6 +822,12 @@ static void Task_PaletteFadeToReturn(u8 taskId)
 #undef tFrames
 #undef tData1
 
+// defines for mon sprite data fields
+
+#define tDelta          data[0]
+#define tDeltaMod       data[1]
+#define tSpecies        data[2]
+
 static u8 CreateMonSprite(struct Pokemon* mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2);
@@ -705,13 +836,13 @@ static u8 CreateMonSprite(struct Pokemon* mon)
     sPokeblockFeed->species = species;
     sPokeblockFeed->monSpriteId_ = spriteId;
     sPokeblockFeed->nature = GetNature(mon);
-    gSprites[spriteId].data[2] = species;
+    gSprites[spriteId].tSpecies = species;
     gSprites[spriteId].callback = SpriteCallbackDummy;
 
     sPokeblockFeed->noMonFlip = TRUE;
     if (!IsPokeSpriteNotFlipped(species))
     {
-        gSprites[spriteId].affineAnims = sSpriteAffineAnimTable_85F05B0;
+        gSprites[spriteId].affineAnims = sSpriteAffineAnimTable_MonNoFlip;
         gSprites[spriteId].oam.affineMode = 3;
         CalcCenterToCornerVec(&gSprites[spriteId], gSprites[spriteId].oam.shape, gSprites[spriteId].oam.size, gSprites[spriteId].oam.affineMode);
         sPokeblockFeed->noMonFlip = FALSE;
@@ -724,22 +855,26 @@ static void PrepareMonToMoveToPokeblock(u8 spriteId)
 {
     gSprites[spriteId].pos1.x = 48;
     gSprites[spriteId].pos1.y = 80;
-    gSprites[spriteId].data[0] = -8;
-    gSprites[spriteId].data[1] = 1;
+    gSprites[spriteId].tDelta = -8;
+    gSprites[spriteId].tDeltaMod = 1;
     gSprites[spriteId].callback = sub_817A468;
 }
 
 static void sub_817A468(struct Sprite* sprite)
 {
     sprite->pos1.x += 4;
-    sprite->pos1.y += sprite->data[0];
-    sprite->data[0] += sprite->data[1];
+    sprite->pos1.y += sprite->tDelta;
+    sprite->tDelta += sprite->tDeltaMod;
 
-    if (sprite->data[0] == 0)
-        PlayCry1(sprite->data[2], 0);
-    if (sprite->data[0] == 9)
+    if (sprite->tDelta == 0)
+        PlayCry1(sprite->tSpecies, 0);
+    if (sprite->tDelta == 9)
         sprite->callback = SpriteCallbackDummy;
 }
+
+#undef tDelta
+#undef tDeltaMod
+#undef tSpecies
 
 static u8 CreatePokeblockCaseSpriteForFeeding(void)
 {
@@ -764,22 +899,29 @@ static void DoPokeblockCaseThrowEffect(u8 spriteId, bool8 a1)
     InitSpriteAffineAnim(&gSprites[spriteId]);
 }
 
+// defines for the pokeblock sprite data fields
+#define tDelta          data[0]
+#define tDeltaMod       data[1]
+
 static u8 CreatePokeblockSprite(void)
 {
     u8 spriteId = CreateSprite(&sThrownPokeblockSpriteTemplate, 174, 84, 1);
-    gSprites[spriteId].data[0] = -12;
-    gSprites[spriteId].data[1] = 1;
+    gSprites[spriteId].tDelta = -12;
+    gSprites[spriteId].tDeltaMod = 1;
     return spriteId;
 }
 
 static void SpriteCB_ThrownPokeblock(struct Sprite* sprite)
 {
     sprite->pos1.x -= 4;
-    sprite->pos1.y += sprite->data[0];
-    sprite->data[0] += sprite->data[1];
-    if (sprite->data[0] == 10)
+    sprite->pos1.y += sprite->tDelta;
+    sprite->tDelta += sprite->tDeltaMod;
+    if (sprite->tDelta == 10)
         DestroySprite(sprite);
 }
+
+#undef tDelta
+#undef tDeltaMod
 
 static void sub_817A5CC(void)
 {
