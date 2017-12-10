@@ -154,7 +154,7 @@ struct UnkRfuStruct_2 {
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
     /* 0x9e8 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
     /* 0xc1c */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
-    /* 0xc3c */ u8 unk_c3c;
+    /* 0xc3c */ vu8 unk_c3c;
     /* 0xc3d */ u8 unk_c3d;
     /* 0xc3e */ vu8 unk_c3e;
     /* 0xc3f */ u8 unk_c3f[70];

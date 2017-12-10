@@ -52,7 +52,7 @@ static void sub_800EAB4(void);
 static void sub_800EAFC(void);
 void sub_800ED34(u16 unused);
 static void sub_800EDBC(u16 unused);
-void sub_800F048(void);
+static void sub_800F048(void);
 struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void);
 void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
 bool32 sub_8010454(u16 a0);
@@ -2929,3 +2929,37 @@ __attribute__((naked)) void sub_800EFB0(void)
                     "\t.pool");
 }
 #endif
+
+void sub_800F014(void)
+{
+    int i;
+    for (i = 0; i < 7; i++)
+    {
+        gRecvCmds[0][i] = gSendCmd[i];
+    }
+    for (i = 0; i < 7; i++)
+    {
+        gSendCmd[i] = 0;
+    }
+}
+
+static void sub_800F048(void)
+{
+    if (gUnknown_03005000.unk_c3c)
+    {
+        u8 r2 = sub_800DAC8(&gUnknown_03005000.unk_c1c, gUnknown_03005000.unk_4c);
+        if (gUnknown_03005000.unk_c1c.unk_1e == 0)
+        {
+            gUnknown_03005000.unk_c3c = 0;
+        }
+        if (r2)
+        {
+            return;
+        }
+    }
+    if (gUnknown_03005000.unk_c3c == 0)
+    {
+        sub_800D9DC(&gUnknown_03005000.unk_9e8, gUnknown_03005000.unk_4c);
+        sub_800DA68(&gUnknown_03005000.unk_c1c, gUnknown_03005000.unk_4c);
+    }
+}
