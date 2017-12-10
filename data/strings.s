@@ -3158,19 +3158,19 @@ gText_PokemonCenter:: @ 85EC791
 gText_GetsAPokeBlockQuestion:: @ 85EC7A0
 	.string " gets a {POKEBLOCK}?$"
 
-gUnknown_085EC7AF:: @ 85EC7AF
+gText_Coolness:: @ 85EC7AF
 	.string "Coolness $"
 
-gUnknown_085EC7B9:: @ 85EC7B9
+gText_Beauty3:: @ 85EC7B9
 	.string "Beauty $"
 
-gUnknown_085EC7C1:: @ 85EC7C1
+gText_Cuteness:: @ 85EC7C1
 	.string "Cuteness $"
 
-gUnknown_085EC7CB:: @ 85EC7CB
+gText_Smartness:: @ 85EC7CB
 	.string "Smartness $"
 
-gUnknown_085EC7D6:: @ 85EC7D6
+gText_Toughness:: @ 85EC7D6
 	.string "Toughness $"
 
 gText_WasEnhanced:: @ 85EC7E1

@@ -69,6 +69,10 @@ EWRAM_DATA void *gUnknown_0203BCA4 = NULL;
 EWRAM_DATA void *gUnknown_0203BCA8 = NULL;
 EWRAM_DATA struct UsePokeblockStruct *gUnknown_0203BCAC = NULL;
 
+// const rom data
+// todo: make it static once the file is decompiled
+
+// code
 void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void))
 {
     gUnknown_0203BCAC = AllocZeroed(0x806C);

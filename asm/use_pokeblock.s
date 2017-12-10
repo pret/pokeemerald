@@ -885,7 +885,7 @@ sub_8166D44: @ 8166D44
 	movs r0, 0x2
 	movs r1, 0x3
 	bl CopyWindowToVram
-	ldr r0, =gUnknown_085DFCFC
+	ldr r0, =sUsePokeblockYesNoWinTemplate
 	movs r1, 0x97
 	movs r2, 0xE
 	movs r3, 0
@@ -1157,7 +1157,7 @@ sub_8166FD4: @ 8166FD4
 	movs r0, 0
 _08166FEC:
 	lsls r0, 16
-	ldr r1, =gUnknown_085DFD04
+	ldr r1, =sContestStatNames
 	lsls r0, r3, 2
 	adds r0, r1
 	ldr r1, [r0]
