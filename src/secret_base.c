@@ -12,7 +12,7 @@
 #include "new_menu_helpers.h"
 #include "menu_indicators.h"
 #include "constants/maps.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "overworld.h"
 #include "fieldmap.h"

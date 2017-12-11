@@ -1,3 +1,6 @@
+#include "constants/easy_chat.h"
+#include "constants/species.h"
+#include "constants/moves.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 

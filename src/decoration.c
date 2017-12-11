@@ -9,7 +9,7 @@
 #include "task.h"
 #include "main.h"
 #include "palette.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "overworld.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"

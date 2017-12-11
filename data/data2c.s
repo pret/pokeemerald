@@ -1,5 +1,8 @@
 @ the second big chunk of data
 
+#include "constants/abilities.h"
+#include "constants/moves.h"
+#include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 

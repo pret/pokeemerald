@@ -81,7 +81,7 @@ gMonFrontAnimIdsTable:: @ 83299EC
 	.byte 0x0b @ SPECIES_SLOWBRO
 	.byte 0x54 @ SPECIES_MAGNEMITE
 	.byte 0x2c @ SPECIES_MAGNETON
-	.byte 0x48 @ SPECIES_FARFETCH_D
+	.byte 0x48 @ SPECIES_FARFETCHD
 	.byte 0x4c @ SPECIES_DODUO
 	.byte 0x41 @ SPECIES_DODRIO
 	.byte 0x0b @ SPECIES_SEEL

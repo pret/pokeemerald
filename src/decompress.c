@@ -1,6 +1,6 @@
 #include "global.h"
 #include "decompress.h"
-#include "species.h"
+#include "constants/species.h"
 #include "text.h"
 #include "malloc.h"
 #include "pokemon.h"

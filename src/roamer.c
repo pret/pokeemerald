@@ -2,7 +2,7 @@
 #include "roamer.h"
 #include "pokemon.h"
 #include "random.h"
-#include "species.h"
+#include "constants/species.h"
 #include "event_data.h"
 
 enum

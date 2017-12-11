@@ -17,7 +17,7 @@
 #include "international_string_util.h"
 #include "strings.h"
 #include "text_window.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "m4a.h"
 #include "field_effect.h"
 #include "region_map.h"

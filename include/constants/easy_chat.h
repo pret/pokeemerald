@@ -44,6 +44,14 @@
 #define EC_WORD_POKEDEX       (EC_GROUP_TRAINER << 9) | 0x10
 #define EC_WORD_RUBY          (EC_GROUP_TRAINER << 9) | 0x11
 #define EC_WORD_LEVEL         (EC_GROUP_TRAINER << 9) | 0x12
+#define EC_WORD_RED           (EC_GROUP_TRAINER << 9) | 0x13
+#define EC_WORD_GREEN         (EC_GROUP_TRAINER << 9) | 0x14
+#define EC_WORD_BAG           (EC_GROUP_TRAINER << 9) | 0x15
+#define EC_WORD_FLAME         (EC_GROUP_TRAINER << 9) | 0x16
+#define EC_WORD_GOLD          (EC_GROUP_TRAINER << 9) | 0x17
+#define EC_WORD_LEAF          (EC_GROUP_TRAINER << 9) | 0x18
+#define EC_WORD_SILVER        (EC_GROUP_TRAINER << 9) | 0x19
+#define EC_WORD_EMERALD       (EC_GROUP_TRAINER << 9) | 0x1a
 
 // STATUS
 #define EC_WORD_DARK          (EC_GROUP_STATUS << 9) | 0x0
@@ -1017,6 +1025,13 @@
 #define EC_WORD_MASTER        (EC_GROUP_EVENTS << 9) | 0x13
 #define EC_WORD_RANK          (EC_GROUP_EVENTS << 9) | 0x14
 #define EC_WORD_RIBBON        (EC_GROUP_EVENTS << 9) | 0x15
+#define EC_WORD_CRUSH         (EC_GROUP_EVENTS << 9) | 0x16
+#define EC_WORD_DIRECT        (EC_GROUP_EVENTS << 9) | 0x17
+#define EC_WORD_TOWER         (EC_GROUP_EVENTS << 9) | 0x18
+#define EC_WORD_UNION         (EC_GROUP_EVENTS << 9) | 0x19
+#define EC_WORD_ROOM          (EC_GROUP_EVENTS << 9) | 0x1a
+#define EC_WORD_WIRELESS      (EC_GROUP_EVENTS << 9) | 0x1b
+#define EC_WORD_FRONTIER      (EC_GROUP_EVENTS << 9) | 0x1c
 
 // TRENDY_SAYING
 #define EC_WORD_KTHX_BYE       (EC_GROUP_TRENDY_SAYING << 9) | 0x0

@@ -6,8 +6,8 @@
 #include "item.h"
 #include "constants/items.h"
 #include "pokemon.h"
-#include "species.h"
-#include "moves.h"
+#include "constants/species.h"
+#include "constants/moves.h"
 #include "constants/battle_move_effects.h"
 
 extern u32 gBattleTypeFlags;

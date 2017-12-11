@@ -1,7 +1,7 @@
 #include "global.h"
 #include "wild_encounter.h"
 #include "pokemon.h"
-#include "species.h"
+#include "constants/species.h"
 #include "metatile_behavior.h"
 #include "fieldmap.h"
 #include "random.h"

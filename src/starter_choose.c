@@ -12,7 +12,7 @@
 #include "decompress.h"
 #include "menu.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "event_data.h"
 #include "pokedex.h"
 #include "data2.h"

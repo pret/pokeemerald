@@ -1,5 +1,6 @@
 @ the second big chunk of data
 
+#include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 

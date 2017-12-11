@@ -14,8 +14,8 @@
 #include "pokemon_storage_system.h"
 #include "field_message_box.h"
 #include "easy_chat.h"
-#include "species.h"
-#include "moves.h"
+#include "constants/species.h"
+#include "constants/moves.h"
 #include "battle.h"
 #include "battle_tower.h"
 #include "contest.h"
@@ -37,6 +37,9 @@
 #include "decoration.h"
 #include "secret_base.h"
 #include "tv.h"
+
+extern const u8 gSpeciesNames[][11];
+extern const u8 gMoveNames[][13];
 
 // Static type declarations
 

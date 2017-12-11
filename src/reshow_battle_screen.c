@@ -10,7 +10,7 @@
 #include "battle_controllers.h"
 #include "link.h"
 #include "sprite.h"
-#include "species.h"
+#include "constants/species.h"
 #include "battle_interface.h"
 
 extern u16 gBattle_BG0_X;

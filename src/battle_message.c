@@ -2,7 +2,7 @@
 #include "battle.h"
 #include "battle_message.h"
 #include "battle_string_ids.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "text.h"
 #include "string_util.h"
 #include "constants/items.h"

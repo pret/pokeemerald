@@ -15,7 +15,7 @@
 #include "gpu_regs.h"
 #include "bg.h"
 #include "pokemon_icon.h"
-#include "species.h"
+#include "constants/species.h"
 #include "malloc.h"
 #include "easy_chat.h"
 #include "mail_data.h"

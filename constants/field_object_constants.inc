@@ -237,15 +237,3 @@
 	.set FIELD_OBJ_GFX_RUBY_SAPPHIRE_MAY,         236
 	.set FIELD_OBJ_GFX_LUGIA,                     237
 	.set FIELD_OBJ_GFX_HO_OH,                     238
-
-	.set SHADOW_SIZE_S,  0
-	.set SHADOW_SIZE_M,  1
-	.set SHADOW_SIZE_L,  2
-	.set SHADOW_SIZE_XL, 3
-
-	.set F_INANIMATE,                       1 << 6
-	.set F_DISABLE_REFLECTION_PALETTE_LOAD, 1 << 7
-
-	.set TRACKS_NONE,      0
-	.set TRACKS_FOOT,      1
-	.set TRACKS_BIKE_TIRE, 2
