@@ -16,9 +16,9 @@
 #include "m4a.h"
 #include "menu.h"
 #include "pokedex.h"
-#include "species.h"
+#include "constants/species.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "overworld.h"
 #include "battle_message.h"
 #include "battle_string_ids.h"
@@ -52,6 +52,7 @@ extern u8 gBattleTerrain;
 extern struct SpriteTemplate gUnknown_0202499C;
 extern bool8 gAffineAnimsDisabled;
 extern u16 gMoveToLearn;
+extern const u8 gSpeciesNames[][11];
 
 extern u8 gBattleCommunication[];
 #define sEvoCursorPos           gBattleCommunication[1] // when learning a new move

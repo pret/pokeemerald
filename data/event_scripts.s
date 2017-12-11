@@ -1,8 +1,12 @@
+#include "constants/flags.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
+#include "constants/species.h"
+#include "constants/vars.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
-	.include "constants/variables.inc"
-	.include "constants/flags.inc"
 
 	.section script_data, "aw", %progbits
 

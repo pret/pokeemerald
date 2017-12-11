@@ -1,7 +1,7 @@
 #include "global.h"
 #include "gba/flash_internal.h"
 #include "save.h"
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "task.h"
 
 extern struct SaveSectionLocation gRamSaveSectionLocations[0xE];

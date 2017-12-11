@@ -2,7 +2,7 @@
 #include "berry.h"
 #include "main.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "text.h"
 #include "random.h"
 #include "event_data.h"

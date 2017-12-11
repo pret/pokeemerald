@@ -1,5 +1,5 @@
-#ifndef GUARD_GAME_STAT_H
-#define GUARD_GAME_STAT_H
+#ifndef GUARD_CONSTANTS_GAME_STAT_H
+#define GUARD_CONSTANTS_GAME_STAT_H
 
 #define GAME_STAT_SAVED_GAME                 0
 #define GAME_STAT_FIRST_HOF_PLAY_TIME        1
@@ -56,7 +56,4 @@
 
 #define NUM_GAME_STATS                      64
 
-void IncrementGameStat(u8);
-u32 GetGameStat(u8);
-
-#endif // GUARD_GAME_STAT_H
+#endif // GUARD_CONSTANTS_GAME_STAT_H

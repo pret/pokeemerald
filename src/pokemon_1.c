@@ -2,7 +2,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "main.h"
-#include "items.h"
+#include "constants/items.h"
 #include "string_util.h"
 #include "text.h"
 
