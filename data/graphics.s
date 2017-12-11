@@ -884,9 +884,15 @@ gMenuPokeblock_Gfx:: @ 8D9B2B4
 	.incbin "baserom.gba", 0xd9b2b4, 0x1bc
 
 gMenuPokeblock_Pal:: @ 8D9B470
-	.incbin "baserom.gba", 0xd9b470, 0x358
+	.incbin "baserom.gba", 0xd9b470, 0x70
+	
+gMenuPokeblockDevice_Gfx:: @ 8D9B4E0
+	.incbin "baserom.gba", 0xd9b4e0, 0x2c0
+	
+gMenuPokeblockDevice_Pal:: @ 8D9B7A0
+	.incbin "baserom.gba", 0xd9b7a0, 0x28
 
-gMenuPokeblockDevice_Gfx:: @ 8D9B7C8
+gMenuPokeblock_Tilemap:: @ 8D9B7C8
 	.incbin "baserom.gba", 0xd9b7c8, 0x148
 	
 	.align 2

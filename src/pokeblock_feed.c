@@ -56,8 +56,6 @@ extern struct SpriteTemplate gUnknown_0202499C;
 extern const u8 gBattleTerrainPalette_Frontier[];
 extern const u8 gBattleTerrainTiles_Building[];
 extern const u8 gUnknown_08D9BA44[];
-extern const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet;
-extern const struct CompressedSpritePalette gPokeblockCase_SpritePal;
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u16 gUnknown_0860F074[];
 
@@ -508,13 +506,13 @@ static const union AffineAnimCmd *const sThrownPokeblockAffineAnimTable[] =
 
 static const struct CompressedSpriteSheet sPokeblock_SpriteSheet =
 {
-    gPokeblock_Gfx, 0x20, TAG_POKEBLOCK_GFX
+    gPokeblock_Gfx, 0x20, GFX_TAG_POKEBLOCK
 };
 
 static const struct SpriteTemplate sThrownPokeblockSpriteTemplate =
 {
-    .tileTag = TAG_POKEBLOCK_GFX,
-    .paletteTag = TAG_POKEBLOCK_GFX,
+    .tileTag = GFX_TAG_POKEBLOCK,
+    .paletteTag = GFX_TAG_POKEBLOCK,
     .oam = &sThrownPokeblockOamData,
     .anims = sThrownPokeblockAnimTable,
     .images = NULL,
@@ -721,7 +719,7 @@ static void SetPokeblockSpritePal(u8 pokeblockCaseId)
 {
     u8 colorId = GetPokeblockData(&gSaveBlock1Ptr->pokeblocks[pokeblockCaseId], PBLOCK_COLOR);
     sPokeblockSpritePal.data = sPokeblocksPals[colorId - 1];
-    sPokeblockSpritePal.tag = TAG_POKEBLOCK_GFX;
+    sPokeblockSpritePal.tag = GFX_TAG_POKEBLOCK;
 }
 
 // defines for task data fields

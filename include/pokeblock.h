@@ -1,7 +1,8 @@
 #ifndef GUARD_POKEBLOCK_H
 #define GUARD_POKEBLOCK_H
 
-#define TAG_POKEBLOCK_GFX 0x39E2
+#define GFX_TAG_POKEBLOCK       14818
+#define GFX_TAG_POKEBLOCK_CASE  14800
 
 enum
 {
@@ -34,6 +35,11 @@ void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void
 void CB2_PreparePokeblockFeedScene(void);
 
 // pokeblock
+extern const s8 gPokeblockFlavorCompatibilityTable[];
+extern const u8 *const gPokeblockNames[];
+extern const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet;
+extern const struct CompressedSpritePalette gPokeblockCase_SpritePal;
+
 u8 CreatePokeblockCaseSprite(s16 x, s16 y, u8 subpriority);
 u8 GetPokeblockData(const struct Pokeblock *pokeblock, u8 dataId);
 void ClearPokeblocks(void);

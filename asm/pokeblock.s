@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_81357FC
-sub_81357FC: @ 81357FC
+	thumb_func_start OpenPokeblockCase
+OpenPokeblockCase: @ 81357FC
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -53,7 +53,7 @@ _08135864:
 _0813586A:
 	ldr r0, =0x00000804
 	adds r1, r5, r0
-	ldr r0, =gUnknown_085B269B
+	ldr r0, =sActionsInBattle
 	str r0, [r1]
 	ldr r4, =0x00000808
 	adds r1, r5, r4
@@ -63,7 +63,7 @@ _0813586A:
 _08135888:
 	ldr r1, =0x00000804
 	adds r0, r5, r1
-	ldr r1, =gUnknown_085B269D
+	ldr r1, =sActionsOnPokeblockFeeder
 	str r1, [r0]
 	ldr r4, =0x00000808
 	adds r0, r5, r4
@@ -73,7 +73,7 @@ _08135888:
 _081358A4:
 	ldr r0, =0x00000804
 	adds r1, r5, r0
-	ldr r0, =gUnknown_085B269F
+	ldr r0, =sActionsWhenGivingToLady
 	str r0, [r1]
 	ldr r4, =0x00000808
 	adds r1, r5, r4
@@ -85,7 +85,7 @@ _081358C0:
 	ldr r1, [r0]
 	ldr r0, =0x00000804
 	adds r2, r1, r0
-	ldr r0, =gUnknown_085B2698
+	ldr r0, =sActionsOnField
 	str r0, [r2]
 	ldr r4, =0x00000808
 	adds r1, r4
@@ -99,14 +99,14 @@ _081358D4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81357FC
+	thumb_func_end OpenPokeblockCase
 
 	thumb_func_start sub_81358F4
 sub_81358F4: @ 81358F4
 	push {lr}
 	ldr r1, =SetCB2ToReshowScreenAfterMenu2
 	movs r0, 0x1
-	bl sub_81357FC
+	bl OpenPokeblockCase
 	pop {r0}
 	bx r0
 	.pool
@@ -117,7 +117,7 @@ sub_8135908: @ 8135908
 	push {lr}
 	ldr r1, =c2_exit_to_overworld_2_switch
 	movs r0, 0x2
-	bl sub_81357FC
+	bl OpenPokeblockCase
 	pop {r0}
 	bx r0
 	.pool
@@ -491,7 +491,7 @@ _08135C98:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08135D18
-	ldr r0, =gMenuPokeblockDevice_Gfx
+	ldr r0, =gMenuPokeblock_Tilemap
 	ldr r4, =gUnknown_0203AB50
 	ldr r1, [r4]
 	bl LZDecompressWram
@@ -593,7 +593,7 @@ sub_8135D7C: @ 8135D7C
 	movs r4, 0
 	str r4, [sp]
 	str r4, [sp, 0x4]
-	ldr r3, =gUnknown_085B271C
+	ldr r3, =sTextColorInPokeblockMenu
 	str r3, [sp, 0x8]
 	str r4, [sp, 0xC]
 	str r1, [sp, 0x10]
@@ -1407,7 +1407,7 @@ CreatePokeblockCaseSprite: @ 8136444
 	adds r3, r2, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =gUnknown_085B2704
+	ldr r0, =sSpriteTemplate_PokeblockCase
 	lsls r4, 16
 	asrs r4, 16
 	lsls r5, 16
@@ -1449,7 +1449,7 @@ _0813648E:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	ldr r0, =gUnknown_085B26F0
+	ldr r0, =sSpriteAffineAnimTable_85B26F0
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
 	bl InitSpriteAffineAnim
@@ -1996,7 +1996,7 @@ _0813696A:
 	ldr r4, =0x00000808
 	adds r1, r3, r4
 	ldrb r1, [r1]
-	ldr r2, =gUnknown_085B2668
+	ldr r2, =sPokeblockMenuActions
 	mov r12, r2
 	ldr r2, =0x00000804
 	adds r3, r2
@@ -2050,12 +2050,12 @@ sub_81369E0: @ 81369E0
 	movs r0, 0x5
 	bl PlaySE
 	adds r0, r5, 0
-	bl sub_8136DE8
+	bl PokeblockAction_Cancel
 	b _08136A3C
 _08136A18:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gUnknown_085B2668
+	ldr r1, =sPokeblockMenuActions
 	ldr r0, =gUnknown_0203AB50
 	ldr r0, [r0]
 	ldr r2, =0x00000804
@@ -2076,8 +2076,8 @@ _08136A3C:
 	.pool
 	thumb_func_end sub_81369E0
 
-	thumb_func_start sub_8136A50
-sub_8136A50: @ 8136A50
+	thumb_func_start PokeblockAction_UseOnField
+PokeblockAction_UseOnField: @ 8136A50
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2092,7 +2092,7 @@ sub_8136A50: @ 8136A50
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8136A50
+	thumb_func_end PokeblockAction_UseOnField
 
 	thumb_func_start sub_8136A74
 sub_8136A74: @ 8136A74
@@ -2118,14 +2118,14 @@ sub_8136AA0: @ 8136AA0
 	ldr r0, =gUnknown_0203AB48
 	ldr r1, [r0]
 	movs r0, 0
-	bl sub_81357FC
+	bl OpenPokeblockCase
 	pop {r0}
 	bx r0
 	.pool
 	thumb_func_end sub_8136AA0
 
-	thumb_func_start sub_8136AB4
-sub_8136AB4: @ 8136AB4
+	thumb_func_start PokeblockAction_Toss
+PokeblockAction_Toss: @ 8136AB4
 	push {r4,r5,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -2177,7 +2177,7 @@ sub_8136AB4: @ 8136AB4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8136AB4
+	thumb_func_end PokeblockAction_Toss
 
 	thumb_func_start sub_8136B48
 sub_8136B48: @ 8136B48
@@ -2192,7 +2192,7 @@ sub_8136B48: @ 8136B48
 	str r2, [sp, 0x4]
 	movs r2, 0xE
 	str r2, [sp, 0x8]
-	ldr r2, =gUnknown_085B26A4
+	ldr r2, =sTossYesNoFuncTable
 	str r2, [sp, 0xC]
 	movs r2, 0x1
 	movs r3, 0
@@ -2203,8 +2203,8 @@ sub_8136B48: @ 8136B48
 	.pool
 	thumb_func_end sub_8136B48
 
-	thumb_func_start sub_8136B78
-sub_8136B78: @ 8136B78
+	thumb_func_start TossPokeblockChoice_Yes
+TossPokeblockChoice_Yes: @ 8136B78
 	push {r4,r5,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -2233,7 +2233,7 @@ sub_8136B78: @ 8136B78
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8136B78
+	thumb_func_end TossPokeblockChoice_Yes
 
 	thumb_func_start sub_8136BC0
 sub_8136BC0: @ 8136BC0
@@ -2283,7 +2283,7 @@ sub_8136BC0: @ 8136BC0
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram
 	adds r0, r7, 0
-	bl sub_8136C54
+	bl TossPokeblockChoice_No
 _08136C36:
 	pop {r4-r7}
 	pop {r0}
@@ -2291,8 +2291,8 @@ _08136C36:
 	.pool
 	thumb_func_end sub_8136BC0
 
-	thumb_func_start sub_8136C54
-sub_8136C54: @ 8136C54
+	thumb_func_start TossPokeblockChoice_No
+TossPokeblockChoice_No: @ 8136C54
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2314,10 +2314,10 @@ sub_8136C54: @ 8136C54
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8136C54
+	thumb_func_end TossPokeblockChoice_No
 
-	thumb_func_start sub_8136C8C
-sub_8136C8C: @ 8136C8C
+	thumb_func_start PokeblockAction_UseInBattle
+PokeblockAction_UseInBattle: @ 8136C8C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2385,10 +2385,10 @@ _08136D1A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8136C8C
+	thumb_func_end PokeblockAction_UseInBattle
 
-	thumb_func_start sub_8136D2C
-sub_8136D2C: @ 8136D2C
+	thumb_func_start PokeblockAction_UseOnPokeblockFeeder
+PokeblockAction_UseOnPokeblockFeeder: @ 8136D2C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2424,10 +2424,10 @@ sub_8136D2C: @ 8136D2C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8136D2C
+	thumb_func_end PokeblockAction_UseOnPokeblockFeeder
 
-	thumb_func_start sub_8136D90
-sub_8136D90: @ 8136D90
+	thumb_func_start PokeblockAction_GiveToContestLady
+PokeblockAction_GiveToContestLady: @ 8136D90
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2459,10 +2459,10 @@ sub_8136D90: @ 8136D90
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8136D90
+	thumb_func_end PokeblockAction_GiveToContestLady
 
-	thumb_func_start sub_8136DE8
-sub_8136DE8: @ 8136DE8
+	thumb_func_start PokeblockAction_Cancel
+PokeblockAction_Cancel: @ 8136DE8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2485,7 +2485,7 @@ sub_8136DE8: @ 8136DE8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8136DE8
+	thumb_func_end PokeblockAction_Cancel
 
 	thumb_func_start sub_8136E20
 sub_8136E20: @ 8136E20
@@ -2815,7 +2815,7 @@ sub_8137068: @ 8137068
 	ldr r7, =gPokeblockNames
 _08137074:
 	lsls r1, r4, 3
-	ldr r0, =gUnknown_085B2720
+	ldr r0, =sFavoritePokeblocksTable
 	adds r1, r0
 	adds r0, r5, 0
 	bl PokeblockGetGain

@@ -427,7 +427,6 @@ SECTIONS {
         data/starter_choose.o(.rodata);
         data/data4c.o(.rodata);
         src/pokeblock.o(.rodata);
-        data/pokeblock.o(.rodata);
         data/data4d.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
