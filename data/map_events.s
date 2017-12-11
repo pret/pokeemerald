@@ -1,8 +1,9 @@
+#include "constants/flags.h"
+#include "constants/items.h"
 #include "constants/map_objects.h"
+#include "constants/vars.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
-	.include "constants/flags.inc"
-	.include "constants/variables.inc"
 
 	.section .rodata
 

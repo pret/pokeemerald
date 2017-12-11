@@ -1,3 +1,4 @@
+#include "constants/items.h"
 #include "constants/songs.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
