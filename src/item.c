@@ -1,6 +1,6 @@
 #include "global.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "string_util.h"
 #include "text.h"
 #include "event_data.h"

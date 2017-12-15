@@ -1,17 +1,17 @@
 	.align 2
 gRoute101_LandMons:: @ 85507E4
-	wild_mon WURMPLE, 2
-	wild_mon POOCHYENA, 2
-	wild_mon WURMPLE, 2
-	wild_mon WURMPLE, 3
-	wild_mon POOCHYENA, 3
-	wild_mon POOCHYENA, 3
-	wild_mon WURMPLE, 3
-	wild_mon POOCHYENA, 3
-	wild_mon ZIGZAGOON, 2
-	wild_mon ZIGZAGOON, 2
-	wild_mon ZIGZAGOON, 3
-	wild_mon ZIGZAGOON, 3
+	wild_mon SPECIES_WURMPLE, 2
+	wild_mon SPECIES_POOCHYENA, 2
+	wild_mon SPECIES_WURMPLE, 2
+	wild_mon SPECIES_WURMPLE, 3
+	wild_mon SPECIES_POOCHYENA, 3
+	wild_mon SPECIES_POOCHYENA, 3
+	wild_mon SPECIES_WURMPLE, 3
+	wild_mon SPECIES_POOCHYENA, 3
+	wild_mon SPECIES_ZIGZAGOON, 2
+	wild_mon SPECIES_ZIGZAGOON, 2
+	wild_mon SPECIES_ZIGZAGOON, 3
+	wild_mon SPECIES_ZIGZAGOON, 3
 
 	.align 2
 gRoute101_LandMonsInfo:: @ 8550814
@@ -20,18 +20,18 @@ gRoute101_LandMonsInfo:: @ 8550814
 
 	.align 2
 gRoute102_LandMons:: @ 855081C
-	wild_mon POOCHYENA, 3
-	wild_mon WURMPLE, 3
-	wild_mon POOCHYENA, 4
-	wild_mon WURMPLE, 4
-	wild_mon LOTAD, 3
-	wild_mon LOTAD, 4
-	wild_mon ZIGZAGOON, 3
-	wild_mon ZIGZAGOON, 3
-	wild_mon ZIGZAGOON, 4
-	wild_mon RALTS, 4
-	wild_mon ZIGZAGOON, 4
-	wild_mon SEEDOT, 3
+	wild_mon SPECIES_POOCHYENA, 3
+	wild_mon SPECIES_WURMPLE, 3
+	wild_mon SPECIES_POOCHYENA, 4
+	wild_mon SPECIES_WURMPLE, 4
+	wild_mon SPECIES_LOTAD, 3
+	wild_mon SPECIES_LOTAD, 4
+	wild_mon SPECIES_ZIGZAGOON, 3
+	wild_mon SPECIES_ZIGZAGOON, 3
+	wild_mon SPECIES_ZIGZAGOON, 4
+	wild_mon SPECIES_RALTS, 4
+	wild_mon SPECIES_ZIGZAGOON, 4
+	wild_mon SPECIES_SEEDOT, 3
 
 	.align 2
 gRoute102_LandMonsInfo:: @ 855084C
@@ -40,11 +40,11 @@ gRoute102_LandMonsInfo:: @ 855084C
 
 	.align 2
 gRoute102_WaterMons:: @ 8550854
-	wild_mon MARILL, 20, 30
-	wild_mon MARILL, 10, 20
-	wild_mon MARILL, 30, 35
-	wild_mon MARILL, 5, 10
-	wild_mon GOLDEEN, 20, 30
+	wild_mon SPECIES_MARILL, 20, 30
+	wild_mon SPECIES_MARILL, 10, 20
+	wild_mon SPECIES_MARILL, 30, 35
+	wild_mon SPECIES_MARILL, 5, 10
+	wild_mon SPECIES_GOLDEEN, 20, 30
 
 	.align 2
 gRoute102_WaterMonsInfo:: @ 8550868
@@ -53,16 +53,16 @@ gRoute102_WaterMonsInfo:: @ 8550868
 
 	.align 2
 gRoute102_FishingMons:: @ 8550870
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon CORPHISH, 10, 30
-	wild_mon CORPHISH, 25, 30
-	wild_mon CORPHISH, 30, 35
-	wild_mon CORPHISH, 20, 25
-	wild_mon CORPHISH, 35, 40
-	wild_mon CORPHISH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_CORPHISH, 10, 30
+	wild_mon SPECIES_CORPHISH, 25, 30
+	wild_mon SPECIES_CORPHISH, 30, 35
+	wild_mon SPECIES_CORPHISH, 20, 25
+	wild_mon SPECIES_CORPHISH, 35, 40
+	wild_mon SPECIES_CORPHISH, 40, 45
 
 	.align 2
 gRoute102_FishingMonsInfo:: @ 8550898
@@ -71,18 +71,18 @@ gRoute102_FishingMonsInfo:: @ 8550898
 
 	.align 2
 gRoute103_LandMons:: @ 85508A0
-	wild_mon POOCHYENA, 2
-	wild_mon POOCHYENA, 3
-	wild_mon POOCHYENA, 3
-	wild_mon POOCHYENA, 4
-	wild_mon WINGULL, 2
-	wild_mon ZIGZAGOON, 3
-	wild_mon ZIGZAGOON, 3
-	wild_mon ZIGZAGOON, 4
-	wild_mon WINGULL, 3
-	wild_mon WINGULL, 3
-	wild_mon WINGULL, 2
-	wild_mon WINGULL, 4
+	wild_mon SPECIES_POOCHYENA, 2
+	wild_mon SPECIES_POOCHYENA, 3
+	wild_mon SPECIES_POOCHYENA, 3
+	wild_mon SPECIES_POOCHYENA, 4
+	wild_mon SPECIES_WINGULL, 2
+	wild_mon SPECIES_ZIGZAGOON, 3
+	wild_mon SPECIES_ZIGZAGOON, 3
+	wild_mon SPECIES_ZIGZAGOON, 4
+	wild_mon SPECIES_WINGULL, 3
+	wild_mon SPECIES_WINGULL, 3
+	wild_mon SPECIES_WINGULL, 2
+	wild_mon SPECIES_WINGULL, 4
 
 	.align 2
 gRoute103_LandMonsInfo:: @ 85508D0
@@ -91,11 +91,11 @@ gRoute103_LandMonsInfo:: @ 85508D0
 
 	.align 2
 gRoute103_WaterMons:: @ 85508D8
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute103_WaterMonsInfo:: @ 85508EC
@@ -104,16 +104,16 @@ gRoute103_WaterMonsInfo:: @ 85508EC
 
 	.align 2
 gRoute103_FishingMons:: @ 85508F4
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute103_FishingMonsInfo:: @ 855091C
@@ -122,18 +122,18 @@ gRoute103_FishingMonsInfo:: @ 855091C
 
 	.align 2
 gRoute104_LandMons:: @ 8550924
-	wild_mon POOCHYENA, 4
-	wild_mon WURMPLE, 4
-	wild_mon POOCHYENA, 5
-	wild_mon MARILL, 5
-	wild_mon MARILL, 4
-	wild_mon POOCHYENA, 5
-	wild_mon TAILLOW, 4
-	wild_mon TAILLOW, 5
-	wild_mon WINGULL, 4
-	wild_mon WINGULL, 4
-	wild_mon WINGULL, 3
-	wild_mon WINGULL, 5
+	wild_mon SPECIES_POOCHYENA, 4
+	wild_mon SPECIES_WURMPLE, 4
+	wild_mon SPECIES_POOCHYENA, 5
+	wild_mon SPECIES_MARILL, 5
+	wild_mon SPECIES_MARILL, 4
+	wild_mon SPECIES_POOCHYENA, 5
+	wild_mon SPECIES_TAILLOW, 4
+	wild_mon SPECIES_TAILLOW, 5
+	wild_mon SPECIES_WINGULL, 4
+	wild_mon SPECIES_WINGULL, 4
+	wild_mon SPECIES_WINGULL, 3
+	wild_mon SPECIES_WINGULL, 5
 
 	.align 2
 gRoute104_LandMonsInfo:: @ 8550954
@@ -142,11 +142,11 @@ gRoute104_LandMonsInfo:: @ 8550954
 
 	.align 2
 gRoute104_WaterMons:: @ 855095C
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute104_WaterMonsInfo:: @ 8550970
@@ -155,16 +155,16 @@ gRoute104_WaterMonsInfo:: @ 8550970
 
 	.align 2
 gRoute104_FishingMons:: @ 8550978
-	wild_mon MAGIKARP, 5, 10
-	wild_mon MAGIKARP, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon MAGIKARP, 10, 30
-	wild_mon MAGIKARP, 10, 30
-	wild_mon MAGIKARP, 25, 30
-	wild_mon MAGIKARP, 30, 35
-	wild_mon MAGIKARP, 20, 25
-	wild_mon MAGIKARP, 35, 40
-	wild_mon MAGIKARP, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_MAGIKARP, 25, 30
+	wild_mon SPECIES_MAGIKARP, 30, 35
+	wild_mon SPECIES_MAGIKARP, 20, 25
+	wild_mon SPECIES_MAGIKARP, 35, 40
+	wild_mon SPECIES_MAGIKARP, 40, 45
 
 	.align 2
 gRoute104_FishingMonsInfo:: @ 85509A0
@@ -173,11 +173,11 @@ gRoute104_FishingMonsInfo:: @ 85509A0
 
 	.align 2
 gRoute105_WaterMons:: @ 85509A8
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute105_WaterMonsInfo:: @ 85509BC
@@ -186,16 +186,16 @@ gRoute105_WaterMonsInfo:: @ 85509BC
 
 	.align 2
 gRoute105_FishingMons:: @ 85509C4
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute105_FishingMonsInfo:: @ 85509EC
@@ -204,18 +204,18 @@ gRoute105_FishingMonsInfo:: @ 85509EC
 
 	.align 2
 gRoute110_LandMons:: @ 85509F4
-	wild_mon POOCHYENA, 12
-	wild_mon ELECTRIKE, 12
-	wild_mon GULPIN, 12
-	wild_mon ELECTRIKE, 13
-	wild_mon MINUN, 13
-	wild_mon ODDISH, 13
-	wild_mon MINUN, 13
-	wild_mon GULPIN, 13
-	wild_mon WINGULL, 12
-	wild_mon WINGULL, 12
-	wild_mon PLUSLE, 12
-	wild_mon PLUSLE, 13
+	wild_mon SPECIES_POOCHYENA, 12
+	wild_mon SPECIES_ELECTRIKE, 12
+	wild_mon SPECIES_GULPIN, 12
+	wild_mon SPECIES_ELECTRIKE, 13
+	wild_mon SPECIES_MINUN, 13
+	wild_mon SPECIES_ODDISH, 13
+	wild_mon SPECIES_MINUN, 13
+	wild_mon SPECIES_GULPIN, 13
+	wild_mon SPECIES_WINGULL, 12
+	wild_mon SPECIES_WINGULL, 12
+	wild_mon SPECIES_PLUSLE, 12
+	wild_mon SPECIES_PLUSLE, 13
 
 	.align 2
 gRoute110_LandMonsInfo:: @ 8550A24
@@ -224,11 +224,11 @@ gRoute110_LandMonsInfo:: @ 8550A24
 
 	.align 2
 gRoute110_WaterMons:: @ 8550A2C
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute110_WaterMonsInfo:: @ 8550A40
@@ -237,16 +237,16 @@ gRoute110_WaterMonsInfo:: @ 8550A40
 
 	.align 2
 gRoute110_FishingMons:: @ 8550A48
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute110_FishingMonsInfo:: @ 8550A70
@@ -255,18 +255,18 @@ gRoute110_FishingMonsInfo:: @ 8550A70
 
 	.align 2
 gRoute111_LandMons:: @ 8550A78
-	wild_mon SANDSHREW, 20
-	wild_mon TRAPINCH, 20
-	wild_mon SANDSHREW, 21
-	wild_mon TRAPINCH, 21
-	wild_mon BALTOY, 19
-	wild_mon BALTOY, 21
-	wild_mon SANDSHREW, 19
-	wild_mon TRAPINCH, 19
-	wild_mon BALTOY, 20
-	wild_mon CACNEA, 20
-	wild_mon CACNEA, 22
-	wild_mon CACNEA, 22
+	wild_mon SPECIES_SANDSHREW, 20
+	wild_mon SPECIES_TRAPINCH, 20
+	wild_mon SPECIES_SANDSHREW, 21
+	wild_mon SPECIES_TRAPINCH, 21
+	wild_mon SPECIES_BALTOY, 19
+	wild_mon SPECIES_BALTOY, 21
+	wild_mon SPECIES_SANDSHREW, 19
+	wild_mon SPECIES_TRAPINCH, 19
+	wild_mon SPECIES_BALTOY, 20
+	wild_mon SPECIES_CACNEA, 20
+	wild_mon SPECIES_CACNEA, 22
+	wild_mon SPECIES_CACNEA, 22
 
 	.align 2
 gRoute111_LandMonsInfo:: @ 8550AA8
@@ -275,11 +275,11 @@ gRoute111_LandMonsInfo:: @ 8550AA8
 
 	.align 2
 gRoute111_WaterMons:: @ 8550AB0
-	wild_mon MARILL, 20, 30
-	wild_mon MARILL, 10, 20
-	wild_mon MARILL, 30, 35
-	wild_mon MARILL, 5, 10
-	wild_mon GOLDEEN, 20, 30
+	wild_mon SPECIES_MARILL, 20, 30
+	wild_mon SPECIES_MARILL, 10, 20
+	wild_mon SPECIES_MARILL, 30, 35
+	wild_mon SPECIES_MARILL, 5, 10
+	wild_mon SPECIES_GOLDEEN, 20, 30
 
 	.align 2
 gRoute111_WaterMonsInfo:: @ 8550AC4
@@ -288,11 +288,11 @@ gRoute111_WaterMonsInfo:: @ 8550AC4
 
 	.align 2
 gRoute111_RockSmashMons:: @ 8550ACC
-	wild_mon GEODUDE, 10, 15
-	wild_mon GEODUDE, 5, 10
-	wild_mon GEODUDE, 15, 20
-	wild_mon GEODUDE, 15, 20
-	wild_mon GEODUDE, 15, 20
+	wild_mon SPECIES_GEODUDE, 10, 15
+	wild_mon SPECIES_GEODUDE, 5, 10
+	wild_mon SPECIES_GEODUDE, 15, 20
+	wild_mon SPECIES_GEODUDE, 15, 20
+	wild_mon SPECIES_GEODUDE, 15, 20
 
 	.align 2
 gRoute111_RockSmashMonsInfo:: @ 8550AE0
@@ -301,16 +301,16 @@ gRoute111_RockSmashMonsInfo:: @ 8550AE0
 
 	.align 2
 gRoute111_FishingMons:: @ 8550AE8
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon BARBOACH, 10, 30
-	wild_mon BARBOACH, 25, 30
-	wild_mon BARBOACH, 30, 35
-	wild_mon BARBOACH, 20, 25
-	wild_mon BARBOACH, 35, 40
-	wild_mon BARBOACH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_BARBOACH, 10, 30
+	wild_mon SPECIES_BARBOACH, 25, 30
+	wild_mon SPECIES_BARBOACH, 30, 35
+	wild_mon SPECIES_BARBOACH, 20, 25
+	wild_mon SPECIES_BARBOACH, 35, 40
+	wild_mon SPECIES_BARBOACH, 40, 45
 
 	.align 2
 gRoute111_FishingMonsInfo:: @ 8550B10
@@ -319,18 +319,18 @@ gRoute111_FishingMonsInfo:: @ 8550B10
 
 	.align 2
 gRoute112_LandMons:: @ 8550B18
-	wild_mon NUMEL, 15
-	wild_mon NUMEL, 15
-	wild_mon MARILL, 15
-	wild_mon NUMEL, 14
-	wild_mon NUMEL, 14
-	wild_mon MARILL, 14
-	wild_mon NUMEL, 16
-	wild_mon MARILL, 16
-	wild_mon NUMEL, 16
-	wild_mon NUMEL, 16
-	wild_mon NUMEL, 16
-	wild_mon NUMEL, 16
+	wild_mon SPECIES_NUMEL, 15
+	wild_mon SPECIES_NUMEL, 15
+	wild_mon SPECIES_MARILL, 15
+	wild_mon SPECIES_NUMEL, 14
+	wild_mon SPECIES_NUMEL, 14
+	wild_mon SPECIES_MARILL, 14
+	wild_mon SPECIES_NUMEL, 16
+	wild_mon SPECIES_MARILL, 16
+	wild_mon SPECIES_NUMEL, 16
+	wild_mon SPECIES_NUMEL, 16
+	wild_mon SPECIES_NUMEL, 16
+	wild_mon SPECIES_NUMEL, 16
 
 	.align 2
 gRoute112_LandMonsInfo:: @ 8550B48
@@ -339,18 +339,18 @@ gRoute112_LandMonsInfo:: @ 8550B48
 
 	.align 2
 gRoute113_LandMons:: @ 8550B50
-	wild_mon SPINDA, 15
-	wild_mon SPINDA, 15
-	wild_mon SLUGMA, 15
-	wild_mon SPINDA, 14
-	wild_mon SPINDA, 14
-	wild_mon SLUGMA, 14
-	wild_mon SPINDA, 16
-	wild_mon SLUGMA, 16
-	wild_mon SPINDA, 16
-	wild_mon SKARMORY, 16
-	wild_mon SPINDA, 16
-	wild_mon SKARMORY, 16
+	wild_mon SPECIES_SPINDA, 15
+	wild_mon SPECIES_SPINDA, 15
+	wild_mon SPECIES_SLUGMA, 15
+	wild_mon SPECIES_SPINDA, 14
+	wild_mon SPECIES_SPINDA, 14
+	wild_mon SPECIES_SLUGMA, 14
+	wild_mon SPECIES_SPINDA, 16
+	wild_mon SPECIES_SLUGMA, 16
+	wild_mon SPECIES_SPINDA, 16
+	wild_mon SPECIES_SKARMORY, 16
+	wild_mon SPECIES_SPINDA, 16
+	wild_mon SPECIES_SKARMORY, 16
 
 	.align 2
 gRoute113_LandMonsInfo:: @ 8550B80
@@ -359,18 +359,18 @@ gRoute113_LandMonsInfo:: @ 8550B80
 
 	.align 2
 gRoute114_LandMons:: @ 8550B88
-	wild_mon SWABLU, 16
-	wild_mon LOTAD, 16
-	wild_mon SWABLU, 17
-	wild_mon SWABLU, 15
-	wild_mon LOTAD, 15
-	wild_mon LOMBRE, 16
-	wild_mon LOMBRE, 16
-	wild_mon LOMBRE, 18
-	wild_mon SEVIPER, 17
-	wild_mon SEVIPER, 15
-	wild_mon SEVIPER, 17
-	wild_mon NUZLEAF, 15
+	wild_mon SPECIES_SWABLU, 16
+	wild_mon SPECIES_LOTAD, 16
+	wild_mon SPECIES_SWABLU, 17
+	wild_mon SPECIES_SWABLU, 15
+	wild_mon SPECIES_LOTAD, 15
+	wild_mon SPECIES_LOMBRE, 16
+	wild_mon SPECIES_LOMBRE, 16
+	wild_mon SPECIES_LOMBRE, 18
+	wild_mon SPECIES_SEVIPER, 17
+	wild_mon SPECIES_SEVIPER, 15
+	wild_mon SPECIES_SEVIPER, 17
+	wild_mon SPECIES_NUZLEAF, 15
 
 	.align 2
 gRoute114_LandMonsInfo:: @ 8550BB8
@@ -379,11 +379,11 @@ gRoute114_LandMonsInfo:: @ 8550BB8
 
 	.align 2
 gRoute114_WaterMons:: @ 8550BC0
-	wild_mon MARILL, 20, 30
-	wild_mon MARILL, 10, 20
-	wild_mon MARILL, 30, 35
-	wild_mon MARILL, 5, 10
-	wild_mon GOLDEEN, 20, 30
+	wild_mon SPECIES_MARILL, 20, 30
+	wild_mon SPECIES_MARILL, 10, 20
+	wild_mon SPECIES_MARILL, 30, 35
+	wild_mon SPECIES_MARILL, 5, 10
+	wild_mon SPECIES_GOLDEEN, 20, 30
 
 	.align 2
 gRoute114_WaterMonsInfo:: @ 8550BD4
@@ -392,11 +392,11 @@ gRoute114_WaterMonsInfo:: @ 8550BD4
 
 	.align 2
 gRoute114_RockSmashMons:: @ 8550BDC
-	wild_mon GEODUDE, 10, 15
-	wild_mon GEODUDE, 5, 10
-	wild_mon GEODUDE, 15, 20
-	wild_mon GEODUDE, 15, 20
-	wild_mon GEODUDE, 15, 20
+	wild_mon SPECIES_GEODUDE, 10, 15
+	wild_mon SPECIES_GEODUDE, 5, 10
+	wild_mon SPECIES_GEODUDE, 15, 20
+	wild_mon SPECIES_GEODUDE, 15, 20
+	wild_mon SPECIES_GEODUDE, 15, 20
 
 	.align 2
 gRoute114_RockSmashMonsInfo:: @ 8550BF0
@@ -405,16 +405,16 @@ gRoute114_RockSmashMonsInfo:: @ 8550BF0
 
 	.align 2
 gRoute114_FishingMons:: @ 8550BF8
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon BARBOACH, 10, 30
-	wild_mon BARBOACH, 25, 30
-	wild_mon BARBOACH, 30, 35
-	wild_mon BARBOACH, 20, 25
-	wild_mon BARBOACH, 35, 40
-	wild_mon BARBOACH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_BARBOACH, 10, 30
+	wild_mon SPECIES_BARBOACH, 25, 30
+	wild_mon SPECIES_BARBOACH, 30, 35
+	wild_mon SPECIES_BARBOACH, 20, 25
+	wild_mon SPECIES_BARBOACH, 35, 40
+	wild_mon SPECIES_BARBOACH, 40, 45
 
 	.align 2
 gRoute114_FishingMonsInfo:: @ 8550C20
@@ -423,18 +423,18 @@ gRoute114_FishingMonsInfo:: @ 8550C20
 
 	.align 2
 gRoute116_LandMons:: @ 8550C28
-	wild_mon POOCHYENA, 6
-	wild_mon WHISMUR, 6
-	wild_mon NINCADA, 6
-	wild_mon ABRA, 7
-	wild_mon NINCADA, 7
-	wild_mon TAILLOW, 6
-	wild_mon TAILLOW, 7
-	wild_mon TAILLOW, 8
-	wild_mon POOCHYENA, 7
-	wild_mon POOCHYENA, 8
-	wild_mon SKITTY, 7
-	wild_mon SKITTY, 8
+	wild_mon SPECIES_POOCHYENA, 6
+	wild_mon SPECIES_WHISMUR, 6
+	wild_mon SPECIES_NINCADA, 6
+	wild_mon SPECIES_ABRA, 7
+	wild_mon SPECIES_NINCADA, 7
+	wild_mon SPECIES_TAILLOW, 6
+	wild_mon SPECIES_TAILLOW, 7
+	wild_mon SPECIES_TAILLOW, 8
+	wild_mon SPECIES_POOCHYENA, 7
+	wild_mon SPECIES_POOCHYENA, 8
+	wild_mon SPECIES_SKITTY, 7
+	wild_mon SPECIES_SKITTY, 8
 
 	.align 2
 gRoute116_LandMonsInfo:: @ 8550C58
@@ -443,18 +443,18 @@ gRoute116_LandMonsInfo:: @ 8550C58
 
 	.align 2
 gRoute117_LandMons:: @ 8550C60
-	wild_mon POOCHYENA, 13
-	wild_mon ODDISH, 13
-	wild_mon POOCHYENA, 14
-	wild_mon ODDISH, 14
-	wild_mon MARILL, 13
-	wild_mon ODDISH, 13
-	wild_mon ILLUMISE, 13
-	wild_mon ILLUMISE, 13
-	wild_mon ILLUMISE, 14
-	wild_mon ILLUMISE, 14
-	wild_mon VOLBEAT, 13
-	wild_mon SEEDOT, 13
+	wild_mon SPECIES_POOCHYENA, 13
+	wild_mon SPECIES_ODDISH, 13
+	wild_mon SPECIES_POOCHYENA, 14
+	wild_mon SPECIES_ODDISH, 14
+	wild_mon SPECIES_MARILL, 13
+	wild_mon SPECIES_ODDISH, 13
+	wild_mon SPECIES_ILLUMISE, 13
+	wild_mon SPECIES_ILLUMISE, 13
+	wild_mon SPECIES_ILLUMISE, 14
+	wild_mon SPECIES_ILLUMISE, 14
+	wild_mon SPECIES_VOLBEAT, 13
+	wild_mon SPECIES_SEEDOT, 13
 
 	.align 2
 gRoute117_LandMonsInfo:: @ 8550C90
@@ -463,11 +463,11 @@ gRoute117_LandMonsInfo:: @ 8550C90
 
 	.align 2
 gRoute117_WaterMons:: @ 8550C98
-	wild_mon MARILL, 20, 30
-	wild_mon MARILL, 10, 20
-	wild_mon MARILL, 30, 35
-	wild_mon MARILL, 5, 10
-	wild_mon GOLDEEN, 20, 30
+	wild_mon SPECIES_MARILL, 20, 30
+	wild_mon SPECIES_MARILL, 10, 20
+	wild_mon SPECIES_MARILL, 30, 35
+	wild_mon SPECIES_MARILL, 5, 10
+	wild_mon SPECIES_GOLDEEN, 20, 30
 
 	.align 2
 gRoute117_WaterMonsInfo:: @ 8550CAC
@@ -476,16 +476,16 @@ gRoute117_WaterMonsInfo:: @ 8550CAC
 
 	.align 2
 gRoute117_FishingMons:: @ 8550CB4
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon CORPHISH, 10, 30
-	wild_mon CORPHISH, 25, 30
-	wild_mon CORPHISH, 30, 35
-	wild_mon CORPHISH, 20, 25
-	wild_mon CORPHISH, 35, 40
-	wild_mon CORPHISH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_CORPHISH, 10, 30
+	wild_mon SPECIES_CORPHISH, 25, 30
+	wild_mon SPECIES_CORPHISH, 30, 35
+	wild_mon SPECIES_CORPHISH, 20, 25
+	wild_mon SPECIES_CORPHISH, 35, 40
+	wild_mon SPECIES_CORPHISH, 40, 45
 
 	.align 2
 gRoute117_FishingMonsInfo:: @ 8550CDC
@@ -494,18 +494,18 @@ gRoute117_FishingMonsInfo:: @ 8550CDC
 
 	.align 2
 gRoute118_LandMons:: @ 8550CE4
-	wild_mon ZIGZAGOON, 24
-	wild_mon ELECTRIKE, 24
-	wild_mon ZIGZAGOON, 26
-	wild_mon ELECTRIKE, 26
-	wild_mon LINOONE, 26
-	wild_mon MANECTRIC, 26
-	wild_mon WINGULL, 25
-	wild_mon WINGULL, 25
-	wild_mon WINGULL, 26
-	wild_mon WINGULL, 26
-	wild_mon WINGULL, 27
-	wild_mon KECLEON, 25
+	wild_mon SPECIES_ZIGZAGOON, 24
+	wild_mon SPECIES_ELECTRIKE, 24
+	wild_mon SPECIES_ZIGZAGOON, 26
+	wild_mon SPECIES_ELECTRIKE, 26
+	wild_mon SPECIES_LINOONE, 26
+	wild_mon SPECIES_MANECTRIC, 26
+	wild_mon SPECIES_WINGULL, 25
+	wild_mon SPECIES_WINGULL, 25
+	wild_mon SPECIES_WINGULL, 26
+	wild_mon SPECIES_WINGULL, 26
+	wild_mon SPECIES_WINGULL, 27
+	wild_mon SPECIES_KECLEON, 25
 
 	.align 2
 gRoute118_LandMonsInfo:: @ 8550D14
@@ -514,11 +514,11 @@ gRoute118_LandMonsInfo:: @ 8550D14
 
 	.align 2
 gRoute118_WaterMons:: @ 8550D1C
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute118_WaterMonsInfo:: @ 8550D30
@@ -527,16 +527,16 @@ gRoute118_WaterMonsInfo:: @ 8550D30
 
 	.align 2
 gRoute118_FishingMons:: @ 8550D38
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon CARVANHA, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon CARVANHA, 30, 35
-	wild_mon CARVANHA, 20, 25
-	wild_mon CARVANHA, 35, 40
-	wild_mon CARVANHA, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_CARVANHA, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_CARVANHA, 30, 35
+	wild_mon SPECIES_CARVANHA, 20, 25
+	wild_mon SPECIES_CARVANHA, 35, 40
+	wild_mon SPECIES_CARVANHA, 40, 45
 
 	.align 2
 gRoute118_FishingMonsInfo:: @ 8550D60
@@ -545,11 +545,11 @@ gRoute118_FishingMonsInfo:: @ 8550D60
 
 	.align 2
 gRoute124_WaterMons:: @ 8550D68
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute124_WaterMonsInfo:: @ 8550D7C
@@ -558,16 +558,16 @@ gRoute124_WaterMonsInfo:: @ 8550D7C
 
 	.align 2
 gRoute124_FishingMons:: @ 8550D84
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute124_FishingMonsInfo:: @ 8550DAC
@@ -576,18 +576,18 @@ gRoute124_FishingMonsInfo:: @ 8550DAC
 
 	.align 2
 gPetalburgWoods_LandMons:: @ 8550DB4
-	wild_mon POOCHYENA, 5
-	wild_mon WURMPLE, 5
-	wild_mon SHROOMISH, 5
-	wild_mon POOCHYENA, 6
-	wild_mon SILCOON, 5
-	wild_mon CASCOON, 5
-	wild_mon WURMPLE, 6
-	wild_mon SHROOMISH, 6
-	wild_mon TAILLOW, 5
-	wild_mon SLAKOTH, 5
-	wild_mon TAILLOW, 6
-	wild_mon SLAKOTH, 6
+	wild_mon SPECIES_POOCHYENA, 5
+	wild_mon SPECIES_WURMPLE, 5
+	wild_mon SPECIES_SHROOMISH, 5
+	wild_mon SPECIES_POOCHYENA, 6
+	wild_mon SPECIES_SILCOON, 5
+	wild_mon SPECIES_CASCOON, 5
+	wild_mon SPECIES_WURMPLE, 6
+	wild_mon SPECIES_SHROOMISH, 6
+	wild_mon SPECIES_TAILLOW, 5
+	wild_mon SPECIES_SLAKOTH, 5
+	wild_mon SPECIES_TAILLOW, 6
+	wild_mon SPECIES_SLAKOTH, 6
 
 	.align 2
 gPetalburgWoods_LandMonsInfo:: @ 8550DE4
@@ -596,18 +596,18 @@ gPetalburgWoods_LandMonsInfo:: @ 8550DE4
 
 	.align 2
 gRusturfTunnel_LandMons:: @ 8550DEC
-	wild_mon WHISMUR, 6
-	wild_mon WHISMUR, 7
-	wild_mon WHISMUR, 6
-	wild_mon WHISMUR, 6
-	wild_mon WHISMUR, 7
-	wild_mon WHISMUR, 7
-	wild_mon WHISMUR, 5
-	wild_mon WHISMUR, 8
-	wild_mon WHISMUR, 5
-	wild_mon WHISMUR, 8
-	wild_mon WHISMUR, 5
-	wild_mon WHISMUR, 8
+	wild_mon SPECIES_WHISMUR, 6
+	wild_mon SPECIES_WHISMUR, 7
+	wild_mon SPECIES_WHISMUR, 6
+	wild_mon SPECIES_WHISMUR, 6
+	wild_mon SPECIES_WHISMUR, 7
+	wild_mon SPECIES_WHISMUR, 7
+	wild_mon SPECIES_WHISMUR, 5
+	wild_mon SPECIES_WHISMUR, 8
+	wild_mon SPECIES_WHISMUR, 5
+	wild_mon SPECIES_WHISMUR, 8
+	wild_mon SPECIES_WHISMUR, 5
+	wild_mon SPECIES_WHISMUR, 8
 
 	.align 2
 gRusturfTunnel_LandMonsInfo:: @ 8550E1C
@@ -616,18 +616,18 @@ gRusturfTunnel_LandMonsInfo:: @ 8550E1C
 
 	.align 2
 gGraniteCave_1F_LandMons:: @ 8550E24
-	wild_mon ZUBAT, 7
-	wild_mon MAKUHITA, 8
-	wild_mon MAKUHITA, 7
-	wild_mon ZUBAT, 8
-	wild_mon MAKUHITA, 9
-	wild_mon ABRA, 8
-	wild_mon MAKUHITA, 10
-	wild_mon MAKUHITA, 6
-	wild_mon GEODUDE, 7
-	wild_mon GEODUDE, 8
-	wild_mon GEODUDE, 6
-	wild_mon GEODUDE, 9
+	wild_mon SPECIES_ZUBAT, 7
+	wild_mon SPECIES_MAKUHITA, 8
+	wild_mon SPECIES_MAKUHITA, 7
+	wild_mon SPECIES_ZUBAT, 8
+	wild_mon SPECIES_MAKUHITA, 9
+	wild_mon SPECIES_ABRA, 8
+	wild_mon SPECIES_MAKUHITA, 10
+	wild_mon SPECIES_MAKUHITA, 6
+	wild_mon SPECIES_GEODUDE, 7
+	wild_mon SPECIES_GEODUDE, 8
+	wild_mon SPECIES_GEODUDE, 6
+	wild_mon SPECIES_GEODUDE, 9
 
 	.align 2
 gGraniteCave_1F_LandMonsInfo:: @ 8550E54
@@ -636,18 +636,18 @@ gGraniteCave_1F_LandMonsInfo:: @ 8550E54
 
 	.align 2
 gGraniteCave_B1F_LandMons:: @ 8550E5C
-	wild_mon ZUBAT, 9
-	wild_mon ARON, 10
-	wild_mon ARON, 9
-	wild_mon ARON, 11
-	wild_mon ZUBAT, 10
-	wild_mon ABRA, 9
-	wild_mon MAKUHITA, 10
-	wild_mon MAKUHITA, 11
-	wild_mon SABLEYE, 10
-	wild_mon SABLEYE, 10
-	wild_mon SABLEYE, 9
-	wild_mon SABLEYE, 11
+	wild_mon SPECIES_ZUBAT, 9
+	wild_mon SPECIES_ARON, 10
+	wild_mon SPECIES_ARON, 9
+	wild_mon SPECIES_ARON, 11
+	wild_mon SPECIES_ZUBAT, 10
+	wild_mon SPECIES_ABRA, 9
+	wild_mon SPECIES_MAKUHITA, 10
+	wild_mon SPECIES_MAKUHITA, 11
+	wild_mon SPECIES_SABLEYE, 10
+	wild_mon SPECIES_SABLEYE, 10
+	wild_mon SPECIES_SABLEYE, 9
+	wild_mon SPECIES_SABLEYE, 11
 
 	.align 2
 gGraniteCave_B1F_LandMonsInfo:: @ 8550E8C
@@ -656,18 +656,18 @@ gGraniteCave_B1F_LandMonsInfo:: @ 8550E8C
 
 	.align 2
 gMtPyre_1F_LandMons:: @ 8550E94
-	wild_mon SHUPPET, 27
-	wild_mon SHUPPET, 28
-	wild_mon SHUPPET, 26
-	wild_mon SHUPPET, 25
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
-	wild_mon SHUPPET, 23
-	wild_mon SHUPPET, 22
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 27
+	wild_mon SPECIES_SHUPPET, 28
+	wild_mon SPECIES_SHUPPET, 26
+	wild_mon SPECIES_SHUPPET, 25
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 23
+	wild_mon SPECIES_SHUPPET, 22
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
 
 	.align 2
 gMtPyre_1F_LandMonsInfo:: @ 8550EC4
@@ -676,18 +676,18 @@ gMtPyre_1F_LandMonsInfo:: @ 8550EC4
 
 	.align 2
 gVictoryRoad_1F_LandMons:: @ 8550ECC
-	wild_mon GOLBAT, 40
-	wild_mon HARIYAMA, 40
-	wild_mon LAIRON, 40
-	wild_mon LOUDRED, 40
-	wild_mon ZUBAT, 36
-	wild_mon MAKUHITA, 36
-	wild_mon GOLBAT, 38
-	wild_mon HARIYAMA, 38
-	wild_mon ARON, 36
-	wild_mon WHISMUR, 36
-	wild_mon ARON, 36
-	wild_mon WHISMUR, 36
+	wild_mon SPECIES_GOLBAT, 40
+	wild_mon SPECIES_HARIYAMA, 40
+	wild_mon SPECIES_LAIRON, 40
+	wild_mon SPECIES_LOUDRED, 40
+	wild_mon SPECIES_ZUBAT, 36
+	wild_mon SPECIES_MAKUHITA, 36
+	wild_mon SPECIES_GOLBAT, 38
+	wild_mon SPECIES_HARIYAMA, 38
+	wild_mon SPECIES_ARON, 36
+	wild_mon SPECIES_WHISMUR, 36
+	wild_mon SPECIES_ARON, 36
+	wild_mon SPECIES_WHISMUR, 36
 
 	.align 2
 gVictoryRoad_1F_LandMonsInfo:: @ 8550EFC
@@ -696,18 +696,18 @@ gVictoryRoad_1F_LandMonsInfo:: @ 8550EFC
 
 	.align 2
 gSafariZone_South_LandMons:: @ 8550F04
-	wild_mon ODDISH, 25
-	wild_mon ODDISH, 27
-	wild_mon GIRAFARIG, 25
-	wild_mon GIRAFARIG, 27
-	wild_mon NATU, 25
-	wild_mon DODUO, 25
-	wild_mon GLOOM, 25
-	wild_mon WOBBUFFET, 27
-	wild_mon PIKACHU, 25
-	wild_mon WOBBUFFET, 27
-	wild_mon PIKACHU, 27
-	wild_mon WOBBUFFET, 29
+	wild_mon SPECIES_ODDISH, 25
+	wild_mon SPECIES_ODDISH, 27
+	wild_mon SPECIES_GIRAFARIG, 25
+	wild_mon SPECIES_GIRAFARIG, 27
+	wild_mon SPECIES_NATU, 25
+	wild_mon SPECIES_DODUO, 25
+	wild_mon SPECIES_GLOOM, 25
+	wild_mon SPECIES_WOBBUFFET, 27
+	wild_mon SPECIES_PIKACHU, 25
+	wild_mon SPECIES_WOBBUFFET, 27
+	wild_mon SPECIES_PIKACHU, 27
+	wild_mon SPECIES_WOBBUFFET, 29
 
 	.align 2
 gSafariZone_South_LandMonsInfo:: @ 8550F34
@@ -716,11 +716,11 @@ gSafariZone_South_LandMonsInfo:: @ 8550F34
 
 	.align 2
 gUnderwater2_WaterMons:: @ 8550F3C
-	wild_mon CLAMPERL, 20, 30
-	wild_mon CHINCHOU, 20, 30
-	wild_mon CLAMPERL, 30, 35
-	wild_mon RELICANTH, 30, 35
-	wild_mon RELICANTH, 30, 35
+	wild_mon SPECIES_CLAMPERL, 20, 30
+	wild_mon SPECIES_CHINCHOU, 20, 30
+	wild_mon SPECIES_CLAMPERL, 30, 35
+	wild_mon SPECIES_RELICANTH, 30, 35
+	wild_mon SPECIES_RELICANTH, 30, 35
 
 	.align 2
 gUnderwater2_WaterMonsInfo:: @ 8550F50
@@ -729,11 +729,11 @@ gUnderwater2_WaterMonsInfo:: @ 8550F50
 
 	.align 2
 gAbandonedShip_Rooms_B1F_WaterMons:: @ 8550F58
-	wild_mon TENTACOOL, 5, 35
-	wild_mon TENTACOOL, 5, 35
-	wild_mon TENTACOOL, 5, 35
-	wild_mon TENTACOOL, 5, 35
-	wild_mon TENTACRUEL, 30, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_TENTACRUEL, 30, 35
 
 	.align 2
 gAbandonedShip_Rooms_B1F_WaterMonsInfo:: @ 8550F6C
@@ -742,16 +742,16 @@ gAbandonedShip_Rooms_B1F_WaterMonsInfo:: @ 8550F6C
 
 	.align 2
 gAbandonedShip_Rooms_B1F_FishingMons:: @ 8550F74
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon TENTACOOL, 25, 30
-	wild_mon TENTACOOL, 30, 35
-	wild_mon TENTACRUEL, 30, 35
-	wild_mon TENTACRUEL, 25, 30
-	wild_mon TENTACRUEL, 20, 25
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_TENTACOOL, 25, 30
+	wild_mon SPECIES_TENTACOOL, 30, 35
+	wild_mon SPECIES_TENTACRUEL, 30, 35
+	wild_mon SPECIES_TENTACRUEL, 25, 30
+	wild_mon SPECIES_TENTACRUEL, 20, 25
 
 	.align 2
 gAbandonedShip_Rooms_B1F_FishingMonsInfo:: @ 8550F9C
@@ -760,18 +760,18 @@ gAbandonedShip_Rooms_B1F_FishingMonsInfo:: @ 8550F9C
 
 	.align 2
 gGraniteCave_B2F_LandMons:: @ 8550FA4
-	wild_mon ZUBAT, 10
-	wild_mon ARON, 11
-	wild_mon ARON, 10
-	wild_mon ZUBAT, 11
-	wild_mon ARON, 12
-	wild_mon ABRA, 10
-	wild_mon SABLEYE, 10
-	wild_mon SABLEYE, 11
-	wild_mon SABLEYE, 12
-	wild_mon SABLEYE, 10
-	wild_mon SABLEYE, 12
-	wild_mon SABLEYE, 10
+	wild_mon SPECIES_ZUBAT, 10
+	wild_mon SPECIES_ARON, 11
+	wild_mon SPECIES_ARON, 10
+	wild_mon SPECIES_ZUBAT, 11
+	wild_mon SPECIES_ARON, 12
+	wild_mon SPECIES_ABRA, 10
+	wild_mon SPECIES_SABLEYE, 10
+	wild_mon SPECIES_SABLEYE, 11
+	wild_mon SPECIES_SABLEYE, 12
+	wild_mon SPECIES_SABLEYE, 10
+	wild_mon SPECIES_SABLEYE, 12
+	wild_mon SPECIES_SABLEYE, 10
 
 	.align 2
 gGraniteCave_B2F_LandMonsInfo:: @ 8550FD4
@@ -780,11 +780,11 @@ gGraniteCave_B2F_LandMonsInfo:: @ 8550FD4
 
 	.align 2
 gGraniteCave_B2F_RockSmashMons:: @ 8550FDC
-	wild_mon GEODUDE, 10, 15
-	wild_mon NOSEPASS, 10, 20
-	wild_mon GEODUDE, 5, 10
-	wild_mon GEODUDE, 15, 20
-	wild_mon GEODUDE, 15, 20
+	wild_mon SPECIES_GEODUDE, 10, 15
+	wild_mon SPECIES_NOSEPASS, 10, 20
+	wild_mon SPECIES_GEODUDE, 5, 10
+	wild_mon SPECIES_GEODUDE, 15, 20
+	wild_mon SPECIES_GEODUDE, 15, 20
 
 	.align 2
 gGraniteCave_B2F_RockSmashMonsInfo:: @ 8550FF0
@@ -793,18 +793,18 @@ gGraniteCave_B2F_RockSmashMonsInfo:: @ 8550FF0
 
 	.align 2
 gFieryPath_LandMons:: @ 8550FF8
-	wild_mon NUMEL, 15
-	wild_mon KOFFING, 15
-	wild_mon NUMEL, 16
-	wild_mon MACHOP, 15
-	wild_mon TORKOAL, 15
-	wild_mon SLUGMA, 15
-	wild_mon KOFFING, 16
-	wild_mon MACHOP, 16
-	wild_mon TORKOAL, 14
-	wild_mon TORKOAL, 16
-	wild_mon GRIMER, 14
-	wild_mon GRIMER, 14
+	wild_mon SPECIES_NUMEL, 15
+	wild_mon SPECIES_KOFFING, 15
+	wild_mon SPECIES_NUMEL, 16
+	wild_mon SPECIES_MACHOP, 15
+	wild_mon SPECIES_TORKOAL, 15
+	wild_mon SPECIES_SLUGMA, 15
+	wild_mon SPECIES_KOFFING, 16
+	wild_mon SPECIES_MACHOP, 16
+	wild_mon SPECIES_TORKOAL, 14
+	wild_mon SPECIES_TORKOAL, 16
+	wild_mon SPECIES_GRIMER, 14
+	wild_mon SPECIES_GRIMER, 14
 
 	.align 2
 gFieryPath_LandMonsInfo:: @ 8551028
@@ -813,18 +813,18 @@ gFieryPath_LandMonsInfo:: @ 8551028
 
 	.align 2
 gMeteorFalls_B1F_2R_LandMons:: @ 8551030
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 35
-	wild_mon BAGON, 30
-	wild_mon SOLROCK, 35
-	wild_mon BAGON, 35
-	wild_mon SOLROCK, 37
-	wild_mon BAGON, 25
-	wild_mon SOLROCK, 39
-	wild_mon GOLBAT, 38
-	wild_mon GOLBAT, 40
-	wild_mon GOLBAT, 38
-	wild_mon GOLBAT, 40
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_BAGON, 30
+	wild_mon SPECIES_SOLROCK, 35
+	wild_mon SPECIES_BAGON, 35
+	wild_mon SPECIES_SOLROCK, 37
+	wild_mon SPECIES_BAGON, 25
+	wild_mon SPECIES_SOLROCK, 39
+	wild_mon SPECIES_GOLBAT, 38
+	wild_mon SPECIES_GOLBAT, 40
+	wild_mon SPECIES_GOLBAT, 38
+	wild_mon SPECIES_GOLBAT, 40
 
 	.align 2
 gMeteorFalls_B1F_2R_LandMonsInfo:: @ 8551060
@@ -833,11 +833,11 @@ gMeteorFalls_B1F_2R_LandMonsInfo:: @ 8551060
 
 	.align 2
 gMeteorFalls_B1F_2R_WaterMons:: @ 8551068
-	wild_mon GOLBAT, 30, 35
-	wild_mon GOLBAT, 30, 35
-	wild_mon SOLROCK, 25, 35
-	wild_mon SOLROCK, 15, 25
-	wild_mon SOLROCK, 5, 15
+	wild_mon SPECIES_GOLBAT, 30, 35
+	wild_mon SPECIES_GOLBAT, 30, 35
+	wild_mon SPECIES_SOLROCK, 25, 35
+	wild_mon SPECIES_SOLROCK, 15, 25
+	wild_mon SPECIES_SOLROCK, 5, 15
 
 	.align 2
 gMeteorFalls_B1F_2R_WaterMonsInfo:: @ 855107C
@@ -846,16 +846,16 @@ gMeteorFalls_B1F_2R_WaterMonsInfo:: @ 855107C
 
 	.align 2
 gMeteorFalls_B1F_2R_FishingMons:: @ 8551084
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon BARBOACH, 10, 30
-	wild_mon BARBOACH, 25, 30
-	wild_mon BARBOACH, 30, 35
-	wild_mon WHISCASH, 30, 35
-	wild_mon WHISCASH, 35, 40
-	wild_mon WHISCASH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_BARBOACH, 10, 30
+	wild_mon SPECIES_BARBOACH, 25, 30
+	wild_mon SPECIES_BARBOACH, 30, 35
+	wild_mon SPECIES_WHISCASH, 30, 35
+	wild_mon SPECIES_WHISCASH, 35, 40
+	wild_mon SPECIES_WHISCASH, 40, 45
 
 	.align 2
 gMeteorFalls_B1F_2R_FishingMonsInfo:: @ 85510AC
@@ -864,18 +864,18 @@ gMeteorFalls_B1F_2R_FishingMonsInfo:: @ 85510AC
 
 	.align 2
 gJaggedPass_LandMons:: @ 85510B4
-	wild_mon NUMEL, 21
-	wild_mon NUMEL, 21
-	wild_mon MACHOP, 21
-	wild_mon NUMEL, 20
-	wild_mon SPOINK, 20
-	wild_mon MACHOP, 20
-	wild_mon SPOINK, 21
-	wild_mon MACHOP, 22
-	wild_mon NUMEL, 22
-	wild_mon SPOINK, 22
-	wild_mon NUMEL, 22
-	wild_mon SPOINK, 22
+	wild_mon SPECIES_NUMEL, 21
+	wild_mon SPECIES_NUMEL, 21
+	wild_mon SPECIES_MACHOP, 21
+	wild_mon SPECIES_NUMEL, 20
+	wild_mon SPECIES_SPOINK, 20
+	wild_mon SPECIES_MACHOP, 20
+	wild_mon SPECIES_SPOINK, 21
+	wild_mon SPECIES_MACHOP, 22
+	wild_mon SPECIES_NUMEL, 22
+	wild_mon SPECIES_SPOINK, 22
+	wild_mon SPECIES_NUMEL, 22
+	wild_mon SPECIES_SPOINK, 22
 
 	.align 2
 gJaggedPass_LandMonsInfo:: @ 85510E4
@@ -884,11 +884,11 @@ gJaggedPass_LandMonsInfo:: @ 85510E4
 
 	.align 2
 gRoute106_WaterMons:: @ 85510EC
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute106_WaterMonsInfo:: @ 8551100
@@ -897,16 +897,16 @@ gRoute106_WaterMonsInfo:: @ 8551100
 
 	.align 2
 gRoute106_FishingMons:: @ 8551108
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute106_FishingMonsInfo:: @ 8551130
@@ -915,11 +915,11 @@ gRoute106_FishingMonsInfo:: @ 8551130
 
 	.align 2
 gRoute107_WaterMons:: @ 8551138
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute107_WaterMonsInfo:: @ 855114C
@@ -928,16 +928,16 @@ gRoute107_WaterMonsInfo:: @ 855114C
 
 	.align 2
 gRoute107_FishingMons:: @ 8551154
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute107_FishingMonsInfo:: @ 855117C
@@ -946,11 +946,11 @@ gRoute107_FishingMonsInfo:: @ 855117C
 
 	.align 2
 gRoute108_WaterMons:: @ 8551184
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute108_WaterMonsInfo:: @ 8551198
@@ -959,16 +959,16 @@ gRoute108_WaterMonsInfo:: @ 8551198
 
 	.align 2
 gRoute108_FishingMons:: @ 85511A0
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute108_FishingMonsInfo:: @ 85511C8
@@ -977,11 +977,11 @@ gRoute108_FishingMonsInfo:: @ 85511C8
 
 	.align 2
 gRoute109_WaterMons:: @ 85511D0
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute109_WaterMonsInfo:: @ 85511E4
@@ -990,16 +990,16 @@ gRoute109_WaterMonsInfo:: @ 85511E4
 
 	.align 2
 gRoute109_FishingMons:: @ 85511EC
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute109_FishingMonsInfo:: @ 8551214
@@ -1008,18 +1008,18 @@ gRoute109_FishingMonsInfo:: @ 8551214
 
 	.align 2
 gRoute115_LandMons:: @ 855121C
-	wild_mon SWABLU, 23
-	wild_mon TAILLOW, 23
-	wild_mon SWABLU, 25
-	wild_mon TAILLOW, 24
-	wild_mon TAILLOW, 25
-	wild_mon SWELLOW, 25
-	wild_mon JIGGLYPUFF, 24
-	wild_mon JIGGLYPUFF, 25
-	wild_mon WINGULL, 24
-	wild_mon WINGULL, 24
-	wild_mon WINGULL, 26
-	wild_mon WINGULL, 25
+	wild_mon SPECIES_SWABLU, 23
+	wild_mon SPECIES_TAILLOW, 23
+	wild_mon SPECIES_SWABLU, 25
+	wild_mon SPECIES_TAILLOW, 24
+	wild_mon SPECIES_TAILLOW, 25
+	wild_mon SPECIES_SWELLOW, 25
+	wild_mon SPECIES_JIGGLYPUFF, 24
+	wild_mon SPECIES_JIGGLYPUFF, 25
+	wild_mon SPECIES_WINGULL, 24
+	wild_mon SPECIES_WINGULL, 24
+	wild_mon SPECIES_WINGULL, 26
+	wild_mon SPECIES_WINGULL, 25
 
 	.align 2
 gRoute115_LandMonsInfo:: @ 855124C
@@ -1028,11 +1028,11 @@ gRoute115_LandMonsInfo:: @ 855124C
 
 	.align 2
 gRoute115_WaterMons:: @ 8551254
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute115_WaterMonsInfo:: @ 8551268
@@ -1041,16 +1041,16 @@ gRoute115_WaterMonsInfo:: @ 8551268
 
 	.align 2
 gRoute115_FishingMons:: @ 8551270
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute115_FishingMonsInfo:: @ 8551298
@@ -1059,18 +1059,18 @@ gRoute115_FishingMonsInfo:: @ 8551298
 
 	.align 2
 gNewMauville_Inside_LandMons:: @ 85512A0
-	wild_mon VOLTORB, 24
-	wild_mon MAGNEMITE, 24
-	wild_mon VOLTORB, 25
-	wild_mon MAGNEMITE, 25
-	wild_mon VOLTORB, 23
-	wild_mon MAGNEMITE, 23
-	wild_mon VOLTORB, 26
-	wild_mon MAGNEMITE, 26
-	wild_mon VOLTORB, 22
-	wild_mon MAGNEMITE, 22
-	wild_mon ELECTRODE, 26
-	wild_mon MAGNETON, 26
+	wild_mon SPECIES_VOLTORB, 24
+	wild_mon SPECIES_MAGNEMITE, 24
+	wild_mon SPECIES_VOLTORB, 25
+	wild_mon SPECIES_MAGNEMITE, 25
+	wild_mon SPECIES_VOLTORB, 23
+	wild_mon SPECIES_MAGNEMITE, 23
+	wild_mon SPECIES_VOLTORB, 26
+	wild_mon SPECIES_MAGNEMITE, 26
+	wild_mon SPECIES_VOLTORB, 22
+	wild_mon SPECIES_MAGNEMITE, 22
+	wild_mon SPECIES_ELECTRODE, 26
+	wild_mon SPECIES_MAGNETON, 26
 
 	.align 2
 gNewMauville_Inside_LandMonsInfo:: @ 85512D0
@@ -1079,18 +1079,18 @@ gNewMauville_Inside_LandMonsInfo:: @ 85512D0
 
 	.align 2
 gRoute119_LandMons:: @ 85512D8
-	wild_mon ZIGZAGOON, 25
-	wild_mon LINOONE, 25
-	wild_mon ZIGZAGOON, 27
-	wild_mon ODDISH, 25
-	wild_mon LINOONE, 27
-	wild_mon ODDISH, 26
-	wild_mon ODDISH, 27
-	wild_mon ODDISH, 24
-	wild_mon TROPIUS, 25
-	wild_mon TROPIUS, 26
-	wild_mon TROPIUS, 27
-	wild_mon KECLEON, 25
+	wild_mon SPECIES_ZIGZAGOON, 25
+	wild_mon SPECIES_LINOONE, 25
+	wild_mon SPECIES_ZIGZAGOON, 27
+	wild_mon SPECIES_ODDISH, 25
+	wild_mon SPECIES_LINOONE, 27
+	wild_mon SPECIES_ODDISH, 26
+	wild_mon SPECIES_ODDISH, 27
+	wild_mon SPECIES_ODDISH, 24
+	wild_mon SPECIES_TROPIUS, 25
+	wild_mon SPECIES_TROPIUS, 26
+	wild_mon SPECIES_TROPIUS, 27
+	wild_mon SPECIES_KECLEON, 25
 
 	.align 2
 gRoute119_LandMonsInfo:: @ 8551308
@@ -1099,11 +1099,11 @@ gRoute119_LandMonsInfo:: @ 8551308
 
 	.align 2
 gRoute119_WaterMons:: @ 8551310
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute119_WaterMonsInfo:: @ 8551324
@@ -1112,16 +1112,16 @@ gRoute119_WaterMonsInfo:: @ 8551324
 
 	.align 2
 gRoute119_FishingMons:: @ 855132C
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon CARVANHA, 10, 30
-	wild_mon CARVANHA, 25, 30
-	wild_mon CARVANHA, 30, 35
-	wild_mon CARVANHA, 20, 25
-	wild_mon CARVANHA, 35, 40
-	wild_mon CARVANHA, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_CARVANHA, 10, 30
+	wild_mon SPECIES_CARVANHA, 25, 30
+	wild_mon SPECIES_CARVANHA, 30, 35
+	wild_mon SPECIES_CARVANHA, 20, 25
+	wild_mon SPECIES_CARVANHA, 35, 40
+	wild_mon SPECIES_CARVANHA, 40, 45
 
 	.align 2
 gRoute119_FishingMonsInfo:: @ 8551354
@@ -1130,18 +1130,18 @@ gRoute119_FishingMonsInfo:: @ 8551354
 
 	.align 2
 gRoute120_LandMons:: @ 855135C
-	wild_mon POOCHYENA, 25
-	wild_mon MIGHTYENA, 25
-	wild_mon MIGHTYENA, 27
-	wild_mon ODDISH, 25
-	wild_mon MARILL, 25
-	wild_mon ODDISH, 26
-	wild_mon ODDISH, 27
-	wild_mon MARILL, 27
-	wild_mon ABSOL, 25
-	wild_mon ABSOL, 27
-	wild_mon KECLEON, 25
-	wild_mon SEEDOT, 25
+	wild_mon SPECIES_POOCHYENA, 25
+	wild_mon SPECIES_MIGHTYENA, 25
+	wild_mon SPECIES_MIGHTYENA, 27
+	wild_mon SPECIES_ODDISH, 25
+	wild_mon SPECIES_MARILL, 25
+	wild_mon SPECIES_ODDISH, 26
+	wild_mon SPECIES_ODDISH, 27
+	wild_mon SPECIES_MARILL, 27
+	wild_mon SPECIES_ABSOL, 25
+	wild_mon SPECIES_ABSOL, 27
+	wild_mon SPECIES_KECLEON, 25
+	wild_mon SPECIES_SEEDOT, 25
 
 	.align 2
 gRoute120_LandMonsInfo:: @ 855138C
@@ -1150,11 +1150,11 @@ gRoute120_LandMonsInfo:: @ 855138C
 
 	.align 2
 gRoute120_WaterMons:: @ 8551394
-	wild_mon MARILL, 20, 30
-	wild_mon MARILL, 10, 20
-	wild_mon MARILL, 30, 35
-	wild_mon MARILL, 5, 10
-	wild_mon GOLDEEN, 20, 30
+	wild_mon SPECIES_MARILL, 20, 30
+	wild_mon SPECIES_MARILL, 10, 20
+	wild_mon SPECIES_MARILL, 30, 35
+	wild_mon SPECIES_MARILL, 5, 10
+	wild_mon SPECIES_GOLDEEN, 20, 30
 
 	.align 2
 gRoute120_WaterMonsInfo:: @ 85513A8
@@ -1163,16 +1163,16 @@ gRoute120_WaterMonsInfo:: @ 85513A8
 
 	.align 2
 gRoute120_FishingMons:: @ 85513B0
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon BARBOACH, 10, 30
-	wild_mon BARBOACH, 25, 30
-	wild_mon BARBOACH, 30, 35
-	wild_mon BARBOACH, 20, 25
-	wild_mon BARBOACH, 35, 40
-	wild_mon BARBOACH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_BARBOACH, 10, 30
+	wild_mon SPECIES_BARBOACH, 25, 30
+	wild_mon SPECIES_BARBOACH, 30, 35
+	wild_mon SPECIES_BARBOACH, 20, 25
+	wild_mon SPECIES_BARBOACH, 35, 40
+	wild_mon SPECIES_BARBOACH, 40, 45
 
 	.align 2
 gRoute120_FishingMonsInfo:: @ 85513D8
@@ -1181,18 +1181,18 @@ gRoute120_FishingMonsInfo:: @ 85513D8
 
 	.align 2
 gRoute121_LandMons:: @ 85513E0
-	wild_mon POOCHYENA, 26
-	wild_mon SHUPPET, 26
-	wild_mon MIGHTYENA, 26
-	wild_mon SHUPPET, 28
-	wild_mon MIGHTYENA, 28
-	wild_mon ODDISH, 26
-	wild_mon ODDISH, 28
-	wild_mon GLOOM, 28
-	wild_mon WINGULL, 26
-	wild_mon WINGULL, 27
-	wild_mon WINGULL, 28
-	wild_mon KECLEON, 25
+	wild_mon SPECIES_POOCHYENA, 26
+	wild_mon SPECIES_SHUPPET, 26
+	wild_mon SPECIES_MIGHTYENA, 26
+	wild_mon SPECIES_SHUPPET, 28
+	wild_mon SPECIES_MIGHTYENA, 28
+	wild_mon SPECIES_ODDISH, 26
+	wild_mon SPECIES_ODDISH, 28
+	wild_mon SPECIES_GLOOM, 28
+	wild_mon SPECIES_WINGULL, 26
+	wild_mon SPECIES_WINGULL, 27
+	wild_mon SPECIES_WINGULL, 28
+	wild_mon SPECIES_KECLEON, 25
 
 	.align 2
 gRoute121_LandMonsInfo:: @ 8551410
@@ -1201,11 +1201,11 @@ gRoute121_LandMonsInfo:: @ 8551410
 
 	.align 2
 gRoute121_WaterMons:: @ 8551418
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute121_WaterMonsInfo:: @ 855142C
@@ -1214,16 +1214,16 @@ gRoute121_WaterMonsInfo:: @ 855142C
 
 	.align 2
 gRoute121_FishingMons:: @ 8551434
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute121_FishingMonsInfo:: @ 855145C
@@ -1232,11 +1232,11 @@ gRoute121_FishingMonsInfo:: @ 855145C
 
 	.align 2
 gRoute122_WaterMons:: @ 8551464
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute122_WaterMonsInfo:: @ 8551478
@@ -1245,16 +1245,16 @@ gRoute122_WaterMonsInfo:: @ 8551478
 
 	.align 2
 gRoute122_FishingMons:: @ 8551480
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute122_FishingMonsInfo:: @ 85514A8
@@ -1263,18 +1263,18 @@ gRoute122_FishingMonsInfo:: @ 85514A8
 
 	.align 2
 gRoute123_LandMons:: @ 85514B0
-	wild_mon POOCHYENA, 26
-	wild_mon SHUPPET, 26
-	wild_mon MIGHTYENA, 26
-	wild_mon SHUPPET, 28
-	wild_mon MIGHTYENA, 28
-	wild_mon ODDISH, 26
-	wild_mon ODDISH, 28
-	wild_mon GLOOM, 28
-	wild_mon WINGULL, 26
-	wild_mon WINGULL, 27
-	wild_mon WINGULL, 28
-	wild_mon KECLEON, 25
+	wild_mon SPECIES_POOCHYENA, 26
+	wild_mon SPECIES_SHUPPET, 26
+	wild_mon SPECIES_MIGHTYENA, 26
+	wild_mon SPECIES_SHUPPET, 28
+	wild_mon SPECIES_MIGHTYENA, 28
+	wild_mon SPECIES_ODDISH, 26
+	wild_mon SPECIES_ODDISH, 28
+	wild_mon SPECIES_GLOOM, 28
+	wild_mon SPECIES_WINGULL, 26
+	wild_mon SPECIES_WINGULL, 27
+	wild_mon SPECIES_WINGULL, 28
+	wild_mon SPECIES_KECLEON, 25
 
 	.align 2
 gRoute123_LandMonsInfo:: @ 85514E0
@@ -1283,11 +1283,11 @@ gRoute123_LandMonsInfo:: @ 85514E0
 
 	.align 2
 gRoute123_WaterMons:: @ 85514E8
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute123_WaterMonsInfo:: @ 85514FC
@@ -1296,16 +1296,16 @@ gRoute123_WaterMonsInfo:: @ 85514FC
 
 	.align 2
 gRoute123_FishingMons:: @ 8551504
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute123_FishingMonsInfo:: @ 855152C
@@ -1314,18 +1314,18 @@ gRoute123_FishingMonsInfo:: @ 855152C
 
 	.align 2
 gMtPyre_2F_LandMons:: @ 8551534
-	wild_mon SHUPPET, 27
-	wild_mon SHUPPET, 28
-	wild_mon SHUPPET, 26
-	wild_mon SHUPPET, 25
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
-	wild_mon SHUPPET, 23
-	wild_mon SHUPPET, 22
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 27
+	wild_mon SPECIES_SHUPPET, 28
+	wild_mon SPECIES_SHUPPET, 26
+	wild_mon SPECIES_SHUPPET, 25
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 23
+	wild_mon SPECIES_SHUPPET, 22
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
 
 	.align 2
 gMtPyre_2F_LandMonsInfo:: @ 8551564
@@ -1334,18 +1334,18 @@ gMtPyre_2F_LandMonsInfo:: @ 8551564
 
 	.align 2
 gMtPyre_3F_LandMons:: @ 855156C
-	wild_mon SHUPPET, 27
-	wild_mon SHUPPET, 28
-	wild_mon SHUPPET, 26
-	wild_mon SHUPPET, 25
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
-	wild_mon SHUPPET, 23
-	wild_mon SHUPPET, 22
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 27
+	wild_mon SPECIES_SHUPPET, 28
+	wild_mon SPECIES_SHUPPET, 26
+	wild_mon SPECIES_SHUPPET, 25
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 23
+	wild_mon SPECIES_SHUPPET, 22
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
 
 	.align 2
 gMtPyre_3F_LandMonsInfo:: @ 855159C
@@ -1354,18 +1354,18 @@ gMtPyre_3F_LandMonsInfo:: @ 855159C
 
 	.align 2
 gMtPyre_4F_LandMons:: @ 85515A4
-	wild_mon SHUPPET, 27
-	wild_mon SHUPPET, 28
-	wild_mon SHUPPET, 26
-	wild_mon SHUPPET, 25
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
-	wild_mon SHUPPET, 23
-	wild_mon SHUPPET, 22
-	wild_mon DUSKULL, 27
-	wild_mon DUSKULL, 27
-	wild_mon DUSKULL, 25
-	wild_mon DUSKULL, 29
+	wild_mon SPECIES_SHUPPET, 27
+	wild_mon SPECIES_SHUPPET, 28
+	wild_mon SPECIES_SHUPPET, 26
+	wild_mon SPECIES_SHUPPET, 25
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 23
+	wild_mon SPECIES_SHUPPET, 22
+	wild_mon SPECIES_DUSKULL, 27
+	wild_mon SPECIES_DUSKULL, 27
+	wild_mon SPECIES_DUSKULL, 25
+	wild_mon SPECIES_DUSKULL, 29
 
 	.align 2
 gMtPyre_4F_LandMonsInfo:: @ 85515D4
@@ -1374,18 +1374,18 @@ gMtPyre_4F_LandMonsInfo:: @ 85515D4
 
 	.align 2
 gMtPyre_5F_LandMons:: @ 85515DC
-	wild_mon SHUPPET, 27
-	wild_mon SHUPPET, 28
-	wild_mon SHUPPET, 26
-	wild_mon SHUPPET, 25
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
-	wild_mon SHUPPET, 23
-	wild_mon SHUPPET, 22
-	wild_mon DUSKULL, 27
-	wild_mon DUSKULL, 27
-	wild_mon DUSKULL, 25
-	wild_mon DUSKULL, 29
+	wild_mon SPECIES_SHUPPET, 27
+	wild_mon SPECIES_SHUPPET, 28
+	wild_mon SPECIES_SHUPPET, 26
+	wild_mon SPECIES_SHUPPET, 25
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 23
+	wild_mon SPECIES_SHUPPET, 22
+	wild_mon SPECIES_DUSKULL, 27
+	wild_mon SPECIES_DUSKULL, 27
+	wild_mon SPECIES_DUSKULL, 25
+	wild_mon SPECIES_DUSKULL, 29
 
 	.align 2
 gMtPyre_5F_LandMonsInfo:: @ 855160C
@@ -1394,18 +1394,18 @@ gMtPyre_5F_LandMonsInfo:: @ 855160C
 
 	.align 2
 gMtPyre_6F_LandMons:: @ 8551614
-	wild_mon SHUPPET, 27
-	wild_mon SHUPPET, 28
-	wild_mon SHUPPET, 26
-	wild_mon SHUPPET, 25
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 24
-	wild_mon SHUPPET, 23
-	wild_mon SHUPPET, 22
-	wild_mon DUSKULL, 27
-	wild_mon DUSKULL, 27
-	wild_mon DUSKULL, 25
-	wild_mon DUSKULL, 29
+	wild_mon SPECIES_SHUPPET, 27
+	wild_mon SPECIES_SHUPPET, 28
+	wild_mon SPECIES_SHUPPET, 26
+	wild_mon SPECIES_SHUPPET, 25
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 24
+	wild_mon SPECIES_SHUPPET, 23
+	wild_mon SPECIES_SHUPPET, 22
+	wild_mon SPECIES_DUSKULL, 27
+	wild_mon SPECIES_DUSKULL, 27
+	wild_mon SPECIES_DUSKULL, 25
+	wild_mon SPECIES_DUSKULL, 29
 
 	.align 2
 gMtPyre_6F_LandMonsInfo:: @ 8551644
@@ -1414,18 +1414,18 @@ gMtPyre_6F_LandMonsInfo:: @ 8551644
 
 	.align 2
 gMtPyre_Exterior_LandMons:: @ 855164C
-	wild_mon SHUPPET, 27
-	wild_mon SHUPPET, 27
-	wild_mon SHUPPET, 28
-	wild_mon SHUPPET, 29
-	wild_mon VULPIX, 29
-	wild_mon VULPIX, 27
-	wild_mon VULPIX, 29
-	wild_mon VULPIX, 25
-	wild_mon WINGULL, 27
-	wild_mon WINGULL, 27
-	wild_mon WINGULL, 26
-	wild_mon WINGULL, 28
+	wild_mon SPECIES_SHUPPET, 27
+	wild_mon SPECIES_SHUPPET, 27
+	wild_mon SPECIES_SHUPPET, 28
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_VULPIX, 29
+	wild_mon SPECIES_VULPIX, 27
+	wild_mon SPECIES_VULPIX, 29
+	wild_mon SPECIES_VULPIX, 25
+	wild_mon SPECIES_WINGULL, 27
+	wild_mon SPECIES_WINGULL, 27
+	wild_mon SPECIES_WINGULL, 26
+	wild_mon SPECIES_WINGULL, 28
 
 	.align 2
 gMtPyre_Exterior_LandMonsInfo:: @ 855167C
@@ -1434,18 +1434,18 @@ gMtPyre_Exterior_LandMonsInfo:: @ 855167C
 
 	.align 2
 gMtPyre_Summit_LandMons:: @ 8551684
-	wild_mon SHUPPET, 28
-	wild_mon SHUPPET, 29
-	wild_mon SHUPPET, 27
-	wild_mon SHUPPET, 26
-	wild_mon SHUPPET, 30
-	wild_mon SHUPPET, 25
-	wild_mon SHUPPET, 24
-	wild_mon DUSKULL, 28
-	wild_mon DUSKULL, 26
-	wild_mon DUSKULL, 30
-	wild_mon CHIMECHO, 28
-	wild_mon CHIMECHO, 28
+	wild_mon SPECIES_SHUPPET, 28
+	wild_mon SPECIES_SHUPPET, 29
+	wild_mon SPECIES_SHUPPET, 27
+	wild_mon SPECIES_SHUPPET, 26
+	wild_mon SPECIES_SHUPPET, 30
+	wild_mon SPECIES_SHUPPET, 25
+	wild_mon SPECIES_SHUPPET, 24
+	wild_mon SPECIES_DUSKULL, 28
+	wild_mon SPECIES_DUSKULL, 26
+	wild_mon SPECIES_DUSKULL, 30
+	wild_mon SPECIES_CHIMECHO, 28
+	wild_mon SPECIES_CHIMECHO, 28
 
 	.align 2
 gMtPyre_Summit_LandMonsInfo:: @ 85516B4
@@ -1454,18 +1454,18 @@ gMtPyre_Summit_LandMonsInfo:: @ 85516B4
 
 	.align 2
 gGraniteCave_StevensRoom_LandMons:: @ 85516BC
-	wild_mon ZUBAT, 7
-	wild_mon MAKUHITA, 8
-	wild_mon MAKUHITA, 7
-	wild_mon ZUBAT, 8
-	wild_mon MAKUHITA, 9
-	wild_mon ABRA, 8
-	wild_mon MAKUHITA, 10
-	wild_mon MAKUHITA, 6
-	wild_mon ARON, 7
-	wild_mon ARON, 8
-	wild_mon ARON, 7
-	wild_mon ARON, 8
+	wild_mon SPECIES_ZUBAT, 7
+	wild_mon SPECIES_MAKUHITA, 8
+	wild_mon SPECIES_MAKUHITA, 7
+	wild_mon SPECIES_ZUBAT, 8
+	wild_mon SPECIES_MAKUHITA, 9
+	wild_mon SPECIES_ABRA, 8
+	wild_mon SPECIES_MAKUHITA, 10
+	wild_mon SPECIES_MAKUHITA, 6
+	wild_mon SPECIES_ARON, 7
+	wild_mon SPECIES_ARON, 8
+	wild_mon SPECIES_ARON, 7
+	wild_mon SPECIES_ARON, 8
 
 	.align 2
 gGraniteCave_StevensRoom_LandMonsInfo:: @ 85516EC
@@ -1474,11 +1474,11 @@ gGraniteCave_StevensRoom_LandMonsInfo:: @ 85516EC
 
 	.align 2
 gRoute125_WaterMons:: @ 85516F4
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute125_WaterMonsInfo:: @ 8551708
@@ -1487,16 +1487,16 @@ gRoute125_WaterMonsInfo:: @ 8551708
 
 	.align 2
 gRoute125_FishingMons:: @ 8551710
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute125_FishingMonsInfo:: @ 8551738
@@ -1505,11 +1505,11 @@ gRoute125_FishingMonsInfo:: @ 8551738
 
 	.align 2
 gRoute126_WaterMons:: @ 8551740
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute126_WaterMonsInfo:: @ 8551754
@@ -1518,16 +1518,16 @@ gRoute126_WaterMonsInfo:: @ 8551754
 
 	.align 2
 gRoute126_FishingMons:: @ 855175C
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute126_FishingMonsInfo:: @ 8551784
@@ -1536,11 +1536,11 @@ gRoute126_FishingMonsInfo:: @ 8551784
 
 	.align 2
 gRoute127_WaterMons:: @ 855178C
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute127_WaterMonsInfo:: @ 85517A0
@@ -1549,16 +1549,16 @@ gRoute127_WaterMonsInfo:: @ 85517A0
 
 	.align 2
 gRoute127_FishingMons:: @ 85517A8
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute127_FishingMonsInfo:: @ 85517D0
@@ -1567,11 +1567,11 @@ gRoute127_FishingMonsInfo:: @ 85517D0
 
 	.align 2
 gRoute128_WaterMons:: @ 85517D8
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute128_WaterMonsInfo:: @ 85517EC
@@ -1580,16 +1580,16 @@ gRoute128_WaterMonsInfo:: @ 85517EC
 
 	.align 2
 gRoute128_FishingMons:: @ 85517F4
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon LUVDISC, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon LUVDISC, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon CORSOLA, 30, 35
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_LUVDISC, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_LUVDISC, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_CORSOLA, 30, 35
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute128_FishingMonsInfo:: @ 855181C
@@ -1598,11 +1598,11 @@ gRoute128_FishingMonsInfo:: @ 855181C
 
 	.align 2
 gRoute129_WaterMons:: @ 8551824
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon WAILORD, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_WAILORD, 25, 30
 
 	.align 2
 gRoute129_WaterMonsInfo:: @ 8551838
@@ -1611,16 +1611,16 @@ gRoute129_WaterMonsInfo:: @ 8551838
 
 	.align 2
 gRoute129_FishingMons:: @ 8551840
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute129_FishingMonsInfo:: @ 8551868
@@ -1629,18 +1629,18 @@ gRoute129_FishingMonsInfo:: @ 8551868
 
 	.align 2
 gRoute130_LandMons:: @ 8551870
-	wild_mon WYNAUT, 30
-	wild_mon WYNAUT, 35
-	wild_mon WYNAUT, 25
-	wild_mon WYNAUT, 40
-	wild_mon WYNAUT, 20
-	wild_mon WYNAUT, 45
-	wild_mon WYNAUT, 15
-	wild_mon WYNAUT, 50
-	wild_mon WYNAUT, 10
-	wild_mon WYNAUT, 5
-	wild_mon WYNAUT, 10
-	wild_mon WYNAUT, 5
+	wild_mon SPECIES_WYNAUT, 30
+	wild_mon SPECIES_WYNAUT, 35
+	wild_mon SPECIES_WYNAUT, 25
+	wild_mon SPECIES_WYNAUT, 40
+	wild_mon SPECIES_WYNAUT, 20
+	wild_mon SPECIES_WYNAUT, 45
+	wild_mon SPECIES_WYNAUT, 15
+	wild_mon SPECIES_WYNAUT, 50
+	wild_mon SPECIES_WYNAUT, 10
+	wild_mon SPECIES_WYNAUT, 5
+	wild_mon SPECIES_WYNAUT, 10
+	wild_mon SPECIES_WYNAUT, 5
 
 	.align 2
 gRoute130_LandMonsInfo:: @ 85518A0
@@ -1649,11 +1649,11 @@ gRoute130_LandMonsInfo:: @ 85518A0
 
 	.align 2
 gRoute130_WaterMons:: @ 85518A8
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute130_WaterMonsInfo:: @ 85518BC
@@ -1662,16 +1662,16 @@ gRoute130_WaterMonsInfo:: @ 85518BC
 
 	.align 2
 gRoute130_FishingMons:: @ 85518C4
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute130_FishingMonsInfo:: @ 85518EC
@@ -1680,11 +1680,11 @@ gRoute130_FishingMonsInfo:: @ 85518EC
 
 	.align 2
 gRoute131_WaterMons:: @ 85518F4
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute131_WaterMonsInfo:: @ 8551908
@@ -1693,16 +1693,16 @@ gRoute131_WaterMonsInfo:: @ 8551908
 
 	.align 2
 gRoute131_FishingMons:: @ 8551910
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute131_FishingMonsInfo:: @ 8551938
@@ -1711,11 +1711,11 @@ gRoute131_FishingMonsInfo:: @ 8551938
 
 	.align 2
 gRoute132_WaterMons:: @ 8551940
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute132_WaterMonsInfo:: @ 8551954
@@ -1724,16 +1724,16 @@ gRoute132_WaterMonsInfo:: @ 8551954
 
 	.align 2
 gRoute132_FishingMons:: @ 855195C
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon HORSEA, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_HORSEA, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute132_FishingMonsInfo:: @ 8551984
@@ -1742,11 +1742,11 @@ gRoute132_FishingMonsInfo:: @ 8551984
 
 	.align 2
 gRoute133_WaterMons:: @ 855198C
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute133_WaterMonsInfo:: @ 85519A0
@@ -1755,16 +1755,16 @@ gRoute133_WaterMonsInfo:: @ 85519A0
 
 	.align 2
 gRoute133_FishingMons:: @ 85519A8
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon HORSEA, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_HORSEA, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute133_FishingMonsInfo:: @ 85519D0
@@ -1773,11 +1773,11 @@ gRoute133_FishingMonsInfo:: @ 85519D0
 
 	.align 2
 gRoute134_WaterMons:: @ 85519D8
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gRoute134_WaterMonsInfo:: @ 85519EC
@@ -1786,16 +1786,16 @@ gRoute134_WaterMonsInfo:: @ 85519EC
 
 	.align 2
 gRoute134_FishingMons:: @ 85519F4
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon HORSEA, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_HORSEA, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gRoute134_FishingMonsInfo:: @ 8551A1C
@@ -1804,11 +1804,11 @@ gRoute134_FishingMonsInfo:: @ 8551A1C
 
 	.align 2
 gAbandonedShip_HiddenFloorCorridors_WaterMons:: @ 8551A24
-	wild_mon TENTACOOL, 5, 35
-	wild_mon TENTACOOL, 5, 35
-	wild_mon TENTACOOL, 5, 35
-	wild_mon TENTACOOL, 5, 35
-	wild_mon TENTACRUEL, 30, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_TENTACRUEL, 30, 35
 
 	.align 2
 gAbandonedShip_HiddenFloorCorridors_WaterMonsInfo:: @ 8551A38
@@ -1817,16 +1817,16 @@ gAbandonedShip_HiddenFloorCorridors_WaterMonsInfo:: @ 8551A38
 
 	.align 2
 gAbandonedShip_HiddenFloorCorridors_FishingMons:: @ 8551A40
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon TENTACOOL, 25, 30
-	wild_mon TENTACOOL, 30, 35
-	wild_mon TENTACRUEL, 30, 35
-	wild_mon TENTACRUEL, 25, 30
-	wild_mon TENTACRUEL, 20, 25
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_TENTACOOL, 25, 30
+	wild_mon SPECIES_TENTACOOL, 30, 35
+	wild_mon SPECIES_TENTACRUEL, 30, 35
+	wild_mon SPECIES_TENTACRUEL, 25, 30
+	wild_mon SPECIES_TENTACRUEL, 20, 25
 
 	.align 2
 gAbandonedShip_HiddenFloorCorridors_FishingMonsInfo:: @ 8551A68
@@ -1835,18 +1835,18 @@ gAbandonedShip_HiddenFloorCorridors_FishingMonsInfo:: @ 8551A68
 
 	.align 2
 gSeafloorCavern_Room1_LandMons:: @ 8551A70
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 28
-	wild_mon ZUBAT, 29
-	wild_mon ZUBAT, 34
-	wild_mon ZUBAT, 35
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_ZUBAT, 29
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_ZUBAT, 35
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gSeafloorCavern_Room1_LandMonsInfo:: @ 8551AA0
@@ -1855,18 +1855,18 @@ gSeafloorCavern_Room1_LandMonsInfo:: @ 8551AA0
 
 	.align 2
 gSeafloorCavern_Room2_LandMons:: @ 8551AA8
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 28
-	wild_mon ZUBAT, 29
-	wild_mon ZUBAT, 34
-	wild_mon ZUBAT, 35
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_ZUBAT, 29
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_ZUBAT, 35
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gSeafloorCavern_Room2_LandMonsInfo:: @ 8551AD8
@@ -1875,18 +1875,18 @@ gSeafloorCavern_Room2_LandMonsInfo:: @ 8551AD8
 
 	.align 2
 gSeafloorCavern_Room3_LandMons:: @ 8551AE0
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 28
-	wild_mon ZUBAT, 29
-	wild_mon ZUBAT, 34
-	wild_mon ZUBAT, 35
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_ZUBAT, 29
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_ZUBAT, 35
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gSeafloorCavern_Room3_LandMonsInfo:: @ 8551B10
@@ -1895,18 +1895,18 @@ gSeafloorCavern_Room3_LandMonsInfo:: @ 8551B10
 
 	.align 2
 gSeafloorCavern_Room4_LandMons:: @ 8551B18
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 28
-	wild_mon ZUBAT, 29
-	wild_mon ZUBAT, 34
-	wild_mon ZUBAT, 35
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_ZUBAT, 29
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_ZUBAT, 35
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gSeafloorCavern_Room4_LandMonsInfo:: @ 8551B48
@@ -1915,18 +1915,18 @@ gSeafloorCavern_Room4_LandMonsInfo:: @ 8551B48
 
 	.align 2
 gSeafloorCavern_Room5_LandMons:: @ 8551B50
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 28
-	wild_mon ZUBAT, 29
-	wild_mon ZUBAT, 34
-	wild_mon ZUBAT, 35
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_ZUBAT, 29
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_ZUBAT, 35
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gSeafloorCavern_Room5_LandMonsInfo:: @ 8551B80
@@ -1935,18 +1935,18 @@ gSeafloorCavern_Room5_LandMonsInfo:: @ 8551B80
 
 	.align 2
 gSeafloorCavern_Room6_LandMons:: @ 8551B88
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 28
-	wild_mon ZUBAT, 29
-	wild_mon ZUBAT, 34
-	wild_mon ZUBAT, 35
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_ZUBAT, 29
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_ZUBAT, 35
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gSeafloorCavern_Room6_LandMonsInfo:: @ 8551BB8
@@ -1955,11 +1955,11 @@ gSeafloorCavern_Room6_LandMonsInfo:: @ 8551BB8
 
 	.align 2
 gSeafloorCavern_Room6_WaterMons:: @ 8551BC0
-	wild_mon TENTACOOL, 5, 35
-	wild_mon ZUBAT, 5, 35
-	wild_mon ZUBAT, 30, 35
-	wild_mon GOLBAT, 30, 35
-	wild_mon GOLBAT, 30, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_ZUBAT, 5, 35
+	wild_mon SPECIES_ZUBAT, 30, 35
+	wild_mon SPECIES_GOLBAT, 30, 35
+	wild_mon SPECIES_GOLBAT, 30, 35
 
 	.align 2
 gSeafloorCavern_Room6_WaterMonsInfo:: @ 8551BD4
@@ -1968,16 +1968,16 @@ gSeafloorCavern_Room6_WaterMonsInfo:: @ 8551BD4
 
 	.align 2
 gSeafloorCavern_Room6_FishingMons:: @ 8551BDC
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gSeafloorCavern_Room6_FishingMonsInfo:: @ 8551C04
@@ -1986,18 +1986,18 @@ gSeafloorCavern_Room6_FishingMonsInfo:: @ 8551C04
 
 	.align 2
 gSeafloorCavern_Room7_LandMons:: @ 8551C0C
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 28
-	wild_mon ZUBAT, 29
-	wild_mon ZUBAT, 34
-	wild_mon ZUBAT, 35
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_ZUBAT, 29
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_ZUBAT, 35
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gSeafloorCavern_Room7_LandMonsInfo:: @ 8551C3C
@@ -2006,11 +2006,11 @@ gSeafloorCavern_Room7_LandMonsInfo:: @ 8551C3C
 
 	.align 2
 gSeafloorCavern_Room7_WaterMons:: @ 8551C44
-	wild_mon TENTACOOL, 5, 35
-	wild_mon ZUBAT, 5, 35
-	wild_mon ZUBAT, 30, 35
-	wild_mon GOLBAT, 30, 35
-	wild_mon GOLBAT, 30, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_ZUBAT, 5, 35
+	wild_mon SPECIES_ZUBAT, 30, 35
+	wild_mon SPECIES_GOLBAT, 30, 35
+	wild_mon SPECIES_GOLBAT, 30, 35
 
 	.align 2
 gSeafloorCavern_Room7_WaterMonsInfo:: @ 8551C58
@@ -2019,16 +2019,16 @@ gSeafloorCavern_Room7_WaterMonsInfo:: @ 8551C58
 
 	.align 2
 gSeafloorCavern_Room7_FishingMons:: @ 8551C60
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gSeafloorCavern_Room7_FishingMonsInfo:: @ 8551C88
@@ -2037,18 +2037,18 @@ gSeafloorCavern_Room7_FishingMonsInfo:: @ 8551C88
 
 	.align 2
 gSeafloorCavern_Room8_LandMons:: @ 8551C90
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 28
-	wild_mon ZUBAT, 29
-	wild_mon ZUBAT, 34
-	wild_mon ZUBAT, 35
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_ZUBAT, 29
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_ZUBAT, 35
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gSeafloorCavern_Room8_LandMonsInfo:: @ 8551CC0
@@ -2057,11 +2057,11 @@ gSeafloorCavern_Room8_LandMonsInfo:: @ 8551CC0
 
 	.align 2
 gSeafloorCavern_Entrance_WaterMons:: @ 8551CC8
-	wild_mon TENTACOOL, 5, 35
-	wild_mon ZUBAT, 5, 35
-	wild_mon ZUBAT, 30, 35
-	wild_mon GOLBAT, 30, 35
-	wild_mon GOLBAT, 30, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_ZUBAT, 5, 35
+	wild_mon SPECIES_ZUBAT, 30, 35
+	wild_mon SPECIES_GOLBAT, 30, 35
+	wild_mon SPECIES_GOLBAT, 30, 35
 
 	.align 2
 gSeafloorCavern_Entrance_WaterMonsInfo:: @ 8551CDC
@@ -2070,16 +2070,16 @@ gSeafloorCavern_Entrance_WaterMonsInfo:: @ 8551CDC
 
 	.align 2
 gSeafloorCavern_Entrance_FishingMons:: @ 8551CE4
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gSeafloorCavern_Entrance_FishingMonsInfo:: @ 8551D0C
@@ -2088,18 +2088,18 @@ gSeafloorCavern_Entrance_FishingMonsInfo:: @ 8551D0C
 
 	.align 2
 gCaveOfOrigin_Entrance_LandMons:: @ 8551D14
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 28
-	wild_mon ZUBAT, 29
-	wild_mon ZUBAT, 34
-	wild_mon ZUBAT, 35
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_ZUBAT, 29
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_ZUBAT, 35
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gCaveOfOrigin_Entrance_LandMonsInfo:: @ 8551D44
@@ -2108,18 +2108,18 @@ gCaveOfOrigin_Entrance_LandMonsInfo:: @ 8551D44
 
 	.align 2
 gCaveOfOrigin_1F_LandMons:: @ 8551D4C
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon SABLEYE, 30
-	wild_mon SABLEYE, 32
-	wild_mon SABLEYE, 34
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 34
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_SABLEYE, 30
+	wild_mon SPECIES_SABLEYE, 32
+	wild_mon SPECIES_SABLEYE, 34
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gCaveOfOrigin_1F_LandMonsInfo:: @ 8551D7C
@@ -2128,18 +2128,18 @@ gCaveOfOrigin_1F_LandMonsInfo:: @ 8551D7C
 
 	.align 2
 gCaveOfOrigin_UnusedRubySapphireMap1_LandMons:: @ 8551D84
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon SABLEYE, 30
-	wild_mon SABLEYE, 32
-	wild_mon SABLEYE, 34
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 34
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_SABLEYE, 30
+	wild_mon SPECIES_SABLEYE, 32
+	wild_mon SPECIES_SABLEYE, 34
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gCaveOfOrigin_UnusedRubySapphireMap1_LandMonsInfo:: @ 8551DB4
@@ -2148,18 +2148,18 @@ gCaveOfOrigin_UnusedRubySapphireMap1_LandMonsInfo:: @ 8551DB4
 
 	.align 2
 gCaveOfOrigin_UnusedRubySapphireMap2_LandMons:: @ 8551DBC
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon SABLEYE, 30
-	wild_mon SABLEYE, 32
-	wild_mon SABLEYE, 34
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 34
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_SABLEYE, 30
+	wild_mon SPECIES_SABLEYE, 32
+	wild_mon SPECIES_SABLEYE, 34
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gCaveOfOrigin_UnusedRubySapphireMap2_LandMonsInfo:: @ 8551DEC
@@ -2168,18 +2168,18 @@ gCaveOfOrigin_UnusedRubySapphireMap2_LandMonsInfo:: @ 8551DEC
 
 	.align 2
 gCaveOfOrigin_UnusedRubySapphireMap3_LandMons:: @ 8551DF4
-	wild_mon ZUBAT, 30
-	wild_mon ZUBAT, 31
-	wild_mon ZUBAT, 32
-	wild_mon SABLEYE, 30
-	wild_mon SABLEYE, 32
-	wild_mon SABLEYE, 34
-	wild_mon ZUBAT, 33
-	wild_mon ZUBAT, 34
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 36
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_ZUBAT, 31
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_SABLEYE, 30
+	wild_mon SPECIES_SABLEYE, 32
+	wild_mon SPECIES_SABLEYE, 34
+	wild_mon SPECIES_ZUBAT, 33
+	wild_mon SPECIES_ZUBAT, 34
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 36
 
 	.align 2
 gCaveOfOrigin_UnusedRubySapphireMap3_LandMonsInfo:: @ 8551E24
@@ -2188,18 +2188,18 @@ gCaveOfOrigin_UnusedRubySapphireMap3_LandMonsInfo:: @ 8551E24
 
 	.align 2
 gNewMauville_Entrance_LandMons:: @ 8551E2C
-	wild_mon VOLTORB, 24
-	wild_mon MAGNEMITE, 24
-	wild_mon VOLTORB, 25
-	wild_mon MAGNEMITE, 25
-	wild_mon VOLTORB, 23
-	wild_mon MAGNEMITE, 23
-	wild_mon VOLTORB, 26
-	wild_mon MAGNEMITE, 26
-	wild_mon VOLTORB, 22
-	wild_mon MAGNEMITE, 22
-	wild_mon VOLTORB, 22
-	wild_mon MAGNEMITE, 22
+	wild_mon SPECIES_VOLTORB, 24
+	wild_mon SPECIES_MAGNEMITE, 24
+	wild_mon SPECIES_VOLTORB, 25
+	wild_mon SPECIES_MAGNEMITE, 25
+	wild_mon SPECIES_VOLTORB, 23
+	wild_mon SPECIES_MAGNEMITE, 23
+	wild_mon SPECIES_VOLTORB, 26
+	wild_mon SPECIES_MAGNEMITE, 26
+	wild_mon SPECIES_VOLTORB, 22
+	wild_mon SPECIES_MAGNEMITE, 22
+	wild_mon SPECIES_VOLTORB, 22
+	wild_mon SPECIES_MAGNEMITE, 22
 
 	.align 2
 gNewMauville_Entrance_LandMonsInfo:: @ 8551E5C
@@ -2208,18 +2208,18 @@ gNewMauville_Entrance_LandMonsInfo:: @ 8551E5C
 
 	.align 2
 gSafariZone_Southwest_LandMons:: @ 8551E64
-	wild_mon ODDISH, 25
-	wild_mon ODDISH, 27
-	wild_mon GIRAFARIG, 25
-	wild_mon GIRAFARIG, 27
-	wild_mon NATU, 25
-	wild_mon DODUO, 27
-	wild_mon GLOOM, 25
-	wild_mon WOBBUFFET, 27
-	wild_mon PIKACHU, 25
-	wild_mon WOBBUFFET, 27
-	wild_mon PIKACHU, 27
-	wild_mon WOBBUFFET, 29
+	wild_mon SPECIES_ODDISH, 25
+	wild_mon SPECIES_ODDISH, 27
+	wild_mon SPECIES_GIRAFARIG, 25
+	wild_mon SPECIES_GIRAFARIG, 27
+	wild_mon SPECIES_NATU, 25
+	wild_mon SPECIES_DODUO, 27
+	wild_mon SPECIES_GLOOM, 25
+	wild_mon SPECIES_WOBBUFFET, 27
+	wild_mon SPECIES_PIKACHU, 25
+	wild_mon SPECIES_WOBBUFFET, 27
+	wild_mon SPECIES_PIKACHU, 27
+	wild_mon SPECIES_WOBBUFFET, 29
 
 	.align 2
 gSafariZone_Southwest_LandMonsInfo:: @ 8551E94
@@ -2228,11 +2228,11 @@ gSafariZone_Southwest_LandMonsInfo:: @ 8551E94
 
 	.align 2
 gSafariZone_Southwest_WaterMons:: @ 8551E9C
-	wild_mon PSYDUCK, 20, 30
-	wild_mon PSYDUCK, 20, 30
-	wild_mon PSYDUCK, 30, 35
-	wild_mon PSYDUCK, 30, 35
-	wild_mon PSYDUCK, 30, 35
+	wild_mon SPECIES_PSYDUCK, 20, 30
+	wild_mon SPECIES_PSYDUCK, 20, 30
+	wild_mon SPECIES_PSYDUCK, 30, 35
+	wild_mon SPECIES_PSYDUCK, 30, 35
+	wild_mon SPECIES_PSYDUCK, 30, 35
 
 	.align 2
 gSafariZone_Southwest_WaterMonsInfo:: @ 8551EB0
@@ -2241,16 +2241,16 @@ gSafariZone_Southwest_WaterMonsInfo:: @ 8551EB0
 
 	.align 2
 gSafariZone_Southwest_FishingMons:: @ 8551EB8
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 25
-	wild_mon GOLDEEN, 10, 30
-	wild_mon GOLDEEN, 25, 30
-	wild_mon GOLDEEN, 30, 35
-	wild_mon SEAKING, 30, 35
-	wild_mon SEAKING, 35, 40
-	wild_mon SEAKING, 25, 30
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 25
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_GOLDEEN, 25, 30
+	wild_mon SPECIES_GOLDEEN, 30, 35
+	wild_mon SPECIES_SEAKING, 30, 35
+	wild_mon SPECIES_SEAKING, 35, 40
+	wild_mon SPECIES_SEAKING, 25, 30
 
 	.align 2
 gSafariZone_Southwest_FishingMonsInfo:: @ 8551EE0
@@ -2259,18 +2259,18 @@ gSafariZone_Southwest_FishingMonsInfo:: @ 8551EE0
 
 	.align 2
 gSafariZone_North_LandMons:: @ 8551EE8
-	wild_mon PHANPY, 27
-	wild_mon ODDISH, 27
-	wild_mon PHANPY, 29
-	wild_mon ODDISH, 29
-	wild_mon NATU, 27
-	wild_mon GLOOM, 29
-	wild_mon GLOOM, 31
-	wild_mon NATU, 29
-	wild_mon XATU, 29
-	wild_mon HERACROSS, 27
-	wild_mon XATU, 31
-	wild_mon HERACROSS, 29
+	wild_mon SPECIES_PHANPY, 27
+	wild_mon SPECIES_ODDISH, 27
+	wild_mon SPECIES_PHANPY, 29
+	wild_mon SPECIES_ODDISH, 29
+	wild_mon SPECIES_NATU, 27
+	wild_mon SPECIES_GLOOM, 29
+	wild_mon SPECIES_GLOOM, 31
+	wild_mon SPECIES_NATU, 29
+	wild_mon SPECIES_XATU, 29
+	wild_mon SPECIES_HERACROSS, 27
+	wild_mon SPECIES_XATU, 31
+	wild_mon SPECIES_HERACROSS, 29
 
 	.align 2
 gSafariZone_North_LandMonsInfo:: @ 8551F18
@@ -2279,11 +2279,11 @@ gSafariZone_North_LandMonsInfo:: @ 8551F18
 
 	.align 2
 gSafariZone_North_RockSmashMons:: @ 8551F20
-	wild_mon GEODUDE, 10, 15
-	wild_mon GEODUDE, 5, 10
-	wild_mon GEODUDE, 15, 20
-	wild_mon GEODUDE, 20, 25
-	wild_mon GEODUDE, 25, 30
+	wild_mon SPECIES_GEODUDE, 10, 15
+	wild_mon SPECIES_GEODUDE, 5, 10
+	wild_mon SPECIES_GEODUDE, 15, 20
+	wild_mon SPECIES_GEODUDE, 20, 25
+	wild_mon SPECIES_GEODUDE, 25, 30
 
 	.align 2
 gSafariZone_North_RockSmashMonsInfo:: @ 8551F34
@@ -2292,18 +2292,18 @@ gSafariZone_North_RockSmashMonsInfo:: @ 8551F34
 
 	.align 2
 gSafariZone_Northwest_LandMons:: @ 8551F3C
-	wild_mon RHYHORN, 27
-	wild_mon ODDISH, 27
-	wild_mon RHYHORN, 29
-	wild_mon ODDISH, 29
-	wild_mon DODUO, 27
-	wild_mon GLOOM, 29
-	wild_mon GLOOM, 31
-	wild_mon DODUO, 29
-	wild_mon DODRIO, 29
-	wild_mon PINSIR, 27
-	wild_mon DODRIO, 31
-	wild_mon PINSIR, 29
+	wild_mon SPECIES_RHYHORN, 27
+	wild_mon SPECIES_ODDISH, 27
+	wild_mon SPECIES_RHYHORN, 29
+	wild_mon SPECIES_ODDISH, 29
+	wild_mon SPECIES_DODUO, 27
+	wild_mon SPECIES_GLOOM, 29
+	wild_mon SPECIES_GLOOM, 31
+	wild_mon SPECIES_DODUO, 29
+	wild_mon SPECIES_DODRIO, 29
+	wild_mon SPECIES_PINSIR, 27
+	wild_mon SPECIES_DODRIO, 31
+	wild_mon SPECIES_PINSIR, 29
 
 	.align 2
 gSafariZone_Northwest_LandMonsInfo:: @ 8551F6C
@@ -2312,11 +2312,11 @@ gSafariZone_Northwest_LandMonsInfo:: @ 8551F6C
 
 	.align 2
 gSafariZone_Northwest_WaterMons:: @ 8551F74
-	wild_mon PSYDUCK, 20, 30
-	wild_mon PSYDUCK, 20, 30
-	wild_mon PSYDUCK, 30, 35
-	wild_mon GOLDUCK, 30, 35
-	wild_mon GOLDUCK, 25, 40
+	wild_mon SPECIES_PSYDUCK, 20, 30
+	wild_mon SPECIES_PSYDUCK, 20, 30
+	wild_mon SPECIES_PSYDUCK, 30, 35
+	wild_mon SPECIES_GOLDUCK, 30, 35
+	wild_mon SPECIES_GOLDUCK, 25, 40
 
 	.align 2
 gSafariZone_Northwest_WaterMonsInfo:: @ 8551F88
@@ -2325,16 +2325,16 @@ gSafariZone_Northwest_WaterMonsInfo:: @ 8551F88
 
 	.align 2
 gSafariZone_Northwest_FishingMons:: @ 8551F90
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 25
-	wild_mon GOLDEEN, 10, 30
-	wild_mon GOLDEEN, 25, 30
-	wild_mon GOLDEEN, 30, 35
-	wild_mon SEAKING, 30, 35
-	wild_mon SEAKING, 35, 40
-	wild_mon SEAKING, 25, 30
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 25
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_GOLDEEN, 25, 30
+	wild_mon SPECIES_GOLDEEN, 30, 35
+	wild_mon SPECIES_SEAKING, 30, 35
+	wild_mon SPECIES_SEAKING, 35, 40
+	wild_mon SPECIES_SEAKING, 25, 30
 
 	.align 2
 gSafariZone_Northwest_FishingMonsInfo:: @ 8551FB8
@@ -2343,18 +2343,18 @@ gSafariZone_Northwest_FishingMonsInfo:: @ 8551FB8
 
 	.align 2
 gVictoryRoad_B1F_LandMons:: @ 8551FC0
-	wild_mon GOLBAT, 40
-	wild_mon HARIYAMA, 40
-	wild_mon LAIRON, 40
-	wild_mon LAIRON, 40
-	wild_mon GOLBAT, 38
-	wild_mon HARIYAMA, 38
-	wild_mon GOLBAT, 42
-	wild_mon HARIYAMA, 42
-	wild_mon LAIRON, 42
-	wild_mon MAWILE, 38
-	wild_mon LAIRON, 42
-	wild_mon MAWILE, 38
+	wild_mon SPECIES_GOLBAT, 40
+	wild_mon SPECIES_HARIYAMA, 40
+	wild_mon SPECIES_LAIRON, 40
+	wild_mon SPECIES_LAIRON, 40
+	wild_mon SPECIES_GOLBAT, 38
+	wild_mon SPECIES_HARIYAMA, 38
+	wild_mon SPECIES_GOLBAT, 42
+	wild_mon SPECIES_HARIYAMA, 42
+	wild_mon SPECIES_LAIRON, 42
+	wild_mon SPECIES_MAWILE, 38
+	wild_mon SPECIES_LAIRON, 42
+	wild_mon SPECIES_MAWILE, 38
 
 	.align 2
 gVictoryRoad_B1F_LandMonsInfo:: @ 8551FF0
@@ -2363,11 +2363,11 @@ gVictoryRoad_B1F_LandMonsInfo:: @ 8551FF0
 
 	.align 2
 gVictoryRoad_B1F_RockSmashMons:: @ 8551FF8
-	wild_mon GRAVELER, 30, 40
-	wild_mon GEODUDE, 30, 40
-	wild_mon GRAVELER, 35, 40
-	wild_mon GRAVELER, 35, 40
-	wild_mon GRAVELER, 35, 40
+	wild_mon SPECIES_GRAVELER, 30, 40
+	wild_mon SPECIES_GEODUDE, 30, 40
+	wild_mon SPECIES_GRAVELER, 35, 40
+	wild_mon SPECIES_GRAVELER, 35, 40
+	wild_mon SPECIES_GRAVELER, 35, 40
 
 	.align 2
 gVictoryRoad_B1F_RockSmashMonsInfo:: @ 855200C
@@ -2376,18 +2376,18 @@ gVictoryRoad_B1F_RockSmashMonsInfo:: @ 855200C
 
 	.align 2
 gVictoryRoad_B2F_LandMons:: @ 8552014
-	wild_mon GOLBAT, 40
-	wild_mon SABLEYE, 40
-	wild_mon LAIRON, 40
-	wild_mon LAIRON, 40
-	wild_mon GOLBAT, 42
-	wild_mon SABLEYE, 42
-	wild_mon GOLBAT, 44
-	wild_mon SABLEYE, 44
-	wild_mon LAIRON, 42
-	wild_mon MAWILE, 42
-	wild_mon LAIRON, 44
-	wild_mon MAWILE, 44
+	wild_mon SPECIES_GOLBAT, 40
+	wild_mon SPECIES_SABLEYE, 40
+	wild_mon SPECIES_LAIRON, 40
+	wild_mon SPECIES_LAIRON, 40
+	wild_mon SPECIES_GOLBAT, 42
+	wild_mon SPECIES_SABLEYE, 42
+	wild_mon SPECIES_GOLBAT, 44
+	wild_mon SPECIES_SABLEYE, 44
+	wild_mon SPECIES_LAIRON, 42
+	wild_mon SPECIES_MAWILE, 42
+	wild_mon SPECIES_LAIRON, 44
+	wild_mon SPECIES_MAWILE, 44
 
 	.align 2
 gVictoryRoad_B2F_LandMonsInfo:: @ 8552044
@@ -2396,11 +2396,11 @@ gVictoryRoad_B2F_LandMonsInfo:: @ 8552044
 
 	.align 2
 gVictoryRoad_B2F_WaterMons:: @ 855204C
-	wild_mon GOLBAT, 30, 35
-	wild_mon GOLBAT, 25, 30
-	wild_mon GOLBAT, 35, 40
-	wild_mon GOLBAT, 35, 40
-	wild_mon GOLBAT, 35, 40
+	wild_mon SPECIES_GOLBAT, 30, 35
+	wild_mon SPECIES_GOLBAT, 25, 30
+	wild_mon SPECIES_GOLBAT, 35, 40
+	wild_mon SPECIES_GOLBAT, 35, 40
+	wild_mon SPECIES_GOLBAT, 35, 40
 
 	.align 2
 gVictoryRoad_B2F_WaterMonsInfo:: @ 8552060
@@ -2409,16 +2409,16 @@ gVictoryRoad_B2F_WaterMonsInfo:: @ 8552060
 
 	.align 2
 gVictoryRoad_B2F_FishingMons:: @ 8552068
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon BARBOACH, 10, 30
-	wild_mon BARBOACH, 25, 30
-	wild_mon BARBOACH, 30, 35
-	wild_mon WHISCASH, 30, 35
-	wild_mon WHISCASH, 35, 40
-	wild_mon WHISCASH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_BARBOACH, 10, 30
+	wild_mon SPECIES_BARBOACH, 25, 30
+	wild_mon SPECIES_BARBOACH, 30, 35
+	wild_mon SPECIES_WHISCASH, 30, 35
+	wild_mon SPECIES_WHISCASH, 35, 40
+	wild_mon SPECIES_WHISCASH, 40, 45
 
 	.align 2
 gVictoryRoad_B2F_FishingMonsInfo:: @ 8552090
@@ -2427,18 +2427,18 @@ gVictoryRoad_B2F_FishingMonsInfo:: @ 8552090
 
 	.align 2
 gMeteorFalls_1F_1R_LandMons:: @ 8552098
-	wild_mon ZUBAT, 16
-	wild_mon ZUBAT, 17
-	wild_mon ZUBAT, 18
-	wild_mon ZUBAT, 15
-	wild_mon ZUBAT, 14
-	wild_mon SOLROCK, 16
-	wild_mon SOLROCK, 18
-	wild_mon SOLROCK, 14
-	wild_mon ZUBAT, 19
-	wild_mon ZUBAT, 20
-	wild_mon ZUBAT, 19
-	wild_mon ZUBAT, 20
+	wild_mon SPECIES_ZUBAT, 16
+	wild_mon SPECIES_ZUBAT, 17
+	wild_mon SPECIES_ZUBAT, 18
+	wild_mon SPECIES_ZUBAT, 15
+	wild_mon SPECIES_ZUBAT, 14
+	wild_mon SPECIES_SOLROCK, 16
+	wild_mon SPECIES_SOLROCK, 18
+	wild_mon SPECIES_SOLROCK, 14
+	wild_mon SPECIES_ZUBAT, 19
+	wild_mon SPECIES_ZUBAT, 20
+	wild_mon SPECIES_ZUBAT, 19
+	wild_mon SPECIES_ZUBAT, 20
 
 	.align 2
 gMeteorFalls_1F_1R_LandMonsInfo:: @ 85520C8
@@ -2447,11 +2447,11 @@ gMeteorFalls_1F_1R_LandMonsInfo:: @ 85520C8
 
 	.align 2
 gMeteorFalls_1F_1R_WaterMons:: @ 85520D0
-	wild_mon ZUBAT, 5, 35
-	wild_mon ZUBAT, 30, 35
-	wild_mon SOLROCK, 25, 35
-	wild_mon SOLROCK, 15, 25
-	wild_mon SOLROCK, 5, 15
+	wild_mon SPECIES_ZUBAT, 5, 35
+	wild_mon SPECIES_ZUBAT, 30, 35
+	wild_mon SPECIES_SOLROCK, 25, 35
+	wild_mon SPECIES_SOLROCK, 15, 25
+	wild_mon SPECIES_SOLROCK, 5, 15
 
 	.align 2
 gMeteorFalls_1F_1R_WaterMonsInfo:: @ 85520E4
@@ -2460,16 +2460,16 @@ gMeteorFalls_1F_1R_WaterMonsInfo:: @ 85520E4
 
 	.align 2
 gMeteorFalls_1F_1R_FishingMons:: @ 85520EC
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon BARBOACH, 10, 30
-	wild_mon BARBOACH, 25, 30
-	wild_mon BARBOACH, 30, 35
-	wild_mon BARBOACH, 20, 25
-	wild_mon BARBOACH, 35, 40
-	wild_mon BARBOACH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_BARBOACH, 10, 30
+	wild_mon SPECIES_BARBOACH, 25, 30
+	wild_mon SPECIES_BARBOACH, 30, 35
+	wild_mon SPECIES_BARBOACH, 20, 25
+	wild_mon SPECIES_BARBOACH, 35, 40
+	wild_mon SPECIES_BARBOACH, 40, 45
 
 	.align 2
 gMeteorFalls_1F_1R_FishingMonsInfo:: @ 8552114
@@ -2478,18 +2478,18 @@ gMeteorFalls_1F_1R_FishingMonsInfo:: @ 8552114
 
 	.align 2
 gMeteorFalls_1F_2R_LandMons:: @ 855211C
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon SOLROCK, 35
-	wild_mon SOLROCK, 33
-	wild_mon SOLROCK, 37
-	wild_mon GOLBAT, 35
-	wild_mon SOLROCK, 39
-	wild_mon GOLBAT, 38
-	wild_mon GOLBAT, 40
-	wild_mon GOLBAT, 38
-	wild_mon GOLBAT, 40
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_SOLROCK, 35
+	wild_mon SPECIES_SOLROCK, 33
+	wild_mon SPECIES_SOLROCK, 37
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_SOLROCK, 39
+	wild_mon SPECIES_GOLBAT, 38
+	wild_mon SPECIES_GOLBAT, 40
+	wild_mon SPECIES_GOLBAT, 38
+	wild_mon SPECIES_GOLBAT, 40
 
 	.align 2
 gMeteorFalls_1F_2R_LandMonsInfo:: @ 855214C
@@ -2498,11 +2498,11 @@ gMeteorFalls_1F_2R_LandMonsInfo:: @ 855214C
 
 	.align 2
 gMeteorFalls_1F_2R_WaterMons:: @ 8552154
-	wild_mon GOLBAT, 30, 35
-	wild_mon GOLBAT, 30, 35
-	wild_mon SOLROCK, 25, 35
-	wild_mon SOLROCK, 15, 25
-	wild_mon SOLROCK, 5, 15
+	wild_mon SPECIES_GOLBAT, 30, 35
+	wild_mon SPECIES_GOLBAT, 30, 35
+	wild_mon SPECIES_SOLROCK, 25, 35
+	wild_mon SPECIES_SOLROCK, 15, 25
+	wild_mon SPECIES_SOLROCK, 5, 15
 
 	.align 2
 gMeteorFalls_1F_2R_WaterMonsInfo:: @ 8552168
@@ -2511,16 +2511,16 @@ gMeteorFalls_1F_2R_WaterMonsInfo:: @ 8552168
 
 	.align 2
 gMeteorFalls_1F_2R_FishingMons:: @ 8552170
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon BARBOACH, 10, 30
-	wild_mon BARBOACH, 25, 30
-	wild_mon BARBOACH, 30, 35
-	wild_mon WHISCASH, 30, 35
-	wild_mon WHISCASH, 35, 40
-	wild_mon WHISCASH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_BARBOACH, 10, 30
+	wild_mon SPECIES_BARBOACH, 25, 30
+	wild_mon SPECIES_BARBOACH, 30, 35
+	wild_mon SPECIES_WHISCASH, 30, 35
+	wild_mon SPECIES_WHISCASH, 35, 40
+	wild_mon SPECIES_WHISCASH, 40, 45
 
 	.align 2
 gMeteorFalls_1F_2R_FishingMonsInfo:: @ 8552198
@@ -2529,18 +2529,18 @@ gMeteorFalls_1F_2R_FishingMonsInfo:: @ 8552198
 
 	.align 2
 gMeteorFalls_B1F_1R_LandMons:: @ 85521A0
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon SOLROCK, 35
-	wild_mon SOLROCK, 33
-	wild_mon SOLROCK, 37
-	wild_mon GOLBAT, 35
-	wild_mon SOLROCK, 39
-	wild_mon GOLBAT, 38
-	wild_mon GOLBAT, 40
-	wild_mon GOLBAT, 38
-	wild_mon GOLBAT, 40
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_SOLROCK, 35
+	wild_mon SPECIES_SOLROCK, 33
+	wild_mon SPECIES_SOLROCK, 37
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_SOLROCK, 39
+	wild_mon SPECIES_GOLBAT, 38
+	wild_mon SPECIES_GOLBAT, 40
+	wild_mon SPECIES_GOLBAT, 38
+	wild_mon SPECIES_GOLBAT, 40
 
 	.align 2
 gMeteorFalls_B1F_1R_LandMonsInfo:: @ 85521D0
@@ -2549,11 +2549,11 @@ gMeteorFalls_B1F_1R_LandMonsInfo:: @ 85521D0
 
 	.align 2
 gMeteorFalls_B1F_1R_WaterMons:: @ 85521D8
-	wild_mon GOLBAT, 30, 35
-	wild_mon GOLBAT, 30, 35
-	wild_mon SOLROCK, 25, 35
-	wild_mon SOLROCK, 15, 25
-	wild_mon SOLROCK, 5, 15
+	wild_mon SPECIES_GOLBAT, 30, 35
+	wild_mon SPECIES_GOLBAT, 30, 35
+	wild_mon SPECIES_SOLROCK, 25, 35
+	wild_mon SPECIES_SOLROCK, 15, 25
+	wild_mon SPECIES_SOLROCK, 5, 15
 
 	.align 2
 gMeteorFalls_B1F_1R_WaterMonsInfo:: @ 85521EC
@@ -2562,16 +2562,16 @@ gMeteorFalls_B1F_1R_WaterMonsInfo:: @ 85521EC
 
 	.align 2
 gMeteorFalls_B1F_1R_FishingMons:: @ 85521F4
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon BARBOACH, 10, 30
-	wild_mon BARBOACH, 25, 30
-	wild_mon BARBOACH, 30, 35
-	wild_mon WHISCASH, 30, 35
-	wild_mon WHISCASH, 35, 40
-	wild_mon WHISCASH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_BARBOACH, 10, 30
+	wild_mon SPECIES_BARBOACH, 25, 30
+	wild_mon SPECIES_BARBOACH, 30, 35
+	wild_mon SPECIES_WHISCASH, 30, 35
+	wild_mon SPECIES_WHISCASH, 35, 40
+	wild_mon SPECIES_WHISCASH, 40, 45
 
 	.align 2
 gMeteorFalls_B1F_1R_FishingMonsInfo:: @ 855221C
@@ -2580,18 +2580,18 @@ gMeteorFalls_B1F_1R_FishingMonsInfo:: @ 855221C
 
 	.align 2
 gShoalCave_LowTideStairsRoom_LandMons:: @ 8552224
-	wild_mon ZUBAT, 26
-	wild_mon SPHEAL, 26
-	wild_mon ZUBAT, 28
-	wild_mon SPHEAL, 28
-	wild_mon ZUBAT, 30
-	wild_mon SPHEAL, 30
-	wild_mon ZUBAT, 32
-	wild_mon SPHEAL, 32
-	wild_mon GOLBAT, 32
-	wild_mon SPHEAL, 32
-	wild_mon GOLBAT, 32
-	wild_mon SPHEAL, 32
+	wild_mon SPECIES_ZUBAT, 26
+	wild_mon SPECIES_SPHEAL, 26
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_SPHEAL, 28
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_SPHEAL, 30
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
+	wild_mon SPECIES_GOLBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
+	wild_mon SPECIES_GOLBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
 
 	.align 2
 gShoalCave_LowTideStairsRoom_LandMonsInfo:: @ 8552254
@@ -2600,18 +2600,18 @@ gShoalCave_LowTideStairsRoom_LandMonsInfo:: @ 8552254
 
 	.align 2
 gShoalCave_LowTideLowerRoom_LandMons:: @ 855225C
-	wild_mon ZUBAT, 26
-	wild_mon SPHEAL, 26
-	wild_mon ZUBAT, 28
-	wild_mon SPHEAL, 28
-	wild_mon ZUBAT, 30
-	wild_mon SPHEAL, 30
-	wild_mon ZUBAT, 32
-	wild_mon SPHEAL, 32
-	wild_mon GOLBAT, 32
-	wild_mon SPHEAL, 32
-	wild_mon GOLBAT, 32
-	wild_mon SPHEAL, 32
+	wild_mon SPECIES_ZUBAT, 26
+	wild_mon SPECIES_SPHEAL, 26
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_SPHEAL, 28
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_SPHEAL, 30
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
+	wild_mon SPECIES_GOLBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
+	wild_mon SPECIES_GOLBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
 
 	.align 2
 gShoalCave_LowTideLowerRoom_LandMonsInfo:: @ 855228C
@@ -2620,18 +2620,18 @@ gShoalCave_LowTideLowerRoom_LandMonsInfo:: @ 855228C
 
 	.align 2
 gShoalCave_LowTideInnerRoom_LandMons:: @ 8552294
-	wild_mon ZUBAT, 26
-	wild_mon SPHEAL, 26
-	wild_mon ZUBAT, 28
-	wild_mon SPHEAL, 28
-	wild_mon ZUBAT, 30
-	wild_mon SPHEAL, 30
-	wild_mon ZUBAT, 32
-	wild_mon SPHEAL, 32
-	wild_mon GOLBAT, 32
-	wild_mon SPHEAL, 32
-	wild_mon GOLBAT, 32
-	wild_mon SPHEAL, 32
+	wild_mon SPECIES_ZUBAT, 26
+	wild_mon SPECIES_SPHEAL, 26
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_SPHEAL, 28
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_SPHEAL, 30
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
+	wild_mon SPECIES_GOLBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
+	wild_mon SPECIES_GOLBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
 
 	.align 2
 gShoalCave_LowTideInnerRoom_LandMonsInfo:: @ 85522C4
@@ -2640,11 +2640,11 @@ gShoalCave_LowTideInnerRoom_LandMonsInfo:: @ 85522C4
 
 	.align 2
 gShoalCave_LowTideInnerRoom_WaterMons:: @ 85522CC
-	wild_mon TENTACOOL, 5, 35
-	wild_mon ZUBAT, 5, 35
-	wild_mon SPHEAL, 25, 30
-	wild_mon SPHEAL, 25, 30
-	wild_mon SPHEAL, 25, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_ZUBAT, 5, 35
+	wild_mon SPECIES_SPHEAL, 25, 30
+	wild_mon SPECIES_SPHEAL, 25, 30
+	wild_mon SPECIES_SPHEAL, 25, 35
 
 	.align 2
 gShoalCave_LowTideInnerRoom_WaterMonsInfo:: @ 85522E0
@@ -2653,16 +2653,16 @@ gShoalCave_LowTideInnerRoom_WaterMonsInfo:: @ 85522E0
 
 	.align 2
 gShoalCave_LowTideInnerRoom_FishingMons:: @ 85522E8
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gShoalCave_LowTideInnerRoom_FishingMonsInfo:: @ 8552310
@@ -2671,18 +2671,18 @@ gShoalCave_LowTideInnerRoom_FishingMonsInfo:: @ 8552310
 
 	.align 2
 gShoalCave_LowTideEntranceRoom_LandMons:: @ 8552318
-	wild_mon ZUBAT, 26
-	wild_mon SPHEAL, 26
-	wild_mon ZUBAT, 28
-	wild_mon SPHEAL, 28
-	wild_mon ZUBAT, 30
-	wild_mon SPHEAL, 30
-	wild_mon ZUBAT, 32
-	wild_mon SPHEAL, 32
-	wild_mon GOLBAT, 32
-	wild_mon SPHEAL, 32
-	wild_mon GOLBAT, 32
-	wild_mon SPHEAL, 32
+	wild_mon SPECIES_ZUBAT, 26
+	wild_mon SPECIES_SPHEAL, 26
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_SPHEAL, 28
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_SPHEAL, 30
+	wild_mon SPECIES_ZUBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
+	wild_mon SPECIES_GOLBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
+	wild_mon SPECIES_GOLBAT, 32
+	wild_mon SPECIES_SPHEAL, 32
 
 	.align 2
 gShoalCave_LowTideEntranceRoom_LandMonsInfo:: @ 8552348
@@ -2691,11 +2691,11 @@ gShoalCave_LowTideEntranceRoom_LandMonsInfo:: @ 8552348
 
 	.align 2
 gShoalCave_LowTideEntranceRoom_WaterMons:: @ 8552350
-	wild_mon TENTACOOL, 5, 35
-	wild_mon ZUBAT, 5, 35
-	wild_mon SPHEAL, 25, 30
-	wild_mon SPHEAL, 25, 30
-	wild_mon SPHEAL, 25, 35
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_ZUBAT, 5, 35
+	wild_mon SPECIES_SPHEAL, 25, 30
+	wild_mon SPECIES_SPHEAL, 25, 30
+	wild_mon SPECIES_SPHEAL, 25, 35
 
 	.align 2
 gShoalCave_LowTideEntranceRoom_WaterMonsInfo:: @ 8552364
@@ -2704,16 +2704,16 @@ gShoalCave_LowTideEntranceRoom_WaterMonsInfo:: @ 8552364
 
 	.align 2
 gShoalCave_LowTideEntranceRoom_FishingMons:: @ 855236C
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gShoalCave_LowTideEntranceRoom_FishingMonsInfo:: @ 8552394
@@ -2722,11 +2722,11 @@ gShoalCave_LowTideEntranceRoom_FishingMonsInfo:: @ 8552394
 
 	.align 2
 gLilycoveCity_WaterMons:: @ 855239C
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gLilycoveCity_WaterMonsInfo:: @ 85523B0
@@ -2735,16 +2735,16 @@ gLilycoveCity_WaterMonsInfo:: @ 85523B0
 
 	.align 2
 gLilycoveCity_FishingMons:: @ 85523B8
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon STARYU, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_STARYU, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gLilycoveCity_FishingMonsInfo:: @ 85523E0
@@ -2753,11 +2753,11 @@ gLilycoveCity_FishingMonsInfo:: @ 85523E0
 
 	.align 2
 gDewfordTown_WaterMons:: @ 85523E8
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gDewfordTown_WaterMonsInfo:: @ 85523FC
@@ -2766,16 +2766,16 @@ gDewfordTown_WaterMonsInfo:: @ 85523FC
 
 	.align 2
 gDewfordTown_FishingMons:: @ 8552404
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gDewfordTown_FishingMonsInfo:: @ 855242C
@@ -2784,11 +2784,11 @@ gDewfordTown_FishingMonsInfo:: @ 855242C
 
 	.align 2
 gSlateportCity_WaterMons:: @ 8552434
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gSlateportCity_WaterMonsInfo:: @ 8552448
@@ -2797,16 +2797,16 @@ gSlateportCity_WaterMonsInfo:: @ 8552448
 
 	.align 2
 gSlateportCity_FishingMons:: @ 8552450
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 20, 25
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 20, 25
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gSlateportCity_FishingMonsInfo:: @ 8552478
@@ -2815,11 +2815,11 @@ gSlateportCity_FishingMonsInfo:: @ 8552478
 
 	.align 2
 gMossdeepCity_WaterMons:: @ 8552480
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gMossdeepCity_WaterMonsInfo:: @ 8552494
@@ -2828,16 +2828,16 @@ gMossdeepCity_WaterMonsInfo:: @ 8552494
 
 	.align 2
 gMossdeepCity_FishingMons:: @ 855249C
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gMossdeepCity_FishingMonsInfo:: @ 85524C4
@@ -2846,11 +2846,11 @@ gMossdeepCity_FishingMonsInfo:: @ 85524C4
 
 	.align 2
 gPacifidlogTown_WaterMons:: @ 85524CC
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gPacifidlogTown_WaterMonsInfo:: @ 85524E0
@@ -2859,16 +2859,16 @@ gPacifidlogTown_WaterMonsInfo:: @ 85524E0
 
 	.align 2
 gPacifidlogTown_FishingMons:: @ 85524E8
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon TENTACOOL, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon SHARPEDO, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon WAILMER, 25, 30
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_TENTACOOL, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_SHARPEDO, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_WAILMER, 25, 30
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gPacifidlogTown_FishingMonsInfo:: @ 8552510
@@ -2877,11 +2877,11 @@ gPacifidlogTown_FishingMonsInfo:: @ 8552510
 
 	.align 2
 gEverGrandeCity_WaterMons:: @ 8552518
-	wild_mon TENTACOOL, 5, 35
-	wild_mon WINGULL, 10, 30
-	wild_mon WINGULL, 15, 25
-	wild_mon PELIPPER, 25, 30
-	wild_mon PELIPPER, 25, 30
+	wild_mon SPECIES_TENTACOOL, 5, 35
+	wild_mon SPECIES_WINGULL, 10, 30
+	wild_mon SPECIES_WINGULL, 15, 25
+	wild_mon SPECIES_PELIPPER, 25, 30
+	wild_mon SPECIES_PELIPPER, 25, 30
 
 	.align 2
 gEverGrandeCity_WaterMonsInfo:: @ 855252C
@@ -2890,16 +2890,16 @@ gEverGrandeCity_WaterMonsInfo:: @ 855252C
 
 	.align 2
 gEverGrandeCity_FishingMons:: @ 8552534
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon LUVDISC, 10, 30
-	wild_mon WAILMER, 10, 30
-	wild_mon LUVDISC, 30, 35
-	wild_mon WAILMER, 30, 35
-	wild_mon CORSOLA, 30, 35
-	wild_mon WAILMER, 35, 40
-	wild_mon WAILMER, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_LUVDISC, 10, 30
+	wild_mon SPECIES_WAILMER, 10, 30
+	wild_mon SPECIES_LUVDISC, 30, 35
+	wild_mon SPECIES_WAILMER, 30, 35
+	wild_mon SPECIES_CORSOLA, 30, 35
+	wild_mon SPECIES_WAILMER, 35, 40
+	wild_mon SPECIES_WAILMER, 40, 45
 
 	.align 2
 gEverGrandeCity_FishingMonsInfo:: @ 855255C
@@ -2908,11 +2908,11 @@ gEverGrandeCity_FishingMonsInfo:: @ 855255C
 
 	.align 2
 gPetalburgCity_WaterMons:: @ 8552564
-	wild_mon MARILL, 20, 30
-	wild_mon MARILL, 10, 20
-	wild_mon MARILL, 30, 35
-	wild_mon MARILL, 5, 10
-	wild_mon MARILL, 5, 10
+	wild_mon SPECIES_MARILL, 20, 30
+	wild_mon SPECIES_MARILL, 10, 20
+	wild_mon SPECIES_MARILL, 30, 35
+	wild_mon SPECIES_MARILL, 5, 10
+	wild_mon SPECIES_MARILL, 5, 10
 
 	.align 2
 gPetalburgCity_WaterMonsInfo:: @ 8552578
@@ -2921,16 +2921,16 @@ gPetalburgCity_WaterMonsInfo:: @ 8552578
 
 	.align 2
 gPetalburgCity_FishingMons:: @ 8552580
-	wild_mon MAGIKARP, 5, 10
-	wild_mon GOLDEEN, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon GOLDEEN, 10, 30
-	wild_mon CORPHISH, 10, 30
-	wild_mon CORPHISH, 25, 30
-	wild_mon CORPHISH, 30, 35
-	wild_mon CORPHISH, 20, 25
-	wild_mon CORPHISH, 35, 40
-	wild_mon CORPHISH, 40, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_GOLDEEN, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_GOLDEEN, 10, 30
+	wild_mon SPECIES_CORPHISH, 10, 30
+	wild_mon SPECIES_CORPHISH, 25, 30
+	wild_mon SPECIES_CORPHISH, 30, 35
+	wild_mon SPECIES_CORPHISH, 20, 25
+	wild_mon SPECIES_CORPHISH, 35, 40
+	wild_mon SPECIES_CORPHISH, 40, 45
 
 	.align 2
 gPetalburgCity_FishingMonsInfo:: @ 85525A8
@@ -2939,11 +2939,11 @@ gPetalburgCity_FishingMonsInfo:: @ 85525A8
 
 	.align 2
 gUnderwater1_WaterMons:: @ 85525B0
-	wild_mon CLAMPERL, 20, 30
-	wild_mon CHINCHOU, 20, 30
-	wild_mon CLAMPERL, 30, 35
-	wild_mon RELICANTH, 30, 35
-	wild_mon RELICANTH, 30, 35
+	wild_mon SPECIES_CLAMPERL, 20, 30
+	wild_mon SPECIES_CHINCHOU, 20, 30
+	wild_mon SPECIES_CLAMPERL, 30, 35
+	wild_mon SPECIES_RELICANTH, 30, 35
+	wild_mon SPECIES_RELICANTH, 30, 35
 
 	.align 2
 gUnderwater1_WaterMonsInfo:: @ 85525C4
@@ -2952,18 +2952,18 @@ gUnderwater1_WaterMonsInfo:: @ 85525C4
 
 	.align 2
 gShoalCave_LowTideIceRoom_LandMons:: @ 85525CC
-	wild_mon ZUBAT, 26
-	wild_mon SPHEAL, 26
-	wild_mon ZUBAT, 28
-	wild_mon SPHEAL, 28
-	wild_mon ZUBAT, 30
-	wild_mon SPHEAL, 30
-	wild_mon SNORUNT, 26
-	wild_mon SPHEAL, 32
-	wild_mon GOLBAT, 30
-	wild_mon SNORUNT, 28
-	wild_mon GOLBAT, 32
-	wild_mon SNORUNT, 30
+	wild_mon SPECIES_ZUBAT, 26
+	wild_mon SPECIES_SPHEAL, 26
+	wild_mon SPECIES_ZUBAT, 28
+	wild_mon SPECIES_SPHEAL, 28
+	wild_mon SPECIES_ZUBAT, 30
+	wild_mon SPECIES_SPHEAL, 30
+	wild_mon SPECIES_SNORUNT, 26
+	wild_mon SPECIES_SPHEAL, 32
+	wild_mon SPECIES_GOLBAT, 30
+	wild_mon SPECIES_SNORUNT, 28
+	wild_mon SPECIES_GOLBAT, 32
+	wild_mon SPECIES_SNORUNT, 30
 
 	.align 2
 gShoalCave_LowTideIceRoom_LandMonsInfo:: @ 85525FC
@@ -2972,18 +2972,18 @@ gShoalCave_LowTideIceRoom_LandMonsInfo:: @ 85525FC
 
 	.align 2
 gSkyPillar_1F_LandMons:: @ 8552604
-	wild_mon SABLEYE, 33
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon SABLEYE, 34
-	wild_mon CLAYDOL, 36
-	wild_mon BANETTE, 37
-	wild_mon BANETTE, 38
-	wild_mon CLAYDOL, 36
-	wild_mon CLAYDOL, 37
-	wild_mon CLAYDOL, 38
-	wild_mon CLAYDOL, 37
-	wild_mon CLAYDOL, 38
+	wild_mon SPECIES_SABLEYE, 33
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_SABLEYE, 34
+	wild_mon SPECIES_CLAYDOL, 36
+	wild_mon SPECIES_BANETTE, 37
+	wild_mon SPECIES_BANETTE, 38
+	wild_mon SPECIES_CLAYDOL, 36
+	wild_mon SPECIES_CLAYDOL, 37
+	wild_mon SPECIES_CLAYDOL, 38
+	wild_mon SPECIES_CLAYDOL, 37
+	wild_mon SPECIES_CLAYDOL, 38
 
 	.align 2
 gSkyPillar_1F_LandMonsInfo:: @ 8552634
@@ -2992,11 +2992,11 @@ gSkyPillar_1F_LandMonsInfo:: @ 8552634
 
 	.align 2
 gSootopolisCity_WaterMons:: @ 855263C
-	wild_mon MAGIKARP, 5, 35
-	wild_mon MAGIKARP, 10, 30
-	wild_mon MAGIKARP, 15, 25
-	wild_mon MAGIKARP, 25, 30
-	wild_mon MAGIKARP, 25, 30
+	wild_mon SPECIES_MAGIKARP, 5, 35
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_MAGIKARP, 15, 25
+	wild_mon SPECIES_MAGIKARP, 25, 30
+	wild_mon SPECIES_MAGIKARP, 25, 30
 
 	.align 2
 gSootopolisCity_WaterMonsInfo:: @ 8552650
@@ -3005,16 +3005,16 @@ gSootopolisCity_WaterMonsInfo:: @ 8552650
 
 	.align 2
 gSootopolisCity_FishingMons:: @ 8552658
-	wild_mon MAGIKARP, 5, 10
-	wild_mon TENTACOOL, 5, 10
-	wild_mon MAGIKARP, 10, 30
-	wild_mon MAGIKARP, 10, 30
-	wild_mon MAGIKARP, 10, 30
-	wild_mon MAGIKARP, 30, 35
-	wild_mon MAGIKARP, 30, 35
-	wild_mon GYARADOS, 35, 40
-	wild_mon GYARADOS, 35, 45
-	wild_mon GYARADOS, 5, 45
+	wild_mon SPECIES_MAGIKARP, 5, 10
+	wild_mon SPECIES_TENTACOOL, 5, 10
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_MAGIKARP, 10, 30
+	wild_mon SPECIES_MAGIKARP, 30, 35
+	wild_mon SPECIES_MAGIKARP, 30, 35
+	wild_mon SPECIES_GYARADOS, 35, 40
+	wild_mon SPECIES_GYARADOS, 35, 45
+	wild_mon SPECIES_GYARADOS, 5, 45
 
 	.align 2
 gSootopolisCity_FishingMonsInfo:: @ 8552680
@@ -3023,18 +3023,18 @@ gSootopolisCity_FishingMonsInfo:: @ 8552680
 
 	.align 2
 gSkyPillar_3F_LandMons:: @ 8552688
-	wild_mon SABLEYE, 33
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon SABLEYE, 34
-	wild_mon CLAYDOL, 36
-	wild_mon BANETTE, 37
-	wild_mon BANETTE, 38
-	wild_mon CLAYDOL, 36
-	wild_mon CLAYDOL, 37
-	wild_mon CLAYDOL, 38
-	wild_mon CLAYDOL, 37
-	wild_mon CLAYDOL, 38
+	wild_mon SPECIES_SABLEYE, 33
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_SABLEYE, 34
+	wild_mon SPECIES_CLAYDOL, 36
+	wild_mon SPECIES_BANETTE, 37
+	wild_mon SPECIES_BANETTE, 38
+	wild_mon SPECIES_CLAYDOL, 36
+	wild_mon SPECIES_CLAYDOL, 37
+	wild_mon SPECIES_CLAYDOL, 38
+	wild_mon SPECIES_CLAYDOL, 37
+	wild_mon SPECIES_CLAYDOL, 38
 
 	.align 2
 gSkyPillar_3F_LandMonsInfo:: @ 85526B8
@@ -3043,18 +3043,18 @@ gSkyPillar_3F_LandMonsInfo:: @ 85526B8
 
 	.align 2
 gSkyPillar_5F_LandMons:: @ 85526C0
-	wild_mon SABLEYE, 33
-	wild_mon GOLBAT, 34
-	wild_mon GOLBAT, 35
-	wild_mon SABLEYE, 34
-	wild_mon CLAYDOL, 36
-	wild_mon BANETTE, 37
-	wild_mon BANETTE, 38
-	wild_mon CLAYDOL, 36
-	wild_mon CLAYDOL, 37
-	wild_mon ALTARIA, 38
-	wild_mon ALTARIA, 39
-	wild_mon ALTARIA, 39
+	wild_mon SPECIES_SABLEYE, 33
+	wild_mon SPECIES_GOLBAT, 34
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_SABLEYE, 34
+	wild_mon SPECIES_CLAYDOL, 36
+	wild_mon SPECIES_BANETTE, 37
+	wild_mon SPECIES_BANETTE, 38
+	wild_mon SPECIES_CLAYDOL, 36
+	wild_mon SPECIES_CLAYDOL, 37
+	wild_mon SPECIES_ALTARIA, 38
+	wild_mon SPECIES_ALTARIA, 39
+	wild_mon SPECIES_ALTARIA, 39
 
 	.align 2
 gSkyPillar_5F_LandMonsInfo:: @ 85526F0
@@ -3063,18 +3063,18 @@ gSkyPillar_5F_LandMonsInfo:: @ 85526F0
 
 	.align 2
 gSafariZone_Southeast_LandMons:: @ 85526F8
-	wild_mon SUNKERN, 33
-	wild_mon MAREEP, 34
-	wild_mon SUNKERN, 35
-	wild_mon MAREEP, 36
-	wild_mon AIPOM, 34
-	wild_mon SPINARAK, 33
-	wild_mon HOOTHOOT, 35
-	wild_mon SNUBBULL, 34
-	wild_mon STANTLER, 36
-	wild_mon GLIGAR, 37
-	wild_mon STANTLER, 39
-	wild_mon GLIGAR, 40
+	wild_mon SPECIES_SUNKERN, 33
+	wild_mon SPECIES_MAREEP, 34
+	wild_mon SPECIES_SUNKERN, 35
+	wild_mon SPECIES_MAREEP, 36
+	wild_mon SPECIES_AIPOM, 34
+	wild_mon SPECIES_SPINARAK, 33
+	wild_mon SPECIES_HOOTHOOT, 35
+	wild_mon SPECIES_SNUBBULL, 34
+	wild_mon SPECIES_STANTLER, 36
+	wild_mon SPECIES_GLIGAR, 37
+	wild_mon SPECIES_STANTLER, 39
+	wild_mon SPECIES_GLIGAR, 40
 
 	.align 2
 gSafariZone_Southeast_LandMonsInfo:: @ 8552728
@@ -3083,11 +3083,11 @@ gSafariZone_Southeast_LandMonsInfo:: @ 8552728
 
 	.align 2
 gSafariZone_Southeast_WaterMons:: @ 8552730
-	wild_mon WOOPER, 25, 30
-	wild_mon MARILL, 25, 30
-	wild_mon MARILL, 25, 30
-	wild_mon MARILL, 30, 35
-	wild_mon QUAGSIRE, 35, 40
+	wild_mon SPECIES_WOOPER, 25, 30
+	wild_mon SPECIES_MARILL, 25, 30
+	wild_mon SPECIES_MARILL, 25, 30
+	wild_mon SPECIES_MARILL, 30, 35
+	wild_mon SPECIES_QUAGSIRE, 35, 40
 
 	.align 2
 gSafariZone_Southeast_WaterMonsInfo:: @ 8552744
@@ -3096,16 +3096,16 @@ gSafariZone_Southeast_WaterMonsInfo:: @ 8552744
 
 	.align 2
 gSafariZone_Southeast_FishingMons:: @ 855274C
-	wild_mon MAGIKARP, 25, 30
-	wild_mon GOLDEEN, 25, 30
-	wild_mon MAGIKARP, 25, 30
-	wild_mon GOLDEEN, 25, 30
-	wild_mon REMORAID, 30, 35
-	wild_mon GOLDEEN, 25, 30
-	wild_mon REMORAID, 25, 30
-	wild_mon REMORAID, 30, 35
-	wild_mon REMORAID, 30, 35
-	wild_mon OCTILLERY, 35, 40
+	wild_mon SPECIES_MAGIKARP, 25, 30
+	wild_mon SPECIES_GOLDEEN, 25, 30
+	wild_mon SPECIES_MAGIKARP, 25, 30
+	wild_mon SPECIES_GOLDEEN, 25, 30
+	wild_mon SPECIES_REMORAID, 30, 35
+	wild_mon SPECIES_GOLDEEN, 25, 30
+	wild_mon SPECIES_REMORAID, 25, 30
+	wild_mon SPECIES_REMORAID, 30, 35
+	wild_mon SPECIES_REMORAID, 30, 35
+	wild_mon SPECIES_OCTILLERY, 35, 40
 
 	.align 2
 gSafariZone_Southeast_FishingMonsInfo:: @ 8552774
@@ -3114,18 +3114,18 @@ gSafariZone_Southeast_FishingMonsInfo:: @ 8552774
 
 	.align 2
 gSafariZone_Northeast_LandMons:: @ 855277C
-	wild_mon AIPOM, 33
-	wild_mon TEDDIURSA, 34
-	wild_mon AIPOM, 35
-	wild_mon TEDDIURSA, 36
-	wild_mon SUNKERN, 34
-	wild_mon LEDYBA, 33
-	wild_mon HOOTHOOT, 35
-	wild_mon PINECO, 34
-	wild_mon HOUNDOUR, 36
-	wild_mon MILTANK, 37
-	wild_mon HOUNDOUR, 39
-	wild_mon MILTANK, 40
+	wild_mon SPECIES_AIPOM, 33
+	wild_mon SPECIES_TEDDIURSA, 34
+	wild_mon SPECIES_AIPOM, 35
+	wild_mon SPECIES_TEDDIURSA, 36
+	wild_mon SPECIES_SUNKERN, 34
+	wild_mon SPECIES_LEDYBA, 33
+	wild_mon SPECIES_HOOTHOOT, 35
+	wild_mon SPECIES_PINECO, 34
+	wild_mon SPECIES_HOUNDOUR, 36
+	wild_mon SPECIES_MILTANK, 37
+	wild_mon SPECIES_HOUNDOUR, 39
+	wild_mon SPECIES_MILTANK, 40
 
 	.align 2
 gSafariZone_Northeast_LandMonsInfo:: @ 85527AC
@@ -3134,11 +3134,11 @@ gSafariZone_Northeast_LandMonsInfo:: @ 85527AC
 
 	.align 2
 gSafariZone_Northeast_RockSmashMons:: @ 85527B4
-	wild_mon SHUCKLE, 25, 30
-	wild_mon SHUCKLE, 20, 25
-	wild_mon SHUCKLE, 30, 35
-	wild_mon SHUCKLE, 30, 35
-	wild_mon SHUCKLE, 35, 40
+	wild_mon SPECIES_SHUCKLE, 25, 30
+	wild_mon SPECIES_SHUCKLE, 20, 25
+	wild_mon SPECIES_SHUCKLE, 30, 35
+	wild_mon SPECIES_SHUCKLE, 30, 35
+	wild_mon SPECIES_SHUCKLE, 35, 40
 
 	.align 2
 gSafariZone_Northeast_RockSmashMonsInfo:: @ 85527C8
@@ -3147,18 +3147,18 @@ gSafariZone_Northeast_RockSmashMonsInfo:: @ 85527C8
 
 	.align 2
 gMagmaHideout_1F_LandMons:: @ 85527D0
-	wild_mon GEODUDE, 27
-	wild_mon TORKOAL, 28
-	wild_mon GEODUDE, 28
-	wild_mon TORKOAL, 30
-	wild_mon GEODUDE, 29
-	wild_mon GEODUDE, 30
-	wild_mon GEODUDE, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 31
-	wild_mon GRAVELER, 32
-	wild_mon GRAVELER, 33
+	wild_mon SPECIES_GEODUDE, 27
+	wild_mon SPECIES_TORKOAL, 28
+	wild_mon SPECIES_GEODUDE, 28
+	wild_mon SPECIES_TORKOAL, 30
+	wild_mon SPECIES_GEODUDE, 29
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 31
+	wild_mon SPECIES_GRAVELER, 32
+	wild_mon SPECIES_GRAVELER, 33
 
 	.align 2
 gMagmaHideout_1F_LandMonsInfo:: @ 8552800
@@ -3167,18 +3167,18 @@ gMagmaHideout_1F_LandMonsInfo:: @ 8552800
 
 	.align 2
 gMagmaHideout_2F_1R_LandMons:: @ 8552808
-	wild_mon GEODUDE, 27
-	wild_mon TORKOAL, 28
-	wild_mon GEODUDE, 28
-	wild_mon TORKOAL, 30
-	wild_mon GEODUDE, 29
-	wild_mon GEODUDE, 30
-	wild_mon GEODUDE, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 31
-	wild_mon GRAVELER, 32
-	wild_mon GRAVELER, 33
+	wild_mon SPECIES_GEODUDE, 27
+	wild_mon SPECIES_TORKOAL, 28
+	wild_mon SPECIES_GEODUDE, 28
+	wild_mon SPECIES_TORKOAL, 30
+	wild_mon SPECIES_GEODUDE, 29
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 31
+	wild_mon SPECIES_GRAVELER, 32
+	wild_mon SPECIES_GRAVELER, 33
 
 	.align 2
 gMagmaHideout_2F_1R_LandMonsInfo:: @ 8552838
@@ -3187,18 +3187,18 @@ gMagmaHideout_2F_1R_LandMonsInfo:: @ 8552838
 
 	.align 2
 gMagmaHideout_2F_2R_LandMons:: @ 8552840
-	wild_mon GEODUDE, 27
-	wild_mon TORKOAL, 28
-	wild_mon GEODUDE, 28
-	wild_mon TORKOAL, 30
-	wild_mon GEODUDE, 29
-	wild_mon GEODUDE, 30
-	wild_mon GEODUDE, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 31
-	wild_mon GRAVELER, 32
-	wild_mon GRAVELER, 33
+	wild_mon SPECIES_GEODUDE, 27
+	wild_mon SPECIES_TORKOAL, 28
+	wild_mon SPECIES_GEODUDE, 28
+	wild_mon SPECIES_TORKOAL, 30
+	wild_mon SPECIES_GEODUDE, 29
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 31
+	wild_mon SPECIES_GRAVELER, 32
+	wild_mon SPECIES_GRAVELER, 33
 
 	.align 2
 gMagmaHideout_2F_2R_LandMonsInfo:: @ 8552870
@@ -3207,18 +3207,18 @@ gMagmaHideout_2F_2R_LandMonsInfo:: @ 8552870
 
 	.align 2
 gMagmaHideout_3F_1R_LandMons:: @ 8552878
-	wild_mon GEODUDE, 27
-	wild_mon TORKOAL, 28
-	wild_mon GEODUDE, 28
-	wild_mon TORKOAL, 30
-	wild_mon GEODUDE, 29
-	wild_mon GEODUDE, 30
-	wild_mon GEODUDE, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 31
-	wild_mon GRAVELER, 32
-	wild_mon GRAVELER, 33
+	wild_mon SPECIES_GEODUDE, 27
+	wild_mon SPECIES_TORKOAL, 28
+	wild_mon SPECIES_GEODUDE, 28
+	wild_mon SPECIES_TORKOAL, 30
+	wild_mon SPECIES_GEODUDE, 29
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 31
+	wild_mon SPECIES_GRAVELER, 32
+	wild_mon SPECIES_GRAVELER, 33
 
 	.align 2
 gMagmaHideout_3F_1R_LandMonsInfo:: @ 85528A8
@@ -3227,18 +3227,18 @@ gMagmaHideout_3F_1R_LandMonsInfo:: @ 85528A8
 
 	.align 2
 gMagmaHideout_3F_2R_LandMons:: @ 85528B0
-	wild_mon GEODUDE, 27
-	wild_mon TORKOAL, 28
-	wild_mon GEODUDE, 28
-	wild_mon TORKOAL, 30
-	wild_mon GEODUDE, 29
-	wild_mon GEODUDE, 30
-	wild_mon GEODUDE, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 31
-	wild_mon GRAVELER, 32
-	wild_mon GRAVELER, 33
+	wild_mon SPECIES_GEODUDE, 27
+	wild_mon SPECIES_TORKOAL, 28
+	wild_mon SPECIES_GEODUDE, 28
+	wild_mon SPECIES_TORKOAL, 30
+	wild_mon SPECIES_GEODUDE, 29
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 31
+	wild_mon SPECIES_GRAVELER, 32
+	wild_mon SPECIES_GRAVELER, 33
 
 	.align 2
 gMagmaHideout_3F_2R_LandMonsInfo:: @ 85528E0
@@ -3247,18 +3247,18 @@ gMagmaHideout_3F_2R_LandMonsInfo:: @ 85528E0
 
 	.align 2
 gMagmaHideout_4F_LandMons:: @ 85528E8
-	wild_mon GEODUDE, 27
-	wild_mon TORKOAL, 28
-	wild_mon GEODUDE, 28
-	wild_mon TORKOAL, 30
-	wild_mon GEODUDE, 29
-	wild_mon GEODUDE, 30
-	wild_mon GEODUDE, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 31
-	wild_mon GRAVELER, 32
-	wild_mon GRAVELER, 33
+	wild_mon SPECIES_GEODUDE, 27
+	wild_mon SPECIES_TORKOAL, 28
+	wild_mon SPECIES_GEODUDE, 28
+	wild_mon SPECIES_TORKOAL, 30
+	wild_mon SPECIES_GEODUDE, 29
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 31
+	wild_mon SPECIES_GRAVELER, 32
+	wild_mon SPECIES_GRAVELER, 33
 
 	.align 2
 gMagmaHideout_4F_LandMonsInfo:: @ 8552918
@@ -3267,18 +3267,18 @@ gMagmaHideout_4F_LandMonsInfo:: @ 8552918
 
 	.align 2
 gMagmaHideout_3F_3R_LandMons:: @ 8552920
-	wild_mon GEODUDE, 27
-	wild_mon TORKOAL, 28
-	wild_mon GEODUDE, 28
-	wild_mon TORKOAL, 30
-	wild_mon GEODUDE, 29
-	wild_mon GEODUDE, 30
-	wild_mon GEODUDE, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 31
-	wild_mon GRAVELER, 32
-	wild_mon GRAVELER, 33
+	wild_mon SPECIES_GEODUDE, 27
+	wild_mon SPECIES_TORKOAL, 28
+	wild_mon SPECIES_GEODUDE, 28
+	wild_mon SPECIES_TORKOAL, 30
+	wild_mon SPECIES_GEODUDE, 29
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 31
+	wild_mon SPECIES_GRAVELER, 32
+	wild_mon SPECIES_GRAVELER, 33
 
 	.align 2
 gMagmaHideout_3F_3R_LandMonsInfo:: @ 8552950
@@ -3287,18 +3287,18 @@ gMagmaHideout_3F_3R_LandMonsInfo:: @ 8552950
 
 	.align 2
 gMagmaHideout_2F_3R_LandMons:: @ 8552958
-	wild_mon GEODUDE, 27
-	wild_mon TORKOAL, 28
-	wild_mon GEODUDE, 28
-	wild_mon TORKOAL, 30
-	wild_mon GEODUDE, 29
-	wild_mon GEODUDE, 30
-	wild_mon GEODUDE, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 30
-	wild_mon GRAVELER, 31
-	wild_mon GRAVELER, 32
-	wild_mon GRAVELER, 33
+	wild_mon SPECIES_GEODUDE, 27
+	wild_mon SPECIES_TORKOAL, 28
+	wild_mon SPECIES_GEODUDE, 28
+	wild_mon SPECIES_TORKOAL, 30
+	wild_mon SPECIES_GEODUDE, 29
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GEODUDE, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 30
+	wild_mon SPECIES_GRAVELER, 31
+	wild_mon SPECIES_GRAVELER, 32
+	wild_mon SPECIES_GRAVELER, 33
 
 	.align 2
 gMagmaHideout_2F_3R_LandMonsInfo:: @ 8552988
@@ -3307,18 +3307,18 @@ gMagmaHideout_2F_3R_LandMonsInfo:: @ 8552988
 
 	.align 2
 gMirageTower_1F_LandMons:: @ 8552990
-	wild_mon SANDSHREW, 21
-	wild_mon TRAPINCH, 21
-	wild_mon SANDSHREW, 20
-	wild_mon TRAPINCH, 20
-	wild_mon SANDSHREW, 20
-	wild_mon TRAPINCH, 20
-	wild_mon SANDSHREW, 22
-	wild_mon TRAPINCH, 22
-	wild_mon SANDSHREW, 23
-	wild_mon TRAPINCH, 23
-	wild_mon SANDSHREW, 24
-	wild_mon TRAPINCH, 24
+	wild_mon SPECIES_SANDSHREW, 21
+	wild_mon SPECIES_TRAPINCH, 21
+	wild_mon SPECIES_SANDSHREW, 20
+	wild_mon SPECIES_TRAPINCH, 20
+	wild_mon SPECIES_SANDSHREW, 20
+	wild_mon SPECIES_TRAPINCH, 20
+	wild_mon SPECIES_SANDSHREW, 22
+	wild_mon SPECIES_TRAPINCH, 22
+	wild_mon SPECIES_SANDSHREW, 23
+	wild_mon SPECIES_TRAPINCH, 23
+	wild_mon SPECIES_SANDSHREW, 24
+	wild_mon SPECIES_TRAPINCH, 24
 
 	.align 2
 gMirageTower_1F_LandMonsInfo:: @ 85529C0
@@ -3327,18 +3327,18 @@ gMirageTower_1F_LandMonsInfo:: @ 85529C0
 
 	.align 2
 gMirageTower_2F_LandMons:: @ 85529C8
-	wild_mon SANDSHREW, 21
-	wild_mon TRAPINCH, 21
-	wild_mon SANDSHREW, 20
-	wild_mon TRAPINCH, 20
-	wild_mon SANDSHREW, 20
-	wild_mon TRAPINCH, 20
-	wild_mon SANDSHREW, 22
-	wild_mon TRAPINCH, 22
-	wild_mon SANDSHREW, 23
-	wild_mon TRAPINCH, 23
-	wild_mon SANDSHREW, 24
-	wild_mon TRAPINCH, 24
+	wild_mon SPECIES_SANDSHREW, 21
+	wild_mon SPECIES_TRAPINCH, 21
+	wild_mon SPECIES_SANDSHREW, 20
+	wild_mon SPECIES_TRAPINCH, 20
+	wild_mon SPECIES_SANDSHREW, 20
+	wild_mon SPECIES_TRAPINCH, 20
+	wild_mon SPECIES_SANDSHREW, 22
+	wild_mon SPECIES_TRAPINCH, 22
+	wild_mon SPECIES_SANDSHREW, 23
+	wild_mon SPECIES_TRAPINCH, 23
+	wild_mon SPECIES_SANDSHREW, 24
+	wild_mon SPECIES_TRAPINCH, 24
 
 	.align 2
 gMirageTower_2F_LandMonsInfo:: @ 85529F8
@@ -3347,18 +3347,18 @@ gMirageTower_2F_LandMonsInfo:: @ 85529F8
 
 	.align 2
 gMirageTower_3F_LandMons:: @ 8552A00
-	wild_mon SANDSHREW, 21
-	wild_mon TRAPINCH, 21
-	wild_mon SANDSHREW, 20
-	wild_mon TRAPINCH, 20
-	wild_mon SANDSHREW, 20
-	wild_mon TRAPINCH, 20
-	wild_mon SANDSHREW, 22
-	wild_mon TRAPINCH, 22
-	wild_mon SANDSHREW, 23
-	wild_mon TRAPINCH, 23
-	wild_mon SANDSHREW, 24
-	wild_mon TRAPINCH, 24
+	wild_mon SPECIES_SANDSHREW, 21
+	wild_mon SPECIES_TRAPINCH, 21
+	wild_mon SPECIES_SANDSHREW, 20
+	wild_mon SPECIES_TRAPINCH, 20
+	wild_mon SPECIES_SANDSHREW, 20
+	wild_mon SPECIES_TRAPINCH, 20
+	wild_mon SPECIES_SANDSHREW, 22
+	wild_mon SPECIES_TRAPINCH, 22
+	wild_mon SPECIES_SANDSHREW, 23
+	wild_mon SPECIES_TRAPINCH, 23
+	wild_mon SPECIES_SANDSHREW, 24
+	wild_mon SPECIES_TRAPINCH, 24
 
 	.align 2
 gMirageTower_3F_LandMonsInfo:: @ 8552A30
@@ -3367,18 +3367,18 @@ gMirageTower_3F_LandMonsInfo:: @ 8552A30
 
 	.align 2
 gMirageTower_4F_LandMons:: @ 8552A38
-	wild_mon SANDSHREW, 21
-	wild_mon TRAPINCH, 21
-	wild_mon SANDSHREW, 20
-	wild_mon TRAPINCH, 20
-	wild_mon SANDSHREW, 20
-	wild_mon TRAPINCH, 20
-	wild_mon SANDSHREW, 22
-	wild_mon TRAPINCH, 22
-	wild_mon SANDSHREW, 23
-	wild_mon TRAPINCH, 23
-	wild_mon SANDSHREW, 24
-	wild_mon TRAPINCH, 24
+	wild_mon SPECIES_SANDSHREW, 21
+	wild_mon SPECIES_TRAPINCH, 21
+	wild_mon SPECIES_SANDSHREW, 20
+	wild_mon SPECIES_TRAPINCH, 20
+	wild_mon SPECIES_SANDSHREW, 20
+	wild_mon SPECIES_TRAPINCH, 20
+	wild_mon SPECIES_SANDSHREW, 22
+	wild_mon SPECIES_TRAPINCH, 22
+	wild_mon SPECIES_SANDSHREW, 23
+	wild_mon SPECIES_TRAPINCH, 23
+	wild_mon SPECIES_SANDSHREW, 24
+	wild_mon SPECIES_TRAPINCH, 24
 
 	.align 2
 gMirageTower_4F_LandMonsInfo:: @ 8552A68
@@ -3387,18 +3387,18 @@ gMirageTower_4F_LandMonsInfo:: @ 8552A68
 
 	.align 2
 gDesertUnderpass_LandMons:: @ 8552A70
-	wild_mon DITTO, 38
-	wild_mon WHISMUR, 35
-	wild_mon DITTO, 40
-	wild_mon LOUDRED, 40
-	wild_mon DITTO, 41
-	wild_mon WHISMUR, 36
-	wild_mon LOUDRED, 38
-	wild_mon DITTO, 42
-	wild_mon WHISMUR, 38
-	wild_mon DITTO, 43
-	wild_mon LOUDRED, 44
-	wild_mon DITTO, 45
+	wild_mon SPECIES_DITTO, 38
+	wild_mon SPECIES_WHISMUR, 35
+	wild_mon SPECIES_DITTO, 40
+	wild_mon SPECIES_LOUDRED, 40
+	wild_mon SPECIES_DITTO, 41
+	wild_mon SPECIES_WHISMUR, 36
+	wild_mon SPECIES_LOUDRED, 38
+	wild_mon SPECIES_DITTO, 42
+	wild_mon SPECIES_WHISMUR, 38
+	wild_mon SPECIES_DITTO, 43
+	wild_mon SPECIES_LOUDRED, 44
+	wild_mon SPECIES_DITTO, 45
 
 	.align 2
 gDesertUnderpass_LandMonsInfo:: @ 8552AA0
@@ -3407,18 +3407,18 @@ gDesertUnderpass_LandMonsInfo:: @ 8552AA0
 
 	.align 2
 gArtisanCave_B1F_LandMons:: @ 8552AA8
-	wild_mon SMEARGLE, 40
-	wild_mon SMEARGLE, 41
-	wild_mon SMEARGLE, 42
-	wild_mon SMEARGLE, 43
-	wild_mon SMEARGLE, 44
-	wild_mon SMEARGLE, 45
-	wild_mon SMEARGLE, 46
-	wild_mon SMEARGLE, 47
-	wild_mon SMEARGLE, 48
-	wild_mon SMEARGLE, 49
-	wild_mon SMEARGLE, 50
-	wild_mon SMEARGLE, 50
+	wild_mon SPECIES_SMEARGLE, 40
+	wild_mon SPECIES_SMEARGLE, 41
+	wild_mon SPECIES_SMEARGLE, 42
+	wild_mon SPECIES_SMEARGLE, 43
+	wild_mon SPECIES_SMEARGLE, 44
+	wild_mon SPECIES_SMEARGLE, 45
+	wild_mon SPECIES_SMEARGLE, 46
+	wild_mon SPECIES_SMEARGLE, 47
+	wild_mon SPECIES_SMEARGLE, 48
+	wild_mon SPECIES_SMEARGLE, 49
+	wild_mon SPECIES_SMEARGLE, 50
+	wild_mon SPECIES_SMEARGLE, 50
 
 	.align 2
 gArtisanCave_B1F_LandMonsInfo:: @ 8552AD8
@@ -3427,18 +3427,18 @@ gArtisanCave_B1F_LandMonsInfo:: @ 8552AD8
 
 	.align 2
 gArtisanCave_1F_LandMons:: @ 8552AE0
-	wild_mon SMEARGLE, 40
-	wild_mon SMEARGLE, 41
-	wild_mon SMEARGLE, 42
-	wild_mon SMEARGLE, 43
-	wild_mon SMEARGLE, 44
-	wild_mon SMEARGLE, 45
-	wild_mon SMEARGLE, 46
-	wild_mon SMEARGLE, 47
-	wild_mon SMEARGLE, 48
-	wild_mon SMEARGLE, 49
-	wild_mon SMEARGLE, 50
-	wild_mon SMEARGLE, 50
+	wild_mon SPECIES_SMEARGLE, 40
+	wild_mon SPECIES_SMEARGLE, 41
+	wild_mon SPECIES_SMEARGLE, 42
+	wild_mon SPECIES_SMEARGLE, 43
+	wild_mon SPECIES_SMEARGLE, 44
+	wild_mon SPECIES_SMEARGLE, 45
+	wild_mon SPECIES_SMEARGLE, 46
+	wild_mon SPECIES_SMEARGLE, 47
+	wild_mon SPECIES_SMEARGLE, 48
+	wild_mon SPECIES_SMEARGLE, 49
+	wild_mon SPECIES_SMEARGLE, 50
+	wild_mon SPECIES_SMEARGLE, 50
 
 	.align 2
 gArtisanCave_1F_LandMonsInfo:: @ 8552B10
@@ -3447,18 +3447,18 @@ gArtisanCave_1F_LandMonsInfo:: @ 8552B10
 
 	.align 2
 gAlteringCave1_LandMons:: @ 8552B18
-	wild_mon ZUBAT, 10
-	wild_mon ZUBAT, 12
-	wild_mon ZUBAT, 8
-	wild_mon ZUBAT, 14
-	wild_mon ZUBAT, 10
-	wild_mon ZUBAT, 12
-	wild_mon ZUBAT, 16
-	wild_mon ZUBAT, 6
-	wild_mon ZUBAT, 8
-	wild_mon ZUBAT, 14
-	wild_mon ZUBAT, 8
-	wild_mon ZUBAT, 14
+	wild_mon SPECIES_ZUBAT, 10
+	wild_mon SPECIES_ZUBAT, 12
+	wild_mon SPECIES_ZUBAT, 8
+	wild_mon SPECIES_ZUBAT, 14
+	wild_mon SPECIES_ZUBAT, 10
+	wild_mon SPECIES_ZUBAT, 12
+	wild_mon SPECIES_ZUBAT, 16
+	wild_mon SPECIES_ZUBAT, 6
+	wild_mon SPECIES_ZUBAT, 8
+	wild_mon SPECIES_ZUBAT, 14
+	wild_mon SPECIES_ZUBAT, 8
+	wild_mon SPECIES_ZUBAT, 14
 
 	.align 2
 gAlteringCave1_LandMonsInfo:: @ 8552B48
@@ -3467,18 +3467,18 @@ gAlteringCave1_LandMonsInfo:: @ 8552B48
 
 	.align 2
 gAlteringCave2_LandMons:: @ 8552B50
-	wild_mon MAREEP, 7
-	wild_mon MAREEP, 9
-	wild_mon MAREEP, 5
-	wild_mon MAREEP, 11
-	wild_mon MAREEP, 7
-	wild_mon MAREEP, 9
-	wild_mon MAREEP, 13
-	wild_mon MAREEP, 3
-	wild_mon MAREEP, 5
-	wild_mon MAREEP, 11
-	wild_mon MAREEP, 5
-	wild_mon MAREEP, 11
+	wild_mon SPECIES_MAREEP, 7
+	wild_mon SPECIES_MAREEP, 9
+	wild_mon SPECIES_MAREEP, 5
+	wild_mon SPECIES_MAREEP, 11
+	wild_mon SPECIES_MAREEP, 7
+	wild_mon SPECIES_MAREEP, 9
+	wild_mon SPECIES_MAREEP, 13
+	wild_mon SPECIES_MAREEP, 3
+	wild_mon SPECIES_MAREEP, 5
+	wild_mon SPECIES_MAREEP, 11
+	wild_mon SPECIES_MAREEP, 5
+	wild_mon SPECIES_MAREEP, 11
 
 	.align 2
 gAlteringCave2_LandMonsInfo:: @ 8552B80
@@ -3487,18 +3487,18 @@ gAlteringCave2_LandMonsInfo:: @ 8552B80
 
 	.align 2
 gAlteringCave3_LandMons:: @ 8552B88
-	wild_mon PINECO, 23
-	wild_mon PINECO, 25
-	wild_mon PINECO, 22
-	wild_mon PINECO, 27
-	wild_mon PINECO, 23
-	wild_mon PINECO, 25
-	wild_mon PINECO, 29
-	wild_mon PINECO, 19
-	wild_mon PINECO, 21
-	wild_mon PINECO, 27
-	wild_mon PINECO, 21
-	wild_mon PINECO, 27
+	wild_mon SPECIES_PINECO, 23
+	wild_mon SPECIES_PINECO, 25
+	wild_mon SPECIES_PINECO, 22
+	wild_mon SPECIES_PINECO, 27
+	wild_mon SPECIES_PINECO, 23
+	wild_mon SPECIES_PINECO, 25
+	wild_mon SPECIES_PINECO, 29
+	wild_mon SPECIES_PINECO, 19
+	wild_mon SPECIES_PINECO, 21
+	wild_mon SPECIES_PINECO, 27
+	wild_mon SPECIES_PINECO, 21
+	wild_mon SPECIES_PINECO, 27
 
 	.align 2
 gAlteringCave3_LandMonsInfo:: @ 8552BB8
@@ -3507,18 +3507,18 @@ gAlteringCave3_LandMonsInfo:: @ 8552BB8
 
 	.align 2
 gAlteringCave4_LandMons:: @ 8552BC0
-	wild_mon HOUNDOUR, 16
-	wild_mon HOUNDOUR, 18
-	wild_mon HOUNDOUR, 14
-	wild_mon HOUNDOUR, 20
-	wild_mon HOUNDOUR, 16
-	wild_mon HOUNDOUR, 18
-	wild_mon HOUNDOUR, 22
-	wild_mon HOUNDOUR, 12
-	wild_mon HOUNDOUR, 14
-	wild_mon HOUNDOUR, 20
-	wild_mon HOUNDOUR, 14
-	wild_mon HOUNDOUR, 20
+	wild_mon SPECIES_HOUNDOUR, 16
+	wild_mon SPECIES_HOUNDOUR, 18
+	wild_mon SPECIES_HOUNDOUR, 14
+	wild_mon SPECIES_HOUNDOUR, 20
+	wild_mon SPECIES_HOUNDOUR, 16
+	wild_mon SPECIES_HOUNDOUR, 18
+	wild_mon SPECIES_HOUNDOUR, 22
+	wild_mon SPECIES_HOUNDOUR, 12
+	wild_mon SPECIES_HOUNDOUR, 14
+	wild_mon SPECIES_HOUNDOUR, 20
+	wild_mon SPECIES_HOUNDOUR, 14
+	wild_mon SPECIES_HOUNDOUR, 20
 
 	.align 2
 gAlteringCave4_LandMonsInfo:: @ 8552BF0
@@ -3527,18 +3527,18 @@ gAlteringCave4_LandMonsInfo:: @ 8552BF0
 
 	.align 2
 gAlteringCave5_LandMons:: @ 8552BF8
-	wild_mon TEDDIURSA, 10
-	wild_mon TEDDIURSA, 12
-	wild_mon TEDDIURSA, 8
-	wild_mon TEDDIURSA, 14
-	wild_mon TEDDIURSA, 10
-	wild_mon TEDDIURSA, 12
-	wild_mon TEDDIURSA, 16
-	wild_mon TEDDIURSA, 6
-	wild_mon TEDDIURSA, 8
-	wild_mon TEDDIURSA, 14
-	wild_mon TEDDIURSA, 8
-	wild_mon TEDDIURSA, 14
+	wild_mon SPECIES_TEDDIURSA, 10
+	wild_mon SPECIES_TEDDIURSA, 12
+	wild_mon SPECIES_TEDDIURSA, 8
+	wild_mon SPECIES_TEDDIURSA, 14
+	wild_mon SPECIES_TEDDIURSA, 10
+	wild_mon SPECIES_TEDDIURSA, 12
+	wild_mon SPECIES_TEDDIURSA, 16
+	wild_mon SPECIES_TEDDIURSA, 6
+	wild_mon SPECIES_TEDDIURSA, 8
+	wild_mon SPECIES_TEDDIURSA, 14
+	wild_mon SPECIES_TEDDIURSA, 8
+	wild_mon SPECIES_TEDDIURSA, 14
 
 	.align 2
 gAlteringCave5_LandMonsInfo:: @ 8552C28
@@ -3547,18 +3547,18 @@ gAlteringCave5_LandMonsInfo:: @ 8552C28
 
 	.align 2
 gAlteringCave6_LandMons:: @ 8552C30
-	wild_mon AIPOM, 22
-	wild_mon AIPOM, 24
-	wild_mon AIPOM, 20
-	wild_mon AIPOM, 26
-	wild_mon AIPOM, 22
-	wild_mon AIPOM, 24
-	wild_mon AIPOM, 28
-	wild_mon AIPOM, 18
-	wild_mon AIPOM, 20
-	wild_mon AIPOM, 26
-	wild_mon AIPOM, 20
-	wild_mon AIPOM, 26
+	wild_mon SPECIES_AIPOM, 22
+	wild_mon SPECIES_AIPOM, 24
+	wild_mon SPECIES_AIPOM, 20
+	wild_mon SPECIES_AIPOM, 26
+	wild_mon SPECIES_AIPOM, 22
+	wild_mon SPECIES_AIPOM, 24
+	wild_mon SPECIES_AIPOM, 28
+	wild_mon SPECIES_AIPOM, 18
+	wild_mon SPECIES_AIPOM, 20
+	wild_mon SPECIES_AIPOM, 26
+	wild_mon SPECIES_AIPOM, 20
+	wild_mon SPECIES_AIPOM, 26
 
 	.align 2
 gAlteringCave6_LandMonsInfo:: @ 8552C60
@@ -3567,18 +3567,18 @@ gAlteringCave6_LandMonsInfo:: @ 8552C60
 
 	.align 2
 gAlteringCave7_LandMons:: @ 8552C68
-	wild_mon SHUCKLE, 22
-	wild_mon SHUCKLE, 24
-	wild_mon SHUCKLE, 20
-	wild_mon SHUCKLE, 26
-	wild_mon SHUCKLE, 22
-	wild_mon SHUCKLE, 24
-	wild_mon SHUCKLE, 28
-	wild_mon SHUCKLE, 18
-	wild_mon SHUCKLE, 20
-	wild_mon SHUCKLE, 26
-	wild_mon SHUCKLE, 20
-	wild_mon SHUCKLE, 26
+	wild_mon SPECIES_SHUCKLE, 22
+	wild_mon SPECIES_SHUCKLE, 24
+	wild_mon SPECIES_SHUCKLE, 20
+	wild_mon SPECIES_SHUCKLE, 26
+	wild_mon SPECIES_SHUCKLE, 22
+	wild_mon SPECIES_SHUCKLE, 24
+	wild_mon SPECIES_SHUCKLE, 28
+	wild_mon SPECIES_SHUCKLE, 18
+	wild_mon SPECIES_SHUCKLE, 20
+	wild_mon SPECIES_SHUCKLE, 26
+	wild_mon SPECIES_SHUCKLE, 20
+	wild_mon SPECIES_SHUCKLE, 26
 
 	.align 2
 gAlteringCave7_LandMonsInfo:: @ 8552C98
@@ -3587,18 +3587,18 @@ gAlteringCave7_LandMonsInfo:: @ 8552C98
 
 	.align 2
 gAlteringCave8_LandMons:: @ 8552CA0
-	wild_mon STANTLER, 22
-	wild_mon STANTLER, 24
-	wild_mon STANTLER, 20
-	wild_mon STANTLER, 26
-	wild_mon STANTLER, 22
-	wild_mon STANTLER, 24
-	wild_mon STANTLER, 28
-	wild_mon STANTLER, 18
-	wild_mon STANTLER, 20
-	wild_mon STANTLER, 26
-	wild_mon STANTLER, 20
-	wild_mon STANTLER, 26
+	wild_mon SPECIES_STANTLER, 22
+	wild_mon SPECIES_STANTLER, 24
+	wild_mon SPECIES_STANTLER, 20
+	wild_mon SPECIES_STANTLER, 26
+	wild_mon SPECIES_STANTLER, 22
+	wild_mon SPECIES_STANTLER, 24
+	wild_mon SPECIES_STANTLER, 28
+	wild_mon SPECIES_STANTLER, 18
+	wild_mon SPECIES_STANTLER, 20
+	wild_mon SPECIES_STANTLER, 26
+	wild_mon SPECIES_STANTLER, 20
+	wild_mon SPECIES_STANTLER, 26
 
 	.align 2
 gAlteringCave8_LandMonsInfo:: @ 8552CD0
@@ -3607,18 +3607,18 @@ gAlteringCave8_LandMonsInfo:: @ 8552CD0
 
 	.align 2
 gAlteringCave9_LandMons:: @ 8552CD8
-	wild_mon SMEARGLE, 22
-	wild_mon SMEARGLE, 24
-	wild_mon SMEARGLE, 20
-	wild_mon SMEARGLE, 26
-	wild_mon SMEARGLE, 22
-	wild_mon SMEARGLE, 24
-	wild_mon SMEARGLE, 28
-	wild_mon SMEARGLE, 18
-	wild_mon SMEARGLE, 20
-	wild_mon SMEARGLE, 26
-	wild_mon SMEARGLE, 20
-	wild_mon SMEARGLE, 26
+	wild_mon SPECIES_SMEARGLE, 22
+	wild_mon SPECIES_SMEARGLE, 24
+	wild_mon SPECIES_SMEARGLE, 20
+	wild_mon SPECIES_SMEARGLE, 26
+	wild_mon SPECIES_SMEARGLE, 22
+	wild_mon SPECIES_SMEARGLE, 24
+	wild_mon SPECIES_SMEARGLE, 28
+	wild_mon SPECIES_SMEARGLE, 18
+	wild_mon SPECIES_SMEARGLE, 20
+	wild_mon SPECIES_SMEARGLE, 26
+	wild_mon SPECIES_SMEARGLE, 20
+	wild_mon SPECIES_SMEARGLE, 26
 
 	.align 2
 gAlteringCave9_LandMonsInfo:: @ 8552D08
@@ -3627,18 +3627,18 @@ gAlteringCave9_LandMonsInfo:: @ 8552D08
 
 	.align 2
 gMeteorFalls_StevensCave_LandMons:: @ 8552D10
-	wild_mon GOLBAT, 33
-	wild_mon GOLBAT, 35
-	wild_mon GOLBAT, 33
-	wild_mon SOLROCK, 35
-	wild_mon SOLROCK, 33
-	wild_mon SOLROCK, 37
-	wild_mon GOLBAT, 35
-	wild_mon SOLROCK, 39
-	wild_mon GOLBAT, 38
-	wild_mon GOLBAT, 40
-	wild_mon GOLBAT, 38
-	wild_mon GOLBAT, 40
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_GOLBAT, 33
+	wild_mon SPECIES_SOLROCK, 35
+	wild_mon SPECIES_SOLROCK, 33
+	wild_mon SPECIES_SOLROCK, 37
+	wild_mon SPECIES_GOLBAT, 35
+	wild_mon SPECIES_SOLROCK, 39
+	wild_mon SPECIES_GOLBAT, 38
+	wild_mon SPECIES_GOLBAT, 40
+	wild_mon SPECIES_GOLBAT, 38
+	wild_mon SPECIES_GOLBAT, 40
 
 	.align 2
 gMeteorFalls_StevensCave_LandMonsInfo:: @ 8552D40

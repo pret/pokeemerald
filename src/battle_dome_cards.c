@@ -4,7 +4,7 @@
 #include "sprite.h"
 #include "window.h"
 #include "malloc.h"
-#include "species.h"
+#include "constants/species.h"
 #include "palette.h"
 #include "decompress.h"
 #include "battle_dome_cards.h"
