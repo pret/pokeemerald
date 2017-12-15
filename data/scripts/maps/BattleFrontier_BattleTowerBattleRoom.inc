@@ -84,7 +84,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241C2F:: @ 8241C2F
 	msgbox BattleFrontier_BattleTowerBattleRoom_Text_242217, 4
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 BattleFrontier_BattleTowerBattleRoom_EventScript_241C8F:: @ 8241C8F
 	setvar VAR_0x8004, 9
@@ -361,7 +361,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_24210E:: @ 824210E
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
 	special sub_8163AC4
@@ -371,7 +371,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_24210E:: @ 824210E
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_24215A
 	setvar VAR_0x8004, 18
 	special sub_81A1780
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 21
 	special sub_81A1780
 

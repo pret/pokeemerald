@@ -90,7 +90,7 @@ BattleFrontier_BattlePyramidTop_EventScript_252B66:: @ 8252B66
 	special sub_81A8E7C
 	setvar VAR_0x8004, 14
 	special sub_81A8E7C
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	warpsilent BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 255, 7, 13
 	waitstate
 	end

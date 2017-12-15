@@ -97,7 +97,7 @@ TrainerHill_Entrance_EventScript_2681DA:: @ 82681DA
 	applymovement 255, TrainerHill_Entrance_Movement_268381
 	waitmovement 0
 	setvar VAR_0x40D6, 0
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	releaseall
 
 TrainerHill_Entrance_EventScript_2681EE:: @ 82681EE
@@ -174,7 +174,7 @@ TrainerHill_Entrance_EventScript_2682C8:: @ 82682C8
 	special sp194_trainer_tower
 	setvar VAR_0x40D6, 1
 	setvar VAR_0x4005, 0
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	msgbox TrainerHill_Entrance_Text_26862A, 4
 	setvar VAR_0x8004, 0
 	special sp194_trainer_tower

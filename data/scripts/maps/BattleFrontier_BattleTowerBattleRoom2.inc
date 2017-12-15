@@ -161,7 +161,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249121:: @ 8249121
 	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249514
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249143:: @ 8249143
 	setvar VAR_0x8004, 1

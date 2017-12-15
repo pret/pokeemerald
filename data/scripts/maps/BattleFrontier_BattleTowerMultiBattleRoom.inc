@@ -68,7 +68,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E41:: @ 8243E41
 	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_2725A6
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_244056, 4
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x4001, 1
 	releaseall
 	end

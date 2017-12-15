@@ -1164,15 +1164,8 @@ gUnknown_0203AB34: @ 203AB34
 .align 2
 gUnknown_0203AB40: @ 203AB40
 	.space 0x8
-
-gUnknown_0203AB48: @ 203AB48
-	.space 0x6
-
-gUnknown_0203AB4E: @ 203AB4E
-	.space 0x2
-
-gUnknown_0203AB50: @ 203AB50
-	.space 0x4
+	
+	.include "src/pokeblock.o"
 
 gUnknown_0203AB54: @ 203AB54
 	.space 0x1

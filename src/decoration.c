@@ -791,17 +791,17 @@ void sub_8127330(u8 taskId)
     for (i = 0; i < sDecorPCBuffer->unk_520 - 1; i ++)
     {
         sub_8127454(sDecorPCBuffer->names[i], gCurDecorInventoryItems[i]);
-        sDecorPCBuffer->items[i].unk_00 = sDecorPCBuffer->names[i];
-        sDecorPCBuffer->items[i].unk_04 = i;
+        sDecorPCBuffer->items[i].name = sDecorPCBuffer->names[i];
+        sDecorPCBuffer->items[i].id = i;
     }
     StringCopy(sDecorPCBuffer->names[i], gText_Cancel);
-    sDecorPCBuffer->items[i].unk_00 = sDecorPCBuffer->names[i];
-    sDecorPCBuffer->items[i].unk_04 = -2;
-    gUnknown_03006310 = gUnknown_085A6BD0;
-    gUnknown_03006310.unk_10 = sDecorMenuWindowIndices[1];
-    gUnknown_03006310.totalItems = sDecorPCBuffer->unk_520;
-    gUnknown_03006310.items = sDecorPCBuffer->items;
-    gUnknown_03006310.maxShowed = sDecorPCBuffer->unk_521;
+    sDecorPCBuffer->items[i].name = sDecorPCBuffer->names[i];
+    sDecorPCBuffer->items[i].id = -2;
+    gMultiuseListMenuTemplate = gUnknown_085A6BD0;
+    gMultiuseListMenuTemplate.unk_10 = sDecorMenuWindowIndices[1];
+    gMultiuseListMenuTemplate.totalItems = sDecorPCBuffer->unk_520;
+    gMultiuseListMenuTemplate.items = sDecorPCBuffer->items;
+    gMultiuseListMenuTemplate.maxShowed = sDecorPCBuffer->unk_521;
 }
 
 void sub_8127454(u8 *dest, u16 decorId)
@@ -870,7 +870,7 @@ void sub_812759C(u8 taskId)
     sub_81272C8();
     sub_81272F8();
     sub_8127330(taskId);
-    data[13] = ListMenuInit(&gUnknown_03006310, sSecretBasePCSelectDecorPageNo, sSecretBasePCSelectDecorLineNo);
+    data[13] = ListMenuInit(&gMultiuseListMenuTemplate, sSecretBasePCSelectDecorPageNo, sSecretBasePCSelectDecorLineNo);
     sub_8127500();
 }
 
@@ -888,8 +888,8 @@ void sub_812764C(u8 taskId)
     data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
-        input = ListMenuHandleInput(data[13]);
-        get_coro_args_x18_x1A(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
+        input = ListMenuHandleInputGetItemId(data[13]);
+        sub_81AE860(data[13], &sSecretBasePCSelectDecorPageNo, &sSecretBasePCSelectDecorLineNo);
         switch (input)
         {
             case -1:

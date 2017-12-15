@@ -5,15 +5,6 @@
 
 	.section .rodata
 
-gUnknown_085B2748:: @ 85B2748
-	.incbin "baserom.gba", 0x5b2748, 0x60
-
-gUnknown_085B27A8:: @ 85B27A8
-	.incbin "baserom.gba", 0x5b27a8, 0x8
-
-gUnknown_085B27B0:: @ 85B27B0
-	.incbin "baserom.gba", 0x5b27b0, 0x18
-
 gUnknown_085B27C8:: @ 85B27C8
 	.incbin "baserom.gba", 0x5b27c8, 0x88
 

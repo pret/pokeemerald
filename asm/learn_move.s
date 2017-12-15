@@ -94,7 +94,7 @@ sub_81606A0: @ 81606A0
 	ldr r0, =gUnknown_085CEBB8
 	bl LoadSpritePalette
 	bl sub_81610B8
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r4]
 	ldrh r2, [r4, 0x2]
 	bl ListMenuInit
@@ -151,7 +151,7 @@ sub_8160740: @ 8160740
 	ldr r0, =gUnknown_085CEBB8
 	bl LoadSpritePalette
 	bl sub_81610B8
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r4]
 	ldrh r2, [r4, 0x2]
 	bl ListMenuInit
@@ -980,7 +980,7 @@ sub_8160F50: @ 8160F50
 	lsls r4, 1
 	adds r0, r4
 	ldrb r0, [r0]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r5, r0, 0
 	ldr r0, [r6]
 	adds r0, r4
@@ -988,7 +988,7 @@ sub_8160F50: @ 8160F50
 	ldr r4, =gUnknown_0203BC38
 	adds r2, r4, 0x2
 	adds r1, r4, 0
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0x2
 	negs r0, r0
 	cmp r5, r0

@@ -752,8 +752,8 @@ _08122322:
 	bx r0
 	thumb_func_end sub_8122298
 
-	thumb_func_start sub_8122328
-sub_8122328: @ 8122328
+	thumb_func_start LoadListMenuArrowsGfx
+LoadListMenuArrowsGfx: @ 8122328
 	push {lr}
 	ldr r0, =gUnknown_0859F514
 	bl LoadCompressedObjectPic
@@ -762,7 +762,7 @@ sub_8122328: @ 8122328
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8122328
+	thumb_func_end LoadListMenuArrowsGfx
 
 	thumb_func_start sub_8122344
 sub_8122344: @ 8122344

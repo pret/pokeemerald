@@ -95,7 +95,7 @@ BattleFrontier_BattleDomeLobby_EventScript_2498C9:: @ 82498C9
 	setvar VAR_0x8006, 1
 	special sub_818E9AC
 	special copy_player_party_from_sav1
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	goto BattleFrontier_BattleDomeLobby_EventScript_249991
 
 BattleFrontier_BattleDomeLobby_EventScript_249940:: @ 8249940
@@ -118,7 +118,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249940:: @ 8249940
 	setvar VAR_0x8006, 1
 	special sub_818E9AC
 	special copy_player_party_from_sav1
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 BattleFrontier_BattleDomeLobby_EventScript_249991:: @ 8249991
 	setvar VAR_0x8004, 13
@@ -265,7 +265,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249BC2:: @ 8249BC2
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A437, 4
 	closemessage
 	call BattleFrontier_BattleDomeLobby_EventScript_249C6E
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	warp BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR, 255, 23, 6
 	setvar VAR_0x4000, 0
 	waitstate

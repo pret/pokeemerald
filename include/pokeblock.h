@@ -25,6 +25,14 @@ enum
     PBLOCK_FEEL,
 };
 
+enum
+{
+    PBLOCK_CASE_FIELD,
+    PBLOCK_CASE_BATTLE,
+    PBLOCK_CASE_FEEDER,
+    PBLOCK_CASE_GIVE
+};
+
 // use pokeblock
 extern u8 gPokeblockMonId;
 extern s16 gPokeblockGain;
@@ -40,8 +48,13 @@ extern const u8 *const gPokeblockNames[];
 extern const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet;
 extern const struct CompressedSpritePalette gPokeblockCase_SpritePal;
 
+void OpenPokeblockCase(u8 caseId, void (*callback)(void));
+void OpenPokeblockCaseInBattle(void);
+void OpenPokeblockCaseOnFeeder(void);
+void ResetPokeblockScrollPositions(void);
+
 u8 CreatePokeblockCaseSprite(s16 x, s16 y, u8 subpriority);
-u8 GetPokeblockData(const struct Pokeblock *pokeblock, u8 dataId);
+s16 GetPokeblockData(const struct Pokeblock *pokeblock, u8 dataId);
 void ClearPokeblocks(void);
 s8 GetFirstFreePokeblockSlot(void);
 bool32 AddPokeblock(struct Pokeblock *pokeblock);

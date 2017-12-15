@@ -72,7 +72,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A22D, 4
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 9
 	special sub_81A1780
 	compare_var_to_value VAR_RESULT, 0

@@ -32,7 +32,7 @@ void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirs
 s8 sub_8198C58(void);
 void do_scheduled_bg_tilemap_copies_to_vram(void);
 void clear_scheduled_bg_copies_to_vram(void);
-void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, s8 speed, const u8 *str);
+void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str);
 void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u16 a3);
 
 #endif // GUARD_MENU_H

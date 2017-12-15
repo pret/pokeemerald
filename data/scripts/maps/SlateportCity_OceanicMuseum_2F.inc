@@ -78,7 +78,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	fadescreen 1
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	removeobject 1
 	setflag FLAG_0x384
 	compare_var_to_value VAR_0x40DA, 0

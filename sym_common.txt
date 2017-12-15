@@ -419,7 +419,7 @@ gUnknown_030062F4: @ 30062F4
 gUnknown_03006300: @ 3006300
 	.space 0x10
 
-gUnknown_03006310: @ 3006310
+gMultiuseListMenuTemplate: @ 3006310
 	.space 0x18
 
 gUnknown_03006328: @ 3006328

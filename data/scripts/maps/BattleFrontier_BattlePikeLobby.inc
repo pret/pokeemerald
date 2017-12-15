@@ -25,7 +25,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B707:: @ 825B707
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_25B710:: @ 825B710
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 27
 	special sub_81A703C
 	lockall
@@ -77,7 +77,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B78D:: @ 825B78D
 	copyvar VAR_0x8006, VAR_RESULT
 	special sub_81A703C
 	special copy_player_party_from_sav1
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 27
 	special sub_81A703C
 	message BattleFrontier_BattlePikeLobby_Text_25C1DF
@@ -108,7 +108,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B806:: @ 825B806
 	setvar VAR_0x8006, 0
 	special sub_81A703C
 	special copy_player_party_from_sav1
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 27
 	special sub_81A703C
 	setvar VAR_0x8004, 8
@@ -210,7 +210,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_0x8004, 5
 	special sub_81A1780
 	call BattleFrontier_BattlePikeLobby_EventScript_25BA94
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	call BattleFrontier_BattlePikeLobby_EventScript_25BB49
 	warpsilent BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR, 255, 6, 7
 	setvar VAR_0x4000, 0

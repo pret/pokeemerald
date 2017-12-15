@@ -65,7 +65,7 @@ SlateportCity_BattleTentCorridor_EventScript_208EEE:: @ 8208EEE
 	msgbox SlateportCity_BattleTentCorridor_Text_25A22D, 4
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 SlateportCity_BattleTentCorridor_EventScript_208F0D:: @ 8208F0D
 	setvar VAR_0x8004, 1

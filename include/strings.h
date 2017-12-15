@@ -18,6 +18,15 @@ extern const u8 gText_Tough[];
 extern const u8 gText_Single[];
 extern const u8 gText_Double[];
 
+extern const u8 gText_Spicy[];
+extern const u8 gText_Dry[];
+extern const u8 gText_Sweet[];
+extern const u8 gText_Bitter[];
+extern const u8 gText_Sour[];
+
+extern const u8 gText_StowCase[];
+extern const u8 gText_LvVar1[];
+
 extern const u8 gText_Spicy2[];
 extern const u8 gText_Dry2[];
 extern const u8 gText_Sweet2[];
