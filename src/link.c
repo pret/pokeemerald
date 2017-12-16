@@ -8,7 +8,7 @@
 #include "bg.h"
 #include "window.h"
 #include "librfu.h"
-#include "rng.h"
+#include "random.h"
 #include "decompress.h"
 #include "string_util.h"
 #include "event_data.h"
@@ -316,7 +316,7 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
     gLocalLinkPlayer.name[8] = IsNationalPokedexEnabled();
-    if (FlagGet(FLAG_SYS_UNKNOWN_87F))
+    if (FlagGet(FLAG_0x87F))
     {
         gLocalLinkPlayer.name[8] |= 0x10;
     }

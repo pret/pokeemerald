@@ -2,7 +2,7 @@
 #include "pokemon.h"
 #include "egg_hatch.h"
 #include "pokedex.h"
-#include "items.h"
+#include "constants/items.h"
 #include "script.h"
 #include "decompress.h"
 #include "task.h"
@@ -10,20 +10,20 @@
 #include "main.h"
 #include "event_data.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "text.h"
 #include "text_window.h"
 #include "string_util.h"
 #include "menu.h"
 #include "trig.h"
-#include "rng.h"
+#include "random.h"
 #include "malloc.h"
 #include "dma3.h"
 #include "gpu_regs.h"
 #include "bg.h"
 #include "m4a.h"
 #include "window.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "daycare.h"
 #include "battle.h" // to get rid of later
 
@@ -703,16 +703,16 @@ static void CB2_EggHatch_1(void)
 
 static void SpriteCB_Egg_0(struct Sprite* sprite)
 {
-    if (++sprite->data0 > 20)
+    if (++sprite->data[0] > 20)
     {
         sprite->callback = SpriteCB_Egg_1;
-        sprite->data0 = 0;
+        sprite->data[0] = 0;
     }
     else
     {
-        sprite->data1 = (sprite->data1 + 20) & 0xFF;
-        sprite->pos2.x = Sin(sprite->data1, 1);
-        if (sprite->data0 == 15)
+        sprite->data[1] = (sprite->data[1] + 20) & 0xFF;
+        sprite->pos2.x = Sin(sprite->data[1], 1);
+        if (sprite->data[0] == 15)
         {
             PlaySE(SE_BOWA);
             StartSpriteAnim(sprite, 1);
@@ -723,19 +723,19 @@ static void SpriteCB_Egg_0(struct Sprite* sprite)
 
 static void SpriteCB_Egg_1(struct Sprite* sprite)
 {
-    if (++sprite->data2 > 30)
+    if (++sprite->data[2] > 30)
     {
-        if (++sprite->data0 > 20)
+        if (++sprite->data[0] > 20)
         {
             sprite->callback = SpriteCB_Egg_2;
-            sprite->data0 = 0;
-            sprite->data2 = 0;
+            sprite->data[0] = 0;
+            sprite->data[2] = 0;
         }
         else
         {
-            sprite->data1 = (sprite->data1 + 20) & 0xFF;
-            sprite->pos2.x = Sin(sprite->data1, 2);
-            if (sprite->data0 == 15)
+            sprite->data[1] = (sprite->data[1] + 20) & 0xFF;
+            sprite->pos2.x = Sin(sprite->data[1], 2);
+            if (sprite->data[0] == 15)
             {
                 PlaySE(SE_BOWA);
                 StartSpriteAnim(sprite, 2);
@@ -746,30 +746,30 @@ static void SpriteCB_Egg_1(struct Sprite* sprite)
 
 static void SpriteCB_Egg_2(struct Sprite* sprite)
 {
-    if (++sprite->data2 > 30)
+    if (++sprite->data[2] > 30)
     {
-        if (++sprite->data0 > 38)
+        if (++sprite->data[0] > 38)
         {
             u16 species;
 
             sprite->callback = SpriteCB_Egg_3;
-            sprite->data0 = 0;
+            sprite->data[0] = 0;
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_SPECIES);
             gSprites[sEggHatchData->pokeSpriteID].pos2.x = 0;
             gSprites[sEggHatchData->pokeSpriteID].pos2.y = 0;
         }
         else
         {
-            sprite->data1 = (sprite->data1 + 20) & 0xFF;
-            sprite->pos2.x = Sin(sprite->data1, 2);
-            if (sprite->data0 == 15)
+            sprite->data[1] = (sprite->data[1] + 20) & 0xFF;
+            sprite->pos2.x = Sin(sprite->data[1], 2);
+            if (sprite->data[0] == 15)
             {
                 PlaySE(SE_BOWA);
                 StartSpriteAnim(sprite, 2);
                 CreateRandomEggShardSprite();
                 CreateRandomEggShardSprite();
             }
-            if (sprite->data0 == 30)
+            if (sprite->data[0] == 30)
                 PlaySE(SE_BOWA);
         }
     }
@@ -777,60 +777,60 @@ static void SpriteCB_Egg_2(struct Sprite* sprite)
 
 static void SpriteCB_Egg_3(struct Sprite* sprite)
 {
-    if (++sprite->data0 > 50)
+    if (++sprite->data[0] > 50)
     {
         sprite->callback = SpriteCB_Egg_4;
-        sprite->data0 = 0;
+        sprite->data[0] = 0;
     }
 }
 
 static void SpriteCB_Egg_4(struct Sprite* sprite)
 {
     s16 i;
-    if (sprite->data0 == 0)
+    if (sprite->data[0] == 0)
         BeginNormalPaletteFade(-1, -1, 0, 0x10, 0xFFFF);
-    if (sprite->data0 < 4u)
+    if (sprite->data[0] < 4u)
     {
         for (i = 0; i <= 3; i++)
             CreateRandomEggShardSprite();
     }
-    sprite->data0++;
+    sprite->data[0]++;
     if (!gPaletteFade.active)
     {
         PlaySE(SE_TAMAGO);
         sprite->invisible = 1;
         sprite->callback = SpriteCB_Egg_5;
-        sprite->data0 = 0;
+        sprite->data[0] = 0;
     }
 }
 
 static void SpriteCB_Egg_5(struct Sprite* sprite)
 {
-    if (sprite->data0 == 0)
+    if (sprite->data[0] == 0)
     {
         gSprites[sEggHatchData->pokeSpriteID].invisible = 0;
         StartSpriteAffineAnim(&gSprites[sEggHatchData->pokeSpriteID], 1);
     }
-    if (sprite->data0 == 8)
+    if (sprite->data[0] == 8)
         BeginNormalPaletteFade(-1, -1, 0x10, 0, 0xFFFF);
-    if (sprite->data0 <= 9)
+    if (sprite->data[0] <= 9)
         gSprites[sEggHatchData->pokeSpriteID].pos1.y -= 1;
-    if (sprite->data0 > 40)
+    if (sprite->data[0] > 40)
         sprite->callback = SpriteCallbackDummy;
-    sprite->data0++;
+    sprite->data[0]++;
 }
 
 static void SpriteCB_EggShard(struct Sprite* sprite)
 {
-    sprite->data4 += sprite->data1;
-    sprite->data5 += sprite->data2;
+    sprite->data[4] += sprite->data[1];
+    sprite->data[5] += sprite->data[2];
 
-    sprite->pos2.x = sprite->data4 / 256;
-    sprite->pos2.y = sprite->data5 / 256;
+    sprite->pos2.x = sprite->data[4] / 256;
+    sprite->pos2.y = sprite->data[5] / 256;
 
-    sprite->data2 += sprite->data3;
+    sprite->data[2] += sprite->data[3];
 
-    if (sprite->pos1.y + sprite->pos2.y > sprite->pos1.y + 20 && sprite->data2 > 0)
+    if (sprite->pos1.y + sprite->pos2.y > sprite->pos1.y + 20 && sprite->data[2] > 0)
         DestroySprite(sprite);
 }
 
@@ -848,9 +848,9 @@ static void CreateRandomEggShardSprite(void)
 static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8 spriteAnimIndex)
 {
     u8 spriteID = CreateSprite(&sSpriteTemplate_EggShard, x, y, 4);
-    gSprites[spriteID].data1 = data1;
-    gSprites[spriteID].data2 = data2;
-    gSprites[spriteID].data3 = data3;
+    gSprites[spriteID].data[1] = data1;
+    gSprites[spriteID].data[2] = data2;
+    gSprites[spriteID].data[3] = data3;
     StartSpriteAnim(&gSprites[spriteID], spriteAnimIndex);
 }
 

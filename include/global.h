@@ -48,7 +48,11 @@ enum
 enum LanguageId {
     LANGUAGE_JAPANESE = 1,
     LANGUAGE_ENGLISH = 2,
+    LANGUAGE_FRENCH = 3,
+    LANGUAGE_ITALIAN = 4,
     LANGUAGE_GERMAN = 5,
+    // 6 goes unused but the theory is it was meant to be Korean
+    LANGUAGE_SPANISH = 7,
 };
 
 #define GAME_VERSION (VERSION_EMERALD)
@@ -285,7 +289,7 @@ struct SecretBaseRecord
     /*0x1B34*/ u8 partyEVs[6];
 };
 
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "global.fieldmap.h"
 #include "global.berry.h"
 #include "global.tv.h"

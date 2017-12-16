@@ -2,11 +2,11 @@
 #include "task.h"
 #include "sprite.h"
 #include "field_map_obj.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "palette.h"
 #include "script.h"
-#include "vars.h"
+#include "constants/vars.h"
 #include "event_data.h"
 #include "main.h"
 

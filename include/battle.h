@@ -86,8 +86,9 @@
 #define BATTLE_FORFEITED            0x9
 #define BATTLE_OPPONENT_TELEPORTED  0xA
 
-#define BATTLE_OUTCOME_BIT_x80      0x80
+#define OUTCOME_LINK_BATTLE_RUN      0x80
 
+#define STATUS_NONE             0x0
 #define STATUS_SLEEP            0x7
 #define STATUS_POISON           0x8
 #define STATUS_BURN             0x10
@@ -615,10 +616,10 @@ struct BattleStruct
     u8 focusPunchBank;
     u8 field_49;
     u8 moneyMultiplier;
-    u8 field_4B;
+    u8 savedTurnActionNumber;
     u8 switchInAbilitiesCounter;
-    u8 field_4D;
-    u8 field_4E;
+    u8 faintedActionsState;
+    u8 faintedActionsBank;
     u8 field_4F;
     u16 expValue;
     u8 field_52;
@@ -690,8 +691,8 @@ struct BattleStruct
     u8 field_182;
     u8 field_183;
     struct BattleEnigmaBerry battleEnigmaBerry;
-    u8 field_1A0;
-    u8 field_1A1;
+    u8 wishPerishSongState;
+    u8 wishPerishSongBank;
     bool8 overworldWeatherDone;
     u8 atkCancellerTracker;
     u8 field_1A4[96];
@@ -800,7 +801,7 @@ extern struct BattleStruct* gBattleStruct;
 #define B_ANIM_ITEM_STEAL               0x10
 #define B_ANIM_SNATCH_MOVE              0x11
 #define B_ANIM_FUTURE_SIGHT_HIT         0x12
-#define B_ANIM_x13                      0x13
+#define B_ANIM_DOOM_DESIRE_HIT          0x13
 #define B_ANIM_x14                      0x14
 #define B_ANIM_INGRAIN_HEAL             0x15
 #define B_ANIM_WISH_HEAL                0x16
@@ -845,8 +846,8 @@ struct BattleScripting
     u8 animArg2;
     u16 tripleKickPower;
     u8 atk49_state;
-    u8 field_15;
-    u8 field_16;
+    u8 bankWithAbility;
+    u8 multihitMoveEffect;
     u8 bank;
     u8 animTurn;
     u8 animTargetsHit;
@@ -932,7 +933,7 @@ struct BattleHealthboxInfo
     u8 flag_x1 : 1;
     u8 flag_x2 : 1;
     u8 flag_x4 : 1;
-    u8 flag_x8 : 1;
+    u8 ballAnimActive : 1; // 0x8
     u8 statusAnimActive : 1; // x10
     u8 animFromTableActive : 1; // x20
     u8 specialAnimActive : 1; //x40

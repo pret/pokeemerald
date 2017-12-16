@@ -1,10 +1,10 @@
 
 // Includes
 #include "global.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "heal_location.h"
 
-#define HEAL_LOCATION(map, x, y) {MAP_GROUP_##map, MAP_ID_##map, x, y}
+#define HEAL_LOCATION(map, x, y) {MAP_GROUP(map), MAP_NUM(map), x, y}
 
 // Static type declarations
 

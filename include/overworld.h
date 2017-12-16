@@ -25,8 +25,6 @@ struct UCoords32
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern MainCallback gFieldCallback;
 
-void IncrementGameStat(u8 index);
-
 void Overworld_SetMapObjTemplateCoords(u8, s16, s16);
 void Overworld_SetMapObjTemplateMovementType(u8, u8);
 
@@ -72,5 +70,7 @@ void mapldr_default(void);
 bool32 sub_80875C8(void);
 bool32 sub_8087634(void);
 bool32 sub_808766C(void);
+void IncrementGameStat(u8);
+u32 GetGameStat(u8);
 
 #endif //GUARD_ROM4_H

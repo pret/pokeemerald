@@ -5,6 +5,32 @@
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
 
+extern const u8 gInterfaceGfx_PokeBall[];
+extern const u8 gInterfacePal_PokeBall[];
+extern const u8 gInterfaceGfx_GreatBall[];
+extern const u8 gInterfacePal_GreatBall[];
+extern const u8 gInterfaceGfx_SafariBall[];
+extern const u8 gInterfacePal_SafariBall[];
+extern const u8 gInterfaceGfx_UltraBall[];
+extern const u8 gInterfacePal_UltraBall[];
+extern const u8 gInterfaceGfx_MasterBall[];
+extern const u8 gInterfacePal_MasterBall[];
+extern const u8 gInterfaceGfx_NetBall[];
+extern const u8 gInterfacePal_NetBall[];
+extern const u8 gInterfaceGfx_DiveBall[];
+extern const u8 gInterfacePal_DiveBall[];
+extern const u8 gInterfaceGfx_NestBall[];
+extern const u8 gInterfacePal_NestBall[];
+extern const u8 gInterfaceGfx_RepeatBall[];
+extern const u8 gInterfacePal_RepeatBall[];
+extern const u8 gInterfaceGfx_TimerBall[];
+extern const u8 gInterfacePal_TimerBall[];
+extern const u8 gInterfaceGfx_LuxuryBall[];
+extern const u8 gInterfacePal_LuxuryBall[];
+extern const u8 gInterfaceGfx_PremierBall[];
+extern const u8 gInterfacePal_PremierBall[];
+extern const u8 gOpenPokeballGfx[];
+
 extern const u8 gItemIcon_QuestionMark[];
 extern const u8 gItemIconPalette_QuestionMark[];
 extern const u8 gUnknown_08DB7AA0[];
@@ -91,5 +117,23 @@ extern const u8 gUnknown_08DB9F08[];
 extern const u8 gUnknown_08DB9FFC[];
 extern const u8 gUnknown_08DBA020[];
 extern const u8 gUnknown_08DBA12C[];
+extern const u8 gUnknown_08DD87C0[];
+extern const u8 gUnknown_08DD8EE0[];
+extern const u16 gUnknown_08DD8780[];
+extern const u8 gUnknown_08DD90E0[];
+extern const u8 gUnknown_08DD9718[];
+extern const u16 gUnknown_08DD9080[];
+extern const u8 gUnknown_08DD98B4[];
+extern const u8 gUnknown_08DD9E58[];
+extern const u16 gUnknown_08DD9874[];
+extern const u8 gUnknown_08DDA02C[];
+extern const u8 gUnknown_08DDA63C[];
+extern const u16 gUnknown_08DD9FEC[];
+extern const u8 gUnknown_08DDA840[];
+extern const u8 gUnknown_08DDAE40[];
+extern const u16 gUnknown_08DDA800[];
+extern const u8 gUnknown_08DDB020[];
+extern const u8 gUnknown_08DDB2C4[];
+extern const u16 gUnknown_08DDAFE0[];
 
 #endif //GUARD_GRAPHICS_H

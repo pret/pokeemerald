@@ -2,17 +2,16 @@
 #include "battle_ai_script_commands.h"
 #include "pokemon.h"
 #include "battle.h"
-#include "species.h"
-#include "abilities.h"
-#include "rng.h"
+#include "constants/species.h"
+#include "constants/abilities.h"
+#include "random.h"
 #include "item.h"
-#include "battle_move_effects.h"
-#include "moves.h"
+#include "constants/battle_move_effects.h"
+#include "constants/moves.h"
 #include "util.h"
 
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
-#define AIScriptRead8(ptr) ((ptr)[0])
 #define AIScriptReadPtr(ptr) (const u8*) AIScriptRead32(ptr)
 
 #define AI_ACTION_DONE          0x0001

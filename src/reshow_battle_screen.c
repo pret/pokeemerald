@@ -10,7 +10,7 @@
 #include "battle_controllers.h"
 #include "link.h"
 #include "sprite.h"
-#include "species.h"
+#include "constants/species.h"
 #include "battle_interface.h"
 
 extern u16 gBattle_BG0_X;
@@ -42,7 +42,7 @@ extern u8 GetBankSpriteDefault_Y(u8 bank);
 extern u8 sub_80A82E4(u8 bank);
 extern void sub_806A068(u16 species, u8 bankIdentity);
 extern void sub_806A12C(u16 backPicId, u8 bankIdentity);
-extern u8 sub_80A5C6C(u8 bank, u8 caseId);
+extern u8 GetBankPosition(u8 bank, u8 caseId);
 
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
@@ -260,11 +260,11 @@ static void CreateBankSprite(u8 bank)
                 return;
 
             sub_806A068(GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBankIdentity(bank));
-            gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, sub_80A5C6C(bank, 2), posY, sub_80A82E4(bank));
+            gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, GetBankPosition(bank, 2), posY, sub_80A82E4(bank));
             gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
-            gSprites[gBankSpriteIds[bank]].data0 = bank;
-            gSprites[gBankSpriteIds[bank]].data2 = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
+            gSprites[gBankSpriteIds[bank]].data[0] = bank;
+            gSprites[gBankSpriteIds[bank]].data[2] = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
 
             StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], gBattleMonForms[bank]);
             if (gBattleSpritesDataPtr->bankData[bank].transformSpecies == SPECIES_CASTFORM)
@@ -278,7 +278,7 @@ static void CreateBankSprite(u8 bank)
                                                  sub_80A82E4(0));
             gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
-            gSprites[gBankSpriteIds[bank]].data0 = bank;
+            gSprites[gBankSpriteIds[bank]].data[0] = bank;
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
         {
@@ -288,7 +288,7 @@ static void CreateBankSprite(u8 bank)
                                                  sub_80A82E4(0));
             gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
-            gSprites[gBankSpriteIds[bank]].data0 = bank;
+            gSprites[gBankSpriteIds[bank]].data[0] = bank;
         }
         else
         {
@@ -296,11 +296,11 @@ static void CreateBankSprite(u8 bank)
                 return;
 
             sub_806A068(GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBankIdentity(bank));
-            gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, sub_80A5C6C(bank, 2), posY, sub_80A82E4(bank));
+            gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C, GetBankPosition(bank, 2), posY, sub_80A82E4(bank));
             gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
-            gSprites[gBankSpriteIds[bank]].data0 = bank;
-            gSprites[gBankSpriteIds[bank]].data2 = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
+            gSprites[gBankSpriteIds[bank]].data[0] = bank;
+            gSprites[gBankSpriteIds[bank]].data[2] = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
 
             StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], gBattleMonForms[bank]);
             if (gBattleSpritesDataPtr->bankData[bank].transformSpecies == SPECIES_CASTFORM)

@@ -99,13 +99,13 @@ sub_80FE8E0: @ 80FE8E0
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -135,13 +135,13 @@ sub_80FE930: @ 80FE930
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -170,7 +170,7 @@ sub_80FE988: @ 80FE988
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
@@ -178,7 +178,7 @@ sub_80FE988: @ 80FE988
 	strh r0, [r4, 0x34]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -324,13 +324,13 @@ sub_80FEAD8: @ 80FEAD8
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -350,7 +350,7 @@ sub_80FEAD8: @ 80FEAD8
 sub_80FEB28: @ 80FEB28
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FEB3C
@@ -377,13 +377,13 @@ sub_80FEB44: @ 80FEB44
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -413,7 +413,7 @@ _080FEB94:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
@@ -421,7 +421,7 @@ _080FEB94:
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -511,7 +511,7 @@ _080FEC68:
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x4]
@@ -519,7 +519,7 @@ _080FEC68:
 	strh r0, [r6, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x6]
@@ -541,7 +541,7 @@ _080FEC68:
 sub_80FECB8: @ 80FECB8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FECE2
@@ -774,7 +774,7 @@ sub_80FEE78: @ 80FEE78
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x4]
@@ -871,7 +871,7 @@ sub_80FEF44: @ 80FEF44
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x4]
@@ -953,13 +953,13 @@ sub_80FEFFC: @ 80FEFFC
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -1101,7 +1101,7 @@ _080FF114:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r6, 0x4]
@@ -1109,7 +1109,7 @@ _080FF114:
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r6, [r6, 0x6]
@@ -1175,7 +1175,7 @@ sub_80FF1C0: @ 80FF1C0
 	movs r0, 0x1
 	strh r0, [r6, 0x2E]
 	adds r0, r6, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	ldrh r0, [r6, 0x3C]
 	strh r5, [r6, 0x2E]
 	lsls r4, 16
@@ -1799,7 +1799,7 @@ _080FF6AA:
 _080FF6C2:
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -1808,7 +1808,7 @@ _080FF6C2:
 	strh r0, [r5, 0x20]
 	ldrb r0, [r6]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r4, [r4, 0x2]
@@ -1848,13 +1848,13 @@ _080FF704:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -1881,13 +1881,13 @@ sub_80FF768: @ 80FF768
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -1944,13 +1944,13 @@ sub_80FF7EC: @ 80FF7EC
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24
@@ -1959,13 +1959,13 @@ sub_80FF7EC: @ 80FF7EC
 	ldr r6, =gAnimBankTarget
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r6]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r2, r0, 0
 	lsls r2, 24
 	subs r4, r5
@@ -2098,7 +2098,7 @@ sub_80FF934: @ 80FF934
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -2107,7 +2107,7 @@ sub_80FF934: @ 80FF934
 	strh r0, [r6, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x2]
@@ -2352,12 +2352,12 @@ sub_80FFB18: @ 80FFB18
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, =gAnimBankAttacker
@@ -2456,7 +2456,7 @@ sub_80FFBF4: @ 80FFBF4
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
@@ -2554,12 +2554,12 @@ sub_80FFCB4: @ 80FFCB4
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, =gAnimBankTarget
@@ -2963,13 +2963,13 @@ sub_80FFFC0: @ 80FFFC0
 	strh r0, [r5, 0x10]
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x14]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x16]
@@ -3161,7 +3161,7 @@ _08100180:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _08100196
@@ -3190,7 +3190,7 @@ _081001B4:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _081001CA
@@ -3219,7 +3219,7 @@ _081001E6:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _081001FC
@@ -3272,7 +3272,7 @@ _08100254:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810026A
@@ -3403,7 +3403,7 @@ _08100362:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _08100378
@@ -3514,7 +3514,7 @@ _08100448:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _081004FC
@@ -3566,7 +3566,7 @@ _081004B6:
 	adds r1, r2, 0
 	bl sub_8100524
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _081004FC
@@ -3837,7 +3837,7 @@ _081006CE:
 _081006D4:
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5]
@@ -3860,7 +3860,7 @@ _08100700:
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r7, [r7]
@@ -4082,12 +4082,12 @@ _081008C4:
 _081008C6:
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, =gBattleAnimArgs
@@ -4346,13 +4346,13 @@ sub_8100AE0: @ 8100AE0
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -4444,7 +4444,7 @@ _08100BA8:
 	movs r4, 0x2
 	eors r0, r4
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrb r0, [r5]
@@ -4456,12 +4456,12 @@ _08100BC8:
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r5]
@@ -4477,7 +4477,7 @@ _08100BC8:
 	mov r2, r8
 	eors r0, r2
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r7
@@ -4486,7 +4486,7 @@ _08100BC8:
 	mov r1, r8
 	eors r0, r1
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -4497,13 +4497,13 @@ _08100C24:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrb r0, [r4]
 _08100C34:
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08100C3E:
@@ -5093,14 +5093,14 @@ sub_81010CC: @ 81010CC
 	ldr r6, =gAnimBankTarget
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
 	strh r0, [r4, 0x20]
 	ldrb r0, [r6]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =0x0000ffe8
@@ -5470,7 +5470,7 @@ _081013C4:
 	bne _081013E8
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
@@ -5481,14 +5481,14 @@ _081013C4:
 _081013E8:
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	adds r0, r6, 0
 	movs r1, 0x3
 _081013FA:
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r4, [r4, 0x2]
@@ -5888,14 +5888,14 @@ _08101718:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r7
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r6
@@ -6930,7 +6930,7 @@ _08101F5C:
 _08101F5E:
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r6, 0x2]
@@ -6938,7 +6938,7 @@ _08101F5E:
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r6, [r6, 0x4]
@@ -6965,7 +6965,7 @@ sub_8101FA8: @ 8101FA8
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =0x0000ffd0
@@ -6973,7 +6973,7 @@ sub_8101FA8: @ 8101FA8
 	strh r0, [r4, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -6995,7 +6995,7 @@ sub_8101FF0: @ 8101FF0
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gBattleAnimArgs
@@ -7007,7 +7007,7 @@ sub_8101FF0: @ 8101FF0
 	strh r0, [r4, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -7123,7 +7123,7 @@ _081020F4:
 _081020F6:
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r6, 0x2]
@@ -7131,7 +7131,7 @@ _081020F6:
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r6, [r6, 0x4]
@@ -7194,14 +7194,14 @@ sub_810217C: @ 810217C
 	ldr r6, =gAnimBankAttacker
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
 	strh r0, [r4, 0x20]
 	ldrb r0, [r6]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0xC
@@ -7319,7 +7319,7 @@ sub_8102268: @ 8102268
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r5, =gBattleAnimArgs
 	lsrs r0, 24
@@ -7328,7 +7328,7 @@ sub_8102268: @ 8102268
 	strh r0, [r6, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x2]
@@ -7468,13 +7468,13 @@ _08102390:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -7676,7 +7676,7 @@ sub_8102540: @ 8102540
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r2, =gBattleAnimArgs
 	lsrs r0, 24
@@ -8071,7 +8071,7 @@ _08102862:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r6]
@@ -8079,7 +8079,7 @@ _08102862:
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r6, [r6, 0x2]
@@ -8660,12 +8660,12 @@ _08102D34:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r3, r0, 24
 _08102D4E:
@@ -8870,7 +8870,7 @@ sub_8102EB0: @ 8102EB0
 _08102ECE:
 	ldrb r0, [r7]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -8880,7 +8880,7 @@ _08102ECE:
 	strh r0, [r6, 0x20]
 	ldrb r0, [r7]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r2, [r4, 0x4]
@@ -9005,14 +9005,14 @@ _08102FDE:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r6
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x8
@@ -9167,7 +9167,7 @@ _08103136:
 	strh r0, [r6, 0x20]
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r4, r0, 0
 	adds r0, r5, 0
 	movs r1, 0
@@ -9334,7 +9334,7 @@ _081032A2:
 	ldrb r5, [r0]
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0
@@ -9719,13 +9719,13 @@ sub_810358C: @ 810358C
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -10140,7 +10140,7 @@ _0810390E:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r6, =gBattleAnimArgs
 	lsrs r0, 24
@@ -10151,7 +10151,7 @@ _0810390E:
 	mov r8, r0
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r2, [r6, 0x6]
@@ -10719,7 +10719,7 @@ _08103DB6:
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	ldr r1, =gTasks
 	mov r3, r8
 	adds r4, r3, r7
@@ -10731,7 +10731,7 @@ _08103DB6:
 	adds r6, r0, 0
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -10762,13 +10762,13 @@ _08103E20:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r10
@@ -11053,12 +11053,12 @@ sub_8104088: @ 8104088
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -11203,13 +11203,13 @@ sub_81041C4: @ 81041C4
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -11426,14 +11426,14 @@ _08104390:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	add r0, r8
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r6
@@ -11513,7 +11513,7 @@ _08104448:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	add r0, r9
@@ -11522,7 +11522,7 @@ _08104448:
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r6
@@ -12356,7 +12356,7 @@ sub_8104B1C: @ 8104B1C
 	bl StartSpriteAnim
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x20
@@ -12370,7 +12370,7 @@ _08104B50:
 	bl StartSpriteAnim
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x20
@@ -12381,7 +12381,7 @@ _08104B6A:
 	ldr r0, =gAnimBankAttacker
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -12432,7 +12432,7 @@ _08104BCA:
 _08104BE4:
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -12441,7 +12441,7 @@ _08104BE4:
 	strh r0, [r6, 0x20]
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r4, [r4, 0x4]
@@ -12962,7 +12962,7 @@ sub_810501C: @ 810501C
 	ldr r6, =gAnimBankTarget
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -13231,7 +13231,7 @@ _08105230:
 	adds r0, r5, 0
 	movs r1, 0x2
 _08105234:
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r5, 0
@@ -13341,7 +13341,7 @@ _08105310:
 	beq _0810536C
 	adds r0, r7, 0
 	mov r1, r10
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r1, =gBattleAnimArgs
 	lsrs r0, 24
@@ -13372,7 +13372,7 @@ _0810535C:
 _0810536C:
 	adds r0, r7, 0
 	mov r1, r10
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gBattleAnimArgs
@@ -13442,7 +13442,7 @@ _081053FA:
 	strb r0, [r1]
 	adds r0, r7, 0
 	ldr r1, [sp, 0x4]
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -13473,13 +13473,13 @@ _0810544C:
 	mov r4, sp
 	mov r0, r8
 	mov r1, r10
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
 	mov r0, r8
 	ldr r1, [sp, 0x4]
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r2, sp
@@ -14295,13 +14295,13 @@ sub_8105AAC: @ 8105AAC
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -14700,7 +14700,7 @@ _08105E08:
 	strh r0, [r5, 0x2E]
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x4]
@@ -14708,7 +14708,7 @@ _08105E08:
 	strh r0, [r5, 0x32]
 	ldrb r0, [r6]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x6]
@@ -15075,7 +15075,7 @@ sub_8106140: @ 8106140
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
@@ -15083,7 +15083,7 @@ sub_8106140: @ 8106140
 	strh r0, [r4, 0x34]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -15776,13 +15776,13 @@ sub_810673C: @ 810673C
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -15927,13 +15927,13 @@ sub_8106878: @ 8106878
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -16032,13 +16032,13 @@ sub_8106944: @ 8106944
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -16513,13 +16513,13 @@ _08106CFC:
 _08106CFE:
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -16666,7 +16666,7 @@ _08106E1E:
 _08106E38:
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r7, =gBattleAnimArgs
 	lsrs r0, 24
@@ -16676,7 +16676,7 @@ _08106E38:
 	strh r0, [r5, 0x20]
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r7, 0x4]
@@ -17019,13 +17019,13 @@ _081070F8:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x28
@@ -17204,7 +17204,7 @@ sub_8107260: @ 8107260
 	beq _08107290
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, =gBattleAnimArgs
@@ -17215,7 +17215,7 @@ sub_8107260: @ 8107260
 _08107290:
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -17225,7 +17225,7 @@ _081072A2:
 	strh r0, [r6, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r4, [r4, 0x2]
@@ -17256,7 +17256,7 @@ _081072D8:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x32]
@@ -17264,7 +17264,7 @@ _081072D8:
 	strh r0, [r6, 0x34]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x36]
@@ -17448,7 +17448,7 @@ _08107482:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r6
@@ -17457,7 +17457,7 @@ _08107482:
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r7, [r7, 0x6]
@@ -17624,7 +17624,7 @@ sub_81075EC: @ 81075EC
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
@@ -17632,7 +17632,7 @@ sub_81075EC: @ 81075EC
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -17776,13 +17776,13 @@ sub_8107730: @ 8107730
 	ldr r7, =gAnimBankAttacker
 	ldrb r0, [r7]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	ldrb r0, [r7]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -17913,7 +17913,7 @@ _08107842:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r5, 0x4]
@@ -17921,7 +17921,7 @@ _08107842:
 	strh r0, [r6, 0x32]
 	ldrb r0, [r4]
 	adds r1, r7, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x6]
@@ -19353,13 +19353,13 @@ sub_8108408: @ 8108408
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0xAC
@@ -19959,14 +19959,14 @@ sub_81088E4: @ 81088E4
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0
 	strh r0, [r5, 0xE]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x10]
@@ -20234,7 +20234,7 @@ _08108B1A:
 sub_8108B2C: @ 8108B2C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _08108B86
@@ -20283,7 +20283,7 @@ _08108B86:
 sub_8108B94: @ 8108B94
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _08108BD0
@@ -20421,13 +20421,13 @@ sub_8108C94: @ 8108C94
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x30]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
@@ -21131,7 +21131,7 @@ sub_8109244: @ 8109244
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
@@ -21139,7 +21139,7 @@ sub_8109244: @ 8109244
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -21167,13 +21167,13 @@ sub_810929C: @ 810929C
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x22]
@@ -22359,7 +22359,7 @@ _08109BCE:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
@@ -22367,7 +22367,7 @@ _08109BCE:
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -23181,13 +23181,13 @@ sub_810A274: @ 810A274
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -23307,7 +23307,7 @@ _0810A384:
 	bne _0810A3AC
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
@@ -23318,14 +23318,14 @@ _0810A384:
 _0810A3AC:
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	adds r0, r4, 0
 	movs r1, 0x3
 _0810A3BE:
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -23420,7 +23420,7 @@ sub_810A46C: @ 810A46C
 	ldr r6, =gAnimBankTarget
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
@@ -23428,7 +23428,7 @@ sub_810A46C: @ 810A46C
 	strh r0, [r4, 0x34]
 	ldrb r0, [r6]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -23591,7 +23591,7 @@ _0810A5E0:
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -23600,7 +23600,7 @@ _0810A5E0:
 	strh r0, [r6, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x4]
@@ -23657,7 +23657,7 @@ _0810A666:
 _0810A66E:
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -23666,7 +23666,7 @@ _0810A66E:
 	strh r0, [r5, 0x20]
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x2]
@@ -23830,7 +23830,7 @@ sub_810A7DC: @ 810A7DC
 	ldr r6, =gAnimBankTarget
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	ldr r1, =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
@@ -23844,7 +23844,7 @@ sub_810A7DC: @ 810A7DC
 	strh r0, [r4, 0x8]
 	ldrb r0, [r6]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r5, 0x2]
@@ -24228,13 +24228,13 @@ _0810AB28:
 _0810AB2A:
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x24]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x26]
@@ -24448,13 +24448,13 @@ _0810ACF4:
 _0810ACF6:
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -24486,13 +24486,13 @@ _0810AD4C:
 _0810AD4E:
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -24521,13 +24521,13 @@ sub_810AD98: @ 810AD98
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -24649,7 +24649,7 @@ _0810AE90:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x24]
@@ -24855,13 +24855,13 @@ _0810B012:
 _0810B048:
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0xE]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x12]
@@ -24881,13 +24881,13 @@ _0810B070:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x12]
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0xA
@@ -25127,13 +25127,13 @@ _0810B24E:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -25194,13 +25194,13 @@ _0810B2DC:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x14]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x16]
@@ -25209,7 +25209,7 @@ _0810B2DC:
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x1C]
@@ -25542,7 +25542,7 @@ _0810B58A:
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x20
@@ -25564,7 +25564,7 @@ _0810B5B4:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -25724,26 +25724,26 @@ sub_810B6C4: @ 810B6C4
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x3
 	str r3, [sp]
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r1, =gBattleAnimArgs
@@ -25979,7 +25979,7 @@ sub_810B8EC: @ 810B8EC
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
@@ -26006,7 +26006,7 @@ _0810B936:
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r1, =gBattleAnimArgs
 	lsrs r0, 24
@@ -26133,13 +26133,13 @@ sub_810BA24: @ 810BA24
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r6, [r6, 0x6]
@@ -26434,13 +26434,13 @@ sub_810BC94: @ 810BC94
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -27182,13 +27182,13 @@ sub_810C2F0: @ 810C2F0
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -27460,12 +27460,12 @@ sub_810C560: @ 810C560
 	mov r8, r0
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r4, r0, 0
 	ldr r7, =gAnimBankTarget
 	ldrb r0, [r7]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -27526,13 +27526,13 @@ _0810C5F4:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -27548,7 +27548,7 @@ _0810C5F4:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r6, 0x6]
@@ -27570,7 +27570,7 @@ _0810C65C:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r6, 0x6]
@@ -27583,7 +27583,7 @@ _0810C65C:
 	ldrb r0, [r4]
 	movs r1, 0x1
 _0810C684:
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r6, [r6, 0x8]
@@ -27679,7 +27679,7 @@ _0810C736:
 	ldr r6, =gAnimBankTarget
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
@@ -28062,12 +28062,12 @@ sub_810C9E4: @ 810C9E4
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r1, r8
@@ -28384,7 +28384,7 @@ _0810CCCE:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r6, 0x4]
@@ -28392,7 +28392,7 @@ _0810CCCE:
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r6, 0x6]
@@ -28414,7 +28414,7 @@ _0810CCCE:
 sub_810CD1C: @ 810CD1C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810CD3E
@@ -28705,13 +28705,13 @@ _0810CF74:
 	bl StartSpriteAnim
 	mov r0, r8
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	mov r0, r8
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -29149,13 +29149,13 @@ sub_810D308: @ 810D308
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -29275,13 +29275,13 @@ _0810D428:
 _0810D42A:
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -29389,7 +29389,7 @@ sub_810D4F4: @ 810D4F4
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r2, [r6, 0x4]
@@ -29400,7 +29400,7 @@ _0810D520:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r6, 0x4]
@@ -29409,7 +29409,7 @@ _0810D532:
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r6, [r6, 0x6]
@@ -29523,13 +29523,13 @@ sub_810D608: @ 810D608
 	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -29601,7 +29601,7 @@ sub_810D6A8: @ 810D6A8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
@@ -29611,7 +29611,7 @@ sub_810D6A8: @ 810D6A8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -29715,13 +29715,13 @@ _0810D7C2:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -29729,14 +29729,14 @@ _0810D7C2:
 	mov r8, r2
 	ldrb r0, [r2]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	subs r4, r6
 	strh r4, [r7, 0x2E]
@@ -29811,13 +29811,13 @@ sub_810D874: @ 810D874
 	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -29879,7 +29879,7 @@ _0810D918:
 	strh r0, [r5, 0x30]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
@@ -29887,7 +29887,7 @@ _0810D918:
 	strh r0, [r5, 0x34]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -29932,13 +29932,13 @@ sub_810D984: @ 810D984
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -30208,13 +30208,13 @@ _0810DBC2:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -30234,7 +30234,7 @@ _0810DBC2:
 sub_810DC10: @ 810DC10
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810DC24
@@ -30309,7 +30309,7 @@ _0810DC72:
 sub_810DCB4: @ 810DCB4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810DCC8
@@ -30699,7 +30699,7 @@ _0810DFC8:
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x4]
@@ -30709,7 +30709,7 @@ _0810DFC8:
 	strh r0, [r6, 0x34]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r4, [r4, 0x6]
@@ -30782,13 +30782,13 @@ _0810E070:
 _0810E088:
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r2, =gBattleAnimArgs
 	ldrh r1, [r2]
@@ -30808,13 +30808,13 @@ _0810E088:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -30958,7 +30958,7 @@ _0810E1FE:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
@@ -30966,7 +30966,7 @@ _0810E1FE:
 	strh r0, [r5, 0x34]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -31118,7 +31118,7 @@ _0810E33E:
 _0810E354:
 	adds r0, r6, 0
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -31127,7 +31127,7 @@ _0810E354:
 	strh r0, [r7, 0x20]
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldrh r1, [r4, 0x2]
 	lsrs r0, 24
@@ -32064,13 +32064,13 @@ sub_810EA4C: @ 810EA4C
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -32240,13 +32240,13 @@ sub_810EB88: @ 810EB88
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -32344,7 +32344,7 @@ _0810ECB0:
 	ldr r0, =gAnimBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -32553,13 +32553,13 @@ _0810EE40:
 _0810EE42:
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -32708,13 +32708,13 @@ _0810EF74:
 _0810EF76:
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x20
@@ -32864,14 +32864,14 @@ sub_810F084: @ 810F084
 	ldr r6, =gAnimBankAttacker
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
 	strh r0, [r1, 0x20]
 	ldrb r0, [r6]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -33139,7 +33139,7 @@ _0810F2B8:
 _0810F2CE:
 	ldrb r0, [r6]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
@@ -33148,7 +33148,7 @@ _0810F2CE:
 	strh r0, [r5, 0x20]
 	ldrb r0, [r6]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r4, [r4, 0x2]
@@ -33571,13 +33571,13 @@ sub_810F634: @ 810F634
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -33656,14 +33656,14 @@ sub_810F6B0: @ 810F6B0
 _0810F6F6:
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
 	strh r0, [r5, 0x20]
 	ldrb r0, [r6]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r7
@@ -33955,13 +33955,13 @@ sub_810F940: @ 810F940
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x24]
@@ -34263,13 +34263,13 @@ sub_810FBA8: @ 810FBA8
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -34508,7 +34508,7 @@ _0810FDE8:
 sub_810FDF0: @ 810FDF0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810FE0E
@@ -35065,13 +35065,13 @@ _08110260:
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -35254,7 +35254,7 @@ _081103C4:
 	strh r0, [r6, 0x2E]
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x4]
@@ -35262,7 +35262,7 @@ _081103C4:
 	strh r0, [r6, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r4, [r4, 0x6]
@@ -35333,13 +35333,13 @@ _08110478:
 	strh r0, [r6, 0x2E]
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x36]
@@ -35387,13 +35387,13 @@ _08110500:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -35715,7 +35715,7 @@ _081107B2:
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r4, r0, 0
 	lsls r4, 24
 	ldr r6, =gBattleAnimArgs
@@ -35726,7 +35726,7 @@ _081107B2:
 	lsrs r4, 16
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -35797,7 +35797,7 @@ _08110870:
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x4]
@@ -35805,7 +35805,7 @@ _08110870:
 	strh r0, [r6, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x6]
@@ -35844,7 +35844,7 @@ sub_81108CC: @ 81108CC
 	ands r1, r0
 	strb r1, [r2]
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _081108F8
@@ -35879,7 +35879,7 @@ _0811090E:
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	bne _08110988
@@ -35949,13 +35949,13 @@ _081109B0:
 _081109B2:
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x12
@@ -36623,13 +36623,13 @@ sub_8110F74: @ 8110F74
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 8
 	movs r1, 0xC0
@@ -36639,13 +36639,13 @@ sub_8110F74: @ 8110F74
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 8
 	movs r2, 0xC0
@@ -37059,7 +37059,7 @@ _08111304:
 sub_811131C: @ 811131C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811134E
@@ -37219,13 +37219,13 @@ sub_8111444: @ 8111444
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gBattleAnimArgs
@@ -37446,7 +37446,7 @@ sub_811160C: @ 811160C
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
@@ -37454,7 +37454,7 @@ sub_811160C: @ 811160C
 	strh r0, [r4, 0x34]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -37929,7 +37929,7 @@ sub_81119E0: @ 81119E0
 	mov r8, r0
 	ldrb r0, [r0]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -37938,7 +37938,7 @@ sub_81119E0: @ 81119E0
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -38045,13 +38045,13 @@ _08111AD2:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x30]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
@@ -38107,13 +38107,13 @@ _08111B3C:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -38982,12 +38982,12 @@ sub_8112264: @ 8112264
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 8
 	movs r2, 0xE0
@@ -39001,12 +39001,12 @@ _081122AC:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 8
 	movs r2, 0xE0
@@ -39017,13 +39017,13 @@ _081122AC:
 _081122D0:
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 8
 	movs r1, 0xE0
@@ -39169,7 +39169,7 @@ sub_81123C4: @ 81123C4
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -39221,7 +39221,7 @@ _08112436:
 	beq _08112502
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -40198,7 +40198,7 @@ sub_8112C6C: @ 8112C6C
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1A]
@@ -40682,13 +40682,13 @@ sub_8113064: @ 8113064
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -40755,13 +40755,13 @@ sub_8113100: @ 8113100
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -40842,13 +40842,13 @@ _081131D0:
 _081131D2:
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -40901,14 +40901,14 @@ sub_8113250: @ 8113250
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
 	strh r0, [r6, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x22]
@@ -41358,14 +41358,14 @@ sub_81135EC: @ 81135EC
 	mov r8, r1
 	ldrb r0, [r1]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	mov r2, r8
 	ldrb r0, [r2]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r3, [r5, 0x8]
@@ -41693,26 +41693,26 @@ sub_81138D4: @ 81138D4
 	ldr r6, =gAnimBankTarget
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x30]
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
 	ldrb r0, [r6]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x34]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -42031,7 +42031,7 @@ _08113B60:
 sub_8113B90: @ 8113B90
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _08113BA4
@@ -42057,7 +42057,7 @@ sub_8113BAC: @ 8113BAC
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1F
@@ -42076,7 +42076,7 @@ sub_8113BAC: @ 8113BAC
 	strh r1, [r5, 0x22]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -42475,7 +42475,7 @@ _08113F84:
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x1F
@@ -42492,7 +42492,7 @@ _08113F84:
 	strh r1, [r5, 0x22]
 	ldrb r0, [r4]
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	subs r1, r0, 0x4
@@ -43658,13 +43658,13 @@ sub_8114994: @ 8114994
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -43673,13 +43673,13 @@ sub_8114994: @ 8114994
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
@@ -43699,7 +43699,7 @@ sub_8114994: @ 8114994
 sub_81149FC: @ 81149FC
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _08114A50
@@ -43719,13 +43719,13 @@ sub_81149FC: @ 81149FC
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x32]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
@@ -43746,7 +43746,7 @@ _08114A50:
 sub_8114A60: @ 8114A60
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _08114A74
@@ -43781,7 +43781,7 @@ _08114A9C:
 	ldr r5, =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x4]
@@ -43789,7 +43789,7 @@ _08114A9C:
 	strh r0, [r6, 0x32]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r4, [r4, 0x6]
@@ -43893,7 +43893,7 @@ sub_8114B80: @ 8114B80
 	ldr r4, =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r2, [r6, 0x2]
@@ -43901,7 +43901,7 @@ sub_8114B80: @ 8114B80
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r3, [r6, 0x4]
@@ -44657,7 +44657,7 @@ _081151BE:
 _081151DA:
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r6
@@ -44693,7 +44693,7 @@ _081151DA:
 sub_8115228: @ 8115228
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80A6900
+	bl AnimateBallThrow
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811523C
@@ -44723,7 +44723,7 @@ _08115262:
 	ldrb r5, [r0]
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x0000fff0
@@ -45244,7 +45244,7 @@ _0811565A:
 	adds r4, r0
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x20
@@ -45255,7 +45255,7 @@ _0811565A:
 	strh r1, [r4, 0xA]
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_80A5C6C
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x40

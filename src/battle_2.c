@@ -11,12 +11,12 @@
 #include "palette.h"
 #include "task.h"
 #include "event_data.h"
-#include "species.h"
+#include "constants/species.h"
 #include "berry.h"
 #include "text.h"
 #include "item.h"
-#include "items.h"
-#include "hold_effects.h"
+#include "constants/items.h"
+#include "constants/hold_effects.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "bg.h"
@@ -26,19 +26,19 @@
 #include "event_data.h"
 #include "m4a.h"
 #include "window.h"
-#include "rng.h"
-#include "songs.h"
+#include "random.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "battle_message.h"
 #include "sprite.h"
 #include "util.h"
 #include "trig.h"
 #include "battle_ai_script_commands.h"
-#include "battle_move_effects.h"
+#include "constants/battle_move_effects.h"
 #include "battle_controllers.h"
 #include "pokedex.h"
-#include "abilities.h"
-#include "moves.h"
+#include "constants/abilities.h"
+#include "constants/moves.h"
 #include "trainer_classes.h"
 #include "evolution_scene.h"
 #include "roamer.h"
@@ -161,7 +161,7 @@ extern const u8 gStatStageRatios[][2];
 extern const u8 * const gBattleScriptsForMoveEffects[];
 extern const u8 * const gBattlescriptsForBallThrow[];
 extern const u8 * const gBattlescriptsForRunningByItem[];
-extern const u8 * const gUnknown_082DBD3C[];
+extern const u8 * const gBattlescriptsForUsingItem[];
 extern const u8 * const gBattlescriptsForSafariActions[];
 
 // strings
@@ -1621,7 +1621,7 @@ void CB2_QuitRecordedBattle(void)
 
 void sub_8038528(struct Sprite* sprite)
 {
-    sprite->data0 = 0;
+    sprite->data[0] = 0;
     sprite->callback = sub_8038538;
 }
 
@@ -1629,42 +1629,42 @@ static void sub_8038538(struct Sprite *sprite)
 {
     u16 *arr = (u16*)(gDecompressionBuffer);
 
-    switch (sprite->data0)
+    switch (sprite->data[0])
     {
     case 0:
-        sprite->data0++;
-        sprite->data1 = 0;
-        sprite->data2 = 0x281;
-        sprite->data3 = 0;
-        sprite->data4 = 1;
+        sprite->data[0]++;
+        sprite->data[1] = 0;
+        sprite->data[2] = 0x281;
+        sprite->data[3] = 0;
+        sprite->data[4] = 1;
         // fall through
     case 1:
-        sprite->data4--;
-        if (sprite->data4 == 0)
+        sprite->data[4]--;
+        if (sprite->data[4] == 0)
         {
             s32 i;
             s32 r2;
             s32 r0;
 
-            sprite->data4 = 2;
-            r2 = sprite->data1 + sprite->data3 * 32;
-            r0 = sprite->data2 - sprite->data3 * 32;
+            sprite->data[4] = 2;
+            r2 = sprite->data[1] + sprite->data[3] * 32;
+            r0 = sprite->data[2] - sprite->data[3] * 32;
             for (i = 0; i < 29; i += 2)
             {
                 arr[r2 + i] = 0x3D;
                 arr[r0 + i] = 0x3D;
             }
-            sprite->data3++;
-            if (sprite->data3 == 21)
+            sprite->data[3]++;
+            if (sprite->data[3] == 21)
             {
-                sprite->data0++;
-                sprite->data1 = 32;
+                sprite->data[0]++;
+                sprite->data[1] = 32;
             }
         }
         break;
     case 2:
-        sprite->data1--;
-        if (sprite->data1 == 20)
+        sprite->data[1]--;
+        if (sprite->data[1] == 20)
             SetMainCallback2(CB2_InitBattle);
         break;
     }
@@ -1825,12 +1825,12 @@ void nullsub_17(void)
 
 static void sub_8038B04(struct Sprite *sprite)
 {
-    if (sprite->data0 != 0)
-        sprite->pos1.x = sprite->data1 + ((sprite->data2 & 0xFF00) >> 8);
+    if (sprite->data[0] != 0)
+        sprite->pos1.x = sprite->data[1] + ((sprite->data[2] & 0xFF00) >> 8);
     else
-        sprite->pos1.x = sprite->data1 - ((sprite->data2 & 0xFF00) >> 8);
+        sprite->pos1.x = sprite->data[1] - ((sprite->data[2] & 0xFF00) >> 8);
 
-    sprite->data2 += 0x180;
+    sprite->data[2] += 0x180;
 
     if (sprite->affineAnimEnded)
     {
@@ -2383,8 +2383,8 @@ u32 sub_80397C4(u32 setId, u32 tableId)
     return gUnknown_0831ABA0[setId][tableId].width * 8;
 }
 
-#define tBank               data0
-#define tSpeciesId          data2
+#define tBank               data[0]
+#define tSpeciesId          data[2]
 
 void oac_poke_opponent(struct Sprite *sprite)
 {
@@ -2432,20 +2432,20 @@ void SpriteCallbackDummy_2(struct Sprite *sprite)
 
 static void sub_80398BC(struct Sprite *sprite) // unused?
 {
-    sprite->data3 = 6;
-    sprite->data4 = 1;
+    sprite->data[3] = 6;
+    sprite->data[4] = 1;
     sprite->callback = sub_80398D0;
 }
 
 static void sub_80398D0(struct Sprite *sprite)
 {
-    sprite->data4--;
-    if (sprite->data4 == 0)
+    sprite->data[4]--;
+    if (sprite->data[4] == 0)
     {
-        sprite->data4 = 8;
+        sprite->data[4] = 8;
         sprite->invisible ^= 1;
-        sprite->data3--;
-        if (sprite->data3 == 0)
+        sprite->data[3]--;
+        if (sprite->data[3] == 0)
         {
             sprite->invisible = FALSE;
             sprite->callback = SpriteCallbackDummy_2;
@@ -2496,8 +2496,8 @@ void sub_8039934(struct Sprite *sprite)
         yOffset = gMonFrontPicCoords[species].y_offset;
     }
 
-    sprite->data3 = 8 - yOffset / 8;
-    sprite->data4 = 1;
+    sprite->data[3] = 8 - yOffset / 8;
+    sprite->data[4] = 1;
     sprite->callback = sub_8039A48;
 }
 
@@ -2505,20 +2505,20 @@ static void sub_8039A48(struct Sprite *sprite)
 {
     s32 i;
 
-    sprite->data4--;
-    if (sprite->data4 == 0)
+    sprite->data[4]--;
+    if (sprite->data[4] == 0)
     {
-        sprite->data4 = 2;
+        sprite->data[4] = 2;
         sprite->pos2.y += 8;
-        sprite->data3--;
-        if (sprite->data3 < 0)
+        sprite->data[3]--;
+        if (sprite->data[3] < 0)
         {
             FreeSpriteOamMatrix(sprite);
             DestroySprite(sprite);
         }
         else
         {
-            u8 *dst = (u8 *)gMonSpritesGfxPtr->sprites[GetBankIdentity(sprite->tBank)] + (gBattleMonForms[sprite->tBank] << 11) + (sprite->data3 << 8);
+            u8 *dst = (u8 *)gMonSpritesGfxPtr->sprites[GetBankIdentity(sprite->tBank)] + (gBattleMonForms[sprite->tBank] << 11) + (sprite->data[3] << 8);
 
             for (i = 0; i < 0x100; i++)
                 *(dst++) = 0;
@@ -2530,25 +2530,25 @@ static void sub_8039A48(struct Sprite *sprite)
 
 void sub_8039AD8(struct Sprite *sprite)
 {
-    sprite->data3 = 8;
-    sprite->data4 = sprite->invisible;
+    sprite->data[3] = 8;
+    sprite->data[4] = sprite->invisible;
     sprite->callback = sub_8039AF4;
 }
 
 static void sub_8039AF4(struct Sprite *sprite)
 {
-    sprite->data3--;
-    if (sprite->data3 == 0)
+    sprite->data[3]--;
+    if (sprite->data[3] == 0)
     {
         sprite->invisible ^= 1;
-        sprite->data3 = 8;
+        sprite->data[3] = 8;
     }
 }
 
 void sub_8039B2C(struct Sprite *sprite)
 {
-    sprite->invisible = sprite->data4;
-    sprite->data4 = FALSE;
+    sprite->invisible = sprite->data[4];
+    sprite->data[4] = FALSE;
     sprite->callback = SpriteCallbackDummy_2;
 }
 
@@ -2578,7 +2578,7 @@ static void oac_poke_ally_(struct Sprite *sprite)
         if (sprite->pos2.x == 0)
         {
             sprite->callback = SpriteCallbackDummy_3;
-            sprite->data1 = 0;
+            sprite->data[1] = 0;
         }
     }
 }
@@ -2596,8 +2596,8 @@ void sub_8039C00(struct Sprite *sprite)
 {
     if (!(gUnknown_020243FC & 1))
     {
-        sprite->pos2.x += sprite->data1;
-        sprite->pos2.y += sprite->data2;
+        sprite->pos2.x += sprite->data[1];
+        sprite->pos2.y += sprite->data[2];
     }
 }
 
@@ -2623,19 +2623,19 @@ void dp11b_obj_instanciate(u8 bank, u8 b, s8 c, s8 d)
         spriteId2 = gHealthBoxesIds[bank];
         gBattleSpritesDataPtr->healthBoxesData[bank].field_2 = bounceHealthBoxSpriteId;
         gBattleSpritesDataPtr->healthBoxesData[bank].flag_x2 = 1;
-        gSprites[bounceHealthBoxSpriteId].data0 = 0x80;
+        gSprites[bounceHealthBoxSpriteId].data[0] = 0x80;
     }
     else
     {
         spriteId2 = gBankSpriteIds[bank];
         gBattleSpritesDataPtr->healthBoxesData[bank].field_3 = bounceHealthBoxSpriteId;
         gBattleSpritesDataPtr->healthBoxesData[bank].flag_x4 = 1;
-        gSprites[bounceHealthBoxSpriteId].data0 = 0xC0;
+        gSprites[bounceHealthBoxSpriteId].data[0] = 0xC0;
     }
-    gSprites[bounceHealthBoxSpriteId].data1 = c;
-    gSprites[bounceHealthBoxSpriteId].data2 = d;
-    gSprites[bounceHealthBoxSpriteId].data3 = spriteId2;
-    gSprites[bounceHealthBoxSpriteId].data4 = b;
+    gSprites[bounceHealthBoxSpriteId].data[1] = c;
+    gSprites[bounceHealthBoxSpriteId].data[2] = d;
+    gSprites[bounceHealthBoxSpriteId].data[3] = spriteId2;
+    gSprites[bounceHealthBoxSpriteId].data[4] = b;
     gSprites[spriteId2].pos2.x = 0;
     gSprites[spriteId2].pos2.y = 0;
 }
@@ -2649,7 +2649,7 @@ void dp11b_obj_free(u8 bank, bool8 b)
         if (!gBattleSpritesDataPtr->healthBoxesData[bank].flag_x2)
             return;
 
-        r4 = gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_2].data3;
+        r4 = gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_2].data[3];
         DestroySprite(&gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_2]);
         gBattleSpritesDataPtr->healthBoxesData[bank].flag_x2 = 0;
     }
@@ -2658,7 +2658,7 @@ void dp11b_obj_free(u8 bank, bool8 b)
         if (!gBattleSpritesDataPtr->healthBoxesData[bank].flag_x4)
             return;
 
-        r4 = gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_3].data3;
+        r4 = gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_3].data[3];
         DestroySprite(&gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].field_3]);
         gBattleSpritesDataPtr->healthBoxesData[bank].flag_x4 = 0;
     }
@@ -2668,16 +2668,16 @@ void dp11b_obj_free(u8 bank, bool8 b)
 
 static void SpriteCB_HealthBoxBounce(struct Sprite *sprite)
 {
-    u8 spriteId = sprite->data3;
+    u8 spriteId = sprite->data[3];
     s32 var;
 
-    if (sprite->data4 == 1)
-        var = sprite->data0;
+    if (sprite->data[4] == 1)
+        var = sprite->data[0];
     else
-        var = sprite->data0;
+        var = sprite->data[0];
 
-    gSprites[spriteId].pos2.y = Sin(var, sprite->data2) + sprite->data2;
-    sprite->data0 = (sprite->data0 + sprite->data1) & 0xFF;
+    gSprites[spriteId].pos2.y = Sin(var, sprite->data[2]) + sprite->data[2];
+    sprite->data[0] = (sprite->data[0] + sprite->data[1]) & 0xFF;
 }
 
 void sub_8039E44(struct Sprite *sprite)
@@ -2873,7 +2873,7 @@ void SwitchInClearSetData(void)
              && (gStatuses3[i] & STATUS3_ALWAYS_HITS) != 0
              && (gDisableStructs[i].bankWithSureHit == gActiveBank))
             {
-                gStatuses3[i] &= ~STATUS3_ALWAYS_HITS;
+                gStatuses3[i] &= ~(STATUS3_ALWAYS_HITS);
                 gStatuses3[i] |= 0x10;
             }
         }
@@ -3669,10 +3669,10 @@ static void TryDoEventsBeforeFirstTurn(void)
 
     *(&gBattleStruct->turnEffectsTracker) = 0;
     *(&gBattleStruct->turnEffectsBank) = 0;
-    *(&gBattleStruct->field_1A0) = 0;
-    *(&gBattleStruct->field_1A1) = 0;
+    *(&gBattleStruct->wishPerishSongState) = 0;
+    *(&gBattleStruct->wishPerishSongBank) = 0;
     gBattleScripting.atk49_state = 0;
-    gBattleStruct->field_4D = 0;
+    gBattleStruct->faintedActionsState = 0;
     gBattleStruct->turncountersTracker = 0;
     gBattleMoveFlags = 0;
 
@@ -3702,8 +3702,8 @@ static void HandleEndTurn_ContinueBattle(void)
         }
         gBattleStruct->turnEffectsTracker = 0;
         gBattleStruct->turnEffectsBank = 0;
-        gBattleStruct->field_1A0 = 0;
-        gBattleStruct->field_1A1 = 0;
+        gBattleStruct->wishPerishSongState = 0;
+        gBattleStruct->wishPerishSongBank = 0;
         gBattleStruct->turncountersTracker = 0;
         gBattleMoveFlags = 0;
     }
@@ -3721,10 +3721,10 @@ void BattleTurnPassed(void)
         if (TurnBasedEffects() != 0)
             return;
     }
-    if (sub_8041728() != 0)
+    if (HandleFaintedMonActions() != 0)
         return;
-    gBattleStruct->field_4D = 0;
-    if (sub_8041364() != 0)
+    gBattleStruct->faintedActionsState = 0;
+    if (HandleWishPerishSongOnTurnEnd() != 0)
         return;
 
     TurnValuesCleanUp(FALSE);
@@ -4693,7 +4693,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     gBattleMainFunc = RunTurnActionsFunctions;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
-    gBattleScripting.field_16 = 0;
+    gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
 }
 
@@ -4702,7 +4702,7 @@ static void RunTurnActionsFunctions(void)
     if (gBattleOutcome != 0)
         gCurrentActionFuncId = 12;
 
-    *(&gBattleStruct->field_4B) = gCurrentTurnActionNumber;
+    *(&gBattleStruct->savedTurnActionNumber) = gCurrentTurnActionNumber;
     sTurnActionsFuncsTable[gCurrentActionFuncId]();
 
     if (gCurrentTurnActionNumber >= gNoOfAllBanks) // everyone did their actions, turn finished
@@ -4712,7 +4712,7 @@ static void RunTurnActionsFunctions(void)
     }
     else
     {
-        if (gBattleStruct->field_4B != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another bank
+        if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another bank
         {
             gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
             gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
@@ -4730,7 +4730,7 @@ static void HandleEndTurn_BattleWon(void)
         gBattleTextBuff1[0] = gBattleOutcome;
         gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
         gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-        gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+        gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
             && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000 | BATTLE_TYPE_EREADER_TRAINER))
@@ -4786,16 +4786,16 @@ static void HandleEndTurn_BattleLost(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
         {
-            if (gBattleOutcome & BATTLE_OUTCOME_BIT_x80)
+            if (gBattleOutcome & OUTCOME_LINK_BATTLE_RUN)
             {
-                gBattlescriptCurrInstr = BattleScript_82DB9C8;
-                gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+                gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeitedLinkBattle;
+                gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
                 gSaveBlock2Ptr->field_CA9_b = 1;
             }
             else
             {
                 gBattlescriptCurrInstr = BattleScript_82DAA0B;
-                gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+                gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
             }
         }
         else
@@ -4803,7 +4803,7 @@ static void HandleEndTurn_BattleLost(void)
             gBattleTextBuff1[0] = gBattleOutcome;
             gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
             gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-            gBattleOutcome &= ~(BATTLE_OUTCOME_BIT_x80);
+            gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
         }
     }
     else
@@ -4820,13 +4820,13 @@ static void HandleEndTurn_RanFromBattle(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        gBattlescriptCurrInstr = BattleScript_82DB9C1;
+        gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = BATTLE_FORFEITED;
         gSaveBlock2Ptr->field_CA9_b = 1;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
     {
-        gBattlescriptCurrInstr = BattleScript_82DB9C1;
+        gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = BATTLE_FORFEITED;
     }
     else
@@ -5277,7 +5277,7 @@ static void HandleAction_UseItem(void)
     }
     else if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
     {
-        gBattlescriptCurrInstr = gUnknown_082DBD3C[0];
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[0];
     }
     else
     {
@@ -5333,7 +5333,7 @@ static void HandleAction_UseItem(void)
             break;
         }
 
-        gBattlescriptCurrInstr = gUnknown_082DBD3C[*(gBattleStruct->AI_itemType + gBankAttacker / 2)];
+        gBattlescriptCurrInstr = gBattlescriptsForUsingItem[*(gBattleStruct->AI_itemType + gBankAttacker / 2)];
     }
     gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
 }
@@ -5440,7 +5440,7 @@ static void HandleAction_Run(void)
             }
         }
 
-        gBattleOutcome |= BATTLE_OUTCOME_BIT_x80;
+        gBattleOutcome |= OUTCOME_LINK_BATTLE_RUN;
         gSaveBlock2Ptr->field_CA9_b = 1;
     }
     else
@@ -5566,9 +5566,9 @@ static void HandleAction_Action9(void)
 
 static void HandleAction_Action11(void)
 {
-    if (!sub_8041728())
+    if (!HandleFaintedMonActions())
     {
-        gBattleStruct->field_4D = 0;
+        gBattleStruct->faintedActionsState = 0;
         gCurrentActionFuncId = ACTION_FINISHED;
     }
 }
@@ -5608,6 +5608,6 @@ static void HandleAction_ActionFinished(void)
     gBattleScripting.atk49_state = 0;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
-    gBattleScripting.field_16 = 0;
+    gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
 }

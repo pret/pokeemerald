@@ -3,7 +3,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "task.h"
-#include "rng.h"
+#include "random.h"
 #include "decompress.h"
 #include "text.h"
 #include "string_util.h"
@@ -2126,7 +2126,7 @@ void sub_800DD94(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, int r
     data->unk_00_4 = 0;
     data->unk_00_5 = 0;
     data->unk_00_6 = 0;
-    data->unk_00_7 = FlagGet(FLAG_SYS_UNKNOWN_87F);
+    data->unk_00_7 = FlagGet(FLAG_0x87F);
     data->unk_01_0 = IsNationalPokedexEnabled();
     data->unk_01_1 = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
@@ -2201,25 +2201,25 @@ void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
     if (gUnknown_03007890->unk_00 == 1)
     {
         sprId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
-        gSprites[sprId].data7 = 0x1234;
-        gSprites[sprId].data6 = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
+        gSprites[sprId].data[7] = 0x1234;
+        gSprites[sprId].data[6] = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
         gSprites[sprId].invisible = TRUE;
         gWirelessStatusIndicatorSpriteId = sprId;
     }
     else
     {
         gWirelessStatusIndicatorSpriteId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
-        gSprites[gWirelessStatusIndicatorSpriteId].data7 = 0x1234;
-        gSprites[gWirelessStatusIndicatorSpriteId].data6 = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
+        gSprites[gWirelessStatusIndicatorSpriteId].data[7] = 0x1234;
+        gSprites[gWirelessStatusIndicatorSpriteId].data[6] = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
         gSprites[gWirelessStatusIndicatorSpriteId].invisible = TRUE;
     }
 }
 
 void sub_800E084(void)
 {
-    if (gSprites[gWirelessStatusIndicatorSpriteId].data7 == 0x1234)
+    if (gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
     {
-        gSprites[gWirelessStatusIndicatorSpriteId].data7 = 0;
+        gSprites[gWirelessStatusIndicatorSpriteId].data[7] = 0;
         DestroySprite(&gSprites[gWirelessStatusIndicatorSpriteId]);
         gMain.oamBuffer[125] = gDummyOamData;
         CpuCopy16(&gDummyOamData, (struct OamData *)OAM + 125, sizeof(struct OamData));
@@ -2253,17 +2253,17 @@ u8 sub_800E124(void)
 
 void sub_800E15C(struct Sprite *sprite, int signalStrengthAnimNum)
 {
-    if (sprite->data2 != signalStrengthAnimNum)
+    if (sprite->data[2] != signalStrengthAnimNum)
     {
-        sprite->data2 = signalStrengthAnimNum;
-        sprite->data3 = 0;
-        sprite->data4 = 0;
+        sprite->data[2] = signalStrengthAnimNum;
+        sprite->data[3] = 0;
+        sprite->data[4] = 0;
     }
 }
 
 void sub_800E174(void)
 {
-    if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].data7 == 0x1234)
+    if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
     {
         struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
         u8 signalStrength = 255;
@@ -2284,47 +2284,47 @@ void sub_800E174(void)
         }
         if (sub_8012224() == TRUE)
         {
-            sprite->data0 = 4;
+            sprite->data[0] = 4;
         }
         else if (signalStrength < 25)
         {
-            sprite->data0 = 3;
+            sprite->data[0] = 3;
         }
         else if (signalStrength >= 25 && signalStrength < 127)
         {
-            sprite->data0 = 2;
+            sprite->data[0] = 2;
         }
         else if (signalStrength >= 127 && signalStrength < 229)
         {
-            sprite->data0 = 1;
+            sprite->data[0] = 1;
         }
         else if (signalStrength >= 229)
         {
-            sprite->data0 = 0;
+            sprite->data[0] = 0;
         }
-        if (sprite->data0 != sprite->data1)
+        if (sprite->data[0] != sprite->data[1])
         {
-            sub_800E15C(sprite, sprite->data0);
-            sprite->data1 = sprite->data0;
+            sub_800E15C(sprite, sprite->data[0]);
+            sprite->data[1] = sprite->data[0];
         }
-        if (sprite->anims[sprite->data2][sprite->data4].frame.duration < sprite->data3)
+        if (sprite->anims[sprite->data[2]][sprite->data[4]].frame.duration < sprite->data[3])
         {
-            sprite->data4++;
-            sprite->data3 = 0;
-            if (sprite->anims[sprite->data2][sprite->data4].type == -2)
+            sprite->data[4]++;
+            sprite->data[3] = 0;
+            if (sprite->anims[sprite->data[2]][sprite->data[4]].type == -2)
             {
-                sprite->data4 = 0;
+                sprite->data[4] = 0;
             }
         }
         else
         {
-            sprite->data3++;
+            sprite->data[3]++;
         }
         gMain.oamBuffer[125] = sWirelessStatusIndicatorOamData;
         gMain.oamBuffer[125].x = sprite->pos1.x + sprite->centerToCornerVecX;
         gMain.oamBuffer[125].y = sprite->pos1.y + sprite->centerToCornerVecY;
         gMain.oamBuffer[125].paletteNum = sprite->oam.paletteNum;
-        gMain.oamBuffer[125].tileNum = sprite->data6 + sprite->anims[sprite->data2][sprite->data4].frame.imageValue;
+        gMain.oamBuffer[125].tileNum = sprite->data[6] + sprite->anims[sprite->data[2]][sprite->data[4]].frame.imageValue;
         CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));
         if (sub_8011A74() == 1)
         {

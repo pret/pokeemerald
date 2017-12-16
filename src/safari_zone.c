@@ -1,7 +1,7 @@
 #include "global.h"
 #include "safari_zone.h"
 #include "event_data.h"
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "main.h"
 #include "battle.h"
 #include "string_util.h"
