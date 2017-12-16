@@ -618,19 +618,19 @@ void Cb2_StartWallClock(void)
     gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = 0;
     gTasks[taskId].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE] = 0x12c;
     spriteId = CreateSprite(&gUnknown_085B2250, 0x78, 0x50, 1);
-    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
     spriteId = CreateSprite(&gUnknown_085B2268, 0x78, 0x50, 0);
-    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
     spriteId = CreateSprite(&gUnknown_085B22A0, 0x78, 0x50, 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 45;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 45;
     spriteId = CreateSprite(&gUnknown_085B22B8, 0x78, 0x50, 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = 90;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = 90;
     sub_813498C();
     PrintTextOnWindow(1, 1, gText_Confirm3, 0, 1, 0, NULL);
     PutWindowTilemap(1);
@@ -659,19 +659,19 @@ void Cb2_ViewWallClock(void)
         spc = 135;
     }
     spriteId = CreateSprite(&gUnknown_085B2250, 0x78, 0x50, 1);
-    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
     spriteId = CreateSprite(&gUnknown_085B2268, 0x78, 0x50, 0);
-    gSprites[spriteId].data0 = taskId;
+    gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
     spriteId = CreateSprite(&gUnknown_085B22A0, 0x78, 0x50, 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = r10;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = r10;
     spriteId = CreateSprite(&gUnknown_085B22B8, 0x78, 0x50, 2);
-    gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].data1 = spc;
+    gSprites[spriteId].data[0] = taskId;
+    gSprites[spriteId].data[1] = spc;
     sub_813498C();
     PrintTextOnWindow(1, 1, gText_Cancel4, 0, 1, 0, NULL);
     PutWindowTilemap(1);
@@ -941,7 +941,7 @@ static void sub_8135130(u8 taskId)
 
 static void sub_81351AC(struct Sprite *sprite)
 {
-    u16 angle = gTasks[sprite->data0].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE];
+    u16 angle = gTasks[sprite->data[0]].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE];
     s16 sin = Sin2(angle) / 16;
     s16 cos = Cos2(angle) / 16;
     u16 xhat;
@@ -963,7 +963,7 @@ static void sub_81351AC(struct Sprite *sprite)
 
 static void sub_8135244(struct Sprite *sprite)
 {
-    u16 angle = gTasks[sprite->data0].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE];
+    u16 angle = gTasks[sprite->data[0]].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE];
     s16 sin = Sin2(angle) / 16;
     s16 cos = Cos2(angle) / 16;
     u16 xhat;
@@ -985,56 +985,56 @@ static void sub_8135244(struct Sprite *sprite)
 
 static void sub_81352DC(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data0].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM])
+    if (gTasks[sprite->data[0]].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM])
     {
-        if (sprite->data1 >= 60 && sprite->data1 < 90)
+        if (sprite->data[1] >= 60 && sprite->data[1] < 90)
         {
-            sprite->data1 += 5;
+            sprite->data[1] += 5;
         }
-        if (sprite->data1 < 60)
+        if (sprite->data[1] < 60)
         {
-            sprite->data1++;
+            sprite->data[1]++;
         }
     }
     else
     {
-        if (sprite->data1 >= 46 && sprite->data1 < 76)
+        if (sprite->data[1] >= 46 && sprite->data[1] < 76)
         {
-            sprite->data1 -= 5;
+            sprite->data[1] -= 5;
         }
-        if (sprite->data1 > 75)
+        if (sprite->data[1] > 75)
         {
-            sprite->data1--;
+            sprite->data[1]--;
         }
     }
-    sprite->pos2.x = Cos2(sprite->data1) * 30 / 0x1000;
-    sprite->pos2.y = Sin2(sprite->data1) * 30 / 0x1000;
+    sprite->pos2.x = Cos2(sprite->data[1]) * 30 / 0x1000;
+    sprite->pos2.y = Sin2(sprite->data[1]) * 30 / 0x1000;
 }
 
 static void sub_8135380(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data0].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM])
+    if (gTasks[sprite->data[0]].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM])
     {
-        if (sprite->data1 >= 105 && sprite->data1 < 135)
+        if (sprite->data[1] >= 105 && sprite->data[1] < 135)
         {
-            sprite->data1 += 5;
+            sprite->data[1] += 5;
         }
-        if (sprite->data1 < 105)
+        if (sprite->data[1] < 105)
         {
-            sprite->data1++;
+            sprite->data[1]++;
         }
     }
     else
     {
-        if (sprite->data1 >= 91 && sprite->data1 < 121)
+        if (sprite->data[1] >= 91 && sprite->data[1] < 121)
         {
-            sprite->data1 -= 5;
+            sprite->data[1] -= 5;
         }
-        if (sprite->data1 > 120)
+        if (sprite->data[1] > 120)
         {
-            sprite->data1--;
+            sprite->data[1]--;
         }
     }
-    sprite->pos2.x = Cos2(sprite->data1) * 30 / 0x1000;
-    sprite->pos2.y = Sin2(sprite->data1) * 30 / 0x1000;
+    sprite->pos2.x = Cos2(sprite->data[1]) * 30 / 0x1000;
+    sprite->pos2.y = Sin2(sprite->data[1]) * 30 / 0x1000;
 }

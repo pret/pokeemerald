@@ -9,7 +9,7 @@
 #include "gpu_regs.h"
 #include "bg.h"
 #include "text_window.h"
-#include "songs.h"
+#include "constants/songs.h"
 
 extern u8 gText_ClearAllSaveData[];
 extern u8 gText_ClearingData[];

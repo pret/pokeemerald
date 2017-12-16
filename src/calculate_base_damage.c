@@ -1,14 +1,14 @@
 #include "global.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "battle.h"
-#include "hold_effects.h"
+#include "constants/hold_effects.h"
 #include "event_data.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "pokemon.h"
-#include "species.h"
-#include "moves.h"
-#include "battle_move_effects.h"
+#include "constants/species.h"
+#include "constants/moves.h"
+#include "constants/battle_move_effects.h"
 
 extern u32 gBattleTypeFlags;
 extern struct BattlePokemon gBattleMons[4];

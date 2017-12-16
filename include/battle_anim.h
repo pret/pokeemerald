@@ -79,11 +79,22 @@ void HandleIntroSlide(u8 terrainId);
 
 // battle_anim_80A5C6C.s
 void sub_80A6EEC(struct Sprite *sprite);
+void sub_80A68D4(struct Sprite *sprite);
+void sub_80A6F3C(struct Sprite *sprite);
 void sub_80A8278(void);
 void sub_80A6B30(struct UnknownAnimStruct2*);
 void sub_80A6B90(struct UnknownAnimStruct2*, u32 arg1);
 u8 sub_80A82E4(u8 bank);
-u8 sub_80A5C6C(u8 bank, u8 attributeId);
+bool8 AnimateBallThrow(struct Sprite *sprite);
+
+enum
+{
+    BANK_X_POS,
+    BANK_Y_POS,
+};
+
+u8 GetBankPosition(u8 bank, u8 attributeId);
+
 bool8 IsBankSpritePresent(u8 bank);
 void sub_80A6C68(u8 arg0);
 u8 GetAnimBankSpriteId(u8 wantedBank);
@@ -98,5 +109,10 @@ u8 GetSubstituteSpriteDefault_Y(u8 bank);
 
 // battle_anim_80A9C70.s
 void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
+
+// battle_anim_8170478.s
+u8 ItemIdToBallId(u16 itemId);
+u8 LaunchBallStarsTask(u8 x, u8 y, u8 kindOfStars, u8 arg3, u8 ballId);
+u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 bank, u32 arg2, u8 ballId);
 
 #endif // GUARD_BATTLE_ANIM_H
