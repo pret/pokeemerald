@@ -943,7 +943,7 @@ static void sub_818E6B0(u8 sheen)
     }
 }
 
-bool8 sub_818E704(struct Pokeblock *pokeblock)
+bool8 GivePokeblockToContestLady(struct Pokeblock *pokeblock)
 {
     u8 sheen;
     bool8 response;

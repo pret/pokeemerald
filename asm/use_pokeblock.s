@@ -678,7 +678,7 @@ _08166BB6:
 	bne _08166BDA
 	ldr r0, =gSpecialVar_ItemId
 	ldrb r0, [r0]
-	bl sub_8136F68
+	bl TryClearPokeblock
 	ldr r0, =sub_8166BEC
 	bl sub_816636C
 _08166BDA:

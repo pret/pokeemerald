@@ -52,16 +52,17 @@ void OpenPokeblockCase(u8 caseId, void (*callback)(void));
 void OpenPokeblockCaseInBattle(void);
 void OpenPokeblockCaseOnFeeder(void);
 void ResetPokeblockScrollPositions(void);
-
 u8 CreatePokeblockCaseSprite(s16 x, s16 y, u8 subpriority);
-s16 GetPokeblockData(const struct Pokeblock *pokeblock, u8 dataId);
 void ClearPokeblocks(void);
-s8 GetFirstFreePokeblockSlot(void);
-bool32 AddPokeblock(struct Pokeblock *pokeblock);
 u8 GetHighestPokeblocksFlavorLevel(const struct Pokeblock *pokeblock);
 u8 GetPokeblocksFeel(const struct Pokeblock *pokeblock);
+s8 GetFirstFreePokeblockSlot(void);
+bool32 AddPokeblock(const struct Pokeblock *pokeblock);
+bool32 TryClearPokeblock(u8 pkblId);
+s16 GetPokeblockData(const struct Pokeblock *pokeblock, u8 field);
+s16 PokeblockGetGain(u8 nature, const struct Pokeblock *pokeblock);
+void PokeblockCopyName(const struct Pokeblock *pokeblock, u8 *dest);
+bool8 CopyMonFavoritePokeblockName(u8 nature, u8 *dest);
 u8 GetPokeblocksFlavor(const struct Pokeblock *pokeblock);
-s16 PokeblockGetGain(u8, const struct Pokeblock *pokeblock);
-void PokeblockCopyName(const struct Pokeblock *pokeblock, u8 *dst);
 
 #endif // GUARD_POKEBLOCK_H

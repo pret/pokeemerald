@@ -54,6 +54,9 @@ extern const u8 gText_NoDecorationsInUse[];
 extern const u8 gText_Exit[];
 extern const u8 gText_Cancel[];
 
+extern const u8 gText_ThrowAwayVar1[];
+extern const u8 gText_Var1ThrownAway[];
+
 extern const u8 gText_Color161Shadow161[];
 extern const u8 gText_GoBackPrevMenu[];
 extern const u8 gText_CantPlaceInRoom[];
