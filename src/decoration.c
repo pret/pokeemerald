@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/decorations.h"
 #include "decompress.h"
 #include "malloc.h"
 #include "text.h"
@@ -8,7 +9,7 @@
 #include "task.h"
 #include "main.h"
 #include "palette.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "overworld.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
@@ -32,7 +33,7 @@
 #include "tilesets.h"
 #include "item_icon.h"
 #include "trader.h"
-#include "map_object_constants.h"
+#include "constants/map_objects.h"
 #include "decoration_inventory.h"
 #include "decoration.h"
 #include "graphics.h"
@@ -1302,7 +1303,7 @@ void sub_8128060(u8 taskId)
 
 void ConfigureCameraObjectForPlacingDecoration(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
 {
-    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.unk4].data0;
+    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.unk4].data[0];
     gUnknown_03005DD0.unk4 = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
     gSprites[gUnknown_03005DD0.unk4].oam.priority = 1;
     gSprites[gUnknown_03005DD0.unk4].callback = sub_81292D0;
@@ -1383,8 +1384,8 @@ void sub_812826C(u8 taskId)
 void sub_81283BC(u8 taskId)
 {
     gTasks[taskId].data[10] = 0;
-    gSprites[sDecor_CameraSpriteObjectIdx1].data7 = 1;
-    gSprites[sDecor_CameraSpriteObjectIdx2].data7 = 1;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 1;
+    gSprites[sDecor_CameraSpriteObjectIdx2].data[7] = 1;
     sub_8128DE0();
     sub_8128950(taskId);
 }
@@ -1392,8 +1393,8 @@ void sub_81283BC(u8 taskId)
 void sub_8128414(u8 taskId)
 {
     gTasks[taskId].data[10] = 0;
-    gSprites[sDecor_CameraSpriteObjectIdx1].data7 = 1;
-    gSprites[sDecor_CameraSpriteObjectIdx2].data7 = 1;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 1;
+    gSprites[sDecor_CameraSpriteObjectIdx2].data[7] = 1;
     sub_8128DE0();
     StringExpandPlaceholders(gStringVar4, gText_CancelDecorating);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_8128B80);
@@ -1769,8 +1770,8 @@ bool8 sub_8128DB4(void)
 void sub_8128DE0(void)
 {
     sDecorationLastDirectionMoved = 0;
-    gSprites[sDecor_CameraSpriteObjectIdx1].data2 = 0;
-    gSprites[sDecor_CameraSpriteObjectIdx1].data3 = 0;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[2] = 0;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[3] = 0;
 }
 
 void sub_8128E18(u8 taskId)
@@ -1778,7 +1779,7 @@ void sub_8128E18(u8 taskId)
     s16 *data;
 
     data = gTasks[taskId].data;
-    if (!gSprites[sDecor_CameraSpriteObjectIdx1].data4)
+    if (!gSprites[sDecor_CameraSpriteObjectIdx1].data[4])
     {
         if (data[10] == 1)
         {
@@ -1792,29 +1793,29 @@ void sub_8128E18(u8 taskId)
         if ((gMain.heldKeys & 0x0F0) == DPAD_UP)
         {
             sDecorationLastDirectionMoved = DIR_SOUTH;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data2 =  0;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data3 = -2;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[2] =  0;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[3] = -2;
             data[1]--;
         }
         if ((gMain.heldKeys & 0x0F0) == DPAD_DOWN)
         {
             sDecorationLastDirectionMoved = DIR_NORTH;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data2 =  0;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data3 =  2;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[2] =  0;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[3] =  2;
             data[1]++;
         }
         if ((gMain.heldKeys & 0x0F0) == DPAD_LEFT)
         {
             sDecorationLastDirectionMoved = DIR_WEST;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data2 = -2;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data3 =  0;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[2] = -2;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[3] =  0;
             data[0]--;
         }
         if ((gMain.heldKeys & 0x0F0) == DPAD_RIGHT)
         {
             sDecorationLastDirectionMoved = DIR_EAST;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data2 =  2;
-            gSprites[sDecor_CameraSpriteObjectIdx1].data3 =  0;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[2] =  2;
+            gSprites[sDecor_CameraSpriteObjectIdx1].data[3] =  0;
             data[0]++;
         }
         if (!sub_8128DB4() || !sub_8128D10(taskId))
@@ -1824,8 +1825,8 @@ void sub_8128E18(u8 taskId)
     }
     if (sDecorationLastDirectionMoved)
     {
-        gSprites[sDecor_CameraSpriteObjectIdx1].data4++;
-        gSprites[sDecor_CameraSpriteObjectIdx1].data4 &= 7;
+        gSprites[sDecor_CameraSpriteObjectIdx1].data[4]++;
+        gSprites[sDecor_CameraSpriteObjectIdx1].data[4] &= 7;
     }
     if (!data[10])
     {
@@ -1843,7 +1844,7 @@ void sub_8128E18(u8 taskId)
 void sub_8128FD8(u8 taskId)
 {
     sub_8197434(0, 1);
-    gSprites[sDecor_CameraSpriteObjectIdx1].data7 = 0;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gTasks[taskId].data[10] = 0;
     gTasks[taskId].func = sub_8128E18;
 }
@@ -1954,20 +1955,20 @@ void SetDecorSelectionBoxOamAttributes(u8 decorShape)
 
 void sub_81292D0(struct Sprite *sprite)
 {
-    sprite->data2 = 0;
-    sprite->data3 = 0;
-    sprite->data4 = 0;
-    sprite->data5 = 0;
-    sprite->data6 = 0;
-    sprite->data7 = 0;
+    sprite->data[2] = 0;
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
+    sprite->data[5] = 0;
+    sprite->data[6] = 0;
+    sprite->data[7] = 0;
     sprite->callback = sub_81292E8;
 }
 
 void sub_81292E8(struct Sprite *sprite)
 {
-    if (sprite->data7 == 0)
+    if (sprite->data[7] == 0)
     {
-        if (sprite->data6 < 15)
+        if (sprite->data[6] < 15)
         {
             sprite->invisible = FALSE;
         }
@@ -1975,8 +1976,8 @@ void sub_81292E8(struct Sprite *sprite)
         {
             sprite->invisible = TRUE;
         }
-        sprite->data6 ++;
-        sprite->data6 &= 0x1F;
+        sprite->data[6] ++;
+        sprite->data[6] &= 0x1F;
     }
     else
     {
@@ -2248,7 +2249,7 @@ bool8 sub_81299AC(u8 taskId)
 void SetUpPuttingAwayDecorationPlayerAvatar(void)
 {
     player_get_direction_lower_nybble();
-    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.unk4].data0;
+    sDecor_CameraSpriteObjectIdx1 = gSprites[gUnknown_03005DD0.unk4].data[0];
     sub_812A39C();
     gUnknown_03005DD0.unk4 = CreateSprite(&gUnknown_085A7404, 0x78, 0x50, 0);
     if (gSaveBlock2Ptr->playerGender == MALE)
@@ -2299,7 +2300,7 @@ void sub_8129ABC(u8 taskId)
 void sub_8129B34(u8 taskId)
 {
     sub_8197434(0, 1);
-    gSprites[sDecor_CameraSpriteObjectIdx1].data7 = 0;
+    gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 0;
     gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
     gSprites[sDecor_CameraSpriteObjectIdx1].callback = sub_812A36C;
     gSprites[sDecor_CameraSpriteObjectIdx2].pos1.x = 0x88;
@@ -2719,9 +2720,9 @@ void sub_812A334(void)
 
 void sub_812A36C(struct Sprite *sprite)
 {
-    sprite->data0 ++;
-    sprite->data0 &= 0x1F;
-    if (sprite->data0 > 15)
+    sprite->data[0] ++;
+    sprite->data[0] &= 0x1F;
+    if (sprite->data[0] > 15)
     {
         sprite->invisible = TRUE;
     }

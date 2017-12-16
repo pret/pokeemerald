@@ -1,7 +1,7 @@
 #include "global.h"
 #include "string_util.h"
 #include "party_menu.h"
-#include "species.h"
+#include "constants/species.h"
 #include "task.h"
 #include "field_message_box.h"
 #include "strings.h"

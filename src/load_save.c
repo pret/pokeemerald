@@ -1,9 +1,9 @@
-#include "global.h"    
+#include "global.h"
 #include "gba/flash_internal.h"
 #include "load_save.h"
 #include "main.h"
 #include "pokemon.h"
-#include "rng.h"
+#include "random.h"
 
 extern void* gUnknown_0203CF5C;
 
@@ -28,7 +28,7 @@ struct LoadedSaveData
  /*0x00F0*/ struct ItemSlot pokeBalls[16];
  /*0x0130*/ struct ItemSlot TMsHMs[64];
  /*0x0230*/ struct ItemSlot berries[46];
- /*0x02E8*/ struct MailStruct mail[16];
+ /*0x02E8*/ struct MailStruct mail[MAIL_COUNT];
 };
 
 EWRAM_DATA struct SaveBlock2 gSaveblock2 = {0};
@@ -330,7 +330,7 @@ void LoadSerializedGame(void)
 void copy_bags_and_unk_data_from_save_blocks(void)
 {
     int i;
-    
+
     // load player items.
     for (i = 0; i < 30; i++)
         gLoadedSaveData.items[i] = gSaveBlock1Ptr->bagPocket_Items[i];

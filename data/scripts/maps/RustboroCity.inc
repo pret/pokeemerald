@@ -52,7 +52,7 @@ RustboroCity_EventScript_1E0715:: @ 81E0715
 	waitmovement 0
 	msgbox RustboroCity_Text_1E22A5, 4
 	closemessage
-	setflag FLAG_0x12F
+	setflag FLAG_HAS_MATCH_CALL
 	applymovement 15, RustboroCity_Movement_2725A4
 	waitmovement 0
 	playse SE_TK_KASYA

@@ -293,7 +293,7 @@ PetalburgWoods_EventScript_22E284:: @ 822E284
 PetalburgWoods_EventScript_22E2C5:: @ 822E2C5
 	special sub_80B4808
 	waitmovement 0
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq PetalburgWoods_EventScript_22E2D6
 	release
 	end
@@ -308,7 +308,7 @@ PetalburgWoods_EventScript_22E2D6:: @ 822E2D6
 	end
 
 PetalburgWoods_EventScript_22E2EF:: @ 822E2EF
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq PetalburgWoods_EventScript_22E302
 	msgbox PetalburgWoods_Text_22E889, 4
 	release

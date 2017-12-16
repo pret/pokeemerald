@@ -1,8 +1,8 @@
 #ifndef GUARD_EVENT_DATA_H
 #define GUARD_EVENT_DATA_H
 
-#include "flags.h"
-#include "vars.h"
+#include "constants/flags.h"
+#include "constants/vars.h"
 
 void InitEventData(void);
 void ClearTempFieldEventData(void);

@@ -16,12 +16,108 @@ gUnknown_08C00524:: @ 8C00524
 	.incbin "baserom.gba", 0xc00c10, 0xa34
 
 gUnknown_08C01644:: @ 8C01644
-	.incbin "baserom.gba", 0xc01644, 0xE0
+	.incbin "baserom.gba", 0xc01644, 0xe0
 
 gUnknown_08C01724:: @ 8C01724
-	.incbin "baserom.gba", 0xc01724, 0xBDC
+	.incbin "baserom.gba", 0xc01724, 0x18
+	
+	.align 2
+gInterfaceGfx_PokeBall::
+	.incbin "graphics/interface/ball/poke.4bpp.lz" @ 0xBC
 
-gUnknown_08C02300:: @ 8C02300
+	.align 2
+gInterfacePal_PokeBall::
+	.incbin "graphics/interface/ball/poke.gbapal.lz"
+
+	.align 2
+gInterfaceGfx_GreatBall::
+	.incbin "graphics/interface/ball/great.4bpp.lz" @ 0xBC
+
+	.align 2
+gInterfacePal_GreatBall::
+	.incbin "graphics/interface/ball/great.gbapal.lz"
+
+	.align 2
+gInterfaceGfx_SafariBall::
+	.incbin "graphics/interface/ball/safari.4bpp.lz" @ 0xBC
+
+	.align 2
+gInterfacePal_SafariBall::
+	.incbin "graphics/interface/ball/safari.gbapal.lz"
+
+	.align 2
+gInterfaceGfx_UltraBall::
+	.incbin "baserom.gba", 0xC019E0, 0xB4
+
+	.align 2
+gInterfacePal_UltraBall::
+	.incbin "baserom.gba", 0xC01A94, 0x20
+
+	.align 2
+gInterfaceGfx_MasterBall::
+	.incbin "graphics/interface/ball/master.4bpp.lz" @ 0xBC
+
+	.align 2
+gInterfacePal_MasterBall::
+	.incbin "graphics/interface/ball/master.gbapal.lz"
+
+	.align 2
+gInterfaceGfx_NetBall::
+	.incbin "graphics/interface/ball/net.4bpp.lz" @ 0xBC
+
+	.align 2
+gInterfacePal_NetBall::
+	.incbin "graphics/interface/ball/net.gbapal.lz"
+
+	.align 2
+gInterfaceGfx_DiveBall::
+	.incbin "graphics/interface/ball/dive.4bpp.lz" @ 0xBC
+
+	.align 2
+gInterfacePal_DiveBall::
+	.incbin "graphics/interface/ball/dive.gbapal.lz"
+
+	.align 2
+gInterfaceGfx_NestBall::
+	.incbin "graphics/interface/ball/nest.4bpp.lz" @ 0xBC
+
+	.align 2
+gInterfacePal_NestBall::
+	.incbin "graphics/interface/ball/nest.gbapal.lz"
+
+	.align 2
+gInterfaceGfx_RepeatBall::
+	.incbin "graphics/interface/ball/repeat.4bpp.lz" @ 0xBC
+
+	.align 2
+gInterfacePal_RepeatBall::
+	.incbin "graphics/interface/ball/repeat.gbapal.lz"
+
+	.align 2
+gInterfaceGfx_TimerBall::
+	.incbin "graphics/interface/ball/timer.4bpp.lz" @ 0xBC
+
+	.align 2
+gInterfacePal_TimerBall::
+	.incbin "graphics/interface/ball/timer.gbapal.lz"
+
+	.align 2
+gInterfaceGfx_LuxuryBall::
+	.incbin "graphics/interface/ball/luxury.4bpp.lz" @ 0xBC
+
+	.align 2
+gInterfacePal_LuxuryBall::
+	.incbin "graphics/interface/ball/luxury.gbapal.lz"
+
+	.align 2
+gInterfaceGfx_PremierBall::
+	.incbin "graphics/interface/ball/premier.4bpp.lz" @ 0xBC
+
+	.align 2
+gInterfacePal_PremierBall::
+	.incbin "graphics/interface/ball/premier.gbapal.lz"
+
+gOpenPokeballGfx:: @ 8C02300
 	.incbin "baserom.gba", 0xc02300, 0x7c
 
 gUnknown_08C0237C:: @ 8C0237C

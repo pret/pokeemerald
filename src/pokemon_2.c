@@ -2,9 +2,9 @@
 #include "pokemon.h"
 #include "battle.h"
 #include "event_data.h"
-#include "rng.h"
+#include "random.h"
 #include "sprite.h"
-#include "species.h"
+#include "constants/species.h"
 #include "text.h"
 #include "string_util.h"
 

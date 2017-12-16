@@ -67,7 +67,11 @@ enum LanguageId
 {
     LANGUAGE_JAPANESE = 1,
     LANGUAGE_ENGLISH = 2,
+    LANGUAGE_FRENCH = 3,
+    LANGUAGE_ITALIAN = 4,
     LANGUAGE_GERMAN = 5,
+    // 6 goes unused but the theory is it was meant to be Korean
+    LANGUAGE_SPANISH = 7,
 };
 
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
@@ -237,7 +241,7 @@ struct SaveBlock2
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
-    /*0x214*/ u8 field_214[1032];
+    /*0x21C*/ u8 field_21C[1032];
     /*0x624*/ u16 contestLinkResults[20]; // 4 positions for 5 categories, possibly a struct or a 2d array
 
         // All below could be a one giant struct
@@ -259,7 +263,7 @@ struct SaveBlock2
     /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
     /*0xCAA*/ u16 field_CAA[4];
     /*0xCB2*/ u16 battlePyramidWildHeaderId;
-    /*0xCB4*/ u16 field_CB4[82];
+    /*0xCB4*/ u16 field_CB4[41];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
     /*0xD08*/ u8 filler_D08[0x112];
@@ -303,7 +307,7 @@ struct SecretBaseRecord
     /*0x1B34*/ u8 partyEVs[6];
 };
 
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "global.fieldmap.h"
 #include "global.berry.h"
 #include "global.tv.h"

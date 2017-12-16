@@ -1,8 +1,12 @@
+#include "constants/flags.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
+#include "constants/species.h"
+#include "constants/vars.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
-	.include "constants/variables.inc"
-	.include "constants/flags.inc"
 
 	.section script_data, "aw", %progbits
 
@@ -2268,7 +2272,7 @@ Route101_EventScript_272141:: @ 8272141
 Route103_EventScript_272141:: @ 8272141
 	lock
 	faceplayer
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_if 0, Route101_EventScript_272155
 	checkflag FLAG_0x119
 	goto_if 0, Route101_EventScript_1FA2D2

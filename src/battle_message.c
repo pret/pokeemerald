@@ -2,10 +2,10 @@
 #include "battle.h"
 #include "battle_message.h"
 #include "battle_string_ids.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "text.h"
 #include "string_util.h"
-#include "items.h"
+#include "constants/items.h"
 #include "event_data.h"
 #include "link.h"
 #include "item.h"
@@ -1631,9 +1631,9 @@ void BufferStringBattle(u16 stringID)
         stringPtr = gText_AttackerUsedX;
         break;
     case STRINGID_BATTLEEND: // battle end
-        if (gBattleTextBuff1[0] & BATTLE_OUTCOME_BIT_x80)
+        if (gBattleTextBuff1[0] & OUTCOME_LINK_BATTLE_RUN)
         {
-            gBattleTextBuff1[0] &= ~(BATTLE_OUTCOME_BIT_x80);
+            gBattleTextBuff1[0] &= ~(OUTCOME_LINK_BATTLE_RUN);
             if (GetBankSide(gActiveBank) == SIDE_OPPONENT && gBattleTextBuff1[0] != BATTLE_DREW)
                 gBattleTextBuff1[0] ^= (BATTLE_LOST | BATTLE_WON);
 

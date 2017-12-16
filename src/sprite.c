@@ -168,14 +168,7 @@ static const struct Sprite sDummySprite =
     .animPaused = 0,
     .affineAnimPaused = 0,
     .animLoopCounter = 0,
-    .data0 = 0,
-    .data1 = 0,
-    .data2 = 0,
-    .data3 = 0,
-    .data4 = 0,
-    .data5 = 0,
-    .data6 = 0,
-    .data7 = 0,
+    .data = {0, 0, 0, 0, 0, 0, 0},
     .inUse = 0,
     .coordOffsetEnabled = 0,
     .invisible = 0,
@@ -1075,7 +1068,7 @@ void BeginAffineAnim(struct Sprite *sprite)
         ApplyAffineAnimFrame(matrixNum, &frameCmd);
         sAffineAnimStates[matrixNum].delayCounter = frameCmd.duration;
         if (sprite->flags_f)
-            obj_update_pos2(sprite, sprite->data6, sprite->data7);
+            obj_update_pos2(sprite, sprite->data[6], sprite->data[7]);
     }
 }
 
@@ -1101,7 +1094,7 @@ void ContinueAffineAnim(struct Sprite *sprite)
             sAffineAnimCmdFuncs[funcIndex](matrixNum, sprite);
         }
         if (sprite->flags_f)
-            obj_update_pos2(sprite, sprite->data6, sprite->data7);
+            obj_update_pos2(sprite, sprite->data[6], sprite->data[7]);
     }
 }
 
@@ -1197,8 +1190,8 @@ u8 GetSpriteMatrixNum(struct Sprite *sprite)
 
 void sub_8007E18(struct Sprite* sprite, s16 a2, s16 a3)
 {
-    sprite->data6 = a2;
-    sprite->data7 = a3;
+    sprite->data[6] = a2;
+    sprite->data[7] = a3;
     sprite->flags_f = 1;
 }
 

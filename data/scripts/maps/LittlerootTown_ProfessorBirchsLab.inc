@@ -482,7 +482,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA25A:: @ 81FA25A
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA28A
 	compare_var_to_value VAR_0x40D3, 2
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_1FA294
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_1FA29E
 	checkflag FLAG_0x119
 	goto_if 0, LittlerootTown_ProfessorBirchsLab_EventScript_1FA2D2

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "pokemon_size_record.h"
 #include "event_data.h"
-#include "species.h"
+#include "constants/species.h"
 #include "string_util.h"
 #include "text.h"
 #include "pokemon.h"

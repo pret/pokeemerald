@@ -7,20 +7,20 @@
 #include "pokemon_3.h"
 #include "safari_zone.h"
 #include "script.h"
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "event_data.h"
-#include "species.h"
+#include "constants/species.h"
 #include "songs.h"
 #include "metatile_behavior.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "trainer_classes.h"
 #include "trainer_ids.h"
-#include "rng.h"
+#include "random.h"
 #include "starter_choose.h"
 #include "script_pokemon_80F8.h"
-#include "items.h"
+#include "constants/items.h"
 #include "palette.h"
 #include "window.h"
 #include "field_map_obj.h"
@@ -84,6 +84,8 @@ extern void sub_81D61E8(void);
 extern void sub_80982B8(void);
 extern void sub_81A9EDC(u16 a0);
 extern void sub_81D572C(u8 a0, u16 arg1);
+extern void IncrementGameStat(u8 statId);
+extern u32 GetGameStat(u8 statId);
 
 extern u32 gBattleTypeFlags;
 extern u8 gBattleOutcome;
@@ -685,7 +687,7 @@ u8 BattleSetup_GetTerrainId(void)
         if (MetatileBehavior_IsBridge(tileBehavior) == TRUE)
             return BATTLE_TERRAIN_WATER;
     }
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_ROUTE113 && gSaveBlock1Ptr->location.mapNum == MAP_ID_ROUTE113)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE113) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE113))
         return BATTLE_TERRAIN_SAND;
     if (GetSav1Weather() == 8)
         return BATTLE_TERRAIN_SAND;
@@ -916,7 +918,7 @@ static void CB2_GiveStarter(void)
 {
     u16 starterMon;
 
-    *GetVarPointer(VAR_STARTER_ID) = gSpecialVar_Result;
+    *GetVarPointer(VAR_FIRST_POKE) = gSpecialVar_Result;
     starterMon = GetStarterPokemon(gSpecialVar_Result);
     ScriptGiveMon(starterMon, 5, 0, 0, 0, 0);
     ResetTasks();
@@ -1575,7 +1577,7 @@ static bool32 sub_80B1D94(s32 rematchTableId)
     if (rematchTableId >= REMATCH_ELITE_FOUR_ENTRIES)
         return TRUE;
     else if (rematchTableId == REMATCH_WALLY_ENTRY)
-        return (FlagGet(FLAG_7E) == FALSE);
+        return (FlagGet(FLAG_0x07E) == FALSE);
     else
         return FALSE;
 }

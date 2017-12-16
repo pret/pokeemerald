@@ -271,7 +271,7 @@ Route116_EventScript_1F2EB7:: @ 81F2EB7
 	end
 
 Route116_EventScript_1F2EF8:: @ 81F2EF8
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F2F03
 	release
 	end
@@ -288,7 +288,7 @@ Route116_EventScript_1F2F03:: @ 81F2F03
 	end
 
 Route116_EventScript_1F2F22:: @ 81F2F22
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F2F35
 	msgbox Route116_Text_29BD92, 4
 	release
@@ -332,7 +332,7 @@ Route116_EventScript_1F2F93:: @ 81F2F93
 	end
 
 Route116_EventScript_1F2FD4:: @ 81F2FD4
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F2FDF
 	release
 	end
@@ -349,7 +349,7 @@ Route116_EventScript_1F2FDF:: @ 81F2FDF
 	end
 
 Route116_EventScript_1F2FFE:: @ 81F2FFE
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F3011
 	msgbox Route116_Text_29C010, 4
 	release
