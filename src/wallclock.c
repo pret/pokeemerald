@@ -22,38 +22,38 @@
 
 // static types
 
-#define WALL_CLOCK_TASK_MINUTE_HAND_ANGLE  0
-#define WALL_CLOCK_TASK_HOUR_HAND_ANGLE    1
-#define WALL_CLOCK_TASK_HOUR               2
-#define WALL_CLOCK_TASK_MINUTE             3
-#define WALL_CLOCK_TASK_SET_COMMAND        4
-#define WALL_CLOCK_TASK_12HRCLOCK_AM_PM    5
-#define WALL_CLOCK_TASK_SET_SPEED          6
+#define tMinuteHandAngle data[0]
+#define tHourHandAngle   data[1]
+#define tHours           data[2]
+#define tMinutes         data[3]
+#define tMvmtDir         data[4]
+#define tPeriod          data[5]
+#define tMvmtSpeed       data[6]
 
 #define TAG_GFX_WALL_CLOCK_HAND 0x1000
 #define TAG_PAL_WALL_CLOCK_HAND 0x1000
 
 // static declarations
 
-static void sub_8134C9C(void);
-static void sub_8134CB8(u8 taskId);
-static void sub_8134CE8(u8 taskId);
-static void sub_8134DC4(u8 taskId);
-static void c3_80BF560(u8 taskId);
-static void sub_8134EA4(u8 taskId);
-static void c2_080111BC(u8 taskId);
-static void sub_8134F10(u8 taskId);
-static void sub_8134F40(u8 taskId);
-static void sub_8134F78(u8 taskId);
-static void sub_8134FB0(u8 taskId);
-static u16 GetClockHandAngle(u16 a0, u8 command, u8 a2);
-static bool32 MoveClockHand(u8 taskId, u8 command);
-static void _12HourClockFixAMPM(u8 taskId, u8 command);
-static void sub_8135130(u8 taskId);
-static void sub_81351AC(struct Sprite *sprite);
-static void sub_8135244(struct Sprite *sprite);
-static void sub_81352DC(struct Sprite *sprite);
-static void sub_8135380(struct Sprite *sprite);
+static void WallClockMainCallback(void);
+static void Task_SetClock1(u8 taskId);
+static void Task_SetClock2(u8 taskId);
+static void Task_SetClock3(u8 taskId);
+static void Task_SetClock4(u8 taskId);
+static void Task_SetClock5(u8 taskId);
+static void Task_SetClock6(u8 taskId);
+static void Task_ViewClock1(u8 taskId);
+static void Task_ViewClock2(u8 taskId);
+static void Task_ViewClock3(u8 taskId);
+static void Task_ViewClock4(u8 taskId);
+static u16 CalcNewMinHandAngle(u16 a0, u8 command, u8 a2);
+static bool32 AdvanceClock(u8 taskId, u8 command);
+static void UpdateClockPeriod(u8 taskId, u8 command);
+static void InitClockWithRtc(u8 taskId);
+static void SpriteCB_MinuteHand(struct Sprite *sprite);
+static void SpriteCB_HourHand(struct Sprite *sprite);
+static void SpriteCB_AMIndicator(struct Sprite *sprite);
+static void SpriteCB_PMIndicator(struct Sprite *sprite);
 
 // rodata
 
@@ -122,7 +122,7 @@ static const struct SpriteTemplate gUnknown_085B2250 = {
     gUnknown_085B2248,
     NULL,
     gDummySpriteAffineAnimTable,
-    sub_81351AC
+    SpriteCB_MinuteHand
 };
 static const struct SpriteTemplate gUnknown_085B2268 = {
     TAG_GFX_WALL_CLOCK_HAND,
@@ -131,7 +131,7 @@ static const struct SpriteTemplate gUnknown_085B2268 = {
     gUnknown_085B224C,
     NULL,
     gDummySpriteAffineAnimTable,
-    sub_8135244
+    SpriteCB_HourHand
 };
 static const struct OamData Unknown_085B2280 = {
     .y = 0xa0,
@@ -159,7 +159,7 @@ static const struct SpriteTemplate gUnknown_085B22A0 = {
     gUnknown_085B2298,
     NULL,
     gDummySpriteAffineAnimTable,
-    sub_81352DC
+    SpriteCB_AMIndicator
 };
 static const struct SpriteTemplate gUnknown_085B22B8 = {
     TAG_GFX_WALL_CLOCK_HAND,
@@ -168,7 +168,7 @@ static const struct SpriteTemplate gUnknown_085B22B8 = {
     gUnknown_085B229C,
     NULL,
     gDummySpriteAffineAnimTable,
-    sub_8135380
+    SpriteCB_PMIndicator
 };
 static const s8 sClockHandCoords[][2] = {
     { 0x00, -0x18},
@@ -535,14 +535,14 @@ static const s8 sClockHandCoords[][2] = {
 
 // text
 
-static void sub_81347B4(void)
+static void WallClockVblankCallback(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void LoadWallClockGraphics(void)
+static void LoadWallClockGraphics(void)
 {
     SetVBlankCallback(NULL);
     SetGpuReg(REG_OFFSET_DISPCNT, 0x0000);
@@ -587,12 +587,12 @@ void LoadWallClockGraphics(void)
     LoadSpritePalettes(gUnknown_085B2218);
 }
 
-void sub_813498C(void)
+static void WallClockInit(void)
 {
     BeginNormalPaletteFade(-1, 0, 16, 0, 0);
     EnableInterrupts(INTR_FLAG_VBLANK);
-    SetVBlankCallback(sub_81347B4);
-    SetMainCallback2(sub_8134C9C);
+    SetVBlankCallback(WallClockVblankCallback);
+    SetMainCallback2(WallClockMainCallback);
     SetGpuReg(REG_OFFSET_BLDCNT, 0x0000);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0x0000);
     SetGpuReg(REG_OFFSET_BLDY, 0x0000);
@@ -609,29 +609,36 @@ void Cb2_StartWallClock(void)
 
     LoadWallClockGraphics();
     LZ77UnCompVram(gUnknown_08DCC648, (u16 *)BG_SCREEN_ADDR(7));
-    taskId = CreateTask(sub_8134CB8, 0);
-    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] = 10;
-    gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] = 0;
-    gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND] = 0;
-    gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = 0;
-    gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED] = 0;
-    gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = 0;
-    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE] = 0x12c;
+
+    taskId = CreateTask(Task_SetClock1, 0);
+    gTasks[taskId].tHours = 10;
+    gTasks[taskId].tMinutes = 0;
+    gTasks[taskId].tMvmtDir = 0;
+    gTasks[taskId].tPeriod = 0;
+    gTasks[taskId].tMvmtSpeed = 0;
+    gTasks[taskId].tMinuteHandAngle = 0;
+    gTasks[taskId].tHourHandAngle = 300;
+
     spriteId = CreateSprite(&gUnknown_085B2250, 0x78, 0x50, 1);
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
+
     spriteId = CreateSprite(&gUnknown_085B2268, 0x78, 0x50, 0);
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
+
     spriteId = CreateSprite(&gUnknown_085B22A0, 0x78, 0x50, 2);
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].data[1] = 45;
+
     spriteId = CreateSprite(&gUnknown_085B22B8, 0x78, 0x50, 2);
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].data[1] = 90;
-    sub_813498C();
+
+    WallClockInit();
+
     PrintTextOnWindow(1, 1, gText_Confirm3, 0, 1, 0, NULL);
     PutWindowTilemap(1);
     schedule_bg_copy_tilemap_to_vram(2);
@@ -641,44 +648,51 @@ void Cb2_ViewWallClock(void)
 {
     u8 taskId;
     u8 spriteId;
-    u8 r10;
-    u8 spc;
+    u8 angle1;
+    u8 angle2;
 
     LoadWallClockGraphics();
     LZ77UnCompVram(gUnknown_08DCC908, (u16 *)BG_SCREEN_ADDR(7));
-    taskId = CreateTask(sub_8134F10, 0);
-    sub_8135130(taskId);
-    if (gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] == 0)
+
+    taskId = CreateTask(Task_ViewClock1, 0);
+    InitClockWithRtc(taskId);
+    if (gTasks[taskId].tPeriod == 0)
     {
-        r10 = 45;
-        spc = 90;
+        angle1 = 45;
+        angle2 = 90;
     }
     else
     {
-        r10 = 90;
-        spc = 135;
+        angle1 = 90;
+        angle2 = 135;
     }
+    
     spriteId = CreateSprite(&gUnknown_085B2250, 0x78, 0x50, 1);
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
+    
     spriteId = CreateSprite(&gUnknown_085B2268, 0x78, 0x50, 0);
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
+    
     spriteId = CreateSprite(&gUnknown_085B22A0, 0x78, 0x50, 2);
     gSprites[spriteId].data[0] = taskId;
-    gSprites[spriteId].data[1] = r10;
+    gSprites[spriteId].data[1] = angle1;
+    
     spriteId = CreateSprite(&gUnknown_085B22B8, 0x78, 0x50, 2);
     gSprites[spriteId].data[0] = taskId;
-    gSprites[spriteId].data[1] = spc;
-    sub_813498C();
+    gSprites[spriteId].data[1] = angle2;
+    
+    WallClockInit();
+    
     PrintTextOnWindow(1, 1, gText_Cancel4, 0, 1, 0, NULL);
     PutWindowTilemap(1);
     schedule_bg_copy_tilemap_to_vram(2);
 }
 
-static void sub_8134C9C(void)
+static void WallClockMainCallback(void)
 {
     RunTasks();
     AnimateSprites();
@@ -687,92 +701,92 @@ static void sub_8134C9C(void)
     UpdatePaletteFade();
 }
 
-static void sub_8134CB8(u8 taskId)
+static void Task_SetClock1(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = sub_8134CE8;
+        gTasks[taskId].func = Task_SetClock2;
     }
 }
 
-static void sub_8134CE8(u8 taskId)
+static void Task_SetClock2(u8 taskId)
 {
-    if (gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] % 6)
+    if (gTasks[taskId].tMinuteHandAngle % 6)
     {
-        gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = GetClockHandAngle(gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE], gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND], gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED]);
+        gTasks[taskId].tMinuteHandAngle = CalcNewMinHandAngle(gTasks[taskId].tMinuteHandAngle, gTasks[taskId].tMvmtDir, gTasks[taskId].tMvmtSpeed);
     }
     else
     {
-        gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] * 6;
-        gTasks[taskId].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE] = (gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] % 12) * 30 + (gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] / 10) * 5;
+        gTasks[taskId].tMinuteHandAngle = gTasks[taskId].tMinutes * 6;
+        gTasks[taskId].tHourHandAngle = (gTasks[taskId].tHours % 12) * 30 + (gTasks[taskId].tMinutes / 10) * 5;
         if (gMain.newKeys & A_BUTTON)
         {
-            gTasks[taskId].func = sub_8134DC4;
+            gTasks[taskId].func = Task_SetClock3;
         }
         else
         {
-            gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND] = 0;
+            gTasks[taskId].tMvmtDir = 0;
             if (gMain.heldKeys & DPAD_LEFT)
             {
-                gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND] = 1;
+                gTasks[taskId].tMvmtDir = 1;
             }
             if (gMain.heldKeys & DPAD_RIGHT)
             {
-                gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND] = 2;
+                gTasks[taskId].tMvmtDir = 2;
             }
-            if (gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND] != 0)
+            if (gTasks[taskId].tMvmtDir != 0)
             {
-                if (gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED] <= 0xFE)
+                if (gTasks[taskId].tMvmtSpeed < 0xFF)
                 {
-                    gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED]++;
+                    gTasks[taskId].tMvmtSpeed++;
                 }
-                gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = GetClockHandAngle(gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE], gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND], gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED]);
-                MoveClockHand(taskId, gTasks[taskId].data[WALL_CLOCK_TASK_SET_COMMAND]);
+                gTasks[taskId].tMinuteHandAngle = CalcNewMinHandAngle(gTasks[taskId].tMinuteHandAngle, gTasks[taskId].tMvmtDir, gTasks[taskId].tMvmtSpeed);
+                AdvanceClock(taskId, gTasks[taskId].tMvmtDir);
             }
             else
             {
-                gTasks[taskId].data[WALL_CLOCK_TASK_SET_SPEED] = 0;
+                gTasks[taskId].tMvmtSpeed = 0;
             }
         }
     }
 }
 
-static void sub_8134DC4(u8 taskId)
+static void Task_SetClock3(u8 taskId)
 {
     SetWindowBorderStyle(0, FALSE, 0x250, 0x0d);
     PrintTextOnWindow(0, 1, gText_IsThisTheCorrectTime, 0, 1, 0, NULL);
     PutWindowTilemap(0);
     schedule_bg_copy_tilemap_to_vram(0);
     CreateYesNoMenu(&gUnknown_085B21F4, 0x250, 0x0d, 1);
-    gTasks[taskId].func = c3_80BF560;
+    gTasks[taskId].func = Task_SetClock4;
 }
 
-static void c3_80BF560(u8 taskId)
+static void Task_SetClock4(u8 taskId)
 {
-    switch (sub_8198C58())
+    switch (ProcessMenuInputNoWrap_())
     {
         case 0:
             PlaySE(SE_SELECT);
-            gTasks[taskId].func = sub_8134EA4;
+            gTasks[taskId].func = Task_SetClock5;
             break;
         case 1:
         case -1:
             PlaySE(SE_SELECT);
             sub_8198070(0, FALSE);
             ClearWindowTilemap(0);
-            gTasks[taskId].func = sub_8134CE8;
+            gTasks[taskId].func = Task_SetClock2;
             break;
     }
 }
 
-static void sub_8134EA4(u8 taskId)
+static void Task_SetClock5(u8 taskId)
 {
-    RtcInitLocalTimeOffset(gTasks[taskId].data[WALL_CLOCK_TASK_HOUR], gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE]);
+    RtcInitLocalTimeOffset(gTasks[taskId].tHours, gTasks[taskId].tMinutes);
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
-    gTasks[taskId].func = c2_080111BC;
+    gTasks[taskId].func = Task_SetClock6;
 }
 
-static void c2_080111BC(u8 taskId)
+static void Task_SetClock6(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -781,30 +795,30 @@ static void c2_080111BC(u8 taskId)
     }
 }
 
-static void sub_8134F10(u8 taskId)
+static void Task_ViewClock1(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gTasks[taskId].func = sub_8134F40;
+        gTasks[taskId].func = Task_ViewClock2;
     }
 }
 
-static void sub_8134F40(u8 taskId)
+static void Task_ViewClock2(u8 taskId)
 {
-    sub_8135130(taskId);
+    InitClockWithRtc(taskId);
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        gTasks[taskId].func = sub_8134F78;
+        gTasks[taskId].func = Task_ViewClock3;
     }
 }
 
-static void sub_8134F78(u8 taskId)
+static void Task_ViewClock3(u8 taskId)
 {
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
-    gTasks[taskId].func = sub_8134FB0;
+    gTasks[taskId].func = Task_ViewClock4;
 }
 
-static void sub_8134FB0(u8 taskId)
+static void Task_ViewClock4(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -812,7 +826,7 @@ static void sub_8134FB0(u8 taskId)
     }
 }
 
-static u8 GetClockHandAngleChange(u16 a0)
+static u8 CalcMinHandDelta(u16 a0)
 {
     if (a0 > 60)
     {
@@ -829,9 +843,9 @@ static u8 GetClockHandAngleChange(u16 a0)
     return 1;
 }
 
-static u16 GetClockHandAngle(u16 a0, u8 command, u8 a2)
+static u16 CalcNewMinHandAngle(u16 a0, u8 command, u8 a2)
 {
-    u8 r1 = GetClockHandAngleChange(a2);
+    u8 r1 = CalcMinHandDelta(a2);
     switch (command)
     {
         case 1:
@@ -846,65 +860,65 @@ static u16 GetClockHandAngle(u16 a0, u8 command, u8 a2)
     return a0;
 }
 
-static bool32 MoveClockHand(u8 taskId, u8 command)
+static bool32 AdvanceClock(u8 taskId, u8 command)
 {
     switch (command)
     {
         case 1:
-            if (gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] > 0)
+            if (gTasks[taskId].tMinutes > 0)
             {
-                gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE]--;
+                gTasks[taskId].tMinutes--;
             }
             else
             {
-                gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] = 59;
-                if (gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] > 0)
+                gTasks[taskId].tMinutes = 59;
+                if (gTasks[taskId].tHours > 0)
                 {
-                    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR]--;
+                    gTasks[taskId].tHours--;
                 }
                 else
                 {
-                    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] = 23;
+                    gTasks[taskId].tHours = 23;
                 }
-                _12HourClockFixAMPM(taskId, command);
+                UpdateClockPeriod(taskId, command);
             }
             break;
         case 2:
-            if (gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] < 59)
+            if (gTasks[taskId].tMinutes < 59)
             {
-                gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE]++;
+                gTasks[taskId].tMinutes++;
             }
             else
             {
-                gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] = 0;
-                if (gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] < 23)
+                gTasks[taskId].tMinutes = 0;
+                if (gTasks[taskId].tHours < 23)
                 {
-                    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR]++;
+                    gTasks[taskId].tHours++;
                 }
                 else
                 {
-                    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] = 0;
+                    gTasks[taskId].tHours = 0;
                 }
-                _12HourClockFixAMPM(taskId, command);
+                UpdateClockPeriod(taskId, command);
             }
             break;
     }
     return FALSE;
 }
 
-static void _12HourClockFixAMPM(u8 taskId, u8 command)
+static void UpdateClockPeriod(u8 taskId, u8 command)
 {
-    u8 hours = gTasks[taskId].data[WALL_CLOCK_TASK_HOUR];
+    u8 hours = gTasks[taskId].tHours;
     switch (command)
     {
         case 1:
             switch (hours)
             {
                 case 11:
-                    gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = FALSE;
+                    gTasks[taskId].tPeriod = FALSE;
                     break;
                 case 23:
-                    gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = TRUE;
+                    gTasks[taskId].tPeriod = TRUE;
                     break;
             }
             break;
@@ -912,43 +926,45 @@ static void _12HourClockFixAMPM(u8 taskId, u8 command)
             switch (hours)
             {
                 case 0:
-                    gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = FALSE;
+                    gTasks[taskId].tPeriod = FALSE;
                     break;
                 case 12:
-                    gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = TRUE;
+                    gTasks[taskId].tPeriod = TRUE;
                     break;
             }
             break;
     }
 }
 
-static void sub_8135130(u8 taskId)
+static void InitClockWithRtc(u8 taskId)
 {
     RtcCalcLocalTime();
-    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] = gLocalTime.hours;
-    gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] = gLocalTime.minutes;
-    gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE] = gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] * 6;
-    gTasks[taskId].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE] = (gTasks[taskId].data[WALL_CLOCK_TASK_HOUR] % 12) * 30 + (gTasks[taskId].data[WALL_CLOCK_TASK_MINUTE] / 10) * 5;
+    gTasks[taskId].tHours = gLocalTime.hours;
+    gTasks[taskId].tMinutes = gLocalTime.minutes;
+    gTasks[taskId].tMinuteHandAngle = gTasks[taskId].tMinutes * 6;
+    gTasks[taskId].tHourHandAngle = (gTasks[taskId].tHours % 12) * 30 + (gTasks[taskId].tMinutes / 10) * 5;
     if (gLocalTime.hours < 12)
     {
-        gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = FALSE;
+        gTasks[taskId].tPeriod = FALSE;
     }
     else
     {
-        gTasks[taskId].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM] = TRUE;
+        gTasks[taskId].tPeriod = TRUE;
     }
 }
 
-static void sub_81351AC(struct Sprite *sprite)
+static void SpriteCB_MinuteHand(struct Sprite *sprite)
 {
-    u16 angle = gTasks[sprite->data[0]].data[WALL_CLOCK_TASK_MINUTE_HAND_ANGLE];
+    u16 angle = gTasks[sprite->data[0]].tMinuteHandAngle;
     s16 sin = Sin2(angle) / 16;
     s16 cos = Cos2(angle) / 16;
     u16 xhat;
     u16 yhat;
+
     SetOamMatrix(0, cos, sin, -sin, cos);
     xhat = sClockHandCoords[angle][0];
     yhat = sClockHandCoords[angle][1];
+
     if (xhat > 0x80)
     {
         xhat |= 0xff00;
@@ -961,13 +977,14 @@ static void sub_81351AC(struct Sprite *sprite)
     sprite->pos2.y = yhat;
 }
 
-static void sub_8135244(struct Sprite *sprite)
+static void SpriteCB_HourHand(struct Sprite *sprite)
 {
-    u16 angle = gTasks[sprite->data[0]].data[WALL_CLOCK_TASK_HOUR_HAND_ANGLE];
+    u16 angle = gTasks[sprite->data[0]].tHourHandAngle;
     s16 sin = Sin2(angle) / 16;
     s16 cos = Cos2(angle) / 16;
     u16 xhat;
     u16 yhat;
+
     SetOamMatrix(1, cos, sin, -sin, cos);
     xhat = sClockHandCoords[angle][0];
     yhat = sClockHandCoords[angle][1];
@@ -983,9 +1000,9 @@ static void sub_8135244(struct Sprite *sprite)
     sprite->pos2.y = yhat;
 }
 
-static void sub_81352DC(struct Sprite *sprite)
+static void SpriteCB_AMIndicator(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data[0]].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM])
+    if (gTasks[sprite->data[0]].tPeriod)
     {
         if (sprite->data[1] >= 60 && sprite->data[1] < 90)
         {
@@ -1011,9 +1028,9 @@ static void sub_81352DC(struct Sprite *sprite)
     sprite->pos2.y = Sin2(sprite->data[1]) * 30 / 0x1000;
 }
 
-static void sub_8135380(struct Sprite *sprite)
+static void SpriteCB_PMIndicator(struct Sprite *sprite)
 {
-    if (gTasks[sprite->data[0]].data[WALL_CLOCK_TASK_12HRCLOCK_AM_PM])
+    if (gTasks[sprite->data[0]].tPeriod)
     {
         if (sprite->data[1] >= 105 && sprite->data[1] < 135)
         {

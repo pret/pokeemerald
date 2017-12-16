@@ -7777,8 +7777,8 @@ _080AEFB6:
 	bx r1
 	thumb_func_end sub_80AEEE8
 
-	thumb_func_start sub_80AEFBC
-sub_80AEFBC: @ 80AEFBC
+	thumb_func_start UpdateWeatherPerDay
+UpdateWeatherPerDay: @ 80AEFBC
 	lsls r0, 16
 	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
@@ -7794,7 +7794,7 @@ sub_80AEFBC: @ 80AEFBC
 	strb r1, [r2]
 	bx lr
 	.pool
-	thumb_func_end sub_80AEFBC
+	thumb_func_end UpdateWeatherPerDay
 
 	thumb_func_start sub_80AEFDC
 sub_80AEFDC: @ 80AEFDC

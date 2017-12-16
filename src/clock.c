@@ -15,14 +15,14 @@
 
 // static declarations
 
-static void sub_809E7E8(struct Time *localTime);
-static void sub_809E858(struct Time *localTime);
+static void UpdatePerDay(struct Time *localTime);
+static void UpdatePerMinute(struct Time *localTime);
 
 // rodata
 
 // text
 
-static void sub_809E778(void)
+static void InitTimeBasedEvents(void)
 {
     FlagSet(FLAG_SYS_CLOCK_SET);
     RtcCalcLocalTime();
@@ -35,38 +35,35 @@ void DoTimeBasedEvents(void)
     if (FlagGet(FLAG_SYS_CLOCK_SET) && !sub_813B9C0())
     {
         RtcCalcLocalTime();
-        sub_809E7E8(&gLocalTime);
-        sub_809E858(&gLocalTime);
+        UpdatePerDay(&gLocalTime);
+        UpdatePerMinute(&gLocalTime);
     }
 }
 
-static void sub_809E7E8(struct Time *localTime)
+static void UpdatePerDay(struct Time *localTime)
 {
     u16 *days = GetVarPointer(VAR_DAYS);
     u16 daysSince;
 
-    if (*days != localTime->days)
+    if (*days != localTime->days && *days <= localTime->days)
     {
-        if (*days <= localTime->days)
-        {
-            daysSince = localTime->days - *days;
-            ClearUpperFlags();
-            sub_8122580(daysSince);
-            sub_80ED888(daysSince);
-            sub_80AEFBC(daysSince);
-            UpdatePartyPokerusTime(daysSince);
-            sub_8137904(daysSince);
-            sub_8137A20(daysSince);
-            sub_8139EF4(daysSince);
-            sub_813A7F4(daysSince);
-            sub_813945C(daysSince);
-            SetRandomLotteryNumber(daysSince);
-            *days = localTime->days;
-        }
+        daysSince = localTime->days - *days;
+        ClearUpperFlags();
+        UpdateDewfordTrendPerDay(daysSince);
+        UpdateTVShowsPerDay(daysSince);
+        UpdateWeatherPerDay(daysSince);
+        UpdatePartyPokerusTime(daysSince);
+        UpdateMirageRnd(daysSince);
+        UpdateBirchState(daysSince);
+        UpdateFrontierManiac(daysSince);
+        UpdateFrontierGambler(daysSince);
+        SetShoalItemFlag(daysSince);
+        SetRandomLotteryNumber(daysSince);
+        *days = localTime->days;
     }
 }
 
-static void sub_809E858(struct Time *localTime)
+static void UpdatePerMinute(struct Time *localTime)
 {
     struct Time difference;
     int minutes;
@@ -83,14 +80,14 @@ static void sub_809E858(struct Time *localTime)
     }
 }
 
-void sub_809E8B4(void)
+static void ReturnFromStartWallClock(void)
 {
-    sub_809E778();
+    InitTimeBasedEvents();
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
-void Special_StartWallClock(void)
+void StartWallClock(void)
 {
     SetMainCallback2(Cb2_StartWallClock);
-    gMain.savedCallback = sub_809E8B4;
+    gMain.savedCallback = ReturnFromStartWallClock;
 }
