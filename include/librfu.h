@@ -221,3 +221,4 @@ bool16 rfu_UNI_setSendData(u8 flag, void *ptr, u8 size);
 void rfu_REQ_recvData(void);
 void rfu_UNI_readySendData(u8 a0);
 void rfu_UNI_clearRecvNewDataFlag(u8 a0);
+void rfu_REQ_PARENT_resumeRetransmitAndChange(void);

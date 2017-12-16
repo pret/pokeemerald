@@ -62,7 +62,9 @@ void sub_801084C(u8 taskId);
 void sub_8010AAC(u8 taskId);
 void sub_8010D0C(u8 taskId);
 void sub_8011068(u8 a0);
-void sub_8011A64(u8 a0, u8 a1);
+void sub_8011170(u32 a0);
+void sub_8011A64(u8 a0, u16 a1);
+void sub_8011D6C(u8 a0);
 u8 sub_8012224(void);
 void sub_801227C(void);
 
@@ -2962,4 +2964,72 @@ static void sub_800F048(void)
         sub_800D9DC(&gUnknown_03005000.unk_9e8, gUnknown_03005000.unk_4c);
         sub_800DA68(&gUnknown_03005000.unk_c1c, gUnknown_03005000.unk_4c);
     }
+}
+
+bool32 sub_800F0B8(void)
+{
+    int i;
+    int j;
+
+    if (gUnknown_03007890->unk_06 == 0)
+    {
+        return FALSE;
+    }
+    for (i = 0; i < 5; i++)
+    {
+        for (j = 0; j < 7; j++)
+        {
+            if (gRecvCmds[i][j] != 0)
+            {
+                return FALSE;
+            }
+        }
+    }
+    return TRUE;
+}
+
+bool32 sub_800F0F8(void)
+{
+    if (gUnknown_03005000.unk_04 < 20)
+    {
+        rfu_REQ_recvData();
+        rfu_waitREQComplete();
+        rfu_REQ_sendData_wrapper(0);
+    }
+    else
+    {
+        gUnknown_03005000.unk_cdb = 0;
+        if ((gUnknown_03005000.unk_ce2 & gUnknown_03007890->unk_02) == gUnknown_03005000.unk_ce2 && (gUnknown_03005000.unk_ce2 & gUnknown_03007890->unk_02))
+        {
+            if (!gUnknown_03005000.unk_cdc)
+            {
+                if (gUnknown_03005000.unk_ce3)
+                {
+                    sub_8011D6C(gUnknown_03005000.unk_ce3);
+                    gUnknown_03005000.unk_ce3 = 0;
+                    if (gUnknown_03005000.unk_ce4 == 1)
+                    {
+                        sub_8011A64(2, 0x8000);
+                        sub_8011170(0x8000);
+                        return FALSE;
+                    }
+                    if (!gUnknown_03004140.unk_00)
+                    {
+                        sub_800EDD4();
+                        gReceivedRemoteLinkPlayers = 0;
+                        return FALSE;
+                    }
+                }
+                sub_800EFB0();
+                rfu_UNI_readySendData(gUnknown_03005000.unk_cda);
+                rfu_REQ_sendData_wrapper(1);
+            }
+            else
+            {
+                rfu_REQ_PARENT_resumeRetransmitAndChange();
+            }
+            gUnknown_03005000.unk_0e = 1;
+        }
+    }
+    return FALSE;
 }

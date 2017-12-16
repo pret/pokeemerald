@@ -140,7 +140,8 @@ struct UnkRfuStruct_2 {
     /* 0x006 */ u8 filler_06[6];
     /* 0x00c */ u8 unk_0c;
     /* 0x00d */ u8 playerCount;
-    /* 0x00e */ u8 filler_0e[6];
+    /* 0x00e */ u8 unk_0e;
+    /* 0x00f */ u8 filler_0f[5];
     /* 0x014 */ u8 unk_14[4][14];
     /* 0x04c */ u8 unk_4c[14];
     /* 0x05a */ u8 filler_5a[13];
@@ -166,7 +167,8 @@ struct UnkRfuStruct_2 {
     /* 0xcd1 */ u8 filler_cd1[9];
     /* 0xcda */ u8 unk_cda;
     /* 0xcdb */ vu8 unk_cdb;
-    /* 0xcdc */ u8 filler_cdc[2];
+    /* 0xcdc */ vu8 unk_cdc;
+    /* 0xcdd */ u8 unk_cdd;
     /* 0xcde */ u8 unk_cde[4];
     /* 0xce2 */ u8 unk_ce2;
     /* 0xce2 */ u8 unk_ce3;
