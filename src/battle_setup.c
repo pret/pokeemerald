@@ -528,8 +528,8 @@ void BattleSetup_StartLegendaryBattle(void)
         CreateBattleStartTask(B_TRANSITION_GROUDON, BGM_BATTLE34);
         break;
     case SPECIES_KYOGRE:
-        gBattleTypeFlags |= BATTLE_TYPE_KYORGE;
-        CreateBattleStartTask(B_TRANSITION_KYORGE, BGM_BATTLE34);
+        gBattleTypeFlags |= BATTLE_TYPE_KYOGRE;
+        CreateBattleStartTask(B_TRANSITION_KYOGRE, BGM_BATTLE34);
         break;
     case SPECIES_RAYQUAZA:
         gBattleTypeFlags |= BATTLE_TYPE_RAYQUAZA;

@@ -6,19 +6,6 @@ void BattleTransition_StartOnField(u8 transitionID);
 void BattleTransition_Start(u8 transitionID);
 bool8 IsBattleTransitionDone(void);
 
-#define TRANSITIONS_NO         25
-
-enum // TRANSITION_MUGSHOT
-{
-    MUGSHOT_SYDNEY,
-    MUGSHOT_PHOEBE,
-    MUGSHOT_GLACIA,
-    MUGSHOT_DRAKE,
-    MUGSHOT_CHAMPION,
-};
-
-#define MUGSHOTS_NO             5
-
 // credits for the names go to Dyskinesia and Tetrable
 // names are naturally subject to change
 
@@ -45,7 +32,7 @@ enum // TRANSITION_MUGSHOT
 #define B_TRANSITION_REGICE                 19
 #define B_TRANSITION_REGISTEEL              20
 #define B_TRANSITION_REGIROCK               21
-#define B_TRANSITION_KYORGE                 22
+#define B_TRANSITION_KYOGRE                 22
 #define B_TRANSITION_GROUDON                23
 #define B_TRANSITION_RAYQUAZA               24
 #define B_TRANSITION_25                     25

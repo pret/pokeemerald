@@ -28,7 +28,7 @@ bool8 CheckForTrainersWantingBattle(void)
 
         retVal = CheckIfTrainerWantsBattle(i);
         if (retVal == 2)
-            break; // two trainers has been found
+            break; // two trainers have been found
 
         if (retVal == 0) // no trainers
             continue;
