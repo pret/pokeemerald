@@ -179,7 +179,7 @@ SECTIONS {
         asm/wallclock.o(.text);
         asm/rom6.o(.text);
         src/pokeblock.o(.text);
-        asm/pokeblock.o(.text);
+        asm/rom_81370FC.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);

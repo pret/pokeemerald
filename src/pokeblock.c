@@ -50,14 +50,7 @@ struct PokeblockMenuStruct
     u8 unkTaskId;
     bool8 isSwapping;
     s16 gfxState;
-    u8 field_E80;
-    u8 field_E81;
-    u8 field_E82;
-    u8 field_E83;
-    u8 field_E84;
-    u8 field_E85;
-    u8 field_E86;
-    u8 field_E87;
+    u8 unused[8];
 };
 
 struct PokeblockSavedData
