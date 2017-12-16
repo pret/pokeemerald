@@ -11,7 +11,7 @@
 #include "random.h"
 #include "string_util.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "item_menu.h"
 #include "text.h"
 #include "easy_chat.h"

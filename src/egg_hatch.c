@@ -2,7 +2,7 @@
 #include "pokemon.h"
 #include "egg_hatch.h"
 #include "pokedex.h"
-#include "items.h"
+#include "constants/items.h"
 #include "script.h"
 #include "decompress.h"
 #include "task.h"
@@ -10,7 +10,7 @@
 #include "main.h"
 #include "event_data.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "text.h"
 #include "text_window.h"
 #include "string_util.h"
@@ -23,7 +23,7 @@
 #include "bg.h"
 #include "m4a.h"
 #include "window.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "daycare.h"
 #include "battle.h" // to get rid of later
 

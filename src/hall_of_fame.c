@@ -9,13 +9,13 @@
 #include "gpu_regs.h"
 #include "main.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "decompress.h"
 #include "save.h"
 #include "window.h"
 #include "bg.h"
-#include "species.h"
-#include "game_stat.h"
+#include "constants/species.h"
+#include "constants/game_stat.h"
 #include "blend_palette.h"
 #include "string_util.h"
 #include "m4a.h"
@@ -24,6 +24,7 @@
 #include "trig.h"
 #include "random.h"
 #include "event_data.h"
+#include "overworld.h"
 
 struct HallofFameMon
 {
@@ -57,6 +58,7 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 extern MainCallback gGameContinueCallback;
 extern u32 gDamagedSaveSectors;
 extern u8 gReservedSpritePaletteCount;
+extern const u8 gSpeciesNames[][11];
 
 #define HALL_OF_FAME_MAX_TEAMS 50
 

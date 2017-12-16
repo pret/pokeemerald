@@ -8,7 +8,7 @@
 #include "link.h"
 #include "util.h"
 #include "main.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "window.h"
 #include "m4a.h"

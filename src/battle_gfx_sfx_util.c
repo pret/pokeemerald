@@ -9,18 +9,18 @@
 #include "random.h"
 #include "util.h"
 #include "pokemon.h"
-#include "moves.h"
+#include "constants/moves.h"
 #include "task.h"
 #include "sprite.h"
 #include "sound.h"
 #include "m4a.h"
-#include "species.h"
+#include "constants/species.h"
 #include "decompress.h"
 #include "data2.h"
 #include "palette.h"
 #include "blend_palette.h"
 #include "contest.h"
-#include "songs.h"
+#include "constants/songs.h"
 
 extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
 extern u8 gActiveBank;

@@ -1416,13 +1416,13 @@ sub_80D833C: @ 80D833C
 	cmp r0, 0
 	bne _080D83CC
 	ldr r0, =gDisplayedStringBattle
-	ldr r1, =gUnknown_0827D507
+	ldr r1, =gText_0827D507
 	bl StringCopy
 	b _080D83D4
 	.pool
 _080D83CC:
 	ldr r0, =gDisplayedStringBattle
-	ldr r1, =gUnknown_0827D531
+	ldr r1, =gText_0827D531
 	bl StringCopy
 _080D83D4:
 	bl sub_80DB89C
@@ -1753,13 +1753,13 @@ _080D868E:
 	cmp r0, 0
 	bne _080D86DC
 	ldr r0, =gDisplayedStringBattle
-	ldr r1, =gUnknown_0827D507
+	ldr r1, =gText_0827D507
 	bl StringCopy
 	b _080D86E4
 	.pool
 _080D86DC:
 	ldr r0, =gDisplayedStringBattle
-	ldr r1, =gUnknown_0827D531
+	ldr r1, =gText_0827D531
 	bl StringCopy
 _080D86E4:
 	bl sub_80DB89C
@@ -2655,7 +2655,7 @@ _080D8F38:
 	bl StringCopy
 _080D8F48:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827D55A
+	ldr r1, =gText_0827D55A
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -3566,7 +3566,7 @@ _080D96D4:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E793
+	ldr r1, =gText_0827E793
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -3638,20 +3638,20 @@ _080D9774:
 	asrs r0, r4, 24
 	cmp r0, 0x1
 	bne _080D97A0
-	ldr r0, =gUnknown_0827E32E
+	ldr r0, =gText_0827E32E
 	b _080D97A6
 	.pool
 _080D97A0:
 	cmp r0, 0x2
 	bne _080D97B4
-	ldr r0, =gUnknown_0827E35B
+	ldr r0, =gText_0827E35B
 _080D97A6:
 	movs r1, 0x1
 	bl sub_80DEC30
 	b _080D97BC
 	.pool
 _080D97B4:
-	ldr r0, =gUnknown_0827E38D
+	ldr r0, =gText_0827E38D
 	movs r1, 0x1
 	bl sub_80DEC30
 _080D97BC:
@@ -3675,7 +3675,7 @@ _080D97DC:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E2FE
+	ldr r1, =gText_0827E2FE
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -3813,7 +3813,7 @@ _080D9904:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E6E3
+	ldr r1, =gText_0827E6E3
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -4043,7 +4043,7 @@ _080D9B30:
 	cmp r3, 0
 	bge _080D9B48
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_0827E73C
+	ldr r1, =gText_0827E73C
 	bl StringExpandPlaceholders
 	b _080D9B74
 	.pool
@@ -4058,13 +4058,13 @@ _080D9B48:
 	cmp r0, 0x4
 	bgt _080D9B6C
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_0827E717
+	ldr r1, =gText_0827E717
 	bl StringExpandPlaceholders
 	b _080D9B74
 	.pool
 _080D9B6C:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_0827E76A
+	ldr r1, =gText_0827E76A
 	bl StringExpandPlaceholders
 _080D9B74:
 	ldr r0, =gStringVar4
@@ -4402,7 +4402,7 @@ _080D9DD4:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E7EA
+	ldr r1, =gText_0827E7EA
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -4426,7 +4426,7 @@ _080D9E60:
 _080D9E6A:
 	bl sub_80DB89C
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E817
+	ldr r1, =gText_0827E817
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -4491,7 +4491,7 @@ _080D9EDC:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827E58A
+	ldr r1, =gText_0827E58A
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -4630,7 +4630,7 @@ _080DA038:
 	adds r1, r2
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827D56F
+	ldr r1, =gText_0827D56F
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -5373,7 +5373,7 @@ _080DA668:
 	ldr r0, [r0]
 	str r0, [r1]
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_0827D597
+	ldr r1, =gText_0827D597
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -11207,7 +11207,7 @@ sub_80DD45C: @ 80DD45C
 	cmp r1, 0
 	bne _080DD4DC
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_0827E837
+	ldr r1, =gText_0827E837
 	bl StringCopy
 	b _080DD52C
 	.pool
@@ -11216,7 +11216,7 @@ _080DD4DC:
 	cmp r0, 0x1
 	bne _080DD4F4
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_0827E83F
+	ldr r1, =gText_0827E83F
 	bl StringCopy
 	b _080DD52C
 	.pool
@@ -11225,7 +11225,7 @@ _080DD4F4:
 	cmp r0, 0x2
 	bne _080DD50C
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_0827E847
+	ldr r1, =gText_0827E847
 	bl StringCopy
 	b _080DD52C
 	.pool
@@ -11234,13 +11234,13 @@ _080DD50C:
 	cmp r0, 0x3
 	bne _080DD524
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_0827E850
+	ldr r1, =gText_0827E850
 	bl StringCopy
 	b _080DD52C
 	.pool
 _080DD524:
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_0827E85A
+	ldr r1, =gText_0827E85A
 	bl StringCopy
 _080DD52C:
 	ldr r4, =gStringVar4

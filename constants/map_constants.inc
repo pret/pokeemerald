@@ -1,3 +1,4 @@
+@ TODO: these need to match the names in include/constants/maps.h
 	.set cur_map_group, -1
 
 	new_map_group

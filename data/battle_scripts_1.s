@@ -1,3 +1,6 @@
+#include "constants/abilities.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
 	.include "constants/constants.inc"

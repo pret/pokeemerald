@@ -1,23 +1,24 @@
 #include "global.h"
 #include "wild_encounter.h"
 #include "pokemon.h"
-#include "species.h"
+#include "constants/species.h"
 #include "metatile_behavior.h"
 #include "fieldmap.h"
 #include "random.h"
-#include "map_constants.h"
+#include "constants/maps.h"
 #include "field_player_avatar.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "event_data.h"
 #include "safari_zone.h"
+#include "overworld.h"
 #include "pokeblock.h"
 #include "battle_setup.h"
 #include "roamer.h"
-#include "game_stat.h"
+#include "constants/game_stat.h"
 #include "tv.h"
 #include "link.h"
 #include "script.h"
-#include "items.h"
+#include "constants/items.h"
 
 extern const u8 EventScript_RepelWoreOff[];
 
@@ -84,8 +85,8 @@ static bool8 CheckFeebas(void)
     u8 route119Section = 0;
     u16 waterTileNum;
 
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_ROUTE119
-     && gSaveBlock1Ptr->location.mapNum == MAP_ID_ROUTE119)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE119)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE119))
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         x -= 7;
@@ -283,8 +284,8 @@ static u16 GetCurrentMapWildMonHeaderId(void)
         if (gWildMonHeaders[i].mapGroup == gSaveBlock1Ptr->location.mapGroup &&
             gWildMonHeaders[i].mapNum == gSaveBlock1Ptr->location.mapNum)
         {
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_ALTERING_CAVE &&
-                gSaveBlock1Ptr->location.mapNum == MAP_ID_ALTERING_CAVE)
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ALTERING_CAVE) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ALTERING_CAVE))
             {
                 u16 alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
                 if (alteringCaveId > 8)
@@ -513,8 +514,8 @@ static bool8 DoGlobalWildEncounterDiceRoll(void)
 
 static bool8 AreLegendariesInSootopolisPreventingEncounters(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP_SOOTOPOLIS_CITY
-        || gSaveBlock1Ptr->location.mapNum != MAP_ID_SOOTOPOLIS_CITY)
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(SOOTOPOLIS_CITY)
+     || gSaveBlock1Ptr->location.mapNum != MAP_NUM(SOOTOPOLIS_CITY))
     {
         return FALSE;
     }

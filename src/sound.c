@@ -5,7 +5,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "pokemon.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "task.h"
 
 struct Fanfare

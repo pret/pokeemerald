@@ -6,10 +6,10 @@
 #include "battle_ai_script_commands.h"
 #include "battle_anim.h"
 #include "pokemon.h"
-#include "species.h"
+#include "constants/species.h"
 #include "recorded_battle.h"
 #include "util.h"
-#include "abilities.h"
+#include "constants/abilities.h"
 #include "battle_message.h"
 
 extern u32 gBattleTypeFlags;

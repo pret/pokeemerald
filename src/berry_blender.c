@@ -1,11 +1,13 @@
 #include "global.h"
+#include "constants/game_stat.h"
+#include "overworld.h"
 #include "berry_blender.h"
 #include "bg.h"
 #include "window.h"
 #include "task.h"
 #include "sprite.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "m4a.h"
 #include "bg.h"
 #include "palette.h"
@@ -20,7 +22,7 @@
 #include "item_menu_icons.h"
 #include "berry.h"
 #include "item.h"
-#include "items.h"
+#include "constants/items.h"
 #include "string_util.h"
 #include "international_string_util.h"
 #include "random.h"
@@ -1064,7 +1066,7 @@ static void Blender_SetPlayerNamesLocal(u8 opponentsNum)
         sBerryBlenderData->playersNo = 2;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2Ptr->playerName);
 
-        if (!FlagGet(FLAG_340))
+        if (!FlagGet(FLAG_0x340))
             StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[BLENDER_MASTER]);
         else
             StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[BLENDER_MISTER]);
@@ -1588,7 +1590,7 @@ static void sub_80808D4(void)
 
         if (gSpecialVar_0x8004 == 1)
         {
-            if (!FlagGet(FLAG_340))
+            if (!FlagGet(FLAG_0x340))
                 sBerryBlenderData->field_120[0] = CreateTask(sub_8081224, 10);
             else
                 sBerryBlenderData->field_120[0] = CreateTask(sUnknown_083399EC[0], 10);

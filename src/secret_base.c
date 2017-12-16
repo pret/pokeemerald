@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "constants/decorations.h"
 #include "malloc.h"
 #include "task.h"
 #include "palette.h"
@@ -10,8 +11,8 @@
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
 #include "menu_indicators.h"
-#include "map_constants.h"
-#include "songs.h"
+#include "constants/maps.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "overworld.h"
 #include "fieldmap.h"
@@ -89,30 +90,30 @@ const struct {
 };
 
 const u8 gUnknown_0858CFE8[] = {
-    MAP_ID_SECRET_BASE_RED_CAVE1,    0x00, 0x01, 0x03,
-    MAP_ID_SECRET_BASE_RED_CAVE2,    0x00, 0x05, 0x09,
-    MAP_ID_SECRET_BASE_RED_CAVE3,    0x00, 0x01, 0x03,
-    MAP_ID_SECRET_BASE_RED_CAVE4,    0x00, 0x07, 0x0d,
-    MAP_ID_SECRET_BASE_BROWN_CAVE1,  0x00, 0x02, 0x03,
-    MAP_ID_SECRET_BASE_BROWN_CAVE2,  0x00, 0x09, 0x02,
-    MAP_ID_SECRET_BASE_BROWN_CAVE3,  0x00, 0x0d, 0x04,
-    MAP_ID_SECRET_BASE_BROWN_CAVE4,  0x00, 0x01, 0x02,
-    MAP_ID_SECRET_BASE_BLUE_CAVE1,   0x00, 0x01, 0x03,
-    MAP_ID_SECRET_BASE_BLUE_CAVE2,   0x00, 0x01, 0x02,
-    MAP_ID_SECRET_BASE_BLUE_CAVE3,   0x00, 0x03, 0x0f,
-    MAP_ID_SECRET_BASE_BLUE_CAVE4,   0x00, 0x03, 0x0e,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE1, 0x00, 0x09, 0x03,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE2, 0x00, 0x08, 0x07,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE3, 0x00, 0x03, 0x06,
-    MAP_ID_SECRET_BASE_YELLOW_CAVE4, 0x00, 0x05, 0x09,
-    MAP_ID_SECRET_BASE_TREE1,        0x00, 0x02, 0x03,
-    MAP_ID_SECRET_BASE_TREE2,        0x00, 0x05, 0x06,
-    MAP_ID_SECRET_BASE_TREE3,        0x00, 0x0f, 0x03,
-    MAP_ID_SECRET_BASE_TREE4,        0x00, 0x04, 0x0a,
-    MAP_ID_SECRET_BASE_SHRUB1,       0x00, 0x03, 0x03,
-    MAP_ID_SECRET_BASE_SHRUB2,       0x00, 0x01, 0x02,
-    MAP_ID_SECRET_BASE_SHRUB3,       0x00, 0x07, 0x08,
-    MAP_ID_SECRET_BASE_SHRUB4,       0x00, 0x09, 0x06
+    MAP_NUM(SECRET_BASE_RED_CAVE1),    0x00, 0x01, 0x03,
+    MAP_NUM(SECRET_BASE_RED_CAVE2),    0x00, 0x05, 0x09,
+    MAP_NUM(SECRET_BASE_RED_CAVE3),    0x00, 0x01, 0x03,
+    MAP_NUM(SECRET_BASE_RED_CAVE4),    0x00, 0x07, 0x0d,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE1),  0x00, 0x02, 0x03,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE2),  0x00, 0x09, 0x02,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE3),  0x00, 0x0d, 0x04,
+    MAP_NUM(SECRET_BASE_BROWN_CAVE4),  0x00, 0x01, 0x02,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE1),   0x00, 0x01, 0x03,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE2),   0x00, 0x01, 0x02,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE3),   0x00, 0x03, 0x0f,
+    MAP_NUM(SECRET_BASE_BLUE_CAVE4),   0x00, 0x03, 0x0e,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE1), 0x00, 0x09, 0x03,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE2), 0x00, 0x08, 0x07,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE3), 0x00, 0x03, 0x06,
+    MAP_NUM(SECRET_BASE_YELLOW_CAVE4), 0x00, 0x05, 0x09,
+    MAP_NUM(SECRET_BASE_TREE1),        0x00, 0x02, 0x03,
+    MAP_NUM(SECRET_BASE_TREE2),        0x00, 0x05, 0x06,
+    MAP_NUM(SECRET_BASE_TREE3),        0x00, 0x0f, 0x03,
+    MAP_NUM(SECRET_BASE_TREE4),        0x00, 0x04, 0x0a,
+    MAP_NUM(SECRET_BASE_SHRUB1),       0x00, 0x03, 0x03,
+    MAP_NUM(SECRET_BASE_SHRUB2),       0x00, 0x01, 0x02,
+    MAP_NUM(SECRET_BASE_SHRUB3),       0x00, 0x07, 0x08,
+    MAP_NUM(SECRET_BASE_SHRUB4),       0x00, 0x09, 0x06
 };
 
 const struct MenuAction gUnknown_0858D048[] = {
@@ -360,7 +361,7 @@ void sub_80E8F9C(void)
     s8 idx;
 
     idx = sCurSecretBaseId / 10 * 4;
-    warp1_set_2(MAP_GROUP_SECRET_BASE_RED_CAVE1, gUnknown_0858CFE8[idx], gUnknown_0858CFE8[idx + 1]);
+    warp1_set_2(MAP_GROUP(SECRET_BASE_RED_CAVE1), gUnknown_0858CFE8[idx], gUnknown_0858CFE8[idx + 1]);
 }
 
 void sub_80E8FD0(u8 taskId)
@@ -455,7 +456,7 @@ void sub_80E91F8(void)
 
 bool8 CurrentMapIsSecretBase(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_SECRET_BASE_RED_CAVE1 && (u8)gSaveBlock1Ptr->location.mapNum <= MAP_ID_SECRET_BASE_SHRUB4)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SECRET_BASE_RED_CAVE1) && (u8)gSaveBlock1Ptr->location.mapNum <= MAP_NUM(SECRET_BASE_SHRUB4))
     {
         return TRUE;
     }

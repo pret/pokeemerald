@@ -6,7 +6,7 @@
 #include "decompress.h"
 #include "task.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "palette.h"
 
 // this file's functions
