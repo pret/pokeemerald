@@ -1140,7 +1140,7 @@ static void sub_80379F8(u8 arrayIdPlus)
         gUnknown_02022FF8[i].gender      = GetMonGender(&gPlayerParty[arrayIdPlus + i]);
         StripExtCtrlCodes(gUnknown_02022FF8[i].nickname);
         if (GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
-            PadNameString(gUnknown_02022FF8[i].nickname, 0);
+            PadNameString(gUnknown_02022FF8[i].nickname, CHAR_SPACE);
     }
     memcpy(gUnknown_02023058, gUnknown_02022FF8, sizeof(gUnknown_02022FF8));
 }
