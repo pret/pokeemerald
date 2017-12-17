@@ -1165,7 +1165,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             }
             break;
         case 4:
-            switch (sub_8198C58())
+            switch (ProcessMenuInputNoWrap_())
             {
             case 0:
                 sEvoCursorPos = 0;

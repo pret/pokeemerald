@@ -663,7 +663,7 @@ static void CB2_EggHatch_1(void)
         }
         break;
     case 10:
-        switch (sub_8198C58())
+        switch (ProcessMenuInputNoWrap_())
         {
         case 0:
             GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar3);
