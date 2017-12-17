@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/trainers.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "battle_transition.h"
@@ -15,8 +16,6 @@
 #include "constants/maps.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "trainer_classes.h"
-#include "trainer_ids.h"
 #include "random.h"
 #include "starter_choose.h"
 #include "script_pokemon_80F8.h"
@@ -27,7 +26,6 @@
 #include "event_scripts.h"
 #include "trainer_see.h"
 #include "field_message_box.h"
-#include "trainer.h"
 #include "sound.h"
 #include "strings.h"
 #include "secret_base.h"
@@ -759,7 +757,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
                 sum += party[i].lvl;
         }
         break;
-    case PARTY_FLAG_CUSTOM_MOVES:
+    case F_TRAINER_PARTY_CUSTOM_MOVESET:
         {
             const struct TrainerMonNoItemCustomMoves *party;
             party = gTrainers[opponentId].party.NoItemCustomMoves;
@@ -767,7 +765,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
                 sum += party[i].lvl;
         }
         break;
-    case PARTY_FLAG_HAS_ITEM:
+    case F_TRAINER_PARTY_HELD_ITEM:
         {
             const struct TrainerMonItemDefaultMoves *party;
             party = gTrainers[opponentId].party.ItemDefaultMoves;
@@ -775,7 +773,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
                 sum += party[i].lvl;
         }
         break;
-    case PARTY_FLAG_CUSTOM_MOVES | PARTY_FLAG_HAS_ITEM:
+    case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
         {
             const struct TrainerMonItemCustomMoves *party;
             party = gTrainers[opponentId].party.ItemCustomMoves;
@@ -820,30 +818,30 @@ static u8 GetTrainerBattleTransition(void)
     if (gTrainerBattleOpponent_A == SECRET_BASE_OPPONENT)
         return B_TRANSITION_CHAMPION;
 
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_ELITE_FOUR)
+    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR)
     {
-        if (gTrainerBattleOpponent_A == TRAINER_ID_SIDNEY)
+        if (gTrainerBattleOpponent_A == TRAINER_SIDNEY)
             return B_TRANSITION_SYDNEY;
-        if (gTrainerBattleOpponent_A == TRAINER_ID_PHOEBE)
+        if (gTrainerBattleOpponent_A == TRAINER_PHOEBE)
             return B_TRANSITION_PHOEBE;
-        if (gTrainerBattleOpponent_A == TRAINER_ID_GLACIA)
+        if (gTrainerBattleOpponent_A == TRAINER_GLACIA)
             return B_TRANSITION_GLACIA;
-        if (gTrainerBattleOpponent_A == TRAINER_ID_DRAKE)
+        if (gTrainerBattleOpponent_A == TRAINER_DRAKE)
             return B_TRANSITION_DRAKE;
         return B_TRANSITION_CHAMPION;
     }
 
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_CHAMPION)
+    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION)
         return B_TRANSITION_CHAMPION;
 
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_TEAM_MAGMA
-        || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_MAGMA_LEADER
-        || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_MAGMA_ADMIN)
+    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_TEAM_MAGMA
+        || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_MAGMA_LEADER
+        || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_MAGMA_ADMIN)
         return B_TRANSITION_MAGMA;
 
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_TEAM_AQUA
-        || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_AQUA_LEADER
-        || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_AQUA_ADMIN)
+    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_TEAM_AQUA
+        || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_AQUA_LEADER
+        || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_AQUA_ADMIN)
         return B_TRANSITION_AQUA;
 
     if (gTrainers[gTrainerBattleOpponent_A].doubleBattle == TRUE)

@@ -17,6 +17,7 @@
 #include "item.h"
 #include "constants/items.h"
 #include "constants/hold_effects.h"
+#include "constants/trainers.h"
 #include "link.h"
 #include "bg.h"
 #include "dma3.h"
@@ -38,7 +39,6 @@
 #include "pokedex.h"
 #include "constants/abilities.h"
 #include "constants/moves.h"
-#include "trainer_classes.h"
 #include "evolution_scene.h"
 #include "roamer.h"
 #include "tv.h"
@@ -1718,7 +1718,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             {
                 const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
@@ -1726,11 +1726,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
             }
-            case PARTY_FLAG_CUSTOM_MOVES:
+            case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
                 const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
@@ -1744,11 +1744,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 }
                 break;
             }
-            case PARTY_FLAG_HAS_ITEM:
+            case F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
@@ -1758,11 +1758,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
             }
-            case PARTY_FLAG_CUSTOM_MOVES | PARTY_FLAG_HAS_ITEM:
+            case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
@@ -4749,19 +4749,19 @@ static void HandleEndTurn_BattleWon(void)
 
         switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)
         {
-        case CLASS_ELITE_FOUR:
-        case CLASS_CHAMPION:
+        case TRAINER_CLASS_ELITE_FOUR:
+        case TRAINER_CLASS_CHAMPION:
             PlayBGM(BGM_KACHI5);
             break;
-        case CLASS_TEAM_AQUA:
-        case CLASS_TEAM_MAGMA:
-        case CLASS_AQUA_ADMIN:
-        case CLASS_AQUA_LEADER:
-        case CLASS_MAGMA_ADMIN:
-        case CLASS_MAGMA_LEADER:
+        case TRAINER_CLASS_TEAM_AQUA:
+        case TRAINER_CLASS_TEAM_MAGMA:
+        case TRAINER_CLASS_AQUA_ADMIN:
+        case TRAINER_CLASS_AQUA_LEADER:
+        case TRAINER_CLASS_MAGMA_ADMIN:
+        case TRAINER_CLASS_MAGMA_LEADER:
             PlayBGM(BGM_KACHI4);
             break;
-        case CLASS_LEADER:
+        case TRAINER_CLASS_LEADER:
             PlayBGM(BGM_KACHI3);
             break;
         default:

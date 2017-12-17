@@ -298,7 +298,6 @@ struct TrainerMonNoItemDefaultMoves
     u16 species;
 };
 
-u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
 u8 GetBankSide(u8 bank);
 
 struct TrainerMonItemDefaultMoves
@@ -347,9 +346,6 @@ struct Trainer
     /*0x20*/ u8 partySize;
     /*0x24*/ union TrainerMonPtr party;
 };
-
-#define PARTY_FLAG_CUSTOM_MOVES     0x1
-#define PARTY_FLAG_HAS_ITEM         0x2
 
 extern const struct Trainer gTrainers[];
 

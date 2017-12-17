@@ -17,6 +17,7 @@
 #include "battle_interface.h"
 #include "constants/species.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
 #include "text.h"
 #include "sound.h"
 #include "pokedex.h"
@@ -6236,19 +6237,19 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
                 lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
             }
             break;
-        case PARTY_FLAG_CUSTOM_MOVES:
+        case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
                 const struct TrainerMonNoItemCustomMoves *party = gTrainers[trainerId].party.NoItemCustomMoves;
                 lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
             }
             break;
-        case PARTY_FLAG_HAS_ITEM:
+        case F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemDefaultMoves *party = gTrainers[trainerId].party.ItemDefaultMoves;
                 lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
             }
             break;
-        case PARTY_FLAG_CUSTOM_MOVES | PARTY_FLAG_HAS_ITEM:
+        case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemCustomMoves *party = gTrainers[trainerId].party.ItemCustomMoves;
                 lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
