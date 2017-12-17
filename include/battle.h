@@ -8,6 +8,7 @@
 #include "battle_ai_switch_items.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_util2.h"
+#include "battle_bg.h"
 
 /*
     Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
@@ -298,7 +299,6 @@ struct TrainerMonNoItemDefaultMoves
     u16 species;
 };
 
-u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
 u8 GetBankSide(u8 bank);
 
 struct TrainerMonItemDefaultMoves
@@ -866,16 +866,6 @@ struct BattleScripting
 };
 
 extern struct BattleScripting gBattleScripting;
-
-// functions
-
-// battle_1
-void LoadBattleTextboxAndBackground(void);
-void LoadBattleEntryBackground(void);
-void ApplyPlayerChosenFrameToBattleMenu(void);
-bool8 LoadChosenBattleElement(u8 caseId);
-void DrawMainBattleBackground(void);
-void task00_0800F6FC(u8 taskId);
 
 enum
 {

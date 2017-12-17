@@ -56,7 +56,8 @@ SECTIONS {
         asm/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
-        asm/battle_1.o(.text);
+        asm/rom_8034C54.o(.text);
+        src/battle_bg.o(.text);
         src/battle_2.o(.text);
         src/battle_util.o(.text);
         src/battle_script_commands.o(.text);

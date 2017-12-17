@@ -84,5 +84,8 @@ extern const u8 gText_RegisteredDataDeleted[];
 extern const u8 gUnknown_085EA79D[];
 extern const u8 gText_PkmnFainted3[];
 extern const u8 gText_Coins[];
+extern const u8 gText_Draw[];
+extern const u8 gText_Loss[];
+extern const u8 gText_Win[];
 
 #endif //GUARD_STRINGS_H

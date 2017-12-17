@@ -7602,7 +7602,7 @@ sub_807B170: @ 807B170
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
 	bl DeactivateAllTextPrinters
-	ldr r0, =gUnknown_08C00000
+	ldr r0, =gBattleTextboxTiles
 	mov r10, r0
 	movs r0, 0
 	mov r9, r0
@@ -7611,7 +7611,7 @@ sub_807B170: @ 807B170
 	movs r2, 0
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r0, =gUnknown_08C00524
+	ldr r0, =gBattleTextboxTilemap
 	mov r8, r0
 	ldr r4, =0x0201c000
 	adds r1, r4, 0
@@ -7621,7 +7621,7 @@ sub_807B170: @ 807B170
 	adds r2, r5, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r6, =gUnknown_08C004E0
+	ldr r6, =gBattleTextboxPalette
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0x20
