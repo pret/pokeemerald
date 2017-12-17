@@ -239,9 +239,9 @@ static const u8 sRegionMapFrameTilemapLZ[] = INCBIN_U8("graphics/pokenav/map_fra
 
 static const u16 Unknown_085A1D48[] = INCBIN_U16("graphics/pokenav/fly_target_icons.gbapal");
 
-static const u8 gUnknown_085A1D68[] = INCBIN_U8("graphics/pokenav/fly_target_icons.4bpp.lz");
+static const u8 sUnknown_085A1D68[] = INCBIN_U8("graphics/pokenav/fly_target_icons.4bpp.lz");
 
-static const u8 gUnknown_085A1E3C[][3] = {
+static const u8 sUnknown_085A1E3C[][3] = {
     {MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), 1},
     {MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), 14},
     {MAP_GROUP(DEWFORD_TOWN), MAP_NUM(DEWFORD_TOWN), 15},
@@ -326,7 +326,7 @@ static const struct SpritePalette gUnknown_085A1F10 = {
     Unknown_085A1D48, 2
 };
 
-static const u16 gUnknown_085A1F18[][2] = {
+static const u16 sUnknown_085A1F18[][2] = {
     {FLAG_UNLOCK_BATTLE_FRONTIER, MAPSEC_BATTLE_FRONTIER},
     {-1, MAPSEC_NONE}
 };
@@ -1738,7 +1738,7 @@ static void sub_8124A70(void)
 {
     struct SpriteSheet sheet;
 
-    LZ77UnCompWram(gUnknown_085A1D68, gUnknown_0203A148->unk_88c);
+    LZ77UnCompWram(sUnknown_085A1D68, gUnknown_0203A148->unk_88c);
     sheet.data = gUnknown_0203A148->unk_88c;
     sheet.size = 0x1c0;
     sheet.tag = 2;
@@ -1806,11 +1806,11 @@ static void sub_8124BE4(void)
     u16 mapSecId;
     u8 spriteId;
 
-    for (i = 0; gUnknown_085A1F18[i][1] != MAPSEC_NONE; i++)
+    for (i = 0; sUnknown_085A1F18[i][1] != MAPSEC_NONE; i++)
     {
-        if (FlagGet(gUnknown_085A1F18[i][0]))
+        if (FlagGet(sUnknown_085A1F18[i][0]))
         {
-            mapSecId = gUnknown_085A1F18[i][1];
+            mapSecId = sUnknown_085A1F18[i][1];
             sub_8124630(mapSecId, &x, &y, &width, &height);
             x = (x + MAPCURSOR_X_MIN) * 8;
             y = (y + MAPCURSOR_Y_MIN) * 8;
@@ -1919,13 +1919,13 @@ static void sub_8124E0C(void)
                             sub_8084CCC(FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && gUnknown_0203A148->regionMap.posWithinMapSec == 0 ? 0x14 : 0x0B);
                             break;
                         default:
-                            if (gUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2] != 0)
+                            if (sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2] != 0)
                             {
-                                sub_8084CCC(gUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2]);
+                                sub_8084CCC(sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2]);
                             }
                             else
                             {
-                                warp1_set_2(gUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][0], gUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][1], -1);
+                                warp1_set_2(sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][0], sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][1], -1);
                             }
                             break;
                     }
