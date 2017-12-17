@@ -83,6 +83,9 @@ extern const u8 gText_OkayToDeleteFromRegistry[];
 extern const u8 gText_RegisteredDataDeleted[];
 extern const u8 gUnknown_085EA79D[];
 extern const u8 gText_EmptyString2[];
+extern const u8 gText_Confirm3[];
+extern const u8 gText_Cancel4[];
+extern const u8 gText_IsThisTheCorrectTime[];
 extern const u8 gText_PkmnFainted3[];
 extern const u8 gText_Coins[];
 

@@ -3696,7 +3696,7 @@ _0807920E:
 	thumb_func_start sub_8079218
 sub_8079218: @ 8079218
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3798,7 +3798,7 @@ _080792D8:
 	thumb_func_start sub_80792E4
 sub_80792E4: @ 80792E4
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0

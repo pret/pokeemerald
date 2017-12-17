@@ -1793,7 +1793,7 @@ void EndMassOutbreak(void)
     gSaveBlock1Ptr->outbreakDaysLeft = 0;
 }
 
-void sub_80ED888(u16 days)
+void UpdateTVShowsPerDay(u16 days)
 {
 
     sub_80ED8B4(days);

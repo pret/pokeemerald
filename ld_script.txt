@@ -105,7 +105,7 @@ SECTIONS {
         src/event_data.o(.text);
         asm/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
-        asm/clock.o(.text);
+        src/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
         src/start_menu.o(.text);
         asm/start_menu.o(.text);
@@ -177,7 +177,7 @@ SECTIONS {
         src/battle_ai_script_commands.o(.text);
         asm/trader.o(.text);
         src/starter_choose.o(.text);
-        asm/wallclock.o(.text);
+        src/wallclock.o(.text);
         asm/rom6.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
@@ -423,6 +423,7 @@ SECTIONS {
         src/battle_ai_script_commands.o(.rodata);
         data/data4.o(.rodata);
         data/starter_choose.o(.rodata);
+        src/wallclock.o(.rodata);
         data/data4c.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);

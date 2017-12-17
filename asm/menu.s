@@ -2266,8 +2266,8 @@ sub_8198C34: @ 8198C34
 	bx r0
 	thumb_func_end sub_8198C34
 
-	thumb_func_start sub_8198C58
-sub_8198C58: @ 8198C58
+	thumb_func_start ProcessMenuInputNoWrap_
+ProcessMenuInputNoWrap_: @ 8198C58
 	push {r4,lr}
 	bl ProcessMenuInputNoWrapAround
 	lsls r0, 24
@@ -2282,7 +2282,7 @@ _08198C6E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8198C58
+	thumb_func_end ProcessMenuInputNoWrap_
 
 	thumb_func_start sub_8198C78
 sub_8198C78: @ 8198C78

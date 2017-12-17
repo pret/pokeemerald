@@ -1121,7 +1121,7 @@ sub_80A00EC: @ 80A00EC
 	thumb_func_start sub_80A0108
 sub_80A0108: @ 80A0108
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1226,7 +1226,7 @@ sub_80A01D0: @ 80A01D0
 	thumb_func_start sub_80A01EC
 sub_80A01EC: @ 80A01EC
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1441,7 +1441,7 @@ sub_80A0388: @ 80A0388
 	thumb_func_start sub_80A03A4
 sub_80A03A4: @ 80A03A4
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
