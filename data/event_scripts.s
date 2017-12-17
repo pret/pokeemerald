@@ -861,7 +861,7 @@ EventScript_271362:: @ 8271362
 	goto EventScript_ShowTrainerIntroMsg
 
 EventScript_271389:: @ 8271389
-	gotobattleendscript
+	gotopostbattlescript
 
 EventScript_TryDoDoubleTrainerBattle:: @ 827138A
 	lock
@@ -885,14 +885,14 @@ EventScript_NotEnoughMonsForDoubleBattle:: @ 82713BA
 	end
 
 EventScript_2713C1:: @ 82713C1
-	gotobattleendscript
+	gotopostbattlescript
 
 EventScript_2713C2:: @ 82713C2
 	applymovement VAR_LAST_TALKED, Movement_27143A
 	waitmovement 0
 	special SetUpTrainerEncounterMusic
 	trainerbattlebegin
-	gotobattleendscript
+	gotopostbattlescript
 
 EventScript_2713D1:: @ 82713D1
 	call EventScript_27142F
@@ -910,7 +910,7 @@ EventScript_2713D1:: @ 82713D1
 	end
 
 EventScript_2713F7:: @ 82713F7
-	gotobattleendscript
+	gotopostbattlescript
 
 EventScript_TryDoDoubleRematchBattle:: @ 82713F8
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
@@ -930,7 +930,7 @@ EventScript_TryDoDoubleRematchBattle:: @ 82713F8
 	end
 
 EventScript_271427:: @ 8271427
-	gotobattleendscript
+	gotopostbattlescript
 
 EventScript_NotEnoughMonsForDoubleRematchBattle:: @ 8271428
 	special ShowTrainerCantBattleSpeech
@@ -972,7 +972,7 @@ EventScript_DoTrainerBattle:: @ 8271454
 	goto_eq EventScript_271491
 
 EventScript_271491:: @ 8271491
-	gototrainerscript
+	gotobeatenscript
 	releaseall
 	end
 
@@ -4094,7 +4094,7 @@ EventScript_TryGetTrainerScript:: @ 82742E6
 	end
 
 EventScript_GotoTrainerScript:: @ 82742F6
-	gototrainerscript
+	gotobeatenscript
 	releaseall
 	end
 

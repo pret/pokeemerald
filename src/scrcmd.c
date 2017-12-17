@@ -1979,13 +1979,13 @@ bool8 ScrCmd_dotrainerbattle(struct ScriptContext *ctx)
     return TRUE;
 }
 
-bool8 ScrCmd_gotobattleendscript(struct ScriptContext *ctx)
+bool8 ScrCmd_gotopostbattlescript(struct ScriptContext *ctx)
 {
     ctx->scriptPtr = BattleSetup_GetScriptAddrAfterBattle();
     return FALSE;
 }
 
-bool8 ScrCmd_gototrainerscript(struct ScriptContext *ctx)
+bool8 ScrCmd_gotobeatenscript(struct ScriptContext *ctx)
 {
     ctx->scriptPtr = BattleSetup_GetTrainerPostBattleScript();
     return FALSE;

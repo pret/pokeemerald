@@ -663,11 +663,13 @@
 	.byte 0x5d
 	.endm
 
-	.macro gotobattleendscript 
+	@ Goes to address after the trainerbattle command (called by the battle functions, see battle_setup.c) 
+	.macro gotopostbattlescript 
 	.byte 0x5e
 	.endm
 
-	.macro gototrainerscript 
+	@ Goes to address specified in the trainerbattle command (called by the battle functions, see battle_setup.c) 
+	.macro gotobeatenscript 
 	.byte 0x5f
 	.endm
 
