@@ -3,6 +3,9 @@
 
     .section .rodata
     .align 2, 0
+	
+gUnknown_0832C6A8:: @ 832C6A8
+	.incbin "baserom.gba", 0x32C6A8, 0x18
 
 gUnknown_0832C6C0:: @ 832C6C0
 	.incbin "baserom.gba", 0x32c6c0, 0x1fe

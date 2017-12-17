@@ -2,7 +2,7 @@
 #include "main.h"
 #include "m4a.h"
 #include "rtc.h"
-#include "rng.h"
+#include "random.h"
 #include "dma3.h"
 #include "gba/flash_internal.h"
 #include "battle.h"

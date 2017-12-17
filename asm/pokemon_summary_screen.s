@@ -1424,16 +1424,16 @@ sub_81C4A08: @ 81C4A08
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl ball_number_to_ball_processing_index
+	bl ItemIdToBallId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_8076A78
+	bl LoadBallGfx
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =gUnknown_0832C588
+	ldr r1, =gBallSpriteTemplates
 	adds r0, r1
 	movs r1, 0x10
 	movs r2, 0x88

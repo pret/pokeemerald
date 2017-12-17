@@ -3409,7 +3409,7 @@ _080C8F0C:
 	adds r0, 0x1
 	strb r0, [r1]
 _080C8F22:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4133,7 +4133,7 @@ _080C9584:
 	b _080C9664
 	.pool
 _080C95A4:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4927,7 +4927,7 @@ _080C9C78:
 	b _080C9CAA
 	.pool
 _080C9C8C:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -5058,7 +5058,7 @@ _080C9DAC:
 	b _080C9DE0
 	.pool
 _080C9DC0:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0

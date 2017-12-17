@@ -1,6 +1,6 @@
 #ifndef GUARD_DATA_BARD_MUSIC_POKEMON_H
 #define GUARD_DATA_BARD_MUSIC_POKEMON_H
-#include "species.h"
+#include "constants/species.h"
 
 const u16 gUnknown_085F5490 = NUM_SPECIES;
 

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "mail.h"
+#include "constants/items.h"
 #include "main.h"
 #include "overworld.h"
 #include "task.h"
@@ -15,7 +16,7 @@
 #include "gpu_regs.h"
 #include "bg.h"
 #include "pokemon_icon.h"
-#include "species.h"
+#include "constants/species.h"
 #include "malloc.h"
 #include "easy_chat.h"
 

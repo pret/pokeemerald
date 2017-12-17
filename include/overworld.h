@@ -68,4 +68,7 @@ void c2_load_new_map(void);
 void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 void mapldr_default(void);
 
+void IncrementGameStat(u8);
+u32 GetGameStat(u8);
+
 #endif //GUARD_ROM4_H

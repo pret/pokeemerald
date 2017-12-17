@@ -2215,7 +2215,7 @@ sub_8030A70: @ 8030A70
 	str r2, [sp, 0x10]
 	movs r2, 0x70
 	movs r3, 0x3A
-	bl sub_8076438
+	bl CreatePokeballSpriteToReleaseMon
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3025,7 +3025,7 @@ task_new_game_prof_birch_speech_part2_4: @ 8031188
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0

@@ -1,5 +1,7 @@
 	.include "asm/macros.inc"
-	.include "constants/constants.inc"
+	.include "constants/gba_constants.inc"
+	.include "constants/misc_constants.inc"
+	.include "constants/species_constants.inc"
 
 	.syntax unified
 
@@ -3694,7 +3696,7 @@ _0807920E:
 	thumb_func_start sub_8079218
 sub_8079218: @ 8079218
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3796,7 +3798,7 @@ _080792D8:
 	thumb_func_start sub_80792E4
 sub_80792E4: @ 80792E4
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10445,7 +10447,7 @@ _0807CD1C:
 	str r2, [sp, 0x10]
 	movs r2, 0x78
 	movs r3, 0x54
-	bl sub_8076438
+	bl CreatePokeballSpriteToReleaseMon
 	ldr r0, [r7]
 	adds r0, 0xD3
 	ldrb r1, [r0]
@@ -12550,7 +12552,7 @@ _0807E168:
 	str r2, [sp, 0x10]
 	movs r2, 0x78
 	movs r3, 0x54
-	bl sub_8076438
+	bl CreatePokeballSpriteToReleaseMon
 	ldr r0, [r7]
 	adds r0, 0xD3
 	ldrb r1, [r0]

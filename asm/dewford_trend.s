@@ -79,8 +79,8 @@ _08122522:
 	.pool
 	thumb_func_end InitDewfordTrend
 
-	thumb_func_start sub_8122580
-sub_8122580: @ 8122580
+	thumb_func_start UpdateDewfordTrendPerDay
+UpdateDewfordTrendPerDay: @ 8122580
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -253,7 +253,7 @@ _081226BE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8122580
+	thumb_func_end UpdateDewfordTrendPerDay
 
 	thumb_func_start sub_81226D8
 sub_81226D8: @ 81226D8

@@ -4,389 +4,389 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_YOUNGSTER
 	.string "BRADY$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word NEVER
-	ec_word GOING
-	ec_word TO
-	ec_word LOSE
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NEVER
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_LOSE
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word I_AM
-	ec_word STRONG
-	ec_word AREN_T
-	ec_word I
-	ec_word QUES
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_STRONG
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_I
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ loss speech
-	ec_word WHAT
-	ec_word QUES
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_QUES
 	.2byte -1
-	ec_word BUT
-	ec_word HOW
-	ec_word QUES
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Brady
 
 @ 1
 	.4byte TRAINER_CLASS_YOUNGSTER
 	.string "CONNER$", 8
 @ pre-battle speech
-	ec_word LOSING
-	ec_word DOESN_T
-	ec_word BUG
-	ec_word ME
+	.2byte EC_WORD_LOSING
+	.2byte EC_WORD_DOESN_T
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_ME
 	.2byte -1
 	.2byte -1
 @ win speech
-	ec_word A
-	ec_word WIN
-	ec_word IS
-	ec_word JUST
-	ec_word AWESOME
+	.2byte EC_WORD_A
+	.2byte EC_WORD_WIN
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_JUST
+	.2byte EC_WORD_AWESOME
 	.2byte -1
 @ loss speech
-	ec_word DARN
-	ec_word ELLIPSIS
-	ec_word LOSING
-	ec_word DOES
-	ec_word BUG
-	ec_word ME
+	.2byte EC_WORD_DARN
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_LOSING
+	.2byte EC_WORD_DOES
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_ME
 	.4byte gBattleFrontierTrainerMons_Conner
 
 @ 2
 	.4byte TRAINER_CLASS_YOUNGSTER
 	.string "BRADLEY$", 8
 @ pre-battle speech
-	ec_word HEY_THERE
-	ec_word EXCL
-	ec_word YOU_RE
-	ec_word MY
-	ec_word OPPONENT
-	ec_word TODAY
+	.2byte EC_WORD_HEY_THERE
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_OPPONENT
+	.2byte EC_WORD_TODAY
 @ win speech
-	ec_word HAHAHA
-	ec_word EXCL
+	.2byte EC_WORD_HAHAHA
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word SEE_YA
-	ec_word LATER
-	ec_word EXCL
+	.2byte EC_WORD_SEE_YA
+	.2byte EC_WORD_LATER
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word TOMORROW
-	ec_word IS
-	ec_word WHEN
-	ec_word WE
-	ec_word REALLY
-	ec_word BATTLE
+	.2byte EC_WORD_TOMORROW
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_WHEN
+	.2byte EC_WORD_WE
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_BATTLE
 	.4byte gBattleFrontierTrainerMons_Bradley
 
 @ 3
 	.4byte TRAINER_CLASS_LASS
 	.string "CYBIL$", 8
 @ pre-battle speech
-	ec_word YOU_RE
-	ec_word REALLY
-	ec_word NOT_VERY
-	ec_word SCARY
-	ec_word AT
-	ec_word ALL
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_NOT_VERY
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_ALL
 @ win speech
-	ec_word IT_S
-	ec_word SAD
-	ec_word TO
-	ec_word SEE
-	ec_word YOU
-	ec_move2 STRUGGLE
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_SAD
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_YOU
+	.2byte EC_MOVE2(STRUGGLE)
 @ loss speech
-	ec_word THIS
-	ec_word CAN_T
-	ec_word BE
-	ec_word HAPPENING
-	ec_word TO_ME
-	ec_word EXCL
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_HAPPENING
+	.2byte EC_WORD_TO_ME
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Cybil
 
 @ 4
 	.4byte TRAINER_CLASS_LASS
 	.string "RODETTE$", 8
 @ pre-battle speech
-	ec_word OH
-	ec_word THIS
-	ec_word IS
-	ec_word SO
-	ec_word EXCITING
-	ec_word EXCL
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_EXCITING
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word IT_S
-	ec_word INCREDIBLE
-	ec_word HOW
-	ec_word STRONG
-	ec_word I_AM
-	ec_word EXCL
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_INCREDIBLE
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_STRONG
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word OH_DEAR
-	ec_word ELLIPSIS
-	ec_word I_AM
-	ec_word JUST
-	ec_word NO
-	ec_word GOOD
+	.2byte EC_WORD_OH_DEAR
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_JUST
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_GOOD
 	.4byte gBattleFrontierTrainerMons_Rodette
 
 @ 5
 	.4byte TRAINER_CLASS_LASS
 	.string "PEGGY$", 8
 @ pre-battle speech
-	ec_word GET
-	ec_word READY
-	ec_word TO
-	ec_word BE
-	ec_word DESTROYED
-	ec_word EXCL
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_READY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_DESTROYED
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word HAHAHA
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_HAHAHA
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
-	ec_word I_AM
-	ec_word LOLLING
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_LOLLING
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I_AM
-	ec_word FEELING
-	ec_word SAD
-	ec_word THANKS
-	ec_word TO
-	ec_word YOU
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_SAD
+	.2byte EC_WORD_THANKS
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_YOU
 	.4byte gBattleFrontierTrainerMons_Peggy
 
 @ 6
 	.4byte TRAINER_CLASS_SCHOOL_KID_1
 	.string "KEITH$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word DON_T
-	ec_word JUST
-	ec_word STUDY
-	ec_word YOU
-	ec_word KNOW
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_JUST
+	.2byte EC_WORD_STUDY
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_KNOW
 @ win speech
-	ec_word YOU
-	ec_word DON_T
-	ec_word STUDY
-	ec_word ENOUGH
-	ec_word ELLIPSIS
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_STUDY
+	.2byte EC_WORD_ENOUGH
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 @ loss speech
-	ec_word I
-	ec_word NEED
-	ec_word TO
-	ec_word STUDY
-	ec_word MORE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_STUDY
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Keith
 
 @ 7
 	.4byte TRAINER_CLASS_SCHOOL_KID_1
 	.string "GRAYSON$", 8
 @ pre-battle speech
-	ec_word A
-	ec_word POKEMON
-	ec_word BATTLE
-	ec_word ISN_T
-	ec_word CHILD_S_PLAY
-	ec_word EXCL
+	.2byte EC_WORD_A
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_CHILD_S_PLAY
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word YOU_RE
-	ec_word DONE
-	ec_word AREN_T
-	ec_word YOU
-	ec_word QUES
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_DONE
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ loss speech
-	ec_word WE
-	ec_word WERE
-	ec_word LIKE
-	ec_word TOYS
-	ec_word TO
-	ec_word YOU
+	.2byte EC_WORD_WE
+	.2byte EC_WORD_WERE
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_TOYS
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_YOU
 	.4byte gBattleFrontierTrainerMons_Grayson
 
 @ 8
 	.4byte TRAINER_CLASS_SCHOOL_KID_1
 	.string "GLENN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WOULD
-	ec_word BE
-	ec_word COOL
-	ec_word IF_I_WIN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WOULD
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_IF_I_WIN
 	.2byte -1
 @ win speech
-	ec_word COOL
-	ec_word EXCL
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word THAT_S
-	ec_word WHAT
-	ec_word I_AM
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I_AM
 @ loss speech
-	ec_word I_AM
-	ec_word NOT
-	ec_word GOING
-	ec_word TO
-	ec_word BE
-	ec_word COOL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_COOL
 	.4byte gBattleFrontierTrainerMons_Glenn
 
 @ 9
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
 	.string "LILIANA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WON_T
-	ec_word GIVE_UP
-	ec_word UNTIL
-	ec_word I
-	ec_word WIN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON_T
+	.2byte EC_WORD_GIVE_UP
+	.2byte EC_WORD_UNTIL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WIN
 @ win speech
-	ec_word THERE
-	ec_word IS
-	ec_word NO
-	ec_word SURRENDER
-	ec_word IN
-	ec_word ME
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_SURRENDER
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_ME
 @ loss speech
-	ec_word THAT_S
-	ec_word IT
-	ec_word ELLIPSIS
-	ec_word I
-	ec_word GIVE_UP
-	ec_word ELLIPSIS
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_GIVE_UP
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Liliana
 
 @ 10
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
 	.string "ELISE$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word STRATEGY
-	ec_word IS
-	ec_word FROM
-	ec_word MY
-	ec_word FATHER
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_STRATEGY
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_FROM
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_FATHER
 @ win speech
-	ec_word I
-	ec_word WIN
-	ec_word EXCL
-	ec_word FATHER
-	ec_word I_VE
-	ec_word WON
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WIN
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_FATHER
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_WON
 @ loss speech
-	ec_word FORGIVE
-	ec_word ME
-	ec_word FATHER
-	ec_word FOR
-	ec_word I_VE
-	ec_word LOST
+	.2byte EC_WORD_FORGIVE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_FATHER
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_LOST
 	.4byte gBattleFrontierTrainerMons_Elise
 
 @ 11
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
 	.string "ZOEY$", 8
 @ pre-battle speech
-	ec_word PLEASE
-	ec_word BATTLE
-	ec_word LIKE
-	ec_word YOU
-	ec_word MEAN
-	ec_word IT
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_MEAN
+	.2byte EC_WORD_IT
 @ win speech
-	ec_word THANK_YOU
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
-	ec_word THANK_YOU
-	ec_word SO
-	ec_word MUCH
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_MUCH
 @ loss speech
-	ec_word WERE
-	ec_word YOU
-	ec_word REALLY
-	ec_word BEING
-	ec_word SERIOUS
-	ec_word QUES
+	.2byte EC_WORD_WERE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_BEING
+	.2byte EC_WORD_SERIOUS
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Zoey
 
 @ 12
 	.4byte TRAINER_CLASS_RICH_BOY
 	.string "MANUEL$", 8
 @ pre-battle speech
-	ec_word ME
-	ec_word LOSE
-	ec_word QUES
-	ec_word THAT_S
-	ec_word PREPOSTEROUS
-	ec_word EXCL
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_LOSE
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_PREPOSTEROUS
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word NATURALLY
-	ec_word I
-	ec_word WIN
+	.2byte EC_WORD_NATURALLY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WIN
 	.2byte -1
 	.2byte -1
 	.2byte -1
 @ loss speech
-	ec_word WAAAH
-	ec_word EXCL
+	.2byte EC_WORD_WAAAH
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word I
-	ec_word LOST
-	ec_word MOTHER
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LOST
+	.2byte EC_WORD_MOTHER
 	.4byte gBattleFrontierTrainerMons_Manuel
 
 @ 13
 	.4byte TRAINER_CLASS_RICH_BOY
 	.string "RUSS$", 8
 @ pre-battle speech
-	ec_word THEY
-	ec_word ALL
-	ec_word WANT
-	ec_word MY
-	ec_word FABULOUS
-	ec_word POKEMON
+	.2byte EC_WORD_THEY
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_FABULOUS
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word I
-	ec_word WILL
-	ec_word HAVE
-	ec_word A
-	ec_word POKEMON
-	ec_word PARTY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_PARTY
 @ loss speech
-	ec_word HOW
-	ec_word COULD
-	ec_word YOU
-	ec_word DO
-	ec_word THAT
-	ec_word QUES
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_COULD
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Russ
 
 @ 14
 	.4byte TRAINER_CLASS_RICH_BOY
 	.string "DUSTIN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word REALLY
-	ec_word LIKE
-	ec_word COOL
-	ec_word POKEMON
+	.2byte EC_WORD_I
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_POKEMON
 	.2byte -1
 @ win speech
-	ec_word I
-	ec_word LIKE
-	ec_word MYSELF
-	ec_word WHEN_I_WIN
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_MYSELF
+	.2byte EC_WORD_WHEN_I_WIN
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word I
-	ec_word LIKE
-	ec_word MYSELF
-	ec_word IF_I_LOSE
-	ec_word TOO
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_MYSELF
+	.2byte EC_WORD_IF_I_LOSE
+	.2byte EC_WORD_TOO
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Dustin
 
@@ -394,50 +394,50 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_LADY
 	.string "TINA$", 8
 @ pre-battle speech
-	ec_word IF_I_WIN
-	ec_word YOU
-	ec_word CAN
-	ec_word HAVE
-	ec_word A
-	ec_move2 SWEET_KISS
+	.2byte EC_WORD_IF_I_WIN
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(SWEET_KISS)
 @ win speech
-	ec_word HERE_IT_IS
-	ec_word YOUR
-	ec_move2 SWEET_KISS
-	ec_word FROM
-	ec_word MY
-	ec_pokemon2 JYNX
+	.2byte EC_WORD_HERE_IT_IS
+	.2byte EC_WORD_YOUR
+	.2byte EC_MOVE2(SWEET_KISS)
+	.2byte EC_WORD_FROM
+	.2byte EC_WORD_MY
+	.2byte EC_POKEMON2(JYNX)
 @ loss speech
-	ec_word YOU
-	ec_word WANT
-	ec_word A
-	ec_move1 SWIFT
-	ec_move2 MEGA_KICK
-	ec_word INSTEAD
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(SWIFT)
+	.2byte EC_MOVE2(MEGA_KICK)
+	.2byte EC_WORD_INSTEAD
 	.4byte gBattleFrontierTrainerMons_Tina
 
 @ 16
 	.4byte TRAINER_CLASS_LADY
 	.string "GILLIAN$", 8
 @ pre-battle speech
-	ec_word THE
-	ec_word GOURMET
-	ec_word THING
-	ec_word IS
-	ec_word SO
-	ec_word YESTERDAY
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_GOURMET
+	.2byte EC_WORD_THING
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_YESTERDAY
 @ win speech
-	ec_word POKEMON
-	ec_word NEVER
-	ec_word GO
-	ec_word OUT
-	ec_word OF
-	ec_word FASHION
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_NEVER
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_OUT
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_FASHION
 @ loss speech
-	ec_word LOSING
-	ec_word DOESN_T
-	ec_word DISAPPOINT
-	ec_word ME
+	.2byte EC_WORD_LOSING
+	.2byte EC_WORD_DOESN_T
+	.2byte EC_WORD_DISAPPOINT
+	.2byte EC_WORD_ME
 	.2byte -1
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Gillian
@@ -446,103 +446,103 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_LADY
 	.string "ZOE$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word HAVEN_T
-	ec_word A
-	ec_word WORRY
-	ec_word AT
-	ec_word ALL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVEN_T
+	.2byte EC_WORD_A
+	.2byte EC_WORD_WORRY
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_ALL
 @ win speech
-	ec_word LIFE
-	ec_word IS
-	ec_word ALWAYS
-	ec_word GOOD
-	ec_word TO_ME
+	.2byte EC_WORD_LIFE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_ALWAYS
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_TO_ME
 	.2byte -1
 @ loss speech
-	ec_word I
-	ec_word WORRY
-	ec_word ABOUT
-	ec_word MY
-	ec_word POKEMON
-	ec_word SKILL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WORRY
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_SKILL
 	.4byte gBattleFrontierTrainerMons_Zoe
 
 @ 18
 	.4byte TRAINER_CLASS_CAMPER
 	.string "CHEN$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word TOTALLY
-	ec_word READY
-	ec_word TO
-	ec_word ROCK
-	ec_word TODAY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TOTALLY
+	.2byte EC_WORD_READY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_ROCK
+	.2byte EC_WORD_TODAY
 @ win speech
-	ec_word I_AM
-	ec_word READY
-	ec_word TO
-	ec_word GO
-	ec_word ON
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_READY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I_VE
-	ec_word LOST
-	ec_word MY
-	ec_move1 FOCUS_ENERGY
-	ec_word AND
-	ec_word TOUGHNESS
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_LOST
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE(FOCUS_ENERGY)
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_TOUGHNESS
 	.4byte gBattleFrontierTrainerMons_Chen
 
 @ 19
 	.4byte TRAINER_CLASS_CAMPER
 	.string "AL$", 8
 @ pre-battle speech
-	ec_word YOUR
-	ec_word LOOK
-	ec_word SAYS
-	ec_word YOU_RE
-	ec_word REALLY
-	ec_word TOUGH
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_SAYS
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_TOUGH
 @ win speech
-	ec_word IT_S
-	ec_word ME
-	ec_word WHO_IS
-	ec_word REALLY
-	ec_word TOUGH
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_WHO_IS
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_TOUGH
 	.2byte -1
 @ loss speech
-	ec_word I_AM
-	ec_word RIGHT
-	ec_word EXCL
-	ec_word YOU_RE
-	ec_word REALLY
-	ec_word TOUGH
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_RIGHT
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_TOUGH
 	.4byte gBattleFrontierTrainerMons_Al
 
 @ 20
 	.4byte TRAINER_CLASS_CAMPER
 	.string "MITCH$", 8
 @ pre-battle speech
-	ec_word MOTHER
-	ec_word NATURE
-	ec_word IS
-	ec_word MY
-	ec_word ALLY
-	ec_word EXCL
+	.2byte EC_WORD_MOTHER
+	.2byte EC_WORD_NATURE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_ALLY
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word WAS
-	ec_word THAT
-	ec_word ENOUGH
-	ec_word FOR
-	ec_word YOU
-	ec_word QUES
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_ENOUGH
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word MOTHER
-	ec_word NATURE
-	ec_word DIDN_T
-	ec_word LET_ME_WIN
-	ec_word QUES
+	.2byte EC_WORD_MOTHER
+	.2byte EC_WORD_NATURE
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_LET_ME_WIN
+	.2byte EC_WORD_QUES
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Mitch
 
@@ -550,25 +550,25 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_PICNICKER
 	.string "ANNE$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word CAN_T
-	ec_word WAIT
-	ec_word LET_S
-	ec_word BATTLE
-	ec_word NOW
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_WAIT
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_NOW
 @ win speech
-	ec_word MY
-	ec_word HAPPINESS
-	ec_word IS
-	ec_word OVERWHELMING
-	ec_word EXCL
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_HAPPINESS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_OVERWHELMING
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word YOU_VE
-	ec_word DESTROYED
-	ec_word MY
-	ec_word HAPPINESS
-	ec_word ELLIPSIS
+	.2byte EC_WORD_YOU_VE
+	.2byte EC_WORD_DESTROYED
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_HAPPINESS
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Anne
 
@@ -576,207 +576,207 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_PICNICKER
 	.string "ALIZE$", 8
 @ pre-battle speech
-	ec_word CUTE
-	ec_word AND
-	ec_word AWFULLY
-	ec_word STRONG
-	ec_word THAT_S
-	ec_word ME
+	.2byte EC_WORD_CUTE
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_AWFULLY
+	.2byte EC_WORD_STRONG
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_ME
 @ win speech
-	ec_word YUP
-	ec_word I_AM
-	ec_word CUTE
-	ec_word AND
-	ec_word AWFULLY
-	ec_word STRONG
+	.2byte EC_WORD_YUP
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_CUTE
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_AWFULLY
+	.2byte EC_WORD_STRONG
 @ loss speech
-	ec_word I_AM
-	ec_word WEAK
-	ec_word ELLIPSIS
-	ec_word BUT
-	ec_word I_AM
-	ec_word CUTE
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_WEAK
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_CUTE
 	.4byte gBattleFrontierTrainerMons_Alize
 
 @ 23
 	.4byte TRAINER_CLASS_PICNICKER
 	.string "LAUREN$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word OLD
-	ec_word BUT
-	ec_word I_AM
-	ec_word ALSO
-	ec_word GOOD
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_OLD
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_ALSO
+	.2byte EC_WORD_GOOD
 @ win speech
-	ec_word I
-	ec_word SAID
-	ec_word I_WAS
-	ec_word OLD
-	ec_word BUT
-	ec_word GOOD
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SAID
+	.2byte EC_WORD_I_WAS
+	.2byte EC_WORD_OLD
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_GOOD
 @ loss speech
-	ec_word WHAT
-	ec_word A
-	ec_word WEIRD
-	ec_word DREAM
-	ec_word THAT_WAS
-	ec_word EXCL
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_WEIRD
+	.2byte EC_WORD_DREAM
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Lauren
 
 @ 24
 	.4byte TRAINER_CLASS_TUBER_2
 	.string "KIPP$", 8
 @ pre-battle speech
-	ec_word IF_I_WIN
-	ec_word I_AM
-	ec_word GOING
-	ec_word TO
-	ec_word GO
-	ec_move2 SURF
+	.2byte EC_WORD_IF_I_WIN
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_GO
+	.2byte EC_MOVE2(SURF)
 @ win speech
-	ec_word YEAH
-	ec_word EXCL
-	ec_word I_AM
-	ec_word OFF
-	ec_word TO
-	ec_move2 SURF
+	.2byte EC_WORD_YEAH
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_OFF
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE2(SURF)
 @ loss speech
-	ec_word OH
-	ec_word NO
-	ec_word EXCL
-	ec_word A
-	ec_move1 WHIRLPOOL
-	ec_word EXCL
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(WHIRLPOOL)
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Kipp
 
 @ 25
 	.4byte TRAINER_CLASS_TUBER_2
 	.string "JASON$", 8
 @ pre-battle speech
-	ec_word TEACH
-	ec_word ME
-	ec_word A
-	ec_word GOOD
-	ec_word STRATEGY
+	.2byte EC_WORD_TEACH
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_STRATEGY
 	.2byte -1
 @ win speech
-	ec_word THAT_WAS
-	ec_word YOUR
-	ec_word GOOD
-	ec_word STRATEGY
-	ec_word QUES_EXCL
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_STRATEGY
+	.2byte EC_WORD_QUES_EXCL
 	.2byte -1
 @ loss speech
-	ec_word WOW
-	ec_word THAT
-	ec_word IS
-	ec_word AN
-	ec_word AWESOME
-	ec_word STRATEGY
+	.2byte EC_WORD_WOW
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_AWESOME
+	.2byte EC_WORD_STRATEGY
 	.4byte gBattleFrontierTrainerMons_Jason
 
 @ 26
 	.4byte TRAINER_CLASS_TUBER_2
 	.string "JOHN$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word A
-	ec_word PRETTY
-	ec_word NEW
-	ec_word TRAINER
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_PRETTY
+	.2byte EC_WORD_NEW
+	.2byte EC_WORD_TRAINER
 	.2byte -1
 @ win speech
-	ec_word I_AM
-	ec_word NEW
-	ec_word BUT
-	ec_word I
-	ec_word WON
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NEW
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I_AM
-	ec_word NEW
-	ec_word SO
-	ec_word WHAT
-	ec_word IF_I_LOSE
-	ec_word QUES
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NEW
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_IF_I_LOSE
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_John
 
 @ 27
 	.4byte TRAINER_CLASS_TUBER_1
 	.string "ANN$", 8
 @ pre-battle speech
-	ec_word IT_S
-	ec_word SO
-	ec_word EXCITING
-	ec_word IT
-	ec_word REALLY
-	ec_word IS
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_EXCITING
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_IS
 @ win speech
-	ec_word I_AM
-	ec_word SO
-	ec_word HAPPY
-	ec_word I
-	ec_word CAN
-	ec_word CRY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN
+	.2byte EC_WORD_CRY
 @ loss speech
-	ec_word I_AM
-	ec_word SO
-	ec_word SAD
-	ec_word I
-	ec_word WILL
-	ec_word CRY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_SAD
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_CRY
 	.4byte gBattleFrontierTrainerMons_Ann
 
 @ 28
 	.4byte TRAINER_CLASS_TUBER_1
 	.string "EILEEN$", 8
 @ pre-battle speech
-	ec_word LET_S
-	ec_word PRETEND
-	ec_word I_AM
-	ec_word AN
-	ec_word ADULT
-	ec_word OK_QUES
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_PRETEND
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_ADULT
+	.2byte EC_WORD_OK_QUES
 @ win speech
-	ec_word SO
-	ec_word THIS
-	ec_word IS
-	ec_word AN
-	ec_word ADULT
-	ec_word FEELING
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_ADULT
+	.2byte EC_WORD_FEELING
 @ loss speech
-	ec_word AN
-	ec_word ADULT
-	ec_word CAN_T
-	ec_word BEAT
-	ec_word YOU
-	ec_word QUES
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_ADULT
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_BEAT
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Eileen
 
 @ 29
 	.4byte TRAINER_CLASS_TUBER_1
 	.string "CARLIE$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word SUMMER
-	ec_word VACATION
-	ec_word IS
-	ec_word FOR
-	ec_word POKEMON
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_SUMMER
+	.2byte EC_WORD_VACATION
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word MY
-	ec_word SUMMER
-	ec_word VACATION
-	ec_word WILL
-	ec_word BE
-	ec_word AWESOME
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_SUMMER
+	.2byte EC_WORD_VACATION
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_AWESOME
 @ loss speech
-	ec_word I
-	ec_word CAN_T_WIN
-	ec_word LIKE
-	ec_word THIS
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_T_WIN
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Carlie
 
@@ -784,389 +784,389 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_SWIMMER_M
 	.string "GORDON$", 8
 @ pre-battle speech
-	ec_word VICTORY
-	ec_word WILL
-	ec_word COME
-	ec_word TO_ME
-	ec_word EXCL
+	.2byte EC_WORD_VICTORY
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_COME
+	.2byte EC_WORD_TO_ME
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word OH_YEAH
-	ec_word EXCL
+	.2byte EC_WORD_OH_YEAH
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word I
-	ec_word REALLY
-	ec_word WON
+	.2byte EC_WORD_I
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_WON
 @ loss speech
-	ec_word NOTHING
-	ec_word IS
-	ec_word WORKING
-	ec_word OUT
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_NOTHING
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_WORKING
+	.2byte EC_WORD_OUT
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 	.4byte gBattleFrontierTrainerMons_Gordon
 
 @ 31
 	.4byte TRAINER_CLASS_SWIMMER_M
 	.string "AYDEN$", 8
 @ pre-battle speech
-	ec_word COME_ON
-	ec_word I
-	ec_word NEED
-	ec_word A
-	ec_word HOT
-	ec_word BATTLE
+	.2byte EC_WORD_COME_ON
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_A
+	.2byte EC_WORD_HOT
+	.2byte EC_WORD_BATTLE
 @ win speech
-	ec_word I
-	ec_word NEED
-	ec_word WATER
-	ec_word TO
-	ec_word COOL
-	ec_word DOWN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_WATER
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_DOWN
 @ loss speech
-	ec_word YOU
-	ec_word HAVE
-	ec_word ME
-	ec_word FEELING
-	ec_word ICE
-	ec_word COLD
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_ICE
+	.2byte EC_WORD_COLD
 	.4byte gBattleFrontierTrainerMons_Ayden
 
 @ 32
 	.4byte TRAINER_CLASS_SWIMMER_M
 	.string "MARCO$", 8
 @ pre-battle speech
-	ec_word I
-	ec_move2 SURF
-	ec_word IN
-	ec_word THE
-	ec_word WINTER
-	ec_word TOO
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(SURF)
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_WINTER
+	.2byte EC_WORD_TOO
 @ win speech
-	ec_word I
-	ec_word WILL
-	ec_word GO
-	ec_move2 SURF
-	ec_word RIGHT
-	ec_word NOW
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_GO
+	.2byte EC_MOVE2(SURF)
+	.2byte EC_WORD_RIGHT
+	.2byte EC_WORD_NOW
 @ loss speech
-	ec_word I
-	ec_word WILL
-	ec_move2 BEAT_UP
-	ec_word MY
-	ec_move2 SURF
-	ec_word BOARD
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_MOVE2(BEAT_UP)
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(SURF)
+	.2byte EC_WORD_BOARD
 	.4byte gBattleFrontierTrainerMons_Marco
 
 @ 33
 	.4byte TRAINER_CLASS_SWIMMER_F
 	.string "CIERRA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word LIKE
-	ec_word TO
-	ec_word SYNCHRONIZE
-	ec_word MY
-	ec_word SWIFT_SWIM
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SYNCHRONIZE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_SWIFT_SWIM
 @ win speech
-	ec_word MY
-	ec_word POKEMON
-	ec_word SYNCHRONIZE
-	ec_word WITH
-	ec_word ME
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_SYNCHRONIZE
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_ME
 	.2byte -1
 @ loss speech
-	ec_word I
-	ec_word NEED
-	ec_word TO
-	ec_word SYNCHRONIZE
-	ec_word BETTER
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SYNCHRONIZE
+	.2byte EC_WORD_BETTER
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Cierra
 
 @ 34
 	.4byte TRAINER_CLASS_SWIMMER_F
 	.string "MARCY$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word A
-	ec_word KNOCKOUT
-	ec_word YOU
-	ec_word CAN_T_WIN
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_KNOCKOUT
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN_T_WIN
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word AFTER
-	ec_word ALL
-	ec_word I_AM
-	ec_word A
-	ec_word KNOCKOUT
-	ec_word EXCL
+	.2byte EC_WORD_AFTER
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_KNOCKOUT
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word THAT_S
-	ec_word NOT
-	ec_word THE
-	ec_word KNOCKOUT
-	ec_word I
-	ec_word MEAN
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_KNOCKOUT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_MEAN
 	.4byte gBattleFrontierTrainerMons_Marcy
 
 @ 35
 	.4byte TRAINER_CLASS_SWIMMER_F
 	.string "KATHY$", 8
 @ pre-battle speech
-	ec_word I_VE
-	ec_word WON
-	ec_word EVERY
-	ec_word MATCH
-	ec_word TODAY
-	ec_word EXCL
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_EVERY
+	.2byte EC_WORD_MATCH
+	.2byte EC_WORD_TODAY
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word IT_S
-	ec_word SO
-	ec_word GREAT
-	ec_word TO
-	ec_word WIN
-	ec_word EXCL
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_GREAT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_WIN
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word HUH_QUES
-	ec_word I
-	ec_word SHOULD
-	ec_word NOT
-	ec_word HAVE
-	ec_word LOST
+	.2byte EC_WORD_HUH_QUES
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_LOST
 	.4byte gBattleFrontierTrainerMons_Kathy
 
 @ 36
 	.4byte TRAINER_CLASS_POKEFAN_1
 	.string "PEYTON$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word NEVER
-	ec_word DISAPPOINTED
-	ec_word WITH
-	ec_word MY
-	ec_word POKEMON
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NEVER
+	.2byte EC_WORD_DISAPPOINTED
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word I_AM
-	ec_word HAPPY
-	ec_word IF
-	ec_word WE
-	ec_word WIN
-	ec_word TOGETHER
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_IF
+	.2byte EC_WORD_WE
+	.2byte EC_WORD_WIN
+	.2byte EC_WORD_TOGETHER
 @ loss speech
-	ec_word I
-	ec_word ADORE
-	ec_word MY
-	ec_word POKEMON
-	ec_word MORE
-	ec_word IF_I_LOSE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ADORE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_IF_I_LOSE
 	.4byte gBattleFrontierTrainerMons_Peyton
 
 @ 37
 	.4byte TRAINER_CLASS_POKEFAN_1
 	.string "JULIAN$", 8
 @ pre-battle speech
-	ec_word YOU
-	ec_word ADORE
-	ec_word YOUR
-	ec_word POKEMON
-	ec_word RIGHT
-	ec_word QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_ADORE
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_RIGHT
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word YOU_RE
-	ec_word TOTALLY
-	ec_word OUT
-	ec_word OF
-	ec_word THE
-	ec_word QUESTION
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_TOTALLY
+	.2byte EC_WORD_OUT
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_QUESTION
 @ loss speech
-	ec_word YOU
-	ec_word DO
-	ec_word ADORE
-	ec_word YOUR
-	ec_word POKEMON
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_ADORE
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Julian
 
 @ 38
 	.4byte TRAINER_CLASS_POKEFAN_1
 	.string "QUINN$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word POKEMON
-	ec_word ARE
-	ec_word BUT
-	ec_word A
-	ec_word DREAM
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_DREAM
 @ win speech
-	ec_word THIS
-	ec_word IS
-	ec_word A
-	ec_word BEAUTIFUL
-	ec_word DREAM
-	ec_word EXCL
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BEAUTIFUL
+	.2byte EC_WORD_DREAM
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word THIS
-	ec_word IS
-	ec_word AN
-	ec_word AWFUL
-	ec_move1 NIGHTMARE
-	ec_word EXCL
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_AWFUL
+	.2byte EC_MOVE(NIGHTMARE)
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Quinn
 
 @ 39
 	.4byte TRAINER_CLASS_POKEFAN_2
 	.string "HAYLEE$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word DON_T
-	ec_word KNOW
-	ec_word HOW
-	ec_word I_AM
-	ec_word FEELING
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
 @ win speech
-	ec_word I_AM
-	ec_word FEELING
-	ec_word OVERWHELMING
-	ec_word JOY
-	ec_word OVER
-	ec_word THIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_OVERWHELMING
+	.2byte EC_WORD_JOY
+	.2byte EC_WORD_OVER
+	.2byte EC_WORD_THIS
 @ loss speech
-	ec_word DESTROYED
-	ec_word IS
-	ec_word THE
-	ec_word WAY
-	ec_word I_AM
-	ec_word FEELING
+	.2byte EC_WORD_DESTROYED
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_WAY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
 	.4byte gBattleFrontierTrainerMons_Haylee
 
 @ 40
 	.4byte TRAINER_CLASS_POKEFAN_2
 	.string "AMANDA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word COME
-	ec_word FROM
-	ec_word A
-	ec_word TRAINER
-	ec_word FAMILY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_COME
+	.2byte EC_WORD_FROM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_FAMILY
 @ win speech
-	ec_word I
-	ec_word WILL
-	ec_word TREASURE
-	ec_word THIS
-	ec_word WIN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_TREASURE
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_WIN
 	.2byte -1
 @ loss speech
-	ec_word I
-	ec_word WANT
-	ec_word TO
-	ec_word GO_HOME
-	ec_word RIGHT
-	ec_word NOW
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_GO_HOME
+	.2byte EC_WORD_RIGHT
+	.2byte EC_WORD_NOW
 	.4byte gBattleFrontierTrainerMons_Amanda
 
 @ 41
 	.4byte TRAINER_CLASS_POKEFAN_2
 	.string "STACY$", 8
 @ pre-battle speech
-	ec_word ALL
-	ec_word POKEMON
-	ec_word HAVE
-	ec_word THEIR
-	ec_word OWN
-	ec_word CUTE_CHARM
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_THEIR
+	.2byte EC_WORD_OWN
+	.2byte EC_WORD_CUTE_CHARM
 @ win speech
-	ec_word YOU
-	ec_word SEE
-	ec_word WHAT
-	ec_word I
-	ec_word MEAN
-	ec_word QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_MEAN
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word SHOULD
-	ec_word I
-	ec_word NOT
-	ec_word ADORE
-	ec_word POKEMON
-	ec_word QUES
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_ADORE
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Stacy
 
 @ 42
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
 	.string "RAFAEL$", 8
 @ pre-battle speech
-	ec_word COME_ON
-	ec_word EXCL
-	ec_word LET_S
-	ec_word SEE
-	ec_word SOME
-	ec_word SPIRIT
+	.2byte EC_WORD_COME_ON
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_SOME
+	.2byte EC_WORD_SPIRIT
 @ win speech
-	ec_word THAT_S_IT_EXCL
-	ec_word THAT_S
-	ec_word THE
-	ec_word SPIRIT
-	ec_word EXCL
+	.2byte EC_WORD_THAT_S_IT_EXCL
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_SPIRIT
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word WELL
-	ec_word SO
-	ec_word MUCH
-	ec_word FOR
-	ec_word OUR
-	ec_word SPIRIT
+	.2byte EC_WORD_WELL
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_MUCH
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_OUR
+	.2byte EC_WORD_SPIRIT
 	.4byte gBattleFrontierTrainerMons_Rafael
 
 @ 43
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
 	.string "OLIVER$", 8
 @ pre-battle speech
-	ec_word A
-	ec_word GENIUS
-	ec_word THAT_S
-	ec_word WHAT
-	ec_word I_AM
-	ec_word EXCL
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GENIUS
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word THAT_S
-	ec_word HOW
-	ec_word A
-	ec_word GENIUS
-	ec_word WORKS
-	ec_word EXCL
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GENIUS
+	.2byte EC_WORD_WORKS
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word YOU_RE
-	ec_word MORE
-	ec_word A
-	ec_word GENIUS
-	ec_word THAN
-	ec_word I_AM
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GENIUS
+	.2byte EC_WORD_THAN
+	.2byte EC_WORD_I_AM
 	.4byte gBattleFrontierTrainerMons_Oliver
 
 @ 44
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
 	.string "PAYTON$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word TRAIN
-	ec_word FROM
-	ec_word THE
-	ec_word EGG
-	ec_word UP
+	.2byte EC_WORD_I
+	.2byte EC_WORD_TRAIN
+	.2byte EC_WORD_FROM
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_EGG
+	.2byte EC_WORD_UP
 @ win speech
-	ec_word WELL
-	ec_word DONE
-	ec_word EXCL
+	.2byte EC_WORD_WELL
+	.2byte EC_WORD_DONE
+	.2byte EC_WORD_EXCL
 	.2byte -1
 	.2byte -1
 	.2byte -1
 @ loss speech
-	ec_word THAT_WAS
-	ec_word A
-	ec_move2 SOFT_BOILED
-	ec_word LOSS
-	ec_word ELLIPSIS
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(SOFT_BOILED)
+	.2byte EC_WORD_LOSS
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Payton
 
@@ -1174,129 +1174,129 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
 	.string "PAMELA$", 8
 @ pre-battle speech
-	ec_word ALL
-	ec_word POKEMON
-	ec_word ADORE
-	ec_word A
-	ec_word KIND
-	ec_word TRAINER
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ADORE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_KIND
+	.2byte EC_WORD_TRAINER
 @ win speech
-	ec_word IT_S
-	ec_word TOO
-	ec_word BAD
-	ec_word YOU
-	ec_word LOST
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_BAD
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_LOST
 	.2byte -1
 @ loss speech
-	ec_word YOU_RE
-	ec_word KIND
-	ec_word AND
-	ec_word YOU_RE
-	ec_word ALSO
-	ec_word STRONG
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_KIND
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_ALSO
+	.2byte EC_WORD_STRONG
 	.4byte gBattleFrontierTrainerMons_Pamela
 
 @ 46
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
 	.string "ELIZA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word ADORE
-	ec_word POKEMON
-	ec_word LIKE
-	ec_word MY
-	ec_word CHILDREN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ADORE
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_CHILDREN
 @ win speech
-	ec_word I_AM
-	ec_word SO
-	ec_word HAPPY
-	ec_word FOR
-	ec_word MY
-	ec_word POKEMON
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
 @ loss speech
-	ec_word OH_DEAR
-	ec_word I_AM
-	ec_word SO
-	ec_word SORRY
-	ec_word ABOUT
-	ec_word THIS
+	.2byte EC_WORD_OH_DEAR
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_SORRY
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_THIS
 	.4byte gBattleFrontierTrainerMons_Eliza
 
 @ 47
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
 	.string "MARISA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word PROMISE
-	ec_word TO
-	ec_word BATTLE
-	ec_word SERIOUSLY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_PROMISE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_SERIOUSLY
 	.2byte -1
 @ win speech
-	ec_word PROMISE
-	ec_word ME
-	ec_word YOU
-	ec_word WILL
-	ec_word DO
-	ec_word BETTER
+	.2byte EC_WORD_PROMISE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_BETTER
 @ loss speech
-	ec_word PROMISE
-	ec_word ME
-	ec_word ANOTHER
-	ec_word BATTLE
-	ec_word PLEASE
-	ec_word EXCL
+	.2byte EC_WORD_PROMISE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_ANOTHER
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Marisa
 
 @ 48
 	.4byte TRAINER_CLASS_BUG_CATCHER
 	.string "LEWIS$", 8
 @ pre-battle speech
-	ec_word A_LITTLE
-	ec_word BUG
-	ec_word IS
-	ec_word SCARY
-	ec_word QUES
-	ec_word HAHAHA
+	.2byte EC_WORD_A_LITTLE
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_HAHAHA
 @ win speech
-	ec_word LOOK
-	ec_word LOOK
-	ec_word EXCL
-	ec_word A
-	ec_word SCARY
-	ec_word BUG
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_A
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_BUG
 @ loss speech
-	ec_word OH
-	ec_word A
-	ec_word BUG
-	ec_word ISN_T
-	ec_word SCARY
-	ec_word ELLIPSIS
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Lewis
 
 @ 49
 	.4byte TRAINER_CLASS_BUG_CATCHER
 	.string "YOSHI$", 8
 @ pre-battle speech
-	ec_word BUG
-	ec_word POKEMON
-	ec_word MAKE
-	ec_word ME
-	ec_word FEELING
-	ec_word LOVEY_DOVEY
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_LOVEY_DOVEY
 @ win speech
-	ec_word BUG
-	ec_word POKEMON
-	ec_word ARE
-	ec_word THE
-	ec_word BEST
-	ec_word EXCL
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_BEST
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word YOU_RE
-	ec_word IGNORANT
-	ec_word ABOUT
-	ec_word BUG
-	ec_word POKEMON
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_IGNORANT
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_POKEMON
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Yoshi
 
@@ -1304,25 +1304,25 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_BUG_CATCHER
 	.string "DESTIN$", 8
 @ pre-battle speech
-	ec_word IT_S
-	ec_word WAY
-	ec_word TOO
-	ec_word HOT
-	ec_word HERE
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_WAY
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_HOT
+	.2byte EC_WORD_HERE
 	.2byte -1
 @ win speech
-	ec_word I_AM
-	ec_word ABOUT
-	ec_word TO
-	ec_move1 OVERHEAT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE(OVERHEAT)
 	.2byte -1
 	.2byte -1
 @ loss speech
-	ec_word PLEASE
-	ec_word I
-	ec_word NEED
-	ec_word SOME
-	ec_word WATER
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_SOME
+	.2byte EC_WORD_WATER
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Destin
 
@@ -1330,23 +1330,23 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_NINJA_BOY
 	.string "KEON$", 8
 @ pre-battle speech
-	ec_word FORGIVE
-	ec_word ME
-	ec_word BUT
-	ec_word HERE_I_COME
-	ec_word EXCL
+	.2byte EC_WORD_FORGIVE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_HERE_I_COME
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word FORGIVE
-	ec_word ME
-	ec_word FOR
-	ec_word MY
-	ec_word OVERWHELMING
-	ec_word POWER
+	.2byte EC_WORD_FORGIVE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_OVERWHELMING
+	.2byte EC_WORD_POWER
 @ loss speech
-	ec_word I_AM
-	ec_word SORRY
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SORRY
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.2byte -1
 	.2byte -1
@@ -1356,51 +1356,51 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_NINJA_BOY
 	.string "STUART$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word PROMISE
-	ec_word YOU
-	ec_word A
-	ec_word HOT
-	ec_word BATTLE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_PROMISE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_A
+	.2byte EC_WORD_HOT
+	.2byte EC_WORD_BATTLE
 @ win speech
-	ec_word THE
-	ec_word MASTER
-	ec_word OF
-	ec_word COOL
-	ec_word THAT_S
-	ec_word ME
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_MASTER
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_ME
 @ loss speech
-	ec_word I
-	ec_word SEE
-	ec_word I_AM
-	ec_word NOT
-	ec_word SO
-	ec_word COOL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_COOL
 	.4byte gBattleFrontierTrainerMons_Stuart
 
 @ 53
 	.4byte TRAINER_CLASS_NINJA_BOY
 	.string "NESTOR$", 8
 @ pre-battle speech
-	ec_word SHOW
-	ec_word ME
-	ec_word A
-	ec_word REALLY
-	ec_word SMOOTH
-	ec_word MOVE
+	.2byte EC_WORD_SHOW
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_A
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_SMOOTH
+	.2byte EC_WORD_MOVE
 @ win speech
-	ec_word THERE
-	ec_word WAS
-	ec_word NOTHING
-	ec_word SMOOTH
-	ec_word ABOUT
-	ec_word THAT
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_NOTHING
+	.2byte EC_WORD_SMOOTH
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_THAT
 @ loss speech
-	ec_word YOU
-	ec_word REALLY
-	ec_word ARE
-	ec_word SMOOTH
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_SMOOTH
+	.2byte EC_WORD_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Nestor
 
@@ -1408,50 +1408,50 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_BUG_MANIAC
 	.string "DERRICK$", 8
 @ pre-battle speech
-	ec_word LET_S
-	ec_word SEE
-	ec_word YOU
-	ec_move2 MEDITATE
-	ec_word LIKE
-	ec_word ME
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_YOU
+	.2byte EC_MOVE2(MEDITATE)
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_ME
 @ win speech
-	ec_word HOW
-	ec_word I
-	ec_move2 MEDITATE
-	ec_word IS
-	ec_word JUST
-	ec_word BEAUTIFUL
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(MEDITATE)
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_JUST
+	.2byte EC_WORD_BEAUTIFUL
 @ loss speech
-	ec_word I
-	ec_word WILL
-	ec_move2 MEDITATE
-	ec_word FOR
-	ec_word A
-	ec_move2 CALM_MIND
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_MOVE2(MEDITATE)
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(CALM_MIND)
 	.4byte gBattleFrontierTrainerMons_Derrick
 
 @ 55
 	.4byte TRAINER_CLASS_BUG_MANIAC
 	.string "BRYSON$", 8
 @ pre-battle speech
-	ec_move2 POISON_POWDER
-	ec_word IS
-	ec_word IN
-	ec_word OUR
-	ec_move2 COTTON_SPORE
-	ec_word MOVE
+	.2byte EC_MOVE2(POISON_POWDER)
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_OUR
+	.2byte EC_MOVE2(COTTON_SPORE)
+	.2byte EC_WORD_MOVE
 @ win speech
-	ec_word HOW_DO
-	ec_word YOU
-	ec_word LIKE
-	ec_word OUR
-	ec_move2 POISON_POWDER
-	ec_word QUES
+	.2byte EC_WORD_HOW_DO
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_OUR
+	.2byte EC_MOVE2(POISON_POWDER)
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word MY
-	ec_move2 COTTON_SPORE
-	ec_word WAS
-	ec_word USELESS
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(COTTON_SPORE)
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_USELESS
 	.2byte -1
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Bryson
@@ -1460,103 +1460,103 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_BUG_MANIAC
 	.string "CLAYTON$", 8
 @ pre-battle speech
-	ec_word HUH_QUES
+	.2byte EC_WORD_HUH_QUES
 	.2byte -1
 	.2byte -1
-	ec_word WHERE
-	ec_word IS_IT_QUES
+	.2byte EC_WORD_WHERE
+	.2byte EC_WORD_IS_IT_QUES
 	.2byte -1
 @ win speech
-	ec_word WHERE
-	ec_word IS_IT_QUES
-	ec_word I_VE
-	ec_word LOST
-	ec_word MY
-	ec_word POKENAV
+	.2byte EC_WORD_WHERE
+	.2byte EC_WORD_IS_IT_QUES
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_LOST
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKENAV
 @ loss speech
-	ec_word WHERE
-	ec_word IS_IT_QUES
-	ec_word I_VE
-	ec_word LOST
-	ec_word MY
-	ec_word SENSE
+	.2byte EC_WORD_WHERE
+	.2byte EC_WORD_IS_IT_QUES
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_LOST
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_SENSE
 	.4byte gBattleFrontierTrainerMons_Clayton
 
 @ 57
 	.4byte TRAINER_CLASS_FISHERMAN
 	.string "TRENTON$", 8
 @ pre-battle speech
-	ec_word COME_OVER
-	ec_word FOR
-	ec_word SOME
-	ec_word TASTY
-	ec_word WATER
+	.2byte EC_WORD_COME_OVER
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_SOME
+	.2byte EC_WORD_TASTY
+	.2byte EC_WORD_WATER
 	.2byte -1
 @ win speech
-	ec_word MMM
-	ec_word DO
-	ec_word YOU
-	ec_word WANT
-	ec_word SOME
-	ec_word QUES
+	.2byte EC_WORD_MMM
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_SOME
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word I
-	ec_word GOT
-	ec_word THIS
-	ec_word TASTY
-	ec_word WATER
-	ec_word SHOPPING
+	.2byte EC_WORD_I
+	.2byte EC_WORD_GOT
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_TASTY
+	.2byte EC_WORD_WATER
+	.2byte EC_WORD_SHOPPING
 	.4byte gBattleFrontierTrainerMons_Trenton
 
 @ 58
 	.4byte TRAINER_CLASS_FISHERMAN
 	.string "JENSON$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word POKEMON
-	ec_word WILL
-	ec_word MAKE
-	ec_word YOU
-	ec_word DOWNCAST
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DOWNCAST
 @ win speech
-	ec_word YOUR
-	ec_word POKEMON
-	ec_word DON_T
-	ec_word MAKE
-	ec_word THE
-	ec_move1 CUT
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_THE
+	.2byte EC_MOVE(CUT)
 @ loss speech
-	ec_word I_AM
-	ec_word THE
-	ec_word TRAINER
-	ec_word WHO_IS
-	ec_word FEELING
-	ec_word DOWNCAST
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_WHO_IS
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_DOWNCAST
 	.4byte gBattleFrontierTrainerMons_Jenson
 
 @ 59
 	.4byte TRAINER_CLASS_FISHERMAN
 	.string "WESLEY$", 8
 @ pre-battle speech
-	ec_pokemon2 MEW
-	ec_pokemon2 MEW
-	ec_word IS
-	ec_word HOW
-	ec_word I
-	ec_word CRY
+	.2byte EC_POKEMON2(MEW)
+	.2byte EC_POKEMON2(MEW)
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CRY
 @ win speech
-	ec_word YES
-	ec_word I
-	ec_word KNOW
-	ec_word I_AM
-	ec_word CUTE
-	ec_word EXCL
+	.2byte EC_WORD_YES
+	.2byte EC_WORD_I
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_CUTE
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_pokemon2 MEW
-	ec_pokemon2 MEW
-	ec_word EXCL
-	ec_pokemon2 MEW
-	ec_word EXCL_EXCL
+	.2byte EC_POKEMON2(MEW)
+	.2byte EC_POKEMON2(MEW)
+	.2byte EC_WORD_EXCL
+	.2byte EC_POKEMON2(MEW)
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Wesley
 
@@ -1564,129 +1564,129 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_RUIN_MANIAC
 	.string "ANTON$", 8
 @ pre-battle speech
-	ec_word GET
-	ec_word READY
-	ec_word FOR
-	ec_word ME
-	ec_word TO
-	ec_move1 THRASH
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_READY
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE(THRASH)
 @ win speech
-	ec_word WAHAHAHA
-	ec_word EXCL
-	ec_word SORRY
-	ec_word ABOUT
-	ec_word THAT
-	ec_word EXCL
+	.2byte EC_WORD_WAHAHAHA
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_SORRY
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word IT_S
-	ec_word A
-	ec_word TOUGH
-	ec_word LOSS
-	ec_word TO
-	ec_move2 SWALLOW
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TOUGH
+	.2byte EC_WORD_LOSS
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE2(SWALLOW)
 	.4byte gBattleFrontierTrainerMons_Anton
 
 @ 61
 	.4byte TRAINER_CLASS_RUIN_MANIAC
 	.string "LAWSON$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word YOUNG
-	ec_word AT
-	ec_word HEART
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_YOUNG
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_HEART
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word NOT
-	ec_word COOL
-	ec_word EXCL
-	ec_word NOT
-	ec_word AT
-	ec_word ALL
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_ALL
 @ loss speech
-	ec_word I_AM
-	ec_word OLD
-	ec_word AND
-	ec_word FEELING
-	ec_word SHAKY
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_OLD
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_SHAKY
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Lawson
 
 @ 62
 	.4byte TRAINER_CLASS_RUIN_MANIAC
 	.string "SAMMY$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word PARTY
-	ec_word IS
-	ec_word READY
-	ec_word TO
-	ec_word ROCK
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_PARTY
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_READY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_ROCK
 @ win speech
-	ec_word MY
-	ec_word PARTY
-	ec_word IS
-	ec_word JUST
-	ec_word INCREDIBLE
-	ec_word EXCL
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_PARTY
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_JUST
+	.2byte EC_WORD_INCREDIBLE
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I
-	ec_word CRY
-	ec_word FOR
-	ec_word MY
-	ec_word PARTY
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CRY
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_PARTY
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Sammy
 
 @ 63
 	.4byte TRAINER_CLASS_COLLECTOR
 	.string "ARNIE$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word NO_1
-	ec_word I
-	ec_word HAVE
-	ec_word NO
-	ec_word RIVAL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NO_1
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_RIVAL
 @ win speech
-	ec_word YOU
-	ec_word SEE
-	ec_word QUES
-	ec_word I
-	ec_word CAN_T
-	ec_word LOSE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_LOSE
 @ loss speech
-	ec_word NO
-	ec_word EXCL
-	ec_word I
-	ec_word WON_T
-	ec_word ACCEPT
-	ec_word THIS
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON_T
+	.2byte EC_WORD_ACCEPT
+	.2byte EC_WORD_THIS
 	.4byte gBattleFrontierTrainerMons_Arnie
 
 @ 64
 	.4byte TRAINER_CLASS_COLLECTOR
 	.string "ADRIAN$", 8
 @ pre-battle speech
-	ec_word YAHOO
-	ec_word EXCL
+	.2byte EC_WORD_YAHOO
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word YAHOO
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_YAHOO
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 @ win speech
-	ec_word THANK_YOU
-	ec_word EXCL
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word THANK_YOU
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 @ loss speech
-	ec_word GOOD_BYE
-	ec_word EXCL
+	.2byte EC_WORD_GOOD_BYE
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word GOOD_BYE
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_GOOD_BYE
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Adrian
 
@@ -1694,103 +1694,103 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_COLLECTOR
 	.string "TRISTAN$", 8
 @ pre-battle speech
-	ec_word CONFUSED
-	ec_word QUES
+	.2byte EC_WORD_CONFUSED
+	.2byte EC_WORD_QUES
 	.2byte -1
-	ec_word I_AM
-	ec_word A
-	ec_word GENIUS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GENIUS
 @ win speech
-	ec_word SEE
-	ec_word QUES
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_QUES
 	.2byte -1
-	ec_word I_AM
-	ec_word A
-	ec_word GENIUS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GENIUS
 @ loss speech
-	ec_word I_AM
-	ec_word NOT
-	ec_word A
-	ec_word GENIUS
-	ec_word IN
-	ec_word BATTLE
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GENIUS
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_BATTLE
 	.4byte gBattleFrontierTrainerMons_Tristan
 
 @ 66
 	.4byte TRAINER_CLASS_PARASOL_LADY
 	.string "JULIANA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word THINK
-	ec_word I_AM
-	ec_word SHOPPING
-	ec_word TOO
-	ec_word MUCH
+	.2byte EC_WORD_I
+	.2byte EC_WORD_THINK
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SHOPPING
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_MUCH
 @ win speech
-	ec_word BUT
-	ec_word I
-	ec_word WANT
-	ec_word A
-	ec_word POKEMON
-	ec_word PLUSH_DOLL
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_PLUSH_DOLL
 @ loss speech
-	ec_word I
-	ec_word SO
-	ec_word WANT
-	ec_word ANOTHER
-	ec_word POKEMON
-	ec_word PLUSH_DOLL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_ANOTHER
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_PLUSH_DOLL
 	.4byte gBattleFrontierTrainerMons_Juliana
 
 @ 67
 	.4byte TRAINER_CLASS_PARASOL_LADY
 	.string "RYLEE$", 8
 @ pre-battle speech
-	ec_word SHOW
-	ec_word ME
-	ec_word THAT
-	ec_word YOU
-	ec_word HAVE
-	ec_word GUTS
+	.2byte EC_WORD_SHOW
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_GUTS
 @ win speech
-	ec_word BYE_BYE
-	ec_word EXCL
-	ec_word YOU
-	ec_word HAVE
-	ec_word NO
-	ec_word GUTS
+	.2byte EC_WORD_BYE_BYE
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_GUTS
 @ loss speech
-	ec_word THAT_WAS
-	ec_word GUTSY
-	ec_word ELLIPSIS
-	ec_word YOU_RE
-	ec_word QUITE
-	ec_word SUPER
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_GUTSY
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_QUITE
+	.2byte EC_WORD_SUPER
 	.4byte gBattleFrontierTrainerMons_Rylee
 
 @ 68
 	.4byte TRAINER_CLASS_PARASOL_LADY
 	.string "CHELSEA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word SERIOUSLY
-	ec_word MEAN
-	ec_word TO
-	ec_word WIN
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SERIOUSLY
+	.2byte EC_WORD_MEAN
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_WIN
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word THAT_WAS
-	ec_word MY
-	ec_word WILL
-	ec_word TO
-	ec_word WIN
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_WIN
 	.2byte -1
 @ loss speech
-	ec_word YOU_RE
-	ec_word FAR
-	ec_word TOO_STRONG
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_FAR
+	.2byte EC_WORD_TOO_STRONG
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Chelsea
 
@@ -1798,233 +1798,233 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_BEAUTY
 	.string "DANELA$", 8
 @ pre-battle speech
-	ec_word YOU
-	ec_word MUST_BE
-	ec_word MY
-	ec_word OPPONENT
-	ec_word NOW
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_MUST_BE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_OPPONENT
+	.2byte EC_WORD_NOW
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word OH_DEAR
-	ec_word TOO_WEAK
-	ec_word EXCL
-	ec_word DON_T
-	ec_word GIVE_UP
-	ec_word EXCL
+	.2byte EC_WORD_OH_DEAR
+	.2byte EC_WORD_TOO_WEAK
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_GIVE_UP
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word THAT_WAS
-	ec_word GOOD
-	ec_word AND
-	ec_word THIS
-	ec_word IS
-	ec_word GOOD_BYE
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_GOOD_BYE
 	.4byte gBattleFrontierTrainerMons_Danela
 
 @ 70
 	.4byte TRAINER_CLASS_BEAUTY
 	.string "LIZBETH$", 8
 @ pre-battle speech
-	ec_word IF_I_LOSE
-	ec_word YOU
-	ec_word CAN
-	ec_word HAVE
-	ec_word A
-	ec_move2 PRESENT
+	.2byte EC_WORD_IF_I_LOSE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(PRESENT)
 @ win speech
-	ec_word HERE_IT_IS
-	ec_word A_LITTLE
-	ec_word PRAISE
-	ec_word AS
-	ec_word YOUR
-	ec_move2 PRESENT
+	.2byte EC_WORD_HERE_IT_IS
+	.2byte EC_WORD_A_LITTLE
+	.2byte EC_WORD_PRAISE
+	.2byte EC_WORD_AS
+	.2byte EC_WORD_YOUR
+	.2byte EC_MOVE2(PRESENT)
 @ loss speech
-	ec_word YOUR
-	ec_move2 PRESENT
-	ec_word QUES_EXCL
-	ec_word HERE_IT_IS
-	ec_word A
-	ec_move1 DOUBLE_SLAP
+	.2byte EC_WORD_YOUR
+	.2byte EC_MOVE2(PRESENT)
+	.2byte EC_WORD_QUES_EXCL
+	.2byte EC_WORD_HERE_IT_IS
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(DOUBLE_SLAP)
 	.4byte gBattleFrontierTrainerMons_Lizbeth
 
 @ 71
 	.4byte TRAINER_CLASS_BEAUTY
 	.string "AMELIA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word BELIEVE
-	ec_word IN
-	ec_word CUTE
-	ec_word FASHION
-	ec_word APPEAL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_BELIEVE
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_CUTE
+	.2byte EC_WORD_FASHION
+	.2byte EC_WORD_APPEAL
 @ win speech
-	ec_word YOUR
-	ec_word FASHION
-	ec_word SENSE
-	ec_word IS
-	ec_word A
-	ec_word DISASTER
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_FASHION
+	.2byte EC_WORD_SENSE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_DISASTER
 @ loss speech
-	ec_word THAT_WAS
-	ec_word AWFUL
-	ec_word EXCL
-	ec_word I_AM
-	ec_word GOING
-	ec_word HOME
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_AWFUL
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_HOME
 	.4byte gBattleFrontierTrainerMons_Amelia
 
 @ 72
 	.4byte TRAINER_CLASS_AROMA_LADY
 	.string "JILLIAN$", 8
 @ pre-battle speech
-	ec_word WHAT
-	ec_word IS
-	ec_word THAT
-	ec_word I
-	ec_word SMELL
-	ec_word QUES
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SMELL
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word IT_S
-	ec_word THE
-	ec_move1 SWEET_SCENT
-	ec_word OF
-	ec_word TASTY
-	ec_word WATER
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_THE
+	.2byte EC_MOVE(SWEET_SCENT)
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_TASTY
+	.2byte EC_WORD_WATER
 @ loss speech
-	ec_word IT_S
-	ec_word YOUR
-	ec_word OFFENSIVE
-	ec_word STENCH
-	ec_word THAT_S
-	ec_word WHAT
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_OFFENSIVE
+	.2byte EC_WORD_STENCH
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_WHAT
 	.4byte gBattleFrontierTrainerMons_Jillian
 
 @ 73
 	.4byte TRAINER_CLASS_AROMA_LADY
 	.string "ABBIE$", 8
 @ pre-battle speech
-	ec_word YOU
-	ec_word TRY
-	ec_word MY
-	ec_word SECRET
-	ec_move1 AROMATHERAPY
-	ec_word OK_QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_TRY
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_SECRET
+	.2byte EC_MOVE(AROMATHERAPY)
+	.2byte EC_WORD_OK_QUES
 @ win speech
-	ec_word MY
-	ec_move1 AROMATHERAPY
-	ec_word IS
-	ec_word TERRIBLE
-	ec_word FOR
-	ec_word YOU
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE(AROMATHERAPY)
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_TERRIBLE
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_YOU
 @ loss speech
-	ec_word DIDN_T
-	ec_word YOU
-	ec_word SMELL
-	ec_word A
-	ec_word THING
-	ec_word QUES_EXCL
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SMELL
+	.2byte EC_WORD_A
+	.2byte EC_WORD_THING
+	.2byte EC_WORD_QUES_EXCL
 	.4byte gBattleFrontierTrainerMons_Abbie
 
 @ 74
 	.4byte TRAINER_CLASS_AROMA_LADY
 	.string "BRIANA$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word BOY
-	ec_word FRIEND
-	ec_word WORKS
-	ec_word TOO
-	ec_word MUCH
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BOY
+	.2byte EC_WORD_FRIEND
+	.2byte EC_WORD_WORKS
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_MUCH
 @ win speech
-	ec_word I
-	ec_word ONLY
-	ec_word MISS
-	ec_word HIM
-	ec_word MORE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ONLY
+	.2byte EC_WORD_MISS
+	.2byte EC_WORD_HIM
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_ELLIPSIS
 @ loss speech
-	ec_word I_AM
-	ec_word SO
-	ec_word LONESOME
-	ec_word WITHOUT
-	ec_word HIM
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_LONESOME
+	.2byte EC_WORD_WITHOUT
+	.2byte EC_WORD_HIM
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Briana
 
 @ 75
 	.4byte TRAINER_CLASS_GUITARIST
 	.string "ANTONIO$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word KNOW
-	ec_word HOW
-	ec_word TO
-	ec_word GO
-	ec_word GO
+	.2byte EC_WORD_I
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_GO
 @ win speech
-	ec_word BUT
-	ec_word I
-	ec_word DON_T
-	ec_word LIKE
-	ec_word TO
-	ec_word DANCE
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_DANCE
 @ loss speech
-	ec_word GO
-	ec_word GO
-	ec_word ELLIPSIS
-	ec_word JUST
-	ec_move1 FLAIL
-	ec_word ABOUT
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_JUST
+	.2byte EC_MOVE(FLAIL)
+	.2byte EC_WORD_ABOUT
 	.4byte gBattleFrontierTrainerMons_Antonio
 
 @ 76
 	.4byte TRAINER_CLASS_GUITARIST
 	.string "JADEN$", 8
 @ pre-battle speech
-	ec_word HELLO
-	ec_word I
-	ec_word THINK
-	ec_word I
-	ec_word ADORE
-	ec_word YOU
+	.2byte EC_WORD_HELLO
+	.2byte EC_WORD_I
+	.2byte EC_WORD_THINK
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ADORE
+	.2byte EC_WORD_YOU
 @ win speech
-	ec_word YOU
-	ec_word MAKE
-	ec_word ME
-	ec_move1 THRASH
-	ec_word IN
-	ec_move2 FRUSTRATION
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_ME
+	.2byte EC_MOVE(THRASH)
+	.2byte EC_WORD_IN
+	.2byte EC_MOVE2(FRUSTRATION)
 @ loss speech
-	ec_word THIS_IS_IT_EXCL
+	.2byte EC_WORD_THIS_IS_IT_EXCL
 	.2byte -1
 	.2byte -1
-	ec_word GOOD_BYE
-	ec_word FOREVER
-	ec_word EXCL
+	.2byte EC_WORD_GOOD_BYE
+	.2byte EC_WORD_FOREVER
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Jaden
 
 @ 77
 	.4byte TRAINER_CLASS_GUITARIST
 	.string "DAKOTA$", 8
 @ pre-battle speech
-	ec_word YOU
-	ec_word HAVE
-	ec_word TO
-	ec_word DANCE
-	ec_word WITH
-	ec_word POWER
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_DANCE
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_POWER
 @ win speech
-	ec_word GOT
-	ec_word IT
-	ec_word QUES
-	ec_word DANCE
-	ec_word WITH
-	ec_word POWER
+	.2byte EC_WORD_GOT
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_DANCE
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_POWER
 @ loss speech
-	ec_word OKAY
-	ec_word YOU
-	ec_word UNDERSTAND
-	ec_word ALL_RIGHT
-	ec_word EXCL
+	.2byte EC_WORD_OKAY
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_UNDERSTAND
+	.2byte EC_WORD_ALL_RIGHT
+	.2byte EC_WORD_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Dakota
 
@@ -2032,74 +2032,74 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_BIRD_KEEPER
 	.string "BRAYDEN$", 8
 @ pre-battle speech
-	ec_word COLOR_CHANGE
-	ec_word VERSION
-	ec_word TOYS
-	ec_word ARE
-	ec_word USELESS
-	ec_word EXCL
+	.2byte EC_WORD_COLOR_CHANGE
+	.2byte EC_WORD_VERSION
+	.2byte EC_WORD_TOYS
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_USELESS
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word I
-	ec_word ONLY
-	ec_word COLLECT
-	ec_word NORMAL
-	ec_word VERSION
-	ec_word TOYS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ONLY
+	.2byte EC_WORD_COLLECT
+	.2byte EC_WORD_NORMAL
+	.2byte EC_WORD_VERSION
+	.2byte EC_WORD_TOYS
 @ loss speech
-	ec_word I
-	ec_move2 ATTRACT
-	ec_word COLOR_CHANGE
-	ec_word VERSION
-	ec_word TOYS
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(ATTRACT)
+	.2byte EC_WORD_COLOR_CHANGE
+	.2byte EC_WORD_VERSION
+	.2byte EC_WORD_TOYS
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Brayden
 
 @ 79
 	.4byte TRAINER_CLASS_BIRD_KEEPER
 	.string "CORSON$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word GET
-	ec_word TO
-	ec_move2 BEAT_UP
-	ec_word ON
-	ec_word YOU
+	.2byte EC_WORD_I
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE2(BEAT_UP)
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_YOU
 @ win speech
-	ec_word TOO
-	ec_word EASY
-	ec_word EXCL
-	ec_word I_AM
-	ec_word SO
-	ec_word COOL
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_EASY
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_COOL
 @ loss speech
-	ec_word WHY
-	ec_word QUES_EXCL
+	.2byte EC_WORD_WHY
+	.2byte EC_WORD_QUES_EXCL
 	.2byte -1
-	ec_word I
-	ec_move2 CURSE
-	ec_word YOU
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(CURSE)
+	.2byte EC_WORD_YOU
 	.4byte gBattleFrontierTrainerMons_Corson
 
 @ 80
 	.4byte TRAINER_CLASS_BIRD_KEEPER
 	.string "TREVIN$", 8
 @ pre-battle speech
-	ec_word THERE
-	ec_word IS
-	ec_word NONE
-	ec_word BETTER
-	ec_word THAN
-	ec_word ME
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_NONE
+	.2byte EC_WORD_BETTER
+	.2byte EC_WORD_THAN
+	.2byte EC_WORD_ME
 @ win speech
-	ec_word YES_SIR_EXCL
+	.2byte EC_WORD_YES_SIR_EXCL
 	.2byte -1
 	.2byte -1
-	ec_word I_AM
-	ec_word THE
-	ec_word BEST
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_BEST
 @ loss speech
-	ec_word SERIOUS
-	ec_word QUES_EXCL
+	.2byte EC_WORD_SERIOUS
+	.2byte EC_WORD_QUES_EXCL
 	.2byte -1
 	.2byte -1
 	.2byte -1
@@ -2110,77 +2110,77 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_SAILOR
 	.string "PATRICK$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word PERFECT
-	ec_word EXCL
-	ec_word GIVE_UP
-	ec_word NOW
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_PERFECT
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_GIVE_UP
+	.2byte EC_WORD_NOW
 	.2byte -1
 @ win speech
-	ec_word DON_T
-	ec_word BE
-	ec_word DISAPPOINTED
-	ec_word I_AM
-	ec_word PERFECT
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_DISAPPOINTED
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_PERFECT
 	.2byte -1
 @ loss speech
-	ec_word BUT
-	ec_word HOW
-	ec_word QUES
-	ec_word I_AM
-	ec_word PERFECT
-	ec_word ELLIPSIS
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_PERFECT
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Patrick
 
 @ 82
 	.4byte TRAINER_CLASS_SAILOR
 	.string "KADEN$", 8
 @ pre-battle speech
-	ec_word WHAT
-	ec_word ARE
-	ec_word YOU
-	ec_word UP
-	ec_word TO
-	ec_word QUES
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_UP
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word YOU
-	ec_word WERE
-	ec_word A
-	ec_word SURPRISE
-	ec_word TO_ME
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WERE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_SURPRISE
+	.2byte EC_WORD_TO_ME
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I
-	ec_word DON_T
-	ec_word KNOW
-	ec_word WHO
-	ec_word I_AM
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_WHO
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Kaden
 
 @ 83
 	.4byte TRAINER_CLASS_SAILOR
 	.string "MAXWELL$", 8
 @ pre-battle speech
-	ec_word HEY_THERE
-	ec_word WHO_IS
-	ec_word YOUR
-	ec_word RIVAL
-	ec_word QUES
+	.2byte EC_WORD_HEY_THERE
+	.2byte EC_WORD_WHO_IS
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_RIVAL
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ win speech
-	ec_word MY
-	ec_word RIVAL
-	ec_word IS
-	ec_word MY
-	ec_word GIRL
-	ec_word FRIEND
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_RIVAL
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_GIRL
+	.2byte EC_WORD_FRIEND
 @ loss speech
-	ec_word I_AM
-	ec_word MAKING
-	ec_word YOU
-	ec_word MY
-	ec_word RIVAL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_MAKING
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_RIVAL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Maxwell
 
@@ -2188,49 +2188,49 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_HIKER
 	.string "DARYL$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word ONLY
-	ec_word KNOW
-	ec_word HOW
-	ec_word TO
-	ec_move1 CHARGE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ONLY
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE(CHARGE)
 @ win speech
-	ec_word AM
-	ec_word I
-	ec_word OVERWHELMING
-	ec_word OR
-	ec_word WHAT
-	ec_word QUES
+	.2byte EC_WORD_AM
+	.2byte EC_WORD_I
+	.2byte EC_WORD_OVERWHELMING
+	.2byte EC_WORD_OR
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word YOU_RE
-	ec_word GOING
-	ec_word TO
-	ec_word A
-	ec_word LEGEND
-	ec_word EXCL
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_A
+	.2byte EC_WORD_LEGEND
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Daryl
 
 @ 85
 	.4byte TRAINER_CLASS_HIKER
 	.string "KENNETH$", 8
 @ pre-battle speech
-	ec_word YOU
-	ec_word BETTER
-	ec_word NOT
-	ec_move2 SLACK_OFF
-	ec_word WITH
-	ec_word ME
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_BETTER
+	.2byte EC_WORD_NOT
+	.2byte EC_MOVE2(SLACK_OFF)
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_ME
 @ win speech
-	ec_word DID
-	ec_word MY
-	ec_move2 TAUNT
-	ec_word INTIMIDATE
-	ec_word YOU
-	ec_word QUES
+	.2byte EC_WORD_DID
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(TAUNT)
+	.2byte EC_WORD_INTIMIDATE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word I_AM
-	ec_word SORRY
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SORRY
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.2byte -1
 	.2byte -1
@@ -2240,25 +2240,25 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_HIKER
 	.string "RICH$", 8
 @ pre-battle speech
-	ec_word YOUR
-	ec_move1 FACADE
-	ec_word DOESN_T
-	ec_move2 TRICK
-	ec_word ME
+	.2byte EC_WORD_YOUR
+	.2byte EC_MOVE(FACADE)
+	.2byte EC_WORD_DOESN_T
+	.2byte EC_MOVE2(TRICK)
+	.2byte EC_WORD_ME
 	.2byte -1
 @ win speech
-	ec_word SERIOUSLY
-	ec_word ARE
-	ec_word YOU
-	ec_word REALLY
-	ec_word OK_QUES
+	.2byte EC_WORD_SERIOUSLY
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_OK_QUES
 	.2byte -1
 @ loss speech
-	ec_word THAT_WAS
-	ec_word REALLY
-	ec_word TOUGH
-	ec_word ON
-	ec_word ME
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_TOUGH
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_ME
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Rich
 
@@ -2266,181 +2266,181 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_KINDLER
 	.string "CADEN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word CAN_T
-	ec_word BE
-	ec_word DEFEATED
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_DEFEATED
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word FIRE
-	ec_word EXCL
+	.2byte EC_WORD_FIRE
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word FIRE
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_FIRE
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 @ loss speech
-	ec_word I_AM
-	ec_word TIRED
-	ec_word ELLIPSIS
-	ec_word IT_S
-	ec_word SO
-	ec_word HOT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TIRED
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_HOT
 	.4byte gBattleFrontierTrainerMons_Caden
 
 @ 88
 	.4byte TRAINER_CLASS_KINDLER
 	.string "MARLON$", 8
 @ pre-battle speech
-	ec_word A
-	ec_word POKEDEX
-	ec_word IS
-	ec_word A_LITTLE
-	ec_word RADIO
-	ec_word QUES
+	.2byte EC_WORD_A
+	.2byte EC_WORD_POKEDEX
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_A_LITTLE
+	.2byte EC_WORD_RADIO
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word A_LITTLE
-	ec_word RADIO
-	ec_word HUH_QUES
-	ec_word THAT_S
-	ec_word TOTALLY
-	ec_word COOL
+	.2byte EC_WORD_A_LITTLE
+	.2byte EC_WORD_RADIO
+	.2byte EC_WORD_HUH_QUES
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_TOTALLY
+	.2byte EC_WORD_COOL
 @ loss speech
-	ec_word IT_S
-	ec_word NOT
-	ec_word QUES
-	ec_word IS
-	ec_word POKENAV
-	ec_word QUES
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_POKENAV
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Marlon
 
 @ 89
 	.4byte TRAINER_CLASS_KINDLER
 	.string "NASH$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word ON
-	ec_word FIRE
-	ec_word BABY
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_FIRE
+	.2byte EC_WORD_BABY
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word I
-	ec_word LEFT
-	ec_word YOU
-	ec_word JUST
-	ec_word AN
-	ec_move2 EMBER
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LEFT
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_JUST
+	.2byte EC_WORD_AN
+	.2byte EC_MOVE2(EMBER)
 @ loss speech
-	ec_word AIYEEH
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_AIYEEH
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
-	ec_word NO
-	ec_word WATER
-	ec_word PLEASE
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_WATER
+	.2byte EC_WORD_PLEASE
 	.4byte gBattleFrontierTrainerMons_Nash
 
 @ 90
 	.4byte TRAINER_CLASS_TRIATHLETE_3
 	.string "ROBBY$", 8
 @ pre-battle speech
-	ec_word HAHAHA
-	ec_word EXCL
-	ec_word HAPPY
-	ec_word TO
-	ec_word MEET_YOU
-	ec_word EXCL
+	.2byte EC_WORD_HAHAHA
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_MEET_YOU
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word I_AM
-	ec_word THE
-	ec_word LEADER
-	ec_word WITH
-	ec_word REFRESHING
-	ec_word SERENE_GRACE
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_LEADER
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_REFRESHING
+	.2byte EC_WORD_SERENE_GRACE
 @ loss speech
-	ec_word I
-	ec_word WILL
-	ec_move1 THRASH
-	ec_word MY
-	ec_word TOYS
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_MOVE(THRASH)
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_TOYS
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Robby
 
 @ 91
 	.4byte TRAINER_CLASS_TRIATHLETE_3
 	.string "REECE$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_move2 QUICK_ATTACK
-	ec_word CAN
-	ec_word BEAT
-	ec_word A
-	ec_move2 TELEPORT
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(QUICK_ATTACK)
+	.2byte EC_WORD_CAN
+	.2byte EC_WORD_BEAT
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(TELEPORT)
 @ win speech
-	ec_word LIKE
-	ec_word I
-	ec_word SAID
-	ec_word I_AM
-	ec_word DARN
-	ec_word FAST
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SAID
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_DARN
+	.2byte EC_WORD_FAST
 @ loss speech
-	ec_word I_WAS
-	ec_word KIDDING
-	ec_word ABOUT
-	ec_word THAT
-	ec_move2 TELEPORT
-	ec_word THING
+	.2byte EC_WORD_I_WAS
+	.2byte EC_WORD_KIDDING
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_THAT
+	.2byte EC_MOVE2(TELEPORT)
+	.2byte EC_WORD_THING
 	.4byte gBattleFrontierTrainerMons_Reece
 
 @ 92
 	.4byte TRAINER_CLASS_TRIATHLETE_4
 	.string "KATHRYN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word DON_T
-	ec_word TRAIN
-	ec_word GOOD
-	ec_word ENOUGH
-	ec_word QUES
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_TRAIN
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_ENOUGH
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word DON_T
-	ec_move2 TAUNT
-	ec_word ME
-	ec_word LIKE
-	ec_word THAT
-	ec_word OK_QUES
+	.2byte EC_WORD_DON_T
+	.2byte EC_MOVE2(TAUNT)
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_OK_QUES
 @ loss speech
-	ec_word WHY
-	ec_word COULDN_T
-	ec_word I
-	ec_word WIN
-	ec_word THIS
-	ec_word QUES
+	.2byte EC_WORD_WHY
+	.2byte EC_WORD_COULDN_T
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WIN
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Kathryn
 
 @ 93
 	.4byte TRAINER_CLASS_TRIATHLETE_4
 	.string "ELLEN$", 8
 @ pre-battle speech
-	ec_word CRUSH
-	ec_word YOU
-	ec_word LIKE
-	ec_word AN
-	ec_word EGG
-	ec_word EXCL
+	.2byte EC_WORD_CRUSH
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_EGG
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word THAT_WAS
-	ec_word A
-	ec_word TASTY
-	ec_word VICTORY
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TASTY
+	.2byte EC_WORD_VICTORY
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 @ loss speech
-	ec_word TOO
-	ec_word TOUGH
-	ec_word TO
-	ec_word CRUSH
-	ec_word EXCL
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_TOUGH
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_CRUSH
+	.2byte EC_WORD_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Ellen
 
@@ -2448,51 +2448,51 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_TRIATHLETE_5
 	.string "RAMON$", 8
 @ pre-battle speech
-	ec_word OKAY
-	ec_word EXCL
+	.2byte EC_WORD_OKAY
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word THIS
-	ec_word IS
-	ec_word PERFECTION
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_PERFECTION
 @ win speech
-	ec_word I_AM
-	ec_word HAPPY
-	ec_word THAT
-	ec_word I
-	ec_word WON
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word IT_S
-	ec_word A
-	ec_word SECRET
-	ec_word WHY
-	ec_word I_AM
-	ec_word HAPPY
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_A
+	.2byte EC_WORD_SECRET
+	.2byte EC_WORD_WHY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_HAPPY
 	.4byte gBattleFrontierTrainerMons_Ramon
 
 @ 95
 	.4byte TRAINER_CLASS_TRIATHLETE_5
 	.string "ARTHUR$", 8
 @ pre-battle speech
-	ec_word HERE_I_COME
-	ec_word FEELING
-	ec_word READY
-	ec_word FOR
-	ec_word IT
-	ec_word ALL
+	.2byte EC_WORD_HERE_I_COME
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_READY
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_ALL
 @ win speech
-	ec_word THAT_S_IT_EXCL
+	.2byte EC_WORD_THAT_S_IT_EXCL
 	.2byte -1
 	.2byte -1
-	ec_word THAT_WAS
-	ec_word FABULOUS
-	ec_word EXCL
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_FABULOUS
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word THAT_WAS
-	ec_word NOT
-	ec_word WHAT
-	ec_word I
-	ec_word NEED
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Arthur
 
@@ -2500,51 +2500,51 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_TRIATHLETE_6
 	.string "ALONDRA$", 8
 @ pre-battle speech
-	ec_word EVERY
-	ec_word DAY
-	ec_word IS
-	ec_word A
-	ec_word GREAT
-	ec_word DAY
+	.2byte EC_WORD_EVERY
+	.2byte EC_WORD_DAY
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GREAT
+	.2byte EC_WORD_DAY
 @ win speech
-	ec_word MY
-	ec_move2 DIVE
-	ec_word WILL
-	ec_word BE
-	ec_word A
-	ec_word LEGEND
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(DIVE)
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_LEGEND
 @ loss speech
-	ec_word MY
-	ec_move2 DIVE
-	ec_word LEFT
-	ec_word ME
-	ec_word COLD
-	ec_word ELLIPSIS
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(DIVE)
+	.2byte EC_WORD_LEFT
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_COLD
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Alondra
 
 @ 97
 	.4byte TRAINER_CLASS_TRIATHLETE_6
 	.string "ADRIANA$", 8
 @ pre-battle speech
-	ec_word COME
-	ec_word SEE
-	ec_word AN
-	ec_word INCREDIBLE
-	ec_word SWIFT_SWIM
-	ec_word EXCL
+	.2byte EC_WORD_COME
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_INCREDIBLE
+	.2byte EC_WORD_SWIFT_SWIM
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word I
-	ec_word MAKE
-	ec_word IT
-	ec_word LOOK
-	ec_word SO
-	ec_word EASY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_EASY
 @ loss speech
-	ec_word I_AM
-	ec_word FEELING
-	ec_move2 BEAT_UP
-	ec_word AND
-	ec_word TIRED
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
+	.2byte EC_MOVE2(BEAT_UP)
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_TIRED
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Adriana
 
@@ -2552,207 +2552,207 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_TRIATHLETE_1
 	.string "MALIK$", 8
 @ pre-battle speech
-	ec_word OH
-	ec_word NOT
-	ec_word ANOTHER
-	ec_word BATTLE
-	ec_word PLEASE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_ANOTHER
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_ELLIPSIS
 @ win speech
-	ec_word I
-	ec_word FINALLY
-	ec_word WON
-	ec_word ELLIPSIS
-	ec_word I_AM
-	ec_word TIRED
+	.2byte EC_WORD_I
+	.2byte EC_WORD_FINALLY
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TIRED
 @ loss speech
-	ec_word I
-	ec_word FINALLY
-	ec_word LOST
-	ec_word ELLIPSIS
-	ec_word I_AM
-	ec_word TIRED
+	.2byte EC_WORD_I
+	.2byte EC_WORD_FINALLY
+	.2byte EC_WORD_LOST
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TIRED
 	.4byte gBattleFrontierTrainerMons_Malik
 
 @ 99
 	.4byte TRAINER_CLASS_TRIATHLETE_2
 	.string "JILL$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word THE
-	ec_move2 QUICK_ATTACK
-	ec_word TRAINER
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_THE
+	.2byte EC_MOVE2(QUICK_ATTACK)
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word THE
-	ec_move2 QUICK_ATTACK
-	ec_word TRAINER
-	ec_word WINS
-	ec_word EXCL
+	.2byte EC_WORD_THE
+	.2byte EC_MOVE2(QUICK_ATTACK)
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_WINS
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word THE
-	ec_move2 QUICK_ATTACK
-	ec_word TRAINER
-	ec_word GIVES
-	ec_word UP
-	ec_word EXCL
+	.2byte EC_WORD_THE
+	.2byte EC_MOVE2(QUICK_ATTACK)
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_GIVES
+	.2byte EC_WORD_UP
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Jill
 
 @ 100
 	.4byte TRAINER_CLASS_TRIATHLETE_3
 	.string "ERIK$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word THE
-	ec_word SPEED_BOOST
-	ec_word HERO
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_SPEED_BOOST
+	.2byte EC_WORD_HERO
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word THANK_YOU
-	ec_word FROM
-	ec_word THE
-	ec_word SPEED_BOOST
-	ec_word HERO
-	ec_word EXCL
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_FROM
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_SPEED_BOOST
+	.2byte EC_WORD_HERO
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word WAAAH
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_WAAAH
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
-	ec_word NO
-	ec_word NO
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_EXCL_EXCL
 	.4byte gBattleFrontierTrainerMons_Erik
 
 @ 101
 	.4byte TRAINER_CLASS_TRIATHLETE_4
 	.string "YAZMIN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WOULD
-	ec_word RATHER
-	ec_word RUN
-	ec_word THAN
-	ec_word BIKE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WOULD
+	.2byte EC_WORD_RATHER
+	.2byte EC_WORD_RUN
+	.2byte EC_WORD_THAN
+	.2byte EC_WORD_BIKE
 @ win speech
-	ec_word YES
-	ec_word I
-	ec_word WOULD
-	ec_word MUCH
-	ec_word RATHER
-	ec_word RUN
+	.2byte EC_WORD_YES
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WOULD
+	.2byte EC_WORD_MUCH
+	.2byte EC_WORD_RATHER
+	.2byte EC_WORD_RUN
 @ loss speech
-	ec_word BYE_BYE
-	ec_word EXCL
-	ec_word I_AM
-	ec_word GOING
-	ec_word TO
-	ec_word RUN_AWAY
+	.2byte EC_WORD_BYE_BYE
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_RUN_AWAY
 	.4byte gBattleFrontierTrainerMons_Yazmin
 
 @ 102
 	.4byte TRAINER_CLASS_TRIATHLETE_5
 	.string "JAMAL$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word GOING
-	ec_word TO
-	ec_word BE
-	ec_word A
-	ec_word FATHER
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_FATHER
 @ win speech
-	ec_word I
-	ec_word CAN_T
-	ec_word WAIT
-	ec_word FOR
-	ec_word MY
-	ec_word BABY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_WAIT
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BABY
 @ loss speech
-	ec_word MY
-	ec_word BABY
-	ec_word WILL
-	ec_word BE
-	ec_word TOTALLY
-	ec_word AWESOME
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BABY
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_TOTALLY
+	.2byte EC_WORD_AWESOME
 	.4byte gBattleFrontierTrainerMons_Jamal
 
 @ 103
 	.4byte TRAINER_CLASS_TRIATHLETE_6
 	.string "LESLIE$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word GOING
-	ec_word TO
-	ec_word BE
-	ec_word A
-	ec_word MOTHER
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_MOTHER
 @ win speech
-	ec_word A
-	ec_word BABY
-	ec_word WILL
-	ec_word BE
-	ec_word A_LITTLE
-	ec_word CHALLENGE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BABY
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_A_LITTLE
+	.2byte EC_WORD_CHALLENGE
 @ loss speech
-	ec_word I_AM
-	ec_word TOO
-	ec_word HAPPY
-	ec_word TO
-	ec_word BE
-	ec_word ANGRY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_ANGRY
 	.4byte gBattleFrontierTrainerMons_Leslie
 
 @ 104
 	.4byte TRAINER_CLASS_TRIATHLETE_1
 	.string "DAVE$", 8
 @ pre-battle speech
-	ec_word WHAT
-	ec_word SHOULD
-	ec_word I
-	ec_word DO
-	ec_word TODAY
-	ec_word QUES
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_TODAY
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word I
-	ec_word SHOULD
-	ec_word ENJOY
-	ec_word SOME
-	ec_word SPORTS
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_ENJOY
+	.2byte EC_WORD_SOME
+	.2byte EC_WORD_SPORTS
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I
-	ec_word WILL
-	ec_word GO
-	ec_word PLAY
-	ec_word A
-	ec_word GAME
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_PLAY
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GAME
 	.4byte gBattleFrontierTrainerMons_Dave
 
 @ 105
 	.4byte TRAINER_CLASS_TRIATHLETE_1
 	.string "CARLO$", 8
 @ pre-battle speech
-	ec_word HAH
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_HAH
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
-	ec_word YEAH
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_YEAH
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 @ win speech
-	ec_word I
-	ec_word DO
-	ec_word THINGS
-	ec_word AT
-	ec_move1 EXTREME_SPEED
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_THINGS
+	.2byte EC_WORD_AT
+	.2byte EC_MOVE(EXTREME_SPEED)
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I
-	ec_word LOST
-	ec_word AT
-	ec_move1 EXTREME_SPEED
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LOST
+	.2byte EC_WORD_AT
+	.2byte EC_MOVE(EXTREME_SPEED)
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Carlo
 
@@ -2760,103 +2760,103 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_TRIATHLETE_2
 	.string "EMILIA$", 8
 @ pre-battle speech
-	ec_word ME
-	ec_word WORRY
-	ec_word QUES
-	ec_word I
-	ec_word HAVE
-	ec_word NONE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_WORRY
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_NONE
 @ win speech
-	ec_word AHAHA
-	ec_word SEE
-	ec_word QUES
-	ec_word THAT_WAS
-	ec_word FANTASTIC
-	ec_word EXCL
+	.2byte EC_WORD_AHAHA
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_FANTASTIC
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word AHAHA
-	ec_word SEE
-	ec_word QUES
-	ec_word THAT_WAS
-	ec_word ENTERTAINING
-	ec_word EXCL
+	.2byte EC_WORD_AHAHA
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_ENTERTAINING
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Emilia
 
 @ 107
 	.4byte TRAINER_CLASS_TRIATHLETE_2
 	.string "DALIA$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word BIKE
-	ec_word IS
-	ec_word VERY
-	ec_word EXPENSIVE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BIKE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_VERY
+	.2byte EC_WORD_EXPENSIVE
 	.2byte -1
 @ win speech
-	ec_word DON_T
-	ec_word COME
-	ec_word NEAR
-	ec_word MY
-	ec_word BIKE
-	ec_word EXCL
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_COME
+	.2byte EC_WORD_NEAR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BIKE
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word MY
-	ec_word BIKE
-	ec_word IS
-	ec_word MY
-	ec_word BEST
-	ec_word FRIEND
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BIKE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BEST
+	.2byte EC_WORD_FRIEND
 	.4byte gBattleFrontierTrainerMons_Dalia
 
 @ 108
 	.4byte TRAINER_CLASS_BLACK_BELT
 	.string "HITOMI$", 8
 @ pre-battle speech
-	ec_word YEAH
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_YEAH
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
-	ec_word HAH
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_HAH
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 @ win speech
-	ec_word WHAT
-	ec_word QUES_EXCL
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_QUES_EXCL
 	.2byte -1
-	ec_word I
-	ec_word WON
-	ec_word QUES_EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_QUES_EXCL
 @ loss speech
-	ec_word AIYEEH
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_AIYEEH
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
-	ec_word I_AM
-	ec_word SORRY
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SORRY
+	.2byte EC_WORD_EXCL_EXCL
 	.4byte gBattleFrontierTrainerMons_Hitomi
 
 @ 109
 	.4byte TRAINER_CLASS_BLACK_BELT
 	.string "RICARDO$", 8
 @ pre-battle speech
-	ec_word COME_ON
-	ec_word EXCL
-	ec_word PLAY
-	ec_word TIME
-	ec_word IS
-	ec_word OVER
+	.2byte EC_WORD_COME_ON
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_PLAY
+	.2byte EC_WORD_TIME
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_OVER
 @ win speech
-	ec_word YOU_RE
-	ec_word OUT
-	ec_word OF
-	ec_word HERE
-	ec_word EXCL
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_OUT
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_HERE
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word PLEASE
-	ec_word DON_T
-	ec_word HIT
-	ec_word ME
-	ec_word EXCL
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_HIT
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Ricardo
 
@@ -2864,178 +2864,178 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_BLACK_BELT
 	.string "SHIZUKA$", 8
 @ pre-battle speech
-	ec_word SHOW
-	ec_word ME
-	ec_word THAT
-	ec_word YOU_RE
-	ec_word SERIOUS
-	ec_word EXCL
+	.2byte EC_WORD_SHOW
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_SERIOUS
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word I
-	ec_word WON_T
-	ec_word FORGET
-	ec_word ABOUT
-	ec_word YOU
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON_T
+	.2byte EC_WORD_FORGET
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_YOU
 	.2byte -1
 @ loss speech
-	ec_word YOU_RE
-	ec_word PERFECT
-	ec_word IN
-	ec_word EVERY
-	ec_word WAY
-	ec_word EXCL
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_PERFECT
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_EVERY
+	.2byte EC_WORD_WAY
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Shizuka
 
 @ 111
 	.4byte TRAINER_CLASS_BATTLE_GIRL
 	.string "JOANA$", 8
 @ pre-battle speech
-	ec_word YOU_RE
-	ec_word GOING
-	ec_word TO
-	ec_word LOSE
-	ec_word RIGHT
-	ec_word AWAY
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_LOSE
+	.2byte EC_WORD_RIGHT
+	.2byte EC_WORD_AWAY
 @ win speech
-	ec_word I_AM
-	ec_word THE
-	ec_word WINNER
-	ec_word HEAR
-	ec_word ME
-	ec_move2 ROAR
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_WINNER
+	.2byte EC_WORD_HEAR
+	.2byte EC_WORD_ME
+	.2byte EC_MOVE2(ROAR)
 @ loss speech
-	ec_word I
-	ec_word REFUSE
-	ec_word TO
-	ec_word ACCEPT
-	ec_word THAT
-	ec_move1 OUTRAGE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_REFUSE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_ACCEPT
+	.2byte EC_WORD_THAT
+	.2byte EC_MOVE(OUTRAGE)
 	.4byte gBattleFrontierTrainerMons_Joana
 
 @ 112
 	.4byte TRAINER_CLASS_BATTLE_GIRL
 	.string "KELLY$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word NIGHT
-	ec_word SCHOOL
-	ec_word IS
-	ec_word REALLY
-	ec_word SCARY
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_NIGHT
+	.2byte EC_WORD_SCHOOL
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_SCARY
 @ win speech
-	ec_word A
-	ec_word LADY
-	ec_word GHOST
-	ec_word APPEARS
-	ec_word THERE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_LADY
+	.2byte EC_WORD_GHOST
+	.2byte EC_WORD_APPEARS
+	.2byte EC_WORD_THERE
 	.2byte -1
 @ loss speech
-	ec_word THE
-	ec_word HOME
-	ec_word WORK
-	ec_word IS
-	ec_word AWFULLY
-	ec_word SCARY
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_HOME
+	.2byte EC_WORD_WORK
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_AWFULLY
+	.2byte EC_WORD_SCARY
 	.4byte gBattleFrontierTrainerMons_Kelly
 
 @ 113
 	.4byte TRAINER_CLASS_BATTLE_GIRL
 	.string "RAYNA$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word NO_1
-	ec_word WHEN
-	ec_word IT_S
-	ec_word ABOUT
-	ec_word POWER
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NO_1
+	.2byte EC_WORD_WHEN
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_POWER
 @ win speech
-	ec_word UNDERSTAND
-	ec_word MY
-	ec_word POWER
-	ec_word NOW
-	ec_word QUES
+	.2byte EC_WORD_UNDERSTAND
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POWER
+	.2byte EC_WORD_NOW
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ loss speech
-	ec_word TERRIBLE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_TERRIBLE
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
-	ec_word I_AM
-	ec_word TERRIBLE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TERRIBLE
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Rayna
 
 @ 114
 	.4byte TRAINER_CLASS_EXPERT_1
 	.string "EVAN$", 8
 @ pre-battle speech
-	ec_word EVERY
-	ec_word BATTLE
-	ec_word HAS
-	ec_word A
-	ec_word SMELL
+	.2byte EC_WORD_EVERY
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_HAS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_SMELL
 	.2byte -1
 @ win speech
-	ec_word OH
-	ec_word EXCL
-	ec_word THE
-	ec_move1 SWEET_SCENT
-	ec_word OF
-	ec_word VICTORY
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_THE
+	.2byte EC_MOVE(SWEET_SCENT)
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_VICTORY
 @ loss speech
-	ec_word THE
-	ec_word AWFUL
-	ec_word STENCH
-	ec_word OF
-	ec_word A
-	ec_word LOSS
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_AWFUL
+	.2byte EC_WORD_STENCH
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_A
+	.2byte EC_WORD_LOSS
 	.4byte gBattleFrontierTrainerMons_Evan
 
 @ 115
 	.4byte TRAINER_CLASS_EXPERT_1
 	.string "JORDAN$", 8
 @ pre-battle speech
-	ec_word GOOD
-	ec_word EXCL
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word COME_ON
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_COME_ON
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 @ win speech
-	ec_word YOU
-	ec_word CAN_T
-	ec_word BEAT
-	ec_word ME
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_BEAT
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word WHAT
-	ec_word QUES_EXCL
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_QUES_EXCL
 	.2byte -1
-	ec_word BUT
-	ec_word HOW
-	ec_word QUES
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Jordan
 
 @ 116
 	.4byte TRAINER_CLASS_EXPERT_1
 	.string "JOEL$", 8
 @ pre-battle speech
-	ec_word FUFUFU
-	ec_word ELLIPSIS
+	.2byte EC_WORD_FUFUFU
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.2byte -1
 	.2byte -1
 	.2byte -1
 @ win speech
-	ec_word GIGGLE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_GIGGLE
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.2byte -1
 	.2byte -1
 	.2byte -1
 @ loss speech
-	ec_word HAHAHA
-	ec_word ELLIPSIS
+	.2byte EC_WORD_HAHAHA
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.2byte -1
 	.2byte -1
@@ -3046,129 +3046,129 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_EXPERT_2
 	.string "KRISTEN$", 8
 @ pre-battle speech
-	ec_word HAHAHA
-	ec_word ELLIPSIS
+	.2byte EC_WORD_HAHAHA
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
-	ec_word A
-	ec_word KID
-	ec_word ELLIPSIS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_KID
+	.2byte EC_WORD_ELLIPSIS
 @ win speech
-	ec_word JUST
-	ec_word A_LITTLE
-	ec_word KID
-	ec_word AFTER
-	ec_word ALL
-	ec_word EXCL
+	.2byte EC_WORD_JUST
+	.2byte EC_WORD_A_LITTLE
+	.2byte EC_WORD_KID
+	.2byte EC_WORD_AFTER
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word A
-	ec_word TOUGH
-	ec_word KID
-	ec_word HUH_QUES
-	ec_word HUMPH
-	ec_word EXCL
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TOUGH
+	.2byte EC_WORD_KID
+	.2byte EC_WORD_HUH_QUES
+	.2byte EC_WORD_HUMPH
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Kristen
 
 @ 118
 	.4byte TRAINER_CLASS_EXPERT_2
 	.string "SELPHY$", 8
 @ pre-battle speech
-	ec_word HUH_QUES
-	ec_word WHAT
-	ec_word IS_IT_QUES
+	.2byte EC_WORD_HUH_QUES
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_IS_IT_QUES
 	.2byte -1
 	.2byte -1
 	.2byte -1
 @ win speech
-	ec_word OH
-	ec_word YES
-	ec_word EXCL
-	ec_word WHY
-	ec_word NOT
-	ec_word QUES
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_YES
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_WHY
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word OH
-	ec_word NO
-	ec_word EXCL
-	ec_word WHY
-	ec_word NOT
-	ec_word QUES
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_WHY
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Selphy
 
 @ 119
 	.4byte TRAINER_CLASS_EXPERT_2
 	.string "CHLOE$", 8
 @ pre-battle speech
-	ec_word COME
-	ec_word WE
-	ec_word WILL
-	ec_word DO
-	ec_word BATTLE
-	ec_word NOW
+	.2byte EC_WORD_COME
+	.2byte EC_WORD_WE
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_NOW
 @ win speech
-	ec_word MORE
-	ec_word EXCL
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word ANOTHER
-	ec_word BATTLE
-	ec_word EXCL
+	.2byte EC_WORD_ANOTHER
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word OH
-	ec_word EXCL
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word STRONG
-	ec_word YOU
-	ec_word ARE
+	.2byte EC_WORD_STRONG
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_ARE
 	.4byte gBattleFrontierTrainerMons_Chloe
 
 @ 120
 	.4byte TRAINER_CLASS_PSYCHIC_1
 	.string "NORTON$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word KNOW
-	ec_word ONLY
-	ec_word YOU
+	.2byte EC_WORD_I
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_ONLY
+	.2byte EC_WORD_YOU
 	.2byte -1
 	.2byte -1
 @ win speech
-	ec_word EXCUSE_ME
-	ec_word BUT
-	ec_word YOU_RE
-	ec_word A
-	ec_word PUSHOVER
-	ec_word EXCL
+	.2byte EC_WORD_EXCUSE_ME
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_PUSHOVER
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word YOU_RE
-	ec_word SOME
-	ec_word KIND
-	ec_word OF
-	ec_word AWESOME
-	ec_word EXCL
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_SOME
+	.2byte EC_WORD_KIND
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_AWESOME
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Norton
 
 @ 121
 	.4byte TRAINER_CLASS_PSYCHIC_1
 	.string "LUKAS$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word JOKING
-	ec_word IS
-	ec_word PRETTY
-	ec_word TERRIBLE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_JOKING
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_PRETTY
+	.2byte EC_WORD_TERRIBLE
+	.2byte EC_WORD_ELLIPSIS
 @ win speech
-	ec_word YOUR
-	ec_word ROCK_HEAD
-	ec_word EXISTS
-	ec_word TO
-	ec_word SHINE
-	ec_word EXCL
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_ROCK_HEAD
+	.2byte EC_WORD_EXISTS
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SHINE
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word YOUR
-	ec_word ROCK_HEAD
-	ec_word COME
-	ec_word TO
-	ec_word SHINE
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_ROCK_HEAD
+	.2byte EC_WORD_COME
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SHINE
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Lukas
 
@@ -3176,77 +3176,77 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_PSYCHIC_1
 	.string "ZACH$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word AN
-	ec_word EXCELLENT
-	ec_move2 MIMIC
-	ec_word OF
-	ec_word POKEMON
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_EXCELLENT
+	.2byte EC_MOVE2(MIMIC)
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word I_AM
-	ec_word HAPPY
-	ec_word LIKE
-	ec_word A_LITTLE
-	ec_pokemon2 TOGEPI
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_A_LITTLE
+	.2byte EC_POKEMON2(TOGEPI)
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I_AM
-	ec_word ANGRY
-	ec_word LIKE
-	ec_word A
-	ec_pokemon2 MANKEY
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_ANGRY
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_A
+	.2byte EC_POKEMON2(MANKEY)
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Zach
 
 @ 123
 	.4byte TRAINER_CLASS_PSYCHIC_2
 	.string "KAITLYN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word CRUSH
-	ec_word THINGS
-	ec_word WITH
-	ec_word PSYCHIC
-	ec_word POWER
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CRUSH
+	.2byte EC_WORD_THINGS
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_PSYCHIC
+	.2byte EC_WORD_POWER
 @ win speech
-	ec_word MY
-	ec_word VICTORY
-	ec_word WILL
-	ec_word MAKE
-	ec_word THE
-	ec_word NEWS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_VICTORY
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_NEWS
 @ loss speech
-	ec_word NO
-	ec_word NO
-	ec_word ELLIPSIS
-	ec_word THIS
-	ec_word WON_T
-	ec_word DO
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_WON_T
+	.2byte EC_WORD_DO
 	.4byte gBattleFrontierTrainerMons_Kaitlyn
 
 @ 124
 	.4byte TRAINER_CLASS_PSYCHIC_2
 	.string "BREANNA$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word POKEMON
-	ec_word WILL
-	ec_word CRUSH
-	ec_word YOU
-	ec_word EXCL
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_CRUSH
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word HAVE
-	ec_word SOME
-	ec_word MORE
-	ec_word OF
-	ec_word THIS
-	ec_word EXCL
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_SOME
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word YOU
-	ec_word HAVE
-	ec_word GUTS
-	ec_word AND
-	ec_word SKILL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_GUTS
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_SKILL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Breanna
 
@@ -3254,25 +3254,25 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_PSYCHIC_2
 	.string "KENDRA$", 8
 @ pre-battle speech
-	ec_word IF
-	ec_word YOU_RE
-	ec_word SMART
-	ec_word STOP
-	ec_word RIGHT
-	ec_word NOW
+	.2byte EC_WORD_IF
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_SMART
+	.2byte EC_WORD_STOP
+	.2byte EC_WORD_RIGHT
+	.2byte EC_WORD_NOW
 @ win speech
-	ec_word I
-	ec_word SAID
-	ec_word THAT
-	ec_word YOU
-	ec_word SHOULD
-	ec_word STOP
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SAID
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_STOP
 @ loss speech
-	ec_word WHY
-	ec_word DIDN_T
-	ec_word YOU
-	ec_word STOP
-	ec_word QUES
+	.2byte EC_WORD_WHY
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_STOP
+	.2byte EC_WORD_QUES
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Kendra
 
@@ -3280,25 +3280,25 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_HEX_MANIAC
 	.string "MOLLY$", 8
 @ pre-battle speech
-	ec_word WILL
-	ec_word MY
-	ec_word CUTE_CHARM
-	ec_move2 ATTRACT
-	ec_word YOU
-	ec_word QUES
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_CUTE_CHARM
+	.2byte EC_MOVE2(ATTRACT)
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word YOUR
-	ec_word POKEMON
-	ec_word ARE
-	ec_word MY
-	ec_word TOYS
-	ec_word NOW
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_TOYS
+	.2byte EC_WORD_NOW
 @ loss speech
-	ec_word OH
-	ec_word HOW
-	ec_word COULD
-	ec_word YOU
-	ec_word QUES
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_COULD
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_QUES
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Molly
 
@@ -3306,205 +3306,205 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_HEX_MANIAC
 	.string "JAZMIN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word FORECAST
-	ec_word TERRIBLE
-	ec_word THINGS
-	ec_word FOR
-	ec_word YOU
+	.2byte EC_WORD_I
+	.2byte EC_WORD_FORECAST
+	.2byte EC_WORD_TERRIBLE
+	.2byte EC_WORD_THINGS
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_YOU
 @ win speech
-	ec_word THERE
-	ec_word WASN_T
-	ec_word MY
-	ec_word FORECAST
-	ec_word RIGHT
-	ec_word QUES
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_WASN_T
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_FORECAST
+	.2byte EC_WORD_RIGHT
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word MY
-	ec_move2 FORESIGHT
-	ec_word DIDN_T
-	ec_word SHOW
-	ec_word ME
-	ec_word THIS
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(FORESIGHT)
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_SHOW
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_THIS
 	.4byte gBattleFrontierTrainerMons_Jazmin
 
 @ 128
 	.4byte TRAINER_CLASS_HEX_MANIAC
 	.string "KELSEY$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word HAVEN_T
-	ec_word SLEPT
-	ec_word IN
-	ec_word DAYS
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVEN_T
+	.2byte EC_WORD_SLEPT
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_DAYS
+	.2byte EC_WORD_ELLIPSIS
 @ win speech
-	ec_word MY
-	ec_word SLEEP
-	ec_word WILL
-	ec_word BE
-	ec_word EXCELLENT
-	ec_word NOW
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_SLEEP
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_EXCELLENT
+	.2byte EC_WORD_NOW
 @ loss speech
-	ec_word YOU
-	ec_word HAVE
-	ec_word DESTROYED
-	ec_word MY
-	ec_word SLEEP
-	ec_word ELLIPSIS
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_DESTROYED
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_SLEEP
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Kelsey
 
 @ 129
 	.4byte TRAINER_CLASS_POKEMANIAC
 	.string "JALEN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word DON_T
-	ec_word ALLOW
-	ec_word POKEMON
-	ec_word TO
-	ec_move1 THRASH
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_ALLOW
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE(THRASH)
 @ win speech
-	ec_word HAHAHA
-	ec_word EXCL
-	ec_word ARE
-	ec_word YOU
-	ec_word ANGRY
-	ec_word QUES
+	.2byte EC_WORD_HAHAHA
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_ANGRY
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word WHY
-	ec_word IS
-	ec_word THIS
-	ec_word SO
-	ec_word HARD
-	ec_word QUES
+	.2byte EC_WORD_WHY
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_HARD
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Jalen
 
 @ 130
 	.4byte TRAINER_CLASS_POKEMANIAC
 	.string "GRIFFEN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_move2 SWALLOW
-	ec_move2 SLUDGE
-	ec_word TO
-	ec_move2 TRANSFORM
-	ec_word MYSELF
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(SWALLOW)
+	.2byte EC_MOVE2(SLUDGE)
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE2(TRANSFORM)
+	.2byte EC_WORD_MYSELF
 @ win speech
-	ec_word I
-	ec_word HAVE
-	ec_word A
-	ec_move1 GROWTH
-	ec_word OF
-	ec_move2 ACID_ARMOR
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(GROWTH)
+	.2byte EC_WORD_OF
+	.2byte EC_MOVE2(ACID_ARMOR)
 @ loss speech
-	ec_word I
-	ec_word HAVE
-	ec_word A
-	ec_move1 GROWTH
-	ec_word OF
-	ec_word SUCTION_CUPS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(GROWTH)
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_SUCTION_CUPS
 	.4byte gBattleFrontierTrainerMons_Griffen
 
 @ 131
 	.4byte TRAINER_CLASS_POKEMANIAC
 	.string "XANDER$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word GOT
-	ec_word MY
-	ec_word POKEMON
-	ec_word ON
-	ec_word RENTAL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_GOT
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_RENTAL
 @ win speech
-	ec_word IT_S
-	ec_word INCREDIBLE
-	ec_word MY
-	ec_word RENTAL
-	ec_word POKEMON
-	ec_word WON
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_INCREDIBLE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_RENTAL
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_WON
 @ loss speech
-	ec_word RENTAL
-	ec_word POKEMON
-	ec_word AREN_T
-	ec_word UP
-	ec_word TO
-	ec_move2 SCRATCH
+	.2byte EC_WORD_RENTAL
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_UP
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE2(SCRATCH)
 	.4byte gBattleFrontierTrainerMons_Xander
 
 @ 132
 	.4byte TRAINER_CLASS_GENTLEMAN
 	.string "MARVIN$", 8
 @ pre-battle speech
-	ec_word YOU_RE
-	ec_word UP
-	ec_word TO
-	ec_word THE
-	ec_word CHALLENGE
-	ec_word QUES
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_UP
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_CHALLENGE
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word I
-	ec_word DIDN_T
-	ec_word THINK
-	ec_word YOU_RE
-	ec_word GOOD
-	ec_word ENOUGH
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_THINK
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_ENOUGH
 @ loss speech
-	ec_word I_AM
-	ec_word FEELING
-	ec_word PERFECT
-	ec_word THANK_YOU
-	ec_word SO
-	ec_word MUCH
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_PERFECT
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_MUCH
 	.4byte gBattleFrontierTrainerMons_Marvin
 
 @ 133
 	.4byte TRAINER_CLASS_GENTLEMAN
 	.string "BRENNAN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_move2 WISH
-	ec_word TO
-	ec_word SEE
-	ec_word THE
-	ec_word NEWS
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(WISH)
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_NEWS
 @ win speech
-	ec_word COMICS
-	ec_word GET
-	ec_word DAMP
-	ec_word FROM
-	ec_word DRIZZLE
-	ec_word QUES
+	.2byte EC_WORD_COMICS
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_DAMP
+	.2byte EC_WORD_FROM
+	.2byte EC_WORD_DRIZZLE
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word THE
-	ec_word TIGHT
-	ec_word MONEY
-	ec_word LIVING
-	ec_word CHANNEL
-	ec_word QUES_EXCL
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_TIGHT
+	.2byte EC_WORD_MONEY
+	.2byte EC_WORD_LIVING
+	.2byte EC_WORD_CHANNEL
+	.2byte EC_WORD_QUES_EXCL
 	.4byte gBattleFrontierTrainerMons_Brennan
 
 @ 134
 	.4byte TRAINER_CLASS_BUG_MANIAC
 	.string "BALEY$", 8
 @ pre-battle speech
-	ec_move1 SCREECH
-	ec_word IS
-	ec_word LIKE
-	ec_word MUSIC
-	ec_word TO_ME
-	ec_word EXCL
+	.2byte EC_MOVE(SCREECH)
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_MUSIC
+	.2byte EC_WORD_TO_ME
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word MY
-	ec_move1 SCREECH
-	ec_word STRATEGY
-	ec_word IS
-	ec_word THE
-	ec_word BEST
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE(SCREECH)
+	.2byte EC_WORD_STRATEGY
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_BEST
 @ loss speech
-	ec_word YOU_RE
-	ec_word SOUNDPROOF
-	ec_word QUES
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_SOUNDPROOF
+	.2byte EC_WORD_QUES
 	.2byte -1
 	.2byte -1
 	.2byte -1
@@ -3514,51 +3514,51 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_RUIN_MANIAC
 	.string "ZACKARY$", 8
 @ pre-battle speech
-	ec_word CAN
-	ec_word YOU
-	ec_move1 DIG
-	ec_word IT
-	ec_word YO
-	ec_word QUES
+	.2byte EC_WORD_CAN
+	.2byte EC_WORD_YOU
+	.2byte EC_MOVE(DIG)
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_YO
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_move2 TAKE_DOWN
-	ec_word TAKE
-	ec_word A
-	ec_move2 DIVE
-	ec_word YO
-	ec_word YO
+	.2byte EC_MOVE2(TAKE_DOWN)
+	.2byte EC_WORD_TAKE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(DIVE)
+	.2byte EC_WORD_YO
+	.2byte EC_WORD_YO
 @ loss speech
-	ec_word BREAK
-	ec_word DOWN
-	ec_move2 DIVE
-	ec_word TIME
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_BREAK
+	.2byte EC_WORD_DOWN
+	.2byte EC_MOVE2(DIVE)
+	.2byte EC_WORD_TIME
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 	.4byte gBattleFrontierTrainerMons_Zackary
 
 @ 136
 	.4byte TRAINER_CLASS_COLLECTOR
 	.string "GABRIEL$", 8
 @ pre-battle speech
-	ec_move2 POUND
-	ec_word THE
-	ec_word THICK_FAT
-	ec_word ON
-	ec_word MY
-	ec_move2 BELLY_DRUM
+	.2byte EC_MOVE2(POUND)
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_THICK_FAT
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(BELLY_DRUM)
 @ win speech
-	ec_move2 POUND
-	ec_word MY
-	ec_move2 BELLY_DRUM
-	ec_move2 POUND
-	ec_word MY
-	ec_move2 BELLY_DRUM
+	.2byte EC_MOVE2(POUND)
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(BELLY_DRUM)
+	.2byte EC_MOVE2(POUND)
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(BELLY_DRUM)
 @ loss speech
-	ec_word MY
-	ec_move2 BELLY_DRUM
-	ec_word WAS
-	ec_word TOO_WEAK
-	ec_word ELLIPSIS
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(BELLY_DRUM)
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_TOO_WEAK
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Gabriel
 
@@ -3566,77 +3566,77 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_PARASOL_LADY
 	.string "EMILY$", 8
 @ pre-battle speech
-	ec_word HOW
-	ec_word ABOUT
-	ec_word A_TINY_BIT
-	ec_word OF
-	ec_move1 HYPNOSIS
-	ec_word QUES
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_A_TINY_BIT
+	.2byte EC_WORD_OF
+	.2byte EC_MOVE(HYPNOSIS)
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word MY
-	ec_move1 HYPNOSIS
-	ec_word STRATEGY
-	ec_word WORKS
-	ec_word TO
-	ec_word PERFECTION
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE(HYPNOSIS)
+	.2byte EC_WORD_STRATEGY
+	.2byte EC_WORD_WORKS
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_PERFECTION
 @ loss speech
-	ec_word MY
-	ec_move1 HYPNOSIS
-	ec_word STRATEGY
-	ec_word WENT
-	ec_word BADLY
-	ec_word ELLIPSIS
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE(HYPNOSIS)
+	.2byte EC_WORD_STRATEGY
+	.2byte EC_WORD_WENT
+	.2byte EC_WORD_BADLY
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Emily
 
 @ 138
 	.4byte TRAINER_CLASS_BEAUTY
 	.string "JORDYN$", 8
 @ pre-battle speech
-	ec_word YOU
-	ec_word DON_T
-	ec_word KNOW
-	ec_word MY
-	ec_word SECRET
-	ec_word ELLIPSIS
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_SECRET
+	.2byte EC_WORD_ELLIPSIS
 @ win speech
-	ec_word I_AM
-	ec_word NOT
-	ec_word AS
-	ec_word I
-	ec_word APPEAR
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_AS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_APPEAR
+	.2byte EC_WORD_ELLIPSIS
 @ loss speech
-	ec_word BUT
-	ec_word HOW
-	ec_word DID
-	ec_word YOU
-	ec_word KNOW
-	ec_word QUES
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_DID
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Jordyn
 
 @ 139
 	.4byte TRAINER_CLASS_AROMA_LADY
 	.string "SOFIA$", 8
 @ pre-battle speech
-	ec_pokemon1 LOUDRED
-	ec_word PROBABLY
-	ec_word HAS
-	ec_word A
-	ec_move1 SWEET_SCENT
+	.2byte EC_POKEMON(LOUDRED)
+	.2byte EC_WORD_PROBABLY
+	.2byte EC_WORD_HAS
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(SWEET_SCENT)
 	.2byte -1
 @ win speech
-	ec_word THAT_S
-	ec_word THE
-	ec_word FEELING
-	ec_word THAT
-	ec_word I
-	ec_word GET
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_GET
 @ loss speech
-	ec_word I
-	ec_word WORK
-	ec_word AT
-	ec_word THE
-	ec_word DEPT_STORE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WORK
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_DEPT_STORE
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Sofia
 
@@ -3644,51 +3644,51 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_COOLTRAINER_1
 	.string "BRADEN$", 8
 @ pre-battle speech
-	ec_word I_CHOOSE_YOU
-	ec_word EXCL
+	.2byte EC_WORD_I_CHOOSE_YOU
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word THIS_IS_IT_EXCL
+	.2byte EC_WORD_THIS_IS_IT_EXCL
 	.2byte -1
 	.2byte -1
 @ win speech
-	ec_word I_AM
-	ec_word FEELING
-	ec_word PRETTY
-	ec_word AWESOME
-	ec_word ABOUT
-	ec_word MYSELF
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_PRETTY
+	.2byte EC_WORD_AWESOME
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_MYSELF
 @ loss speech
-	ec_word ALL_RIGHT
-	ec_word EXCL
+	.2byte EC_WORD_ALL_RIGHT
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word I
-	ec_word SURRENDER
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SURRENDER
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Braden
 
 @ 141
 	.4byte TRAINER_CLASS_COOLTRAINER_1
 	.string "KAYDEN$", 8
 @ pre-battle speech
-	ec_word THEY
-	ec_word OVERDO
-	ec_word THAT
-	ec_word GOURMET
-	ec_word THING
-	ec_word ELLIPSIS
+	.2byte EC_WORD_THEY
+	.2byte EC_WORD_OVERDO
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_GOURMET
+	.2byte EC_WORD_THING
+	.2byte EC_WORD_ELLIPSIS
 @ win speech
-	ec_word THAT
-	ec_word GOURMET
-	ec_word THING
-	ec_word ISN_T
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_GOURMET
+	.2byte EC_WORD_THING
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 @ loss speech
-	ec_word HEY
-	ec_word THIS
-	ec_word IS
-	ec_word PRETTY
-	ec_word TASTY
+	.2byte EC_WORD_HEY
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_PRETTY
+	.2byte EC_WORD_TASTY
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Kayden
 
@@ -3696,259 +3696,259 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_COOLTRAINER_1
 	.string "COOPER$", 8
 @ pre-battle speech
-	ec_word THIS
-	ec_word SHOULD
-	ec_word ABSOLUTELY
-	ec_word BE
-	ec_word A
-	ec_word PUSHOVER
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_ABSOLUTELY
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_PUSHOVER
 @ win speech
-	ec_word THAT_WAS
-	ec_word TOO
-	ec_word EXCITING
-	ec_word FOR
-	ec_word ME
-	ec_word ELLIPSIS
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_EXCITING
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_ELLIPSIS
 @ loss speech
-	ec_word PLEASE
-	ec_word EXCL
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word SORRY
-	ec_word I_AM
-	ec_word SORRY
+	.2byte EC_WORD_SORRY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SORRY
 	.4byte gBattleFrontierTrainerMons_Cooper
 
 @ 143
 	.4byte TRAINER_CLASS_COOLTRAINER_2
 	.string "JULIA$", 8
 @ pre-battle speech
-	ec_word SPIRIT
-	ec_word ALONE
-	ec_word WON_T
-	ec_word MAKE
-	ec_word YOU
-	ec_word WIN
+	.2byte EC_WORD_SPIRIT
+	.2byte EC_WORD_ALONE
+	.2byte EC_WORD_WON_T
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WIN
 @ win speech
-	ec_word YOU
-	ec_word SHOULD
-	ec_word ACCEPT
-	ec_word THIS
-	ec_word WITH
-	ec_word SERENE_GRACE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_ACCEPT
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_SERENE_GRACE
 @ loss speech
-	ec_word FOR_NOW
-	ec_word GOOD_BYE
-	ec_word BUT
-	ec_word IT_S
-	ec_word NOT
-	ec_word OVER
+	.2byte EC_WORD_FOR_NOW
+	.2byte EC_WORD_GOOD_BYE
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_OVER
 	.4byte gBattleFrontierTrainerMons_Julia
 
 @ 144
 	.4byte TRAINER_CLASS_COOLTRAINER_2
 	.string "AMARA$", 8
 @ pre-battle speech
-	ec_word WROOOAAR_EXCL
-	ec_word EXCL_EXCL
-	ec_word I_AM
-	ec_word SO
-	ec_word READY
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_WROOOAAR_EXCL
+	.2byte EC_WORD_EXCL_EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_READY
+	.2byte EC_WORD_EXCL_EXCL
 @ win speech
-	ec_word I
-	ec_word LOSE
-	ec_word MYSELF
-	ec_word IF
-	ec_word IT_S
-	ec_word EXCITING
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LOSE
+	.2byte EC_WORD_MYSELF
+	.2byte EC_WORD_IF
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_EXCITING
 @ loss speech
-	ec_word THAT_S
-	ec_word TOO
-	ec_word MUCH
-	ec_word TO
-	ec_move2 TACKLE
-	ec_word EXCL
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_MUCH
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE2(TACKLE)
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Amara
 
 @ 145
 	.4byte TRAINER_CLASS_COOLTRAINER_2
 	.string "LYNN$", 8
 @ pre-battle speech
-	ec_word YOUR
-	ec_word SECRET
-	ec_word CAN_T
-	ec_word BE
-	ec_word HIDDEN
-	ec_word FOREVER
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_SECRET
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_HIDDEN
+	.2byte EC_WORD_FOREVER
 @ win speech
-	ec_word I
-	ec_word KNOW
-	ec_word YOUR
-	ec_word SECRET
-	ec_word NOW
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_SECRET
+	.2byte EC_WORD_NOW
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word YOU
-	ec_word CAN_T
-	ec_move1 SAFEGUARD
-	ec_word YOUR
-	ec_word OWN
-	ec_word SECRET
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN_T
+	.2byte EC_MOVE(SAFEGUARD)
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_OWN
+	.2byte EC_WORD_SECRET
 	.4byte gBattleFrontierTrainerMons_Lynn
 
 @ 146
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
 	.string "JOVAN$", 8
 @ pre-battle speech
-	ec_word YOUR
-	ec_word BATTLE
-	ec_word SENSE
-	ec_word IS
-	ec_word SADLY
-	ec_word LACKING
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_SENSE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_SADLY
+	.2byte EC_WORD_LACKING
 @ win speech
-	ec_word MY
-	ec_word BATTLE
-	ec_word SENSE
-	ec_word IS
-	ec_word COOL
-	ec_word ISN_T_IT_QUES
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_SENSE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_ISN_T_IT_QUES
 @ loss speech
-	ec_word I_WAS
-	ec_word MINUS
-	ec_word MY
-	ec_word NORMAL
-	ec_word POWER
-	ec_word TODAY
+	.2byte EC_WORD_I_WAS
+	.2byte EC_WORD_MINUS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_NORMAL
+	.2byte EC_WORD_POWER
+	.2byte EC_WORD_TODAY
 	.4byte gBattleFrontierTrainerMons_Jovan
 
 @ 147
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
 	.string "DOMINIC$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word HAVE
-	ec_word THIS
-	ec_word EXCELLENT
-	ec_word CAMERA
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_EXCELLENT
+	.2byte EC_WORD_CAMERA
 	.2byte -1
 @ win speech
-	ec_word MY
-	ec_word CAMERA
-	ec_word WAS
-	ec_word AWFULLY
-	ec_word EXPENSIVE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_CAMERA
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_AWFULLY
+	.2byte EC_WORD_EXPENSIVE
 	.2byte -1
 @ loss speech
-	ec_word MY
-	ec_word CAMERA
-	ec_word DOESN_T
-	ec_word MISS
-	ec_word A
-	ec_word THING
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_CAMERA
+	.2byte EC_WORD_DOESN_T
+	.2byte EC_WORD_MISS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_THING
 	.4byte gBattleFrontierTrainerMons_Dominic
 
 @ 148
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
 	.string "NIKOLAS$", 8
 @ pre-battle speech
-	ec_word I
-	ec_move2 MIMIC
-	ec_word POKEMON
-	ec_word AFTER
-	ec_word EVERY
-	ec_word BATTLE
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(MIMIC)
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_AFTER
+	.2byte EC_WORD_EVERY
+	.2byte EC_WORD_BATTLE
 @ win speech
-	ec_word IF_I_WIN
-	ec_word I
-	ec_word PRETEND
-	ec_word I_AM
-	ec_word A
-	ec_pokemon2 TAUROS
+	.2byte EC_WORD_IF_I_WIN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_PRETEND
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_POKEMON2(TAUROS)
 @ loss speech
-	ec_word IF_I_LOSE
-	ec_word I
-	ec_word PRETEND
-	ec_word I_AM
-	ec_word A
-	ec_pokemon2 MILTANK
+	.2byte EC_WORD_IF_I_LOSE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_PRETEND
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_POKEMON2(MILTANK)
 	.4byte gBattleFrontierTrainerMons_Nikolas
 
 @ 149
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
 	.string "VALERIA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_move2 WISH
-	ec_word YOU
-	ec_word WOULD
-	ec_word NOT
-	ec_move2 GLARE
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(WISH)
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WOULD
+	.2byte EC_WORD_NOT
+	.2byte EC_MOVE2(GLARE)
 @ win speech
-	ec_word YOU_RE
-	ec_word MEAN
-	ec_word EXCL
-	ec_word I
-	ec_word MEAN
-	ec_word REALLY
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_MEAN
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_MEAN
+	.2byte EC_WORD_REALLY
 @ loss speech
-	ec_word YOU
-	ec_word HAVE
-	ec_word A
-	ec_word REALLY
-	ec_move1 SCARY_FACE
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_REALLY
+	.2byte EC_MOVE(SCARY_FACE)
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Valeria
 
 @ 150
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
 	.string "DELANEY$", 8
 @ pre-battle speech
-	ec_word SCHOOL
-	ec_word IS
-	ec_word OVER
-	ec_word TIME
-	ec_word TO
-	ec_word PLAY
+	.2byte EC_WORD_SCHOOL
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_OVER
+	.2byte EC_WORD_TIME
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_PLAY
 @ win speech
-	ec_word MY
-	ec_word BOY
-	ec_word FRIEND
-	ec_word IS
-	ec_word FROM
-	ec_word SCHOOL
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BOY
+	.2byte EC_WORD_FRIEND
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_FROM
+	.2byte EC_WORD_SCHOOL
 @ loss speech
-	ec_word I
-	ec_word HAVE
-	ec_word TO
-	ec_word WORK
-	ec_word NEXT
-	ec_word WEEK
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_WORK
+	.2byte EC_WORD_NEXT
+	.2byte EC_WORD_WEEK
 	.4byte gBattleFrontierTrainerMons_Delaney
 
 @ 151
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
 	.string "MEGHAN$", 8
 @ pre-battle speech
-	ec_word SCHOOL
-	ec_word IS
-	ec_word OUT
-	ec_word TIME
-	ec_word TO
-	ec_word PLAY
+	.2byte EC_WORD_SCHOOL
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_OUT
+	.2byte EC_WORD_TIME
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_PLAY
 @ win speech
-	ec_word MY
-	ec_word BOY
-	ec_word FRIEND
-	ec_word LIKES
-	ec_word COMICS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BOY
+	.2byte EC_WORD_FRIEND
+	.2byte EC_WORD_LIKES
+	.2byte EC_WORD_COMICS
 	.2byte -1
 @ loss speech
-	ec_word IT_S
-	ec_word BACK
-	ec_word TO
-	ec_word SCHOOL
-	ec_word SOON
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_BACK
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SCHOOL
+	.2byte EC_WORD_SOON
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Meghan
 
@@ -3956,25 +3956,25 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_DRAGON_TAMER
 	.string "ROBERTO$", 8
 @ pre-battle speech
-	ec_word DRAGON
-	ec_word POKEMON
-	ec_word ARE
-	ec_word INVINCIBLE
-	ec_word EXCL
+	.2byte EC_WORD_DRAGON
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_INVINCIBLE
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word YOU
-	ec_word WEREN_T
-	ec_word BAD
-	ec_word I_WAS
-	ec_word JUST
-	ec_word BETTER
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WEREN_T
+	.2byte EC_WORD_BAD
+	.2byte EC_WORD_I_WAS
+	.2byte EC_WORD_JUST
+	.2byte EC_WORD_BETTER
 @ loss speech
-	ec_word AREN_T
-	ec_word YOU
-	ec_word SATISFIED
-	ec_word YET
-	ec_word QUES
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SATISFIED
+	.2byte EC_WORD_YET
+	.2byte EC_WORD_QUES
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Roberto
 
@@ -3982,25 +3982,25 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_DRAGON_TAMER
 	.string "DAMIAN$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word PURE_POWER
-	ec_word IS
-	ec_word MACHINE
-	ec_word LIKE
-	ec_word EXCL
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_PURE_POWER
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_MACHINE
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word MY
-	ec_move2 MACH_PUNCH
-	ec_word WILL
-	ec_word MAKE
-	ec_word A
-	ec_move1 BRICK_BREAK
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(MACH_PUNCH)
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(BRICK_BREAK)
 @ loss speech
-	ec_word ARRGH
-	ec_word EXCL
+	.2byte EC_WORD_ARRGH
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word NO
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Damian
 
@@ -4008,103 +4008,103 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_DRAGON_TAMER
 	.string "BRODY$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word FASHION
-	ec_word SENSE
-	ec_word SEEMS
-	ec_pokemon1 ODDISH
-	ec_word QUES
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_FASHION
+	.2byte EC_WORD_SENSE
+	.2byte EC_WORD_SEEMS
+	.2byte EC_POKEMON(ODDISH)
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word IT_S
-	ec_word MY
-	ec_word FAMILY
-	ec_word STAY_AT_HOME
-	ec_word LOOK
-	ec_word EXCL
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_FAMILY
+	.2byte EC_WORD_STAY_AT_HOME
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I
-	ec_word QUESTION
-	ec_word YOUR
-	ec_word FASHION
-	ec_word SENSE
-	ec_word SERIOUSLY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_QUESTION
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_FASHION
+	.2byte EC_WORD_SENSE
+	.2byte EC_WORD_SERIOUSLY
 	.4byte gBattleFrontierTrainerMons_Brody
 
 @ 155
 	.4byte TRAINER_CLASS_DRAGON_TAMER
 	.string "GRAHAM$", 8
 @ pre-battle speech
-	ec_word YEAH
-	ec_word EXCL
+	.2byte EC_WORD_YEAH
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word YEAH_YEAH
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_YEAH_YEAH
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 @ win speech
-	ec_word WAHAHAHA
-	ec_word WAHAHAHA
-	ec_word EXCL
-	ec_word WAHAHAHA
-	ec_word WAHAHAHA
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_WAHAHAHA
+	.2byte EC_WORD_WAHAHAHA
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_WAHAHAHA
+	.2byte EC_WORD_WAHAHAHA
+	.2byte EC_WORD_EXCL_EXCL
 @ loss speech
-	ec_word I_AM
-	ec_word SORRY
-	ec_word ELLIPSIS
-	ec_word IT_S
-	ec_word MY
-	ec_word BAD
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SORRY
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BAD
 	.4byte gBattleFrontierTrainerMons_Graham
 
 @ 156
 	.4byte TRAINER_CLASS_POKEFAN_1
 	.string "TYLOR$", 8
 @ pre-battle speech
-	ec_word ARE
-	ec_word YOU
-	ec_word FEELING
-	ec_word MY
-	ec_move2 HEAT_WAVE
-	ec_word QUES
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(HEAT_WAVE)
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word YES
-	ec_word I_AM
-	ec_word ON
-	ec_word FIRE
-	ec_word EXCL
+	.2byte EC_WORD_YES
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_FIRE
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word BUT
-	ec_word I_WAS
-	ec_word ON
-	ec_word FIRE
-	ec_word FOR
-	ec_word YOU
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_I_WAS
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_FIRE
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_YOU
 	.4byte gBattleFrontierTrainerMons_Tylor
 
 @ 157
 	.4byte TRAINER_CLASS_POKEFAN_2
 	.string "JAREN$", 8
 @ pre-battle speech
-	ec_word FIGHTING
-	ec_word SPIRIT
-	ec_word QUES
-	ec_word ME
-	ec_word QUES
+	.2byte EC_WORD_FIGHTING
+	.2byte EC_WORD_SPIRIT
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ win speech
-	ec_word I
-	ec_word WANT
-	ec_word MORE
-	ec_word CUTE
-	ec_word POKEMON
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_CUTE
+	.2byte EC_WORD_POKEMON
 	.2byte -1
 @ loss speech
-	ec_word YOUR
-	ec_word POKEMON
-	ec_word LOOK
-	ec_word QUITE
-	ec_word CUTE
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_QUITE
+	.2byte EC_WORD_CUTE
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Jaren
 
@@ -4112,389 +4112,389 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
 	.string "CORDELL$", 8
 @ pre-battle speech
-	ec_word A
-	ec_word BATTLE
-	ec_word IS
-	ec_word DECIDED
-	ec_word ON
-	ec_word SPIRIT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_DECIDED
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_SPIRIT
 @ win speech
-	ec_word CAN_T
-	ec_word YOU
-	ec_word ACCEPT
-	ec_word THAT
-	ec_word QUES
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_ACCEPT
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ loss speech
-	ec_word I
-	ec_word WILL
-	ec_word BE
-	ec_word ON
-	ec_word MY
-	ec_word WAY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_WAY
 	.4byte gBattleFrontierTrainerMons_Cordell
 
 @ 159
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
 	.string "JAZLYN$", 8
 @ pre-battle speech
-	ec_word IS
-	ec_word YOUR
-	ec_word POKEDEX
-	ec_word REALLY
-	ec_word AWESOME
-	ec_word QUES
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEDEX
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_AWESOME
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word OH_YEAH
-	ec_word WOW
-	ec_word YOUR
-	ec_word POKEDEX
-	ec_word IS
-	ec_word SUPER
+	.2byte EC_WORD_OH_YEAH
+	.2byte EC_WORD_WOW
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEDEX
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_SUPER
 @ loss speech
-	ec_word AN
-	ec_word AVANT_GARDE
-	ec_word POKEDEX
-	ec_word WOULD
-	ec_word BE
-	ec_word AWESOME
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_AVANT_GARDE
+	.2byte EC_WORD_POKEDEX
+	.2byte EC_WORD_WOULD
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_AWESOME
 	.4byte gBattleFrontierTrainerMons_Jazlyn
 
 @ 160
 	.4byte TRAINER_CLASS_YOUNGSTER
 	.string "ZACHERY$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word HAVE
-	ec_word MY
-	ec_word OWN
-	ec_word PLACE
-	ec_word YEEHAW_EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_OWN
+	.2byte EC_WORD_PLACE
+	.2byte EC_WORD_YEEHAW_EXCL
 @ win speech
-	ec_word IT_S
-	ec_word AN
-	ec_word EXCITING
-	ec_word TIME
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_EXCITING
+	.2byte EC_WORD_TIME
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 @ loss speech
-	ec_word YOU
-	ec_word CAN_T
-	ec_word FLATTEN
-	ec_word MY
-	ec_word HAPPINESS
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_FLATTEN
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_HAPPINESS
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Zachery
 
 @ 161
 	.4byte TRAINER_CLASS_YOUNGSTER
 	.string "JOHAN$", 8
 @ pre-battle speech
-	ec_word WINTER
-	ec_word WILL
-	ec_word SOON
-	ec_word BE
-	ec_word HERE
+	.2byte EC_WORD_WINTER
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_SOON
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_HERE
 	.2byte -1
 @ win speech
-	ec_word MY
-	ec_word ALLOWANCE
-	ec_word COULD
-	ec_word USE
-	ec_word A
-	ec_move2 HELPING_HAND
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_ALLOWANCE
+	.2byte EC_WORD_COULD
+	.2byte EC_WORD_USE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(HELPING_HAND)
 @ loss speech
-	ec_word I
-	ec_word ALWAYS
-	ec_word USE
-	ec_word MY
-	ec_word ALLOWANCE
-	ec_word UP
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ALWAYS
+	.2byte EC_WORD_USE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_ALLOWANCE
+	.2byte EC_WORD_UP
 	.4byte gBattleFrontierTrainerMons_Johan
 
 @ 162
 	.4byte TRAINER_CLASS_LASS
 	.string "SHEA$", 8
 @ pre-battle speech
-	ec_word DO
-	ec_word YOU
-	ec_word BATTLE
-	ec_word WITH
-	ec_word BEAUTY
-	ec_word QUES
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_BEAUTY
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word YOU
-	ec_word BATTLE
-	ec_word IN
-	ec_word AN
-	ec_word UGLY
-	ec_word WAY
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_UGLY
+	.2byte EC_WORD_WAY
 @ loss speech
-	ec_word WHAT
-	ec_word IS
-	ec_word BEAUTY
-	ec_word TO
-	ec_word YOU
-	ec_word QUES
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_BEAUTY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Shea
 
 @ 163
 	.4byte TRAINER_CLASS_LASS
 	.string "KAILA$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word FEELING
-	ec_word THIRSTY
-	ec_word RIGHT
-	ec_word NOW
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_THIRSTY
+	.2byte EC_WORD_RIGHT
+	.2byte EC_WORD_NOW
+	.2byte EC_WORD_ELLIPSIS
 @ win speech
-	ec_word I
-	ec_word COULD
-	ec_word USE
-	ec_word A
-	ec_word COLD
-	ec_word DRINK
+	.2byte EC_WORD_I
+	.2byte EC_WORD_COULD
+	.2byte EC_WORD_USE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_COLD
+	.2byte EC_WORD_DRINK
 @ loss speech
-	ec_word THAT
-	ec_word LOSS
-	ec_word IS
-	ec_word HARD
-	ec_word TO
-	ec_move2 SWALLOW
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_LOSS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_HARD
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE2(SWALLOW)
 	.4byte gBattleFrontierTrainerMons_Kaila
 
 @ 164
 	.4byte TRAINER_CLASS_SCHOOL_KID_1
 	.string "ISIAH$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word PRETEND
-	ec_word TO
-	ec_word STUDY
-	ec_word A_LOT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_PRETEND
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_STUDY
+	.2byte EC_WORD_A_LOT
 	.2byte -1
 @ win speech
-	ec_word I
-	ec_move2 TRICK
-	ec_word MOTHER
-	ec_word FOR
-	ec_word MY
-	ec_word ALLOWANCE
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(TRICK)
+	.2byte EC_WORD_MOTHER
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_ALLOWANCE
 @ loss speech
-	ec_word I
-	ec_word DON_T
-	ec_word WANT
-	ec_word TO
-	ec_word STUDY
-	ec_word MORE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_STUDY
+	.2byte EC_WORD_MORE
 	.4byte gBattleFrontierTrainerMons_Isiah
 
 @ 165
 	.4byte TRAINER_CLASS_SCHOOL_KID_1
 	.string "GARRETT$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word ENJOY
-	ec_word COMICS
-	ec_word AND
-	ec_word THIS
-	ec_word GAME
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ENJOY
+	.2byte EC_WORD_COMICS
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_GAME
 @ win speech
-	ec_word I
-	ec_word LIKE
-	ec_word THIS
-	ec_word MUSIC
-	ec_word IDOL
-	ec_word TOO
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_MUSIC
+	.2byte EC_WORD_IDOL
+	.2byte EC_WORD_TOO
 @ loss speech
-	ec_word BUT
-	ec_word I
-	ec_word HAVE
-	ec_word TO
-	ec_word STUDY
-	ec_word MORE
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_STUDY
+	.2byte EC_WORD_MORE
 	.4byte gBattleFrontierTrainerMons_Garrett
 
 @ 166
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
 	.string "HAYLIE$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WORRY
-	ec_word TOO
-	ec_word MUCH
-	ec_word TO
-	ec_word SLEEP
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WORRY
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_MUCH
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SLEEP
 @ win speech
-	ec_word A
-	ec_word WIN
-	ec_word GIVES
-	ec_word ME
-	ec_word A
-	ec_move2 CALM_MIND
+	.2byte EC_WORD_A
+	.2byte EC_WORD_WIN
+	.2byte EC_WORD_GIVES
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(CALM_MIND)
 @ loss speech
-	ec_word MY
-	ec_word INSOMNIA
-	ec_word WILL
-	ec_word GET
-	ec_word BAD
-	ec_word ELLIPSIS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_INSOMNIA
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_BAD
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Haylie
 
 @ 167
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
 	.string "MEGAN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word BELIEVE
-	ec_word IN
-	ec_word AN
-	ec_move1 AROMATHERAPY
-	ec_word BATH
+	.2byte EC_WORD_I
+	.2byte EC_WORD_BELIEVE
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_AN
+	.2byte EC_MOVE(AROMATHERAPY)
+	.2byte EC_WORD_BATH
 @ win speech
-	ec_word I
-	ec_word WANT
-	ec_word A
-	ec_word HEALTHY
-	ec_word CLEAR_BODY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_HEALTHY
+	.2byte EC_WORD_CLEAR_BODY
 	.2byte -1
 @ loss speech
-	ec_word IF
-	ec_word ONLY
-	ec_move1 AROMATHERAPY
-	ec_word WERE
-	ec_word LESS
-	ec_word EXPENSIVE
+	.2byte EC_WORD_IF
+	.2byte EC_WORD_ONLY
+	.2byte EC_MOVE(AROMATHERAPY)
+	.2byte EC_WORD_WERE
+	.2byte EC_WORD_LESS
+	.2byte EC_WORD_EXPENSIVE
 	.4byte gBattleFrontierTrainerMons_Megan
 
 @ 168
 	.4byte TRAINER_CLASS_RICH_BOY
 	.string "ISSAC$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word HOBBY
-	ec_word QUES
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_HOBBY
+	.2byte EC_WORD_QUES
 	.2byte -1
 	.2byte -1
 	.2byte -1
 @ win speech
-	ec_word I
-	ec_word LIKE
-	ec_word ANY
-	ec_word KIND
-	ec_word OF
-	ec_move2 WATER_SPORT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_ANY
+	.2byte EC_WORD_KIND
+	.2byte EC_WORD_OF
+	.2byte EC_MOVE2(WATER_SPORT)
 @ loss speech
-	ec_word I
-	ec_word DISLIKE
-	ec_word ANY
-	ec_word KIND
-	ec_word OF
-	ec_move2 MUD_SPORT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DISLIKE
+	.2byte EC_WORD_ANY
+	.2byte EC_WORD_KIND
+	.2byte EC_WORD_OF
+	.2byte EC_MOVE2(MUD_SPORT)
 	.4byte gBattleFrontierTrainerMons_Issac
 
 @ 169
 	.4byte TRAINER_CLASS_RICH_BOY
 	.string "QUINTON$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word SAD
-	ec_word CAUSE
-	ec_word I_AM
-	ec_word TOO_WEAK
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SAD
+	.2byte EC_WORD_CAUSE
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TOO_WEAK
 	.2byte -1
 @ win speech
-	ec_word YOU
-	ec_word AREN_T
-	ec_word TOO_STRONG
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_TOO_STRONG
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 	.2byte -1
 @ loss speech
-	ec_word HEY
-	ec_word WHAT
-	ec_word DID
-	ec_word I
-	ec_word DO
-	ec_word QUES
+	.2byte EC_WORD_HEY
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_DID
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Quinton
 
 @ 170
 	.4byte TRAINER_CLASS_LADY
 	.string "SALMA$", 8
 @ pre-battle speech
-	ec_word YOU_VE
-	ec_word GOT
-	ec_word YOUR
-	ec_word HUSTLE
-	ec_word ON
-	ec_word EXCL
+	.2byte EC_WORD_YOU_VE
+	.2byte EC_WORD_GOT
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_HUSTLE
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word I
-	ec_word WIN
-	ec_word YOU
-	ec_word HUSTLE
-	ec_word ON
-	ec_word OUT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WIN
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HUSTLE
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_OUT
 @ loss speech
-	ec_word I
-	ec_word DON_T
-	ec_word GET
-	ec_word HOW
-	ec_word I
-	ec_word LOST
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LOST
 	.4byte gBattleFrontierTrainerMons_Salma
 
 @ 171
 	.4byte TRAINER_CLASS_LADY
 	.string "ANSLEY$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word BORED
-	ec_word ELLIPSIS
-	ec_word DANCE
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_BORED
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_DANCE
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 @ win speech
-	ec_word YOU_VE
-	ec_word BORED
-	ec_word ME
-	ec_word SOME
-	ec_word MORE
+	.2byte EC_WORD_YOU_VE
+	.2byte EC_WORD_BORED
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_SOME
+	.2byte EC_WORD_MORE
 	.2byte -1
 @ loss speech
-	ec_word TAKE
-	ec_word YOUR
-	ec_move2 FRUSTRATION
-	ec_word SOME
-	ec_word OTHER
-	ec_word PLACE
+	.2byte EC_WORD_TAKE
+	.2byte EC_WORD_YOUR
+	.2byte EC_MOVE2(FRUSTRATION)
+	.2byte EC_WORD_SOME
+	.2byte EC_WORD_OTHER
+	.2byte EC_WORD_PLACE
 	.4byte gBattleFrontierTrainerMons_Ansley
 
 @ 172
 	.4byte TRAINER_CLASS_BUG_CATCHER
 	.string "HOLDEN$", 8
 @ pre-battle speech
-	ec_word LET_S
-	ec_word COMMEMORATE
-	ec_word MY
-	ec_word COOLNESS
-	ec_word IN
-	ec_word BATTLE
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_COMMEMORATE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_COOLNESS
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_BATTLE
 @ win speech
-	ec_word YOU_RE
-	ec_word TOO_WEAK
-	ec_word FOR
-	ec_word ANY
-	ec_word PRAISE
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_TOO_WEAK
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ANY
+	.2byte EC_WORD_PRAISE
 	.2byte -1
 @ loss speech
-	ec_word YOUR
-	ec_word BATTLE
-	ec_word SENSE
-	ec_word IS
-	ec_word AMUSING
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_SENSE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_AMUSING
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Holden
 
@@ -4502,103 +4502,103 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_BUG_CATCHER
 	.string "LUCA$", 8
 @ pre-battle speech
-	ec_word WE
-	ec_word WILL
-	ec_word HAVE
-	ec_word A
-	ec_word COOL
-	ec_word BATTLE
+	.2byte EC_WORD_WE
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_BATTLE
 @ win speech
-	ec_word I
-	ec_word WON
-	ec_word IN
-	ec_word A
-	ec_word COOL
-	ec_word WAY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_A
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_WAY
 @ loss speech
-	ec_word HELLO
-	ec_word QUES
-	ec_word I_AM
-	ec_word JUST
-	ec_word A
-	ec_word KID
+	.2byte EC_WORD_HELLO
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_JUST
+	.2byte EC_WORD_A
+	.2byte EC_WORD_KID
 	.4byte gBattleFrontierTrainerMons_Luca
 
 @ 174
 	.4byte TRAINER_CLASS_NINJA_BOY
 	.string "JAMISON$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_move2 SECRET_POWER
-	ec_word IS
-	ec_word OVERWHELMING
-	ec_word TO
-	ec_word POKEMON
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(SECRET_POWER)
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_OVERWHELMING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word DID
-	ec_word YOU
-	ec_word SEE
-	ec_word THAT
-	ec_word QUES
+	.2byte EC_WORD_DID
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ loss speech
-	ec_word I
-	ec_word WILL
-	ec_word USE
-	ec_move1 SMOKESCREEN
-	ec_word TO
-	ec_word ESCAPE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_USE
+	.2byte EC_MOVE(SMOKESCREEN)
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_ESCAPE
 	.4byte gBattleFrontierTrainerMons_Jamison
 
 @ 175
 	.4byte TRAINER_CLASS_NINJA_BOY
 	.string "GUNNAR$", 8
 @ pre-battle speech
-	ec_word I
-	ec_move1 CUT
-	ec_word DOWN
-	ec_word EVERY
-	ec_word OPPONENT
+	.2byte EC_WORD_I
+	.2byte EC_MOVE(CUT)
+	.2byte EC_WORD_DOWN
+	.2byte EC_WORD_EVERY
+	.2byte EC_WORD_OPPONENT
 	.2byte -1
 @ win speech
-	ec_word DON_T
-	ec_move1 GRUDGE
-	ec_word ME
-	ec_word FOR
-	ec_word YOUR
-	ec_word LOSS
+	.2byte EC_WORD_DON_T
+	.2byte EC_MOVE(GRUDGE)
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_LOSS
 @ loss speech
-	ec_word PLEASE
-	ec_word LOSE
-	ec_word THAT
-	ec_move1 SCARY_FACE
-	ec_word OF
-	ec_word YOURS
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_LOSE
+	.2byte EC_WORD_THAT
+	.2byte EC_MOVE(SCARY_FACE)
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_YOURS
 	.4byte gBattleFrontierTrainerMons_Gunnar
 
 @ 176
 	.4byte TRAINER_CLASS_TUBER_2
 	.string "CRAIG$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word CAN_T
-	ec_word WAIT
-	ec_word FOR
-	ec_word MY
-	ec_word TRAIN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_WAIT
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_TRAIN
 @ win speech
-	ec_word MY
-	ec_word TRAIN
-	ec_word ISN_T
-	ec_word HERE
-	ec_word YET
-	ec_word ELLIPSIS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_TRAIN
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_HERE
+	.2byte EC_WORD_YET
+	.2byte EC_WORD_ELLIPSIS
 @ loss speech
-	ec_word HERE_IT_IS
-	ec_word MY
-	ec_word TRAIN
-	ec_word SEE_YA
-	ec_word EXCL
+	.2byte EC_WORD_HERE_IT_IS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_TRAIN
+	.2byte EC_WORD_SEE_YA
+	.2byte EC_WORD_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Craig
 
@@ -4606,25 +4606,25 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_TUBER_2
 	.string "PIERCE$", 8
 @ pre-battle speech
-	ec_word THERE
-	ec_word WAS
-	ec_word A
-	ec_move2 HEAT_WAVE
-	ec_word LAST
-	ec_word WEEK
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(HEAT_WAVE)
+	.2byte EC_WORD_LAST
+	.2byte EC_WORD_WEEK
 @ win speech
-	ec_word I
-	ec_word CAN_T
-	ec_word TAKE
-	ec_word A
-	ec_move2 HEAT_WAVE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_TAKE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(HEAT_WAVE)
 	.2byte -1
 @ loss speech
-	ec_word DIDN_T
-	ec_word IT
-	ec_move1 HAIL
-	ec_word TOO
-	ec_word QUES
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_IT
+	.2byte EC_MOVE(HAIL)
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_QUES
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Pierce
 
@@ -4632,155 +4632,155 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_TUBER_1
 	.string "REGINA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word LIKE
-	ec_word TO
-	ec_word PLAY
-	ec_word IN
-	ec_word WATER
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_PLAY
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_WATER
 @ win speech
-	ec_word I
-	ec_word REFUSE
-	ec_word TO
-	ec_word COME
-	ec_word OUT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_REFUSE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_COME
+	.2byte EC_WORD_OUT
 	.2byte -1
 @ loss speech
-	ec_word YOU_RE
-	ec_word NOT
-	ec_word MUCH
-	ec_word GOOD
-	ec_word IN
-	ec_word WATER
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_MUCH
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_WATER
 	.4byte gBattleFrontierTrainerMons_Regina
 
 @ 179
 	.4byte TRAINER_CLASS_TUBER_1
 	.string "ALISON$", 8
 @ pre-battle speech
-	ec_word THIS
-	ec_word KINDERGARTEN
-	ec_word MAGAZINE
-	ec_word IS
-	ec_word TOO
-	ec_word MUCH
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_KINDERGARTEN
+	.2byte EC_WORD_MAGAZINE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_MUCH
 @ win speech
-	ec_word HOW
-	ec_word TO
-	ec_word BUG
-	ec_word YOUR
-	ec_word TEACHER
-	ec_word QUES
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_TEACHER
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word ENJOY
-	ec_word A
-	ec_word TASTY
-	ec_word SCHOOL
-	ec_word DIET
-	ec_word QUES
+	.2byte EC_WORD_ENJOY
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TASTY
+	.2byte EC_WORD_SCHOOL
+	.2byte EC_WORD_DIET
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Alison
 
 @ 180
 	.4byte TRAINER_CLASS_BUG_MANIAC
 	.string "HANK$", 8
 @ pre-battle speech
-	ec_word THERE
-	ec_word IS
-	ec_word A
-	ec_word BUG
-	ec_word EVENT
-	ec_word SOON
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_EVENT
+	.2byte EC_WORD_SOON
 @ win speech
-	ec_word IT_S
-	ec_word A
-	ec_word BUG
-	ec_word FASHION
-	ec_word SHOW
-	ec_word EXCL
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_FASHION
+	.2byte EC_WORD_SHOW
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word DON_T
-	ec_word YOU
-	ec_word LIKE
-	ec_word BUG
-	ec_word POKEMON
-	ec_word QUES
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Hank
 
 @ 181
 	.4byte TRAINER_CLASS_BUG_MANIAC
 	.string "EARL$", 8
 @ pre-battle speech
-	ec_word THE
-	ec_word INVINCIBLE
-	ec_word BUG
-	ec_word TRAINER
-	ec_word IS
-	ec_word HERE
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_INVINCIBLE
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_HERE
 @ win speech
-	ec_word THE
-	ec_word INVINCIBLE
-	ec_word BUG
-	ec_word TRAINER
-	ec_word AM
-	ec_word I
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_INVINCIBLE
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_AM
+	.2byte EC_WORD_I
 @ loss speech
-	ec_word SEE
-	ec_word HOW
-	ec_word FAST
-	ec_word I
-	ec_word RUN_AWAY
-	ec_word EXCL
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_FAST
+	.2byte EC_WORD_I
+	.2byte EC_WORD_RUN_AWAY
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Earl
 
 @ 182
 	.4byte TRAINER_CLASS_FISHERMAN
 	.string "RAMIRO$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WENT
-	ec_word TO
-	ec_word A
-	ec_word FISHING
-	ec_word SCHOOL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WENT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_A
+	.2byte EC_WORD_FISHING
+	.2byte EC_WORD_SCHOOL
 @ win speech
-	ec_word SERIOUSLY
-	ec_word I_AM
-	ec_word IN
-	ec_word THE
-	ec_word FISHING
-	ec_word HALL_OF_FAME
+	.2byte EC_WORD_SERIOUSLY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_FISHING
+	.2byte EC_WORD_HALL_OF_FAME
 @ loss speech
-	ec_word I
-	ec_word WANT
-	ec_word TO
-	ec_word GO
-	ec_word BACK
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_BACK
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Ramiro
 
 @ 183
 	.4byte TRAINER_CLASS_FISHERMAN
 	.string "HUNTER$", 8
 @ pre-battle speech
-	ec_word SHOW
-	ec_word ME
-	ec_word A
-	ec_word TOTALLY
-	ec_word COOL
-	ec_move1 CROSS_CHOP
+	.2byte EC_WORD_SHOW
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TOTALLY
+	.2byte EC_WORD_COOL
+	.2byte EC_MOVE(CROSS_CHOP)
 @ win speech
-	ec_word YOU_RE
-	ec_word TOO_WEAK
-	ec_word TO
-	ec_word DO
-	ec_word A
-	ec_move1 CROSS_CHOP
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_TOO_WEAK
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(CROSS_CHOP)
 @ loss speech
-	ec_word WAS
-	ec_word IT
-	ec_word A
-	ec_word MISTAKE
-	ec_word QUES
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_MISTAKE
+	.2byte EC_WORD_QUES
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Hunter
 
@@ -4788,103 +4788,103 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_RUIN_MANIAC
 	.string "AIDEN$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word WORK
-	ec_word IS
-	ec_word MAKING
-	ec_word ME
-	ec_word HEALTHY
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_WORK
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_MAKING
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_HEALTHY
 @ win speech
-	ec_word YOU
-	ec_word SEE
-	ec_word QUES
-	ec_word I_AM
-	ec_word HEALTHY
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_HEALTHY
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word YOU_RE
-	ec_word MORE
-	ec_word HEALTHY
-	ec_word THAN
-	ec_word I_AM
-	ec_word ELLIPSIS
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_HEALTHY
+	.2byte EC_WORD_THAN
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Aiden
 
 @ 185
 	.4byte TRAINER_CLASS_RUIN_MANIAC
 	.string "XAVIER$", 8
 @ pre-battle speech
-	ec_word HEY_THERE
-	ec_word EXCL
+	.2byte EC_WORD_HEY_THERE
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word LOOK
-	ec_word LOOK
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_EXCL_EXCL
 @ win speech
-	ec_word GOOD_BYE
-	ec_word AND
-	ec_word THANK_YOU
-	ec_word THAT_WAS
-	ec_word FUNNY
+	.2byte EC_WORD_GOOD_BYE
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_FUNNY
 	.2byte -1
 @ loss speech
-	ec_word WOWEE
-	ec_word EXCL
+	.2byte EC_WORD_WOWEE
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word NO
-	ec_word NO
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_EXCL_EXCL
 	.4byte gBattleFrontierTrainerMons_Xavier
 
 @ 186
 	.4byte TRAINER_CLASS_COLLECTOR
 	.string "CLINTON$", 8
 @ pre-battle speech
-	ec_word WANT
-	ec_word TO
-	ec_word SEE
-	ec_word MY
-	ec_move1 HYPNOSIS
-	ec_word QUES
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE(HYPNOSIS)
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word YOUR
-	ec_move2 FURY_SWIPES
-	ec_word YOUR
-	ec_move1 STRENGTH
-	ec_word YOUNG
-	ec_word TRAINER
+	.2byte EC_WORD_YOUR
+	.2byte EC_MOVE2(FURY_SWIPES)
+	.2byte EC_WORD_YOUR
+	.2byte EC_MOVE(STRENGTH)
+	.2byte EC_WORD_YOUNG
+	.2byte EC_WORD_TRAINER
 @ loss speech
-	ec_word TCH
-	ec_word ELLIPSIS
+	.2byte EC_WORD_TCH
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
-	ec_word I_AM
-	ec_word TOO_WEAK
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TOO_WEAK
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Clinton
 
 @ 187
 	.4byte TRAINER_CLASS_COLLECTOR
 	.string "JESSE$", 8
 @ pre-battle speech
-	ec_word THIS
-	ec_word BATTLE
-	ec_word IS
-	ec_word FOR
-	ec_word MY
-	ec_word MOTHER
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_MOTHER
 @ win speech
-	ec_word MOTHER
-	ec_word WILL
-	ec_word BE
-	ec_word HAPPY
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_MOTHER
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 @ loss speech
-	ec_word I
-	ec_word WANT
-	ec_word MY
-	ec_word MOTHER
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_MOTHER
+	.2byte EC_WORD_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Jesse
 
@@ -4892,77 +4892,77 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_GUITARIST
 	.string "EDUARDO$", 8
 @ pre-battle speech
-	ec_word OUR
-	ec_word MUSIC
-	ec_word WILL
-	ec_word PLAY
-	ec_word ALL
-	ec_word NIGHT
+	.2byte EC_WORD_OUR
+	.2byte EC_WORD_MUSIC
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_PLAY
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_NIGHT
 @ win speech
-	ec_word NIGHTTIME
-	ec_word IS
-	ec_word WHEN
-	ec_word I
-	ec_word PLAY
-	ec_word BEST
+	.2byte EC_WORD_NIGHTTIME
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_WHEN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_PLAY
+	.2byte EC_WORD_BEST
 @ loss speech
-	ec_word LET_S
-	ec_word PARTY
-	ec_word UNTIL
-	ec_word THE
-	ec_move1 MORNING_SUN
-	ec_word EXCL
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_PARTY
+	.2byte EC_WORD_UNTIL
+	.2byte EC_WORD_THE
+	.2byte EC_MOVE(MORNING_SUN)
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Eduardo
 
 @ 189
 	.4byte TRAINER_CLASS_GUITARIST
 	.string "HAL$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word TRENDY
-	ec_word AREN_T
-	ec_word I
-	ec_word QUES
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TRENDY
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_I
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ win speech
-	ec_word I_AM
-	ec_word FEELING
-	ec_word HIP_AND
-	ec_word HAPPENING
-	ec_word OH_YEAH
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_HIP_AND
+	.2byte EC_WORD_HAPPENING
+	.2byte EC_WORD_OH_YEAH
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I_AM
-	ec_word ALWAYS
-	ec_word TRENDY
-	ec_word THANK_YOU
-	ec_word VERY
-	ec_word MUCH
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_ALWAYS
+	.2byte EC_WORD_TRENDY
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_VERY
+	.2byte EC_WORD_MUCH
 	.4byte gBattleFrontierTrainerMons_Hal
 
 @ 190
 	.4byte TRAINER_CLASS_BIRD_KEEPER
 	.string "GAGE$", 8
 @ pre-battle speech
-	ec_word HERE_IT_IS
-	ec_word A
-	ec_word FLYING
-	ec_word TYPE
-	ec_word HIDDEN
-	ec_word MOVE
+	.2byte EC_WORD_HERE_IT_IS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_FLYING
+	.2byte EC_WORD_TYPE
+	.2byte EC_WORD_HIDDEN
+	.2byte EC_WORD_MOVE
 @ win speech
-	ec_word IT_S
-	ec_word A
-	ec_word FLYING
-	ec_word TYPE
-	ec_word VICTORY
-	ec_word EXCL
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_A
+	.2byte EC_WORD_FLYING
+	.2byte EC_WORD_TYPE
+	.2byte EC_WORD_VICTORY
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word IF_I_LOSE
-	ec_word I
-	ec_word JUST
-	ec_move1 FLY
-	ec_word AWAY
+	.2byte EC_WORD_IF_I_LOSE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_JUST
+	.2byte EC_MOVE(FLY)
+	.2byte EC_WORD_AWAY
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Gage
 
@@ -4970,181 +4970,181 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_BIRD_KEEPER
 	.string "ARNOLD$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word FEELING
-	ec_word WEIRD
-	ec_word FROM
-	ec_word A
-	ec_word DREAM
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_WEIRD
+	.2byte EC_WORD_FROM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_DREAM
 @ win speech
-	ec_word YOUR
-	ec_move1 SCARY_FACE
-	ec_word WAS
-	ec_word IN
-	ec_word MY
-	ec_word DREAM
+	.2byte EC_WORD_YOUR
+	.2byte EC_MOVE(SCARY_FACE)
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_DREAM
 @ loss speech
-	ec_word MY
-	ec_word INCREDIBLE
-	ec_word DREAM
-	ec_word WAS
-	ec_word SO
-	ec_word WEIRD
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_INCREDIBLE
+	.2byte EC_WORD_DREAM
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_WEIRD
 	.4byte gBattleFrontierTrainerMons_Arnold
 
 @ 192
 	.4byte TRAINER_CLASS_SAILOR
 	.string "JARRETT$", 8
 @ pre-battle speech
-	ec_word COME_ON
-	ec_word LET_S
-	ec_word DANCE
-	ec_word LIKE
-	ec_word IT_S
-	ec_word YESTERDAY
+	.2byte EC_WORD_COME_ON
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_DANCE
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_YESTERDAY
 @ win speech
-	ec_word YOU
-	ec_word LIKE
-	ec_word HOW
-	ec_word I
-	ec_word DANCE
-	ec_word QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DANCE
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word YOU
-	ec_word DON_T
-	ec_word APPRECIATE
-	ec_word HOW
-	ec_word I
-	ec_word DANCE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_APPRECIATE
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DANCE
 	.4byte gBattleFrontierTrainerMons_Jarrett
 
 @ 193
 	.4byte TRAINER_CLASS_SAILOR
 	.string "GARETT$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word GIRL
-	ec_word GIVES
-	ec_word ME
-	ec_word A_LITTLE
-	ec_move2 SWEET_KISS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_GIRL
+	.2byte EC_WORD_GIVES
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_A_LITTLE
+	.2byte EC_MOVE2(SWEET_KISS)
 @ win speech
-	ec_word MY
-	ec_word GIRL
-	ec_word FRIEND
-	ec_word IS
-	ec_word MY
-	ec_word TREASURE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_GIRL
+	.2byte EC_WORD_FRIEND
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_TREASURE
 @ loss speech
-	ec_word A
-	ec_word TREASURE
-	ec_word ISN_T
-	ec_word ALWAYS
-	ec_word ABOUT
-	ec_word MONEY
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TREASURE
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_ALWAYS
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_MONEY
 	.4byte gBattleFrontierTrainerMons_Garett
 
 @ 194
 	.4byte TRAINER_CLASS_HIKER
 	.string "EMANUEL$", 8
 @ pre-battle speech
-	ec_word SMARTNESS
-	ec_word ALONE
-	ec_word WON_T
-	ec_word MAKE
-	ec_word YOU
-	ec_word WIN
+	.2byte EC_WORD_SMARTNESS
+	.2byte EC_WORD_ALONE
+	.2byte EC_WORD_WON_T
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WIN
 @ win speech
-	ec_word I_AM
-	ec_word NOT_VERY
-	ec_word SMART
-	ec_word BUT
-	ec_word I
-	ec_word WON
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NOT_VERY
+	.2byte EC_WORD_SMART
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON
 @ loss speech
-	ec_word HOW
-	ec_word DID
-	ec_word YOU
-	ec_move2 FAKE_OUT
-	ec_word ME
-	ec_word QUES
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_DID
+	.2byte EC_WORD_YOU
+	.2byte EC_MOVE2(FAKE_OUT)
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Emanuel
 
 @ 195
 	.4byte TRAINER_CLASS_HIKER
 	.string "GUSTAVO$", 8
 @ pre-battle speech
-	ec_move1 CHARGE
-	ec_word EXCL
+	.2byte EC_MOVE(CHARGE)
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_move1 CHARGE
-	ec_word EXCL_EXCL
+	.2byte EC_MOVE(CHARGE)
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 @ win speech
-	ec_word SURRENDER
-	ec_word QUES
+	.2byte EC_WORD_SURRENDER
+	.2byte EC_WORD_QUES
 	.2byte -1
-	ec_word SO
-	ec_word SOON
-	ec_word QUES
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_SOON
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word YOU
-	ec_word CAN_T
-	ec_word MAKE
-	ec_word ME
-	ec_word SURRENDER
-	ec_word YET
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_SURRENDER
+	.2byte EC_WORD_YET
 	.4byte gBattleFrontierTrainerMons_Gustavo
 
 @ 196
 	.4byte TRAINER_CLASS_KINDLER
 	.string "KAMERON$", 8
 @ pre-battle speech
-	ec_word TAKE_THAT
-	ec_word EXCL
-	ec_word IT_S
-	ec_word MY
-	ec_word FIERY
-	ec_move2 TRICK
+	.2byte EC_WORD_TAKE_THAT
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_FIERY
+	.2byte EC_MOVE2(TRICK)
 @ win speech
-	ec_word DID
-	ec_word MY
-	ec_word FIERY
-	ec_move2 TRICK
-	ec_move1 ASTONISH
-	ec_word QUES
+	.2byte EC_WORD_DID
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_FIERY
+	.2byte EC_MOVE2(TRICK)
+	.2byte EC_MOVE(ASTONISH)
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word YOU
-	ec_word DIDN_T
-	ec_word FALL
-	ec_word FOR
-	ec_word MY
-	ec_move2 TRICK
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_FALL
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(TRICK)
 	.4byte gBattleFrontierTrainerMons_Kameron
 
 @ 197
 	.4byte TRAINER_CLASS_KINDLER
 	.string "ALFREDO$", 8
 @ pre-battle speech
-	ec_word A
-	ec_word FIERY
-	ec_word GOURMET
-	ec_word AM
-	ec_word I
-	ec_word EXCL
+	.2byte EC_WORD_A
+	.2byte EC_WORD_FIERY
+	.2byte EC_WORD_GOURMET
+	.2byte EC_WORD_AM
+	.2byte EC_WORD_I
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word IT_S
-	ec_word A
-	ec_word TASTY
-	ec_word GOURMET
-	ec_word VICTORY
-	ec_word EXCL
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TASTY
+	.2byte EC_WORD_GOURMET
+	.2byte EC_WORD_VICTORY
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word WHAT
-	ec_word A
-	ec_word DISASTER
-	ec_word THAT_WAS
-	ec_word EXCL
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_DISASTER
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Alfredo
 
@@ -5152,25 +5152,25 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_GENTLEMAN
 	.string "RUBEN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word CAN_T
-	ec_word WAIT
-	ec_word TO
-	ec_word GET
-	ec_word GOING
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_WAIT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_GOING
 @ win speech
-	ec_word GET
-	ec_word GOING
-	ec_word EXCL
-	ec_word THIS
-	ec_word IS
-	ec_word GOOD_BYE
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_GOOD_BYE
 @ loss speech
-	ec_word I_VE
-	ec_word GOT
-	ec_word TO
-	ec_word GET
-	ec_word GOING
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_GOT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_GOING
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Ruben
 
@@ -5178,25 +5178,25 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_GENTLEMAN
 	.string "LAMAR$", 8
 @ pre-battle speech
-	ec_word A
-	ec_move2 PRESENT
-	ec_word FOR
-	ec_word ME
-	ec_word QUES
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(PRESENT)
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ win speech
-	ec_word MMM
-	ec_word THIS
-	ec_word IS
-	ec_word QUITE
-	ec_word TASTY
-	ec_word ELLIPSIS
+	.2byte EC_WORD_MMM
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_QUITE
+	.2byte EC_WORD_TASTY
+	.2byte EC_WORD_ELLIPSIS
 @ loss speech
-	ec_word OH
-	ec_word IT_S
-	ec_word A
-	ec_word GAME
-	ec_word IS_IT_QUES
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GAME
+	.2byte EC_WORD_IS_IT_QUES
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Lamar
 
@@ -5204,155 +5204,155 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_YOUNGSTER
 	.string "JAXON$", 8
 @ pre-battle speech
-	ec_word A
-	ec_word SHELL_ARMOR
-	ec_word IS
-	ec_word WHAT
-	ec_word I
-	ec_word WANT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_SHELL_ARMOR
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WANT
 @ win speech
-	ec_word MY
-	ec_word FATHER
-	ec_word AND
-	ec_word MOTHER
-	ec_word WON_T
-	ec_word ACCEPT
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_FATHER
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_MOTHER
+	.2byte EC_WORD_WON_T
+	.2byte EC_WORD_ACCEPT
 @ loss speech
-	ec_word PLEASE
-	ec_word I
-	ec_word NEED
-	ec_word A
-	ec_word SHELL_ARMOR
-	ec_word EXCL
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_A
+	.2byte EC_WORD_SHELL_ARMOR
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Jaxon
 
 @ 201
 	.4byte TRAINER_CLASS_YOUNGSTER
 	.string "LOGAN$", 8
 @ pre-battle speech
-	ec_word IF_I_LOSE
-	ec_word I
-	ec_word WILL
-	ec_word STUDY
-	ec_word FOR
-	ec_word SCHOOL
+	.2byte EC_WORD_IF_I_LOSE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_STUDY
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_SCHOOL
 @ win speech
-	ec_word ME
-	ec_word STUDY
-	ec_word QUES
-	ec_word NOT_VERY
-	ec_word LIKELY_TO
-	ec_word SEE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_STUDY
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_NOT_VERY
+	.2byte EC_WORD_LIKELY_TO
+	.2byte EC_WORD_SEE
 @ loss speech
-	ec_word NO
-	ec_word THANKS
-	ec_word I_AM
-	ec_word GOING
-	ec_word TO
-	ec_word SLEEP
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_THANKS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SLEEP
 	.4byte gBattleFrontierTrainerMons_Logan
 
 @ 202
 	.4byte TRAINER_CLASS_LASS
 	.string "EMILEE$", 8
 @ pre-battle speech
-	ec_word IS
-	ec_word THIS
-	ec_word KIND
-	ec_word OF
-	ec_word BATTLE
-	ec_word OK_QUES
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_KIND
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_OK_QUES
 @ win speech
-	ec_word LET_S
-	ec_word GO
-	ec_word FOR
-	ec_word AN
-	ec_move1 ICY_WIND
-	ec_move2 SURF
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_AN
+	.2byte EC_MOVE(ICY_WIND)
+	.2byte EC_MOVE2(SURF)
 @ loss speech
-	ec_word HOW
-	ec_word ABOUT
-	ec_word A
-	ec_move1 ROCK_SLIDE
-	ec_word SHOW
-	ec_word QUES
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(ROCK_SLIDE)
+	.2byte EC_WORD_SHOW
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Emilee
 
 @ 203
 	.4byte TRAINER_CLASS_LASS
 	.string "JOSIE$", 8
 @ pre-battle speech
-	ec_word A
-	ec_word POKEMON
-	ec_word FASHION
-	ec_word CONTEST
-	ec_word IS
-	ec_word PRETTY
+	.2byte EC_WORD_A
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_FASHION
+	.2byte EC_WORD_CONTEST
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_PRETTY
 @ win speech
-	ec_word I
-	ec_word REALLY
-	ec_word LIKE
-	ec_word MODE
-	ec_word FASHION
-	ec_word THINGS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_MODE
+	.2byte EC_WORD_FASHION
+	.2byte EC_WORD_THINGS
 @ loss speech
-	ec_word YOU_RE
-	ec_word TOTALLY
-	ec_word LACKING
-	ec_word IN
-	ec_word FASHION
-	ec_word SENSE
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_TOTALLY
+	.2byte EC_WORD_LACKING
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_FASHION
+	.2byte EC_WORD_SENSE
 	.4byte gBattleFrontierTrainerMons_Josie
 
 @ 204
 	.4byte TRAINER_CLASS_CAMPER
 	.string "ARMANDO$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word NEED
-	ec_word MORE
-	ec_word GRASS
-	ec_word TYPE
-	ec_word POKEMON
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_GRASS
+	.2byte EC_WORD_TYPE
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word TRADE
-	ec_word ME
-	ec_word A
-	ec_word GRASS
-	ec_word POKEMON
-	ec_word PLEASE
+	.2byte EC_WORD_TRADE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GRASS
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_PLEASE
 @ loss speech
-	ec_word THERE
-	ec_word AREN_T
-	ec_word ENOUGH
-	ec_word GRASS
-	ec_word TYPE
-	ec_word POKEMON
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_ENOUGH
+	.2byte EC_WORD_GRASS
+	.2byte EC_WORD_TYPE
+	.2byte EC_WORD_POKEMON
 	.4byte gBattleFrontierTrainerMons_Armando
 
 @ 205
 	.4byte TRAINER_CLASS_CAMPER
 	.string "SKYLER$", 8
 @ pre-battle speech
-	ec_move2 INGRAIN
-	ec_word IS
-	ec_word MY
-	ec_word CHOICE
-	ec_word BATTLE
-	ec_word MOVE
+	.2byte EC_MOVE2(INGRAIN)
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_CHOICE
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_MOVE
 @ win speech
-	ec_word YOU
-	ec_word CAN_T
-	ec_word MOVE
-	ec_word ME
-	ec_word NOW
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_MOVE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_NOW
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word YOU
-	ec_move1 CUT
-	ec_word ME
-	ec_word DOWN
-	ec_word ELLIPSIS
+	.2byte EC_WORD_YOU
+	.2byte EC_MOVE(CUT)
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_DOWN
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Skyler
 
@@ -5360,154 +5360,154 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_PICNICKER
 	.string "RUTH$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WANT
-	ec_word TO
-	ec_word ENJOY
-	ec_word THIS
-	ec_word BATTLE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_ENJOY
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_BATTLE
 @ win speech
-	ec_word THAT_WAS
-	ec_word MUCH
-	ec_word TOO
-	ec_word EASY
-	ec_word EXCL
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_MUCH
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_EASY
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word PLEASE
-	ec_word STOP
-	ec_word I
-	ec_word DON_T
-	ec_word ENJOY
-	ec_word THIS
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_STOP
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_ENJOY
+	.2byte EC_WORD_THIS
 	.4byte gBattleFrontierTrainerMons_Ruth
 
 @ 207
 	.4byte TRAINER_CLASS_PICNICKER
 	.string "MELODY$", 8
 @ pre-battle speech
-	ec_word I
-	ec_move2 WISH
-	ec_word SUNDAY
-	ec_word IS
-	ec_word A
-	ec_move2 SUNNY_DAY
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(WISH)
+	.2byte EC_WORD_SUNDAY
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(SUNNY_DAY)
 @ win speech
-	ec_word SUNDAY
-	ec_word SEEMS
-	ec_word FOREVER
-	ec_word TO
-	ec_word COME
-	ec_word ELLIPSIS
+	.2byte EC_WORD_SUNDAY
+	.2byte EC_WORD_SEEMS
+	.2byte EC_WORD_FOREVER
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_COME
+	.2byte EC_WORD_ELLIPSIS
 @ loss speech
-	ec_word THE
-	ec_word FORECAST
-	ec_word SAYS
-	ec_word IT
-	ec_word WILL
-	ec_move1 HAIL
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_FORECAST
+	.2byte EC_WORD_SAYS
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_WILL
+	.2byte EC_MOVE(HAIL)
 	.4byte gBattleFrontierTrainerMons_Melody
 
 @ 208
 	.4byte TRAINER_CLASS_SWIMMER_M
 	.string "PEDRO$", 8
 @ pre-battle speech
-	ec_word A
-	ec_word SWIFT_SWIM
-	ec_word WILL
-	ec_word DO
-	ec_word YOU
-	ec_word GOOD
+	.2byte EC_WORD_A
+	.2byte EC_WORD_SWIFT_SWIM
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_GOOD
 @ win speech
-	ec_word THAT_S
-	ec_word HOW
-	ec_word I
-	ec_word SINK
-	ec_word AN
-	ec_word OPPONENT
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SINK
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_OPPONENT
 @ loss speech
-	ec_word UH_OH
-	ec_word EXCL
+	.2byte EC_WORD_UH_OH
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word A
-	ec_move1 WHIRLPOOL
-	ec_word EXCL
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(WHIRLPOOL)
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Pedro
 
 @ 209
 	.4byte TRAINER_CLASS_SWIMMER_M
 	.string "ERICK$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WILL
-	ec_move2 TACKLE
-	ec_word YOU
-	ec_word DOWN
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_MOVE2(TACKLE)
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DOWN
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word DON_T
-	ec_word YOU
-	ec_word RUN_AWAY
-	ec_word YOU
-	ec_word LOSER
-	ec_word EXCL
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_RUN_AWAY
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_LOSER
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I
-	ec_word DIDN_T
-	ec_word THINK
-	ec_word YOU
-	ec_word WOULD
-	ec_move1 COUNTER
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_THINK
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WOULD
+	.2byte EC_MOVE(COUNTER)
 	.4byte gBattleFrontierTrainerMons_Erick
 
 @ 210
 	.4byte TRAINER_CLASS_SWIMMER_F
 	.string "ELAINE$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word HEROINE
-	ec_word ADVENTURE
-	ec_word ISN_T
-	ec_word GOING
-	ec_word WELL
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_HEROINE
+	.2byte EC_WORD_ADVENTURE
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_WELL
 @ win speech
-	ec_word THANK_YOU
-	ec_word EXCL
-	ec_word THAT_S
-	ec_word WHAT
-	ec_word I
-	ec_word NEED
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
 @ loss speech
-	ec_word I
-	ec_word KNOW
-	ec_word I_AM
-	ec_word NOT
-	ec_word A
-	ec_word HEROINE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_HEROINE
 	.4byte gBattleFrontierTrainerMons_Elaine
 
 @ 211
 	.4byte TRAINER_CLASS_SWIMMER_F
 	.string "JOYCE$", 8
 @ pre-battle speech
-	ec_word YOU
-	ec_word MAKE
-	ec_word ME
-	ec_word GO
-	ec_word AHAHA
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_AHAHA
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word LALALA
-	ec_word NO
-	ec_word LOSING
-	ec_word FOR
-	ec_word ME
-	ec_word EXCL
+	.2byte EC_WORD_LALALA
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_LOSING
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word LALALA
-	ec_word ELLIPSIS
+	.2byte EC_WORD_LALALA
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
-	ec_word HUH_QUES
+	.2byte EC_WORD_HUH_QUES
 	.2byte -1
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Joyce
@@ -5516,129 +5516,129 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_POKEFAN_1
 	.string "TODD$", 8
 @ pre-battle speech
-	ec_word YOU_RE
-	ec_word A
-	ec_word LIGHTNINGROD
-	ec_word FOR
-	ec_word MY
-	ec_word POWER
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_LIGHTNINGROD
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POWER
 @ win speech
-	ec_word THAT_S
-	ec_word ALL
-	ec_word YOU
-	ec_word COULD
-	ec_move1 ABSORB
-	ec_word QUES
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_COULD
+	.2byte EC_MOVE(ABSORB)
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word YOU
-	ec_move2 REFLECT
-	ec_word MY
-	ec_word POWER
-	ec_word BACK
-	ec_word QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_MOVE2(REFLECT)
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POWER
+	.2byte EC_WORD_BACK
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Todd
 
 @ 213
 	.4byte TRAINER_CLASS_POKEFAN_1
 	.string "GAVIN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WILL
-	ec_move1 BIDE
-	ec_word MY
-	ec_word TIME
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_MOVE(BIDE)
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_TIME
 	.2byte -1
 @ win speech
-	ec_word IT_S
-	ec_word OVER
-	ec_word SO
-	ec_word SOON
-	ec_word QUES
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_OVER
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_SOON
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ loss speech
-	ec_word MY
-	ec_word MISTAKE
-	ec_word WAS
-	ec_word TOO
-	ec_word EXPENSIVE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_MISTAKE
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_EXPENSIVE
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Gavin
 
 @ 214
 	.4byte TRAINER_CLASS_POKEFAN_2
 	.string "MALORY$", 8
 @ pre-battle speech
-	ec_word PROMISE
-	ec_word TO
-	ec_word SHOW
-	ec_word ME
-	ec_word CUTE
-	ec_word POKEMON
+	.2byte EC_WORD_PROMISE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SHOW
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_CUTE
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word GIGGLE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_GIGGLE
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
-	ec_word THANK_YOU
-	ec_word SO
-	ec_word MUCH
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_MUCH
 @ loss speech
-	ec_word TCH
-	ec_word YOUR
-	ec_word POKEMON
-	ec_word AREN_T
-	ec_word VERY
-	ec_word NICE
+	.2byte EC_WORD_TCH
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_VERY
+	.2byte EC_WORD_NICE
 	.4byte gBattleFrontierTrainerMons_Malory
 
 @ 215
 	.4byte TRAINER_CLASS_POKEFAN_2
 	.string "ESTHER$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WANT
-	ec_word A
-	ec_word NICE
-	ec_move2 PRESENT
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_NICE
+	.2byte EC_MOVE2(PRESENT)
+	.2byte EC_WORD_ELLIPSIS
 @ win speech
-	ec_word PLEASE
-	ec_word GET
-	ec_word ME
-	ec_word A
-	ec_word POKEMON
-	ec_word GAME
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_A
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_GAME
 @ loss speech
-	ec_word MESSAGE
-	ec_word CARDS
-	ec_word MAKE
-	ec_word A
-	ec_word WEAK
-	ec_move2 PRESENT
+	.2byte EC_WORD_MESSAGE
+	.2byte EC_WORD_CARDS
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_WEAK
+	.2byte EC_MOVE2(PRESENT)
 	.4byte gBattleFrontierTrainerMons_Esther
 
 @ 216
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
 	.string "OSCAR$", 8
 @ pre-battle speech
-	ec_word LET_S
-	ec_word SEE
-	ec_word YOUR
-	ec_word POWER
-	ec_word IN
-	ec_word FULL
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POWER
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_FULL
 @ win speech
-	ec_word THAT_WAS
-	ec_word NOT
-	ec_word YOUR
-	ec_word FULL
-	ec_word POWER
-	ec_word EXCL
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_FULL
+	.2byte EC_WORD_POWER
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word NOT
-	ec_word FUNNY
-	ec_word ELLIPSIS
-	ec_word YOU_RE
-	ec_word TOO_STRONG
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_FUNNY
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_TOO_STRONG
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Oscar
 
@@ -5646,129 +5646,129 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
 	.string "WILSON$", 8
 @ pre-battle speech
-	ec_word WORK
-	ec_word IS
-	ec_word MAKING
-	ec_word ME
-	ec_word AN
-	ec_word EARLY_BIRD
+	.2byte EC_WORD_WORK
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_MAKING
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_EARLY_BIRD
 @ win speech
-	ec_word ALL
-	ec_word WORK
-	ec_word AND
-	ec_word NO
-	ec_word PLAY
-	ec_word ELLIPSIS
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_WORK
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_PLAY
+	.2byte EC_WORD_ELLIPSIS
 @ loss speech
-	ec_move1 ENDURE
-	ec_word IS
-	ec_word ALL
-	ec_word I
-	ec_word CAN
-	ec_word DO
+	.2byte EC_MOVE(ENDURE)
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN
+	.2byte EC_WORD_DO
 	.4byte gBattleFrontierTrainerMons_Wilson
 
 @ 218
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
 	.string "CLARE$", 8
 @ pre-battle speech
-	ec_word YAY
-	ec_word EXCL
-	ec_word A
-	ec_word TOUGH
-	ec_word TRAINER
-	ec_word EXCL
+	.2byte EC_WORD_YAY
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TOUGH
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word AWW
-	ec_word EXCL
-	ec_word A
-	ec_word WIMPY
-	ec_word TRAINER
-	ec_word EXCL
+	.2byte EC_WORD_AWW
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_A
+	.2byte EC_WORD_WIMPY
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word COOL
-	ec_word EXCL
-	ec_word A
-	ec_word GENIUS
-	ec_word TRAINER
-	ec_word EXCL
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GENIUS
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Clare
 
 @ 219
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
 	.string "TESS$", 8
 @ pre-battle speech
-	ec_word WANT
-	ec_word SOME
-	ec_pokemon1 GULPIN
-	ec_word DESIGN
-	ec_word SWEETS
-	ec_word QUES
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_SOME
+	.2byte EC_POKEMON(GULPIN)
+	.2byte EC_WORD_DESIGN
+	.2byte EC_WORD_SWEETS
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word THEY_RE
-	ec_word A
-	ec_word SECRET
-	ec_word POKEMON
-	ec_word GOURMET
-	ec_word ITEM
+	.2byte EC_WORD_THEY_RE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_SECRET
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_GOURMET
+	.2byte EC_WORD_ITEM
 @ loss speech
-	ec_word THEY_RE
-	ec_word TASTY
-	ec_word EXCL
-	ec_word REFRESHING
-	ec_word TOO
-	ec_word EXCL
+	.2byte EC_WORD_THEY_RE
+	.2byte EC_WORD_TASTY
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_REFRESHING
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Tess
 
 @ 220
 	.4byte TRAINER_CLASS_COOLTRAINER_1
 	.string "LEON$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word BETTER
-	ec_word THAN
-	ec_word ANY
-	ec_word OTHER
-	ec_word TRAINER
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_BETTER
+	.2byte EC_WORD_THAN
+	.2byte EC_WORD_ANY
+	.2byte EC_WORD_OTHER
+	.2byte EC_WORD_TRAINER
 @ win speech
-	ec_word I
-	ec_word DID
-	ec_word IT
-	ec_move2 JUMP_KICK
-	ec_word FOR
-	ec_word JOY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DID
+	.2byte EC_WORD_IT
+	.2byte EC_MOVE2(JUMP_KICK)
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_JOY
 @ loss speech
-	ec_word BACK
-	ec_word HOME
-	ec_word I
-	ec_word WILL
-	ec_word GO
-	ec_word ELLIPSIS
+	.2byte EC_WORD_BACK
+	.2byte EC_WORD_HOME
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Leon
 
 @ 221
 	.4byte TRAINER_CLASS_COOLTRAINER_1
 	.string "ALONZO$", 8
 @ pre-battle speech
-	ec_word I_VE
-	ec_word NOT
-	ec_word LOST
-	ec_word ONCE
-	ec_word YET
-	ec_word EXCL
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_LOST
+	.2byte EC_WORD_ONCE
+	.2byte EC_WORD_YET
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word YOUR
-	ec_word SAD
-	ec_word LOOK
-	ec_word BECOMES
-	ec_word YOU
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_SAD
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_BECOMES
+	.2byte EC_WORD_YOU
 	.2byte -1
 @ loss speech
-	ec_word I
-	ec_word DON_T
-	ec_word BELIEVE
-	ec_word THIS
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_BELIEVE
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Alonzo
 
@@ -5776,363 +5776,363 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_COOLTRAINER_1
 	.string "VINCE$", 8
 @ pre-battle speech
-	ec_word THE
-	ec_word TOP
-	ec_word TRAINER
-	ec_word THAT_S
-	ec_word ME
-	ec_word EXCL
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_TOP
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word THE
-	ec_word TOP
-	ec_word RANK
-	ec_word BELONGS_TO
-	ec_word ME
-	ec_word EXCL
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_TOP
+	.2byte EC_WORD_RANK
+	.2byte EC_WORD_BELONGS_TO
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I
-	ec_word WILL
-	ec_word APPEAL
-	ec_word THIS
-	ec_move1 OUTRAGE
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_APPEAL
+	.2byte EC_WORD_THIS
+	.2byte EC_MOVE(OUTRAGE)
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Vince
 
 @ 223
 	.4byte TRAINER_CLASS_COOLTRAINER_1
 	.string "BRYON$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_move2 BARRAGE
-	ec_word WILL
-	ec_move2 SLAM
-	ec_word YOU
-	ec_word EXCL
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(BARRAGE)
+	.2byte EC_WORD_WILL
+	.2byte EC_MOVE2(SLAM)
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word YOU
-	ec_word DIDN_T
-	ec_word COUNT_ON
-	ec_word ANY
-	ec_word LESS
-	ec_word QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_COUNT_ON
+	.2byte EC_WORD_ANY
+	.2byte EC_WORD_LESS
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word I
-	ec_word JUST
-	ec_word DON_T
-	ec_word GET
-	ec_word IT
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_JUST
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Bryon
 
 @ 224
 	.4byte TRAINER_CLASS_COOLTRAINER_2
 	.string "AVA$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word A
-	ec_word TREASURE
-	ec_word OF
-	ec_word THIS
-	ec_word WORLD
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TREASURE
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_WORLD
 @ win speech
-	ec_word MY
-	ec_word WORLD
-	ec_word IS
-	ec_word FULL
-	ec_word OF
-	ec_word WONDER
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_WORLD
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_FULL
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_WONDER
 @ loss speech
-	ec_word WHY
-	ec_word ARE
-	ec_word YOU
-	ec_word SO
-	ec_word TERRIBLE
-	ec_word QUES
+	.2byte EC_WORD_WHY
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_TERRIBLE
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Ava
 
 @ 225
 	.4byte TRAINER_CLASS_COOLTRAINER_2
 	.string "MIRIAM$", 8
 @ pre-battle speech
-	ec_word OH
-	ec_word A
-	ec_word TRAINER
-	ec_word WITH
-	ec_word A
-	ec_move1 SCARY_FACE
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(SCARY_FACE)
 @ win speech
-	ec_word AHAHA
-	ec_word YOU
-	ec_word ONLY
-	ec_word LOOK
-	ec_word SCARY
-	ec_word EXCL
+	.2byte EC_WORD_AHAHA
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_ONLY
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word AIYEEH
-	ec_word EXCL
-	ec_word YOU
-	ec_word REALLY
-	ec_word ARE
-	ec_word SCARY
+	.2byte EC_WORD_AIYEEH
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_SCARY
 	.4byte gBattleFrontierTrainerMons_Miriam
 
 @ 226
 	.4byte TRAINER_CLASS_COOLTRAINER_2
 	.string "CARRIE$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WILL
-	ec_word SHOW
-	ec_word YOU
-	ec_word GUTSY
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_SHOW
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_GUTSY
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word IT_S
-	ec_word ALL
-	ec_word ABOUT
-	ec_word GUTS
-	ec_word EXCL
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_GUTS
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word OH
-	ec_word NO
-	ec_word ELLIPSIS
-	ec_move1 SELF_DESTRUCT
-	ec_word MODE
-	ec_word EXCL
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_MOVE(SELF_DESTRUCT)
+	.2byte EC_WORD_MODE
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Carrie
 
 @ 227
 	.4byte TRAINER_CLASS_COOLTRAINER_2
 	.string "GILLIAN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word SEEK
-	ec_word A
-	ec_word TRULY
-	ec_word GREAT
-	ec_word BATTLE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SEEK
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TRULY
+	.2byte EC_WORD_GREAT
+	.2byte EC_WORD_BATTLE
 @ win speech
-	ec_word I
-	ec_word NEED
-	ec_word A_LOT
-	ec_word BETTER
-	ec_word BATTLE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_A_LOT
+	.2byte EC_WORD_BETTER
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_ELLIPSIS
 @ loss speech
-	ec_word THAT_WAS
-	ec_word A_LITTLE
-	ec_word TOO
-	ec_word MUCH
-	ec_word TO
-	ec_word TAKE
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_A_LITTLE
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_MUCH
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_TAKE
 	.4byte gBattleFrontierTrainerMons_Gillian2
 
 @ 228
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
 	.string "TYLER$", 8
 @ pre-battle speech
-	ec_word YO
-	ec_word EXCL
+	.2byte EC_WORD_YO
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word LET_S
-	ec_word GO
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_EXCL_EXCL
 @ win speech
-	ec_word YO
-	ec_word EXCL
+	.2byte EC_WORD_YO
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word I
-	ec_word WON
-	ec_word YO
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_YO
 @ loss speech
-	ec_word YO
-	ec_word EXCL
+	.2byte EC_WORD_YO
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word I
-	ec_word LOST
-	ec_word YO
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LOST
+	.2byte EC_WORD_YO
 	.4byte gBattleFrontierTrainerMons_Tyler
 
 @ 229
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
 	.string "CHAZ$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word POKEMON
-	ec_word HAVE
-	ec_word TOO
-	ec_word MUCH
-	ec_word POWER
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_MUCH
+	.2byte EC_WORD_POWER
 @ win speech
-	ec_word THEY
-	ec_word HAVE
-	ec_word MORE
-	ec_word POWER
-	ec_word NOW
-	ec_word EXCL
+	.2byte EC_WORD_THEY
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_POWER
+	.2byte EC_WORD_NOW
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word YEAH
-	ec_move2 TAKE_DOWN
-	ec_word THEIR
-	ec_word POWER
-	ec_word A_TINY_BIT
-	ec_word PLEASE
+	.2byte EC_WORD_YEAH
+	.2byte EC_MOVE2(TAKE_DOWN)
+	.2byte EC_WORD_THEIR
+	.2byte EC_WORD_POWER
+	.2byte EC_WORD_A_TINY_BIT
+	.2byte EC_WORD_PLEASE
 	.4byte gBattleFrontierTrainerMons_Chaz
 
 @ 230
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
 	.string "NELSON$", 8
 @ pre-battle speech
-	ec_word WELL_THEN
-	ec_word WILL
-	ec_word THIS
-	ec_word POKEMON
-	ec_word WORK
-	ec_word QUES
+	.2byte EC_WORD_WELL_THEN
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_WORK
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word I
-	ec_word SEE
-	ec_word THAT
-	ec_word IT
-	ec_word WAS
-	ec_word TOO_STRONG
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_TOO_STRONG
 @ loss speech
-	ec_word IT
-	ec_word DIDN_T
-	ec_word MATCH_UP
-	ec_word WELL
-	ec_word I
-	ec_word THINK
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_MATCH_UP
+	.2byte EC_WORD_WELL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_THINK
 	.4byte gBattleFrontierTrainerMons_Nelson
 
 @ 231
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
 	.string "SHANIA$", 8
 @ pre-battle speech
-	ec_word ALL
-	ec_word MY
-	ec_word POKEMON
-	ec_word ABSOLUTELY
-	ec_word ADORE
-	ec_word ME
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ABSOLUTELY
+	.2byte EC_WORD_ADORE
+	.2byte EC_WORD_ME
 @ win speech
-	ec_word HAPPINESS
-	ec_word IS
-	ec_word A
-	ec_word POKEMON
-	ec_word WITH
-	ec_word CUTE_CHARM
+	.2byte EC_WORD_HAPPINESS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_CUTE_CHARM
 @ loss speech
-	ec_word YOU_RE
-	ec_word SO
-	ec_word MEAN
-	ec_word TO
-	ec_word CUTE
-	ec_word POKEMON
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_MEAN
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_CUTE
+	.2byte EC_WORD_POKEMON
 	.4byte gBattleFrontierTrainerMons_Shania
 
 @ 232
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
 	.string "STELLA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WANT
-	ec_word TO
-	ec_word SEE
-	ec_word YOUR
-	ec_word POKEMON
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word WELL
-	ec_word AREN_T
-	ec_word THEY
-	ec_word BORING
-	ec_word QUES
-	ec_word AHAHA
+	.2byte EC_WORD_WELL
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_THEY
+	.2byte EC_WORD_BORING
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_AHAHA
 @ loss speech
-	ec_word YOUR
-	ec_word POKEMON
-	ec_word ARE
-	ec_word SOMETHING
-	ec_word ELSE
-	ec_word ALL_RIGHT
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_SOMETHING
+	.2byte EC_WORD_ELSE
+	.2byte EC_WORD_ALL_RIGHT
 	.4byte gBattleFrontierTrainerMons_Stella
 
 @ 233
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
 	.string "DORINE$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word YOUNG
-	ec_word AND
-	ec_word STRONG
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_YOUNG
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_STRONG
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word SEE
-	ec_word QUES
-	ec_word AREN_T
-	ec_word I
-	ec_word GOOD
-	ec_word QUES
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_I
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word THIS
-	ec_word ISN_T
-	ec_word WORKING
-	ec_word OUT
-	ec_word AT
-	ec_word ALL
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_WORKING
+	.2byte EC_WORD_OUT
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_ALL
 	.4byte gBattleFrontierTrainerMons_Dorine
 
 @ 234
 	.4byte TRAINER_CLASS_DRAGON_TAMER
 	.string "MADDOX$", 8
 @ pre-battle speech
-	ec_word DRAGON
-	ec_word POKEMON
-	ec_word ARE
-	ec_word MY
-	ec_word NO_1
-	ec_word CHOICE
+	.2byte EC_WORD_DRAGON
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_NO_1
+	.2byte EC_WORD_CHOICE
 @ win speech
-	ec_word IT_S
-	ec_word NO
-	ec_word SECRET
-	ec_word DRAGON
-	ec_word POKEMON
-	ec_word WIN
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_SECRET
+	.2byte EC_WORD_DRAGON
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_WIN
 @ loss speech
-	ec_word DRAGON
-	ec_word POKEMON
-	ec_word SHOULD
-	ec_word NOT
-	ec_word LOSE
-	ec_word EXCL
+	.2byte EC_WORD_DRAGON
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_LOSE
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Maddox
 
 @ 235
 	.4byte TRAINER_CLASS_DRAGON_TAMER
 	.string "DAVIN$", 8
 @ pre-battle speech
-	ec_word LET_S
-	ec_word HEAR
-	ec_word YOU
-	ec_move2 ROAR
-	ec_word EXCL
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_HEAR
+	.2byte EC_WORD_YOU
+	.2byte EC_MOVE2(ROAR)
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word WROOOAAR_EXCL
+	.2byte EC_WORD_WROOOAAR_EXCL
 	.2byte -1
 	.2byte -1
-	ec_word VICTORY
-	ec_word EXCL_EXCL
+	.2byte EC_WORD_VICTORY
+	.2byte EC_WORD_EXCL_EXCL
 	.2byte -1
 @ loss speech
-	ec_word WROOOAAR_EXCL
+	.2byte EC_WORD_WROOOAAR_EXCL
 	.2byte -1
 	.2byte -1
-	ec_word WHY
-	ec_word QUES_EXCL
+	.2byte EC_WORD_WHY
+	.2byte EC_WORD_QUES_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Davin
 
@@ -6140,285 +6140,285 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_DRAGON_TAMER
 	.string "TREVON$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word LIVING
-	ec_word ONLY
-	ec_word WITH
-	ec_word DRAGON
-	ec_word POKEMON
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_LIVING
+	.2byte EC_WORD_ONLY
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_DRAGON
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word THE
-	ec_word WAY
-	ec_word I_AM
-	ec_word LIVING
-	ec_word IS
-	ec_word PERFECT
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_WAY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_LIVING
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_PERFECT
 @ loss speech
-	ec_word YOU_VE
-	ec_word DESTROYED
-	ec_word THE
-	ec_word WAY
-	ec_word I_AM
-	ec_word LIVING
+	.2byte EC_WORD_YOU_VE
+	.2byte EC_WORD_DESTROYED
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_WAY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_LIVING
 	.4byte gBattleFrontierTrainerMons_Trevon
 
 @ 237
 	.4byte TRAINER_CLASS_BLACK_BELT
 	.string "MATEO$", 8
 @ pre-battle speech
-	ec_word THIS
-	ec_word SHOULD
-	ec_word BE
-	ec_word OVER
-	ec_word SOON
-	ec_word ENOUGH
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_OVER
+	.2byte EC_WORD_SOON
+	.2byte EC_WORD_ENOUGH
 @ win speech
-	ec_word WELL
-	ec_word THAT
-	ec_word DIDN_T
-	ec_word TAKE
-	ec_word VERY
-	ec_word MUCH
+	.2byte EC_WORD_WELL
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_TAKE
+	.2byte EC_WORD_VERY
+	.2byte EC_WORD_MUCH
 @ loss speech
-	ec_word I
-	ec_word CAN_T
-	ec_word LOSE
-	ec_word SO
-	ec_word SOON
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_LOSE
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_SOON
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Mateo
 
 @ 238
 	.4byte TRAINER_CLASS_BLACK_BELT
 	.string "BRET$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word LIKE
-	ec_word ROCK_SOLID
-	ec_word POKEMON
-	ec_word THE
-	ec_word BEST
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_ROCK_SOLID
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_BEST
 @ win speech
-	ec_word TOUGHNESS
-	ec_word IS
-	ec_word THE
-	ec_word WAY
-	ec_word TO
-	ec_word GO
+	.2byte EC_WORD_TOUGHNESS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_WAY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_GO
 @ loss speech
-	ec_word I
-	ec_word ALSO
-	ec_word HAVE
-	ec_word A
-	ec_word PLUSH_DOLL
-	ec_word COLLECTION
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ALSO
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_PLUSH_DOLL
+	.2byte EC_WORD_COLLECTION
 	.4byte gBattleFrontierTrainerMons_Bret
 
 @ 239
 	.4byte TRAINER_CLASS_BLACK_BELT
 	.string "RAUL$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word REJECT
-	ec_word EVERY
-	ec_word WEAK
-	ec_word TRAINER
+	.2byte EC_WORD_I
+	.2byte EC_WORD_REJECT
+	.2byte EC_WORD_EVERY
+	.2byte EC_WORD_WEAK
+	.2byte EC_WORD_TRAINER
 	.2byte -1
 @ win speech
-	ec_word HUMPH
-	ec_word EXCL
-	ec_word ANOTHER
-	ec_word WEAK
-	ec_word TRAINER
-	ec_word ELLIPSIS
+	.2byte EC_WORD_HUMPH
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_ANOTHER
+	.2byte EC_WORD_WEAK
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_ELLIPSIS
 @ loss speech
-	ec_word THERE
-	ec_word IS
-	ec_word NOTHING
-	ec_word WEAK
-	ec_word ABOUT
-	ec_word YOU
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_NOTHING
+	.2byte EC_WORD_WEAK
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_YOU
 	.4byte gBattleFrontierTrainerMons_Raul
 
 @ 240
 	.4byte TRAINER_CLASS_BATTLE_GIRL
 	.string "KAY$", 8
 @ pre-battle speech
-	ec_word AND
-	ec_word YET
-	ec_word ANOTHER
-	ec_word BATTLE
-	ec_word QUES
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_YET
+	.2byte EC_WORD_ANOTHER
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ win speech
-	ec_word I
-	ec_word WON
-	ec_word BUT
-	ec_word I_AM
-	ec_word TIRED
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TIRED
+	.2byte EC_WORD_ELLIPSIS
 @ loss speech
-	ec_word GOOD
-	ec_word IT_S
-	ec_word OVER
-	ec_word AT
-	ec_word LAST
-	ec_word ELLIPSIS
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_OVER
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_LAST
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Kay
 
 @ 241
 	.4byte TRAINER_CLASS_BATTLE_GIRL
 	.string "ELENA$", 8
 @ pre-battle speech
-	ec_word A
-	ec_word BATTLE
-	ec_word GIRL
-	ec_word THAT_S
-	ec_word ME
-	ec_word EXCL
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_GIRL
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word ISN_T
-	ec_word A
-	ec_word BATTLE
-	ec_word GIRL
-	ec_word AWESOME
-	ec_word QUES
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_GIRL
+	.2byte EC_WORD_AWESOME
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word YOU
-	ec_word DISLIKE
-	ec_word A
-	ec_word BATTLE
-	ec_word GIRL
-	ec_word QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DISLIKE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_GIRL
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Elena
 
 @ 242
 	.4byte TRAINER_CLASS_BATTLE_GIRL
 	.string "ALANA$", 8
 @ pre-battle speech
-	ec_word EAT
-	ec_word MY
-	ec_word INVINCIBLE
-	ec_word ATTACK
-	ec_word YOU
-	ec_word EXCL
+	.2byte EC_WORD_EAT
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_INVINCIBLE
+	.2byte EC_WORD_ATTACK
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word YOU
-	ec_word HAVE
-	ec_word MUCH
-	ec_word TO
-	ec_word LEARN
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_MUCH
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_LEARN
 	.2byte -1
 @ loss speech
-	ec_word SO
-	ec_word MUCH
-	ec_word FOR
-	ec_word MY
-	ec_word INVINCIBLE
-	ec_word ATTACK
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_MUCH
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_INVINCIBLE
+	.2byte EC_WORD_ATTACK
 	.4byte gBattleFrontierTrainerMons_Alana
 
 @ 243
 	.4byte TRAINER_CLASS_EXPERT_1
 	.string "ALEXAS$", 8
 @ pre-battle speech
-	ec_word GOOD
-	ec_word TO
-	ec_word MEET_YOU
-	ec_word YOUNG
-	ec_word TRAINER
-	ec_word EXCL
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_MEET_YOU
+	.2byte EC_WORD_YOUNG
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word WAHAHAHA
-	ec_word EXCL
+	.2byte EC_WORD_WAHAHAHA
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word GIVE
-	ec_word IT
-	ec_word UP
+	.2byte EC_WORD_GIVE
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_UP
 @ loss speech
-	ec_word YOU
-	ec_word ARE
-	ec_word A
-	ec_word STRONG
-	ec_word TRAINER
-	ec_word KID
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_STRONG
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_KID
 	.4byte gBattleFrontierTrainerMons_Alexas
 
 @ 244
 	.4byte TRAINER_CLASS_EXPERT_1
 	.string "WESTON$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word DON_T
-	ec_word PLAY
-	ec_word DOWN
-	ec_word ALL_RIGHT
-	ec_word QUES
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_PLAY
+	.2byte EC_WORD_DOWN
+	.2byte EC_WORD_ALL_RIGHT
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word YOU_RE
-	ec_word FAR
-	ec_word TOO
-	ec_word EASY
-	ec_word TO
-	ec_word ATTACK
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_FAR
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_EASY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_ATTACK
 @ loss speech
-	ec_word WELL
-	ec_word WELL
-	ec_word ELLIPSIS
-	ec_word I
-	ec_word SURRENDER
-	ec_word ELLIPSIS
+	.2byte EC_WORD_WELL
+	.2byte EC_WORD_WELL
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SURRENDER
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Weston
 
 @ 245
 	.4byte TRAINER_CLASS_EXPERT_1
 	.string "JASPER$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word NOT
-	ec_word OLD
-	ec_word I_AM
-	ec_word SKILLED
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_OLD
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SKILLED
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word SKILLED
-	ec_word THAT_S
-	ec_word WHAT
-	ec_word I_AM
-	ec_word EXCL
+	.2byte EC_WORD_SKILLED
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word I_AM
-	ec_word SHOCKED
-	ec_word EXCL
-	ec_word DOWN
-	ec_word I
-	ec_word GO
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SHOCKED
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_DOWN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_GO
 	.4byte gBattleFrontierTrainerMons_Jasper
 
 @ 246
 	.4byte TRAINER_CLASS_EXPERT_2
 	.string "NADIA$", 8
 @ pre-battle speech
-	ec_word YOU
-	ec_word CAN_T
-	ec_word BEAT
-	ec_word ME
-	ec_word DOWN
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_BEAT
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_DOWN
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word HAH
-	ec_word EXCL
+	.2byte EC_WORD_HAH
+	.2byte EC_WORD_EXCL
 	.2byte -1
-	ec_word I
-	ec_word BEAT
-	ec_word YOU
+	.2byte EC_WORD_I
+	.2byte EC_WORD_BEAT
+	.2byte EC_WORD_YOU
 @ loss speech
-	ec_word I_AM
-	ec_move2 BEAT_UP
-	ec_word AND
-	ec_word DOWNCAST
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_MOVE2(BEAT_UP)
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_DOWNCAST
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Nadia
 
@@ -6426,103 +6426,103 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_EXPERT_2
 	.string "MIRANDA$", 8
 @ pre-battle speech
-	ec_word WELL
-	ec_word WELL
+	.2byte EC_WORD_WELL
+	.2byte EC_WORD_WELL
 	.2byte -1
-	ec_word LET_S
-	ec_word START
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_START
 	.2byte -1
 @ win speech
-	ec_word WHAT
-	ec_word QUES
-	ec_word DONE
-	ec_word SO
-	ec_word SOON
-	ec_word QUES
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_DONE
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_SOON
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word WELL
-	ec_word I
-	ec_word SEE
-	ec_word THAT
-	ec_word I_AM
-	ec_word TOO_WEAK
+	.2byte EC_WORD_WELL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TOO_WEAK
 	.4byte gBattleFrontierTrainerMons_Miranda
 
 @ 248
 	.4byte TRAINER_CLASS_EXPERT_2
 	.string "EMMA$", 8
 @ pre-battle speech
-	ec_word I_VE
-	ec_word BEEN
-	ec_word HEARING
-	ec_word ABOUT
-	ec_word YOU
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_BEEN
+	.2byte EC_WORD_HEARING
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_YOU
 	.2byte -1
 @ win speech
-	ec_word I
-	ec_word THINK
-	ec_word I_VE
-	ec_word MISHEARD
-	ec_word THINGS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_THINK
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_MISHEARD
+	.2byte EC_WORD_THINGS
 	.2byte -1
 @ loss speech
-	ec_word WHAT
-	ec_word I_VE
-	ec_word BEEN
-	ec_word HEARING
-	ec_word IS
-	ec_word RIGHT
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_BEEN
+	.2byte EC_WORD_HEARING
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_RIGHT
 	.4byte gBattleFrontierTrainerMons_Emma
 
 @ 249
 	.4byte TRAINER_CLASS_PSYCHIC_1
 	.string "ROLANDO$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word A
-	ec_word SUPER
-	ec_word POKEMON
-	ec_word HERO
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_SUPER
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_HERO
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word WAS
-	ec_word THAT
-	ec_word ENOUGH
-	ec_word FOR
-	ec_word YOU
-	ec_word QUES
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_ENOUGH
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word YOU
-	ec_word SHOULD
-	ec_word NOT
-	ec_word BEAT
-	ec_word A
-	ec_word HERO
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_BEAT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_HERO
 	.4byte gBattleFrontierTrainerMons_Rolando
 
 @ 250
 	.4byte TRAINER_CLASS_PSYCHIC_1
 	.string "STANLY$", 8
 @ pre-battle speech
-	ec_word THIS
-	ec_word SHOULD
-	ec_word BE
-	ec_word AN
-	ec_word EASY
-	ec_word MATCH
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_EASY
+	.2byte EC_WORD_MATCH
 @ win speech
-	ec_word IT
-	ec_word REALLY
-	ec_word WAS
-	ec_word EASY
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_EASY
 	.2byte -1
 	.2byte -1
 @ loss speech
-	ec_word ARE
-	ec_word YOU
-	ec_word HAPPY
-	ec_word NOW
-	ec_word QUES
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_NOW
+	.2byte EC_WORD_QUES
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Stanly
 
@@ -6530,207 +6530,207 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_PSYCHIC_1
 	.string "DARIO$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_move2 FORESIGHT
-	ec_word SAYS
-	ec_word I
-	ec_word WILL
-	ec_word WIN
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(FORESIGHT)
+	.2byte EC_WORD_SAYS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_WIN
 @ win speech
-	ec_word MY
-	ec_move2 FORESIGHT
-	ec_word HAS
-	ec_word BEEN
-	ec_word PERFECT
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(FORESIGHT)
+	.2byte EC_WORD_HAS
+	.2byte EC_WORD_BEEN
+	.2byte EC_WORD_PERFECT
 	.2byte -1
 @ loss speech
-	ec_word I
-	ec_word DIDN_T
-	ec_word SEE
-	ec_word THIS
-	ec_move1 REVERSAL
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_THIS
+	.2byte EC_MOVE(REVERSAL)
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Dario
 
 @ 252
 	.4byte TRAINER_CLASS_PSYCHIC_2
 	.string "KARLEE$", 8
 @ pre-battle speech
-	ec_word SOMETHING
-	ec_word GOOD
-	ec_word WILL
-	ec_word COME
-	ec_word OF
-	ec_word THIS
+	.2byte EC_WORD_SOMETHING
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_COME
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_THIS
 @ win speech
-	ec_word YOU
-	ec_word SEE
-	ec_word QUES
-	ec_word FANTASTIC
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_FANTASTIC
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word THAT
-	ec_word SOMETHING
-	ec_word GOOD
-	ec_word WENT
-	ec_word TO
-	ec_word YOU
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_SOMETHING
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_WENT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_YOU
 	.4byte gBattleFrontierTrainerMons_Karlee
 
 @ 253
 	.4byte TRAINER_CLASS_PSYCHIC_2
 	.string "JAYLIN$", 8
 @ pre-battle speech
-	ec_word EVERY
-	ec_word TRAINER
-	ec_word HAS
-	ec_word BEEN
-	ec_word TOO_WEAK
-	ec_word ELLIPSIS
+	.2byte EC_WORD_EVERY
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_HAS
+	.2byte EC_WORD_BEEN
+	.2byte EC_WORD_TOO_WEAK
+	.2byte EC_WORD_ELLIPSIS
 @ win speech
-	ec_word IT_S
-	ec_word MAKING
-	ec_word ME
-	ec_move1 YAWN
-	ec_word THAT
-	ec_word BATTLE
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_MAKING
+	.2byte EC_WORD_ME
+	.2byte EC_MOVE(YAWN)
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_BATTLE
 @ loss speech
-	ec_word I
-	ec_word SLEPT
-	ec_word AND
-	ec_word SO
-	ec_word I
-	ec_word LOST
+	.2byte EC_WORD_I
+	.2byte EC_WORD_SLEPT
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LOST
 	.4byte gBattleFrontierTrainerMons_Jaylin
 
 @ 254
 	.4byte TRAINER_CLASS_PSYCHIC_2
 	.string "INGRID$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word NOT
-	ec_word A
-	ec_word VERY
-	ec_word MEAN
-	ec_word TRAINER
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_VERY
+	.2byte EC_WORD_MEAN
+	.2byte EC_WORD_TRAINER
 @ win speech
-	ec_word WASN_T
-	ec_word THAT
-	ec_word A
-	ec_word GOOD
-	ec_word MATCH
-	ec_word QUES
+	.2byte EC_WORD_WASN_T
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GOOD
+	.2byte EC_WORD_MATCH
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word I
-	ec_word LOST
-	ec_word CAUSE
-	ec_word YOU_RE
-	ec_word MEAN
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LOST
+	.2byte EC_WORD_CAUSE
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_MEAN
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Ingrid
 
 @ 255
 	.4byte TRAINER_CLASS_HEX_MANIAC
 	.string "DELILAH$", 8
 @ pre-battle speech
-	ec_word DON_T
-	ec_move1 GRUDGE
-	ec_word ME
-	ec_word IF_I_WIN
-	ec_word OK_QUES
+	.2byte EC_WORD_DON_T
+	.2byte EC_MOVE(GRUDGE)
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_IF_I_WIN
+	.2byte EC_WORD_OK_QUES
 	.2byte -1
 @ win speech
-	ec_word I_AM
-	ec_word SORRY
-	ec_word TO
-	ec_word SEE
-	ec_word YOU
-	ec_word ANGRY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SORRY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_ANGRY
 @ loss speech
-	ec_word I
-	ec_word HAVE
-	ec_word A
-	ec_move1 GRUDGE
-	ec_word WITH
-	ec_word YOU
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(GRUDGE)
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_YOU
 	.4byte gBattleFrontierTrainerMons_Delilah
 
 @ 256
 	.4byte TRAINER_CLASS_HEX_MANIAC
 	.string "CARLY$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WILL
-	ec_word SCATTER
-	ec_word SOME
-	ec_move2 POISON_POWDER
-	ec_word ABOUT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_SCATTER
+	.2byte EC_WORD_SOME
+	.2byte EC_MOVE2(POISON_POWDER)
+	.2byte EC_WORD_ABOUT
 @ win speech
-	ec_word IT_S
-	ec_word SCARY
-	ec_word HOW
-	ec_word MY
-	ec_word STRATEGY
-	ec_word WORKS
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_STRATEGY
+	.2byte EC_WORD_WORKS
 @ loss speech
-	ec_word I
-	ec_word DISLIKE
-	ec_word YOU
-	ec_word AND
-	ec_word YOUR
-	ec_word POKEMON
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DISLIKE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_POKEMON
 	.4byte gBattleFrontierTrainerMons_Carly
 
 @ 257
 	.4byte TRAINER_CLASS_HEX_MANIAC
 	.string "LEXIE$", 8
 @ pre-battle speech
-	ec_word WANT
-	ec_word TO
-	ec_word SEE
-	ec_word SCARY
-	ec_word POKEMON
-	ec_word QUES
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word WASN_T
-	ec_word THAT
-	ec_word SCARY
-	ec_word EH_QUES
+	.2byte EC_WORD_WASN_T
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_EH_QUES
 	.2byte -1
 	.2byte -1
 @ loss speech
-	ec_word YOU_RE
-	ec_word MORE
-	ec_word SCARY
-	ec_word THAN
-	ec_word MY
-	ec_word POKEMON
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_THAN
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
 	.4byte gBattleFrontierTrainerMons_Lexie
 
 @ 258
 	.4byte TRAINER_CLASS_POKEMANIAC
 	.string "MILLER$", 8
 @ pre-battle speech
-	ec_word HELLO
-	ec_word QUES
+	.2byte EC_WORD_HELLO
+	.2byte EC_WORD_QUES
 	.2byte -1
-	ec_word HELLO
-	ec_word QUES_EXCL
+	.2byte EC_WORD_HELLO
+	.2byte EC_WORD_QUES_EXCL
 	.2byte -1
 @ win speech
-	ec_word HELLO
-	ec_word MOTHER
-	ec_word EXCL
-	ec_word I
-	ec_word WON
-	ec_word EXCL
+	.2byte EC_WORD_HELLO
+	.2byte EC_WORD_MOTHER
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word MY
-	ec_word PHONE
-	ec_word ISN_T
-	ec_word WORKING
-	ec_word ELLIPSIS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_PHONE
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_WORKING
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Miller
 
@@ -6738,153 +6738,153 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_POKEMANIAC
 	.string "MARV$", 8
 @ pre-battle speech
-	ec_word YOU
-	ec_word CAN
-	ec_word LOSE
-	ec_word YOUR
-	ec_move1 SWAGGER
-	ec_word NOW
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN
+	.2byte EC_WORD_LOSE
+	.2byte EC_WORD_YOUR
+	.2byte EC_MOVE(SWAGGER)
+	.2byte EC_WORD_NOW
 @ win speech
-	ec_word THERE
-	ec_word IS
-	ec_word NO
-	ec_move1 SWAGGER
-	ec_word LEFT
-	ec_word EH_QUES
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_NO
+	.2byte EC_MOVE(SWAGGER)
+	.2byte EC_WORD_LEFT
+	.2byte EC_WORD_EH_QUES
 @ loss speech
-	ec_word GO
-	ec_word ON
-	ec_move1 SWAGGER
-	ec_word ALL
-	ec_word YOU
-	ec_word WANT
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_ON
+	.2byte EC_MOVE(SWAGGER)
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WANT
 	.4byte gBattleFrontierTrainerMons_Marv
 
 @ 260
 	.4byte TRAINER_CLASS_POKEMANIAC
 	.string "LAYTON$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word KNOW
-	ec_word I_AM
-	ec_word TOTALLY
-	ec_word COOL
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TOTALLY
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word YOU
-	ec_word CAN
-	ec_word LOOK
-	ec_word UP
-	ec_word TO
-	ec_word ME
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_UP
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_ME
 @ loss speech
-	ec_word YOU_RE
-	ec_word COOL
-	ec_word EXCL
-	ec_word NO
-	ec_word REALLY
-	ec_word EXCL
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_NO
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Layton
 
 @ 261
 	.4byte TRAINER_CLASS_GENTLEMAN
 	.string "BROOKS$", 8
 @ pre-battle speech
-	ec_word THIS
-	ec_word IS
-	ec_word A
-	ec_word HIGH
-	ec_word LEVEL
-	ec_word BATTLE
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_HIGH
+	.2byte EC_WORD_LEVEL
+	.2byte EC_WORD_BATTLE
 @ win speech
-	ec_word THAT_WAS
-	ec_word HIGH
-	ec_word LEVEL
-	ec_word AND
-	ec_word EXCITING
-	ec_word TOO
+	.2byte EC_WORD_THAT_WAS
+	.2byte EC_WORD_HIGH
+	.2byte EC_WORD_LEVEL
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_EXCITING
+	.2byte EC_WORD_TOO
 @ loss speech
-	ec_word YOU_RE
-	ec_word TOO
-	ec_word HIGH
-	ec_word IN
-	ec_word LEVEL
-	ec_word ELLIPSIS
+	.2byte EC_WORD_YOU_RE
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_HIGH
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_LEVEL
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Brooks
 
 @ 262
 	.4byte TRAINER_CLASS_GENTLEMAN
 	.string "GREGORY$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word NOT
-	ec_word THAT
-	ec_word OLD
-	ec_word YET
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_OLD
+	.2byte EC_WORD_YET
 	.2byte -1
 @ win speech
-	ec_word WHO
-	ec_word SAYS
-	ec_word I_AM
-	ec_word TOO
-	ec_word OLD
-	ec_word QUES
+	.2byte EC_WORD_WHO
+	.2byte EC_WORD_SAYS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_OLD
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word PLEASE
-	ec_word I_AM
-	ec_word REALLY
-	ec_word NOT
-	ec_word THAT
-	ec_word OLD
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_OLD
 	.4byte gBattleFrontierTrainerMons_Gregory
 
 @ 263
 	.4byte TRAINER_CLASS_GENTLEMAN
 	.string "REESE$", 8
 @ pre-battle speech
-	ec_word I_VE
-	ec_word A
-	ec_word COUPLE
-	ec_word THINGS
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_COUPLE
+	.2byte EC_WORD_THINGS
 	.2byte -1
 	.2byte -1
 @ win speech
-	ec_word DON_T
-	ec_word DIET
-	ec_word PLAY
-	ec_word SPORTS
-	ec_word INSTEAD
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_DIET
+	.2byte EC_WORD_PLAY
+	.2byte EC_WORD_SPORTS
+	.2byte EC_WORD_INSTEAD
 	.2byte -1
 @ loss speech
-	ec_word INSTEAD
-	ec_word OF
-	ec_word TELEVISION
-	ec_word GET
-	ec_word A
-	ec_word BOOK
+	.2byte EC_WORD_INSTEAD
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_TELEVISION
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BOOK
 	.4byte gBattleFrontierTrainerMons_Reese
 
 @ 264
 	.4byte TRAINER_CLASS_TRIATHLETE_3
 	.string "MASON$", 8
 @ pre-battle speech
-	ec_word PLEASE
-	ec_word DON_T
-	ec_word MAKE
-	ec_word THIS
-	ec_word SCARY
+	.2byte EC_WORD_PLEASE
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_SCARY
 	.2byte -1
 @ win speech
-	ec_word THANK_YOU
-	ec_word ELLIPSIS
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
-	ec_word I_AM
-	ec_word HAPPY
-	ec_word NOW
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_NOW
 @ loss speech
-	ec_word I_AM
-	ec_word DISAPPOINTED
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_DISAPPOINTED
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.2byte -1
 	.2byte -1
@@ -6894,75 +6894,75 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_TRIATHLETE_3
 	.string "TOBY$", 8
 @ pre-battle speech
-	ec_word LISTEN
-	ec_word UP
+	.2byte EC_WORD_LISTEN
+	.2byte EC_WORD_UP
 	.2byte -1
-	ec_word I
-	ec_word ALWAYS
-	ec_word WIN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ALWAYS
+	.2byte EC_WORD_WIN
 @ win speech
-	ec_word I_AM
-	ec_word A
-	ec_word GENIUS
-	ec_word OR
-	ec_word WHAT
-	ec_word QUES
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_GENIUS
+	.2byte EC_WORD_OR
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word I
-	ec_word CAN
-	ec_word BEAT
-	ec_word YOU
-	ec_word AT
-	ec_word SMARTNESS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN
+	.2byte EC_WORD_BEAT
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_SMARTNESS
 	.4byte gBattleFrontierTrainerMons_Toby
 
 @ 266
 	.4byte TRAINER_CLASS_TRIATHLETE_4
 	.string "DOROTHY$", 8
 @ pre-battle speech
-	ec_word THE
-	ec_word SPORTS
-	ec_word WORLD
-	ec_word SHOULD
-	ec_word ACCEPT
-	ec_word POKEMON
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_SPORTS
+	.2byte EC_WORD_WORLD
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_ACCEPT
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word THANK_YOU
-	ec_word EXCL
-	ec_word THAT
-	ec_word WIN
-	ec_word WAS
-	ec_word REFRESHING
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_WIN
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_REFRESHING
 @ loss speech
-	ec_word THANK_YOU
-	ec_word EXCL
-	ec_word THAT
-	ec_word LOSS
-	ec_word WAS
-	ec_word REFRESHING
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_LOSS
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_REFRESHING
 	.4byte gBattleFrontierTrainerMons_Dorothy
 
 @ 267
 	.4byte TRAINER_CLASS_TRIATHLETE_4
 	.string "PIPER$", 8
 @ pre-battle speech
-	ec_word COME_ON
-	ec_word YOU
-	ec_word NEED
-	ec_word A
-	ec_word SPEED_BOOST
-	ec_word QUES
+	.2byte EC_WORD_COME_ON
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_A
+	.2byte EC_WORD_SPEED_BOOST
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word YOU
-	ec_word NEED
-	ec_word TO
-	ec_word SHOW
-	ec_word MORE
-	ec_word GUTS
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SHOW
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_GUTS
 @ loss speech
-	ec_word OH
-	ec_word YOU
-	ec_word EXCL
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_EXCL
 	.2byte -1
 	.2byte -1
 	.2byte -1
@@ -6972,51 +6972,51 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_TRIATHLETE_5
 	.string "FINN$", 8
 @ pre-battle speech
-	ec_word NOT
-	ec_word ANOTHER
-	ec_word TRAINER
-	ec_word BATTLE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_ANOTHER
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 @ win speech
-	ec_word WON_T
-	ec_word THIS
-	ec_word EVER
-	ec_word END
-	ec_word QUES
+	.2byte EC_WORD_WON_T
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_EVER
+	.2byte EC_WORD_END
+	.2byte EC_WORD_QUES
 	.2byte -1
 @ loss speech
-	ec_word I
-	ec_word FINALLY
-	ec_word GET
-	ec_word TO
-	ec_move2 REST
-	ec_word A_LITTLE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_FINALLY
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE2(REST)
+	.2byte EC_WORD_A_LITTLE
 	.4byte gBattleFrontierTrainerMons_Finn
 
 @ 269
 	.4byte TRAINER_CLASS_TRIATHLETE_5
 	.string "SAMIR$", 8
 @ pre-battle speech
-	ec_word I
-	ec_move2 DIVE
-	ec_word BELOW
-	ec_word THE
-	ec_move2 SURF
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(DIVE)
+	.2byte EC_WORD_BELOW
+	.2byte EC_WORD_THE
+	.2byte EC_MOVE2(SURF)
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word YAHOO
-	ec_word TAKE
-	ec_word A
-	ec_move2 DIVE
-	ec_word YOU
-	ec_word EXCL
+	.2byte EC_WORD_YAHOO
+	.2byte EC_WORD_TAKE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(DIVE)
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word I_AM
-	ec_word GOING
-	ec_word TO
-	ec_word SINK
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_SINK
+	.2byte EC_WORD_ELLIPSIS
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Samir
 
@@ -7024,700 +7024,700 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_TRIATHLETE_6
 	.string "FIONA$", 8
 @ pre-battle speech
-	ec_word DID
-	ec_word YOU
-	ec_word LIMBER
-	ec_word UP
-	ec_word BEFORE
-	ec_word QUES
+	.2byte EC_WORD_DID
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_LIMBER
+	.2byte EC_WORD_UP
+	.2byte EC_WORD_BEFORE
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word YOU
-	ec_word NEED
-	ec_word TO
-	ec_word BE
-	ec_word MORE
-	ec_word READY
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_READY
 @ loss speech
-	ec_word BEING
-	ec_word LIMBER
-	ec_word DIDN_T
-	ec_word WORK
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_BEING
+	.2byte EC_WORD_LIMBER
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_WORK
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 	.4byte gBattleFrontierTrainerMons_Fiona
 
 @ 271
 	.4byte TRAINER_CLASS_TRIATHLETE_6
 	.string "GLORIA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word LIKE
-	ec_word TO
-	ec_word ATTACK
-	ec_word WITH
-	ec_word SUCTION_CUPS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_ATTACK
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_SUCTION_CUPS
 @ win speech
-	ec_word GIGGLE
-	ec_word ELLIPSIS
-	ec_word IT_S
-	ec_word OVER
-	ec_word FOR
-	ec_word YOU
+	.2byte EC_WORD_GIGGLE
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_OVER
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_YOU
 @ loss speech
-	ec_word I
-	ec_word DON_T
-	ec_word GET
-	ec_word HOW
-	ec_word SUCTION_CUPS
-	ec_word WORK
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_SUCTION_CUPS
+	.2byte EC_WORD_WORK
 	.4byte gBattleFrontierTrainerMons_Gloria
 
 @ 272
 	.4byte TRAINER_CLASS_TRIATHLETE_1
 	.string "NICO$", 8
 @ pre-battle speech
-	ec_word LIKE
-	ec_word A
-	ec_move1 SONIC_BOOM
-	ec_word I_VE_ARRIVED
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(SONIC_BOOM)
+	.2byte EC_WORD_I_VE_ARRIVED
 	.2byte -1
 	.2byte -1
 @ win speech
-	ec_word SORRY
-	ec_word TO
-	ec_word MAKE
-	ec_word YOU
-	ec_word SO
-	ec_word DOWNCAST
+	.2byte EC_WORD_SORRY
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_DOWNCAST
 @ loss speech
-	ec_word I_AM
-	ec_word GOING
-	ec_word WITH
-	ec_word A
-	ec_move2 SUPERSONIC
-	ec_word SPEED_BOOST
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(SUPERSONIC)
+	.2byte EC_WORD_SPEED_BOOST
 	.4byte gBattleFrontierTrainerMons_Nico
 
 @ 273
 	.4byte TRAINER_CLASS_TRIATHLETE_1
 	.string "JEREMY$", 8
 @ pre-battle speech
-	ec_word A
-	ec_word POKEMON
-	ec_word MASTER
-	ec_word THAT_S
-	ec_word MY
-	ec_word DREAM
+	.2byte EC_WORD_A
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_MASTER
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_DREAM
 @ win speech
-	ec_word MY
-	ec_word DREAM
-	ec_word ISN_T
-	ec_word FAR
-	ec_word OFF
-	ec_word EXCL
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_DREAM
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_FAR
+	.2byte EC_WORD_OFF
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word WHAT
-	ec_word I
-	ec_word DREAM
-	ec_word ISN_T
-	ec_word HAPPENING
-	ec_word ELLIPSIS
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DREAM
+	.2byte EC_WORD_ISN_T
+	.2byte EC_WORD_HAPPENING
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Jeremy
 
 @ 274
 	.4byte TRAINER_CLASS_TRIATHLETE_2
 	.string "CAITLIN$", 8
 @ pre-battle speech
-	ec_word DON_T
-	ec_word YOU
-	ec_word THINK
-	ec_word I_AM
-	ec_word CUTE
-	ec_word QUES
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_THINK
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_CUTE
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word THERE
-	ec_word IS
-	ec_word MORE
-	ec_word TO_ME
-	ec_word THAN
-	ec_word CUTENESS
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_TO_ME
+	.2byte EC_WORD_THAN
+	.2byte EC_WORD_CUTENESS
 @ loss speech
-	ec_word MY
-	ec_word CUTE_CHARM
-	ec_word DOESN_T
-	ec_move2 ATTRACT
-	ec_word YOU
-	ec_word QUES
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_CUTE_CHARM
+	.2byte EC_WORD_DOESN_T
+	.2byte EC_MOVE2(ATTRACT)
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Caitlin
 
 @ 275
 	.4byte TRAINER_CLASS_TRIATHLETE_2
 	.string "REENA$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word ALWAYS
-	ec_word HAPPY
-	ec_word HAPPY
-	ec_word HAPPY
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_ALWAYS
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_EXCL
 @ win speech
-	ec_word OH
-	ec_word YAY
-	ec_word EXCL
-	ec_word YAHOO
-	ec_word FOR
-	ec_word ME
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_YAY
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_YAHOO
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_ME
 @ loss speech
-	ec_word YAHOO
-	ec_word EXCL
-	ec_word I_AM
-	ec_word HAPPY
-	ec_word FOR
-	ec_word YOU
+	.2byte EC_WORD_YAHOO
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_HAPPY
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_YOU
 	.4byte gBattleFrontierTrainerMons_Reena
 
 @ 276
 	.4byte TRAINER_CLASS_BUG_MANIAC
 	.string "AVERY$", 8
 @ pre-battle speech
-	ec_word I_VE
-	ec_word GOT
-	ec_word A_LOT
-	ec_word OF
-	ec_word BUG
-	ec_word POKEMON
+	.2byte EC_WORD_I_VE
+	.2byte EC_WORD_GOT
+	.2byte EC_WORD_A_LOT
+	.2byte EC_WORD_OF
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word MY
-	ec_word BUG
-	ec_word POKEMON
-	ec_word ARE
-	ec_word ALL
-	ec_word UNBELIEVABLE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_UNBELIEVABLE
 @ loss speech
-	ec_word MY
-	ec_word BUG
-	ec_word POKEMON
-	ec_word ARE
-	ec_word ALL
-	ec_word UPSIDE_DOWN
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_UPSIDE_DOWN
 	.4byte gBattleFrontierTrainerMons_Avery
 
 @ 277
 	.4byte TRAINER_CLASS_BUG_MANIAC
 	.string "LIAM$", 8
 @ pre-battle speech
-	ec_word WE
-	ec_word REALLY
-	ec_word DISLIKE
-	ec_word FIRE
-	ec_word AND
-	ec_word FLYING
+	.2byte EC_WORD_WE
+	.2byte EC_WORD_REALLY
+	.2byte EC_WORD_DISLIKE
+	.2byte EC_WORD_FIRE
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_FLYING
 @ win speech
-	ec_word BUG
-	ec_word POKEMON
-	ec_word AREN_T
-	ec_word BAD
-	ec_word HEY_QUES
+	.2byte EC_WORD_BUG
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_BAD
+	.2byte EC_WORD_HEY_QUES
 	.2byte -1
 @ loss speech
-	ec_word YOU
-	ec_word KNOW
-	ec_word WHAT
-	ec_word WE
-	ec_word DISLIKE
-	ec_word HEY_QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_KNOW
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_WE
+	.2byte EC_WORD_DISLIKE
+	.2byte EC_WORD_HEY_QUES
 	.4byte gBattleFrontierTrainerMons_Liam
 
 @ 278
 	.4byte TRAINER_CLASS_FISHERMAN
 	.string "THEO$", 8
 @ pre-battle speech
-	ec_word FISHING
-	ec_word IS
-	ec_word MY
-	ec_word CHOICE
-	ec_word IN
-	ec_word LIFE
+	.2byte EC_WORD_FISHING
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_CHOICE
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_LIFE
 @ win speech
-	ec_word WATER
-	ec_word POKEMON
-	ec_move2 ATTRACT
-	ec_word ME
-	ec_word WITHOUT
-	ec_word END
+	.2byte EC_WORD_WATER
+	.2byte EC_WORD_POKEMON
+	.2byte EC_MOVE2(ATTRACT)
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_WITHOUT
+	.2byte EC_WORD_END
 @ loss speech
-	ec_word DON_T
-	ec_word COUNT_ON
-	ec_word THAT
-	ec_word HAPPENING
-	ec_word ANOTHER
-	ec_word TIME
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_COUNT_ON
+	.2byte EC_WORD_THAT
+	.2byte EC_WORD_HAPPENING
+	.2byte EC_WORD_ANOTHER
+	.2byte EC_WORD_TIME
 	.4byte gBattleFrontierTrainerMons_Theo
 
 @ 279
 	.4byte TRAINER_CLASS_FISHERMAN
 	.string "BAILEY$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word AN
-	ec_word ADULT
-	ec_word I
-	ec_word BATTLE
-	ec_word EASY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_ADULT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_EASY
 @ win speech
-	ec_word I_AM
-	ec_word AN
-	ec_word ADULT
-	ec_word I
-	ec_move2 SWALLOW
-	ec_word JOY
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_ADULT
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(SWALLOW)
+	.2byte EC_WORD_JOY
 @ loss speech
-	ec_word I_AM
-	ec_word AN
-	ec_word ADULT
-	ec_word I
-	ec_move2 SWALLOW
-	ec_move2 FRUSTRATION
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_ADULT
+	.2byte EC_WORD_I
+	.2byte EC_MOVE2(SWALLOW)
+	.2byte EC_MOVE2(FRUSTRATION)
 	.4byte gBattleFrontierTrainerMons_Bailey
 
 @ 280
 	.4byte TRAINER_CLASS_RUIN_MANIAC
 	.string "HUGO$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word TRY
-	ec_word THE
-	ec_word BEST
-	ec_word I
-	ec_word CAN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_TRY
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_BEST
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN
 @ win speech
-	ec_word I
-	ec_word CAN_WIN
-	ec_word IF
-	ec_word I
-	ec_word TRY
-	ec_word ENOUGH
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_WIN
+	.2byte EC_WORD_IF
+	.2byte EC_WORD_I
+	.2byte EC_WORD_TRY
+	.2byte EC_WORD_ENOUGH
 @ loss speech
-	ec_word I
-	ec_word DID
-	ec_word TRY
-	ec_word DIDN_T
-	ec_word I
-	ec_word QUES
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DID
+	.2byte EC_WORD_TRY
+	.2byte EC_WORD_DIDN_T
+	.2byte EC_WORD_I
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Hugo
 
 @ 281
 	.4byte TRAINER_CLASS_RUIN_MANIAC
 	.string "BRYCE$", 8
 @ pre-battle speech
-	ec_word I_WAS
-	ec_word ON
-	ec_word VACATION
-	ec_word UNTIL
-	ec_word ONLY
-	ec_word YESTERDAY
+	.2byte EC_WORD_I_WAS
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_VACATION
+	.2byte EC_WORD_UNTIL
+	.2byte EC_WORD_ONLY
+	.2byte EC_WORD_YESTERDAY
 @ win speech
-	ec_word I
-	ec_word HAVEN_T
-	ec_word LOST
-	ec_word MY
-	ec_word SKILL
-	ec_word YET
+	.2byte EC_WORD_I
+	.2byte EC_WORD_HAVEN_T
+	.2byte EC_WORD_LOST
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_SKILL
+	.2byte EC_WORD_YET
 @ loss speech
-	ec_word THAT_S
-	ec_word IT
-	ec_word ELLIPSIS
-	ec_word I
-	ec_word NEED
-	ec_word SLEEP
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_ELLIPSIS
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_SLEEP
 	.4byte gBattleFrontierTrainerMons_Bryce
 
 @ 282
 	.4byte TRAINER_CLASS_COLLECTOR
 	.string "GIDEON$", 8
 @ pre-battle speech
-	ec_word WHAT_S_UP_QUES
-	ec_word YOU
-	ec_word THINK
-	ec_word I_AM
-	ec_word SCARY
-	ec_word QUES
+	.2byte EC_WORD_WHAT_S_UP_QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_THINK
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word I_AM
-	ec_word COOL
-	ec_word BUT
-	ec_word NOT
-	ec_word SCARY
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_COOL
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_SCARY
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word LOOK
-	ec_word AT
-	ec_word MY
-	ec_word FABULOUS
-	ec_word FASHION
-	ec_word SENSE
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_FABULOUS
+	.2byte EC_WORD_FASHION
+	.2byte EC_WORD_SENSE
 	.4byte gBattleFrontierTrainerMons_Gideon
 
 @ 283
 	.4byte TRAINER_CLASS_COLLECTOR
 	.string "TRISTON$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word WOULD
-	ec_word RATHER
-	ec_word LOOK
-	ec_word AT
-	ec_word POKEMON
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WOULD
+	.2byte EC_WORD_RATHER
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_POKEMON
 @ win speech
-	ec_word HUH_QUES
-	ec_word YOU
-	ec_word MEAN
-	ec_word I
-	ec_word WON
-	ec_word QUES_EXCL
+	.2byte EC_WORD_HUH_QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_MEAN
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_QUES_EXCL
 @ loss speech
-	ec_word SEE
-	ec_word QUES
+	.2byte EC_WORD_SEE
+	.2byte EC_WORD_QUES
 	.2byte -1
-	ec_word I
-	ec_word ALWAYS
-	ec_word LOSE
+	.2byte EC_WORD_I
+	.2byte EC_WORD_ALWAYS
+	.2byte EC_WORD_LOSE
 	.4byte gBattleFrontierTrainerMons_Triston
 
 @ 284
 	.4byte TRAINER_CLASS_GUITARIST
 	.string "CHARLES$", 8
 @ pre-battle speech
-	ec_word IT_S
-	ec_word HOPELESS
-	ec_word TO
-	ec_move2 STRUGGLE
-	ec_word WITH
-	ec_word ME
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_HOPELESS
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE2(STRUGGLE)
+	.2byte EC_WORD_WITH
+	.2byte EC_WORD_ME
 @ win speech
-	ec_move1 SUBMISSION
-	ec_word WAS
-	ec_word YOUR
-	ec_word ONLY
-	ec_word CHOICE
+	.2byte EC_MOVE(SUBMISSION)
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_YOUR
+	.2byte EC_WORD_ONLY
+	.2byte EC_WORD_CHOICE
 	.2byte -1
 @ loss speech
-	ec_word I_AM
-	ec_word GOING
-	ec_word DOWN
-	ec_word DOWN
-	ec_word DOWN
-	ec_word EXCL
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_GOING
+	.2byte EC_WORD_DOWN
+	.2byte EC_WORD_DOWN
+	.2byte EC_WORD_DOWN
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Charles
 
 @ 285
 	.4byte TRAINER_CLASS_GUITARIST
 	.string "RAYMOND$", 8
 @ pre-battle speech
-	ec_word WANT
-	ec_word TO
-	ec_word HEAR
-	ec_word MY
-	ec_word SONG
-	ec_word QUES
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_HEAR
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_SONG
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word SATISFIED
-	ec_word THAT_S
-	ec_word WHAT
-	ec_word I_AM
-	ec_word EXCL
+	.2byte EC_WORD_SATISFIED
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word SATISFIED
-	ec_word IS
-	ec_word WHAT
-	ec_word I
-	ec_word CAN_T
-	ec_word BE
+	.2byte EC_WORD_SATISFIED
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAN_T
+	.2byte EC_WORD_BE
 	.4byte gBattleFrontierTrainerMons_Raymond
 
 @ 286
 	.4byte TRAINER_CLASS_BIRD_KEEPER
 	.string "DIRK$", 8
 @ pre-battle speech
-	ec_word FLYING
-	ec_word POKEMON
-	ec_word ARE
-	ec_word ABOVE
-	ec_word THE
-	ec_move2 REST
+	.2byte EC_WORD_FLYING
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_ABOVE
+	.2byte EC_WORD_THE
+	.2byte EC_MOVE2(REST)
 @ win speech
-	ec_word YOU
-	ec_word CAN_T_WIN
-	ec_word EXCL
-	ec_word FLYING
-	ec_word POKEMON
-	ec_word RULE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_CAN_T_WIN
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_FLYING
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_RULE
 @ loss speech
-	ec_word AREN_T
-	ec_word THERE
-	ec_word MORE
-	ec_word FLYING
-	ec_word POKEMON
-	ec_word QUES
+	.2byte EC_WORD_AREN_T
+	.2byte EC_WORD_THERE
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_FLYING
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Dirk
 
 @ 287
 	.4byte TRAINER_CLASS_BIRD_KEEPER
 	.string "HAROLD$", 8
 @ pre-battle speech
-	ec_word MY
-	ec_word POKEMON
-	ec_word APPEAL
-	ec_word TO
-	ec_word YOU
-	ec_word QUES
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_APPEAL
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_QUES
 @ win speech
-	ec_word YOU
-	ec_word DO
-	ec_word LIKE
-	ec_word MY
-	ec_word POKEMON
-	ec_word QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_QUES
 @ loss speech
-	ec_word SO
-	ec_word YOU
-	ec_word DISLIKE
-	ec_word MY
-	ec_word POKEMON
-	ec_word QUES
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_DISLIKE
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_POKEMON
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Harold
 
 @ 288
 	.4byte TRAINER_CLASS_SAILOR
 	.string "OMAR$", 8
 @ pre-battle speech
-	ec_word LET_ME_WIN
-	ec_word IN
-	ec_move1 RETURN
-	ec_word FOR
-	ec_word A
-	ec_move2 PRESENT
+	.2byte EC_WORD_LET_ME_WIN
+	.2byte EC_WORD_IN
+	.2byte EC_MOVE(RETURN)
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_A
+	.2byte EC_MOVE2(PRESENT)
 @ win speech
-	ec_word HERE
-	ec_word YOU
-	ec_word ARE
-	ec_word SOME
-	ec_move2 TOXIC
-	ec_word SWEETS
+	.2byte EC_WORD_HERE
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_ARE
+	.2byte EC_WORD_SOME
+	.2byte EC_MOVE2(TOXIC)
+	.2byte EC_WORD_SWEETS
 @ loss speech
-	ec_word YOUR
-	ec_move2 PRESENT
-	ec_word QUES
-	ec_word WHAT
-	ec_word FOR
-	ec_word QUES_EXCL
+	.2byte EC_WORD_YOUR
+	.2byte EC_MOVE2(PRESENT)
+	.2byte EC_WORD_QUES
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_FOR
+	.2byte EC_WORD_QUES_EXCL
 	.4byte gBattleFrontierTrainerMons_Omar
 
 @ 289
 	.4byte TRAINER_CLASS_SAILOR
 	.string "PETER$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word BRAG
-	ec_word ABOUT
-	ec_word MY
-	ec_word HAPPINESS
-	ec_word OK_QUES
+	.2byte EC_WORD_I
+	.2byte EC_WORD_BRAG
+	.2byte EC_WORD_ABOUT
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_HAPPINESS
+	.2byte EC_WORD_OK_QUES
 @ win speech
-	ec_word YOU
-	ec_word HAVE
-	ec_word TO
-	ec_word LISTEN
-	ec_word TO_ME
-	ec_word BRAG
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HAVE
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_LISTEN
+	.2byte EC_WORD_TO_ME
+	.2byte EC_WORD_BRAG
 @ loss speech
-	ec_word I_AM
-	ec_word DISAPPOINTED
-	ec_word YOU
-	ec_word WON_T
-	ec_word LISTEN
-	ec_word TO_ME
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_DISAPPOINTED
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WON_T
+	.2byte EC_WORD_LISTEN
+	.2byte EC_WORD_TO_ME
 	.4byte gBattleFrontierTrainerMons_Peter
 
 @ 290
 	.4byte TRAINER_CLASS_HIKER
 	.string "DEV$", 8
 @ pre-battle speech
-	ec_word COME_ON
-	ec_word LET_S
-	ec_word GET
-	ec_word A
-	ec_word MOVE
-	ec_word ON
+	.2byte EC_WORD_COME_ON
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_A
+	.2byte EC_WORD_MOVE
+	.2byte EC_WORD_ON
 @ win speech
-	ec_word I
-	ec_word GET
-	ec_word TO
-	ec_word NAP
-	ec_word AFTER
-	ec_word THAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_GET
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_NAP
+	.2byte EC_WORD_AFTER
+	.2byte EC_WORD_THAT
 @ loss speech
-	ec_word I
-	ec_word NEED
-	ec_word TO
-	ec_word NAP
-	ec_word AFTER
-	ec_word THAT
+	.2byte EC_WORD_I
+	.2byte EC_WORD_NEED
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_NAP
+	.2byte EC_WORD_AFTER
+	.2byte EC_WORD_THAT
 	.4byte gBattleFrontierTrainerMons_Dev
 
 @ 291
 	.4byte TRAINER_CLASS_HIKER
 	.string "COREY$", 8
 @ pre-battle speech
-	ec_word LET_S
-	ec_word TEACH
-	ec_word YOU
-	ec_word HOW
-	ec_word TOUGH
-	ec_word I_AM
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_TEACH
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_HOW
+	.2byte EC_WORD_TOUGH
+	.2byte EC_WORD_I_AM
 @ win speech
-	ec_word LOOK
-	ec_word AT
-	ec_word ME
-	ec_word MAKE
-	ec_word A
-	ec_move1 BRICK_BREAK
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_ME
+	.2byte EC_WORD_MAKE
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(BRICK_BREAK)
 @ loss speech
-	ec_word MY
-	ec_move2 FRUSTRATION
-	ec_word IS
-	ec_word CLOSE
-	ec_word TO
-	ec_move2 ERUPTION
+	.2byte EC_WORD_MY
+	.2byte EC_MOVE2(FRUSTRATION)
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_CLOSE
+	.2byte EC_WORD_TO
+	.2byte EC_MOVE2(ERUPTION)
 	.4byte gBattleFrontierTrainerMons_Corey
 
 @ 292
 	.4byte TRAINER_CLASS_KINDLER
 	.string "ANDRE$", 8
 @ pre-battle speech
-	ec_word NOW
-	ec_word THIS
-	ec_word IS
-	ec_word A
-	ec_word PERFECT
-	ec_word FLAME_BODY
+	.2byte EC_WORD_NOW
+	.2byte EC_WORD_THIS
+	.2byte EC_WORD_IS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_PERFECT
+	.2byte EC_WORD_FLAME_BODY
 @ win speech
-	ec_word LOOK
-	ec_word AT
-	ec_word MY
-	ec_word FIERY
-	ec_word DANCE
-	ec_word EXCL
+	.2byte EC_WORD_LOOK
+	.2byte EC_WORD_AT
+	.2byte EC_WORD_MY
+	.2byte EC_WORD_FIERY
+	.2byte EC_WORD_DANCE
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word YOU
-	ec_word WANT
-	ec_word AN
-	ec_move2 EXPLOSION
-	ec_word HERE
-	ec_word QUES
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WANT
+	.2byte EC_WORD_AN
+	.2byte EC_MOVE2(EXPLOSION)
+	.2byte EC_WORD_HERE
+	.2byte EC_WORD_QUES
 	.4byte gBattleFrontierTrainerMons_Andre
 
 @ 293
 	.4byte TRAINER_CLASS_KINDLER
 	.string "FERRIS$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word NO_1
-	ec_word IN
-	ec_word THE
-	ec_word OLD
-	ec_word CLASS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NO_1
+	.2byte EC_WORD_IN
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_OLD
+	.2byte EC_WORD_CLASS
 @ win speech
-	ec_word NO_1
-	ec_word THAT_S
-	ec_word WHAT
-	ec_word I_AM
-	ec_word EXCL
+	.2byte EC_WORD_NO_1
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word I_AM
-	ec_word NOT
-	ec_word NO_1
-	ec_word ANY
-	ec_word MORE
-	ec_word ELLIPSIS
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_NOT
+	.2byte EC_WORD_NO_1
+	.2byte EC_WORD_ANY
+	.2byte EC_WORD_MORE
+	.2byte EC_WORD_ELLIPSIS
 	.4byte gBattleFrontierTrainerMons_Ferris
 
 @ 294
 	.4byte TRAINER_CLASS_PARASOL_LADY
 	.string "ALIVIA$", 8
 @ pre-battle speech
-	ec_word I_AM
-	ec_word FEELING
-	ec_word GIDDY
-	ec_word SO
-	ec_word SHOULD
-	ec_word YOU
+	.2byte EC_WORD_I_AM
+	.2byte EC_WORD_FEELING
+	.2byte EC_WORD_GIDDY
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_YOU
 @ win speech
-	ec_word IT
-	ec_word WAS
-	ec_word ALL
-	ec_word TOGETHER
-	ec_word TOO
-	ec_word EASY
+	.2byte EC_WORD_IT
+	.2byte EC_WORD_WAS
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_TOGETHER
+	.2byte EC_WORD_TOO
+	.2byte EC_WORD_EASY
 @ loss speech
-	ec_word I
-	ec_word WILL
-	ec_word GIDDY
-	ec_word UP
-	ec_word AND
-	ec_word AWAY
+	.2byte EC_WORD_I
+	.2byte EC_WORD_WILL
+	.2byte EC_WORD_GIDDY
+	.2byte EC_WORD_UP
+	.2byte EC_WORD_AND
+	.2byte EC_WORD_AWAY
 	.4byte gBattleFrontierTrainerMons_Alivia
 
 @ 295
 	.4byte TRAINER_CLASS_PARASOL_LADY
 	.string "PAIGE$", 8
 @ pre-battle speech
-	ec_word LET_S
-	ec_word ENJOY
-	ec_word OUR
-	ec_word BATTLE
-	ec_word TOGETHER
+	.2byte EC_WORD_LET_S
+	.2byte EC_WORD_ENJOY
+	.2byte EC_WORD_OUR
+	.2byte EC_WORD_BATTLE
+	.2byte EC_WORD_TOGETHER
 	.2byte -1
 @ win speech
-	ec_word THAT_S_IT_EXCL
+	.2byte EC_WORD_THAT_S_IT_EXCL
 	.2byte -1
 	.2byte -1
-	ec_word THANK_YOU
-	ec_word VERY
-	ec_word MUCH
+	.2byte EC_WORD_THANK_YOU
+	.2byte EC_WORD_VERY
+	.2byte EC_WORD_MUCH
 @ loss speech
-	ec_word THAT_S_IT_EXCL
+	.2byte EC_WORD_THAT_S_IT_EXCL
 	.2byte -1
 	.2byte -1
-	ec_word DO
-	ec_word GO
-	ec_word ON
+	.2byte EC_WORD_DO
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_ON
 	.4byte gBattleFrontierTrainerMons_Paige
 
 @ 296
 	.4byte TRAINER_CLASS_BEAUTY
 	.string "ANYA$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word DISLIKE
-	ec_word OH
-	ec_word SO
-	ec_word PRETTY
-	ec_word FASHION
+	.2byte EC_WORD_I
+	.2byte EC_WORD_DISLIKE
+	.2byte EC_WORD_OH
+	.2byte EC_WORD_SO
+	.2byte EC_WORD_PRETTY
+	.2byte EC_WORD_FASHION
 @ win speech
-	ec_word FASHION
-	ec_word SHOULD
-	ec_word MATCH
-	ec_word THE
-	ec_word PERSON
+	.2byte EC_WORD_FASHION
+	.2byte EC_WORD_SHOULD
+	.2byte EC_WORD_MATCH
+	.2byte EC_WORD_THE
+	.2byte EC_WORD_PERSON
 	.2byte -1
 @ loss speech
-	ec_word PRETTY
-	ec_word COULD
-	ec_word BE
-	ec_word GOOD
+	.2byte EC_WORD_PRETTY
+	.2byte EC_WORD_COULD
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_GOOD
 	.2byte -1
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Anya
@@ -7726,51 +7726,51 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_BEAUTY
 	.string "DAWN$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word GO
-	ec_word ALL
-	ec_word OUT
-	ec_word EXCL
+	.2byte EC_WORD_I
+	.2byte EC_WORD_GO
+	.2byte EC_WORD_ALL
+	.2byte EC_WORD_OUT
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ win speech
-	ec_word DON_T
-	ec_word BE
-	ec_word A
-	ec_word BABY
-	ec_word EXCL
+	.2byte EC_WORD_DON_T
+	.2byte EC_WORD_BE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_BABY
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word YOU
-	ec_word WON
-	ec_word EXCL
-	ec_word MOVE
-	ec_word ON
-	ec_word EXCL
+	.2byte EC_WORD_YOU
+	.2byte EC_WORD_WON
+	.2byte EC_WORD_EXCL
+	.2byte EC_WORD_MOVE
+	.2byte EC_WORD_ON
+	.2byte EC_WORD_EXCL
 	.4byte gBattleFrontierTrainerMons_Dawn
 
 @ 298
 	.4byte TRAINER_CLASS_AROMA_LADY
 	.string "ABBY$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word LIKE
-	ec_word A
-	ec_word TRAINER
-	ec_word THAT_S
-	ec_word REFRESHING
+	.2byte EC_WORD_I
+	.2byte EC_WORD_LIKE
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TRAINER
+	.2byte EC_WORD_THAT_S
+	.2byte EC_WORD_REFRESHING
 @ win speech
-	ec_word VICTORY
-	ec_word HAS
-	ec_word A
-	ec_move1 SWEET_SCENT
-	ec_word EXCL
+	.2byte EC_WORD_VICTORY
+	.2byte EC_WORD_HAS
+	.2byte EC_WORD_A
+	.2byte EC_MOVE(SWEET_SCENT)
+	.2byte EC_WORD_EXCL
 	.2byte -1
 @ loss speech
-	ec_word WHAT
-	ec_word AN
-	ec_word AWFUL
-	ec_word STENCH
-	ec_word EXCL
+	.2byte EC_WORD_WHAT
+	.2byte EC_WORD_AN
+	.2byte EC_WORD_AWFUL
+	.2byte EC_WORD_STENCH
+	.2byte EC_WORD_EXCL
 	.2byte -1
 	.4byte gBattleFrontierTrainerMons_Abby
 
@@ -7778,24 +7778,24 @@ gBattleFrontierTrainers:: @ 85D5ACC
 	.4byte TRAINER_CLASS_AROMA_LADY
 	.string "GRETEL$", 8
 @ pre-battle speech
-	ec_word I
-	ec_word CAUSE
-	ec_move1 OUTRAGE
-	ec_word AS
-	ec_word A
-	ec_word TRAINER
+	.2byte EC_WORD_I
+	.2byte EC_WORD_CAUSE
+	.2byte EC_MOVE(OUTRAGE)
+	.2byte EC_WORD_AS
+	.2byte EC_WORD_A
+	.2byte EC_WORD_TRAINER
 @ win speech
-	ec_word IT_S
-	ec_word ONLY
-	ec_word NATURAL
-	ec_word SEE_YA
-	ec_word BYE_BYE
-	ec_word EXCL
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_ONLY
+	.2byte EC_WORD_NATURAL
+	.2byte EC_WORD_SEE_YA
+	.2byte EC_WORD_BYE_BYE
+	.2byte EC_WORD_EXCL
 @ loss speech
-	ec_word IT_S
-	ec_word HARD
-	ec_word TO
-	ec_word BELIEVE
-	ec_word BUT
-	ec_word CONGRATS
+	.2byte EC_WORD_IT_S
+	.2byte EC_WORD_HARD
+	.2byte EC_WORD_TO
+	.2byte EC_WORD_BELIEVE
+	.2byte EC_WORD_BUT
+	.2byte EC_WORD_CONGRATS
 	.4byte gBattleFrontierTrainerMons_Gretel

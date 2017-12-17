@@ -2554,7 +2554,7 @@ sub_81B1708: @ 81B1708
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4010,7 +4010,7 @@ sub_81B227C: @ 81B227C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -7952,7 +7952,7 @@ sub_81B43DC: @ 81B43DC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -8485,7 +8485,7 @@ sub_81B48DC: @ 81B48DC
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r4, r1, r0
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -8777,7 +8777,7 @@ sub_81B4BA0: @ 81B4BA0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -8883,7 +8883,7 @@ sub_81B4C94: @ 81B4C94
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -9691,7 +9691,7 @@ sub_81B5430: @ 81B5430
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -9985,7 +9985,7 @@ sub_81B56D8: @ 81B56D8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -12970,7 +12970,7 @@ sub_81B7028: @ 81B7028
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -13272,7 +13272,7 @@ sub_81B72C8: @ 81B72C8
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r4, r1, r0
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r5, r0, 24
 	cmp r5, 0
@@ -15054,7 +15054,7 @@ sub_81B82D4: @ 81B82D4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0

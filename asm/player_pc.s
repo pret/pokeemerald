@@ -1378,7 +1378,7 @@ sub_816B9D8: @ 816B9D8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x1

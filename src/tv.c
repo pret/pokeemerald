@@ -3,8 +3,8 @@
 #include "global.h"
 #include "rtc.h"
 #include "overworld.h"
-#include "map_constants.h"
-#include "rng.h"
+#include "constants/maps.h"
+#include "random.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "field_camera.h"
@@ -14,12 +14,12 @@
 #include "pokemon_storage_system.h"
 #include "field_message_box.h"
 #include "easy_chat.h"
-#include "species.h"
-#include "moves.h"
+#include "constants/species.h"
+#include "constants/moves.h"
 #include "battle.h"
 #include "battle_tower.h"
 #include "contest.h"
-#include "items.h"
+#include "constants/items.h"
 #include "item.h"
 #include "link.h"
 #include "main.h"
@@ -37,6 +37,9 @@
 #include "decoration.h"
 #include "secret_base.h"
 #include "tv.h"
+
+extern const u8 gSpeciesNames[][11];
+extern const u8 gMoveNames[][13];
 
 // Static type declarations
 
@@ -832,7 +835,7 @@ void UpdateTVScreensOnMap(int width, int height)
         case 2:
             break;
         default:
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F && gSaveBlock1Ptr->location.mapNum == MAP_ID_LILYCOVE_CITY_COVE_LILY_MOTEL_1F)
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(LILYCOVE_CITY_COVE_LILY_MOTEL_1F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(LILYCOVE_CITY_COVE_LILY_MOTEL_1F))
             {
                 SetTVMetatilesOnMap(width, height, 0x3);
             }
@@ -1575,7 +1578,9 @@ void SaveRecordedItemPurchasesForTVShow(void)
     TVShow *show;
     u8 i;
 
-    if (!(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_TRAINER_HILL_LOBBY && gSaveBlock1Ptr->location.mapNum == MAP_ID_TRAINER_HILL_LOBBY) && !(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_BATTLE_FRONTIER_MART && gSaveBlock1Ptr->location.mapNum == MAP_ID_BATTLE_FRONTIER_MART) && !rbernoulli(1, 3))
+    if (!(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_HILL_ENTRANCE))
+     && !(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_MART) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_MART))
+     && !rbernoulli(1, 3))
     {
         sCurTVShowSlot = FindEmptyTVSlotBeyondFirstFiveShowsOfArray(gSaveBlock1Ptr->tvShows);
         if (sCurTVShowSlot != -1 && HasMixableShowAlreadyBeenSpawnedWithPlayerID(TVSHOW_SMART_SHOPPER, FALSE) != TRUE)
@@ -1788,7 +1793,7 @@ void EndMassOutbreak(void)
     gSaveBlock1Ptr->outbreakDaysLeft = 0;
 }
 
-void sub_80ED888(u16 days)
+void UpdateTVShowsPerDay(u16 days)
 {
 
     sub_80ED8B4(days);
@@ -2959,13 +2964,13 @@ bool8 IsPriceDiscounted(u8 newsKind)
     switch (newsKind)
     {
         case POKENEWS_SLATEPORT:
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_SLATEPORT_CITY && gSaveBlock1Ptr->location.mapNum == MAP_ID_SLATEPORT_CITY && gSpecialVar_LastTalked == 25)
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SLATEPORT_CITY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SLATEPORT_CITY) && gSpecialVar_LastTalked == 25)
             {
                 return TRUE;
             }
             return FALSE;
         case POKENEWS_LILYCOVE:
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP && gSaveBlock1Ptr->location.mapNum == MAP_ID_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP)
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP))
             {
                 return TRUE;
             }
@@ -3694,20 +3699,20 @@ u32 GetPlayerIDAsU32(void)
 
 u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
     {
         return 0;
     }
     if (gSaveBlock2Ptr->playerGender == MALE)
     {
-        if (gSaveBlock1Ptr->location.mapNum != MAP_ID_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+        if (gSaveBlock1Ptr->location.mapNum != MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
         {
             return 0;
         }
     }
     else
     {
-        if (gSaveBlock1Ptr->location.mapNum != MAP_ID_LITTLEROOT_TOWN_MAYS_HOUSE_1F)
+        if (gSaveBlock1Ptr->location.mapNum != MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_1F))
         {
             return 0;
         }
@@ -3725,11 +3730,11 @@ u8 CheckForBigMovieOrEmergencyNewsOnTV(void)
 
 void GetMomOrDadStringForTVMessage(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
         {
-            if (gSaveBlock1Ptr->location.mapNum == MAP_ID_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F)
+            if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_1F))
             {
                 StringCopy(gStringVar1, gText_Mom);
                 VarSet(VAR_0x4003, 1);
@@ -3737,7 +3742,7 @@ void GetMomOrDadStringForTVMessage(void)
         }
         else
         {
-            if (gSaveBlock1Ptr->location.mapNum == MAP_ID_LITTLEROOT_TOWN_MAYS_HOUSE_1F)
+            if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(LITTLEROOT_TOWN_MAYS_HOUSE_1F))
             {
                 StringCopy(gStringVar1, gText_Mom);
                 VarSet(VAR_0x4003, 1);
