@@ -2,12 +2,21 @@ First, you must put a Pokémon Emerald (US) ROM in the root directory of the rep
 
 # Linux
 
-TBD
+* Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+* get [**agbcc**](https://github.com/pret/agbcc)
+  * build and install it.
+    ```
+    build.sh
+    install.sh /path/to/pokeemerald
+    ```
+* in the `pokeemerald` dir run `./build_tools.sh`
 
 # Windows
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+* Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
-Then get the compiled tools from https://github.com/YamaArashi/pokeruby-tools. Copy the "tools" folder over the "tools" folder in your pokeemerald directory.
+* Then get the compiled tools from https://github.com/pret/pokeruby-tools.
+* Copy the "tools" folder over the "tools" folder in your pokeemerald directory.
 
-You can then build pokeemerald using "make" in the MSYS environment provided with devkitARM.
+# All
+You can then build pokeemerald using "make"
