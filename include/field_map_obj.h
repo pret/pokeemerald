@@ -78,6 +78,7 @@ u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
 u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z);
 void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern);
 u8 npc_running_behaviour_by_direction(u8 direction);
+const u8 *GetFieldObjectScriptPointerByFieldObjectId(u8 mapObjectId);
 
 // Exported data declarations
 

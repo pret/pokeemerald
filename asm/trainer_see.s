@@ -5,127 +5,10 @@
 
 	.text
 
-	thumb_func_start CheckIfTrainerWantsBattle
-@ u8 CheckIfTrainerWantsBattle(u8 trainerFieldObjectId)
-CheckIfTrainerWantsBattle: @ 80B3D00
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r0, 0x1
-	mov r9, r0
-	bl InTrainerHill
-	cmp r0, 0x1
-	bne _080B3D1E
-	bl sub_81D62AC
-	b _080B3D24
-_080B3D1E:
-	adds r0, r5, 0
-	bl GetFieldObjectScriptPointerByFieldObjectId
-_080B3D24:
-	adds r7, r0, 0
-	bl InBattlePyramid
-	lsls r0, 24
-	cmp r0, 0
-	beq _080B3D3E
-	adds r0, r5, 0
-	bl GetBattlePyramidTrainerFlag
-_080B3D36:
-	lsls r0, 24
-_080B3D38:
-	cmp r0, 0
-	beq _080B3D56
-	b _080B3DE0
-_080B3D3E:
-	bl InTrainerHill
-	cmp r0, 0x1
-	bne _080B3D4E
-	adds r0, r5, 0
-	bl GetTrainerHillTrainerFlag
-	b _080B3D36
-_080B3D4E:
-	adds r0, r7, 0
-	bl GetTrainerFlagFromScriptPointer
-	b _080B3D38
-_080B3D56:
-	lsls r4, r5, 3
-	adds r0, r4, r5
-	lsls r0, 2
-	ldr r1, =gMapObjects
-	adds r0, r1
-	bl CheckIfTrainerCanApproachPlayer
-	lsls r0, 24
-	lsrs r6, r0, 24
-	mov r8, r4
-	cmp r6, 0
-	beq _080B3DE0
-	ldrb r0, [r7, 0x1]
-	cmp r0, 0x4
-	beq _080B3D7C
-	cmp r0, 0x7
-	beq _080B3D7C
-	cmp r0, 0x6
-	bne _080B3D8A
-_080B3D7C:
-	bl GetMonsStateToDoubles_2
-	lsls r0, 24
-	cmp r0, 0
-	bne _080B3DE0
-	movs r1, 0x2
-	mov r9, r1
-_080B3D8A:
-	ldr r2, =gApproachingTrainers
-	ldr r4, =gNoOfApproachingTrainers
-	ldrb r1, [r4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	strb r5, [r0]
-	ldrb r1, [r4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r1, r2, 0x4
-	adds r0, r1
-	str r7, [r0]
-	ldrb r1, [r4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	strb r6, [r0, 0x1]
-	mov r1, r8
-	adds r0, r1, r5
-	lsls r0, 2
-	ldr r1, =gMapObjects
-	adds r0, r1
-	subs r1, r6, 0x1
-	lsls r1, 24
-	lsrs r1, 24
-	bl TrainerApproachPlayer
-	ldrb r0, [r4]
-	adds r0, 0x1
-	strb r0, [r4]
-	mov r0, r9
-	b _080B3DE2
-	.pool
-_080B3DE0:
-	movs r0, 0
-_080B3DE2:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end CheckIfTrainerWantsBattle
 
-	thumb_func_start CheckIfTrainerCanApproachPlayer
-@ u8 CheckIfTrainerCanApproachPlayer(struct npc_state *trainerFieldObject)
-CheckIfTrainerCanApproachPlayer: @ 80B3DF0
+	thumb_func_start GetTrainerApproachDistance
+@ u8 GetTrainerApproachDistance(struct npc_state *trainerFieldObject)
+GetTrainerApproachDistance: @ 80B3DF0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -140,7 +23,7 @@ CheckIfTrainerCanApproachPlayer: @ 80B3DF0
 	mov r8, r4
 	cmp r0, 0x1
 	bne _080B3E50
-	ldr r1, =gIsTrainerInRange
+	ldr r1, =sDirectionalApproachDistanceFuncs
 	ldrb r0, [r7, 0x18]
 	lsls r0, 28
 	lsrs r0, 26
@@ -173,7 +56,7 @@ _080B3E4C:
 _080B3E50:
 	movs r5, 0
 _080B3E52:
-	ldr r0, =gIsTrainerInRange
+	ldr r0, =sDirectionalApproachDistanceFuncs
 	lsls r4, r5, 2
 	adds r4, r0
 	ldrb r1, [r7, 0x1D]
@@ -210,11 +93,11 @@ _080B3E90:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end CheckIfTrainerCanApproachPlayer
+	thumb_func_end GetTrainerApproachDistance
 
-	thumb_func_start IsTrainerInRangeSouth
-@ u8 IsTrainerInRangeSouth(struct npc_state *trainerFieldObject, u16 sightRange, u16 playerX, u16 playerY)
-IsTrainerInRangeSouth: @ 80B3EA0
+	thumb_func_start GetTrainerApproachDistanceSouth
+@ u8 GetTrainerApproachDistanceSouth(struct npc_state *trainerFieldObject, u16 sightRange, u16 playerX, u16 playerY)
+GetTrainerApproachDistanceSouth: @ 80B3EA0
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -250,11 +133,11 @@ _080B3EDC:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end IsTrainerInRangeSouth
+	thumb_func_end GetTrainerApproachDistanceSouth
 
-	thumb_func_start IsTrainerInRangeNorth
-@ u8 IsTrainerInRangeNorth(struct npc_state *trainerFieldObject, u16 sightRange, u16 playerX, u16 playerY)
-IsTrainerInRangeNorth: @ 80B3EE4
+	thumb_func_start GetTrainerApproachDistanceNorth
+@ u8 GetTrainerApproachDistanceNorth(struct npc_state *trainerFieldObject, u16 sightRange, u16 playerX, u16 playerY)
+GetTrainerApproachDistanceNorth: @ 80B3EE4
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -290,11 +173,11 @@ _080B3F20:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end IsTrainerInRangeNorth
+	thumb_func_end GetTrainerApproachDistanceNorth
 
-	thumb_func_start IsTrainerInRangeWest
-@ u8 IsTrainerInRangeWest(struct npc_state *trainerFieldObject, u16 sightRange, u16 playerX, u16 playerY)
-IsTrainerInRangeWest: @ 80B3F28
+	thumb_func_start GetTrainerApproachDistanceWest
+@ u8 GetTrainerApproachDistanceWest(struct npc_state *trainerFieldObject, u16 sightRange, u16 playerX, u16 playerY)
+GetTrainerApproachDistanceWest: @ 80B3F28
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -330,11 +213,11 @@ _080B3F64:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end IsTrainerInRangeWest
+	thumb_func_end GetTrainerApproachDistanceWest
 
-	thumb_func_start IsTrainerInRangeEast
-@ u8 IsTrainerInRangeEast(struct npc_state *trainerFieldObject, u16 sightRange, u16 playerX, u16 playerY)
-IsTrainerInRangeEast: @ 80B3F6C
+	thumb_func_start GetTrainerApproachDistanceEast
+@ u8 GetTrainerApproachDistanceEast(struct npc_state *trainerFieldObject, u16 sightRange, u16 playerX, u16 playerY)
+GetTrainerApproachDistanceEast: @ 80B3F6C
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -370,7 +253,7 @@ _080B3FA8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end IsTrainerInRangeEast
+	thumb_func_end GetTrainerApproachDistanceEast
 
 	thumb_func_start CheckPathBetweenTrainerAndPlayer
 @ u8 CheckPathBetweenTrainerAndPlayer(struct npc_state *fieldObject, u8 a2, u8 direction)

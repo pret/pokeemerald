@@ -4,7 +4,7 @@
 struct ApproachingTrainer
 {
     u8 mapObjectId;
-    u8 radius;
+    u8 radius; // plus 1
     u8 field_2;
     u8 field_3;
     const u8 *trainerScriptPtr;

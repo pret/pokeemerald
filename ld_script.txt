@@ -379,7 +379,7 @@ SECTIONS {
         data/field_screen.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
-        data/trainer_see.o(.rodata);
+        src/trainer_see.o(.rodata);
         data/wild_encounter.o(.rodata);
         data/field_effect.o(.rodata);
         data/option_menu.o(.rodata);
