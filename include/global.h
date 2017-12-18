@@ -379,10 +379,12 @@ struct EasyChatPair
     u16 words[2];
 }; /*size = 0x8*/
 
+#define MAIL_WORDS_COUNT 9
+
 struct MailStruct
 {
-    /*0x00*/ u16 words[9];
-    /*0x12*/ u8 playerName[8];
+    /*0x00*/ u16 words[MAIL_WORDS_COUNT];
+    /*0x12*/ u8 playerName[PLAYER_NAME_LENGTH];
     /*0x1A*/ u8 trainerId[4];
     /*0x1E*/ u16 species;
     /*0x20*/ u16 itemId;

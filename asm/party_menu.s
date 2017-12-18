@@ -3402,14 +3402,14 @@ sub_81B1DB8: @ 81B1DB8
 	lsrs r4, r5, 16
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081B1DE2
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_80D4420
+	bl GiveMailToMon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -6216,7 +6216,7 @@ _081B34D2:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B3508
@@ -7791,7 +7791,7 @@ _081B425A:
 	.pool
 _081B4278:
 	ldrh r0, [r6]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B42A4
@@ -7999,7 +7999,7 @@ _081B4402:
 	.pool
 _081B4458:
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B4498
@@ -8681,7 +8681,7 @@ sub_81B4A98: @ 81B4A98
 	adds r0, r1
 	ldr r1, =sub_81B4AE0
 	movs r2, 0x1
-	bl sub_8121478
+	bl ReadMail
 	pop {r0}
 	bx r0
 	.pool
@@ -8801,7 +8801,7 @@ _081B4BC6:
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	bl sub_80D4700
+	bl TakeMailFromMon2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -10735,7 +10735,7 @@ sub_81B5CB0: @ 81B5CB0
 	b _081B5D24
 	.pool
 _081B5CD8:
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B5CFC
@@ -10821,7 +10821,7 @@ _081B5D68:
 	adds r0, r7, r5
 	ldrb r4, [r0]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -10853,7 +10853,7 @@ _081B5DAC:
 	adds r0, r5, r7
 	ldrb r4, [r0, 0x6]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -14728,7 +14728,7 @@ sub_81B7FAC: @ 81B7FAC
 	.pool
 _081B7FF8:
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B800C
@@ -14770,7 +14770,7 @@ sub_81B8044: @ 81B8044
 	lsrs r4, r0, 24
 	ldr r5, =gUnknown_0203CEC8
 	ldrh r0, [r5, 0xC]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B807C
@@ -15093,7 +15093,7 @@ _081B82FA:
 	.pool
 _081B8338:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B835C

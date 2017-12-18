@@ -3360,7 +3360,7 @@ _081AC8D4:
 	bl memcpy
 	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4664,7 +4664,7 @@ item_menu_type_b: @ 81AD4B4
 	lsrs r4, r0, 24
 	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

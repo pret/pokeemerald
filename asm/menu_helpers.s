@@ -512,7 +512,7 @@ itemid_80BF6D8_mail_related: @ 812217C
 	bne _081221A4
 _08122192:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

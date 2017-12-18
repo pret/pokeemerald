@@ -13369,7 +13369,7 @@ sub_807E7E8: @ 807E7E8
 	ldrh r0, [r5, 0x28]
 	cmp r0, 0
 	beq _0807E960
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E954
@@ -13442,7 +13442,7 @@ _0807E98E:
 	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_81DB4DC
+	bl PadNameString
 	ldr r1, [r6, 0x18]
 	lsrs r0, r1, 24
 	strb r0, [r5, 0x1A]

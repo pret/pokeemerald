@@ -185,7 +185,7 @@ extern void sub_80356D0(void);
 extern void GetFrontierTrainerName(u8* dst, u16 trainerId); // battle tower
 extern void sub_8166188(void); // battle tower, sets link battle mons level but why?
 extern void sub_8165B88(u8* dst, u16 trainerId); // battle tower, gets language
-extern void sub_81DB4DC(u8* dst, u8 arg2); //
+extern void PadNameString(u8* dst, u8 arg2); //
 extern void sub_81B9150(void);
 extern void sub_800AC34(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
@@ -1140,7 +1140,7 @@ static void sub_80379F8(u8 arrayIdPlus)
         gUnknown_02022FF8[i].gender      = GetMonGender(&gPlayerParty[arrayIdPlus + i]);
         StripExtCtrlCodes(gUnknown_02022FF8[i].nickname);
         if (GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
-            sub_81DB4DC(gUnknown_02022FF8[i].nickname, 0);
+            PadNameString(gUnknown_02022FF8[i].nickname, CHAR_SPACE);
     }
     memcpy(gUnknown_02023058, gUnknown_02022FF8, sizeof(gUnknown_02022FF8));
 }

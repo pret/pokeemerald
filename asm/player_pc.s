@@ -1263,7 +1263,7 @@ sub_816B8A4: @ 816B8A4
 	adds r0, r1
 	ldr r1, =sub_816B900
 	movs r2, 0x1
-	bl sub_8121478
+	bl ReadMail
 	adds r0, r4, 0
 	bl DestroyTask
 _0816B8E6:
