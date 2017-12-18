@@ -53,7 +53,7 @@
 #define BATTLE_TYPE_PALACE          0x20000
 #define BATTLE_TYPE_ARENA           0x40000
 #define BATTLE_TYPE_FACTORY         0x80000
-#define BATTLE_TYPE_x100000         0x100000
+#define BATTLE_TYPE_PIKE            0x100000
 #define BATTLE_TYPE_PYRAMID         0x200000
 #define BATTLE_TYPE_INGAME_PARTNER  0x400000
 #define BATTLE_TYPE_x800000         0x800000
@@ -62,7 +62,7 @@
 #define BATTLE_TYPE_x4000000        0x4000000
 #define BATTLE_TYPE_SECRET_BASE     0x8000000
 #define BATTLE_TYPE_GROUDON         0x10000000
-#define BATTLE_TYPE_KYORGE          0x20000000
+#define BATTLE_TYPE_KYOGRE          0x20000000
 #define BATTLE_TYPE_RAYQUAZA        0x40000000
 #define BATTLE_TYPE_x80000000       0x80000000
 
@@ -72,8 +72,8 @@
 #define STEVEN_PARTNER_ID           0xC03
 #define SECRET_BASE_OPPONENT        0x400
 
-#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID)
-#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000)
+#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
+#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
 
 #define BATTLE_WON                  0x1
 #define BATTLE_LOST                 0x2
@@ -229,9 +229,9 @@
 #define BATTLE_TERRAIN_UNDERWATER   3
 #define BATTLE_TERRAIN_WATER        4
 #define BATTLE_TERRAIN_POND         5
-#define BATTLE_TERRAIN_ROCK         6
+#define BATTLE_TERRAIN_MOUNTAIN     6
 #define BATTLE_TERRAIN_CAVE         7
-#define BATTLE_TERRAIN_INSIDE       8
+#define BATTLE_TERRAIN_BUILDING     8
 #define BATTLE_TERRAIN_PLAIN        9
 
 // array entries for battle communication
@@ -298,7 +298,6 @@ struct TrainerMonNoItemDefaultMoves
     u16 species;
 };
 
-u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
 u8 GetBankSide(u8 bank);
 
 struct TrainerMonItemDefaultMoves
@@ -328,10 +327,10 @@ struct TrainerMonItemCustomMoves
 
 union TrainerMonPtr
 {
-    struct TrainerMonNoItemDefaultMoves* NoItemDefaultMoves;
-    struct TrainerMonNoItemCustomMoves* NoItemCustomMoves;
-    struct TrainerMonItemDefaultMoves* ItemDefaultMoves;
-    struct TrainerMonItemCustomMoves* ItemCustomMoves;
+    struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
+    struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
+    struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
+    struct TrainerMonItemCustomMoves *ItemCustomMoves;
 };
 
 struct Trainer
@@ -347,9 +346,6 @@ struct Trainer
     /*0x20*/ u8 partySize;
     /*0x24*/ union TrainerMonPtr party;
 };
-
-#define PARTY_FLAG_CUSTOM_MOVES     0x1
-#define PARTY_FLAG_HAS_ITEM         0x2
 
 extern const struct Trainer gTrainers[];
 

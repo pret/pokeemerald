@@ -473,7 +473,7 @@ Route111_EventScript_1F1249:: @ 81F1249
 
 Route111_EventScript_1F1260:: @ 81F1260
 	trainerbattle 2, TRAINER_DUSTY_1, 0, Route111_Text_298B08, Route111_Text_298B53, Route111_EventScript_1F128C
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F12AB
 	msgbox Route111_Text_298B9A, 4
@@ -513,7 +513,7 @@ Route111_EventScript_1F12F0:: @ 81F12F0
 
 Route111_EventScript_1F1307:: @ 81F1307
 	trainerbattle 2, TRAINER_WILTON_1, 0, Route111_Text_298F79, Route111_Text_298FA9, Route111_EventScript_1F1333
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F1352
 	msgbox Route111_Text_298FD4, 4
@@ -538,7 +538,7 @@ Route111_EventScript_1F1352:: @ 81F1352
 
 Route111_EventScript_1F1369:: @ 81F1369
 	trainerbattle 2, TRAINER_BROOKE_1, 0, Route111_Text_299143, Route111_Text_299193, Route111_EventScript_1F1395
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F13B4
 	msgbox Route111_Text_2991C2, 4

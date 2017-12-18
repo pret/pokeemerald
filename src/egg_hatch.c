@@ -58,7 +58,7 @@ extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];
 
 extern u8 sav1_map_get_name(void);
-extern s8 sub_8198C58(void);
+extern s8 ProcessMenuInputNoWrap_(void);
 extern void TVShowConvertInternationalString(u8* str1, u8* str2, u8);
 extern void sub_806A068(u16, u8);
 extern void fade_screen(u8, u8);
@@ -669,7 +669,7 @@ static void CB2_EggHatch_1(void)
         }
         break;
     case 10:
-        switch (sub_8198C58())
+        switch (ProcessMenuInputNoWrap_())
         {
         case 0:
             GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar3);

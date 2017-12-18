@@ -1283,7 +1283,7 @@ u8 sub_80EA20C(u8 secretBaseRecordId)
     return (gSaveBlock1Ptr->secretBases[secretBaseRecordId].trainerId[0] % 5) + (gSaveBlock1Ptr->secretBases[secretBaseRecordId].gender * 5);
 }
 
-const u8 *sub_80EA250(void)
+const u8 *GetSecretBaseTrainerLoseText(void)
 {
     u8 param;
 

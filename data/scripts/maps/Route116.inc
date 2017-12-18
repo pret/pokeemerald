@@ -259,7 +259,7 @@ Route116_EventScript_1F2EA0:: @ 81F2EA0
 
 Route116_EventScript_1F2EB7:: @ 81F2EB7
 	trainerbattle 2, TRAINER_JERRY_1, 0, Route116_Text_29BD0C, Route116_Text_29BD66, Route116_EventScript_1F2EF8
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2F4E
 	setvar VAR_0x8004, 273
@@ -271,7 +271,7 @@ Route116_EventScript_1F2EB7:: @ 81F2EB7
 	end
 
 Route116_EventScript_1F2EF8:: @ 81F2EF8
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F2F03
 	release
 	end
@@ -288,7 +288,7 @@ Route116_EventScript_1F2F03:: @ 81F2F03
 	end
 
 Route116_EventScript_1F2F22:: @ 81F2F22
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F2F35
 	msgbox Route116_Text_29BD92, 4
 	release
@@ -320,7 +320,7 @@ Route116_EventScript_1F2F7C:: @ 81F2F7C
 
 Route116_EventScript_1F2F93:: @ 81F2F93
 	trainerbattle 2, TRAINER_KAREN_1, 0, Route116_Text_29BFC5, Route116_Text_29BFFA, Route116_EventScript_1F2FD4
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F302A
 	setvar VAR_0x8004, 280
@@ -332,7 +332,7 @@ Route116_EventScript_1F2F93:: @ 81F2F93
 	end
 
 Route116_EventScript_1F2FD4:: @ 81F2FD4
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F2FDF
 	release
 	end
@@ -349,7 +349,7 @@ Route116_EventScript_1F2FDF:: @ 81F2FDF
 	end
 
 Route116_EventScript_1F2FFE:: @ 81F2FFE
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F3011
 	msgbox Route116_Text_29C010, 4
 	release

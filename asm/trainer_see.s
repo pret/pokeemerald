@@ -5,133 +5,6 @@
 
 	.text
 
-	thumb_func_start CheckForTrainersWantingBattle
-@ bool8 CheckForTrainersWantingBattle()
-CheckForTrainersWantingBattle: @ 80B3BE8
-	push {r4-r7,lr}
-	ldr r0, =gUnknown_030060A8
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, =gUnknown_02038BFC
-	strb r1, [r0]
-	movs r4, 0
-	ldr r6, =gMapObjects
-_080B3BF8:
-	lsls r0, r4, 3
-	adds r0, r4
-	lsls r0, 2
-	adds r1, r0, r6
-	ldrb r0, [r1]
-	lsls r0, 31
-	cmp r0, 0
-	beq _080B3C38
-	ldrb r0, [r1, 0x7]
-	cmp r0, 0x1
-	beq _080B3C12
-	cmp r0, 0x3
-	bne _080B3C38
-_080B3C12:
-	adds r0, r4, 0
-	bl CheckIfTrainerWantsBattle
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	beq _080B3C42
-	cmp r0, 0
-	beq _080B3C38
-	ldr r0, =gUnknown_030060A8
-	ldrb r1, [r0]
-	adds r5, r0, 0
-	cmp r1, 0x1
-	bhi _080B3C88
-	bl GetMonsStateToDoubles_2
-	lsls r0, 24
-	cmp r0, 0
-	bne _080B3C42
-_080B3C38:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0xF
-	bls _080B3BF8
-_080B3C42:
-	ldr r0, =gUnknown_030060A8
-	ldrb r4, [r0]
-	adds r5, r0, 0
-	cmp r4, 0x1
-	bne _080B3C88
-	bl ResetTrainerOpponentIds
-	ldr r2, =gUnknown_03006090
-	ldrb r0, [r5]
-	subs r0, 0x1
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	adds r2, 0x4
-	adds r1, r2
-	ldr r1, [r1]
-	bl SingleTrainerWantsBattle
-	ldr r0, =gUnknown_030060AC
-	strb r4, [r0]
-	movs r0, 0x1
-	b _080B3CF4
-	.pool
-_080B3C88:
-	ldrb r0, [r5]
-	cmp r0, 0x2
-	bne _080B3CEC
-	bl ResetTrainerOpponentIds
-	movs r4, 0
-	ldrb r5, [r5]
-	cmp r4, r5
-	bcs _080B3CC6
-	ldr r6, =gUnknown_03006090
-	adds r7, r6, 0x4
-	ldr r5, =gUnknown_02038BFC
-_080B3CA0:
-	lsls r1, r4, 1
-	adds r1, r4
-	lsls r1, 2
-	adds r0, r1, r6
-	ldrb r0, [r0]
-	adds r1, r7
-	ldr r1, [r1]
-	bl TwoTrainersWantBattle
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldrb r0, [r5]
-	adds r0, 0x1
-	strb r0, [r5]
-	ldr r0, =gUnknown_030060A8
-	ldrb r0, [r0]
-	cmp r4, r0
-	bcc _080B3CA0
-_080B3CC6:
-	bl TwoTrainersWantBattleExecuteScript
-	ldr r1, =gUnknown_02038BFC
-	movs r0, 0
-	strb r0, [r1]
-	ldr r1, =gUnknown_030060AC
-	movs r0, 0x1
-	strb r0, [r1]
-	movs r0, 0x1
-	b _080B3CF4
-	.pool
-_080B3CEC:
-	ldr r1, =gUnknown_030060AC
-	movs r0, 0
-	strb r0, [r1]
-	movs r0, 0
-_080B3CF4:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end CheckForTrainersWantingBattle
-
 	thumb_func_start CheckIfTrainerWantsBattle
 @ u8 CheckIfTrainerWantsBattle(u8 trainerFieldObjectId)
 CheckIfTrainerWantsBattle: @ 80B3D00
@@ -203,8 +76,8 @@ _080B3D7C:
 	movs r1, 0x2
 	mov r9, r1
 _080B3D8A:
-	ldr r2, =gUnknown_03006090
-	ldr r4, =gUnknown_030060A8
+	ldr r2, =gApproachingTrainers
+	ldr r4, =gNoOfApproachingTrainers
 	ldrb r1, [r4]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -608,8 +481,8 @@ TrainerApproachPlayer: @ 80B406C
 	ldr r0, =c3_8081EDC
 	movs r1, 0x50
 	bl CreateTask
-	ldr r4, =gUnknown_03006090
-	ldr r3, =gUnknown_030060A8
+	ldr r4, =gApproachingTrainers
+	ldr r3, =gNoOfApproachingTrainers
 	ldrb r2, [r3]
 	lsls r1, r2, 1
 	adds r1, r2
@@ -645,16 +518,16 @@ TrainerApproachPlayer: @ 80B406C
 sub_80B40C8: @ 80B40C8
 	push {r4,r5,lr}
 	adds r2, r0, 0
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B40E4
-	ldr r0, =gUnknown_03006090
+	ldr r0, =gApproachingTrainers
 	ldrb r5, [r0, 0x8]
 	b _080B40E8
 	.pool
 _080B40E4:
-	ldr r0, =gUnknown_03006090
+	ldr r0, =gApproachingTrainers
 	ldrb r5, [r0, 0x14]
 _080B40E8:
 	ldr r4, =c3_8081EDC
@@ -1290,11 +1163,11 @@ sub_80B45BC: @ 80B45BC
 	thumb_func_start sub_80B45D0
 sub_80B45D0: @ 80B45D0
 	push {lr}
-	ldr r0, =gUnknown_030060A8
+	ldr r0, =gNoOfApproachingTrainers
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080B4610
-	ldr r1, =gUnknown_02038BFC
+	ldr r1, =gApproachingTrainerId
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080B460C
@@ -1304,7 +1177,7 @@ sub_80B45D0: @ 80B45D0
 	movs r0, 0x1
 	strh r0, [r1]
 	bl UnfreezeMapObjects
-	ldr r0, =gUnknown_03006090
+	ldr r0, =gApproachingTrainers
 	ldrb r0, [r0, 0xC]
 	bl sub_80974D0
 	b _080B4616
@@ -1531,16 +1404,16 @@ _080B47B2:
 	thumb_func_start sub_80B47BC
 sub_80B47BC: @ 80B47BC
 	push {lr}
-	ldr r0, =gUnknown_02038BFC
+	ldr r0, =gApproachingTrainerId
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B47D4
-	ldr r0, =gUnknown_03006090
+	ldr r0, =gApproachingTrainers
 	ldrb r0, [r0, 0xC]
 	b _080B47D8
 	.pool
 _080B47D4:
-	ldr r0, =gUnknown_03006090
+	ldr r0, =gApproachingTrainers
 	ldrb r0, [r0]
 _080B47D8:
 	pop {r1}
@@ -1560,12 +1433,12 @@ sub_80B47E0: @ 80B47E0
 _080B47EE:
 	cmp r0, 0
 	beq _080B47FC
-	ldr r0, =gUnknown_03006090
+	ldr r0, =gApproachingTrainers
 	ldrb r0, [r0, 0xC]
 	b _080B4800
 	.pool
 _080B47FC:
-	ldr r0, =gUnknown_03006090
+	ldr r0, =gApproachingTrainers
 	ldrb r0, [r0]
 _080B4800:
 	pop {r1}
@@ -1580,7 +1453,7 @@ sub_80B4808: @ 80B4808
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080B4870
-	ldr r2, =gUnknown_03006090
+	ldr r2, =gApproachingTrainers
 	ldr r0, =gUnknown_03006080
 	ldrh r1, [r0]
 	lsls r0, r1, 1

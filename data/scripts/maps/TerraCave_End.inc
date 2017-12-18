@@ -38,7 +38,7 @@ TerraCave_End_EventScript_23B0EC:: @ 823B0EC
 	setvar VAR_LAST_TALKED, 1
 	setwildbattle SPECIES_GROUDON, 70, ITEM_NONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0934
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_0x4001, 0

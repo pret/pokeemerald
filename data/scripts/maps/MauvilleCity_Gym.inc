@@ -77,7 +77,7 @@ MauvilleCity_Gym_EventScript_20DEE7:: @ 820DEE7
 
 MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
 	trainerbattle 1, TRAINER_WATTSON_1, 0, MauvilleCity_Gym_Text_20E602, MauvilleCity_Gym_Text_20E734, MauvilleCity_Gym_EventScript_20DF2B
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq MauvilleCity_Gym_EventScript_20DFDE
 	checkflag FLAG_0x0A7

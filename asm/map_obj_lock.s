@@ -62,7 +62,7 @@ _080983E2:
 	thumb_func_start ScriptFreezeMapObjects
 ScriptFreezeMapObjects: @ 80983E8
 	push {lr}
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r0, =sub_80983A4
 	movs r1, 0x50
 	bl CreateTask
@@ -348,7 +348,7 @@ sub_8098630: @ 8098630
 	bl sub_80B47E0
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030060A8
+	ldr r0, =gNoOfApproachingTrainers
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080986E0

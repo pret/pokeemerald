@@ -1359,8 +1359,8 @@ ScriptGiveEgg: @ 80F92C8
 	bx r1
 	thumb_func_end ScriptGiveEgg
 
-	thumb_func_start sub_80F92F8
-sub_80F92F8: @ 80F92F8
+	thumb_func_start HasEnoughMonsForDoubleBattle
+HasEnoughMonsForDoubleBattle: @ 80F92F8
 	push {lr}
 	bl GetMonsStateToDoubles
 	lsls r0, 24
@@ -1382,7 +1382,7 @@ _080F9318:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80F92F8
+	thumb_func_end HasEnoughMonsForDoubleBattle
 
 	thumb_func_start sub_80F9320
 sub_80F9320: @ 80F9320

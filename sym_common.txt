@@ -302,10 +302,10 @@ gUnknown_03006080: @ 3006080
 gUnknown_03006084: @ 3006084
 	.space 0xC
 
-gUnknown_03006090: @ 3006090
+gApproachingTrainers: @ 3006090
 	.space 0x18
 
-gUnknown_030060A8: @ 30060A8
+gNoOfApproachingTrainers: @ 30060A8
 	.space 0x4
 
 gUnknown_030060AC: @ 30060AC

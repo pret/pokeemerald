@@ -5,9 +5,6 @@
 
 	.text
 
-
-
-
 	thumb_func_start sub_81370FC
 sub_81370FC: @ 81370FC
 	push {r4,lr}
@@ -862,13 +859,15 @@ _0813785A:
 	thumb_func_start sp0C8_whiteout_maybe
 sp0C8_whiteout_maybe: @ 813787C
 	push {lr}
-	ldr r0, =c2_whiteout
+	ldr r0, =CB2_WhiteOut
 	bl SetMainCallback2
 	movs r0, 0
 	pop {r1}
 	bx r1
 	.pool
 	thumb_func_end sp0C8_whiteout_maybe
+
+@ time_events.o
 
 	thumb_func_start sub_8137890
 sub_8137890: @ 8137890
@@ -926,8 +925,8 @@ sub_81378E4: @ 81378E4
 	bx r0
 	thumb_func_end sub_81378E4
 
-	thumb_func_start sub_8137904
-sub_8137904: @ 8137904
+	thumb_func_start UpdateMirageRnd
+UpdateMirageRnd: @ 8137904
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -953,7 +952,7 @@ _08137928:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8137904
+	thumb_func_end UpdateMirageRnd
 
 	thumb_func_start sub_813793C
 sub_813793C: @ 813793C
@@ -1067,8 +1066,8 @@ sub_8137A0C: @ 8137A0C
 	.pool
 	thumb_func_end sub_8137A0C
 
-	thumb_func_start sub_8137A20
-sub_8137A20: @ 8137A20
+	thumb_func_start UpdateBirchState
+UpdateBirchState: @ 8137A20
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -1087,7 +1086,9 @@ sub_8137A20: @ 8137A20
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8137A20
+	thumb_func_end UpdateBirchState
+
+@ birch_pc.o
 
 	thumb_func_start sub_8137A4C
 sub_8137A4C: @ 8137A4C
@@ -4287,15 +4288,15 @@ _08139456:
 	bx r1
 	thumb_func_end sub_81393FC
 
-	thumb_func_start sub_813945C
-sub_813945C: @ 813945C
+	thumb_func_start SetShoalItemFlag
+SetShoalItemFlag: @ 813945C
 	push {lr}
 	ldr r0, =0x000008bf
 	bl FlagSet
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813945C
+	thumb_func_end SetShoalItemFlag
 
 	thumb_func_start sub_813946C
 sub_813946C: @ 813946C
@@ -5616,8 +5617,8 @@ _08139EEE:
 	bx r1
 	thumb_func_end sub_8139ED0
 
-	thumb_func_start sub_8139EF4
-sub_8139EF4: @ 8139EF4
+	thumb_func_start UpdateFrontierManiac
+UpdateFrontierManiac: @ 8139EF4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -5636,7 +5637,7 @@ sub_8139EF4: @ 8139EF4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8139EF4
+	thumb_func_end UpdateFrontierManiac
 
 	thumb_func_start sub_8139F20
 sub_8139F20: @ 8139F20
@@ -6684,8 +6685,8 @@ _0813A7C6:
 	.pool
 	thumb_func_end sub_813A7B8
 
-	thumb_func_start sub_813A7F4
-sub_813A7F4: @ 813A7F4
+	thumb_func_start UpdateFrontierGambler
+UpdateFrontierGambler: @ 813A7F4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -6704,7 +6705,7 @@ sub_813A7F4: @ 813A7F4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813A7F4
+	thumb_func_end UpdateFrontierGambler
 
 	thumb_func_start sub_813A820
 sub_813A820: @ 813A820

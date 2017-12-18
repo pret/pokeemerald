@@ -266,7 +266,7 @@ sub_80FD254: @ 80FD254
 	ldr r1, =bag_menu_mail_related
 	mov r0, sp
 	movs r2, 0
-	bl sub_8121478
+	bl ReadMail
 	add sp, 0x24
 	pop {r0}
 	bx r0

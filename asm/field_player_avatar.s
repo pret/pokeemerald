@@ -3896,7 +3896,7 @@ sub_808C750: @ 808C750
 	lsls r4, 24
 	lsrs r4, 24
 	bl ScriptContext2_Enable
-	bl sav1_reset_battle_music_maybe
+	bl Overworld_ClearSavedMusic
 	bl Overworld_ChangeMusicToDefault
 	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2]

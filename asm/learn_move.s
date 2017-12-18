@@ -353,7 +353,7 @@ _08160994:
 	b _08160E88
 	.pool
 _081609A8:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -433,7 +433,7 @@ _08160A50:
 	b _08160E88
 	.pool
 _08160A64:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -493,7 +493,7 @@ _08160ADC:
 	b _08160E88
 	.pool
 _08160AEC:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -551,7 +551,7 @@ _08160B6C:
 	b _08160E88
 	.pool
 _08160B80:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0

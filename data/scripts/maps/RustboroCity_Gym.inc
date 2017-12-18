@@ -3,7 +3,7 @@ RustboroCity_Gym_MapScripts:: @ 8212F30
 
 RustboroCity_Gym_EventScript_212F31:: @ 8212F31
 	trainerbattle 1, TRAINER_ROXANNE_1, 0, RustboroCity_Gym_Text_21362A, RustboroCity_Gym_Text_21370B, RustboroCity_Gym_EventScript_212F66
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq RustboroCity_Gym_EventScript_212FC8
 	checkflag FLAG_0x0A5

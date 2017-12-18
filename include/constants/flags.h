@@ -303,7 +303,7 @@
 #define FLAG_0x12C               0x12C
 #define FLAG_0x12D               0x12D
 #define FLAG_0x12E               0x12E
-#define FLAG_0x12F               0x12F
+#define FLAG_HAS_MATCH_CALL      0x12F
 #define FLAG_0x130               0x130
 #define FLAG_0x131               0x131
 #define FLAG_0x132               0x132
@@ -348,7 +348,7 @@
 #define FLAG_0x159               0x159
 #define FLAG_0x15A               0x15A
 #define FLAG_0x15B               0x15B
-#define FLAG_0x15C               0x15C
+#define FLAG_MATCH_CALL_REGISTERED 0x15C
 #define FLAG_0x15D               0x15D
 #define FLAG_0x15E               0x15E
 #define FLAG_0x15F               0x15F

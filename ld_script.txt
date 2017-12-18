@@ -105,7 +105,7 @@ SECTIONS {
         src/event_data.o(.text);
         asm/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
-        asm/clock.o(.text);
+        src/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
         src/start_menu.o(.text);
         asm/start_menu.o(.text);
@@ -119,8 +119,9 @@ SECTIONS {
         asm/battle_anim_80A9C70.o(.text);
         asm/title_screen.o(.text);
         asm/field_screen.o(.text);
-        asm/battle_setup.o(.text);
+        src/battle_setup.o(.text);
         asm/cable_club.o(.text);
+        src/trainer_see.o(.text);
         asm/trainer_see.o(.text);
         src/wild_encounter.o(.text);
         asm/field_effect.o(.text);
@@ -133,7 +134,7 @@ SECTIONS {
         asm/pokemon_icon.o(.text);
         asm/script_movement.o(.text);
         asm/fldeff_cut.o(.text);
-        asm/mail_data.o(.text);
+        src/mail_data.o(.text);
         asm/map_name_popup.o(.text);
         asm/item_menu_icons.o(.text);
         asm/battle_anim_80D51AC.o(.text);
@@ -176,7 +177,7 @@ SECTIONS {
         src/battle_ai_script_commands.o(.text);
         asm/trader.o(.text);
         src/starter_choose.o(.text);
-        asm/wallclock.o(.text);
+        src/wallclock.o(.text);
         asm/rom6.o(.text);
         src/pokeblock.o(.text);
         asm/rom_81370FC.o(.text);
@@ -379,7 +380,7 @@ SECTIONS {
         data/battle_anim_80A9C70.o(.rodata);
         data/title_screen.o(.rodata);
         data/field_screen.o(.rodata);
-        data/battle_setup.o(.rodata);
+        src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         data/trainer_see.o(.rodata);
         data/wild_encounter.o(.rodata);
@@ -425,7 +426,7 @@ SECTIONS {
         src/battle_ai_script_commands.o(.rodata);
         data/data4.o(.rodata);
         data/starter_choose.o(.rodata);
-        data/data4c.o(.rodata);
+        src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
         data/data4d.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);

@@ -105,7 +105,7 @@ void SafariZoneRetirePrompt(void)
     ScriptContext1_SetupScript(EventScript_2A4B6F);
 }
 
-void sub_80FC190(void)
+void CB2_EndSafariBattle(void)
 {
     sSafariZoneFleedMons += gBattleResults.field_1F;
     if (gBattleOutcome == BATTLE_CAUGHT)

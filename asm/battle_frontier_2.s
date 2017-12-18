@@ -12380,7 +12380,7 @@ _081A0C8E:
 sub_81A0C9C: @ 81A0C9C
 	push {lr}
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
 	movs r0, 0

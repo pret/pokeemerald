@@ -61,17 +61,17 @@ gSpecials:: @ 81DBA64
 	def_special FieldObjectInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
-	def_special sub_80B170C
-	def_special sub_80B1A14
-	def_special special_trainer_unable_to_battle
-	def_special check_trainer_flag
+	def_special GetTrainerBattleMode
+	def_special ShowTrainerIntroSpeech
+	def_special ShowTrainerCantBattleSpeech
+	def_special GetTrainerFlag
 	def_special sub_80B45AC
 	def_special SetUpTrainerEncounterMusic
-	def_special sub_80B226C
-	def_special sub_80B22A0
-	def_special sub_80B19EC
+	def_special ShouldTryRematchBattle
+	def_special IsTrainerReadyForRematch
+	def_special BattleSetup_StartRematchBattle
 	def_special sub_80C7578
-	def_special sub_80F92F8
+	def_special HasEnoughMonsForDoubleBattle
 	def_special TurnOffTVScreen
 	def_special DoTVShow
 	def_special DoPokeNews
@@ -164,10 +164,10 @@ gSpecials:: @ 81DBA64
 	def_special sub_8138B8C
 	def_special sub_814FC9C
 	def_special sub_8085784
-	def_special Special_StartWallClock
+	def_special StartWallClock
 	def_special Special_ViewWallClock
-	def_special sub_80B1138
-	def_special sub_80B086C
+	def_special ChooseStarter
+	def_special StartWallyTutorialBattle
 	def_special ChangePokemonNickname
 	def_special sub_81B94B0
 	def_special GetFirstFreePokeblockSlot
@@ -320,9 +320,9 @@ gSpecials:: @ 81DBA64
 	def_special sub_8139540
 	def_special sub_809E1C8
 	def_special sub_8139560
-	def_special sub_80B0A18
-	def_special sub_80B0934
-	def_special sub_80B0A74
+	def_special StartGroudonKyogreBattle
+	def_special BattleSetup_StartLegendaryBattle
+	def_special StartRegiBattle
 	def_special sub_80B16D8
 	def_special DoSealedChamberShakingEffect2
 	def_special sub_8139634
@@ -332,7 +332,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_80F8D28
 	def_special sub_80F8EB8
 	def_special sub_8162794
-	def_special sub_80B08EC
+	def_special BattleSetup_StartLatiBattle
 	def_special sub_8139648
 	def_special sub_8139668
 	def_special sub_80F8FA0
@@ -415,7 +415,7 @@ gSpecials:: @ 81DBA64
 	def_special PutLilycoveContestLadyShowOnTheAir
 	def_special sub_813B880
 	def_special sub_81A085C
-	def_special CheckIfMultipleTrainersWantBattle
+	def_special ShouldTryGetTrainerScript
 	def_special AddMapNamePopUpWindowTask
 	def_special AddMapNamePopUpWindowTask
 	def_special sub_81BE994

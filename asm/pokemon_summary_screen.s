@@ -4207,7 +4207,7 @@ sub_81C61E0: @ 81C61E0
 	cmp r0, 0x3
 	beq _081C620C
 	ldrh r0, [r4]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4673,7 +4673,7 @@ sub_81C6648: @ 81C6648
 	bl sub_81C61A8
 	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

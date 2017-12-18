@@ -279,7 +279,7 @@ PetalburgWoods_EventScript_22E26D:: @ 822E26D
 
 PetalburgWoods_EventScript_22E284:: @ 822E284
 	trainerbattle 2, TRAINER_JAMES_1, 0, PetalburgWoods_Text_22E827, PetalburgWoods_Text_22E86B, PetalburgWoods_EventScript_22E2C5
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq PetalburgWoods_EventScript_22E31B
 	setvar VAR_0x8004, 621
@@ -293,7 +293,7 @@ PetalburgWoods_EventScript_22E284:: @ 822E284
 PetalburgWoods_EventScript_22E2C5:: @ 822E2C5
 	special sub_80B4808
 	waitmovement 0
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq PetalburgWoods_EventScript_22E2D6
 	release
 	end
@@ -308,7 +308,7 @@ PetalburgWoods_EventScript_22E2D6:: @ 822E2D6
 	end
 
 PetalburgWoods_EventScript_22E2EF:: @ 822E2EF
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq PetalburgWoods_EventScript_22E302
 	msgbox PetalburgWoods_Text_22E889, 4
 	release
