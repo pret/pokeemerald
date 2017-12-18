@@ -71,8 +71,9 @@ enum FieldEffectScriptIdx
 
 extern u32 gFieldEffectArguments[8];
 
-u8 FieldEffectStart(u8);
+u32 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);
 void sub_80B69DC(void);
+void FieldEffectStop(struct Sprite *sprite, u8 id);
 
 #endif //GUARD_FIELD_EFFECTS_H

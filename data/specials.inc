@@ -65,7 +65,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowTrainerIntroSpeech
 	def_special ShowTrainerCantBattleSpeech
 	def_special GetTrainerFlag
-	def_special sub_80B45AC
+	def_special EndTrainerApproach
 	def_special SetUpTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
 	def_special IsTrainerReadyForRematch

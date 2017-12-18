@@ -2332,7 +2332,7 @@ bool8 ScrCmd_mossdeepgym4(struct ScriptContext *ctx)
 
 bool8 ScrCmd_cmdD8(struct ScriptContext *ctx)
 {
-    gSelectedMapObject = sub_80B47BC();
+    gSelectedMapObject = GetCurrentApproachingTrainerMapObjectId();
     return FALSE;
 }
 

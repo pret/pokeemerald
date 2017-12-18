@@ -60,7 +60,7 @@ void sub_808E82C(u8, u8, u8, s16, s16);
 void sub_808E7E4(u8, u8, u8);
 void sub_808E78C(u8, u8, u8, u8);
 void sub_808E75C(s16, s16);
-void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
+void FieldObjectGetLocalIdAndMap(struct MapObject *mapObject, void *localId, void *mapNum, void *mapGroup);
 void npc_coords_shift(struct MapObject *, s16, s16);
 void sub_808EB08(struct MapObject *, s16, s16);
 void sub_808F254(u8, u8, u8);
@@ -79,6 +79,15 @@ u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z);
 void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern);
 u8 npc_running_behaviour_by_direction(u8 direction);
 const u8 *GetFieldObjectScriptPointerByFieldObjectId(u8 mapObjectId);
+u8 sub_8092C8C(struct MapObject *mapObject, s16 x, s16 y, u8 direction);
+u8 GetFaceDirectionAnimId(u32);
+u8 GetGoSpeed0AnimId(u32);
+u8 sub_80934BC(u32);
+bool8 FieldObjectSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId);
+bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *mapObject);
+u8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *mapObject);
+void sub_808F23C(const struct MapObject *mapObject, u8 movementType);
+void sub_808F208(const struct MapObject *mapObject);
 
 // Exported data declarations
 

@@ -844,7 +844,7 @@ EventScript_271354:: @ 8271354
 
 EventScript_271356:: @ 8271356
 	special SetUpTrainerEncounterMusic
-	special sub_80B45AC
+	special EndTrainerApproach
 	waitstate
 	goto EventScript_ShowTrainerIntroMsg
 
