@@ -1,4 +1,5 @@
 #include "global.h"
+#include "mail.h"
 #include "constants/items.h"
 #include "main.h"
 #include "overworld.h"
@@ -18,117 +19,6 @@
 #include "constants/species.h"
 #include "malloc.h"
 #include "easy_chat.h"
-#include "mail_data.h"
-#include "mail.h"
-
-// Static type declarations
-
-struct UnkMailStruct
-{
-    u32 numEasyChatWords:2;
-    u32 xOffset:6;
-    u32 lineHeight:8;
-};
-
-struct MailLayout
-{
-    u8 numSubStructs;
-    u8 signatureYPos;
-    u8 signatureWidth;
-    u8 wordsXPos;
-    u8 wordsYPos;
-    const struct UnkMailStruct *var8;
-};
-
-struct MailGraphics
-{
-    const u16 *palette;
-    const u8 *tiles;
-    const u8 *tileMap;
-    u16 var0C;
-    u16 var0E;
-    u16 color10;
-    u16 color12;
-};
-
-// Static RAM declarations
-
-static EWRAM_DATA struct
-{
-    /*0x0000*/ u8 strbuf[8][64];
-    /*0x0200*/ u8 playerName[12];
-    /*0x020C*/ MainCallback callback;
-    /*0x0210*/ MainCallback callback2;
-    /*0x0214*/ struct MailStruct *mail;
-    /*0x0218*/ bool8 flag;
-    /*0x0219*/ u8 signatureWidth;
-    /*0x021a*/ u8 mailType;
-    /*0x021b*/ u8 animsActive;
-    /*0x021c*/ u8 monIconSprite;
-    /*0x021d*/ u8 language;
-    /*0x021e*/ bool8 playerIsSender;
-    /*0x0220*/ void (*parserSingle)(u8 *dest, u16 word);
-    /*0x0224*/ void (*parserMultiple)(u8 *dest, const u16 *src, u16 length1, u16 length2);
-    /*0x0228*/ const struct MailLayout *layout;
-    /*0x022c*/ u8 bg1TilemapBuffer[0x1000];
-    /*0x122c*/ u8 bg2TilemapBuffer[0x1000];
-} *gUnknown_0203A134 = NULL;
-
-// Static ROM declarations
-
-void sub_81219F0(void);
-void sub_8121A1C(void);
-void sub_8121B1C(void);
-void sub_8121C50(void);
-void sub_8121C64(void);
-void sub_8121C98(void);
-void sub_8121CC0(void);
-void sub_8121D00(void);
-
-// .rodata
-
-const struct BgTemplate gUnknown_0859F290[] = {
-    {
-        .bg = 0,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 31,
-        .priority = 0
-    }, {
-        .bg = 1,
-        .charBaseIndex = 0,
-        .mapBaseIndex = 30,
-        .priority = 1
-    }, {
-        .bg = 2,
-        .charBaseIndex = 0,
-        .mapBaseIndex = 29,
-        .priority = 2
-    }
-};
-
-const struct WindowTemplate gUnknown_0859F29C[] = {
-    {
-        .priority = 0,
-        .tilemapLeft = 2,
-        .tilemapTop = 3,
-        .width = 26,
-        .height = 15,
-        .paletteNum = 15,
-        .baseBlock = 1
-    },
-    DUMMY_WIN_TEMPLATE
-};
-
-const u8 gUnknown_0859F2AC[] = {
-     0,
-    10,
-    11
-};
-
-const u16 gUnknown_0859F2B0[][2] = {
-    { 0x6ACD, 0x51A5 },
-    { 0x45FC, 0x38D4 }
-};
 
 extern const u16 gUnknown_08DBE818[];
 extern const u16 gUnknown_08DBE838[];
@@ -167,7 +57,118 @@ extern const u8 gUnknown_08DC04E8[];
 extern const u8 gUnknown_08DBF904[];
 extern const u8 gUnknown_08DC0600[];
 
-const struct MailGraphics gUnknown_0859F2B8[] = {
+// Static type declarations
+
+struct UnkMailStruct
+{
+    u32 numEasyChatWords:2;
+    u32 xOffset:6;
+    u32 lineHeight:8;
+};
+
+struct MailLayout
+{
+    u8 numSubStructs;
+    u8 signatureYPos;
+    u8 signatureWidth;
+    u8 wordsXPos;
+    u8 wordsYPos;
+    const struct UnkMailStruct *var8;
+};
+
+struct MailGraphics
+{
+    const u16 *palette;
+    const u8 *tiles;
+    const u8 *tileMap;
+    u16 var0C;
+    u16 var0E;
+    u16 color10;
+    u16 color12;
+};
+
+struct MailRead
+{
+    /*0x0000*/ u8 strbuf[8][64];
+    /*0x0200*/ u8 playerName[12];
+    /*0x020C*/ MainCallback callback;
+    /*0x0210*/ MainCallback callback2;
+    /*0x0214*/ struct MailStruct *mail;
+    /*0x0218*/ bool8 flag;
+    /*0x0219*/ u8 signatureWidth;
+    /*0x021a*/ u8 mailType;
+    /*0x021b*/ u8 animsActive;
+    /*0x021c*/ u8 monIconSprite;
+    /*0x021d*/ u8 language;
+    /*0x021e*/ bool8 playerIsSender;
+    /*0x0220*/ void (*parserSingle)(u8 *dest, u16 word);
+    /*0x0224*/ void (*parserMultiple)(u8 *dest, const u16 *src, u16 length1, u16 length2);
+    /*0x0228*/ const struct MailLayout *layout;
+    /*0x022c*/ u8 bg1TilemapBuffer[0x1000];
+    /*0x122c*/ u8 bg2TilemapBuffer[0x1000];
+};
+
+// Static RAM declarations
+
+static EWRAM_DATA struct MailRead *sMailRead = NULL;
+
+// Static ROM declarations
+
+static void CB2_InitMailRead(void);
+static void sub_8121A1C(void);
+static void sub_8121B1C(void);
+static void VBlankCB_MailRead(void);
+static void CB2_MailRead(void);
+static void CB2_WaitForPaletteExitOnKeyPress(void);
+static void CB2_ExitOnKeyPress(void);
+static void CB2_ExitMailReadFreeVars(void);
+
+// .rodata
+
+static const struct BgTemplate sUnknown_0859F290[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .priority = 0
+    }, {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .priority = 1
+    }, {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 29,
+        .priority = 2
+    }
+};
+
+static const struct WindowTemplate sUnknown_0859F29C[] = {
+    {
+        .priority = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 3,
+        .width = 26,
+        .height = 15,
+        .paletteNum = 15,
+        .baseBlock = 1
+    },
+    DUMMY_WIN_TEMPLATE
+};
+
+static const u8 sUnknown_0859F2AC[] = {
+     0,
+    10,
+    11
+};
+
+static const u16 sUnknown_0859F2B0[][2] = {
+    { 0x6ACD, 0x51A5 },
+    { 0x45FC, 0x38D4 }
+};
+
+static const struct MailGraphics sUnknown_0859F2B8[] = {
     {
         gUnknown_08DBE818, gUnknown_08DBE998, gUnknown_08DBFBA4, 0x02c0, 0x0000, 0x294a, 0x6739
     }, {
@@ -195,13 +196,13 @@ const struct MailGraphics gUnknown_0859F2B8[] = {
     }
 };
 
-const struct UnkMailStruct Unknown_0859F3A8[] = {
+static const struct UnkMailStruct Unknown_0859F3A8[] = {
     { .numEasyChatWords = 3, .lineHeight = 16 },
     { .numEasyChatWords = 3, .lineHeight = 16 },
     { .numEasyChatWords = 3, .lineHeight = 16 }
 };
 
-const struct MailLayout gUnknown_0859F3B4[] = {
+static const struct MailLayout sUnknown_0859F3B4[] = {
     { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
     { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
     { 0x03, 0x00, 0x00, 0x02, 0x04, Unknown_0859F3A8 },
@@ -216,7 +217,7 @@ const struct MailLayout gUnknown_0859F3B4[] = {
     { 0x03, 0x00, 0x00, 0x02, 0x00, Unknown_0859F3A8 }
 };
 
-const struct UnkMailStruct Unknown_0859F444[] = {
+static const struct UnkMailStruct Unknown_0859F444[] = {
     { .numEasyChatWords = 2, .lineHeight = 16 },
     { .numEasyChatWords = 2, .lineHeight = 16 },
     { .numEasyChatWords = 2, .lineHeight = 16 },
@@ -224,7 +225,7 @@ const struct UnkMailStruct Unknown_0859F444[] = {
     { .numEasyChatWords = 1, .lineHeight = 16 }
 };
 
-const struct MailLayout gUnknown_0859F458[] = {
+static const struct MailLayout sUnknown_0859F458[] = {
     { 0x05, 0x07, 0x58, 0x0b, 0x1e, Unknown_0859F444 },
     { 0x05, 0x0a, 0x60, 0x09, 0x1e, Unknown_0859F444 },
     { 0x05, 0x0c, 0x68, 0x05, 0x1e, Unknown_0859F444 },
@@ -241,23 +242,23 @@ const struct MailLayout gUnknown_0859F458[] = {
 
 // What the heck are these meant to be? Call them u16 for now.
 
-const u16 Unknown_0859F4E8[] = {
+static const u16 Unknown_0859F4E8[] = {
     0x00, 0x4000, 0x00, 0x00
 };
 
-const u16 Unknown_0859F4F0[] = {
+static const u16 Unknown_0859F4F0[] = {
     0x00, 0x00, -1, 0x00
 };
 
-const u16 Unknown_0859F4F8[] = {
+static const u16 Unknown_0859F4F8[] = {
     0x04, 0x00, -1, 0x00
 };
 
-const u16 Unknown_0859F500[] = {
+static const u16 Unknown_0859F500[] = {
     0x00, 0x40, -1, 0x00
 };
 
-const u16 *const gUnknown_0859F508[] = {
+static const u16 *const sUnknown_0859F508[] = {
     Unknown_0859F4F0,
     Unknown_0859F4F8,
     Unknown_0859F500
@@ -265,60 +266,62 @@ const u16 *const gUnknown_0859F508[] = {
 
 // .text
 
-void sub_8121478(struct MailStruct *mail, MainCallback callback, bool8 flag) {
+void ReadMail(struct MailStruct *mail, void (*callback)(void), bool8 flag)
+{
     u16 buffer[2];
     u16 species;
 
-    gUnknown_0203A134 = calloc(1, sizeof(*gUnknown_0203A134));
-    gUnknown_0203A134->language = LANGUAGE_ENGLISH;
-    gUnknown_0203A134->playerIsSender = TRUE;
-    gUnknown_0203A134->parserSingle = CopyEasyChatWord;
-    gUnknown_0203A134->parserMultiple = ConvertEasyChatWordsToString;
-    if (mail->itemId >= ITEM_ORANGE_MAIL && mail->itemId <= ITEM_RETRO_MAIL) {
-        gUnknown_0203A134->mailType = mail->itemId - ITEM_ORANGE_MAIL;
+    sMailRead = calloc(1, sizeof(*sMailRead));
+    sMailRead->language = LANGUAGE_ENGLISH;
+    sMailRead->playerIsSender = TRUE;
+    sMailRead->parserSingle = CopyEasyChatWord;
+    sMailRead->parserMultiple = ConvertEasyChatWordsToString;
+    if (IS_ITEM_MAIL(mail->itemId))
+    {
+        sMailRead->mailType = mail->itemId - ITEM_ORANGE_MAIL;
     }
     else
     {
-        gUnknown_0203A134->mailType = 0;
+        sMailRead->mailType = 0;
         flag = FALSE;
     }
-    switch (gUnknown_0203A134->playerIsSender)
+    switch (sMailRead->playerIsSender)
     {
         case FALSE:
         default:
-            gUnknown_0203A134->layout = &gUnknown_0859F3B4[gUnknown_0203A134->mailType];
+            sMailRead->layout = &sUnknown_0859F3B4[sMailRead->mailType];
             break;
         case TRUE:
-            gUnknown_0203A134->layout = &gUnknown_0859F458[gUnknown_0203A134->mailType];
+            sMailRead->layout = &sUnknown_0859F458[sMailRead->mailType];
             break;
     }
-    species = sub_80D45E8(mail->species, buffer);
+    species = MailSpeciesToSpecies(mail->species, buffer);
     if (species >= SPECIES_BULBASAUR && species < NUM_SPECIES)
     {
-        switch (gUnknown_0203A134->mailType)
+        switch (sMailRead->mailType)
         {
             default:
-                gUnknown_0203A134->animsActive = 0;
+                sMailRead->animsActive = 0;
                 break;
             case ITEM_BEAD_MAIL - ITEM_ORANGE_MAIL:
-                gUnknown_0203A134->animsActive = 1;
+                sMailRead->animsActive = 1;
                 break;
             case ITEM_DREAM_MAIL - ITEM_ORANGE_MAIL:
-                gUnknown_0203A134->animsActive = 2;
+                sMailRead->animsActive = 2;
                 break;
         }
     }
     else
     {
-        gUnknown_0203A134->animsActive = 0;
+        sMailRead->animsActive = 0;
     }
-    gUnknown_0203A134->mail = mail;
-    gUnknown_0203A134->callback = callback;
-    gUnknown_0203A134->flag = flag;
-    SetMainCallback2(sub_81219F0);
+    sMailRead->mail = mail;
+    sMailRead->callback = callback;
+    sMailRead->flag = flag;
+    SetMainCallback2(CB2_InitMailRead);
 }
 
-bool8 sub_81215EC(void)
+static bool8 MailReadBuildGraphics(void)
 {
     u16 icon;
 
@@ -352,21 +355,21 @@ bool8 sub_81215EC(void)
             SetGpuReg(REG_OFFSET_BG2HOFS, 0x0000);
             SetGpuReg(REG_OFFSET_BG3HOFS, 0x0000);
             SetGpuReg(REG_OFFSET_BG3VOFS, 0x0000);
-            SetGpuReg(REG_OFFSET_BLDCNT, 0x0000);
+            SetGpuReg(REG_OFFSET_BLDCNT,  0x0000);
             SetGpuReg(REG_OFFSET_BLDALPHA, 0x0000);
             break;
         case 6:
             ResetBgsAndClearDma3BusyFlags(0);
-            InitBgsFromTemplates(0, gUnknown_0859F290, 3);
-            SetBgTilemapBuffer(1, gUnknown_0203A134->bg1TilemapBuffer);
-            SetBgTilemapBuffer(2, gUnknown_0203A134->bg2TilemapBuffer);
+            InitBgsFromTemplates(0, sUnknown_0859F290, 3);
+            SetBgTilemapBuffer(1, sMailRead->bg1TilemapBuffer);
+            SetBgTilemapBuffer(2, sMailRead->bg2TilemapBuffer);
             break;
         case 7:
-            InitWindows(gUnknown_0859F29C);
+            InitWindows(sUnknown_0859F29C);
             DeactivateAllTextPrinters();
             break;
         case 8:
-            decompress_and_copy_tile_data_to_vram(1, gUnknown_0859F2B8[gUnknown_0203A134->mailType].tiles, 0, 0, 0);
+            decompress_and_copy_tile_data_to_vram(1, sUnknown_0859F2B8[sMailRead->mailType].tiles, 0, 0, 0);
             break;
         case 9:
             if (free_temp_tile_data_buffers_if_possible())
@@ -377,7 +380,7 @@ bool8 sub_81215EC(void)
         case 10:
             FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
             FillBgTilemapBufferRect_Palette0(2, 1, 0, 0, 30, 20);
-            CopyToBgTilemapBuffer(1, gUnknown_0859F2B8[gUnknown_0203A134->mailType].tileMap, 0, 0);
+            CopyToBgTilemapBuffer(1, sUnknown_0859F2B8[sMailRead->mailType].tileMap, 0, 0);
             break;
         case 11:
             CopyBgTilemapBufferToVram(0);
@@ -386,24 +389,24 @@ bool8 sub_81215EC(void)
             break;
         case 12:
             LoadPalette(GetOverworldTextboxPalettePtr(), 240, 32);
-            gPlttBufferUnfaded[250] = gUnknown_0859F2B8[gUnknown_0203A134->mailType].color10;
-            gPlttBufferFaded[250] = gUnknown_0859F2B8[gUnknown_0203A134->mailType].color10;
-            gPlttBufferUnfaded[251] = gUnknown_0859F2B8[gUnknown_0203A134->mailType].color12;
-            gPlttBufferFaded[251] = gUnknown_0859F2B8[gUnknown_0203A134->mailType].color12;
-            LoadPalette(gUnknown_0859F2B8[gUnknown_0203A134->mailType].palette, 0, 32);
-            gPlttBufferUnfaded[10] = gUnknown_0859F2B0[gSaveBlock2Ptr->playerGender][0];
-            gPlttBufferFaded[10] = gUnknown_0859F2B0[gSaveBlock2Ptr->playerGender][0];
-            gPlttBufferUnfaded[11] = gUnknown_0859F2B0[gSaveBlock2Ptr->playerGender][1];
-            gPlttBufferFaded[11] = gUnknown_0859F2B0[gSaveBlock2Ptr->playerGender][1];
+            gPlttBufferUnfaded[250] = sUnknown_0859F2B8[sMailRead->mailType].color10;
+            gPlttBufferFaded[250] = sUnknown_0859F2B8[sMailRead->mailType].color10;
+            gPlttBufferUnfaded[251] = sUnknown_0859F2B8[sMailRead->mailType].color12;
+            gPlttBufferFaded[251] = sUnknown_0859F2B8[sMailRead->mailType].color12;
+            LoadPalette(sUnknown_0859F2B8[sMailRead->mailType].palette, 0, 32);
+            gPlttBufferUnfaded[10] = sUnknown_0859F2B0[gSaveBlock2Ptr->playerGender][0];
+            gPlttBufferFaded[10] = sUnknown_0859F2B0[gSaveBlock2Ptr->playerGender][0];
+            gPlttBufferUnfaded[11] = sUnknown_0859F2B0[gSaveBlock2Ptr->playerGender][1];
+            gPlttBufferFaded[11] = sUnknown_0859F2B0[gSaveBlock2Ptr->playerGender][1];
             break;
         case 13:
-            if (gUnknown_0203A134->flag)
+            if (sMailRead->flag)
             {
                 sub_8121A1C();
             }
             break;
         case 14:
-            if (gUnknown_0203A134->flag)
+            if (sMailRead->flag)
             {
                 sub_8121B1C();
                 RunTextPrinters();
@@ -416,20 +419,20 @@ bool8 sub_81215EC(void)
             }
             break;
         case 16:
-            SetVBlankCallback(sub_8121C50);
+            SetVBlankCallback(VBlankCB_MailRead);
             gPaletteFade.bufferTransferDisabled = TRUE;
             break;
         case 17:
-            icon = sub_80D2E84(gUnknown_0203A134->mail->species);
-            switch (gUnknown_0203A134->animsActive)
+            icon = sub_80D2E84(sMailRead->mail->species);
+            switch (sMailRead->animsActive)
             {
                 case 1:
                     sub_80D2F68(icon);
-                    gUnknown_0203A134->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x60, 0x80, 0, 0);
+                    sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x60, 0x80, 0, 0);
                     break;
                 case 2:
                     sub_80D2F68(icon);
-                    gUnknown_0203A134->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x28, 0x80, 0, 0);
+                    sMailRead->monIconSprite = sub_80D2D78(icon, SpriteCallbackDummy, 0x28, 0x80, 0, 0);
                     break;
             }
             break;
@@ -440,53 +443,53 @@ bool8 sub_81215EC(void)
             ShowBg(2);
             BeginNormalPaletteFade(-1, 0, 16, 0, 0);
             gPaletteFade.bufferTransferDisabled = FALSE;
-            gUnknown_0203A134->callback2 = sub_8121C98;
+            sMailRead->callback2 = CB2_WaitForPaletteExitOnKeyPress;
             return TRUE;
         default:
             return FALSE;
     }
-    gMain.state ++;
+    gMain.state++;
     return FALSE;
 }
 
-void sub_81219F0(void)
+static void CB2_InitMailRead(void)
 {
     do
     {
-        if (sub_81215EC() == TRUE)
+        if (MailReadBuildGraphics() == TRUE)
         {
-            SetMainCallback2(sub_8121C64);
+            SetMainCallback2(CB2_MailRead);
             break;
         }
     } while (sub_81221AC() != TRUE);
 }
 
-void sub_8121A1C(void)
+static void sub_8121A1C(void)
 {
     u16 i;
     u8 total;
     u8 *ptr;
 
     total = 0;
-    for (i = 0; i < gUnknown_0203A134->layout->numSubStructs; i ++)
+    for (i = 0; i < sMailRead->layout->numSubStructs; i ++)
     {
-        ConvertEasyChatWordsToString(gUnknown_0203A134->strbuf[i], &gUnknown_0203A134->mail->words[total], gUnknown_0203A134->layout->var8[i].numEasyChatWords, 1);
-        total += gUnknown_0203A134->layout->var8[i].numEasyChatWords;
+        ConvertEasyChatWordsToString(sMailRead->strbuf[i], &sMailRead->mail->words[total], sMailRead->layout->var8[i].numEasyChatWords, 1);
+        total += sMailRead->layout->var8[i].numEasyChatWords;
     }
-    ptr = StringCopy(gUnknown_0203A134->playerName, gUnknown_0203A134->mail->playerName);
-    if (!gUnknown_0203A134->playerIsSender)
+    ptr = StringCopy(sMailRead->playerName, sMailRead->mail->playerName);
+    if (!sMailRead->playerIsSender)
     {
         StringCopy(ptr, gText_FromSpace);
-        gUnknown_0203A134->signatureWidth = gUnknown_0203A134->layout->signatureWidth - (StringLength(gUnknown_0203A134->playerName) * 8 - 0x60);
+        sMailRead->signatureWidth = sMailRead->layout->signatureWidth - (StringLength(sMailRead->playerName) * 8 - 0x60);
     }
     else
     {
-        sub_81DB52C(gUnknown_0203A134->playerName);
-        gUnknown_0203A134->signatureWidth = gUnknown_0203A134->layout->signatureWidth;
+        sub_81DB52C(sMailRead->playerName);
+        sMailRead->signatureWidth = sMailRead->layout->signatureWidth;
     }
 }
 
-void sub_8121B1C(void)
+static void sub_8121B1C(void)
 {
     u16 i;
     u8 strbuf[0x20];
@@ -500,77 +503,76 @@ void sub_8121B1C(void)
     PutWindowTilemap(1);
     FillWindowPixelBuffer(0, 0);
     FillWindowPixelBuffer(1, 0);
-    for (i = 0; i < gUnknown_0203A134->layout->numSubStructs; i ++)
+    for (i = 0; i < sMailRead->layout->numSubStructs; i ++)
     {
-        if (gUnknown_0203A134->strbuf[i][0] == EOS || gUnknown_0203A134->strbuf[i][0] == CHAR_SPACE)
+        if (sMailRead->strbuf[i][0] == EOS || sMailRead->strbuf[i][0] == CHAR_SPACE)
         {
             continue;
         }
-        box_print(0, 1, gUnknown_0203A134->layout->var8[i].xOffset + gUnknown_0203A134->layout->wordsYPos, y + gUnknown_0203A134->layout->wordsXPos, gUnknown_0859F2AC, 0, gUnknown_0203A134->strbuf[i]);
-        y += gUnknown_0203A134->layout->var8[i].lineHeight;
+        box_print(0, 1, sMailRead->layout->var8[i].xOffset + sMailRead->layout->wordsYPos, y + sMailRead->layout->wordsXPos, sUnknown_0859F2AC, 0, sMailRead->strbuf[i]);
+        y += sMailRead->layout->var8[i].lineHeight;
     }
     bufptr = StringCopy(strbuf, gText_FromSpace);
-    StringCopy(bufptr, gUnknown_0203A134->playerName);
-    box_x = GetStringCenterAlignXOffset(1, strbuf, gUnknown_0203A134->signatureWidth) + 0x68;
-    box_y = gUnknown_0203A134->layout->signatureYPos + 0x58;
-    box_print(0, 1, box_x, box_y, gUnknown_0859F2AC, 0, strbuf);
+    StringCopy(bufptr, sMailRead->playerName);
+    box_x = GetStringCenterAlignXOffset(1, strbuf, sMailRead->signatureWidth) + 0x68;
+    box_y = sMailRead->layout->signatureYPos + 0x58;
+    box_print(0, 1, box_x, box_y, sUnknown_0859F2AC, 0, strbuf);
     CopyWindowToVram(0, 3);
     CopyWindowToVram(1, 3);
 }
 
-void sub_8121C50(void)
+static void VBlankCB_MailRead(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_8121C64(void)
+static void CB2_MailRead(void)
 {
-    if (gUnknown_0203A134->animsActive != 0)
+    if (sMailRead->animsActive != 0)
     {
         AnimateSprites();
         BuildOamBuffer();
     }
-    gUnknown_0203A134->callback2();
+    sMailRead->callback2();
 }
 
-void sub_8121C98(void)
+static void CB2_WaitForPaletteExitOnKeyPress(void)
 {
     if (!UpdatePaletteFade())
     {
-        gUnknown_0203A134->callback2 = sub_8121CC0;
+        sMailRead->callback2 = CB2_ExitOnKeyPress;
     }
 }
 
-void sub_8121CC0(void)
+static void CB2_ExitOnKeyPress(void)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
-        gUnknown_0203A134->callback2 = sub_8121D00;
+        sMailRead->callback2 = CB2_ExitMailReadFreeVars;
     }
 }
 
-void sub_8121D00(void)
+static void CB2_ExitMailReadFreeVars(void)
 {
     if (!UpdatePaletteFade())
     {
-        SetMainCallback2(gUnknown_0203A134->callback);
-        switch (gUnknown_0203A134->animsActive)
+        SetMainCallback2(sMailRead->callback);
+        switch (sMailRead->animsActive)
         {
             case 1:
             case 2:
-                sub_80D2FF0(sub_80D2E84(gUnknown_0203A134->mail->species));
-                sub_80D2EF8(&gSprites[gUnknown_0203A134->monIconSprite]);
+                sub_80D2FF0(sub_80D2E84(sMailRead->mail->species));
+                sub_80D2EF8(&gSprites[sMailRead->monIconSprite]);
         }
-        memset(gUnknown_0203A134, 0, sizeof(*gUnknown_0203A134));
+        memset(sMailRead, 0, sizeof(*sMailRead));
         ResetPaletteFade();
         UnsetBgTilemapBuffer(0);
         UnsetBgTilemapBuffer(1);
         ResetBgsAndClearDma3BusyFlags(0);
         FreeAllWindowBuffers();
-        free(gUnknown_0203A134);
-        gUnknown_0203A134 = NULL;
+        FREE_AND_SET_NULL(sMailRead);
     }
 }

@@ -17,7 +17,7 @@ FortreeCity_Gym_EventScript_2165C4:: @ 82165C4
 
 FortreeCity_Gym_EventScript_2165C8:: @ 82165C8
 	trainerbattle 1, TRAINER_WINONA_1, 0, FortreeCity_Gym_Text_216D75, FortreeCity_Gym_Text_216E60, FortreeCity_Gym_EventScript_2165FD
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq FortreeCity_Gym_EventScript_21668D
 	checkflag FLAG_0x0AA

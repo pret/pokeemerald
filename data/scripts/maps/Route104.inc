@@ -882,7 +882,7 @@ Route104_EventScript_1ED376:: @ 81ED376
 
 Route104_EventScript_1ED38D:: @ 81ED38D
 	trainerbattle 2, TRAINER_HALEY_1, 0, Route104_Text_29563A, Route104_Text_29566F, Route104_EventScript_1ED3CE
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route104_EventScript_1ED424
 	setvar VAR_0x8004, 604
@@ -896,7 +896,7 @@ Route104_EventScript_1ED38D:: @ 81ED38D
 Route104_EventScript_1ED3CE:: @ 81ED3CE
 	special sub_80B4808
 	waitmovement 0
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route104_EventScript_1ED3DF
 	release
 	end
@@ -911,7 +911,7 @@ Route104_EventScript_1ED3DF:: @ 81ED3DF
 	end
 
 Route104_EventScript_1ED3F8:: @ 81ED3F8
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route104_EventScript_1ED40B
 	msgbox Route104_Text_295689, 4
 	release
@@ -933,7 +933,7 @@ Route104_EventScript_1ED424:: @ 81ED424
 
 Route104_EventScript_1ED43B:: @ 81ED43B
 	trainerbattle 2, TRAINER_WINSTON_1, 0, Route104_Text_295870, Route104_Text_2958AD, Route104_EventScript_1ED47C
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route104_EventScript_1ED4D2
 	setvar VAR_0x8004, 136
@@ -947,7 +947,7 @@ Route104_EventScript_1ED43B:: @ 81ED43B
 Route104_EventScript_1ED47C:: @ 81ED47C
 	special sub_80B4808
 	waitmovement 0
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route104_EventScript_1ED48D
 	release
 	end
@@ -962,7 +962,7 @@ Route104_EventScript_1ED48D:: @ 81ED48D
 	end
 
 Route104_EventScript_1ED4A6:: @ 81ED4A6
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route104_EventScript_1ED4B9
 	msgbox Route104_Text_2958C1, 4
 	release
@@ -984,7 +984,7 @@ Route104_EventScript_1ED4D2:: @ 81ED4D2
 
 Route104_EventScript_1ED4E9:: @ 81ED4E9
 	trainerbattle 2, TRAINER_CINDY_1, 0, Route104_Text_295A7E, Route104_Text_295ABB, Route104_EventScript_1ED52A
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route104_EventScript_1ED580
 	setvar VAR_0x8004, 114
@@ -998,7 +998,7 @@ Route104_EventScript_1ED4E9:: @ 81ED4E9
 Route104_EventScript_1ED52A:: @ 81ED52A
 	special sub_80B4808
 	waitmovement 0
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route104_EventScript_1ED53B
 	release
 	end
@@ -1013,7 +1013,7 @@ Route104_EventScript_1ED53B:: @ 81ED53B
 	end
 
 Route104_EventScript_1ED554:: @ 81ED554
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route104_EventScript_1ED567
 	msgbox Route104_Text_295AC3, 4
 	release

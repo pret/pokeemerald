@@ -157,7 +157,7 @@ DewfordTown_Gym_EventScript_1FC7C1:: @ 81FC7C1
 
 DewfordTown_Gym_EventScript_1FC7C2:: @ 81FC7C2
 	trainerbattle 1, TRAINER_BRAWLY_1, 0, DewfordTown_Gym_Text_1FCF44, DewfordTown_Gym_Text_1FD008, DewfordTown_Gym_EventScript_1FC7F7
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq DewfordTown_Gym_EventScript_1FC89C
 	checkflag FLAG_0x0A6

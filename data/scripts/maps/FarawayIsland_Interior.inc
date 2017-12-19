@@ -145,7 +145,7 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	setvar VAR_0x8006, 0
 	special DoScriptedWildBattle
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0934
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80

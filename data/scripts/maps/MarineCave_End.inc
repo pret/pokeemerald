@@ -38,7 +38,7 @@ MarineCave_End_EventScript_23B01B:: @ 823B01B
 	setvar VAR_LAST_TALKED, 1
 	setwildbattle SPECIES_KYOGRE, 70, ITEM_NONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0934
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_0x4001, 0

@@ -277,7 +277,7 @@ Task_CallYesOrNoCallback: @ 8121FDC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -512,7 +512,7 @@ itemid_80BF6D8_mail_related: @ 812217C
 	bne _081221A4
 _08122192:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -104,7 +104,7 @@ IslandCave_EventScript_238F58:: @ 8238F58
 	waitmoncry
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0A74
+	special StartRegiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80

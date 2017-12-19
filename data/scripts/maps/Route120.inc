@@ -297,7 +297,7 @@ Route120_EventScript_1F57D7:: @ 81F57D7
 
 Route120_EventScript_1F57EE:: @ 81F57EE
 	trainerbattle 2, TRAINER_ROBERT_1, 0, Route120_Text_29E6E3, Route120_Text_29E70A, Route120_EventScript_1F581A
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route120_EventScript_1F5839
 	msgbox Route120_Text_29E726, 4
@@ -332,7 +332,7 @@ Route120_EventScript_1F5867:: @ 81F5867
 
 Route120_EventScript_1F587E:: @ 81F587E
 	trainerbattle 2, TRAINER_JEFFREY_1, 0, Route120_Text_29E9D7, Route120_Text_29E9FF, Route120_EventScript_1F58AA
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route120_EventScript_1F58C9
 	msgbox Route120_Text_29EA08, 4

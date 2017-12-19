@@ -114,7 +114,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_29283F:: @ 829283F
 
 LittlerootTown_BrendansHouse_2F_EventScript_292849:: @ 8292849
 	fadescreen 1
-	special Special_StartWallClock
+	special StartWallClock
 	waitstate
 	return
 
@@ -318,7 +318,7 @@ LittlerootTown_MaysHouse_1F_EventScript_2929C5:: @ 82929C5
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
 	compare_var_to_value VAR_0x408C, 4
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A19
 	checkflag FLAG_0x052
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A86

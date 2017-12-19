@@ -28,7 +28,7 @@ Route108_EventScript_1EE6E6:: @ 81EE6E6
 
 Route108_EventScript_1EE6FD:: @ 81EE6FD
 	trainerbattle 2, TRAINER_CORY_1, 0, Route108_Text_296F5D, Route108_Text_296F93, Route108_EventScript_1EE729
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route108_EventScript_1EE748
 	msgbox Route108_Text_296FB0, 4

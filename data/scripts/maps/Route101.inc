@@ -225,7 +225,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	setobjectxy 255, 6, 13
 	applymovement 255, Route101_Movement_2725A4
 	waitmovement 0
-	special sub_80B1138
+	special ChooseStarter
 	waitstate
 	applymovement 2, Route101_Movement_1EBE8D
 	waitmovement 0

@@ -2201,7 +2201,7 @@ _080C83CC:
 	ldr r1, =0x00000ce6
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C83F4
@@ -2304,7 +2304,7 @@ _080C84C8:
 	ldr r1, =0x00000ce6
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C84F8
@@ -2874,7 +2874,7 @@ _080C8A0C:
 	ldr r2, =0x00000ce6
 	adds r0, r2
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C8A8C
@@ -2913,7 +2913,7 @@ _080C8A7C:
 	ldr r2, =0x00000ce6
 	adds r0, r1, r2
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8A98
@@ -3409,7 +3409,7 @@ _080C8F0C:
 	adds r0, 0x1
 	strb r0, [r1]
 _080C8F22:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3661,7 +3661,7 @@ _080C914E:
 	ldr r1, =0x00000ce6
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C9168
@@ -3943,7 +3943,7 @@ _080C93E4:
 	ldr r1, =0x00000ce6
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C9404
@@ -4133,7 +4133,7 @@ _080C9584:
 	b _080C9664
 	.pool
 _080C95A4:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4927,7 +4927,7 @@ _080C9C78:
 	b _080C9CAA
 	.pool
 _080C9C8C:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -5058,7 +5058,7 @@ _080C9DAC:
 	b _080C9DE0
 	.pool
 _080C9DC0:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -16168,7 +16168,7 @@ sub_80CFB44: @ 80CFB44
 	.pool
 _080CFB8C:
 	ldrh r0, [r1]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CFBA4
@@ -16197,7 +16197,7 @@ _080CFBAC:
 	.pool
 _080CFBCC:
 	ldrh r0, [r1]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

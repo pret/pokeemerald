@@ -188,7 +188,7 @@ Route118_Movement_1F3F7E: @ 81F3F7E
 
 Route118_EventScript_1F3F87:: @ 81F3F87
 	trainerbattle 2, TRAINER_ROSE_1, 0, Route118_Text_29D290, Route118_Text_29D2D8, Route118_EventScript_1F3FB3
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F3FD2
 	msgbox Route118_Text_29D2FA, 4
@@ -223,7 +223,7 @@ Route118_EventScript_1F4000:: @ 81F4000
 
 Route118_EventScript_1F4017:: @ 81F4017
 	trainerbattle 2, TRAINER_DALTON_1, 0, Route118_Text_29D6AF, Route118_Text_29D6CD, Route118_EventScript_1F4043
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F4062
 	msgbox Route118_Text_29D6D8, 4

@@ -65,7 +65,7 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	setvar VAR_0x8006, 0
 	special DoScriptedWildBattle
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0934
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_LAST_TALKED, 1

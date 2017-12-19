@@ -3,7 +3,7 @@ AbandonedShip_Rooms2_1F_MapScripts:: @ 82380A6
 
 AbandonedShip_Rooms2_1F_EventScript_2380A7:: @ 82380A7
 	trainerbattle 6, TRAINER_KIRA_AND_DAN_1, 0, AbandonedShip_Rooms2_1F_Text_23819D, AbandonedShip_Rooms2_1F_Text_2381DA, AbandonedShip_Rooms2_1F_Text_238257, AbandonedShip_Rooms2_1F_EventScript_2380D7
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq AbandonedShip_Rooms2_1F_EventScript_2380F0
 	msgbox AbandonedShip_Rooms2_1F_Text_23820F, 4
@@ -26,7 +26,7 @@ AbandonedShip_Rooms2_1F_EventScript_2380F0:: @ 82380F0
 
 AbandonedShip_Rooms2_1F_EventScript_23810B:: @ 823810B
 	trainerbattle 6, TRAINER_KIRA_AND_DAN_1, 0, AbandonedShip_Rooms2_1F_Text_2382A4, AbandonedShip_Rooms2_1F_Text_2382F4, AbandonedShip_Rooms2_1F_Text_23836F, AbandonedShip_Rooms2_1F_EventScript_23813B
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq AbandonedShip_Rooms2_1F_EventScript_238154
 	msgbox AbandonedShip_Rooms2_1F_Text_23830A, 4

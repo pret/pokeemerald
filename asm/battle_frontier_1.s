@@ -13791,7 +13791,7 @@ sub_8195FF8: @ 8195FF8
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r6, =gUnknown_085500A4
+	ldr r6, =gRematchTable
 _08196000:
 	movs r1, 0xAE
 	lsls r1, 1
@@ -13887,7 +13887,7 @@ task_prev_quest: @ 81960A8
 	cmp r0, 0
 	bne _081960C2
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
 _081960C2:
@@ -14659,7 +14659,7 @@ sub_8196710: @ 8196710
 	thumb_func_start sub_819672C
 sub_819672C: @ 819672C
 	push {lr}
-	ldr r1, =gUnknown_085500A4
+	ldr r1, =gRematchTable
 	lsls r0, 4
 	adds r0, r1
 	ldrh r2, [r0, 0xA]
@@ -14677,10 +14677,10 @@ sub_8196748: @ 8196748
 	push {r4-r6,lr}
 	movs r5, 0
 	movs r6, 0
-	ldr r4, =gUnknown_085500A4
+	ldr r4, =gRematchTable
 _08196750:
 	ldrh r0, [r4]
-	bl HasTrainerAlreadyBeenFought
+	bl HasTrainerBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819675E
@@ -14703,10 +14703,10 @@ sub_8196774: @ 8196774
 	adds r7, r0, 0
 	movs r4, 0
 	movs r6, 0
-	ldr r5, =gUnknown_085500A4
+	ldr r5, =gRematchTable
 _0819677E:
 	ldrh r0, [r5]
-	bl HasTrainerAlreadyBeenFought
+	bl HasTrainerBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819679A
@@ -14766,7 +14766,7 @@ _081967EC:
 	adds r4, r0, 0
 	movs r7, 0x1
 	adds r0, r5, 0
-	bl sub_80B1E94
+	bl UpdateRematchIfDefeated
 	b _08196832
 _0819680A:
 	bl Random
@@ -15270,7 +15270,7 @@ sub_8196B98: @ 8196B98
 	adds r7, r0, 0
 	cmp r1, 0xFF
 	beq _08196C5C
-	ldr r1, =gUnknown_085500A4
+	ldr r1, =gRematchTable
 	lsls r0, r2, 4
 	adds r2, r0, r1
 	ldrh r4, [r2, 0xA]
@@ -15373,7 +15373,7 @@ sub_8196C70: @ 8196C70
 	lsls r1, 2
 	adds r1, r2
 	ldrh r0, [r1]
-	bl sub_80B2250
+	bl GetLastBeatenRematchTrainerId
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r5, =gTrainers

@@ -3,7 +3,7 @@ MeteorFalls_1F_2R_MapScripts:: @ 822C4DD
 
 MeteorFalls_1F_2R_EventScript_22C4DE:: @ 822C4DE
 	trainerbattle 2, TRAINER_NICOLAS_1, 0, MeteorFalls_1F_2R_Text_22C608, MeteorFalls_1F_2R_Text_22C678, MeteorFalls_1F_2R_EventScript_22C50A
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq MeteorFalls_1F_2R_EventScript_22C529
 	msgbox MeteorFalls_1F_2R_Text_22C6A3, 4
@@ -28,7 +28,7 @@ MeteorFalls_1F_2R_EventScript_22C529:: @ 822C529
 
 MeteorFalls_1F_2R_EventScript_22C540:: @ 822C540
 	trainerbattle 6, TRAINER_JOHN_AND_JAY_1, 0, MeteorFalls_1F_2R_Text_22C843, MeteorFalls_1F_2R_Text_22C89C, MeteorFalls_1F_2R_Text_22C92B, MeteorFalls_1F_2R_EventScript_22C570
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq MeteorFalls_1F_2R_EventScript_22C589
 	msgbox MeteorFalls_1F_2R_Text_22C8C1, 4
@@ -51,7 +51,7 @@ MeteorFalls_1F_2R_EventScript_22C589:: @ 822C589
 
 MeteorFalls_1F_2R_EventScript_22C5A4:: @ 822C5A4
 	trainerbattle 6, TRAINER_JOHN_AND_JAY_1, 0, MeteorFalls_1F_2R_Text_22C9E6, MeteorFalls_1F_2R_Text_22CA44, MeteorFalls_1F_2R_Text_22CACD, MeteorFalls_1F_2R_EventScript_22C5D4
-	specialvar VAR_RESULT, sub_80B226C
+	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare_var_to_value VAR_RESULT, 1
 	goto_eq MeteorFalls_1F_2R_EventScript_22C5ED
 	msgbox MeteorFalls_1F_2R_Text_22CA70, 4

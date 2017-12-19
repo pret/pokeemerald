@@ -36,7 +36,7 @@ PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	applymovement 255, PetalburgCity_Movement_1DC430
 	waitmovement 0
 	msgbox PetalburgCity_Text_1EC1F8, 4
-	special sub_80B086C
+	special StartWallyTutorialBattle
 	waitstate
 	msgbox PetalburgCity_Text_1EC271, 4
 	applymovementat 2, PetalburgCity_Movement_2725A4, PETALBURG_CITY

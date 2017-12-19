@@ -19,7 +19,7 @@
                               | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_ROAMER | BATTLE_TYPE_EREADER_TRAINER   \
                               | BATTLE_TYPE_KYOGRE_GROUDON | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI           \
                               | BATTLE_TYPE_RECORDED | BATTLE_TYPE_x4000000 | BATTLE_TYPE_SECRET_BASE           \
-                              | BATTLE_TYPE_GROUDON | BATTLE_TYPE_KYORGE | BATTLE_TYPE_RAYQUAZA))
+                              | BATTLE_TYPE_GROUDON | BATTLE_TYPE_KYOGRE | BATTLE_TYPE_RAYQUAZA))
 
 extern u32 gBattleTypeFlags;
 extern u16 gTrainerBattleOpponent_A;

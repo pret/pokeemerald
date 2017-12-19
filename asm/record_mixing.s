@@ -3650,7 +3650,7 @@ _080E8A78:
 	beq _080E8A90
 	mov r0, r8
 	movs r1, 0xFC
-	bl sub_81DB4DC
+	bl PadNameString
 _080E8A90:
 	ldrb r1, [r7]
 	lsrs r1, 4
