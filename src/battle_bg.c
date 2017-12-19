@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "sprite.h"
-#include "trainer_classes.h"
+#include "constants\trainers.h"
 #include "graphics.h"
 #include "decompress.h"
 #include "bg.h"
@@ -105,7 +105,7 @@ void DrawMainBattleBackground(void)
         LZDecompressVram(gBattleTerrainTilemap_Cave, (void*)(VRAM + 0xD000));
         LoadCompressedPalette(gBattleTerrainPalette_Groudon, 0x20, 0x60);
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_KYORGE)
+    else if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE)
     {
         LZDecompressVram(gBattleTerrainTiles_Water, (void*)(VRAM + 0x8000));
         LZDecompressVram(gBattleTerrainTilemap_Water, (void*)(VRAM + 0xD000));
@@ -122,14 +122,14 @@ void DrawMainBattleBackground(void)
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         {
             u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-            if (trainerClass == CLASS_LEADER)
+            if (trainerClass == TRAINER_CLASS_LEADER)
             {
                 LZDecompressVram(gBattleTerrainTiles_Building, (void*)(VRAM + 0x8000));
                 LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(VRAM + 0xD000));
                 LoadCompressedPalette(gBattleTerrainPalette_BuildingLeader, 0x20, 0x60);
                 return;
             }
-            else if (trainerClass == CLASS_CHAMPION)
+            else if (trainerClass == TRAINER_CLASS_CHAMPION)
             {
                 LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(VRAM + 0x8000));
                 LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(VRAM + 0xD000));
@@ -501,7 +501,7 @@ void LoadBattleEntryBackground(void)
         LZDecompressVram(gBattleTerrainAnimTiles_Cave, (void*)(VRAM + 0x4000));
         LZDecompressVram(gBattleTerrainAnimTilemap_Cave, (void*)(VRAM + 0xE000));
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_KYORGE)
+    else if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE)
     {
         LZDecompressVram(gBattleTerrainAnimTiles_Underwater, (void*)(VRAM + 0x4000));
         LZDecompressVram(gBattleTerrainAnimTilemap_Underwater, (void*)(VRAM + 0xE000));
@@ -516,13 +516,13 @@ void LoadBattleEntryBackground(void)
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         {
             u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-            if (trainerClass == CLASS_LEADER)
+            if (trainerClass == TRAINER_CLASS_LEADER)
             {
                 LZDecompressVram(gBattleTerrainAnimTiles_Building, (void*)(VRAM + 0x4000));
                 LZDecompressVram(gBattleTerrainAnimTilemap_Building, (void*)(VRAM + 0xE000));
                 return;
             }
-            else if (trainerClass == CLASS_CHAMPION)
+            else if (trainerClass == TRAINER_CLASS_CHAMPION)
             {
                 LZDecompressVram(gBattleTerrainAnimTiles_Building, (void*)(VRAM + 0x4000));
                 LZDecompressVram(gBattleTerrainAnimTilemap_Building, (void*)(VRAM + 0xE000));
@@ -573,12 +573,12 @@ bool8 LoadChosenBattleElement(u8 caseId)
             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             {
                 u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-                if (trainerClass == CLASS_LEADER)
+                if (trainerClass == TRAINER_CLASS_LEADER)
                 {
                     LZDecompressVram(gBattleTerrainTiles_Building, (void*)(VRAM + 0x8000));
                     break;
                 }
-                else if (trainerClass == CLASS_CHAMPION)
+                else if (trainerClass == TRAINER_CLASS_CHAMPION)
                 {
                     LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(VRAM + 0x8000));
                     break;
@@ -635,12 +635,12 @@ bool8 LoadChosenBattleElement(u8 caseId)
             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             {
                 u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-                if (trainerClass == CLASS_LEADER)
+                if (trainerClass == TRAINER_CLASS_LEADER)
                 {
                     LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(VRAM + 0xD000));
                     break;
                 }
-                else if (trainerClass == CLASS_CHAMPION)
+                else if (trainerClass == TRAINER_CLASS_CHAMPION)
                 {
                     LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(VRAM + 0xD000));
                     break;
@@ -697,12 +697,12 @@ bool8 LoadChosenBattleElement(u8 caseId)
             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             {
                 u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-                if (trainerClass == CLASS_LEADER)
+                if (trainerClass == TRAINER_CLASS_LEADER)
                 {
                     LoadCompressedPalette(gBattleTerrainPalette_BuildingLeader, 0x20, 0x60);
                     break;
                 }
-                else if (trainerClass == CLASS_CHAMPION)
+                else if (trainerClass == TRAINER_CLASS_CHAMPION)
                 {
                     LoadCompressedPalette(gBattleTerrainPalette_StadiumWallace, 0x20, 0x60);
                     break;
