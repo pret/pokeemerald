@@ -391,7 +391,7 @@ _08179F00:
 	.pool
 _08179F20:
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08D7C440
+	ldr r1, =gBattleTerrainTiles_Building
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -423,7 +423,7 @@ _08179F5E:
 	b _08179FA0
 	.pool
 _08179F78:
-	ldr r0, =gUnknown_08D7C9EC
+	ldr r0, =gBattleTerrainPalette_Frontier
 	movs r1, 0x20
 	movs r2, 0x60
 	bl LoadCompressedPalette
