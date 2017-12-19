@@ -88,9 +88,6 @@ extern u32 GetGameStat(u8 statId);
 extern u32 gBattleTypeFlags;
 extern u8 gBattleOutcome;
 extern void (*gFieldCallback)(void);
-extern u8 gApproachingTrainerId;
-extern u8 gNoOfApproachingTrainers;
-extern u16 gUnknown_03006080;
 
 // this file's functions
 static void DoBattlePikeWildBattle(void);
@@ -113,7 +110,7 @@ static void HandleRematchVarsOnBattleEnd(void);
 static const u8 *GetIntroSpeechOfApproachingTrainer(void);
 static const u8 *GetTrainerCantBattleSpeech(void);
 
-// ewram data
+// ewram vars
 EWRAM_DATA static u16 sTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent_A = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent_B = 0;

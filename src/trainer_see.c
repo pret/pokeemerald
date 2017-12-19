@@ -14,12 +14,6 @@
 #include "event_data.h"
 #include "script_movement.h"
 
-extern u8 gApproachingTrainerId;
-extern u8 gNoOfApproachingTrainers;
-extern u8 gUnknown_030060AC;
-extern u16 gUnknown_03006080;
-extern u8 gUnknown_03006084[];
-
 extern bool8 InBattlePyramid(void);
 extern bool32 InTrainerHill(void);
 extern bool8 GetBattlePyramidTrainerFlag(u8 mapObjectId);
@@ -54,6 +48,16 @@ static bool8 sub_80B4438(u8 taskId, struct Task *task, struct MapObject *trainer
 static bool8 sub_80B44AC(u8 taskId, struct Task *task, struct MapObject *trainerObj);
 
 static void SpriteCB_TrainerIcons(struct Sprite *sprite);
+
+// IWRAM common
+u16 gUnknown_03006080;
+u8 gUnknown_03006084[4];
+struct ApproachingTrainer gApproachingTrainers[2];
+u8 gNoOfApproachingTrainers;
+u8 gUnknown_030060AC;
+
+// EWRAM
+EWRAM_DATA u8 gApproachingTrainerId = 0;
 
 // const rom data
 static const u8 sEmotion_ExclamationMarkGfx[] = INCBIN_U8("graphics/misc/emotion_exclamation.4bpp");
