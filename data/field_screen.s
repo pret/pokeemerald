@@ -1545,7 +1545,7 @@ gUnknown_0854014C:: @ 854014C
 
 gUnknown_0854C14C:: @ 854C14C
 @ replacing .incbin "baserom.gba", 0x0054c14c, 0x4
-.4byte 0x2038454
+.4byte gUnknown_02038454
 
 gUnknown_0854C150:: @ 854C150
 @ replacing .incbin "baserom.gba", 0x0054c150, 0xf0

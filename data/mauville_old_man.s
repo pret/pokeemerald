@@ -8,24 +8,24 @@ gUnknown_0859EFE4:: @ 859EFE4
 	.2byte 0x2811, 0x1029, 0x1018, 0xE0D, 0x1A1A, 0x1A1D
 
 gUnknown_0859EFF0:: @ 859EFF0
-	.4byte 0x8294295
-	.4byte 0x82942a1
-	.4byte 0x82942ae
-	.4byte 0x82942bb
-	.4byte 0x82942c6
-	.4byte 0x82942d5
-	.4byte 0x82942e3
-	.4byte 0x82942f0
+	.4byte gText_SoPretty
+	.4byte gText_SoDarling
+	.4byte gText_SoRelaxed
+	.4byte gText_SoSunny
+	.4byte gText_SoDesirable
+	.4byte gText_SoExciting
+	.4byte gText_SoAmusing
+	.4byte gText_SoMagical
 
 gUnknown_0859F010:: @ 859F010
-	.4byte 0x8294313
-	.4byte 0x8294359
-	.4byte 0x8294398
-	.4byte 0x82943da
-	.4byte 0x829441c
-	.4byte 0x8294460
-	.4byte 0x82944a0
-	.4byte 0x82944d5
+	.4byte gUnknown_08294313
+	.4byte gUnknown_08294359
+	.4byte gUnknown_08294398
+	.4byte gUnknown_082943DA
+	.4byte gUnknown_0829441C
+	.4byte gUnknown_08294460
+	.4byte gUnknown_082944A0
+	.4byte gUnknown_082944D5
 
 gUnknown_0859F030:: @ 859F030
 	.incbin "baserom.gba", 0x59f030, 0x18

@@ -83,10 +83,10 @@ gUnknown_08597C8C:: @ 8597C8C
 	.incbin "baserom.gba", 0x597c8c, 0x4
 
 gUnknown_08597C90:: @ 8597C90
-	.4byte 0x862b810
-	.4byte 0x862b832
-	.4byte 0x862b84b
-	.4byte 0x862b86c
+	.4byte gUnknown_862B810
+	.4byte gUnknown_862B832
+	.4byte gUnknown_862B84B
+	.4byte gUnknown_862B86C
 
 gUnknown_08597CA0:: @ 8597CA0
 	.incbin "baserom.gba", 0x597ca0, 0x20

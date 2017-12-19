@@ -33,7 +33,9 @@ gText_MysteryGiftNewTrainer:: @ 8674C31
 
 gText_MysteryGiftCantBeUsed:: @ 8674C86
 	.string "This data can’t be used in\nthis version.$"
-	.incbin "baserom.gba", 0x00674caf, 0x2e	//no pointer to this one
+	
+gUnknown_08674CAF:: @ 8674CAF
+	.incbin "baserom.gba", 0x00674caf, 0x2e
 
 gText_MysteryGiftStampCard::
 	.string "Thank you for using the STAMP CARD\nSystem.\pYou have {STR_VAR_1} more to collect to\nfill your STAMP CARD.$"

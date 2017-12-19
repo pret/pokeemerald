@@ -26,9 +26,4 @@ Thumbs.db
 build/
 .DS_Store
 *.ddump
-data2new.s
-data2old.s
-dump baserom msys code.txt
 *.lnk
-baserom.rar
-datadump/

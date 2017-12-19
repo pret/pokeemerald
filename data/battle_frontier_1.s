@@ -1365,9 +1365,9 @@ gUnknown_0860EF98:: @ 860EF98
 	.incbin "baserom.gba", 0x60ef98, 0x8
 
 gUnknown_0860EFA0:: @ 860EFA0
-	.4byte 0x2021cc4
-	.4byte 0x2021dc4
-	.4byte 0x2021ec4
+	.4byte gStringVar1
+	.4byte gStringVar2
+	.4byte gStringVar3
 
 gUnknown_0860EFAC:: @ 860EFAC
 	.4byte sub_8196A44

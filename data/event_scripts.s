@@ -5862,28 +5862,28 @@ EventScript_292DE5:: @ 8292DE5
 
 	.include "data/scripts/pokeblocks.inc"
 
-Text_294295: @ 8294295
+gText_SoPretty:: @ 8294295
 	.string " so pretty!$"
 
-Text_2942A1: @ 82942A1
+gText_SoDarling:: @ 82942A1
 	.string " so darling!$"
 
-Text_2942AE: @ 82942AE
+gText_SoRelaxed:: @ 82942AE
 	.string " so relaxed!$"
 
-Text_2942BB: @ 82942BB
+gText_SoSunny:: @ 82942BB
 	.string " so sunny!$"
 
-Text_2942C6: @ 82942C6
+gText_SoDesirable:: @ 82942C6
 	.string " so desirable!$"
 
-Text_2942D5: @ 82942D5
+gText_SoExciting:: @ 82942D5
 	.string " so exciting!$"
 
-Text_2942E3: @ 82942E3
+gText_SoAmusing:: @ 82942E3
 	.string " so amusing!$"
 
-Text_2942F0: @ 82942F0
+gText_SoMagical:: @ 82942F0
 	.string " so magical!$"
 
 gUnknown_082942FD:: @ 82942FD
