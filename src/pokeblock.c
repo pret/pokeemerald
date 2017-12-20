@@ -800,7 +800,7 @@ static void sub_8136344(void)
         u8 i;
 
         for (i = 0;
-             i < sSavedPokeblockData.lastItemPos - 4 && sSavedPokeblockData.lastItemPage + sPokeblockMenu->maxShowed != sPokeblockMenu->itemsNo;
+             (i < sSavedPokeblockData.lastItemPos - 4) && (sSavedPokeblockData.lastItemPage + sPokeblockMenu->maxShowed != sPokeblockMenu->itemsNo);
              sSavedPokeblockData.lastItemPos--, sSavedPokeblockData.lastItemPage++, i++);
     }
 }
