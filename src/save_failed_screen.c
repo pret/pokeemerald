@@ -154,8 +154,8 @@ static const u8 sClockFrames[8][3] =
     { 5, 1, 0 },
 };
 
-static const u8 gSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
-static const u8 gSaveFailedClockGfx[] = INCBIN_U8("graphics/misc/clock_small.4bpp.lz");
+static const u8 sSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
+static const u8 sSaveFailedClockGfx[] = INCBIN_U8("graphics/misc/clock_small.4bpp.lz");
 
 static void CB2_SaveFailedScreen(void);
 static void CB2_WipeSave(void);
@@ -221,7 +221,7 @@ static void CB2_SaveFailedScreen(void)
             LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
             LZ77UnCompVram(gBirchBagTilemap, (void *)(VRAM + 0x7000));
             LZ77UnCompVram(gBirchGrassTilemap, (void *)(VRAM + 0x7800));
-            LZ77UnCompVram(gSaveFailedClockGfx, (void *)(VRAM + 0x10020));
+            LZ77UnCompVram(sSaveFailedClockGfx, (void *)(VRAM + 0x10020));
             ResetBgsAndClearDma3BusyFlags(0);
             InitBgsFromTemplates(0, gUnknown_085EFD88, 3);
             SetBgTilemapBuffer(0, (void *)&gDecompressionBuffer[0x2000]);
@@ -238,7 +238,7 @@ static void CB2_SaveFailedScreen(void)
             ResetTasks();
             ResetPaletteFade();
             LoadPalette(gBirchBagGrassPal, 0, 0x40);
-            LoadPalette(gSaveFailedClockPal, 0x100, 0x20);
+            LoadPalette(sSaveFailedClockPal, 0x100, 0x20);
             LoadPalette(gUnknown_0850FEFC, 0xE0, 0x20);
             LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
             SetWindowBorderStyle(gSaveFailedWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);

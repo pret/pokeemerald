@@ -234,7 +234,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 static const u8 sTargetIdentities[] = {IDENTITY_PLAYER_MON1, IDENTITY_PLAYER_MON2, IDENTITY_OPPONENT_MON2, IDENTITY_OPPONENT_MON1};
 
 // unknown unused data
-static const u8 gUnknown_0831C5FC[] = {0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58};
+static const u8 sUnknown_0831C5FC[] = {0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58};
 
 void nullsub_21(void)
 {

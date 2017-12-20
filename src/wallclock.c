@@ -57,8 +57,8 @@ static void SpriteCB_PMIndicator(struct Sprite *sprite);
 
 // rodata
 
-static const u8 gUnknown_085B1F58[] = INCBIN_U8("graphics/wallclock/graphics_85b1f58.4bpp.lz");
-static const u16 gUnknown_085B21D4[] = INCBIN_U16("graphics/wallclock/palette_85b21d4.gbapal");
+static const u8 sUnknown_085B1F58[] = INCBIN_U8("graphics/wallclock/graphics_85b1f58.4bpp.lz");
+static const u16 sUnknown_085B21D4[] = INCBIN_U16("graphics/wallclock/palette_85b21d4.gbapal");
 static const struct WindowTemplate gUnknown_085B21DC[] = {
     { 0x00, 0x03, 0x11, 0x18, 0x02, 0x0e, 0x200 },
     { 0x02, 0x18, 0x10, 0x06, 0x02, 0x0c, 0x230 },
@@ -88,7 +88,7 @@ static const struct BgTemplate gUnknown_085B21FC[] = {
     }
 };
 static const struct CompressedSpriteSheet gUnknown_085B2208 = {
-    gUnknown_085B1F58, 0x2000, TAG_GFX_WALL_CLOCK_HAND
+    sUnknown_085B1F58, 0x2000, TAG_GFX_WALL_CLOCK_HAND
 };
 static const u32 filler_85B2210[2] = {};
 static const struct SpritePalette gUnknown_085B2218[] = {
@@ -571,7 +571,7 @@ static void LoadWallClockGraphics(void)
         LoadPalette(gUnknown_08DCC03C, 0x00, 0x20);
     }
     LoadPalette(GetOverworldTextboxPalettePtr(), 0xe0, 0x20);
-    LoadPalette(gUnknown_085B21D4, 0xc0, 0x08);
+    LoadPalette(sUnknown_085B21D4, 0xc0, 0x08);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gUnknown_085B21FC, 3);
     InitWindows(gUnknown_085B21DC);
@@ -666,27 +666,27 @@ void Cb2_ViewWallClock(void)
         angle1 = 90;
         angle2 = 135;
     }
-    
+
     spriteId = CreateSprite(&gUnknown_085B2250, 0x78, 0x50, 1);
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
-    
+
     spriteId = CreateSprite(&gUnknown_085B2268, 0x78, 0x50, 0);
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
-    
+
     spriteId = CreateSprite(&gUnknown_085B22A0, 0x78, 0x50, 2);
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].data[1] = angle1;
-    
+
     spriteId = CreateSprite(&gUnknown_085B22B8, 0x78, 0x50, 2);
     gSprites[spriteId].data[0] = taskId;
     gSprites[spriteId].data[1] = angle2;
-    
+
     WallClockInit();
-    
+
     PrintTextOnWindow(1, 1, gText_Cancel4, 0, 1, 0, NULL);
     PutWindowTilemap(1);
     schedule_bg_copy_tilemap_to_vram(2);
