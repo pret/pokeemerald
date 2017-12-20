@@ -1,21 +1,21 @@
-	.include "asm/macros.inc"
-	.include "constants/constants.inc"
+    .include "asm/macros.inc"
+    .include "constants/constants.inc"
 
-	.section .rodata
+    .section .rodata
 
-	.align 2
+    .align 2
 
 gUnknown_862B810:: @ 862B810
-	.string "{CLEAR 11}A{CLEAR 6}B{CLEAR 6}C{CLEAR 26}D{CLEAR 6}E{CLEAR 6}F{CLEAR 26}others$"
+    .string "{CLEAR 11}A{CLEAR 6}B{CLEAR 6}C{CLEAR 26}D{CLEAR 6}E{CLEAR 6}F{CLEAR 26}others$"
 
 gUnknown_862B832:: @ 862B832
-	.string "{CLEAR 11}G{CLEAR 6}H{CLEAR 6}I{CLEAR 26}J{CLEAR 6}K{CLEAR 6}L$"
+    .string "{CLEAR 11}G{CLEAR 6}H{CLEAR 6}I{CLEAR 26}J{CLEAR 6}K{CLEAR 6}L$"
 
 gUnknown_862B84B:: @ 862B84B
     .string "{CLEAR 11}M{CLEAR 6}N{CLEAR 6}O{CLEAR 26}P{CLEAR 6}Q{CLEAR 6}R{CLEAR 6}S{CLEAR 26} $"
 
 gUnknown_862B86C:: @ 862B86C
-	.string "{CLEAR 11}T{CLEAR 6}U{CLEAR 6}V{CLEAR 26}W{CLEAR 6}X{CLEAR 6}Y{CLEAR 6}Z{CLEAR 26} $"
+    .string "{CLEAR 11}T{CLEAR 6}U{CLEAR 6}V{CLEAR 26}W{CLEAR 6}X{CLEAR 6}Y{CLEAR 6}Z{CLEAR 26} $"
 
 gUnknown_0862B88D:: @ 862B88D
     .string "{CLEAR 11}a{CLEAR 6}b{CLEAR 6}c{CLEAR 26}d{CLEAR 6}e{CLEAR 6}f{CLEAR 6} {CLEAR 30}.$"
@@ -49,7 +49,7 @@ gUnknown_0862B9AE:: @ 862B9AE
  
 gUnknown_0862B9C7:: @ 862B9C7
    .string "{CLEAR 12}!{CLEAR 17}?{CLEAR 16}♂{CLEAR 16}♀{CLEAR 16}/{CLEAR 17}-$"
-	
+    
 gUnknown_0862B9E0:: @ 862B9E0
     .string "{CLEAR 11}…{CLEAR 16}“{CLEAR 16}”{CLEAR 18}‘{CLEAR 19}’{CLEAR 18} $"
 

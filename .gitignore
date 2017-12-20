@@ -26,4 +26,3 @@ Thumbs.db
 build/
 .DS_Store
 *.ddump
-*.lnk
