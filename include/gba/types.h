@@ -49,7 +49,7 @@ struct OamData
              u32 matrixNum:5; // bits 3/4 are h-flip/v-flip if not in affine mode
              u32 size:2;
 
-    /*0x04*/ u16 tileNum:10;    // 0x33F
+    /*0x04*/ u16 tileNum:10;    // 0x3FF
              u16 priority:2;    // 0x400, 0x800 -> 0xC00
              u16 paletteNum:4;
     /*0x06*/ u16 affineParam;

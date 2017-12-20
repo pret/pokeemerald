@@ -29,10 +29,10 @@ static u8 sub_818E258(const u8 *);
 
 extern const u8 gText_Lady2[];
 
-static const u16 gUnknown_0860B074[] = {
+static const u16 sUnknown_0860B074[] = {
         0x62, 0xcb, 0xdc, 0xcc, 0xd1
 };
-static const u16 gUnknown_0860B07E[] = {
+static const u16 sUnknown_0860B07E[] = {
         0x1a, 0x14, 0x0a
 };
 
@@ -119,11 +119,11 @@ static const u16 *const gUnknown_0860B1A4[] = {
         Unknown_0860B192
 };
 
-static const u16 gUnknown_0860B1E4[] = {
+static const u16 sUnknown_0860B1E4[] = {
         0x0210, 0x0400, 0x0212, 0x1a26, 0x0208, 0x045d, 0x040a, 0x0411, 0x0464, 0x020e, 0x1a25, 0x181b, 0x1a24, 0x0420, 0x0410, 0x0400
 };
 
-static const u16 gUnknown_0860B204[] = {
+static const u16 sUnknown_0860B204[] = {
         0x007b, 0x007f, 0x0081, 0x0023, 0x0023, 0x0023, 0x00a5, 0x00a7, 0x00a6, 0x000b, 0x012f, 0x006b, 0x006d, 0x0044, 0x0044, 0x000c
 };
 
@@ -176,7 +176,7 @@ static const u16 *const gUnknown_0860B2EC[] = {
         Unknown_0860B2D6
 };
 
-static const u16 gUnknown_0860B304[] = {
+static const u16 sUnknown_0860B304[] = {
         0x0b, 0x6e, 0x40, 0x6f, 0x44, 0x47
 };
 
@@ -218,7 +218,7 @@ static const u8 *const gUnknown_0860B338[] = {
         gUnknown_085EADE7
 };
 
-static const u16 gUnknown_0860B34C[] = {
+static const u16 sUnknown_0860B34C[] = {
         0x0120, 0x013b, 0x011e, 0x013d, 0x0019
 };
 
@@ -237,11 +237,11 @@ void sub_818D9C0(void)
 {
     LilycoveLady *lilycoveLady;
 
-    VarSet(VAR_0x4010, gUnknown_0860B07E[GetLilycoveLadyId()]);
+    VarSet(VAR_0x4010, sUnknown_0860B07E[GetLilycoveLadyId()]);
     if (GetLilycoveLadyId() == LILYCOVE_LADY_CONTEST)
     {
         lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
-        VarSet(VAR_0x4011, gUnknown_0860B074[lilycoveLady->contest.category]);
+        VarSet(VAR_0x4011, sUnknown_0860B074[lilycoveLady->contest.category]);
         gSpecialVar_Result = TRUE;
     }
     else
@@ -481,7 +481,7 @@ u16 sub_818DEA0(void)
     u16 itemId;
 
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    itemId = gUnknown_0860B304[gUnknown_0203CD64->unk_00c];
+    itemId = sUnknown_0860B304[gUnknown_0203CD64->unk_00c];
     sub_818DE88(itemId);
     gUnknown_0203CD64->phase = 2;
     return itemId;
@@ -508,8 +508,8 @@ static void sub_818DF00(void)
     {
         gUnknown_0203CD68->unk_002[i] = gUnknown_0860B1A4[v0][i];
     }
-    gUnknown_0203CD68->unk_014 = gUnknown_0860B1E4[v0];
-    gUnknown_0203CD68->itemId = gUnknown_0860B204[v0];
+    gUnknown_0203CD68->unk_014 = sUnknown_0860B1E4[v0];
+    gUnknown_0203CD68->itemId = sUnknown_0860B204[v0];
     gUnknown_0203CD68->unk_02b = v0;
     gUnknown_0203CD68->playerName[0] = EOS;
 }
@@ -581,13 +581,13 @@ u8 sub_818E06C(void)
             {
                 i = 0;
             }
-        } while (sub_811F8D8(gUnknown_0860B1E4[i]) == 0);
+        } while (sub_811F8D8(sUnknown_0860B1E4[i]) == 0);
         for (j = 0; j < 9; j ++)
         {
             quiz->unk_002[j] = gUnknown_0860B1A4[i][j];
         }
-        quiz->unk_014 = gUnknown_0860B1E4[i];
-        quiz->itemId = gUnknown_0860B204[i];
+        quiz->unk_014 = sUnknown_0860B1E4[i];
+        quiz->itemId = sUnknown_0860B204[i];
         quiz->unk_02b = i;
         quiz->playerName[0] = EOS;
     }
@@ -1091,7 +1091,7 @@ void sub_818E940(void)
 void sub_818E960(void)
 {
     gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
-    gSpecialVar_0x8005 = gUnknown_0860B34C[gUnknown_0203CD6C->category];
+    gSpecialVar_0x8005 = sUnknown_0860B34C[gUnknown_0203CD6C->category];
 }
 
 u8 sub_818E990(void)

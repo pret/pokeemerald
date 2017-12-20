@@ -65,7 +65,7 @@ static const struct PaletteStructTemplate gDummyPaletteStructTemplate = {
     .uid = 0xFFFF,
     .pst_field_B_5 = 1
 };
-static const u8 gUnknown_0852489C[] = {
+static const u8 sUnknown_0852489C[] = {
      0,  0,  0,  0,  0,
      5,  5,  5,  5,  5,
     11, 11, 11, 11, 11,
@@ -849,13 +849,13 @@ void TintPalette_GrayScale(u16 *palette, u16 count)
         r = *palette & 0x1F;
         g = (*palette >> 5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-        
+
         r *= 0x4C;
         r += g * 0x97;
         r += b * 0x1D;
-        
+
         gray = r >> 8;
-        
+
         *palette++ = gray << 10 | gray << 5 | gray;
     }
     return;
@@ -874,18 +874,18 @@ void TintPalette_GrayScale2(u16 *palette, u16 count)
         r = *palette & 0x1F;
         g = (*palette >> 5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-        
+
         r *= 0x4C;
         r += g * 0x97;
         r += b * 0x1D;
-        
+
         gray = r >> 8;
-        
+
         if ((u32)gray > 0x1F)
             gray = 0x1F;
-        
-        gray = gUnknown_0852489C[gray];
-        
+
+        gray = sUnknown_0852489C[gray];
+
         *palette++ = gray << 10 | gray << 5 | gray;
     }
     return;
@@ -902,31 +902,31 @@ void TintPalette_SepiaTone(u16 *palette, u16 count)
     s8 r2;
     s8 g2;
     s8 b2;
-    
+
     int i;
     for (i = 0; i < count; i++)
     {
         r = *palette & 0x1F;
         g = (*palette >> 5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-        
+
         r *= 0x4C;
         r += g * 0x97;
         r += b * 0x1D;
-        
+
         gray = (s32)(r >> 8);
-        
+
         sepia = (gray * 0x133);
-        
+
         r2 = (u16)sepia >> 8;
-        
+
         g2 = gray;
-        
+
         b2 = (gray * 15);
-        
+
         if (r2 > 0x1F)
             r2 = 0x1F;
-        
+
         *palette++ = b2 << 10 | g2 << 5 | r2;
     }
     return;
@@ -1011,28 +1011,28 @@ void sub_80A2BAC(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
         r = *palette & 0x1F;
         g = (*palette >> 5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-        
+
         r *= 0x4C;
         r += g * 0x97;
         r += b * 0x1D;
-        
+
         gray = r >> 8;
-        
+
         r2 = (u16)(gray * a3) >> 8;
-        
+
         g2 = (u16)(gray * a4) >> 8;
-        
+
         b2 = (u16)(gray * a5) >> 8;
-        
+
         if (r2 > 0x1F)
             r2 = 0x1F;
-        
+
         if (g2 > 0x1F)
             g2 = 0x1F;
-        
+
         if (b2 > 0x1F)
             b2 = 0x1F;
-        
+
         *palette++ = b2 << 10 | g2 << 5 | r2;
     }
     return;

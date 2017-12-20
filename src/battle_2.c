@@ -152,7 +152,7 @@ extern u8 gUnknown_020241E9;
 extern u16 gChosenMove;
 
 extern const struct BattleMove gBattleMoves[];
-extern const u16 gUnknown_08C004E0[]; // battle textbox palette
+extern const u16 gBattleTextboxPalette[]; // battle textbox palette
 extern const struct BgTemplate gUnknown_0831AA08[];
 extern const struct WindowTemplate * const gUnknown_0831ABA0[];
 extern const u8 gUnknown_0831ACE0[];
@@ -754,7 +754,7 @@ static void CB2_HandleStartBattle(void)
             ResetBlockReceivedFlags();
             sub_8036EB8(2, playerMultiplayerId);
             SetAllPlayersBerryData();
-            taskId = CreateTask(task00_0800F6FC, 0);
+            taskId = CreateTask(sub_8035D74, 0);
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
@@ -956,7 +956,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             ResetBlockReceivedFlags();
             sub_8036EB8(2, playerMultiplayerId);
             SetAllPlayersBerryData();
-            taskId = CreateTask(task00_0800F6FC, 0);
+            taskId = CreateTask(sub_8035D74, 0);
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
@@ -1342,7 +1342,7 @@ static void CB2_HandleStartMultiBattle(void)
             sub_8036EB8(4, playerMultiplayerId);
             SetAllPlayersBerryData();
             sub_8068AA4();
-            var = CreateTask(task00_0800F6FC, 0);
+            var = CreateTask(sub_8035D74, 0);
             gTasks[var].data[1] = 0x10E;
             gTasks[var].data[2] = 0x5A;
             gTasks[var].data[5] = 0;
@@ -1978,7 +1978,7 @@ void sub_8038D64(void)
         gBattle_BG3_Y = 0;
 
         sub_80356D0();
-        LoadCompressedPalette(gUnknown_08C004E0, 0, 64);
+        LoadCompressedPalette(gBattleTextboxPalette, 0, 64);
         ApplyPlayerChosenFrameToBattleMenu();
         ResetSpriteData();
         ResetTasks();
@@ -1988,7 +1988,7 @@ void sub_8038D64(void)
         gReservedSpritePaletteCount = 4;
         SetVBlankCallback(VBlankCB_Battle);
 
-        taskId = CreateTask(task00_0800F6FC, 0);
+        taskId = CreateTask(sub_8035D74, 0);
         gTasks[taskId].data[1] = 0x10E;
         gTasks[taskId].data[2] = 0x5A;
         gTasks[taskId].data[5] = 1;

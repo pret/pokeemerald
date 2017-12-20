@@ -8,6 +8,6 @@ TBD
 
 Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
-Then get the compiled tools from https://github.com/YamaArashi/pokeruby-tools. Copy the "tools" folder over the "tools" folder in your pokeemerald directory.
+Then download [**pokeruby-tools**](https://github.com/pret/pokeruby-tools). Copy the `tools/` folder with the compiled `exe`s to the `tools/` folder in your `pokeemerald/` directory.
 
-You can then build pokeemerald using "make" in the MSYS environment provided with devkitARM.
+You can then build pokeemerald using `make` in the MSYS environment provided with devkitARM.

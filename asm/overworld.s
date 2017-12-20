@@ -2856,8 +2856,8 @@ sav1_map_get_name: @ 8085C58
 	.pool
 	thumb_func_end sav1_map_get_name
 
-	thumb_func_start sav1_map_get_battletype
-sav1_map_get_battletype: @ 8085C80
+	thumb_func_start GetCurrentMapBattleScene
+GetCurrentMapBattleScene: @ 8085C80
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
@@ -2875,7 +2875,7 @@ sav1_map_get_battletype: @ 8085C80
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sav1_map_get_battletype
+	thumb_func_end GetCurrentMapBattleScene
 
 	thumb_func_start overworld_bg_setup
 @ void overworld_bg_setup()

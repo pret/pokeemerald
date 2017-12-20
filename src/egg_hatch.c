@@ -48,9 +48,9 @@ extern struct SpriteTemplate gUnknown_0202499C;
 extern void (*gFieldCallback)(void);
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const u8 gUnknown_08C00000[];
-extern const u8 gUnknown_08C00524[];
-extern const u8 gUnknown_08C004E0[];
+extern const u8 gBattleTextboxTiles[];
+extern const u8 gBattleTextboxTilemap[];
+extern const u8 gBattleTextboxPalette[];
 extern const u16 gUnknown_08DD7300[]; // palette, gameboy advance
 extern const u32 gUnknown_08DD7360[]; // tileset gameboy advance
 extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
@@ -522,9 +522,9 @@ static void CB2_EggHatch_0(void)
         gMain.state++;
         break;
     case 2:
-        copy_decompressed_tile_data_to_vram_autofree(0, gUnknown_08C00000, 0, 0, 0);
-        CopyToBgTilemapBuffer(0, gUnknown_08C00524, 0, 0);
-        LoadCompressedPalette(gUnknown_08C004E0, 0, 0x20);
+        copy_decompressed_tile_data_to_vram_autofree(0, gBattleTextboxTiles, 0, 0, 0);
+        CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
+        LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
         gMain.state++;
         break;
     case 3:
