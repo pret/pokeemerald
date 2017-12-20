@@ -88,5 +88,8 @@ extern const u8 gText_Cancel4[];
 extern const u8 gText_IsThisTheCorrectTime[];
 extern const u8 gText_PkmnFainted3[];
 extern const u8 gText_Coins[];
+extern const u8 gText_Draw[];
+extern const u8 gText_Loss[];
+extern const u8 gText_Win[];
 
 #endif //GUARD_STRINGS_H

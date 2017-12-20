@@ -8,7 +8,7 @@
 	.include "src/link.o"
 	.include "src/rtc.o"
 	.include "src/main_menu.o"
-	.include "src/battle_1.o"
+	.include "src/rom_8034C54.o"
 	.include "src/egg_hatch.o"
 	.include "src/berry_blender.o"
 	.include "src/play_time.o"
