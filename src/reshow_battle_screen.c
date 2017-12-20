@@ -35,7 +35,7 @@ extern struct SpriteTemplate gUnknown_0202499C;
 extern const union AnimCmd * const * const gMonAnimationsSpriteAnimsPtrTable[];
 
 extern void dp12_8087EA4(void);
-extern void trs_config(void);
+extern void sub_8035658(void);
 extern bool8 IsDoubleBattle(void);
 extern u8 GetSubstituteSpriteDefault_Y(u8 bank);
 extern u8 GetBankSpriteDefault_Y(u8 bank);
@@ -73,7 +73,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     {
     case 0:
         dp12_8087EA4();
-        trs_config();
+        sub_8035658();
         SetBgAttribute(1, BG_CTRL_ATTR_VISIBLE, 0);
         SetBgAttribute(2, BG_CTRL_ATTR_VISIBLE, 0);
         ShowBg(0);

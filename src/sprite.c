@@ -240,7 +240,7 @@ static const AffineAnimCmdFunc sAffineAnimCmdFuncs[] =
     AffineAnimCmd_frame,
 };
 
-static const s32 gUnknown_082EC6F4[24] =
+static const s32 sUnknown_082EC6F4[24] =
 {
     8,      8,      0x10,   0x10,   0x20,   0x20,
     0x40,   0x40,   0x10,   8,      0x20,   8,
@@ -1214,14 +1214,14 @@ void obj_update_pos2(struct Sprite* sprite, s32 a1, s32 a2)
     u8 matrixNum = sprite->oam.matrixNum;
     if (a1 != 0x800)
     {
-        var0 = gUnknown_082EC6F4[sprite->oam.size * 8 + sprite->oam.shape * 32];
+        var0 = sUnknown_082EC6F4[sprite->oam.size * 8 + sprite->oam.shape * 32];
         var1 = var0 << 8;
         var2 = (var0 << 16) / gOamMatrices[matrixNum].a;
         sprite->pos2.x = sub_8007E28(var1, var2, a1);
     }
     if (a2 != 0x800)
     {
-        var0 = gUnknown_082EC6F4[4 + (sprite->oam.size * 8 + sprite->oam.shape * 32)];
+        var0 = sUnknown_082EC6F4[4 + (sprite->oam.size * 8 + sprite->oam.shape * 32)];
         var1 = var0 << 8;
         var2 = (var0 << 16) / gOamMatrices[matrixNum].d;
         sprite->pos2.y = sub_8007E28(var1, var2, a2);
@@ -1247,7 +1247,7 @@ void obj_update_pos2(struct Sprite* sprite, s32 a1, s32 a2)
 	mov r9, r0\n\
 	cmp r6, r9\n\
 	beq _08007EA2\n\
-	ldr r2, =gUnknown_082EC6F4\n\
+	ldr r2, =sUnknown_082EC6F4\n\
 	lsrs r1, 6\n\
 	lsls r1, 3\n\
 	ldrb r0, [r5, 0x1]\n\
@@ -1272,7 +1272,7 @@ void obj_update_pos2(struct Sprite* sprite, s32 a1, s32 a2)
 _08007EA2:\n\
 	cmp r8, r9\n\
 	beq _08007EDA\n\
-	ldr r2, =gUnknown_082EC6F4\n\
+	ldr r2, =sUnknown_082EC6F4\n\
 	ldrb r1, [r5, 0x3]\n\
 	lsrs r1, 6\n\
 	lsls r1, 3\n\

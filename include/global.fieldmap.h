@@ -39,7 +39,7 @@ enum
     MAP_BATTLE_SCENE_PHOEBE,       // 5
     MAP_BATTLE_SCENE_GLACIA,       // 6
     MAP_BATTLE_SCENE_DRAKE,        // 7
-    MAP_BATTLE_SCENE_BATTLE_TOWER, // 8
+    MAP_BATTLE_SCENE_FRONTIER,     // 8
 };
 
 typedef void (*TilesetCB)(void);
