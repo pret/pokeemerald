@@ -5766,7 +5766,7 @@ sub_80C58D4: @ 80C58D4
 	beq _080C5914
 	cmp r0, 0x2
 	beq _080C591C
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	b _080C5924
 	.pool
 _080C5914:

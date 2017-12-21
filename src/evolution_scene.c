@@ -86,7 +86,7 @@ extern void sub_806A068(u16, u8);
 extern void sub_807F19C(void);
 extern void sub_807B140(void);
 extern void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
-extern void sub_8085784(void);
+extern void Overworld_PlaySpecialMapMusic(void);
 extern void sub_81BFA38(struct Pokemon *party, u8 monId, u8 partyCount, void *CB2_ptr, u16 move);
 extern u8 sub_81C1B94(void);
 extern void sub_807F1A8(u8 arg0, const u8 *arg1, u8 arg2);
@@ -698,7 +698,7 @@ static void Task_EvolutionScene(u8 taskID)
                 if (!(gTasks[taskID].tBits & TASK_BIT_LEARN_MOVE))
                 {
                     StopMapMusic();
-                    sub_8085784();
+                    Overworld_PlaySpecialMapMusic();
                 }
 
                 gTasks[taskID].tBits |= TASK_BIT_LEARN_MOVE;
@@ -727,7 +727,7 @@ static void Task_EvolutionScene(u8 taskID)
             if (!(gTasks[taskID].tBits & TASK_BIT_LEARN_MOVE))
             {
                 StopMapMusic();
-                sub_8085784();
+                Overworld_PlaySpecialMapMusic();
             }
             if (!gTasks[taskID].tEvoWasStopped)
                 CreateShedinja(gTasks[taskID].tPreEvoSpecies, mon);

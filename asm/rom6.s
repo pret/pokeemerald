@@ -4668,7 +4668,7 @@ mapldr_080CA5C0: @ 8137C5C
 	push {lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl sp109_CreatePCMenu
 	bl sub_80E2514
 	movs r0, 0x1
@@ -4733,10 +4733,10 @@ Special_ViewWallClock: @ 8137CC8
 
 	thumb_func_start wild_pokemon_reroll
 wild_pokemon_reroll: @ 8137CEC
-	ldr r0, =gUnknown_0203AB54
+	ldr r0, =gBikeCyclingChallenge
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, =gUnknown_0203AB55
+	ldr r0, =gBikeCollisions
 	strb r1, [r0]
 	ldr r1, =gUnknown_0203AB58
 	movs r0, 0
@@ -4747,10 +4747,10 @@ wild_pokemon_reroll: @ 8137CEC
 
 	thumb_func_start sub_8137D0C
 sub_8137D0C: @ 8137D0C
-	ldr r1, =gUnknown_0203AB54
+	ldr r1, =gBikeCyclingChallenge
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gUnknown_0203AB55
+	ldr r1, =gBikeCollisions
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, =gUnknown_0203AB58
@@ -4919,7 +4919,7 @@ sub_8137E6C: @ 8137E6C
 	ldr r4, [r0, 0x20]
 	ldr r0, [r1]
 	subs r4, r0
-	ldr r5, =gUnknown_0203AB55
+	ldr r5, =gBikeCollisions
 	ldrb r1, [r5]
 	adds r0, r4, 0
 	bl sub_8137D5C
