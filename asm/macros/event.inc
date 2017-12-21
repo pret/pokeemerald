@@ -295,8 +295,8 @@
 	@ Initializes the RTC`s local time offset to the given hour and minute. In FireRed, this command is a nop.
 	.macro initclock hour, minute
 	.byte 0x2c
-	.byte \hour
-	.byte \minute
+	.2byte \hour
+	.2byte \minute
 	.endm
 
 	@ Runs time based events. In FireRed, this command is a nop.
