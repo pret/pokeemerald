@@ -3,30 +3,30 @@ EventScript_27EE0B:: @ 827EE0B
 	incrementgamestat 44
 	special ResetTVShowState
 	specialvar VAR_RESULT, CheckForBigMovieOrEmergencyNewsOnTV
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq EventScript_27EE9A
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_27EEA4
 	checkflag FLAG_SYS_TV_START
 	goto_if 0, EventScript_27EE8A
 	checkflag FLAG_SYS_TV_WATCH
 	goto_eq EventScript_27EE8A
 	specialvar VAR_RESULT, IsTVShowInSearchOfTrainersAiring
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_27EEFF
 	goto EventScript_27EEE9
 	end
 
 EventScript_27EE54:: @ 827EE54
 	specialvar VAR_0x8004, special_0x44
-	compare_var_to_value VAR_0x8004, 255
+	compare VAR_0x8004, 255
 	goto_eq EventScript_27EED8
 	specialvar VAR_RESULT, special_0x4a
-	compare_var_to_value VAR_RESULT, 255
+	compare VAR_RESULT, 255
 	goto_eq EventScript_27EED8
 	copyvar VAR_0x8004, VAR_RESULT
 	specialvar VAR_RESULT, special_0x45
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, EventScript_27EEBA
 	end
 
@@ -55,7 +55,7 @@ EventScript_27EEBA:: @ 827EEBA
 	special DoTVShow
 	waitmessage
 	waitbuttonpress
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if 5, EventScript_27EEBA
 	goto EventScript_27EED0
 	end
@@ -74,7 +74,7 @@ EventScript_27EED8:: @ 827EED8
 
 EventScript_27EEE9:: @ 827EEE9
 	special DoPokeNews
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_27EE54
 	waitmessage
 	waitbuttonpress
@@ -85,7 +85,7 @@ EventScript_27EEFF:: @ 827EEFF
 	special DoTVShowInSearchOfTrainers
 	waitmessage
 	waitbuttonpress
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_27EEFF
 	goto EventScript_27EED0
 	end

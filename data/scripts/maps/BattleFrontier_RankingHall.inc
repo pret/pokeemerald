@@ -86,7 +86,7 @@ BattleFrontier_RankingHall_EventScript_25E54A:: @ 825E54A
 	lock
 	faceplayer
 	msgbox BattleFrontier_RankingHall_Text_25E666, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_RankingHall_EventScript_25E569
 	msgbox BattleFrontier_RankingHall_Text_25E6B6, 4
 	release

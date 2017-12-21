@@ -51,7 +51,7 @@ MossdeepCity_Gym_EventScript_220885:: @ 8220885
 MossdeepCity_Gym_EventScript_220898:: @ 8220898
 	trainerbattle 8, TRAINER_TATE_AND_LIZA_1, 0, MossdeepCity_Gym_Text_221783, MossdeepCity_Gym_Text_2218EC, MossdeepCity_Gym_Text_221BCE, MossdeepCity_Gym_EventScript_2208D1
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MossdeepCity_Gym_EventScript_22097E
 	checkflag FLAG_0x0AB
 	goto_if 0, MossdeepCity_Gym_EventScript_220937
@@ -93,7 +93,7 @@ MossdeepCity_Gym_EventScript_2208D1:: @ 82208D1
 
 MossdeepCity_Gym_EventScript_220937:: @ 8220937
 	giveitem_std ITEM_TM04
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_Gym_EventScript_272054
 	msgbox MossdeepCity_Gym_Text_221A40, 4
 	setflag FLAG_0x0AB
@@ -102,7 +102,7 @@ MossdeepCity_Gym_EventScript_220937:: @ 8220937
 
 MossdeepCity_Gym_EventScript_22095B:: @ 822095B
 	giveitem_std ITEM_TM04
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_Gym_EventScript_27205E
 	msgbox MossdeepCity_Gym_Text_221A40, 4
 	setflag FLAG_0x0AB

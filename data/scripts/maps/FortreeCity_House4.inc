@@ -35,7 +35,7 @@ FortreeCity_House4_EventScript_217CD8:: @ 8217CD8
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_217E05, 4
 	giveitem_std ITEM_MENTAL_HERB
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FortreeCity_House4_EventScript_272054
 	setflag FLAG_0x0DF
 	releaseall

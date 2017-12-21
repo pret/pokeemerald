@@ -2089,7 +2089,7 @@ bool8 ScrCmd_getpricereduction(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_choosecontestpkmn(struct ScriptContext *ctx)
+bool8 ScrCmd_choosecontestmon(struct ScriptContext *ctx)
 {
     sub_81B9404();
     ScriptContext1_Stop();

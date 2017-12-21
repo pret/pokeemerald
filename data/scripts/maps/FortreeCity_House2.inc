@@ -22,7 +22,7 @@ FortreeCity_House2_EventScript_2177CB:: @ 82177CB
 	case 0, FortreeCity_House2_EventScript_217878
 	msgbox FortreeCity_House2_Text_217A28, 4
 	giveitem_std ITEM_TM10
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FortreeCity_House2_EventScript_272054
 	setflag FLAG_0x108
 	msgbox FortreeCity_House2_Text_217A91, 4

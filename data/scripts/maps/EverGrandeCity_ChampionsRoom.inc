@@ -53,16 +53,16 @@ EverGrandeCity_ChampionsRoom_EventScript_228A61:: @ 8228A61
 	closemessage
 	playse SE_DOOR
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228ABC
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228AC1
 	addobject 2
 	call EverGrandeCity_ChampionsRoom_EventScript_228BFD
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EverGrandeCity_ChampionsRoom_EventScript_228AC6
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EverGrandeCity_ChampionsRoom_EventScript_228AFB
 	end
 
@@ -128,9 +128,9 @@ EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_2293EB, 4
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228BEB
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228BF4
 	closemessage
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_228C3F

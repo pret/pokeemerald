@@ -21,9 +21,9 @@ Route103_EventScript_1EC3AE:: @ 81EC3AE
 Route103_EventScript_1EC3C1:: @ 81EC3C1
 	lockall
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route103_EventScript_1EC3DA
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route103_EventScript_1EC434
 	end
 
@@ -210,7 +210,7 @@ Route103_EventScript_1EC5F4:: @ 81EC5F4
 Route103_EventScript_1EC60B:: @ 81EC60B
 	trainerbattle 6, TRAINER_AMY_AND_LIV_1, 0, Route103_Text_2949F9, Route103_Text_294A3D, Route103_Text_294AAE, Route103_EventScript_1EC63A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route103_EventScript_1EC653
 	msgbox Route103_Text_294A52, 6
 	end
@@ -232,7 +232,7 @@ Route103_EventScript_1EC653:: @ 81EC653
 Route103_EventScript_1EC66E:: @ 81EC66E
 	trainerbattle 6, TRAINER_AMY_AND_LIV_1, 0, Route103_Text_294AFD, Route103_Text_294B22, Route103_Text_294BD0, Route103_EventScript_1EC69D
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route103_EventScript_1EC6B6
 	msgbox Route103_Text_294B40, 6
 	end
@@ -259,7 +259,7 @@ Route103_EventScript_1EC6D1:: @ 81EC6D1
 Route103_EventScript_1EC6E8:: @ 81EC6E8
 	trainerbattle 2, TRAINER_MIGUEL_1, 0, Route103_Text_294EDF, Route103_Text_294F21, Route103_EventScript_1EC714
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route103_EventScript_1EC733
 	msgbox Route103_Text_294F42, 4
 	release

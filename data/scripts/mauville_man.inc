@@ -12,9 +12,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E0A6:: @ 828E0A6
 	lock
 	faceplayer
 	msgbox MauvilleCity_PokemonCenter_1F_Text_29038E, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E0C7
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E0EA
 	end
 
@@ -23,7 +23,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E0C7:: @ 828E0C7
 	special sub_8120340
 	delay 60
 	special sub_81201F4
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E0F4
 	msgbox MauvilleCity_PokemonCenter_1F_Text_2903E6, 4
 	release
@@ -36,9 +36,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E0EA:: @ 828E0EA
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E0F4:: @ 828E0F4
 	msgbox MauvilleCity_PokemonCenter_1F_Text_290421, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E113
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E15D
 	end
 
@@ -47,14 +47,14 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E113:: @ 828E113
 	call MauvilleCity_PokemonCenter_1F_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E15D
 	msgbox MauvilleCity_PokemonCenter_1F_Text_2904C1, 4
 	setvar VAR_0x8004, 1
 	special sub_8120340
 	delay 60
 	msgbox MauvilleCity_PokemonCenter_1F_Text_2904EB, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E113
 	special sub_8120210
 	msgbox MauvilleCity_PokemonCenter_1F_Text_290514, 4
@@ -72,7 +72,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E167:: @ 828E167
 	setflag FLAG_SYS_HIPSTER_MEET
 	msgbox MauvilleCity_PokemonCenter_1F_Text_29054C, 4
 	special sub_8120358
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E18C
 	msgbox MauvilleCity_PokemonCenter_1F_Text_290598, 4
 	release
@@ -80,7 +80,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E167:: @ 828E167
 
 MauvilleCity_PokemonCenter_1F_EventScript_28E18C:: @ 828E18C
 	special sub_812038C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E1A4
 	msgbox MauvilleCity_PokemonCenter_1F_Text_290602, 4
 	release
@@ -155,10 +155,10 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E4D4:: @ 828E4D4
 	lock
 	faceplayer
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E1B1, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E503
 	special sub_8133CD8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E50D
 	message MauvilleCity_PokemonCenter_1F_Text_28E23F
 	waitmessage
@@ -178,15 +178,15 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E50D:: @ 828E50D
 MauvilleCity_PokemonCenter_1F_EventScript_28E517:: @ 828E517
 	special sub_8133EC0
 	waitstate
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E558
-	compare_var_to_value VAR_0x8004, 65535
+	compare VAR_0x8004, 65535
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E562
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E2A9, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E56E
 	special sub_8133CF4
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E57A
 	goto MauvilleCity_PokemonCenter_1F_EventScript_28E584
 	end
@@ -217,15 +217,15 @@ MauvilleCity_PokemonCenter_1F_EventScript_28E584:: @ 828E584
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E323, 4
 	special sub_8133D8C
 	waitstate
-	compare_var_to_value VAR_0x8006, 0
+	compare VAR_0x8006, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E5D4
-	compare_var_to_value VAR_0x8006, 65535
+	compare VAR_0x8006, 65535
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E5DE
 	special sub_8133D2C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E5EC
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E3C4, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_28E584
 	special sub_8133E38
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E424, 4
@@ -702,23 +702,23 @@ MauvilleCity_PokemonCenter_1F_EventScript_29014A:: @ 829014A
 	setvar VAR_0x800A, 0
 	setvar VAR_0x800B, 0
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E5F6, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290219
 	specialvar VAR_RESULT, sub_81213B0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_2901DA
 	message MauvilleCity_PokemonCenter_1F_Text_28E673
 	waitmessage
 	special sub_8121388
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_2901B7
 	setvar VAR_0x8008, 1
 	special sub_812139C
 	waitmessage
 	waitbuttonpress
 	specialvar VAR_RESULT, sub_81213D8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_2901BD
 	goto MauvilleCity_PokemonCenter_1F_EventScript_29020F
 
@@ -729,7 +729,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_2901B7:: @ 82901B7
 MauvilleCity_PokemonCenter_1F_EventScript_2901BD:: @ 82901BD
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E78A, 4
 	specialvar VAR_RESULT, sub_8121424
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_29022D
 	goto MauvilleCity_PokemonCenter_1F_EventScript_2901E2
 
@@ -738,10 +738,10 @@ MauvilleCity_PokemonCenter_1F_EventScript_2901DA:: @ 82901DA
 
 MauvilleCity_PokemonCenter_1F_EventScript_2901E2:: @ 82901E2
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E7EE, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290219
 	specialvar VAR_RESULT, sub_8121450
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_29020F
 	msgbox MauvilleCity_PokemonCenter_1F_Text_28E881, 4
 	release
@@ -787,25 +787,25 @@ MauvilleCity_PokemonCenter_1F_EventScript_2902F6:: @ 82902F6
 	lock
 	faceplayer
 	msgbox MauvilleCity_PokemonCenter_1F_Text_29022F, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290317
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_29037A
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_290317:: @ 8290317
 	special sub_81203C4
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290359
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290384
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_290331:: @ 8290331
 	special sub_81203C4
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_29034B
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290384
 	end
 
@@ -819,9 +819,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_290359:: @ 8290359
 	special sub_8138AC0
 	waitmessage
 	yesnobox 20, 8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290331
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_PokemonCenter_1F_EventScript_290331
 	end
 

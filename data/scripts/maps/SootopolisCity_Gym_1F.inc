@@ -19,11 +19,11 @@ SootopolisCity_Gym_1F_MapScript1_224E6A: @ 8224E6A
 	end
 
 SootopolisCity_Gym_1F_EventScript_224E73:: @ 8224E73
-	compare_var_to_value VAR_ICE_STEP_COUNT, 8
+	compare VAR_ICE_STEP_COUNT, 8
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_224ECA
-	compare_var_to_value VAR_ICE_STEP_COUNT, 28
+	compare VAR_ICE_STEP_COUNT, 28
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_224EB8
-	compare_var_to_value VAR_ICE_STEP_COUNT, 67
+	compare VAR_ICE_STEP_COUNT, 67
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_224EA6
 	setmetatile 8, 4, 519, 0
 	setmetatile 8, 5, 519, 0
@@ -88,7 +88,7 @@ SootopolisCity_Gym_1F_Movement_224F42: @ 8224F42
 SootopolisCity_Gym_1F_EventScript_224F44:: @ 8224F44
 	trainerbattle 1, TRAINER_JUAN_1, 0, SootopolisCity_Gym_1F_Text_225268, SootopolisCity_Gym_1F_Text_225432, SootopolisCity_Gym_1F_EventScript_224F82
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SootopolisCity_Gym_1F_EventScript_225025
 	checkflag FLAG_0x0AC
 	goto_if 0, SootopolisCity_Gym_1F_EventScript_224FF7
@@ -126,7 +126,7 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 
 SootopolisCity_Gym_1F_EventScript_224FD4:: @ 8224FD4
 	giveitem_std ITEM_TM03
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_Gym_1F_EventScript_27205E
 	msgbox SootopolisCity_Gym_1F_Text_2256C1, 4
 	setflag FLAG_0x0AC
@@ -134,7 +134,7 @@ SootopolisCity_Gym_1F_EventScript_224FD4:: @ 8224FD4
 
 SootopolisCity_Gym_1F_EventScript_224FF7:: @ 8224FF7
 	giveitem_std ITEM_TM03
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_Gym_1F_EventScript_272054
 	msgbox SootopolisCity_Gym_1F_Text_2256C1, 4
 	setflag FLAG_0x0AC

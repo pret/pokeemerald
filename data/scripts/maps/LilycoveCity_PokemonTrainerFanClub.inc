@@ -62,9 +62,9 @@ LilycoveCity_PokemonTrainerFanClub_Movement_21C807: @ 821C807
 
 LilycoveCity_PokemonTrainerFanClub_MapScript1_21C80D: @ 821C80D
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_21C8DA
-	compare_var_to_value VAR_0x4095, 1
+	compare VAR_0x4095, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C9F8
-	compare_var_to_value VAR_0x4095, 2
+	compare VAR_0x4095, 2
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C829
 	end
 
@@ -73,41 +73,41 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C829:: @ 821C829
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_21C8F5
 	setvar VAR_0x8004, 8
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9B8
 	setvar VAR_0x8004, 9
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9C0
 	setvar VAR_0x8004, 10
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9C8
 	setvar VAR_0x8004, 11
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9D0
 	setvar VAR_0x8004, 12
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9D8
 	setvar VAR_0x8004, 13
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9E0
 	setvar VAR_0x8004, 14
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9E8
 	setvar VAR_0x8004, 15
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9F0
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21C8DA:: @ 821C8DA
 	specialvar VAR_RESULT, sub_80EE7C0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21C8F1
 	clearflag FLAG_0x2DA
 	clearflag FLAG_0x0D2
@@ -121,37 +121,37 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21C8F5:: @ 821C8F5
 	setvar VAR_0x8005, 8
 	setvar VAR_0x8004, 8
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 9
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 10
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 11
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 12
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 13
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 14
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
 	setvar VAR_0x8004, 15
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9AE
-	compare_var_to_value VAR_0x8005, 5
+	compare VAR_0x8005, 5
 	goto_if 4, LilycoveCity_PokemonTrainerFanClub_EventScript_21C9B4
 	return
 
@@ -209,13 +209,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CA17:: @ 821CA17
 	faceplayer
 	setvar VAR_0x8004, 13
 	special sub_813BDB4
-	compare_var_to_value VAR_0x4095, 0
+	compare VAR_0x4095, 0
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CA84
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CA56
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CA7A
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D12A, 4
 	release
@@ -223,7 +223,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CA17:: @ 821CA17
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CA56:: @ 821CA56
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CA70
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D094, 4
 	release
@@ -249,13 +249,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CA8E:: @ 821CA8E
 	faceplayer
 	setvar VAR_0x8004, 8
 	special sub_813BDB4
-	compare_var_to_value VAR_0x4095, 0
+	compare VAR_0x4095, 0
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CAFB
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CACD
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CAF1
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D347, 4
 	release
@@ -263,7 +263,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CA8E:: @ 821CA8E
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CACD:: @ 821CACD
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CAE7
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D2A6, 4
 	release
@@ -289,13 +289,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CB05:: @ 821CB05
 	faceplayer
 	setvar VAR_0x8004, 9
 	special sub_813BDB4
-	compare_var_to_value VAR_0x4095, 0
+	compare VAR_0x4095, 0
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CB72
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CB44
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CB68
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D52E, 4
 	release
@@ -303,7 +303,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CB05:: @ 821CB05
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CB44:: @ 821CB44
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CB5E
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D438, 4
 	release
@@ -329,13 +329,13 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CB7C:: @ 821CB7C
 	faceplayer
 	setvar VAR_0x8004, 10
 	special sub_813BDB4
-	compare_var_to_value VAR_0x4095, 0
+	compare VAR_0x4095, 0
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CBE9
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CBBB
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CBDF
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D822, 4
 	release
@@ -343,7 +343,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CB7C:: @ 821CB7C
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CBBB:: @ 821CBBB
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CBD5
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D751, 4
 	release
@@ -370,10 +370,10 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CBF3:: @ 821CBF3
 	setvar VAR_0x8004, 11
 	special sub_813BDB4
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CC27
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CC4B
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D9D1, 4
 	release
@@ -381,7 +381,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CBF3:: @ 821CBF3
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CC27:: @ 821CC27
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CC41
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21D921, 4
 	release
@@ -403,10 +403,10 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CC55:: @ 821CC55
 	setvar VAR_0x8004, 12
 	special sub_813BDB4
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CC89
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CCAD
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DB69, 4
 	release
@@ -414,7 +414,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CC55:: @ 821CC55
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CC89:: @ 821CC89
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CCA3
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DA73, 4
 	release
@@ -436,10 +436,10 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CCB7:: @ 821CCB7
 	setvar VAR_0x8004, 14
 	special sub_813BDB4
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CCEB
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD0F
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DD36, 4
 	release
@@ -447,7 +447,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CCB7:: @ 821CCB7
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CCEB:: @ 821CCEB
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD05
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DC68, 4
 	release
@@ -469,10 +469,10 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD19:: @ 821CD19
 	setvar VAR_0x8004, 15
 	special sub_813BDB4
 	specialvar VAR_RESULT, sub_813BD60
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD4D
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD71
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DEFF, 4
 	release
@@ -480,7 +480,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD19:: @ 821CD19
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CD4D:: @ 821CD4D
 	specialvar VAR_RESULT, sub_813BCA8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CD67
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_21DE72, 4
 	release
@@ -508,7 +508,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD7B:: @ 821CD7B
 LilycoveCity_PokemonTrainerFanClub_EventScript_21CD90:: @ 821CD90
 	setvar VAR_0x8005, 11
 	special InterviewBefore
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CEFF
 	copyvar VAR_0x800A, VAR_0x8006
 	setvar VAR_0x8004, 8
@@ -519,9 +519,9 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CD90:: @ 821CD90
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CDE0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CDEE
 	end
 
@@ -534,9 +534,9 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CDEE:: @ 821CDEE
 	setvar VAR_0x8004, 8
 	special sub_813BDB4
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281C3D, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CEC6
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CE15
 	end
 
@@ -549,9 +549,9 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CE15:: @ 821CE15
 	call LilycoveCity_PokemonTrainerFanClub_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CDE0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CDEE
 	end
 
@@ -579,9 +579,9 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_21CE9F:: @ 821CE9F
 	setvar VAR_0x8004, 8
 	special sub_813BDB4
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_281CCD, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CEC6
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonTrainerFanClub_EventScript_21CE4D
 	end
 

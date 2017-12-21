@@ -10,9 +10,9 @@ LilycoveCity_PokemonCenter_1F_MapScript1_21C5BD: @ 821C5BD
 
 LilycoveCity_PokemonCenter_1F_EventScript_21C5C6:: @ 821C5C6
 	special sub_818D9C0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_21C5E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_21C5E4
 	end
 

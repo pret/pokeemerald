@@ -5,9 +5,9 @@ Route110_TrickHousePuzzle3_MapScripts:: @ 826BED8
 
 Route110_TrickHousePuzzle3_MapScript1_26BEE3: @ 826BEE3
 	call Route110_TrickHousePuzzle3_EventScript_26BF1E
-	compare_var_to_value VAR_0x4009, 0
+	compare VAR_0x4009, 0
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF97
-	compare_var_to_value VAR_0x4009, 1
+	compare VAR_0x4009, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C232
 	end
 
@@ -25,13 +25,13 @@ Route110_TrickHousePuzzle3_EventScript_26BF1E:: @ 826BF1E
 	setmetatile 3, 11, 600, 0
 	setmetatile 12, 5, 600, 0
 	setmetatile 8, 2, 600, 0
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF6F
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF79
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF83
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF8D
 	return
 
@@ -241,13 +241,13 @@ Route110_TrickHousePuzzle3_EventScript_26C510:: @ 826C510
 	setvar VAR_0x4002, 0
 	setvar VAR_0x4003, 0
 	setvar VAR_0x4004, 0
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C551
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C557
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C55D
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C563
 	return
 
@@ -268,14 +268,14 @@ Route110_TrickHousePuzzle3_EventScript_26C563:: @ 826C563
 	return
 
 Route110_TrickHousePuzzle3_EventScript_26C569:: @ 826C569
-	compare_var_to_value VAR_0x4009, 1
+	compare VAR_0x4009, 1
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26BF97
-	compare_var_to_value VAR_0x4009, 0
+	compare VAR_0x4009, 0
 	call_if 1, Route110_TrickHousePuzzle3_EventScript_26C232
 	special DrawWholeMapView
-	compare_var_to_value VAR_0x4009, 1
+	compare VAR_0x4009, 1
 	goto_eq Route110_TrickHousePuzzle3_EventScript_26C599
-	compare_var_to_value VAR_0x4009, 0
+	compare VAR_0x4009, 0
 	goto_eq Route110_TrickHousePuzzle3_EventScript_26C5A0
 	end
 
@@ -291,7 +291,7 @@ Route110_TrickHousePuzzle3_EventScript_26C5A0:: @ 826C5A0
 
 Route110_TrickHousePuzzle3_EventScript_26C5A7:: @ 826C5A7
 	lockall
-	compare_var_to_value VAR_0x40AD, 0
+	compare VAR_0x40AD, 0
 	goto_eq Route110_TrickHousePuzzle3_EventScript_26C5B9
 	goto Route110_TrickHousePuzzle3_EventScript_26A3DB
 	end

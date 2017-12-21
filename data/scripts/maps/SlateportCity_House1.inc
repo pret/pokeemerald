@@ -5,9 +5,9 @@ SlateportCity_House1_EventScript_209AA5:: @ 8209AA5
 	lock
 	faceplayer
 	msgbox SlateportCity_House1_Text_209B8E, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209AC6
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_House1_EventScript_209AE9
 	end
 
@@ -15,9 +15,9 @@ SlateportCity_House1_EventScript_209AC6:: @ 8209AC6
 	msgbox SlateportCity_House1_Text_209BFF, 4
 	special sub_81B94B0
 	waitstate
-	compare_var_to_value VAR_0x8004, 255
+	compare VAR_0x8004, 255
 	goto_if 5, SlateportCity_House1_EventScript_209AF3
-	compare_var_to_value VAR_0x8004, 255
+	compare VAR_0x8004, 255
 	goto_eq SlateportCity_House1_EventScript_209AE9
 	end
 
@@ -28,20 +28,20 @@ SlateportCity_House1_EventScript_209AE9:: @ 8209AE9
 
 SlateportCity_House1_EventScript_209AF3:: @ 8209AF3
 	specialvar VAR_RESULT, sub_81396E0
-	compare_var_to_value VAR_RESULT, 412
+	compare VAR_RESULT, 412
 	goto_eq SlateportCity_House1_EventScript_209B46
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	special TV_CheckMonOTIDEqualsPlayerID
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209B50
 	specialvar VAR_RESULT, sub_8139770
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209B50
 	msgbox SlateportCity_House1_Text_209C2B, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209B5A
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_House1_EventScript_209AE9
 	end
 
@@ -60,7 +60,7 @@ SlateportCity_House1_EventScript_209B5A:: @ 8209B5A
 	call SlateportCity_House1_EventScript_2723DD
 	specialvar VAR_RESULT, TV_PutNameRaterShowOnTheAirIfNicnkameChanged
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_House1_EventScript_209B84
 	msgbox SlateportCity_House1_Text_209D5E, 4
 	release

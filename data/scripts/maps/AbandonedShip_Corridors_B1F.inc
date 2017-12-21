@@ -31,7 +31,7 @@ AbandonedShip_Corridors_B1F_EventScript_237DC8:: @ 8237DC8
 	checkflag FLAG_0x0EF
 	goto_eq AbandonedShip_Corridors_B1F_EventScript_237E09
 	checkitem ITEM_STORAGE_KEY, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq AbandonedShip_Corridors_B1F_EventScript_237DFF
 	msgbox AbandonedShip_Corridors_B1F_Text_237F4B, 4
 	playse SE_PIN

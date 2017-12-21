@@ -38,9 +38,9 @@ BattleFrontier_BattlePikeRandomRoom3_MapScript1_25E47A: @ 825E47A
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePikeRandomRoom3_EventScript_25E4A3
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq BattleFrontier_BattlePikeRandomRoom3_EventScript_25E4A3
 	end
 

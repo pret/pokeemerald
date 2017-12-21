@@ -58,17 +58,17 @@ MtChimney_EventScript_22EE0B:: @ 822EE0B
 	fadescreen 0
 	setobjectxyperm 1, 10, 12
 	addobject 1
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, MtChimney_EventScript_22EEC7
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, MtChimney_EventScript_22EED2
 	applymovement 255, MtChimney_Movement_2725A4
 	waitmovement 0
 	msgbox MtChimney_Text_22FC3D, 4
 	closemessage
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, MtChimney_EventScript_22EEDD
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, MtChimney_EventScript_22EEE8
 	removeobject 1
 	setflag FLAG_0x39E
@@ -104,17 +104,17 @@ MtChimney_EventScript_22EEF3:: @ 822EEF3
 	faceplayer
 	showmoneybox 0, 0, 0
 	msgbox MtChimney_Text_22FE04, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MtChimney_EventScript_22EF69
 	checkmoney 0xc8, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MtChimney_EventScript_22EF76
 	msgbox MtChimney_Text_22FE4D, 4
 	checkitemspace ITEM_LAVA_COOKIE, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, MtChimney_EventScript_22EF5E
 	giveitem_std ITEM_LAVA_COOKIE
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MtChimney_EventScript_22EF51
 	hidemoneybox
 	nop
@@ -459,7 +459,7 @@ MtChimney_EventScript_22F0E4:: @ 822F0E4
 	checkflag FLAG_0x073
 	goto_eq MtChimney_EventScript_22F12D
 	msgbox MtChimney_Text_22FF12, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MtChimney_EventScript_22F123
 	msgbox MtChimney_Text_22FF66, 4
 	giveitem_std ITEM_METEORITE
@@ -489,7 +489,7 @@ MtChimney_EventScript_22F141:: @ 822F141
 MtChimney_EventScript_22F14A:: @ 822F14A
 	trainerbattle 2, TRAINER_SHELBY_1, 0, MtChimney_Text_23001D, MtChimney_Text_230076, MtChimney_EventScript_22F176
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MtChimney_EventScript_22F195
 	msgbox MtChimney_Text_2300A2, 4
 	release
@@ -534,7 +534,7 @@ MtChimney_EventScript_22F1F1:: @ 822F1F1
 MtChimney_EventScript_22F208:: @ 822F208
 	trainerbattle 2, TRAINER_SAWYER_1, 0, MtChimney_Text_2304B3, MtChimney_Text_2304F7, MtChimney_EventScript_22F234
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MtChimney_EventScript_22F253
 	msgbox MtChimney_Text_230519, 4
 	release

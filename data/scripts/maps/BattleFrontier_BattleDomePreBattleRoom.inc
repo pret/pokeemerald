@@ -17,7 +17,7 @@ BattleFrontier_BattleDomePreBattleRoom_MapScript2_24B218: @ 824B218
 	.2byte 0
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_24B222:: @ 824B222
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 6
@@ -33,7 +33,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F:: @ 824B24F
 	waitmessage
 	switch VAR_RESULT
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_23E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B2C1
 	multichoice 16, 0, 73, 1
 	switch VAR_RESULT
@@ -158,7 +158,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B46D:: @ 824B46D
 	waitstate
 	setvar VAR_0x8004, 21
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_24B24F
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 8

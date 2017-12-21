@@ -79,13 +79,13 @@ RustboroCity_PokemonSchool_EventScript_213F95:: @ 8213F95
 	faceplayer
 	checkflag FLAG_0x113
 	goto_eq RustboroCity_PokemonSchool_EventScript_213FFB
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, RustboroCity_PokemonSchool_EventScript_213FE5
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, RustboroCity_PokemonSchool_EventScript_213FF0
 	msgbox RustboroCity_PokemonSchool_Text_214433, 4
 	giveitem_std ITEM_QUICK_CLAW
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_PokemonSchool_EventScript_272054
 	closemessage
 	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_2725AA

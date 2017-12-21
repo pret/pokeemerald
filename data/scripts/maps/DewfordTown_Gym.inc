@@ -11,17 +11,17 @@ DewfordTown_Gym_EventScript_1FC648:: @ 81FC648
 	goto_eq DewfordTown_Gym_EventScript_1FC6A2
 	call DewfordTown_Gym_EventScript_1FC768
 	copyvar VAR_0x8001, VAR_0x8000
-	compare_var_to_value VAR_0x8000, 0
+	compare VAR_0x8000, 0
 	goto_eq DewfordTown_Gym_EventScript_1FC6BE
-	compare_var_to_value VAR_0x8000, 1
+	compare VAR_0x8000, 1
 	goto_eq DewfordTown_Gym_EventScript_1FC6BA
-	compare_var_to_value VAR_0x8000, 2
+	compare VAR_0x8000, 2
 	goto_eq DewfordTown_Gym_EventScript_1FC6B6
-	compare_var_to_value VAR_0x8000, 3
+	compare VAR_0x8000, 3
 	goto_eq DewfordTown_Gym_EventScript_1FC6B2
-	compare_var_to_value VAR_0x8000, 4
+	compare VAR_0x8000, 4
 	goto_eq DewfordTown_Gym_EventScript_1FC6AE
-	compare_var_to_value VAR_0x8000, 5
+	compare VAR_0x8000, 5
 	goto_eq DewfordTown_Gym_EventScript_1FC6AA
 	goto DewfordTown_Gym_EventScript_1FC6A6
 
@@ -60,20 +60,20 @@ DewfordTown_Gym_EventScript_1FC6BE:: @ 81FC6BE
 DewfordTown_Gym_EventScript_1FC6C2:: @ 81FC6C2
 	call DewfordTown_Gym_EventScript_1FC768
 	nop1
-	compare_var_to_var VAR_0x8000, VAR_0x8001
+	compare VAR_0x8000, VAR_0x8001
 	goto_eq DewfordTown_Gym_EventScript_1FC71A
 	copyvar VAR_0x8001, VAR_0x8000
-	compare_var_to_value VAR_0x8000, 1
+	compare VAR_0x8000, 1
 	goto_eq DewfordTown_Gym_EventScript_1FC71B
-	compare_var_to_value VAR_0x8000, 2
+	compare VAR_0x8000, 2
 	goto_eq DewfordTown_Gym_EventScript_1FC726
-	compare_var_to_value VAR_0x8000, 3
+	compare VAR_0x8000, 3
 	goto_eq DewfordTown_Gym_EventScript_1FC731
-	compare_var_to_value VAR_0x8000, 4
+	compare VAR_0x8000, 4
 	goto_eq DewfordTown_Gym_EventScript_1FC73C
-	compare_var_to_value VAR_0x8000, 5
+	compare VAR_0x8000, 5
 	goto_eq DewfordTown_Gym_EventScript_1FC747
-	compare_var_to_value VAR_0x8000, 6
+	compare VAR_0x8000, 6
 	goto_eq DewfordTown_Gym_EventScript_1FC752
 
 DewfordTown_Gym_EventScript_1FC71A:: @ 81FC71A
@@ -158,7 +158,7 @@ DewfordTown_Gym_EventScript_1FC7C1:: @ 81FC7C1
 DewfordTown_Gym_EventScript_1FC7C2:: @ 81FC7C2
 	trainerbattle 1, TRAINER_BRAWLY_1, 0, DewfordTown_Gym_Text_1FCF44, DewfordTown_Gym_Text_1FD008, DewfordTown_Gym_EventScript_1FC7F7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq DewfordTown_Gym_EventScript_1FC89C
 	checkflag FLAG_0x0A6
 	goto_if 0, DewfordTown_Gym_EventScript_1FC878
@@ -175,7 +175,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 	setflag FLAG_0x4F1
 	setflag FLAG_BADGE02_GET
 	addvar VAR_0x4085, 1
-	compare_var_to_value VAR_0x4085, 6
+	compare VAR_0x4085, 6
 	call_if 1, DewfordTown_Gym_EventScript_271E84
 	setvar VAR_0x8008, 2
 	call DewfordTown_Gym_EventScript_271F43
@@ -195,7 +195,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 
 DewfordTown_Gym_EventScript_1FC855:: @ 81FC855
 	giveitem_std ITEM_TM08
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq DewfordTown_Gym_EventScript_27205E
 	msgbox DewfordTown_Gym_Text_1FD181, 4
 	setflag FLAG_0x0A6
@@ -203,7 +203,7 @@ DewfordTown_Gym_EventScript_1FC855:: @ 81FC855
 
 DewfordTown_Gym_EventScript_1FC878:: @ 81FC878
 	giveitem_std ITEM_TM08
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq DewfordTown_Gym_EventScript_272054
 	msgbox DewfordTown_Gym_Text_1FD181, 4
 	setflag FLAG_0x0A6

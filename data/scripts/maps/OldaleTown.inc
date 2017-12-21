@@ -76,7 +76,7 @@ OldaleTown_EventScript_1E8F75:: @ 81E8F75
 OldaleTown_EventScript_1E8F8C:: @ 81E8F8C
 	msgbox OldaleTown_Text_1E91FD, 4
 	giveitem_std ITEM_POTION
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq OldaleTown_EventScript_1E8FC3
 	msgbox OldaleTown_Text_1E92AF, 4
 	setflag FLAG_0x084
@@ -261,9 +261,9 @@ OldaleTown_EventScript_1E90C6:: @ 81E90C6
 
 OldaleTown_EventScript_1E90E6:: @ 81E90E6
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq OldaleTown_EventScript_1E90FE
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq OldaleTown_EventScript_1E910C
 	end
 
@@ -279,9 +279,9 @@ OldaleTown_EventScript_1E910C:: @ 81E910C
 
 OldaleTown_EventScript_1E911A:: @ 81E911A
 	closemessage
-	compare_var_to_value VAR_0x8009, 0
+	compare VAR_0x8009, 0
 	call_if 1, OldaleTown_EventScript_1E9148
-	compare_var_to_value VAR_0x8009, 1
+	compare VAR_0x8009, 1
 	call_if 1, OldaleTown_EventScript_1E915E
 	applymovement 4, OldaleTown_Movement_1E9177
 	waitmovement 0
@@ -292,7 +292,7 @@ OldaleTown_EventScript_1E911A:: @ 81E911A
 	end
 
 OldaleTown_EventScript_1E9148:: @ 81E9148
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	goto_if 5, OldaleTown_EventScript_1E915E
 	applymovement 4, OldaleTown_Movement_1E9177
 	waitmovement 0

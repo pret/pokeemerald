@@ -26,7 +26,7 @@ EverGrandeCity_DrakesRoom_EventScript_2286C5:: @ 82286C5
 EverGrandeCity_DrakesRoom_MapScript1_2286D2: @ 82286D2
 	checkflag FLAG_0x4FE
 	call_if 1, EverGrandeCity_DrakesRoom_EventScript_2286E7
-	compare_var_to_value VAR_0x409C, 4
+	compare VAR_0x409C, 4
 	call_if 1, EverGrandeCity_DrakesRoom_EventScript_2286ED
 	end
 

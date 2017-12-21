@@ -27,7 +27,7 @@ NavelRock_Bottom_MapScript1_269284: @ 8269284
 
 NavelRock_Bottom_EventScript_26928E:: @ 826928E
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, NavelRock_Bottom_EventScript_27374E
 	removeobject 1
 	return
@@ -65,11 +65,11 @@ NavelRock_Bottom_EventScript_2692A2:: @ 82692A2
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq NavelRock_Bottom_EventScript_269336
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq NavelRock_Bottom_EventScript_269344
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq NavelRock_Bottom_EventScript_269344
 	setflag FLAG_0x091
 	release

@@ -10,9 +10,9 @@ Route111_OldLadysRestStop_EventScript_22A920:: @ 822A920
 	lock
 	faceplayer
 	msgbox Route111_OldLadysRestStop_Text_22A978, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route111_OldLadysRestStop_EventScript_22A941
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route111_OldLadysRestStop_EventScript_22A96E
 	end
 
@@ -21,9 +21,9 @@ Route111_OldLadysRestStop_EventScript_22A941:: @ 822A941
 	closemessage
 	call Route111_OldLadysRestStop_EventScript_272083
 	msgbox Route111_OldLadysRestStop_Text_22AA16, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route111_OldLadysRestStop_EventScript_22A941
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route111_OldLadysRestStop_EventScript_22A96E
 	end
 

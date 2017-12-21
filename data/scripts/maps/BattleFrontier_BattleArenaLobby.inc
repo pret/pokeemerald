@@ -49,7 +49,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255CCF:: @ 8255CCF
 	lockall
 	setvar VAR_0x8004, 10
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255CF0
 	msgbox BattleFrontier_BattleArenaLobby_Text_2568E7, 4
 	goto BattleFrontier_BattleArenaLobby_EventScript_255CF8
@@ -97,7 +97,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255D59:: @ 8255D59
 	playse SE_SAVE
 	waitse
 	call BattleFrontier_BattleArenaLobby_EventScript_23E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255DBF
 	message BattleFrontier_BattleArenaLobby_Text_256B19
 	waitmessage
@@ -156,7 +156,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255E47:: @ 8255E47
 	case 127, BattleFrontier_BattleArenaLobby_EventScript_255FFB
 	setvar VAR_0x8004, 15
 	special sub_81A1780
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255FAC
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -169,7 +169,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255E47:: @ 8255E47
 	setvar VAR_0x8005, 3
 	special sub_80F9490
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255FF8
 	msgbox BattleFrontier_BattleArenaLobby_Text_2564CE, 5
 	switch VAR_RESULT
@@ -201,7 +201,7 @@ BattleFrontier_BattleArenaLobby_EventScript_255EE8:: @ 8255EE8
 	delay 2
 	call BattleFrontier_BattleArenaLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleArenaLobby_EventScript_255FE1
 
 BattleFrontier_BattleArenaLobby_EventScript_255F54:: @ 8255F54
@@ -214,9 +214,9 @@ BattleFrontier_BattleArenaLobby_EventScript_255F54:: @ 8255F54
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattleArenaLobby_EventScript_256005
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattleArenaLobby_EventScript_256050
 	warp BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 255, 9, 13
 	setvar VAR_0x4000, 0

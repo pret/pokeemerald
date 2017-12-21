@@ -61,7 +61,7 @@ BattleFrontier_BattleDomeLobby_EventScript_24989B:: @ 824989B
 	lockall
 	setvar VAR_0x8004, 10
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleDomeLobby_EventScript_2498C1
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A4E9, 4
 	goto BattleFrontier_BattleDomeLobby_EventScript_2498C9
@@ -127,7 +127,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249991:: @ 8249991
 	playse SE_SAVE
 	waitse
 	call BattleFrontier_BattleDomeLobby_EventScript_23E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleDomeLobby_EventScript_2499E9
 	message BattleFrontier_BattleDomeLobby_Text_24AE17
 	waitmessage
@@ -182,15 +182,15 @@ BattleFrontier_BattleDomeLobby_EventScript_249A47:: @ 8249A47
 
 BattleFrontier_BattleDomeLobby_EventScript_249A59:: @ 8249A59
 	special copy_player_party_to_sav1
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CFD
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D06
 
 BattleFrontier_BattleDomeLobby_EventScript_249A72:: @ 8249A72
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D0F
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D15
 	waitmessage
 	multichoice 17, 6, 23, 0
@@ -209,7 +209,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	case 127, BattleFrontier_BattleDomeLobby_EventScript_249C64
 	setvar VAR_0x8004, 15
 	special sub_81A1780
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleDomeLobby_EventScript_249C15
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -222,7 +222,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249ABF:: @ 8249ABF
 	setvar VAR_0x8005, 3
 	special sub_80F9490
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleDomeLobby_EventScript_249C61
 	msgbox BattleFrontier_BattleDomeLobby_Text_24A1C6, 5
 	switch VAR_RESULT
@@ -250,7 +250,7 @@ BattleFrontier_BattleDomeLobby_EventScript_249B60:: @ 8249B60
 	delay 2
 	call BattleFrontier_BattleDomeLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleDomeLobby_EventScript_249C4A
 	setvar VAR_0x8004, 22
 	special sub_818E9AC
@@ -272,9 +272,9 @@ BattleFrontier_BattleDomeLobby_EventScript_249BC2:: @ 8249BC2
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249BFA:: @ 8249BFA
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D1B
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D24
 	goto BattleFrontier_BattleDomeLobby_EventScript_249A72
 
@@ -309,26 +309,26 @@ BattleFrontier_BattleDomeLobby_EventScript_249C6C:: @ 8249C6C
 	end
 
 BattleFrontier_BattleDomeLobby_EventScript_249C6E:: @ 8249C6E
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CDD
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CE5
 	applymovement 255, BattleFrontier_BattleDomeLobby_Movement_249D45
 	waitmovement 0
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D2D
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D33
 	waitdooranim
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CED
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249CF5
 	applymovement 255, BattleFrontier_BattleDomeLobby_Movement_249D4E
 	waitmovement 0
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D39
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249D3F
 	waitdooranim
 	return
@@ -434,13 +434,13 @@ BattleFrontier_BattleDomeLobby_EventScript_249D84:: @ 8249D84
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 9
 	special sub_818E9AC
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249DC9
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249DD2
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249DDB
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	call_if 1, BattleFrontier_BattleDomeLobby_EventScript_249DE4
 	fadescreen 1
 	setvar VAR_0x8004, 8

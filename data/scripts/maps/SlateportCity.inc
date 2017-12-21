@@ -6,9 +6,9 @@ SlateportCity_MapScripts:: @ 81DCC61
 SlateportCity_MapScript1_1DCC6C: @ 81DCC6C
 	setvar VAR_0x40AA, 0
 	call SlateportCity_EventScript_1DCC8D
-	compare_var_to_value VAR_0x4058, 1
+	compare VAR_0x4058, 1
 	call_if 1, SlateportCity_EventScript_1DCC99
-	compare_var_to_value VAR_0x40D2, 1
+	compare VAR_0x40D2, 1
 	call_if 1, SlateportCity_EventScript_1DCCE7
 	end
 
@@ -38,7 +38,7 @@ SlateportCity_EventScript_1DCC99:: @ 81DCC99
 SlateportCity_EventScript_1DCCE7:: @ 81DCCE7
 	setflag FLAG_SPECIAL_FLAG_0x4000
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 30
+	compare VAR_0x8004, 30
 	goto_eq SlateportCity_EventScript_1DCD06
 	setobjectxyperm 35, 23, 27
 	setobjectmovementtype 35, 10
@@ -143,10 +143,10 @@ SlateportCity_EventScript_1DCDE4:: @ 81DCDE4
 	bufferleadmonspeciesname 0
 	msgbox SlateportCity_Text_1DD68A, 4
 	specialvar VAR_RESULT, sub_8139348
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_EventScript_1DCE38
 	specialvar VAR_RESULT, sub_81393C8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, SlateportCity_EventScript_1DCE2E
 	msgbox SlateportCity_Text_1DD697, 4
 	playfanfare BGM_FANFA4
@@ -170,7 +170,7 @@ SlateportCity_EventScript_1DCE38:: @ 81DCE38
 SlateportCity_EventScript_1DCE42:: @ 81DCE42
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4058, 1
+	compare VAR_0x4058, 1
 	call_if 1, SlateportCity_EventScript_1DCE59
 	msgbox SlateportCity_Text_1DD81A, 4
 	release
@@ -184,7 +184,7 @@ SlateportCity_EventScript_1DCE59:: @ 81DCE59
 SlateportCity_EventScript_1DCE63:: @ 81DCE63
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4058, 1
+	compare VAR_0x4058, 1
 	call_if 1, SlateportCity_EventScript_1DCE7A
 	msgbox SlateportCity_Text_1DD8A6, 4
 	release
@@ -198,7 +198,7 @@ SlateportCity_EventScript_1DCE7A:: @ 81DCE7A
 SlateportCity_EventScript_1DCE84:: @ 81DCE84
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4058, 1
+	compare VAR_0x4058, 1
 	call_if 1, SlateportCity_EventScript_1DCEA4
 	checkflag FLAG_0x060
 	goto_eq SlateportCity_EventScript_1DCEAE
@@ -219,7 +219,7 @@ SlateportCity_EventScript_1DCEAE:: @ 81DCEAE
 SlateportCity_EventScript_1DCEB8:: @ 81DCEB8
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4058, 1
+	compare VAR_0x4058, 1
 	call_if 1, SlateportCity_EventScript_1DCECF
 	msgbox SlateportCity_Text_1DDA34, 4
 	release
@@ -231,7 +231,7 @@ SlateportCity_EventScript_1DCECF:: @ 81DCECF
 	end
 
 SlateportCity_EventScript_1DCED9:: @ 81DCED9
-	compare_var_to_value VAR_0x4058, 1
+	compare VAR_0x4058, 1
 	goto_eq SlateportCity_EventScript_1DCEED
 	msgbox SlateportCity_Text_1DDA9A, 2
 	end
@@ -243,7 +243,7 @@ SlateportCity_EventScript_1DCEED:: @ 81DCEED
 SlateportCity_EventScript_1DCEF6:: @ 81DCEF6
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4058, 1
+	compare VAR_0x4058, 1
 	call_if 1, SlateportCity_EventScript_1DCF0D
 	msgbox SlateportCity_Text_1DDB21, 4
 	release
@@ -328,7 +328,7 @@ SlateportCity_EventScript_1DCFB2:: @ 81DCFB2
 SlateportCity_EventScript_1DCFBB:: @ 81DCFBB
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4058, 1
+	compare VAR_0x4058, 1
 	call_if 1, SlateportCity_EventScript_1DCFD2
 	msgbox SlateportCity_Text_1DE10E, 4
 	release
@@ -740,7 +740,7 @@ SlateportCity_EventScript_1DD36E:: @ 81DD36E
 SlateportCity_EventScript_1DD39A:: @ 81DD39A
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, sub_80246D4
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_EventScript_1DD3C0
 	msgbox SlateportCity_Text_1DEE40, 4
 	special sub_80248B0
@@ -859,20 +859,20 @@ SlateportCity_EventScript_1DD54A:: @ 81DD54A
 
 SlateportCity_EventScript_1DD557:: @ 81DD557
 	msgbox SlateportCity_Text_1DEE90, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_EventScript_1DD3CA
 	copyvar VAR_0x8004, VAR_0x8009
 	specialvar VAR_RESULT, sub_80246D4
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_EventScript_1DD5CE
 	giveitem_std VAR_0x8008
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_EventScript_1DD5C1
 	copyvar VAR_0x8004, VAR_0x8009
 	special sub_802477C
 	special sub_802488C
 	msgbox SlateportCity_Text_1DEEF7, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_EventScript_1DD3CA
 	msgbox SlateportCity_Text_1DEF79, 4
 	special sub_8024918
