@@ -127,6 +127,7 @@ SECTIONS {
         asm/field_effect.o(.text);
         asm/unknown_task.o(.text);
         asm/option_menu.o(.text);
+        src/pokedex.o(.text);
         asm/pokedex.o(.text);
         asm/trainer_card.o(.text);
         src/pokemon_storage_system.o(.text);
@@ -383,6 +384,7 @@ SECTIONS {
         data/wild_encounter.o(.rodata);
         data/field_effect.o(.rodata);
         data/option_menu.o(.rodata);
+        src/pokedex.o(.rodata);
         data/pokedex.o(.rodata);
         data/trainer_card.o(.rodata);
         data/pokemon_storage_system.o(.rodata);

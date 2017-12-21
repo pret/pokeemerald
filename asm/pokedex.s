@@ -2609,7 +2609,7 @@ _080BCACC:
 	movs r7, 0x1
 	mov r9, r7
 _080BCADA:
-	ldr r1, =gUnknown_0855C6A4
+	ldr r1, =gPokedexOrder_Alphabetical
 	lsls r4, 16
 	asrs r0, r4, 15
 	adds r0, r1
@@ -2687,7 +2687,7 @@ _080BCB78:
 	ldr r7, =gUnknown_02039B4C
 	ldr r6, =0x0000060c
 _080BCB82:
-	ldr r1, =gUnknown_0855C9DA
+	ldr r1, =gPokedexOrder_Weight
 	asrs r0, 15
 	adds r0, r1
 	ldrh r0, [r0]
@@ -2752,7 +2752,7 @@ _080BCC08:
 	ldr r0, =0x00000181
 	mov r9, r0
 _080BCC16:
-	ldr r1, =gUnknown_0855C9DA
+	ldr r1, =gPokedexOrder_Weight
 	lsls r4, 16
 	asrs r0, r4, 15
 	adds r0, r1
@@ -2819,7 +2819,7 @@ _080BCCA0:
 	ldr r7, =gUnknown_02039B4C
 	ldr r6, =0x0000060c
 _080BCCAA:
-	ldr r1, =gUnknown_0855CCDE
+	ldr r1, =gPokedexOrder_Height
 	asrs r0, 15
 	adds r0, r1
 	ldrh r0, [r0]
@@ -2884,7 +2884,7 @@ _080BCD30:
 	ldr r0, =0x00000181
 	mov r9, r0
 _080BCD3E:
-	ldr r1, =gUnknown_0855CCDE
+	ldr r1, =gPokedexOrder_Height
 	lsls r4, 16
 	asrs r0, r4, 15
 	adds r0, r1
