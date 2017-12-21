@@ -1,7 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "sprite.h"
-#include "constants\trainers.h"
+#include "constants/trainers.h"
 #include "graphics.h"
 #include "decompress.h"
 #include "bg.h"
