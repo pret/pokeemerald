@@ -21921,7 +21921,7 @@ sub_81D1DC0: @ 81D1DC0
 	ldr r7, =gUnknown_0203CF4C
 	ldr r0, =gText_Cancel2
 	mov r12, r0
-	ldr r4, =gUnknown_03006310
+	ldr r4, =gMultiuseListMenuTemplate
 	ldr r1, =gUnknown_0203CF48
 	mov r8, r1
 	ldr r2, =sub_81D1E7C
@@ -23376,7 +23376,7 @@ sub_81D28C8: @ 81D28C8
 	push {r4-r7,lr}
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r3, =gUnknown_03006310
+	ldr r3, =gMultiuseListMenuTemplate
 	adds r2, r3, 0
 	ldr r1, =gUnknown_08625548
 	ldm r1!, {r5-r7}

@@ -21,6 +21,7 @@
 #include "constants/abilities.h"
 #include "pokemon_animation.h"
 #include "pokedex.h"
+#include "pokeblock.h"
 
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
@@ -58,7 +59,6 @@ extern const u8 gText_PkmnsXPreventsSwitching[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
-extern const s8 gPokeblockFlavorCompatibilityTable[];
 extern const u8 gMonAnimationDelayTable[];
 extern const u8 gMonFrontAnimIdsTable[];
 
@@ -1298,21 +1298,21 @@ bool8 IsPokeSpriteNotFlipped(u16 species)
     return gBaseStats[species].noFlip;
 }
 
-s8 GetMonFlavorRelation(struct Pokemon *mon, u8 a2)
+s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
 {
     u8 nature = GetNature(mon);
-    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + flavor];
 }
 
-s8 GetFlavorRelationByPersonality(u32 personality, u8 a2)
+s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
 {
     u8 nature = GetNatureFromPersonality(personality);
-    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + flavor];
 }
 
 bool8 IsTradedMon(struct Pokemon *mon)
 {
-    u8 otName[8];
+    u8 otName[OT_NAME_LENGTH + 1];
     u32 otId;
     GetMonData(mon, MON_DATA_OT_NAME, otName);
     otId = GetMonData(mon, MON_DATA_OT_ID, 0);

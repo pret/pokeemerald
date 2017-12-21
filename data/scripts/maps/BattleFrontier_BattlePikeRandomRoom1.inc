@@ -89,7 +89,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D285:: @ 825D285
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE3F, 4
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE94, 4
 	closemessage
 	release
@@ -257,7 +257,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D50E:: @ 825D50E
 	waitmessage
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DA13, 4
 	closemessage
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D798

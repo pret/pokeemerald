@@ -2351,7 +2351,7 @@ _081C51D6:
 	thumb_func_start sub_81C51DC
 sub_81C51DC: @ 81C51DC
 	push {lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0861F2B4
@@ -2363,7 +2363,7 @@ sub_81C51DC: @ 81C51DC
 	adds r1, 0x4
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r1, 0x82
@@ -2460,7 +2460,7 @@ _081C52DC:
 	b _081C5308
 	.pool
 _081C52F0:
-	bl sub_8122328
+	bl LoadListMenuArrowsGfx
 	ldr r0, [r4]
 	ldr r1, =0x00000984
 	adds r0, r1
@@ -2559,7 +2559,7 @@ _081C5382:
 	movs r0, 0x2
 	negs r0, r0
 	str r0, [r1]
-	ldr r2, =gUnknown_03006310
+	ldr r2, =gMultiuseListMenuTemplate
 	adds r1, r2, 0
 	ldr r0, =gUnknown_0861F2C0
 	ldm r0!, {r4,r6,r7}
@@ -2918,7 +2918,7 @@ sub_81C56F8: @ 81C56F8
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldr r2, =gUnknown_0203CF30
 	ldrh r1, [r2, 0x8]
 	ldrh r2, [r2, 0x6]
@@ -3545,7 +3545,7 @@ _081C5C12:
 	adds r1, r4, 0
 	adds r1, 0x8
 	adds r2, r4, 0x6
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	ldrh r1, [r4, 0x8]
 	ldrh r0, [r4, 0x6]
 	adds r1, r0
@@ -3565,14 +3565,14 @@ _081C5C12:
 	.pool
 _081C5C5C:
 	ldrb r0, [r7]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r6, r0, 0
 	ldrb r0, [r7]
 	ldr r1, =gUnknown_0203CF38
 	mov r8, r1
 	mov r2, r8
 	subs r2, 0x2
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0x2
 	negs r0, r0
 	cmp r6, r0
@@ -4646,7 +4646,7 @@ sub_81C65CC: @ 81C65CC
 	bl sub_81C5924
 	bl sub_81C59BC
 	bl sub_81C5314
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r6]
 	ldrh r2, [r7]
 	bl ListMenuInit
@@ -4953,18 +4953,18 @@ sub_81C68B0: @ 81C68B0
 	ldrb r0, [r4]
 	ldr r1, =gUnknown_0203CF38
 	subs r2, r1, 0x2
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	b _081C6940
 	.pool
 _081C68F8:
 	ldrb r0, [r4]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r6, r0, 0
 	ldrb r0, [r4]
 	ldr r4, =gUnknown_0203CF38
 	subs r2, r4, 0x2
 	adds r1, r4, 0
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0
 	bl sub_81C7028
 	subs r4, 0x8
@@ -5066,7 +5066,7 @@ _081C69A8:
 	strh r0, [r1, 0x6]
 _081C69E0:
 	bl sub_81C5314
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r7]
 	mov r3, r8
 	ldrh r2, [r3]
@@ -5124,7 +5124,7 @@ sub_81C6A14: @ 81C6A14
 	strh r0, [r1, 0x6]
 _081C6A5E:
 	bl sub_81C5314
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r5]
 	ldrh r2, [r7]
 	bl ListMenuInit

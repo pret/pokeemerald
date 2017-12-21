@@ -1,7 +1,8 @@
 #ifndef GUARD_PARTY_MENU_H
 #define GUARD_PARTY_MENU_H
 
-enum {
+enum
+{
     AILMENT_NONE,
     AILMENT_PSN,
     AILMENT_PRZ,
@@ -14,5 +15,6 @@ bool8 pokemon_has_move(struct Pokemon *, u16);
 void sub_81B58A8(void);
 void DoWallyTutorialBagMenu(void);
 u8 pokemon_ailments_get_primary(u32 status);
+u8 *GetMonNickname(struct Pokemon *mon, u8 *dst);
 
 #endif // GUARD_PARTY_MENU_H

@@ -1082,13 +1082,13 @@ void game_continue(u8 taskId)
         if (sub_80E9878(i))
         {
             sub_80E9780(gUnknown_0203A020->names[count], i);
-            gUnknown_0203A020->items[count].unk_00 = gUnknown_0203A020->names[count];
-            gUnknown_0203A020->items[count].unk_04 = i;
+            gUnknown_0203A020->items[count].name = gUnknown_0203A020->names[count];
+            gUnknown_0203A020->items[count].id = i;
             count ++;
         }
     }
-    gUnknown_0203A020->items[count].unk_00 = gText_Cancel;
-    gUnknown_0203A020->items[count].unk_04 = -2;
+    gUnknown_0203A020->items[count].name = gText_Cancel;
+    gUnknown_0203A020->items[count].id = -2;
     data[0] = count + 1;
     if (data[0] < 8)
     {
@@ -1098,11 +1098,11 @@ void game_continue(u8 taskId)
     {
         data[3] = 8;
     }
-    gUnknown_03006310 = gUnknown_0858D07C;
-    gUnknown_03006310.unk_10 = data[6];
-    gUnknown_03006310.totalItems = data[0];
-    gUnknown_03006310.items = gUnknown_0203A020->items;
-    gUnknown_03006310.maxShowed = data[3];
+    gMultiuseListMenuTemplate = gUnknown_0858D07C;
+    gMultiuseListMenuTemplate.unk_10 = data[6];
+    gMultiuseListMenuTemplate.totalItems = data[0];
+    gMultiuseListMenuTemplate.items = gUnknown_0203A020->items;
+    gMultiuseListMenuTemplate.maxShowed = data[3];
 }
 
 void sub_80E9DEC(u32 a0, bool8 flag, struct ListMenu *menu)
@@ -1119,7 +1119,7 @@ void sub_80E9E00(u8 taskId)
 
     data = gTasks[taskId].data;
     SetStandardWindowBorderStyle(data[6], 0);
-    data[5] = ListMenuInit(&gUnknown_03006310, data[2], data[1]);
+    data[5] = ListMenuInit(&gMultiuseListMenuTemplate, data[2], data[1]);
     sub_80E9E44(taskId);
     schedule_bg_copy_tilemap_to_vram(0);
 }
@@ -1138,8 +1138,8 @@ void sub_80E9E90(u8 taskId)
     s32 input;
 
     data = gTasks[taskId].data;
-    input = ListMenuHandleInput(data[5]);
-    get_coro_args_x18_x1A(data[5], &data[2], &data[1]);
+    input = ListMenuHandleInputGetItemId(data[5]);
+    sub_81AE860(data[5], &data[2], &data[1]);
     switch (input)
     {
         case -1:

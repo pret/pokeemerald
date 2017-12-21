@@ -230,7 +230,7 @@ Route101_EventScript_1EBE16:: @ 81EBE16
 	applymovement 2, Route101_Movement_1EBE8D
 	waitmovement 0
 	msgbox Route101_Text_1EBF12, 4
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setflag FLAG_0x2D0
 	clearflag FLAG_0x2D1
 	setflag FLAG_0x2BC

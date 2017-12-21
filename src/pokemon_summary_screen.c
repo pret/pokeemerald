@@ -73,7 +73,7 @@ extern void do_scheduled_bg_tilemap_copies_to_vram(void);
 extern u8 sub_81221EC();
 extern u8 sub_81221AC();
 extern void SetVBlankHBlankCallbacksToNull();
-extern void sub_8121DA0();
+extern void ResetVramOamAndBgCntRegs();
 extern void clear_scheduled_bg_copies_to_vram();
 extern void remove_some_task();
 extern void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable);
@@ -193,7 +193,7 @@ void sub_81C4A88();
 void sub_81C4280();
 void sub_81C0510(u8 taskId);
 void sub_81C171C(u8 taskId);
-void sub_8121E10();
+void ResetAllBgsCoordinates();
 u8 sub_81B205C(struct Pokemon* a);
 void sub_81C1DA4(u16 a, s16 b);
 void sub_81C1EFC(u16 a, s16 b, u16 c);
@@ -450,7 +450,7 @@ bool8 sub_81BFB10(void)
     {
     case 0:
         SetVBlankHBlankCallbacksToNull();
-        sub_8121DA0();
+        ResetVramOamAndBgCntRegs();
         clear_scheduled_bg_copies_to_vram();
         gMain.state++;
         break;
@@ -578,7 +578,7 @@ void sub_81BFE24()
     SetBgTilemapBuffer(1, &gUnknown_0203CF1C->unkTilemap2);
     SetBgTilemapBuffer(2, &gUnknown_0203CF1C->unkTilemap1);
     SetBgTilemapBuffer(3, &gUnknown_0203CF1C->unkTilemap0);
-    sub_8121E10();
+    ResetAllBgsCoordinates();
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
     schedule_bg_copy_tilemap_to_vram(3);

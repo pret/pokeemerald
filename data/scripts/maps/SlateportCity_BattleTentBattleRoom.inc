@@ -54,7 +54,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_2099BE:: @ 82099BE
 	msgbox 0x2021fc4, 4
 	waitmessage
 	closemessage
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 6
 	setvar VAR_0x8005, 0
 	special sub_8163AC4

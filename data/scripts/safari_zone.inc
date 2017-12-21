@@ -53,7 +53,7 @@ EventScript_2A4BAC:: @ 82A4BAC
 
 EventScript_2A4BD0:: @ 82A4BD0
 	fadescreen 1
-	special sub_8135908
+	special OpenPokeblockCaseOnFeeder
 	waitstate
 	compare VAR_RESULT, 65535
 	goto_if 5, EventScript_2A4BE2

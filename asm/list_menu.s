@@ -64,7 +64,7 @@ _081AE4B0:
 	ldr r1, [sp, 0x4]
 	bl sub_8098858
 _081AE4C0:
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp]
 	ldm r1!, {r3-r5}
@@ -87,7 +87,7 @@ _081AE4C0:
 	.pool
 _081AE4F4:
 	ldrb r0, [r5, 0x6]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	str r0, [r5]
 	ldr r1, =gMain
 	ldrh r0, [r1, 0x2E]
@@ -227,9 +227,9 @@ _081AE5F0:
 	bx r1
 	thumb_func_end Unused_ListMenuInit2
 
-	thumb_func_start ListMenuHandleInput
-@ int ListMenuHandleInput(u8 taskId)
-ListMenuHandleInput: @ 81AE604
+	thumb_func_start ListMenuHandleInputGetItemId
+@ int ListMenuHandleInputGetItemId(u8 taskId)
+ListMenuHandleInputGetItemId: @ 81AE604
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -337,7 +337,7 @@ _081AE6BE:
 _081AE6C2:
 	pop {r1}
 	bx r1
-	thumb_func_end ListMenuHandleInput
+	thumb_func_end ListMenuHandleInputGetItemId
 
 	thumb_func_start sub_81AE6C8
 sub_81AE6C8: @ 81AE6C8
@@ -557,8 +557,8 @@ _081AE856:
 	.pool
 	thumb_func_end sub_81AE838
 
-	thumb_func_start get_coro_args_x18_x1A
-get_coro_args_x18_x1A: @ 81AE860
+	thumb_func_start sub_81AE860
+sub_81AE860: @ 81AE860
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -581,7 +581,7 @@ _081AE882:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end get_coro_args_x18_x1A
+	thumb_func_end sub_81AE860
 
 	thumb_func_start ListMenuGetYCoordForPrintingArrowCursor
 @ u8 ListMenuGetYCoordForPrintingArrowCursor(u8 taskId)
