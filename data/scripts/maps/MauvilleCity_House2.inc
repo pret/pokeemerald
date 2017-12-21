@@ -8,7 +8,7 @@ MauvilleCity_House2_EventScript_210C5D:: @ 8210C5D
 	goto_eq MauvilleCity_House2_EventScript_210CDA
 	msgbox MauvilleCity_House2_Text_210CEE, 4
 	checkitem ITEM_HARBOR_MAIL, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_House2_EventScript_210C82
 	release
 	end
@@ -20,9 +20,9 @@ MauvilleCity_House2_EventScript_210C82:: @ 8210C82
 	applymovement VAR_LAST_TALKED, MauvilleCity_House2_Movement_27259A
 	waitmovement 0
 	msgbox MauvilleCity_House2_Text_210D76, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_House2_EventScript_210CB8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_House2_EventScript_210CE4
 	end
 

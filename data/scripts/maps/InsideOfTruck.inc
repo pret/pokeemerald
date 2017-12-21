@@ -17,9 +17,9 @@ InsideOfTruck_EventScript_23BF04:: @ 823BF04
 	lockall
 	setflag FLAG_SPECIAL_FLAG_0x4000
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq InsideOfTruck_EventScript_23BF20
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq InsideOfTruck_EventScript_23BF46
 	end
 

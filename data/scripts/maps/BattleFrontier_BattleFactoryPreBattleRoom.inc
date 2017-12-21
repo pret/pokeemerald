@@ -9,7 +9,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AC5: @ 8259AC5
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259ACF:: @ 8259ACF
 	setvar VAR_0x4001, 1
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	goto_if 5, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AEA
 	setobjectxy 1, 8, 7
 	turnobject 1, 1
@@ -23,13 +23,13 @@ BattleFrontier_BattleFactoryPreBattleRoom_MapScript2_259AEF: @ 8259AEF
 	.2byte 0
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259AF9:: @ 8259AF9
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5
 	setvar VAR_0x4000, 1
 	applymovement 1, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A1AC
 	applymovement 255, BattleFrontier_BattleFactoryPreBattleRoom_Movement_25A19A
 	waitmovement 0
-	compare_var_to_value VAR_0x8006, 2
+	compare VAR_0x8006, 2
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69
 	setvar VAR_0x8004, 13
 	special sub_81A5E74
@@ -55,9 +55,9 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74:: @ 8259B74
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25AB96, 4
 	closemessage
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23F2B7
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A17C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A18B
 	waitmovement 0
 	warp BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM, 255, 6, 11
@@ -75,7 +75,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 	special sp000_heal_pokemon
 	setvar VAR_0x8004, 9
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26
 	playse 263
 	waitse
@@ -96,27 +96,27 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C13:: @ 8259C13
 	setvar VAR_0x8004, 9
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259C26:: @ 8259C26
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E1D
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E24
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E2B
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E32
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E39
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E40
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259CC6
 	multichoice 19, 4, 103, 1
 	switch VAR_RESULT
@@ -185,7 +185,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259DF2:: @ 8259DF2
 	setvar VAR_0x8004, 7
 	special sub_81A5E74
 	waitstate
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259B74
 	setvar VAR_0x8004, 8
 	special sub_81A5E74
@@ -249,41 +249,41 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E69:: @ 8259E69
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259E93:: @ 8259E93
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A3B4, 4
-	compare_var_to_value VAR_0x8005, 0
+	compare VAR_0x8005, 0
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F62
-	compare_var_to_value VAR_0x8005, 1
+	compare VAR_0x8005, 1
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F6B
-	compare_var_to_value VAR_0x8005, 2
+	compare VAR_0x8005, 2
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F74
-	compare_var_to_value VAR_0x8005, 3
+	compare VAR_0x8005, 3
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F7D
-	compare_var_to_value VAR_0x8005, 4
+	compare VAR_0x8005, 4
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F86
-	compare_var_to_value VAR_0x8005, 5
+	compare VAR_0x8005, 5
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F8F
-	compare_var_to_value VAR_0x8005, 6
+	compare VAR_0x8005, 6
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259F98
-	compare_var_to_value VAR_0x8005, 7
+	compare VAR_0x8005, 7
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FA1
-	compare_var_to_value VAR_0x8005, 8
+	compare VAR_0x8005, 8
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FAA
-	compare_var_to_value VAR_0x8005, 10
+	compare VAR_0x8005, 10
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FB3
-	compare_var_to_value VAR_0x8005, 11
+	compare VAR_0x8005, 11
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FBC
-	compare_var_to_value VAR_0x8005, 12
+	compare VAR_0x8005, 12
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FC5
-	compare_var_to_value VAR_0x8005, 13
+	compare VAR_0x8005, 13
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FCE
-	compare_var_to_value VAR_0x8005, 14
+	compare VAR_0x8005, 14
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FD7
-	compare_var_to_value VAR_0x8005, 15
+	compare VAR_0x8005, 15
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FE0
-	compare_var_to_value VAR_0x8005, 16
+	compare VAR_0x8005, 16
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FE9
-	compare_var_to_value VAR_0x8005, 17
+	compare VAR_0x8005, 17
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FF2
-	compare_var_to_value VAR_0x8005, 18
+	compare VAR_0x8005, 18
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FFB
 	return
 
@@ -360,23 +360,23 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259FFB:: @ 8259FFB
 	return
 
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A004:: @ 825A004
-	compare_var_to_value VAR_0x8006, 0
+	compare VAR_0x8006, 0
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A068
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A071
-	compare_var_to_value VAR_0x8006, 2
+	compare VAR_0x8006, 2
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A07A
-	compare_var_to_value VAR_0x8006, 3
+	compare VAR_0x8006, 3
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A083
-	compare_var_to_value VAR_0x8006, 4
+	compare VAR_0x8006, 4
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A08C
-	compare_var_to_value VAR_0x8006, 5
+	compare VAR_0x8006, 5
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A095
-	compare_var_to_value VAR_0x8006, 6
+	compare VAR_0x8006, 6
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A09E
-	compare_var_to_value VAR_0x8006, 7
+	compare VAR_0x8006, 7
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0A7
-	compare_var_to_value VAR_0x8006, 8
+	compare VAR_0x8006, 8
 	call_if 1, BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B0
 	return
 
@@ -420,7 +420,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A0B9:: @ 825A0B9
 	message BattleFrontier_BattleFactoryPreBattleRoom_Text_25AD20
 	waitmessage
 	call BattleFrontier_BattleFactoryPreBattleRoom_EventScript_23E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryPreBattleRoom_EventScript_25A110
 	multichoice 19, 4, 103, 1
 	switch VAR_RESULT

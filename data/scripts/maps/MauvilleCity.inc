@@ -107,9 +107,9 @@ MauvilleCity_EventScript_1DF452:: @ 81DF452
 	end
 
 MauvilleCity_EventScript_1DF4AD:: @ 81DF4AD
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, MauvilleCity_EventScript_1DF63A
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_EventScript_1DF683
 	closemessage
 	switch VAR_FACING
@@ -164,18 +164,18 @@ MauvilleCity_EventScript_1DF593:: @ 81DF593
 	setflag FLAG_0x0BE
 	setvar VAR_0x40F2, 0
 	setflag FLAG_0x088
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, MauvilleCity_EventScript_1DF5F3
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, MauvilleCity_EventScript_1DF601
 	applymovement 255, MauvilleCity_Movement_2725AA
 	waitmovement 0
 	msgbox MauvilleCity_Text_1DFED5, 4
 	closemessage
 	addvar VAR_0x40D1, 1
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, MauvilleCity_EventScript_1DF616
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, MauvilleCity_EventScript_1DF628
 	removeobject 11
 	releaseall
@@ -426,7 +426,7 @@ MauvilleCity_EventScript_1DF73A:: @ 81DF73A
 	faceplayer
 	checkflag FLAG_0x0D1
 	goto_eq MauvilleCity_EventScript_1DF7B0
-	compare_var_to_value VAR_0x40BA, 2
+	compare VAR_0x40BA, 2
 	goto_eq MauvilleCity_EventScript_1DF784
 	checkflag FLAG_0x0D0
 	goto_eq MauvilleCity_EventScript_1DF77A
@@ -445,7 +445,7 @@ MauvilleCity_EventScript_1DF77A:: @ 81DF77A
 MauvilleCity_EventScript_1DF784:: @ 81DF784
 	msgbox MauvilleCity_Text_1E020E, 4
 	giveitem_std ITEM_TM24
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_EventScript_272054
 	setflag FLAG_0x0D1
 	msgbox MauvilleCity_Text_1E02AA, 4

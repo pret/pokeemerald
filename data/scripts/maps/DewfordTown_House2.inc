@@ -8,7 +8,7 @@ DewfordTown_House2_EventScript_1FE22E:: @ 81FE22E
 	goto_eq DewfordTown_House2_EventScript_1FE267
 	msgbox DewfordTown_House2_Text_1FE27A, 4
 	giveitem_std ITEM_SILK_SCARF
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq DewfordTown_House2_EventScript_1FE25D
 	setflag FLAG_0x121
 	release

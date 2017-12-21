@@ -26,7 +26,7 @@ EverGrandeCity_PhoebesRoom_EventScript_22819D:: @ 822819D
 EverGrandeCity_PhoebesRoom_MapScript1_2281AA: @ 82281AA
 	checkflag FLAG_0x4FC
 	call_if 1, EverGrandeCity_PhoebesRoom_EventScript_2281BF
-	compare_var_to_value VAR_0x409C, 2
+	compare VAR_0x409C, 2
 	call_if 1, EverGrandeCity_PhoebesRoom_EventScript_2281C5
 	end
 

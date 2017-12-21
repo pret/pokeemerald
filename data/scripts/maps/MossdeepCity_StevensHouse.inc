@@ -14,7 +14,7 @@ MossdeepCity_StevensHouse_EventScript_22279E:: @ 822279E
 	return
 
 MossdeepCity_StevensHouse_MapScript1_2227A8: @ 82227A8
-	compare_var_to_value VAR_0x40C6, 2
+	compare VAR_0x40C6, 2
 	call_if 1, MossdeepCity_StevensHouse_EventScript_2227B4
 	end
 
@@ -74,7 +74,7 @@ MossdeepCity_StevensHouse_Movement_22283B: @ 822283B
 MossdeepCity_StevensHouse_EventScript_222841:: @ 8222841
 	lockall
 	msgbox MossdeepCity_StevensHouse_Text_222B9E, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_StevensHouse_EventScript_22285B
 	goto MossdeepCity_StevensHouse_EventScript_222865
 	end
@@ -87,9 +87,9 @@ MossdeepCity_StevensHouse_EventScript_22285B:: @ 822285B
 MossdeepCity_StevensHouse_EventScript_222865:: @ 8222865
 	setvar VAR_0x4001, 398
 	givemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_StevensHouse_EventScript_222895
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MossdeepCity_StevensHouse_EventScript_2228BD
 	goto MossdeepCity_StevensHouse_EventScript_273811
 	end
@@ -97,7 +97,7 @@ MossdeepCity_StevensHouse_EventScript_222865:: @ 8222865
 MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 	call MossdeepCity_StevensHouse_EventScript_2228EB
 	msgbox gUnknown_08273374, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_StevensHouse_EventScript_222901
 	call MossdeepCity_StevensHouse_EventScript_27378B
 	call MossdeepCity_StevensHouse_EventScript_2723DD
@@ -107,7 +107,7 @@ MossdeepCity_StevensHouse_EventScript_222895:: @ 8222895
 MossdeepCity_StevensHouse_EventScript_2228BD:: @ 82228BD
 	call MossdeepCity_StevensHouse_EventScript_2228EB
 	msgbox gUnknown_08273374, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_StevensHouse_EventScript_2228E0
 	call MossdeepCity_StevensHouse_EventScript_273797
 	goto MossdeepCity_StevensHouse_EventScript_2228E0

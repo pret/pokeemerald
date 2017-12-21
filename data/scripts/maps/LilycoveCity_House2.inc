@@ -8,7 +8,7 @@ LilycoveCity_House2_EventScript_21ED75:: @ 821ED75
 	goto_eq LilycoveCity_House2_EventScript_21EDAC
 	msgbox LilycoveCity_House2_Text_21EDB6, 4
 	giveitem_std ITEM_TM44
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_House2_EventScript_272054
 	setflag FLAG_0x0EA
 	msgbox LilycoveCity_House2_Text_21EDF9, 4

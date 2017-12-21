@@ -5,18 +5,18 @@ Route115_MapScripts:: @ 81F2920
 	.byte 0
 
 Route115_MapScript1_1F2930: @ 81F2930
-	compare_var_to_value VAR_0x4037, 3
+	compare VAR_0x4037, 3
 	call_if 1, Route115_EventScript_273939
-	compare_var_to_value VAR_0x4037, 4
+	compare VAR_0x4037, 4
 	call_if 1, Route115_EventScript_27394C
 	end
 
 Route115_MapScript1_1F2947: @ 81F2947
-	compare_var_to_value VAR_0x4039, 1
+	compare VAR_0x4039, 1
 	call_if 1, Route115_EventScript_273D13
-	compare_var_to_value VAR_0x4037, 3
+	compare VAR_0x4037, 3
 	call_if 1, Route115_EventScript_273D1B
-	compare_var_to_value VAR_0x4037, 4
+	compare VAR_0x4037, 4
 	call_if 1, Route115_EventScript_273D1B
 	end
 
@@ -39,7 +39,7 @@ Route115_EventScript_1F2985:: @ 81F2985
 Route115_EventScript_1F298E:: @ 81F298E
 	trainerbattle 2, TRAINER_TIMOTHY_1, 0, Route115_Text_29B1FA, Route115_Text_29B230, Route115_EventScript_1F29BA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route115_EventScript_1F29D9
 	msgbox Route115_Text_29B258, 4
 	release
@@ -69,7 +69,7 @@ Route115_EventScript_1F29F0:: @ 81F29F0
 Route115_EventScript_1F2A07:: @ 81F2A07
 	trainerbattle 2, TRAINER_NOB_1, 0, Route115_Text_29B449, Route115_Text_29B480, Route115_EventScript_1F2A33
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route115_EventScript_1F2A52
 	msgbox Route115_Text_29B49D, 4
 	release
@@ -94,7 +94,7 @@ Route115_EventScript_1F2A52:: @ 81F2A52
 Route115_EventScript_1F2A69:: @ 81F2A69
 	trainerbattle 2, TRAINER_CYNDY_1, 0, Route115_Text_29B5EF, Route115_Text_29B62D, Route115_EventScript_1F2A95
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route115_EventScript_1F2AB4
 	msgbox Route115_Text_29B647, 4
 	release

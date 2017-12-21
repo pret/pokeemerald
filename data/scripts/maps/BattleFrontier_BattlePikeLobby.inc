@@ -51,7 +51,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B762:: @ 825B762
 	lockall
 	setvar VAR_0x8004, 10
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25B784
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C18A, 4
 	waitmessage
@@ -149,7 +149,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 	case 127, BattleFrontier_BattlePikeLobby_EventScript_25BA76
 	setvar VAR_0x8004, 15
 	special sub_81A1780
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA27
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -162,7 +162,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B8BB:: @ 825B8BB
 	setvar VAR_0x8005, 3
 	special sub_80F9490
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA73
 	msgbox BattleFrontier_BattlePikeLobby_Text_25C0D8, 5
 	switch VAR_RESULT
@@ -199,7 +199,7 @@ BattleFrontier_BattlePikeLobby_EventScript_25B95C:: @ 825B95C
 	setvar VAR_0x4000, 255
 	setvar VAR_0x8004, 26
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePikeLobby_EventScript_25BA5C
 	special copy_player_party_to_sav1
 	setvar VAR_0x8004, 3

@@ -230,11 +230,11 @@ MossdeepCity_EventScript_1E4C26:: @ 81E4C26
 	checkflag FLAG_0x114
 	goto_eq MossdeepCity_EventScript_1E4C68
 	msgbox MossdeepCity_Text_1E4CED, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_EventScript_1E4C72
 	msgbox MossdeepCity_Text_1E4D5B, 4
 	giveitem_std ITEM_KINGS_ROCK
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_EventScript_272054
 	setflag FLAG_0x114
 	release
@@ -259,9 +259,9 @@ MossdeepCity_EventScript_1E4C85:: @ 81E4C85
 	faceplayer
 	msgbox MossdeepCity_Text_1E5453, 4
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, MossdeepCity_EventScript_1E4CB0
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, MossdeepCity_EventScript_1E4CC2
 	addvar VAR_0x40D1, 1
 	removeobject 16

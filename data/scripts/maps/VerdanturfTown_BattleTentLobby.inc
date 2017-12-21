@@ -133,7 +133,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201873:: @ 8201873
 	faceplayer
 	setvar VAR_0x8004, 1
 	special sub_81B99B4
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, VerdanturfTown_BattleTentLobby_EventScript_2017EE
 	special copy_player_party_to_sav1
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C50C3, 4
@@ -154,7 +154,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	setvar VAR_RESULT, 2
 	setvar VAR_0x8004, 15
 	special sub_81A1780
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq VerdanturfTown_BattleTentLobby_EventScript_2019E8
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -166,7 +166,7 @@ VerdanturfTown_BattleTentLobby_EventScript_2018CF:: @ 82018CF
 	setvar VAR_0x8005, 3
 	special sub_80F9490
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq VerdanturfTown_BattleTentLobby_EventScript_201A34
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C5662, 5
 	switch VAR_RESULT
@@ -194,7 +194,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201954:: @ 8201954
 	delay 2
 	call VerdanturfTown_BattleTentLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq VerdanturfTown_BattleTentLobby_EventScript_201A1D
 
 VerdanturfTown_BattleTentLobby_EventScript_2019AE:: @ 82019AE
@@ -281,7 +281,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201A7B:: @ 8201A7B
 	goto_eq VerdanturfTown_BattleTentLobby_EventScript_201AB2
 	msgbox VerdanturfTown_BattleTentLobby_Text_201D9E, 4
 	giveitem_std ITEM_TM45
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq VerdanturfTown_BattleTentLobby_EventScript_272054
 	setflag FLAG_0x0EB
 	msgbox VerdanturfTown_BattleTentLobby_Text_201E43, 4

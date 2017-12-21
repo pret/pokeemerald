@@ -39,10 +39,10 @@ Route114_FossilManiacsTunnel_EventScript_22AF87:: @ 822AF87
 	checkflag FLAG_0x10B
 	goto_eq Route114_FossilManiacsTunnel_EventScript_22AFC6
 	checkitem ITEM_ROOT_FOSSIL, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
 	checkitem ITEM_CLAW_FOSSIL, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route114_FossilManiacsTunnel_EventScript_22AFBC
 	msgbox Route114_FossilManiacsTunnel_Text_22AFD0, 4
 	release

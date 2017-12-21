@@ -42,9 +42,9 @@ SSTidalRooms_EventScript_23C03C:: @ 823C03C
 	return
 
 SSTidalCorridor_EventScript_23C050:: @ 823C050
-	compare_var_to_value VAR_PORTHOLE, 2
+	compare VAR_PORTHOLE, 2
 	goto_eq SSTidalCorridor_EventScript_23C067
-	compare_var_to_value VAR_PORTHOLE, 7
+	compare VAR_PORTHOLE, 7
 	goto_eq SSTidalCorridor_EventScript_23C07D
 	end
 
@@ -114,9 +114,9 @@ SSTidalCorridor_EventScript_23C110:: @ 823C110
 SSTidalCorridor_EventScript_23C119:: @ 823C119
 	lock
 	faceplayer
-	compare_var_to_value VAR_PORTHOLE, 4
+	compare VAR_PORTHOLE, 4
 	goto_eq SSTidalCorridor_EventScript_23C13B
-	compare_var_to_value VAR_PORTHOLE, 8
+	compare VAR_PORTHOLE, 8
 	goto_eq SSTidalCorridor_EventScript_23C15A
 	msgbox SSTidalCorridor_Text_23C596, 4
 	release
@@ -148,9 +148,9 @@ SSTidalCorridor_EventScript_23C179:: @ 823C179
 
 SSTidalCorridor_EventScript_23C17D:: @ 823C17D
 	lockall
-	compare_var_to_value VAR_PORTHOLE, 2
+	compare VAR_PORTHOLE, 2
 	goto_eq SSTidalCorridor_EventScript_23C19E
-	compare_var_to_value VAR_PORTHOLE, 7
+	compare VAR_PORTHOLE, 7
 	goto_eq SSTidalCorridor_EventScript_23C19E
 	msgbox SSTidalCorridor_Text_23C6C3, 4
 	releaseall

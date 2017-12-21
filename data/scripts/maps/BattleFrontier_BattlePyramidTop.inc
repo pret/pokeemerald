@@ -20,7 +20,7 @@ BattleFrontier_BattlePyramidTop_MapScript2_2550CE: @ 82550CE
 BattleFrontier_BattlePyramidTop_EventScript_2550D8:: @ 82550D8
 	setvar VAR_0x4001, 1
 	turnobject 255, 2
-	compare_var_to_value VAR_0x400C, 0
+	compare VAR_0x400C, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_2550F3
 	setobjectxyperm 2, 0, 0
 
@@ -30,7 +30,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2550F3:: @ 82550F3
 BattleFrontier_BattlePyramidTop_MapScript1_2550F4: @ 82550F4
 	setvar VAR_0x8004, 9
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_25510C
 	call BattleFrontier_BattlePyramidTop_EventScript_242170
 
@@ -45,11 +45,11 @@ BattleFrontier_BattlePyramidTop_EventScript_25510C:: @ 825510C
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	compare_var_to_value VAR_RESULT, 9
+	compare VAR_RESULT, 9
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	end
 
@@ -88,9 +88,9 @@ BattleFrontier_BattlePyramidTop_EventScript_255193:: @ 8255193
 BattleFrontier_BattlePyramidTop_EventScript_2551D0:: @ 82551D0
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x400D, 0
+	compare VAR_0x400D, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_255236
-	compare_var_to_value VAR_0x400C, 0
+	compare VAR_0x400C, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_255240
 	msgbox BattleFrontier_BattlePyramidTop_Text_255410, 4
 	closemessage
@@ -136,7 +136,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255256:: @ 8255256
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_2552D0
 	special SpawnScriptFieldObject
 	applymovement 127, BattleFrontier_BattlePyramidTop_Movement_25540C
@@ -160,14 +160,14 @@ BattleFrontier_BattlePyramidTop_EventScript_2552DA:: @ 82552DA
 	msgbox BattleFrontier_BattlePyramidTop_Text_255846, 4
 	call BattleFrontier_BattlePyramidTop_EventScript_2553ED
 	playbgm BGM_BATTLE_PYRAMID_SUMMIT, 0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_2552FB
 	goto BattleFrontier_BattlePyramidTop_EventScript_252B42
 
 BattleFrontier_BattlePyramidTop_EventScript_2552FB:: @ 82552FB
 	setvar VAR_0x8004, 12
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_25521A
 	msgbox BattleFrontier_BattlePyramidTop_Text_255873, 4
 	playfanfare BGM_ME_BATTLE_SYMBOL
@@ -183,7 +183,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255335:: @ 8255335
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_255388
 	special SpawnScriptFieldObject
 	applymovement 127, BattleFrontier_BattlePyramidTop_Movement_25540C
@@ -207,14 +207,14 @@ BattleFrontier_BattlePyramidTop_EventScript_255392:: @ 8255392
 	msgbox BattleFrontier_BattlePyramidTop_Text_255AA1, 4
 	call BattleFrontier_BattlePyramidTop_EventScript_2553ED
 	playbgm BGM_BATTLE_PYRAMID_SUMMIT, 0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_2553B3
 	goto BattleFrontier_BattlePyramidTop_EventScript_252B42
 
 BattleFrontier_BattlePyramidTop_EventScript_2553B3:: @ 82553B3
 	setvar VAR_0x8004, 12
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_25521A
 	msgbox BattleFrontier_BattlePyramidTop_Text_255ACD, 4
 	playfanfare BGM_ME_BATTLE_SYMBOL

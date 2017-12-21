@@ -5,7 +5,7 @@ LittlerootTown_BrendansHouse_1F_MapScripts:: @ 81F7755
 	.byte 0
 
 LittlerootTown_BrendansHouse_1F_MapScript1_1F7765: @ 81F7765
-	compare_var_to_value VAR_0x4092, 6
+	compare VAR_0x4092, 6
 	call_if 0, LittlerootTown_BrendansHouse_1F_EventScript_1F777A
 	checkflag FLAG_0x112
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F778D
@@ -18,7 +18,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F777A:: @ 81F777A
 
 LittlerootTown_BrendansHouse_1F_EventScript_1F778D:: @ 81F778D
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F779A
 	return
 
@@ -27,11 +27,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F779A:: @ 81F779A
 	return
 
 LittlerootTown_BrendansHouse_1F_MapScript1_1F77A4: @ 81F77A4
-	compare_var_to_value VAR_0x4092, 3
+	compare VAR_0x4092, 3
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F77DE
-	compare_var_to_value VAR_0x4092, 5
+	compare VAR_0x4092, 5
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F77C6
-	compare_var_to_value VAR_0x4092, 6
+	compare VAR_0x4092, 6
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F77D2
 	end
 
@@ -151,22 +151,22 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	waitmovement 0
 	applymovement 7, LittlerootTown_BrendansHouse_1F_Movement_27259A
 	waitmovement 0
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 5, LittlerootTown_BrendansHouse_1F_EventScript_1F7981
 	playbgm BGM_BOY_SUP, 1
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F798C
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F7997
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79A2
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F90B4, 4
 	closemessage
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79C1
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79D3
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F79E5
 	playse SE_KAIDAN
 	removeobject 7

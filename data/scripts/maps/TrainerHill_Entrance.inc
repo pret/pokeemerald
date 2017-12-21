@@ -20,7 +20,7 @@ TrainerHill_Entrance_MapScript1_2680D0: @ 82680D0
 	setvar VAR_0x4000, 0
 	setvar VAR_0x8004, 9
 	special sp194_trainer_tower
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq TrainerHill_Entrance_EventScript_2680FF
 	setobjectxy 255, 9, 6
 	applymovement 255, TrainerHill_Entrance_Movement_26837F
@@ -29,7 +29,7 @@ TrainerHill_Entrance_MapScript1_2680D0: @ 82680D0
 TrainerHill_Entrance_EventScript_2680FF:: @ 82680FF
 	setvar VAR_0x8004, 16
 	special sp194_trainer_tower
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq TrainerHill_Entrance_EventScript_26811A
 	applymovement 255, TrainerHill_Entrance_Movement_26837F
 	end
@@ -45,7 +45,7 @@ TrainerHill_Entrance_MapScript1_26811B: @ 826811B
 	end
 
 TrainerHill_Entrance_MapScript1_268128: @ 8268128
-	compare_var_to_value VAR_0x400D, 17
+	compare VAR_0x400D, 17
 	call_if 1, TrainerHill_Entrance_EventScript_268134
 	end
 
@@ -116,7 +116,7 @@ TrainerHill_Entrance_EventScript_2681FD:: @ 82681FD
 	faceplayer
 	setvar VAR_0x8004, 10
 	special sp194_trainer_tower
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq TrainerHill_Entrance_EventScript_26821F
 	msgbox TrainerHill_Entrance_Text_2686F4, 4
 	goto TrainerHill_Entrance_EventScript_268227
@@ -136,11 +136,11 @@ TrainerHill_Entrance_EventScript_268229:: @ 8268229
 	msgbox TrainerHill_Entrance_Text_2684C6, 4
 	setvar VAR_0x8004, 13
 	special sp194_trainer_tower
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, TrainerHill_Entrance_EventScript_26832E
 	setvar VAR_0x8004, 8
 	special sp194_trainer_tower
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq TrainerHill_Entrance_EventScript_268275
 	msgbox TrainerHill_Entrance_Text_268564, 4
 	goto TrainerHill_Entrance_EventScript_26827D
@@ -196,7 +196,7 @@ TrainerHill_Entrance_EventScript_26832E:: @ 826832E
 	special sp194_trainer_tower
 	setvar VAR_0x4005, 1
 	call TrainerHill_Entrance_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq TrainerHill_Entrance_EventScript_26835C
 	setvar VAR_0x8004, 14
 	special sp194_trainer_tower

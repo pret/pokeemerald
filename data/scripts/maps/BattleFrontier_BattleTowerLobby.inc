@@ -13,7 +13,7 @@ BattleFrontier_BattleTowerLobby_MapScript1_23E694: @ 823E694
 	call BattleFrontier_BattleTowerLobby_EventScript_28CC84
 	setvar VAR_0x8004, 10
 	special sub_81A085C
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E6B5
 	checkflag FLAG_0x934
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E6C1
@@ -78,7 +78,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E758:: @ 823E758
 	faceplayer
 	setvar VAR_0x8004, 10
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E778
 	message BattleFrontier_BattleTowerLobby_Text_23F60D
 	waitmessage
@@ -90,7 +90,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E778:: @ 823E778
 BattleFrontier_BattleTowerLobby_EventScript_23E780:: @ 823E780
 	setvar VAR_0x8004, 5
 	special sub_8161F74
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E7A5
 	message BattleFrontier_BattleTowerLobby_Text_23F844
 	waitmessage
@@ -107,7 +107,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E7A5:: @ 823E7A5
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74
-	compare_var_to_value VAR_RESULT, 49
+	compare VAR_RESULT, 49
 	goto_if 5, BattleFrontier_BattleTowerLobby_EventScript_23E7E2
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F79D, 4
 
@@ -119,14 +119,14 @@ BattleFrontier_BattleTowerLobby_EventScript_23E7E2:: @ 823E7E2
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23E7F2:: @ 823E7F2
-	compare_var_to_value VAR_0x40CE, 2
+	compare VAR_0x40CE, 2
 	goto_if 5, BattleFrontier_BattleTowerLobby_EventScript_23E81E
 	checkflag FLAG_0x152
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E81E
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleTowerLobby_EventScript_23E830
 
 BattleFrontier_BattleTowerLobby_EventScript_23E81E:: @ 823E81E
@@ -160,7 +160,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E84D:: @ 823E84D
 	playse SE_SAVE
 	waitse
 	call BattleFrontier_BattleTowerLobby_EventScript_23E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E8DF
 	message BattleFrontier_BattleTowerLobby_Text_23FE3C
 	waitmessage
@@ -183,7 +183,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_23E8B4:: @ 823E8B4
 BattleFrontier_BattleTowerLobby_EventScript_23E8B4:: @ 823E8B4
 	setvar VAR_0x8004, 19
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E8D7
 	playse SE_SAVE
 	msgbox BattleFrontier_BattleTowerLobby_Text_2423CD, 4
@@ -214,7 +214,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E8E0:: @ 823E8E0
 BattleFrontier_BattleTowerLobby_EventScript_23E8EE:: @ 823E8EE
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23E930
 	message BattleFrontier_BattleTowerLobby_Text_23F737
 	waitmessage
@@ -263,7 +263,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E984:: @ 823E984
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	setvar VAR_0x8004, 15
 	special sub_81A1780
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -276,7 +276,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E984:: @ 823E984
 	setvar VAR_0x8005, 3
 	special sub_80F9490
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FDC7, 5
 	switch VAR_RESULT
@@ -304,7 +304,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EA2A:: @ 823EA2A
 	delay 2
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
 	setvar VAR_0x40BC, 1
@@ -343,7 +343,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EAED:: @ 823EAED
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	setvar VAR_0x8004, 15
 	special sub_81A1780
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -356,7 +356,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EAED:: @ 823EAED
 	setvar VAR_0x8005, 4
 	special sub_80F9490
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FDC7, 5
 	switch VAR_RESULT
@@ -384,7 +384,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EB93:: @ 823EB93
 	delay 2
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
 	setvar VAR_0x40BC, 0
@@ -424,7 +424,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC59:: @ 823EC59
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	setvar VAR_0x8004, 15
 	special sub_81A1780
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -437,7 +437,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EC59:: @ 823EC59
 	setvar VAR_0x8005, 2
 	special sub_80F9490
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FDC7, 5
 	switch VAR_RESULT
@@ -465,7 +465,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23ECFF:: @ 823ECFF
 	delay 2
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
 	setvar VAR_0x40BC, 0
@@ -504,7 +504,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EDC2:: @ 823EDC2
 	case 127, BattleFrontier_BattleTowerLobby_EventScript_23F0E6
 	setvar VAR_0x8004, 15
 	special sub_81A1780
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F02B
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -517,7 +517,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23EDC2:: @ 823EDC2
 	setvar VAR_0x8005, 2
 	special sub_80F9490
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0E3
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FDC7, 5
 	switch VAR_RESULT
@@ -548,11 +548,11 @@ BattleFrontier_BattleTowerLobby_EventScript_23EE68:: @ 823EE68
 	special sub_8161F74
 	call BattleFrontier_BattleTowerLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0D0
 	incrementgamestat 30
 	specialvar VAR_RESULT, sub_80093CC
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F3E8
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F2C5
 	end
@@ -605,9 +605,9 @@ BattleFrontier_BattleTowerLobby_EventScript_23EF80:: @ 823EF80
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23EF8A:: @ 823EF8A
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23EFA1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23EFAB
 	end
 
@@ -743,7 +743,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F108:: @ 823F108
 	setvar VAR_0x8004, 12
 	special sub_8161F74
 	delay 1
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if 5, BattleFrontier_BattleTowerLobby_EventScript_23F108
 	call BattleFrontier_BattleTowerLobby_EventScript_23F135
 	clearflag FLAG_0x077
@@ -754,7 +754,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23F108:: @ 823F108
 
 BattleFrontier_BattleTowerLobby_EventScript_23F135:: @ 823F135
 	call BattleFrontier_BattleTowerLobby_EventScript_23F1A7
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F152
 	msgbox BattleFrontier_BattleTowerLobby_Text_23FE11, 4
 	goto BattleFrontier_BattleTowerLobby_EventScript_23F15B
@@ -807,13 +807,13 @@ BattleFrontier_BattleTowerLobby_Movement_23F1A0: @ 823F1A0
 	step_end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F1A7:: @ 823F1A7
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F1D4
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F1D9
-	compare_var_to_value VAR_0x40CE, 2
+	compare VAR_0x40CE, 2
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F1DE
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F1E3
 	return
 
@@ -834,13 +834,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23F1E3:: @ 823F1E3
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F1E8:: @ 823F1E8
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F215
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F21B
-	compare_var_to_value VAR_0x40CE, 2
+	compare VAR_0x40CE, 2
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F221
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F227
 	return
 
@@ -861,13 +861,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23F227:: @ 823F227
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F22D:: @ 823F22D
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F25A
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F260
-	compare_var_to_value VAR_0x40CE, 2
+	compare VAR_0x40CE, 2
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F266
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F26C
 	return
 
@@ -888,13 +888,13 @@ BattleFrontier_BattleTowerLobby_EventScript_23F26C:: @ 823F26C
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F272:: @ 823F272
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F29F
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F2A5
-	compare_var_to_value VAR_0x40CE, 2
+	compare VAR_0x40CE, 2
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F2AB
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F2B1
 	return
 
@@ -934,25 +934,25 @@ BattleFrontier_BattleTowerLobby_EventScript_23F2C5:: @ 823F2C5
 	setvar VAR_0x8005, 0
 	special sub_80B2DA4
 	waitstate
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F3AF
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2772D2
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F327
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F351
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F0E6
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2772C5
-	compare_var_to_value VAR_RESULT, 11
+	compare VAR_RESULT, 11
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F366
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_23F327:: @ 823F327
 	special sub_80097E8
-	compare_var_to_value VAR_0x8005, 3
+	compare VAR_0x8005, 3
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F33F
 	msgbox BattleFrontier_BattleTowerLobby_Text_278255, 4
 	release
@@ -973,11 +973,11 @@ BattleFrontier_BattleTowerLobby_EventScript_23F351:: @ 823F351
 
 BattleFrontier_BattleTowerLobby_EventScript_23F366:: @ 823F366
 	special sub_80097E8
-	compare_var_to_value VAR_0x8005, 0
+	compare VAR_0x8005, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F394
-	compare_var_to_value VAR_0x8005, 1
+	compare VAR_0x8005, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F39D
-	compare_var_to_value VAR_0x8005, 2
+	compare VAR_0x8005, 2
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_23F3A6
 	msgbox BattleFrontier_BattleTowerLobby_Text_2413DE, 4
 	release
@@ -1034,26 +1034,26 @@ BattleFrontier_BattleTowerLobby_EventScript_23F3F3:: @ 823F3F3
 
 BattleFrontier_BattleTowerLobby_EventScript_23F430:: @ 823F430
 	call BattleFrontier_BattleTowerLobby_EventScript_277B30
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F496
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F3F3
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F430
-	compare_var_to_value VAR_RESULT, 11
+	compare VAR_RESULT, 11
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F366
 	release
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_23F463:: @ 823F463
 	call BattleFrontier_BattleTowerLobby_EventScript_277B35
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F496
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F3F3
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F463
-	compare_var_to_value VAR_RESULT, 11
+	compare VAR_RESULT, 11
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23F366
 	release
 	return

@@ -42,7 +42,7 @@ LilycoveCity_EventScript_1E2BD8:: @ 81E2BD8
 	random 10
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_EventScript_272054
 	setflag FLAG_0x92F
 	msgbox LilycoveCity_Text_2A72E3, 4
@@ -240,9 +240,9 @@ LilycoveCity_EventScript_1E2DDE:: @ 81E2DDE
 	lock
 	faceplayer
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_EventScript_1E2DF8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_EventScript_1E2E6B
 	end
 
@@ -252,7 +252,7 @@ LilycoveCity_EventScript_1E2DF8:: @ 81E2DF8
 	call_if 1, LilycoveCity_EventScript_1E2E48
 	checkflag FLAG_0x11E
 	call_if 0, LilycoveCity_EventScript_1E2E51
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_EventScript_1E2E5A
 	msgbox LilycoveCity_Text_1E3234, 4
 	switch VAR_FIRST_POKE
@@ -283,7 +283,7 @@ LilycoveCity_EventScript_1E2E6B:: @ 81E2E6B
 	call_if 1, LilycoveCity_EventScript_1E2EBB
 	checkflag FLAG_0x11E
 	call_if 0, LilycoveCity_EventScript_1E2EC4
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_EventScript_1E2ECD
 	msgbox LilycoveCity_Text_1E373C, 4
 	switch VAR_FIRST_POKE
@@ -343,9 +343,9 @@ LilycoveCity_EventScript_1E2F3E:: @ 81E2F3E
 	setvar VAR_RESULT, 0
 	checkflag FLAG_BADGE06_GET
 	call_if 1, LilycoveCity_EventScript_1E2F76
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_EventScript_1E2F86
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_EventScript_1E2F8F
 	clearflag FLAG_0x2D2
 	clearflag FLAG_0x351
@@ -380,9 +380,9 @@ LilycoveCity_EventScript_1E2FAA:: @ 81E2FAA
 	setvar VAR_RESULT, 0
 	checkflag FLAG_BADGE06_GET
 	call_if 1, LilycoveCity_EventScript_1E2F76
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_EventScript_1E2FE2
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_EventScript_1E2FEB
 	clearflag FLAG_0x2F8
 	clearflag FLAG_0x32F
@@ -423,9 +423,9 @@ LilycoveCity_EventScript_1E302D:: @ 81E302D
 	lock
 	faceplayer
 	msgbox LilycoveCity_Text_1E4774, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_EventScript_1E304F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_EventScript_1E3058
 	release
 	end

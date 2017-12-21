@@ -10,7 +10,7 @@ GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
 	setflag FLAG_0x0BD
 	msgbox GraniteCave_StevensRoom_Text_22DDBD, 4
 	giveitem_std ITEM_TM47
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, GraniteCave_StevensRoom_EventScript_22DD3C
 	msgbox GraniteCave_StevensRoom_Text_22DE6B, 4
 	closemessage
@@ -23,13 +23,13 @@ GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
 	setflag FLAG_0x131
 	msgbox GraniteCave_StevensRoom_Text_22DF8C, 4
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, GraniteCave_StevensRoom_EventScript_22DD0D
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, GraniteCave_StevensRoom_EventScript_22DD2A
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, GraniteCave_StevensRoom_EventScript_22DD18
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, GraniteCave_StevensRoom_EventScript_22DD18
 	playse SE_KAIDAN
 	removeobject 1

@@ -9,12 +9,12 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	lock
 	faceplayer
 	dodailyevents
-	compare_var_to_value VAR_POKELOT_PRIZE, 0
+	compare VAR_POKELOT_PRIZE, 0
 	goto_if 5, LilycoveCity_DepartmentStore_1F_EventScript_21F7F7
 	checkflag FLAG_0x92A
 	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F78D
 	msgbox LilycoveCity_DepartmentStore_1F_Text_2A6390, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F797
 	setflag FLAG_0x92A
 	message LilycoveCity_DepartmentStore_1F_Text_2A64C8
@@ -33,24 +33,24 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	delay 10
 	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_27259E
 	waitmovement 0
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7A1
 	incrementgamestat 46
-	compare_var_to_value VAR_0x8006, 0
+	compare VAR_0x8006, 0
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F77B
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F784
 	bufferitemname 0, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F7B9
-	compare_var_to_value VAR_0x8004, 2
+	compare VAR_0x8004, 2
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F7C2
-	compare_var_to_value VAR_0x8004, 3
+	compare VAR_0x8004, 3
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F7CB
-	compare_var_to_value VAR_0x8004, 4
+	compare VAR_0x8004, 4
 	call_if 1, LilycoveCity_DepartmentStore_1F_EventScript_21F7D4
 	giveitem_std VAR_0x8005
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7DD
 	special sub_80EE2CC
 	goto LilycoveCity_DepartmentStore_1F_EventScript_21F7AF
@@ -114,7 +114,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F7ED:: @ 821F7ED
 LilycoveCity_DepartmentStore_1F_EventScript_21F7F7:: @ 821F7F7
 	msgbox LilycoveCity_DepartmentStore_1F_Text_2A67E1, 4
 	giveitem_std VAR_POKELOT_PRIZE
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStore_1F_EventScript_21F7ED
 	copyvar VAR_0x8004, VAR_0x404D
 	copyvar VAR_0x8005, VAR_POKELOT_PRIZE

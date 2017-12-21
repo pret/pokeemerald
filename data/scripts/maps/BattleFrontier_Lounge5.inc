@@ -5,16 +5,16 @@ BattleFrontier_Lounge5_EventScript_2645C6:: @ 82645C6
 	lock
 	faceplayer
 	msgbox BattleFrontier_Lounge5_Text_264632, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_Lounge5_EventScript_26460D
 	special sub_81B94B0
 	waitstate
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x8004, 255
+	compare VAR_0x8004, 255
 	goto_eq BattleFrontier_Lounge5_EventScript_26460D
 	specialvar VAR_RESULT, sub_81396E0
-	compare_var_to_value VAR_RESULT, 412
+	compare VAR_RESULT, 412
 	goto_eq BattleFrontier_Lounge5_EventScript_264603
 	special sub_813A7B8
 	waitmessage

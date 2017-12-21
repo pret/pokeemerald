@@ -5,9 +5,9 @@ NewMauville_Inside_MapScripts:: @ 82373D7
 	.byte 0
 
 NewMauville_Inside_MapScript1_2373E7: @ 82373E7
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, NewMauville_Inside_EventScript_237489
-	compare_var_to_value VAR_0x4002, 1
+	compare VAR_0x4002, 1
 	call_if 1, NewMauville_Inside_EventScript_2375D7
 	checkflag FLAG_SYS_CTRL_OBJ_DELETE
 	call_if 1, NewMauville_Inside_EventScript_237407
@@ -15,7 +15,7 @@ NewMauville_Inside_MapScript1_2373E7: @ 82373E7
 
 NewMauville_Inside_EventScript_237407:: @ 8237407
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, NewMauville_Inside_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
@@ -44,7 +44,7 @@ NewMauville_Inside_EventScript_237449:: @ 8237449
 	return
 
 NewMauville_Inside_MapScript1_23744D: @ 823744D
-	compare_var_to_value VAR_0x40BA, 2
+	compare VAR_0x40BA, 2
 	call_if 1, NewMauville_Inside_EventScript_23773A
 	end
 
@@ -171,7 +171,7 @@ NewMauville_Inside_EventScript_23773A:: @ 823773A
 
 NewMauville_Inside_EventScript_23778F:: @ 823778F
 	lockall
-	compare_var_to_value VAR_0x40BA, 2
+	compare VAR_0x40BA, 2
 	goto_eq NewMauville_Inside_EventScript_2377A5
 	msgbox NewMauville_Inside_Text_237896, 4
 	releaseall
@@ -194,11 +194,11 @@ NewMauville_Inside_EventScript_2377AF:: @ 82377AF
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq NewMauville_Inside_EventScript_2377F3
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq NewMauville_Inside_EventScript_2377F3
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq NewMauville_Inside_EventScript_2377F3
 	setflag FLAG_0x1C1
 	release
@@ -221,11 +221,11 @@ NewMauville_Inside_EventScript_2377FC:: @ 82377FC
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq NewMauville_Inside_EventScript_237840
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq NewMauville_Inside_EventScript_237840
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq NewMauville_Inside_EventScript_237840
 	setflag FLAG_0x1C2
 	release
@@ -248,11 +248,11 @@ NewMauville_Inside_EventScript_237849:: @ 8237849
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq NewMauville_Inside_EventScript_23788D
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq NewMauville_Inside_EventScript_23788D
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq NewMauville_Inside_EventScript_23788D
 	setflag FLAG_0x1C3
 	release
