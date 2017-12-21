@@ -4,20 +4,27 @@
 struct ApproachingTrainer
 {
     u8 mapObjectId;
-    u8 radius;
-    u8 field_2;
-    u8 field_3;
+    u8 radius; // plus 1
     const u8 *trainerScriptPtr;
-    u8 field_8;
-    u8 field_9;
-    u8 field_A;
-    u8 field_B;
+    u8 taskId;
 };
 
-extern struct ApproachingTrainer gApproachingTrainers[];
+extern u16 gUnknown_03006080;
+extern u8 gUnknown_03006084[4];
+extern struct ApproachingTrainer gApproachingTrainers[2];
+extern u8 gNoOfApproachingTrainers;
+extern u8 gUnknown_030060AC;
+extern u8 gApproachingTrainerId;
 
-void sub_80B4578(struct MapObject *);
-u8 sub_80B47BC(void);
-void sub_8155D78(struct MapObject *);
+bool8 CheckForTrainersWantingBattle(void);
+void sub_80B4578(struct MapObject *var);
+void EndTrainerApproach(void);
+void sub_80B45D0(void);
+u8 FldEff_ExclamationMarkIcon1(void);
+u8 FldEff_ExclamationMarkIcon2(void);
+u8 FldEff_HeartIcon(void);
+u8 GetCurrentApproachingTrainerMapObjectId(void);
+u8 GetChosenApproachingTrainerMapObjectId(u8 arrayId);
+void sub_80B4808(void);
 
-#endif //GUARD_TRAINER_SEE_H
+#endif // GUARD_TRAINER_SEE_H

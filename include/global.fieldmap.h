@@ -224,7 +224,7 @@ struct MapObject
     /*0x0C*/ struct Coords16 coords1;
     /*0x10*/ struct Coords16 coords2;
     /*0x14*/ struct Coords16 coords3;
-    /*0x18*/ u8 mapobj_unk_18:4;  //current direction?
+    /*0x18*/ u8 mapobj_unk_18:4;  // current direction?
     /*0x18*/ u8 placeholder18:4;
     /*0x19*/ union __attribute__((packed)) {
         u8 as_byte;

@@ -2,7 +2,7 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-
+	
 gExpandedPlaceholder_Empty:: @ 85E8218
 	.string "$"
 

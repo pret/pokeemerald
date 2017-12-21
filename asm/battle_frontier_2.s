@@ -29290,7 +29290,7 @@ sub_81A9B04: @ 81A9B04
 	cmp r0, 0
 	beq _081A9B2E
 	movs r0, 0x1
-	bl sub_80B47E0
+	bl GetChosenApproachingTrainerMapObjectId
 	ldr r1, =gSelectedMapObject
 	strb r0, [r1]
 	ldr r0, =gTrainerBattleOpponent_B

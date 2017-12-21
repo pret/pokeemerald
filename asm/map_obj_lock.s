@@ -345,7 +345,7 @@ sub_8098630: @ 8098630
 	mov r6, r8
 	push {r6,r7}
 	movs r0, 0
-	bl sub_80B47E0
+	bl GetChosenApproachingTrainerMapObjectId
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, =gNoOfApproachingTrainers
@@ -353,7 +353,7 @@ sub_8098630: @ 8098630
 	cmp r0, 0x2
 	bne _080986E0
 	movs r0, 0x1
-	bl sub_80B47E0
+	bl GetChosenApproachingTrainerMapObjectId
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
