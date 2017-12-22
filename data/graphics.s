@@ -569,7 +569,10 @@ gUnknown_08D84970:: @ 8D84970
 	.incbin "baserom.gba", 0xd84970, 0x590
 
 gUnknown_08D84F00:: @ 8D84F00
-	.incbin "baserom.gba", 0xd84f00, 0x458
+	.incbin "baserom.gba", 0xd84f00, 0x158
+
+gUnknown_08D85058:: @ 8D85058
+	.incbin "baserom.gba", 0xd85058, 0x300
 
 gUnknown_08D85358:: @ 8D85358
 	.incbin "baserom.gba", 0xd85358, 0xec

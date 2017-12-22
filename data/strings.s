@@ -5217,22 +5217,22 @@ gText_Appeal2:: @ 85EFA67
 gText_Jam2:: @ 85EFA6E
 	.string "JAM$"
 
-gUnknown_085EFA72:: @ 85EFA72
+gText_Kira:: @ 85EFA72
 	.string "KIRA$"
 
-gUnknown_085EFA77:: @ 85EFA77
+gText_Amy:: @ 85EFA77
 	.string "AMY$"
 
-gUnknown_085EFA7B:: @ 85EFA7B
+gText_John:: @ 85EFA7B
 	.string "JOHN$"
 
-gUnknown_085EFA80:: @ 85EFA80
+gText_Roy:: @ 85EFA80
 	.string "ROY$"
 
-gUnknown_085EFA84:: @ 85EFA84
+gText_Gabby:: @ 85EFA84
 	.string "GABBY$"
 
-gUnknown_085EFA8A:: @ 85EFA8A
+gText_Anna:: @ 85EFA8A
 	.string "ANNA$"
 
 gText_ClearAllSaveData:: @ 85EFA8F

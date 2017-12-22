@@ -14097,7 +14097,7 @@ sub_8196274: @ 8196274
 _08196298:
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
-	ldr r1, =gUnknown_0860EF70
+	ldr r1, =gText_PokenavCallEllipsis
 	bl sub_81965D8
 	movs r0, 0x1
 _081962A4:
