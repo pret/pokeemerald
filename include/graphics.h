@@ -238,4 +238,7 @@ extern const u8 gBattleTerrainPalette_StadiumGlacia[];
 extern const u8 gBattleTerrainPalette_StadiumDrake[];
 extern const u8 gBattleTerrainPalette_StadiumWallace[];
 
+extern const u8 gUnknown_08DC234C[];
+extern const u8 gUnknown_08DC16F4[];
+
 #endif //GUARD_GRAPHICS_H

@@ -1217,10 +1217,10 @@ gUnknown_08DC0754:: @ 8DC0754
 	.incbin "baserom.gba", 0xdc0754, 0x440
 
 gUnknown_08DC0B94:: @ 8DC0B94
-	.incbin "baserom.gba", 0xdc0b94, 0xb62
+	.incbin "baserom.gba", 0xdc0b94, 0xb60
 
-gUnknown_08DC16F6:: @ 8DC16F6
-	.incbin "baserom.gba", 0xdc16f6, 0x60
+gUnknown_08DC16F4:: @ 8DC16F4
+	.incbin "baserom.gba", 0xdc16f4, 0x62
 
 gUnknown_08DC1756:: @ 8DC1756
 	.incbin "baserom.gba", 0xdc1756, 0x60
@@ -1232,7 +1232,10 @@ gUnknown_08DC1876:: @ 8DC1876
 	.incbin "baserom.gba", 0xdc1876, 0xbe
 
 gUnknown_08DC1934:: @ 8DC1934
-	.incbin "baserom.gba", 0xdc1934, 0x10d4
+	.incbin "baserom.gba", 0xdc1934, 0xA18
+	
+gUnknown_08DC234C:: @ 8DC234C
+	.incbin "baserom.gba", 0xDC234C, 0x6BC
 
 gUnknown_08DC2A08:: @ 8DC2A08
 	.incbin "baserom.gba", 0xdc2a08, 0x114
