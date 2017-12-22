@@ -65,7 +65,8 @@ static const struct PaletteStructTemplate gDummyPaletteStructTemplate = {
     .uid = 0xFFFF,
     .pst_field_B_5 = 1
 };
-static const u8 gUnknown_0852489C[] = {
+
+static const u8 sRoundedDownGrayscaleMap[] = {
      0,  0,  0,  0,  0,
      5,  5,  5,  5,  5,
     11, 11, 11, 11, 11,
@@ -620,7 +621,7 @@ static u8 UpdateFastPaletteFade(void)
             gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
         }
         break;
-    case FAST_FADE_OUT_TO_WHTIE:
+    case FAST_FADE_OUT_TO_WHITE:
         for (i = paletteOffsetStart; i < paletteOffsetEnd; i++)
         {
             struct PlttData *data = (struct PlttData *)&gPlttBufferFaded[i];
@@ -701,7 +702,7 @@ static u8 UpdateFastPaletteFade(void)
         case FAST_FADE_IN_FROM_BLACK:
             CpuCopy32(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
             break;
-        case FAST_FADE_OUT_TO_WHTIE:
+        case FAST_FADE_OUT_TO_WHITE:
             CpuFill32(0xFFFFFFFF, gPlttBufferFaded, PLTT_SIZE);
             break;
         case FAST_FADE_OUT_TO_BLACK:
@@ -838,10 +839,10 @@ void BlendPalettesUnfaded(u32 selectedPalettes, u8 coeff, u16 color)
 
 void TintPalette_GrayScale(u16 *palette, u16 count)
 {
-    s32 r;
-    s32 g;
-    s32 b;
-    s32 gray;
+    int r;
+    int g;
+    int b;
+    u32 gray;
 
     int i;
     for (i = 0; i < count; i++)
@@ -850,23 +851,22 @@ void TintPalette_GrayScale(u16 *palette, u16 count)
         g = (*palette >> 5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
         
-        r *= 0x4C;
-        r += g * 0x97;
-        r += b * 0x1D;
+        r = r * Q_8_8(0.2969);
+        r += g * Q_8_8(0.5899);
+        r += b * Q_8_8(0.1133);
         
         gray = r >> 8;
         
         *palette++ = gray << 10 | gray << 5 | gray;
     }
-    return;
 }
 
 void TintPalette_GrayScale2(u16 *palette, u16 count)
 {
-    s32 r;
-    s32 g;
-    s32 b;
-    s32 gray;
+    int r;
+    int g;
+    int b;
+    u32 gray;
 
     int i;
     for (i = 0; i < count; i++)
@@ -874,62 +874,57 @@ void TintPalette_GrayScale2(u16 *palette, u16 count)
         r = *palette & 0x1F;
         g = (*palette >> 5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-        
-        r *= 0x4C;
-        r += g * 0x97;
-        r += b * 0x1D;
+       
+        r = r * Q_8_8(0.2969);
+        r += g * Q_8_8(0.5899);
+        r += b * Q_8_8(0.1133);
         
         gray = r >> 8;
         
-        if ((u32)gray > 0x1F)
+        if (gray > 0x1F)
             gray = 0x1F;
         
-        gray = gUnknown_0852489C[gray];
+        gray = sRoundedDownGrayscaleMap[gray];
         
         *palette++ = gray << 10 | gray << 5 | gray;
     }
-    return;
 }
 
 #ifdef NONMATCHING
 void TintPalette_SepiaTone(u16 *palette, u16 count)
 {
-    s32 r;
-    s32 g;
-    s32 b;
+    int red;
+    int green;
+    int blue;
     u32 gray;
-    u32 sepia;
-    s8 r2;
-    s8 g2;
-    s8 b2;
+    u8 r2;
+    u8 g2;
+    u8 b2;
     
     int i;
     for (i = 0; i < count; i++)
     {
-        r = *palette & 0x1F;
-        g = (*palette >> 5) & 0x1F;
-        b = (*palette >> 10) & 0x1F;
+        red = *palette & 0x1F;
+        green = (*palette >> 5) & 0x1F;
+        blue = (*palette >> 10) & 0x1F;
         
-        r *= 0x4C;
-        r += g * 0x97;
-        r += b * 0x1D;
+        gray = red * Q_8_8(0.2969);
+        gray += green * Q_8_8(0.5899);
+        gray += blue * Q_8_8(0.1133);
         
-        gray = (s32)(r >> 8);
+        gray = gray / 256;
         
-        sepia = (gray * 0x133);
-        
-        r2 = (u16)sepia >> 8;
+        r2 = (gray * 0x133) / 256;
         
         g2 = gray;
         
-        b2 = (gray * 15);
+        b2 = (gray * 0xF);
         
         if (r2 > 0x1F)
             r2 = 0x1F;
         
         *palette++ = b2 << 10 | g2 << 5 | r2;
     }
-    return;
 }
 #else
 __attribute__((naked))
@@ -995,7 +990,7 @@ _080A2BA2:\n\
 #endif // NONMATCHING
 
 #ifdef NONMATCHING
-void sub_80A2BAC(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
+void TintPalette_CustomTone(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
 {
     s32 r;
     s32 g;
@@ -1039,7 +1034,7 @@ void sub_80A2BAC(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
 }
 #else
 __attribute__((naked))
-void sub_80A2BAC(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
+void TintPalette_CustomTone(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
 {
     asm("push {r4-r7,lr}\n\
     mov r7, r9\n\
@@ -1153,7 +1148,7 @@ void sub_80A2C44(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7)
     gTasks[taskId].func(taskId);
 }
 
-u32 sub_80A2CF8(u8 var)
+bool32 sub_80A2CF8(u8 var)
 {
     int i;
 
@@ -1181,7 +1176,7 @@ void sub_80A2D54(u8 taskId)
 {
     u32 wordVar;
     s16 *data;
-    u16 temp;
+    s16 temp;
 
     data = gTasks[taskId].data;
     wordVar = GetWordTaskArg(taskId, 5);
@@ -1191,7 +1186,7 @@ void sub_80A2D54(u8 taskId)
         data[4] = 0;
         BlendPalettes(wordVar, data[0], data[7]);
         temp = data[1];
-        if (data[0] == (s16)temp)
+        if (data[0] == temp)
         {
             DestroyTask(taskId);
         }
@@ -1200,12 +1195,12 @@ void sub_80A2D54(u8 taskId)
             data[0] += data[2];
             if (data[2] >= 0)
             {
-                if (data[0] < (s16)temp)
+                if (data[0] < temp)
                 {
                     return;
                 }
             }
-            else if (data[0] > (s16)temp)
+            else if (data[0] > temp)
             {
                 return;
             }
