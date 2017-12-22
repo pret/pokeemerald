@@ -514,11 +514,12 @@ struct RecordMixingDayCareMail
     bool16 holdsItem[DAYCARE_MON_COUNT];
 };
 
-#define MAP_OBJECTS_COUNT  16
-#define BERRY_TREES_COUNT  128
-#define FLAGS_COUNT        300
-#define VARS_COUNT         256
-#define MAIL_COUNT         16
+#define POKEBLOCKS_COUNT    40
+#define MAP_OBJECTS_COUNT   16
+#define BERRY_TREES_COUNT   128
+#define FLAGS_COUNT         300
+#define VARS_COUNT          256
+#define MAIL_COUNT          16
 
 enum
 {
@@ -611,7 +612,7 @@ struct SaveBlock1
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[16];
     /*0x690*/ struct ItemSlot bagPocket_TMHM[64];
     /*0x790*/ struct ItemSlot bagPocket_Berries[46];
-    /*0x848*/ struct Pokeblock pokeblocks[40];
+    /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x988*/ u8 seen1[52];
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 field_9C2[6];

@@ -153,7 +153,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E84D:: @ 823E84D
 	setvar VAR_0x8004, 8
 	special sub_81A1780
 	special copy_player_party_from_sav1
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 6
 	setvar VAR_0x8005, 0
 	special sub_8161F74

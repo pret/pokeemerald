@@ -528,7 +528,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C440:: @ 824C440
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
 	setvar VAR_0x4009, 1
@@ -537,7 +537,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C440:: @ 824C440
 	setvar VAR_0x4009, 0
 	setvar VAR_0x8004, 17
 	special sub_818E9AC
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 16
 	special sub_818E9AC
 	return

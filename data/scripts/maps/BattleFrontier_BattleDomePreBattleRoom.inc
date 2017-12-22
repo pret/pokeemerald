@@ -249,7 +249,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
 	special sub_81A1780
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B600
 	fadescreen 1
 	setvar VAR_0x8004, 11

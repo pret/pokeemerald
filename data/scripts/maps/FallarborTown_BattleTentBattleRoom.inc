@@ -110,7 +110,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_2009B3:: @ 82009B3
 	special sub_81A1780
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 FallarborTown_BattleTentBattleRoom_EventScript_200A2A:: @ 8200A2A
 	setvar VAR_0x8004, 1

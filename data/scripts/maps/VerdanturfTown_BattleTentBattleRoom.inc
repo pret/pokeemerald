@@ -88,7 +88,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 	special sub_81A1780
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
 	setvar VAR_0x8004, 1

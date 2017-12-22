@@ -7,7 +7,7 @@
 .set __special__, 0
         .align 2
 gSpecials:: @ 81DBA64
-	def_special sp000_heal_pokemon
+	def_special HealPlayerParty
 	def_special sub_809D2BC
 	def_special sub_80AF948
 	def_special sub_80AF9F8
@@ -218,7 +218,7 @@ gSpecials:: @ 81DBA64
 	def_special EnterSafariMode
 	def_special ExitSafariMode
 	def_special GetPokeblockFeederInFront
-	def_special sub_8135908
+	def_special OpenPokeblockCaseOnFeeder
 	def_special sub_813793C
 	def_special sub_8137988
 	def_special sub_8137A0C

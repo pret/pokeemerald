@@ -70,7 +70,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	special copy_player_party_from_sav1
 	setvar VAR_0x8004, 14
 	special sub_81A8E7C
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	message BattleFrontier_BattlePyramidLobby_Text_2519F8
 	waitmessage
 	playse SE_EXPMAX
@@ -100,7 +100,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250852:: @ 8250852
 	special copy_player_party_from_sav1
 	setvar VAR_0x8004, 14
 	special sub_81A8E7C
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	lockall
 	message BattleFrontier_BattlePyramidLobby_Text_251B5A
 	waitmessage
@@ -218,7 +218,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250A21:: @ 8250A21
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	setvar VAR_RESULT, 0
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	warp BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE, 255, 1, 1
 	setvar VAR_0x4000, 0
 	waitstate

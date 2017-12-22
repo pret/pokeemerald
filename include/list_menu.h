@@ -1,14 +1,17 @@
 #ifndef GUARD_LIST_MENU_H
 #define GUARD_LIST_MENU_H
 
+#define LIST_NOTHING_CHOSEN -1
+#define LIST_B_PRESSED -2
+
 // Exported type declarations
 
 // Exported RAM declarations
 
 struct ListMenuItem
 {
-    const u8 *unk_00;
-    s32 unk_04;
+    const u8 *name;
+    s32 id;
 };
 
 struct ListMenu;
@@ -16,7 +19,7 @@ struct ListMenu;
 struct ListMenuTemplate
 {
     const struct ListMenuItem *items;
-    void (* unk_04)(u32, bool8, struct ListMenu *);
+    void (* moveCursorFunc)(u32, bool8, struct ListMenu *);
     void (* unk_08)(u8, s32, u8);
     u16 totalItems;
     u16 maxShowed;
@@ -32,9 +35,11 @@ struct ListMenuTemplate
     u32 spaceBetweenItems:6; // x20000, x40000, x80000, x100000, x200000, x400000 = x7E0000
     u32 unk_16_7:1; // x800000
     u32 unk_17_0:6; // x1000000, x2000000, x4000000, x8000000, x10000000, x20000000 = x3F000000
+    u32 cursorKind:2; // x40000000, x80000000
 };
 
-struct ListMenu {
+struct ListMenu
+{
     struct ListMenuTemplate _template;
     u16 scrollOffset;
     u16 selectedRow;
@@ -44,13 +49,13 @@ struct ListMenu {
     u8 unk_1F;
 };
 
-extern struct ListMenuTemplate gUnknown_03006310;
+extern struct ListMenuTemplate gMultiuseListMenuTemplate;
 
 // Exported ROM declarations
 
-u8 ListMenuInit(struct ListMenuTemplate *template, u16 a1, u16 a2);
-s32 ListMenuHandleInput(u8 id);
-void get_coro_args_x18_x1A(u8 a0, u16 *a1, u16 *a2);
-void sub_81AE6C8(u8 a0, u16 *a1, u16 *a2);
+u8 ListMenuInit(struct ListMenuTemplate *template, u16 cursorPage, u16 cursorPosition);
+s32 ListMenuHandleInputGetItemId(u8 listTaskId);
+void sub_81AE860(u8 listTaskId, u16 *a1, u16 *a2);
+void sub_81AE6C8(u8 listTaskId, u16 *a1, u16 *a2);
 
 #endif //GUARD_LIST_MENU_H

@@ -179,6 +179,8 @@ SECTIONS {
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
         asm/rom6.o(.text);
+        src/pokeblock.o(.text);
+        asm/rom_81370FC.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
@@ -207,6 +209,7 @@ SECTIONS {
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
         asm/battle_tower.o(.text);
+        src/use_pokeblock.o(.text);
         asm/use_pokeblock.o(.text);
         src/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
@@ -222,7 +225,7 @@ SECTIONS {
         asm/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
         src/braille_puzzles.o(.text);
-        asm/pokeblock_feed.o(.text);
+        src/pokeblock_feed.o(.text);
         src/clear_save_data_screen.o(.text);
         asm/intro_credits_graphics.o(.text);
         src/evolution_graphics.o(.text);
@@ -424,7 +427,8 @@ SECTIONS {
         data/data4.o(.rodata);
         data/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
-        data/data4c.o(.rodata);
+        src/pokeblock.o(.rodata);
+        data/data4d.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
@@ -436,6 +440,7 @@ SECTIONS {
         data/learn_move.o(.rodata);
         src/roamer.o(.rodata);
         data/battle_tower.o(.rodata);
+        src/use_pokeblock.o(.rodata);
         data/use_pokeblock.o(.rodata);
         src/battle_controller_wally.o(.rodata);
         data/player_pc.o(.rodata);
@@ -451,7 +456,7 @@ SECTIONS {
         data/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
         data/braille_puzzles.o(.rodata);
-        data/pokeblock_feed.o(.rodata);
+        src/pokeblock_feed.o(.rodata);
         src/clear_save_data_screen.o(.rodata);
         data/intro_credits_graphics.o(.rodata);
         src/evolution_graphics.o(.rodata);

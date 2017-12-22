@@ -177,7 +177,6 @@ extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u8 gHealthboxElementsGfxTable[][32];
 
 // functions
-extern void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, s8 speed, const u8 *str); // menu.h
 extern void LoadBattleBarGfx(u8 arg0);
 
 // this file's functions

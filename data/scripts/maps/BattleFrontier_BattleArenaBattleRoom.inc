@@ -143,7 +143,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257630:: @ 8257630
 	special sub_81A1780
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 BattleFrontier_BattleArenaBattleRoom_EventScript_2576B0:: @ 82576B0
 	setvar VAR_0x8004, 9
@@ -430,14 +430,14 @@ FallarborTown_BattleTentBattleRoom_EventScript_257B6C:: @ 8257B6C
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 5
 	setvar VAR_0x8005, 0
 	special sub_8163AC4
 	waitstate
 	setvar VAR_0x8004, 18
 	special sub_81A1780
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 21
 	special sub_81A1780
 	return

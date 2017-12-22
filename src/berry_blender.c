@@ -134,8 +134,6 @@ extern u8 gInGameOpponentsNo;
 extern u8 gUnknown_020322D5;
 extern u8 gResultsWindowId;
 
-extern const u8 * const gPokeblockNames[];
-
 // graphics
 extern const u8 gBerryBlenderArrowTiles[];
 extern const u8 gBerryBlenderStartTiles[];

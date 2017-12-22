@@ -1435,7 +1435,7 @@ OldaleTown_PokemonCenter_1F_EventScript_271993:: @ 8271993
 	waitfieldeffect 25
 	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_2725AA
 	waitmovement 0
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_2719B1:: @ 82719B1
@@ -2194,7 +2194,7 @@ SSTidalRooms_EventScript_272083:: @ 8272083
 	fadescreen 1
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	fadescreen 0
 	return
 
@@ -5133,7 +5133,7 @@ SecretBase_RedCave1_EventScript_276286:: @ 8276286
 	call_if 1, SecretBase_RedCave1_EventScript_2762C1
 	compare VAR_RESULT, 2
 	call_if 1, SecretBase_RedCave1_EventScript_2762C5
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	release
 	end
 
