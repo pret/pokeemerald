@@ -2650,4 +2650,16 @@ extern const u8 gBattleTerrainPalette_StadiumWallace[];
 extern const u8 gUnknown_08DC234C[];
 extern const u8 gUnknown_08DC16F4[];
 
+// rayquaza scene gfx
+extern const u8 gUnknown_08DA1E78[];
+extern const u8 gUnknown_08DA2A5C[];
+extern const u8 gUnknown_08DA2B28[];
+extern const u8 gUnknown_08DA2D1C[];
+extern const u8 gUnknown_08DA3250[];
+extern const u8 gUnknown_08DA32A4[];
+extern const u8 gUnknown_08DA3370[];
+extern const u8 gUnknown_08DA3398[];
+extern const u8 gUnknown_08DA3BC0[];
+extern const u8 gUnknown_08DA3C7C[];
+
 #endif //GUARD_GRAPHICS_H

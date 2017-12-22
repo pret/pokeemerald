@@ -973,8 +973,29 @@ gUnknown_08D9C13C:: @ 8D9C13C
 @ 8D9C3A8
 	.include "data/graphics/berries/berry_graphics.inc"
 
-@ 8DA1E78
-	.incbin "baserom.gba", 0xda1e78, 0x1548
+gUnknown_08DA1E78:: @ 8DA1E78
+	.incbin "baserom.gba", 0xda1e78, 0xBE4
+	
+gUnknown_08DA2A5C:: @ 8DA2A5C
+	.incbin "baserom.gba", 0xDA2A5C, 0xCC
+	
+gUnknown_08DA2B28:: @ 8DA2B28
+	.incbin "baserom.gba", 0xDA2B28, 0x1F4
+	
+gUnknown_08DA2D1C:: @ 8DA2D1C
+	.incbin "baserom.gba", 0xDA2D1C, 0x534
+	
+gUnknown_08DA3250:: @ 8DA3250
+	.incbin "baserom.gba", 0xDA3250, 0x54
+	
+gUnknown_08DA32A4:: @ 8DA32A4
+	.incbin "baserom.gba", 0xDA32A4, 0xCC
+	
+gUnknown_08DA3370:: @ 8DA3370
+	.incbin "baserom.gba", 0xDA3370, 0x28
+	
+gUnknown_08DA3398:: @ 8DA3398
+	.incbin "baserom.gba", 0xDA3398, 0x28
 
 gUnknown_08DA33C0:: @ 8DA33C0
 	.incbin "baserom.gba", 0xda33c0, 0x428
@@ -989,7 +1010,13 @@ gUnknown_08DA3988:: @ 8DA3988
 	.incbin "baserom.gba", 0xda3988, 0x100
 
 gUnknown_08DA3A88:: @ 8DA3A88
-	.incbin "baserom.gba", 0xda3a88, 0x20c
+	.incbin "baserom.gba", 0xda3a88, 0x138
+	
+gUnknown_08DA3BC0:: @ 8DA3BC0
+	.incbin "baserom.gba", 0xDA3BC0, 0xBC
+	
+gUnknown_08DA3C7C:: @ 8DA3C7C
+	.incbin "baserom.gba", 0xDA3C7C, 0x18
 
 gUnknown_08DA3C94:: @ 8DA3C94
 	.incbin "baserom.gba", 0xda3c94, 0x1114
