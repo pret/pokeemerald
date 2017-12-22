@@ -3,7 +3,7 @@ RustboroCity_CuttersHouse: @ 8483478
 	.4byte RustboroCity_CuttersHouse_MapEvents
 	.4byte RustboroCity_CuttersHouse_MapScripts
 	.4byte 0x0
-	.2byte BGM_GOTOWN
+	.2byte MUS_GOTOWN
 	.2byte 98
 	.byte 10
 	.byte 0

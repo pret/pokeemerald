@@ -3,7 +3,7 @@ NavelRock_Up2: @ 848591C
 	.4byte NavelRock_Up2_MapEvents
 	.4byte NavelRock_Up2_MapScripts
 	.4byte 0x0
-	.2byte BGM_FRLG_MT_EMBER
+	.2byte MUS_RG_NANADUNGEON
 	.2byte 426
 	.byte 211
 	.byte 0

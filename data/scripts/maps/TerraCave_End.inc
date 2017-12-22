@@ -10,7 +10,7 @@ TerraCave_End_MapScript1_23B0BB: @ 823B0BB
 
 TerraCave_End_EventScript_23B0C5:: @ 823B0C5
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, TerraCave_End_EventScript_27374E
 	removeobject 1
 	return
@@ -43,11 +43,11 @@ TerraCave_End_EventScript_23B0EC:: @ 823B0EC
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_0x4001, 0
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq TerraCave_End_EventScript_23B155
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq TerraCave_End_EventScript_23B163
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq TerraCave_End_EventScript_23B163
 	setvar VAR_0x4039, 1
 	setflag FLAG_0x1BF

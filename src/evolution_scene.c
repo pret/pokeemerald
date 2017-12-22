@@ -594,14 +594,14 @@ static void Task_EvolutionScene(u8 taskID)
     case 3:
         if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteID)) // wait for animation, play tu du SE
         {
-            PlaySE(BGM_ME_SHINKA);
+            PlaySE(MUS_ME_SHINKA);
             gTasks[taskID].tState++;
         }
         break;
     case 4: // play evolution music and fade screen black
         if (!IsSEPlaying())
         {
-            PlayNewMapMusic(BGM_SHINKA);
+            PlayNewMapMusic(MUS_SHINKA);
             gTasks[taskID].tState++;
             BeginNormalPaletteFade(0x1C, 4, 0, 0x10, 0);
         }
@@ -677,7 +677,7 @@ static void Task_EvolutionScene(u8 taskID)
         {
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
             BattleHandleAddTextPrinter(gStringVar4, 0);
-            PlayBGM(BGM_FANFA5);
+            PlayBGM(MUS_FANFA5);
             gTasks[taskID].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (void*)(&gTasks[taskID].tPostEvoSpecies));
             CalculateMonStats(mon);
@@ -772,7 +772,7 @@ static void Task_EvolutionScene(u8 taskID)
         if (!IsTextPrinterActive(0) && !IsSEPlaying())
         {
             BufferMoveToLearnIntoBattleTextBuff2();
-            PlayFanfare(BGM_FANFA1);
+            PlayFanfare(MUS_FANFA1);
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_ID_ADDER]);
             BattleHandleAddTextPrinter(gDisplayedStringBattle, 0);
             gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter
@@ -962,15 +962,15 @@ static void Task_TradeEvolutionScene(u8 taskID)
     case 2:
         if (IsCryFinished())
         {
-            m4aSongNumStop(BGM_SHINKA);
-            PlaySE(BGM_ME_SHINKA);
+            m4aSongNumStop(MUS_SHINKA);
+            PlaySE(MUS_ME_SHINKA);
             gTasks[taskID].tState++;
         }
         break;
     case 3:
         if (!IsSEPlaying())
         {
-            PlayBGM(BGM_SHINKA);
+            PlayBGM(MUS_SHINKA);
             gTasks[taskID].tState++;
             BeginNormalPaletteFade(0x1C, 4, 0, 0x10, 0);
         }
@@ -1040,7 +1040,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         {
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
             sub_807F1A8(0, gStringVar4, 1);
-            PlayFanfare(BGM_FANFA5);
+            PlayFanfare(MUS_FANFA5);
             gTasks[taskID].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (&gTasks[taskID].tPostEvoSpecies));
             CalculateMonStats(mon);
@@ -1073,7 +1073,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             }
             else
             {
-                PlayBGM(BGM_SHINKA);
+                PlayBGM(MUS_SHINKA);
                 sub_807F1A8(0, gText_CommunicationStandby5, 1);
                 gTasks[taskID].tState++;
             }
@@ -1117,7 +1117,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         if (!IsTextPrinterActive(0) && !IsSEPlaying())
         {
             BufferMoveToLearnIntoBattleTextBuff2();
-            PlayFanfare(BGM_FANFA1);
+            PlayFanfare(MUS_FANFA1);
             BattleStringExpandPlaceholdersToDisplayedString(gBattleStringsTable[STRINGID_PKMNLEARNEDMOVE - BATTLESTRINGS_ID_ADDER]);
             sub_807F1A8(0, gDisplayedStringBattle, 1);
             gTasks[taskID].tLearnsFirstMove = 0x40; // re-used as a counter

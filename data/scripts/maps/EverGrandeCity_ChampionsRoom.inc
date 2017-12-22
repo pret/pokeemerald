@@ -38,7 +38,7 @@ EverGrandeCity_ChampionsRoom_Movement_228A42: @ 8228A42
 	step_end
 
 EverGrandeCity_ChampionsRoom_EventScript_228A45:: @ 8228A45
-	playbgm BGM_DAIGO, 0
+	playbgm MUS_DAIGO, 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_228C4C, 4
 	trainerbattle 3, TRAINER_WALLACE, 0, EverGrandeCity_ChampionsRoom_Text_228EAC
 	goto EverGrandeCity_ChampionsRoom_EventScript_228A61
@@ -53,25 +53,25 @@ EverGrandeCity_ChampionsRoom_EventScript_228A61:: @ 8228A61
 	closemessage
 	playse SE_DOOR
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228ABC
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228AC1
 	addobject 2
 	call EverGrandeCity_ChampionsRoom_EventScript_228BFD
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EverGrandeCity_ChampionsRoom_EventScript_228AC6
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EverGrandeCity_ChampionsRoom_EventScript_228AFB
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_228ABC:: @ 8228ABC
-	playbgm BGM_GIRL_SUP, 0
+	playbgm MUS_GIRL_SUP, 0
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_228AC1:: @ 8228AC1
-	playbgm BGM_BOY_SUP, 0
+	playbgm MUS_BOY_SUP, 0
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_228AC6:: @ 8228AC6
@@ -128,9 +128,9 @@ EverGrandeCity_ChampionsRoom_EventScript_228B30:: @ 8228B30
 	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_2293EB, 4
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228BEB
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, EverGrandeCity_ChampionsRoom_EventScript_228BF4
 	closemessage
 	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_228C3F

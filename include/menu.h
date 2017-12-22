@@ -4,6 +4,9 @@
 #include "text.h"
 #include "window.h"
 
+#define MENU_NOTHING_CHOSEN -2
+#define MENU_B_PRESSED -1
+
 struct MenuAction
 {
     const u8 *text;
@@ -32,7 +35,9 @@ void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirs
 s8 ProcessMenuInputNoWrap_(void);
 void do_scheduled_bg_tilemap_copies_to_vram(void);
 void clear_scheduled_bg_copies_to_vram(void);
-void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, s8 speed, const u8 *str);
+void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str);
 void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u16 a3);
+void sub_81995E4(u8 windowId, u8 optionsNo, const struct MenuAction *actions, const u8 *actionIds);
+void sub_8197DF8(u8 windowId, bool8 copyToVram);
 
 #endif // GUARD_MENU_H

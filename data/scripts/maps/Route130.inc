@@ -3,10 +3,10 @@ Route130_MapScripts:: @ 81F735F
 	.byte 0
 
 Route130_MapScript1_1F7365: @ 81F7365
-	compare_var_to_value VAR_0x405E, 4
+	compare VAR_0x405E, 4
 	call_if 4, Route130_EventScript_1F73B5
 	specialvar VAR_RESULT, sub_813793C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route130_EventScript_1F73B1
 	setflag FLAG_0x011
 	setflag FLAG_0x012

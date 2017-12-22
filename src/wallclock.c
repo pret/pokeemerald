@@ -16,7 +16,7 @@
 #include "task.h"
 #include "strings.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "trig.h"
 #include "decompress.h"
 

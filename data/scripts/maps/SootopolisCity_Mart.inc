@@ -28,7 +28,7 @@ SootopolisCity_Mart_Pokemart_2267AC: @ 82267AC
 SootopolisCity_Mart_EventScript_2267C2:: @ 82267C2
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x40CA, 2
+	compare VAR_0x40CA, 2
 	goto_if 4, SootopolisCity_Mart_EventScript_2267E2
 	checkflag FLAG_0x081
 	goto_if 0, SootopolisCity_Mart_EventScript_2267E2
@@ -44,7 +44,7 @@ SootopolisCity_Mart_EventScript_2267E2:: @ 82267E2
 SootopolisCity_Mart_EventScript_2267EC:: @ 82267EC
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x40CA, 2
+	compare VAR_0x40CA, 2
 	goto_if 4, SootopolisCity_Mart_EventScript_22680C
 	checkflag FLAG_0x081
 	goto_if 0, SootopolisCity_Mart_EventScript_22680C

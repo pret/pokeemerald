@@ -9,7 +9,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_2186D3:: @ 82186D3
 	checkflag FLAG_0x002
 	call_if 1, LilycoveCity_CoveLilyMotel_2F_EventScript_21870F
 	specialvar VAR_RESULT, sub_80C08E4
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_CoveLilyMotel_2F_EventScript_218702
 	release
 	end
@@ -20,7 +20,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_2186F9:: @ 82186F9
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_218702:: @ 8218702
 	setflag FLAG_0x002
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	goto LilycoveCity_CoveLilyMotel_2F_EventScript_21870F
 	end

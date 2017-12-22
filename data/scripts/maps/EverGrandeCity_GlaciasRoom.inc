@@ -26,7 +26,7 @@ EverGrandeCity_GlaciasRoom_EventScript_22843B:: @ 822843B
 EverGrandeCity_GlaciasRoom_MapScript1_228448: @ 8228448
 	checkflag FLAG_0x4FD
 	call_if 1, EverGrandeCity_GlaciasRoom_EventScript_22845D
-	compare_var_to_value VAR_0x409C, 3
+	compare VAR_0x409C, 3
 	call_if 1, EverGrandeCity_GlaciasRoom_EventScript_228463
 	end
 
@@ -43,7 +43,7 @@ EverGrandeCity_GlaciasRoom_EventScript_228469:: @ 8228469
 	faceplayer
 	checkflag FLAG_0x4FD
 	goto_eq EverGrandeCity_GlaciasRoom_EventScript_228490
-	playbgm BGM_SITENNOU, 0
+	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_GlaciasRoom_Text_2284AC, 4
 	trainerbattle 3, TRAINER_GLACIA, 0, EverGrandeCity_GlaciasRoom_Text_2285B4
 	goto EverGrandeCity_GlaciasRoom_EventScript_22849A

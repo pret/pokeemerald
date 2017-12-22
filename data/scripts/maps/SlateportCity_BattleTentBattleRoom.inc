@@ -10,9 +10,9 @@ SlateportCity_BattleTentBattleRoom_MapScript1_209970: @ 8209970
 
 SlateportCity_BattleTentBattleRoom_EventScript_209976:: @ 8209976
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_BattleTentBattleRoom_EventScript_20998E
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_BattleTentBattleRoom_EventScript_209994
 	return
 
@@ -54,7 +54,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_2099BE:: @ 82099BE
 	msgbox 0x2021fc4, 4
 	waitmessage
 	closemessage
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 6
 	setvar VAR_0x8005, 0
 	special sub_8163AC4

@@ -3,7 +3,7 @@ RustboroCity_DevonCorp_2F_MapScripts:: @ 8211857
 	.byte 0
 
 RustboroCity_DevonCorp_2F_MapScript1_21185D: @ 821185D
-	compare_var_to_value VAR_0x40C4, 1
+	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
 	end
 
@@ -14,7 +14,7 @@ RustboroCity_DevonCorp_2F_EventScript_211869:: @ 8211869
 RustboroCity_DevonCorp_2F_EventScript_21186F:: @ 821186F
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x40C4, 1
+	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
 	msgbox RustboroCity_DevonCorp_2F_Text_211BFB, 4
 	release
@@ -23,7 +23,7 @@ RustboroCity_DevonCorp_2F_EventScript_21186F:: @ 821186F
 RustboroCity_DevonCorp_2F_EventScript_211886:: @ 8211886
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x40C4, 1
+	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
 	checkflag FLAG_0x11F
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_2118A6
@@ -39,7 +39,7 @@ RustboroCity_DevonCorp_2F_EventScript_2118A6:: @ 82118A6
 RustboroCity_DevonCorp_2F_EventScript_2118B0:: @ 82118B0
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x40C4, 1
+	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
 	checkflag FLAG_0x0BC
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_2118D0
@@ -55,7 +55,7 @@ RustboroCity_DevonCorp_2F_EventScript_2118D0:: @ 82118D0
 RustboroCity_DevonCorp_2F_EventScript_2118DA:: @ 82118DA
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x40C4, 1
+	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
 	msgbox RustboroCity_DevonCorp_2F_Text_211EE0, 4
 	release
@@ -64,16 +64,16 @@ RustboroCity_DevonCorp_2F_EventScript_2118DA:: @ 82118DA
 RustboroCity_DevonCorp_2F_EventScript_2118F1:: @ 82118F1
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x40C4, 2
+	compare VAR_0x40C4, 2
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A03
-	compare_var_to_value VAR_0x40C4, 1
+	compare VAR_0x40C4, 1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_2119F9
 	msgbox RustboroCity_DevonCorp_2F_Text_211F48, 4
 	checkitem ITEM_ROOT_FOSSIL, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211933
 	checkitem ITEM_CLAW_FOSSIL, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211991
 	release
 	end
@@ -86,10 +86,10 @@ RustboroCity_DevonCorp_2F_EventScript_211933:: @ 8211933
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_27259A
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_2119EF
 	checkitem ITEM_CLAW_FOSSIL, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B84
 	goto RustboroCity_DevonCorp_2F_EventScript_211974
 	end
@@ -111,10 +111,10 @@ RustboroCity_DevonCorp_2F_EventScript_211991:: @ 8211991
 	applymovement 5, RustboroCity_DevonCorp_2F_Movement_27259A
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_2F_Text_211FA6, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_2119EF
 	checkitem ITEM_ROOT_FOSSIL, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B84
 	goto RustboroCity_DevonCorp_2F_EventScript_2119D2
 	end
@@ -139,9 +139,9 @@ RustboroCity_DevonCorp_2F_EventScript_2119F9:: @ 82119F9
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_211A03:: @ 8211A03
-	compare_var_to_value VAR_0x40C5, 1
+	compare VAR_0x40C5, 1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A1A
-	compare_var_to_value VAR_0x40C5, 2
+	compare VAR_0x40C5, 2
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A2C
 	end
 
@@ -160,9 +160,9 @@ RustboroCity_DevonCorp_2F_EventScript_211A2C:: @ 8211A2C
 RustboroCity_DevonCorp_2F_EventScript_211A3E:: @ 8211A3E
 	setvar VAR_0x4001, 388
 	givemon SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A6E
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211A96
 	goto RustboroCity_DevonCorp_2F_EventScript_273811
 	end
@@ -170,7 +170,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A3E:: @ 8211A3E
 RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 	call RustboroCity_DevonCorp_2F_EventScript_211AC4
 	msgbox gUnknown_08273374, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211AD7
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
 	call RustboroCity_DevonCorp_2F_EventScript_2723DD
@@ -180,7 +180,7 @@ RustboroCity_DevonCorp_2F_EventScript_211A6E:: @ 8211A6E
 RustboroCity_DevonCorp_2F_EventScript_211A96:: @ 8211A96
 	call RustboroCity_DevonCorp_2F_EventScript_211AC4
 	msgbox gUnknown_08273374, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211AB9
 	call RustboroCity_DevonCorp_2F_EventScript_273797
 	goto RustboroCity_DevonCorp_2F_EventScript_211AB9
@@ -193,7 +193,7 @@ RustboroCity_DevonCorp_2F_EventScript_211AB9:: @ 8211AB9
 
 RustboroCity_DevonCorp_2F_EventScript_211AC4:: @ 8211AC4
 	bufferspeciesname 1, SPECIES_LILEEP
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message RustboroCity_DevonCorp_2F_Text_2122CB
 	waitmessage
 	waitfanfare
@@ -209,9 +209,9 @@ RustboroCity_DevonCorp_2F_EventScript_211AD7:: @ 8211AD7
 RustboroCity_DevonCorp_2F_EventScript_211AE1:: @ 8211AE1
 	setvar VAR_0x4001, 390
 	givemon SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B11
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B39
 	goto RustboroCity_DevonCorp_2F_EventScript_273811
 	end
@@ -219,7 +219,7 @@ RustboroCity_DevonCorp_2F_EventScript_211AE1:: @ 8211AE1
 RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 	call RustboroCity_DevonCorp_2F_EventScript_211B67
 	msgbox gUnknown_08273374, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B7A
 	call RustboroCity_DevonCorp_2F_EventScript_27378B
 	call RustboroCity_DevonCorp_2F_EventScript_2723DD
@@ -229,7 +229,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B11:: @ 8211B11
 RustboroCity_DevonCorp_2F_EventScript_211B39:: @ 8211B39
 	call RustboroCity_DevonCorp_2F_EventScript_211B67
 	msgbox gUnknown_08273374, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_2F_EventScript_211B5C
 	call RustboroCity_DevonCorp_2F_EventScript_273797
 	goto RustboroCity_DevonCorp_2F_EventScript_211B5C
@@ -242,7 +242,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B5C:: @ 8211B5C
 
 RustboroCity_DevonCorp_2F_EventScript_211B67:: @ 8211B67
 	bufferspeciesname 1, SPECIES_ANORITH
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message RustboroCity_DevonCorp_2F_Text_2122CB
 	waitmessage
 	waitfanfare
@@ -281,9 +281,9 @@ RustboroCity_DevonCorp_2F_EventScript_211BCD:: @ 8211BCD
 RustboroCity_DevonCorp_2F_EventScript_211BCF:: @ 8211BCF
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x40C4, 1
+	compare VAR_0x40C4, 1
 	call_if 1, RustboroCity_DevonCorp_2F_EventScript_211869
-	compare_var_to_value VAR_0x405A, 6
+	compare VAR_0x405A, 6
 	goto_if 4, RustboroCity_DevonCorp_2F_EventScript_211BF1
 	msgbox RustboroCity_DevonCorp_2F_Text_212338, 4
 	release

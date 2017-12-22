@@ -11,7 +11,7 @@ Route110_SeasideCyclingRoadEntrance1_EventScript_26EA78:: @ 826EA78
 Route110_SeasideCyclingRoadEntrance1_EventScript_26EA84:: @ 826EA84
 	lockall
 	specialvar VAR_RESULT, sp0E3_walkrun_bitfield_interpretation
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route110_SeasideCyclingRoadEntrance1_EventScript_26EA9F
 	setflag FLAG_SYS_CYCLING_ROAD
 	setvar VAR_0x4001, 1

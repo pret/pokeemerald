@@ -18,7 +18,7 @@ FortreeCity_Gym_EventScript_2165C4:: @ 82165C4
 FortreeCity_Gym_EventScript_2165C8:: @ 82165C8
 	trainerbattle 1, TRAINER_WINONA_1, 0, FortreeCity_Gym_Text_216D75, FortreeCity_Gym_Text_216E60, FortreeCity_Gym_EventScript_2165FD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq FortreeCity_Gym_EventScript_21668D
 	checkflag FLAG_0x0AA
 	goto_if 0, FortreeCity_Gym_EventScript_216646
@@ -38,7 +38,7 @@ FortreeCity_Gym_EventScript_2165FD:: @ 82165FD
 	call FortreeCity_Gym_EventScript_21666A
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox FortreeCity_Gym_Text_217044, 4
 	waitfanfare
 	closemessage
@@ -51,7 +51,7 @@ FortreeCity_Gym_EventScript_2165FD:: @ 82165FD
 
 FortreeCity_Gym_EventScript_216646:: @ 8216646
 	giveitem_std ITEM_TM40
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FortreeCity_Gym_EventScript_272054
 	msgbox FortreeCity_Gym_Text_216FEC, 4
 	setflag FLAG_0x0AA
@@ -60,7 +60,7 @@ FortreeCity_Gym_EventScript_216646:: @ 8216646
 
 FortreeCity_Gym_EventScript_21666A:: @ 821666A
 	giveitem_std ITEM_TM40
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FortreeCity_Gym_EventScript_27205E
 	msgbox FortreeCity_Gym_Text_216FEC, 4
 	setflag FLAG_0x0AA

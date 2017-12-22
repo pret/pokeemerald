@@ -10,7 +10,7 @@ Route119_MapScript1_1F442F: @ 81F442F
 
 Route119_EventScript_1F4439:: @ 81F4439
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, Route119_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
@@ -18,7 +18,7 @@ Route119_EventScript_1F4439:: @ 81F4439
 Route119_MapScript1_1F444D: @ 81F444D
 	call Route119_EventScript_271ED7
 	call Route119_EventScript_271EFB
-	compare_var_to_value VAR_0x40B3, 1
+	compare VAR_0x40B3, 1
 	call_if 1, Route119_EventScript_1F4466
 	special sub_8139648
 	end
@@ -43,39 +43,39 @@ Route119_EventScript_1F4488:: @ 81F4488
 	lockall
 	addobject 25
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route119_EventScript_1F4501
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, Route119_EventScript_1F4506
 	delay 65
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, Route119_EventScript_1F46C6
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, Route119_EventScript_1F46D1
 	applymovement 255, Route119_Movement_2725AA
 	waitmovement 0
 	delay 30
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, Route119_EventScript_1F4700
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, Route119_EventScript_1F470F
 	removeobject 25
 	addobject 16
 	delay 30
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route119_EventScript_1F450B
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route119_EventScript_1F4585
 	releaseall
 	end
 
 Route119_EventScript_1F4501:: @ 81F4501
-	playbgm BGM_GIRL_SUP, 1
+	playbgm MUS_GIRL_SUP, 1
 	return
 
 Route119_EventScript_1F4506:: @ 81F4506
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	return
 
 Route119_EventScript_1F450B:: @ 81F450B
@@ -145,25 +145,25 @@ Route119_EventScript_1F45FF:: @ 81F45FF
 
 Route119_EventScript_1F460F:: @ 81F460F
 	closemessage
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, Route119_EventScript_1F4700
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, Route119_EventScript_1F470F
 	removeobject 16
 	addobject 25
 	delay 30
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, Route119_EventScript_1F46DC
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, Route119_EventScript_1F46EE
 	removeobject 25
 	setvar VAR_0x4072, 1
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	delay 60
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, Route119_EventScript_1F46A0
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, Route119_EventScript_1F46A8
 	addobject 43
 	applymovement 43, Route119_Movement_1F4752
@@ -171,9 +171,9 @@ Route119_EventScript_1F460F:: @ 81F460F
 	addvar VAR_0x40D1, 1
 	msgbox Route119_Text_1F4E60, 4
 	closemessage
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, Route119_EventScript_1F46B0
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, Route119_EventScript_1F46BB
 	removeobject 43
 	releaseall
@@ -369,7 +369,7 @@ Route119_EventScript_1F47F9:: @ 81F47F9
 Route119_EventScript_1F4810:: @ 81F4810
 	trainerbattle 2, TRAINER_JACKSON_1, 0, Route119_Text_29DC4C, Route119_Text_29DC9F, Route119_EventScript_1F483C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route119_EventScript_1F485B
 	msgbox Route119_Text_29DCC6, 4
 	release
@@ -394,7 +394,7 @@ Route119_EventScript_1F485B:: @ 81F485B
 Route119_EventScript_1F4872:: @ 81F4872
 	trainerbattle 2, TRAINER_CATHERINE_1, 0, Route119_Text_29DE0F, Route119_Text_29DE5D, Route119_EventScript_1F489E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route119_EventScript_1F48BD
 	msgbox Route119_Text_29DE88, 4
 	release

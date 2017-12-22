@@ -5,7 +5,7 @@ RustboroCity_DevonCorp_3F_MapScripts:: @ 821242D
 	.byte 0
 
 RustboroCity_DevonCorp_3F_MapScript1_21243D: @ 821243D
-	compare_var_to_value VAR_0x408F, 0
+	compare VAR_0x408F, 0
 	call_if 1, RustboroCity_DevonCorp_3F_EventScript_212449
 	end
 
@@ -37,7 +37,7 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_212DE8, 4
 	closemessage
-	playbgm BGM_TSURETEK, 0
+	playbgm MUS_TSURETEK, 0
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_212534
 	applymovement 255, RustboroCity_DevonCorp_3F_Movement_212558
 	waitmovement 0
@@ -50,7 +50,7 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	msgbox RustboroCity_DevonCorp_3F_Text_212609, 4
 	giveitem_std ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_21277C, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message RustboroCity_DevonCorp_3F_Text_212820
 	waitfanfare
 	setflag FLAG_SYS_POKENAV_GET
@@ -164,7 +164,7 @@ RustboroCity_DevonCorp_3F_EventScript_21256C:: @ 821256C
 RustboroCity_DevonCorp_3F_EventScript_212595:: @ 8212595
 	msgbox RustboroCity_DevonCorp_3F_Text_212A29, 4
 	giveitem_std ITEM_EXP_SHARE
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_DevonCorp_3F_EventScript_272054
 	setflag FLAG_0x110
 	msgbox RustboroCity_DevonCorp_3F_Text_212A9E, 4

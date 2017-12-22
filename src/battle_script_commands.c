@@ -7121,7 +7121,7 @@ static void atk76_various(void)
             gBattleOutcome = BATTLE_OPPONENT_TELEPORTED;
         break;
     case VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC:
-        EmitPlayFanfareOrBGM(0, BGM_KACHI1, TRUE);
+        EmitPlayFanfareOrBGM(0, MUS_KACHI1, TRUE);
         MarkBufferBankForExecution(gActiveBank);
         break;
     }

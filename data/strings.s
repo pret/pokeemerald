@@ -832,46 +832,46 @@ gText_UnkF908Var1Var2:: @ 85E9263
 gText_BerryTag:: @ 85E926B
 	.string "BERRY TAG$"
 
-gUnknown_085E9275:: @ 85E9275
+gText_RedPokeblock:: @ 85E9275
 	.string "RED {POKEBLOCK}$"
 
-gUnknown_085E927F:: @ 85E927F
+gText_BluePokeblock:: @ 85E927F
 	.string "BLUE {POKEBLOCK}$"
 
-gUnknown_085E928A:: @ 85E928A
+gText_PinkPokeblock:: @ 85E928A
 	.string "PINK {POKEBLOCK}$"
 
-gUnknown_085E9295:: @ 85E9295
+gText_GreenPokeblock:: @ 85E9295
 	.string "GREEN {POKEBLOCK}$"
 
-gUnknown_085E92A1:: @ 85E92A1
+gText_YellowPokeblock:: @ 85E92A1
 	.string "YELLOW {POKEBLOCK}$"
 
-gUnknown_085E92AE:: @ 85E92AE
+gText_PurplePokeblock:: @ 85E92AE
 	.string "PURPLE {POKEBLOCK}$"
 
-gUnknown_085E92BB:: @ 85E92BB
+gText_IndigoPokeblock:: @ 85E92BB
 	.string "INDIGO {POKEBLOCK}$"
 
-gUnknown_085E92C8:: @ 85E92C8
+gText_BrownPokeblock:: @ 85E92C8
 	.string "BROWN {POKEBLOCK}$"
 
-gUnknown_085E92D4:: @ 85E92D4
+gText_LiteBluePokeblock:: @ 85E92D4
 	.string "LITEBLUE {POKEBLOCK}$"
 
-gUnknown_085E92E3:: @ 85E92E3
+gText_OlivePokeblock:: @ 85E92E3
 	.string "OLIVE {POKEBLOCK}$"
 
-gUnknown_085E92EF:: @ 85E92EF
+gText_GrayPokeblock:: @ 85E92EF
 	.string "GRAY {POKEBLOCK}$"
 
-gUnknown_085E92FA:: @ 85E92FA
+gText_BlackPokeblock:: @ 85E92FA
 	.string "BLACK {POKEBLOCK}$"
 
-gUnknown_085E9306:: @ 85E9306
+gText_WhitePokeblock:: @ 85E9306
 	.string "WHITE {POKEBLOCK}$"
 
-gUnknown_085E9312:: @ 85E9312
+gText_GoldPokeblock:: @ 85E9312
 	.string "GOLD {POKEBLOCK}$"
 
 gText_Spicy:: @ 85E931D
@@ -3158,19 +3158,19 @@ gText_PokemonCenter:: @ 85EC791
 gText_GetsAPokeBlockQuestion:: @ 85EC7A0
 	.string " gets a {POKEBLOCK}?$"
 
-gUnknown_085EC7AF:: @ 85EC7AF
+gText_Coolness:: @ 85EC7AF
 	.string "Coolness $"
 
-gUnknown_085EC7B9:: @ 85EC7B9
+gText_Beauty3:: @ 85EC7B9
 	.string "Beauty $"
 
-gUnknown_085EC7C1:: @ 85EC7C1
+gText_Cuteness:: @ 85EC7C1
 	.string "Cuteness $"
 
-gUnknown_085EC7CB:: @ 85EC7CB
+gText_Smartness:: @ 85EC7CB
 	.string "Smartness $"
 
-gUnknown_085EC7D6:: @ 85EC7D6
+gText_Toughness:: @ 85EC7D6
 	.string "Toughness $"
 
 gText_WasEnhanced:: @ 85EC7E1
@@ -3817,7 +3817,7 @@ gText_WaitForAllChooseBerry:: @ 85ED62C
 
 	.align 2
 gText_EndedWithXUnitsPowder:: @ 85ED65C
-	.string "{PAUSE_MUSIC}{PLAY_BGM BGM_FANFA1}You ended up with {STR_VAR_1} units of\nsilky-smooth BERRY POWDER.{RESUME_MUSIC}\pYour total amount of BERRY POWDER\nis {STR_VAR_2}.\p$"
+	.string "{PAUSE_MUSIC}{PLAY_BGM MUS_FANFA1}You ended up with {STR_VAR_1} units of\nsilky-smooth BERRY POWDER.{RESUME_MUSIC}\pYour total amount of BERRY POWDER\nis {STR_VAR_2}.\p$"
 
 	.align 2
 gText_RecordingGameResults:: @ 85ED6C8

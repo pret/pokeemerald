@@ -8,7 +8,7 @@ Route111_MapScripts:: @ 81F0CA7
 Route111_MapScript1_1F0CBC: @ 81F0CBC
 	checkflag FLAG_0x0E4
 	call_if 0, Route111_EventScript_1F0CD1
-	compare_var_to_value VAR_0x40CB, 1
+	compare VAR_0x40CB, 1
 	call_if 1, Route111_EventScript_1F0CE4
 	end
 
@@ -43,9 +43,9 @@ Route111_MapScript1_1F0D87: @ 81F0D87
 	special sub_81BE79C
 	checkflag FLAG_0x14E
 	call_if 0, Route111_EventScript_1F0E3C
-	compare_var_to_value VAR_0x40CB, 1
+	compare VAR_0x40CB, 1
 	call_if 1, Route111_EventScript_1F0DC2
-	compare_var_to_value VAR_0x40CB, 2
+	compare VAR_0x40CB, 2
 	call_if 1, Route111_EventScript_1F0E40
 	call Route111_EventScript_1F0DE6
 	call Route111_EventScript_28CCC7
@@ -55,9 +55,9 @@ Route111_MapScript1_1F0D87: @ 81F0D87
 
 Route111_EventScript_1F0DC2:: @ 81F0DC2
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_1F0DDA
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F0DE0
 	return
 
@@ -71,15 +71,15 @@ Route111_EventScript_1F0DE0:: @ 81F0DE0
 
 Route111_EventScript_1F0DE6:: @ 81F0DE6
 	getplayerxy VAR_0x4000, VAR_0x4001
-	compare_var_to_value VAR_0x4001, 34
+	compare VAR_0x4001, 34
 	goto_if 0, Route111_EventScript_1F0E25
-	compare_var_to_value VAR_0x4001, 107
+	compare VAR_0x4001, 107
 	goto_if 2, Route111_EventScript_1F0E25
-	compare_var_to_value VAR_0x4001, 72
+	compare VAR_0x4001, 72
 	goto_if 2, Route111_EventScript_1F0E22
-	compare_var_to_value VAR_0x4000, 2000
+	compare VAR_0x4000, 2000
 	goto_if 2, Route111_EventScript_1F0E25
-	compare_var_to_value VAR_0x4000, 8
+	compare VAR_0x4000, 8
 	goto_if 0, Route111_EventScript_1F0E25
 
 Route111_EventScript_1F0E22:: @ 81F0E22
@@ -167,7 +167,7 @@ Route111_EventScript_1F0EB9:: @ 81F0EB9
 	goto_eq Route111_EventScript_1F0EF4
 	msgbox Route111_Text_2A6EBD, 4
 	giveitem_std ITEM_RAZZ_BERRY
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_272054
 	setflag FLAG_0x92C
 	special sub_8138B10
@@ -206,7 +206,7 @@ Route111_EventScript_1F0F22:: @ 81F0F22
 
 Route111_EventScript_1F0F2E:: @ 81F0F2E
 	checkitem ITEM_GO_GOGGLES, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_1F0F45
 	setvar VAR_0x4003, 1
 	releaseall
@@ -215,13 +215,13 @@ Route111_EventScript_1F0F2E:: @ 81F0F2E
 Route111_EventScript_1F0F45:: @ 81F0F45
 	msgbox gUnknown_08272C5F, 4
 	closemessage
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	call_if 1, Route111_EventScript_1F0F7C
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	call_if 1, Route111_EventScript_1F0F87
-	compare_var_to_value VAR_0x8004, 2
+	compare VAR_0x8004, 2
 	call_if 1, Route111_EventScript_1F0F92
-	compare_var_to_value VAR_0x8004, 3
+	compare VAR_0x8004, 3
 	call_if 1, Route111_EventScript_1F0F9D
 	releaseall
 	end
@@ -264,14 +264,14 @@ Route111_Movement_1F0FAE: @ 81F0FAE
 
 Route111_EventScript_1F0FB0:: @ 81F0FB0
 	setweather 2
-	fadenewbgm BGM_DOORO_X1
+	fadenewbgm MUS_DOORO_X1
 	doweather
 	setvar VAR_0x4003, 0
 	end
 
 Route111_EventScript_1F0FBD:: @ 81F0FBD
 	setweather 8
-	fadenewbgm BGM_ASHROAD
+	fadenewbgm MUS_ASHROAD
 	doweather
 	end
 
@@ -280,7 +280,7 @@ Route111_EventScript_1F0FC5:: @ 81F0FC5
 	faceplayer
 	setflag FLAG_0x8A3
 	msgbox Route111_Text_1F1475, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F0FE7
 	msgbox Route111_Text_1F14F5, 4
 	release
@@ -415,9 +415,9 @@ Route111_EventScript_1F1192:: @ 81F1192
 Route111_EventScript_1F119B:: @ 81F119B
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x40CB, 3
+	compare VAR_0x40CB, 3
 	goto_eq Route111_EventScript_1F11C6
-	compare_var_to_value VAR_0x40CB, 2
+	compare VAR_0x40CB, 2
 	goto_eq Route111_EventScript_1F11D0
 	checkflag FLAG_0x14E
 	goto_eq Route111_EventScript_1F11DA
@@ -474,7 +474,7 @@ Route111_EventScript_1F1249:: @ 81F1249
 Route111_EventScript_1F1260:: @ 81F1260
 	trainerbattle 2, TRAINER_DUSTY_1, 0, Route111_Text_298B08, Route111_Text_298B53, Route111_EventScript_1F128C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F12AB
 	msgbox Route111_Text_298B9A, 4
 	release
@@ -514,7 +514,7 @@ Route111_EventScript_1F12F0:: @ 81F12F0
 Route111_EventScript_1F1307:: @ 81F1307
 	trainerbattle 2, TRAINER_WILTON_1, 0, Route111_Text_298F79, Route111_Text_298FA9, Route111_EventScript_1F1333
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F1352
 	msgbox Route111_Text_298FD4, 4
 	release
@@ -539,7 +539,7 @@ Route111_EventScript_1F1352:: @ 81F1352
 Route111_EventScript_1F1369:: @ 81F1369
 	trainerbattle 2, TRAINER_BROOKE_1, 0, Route111_Text_299143, Route111_Text_299193, Route111_EventScript_1F1395
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F13B4
 	msgbox Route111_Text_2991C2, 4
 	release

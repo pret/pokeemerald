@@ -5,7 +5,7 @@ MirageTower_4F_EventScript_23AD48:: @ 823AD48
 	lock
 	faceplayer
 	msgbox MirageTower_4F_Text_23ADF9, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MirageTower_4F_EventScript_23AD7F
 	giveitem_std ITEM_ROOT_FOSSIL
 	closemessage
@@ -26,7 +26,7 @@ MirageTower_4F_EventScript_23AD89:: @ 823AD89
 	lock
 	faceplayer
 	msgbox MirageTower_4F_Text_23AE98, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MirageTower_4F_EventScript_23ADC0
 	giveitem_std ITEM_CLAW_FOSSIL
 	closemessage

@@ -3,7 +3,7 @@ SlateportCity_Mart: @ 8483248
 	.4byte SlateportCity_Mart_MapEvents
 	.4byte SlateportCity_Mart_MapScripts
 	.4byte 0x0
-	.2byte BGM_FRIENDLY
+	.2byte MUS_FRIENDLY
 	.2byte 63
 	.byte 8
 	.byte 0

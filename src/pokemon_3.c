@@ -21,6 +21,7 @@
 #include "constants/abilities.h"
 #include "pokemon_animation.h"
 #include "pokedex.h"
+#include "pokeblock.h"
 
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
@@ -58,7 +59,6 @@ extern const u8 gText_PkmnsXPreventsSwitching[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
-extern const s8 gPokeblockFlavorCompatibilityTable[];
 extern const u8 gMonAnimationDelayTable[];
 extern const u8 gMonFrontAnimIdsTable[];
 
@@ -1145,11 +1145,11 @@ void ClearBattleMonForms(void)
 u16 GetBattleBGM(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
-        return BGM_BATTLE34;
+        return MUS_BATTLE34;
     if (gBattleTypeFlags & BATTLE_TYPE_REGI)
-        return BGM_BATTLE36;
+        return MUS_BATTLE36;
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
-        return BGM_BATTLE20;
+        return MUS_BATTLE20;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         u8 trainerClass;
@@ -1165,24 +1165,24 @@ u16 GetBattleBGM(void)
         {
         case TRAINER_CLASS_AQUA_LEADER:
         case TRAINER_CLASS_MAGMA_LEADER:
-            return BGM_BATTLE30;
+            return MUS_BATTLE30;
         case TRAINER_CLASS_TEAM_AQUA:
         case TRAINER_CLASS_TEAM_MAGMA:
         case TRAINER_CLASS_AQUA_ADMIN:
         case TRAINER_CLASS_MAGMA_ADMIN:
-            return BGM_BATTLE31;
+            return MUS_BATTLE31;
         case TRAINER_CLASS_LEADER:
-            return BGM_BATTLE32;
+            return MUS_BATTLE32;
         case TRAINER_CLASS_CHAMPION:
-            return BGM_BATTLE33;
+            return MUS_BATTLE33;
         case TRAINER_CLASS_PKMN_TRAINER_3:
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-                return BGM_BATTLE35;
+                return MUS_BATTLE35;
             if (!StringCompare(gTrainers[gTrainerBattleOpponent_A].trainerName, gText_BattleWallyName))
-                return BGM_BATTLE20;
-            return BGM_BATTLE35;
+                return MUS_BATTLE20;
+            return MUS_BATTLE35;
         case TRAINER_CLASS_ELITE_FOUR:
-            return BGM_BATTLE38;
+            return MUS_BATTLE38;
         case TRAINER_CLASS_SALON_MAIDEN:
         case TRAINER_CLASS_DOME_ACE:
         case TRAINER_CLASS_PALACE_MAVEN:
@@ -1190,12 +1190,12 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_FACTORY_HEAD:
         case TRAINER_CLASS_PIKE_QUEEN:
         case TRAINER_CLASS_PYRAMID_KING:
-            return BGM_BATTLE_FRONTIER_BRAIN;
+            return MUS_VS_FRONT;
         default:
-            return BGM_BATTLE20;
+            return MUS_BATTLE20;
         }
     }
-    return BGM_BATTLE27;
+    return MUS_BATTLE27;
 }
 
 void PlayBattleBGM(void)
@@ -1298,21 +1298,21 @@ bool8 IsPokeSpriteNotFlipped(u16 species)
     return gBaseStats[species].noFlip;
 }
 
-s8 GetMonFlavorRelation(struct Pokemon *mon, u8 a2)
+s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
 {
     u8 nature = GetNature(mon);
-    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + flavor];
 }
 
-s8 GetFlavorRelationByPersonality(u32 personality, u8 a2)
+s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
 {
     u8 nature = GetNatureFromPersonality(personality);
-    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + flavor];
 }
 
 bool8 IsTradedMon(struct Pokemon *mon)
 {
-    u8 otName[8];
+    u8 otName[OT_NAME_LENGTH + 1];
     u32 otId;
     GetMonData(mon, MON_DATA_OT_NAME, otName);
     otId = GetMonData(mon, MON_DATA_OT_ID, 0);

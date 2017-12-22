@@ -1066,7 +1066,7 @@ sub_81D6FD0: @ 81D6FD0
 	thumb_func_start sub_81D6FE0
 sub_81D6FE0: @ 81D6FE0
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0862A888
@@ -1088,7 +1088,7 @@ sub_81D6FE0: @ 81D6FE0
 	adds r1, r0
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -2758,7 +2758,7 @@ _081D7E08:
 	thumb_func_start sub_81D7E10
 sub_81D7E10: @ 81D7E10
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0862AA54
@@ -2780,7 +2780,7 @@ sub_81D7E10: @ 81D7E10
 	adds r1, r0
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -3292,7 +3292,7 @@ _081D829A:
 	thumb_func_start sub_81D82B0
 sub_81D82B0: @ 81D82B0
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0862AACC
@@ -3319,7 +3319,7 @@ sub_81D82B0: @ 81D82B0
 	adds r1, r0
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -3899,7 +3899,7 @@ _081D8818:
 	thumb_func_start sub_81D8828
 sub_81D8828: @ 81D8828
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0862AB44
@@ -3926,7 +3926,7 @@ sub_81D8828: @ 81D8828
 	adds r1, r0
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -4354,7 +4354,7 @@ _081D8C26:
 	thumb_func_start sub_81D8C38
 sub_81D8C38: @ 81D8C38
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0862AD08
@@ -4376,7 +4376,7 @@ sub_81D8C38: @ 81D8C38
 	adds r1, r0
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1

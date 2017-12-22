@@ -125,7 +125,7 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_2198EA:: @ 82198EA
 	applymovement 1, LilycoveCity_LilycoveMuseum_2F_Movement_27259E
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_219EC5, 4
 	givedecoration_std 44
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_LilycoveMuseum_2F_EventScript_219911
 	setflag FLAG_0x0EC
 	closemessage

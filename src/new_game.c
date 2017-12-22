@@ -33,7 +33,6 @@ extern void Overworld_SetWarpDestination(s8 mapBank, s8 mapNo, s8 warpNo, s8 xPo
 extern void warp_in(void);
 extern void sub_80BB358(void);
 extern void ResetBagScrollPositions(void);
-extern void sub_813624C(void); // clears something pokeblock related
 extern void ResetPokedex(void);
 extern void sub_8084400(void);
 extern void ClearMailData(void);
@@ -148,7 +147,7 @@ void sub_808447C(void)
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetBagScrollPositions();
-    sub_813624C();
+    ResetPokeblockScrollPositions();
 }
 
 void NewGameInitData(void)

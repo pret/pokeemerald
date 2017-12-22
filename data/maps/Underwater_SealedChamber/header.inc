@@ -3,7 +3,7 @@ Underwater_SealedChamber: @ 8484668
 	.4byte Underwater_SealedChamber_MapEvents
 	.4byte Underwater_SealedChamber_MapScripts
 	.4byte 0x0
-	.2byte BGM_DEEPDEEP
+	.2byte MUS_DEEPDEEP
 	.2byte 283
 	.byte 79
 	.byte 0

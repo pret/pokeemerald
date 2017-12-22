@@ -6,7 +6,7 @@ Route110_TrickHouseEnd_MapScripts:: @ 826ACAF
 	.byte 0
 
 Route110_TrickHouseEnd_MapScript1_26ACC4: @ 826ACC4
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AD0D
 	end
 
@@ -61,7 +61,7 @@ Route110_TrickHouseEnd_EventScript_26AD84:: @ 826AD84
 	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_RARE_CANDY
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
 	closemessage
@@ -74,7 +74,7 @@ Route110_TrickHouseEnd_EventScript_26ADC0:: @ 826ADC0
 	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_TIMER_BALL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
 	closemessage
@@ -87,7 +87,7 @@ Route110_TrickHouseEnd_EventScript_26ADFC:: @ 826ADFC
 	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_HARD_STONE
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
 	closemessage
@@ -100,7 +100,7 @@ Route110_TrickHouseEnd_EventScript_26AE38:: @ 826AE38
 	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_SMOKE_BALL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
 	closemessage
@@ -113,7 +113,7 @@ Route110_TrickHouseEnd_EventScript_26AE74:: @ 826AE74
 	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_TM12
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
 	closemessage
@@ -126,7 +126,7 @@ Route110_TrickHouseEnd_EventScript_26AEB0:: @ 826AEB0
 	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_MAGNET
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
 	closemessage
@@ -139,7 +139,7 @@ Route110_TrickHouseEnd_EventScript_26AEEC:: @ 826AEEC
 	msgbox Route110_TrickHouseEnd_Text_26B73D, 4
 	setvar VAR_0x40C1, 0
 	giveitem_std ITEM_PP_MAX
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26AFEF
 	msgbox Route110_TrickHouseEnd_Text_26B7EF, 4
 	closemessage
@@ -150,13 +150,13 @@ Route110_TrickHouseEnd_EventScript_26AEEC:: @ 826AEEC
 Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	msgbox Route110_TrickHouseEnd_Text_26B3AB, 4
 	closemessage
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, Route110_TrickHouseEnd_EventScript_26B015
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, Route110_TrickHouseEnd_EventScript_26B020
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, Route110_TrickHouseEnd_EventScript_26B02B
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, Route110_TrickHouseEnd_EventScript_26B036
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_26B3FA, 4
@@ -167,7 +167,7 @@ Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	msgbox Route110_TrickHouseEnd_Text_26B485, 4
 	setvar VAR_0x40C1, 0
 	call Route110_TrickHouseEnd_EventScript_26AFA5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route110_TrickHouseEnd_EventScript_26B002
 	msgbox Route110_TrickHouseEnd_Text_26B69A, 4
 	call Route110_TrickHouseEnd_EventScript_26AFCF

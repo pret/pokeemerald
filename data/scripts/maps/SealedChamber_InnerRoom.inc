@@ -9,7 +9,7 @@ SealedChamber_InnerRoom_EventScript_2391F8:: @ 82391F8
 	checkflag FLAG_0x0E4
 	goto_eq SealedChamber_InnerRoom_EventScript_239253
 	specialvar VAR_RESULT, CheckRelicanthWailord
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SealedChamber_InnerRoom_EventScript_239253
 	fadeoutbgm 0
 	playse SE_TRACK_MOVE

@@ -11,12 +11,12 @@ Route110_MapScript1_1EF279: @ 81EF279
 Route110_MapScript1_1EF27D: @ 81EF27D
 	call Route110_EventScript_271ED7
 	call Route110_EventScript_271EFB
-	compare_var_to_value VAR_0x40A9, 1
+	compare VAR_0x40A9, 1
 	call_if 1, Route110_EventScript_1EF293
 	end
 
 Route110_EventScript_1EF293:: @ 81EF293
-	savebgm BGM_CYCLING
+	savebgm MUS_CYCLING
 	return
 
 Route110_MapScript2_1EF297: @ 81EF297
@@ -131,7 +131,7 @@ Route110_EventScript_1EF389:: @ 81EF389
 Route110_EventScript_1EF392:: @ 81EF392
 	lockall
 	specialvar VAR_RESULT, sub_8137EFC
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route110_EventScript_1EF3AD
 	msgbox Route110_Text_1F0A1E, 4
 	releaseall
@@ -146,9 +146,9 @@ Route110_EventScript_1EF3B7:: @ 81EF3B7
 	lock
 	faceplayer
 	specialvar VAR_RESULT, sp0E3_walkrun_bitfield_interpretation
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route110_EventScript_1EF3E8
-	compare_var_to_value VAR_0x40A9, 0
+	compare VAR_0x40A9, 0
 	goto_eq Route110_EventScript_1EF3DE
 	msgbox Route110_Text_1F06FB, 4
 	release
@@ -177,7 +177,7 @@ Route110_EventScript_1EF409:: @ 81EF409
 Route110_EventScript_1EF420:: @ 81EF420
 	trainerbattle 2, TRAINER_EDWIN_1, 0, Route110_Text_29815E, Route110_Text_29818F, Route110_EventScript_1EF44C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route110_EventScript_1EF46B
 	msgbox Route110_Text_2981B3, 4
 	release
@@ -217,7 +217,7 @@ Route110_EventScript_1EF4B0:: @ 81EF4B0
 Route110_EventScript_1EF4C7:: @ 81EF4C7
 	trainerbattle 2, TRAINER_BENJAMIN_1, 0, Route110_Text_297C63, Route110_Text_297C8A, Route110_EventScript_1EF4F3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route110_EventScript_1EF512
 	msgbox Route110_Text_297CB4, 4
 	release
@@ -247,7 +247,7 @@ Route110_EventScript_1EF529:: @ 81EF529
 Route110_EventScript_1EF540:: @ 81EF540
 	trainerbattle 2, TRAINER_ABIGAIL_1, 0, Route110_Text_297DFA, Route110_Text_297E69, Route110_EventScript_1EF56C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route110_EventScript_1EF58B
 	msgbox Route110_Text_297E88, 4
 	release
@@ -272,7 +272,7 @@ Route110_EventScript_1EF58B:: @ 81EF58B
 Route110_EventScript_1EF5A2:: @ 81EF5A2
 	trainerbattle 2, TRAINER_ISABEL_1, 0, Route110_Text_298349, Route110_Text_298389, Route110_EventScript_1EF5CE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route110_EventScript_1EF5ED
 	msgbox Route110_Text_2983A2, 4
 	release
@@ -369,7 +369,7 @@ Route110_EventScript_1EF735:: @ 81EF735
 
 Route110_EventScript_1EF743:: @ 81EF743
 	setvar VAR_0x40A9, 3
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	return
 
@@ -391,9 +391,9 @@ Route110_EventScript_1EF763:: @ 81EF763
 Route110_EventScript_1EF76E:: @ 81EF76E
 	lockall
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route110_EventScript_1EF7E1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, Route110_EventScript_1EF7E6
 	applymovement 28, Route110_Movement_2725AA
 	waitmovement 0
@@ -402,26 +402,26 @@ Route110_EventScript_1EF76E:: @ 81EF76E
 	applymovement 28, Route110_Movement_27259A
 	waitmovement 0
 	delay 30
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, Route110_EventScript_1EF94E
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, Route110_EventScript_1EF959
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, Route110_EventScript_1EF964
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route110_EventScript_1EF7EB
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route110_EventScript_1EF865
 	releaseall
 	end
 
 Route110_EventScript_1EF7E1:: @ 81EF7E1
-	playbgm BGM_GIRL_SUP, 1
+	playbgm MUS_GIRL_SUP, 1
 	return
 
 Route110_EventScript_1EF7E6:: @ 81EF7E6
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	return
 
 Route110_EventScript_1EF7EB:: @ 81EF7EB
@@ -490,26 +490,26 @@ Route110_EventScript_1EF8DF:: @ 81EF8DF
 
 Route110_EventScript_1EF8EC:: @ 81EF8EC
 	closemessage
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, Route110_EventScript_1EF990
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, Route110_EventScript_1EF998
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, Route110_EventScript_1EF9A0
 	setobjectmovementtype 28, 10
 	setobjectmovementtype 29, 10
 	removeobject 28
 	addobject 29
 	delay 45
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, Route110_EventScript_1EF96F
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, Route110_EventScript_1EF97A
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, Route110_EventScript_1EF985
 	removeobject 29
 	setvar VAR_0x4069, 1
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
 	end
@@ -632,13 +632,13 @@ Route110_EventScript_1EF9F7:: @ 81EF9F7
 	waitmovement 0
 	applymovement 36, Route110_Movement_27259A
 	waitmovement 0
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, Route110_EventScript_1EFAD8
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, Route110_EventScript_1EFAE3
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, Route110_EventScript_1EFAEE
-	compare_var_to_value VAR_0x8008, 4
+	compare VAR_0x8008, 4
 	call_if 1, Route110_EventScript_1EFAF9
 	msgbox Route110_Text_1F0AB5, 4
 	closemessage
@@ -655,7 +655,7 @@ Route110_EventScript_1EF9F7:: @ 81EF9F7
 	msgbox Route110_Text_1F0AFF, 4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox Route110_Text_1F0C0C, 4
 	waitfanfare
 	closemessage
@@ -663,13 +663,13 @@ Route110_EventScript_1EF9F7:: @ 81EF9F7
 	setflag FLAG_0x119
 	msgbox Route110_Text_1F0C33, 4
 	closemessage
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, Route110_EventScript_1EFB04
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, Route110_EventScript_1EFB0F
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, Route110_EventScript_1EFB1A
-	compare_var_to_value VAR_0x8008, 4
+	compare VAR_0x8008, 4
 	call_if 1, Route110_EventScript_1EFB25
 	removeobject 36
 	setvar VAR_0x40DA, 2

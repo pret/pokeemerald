@@ -3,7 +3,7 @@ SecretBase_RedCave1: @ 8484A90
 	.4byte SecretBase_RedCave1_MapEvents
 	.4byte SecretBase_RedCave1_MapScripts
 	.4byte 0x0
-	.2byte BGM_MACHI_S3
+	.2byte MUS_MACHI_S3
 	.2byte 197
 	.byte 86
 	.byte 0

@@ -3,7 +3,7 @@ NavelRock_Down11: @ 8485AA4
 	.4byte NavelRock_Down11_MapEvents
 	.4byte NavelRock_Down11_MapScripts
 	.4byte 0x0
-	.2byte BGM_FRLG_MT_EMBER
+	.2byte MUS_RG_NANADUNGEON
 	.2byte 425
 	.byte 211
 	.byte 0

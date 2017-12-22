@@ -11,15 +11,15 @@ SkyPillar_Top_MapScript1_2396C8: @ 82396C8
 
 SkyPillar_Top_EventScript_2396D2:: @ 82396D2
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, SkyPillar_Top_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
 
 SkyPillar_Top_MapScript1_2396E6: @ 82396E6
-	compare_var_to_value VAR_0x40CA, 2
+	compare VAR_0x40CA, 2
 	call_if 0, SkyPillar_Top_EventScript_2396FD
-	compare_var_to_value VAR_0x40CA, 2
+	compare VAR_0x40CA, 2
 	call_if 4, SkyPillar_Top_EventScript_239705
 	end
 
@@ -57,11 +57,11 @@ SkyPillar_Top_EventScript_239722:: @ 8239722
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SkyPillar_Top_EventScript_239768
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq SkyPillar_Top_EventScript_239771
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq SkyPillar_Top_EventScript_239771
 	setflag FLAG_0x1C0
 	releaseall

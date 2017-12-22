@@ -16,19 +16,19 @@ LilycoveCity_MoveDeletersHouse_EventScript_21EA3B:: @ 821EA3B
 	msgbox LilycoveCity_MoveDeletersHouse_Text_21EB65, 4
 	special sub_81B94B0
 	waitstate
-	compare_var_to_value VAR_0x8004, 255
+	compare VAR_0x8004, 255
 	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EAE6
 	special sub_81B98DC
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EADC
 	special sub_81B96D0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EACF
 	msgbox LilycoveCity_MoveDeletersHouse_Text_21EB89, 4
 	fadescreen 1
 	special sub_81B968C
 	fadescreen 0
-	compare_var_to_value VAR_0x8005, 4
+	compare VAR_0x8005, 4
 	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EA3B
 	special sub_81B9718
 	msgbox LilycoveCity_MoveDeletersHouse_Text_21EBDA, 5
@@ -40,10 +40,10 @@ LilycoveCity_MoveDeletersHouse_EventScript_21EA3B:: @ 821EA3B
 
 LilycoveCity_MoveDeletersHouse_EventScript_21EAB0:: @ 821EAB0
 	special sub_81B9918
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EAF0
 	special sub_81B9770
-	playfanfare BGM_ME_WASURE
+	playfanfare MUS_ME_WASURE
 	waitfanfare
 	msgbox LilycoveCity_MoveDeletersHouse_Text_21EC06, 4
 	releaseall

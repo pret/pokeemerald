@@ -13,7 +13,7 @@ EverGrandeCity_SidneysRoom_MapScript1_227F16: @ 8227F16
 EverGrandeCity_SidneysRoom_MapScript1_227F1D: @ 8227F1D
 	checkflag FLAG_0x4FB
 	call_if 1, EverGrandeCity_SidneysRoom_EventScript_227F32
-	compare_var_to_value VAR_0x409C, 1
+	compare VAR_0x409C, 1
 	call_if 1, EverGrandeCity_SidneysRoom_EventScript_227F38
 	end
 
@@ -50,7 +50,7 @@ EverGrandeCity_SidneysRoom_EventScript_227F64:: @ 8227F64
 	faceplayer
 	checkflag FLAG_0x4FB
 	goto_eq EverGrandeCity_SidneysRoom_EventScript_227F8B
-	playbgm BGM_SITENNOU, 0
+	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_SidneysRoom_Text_227FA7, 4
 	trainerbattle 3, TRAINER_SIDNEY, 0, EverGrandeCity_SidneysRoom_Text_2280A2
 	goto EverGrandeCity_SidneysRoom_EventScript_227F95

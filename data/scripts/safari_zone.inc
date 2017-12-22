@@ -14,7 +14,7 @@ EventScript_2A4B5D:: @ 82A4B5D
 EventScript_2A4B6F:: @ 82A4B6F
 	lockall
 	msgbox Text_2A4BF4, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_2A4B85
 	releaseall
 	end
@@ -43,19 +43,19 @@ EventScript_2A4B9B:: @ 82A4B9B
 EventScript_2A4BAC:: @ 82A4BAC
 	lockall
 	special GetPokeblockFeederInFront
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_if 5, EventScript_2A4BEB
 	msgbox Text_2A4C90, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_2A4BD0
 	releaseall
 	end
 
 EventScript_2A4BD0:: @ 82A4BD0
 	fadescreen 1
-	special sub_8135908
+	special OpenPokeblockCaseOnFeeder
 	waitstate
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_if 5, EventScript_2A4BE2
 	end
 

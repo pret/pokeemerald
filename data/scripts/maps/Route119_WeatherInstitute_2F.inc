@@ -3,9 +3,9 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 826FF1E
 	.byte 0
 
 Route119_WeatherInstitute_2F_MapScript1_26FF24: @ 826FF24
-	compare_var_to_value VAR_0x40B3, 0
+	compare VAR_0x40B3, 0
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF44
-	compare_var_to_value VAR_0x40B3, 1
+	compare VAR_0x40B3, 1
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF50
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_26FF5C
@@ -86,9 +86,9 @@ Route119_WeatherInstitute_2F_EventScript_27004D:: @ 827004D
 	msgbox Route119_WeatherInstitute_2F_Text_270650, 4
 	setvar VAR_0x4001, 385
 	givemon SPECIES_CASTFORM, 25, ITEM_MYSTIC_WATER, 0x0, 0x0, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route119_WeatherInstitute_2F_EventScript_270085
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route119_WeatherInstitute_2F_EventScript_2700AD
 	goto Route119_WeatherInstitute_2F_EventScript_273811
 	end
@@ -96,7 +96,7 @@ Route119_WeatherInstitute_2F_EventScript_27004D:: @ 827004D
 Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 	call Route119_WeatherInstitute_2F_EventScript_2700DB
 	msgbox gUnknown_08273374, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route119_WeatherInstitute_2F_EventScript_2700EA
 	call Route119_WeatherInstitute_2F_EventScript_27378B
 	call Route119_WeatherInstitute_2F_EventScript_2723DD
@@ -106,7 +106,7 @@ Route119_WeatherInstitute_2F_EventScript_270085:: @ 8270085
 Route119_WeatherInstitute_2F_EventScript_2700AD:: @ 82700AD
 	call Route119_WeatherInstitute_2F_EventScript_2700DB
 	msgbox gUnknown_08273374, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route119_WeatherInstitute_2F_EventScript_2700D0
 	call Route119_WeatherInstitute_2F_EventScript_273797
 	goto Route119_WeatherInstitute_2F_EventScript_2700D0
@@ -118,7 +118,7 @@ Route119_WeatherInstitute_2F_EventScript_2700D0:: @ 82700D0
 	end
 
 Route119_WeatherInstitute_2F_EventScript_2700DB:: @ 82700DB
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message Route119_WeatherInstitute_2F_Text_2706E8
 	waitmessage
 	waitfanfare
@@ -144,12 +144,12 @@ Route119_WeatherInstitute_2F_EventScript_27010A:: @ 827010A
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_270160
 	checkflag FLAG_0x1BF
 	call_if 1, Route119_WeatherInstitute_2F_EventScript_270160
-	compare_var_to_value VAR_0x8004, 2
+	compare VAR_0x8004, 2
 	goto_eq Route119_WeatherInstitute_2F_EventScript_270166
 	checkflag FLAG_0x002
 	call_if 0, Route119_WeatherInstitute_2F_EventScript_270159
 	specialvar VAR_RESULT, sub_813B374
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route119_WeatherInstitute_2F_EventScript_27014F
 	msgbox Route119_WeatherInstitute_2F_Text_2707F1, 4
 	release

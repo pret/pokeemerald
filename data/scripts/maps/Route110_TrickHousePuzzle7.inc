@@ -73,7 +73,7 @@ Route110_TrickHousePuzzle7_EventScript_26E185:: @ 826E185
 	return
 
 Route110_TrickHousePuzzle7_MapScript1_26E198: @ 826E198
-	compare_var_to_value VAR_0x40B6, 1
+	compare VAR_0x40B6, 1
 	goto_eq Route110_TrickHousePuzzle7_EventScript_26E1B3
 	clearflag FLAG_0x0C2
 	clearflag FLAG_0x0C3
@@ -86,7 +86,7 @@ Route110_TrickHousePuzzle7_EventScript_26E1B3:: @ 826E1B3
 	end
 
 Route110_TrickHousePuzzle7_MapScript1_26E1B4: @ 826E1B4
-	compare_var_to_value VAR_0x40B6, 1
+	compare VAR_0x40B6, 1
 	call_if 1, Route110_TrickHousePuzzle7_EventScript_26E0AC
 	end
 
@@ -100,7 +100,7 @@ Route110_TrickHousePuzzle7_EventScript_26E1CA:: @ 826E1CA
 
 Route110_TrickHousePuzzle7_EventScript_26E1D0:: @ 826E1D0
 	lockall
-	compare_var_to_value VAR_0x40B1, 0
+	compare VAR_0x40B1, 0
 	goto_eq Route110_TrickHousePuzzle7_EventScript_26E1E2
 	goto Route110_TrickHousePuzzle7_EventScript_26A3DB
 	end
