@@ -132,6 +132,7 @@ SECTIONS {
         asm/trainer_card.o(.text);
         src/pokemon_storage_system.o(.text);
         asm/pokemon_storage_system.o(.text);
+        src/pokemon_icon.o(.text);
         asm/pokemon_icon.o(.text);
         asm/script_movement.o(.text);
         asm/fldeff_cut.o(.text);
@@ -391,7 +392,7 @@ SECTIONS {
         data/pokedex.o(.rodata);
         data/trainer_card.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
-        data/pokemon_icon.o(.rodata);
+        src/pokemon_icon.o(.rodata);
         data/fldeff_cut.o(.rodata);
         data/map_name_popup.o(.rodata);
         data/item_menu_icons.o(.rodata);
