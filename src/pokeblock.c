@@ -22,7 +22,7 @@
 #include "item.h"
 #include "constants/items.h"
 #include "string_util.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "berry.h"
 #include "menu_indicators.h"
