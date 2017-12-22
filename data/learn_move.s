@@ -2,6 +2,8 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
+gUnknown_085CEA18:: @ 85CEA18
+	.incbin "baserom.gba", 0x5ceA18, 0x198
 
 gUnknown_085CEBB0:: @ 85CEBB0
 	.incbin "baserom.gba", 0x5cebb0, 0x8
