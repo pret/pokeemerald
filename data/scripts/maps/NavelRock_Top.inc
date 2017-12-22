@@ -30,7 +30,7 @@ NavelRock_Top_MapScript1_269151: @ 8269151
 
 NavelRock_Top_EventScript_26915B:: @ 826915B
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, NavelRock_Top_EventScript_27374E
 	removeobject 1
 	return
@@ -65,16 +65,16 @@ NavelRock_Top_EventScript_26916F:: @ 826916F
 	setvar VAR_0x8006, 0
 	special DoScriptedWildBattle
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0934
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_LAST_TALKED, 1
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq NavelRock_Top_EventScript_269217
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq NavelRock_Top_EventScript_269225
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq NavelRock_Top_EventScript_269225
 	setflag FLAG_0x092
 	releaseall

@@ -17,29 +17,29 @@ BattleFrontier_Lounge2_EventScript_26065F:: @ 826065F
 	end
 
 BattleFrontier_Lounge2_EventScript_26066D:: @ 826066D
-	compare_var_to_value VAR_0x402F, 0
+	compare VAR_FRONTIER_MANIAC_FACILITY, 0
 	call_if 1, BattleFrontier_Lounge2_EventScript_26070A
-	compare_var_to_value VAR_0x402F, 1
+	compare VAR_FRONTIER_MANIAC_FACILITY, 1
 	call_if 1, BattleFrontier_Lounge2_EventScript_26070F
-	compare_var_to_value VAR_0x402F, 2
+	compare VAR_FRONTIER_MANIAC_FACILITY, 2
 	call_if 1, BattleFrontier_Lounge2_EventScript_260714
-	compare_var_to_value VAR_0x402F, 3
+	compare VAR_FRONTIER_MANIAC_FACILITY, 3
 	call_if 1, BattleFrontier_Lounge2_EventScript_260719
-	compare_var_to_value VAR_0x402F, 4
+	compare VAR_FRONTIER_MANIAC_FACILITY, 4
 	call_if 1, BattleFrontier_Lounge2_EventScript_26071E
-	compare_var_to_value VAR_0x402F, 5
+	compare VAR_FRONTIER_MANIAC_FACILITY, 5
 	call_if 1, BattleFrontier_Lounge2_EventScript_260723
-	compare_var_to_value VAR_0x402F, 6
+	compare VAR_FRONTIER_MANIAC_FACILITY, 6
 	call_if 1, BattleFrontier_Lounge2_EventScript_260728
-	compare_var_to_value VAR_0x402F, 7
+	compare VAR_FRONTIER_MANIAC_FACILITY, 7
 	call_if 1, BattleFrontier_Lounge2_EventScript_26072D
-	compare_var_to_value VAR_0x402F, 8
+	compare VAR_FRONTIER_MANIAC_FACILITY, 8
 	call_if 1, BattleFrontier_Lounge2_EventScript_260732
-	compare_var_to_value VAR_0x402F, 9
+	compare VAR_FRONTIER_MANIAC_FACILITY, 9
 	call_if 1, BattleFrontier_Lounge2_EventScript_260737
-	compare_var_to_value VAR_0x402F, 3
+	compare VAR_FRONTIER_MANIAC_FACILITY, 3
 	call_if 3, BattleFrontier_Lounge2_EventScript_2606F8
-	compare_var_to_value VAR_0x402F, 4
+	compare VAR_FRONTIER_MANIAC_FACILITY, 4
 	call_if 4, BattleFrontier_Lounge2_EventScript_260701
 	special sub_8139F20
 	waitmessage

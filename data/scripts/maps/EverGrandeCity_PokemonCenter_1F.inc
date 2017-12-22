@@ -36,11 +36,11 @@ EverGrandeCity_PokemonCenter_1F_EventScript_229A79:: @ 8229A79
 	faceplayer
 	msgbox EverGrandeCity_PokemonCenter_1F_Text_229BF1, 4
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, EverGrandeCity_PokemonCenter_1F_EventScript_229AB6
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, EverGrandeCity_PokemonCenter_1F_EventScript_229AC1
 	addvar VAR_0x40D1, 1
 	setflag FLAG_0x1CF

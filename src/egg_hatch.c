@@ -48,9 +48,9 @@ extern struct SpriteTemplate gUnknown_0202499C;
 extern void (*gFieldCallback)(void);
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-extern const u8 gUnknown_08C00000[];
-extern const u8 gUnknown_08C00524[];
-extern const u8 gUnknown_08C004E0[];
+extern const u8 gBattleTextboxTiles[];
+extern const u8 gBattleTextboxTilemap[];
+extern const u8 gBattleTextboxPalette[];
 extern const u16 gUnknown_08DD7300[]; // palette, gameboy advance
 extern const u32 gUnknown_08DD7360[]; // tileset gameboy advance
 extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
@@ -58,7 +58,7 @@ extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];
 
 extern u8 sav1_map_get_name(void);
-extern s8 sub_8198C58(void);
+extern s8 ProcessMenuInputNoWrap_(void);
 extern void TVShowConvertInternationalString(u8* str1, u8* str2, u8);
 extern void sub_806A068(u16, u8);
 extern void fade_screen(u8, u8);
@@ -91,7 +91,7 @@ static void CreateRandomEggShardSprite(void);
 static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8 spriteAnimIndex);
 
 // IWRAM bss
-static IWRAM_DATA struct EggHatchData* sEggHatchData;
+static IWRAM_DATA struct EggHatchData *sEggHatchData;
 
 // rom data
 static const u16 sEggPalette[] = INCBIN_U16("graphics/pokemon/palettes/egg_palette.gbapal");
@@ -522,9 +522,9 @@ static void CB2_EggHatch_0(void)
         gMain.state++;
         break;
     case 2:
-        copy_decompressed_tile_data_to_vram_autofree(0, gUnknown_08C00000, 0, 0, 0);
-        CopyToBgTilemapBuffer(0, gUnknown_08C00524, 0, 0);
-        LoadCompressedPalette(gUnknown_08C004E0, 0, 0x20);
+        copy_decompressed_tile_data_to_vram_autofree(0, gBattleTextboxTiles, 0, 0, 0);
+        CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
+        LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
         gMain.state++;
         break;
     case 3:
@@ -669,7 +669,7 @@ static void CB2_EggHatch_1(void)
         }
         break;
     case 10:
-        switch (sub_8198C58())
+        switch (ProcessMenuInputNoWrap_())
         {
         case 0:
             GetMonNick(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar3);

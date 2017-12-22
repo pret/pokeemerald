@@ -98,7 +98,7 @@ _081B0234:
 	.4byte _081B0474
 _081B0290:
 	bl SetVBlankHBlankCallbacksToNull
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	bl clear_scheduled_bg_copies_to_vram
 	ldr r1, =gMain
 	movs r0, 0x87
@@ -429,7 +429,7 @@ sub_81B0550: @ 81B0550
 	ldr r1, [r5]
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r1, 0x82
@@ -2554,7 +2554,7 @@ sub_81B1708: @ 81B1708
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3161,7 +3161,7 @@ sub_81B1B8C: @ 81B1B8C
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	movs r0, 0x6
-	bl sub_8121F20
+	bl RunTextPrintersRetIsActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -3402,14 +3402,14 @@ sub_81B1DB8: @ 81B1DB8
 	lsrs r4, r5, 16
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081B1DE2
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_80D4420
+	bl GiveMailToMon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -4010,7 +4010,7 @@ sub_81B227C: @ 81B227C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -6216,7 +6216,7 @@ _081B34D2:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B3508
@@ -7791,7 +7791,7 @@ _081B425A:
 	.pool
 _081B4278:
 	ldrh r0, [r6]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B42A4
@@ -7952,7 +7952,7 @@ sub_81B43DC: @ 81B43DC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -7999,7 +7999,7 @@ _081B4402:
 	.pool
 _081B4458:
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B4498
@@ -8485,7 +8485,7 @@ sub_81B48DC: @ 81B48DC
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r4, r1, r0
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -8681,7 +8681,7 @@ sub_81B4A98: @ 81B4A98
 	adds r0, r1
 	ldr r1, =sub_81B4AE0
 	movs r2, 0x1
-	bl sub_8121478
+	bl ReadMail
 	pop {r0}
 	bx r0
 	.pool
@@ -8777,7 +8777,7 @@ sub_81B4BA0: @ 81B4BA0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -8801,7 +8801,7 @@ _081B4BC6:
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	bl sub_80D4700
+	bl TakeMailFromMon2
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -8883,7 +8883,7 @@ sub_81B4C94: @ 81B4C94
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -9691,7 +9691,7 @@ sub_81B5430: @ 81B5430
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -9985,7 +9985,7 @@ sub_81B56D8: @ 81B56D8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10735,7 +10735,7 @@ sub_81B5CB0: @ 81B5CB0
 	b _081B5D24
 	.pool
 _081B5CD8:
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B5CFC
@@ -10821,7 +10821,7 @@ _081B5D68:
 	adds r0, r7, r5
 	ldrb r4, [r0]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -10853,7 +10853,7 @@ _081B5DAC:
 	adds r0, r5, r7
 	ldrb r4, [r0, 0x6]
 	adds r0, r1, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12970,7 +12970,7 @@ sub_81B7028: @ 81B7028
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -13272,7 +13272,7 @@ sub_81B72C8: @ 81B72C8
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r4, r1, r0
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r5, r0, 24
 	cmp r5, 0
@@ -14728,7 +14728,7 @@ sub_81B7FAC: @ 81B7FAC
 	.pool
 _081B7FF8:
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B800C
@@ -14770,7 +14770,7 @@ sub_81B8044: @ 81B8044
 	lsrs r4, r0, 24
 	ldr r5, =gUnknown_0203CEC8
 	ldrh r0, [r5, 0xC]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B807C
@@ -15054,7 +15054,7 @@ sub_81B82D4: @ 81B82D4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -15093,7 +15093,7 @@ _081B82FA:
 	.pool
 _081B8338:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B835C

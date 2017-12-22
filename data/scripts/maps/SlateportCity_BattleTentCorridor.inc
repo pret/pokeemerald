@@ -9,7 +9,7 @@ SlateportCity_BattleTentCorridor_MapScript2_208E31: @ 8208E31
 
 SlateportCity_BattleTentCorridor_EventScript_208E3B:: @ 8208E3B
 	setvar VAR_0x4001, 1
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	goto_if 5, SlateportCity_BattleTentCorridor_EventScript_208E56
 	setobjectxy 1, 2, 2
 	turnobject 1, 1
@@ -23,13 +23,13 @@ SlateportCity_BattleTentCorridor_MapScript2_208E5B: @ 8208E5B
 	.2byte 0
 
 SlateportCity_BattleTentCorridor_EventScript_208E65:: @ 8208E65
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	goto_eq SlateportCity_BattleTentCorridor_EventScript_208EEE
 	setvar VAR_0x4000, 1
 	applymovement 1, SlateportCity_BattleTentCorridor_Movement_209062
 	applymovement 255, SlateportCity_BattleTentCorridor_Movement_209059
 	waitmovement 0
-	compare_var_to_value VAR_0x8006, 2
+	compare VAR_0x8006, 2
 	goto_eq SlateportCity_BattleTentCorridor_EventScript_209044
 	setvar VAR_0x8004, 9
 	special sub_81B9D08
@@ -65,15 +65,15 @@ SlateportCity_BattleTentCorridor_EventScript_208EEE:: @ 8208EEE
 	msgbox SlateportCity_BattleTentCorridor_Text_25A22D, 4
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 SlateportCity_BattleTentCorridor_EventScript_208F0D:: @ 8208F0D
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_BattleTentCorridor_EventScript_209014
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, SlateportCity_BattleTentCorridor_EventScript_20901B
 	multichoice 20, 6, 104, 1
 	switch VAR_RESULT
@@ -111,7 +111,7 @@ SlateportCity_BattleTentCorridor_EventScript_208FF1:: @ 8208FF1
 	setvar VAR_0x8004, 7
 	special sub_81B9D08
 	waitstate
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_BattleTentCorridor_EventScript_208EB4
 	msgbox SlateportCity_BattleTentCorridor_Text_25AB6C, 4
 	goto SlateportCity_BattleTentCorridor_EventScript_208EB4

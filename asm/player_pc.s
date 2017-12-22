@@ -733,7 +733,7 @@ sub_816B430: @ 816B430
 	bl sub_816B4C0
 	bl sub_816BC14
 	bl gpu_pal_allocator_reset__manage_upper_four
-	bl sub_8122328
+	bl LoadListMenuArrowsGfx
 	ldr r0, =gUnknown_0203BCC4
 	ldr r0, [r0]
 	movs r1, 0xCD
@@ -1013,7 +1013,7 @@ sub_816B674: @ 816B674
 	cmp r0, 0
 	bne _0816B71E
 	ldrb r0, [r4, 0xA]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r6, r0, 0
 	ldrb r0, [r4, 0xA]
 	ldr r7, =gUnknown_0203BCBA
@@ -1021,7 +1021,7 @@ sub_816B674: @ 816B674
 	mov r8, r1
 	adds r1, r7, 0
 	mov r2, r8
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0x2
 	negs r0, r0
 	cmp r6, r0
@@ -1263,7 +1263,7 @@ sub_816B8A4: @ 816B8A4
 	adds r0, r1
 	ldr r1, =sub_816B900
 	movs r2, 0x1
-	bl sub_8121478
+	bl ReadMail
 	adds r0, r4, 0
 	bl DestroyTask
 _0816B8E6:
@@ -1378,7 +1378,7 @@ sub_816B9D8: @ 816B9D8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r0, 24
 	movs r1, 0x1
@@ -1820,7 +1820,7 @@ _0816BD58:
 	movs r1, 0x2
 	negs r1, r1
 	str r1, [r0]
-	ldr r4, =gUnknown_03006310
+	ldr r4, =gMultiuseListMenuTemplate
 	adds r1, r4, 0
 	ldr r0, =gUnknown_085DFF44
 	ldm r0!, {r2,r3,r6}
@@ -2327,7 +2327,7 @@ _0816C186:
 	bl sub_816C110
 	bl sub_816C140
 	bl sub_816BD04
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldr r2, =gUnknown_0203BCB8
 	ldrh r1, [r2, 0x2]
 	ldrh r2, [r2]
@@ -2476,7 +2476,7 @@ sub_816C30C: @ 816C30C
 	ldr r1, =gUnknown_0203BCBA
 	subs r4, r1, 0x2
 	adds r2, r4, 0
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	ldrh r1, [r4, 0x2]
 	ldrh r0, [r4]
 	adds r1, r0
@@ -2492,12 +2492,12 @@ sub_816C30C: @ 816C30C
 	.pool
 _0816C35C:
 	ldrb r0, [r4, 0xA]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r6, r0, 0
 	ldrb r0, [r4, 0xA]
 	ldr r1, =gUnknown_0203BCBA
 	subs r2, r1, 0x2
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0x2
 	negs r0, r0
 	cmp r6, r0
@@ -2691,18 +2691,18 @@ sub_816C4FC: @ 816C4FC
 	ldrb r0, [r4, 0xA]
 	ldr r1, =gUnknown_0203BCBA
 	subs r2, r1, 0x2
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	b _0816C57E
 	.pool
 _0816C530:
 	ldrb r0, [r4, 0xA]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r6, r0, 0
 	ldrb r0, [r4, 0xA]
 	ldr r1, =gUnknown_0203BCBA
 	subs r4, r1, 0x2
 	adds r2, r4, 0
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	ldr r0, =gUnknown_0203BCC4
 	ldr r0, [r0]
 	movs r1, 0xCD
@@ -2825,7 +2825,7 @@ _0816C622:
 	adds r0, r2
 	movs r1, 0xFF
 	strb r1, [r0]
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldr r2, =gUnknown_0203BCB8
 	ldrh r1, [r2, 0x2]
 	ldrh r2, [r2]
@@ -3363,7 +3363,7 @@ sub_816CB04: @ 816CB04
 	bl sub_816C110
 	bl sub_816C140
 	bl sub_816BD04
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r4, 0x2]
 	ldrh r2, [r4]
 	bl ListMenuInit

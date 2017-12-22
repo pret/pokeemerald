@@ -3,7 +3,7 @@ MtPyre_Summit_MapScripts:: @ 8231FF7
 	.byte 0
 
 MtPyre_Summit_MapScript1_231FFD: @ 8231FFD
-	compare_var_to_value VAR_0x40B9, 2
+	compare VAR_0x40B9, 2
 	call_if 1, MtPyre_Summit_EventScript_232009
 	end
 
@@ -37,11 +37,11 @@ MtPyre_Summit_EventScript_23203C:: @ 823203C
 	applymovement 2, MtPyre_Summit_Movement_2725AA
 	waitmovement 0
 	delay 50
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_2320E0
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, MtPyre_Summit_EventScript_2320EB
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_2320EC
 	msgbox MtPyre_Summit_Text_23281A, 4
 	closemessage
@@ -57,11 +57,11 @@ MtPyre_Summit_EventScript_23203C:: @ 823203C
 	fadescreen 0
 	delay 20
 	setvar VAR_0x40B9, 1
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_2320F7
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, MtPyre_Summit_EventScript_23210C
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_232117
 	msgbox MtPyre_Summit_Text_23290E, 4
 	giveitem_std ITEM_MAGMA_EMBLEM
@@ -134,18 +134,18 @@ MtPyre_Summit_EventScript_23213C:: @ 823213C
 	checkflag FLAG_0x09E
 	goto_eq MtPyre_Summit_EventScript_232167
 	msgbox MtPyre_Summit_Text_232E0C, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, MtPyre_Summit_EventScript_232187
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, MtPyre_Summit_EventScript_232190
 	release
 	end
 
 MtPyre_Summit_EventScript_232167:: @ 8232167
 	msgbox MtPyre_Summit_Text_2331A6, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, MtPyre_Summit_EventScript_232199
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, MtPyre_Summit_EventScript_232190
 	release
 	end
@@ -167,7 +167,7 @@ MtPyre_Summit_EventScript_2321A2:: @ 82321A2
 	faceplayer
 	checkflag FLAG_0x103
 	goto_eq MtPyre_Summit_EventScript_2321E2
-	compare_var_to_value VAR_0x40B9, 3
+	compare VAR_0x40B9, 3
 	call_if 4, MtPyre_Summit_EventScript_2321CB
 	checkflag FLAG_0x081
 	goto_eq MtPyre_Summit_EventScript_2321D8
@@ -213,11 +213,11 @@ MtPyre_Summit_EventScript_232210:: @ 8232210
 	applymovement 255, MtPyre_Summit_Movement_2725A6
 	waitmovement 0
 	delay 60
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_2322C4
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, MtPyre_Summit_EventScript_2322DD
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_2322F6
 	playse SE_PIN
 	applymovement 8, MtPyre_Summit_Movement_272598
@@ -225,19 +225,19 @@ MtPyre_Summit_EventScript_232210:: @ 8232210
 	applymovement 8, MtPyre_Summit_Movement_27259A
 	waitmovement 0
 	delay 30
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_23230F
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, MtPyre_Summit_EventScript_232328
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_232341
 	msgbox MtPyre_Summit_Text_233183, 4
 	closemessage
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, MtPyre_Summit_EventScript_23235A
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, MtPyre_Summit_EventScript_232376
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, MtPyre_Summit_EventScript_232392
 	delay 30
 	applymovement 2, MtPyre_Summit_Movement_2323B6

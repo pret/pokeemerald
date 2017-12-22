@@ -39,7 +39,7 @@ enum
     MAP_BATTLE_SCENE_PHOEBE,       // 5
     MAP_BATTLE_SCENE_GLACIA,       // 6
     MAP_BATTLE_SCENE_DRAKE,        // 7
-    MAP_BATTLE_SCENE_BATTLE_TOWER, // 8
+    MAP_BATTLE_SCENE_FRONTIER,     // 8
 };
 
 typedef void (*TilesetCB)(void);
@@ -224,7 +224,7 @@ struct MapObject
     /*0x0C*/ struct Coords16 coords1;
     /*0x10*/ struct Coords16 coords2;
     /*0x14*/ struct Coords16 coords3;
-    /*0x18*/ u8 mapobj_unk_18:4;  //current direction?
+    /*0x18*/ u8 mapobj_unk_18:4;  // current direction?
     /*0x18*/ u8 placeholder18:4;
     /*0x19*/ union __attribute__((packed)) {
         u8 as_byte;

@@ -9,5 +9,6 @@
 void pal_fill_black(void);
 bool8 sub_80ABDFC(void);
 void sub_80AF168(void);
+void UpdateWeatherPerDay(u16 days);
 
 #endif //GUARD_FIELD_SCREEN_H

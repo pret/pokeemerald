@@ -10,23 +10,23 @@ Route120_MapScript1_1F53FC: @ 81F53FC
 	end
 
 Route120_EventScript_1F5406:: @ 81F5406
-	compare_var_to_value VAR_0x8009, 0
+	compare VAR_0x8009, 0
 	call_if 1, Route120_EventScript_1F5449
-	compare_var_to_value VAR_0x8009, 1
+	compare VAR_0x8009, 1
 	call_if 1, Route120_EventScript_1F5460
-	compare_var_to_value VAR_0x8009, 2
+	compare VAR_0x8009, 2
 	call_if 1, Route120_EventScript_1F5460
-	compare_var_to_value VAR_0x8009, 3
+	compare VAR_0x8009, 3
 	call_if 1, Route120_EventScript_1F5460
-	compare_var_to_value VAR_0x8009, 4
+	compare VAR_0x8009, 4
 	call_if 1, Route120_EventScript_1F5460
-	compare_var_to_value VAR_0x8009, 5
+	compare VAR_0x8009, 5
 	call_if 1, Route120_EventScript_1F5460
 	return
 
 Route120_EventScript_1F5449:: @ 81F5449
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, Route120_EventScript_27374E
 	removeobject 30
 	removeobject 36
@@ -34,7 +34,7 @@ Route120_EventScript_1F5449:: @ 81F5449
 
 Route120_EventScript_1F5460:: @ 81F5460
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, Route120_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
@@ -71,11 +71,11 @@ Route120_MapScript1_1F54CD: @ 81F54CD
 
 Route120_EventScript_1F54D8:: @ 81F54D8
 	getplayerxy VAR_0x4000, VAR_0x4001
-	compare_var_to_value VAR_0x4001, 14
+	compare VAR_0x4001, 14
 	goto_if 3, Route120_EventScript_1F5503
-	compare_var_to_value VAR_0x4001, 60
+	compare VAR_0x4001, 60
 	goto_if 3, Route120_EventScript_1F5507
-	compare_var_to_value VAR_0x4001, 61
+	compare VAR_0x4001, 61
 	goto_if 4, Route120_EventScript_1F54FF
 	return
 
@@ -88,9 +88,9 @@ Route120_EventScript_1F5503:: @ 81F5503
 	return
 
 Route120_EventScript_1F5507:: @ 81F5507
-	compare_var_to_value VAR_0x4000, 7
+	compare VAR_0x4000, 7
 	goto_if 3, Route120_EventScript_1F5523
-	compare_var_to_value VAR_0x4000, 19
+	compare VAR_0x4000, 19
 	goto_if 3, Route120_EventScript_1F5503
 	goto Route120_EventScript_1F5523
 	end
@@ -106,9 +106,9 @@ Route120_EventScript_1F5527:: @ 81F5527
 	checkflag FLAG_0x92E
 	goto_eq Route120_EventScript_1F5625
 	msgbox Route120_Text_2A70C7, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, Route120_EventScript_1F562F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route120_EventScript_1F5638
 	specialvar VAR_RESULT, sub_8138AF0
 	switch VAR_RESULT
@@ -151,7 +151,7 @@ Route120_EventScript_1F55F6:: @ 81F55F6
 
 Route120_EventScript_1F5601:: @ 81F5601
 	giveitem_std VAR_0x8004
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route120_EventScript_272054
 	setflag FLAG_0x92E
 	msgbox Route120_Text_2A71D5, 4
@@ -177,7 +177,7 @@ Route120_EventScript_1F5641:: @ 81F5641
 	checkflag FLAG_0x122
 	goto_eq Route120_EventScript_1F5672
 	msgbox Route120_Text_1F5998, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route120_EventScript_1F5665
 	goto Route120_EventScript_1F568B
 	end
@@ -190,7 +190,7 @@ Route120_EventScript_1F5665:: @ 81F5665
 
 Route120_EventScript_1F5672:: @ 81F5672
 	msgbox Route120_Text_1F5ADE, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route120_EventScript_1F5665
 	goto Route120_EventScript_1F568B
 	end
@@ -198,9 +198,9 @@ Route120_EventScript_1F5672:: @ 81F5672
 Route120_EventScript_1F568B:: @ 81F568B
 	msgbox Route120_Text_1F5B0F, 4
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, Route120_EventScript_1F57A3
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, Route120_EventScript_1F57AE
 	applymovement 31, Route120_Movement_2725A4
 	waitmovement 0
@@ -221,11 +221,11 @@ Route120_EventScript_1F568B:: @ 81F568B
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route120_EventScript_1F571C
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq Route120_EventScript_1F571C
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq Route120_EventScript_1F571C
 	goto Route120_EventScript_1F572C
 	end
@@ -297,8 +297,8 @@ Route120_EventScript_1F57D7:: @ 81F57D7
 
 Route120_EventScript_1F57EE:: @ 81F57EE
 	trainerbattle 2, TRAINER_ROBERT_1, 0, Route120_Text_29E6E3, Route120_Text_29E70A, Route120_EventScript_1F581A
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route120_EventScript_1F5839
 	msgbox Route120_Text_29E726, 4
 	release
@@ -332,8 +332,8 @@ Route120_EventScript_1F5867:: @ 81F5867
 
 Route120_EventScript_1F587E:: @ 81F587E
 	trainerbattle 2, TRAINER_JEFFREY_1, 0, Route120_Text_29E9D7, Route120_Text_29E9FF, Route120_EventScript_1F58AA
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route120_EventScript_1F58C9
 	msgbox Route120_Text_29EA08, 4
 	release

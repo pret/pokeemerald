@@ -3,7 +3,7 @@ Route110_TrickHousePuzzle4_MapScripts:: @ 826C860
 
 Route110_TrickHousePuzzle4_EventScript_26C861:: @ 826C861
 	lockall
-	compare_var_to_value VAR_0x40AE, 0
+	compare VAR_0x40AE, 0
 	goto_eq Route110_TrickHousePuzzle4_EventScript_26C873
 	goto Route110_TrickHousePuzzle4_EventScript_26A3DB
 	end

@@ -8,9 +8,9 @@ LittlerootTown_MaysHouse_1F_EventScript_292704:: @ 8292704
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7A1C, 4
 	applymovement VAR_0x8004, LittlerootTown_BrendansHouse_1F_Movement_27259E
 	waitmovement 0
-	compare_var_to_value VAR_0x8005, 0
+	compare VAR_0x8005, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_29274D
-	compare_var_to_value VAR_0x8005, 1
+	compare VAR_0x8005, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292758
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7A46, 4
 	closemessage
@@ -69,9 +69,9 @@ LittlerootTown_MaysHouse_2F_EventScript_292799:: @ 8292799
 	setflag FLAG_0x2F2
 	setflag FLAG_0x2F3
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_2927DF
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_29280F
 	playse SE_KAIDAN
 	removeobject VAR_0x8008
@@ -114,7 +114,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_29283F:: @ 829283F
 
 LittlerootTown_BrendansHouse_2F_EventScript_292849:: @ 8292849
 	fadescreen 1
-	special Special_StartWallClock
+	special StartWallClock
 	waitstate
 	return
 
@@ -314,17 +314,17 @@ LittlerootTown_BrendansHouse_1F_EventScript_2929C5:: @ 82929C5
 LittlerootTown_MaysHouse_1F_EventScript_2929C5:: @ 82929C5
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4082, 4
+	compare VAR_0x4082, 4
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
-	compare_var_to_value VAR_0x408C, 4
+	compare VAR_0x408C, 4
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A0F
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A19
 	checkflag FLAG_0x052
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A86
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A94
-	compare_var_to_value VAR_0x4092, 7
+	compare VAR_0x4092, 7
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292AB0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7A1C, 4
 	release
@@ -360,7 +360,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A51:: @ 8292A51
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_292A86
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7D73, 4
 	giveitem_std ITEM_AMULET_COIN
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_272054
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7DBE, 4
 	setflag FLAG_0x085
@@ -444,13 +444,13 @@ LittlerootTown_BrendansHouse_1F_EventScript_292AF2:: @ 8292AF2
 LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	lockall
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292C76
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292C86
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D08
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D13
 	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_27259E
 	waitmovement 0
@@ -460,32 +460,32 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	applymovement VAR_0x8009, LittlerootTown_BrendansHouse_1F_Movement_27259A
 	waitmovement 0
 	delay 20
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292C96
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292CA1
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F800E, 4
 	giveitem_std ITEM_SS_TICKET
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F80FE, 4
 	closemessage
 	delay 20
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292CAC
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292CC1
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F815B, 4
 	closemessage
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292CD6
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292CEF
 	playse SE_DOOR
 	removeobject VAR_0x8009
 	setflag FLAG_0x123
 	delay 30
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D48
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D5D
 	delay 20
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F81B9, 4
@@ -493,24 +493,24 @@ LittlerootTown_MaysHouse_1F_EventScript_292AF2:: @ 8292AF2
 	setflag FLAG_SYS_TV_LATI
 	special TurnOnTVScreen
 	delay 60
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D72
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D7D
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F824B, 4
 	closemessage
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D1E
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D33
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F826F, 4
 	closemessage
 	clearflag FLAG_SYS_TV_LATI
 	setflag FLAG_0x0FF
 	special TurnOffTVScreen
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D88
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_292D9D
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8351, 4
 	multichoice 22, 8, 108, 1

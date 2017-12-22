@@ -29,17 +29,17 @@ PetalburgCity_PokemonCenter_1F_EventScript_207A1C:: @ 8207A1C
 	faceplayer
 	msgbox PetalburgCity_PokemonCenter_1F_Text_207B09, 4
 	specialvar VAR_RESULT, sub_81394D8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_207A38
 	release
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_207A38:: @ 8207A38
-	compare_var_to_value VAR_FIRST_POKE, 0
+	compare VAR_FIRST_POKE, 0
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_207A5B
-	compare_var_to_value VAR_FIRST_POKE, 1
+	compare VAR_FIRST_POKE, 1
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_207A64
-	compare_var_to_value VAR_FIRST_POKE, 2
+	compare VAR_FIRST_POKE, 2
 	call_if 1, PetalburgCity_PokemonCenter_1F_EventScript_207A6D
 	release
 	end

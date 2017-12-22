@@ -19,7 +19,7 @@ MossdeepCity_House4_EventScript_222DF7:: @ 8222DF7
 	lock
 	faceplayer
 	special sub_80E8BC8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_House4_EventScript_222E14
 	special sub_8139200
 	msgbox MossdeepCity_House4_Text_222ECC, 4

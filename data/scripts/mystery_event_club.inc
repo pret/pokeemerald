@@ -29,9 +29,9 @@ PetalburgCity_PokemonCenter_1F_EventScript_29159F:: @ 829159F
 	call PetalburgCity_PokemonCenter_1F_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_2915CB
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_2915D5
 	end
 
@@ -81,9 +81,9 @@ PetalburgCity_PokemonCenter_1F_EventScript_291650:: @ 8291650
 	call PetalburgCity_PokemonCenter_1F_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_2915CB
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq PetalburgCity_PokemonCenter_1F_EventScript_2915D5
 	end
 

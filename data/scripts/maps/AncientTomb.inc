@@ -11,7 +11,7 @@ AncientTomb_MapScript1_238FC3: @ 8238FC3
 
 AncientTomb_EventScript_238FCD:: @ 8238FCD
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, AncientTomb_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
@@ -72,15 +72,15 @@ AncientTomb_EventScript_23905A:: @ 823905A
 	waitmoncry
 	setwildbattle SPECIES_REGISTEEL, 40, ITEM_NONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0A74
+	special StartRegiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq AncientTomb_EventScript_2390A1
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq AncientTomb_EventScript_2390AA
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq AncientTomb_EventScript_2390AA
 	setflag FLAG_0x1BD
 	release

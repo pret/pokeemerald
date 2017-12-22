@@ -36,6 +36,24 @@ extern u8 gStringVar2[];
 extern u8 gStringVar3[];
 extern u8 gStringVar4[];
 
+// There are many quirks in the source code which have overarching behavioral differences from
+// a number of other files. For example, diploma.c seems to declare rodata before each use while
+// other files declare out of order and must be at the beginning. There are also a number of
+// macros which differ from one file to the next due to the method of obtaining the result, such
+// as these below. Because of this, there is a theory (Two Team Theory) that states that these
+// programming projects had more than 1 "programming team" which utilized different macros for
+// each of the files that were worked on.
+#define T1_READ_8(ptr)  ((ptr)[0])
+#define T1_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
+#define T1_READ_32(ptr) ((ptr)[0] | ((ptr)[1] << 8) | ((ptr)[2] << 16) | ((ptr)[3] << 24))
+#define T1_READ_PTR(ptr) (u8*) T1_READ_32(ptr)
+
+// T2_READ_8 is a duplicate to remain consistent with each group.
+#define T2_READ_8(ptr)  ((ptr)[0])
+#define T2_READ_16(ptr) ((ptr)[0] + ((ptr)[1] << 8))
+#define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
+#define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
+
 enum
 {
     VERSION_SAPPHIRE = 1,
@@ -45,7 +63,8 @@ enum
     VERSION_LEAF_GREEN = 5,
 };
 
-enum LanguageId {
+enum LanguageId
+{
     LANGUAGE_JAPANESE = 1,
     LANGUAGE_ENGLISH = 2,
     LANGUAGE_FRENCH = 3,
@@ -222,7 +241,7 @@ struct SaveBlock2
     /*0x1EC*/ struct BerryCrush berryCrush;
     /*0x1FC*/ struct PokemonJumpResults pokeJump;
     /*0x20C*/ struct BerryPickingResults berryPick;
-    /*0x214*/ u8 field_214[1032];
+    /*0x21C*/ u8 field_21C[1032];
     /*0x624*/ u16 contestLinkResults[20]; // 4 positions for 5 categories, possibly a struct or a 2d array
 
         // All below could be a one giant struct
@@ -244,7 +263,7 @@ struct SaveBlock2
     /*0xCA9*/ u8 field_CA9_f : 1;   // 0x80
     /*0xCAA*/ u16 field_CAA[4];
     /*0xCB2*/ u16 battlePyramidWildHeaderId;
-    /*0xCB4*/ u8 field_CB4[82];
+    /*0xCB4*/ u16 field_CB4[41];
     /*0xD06*/ u8 field_D06;
     /*0xD07*/ u8 field_D07;
     /*0xD08*/ u8 filler_D08[0x112];
@@ -360,10 +379,12 @@ struct EasyChatPair
     u16 words[2];
 }; /*size = 0x8*/
 
+#define MAIL_WORDS_COUNT 9
+
 struct MailStruct
 {
-    /*0x00*/ u16 words[9];
-    /*0x12*/ u8 playerName[8];
+    /*0x00*/ u16 words[MAIL_WORDS_COUNT];
+    /*0x12*/ u8 playerName[PLAYER_NAME_LENGTH];
     /*0x1A*/ u8 trainerId[4];
     /*0x1E*/ u16 species;
     /*0x20*/ u16 itemId;
@@ -493,11 +514,12 @@ struct RecordMixingDayCareMail
     bool16 holdsItem[DAYCARE_MON_COUNT];
 };
 
-#define MAP_OBJECTS_COUNT  16
-#define BERRY_TREES_COUNT  128
-#define FLAGS_COUNT        300
-#define VARS_COUNT         256
-#define MAIL_COUNT         16
+#define POKEBLOCKS_COUNT    40
+#define MAP_OBJECTS_COUNT   16
+#define BERRY_TREES_COUNT   128
+#define FLAGS_COUNT         300
+#define VARS_COUNT          256
+#define MAIL_COUNT          16
 
 enum
 {
@@ -590,7 +612,7 @@ struct SaveBlock1
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[16];
     /*0x690*/ struct ItemSlot bagPocket_TMHM[64];
     /*0x790*/ struct ItemSlot bagPocket_Berries[46];
-    /*0x848*/ struct Pokeblock pokeblocks[40];
+    /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x988*/ u8 seen1[52];
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 field_9C2[6];

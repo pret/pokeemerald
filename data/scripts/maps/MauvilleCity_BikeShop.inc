@@ -10,17 +10,17 @@ MauvilleCity_BikeShop_EventScript_20EBBC:: @ 820EBBC
 	goto_eq MauvilleCity_BikeShop_EventScript_20EBF7
 	msgbox MauvilleCity_BikeShop_Text_20EE22, 4
 	msgbox MauvilleCity_BikeShop_Text_20EE99, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20EC4A
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_BikeShop_EventScript_20EC3D
 	end
 
 MauvilleCity_BikeShop_EventScript_20EBF7:: @ 820EBF7
 	msgbox MauvilleCity_BikeShop_Text_20EE99, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20EC4A
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_BikeShop_EventScript_20EC3D
 	end
 
@@ -64,19 +64,19 @@ MauvilleCity_BikeShop_EventScript_20EC87:: @ 820EC87
 
 MauvilleCity_BikeShop_EventScript_20EC94:: @ 820EC94
 	msgbox MauvilleCity_BikeShop_Text_20F1FB, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20ECB3
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_BikeShop_EventScript_20ECE5
 	end
 
 MauvilleCity_BikeShop_EventScript_20ECB3:: @ 820ECB3
 	msgbox MauvilleCity_BikeShop_Text_20F22F, 4
 	checkitem ITEM_ACRO_BIKE, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20ECEF
 	checkitem ITEM_MACH_BIKE, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_BikeShop_EventScript_20ED10
 	msgbox MauvilleCity_BikeShop_Text_20F2F3, 4
 	release

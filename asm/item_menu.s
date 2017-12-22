@@ -463,7 +463,7 @@ _081AAF54:
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrb r2, [r4, 0x5]
 	lsls r2, 1
 	adds r1, r4, 0
@@ -568,7 +568,7 @@ _081AB046:
 	thumb_func_start bag_menu_init_bgs
 bag_menu_init_bgs: @ 81AB050
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	ldr r4, =gUnknown_0203CE54
 	ldr r0, [r4]
 	adds r0, 0x4
@@ -586,7 +586,7 @@ bag_menu_init_bgs: @ 81AB050
 	adds r1, 0x4
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r1, 0x82
@@ -719,7 +719,7 @@ _081AB1B2:
 	b _081AB1E4
 	.pool
 _081AB1CC:
-	bl sub_8122328
+	bl LoadListMenuArrowsGfx
 	ldr r0, [r4]
 	ldr r1, =0x00000834
 	adds r0, r1
@@ -902,7 +902,7 @@ _081AB30C:
 	cmp r6, r0
 	bcc _081AB30C
 _081AB34A:
-	ldr r2, =gUnknown_03006310
+	ldr r2, =gMultiuseListMenuTemplate
 	adds r1, r2, 0
 	ldr r0, =gUnknown_08613F9C
 	ldm r0!, {r3-r5}
@@ -1924,7 +1924,7 @@ bag_menu_inits_lists_menu: @ 81ABBBC
 	bl sub_81ABA88
 	ldrb r0, [r7, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	mov r2, r8
 	ldrh r1, [r2]
 	ldrh r2, [r4]
@@ -2133,7 +2133,7 @@ _081ABDCC:
 	ldrb r0, [r6]
 	adds r1, r7, 0
 	mov r2, r8
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	ldrh r2, [r7]
 	mov r3, r8
 	ldrh r0, [r3]
@@ -2157,12 +2157,12 @@ _081ABDCC:
 	.pool
 _081ABE10:
 	ldrb r0, [r6]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r4, r0, 0
 	ldrb r0, [r6]
 	adds r1, r7, 0
 	mov r2, r8
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0x2
 	negs r0, r0
 	cmp r4, r0
@@ -2603,7 +2603,7 @@ _081AC1DC:
 	subs r5, r4, 0x5
 	ldrb r0, [r5, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrb r2, [r5, 0x5]
 	lsls r2, 1
 	adds r1, r4, 0
@@ -2847,12 +2847,12 @@ sub_81AC3C0: @ 81AC3C0
 	adds r1, r2, r1
 	adds r3, 0x8
 	adds r2, r3
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	b _081AC472
 	.pool
 _081AC418:
 	ldrb r0, [r4]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r7, r0, 0
 	ldrb r0, [r4]
 	ldr r5, =gUnknown_0203CE58
@@ -2864,7 +2864,7 @@ _081AC418:
 	adds r4, r5, 0
 	adds r4, 0x8
 	adds r2, r4
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0
 	bl sub_80D4FC8
 	ldrb r0, [r5, 0x5]
@@ -2989,7 +2989,7 @@ _081AC4F8:
 _081AC538:
 	ldrb r0, [r5, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	mov r2, r8
 	ldrh r1, [r2]
 	ldrh r2, [r7]
@@ -3070,7 +3070,7 @@ sub_81AC590: @ 81AC590
 _081AC5F2:
 	ldrb r0, [r4, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r6]
 	ldrh r2, [r5]
 	bl ListMenuInit
@@ -3360,7 +3360,7 @@ _081AC8D4:
 	bl memcpy
 	ldr r0, =gSpecialVar_ItemId
 	ldrh r0, [r0]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4326,7 +4326,7 @@ Task_ActuallyToss: @ 81AD150
 	bl sub_81ABA88
 	ldrb r0, [r4, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	mov r2, r8
 	ldrh r1, [r2]
 	ldrh r2, [r7]
@@ -4388,7 +4388,7 @@ _081AD23A:
 	ldr r0, =gUnknown_0203CE58
 	ldrb r0, [r0, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r6]
 	ldrh r2, [r5]
 	bl ListMenuInit
@@ -4664,7 +4664,7 @@ item_menu_type_b: @ 81AD4B4
 	lsrs r4, r0, 24
 	ldr r5, =gSpecialVar_ItemId
 	ldrh r0, [r5]
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4748,7 +4748,7 @@ _081AD550:
 	cmp r6, 0x1
 	bne _081AD5C4
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
 	ldr r2, =gSpecialVar_ItemId
@@ -5155,7 +5155,7 @@ sub_81AD8C8: @ 81AD8C8
 	bl sub_81ABA88
 	ldrb r0, [r7, 0x5]
 	bl load_bag_item_list_buffers
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	mov r2, r9
 	ldrh r1, [r2]
 	ldrh r2, [r5]

@@ -13,7 +13,7 @@ Route110_TrickHousePuzzle5_MapScript1_26CAF6: @ 826CAF6
 
 Route110_TrickHousePuzzle5_EventScript_26CB15:: @ 826CB15
 	lockall
-	compare_var_to_value VAR_0x40AF, 0
+	compare VAR_0x40AF, 0
 	goto_eq Route110_TrickHousePuzzle5_EventScript_26CB27
 	goto Route110_TrickHousePuzzle5_EventScript_26A3DB
 	end
@@ -27,7 +27,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB32:: @ 826CB32
 	lockall
 	applymovement 1, Route110_TrickHousePuzzle5_Movement_27259E
 	waitmovement 0
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	goto_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
 	setvar VAR_0x4009, 0
 	goto Route110_TrickHousePuzzle5_EventScript_26CCEB
@@ -37,7 +37,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB53:: @ 826CB53
 	lockall
 	applymovement 2, Route110_TrickHousePuzzle5_Movement_27259E
 	waitmovement 0
-	compare_var_to_value VAR_0x4002, 1
+	compare VAR_0x4002, 1
 	goto_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
 	setvar VAR_0x4009, 0
 	goto Route110_TrickHousePuzzle5_EventScript_26CD6A
@@ -47,7 +47,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB74:: @ 826CB74
 	lockall
 	applymovement 3, Route110_TrickHousePuzzle5_Movement_27259E
 	waitmovement 0
-	compare_var_to_value VAR_0x4003, 1
+	compare VAR_0x4003, 1
 	goto_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
 	setvar VAR_0x4009, 0
 	goto Route110_TrickHousePuzzle5_EventScript_26CDF4
@@ -57,7 +57,7 @@ Route110_TrickHousePuzzle5_EventScript_26CB95:: @ 826CB95
 	lockall
 	applymovement 4, Route110_TrickHousePuzzle5_Movement_27259E
 	waitmovement 0
-	compare_var_to_value VAR_0x4004, 1
+	compare VAR_0x4004, 1
 	goto_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
 	setvar VAR_0x4009, 0
 	goto Route110_TrickHousePuzzle5_EventScript_26CE73
@@ -67,7 +67,7 @@ Route110_TrickHousePuzzle5_EventScript_26CBB6:: @ 826CBB6
 	lockall
 	applymovement 5, Route110_TrickHousePuzzle5_Movement_27259E
 	waitmovement 0
-	compare_var_to_value VAR_0x4005, 1
+	compare VAR_0x4005, 1
 	goto_eq Route110_TrickHousePuzzle5_EventScript_26D1AA
 	setvar VAR_0x4009, 0
 	goto Route110_TrickHousePuzzle5_EventScript_26CEF2
@@ -219,13 +219,13 @@ Route110_TrickHousePuzzle5_EventScript_26CCEB:: @ 826CCEB
 	waitmovement 0
 	applymovement 1, Route110_TrickHousePuzzle5_Movement_27259A
 	waitmovement 0
-	compare_var_to_value VAR_0x4009, 1
+	compare VAR_0x4009, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D1B4
-	compare_var_to_value VAR_0x4009, 2
+	compare VAR_0x4009, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D1EC
-	compare_var_to_value VAR_0x4009, 3
+	compare VAR_0x4009, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D224
-	compare_var_to_value VAR_0x4009, 4
+	compare VAR_0x4009, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D25C
 	msgbox Route110_TrickHousePuzzle5_Text_26D6CE, 4
 	random 3
@@ -243,15 +243,15 @@ Route110_TrickHousePuzzle5_EventScript_26CD6A:: @ 826CD6A
 	waitmovement 0
 	applymovement 2, Route110_TrickHousePuzzle5_Movement_27259A
 	waitmovement 0
-	compare_var_to_value VAR_0x4009, 1
+	compare VAR_0x4009, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D2CC
-	compare_var_to_value VAR_0x4009, 2
+	compare VAR_0x4009, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D304
-	compare_var_to_value VAR_0x4009, 3
+	compare VAR_0x4009, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D33C
-	compare_var_to_value VAR_0x4009, 4
+	compare VAR_0x4009, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D374
-	compare_var_to_value VAR_0x4009, 5
+	compare VAR_0x4009, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D3AC
 	msgbox Route110_TrickHousePuzzle5_Text_26D8EA, 4
 	random 3
@@ -269,13 +269,13 @@ Route110_TrickHousePuzzle5_EventScript_26CDF4:: @ 826CDF4
 	waitmovement 0
 	applymovement 3, Route110_TrickHousePuzzle5_Movement_27259A
 	waitmovement 0
-	compare_var_to_value VAR_0x4009, 1
+	compare VAR_0x4009, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D1B4
-	compare_var_to_value VAR_0x4009, 2
+	compare VAR_0x4009, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D1EC
-	compare_var_to_value VAR_0x4009, 3
+	compare VAR_0x4009, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D224
-	compare_var_to_value VAR_0x4009, 4
+	compare VAR_0x4009, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D25C
 	msgbox Route110_TrickHousePuzzle5_Text_26DA1E, 4
 	random 3
@@ -293,13 +293,13 @@ Route110_TrickHousePuzzle5_EventScript_26CE73:: @ 826CE73
 	waitmovement 0
 	applymovement 4, Route110_TrickHousePuzzle5_Movement_27259A
 	waitmovement 0
-	compare_var_to_value VAR_0x4009, 1
+	compare VAR_0x4009, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D1B4
-	compare_var_to_value VAR_0x4009, 2
+	compare VAR_0x4009, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D1EC
-	compare_var_to_value VAR_0x4009, 3
+	compare VAR_0x4009, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D224
-	compare_var_to_value VAR_0x4009, 4
+	compare VAR_0x4009, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D25C
 	msgbox Route110_TrickHousePuzzle5_Text_26DB4C, 4
 	random 3
@@ -475,132 +475,132 @@ Route110_TrickHousePuzzle5_EventScript_26D1AA:: @ 826D1AA
 	end
 
 Route110_TrickHousePuzzle5_EventScript_26D1B4:: @ 826D1B4
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D3E4
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D3EF
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D3FA
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D405
-	compare_var_to_value VAR_0x4008, 5
+	compare VAR_0x4008, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D410
 	return
 
 Route110_TrickHousePuzzle5_EventScript_26D1EC:: @ 826D1EC
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D41B
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D426
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D431
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D43C
-	compare_var_to_value VAR_0x4008, 5
+	compare VAR_0x4008, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D447
 	return
 
 Route110_TrickHousePuzzle5_EventScript_26D224:: @ 826D224
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D452
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D45D
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D468
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D473
-	compare_var_to_value VAR_0x4008, 5
+	compare VAR_0x4008, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D47E
 	return
 
 Route110_TrickHousePuzzle5_EventScript_26D25C:: @ 826D25C
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D489
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D494
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D49F
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4AA
-	compare_var_to_value VAR_0x4008, 5
+	compare VAR_0x4008, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4B5
 	return
 
 Route110_TrickHousePuzzle5_EventScript_26D294:: @ 826D294
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4C0
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4CB
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4D6
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4E1
-	compare_var_to_value VAR_0x4008, 5
+	compare VAR_0x4008, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4EC
 	return
 
 Route110_TrickHousePuzzle5_EventScript_26D2CC:: @ 826D2CC
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D4F7
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D502
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D50D
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D518
-	compare_var_to_value VAR_0x4008, 5
+	compare VAR_0x4008, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D523
 	return
 
 Route110_TrickHousePuzzle5_EventScript_26D304:: @ 826D304
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D52E
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D539
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D544
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D54F
-	compare_var_to_value VAR_0x4008, 5
+	compare VAR_0x4008, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D55A
 	return
 
 Route110_TrickHousePuzzle5_EventScript_26D33C:: @ 826D33C
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D565
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D570
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D57B
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D586
-	compare_var_to_value VAR_0x4008, 5
+	compare VAR_0x4008, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D591
 	return
 
 Route110_TrickHousePuzzle5_EventScript_26D374:: @ 826D374
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D59C
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D5A7
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D5B2
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D5BD
-	compare_var_to_value VAR_0x4008, 5
+	compare VAR_0x4008, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D5C8
 	return
 
 Route110_TrickHousePuzzle5_EventScript_26D3AC:: @ 826D3AC
-	compare_var_to_value VAR_0x4008, 1
+	compare VAR_0x4008, 1
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D5D3
-	compare_var_to_value VAR_0x4008, 2
+	compare VAR_0x4008, 2
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D5DE
-	compare_var_to_value VAR_0x4008, 3
+	compare VAR_0x4008, 3
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D5E9
-	compare_var_to_value VAR_0x4008, 4
+	compare VAR_0x4008, 4
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D5F4
-	compare_var_to_value VAR_0x4008, 5
+	compare VAR_0x4008, 5
 	call_if 1, Route110_TrickHousePuzzle5_EventScript_26D5FF
 	return
 

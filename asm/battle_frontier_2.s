@@ -12380,7 +12380,7 @@ _081A0C8E:
 sub_81A0C9C: @ 81A0C9C
 	push {lr}
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
 	movs r0, 0
@@ -29290,7 +29290,7 @@ sub_81A9B04: @ 81A9B04
 	cmp r0, 0
 	beq _081A9B2E
 	movs r0, 0x1
-	bl sub_80B47E0
+	bl GetChosenApproachingTrainerMapObjectId
 	ldr r1, =gSelectedMapObject
 	strb r0, [r1]
 	ldr r0, =gTrainerBattleOpponent_B

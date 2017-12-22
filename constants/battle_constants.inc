@@ -19,7 +19,7 @@
     .set BATTLE_TYPE_PALACE,          0x20000
     .set BATTLE_TYPE_ARENA,          0x40000
     .set BATTLE_TYPE_FACTORY,         0x80000
-    .set BATTLE_TYPE_x100000,         0x100000
+    .set BATTLE_TYPE_PIKE,         0x100000
     .set BATTLE_TYPE_PYRAMID,         0x200000
     .set BATTLE_TYPE_INGAME_PARTNER,  0x400000
     .set BATTLE_TYPE_x800000,         0x800000
@@ -28,7 +28,7 @@
     .set BATTLE_TYPE_x4000000,        0x4000000
     .set BATTLE_TYPE_SECRET_BASE,     0x8000000
     .set BATTLE_TYPE_GROUDON,         0x10000000
-    .set BATTLE_TYPE_KYORGE,          0x20000000
+    .set BATTLE_TYPE_KYOGRE,          0x20000000
     .set BATTLE_TYPE_RAYQUAZA,        0x40000000
     .set BATTLE_TYPE_x80000000,       0x80000000
     

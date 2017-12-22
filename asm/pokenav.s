@@ -8089,7 +8089,7 @@ _081CB0C0:
 	thumb_func_start sub_81CB0C8
 sub_81CB0C8: @ 81CB0C8
 	push {lr}
-	ldr r1, =gUnknown_085500A4
+	ldr r1, =gRematchTable
 	lsls r0, 4
 	adds r0, r1
 	ldrh r2, [r0, 0xA]
@@ -20738,7 +20738,7 @@ _081D15B6:
 
 	thumb_func_start sub_81D15BC
 sub_81D15BC: @ 81D15BC
-	ldr r1, =gUnknown_085500A4
+	ldr r1, =gRematchTable
 	lsls r0, 4
 	adds r0, r1
 	ldrh r0, [r0]
@@ -20751,7 +20751,7 @@ sub_81D15CC: @ 81D15CC
 	push {lr}
 	adds r3, r0, 0
 	movs r1, 0
-	ldr r2, =gUnknown_085500A4
+	ldr r2, =gRematchTable
 _081D15D4:
 	ldrh r0, [r2]
 	cmp r0, r3
@@ -21440,7 +21440,7 @@ _081D1A24:
 	cmp r0, 0
 	bne _081D1A1C
 	adds r0, r7, 0
-	bl sub_80B2318
+	bl CountBattledRematchTeams
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
@@ -21921,7 +21921,7 @@ sub_81D1DC0: @ 81D1DC0
 	ldr r7, =gUnknown_0203CF4C
 	ldr r0, =gText_Cancel2
 	mov r12, r0
-	ldr r4, =gUnknown_03006310
+	ldr r4, =gMultiuseListMenuTemplate
 	ldr r1, =gUnknown_0203CF48
 	mov r8, r1
 	ldr r2, =sub_81D1E7C
@@ -23376,7 +23376,7 @@ sub_81D28C8: @ 81D28C8
 	push {r4-r7,lr}
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r3, =gUnknown_03006310
+	ldr r3, =gMultiuseListMenuTemplate
 	adds r2, r3, 0
 	ldr r1, =gUnknown_08625548
 	ldm r1!, {r5-r7}
@@ -30343,8 +30343,8 @@ _081D6176:
 	.pool
 	thumb_func_end sub_81D6134
 
-	thumb_func_start battle_init
-battle_init: @ 81D6180
+	thumb_func_start sub_81D6180
+sub_81D6180: @ 81D6180
 	lsls r0, 24
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
@@ -30355,7 +30355,7 @@ battle_init: @ 81D6180
 	ldrh r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end battle_init
+	thumb_func_end sub_81D6180
 
 	thumb_func_start GetTrainerHillTrainerFlag
 @ u8 GetTrainerHillTrainerFlag(u8 fieldObjectId)

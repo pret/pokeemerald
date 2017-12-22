@@ -11,7 +11,7 @@ IslandCave_MapScript1_238E3A: @ 8238E3A
 
 IslandCave_EventScript_238E44:: @ 8238E44
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, IslandCave_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
@@ -104,15 +104,15 @@ IslandCave_EventScript_238F58:: @ 8238F58
 	waitmoncry
 	setwildbattle SPECIES_REGICE, 40, ITEM_NONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0A74
+	special StartRegiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq IslandCave_EventScript_238F9F
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq IslandCave_EventScript_238FA8
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq IslandCave_EventScript_238FA8
 	setflag FLAG_0x1BC
 	release

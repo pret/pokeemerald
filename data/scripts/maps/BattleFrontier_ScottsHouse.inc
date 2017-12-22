@@ -48,7 +48,7 @@ BattleFrontier_ScottsHouse_EventScript_263704:: @ 8263704
 	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
 	msgbox BattleFrontier_ScottsHouse_Text_2640BC, 4
 	giveitem_std ITEM_LANSAT_BERRY
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2637D0
 	setflag FLAG_0x05C
 	setflag FLAG_0x004
@@ -72,7 +72,7 @@ BattleFrontier_ScottsHouse_EventScript_26376A:: @ 826376A
 	goto_if 0, BattleFrontier_ScottsHouse_EventScript_2636EC
 	msgbox BattleFrontier_ScottsHouse_Text_264216, 4
 	giveitem_std ITEM_STARF_BERRY
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2637D0
 	setflag FLAG_0x1D2
 	setflag FLAG_0x004
@@ -91,9 +91,9 @@ BattleFrontier_ScottsHouse_EventScript_2637DA:: @ 82637DA
 
 BattleFrontier_ScottsHouse_EventScript_2637E4:: @ 82637E4
 	random 3
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_ScottsHouse_EventScript_263807
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_ScottsHouse_EventScript_263811
 	msgbox BattleFrontier_ScottsHouse_Text_263DDD, 4
 	release
@@ -118,7 +118,7 @@ BattleFrontier_ScottsHouse_EventScript_26381B:: @ 826381B
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74
-	compare_var_to_value VAR_RESULT, 50
+	compare VAR_RESULT, 50
 	goto_if 4, BattleFrontier_ScottsHouse_EventScript_26387A
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -127,7 +127,7 @@ BattleFrontier_ScottsHouse_EventScript_26381B:: @ 826381B
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74
-	compare_var_to_value VAR_RESULT, 50
+	compare VAR_RESULT, 50
 	goto_if 4, BattleFrontier_ScottsHouse_EventScript_26387A
 	goto BattleFrontier_ScottsHouse_EventScript_2637E4
 	end
@@ -135,7 +135,7 @@ BattleFrontier_ScottsHouse_EventScript_26381B:: @ 826381B
 BattleFrontier_ScottsHouse_EventScript_26387A:: @ 826387A
 	msgbox BattleFrontier_ScottsHouse_Text_264412, 4
 	givedecoration_std 42
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2638A0
 	setflag FLAG_0x0ED
 	setflag FLAG_0x003
@@ -161,7 +161,7 @@ BattleFrontier_ScottsHouse_EventScript_2638B4:: @ 82638B4
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74
-	compare_var_to_value VAR_RESULT, 100
+	compare VAR_RESULT, 100
 	goto_if 4, BattleFrontier_ScottsHouse_EventScript_263913
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -170,7 +170,7 @@ BattleFrontier_ScottsHouse_EventScript_2638B4:: @ 82638B4
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_8161F74
-	compare_var_to_value VAR_RESULT, 100
+	compare VAR_RESULT, 100
 	goto_if 4, BattleFrontier_ScottsHouse_EventScript_263913
 	goto BattleFrontier_ScottsHouse_EventScript_2637E4
 	end
@@ -178,7 +178,7 @@ BattleFrontier_ScottsHouse_EventScript_2638B4:: @ 82638B4
 BattleFrontier_ScottsHouse_EventScript_263913:: @ 8263913
 	msgbox BattleFrontier_ScottsHouse_Text_26449F, 4
 	givedecoration_std 43
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2638A0
 	setflag FLAG_0x0EE
 	setflag FLAG_0x003
@@ -194,23 +194,23 @@ BattleFrontier_ScottsHouse_EventScript_263943:: @ 8263943
 	msgbox BattleFrontier_ScottsHouse_Text_263A3F, 4
 	closemessage
 	delay 30
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, BattleFrontier_ScottsHouse_EventScript_263A13
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, BattleFrontier_ScottsHouse_EventScript_263A1E
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, BattleFrontier_ScottsHouse_EventScript_263A29
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, BattleFrontier_ScottsHouse_EventScript_263A34
 	msgbox BattleFrontier_ScottsHouse_Text_263B29, 4
 	applymovement 1, BattleFrontier_ScottsHouse_Movement_27259E
 	waitmovement 0
 	msgbox BattleFrontier_ScottsHouse_Text_263BD4, 4
-	compare_var_to_value VAR_0x40D1, 13
+	compare VAR_0x40D1, 13
 	goto_eq BattleFrontier_ScottsHouse_EventScript_2639BC
-	compare_var_to_value VAR_0x40D1, 9
+	compare VAR_0x40D1, 9
 	goto_if 4, BattleFrontier_ScottsHouse_EventScript_2639CB
-	compare_var_to_value VAR_0x40D1, 6
+	compare VAR_0x40D1, 6
 	goto_if 4, BattleFrontier_ScottsHouse_EventScript_2639DA
 	goto BattleFrontier_ScottsHouse_EventScript_2639E9
 	end

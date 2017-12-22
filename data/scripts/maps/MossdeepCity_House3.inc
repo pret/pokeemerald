@@ -7,7 +7,7 @@ MossdeepCity_House3_EventScript_2225C3:: @ 82225C3
 	checkflag FLAG_0x098
 	goto_eq MossdeepCity_House3_EventScript_222602
 	msgbox MossdeepCity_House3_Text_222616, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_House3_EventScript_22260C
 	msgbox MossdeepCity_House3_Text_2226B6, 4
 	giveitem_std ITEM_SUPER_ROD

@@ -12,7 +12,7 @@ RustboroCity_Flat2_2F_EventScript_215FE1:: @ 8215FE1
 	goto_eq RustboroCity_Flat2_2F_EventScript_216010
 	msgbox RustboroCity_Flat2_2F_Text_21605A, 4
 	giveitem_std ITEM_PREMIER_BALL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_Flat2_2F_EventScript_272054
 	setflag FLAG_0x0D5
 	release

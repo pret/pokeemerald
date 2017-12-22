@@ -94,7 +94,7 @@ sub_81606A0: @ 81606A0
 	ldr r0, =gUnknown_085CEBB8
 	bl LoadSpritePalette
 	bl sub_81610B8
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r4]
 	ldrh r2, [r4, 0x2]
 	bl ListMenuInit
@@ -151,7 +151,7 @@ sub_8160740: @ 8160740
 	ldr r0, =gUnknown_085CEBB8
 	bl LoadSpritePalette
 	bl sub_81610B8
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	ldrh r1, [r4]
 	ldrh r2, [r4, 0x2]
 	bl ListMenuInit
@@ -175,14 +175,14 @@ sub_8160740: @ 8160740
 	thumb_func_start sub_81607EC
 sub_81607EC: @ 81607EC
 	push {lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_085CEC28
 	movs r0, 0
 	movs r2, 0x2
 	bl InitBgsFromTemplates
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
@@ -353,7 +353,7 @@ _08160994:
 	b _08160E88
 	.pool
 _081609A8:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -433,7 +433,7 @@ _08160A50:
 	b _08160E88
 	.pool
 _08160A64:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -493,7 +493,7 @@ _08160ADC:
 	b _08160E88
 	.pool
 _08160AEC:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -551,7 +551,7 @@ _08160B6C:
 	b _08160E88
 	.pool
 _08160B80:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -980,7 +980,7 @@ sub_8160F50: @ 8160F50
 	lsls r4, 1
 	adds r0, r4
 	ldrb r0, [r0]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r5, r0, 0
 	ldr r0, [r6]
 	adds r0, r4
@@ -988,7 +988,7 @@ sub_8160F50: @ 8160F50
 	ldr r4, =gUnknown_0203BC38
 	adds r2, r4, 0x2
 	adds r1, r4, 0
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0x2
 	negs r0, r0
 	cmp r5, r0

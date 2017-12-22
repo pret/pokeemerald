@@ -6,18 +6,18 @@ Route118_MapScripts:: @ 81F3DBC
 
 Route118_MapScript1_1F3DCC: @ 81F3DCC
 	call Route118_EventScript_28CCC7
-	compare_var_to_value VAR_0x4039, 1
+	compare VAR_0x4039, 1
 	call_if 1, Route118_EventScript_273D13
-	compare_var_to_value VAR_0x4037, 7
+	compare VAR_0x4037, 7
 	call_if 1, Route118_EventScript_273D1B
-	compare_var_to_value VAR_0x4037, 8
+	compare VAR_0x4037, 8
 	call_if 1, Route118_EventScript_273D1B
 	end
 
 Route118_MapScript1_1F3DF3: @ 81F3DF3
-	compare_var_to_value VAR_0x4037, 7
+	compare VAR_0x4037, 7
 	call_if 1, Route118_EventScript_273985
-	compare_var_to_value VAR_0x4037, 8
+	compare VAR_0x4037, 8
 	call_if 1, Route118_EventScript_273998
 	end
 
@@ -31,9 +31,9 @@ Route118_EventScript_1F3E14:: @ 81F3E14
 	checkflag FLAG_0x0E3
 	goto_eq Route118_EventScript_1F3E69
 	msgbox Route118_Text_1F427B, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F3E3E
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route118_EventScript_1F3E5F
 	end
 
@@ -102,11 +102,11 @@ Route118_EventScript_1F3EE4:: @ 81F3EE4
 	delay 30
 	msgbox Route118_Text_1F40BE, 4
 	closemessage
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, Route118_EventScript_1F3F28
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, Route118_EventScript_1F3F3A
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, Route118_EventScript_1F3F4C
 	setvar VAR_0x4071, 1
 	removeobject 19
@@ -188,8 +188,8 @@ Route118_Movement_1F3F7E: @ 81F3F7E
 
 Route118_EventScript_1F3F87:: @ 81F3F87
 	trainerbattle 2, TRAINER_ROSE_1, 0, Route118_Text_29D290, Route118_Text_29D2D8, Route118_EventScript_1F3FB3
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F3FD2
 	msgbox Route118_Text_29D2FA, 4
 	release
@@ -223,8 +223,8 @@ Route118_EventScript_1F4000:: @ 81F4000
 
 Route118_EventScript_1F4017:: @ 81F4017
 	trainerbattle 2, TRAINER_DALTON_1, 0, Route118_Text_29D6AF, Route118_Text_29D6CD, Route118_EventScript_1F4043
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route118_EventScript_1F4062
 	msgbox Route118_Text_29D6D8, 4
 	release

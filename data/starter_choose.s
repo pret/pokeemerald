@@ -63,5 +63,4 @@ sSpriteTemplate_PokeBall:: @ 85B1F28
 	.incbin "baserom.gba", 0x5b1f28, 0x18
 
 gUnknown_085B1F40:: @ 85B1F40
-	.incbin "baserom.gba", 0x5b1f40, 0x294
-
+	.incbin "baserom.gba", 0x5b1f40, 0x18

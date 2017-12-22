@@ -11,9 +11,9 @@ LavaridgeTown_MapScript1_1EA4DE: @ 81EA4DE
 	call_if 1, LavaridgeTown_EventScript_1EA53F
 	call LavaridgeTown_EventScript_271ED7
 	call LavaridgeTown_EventScript_271EFB
-	compare_var_to_value VAR_0x4053, 1
+	compare VAR_0x4053, 1
 	call_if 1, LavaridgeTown_EventScript_1EA518
-	compare_var_to_value VAR_0x4053, 1
+	compare VAR_0x4053, 1
 	call_if 1, LavaridgeTown_EventScript_1EA543
 	end
 
@@ -23,7 +23,7 @@ LavaridgeTown_EventScript_1EA514:: @ 81EA514
 
 LavaridgeTown_EventScript_1EA518:: @ 81EA518
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 9
+	compare VAR_0x8004, 9
 	goto_eq LavaridgeTown_EventScript_1EA529
 	return
 
@@ -49,24 +49,24 @@ LavaridgeTown_MapScript2_1EA547: @ 81EA547
 LavaridgeTown_EventScript_1EA551:: @ 81EA551
 	lockall
 	getplayerxy VAR_0x8008, VAR_0x8009
-	compare_var_to_value VAR_0x8008, 9
+	compare VAR_0x8008, 9
 	call_if 1, LavaridgeTown_EventScript_1EA63A
-	compare_var_to_value VAR_0x8008, 9
+	compare VAR_0x8008, 9
 	call_if 5, LavaridgeTown_EventScript_1EA65C
 	delay 20
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LavaridgeTown_EventScript_1EA630
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LavaridgeTown_EventScript_1EA635
-	compare_var_to_value VAR_0x8008, 9
+	compare VAR_0x8008, 9
 	call_if 1, LavaridgeTown_EventScript_1EA6A1
-	compare_var_to_value VAR_0x8008, 9
+	compare VAR_0x8008, 9
 	call_if 5, LavaridgeTown_EventScript_1EA6AC
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LavaridgeTown_EventScript_1EA5B5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LavaridgeTown_EventScript_1EA5DA
 	end
 
@@ -91,9 +91,9 @@ LavaridgeTown_EventScript_1EA5FF:: @ 81EA5FF
 	removeobject 8
 	addobject 7
 	delay 30
-	compare_var_to_value VAR_0x8008, 9
+	compare VAR_0x8008, 9
 	call_if 1, LavaridgeTown_EventScript_1EA6B7
-	compare_var_to_value VAR_0x8008, 9
+	compare VAR_0x8008, 9
 	call_if 5, LavaridgeTown_EventScript_1EA6C9
 	removeobject 7
 	setvar VAR_0x4053, 2
@@ -213,7 +213,7 @@ LavaridgeTown_Movement_1EA6F8: @ 81EA6F8
 
 LavaridgeTown_EventScript_1EA6FA:: @ 81EA6FA
 	specialvar VAR_RESULT, player_get_direction_lower_nybble
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LavaridgeTown_EventScript_1EA70B
 	end
 
@@ -251,10 +251,10 @@ LavaridgeTown_EventScript_1EA744:: @ 81EA744
 	checkflag FLAG_0x10A
 	goto_eq LavaridgeTown_EventScript_1EA787
 	msgbox LavaridgeTown_Text_1EAB80, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LavaridgeTown_EventScript_1EA79B
 	getpartysize
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq LavaridgeTown_EventScript_1EA791
 	msgbox LavaridgeTown_Text_1EACC0, 4
 	setflag FLAG_0x10A

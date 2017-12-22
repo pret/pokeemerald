@@ -11,8 +11,7 @@
 #include "link.h"
 #include "constants/hold_effects.h"
 #include "random.h"
-#include "trainer_classes.h"
-#include "trainer_ids.h"
+#include "constants/trainers.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "m4a.h"
@@ -22,6 +21,7 @@
 #include "constants/abilities.h"
 #include "pokemon_animation.h"
 #include "pokedex.h"
+#include "pokeblock.h"
 
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
@@ -59,7 +59,6 @@ extern const u8 gText_PkmnsXPreventsSwitching[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
-extern const s8 gPokeblockFlavorCompatibilityTable[];
 extern const u8 gMonAnimationDelayTable[];
 extern const u8 gMonFrontAnimIdsTable[];
 
@@ -692,9 +691,9 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
         if ((event != 5 || !(Random() & 1))
          && (event != 3
           || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-           && (gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_ELITE_FOUR
-            || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_LEADER
-            || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_CHAMPION))))
+           && (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR
+            || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_LEADER
+            || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION))))
         {
             s8 mod = gUnknown_08329ECE[event][friendshipLevel];
             if (mod > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
@@ -1146,55 +1145,57 @@ void ClearBattleMonForms(void)
 u16 GetBattleBGM(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
-        return 0x1E0;
+        return BGM_BATTLE34;
     if (gBattleTypeFlags & BATTLE_TYPE_REGI)
-        return 0x1DF;
+        return BGM_BATTLE36;
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
-        return 0x1DC;
+        return BGM_BATTLE20;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         u8 trainerClass;
+
         if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
             trainerClass = GetFrontierOpponentClass(gTrainerBattleOpponent_A);
         else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
-            trainerClass = CLASS_EXPERT;
+            trainerClass = TRAINER_CLASS_EXPERT;
         else
             trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
+
         switch (trainerClass)
         {
-        case CLASS_AQUA_LEADER:
-        case CLASS_MAGMA_LEADER:
-            return 0x1E3;
-        case CLASS_TEAM_AQUA:
-        case CLASS_TEAM_MAGMA:
-        case CLASS_AQUA_ADMIN:
-        case CLASS_MAGMA_ADMIN:
-            return 0x1DB;
-        case CLASS_LEADER:
-            return 0x1DD;
-        case CLASS_CHAMPION:
-            return 0x1DE;
-        case CLASS_PKMN_TRAINER_RIVAL:
+        case TRAINER_CLASS_AQUA_LEADER:
+        case TRAINER_CLASS_MAGMA_LEADER:
+            return BGM_BATTLE30;
+        case TRAINER_CLASS_TEAM_AQUA:
+        case TRAINER_CLASS_TEAM_MAGMA:
+        case TRAINER_CLASS_AQUA_ADMIN:
+        case TRAINER_CLASS_MAGMA_ADMIN:
+            return BGM_BATTLE31;
+        case TRAINER_CLASS_LEADER:
+            return BGM_BATTLE32;
+        case TRAINER_CLASS_CHAMPION:
+            return BGM_BATTLE33;
+        case TRAINER_CLASS_PKMN_TRAINER_3:
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-                return 0x1E1;
+                return BGM_BATTLE35;
             if (!StringCompare(gTrainers[gTrainerBattleOpponent_A].trainerName, gText_BattleWallyName))
-                return 0x1DC;
-            return 0x1E1;
-        case CLASS_ELITE_FOUR:
-            return 0x1E2;
-        case CLASS_SALON_MAIDEN:
-        case CLASS_DOME_ACE:
-        case CLASS_PALACE_MAVEN:
-        case CLASS_ARENA_TYCOON:
-        case CLASS_FACTORY_HEAD:
-        case CLASS_PIKE_QUEEN:
-        case CLASS_PYRAMID_KING:
-            return 0x1D7;
+                return BGM_BATTLE20;
+            return BGM_BATTLE35;
+        case TRAINER_CLASS_ELITE_FOUR:
+            return BGM_BATTLE38;
+        case TRAINER_CLASS_SALON_MAIDEN:
+        case TRAINER_CLASS_DOME_ACE:
+        case TRAINER_CLASS_PALACE_MAVEN:
+        case TRAINER_CLASS_ARENA_TYCOON:
+        case TRAINER_CLASS_FACTORY_HEAD:
+        case TRAINER_CLASS_PIKE_QUEEN:
+        case TRAINER_CLASS_PYRAMID_KING:
+            return BGM_BATTLE_FRONTIER_BRAIN;
         default:
-            return 0x1DC;
+            return BGM_BATTLE20;
         }
     }
-    return 0x1DA;
+    return BGM_BATTLE27;
 }
 
 void PlayBattleBGM(void)
@@ -1297,21 +1298,21 @@ bool8 IsPokeSpriteNotFlipped(u16 species)
     return gBaseStats[species].noFlip;
 }
 
-s8 GetMonFlavorRelation(struct Pokemon *mon, u8 a2)
+s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
 {
     u8 nature = GetNature(mon);
-    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + flavor];
 }
 
-s8 GetFlavorRelationByPersonality(u32 personality, u8 a2)
+s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
 {
     u8 nature = GetNatureFromPersonality(personality);
-    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + flavor];
 }
 
 bool8 IsTradedMon(struct Pokemon *mon)
 {
-    u8 otName[8];
+    u8 otName[OT_NAME_LENGTH + 1];
     u32 otId;
     GetMonData(mon, MON_DATA_OT_NAME, otName);
     otId = GetMonData(mon, MON_DATA_OT_ID, 0);
@@ -1396,7 +1397,7 @@ static s32 GetWildMonTableIdInAlteringCave(u16 species)
 
 void SetWildMonHeldItem(void)
 {
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID | BATTLE_TYPE_x100000)))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID | BATTLE_TYPE_PIKE)))
     {
         u16 rnd = Random() % 100;
         u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, 0);
@@ -1462,12 +1463,14 @@ bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
     return retVal;
 }
 
-const u8* GetTrainerPartnerName(void)
+const u8 *GetTrainerPartnerName(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         if (gPartnerTrainerId == STEVEN_PARTNER_ID)
-            return gTrainers[TRAINER_ID_STEVEN].trainerName;
+        {
+            return gTrainers[TRAINER_STEVEN].trainerName;
+        }
         else
         {
             GetFrontierTrainerName(gStringVar1, gPartnerTrainerId);
@@ -1682,14 +1685,14 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
     }
 }
 
-const u8* GetTrainerClassNameFromId(u16 trainerId)
+const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
     if (trainerId > NO_OF_TRAINERS)
         trainerId = 0;
     return gTrainerClassNames[gTrainers[trainerId].trainerClass];
 }
 
-const u8* GetTrainerNameFromId(u16 trainerId)
+const u8 *GetTrainerNameFromId(u16 trainerId)
 {
     if (trainerId > NO_OF_TRAINERS)
         trainerId = 0;

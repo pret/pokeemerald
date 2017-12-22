@@ -5,9 +5,9 @@ BattleFrontier_BattleTowerBattleRoom2_MapScripts:: @ 8248EE8
 	.byte 0
 
 BattleFrontier_BattleTowerBattleRoom2_MapScript1_248EF8: @ 8248EF8
-	compare_var_to_value VAR_0x40CE, 2
+	compare VAR_0x40CE, 2
 	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_248F0F
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_248F2F
 	end
 
@@ -15,7 +15,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F0F:: @ 8248F0F
 	setvar VAR_0x8004, 14
 	special sub_8161F74
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_248F29
 	setvar VAR_0x401F, 0
 	return
@@ -48,7 +48,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248F4D:: @ 8248F4D
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4
 	applymovement 2, BattleFrontier_BattleTowerBattleRoom2_Movement_24953E
 	applymovement 3, BattleFrontier_BattleTowerBattleRoom2_Movement_24953E
@@ -70,7 +70,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_248FB4:: @ 8248FB4
 	applymovement 1, BattleFrontier_BattleTowerBattleRoom2_Movement_249528
 	applymovement 4, BattleFrontier_BattleTowerBattleRoom2_Movement_24952E
 	waitmovement 0
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249026
 	setvar VAR_0x8004, 7
 	setvar VAR_0x8005, 0
@@ -142,7 +142,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2490AA:: @ 82490AA
 	applymovement 5, BattleFrontier_BattleTowerBattleRoom2_Movement_249524
 	applymovement 6, BattleFrontier_BattleTowerBattleRoom2_Movement_249524
 	waitmovement 0
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249118
 	msgbox BattleFrontier_BattleTowerBattleRoom2_Text_242217, 4
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249121
@@ -157,21 +157,21 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249121:: @ 8249121
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249514
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_249143:: @ 8249143
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_2492FD
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_249283
 	call BattleFrontier_BattleTowerBattleRoom2_EventScript_23E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_2491B1
 	multichoice 19, 4, 103, 1
 	switch VAR_RESULT
@@ -256,7 +256,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2492DB:: @ 82492DB
 	end
 
 BattleFrontier_BattleTowerBattleRoom2_EventScript_2492FD:: @ 82492FD
-	compare_var_to_value VAR_0x40CE, 3
+	compare VAR_0x40CE, 3
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_24937E
 	copyvar VAR_0x400F, VAR_RESULT
 	switch VAR_0x400F
@@ -374,7 +374,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249483:: @ 8249483
 	waitmessage
 	special sub_813B568
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleTowerBattleRoom2_EventScript_24907E
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249412
 	end
@@ -395,7 +395,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_2494DD:: @ 82494DD
 	message BattleFrontier_BattleTowerBattleRoom2_Text_24244C
 	waitmessage
 	multichoicedefault 20, 8, 94, 1, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerBattleRoom2_EventScript_2494FA
 	goto BattleFrontier_BattleTowerBattleRoom2_EventScript_249143
 	end

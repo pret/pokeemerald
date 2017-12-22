@@ -17,6 +17,7 @@
 #include "item.h"
 #include "constants/items.h"
 #include "constants/hold_effects.h"
+#include "constants/trainers.h"
 #include "link.h"
 #include "bg.h"
 #include "dma3.h"
@@ -38,7 +39,6 @@
 #include "pokedex.h"
 #include "constants/abilities.h"
 #include "constants/moves.h"
-#include "trainer_classes.h"
 #include "evolution_scene.h"
 #include "roamer.h"
 #include "tv.h"
@@ -152,7 +152,7 @@ extern u8 gUnknown_020241E9;
 extern u16 gChosenMove;
 
 extern const struct BattleMove gBattleMoves[];
-extern const u16 gUnknown_08C004E0[]; // battle textbox palette
+extern const u16 gBattleTextboxPalette[]; // battle textbox palette
 extern const struct BgTemplate gUnknown_0831AA08[];
 extern const struct WindowTemplate * const gUnknown_0831ABA0[];
 extern const u8 gUnknown_0831ACE0[];
@@ -185,7 +185,7 @@ extern void sub_80356D0(void);
 extern void GetFrontierTrainerName(u8* dst, u16 trainerId); // battle tower
 extern void sub_8166188(void); // battle tower, sets link battle mons level but why?
 extern void sub_8165B88(u8* dst, u16 trainerId); // battle tower, gets language
-extern void sub_81DB4DC(u8* dst, u8 arg2); //
+extern void PadNameString(u8* dst, u8 arg2); //
 extern void sub_81B9150(void);
 extern void sub_800AC34(void);
 extern void sub_80B3AF8(u8 taskId); // cable club
@@ -415,7 +415,7 @@ static void CB2_InitBattleInternal(void)
 
     gBattleTerrain = BattleSetup_GetTerrainId();
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-        gBattleTerrain = BATTLE_TERRAIN_INSIDE;
+        gBattleTerrain = BATTLE_TERRAIN_BUILDING;
 
     sub_80356D0();
     LoadBattleTextboxAndBackground();
@@ -754,7 +754,7 @@ static void CB2_HandleStartBattle(void)
             ResetBlockReceivedFlags();
             sub_8036EB8(2, playerMultiplayerId);
             SetAllPlayersBerryData();
-            taskId = CreateTask(task00_0800F6FC, 0);
+            taskId = CreateTask(sub_8035D74, 0);
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
@@ -956,7 +956,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             ResetBlockReceivedFlags();
             sub_8036EB8(2, playerMultiplayerId);
             SetAllPlayersBerryData();
-            taskId = CreateTask(task00_0800F6FC, 0);
+            taskId = CreateTask(sub_8035D74, 0);
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
@@ -1140,7 +1140,7 @@ static void sub_80379F8(u8 arrayIdPlus)
         gUnknown_02022FF8[i].gender      = GetMonGender(&gPlayerParty[arrayIdPlus + i]);
         StripExtCtrlCodes(gUnknown_02022FF8[i].nickname);
         if (GetMonData(&gPlayerParty[arrayIdPlus + i], MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
-            sub_81DB4DC(gUnknown_02022FF8[i].nickname, 0);
+            PadNameString(gUnknown_02022FF8[i].nickname, CHAR_SPACE);
     }
     memcpy(gUnknown_02023058, gUnknown_02022FF8, sizeof(gUnknown_02022FF8));
 }
@@ -1342,7 +1342,7 @@ static void CB2_HandleStartMultiBattle(void)
             sub_8036EB8(4, playerMultiplayerId);
             SetAllPlayersBerryData();
             sub_8068AA4();
-            var = CreateTask(task00_0800F6FC, 0);
+            var = CreateTask(sub_8035D74, 0);
             gTasks[var].data[1] = 0x10E;
             gTasks[var].data[2] = 0x5A;
             gTasks[var].data[5] = 0;
@@ -1718,7 +1718,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             {
                 const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
@@ -1726,11 +1726,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
             }
-            case PARTY_FLAG_CUSTOM_MOVES:
+            case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
                 const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
@@ -1744,11 +1744,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 }
                 break;
             }
-            case PARTY_FLAG_HAS_ITEM:
+            case F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
@@ -1758,11 +1758,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
             }
-            case PARTY_FLAG_CUSTOM_MOVES | PARTY_FLAG_HAS_ITEM:
+            case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
+                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
 
                 personalityValue += nameHash << 8;
@@ -1978,7 +1978,7 @@ void sub_8038D64(void)
         gBattle_BG3_Y = 0;
 
         sub_80356D0();
-        LoadCompressedPalette(gUnknown_08C004E0, 0, 64);
+        LoadCompressedPalette(gBattleTextboxPalette, 0, 64);
         ApplyPlayerChosenFrameToBattleMenu();
         ResetSpriteData();
         ResetTasks();
@@ -1988,7 +1988,7 @@ void sub_8038D64(void)
         gReservedSpritePaletteCount = 4;
         SetVBlankCallback(VBlankCB_Battle);
 
-        taskId = CreateTask(task00_0800F6FC, 0);
+        taskId = CreateTask(sub_8035D74, 0);
         gTasks[taskId].data[1] = 0x10E;
         gTasks[taskId].data[2] = 0x5A;
         gTasks[taskId].data[5] = 1;
@@ -4749,19 +4749,19 @@ static void HandleEndTurn_BattleWon(void)
 
         switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)
         {
-        case CLASS_ELITE_FOUR:
-        case CLASS_CHAMPION:
+        case TRAINER_CLASS_ELITE_FOUR:
+        case TRAINER_CLASS_CHAMPION:
             PlayBGM(BGM_KACHI5);
             break;
-        case CLASS_TEAM_AQUA:
-        case CLASS_TEAM_MAGMA:
-        case CLASS_AQUA_ADMIN:
-        case CLASS_AQUA_LEADER:
-        case CLASS_MAGMA_ADMIN:
-        case CLASS_MAGMA_LEADER:
+        case TRAINER_CLASS_TEAM_AQUA:
+        case TRAINER_CLASS_TEAM_MAGMA:
+        case TRAINER_CLASS_AQUA_ADMIN:
+        case TRAINER_CLASS_AQUA_LEADER:
+        case TRAINER_CLASS_MAGMA_ADMIN:
+        case TRAINER_CLASS_MAGMA_LEADER:
             PlayBGM(BGM_KACHI4);
             break;
-        case CLASS_LEADER:
+        case TRAINER_CLASS_LEADER:
             PlayBGM(BGM_KACHI3);
             break;
         default:

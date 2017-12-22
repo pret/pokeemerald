@@ -10,11 +10,11 @@ AbandonedShip_HiddenFloorRooms_EventScript_238C59:: @ 8238C59
 	setvar VAR_0x4001, 1
 	getplayerxy VAR_0x4002, VAR_0x4003
 	setvar VAR_0x4004, 1
-	compare_var_to_value VAR_0x4002, 21
+	compare VAR_0x4002, 21
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238CD1
-	compare_var_to_value VAR_0x4002, 36
+	compare VAR_0x4002, 36
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238CD7
-	compare_var_to_value VAR_0x4003, 2
+	compare VAR_0x4003, 2
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238CDD
 	switch VAR_0x4004
 	case 1, AbandonedShip_HiddenFloorRooms_EventScript_238CE3
@@ -44,7 +44,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238CE3:: @ 8238CE3
 	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	specialvar VAR_RESULT, sub_81392F8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DD3
 	waitfieldeffect 54
 	delay 10
@@ -55,10 +55,10 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D0C:: @ 8238D0C
 
 AbandonedShip_HiddenFloorRooms_EventScript_238D0D:: @ 8238D0D
 	specialvar VAR_RESULT, sub_81392AC
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq AbandonedShip_HiddenFloorRooms_EventScript_238D32
 	delay 20
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DB3
 	waitfieldeffect 54
 	delay 10
@@ -78,7 +78,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D33:: @ 8238D33
 	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	specialvar VAR_RESULT, sub_8139320
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DE3
 	waitfieldeffect 54
 	delay 10
@@ -99,7 +99,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_238D6B:: @ 8238D6B
 	setfieldeffectargument 2, 0
 	dofieldeffect 54
 	specialvar VAR_RESULT, sub_81392D4
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, AbandonedShip_HiddenFloorRooms_EventScript_238DC3
 	waitfieldeffect 54
 	delay 10

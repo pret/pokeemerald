@@ -850,13 +850,13 @@ void TintPalette_GrayScale(u16 *palette, u16 count)
         r = *palette & 0x1F;
         g = (*palette >> 5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-        
+
         r = r * Q_8_8(0.2969);
         r += g * Q_8_8(0.5899);
         r += b * Q_8_8(0.1133);
-        
+
         gray = r >> 8;
-        
+
         *palette++ = gray << 10 | gray << 5 | gray;
     }
 }
@@ -874,18 +874,18 @@ void TintPalette_GrayScale2(u16 *palette, u16 count)
         r = *palette & 0x1F;
         g = (*palette >> 5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-       
+
         r = r * Q_8_8(0.2969);
         r += g * Q_8_8(0.5899);
         r += b * Q_8_8(0.1133);
-        
+
         gray = r >> 8;
-        
+
         if (gray > 0x1F)
             gray = 0x1F;
-        
+
         gray = sRoundedDownGrayscaleMap[gray];
-        
+
         *palette++ = gray << 10 | gray << 5 | gray;
     }
 }
@@ -897,32 +897,35 @@ void TintPalette_SepiaTone(u16 *palette, u16 count)
     int green;
     int blue;
     u32 gray;
-    u8 r2;
-    u8 g2;
-    u8 b2;
-    
+    u32 sepia;
+    s8 r2;
+    s8 g2;
+    s8 b2;
+
     int i;
     for (i = 0; i < count; i++)
     {
-        red = *palette & 0x1F;
-        green = (*palette >> 5) & 0x1F;
-        blue = (*palette >> 10) & 0x1F;
-        
-        gray = red * Q_8_8(0.2969);
-        gray += green * Q_8_8(0.5899);
-        gray += blue * Q_8_8(0.1133);
-        
-        gray = gray / 256;
-        
-        r2 = (gray * 0x133) / 256;
-        
+        r = *palette & 0x1F;
+        g = (*palette >> 5) & 0x1F;
+        b = (*palette >> 10) & 0x1F;
+
+        r *= 0x4C;
+        r += g * 0x97;
+        r += b * 0x1D;
+
+        gray = (s32)(r >> 8);
+
+        sepia = (gray * 0x133);
+
+        r2 = (u16)sepia >> 8;
+
         g2 = gray;
-        
-        b2 = (gray * 0xF);
-        
+
+        b2 = (gray * 15);
+
         if (r2 > 0x1F)
             r2 = 0x1F;
-        
+
         *palette++ = b2 << 10 | g2 << 5 | r2;
     }
 }
@@ -1006,28 +1009,28 @@ void TintPalette_CustomTone(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
         r = *palette & 0x1F;
         g = (*palette >> 5) & 0x1F;
         b = (*palette >> 10) & 0x1F;
-        
+
         r *= 0x4C;
         r += g * 0x97;
         r += b * 0x1D;
-        
+
         gray = r >> 8;
-        
+
         r2 = (u16)(gray * a3) >> 8;
-        
+
         g2 = (u16)(gray * a4) >> 8;
-        
+
         b2 = (u16)(gray * a5) >> 8;
-        
+
         if (r2 > 0x1F)
             r2 = 0x1F;
-        
+
         if (g2 > 0x1F)
             g2 = 0x1F;
-        
+
         if (b2 > 0x1F)
             b2 = 0x1F;
-        
+
         *palette++ = b2 << 10 | g2 << 5 | r2;
     }
     return;

@@ -7,10 +7,18 @@
 
 extern const u8 gUnknown_0823B4E8[];
 extern const u8 gUnknown_0823B5E9[];
+extern const u8 EventScript_TestSignpostMsg[];
+extern const u8 EventScript_TryGetTrainerScript[];
 extern const u8 EventScript_275BB7[];
 extern const u8 EventScript_275D0C[];
 extern const u8 EventScript_275D1F[];
 extern const u8 EventScript_275D2E[];
+extern const u8 EventScript_271354[];
+extern const u8 EventScript_2713C2[];
+extern const u8 EventScript_TryDoDoubleTrainerBattle[];
+extern const u8 EventScript_271362[];
+extern const u8 EventScript_TryDoDoubleRematchBattle[];
+extern const u8 EventScript_2713D1[];
 extern const u8 EventScript_2766A2[];
 extern const u8 EventScript_2766A6[];
 

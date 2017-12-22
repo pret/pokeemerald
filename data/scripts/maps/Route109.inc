@@ -280,7 +280,7 @@ Route109_EventScript_1EE910:: @ 81EE910
 Route109_EventScript_1EE921:: @ 81EE921
 	message Route109_Text_1EEC96
 	msgbox Route109_Text_1EEC96, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route109_EventScript_1EE981
 	goto Route109_EventScript_1EE972
 	end
@@ -333,7 +333,7 @@ Route109_EventScript_1EE9B5:: @ 81EE9B5
 	goto_eq Route109_EventScript_1EE9F2
 	msgbox Route109_Text_1EEFDE, 4
 	giveitem_std ITEM_SOFT_SAND
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route109_EventScript_272054
 	closemessage
 	applymovement VAR_LAST_TALKED, Route109_Movement_2725A2
@@ -397,8 +397,8 @@ Route109_EventScript_1EEA82:: @ 81EEA82
 
 Route109_EventScript_1EEA99:: @ 81EEA99
 	trainerbattle 2, TRAINER_RICKY_1, 0, Route109_Text_29733B, Route109_Text_297379, Route109_EventScript_1EEAC5
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route109_EventScript_1EEAE4
 	msgbox Route109_Text_297380, 4
 	release
@@ -422,8 +422,8 @@ Route109_EventScript_1EEAE4:: @ 81EEAE4
 
 Route109_EventScript_1EEAFB:: @ 81EEAFB
 	trainerbattle 2, TRAINER_LOLA_1, 0, Route109_Text_29749C, Route109_Text_2974CF, Route109_EventScript_1EEB27
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route109_EventScript_1EEB46
 	msgbox Route109_Text_2974D6, 4
 	release

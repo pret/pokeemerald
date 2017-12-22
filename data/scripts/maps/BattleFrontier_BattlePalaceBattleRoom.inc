@@ -12,9 +12,9 @@ BattleFrontier_BattlePalaceBattleRoom_MapScript1_24F825: @ 824F825
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F833:: @ 824F833
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24F84B
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24F856
 	return
 
@@ -37,7 +37,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F86B:: @ 824F86B
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8B5
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE9B
 	waitmovement 0
@@ -100,31 +100,31 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F911:: @ 824F911
 	special sub_81A1780
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24F98A:: @ 824F98A
 	setvar VAR_0x8004, 9
 	special sub_81A1780
 	copyvar VAR_0x400F, VAR_RESULT
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB61
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE66
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE6D
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE74
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE7B
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE82
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	call_if 1, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FE89
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_23E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FA42
 	multichoice 19, 4, 103, 1
 	switch VAR_RESULT
@@ -198,7 +198,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB3F:: @ 824FB3F
 	end
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB61:: @ 824FB61
-	compare_var_to_value VAR_0x4002, 1
+	compare VAR_0x4002, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2500DD, 4
 	setvar VAR_0x4002, 1
@@ -207,7 +207,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB79:: @ 824FB79
 	message BattleFrontier_BattlePalaceBattleRoom_Text_25014A
 	waitmessage
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_23E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FBD0
 	multichoice 19, 4, 103, 1
 	switch VAR_RESULT
@@ -247,7 +247,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06:: @ 824FC06
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2501C1, 4
 	setvar VAR_0x8004, 2
@@ -257,7 +257,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FC06:: @ 824FC06
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCAA:: @ 824FCAA
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2502C4, 4
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8FA
 
@@ -266,7 +266,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	special sub_8195960
 	setvar VAR_0x8004, 12
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_2502FF, 4
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE99
@@ -290,7 +290,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD3A:: @ 824FD3A
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250485, 4
 	setvar VAR_0x8004, 2
@@ -300,7 +300,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD3A:: @ 824FD3A
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD67:: @ 824FD67
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250572, 4
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_24FDF7
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84
 	goto BattleFrontier_BattlePalaceBattleRoom_EventScript_24F8FA
 
@@ -309,7 +309,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 	special sub_8195960
 	setvar VAR_0x8004, 12
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FB28
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_25057E, 4
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE99
@@ -337,14 +337,14 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_24FDF7:: @ 824FDF7
 	setvar VAR_0x8005, 6
 	setvar VAR_0x8006, 0
 	special sub_81A1780
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 4
 	setvar VAR_0x8005, 0
 	special sub_8163AC4
 	waitstate
 	setvar VAR_0x8004, 18
 	special sub_81A1780
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 21
 	special sub_81A1780
 	return
@@ -460,7 +460,7 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_24FEB6: @ 824FEB6
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_24FEBB:: @ 824FEBB
 	copyvar VAR_RESULT, VAR_0x40CE
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceBattleRoom_EventScript_24FED5
 	warp BATTLE_FRONTIER_BATTLE_PALACE_LOBBY, 255, 5, 7
 	waitstate

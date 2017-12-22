@@ -250,10 +250,10 @@ BattleFrontier_Lounge7_EventScript_26564F:: @ 826564F
 	buffernumberstring 1, VAR_0x8008
 	copyvar VAR_0x8004, VAR_0x400C
 	msgbox BattleFrontier_Lounge7_Text_265921, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_Lounge7_EventScript_2656CA
 	specialvar VAR_0x4001, sub_813AA04
-	compare_var_to_var VAR_0x4001, VAR_0x8008
+	compare VAR_0x4001, VAR_0x8008
 	goto_if 4, BattleFrontier_Lounge7_EventScript_265696
 	msgbox BattleFrontier_Lounge7_Text_265997, 4
 	goto BattleFrontier_Lounge7_EventScript_2656CA
@@ -267,7 +267,7 @@ BattleFrontier_Lounge7_EventScript_265696:: @ 8265696
 	special sub_813ADB8
 	special sub_81B892C
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_Lounge7_EventScript_265645
 	msgbox BattleFrontier_Lounge7_Text_2659C7, 4
 	copyvar VAR_0x8004, VAR_0x8008
@@ -276,7 +276,7 @@ BattleFrontier_Lounge7_EventScript_265696:: @ 8265696
 	end
 
 BattleFrontier_Lounge7_EventScript_2656CA:: @ 82656CA
-	compare_var_to_value VAR_0x400E, 0
+	compare VAR_0x400E, 0
 	goto_eq BattleFrontier_Lounge7_EventScript_26532F
 	goto BattleFrontier_Lounge7_EventScript_26551F
 	end

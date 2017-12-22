@@ -40,7 +40,7 @@ extern const u8 gDaycareText_PlayOther[];
 
 extern u8 GetCursorSelectionMonId(void);
 extern u16 ItemIdToBattleMoveId(u16);
-extern s32 ListMenuHandleInput(u8);
+extern s32 ListMenuHandleInputGetItemId(u8);
 extern void sub_81AE6C8(u8, u16*, u16*);
 extern void sub_819746C(u8, bool8);
 extern void sub_81973FC(u8, bool8);
@@ -75,7 +75,7 @@ static const struct ListMenuItem sLevelMenuItems[] =
 static const struct ListMenuTemplate sDaycareListMenuLevelTemplate =
 {
     .items = sLevelMenuItems,
-    .unk_04 = sub_81AF078,
+    .moveCursorFunc = sub_81AF078,
     .unk_08 = DaycarePrintMonInfo,
     .totalItems = 3,
     .maxShowed = 3,
@@ -90,7 +90,8 @@ static const struct ListMenuTemplate sDaycareListMenuLevelTemplate =
     .unk_16_0 = TRUE,
     .spaceBetweenItems = 0,
     .unk_16_7 = FALSE,
-    .unk_17_0 = 1
+    .unk_17_0 = 1,
+    .cursorKind = 0
 };
 
 static const u8 *const sCompatibilityMessages[] =
@@ -1256,7 +1257,7 @@ static void DaycarePrintMonInfo(u8 windowId, s32 daycareSlotId, u8 y)
 
 static void Task_HandleDaycareLevelMenuInput(u8 taskId)
 {
-    u32 var = ListMenuHandleInput(gTasks[taskId].tMenuListTaskId);
+    u32 var = ListMenuHandleInputGetItemId(gTasks[taskId].tMenuListTaskId);
 
     if (gMain.newKeys & A_BUTTON)
     {

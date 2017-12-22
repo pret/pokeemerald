@@ -12,6 +12,7 @@
 #include "window.h"
 #include "palette.h"
 #include "battle_controllers.h"
+#include "battle_setup.h"
 
 extern u16 gLastUsedItem;
 extern u8 gLastUsedAbility;
@@ -54,8 +55,6 @@ extern void sub_81D5554(u8 *txtPtr, u16 trainerId); // pokenav
 extern void GetEreaderTrainerName(u8 *txtPtr);
 extern void sub_81A36D0(u8 arg0, u16 trainerId); // battle_frontier_2
 extern void sub_81D572C(u8 arg0, u16 trainerId); // pokenav
-extern const u8* GetTrainer1LoseText(void); // battle_setup
-extern const u8* GetTrainer2LoseText(void); // battle_setup
 extern void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 extern s32 GetStringCenterAlignXOffsetWithLetterSpacing(u8 fontId, const u8 *str, s32 totalWidth, s16 letterSpacing);
 extern u8 GetTextSpeedInRecordedBattle(void);
@@ -1367,7 +1366,7 @@ static const u16 sUnknownMoveTable[] =
 
 static const u8 sDummyWeirdStatusString[] = {EOS, EOS, EOS, EOS, EOS, EOS, EOS, EOS, 0, 0};
 
-static const u8 gUnknown_085CD42C[] =
+static const u8 sUnknown_085CD42C[] =
 {
     0xFF, 0x1, 0x0, 0x1, 0x0, 0x0, 0x1, 0x1, 0xF, 0x6, 0x0, 0x0, 0xFF, 0x1,
     0x1, 0x1, 0x0, 0x0, 0x0, 0x1, 0xF, 0x6, 0x0, 0x0, 0xEE, 0x1, 0x0, 0x1, 0x0,
@@ -1392,7 +1391,7 @@ static const u8 gUnknown_085CD42C[] =
     0x6, 0x0, 0x0, 0x0, 0x1, 0xFF, 0x1, 0x0, 0x0, 0x0, 0x1, 0x0, 0x6, 0x0, 0x0
 };
 
-static const u8 gUnknown_085CD54C[] =
+static const u8 sUnknown_085CD54C[] =
 {
     0xFF, 0x1, 0x0, 0x1, 0x0, 0x0, 0x1, 0x1, 0xF, 0x6, 0x0, 0x0, 0xFF, 0x1,
     0x1, 0x1, 0x0, 0x0, 0x0, 0x1, 0xF, 0x6, 0x0, 0x0, 0xEE, 0x1, 0x0, 0x1, 0x0,
@@ -1419,7 +1418,7 @@ static const u8 gUnknown_085CD54C[] =
 
 static const u8 * const gUnknown_085CD660[] =
 {
-    gUnknown_085CD42C, gUnknown_085CD54C
+    sUnknown_085CD42C, sUnknown_085CD54C
 };
 
 static const u8 sRecordedBattleTextSpeeds[] = {8, 4, 1, 0};
@@ -2068,7 +2067,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 }
                 else
                 {
-                    toCpy = GetTrainer1LoseText();
+                    toCpy = GetTrainerALoseText();
                 }
                 break;
             case B_TXT_TRAINER1_WIN_TEXT: // trainerA win text
@@ -2165,7 +2164,7 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 }
                 else
                 {
-                    toCpy = GetTrainer2LoseText();
+                    toCpy = GetTrainerBLoseText();
                 }
                 break;
             case B_TXT_TRAINER2_WIN_TEXT:

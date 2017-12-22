@@ -7,7 +7,7 @@ FallarborTown_House1_EventScript_200F13:: @ 8200F13
 	checkflag FLAG_0x0E5
 	goto_eq FallarborTown_House1_EventScript_200FB2
 	checkitem ITEM_METEORITE, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq FallarborTown_House1_EventScript_200F38
 	msgbox FallarborTown_House1_Text_200FEE, 4
 	release
@@ -18,11 +18,11 @@ FallarborTown_House1_EventScript_200F38:: @ 8200F38
 	call_if 0, FallarborTown_House1_EventScript_200F8B
 	checkflag FLAG_0x002
 	call_if 1, FallarborTown_House1_EventScript_200F9C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FallarborTown_House1_EventScript_200FA5
 	msgbox FallarborTown_House1_Text_201159, 4
 	giveitem_std ITEM_TM27
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FallarborTown_House1_EventScript_272054
 	setvar VAR_0x8004, 280
 	call FallarborTown_House1_EventScript_2723E4

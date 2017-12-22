@@ -1174,8 +1174,8 @@ _080F917A:
 	bx r1
 	thumb_func_end sub_80F9160
 
-	thumb_func_start sp000_heal_pokemon
-sp000_heal_pokemon: @ 80F9180
+	thumb_func_start HealPlayerParty
+HealPlayerParty: @ 80F9180
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1267,7 +1267,7 @@ _080F922C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sp000_heal_pokemon
+	thumb_func_end HealPlayerParty
 
 	thumb_func_start ScriptGiveMon
 @ void ScriptGiveMon(s16 species_num, u8 level, int held_item)
@@ -1359,8 +1359,8 @@ ScriptGiveEgg: @ 80F92C8
 	bx r1
 	thumb_func_end ScriptGiveEgg
 
-	thumb_func_start sub_80F92F8
-sub_80F92F8: @ 80F92F8
+	thumb_func_start HasEnoughMonsForDoubleBattle
+HasEnoughMonsForDoubleBattle: @ 80F92F8
 	push {lr}
 	bl GetMonsStateToDoubles
 	lsls r0, 24
@@ -1382,7 +1382,7 @@ _080F9318:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80F92F8
+	thumb_func_end HasEnoughMonsForDoubleBattle
 
 	thumb_func_start sub_80F9320
 sub_80F9320: @ 80F9320

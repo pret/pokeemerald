@@ -444,7 +444,7 @@ task_yes_no_maybe: @ 80E215C
 	b _080E21C4
 	.pool
 _080E2180:
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x1

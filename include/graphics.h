@@ -1,10 +1,7 @@
-//
-// Created by scott on 10/21/2017.
-//
-
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
 
+// interface pokeballs
 extern const u8 gInterfaceGfx_PokeBall[];
 extern const u8 gInterfacePal_PokeBall[];
 extern const u8 gInterfaceGfx_GreatBall[];
@@ -30,6 +27,28 @@ extern const u8 gInterfacePal_LuxuryBall[];
 extern const u8 gInterfaceGfx_PremierBall[];
 extern const u8 gInterfacePal_PremierBall[];
 extern const u8 gOpenPokeballGfx[];
+
+// pokeblock
+extern const u8 gMenuPokeblock_Gfx[];
+extern const u8 gMenuPokeblock_Pal[];
+extern const u8 gMenuPokeblock_Tilemap[];
+extern const u8 gMenuPokeblockDevice_Gfx[];
+extern const u8 gMenuPokeblockDevice_Pal[];
+extern const u8 gPokeblockRed_Pal[];
+extern const u8 gPokeblockBlue_Pal[];
+extern const u8 gPokeblockPink_Pal[];
+extern const u8 gPokeblockGreen_Pal[];
+extern const u8 gPokeblockYellow_Pal[];
+extern const u8 gPokeblockPurple_Pal[];
+extern const u8 gPokeblockIndigo_Pal[];
+extern const u8 gPokeblockBrown_Pal[];
+extern const u8 gPokeblockLiteBlue_Pal[];
+extern const u8 gPokeblockOlive_Pal[];
+extern const u8 gPokeblockGray_Pal[];
+extern const u8 gPokeblockBlack_Pal[];
+extern const u8 gPokeblockWhite_Pal[];
+extern const u8 gPokeblockGold_Pal[];
+extern const u8 gPokeblock_Gfx[];
 
 extern const u8 gItemIcon_QuestionMark[];
 extern const u8 gItemIconPalette_QuestionMark[];
@@ -117,6 +136,11 @@ extern const u8 gUnknown_08DB9F08[];
 extern const u8 gUnknown_08DB9FFC[];
 extern const u8 gUnknown_08DBA020[];
 extern const u8 gUnknown_08DBA12C[];
+extern const u8 gUnknown_08DCC05C[];
+extern const u16 gUnknown_08DCC01C[];
+extern const u16 gUnknown_08DCC03C[];
+extern const u8 gUnknown_08DCC648[];
+extern const u8 gUnknown_08DCC908[];
 extern const u8 gUnknown_08DD87C0[];
 extern const u8 gUnknown_08DD8EE0[];
 extern const u16 gUnknown_08DD8780[];
@@ -135,5 +159,83 @@ extern const u16 gUnknown_08DDA800[];
 extern const u8 gUnknown_08DDB020[];
 extern const u8 gUnknown_08DDB2C4[];
 extern const u16 gUnknown_08DDAFE0[];
+
+extern const u8 gBattleTextboxTiles[];
+extern const u8 gBattleTextboxTilemap[];
+extern const u8 gBattleTextboxPalette[];
+extern const u8 gUnknown_08D778F0[];
+extern const u8 gUnknown_08D77B0C[];
+extern const u8 gUnknown_08D77AE4[];
+extern const u8 gUnknown_08D779D8[];
+extern const u8 gUnknown_08D857A8[];
+extern const u8 gUnknown_08D85A1C[];
+extern const u8 gUnknown_08D85600[];
+
+// battle terrains
+extern const u8 gBattleTerrainTiles_TallGrass[];
+extern const u8 gBattleTerrainTilemap_TallGrass[];
+extern const u8 gBattleTerrainAnimTiles_TallGrass[];
+extern const u8 gBattleTerrainAnimTilemap_TallGrass[];
+extern const u8 gBattleTerrainPalette_TallGrass[];
+extern const u8 gBattleTerrainTiles_LongGrass[];
+extern const u8 gBattleTerrainTilemap_LongGrass[];
+extern const u8 gBattleTerrainAnimTiles_LongGrass[];
+extern const u8 gBattleTerrainAnimTilemap_LongGrass[];
+extern const u8 gBattleTerrainPalette_LongGrass[];
+extern const u8 gBattleTerrainTiles_Sand[];
+extern const u8 gBattleTerrainTilemap_Sand[];
+extern const u8 gBattleTerrainAnimTiles_Sand[];
+extern const u8 gBattleTerrainAnimTilemap_Sand[];
+extern const u8 gBattleTerrainPalette_Sand[];
+extern const u8 gBattleTerrainTiles_Underwater[];
+extern const u8 gBattleTerrainTilemap_Underwater[];
+extern const u8 gBattleTerrainAnimTiles_Underwater[];
+extern const u8 gBattleTerrainAnimTilemap_Underwater[];
+extern const u8 gBattleTerrainPalette_Underwater[];
+extern const u8 gBattleTerrainTiles_Water[];
+extern const u8 gBattleTerrainTilemap_Water[];
+extern const u8 gBattleTerrainAnimTiles_Water[];
+extern const u8 gBattleTerrainAnimTilemap_Water[];
+extern const u8 gBattleTerrainPalette_Water[];
+extern const u8 gBattleTerrainTiles_PondWater[];
+extern const u8 gBattleTerrainTilemap_PondWater[];
+extern const u8 gBattleTerrainAnimTiles_PondWater[];
+extern const u8 gBattleTerrainAnimTilemap_PondWater[];
+extern const u8 gBattleTerrainPalette_PondWater[];
+extern const u8 gBattleTerrainTiles_Rock[];
+extern const u8 gBattleTerrainTilemap_Rock[];
+extern const u8 gBattleTerrainAnimTiles_Rock[];
+extern const u8 gBattleTerrainAnimTilemap_Rock[];
+extern const u8 gBattleTerrainPalette_Rock[];
+extern const u8 gBattleTerrainTiles_Cave[];
+extern const u8 gBattleTerrainTilemap_Cave[];
+extern const u8 gBattleTerrainAnimTiles_Cave[];
+extern const u8 gBattleTerrainAnimTilemap_Cave[];
+extern const u8 gBattleTerrainPalette_Cave[];
+extern const u8 gBattleTerrainTiles_Building[];
+extern const u8 gBattleTerrainTilemap_Building[];
+extern const u8 gBattleTerrainAnimTiles_Building[];
+extern const u8 gBattleTerrainAnimTilemap_Building[];
+extern const u8 gBattleTerrainPalette_Building[];
+extern const u8 gBattleTerrainPalette_Plain[];
+extern const u8 gBattleTerrainPalette_Frontier[];
+extern const u8 gBattleTerrainTiles_Stadium[];
+extern const u8 gBattleTerrainTilemap_Stadium[];
+extern const u8 gBattleTerrainTiles_Rayquaza[];
+extern const u8 gBattleTerrainTilemap_Rayquaza[];
+extern const u8 gBattleTerrainAnimTiles_Rayquaza[];
+extern const u8 gBattleTerrainAnimTilemap_Rayquaza[];
+extern const u8 gBattleTerrainPalette_Rayquaza[];
+extern const u8 gBattleTerrainPalette_Kyogre[];
+extern const u8 gBattleTerrainPalette_Groudon[];
+extern const u8 gBattleTerrainPalette_BuildingGym[];
+extern const u8 gBattleTerrainPalette_BuildingLeader[];
+extern const u8 gBattleTerrainPalette_StadiumAqua[];
+extern const u8 gBattleTerrainPalette_StadiumMagma[];
+extern const u8 gBattleTerrainPalette_StadiumSidney[];
+extern const u8 gBattleTerrainPalette_StadiumPhoebe[];
+extern const u8 gBattleTerrainPalette_StadiumGlacia[];
+extern const u8 gBattleTerrainPalette_StadiumDrake[];
+extern const u8 gBattleTerrainPalette_StadiumWallace[];
 
 #endif //GUARD_GRAPHICS_H

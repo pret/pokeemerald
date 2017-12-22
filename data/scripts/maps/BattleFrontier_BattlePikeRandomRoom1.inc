@@ -89,7 +89,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D285:: @ 825D285
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE3F, 4
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DE94, 4
 	closemessage
 	release
@@ -145,7 +145,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DED2, 4
 	setvar VAR_0x8004, 2
@@ -155,14 +155,14 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D2FB:: @ 825D2FB
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3BD:: @ 825D3BD
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DF71, 4
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D20A
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D3DA:: @ 825D3DA
 	setvar VAR_0x8004, 12
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DFA2, 4
 	waitmessage
@@ -180,7 +180,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D416:: @ 825D416
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 7
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E02C, 4
 	setvar VAR_0x8004, 2
@@ -190,14 +190,14 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D416:: @ 825D416
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D443:: @ 825D443
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0E8, 4
 	call BattleFrontier_BattlePikeRandomRoom1_EventScript_25D77B
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460
 	goto BattleFrontier_BattlePikeRandomRoom1_EventScript_25D20A
 
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D460:: @ 825D460
 	setvar VAR_0x8004, 12
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_25D49D
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25E0F6, 4
 	waitmessage
@@ -257,7 +257,7 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D50E:: @ 825D50E
 	waitmessage
 	playfanfare BGM_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DA13, 4
 	closemessage
 	applymovement 1, BattleFrontier_BattlePikeRandomRoom1_Movement_25D798
@@ -320,9 +320,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D605:: @ 825D605
 	setvar VAR_0x8004, 12
 	special sub_81A703C
 	copyvar VAR_0x8004, VAR_RESULT
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D6D5
 	msgbox BattleFrontier_BattlePikeRandomRoom1_Text_25DD3F, 4
 	closemessage
@@ -337,13 +337,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D643:: @ 825D643
 	waitmoncry
 	setvar VAR_0x8004, 11
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D751
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D758
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D75F
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D766
 	setvar VAR_0x8004, 15
 	special sub_81A703C
@@ -374,9 +374,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D6D5:: @ 825D6D5
 	waitmoncry
 	setvar VAR_0x8004, 11
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D76D
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D774
 	setvar VAR_0x8004, 15
 	special sub_81A703C
@@ -607,9 +607,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_25D831:: @ 825D831
 BattleFrontier_BattlePikeRandomRoom1_EventScript_25D83E:: @ 825D83E
 	setvar VAR_0x8004, 13
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D881
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_25D875
 	playfanfare BGM_ME_ASA
 	waitfanfare

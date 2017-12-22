@@ -10,7 +10,7 @@ BattleFrontier_OutsideEast_MapScript1_242C0F: @ 8242C0F
 
 BattleFrontier_OutsideEast_EventScript_242C19:: @ 8242C19
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, BattleFrontier_OutsideEast_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
@@ -135,11 +135,11 @@ BattleFrontier_OutsideEast_EventScript_242CFC:: @ 8242CFC
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_OutsideEast_EventScript_242D60
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq BattleFrontier_OutsideEast_EventScript_242D60
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq BattleFrontier_OutsideEast_EventScript_242D60
 	setflag FLAG_0x1C6
 	release
