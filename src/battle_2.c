@@ -4738,9 +4738,9 @@ static void HandleEndTurn_BattleWon(void)
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
 
         if (gTrainerBattleOpponent_A == TRAINER_OPPONENT_3FE)
-            PlayBGM(BGM_KACHI3);
+            PlayBGM(MUS_KACHI3);
         else
-            PlayBGM(BGM_KACHI1);
+            PlayBGM(MUS_KACHI1);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -4751,7 +4751,7 @@ static void HandleEndTurn_BattleWon(void)
         {
         case TRAINER_CLASS_ELITE_FOUR:
         case TRAINER_CLASS_CHAMPION:
-            PlayBGM(BGM_KACHI5);
+            PlayBGM(MUS_KACHI5);
             break;
         case TRAINER_CLASS_TEAM_AQUA:
         case TRAINER_CLASS_TEAM_MAGMA:
@@ -4759,13 +4759,13 @@ static void HandleEndTurn_BattleWon(void)
         case TRAINER_CLASS_AQUA_LEADER:
         case TRAINER_CLASS_MAGMA_ADMIN:
         case TRAINER_CLASS_MAGMA_LEADER:
-            PlayBGM(BGM_KACHI4);
+            PlayBGM(MUS_KACHI4);
             break;
         case TRAINER_CLASS_LEADER:
-            PlayBGM(BGM_KACHI3);
+            PlayBGM(MUS_KACHI3);
             break;
         default:
-            PlayBGM(BGM_KACHI1);
+            PlayBGM(MUS_KACHI1);
             break;
         }
     }

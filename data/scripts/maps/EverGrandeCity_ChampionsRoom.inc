@@ -38,7 +38,7 @@ EverGrandeCity_ChampionsRoom_Movement_228A42: @ 8228A42
 	step_end
 
 EverGrandeCity_ChampionsRoom_EventScript_228A45:: @ 8228A45
-	playbgm BGM_DAIGO, 0
+	playbgm MUS_DAIGO, 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_228C4C, 4
 	trainerbattle 3, TRAINER_WALLACE, 0, EverGrandeCity_ChampionsRoom_Text_228EAC
 	goto EverGrandeCity_ChampionsRoom_EventScript_228A61
@@ -67,11 +67,11 @@ EverGrandeCity_ChampionsRoom_EventScript_228A61:: @ 8228A61
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_228ABC:: @ 8228ABC
-	playbgm BGM_GIRL_SUP, 0
+	playbgm MUS_GIRL_SUP, 0
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_228AC1:: @ 8228AC1
-	playbgm BGM_BOY_SUP, 0
+	playbgm MUS_BOY_SUP, 0
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_228AC6:: @ 8228AC6

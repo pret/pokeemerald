@@ -189,7 +189,7 @@ bool8 WaitFanfare(bool8 stop)
         if (!stop)
             m4aMPlayContinue(&gMPlay_BGM);
         else
-            m4aSongNumStart(SE_STOP);
+            m4aSongNumStart(MUS_DUMMY);
 
         return TRUE;
     }

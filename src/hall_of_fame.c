@@ -424,7 +424,7 @@ static bool8 InitHallOfFameScreen(void)
         if (!gPaletteFade.active)
         {
             SetMainCallback2(CB2_HallOfFame);
-            PlayBGM(BGM_DENDOU);
+            PlayBGM(MUS_DENDOU);
             return FALSE;
         }
         break;

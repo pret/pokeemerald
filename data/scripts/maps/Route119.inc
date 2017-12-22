@@ -71,11 +71,11 @@ Route119_EventScript_1F4488:: @ 81F4488
 	end
 
 Route119_EventScript_1F4501:: @ 81F4501
-	playbgm BGM_GIRL_SUP, 1
+	playbgm MUS_GIRL_SUP, 1
 	return
 
 Route119_EventScript_1F4506:: @ 81F4506
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	return
 
 Route119_EventScript_1F450B:: @ 81F450B
@@ -158,7 +158,7 @@ Route119_EventScript_1F460F:: @ 81F460F
 	call_if 1, Route119_EventScript_1F46EE
 	removeobject 25
 	setvar VAR_0x4072, 1
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	delay 60
 	compare VAR_0x4001, 1

@@ -94,7 +94,7 @@ BattleFrontier_BattleTowerLobby_EventScript_23E780:: @ 823E780
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_23E7A5
 	message BattleFrontier_BattleTowerLobby_Text_23F844
 	waitmessage
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	msgbox BattleFrontier_BattleTowerLobby_Text_23F89F, 4
 

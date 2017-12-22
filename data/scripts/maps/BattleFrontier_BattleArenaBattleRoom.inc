@@ -141,7 +141,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257630:: @ 8257630
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
 
@@ -364,7 +364,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257A5C:: @ 8257A5C
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF1
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_25813F, 4
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleArenaBattleRoom_Text_25819C
 	waitmessage
 	waitfanfare
@@ -408,7 +408,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_257B15:: @ 8257B15
 	applymovement 7, BattleFrontier_BattleArenaBattleRoom_Movement_257BF1
 	waitmovement 0
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_258323, 4
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleArenaBattleRoom_Text_25835B
 	waitmessage
 	waitfanfare

@@ -3,7 +3,7 @@ AquaHideout_UnusedRubyMap3: @ 8484710
 	.4byte AquaHideout_UnusedRubyMap3_MapEvents
 	.4byte AquaHideout_UnusedRubyMap3_MapScripts
 	.4byte 0x0
-	.2byte BGM_AJITO
+	.2byte MUS_AJITO
 	.2byte 318
 	.byte 197
 	.byte 0

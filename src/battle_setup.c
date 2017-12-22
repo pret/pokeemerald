@@ -11,7 +11,7 @@
 #include "constants/game_stat.h"
 #include "event_data.h"
 #include "constants/species.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "metatile_behavior.h"
 #include "constants/maps.h"
 #include "field_player_avatar.h"
@@ -520,25 +520,25 @@ void BattleSetup_StartLegendaryBattle(void)
     default:
     case SPECIES_GROUDON:
         gBattleTypeFlags |= BATTLE_TYPE_GROUDON;
-        CreateBattleStartTask(B_TRANSITION_GROUDON, BGM_BATTLE34);
+        CreateBattleStartTask(B_TRANSITION_GROUDON, MUS_BATTLE34);
         break;
     case SPECIES_KYOGRE:
         gBattleTypeFlags |= BATTLE_TYPE_KYOGRE;
-        CreateBattleStartTask(B_TRANSITION_KYOGRE, BGM_BATTLE34);
+        CreateBattleStartTask(B_TRANSITION_KYOGRE, MUS_BATTLE34);
         break;
     case SPECIES_RAYQUAZA:
         gBattleTypeFlags |= BATTLE_TYPE_RAYQUAZA;
-        CreateBattleStartTask(B_TRANSITION_RAYQUAZA, BGM_BATTLE_LEGENDARY);
+        CreateBattleStartTask(B_TRANSITION_RAYQUAZA, MUS_VS_REKKU);
         break;
     case SPECIES_DEOXYS:
-        CreateBattleStartTask(B_TRANSITION_BLUR, BGM_FRLG_BATTLE_DEOXYS);
+        CreateBattleStartTask(B_TRANSITION_BLUR, MUS_RG_VS_DEO);
         break;
     case SPECIES_LUGIA:
     case SPECIES_HO_OH:
-        CreateBattleStartTask(B_TRANSITION_BLUR, BGM_FRLG_BATTLE_LEGENDARY);
+        CreateBattleStartTask(B_TRANSITION_BLUR, MUS_RG_VS_DEN);
         break;
     case SPECIES_MEW:
-        CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, BGM_BATTLE_MEW);
+        CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, MUS_VS_MEW);
         break;
     }
 
@@ -555,9 +555,9 @@ void StartGroudonKyogreBattle(void)
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
 
     if (gGameVersion == VERSION_RUBY)
-        CreateBattleStartTask(B_TRANSITION_SHARDS, BGM_BATTLE34); // GROUDON
+        CreateBattleStartTask(B_TRANSITION_SHARDS, MUS_BATTLE34); // GROUDON
     else
-        CreateBattleStartTask(B_TRANSITION_RIPPLE, BGM_BATTLE34); // KYOGRE
+        CreateBattleStartTask(B_TRANSITION_RIPPLE, MUS_BATTLE34); // KYOGRE
 
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -590,7 +590,7 @@ void StartRegiBattle(void)
         transitionId = B_TRANSITION_GRID_SQUARES;
         break;
     }
-    CreateBattleStartTask(transitionId, BGM_BATTLE36);
+    CreateBattleStartTask(transitionId, MUS_BATTLE36);
 
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -1446,46 +1446,46 @@ void SetUpTrainerEncounterMusic(void)
         switch (GetTrainerEncounterMusicId(trainerId))
         {
         case TRAINER_ENCOUNTER_MUSIC_MALE:
-            music = BGM_BOYEYE;
+            music = MUS_BOYEYE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_FEMALE:
-            music = BGM_GIRLEYE;
+            music = MUS_GIRLEYE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_GIRL:
-            music = BGM_SYOUJOEYE;
+            music = MUS_SYOUJOEYE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_INTENSE:
-            music = BGM_HAGESHII;
+            music = MUS_HAGESHII;
             break;
         case TRAINER_ENCOUNTER_MUSIC_COOL:
-            music = BGM_KAKKOII;
+            music = MUS_KAKKOII;
             break;
         case TRAINER_ENCOUNTER_MUSIC_AQUA:
-            music = BGM_AQA_0;
+            music = MUS_AQA_0;
             break;
         case TRAINER_ENCOUNTER_MUSIC_MAGMA:
-            music = BGM_MGM0;
+            music = MUS_MGM0;
             break;
         case TRAINER_ENCOUNTER_MUSIC_SWIMMER:
-            music = BGM_SWIMEYE;
+            music = MUS_SWIMEYE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_TWINS:
-            music = BGM_HUTAGO;
+            music = MUS_HUTAGO;
             break;
         case TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR:
-            music = BGM_SITENNOU;
+            music = MUS_SITENNOU;
             break;
         case TRAINER_ENCOUNTER_MUSIC_HIKER:
-            music = BGM_YAMA_EYE;
+            music = MUS_YAMA_EYE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_INTERVIEWER:
-            music = BGM_INTER_V;
+            music = MUS_INTER_V;
             break;
         case TRAINER_ENCOUNTER_MUSIC_RICH:
-            music = BGM_TEST;
+            music = MUS_TEST;
             break;
         default:
-            music = BGM_AYASII;
+            music = MUS_AYASII;
         }
         PlayNewMapMusic(music);
     }

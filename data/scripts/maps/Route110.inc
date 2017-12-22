@@ -16,7 +16,7 @@ Route110_MapScript1_1EF27D: @ 81EF27D
 	end
 
 Route110_EventScript_1EF293:: @ 81EF293
-	savebgm BGM_CYCLING
+	savebgm MUS_CYCLING
 	return
 
 Route110_MapScript2_1EF297: @ 81EF297
@@ -369,7 +369,7 @@ Route110_EventScript_1EF735:: @ 81EF735
 
 Route110_EventScript_1EF743:: @ 81EF743
 	setvar VAR_0x40A9, 3
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	return
 
@@ -417,11 +417,11 @@ Route110_EventScript_1EF76E:: @ 81EF76E
 	end
 
 Route110_EventScript_1EF7E1:: @ 81EF7E1
-	playbgm BGM_GIRL_SUP, 1
+	playbgm MUS_GIRL_SUP, 1
 	return
 
 Route110_EventScript_1EF7E6:: @ 81EF7E6
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	return
 
 Route110_EventScript_1EF7EB:: @ 81EF7EB
@@ -509,7 +509,7 @@ Route110_EventScript_1EF8EC:: @ 81EF8EC
 	call_if 1, Route110_EventScript_1EF985
 	removeobject 29
 	setvar VAR_0x4069, 1
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
 	end
@@ -655,7 +655,7 @@ Route110_EventScript_1EF9F7:: @ 81EF9F7
 	msgbox Route110_Text_1F0AFF, 4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox Route110_Text_1F0C0C, 4
 	waitfanfare
 	closemessage

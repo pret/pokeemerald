@@ -3,7 +3,7 @@ Underwater1: @ 8482A30
 	.4byte Underwater1_MapEvents
 	.4byte Underwater1_MapScripts
 	.4byte Underwater1_MapConnections
-	.2byte BGM_DEEPDEEP
+	.2byte MUS_DEEPDEEP
 	.2byte 274
 	.byte 50
 	.byte 0

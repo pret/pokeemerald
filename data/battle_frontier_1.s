@@ -1,3 +1,5 @@
+#include "constants/flags.h"
+
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -1391,10 +1393,14 @@ gUnknown_0860EFF4:: @ 860EFF4
 	.4byte gText_BattlePyramid
 
 gUnknown_0860F010:: @ 860F010
-	.4byte gUnknown_08680867
-	.4byte gUnknown_086A0869
-	.4byte gUnknown_086C086B
-	.4byte gUnknown_086E086D
+	.2byte FLAG_BADGE01_GET
+	.2byte FLAG_BADGE02_GET
+	.2byte FLAG_BADGE03_GET
+	.2byte FLAG_BADGE04_GET
+	.2byte FLAG_BADGE05_GET
+	.2byte FLAG_BADGE06_GET
+	.2byte FLAG_BADGE07_GET
+	.2byte FLAG_BADGE08_GET
 
 gUnknown_0860F020:: @ 860F020
 	.4byte gUnknown_082A5D6C

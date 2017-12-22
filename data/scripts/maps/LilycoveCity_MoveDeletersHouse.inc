@@ -43,7 +43,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_21EAB0:: @ 821EAB0
 	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_MoveDeletersHouse_EventScript_21EAF0
 	special sub_81B9770
-	playfanfare BGM_ME_WASURE
+	playfanfare MUS_ME_WASURE
 	waitfanfare
 	msgbox LilycoveCity_MoveDeletersHouse_Text_21EC06, 4
 	releaseall

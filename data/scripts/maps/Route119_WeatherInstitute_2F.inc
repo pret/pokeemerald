@@ -118,7 +118,7 @@ Route119_WeatherInstitute_2F_EventScript_2700D0:: @ 82700D0
 	end
 
 Route119_WeatherInstitute_2F_EventScript_2700DB:: @ 82700DB
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message Route119_WeatherInstitute_2F_Text_2706E8
 	waitmessage
 	waitfanfare

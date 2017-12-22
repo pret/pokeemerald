@@ -193,7 +193,7 @@ RustboroCity_DevonCorp_2F_EventScript_211AB9:: @ 8211AB9
 
 RustboroCity_DevonCorp_2F_EventScript_211AC4:: @ 8211AC4
 	bufferspeciesname 1, SPECIES_LILEEP
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message RustboroCity_DevonCorp_2F_Text_2122CB
 	waitmessage
 	waitfanfare
@@ -242,7 +242,7 @@ RustboroCity_DevonCorp_2F_EventScript_211B5C:: @ 8211B5C
 
 RustboroCity_DevonCorp_2F_EventScript_211B67:: @ 8211B67
 	bufferspeciesname 1, SPECIES_ANORITH
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message RustboroCity_DevonCorp_2F_Text_2122CB
 	waitmessage
 	waitfanfare

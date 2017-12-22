@@ -70,7 +70,7 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_259BA5:: @ 8259BA5
 	setvar VAR_0x8004, 16
 	special sub_81A5E74
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_25A22D, 4
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
 	setvar VAR_0x8004, 9

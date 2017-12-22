@@ -65,7 +65,7 @@ EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	applymovement 4, EverGrandeCity_PokemonLeague_1F_Movement_2296E5
 	waitmovement 0
 	delay 10
-	playfanfare BGM_ME_BACHI
+	playfanfare MUS_ME_BACHI
 	message EverGrandeCity_PokemonLeague_1F_Text_2297EF
 	waitmessage
 	waitfanfare

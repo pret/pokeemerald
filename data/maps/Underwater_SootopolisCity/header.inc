@@ -3,7 +3,7 @@ Underwater_SootopolisCity: @ 8483F4C
 	.4byte Underwater_SootopolisCity_MapEvents
 	.4byte Underwater_SootopolisCity_MapScripts
 	.4byte 0x0
-	.2byte BGM_DEEPDEEP
+	.2byte MUS_DEEPDEEP
 	.2byte 130
 	.byte 54
 	.byte 0

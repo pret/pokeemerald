@@ -918,7 +918,7 @@ LittlerootTown_EventScript_1E8686:: @ 81E8686
 
 LittlerootTown_EventScript_1E8693:: @ 81E8693
 	msgbox LittlerootTown_Text_1E87F0, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message LittlerootTown_Text_1E8925
 	waitfanfare
 	setflag FLAG_0x112

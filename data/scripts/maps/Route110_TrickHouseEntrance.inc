@@ -723,7 +723,7 @@ Route110_TrickHousePuzzle5_EventScript_26A3E5:: @ 826A3E5
 Route110_TrickHousePuzzle6_EventScript_26A3E5:: @ 826A3E5
 Route110_TrickHousePuzzle7_EventScript_26A3E5:: @ 826A3E5
 Route110_TrickHousePuzzle8_EventScript_26A3E5:: @ 826A3E5
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message Route110_TrickHousePuzzle1_Text_26ABE8
 	waitfanfare
 	msgbox Route110_TrickHousePuzzle1_Text_26ABFB, 4

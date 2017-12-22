@@ -3,7 +3,7 @@ EverGrandeCity_PhoebesRoom: @ 8483BE8
 	.4byte EverGrandeCity_PhoebesRoom_MapEvents
 	.4byte EverGrandeCity_PhoebesRoom_MapScripts
 	.4byte 0x0
-	.2byte BGM_C_ROAD
+	.2byte MUS_C_ROAD
 	.2byte 112
 	.byte 15
 	.byte 0

@@ -100,7 +100,7 @@ RustboroCity_Gym_EventScript_21307B:: @ 821307B
 	pokenavcall RustboroCity_Gym_Text_213A76
 	waitmessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox RustboroCity_Gym_Text_213C01, 4
 	waitfanfare
 	closemessage

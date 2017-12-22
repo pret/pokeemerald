@@ -462,7 +462,7 @@ MauvilleCity_EventScript_1DF7BA:: @ 81DF7BA
 	pokenavcall MauvilleCity_Text_1DFDFB
 	waitmessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox MauvilleCity_Text_1DFEB4, 4
 	waitfanfare
 	closemessage

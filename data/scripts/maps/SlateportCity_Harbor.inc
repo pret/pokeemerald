@@ -16,7 +16,7 @@ SlateportCity_Harbor_EventScript_20C9A5:: @ 820C9A5
 	return
 
 SlateportCity_Harbor_EventScript_20C9A9:: @ 820C9A9
-	savebgm BGM_AQA_0
+	savebgm MUS_AQA_0
 	setobjectxyperm 4, 12, 13
 	setobjectmovementtype 4, 9
 	setflag FLAG_0x389

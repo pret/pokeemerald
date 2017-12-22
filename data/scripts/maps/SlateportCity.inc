@@ -70,7 +70,7 @@ SlateportCity_EventScript_1DCD1C:: @ 81DCD1C
 	msgbox SlateportCity_Text_1DF12B, 4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox SlateportCity_Text_1DF1A6, 4
 	waitfanfare
 	closemessage
@@ -149,7 +149,7 @@ SlateportCity_EventScript_1DCDE4:: @ 81DCDE4
 	compare VAR_RESULT, 0
 	call_if 1, SlateportCity_EventScript_1DCE2E
 	msgbox SlateportCity_Text_1DD697, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message SlateportCity_Text_1DD6E3
 	waitfanfare
 	msgbox SlateportCity_Text_1DD702, 4
@@ -586,7 +586,7 @@ SlateportCity_EventScript_1DD1F8:: @ 81DD1F8
 	applymovement 11, SlateportCity_Movement_2725A6
 	waitmovement 0
 	msgbox SlateportCity_Text_1DE64F, 4
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	msgbox SlateportCity_Text_1DE724, 4
 	applymovement 6, SlateportCity_Movement_2725A4
 	applymovement 1, SlateportCity_Movement_2725A4

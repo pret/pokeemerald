@@ -159,7 +159,7 @@ BattleFrontier_BattleTowerBattleRoom2_EventScript_249121:: @ 8249121
 	special sub_81A1780
 	compare VAR_0x40CE, 3
 	call_if 1, BattleFrontier_BattleTowerBattleRoom2_EventScript_249514
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
 

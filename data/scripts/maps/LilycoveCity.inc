@@ -247,7 +247,7 @@ LilycoveCity_EventScript_1E2DDE:: @ 81E2DDE
 	end
 
 LilycoveCity_EventScript_1E2DF8:: @ 81E2DF8
-	playbgm BGM_GIRL_SUP, 1
+	playbgm MUS_GIRL_SUP, 1
 	checkflag FLAG_0x11E
 	call_if 1, LilycoveCity_EventScript_1E2E48
 	checkflag FLAG_0x11E
@@ -272,13 +272,13 @@ LilycoveCity_EventScript_1E2E51:: @ 81E2E51
 LilycoveCity_EventScript_1E2E5A:: @ 81E2E5A
 	setflag FLAG_0x11E
 	msgbox LilycoveCity_Text_1E318D, 4
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	release
 	end
 
 LilycoveCity_EventScript_1E2E6B:: @ 81E2E6B
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	checkflag FLAG_0x11E
 	call_if 1, LilycoveCity_EventScript_1E2EBB
 	checkflag FLAG_0x11E
@@ -303,7 +303,7 @@ LilycoveCity_EventScript_1E2EC4:: @ 81E2EC4
 LilycoveCity_EventScript_1E2ECD:: @ 81E2ECD
 	setflag FLAG_0x11E
 	msgbox LilycoveCity_Text_1E36BF, 4
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	release
 	end
@@ -413,7 +413,7 @@ LilycoveCity_EventScript_1E3006:: @ 81E3006
 	delay 15
 	removeobject VAR_LAST_TALKED
 	waitfieldeffect 30
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	setflag FLAG_0x124
 	release

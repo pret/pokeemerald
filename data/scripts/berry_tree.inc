@@ -119,7 +119,7 @@ Route102_EventScript_274448:: @ 8274448
 	special sub_80EED34
 	special FieldObjectInteractionRemoveBerryTree
 	message Route102_Text_27461B
-	playfanfare BGM_ME_KINOMI
+	playfanfare MUS_ME_KINOMI
 	waitmessage
 	waitfanfare
 	waitbuttonpress

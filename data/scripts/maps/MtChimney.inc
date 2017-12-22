@@ -35,7 +35,7 @@ MtChimney_EventScript_22EE02:: @ 822EE02
 
 MtChimney_EventScript_22EE0B:: @ 822EE0B
 	lockall
-	playbgm BGM_MGM0, 0
+	playbgm MUS_MGM0, 0
 	msgbox MtChimney_Text_22F26A, 4
 	applymovement 2, MtChimney_Movement_27259E
 	waitmovement 0

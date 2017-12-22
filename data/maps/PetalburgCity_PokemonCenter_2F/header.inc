@@ -3,7 +3,7 @@ PetalburgCity_PokemonCenter_2F: @ 84830A4
 	.4byte PetalburgCity_PokemonCenter_2F_MapEvents
 	.4byte PetalburgCity_PokemonCenter_2F_MapScripts
 	.4byte 0x0
-	.2byte BGM_POKECEN
+	.2byte MUS_POKECEN
 	.2byte 62
 	.byte 7
 	.byte 0

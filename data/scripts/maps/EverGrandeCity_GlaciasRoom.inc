@@ -43,7 +43,7 @@ EverGrandeCity_GlaciasRoom_EventScript_228469:: @ 8228469
 	faceplayer
 	checkflag FLAG_0x4FD
 	goto_eq EverGrandeCity_GlaciasRoom_EventScript_228490
-	playbgm BGM_SITENNOU, 0
+	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_GlaciasRoom_Text_2284AC, 4
 	trainerbattle 3, TRAINER_GLACIA, 0, EverGrandeCity_GlaciasRoom_Text_2285B4
 	goto EverGrandeCity_GlaciasRoom_EventScript_22849A

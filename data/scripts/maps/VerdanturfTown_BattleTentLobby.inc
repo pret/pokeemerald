@@ -70,7 +70,7 @@ VerdanturfTown_BattleTentLobby_EventScript_201791:: @ 8201791
 	special sub_81A1780
 	message VerdanturfTown_BattleTentLobby_Text_24A554
 	waitmessage
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	msgbox VerdanturfTown_BattleTentLobby_Text_2C539A, 4
 	closemessage

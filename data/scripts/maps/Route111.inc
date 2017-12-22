@@ -264,14 +264,14 @@ Route111_Movement_1F0FAE: @ 81F0FAE
 
 Route111_EventScript_1F0FB0:: @ 81F0FB0
 	setweather 2
-	fadenewbgm BGM_DOORO_X1
+	fadenewbgm MUS_DOORO_X1
 	doweather
 	setvar VAR_0x4003, 0
 	end
 
 Route111_EventScript_1F0FBD:: @ 81F0FBD
 	setweather 8
-	fadenewbgm BGM_ASHROAD
+	fadenewbgm MUS_ASHROAD
 	doweather
 	end
 

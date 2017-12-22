@@ -6,7 +6,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BD8D, 4
 	closemessage
-	playbgm BGM_AQA_0, 1
+	playbgm MUS_AQA_0, 1
 	addobject 3
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_20BCE4
 	waitmovement 0
@@ -59,7 +59,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C059, 4
 	closemessage
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	fadescreen 1
 	removeobject 2
@@ -76,7 +76,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C36C, 4
 	closemessage
 	fadescreen 1
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
 	removeobject 1

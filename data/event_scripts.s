@@ -805,7 +805,7 @@ Std_5: @ 8271332
 
 Std_9: @ 827133C
 	message 0x0
-	playfanfare BGM_ME_BATTLE_POINTS
+	playfanfare MUS_ME_POINTGET
 	waitfanfare
 	waitmessage
 	return
@@ -1593,11 +1593,11 @@ EventScript_271BA9:: @ 8271BA9
 	return
 
 EventScript_271BAF:: @ 8271BAF
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	return
 
 EventScript_271BB3:: @ 8271BB3
-	playfanfare BGM_ME_WAZA
+	playfanfare MUS_ME_WAZA
 	return
 
 Std_ObtainDecoration:: @ 8271BB7
@@ -1615,7 +1615,7 @@ EventScript_271BC5:: @ 8271BC5
 	return
 
 EventScript_271BE0:: @ 8271BE0
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message gUnknown_08272B09
 	waitfanfare
 	msgbox gUnknown_08272B48, 4
@@ -1785,7 +1785,7 @@ EventScript_271DBC:: @ 8271DBC
 	end
 
 EventScript_271DF9:: @ 8271DF9
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	msgbox gUnknown_082726C2, 4
 	special sub_816AE98
 	waitstate
@@ -1793,7 +1793,7 @@ EventScript_271DF9:: @ 8271DF9
 	end
 
 EventScript_271E0E:: @ 8271E0E
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	checkflag FLAG_SYS_PC_LANETTE
 	call_if 0, EventScript_271E35
 	checkflag FLAG_SYS_PC_LANETTE
@@ -1822,7 +1822,7 @@ EventScript_271E47:: @ 8271E47
 EventScript_271E54:: @ 8271E54
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, EventScript_271E47
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	special sub_8137C28
 	waitstate
 	goto EventScript_271DBC
@@ -2182,7 +2182,7 @@ MossdeepCity_Gym_EventScript_27207E:: @ 827207E
 PetalburgCity_Gym_EventScript_27207E:: @ 827207E
 RustboroCity_Gym_EventScript_27207E:: @ 827207E
 SootopolisCity_Gym_1F_EventScript_27207E:: @ 827207E
-	playfanfare BGM_ME_BACHI
+	playfanfare MUS_ME_BACHI
 	waitfanfare
 	return
 
@@ -2192,7 +2192,7 @@ Route119_WeatherInstitute_1F_EventScript_272083:: @ 8272083
 RustboroCity_DevonCorp_3F_EventScript_272083:: @ 8272083
 SSTidalRooms_EventScript_272083:: @ 8272083
 	fadescreen 1
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special HealPlayerParty
 	fadescreen 0
@@ -2211,7 +2211,7 @@ DewfordTown_EventScript_2720A0:: @ 82720A0
 Route104_EventScript_2720A0:: @ 82720A0
 Route109_EventScript_2720A0:: @ 82720A0
 	setflag FLAG_SPECIAL_FLAG_0x4001
-	playbgm BGM_M_BOAT, 0
+	playbgm MUS_M_BOAT, 0
 	return
 
 DewfordTown_EventScript_2720A8:: @ 82720A8
@@ -2569,7 +2569,7 @@ FallarborTown_House1_EventScript_2723E4:: @ 82723E4
 GraniteCave_StevensRoom_EventScript_2723E4:: @ 82723E4
 SlateportCity_OceanicMuseum_2F_EventScript_2723E4:: @ 82723E4
 	bufferitemname 0, VAR_0x8004
-	playfanfare BGM_ME_WAZA
+	playfanfare MUS_ME_WAZA
 	message gUnknown_08273161
 	waitmessage
 	waitfanfare
@@ -4079,7 +4079,7 @@ Std_8:: @ 82742C9
 	buffertrainername 1, VAR_0x8000
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox gUnknown_08272E0F, 4
 	waitfanfare
 	closemessage

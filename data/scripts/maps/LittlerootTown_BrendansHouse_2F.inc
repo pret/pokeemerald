@@ -73,7 +73,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	applymovement 1, LittlerootTown_BrendansHouse_2F_Movement_27259A
 	waitmovement 0
 	delay 10
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	compare VAR_FACING, 2
 	call_if 1, LittlerootTown_BrendansHouse_2F_EventScript_1F8507
 	compare VAR_FACING, 1
@@ -86,7 +86,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8497:: @ 81F8497
 	setflag FLAG_0x331
 	clearflag FLAG_0x2F8
 	setvar VAR_0x4050, 1
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
 	end

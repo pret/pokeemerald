@@ -121,7 +121,7 @@ MossdeepCity_StevensHouse_EventScript_2228E0:: @ 82228E0
 MossdeepCity_StevensHouse_EventScript_2228EB:: @ 82228EB
 	bufferspeciesname 1, SPECIES_BELDUM
 	removeobject 2
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message MossdeepCity_StevensHouse_Text_222BED
 	waitmessage
 	waitfanfare

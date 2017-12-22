@@ -69,7 +69,7 @@ SlateportCity_BattleTentLobby_EventScript_2087E9:: @ 82087E9
 	special sub_81A1780
 	message SlateportCity_BattleTentLobby_Text_23F68C
 	waitmessage
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	goto SlateportCity_BattleTentLobby_EventScript_208861
 
