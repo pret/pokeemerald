@@ -2705,34 +2705,34 @@ gUnknown_085EBB4F:: @ 85EBB4F
 gUnknown_085EBB56:: @ 85EBB56
 	.string "What would you like to do?$"
 
-gUnknown_085EBB71:: @ 85EBB71
+gText_WithdrawPokemon:: @ 85EBB71
 	.string "WITHDRAW POKéMON$"
 
-gUnknown_085EBB82:: @ 85EBB82
+gText_DepositPokemon:: @ 85EBB82
 	.string "DEPOSIT POKéMON$"
 
-gUnknown_085EBB92:: @ 85EBB92
+gText_MovePokemon:: @ 85EBB92
 	.string "MOVE POKéMON$"
 
-gUnknown_085EBB9F:: @ 85EBB9F
+gText_MoveItems:: @ 85EBB9F
 	.string "MOVE ITEMS$"
 
-gUnknown_085EBBAA:: @ 85EBBAA
+gText_SeeYa:: @ 85EBBAA
 	.string "SEE YA!$"
 
-gUnknown_085EBBB2:: @ 85EBBB2
+gText_WithdrawMonDescription:: @ 85EBBB2
 	.string "Move POKéMON stored in BOXES to\nyour party.$"
 
-gUnknown_085EBBDE:: @ 85EBBDE
+gText_DepositMonDescription:: @ 85EBBDE
 	.string "Store POKéMON in your party in BOXES.$"
 
-gUnknown_085EBC04:: @ 85EBC04
+gText_MoveMonDescription:: @ 85EBC04
 	.string "Organize the POKéMON in BOXES and\nin your party.$"
 
-gUnknown_085EBC35:: @ 85EBC35
+gText_MoveItemsDescription:: @ 85EBC35
 	.string "Move items held by any POKéMON\nin a BOX or your party.$"
 
-gUnknown_085EBC6C:: @ 85EBC6C
+gText_SeeYaDescription:: @ 85EBC6C
 	.string "Return to the previous menu.$"
 
 gText_JustOnePkmn:: @ 85EBC89

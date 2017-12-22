@@ -137,4 +137,15 @@ extern const u8 gMenuText_Give2[];
 
 extern const u8 gText_Cancel2[];
 
+extern const u8 gText_WithdrawPokemon[];
+extern const u8 gText_WithdrawMonDescription[];
+extern const u8 gText_DepositPokemon[];
+extern const u8 gText_DepositMonDescription[];
+extern const u8 gText_MovePokemon[];
+extern const u8 gText_MoveMonDescription[];
+extern const u8 gText_MoveItems[];
+extern const u8 gText_MoveItemsDescription[];
+extern const u8 gText_SeeYa[];
+extern const u8 gText_SeeYaDescription[];
+
 #endif //GUARD_STRINGS_H

@@ -391,6 +391,7 @@ SECTIONS {
         src/pokedex.o(.rodata);
         data/pokedex.o(.rodata);
         data/trainer_card.o(.rodata);
+        src/pokemon_storage_system.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
         src/pokemon_icon.o(.rodata);
         data/fldeff_cut.o(.rodata);
