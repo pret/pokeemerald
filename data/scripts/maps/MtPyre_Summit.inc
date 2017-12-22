@@ -31,7 +31,7 @@ MtPyre_Summit_EventScript_232030:: @ 8232030
 	end
 
 MtPyre_Summit_EventScript_23203C:: @ 823203C
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	applymovement 255, MtPyre_Summit_Movement_2725B2
 	waitmovement 0
 	applymovement 2, MtPyre_Summit_Movement_2725AA

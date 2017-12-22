@@ -43,7 +43,7 @@ EverGrandeCity_DrakesRoom_EventScript_2286F3:: @ 82286F3
 	faceplayer
 	checkflag FLAG_0x4FE
 	goto_eq EverGrandeCity_DrakesRoom_EventScript_22871A
-	playbgm BGM_SITENNOU, 0
+	playbgm MUS_SITENNOU, 0
 	msgbox EverGrandeCity_DrakesRoom_Text_22873E, 4
 	trainerbattle 3, TRAINER_DRAKE, 0, EverGrandeCity_DrakesRoom_Text_228895
 	goto EverGrandeCity_DrakesRoom_EventScript_228724

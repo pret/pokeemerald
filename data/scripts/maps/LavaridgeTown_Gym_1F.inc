@@ -87,7 +87,7 @@ LavaridgeTown_Gym_1F_EventScript_1FE7C1:: @ 81FE7C1
 	call LavaridgeTown_Gym_1F_EventScript_1FE841
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox LavaridgeTown_Gym_1F_Text_1FF517, 4
 	waitfanfare
 	closemessage

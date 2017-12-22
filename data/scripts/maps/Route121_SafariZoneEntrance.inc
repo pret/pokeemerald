@@ -70,7 +70,7 @@ Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 	updatemoneybox 0, 0
 	nop
 	msgbox Route121_SafariZoneEntrance_Text_2A5036, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message Route121_SafariZoneEntrance_Text_2A5052
 	waitfanfare
 	msgbox Route121_SafariZoneEntrance_Text_2A506F, 4

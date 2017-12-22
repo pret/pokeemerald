@@ -13,7 +13,7 @@
 #include "task.h"
 #include "trig.h"
 #include "sound.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "strings.h"
 #include "window.h"
 #include "text_window.h"

@@ -3,7 +3,7 @@ UnknownMap_25_30: @ 8484DD8
 	.4byte UnknownMap_25_30_MapEvents
 	.4byte UnknownMap_25_30_MapScripts
 	.4byte 0x0
-	.2byte BGM_NIBI
+	.2byte MUS_NIBI
 	.2byte 227
 	.byte 87
 	.byte 0

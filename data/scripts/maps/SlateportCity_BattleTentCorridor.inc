@@ -63,7 +63,7 @@ SlateportCity_BattleTentCorridor_EventScript_208EEE:: @ 8208EEE
 	setvar VAR_0x8004, 16
 	special sub_81A5E74
 	msgbox SlateportCity_BattleTentCorridor_Text_25A22D, 4
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special sp000_heal_pokemon
 

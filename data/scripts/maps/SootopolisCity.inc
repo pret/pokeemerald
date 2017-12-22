@@ -546,7 +546,7 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	clearflag FLAG_SYS_WEATHER_CTRL
 	setvar VAR_0x40CA, 3
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
-	fadenewbgm BGM_RUNECITY
+	fadenewbgm MUS_RUNECITY
 	delay 120
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	warp8 SOOTOPOLIS_CITY, 255, 43, 32
@@ -599,7 +599,7 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	clearflag FLAG_SYS_WEATHER_CTRL
 	setvar VAR_0x40CA, 2
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
-	fadenewbgm BGM_NAMINORI
+	fadenewbgm MUS_NAMINORI
 	delay 120
 	clearflag FLAG_SPECIAL_FLAG_0x4000
 	warp8 SOOTOPOLIS_CITY, 255, 29, 53

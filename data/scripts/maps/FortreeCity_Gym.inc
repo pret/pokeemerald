@@ -38,7 +38,7 @@ FortreeCity_Gym_EventScript_2165FD:: @ 82165FD
 	call FortreeCity_Gym_EventScript_21666A
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox FortreeCity_Gym_Text_217044, 4
 	waitfanfare
 	closemessage

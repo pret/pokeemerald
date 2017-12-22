@@ -160,7 +160,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_29286D:: @ 829286D
 	call LittlerootTown_BrendansHouse_1F_EventScript_29294B
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_292AE0
 	waitmovement 0
-	playbgm BGM_INTER_V, 0
+	playbgm MUS_INTER_V, 0
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7BBC, 4
 	closemessage
 	applymovement VAR_0x8005, LittlerootTown_BrendansHouse_1F_Movement_2929B7
@@ -185,7 +185,7 @@ LittlerootTown_MaysHouse_1F_EventScript_2928DC:: @ 82928DC
 	call LittlerootTown_MaysHouse_1F_EventScript_29294B
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_292AE8
 	waitmovement 0
-	playbgm BGM_INTER_V, 0
+	playbgm MUS_INTER_V, 0
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F7BBC, 4
 	closemessage
 	applymovement VAR_0x8005, LittlerootTown_MaysHouse_1F_Movement_2929BA
@@ -341,7 +341,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_292A19:: @ 8292A19
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7E0E, 4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F7E89, 4
 	waitfanfare
 	closemessage

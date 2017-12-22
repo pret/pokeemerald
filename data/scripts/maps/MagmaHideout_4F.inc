@@ -3,7 +3,7 @@ MagmaHideout_4F_MapScripts:: @ 823A55F
 
 MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	lockall
-	playbgm BGM_MGM0, 0
+	playbgm MUS_MGM0, 0
 	msgbox MagmaHideout_4F_Text_23A9F4, 4
 	closemessage
 	delay 20
@@ -15,7 +15,7 @@ MagmaHideout_4F_EventScript_23A560:: @ 823A560
 	dofieldeffect 54
 	waitfieldeffect 54
 	setvar VAR_RESULT, 1
-	playfanfare BGM_ME_TAMA
+	playfanfare MUS_ME_TAMA
 	playse SE_TAMA
 	special sub_80B0534
 	applymovement 255, MagmaHideout_4F_Movement_2725A6

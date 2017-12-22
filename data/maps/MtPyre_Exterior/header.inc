@@ -3,7 +3,7 @@ MtPyre_Exterior: @ 848410C
 	.4byte MtPyre_Exterior_MapEvents
 	.4byte MtPyre_Exterior_MapScripts
 	.4byte 0x0
-	.2byte BGM_MACHUPI
+	.2byte MUS_MACHUPI
 	.2byte 302
 	.byte 65
 	.byte 0

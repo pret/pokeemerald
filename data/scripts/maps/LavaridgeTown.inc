@@ -98,17 +98,17 @@ LavaridgeTown_EventScript_1EA5FF:: @ 81EA5FF
 	removeobject 7
 	setvar VAR_0x4053, 2
 	clearflag FLAG_SPECIAL_FLAG_0x4000
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
 	end
 
 LavaridgeTown_EventScript_1EA630:: @ 81EA630
-	playbgm BGM_GIRL_SUP, 1
+	playbgm MUS_GIRL_SUP, 1
 	return
 
 LavaridgeTown_EventScript_1EA635:: @ 81EA635
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	return
 
 LavaridgeTown_EventScript_1EA63A:: @ 81EA63A
@@ -258,7 +258,7 @@ LavaridgeTown_EventScript_1EA744:: @ 81EA744
 	goto_eq LavaridgeTown_EventScript_1EA791
 	msgbox LavaridgeTown_Text_1EACC0, 4
 	setflag FLAG_0x10A
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message LavaridgeTown_Text_1EACF4
 	waitfanfare
 	giveegg SPECIES_WYNAUT

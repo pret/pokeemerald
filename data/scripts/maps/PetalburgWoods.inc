@@ -8,7 +8,7 @@ PetalburgWoods_EventScript_22DFD7:: @ 822DFD7
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E34F, 4
 	closemessage
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	applymovement 3, PetalburgWoods_Movement_22E209
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E3AA, 4
@@ -45,7 +45,7 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E34F, 4
 	closemessage
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	applymovement 3, PetalburgWoods_Movement_22E209
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E3AA, 4

@@ -43,7 +43,7 @@ OldaleTown_EventScript_1E8EFC:: @ 81E8EFC
 	checkflag FLAG_0x001
 	goto_eq OldaleTown_EventScript_1E8FB9
 	setflag FLAG_0x001
-	playbgm BGM_TSURETEK, 0
+	playbgm MUS_TSURETEK, 0
 	msgbox OldaleTown_Text_1E91C0, 4
 	closemessage
 	switch VAR_FACING

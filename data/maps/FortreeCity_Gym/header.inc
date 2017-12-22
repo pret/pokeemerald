@@ -3,7 +3,7 @@ FortreeCity_Gym: @ 848353C
 	.4byte FortreeCity_Gym_MapEvents
 	.4byte FortreeCity_Gym_MapScripts
 	.4byte 0x0
-	.2byte BGM_GIM
+	.2byte MUS_GIM
 	.2byte 100
 	.byte 11
 	.byte 0

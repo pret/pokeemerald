@@ -15,7 +15,7 @@ GraniteCave_StevensRoom_EventScript_22DC7B:: @ 822DC7B
 	msgbox GraniteCave_StevensRoom_Text_22DE6B, 4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox GraniteCave_StevensRoom_Text_22DF6A, 4
 	waitfanfare
 	closemessage

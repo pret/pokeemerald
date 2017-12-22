@@ -3,7 +3,7 @@ TerraCave_Entrance: @ 8484A20
 	.4byte TerraCave_Entrance_MapEvents
 	.4byte TerraCave_Entrance_MapScripts
 	.4byte 0x0
-	.2byte BGM_DAN01
+	.2byte MUS_DAN01
 	.2byte 408
 	.byte 205
 	.byte 0

@@ -108,7 +108,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_2009B3:: @ 82009B3
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special sp000_heal_pokemon
 

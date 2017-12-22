@@ -96,7 +96,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9DDB:: @ 81F9DDB
 	bufferleadmonspeciesname 0
 	message LittlerootTown_ProfessorBirchsLab_Text_1FA74D
 	waitmessage
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FA8B1, 5
 	compare VAR_RESULT, 1
@@ -184,7 +184,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1F9E80:: @ 81F9E80
 	applymovement 255, LittlerootTown_ProfessorBirchsLab_Movement_2725A6
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1FB419, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message LittlerootTown_ProfessorBirchsLab_Text_1FB436
 	waitmessage
 	waitfanfare
@@ -469,7 +469,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA23F:: @ 81FA23F
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA24F:: @ 81FA24F
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message LittlerootTown_ProfessorBirchsLab_Text_1FB9D7
 	waitmessage
 	waitfanfare
@@ -517,7 +517,7 @@ Route101_EventScript_1FA2D2:: @ 81FA2D2
 	msgbox Route101_Text_2B5F52, 4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox Route101_Text_2B603A, 4
 	waitfanfare
 	closemessage
@@ -568,7 +568,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_1FA37F:: @ 81FA37F
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_1FA3AC:: @ 81FA3AC
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message LittlerootTown_ProfessorBirchsLab_Text_1FAC32
 	waitfanfare
 	setflag FLAG_SYS_POKEDEX_GET

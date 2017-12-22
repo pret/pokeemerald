@@ -311,7 +311,7 @@ RusturfTunnel_EventScript_22D0AF:: @ 822D0AF
 RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	lock
 	faceplayer
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	msgbox RusturfTunnel_Text_22D20A, 4
 	trainerbattle 3, TRAINER_GRUNT_10, 0, RusturfTunnel_Text_22D2B0
 	msgbox RusturfTunnel_Text_22D2E1, 4

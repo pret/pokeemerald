@@ -3817,7 +3817,7 @@ gText_WaitForAllChooseBerry:: @ 85ED62C
 
 	.align 2
 gText_EndedWithXUnitsPowder:: @ 85ED65C
-	.string "{PAUSE_MUSIC}{PLAY_BGM BGM_FANFA1}You ended up with {STR_VAR_1} units of\nsilky-smooth BERRY POWDER.{RESUME_MUSIC}\pYour total amount of BERRY POWDER\nis {STR_VAR_2}.\p$"
+	.string "{PAUSE_MUSIC}{PLAY_BGM MUS_FANFA1}You ended up with {STR_VAR_1} units of\nsilky-smooth BERRY POWDER.{RESUME_MUSIC}\pYour total amount of BERRY POWDER\nis {STR_VAR_2}.\p$"
 
 	.align 2
 gText_RecordingGameResults:: @ 85ED6C8

@@ -3,7 +3,7 @@ LavaridgeTown_Mart: @ 8482D24
 	.4byte LavaridgeTown_Mart_MapEvents
 	.4byte LavaridgeTown_Mart_MapScripts
 	.4byte 0x0
-	.2byte BGM_FRIENDLY
+	.2byte MUS_FRIENDLY
 	.2byte 63
 	.byte 3
 	.byte 0

@@ -3177,7 +3177,7 @@ BattleScript_Pausex20::
 	return
 
 BattleScript_LevelUp::
-	fanfare BGM_FANFA1
+	fanfare MUS_FANFA1
 	printstring STRINGID_PKMNGREWTOLV
 	setbyte sLVLBOX_STATE, 0x0
 	drawlvlupbox
@@ -3205,7 +3205,7 @@ BattleScript_ForgotAndLearnedNewMove::
 	printstring STRINGID_ANDELLIPSIS
 BattleScript_LearnedNewMove::
 	buffermovetolearn
-	fanfare BGM_FANFA1
+	fanfare MUS_FANFA1
 	printstring STRINGID_PKMNLEARNEDMOVE
 	waitmessage 0x40
 	updatechoicemoveonlvlup ATTACKER

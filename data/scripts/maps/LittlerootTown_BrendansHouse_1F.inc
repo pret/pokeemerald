@@ -153,7 +153,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	waitmovement 0
 	compare VAR_0x8008, 1
 	call_if 5, LittlerootTown_BrendansHouse_1F_EventScript_1F7981
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_BrendansHouse_1F_EventScript_1F798C
 	compare VAR_0x8008, 1
@@ -176,7 +176,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F78E2:: @ 81F78E2
 	delay 30
 	setvar VAR_0x408D, 3
 	setvar VAR_0x4050, 1
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
 	end

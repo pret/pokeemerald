@@ -115,7 +115,7 @@ SootopolisCity_Gym_1F_EventScript_224F82:: @ 8224F82
 	call SootopolisCity_Gym_1F_EventScript_224FD4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox SootopolisCity_Gym_1F_Text_22574D, 4
 	waitfanfare
 	closemessage

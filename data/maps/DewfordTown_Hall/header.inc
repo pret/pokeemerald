@@ -3,7 +3,7 @@ DewfordTown_Hall: @ 8482C7C
 	.4byte DewfordTown_Hall_MapEvents
 	.4byte DewfordTown_Hall_MapScripts
 	.4byte 0x0
-	.2byte BGM_HIGHTOWN
+	.2byte MUS_HIGHTOWN
 	.2byte 66
 	.byte 2
 	.byte 0

@@ -74,7 +74,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	applymovement 1, LittlerootTown_MaysHouse_2F_Movement_27259A
 	waitmovement 0
 	delay 10
-	playbgm BGM_GIRL_SUP, 1
+	playbgm MUS_GIRL_SUP, 1
 	compare VAR_FACING, 2
 	call_if 1, LittlerootTown_MaysHouse_2F_EventScript_1F93BA
 	compare VAR_FACING, 1
@@ -87,7 +87,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F934A:: @ 81F934A
 	setflag FLAG_0x332
 	clearflag FLAG_0x2D2
 	setvar VAR_0x4050, 1
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
 	end

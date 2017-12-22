@@ -18,7 +18,7 @@ Route101_EventScript_1EBCD5:: @ 81EBCD5
 
 Route101_EventScript_1EBCDE:: @ 81EBCDE
 	lockall
-	playbgm BGM_EVENT0, 1
+	playbgm MUS_EVENT0, 1
 	msgbox Route101_Text_1EBE8F, 4
 	closemessage
 	setobjectxy 2, 0, 15

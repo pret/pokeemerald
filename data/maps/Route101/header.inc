@@ -3,7 +3,7 @@ Route101: @ 8482678
 	.4byte Route101_MapEvents
 	.4byte Route101_MapScripts
 	.4byte Route101_MapConnections
-	.2byte BGM_DOORO1
+	.2byte MUS_DOORO1
 	.2byte 17
 	.byte 16
 	.byte 0

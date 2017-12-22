@@ -288,7 +288,7 @@ RustboroCity_EventScript_1E09B6:: @ 81E09B6
 RustboroCity_EventScript_1E09CD:: @ 81E09CD
 	msgbox RustboroCity_Text_1E17FE, 4
 	closemessage
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	addobject 10
 	addobject 9
 	applymovement 10, RustboroCity_Movement_1E0AA0
@@ -689,11 +689,11 @@ RustboroCity_EventScript_1E0DD1:: @ 81E0DD1
 	return
 
 RustboroCity_EventScript_1E0DE9:: @ 81E0DE9
-	playbgm BGM_GIRL_SUP, 1
+	playbgm MUS_GIRL_SUP, 1
 	return
 
 RustboroCity_EventScript_1E0DEE:: @ 81E0DEE
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	return
 
 RustboroCity_EventScript_1E0DF3:: @ 81E0DF3
@@ -841,7 +841,7 @@ RustboroCity_EventScript_1E100B:: @ 81E100B
 	msgbox RustboroCity_Text_1E1A49, 4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox RustboroCity_Text_1E1ADB, 4
 	waitfanfare
 	closemessage
@@ -883,7 +883,7 @@ RustboroCity_EventScript_1E10C1:: @ 81E10C1
 	end
 
 RustboroCity_EventScript_1E10D6:: @ 81E10D6
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	return
 
@@ -914,7 +914,7 @@ RustboroCity_EventScript_1E1114:: @ 81E1114
 	msgbox RustboroCity_Text_1E1D7D, 4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox RustboroCity_Text_1E1E11, 4
 	waitfanfare
 	closemessage

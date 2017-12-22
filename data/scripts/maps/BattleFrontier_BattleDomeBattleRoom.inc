@@ -455,7 +455,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C2B9:: @ 824C2B9
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C82B
 	waitmovement 0
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D172, 4
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleDomeBattleRoom_Text_24D1AA
 	waitmessage
 	waitfanfare
@@ -494,7 +494,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_24C373:: @ 824C373
 	applymovement 15, BattleFrontier_BattleDomeBattleRoom_Movement_24C82B
 	waitmovement 0
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_24D47F, 4
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleDomeBattleRoom_Text_24D522
 	waitmessage
 	waitfanfare

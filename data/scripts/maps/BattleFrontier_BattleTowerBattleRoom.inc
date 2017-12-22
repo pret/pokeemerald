@@ -82,7 +82,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_241C2F:: @ 8241C2F
 	applymovement 255, BattleFrontier_BattleTowerBattleRoom_Movement_24217E
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerBattleRoom_Text_242217, 4
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special sp000_heal_pokemon
 
@@ -310,7 +310,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_242046:: @ 8242046
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattleTowerBattleRoom_EventScript_241DF6
 	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2426B4, 4
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleTowerBattleRoom_Text_24270E
 	waitmessage
 	waitfanfare
@@ -344,7 +344,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_2420CF:: @ 82420CF
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattleTowerBattleRoom_EventScript_241DF6
 	msgbox BattleFrontier_BattleTowerBattleRoom_Text_2428F7, 4
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleTowerBattleRoom_Text_242932
 	waitmessage
 	waitfanfare

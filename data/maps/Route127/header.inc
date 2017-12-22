@@ -3,7 +3,7 @@ Route127: @ 8482950
 	.4byte Route127_MapEvents
 	.4byte Route127_MapScripts
 	.4byte Route127_MapConnections
-	.2byte BGM_DOORO_X3
+	.2byte MUS_DOORO_X3
 	.2byte 43
 	.byte 42
 	.byte 0

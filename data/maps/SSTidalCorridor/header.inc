@@ -3,7 +3,7 @@ SSTidalCorridor: @ 8484F0C
 	.4byte SSTidalCorridor_MapEvents
 	.4byte SSTidalCorridor_MapScripts
 	.4byte 0x0
-	.2byte BGM_M_BOAT
+	.2byte MUS_M_BOAT
 	.2byte 277
 	.byte 87
 	.byte 0

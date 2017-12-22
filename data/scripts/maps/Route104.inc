@@ -83,11 +83,11 @@ Route104_EventScript_1ECD11:: @ 81ECD11
 	return
 
 Route104_EventScript_1ECD29:: @ 81ECD29
-	playbgm BGM_GIRL_SUP, 1
+	playbgm MUS_GIRL_SUP, 1
 	return
 
 Route104_EventScript_1ECD2E:: @ 81ECD2E
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	return
 
 Route104_EventScript_1ECD33:: @ 81ECD33
@@ -107,7 +107,7 @@ Route104_EventScript_1ECD4B:: @ 81ECD4B
 	msgbox Route104_Text_1EDBFF, 4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox Route104_Text_1EDC8F, 4
 	waitfanfare
 	closemessage
@@ -167,7 +167,7 @@ Route104_EventScript_1ECE1C:: @ 81ECE1C
 	end
 
 Route104_EventScript_1ECE31:: @ 81ECE31
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	return
 
@@ -198,7 +198,7 @@ Route104_EventScript_1ECE6F:: @ 81ECE6F
 	msgbox Route104_Text_1EDF04, 4
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox Route104_Text_1EDFA0, 4
 	waitfanfare
 	closemessage
@@ -395,7 +395,7 @@ Route104_EventScript_1ED0EF:: @ 81ED0EF
 	pokenavcall Route104_Text_1EE336
 	waitmessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox Route104_Text_1EE463, 4
 	waitfanfare
 	closemessage

@@ -30,7 +30,7 @@ Route103_EventScript_1EC3C1:: @ 81EC3C1
 Route103_EventScript_1EC3DA:: @ 81EC3DA
 	msgbox Route103_Text_1EC7A6, 4
 	closemessage
-	playbgm BGM_GIRL_SUP, 1
+	playbgm MUS_GIRL_SUP, 1
 	applymovement 2, Route103_Movement_27259E
 	waitmovement 0
 	applymovement 2, Route103_Movement_272598
@@ -47,7 +47,7 @@ Route103_EventScript_1EC3DA:: @ 81EC3DA
 Route103_EventScript_1EC434:: @ 81EC434
 	msgbox Route103_Text_1EC989, 4
 	closemessage
-	playbgm BGM_BOY_SUP, 1
+	playbgm MUS_BOY_SUP, 1
 	applymovement 2, Route103_Movement_27259E
 	waitmovement 0
 	applymovement 2, Route103_Movement_272598
@@ -146,7 +146,7 @@ Route103_EventScript_1EC5A2:: @ 81EC5A2
 	setflag FLAG_0x082
 	setvar VAR_0x40C7, 1
 	clearflag FLAG_0x3D3
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
 	end

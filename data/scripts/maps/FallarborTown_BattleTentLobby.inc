@@ -70,7 +70,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFF27:: @ 81FFF27
 	special sub_81A1780
 	message FallarborTown_BattleTentLobby_Text_2C4F69
 	waitmessage
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	msgbox FallarborTown_BattleTentLobby_Text_2C501F, 4
 	closemessage

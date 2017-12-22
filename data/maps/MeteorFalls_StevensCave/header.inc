@@ -3,7 +3,7 @@ MeteorFalls_StevensCave: @ 8484A74
 	.4byte MeteorFalls_StevensCave_MapEvents
 	.4byte MeteorFalls_StevensCave_MapScripts
 	.4byte 0x0
-	.2byte BGM_DAN03
+	.2byte MUS_DAN03
 	.2byte 431
 	.byte 63
 	.byte 0

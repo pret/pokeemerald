@@ -174,7 +174,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B00C:: @ 825B00C
 	closemessage
 	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_25B182
 	waitmovement 0
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleFactoryBattleRoom_Text_25B460
 	waitmessage
 	waitfanfare
@@ -210,7 +210,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_25B09B:: @ 825B09B
 	waitmessage
 	applymovement 8, BattleFrontier_BattleFactoryBattleRoom_Movement_25B182
 	waitmovement 0
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattleFactoryBattleRoom_Text_25B640
 	waitmessage
 	waitfanfare

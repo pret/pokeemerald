@@ -37,7 +37,7 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_212DE8, 4
 	closemessage
-	playbgm BGM_TSURETEK, 0
+	playbgm MUS_TSURETEK, 0
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_212534
 	applymovement 255, RustboroCity_DevonCorp_3F_Movement_212558
 	waitmovement 0
@@ -50,7 +50,7 @@ RustboroCity_DevonCorp_3F_EventScript_21246E:: @ 821246E
 	msgbox RustboroCity_DevonCorp_3F_Text_212609, 4
 	giveitem_std ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_21277C, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message RustboroCity_DevonCorp_3F_Text_212820
 	waitfanfare
 	setflag FLAG_SYS_POKENAV_GET

@@ -82,7 +82,7 @@ MossdeepCity_Gym_EventScript_2208D1:: @ 82208D1
 	call MossdeepCity_Gym_EventScript_22095B
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox MossdeepCity_Gym_Text_221AEA, 4
 	waitfanfare
 	closemessage

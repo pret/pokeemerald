@@ -59,7 +59,7 @@ BattleFrontier_BattlePyramidTop_MapScript2_25516E: @ 825516E
 	.2byte 0
 
 BattleFrontier_BattlePyramidTop_EventScript_255180:: @ 8255180
-	playbgm BGM_BATTLE_PYRAMID_SUMMIT, 0
+	playbgm MUS_PYRAMID_TOP, 0
 	setvar VAR_0x400E, 1
 	end
 
@@ -102,7 +102,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2551D0:: @ 82551D0
 	waitmovement 0
 	message BattleFrontier_BattlePyramidTop_Text_2554E8
 	waitmessage
-	playfanfare BGM_ME_BATTLE_POINTS
+	playfanfare MUS_ME_POINTGET
 	waitfanfare
 	closemessage
 
@@ -159,7 +159,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2552D0:: @ 82552D0
 BattleFrontier_BattlePyramidTop_EventScript_2552DA:: @ 82552DA
 	msgbox BattleFrontier_BattlePyramidTop_Text_255846, 4
 	call BattleFrontier_BattlePyramidTop_EventScript_2553ED
-	playbgm BGM_BATTLE_PYRAMID_SUMMIT, 0
+	playbgm MUS_PYRAMID_TOP, 0
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_2552FB
 	goto BattleFrontier_BattlePyramidTop_EventScript_252B42
@@ -170,7 +170,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2552FB:: @ 82552FB
 	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidTop_EventScript_25521A
 	msgbox BattleFrontier_BattlePyramidTop_Text_255873, 4
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattlePyramidTop_Text_2558E9
 	waitmessage
 	waitfanfare
@@ -206,7 +206,7 @@ BattleFrontier_BattlePyramidTop_EventScript_255388:: @ 8255388
 BattleFrontier_BattlePyramidTop_EventScript_255392:: @ 8255392
 	msgbox BattleFrontier_BattlePyramidTop_Text_255AA1, 4
 	call BattleFrontier_BattlePyramidTop_EventScript_2553ED
-	playbgm BGM_BATTLE_PYRAMID_SUMMIT, 0
+	playbgm MUS_PYRAMID_TOP, 0
 	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_2553B3
 	goto BattleFrontier_BattlePyramidTop_EventScript_252B42
@@ -217,7 +217,7 @@ BattleFrontier_BattlePyramidTop_EventScript_2553B3:: @ 82553B3
 	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_25521A
 	msgbox BattleFrontier_BattlePyramidTop_Text_255ACD, 4
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattlePyramidTop_Text_255B59
 	waitmessage
 	waitfanfare

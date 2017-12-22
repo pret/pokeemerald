@@ -182,7 +182,7 @@ DewfordTown_Gym_EventScript_1FC7F7:: @ 81FC7F7
 	call DewfordTown_Gym_EventScript_1FC855
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox DewfordTown_Gym_Text_1FD1E0, 4
 	waitfanfare
 	closemessage

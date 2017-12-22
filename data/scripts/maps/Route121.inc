@@ -15,7 +15,7 @@ Route121_EventScript_1F5E0F:: @ 81F5E0F
 
 Route121_EventScript_1F5E18:: @ 81F5E18
 	lockall
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	applymovement 13, Route121_Movement_2725B8
 	waitmovement 0
 	msgbox Route121_Text_1F605A, 4

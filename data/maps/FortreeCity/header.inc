@@ -3,7 +3,7 @@ FortreeCity: @ 8482528
 	.4byte FortreeCity_MapEvents
 	.4byte FortreeCity_MapScripts
 	.4byte FortreeCity_MapConnections
-	.2byte BGM_MACHI_S3
+	.2byte MUS_MACHI_S3
 	.2byte 5
 	.byte 11
 	.byte 0

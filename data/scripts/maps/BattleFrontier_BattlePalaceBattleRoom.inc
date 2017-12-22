@@ -98,7 +98,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24F911:: @ 824F911
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special sp000_heal_pokemon
 
@@ -272,7 +272,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FCC7:: @ 824FCC7
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE99
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_25036D, 4
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattlePalaceBattleRoom_Text_2503DC
 	waitmessage
 	waitfanfare
@@ -315,7 +315,7 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_24FD84:: @ 824FD84
 	applymovement 1, BattleFrontier_BattlePalaceBattleRoom_Movement_24FE99
 	applymovement 3, BattleFrontier_BattlePalaceBattleRoom_Movement_24FEAC
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_250629, 4
-	playfanfare BGM_ME_BATTLE_SYMBOL
+	playfanfare MUS_ME_SYMBOLGET
 	message BattleFrontier_BattlePalaceBattleRoom_Text_250699
 	waitmessage
 	waitfanfare

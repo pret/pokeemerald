@@ -33,7 +33,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A8F:: @ 8252A8F
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252A98:: @ 8252A98
-	playbgm BGM_BATTLE_PYRAMID, 0
+	playbgm MUS_PYRAMID, 0
 	setvar VAR_0x400E, 1
 	end
 

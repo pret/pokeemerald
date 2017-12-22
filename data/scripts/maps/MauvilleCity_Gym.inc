@@ -108,7 +108,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	call MauvilleCity_Gym_EventScript_20DFB1
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox MauvilleCity_Gym_Text_20E8B5, 4
 	waitfanfare
 	closemessage

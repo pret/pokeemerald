@@ -3,7 +3,7 @@ MossdeepCity_Mart: @ 8483948
 	.4byte MossdeepCity_Mart_MapEvents
 	.4byte MossdeepCity_Mart_MapScripts
 	.4byte 0x0
-	.2byte BGM_FRIENDLY
+	.2byte MUS_FRIENDLY
 	.2byte 63
 	.byte 13
 	.byte 0

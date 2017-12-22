@@ -247,7 +247,7 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_24B5C7:: @ 824B5C7
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special sp000_heal_pokemon
 	call BattleFrontier_BattleDomePreBattleRoom_EventScript_24B600
