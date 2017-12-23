@@ -168,7 +168,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA5A:: @ 825CA5A
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA78:: @ 825CA78
 	setvar VAR_0x8004, 17
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA91
 	setvar VAR_0x4005, 255
 	end
@@ -191,7 +191,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_25CA97:: @ 825CA97
 BattleFrontier_BattlePikeThreePathRoom_EventScript_25CABB:: @ 825CABB
 	setvar VAR_0x8004, 19
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_25CBC2
 	lock
 	faceplayer

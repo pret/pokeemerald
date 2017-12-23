@@ -11,7 +11,7 @@ DesertRuins_MapScript1_22D96B: @ 822D96B
 
 DesertRuins_EventScript_22D975:: @ 822D975
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, DesertRuins_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
@@ -76,11 +76,11 @@ DesertRuins_EventScript_22DA02:: @ 822DA02
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq DesertRuins_EventScript_22DA49
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq DesertRuins_EventScript_22DA52
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq DesertRuins_EventScript_22DA52
 	setflag FLAG_0x1BB
 	release

@@ -139,7 +139,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_pokemartdecoration2
 	.4byte ScrCmd_playslotmachine
 	.4byte ScrCmd_setberrytree
-	.4byte ScrCmd_choosecontestpkmn
+	.4byte ScrCmd_choosecontestmon
 	.4byte ScrCmd_startcontest
 	.4byte ScrCmd_showcontestresults
 	.4byte ScrCmd_contestlinktransfer

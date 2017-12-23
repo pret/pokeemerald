@@ -14,10 +14,10 @@ PacifidlogTown_House2_EventScript_203792:: @ 8203792
 	call_if 0, PacifidlogTown_House2_EventScript_203801
 	setflag FLAG_0x12C
 	specialvar VAR_RESULT, sub_8138C04
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_if 4, PacifidlogTown_House2_EventScript_203816
 	specialvar VAR_RESULT, sub_8138C04
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if 4, PacifidlogTown_House2_EventScript_203845
 	goto PacifidlogTown_House2_EventScript_20384F
 	end
@@ -26,7 +26,7 @@ PacifidlogTown_House2_EventScript_2037DE:: @ 82037DE
 	checkflag FLAG_0x12B
 	goto_if 0, PacifidlogTown_House2_EventScript_27374E
 	specialvar VAR_RESULT, sub_813970C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, PacifidlogTown_House2_EventScript_203812
 	return
 
@@ -46,7 +46,7 @@ PacifidlogTown_House2_EventScript_203812:: @ 8203812
 PacifidlogTown_House2_EventScript_203816:: @ 8203816
 	msgbox PacifidlogTown_House2_Text_20396D, 4
 	giveitem_std ITEM_TM27
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq PacifidlogTown_House2_EventScript_272054
 	setflag FLAG_0x12B
 	special sub_8139754
@@ -62,7 +62,7 @@ PacifidlogTown_House2_EventScript_203845:: @ 8203845
 PacifidlogTown_House2_EventScript_20384F:: @ 820384F
 	msgbox PacifidlogTown_House2_Text_203A2F, 4
 	giveitem_std ITEM_TM21
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq PacifidlogTown_House2_EventScript_272054
 	setflag FLAG_0x12B
 	special sub_8139754

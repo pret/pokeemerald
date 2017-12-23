@@ -6,13 +6,22 @@
 	.section .rodata
 
 gUnknown_08589A08:: @ 8589A08
-	.incbin "baserom.gba", 0x589a08, 0x8
+	.4byte BuyMenuTryMakePurchase
+	.4byte BuyMenuReturnToItemList
 
 gUnknown_08589A10:: @ 8589A10
-	.incbin "baserom.gba", 0x589a10, 0x18
+	.4byte gUnknown_085E93C7
+	.4byte HandleShopMenuBuy
+	.4byte gUnknown_085E93CB
+	.4byte HandleShopMenuSell
+	.4byte gUnknown_085E93D0
+	.4byte HandleShopMenuQuit
 
 gUnknown_08589A28:: @ 8589A28
-	.incbin "baserom.gba", 0x589a28, 0x10
+	.4byte gUnknown_085E93C7
+	.4byte HandleShopMenuBuy
+	.4byte gUnknown_085E93D0
+	.4byte HandleShopMenuQuit
 
 gUnknown_08589A38:: @ 8589A38
 	.incbin "baserom.gba", 0x589a38, 0x10

@@ -6,9 +6,9 @@ SootopolisCity_MysteryEventsHouse_1F_MapScripts:: @ 8227953
 SootopolisCity_MysteryEventsHouse_1F_MapScript1_22795E: @ 822795E
 	setvar VAR_0x8004, 16
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_22797D
-	compare_var_to_value VAR_0x40C0, 0
+	compare VAR_0x40C0, 0
 	call_if 5, SootopolisCity_MysteryEventsHouse_1F_EventScript_227991
 	end
 
@@ -39,11 +39,11 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_2279B7:: @ 82279B7
 	moveobjectoffscreen 1
 	applymovement 255, SootopolisCity_MysteryEventsHouse_1F_Movement_2725A6
 	waitmovement 0
-	compare_var_to_value VAR_0x40C0, 1
+	compare VAR_0x40C0, 1
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A04
-	compare_var_to_value VAR_0x40C0, 2
+	compare VAR_0x40C0, 2
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A0D
-	compare_var_to_value VAR_0x40C0, 3
+	compare VAR_0x40C0, 3
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227A16
 	special copy_player_party_from_sav1
 	setvar VAR_0x40C0, 0
@@ -76,9 +76,9 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A24:: @ 8227A24
 	faceplayer
 	setvar VAR_0x8004, 16
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A4E
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227B46, 4
 	release
@@ -93,27 +93,27 @@ SootopolisCity_MysteryEventsHouse_1F_EventScript_227A58:: @ 8227A58
 	special copy_player_party_to_sav1
 	special sub_8139238
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227BFC, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	call SootopolisCity_MysteryEventsHouse_1F_EventScript_227AEF
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227CEB, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special copy_player_party_from_sav1
 	call SootopolisCity_MysteryEventsHouse_1F_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_MysteryEventsHouse_1F_EventScript_227AE2
 	special copy_player_party_to_sav1
 	special sub_80F94E8
 	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_227D21, 4
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227AFE
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227B10
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_227B22
 	warp SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F, 255, 3, 1
 	waitstate

@@ -211,7 +211,7 @@ void Task_HandleTruckSequence(u8 taskId)
         data[1]++;
         if (data[1] == 90)
         {
-            PlaySE(SE_TRACK_HAIK);
+            PlaySE(SE_TRACK_HAIKI);
             data[1] = 0;
             data[0] = 5;
         }

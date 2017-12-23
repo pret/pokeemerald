@@ -8,7 +8,7 @@ SSTidalRooms_EventScript_23C9F2:: @ 823C9F2
 	goto_eq SSTidalRooms_EventScript_23CA29
 	msgbox SSTidalRooms_Text_23D098, 4
 	giveitem_std ITEM_TM49
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SSTidalRooms_EventScript_272054
 	setflag FLAG_0x104
 	msgbox SSTidalRooms_Text_23D145, 4

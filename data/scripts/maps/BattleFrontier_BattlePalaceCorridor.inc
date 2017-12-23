@@ -14,21 +14,21 @@ BattleFrontier_BattlePalaceCorridor_EventScript_24F4B3:: @ 824F4B3
 	lockall
 	setvar VAR_0x8004, 3
 	special sub_8195960
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattlePalaceCorridor_EventScript_24F58B
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePalaceCorridor_EventScript_24F594
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, BattleFrontier_BattlePalaceCorridor_EventScript_24F59D
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	call_if 1, BattleFrontier_BattlePalaceCorridor_EventScript_24F5A6
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	call_if 1, BattleFrontier_BattlePalaceCorridor_EventScript_24F5AF
 	closemessage
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePalaceCorridor_EventScript_24F553
 	applymovement 1, BattleFrontier_BattlePalaceCorridor_Movement_24F5BD
 	applymovement 255, BattleFrontier_BattlePalaceCorridor_Movement_24F5C4

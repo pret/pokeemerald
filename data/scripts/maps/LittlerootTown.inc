@@ -7,23 +7,23 @@ LittlerootTown_MapScripts:: @ 81E7DCB
 LittlerootTown_MapScript1_1E7DDB: @ 81E7DDB
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	call LittlerootTown_EventScript_271ED7
-	compare_var_to_value VAR_0x4092, 2
+	compare VAR_0x4092, 2
 	call_if 1, LittlerootTown_EventScript_1E7E67
 	checkflag FLAG_0x052
 	call_if 0, LittlerootTown_EventScript_1E7E6F
-	compare_var_to_value VAR_0x4050, 3
+	compare VAR_0x4050, 3
 	call_if 1, LittlerootTown_EventScript_1E7E92
-	compare_var_to_value VAR_0x4082, 4
+	compare VAR_0x4082, 4
 	call_if 1, LittlerootTown_EventScript_1E7E5C
-	compare_var_to_value VAR_0x408C, 4
+	compare VAR_0x408C, 4
 	call_if 1, LittlerootTown_EventScript_1E7E5C
-	compare_var_to_value VAR_0x40C7, 1
+	compare VAR_0x40C7, 1
 	call_if 1, LittlerootTown_EventScript_1E7E53
-	compare_var_to_value VAR_0x408D, 3
+	compare VAR_0x408D, 3
 	call_if 1, LittlerootTown_EventScript_1E7E4F
-	compare_var_to_value VAR_0x40D3, 1
+	compare VAR_0x40D3, 1
 	call_if 1, LittlerootTown_EventScript_1E7E4B
-	compare_var_to_value VAR_0x40D3, 2
+	compare VAR_0x40D3, 2
 	call_if 1, LittlerootTown_EventScript_1E7E45
 	end
 
@@ -54,7 +54,7 @@ LittlerootTown_EventScript_1E7E67:: @ 81E7E67
 	return
 
 LittlerootTown_EventScript_1E7E6F:: @ 81E7E6F
-	compare_var_to_value VAR_0x4050, 0
+	compare VAR_0x4050, 0
 	goto_eq LittlerootTown_EventScript_1E7E86
 	setobjectxyperm 1, 10, 1
 	setobjectmovementtype 1, 7
@@ -69,9 +69,9 @@ LittlerootTown_EventScript_1E7E92:: @ 81E7E92
 	clearflag FLAG_0x2F0
 	setobjectmovementtype 4, 8
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_EventScript_1E7EB1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_EventScript_1E7EB9
 	return
 
@@ -209,7 +209,7 @@ LittlerootTown_EventScript_1E7FEC:: @ 81E7FEC
 	addobject 8
 	addobject 7
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LittlerootTown_EventScript_1E8004
 	goto LittlerootTown_EventScript_1E8013
 	end
@@ -239,7 +239,7 @@ LittlerootTown_EventScript_1E8034:: @ 81E8034
 	goto_eq LittlerootTown_EventScript_1E8087
 	checkflag FLAG_0x052
 	goto_eq LittlerootTown_EventScript_1E807A
-	compare_var_to_value VAR_0x4050, 0
+	compare VAR_0x4050, 0
 	goto_if 5, LittlerootTown_EventScript_1E805D
 	msgbox LittlerootTown_Text_1E8BB8, 4
 	release
@@ -384,9 +384,9 @@ LittlerootTown_EventScript_1E815A:: @ 81E815A
 LittlerootTown_EventScript_1E8163:: @ 81E8163
 	lockall
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_EventScript_1E817D
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_EventScript_1E8186
 	releaseall
 	end
@@ -402,9 +402,9 @@ LittlerootTown_EventScript_1E8186:: @ 81E8186
 LittlerootTown_EventScript_1E818F:: @ 81E818F
 	lockall
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_EventScript_1E81A9
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_EventScript_1E81B2
 	releaseall
 	end
@@ -457,27 +457,27 @@ LittlerootTown_EventScript_1E8205:: @ 81E8205
 
 LittlerootTown_EventScript_1E8211:: @ 81E8211
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_EventScript_1E8297
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_EventScript_1E82A2
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_EventScript_1E8281
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_EventScript_1E828C
 	msgbox LittlerootTown_Text_1E87E1, 4
 	closemessage
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_EventScript_1E82AD
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_EventScript_1E82F0
 	call LittlerootTown_EventScript_1E8693
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_EventScript_1E8405
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_EventScript_1E8448
 	goto LittlerootTown_EventScript_1E8686
 	end
@@ -503,32 +503,32 @@ LittlerootTown_EventScript_1E82A2:: @ 81E82A2
 	return
 
 LittlerootTown_EventScript_1E82AD:: @ 81E82AD
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_EventScript_1E8333
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_EventScript_1E8348
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, LittlerootTown_EventScript_1E835D
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, LittlerootTown_EventScript_1E8372
-	compare_var_to_value VAR_0x8008, 4
+	compare VAR_0x8008, 4
 	call_if 1, LittlerootTown_EventScript_1E8387
-	compare_var_to_value VAR_0x8008, 5
+	compare VAR_0x8008, 5
 	call_if 1, LittlerootTown_EventScript_1E839C
 	return
 
 LittlerootTown_EventScript_1E82F0:: @ 81E82F0
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_EventScript_1E8333
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_EventScript_1E8348
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, LittlerootTown_EventScript_1E83B1
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, LittlerootTown_EventScript_1E83C6
-	compare_var_to_value VAR_0x8008, 4
+	compare VAR_0x8008, 4
 	call_if 1, LittlerootTown_EventScript_1E83DB
-	compare_var_to_value VAR_0x8008, 5
+	compare VAR_0x8008, 5
 	call_if 1, LittlerootTown_EventScript_1E83F0
 	return
 
@@ -603,32 +603,32 @@ LittlerootTown_EventScript_1E83F0:: @ 81E83F0
 	return
 
 LittlerootTown_EventScript_1E8405:: @ 81E8405
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_EventScript_1E848B
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_EventScript_1E8496
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, LittlerootTown_EventScript_1E84A1
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, LittlerootTown_EventScript_1E84C7
-	compare_var_to_value VAR_0x8008, 4
+	compare VAR_0x8008, 4
 	call_if 1, LittlerootTown_EventScript_1E84ED
-	compare_var_to_value VAR_0x8008, 5
+	compare VAR_0x8008, 5
 	call_if 1, LittlerootTown_EventScript_1E8513
 	return
 
 LittlerootTown_EventScript_1E8448:: @ 81E8448
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_EventScript_1E848B
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_EventScript_1E8496
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, LittlerootTown_EventScript_1E8539
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, LittlerootTown_EventScript_1E855F
-	compare_var_to_value VAR_0x8008, 4
+	compare VAR_0x8008, 4
 	call_if 1, LittlerootTown_EventScript_1E8585
-	compare_var_to_value VAR_0x8008, 5
+	compare VAR_0x8008, 5
 	call_if 1, LittlerootTown_EventScript_1E85AB
 	return
 
@@ -892,9 +892,9 @@ LittlerootTown_EventScript_1E863D:: @ 81E863D
 	lock
 	faceplayer
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LittlerootTown_EventScript_1E8281
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LittlerootTown_EventScript_1E828C
 	call LittlerootTown_EventScript_1E8693
 	applymovement 4, LittlerootTown_Movement_2725A6
@@ -918,7 +918,7 @@ LittlerootTown_EventScript_1E8686:: @ 81E8686
 
 LittlerootTown_EventScript_1E8693:: @ 81E8693
 	msgbox LittlerootTown_Text_1E87F0, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message LittlerootTown_Text_1E8925
 	waitfanfare
 	setflag FLAG_0x112

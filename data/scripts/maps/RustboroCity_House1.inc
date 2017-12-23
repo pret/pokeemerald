@@ -11,17 +11,17 @@ RustboroCity_House1_EventScript_21593F:: @ 821593F
 	specialvar VAR_RESULT, sub_807E73C
 	copyvar VAR_0x8009, VAR_RESULT
 	msgbox RustboroCity_House1_Text_2159E8, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_House1_EventScript_2159BD
 	special sub_81B94B0
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
-	compare_var_to_value VAR_0x8004, 255
+	compare VAR_0x8004, 255
 	goto_eq RustboroCity_House1_EventScript_2159BD
 	copyvar VAR_0x8005, VAR_0x800A
 	specialvar VAR_RESULT, sub_807E9D4
 	copyvar VAR_0x800B, VAR_RESULT
-	compare_var_to_var VAR_RESULT, VAR_0x8009
+	compare VAR_RESULT, VAR_0x8009
 	goto_if 5, RustboroCity_House1_EventScript_2159C7
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A

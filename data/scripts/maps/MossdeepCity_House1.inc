@@ -7,7 +7,7 @@ MossdeepCity_House1_EventScript_221FD6:: @ 8221FD6
 	bufferleadmonspeciesname 0
 	msgbox MossdeepCity_House1_Text_22200F, 4
 	specialvar VAR_RESULT, sub_81391D0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_House1_EventScript_221FFC
 	msgbox MossdeepCity_House1_Text_22201D, 4
 	release

@@ -11,7 +11,7 @@ LilycoveCity_House3_EventScript_21EE4B:: @ 821EE4B
 	lock
 	faceplayer
 	msgbox LilycoveCity_House3_Text_21EF99, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_House3_EventScript_21EE75
 	msgbox LilycoveCity_House3_Text_21F0F8, 4
 	closemessage

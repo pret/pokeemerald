@@ -474,7 +474,7 @@ EventScript_23B531:: @ 823B531
 
 EventScript_23B568:: @ 823B568
 	msgbox Text_2766AA, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_23B4D3
 	closemessage
 	special sub_80E9AC0
@@ -520,13 +520,13 @@ gUnknown_0823B5E9:: @ 823B5E9
 
 EventScript_23B5F0:: @ 823B5F0
 	special sub_80E9BDC
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_23B62F
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq EventScript_23B652
 	special sub_80E980C
 	msgbox Text_276707, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_23B5A1
 	msgbox Text_2767D1, 3
 	special sub_80E9C2C
@@ -536,7 +536,7 @@ EventScript_23B5F0:: @ 823B5F0
 
 EventScript_23B62F:: @ 823B62F
 	msgbox Text_276731, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_23B5A1
 	msgbox Text_2767E9, 3
 	special sub_80E9C2C
@@ -586,13 +586,13 @@ gUnknown_0823B684:: @ 823B684
 
 gUnknown_0823B68C:: @ 823B68C
 	special sub_80FAC78
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_23B6BC
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_23B6C5
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq EventScript_23B6CE
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq EventScript_23B6D7
 	end
 
@@ -805,7 +805,7 @@ Std_5: @ 8271332
 
 Std_9: @ 827133C
 	message 0x0
-	playfanfare BGM_ME_BATTLE_POINTS
+	playfanfare MUS_ME_POINTGET
 	waitfanfare
 	waitmessage
 	return
@@ -844,7 +844,7 @@ EventScript_271354:: @ 8271354
 
 EventScript_271356:: @ 8271356
 	special SetUpTrainerEncounterMusic
-	special sub_80B45AC
+	special EndTrainerApproach
 	waitstate
 	goto EventScript_ShowTrainerIntroMsg
 
@@ -854,7 +854,7 @@ EventScript_271362:: @ 8271362
 	applymovement VAR_LAST_TALKED, Movement_27143A
 	waitmovement 0
 	specialvar VAR_RESULT, GetTrainerFlag
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, EventScript_271389
 	special SetUpTrainerEncounterMusic
 	special sub_80B16D8
@@ -868,10 +868,10 @@ EventScript_TryDoDoubleTrainerBattle:: @ 827138A
 	faceplayer
 	call EventScript_27142F
 	specialvar VAR_RESULT, GetTrainerFlag
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, EventScript_2713C1
 	special HasEnoughMonsForDoubleBattle
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, EventScript_NotEnoughMonsForDoubleBattle
 	special SetUpTrainerEncounterMusic
 	special sub_80B16D8
@@ -897,7 +897,7 @@ EventScript_2713C2:: @ 82713C2
 EventScript_2713D1:: @ 82713D1
 	call EventScript_27142F
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_2713F7
 	special SetUpTrainerEncounterMusic
 	special sub_80B16D8
@@ -914,10 +914,10 @@ EventScript_2713F7:: @ 82713F7
 
 EventScript_TryDoDoubleRematchBattle:: @ 82713F8
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_271427
 	special HasEnoughMonsForDoubleBattle
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, EventScript_NotEnoughMonsForDoubleRematchBattle
 	special SetUpTrainerEncounterMusic
 	special sub_80B16D8
@@ -953,22 +953,22 @@ EventScript_ShowTrainerIntroMsg:: @ 827143C
 	waitmessage
 	waitbuttonpress
 	special sub_80B45D0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_271356
 	goto EventScript_DoTrainerBattle
 
 EventScript_DoTrainerBattle:: @ 8271454
 	trainerbattlebegin
 	specialvar VAR_RESULT, GetTrainerBattleMode
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_271491
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq EventScript_271491
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_271491
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq EventScript_271491
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_eq EventScript_271491
 
 EventScript_271491:: @ 8271491
@@ -1233,7 +1233,7 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	special sub_81AFDD0
 	setflag FLAG_0x87F
 	call EverGrandeCity_HallOfFame_EventScript_271829
-	compare_var_to_value VAR_0x40CC, 0
+	compare VAR_0x40CC, 0
 	call_if 1, EverGrandeCity_HallOfFame_EventScript_271839
 	clearflag FLAG_0x39D
 	call EverGrandeCity_HallOfFame_EventScript_2718CC
@@ -1255,7 +1255,7 @@ EverGrandeCity_HallOfFame_EventScript_2717C1:: @ 82717C1
 	call_if 0, EverGrandeCity_HallOfFame_EventScript_27183F
 	setflag FLAG_0x2F8
 	setflag FLAG_0x2D2
-	compare_var_to_value VAR_0x40D3, 0
+	compare VAR_0x40D3, 0
 	call_if 1, EverGrandeCity_HallOfFame_EventScript_271851
 	return
 
@@ -1291,11 +1291,11 @@ EverGrandeCity_HallOfFame_EventScript_271857:: @ 8271857
 	end
 
 EverGrandeCity_HallOfFame_EventScript_271862:: @ 8271862
-	compare_var_to_value VAR_0x4096, 1
+	compare VAR_0x4096, 1
 	goto_eq EverGrandeCity_HallOfFame_EventScript_271884
-	compare_var_to_value VAR_0x4096, 2
+	compare VAR_0x4096, 2
 	goto_eq EverGrandeCity_HallOfFame_EventScript_27189A
-	compare_var_to_value VAR_0x4096, 3
+	compare VAR_0x4096, 3
 	goto_eq EverGrandeCity_HallOfFame_EventScript_2718B3
 	end
 
@@ -1394,12 +1394,12 @@ VerdanturfTown_PokemonCenter_1F_EventScript_27191E:: @ 827191E
 	faceplayer
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, sub_80C2E40
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A68
 	msgbox gUnknown_082726EB, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_27195A
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271954
 	end
 
@@ -1409,9 +1409,9 @@ OldaleTown_PokemonCenter_1F_EventScript_271954:: @ 8271954
 
 OldaleTown_PokemonCenter_1F_EventScript_27195A:: @ 827195A
 	incrementgamestat 15
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	call_if 1, OldaleTown_PokemonCenter_1F_EventScript_271987
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	call_if 1, OldaleTown_PokemonCenter_1F_EventScript_27198D
 	waitmessage
 	call OldaleTown_PokemonCenter_1F_EventScript_271993
@@ -1435,23 +1435,23 @@ OldaleTown_PokemonCenter_1F_EventScript_271993:: @ 8271993
 	waitfieldeffect 25
 	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_2725AA
 	waitmovement 0
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_2719B1:: @ 82719B1
 	specialvar VAR_RESULT, sub_8139ED0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
 	specialvar VAR_RESULT, sp182_move_string
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_2719E2
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A19
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_2719E2:: @ 82719E2
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A03
 	message gUnknown_08272798
 	waitmessage
@@ -1482,9 +1482,9 @@ OldaleTown_PokemonCenter_1F_EventScript_271A19:: @ 8271A19
 
 OldaleTown_PokemonCenter_1F_EventScript_271A43:: @ 8271A43
 	specialvar VAR_RESULT, sub_8139540
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A5F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_2719B1
 	end
 
@@ -1504,14 +1504,14 @@ OldaleTown_PokemonCenter_1F_EventScript_271A68:: @ 8271A68
 	applymovement VAR_0x800B, OldaleTown_PokemonCenter_1F_Movement_27259A
 	waitmovement 0
 	msgbox gUnknown_08272860, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
 	message gUnknown_08272A07
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271AAC:: @ 8271AAC
 	msgbox gUnknown_08272982, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271AC5
 	message gUnknown_08272A07
 	return
@@ -1536,9 +1536,9 @@ EventScript_271AE3:: @ 8271AE3
 	bufferitemnameplural 1, VAR_0x8000, 32769
 	checkitemtype VAR_0x8000
 	call EventScript_271B08
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if 1, EventScript_271B95
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	call_if 1, EventScript_271BA9
 	return
 
@@ -1553,31 +1553,31 @@ EventScript_271B08:: @ 8271B08
 
 EventScript_271B45:: @ 8271B45
 	bufferstdstring 2, 14
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if 1, EventScript_271BAF
 	return
 
 EventScript_271B55:: @ 8271B55
 	bufferstdstring 2, 15
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if 1, EventScript_271BAF
 	return
 
 EventScript_271B65:: @ 8271B65
 	bufferstdstring 2, 16
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if 1, EventScript_271BAF
 	return
 
 EventScript_271B75:: @ 8271B75
 	bufferstdstring 2, 17
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if 1, EventScript_271BB3
 	return
 
 EventScript_271B85:: @ 8271B85
 	bufferstdstring 2, 18
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if 1, EventScript_271BAF
 	return
 
@@ -1593,11 +1593,11 @@ EventScript_271BA9:: @ 8271BA9
 	return
 
 EventScript_271BAF:: @ 8271BAF
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	return
 
 EventScript_271BB3:: @ 8271BB3
-	playfanfare BGM_ME_WAZA
+	playfanfare MUS_ME_WAZA
 	return
 
 Std_ObtainDecoration:: @ 8271BB7
@@ -1608,14 +1608,14 @@ Std_ObtainDecoration:: @ 8271BB7
 
 EventScript_271BC5:: @ 8271BC5
 	bufferdecorationname 1, VAR_0x8000
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if 1, EventScript_271BE0
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	call_if 1, EventScript_271BF7
 	return
 
 EventScript_271BE0:: @ 8271BE0
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message gUnknown_08272B09
 	waitfanfare
 	msgbox gUnknown_08272B48, 4
@@ -1637,9 +1637,9 @@ Std_FindItem:: @ 8271BFD
 	bufferitemnameplural 1, VAR_0x8000, 32769
 	checkitemtype VAR_0x8000
 	call EventScript_271B08
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if 1, EventScript_271C3A
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	call_if 1, EventScript_271CA1
 	release
 	return
@@ -1649,16 +1649,16 @@ EventScript_271C3A:: @ 8271C3A
 	giveitem VAR_0x8004, 32773
 	specialvar VAR_RESULT, sub_81398C0
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, EventScript_271C8F
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, EventScript_271C9B
 	waitfanfare
 	waitmessage
 	bufferitemnameplural 1, VAR_0x8004, 32773
 	setvar VAR_0x8004, 12
 	special sub_81A8E7C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_271C86
 	msgbox gUnknown_08272A9A, 4
 	return
@@ -1690,9 +1690,9 @@ EventScript_271CB7:: @ 8271CB7
 	bufferitemnameplural 1, VAR_0x8005, 1
 	checkitemtype VAR_0x8005
 	call EventScript_271B08
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	goto_eq EventScript_271CE8
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	goto_eq EventScript_271D47
 	end
 
@@ -1700,9 +1700,9 @@ EventScript_271CE8:: @ 8271CE8
 	copyvar VAR_0x8008, VAR_0x8004
 	copyvar VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, sub_81398C0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_271D0E
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_271D1F
 	end
 
@@ -1739,9 +1739,9 @@ EventScript_271D5E:: @ 8271D5E
 	lock
 	faceplayer
 	msgbox Text_27260D, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_271D83
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_271D89
 	goto EventScript_271D89
 
@@ -1785,7 +1785,7 @@ EventScript_271DBC:: @ 8271DBC
 	end
 
 EventScript_271DF9:: @ 8271DF9
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	msgbox gUnknown_082726C2, 4
 	special sub_816AE98
 	waitstate
@@ -1793,7 +1793,7 @@ EventScript_271DF9:: @ 8271DF9
 	end
 
 EventScript_271E0E:: @ 8271E0E
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	checkflag FLAG_SYS_PC_LANETTE
 	call_if 0, EventScript_271E35
 	checkflag FLAG_SYS_PC_LANETTE
@@ -1822,7 +1822,7 @@ EventScript_271E47:: @ 8271E47
 EventScript_271E54:: @ 8271E54
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, EventScript_271E47
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	special sub_8137C28
 	waitstate
 	goto EventScript_271DBC
@@ -1901,13 +1901,13 @@ Route109_EventScript_271E95:: @ 8271E95
 
 EventScript_271EA0:: @ 8271EA0
 	checkpartymove MOVE_SURF
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq EventScript_271ED6
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	lockall
 	msgbox gUnknown_08272FD6, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_271ED5
 	msgbox gUnknown_0827300D, 4
 	dofieldeffect 9
@@ -1930,9 +1930,9 @@ Route110_EventScript_271ED7:: @ 8271ED7
 Route119_EventScript_271ED7:: @ 8271ED7
 RustboroCity_EventScript_271ED7:: @ 8271ED7
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_EventScript_271EEF
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq RustboroCity_EventScript_271EF5
 	end
 
@@ -1948,9 +1948,9 @@ LavaridgeTown_EventScript_271EFB:: @ 8271EFB
 Route110_EventScript_271EFB:: @ 8271EFB
 Route119_EventScript_271EFB:: @ 8271EFB
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LavaridgeTown_EventScript_271F13
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LavaridgeTown_EventScript_271F19
 	end
 
@@ -1964,9 +1964,9 @@ LavaridgeTown_EventScript_271F19:: @ 8271F19
 
 EventScript_271F1F:: @ 8271F1F
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_271F37
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_271F3D
 	end
 
@@ -2182,7 +2182,7 @@ MossdeepCity_Gym_EventScript_27207E:: @ 827207E
 PetalburgCity_Gym_EventScript_27207E:: @ 827207E
 RustboroCity_Gym_EventScript_27207E:: @ 827207E
 SootopolisCity_Gym_1F_EventScript_27207E:: @ 827207E
-	playfanfare BGM_ME_BACHI
+	playfanfare MUS_ME_BACHI
 	waitfanfare
 	return
 
@@ -2192,9 +2192,9 @@ Route119_WeatherInstitute_1F_EventScript_272083:: @ 8272083
 RustboroCity_DevonCorp_3F_EventScript_272083:: @ 8272083
 SSTidalRooms_EventScript_272083:: @ 8272083
 	fadescreen 1
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	fadescreen 0
 	return
 
@@ -2211,7 +2211,7 @@ DewfordTown_EventScript_2720A0:: @ 82720A0
 Route104_EventScript_2720A0:: @ 82720A0
 Route109_EventScript_2720A0:: @ 82720A0
 	setflag FLAG_SPECIAL_FLAG_0x4001
-	playbgm BGM_M_BOAT, 0
+	playbgm MUS_M_BOAT, 0
 	return
 
 DewfordTown_EventScript_2720A8:: @ 82720A8
@@ -2224,25 +2224,25 @@ Route109_EventScript_2720A8:: @ 82720A8
 LittlerootTown_ProfessorBirchsLab_EventScript_2720AD:: @ 82720AD
 Route101_EventScript_2720AD:: @ 82720AD
 Route103_EventScript_2720AD:: @ 82720AD
-	compare_var_to_value VAR_0x4085, 0
+	compare VAR_0x4085, 0
 	goto_eq Route101_EventScript_27374E
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_eq Route101_EventScript_27211A
-	compare_var_to_value VAR_BIRCH_STATE, 0
+	compare VAR_BIRCH_STATE, 0
 	call_if 1, Route101_EventScript_27211A
-	compare_var_to_value VAR_BIRCH_STATE, 1
+	compare VAR_BIRCH_STATE, 1
 	call_if 1, Route101_EventScript_27211A
-	compare_var_to_value VAR_BIRCH_STATE, 2
+	compare VAR_BIRCH_STATE, 2
 	call_if 1, Route101_EventScript_272127
-	compare_var_to_value VAR_BIRCH_STATE, 3
+	compare VAR_BIRCH_STATE, 3
 	call_if 1, Route101_EventScript_272127
-	compare_var_to_value VAR_BIRCH_STATE, 4
+	compare VAR_BIRCH_STATE, 4
 	call_if 1, Route101_EventScript_272134
-	compare_var_to_value VAR_BIRCH_STATE, 5
+	compare VAR_BIRCH_STATE, 5
 	call_if 1, Route101_EventScript_272134
-	compare_var_to_value VAR_BIRCH_STATE, 6
+	compare VAR_BIRCH_STATE, 6
 	call_if 1, Route101_EventScript_27211A
-	compare_var_to_value VAR_BIRCH_STATE, 7
+	compare VAR_BIRCH_STATE, 7
 	call_if 1, Route101_EventScript_27211A
 	return
 
@@ -2279,7 +2279,7 @@ Route103_EventScript_272141:: @ 8272141
 
 Route101_EventScript_272155:: @ 8272155
 	msgbox gUnknown_082A5C9C, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route101_EventScript_27216F
 	call Route101_EventScript_272184
 	release
@@ -2308,7 +2308,7 @@ Route101_EventScript_272184:: @ 8272184
 	buffernumberstring 1, VAR_0x8009
 	msgbox gUnknown_082A5D2C, 4
 	call Route101_EventScript_272179
-	compare_var_to_value VAR_0x800A, 0
+	compare VAR_0x800A, 0
 	goto_eq Route101_EventScript_27374E
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, sub_8137A4C
@@ -2378,9 +2378,9 @@ BirthIsland_Harbor_EventScript_272250:: @ 8272250
 FarawayIsland_Entrance_EventScript_272250:: @ 8272250
 NavelRock_Harbor_EventScript_272250:: @ 8272250
 SouthernIsland_Exterior_EventScript_272250:: @ 8272250
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, BattleFrontier_OutsideWest_EventScript_242A21
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, BattleFrontier_OutsideWest_EventScript_242A2C
 	delay 30
 	hideobjectat 255, PETALBURG_CITY
@@ -2487,7 +2487,7 @@ Route119_EventScript_272329:: @ 8272329
 Route119_EventScript_272336:: @ 8272336
 Route120_EventScript_272336:: @ 8272336
 	checkitem ITEM_DEVON_SCOPE, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route119_EventScript_272350
 	msgbox Route119_Text_1F5D00, 4
 	release
@@ -2495,7 +2495,7 @@ Route120_EventScript_272336:: @ 8272336
 
 Route119_EventScript_272350:: @ 8272350
 	msgbox Route119_Text_1F5D23, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route119_EventScript_272365
 	release
 	end
@@ -2516,11 +2516,11 @@ Route119_EventScript_272365:: @ 8272365
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route119_EventScript_2723C1
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq Route119_EventScript_2723C1
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq Route119_EventScript_2723C1
 	release
 	end
@@ -2569,7 +2569,7 @@ FallarborTown_House1_EventScript_2723E4:: @ 82723E4
 GraniteCave_StevensRoom_EventScript_2723E4:: @ 82723E4
 SlateportCity_OceanicMuseum_2F_EventScript_2723E4:: @ 82723E4
 	bufferitemname 0, VAR_0x8004
-	playfanfare BGM_ME_WAZA
+	playfanfare MUS_ME_WAZA
 	message gUnknown_08273161
 	waitmessage
 	waitfanfare
@@ -3323,9 +3323,9 @@ EventScript_2736BC:: @ 82736BC
 	lockall
 	special sub_80F972C
 	waitstate
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_2736D9
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq EventScript_2736F8
 	releaseall
 	end
@@ -3353,17 +3353,17 @@ EventScript_2736F8:: @ 82736F8
 	waitbuttonpress
 	setvar VAR_0x8004, 16
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4222
 	setvar VAR_0x8004, 12
 	special sub_81A8E7C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePyramidTop_EventScript_252B42
 	setvar VAR_0x8004, 10
 	special sp194_trainer_tower
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq TrainerHill_1F_EventScript_2C83C9
 	special sub_80B05B4
 	waitstate
@@ -3530,7 +3530,7 @@ RustboroCity_DevonCorp_2F_EventScript_2737A0:: @ 82737A0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2737BB:: @ 82737BB
 	specialvar VAR_RESULT, sub_813B21C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_2737D4
 	msgbox gText_PkmnTransferredSomeonesPC, 4
 	return
@@ -3543,7 +3543,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_2737D4:: @ 82737D4
 
 LittlerootTown_ProfessorBirchsLab_EventScript_2737E6:: @ 82737E6
 	specialvar VAR_RESULT, sub_813B21C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LittlerootTown_ProfessorBirchsLab_EventScript_2737FF
 	msgbox gText_PkmnTransferredLanettesPC, 4
 	return
@@ -3565,20 +3565,20 @@ RustboroCity_DevonCorp_2F_EventScript_273811:: @ 8273811
 EventScript_27381B:: @ 827381B
 	lockall
 	msgbox gUnknown_0827339F, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_2738FD
 	setvar VAR_0x8004, 20
 	call MauvilleCity_PokemonCenter_1F_EventScript_271E7C
 	lock
 	faceplayer
 	specialvar VAR_0x8008, sub_813B490
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq EventScript_27386D
-	compare_var_to_value VAR_0x8004, 2
+	compare VAR_0x8004, 2
 	goto_eq EventScript_2738B5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_2738FD
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_2738FF
 	end
 
@@ -3818,7 +3818,7 @@ gUnknown_08273D1F:: @ 8273D1F
 
 gUnknown_08273D1F:: @ 8273D1F
 	lockall
-	compare_var_to_value VAR_0x4037, 9
+	compare VAR_0x4037, 9
 	goto_if 4, Route105_EventScript_273D51
 	goto Route105_EventScript_273D5F
 	end
@@ -4079,7 +4079,7 @@ Std_8:: @ 82742C9
 	buffertrainername 1, VAR_0x8000
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox gUnknown_08272E0F, 4
 	waitfanfare
 	closemessage
@@ -4088,7 +4088,7 @@ Std_8:: @ 82742C9
 
 EventScript_TryGetTrainerScript:: @ 82742E6
 	special ShouldTryGetTrainerScript
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_GotoTrainerScript
 	releaseall
 	end
@@ -4414,32 +4414,32 @@ SecretBase_RedCave1_Text_275944: @ 8275944
 EventScript_2759F1:: @ 82759F1
 	special sub_80E8C98
 	special sub_80E8BC8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_275BE8
 	checkpartymove MOVE_SECRET_POWER
 	setfieldeffectargument 0, VAR_RESULT
 	buffermovename 1, MOVE_SECRET_POWER
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	goto_eq EventScript_275A50
-	compare_var_to_value VAR_0x8007, 2
+	compare VAR_0x8007, 2
 	goto_eq EventScript_275A50
-	compare_var_to_value VAR_0x8007, 3
+	compare VAR_0x8007, 3
 	goto_eq EventScript_275A50
-	compare_var_to_value VAR_0x8007, 4
+	compare VAR_0x8007, 4
 	goto_eq EventScript_275A50
-	compare_var_to_value VAR_0x8007, 5
+	compare VAR_0x8007, 5
 	goto_eq EventScript_275AA9
-	compare_var_to_value VAR_0x8007, 6
+	compare VAR_0x8007, 6
 	goto_eq EventScript_275B02
 	end
 
 EventScript_275A50:: @ 8275A50
 	lockall
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq EventScript_275A91
 	bufferpartymonnick 0, VAR_RESULT
 	msgbox gText_23B704, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_275CDE
 	msgbox Route103_Text_290771, 4
 	closemessage
@@ -4467,11 +4467,11 @@ EventScript_275A9B:: @ 8275A9B
 
 EventScript_275AA9:: @ 8275AA9
 	lockall
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq EventScript_275AEA
 	bufferpartymonnick 0, VAR_RESULT
 	msgbox Text_274779, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_275CDE
 	msgbox Route103_Text_290771, 4
 	closemessage
@@ -4499,11 +4499,11 @@ EventScript_275AF4:: @ 8275AF4
 
 EventScript_275B02:: @ 8275B02
 	lockall
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq EventScript_275B43
 	bufferpartymonnick 0, VAR_RESULT
 	msgbox Text_274825, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_275CDE
 	msgbox Route103_Text_290771, 4
 	closemessage
@@ -4548,7 +4548,7 @@ SecretBase_RedCave1_EventScript_275B81:: @ 8275B81
 	waitmovement 0
 	setvar VAR_0x4097, 1
 	msgbox SecretBase_RedCave1_Text_23B759, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_275BAB
 	closemessage
 	playse SE_KAIDAN
@@ -4572,7 +4572,7 @@ EventScript_275BB7:: @ 8275BB7
 	setvar VAR_0x4097, 1
 	playse SE_KAIDAN
 	special sub_80E9744
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_275BDB
 	clearflag FLAG_0x0AD
 	special sub_80E9068
@@ -4589,58 +4589,58 @@ EventScript_275BDB:: @ 8275BDB
 
 EventScript_275BE8:: @ 8275BE8
 	checkpartymove MOVE_SECRET_POWER
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq EventScript_275C9A
 	setfieldeffectargument 0, VAR_RESULT
 	setorcopyvar VAR_0x8004, VAR_RESULT
 	lockall
 	special sub_8139200
 	msgbox Text_276A3D, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_275CDE
 	msgbox Text_2766AA, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_275CDE
 	fadescreenswapbuffers 1
 	special sub_80E9B70
 	closemessage
 	fadescreenswapbuffers 0
 	msgbox Text_276A95, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_275CDE
 	bufferpartymonnick 0, VAR_0x8004
 	buffermovename 1, MOVE_SECRET_POWER
 	msgbox Route103_Text_290771, 4
 	closemessage
 	closemessage
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	goto_eq EventScript_275A86
-	compare_var_to_value VAR_0x8007, 2
+	compare VAR_0x8007, 2
 	goto_eq EventScript_275A86
-	compare_var_to_value VAR_0x8007, 3
+	compare VAR_0x8007, 3
 	goto_eq EventScript_275A86
-	compare_var_to_value VAR_0x8007, 4
+	compare VAR_0x8007, 4
 	goto_eq EventScript_275A86
-	compare_var_to_value VAR_0x8007, 5
+	compare VAR_0x8007, 5
 	goto_eq EventScript_275ADF
-	compare_var_to_value VAR_0x8007, 6
+	compare VAR_0x8007, 6
 	goto_eq EventScript_275B38
 	releaseall
 	end
 
 EventScript_275C9A:: @ 8275C9A
 	lockall
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	goto_eq EventScript_275A91
-	compare_var_to_value VAR_0x8007, 2
+	compare VAR_0x8007, 2
 	goto_eq EventScript_275A91
-	compare_var_to_value VAR_0x8007, 3
+	compare VAR_0x8007, 3
 	goto_eq EventScript_275A91
-	compare_var_to_value VAR_0x8007, 4
+	compare VAR_0x8007, 4
 	goto_eq EventScript_275A91
-	compare_var_to_value VAR_0x8007, 5
+	compare VAR_0x8007, 5
 	goto_eq EventScript_275AEA
-	compare_var_to_value VAR_0x8007, 6
+	compare VAR_0x8007, 6
 	goto_eq EventScript_275B43
 	end
 
@@ -4691,10 +4691,10 @@ EventScript_275D2E:: @ 8275D2E
 
 EventScript_275D39:: @ 8275D39
 	special sub_8129708
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_275D63
 	addvar VAR_0x8004, 1
-	compare_var_to_value VAR_0x8005, 0
+	compare VAR_0x8005, 0
 	goto_eq EventScript_275D39
 	removeobject VAR_0x8006
 	setflag 0x8005
@@ -4729,25 +4729,25 @@ SecretBase_YellowCave2_EventScript_275D64:: @ 8275D64
 SecretBase_YellowCave3_EventScript_275D64:: @ 8275D64
 SecretBase_YellowCave4_EventScript_275D64:: @ 8275D64
 	special sub_80EA354
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_eq SecretBase_RedCave1_EventScript_275DD6
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq SecretBase_RedCave1_EventScript_275E4E
-	compare_var_to_value VAR_0x8004, 2
+	compare VAR_0x8004, 2
 	goto_eq SecretBase_RedCave1_EventScript_275EC6
-	compare_var_to_value VAR_0x8004, 3
+	compare VAR_0x8004, 3
 	goto_eq SecretBase_RedCave1_EventScript_275F3E
-	compare_var_to_value VAR_0x8004, 4
+	compare VAR_0x8004, 4
 	goto_eq SecretBase_RedCave1_EventScript_275FB6
-	compare_var_to_value VAR_0x8004, 5
+	compare VAR_0x8004, 5
 	goto_eq SecretBase_RedCave1_EventScript_27602E
-	compare_var_to_value VAR_0x8004, 6
+	compare VAR_0x8004, 6
 	goto_eq SecretBase_RedCave1_EventScript_2760A6
-	compare_var_to_value VAR_0x8004, 7
+	compare VAR_0x8004, 7
 	goto_eq SecretBase_RedCave1_EventScript_27611E
-	compare_var_to_value VAR_0x8004, 8
+	compare VAR_0x8004, 8
 	goto_eq SecretBase_RedCave1_EventScript_276196
-	compare_var_to_value VAR_0x8004, 9
+	compare VAR_0x8004, 9
 	goto_eq SecretBase_RedCave1_EventScript_27620E
 	end
 
@@ -4756,15 +4756,15 @@ SecretBase_RedCave1_EventScript_275DD6:: @ 8275DD6
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_275E25
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_275E44
 	msgbox SecretBase_RedCave1_Text_2748A0, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_275E2F
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_275E2F
 	msgbox SecretBase_RedCave1_Text_274939, 4
 	goto SecretBase_RedCave1_EventScript_276286
@@ -4793,15 +4793,15 @@ SecretBase_RedCave1_EventScript_275E4E:: @ 8275E4E
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_275E9D
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_275EBC
 	msgbox SecretBase_RedCave1_Text_274C13, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_275EA7
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_275EA7
 	msgbox SecretBase_RedCave1_Text_274CB0, 4
 	goto SecretBase_RedCave1_EventScript_276286
@@ -4830,15 +4830,15 @@ SecretBase_RedCave1_EventScript_275EC6:: @ 8275EC6
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_275F15
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_275F34
 	msgbox SecretBase_RedCave1_Text_274F39, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_275F1F
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_275F1F
 	msgbox SecretBase_RedCave1_Text_274FCA, 4
 	goto SecretBase_RedCave1_EventScript_276286
@@ -4867,15 +4867,15 @@ SecretBase_RedCave1_EventScript_275F3E:: @ 8275F3E
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_275F8D
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_275FAC
 	msgbox SecretBase_RedCave1_Text_275287, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_275F97
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_275F97
 	msgbox SecretBase_RedCave1_Text_275315, 4
 	goto SecretBase_RedCave1_EventScript_276286
@@ -4904,15 +4904,15 @@ SecretBase_RedCave1_EventScript_275FB6:: @ 8275FB6
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_276005
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_276024
 	msgbox SecretBase_RedCave1_Text_2755D2, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_27600F
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_27600F
 	msgbox SecretBase_RedCave1_Text_275679, 4
 	goto SecretBase_RedCave1_EventScript_276286
@@ -4941,15 +4941,15 @@ SecretBase_RedCave1_EventScript_27602E:: @ 827602E
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_27607D
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_27609C
 	msgbox SecretBase_RedCave1_Text_274A64, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_276087
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_276087
 	msgbox SecretBase_RedCave1_Text_274AFA, 4
 	goto SecretBase_RedCave1_EventScript_276286
@@ -4978,15 +4978,15 @@ SecretBase_RedCave1_EventScript_2760A6:: @ 82760A6
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_2760F5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_276114
 	msgbox SecretBase_RedCave1_Text_274DD2, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_2760FF
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_2760FF
 	msgbox SecretBase_RedCave1_Text_274E41, 4
 	goto SecretBase_RedCave1_EventScript_276286
@@ -5015,15 +5015,15 @@ SecretBase_RedCave1_EventScript_27611E:: @ 827611E
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_27616D
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_27618C
 	msgbox SecretBase_RedCave1_Text_275114, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_276177
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_276177
 	msgbox SecretBase_RedCave1_Text_2751AF, 4
 	goto SecretBase_RedCave1_EventScript_276286
@@ -5052,15 +5052,15 @@ SecretBase_RedCave1_EventScript_276196:: @ 8276196
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_2761E5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_276204
 	msgbox SecretBase_RedCave1_Text_275405, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_2761EF
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_2761EF
 	msgbox SecretBase_RedCave1_Text_2754B2, 4
 	goto SecretBase_RedCave1_EventScript_276286
@@ -5089,15 +5089,15 @@ SecretBase_RedCave1_EventScript_27620E:: @ 827620E
 	faceplayer
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, SecretBase_RedCave1_EventScript_27625D
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SecretBase_RedCave1_EventScript_27627C
 	msgbox SecretBase_RedCave1_Text_2757B5, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_276267
 	setvar VAR_RESULT, 1
 	special sub_80EA30C
 	call SecretBase_RedCave1_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SecretBase_RedCave1_EventScript_276267
 	msgbox SecretBase_RedCave1_Text_275884, 4
 	goto SecretBase_RedCave1_EventScript_276286
@@ -5127,13 +5127,13 @@ SecretBase_RedCave1_EventScript_276286:: @ 8276286
 	setvar VAR_0x8005, 0
 	special sub_8163AC4
 	waitstate
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	call_if 1, SecretBase_RedCave1_EventScript_2762BD
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, SecretBase_RedCave1_EventScript_2762C1
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, SecretBase_RedCave1_EventScript_2762C5
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	release
 	end
 
@@ -5264,67 +5264,92 @@ gUnknown_0827EA0C:: @ 827EA0C
 gUnknown_0827EA17:: @ 827EA17
 	.string "CONTEST$"
 
+gContestRankNormal::
 	.string "NORMAL RANK$"
 
+gContestRankSuper::
 	.string "SUPER RANK$"
 
+gContestRankHyper::
 	.string "HYPER RANK$"
 
+gContestRankMaster::
 	.string "MASTER RANK$"
 
+gContestLink::
 	.string "LINK$"
 
+gContestCoolness::
 	.string "COOLNESS$"
 
+gContestBeauty::
 	.string "BEAUTY$"
 
+gContestCuteness::
 	.string "CUTENESS$"
 
+gContestSmartness::
 	.string "SMARTNESS$"
 
+gContestToughness::
 	.string "TOUGHNESS$"
 
+gContestPaintingCool1::
 	.string "Nonstop supercool--\n"
 	.string "the inestimable {STR_VAR_1}$"
 
+gContestPaintingCool2::
 	.string "Hey, there!\n"
 	.string "The good-looking POKéMON {STR_VAR_1}$"
 
+gContestPaintingCool3::
 	.string "The marvelous, wonderful, and\n"
 	.string "very great {STR_VAR_1}$"
 
+gContestPaintingBeauty1::
 	.string "This century’s last Venus--\n"
 	.string "the beautiful {STR_VAR_1}$"
 
+gContestPaintingBeauty2::
 	.string "{STR_VAR_1}’s dazzling,\n"
 	.string "glittering smile$"
 
+gContestPaintingBeauty3::
 	.string "POKéMON CENTER’s super idol--\n"
 	.string "the incomparable {STR_VAR_1}$"
 
+gContestPaintingCute1::
 	.string "The lovely and sweet {STR_VAR_1}$"
 
+gContestPaintingCute2::
 	.string "The pretty {STR_VAR_1}’s\n"
 	.string "winning portrait$"
 
+gContestPaintingCute3::
 	.string "Give us a wink!\n"
 	.string "The cutie POKéMON {STR_VAR_1}$"
 
+gContestPaintingSmart1::
 	.string "The smartness maestro--\n"
 	.string "the wise POKéMON {STR_VAR_1}$"
 
+gContestPaintingSmart2::
 	.string "{STR_VAR_1}--the one chosen\n"
 	.string "above all POKéMON$"
 
+gContestPaintingSmart3::
 	.string "The excellent {STR_VAR_1}’s\n"
 	.string "moment of elegance$"
 
+gContestPaintingTough1::
 	.string "The powerfully muscular\n"
 	.string "speedster {STR_VAR_1}$"
 
+gContestPaintingTough2::
 	.string "The strong, stronger, and\n"
 	.string "strongest {STR_VAR_1}$"
 
+gContestPaintingTough3::
 	.string "The mighty tough\n"
 	.string "hyper POKéMON {STR_VAR_1}$"
 
@@ -5478,13 +5503,13 @@ SlateportCity_PokemonFanClub_EventScript_28C7E9:: @ 828C7E9
 SlateportCity_PokemonFanClub_EventScript_28C7F0:: @ 828C7F0
 	setvar VAR_0x8005, 1
 	special InterviewBefore
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28C879
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox SlateportCity_PokemonFanClub_Text_280674, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28C827
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28C85C
 	end
 
@@ -5496,9 +5521,9 @@ SlateportCity_PokemonFanClub_EventScript_28C827:: @ 828C827
 	call SlateportCity_PokemonFanClub_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28C866
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28C85C
 	end
 
@@ -5523,24 +5548,24 @@ SlateportCity_OceanicMuseum_1F_EventScript_28C883:: @ 828C883
 	faceplayer
 	setvar VAR_0x8005, 2
 	special InterviewBefore
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C939
 	copyvar VAR_0x8009, VAR_0x8006
 	checkflag FLAG_0x069
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8C8
 	setflag FLAG_0x069
 	msgbox SlateportCity_OceanicMuseum_1F_Text_2811A0, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8E7
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_28C8C8:: @ 828C8C8
 	msgbox SlateportCity_OceanicMuseum_1F_Text_28126D, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C8E7
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
 	end
 
@@ -5552,9 +5577,9 @@ SlateportCity_OceanicMuseum_1F_EventScript_28C8E7:: @ 828C8E7
 	call SlateportCity_OceanicMuseum_1F_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C926
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_28C91C
 	end
 
@@ -5578,17 +5603,17 @@ SlateportCity_PokemonFanClub_EventScript_28C943:: @ 828C943
 	lock
 	faceplayer
 	specialvar VAR_RESULT, sub_80EF8F8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28C7F0
 	setvar VAR_0x8005, 3
 	special InterviewBefore
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28CA4F
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox SlateportCity_PokemonFanClub_Text_280270, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28C98C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28CA45
 	end
 
@@ -5624,14 +5649,14 @@ SlateportCity_PokemonFanClub_EventScript_28C9ED:: @ 828C9ED
 	call SlateportCity_PokemonFanClub_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28CA45
 	msgbox SlateportCity_PokemonFanClub_Text_2804AC, 4
 	setvar VAR_0x8006, 1
 	call SlateportCity_PokemonFanClub_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_28CA45
 	msgbox SlateportCity_PokemonFanClub_Text_280523, 4
 	copyvar VAR_0x8007, VAR_0x800A
@@ -5656,13 +5681,13 @@ LilycoveCity_ContestLobby_EventScript_28CA59:: @ 828CA59
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CB21
 	setvar VAR_0x8005, 6
 	special InterviewBefore
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CB21
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox LilycoveCity_ContestLobby_Text_27EF15, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CA9B
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CAD0
 	end
 
@@ -5674,9 +5699,9 @@ LilycoveCity_ContestLobby_EventScript_28CA9B:: @ 828CA9B
 	call LilycoveCity_ContestLobby_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CADA
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CAD0
 	end
 
@@ -5695,7 +5720,7 @@ LilycoveCity_ContestLobby_EventScript_28CADA:: @ 828CADA
 	call LilycoveCity_ContestLobby_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CAD0
 	msgbox LilycoveCity_ContestLobby_Text_27F0EC, 4
 	setflag FLAG_0x002
@@ -5709,11 +5734,11 @@ LilycoveCity_ContestLobby_EventScript_28CB21:: @ 828CB21
 	end
 
 LilycoveCity_ContestLobby_EventScript_28CB2B:: @ 828CB2B
-	compare_var_to_value VAR_0x4086, 2
+	compare VAR_0x4086, 2
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_28CB95
 	setvar VAR_0x8005, 6
 	special InterviewBefore
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_28CB95
 	switch VAR_0x4088
 	case 0, LilycoveCity_ContestLobby_EventScript_28CB95
@@ -5738,13 +5763,13 @@ BattleFrontier_BattleTowerLobby_EventScript_28CB96:: @ 828CB96
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC7A
 	setvar VAR_0x8005, 7
 	special InterviewBefore
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC7A
 	copyvar VAR_0x8009, VAR_0x8006
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F704, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CBD8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC2E
 	end
 
@@ -5753,9 +5778,9 @@ BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
 	waitmessage
 	multichoice 20, 8, 45, 1
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_28CC38
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_28CC41
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F97A, 4
 	setvar VAR_0x8004, 12
@@ -5763,9 +5788,9 @@ BattleFrontier_BattleTowerLobby_EventScript_28CBD8:: @ 828CBD8
 	call BattleFrontier_BattleTowerLobby_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC4A
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC70
 	end
 
@@ -5783,7 +5808,7 @@ BattleFrontier_BattleTowerLobby_EventScript_28CC41:: @ 828CC41
 	return
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC4A:: @ 828CC4A
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CC70
 	msgbox BattleFrontier_BattleTowerLobby_Text_27F9FD, 4
 	setflag FLAG_0x002
@@ -5803,11 +5828,11 @@ BattleFrontier_BattleTowerLobby_EventScript_28CC7A:: @ 828CC7A
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_28CC84:: @ 828CC84
-	compare_var_to_value VAR_0x40BC, 0
+	compare VAR_0x40BC, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CCA6
 	setvar VAR_0x8005, 7
 	special InterviewBefore
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_28CCA6
 	clearflag FLAG_0x396
 	return
@@ -5837,28 +5862,28 @@ EventScript_292DE5:: @ 8292DE5
 
 	.include "data/scripts/pokeblocks.inc"
 
-Text_294295: @ 8294295
+gText_SoPretty:: @ 8294295
 	.string " so pretty!$"
 
-Text_2942A1: @ 82942A1
+gText_SoDarling:: @ 82942A1
 	.string " so darling!$"
 
-Text_2942AE: @ 82942AE
+gText_SoRelaxed:: @ 82942AE
 	.string " so relaxed!$"
 
-Text_2942BB: @ 82942BB
+gText_SoSunny:: @ 82942BB
 	.string " so sunny!$"
 
-Text_2942C6: @ 82942C6
+gText_SoDesirable:: @ 82942C6
 	.string " so desirable!$"
 
-Text_2942D5: @ 82942D5
+gText_SoExciting:: @ 82942D5
 	.string " so exciting!$"
 
-Text_2942E3: @ 82942E3
+gText_SoAmusing:: @ 82942E3
 	.string " so amusing!$"
 
-Text_2942F0: @ 82942F0
+gText_SoMagical:: @ 82942F0
 	.string " so magical!$"
 
 gUnknown_082942FD:: @ 82942FD
@@ -5913,11 +5938,11 @@ Text_RepelWoreOff: @ 82A4B33
 
 MauvilleCity_GameCorner_EventScript_2A5AB1:: @ 82A5AB1
 	checkitem ITEM_COIN_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 0
 	getpricereduction 2
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_2A5B0D
 	addvar VAR_0x8004, 128
 	goto MauvilleCity_GameCorner_EventScript_2A5B0D
@@ -5925,11 +5950,11 @@ MauvilleCity_GameCorner_EventScript_2A5AB1:: @ 82A5AB1
 
 MauvilleCity_GameCorner_EventScript_2A5ADF:: @ 82A5ADF
 	checkitem ITEM_COIN_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_210456
 	setvar VAR_0x8004, 1
 	getpricereduction 2
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_GameCorner_EventScript_2A5B0D
 	addvar VAR_0x8004, 128
 	goto MauvilleCity_GameCorner_EventScript_2A5B0D
@@ -6031,11 +6056,11 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8395:: @ 82A8395
 	faceplayer
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8A69, 4
 	specialvar VAR_RESULT, sub_818DBE8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83D0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83C6
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8510
 	end
 
@@ -6048,9 +6073,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A83D0:: @ 82A83D0
 	special sub_818DC2C
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8A7D, 4
 	specialvar VAR_RESULT, sub_818DC60
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8435
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A83F7
 	end
 
@@ -6058,9 +6083,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A83F7:: @ 82A83F7
 	special sub_818DCC8
 	special sub_818DD14
 	specialvar VAR_RESULT, sub_818DD54
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8419
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8427
 	end
 
@@ -6076,9 +6101,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8427:: @ 82A8427
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8435:: @ 82A8435
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8B69, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8454
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A845E
 	end
 
@@ -6097,25 +6122,25 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A846C:: @ 82A846C
 	setvar VAR_RESULT, 0
 	special sub_818DD78
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A848E
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84AD
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A848E:: @ 82A848E
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8BEE, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8454
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A846C
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84AD:: @ 82A84AD
 	specialvar VAR_RESULT, sub_818DE44
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84C9
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84D6
 	end
 
@@ -6127,9 +6152,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A84C9:: @ 82A84C9
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A84D6:: @ 82A84D6
 	specialvar VAR_RESULT, sub_818DE5C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84F2
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A84FF
 	end
 
@@ -6150,9 +6175,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8510:: @ 82A8510
 	specialvar VAR_0x8004, sub_818DEA0
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8D5D, 4
 	giveitem_std VAR_0x8004
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8545
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A854F
 	end
 
@@ -6171,29 +6196,29 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8554:: @ 82A8554
 	faceplayer
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8E2B, 4
 	specialvar VAR_RESULT, sub_818E038
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8585
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85AC
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86EC
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8585:: @ 82A8585
 	specialvar VAR_RESULT, sub_818E06C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85C8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85D2
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85E0
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A85AC:: @ 82A85AC
 	specialvar VAR_RESULT, sub_818E2D8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8759
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A85C8
 	end
 
@@ -6215,9 +6240,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A85E0:: @ 82A85E0
 LilycoveCity_PokemonCenter_1F_EventScript_2A85EE:: @ 82A85EE
 	setvar VAR_0x8004, 0
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8EEC, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A861C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8612
 	end
 
@@ -6228,15 +6253,15 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8612:: @ 82A8612
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A861C:: @ 82A861C
 	special sub_818E3BC
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A864C
-	compare_var_to_value VAR_0x8004, 15
+	compare VAR_0x8004, 15
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8656
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8635:: @ 82A8635
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8660
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8689
 	end
 
@@ -6254,9 +6279,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8656:: @ 82A8656
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8660:: @ 82A8660
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8F7E, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A867F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A861C
 	end
 
@@ -6269,9 +6294,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8689:: @ 82A8689
 	special sub_818E37C
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A8F4D, 4
 	specialvar VAR_RESULT, sub_818E308
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86C7
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A86B0
 	end
 
@@ -6296,9 +6321,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A86C7:: @ 82A86C7
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A86EC:: @ 82A86EC
 	specialvar VAR_RESULT, sub_818E298
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8708
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8716
 	end
 
@@ -6317,7 +6342,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8724:: @ 82A8724
 	special sub_818E358
 	special sub_818E37C
 	giveitem_std VAR_0x8005
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A874C
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8759
 	end
@@ -6330,9 +6355,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A874C:: @ 82A874C
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8759:: @ 82A8759
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A90FB, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8785
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
 	end
 
@@ -6350,17 +6375,17 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A878D:: @ 82A878D
 	setvar VAR_RESULT, 0
 	special sub_818E3E0
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87AF
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87CE
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A87AF:: @ 82A87AF
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9212, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A878D
 	end
 
@@ -6374,16 +6399,16 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A87E1:: @ 82A87E1
 	fadescreen 1
 	special sub_818E47C
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87F8
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A8817
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A87F8:: @ 82A87F8
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A92D3, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8778
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A87E1
 	end
 
@@ -6400,17 +6425,17 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A882A:: @ 82A882A
 	faceplayer
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A93A7, 4
 	specialvar VAR_RESULT, sub_818E8B4
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8850
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A886C
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A8850:: @ 82A8850
 	specialvar VAR_RESULT, sub_818E8E0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8876
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A886C
 	end
 
@@ -6423,12 +6448,12 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A8876:: @ 82A8876
 	special sub_818E914
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A93F4, 4
 	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A89AE
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A94E8, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88B0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88BA
 	end
 
@@ -6441,17 +6466,17 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A88BA:: @ 82A88BA
 	fadescreen 1
 	special sub_818E92C
 	waitstate
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88D7
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_PokemonCenter_1F_EventScript_2A88F6
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A88D7:: @ 82A88D7
 	msgbox LilycoveCity_PokemonCenter_1F_Text_2A9537, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88B0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A88BA
 	end
 
@@ -6473,7 +6498,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A890A:: @ 82A890A
 	playmoncry VAR_0x8005, 0
 	delay 120
 	waitmoncry
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A893F
 	goto LilycoveCity_PokemonCenter_1F_EventScript_2A894C
 	end
@@ -6487,9 +6512,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A894C:: @ 82A894C
 	applymovement 4, LilycoveCity_PokemonCenter_1F_Movement_2A89C0
 	waitmovement 0
 	delay 60
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8970
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A897E
 	end
 
@@ -6506,7 +6531,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A897E:: @ 82A897E
 
 LilycoveCity_PokemonCenter_1F_EventScript_2A898F:: @ 82A898F
 	specialvar VAR_RESULT, sub_818E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A89A1
 	release
 	end
@@ -6551,15 +6576,15 @@ LilycoveCity_PokemonCenter_1F_EventScript_2A89C7:: @ 82A89C7
 	specialvar VAR_RESULT, sub_818E990
 	special sub_818E914
 	special sub_818E960
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A0A
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A1D
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A30
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A43
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq LilycoveCity_PokemonCenter_1F_EventScript_2A8A56
 	end
 
@@ -6871,6 +6896,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A9703: @ 82A9703
 LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "{STR_VAR_1}: Umyaaaan!$"
 
+BattleFrontier_PokeNav_2A971C:: @ 82A971C
 	.string "Hi! {PLAYER}{STRING 5}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I saw this {STR_VAR_2} a while back\n"
@@ -6878,6 +6904,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "It was so close, too!\n"
 	.string "Well, see you again!$"
 
+BattleFrontier_PokeNav_2A9798:: @ 82A9798
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "I tried to catch a nice {STR_VAR_2}\n"
@@ -6886,6 +6913,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I was sure disappointed!\p"
 	.string "Okay, bye!$"
 
+BattleFrontier_PokeNav_2A9813:: @ 82A9813
 	.string "Hey there, {PLAYER}!\n"
 	.string "It’s me, {STR_VAR_1}.\p"
 	.string "I just took a shot at catching\n"
@@ -6894,6 +6922,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "It spoiled my day…\n"
 	.string "All right, see you!$"
 
+BattleFrontier_PokeNav_2A98A8:: @ 82A98A8
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "You know the POKéMON {STR_VAR_2}?\n"
@@ -6904,6 +6933,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "sure, though.\p"
 	.string "Okay, catch you later.$"
 
+BattleFrontier_PokeNav_2A9977:: @ 82A9977
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It’s {STR_VAR_1}.\l"
 	.string "Catching any POKéMON lately?\p"
@@ -6911,6 +6941,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "nabbing one, but it got loose.\p"
 	.string "Right, take care!$"
 
+BattleFrontier_PokeNav_2A99FD:: @ 82A99FD
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\l"
 	.string "Caught any POKéMON lately?\p"
@@ -6918,6 +6949,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "But it evaded me somehow.\p"
 	.string "You take care.$"
 
+BattleFrontier_PokeNav_2A9A78:: @ 82A9A78
 	.string "…Uh, {PLAYER}{STRING 5}?\n"
 	.string "It’s me, {STR_VAR_1}.\p"
 	.string "Oh, wait! Wait!\n"
@@ -6925,6 +6957,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Aaarrrgh! It bolted loose!\n"
 	.string "That wasn’t just close!$"
 
+BattleFrontier_PokeNav_2A9AE8:: @ 82A9AE8
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
 	.string "Have you had success catching\n"
@@ -6934,6 +6967,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I need to try harder!\n"
 	.string "See you again!$"
 
+BattleFrontier_PokeNav_2A9BA7:: @ 82A9BA7
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "So? Are you getting more POKéMON\n"
@@ -6942,6 +6976,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "They all get away from me!\p"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2A9C36:: @ 82A9C36
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Listen, I came within a whisker of\n"
@@ -6950,6 +6985,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I need to try harder.\n"
 	.string "See you around.$"
 
+BattleFrontier_PokeNav_2A9CC8:: @ 82A9CC8
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "How are things with you?\p"
@@ -6957,6 +6993,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "earlier, but it managed to flee.\p"
 	.string "I feel defeated…$"
 
+BattleFrontier_PokeNav_2A9D44:: @ 82A9D44
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "Are you still catching POKéMON?\p"
@@ -6964,6 +7001,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "myself, but it’s not so easy.\p"
 	.string "The way of POKéMON is deep!$"
 
+BattleFrontier_PokeNav_2A9DD7:: @ 82A9DD7
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "Have you been catching POKéMON?\p"
@@ -6971,6 +7009,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "myself, but with little success.\p"
 	.string "The way of POKéMON is deep!$"
 
+BattleFrontier_PokeNav_2A9E70:: @ 82A9E70
 	.string "Oh, hi, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Just now, I tried to catch a cute\n"
@@ -6979,6 +7018,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Oh, you bet I was disappointed!\p"
 	.string "Bye-bye!$"
 
+BattleFrontier_PokeNav_2A9EFD:: @ 82A9EFD
 	.string "Hey, {PLAYER}!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I’ve been thinking about trying\n"
@@ -6988,6 +7028,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m at my wit’s end!\n"
 	.string "See you around!$"
 
+BattleFrontier_PokeNav_2A9FAB:: @ 82A9FAB
 	.string "Hi! {PLAYER}{STRING 5}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I tried battling another TRAINER,\n"
@@ -6995,6 +7036,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "It was really disappointing.\n"
 	.string "Well, see you again!$"
 
+BattleFrontier_PokeNav_2AA028:: @ 82AA028
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "I challenged someone else after\n"
@@ -7002,12 +7044,14 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I came close, but I ended up\n"
 	.string "losing. Oh, well!$"
 
+BattleFrontier_PokeNav_2AA099:: @ 82AA099
 	.string "Hey there, {PLAYER}!\n"
 	.string "It’s me, {STR_VAR_1}.\p"
 	.string "I just got cleaned in a battle.\p"
 	.string "I guess I need to raise my team\n"
 	.string "some more!$"
 
+BattleFrontier_PokeNav_2AA100:: @ 82AA100
 	.string "Hey, {PLAYER}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I tried another battle yesterday,\n"
@@ -7015,6 +7059,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "My team needs more raising.\n"
 	.string "Okay, catch you later.$"
 
+BattleFrontier_PokeNav_2AA188:: @ 82AA188
 	.string "Hiya, {PLAYER}!\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "How are things with you?\p"
@@ -7023,6 +7068,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I can’t get it together.\n"
 	.string "Right, take care!$"
 
+BattleFrontier_PokeNav_2AA214:: @ 82AA214
 	.string "Hey, {PLAYER}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "How’s it going for you?\p"
@@ -7031,6 +7077,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I can’t get into the groove.\n"
 	.string "You take care.$"
 
+BattleFrontier_PokeNav_2AA2A1:: @ 82AA2A1
 	.string "{STR_VAR_1} here.\n"
 	.string "How’s it going lately?\p"
 	.string "I lost a battle yesterday,\n"
@@ -7038,6 +7085,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I have to devise a plan…\n"
 	.string "See you.$"
 
+BattleFrontier_PokeNav_2AA31B:: @ 82AA31B
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
 	.string "How are your POKéMON doing?\n"
@@ -7045,6 +7093,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I need to try harder!\n"
 	.string "See you again!$"
 
+BattleFrontier_PokeNav_2AA3A8:: @ 82AA3A8
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "Listen, listen, you have to hear\n"
@@ -7053,6 +7102,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "but I lost at the last second.\p"
 	.string "Oh, it burns me up!$"
 
+BattleFrontier_PokeNav_2AA442:: @ 82AA442
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "A little earlier, I was in a battle.\n"
@@ -7060,12 +7110,14 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I need to raise my POKéMON more.\n"
 	.string "See you around.$"
 
+BattleFrontier_PokeNav_2AA4C5:: @ 82AA4C5
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "How are your POKéMON?\p"
 	.string "I just lost yet another battle.\p"
 	.string "Well, see you!$"
 
+BattleFrontier_PokeNav_2AA520:: @ 82AA520
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "Are you still battling hard?\p"
@@ -7073,6 +7125,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "been training my team all over.\p"
 	.string "Let’s meet again.$"
 
+BattleFrontier_PokeNav_2AA5AD:: @ 82AA5AD
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I hope you’ve been keeping well.\p"
@@ -7081,6 +7134,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "{PLAYER}{STRING 5}, try to be active like me.\n"
 	.string "See you again!$"
 
+BattleFrontier_PokeNav_2AA64D:: @ 82AA64D
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Are you doing good?\p"
@@ -7088,6 +7142,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "though.\p"
 	.string "Bye-bye!$"
 
+BattleFrontier_PokeNav_2AA6AF:: @ 82AA6AF
 	.string "Hi! {PLAYER}{STRING 5}, hello!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I battled another TRAINER earlier.\n"
@@ -7095,11 +7150,13 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "My {STR_VAR_2} really worked hard\n"
 	.string "for me. This is so great!$"
 
+BattleFrontier_PokeNav_2AA730:: @ 82AA730
 	.string "Hello, {PLAYER}{STRING 5}!\n"
 	.string "It’s {STR_VAR_1}!\p"
 	.string "I had a battle yesterday and\n"
 	.string "I won! It’s fantastic!$"
 
+BattleFrontier_PokeNav_2AA77A:: @ 82AA77A
 	.string "Hey there, {PLAYER}!\n"
 	.string "It’s me, {STR_VAR_1}!\l"
 	.string "How’s your battling?\p"
@@ -7108,6 +7165,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "The next time I battle you,\n"
 	.string "{PLAYER}, it won’t be me losing!$"
 
+BattleFrontier_PokeNav_2AA81C:: @ 82AA81C
 	.string "Hey, {PLAYER}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I had a match earlier.\n"
@@ -7115,6 +7173,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "My {STR_VAR_2} put on one\n"
 	.string "inspired showing.$"
 
+BattleFrontier_PokeNav_2AA88C:: @ 82AA88C
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "How are things with you?\n"
@@ -7124,6 +7183,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You wait. I’m going to beat you\n"
 	.string "next time! Right, take care!$"
 
+BattleFrontier_PokeNav_2AA934:: @ 82AA934
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "How’s it going for you?\p"
@@ -7132,6 +7192,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "When we have our next battle,\n"
 	.string "I’m sure not going to lose!$"
 
+BattleFrontier_PokeNav_2AA9D3:: @ 82AA9D3
 	.string "{PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "My {STR_VAR_2} is a force!\n"
@@ -7139,6 +7200,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I can’t wait to have a rematch\n"
 	.string "with you.$"
 
+BattleFrontier_PokeNav_2AAA40:: @ 82AAA40
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
 	.string "I hope you’ve been well.\n"
@@ -7147,6 +7209,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "hard to get the win.\p"
 	.string "See you again!$"
 
+BattleFrontier_PokeNav_2AAAE4:: @ 82AAAE4
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "How are your POKéMON holding up?\n"
@@ -7156,6 +7219,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I wish I could’ve shown you!\n"
 	.string "See you again!$"
 
+BattleFrontier_PokeNav_2AAB8C:: @ 82AAB8C
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "How has life been treating you?\p"
@@ -7164,6 +7228,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I just won a battle with them.\n"
 	.string "See you around.$"
 
+BattleFrontier_PokeNav_2AAC25:: @ 82AAC25
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Been in any battles lately?\n"
@@ -7171,6 +7236,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m on a roll! Gahahaha!\n"
 	.string "Well, see you!$"
 
+BattleFrontier_PokeNav_2AAC9D:: @ 82AAC9D
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s me, {STR_VAR_1}.\p"
 	.string "I trust you’ve been well?\n"
@@ -7179,6 +7245,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m not stepping aside to you\l"
 	.string "youngsters yet!$"
 
+BattleFrontier_PokeNav_2AAD41:: @ 82AAD41
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I hope you’ve been keeping well.\n"
@@ -7188,6 +7255,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "quite yet!\p"
 	.string "See you again!$"
 
+BattleFrontier_PokeNav_2AAE00:: @ 82AAE00
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I was in a battle recently, and my\n"
@@ -7195,6 +7263,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I wish you could have seen it,\n"
 	.string "{PLAYER}{STRING 5}. Bye-bye!$"
 
+BattleFrontier_PokeNav_2AAE7F:: @ 82AAE7F
 	.string "Hi! {PLAYER}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Huh? Wait, you’re near\n"
@@ -7202,6 +7271,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Oh, wow, we have to battle, then!\n"
 	.string "I’ll be waiting! See you!$"
 
+BattleFrontier_PokeNav_2AAEF1:: @ 82AAEF1
 	.string "Hello, {PLAYER}!\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "Oh? You happen to be around\n"
@@ -7209,6 +7279,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Would you like to battle now?\n"
 	.string "I’ll wait for you! See you!$"
 
+BattleFrontier_PokeNav_2AAF69:: @ 82AAF69
 	.string "Hey there, {PLAYER}!\n"
 	.string "It’s me, {STR_VAR_1}.\p"
 	.string "Oh, hey, are you near\n"
@@ -7218,6 +7289,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m not losing again!\n"
 	.string "I’ll be waiting! Catch you soon!$"
 
+BattleFrontier_PokeNav_2AB010:: @ 82AB010
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "Whereabouts are you now?\n"
@@ -7225,6 +7297,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Want to battle now?\n"
 	.string "I’ll wait for you. See you!$"
 
+BattleFrontier_PokeNav_2AB076:: @ 82AB076
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It’s {STR_VAR_1}.\l"
 	.string "How are things with you?\p"
@@ -7235,6 +7308,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll keep an eye out for you.\n"
 	.string "See you soon!$"
 
+BattleFrontier_PokeNav_2AB11A:: @ 82AB11A
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\l"
 	.string "How are your POKéMON keeping?\p"
@@ -7245,6 +7319,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I can wait, sure.\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2AB1B4:: @ 82AB1B4
 	.string "…Er, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here…\p"
 	.string "Oh, you happen to be around\n"
@@ -7254,6 +7329,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll show you my POKéMON.\n"
 	.string "I’ll wait for you.$"
 
+BattleFrontier_PokeNav_2AB23D:: @ 82AB23D
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
 	.string "I hope you’re doing well.\n"
@@ -7263,6 +7339,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll wait for you.\n"
 	.string "See you soon!$"
 
+BattleFrontier_PokeNav_2AB2E9:: @ 82AB2E9
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "Are you keeping up?\n"
@@ -7271,6 +7348,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "should battle?\p"
 	.string "Don’t keep me waiting too long!$"
 
+BattleFrontier_PokeNav_2AB382:: @ 82AB382
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "How are things with you?\n"
@@ -7279,6 +7357,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m ready and waiting.\n"
 	.string "Be quick!$"
 
+BattleFrontier_PokeNav_2AB410:: @ 82AB410
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Ah, so where you are now is\n"
@@ -7288,6 +7367,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll wait around for you!\n"
 	.string "See you real quick!$"
 
+BattleFrontier_PokeNav_2AB4B0:: @ 82AB4B0
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "Where might you be now?\p"
@@ -7298,6 +7378,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I can wait.\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2AB538:: @ 82AB538
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I hope you’ve been keeping well.\n"
@@ -7307,6 +7388,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll wait for you.\n"
 	.string "Bye for now.$"
 
+BattleFrontier_PokeNav_2AB5E4:: @ 82AB5E4
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You’re what? …{STR_VAR_2}?\n"
@@ -7316,12 +7398,14 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll be looking for you!\n"
 	.string "Bye-bye!$"
 
+BattleFrontier_PokeNav_2AB670:: @ 82AB670
 	.string "Hi! {PLAYER}, hello!\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "Want to have a battle with me?\p"
 	.string "I’ll be waiting for you around\n"
 	.string "{STR_VAR_2}!$"
 
+BattleFrontier_PokeNav_2AB6CD:: @ 82AB6CD
 	.string "Hello, {PLAYER}!\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "Would you like to have a battle\n"
@@ -7329,6 +7413,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You can find me around\n"
 	.string "{STR_VAR_2}. I’ll be waiting!$"
 
+BattleFrontier_PokeNav_2AB73C:: @ 82AB73C
 	.string "Hey there, {PLAYER}!\n"
 	.string "It’s me, {STR_VAR_1}.\p"
 	.string "My POKéMON have grown a lot\n"
@@ -7339,6 +7424,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll be waiting for you around\n"
 	.string "{STR_VAR_2}.$"
 
+BattleFrontier_PokeNav_2AB808:: @ 82AB808
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\l"
 	.string "How are things with you?\p"
@@ -7349,6 +7435,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Let’s meet up around\n"
 	.string "{STR_VAR_2}, okay?$"
 
+BattleFrontier_PokeNav_2AB8B7:: @ 82AB8B7
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "My POKéMON are growing up in\n"
@@ -7358,6 +7445,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll keep an eye out for you around\n"
 	.string "{STR_VAR_2}. See you soon!$"
 
+BattleFrontier_PokeNav_2AB95D:: @ 82AB95D
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\l"
 	.string "I hope you’re on top of things.\p"
@@ -7367,6 +7455,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "come to {STR_VAR_2}.\p"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2ABA03:: @ 82ABA03
 	.string "…Er, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here…\l"
 	.string "So? Are your POKéMON growing?\p"
@@ -7376,6 +7465,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Come see me for a match.\p"
 	.string "See you around.$"
 
+BattleFrontier_PokeNav_2ABA9F:: @ 82ABA9F
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\p"
 	.string "I hope you’re doing well.\n"
@@ -7385,6 +7475,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll be around {STR_VAR_2}.\n"
 	.string "Until then, good-bye!$"
 
+BattleFrontier_PokeNav_2ABB62:: @ 82ABB62
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "How are your POKéMON doing?\p"
@@ -7394,6 +7485,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "so let’s battle if you’re close by.\p"
 	.string "Hope I see you soon!$"
 
+BattleFrontier_PokeNav_2ABC26:: @ 82ABC26
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "So, how are things with you?\p"
@@ -7404,6 +7496,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll be around {STR_VAR_2}.\n"
 	.string "Come see me if you’re close.$"
 
+BattleFrontier_PokeNav_2ABCE9:: @ 82ABCE9
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "Where might you be now?\p"
@@ -7413,6 +7506,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m around {STR_VAR_2} now.\n"
 	.string "I hope you’ll seek us out.$"
 
+BattleFrontier_PokeNav_2ABDA2:: @ 82ABDA2
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s me, {STR_VAR_1}.\p"
 	.string "I should tell you, my POKéMON have\n"
@@ -7422,6 +7516,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "We’ll be around {STR_VAR_2}.\n"
 	.string "Come see us anytime!$"
 
+BattleFrontier_PokeNav_2ABE5E:: @ 82ABE5E
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "Are your POKéMON keeping well?\p"
@@ -7432,6 +7527,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "If you’re near {STR_VAR_2},\n"
 	.string "do come see us.$"
 
+BattleFrontier_PokeNav_2ABF36:: @ 82ABF36
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "Keeping well, I hope.\p"
@@ -7443,6 +7539,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "{STR_VAR_2}.\p"
 	.string "Come see us anytime, okay?$"
 
+BattleFrontier_PokeNav_2AC009:: @ 82AC009
 	.string "It’s me, the mountain-loving\n"
 	.string "{STR_VAR_1}!\p"
 	.string "Well, since we met, have you grown\n"
@@ -7451,6 +7548,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Next time, we’ll meet somewhere\n"
 	.string "around {STR_VAR_2}.$"
 
+BattleFrontier_PokeNav_2AC0BD:: @ 82AC0BD
 	.string "This is {STR_VAR_1}.\n"
 	.string "Hello.\p"
 	.string "I was just telling a new TRAINER\n"
@@ -7461,6 +7559,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "that everyone will admire.\p"
 	.string "I hope we meet again!$"
 
+BattleFrontier_PokeNav_2AC18C:: @ 82AC18C
 	.string "Hello! It’s {STR_VAR_1}.\p"
 	.string "I love where I am now.\n"
 	.string "It’s pleasant with sweet aromas!\p"
@@ -7468,6 +7567,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "and they burst into bloom.\p"
 	.string "See you again sometime!$"
 
+BattleFrontier_PokeNav_2AC228:: @ 82AC228
 	.string "Hello! Thirty years of exploration,\n"
 	.string "{STR_VAR_1} at your service!\p"
 	.string "It seems that you’re energetically\n"
@@ -7477,6 +7577,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Now, if you’ll excuse me,\n"
 	.string "I have ruins to explore.$"
 
+BattleFrontier_PokeNav_2AC30C:: @ 82AC30C
 	.string "It’s {STR_VAR_1}!\p"
 	.string "Know what I’m doing today?\n"
 	.string "Looking at waves from the beach!\p"
@@ -7484,6 +7585,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "The sea is the prettiest from here.\l"
 	.string "I’m getting hungry, so bye-bye!$"
 
+BattleFrontier_PokeNav_2AC3B6:: @ 82AC3B6
 	.string "Munch-chew…\n"
 	.string "Oh, hi, it’s {STR_VAR_1}.\l"
 	.string "I love eating on the beach.\p"
@@ -7491,6 +7593,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "great. We’re fully fueled!\l"
 	.string "I’m going for a swim. Bye!$"
 
+BattleFrontier_PokeNav_2AC446:: @ 82AC446
 	.string "Hello, this is {STR_VAR_1}…\p"
 	.string "I’ve grown a little jaded with this\n"
 	.string "whole COOLTRAINER thing…\p"
@@ -7506,6 +7609,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "But when I see you next,\n"
 	.string "don’t worry, I won’t whine!$"
 
+BattleFrontier_PokeNav_2AC5C7:: @ 82AC5C7
 	.string "Yahoo, it’s {STR_VAR_1}!\n"
 	.string "How do you do?\p"
 	.string "I’ve been raising my POKéMON with\n"
@@ -7515,6 +7619,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Isn’t it great to have TRAINER\n"
 	.string "friends? Let’s meet again!$"
 
+BattleFrontier_PokeNav_2AC682:: @ 82AC682
 	.string "It’s {STR_VAR_1}…\n"
 	.string "Right now, behind you…\l"
 	.string "Wasn’t there something…?\p"
@@ -7526,6 +7631,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Giggle…\n"
 	.string "Farewell…$"
 
+BattleFrontier_PokeNav_2AC755:: @ 82AC755
 	.string "This is {STR_VAR_1}.\n"
 	.string "How do you do?\p"
 	.string "Isn’t it convenient that we can\n"
@@ -7536,6 +7642,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I should be going now.\n"
 	.string "I’m glad we had this chat.$"
 
+BattleFrontier_PokeNav_2AC82C:: @ 82AC82C
 	.string "It’s {STR_VAR_1}!\n"
 	.string "Will you listen to this?\p"
 	.string "I like the SAFARI ZONE a lot,\n"
@@ -7547,6 +7654,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m off to the SAFARI ZONE again!\n"
 	.string "Catch you!$"
 
+BattleFrontier_PokeNav_2AC914:: @ 82AC914
 	.string "Hello, {STR_VAR_1} here.\n"
 	.string "Yes, correct, I am rich, yes.\p"
 	.string "I should tell you, my wealth has\n"
@@ -7560,6 +7668,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Oh, you must excuse me, I have this\n"
 	.string "formal dinner to attend.$"
 
+BattleFrontier_PokeNav_2ACA59:: @ 82ACA59
 	.string "Ufufufufu…\n"
 	.string "It’s me, {STR_VAR_1}…\p"
 	.string "Can you guess what I’m seeing?\n"
@@ -7569,6 +7678,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I… I’m kind of busy now.\n"
 	.string "I have to go.$"
 
+BattleFrontier_PokeNav_2ACB02:: @ 82ACB02
 	.string "Oh, it’s {STR_VAR_1}!\p"
 	.string "I was just thinking I’m getting\n"
 	.string "bored of the ABANDONED SHIP.\p"
@@ -7582,6 +7692,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "door to a match.\p"
 	.string "Be seeing you!$"
 
+BattleFrontier_PokeNav_2ACC3F:: @ 82ACC3F
 	.string "I’m {STR_VAR_1}!\n"
 	.string "The man of the sea!\p"
 	.string "You know what I think?\p"
@@ -7593,6 +7704,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "It’s a great training opportunity!\n"
 	.string "Sorry, but I have to go!$"
 
+BattleFrontier_PokeNav_2ACD2F:: @ 82ACD2F
 	.string "It’s {STR_VAR_1}! Listen, I’ve been\n"
 	.string "teaching karate to my POKéMON.\p"
 	.string "But now they’re better than me!\n"
@@ -7603,6 +7715,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "We have to battle again!\n"
 	.string "Ugwaah!$"
 
+BattleFrontier_PokeNav_2ACE1E:: @ 82ACE1E
 	.string "It’s me, {STR_VAR_1}.\n"
 	.string "How’re your travels unwinding?\p"
 	.string "…Whoa, is that right?\n"
@@ -7614,6 +7727,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better get this tune properly\n"
 	.string "written, so I’ve got to fly! Later!$"
 
+BattleFrontier_PokeNav_2ACF32:: @ 82ACF32
 	.string "This is {STR_VAR_1}…\n"
 	.string "Hear my new song.\p"
 	.string "Lalala, {STR_VAR_2}, {STR_VAR_2}!\n"
@@ -7623,6 +7737,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "{STR_VAR_1} and {STR_VAR_2}…\p"
 	.string "Repeat chorus, fade…$"
 
+BattleFrontier_PokeNav_2ACFBE:: @ 82ACFBE
 	.string "I’m {STR_VAR_1}, you know,\n"
 	.string "the camping expert!\p"
 	.string "When we battled, I couldn’t help\n"
@@ -7634,6 +7749,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Battle with us again, okay?\n"
 	.string "Oh, and let’s go camping, too!$"
 
+BattleFrontier_PokeNav_2AD0AC:: @ 82AD0AC
 	.string "It’s me, me, {STR_VAR_1}!\p"
 	.string "I’d like to climb other mountains\n"
 	.string "than this one, to be honest.\p"
@@ -7643,6 +7759,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "with ladies around, let me know!\p"
 	.string "Ehehehe, see you around!$"
 
+BattleFrontier_PokeNav_2AD194:: @ 82AD194
 	.string "… … … … … …\n"
 	.string "… … … … … …\l"
 	.string "It’s {STR_VAR_1}…\p"
@@ -7650,6 +7767,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "… … … … … …\l"
 	.string "That’s all today…$"
 
+BattleFrontier_PokeNav_2AD1DF:: @ 82AD1DF
 	.string "This is {STR_VAR_1}. Today, I had\n"
 	.string "this feeling I would chat with you.\p"
 	.string "My desire to defeat you builds\n"
@@ -7659,6 +7777,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m glad you heard me out.\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2AD2A8:: @ 82AD2A8
 	.string "It’s {STR_VAR_1}.\p"
 	.string "When there’s a strong TRAINER\n"
 	.string "nearby, I can sometimes sense that\l"
@@ -7668,6 +7787,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’ll be waiting for your visit.\n"
 	.string "Bye!$"
 
+BattleFrontier_PokeNav_2AD34F:: @ 82AD34F
 	.string "Hello, this is {STR_VAR_1}.\n"
 	.string "You sound well, {PLAYER}{STRING 5}.\p"
 	.string "I’ve traveled around the world,\n"
@@ -7679,6 +7799,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "techniques.\p"
 	.string "I do hope for a rematch.$"
 
+BattleFrontier_PokeNav_2AD44E:: @ 82AD44E
 	.string "Snivel… It’s… {STR_VAR_1}…\n"
 	.string "…Sob…\p"
 	.string "ROXANNE chewed me out in class\n"
@@ -7690,6 +7811,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "the TRAINER’S SCHOOL tomorrow!\p"
 	.string "See you later!$"
 
+BattleFrontier_PokeNav_2AD53A:: @ 82AD53A
 	.string "It’s {STR_VAR_1}!\p"
 	.string "ROXANNE let me battle with her\n"
 	.string "yesterday.\p"
@@ -7702,6 +7824,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m going to really focus and work!\n"
 	.string "I’d better go!$"
 
+BattleFrontier_PokeNav_2AD642:: @ 82AD642
 	.string "Hi, it’s ANNA! I’m with my junior\n"
 	.string "partner MEG again today.\p"
 	.string "I really love caring for MEG and\n"
@@ -7719,6 +7842,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I have to go now.\n"
 	.string "It’s time for our snack!$"
 
+BattleFrontier_PokeNav_2AD801:: @ 82AD801
 	.string "I love POKéMON!\n"
 	.string "It’s {STR_VAR_1} from the FAN CLUB!\p"
 	.string "You have to hear this!\n"
@@ -7732,6 +7856,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Sorry, but I can’t talk now!\n"
 	.string "You’ll have to hear this next time!$"
 
+BattleFrontier_PokeNav_2AD92E:: @ 82AD92E
 	.string "Ohoho!\p"
 	.string "This is {STR_VAR_1}! I can’t wait to\n"
 	.string "tell you about my darling POKéMON!\p"
@@ -7747,6 +7872,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Well, I must be going.\n"
 	.string "Bye, now!$"
 
+BattleFrontier_PokeNav_2ADA8F:: @ 82ADA8F
 	.string "I am… {STR_VAR_1}.\n"
 	.string "People call me an EXPERT.\p"
 	.string "But there is one thing I know.\n"
@@ -7758,6 +7884,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "something deep and profound!\p"
 	.string "I shall leave you in good spirits!$"
 
+BattleFrontier_PokeNav_2ADB9B:: @ 82ADB9B
 	.string "It’s {STR_VAR_1}.\n"
 	.string "I’m glad to chat with you!\p"
 	.string "I am feeling alive and refreshed\n"
@@ -7768,6 +7895,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I imagine you’ll become an EXPERT\n"
 	.string "in your old age! Ohohoho…$"
 
+BattleFrontier_PokeNav_2ADC92:: @ 82ADC92
 	.string "Yay! This is {STR_VAR_1}!\n"
 	.string "What’s up?\p"
 	.string "I might be imagining this, but when\n"
@@ -7783,6 +7911,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You didn’t really believe that?\l"
 	.string "Ehehehe, that’s all! Bye now!$"
 
+BattleFrontier_PokeNav_2ADE08:: @ 82ADE08
 	.string "Ahoy!\n"
 	.string "{STR_VAR_1} here!\p"
 	.string "As always, I’m fishing with wild\n"
@@ -7796,6 +7925,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Gotta go!\n"
 	.string "Find me some new fishing spots!$"
 
+BattleFrontier_PokeNav_2ADF07:: @ 82ADF07
 	.string "Hey, there! It’s {STR_VAR_1}.\n"
 	.string "Are you taking it casually?\p"
 	.string "Ever since I was a kid, you know,\n"
@@ -7813,6 +7943,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "But, hey, be cool. Take it casual.\n"
 	.string "See you around.$"
 
+BattleFrontier_PokeNav_2AE0D9:: @ 82AE0D9
 	.string "This is {STR_VAR_1}!\n"
 	.string "I’m cycling right now.\p"
 	.string "I love swimming and running,\n"
@@ -7826,6 +7957,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You should make the challenge, too!\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2AE1FD:: @ 82AE1FD
 	.string "Yo, this is {STR_VAR_1}! I’m smack\n"
 	.string "in the middle of a triathlon!\p"
 	.string "But, hey, I’ve always got time to\n"
@@ -7839,6 +7971,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m getting run down…\l"
 	.string "Gasp… Have…to…go…$"
 
+BattleFrontier_PokeNav_2AE327:: @ 82AE327
 	.string "Hi, it’s {STR_VAR_1}.\n"
 	.string "If you want to improve endurance,\l"
 	.string "high-altitude training is it!\p"
@@ -7847,6 +7980,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m getting oxygen starved, too!\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2AE3DA:: @ 82AE3DA
 	.string "Oh, it’s {STR_VAR_1}, hello.\p"
 	.string "I’ve been swimming a lot but I still\n"
 	.string "can’t seem to reach EVERGRANDE.\p"
@@ -7855,6 +7989,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Wahahaha.\l"
 	.string "Take care!$"
 
+BattleFrontier_PokeNav_2AE489:: @ 82AE489
 	.string "Hey, it’s {STR_VAR_1}…\n"
 	.string "Whoops!\p"
 	.string "Splash!\p"
@@ -7870,6 +8005,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Anyways, I’m busy sunbathing,\n"
 	.string "so let’s chat another time.$"
 
+BattleFrontier_PokeNav_2AE5CD:: @ 82AE5CD
 	.string "Hello, this is {STR_VAR_1}.\p"
 	.string "Out of the three triathlon events,\n"
 	.string "I like swimming best.\p"
@@ -7878,12 +8014,14 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Ooh, triathlon is such a grueling\n"
 	.string "test of human endurance! Bye!$"
 
+BattleFrontier_PokeNav_2AE698:: @ 82AE698
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "How are your POKéMON doing?\p"
 	.string "My DRAGON POKéMON appear to be\n"
 	.string "in peak form. Bye for now.$"
 
+BattleFrontier_PokeNav_2AE704:: @ 82AE704
 	.string "{STR_VAR_1} here.\p"
 	.string "My {STR_VAR_2} has grown even more\n"
 	.string "tough than that last time.\p"
@@ -7891,6 +8029,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You wait till next time!\p"
 	.string "See you around!$"
 
+BattleFrontier_PokeNav_2AE78F:: @ 82AE78F
 	.string "It is {STR_VAR_1} here.\p"
 	.string "I have continued with my studies\n"
 	.string "in the art of concealment.\p"
@@ -7900,6 +8039,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Like smoke I disappear!\n"
 	.string "Farewell!$"
 
+BattleFrontier_PokeNav_2AE859:: @ 82AE859
 	.string "This is {STR_VAR_1}.\n"
 	.string "I kept up my training since we met.\p"
 	.string "My {STR_VAR_2} is getting pretty\n"
@@ -7907,6 +8047,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Training on a beach is effective,\n"
 	.string "just as I thought. Bye now!$"
 
+BattleFrontier_PokeNav_2AE8E6:: @ 82AE8E6
 	.string "How do you do?\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I wonder when this yucky volcanic\n"
@@ -7915,6 +8056,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "up the pattern on my parasol…\p"
 	.string "Let’s promise to meet again!$"
 
+BattleFrontier_PokeNav_2AE998:: @ 82AE998
 	.string "Hi, {STR_VAR_1} here.\p"
 	.string "Did you know that it’s easier to\n"
 	.string "float in the sea than a pool?\p"
@@ -7926,6 +8068,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "…Where am I, anyway?\n"
 	.string "I’d better go!$"
 
+BattleFrontier_PokeNav_2AEA8F:: @ 82AEA8F
 	.string "Oh, {PLAYER}{STRING 5}, hello!\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I’m up in the mountains now.\p"
@@ -7937,12 +8080,14 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’m going to try that!\n"
 	.string "Bye-bye!$"
 
+BattleFrontier_PokeNav_2AEB77:: @ 82AEB77
 	.string "Oh, hi, hi, this is {STR_VAR_1}!\p"
 	.string "I’m raising POKéMON with LIV!\n"
 	.string "We’re trying very hard!\p"
 	.string "If we try harder, can we become\n"
 	.string "number one? Bye-bye!$"
 
+BattleFrontier_PokeNav_2AEBFA:: @ 82AEBFA
 	.string "{STR_VAR_1} here!\p"
 	.string "I’m a SAILOR, but I’m not on a boat\n"
 	.string "now.\p"
@@ -7952,6 +8097,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "while staring out across the waves.\p"
 	.string "All right, next time!$"
 
+BattleFrontier_PokeNav_2AECC1:: @ 82AECC1
 	.string "It’s {STR_VAR_1}.\n"
 	.string "So? Get any more POKéMON?\p"
 	.string "If you catch a new POKéMON,\n"
@@ -7959,6 +8105,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I won’t whine for it, honest.\n"
 	.string "I’ll be waiting. See you.$"
 
+BattleFrontier_PokeNav_2AED52:: @ 82AED52
 	.string "This is {STR_VAR_1}.\p"
 	.string "Are you raising your POKéMON\n"
 	.string "in the optimal way?\p"
@@ -7969,6 +8116,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "POKéMON, you should come out to\l"
 	.string "{STR_VAR_2}. Take care now.$"
 
+BattleFrontier_PokeNav_2AEE35:: @ 82AEE35
 	.string "Hi, this is {STR_VAR_1}.\p"
 	.string "I gave a {POKEBLOCK} to my {STR_VAR_2}.\n"
 	.string "It seemed to enjoy it very much.\p"
@@ -7977,6 +8125,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I find that quite fascinating.\n"
 	.string "Please do take care.$"
 
+BattleFrontier_PokeNav_2AEEF4:: @ 82AEEF4
 	.string "{STR_VAR_1} here.\p"
 	.string "If you cooperate with POKéMON,\n"
 	.string "one can be comfortable in the wild.\p"
@@ -7987,6 +8136,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I think you’re on the right track!\n"
 	.string "Catch you later!$"
 
+BattleFrontier_PokeNav_2AEFDA:: @ 82AEFDA
 	.string "Hi, it’s {STR_VAR_1}. You know,\n"
 	.string "the TRAINER who’s always prepared!\p"
 	.string "{PLAYER}{STRING 5}, do you have enough items?\n"
@@ -7997,6 +8147,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better go check my own\n"
 	.string "supplies! Be vigilant!$"
 
+BattleFrontier_PokeNav_2AF0E7:: @ 82AF0E7
 	.string "It’s {STR_VAR_1}!\n"
 	.string "It’s {STR_VAR_1}!\p"
 	.string "{STR_VAR_2} is a very busy\n"
@@ -8007,6 +8158,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "How did you do today?\n"
 	.string "Tell me about it next time, okay?$"
 
+BattleFrontier_PokeNav_2AF1B8:: @ 82AF1B8
 	.string "It’s me, {STR_VAR_1}.\p"
 	.string "I’m popular because I have lots\n"
 	.string "of BUG POKéMON, right?\p"
@@ -8019,6 +8171,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Snivel…\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2AF2C4:: @ 82AF2C4
 	.string "Hah! Hah! Hah! Hah!\p"
 	.string "Hi! It’s {STR_VAR_1}! Hah! Hah!\p"
 	.string "Trying to chat…\n"
@@ -8029,6 +8182,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "We’ll chat…another time…\l"
 	.string "Hah! Hah! Hah!$"
 
+BattleFrontier_PokeNav_2AF371:: @ 82AF371
 	.string "Oh, hi!\p"
 	.string "I’m still searching for treasures\n"
 	.string "with KIRA!\p"
@@ -8042,6 +8196,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You’re my one and only!\p"
 	.string "…{PLAYER}, I have to go, bye!$"
 
+BattleFrontier_PokeNav_2AF480:: @ 82AF480
 	.string "This is {STR_VAR_1}!\p"
 	.string "I went to DEWFORD’s GYM again\n"
 	.string "for training.\p"
@@ -8062,6 +8217,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Forget this chat ever happened,\n"
 	.string "how about it? So long!$"
 
+BattleFrontier_PokeNav_2AF671:: @ 82AF671
 	.string "It’s a pleasure to chat with\n"
 	.string "a young TRAINER like you.\p"
 	.string "I imagine that you will continue to\n"
@@ -8076,6 +8232,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Hahaha!\n"
 	.string "Never be discouraged!$"
 
+BattleFrontier_PokeNav_2AF7D8:: @ 82AF7D8
 	.string "Hi, this is {STR_VAR_1}!\n"
 	.string "We just won a battle!\p"
 	.string "We don’t win often, but it was this\n"
@@ -8089,6 +8246,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "to her next time?\p"
 	.string "Okay, see you!$"
 
+BattleFrontier_PokeNav_2AF8F7:: @ 82AF8F7
 	.string "{STR_VAR_1} here, yes.\n"
 	.string "I headed out to sea yesterday.\p"
 	.string "I had been hoping to find a new\n"
@@ -8103,6 +8261,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s all I have to say!\n"
 	.string "Farewell for now!$"
 
+BattleFrontier_PokeNav_2AFA39:: @ 82AFA39
 	.string "Ahoy there!\n"
 	.string "It’s me, {STR_VAR_1}!\l"
 	.string "I’m out on ROUTE 108 now!\l"
@@ -8114,6 +8273,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s all from ROUTE 108!\n"
 	.string "Brought to you by {STR_VAR_1}!$"
 
+BattleFrontier_PokeNav_2AFB26:: @ 82AFB26
 	.string "It’s {STR_VAR_1}!\p"
 	.string "I’m kind of busy, but I figured\n"
 	.string "I should let you know that I’ve\l"
@@ -8123,6 +8283,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I think we’ll be good rivals,\n"
 	.string "you and I. Good-bye for now!$"
 
+BattleFrontier_PokeNav_2AFC07:: @ 82AFC07
 	.string "Hi! This is {STR_VAR_1}.\n"
 	.string "I heard the news!\p"
 	.string "They say you did excellent at\n"
@@ -8130,6 +8291,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "It’s awesome, {STR_VAR_3} straight wins?\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2AFC78:: @ 82AFC78
 	.string "Hello, it’s {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won {STR_VAR_3} straight\n"
@@ -8137,6 +8299,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s special! I should try\n"
 	.string "harder, too! See you!$"
 
+BattleFrontier_PokeNav_2AFCFF:: @ 82AFCFF
 	.string "Hey there, {PLAYER}!\n"
 	.string "It’s me, {STR_VAR_1}.\p"
 	.string "I heard you went on a tear at\n"
@@ -8146,6 +8309,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better get it together, too!\n"
 	.string "Catch you soon!$"
 
+BattleFrontier_PokeNav_2AFDA7:: @ 82AFDA7
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here. What’s up?\p"
 	.string "There’s a rumor going around that\n"
@@ -8154,6 +8318,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better step it up, too.\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2AFE3D:: @ 82AFE3D
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "You were at the {STR_VAR_2}\n"
@@ -8162,6 +8327,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better work on my POKéMON more.\n"
 	.string "See you soon!$"
 
+BattleFrontier_PokeNav_2AFECA:: @ 82AFECA
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you pulled off\n"
@@ -8170,6 +8336,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That inspires me to focus on\n"
 	.string "raising my team.$"
 
+BattleFrontier_PokeNav_2AFF64:: @ 82AFF64
 	.string "…Er, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here…\p"
 	.string "Oh, yeah, you were over at\n"
@@ -8178,6 +8345,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Oh, there goes a rare POKéMON!\n"
 	.string "I have to go!$"
 
+BattleFrontier_PokeNav_2AFFF0:: @ 82AFFF0
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
 	.string "I hope you’re doing well.\p"
@@ -8187,6 +8355,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s very impressive!\n"
 	.string "I hope you stay successful.$"
 
+BattleFrontier_PokeNav_2B00B5:: @ 82B00B5
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I heard! Your {STR_VAR_3}-win streak at\n"
@@ -8194,6 +8363,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That is so cool!\n"
 	.string "I’d better try harder, too!$"
 
+BattleFrontier_PokeNav_2B0129:: @ 82B0129
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won {STR_VAR_3} straight battles at\n"
@@ -8201,6 +8371,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
+BattleFrontier_PokeNav_2B01A5:: @ 82B01A5
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I hear you’re the terror of\n"
@@ -8210,6 +8381,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You’re good, you.\n"
 	.string "I wonder how many I can win?$"
 
+BattleFrontier_PokeNav_2B0232:: @ 82B0232
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
@@ -8219,6 +8391,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s quite the tale.\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2B02D9:: @ 82B02D9
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "I hope you’ve been keeping well.\p"
@@ -8227,6 +8400,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I admire your energy!\n"
 	.string "Bye now.$"
 
+BattleFrontier_PokeNav_2B0366:: @ 82B0366
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I heard about you!\n"
@@ -8235,6 +8409,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You’re an inspiration!\n"
 	.string "Bye-bye!$"
 
+BattleFrontier_PokeNav_2B03E6:: @ 82B03E6
 	.string "Hi! This is {STR_VAR_1}.\n"
 	.string "I heard the news!\p"
 	.string "They say you did excellent at\n"
@@ -8242,6 +8417,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "It’s awesome--{STR_VAR_3} straight wins?\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2B0457:: @ 82B0457
 	.string "Hello, it’s {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won {STR_VAR_3} straight\n"
@@ -8249,6 +8425,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s special! I should try\n"
 	.string "harder, too! See you!$"
 
+BattleFrontier_PokeNav_2B04DE:: @ 82B04DE
 	.string "Hey there, {PLAYER}!\n"
 	.string "It’s me, {STR_VAR_1}.\p"
 	.string "I heard you went on a tear at\n"
@@ -8258,6 +8435,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better get it together, too!\n"
 	.string "Catch you soon!$"
 
+BattleFrontier_PokeNav_2B0586:: @ 82B0586
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here. What’s up?\p"
 	.string "There’s a rumor going around that\n"
@@ -8266,6 +8444,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better step it up, too.\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2B061C:: @ 82B061C
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "You were at the {STR_VAR_2}\n"
@@ -8274,6 +8453,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Me? I’d say I’m coming along.\n"
 	.string "See you soon!$"
 
+BattleFrontier_PokeNav_2B06A3:: @ 82B06A3
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you pulled off\n"
@@ -8282,6 +8462,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better try harder myself!\n"
 	.string "See you soon!$"
 
+BattleFrontier_PokeNav_2B073B:: @ 82B073B
 	.string "…Er, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here…\p"
 	.string "Oh, yeah, you were over at\n"
@@ -8290,6 +8471,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Oh, there goes a rare POKéMON!\n"
 	.string "I have to go!$"
 
+BattleFrontier_PokeNav_2B07C7:: @ 82B07C7
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
 	.string "I hope you’re doing well.\p"
@@ -8299,6 +8481,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s very impressive!\n"
 	.string "I’d better work on my POKéMON, too!$"
 
+BattleFrontier_PokeNav_2B0894:: @ 82B0894
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I heard! Your {STR_VAR_3}-win streak at\n"
@@ -8306,6 +8489,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That is so cool!\n"
 	.string "I’d better try harder, too!$"
 
+BattleFrontier_PokeNav_2B0908:: @ 82B0908
 	.string "Oh, {PLAYER}{STRING 5}, hello…\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won {STR_VAR_3} straight battles at\n"
@@ -8313,6 +8497,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
+BattleFrontier_PokeNav_2B0984:: @ 82B0984
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I hear you’re the terror of\n"
@@ -8322,6 +8507,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You’re good, you.\n"
 	.string "I wonder how many I can win?$"
 
+BattleFrontier_PokeNav_2B0A11:: @ 82B0A11
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
@@ -8331,6 +8517,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s quite the tale.\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2B0AB8:: @ 82B0AB8
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "I hope you’ve been keeping well.\p"
@@ -8339,6 +8526,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I admire your energy!\n"
 	.string "Bye now.$"
 
+BattleFrontier_PokeNav_2B0B45:: @ 82B0B45
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
@@ -8347,6 +8535,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You’re an inspiration!\n"
 	.string "Bye-bye!$"
 
+BattleFrontier_PokeNav_2B0BC5:: @ 82B0BC5
 	.string "Hi! {PLAYER}?\n"
 	.string "Hello, this is {STR_VAR_1}!\l"
 	.string "I heard the news!\p"
@@ -8355,6 +8544,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "It’s awesome! I have to do better!\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2B0C4A:: @ 82B0C4A
 	.string "Hello, it’s {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won {STR_VAR_3} titles\n"
@@ -8362,6 +8552,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s super! I wonder if I can\n"
 	.string "become a champion?$"
 
+BattleFrontier_PokeNav_2B0CC7:: @ 82B0CC7
 	.string "Hey there, {PLAYER}!\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "How’s it going?\p"
@@ -8370,6 +8561,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Make it one more next time!\n"
 	.string "Catch you soon!$"
 
+BattleFrontier_PokeNav_2B0D4A:: @ 82B0D4A
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I heard you became the champion\n"
@@ -8377,6 +8569,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Sounds like you’re working hard.\n"
 	.string "I’ll try to keep up!$"
 
+BattleFrontier_PokeNav_2B0DC8:: @ 82B0DC8
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "I heard you won {STR_VAR_3} times\n"
@@ -8384,6 +8577,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better get with it, too!\n"
 	.string "See you soon!$"
 
+BattleFrontier_PokeNav_2B0E35:: @ 82B0E35
 	.string "Hey, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you became\n"
@@ -8392,6 +8586,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better raise my POKéMON before\n"
 	.string "you pull farther ahead.$"
 
+BattleFrontier_PokeNav_2B0ED1:: @ 82B0ED1
 	.string "{PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "You were at the {STR_VAR_2}\n"
@@ -8401,6 +8596,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Oh, is that right.\n"
 	.string "Okay, bye.$"
 
+BattleFrontier_PokeNav_2B0F72:: @ 82B0F72
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
 	.string "I hope you’re doing well.\l"
@@ -8410,6 +8606,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I must raise my POKéMON like you.\n"
 	.string "See you again.$"
 
+BattleFrontier_PokeNav_2B102A:: @ 82B102A
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I heard! You took the title\n"
@@ -8417,6 +8614,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That is so cool!\n"
 	.string "I’d better try harder, too!$"
 
+BattleFrontier_PokeNav_2B10A7:: @ 82B10A7
 	.string "Oh, {PLAYER}{STRING 5}, hello.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won {STR_VAR_3} straight times at\n"
@@ -8424,6 +8622,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
+BattleFrontier_PokeNav_2B1121:: @ 82B1121
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I hear you’re the terror of\n"
@@ -8435,6 +8634,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "…Pretty well impossible?\n"
 	.string "Well, see you!$"
 
+BattleFrontier_PokeNav_2B11D3:: @ 82B11D3
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
@@ -8443,6 +8643,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s quite the tale.\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2B124D:: @ 82B124D
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "I hope you’ve been keeping well.\p"
@@ -8451,6 +8652,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I admire your energy!\n"
 	.string "Bye now.$"
 
+BattleFrontier_PokeNav_2B12D0:: @ 82B12D0
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
@@ -8459,6 +8661,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You’re an inspiration!\n"
 	.string "See you again!$"
 
+BattleFrontier_PokeNav_2B1347:: @ 82B1347
 	.string "Hi! {PLAYER}?\n"
 	.string "Hello, this is {STR_VAR_1}!\l"
 	.string "I heard the news!\p"
@@ -8467,6 +8670,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s awesome!\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2B13B1:: @ 82B13B1
 	.string "Hello, it’s {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won your way through\n"
@@ -8474,6 +8678,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I have to try much harder!\n"
 	.string "Bye!$"
 
+BattleFrontier_PokeNav_2B142B:: @ 82B142B
 	.string "Hey there, {PLAYER}!\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "How’s it going?\p"
@@ -8482,6 +8687,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Try to do even better next time!\n"
 	.string "Catch you soon!$"
 
+BattleFrontier_PokeNav_2B14B4:: @ 82B14B4
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I heard you blew through {STR_VAR_3} rooms\n"
@@ -8489,6 +8695,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better train my POKéMON and\n"
 	.string "try to keep up!$"
 
+BattleFrontier_PokeNav_2B1525:: @ 82B1525
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "I heard you got past {STR_VAR_3} rooms\n"
@@ -8496,6 +8703,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better get with it, too!\n"
 	.string "See you soon!$"
 
+BattleFrontier_PokeNav_2B158E:: @ 82B158E
 	.string "Hey, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you got through\n"
@@ -8503,6 +8711,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better raise my POKéMON before\n"
 	.string "you pull further ahead.$"
 
+BattleFrontier_PokeNav_2B1622:: @ 82B1622
 	.string "{PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "You were at the {STR_VAR_2}\n"
@@ -8511,6 +8720,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Oh, there goes a rare POKéMON!\n"
 	.string "Okay, bye.$"
 
+BattleFrontier_PokeNav_2B169D:: @ 82B169D
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
 	.string "I hope you’re doing well.\l"
@@ -8521,6 +8731,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I must raise my POKéMON like you.\l"
 	.string "See you again.$"
 
+BattleFrontier_PokeNav_2B1775:: @ 82B1775
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I heard! You won your way through\n"
@@ -8528,6 +8739,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That is so cool!\n"
 	.string "I’d better try harder, too!$"
 
+BattleFrontier_PokeNav_2B17F8:: @ 82B17F8
 	.string "Oh, {PLAYER}{STRING 5}, hello.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You won your way past {STR_VAR_3} rooms\n"
@@ -8535,6 +8747,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
+BattleFrontier_PokeNav_2B1877:: @ 82B1877
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I hear you’re the terror of\n"
@@ -8546,6 +8759,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "…Pretty well impossible?\n"
 	.string "Well, see you!$"
 
+BattleFrontier_PokeNav_2B1946:: @ 82B1946
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
@@ -8554,6 +8768,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s quite the tale.\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2B19C7:: @ 82B19C7
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "I hope you’ve been keeping well.\p"
@@ -8562,6 +8777,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I admire your energy!\n"
 	.string "Bye now.$"
 
+BattleFrontier_PokeNav_2B1A4C:: @ 82B1A4C
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
@@ -8570,6 +8786,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "You’re an inspiration!\n"
 	.string "See you again!$"
 
+BattleFrontier_PokeNav_2B1ACA:: @ 82B1ACA
 	.string "Hi! {PLAYER}?\n"
 	.string "Hello, this is {STR_VAR_1}!\l"
 	.string "I heard the news!\p"
@@ -8578,6 +8795,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s awesome!\n"
 	.string "I should try that challenge.$"
 
+BattleFrontier_PokeNav_2B1B50:: @ 82B1B50
 	.string "Hello, it’s {STR_VAR_1}!\n"
 	.string "I heard about you!\p"
 	.string "They said you won your way through\n"
@@ -8585,6 +8803,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Wow, that’s fantastic!\n"
 	.string "I’d better raise my POKéMON, too!$"
 
+BattleFrontier_PokeNav_2B1BE4:: @ 82B1BE4
 	.string "Hey there, {PLAYER}!\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "How’s it going?\p"
@@ -8593,6 +8812,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "Try to do even better next time!\n"
 	.string "Catch you soon!$"
 
+BattleFrontier_PokeNav_2B1C6A:: @ 82B1C6A
 	.string "Hey, {PLAYER}{STRING 5}.\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "I heard you scaled {STR_VAR_3} floors\n"
@@ -8600,6 +8820,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better work hard and try\n"
 	.string "to keep up!$"
 
+BattleFrontier_PokeNav_2B1CCF:: @ 82B1CCF
 	.string "Hiya, {PLAYER}{STRING 5}!\n"
 	.string "It’s {STR_VAR_1}.\p"
 	.string "I heard you climbed {STR_VAR_3} floors\n"
@@ -8607,6 +8828,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better get with it, too!\n"
 	.string "See you soon!$"
 
+BattleFrontier_PokeNav_2B1D38:: @ 82B1D38
 	.string "Hey, {PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here. How are you?\p"
 	.string "By the way, I heard you got through\n"
@@ -8614,6 +8836,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I’d better raise my POKéMON before\n"
 	.string "you pull further ahead.$"
 
+BattleFrontier_PokeNav_2B1DCD:: @ 82B1DCD
 	.string "{PLAYER}{STRING 5}?\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "You were at the {STR_VAR_2}\n"
@@ -8623,6 +8846,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "No, huh?\n"
 	.string "Okay, bye.$"
 
+BattleFrontier_PokeNav_2B1E4B:: @ 82B1E4B
 	.string "Oh, {PLAYER}{STRING 5}, how do you do?\n"
 	.string "This is {STR_VAR_1} speaking.\l"
 	.string "I hope you’re doing well.\l"
@@ -8633,6 +8857,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I must raise my POKéMON like you.\l"
 	.string "See you again.$"
 
+BattleFrontier_PokeNav_2B1F24:: @ 82B1F24
 	.string "Oh, {PLAYER}{STRING 5}, hi there!\n"
 	.string "This is {STR_VAR_1}!\p"
 	.string "I heard! You won your way through\n"
@@ -8640,6 +8865,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That is so cool!\n"
 	.string "I’d better try harder, too!$"
 
+BattleFrontier_PokeNav_2B1FA8:: @ 82B1FA8
 	.string "Oh, {PLAYER}{STRING 5}, hello.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "You climbed {STR_VAR_3} floors inside\n"
@@ -8647,6 +8873,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s quite the accomplishment.\n"
 	.string "I need to work harder.$"
 
+BattleFrontier_PokeNav_2B2022:: @ 82B2022
 	.string "Ah, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\p"
 	.string "I hear you’re the terror of\n"
@@ -8658,6 +8885,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "…Pretty well impossible?\n"
 	.string "Well, see you!$"
 
+BattleFrontier_PokeNav_2B20F3:: @ 82B20F3
 	.string "Hello, {PLAYER}{STRING 5}.\n"
 	.string "It’s me, {STR_VAR_1}.\l"
 	.string "Are you keeping well?\p"
@@ -8666,6 +8894,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "That’s quite the tale.\n"
 	.string "See you!$"
 
+BattleFrontier_PokeNav_2B2175:: @ 82B2175
 	.string "Ah, hello, {PLAYER}{STRING 5}!\n"
 	.string "This is {STR_VAR_1}!\l"
 	.string "I hope you’ve been keeping well.\p"
@@ -8674,6 +8903,7 @@ LilycoveCity_PokemonCenter_1F_Text_2A970E: @ 82A970E
 	.string "I admire your energy!\n"
 	.string "Bye now.$"
 
+BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "Oh, hi, {PLAYER}{STRING 5}.\n"
 	.string "This is {STR_VAR_1}.\l"
 	.string "I heard about you!\p"
@@ -9518,11 +9748,11 @@ BattleFrontier_BattleTowerLobby_EventScript_2B688D:: @ 82B688D
 	faceplayer
 	setvar VAR_0x8004, 0
 	special sub_81A085C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6900
 	setvar VAR_0x8004, 10
 	special sub_81A085C
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B68BE
 	checkflag FLAG_0x934
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6E90
@@ -9530,15 +9760,15 @@ BattleFrontier_BattleTowerLobby_EventScript_2B688D:: @ 82B688D
 BattleFrontier_BattleTowerLobby_EventScript_2B68BE:: @ 82B68BE
 	setvar VAR_0x8004, 11
 	special sub_81A085C
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B69D3
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6ACF
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6C77
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6D5C
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6DD4
 	release
 	releaseall
@@ -9560,7 +9790,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6925:: @ 82B6925
 	setvar VAR_0x8005, 6
 	special sub_81A085C
 	waitstate
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B69BB
 	setvar VAR_0x8004, 8
 	setvar VAR_0x8005, 0
@@ -9624,9 +9854,9 @@ BattleFrontier_BattleTowerLobby_EventScript_2B69D3:: @ 82B69D3
 	special sub_81A085C
 	waitstate
 	copyvar VAR_0x8005, VAR_RESULT
-	compare_var_to_value VAR_0x8005, 0
+	compare VAR_0x8005, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6ABA
-	compare_var_to_value VAR_0x8005, 1
+	compare VAR_0x8005, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6AC0
 	setvar VAR_0x8004, 12
 	special sub_81A085C
@@ -9637,7 +9867,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B69D3:: @ 82B69D3
 	special sub_81A085C
 	setvar VAR_0x8004, 12
 	special sub_81A085C
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6AC6
 	setvar VAR_0x8004, 16
 	setvar VAR_0x8005, 0
@@ -9693,11 +9923,11 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6B09:: @ 82B6B09
 	setvar VAR_0x8004, 19
 	special sub_81A085C
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6B81
 	setvar VAR_0x8004, 20
 	special sub_81A085C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6C0C
 	setvar VAR_0x8004, 16
 	setvar VAR_0x8005, 0
@@ -9737,7 +9967,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6B81:: @ 82B6B81
 	waitstate
 	setvar VAR_0x8004, 15
 	special sub_81A085C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6B09
 
 BattleFrontier_BattleTowerLobby_EventScript_2B6BD4:: @ 82B6BD4
@@ -9779,7 +10009,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C0C:: @ 82B6C0C
 	waitstate
 	setvar VAR_0x8004, 15
 	special sub_81A085C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6B09
 	goto BattleFrontier_BattleTowerLobby_EventScript_2B6BD4
 	end
@@ -9810,9 +10040,9 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6C77:: @ 82B6C77
 	special sub_81A085C
 	waitstate
 	copyvar VAR_0x8005, VAR_RESULT
-	compare_var_to_value VAR_0x8005, 0
+	compare VAR_0x8005, 0
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6D50
-	compare_var_to_value VAR_0x8005, 1
+	compare VAR_0x8005, 1
 	call_if 1, BattleFrontier_BattleTowerLobby_EventScript_2B6D56
 	setvar VAR_0x8004, 17
 	special sub_81A085C
@@ -9918,7 +10148,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6E4D:: @ 82B6E4D
 BattleFrontier_BattleTowerLobby_EventScript_2B6E54:: @ 82B6E54
 	setvar VAR_0x8004, 24
 	special sub_81A085C
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6E93
 	applymovement 6, BattleFrontier_BattleTowerLobby_Movement_2B6E94
 	waitmovement 0
@@ -9927,7 +10157,7 @@ BattleFrontier_BattleTowerLobby_EventScript_2B6E54:: @ 82B6E54
 BattleFrontier_BattleTowerLobby_EventScript_2B6E72:: @ 82B6E72
 	setvar VAR_0x8004, 24
 	special sub_81A085C
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_eq BattleFrontier_BattleTowerLobby_EventScript_2B6E93
 	applymovement 6, BattleFrontier_BattleTowerLobby_Movement_2B6E95
 	waitmovement 0
@@ -12202,232 +12432,346 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thank you, my mentor!\n"
 	.string "I apologize for my skepticism!$"
 
+gBattleDomeOpponentPotential1::
 	.string "The best candidate to be a champ!$"
 
+gBattleDomeOpponentPotential2::
 	.string "A sure-finalist team.$"
 
+gBattleDomeOpponentPotential3::
 	.string "A likely top-three finisher.$"
-
+	
+gBattleDomeOpponentPotential4::
 	.string "A candidate to finish first.$"
 
+gBattleDomeOpponentPotential5::
 	.string "A team with top-class potential.$"
 
+gBattleDomeOpponentPotential6::
 	.string "The dark horse team this tournament.$"
 
+gBattleDomeOpponentPotential7::
 	.string "A better-than-average team.$"
 
+gBattleDomeOpponentPotential8::
 	.string "This tournament’s average team.$"
 
+gBattleDomeOpponentPotential9::
 	.string "A team with average potential.$"
 
+gBattleDomeOpponentPotential10::
 	.string "A weaker-than-average team.$"
 
+gBattleDomeOpponentPotential11::
 	.string "A team looking for its first win.$"
 
+gBattleDomeOpponentPotential12::
 	.string "One win will make this team proud.$"
 
+gBattleDomeOpponentPotential13::
 	.string "Overall, a weak team.$"
 
+gBattleDomeOpponentPotential14::
 	.string "A team with very low potential.$"
 
+gBattleDomeOpponentPotential15::
 	.string "A team unlikely to win the tournament.$"
 
+gBattleDomeOpponentPotential16::
 	.string "The team most unlikely to win.$"
 
+gBattleDomeOpponentPotential17::
 	.string "The perfect, invincible superstar!$"
 
+gBattleDomeOpponentStyle1::	
 	.string "Willing to risk total disaster at times.$"
 
+gBattleDomeOpponentStyle2::
 	.string "Skilled at enduring long battles.$"
 
+gBattleDomeOpponentStyle3::
 	.string "Varies tactics to suit the opponent.$"
 
+gBattleDomeOpponentStyle4::
 	.string "Has a tough winning pattern.$"
 
+gBattleDomeOpponentStyle5::
 	.string "Occasionally uses a very rare move.$"
 
+gBattleDomeOpponentStyle6::
 	.string "Uses startling and disruptive moves.$"
 
+gBattleDomeOpponentStyle7::
 	.string "Constantly watches HP in battle.$"
 
+gBattleDomeOpponentStyle8::
 	.string "Good at storing then loosing power.$"
 
+gBattleDomeOpponentStyle9::
 	.string "Skilled at enfeebling foes.$"
 
+gBattleDomeOpponentStyle10::
 	.string "Prefers tactics that rely on luck.$"
 
+gBattleDomeOpponentStyle11::
 	.string "Attacks with a regal atmosphere.$"
 
+gBattleDomeOpponentStyle12::
 	.string "Attacks with powerful, low-PP moves.$"
 
+gBattleDomeOpponentStyle13::
 	.string "Skilled at enfeebling, then attacking.$"
 
+gBattleDomeOpponentStyle14::
 	.string "Battles while enduring all attacks.$"
 
+gBattleDomeOpponentStyle15::
 	.string "Skilled at upsetting foes emotionally.$"
 
+gBattleDomeOpponentStyle16::
 	.string "Uses strong and straightforward moves.$"
 
+gBattleDomeOpponentStyle17::
 	.string "Aggressively uses strong moves.$"
 
+gBattleDomeOpponentStyle18::
 	.string "Battles while cleverly dodging attacks.$"
 
+gBattleDomeOpponentStyle19::
 	.string "Skilled at using upsetting attacks.$"
 
+gBattleDomeOpponentStyle20::
 	.string "Uses many popular moves.$"
 
+gBattleDomeOpponentStyle21::
 	.string "Has moves for powerful combinations.$"
 
+gBattleDomeOpponentStyle22::
 	.string "Uses high-probability attacks.$"
 
+gBattleDomeOpponentStyle23::
 	.string "Aggressively uses spectacular moves.$"
 
+gBattleDomeOpponentStyle24::
 	.string "Emphasizes offense over defense.$"
 
+gBattleDomeOpponentStyle25::
 	.string "Emphasizes defense over offense.$"
 
+gBattleDomeOpponentStyle26::
 	.string "Attacks quickly with strong moves.$"
 
+gBattleDomeOpponentStyle27::
 	.string "Often uses moves with added effects.$"
 
+gBattleDomeOpponentStyle28::
 	.string "Uses a well-balanced mix of moves.$"
 
+gBattleDomeOpponentStyleUnused1::
 	.string "This is sample message 1.$"
 
+gBattleDomeOpponentStyleUnused2::
 	.string "This is sample message 2.$"
 
+gBattleDomeOpponentStyleUnused3::
 	.string "This is sample message 3.$"
 
+gBattleDomeOpponentStyleUnused4::
 	.string "This is sample message 4.$"
 
+gBattleDomeOpponentStats1::
 	.string "Emphasizes HP and ATTACK.$"
 
+gBattleDomeOpponentStats2::
 	.string "Emphasizes HP and DEFENSE.$"
 
+gBattleDomeOpponentStats3::
 	.string "Emphasizes HP and SPEED.$"
 
+gBattleDomeOpponentStats4::
 	.string "Emphasizes HP and SP. ATTACK.$"
 
+gBattleDomeOpponentStats5::
 	.string "Emphasizes HP and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats6::
 	.string "Emphasizes ATTACK and DEFENSE.$"
 
+gBattleDomeOpponentStats7::
 	.string "Emphasizes ATTACK and SPEED.$"
 
+gBattleDomeOpponentStats8::
 	.string "Emphasizes ATTACK and SP. ATTACK.$"
 
+gBattleDomeOpponentStats9::
 	.string "Emphasizes ATTACK and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats10::
 	.string "Emphasizes DEFENSE and SPEED.$"
 
+gBattleDomeOpponentStats11::
 	.string "Emphasizes DEFENSE and SP. ATTACK.$"
 
+gBattleDomeOpponentStats12::
 	.string "Emphasizes DEFENSE and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats13::
 	.string "Emphasizes SPEED and SP. ATTACK.$"
 
+gBattleDomeOpponentStats14::
 	.string "Emphasizes SPEED and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats15::
 	.string "Emphasizes SP. ATTACK and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats16::
 	.string "Emphasizes HP.$"
 
+gBattleDomeOpponentStats17::
 	.string "Emphasizes ATTACK.$"
 
+gBattleDomeOpponentStats18::
 	.string "Emphasizes DEFENSE.$"
 
+gBattleDomeOpponentStats19::
 	.string "Emphasizes SPEED.$"
 
+gBattleDomeOpponentStats20::
 	.string "Emphasizes SP. ATTACK.$"
 
+gBattleDomeOpponentStats21::
 	.string "Emphasizes SP. DEFENSE.$"
 
+gBattleDomeOpponentStats22::
 	.string "Neglects HP and ATTACK.$"
 
+gBattleDomeOpponentStats23::
 	.string "Neglects HP and DEFENSE.$"
 
+gBattleDomeOpponentStats24::
 	.string "Neglects HP and SPEED.$"
 
+gBattleDomeOpponentStats25::
 	.string "Neglects HP and SP. ATTACK.$"
 
+gBattleDomeOpponentStats26::
 	.string "Neglects HP and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats27::
 	.string "Neglects ATTACK and DEFENSE.$"
 
+gBattleDomeOpponentStats28::
 	.string "Neglects ATTACK and SPEED.$"
 
+gBattleDomeOpponentStats29::
 	.string "Neglects ATTACK and SP. ATTACK.$"
 
+gBattleDomeOpponentStats30::
 	.string "Neglects ATTACK and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats31::
 	.string "Neglects DEFENSE and SPEED.$"
 
+gBattleDomeOpponentStats32::
 	.string "Neglects DEFENSE and SP. ATTACK.$"
 
+gBattleDomeOpponentStats33::
 	.string "Neglects DEFENSE and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats34::
 	.string "Neglects SPEED and SP. ATTACK.$"
 
+gBattleDomeOpponentStats35::
 	.string "Neglects SPEED and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats36::
 	.string "Neglects SP. ATTACK and SP. DEFENSE.$"
 
+gBattleDomeOpponentStats37::
 	.string "Neglects HP.$"
 
+gBattleDomeOpponentStats38::
 	.string "Neglects ATTACK.$"
 
+gBattleDomeOpponentStats39::
 	.string "Neglects DEFENSE.$"
 
+gBattleDomeOpponentStats40::
 	.string "Neglects SPEED.$"
 
+gBattleDomeOpponentStats41::
 	.string "Neglects SP. ATTACK.$"
 
+gBattleDomeOpponentStats42::
 	.string "Neglects SP. DEFENSE.$"
 
+gBattleDomeOpponentStats43::
 	.string "Raises POKéMON in a well-balanced way.$"
 
+gBattleDomeWinStrings1::
 	.string "Let the battle begin!$"
 
+gBattleDomeWinStrings2::
 	.string "{STR_VAR_1} won using {STR_VAR_2}!$"
 
+gBattleDomeWinStrings3::
 	.string "{STR_VAR_1} became the champ!$"
 
+gBattleDomeWinStrings4::
 	.string "{STR_VAR_1} won by default!$"
 
+gBattleDomeWinStrings5::
 	.string "{STR_VAR_1} won outright by default!$"
 
+gBattleDomeWinStrings6::
 	.string "{STR_VAR_1} won without using a move!$"
 
+gBattleDomeWinStrings7::
 	.string "{STR_VAR_1} won outright with no moves!$"
 
+gBattleDomeMatchNumber1::
 	.string "Round 1, Match 1$"
 
+gBattleDomeMatchNumber2::
 	.string "Round 1, Match 2$"
 
+gBattleDomeMatchNumber3::
 	.string "Round 1, Match 3$"
 
+gBattleDomeMatchNumber4::
 	.string "Round 1, Match 4$"
 
+gBattleDomeMatchNumber5::
 	.string "Round 1, Match 5$"
 
+gBattleDomeMatchNumber6::
 	.string "Round 1, Match 6$"
 
+gBattleDomeMatchNumber7::
 	.string "Round 1, Match 7$"
 
+gBattleDomeMatchNumber8::
 	.string "Round 1, Match 8$"
 
+gBattleDomeMatchNumber9::
 	.string "Round 2, Match 1$"
 
+gBattleDomeMatchNumber10::
 	.string "Round 2, Match 2$"
 
+gBattleDomeMatchNumber11::
 	.string "Round 2, Match 3$"
 
+gBattleDomeMatchNumber12::
 	.string "Round 2, Match 4$"
 
+gBattleDomeMatchNumber13::
 	.string "Semifinal Match 1$"
 
+gBattleDomeMatchNumber14::
 	.string "Semifinal Match 2$"
 
+gBattleDomeMatchNumber15::
 	.string "Final Match$"
 
 BattleFrontier_BattlePikeRandomRoom1_MapScripts_2C3E1B: @ 82C3E1B
@@ -12484,13 +12828,13 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3EE8:: @ 82C3EE8
 	setvar VAR_0x4010, 28
 	setvar VAR_0x8004, 5
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F35
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_eq BattleFrontier_BattlePikeRandomRoom1_EventScript_2C3F3F
 	hideobjectat 2, BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_1
 	setvar VAR_0x4004, 1
@@ -12601,9 +12945,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C408D:: @ 82C408D
 BattleFrontier_BattlePikeRandomRoom1_EventScript_2C40A2:: @ 82C40A2
 	setvar VAR_0x8004, 25
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4128
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 5, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4136
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
@@ -12623,9 +12967,9 @@ BattleFrontier_BattlePikeRandomRoom1_EventScript_2C40A2:: @ 82C40A2
 	special sub_81A1780
 	setvar VAR_0x8004, 3
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C4144
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattlePikeRandomRoom1_EventScript_2C415C
 	waitstate
 	end
@@ -12665,9 +13009,9 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
 	special sub_81A703C
 	setvar VAR_0x8004, 25
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4128
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 5, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4136
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
@@ -12687,9 +13031,9 @@ BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4174:: @ 82C4174
 	special sub_81A1780
 	setvar VAR_0x8004, 3
 	special sub_81A703C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C4144
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, BattleFrontier_BattlePikeRandomRoom3_EventScript_2C415C
 	waitstate
 	end
@@ -12722,9 +13066,9 @@ BattleFrontier_BattlePikeThreePathRoom_MapScript1_2C423E: @ 82C423E
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 0
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_2C426B
 	call BattleFrontier_BattlePikeThreePathRoom_EventScript_2C4271
 
@@ -13564,15 +13908,15 @@ SlateportCity_PokemonFanClub_EventScript_2C7F16:: @ 82C7F16
 	checkflag FLAG_0x1B1
 	goto_eq SlateportCity_PokemonFanClub_EventScript_2C7F74
 	msgbox SlateportCity_PokemonFanClub_Text_2C6E37, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
 	call SlateportCity_PokemonFanClub_EventScript_2C832D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
 	msgbox SlateportCity_PokemonFanClub_Text_2C6F66, 4
 	setvar VAR_0x8005, 23
 	call SlateportCity_PokemonFanClub_EventScript_2C8326
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_2C7F6A
 	setflag FLAG_0x1B1
 	goto SlateportCity_PokemonFanClub_EventScript_2C7F74
@@ -13594,15 +13938,15 @@ MauvilleCity_EventScript_2C7F7E:: @ 82C7F7E
 	checkflag FLAG_0x1B2
 	goto_eq MauvilleCity_EventScript_2C7FDC
 	msgbox MauvilleCity_Text_2C6FDB, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_EventScript_2C7FD2
 	call MauvilleCity_EventScript_2C832D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_EventScript_2C7FD2
 	msgbox MauvilleCity_Text_2C70F3, 4
 	setvar VAR_0x8005, 16
 	call MauvilleCity_EventScript_2C8326
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_EventScript_2C7FD2
 	setflag FLAG_0x1B2
 	goto MauvilleCity_EventScript_2C7FDC
@@ -13624,15 +13968,15 @@ VerdanturfTown_PokemonCenter_1F_EventScript_2C7FE6:: @ 82C7FE6
 	checkflag FLAG_0x1B3
 	goto_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C8044
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_2C7174, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
 	call VerdanturfTown_PokemonCenter_1F_EventScript_2C832D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_2C7243, 4
 	setvar VAR_0x8005, 29
 	call VerdanturfTown_PokemonCenter_1F_EventScript_2C8326
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq VerdanturfTown_PokemonCenter_1F_EventScript_2C803A
 	setflag FLAG_0x1B3
 	goto VerdanturfTown_PokemonCenter_1F_EventScript_2C8044
@@ -13654,15 +13998,15 @@ LavaridgeTown_House_EventScript_2C804E:: @ 82C804E
 	checkflag FLAG_0x1B4
 	goto_eq LavaridgeTown_House_EventScript_2C80AC
 	msgbox LavaridgeTown_House_Text_2C72B6, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LavaridgeTown_House_EventScript_2C80A2
 	call LavaridgeTown_House_EventScript_2C832D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LavaridgeTown_House_EventScript_2C80A2
 	msgbox LavaridgeTown_House_Text_2C73B1, 4
 	setvar VAR_0x8005, 7
 	call LavaridgeTown_House_EventScript_2C8326
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LavaridgeTown_House_EventScript_2C80A2
 	setflag FLAG_0x1B4
 	goto LavaridgeTown_House_EventScript_2C80AC
@@ -13684,15 +14028,15 @@ FallarborTown_Mart_EventScript_2C80B6:: @ 82C80B6
 	checkflag FLAG_0x1B5
 	goto_eq FallarborTown_Mart_EventScript_2C8114
 	msgbox FallarborTown_Mart_Text_2C7449, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FallarborTown_Mart_EventScript_2C810A
 	call FallarborTown_Mart_EventScript_2C832D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FallarborTown_Mart_EventScript_2C810A
 	msgbox FallarborTown_Mart_Text_2C7582, 4
 	setvar VAR_0x8005, 8
 	call FallarborTown_Mart_EventScript_2C8326
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FallarborTown_Mart_EventScript_2C810A
 	setflag FLAG_0x1B5
 	goto FallarborTown_Mart_EventScript_2C8114
@@ -13714,15 +14058,15 @@ FortreeCity_House2_EventScript_2C811E:: @ 82C811E
 	checkflag FLAG_0x1B6
 	goto_eq FortreeCity_House2_EventScript_2C817C
 	msgbox FortreeCity_House2_Text_2C7637, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FortreeCity_House2_EventScript_2C8172
 	call FortreeCity_House2_EventScript_2C832D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FortreeCity_House2_EventScript_2C8172
 	msgbox FortreeCity_House2_Text_2C7721, 4
 	setvar VAR_0x8005, 24
 	call FortreeCity_House2_EventScript_2C8326
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FortreeCity_House2_EventScript_2C8172
 	setflag FLAG_0x1B6
 	goto FortreeCity_House2_EventScript_2C817C
@@ -13744,15 +14088,15 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_2C8186:: @ 82C8186
 	checkflag FLAG_0x1B7
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81E4
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2C77C6, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
 	call LilycoveCity_DepartmentStoreRooftop_EventScript_2C832D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2C7911, 4
 	setvar VAR_0x8005, 14
 	call LilycoveCity_DepartmentStoreRooftop_EventScript_2C8326
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_2C81DA
 	setflag FLAG_0x1B7
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_2C81E4
@@ -13774,15 +14118,15 @@ MossdeepCity_EventScript_2C81EE:: @ 82C81EE
 	checkflag FLAG_0x1B8
 	goto_eq MossdeepCity_EventScript_2C824C
 	msgbox MossdeepCity_Text_2C79A6, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_EventScript_2C8242
 	call MossdeepCity_EventScript_2C832D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_EventScript_2C8242
 	msgbox MossdeepCity_Text_2C7B0D, 4
 	setvar VAR_0x8005, 15
 	call MossdeepCity_EventScript_2C8326
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_EventScript_2C8242
 	setflag FLAG_0x1B8
 	goto MossdeepCity_EventScript_2C824C
@@ -13804,15 +14148,15 @@ SootopolisCity_PokemonCenter_1F_EventScript_2C8256:: @ 82C8256
 	checkflag FLAG_0x1B9
 	goto_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82B4
 	msgbox SootopolisCity_PokemonCenter_1F_Text_2C7B8E, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
 	call SootopolisCity_PokemonCenter_1F_EventScript_2C832D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
 	msgbox SootopolisCity_PokemonCenter_1F_Text_2C7C98, 4
 	setvar VAR_0x8005, 4
 	call SootopolisCity_PokemonCenter_1F_EventScript_2C8326
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_PokemonCenter_1F_EventScript_2C82AA
 	setflag FLAG_0x1B9
 	goto SootopolisCity_PokemonCenter_1F_EventScript_2C82B4
@@ -13834,15 +14178,15 @@ PacifidlogTown_PokemonCenter_1F_EventScript_2C82BE:: @ 82C82BE
 	checkflag FLAG_0x1BA
 	goto_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C831C
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_2C7CFA, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
 	call PacifidlogTown_PokemonCenter_1F_EventScript_2C832D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_2C7E40, 4
 	setvar VAR_0x8005, 12
 	call PacifidlogTown_PokemonCenter_1F_EventScript_2C8326
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq PacifidlogTown_PokemonCenter_1F_EventScript_2C8312
 	setflag FLAG_0x1BA
 	goto PacifidlogTown_PokemonCenter_1F_EventScript_2C831C
@@ -13898,11 +14242,11 @@ TrainerHill_Roof_MapScript1_2C8336: @ 82C8336
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq TrainerHill_1F_EventScript_2C83C9
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq TrainerHill_1F_EventScript_2C83C9
-	compare_var_to_value VAR_RESULT, 9
+	compare VAR_RESULT, 9
 	goto_eq TrainerHill_1F_EventScript_2C83C9
 	end
 
@@ -13936,7 +14280,7 @@ TrainerHill_1F_EventScript_2C83A6:: @ 82C83A6
 	setvar VAR_0x4002, 1
 	setvar VAR_0x8004, 9
 	special sp194_trainer_tower
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq TrainerHill_1F_EventScript_2C83BF
 	end
 

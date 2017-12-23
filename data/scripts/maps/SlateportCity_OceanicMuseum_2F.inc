@@ -6,7 +6,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BD8D, 4
 	closemessage
-	playbgm BGM_AQA_0, 1
+	playbgm MUS_AQA_0, 1
 	addobject 3
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_20BCE4
 	waitmovement 0
@@ -16,21 +16,21 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_20BCE8
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_20BCF5
 	waitmovement 0
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BC92
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BC92
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE40, 4
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 5, SlateportCity_OceanicMuseum_2F_EventScript_20BC9D
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE69, 4
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BE93, 4
 	closemessage
 	applymovement 4, SlateportCity_OceanicMuseum_2F_Movement_20BCE2
 	waitmovement 0
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BCA8
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BCB3
 	trainerbattle 3, TRAINER_GRUNT_14, 0, SlateportCity_OceanicMuseum_2F_Text_20BEE2
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20BEFA, 4
@@ -59,7 +59,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C059, 4
 	closemessage
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	fadescreen 1
 	removeobject 2
@@ -76,12 +76,12 @@ SlateportCity_OceanicMuseum_2F_EventScript_20BB00:: @ 820BB00
 	msgbox SlateportCity_OceanicMuseum_2F_Text_20C36C, 4
 	closemessage
 	fadescreen 1
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	removeobject 1
 	setflag FLAG_0x384
-	compare_var_to_value VAR_0x40DA, 0
+	compare VAR_0x40DA, 0
 	call_if 1, SlateportCity_OceanicMuseum_2F_EventScript_20BC8C
 	setflag FLAG_0x095
 	clearflag FLAG_0x3B3

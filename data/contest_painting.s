@@ -45,8 +45,12 @@ gUnknown_085AFDA4:: @ 85AFDA4
 gUnknown_085B02B0:: @ 85B02B0
 	.incbin "baserom.gba", 0x5b02b0, 0x524
 
-gUnknown_085B07D4:: @ 85B07D4
-	.incbin "baserom.gba", 0x5b07d4, 0x14
+gContestRankTextPointers:: @ 85B07D4
+	.4byte gContestRankNormal
+	.4byte gContestRankSuper
+	.4byte gContestRankHyper
+	.4byte gContestRankMaster
+	.4byte gContestLink
 
 gUnknown_085B07E8:: @ 85B07E8
 	.incbin "baserom.gba", 0x5b07e8, 0x4
@@ -54,11 +58,25 @@ gUnknown_085B07E8:: @ 85B07E8
 gUnknown_085B07EC:: @ 85B07EC
 	.incbin "baserom.gba", 0x5b07ec, 0x8
 
-gUnknown_085B07F4:: @ 85B07F4
-	.incbin "baserom.gba", 0x5b07f4, 0x3c
+gContestPaintingDescriptionPointers:: @ 85B07F4
+	.4byte gContestPaintingCool1
+	.4byte gContestPaintingCool2
+	.4byte gContestPaintingCool3
+	.4byte gContestPaintingBeauty1
+	.4byte gContestPaintingBeauty2
+	.4byte gContestPaintingBeauty3
+	.4byte gContestPaintingCute1
+	.4byte gContestPaintingCute2
+	.4byte gContestPaintingCute3
+	.4byte gContestPaintingSmart1
+	.4byte gContestPaintingSmart2
+	.4byte gContestPaintingSmart3
+	.4byte gContestPaintingTough1
+	.4byte gContestPaintingTough2
+	.4byte gContestPaintingTough3
 
 gUnknown_085B0830:: @ 85B0830
-	.incbin "baserom.gba", 0x5b0830, 0x8
+	.4byte 0xc0003000, 0x00000000
 
 gUnknown_085B0838:: @ 85B0838
 	.incbin "baserom.gba", 0x5b0838, 0x4

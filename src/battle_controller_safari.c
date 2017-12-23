@@ -19,6 +19,7 @@
 #include "reshow_battle_screen.h"
 #include "pokeball.h"
 #include "data2.h"
+#include "pokeblock.h"
 
 extern u32 gBattleExecBuffer;
 extern u8 gActiveBank;
@@ -291,13 +292,13 @@ static void CompleteOnSpecialAnimDone(void)
         SafariBufferExecCompleted();
 }
 
-static void OpenPokeblockCase(void)
+static void SafariOpenPokeblockCase(void)
 {
     if (!gPaletteFade.active)
     {
         gBattleBankFunc[gActiveBank] = CompleteWhenChosePokeblock;
         FreeAllWindowBuffers();
-        sub_81358F4();
+        OpenPokeblockCaseInBattle();
     }
 }
 
@@ -497,7 +498,7 @@ static void SafariHandleChooseItem(void)
     s32 i;
 
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-    gBattleBankFunc[gActiveBank] = OpenPokeblockCase;
+    gBattleBankFunc[gActiveBank] = SafariOpenPokeblockCase;
     gBankInMenu = gActiveBank;
 }
 

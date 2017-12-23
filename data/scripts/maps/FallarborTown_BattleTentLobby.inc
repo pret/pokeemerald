@@ -70,7 +70,7 @@ FallarborTown_BattleTentLobby_EventScript_1FFF27:: @ 81FFF27
 	special sub_81A1780
 	message FallarborTown_BattleTentLobby_Text_2C4F69
 	waitmessage
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	msgbox FallarborTown_BattleTentLobby_Text_2C501F, 4
 	closemessage
@@ -132,7 +132,7 @@ FallarborTown_BattleTentLobby_EventScript_200001:: @ 8200001
 	faceplayer
 	setvar VAR_0x8004, 1
 	special sub_81B9B80
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, FallarborTown_BattleTentLobby_EventScript_1FFF84
 	special copy_player_party_to_sav1
 	msgbox FallarborTown_BattleTentLobby_Text_2C47EB, 4
@@ -153,7 +153,7 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	setvar VAR_RESULT, 2
 	setvar VAR_0x8004, 15
 	special sub_81A1780
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq FallarborTown_BattleTentLobby_EventScript_200176
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -165,7 +165,7 @@ FallarborTown_BattleTentLobby_EventScript_20005D:: @ 820005D
 	setvar VAR_0x8005, 3
 	special sub_80F9490
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FallarborTown_BattleTentLobby_EventScript_2001C2
 	msgbox FallarborTown_BattleTentLobby_Text_2C4B35, 5
 	switch VAR_RESULT
@@ -193,7 +193,7 @@ FallarborTown_BattleTentLobby_EventScript_2000E2:: @ 82000E2
 	delay 2
 	call FallarborTown_BattleTentLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FallarborTown_BattleTentLobby_EventScript_2001AB
 
 FallarborTown_BattleTentLobby_EventScript_20013C:: @ 820013C

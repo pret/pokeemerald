@@ -4,7 +4,7 @@ RustboroCity_Gym_MapScripts:: @ 8212F30
 RustboroCity_Gym_EventScript_212F31:: @ 8212F31
 	trainerbattle 1, TRAINER_ROXANNE_1, 0, RustboroCity_Gym_Text_21362A, RustboroCity_Gym_Text_21370B, RustboroCity_Gym_EventScript_212F66
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq RustboroCity_Gym_EventScript_212FC8
 	checkflag FLAG_0x0A5
 	goto_if 0, RustboroCity_Gym_EventScript_212FA4
@@ -23,14 +23,14 @@ RustboroCity_Gym_EventScript_212F66:: @ 8212F66
 	addvar VAR_0x4085, 1
 	setvar VAR_0x8008, 1
 	call RustboroCity_Gym_EventScript_271F43
-	compare_var_to_value VAR_0x4085, 6
+	compare VAR_0x4085, 6
 	call_if 1, RustboroCity_Gym_EventScript_271E84
 	goto RustboroCity_Gym_EventScript_212FA4
 	end
 
 RustboroCity_Gym_EventScript_212FA4:: @ 8212FA4
 	giveitem_std ITEM_TM39
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq RustboroCity_Gym_EventScript_272054
 	setflag FLAG_0x0A5
 	msgbox RustboroCity_Gym_Text_2138B1, 4
@@ -100,7 +100,7 @@ RustboroCity_Gym_EventScript_21307B:: @ 821307B
 	pokenavcall RustboroCity_Gym_Text_213A76
 	waitmessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox RustboroCity_Gym_Text_213C01, 4
 	waitfanfare
 	closemessage

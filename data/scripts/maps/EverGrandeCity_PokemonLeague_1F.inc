@@ -51,9 +51,9 @@ EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	checkflag FLAG_0x107
 	goto_eq EverGrandeCity_PokemonLeague_1F_EventScript_2296BB
 	getplayerxy VAR_0x4000, VAR_0x4001
-	compare_var_to_value VAR_0x4000, 11
+	compare VAR_0x4000, 11
 	call_if 4, EverGrandeCity_PokemonLeague_1F_EventScript_229698
-	compare_var_to_value VAR_0x4000, 8
+	compare VAR_0x4000, 8
 	call_if 3, EverGrandeCity_PokemonLeague_1F_EventScript_2296A3
 	message EverGrandeCity_PokemonLeague_1F_Text_2296E8
 	waitmessage
@@ -65,7 +65,7 @@ EverGrandeCity_PokemonLeague_1F_EventScript_229636:: @ 8229636
 	applymovement 4, EverGrandeCity_PokemonLeague_1F_Movement_2296E5
 	waitmovement 0
 	delay 10
-	playfanfare BGM_ME_BACHI
+	playfanfare MUS_ME_BACHI
 	message EverGrandeCity_PokemonLeague_1F_Text_2297EF
 	waitmessage
 	waitfanfare

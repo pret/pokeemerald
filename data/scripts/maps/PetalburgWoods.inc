@@ -8,7 +8,7 @@ PetalburgWoods_EventScript_22DFD7:: @ 822DFD7
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E34F, 4
 	closemessage
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	applymovement 3, PetalburgWoods_Movement_22E209
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E3AA, 4
@@ -45,7 +45,7 @@ PetalburgWoods_EventScript_22E079:: @ 822E079
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E34F, 4
 	closemessage
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	applymovement 3, PetalburgWoods_Movement_22E209
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E3AA, 4
@@ -89,7 +89,7 @@ PetalburgWoods_EventScript_22E138:: @ 822E138
 	waitmovement 0
 	msgbox PetalburgWoods_Text_22E63D, 4
 	giveitem_std ITEM_GREAT_BALL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq PetalburgWoods_EventScript_22E17D
 	goto PetalburgWoods_EventScript_22E18B
 	end
@@ -253,7 +253,7 @@ PetalburgWoods_EventScript_22E222:: @ 822E222
 	goto_eq PetalburgWoods_EventScript_22E251
 	msgbox PetalburgWoods_Text_22EAFE, 4
 	giveitem_std ITEM_MIRACLE_SEED
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq PetalburgWoods_EventScript_272054
 	setflag FLAG_0x129
 	release
@@ -280,11 +280,11 @@ PetalburgWoods_EventScript_22E26D:: @ 822E26D
 PetalburgWoods_EventScript_22E284:: @ 822E284
 	trainerbattle 2, TRAINER_JAMES_1, 0, PetalburgWoods_Text_22E827, PetalburgWoods_Text_22E86B, PetalburgWoods_EventScript_22E2C5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq PetalburgWoods_EventScript_22E31B
 	setvar VAR_0x8004, 621
 	specialvar VAR_RESULT, sub_813B4E0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq PetalburgWoods_EventScript_22E2EF
 	msgbox PetalburgWoods_Text_22E889, 4
 	release

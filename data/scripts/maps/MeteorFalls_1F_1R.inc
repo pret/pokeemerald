@@ -16,7 +16,7 @@ MeteorFalls_1F_1R_EventScript_22BD3A:: @ 822BD3A
 
 MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	lockall
-	playbgm BGM_MGM0, 0
+	playbgm MUS_MGM0, 0
 	applymovement 255, MeteorFalls_1F_1R_Movement_2725B0
 	waitmovement 0
 	delay 30
@@ -45,7 +45,7 @@ MeteorFalls_1F_1R_EventScript_22BD5F:: @ 822BD5F
 	addobject 7
 	addobject 8
 	addobject 9
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	applymovement 7, MeteorFalls_1F_1R_Movement_22BED9
 	applymovement 8, MeteorFalls_1F_1R_Movement_22BEE0
 	applymovement 9, MeteorFalls_1F_1R_Movement_22BEE8

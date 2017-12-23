@@ -14,7 +14,7 @@ MtPyre_3F_EventScript_23176A:: @ 823176A
 MtPyre_3F_EventScript_231781:: @ 8231781
 	trainerbattle 2, TRAINER_GABRIELLE_1, 0, MtPyre_3F_Text_231952, MtPyre_3F_Text_23196A, MtPyre_3F_EventScript_2317AD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MtPyre_3F_EventScript_2317CC
 	msgbox MtPyre_3F_Text_23199B, 4
 	release

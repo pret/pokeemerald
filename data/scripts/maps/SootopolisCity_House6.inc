@@ -7,11 +7,11 @@ SootopolisCity_House6_EventScript_226F5C:: @ 8226F5C
 	checkflag FLAG_0x0F5
 	goto_eq SootopolisCity_House6_EventScript_226FA3
 	msgbox SootopolisCity_House6_Text_226FC3, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, SootopolisCity_House6_EventScript_226F99
 	msgbox SootopolisCity_House6_Text_227034, 4
 	givedecoration_std 117
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_House6_EventScript_226FAD
 	setflag FLAG_0x0F5
 	release

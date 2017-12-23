@@ -21,7 +21,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A5D:: @ 8252A5D
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77:: @ 8252A77
 	special sub_81A8E7C
 	delay 2
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if 5, BattleFrontier_BattlePyramidEmptySquare_EventScript_252A77
 	setvar VAR_0x400D, 0
 	releaseall
@@ -33,7 +33,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252A8F:: @ 8252A8F
 	end
 
 BattleFrontier_BattlePyramidEmptySquare_EventScript_252A98:: @ 8252A98
-	playbgm BGM_BATTLE_PYRAMID, 0
+	playbgm MUS_PYRAMID, 0
 	setvar VAR_0x400E, 1
 	end
 
@@ -49,17 +49,17 @@ BattleFrontier_BattlePyramidEmptySquare_MapScript1_252AA2: @ 8252AA2
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B39
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
-	compare_var_to_value VAR_RESULT, 9
+	compare VAR_RESULT, 9
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252B42
 	setvar VAR_0x8004, 14
 	setvar VAR_0x8005, 8
@@ -90,7 +90,7 @@ BattleFrontier_BattlePyramidTop_EventScript_252B66:: @ 8252B66
 	special sub_81A8E7C
 	setvar VAR_0x8004, 14
 	special sub_81A8E7C
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	warpsilent BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 255, 7, 13
 	waitstate
 	end
@@ -134,7 +134,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252BE8:: @ 8252BE8
 	setvar VAR_0x8005, 2
 	copyvar VAR_0x8006, VAR_RESULT
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C45
 	setvar VAR_0x8004, 6
 	special sub_81A8E7C
@@ -166,7 +166,7 @@ BattleFrontier_BattlePyramidEmptySquare_EventScript_252C6A:: @ 8252C6A
 	setvar VAR_0x8004, 7
 	special sub_81A8E7C
 	callstd 1
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	goto_eq BattleFrontier_BattlePyramidEmptySquare_EventScript_252C87
 	setvar VAR_0x8004, 8
 	special sub_81A8E7C

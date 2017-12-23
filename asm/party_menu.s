@@ -98,7 +98,7 @@ _081B0234:
 	.4byte _081B0474
 _081B0290:
 	bl SetVBlankHBlankCallbacksToNull
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	bl clear_scheduled_bg_copies_to_vram
 	ldr r1, =gMain
 	movs r0, 0x87
@@ -429,7 +429,7 @@ sub_81B0550: @ 81B0550
 	ldr r1, [r5]
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0x1
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r1, 0x82
@@ -3161,7 +3161,7 @@ sub_81B1B8C: @ 81B1B8C
 	lsrs r4, r0, 24
 	adds r5, r4, 0
 	movs r0, 0x6
-	bl sub_8121F20
+	bl RunTextPrintersRetIsActive
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1

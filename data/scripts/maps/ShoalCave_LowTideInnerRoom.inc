@@ -73,7 +73,7 @@ ShoalCave_LowTideInnerRoom_EventScript_236FBA:: @ 8236FBA
 	checkflag FLAG_0x3BC
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_236FEC
 	giveitem_std ITEM_SHOAL_SHELL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_272054
 	setmetatile 41, 20, 859, 0
 	special DrawWholeMapView
@@ -91,7 +91,7 @@ ShoalCave_LowTideInnerRoom_EventScript_236FF6:: @ 8236FF6
 	checkflag FLAG_0x3BD
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_236FEC
 	giveitem_std ITEM_SHOAL_SHELL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_272054
 	setmetatile 41, 10, 859, 0
 	special DrawWholeMapView
@@ -104,7 +104,7 @@ ShoalCave_LowTideInnerRoom_EventScript_237028:: @ 8237028
 	checkflag FLAG_0x3BE
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_236FEC
 	giveitem_std ITEM_SHOAL_SHELL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_272054
 	setmetatile 6, 9, 859, 0
 	special DrawWholeMapView
@@ -117,7 +117,7 @@ ShoalCave_LowTideInnerRoom_EventScript_23705A:: @ 823705A
 	checkflag FLAG_0x3BF
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_236FEC
 	giveitem_std ITEM_SHOAL_SHELL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_272054
 	setmetatile 16, 13, 859, 0
 	special DrawWholeMapView
@@ -130,7 +130,7 @@ ShoalCave_LowTideInnerRoom_EventScript_23708C:: @ 823708C
 	checkflag FLAG_0x3B8
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_2370BE
 	giveitem_std ITEM_SHOAL_SALT
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_272054
 	setmetatile 31, 8, 858, 0
 	special DrawWholeMapView
@@ -148,7 +148,7 @@ ShoalCave_LowTideInnerRoom_EventScript_2370C8:: @ 82370C8
 	checkflag FLAG_0x3B9
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_2370BE
 	giveitem_std ITEM_SHOAL_SALT
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideInnerRoom_EventScript_272054
 	setmetatile 14, 26, 858, 0
 	special DrawWholeMapView

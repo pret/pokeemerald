@@ -11,7 +11,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	waitmovement 0
 	applymovement 255, SeafloorCavern_Room9_Movement_23505C
 	waitmovement 0
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	msgbox SeafloorCavern_Room9_Text_23505F, 4
 	closemessage
 	addobject VAR_0x8004
@@ -44,7 +44,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	waitfieldeffect 54
 	closemessage
 	setvar VAR_RESULT, 0
-	playfanfare BGM_ME_TAMA
+	playfanfare MUS_ME_TAMA
 	playse SE_TAMA
 	special sub_80B0534
 	applymovement VAR_0x8004, SeafloorCavern_Room9_Movement_2725A6
@@ -81,7 +81,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	setvar VAR_0x8006, 4
 	setvar VAR_0x8007, 5
 	msgbox SeafloorCavern_Room9_Text_2352A7, 4
-	playse SE_PC_LOGON
+	playse SE_PC_LOGIN
 	applymovement 255, SeafloorCavern_Room9_Movement_2725A4
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_2352F6, 4

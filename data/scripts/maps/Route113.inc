@@ -14,9 +14,9 @@ Route113_MapScript1_1F2161: @ 81F2161
 
 Route113_EventScript_1F216A:: @ 81F216A
 	getplayerxy VAR_0x4000, VAR_0x4001
-	compare_var_to_value VAR_0x4000, 19
+	compare VAR_0x4000, 19
 	goto_if 0, Route113_EventScript_1F2189
-	compare_var_to_value VAR_0x4000, 84
+	compare VAR_0x4000, 84
 	goto_if 2, Route113_EventScript_1F2189
 	setweather 7
 	return
@@ -61,7 +61,7 @@ Route113_EventScript_1F21D7:: @ 81F21D7
 Route113_EventScript_1F21EE:: @ 81F21EE
 	trainerbattle 2, TRAINER_MADELINE_1, 0, Route113_Text_299EA6, Route113_Text_299EF9, Route113_EventScript_1F221A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route113_EventScript_1F2239
 	msgbox Route113_Text_299F15, 4
 	release
@@ -86,7 +86,7 @@ Route113_EventScript_1F2239:: @ 81F2239
 Route113_EventScript_1F2250:: @ 81F2250
 	trainerbattle 2, TRAINER_LAO_1, 0, Route113_Text_29A015, Route113_Text_29A04C, Route113_EventScript_1F227C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route113_EventScript_1F229B
 	msgbox Route113_Text_29A067, 4
 	release

@@ -68,7 +68,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E41:: @ 8243E41
 	applymovement 255, BattleFrontier_BattleTowerMultiBattleRoom_Movement_2725A6
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_244056, 4
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x4001, 1
 	releaseall
 	end
@@ -88,7 +88,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E7A:: @ 8243E7A
 	message BattleFrontier_BattleTowerMultiBattleRoom_Text_244094
 	waitmessage
 	multichoicedefault 20, 8, 94, 1, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243E9D
 	msgbox BattleFrontier_BattleTowerMultiBattleRoom_Text_24410C, 4
 	release
@@ -192,9 +192,9 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243F36:: @ 8243F36
 	waitmessage
 	waitbuttonpress
 	closemessage
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 5, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FD4
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_243FDF
 	removeobject VAR_LAST_TALKED
 	setflag FLAG_0x152

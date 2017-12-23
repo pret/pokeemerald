@@ -10,7 +10,7 @@ SouthernIsland_Exterior_EventScript_2429D2:: @ 82429D2
 	lock
 	faceplayer
 	msgbox SouthernIsland_Exterior_Text_2A69F1, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SouthernIsland_Exterior_EventScript_242A17
 	msgbox SouthernIsland_Exterior_Text_2A6A5D, 4
 	closemessage

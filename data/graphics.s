@@ -880,14 +880,80 @@ gBuyMenuFrame_Tilemap:: @ 8D9B0F0
 gMenuMoneyGfx:: @ 8D9B230
     .incbin "baserom.gba", 0xd9b230, 0x84
 
-gUnknown_08D9B2B4:: @ 8D9B2B4
+gMenuPokeblock_Gfx:: @ 8D9B2B4
 	.incbin "baserom.gba", 0xd9b2b4, 0x1bc
 
-gUnknown_08D9B470:: @ 8D9B470
-	.incbin "baserom.gba", 0xd9b470, 0x358
+gMenuPokeblock_Pal:: @ 8D9B470
+	.incbin "baserom.gba", 0xd9b470, 0x70
+	
+gMenuPokeblockDevice_Gfx:: @ 8D9B4E0
+	.incbin "baserom.gba", 0xd9b4e0, 0x2c0
+	
+gMenuPokeblockDevice_Pal:: @ 8D9B7A0
+	.incbin "baserom.gba", 0xd9b7a0, 0x28
 
-gUnknown_08D9B7C8:: @ 8D9B7C8
-	.incbin "baserom.gba", 0xd9b7c8, 0x27c
+gMenuPokeblock_Tilemap:: @ 8D9B7C8
+	.incbin "baserom.gba", 0xd9b7c8, 0x148
+	
+	.align 2
+gPokeblock_Gfx::
+	.incbin "graphics/pokeblock/pokeblock.4bpp.lz"
+
+	.align 2
+gPokeblockRed_Pal::
+	.incbin "graphics/pokeblock/red.gbapal.lz"
+
+	.align 2
+gPokeblockBlue_Pal::
+	.incbin "graphics/pokeblock/blue.gbapal.lz"
+
+	.align 2
+gPokeblockPink_Pal::
+	.incbin "graphics/pokeblock/pink.gbapal.lz"
+
+	.align 2
+gPokeblockGreen_Pal::
+	.incbin "graphics/pokeblock/green.gbapal.lz"
+
+	.align 2
+gPokeblockYellow_Pal::
+	.incbin "graphics/pokeblock/yellow.gbapal.lz"
+
+	.align 2
+gPokeblockPurple_Pal::
+	.incbin "graphics/pokeblock/purple.gbapal.lz"
+
+	.align 2
+gPokeblockIndigo_Pal::
+	.incbin "graphics/pokeblock/indigo.gbapal.lz"
+
+	.align 2
+gPokeblockBrown_Pal::
+	.incbin "graphics/pokeblock/brown.gbapal.lz"
+
+	.align 2
+gPokeblockLiteBlue_Pal::
+	.incbin "graphics/pokeblock/liteblue.gbapal.lz"
+
+	.align 2
+gPokeblockOlive_Pal::
+	.incbin "graphics/pokeblock/olive.gbapal.lz"
+
+	.align 2
+gPokeblockGray_Pal::
+	.incbin "graphics/pokeblock/gray.gbapal.lz"
+
+	.align 2
+gPokeblockBlack_Pal::
+	.incbin "graphics/pokeblock/black.gbapal.lz"
+
+	.align 2
+gPokeblockWhite_Pal::
+	.incbin "graphics/pokeblock/white.gbapal.lz"
+
+	.align 2
+gPokeblockGold_Pal::
+	.incbin "graphics/pokeblock/gold.gbapal.lz"
 
 gUnknown_08D9BA44:: @ 8D9BA44
 	.incbin "baserom.gba", 0xd9ba44, 0x100
@@ -1461,8 +1527,11 @@ gUnknown_08DD4620:: @ 8DD4620
 	.incbin "baserom.gba", 0xdd4620, 0xc0
 
 gUnknown_08DD46E0:: @ 8DD46E0
-	.incbin "baserom.gba", 0xdd46e0, 0x180
+	.incbin "baserom.gba", 0xdd46e0, 0xc0
 
+gUnknown_08DD47A0:: @ 8DD47A0
+	.incbin "baserom.gba", 0xdd47a0, 0xc0
+	
 gUnknown_08DD4860:: @ 8DD4860
 	.incbin "baserom.gba", 0xdd4860, 0x20
 

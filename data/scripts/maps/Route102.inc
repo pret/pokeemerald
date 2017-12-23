@@ -20,11 +20,11 @@ Route102_EventScript_1EC0FC:: @ 81EC0FC
 Route102_EventScript_1EC105:: @ 81EC105
 	trainerbattle 2, TRAINER_CALVIN_1, 0, Route102_Text_294513, Route102_Text_29457C, Route102_EventScript_1EC146
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route102_EventScript_1EC19C
 	setvar VAR_0x8004, 318
 	specialvar VAR_RESULT, sub_813B4E0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route102_EventScript_1EC170
 	msgbox Route102_Text_2945AC, 4
 	release

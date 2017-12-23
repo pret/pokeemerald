@@ -3,7 +3,7 @@ BattleFrontier_BattlePalaceBattleRoom: @ 84853DC
 	.4byte BattleFrontier_BattlePalaceBattleRoom_MapEvents
 	.4byte BattleFrontier_BattlePalaceBattleRoom_MapScripts
 	.4byte 0x0
-	.2byte BGM_BATTLE_PALACE
+	.2byte MUS_B_PALACE
 	.2byte 344
 	.byte 58
 	.byte 0

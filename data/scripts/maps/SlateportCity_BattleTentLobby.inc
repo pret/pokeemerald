@@ -69,7 +69,7 @@ SlateportCity_BattleTentLobby_EventScript_2087E9:: @ 82087E9
 	special sub_81A1780
 	message SlateportCity_BattleTentLobby_Text_23F68C
 	waitmessage
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	goto SlateportCity_BattleTentLobby_EventScript_208861
 
@@ -120,7 +120,7 @@ SlateportCity_BattleTentLobby_EventScript_2088AA:: @ 82088AA
 	faceplayer
 	setvar VAR_0x8004, 1
 	special sub_81B9D08
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, SlateportCity_BattleTentLobby_EventScript_2087E9
 	special copy_player_party_to_sav1
 	msgbox SlateportCity_BattleTentLobby_Text_2C5810, 4
@@ -167,7 +167,7 @@ SlateportCity_BattleTentLobby_EventScript_208950:: @ 8208950
 	delay 2
 	call SlateportCity_BattleTentLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_BattleTentLobby_EventScript_208A14
 	setvar VAR_0x8006, 0
 
@@ -249,7 +249,7 @@ SlateportCity_BattleTentLobby_EventScript_208A3D:: @ 8208A3D
 	goto_eq SlateportCity_BattleTentLobby_EventScript_208A74
 	msgbox SlateportCity_BattleTentLobby_Text_208B4E, 4
 	giveitem_std ITEM_TM41
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_BattleTentLobby_EventScript_272054
 	setflag FLAG_0x109
 	msgbox SlateportCity_BattleTentLobby_Text_208C5C, 4

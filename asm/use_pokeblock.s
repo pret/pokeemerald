@@ -5,350 +5,10 @@
 
 	.text
 
-	thumb_func_start sub_8166204
-sub_8166204: @ 8166204
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	adds r6, r1, 0
-	ldr r4, =gUnknown_0203BCAC
-	ldr r0, =0x0000806c
-	bl AllocZeroed
-	str r0, [r4]
-	ldr r1, =gUnknown_0203BC90
-	ldr r2, =0x00007fd0
-	adds r0, r2
-	str r0, [r1]
-	str r5, [r0, 0x8]
-	str r6, [r0, 0x4]
-	ldr r0, =sub_8166380
-	bl launch_c3_walk_stairs_and_run_once
-	ldr r0, =sub_816631C
-	bl SetMainCallback2
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8166204
 
-	thumb_func_start sub_816624C
-sub_816624C: @ 816624C
-	push {r4,r5,lr}
-	ldr r4, =gUnknown_0203BCAC
-	ldr r0, =0x0000806c
-	bl AllocZeroed
-	str r0, [r4]
-	ldr r5, =gUnknown_0203BC90
-	ldr r1, =0x00007fd0
-	adds r0, r1
-	str r0, [r5]
-	ldr r1, =gUnknown_0203BC98
-	ldr r1, [r1]
-	str r1, [r0, 0x8]
-	ldr r1, =gUnknown_0203BC94
-	ldr r1, [r1]
-	str r1, [r0, 0x4]
-	ldr r4, =gUnknown_0203BC9C
-	ldrb r0, [r4]
-	bl sub_81672E4
-	strb r0, [r4]
-	ldr r5, [r5]
-	movs r1, 0
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x3
-	bls _08166284
-	movs r1, 0x1
-_08166284:
-	adds r0, r5, 0
-	adds r0, 0x56
-	strb r1, [r0]
-	ldr r0, =sub_8166380
-	bl launch_c3_walk_stairs_and_run_once
-	ldr r0, =sub_81662C0
-	bl SetMainCallback2
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_816624C
 
-	thumb_func_start sub_81662C0
-sub_81662C0: @ 81662C0
-	push {r4,lr}
-	ldr r4, =gUnknown_0203BC90
-	ldr r0, [r4]
-	ldr r0, [r0]
-	bl _call_via_r0
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	ldr r4, [r4]
-	ldr r1, [r4]
-	ldr r0, =map_warp_consider_1_to_outside_or_stair_or_dive
-	cmp r1, r0
-	bne _081662F0
-	adds r0, r4, 0
-	adds r0, 0x50
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, =sub_8166304
-	bl SetMainCallback2
-_081662F0:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81662C0
-
-	thumb_func_start sub_8166304
-sub_8166304: @ 8166304
-	push {lr}
-	bl sub_81668F8
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8166304
-
-	thumb_func_start sub_816631C
-sub_816631C: @ 816631C
-	push {lr}
-	ldr r0, =gUnknown_0203BC90
-	ldr r0, [r0]
-	ldr r0, [r0]
-	bl _call_via_r0
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl RunTextPrinters
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_816631C
-
-	thumb_func_start sub_8166340
-sub_8166340: @ 8166340
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	ldr r0, =gUnknown_0203BCAC
-	ldr r0, [r0]
-	ldr r1, =0x00007c58
-	adds r0, r1
-	bl sub_81D2108
-	bl sub_80BA0A8
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8166340
-
-	thumb_func_start launch_c3_walk_stairs_and_run_once
-launch_c3_walk_stairs_and_run_once: @ 816636C
-	ldr r1, =gUnknown_0203BC90
-	ldr r1, [r1]
-	str r0, [r1]
-	adds r1, 0x50
-	movs r0, 0
-	strb r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end launch_c3_walk_stairs_and_run_once
-
-	thumb_func_start sub_8166380
-sub_8166380: @ 8166380
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r1, =gUnknown_0203BC90
-	ldr r0, [r1]
-	adds r0, 0x50
-	ldrb r0, [r0]
-	adds r2, r1, 0
-	cmp r0, 0xF
-	bls _08166394
-	b _08166556
-_08166394:
-	lsls r0, 2
-	ldr r1, =_081663A8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_081663A8:
-	.4byte _081663E8
-	.4byte _0816640C
-	.4byte _08166416
-	.4byte _08166434
-	.4byte _08166464
-	.4byte _08166468
-	.4byte _08166474
-	.4byte _08166484
-	.4byte _08166490
-	.4byte _0816649C
-	.4byte _081664B8
-	.4byte _081664BC
-	.4byte _081664E4
-	.4byte _08166510
-	.4byte _08166528
-	.4byte _08166550
-_081663E8:
-	ldr r2, =gUnknown_0203BCAC
-	ldr r0, [r2]
-	ldr r1, =0x00007b10
-	adds r0, r1
-	movs r1, 0xFF
-	strb r1, [r0]
-	ldr r0, [r2]
-	ldr r2, =0x00007c58
-	adds r0, r2
-	bl sub_81D1ED4
-	b _0816653C
-	.pool
-_0816640C:
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	b _0816653C
-_08166416:
-	movs r0, 0
-	bl SetVBlankCallback
-	movs r0, 0
-	str r0, [sp]
-	movs r1, 0xC0
-	lsls r1, 19
-	ldr r2, =0x05006000
-	mov r0, sp
-	bl CpuSet
-	b _0816653C
-	.pool
-_08166434:
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, =gUnknown_085DFCCC
-	movs r0, 0
-	movs r2, 0x4
-	bl InitBgsFromTemplates
-	ldr r0, =gUnknown_085DFCDC
-	bl InitWindows
-	bl DeactivateAllTextPrinters
-	movs r0, 0
-	movs r1, 0x97
-	movs r2, 0xE0
-	bl sub_809882C
-	b _0816653C
-	.pool
-_08166464:
-	ldr r1, [r2]
-	b _08166540
-_08166468:
-	bl sub_8168328
-	lsls r0, 24
-	cmp r0, 0
-	bne _08166556
-	b _0816653C
-_08166474:
-	ldr r1, =gKeyRepeatStartDelay
-	movs r0, 0x14
-	strh r0, [r1]
-	bl sub_8167420
-	b _0816653C
-	.pool
-_08166484:
-	bl sub_8167930
-	lsls r0, 24
-	cmp r0, 0
-	bne _08166556
-	b _0816653C
-_08166490:
-	movs r0, 0
-	bl sub_8167608
-	bl sub_8167760
-	b _0816653C
-_0816649C:
-	ldr r0, =gUnknown_0203BCAC
-	ldr r0, [r0]
-	ldr r1, =0x00007b0e
-	adds r0, r1
-	bl sub_81D312C
-	lsls r0, 24
-	cmp r0, 0
-	bne _08166556
-	b _0816653C
-	.pool
-_081664B8:
-	ldr r1, [r2]
-	b _08166540
-_081664BC:
-	ldr r5, =gUnknown_0203BCAC
-	ldr r1, [r5]
-	ldr r4, =0x00007c58
-	adds r0, r1, r4
-	ldr r2, =0x00007c6c
-	adds r1, r2
-	bl sub_81D2754
-	ldr r0, [r5]
-	adds r0, r4
-	bl sub_81D20AC
-	b _0816653C
-	.pool
-_081664E4:
-	ldr r4, =gUnknown_0203BCAC
-	ldr r0, [r4]
-	ldr r1, =0x00007c58
-	adds r0, r1
-	bl sub_81D20BC
-	lsls r0, 24
-	cmp r0, 0
-	bne _08166556
-	ldr r2, [r4]
-	ldr r1, =0x00007c58
-	adds r0, r2, r1
-	adds r1, 0x14
-	adds r2, r1
-	adds r1, r2, 0
-	bl sub_81D1F84
-	b _0816653C
-	.pool
-_08166510:
-	ldr r0, =gUnknown_0203BCAC
-	ldr r0, [r0]
-	ldr r2, =0x00007c58
-	adds r0, r2
-	bl sub_81D2230
-	b _0816653C
-	.pool
-_08166528:
-	movs r0, 0
-	bl PutWindowTilemap
-	movs r0, 0x1
-	bl PutWindowTilemap
-	movs r0, 0
-	movs r1, 0x1
-	bl sub_8167BA0
-_0816653C:
-	ldr r0, =gUnknown_0203BC90
-	ldr r1, [r0]
-_08166540:
-	adds r1, 0x50
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _08166556
-	.pool
-_08166550:
-	ldr r0, =map_warp_consider_1_to_outside_or_stair_or_dive
-	bl launch_c3_walk_stairs_and_run_once
-_08166556:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8166380
-
-	thumb_func_start map_warp_consider_1_to_outside_or_stair_or_dive
-map_warp_consider_1_to_outside_or_stair_or_dive: @ 8166564
+	thumb_func_start sub_8166564
+sub_8166564: @ 8166564
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r4, =gUnknown_0203BC90
@@ -424,14 +84,14 @@ _081665C0:
 	bl sub_81D3480
 _0816660A:
 	ldr r0, =sub_8166634
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 _08166610:
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end map_warp_consider_1_to_outside_or_stair_or_dive
+	thumb_func_end sub_8166564
 
 	thumb_func_start sub_8166634
 sub_8166634: @ 8166634
@@ -567,7 +227,7 @@ _0816675C:
 	.pool
 _08166788:
 	ldr r0, =sub_8166BEC
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 	b _0816680E
 	.pool
 _08166794:
@@ -611,7 +271,7 @@ _081667CC:
 	.pool
 _081667E8:
 	ldr r0, =sub_816681C
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 	b _0816680E
 	.pool
 _081667F4:
@@ -656,7 +316,7 @@ _08166838:
 	adds r0, r1
 	ldrb r0, [r0]
 	bl sub_81672A4
-	ldr r1, =gUnknown_0203BC9C
+	ldr r1, =gPokeblockMonId
 	strb r0, [r1]
 	ldr r1, =gUnknown_0203BC94
 	ldr r2, [r5]
@@ -708,9 +368,9 @@ _08166888:
 	str r5, [r4]
 	bl FreeAllWindowBuffers
 	ldr r1, =gMain
-	ldr r0, =sub_816624C
+	ldr r0, =CB2_ReturnAndChooseMonToGivePokeblock
 	str r0, [r1, 0x8]
-	bl sub_8179D70
+	bl CB2_PreparePokeblockFeedScene
 _081668D4:
 	add sp, 0x4
 	pop {r4,r5}
@@ -752,7 +412,7 @@ _0816693C:
 	ldr r0, [r0]
 	ldr r1, =0x00008041
 	adds r0, r1
-	ldr r1, =gUnknown_0203BC9C
+	ldr r1, =gPokeblockMonId
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -837,7 +497,7 @@ _081669F4:
 	adds r0, r1
 	bl sub_81D3464
 	ldr r0, =sub_8166A34
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 	ldr r0, =sub_816631C
 	bl SetMainCallback2
 _08166A18:
@@ -1018,9 +678,9 @@ _08166BB6:
 	bne _08166BDA
 	ldr r0, =gSpecialVar_ItemId
 	ldrb r0, [r0]
-	bl sub_8136F68
+	bl TryClearPokeblock
 	ldr r0, =sub_8166BEC
-	bl launch_c3_walk_stairs_and_run_once
+	bl sub_816636C
 _08166BDA:
 	pop {r4-r6}
 	pop {r0}
@@ -1225,7 +885,7 @@ sub_8166D44: @ 8166D44
 	movs r0, 0x2
 	movs r1, 0x3
 	bl CopyWindowToVram
-	ldr r0, =gUnknown_085DFCFC
+	ldr r0, =sUsePokeblockYesNoWinTemplate
 	movs r1, 0x97
 	movs r2, 0xE
 	movs r3, 0
@@ -1497,7 +1157,7 @@ sub_8166FD4: @ 8166FD4
 	movs r0, 0
 _08166FEC:
 	lsls r0, 16
-	ldr r1, =gUnknown_085DFD04
+	ldr r1, =sContestStatNames
 	lsls r0, r3, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -1719,7 +1379,7 @@ sub_8167184: @ 8167184
 	adds r0, r3, 0
 	adds r0, 0x6E
 	strh r1, [r0]
-	ldr r0, =gUnknown_0203BC9E
+	ldr r0, =gPokeblockGain
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0

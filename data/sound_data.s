@@ -1,19 +1,14 @@
 	.section .rodata
 
-voicegroup_pokemon_cry:: @ 8675D04
-	.incbin "baserom.gba", 0x675D04, 0x27FF0
+	.include "asm/macros/m4a.inc"
 
-gCryTable:: @ 869DCF4
-	.incbin "baserom.gba", 0x69dcf4, 0x1230
+	.include "sound/voice_groups.inc"
 
-gCryTable2:: @ 869EF24
-	.incbin "baserom.gba", 0x69ef24, 0x1200
+	@ keysplit tables, programmable wave data
+	.incbin "baserom.gba", 0x6b4698, 0x328
 
-gUnknown_086A0124:: @ 86A0124
-	.incbin "baserom.gba", 0x6a0124, 0x1489c
+	.include "sound/music_player_table.inc"
+	.include "sound/song_table.inc"
 
-gMPlayTable:: @ 86B49C0
-	.incbin "baserom.gba", 0x6b49c0, 0x30
-
-gSongTable:: @ 86B49F0
-	.incbin "baserom.gba", 0x6b49f0, 0x2ee660
+	@ direct sound data
+	.incbin "baserom.gba", 0x6b5d04, 0x246338

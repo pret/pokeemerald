@@ -295,21 +295,7 @@ gUnknown_03005DF4: @ 3005DF4
 
     .include "sound.o"
 	.include "task.o"
-
-gUnknown_03006080: @ 3006080
-	.space 0x4
-
-gUnknown_03006084: @ 3006084
-	.space 0xC
-
-gApproachingTrainers: @ 3006090
-	.space 0x18
-
-gNoOfApproachingTrainers: @ 30060A8
-	.space 0x4
-
-gUnknown_030060AC: @ 30060AC
-	.space 0x4
+	.include "trainer_see.o"
 
 gUnknown_030060B0: @ 30060B0
 	.space 0x4
@@ -419,7 +405,7 @@ gUnknown_030062F4: @ 30062F4
 gUnknown_03006300: @ 3006300
 	.space 0x10
 
-gUnknown_03006310: @ 3006310
+gMultiuseListMenuTemplate: @ 3006310
 	.space 0x18
 
 gUnknown_03006328: @ 3006328

@@ -5,7 +5,7 @@ SlateportCity_Harbor_MapScripts:: @ 820C97D
 SlateportCity_Harbor_MapScript1_20C983: @ 820C983
 	setescapewarp SLATEPORT_CITY, 255, 28, 13
 	setvar VAR_0x4001, 0
-	compare_var_to_value VAR_0x40A0, 1
+	compare VAR_0x40A0, 1
 	call_if 1, SlateportCity_Harbor_EventScript_20C9A9
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if 1, SlateportCity_Harbor_EventScript_20C9A5
@@ -16,7 +16,7 @@ SlateportCity_Harbor_EventScript_20C9A5:: @ 820C9A5
 	return
 
 SlateportCity_Harbor_EventScript_20C9A9:: @ 820C9A9
-	savebgm BGM_AQA_0
+	savebgm MUS_AQA_0
 	setobjectxyperm 4, 12, 13
 	setobjectmovementtype 4, 9
 	setflag FLAG_0x389
@@ -66,13 +66,13 @@ SlateportCity_Harbor_EventScript_20C9F5:: @ 820C9F5
 	setvar VAR_0x40A0, 2
 	setflag FLAG_0x061
 	setflag FLAG_0x313
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, SlateportCity_Harbor_EventScript_20CA89
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, SlateportCity_Harbor_EventScript_20CA9E
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, SlateportCity_Harbor_EventScript_20CAB3
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, SlateportCity_Harbor_EventScript_20CAB3
 	msgbox SlateportCity_Harbor_Text_20D35A, 4
 	closemessage
@@ -201,7 +201,7 @@ SlateportCity_Harbor_EventScript_20CB88:: @ 820CB88
 
 SlateportCity_Harbor_EventScript_20CB92:: @ 820CB92
 	msgbox SlateportCity_Harbor_Text_20CF93, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_20CBDD
 	setvar VAR_PORTHOLE, 1
 	call SlateportCity_Harbor_EventScript_20CBE9
@@ -212,7 +212,7 @@ SlateportCity_Harbor_EventScript_20CB92:: @ 820CB92
 
 SlateportCity_Harbor_EventScript_20CBBA:: @ 820CBBA
 	msgbox SlateportCity_Harbor_Text_20CFAE, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_20CBDD
 	call SlateportCity_Harbor_EventScript_20CBE9
 	warp BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
@@ -233,9 +233,9 @@ SlateportCity_Harbor_EventScript_20CBE9:: @ 820CBE9
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, SLATEPORT_CITY_HARBOR
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, SlateportCity_Harbor_EventScript_20CC42
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, SlateportCity_Harbor_EventScript_20CC37
 	delay 30
 	hideobjectat 255, PETALBURG_CITY
@@ -277,7 +277,7 @@ SlateportCity_Harbor_EventScript_20CC52:: @ 820CC52
 	call_if 1, SlateportCity_Harbor_EventScript_20CC93
 	checkflag FLAG_0x1BF
 	call_if 1, SlateportCity_Harbor_EventScript_20CC93
-	compare_var_to_value VAR_0x8004, 2
+	compare VAR_0x8004, 2
 	goto_eq SlateportCity_Harbor_EventScript_20CC89
 	msgbox SlateportCity_Harbor_Text_20D08E, 4
 	release
@@ -305,7 +305,7 @@ SlateportCity_Harbor_EventScript_20CCA2:: @ 820CCA2
 	goto_eq SlateportCity_Harbor_EventScript_20CCF6
 	checkflag FLAG_0x070
 	goto_eq SlateportCity_Harbor_EventScript_20CCE9
-	compare_var_to_value VAR_0x40A0, 2
+	compare VAR_0x40A0, 2
 	goto_eq SlateportCity_Harbor_EventScript_20CCDF
 	msgbox SlateportCity_Harbor_Text_20D232, 4
 	closemessage
@@ -331,10 +331,10 @@ SlateportCity_Harbor_EventScript_20CCF6:: @ 820CCF6
 	end
 
 SlateportCity_Harbor_EventScript_20CD00:: @ 820CD00
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	goto_eq SlateportCity_Harbor_EventScript_20CE11
 	checkitem ITEM_SCANNER, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_Harbor_EventScript_20CD38
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_eq SlateportCity_Harbor_EventScript_20CD2E
@@ -364,10 +364,10 @@ SlateportCity_Harbor_EventScript_20CD44:: @ 820CD44
 
 SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B
 	msgbox SlateportCity_Harbor_Text_20D8BC, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_20CE05
 	giveitem_std ITEM_DEEP_SEA_TOOTH
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_272054
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, 4
@@ -377,10 +377,10 @@ SlateportCity_Harbor_EventScript_20CD7B:: @ 820CD7B
 
 SlateportCity_Harbor_EventScript_20CDBB:: @ 820CDBB
 	msgbox SlateportCity_Harbor_Text_20D8F1, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_20CE05
 	giveitem_std ITEM_DEEP_SEA_SCALE
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_Harbor_EventScript_272054
 	takeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_20D94A, 4

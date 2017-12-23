@@ -3,7 +3,7 @@ Route131_MapScripts:: @ 81F7404
 	.byte 0
 
 Route131_MapScript1_1F740A: @ 81F740A
-	compare_var_to_value VAR_0x405E, 4
+	compare VAR_0x405E, 4
 	call_if 4, Route131_EventScript_1F741F
 	call Route131_EventScript_1F741B
 	end

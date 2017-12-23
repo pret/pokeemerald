@@ -15,7 +15,7 @@ Route121_EventScript_1F5E0F:: @ 81F5E0F
 
 Route121_EventScript_1F5E18:: @ 81F5E18
 	lockall
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	applymovement 13, Route121_Movement_2725B8
 	waitmovement 0
 	msgbox Route121_Text_1F605A, 4
@@ -73,7 +73,7 @@ Route121_EventScript_1F5E74:: @ 81F5E74
 Route121_EventScript_1F5E8B:: @ 81F5E8B
 	trainerbattle 2, TRAINER_WALTER_1, 0, Route121_Text_29F199, Route121_Text_29F20D, Route121_EventScript_1F5EB7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route121_EventScript_1F5ED6
 	msgbox Route121_Text_29F21E, 4
 	release
@@ -113,7 +113,7 @@ Route121_EventScript_1F5F1F:: @ 81F5F1F
 Route121_EventScript_1F5F3A:: @ 81F5F3A
 	trainerbattle 2, TRAINER_JESSICA_1, 0, Route121_Text_29F612, Route121_Text_29F641, Route121_EventScript_1F5F66
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route121_EventScript_1F5F85
 	msgbox Route121_Text_29F66F, 4
 	release
@@ -158,7 +158,7 @@ Route121_EventScript_1F5FE1:: @ 81F5FE1
 Route121_EventScript_1F5FF8:: @ 81F5FF8
 	trainerbattle 2, TRAINER_CRISTIN_1, 0, Route121_Text_29F770, Route121_Text_29F7C1, Route121_EventScript_1F6024
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route121_EventScript_1F6043
 	msgbox Route121_Text_29F7D4, 4
 	release

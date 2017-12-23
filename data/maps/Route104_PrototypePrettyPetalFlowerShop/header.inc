@@ -3,7 +3,7 @@ Route104_PrototypePrettyPetalFlowerShop: @ 8485B14
 	.4byte Route104_PrototypePrettyPetalFlowerShop_MapEvents
 	.4byte Route104_PrototypePrettyPetalFlowerShop_MapScripts
 	.4byte 0x0
-	.2byte BGM_NEXTROAD
+	.2byte MUS_NEXTROAD
 	.2byte 117
 	.byte 19
 	.byte 0

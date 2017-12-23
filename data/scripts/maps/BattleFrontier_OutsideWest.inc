@@ -12,7 +12,7 @@ BattleFrontier_OutsideWest_EventScript_23D3F0:: @ 823D3F0
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_23D808, 4
 	checkitem ITEM_SS_TICKET, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_OutsideWest_EventScript_23D44E
 	message BattleFrontier_OutsideWest_Text_23D89D
 	waitmessage
@@ -35,7 +35,7 @@ BattleFrontier_OutsideWest_EventScript_23D44E:: @ 823D44E
 
 BattleFrontier_OutsideWest_EventScript_23D458:: @ 823D458
 	msgbox BattleFrontier_OutsideWest_Text_23D8F2, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_OutsideWest_EventScript_23D4AE
 	msgbox BattleFrontier_OutsideWest_Text_23D94B, 4
 	call BattleFrontier_OutsideWest_EventScript_23D4BA
@@ -46,7 +46,7 @@ BattleFrontier_OutsideWest_EventScript_23D458:: @ 823D458
 
 BattleFrontier_OutsideWest_EventScript_23D483:: @ 823D483
 	msgbox BattleFrontier_OutsideWest_Text_23D90E, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_OutsideWest_EventScript_23D4AE
 	msgbox BattleFrontier_OutsideWest_Text_23D94B, 4
 	call BattleFrontier_OutsideWest_EventScript_23D4BA
@@ -144,13 +144,13 @@ BattleFrontier_OutsideWest_EventScript_23D57F:: @ 823D57F
 	lock
 	faceplayer
 	delay 20
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5C5
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5BA
 	msgbox BattleFrontier_OutsideWest_Text_23DC36, 4
 	release
@@ -169,13 +169,13 @@ BattleFrontier_OutsideWest_EventScript_23D5C6:: @ 823D5C6
 	faceplayer
 	message BattleFrontier_OutsideWest_Text_23DCB0
 	waitmessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, BattleFrontier_OutsideWest_EventScript_23D5FD
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, BattleFrontier_OutsideWest_EventScript_23D608
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, BattleFrontier_OutsideWest_EventScript_23D613
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, BattleFrontier_OutsideWest_EventScript_23D61E
 	waitbuttonpress
 	release
@@ -226,7 +226,7 @@ BattleFrontier_OutsideWest_EventScript_23D635:: @ 823D635
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_23DD3B, 4
 	random 2
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_OutsideWest_EventScript_23D653
 	goto BattleFrontier_OutsideWest_EventScript_23D65D
 	end

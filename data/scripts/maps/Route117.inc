@@ -41,7 +41,7 @@ Route117_EventScript_1F39C7:: @ 81F39C7
 Route117_EventScript_1F39D0:: @ 81F39D0
 	trainerbattle 2, TRAINER_ISAAC_1, 0, Route117_Text_29C43F, Route117_Text_29C47A, Route117_EventScript_1F39FC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3A1B
 	msgbox Route117_Text_29C498, 4
 	release
@@ -66,7 +66,7 @@ Route117_EventScript_1F3A1B:: @ 81F3A1B
 Route117_EventScript_1F3A32:: @ 81F3A32
 	trainerbattle 2, TRAINER_LYDIA_1, 0, Route117_Text_29C612, Route117_Text_29C659, Route117_EventScript_1F3A5E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3A7D
 	msgbox Route117_Text_29C679, 4
 	release
@@ -91,7 +91,7 @@ Route117_EventScript_1F3A7D:: @ 81F3A7D
 Route117_EventScript_1F3A94:: @ 81F3A94
 	trainerbattle 2, TRAINER_DYLAN_1, 0, Route117_Text_29C7A5, Route117_Text_29C7EB, Route117_EventScript_1F3AC0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3ADF
 	msgbox Route117_Text_29C800, 4
 	release
@@ -116,7 +116,7 @@ Route117_EventScript_1F3ADF:: @ 81F3ADF
 Route117_EventScript_1F3AF6:: @ 81F3AF6
 	trainerbattle 2, TRAINER_MARIA_1, 0, Route117_Text_29C955, Route117_Text_29C9A6, Route117_EventScript_1F3B22
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3B41
 	msgbox Route117_Text_29C9D0, 4
 	release
@@ -146,7 +146,7 @@ Route117_EventScript_1F3B58:: @ 81F3B58
 Route117_EventScript_1F3B6F:: @ 81F3B6F
 	trainerbattle 6, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CC4A, Route117_Text_29CC8E, Route117_Text_29CD61, Route117_EventScript_1F3B9F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3BB8
 	msgbox Route117_Text_29CCCB, 4
 	release
@@ -169,7 +169,7 @@ Route117_EventScript_1F3BB8:: @ 81F3BB8
 Route117_EventScript_1F3BD3:: @ 81F3BD3
 	trainerbattle 6, TRAINER_ANNA_AND_MEG_1, 0, Route117_Text_29CD9D, Route117_Text_29CDE9, Route117_Text_29CE52, Route117_EventScript_1F3C03
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route117_EventScript_1F3C1C
 	msgbox Route117_Text_29CE17, 4
 	release

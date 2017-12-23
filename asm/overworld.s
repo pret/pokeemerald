@@ -21,7 +21,7 @@ sub_8084620: @ 8084620
 	lsrs r1, 1
 	adds r0, r4, 0
 	bl SetMoney
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	bl sub_8084720
 	bl copy_saved_warp3_bank_and_enter_x_to_warp1
 	bl warp_in

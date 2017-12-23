@@ -33,7 +33,7 @@ Route121_SafariZoneEntrance_EventScript_22BBEF:: @ 822BBEF
 	lock
 	faceplayer
 	msgbox Route121_SafariZoneEntrance_Text_2A4E46, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route121_SafariZoneEntrance_EventScript_22BC0E
 	msgbox Route121_SafariZoneEntrance_Text_2A4E7E, 4
 	release
@@ -50,7 +50,7 @@ Route121_SafariZoneEntrance_EventScript_22BC18:: @ 822BC18
 	waitmovement 0
 	showmoneybox 0, 0, 0
 	msgbox Route121_SafariZoneEntrance_Text_2A4F74, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route121_SafariZoneEntrance_EventScript_22BC48
 	msgbox Route121_SafariZoneEntrance_Text_2A4FD7, 4
 	goto Route121_SafariZoneEntrance_EventScript_22BD06
@@ -58,11 +58,11 @@ Route121_SafariZoneEntrance_EventScript_22BC18:: @ 822BC18
 
 Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route121_SafariZoneEntrance_EventScript_22BCEA
 	call Route121_SafariZoneEntrance_EventScript_22BCBF
 	checkmoney 0x1f4, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route121_SafariZoneEntrance_EventScript_22BCF8
 	playse SE_REGI
 	msgbox Route121_SafariZoneEntrance_Text_2A501B, 4
@@ -70,7 +70,7 @@ Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 	updatemoneybox 0, 0
 	nop
 	msgbox Route121_SafariZoneEntrance_Text_2A5036, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message Route121_SafariZoneEntrance_Text_2A5052
 	waitfanfare
 	msgbox Route121_SafariZoneEntrance_Text_2A506F, 4
@@ -89,10 +89,10 @@ Route121_SafariZoneEntrance_EventScript_22BC48:: @ 822BC48
 
 Route121_SafariZoneEntrance_EventScript_22BCBF:: @ 822BCBF
 	getpartysize
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if 5, Route121_SafariZoneEntrance_EventScript_22BCE9
 	specialvar VAR_RESULT, sub_8139530
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route121_SafariZoneEntrance_EventScript_22BCE9
 	msgbox Route121_SafariZoneEntrance_Text_2A50E5, 4
 	goto Route121_SafariZoneEntrance_EventScript_22BD06

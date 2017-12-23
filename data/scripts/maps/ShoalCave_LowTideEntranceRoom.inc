@@ -23,24 +23,24 @@ ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
 	checkflag FLAG_SYS_SHOAL_ITEM
 	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_236ED9
 	checkitem ITEM_SHOAL_SALT, 4
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236E9B
 	checkitem ITEM_SHOAL_SHELL, 4
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236E9B
 	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7F37, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236ECF
 	checkitemspace ITEM_SHELL_BELL, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, ShoalCave_LowTideEntranceRoom_EventScript_236E69
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236E91
 	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7FAC, 4
 	takeitem ITEM_SHOAL_SALT, 4
 	takeitem ITEM_SHOAL_SHELL, 4
 	giveitem_std ITEM_SHELL_BELL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_272054
 	msgbox ShoalCave_LowTideEntranceRoom_Text_2A8012, 4
 	setflag FLAG_0x002
@@ -49,13 +49,13 @@ ShoalCave_LowTideEntranceRoom_EventScript_236DD9:: @ 8236DD9
 
 ShoalCave_LowTideEntranceRoom_EventScript_236E69:: @ 8236E69
 	checkitem ITEM_SHOAL_SALT, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236E7A
 	return
 
 ShoalCave_LowTideEntranceRoom_EventScript_236E7A:: @ 8236E7A
 	checkitem ITEM_SHOAL_SHELL, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236E8B
 	return
 
@@ -70,10 +70,10 @@ ShoalCave_LowTideEntranceRoom_EventScript_236E91:: @ 8236E91
 
 ShoalCave_LowTideEntranceRoom_EventScript_236E9B:: @ 8236E9B
 	checkitem ITEM_SHOAL_SALT, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236EC5
 	checkitem ITEM_SHOAL_SHELL, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236EC5
 	msgbox ShoalCave_LowTideEntranceRoom_Text_2A7E0E, 4
 	release

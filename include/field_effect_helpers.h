@@ -12,5 +12,6 @@
 // Exported ROM declarations
 u8 sub_8154228(void);
 bool8 sub_8155DA0(struct MapObject *);
+void sub_8155D78(struct MapObject *);
 
 #endif //GUARD_FIELD_EFFECT_HELPERS_H

@@ -3,7 +3,7 @@ MagmaHideout_2F_1R: @ 8484844
 	.4byte MagmaHideout_2F_1R_MapEvents
 	.4byte MagmaHideout_2F_1R_MapScripts
 	.4byte 0x0
-	.2byte BGM_AJITO
+	.2byte MUS_AJITO
 	.2byte 337
 	.byte 198
 	.byte 0

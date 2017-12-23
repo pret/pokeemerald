@@ -5,7 +5,7 @@ SkyPillar_2F_MapScripts:: @ 823962B
 	.byte 0
 
 SkyPillar_2F_MapScript1_23963B: @ 823963B
-	compare_var_to_value VAR_0x40CA, 2
+	compare VAR_0x40CA, 2
 	call_if 0, SkyPillar_2F_EventScript_23964C
 	copyvar VAR_ICE_STEP_COUNT, 0x1
 	end

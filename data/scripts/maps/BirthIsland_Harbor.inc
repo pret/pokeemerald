@@ -5,7 +5,7 @@ BirthIsland_Harbor_EventScript_26805D:: @ 826805D
 	lock
 	faceplayer
 	msgbox BirthIsland_Harbor_Text_2C6B90, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BirthIsland_Harbor_EventScript_2680A2
 	msgbox BirthIsland_Harbor_Text_2A6A5D, 4
 	closemessage

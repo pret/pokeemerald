@@ -68,7 +68,7 @@ Route112_EventScript_1F1E6A:: @ 81F1E6A
 Route112_EventScript_1F1E81:: @ 81F1E81
 	trainerbattle 2, TRAINER_TRENT_1, 0, Route112_Text_299815, Route112_Text_29987C, Route112_EventScript_1F1EAD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route112_EventScript_1F1ECC
 	msgbox Route112_Text_299896, 4
 	release

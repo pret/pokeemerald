@@ -9,7 +9,7 @@ RusturfTunnel_MapScript2_22CE32: @ 822CE32
 	.2byte 0
 
 RusturfTunnel_MapScript1_22CE44: @ 822CE44
-	compare_var_to_value VAR_0x409A, 2
+	compare VAR_0x409A, 2
 	call_if 1, RusturfTunnel_EventScript_22CE50
 	end
 
@@ -51,35 +51,35 @@ RusturfTunnel_EventScript_22CE99:: @ 822CE99
 
 RusturfTunnel_EventScript_22CEAE:: @ 822CEAE
 	lockall
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, RusturfTunnel_EventScript_22CFA7
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, RusturfTunnel_EventScript_22CFBC
-	compare_var_to_value VAR_0x4001, 3
+	compare VAR_0x4001, 3
 	call_if 1, RusturfTunnel_EventScript_22CFC7
 	call RusturfTunnel_EventScript_22CFFF
 	msgbox RusturfTunnel_Text_22D65C, 4
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, RusturfTunnel_EventScript_22CFC8
-	compare_var_to_value VAR_0x4001, 3
+	compare VAR_0x4001, 3
 	call_if 1, RusturfTunnel_EventScript_22CFC8
 	giveitem_std ITEM_HM04
 	setflag FLAG_0x06A
 	msgbox RusturfTunnel_Text_22D6D2, 4
 	closemessage
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, RusturfTunnel_EventScript_22CF5D
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, RusturfTunnel_EventScript_22CF6F
-	compare_var_to_value VAR_0x4001, 3
+	compare VAR_0x4001, 3
 	call_if 1, RusturfTunnel_EventScript_22CF8B
 	msgbox RusturfTunnel_Text_22D745, 4
 	closemessage
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, RusturfTunnel_EventScript_22CFD4
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, RusturfTunnel_EventScript_22CFE6
-	compare_var_to_value VAR_0x4001, 3
+	compare VAR_0x4001, 3
 	call_if 1, RusturfTunnel_EventScript_22CFE6
 	call RusturfTunnel_EventScript_272216
 	releaseall
@@ -311,7 +311,7 @@ RusturfTunnel_EventScript_22D0AF:: @ 822D0AF
 RusturfTunnel_EventScript_22D0C2:: @ 822D0C2
 	lock
 	faceplayer
-	playbgm BGM_AQA_0, 0
+	playbgm MUS_AQA_0, 0
 	msgbox RusturfTunnel_Text_22D20A, 4
 	trainerbattle 3, TRAINER_GRUNT_10, 0, RusturfTunnel_Text_22D2B0
 	msgbox RusturfTunnel_Text_22D2E1, 4
