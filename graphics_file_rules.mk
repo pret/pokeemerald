@@ -326,3 +326,9 @@ $(unusedgfxdir)/color_frames.4bpp: $(unusedgfxdir)/color_frames.png
 
 $(btintgfxdir)/unused_window2bar.4bpp: $(btintgfxdir)/unused_window2bar.png
 	$(GFX) $< $@ -num_tiles 5
+
+$(unusedgfxdir)/old_contest.4bpp: $(unusedgfxdir)/old_contest_frame_1.4bpp $(unusedgfxdir)/old_contest_floor.4bpp $(unusedgfxdir)/old_contest_frame_2.4bpp $(unusedgfxdir)/old_contest_symbols.4bpp $(unusedgfxdir)/old_contest_meter.4bpp $(unusedgfxdir)/old_contest_classes.4bpp $(unusedgfxdir)/old_contest_numbers.4bpp
+	@cat $(unusedgfxdir)/old_contest_frame_1.4bpp $(unusedgfxdir)/old_contest_floor.4bpp $(unusedgfxdir)/old_contest_frame_2.4bpp $(unusedgfxdir)/old_contest_symbols.4bpp $(unusedgfxdir)/old_contest_meter.4bpp $(unusedgfxdir)/old_contest_classes.4bpp $(unusedgfxdir)/old_contest_numbers.4bpp >$@
+
+$(unusedgfxdir)/old_contest_2.4bpp: $(unusedgfxdir)/old_contest_2_1.4bpp $(unusedgfxdir)/old_contest_2_2.4bpp
+	@cat $(unusedgfxdir)/old_contest_2_1.4bpp $(unusedgfxdir)/old_contest_2_2.4bpp >$@

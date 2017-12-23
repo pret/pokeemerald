@@ -1024,7 +1024,16 @@ gBattleInterface_BallDisplayPal:: @ 8C11BBC
 
     .align 2
 gHealthboxElementsGfxTable:: @ 8C11BDC
-	.incbin "baserom.gba", 0xc11bdc, 0x840
+	.incbin "graphics/battle_interface/hpbar.4bpp"
+	.incbin "graphics/battle_interface/expbar.4bpp"
+	.incbin "graphics/battle_interface/status_psn.4bpp"
+	.incbin "graphics/battle_interface/status_par.4bpp"
+	.incbin "graphics/battle_interface/status_slp.4bpp"
+	.incbin "graphics/battle_interface/status_frz.4bpp"
+	.incbin "graphics/battle_interface/status_brn.4bpp"
+	.incbin "graphics/battle_interface/misc.4bpp"
+	.incbin "graphics/battle_interface/hpbar_anim.4bpp"
+	.incbin "graphics/battle_interface/misc_frameend.4bpp"
 
     .align 2
 gBattleInterface_BallDisplayGfx:: @ 8C1241C
@@ -1032,7 +1041,179 @@ gBattleInterface_BallDisplayGfx:: @ 8C1241C
 
     .align 2
 gUnknown_08C1249C:: @ 8C1249C
-	.incbin "baserom.gba", 0xc1249c, 0x49f4
+	.incbin "graphics/battle_interface/ball_display_unused_extra.4bpp"
+	.incbin "graphics/battle_interface/status2.4bpp" @ these three duplicate sets of graphics are for the opponent pokemon and are also for use in double battles. they use dynamic palettes so coloring them is an extreme headache and wont be done for now.
+	.incbin "graphics/battle_interface/status3.4bpp"
+	.incbin "graphics/battle_interface/status4.4bpp"
+	.incbin "graphics/unknown/unknown_D12FEC.4bpp"
+	.incbin "graphics/unknown/unknown_D1300C.4bpp"
+
+	@ even more seemingly unused windows. lovely.
+	.incbin "graphics/battle_interface/unused_window3.4bpp.lz"
+	.incbin "graphics/battle_interface/unused_window4.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_116:: @ 8D1302C
+	.incbin "graphics/battle_anims/sprites/116.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_116:: @ 8D132D8
+	.incbin "graphics/battle_anims/sprites/116.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_117:: @ 8D13300
+	.incbin "graphics/battle_anims/sprites/117.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_117:: @ 8D1353C
+	.incbin "graphics/battle_anims/sprites/117.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_118:: @ 8D13558
+	.incbin "graphics/battle_anims/sprites/118.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_118:: @ 8D136F0
+	.incbin "graphics/battle_anims/sprites/118.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_119:: @ 8D1370C
+	.incbin "graphics/battle_anims/sprites/119.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_119:: @ 8D1399C
+	.incbin "graphics/battle_anims/sprites/119.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_120:: @ 8D139C4
+	.incbin "graphics/battle_anims/sprites/120.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_120:: @ 8D13AB8
+	.incbin "graphics/battle_anims/sprites/120.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_121:: @ 8D13AE0
+	.incbin "graphics/battle_anims/sprites/121.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_121:: @ 8D13B0C
+	.incbin "graphics/battle_anims/sprites/121.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_122:: @ 8D13B30
+	.incbin "graphics/battle_anims/sprites/122.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_122:: @ 8D13C2C
+	.incbin "graphics/battle_anims/sprites/122.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_123:: @ 8D13C48
+	.incbin "graphics/battle_anims/sprites/123.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_124:: @ 8D13D84
+	.incbin "graphics/battle_anims/sprites/124.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_124:: @ 8D1401C
+	.incbin "graphics/battle_anims/sprites/124.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_125:: @ 8D14044
+	.incbin "graphics/battle_anims/sprites/125.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_125:: @ 8D14130
+	.incbin "graphics/battle_anims/sprites/125.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_126:: @ 8D14158
+	.incbin "graphics/battle_anims/sprites/126.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_126:: @ 8D141C0
+	.incbin "graphics/battle_anims/sprites/126.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_127:: @ 8D141E0
+	.incbin "graphics/battle_anims/sprites/127.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_127:: @ 8D14380
+	.incbin "graphics/battle_anims/sprites/127.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_128:: @ 8D143A4
+	.incbin "graphics/battle_anims/sprites/128.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_128:: @ 8D14610
+	.incbin "graphics/battle_anims/sprites/128.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_129:: @ 8D14630
+	.incbin "graphics/battle_anims/sprites/129.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_130:: @ 8D14694
+	.incbin "graphics/battle_anims/sprites/130.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_130:: @ 8D14A64
+	.incbin "graphics/battle_anims/sprites/130.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_131:: @ 8D14A8C
+	.incbin "graphics/battle_anims/sprites/131.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_132:: @ 8D14BFC
+	.incbin "graphics/battle_anims/sprites/132.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_132:: @ 8D14CFC
+	.incbin "graphics/battle_anims/sprites/132.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_133:: @ 8D14D1C
+	.incbin "graphics/battle_anims/sprites/133.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_133:: @ 8D14D98
+	.incbin "graphics/battle_anims/sprites/133.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_134:: @ 8D14DC0
+	.incbin "graphics/battle_anims/sprites/134.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_076:: @ 8D14E90
+	.incbin "graphics/battle_anims/sprites/076.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_076:: @ 8D150CC
+	.incbin "graphics/battle_anims/sprites/076.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_077:: @ 8D150F4
+	.incbin "graphics/battle_anims/sprites/077.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/old_contest.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/old_contest.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unused/old_contest.bin.lz"
+
+	.align 2
+	.incbin "graphics/unknown/unknown_C15BC0.bin.lz"
+
+	.align 2
+	.incbin "graphics/unused/old_contest_2.4bpp.lz"
 
 gUnknown_08C16E90:: @ 8C16E90
 	.incbin "baserom.gba", 0xc16e90, 0x118
