@@ -31102,7 +31102,7 @@ sub_81AA96C: @ 81AA96C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r3, 0
-	ldr r2, =gUnknown_08613655
+	ldr r2, =gUnknown_08613650+0x5
 	mov r12, r2
 	movs r7, 0x7
 _081AA994:
