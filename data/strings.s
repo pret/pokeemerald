@@ -3521,10 +3521,10 @@ gText_Var1sTrainerCard:: @ 85ECFA6
 gText_HallOfFameDebut:: @ 85ECFB8
 	.string "HALL OF FAME DEBUT  $"
 
-gUnknown_085ECFCD:: @ 85ECFCD
+gText_LinkBattles:: @ 85ECFCD
 	.string "LINK BATTLES$"
 
-gUnknown_085ECFDA:: @ 85ECFDA
+gText_LinkCableBattles:: @ 85ECFDA
 	.string "LINK CABLE BATTLES$"
 
 gText_WinsLosses:: @ 85ECFED

@@ -88,7 +88,10 @@ gUnknown_0856FB0C:: @ 856FB0C
 	.incbin "baserom.gba", 0x56fb0c, 0x3
 
 gUnknown_0856FB0F:: @ 856FB0F
-	.incbin "baserom.gba", 0x56fb0f, 0x9
+     .incbin "baserom.gba", 0x56fb0f, 0x3
+
+gUnknown_0856FB12:: @ 856FB12
+     .incbin "baserom.gba", 0x56fb12, 0x6
 
 gUnknown_0856FB18:: @ 856FB18
 	.incbin "baserom.gba", 0x56fb18, 0x8
@@ -105,7 +108,8 @@ gUnknown_0856FB28:: @ 856FB28
 	.4byte sub_80C4DB0
 
 gUnknown_0856FB40:: @ 856FB40
-	.incbin "baserom.gba", 0x56fb40, 0x8
+	.4byte gUnknown_0856FB0C
+	.4byte gUnknown_0856FB12
 
 gUnknown_0856FB48:: @ 856FB48
 	.incbin "baserom.gba", 0x56fb48, 0x2
@@ -123,7 +127,9 @@ gUnknown_0856FB57:: @ 856FB57
 	.incbin "baserom.gba", 0x56fb57, 0x5
 
 gUnknown_0856FB5C:: @ 856FB5C
-	.incbin "baserom.gba", 0x56fb5c, 0xc
+	.4byte gText_LinkBattles
+	.4byte gText_LinkCableBattles
+	.4byte gText_LinkBattles
 
 gUnknown_0856FB68:: @ 856FB68
 	.incbin "baserom.gba", 0x56fb68, 0x6
