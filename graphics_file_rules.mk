@@ -5,6 +5,8 @@ monpaldir := graphics/pokemon/palettes
 tilesetdir := data/tilesets
 fontdir := data/graphics/fonts
 menudir := graphics/interface
+btanimgfxdir := graphics/battle_anims/sprites
+unusedgfxdir := graphics/unused
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -297,3 +299,20 @@ graphics/misc/japanese_hof.4bpp: %.4bpp: %.png
 $(menudir)/menu.gbapal: $(menudir)/menu_0.gbapal $(menudir)/menu_1.gbapal
 	@cat $(menudir)/menu_0.gbapal $(menudir)/menu_1.gbapal >$@
 
+$(btanimgfxdir)/010.4bpp: $(btanimgfxdir)/010_0.4bpp $(btanimgfxdir)/010_1.4bpp $(btanimgfxdir)/010_2.4bpp $(btanimgfxdir)/010_3.4bpp
+	@cat $(btanimgfxdir)/010_0.4bpp $(btanimgfxdir)/010_1.4bpp $(btanimgfxdir)/010_2.4bpp $(btanimgfxdir)/010_3.4bpp >$@
+
+$(unusedgfxdir)/obi_palpak1.gbapal: $(unusedgfxdir)/old_pal1.gbapal $(unusedgfxdir)/old_pal2.gbapal $(unusedgfxdir)/old_pal3.gbapal
+	@cat $(unusedgfxdir)/old_pal1.gbapal $(unusedgfxdir)/old_pal2.gbapal $(unusedgfxdir)/old_pal3.gbapal >$@
+
+$(unusedgfxdir)/obi_palpak3.gbapal: $(unusedgfxdir)/old_pal5.gbapal $(unusedgfxdir)/old_pal6.gbapal $(unusedgfxdir)/old_pal7.gbapal
+	@cat $(unusedgfxdir)/old_pal5.gbapal $(unusedgfxdir)/old_pal6.gbapal $(unusedgfxdir)/old_pal7.gbapal >$@
+
+$(unusedgfxdir)/obi1.4bpp: $(unusedgfxdir)/old_bulbasaur.4bpp $(unusedgfxdir)/old_charizard.4bpp
+	@cat $(unusedgfxdir)/old_bulbasaur.4bpp $(unusedgfxdir)/old_charizard.4bpp >$@
+
+$(unusedgfxdir)/obi2.4bpp: $(unusedgfxdir)/old_bulbasaur2.4bpp $(unusedgfxdir)/old_battle_interface_1.4bpp $(unusedgfxdir)/old_battle_interface_2.4bpp $(unusedgfxdir)/old_battle_interface_3.4bpp
+	@cat $(unusedgfxdir)/old_bulbasaur2.4bpp $(unusedgfxdir)/old_battle_interface_1.4bpp $(unusedgfxdir)/old_battle_interface_2.4bpp $(unusedgfxdir)/old_battle_interface_3.4bpp >$@
+
+$(menudir)/hp_numbers.4bpp: $(menudir)/hpbar_anim.4bpp $(menudir)/numbers1.4bpp $(menudir)/numbers2.4bpp
+	@cat $(menudir)/hpbar_anim.4bpp $(menudir)/numbers1.4bpp $(menudir)/numbers2.4bpp >$@
