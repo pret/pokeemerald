@@ -4488,34 +4488,34 @@ gUnknown_085EE6AD:: @ 85EE6AD
 gUnknown_085EE6B6:: @ 85EE6B6
 	.string "Updated time$"
 
-gUnknown_085EE6C3:: @ 85EE6C3
+gText_MenuPokedex:: @ 85EE6C3
 	.string "POKéDEX$"
 
-gUnknown_085EE6CB:: @ 85EE6CB
+gText_MenuPokemon:: @ 85EE6CB
 	.string "POKéMON$"
 
-gUnknown_085EE6D3:: @ 85EE6D3
+gText_MenuBag:: @ 85EE6D3
 	.string "BAG$"
 
-gUnknown_085EE6D7:: @ 85EE6D7
+gText_MenuPokenav:: @ 85EE6D7
 	.string "POKéNAV$"
 
-gUnknown_085EE6DF:: @ 85EE6DF
+gText_MenuPlayer:: @ 85EE6DF
 	.string "{PLAYER}$"
 
-gUnknown_085EE6E2:: @ 85EE6E2
+gText_MenuSave:: @ 85EE6E2
 	.string "SAVE$"
 
-gUnknown_085EE6E7:: @ 85EE6E7
+gText_MenuOption:: @ 85EE6E7
 	.string "OPTION$"
 
-gUnknown_085EE6EE:: @ 85EE6EE
+gText_MenuExit:: @ 85EE6EE
 	.string "EXIT$"
 
-gUnknown_085EE6F3:: @ 85EE6F3
+gText_MenuRetire:: @ 85EE6F3
 	.string "RETIRE$"
 
-gUnknown_085EE6FA:: @ 85EE6FA
+gText_MenuRest:: @ 85EE6FA
 	.string "REST$"
 
 gText_SafariBallStock:: @ 85EE6FF
@@ -4524,28 +4524,28 @@ gText_SafariBallStock:: @ 85EE6FF
 gText_BattlePyramidFloor:: @ 85EE716
 	.string "Battle Pyramid\n{STR_VAR_1}$"
 
-gUnknown_085EE728:: @ 85EE728
+gText_Floor1:: @ 85EE728
 	.string "Floor 1$"
 
-gUnknown_085EE730:: @ 85EE730
+gText_Floor2:: @ 85EE730
 	.string "Floor 2$"
 
-gUnknown_085EE738:: @ 85EE738
+gText_Floor3:: @ 85EE738
 	.string "Floor 3$"
 
-gUnknown_085EE740:: @ 85EE740
+gText_Floor4:: @ 85EE740
 	.string "Floor 4$"
 
-gUnknown_085EE748:: @ 85EE748
+gText_Floor5:: @ 85EE748
 	.string "Floor 5$"
 
-gUnknown_085EE750:: @ 85EE750
+gText_Floor6:: @ 85EE750
 	.string "Floor 6$"
 
-gUnknown_085EE758:: @ 85EE758
+gText_Floor7:: @ 85EE758
 	.string "Floor 7$"
 
-gUnknown_085EE760:: @ 85EE760
+gText_Peak:: @ 85EE760
 	.string "Peak$"
 
 gText_LinkStandby2:: @ 85EE765

@@ -148,4 +148,26 @@ extern const u8 gText_MoveItemsDescription[];
 extern const u8 gText_SeeYa[];
 extern const u8 gText_SeeYaDescription[];
 
+// menu texts
+extern const u8 gText_MenuPokedex[];
+extern const u8 gText_MenuPokemon[];
+extern const u8 gText_MenuBag[];
+extern const u8 gText_MenuPokenav[];
+extern const u8 gText_MenuPlayer[];
+extern const u8 gText_MenuSave[];
+extern const u8 gText_MenuOption[];
+extern const u8 gText_MenuExit[];
+extern const u8 gText_MenuRetire[];
+extern const u8 gText_MenuRest[];
+extern const u8 gText_Floor1[];
+extern const u8 gText_Floor2[];
+extern const u8 gText_Floor3[];
+extern const u8 gText_Floor4[];
+extern const u8 gText_Floor5[];
+extern const u8 gText_Floor6[];
+extern const u8 gText_Floor7[];
+extern const u8 gText_Peak[];
+extern const u8 gText_SafariBallStock[];
+extern const u8 gText_BattlePyramidFloor[];
+
 #endif //GUARD_STRINGS_H
