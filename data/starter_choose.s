@@ -15,7 +15,10 @@ gBirchGrassTilemap:: @ 85B0C0C
 	.incbin "baserom.gba", 0x5b0c0c, 0x1f8
 
 gBirchHelpGfx:: @ 85B0E04
-	.incbin "baserom.gba", 0x5b0e04, 0xfc8
+	.incbin "baserom.gba", 0x5b0e04, 0xaa8
+
+gUnknown_085B18AC:: @ 85B18AC
+	.incbin "baserom.gba", 0x5b18AC, 0x520
 
 gUnknown_085B1DCC:: @ 85B1DCC
 	.incbin "baserom.gba", 0x5b1dcc, 0x10
