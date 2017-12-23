@@ -4,6 +4,7 @@ monfrontdir := graphics/pokemon/anim_front_pics
 monpaldir := graphics/pokemon/palettes
 tilesetdir := data/tilesets
 fontdir := data/graphics/fonts
+menudir := graphics/interface
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -292,3 +293,7 @@ graphics/pokenav/region_map.8bpp: %.8bpp: %.png
 
 graphics/misc/japanese_hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
+
+$(menudir)/menu.gbapal: $(menudir)/menu_0.gbapal $(menudir)/menu_1.gbapal
+	@cat $(menudir)/menu_0.gbapal $(menudir)/menu_1.gbapal >$@
+

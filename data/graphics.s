@@ -1,26 +1,33 @@
 	.section gfx_data, "aw", %progbits
 
+	.align 2
 gBattleTextboxTiles:: @ 8C00000
-	.incbin "baserom.gba", 0xc00000, 0x4e0
+	.incbin "graphics/interface/menu.4bpp.lz" @ menu window and arrows
 
+	.align 2
 gBattleTextboxPalette:: @ 8C004E0
-	.incbin "baserom.gba", 0xc004e0, 0x44
+	.incbin "graphics/interface/menu.gbapal.lz"
 
+	.align 2
 gBattleTextboxTilemap:: @ 8C00524
-	.incbin "baserom.gba", 0xc00524, 0x22c
+	.incbin "graphics/interface/menu_map.bin.lz"
 
 @ 8C00750
 	.include "data/graphics/pokemon/circled_question_mark_graphics.inc"
 
 @ 8C00C10
-	.incbin "baserom.gba", 0xc00c10, 0xa34
+	.incbin "graphics/unused/old_charmap.4bpp.lz" @ japanese table and bunch of stuff
+	.incbin "graphics/unused/old_charmap.bin.lz"
+	.incbin "graphics/unused/old_charmap.gbapal.lz"
 
-gUnknown_08C01644:: @ 8C01644
-	.incbin "baserom.gba", 0xc01644, 0xe0
+	.align 2
+gSmokescreenImpactTiles:: @ 8C01644
+	.incbin "graphics/battle_anims/sprites/smokescreen_impact.4bpp.lz"
 
-gUnknown_08C01724:: @ 8C01724
-	.incbin "baserom.gba", 0xc01724, 0x18
-	
+	.align 2
+gSmokescreenImpactPalette:: @ 8C01724
+	.incbin "graphics/battle_anims/sprites/smokescreen_impact.gbapal.lz"
+
 	.align 2
 gInterfaceGfx_PokeBall::
 	.incbin "graphics/interface/ball/poke.4bpp.lz" @ 0xBC
@@ -47,11 +54,11 @@ gInterfacePal_SafariBall::
 
 	.align 2
 gInterfaceGfx_UltraBall::
-	.incbin "baserom.gba", 0xC019E0, 0xB4
+	.incbin "graphics/interface/ball/ultra.4bpp.lz" @ 0xBC
 
 	.align 2
 gInterfacePal_UltraBall::
-	.incbin "baserom.gba", 0xC01A94, 0x20
+	.incbin "graphics/interface/ball/ultra.gbapal.lz"
 
 	.align 2
 gInterfaceGfx_MasterBall::
