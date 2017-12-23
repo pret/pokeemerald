@@ -518,8 +518,501 @@ gUnknown_08C08F0C::
 gUnknown_08C093C8::
 	.incbin "graphics/battle_interface/unused_window.gbapal.lz"
 
+	.align 2
 gUnknown_08C093F0:: @ 8C093F0
-	.incbin "baserom.gba", 0xc093f0, 0x87ac
+	.incbin "graphics/interface/hp_numbers.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_046::
+	.incbin "graphics/battle_anims/sprites/046.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_046::
+	.incbin "graphics/battle_anims/sprites/046.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_047::
+	.incbin "graphics/battle_anims/sprites/047.gbapal.lz"
+
+	@ more unused windows
+	.incbin "graphics/battle_interface/unused_window2.4bpp.lz"
+	.incbin "graphics/battle_interface/unused_window2bar.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_048::
+	.incbin "graphics/battle_anims/sprites/048.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_048::
+	.incbin "graphics/battle_anims/sprites/048.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_049::
+	.incbin "graphics/battle_anims/sprites/049.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_050::
+	.incbin "graphics/battle_anims/sprites/050.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_050::
+	.incbin "graphics/battle_anims/sprites/050.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_051::
+	.incbin "graphics/battle_anims/sprites/051.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_052::
+	.incbin "graphics/battle_anims/sprites/052.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/line_sketch.4bpp.lz" @ unused
+
+	.align 2
+	.incbin "graphics/unused/line_sketch.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_054::
+	.incbin "graphics/battle_anims/sprites/054.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_054::
+	.incbin "graphics/battle_anims/sprites/054.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_056::
+	.incbin "graphics/battle_anims/sprites/056.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_056::
+	.incbin "graphics/battle_anims/sprites/056.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_055::
+	.incbin "graphics/battle_anims/sprites/055.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_057::
+	.incbin "graphics/battle_anims/sprites/057.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_057::
+	.incbin "graphics/battle_anims/sprites/057.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_058::
+	.incbin "graphics/battle_anims/sprites/058.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_058::
+	.incbin "graphics/battle_anims/sprites/058.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_059::
+	.incbin "graphics/battle_anims/sprites/059.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_059::
+	.incbin "graphics/battle_anims/sprites/059.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_060::
+	.incbin "graphics/battle_anims/sprites/060.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_060::
+	.incbin "graphics/battle_anims/sprites/060.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_061::
+	.incbin "graphics/battle_anims/sprites/061.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_061::
+	.incbin "graphics/battle_anims/sprites/061.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_062::
+	.incbin "graphics/battle_anims/sprites/062.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_062::
+	.incbin "graphics/battle_anims/sprites/062.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_063::
+	.incbin "graphics/battle_anims/sprites/063.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_063::
+	.incbin "graphics/battle_anims/sprites/063.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unused/metronome_hand_small.4bpp.lz" @ unused, was for metronome at one point
+
+	.align 2
+gBattleAnimSpritePalette_091::
+	.incbin "graphics/battle_anims/sprites/091.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_065::
+	.incbin "graphics/battle_anims/sprites/065.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_065::
+	.incbin "graphics/battle_anims/sprites/065.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_066::
+	.incbin "graphics/battle_anims/sprites/066.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_066::
+	.incbin "graphics/battle_anims/sprites/066.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_070::
+	.incbin "graphics/battle_anims/sprites/070.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_070::
+	.incbin "graphics/battle_anims/sprites/070.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_071::
+	.incbin "graphics/battle_anims/sprites/071.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_072::
+	.incbin "graphics/battle_anims/sprites/072.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_072::
+	.incbin "graphics/battle_anims/sprites/072.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_073::
+	.incbin "graphics/battle_anims/sprites/073.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_073::
+	.incbin "graphics/battle_anims/sprites/073.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_075::
+	.incbin "graphics/battle_anims/sprites/075.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_075::
+	.incbin "graphics/battle_anims/sprites/075.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_078::
+	.incbin "graphics/battle_anims/sprites/078.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_078::
+	.incbin "graphics/battle_anims/sprites/078.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_079::
+	.incbin "graphics/battle_anims/sprites/079.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_080::
+	.incbin "graphics/battle_anims/sprites/080.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_080::
+	.incbin "graphics/battle_anims/sprites/080.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_081::
+	.incbin "graphics/battle_anims/sprites/081.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_081::
+	.incbin "graphics/battle_anims/sprites/081.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unknown/unknown_C0CA1C.bin"
+
+	.align 2
+	.incbin "graphics/unknown/unknown_C0CA40.bin"
+
+	.align 2
+	.incbin "graphics/unknown/unknown_C0CA64.bin"
+
+	.align 2
+	.incbin "graphics/unused/line_sketch_2.8bpp.lz"
+
+	.align 2
+	.incbin "graphics/unknown/unknown_C0CAE0.bin"
+
+	.align 2
+	.incbin "graphics/unused/line_sketch_2.bin.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_082::
+	.incbin "graphics/battle_anims/sprites/082.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_082::
+	.incbin "graphics/battle_anims/sprites/082.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_083::
+	.incbin "graphics/battle_anims/sprites/083.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_084::
+	.incbin "graphics/battle_anims/sprites/084.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_085::
+	.incbin "graphics/battle_anims/sprites/085.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_086::
+	.incbin "graphics/battle_anims/sprites/086.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_088::
+	.incbin "graphics/battle_anims/sprites/088.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_089::
+	.incbin "graphics/battle_anims/sprites/089.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_090::
+	.incbin "graphics/battle_anims/sprites/090.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_092::
+	.incbin "graphics/battle_anims/sprites/092.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_093::
+	.incbin "graphics/battle_anims/sprites/093.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_094::
+	.incbin "graphics/battle_anims/sprites/094.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unknown/unknown_D0D2B4.bin.lz"
+
+	.align 2
+gBattleAnimSpritePalette_095::
+	.incbin "graphics/battle_anims/sprites/095.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_096::
+	.incbin "graphics/battle_anims/sprites/096.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_097::
+	.incbin "graphics/battle_anims/sprites/097.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_100::
+	.incbin "graphics/battle_anims/sprites/100.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_101::
+	.incbin "graphics/battle_anims/sprites/101.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_103::
+	.incbin "graphics/battle_anims/sprites/103.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_083::
+	.incbin "graphics/battle_anims/sprites/083.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_084::
+	.incbin "graphics/battle_anims/sprites/084.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_085::
+	.incbin "graphics/battle_anims/sprites/085.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_086::
+	.incbin "graphics/battle_anims/sprites/086.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_088::
+	.incbin "graphics/battle_anims/sprites/088.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_089::
+	.incbin "graphics/battle_anims/sprites/089.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_090::
+	.incbin "graphics/battle_anims/sprites/090.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_091::
+	.incbin "graphics/battle_anims/sprites/091.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_092::
+	.incbin "graphics/battle_anims/sprites/092.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_093::
+	.incbin "graphics/battle_anims/sprites/093.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_094::
+	.incbin "graphics/battle_anims/sprites/094.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_095::
+	.incbin "graphics/battle_anims/sprites/095.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_096::
+	.incbin "graphics/battle_anims/sprites/096.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_097::
+	.incbin "graphics/battle_anims/sprites/097.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_098::
+	.incbin "graphics/battle_anims/sprites/098.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_100::
+	.incbin "graphics/battle_anims/sprites/100.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_101::
+	.incbin "graphics/battle_anims/sprites/101.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_102::
+	.incbin "graphics/battle_anims/sprites/102.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_103::
+	.incbin "graphics/battle_anims/sprites/103.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_104::
+	.incbin "graphics/battle_anims/sprites/104.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_104::
+	.incbin "graphics/battle_anims/sprites/104.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_105::
+	.incbin "graphics/battle_anims/sprites/105.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_105::
+	.incbin "graphics/battle_anims/sprites/105.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_106::
+	.incbin "graphics/battle_anims/sprites/106.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_107::
+	.incbin "graphics/battle_anims/sprites/107.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_107::
+	.incbin "graphics/battle_anims/sprites/107.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_108::
+	.incbin "graphics/battle_anims/sprites/108.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_109::
+	.incbin "graphics/battle_anims/sprites/109.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_109::
+	.incbin "graphics/battle_anims/sprites/109.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_110::
+	.incbin "graphics/battle_anims/sprites/110.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_111::
+	.incbin "graphics/battle_anims/sprites/111.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_111::
+	.incbin "graphics/battle_anims/sprites/111.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_112::
+	.incbin "graphics/battle_anims/sprites/112.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_112::
+	.incbin "graphics/battle_anims/sprites/112.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_113::
+	.incbin "graphics/battle_anims/sprites/113.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_113::
+	.incbin "graphics/battle_anims/sprites/113.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_114::
+	.incbin "graphics/battle_anims/sprites/114.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_114::
+	.incbin "graphics/battle_anims/sprites/114.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unused/blue_frame.bin.lz" @  P1, P2, P3 and P4 tilemaps?
+
+	.align 2
+	.incbin "graphics/unused/redyellowgreen_frame.bin.lz"
+
+	.align 2
+	.incbin "graphics/unused/color_frames.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/color_frames.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_115::
+	.incbin "graphics/battle_anims/sprites/115.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/water_splash.8bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/water_splash.bin.lz"
+
+	.align 2
+	.incbin "graphics/unused/water_splash.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unused/basic_frame.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/basic_frame.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unused/basic_frame.bin.lz"
 
     .align 2
 gBattleInterface_BallStatusBarPal:: @ 8C11B9C

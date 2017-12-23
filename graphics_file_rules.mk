@@ -7,6 +7,7 @@ fontdir := data/graphics/fonts
 menudir := graphics/interface
 btanimgfxdir := graphics/battle_anims/sprites
 unusedgfxdir := graphics/unused
+btintgfxdir := graphics/battle_interface/
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -316,3 +317,12 @@ $(unusedgfxdir)/obi2.4bpp: $(unusedgfxdir)/old_bulbasaur2.4bpp $(unusedgfxdir)/o
 
 $(menudir)/hp_numbers.4bpp: $(menudir)/hpbar_anim.4bpp $(menudir)/numbers1.4bpp $(menudir)/numbers2.4bpp
 	@cat $(menudir)/hpbar_anim.4bpp $(menudir)/numbers1.4bpp $(menudir)/numbers2.4bpp >$@
+
+$(unusedgfxdir)/redyellowgreen_frame.bin: $(unusedgfxdir)/red_frame.bin $(unusedgfxdir)/yellow_frame.bin $(unusedgfxdir)/green_frame.bin $(unusedgfxdir)/blank_frame.bin
+	@cat $(unusedgfxdir)/red_frame.bin $(unusedgfxdir)/yellow_frame.bin $(unusedgfxdir)/green_frame.bin $(unusedgfxdir)/blank_frame.bin >$@
+
+$(unusedgfxdir)/color_frames.4bpp: $(unusedgfxdir)/color_frames.png
+	$(GFX) $< $@ -num_tiles 353
+
+$(btintgfxdir)/unused_window2bar.4bpp: $(btintgfxdir)/unused_window2bar.png
+	$(GFX) $< $@ -num_tiles 5
