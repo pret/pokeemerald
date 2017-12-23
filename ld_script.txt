@@ -488,7 +488,6 @@ SECTIONS {
         data/pokemon_summary_screen.o(.rodata);
         data/pokenav.o(.rodata);
         src/rayquaza_scene.o(.rodata);
-        data/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         data/trainer_rematch.o(.rodata);
         data/unk_sprite_file.o(.rodata);
