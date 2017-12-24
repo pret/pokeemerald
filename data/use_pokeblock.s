@@ -2,7 +2,7 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-    
+
 gUnknown_085DFA60:: @ 85DFA60
 	.incbin "baserom.gba", 0x5dfa60, 0x20
 
@@ -47,10 +47,10 @@ sContestStatNames:: @ 85DFD04
 	.4byte gText_Beauty3
 
 gUnknown_085DFD18:: @ 85DFD18
-	.incbin "baserom.gba", 0x5dfd18, 0x8
+	obj_tiles gUnknown_08DCCD5C, 0x200, 0
 
 gUnknown_085DFD20:: @ 85DFD20
-	.incbin "baserom.gba", 0x5dfd20, 0x8
+	obj_pal gUnknown_08DCCD3C, 0
 
 gUnknown_085DFD28:: @ 85DFD28
 	.incbin "baserom.gba", 0x5dfd28, 0x34
@@ -62,4 +62,5 @@ gUnknown_085DFDA0:: @ 85DFDA0
 	.incbin "baserom.gba", 0x5dfda0, 0x18
 
 gUnknown_085DFDB8:: @ 85DFDB8
-	.incbin "baserom.gba", 0x5dfdb8, 0x8
+	.4byte gUnknown_08DCCB98
+	.4byte 1

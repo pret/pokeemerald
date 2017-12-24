@@ -28,15 +28,15 @@ sub_80D2CC4: @ 80D2CC4
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, =gUnknown_0857C570
+	ldr r0, =sMonIconOamData
 	str r0, [sp, 0x18]
 	adds r0, r4, 0
 	adds r2, r5, 0
 	bl GetMonIconPtr
 	str r0, [sp, 0x1C]
-	ldr r0, =gUnknown_0857C5B4
+	ldr r0, =sMonIconAnims
 	str r0, [sp, 0x20]
-	ldr r0, =gUnknown_0857C5E8
+	ldr r0, =sMonIconAffineAnims
 	str r0, [sp, 0x24]
 	str r6, [sp, 0x28]
 	ldr r0, =gMonIconPaletteIndices
@@ -102,13 +102,13 @@ sub_80D2D78: @ 80D2D78
 	lsls r6, 24
 	lsrs r6, 24
 	mov r3, sp
-	ldr r2, =gUnknown_0857C570
+	ldr r2, =sMonIconOamData
 	str r2, [sp]
 	movs r2, 0
 	str r2, [sp, 0x4]
-	ldr r2, =gUnknown_0857C5B4
+	ldr r2, =sMonIconAnims
 	str r2, [sp, 0x8]
-	ldr r2, =gUnknown_0857C5E8
+	ldr r2, =sMonIconAffineAnims
 	str r2, [sp, 0xC]
 	str r1, [sp, 0x10]
 	ldr r2, =gMonIconPaletteIndices
@@ -601,7 +601,7 @@ _080D3126:
 	strb r7, [r5]
 	b _080D31A4
 _080D312A:
-	ldr r2, =gUnknown_0857C5F0
+	ldr r2, =sSpriteImageSizes
 	ldrb r1, [r4, 0x3]
 	lsrs r1, 6
 	lsls r1, 1
@@ -689,7 +689,7 @@ sub_80D31B4: @ 80D31B4
 	mov r8, r0
 	movs r0, 0
 	str r0, [sp, 0x30]
-	ldr r2, =gUnknown_0857C5F0
+	ldr r2, =sSpriteImageSizes
 	mov r0, r9
 	ldr r6, [r0]
 	ldrb r1, [r6, 0x3]
@@ -776,7 +776,7 @@ sub_80D328C: @ 80D328C
 	sub sp, 0x8
 	movs r1, 0
 	str r1, [sp]
-	ldr r3, =gUnknown_0857C5F0
+	ldr r3, =sSpriteImageSizes
 	ldrb r2, [r0, 0x3]
 	lsrs r2, 6
 	lsls r2, 1
