@@ -163,7 +163,7 @@ gSpecials:: @ 81DBA64
 	def_special sub_8138BC8
 	def_special sub_8138B8C
 	def_special sub_814FC9C
-	def_special sub_8085784
+	def_special Overworld_PlaySpecialMapMusic
 	def_special StartWallClock
 	def_special Special_ViewWallClock
 	def_special ChooseStarter

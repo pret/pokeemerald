@@ -2212,8 +2212,8 @@ call_ResetMapMusic: @ 8085778
 	bx r0
 	thumb_func_end call_ResetMapMusic
 
-	thumb_func_start sub_8085784
-sub_8085784: @ 8085784
+	thumb_func_start Overworld_PlaySpecialMapMusic
+Overworld_PlaySpecialMapMusic: @ 8085784
 	push {r4,lr}
 	bl sav1_map_get_music
 	lsls r0, 16
@@ -2261,7 +2261,7 @@ _080857E8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8085784
+	thumb_func_end Overworld_PlaySpecialMapMusic
 
 	thumb_func_start Overworld_SetSavedMusic
 Overworld_SetSavedMusic: @ 80857F4
