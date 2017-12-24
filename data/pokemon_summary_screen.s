@@ -121,7 +121,12 @@ gUnknown_0861F2C0:: @ 861F2C0
 	.incbin "baserom.gba", 0x61f2c0, 0x18
 
 gUnknown_0861F2D8:: @ 861F2D8
-	.incbin "baserom.gba", 0x61f2d8, 0x30
+	.4byte gMenuText_Use, sub_81C61E0
+	.4byte gMenuText_Toss, sub_81C62C4
+	.4byte gMenuText_Give, sub_81C6648
+	.4byte gText_Cancel2, sub_81C6258
+	.4byte gMenuText_Use, sub_81C679C
+	.4byte gText_EmptyString2, NULL
 
 gUnknown_0861F308:: @ 861F308
 	.incbin "baserom.gba", 0x61f308, 0x4
@@ -136,7 +141,8 @@ gUnknown_0861F310:: @ 861F310
 	.incbin "baserom.gba", 0x61f310, 0x4
 
 gUnknown_0861F314:: @ 861F314
-	.incbin "baserom.gba", 0x61f314, 0x8
+	.4byte sub_81C654C
+	.4byte sub_81C63D0
 
 gUnknown_0861F31C:: @ 861F31C
 	.incbin "baserom.gba", 0x61f31c, 0xc
