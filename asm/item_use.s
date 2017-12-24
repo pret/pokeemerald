@@ -354,7 +354,7 @@ _080FD320:
 	bl sav1_map_is_biking_allowed
 	cmp r0, 0x1
 	bne _080FD348
-	bl sub_8119FF8
+	bl IsBikingDisallowedByPlayer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FD348

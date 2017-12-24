@@ -7975,7 +7975,7 @@ _080AF120:
 sub_80AF128: @ 80AF128
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_black
 	ldr r0, =task0A_nop_for_a_while
 	movs r1, 0xA
@@ -8006,7 +8006,7 @@ _080AF160:
 sub_80AF168: @ 80AF168
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_black
 	ldr r0, =task0A_asap_script_env_2_enable_and_set_ctx_running
 	movs r1, 0xA
@@ -8092,7 +8092,7 @@ _080AF20E:
 sub_80AF214: @ 80AF214
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl palette_bg_faded_fill_black
 	ldr r0, =task_mpl_807DD60
 	movs r1, 0xA
@@ -8220,7 +8220,7 @@ _080AF30C:
 sub_80AF314: @ 80AF314
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl palette_bg_faded_fill_black
 	ldr r0, =sub_80AF234
 	movs r1, 0xA
@@ -8279,7 +8279,7 @@ _080AF37E:
 	thumb_func_start mapldr_default
 mapldr_default: @ 80AF398
 	push {lr}
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl sub_80AF334
 	bl ScriptContext2_Enable
@@ -8290,7 +8290,7 @@ mapldr_default: @ 80AF398
 	thumb_func_start sub_80AF3B0
 sub_80AF3B0: @ 80AF3B0
 	push {lr}
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl sub_80AF08C
 	bl sub_80AF334
 	bl ScriptContext2_Enable
@@ -8304,7 +8304,7 @@ sub_80AF3C8: @ 80AF3C8
 	bl sub_81D6534
 	cmp r0, 0
 	bne _080AF3D6
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 _080AF3D6:
 	bl pal_fill_black
 	bl sub_80AF334
@@ -8316,7 +8316,7 @@ _080AF3D6:
 	thumb_func_start sub_80AF3E8
 sub_80AF3E8: @ 80AF3E8
 	push {lr}
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	movs r0, 0x2E
 	bl PlaySE
@@ -8332,7 +8332,7 @@ sub_80AF3E8: @ 80AF3E8
 	thumb_func_start sub_80AF40C
 sub_80AF40C: @ 80AF40C
 	push {lr}
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	movs r0, 0x2E
 	bl PlaySE
@@ -8680,7 +8680,7 @@ sub_80AF6D4: @ 80AF6D4
 sub_80AF6F0: @ 80AF6F0
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_black
 	ldr r0, =task_mpl_807E3C8
 	movs r1, 0xA

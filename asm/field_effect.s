@@ -2027,7 +2027,7 @@ _080B6A8A:
 	thumb_func_start mapldr_08084390
 mapldr_08084390: @ 80B6AA4
 	push {r4,lr}
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_black
 	ldr r0, =c3_080843F8
 	movs r1, 0
@@ -2113,7 +2113,7 @@ _080B6B58:
 	thumb_func_start sub_80B6B68
 sub_80B6B68: @ 80B6B68
 	push {lr}
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	bl FreezeMapObjects
@@ -2780,7 +2780,7 @@ _080B709C:
 	thumb_func_start sub_80B70B4
 sub_80B70B4: @ 80B70B4
 	push {lr}
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	ldr r0, =sub_80B70DC
@@ -3747,7 +3747,7 @@ _080B784C:
 	thumb_func_start mapldr_080851BC
 mapldr_080851BC: @ 80B7868
 	push {lr}
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	ldr r0, =gFieldCallback
@@ -4458,7 +4458,7 @@ _080B7E40:
 	thumb_func_start mapldr_080859D4
 mapldr_080859D4: @ 80B7E48
 	push {lr}
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	bl FreezeMapObjects
@@ -4903,7 +4903,7 @@ _080B81E6:
 	thumb_func_start mapldr_08085D88
 mapldr_08085D88: @ 80B8200
 	push {lr}
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	bl FreezeMapObjects

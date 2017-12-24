@@ -62,7 +62,7 @@ _0809BF3C:
 	cmp r6, 0
 	bne _0809BFA2
 _0809BF40:
-	bl sub_811A138
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x4
