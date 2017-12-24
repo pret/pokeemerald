@@ -292,3 +292,6 @@ graphics/pokenav/region_map.8bpp: %.8bpp: %.png
 
 graphics/misc/japanese_hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
+
+graphics/picture_frame/frame5.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 86
