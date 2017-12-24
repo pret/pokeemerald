@@ -7,7 +7,8 @@ fontdir := data/graphics/fonts
 menudir := graphics/interface
 btanimgfxdir := graphics/battle_anims/sprites
 unusedgfxdir := graphics/unused
-btintgfxdir := graphics/battle_interface/
+unknowngfxdir := graphics/unknown
+btintgfxdir := graphics/battle_interface
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -332,3 +333,18 @@ $(unusedgfxdir)/old_contest.4bpp: $(unusedgfxdir)/old_contest_frame_1.4bpp $(unu
 
 $(unusedgfxdir)/old_contest_2.4bpp: $(unusedgfxdir)/old_contest_2_1.4bpp $(unusedgfxdir)/old_contest_2_2.4bpp
 	@cat $(unusedgfxdir)/old_contest_2_1.4bpp $(unusedgfxdir)/old_contest_2_2.4bpp >$@
+
+$(unknowngfxdir)/unknown_C19470.4bpp: $(unknowngfxdir)/unknown_C19470.png
+	$(GFX) $< $@ -num_tiles 36
+
+$(btanimgfxdir)/141.4bpp: $(btanimgfxdir)/141_0.4bpp $(btanimgfxdir)/141_1.4bpp $(btanimgfxdir)/141_2.4bpp $(btanimgfxdir)/141_3.4bpp $(btanimgfxdir)/141_4.4bpp
+	@cat $(btanimgfxdir)/141_0.4bpp $(btanimgfxdir)/141_1.4bpp $(btanimgfxdir)/141_2.4bpp $(btanimgfxdir)/141_3.4bpp $(btanimgfxdir)/141_4.4bpp >$@
+
+$(btanimgfxdir)/074.4bpp: $(btanimgfxdir)/074_0.4bpp $(btanimgfxdir)/074_1.4bpp
+	@cat $(btanimgfxdir)/074_0.4bpp $(btanimgfxdir)/074_1.4bpp >$@
+
+$(btanimgfxdir)/159.4bpp: $(btanimgfxdir)/159_0.4bpp $(btanimgfxdir)/159_1.4bpp
+	@cat $(btanimgfxdir)/159_0.4bpp $(btanimgfxdir)/159_1.4bpp >$@
+
+$(btanimgfxdir)/001.4bpp: $(btanimgfxdir)/001_0.4bpp $(btanimgfxdir)/001_1.4bpp
+	@cat $(btanimgfxdir)/001_0.4bpp $(btanimgfxdir)/001_1.4bpp >$@

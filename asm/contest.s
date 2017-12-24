@@ -6652,7 +6652,7 @@ sub_80DB0C4: @ 80DB0C4
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_08587C00
 	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_08C1C6B8
+	ldr r0, =gContest2Pal
 	movs r1, 0x88
 	lsls r1, 1
 	movs r2, 0x20
