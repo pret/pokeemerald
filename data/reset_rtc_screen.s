@@ -1,8 +1,8 @@
-    .include "asm/macros.inc"
-    .include "constants/constants.inc"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
-    .section .rodata
-    .align 2, 0
+	.section .rodata
+	.align 2, 0
 
 gUnknown_08510404:: @ 8510404 struct BgTemplate
 	.4byte 0x000001f0

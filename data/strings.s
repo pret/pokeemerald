@@ -304,13 +304,13 @@ gText_UnkWeight:: @ 85E86D0
 	.string "????.? lbs.$"
 
 gUnknown_085E86DC:: @ 85E86DC
-	.string "                       POKéMON$"
+	.string "					   POKéMON$"
 
 gUnknown_085E86FB:: @ 85E86FB
-	.string "{CLEAR_TO 0x0C}    ’    ”$"
+	.string "{CLEAR_TO 0x0C}	’	”$"
 
 gUnknown_085E8709:: @ 85E8709
-	.string "        .   lbs.$"
+	.string "		.   lbs.$"
 
 gUnknown_085E871A:: @ 85E871A
 	.string "$"
@@ -1923,7 +1923,7 @@ gUnknown_085EAFE8:: @ 85EAFE8
 	.string "MUDKIP DOLL   1,000 COINS$"
 
 gUnknown_085EB002:: @ 85EB002
-	.string "  50 COINS    ¥1,000$"
+	.string "  50 COINS	¥1,000$"
 
 gUnknown_085EB017:: @ 85EB017
 	.string "500 COINS  ¥10,000$"
@@ -2121,7 +2121,7 @@ gText_MenuOptionExit:: @ 85EB285
 	.string "EXIT$"
 
 gUnknown_085EB28A:: @ 85EB28A
-    .string "  "
+	.string "  "
 
 gUnknown_085EB28C:: @ 85EB28C
 	.string "5BP$"
@@ -4800,7 +4800,7 @@ gText_AcceptThisPkmn:: @ 85EECF0
 	.string "Accept this POKéMON?$"
 
 gUnknown_085EED05:: @ 85EED05
-	.string "    $"
+	.string "	$"
 
 gText_SamePkmnInPartyAlready:: @ 85EED0A
 	.string "Same {PKMN} in party already.$"

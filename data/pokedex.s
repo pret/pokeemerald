@@ -1,8 +1,8 @@
-    .include "asm/macros.inc"
-    .include "constants/constants.inc"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
-    .section .rodata
-    .align 2, 0
+	.section .rodata
+	.align 2, 0
 	
 .macro unk_dex_struct texts, a2, a3, a4
 	.4byte \texts

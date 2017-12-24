@@ -1,119 +1,119 @@
 @ format: attacking type, defending type, damage multiplier
 @ the multiplier is a (decimal) fixed-point number:
-@     20 is ×2.0
-@     05 is ×0.5
-@     00 is ×0
+@	 20 is ×2.0
+@	 05 is ×0.5
+@	 00 is ×0
 
 gTypeEffectiveness:: @ 831ACE8
-	.byte   TYPE_NORMAL,     TYPE_ROCK,  5
-	.byte   TYPE_NORMAL,    TYPE_STEEL,  5
-	.byte     TYPE_FIRE,     TYPE_FIRE,  5
-	.byte     TYPE_FIRE,    TYPE_WATER,  5
-	.byte     TYPE_FIRE,    TYPE_GRASS, 20
-	.byte     TYPE_FIRE,      TYPE_ICE, 20
-	.byte     TYPE_FIRE,      TYPE_BUG, 20
-	.byte     TYPE_FIRE,     TYPE_ROCK,  5
-	.byte     TYPE_FIRE,   TYPE_DRAGON,  5
-	.byte     TYPE_FIRE,    TYPE_STEEL, 20
-	.byte    TYPE_WATER,     TYPE_FIRE, 20
-	.byte    TYPE_WATER,    TYPE_WATER,  5
-	.byte    TYPE_WATER,    TYPE_GRASS,  5
-	.byte    TYPE_WATER,   TYPE_GROUND, 20
-	.byte    TYPE_WATER,     TYPE_ROCK, 20
-	.byte    TYPE_WATER,   TYPE_DRAGON,  5
-	.byte TYPE_ELECTRIC,    TYPE_WATER, 20
+	.byte   TYPE_NORMAL,	 TYPE_ROCK,  5
+	.byte   TYPE_NORMAL,	TYPE_STEEL,  5
+	.byte	 TYPE_FIRE,	 TYPE_FIRE,  5
+	.byte	 TYPE_FIRE,	TYPE_WATER,  5
+	.byte	 TYPE_FIRE,	TYPE_GRASS, 20
+	.byte	 TYPE_FIRE,	  TYPE_ICE, 20
+	.byte	 TYPE_FIRE,	  TYPE_BUG, 20
+	.byte	 TYPE_FIRE,	 TYPE_ROCK,  5
+	.byte	 TYPE_FIRE,   TYPE_DRAGON,  5
+	.byte	 TYPE_FIRE,	TYPE_STEEL, 20
+	.byte	TYPE_WATER,	 TYPE_FIRE, 20
+	.byte	TYPE_WATER,	TYPE_WATER,  5
+	.byte	TYPE_WATER,	TYPE_GRASS,  5
+	.byte	TYPE_WATER,   TYPE_GROUND, 20
+	.byte	TYPE_WATER,	 TYPE_ROCK, 20
+	.byte	TYPE_WATER,   TYPE_DRAGON,  5
+	.byte TYPE_ELECTRIC,	TYPE_WATER, 20
 	.byte TYPE_ELECTRIC, TYPE_ELECTRIC,  5
-	.byte TYPE_ELECTRIC,    TYPE_GRASS,  5
+	.byte TYPE_ELECTRIC,	TYPE_GRASS,  5
 	.byte TYPE_ELECTRIC,   TYPE_GROUND,  0
 	.byte TYPE_ELECTRIC,   TYPE_FLYING, 20
 	.byte TYPE_ELECTRIC,   TYPE_DRAGON,  5
-	.byte    TYPE_GRASS,     TYPE_FIRE,  5
-	.byte    TYPE_GRASS,    TYPE_WATER, 20
-	.byte    TYPE_GRASS,    TYPE_GRASS,  5
-	.byte    TYPE_GRASS,   TYPE_POISON,  5
-	.byte    TYPE_GRASS,   TYPE_GROUND, 20
-	.byte    TYPE_GRASS,   TYPE_FLYING,  5
-	.byte    TYPE_GRASS,      TYPE_BUG,  5
-	.byte    TYPE_GRASS,     TYPE_ROCK, 20
-	.byte    TYPE_GRASS,   TYPE_DRAGON,  5
-	.byte    TYPE_GRASS,    TYPE_STEEL,  5
-	.byte      TYPE_ICE,    TYPE_WATER,  5
-	.byte      TYPE_ICE,    TYPE_GRASS, 20
-	.byte      TYPE_ICE,      TYPE_ICE,  5
-	.byte      TYPE_ICE,   TYPE_GROUND, 20
-	.byte      TYPE_ICE,   TYPE_FLYING, 20
-	.byte      TYPE_ICE,   TYPE_DRAGON, 20
-	.byte      TYPE_ICE,    TYPE_STEEL,  5
-	.byte      TYPE_ICE,     TYPE_FIRE,  5
+	.byte	TYPE_GRASS,	 TYPE_FIRE,  5
+	.byte	TYPE_GRASS,	TYPE_WATER, 20
+	.byte	TYPE_GRASS,	TYPE_GRASS,  5
+	.byte	TYPE_GRASS,   TYPE_POISON,  5
+	.byte	TYPE_GRASS,   TYPE_GROUND, 20
+	.byte	TYPE_GRASS,   TYPE_FLYING,  5
+	.byte	TYPE_GRASS,	  TYPE_BUG,  5
+	.byte	TYPE_GRASS,	 TYPE_ROCK, 20
+	.byte	TYPE_GRASS,   TYPE_DRAGON,  5
+	.byte	TYPE_GRASS,	TYPE_STEEL,  5
+	.byte	  TYPE_ICE,	TYPE_WATER,  5
+	.byte	  TYPE_ICE,	TYPE_GRASS, 20
+	.byte	  TYPE_ICE,	  TYPE_ICE,  5
+	.byte	  TYPE_ICE,   TYPE_GROUND, 20
+	.byte	  TYPE_ICE,   TYPE_FLYING, 20
+	.byte	  TYPE_ICE,   TYPE_DRAGON, 20
+	.byte	  TYPE_ICE,	TYPE_STEEL,  5
+	.byte	  TYPE_ICE,	 TYPE_FIRE,  5
 	.byte TYPE_FIGHTING,   TYPE_NORMAL, 20
-	.byte TYPE_FIGHTING,      TYPE_ICE, 20
+	.byte TYPE_FIGHTING,	  TYPE_ICE, 20
 	.byte TYPE_FIGHTING,   TYPE_POISON,  5
 	.byte TYPE_FIGHTING,   TYPE_FLYING,  5
 	.byte TYPE_FIGHTING,  TYPE_PSYCHIC,  5
-	.byte TYPE_FIGHTING,      TYPE_BUG,  5
-	.byte TYPE_FIGHTING,     TYPE_ROCK, 20
-	.byte TYPE_FIGHTING,     TYPE_DARK, 20
-	.byte TYPE_FIGHTING,    TYPE_STEEL, 20
-	.byte   TYPE_POISON,    TYPE_GRASS, 20
+	.byte TYPE_FIGHTING,	  TYPE_BUG,  5
+	.byte TYPE_FIGHTING,	 TYPE_ROCK, 20
+	.byte TYPE_FIGHTING,	 TYPE_DARK, 20
+	.byte TYPE_FIGHTING,	TYPE_STEEL, 20
+	.byte   TYPE_POISON,	TYPE_GRASS, 20
 	.byte   TYPE_POISON,   TYPE_POISON,  5
 	.byte   TYPE_POISON,   TYPE_GROUND,  5
-	.byte   TYPE_POISON,     TYPE_ROCK,  5
-	.byte   TYPE_POISON,    TYPE_GHOST,  5
-	.byte   TYPE_POISON,    TYPE_STEEL,  0
-	.byte   TYPE_GROUND,     TYPE_FIRE, 20
+	.byte   TYPE_POISON,	 TYPE_ROCK,  5
+	.byte   TYPE_POISON,	TYPE_GHOST,  5
+	.byte   TYPE_POISON,	TYPE_STEEL,  0
+	.byte   TYPE_GROUND,	 TYPE_FIRE, 20
 	.byte   TYPE_GROUND, TYPE_ELECTRIC, 20
-	.byte   TYPE_GROUND,    TYPE_GRASS,  5
+	.byte   TYPE_GROUND,	TYPE_GRASS,  5
 	.byte   TYPE_GROUND,   TYPE_POISON, 20
 	.byte   TYPE_GROUND,   TYPE_FLYING,  0
-	.byte   TYPE_GROUND,      TYPE_BUG,  5
-	.byte   TYPE_GROUND,     TYPE_ROCK, 20
-	.byte   TYPE_GROUND,    TYPE_STEEL, 20
+	.byte   TYPE_GROUND,	  TYPE_BUG,  5
+	.byte   TYPE_GROUND,	 TYPE_ROCK, 20
+	.byte   TYPE_GROUND,	TYPE_STEEL, 20
 	.byte   TYPE_FLYING, TYPE_ELECTRIC,  5
-	.byte   TYPE_FLYING,    TYPE_GRASS, 20
+	.byte   TYPE_FLYING,	TYPE_GRASS, 20
 	.byte   TYPE_FLYING, TYPE_FIGHTING, 20
-	.byte   TYPE_FLYING,      TYPE_BUG, 20
-	.byte   TYPE_FLYING,     TYPE_ROCK,  5
-	.byte   TYPE_FLYING,    TYPE_STEEL,  5
+	.byte   TYPE_FLYING,	  TYPE_BUG, 20
+	.byte   TYPE_FLYING,	 TYPE_ROCK,  5
+	.byte   TYPE_FLYING,	TYPE_STEEL,  5
 	.byte  TYPE_PSYCHIC, TYPE_FIGHTING, 20
 	.byte  TYPE_PSYCHIC,   TYPE_POISON, 20
 	.byte  TYPE_PSYCHIC,  TYPE_PSYCHIC,  5
-	.byte  TYPE_PSYCHIC,     TYPE_DARK,  0
-	.byte  TYPE_PSYCHIC,    TYPE_STEEL,  5
-	.byte      TYPE_BUG,     TYPE_FIRE,  5
-	.byte      TYPE_BUG,    TYPE_GRASS, 20
-	.byte      TYPE_BUG, TYPE_FIGHTING,  5
-	.byte      TYPE_BUG,   TYPE_POISON,  5
-	.byte      TYPE_BUG,   TYPE_FLYING,  5
-	.byte      TYPE_BUG,  TYPE_PSYCHIC, 20
-	.byte      TYPE_BUG,    TYPE_GHOST,  5
-	.byte      TYPE_BUG,     TYPE_DARK, 20
-	.byte      TYPE_BUG,    TYPE_STEEL,  5
-	.byte     TYPE_ROCK,     TYPE_FIRE, 20
-	.byte     TYPE_ROCK,      TYPE_ICE, 20
-	.byte     TYPE_ROCK, TYPE_FIGHTING,  5
-	.byte     TYPE_ROCK,   TYPE_GROUND,  5
-	.byte     TYPE_ROCK,   TYPE_FLYING, 20
-	.byte     TYPE_ROCK,      TYPE_BUG, 20
-	.byte     TYPE_ROCK,    TYPE_STEEL,  5
-	.byte    TYPE_GHOST,   TYPE_NORMAL,  0
-	.byte    TYPE_GHOST,  TYPE_PSYCHIC, 20
-	.byte    TYPE_GHOST,     TYPE_DARK,  5
-	.byte    TYPE_GHOST,    TYPE_STEEL,  5
-	.byte    TYPE_GHOST,    TYPE_GHOST, 20
+	.byte  TYPE_PSYCHIC,	 TYPE_DARK,  0
+	.byte  TYPE_PSYCHIC,	TYPE_STEEL,  5
+	.byte	  TYPE_BUG,	 TYPE_FIRE,  5
+	.byte	  TYPE_BUG,	TYPE_GRASS, 20
+	.byte	  TYPE_BUG, TYPE_FIGHTING,  5
+	.byte	  TYPE_BUG,   TYPE_POISON,  5
+	.byte	  TYPE_BUG,   TYPE_FLYING,  5
+	.byte	  TYPE_BUG,  TYPE_PSYCHIC, 20
+	.byte	  TYPE_BUG,	TYPE_GHOST,  5
+	.byte	  TYPE_BUG,	 TYPE_DARK, 20
+	.byte	  TYPE_BUG,	TYPE_STEEL,  5
+	.byte	 TYPE_ROCK,	 TYPE_FIRE, 20
+	.byte	 TYPE_ROCK,	  TYPE_ICE, 20
+	.byte	 TYPE_ROCK, TYPE_FIGHTING,  5
+	.byte	 TYPE_ROCK,   TYPE_GROUND,  5
+	.byte	 TYPE_ROCK,   TYPE_FLYING, 20
+	.byte	 TYPE_ROCK,	  TYPE_BUG, 20
+	.byte	 TYPE_ROCK,	TYPE_STEEL,  5
+	.byte	TYPE_GHOST,   TYPE_NORMAL,  0
+	.byte	TYPE_GHOST,  TYPE_PSYCHIC, 20
+	.byte	TYPE_GHOST,	 TYPE_DARK,  5
+	.byte	TYPE_GHOST,	TYPE_STEEL,  5
+	.byte	TYPE_GHOST,	TYPE_GHOST, 20
 	.byte   TYPE_DRAGON,   TYPE_DRAGON, 20
-	.byte   TYPE_DRAGON,    TYPE_STEEL,  5
-	.byte     TYPE_DARK, TYPE_FIGHTING,  5
-	.byte     TYPE_DARK,  TYPE_PSYCHIC, 20
-	.byte     TYPE_DARK,    TYPE_GHOST, 20
-	.byte     TYPE_DARK,     TYPE_DARK,  5
-	.byte     TYPE_DARK,    TYPE_STEEL,  5
-	.byte    TYPE_STEEL,     TYPE_FIRE,  5
-	.byte    TYPE_STEEL,    TYPE_WATER,  5
-	.byte    TYPE_STEEL, TYPE_ELECTRIC,  5
-	.byte    TYPE_STEEL,      TYPE_ICE, 20
-	.byte    TYPE_STEEL,     TYPE_ROCK, 20
-	.byte    TYPE_STEEL,    TYPE_STEEL,  5
-	.byte          0xFE,          0xFE,  0
-	.byte   TYPE_NORMAL,    TYPE_GHOST,  0
-	.byte TYPE_FIGHTING,    TYPE_GHOST,  0
-	.byte          0xFF,          0xFF,  0
+	.byte   TYPE_DRAGON,	TYPE_STEEL,  5
+	.byte	 TYPE_DARK, TYPE_FIGHTING,  5
+	.byte	 TYPE_DARK,  TYPE_PSYCHIC, 20
+	.byte	 TYPE_DARK,	TYPE_GHOST, 20
+	.byte	 TYPE_DARK,	 TYPE_DARK,  5
+	.byte	 TYPE_DARK,	TYPE_STEEL,  5
+	.byte	TYPE_STEEL,	 TYPE_FIRE,  5
+	.byte	TYPE_STEEL,	TYPE_WATER,  5
+	.byte	TYPE_STEEL, TYPE_ELECTRIC,  5
+	.byte	TYPE_STEEL,	  TYPE_ICE, 20
+	.byte	TYPE_STEEL,	 TYPE_ROCK, 20
+	.byte	TYPE_STEEL,	TYPE_STEEL,  5
+	.byte		  0xFE,		  0xFE,  0
+	.byte   TYPE_NORMAL,	TYPE_GHOST,  0
+	.byte TYPE_FIGHTING,	TYPE_GHOST,  0
+	.byte		  0xFF,		  0xFF,  0

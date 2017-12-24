@@ -1,8 +1,8 @@
-    .include "asm/macros.inc"
-    .include "constants/constants.inc"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
-    .section .rodata
-    .align 2, 0
+	.section .rodata
+	.align 2, 0
 
 gUnknown_0857173C:: @ 857173C
 	.incbin "baserom.gba", 0x57173c, 0x20
