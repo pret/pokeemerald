@@ -3,7 +3,7 @@
 
 	.section .rodata
 	.align 2, 0
-	
+
 .macro unk_trainer_card_struct text1, text2, short1, short2, short3, short4
 	.4byte \text1
 	.4byte \text2

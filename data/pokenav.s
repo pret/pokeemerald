@@ -2,7 +2,7 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-	
+
 gUnknown_0861F3EC:: @ 861F3EC
 	.4byte sub_81C9298
 	.4byte sub_81C941C
@@ -109,10 +109,10 @@ gUnknown_0861F3EC:: @ 861F3EC
 	.4byte sub_81CFE70
 	.4byte sub_81CFA48
 	.4byte sub_81CFE98
-	
+
 gUnknown_0861F590:: @ 861F590
 	.incbin "baserom.gba", 0x61F590, 0x20
-	
+
 gUnknown_0861F5B0:: @ 861F5B0
 	.incbin "baserom.gba", 0x61f5b0, 0x454
 
@@ -165,13 +165,13 @@ gUnknown_0861FA9C:: @ 861FA9C
 	.4byte gUnknown_08DC838C, 2
 	.4byte gUnknown_08DC80DC, 0
 	.4byte gUnknown_08DC8D50, 0
-	
+
 gUnknown_0861FAD4:: @ 861FAD4
 	.2byte 0x0
 	.2byte 0x8000
 	.2byte 0x0
 	.2byte 0x0
-	
+
 gUnknown_0861FADC::
 	obj_image_anim_frame 0, 8
 	obj_image_anim_frame 16, 8
@@ -182,7 +182,7 @@ gUnknown_0861FADC::
 	obj_image_anim_frame 96, 8
 	obj_image_anim_frame 112, 8
 	obj_image_anim_jump 0
-	
+
 gUnknown_0861FB00::
 	.4byte gUnknown_0861FADC
 
@@ -194,13 +194,13 @@ gUnknown_0861FB1C::
 	.2byte 0xC000
 	.2byte 0x400
 	.2byte 0x0
-	
+
 gUnknown_0861FB24::
 	.2byte 0x4000
 	.2byte 0x8000
 	.2byte 0x400
 	.2byte 0x0
-	
+
 gUnknown_0861FB2C:: @ 861FB2C
 	spr_template 2, 1, gUnknown_0861FB1C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
@@ -1409,7 +1409,7 @@ gUnknown_08622810:: @ 8622810
 gUnknown_08622818:: @ 8622818
 	obj_pal gUnknown_08622698, 12
 	obj_pal NULL, 0
-	
+
 gUnknown_08622828:: @ 8622828
 	.2byte 0x8000
 	.2byte 0x0
@@ -1424,7 +1424,7 @@ gUnknown_08622848:: @ 8622848
 	.2byte 0xC000
 	.2byte 0x400
 	.2byte 0x0
-	
+
 gUnknown_08622850:: @ 8622850
 	spr_template 8, 13, gUnknown_08622848, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
@@ -1543,7 +1543,7 @@ gUnknown_08623118:: @ 8623118
 	.4byte 0xE, gUnknown_08622ED4
 	.4byte 0xF, gUnknown_08622F14
 	.4byte 0x1000F, gUnknown_08622F5C
-	
+
 gUnknown_086231C8:: @ 86231C8
 	.2byte 0x4000
 	.2byte 0x4000
@@ -1765,7 +1765,7 @@ gUnknown_08624C80:: @ 8624C80
 
 gUnknown_08624CB0:: @ 8624CB0
 	.incbin "baserom.gba", 0x624cb0, 0x54
-	
+
 gUnknown_08624D04:: @ 8624D04
 	 .incbin "baserom.gba", 0x624d04, 0x78
 

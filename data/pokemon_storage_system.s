@@ -45,10 +45,10 @@ gUnknown_085724A4:: @ 85724A4
 
 gUnknown_085724BC:: @ 85724BC
 	.incbin "baserom.gba", 0x5724bc, 0x18
-	
+
 gUnknown_085724D4:: @ 85724D4
 	.incbin "baserom.gba", 0x5724d4, 0x20
-	
+
 gUnknown_085724F4:: @ 85724F4
 	.incbin "baserom.gba", 0x5724f4, 0x200
 
@@ -107,7 +107,7 @@ gUnknown_0857276C:: @ 857276C
 
 gUnknown_08572864:: @ 8572864
 	window_template 0, 0x18, 0xB, 5, 4, 0xF, 0x5C
-	
+
 	.align 2
 gOamData_857286C:: @ 857286C
 	.2byte 0x0000

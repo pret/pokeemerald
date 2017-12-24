@@ -3,7 +3,7 @@
 
 	.section .rodata
 	.align 2, 0
-	
+
 .macro unk_dex_struct texts, a2, a3, a4
 	.4byte \texts
 	.byte \a2, \a3, \a4
@@ -30,7 +30,7 @@ gUnknown_0855D2BE:: @ 855D2BE
 
 sText_TenDashes:: @ 855D2FE
 	.string "----------$"
-	
+
 .align 2
 
 gUnknown_0855D30C:: @ 855D30C

@@ -20,7 +20,7 @@ gUnknown_08C01644:: @ 8C01644
 
 gUnknown_08C01724:: @ 8C01724
 	.incbin "baserom.gba", 0xc01724, 0x18
-	
+
 	.align 2
 gInterfaceGfx_PokeBall::
 	.incbin "graphics/interface/ball/poke.4bpp.lz" @ 0xBC
@@ -253,28 +253,28 @@ gSubstituteDollGfx:: @ 8C2CEE0
 
 gSubstituteDollTilemap:: @ 8C2D120
 	.incbin "baserom.gba", 0xc2d120, 552
-	
+
 gUnknown_08C2D348:: @ 8C2D348
 	.incbin "baserom.gba", 0xC2D348, 196
-	
+
 gUnknown_08C2D40C:: @ 8C2D40C
 	.incbin "baserom.gba", 0xC2D40C, 28
-	
+
 gContestConfetti_Gfx:: @ 8C2D428
 	.incbin "baserom.gba", 0xC2D428, 288
-	
+
 gContestConfetti_Pal:: @ 8C2D548
 	.incbin "baserom.gba", 0xC2D548, 40
-	
+
 gUnknown_08C2D570:: @ 8C2D570
 	.incbin "baserom.gba", 0xC2D570, 316
-	
+
 gUnknown_08C2D6AC:: @ 8C2D6AC
 	.incbin "baserom.gba", 0xC2D6AC, 36
-	
+
 gUnknown_08C2D6D0:: @ 8C2D6D0
 	.incbin "baserom.gba", 0xC2D6D0, 40
-	
+
 gUnknown_08C2D6F8:: @ 8C2D6F8
 	.incbin "baserom.gba", 0xC2D6F8, 40
 
@@ -897,7 +897,7 @@ gMenuMoneyPal:: @ 8D9B0C8
 
 gBuyMenuFrame_Tilemap:: @ 8D9B0F0
 	.incbin "baserom.gba", 0xd9b0f0, 0x140
-	
+
 gMenuMoneyGfx:: @ 8D9B230
 	.incbin "baserom.gba", 0xd9b230, 0x84
 
@@ -906,16 +906,16 @@ gMenuPokeblock_Gfx:: @ 8D9B2B4
 
 gMenuPokeblock_Pal:: @ 8D9B470
 	.incbin "baserom.gba", 0xd9b470, 0x70
-	
+
 gMenuPokeblockDevice_Gfx:: @ 8D9B4E0
 	.incbin "baserom.gba", 0xd9b4e0, 0x2c0
-	
+
 gMenuPokeblockDevice_Pal:: @ 8D9B7A0
 	.incbin "baserom.gba", 0xd9b7a0, 0x28
 
 gMenuPokeblock_Tilemap:: @ 8D9B7C8
 	.incbin "baserom.gba", 0xd9b7c8, 0x148
-	
+
 	.align 2
 gPokeblock_Gfx::
 	.incbin "graphics/pokeblock/pokeblock.4bpp.lz"
@@ -996,25 +996,25 @@ gUnknown_08D9C13C:: @ 8D9C13C
 
 gUnknown_08DA1E78:: @ 8DA1E78
 	.incbin "baserom.gba", 0xda1e78, 0xBE4
-	
+
 gUnknown_08DA2A5C:: @ 8DA2A5C
 	.incbin "baserom.gba", 0xDA2A5C, 0xCC
-	
+
 gUnknown_08DA2B28:: @ 8DA2B28
 	.incbin "baserom.gba", 0xDA2B28, 0x1F4
-	
+
 gUnknown_08DA2D1C:: @ 8DA2D1C
 	.incbin "baserom.gba", 0xDA2D1C, 0x534
-	
+
 gUnknown_08DA3250:: @ 8DA3250
 	.incbin "baserom.gba", 0xDA3250, 0x54
-	
+
 gUnknown_08DA32A4:: @ 8DA32A4
 	.incbin "baserom.gba", 0xDA32A4, 0xCC
-	
+
 gUnknown_08DA3370:: @ 8DA3370
 	.incbin "baserom.gba", 0xDA3370, 0x28
-	
+
 gUnknown_08DA3398:: @ 8DA3398
 	.incbin "baserom.gba", 0xDA3398, 0x28
 
@@ -1032,10 +1032,10 @@ gUnknown_08DA3988:: @ 8DA3988
 
 gUnknown_08DA3A88:: @ 8DA3A88
 	.incbin "baserom.gba", 0xda3a88, 0x138
-	
+
 gUnknown_08DA3BC0:: @ 8DA3BC0
 	.incbin "baserom.gba", 0xDA3BC0, 0xBC
-	
+
 gUnknown_08DA3C7C:: @ 8DA3C7C
 	.incbin "baserom.gba", 0xDA3C7C, 0x18
 
@@ -1053,10 +1053,10 @@ gUnknown_08DA4F70:: @ 8DA4F70
 
 gUnknown_08DA60B8:: @ 8DA60B8
 	.incbin "baserom.gba", 0xda60b8, 0x388
-	
+
 gUnknown_08DA6440:: @ 8DA6440
 	.incbin "baserom.gba", 0xDA6440, 0x46C
-	
+
 gUnknown_08DA68AC:: @ 8DA68AC
 	.incbin "baserom.gba", 0xDA68AC, 0x110
 
@@ -1098,34 +1098,34 @@ gUnknown_08DA8D6C:: @ 8DA8D6C
 
 gUnknown_08DA8E84:: @ 8DA8E84
 	.incbin "baserom.gba", 0xda8e84, 0x54
-	
+
 gUnknown_08DA8ED8:: @ 8DA8ED8
 	.incbin "baserom.gba", 0xDA8ED8, 0x798
-	
+
 gUnknown_08DA9670:: @ 8DA9670
 	.incbin "baserom.gba", 0xDA9670, 0x44
-	
+
 gUnknown_08DA96B4:: @ 8DA96B4
 	.incbin "baserom.gba", 0xDA96B4, 0x248
-	
+
 gUnknown_08DA98FC:: @ 8DA98FC
 	.incbin "baserom.gba", 0xDA98FC, 0xCA8
-	
+
 gUnknown_08DAA5A4:: @ 8DAA5A4
 	.incbin "baserom.gba", 0xDAA5A4, 0x1F0
-	
+
 gUnknown_08DAA794:: @ 8DAA794
 	.incbin "baserom.gba", 0xDAA794, 0x98
-	
+
 gUnknown_08DAA82C:: @ 8DAA82C
 	.incbin "baserom.gba", 0xDAA82C, 0x28
-	
+
 gUnknown_08DAA854:: @ 8DAA854
 	.incbin "baserom.gba", 0xDAA854, 0x28
-	
+
 gUnknown_08DAA87C:: @ 8DAA87C
 	.incbin "baserom.gba", 0xDAA87C, 0x28
-	
+
 gUnknown_08DAA8A4:: @ 8DAA8A4
 	.incbin "baserom.gba", 0xDAA8A4, 0x10
 
@@ -1332,7 +1332,7 @@ gUnknown_08DC1876:: @ 8DC1876
 
 gUnknown_08DC1934:: @ 8DC1934
 	.incbin "baserom.gba", 0xdc1934, 0xA18
-	
+
 gUnknown_08DC234C:: @ 8DC234C
 	.incbin "baserom.gba", 0xDC234C, 0x6BC
 
@@ -1525,43 +1525,43 @@ gUnknown_08DC9608:: @ 8DC9608
 
 gUnknown_08DC9628:: @ 8DC9628
 	.incbin "baserom.gba", 0xdc9628, 0x320
-	
+
 gBerryBlenderMiscPalette:: @ 8DCAB88
 	.incbin "graphics/berry_blender/misc.gbapal"
-	
+
 gBerryBlenderArrowPalette:: @ 8DC9948
 	.incbin "graphics/berry_blender/arrow.gbapal"
 
 gUnknown_8DC9988:: @ 8DC9988
 	.incbin "baserom.gba", 0xdc9988, 0x200
-	
+
 	.align 2
 gBerryBlenderMarubatsuTiles:: @ 8DC9B88
 	.incbin "graphics/berry_blender/marubatsu.4bpp"
-	
+
 	.align 2
 gBerryBlenderParticlesTiles:: @ 8E90818
 	.incbin "graphics/berry_blender/particles.4bpp"
-	
+
 	.space 0x120
 
 	.align 2
 gBerryBlenderCountdownNumbersTiles:: @ 8DC9F88
 	.incbin "graphics/berry_blender/countdown_numbers.4bpp"
-	
+
 	.align 2
 gBerryBlenderStartTiles:: @ 8DCA588
 	.incbin "graphics/berry_blender/start.4bpp"
-	
+
 	.space 0x200
-	
+
    .align 2
 gBerryBlenderArrowTiles:: @ 8DCAB88
 	.incbin "graphics/berry_blender/arrow.4bpp"
 
 gUnknown_08DCB388:: @ 8DCB388
 	.incbin "baserom.gba", 0xdcb388, 0xA28
-	
+
 gUnknown_08DCBDB0:: @ 8DCBDB0
 	.incbin "baserom.gba", 0xdcbdb0, 0x20
 
@@ -1687,7 +1687,7 @@ gUnknown_08DD46E0:: @ 8DD46E0
 
 gUnknown_08DD47A0:: @ 8DD47A0
 	.incbin "baserom.gba", 0xdd47a0, 0xc0
-	
+
 gUnknown_08DD4860:: @ 8DD4860
 	.incbin "baserom.gba", 0xdd4860, 0x20
 
@@ -1743,61 +1743,61 @@ gUnknown_08DD7300:: @ 8DD7300
 	.incbin "baserom.gba", 0xdd7300, 0x60
 
 gUnknown_08DD7360:: @ 8DD7360
-		.incbin "baserom.gba", 0xdd7360, 0x1420
+	.incbin "baserom.gba", 0xdd7360, 0x1420
 
 gUnknown_08DD8780:: @ 8DD8780
-		.incbin "baserom.gba", 0xdd8780, 0x40
+	.incbin "baserom.gba", 0xdd8780, 0x40
 
 gUnknown_08DD87C0:: @ 8DD87C0
-		.incbin "baserom.gba", 0xdd87c0, 0x720
+	.incbin "baserom.gba", 0xdd87c0, 0x720
 
 gUnknown_08DD8EE0:: @ 8DD8EE0
-		.incbin "baserom.gba", 0xdd8ee0, 0x1a0
+	.incbin "baserom.gba", 0xdd8ee0, 0x1a0
 
 gUnknown_08DD9080:: @ 8DD9080
-		.incbin "baserom.gba", 0xdd9080, 0x60
+	.incbin "baserom.gba", 0xdd9080, 0x60
 
 gUnknown_08DD90E0:: @ 8DD90E0
-		.incbin "baserom.gba", 0xdd90e0, 0x638
+	.incbin "baserom.gba", 0xdd90e0, 0x638
 
 gUnknown_08DD9718:: @ 8DD9718
-		.incbin "baserom.gba", 0xdd9718, 0x15c
+	.incbin "baserom.gba", 0xdd9718, 0x15c
 
 gUnknown_08DD9874:: @ 8DD9874
-		.incbin "baserom.gba", 0xdd9874, 0x40
+	.incbin "baserom.gba", 0xdd9874, 0x40
 
 gUnknown_08DD98B4:: @ 8DD98B4
-		.incbin "baserom.gba", 0xdd98b4, 0x5a4
+	.incbin "baserom.gba", 0xdd98b4, 0x5a4
 
 gUnknown_08DD9E58:: @ 8DD9E58
-		.incbin "baserom.gba", 0xdd9e58, 0x194
+	.incbin "baserom.gba", 0xdd9e58, 0x194
 
 gUnknown_08DD9FEC:: @ 8DD9FEC
-		.incbin "baserom.gba", 0xdd9fec, 0x40
+	.incbin "baserom.gba", 0xdd9fec, 0x40
 
 gUnknown_08DDA02C:: @ 8DDA02C
-		.incbin "baserom.gba", 0xdda02c, 0x610
+	.incbin "baserom.gba", 0xdda02c, 0x610
 
 gUnknown_08DDA63C:: @ 8DDA63C
-		.incbin "baserom.gba", 0xdda63c, 0x1c4
+	.incbin "baserom.gba", 0xdda63c, 0x1c4
 
 gUnknown_08DDA800:: @ 8DDA800
-		.incbin "baserom.gba", 0xdda800, 0x40
+	.incbin "baserom.gba", 0xdda800, 0x40
 
 gUnknown_08DDA840:: @ 8DDA840
-		.incbin "baserom.gba", 0xdda840, 0x600
+	.incbin "baserom.gba", 0xdda840, 0x600
 
 gUnknown_08DDAE40:: @ 8DDAE40
-		.incbin "baserom.gba", 0xddae40, 0x1a0
+	.incbin "baserom.gba", 0xddae40, 0x1a0
 
 gUnknown_08DDAFE0:: @ 8DDAFE0
-		.incbin "baserom.gba", 0xddafe0, 0x40
+	.incbin "baserom.gba", 0xddafe0, 0x40
 
 gUnknown_08DDB020:: @ 8DDB020
-		.incbin "baserom.gba", 0xddb020, 0x2a4
+	.incbin "baserom.gba", 0xddb020, 0x2a4
 
 gUnknown_08DDB2C4:: @ 8DDB2C4
-		.incbin "baserom.gba", 0xddb2c4, 0x120
+	.incbin "baserom.gba", 0xddb2c4, 0x120
 
 gUnknown_08DDB3E4:: @ 8DDB3E4
 	.incbin "baserom.gba", 0xddb3e4, 0x80
