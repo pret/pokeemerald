@@ -14567,7 +14567,7 @@ _08105CCC:
 	lsls r2, 1
 	adds r0, r2
 	str r1, [r0]
-	ldr r0, =gUnknown_08C22610
+	ldr r0, =gBattleAnimSpritePalette_206
 	bl LZDecompressWram
 	movs r4, 0
 _08105D00:

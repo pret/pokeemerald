@@ -1892,23 +1892,357 @@ gBattleAnimSpritePalette_203:: @ 8D2278C
 gBattleAnimSpriteSheet_206:: @ 8D227B0
 	.incbin "graphics/battle_anims/sprites/206.4bpp.lz"
 
-gUnknown_08C22610:: @ 8C22610
-	.incbin "baserom.gba", 0xc22610, 0xcd0
+	.align 2
+gBattleAnimSpritePalette_206:: @ 8D229BC
+	.incbin "graphics/battle_anims/sprites/206.gbapal.lz"
 
+	.align 2
+gBattleAnimSpriteSheet_205:: @ 8D22A50
+	.incbin "graphics/battle_anims/sprites/205.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_205:: @ 8D22C84
+	.incbin "graphics/battle_anims/sprites/205.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_207:: @ 8D22CA8
+	.incbin "graphics/battle_anims/sprites/207.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_207:: @ 8D22D74
+	.incbin "graphics/battle_anims/sprites/207.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_208:: @ 8D22D98
+	.incbin "graphics/battle_anims/sprites/208.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_209:: @ 8D23188
+	.incbin "graphics/battle_anims/sprites/209.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_209:: @ 8D23490
+	.incbin "graphics/battle_anims/sprites/209.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_064:: @ 8D234B0
+	.incbin "graphics/battle_anims/sprites/064.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_064:: @ 8D235A0
+	.incbin "graphics/battle_anims/sprites/064.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_210:: @ 8D235C4
+	.incbin "graphics/battle_anims/sprites/210.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_219:: @ 8D2362C
+	.incbin "graphics/battle_anims/sprites/219.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_210:: @ 8D2364C
+	.incbin "graphics/battle_anims/sprites/210.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_216:: @ 8D2366C
+	.incbin "graphics/battle_anims/sprites/216.gbapal.lz"
+
+	.align 2
 gUnknown_08C232E0:: @ 8C232E0
-	.incbin "baserom.gba", 0xc232e0, 0xa70
+	.incbin "graphics/battle_anims/backgrounds/attract.4bpp.lz"
 
+	.align 2
 gUnknown_08C23D50:: @ 8C23D50
-	.incbin "baserom.gba", 0xc23d50, 0x28
+	.incbin "graphics/battle_anims/backgrounds/attract.gbapal.lz"
 
+	.align 2
 gUnknown_08C23D78:: @ 8C23D78
-	.incbin "baserom.gba", 0xc23d78, 0xc58
+	.incbin "graphics/battle_anims/backgrounds/attract.bin.lz"
 
+	.align 2
+gBattleAnimSpriteSheet_217:: @ 8D243A0
+	.incbin "graphics/battle_anims/sprites/217.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_217:: @ 8D24408
+	.incbin "graphics/battle_anims/sprites/217.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_212:: @ 8D24428
+	.incbin "graphics/battle_anims/sprites/212.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_211:: @ 8D2465C
+	.incbin "graphics/battle_anims/sprites/211.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_213:: @ 8D246AC
+	.incbin "graphics/battle_anims/sprites/213.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_211:: @ 8D24918
+	.incbin "graphics/battle_anims/sprites/211.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_214:: @ 8D2493C
+	.incbin "graphics/battle_anims/sprites/214.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_215:: @ 8D24BCC
+	.incbin "graphics/battle_anims/sprites/215.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_215:: @ 8D24D58
+	.incbin "graphics/battle_anims/sprites/215.gbapal.lz"
+
+	.align 2
 gUnknown_08C249D0:: @ 8C249D0
-	.incbin "baserom.gba", 0xc249d0, 0x28
+	.incbin "graphics/battle_anims/backgrounds/scary_face.gbapal.lz"
 
+	.align 2
 gUnknown_08C249F8:: @ 8C249F8
-	.incbin "baserom.gba", 0xc249f8, 0x5c3c
+	.incbin "graphics/battle_anims/backgrounds/scary_face.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_218:: @ 8D24FD4
+	.incbin "graphics/battle_anims/sprites/218.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_218:: @ 8D24FFC
+	.incbin "graphics/battle_anims/sprites/218.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_087:: @ 8D250A8
+	.incbin "graphics/battle_anims/sprites/087.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_087:: @ 8D25100
+	.incbin "graphics/battle_anims/sprites/087.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_018:: @ 8D25128
+	.incbin "graphics/battle_anims/sprites/018.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_018:: @ 8D25164
+	.incbin "graphics/battle_anims/sprites/018.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_220:: @ 8D25180
+	.incbin "graphics/battle_anims/sprites/220.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_220:: @ 8D251A8
+	.incbin "graphics/battle_anims/sprites/220.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_221:: @ 8D252D4
+	.incbin "graphics/battle_anims/sprites/221.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_221:: @ 8D252F4
+	.incbin "graphics/battle_anims/sprites/221.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_222:: @ 8D25558
+	.incbin "graphics/battle_anims/sprites/222.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_222:: @ 8D25844
+	.incbin "graphics/battle_anims/sprites/222.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_223:: @ 8D2586C
+	.incbin "graphics/battle_anims/sprites/223.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_223:: @ 8D2588C
+	.incbin "graphics/battle_anims/sprites/223.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_224:: @ 8D25B20
+	.incbin "graphics/battle_anims/sprites/224.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_224:: @ 8D25B40
+	.incbin "graphics/battle_anims/sprites/224.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_230:: @ 8D25C3C
+	.incbin "graphics/battle_anims/sprites/230.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_230:: @ 8D25C64
+	.incbin "graphics/battle_anims/sprites/230.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_228:: @ 8D25EA8
+	.incbin "graphics/battle_anims/sprites/228.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_228:: @ 8D25EC8
+	.incbin "graphics/battle_anims/sprites/228.4bpp.lz"
+
+	.align 2
+gBattleAnimBackgroundPalette_04:: @ 8D25F70
+	.incbin "graphics/battle_anims/backgrounds/04.gbapal.lz"
+
+	.align 2
+gBattleAnimBackgroundImage_04:: @ 8D25F98
+	.incbin "graphics/battle_anims/backgrounds/04.4bpp.lz"
+
+	.align 2
+gBattleAnimBackgroundTilemap_04:: @ 8D26D04
+	.incbin "graphics/battle_anims/backgrounds/04.bin.lz"
+
+	.align 2
+gBattleAnimBackgroundTilemap_05:: @ 8D27200
+	.incbin "graphics/battle_anims/backgrounds/05.bin.lz"
+
+	.align 2
+gBattleAnimBackgroundTilemap_06:: @ 8D276D0
+	.incbin "graphics/battle_anims/backgrounds/06.bin.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_225:: @ 8D27B10
+	.incbin "graphics/battle_anims/sprites/225.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_225:: @ 8D27C94
+	.incbin "graphics/battle_anims/sprites/225.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_227:: @ 8D27CBC
+	.incbin "graphics/battle_anims/sprites/227.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_226:: @ 8D27E04
+	.incbin "graphics/battle_anims/sprites/226.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_226:: @ 8D27E90
+	.incbin "graphics/battle_anims/sprites/226.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_229:: @ 8D27EB4
+	.incbin "graphics/battle_anims/sprites/229.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_229:: @ 8D28070
+	.incbin "graphics/battle_anims/sprites/229.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_099:: @ 8D28098
+	.incbin "graphics/battle_anims/sprites/099.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_099:: @ 8D281B8
+	.incbin "graphics/battle_anims/sprites/099.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_232:: @ 8D281E0
+	.incbin "graphics/battle_anims/sprites/232.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_231:: @ 8D28718
+	.incbin "graphics/battle_anims/sprites/231.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_231:: @ 8D28740
+	.incbin "graphics/battle_anims/sprites/231.4bpp.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_233:: @ 8D28910
+	.incbin "graphics/battle_anims/sprites/233.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_233:: @ 8D28994
+	.incbin "graphics/battle_anims/sprites/233.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_234:: @ 8D289BC
+	.incbin "graphics/battle_anims/sprites/234.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_234:: @ 8D28B7C
+	.incbin "graphics/battle_anims/sprites/234.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_238:: @ 8D28BA0
+	.incbin "graphics/battle_anims/sprites/238.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_238:: @ 8D28C08
+	.incbin "graphics/battle_anims/sprites/238.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_235:: @ 8D28C2C
+	.incbin "graphics/battle_anims/sprites/235.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_235:: @ 8D28C7C
+	.incbin "graphics/battle_anims/sprites/235.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_236:: @ 8D28C98
+	.incbin "graphics/battle_anims/sprites/236.gbapal.lz"
+
+	.align 2
+gBattleAnimSpritePalette_237:: @ 8D28CB4
+	.incbin "graphics/battle_anims/sprites/237.gbapal.lz"
+
+	.align 2
+gBattleAnimBackgroundImage_07:: @ 8D28CD0
+	.incbin "graphics/battle_anims/backgrounds/07.4bpp.lz"
+
+	.align 2
+gBattleAnimBackgroundPalette_07:: @ 8D28E78
+	.incbin "graphics/battle_anims/backgrounds/07.gbapal.lz"
+
+	.align 2
+gBattleAnimBackgroundPalette_18:: @ 8D28EA0
+	.incbin "graphics/battle_anims/backgrounds/18.gbapal.lz"
+
+	.align 2
+gBattleAnimBackgroundTilemap_07:: @ 8D28EC8
+	.incbin "graphics/battle_anims/backgrounds/07.bin.lz"
+
+	.align 2
+gBattleAnimBackgroundTilemap_08:: @ 8D29058
+	.incbin "graphics/battle_anims/backgrounds/08.bin.lz"
+
+	.align 2
+gBattleAnimBackgroundImage_20:: @ 8D291E4
+	.incbin "graphics/battle_anims/backgrounds/20.4bpp.lz"
+
+	.align 2
+gBattleAnimBackgroundPalette_20:: @ 8D29C0C
+	.incbin "graphics/battle_anims/backgrounds/20.gbapal.lz"
+
+	.align 2
+gBattleAnimBackgroundTilemap_20:: @ 8D29C2C
+	.incbin "graphics/battle_anims/backgrounds/20.bin.lz"
+
+	.align 2
+gBattleAnimBackgroundTilemap_09:: @ 8D29E30
+	.incbin "graphics/battle_anims/backgrounds/09.bin.lz"
+
+	.align 2
+gBattleAnimBackgroundPalette_09:: @ 8D2A128
+	.incbin "graphics/battle_anims/backgrounds/09.gbapal.lz"
+
+	.align 2
+gBattleAnimBackgroundPalette_22:: @ 8D2A148
+	.incbin "graphics/battle_anims/backgrounds/22.gbapal.lz"
+
+	.align 2
+gBattleAnimBackgroundImage_09:: @ 8D2A168
+	.incbin "graphics/battle_anims/backgrounds/09.4bpp.lz"
+
+	.align 2
+gBattleAnimBackgroundTilemap_10:: @ 8D2A6E8
+	.incbin "graphics/battle_anims/backgrounds/10.bin.lz"
 
 gUnknown_08C2A634:: @ 8C2A634
 	.incbin "baserom.gba", 0xc2a634, 0xa0
