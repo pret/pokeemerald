@@ -2829,67 +2829,100 @@ gBattleTerrainAnimTilemap_Rayquaza:: @ 8D82C70
 
 	.align 2
 gUnknown_08D82F10:: @ 8D82F10
-	.incbin "baserom.gba", 0xd82f10, 0x5ec
+	.incbin "graphics/battle_frontier/tourney_bg.4bpp.lz"
 
+	.align 2
 gUnknown_08D834FC:: @ 8D834FC
-	.incbin "baserom.gba", 0xd834fc, 0x404
+	.incbin "graphics/battle_frontier/tourney_line.4bpp.lz" @ the red glow mask for the tourney advancement lines
 
+	.align 2
 gUnknown_08D83900:: @ 8D83900
-	.incbin "baserom.gba", 0xd83900, 0x22c
+	.incbin "graphics/unknown/unknown_D83900.bin.lz" @ tilemaps likely
 
+	.align 2
 gUnknown_08D83B2C:: @ 8D83B2C
-	.incbin "baserom.gba", 0xd83b2c, 0x110
+	.incbin "graphics/unknown/unknown_D83B2C.bin.lz"
 
+	.align 2
 gUnknown_08D83C3C:: @ 8D83C3C
-	.incbin "baserom.gba", 0xd83c3c, 0x114
+	.incbin "graphics/unknown/unknown_D83C3C.bin.lz"
 
+	.align 2
 gUnknown_08D83D50:: @ 8D83D50
-	.incbin "baserom.gba", 0xd83d50, 0xc20
+	.incbin "graphics/battle_frontier/misc1.4bpp.lz"
 
+	.align 2
 gUnknown_08D84970:: @ 8D84970
-	.incbin "baserom.gba", 0xd84970, 0x590
+	.incbin "graphics/unknown/unknown_D84970.bin.lz"
 
+	.align 2
 gUnknown_08D84F00:: @ 8D84F00
-	.incbin "baserom.gba", 0xd84f00, 0x458
+	.incbin "graphics/unknown/unknown_D84F00.bin.lz"
 
+	.align 2
+gBattleFrontierGfx_DomeOptions:: @ 8D85058
+	.incbin "graphics/battle_frontier/options.4bpp.lz"
+
+	.align 2
 gUnknown_08D85358:: @ 8D85358
-	.incbin "baserom.gba", 0xd85358, 0xec
+	.incbin "graphics/battle_frontier/options_pal1.gbapal.lz"
 
+	.align 2
 gUnknown_08D85444:: @ 8D85444
-	.incbin "baserom.gba", 0xd85444, 0x84
+	.incbin "graphics/battle_frontier/options_pal2.gbapal.lz" @ pokeball pal
 
+	.align 2
 gUnknown_08D854C8:: @ 8D854C8
-	.incbin "baserom.gba", 0xd854c8, 0x120
+	.incbin "graphics/battle_frontier/options_pal3.gbapal.lz" @ arrow pal
 
+	.align 2
+gUnknown_08D854E8:: @ 8D854E8
+	.incbin "graphics/battle_frontier/symbols.4bpp.lz"
+
+	.align 2
 gUnknown_08D855E8:: @ 8D855E8
-	.incbin "baserom.gba", 0xd855e8, 0x18
+	.incbin "graphics/battle_frontier/symbols.gbapal.lz"
 
+	.align 2
 gUnknown_08D85600:: @ 8D85600
-	.incbin "baserom.gba", 0xd85600, 0x20
+	.incbin "graphics/battle_frontier/text.gbapal.lz" @ text palette for frontier text.
 
+	.align 2
 gUnknown_08D85620:: @ 8D85620
-	.incbin "baserom.gba", 0xd85620, 0x20
+	.incbin "graphics/battle_frontier/text_pp.gbapal" @ text palette for PP text
 
+	@ dome anim pals
+
+	.align 2
 gUnknown_08D85640:: @ 8D85640
-	.incbin "baserom.gba", 0xd85640, 0x20
+	.incbin "graphics/battle_frontier/dome_anim1.gbapal"
 
+	.align 2
 gUnknown_08D85660:: @ 8D85660
-	.incbin "baserom.gba", 0xd85660, 0x20
+	.incbin "graphics/battle_frontier/dome_anim2.gbapal"
 
+	.align 2
 gUnknown_08D85680:: @ 8D85680
-	.incbin "baserom.gba", 0xd85680, 0x20
+	.incbin "graphics/battle_frontier/dome_anim3.gbapal"
 
+	.align 2
 gUnknown_08D856A0:: @ 8D856A0
-	.incbin "baserom.gba", 0xd856a0, 0x28
+	.incbin "graphics/battle_frontier/dome_anim4.gbapal"
 
+	@ 8D856C0
+	.2byte 0x013F, 0x0119, 0x0113, 0x010E @ unused?
+
+	.align 2
 gUnknown_08D856C8:: @ 8D856C8
-	.incbin "baserom.gba", 0xd856c8, 0xe0
+	.incbin "graphics/battle_frontier/pyramid_light.gbapal" @ unfaded pal for the player light in battle pyramid
 
+	.align 2
 gUnknown_08D857A8:: @ 8D857A8
-	.incbin "baserom.gba", 0xd857a8, 0x274
+	.incbin "graphics/battle_frontier/battle_tilemap1.bin.lz"
 
+	.align 2
 gUnknown_08D85A1C:: @ 8D85A1C
-	.incbin "baserom.gba", 0xd85a1c, 0x234
+	.incbin "graphics/battle_frontier/battle_tilemap2.bin.lz"
 
 gUnknown_08D85C50:: @ 8D85C50
 	.incbin "baserom.gba", 0xd85c50, 0x60
