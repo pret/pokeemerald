@@ -1118,10 +1118,10 @@ gUnknown_0203AB40: @ 203AB40
 	
 	.include "src/pokeblock.o"
 
-gUnknown_0203AB54: @ 203AB54
+gBikeCyclingChallenge: @ 203AB54
 	.space 0x1
 
-gUnknown_0203AB55: @ 203AB55
+gBikeCollisions: @ 203AB55
 	.space 0x3
 
 gUnknown_0203AB58: @ 203AB58
