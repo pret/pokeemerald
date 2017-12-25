@@ -424,10 +424,14 @@ SECTIONS {
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
-        data/data4.o(.rodata);
+        data/trader.o(.rodata);
         data/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
+        data/rom_81370FC.o(.rodata);
+        data/battle_records.o(.rodata);
+        data/pokedex_area_screen.o(.rodata);
+        src/evolution_scene.o(.rodata);
         data/data4d.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);

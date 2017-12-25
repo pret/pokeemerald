@@ -5214,7 +5214,7 @@ sub_8139B60: @ 8139B60
 	movs r1, 0x1
 	adds r2, r4, 0
 	bl PrintTextOnWindow
-	ldr r6, =gUnknown_085B2BB4
+	ldr r6, =gElevatorFloorsTable
 	ldr r4, =gSpecialVar_0x8005
 	ldrh r0, [r4]
 	lsls r0, 2
