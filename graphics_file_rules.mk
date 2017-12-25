@@ -10,6 +10,7 @@ unusedgfxdir := graphics/unused
 unknowngfxdir := graphics/unknown
 btintgfxdir := graphics/battle_interface
 masksgfxdir := graphics/battle_anims/masks
+bttransgfxdir := graphics/battle_transitions
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -352,3 +353,6 @@ $(btanimgfxdir)/001.4bpp: $(btanimgfxdir)/001_0.4bpp $(btanimgfxdir)/001_1.4bpp
 
 $(masksgfxdir)/unknown_C2EA50.4bpp: $(masksgfxdir)/unknown_C2EA50.png
 	$(GFX) $< $@ -num_tiles 14
+
+$(bttransgfxdir)/vs_frame.4bpp: $(bttransgfxdir)/vs_frame.png
+	$(GFX) $< $@ -num_tiles 16
