@@ -1129,8 +1129,29 @@ gCableCarCord_Gfx:: @ 8DBC2C0
 gUnknown_08DBC2E8:: @ 8DBC2E8
 	.incbin "baserom.gba", 0xdbc2e8, 0x72c
 
-gUnknown_08DBCA14:: @ 0x08DBCA14
-	.incbin "baserom.gba", 0xdbca14, 0x1e04
+	.align 2
+gRouletteWheelTiles:: @ 0x08DBCA14
+	.incbin "graphics/roulette/wheel.8bpp.lz"
+
+	.align 2
+gRouletteCenter_Gfx:: @ 0x08DBDABC
+	.incbin "graphics/roulette/center.4bpp.lz"
+
+	.align 2
+gRouletteHeadersTiles:: @ 0x08DBDE38
+	.incbin "graphics/roulette/headers.4bpp.lz"
+
+	.align 2
+gRouletteCreditTiles:: @ 0x08DBE45C
+	.incbin "graphics/roulette/credit.4bpp.lz"
+
+	.align 2
+gRouletteNumbersTiles:: @ 0x08DBE5AC
+	.incbin "graphics/roulette/numbers.4bpp.lz"
+
+	.align 2
+gRouletteMultiplierTiles:: @ 0x08DBE690
+	.incbin "graphics/roulette/multiplier.4bpp.lz"
 
 gUnknown_08DBE818:: @ 0x08DBE818
 	.incbin "baserom.gba", 0xdbe818, 0x20

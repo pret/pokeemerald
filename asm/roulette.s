@@ -459,7 +459,7 @@ _08140662:
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_08DBCA14
+	ldr r1, =gRouletteWheelTiles
 	str r4, [sp]
 	movs r0, 0x2
 	movs r2, 0
@@ -3619,7 +3619,7 @@ _08142174:
 	cmp r3, 0x3
 	bls _08142144
 	movs r6, 0
-	ldr r0, =gUnknown_085B62E8
+	ldr r0, =gUnknown_085B62E4+0x4
 	add r0, r12
 	ldr r7, [r0]
 	ldr r4, =gUnknown_0203AB88
@@ -4985,7 +4985,7 @@ _08142D24:
 	lsls r1, r5, 1
 	adds r1, r5
 	lsls r1, 3
-	ldr r0, =gUnknown_085B75B0
+	ldr r0, =gSpriteTemplate_85B75B0
 	adds r0, r1, r0
 	adds r1, 0x94
 	adds r2, r4, 0
@@ -5035,7 +5035,7 @@ _08142D86:
 	lsls r1, r6, 1
 	adds r1, r6
 	lsls r1, 3
-	ldr r0, =gUnknown_085B7508
+	ldr r0, =gSpriteTemplate_85B7508
 	adds r0, r1, r0
 	adds r1, 0x94
 	lsls r1, 16
@@ -5070,7 +5070,7 @@ _08142DCC:
 	lsls r2, r6, 1
 	adds r2, r6
 	lsls r2, 3
-	ldr r0, =gUnknown_085B7568
+	ldr r0, =gSpriteTemplate_85B7568
 	adds r0, r2, r0
 	adds r2, 0x5C
 	lsls r2, 16
@@ -5278,7 +5278,7 @@ sub_8142F7C: @ 8142F7C
 	movs r0, 0x4
 	mov r8, r0
 _08142F8C:
-	ldr r0, =gUnknown_085B7928
+	ldr r0, =gSpriteTemplate_85B7928
 	movs r1, 0x74
 	movs r2, 0x14
 	movs r3, 0xA
@@ -5600,7 +5600,7 @@ _08143216:
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, =gUnknown_085B7610
+	ldr r1, =gSpriteTemplate_85B7610
 	adds r0, r1
 	movs r1, 0x28
 	mov r2, sp
@@ -5749,7 +5749,7 @@ _08143322:
 	lsrs r5, r0, 24
 	cmp r5, 0x4
 	bls _08143322
-	ldr r0, =gUnknown_085B77E4
+	ldr r0, =gSpriteTemplate_85B77E4
 	movs r1, 0xD0
 	movs r2, 0x10
 	movs r3, 0x4
@@ -6459,7 +6459,7 @@ sub_814391C: @ 814391C
 	str r0, [sp, 0x4]
 	mov r0, sp
 	bl LoadSpriteSheet
-	ldr r0, =gUnknown_085B7950
+	ldr r0, =gSpriteTemplate_85B7950
 	movs r1, 0x74
 	movs r2, 0x50
 	movs r3, 0x51
@@ -6530,7 +6530,7 @@ _081439D0:
 	subs r3, r4
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =gUnknown_085B7928
+	ldr r0, =gSpriteTemplate_85B7928
 	movs r1, 0x74
 	movs r2, 0x50
 	bl CreateSprite
@@ -8128,7 +8128,7 @@ sub_81446DC: @ 81446DC
 	lsrs r0, 16
 	mov r9, r0
 	ldr r5, =gUnknown_0203AB88
-	ldr r0, =gUnknown_085B79F8
+	ldr r0, =gSpriteTemplate_85B79F8
 	movs r2, 0xC
 	negs r2, r2
 	movs r1, 0x24
@@ -8137,7 +8137,7 @@ sub_81446DC: @ 81446DC
 	ldr r1, [r5]
 	adds r1, 0x73
 	strb r0, [r1]
-	ldr r4, =gUnknown_085B7ABC
+	ldr r4, =gSpriteTemplate_85B7ABC
 	mov r3, r8
 	movs r0, 0x2E
 	ldrsh r2, [r3, r0]
@@ -8353,7 +8353,7 @@ sub_81448B8: @ 81448B8
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0
-	ldr r0, =gUnknown_085B7A10
+	ldr r0, =gSpriteTemplate_85B7A10
 	movs r1, 0x2E
 	ldrsh r2, [r7, r1]
 	lsls r2, 2
@@ -8709,12 +8709,12 @@ _08144BAC:
 	mov r5, r10
 	cmp r5, r8
 	bcs _08144C18
-	ldr r1, =gUnknown_085B6160
+	ldr r1, =gUnknown_085B6154+0xC
 	mov r10, r1
 _08144BBC:
 	ldr r3, [r4]
 	lsls r0, r6, 3
-	ldr r1, =gUnknown_085B62E8
+	ldr r1, =gUnknown_085B62E4+0x4
 	adds r0, r1
 	ldr r1, [r3, 0x8]
 	ldr r2, [r0]

@@ -4,6 +4,7 @@ monfrontdir := graphics/pokemon/anim_front_pics
 monpaldir := graphics/pokemon/palettes
 tilesetdir := data/tilesets
 fontdir := data/graphics/fonts
+roulgfxdir := graphics/roulette
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -295,3 +296,9 @@ graphics/misc/japanese_hof.4bpp: %.4bpp: %.png
 
 graphics/picture_frame/frame5.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 86
+
+$(roulgfxdir)/roulette_tilt.4bpp: $(roulgfxdir)/shroomish.4bpp $(roulgfxdir)/tailow.4bpp
+	@cat $(roulgfxdir)/shroomish.4bpp $(roulgfxdir)/tailow.4bpp >$@
+
+$(roulgfxdir)/poke_icons2.4bpp: $(roulgfxdir)/wynaut.4bpp $(roulgfxdir)/azurill.4bpp $(roulgfxdir)/skitty.4bpp $(roulgfxdir)/makuhita.4bpp
+	@cat $(roulgfxdir)/wynaut.4bpp $(roulgfxdir)/azurill.4bpp $(roulgfxdir)/skitty.4bpp $(roulgfxdir)/makuhita.4bpp >$@

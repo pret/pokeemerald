@@ -432,6 +432,7 @@ SECTIONS {
         data/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
+        data/roulette.o(.rodata);
         data/data4d.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
