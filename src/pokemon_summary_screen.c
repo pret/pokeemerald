@@ -93,7 +93,7 @@ extern struct CompressedSpriteSheet gUnknown_0861D074;
 extern struct CompressedSpriteSheet gUnknown_0861D0F8;
 extern struct CompressedSpritePalette gUnknown_0861D100;
 extern struct CompressedSpritePalette gUnknown_0861D07C;
-extern u8 gUnknown_08D97B84;
+extern u8 gMoveTypes_Pal;
 extern u8 gUnknown_08D97D0C;
 extern void reset_temp_tile_data_buffers();
 extern void decompress_and_copy_tile_data_to_vram(u8 a, void* tiledata, u8 b, u8 c, u8 d);
@@ -648,7 +648,7 @@ u8 sub_81BFEB0()
         gUnknown_0203CF1C->unk40F0++;
         break;
     case 12:
-        LoadCompressedPalette(&gUnknown_08D97B84, 0x1D0, 0x60);
+        LoadCompressedPalette(&gMoveTypes_Pal, 0x1D0, 0x60);
         gUnknown_0203CF1C->unk40F0 = 0;
         return 1;
     }

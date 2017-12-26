@@ -2411,7 +2411,7 @@ _081C5264:
 	.4byte _081C52D4
 _081C5278:
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08D9A620
+	ldr r1, =gBagScreen_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2

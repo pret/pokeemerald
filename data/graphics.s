@@ -3390,77 +3390,129 @@ gBattleAnimBackgroundImage_Surf:: @ 8D94AB8
 gBattleAnimBackgroundPalette_Surf:: @ 8D95DD8
 	.incbin "graphics/battle_anims/backgrounds/water.gbapal.lz"
 
+	.align 2
 gUnknown_08D95E00:: @ 8D95E00
-	.incbin "baserom.gba", 0xd95e00, 0x2d0
+	.incbin "graphics/unknown/unknown_D95E00.bin.lz"
 
+	.align 2
 gUnknown_08D960D0:: @ 8D960D0
-	.incbin "baserom.gba", 0xd960d0, 0x2d4
+	.incbin "graphics/unknown/unknown_D960D0.bin.lz"
 
+	.align 2
 gUnknown_08D963A4:: @ 8D963A4
-	.incbin "baserom.gba", 0xd963a4, 0x448
+	.incbin "graphics/unknown/unknown_D963A4.bin.lz"
 
-gUnknown_08D967EC:: @ 8D967EC
-	.incbin "baserom.gba", 0xd967ec, 0x2c8
+	.align 2
+gBattleAnimSpritePalette_286:: @ 8E71200
+	.incbin "graphics/battle_anims/sprites/286.gbapal.lz"
 
-gUnknown_08D96AB4:: @ 8D96AB4
-	.incbin "baserom.gba", 0xd96ab4, 0xec
+	.align 2
+gBattleAnimSpriteSheet_188:: @ 8E71228
+	.incbin "graphics/battle_anims/sprites/188.4bpp.lz"
 
-gUnknown_08D96BA0:: @ 8D96BA0
-	 .incbin "baserom.gba", 0xd96ba0, 0x138
+	.align 2
+gBattleAnimSpritePalette_188:: @ 8E7133C
+	.incbin "graphics/battle_anims/sprites/188.gbapal.lz"
 
-gUnknown_08D96CD8:: @ 8D96CD8
-	 .incbin "baserom.gba", 0xd96cd8, 0x294
+	.align 2
+gPartyMenuMisc_Gfx:: @ 8D967EC
+	.incbin "graphics/interface/party_menu_misc.4bpp.lz"
 
-gUnknown_08D96F6C:: @ 8D96F6C
-	 .incbin "baserom.gba", 0xd96f6c, 0x24
+	.align 2
+gPartyMenuMisc_Pal:: @ 8D96AB4
+	.incbin "graphics/interface/party_menu_misc.gbapal.lz"
 
-gUnknown_08D96F90:: @ 8D96F90
-	 .incbin "baserom.gba", 0xd96f90, 0x1F8
+	.align 2
+gPartyMenuMisc_Tilemap:: @ 8D96BA0
+	.incbin "graphics/interface/party_menu_misc.bin.lz"
 
-gUnknown_08D97188:: @ 8D97188
-	 .incbin "baserom.gba", 0xd97188, 0x28
+	.align 2
+gPartyMenuPokeball_Gfx:: @ 8D96CD8
+	.incbin "graphics/interface/party_menu_pokeball.4bpp.lz"
 
-gUnknown_08D971B0:: @ 8D971B0
-	 .incbin "baserom.gba", 0xd971b0, 0x9D4
+	.align 2
+gPartyMenuPokeballSmall_Gfx:: @ 8D96E58
+	.incbin "graphics/interface/party_menu_pokeball_small.4bpp.lz" @ unused
 
-gUnknown_08D97B84:: @ 8D97B84
-	 .incbin "baserom.gba", 0xd97b84, 0x68
+	.align 2
+gPartyMenuPokeball_Pal:: @ 8D96F6C
+	.incbin "graphics/interface/party_menu_pokeball.gbapal.lz"
 
+	.align 2
+gStatusGfx_Icons:: @ 8D96F90
+	.incbin "graphics/interface/status_icons.4bpp.lz"
+
+	.align 2
+gStatusPal_Icons:: @ 8D97188
+	.incbin "graphics/interface/status_icons.gbapal.lz"
+
+	.align 2
+gMoveTypes_Gfx:: @ 8D971B0
+	.incbin "graphics/types/move_types.4bpp.lz"
+
+	.align 2
+gMoveTypes_Pal:: @ 8D97B84
+	.incbin "graphics/types/move_types.gbapal.lz"
+
+	.align 2
 gUnknown_08D97BEC:: @ 8D97BEC
-	 .incbin "baserom.gba", 0xd97bec, 0x108
+	.incbin "graphics/interface/summary_frames.4bpp.lz"
 
+	.align 2
 gUnknown_08D97CF4:: @ 8D97CF4
-	 .incbin "baserom.gba", 0xd97cf4, 0x18
+	.incbin "graphics/interface/summary_frames.gbapal.lz"
 
+	.align 2
 gUnknown_08D97D0C:: @ 8D97D0C
-	.incbin "baserom.gba", 0xd97d0c, 0x830
+	.incbin "graphics/interface/status_screen.4bpp.lz"
 
+	.align 2
 gUnknown_08D9853C:: @ 8D9853C
-	.incbin "baserom.gba", 0xd9853c, 0xf0
+	.incbin "graphics/interface/status_screen.gbapal.lz"
 
+	.align 2
 gUnknown_08D9862C:: @ 8D9862C
-	.incbin "baserom.gba", 0xd9862c, 0x1d0
+	.incbin "graphics/interface/status_screen.bin.lz"
 
+	.align 2
 gUnknown_08D987FC:: @ 8D987FC
-	.incbin "baserom.gba", 0xd987fc, 0x190
+	.incbin "graphics/interface/status_tilemap1.bin.lz"
 
+	.align 2
 gUnknown_08D9898C:: @ 8D9898C
-	.incbin "baserom.gba", 0xd9898c, 0x19c
+	.incbin "graphics/interface/status_tilemap2.bin.lz"
 
+	.align 2
 gUnknown_08D98B28:: @ 8D98B28
-	.incbin "baserom.gba", 0xd98b28, 0x1a0
+	.incbin "graphics/interface/status_tilemap3.bin.lz"
 
+	.align 2
 gUnknown_08D98CC8:: @ 8D98CC8
-	.incbin "baserom.gba", 0xd98cc8, 0x18c0
+	.incbin "graphics/interface/status_tilemap0.bin.lz"
 
-gUnknown_08D9A588:: @ 8D9A588
-	.incbin "baserom.gba", 0xd9a588, 0x4c
+	.align 2
+gBagMaleTiles:: @ 8E75024
+	.incbin "graphics/misc/bag_male.4bpp.lz"
 
-gUnknown_08D9A5D4:: @ 8D9A5D4
-	.incbin "baserom.gba", 0xd9a5d4, 0x4c
+	.align 2
+gBagFemaleTiles:: @ 8E75BA0
+	.incbin "graphics/misc/bag_female.4bpp.lz"
 
-gUnknown_08D9A620:: @ 8D9A620
-	.incbin "baserom.gba", 0xd9a620, 0x26c
+	.align 2
+gBagPalette:: @ 8E76700
+	.incbin "graphics/misc/bag.gbapal.lz"
+
+	.align 2
+gBagScreenMale_Pal:: @ 8D9A588
+	.incbin "graphics/interface/bag_screen_male.gbapal.lz"
+
+	.align 2
+gBagScreenFemale_Pal:: @ 8D9A5D4
+	.incbin "graphics/interface/bag_screen_female.gbapal.lz"
+
+	.align 2
+gBagScreen_Gfx:: @ 8D9A620
+	.incbin "graphics/interface/bag_screen.4bpp.lz"
 
 gUnknown_08D9A88C:: @ 8D9A88C
 	.incbin "baserom.gba", 0xd9a88c, 0x544

@@ -487,7 +487,7 @@ _081B05F0:
 	.4byte _081B0694
 _081B0610:
 	ldr r4, =gUnknown_0203CEE0
-	ldr r0, =gUnknown_08D967EC
+	ldr r0, =gPartyMenuMisc_Gfx
 	mov r1, sp
 	bl malloc_and_decompress
 	adds r1, r0, 0
@@ -505,14 +505,14 @@ _081B0638:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B06B4
-	ldr r0, =gUnknown_08D96BA0
+	ldr r0, =gPartyMenuMisc_Tilemap
 	ldr r1, =gUnknown_0203CEE4
 	ldr r1, [r1]
 	bl LZDecompressWram
 	b _081B069A
 	.pool
 _081B0658:
-	ldr r0, =gUnknown_08D96AB4
+	ldr r0, =gPartyMenuMisc_Pal
 	movs r2, 0xB0
 	lsls r2, 1
 	movs r1, 0

@@ -637,7 +637,7 @@ _081AB0E8:
 	.4byte _081AB1A8
 _081AB0FC:
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08D9A620
+	ldr r1, =gBagScreen_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -670,14 +670,14 @@ _081AB13C:
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	beq _081AB164
-	ldr r0, =gUnknown_08D9A5D4
+	ldr r0, =gBagScreenFemale_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
 	b _081AB1AE
 	.pool
 _081AB164:
-	ldr r0, =gUnknown_08D9A588
+	ldr r0, =gBagScreenMale_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette

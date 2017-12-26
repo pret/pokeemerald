@@ -246,10 +246,10 @@ gUnknown_08615EC0:: @ 8615EC0
 	.incbin "baserom.gba", 0x615ec0, 0x38
 
 gUnknown_08615EF8:: @ 8615EF8
-	obj_tiles gUnknown_08D96CD8, 0x400, 1200
+	obj_tiles gPartyMenuPokeball_Gfx, 0x400, 1200
 
 gUnknown_08615F00:: @ 8615F00
-	obj_pal gUnknown_08D96F6C, 1200
+	obj_pal gPartyMenuPokeball_Pal, 1200
 
 gUnknown_08615F08:: @ 8615F08
 	.incbin "baserom.gba", 0x615f08, 0x68
@@ -261,10 +261,10 @@ gUnknown_08615F78:: @ 8615F78
 	.incbin "baserom.gba", 0x615f78, 0x80
 
 gUnknown_08615FF8:: @ 8615FF8
-	obj_tiles gUnknown_08D96F90, 0x400, 1202
+	obj_tiles gStatusGfx_Icons, 0x400, 1202
 
 gUnknown_08616000:: @ 8616000
-	obj_pal gUnknown_08D97188, 1202
+	obj_pal gStatusPal_Icons, 1202
 
 gUnknown_08616008:: @ 8616008
 	.incbin "baserom.gba", 0x616008, 0x18

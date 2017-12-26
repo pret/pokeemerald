@@ -11,6 +11,10 @@ unknowngfxdir := graphics/unknown
 btintgfxdir := graphics/battle_interface
 masksgfxdir := graphics/battle_anims/masks
 bttransgfxdir := graphics/battle_transitions
+typesdir := graphics/types
+
+types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
+contest_types := cool beauty cute smart tough
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -356,3 +360,15 @@ $(masksgfxdir)/unknown_C2EA50.4bpp: $(masksgfxdir)/unknown_C2EA50.png
 
 $(bttransgfxdir)/vs_frame.4bpp: $(bttransgfxdir)/vs_frame.png
 	$(GFX) $< $@ -num_tiles 16
+
+$(menudir)/party_menu_misc.4bpp: $(menudir)/party_menu_misc.png
+	$(GFX) $< $@ -num_tiles 62
+
+$(typesdir)/move_types.4bpp: $(types:%=$(typesdir)/%.4bpp) $(contest_types:%=$(typesdir)/contest_%.4bpp)
+	@cat $^ >$@
+
+$(typesdir)/move_types.gbapal: $(typesdir)/move_types_1.gbapal $(typesdir)/move_types_2.gbapal $(typesdir)/move_types_3.gbapal
+	@cat $(typesdir)/move_types_1.gbapal $(typesdir)/move_types_2.gbapal $(typesdir)/move_types_3.gbapal >$@
+
+$(menudir)/bag_screen.4bpp: $(menudir)/bag_screen.png
+	$(GFX) $< $@ -num_tiles 53
