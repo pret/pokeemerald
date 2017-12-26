@@ -11731,7 +11731,7 @@ _080DD956:
 	ldr r1, [r0]
 	movs r0, 0x13
 	ldrsb r0, [r1, r0]
-	ldr r4, =gUnknown_08D8EC24
+	ldr r4, =gContestApplauseMeterGfx
 	cmp r5, r0
 	bge _080DD966
 	adds r4, 0x40

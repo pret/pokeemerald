@@ -53,7 +53,7 @@ gUnknown_0831C688:: @ 831C688
 
 	.align 2
 gSpriteSheet_EnemyShadow:: @ 831C6A0
-	obj_tiles gUnknown_08D8FBC0, 0x0080, 0xd759
+	obj_tiles gEnemyMonShadow_Gfx, 0x0080, 0xd759
 
 	.align 2
 gUnknown_0831C6A8:: @ 831C6A8
