@@ -435,7 +435,7 @@ SECTIONS {
         data/roulette.o(.rodata);
         data/pokedex_cry_screen.o(.rodata);
         src/landmark.o(.rodata);
-        data/data4d.o(.rodata);
+        data/battle_transition.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);

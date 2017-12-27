@@ -5,6 +5,7 @@ monpaldir := graphics/pokemon/palettes
 tilesetdir := data/tilesets
 fontdir := data/graphics/fonts
 roulgfxdir := graphics/roulette
+battletransgfxdir := graphics/battle_transitions
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -301,4 +302,23 @@ $(roulgfxdir)/roulette_tilt.4bpp: $(roulgfxdir)/shroomish.4bpp $(roulgfxdir)/tai
 	@cat $(roulgfxdir)/shroomish.4bpp $(roulgfxdir)/tailow.4bpp >$@
 
 $(roulgfxdir)/poke_icons2.4bpp: $(roulgfxdir)/wynaut.4bpp $(roulgfxdir)/azurill.4bpp $(roulgfxdir)/skitty.4bpp $(roulgfxdir)/makuhita.4bpp
-	@cat $(roulgfxdir)/wynaut.4bpp $(roulgfxdir)/azurill.4bpp $(roulgfxdir)/skitty.4bpp $(roulgfxdir)/makuhita.4bpp >$@
+	@cat $^ >$@
+
+$(battletransgfxdir)/85BBC14.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 53
+
+$(battletransgfxdir)/rayquaza.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 938
+
+$(battletransgfxdir)/frontier_square_1.4bpp: $(battletransgfxdir)/frontier_squares_blanktiles.4bpp $(battletransgfxdir)/frontier_squares_1.4bpp
+	@cat $^ >$@
+
+$(battletransgfxdir)/frontier_square_2.4bpp: $(battletransgfxdir)/frontier_squares_blanktiles.4bpp $(battletransgfxdir)/frontier_squares_2.4bpp
+	@cat $^ >$@
+ 
+$(battletransgfxdir)/frontier_square_3.4bpp: $(battletransgfxdir)/frontier_squares_blanktiles.4bpp $(battletransgfxdir)/frontier_squares_3.4bpp
+	@cat $^ >$@
+
+$(battletransgfxdir)/frontier_square_4.4bpp: $(battletransgfxdir)/frontier_squares_blanktiles.4bpp $(battletransgfxdir)/frontier_squares_4.4bpp
+	@cat $^ >$@
+
