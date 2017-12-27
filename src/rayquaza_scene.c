@@ -431,12 +431,12 @@ static const union AnimCmd *const sSpriteAnimTable_862A8BC[] =
 
 const struct CompressedSpriteSheet gUnknown_0862A8C4 =
 {
-    gUnknown_08DA1E78, 0x3000, 30505
+    gRaySceneGroudon_Gfx, 0x3000, 30505
 };
 
 const struct CompressedSpritePalette gUnknown_0862A8CC =
 {
-    gUnknown_08DA3370, 30505
+    gRaySceneGroudon_Pal, 30505
 };
 
 const struct SpriteTemplate gUnknown_0862A8D4 =
@@ -463,7 +463,7 @@ static const union AnimCmd *const sSpriteAnimTable_862A8F4[] =
 
 const struct CompressedSpriteSheet gUnknown_0862A8F8 =
 {
-    gUnknown_08DA2A5C, 0x200, 30506
+    gRaySceneGroudon2_Gfx, 0x200, 30506
 };
 
 const struct SpriteTemplate gUnknown_0862A900 =
@@ -490,7 +490,7 @@ static const union AnimCmd *const sSpriteAnimTable_862A920[] =
 
 const struct CompressedSpriteSheet gUnknown_0862A924 =
 {
-    gUnknown_08DA2B28, 0x400, 30507
+    gRaySceneGroudon3_Gfx, 0x400, 30507
 };
 
 const struct SpriteTemplate gUnknown_0862A92C =
@@ -582,12 +582,12 @@ static const union AnimCmd *const sSpriteAnimTable_862A9B0[] =
 
 const struct CompressedSpriteSheet gUnknown_0862A9D4 =
 {
-    gUnknown_08DA2D1C, 0xF00, 30508
+    gRaySceneKyogre_Gfx, 0xF00, 30508
 };
 
 const struct CompressedSpritePalette gUnknown_0862A9DC =
 {
-    gUnknown_08DA3398, 30508
+    gRaySceneKyogre_Pal, 30508
 };
 
 const struct SpriteTemplate gUnknown_0862A9E4 =
@@ -617,7 +617,7 @@ static const union AnimCmd *const sSpriteAnimTable_862AA10[] =
 
 const struct CompressedSpriteSheet gUnknown_0862AA14 =
 {
-    gUnknown_08DA3250, 0xC0, 30509
+    gRaySceneKyogre2_Gfx, 0xC0, 30509
 };
 
 const struct SpriteTemplate gUnknown_0862AA1C =
@@ -633,7 +633,7 @@ const struct SpriteTemplate gUnknown_0862AA1C =
 
 const struct CompressedSpriteSheet gUnknown_0862AA34 =
 {
-    gUnknown_08DA32A4, 0x200, 30510
+    gRaySceneKyogre3_Gfx, 0x200, 30510
 };
 
 const struct SpriteTemplate gUnknown_0862AA3C =
@@ -704,12 +704,12 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_862AA8C[] =
 
 const struct CompressedSpriteSheet gUnknown_0862AA90 =
 {
-    gUnknown_08DA3BC0, 0x100, 30555
+    gRaySceneSmoke_Gfx, 0x100, 30555
 };
 
 const struct CompressedSpritePalette gUnknown_0862AA98 =
 {
-    gUnknown_08DA3C7C, 30555
+    gRaySceneSmoke_Pal, 30555
 };
 
 const struct SpriteTemplate gUnknown_0862AAA0 =
@@ -803,17 +803,17 @@ static const union AnimCmd *const sSpriteAnimTable_862AAF8[] =
 
 const struct CompressedSpriteSheet gUnknown_0862AAFC =
 {
-    gUnknown_08DA6440, 0x1000, 30556
+    gRaySceneRayquazaFly1_Gfx, 0x1000, 30556
 };
 
 const struct CompressedSpriteSheet gUnknown_0862AB04 =
 {
-    gUnknown_08DA68AC, 0x200, 30557
+    gRaySceneRayquazaTail_Gfx, 0x200, 30557
 };
 
 const struct CompressedSpritePalette gUnknown_0862AB0C =
 {
-    gUnknown_08DA4DA8, 30556
+    gRaySceneRayquaza_Pal, 30556
 };
 
 const struct SpriteTemplate gUnknown_0862AB14 =
@@ -1017,52 +1017,52 @@ static const union AnimCmd *const sSpriteAnimTable_862AC24[] =
 
 const struct CompressedSpriteSheet gUnknown_0862AC28 =
 {
-    gUnknown_08DA8ED8, 0x1800, 30565
+    gRaySceneGroudonLeft_Gfx, 0x1800, 30565
 };
 
 const struct CompressedSpriteSheet gUnknown_0862AC30 =
 {
-    gUnknown_08DA9670, 0x80, 30566
+    gRaySceneGroudonTail_Gfx, 0x80, 30566
 };
 
 const struct CompressedSpriteSheet gUnknown_0862AC38 =
 {
-    gUnknown_08DA96B4, 0x600, 30568
+    gRaySceneKyogreRight_Gfx, 0x600, 30568
 };
 
 const struct CompressedSpriteSheet gUnknown_0862AC40 =
 {
-    gUnknown_08DA98FC, 0x2000, 30569
+    gRaySceneRayquazaHover_Gfx, 0x2000, 30569
 };
 
 const struct CompressedSpriteSheet gUnknown_0862AC48 =
 {
-    gUnknown_08DAA5A4, 0x800, 30570
+    gRaySceneRayquazaFlyIn_Gfx, 0x800, 30570
 };
 
 const struct CompressedSpriteSheet gUnknown_0862AC50 =
 {
-    gUnknown_08DAA794, 0x300, 30571
+    gRaySceneSplash_Gfx, 0x300, 30571
 };
 
 const struct CompressedSpritePalette gUnknown_0862AC58 =
 {
-    gUnknown_08DAA82C, 30565
+    gRaySceneGroudonLeft_Pal, 30565
 };
 
 const struct CompressedSpritePalette gUnknown_0862AC60 =
 {
-    gUnknown_08DAA854, 30568
+    gRaySceneKyogreRight_Pal, 30568
 };
 
 const struct CompressedSpritePalette gUnknown_0862AC68 =
 {
-    gUnknown_08DAA87C, 30569
+    gRaySceneRayquazaHover_Pal, 30569
 };
 
 const struct CompressedSpritePalette gUnknown_0862AC70 =
 {
-    gUnknown_08DAA8A4, 30571
+    gRaySceneSplash_Pal, 30571
 };
 
 const struct SpriteTemplate gUnknown_0862AC78 =

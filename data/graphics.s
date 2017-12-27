@@ -3514,44 +3514,69 @@ gBagScreenFemale_Pal:: @ 8D9A5D4
 gBagScreen_Gfx:: @ 8D9A620
 	.incbin "graphics/interface/bag_screen.4bpp.lz"
 
+	.align 2
 gUnknown_08D9A88C:: @ 8D9A88C
-	.incbin "baserom.gba", 0xd9a88c, 0x544
+	.incbin "graphics/unknown/unknown_D9A88C.bin.lz"
 
+	.align 2
+gBattleFrontierGfx_PyramidBag:: @ 8D9A9EC
+	.incbin "graphics/interface/bag_pyramid.4bpp.lz"
+
+	.align 2
 gUnknown_08D9ADD0:: @ 8D9ADD0
-	.incbin "baserom.gba", 0xd9add0, 0x34
+	.incbin "graphics/interface/bag_pyramid.gbapal.lz" @ female palette is first and male is second.
 
+	.align 2
 gUnknown_08D9AE04:: @ 8D9AE04
-	.incbin "baserom.gba", 0xd9ae04, 0x140
+	.incbin "graphics/unknown/unknown_D9AE04.bin.lz" @ tilemap?
 
+	.align 2
 gUnknown_08D9AF44:: @ 8D9AF44
-	.incbin "baserom.gba", 0xd9af44, 0x78
+	.incbin "graphics/unknown/unknown_D9AF44.gbapal.lz"
 
+	.align 2
+gBagSwapLineGfx:: @ 8D9AF6C
+	.incbin "graphics/interface/bag_swap.4bpp.lz"
+
+	.align 2
+gBagSwapLinePal:: @ 8D9AFAC
+	.incbin "graphics/interface/bag_swap.gbapal.lz"
+
+	.align 2
 gBuyMenuFrame_Gfx:: @ 8D9AFBC
-	.incbin "baserom.gba", 0xd9afbc, 0x10c
+	.incbin "graphics/interface/mart_frame.4bpp.lz"
 
+	.align 2
 gMenuMoneyPal:: @ 8D9B0C8
-	.incbin "baserom.gba", 0xd9b0c8, 0x28
+	.incbin "graphics/interface/mart_frame.gbapal.lz"
 
+	.align 2
 gBuyMenuFrame_Tilemap:: @ 8D9B0F0
-	.incbin "baserom.gba", 0xd9b0f0, 0x140
+	.incbin "graphics/interface/mart_frame.bin.lz"
 
+	.align 2
 gMenuMoneyGfx:: @ 8D9B230
-	.incbin "baserom.gba", 0xd9b230, 0x84
+	.incbin "graphics/interface/money.4bpp.lz"
 
+	.align 2
 gMenuPokeblock_Gfx:: @ 8D9B2B4
-	.incbin "baserom.gba", 0xd9b2b4, 0x1bc
+	.incbin "graphics/interface/pokeblock_case_frame.4bpp.lz"
 
+	.align 2
 gMenuPokeblock_Pal:: @ 8D9B470
-	.incbin "baserom.gba", 0xd9b470, 0x70
+	.incbin "graphics/interface/pokeblock_case_frame.gbapal.lz"
 
+	.align 2
 gMenuPokeblockDevice_Gfx:: @ 8D9B4E0
-	.incbin "baserom.gba", 0xd9b4e0, 0x2c0
+	.incbin "graphics/interface/pokeblock_device.4bpp.lz"
 
+	.align 2
 gMenuPokeblockDevice_Pal:: @ 8D9B7A0
-	.incbin "baserom.gba", 0xd9b7a0, 0x28
+	.incbin "graphics/interface/pokeblock_device.gbapal.lz"
 
+	.align 2
 gMenuPokeblock_Tilemap:: @ 8D9B7C8
-	.incbin "baserom.gba", 0xd9b7c8, 0x148
+	.incbin "graphics/interface/pokeblock.bin.lz"
 
 	.align 2
 gPokeblock_Gfx::
@@ -3613,176 +3638,236 @@ gPokeblockWhite_Pal::
 gPokeblockGold_Pal::
 	.incbin "graphics/pokeblock/gold.gbapal.lz"
 
+	.align 2
 gUnknown_08D9BA44:: @ 8D9BA44
-	.incbin "baserom.gba", 0xd9ba44, 0x100
+	.incbin "graphics/interface/pokeblock_feeding_bg_map.bin.lz"
 
+	.align 2
 gUnknown_08D9BB44:: @ 8D9BB44
-	.incbin "baserom.gba", 0xd9bb44, 0x3ac
+	.incbin "graphics/interface/check_berry.4bpp.lz"
 
+	.align 2
 gUnknown_08D9BEF0:: @ 8D9BEF0
-	.incbin "baserom.gba", 0xd9bef0, 0xa8
+	.incbin "graphics/interface/check_berry.gbapal.lz"
 
+	.align 2
 gUnknown_08D9BF98:: @ 8D9BF98
-	.incbin "baserom.gba", 0xd9bf98, 0x1a4
+	.incbin "graphics/interface/berry_tag.bin.lz"
 
+	.align 2
 gUnknown_08D9C13C:: @ 8D9C13C
-	.incbin "baserom.gba", 0xd9c13c, 0x26c
+	.incbin "graphics/interface/berry_tag_title.bin.lz"
+
+	.align 2
+gBerryCheckCircle_Gfx:: @ 8D9C24C
+	.incbin "graphics/interface/check_berry_circle.4bpp.lz"
 
 @ 8D9C3A8
 	.include "data/graphics/berries/berry_graphics.inc"
 
-gUnknown_08DA1E78:: @ 8DA1E78
-	.incbin "baserom.gba", 0xda1e78, 0xBE4
+	.align 2
+gRaySceneGroudon_Gfx:: @ 8DA1E78
+	.incbin "graphics/rayquaza_scene/groudon.4bpp.lz"
 
-gUnknown_08DA2A5C:: @ 8DA2A5C
-	.incbin "baserom.gba", 0xDA2A5C, 0xCC
+	.align 2
+gRaySceneGroudon2_Gfx:: @ 8DA2A5C
+	.incbin "graphics/rayquaza_scene/groudon_shoulder.4bpp.lz"
 
-gUnknown_08DA2B28:: @ 8DA2B28
-	.incbin "baserom.gba", 0xDA2B28, 0x1F4
+	.align 2
+gRaySceneGroudon3_Gfx:: @ 8DA2B28
+	.incbin "graphics/rayquaza_scene/groudon_claw.4bpp.lz"
 
-gUnknown_08DA2D1C:: @ 8DA2D1C
-	.incbin "baserom.gba", 0xDA2D1C, 0x534
+	.align 2
+gRaySceneKyogre_Gfx:: @ 8DA2D1C
+	.incbin "graphics/rayquaza_scene/kyogre.4bpp.lz"
 
-gUnknown_08DA3250:: @ 8DA3250
-	.incbin "baserom.gba", 0xDA3250, 0x54
+	.align 2
+gRaySceneKyogre2_Gfx:: @ 8DA3250
+	.incbin "graphics/rayquaza_scene/kyogre_shoulder.4bpp.lz"
 
-gUnknown_08DA32A4:: @ 8DA32A4
-	.incbin "baserom.gba", 0xDA32A4, 0xCC
+	.align 2
+gRaySceneKyogre3_Gfx:: @ 8DA32A4
+	.incbin "graphics/rayquaza_scene/kyogre_fin.4bpp.lz"
 
-gUnknown_08DA3370:: @ 8DA3370
-	.incbin "baserom.gba", 0xDA3370, 0x28
+	.align 2
+gRaySceneGroudon_Pal:: @ 8DA3370
+	.incbin "graphics/rayquaza_scene/groudon.gbapal.lz"
 
-gUnknown_08DA3398:: @ 8DA3398
-	.incbin "baserom.gba", 0xDA3398, 0x28
+	.align 2
+gRaySceneKyogre_Pal:: @ 8DA3398
+	.incbin "graphics/rayquaza_scene/kyogre.gbapal.lz"
 
-gUnknown_08DA33C0:: @ 8DA33C0
-	.incbin "baserom.gba", 0xda33c0, 0x428
+	.align 2
+gRaySceneClouds_Gfx:: @ 8DA33C0
+	.incbin "graphics/rayquaza_scene/clouds.4bpp.lz"
 
-gUnknown_08DA37E8:: @ 8DA37E8
-	.incbin "baserom.gba", 0xda37e8, 0x3c
+	.align 2
+gRaySceneClouds_Pal:: @ 8DA37E8
+	.incbin "graphics/rayquaza_scene/clouds.gbapal.lz" @ pal 1 clouds, pal 2 rain
 
-gUnknown_08DA3824:: @ 8DA3824
-	.incbin "baserom.gba", 0xda3824, 0x164
+	.align 2
+gRaySceneClouds1_Tilemap:: @ 8DA3824
+	.incbin "graphics/rayquaza_scene/clouds1.bin.lz"
 
-gUnknown_08DA3988:: @ 8DA3988
-	.incbin "baserom.gba", 0xda3988, 0x100
+	.align 2
+gRaySceneClouds2_Tilemap:: @ 8DA3988
+	.incbin "graphics/rayquaza_scene/clouds2.bin.lz"
 
-gUnknown_08DA3A88:: @ 8DA3A88
-	.incbin "baserom.gba", 0xda3a88, 0x138
+	.align 2
+gRaySceneClouds3_Tilemap:: @ 8DA3A88
+	.incbin "graphics/rayquaza_scene/clouds3.bin.lz"
 
-gUnknown_08DA3BC0:: @ 8DA3BC0
-	.incbin "baserom.gba", 0xDA3BC0, 0xBC
+	.align 2
+gRaySceneSmoke_Gfx:: @ 8DA3BC0
+	.incbin "graphics/rayquaza_scene/smoke.4bpp.lz"
 
-gUnknown_08DA3C7C:: @ 8DA3C7C
-	.incbin "baserom.gba", 0xDA3C7C, 0x18
+	.align 2
+gRaySceneSmoke_Pal:: @ 8DA3C7C
+	.incbin "graphics/rayquaza_scene/smoke.gbapal.lz"
 
-gUnknown_08DA3C94:: @ 8DA3C94
-	.incbin "baserom.gba", 0xda3c94, 0x1114
+	.align 2
+gRaySceneRayquaza_Gfx:: @ 8DA3C94
+	.incbin "graphics/rayquaza_scene/rayquaza.8bpp.lz"
 
-gUnknown_08DA4DA8:: @ 8DA4DA8
-	.incbin "baserom.gba", 0xda4da8, 0x44
+	.align 2
+gRaySceneRayquaza_Pal:: @ 8DA4DA8
+	.incbin "graphics/rayquaza_scene/rayquaza.gbapal.lz"
 
-gUnknown_08DA4DEC:: @ 8DA4DEC
-	.incbin "baserom.gba", 0xda4dec, 0x184
+	.align 2
+gRaySceneRayquaza_Tilemap:: @ 8DA4DEC
+	.incbin "graphics/rayquaza_scene/rayquaza.bin.lz"
 
-gUnknown_08DA4F70:: @ 8DA4F70
-	.incbin "baserom.gba", 0xda4f70, 0x1148
+	.align 2
+gRaySceneOvercast_Gfx:: @ 8DA4F70
+	.incbin "graphics/rayquaza_scene/overcast.4bpp.lz" @ uses pal 2 of gRaySceneRayquaza_Pal
 
-gUnknown_08DA60B8:: @ 8DA60B8
-	.incbin "baserom.gba", 0xda60b8, 0x388
+	.align 2
+gRaySceneOvercast_Tilemap:: @ 8DA60B8
+	.incbin "graphics/rayquaza_scene/overcast.bin.lz"
 
-gUnknown_08DA6440:: @ 8DA6440
-	.incbin "baserom.gba", 0xDA6440, 0x46C
+	.align 2
+gRaySceneRayquazaFly1_Gfx:: @ 8DA6440
+	.incbin "graphics/rayquaza_scene/rayquaza_fly1.4bpp.lz"
 
-gUnknown_08DA68AC:: @ 8DA68AC
-	.incbin "baserom.gba", 0xDA68AC, 0x110
+	.align 2
+gRaySceneRayquazaTail_Gfx:: @ 8DA68AC
+	.incbin "graphics/rayquaza_scene/rayquaza_tail_fix.4bpp.lz" @ for some reason there are an extra 0xC bytes at the end of the original 4bpp, so in order to produce the correct lz, we have to cat the bytes at the end with a make rule. not sure why those bytes are there, it may have been a bug in Game Freak's software.
 
-gUnknown_08DA69BC:: @ 8DA69BC
-	.incbin "baserom.gba", 0xda69bc, 0xb6c
+	.align 2
+gRaySceneOvercast2_Gfx:: @ 8DA69BC
+	.incbin "graphics/rayquaza_scene/overcast2.4bpp.lz"
 
-gUnknown_08DA7528:: @ 8DA7528
-	.incbin "baserom.gba", 0xda7528, 0x21c
+	.align 2
+gRaySceneRayquazaLight_Gfx:: @ 8DA7528
+	.incbin "graphics/rayquaza_scene/rayquaza_light.4bpp.lz" @ uses pal 2 of gRaySceneOvercast2_Pal
 
-gUnknown_08DA7744:: @ 8DA7744
-	.incbin "baserom.gba", 0xda7744, 0x40
+	.align 2
+gRaySceneOvercast2_Pal:: @ 8DA7744
+	.incbin "graphics/rayquaza_scene/overcast2.gbapal.lz"
 
-gUnknown_08DA7784:: @ 8DA7784
-	.incbin "baserom.gba", 0xda7784, 0x328
+	.align 2
+gRaySceneOvercast2_Tilemap:: @ 8DA7784
+	.incbin "graphics/rayquaza_scene/overcast2.bin.lz"
 
-gUnknown_08DA7AAC:: @ 8DA7AAC
-	.incbin "baserom.gba", 0xda7aac, 0x184
+	.align 2
+gRaySceneRayquazaLight_Tilemap:: @ 8DA7AAC
+	.incbin "graphics/rayquaza_scene/rayquaza_light.bin.lz"
 
-gUnknown_08DA7C30:: @ 8DA7C30
-	.incbin "baserom.gba", 0xda7c30, 0x13c
+	.align 2
+gRaySceneChaseBg_Gfx:: @ 8DA7C30
+	.incbin "graphics/rayquaza_scene/chase_bg.4bpp.lz"
 
-gUnknown_08DA7D6C:: @ 8DA7D6C
-	.incbin "baserom.gba", 0xda7d6c, 0x140
+	.align 2
+gRaySceneChaseBg_Tilemap:: @ 8DA7D6C
+	.incbin "graphics/rayquaza_scene/chase_bg.bin.lz"
 
-gUnknown_08DA7EAC:: @ 8DA7EAC
-	.incbin "baserom.gba", 0xda7eac, 0x108
+	.align 2
+gRaySceneChaseStreaks_Gfx:: @ 8DA7EAC
+	.incbin "graphics/rayquaza_scene/chase_streaks.4bpp.lz"
 
-gUnknown_08DA7FB4:: @ 8DA7FB4
-	.incbin "baserom.gba", 0xda7fb4, 0x108
+	.align 2
+gRaySceneChaseStreaks_Tilemap:: @ 8DA7FB4
+	.incbin "graphics/rayquaza_scene/chase_streaks.bin.lz"
 
-gUnknown_08DA80BC:: @ 8DA80BC
-	.incbin "baserom.gba", 0xda80bc, 0xa84
+	.align 2
+gRaySceneRayquazaChase_Gfx:: @ 8DA80BC
+	.incbin "graphics/rayquaza_scene/rayquaza_chase.4bpp.lz"
 
-gUnknown_08DA8B40:: @ 8DA8B40
-	.incbin "baserom.gba", 0xda8b40, 0x22c
+	.align 2
+gRayChaseRayquazaChase_Tilemap:: @ 8DA8B40
+	.incbin "graphics/rayquaza_scene/rayquaza_chase.bin.lz"
 
-gUnknown_08DA8D6C:: @ 8DA8D6C
-	.incbin "baserom.gba", 0xda8d6c, 0x118
+	.align 2
+gRayChaseRayquazaChase2_Tilemap:: @ 8DA8D6C
+	.incbin "graphics/rayquaza_scene/rayquaza_chase2.bin.lz"
 
-gUnknown_08DA8E84:: @ 8DA8E84
-	.incbin "baserom.gba", 0xda8e84, 0x54
+	.align 2
+gRaySceneChase_Pal:: @ 8DA8E84
+	.incbin "graphics/rayquaza_scene/chase.gbapal.lz"
 
-gUnknown_08DA8ED8:: @ 8DA8ED8
-	.incbin "baserom.gba", 0xDA8ED8, 0x798
+	.align 2
+gRaySceneGroudonLeft_Gfx:: @ 8DA8ED8
+	.incbin "graphics/rayquaza_scene/groudon_left.4bpp.lz"
 
-gUnknown_08DA9670:: @ 8DA9670
-	.incbin "baserom.gba", 0xDA9670, 0x44
+	.align 2
+gRaySceneGroudonTail_Gfx:: @ 8DA9670
+	.incbin "graphics/rayquaza_scene/groudon_tail.4bpp.lz"
 
-gUnknown_08DA96B4:: @ 8DA96B4
-	.incbin "baserom.gba", 0xDA96B4, 0x248
+	.align 2
+gRaySceneKyogreRight_Gfx:: @ 8DA96B4
+	.incbin "graphics/rayquaza_scene/kyogre_right.4bpp.lz"
 
-gUnknown_08DA98FC:: @ 8DA98FC
-	.incbin "baserom.gba", 0xDA98FC, 0xCA8
+	.align 2
+gRaySceneRayquazaHover_Gfx:: @ 8DA98FC
+	.incbin "graphics/rayquaza_scene/rayquaza_hover.4bpp.lz"
 
-gUnknown_08DAA5A4:: @ 8DAA5A4
-	.incbin "baserom.gba", 0xDAA5A4, 0x1F0
+	.align 2
+gRaySceneRayquazaFlyIn_Gfx:: @ 8DAA5A4
+	.incbin "graphics/rayquaza_scene/rayquaza_flyin.4bpp.lz"
 
-gUnknown_08DAA794:: @ 8DAA794
-	.incbin "baserom.gba", 0xDAA794, 0x98
+	.align 2
+gRaySceneSplash_Gfx:: @ 8DAA794
+	.incbin "graphics/rayquaza_scene/splash.4bpp.lz"
 
-gUnknown_08DAA82C:: @ 8DAA82C
-	.incbin "baserom.gba", 0xDAA82C, 0x28
+	.align 2
+gRaySceneGroudonLeft_Pal:: @ 8DAA82C
+	.incbin "graphics/rayquaza_scene/groudon_left.gbapal.lz"
 
-gUnknown_08DAA854:: @ 8DAA854
-	.incbin "baserom.gba", 0xDAA854, 0x28
+	.align 2
+gRaySceneKyogreRight_Pal:: @ 8DAA854
+	.incbin "graphics/rayquaza_scene/kyogre_right.gbapal.lz"
 
-gUnknown_08DAA87C:: @ 8DAA87C
-	.incbin "baserom.gba", 0xDAA87C, 0x28
+	.align 2
+gRaySceneRayquazaHover_Pal:: @ 8DAA87C
+	.incbin "graphics/rayquaza_scene/rayquaza_hover.gbapal.lz"
 
-gUnknown_08DAA8A4:: @ 8DAA8A4
-	.incbin "baserom.gba", 0xDAA8A4, 0x10
+	.align 2
+gRaySceneSplash_Pal:: @ 8DAA8A4
+	.incbin "graphics/rayquaza_scene/splash.gbapal.lz"
 
-gUnknown_08DAA8B4:: @ 8DAA8B4
-	.incbin "baserom.gba", 0xdaa8b4, 0x270
+	.align 2
+gRaySceneHushBg_Gfx:: @ 8DAA8B4
+	.incbin "graphics/rayquaza_scene/hush_bg.4bpp.lz"
 
-gUnknown_08DAAB24:: @ 8DAAB24
-	.incbin "baserom.gba", 0xdaab24, 0xf8
+	.align 2
+gRaySceneHushRing_Gfx:: @ 8DAAB24
+	.incbin "graphics/rayquaza_scene/hush_ring.8bpp.lz"
 
-gUnknown_08DAAC1C:: @ 8DAAC1C
-	.incbin "baserom.gba", 0xdaac1c, 0x238
+	.align 2
+gRaySceneHushBg_Tilemap:: @ 8DAAC1C
+	.incbin "graphics/rayquaza_scene/hush_bg.bin.lz"
 
-gUnknown_08DAAE54:: @ 8DAAE54
-	.incbin "baserom.gba", 0xdaae54, 0x144
+	.align 2
+gRaySceneHushRing_Tilemap:: @ 8DAAE54
+	.incbin "graphics/rayquaza_scene/hush_ring.bin.lz"
 
-gUnknown_08DAAF98:: @ 8DAAF98
-	.incbin "baserom.gba", 0xdaaf98, 0x54
+	.align 2
+gRaySceneHushRing_Map:: @ 8DAAF98
+	.incbin "graphics/rayquaza_scene/hush_ring_map.bin.lz"
 
-gUnknown_08DAAFEC:: @ 8DAAFEC
-	.incbin "baserom.gba", 0xdaafec, 0x6c
+	.align 2
+gRaySceneHushBg_Pal:: @ 8DAAFEC
+	.incbin "graphics/rayquaza_scene/hush_bg.gbapal.lz"
 
 @ 8DAB058
 	.include "data/graphics/items/item_graphics.inc"

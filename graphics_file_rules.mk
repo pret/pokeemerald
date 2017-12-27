@@ -12,6 +12,7 @@ btintgfxdir := graphics/battle_interface
 masksgfxdir := graphics/battle_anims/masks
 bttransgfxdir := graphics/battle_transitions
 typesdir := graphics/types
+raydir := graphics/rayquaza_scene
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -372,3 +373,22 @@ $(typesdir)/move_types.gbapal: $(typesdir)/move_types_1.gbapal $(typesdir)/move_
 
 $(menudir)/bag_screen.4bpp: $(menudir)/bag_screen.png
 	$(GFX) $< $@ -num_tiles 53
+
+$(raydir)/rayquaza.8bpp: $(raydir)/rayquaza.png
+	$(GFX) $< $@ -num_tiles 227
+
+$(raydir)/overcast.4bpp: $(raydir)/overcast.png
+	$(GFX) $< $@ -num_tiles 313
+
+$(raydir)/rayquaza_fly1.4bpp: $(raydir)/rayquaza_fly1.png
+	$(GFX) $< $@ -num_tiles 124
+
+$(raydir)/rayquaza_tail_fix.4bpp: $(raydir)/rayquaza_tail.4bpp
+	cp $< $@
+	head -c 12 /dev/zero >> $@
+
+$(raydir)/chase_streaks.4bpp: $(raydir)/chase_streaks.png
+	$(GFX) $< $@ -num_tiles 19
+
+$(raydir)/rayquaza_chase.4bpp: $(raydir)/rayquaza_chase.png
+	$(GFX) $< $@ -num_tiles 155
