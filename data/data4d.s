@@ -5,12 +5,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_085B8CA0:: @ 85B8CA0
-	.incbin "baserom.gba", 0x5b8cA0, 0x518
-
-gUnknown_085B91B8:: @ 85B91B8
-	.incbin "baserom.gba", 0x5b91b8, 0x178
-
 gUnknown_085B9330:: @ 85B9330
 	.incbin "baserom.gba", 0x5b9330, 0x580
 

@@ -53,7 +53,7 @@ MirageTower_4F_EventScript_23ADCA:: @ 823ADCA
 	special sub_81BE994
 	waitstate
 	setvar VAR_0x40CB, 1
-	clearflag FLAG_0x078
+	clearflag FLAG_LANDMARK_MIRAGE_TOWER
 	warp ROUTE_111, 255, 19, 59
 	waitstate
 	release

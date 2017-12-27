@@ -187,7 +187,7 @@ SECTIONS {
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
-        asm/landmark.o(.text);
+        src/landmark.o(.text);
         asm/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
         src/battle_controller_link_partner.o(.text);
@@ -434,6 +434,7 @@ SECTIONS {
         src/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
         data/pokedex_cry_screen.o(.rodata);
+        src/landmark.o(.rodata);
         data/data4d.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);

@@ -7,7 +7,7 @@ TrainerHill_Entrance_MapScripts:: @ 82680AC
 	.byte 0
 
 TrainerHill_Entrance_MapScript1_2680C6: @ 82680C6
-	setflag FLAG_0x8E2
+	setflag FLAG_LANDMARK_TRAINER_HILL
 	getplayerxy VAR_0x400D, VAR_RESULT
 	end
 

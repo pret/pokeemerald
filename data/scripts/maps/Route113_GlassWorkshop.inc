@@ -3,7 +3,7 @@ Route113_GlassWorkshop_MapScripts:: @ 826ED03
 	.byte 0
 
 Route113_GlassWorkshop_MapScript1_26ED09: @ 826ED09
-	setflag FLAG_0x8A4
+	setflag FLAG_LANDMARK_GLASS_WORKSHOP
 	compare VAR_0x40BE, 1
 	call_if 1, Route113_GlassWorkshop_EventScript_26ED18
 	end

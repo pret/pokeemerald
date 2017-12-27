@@ -3,7 +3,7 @@ SouthernIsland_Exterior_MapScripts:: @ 82429C8
 	.byte 0
 
 SouthernIsland_Exterior_MapScript1_2429CE: @ 82429CE
-	setflag FLAG_UNLOCK_SOUTHERN_ISLAND
+	setflag FLAG_LANDMARK_SOUTHERN_ISLAND
 	end
 
 SouthernIsland_Exterior_EventScript_2429D2:: @ 82429D2

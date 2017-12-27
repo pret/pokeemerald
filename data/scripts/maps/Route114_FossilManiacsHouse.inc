@@ -3,7 +3,7 @@ Route114_FossilManiacsHouse_MapScripts:: @ 822AD30
 	.byte 0
 
 Route114_FossilManiacsHouse_MapScript1_22AD36: @ 822AD36
-	setflag FLAG_0x8B7
+	setflag FLAG_LANDMARK_FOSSIL_MANIACS_HOUSE
 	end
 
 Route114_FossilManiacsHouse_EventScript_22AD3A:: @ 822AD3A
