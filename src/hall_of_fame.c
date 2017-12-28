@@ -97,7 +97,7 @@ extern u16 sub_818D7D8(u16 species, u32 trainerId, u32 personality, u8 arg3, s16
 extern void sub_8198204(u8 *dst, const u8 *src, u8, u8, u8);
 extern bool8 sub_80F9C30(void);
 extern void sub_8198314(void);
-extern void sub_8137C3C(void);
+extern void ReturnFromHallOfFamePC(void);
 extern void sub_8198180(const u8 *src, u8, u8);
 extern void sub_80F9BF4(u16, u16, u8);
 extern void sub_81980F0(u8, u8, u8, u8, u16);
@@ -1108,7 +1108,7 @@ static void Task_HofPC_HandleExit(u8 taskId)
         if (sHofMonPtr != NULL)
             FREE_AND_SET_NULL(sHofMonPtr);
 
-        sub_8137C3C();
+        ReturnFromHallOfFamePC();
     }
 }
 

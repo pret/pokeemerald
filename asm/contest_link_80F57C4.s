@@ -2151,7 +2151,7 @@ sub_80F6AE8: @ 80F6AE8
 	movs r2, 0x80
 	movs r3, 0x1
 	bl RequestDma3Fill
-	ldr r0, =gUnknown_0858D8C8
+	ldr r0, =gSpriteTemplate_858D8C8
 	movs r1, 0x8
 	movs r2, 0x8
 	movs r3, 0
@@ -2454,7 +2454,7 @@ sub_80F6DC0: @ 80F6DC0
 	push {r4-r6,lr}
 	sub sp, 0x20
 	mov r1, sp
-	ldr r0, =gUnknown_0858D7F8
+	ldr r0, =gSpriteTemplate_858D7F8
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
 	ldm r0!, {r2-r4}
@@ -3564,7 +3564,7 @@ sub_80F7670: @ 80F7670
 	ldrb r0, [r0, 0x7]
 	cmp r0, 0x27
 	bhi _080F7732
-	ldr r4, =gUnknown_0858D860
+	ldr r4, =gSpriteTemplate_858D860
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16

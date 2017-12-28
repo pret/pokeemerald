@@ -3,6 +3,6 @@ AlteringCave_MapScripts:: @ 823B177
 	.byte 0
 
 AlteringCave_MapScript1_23B17D: @ 823B17D
-	setflag FLAG_0x8DD
+	setflag FLAG_LANDMARK_ALTERING_CAVE
 	end
 

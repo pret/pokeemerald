@@ -144,7 +144,7 @@ SlateportCity_PokemonFanClub_EventScript_20A0D5:: @ 820A0D5
 	end
 
 SlateportCity_PokemonFanClub_EventScript_20A0DF:: @ 820A0DF
-	specialvar VAR_RESULT, sub_8139004
+	specialvar VAR_RESULT, CheckLeadMonCool
 	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_20A0F0
 	return
@@ -154,7 +154,7 @@ SlateportCity_PokemonFanClub_EventScript_20A0F0:: @ 820A0F0
 	return
 
 SlateportCity_PokemonFanClub_EventScript_20A0F6:: @ 820A0F6
-	specialvar VAR_RESULT, sub_8139030
+	specialvar VAR_RESULT, CheckLeadMonBeauty
 	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_20A107
 	return
@@ -164,7 +164,7 @@ SlateportCity_PokemonFanClub_EventScript_20A107:: @ 820A107
 	return
 
 SlateportCity_PokemonFanClub_EventScript_20A10D:: @ 820A10D
-	specialvar VAR_RESULT, sub_813905C
+	specialvar VAR_RESULT, CheckLeadMonCute
 	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_20A11E
 	return
@@ -174,7 +174,7 @@ SlateportCity_PokemonFanClub_EventScript_20A11E:: @ 820A11E
 	return
 
 SlateportCity_PokemonFanClub_EventScript_20A124:: @ 820A124
-	specialvar VAR_RESULT, sub_8139088
+	specialvar VAR_RESULT, CheckLeadMonSmart
 	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_20A135
 	return
@@ -184,7 +184,7 @@ SlateportCity_PokemonFanClub_EventScript_20A135:: @ 820A135
 	return
 
 SlateportCity_PokemonFanClub_EventScript_20A13B:: @ 820A13B
-	specialvar VAR_RESULT, sub_81390B4
+	specialvar VAR_RESULT, CheckLeadMonTough
 	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_20A14C
 	return
@@ -217,7 +217,7 @@ SlateportCity_PokemonFanClub_EventScript_20A17E:: @ 820A17E
 	checkflag FLAG_0x116
 	goto_eq SlateportCity_PokemonFanClub_EventScript_20A1DE
 	msgbox SlateportCity_PokemonFanClub_Text_20AA77, 4
-	specialvar VAR_RESULT, sub_8138C04
+	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	compare VAR_RESULT, 4
 	goto_if 4, SlateportCity_PokemonFanClub_EventScript_20A1A3
 	release

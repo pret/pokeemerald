@@ -3,6 +3,6 @@ Route117_PokemonDayCare_MapScripts:: @ 822BBB1
 	.byte 0
 
 Route117_PokemonDayCare_MapScript1_22BBB7: @ 822BBB7
-	setflag FLAG_0x8A6
+	setflag FLAG_LANDMARK_POKEMON_DAYCARE
 	end
 

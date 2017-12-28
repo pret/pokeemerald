@@ -98,7 +98,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F89AE:: @ 81F89AE
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_2725A8
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1F89EC
 	waitmovement 0
-	special sub_8138B48
+	special GetRivalSonDaughterString
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F8BC5, 4
 	setflag FLAG_0x057
 	setvar VAR_0x408C, 2
@@ -124,7 +124,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F89F3:: @ 81F89F3
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A29
 	compare VAR_0x408D, 3
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F
-	special sub_8138B48
+	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8CA5, 4
 	release
 	end
@@ -148,7 +148,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F8A3D:: @ 81F8A3D
 LittlerootTown_MaysHouse_1F_EventScript_1F8A3D:: @ 81F8A3D
 	lock
 	faceplayer
-	special sub_8138B10
+	special GetPlayerBigGuyGirlString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F9262, 4
 	release
 	end

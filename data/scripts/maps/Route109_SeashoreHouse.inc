@@ -3,7 +3,7 @@ Route109_SeashoreHouse_MapScripts:: @ 82693F4
 	.byte 0
 
 Route109_SeashoreHouse_MapScript1_2693FA: @ 82693FA
-	setflag FLAG_0x89F
+	setflag FLAG_LANDMARK_SEASHORE_HOUSE
 	end
 
 Route109_SeashoreHouse_EventScript_2693FE:: @ 82693FE

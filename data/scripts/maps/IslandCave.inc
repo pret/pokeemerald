@@ -31,7 +31,7 @@ IslandCave_EventScript_238E62:: @ 8238E62
 	return
 
 IslandCave_MapScript1_238E99: @ 8238E99
-	setflag FLAG_0x8B5
+	setflag FLAG_LANDMARK_ISLAND_CAVE
 	call IslandCave_EventScript_238F45
 	checkflag FLAG_0x1BC
 	call_if 0, IslandCave_EventScript_238EAB

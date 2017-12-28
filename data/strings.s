@@ -1619,16 +1619,16 @@ gText_DecorationReturnedToPC:: @ 85EAAC5
 gText_NoDecorationsInUse:: @ 85EAAEC
 	.string "There are no decorations in use.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_085EAB0F:: @ 85EAB0F
+gText_Tristan:: @ 85EAB0F
 	.string "TRISTAN$"
 
-gUnknown_085EAB17:: @ 85EAB17
+gText_Philip:: @ 85EAB17
 	.string "PHILIP$"
 
-gUnknown_085EAB1E:: @ 85EAB1E
+gText_Dennis:: @ 85EAB1E
 	.string "DENNIS$"
 
-gUnknown_085EAB25:: @ 85EAB25
+gText_Roberto:: @ 85EAB25
 	.string "ROBERTO$"
 
 gText_TurnOff:: @ 85EAB2D
@@ -2282,19 +2282,19 @@ gUnknown_085EB4D4:: @ 85EB4D4
 gUnknown_085EB4E0:: @ 85EB4E0
 	.string "OPEN LEVEL$"
 
-gUnknown_085EB4EB:: @ 85EB4EB
+gText_BattleBasics:: @ 85EB4EB
 	.string "BATTLE BASICS$"
 
-gUnknown_085EB4F9:: @ 85EB4F9
+gText_PokemonNature:: @ 85EB4F9
 	.string "POKéMON NATURE$"
 
-gUnknown_085EB508:: @ 85EB508
+gText_PokemonMoves:: @ 85EB508
 	.string "POKéMON MOVES$"
 
-gUnknown_085EB516:: @ 85EB516
+gText_Underpowered:: @ 85EB516
 	.string "UNDERPOWERED$"
 
-gUnknown_085EB523:: @ 85EB523
+gText_WhenInDanger:: @ 85EB523
 	.string "WHEN IN DANGER$"
 
 gUnknown_085EB532:: @ 85EB532
@@ -2321,7 +2321,7 @@ gUnknown_085EB589:: @ 85EB589
 gUnknown_085EB597:: @ 85EB597
 	.string "BATTLE POKéMON$"
 
-gUnknown_085EB5A6:: @ 85EB5A6
+gText_BattleTrainers:: @ 85EB5A6
 	.string "BATTLE TRAINERS$"
 
 gUnknown_085EB5B6:: @ 85EB5B6
@@ -2363,73 +2363,73 @@ gText_Son:: @ 85EB60A
 gText_Daughter:: @ 85EB60E
 	.string "daughter$"
 
-gUnknown_085EB617:: @ 85EB617
+gText_BlueFlute:: @ 85EB617
 	.string "BLUE FLUTE$"
 
-gUnknown_085EB622:: @ 85EB622
+gText_YellowFlute:: @ 85EB622
 	.string "YELLOW FLUTE$"
 
-gUnknown_085EB62F:: @ 85EB62F
+gText_RedFlute:: @ 85EB62F
 	.string "RED FLUTE$"
 
-gUnknown_085EB639:: @ 85EB639
+gText_WhiteFlute:: @ 85EB639
 	.string "WHITE FLUTE$"
 
-gUnknown_085EB645:: @ 85EB645
+gText_BlackFlute:: @ 85EB645
 	.string "BLACK FLUTE$"
 
-gUnknown_085EB651:: @ 85EB651
+gText_PrettyChair:: @ 85EB651
 	.string "PRETTY CHAIR$"
 
-gUnknown_085EB65E:: @ 85EB65E
+gText_PrettyDesk:: @ 85EB65E
 	.string "PRETTY DESK$"
 
-gUnknown_085EB66A:: @ 85EB66A
+gText_1F:: @ 85EB66A
 	.string "1F$"
 
-gUnknown_085EB66D:: @ 85EB66D
+gText_2F:: @ 85EB66D
 	.string "2F$"
 
-gUnknown_085EB670:: @ 85EB670
+gText_3F:: @ 85EB670
 	.string "3F$"
 
-gUnknown_085EB673:: @ 85EB673
+gText_4F:: @ 85EB673
 	.string "4F$"
 
-gUnknown_085EB676:: @ 85EB676
+gText_5F:: @ 85EB676
 	.string "5F$"
 
-gUnknown_085EB679:: @ 85EB679
+gText_6F:: @ 85EB679
 	.string "6F$"
 
-gUnknown_085EB67C:: @ 85EB67C
+gText_7F:: @ 85EB67C
 	.string "7F$"
 
-gUnknown_085EB67F:: @ 85EB67F
+gText_8F:: @ 85EB67F
 	.string "8F$"
 
-gUnknown_085EB682:: @ 85EB682
+gText_9F:: @ 85EB682
 	.string "9F$"
 
-gUnknown_085EB685:: @ 85EB685
+gText_10F:: @ 85EB685
 	.string "10F$"
 
-gUnknown_085EB689:: @ 85EB689
+gText_11F:: @ 85EB689
 	.string "11F$"
 
-gUnknown_085EB68D:: @ 85EB68D
+gText_B1F:: @ 85EB68D
 	.string "B1F$"
 
-gUnknown_085EB691:: @ 85EB691
+gText_B2F:: @ 85EB691
 	.string "B2F$"
 
-gUnknown_085EB695:: @ 85EB695
+gText_B3F:: @ 85EB695
 	.string "B3F$"
 
-gUnknown_085EB699:: @ 85EB699
+gText_B4F:: @ 85EB699
 	.string "B4F$"
 
-gUnknown_085EB69D:: @ 85EB69D
+gText_Rooftop:: @ 85EB69D
 	.string "ROOFTOP$"
 
 gText_ElevatorNowOn:: @ 85EB6A5
@@ -2438,43 +2438,43 @@ gText_ElevatorNowOn:: @ 85EB6A5
 gText_BP:: @ 85EB6AD
 	.string "BP$"
 
-gUnknown_085EB6B0:: @ 85EB6B0
+gText_EnergyPowder50:: @ 85EB6B0
 	.string "ENERGYPOWDER{CLEAR_TO 0x72}{SIZE 0}50$"
 
-gUnknown_085EB6C5:: @ 85EB6C5
+gText_EnergyRoot80:: @ 85EB6C5
 	.string "ENERGY ROOT{CLEAR_TO 0x72}{SIZE 0}80$"
 
-gUnknown_085EB6D9:: @ 85EB6D9
+gText_HealPowder50:: @ 85EB6D9
 	.string "HEAL POWDER{CLEAR_TO 0x72}{SIZE 0}50$"
 
-gUnknown_085EB6ED:: @ 85EB6ED
+gText_RevivalHerb300:: @ 85EB6ED
 	.string "REVIVAL HERB{CLEAR_TO 0x6C}{SIZE 0}300$"
 
-gUnknown_085EB703:: @ 85EB703
+gText_Protein1000:: @ 85EB703
 	.string "PROTEIN{CLEAR_TO 0x63}{SIZE 0}1,000$"
 
-gUnknown_085EB716:: @ 85EB716
+gText_Iron1000:: @ 85EB716
 	.string "IRON{CLEAR_TO 0x63}{SIZE 0}1,000$"
 
-gUnknown_085EB726:: @ 85EB726
+gText_Carbos1000:: @ 85EB726
 	.string "CARBOS{CLEAR_TO 0x63}{SIZE 0}1,000$"
 
-gUnknown_085EB738:: @ 85EB738
+gText_Calcium1000:: @ 85EB738
 	.string "CALCIUM{CLEAR_TO 0x63}{SIZE 0}1,000$"
 
-gUnknown_085EB74B:: @ 85EB74B
+gText_Zinc1000:: @ 85EB74B
 	.string "ZINC{CLEAR_TO 0x63}{SIZE 0}1,000$"
 
-gUnknown_085EB75B:: @ 85EB75B
+gText_HPUp1000:: @ 85EB75B
 	.string "HP UP{CLEAR_TO 0x63}{SIZE 0}1,000$"
 
-gUnknown_085EB76C:: @ 85EB76C
+gText_PPUp3000:: @ 85EB76C
 	.string "PP UP{CLEAR_TO 0x63}{SIZE 0}3,000$"
 
-gUnknown_085EB77D:: @ 85EB77D
+gText_RankingHall:: @ 85EB77D
 	.string "RANKING HALL$"
 
-gUnknown_085EB78A:: @ 85EB78A
+gText_ExchangeService:: @ 85EB78A
 	.string "EXCHANGE SERVICE$"
 
 gText_LilycoveCity:: @ 85EB79B
@@ -3293,190 +3293,190 @@ gText_Second:: @ 85ECB80
 gText_Third:: @ 85ECB87
 	.string "third$"
 
-gUnknown_085ECB8D:: @ 85ECB8D
+gText_0Pts:: @ 85ECB8D
 	.string "0 pts$"
 
-gUnknown_085ECB93:: @ 85ECB93
+gText_10Pts:: @ 85ECB93
 	.string "10 pts$"
 
-gUnknown_085ECB9A:: @ 85ECB9A
+gText_20Pts:: @ 85ECB9A
 	.string "20 pts$"
 
-gUnknown_085ECBA1:: @ 85ECBA1
+gText_30Pts:: @ 85ECBA1
 	.string "30 pts$"
 
-gUnknown_085ECBA8:: @ 85ECBA8
+gText_40Pts:: @ 85ECBA8
 	.string "40 pts$"
 
-gUnknown_085ECBAF:: @ 85ECBAF
+gText_50Pts:: @ 85ECBAF
 	.string "50 pts$"
 
-gUnknown_085ECBB6:: @ 85ECBB6
+gText_60Pts:: @ 85ECBB6
 	.string "60 pts$"
 
-gUnknown_085ECBBD:: @ 85ECBBD
+gText_70Pts:: @ 85ECBBD
 	.string "70 pts$"
 
-gUnknown_085ECBC4:: @ 85ECBC4
+gText_80Pts:: @ 85ECBC4
 	.string "80 pts$"
 
-gUnknown_085ECBCB:: @ 85ECBCB
+gText_90Pts:: @ 85ECBCB
 	.string "90 pts$"
 
-gUnknown_085ECBD2:: @ 85ECBD2
+gText_100Pts:: @ 85ECBD2
 	.string "100 pts$"
 
-gUnknown_085ECBDA:: @ 85ECBDA
+gText_QuestionMark:: @ 85ECBDA
 	.string "?$"
 
-gUnknown_085ECBDC:: @ 85ECBDC
+gText_KissPoster16BP:: @ 85ECBDC
 	.string "KISS POSTER{CLEAR_TO 0x5E}16BP$"
 
-gUnknown_085ECBEF:: @ 85ECBEF
+gText_KissCushion32BP:: @ 85ECBEF
 	.string "KISS CUSHION{CLEAR_TO 0x5E}32BP$"
 
-gUnknown_085ECC03:: @ 85ECC03
+gText_SmoochumDoll32BP:: @ 85ECC03
 	.string "SMOOCHUM DOLL{CLEAR_TO 0x5E}32BP$"
 
-gUnknown_085ECC18:: @ 85ECC18
+gText_TogepiDoll48BP:: @ 85ECC18
 	.string "TOGEPI DOLL{CLEAR_TO 0x5E}48BP$"
 
-gUnknown_085ECC2B:: @ 85ECC2B
+gText_MeowthDoll48BP:: @ 85ECC2B
 	.string "MEOWTH DOLL{CLEAR_TO 0x5E}48BP$"
 
-gUnknown_085ECC3E:: @ 85ECC3E
+gText_ClefairyDoll48BP:: @ 85ECC3E
 	.string "CLEFAIRY DOLL{CLEAR_TO 0x5E}48BP$"
 
-gUnknown_085ECC53:: @ 85ECC53
+gText_DittoDoll48BP:: @ 85ECC53
 	.string "DITTO DOLL{CLEAR_TO 0x5E}48BP$"
 
-gUnknown_085ECC65:: @ 85ECC65
+gText_CyndaquilDoll80BP:: @ 85ECC65
 	.string "CYNDAQUIL DOLL{CLEAR_TO 0x5E}80BP$"
 
-gUnknown_085ECC7B:: @ 85ECC7B
+gText_ChikoritaDoll80BP:: @ 85ECC7B
 	.string "CHIKORITA DOLL{CLEAR_TO 0x5E}80BP$"
 
-gUnknown_085ECC91:: @ 85ECC91
+gText_TotodileDoll80BP:: @ 85ECC91
 	.string "TOTODILE DOLL{CLEAR_TO 0x5E}80BP$"
 
-gUnknown_085ECCA6:: @ 85ECCA6
+gText_LaprasDoll128BP:: @ 85ECCA6
 	.string "LAPRAS DOLL{CLEAR_TO 0x58}128BP$"
 
-gUnknown_085ECCBA:: @ 85ECCBA
+gText_SnorlaxDoll128BP:: @ 85ECCBA
 	.string "SNORLAX DOLL{CLEAR_TO 0x58}128BP$"
 
-gUnknown_085ECCCF:: @ 85ECCCF
+gText_VenusaurDoll256BP:: @ 85ECCCF
 	.string "VENUSAUR DOLL{CLEAR_TO 0x58}256BP$"
 
-gUnknown_085ECCE5:: @ 85ECCE5
+gText_CharizardDoll256BP:: @ 85ECCE5
 	.string "CHARIZARD DOLL{CLEAR_TO 0x58}256BP$"
 
-gUnknown_085ECCFC:: @ 85ECCFC
+gText_BlastoiseDoll256BP:: @ 85ECCFC
 	.string "BLASTOISE DOLL{CLEAR_TO 0x58}256BP$"
 
-gUnknown_085ECD13:: @ 85ECD13
+gText_Protein1BP:: @ 85ECD13
 	.string "PROTEIN{CLEAR_TO 0x64}1BP$"
 
-gUnknown_085ECD21:: @ 85ECD21
+gText_Calcium1BP:: @ 85ECD21
 	.string "CALCIUM{CLEAR_TO 0x64}1BP$"
 
-gUnknown_085ECD2F:: @ 85ECD2F
+gText_Iron1BP:: @ 85ECD2F
 	.string "IRON{CLEAR_TO 0x64}1BP$"
 
-gUnknown_085ECD3A:: @ 85ECD3A
+gText_Zinc1BP:: @ 85ECD3A
 	.string "ZINC{CLEAR_TO 0x64}1BP$"
 
-gUnknown_085ECD45:: @ 85ECD45
+gText_Carbos1BP:: @ 85ECD45
 	.string "CARBOS{CLEAR_TO 0x64}1BP$"
 
-gUnknown_085ECD52:: @ 85ECD52
+gText_HpUp1BP:: @ 85ECD52
 	.string "HP UP{CLEAR_TO 0x64}1BP$"
 
-gUnknown_085ECD5E:: @ 85ECD5E
+gText_Leftovers48BP:: @ 85ECD5E
 	.string "LEFTOVERS{CLEAR_TO 0x5E}48BP$"
 
-gUnknown_085ECD6F:: @ 85ECD6F
+gText_WhiteHerb48BP:: @ 85ECD6F
 	.string "WHITE HERB{CLEAR_TO 0x5E}48BP$"
 
-gUnknown_085ECD81:: @ 85ECD81
+gText_QuickClaw48BP:: @ 85ECD81
 	.string "QUICK CLAW{CLEAR_TO 0x5E}48BP$"
 
-gUnknown_085ECD93:: @ 85ECD93
+gText_MentalHerb48BP:: @ 85ECD93
 	.string "MENTAL HERB{CLEAR_TO 0x5E}48BP$"
 
-gUnknown_085ECDA6:: @ 85ECDA6
+gText_BrightPowder64BP:: @ 85ECDA6
 	.string "BRIGHTPOWDER{CLEAR_TO 0x5E}64BP$"
 
-gUnknown_085ECDBA:: @ 85ECDBA
+gText_ChoiceBand64BP:: @ 85ECDBA
 	.string "CHOICE BAND{CLEAR_TO 0x5E}64BP$"
 
-gUnknown_085ECDCD:: @ 85ECDCD
+gText_KingsRock64BP:: @ 85ECDCD
 	.string "KING’S ROCK{CLEAR_TO 0x5E}64BP$"
 
-gUnknown_085ECDE0:: @ 85ECDE0
+gText_FocusBand64BP:: @ 85ECDE0
 	.string "FOCUS BAND{CLEAR_TO 0x5E}64BP$"
 
-gUnknown_085ECDF2:: @ 85ECDF2
+gText_ScopeLens64BP:: @ 85ECDF2
 	.string "SCOPE LENS{CLEAR_TO 0x5E}64BP$"
 
-gUnknown_085ECE04:: @ 85ECE04
+gText_Softboiled16BP:: @ 85ECE04
 	.string "SOFTBOILED{CLEAR_TO 0x4E}16BP$"
 
-gUnknown_085ECE16:: @ 85ECE16
+gText_SeismicToss24BP:: @ 85ECE16
 	.string "SEISMIC TOSS{CLEAR_TO 0x4E}24BP$"
 
-gUnknown_085ECE2A:: @ 85ECE2A
+gText_DreamEater24BP:: @ 85ECE2A
 	.string "DREAM EATER{CLEAR_TO 0x4E}24BP$"
 
-gUnknown_085ECE3D:: @ 85ECE3D
+gText_MegaPunch24BP:: @ 85ECE3D
 	.string "MEGA PUNCH{CLEAR_TO 0x4E}24BP$"
 
-gUnknown_085ECE4F:: @ 85ECE4F
+gText_MegaKick48BP:: @ 85ECE4F
 	.string "MEGA KICK{CLEAR_TO 0x4E}48BP$"
 
-gUnknown_085ECE60:: @ 85ECE60
+gText_BodySlam48BP:: @ 85ECE60
 	.string "BODY SLAM{CLEAR_TO 0x4E}48BP$"
 
-gUnknown_085ECE71:: @ 85ECE71
+gText_RockSlide48BP:: @ 85ECE71
 	.string "ROCK SLIDE{CLEAR_TO 0x4E}48BP$"
 
-gUnknown_085ECE83:: @ 85ECE83
+gText_Counter48BP:: @ 85ECE83
 	.string "COUNTER{CLEAR_TO 0x4E}48BP$"
 
-gUnknown_085ECE92:: @ 85ECE92
+gText_ThunderWave48BP:: @ 85ECE92
 	.string "THUNDER WAVE{CLEAR_TO 0x4E}48BP$"
 
-gUnknown_085ECEA6:: @ 85ECEA6
+gText_SwordsDance48BP:: @ 85ECEA6
 	.string "SWORDS DANCE{CLEAR_TO 0x4E}48BP$"
 
-gUnknown_085ECEBA:: @ 85ECEBA
+gText_DefenseCurl16BP:: @ 85ECEBA
 	.string "DEFENSE CURL{CLEAR_TO 0x4E}16BP$"
 
-gUnknown_085ECECE:: @ 85ECECE
+gText_Snore24BP:: @ 85ECECE
 	.string "SNORE{CLEAR_TO 0x4E}24BP$"
 
-gUnknown_085ECEDB:: @ 85ECEDB
+gText_MudSlap24BP:: @ 85ECEDB
 	.string "MUD-SLAP{CLEAR_TO 0x4E}24BP$"
 
-gUnknown_085ECEEB:: @ 85ECEEB
+gText_Swift24BP:: @ 85ECEEB
 	.string "SWIFT{CLEAR_TO 0x4E}24BP$"
 
-gUnknown_085ECEF8:: @ 85ECEF8
+gText_IcyWind24BP:: @ 85ECEF8
 	.string "ICY WIND{CLEAR_TO 0x4E}24BP$"
 
-gUnknown_085ECF08:: @ 85ECF08
+gText_Endure48BP:: @ 85ECF08
 	.string "ENDURE{CLEAR_TO 0x4E}48BP$"
 
-gUnknown_085ECF16:: @ 85ECF16
+gText_PsychUp48BP:: @ 85ECF16
 	.string "PSYCH UP{CLEAR_TO 0x4E}48BP$"
 
-gUnknown_085ECF26:: @ 85ECF26
+gText_IcePunch48BP:: @ 85ECF26
 	.string "ICE PUNCH{CLEAR_TO 0x4E}48BP$"
 
-gUnknown_085ECF37:: @ 85ECF37
+gText_ThunderPunch48BP:: @ 85ECF37
 	.string "THUNDERPUNCH{CLEAR_TO 0x4E}48BP$"
 
-gUnknown_085ECF4B:: @ 85ECF4B
+gText_FirePunch48BP:: @ 85ECF4B
 	.string "FIRE PUNCH{CLEAR_TO 0x4E}48BP$"
 
 gText_PkmnFainted3:: @ 85ECF5D
@@ -5217,22 +5217,22 @@ gText_Appeal2:: @ 85EFA67
 gText_Jam2:: @ 85EFA6E
 	.string "JAM$"
 
-gUnknown_085EFA72:: @ 85EFA72
+gText_Kira:: @ 85EFA72
 	.string "KIRA$"
 
-gUnknown_085EFA77:: @ 85EFA77
+gText_Amy:: @ 85EFA77
 	.string "AMY$"
 
-gUnknown_085EFA7B:: @ 85EFA7B
+gText_John:: @ 85EFA7B
 	.string "JOHN$"
 
-gUnknown_085EFA80:: @ 85EFA80
+gText_Roy:: @ 85EFA80
 	.string "ROY$"
 
-gUnknown_085EFA84:: @ 85EFA84
+gText_Gabby:: @ 85EFA84
 	.string "GABBY$"
 
-gUnknown_085EFA8A:: @ 85EFA8A
+gText_Anna:: @ 85EFA8A
 	.string "ANNA$"
 
 gText_ClearAllSaveData:: @ 85EFA8F

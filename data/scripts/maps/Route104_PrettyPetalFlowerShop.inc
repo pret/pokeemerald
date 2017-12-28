@@ -3,7 +3,7 @@ Route104_PrettyPetalFlowerShop_MapScripts:: @ 822A34C
 	.byte 0
 
 Route104_PrettyPetalFlowerShop_MapScript1_22A352: @ 822A352
-	setflag FLAG_0x89C
+	setflag FLAG_LANDMARK_FLOWER_SHOP
 	checkflag FLAG_0x07F
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_22A36B
 	checkflag FLAG_BADGE03_GET

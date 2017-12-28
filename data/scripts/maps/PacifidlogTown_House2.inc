@@ -13,10 +13,10 @@ PacifidlogTown_House2_EventScript_203792:: @ 8203792
 	checkflag FLAG_0x12C
 	call_if 0, PacifidlogTown_House2_EventScript_203801
 	setflag FLAG_0x12C
-	specialvar VAR_RESULT, sub_8138C04
+	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	compare VAR_RESULT, 4
 	goto_if 4, PacifidlogTown_House2_EventScript_203816
-	specialvar VAR_RESULT, sub_8138C04
+	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	compare VAR_RESULT, 2
 	goto_if 4, PacifidlogTown_House2_EventScript_203845
 	goto PacifidlogTown_House2_EventScript_20384F

@@ -142,10 +142,10 @@ SlateportCity_EventScript_1DCDE4:: @ 81DCDE4
 	faceplayer
 	bufferleadmonspeciesname 0
 	msgbox SlateportCity_Text_1DD68A, 4
-	specialvar VAR_RESULT, sub_8139348
+	specialvar VAR_RESULT, LeadMonHasEffortRibbon
 	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_EventScript_1DCE38
-	specialvar VAR_RESULT, sub_81393C8
+	specialvar VAR_RESULT, Special_AreLeadMonEVsMaxedOut
 	compare VAR_RESULT, 0
 	call_if 1, SlateportCity_EventScript_1DCE2E
 	msgbox SlateportCity_Text_1DD697, 4
@@ -153,7 +153,7 @@ SlateportCity_EventScript_1DCDE4:: @ 81DCDE4
 	message SlateportCity_Text_1DD6E3
 	waitfanfare
 	msgbox SlateportCity_Text_1DD702, 4
-	special sub_8139370
+	special GiveLeadMonEffortRibbon
 	release
 	end
 

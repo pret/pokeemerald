@@ -13,6 +13,7 @@ masksgfxdir := graphics/battle_anims/masks
 bttransgfxdir := graphics/battle_transitions
 typesdir := graphics/types
 raydir := graphics/rayquaza_scene
+roulgfxdir := graphics/roulette
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -392,3 +393,30 @@ $(raydir)/chase_streaks.4bpp: $(raydir)/chase_streaks.png
 
 $(raydir)/rayquaza_chase.4bpp: $(raydir)/rayquaza_chase.png
 	$(GFX) $< $@ -num_tiles 155
+
+graphics/picture_frame/frame5.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 86
+
+$(roulgfxdir)/roulette_tilt.4bpp: $(roulgfxdir)/shroomish.4bpp $(roulgfxdir)/tailow.4bpp
+	@cat $(roulgfxdir)/shroomish.4bpp $(roulgfxdir)/tailow.4bpp >$@
+
+$(roulgfxdir)/poke_icons2.4bpp: $(roulgfxdir)/wynaut.4bpp $(roulgfxdir)/azurill.4bpp $(roulgfxdir)/skitty.4bpp $(roulgfxdir)/makuhita.4bpp
+	@cat $^ >$@
+
+$(bttransgfxdir)/85BBC14.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 53
+
+$(bttransgfxdir)/rayquaza.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 938
+
+$(bttransgfxdir)/frontier_square_1.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp $(bttransgfxdir)/frontier_squares_1.4bpp
+	@cat $^ >$@
+
+$(bttransgfxdir)/frontier_square_2.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp $(bttransgfxdir)/frontier_squares_2.4bpp
+	@cat $^ >$@
+ 
+$(bttransgfxdir)/frontier_square_3.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp $(bttransgfxdir)/frontier_squares_3.4bpp
+	@cat $^ >$@
+
+$(bttransgfxdir)/frontier_square_4.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp $(bttransgfxdir)/frontier_squares_4.4bpp
+	@cat $^ >$@

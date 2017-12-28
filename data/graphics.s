@@ -1249,6 +1249,7 @@ gUnknown_08C1850C:: @ 8C1850C
 	.incbin "graphics/contest/audience.4bpp.lz"
 
 	.align 2
+gUnknown_08C19168::
 	.incbin "graphics/contest/faces.4bpp.lz"
 
 	.align 2

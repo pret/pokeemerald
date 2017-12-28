@@ -3,7 +3,7 @@ Route104_MrBrineysHouse_MapScripts:: @ 8229D2E
 	.byte 0
 
 Route104_MrBrineysHouse_MapScript1_229D34: @ 8229D34
-	setflag FLAG_0x89D
+	setflag FLAG_LANDMARK_MR_BRINEY_HOUSE
 	compare VAR_0x4090, 1
 	call_if 1, Route104_MrBrineysHouse_EventScript_229D50
 	checkflag FLAG_0x0BC

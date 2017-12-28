@@ -3,6 +3,6 @@ SkyPillar_Entrance_MapScripts:: @ 823929E
 	.byte 0
 
 SkyPillar_Entrance_MapScript1_2392A4: @ 82392A4
-	setflag FLAG_0x8BE
+	setflag FLAG_LANDMARK_SKY_PILLAR
 	end
 

@@ -661,104 +661,104 @@ BattleFrontier_BattlePointExchangeServiceCorner_Text_26012D: @ 826012D
 	.string "the BATTLE facilities, they start\l"
 	.string "giving you more and more Battle Points.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_2601AA: @ 82601AA
+BattleFrontier_BattlePointExchangeServiceCorner_Text_2601AA:: @ 82601AA
 	.string "A large poster with a SMOOCHUM print.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_2601D0: @ 82601D0
+BattleFrontier_BattlePointExchangeServiceCorner_Text_2601D0:: @ 82601D0
 	.string "A SMOOCHUM cushion.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_260201: @ 8260201
+BattleFrontier_BattlePointExchangeServiceCorner_Text_260201:: @ 8260201
 	.string "A SMOOCHUM DOLL.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_26022F: @ 826022F
+BattleFrontier_BattlePointExchangeServiceCorner_Text_26022F:: @ 826022F
 	.string "A TOGEPI DOLL.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_26025B: @ 826025B
+BattleFrontier_BattlePointExchangeServiceCorner_Text_26025B:: @ 826025B
 	.string "A MEOWTH DOLL.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_260287: @ 8260287
+BattleFrontier_BattlePointExchangeServiceCorner_Text_260287:: @ 8260287
 	.string "A CLEFAIRY DOLL.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_2602B5: @ 82602B5
+BattleFrontier_BattlePointExchangeServiceCorner_Text_2602B5:: @ 82602B5
 	.string "A DITTO DOLL.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_2602E0: @ 82602E0
+BattleFrontier_BattlePointExchangeServiceCorner_Text_2602E0:: @ 82602E0
 	.string "A CYNDAQUIL DOLL.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_26030F: @ 826030F
+BattleFrontier_BattlePointExchangeServiceCorner_Text_26030F:: @ 826030F
 	.string "A CHIKORITA DOLL.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_26033E: @ 826033E
+BattleFrontier_BattlePointExchangeServiceCorner_Text_26033E:: @ 826033E
 	.string "A TOTODILE DOLL.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C: @ 826036C
+BattleFrontier_BattlePointExchangeServiceCorner_Text_26036C:: @ 826036C
 	.string "A large DOLL.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_260397: @ 8260397
+BattleFrontier_BattlePointExchangeServiceCorner_Text_260397:: @ 8260397
 	.string "Raises the stat ATTACK of one\n"
 	.string "POKéMON.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_2603BE: @ 82603BE
+BattleFrontier_BattlePointExchangeServiceCorner_Text_2603BE:: @ 82603BE
 	.string "Raises the stat SP. ATK of one\n"
 	.string "POKéMON.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_2603E6: @ 82603E6
+BattleFrontier_BattlePointExchangeServiceCorner_Text_2603E6:: @ 82603E6
 	.string "Raises the stat DEFENSE of one\n"
 	.string "POKéMON.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_26040E: @ 826040E
+BattleFrontier_BattlePointExchangeServiceCorner_Text_26040E:: @ 826040E
 	.string "Raises the stat SP. DEF of one\n"
 	.string "POKéMON.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_260436: @ 8260436
+BattleFrontier_BattlePointExchangeServiceCorner_Text_260436:: @ 8260436
 	.string "Raises the stat SPEED of one\n"
 	.string "POKéMON.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_26045C: @ 826045C
+BattleFrontier_BattlePointExchangeServiceCorner_Text_26045C:: @ 826045C
 	.string "Raises the HP of one POKéMON.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_26047A: @ 826047A
+BattleFrontier_BattlePointExchangeServiceCorner_Text_26047A:: @ 826047A
 	.string "A hold item that gradually restores\n"
 	.string "HP in battle.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_2604AC: @ 82604AC
+BattleFrontier_BattlePointExchangeServiceCorner_Text_2604AC:: @ 82604AC
 	.string "A hold item that restores any\n"
 	.string "lowered stat.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_2604D8: @ 82604D8
+BattleFrontier_BattlePointExchangeServiceCorner_Text_2604D8:: @ 82604D8
 	.string "A hold item that occasionally allows\n"
 	.string "the first strike.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_26050F: @ 826050F
+BattleFrontier_BattlePointExchangeServiceCorner_Text_26050F:: @ 826050F
 	.string "A hold item that snaps POKéMON out\n"
 	.string "of infatuation.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_260542: @ 8260542
+BattleFrontier_BattlePointExchangeServiceCorner_Text_260542:: @ 8260542
 	.string "A hold item that casts a glare to\n"
 	.string "reduce accuracy.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_260575: @ 8260575
+BattleFrontier_BattlePointExchangeServiceCorner_Text_260575:: @ 8260575
 	.string "Raises a move’s power, but permits\n"
 	.string "only that move.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_2605A8: @ 82605A8
+BattleFrontier_BattlePointExchangeServiceCorner_Text_2605A8:: @ 82605A8
 	.string "A hold item that may cause flinching\n"
 	.string "when the foe is hit.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_2605E2: @ 82605E2
+BattleFrontier_BattlePointExchangeServiceCorner_Text_2605E2:: @ 82605E2
 	.string "A hold item that occasionally\n"
 	.string "prevents fainting.$"
 
-BattleFrontier_BattlePointExchangeServiceCorner_Text_260613: @ 8260613
+BattleFrontier_BattlePointExchangeServiceCorner_Text_260613:: @ 8260613
 	.string "A hold item that raises the\n"
 	.string "critical-hit rate.$"

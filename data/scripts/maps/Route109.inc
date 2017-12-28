@@ -328,7 +328,7 @@ Route109_EventScript_1EE99E:: @ 81EE99E
 Route109_EventScript_1EE9B5:: @ 81EE9B5
 	lock
 	faceplayer
-	special sub_8138B10
+	special GetPlayerBigGuyGirlString
 	checkflag FLAG_0x118
 	goto_eq Route109_EventScript_1EE9F2
 	msgbox Route109_Text_1EEFDE, 4

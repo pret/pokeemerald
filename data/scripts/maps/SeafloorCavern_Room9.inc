@@ -33,7 +33,7 @@ SeafloorCavern_Room9_EventScript_234DC9:: @ 8234DC9
 	special sub_80B05B4
 	waitstate
 	msgbox SeafloorCavern_Room9_Text_235279, 4
-	special sub_81379F8
+	special WaitWeather
 	waitstate
 	setvar VAR_RESULT, 1
 	playse SE_W197

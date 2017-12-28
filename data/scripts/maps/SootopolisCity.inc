@@ -202,7 +202,7 @@ SootopolisCity_MapScript2_1E5914: @ 81E5914
 
 SootopolisCity_EventScript_1E5926:: @ 81E5926
 	lockall
-	special sub_8138AD0
+	special StorePlayerCoordsInVars
 	compare VAR_0x8004, 43
 	goto_if 5, SootopolisCity_EventScript_1E5A82
 	compare VAR_0x8005, 32
@@ -492,7 +492,7 @@ SootopolisCity_Movement_1E5BF7: @ 81E5BF7
 
 SootopolisCity_EventScript_1E5BFE:: @ 81E5BFE
 	lockall
-	special sub_8138AD0
+	special StorePlayerCoordsInVars
 	compare VAR_0x8004, 43
 	goto_if 5, SootopolisCity_EventScript_1E5CCE
 	compare VAR_0x8005, 32
@@ -541,7 +541,7 @@ SootopolisCity_EventScript_1E5C1E:: @ 81E5C1E
 	applymovement 11, SootopolisCity_Movement_1E5E5B
 	waitmovement 0
 	removeobject 11
-	special sub_81379F8
+	special WaitWeather
 	waitstate
 	clearflag FLAG_SYS_WEATHER_CTRL
 	setvar VAR_0x40CA, 3
@@ -594,7 +594,7 @@ SootopolisCity_EventScript_1E5CCE:: @ 81E5CCE
 	applymovement 11, SootopolisCity_Movement_1E5E5B
 	waitmovement 0
 	removeobject 11
-	special sub_81379F8
+	special WaitWeather
 	waitstate
 	clearflag FLAG_SYS_WEATHER_CTRL
 	setvar VAR_0x40CA, 2
@@ -747,7 +747,7 @@ SootopolisCity_EventScript_1E5F10:: @ 81E5F10
 
 SootopolisCity_EventScript_1E5F1B:: @ 81E5F1B
 	dodailyevents
-	special sub_8138B10
+	special GetPlayerBigGuyGirlString
 	checkflag FLAG_0x932
 	goto_eq SootopolisCity_EventScript_1E5FBB
 	msgbox SootopolisCity_Text_2A7BB0, 4

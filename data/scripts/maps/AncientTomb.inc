@@ -17,7 +17,7 @@ AncientTomb_EventScript_238FCD:: @ 8238FCD
 	return
 
 AncientTomb_MapScript1_238FE1: @ 8238FE1
-	setflag FLAG_0x8B9
+	setflag FLAG_LANDMARK_ANCIENT_TOMB
 	checkflag FLAG_0x1BD
 	call_if 0, AncientTomb_EventScript_238FEE
 	end

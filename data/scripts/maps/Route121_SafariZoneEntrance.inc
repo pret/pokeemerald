@@ -91,7 +91,7 @@ Route121_SafariZoneEntrance_EventScript_22BCBF:: @ 822BCBF
 	getpartysize
 	compare VAR_RESULT, 6
 	goto_if 5, Route121_SafariZoneEntrance_EventScript_22BCE9
-	specialvar VAR_RESULT, sub_8139530
+	specialvar VAR_RESULT, ScriptCheckFreePokemonStorageSpace
 	compare VAR_RESULT, 1
 	goto_eq Route121_SafariZoneEntrance_EventScript_22BCE9
 	msgbox Route121_SafariZoneEntrance_Text_2A50E5, 4

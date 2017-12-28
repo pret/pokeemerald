@@ -31,7 +31,7 @@ DesertRuins_EventScript_22D993:: @ 822D993
 	return
 
 DesertRuins_MapScript1_22D9CA: @ 822D9CA
-	setflag FLAG_0x8B6
+	setflag FLAG_LANDMARK_DESERT_RUINS
 	checkflag FLAG_0x1BB
 	call_if 0, DesertRuins_EventScript_22D9D7
 	end

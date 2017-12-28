@@ -256,7 +256,7 @@ gUnknown_081F860D:: @ 81F860D
 
 LittlerootTown_BrendansHouse_2F_EventScript_1F8626:: @ 81F8626
 	setvar VAR_0x8004, 1
-	special sp0D9_ComputerRelated
+	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox gUnknown_08272D87, 4
 	special sub_816AE58
@@ -267,7 +267,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1F8626:: @ 81F8626
 LittlerootTown_BrendansHouse_2F_EventScript_1F863F:: @ 81F863F
 	setvar VAR_0x8004, 1
 	playse SE_PC_OFF
-	special sub_8138E20
+	special DoPCTurnOffEffect
 	releaseall
 	end
 

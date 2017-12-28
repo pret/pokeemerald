@@ -3,7 +3,7 @@ Route123_MapScripts:: @ 81F6147
 	.byte 0
 
 Route123_MapScript1_1F614D: @ 81F614D
-	special sub_8139668
+	special SetRoute123Weather
 	end
 
 Route123_EventScript_1F6151:: @ 81F6151
@@ -12,7 +12,7 @@ Route123_EventScript_1F6151:: @ 81F6151
 	checkflag FLAG_0x0E8
 	goto_eq Route123_EventScript_1F61A0
 	msgbox Route123_Text_1F641E, 4
-	special sub_81390E0
+	special IsGrassTypeInParty
 	compare VAR_RESULT, 0
 	goto_eq Route123_EventScript_1F619E
 	msgbox Route123_Text_1F645D, 4

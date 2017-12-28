@@ -3,7 +3,7 @@ Route123_BerryMastersHouse_MapScripts:: @ 826F83B
 	.byte 0
 
 Route123_BerryMastersHouse_MapScript1_26F841: @ 826F841
-	setflag FLAG_0x8C3
+	setflag FLAG_LANDMARK_BERRY_MASTERS_HOUSE
 	end
 
 Route123_BerryMastersHouse_EventScript_26F845:: @ 826F845

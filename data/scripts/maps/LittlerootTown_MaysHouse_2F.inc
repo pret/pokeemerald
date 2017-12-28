@@ -317,7 +317,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F956C:: @ 81F956C
 
 LittlerootTown_MaysHouse_2F_EventScript_1F9576:: @ 81F9576
 	setvar VAR_0x8004, 2
-	special sp0D9_ComputerRelated
+	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox gUnknown_08272D87, 4
 	special sub_816AE58
@@ -328,7 +328,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1F9576:: @ 81F9576
 LittlerootTown_MaysHouse_2F_EventScript_1F958F:: @ 81F958F
 	setvar VAR_0x8004, 2
 	playse SE_PC_OFF
-	special sub_8138E20
+	special DoPCTurnOffEffect
 	releaseall
 	end
 
