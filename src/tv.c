@@ -32,7 +32,7 @@
 #include "naming_screen.h"
 #include "malloc.h"
 #include "region_map.h"
-#include "region_map_sections.h"
+#include "constants/region_map_sections.h"
 #include "decoration.h"
 #include "secret_base.h"
 #include "tv.h"

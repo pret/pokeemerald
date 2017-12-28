@@ -25,7 +25,7 @@
 #include "sound.h"
 #include "event_scripts.h"
 #include "event_data.h"
-#include "region_map_sections.h"
+#include "constants/region_map_sections.h"
 #include "player_pc.h"
 #include "strings.h"
 #include "tv.h"

@@ -180,7 +180,12 @@ SECTIONS {
         src/wallclock.o(.text);
         asm/rom6.o(.text);
         src/pokeblock.o(.text);
-        asm/rom_81370FC.o(.text);
+        asm/fldeff_flash.o(.text);
+        asm/post_battle_event_funcs.o(.text);
+        asm/time_events.o(.text);
+        asm/birch_pc.o(.text);
+        asm/hof_pc.o(.text);
+        asm/field_specials.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
@@ -428,7 +433,9 @@ SECTIONS {
         data/starter_choose.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
-        data/rom_81370FC.o(.rodata);
+        data/fldeff_flash.o(.rodata);
+        data/time_events.o(.rodata);
+        data/field_specials.o(.rodata);
         data/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);

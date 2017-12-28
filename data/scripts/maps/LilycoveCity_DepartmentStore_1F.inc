@@ -26,10 +26,10 @@ LilycoveCity_DepartmentStore_1F_EventScript_21F69C:: @ 821F69C
 	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_2725A8
 	waitmovement 0
 	playse SE_PC_ON
-	special sub_8138EC0
+	special DoLotteryCornerComputerEffect
 	special PickLotteryCornerTicket
 	delay 220
-	special sub_8138FAC
+	special EndLotteryCornerComputerEffect
 	delay 10
 	applymovement 2, LilycoveCity_DepartmentStore_1F_Movement_27259E
 	waitmovement 0

@@ -67,7 +67,7 @@ Route117_EventScript_291CE8:: @ 8291CE8
 	special GetDaycareMonNicknames
 	msgbox Route117_Text_292299, 4
 	special SetDaycareCompatibilityString
-	special sub_8138AC0
+	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	setvar VAR_0x8004, 0

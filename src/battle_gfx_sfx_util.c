@@ -63,7 +63,7 @@ extern const u8 gUnknown_08C1F46C[];
 extern const u8 gUnknown_08C1F5E8[];
 extern const u8 gUnknown_08C1F76C[];
 extern const u8 gUnknown_08C1F8E8[];
-extern const u8 gUnknown_08C0237C[];
+extern const u8 gBlankGfxCompressed[];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
 
@@ -110,10 +110,10 @@ static const struct CompressedSpriteSheet gUnknown_0832C100 =
 
 static const struct CompressedSpriteSheet gUnknown_0832C108[BATTLE_BANKS_COUNT] =
 {
-    {gUnknown_08C0237C, 0x0100, 0xd704},
-    {gUnknown_08C0237C, 0x0120, 0xd705},
-    {gUnknown_08C0237C, 0x0100, 0xd706},
-    {gUnknown_08C0237C, 0x0120, 0xd707}
+    {gBlankGfxCompressed, 0x0100, 0xd704},
+    {gBlankGfxCompressed, 0x0120, 0xd705},
+    {gBlankGfxCompressed, 0x0100, 0xd706},
+    {gBlankGfxCompressed, 0x0120, 0xd707}
 };
 
 static const struct SpritePalette gUnknown_0832C128[2] =

@@ -1,4 +1,6 @@
-
+#include "constants/flags.h"
+#include "constants/region_map_sections.h"
+#include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -6,11 +8,11 @@
 
 	.align 2
 gUnknown_085B3D94:: @ 85B3D94
-	.incbin "graphics/unknown/unknown_5B3D94.gbapal"
+	.incbin "graphics/pokedex/area_glow.gbapal"
 
 	.align 2
 gUnknown_085B3DB4:: @ 85B3DB4
-	.incbin "graphics/unknown/unknown_5B3DB4.4bpp.lz"
+	.incbin "graphics/pokedex/area_glow.4bpp.lz"
 
 	.align 1
 gUnknown_085B3EE8:: @ 85B3EE8
@@ -18,15 +20,22 @@ gUnknown_085B3EE8:: @ 85B3EE8
 
 	.align 1
 gUnknown_085B3EEA:: @ 85B3EEA
-	.2byte 0x00cb, 0x00cc, 0x00cd
+	.2byte MAPSEC_MARINE_CAVE, MAPSEC_UNDERWATER_MARINE_CAVE, MAPSEC_TERRA_CAVE
 
 	.align 1
 gUnknown_085B3EF0:: @ 85B3EF0
-	.2byte 0x0148, 0x0000, 0x0022, 0x019c, 0x0000, 0x0000
+	.2byte SPECIES_FEEBAS,  0x0000, 0x0022
+    .2byte SPECIES_EGG,     0x0000, 0x0000
 
 	.align 1
 gUnknown_085B3EFC:: @ 85B3EFC
-	.2byte 0x0055, 0x08be, 0x0044, 0x08a7, 0x00d2, 0x08dd, 0x00c7, 0x0078, 0x00d1, 0x08de, 0x00ca, 0x08df, 0x00d5, 0x0000
+	.2byte MAPSEC_SKY_PILLAR,       FLAG_LANDMARK_SKY_PILLAR
+    .2byte MAPSEC_SEAFLOOR_CAVERN,  FLAG_LANDMARK_SEAFLOOR_CAVERN
+    .2byte MAPSEC_ALTERING_CAVE_2,  FLAG_LANDMARK_ALTERING_CAVE
+    .2byte MAPSEC_MIRAGE_TOWER,     FLAG_LANDMARK_MIRAGE_TOWER
+    .2byte MAPSEC_DESERT_UNDERPASS, FLAG_LANDMARK_DESERT_UNDERPASS
+    .2byte MAPSEC_ARTISAN_CAVE,     FLAG_0x8DF
+    .2byte MAPSEC_NONE,             0x0000
 
 gUnknown_085B3F18:: @ 85B3F18
 	.byte 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x11, 0x20, 0x02, 0x03, 0x27, 0x2d, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f
@@ -44,36 +53,40 @@ gUnknown_085B4018:: @ 85B4018
 
 	.align 2
 gUnknown_085B401C:: @ 85B401C
-	obj_tiles gUnknown_085B406C, 0x0080, 0x0002
+	obj_tiles AreaMarkerTiles, 0x0080, 0x0002
 
 	.align 2
 gUnknown_085B4024:: @ 85B4024
-	obj_pal gUnknown_085B404C, 0x0002
+	obj_pal AreaMarkerPalette, 0x0002
 
 	.align 2
 gUnknown_085B402C:: @ 85B402C
-	.byte 0x00, 0x00, 0x00, 0x40, 0x00, 0x04, 0x00, 0x00
+	.2byte 0x0000
+	.2byte 0x4000
+	.2byte 0x0400
 
 	.align 2
 gUnknown_085B4034:: @ 85B4034
 	spr_template 0x0002, 0x0002, gUnknown_085B402C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-gUnknown_085B404C:: @ 85B404C
-	.incbin "graphics/unknown/unknown_5B404C.gbapal"
+AreaMarkerPalette:: @ 85B404C
+	.incbin "graphics/pokedex/area_marker.gbapal"
 
 	.align 2
-gUnknown_085B406C:: @ 85B406C
-	.incbin "graphics/unknown/unknown_5B406C.4bpp"
+AreaMarkerTiles:: @ 85B406C
+	.incbin "graphics/pokedex/area_marker.4bpp"
 
 	.align 2
 gUnknown_085B40EC:: @ 85B40EC
 	obj_pal gUnknown_08DC4120, 0x0003
 
 	.align 2
-gUnknown_085B40F4:: @ 85B40F4
-	.byte 0x00, 0x00, 0x00, 0x80, 0x00, 0x04, 0x00, 0x00
+gOamData_85B40F4:: @ 85B40F4
+	.2byte 0x0000
+	.2byte 0x8000
+	.2byte 0x0400
 
 	.align 2
-gUnknown_085B40FC:: @ 85B40FC
-	spr_template 0x0003, 0x0003, gUnknown_085B40F4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+gSpriteTemplate_85B40FC:: @ 85B40FC
+	spr_template 0x0003, 0x0003, gOamData_85B40F4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy

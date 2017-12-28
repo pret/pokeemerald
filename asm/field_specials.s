@@ -5,1388 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_81370FC
-sub_81370FC: @ 81370FC
-	push {r4,lr}
-	bl ShouldDoBrailleFlyEffect
-	lsls r0, 24
-	cmp r0, 0
-	beq _08137134
-	ldr r4, =gSpecialVar_Result
-	bl GetCursorSelectionMonId
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4]
-	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
-	str r0, [r1]
-	ldr r1, =gUnknown_0203CEEC
-	ldr r0, =sub_8179918
-	b _08137152
-	.pool
-_08137134:
-	ldr r0, =gMapHeader
-	ldrb r0, [r0, 0x15]
-	cmp r0, 0x1
-	bne _08137170
-	ldr r0, =0x00000888
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	bne _08137170
-	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
-	str r0, [r1]
-	ldr r1, =gUnknown_0203CEEC
-	ldr r0, =hm2_flash
-_08137152:
-	str r0, [r1]
-	movs r0, 0x1
-	b _08137172
-	.pool
-_08137170:
-	movs r0, 0
-_08137172:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_81370FC
-
-	thumb_func_start hm2_flash
-hm2_flash: @ 8137178
-	push {r4,lr}
-	bl oei_task_add
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl GetCursorSelectionMonId
-	ldr r1, =gFieldEffectArguments
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [r1]
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r2, =sub_81371B4
-	lsrs r1, r2, 16
-	strh r1, [r0, 0x18]
-	strh r2, [r0, 0x1A]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end hm2_flash
-
-	thumb_func_start sub_81371B4
-sub_81371B4: @ 81371B4
-	push {lr}
-	movs r0, 0xCF
-	bl PlaySE
-	ldr r0, =0x00000888
-	bl FlagSet
-	ldr r0, =EventScript_2926F8
-	bl ScriptContext1_SetupScript
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81371B4
-
-	thumb_func_start sub_81371D4
-sub_81371D4: @ 81371D4
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81371D4
-
-	thumb_func_start sub_81371EC
-sub_81371EC: @ 81371EC
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81371EC
-
-	thumb_func_start c2_change_map
-c2_change_map: @ 8137200
-	push {r4,lr}
-	sub sp, 0x8
-	movs r0, 0
-	bl SetVBlankCallback
-	movs r0, 0
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0xC
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0xA
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x8
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x18
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x1A
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x14
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x16
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x10
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x12
-	movs r1, 0
-	bl SetGpuReg
-	mov r1, sp
-	movs r0, 0
-	strh r0, [r1]
-	ldr r1, =0x040000d4
-	mov r0, sp
-	str r0, [r1]
-	movs r0, 0xC0
-	lsls r0, 19
-	str r0, [r1, 0x4]
-	ldr r0, =0x8100c000
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	movs r4, 0
-	str r4, [sp, 0x4]
-	add r0, sp, 0x4
-	str r0, [r1]
-	movs r0, 0xE0
-	lsls r0, 19
-	str r0, [r1, 0x4]
-	ldr r0, =0x85000100
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	mov r0, sp
-	strh r4, [r0]
-	str r0, [r1]
-	ldr r0, =0x05000002
-	str r0, [r1, 0x4]
-	ldr r0, =0x810001ff
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	bl ResetPaletteFade
-	bl ResetTasks
-	bl ResetSpriteData
-	ldr r3, =0x04000208
-	ldrh r2, [r3]
-	strh r4, [r3]
-	ldr r4, =0x04000200
-	ldrh r0, [r4]
-	movs r1, 0x1
-	orrs r0, r1
-	strh r0, [r4]
-	strh r2, [r3]
-	ldr r0, =sub_81371EC
-	bl SetVBlankCallback
-	ldr r0, =sub_81371D4
-	bl SetMainCallback2
-	bl sub_8137304
-	lsls r0, 24
-	cmp r0, 0
-	bne _081372D2
-	ldr r0, =gMain
-	ldr r0, [r0, 0x8]
-	bl SetMainCallback2
-_081372D2:
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end c2_change_map
-
-	thumb_func_start sub_8137304
-sub_8137304: @ 8137304
-	push {r4-r7,lr}
-	bl get_map_light_from_warp0
-	lsls r0, 24
-	lsrs r6, r0, 24
-	bl sav1_map_get_light_level
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r3, 0
-	ldr r4, =gUnknown_085B27C8
-	ldrb r0, [r4]
-	cmp r0, 0
-	beq _08137358
-	adds r7, r4, 0
-	adds r0, r4, 0x4
-	mov r12, r0
-_08137326:
-	lsls r2, r3, 3
-	adds r1, r2, r7
-	ldrb r0, [r1]
-	cmp r0, r6
-	bne _08137348
-	ldrb r0, [r1, 0x1]
-	cmp r0, r5
-	bne _08137348
-	mov r1, r12
-	adds r0, r2, r1
-	ldr r0, [r0]
-	bl _call_via_r0
-	movs r0, 0x1
-	b _0813735A
-	.pool
-_08137348:
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	lsls r0, r3, 3
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08137326
-_08137358:
-	movs r0, 0
-_0813735A:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8137304
-
-	thumb_func_start sub_8137360
-sub_8137360: @ 8137360
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsls r1, 24
-	lsrs r5, r0, 24
-	lsrs r4, r1, 24
-	movs r3, 0
-	ldr r1, =gUnknown_085B27C8
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _081373A0
-	adds r6, r1, 0
-_08137376:
-	lsls r0, r3, 3
-	adds r2, r0, r6
-	ldrb r0, [r2]
-	cmp r0, r5
-	bne _08137390
-	ldrb r0, [r2, 0x1]
-	cmp r0, r4
-	bne _08137390
-	ldrb r0, [r2, 0x2]
-	b _081373A2
-	.pool
-_08137390:
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	lsls r0, r3, 3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08137376
-_081373A0:
-	movs r0, 0
-_081373A2:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8137360
-
-	thumb_func_start fade_type_for_given_maplight_pair
-fade_type_for_given_maplight_pair: @ 81373A8
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsls r1, 24
-	lsrs r5, r0, 24
-	lsrs r4, r1, 24
-	movs r3, 0
-	ldr r1, =gUnknown_085B27C8
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _081373E8
-	adds r6, r1, 0
-_081373BE:
-	lsls r0, r3, 3
-	adds r2, r0, r6
-	ldrb r0, [r2]
-	cmp r0, r5
-	bne _081373D8
-	ldrb r0, [r2, 0x1]
-	cmp r0, r4
-	bne _081373D8
-	ldrb r0, [r2, 0x3]
-	b _081373EA
-	.pool
-_081373D8:
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	lsls r0, r3, 3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _081373BE
-_081373E8:
-	movs r0, 0
-_081373EA:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end fade_type_for_given_maplight_pair
-
-	thumb_func_start sub_81373F0
-sub_81373F0: @ 81373F0
-	push {lr}
-	ldr r0, =sub_8137404
-	movs r1, 0
-	bl CreateTask
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81373F0
-
-	thumb_func_start sub_8137404
-sub_8137404: @ 8137404
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	ldr r0, =sub_8137420
-	str r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end sub_8137404
-
-	thumb_func_start sub_8137420
-sub_8137420: @ 8137420
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0
-	movs r1, 0
-	bl SetGpuReg
-	ldr r0, =gUnknown_085B2A90
-	ldr r1, =0x0600c000
-	bl LZ77UnCompVram
-	ldr r0, =gUnknown_085B28B0
-	ldr r1, =0x0600f800
-	bl LZ77UnCompVram
-	ldr r0, =gUnknown_085B2850
-	movs r1, 0xE0
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r0, =gUnknown_085B28A0
-	movs r1, 0xE0
-	movs r2, 0x10
-	bl LoadPalette
-	ldr r1, =0x00003e41
-	movs r0, 0x50
-	bl SetGpuReg
-	movs r0, 0x52
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x54
-	movs r1, 0
-	bl SetGpuReg
-	ldr r1, =0x00001f0c
-	movs r0, 0x8
-	bl SetGpuReg
-	movs r1, 0x8A
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, =sub_81374C4
-	str r1, [r0]
-	movs r2, 0
-	movs r1, 0x10
-	strh r1, [r0, 0x8]
-	strh r2, [r0, 0xA]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8137420
-
-	thumb_func_start sub_81374C4
-sub_81374C4: @ 81374C4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r5, r1, r2
-	ldrh r4, [r5, 0xA]
-	movs r0, 0x80
-	lsls r0, 5
-	adds r1, r4, r0
-	lsls r1, 16
-	lsrs r1, 16
-	movs r0, 0x52
-	bl SetGpuReg
-	cmp r4, 0x10
-	bhi _081374F8
-	ldrh r0, [r5, 0xA]
-	adds r0, 0x1
-	strh r0, [r5, 0xA]
-	b _08137500
-	.pool
-_081374F8:
-	movs r0, 0
-	strh r0, [r5, 0xC]
-	ldr r0, =sub_813750C
-	str r0, [r5]
-_08137500:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81374C4
-
-	thumb_func_start sub_813750C
-sub_813750C: @ 813750C
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r1, =0x00001010
-	movs r0, 0x52
-	bl SetGpuReg
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r4, r0, r1
-	ldrh r1, [r4, 0xC]
-	cmp r1, 0x7
-	bhi _08137554
-	adds r0, r1, 0x1
-	strh r0, [r4, 0xC]
-	lsls r1, 1
-	ldr r0, =gUnknown_085B28A0
-	adds r0, r1, r0
-	movs r2, 0x10
-	subs r2, r1
-	lsls r2, 16
-	lsrs r2, 16
-	movs r1, 0xE0
-	bl LoadPalette
-	b _08137566
-	.pool
-_08137554:
-	ldr r0, =gUnknown_085B2850
-	movs r1, 0
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r0, =sub_8137574
-	str r0, [r4]
-	movs r0, 0x8
-	strh r0, [r4, 0xC]
-_08137566:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_813750C
-
-	thumb_func_start sub_8137574
-sub_8137574: @ 8137574
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	ldrh r2, [r1, 0xC]
-	movs r3, 0xC
-	ldrsh r0, [r1, r3]
-	cmp r0, 0
-	beq _08137598
-	subs r0, r2, 0x1
-	strh r0, [r1, 0xC]
-	b _081375A0
-	.pool
-_08137598:
-	ldr r0, =gMain
-	ldr r0, [r0, 0x8]
-	bl SetMainCallback2
-_081375A0:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8137574
-
-	thumb_func_start sub_81375A8
-sub_81375A8: @ 81375A8
-	push {lr}
-	ldr r0, =sub_81375BC
-	movs r1, 0
-	bl CreateTask
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81375A8
-
-	thumb_func_start sub_81375BC
-sub_81375BC: @ 81375BC
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	ldr r0, =sub_81375D8
-	str r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end sub_81375BC
-
-	thumb_func_start sub_81375D8
-sub_81375D8: @ 81375D8
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0
-	movs r1, 0
-	bl SetGpuReg
-	ldr r0, =gUnknown_085B2A90
-	ldr r1, =0x0600c000
-	bl LZ77UnCompVram
-	ldr r0, =gUnknown_085B28B0
-	ldr r1, =0x0600f800
-	bl LZ77UnCompVram
-	movs r0, 0x50
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x52
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x54
-	movs r1, 0
-	bl SetGpuReg
-	ldr r1, =0x00001f0c
-	movs r0, 0x8
-	bl SetGpuReg
-	movs r1, 0x8A
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	ldr r0, =gUnknown_085B2850
-	movs r1, 0xE0
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r0, =gUnknown_085B2870
-	movs r1, 0
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r1, =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, =sub_8137678
-	str r1, [r0]
-	movs r2, 0
-	movs r1, 0x10
-	strh r1, [r0, 0x8]
-	strh r2, [r0, 0xA]
-	strh r2, [r0, 0xC]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81375D8
-
-	thumb_func_start sub_8137678
-sub_8137678: @ 8137678
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-	ldrh r1, [r4, 0xC]
-	cmp r1, 0xF
-	bhi _081376B4
-	adds r2, r1, 0x1
-	adds r0, r2, 0x1
-	strh r0, [r4, 0xC]
-	movs r0, 0xF
-	subs r0, r1
-	lsls r0, 1
-	ldr r1, =gUnknown_085B2890
-	adds r0, r1
-	lsls r2, 17
-	lsrs r2, 16
-	movs r1, 0xE0
-	bl LoadPalette
-	b _081376C8
-	.pool
-_081376B4:
-	ldr r1, =0x00001010
-	movs r0, 0x52
-	bl SetGpuReg
-	ldr r1, =0x00003e41
-	movs r0, 0x50
-	bl SetGpuReg
-	ldr r0, =sub_81376DC
-	str r0, [r4]
-_081376C8:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8137678
-
-	thumb_func_start sub_81376DC
-sub_81376DC: @ 81376DC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r5, r1, r2
-	ldrh r0, [r5, 0xA]
-	movs r1, 0x10
-	subs r1, r0
-	lsls r1, 16
-	lsrs r4, r1, 16
-	movs r0, 0x80
-	lsls r0, 21
-	adds r1, r0
-	lsrs r1, 16
-	movs r0, 0x52
-	bl SetGpuReg
-	cmp r4, 0
-	beq _08137714
-	ldrh r0, [r5, 0xA]
-	adds r0, 0x1
-	strh r0, [r5, 0xA]
-	b _08137726
-	.pool
-_08137714:
-	ldr r0, =gUnknown_085B2870
-	movs r1, 0
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r0, =gMain
-	ldr r0, [r0, 0x8]
-	bl SetMainCallback2
-_08137726:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81376DC
-
-	thumb_func_start sub_8137734
-sub_8137734: @ 8137734
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x1C
-	bl HealPlayerParty
-	ldr r4, =0x00000864
-	adds r0, r4, 0
-	bl FlagGet
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x1
-	bne _08137760
-	ldr r0, =gHasHallOfFameRecords
-	strb r1, [r0]
-	b _0813776C
-	.pool
-_08137760:
-	ldr r1, =gHasHallOfFameRecords
-	movs r0, 0
-	strb r0, [r1]
-	adds r0, r4, 0
-	bl FlagSet
-_0813776C:
-	movs r0, 0x1
-	bl GetGameStat
-	cmp r0, 0
-	bne _0813778E
-	ldr r0, =gSaveBlock2Ptr
-	ldr r2, [r0]
-	ldrh r1, [r2, 0xE]
-	lsls r1, 16
-	ldrb r0, [r2, 0x10]
-	lsls r0, 8
-	orrs r1, r0
-	ldrb r0, [r2, 0x11]
-	orrs r1, r0
-	movs r0, 0x1
-	bl sav12_xor_set
-_0813778E:
-	bl sub_8076D48
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0
-	bne _081377AC
-	movs r0, 0x1
-	bl sub_8084F6C
-	b _081377B2
-	.pool
-_081377AC:
-	movs r0, 0x2
-	bl sub_8084F6C
-_081377B2:
-	movs r7, 0
-	movs r6, 0
-	add r0, sp, 0x18
-	mov r8, r0
-	mov r5, sp
-_081377BC:
-	movs r0, 0x64
-	adds r1, r6, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r4, r1, r0
-	movs r0, 0
-	strb r6, [r5]
-	strb r0, [r5, 0x1]
-	adds r0, r4, 0
-	movs r1, 0x5
-	bl GetMonData
-	cmp r0, 0
-	beq _0813780A
-	adds r0, r4, 0
-	movs r1, 0x6
-	bl GetMonData
-	cmp r0, 0
-	bne _0813780A
-	adds r0, r4, 0
-	movs r1, 0x43
-	bl GetMonData
-	cmp r0, 0
-	bne _0813780A
-	movs r0, 0x1
-	mov r1, r8
-	strb r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x43
-	add r2, sp, 0x18
-	bl SetMonData
-	adds r0, r4, 0
-	bl GetRibbonCount
-	strb r0, [r5, 0x1]
-	movs r7, 0x1
-_0813780A:
-	adds r5, 0x4
-	adds r6, 0x1
-	cmp r6, 0x5
-	ble _081377BC
-	cmp r7, 0x1
-	bne _0813785A
-	movs r0, 0x2A
-	bl IncrementGameStat
-	ldr r0, =0x0000089b
-	bl FlagSet
-	mov r3, sp
-	add r2, sp, 0x4
-	movs r6, 0x4
-_08137828:
-	ldrb r1, [r3, 0x1]
-	ldrb r0, [r2, 0x1]
-	cmp r0, r1
-	bls _08137838
-	ldr r1, [sp]
-	ldr r0, [r2]
-	str r0, [sp]
-	str r1, [r2]
-_08137838:
-	adds r2, 0x4
-	subs r6, 0x1
-	cmp r6, 0
-	bge _08137828
-	mov r0, sp
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0x4
-	bls _0813785A
-	mov r0, sp
-	ldrb r1, [r0]
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, =gPlayerParty
-	adds r0, r1
-	movs r1, 0x43
-	bl sub_80EE4DC
-_0813785A:
-	ldr r0, =CB2_DoHallOfFameScreen
-	bl SetMainCallback2
-	movs r0, 0
-	add sp, 0x1C
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8137734
-
-	thumb_func_start sp0C8_whiteout_maybe
-sp0C8_whiteout_maybe: @ 813787C
-	push {lr}
-	ldr r0, =CB2_WhiteOut
-	bl SetMainCallback2
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sp0C8_whiteout_maybe
-
-@ time_events.o
-
-	thumb_func_start sub_8137890
-sub_8137890: @ 8137890
-	push {r4,lr}
-	ldr r0, =0x00004024
-	bl VarGet
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	ldr r0, =0x00004025
-	bl VarGet
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r4, 16
-	orrs r4, r0
-	adds r0, r4, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8137890
-
-	thumb_func_start sub_81378BC
-sub_81378BC: @ 81378BC
-	push {r4,lr}
-	adds r4, r0, 0
-	ldr r0, =0x00004024
-	lsrs r1, r4, 16
-	bl VarSet
-	ldr r0, =0x00004025
-	lsls r4, 16
-	lsrs r4, 16
-	adds r1, r4, 0
-	bl VarSet
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81378BC
-
-	thumb_func_start sub_81378E4
-sub_81378E4: @ 81378E4
-	push {r4,lr}
-	bl Random
-	adds r4, r0, 0
-	bl Random
-	lsls r4, 16
-	lsls r0, 16
-	lsrs r0, 16
-	orrs r4, r0
-	adds r0, r4, 0
-	bl sub_81378BC
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81378E4
-
-	thumb_func_start UpdateMirageRnd
-UpdateMirageRnd: @ 8137904
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	bl sub_8137890
-	adds r1, r0, 0
-	cmp r4, 0
-	beq _08137928
-	ldr r3, =0x41c64e6d
-	ldr r2, =0x00003039
-_08137918:
-	adds r0, r1, 0
-	muls r0, r3
-	adds r1, r0, r2
-	subs r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0
-	bne _08137918
-_08137928:
-	adds r0, r1, 0
-	bl sub_81378BC
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end UpdateMirageRnd
-
-	thumb_func_start sub_813793C
-sub_813793C: @ 813793C
-	push {r4-r6,lr}
-	bl sub_8137890
-	lsrs r6, r0, 16
-	movs r5, 0
-_08137946:
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	bl GetMonData
-	cmp r0, 0
-	beq _08137978
-	adds r0, r4, 0
-	movs r1, 0
-	bl GetMonData
-	ldr r1, =0x0000ffff
-	ands r1, r0
-	cmp r1, r6
-	bne _08137978
-	movs r0, 0x1
-	b _08137980
-	.pool
-_08137978:
-	adds r5, 0x1
-	cmp r5, 0x5
-	ble _08137946
-	movs r0, 0
-_08137980:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_813793C
-
-	thumb_func_start sub_8137988
-sub_8137988: @ 8137988
-	push {lr}
-	bl get_map_light_from_warp0
-	lsls r0, 24
-	lsrs r0, 24
-	bl is_light_level_1_2_3_5_or_6
-	lsls r0, 24
-	cmp r0, 0
-	beq _081379CE
-	bl RtcCalcLocalTime
-	ldr r1, =gUnknown_085B2B44
-	ldr r0, =gLocalTime
-	ldrb r0, [r0, 0x2]
-	lsls r0, 24
-	asrs r0, 24
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _081379C8
-	ldr r0, =0x0000089a
-	bl FlagSet
-	b _081379CE
-	.pool
-_081379C8:
-	ldr r0, =0x0000089a
-	bl FlagClear
-_081379CE:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8137988
-
-	thumb_func_start sub_81379D8
-sub_81379D8: @ 81379D8
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	bl sub_80AC3BC
-	lsls r0, 24
-	cmp r0, 0
-	beq _081379F2
-	bl EnableBothScriptContexts
-	adds r0, r4, 0
-	bl DestroyTask
-_081379F2:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_81379D8
-
-	thumb_func_start sub_81379F8
-sub_81379F8: @ 81379F8
-	push {lr}
-	ldr r0, =sub_81379D8
-	movs r1, 0x50
-	bl CreateTask
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81379F8
-
-	thumb_func_start sub_8137A0C
-sub_8137A0C: @ 8137A0C
-	push {lr}
-	ldr r0, =0x00004049
-	bl GetVarPointer
-	movs r1, 0
-	strh r1, [r0]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8137A0C
-
-	thumb_func_start UpdateBirchState
-UpdateBirchState: @ 8137A20
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	ldr r0, =0x00004049
-	bl GetVarPointer
-	adds r5, r0, 0
-	ldrh r0, [r5]
-	adds r4, r0
-	strh r4, [r5]
-	ldrh r0, [r5]
-	movs r1, 0x7
-	bl __umodsi3
-	strh r0, [r5]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end UpdateBirchState
-
-@ birch_pc.o
-
-	thumb_func_start sub_8137A4C
-sub_8137A4C: @ 8137A4C
-	push {lr}
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	cmp r0, 0
-	bne _08137A70
-	movs r0, 0
-	bl sub_80C0844
-	ldr r1, =gSpecialVar_0x8005
-	strh r0, [r1]
-	movs r0, 0x1
-	bl sub_80C0844
-	b _08137A80
-	.pool
-_08137A70:
-	movs r0, 0
-	bl pokedex_count
-	ldr r1, =gSpecialVar_0x8005
-	strh r0, [r1]
-	movs r0, 0x1
-	bl pokedex_count
-_08137A80:
-	ldr r1, =gSpecialVar_0x8006
-	strh r0, [r1]
-	bl IsNationalPokedexEnabled
-	lsls r0, 16
-	lsrs r0, 16
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8137A4C
-
-	thumb_func_start sub_8137A98
-sub_8137A98: @ 8137A98
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x9
-	bhi _08137AA4
-	b _08137BFC
-_08137AA4:
-	cmp r0, 0x13
-	bhi _08137AB0
-	ldr r0, =gUnknown_082A5DAB
-	b _08137C06
-	.pool
-_08137AB0:
-	cmp r0, 0x1D
-	bhi _08137ABC
-	ldr r0, =gUnknown_082A5DF1
-	b _08137C06
-	.pool
-_08137ABC:
-	cmp r0, 0x27
-	bhi _08137AC8
-	ldr r0, =gUnknown_082A5E34
-	b _08137C06
-	.pool
-_08137AC8:
-	cmp r0, 0x31
-	bhi _08137AD4
-	ldr r0, =gUnknown_082A5E83
-	b _08137C06
-	.pool
-_08137AD4:
-	cmp r0, 0x3B
-	bhi _08137AE0
-	ldr r0, =gUnknown_082A5EB9
-	b _08137C06
-	.pool
-_08137AE0:
-	cmp r0, 0x45
-	bhi _08137AEC
-	ldr r0, =gUnknown_082A5EF4
-	b _08137C06
-	.pool
-_08137AEC:
-	cmp r0, 0x4F
-	bhi _08137AF8
-	ldr r0, =gUnknown_082A5F39
-	b _08137C06
-	.pool
-_08137AF8:
-	cmp r0, 0x59
-	bhi _08137B04
-	ldr r0, =gUnknown_082A5F82
-	b _08137C06
-	.pool
-_08137B04:
-	cmp r0, 0x63
-	bhi _08137B10
-	ldr r0, =gUnknown_082A5FB9
-	b _08137C06
-	.pool
-_08137B10:
-	cmp r0, 0x6D
-	bhi _08137B1C
-	ldr r0, =gUnknown_082A6018
-	b _08137C06
-	.pool
-_08137B1C:
-	cmp r0, 0x77
-	bhi _08137B28
-	ldr r0, =gUnknown_082A6061
-	b _08137C06
-	.pool
-_08137B28:
-	cmp r0, 0x81
-	bhi _08137B34
-	ldr r0, =gUnknown_082A609C
-	b _08137C06
-	.pool
-_08137B34:
-	cmp r0, 0x8B
-	bhi _08137B40
-	ldr r0, =gUnknown_082A60D5
-	b _08137C06
-	.pool
-_08137B40:
-	cmp r0, 0x95
-	bhi _08137B4C
-	ldr r0, =gUnknown_082A6124
-	b _08137C06
-	.pool
-_08137B4C:
-	cmp r0, 0x9F
-	bhi _08137B58
-	ldr r0, =gUnknown_082A616F
-	b _08137C06
-	.pool
-_08137B58:
-	cmp r0, 0xA9
-	bhi _08137B64
-	ldr r0, =gUnknown_082A61D6
-	b _08137C06
-	.pool
-_08137B64:
-	cmp r0, 0xB3
-	bhi _08137B70
-	ldr r0, =gUnknown_082A623A
-	b _08137C06
-	.pool
-_08137B70:
-	cmp r0, 0xBD
-	bhi _08137B7C
-	ldr r0, =gUnknown_082A6287
-	b _08137C06
-	.pool
-_08137B7C:
-	cmp r0, 0xC7
-	bls _08137BEA
-	cmp r0, 0xC8
-	bne _08137BB8
-	ldr r0, =0x00000199
-	bl SpeciesToNationalPokedexNum
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x1
-	bl GetSetPokedexFlag
-	lsls r0, 24
-	cmp r0, 0
-	bne _08137BEA
-	movs r0, 0xCD
-	lsls r0, 1
-	bl SpeciesToNationalPokedexNum
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x1
-	bl GetSetPokedexFlag
-	lsls r0, 24
-	cmp r0, 0
-	bne _08137BEA
-	b _08137C04
-	.pool
-_08137BB8:
-	cmp r0, 0xC9
-	bne _08137BF8
-	ldr r0, =0x00000199
-	bl SpeciesToNationalPokedexNum
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x1
-	bl GetSetPokedexFlag
-	lsls r0, 24
-	cmp r0, 0
-	beq _08137C04
-	movs r0, 0xCD
-	lsls r0, 1
-	bl SpeciesToNationalPokedexNum
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x1
-	bl GetSetPokedexFlag
-	lsls r0, 24
-	cmp r0, 0
-	beq _08137C04
-_08137BEA:
-	ldr r0, =gUnknown_082A62C9
-	b _08137C06
-	.pool
-_08137BF8:
-	cmp r0, 0xCA
-	beq _08137C04
-_08137BFC:
-	ldr r0, =gUnknown_082A5D6C
-	b _08137C06
-	.pool
-_08137C04:
-	ldr r0, =gUnknown_082A6312
-_08137C06:
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8137A98
-
-	thumb_func_start sub_8137C10
-sub_8137C10: @ 8137C10
-	push {lr}
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	bl sub_8137A98
-	bl ShowFieldMessage
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8137C10
-
-	thumb_func_start sub_8137C28
-sub_8137C28: @ 8137C28
-	push {lr}
-	ldr r0, =CB2_DoHallOfFamePC
-	bl SetMainCallback2
-	bl ScriptContext2_Enable
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8137C28
-
-	thumb_func_start sub_8137C3C
-sub_8137C3C: @ 8137C3C
-	push {lr}
-	ldr r0, =c2_exit_to_overworld_2_switch
-	bl SetMainCallback2
-	ldr r1, =gFieldCallback
-	ldr r0, =mapldr_080CA5C0
-	str r0, [r1]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8137C3C
-
-	thumb_func_start mapldr_080CA5C0
-mapldr_080CA5C0: @ 8137C5C
-	push {lr}
-	sub sp, 0x4
-	bl ScriptContext2_Enable
-	bl sub_8085784
-	bl sp109_CreatePCMenu
-	bl sub_80E2514
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, =sub_8137C94
-	movs r1, 0xA
-	bl CreateTask
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end mapldr_080CA5C0
-
-	thumb_func_start sub_8137C94
-sub_8137C94: @ 8137C94
-	push {lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08137CAC
-	adds r0, r2, 0
-	bl DestroyTask
-_08137CAC:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8137C94
-
-	thumb_func_start sub_8137CB4
-sub_8137CB4: @ 8137CB4
+	thumb_func_start Special_ShowDiploma
+Special_ShowDiploma: @ 8137CB4
 	push {lr}
 	ldr r0, =CB2_ShowDiploma
 	bl SetMainCallback2
@@ -1394,7 +14,7 @@ sub_8137CB4: @ 8137CB4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8137CB4
+	thumb_func_end Special_ShowDiploma
 
 	thumb_func_start Special_ViewWallClock
 Special_ViewWallClock: @ 8137CC8
@@ -1410,8 +30,8 @@ Special_ViewWallClock: @ 8137CC8
 	.pool
 	thumb_func_end Special_ViewWallClock
 
-	thumb_func_start wild_pokemon_reroll
-wild_pokemon_reroll: @ 8137CEC
+	thumb_func_start ResetCyclingRoadChallengeData
+ResetCyclingRoadChallengeData: @ 8137CEC
 	ldr r0, =gUnknown_0203AB54
 	movs r1, 0
 	strb r1, [r0]
@@ -1422,10 +42,10 @@ wild_pokemon_reroll: @ 8137CEC
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end wild_pokemon_reroll
+	thumb_func_end ResetCyclingRoadChallengeData
 
-	thumb_func_start sub_8137D0C
-sub_8137D0C: @ 8137D0C
+	thumb_func_start Special_BeginCyclingRoadChallenge
+Special_BeginCyclingRoadChallenge: @ 8137D0C
 	ldr r1, =gUnknown_0203AB54
 	movs r0, 0x1
 	strb r0, [r1]
@@ -1438,10 +58,10 @@ sub_8137D0C: @ 8137D0C
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_8137D0C
+	thumb_func_end Special_BeginCyclingRoadChallenge
 
-	thumb_func_start sp0E3_walkrun_bitfield_interpretation
-sp0E3_walkrun_bitfield_interpretation: @ 8137D34
+	thumb_func_start GetPlayerAvatarBike
+GetPlayerAvatarBike: @ 8137D34
 	push {lr}
 	movs r0, 0x4
 	bl TestPlayerAvatarFlags
@@ -1463,10 +83,10 @@ _08137D56:
 _08137D58:
 	pop {r1}
 	bx r1
-	thumb_func_end sp0E3_walkrun_bitfield_interpretation
+	thumb_func_end GetPlayerAvatarBike
 
-	thumb_func_start sub_8137D5C
-sub_8137D5C: @ 8137D5C
+	thumb_func_start DetermineCyclingRoadResults
+DetermineCyclingRoadResults: @ 8137D5C
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	lsls r1, 24
@@ -1588,10 +208,10 @@ _08137E5C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8137D5C
+	thumb_func_end DetermineCyclingRoadResults
 
-	thumb_func_start sub_8137E6C
-sub_8137E6C: @ 8137E6C
+	thumb_func_start FinishCyclingRoadChallenge
+FinishCyclingRoadChallenge: @ 8137E6C
 	push {r4,r5,lr}
 	ldr r0, =gMain
 	ldr r1, =gUnknown_0203AB58
@@ -1601,18 +221,18 @@ sub_8137E6C: @ 8137E6C
 	ldr r5, =gUnknown_0203AB55
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_8137D5C
+	bl DetermineCyclingRoadResults
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_8137E9C
+	bl RecordCyclingRoadResults
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8137E6C
+	thumb_func_end FinishCyclingRoadChallenge
 
-	thumb_func_start sub_8137E9C
-sub_8137E9C: @ 8137E9C
+	thumb_func_start RecordCyclingRoadResults
+RecordCyclingRoadResults: @ 8137E9C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1653,10 +273,10 @@ _08137EE6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8137E9C
+	thumb_func_end RecordCyclingRoadResults
 
-	thumb_func_start sub_8137EFC
-sub_8137EFC: @ 8137EFC
+	thumb_func_start GetRecordedCyclingRoadResults
+GetRecordedCyclingRoadResults: @ 8137EFC
 	push {r4,lr}
 	ldr r0, =0x00004028
 	bl VarGet
@@ -1675,7 +295,7 @@ sub_8137EFC: @ 8137EFC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8137D5C
+	bl DetermineCyclingRoadResults
 	movs r0, 0x1
 	b _08137F3E
 	.pool
@@ -1685,10 +305,10 @@ _08137F3E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8137EFC
+	thumb_func_end GetRecordedCyclingRoadResults
 
-	thumb_func_start sub_8137F44
-sub_8137F44: @ 8137F44
+	thumb_func_start UpdateCyclingRoadState
+UpdateCyclingRoadState: @ 8137F44
 	push {r4,lr}
 	ldr r0, =gUnknown_020322DC
 	ldrh r1, [r0]
@@ -1719,10 +339,10 @@ _08137F7C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8137F44
+	thumb_func_end UpdateCyclingRoadState
 
-	thumb_func_start sub_8137F90
-sub_8137F90: @ 8137F90
+	thumb_func_start SetSSTidalFlag
+SetSSTidalFlag: @ 8137F90
 	push {lr}
 	ldr r0, =0x0000088d
 	bl FlagSet
@@ -1733,17 +353,17 @@ sub_8137F90: @ 8137F90
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8137F90
+	thumb_func_end SetSSTidalFlag
 
-	thumb_func_start sub_8137FB0
-sub_8137FB0: @ 8137FB0
+	thumb_func_start ResetSSTidalFlag
+ResetSSTidalFlag: @ 8137FB0
 	push {lr}
 	ldr r0, =0x0000088d
 	bl FlagClear
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8137FB0
+	thumb_func_end ResetSSTidalFlag
 
 	thumb_func_start CountSSTidalStep
 CountSSTidalStep: @ 8137FC0
@@ -2073,8 +693,8 @@ _0813823A:
 	bx r1
 	thumb_func_end sub_81381F8
 
-	thumb_func_start sub_8138240
-sub_8138240: @ 8138240
+	thumb_func_start GetLinkPartnerNames
+GetLinkPartnerNames: @ 8138240
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2119,7 +739,7 @@ _0813828A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8138240
+	thumb_func_end GetLinkPartnerNames
 
 	thumb_func_start SpawnLinkPartnerFieldObject
 SpawnLinkPartnerFieldObject: @ 81382A0
@@ -2419,8 +1039,8 @@ _081384E6:
 	.pool
 	thumb_func_end sub_813842C
 
-	thumb_func_start sub_81384F0
-sub_81384F0: @ 81384F0
+	thumb_func_start MauvilleGymSpecial1
+MauvilleGymSpecial1: @ 81384F0
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, =gUnknown_085B2B68
@@ -2454,10 +1074,10 @@ _0813852A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81384F0
+	thumb_func_end MauvilleGymSpecial1
 
-	thumb_func_start sub_8138540
-sub_8138540: @ 8138540
+	thumb_func_start MauvilleGymSpecial2
+MauvilleGymSpecial2: @ 8138540
 	push {r4-r6,lr}
 	movs r5, 0xC
 _08138544:
@@ -2668,10 +1288,10 @@ _08138744:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138540
+	thumb_func_end MauvilleGymSpecial2
 
-	thumb_func_start sub_8138750
-sub_8138750: @ 8138750
+	thumb_func_start MauvilleGymSpecial3
+MauvilleGymSpecial3: @ 8138750
 	push {r4-r6,lr}
 	ldr r4, =gUnknown_085B2B68
 	movs r5, 0x3
@@ -2823,10 +1443,10 @@ _081388DA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138750
+	thumb_func_end MauvilleGymSpecial3
 
-	thumb_func_start sub_81388E4
-sub_81388E4: @ 81388E4
+	thumb_func_start PetalburgGymSpecial1
+PetalburgGymSpecial1: @ 81388E4
 	push {lr}
 	ldr r0, =gUnknown_0203AB5C
 	movs r1, 0
@@ -2835,16 +1455,16 @@ sub_81388E4: @ 81388E4
 	strb r1, [r0]
 	movs r0, 0x2C
 	bl PlaySE
-	ldr r0, =sub_8138910
+	ldr r0, =Task_PetalburgGym
 	movs r1, 0x8
 	bl CreateTask
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81388E4
+	thumb_func_end PetalburgGymSpecial1
 
-	thumb_func_start sub_8138910
-sub_8138910: @ 8138910
+	thumb_func_start Task_PetalburgGym
+Task_PetalburgGym: @ 8138910
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2863,7 +1483,7 @@ sub_8138910: @ 8138910
 	lsls r1, 1
 	adds r1, r2
 	ldrh r1, [r1]
-	bl sub_8138978
+	bl PetalburgGymFunc
 	movs r0, 0
 	strb r0, [r4]
 	ldrb r0, [r5]
@@ -2885,10 +1505,10 @@ _08138970:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8138910
+	thumb_func_end Task_PetalburgGym
 
-	thumb_func_start sub_8138978
-sub_8138978: @ 8138978
+	thumb_func_start PetalburgGymFunc
+PetalburgGymFunc: @ 8138978
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3042,33 +1662,33 @@ _08138A92:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8138978
+	thumb_func_end PetalburgGymFunc
 
-	thumb_func_start sub_8138AA4
-sub_8138AA4: @ 8138AA4
+	thumb_func_start PetalburgGymSpecial2
+PetalburgGymSpecial2: @ 8138AA4
 	push {lr}
 	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	ldr r1, =gUnknown_085B2B7E
 	ldrh r1, [r1, 0x8]
-	bl sub_8138978
+	bl PetalburgGymFunc
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138AA4
+	thumb_func_end PetalburgGymSpecial2
 
-	thumb_func_start sub_8138AC0
-sub_8138AC0: @ 8138AC0
+	thumb_func_start ShowFieldMessageStringVar4
+ShowFieldMessageStringVar4: @ 8138AC0
 	push {lr}
 	ldr r0, =gStringVar4
 	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138AC0
+	thumb_func_end ShowFieldMessageStringVar4
 
-	thumb_func_start sub_8138AD0
-sub_8138AD0: @ 8138AD0
+	thumb_func_start StorePlayerCoordsInVars
+StorePlayerCoordsInVars: @ 8138AD0
 	ldr r1, =gSpecialVar_0x8004
 	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
@@ -3079,10 +1699,10 @@ sub_8138AD0: @ 8138AD0
 	strh r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_8138AD0
+	thumb_func_end StorePlayerCoordsInVars
 
-	thumb_func_start sub_8138AF0
-sub_8138AF0: @ 8138AF0
+	thumb_func_start GetPlayerTrainerIdOnesDigit
+GetPlayerTrainerIdOnesDigit: @ 8138AF0
 	push {lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -3097,10 +1717,10 @@ sub_8138AF0: @ 8138AF0
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8138AF0
+	thumb_func_end GetPlayerTrainerIdOnesDigit
 
-	thumb_func_start sub_8138B10
-sub_8138B10: @ 8138B10
+	thumb_func_start GetPlayerBigGuyGirlString
+GetPlayerBigGuyGirlString: @ 8138B10
 	push {lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -3120,10 +1740,10 @@ _08138B3C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138B10
+	thumb_func_end GetPlayerBigGuyGirlString
 
-	thumb_func_start sub_8138B48
-sub_8138B48: @ 8138B48
+	thumb_func_start GetRivalSonDaughterString
+GetRivalSonDaughterString: @ 8138B48
 	push {lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -3143,7 +1763,7 @@ _08138B74:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138B48
+	thumb_func_end GetRivalSonDaughterString
 
 	thumb_func_start sub_8138B80
 sub_8138B80: @ 8138B80
@@ -3153,8 +1773,8 @@ sub_8138B80: @ 8138B80
 	.pool
 	thumb_func_end sub_8138B80
 
-	thumb_func_start sub_8138B8C
-sub_8138B8C: @ 8138B8C
+	thumb_func_start CableCarWarp
+CableCarWarp: @ 8138B8C
 	push {lr}
 	sub sp, 0x4
 	ldr r0, =gSpecialVar_0x8004
@@ -3184,10 +1804,10 @@ _08138BC2:
 	add sp, 0x4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8138B8C
+	thumb_func_end CableCarWarp
 
-	thumb_func_start sub_8138BC8
-sub_8138BC8: @ 8138BC8
+	thumb_func_start SetFlagInVar
+SetFlagInVar: @ 8138BC8
 	push {lr}
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
@@ -3195,10 +1815,10 @@ sub_8138BC8: @ 8138BC8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138BC8
+	thumb_func_end SetFlagInVar
 
-	thumb_func_start sub_8138BDC
-sub_8138BDC: @ 8138BDC
+	thumb_func_start GetWeekCount
+GetWeekCount: @ 8138BDC
 	push {lr}
 	ldr r0, =gLocalTime
 	movs r1, 0
@@ -3215,10 +1835,10 @@ _08138BF6:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8138BDC
+	thumb_func_end GetWeekCount
 
-	thumb_func_start sub_8138C04
-sub_8138C04: @ 8138C04
+	thumb_func_start GetLeadMonFriendshipScore
+GetLeadMonFriendshipScore: @ 8138C04
 	push {r4,lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -3281,32 +1901,32 @@ _08138C7E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8138C04
+	thumb_func_end GetLeadMonFriendshipScore
 
-	thumb_func_start sub_8138C84
-sub_8138C84: @ 8138C84
+	thumb_func_start CB2_FieldShowRegionMap
+CB2_FieldShowRegionMap: @ 8138C84
 	push {lr}
 	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl sub_817018C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138C84
+	thumb_func_end CB2_FieldShowRegionMap
 
-	thumb_func_start sub_8138C94
-sub_8138C94: @ 8138C94
+	thumb_func_start FieldShowRegionMap
+FieldShowRegionMap: @ 8138C94
 	push {lr}
-	ldr r0, =sub_8138C84
+	ldr r0, =CB2_FieldShowRegionMap
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138C94
+	thumb_func_end FieldShowRegionMap
 
-	thumb_func_start sp0D9_ComputerRelated
-sp0D9_ComputerRelated: @ 8138CA4
+	thumb_func_start DoPCTurnOnEffect
+DoPCTurnOnEffect: @ 8138CA4
 	push {r4,lr}
-	ldr r4, =sub_8138CE8
+	ldr r4, =Task_PCTurnOnEffect
 	adds r0, r4, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -3334,10 +1954,10 @@ _08138CD8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sp0D9_ComputerRelated
+	thumb_func_end DoPCTurnOnEffect
 
-	thumb_func_start sub_8138CE8
-sub_8138CE8: @ 8138CE8
+	thumb_func_start Task_PCTurnOnEffect
+Task_PCTurnOnEffect: @ 8138CE8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3351,15 +1971,15 @@ sub_8138CE8: @ 8138CE8
 	cmp r0, 0
 	bne _08138D06
 	adds r0, r1, 0
-	bl sub_8138D10
+	bl PCTurnOnEffect_0
 _08138D06:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138CE8
+	thumb_func_end Task_PCTurnOnEffect
 
-	thumb_func_start sub_8138D10
-sub_8138D10: @ 8138D10
+	thumb_func_start PCTurnOnEffect_0
+PCTurnOnEffect_0: @ 8138D10
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r6, 0
@@ -3401,7 +2021,7 @@ _08138D4C:
 	asrs r1, 24
 	lsls r2, r5, 24
 	asrs r2, 24
-	bl sub_8138D88
+	bl PCTurnOnEffect_1
 	bl DrawWholeMapView
 	ldrh r0, [r4, 0x10]
 	movs r1, 0x1
@@ -3423,10 +2043,10 @@ _08138D7C:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8138D10
+	thumb_func_end PCTurnOnEffect_0
 
-	thumb_func_start sub_8138D88
-sub_8138D88: @ 8138D88
+	thumb_func_start PCTurnOnEffect_1
+PCTurnOnEffect_1: @ 8138D88
 	push {r4,r5,lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -3498,18 +2118,18 @@ _08138DE6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138D88
+	thumb_func_end PCTurnOnEffect_1
 
-	thumb_func_start sub_8138E20
-sub_8138E20: @ 8138E20
+	thumb_func_start DoPCTurnOffEffect
+DoPCTurnOffEffect: @ 8138E20
 	push {lr}
-	bl sub_8138E2C
+	bl PCTurnOffEffect
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8138E20
+	thumb_func_end DoPCTurnOffEffect
 
-	thumb_func_start sub_8138E2C
-sub_8138E2C: @ 8138E2C
+	thumb_func_start PCTurnOffEffect
+PCTurnOffEffect: @ 8138E2C
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r5, 0
@@ -3583,12 +2203,12 @@ _08138E82:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138E2C
+	thumb_func_end PCTurnOffEffect
 
-	thumb_func_start sub_8138EC0
-sub_8138EC0: @ 8138EC0
+	thumb_func_start DoLotteryCornerComputerEffect
+DoLotteryCornerComputerEffect: @ 8138EC0
 	push {r4,lr}
-	ldr r4, =sub_8138F04
+	ldr r4, =Task_LotteryCornerComputerEffect
 	adds r0, r4, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -3616,10 +2236,10 @@ _08138EF4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138EC0
+	thumb_func_end DoLotteryCornerComputerEffect
 
-	thumb_func_start sub_8138F04
-sub_8138F04: @ 8138F04
+	thumb_func_start Task_LotteryCornerComputerEffect
+Task_LotteryCornerComputerEffect: @ 8138F04
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3633,15 +2253,15 @@ sub_8138F04: @ 8138F04
 	cmp r0, 0
 	bne _08138F22
 	adds r0, r1, 0
-	bl sub_8138F2C
+	bl LotteryCornerComputerEffect
 _08138F22:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138F04
+	thumb_func_end Task_LotteryCornerComputerEffect
 
-	thumb_func_start sub_8138F2C
-sub_8138F2C: @ 8138F2C
+	thumb_func_start LotteryCornerComputerEffect
+LotteryCornerComputerEffect: @ 8138F2C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0xE
@@ -3697,10 +2317,10 @@ _08138F9A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138F2C
+	thumb_func_end LotteryCornerComputerEffect
 
-	thumb_func_start sub_8138FAC
-sub_8138FAC: @ 8138FAC
+	thumb_func_start EndLotteryCornerComputerEffect
+EndLotteryCornerComputerEffect: @ 8138FAC
 	push {lr}
 	ldr r2, =0x00000e9d
 	movs r0, 0x12
@@ -3714,10 +2334,10 @@ sub_8138FAC: @ 8138FAC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138FAC
+	thumb_func_end EndLotteryCornerComputerEffect
 
-	thumb_func_start sub_8138FD4
-sub_8138FD4: @ 8138FD4
+	thumb_func_start SetTrickHouseEndRoomFlag
+SetTrickHouseEndRoomFlag: @ 8138FD4
 	push {lr}
 	ldr r1, =gSpecialVar_0x8004
 	ldr r0, =0x000001f5
@@ -3726,10 +2346,10 @@ sub_8138FD4: @ 8138FD4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138FD4
+	thumb_func_end SetTrickHouseEndRoomFlag
 
-	thumb_func_start sub_8138FEC
-sub_8138FEC: @ 8138FEC
+	thumb_func_start ResetTrickHouseEndRoomFlag
+ResetTrickHouseEndRoomFlag: @ 8138FEC
 	push {lr}
 	ldr r1, =gSpecialVar_0x8004
 	ldr r0, =0x000001f5
@@ -3738,10 +2358,10 @@ sub_8138FEC: @ 8138FEC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8138FEC
+	thumb_func_end ResetTrickHouseEndRoomFlag
 
-	thumb_func_start sub_8139004
-sub_8139004: @ 8139004
+	thumb_func_start CheckLeadMonCool
+CheckLeadMonCool: @ 8139004
 	push {lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -3762,10 +2382,10 @@ _08139028:
 _0813902A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8139004
+	thumb_func_end CheckLeadMonCool
 
-	thumb_func_start sub_8139030
-sub_8139030: @ 8139030
+	thumb_func_start CheckLeadMonBeauty
+CheckLeadMonBeauty: @ 8139030
 	push {lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -3786,10 +2406,10 @@ _08139054:
 _08139056:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8139030
+	thumb_func_end CheckLeadMonBeauty
 
-	thumb_func_start sub_813905C
-sub_813905C: @ 813905C
+	thumb_func_start CheckLeadMonCute
+CheckLeadMonCute: @ 813905C
 	push {lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -3810,10 +2430,10 @@ _08139080:
 _08139082:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_813905C
+	thumb_func_end CheckLeadMonCute
 
-	thumb_func_start sub_8139088
-sub_8139088: @ 8139088
+	thumb_func_start CheckLeadMonSmart
+CheckLeadMonSmart: @ 8139088
 	push {lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -3834,10 +2454,10 @@ _081390AC:
 _081390AE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8139088
+	thumb_func_end CheckLeadMonSmart
 
-	thumb_func_start sub_81390B4
-sub_81390B4: @ 81390B4
+	thumb_func_start CheckLeadMonTough
+CheckLeadMonTough: @ 81390B4
 	push {lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -3858,10 +2478,10 @@ _081390D8:
 _081390DA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81390B4
+	thumb_func_end CheckLeadMonTough
 
-	thumb_func_start sub_81390E0
-sub_81390E0: @ 81390E0
+	thumb_func_start IsGrassTypeInParty
+IsGrassTypeInParty: @ 81390E0
 	push {r4-r6,lr}
 	movs r5, 0
 	ldr r6, =gBaseStats
@@ -3915,7 +2535,7 @@ _0813914A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81390E0
+	thumb_func_end IsGrassTypeInParty
 
 	thumb_func_start SpawnScriptFieldObject
 SpawnScriptFieldObject: @ 8139158
@@ -3975,8 +2595,8 @@ RemoveScriptFieldObject: @ 81391AC
 	.pool
 	thumb_func_end RemoveScriptFieldObject
 
-	thumb_func_start sub_81391D0
-sub_81391D0: @ 81391D0
+	thumb_func_start GetPokeblockNameByMonNature
+GetPokeblockNameByMonNature: @ 81391D0
 	push {lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -3995,10 +2615,10 @@ sub_81391D0: @ 81391D0
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81391D0
+	thumb_func_end GetPokeblockNameByMonNature
 
-	thumb_func_start sub_8139200
-sub_8139200: @ 8139200
+	thumb_func_start GetSecretBaseNearbyMapName
+GetSecretBaseNearbyMapName: @ 8139200
 	push {r4,lr}
 	ldr r4, =gStringVar1
 	ldr r0, =0x00004026
@@ -4013,7 +2633,7 @@ sub_8139200: @ 8139200
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8139200
+	thumb_func_end GetSecretBaseNearbyMapName
 
 	thumb_func_start sub_8139228
 sub_8139228: @ 8139228
@@ -4159,8 +2779,8 @@ _08139342:
 	bx r1
 	thumb_func_end sub_8139320
 
-	thumb_func_start sub_8139348
-sub_8139348: @ 8139348
+	thumb_func_start LeadMonHasEffortRibbon
+LeadMonHasEffortRibbon: @ 8139348
 	push {lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -4177,10 +2797,10 @@ sub_8139348: @ 8139348
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8139348
+	thumb_func_end LeadMonHasEffortRibbon
 
-	thumb_func_start sub_8139370
-sub_8139370: @ 8139370
+	thumb_func_start GiveLeadMonEffortRibbon
+GiveLeadMonEffortRibbon: @ 8139370
 	push {r4,lr}
 	sub sp, 0x4
 	movs r0, 0x2A
@@ -4216,10 +2836,10 @@ _081393B6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8139370
+	thumb_func_end GiveLeadMonEffortRibbon
 
-	thumb_func_start sub_81393C8
-sub_81393C8: @ 81393C8
+	thumb_func_start Special_AreLeadMonEVsMaxedOut
+Special_AreLeadMonEVsMaxedOut: @ 81393C8
 	push {lr}
 	bl GetLeadMonIndex
 	lsls r0, 24
@@ -4241,7 +2861,7 @@ _081393F4:
 _081393F6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81393C8
+	thumb_func_end Special_AreLeadMonEVsMaxedOut
 
 	thumb_func_start sub_81393FC
 sub_81393FC: @ 81393FC
@@ -4298,8 +2918,8 @@ SetShoalItemFlag: @ 813945C
 	.pool
 	thumb_func_end SetShoalItemFlag
 
-	thumb_func_start sub_813946C
-sub_813946C: @ 813946C
+	thumb_func_start PutZigzagoonInPlayerParty
+PutZigzagoonInPlayerParty: @ 813946C
 	push {r4,r5,lr}
 	sub sp, 0x14
 	ldr r5, =gPlayerParty
@@ -4347,10 +2967,10 @@ sub_813946C: @ 813946C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813946C
+	thumb_func_end PutZigzagoonInPlayerParty
 
-	thumb_func_start sub_81394D8
-sub_81394D8: @ 81394D8
+	thumb_func_start IsStarterInParty
+IsStarterInParty: @ 81394D8
 	push {r4-r6,lr}
 	ldr r0, =0x00004023
 	bl VarGet
@@ -4390,20 +3010,20 @@ _08139528:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81394D8
+	thumb_func_end IsStarterInParty
 
-	thumb_func_start sub_8139530
-sub_8139530: @ 8139530
+	thumb_func_start ScriptCheckFreePokemonStorageSpace
+ScriptCheckFreePokemonStorageSpace: @ 8139530
 	push {lr}
-	bl sub_80D2218
+	bl CheckFreePokemonStorageSpace
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8139530
+	thumb_func_end ScriptCheckFreePokemonStorageSpace
 
-	thumb_func_start sub_8139540
-sub_8139540: @ 8139540
+	thumb_func_start IsPokerusInParty
+IsPokerusInParty: @ 8139540
 	push {lr}
 	ldr r0, =gPlayerParty
 	movs r1, 0x3F
@@ -4419,7 +3039,7 @@ _08139558:
 _0813955A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8139540
+	thumb_func_end IsPokerusInParty
 
 	thumb_func_start sub_8139560
 sub_8139560: @ 8139560
@@ -4529,8 +3149,8 @@ sub_8139634: @ 8139634
 	bx r1
 	thumb_func_end sub_8139634
 
-	thumb_func_start sub_8139648
-sub_8139648: @ 8139648
+	thumb_func_start SetRoute119Weather
+SetRoute119Weather: @ 8139648
 	push {lr}
 	bl get_map_light_from_warp0
 	lsls r0, 24
@@ -4545,10 +3165,10 @@ sub_8139648: @ 8139648
 _08139664:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8139648
+	thumb_func_end SetRoute119Weather
 
-	thumb_func_start sub_8139668
-sub_8139668: @ 8139668
+	thumb_func_start SetRoute123Weather
+SetRoute123Weather: @ 8139668
 	push {lr}
 	bl get_map_light_from_warp0
 	lsls r0, 24
@@ -4563,7 +3183,7 @@ sub_8139668: @ 8139668
 _08139684:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8139668
+	thumb_func_end SetRoute123Weather
 
 	thumb_func_start GetLeadMonIndex
 GetLeadMonIndex: @ 8139688
@@ -4611,8 +3231,8 @@ _081396D8:
 	bx r1
 	thumb_func_end GetLeadMonIndex
 
-	thumb_func_start sub_81396E0
-sub_81396E0: @ 81396E0
+	thumb_func_start ScriptGetPartyMonSpecies
+ScriptGetPartyMonSpecies: @ 81396E0
 	push {lr}
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
@@ -4628,7 +3248,7 @@ sub_81396E0: @ 81396E0
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_81396E0
+	thumb_func_end ScriptGetPartyMonSpecies
 
 	thumb_func_start nullsub_54
 nullsub_54: @ 8139708

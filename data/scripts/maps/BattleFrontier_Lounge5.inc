@@ -13,7 +13,7 @@ BattleFrontier_Lounge5_EventScript_2645C6:: @ 82645C6
 	faceplayer
 	compare VAR_0x8004, 255
 	goto_eq BattleFrontier_Lounge5_EventScript_26460D
-	specialvar VAR_RESULT, sub_81396E0
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, 412
 	goto_eq BattleFrontier_Lounge5_EventScript_264603
 	special sub_813A7B8

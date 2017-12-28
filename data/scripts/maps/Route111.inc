@@ -170,7 +170,7 @@ Route111_EventScript_1F0EB9:: @ 81F0EB9
 	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_272054
 	setflag FLAG_0x92C
-	special sub_8138B10
+	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_2A6F3D, 4
 	release
 	end

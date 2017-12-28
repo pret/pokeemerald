@@ -98,7 +98,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F785E:: @ 81F785E
 	applymovement 255, LittlerootTown_BrendansHouse_1F_Movement_2725A4
 	applymovement 4, LittlerootTown_BrendansHouse_1F_Movement_1F789C
 	waitmovement 0
-	special sub_8138B48
+	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8BC5, 4
 	setflag FLAG_0x057
 	setvar VAR_0x4082, 2

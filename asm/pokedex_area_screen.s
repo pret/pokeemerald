@@ -1831,7 +1831,7 @@ _0813D924:
 	lsls r6, 16
 	adds r1, r6
 	asrs r1, 16
-	ldr r0, =gUnknown_085B40FC
+	ldr r0, =gSpriteTemplate_85B40FC
 	movs r2, 0x8C
 	movs r3, 0
 	bl CreateSprite

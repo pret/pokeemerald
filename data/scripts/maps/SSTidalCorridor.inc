@@ -11,7 +11,7 @@ SSTidalCorridor_MapScript2_23BFD5: @ 823BFD5
 	.2byte 0
 
 SSTidalCorridor_EventScript_23BFFF:: @ 823BFFF
-	special sub_8137F90
+	special SetSSTidalFlag
 	setvar VAR_PORTHOLE, 2
 	lockall
 	playse SE_PINPON
@@ -28,14 +28,14 @@ SSTidalCorridor_EventScript_23C015:: @ 823C015
 	end
 
 SSTidalRooms_EventScript_23C028:: @ 823C028
-	special sub_8137F90
+	special SetSSTidalFlag
 	setvar VAR_PORTHOLE, 7
 	playse SE_PINPON
 	msgbox SSTidalRooms_Text_23C462, 4
 	return
 
 SSTidalRooms_EventScript_23C03C:: @ 823C03C
-	special sub_8137FB0
+	special ResetSSTidalFlag
 	setvar VAR_PORTHOLE, 4
 	playse SE_PINPON
 	msgbox SSTidalRooms_Text_23C553, 4
@@ -49,7 +49,7 @@ SSTidalCorridor_EventScript_23C050:: @ 823C050
 	end
 
 SSTidalCorridor_EventScript_23C067:: @ 823C067
-	special sub_8137FB0
+	special ResetSSTidalFlag
 	setvar VAR_PORTHOLE, 3
 	lockall
 	playse SE_PINPON
@@ -58,7 +58,7 @@ SSTidalCorridor_EventScript_23C067:: @ 823C067
 	end
 
 SSTidalCorridor_EventScript_23C07D:: @ 823C07D
-	special sub_8137FB0
+	special ResetSSTidalFlag
 	setvar VAR_PORTHOLE, 8
 	lockall
 	playse SE_PINPON
@@ -67,7 +67,7 @@ SSTidalCorridor_EventScript_23C07D:: @ 823C07D
 	end
 
 SSTidalRooms_EventScript_23C093:: @ 823C093
-	special sub_8137FB0
+	special ResetSSTidalFlag
 	setvar VAR_PORTHOLE, 8
 	playse SE_PINPON
 	msgbox SSTidalRooms_Text_23C50F, 4

@@ -1481,7 +1481,7 @@ OldaleTown_PokemonCenter_1F_EventScript_271A19:: @ 8271A19
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271A43:: @ 8271A43
-	specialvar VAR_RESULT, sub_8139540
+	specialvar VAR_RESULT, IsPokerusInParty
 	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A5F
 	compare VAR_RESULT, 0
@@ -1724,7 +1724,7 @@ EventScript_271D2A:: @ 8271D2A
 	copyvar VAR_0x8004, VAR_0x8008
 	msgbox gUnknown_08272A9A, 4
 	special sub_80EDCE8
-	special sub_8138BC8
+	special SetFlagInVar
 	releaseall
 	end
 
@@ -1761,7 +1761,7 @@ EventScript_271D89:: @ 8271D89
 EventScript_271D92:: @ 8271D92
 	lockall
 	setvar VAR_0x8004, 0
-	special sp0D9_ComputerRelated
+	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox Text_27265A, 4
 	goto EventScript_271DAC
@@ -1815,7 +1815,7 @@ EventScript_271E3E:: @ 8271E3E
 EventScript_271E47:: @ 8271E47
 	setvar VAR_0x8004, 0
 	playse SE_PC_OFF
-	special sub_8138E20
+	special DoPCTurnOffEffect
 	releaseall
 	end
 
@@ -1823,7 +1823,7 @@ EventScript_271E54:: @ 8271E54
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, EventScript_271E47
 	playse SE_PC_LOGIN
-	special sub_8137C28
+	special AccessHallOfFamePC
 	waitstate
 	goto EventScript_271DBC
 	end
@@ -2202,7 +2202,7 @@ EventScript_27208F:: @ 827208F
 	lockall
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F8820, 4
 	fadescreen 1
-	special sub_8138C94
+	special FieldShowRegionMap
 	waitstate
 	releaseall
 	end
@@ -2292,7 +2292,7 @@ Route101_EventScript_27216F:: @ 827216F
 
 Route101_EventScript_272179:: @ 8272179
 	copyvar VAR_0x8004, VAR_0x8009
-	special sub_8137C10
+	special ShowPokedexRatingMessage
 	waitmessage
 	waitbuttonpress
 	return
@@ -2300,7 +2300,7 @@ Route101_EventScript_272179:: @ 8272179
 EverGrandeCity_ChampionsRoom_EventScript_272184:: @ 8272184
 Route101_EventScript_272184:: @ 8272184
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, sub_8137A4C
+	specialvar VAR_RESULT, ScriptGetPokedexInfo
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
 	copyvar VAR_0x800A, VAR_RESULT
@@ -2311,7 +2311,7 @@ Route101_EventScript_272184:: @ 8272184
 	compare VAR_0x800A, 0
 	goto_eq Route101_EventScript_27374E
 	setvar VAR_0x8004, 1
-	specialvar VAR_RESULT, sub_8137A4C
+	specialvar VAR_RESULT, ScriptGetPokedexInfo
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
 	buffernumberstring 0, VAR_0x8008
@@ -4594,7 +4594,7 @@ EventScript_275BE8:: @ 8275BE8
 	setfieldeffectargument 0, VAR_RESULT
 	setorcopyvar VAR_0x8004, VAR_RESULT
 	lockall
-	special sub_8139200
+	special GetSecretBaseNearbyMapName
 	msgbox Text_276A3D, 5
 	compare VAR_RESULT, 0
 	goto_eq EventScript_275CDE

@@ -21048,8 +21048,8 @@ _080D220C:
 	bx r1
 	thumb_func_end sub_80D214C
 
-	thumb_func_start sub_80D2218
-sub_80D2218: @ 80D2218
+	thumb_func_start CheckFreePokemonStorageSpace
+CheckFreePokemonStorageSpace: @ 80D2218
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -21095,7 +21095,7 @@ _080D2262:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D2218
+	thumb_func_end CheckFreePokemonStorageSpace
 
 	thumb_func_start sub_80D2270
 sub_80D2270: @ 80D2270

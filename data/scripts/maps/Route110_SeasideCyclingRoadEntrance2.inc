@@ -22,7 +22,7 @@ Route110_SeasideCyclingRoadEntrance2_EventScript_26EBC4:: @ 826EBC4
 
 Route110_SeasideCyclingRoadEntrance2_EventScript_26EBD0:: @ 826EBD0
 	lockall
-	specialvar VAR_RESULT, sp0E3_walkrun_bitfield_interpretation
+	specialvar VAR_RESULT, GetPlayerAvatarBike
 	compare VAR_RESULT, 2
 	call_if 1, Route110_SeasideCyclingRoadEntrance2_EventScript_26EBF6
 	compare VAR_RESULT, 0

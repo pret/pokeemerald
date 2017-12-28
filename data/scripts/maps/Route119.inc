@@ -20,7 +20,7 @@ Route119_MapScript1_1F444D: @ 81F444D
 	call Route119_EventScript_271EFB
 	compare VAR_0x40B3, 1
 	call_if 1, Route119_EventScript_1F4466
-	special sub_8139648
+	special SetRoute119Weather
 	end
 
 Route119_EventScript_1F4466:: @ 81F4466

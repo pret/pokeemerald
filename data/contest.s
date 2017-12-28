@@ -15,111 +15,127 @@ gUnknown_08587A74:: @ 8587A74
 	obj_tiles gUnknown_08C19450, 0x0020, 0x4e20
 
 	.align 2
-gUnknown_08587A7C:: @ 8587A7C
-	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+gOamData_8587A7C:: @ 8587A7C
+	.2byte 0x0000
+	.2byte 0x0000
+	.2byte 0x0000
 
 	.align 2
-gUnknown_08587A84:: @ 8587A84
-	.2byte 0x0100, 0x0100, 0x0000, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+gSpriteAffineAnim_8587A84:: @ 8587A84
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_08587A94:: @ 8587A94
-	.2byte 0x0100, 0x0100, 0x0000, 0x0000, 0xfff6, 0xfff6, 0x14ec, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+gSpriteAffineAnim_8587A94:: @ 8587A94
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0xFFF6, 0xFFF6, -20, 20
+	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_08587AAC:: @ 8587AAC
-	.2byte 0x0038, 0x0038, 0x0000, 0x0000, 0x000a, 0x000a, 0x1414, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+gSpriteAffineAnim_8587AAC:: @ 8587AAC
+	obj_rot_scal_anim_frame 0x38, 0x38, 0, 0
+	obj_rot_scal_anim_frame 0xA, 0xA, 20, 20
+	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_08587AC4:: @ 8587AC4
-	.4byte gUnknown_08587A84
-	.4byte gUnknown_08587A94
-	.4byte gUnknown_08587AAC
+gSpriteAffineAnimTable_8587AC4:: @ 8587AC4
+	.4byte gSpriteAffineAnim_8587A84
+	.4byte gSpriteAffineAnim_8587A94
+	.4byte gSpriteAffineAnim_8587AAC
 
 	.align 2
-gUnknown_08587AD0:: @ 8587AD0
-	spr_template 0x4e20, 0xabe0, gUnknown_08587A7C, gDummySpriteAnimTable, NULL, gUnknown_08587AC4, SpriteCallbackDummy
+gSpriteTemplate_8587AD0:: @ 8587AD0
+	spr_template 0x4e20, 0xabe0, gOamData_8587A7C, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8587AC4, SpriteCallbackDummy
 
 	.align 2
 gUnknown_08587AE8:: @ 8587AE8
-	obj_tiles gUnknown_08D8E93C, 0x0100, 0x4e22
-	obj_tiles gUnknown_08D8E93C, 0x0100, 0x4e23
-	obj_tiles gUnknown_08D8E93C, 0x0100, 0x4e24
-	obj_tiles gUnknown_08D8E93C, 0x0100, 0x4e25
+	obj_tiles gContestNextTurnGfx, 0x0100, 0x4e22
+	obj_tiles gContestNextTurnGfx, 0x0100, 0x4e23
+	obj_tiles gContestNextTurnGfx, 0x0100, 0x4e24
+	obj_tiles gContestNextTurnGfx, 0x0100, 0x4e25
 
 	.align 2
 gUnknown_08587B08:: @ 8587B08
-	obj_pal gUnknown_08D8ECA4, 0x4e22
+	obj_pal gContestPal, 0x4e22
 
 	.align 2
-gUnknown_08587B10:: @ 8587B10
-	.byte 0x00, 0x40, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00
+gOamData_8587B10:: @ 8587B10
+	.2byte 0x4000
+	.2byte 0x4000
+	.2byte 0x0000
 
 	.align 2
-gUnknown_08587B18:: @ 8587B18
-	spr_template 0x4e22, 0x4e22, gUnknown_08587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 0x4e23, 0x4e22, gUnknown_08587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 0x4e24, 0x4e22, gUnknown_08587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-	spr_template 0x4e25, 0x4e22, gUnknown_08587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+gSpriteTemplate_8587B18:: @ 8587B18
+	spr_template 0x4e22, 0x4e22, gOamData_8587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x4e23, 0x4e22, gOamData_8587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x4e24, 0x4e22, gOamData_8587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x4e25, 0x4e22, gOamData_8587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-gUnknown_08587B78:: @ 8587B78
-	.byte 0xe4, 0xfc, 0x05, 0x00, 0x04, 0xfc, 0x45, 0x00
+gSubspriteTable_8587B78:: @ 8587B78
+	subsprite -28,  -4, 0,   0, 32x8
+	subsprite   4,  -4, 0,   4, 32x8
 
 	.align 2
-gUnknown_08587B80:: @ 8587B80
-	.4byte 0x00000002, gUnknown_08587B78
+gSubspriteTables_8587B80:: @ 8587B80
+	.4byte 2, gSubspriteTable_8587B78
 
 	.align 2
 gUnknown_08587B88:: @ 8587B88
 	obj_tiles gUnknown_08C19168, 0x0180, 0xabe1
 
 	.align 2
-gUnknown_08587B90:: @ 8587B90
-	.byte 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00
+gOamData_8587B90:: @ 8587B90
+	.2byte 0x0000
+	.2byte 0x4000
+	.2byte 0x0000
 
 	.align 2
-gUnknown_08587B98:: @ 8587B98
-	spr_template 0xabe1, 0xabe0, gUnknown_08587B90, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+gSpriteTemplate_8587B98:: @ 8587B98
+	spr_template 0xabe1, 0xabe0, gOamData_8587B90, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
 gUnknown_08587BB0:: @ 8587BB0
-	obj_tiles gUnknown_08D8EAE4, 0x0400, 0xabe2
+	obj_tiles gContestApplauseGfx, 0x0400, 0xabe2
 
 	.align 2
 gUnknown_08587BB8:: @ 8587BB8
-	obj_pal gUnknown_08D8ECA4, 0xabe2
+	obj_pal gContestPal, 0xabe2
 
 	.align 2
-gUnknown_08587BC0:: @ 8587BC0
-	.byte 0x00, 0x40, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00
+gOamData_8587BC0:: @ 8587BC0
+	.2byte 0x4000
+	.2byte 0xC000
+	.2byte 0x0000
 
 	.align 2
-gUnknown_08587BC8:: @ 8587BC8
-	spr_template 0xabe2, 0xabe2, gUnknown_08587BC0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+gSpriteTemplate_8587BC8:: @ 8587BC8
+	spr_template 0xabe2, 0xabe2, gOamData_8587BC0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-gUnknown_08587BE0:: @ 8587BE0
-	.byte 0x00, 0x00, 0x00, 0xc0, 0x00, 0x2c, 0x00, 0x00
+gOamData_8587BE0:: @ 8587BE0
+	.2byte 0x0000
+	.2byte 0xC000
+	.2byte 0x2C00
 
 	.align 2
-gUnknown_08587BE8:: @ 8587BE8
-	spr_template 0x4e21, 0x4e21, gUnknown_08587BE0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+gSpriteTemplate_8587BE8:: @ 8587BE8
+	spr_template 0x4e21, 0x4e21, gOamData_8587BE0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
 gUnknown_08587C00:: @ 8587C00
-	obj_tiles gUnknown_08C1C3E4, 0x0800, 0x4e21
+	obj_tiles gContestJudgeGfx, 0x0800, 0x4e21
 
 	.align 2
 gUnknown_08587C08:: @ 8587C08
-	obj_tiles gUnknown_08C19284, 0x0380, 0xabe0
+	obj_tiles gContestJudgeSymbolsGfx, 0x0380, 0xabe0
 
 	.align 2
 gUnknown_08587C10:: @ 8587C10
-	obj_pal gUnknown_08C19428, 0xabe0
+	obj_pal gContest3Pal, 0xabe0
 
 	.align 2
-gUnknown_08587C18:: @ 8587C18
+gSpriteTemplate_8587C18:: @ 8587C18
 	spr_template 0xabe0, 0xabe0, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
@@ -300,10 +316,10 @@ gUnknown_085898A4:: @ 85898A4
 
 	.align 2
 gUnknown_08589904:: @ 8589904
-	obj_tiles gUnknown_08C0237C, 0x1000, 0x80e8
-	obj_tiles gUnknown_08C0237C, 0x1000, 0x80e9
-	obj_tiles gUnknown_08C0237C, 0x1000, 0x80ea
-	obj_tiles gUnknown_08C0237C, 0x1000, 0x80eb
+	obj_tiles gBlankGfxCompressed, 0x1000, 0x80e8
+	obj_tiles gBlankGfxCompressed, 0x1000, 0x80e9
+	obj_tiles gBlankGfxCompressed, 0x1000, 0x80ea
+	obj_tiles gBlankGfxCompressed, 0x1000, 0x80eb
 
 	.align 2
 gUnknown_08589924:: @ 8589924 Yup this is super dangerous but that's how it is here
@@ -313,29 +329,35 @@ gUnknown_08589924:: @ 8589924 Yup this is super dangerous but that's how it is h
 	obj_pal gHeap + 0x1A104, 0x80eb
 
 	.align 2
-gUnknown_08589944:: @ 8589944
-	.byte 0x00, 0x07, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00
+gOamData_8589944:: @ 8589944
+	.2byte 0x0700
+	.2byte 0xC000
+	.2byte 0x0000
 
 	.align 2
-gUnknown_0858994C:: @ 858994C
-	.2byte 0x0100, 0x0100, 0x0000, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+gSpriteAffineAnim_858994C:: @ 858994C
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_0858995C:: @ 858995C
-	.2byte 0x0003, 0x0003, 0x0f00, 0x0000, 0xfffd, 0xfffd, 0x0f00, 0x0000, 0x0003, 0x0003, 0x0f00, 0x0000, 0xfffd, 0xfffd, 0x0f00, 0x0000
-	.2byte 0x7fff, 0x0000, 0x0000, 0x0000
+gSpriteAffineAnim_858995C:: @ 858995C
+	obj_rot_scal_anim_frame 0x3, 0x3, 0, 15
+	obj_rot_scal_anim_frame 0xFFFD, 0xFFFD, 0, 15
+	obj_rot_scal_anim_frame 0x3, 0x3, 0, 15
+	obj_rot_scal_anim_frame 0xFFFD, 0xFFFD, 0, 15
+	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_08589984:: @ 8589984
-	.4byte gUnknown_0858994C
-	.4byte gUnknown_0858995C
+gSpriteAffineAnimTable_8589984:: @ 8589984
+	.4byte gSpriteAffineAnim_858994C
+	.4byte gSpriteAffineAnim_858995C
 
 	.align 2
-gUnknown_0858998C:: @ 858998C
-	spr_template 0x80e8, 0x80e8, gUnknown_08589944, gDummySpriteAnimTable, NULL, gUnknown_08589984, SpriteCallbackDummy
-	spr_template 0x80e9, 0x80e9, gUnknown_08589944, gDummySpriteAnimTable, NULL, gUnknown_08589984, SpriteCallbackDummy
-	spr_template 0x80ea, 0x80ea, gUnknown_08589944, gDummySpriteAnimTable, NULL, gUnknown_08589984, SpriteCallbackDummy
-	spr_template 0x80eb, 0x80eb, gUnknown_08589944, gDummySpriteAnimTable, NULL, gUnknown_08589984, SpriteCallbackDummy
+gSpriteTemplate_858998C:: @ 858998C
+	spr_template 0x80e8, 0x80e8, gOamData_8589944, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8589984, SpriteCallbackDummy
+	spr_template 0x80e9, 0x80e9, gOamData_8589944, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8589984, SpriteCallbackDummy
+	spr_template 0x80ea, 0x80ea, gOamData_8589944, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8589984, SpriteCallbackDummy
+	spr_template 0x80eb, 0x80eb, gOamData_8589944, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8589984, SpriteCallbackDummy
 
 	.align 2
 gUnknown_085899EC:: @ 85899EC

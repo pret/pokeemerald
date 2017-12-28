@@ -21,7 +21,7 @@
 #include "m4a.h"
 #include "field_effect.h"
 #include "region_map.h"
-#include "region_map_sections.h"
+#include "constants/region_map_sections.h"
 
 #define MAP_WIDTH 28
 #define MAP_HEIGHT 15

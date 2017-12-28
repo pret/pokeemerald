@@ -5,7 +5,7 @@ Route110_MapScripts:: @ 81EF269
 	.byte 0
 
 Route110_MapScript1_1EF279: @ 81EF279
-	special sub_8137F44
+	special UpdateCyclingRoadState
 	end
 
 Route110_MapScript1_1EF27D: @ 81EF27D
@@ -24,7 +24,7 @@ Route110_MapScript2_1EF297: @ 81EF297
 	.2byte 0
 
 Route110_EventScript_1EF2A1:: @ 81EF2A1
-	special sub_8137D0C
+	special Special_BeginCyclingRoadChallenge
 	setvar VAR_0x40A9, 2
 	return
 
@@ -130,7 +130,7 @@ Route110_EventScript_1EF389:: @ 81EF389
 
 Route110_EventScript_1EF392:: @ 81EF392
 	lockall
-	specialvar VAR_RESULT, sub_8137EFC
+	specialvar VAR_RESULT, GetRecordedCyclingRoadResults
 	compare VAR_RESULT, 0
 	goto_eq Route110_EventScript_1EF3AD
 	msgbox Route110_Text_1F0A1E, 4
@@ -145,7 +145,7 @@ Route110_EventScript_1EF3AD:: @ 81EF3AD
 Route110_EventScript_1EF3B7:: @ 81EF3B7
 	lock
 	faceplayer
-	specialvar VAR_RESULT, sp0E3_walkrun_bitfield_interpretation
+	specialvar VAR_RESULT, GetPlayerAvatarBike
 	compare VAR_RESULT, 1
 	goto_eq Route110_EventScript_1EF3E8
 	compare VAR_0x40A9, 0
@@ -326,7 +326,7 @@ Route110_EventScript_1EF661:: @ 81EF661
 	end
 
 Route110_EventScript_1EF673:: @ 81EF673
-	special sub_8137E6C
+	special FinishCyclingRoadChallenge
 	msgbox Route110_Text_1F03FF, 4
 	switch VAR_RESULT
 	case 10, Route110_EventScript_1EF6FD

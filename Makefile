@@ -84,9 +84,10 @@ tidy:
 include graphics_file_rules.mk
 
 %.s: ;
-%.bin: ;
 %.png: ;
 %.pal: ;
+%.aif: ;
+
 %.1bpp: %.png  ; $(GFX) $< $@
 %.4bpp: %.png  ; $(GFX) $< $@
 %.8bpp: %.png  ; $(GFX) $< $@

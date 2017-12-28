@@ -130,7 +130,7 @@ sub_8084788: @ 8084788
 	ldr r0, =0x0000088c
 	bl FlagClear
 	bl sub_8085B2C
-	bl wild_pokemon_reroll
+	bl ResetCyclingRoadChallengeData
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMoveToOtherLocationSet
 	pop {r0}
@@ -1377,7 +1377,7 @@ _080850C8:
 	bl CopyFieldObjectTemplatesToSav1
 	bl TrySetMapSaveWarpStatus
 	bl ClearTempFieldEventData
-	bl wild_pokemon_reroll
+	bl ResetCyclingRoadChallengeData
 	bl prev_quest_postbuffer_cursor_backup_reset
 	adds r0, r6, 0
 	adds r1, r5, 0
@@ -1465,7 +1465,7 @@ _080851A2:
 	bl sub_80EB218
 	bl TrySetMapSaveWarpStatus
 	bl ClearTempFieldEventData
-	bl wild_pokemon_reroll
+	bl ResetCyclingRoadChallengeData
 	bl prev_quest_postbuffer_cursor_backup_reset
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
@@ -2668,7 +2668,7 @@ sub_8085B2C: @ 8085B2C
 	lsls r0, 6
 	cmp r1, r0
 	bne _08085B5C
-	bl sub_813793C
+	bl IsMirageIslandPresent
 	lsls r0, 24
 	cmp r0, 0
 	bne _08085B5C

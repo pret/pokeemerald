@@ -120,7 +120,7 @@ gInterfacePal_PremierBall::
 gOpenPokeballGfx:: @ 8C02300
 	.incbin "baserom.gba", 0xc02300, 0x7c
 
-gUnknown_08C0237C:: @ 8C0237C
+gBlankGfxCompressed:: @ 8C0237C
 	.incbin "baserom.gba", 0xc0237c, 0x7074
 
 gUnknown_08C093F0:: @ 8C093F0
@@ -167,10 +167,10 @@ gUnknown_08C1850C:: @ 8C1850C
 gUnknown_08C19168:: @ 8C19168
 	.incbin "baserom.gba", 0xc19168, 0x11c
 
-gUnknown_08C19284:: @ 8C19284
+gContestJudgeSymbolsGfx:: @ 8C19284
 	.incbin "baserom.gba", 0xc19284, 0x1a4
 
-gUnknown_08C19428:: @ 8C19428
+gContest3Pal:: @ 8C19428
 	.incbin "baserom.gba", 0xc19428, 0x28
 
 gUnknown_08C19450:: @ 8C19450
@@ -197,7 +197,7 @@ gUnknown_08C1A490:: @ 8C1A490
 gUnknown_08C1A564:: @ 8C1A564
 	.incbin "baserom.gba", 0xc1a564, 0x1E80
 
-gUnknown_08C1C3E4:: @ 8C1C3E4
+gContestJudgeGfx:: @ 8C1C3E4
 	.incbin "baserom.gba", 0xc1c3e4, 0x2d4
 
 gUnknown_08C1C6B8:: @ 8C1C6B8
@@ -774,7 +774,7 @@ gUnknown_08D8D58C:: @ 8D8D58C
 gUnknown_08D8DAB8:: @ 8D8DAB8
 	.incbin "baserom.gba", 0xd8dab8, 0xe84
 
-gUnknown_08D8E93C:: @ 8D8E93C
+gContestNextTurnGfx:: @ 8D8E93C
 	.incbin "baserom.gba", 0xd8e93c, 0x78
 
 gUnknown_08D8E9B4:: @ 8D8E9B4
@@ -783,13 +783,13 @@ gUnknown_08D8E9B4:: @ 8D8E9B4
 gUnknown_08D8EA34:: @ 8D8EA34
 	.incbin "baserom.gba", 0xd8ea34, 0xb0
 
-gUnknown_08D8EAE4:: @ 8D8EAE4
+gContestApplauseGfx:: @ 8D8EAE4
 	.incbin "baserom.gba", 0xd8eaE4, 0x140
 
 gUnknown_08D8EC24:: @ 8D8EC24
 	.incbin "baserom.gba", 0xd8ec24, 0x80
 
-gUnknown_08D8ECA4:: @ 8D8ECA4
+gContestPal:: @ 8D8ECA4
 	.incbin "baserom.gba", 0xd8eca4, 0xef8
 
 gUnknown_08D8FB9C:: @ 8D8FB9C

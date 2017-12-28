@@ -49,30 +49,30 @@ MauvilleCity_Gym_EventScript_20DDC4:: @ 820DDC4
 
 MauvilleCity_Gym_EventScript_20DEAF:: @ 820DEAF
 	setvar VAR_0x8004, 0
-	special sub_81384F0
+	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_20DDBA
 	end
 
 MauvilleCity_Gym_EventScript_20DEBD:: @ 820DEBD
 	setvar VAR_0x8004, 1
-	special sub_81384F0
+	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_20DDBA
 	end
 
 MauvilleCity_Gym_EventScript_20DECB:: @ 820DECB
 	setvar VAR_0x8004, 2
-	special sub_81384F0
+	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_20DDBA
 	end
 
 MauvilleCity_Gym_EventScript_20DED9:: @ 820DED9
 	setvar VAR_0x8004, 3
-	special sub_81384F0
+	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_20DDBA
 	end
 
 MauvilleCity_Gym_EventScript_20DEE7:: @ 820DEE7
-	special sub_8138750
+	special MauvilleGymSpecial3
 	end
 
 MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
@@ -102,7 +102,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	call_if 1, MauvilleCity_Gym_EventScript_271E84
 	setvar VAR_0x8008, 3
 	call MauvilleCity_Gym_EventScript_271F43
-	special sub_8138750
+	special MauvilleGymSpecial3
 	special DrawWholeMapView
 	playse SE_KI_GASYAN
 	call MauvilleCity_Gym_EventScript_20DFB1
@@ -189,8 +189,8 @@ MauvilleCity_Gym_EventScript_20E068:: @ 820E068
 	end
 
 MauvilleCity_Gym_EventScript_20E08D:: @ 820E08D
-	special sub_8138540
-	special sub_81384F0
+	special MauvilleGymSpecial2
+	special MauvilleGymSpecial1
 	special DrawWholeMapView
 	playse SE_KI_GASYAN
 	checkflag FLAG_0x063

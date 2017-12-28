@@ -53,7 +53,7 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 EverGrandeCity_HallOfFame_EventScript_2298E9:: @ 82298E9
 	setrespawn 1
 	fadescreenspeed 1, 24
-	special sub_8137734
+	special GameClear
 	waitstate
 	releaseall
 	end
@@ -61,7 +61,7 @@ EverGrandeCity_HallOfFame_EventScript_2298E9:: @ 82298E9
 EverGrandeCity_HallOfFame_EventScript_2298F5:: @ 82298F5
 	setrespawn 2
 	fadescreenspeed 1, 24
-	special sub_8137734
+	special GameClear
 	waitstate
 	releaseall
 	end

@@ -1,73 +1,7 @@
-@ the fourth big chunk of data
-
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
-
-	.align 2
-gUnknown_085B27C8:: @ 85B27C8
-	.byte 0x01, 0x04, 0x01, 0x00
-	.4byte sub_81375A8
-	.byte 0x02, 0x04, 0x01, 0x00
-	.4byte sub_81375A8
-	.byte 0x03, 0x04, 0x01, 0x00
-	.4byte sub_81375A8
-	.byte 0x05, 0x04, 0x01, 0x00
-	.4byte sub_81375A8
-	.byte 0x06, 0x04, 0x01, 0x00
-	.4byte sub_81375A8
-	.byte 0x07, 0x04, 0x01, 0x00
-	.4byte sub_81375A8
-	.byte 0x08, 0x04, 0x01, 0x00
-	.4byte sub_81375A8
-	.byte 0x09, 0x04, 0x01, 0x00
-	.4byte sub_81375A8
-	.byte 0x04, 0x01, 0x00, 0x01
-	.4byte sub_81373F0
-	.byte 0x04, 0x02, 0x00, 0x01
-	.4byte sub_81373F0
-	.byte 0x04, 0x03, 0x00, 0x01
-	.4byte sub_81373F0
-	.byte 0x04, 0x05, 0x00, 0x01
-	.4byte sub_81373F0
-	.byte 0x04, 0x06, 0x00, 0x01
-	.4byte sub_81373F0
-	.byte 0x04, 0x07, 0x00, 0x01
-	.4byte sub_81373F0
-	.byte 0x04, 0x08, 0x00, 0x01
-	.4byte sub_81373F0
-	.byte 0x04, 0x09, 0x00, 0x01
-	.4byte sub_81373F0
-	.byte 0x00, 0x00, 0x00, 0x00
-	.4byte NULL
-
-	.align 2
-gUnknown_085B2850:: @ 85B2850
-	.incbin "graphics/unknown/unknown_5B2850.gbapal"
-
-	.align 2
-gUnknown_085B2870:: @ 85B2870
-	.incbin "graphics/unknown/unknown_5B2870.gbapal"
-
-	.align 2
-gUnknown_085B2890:: @ 85B2890
-	.incbin "graphics/unknown/unknown_5B2890.gbapal"
-
-	.align 2
-gUnknown_085B28A0:: @ 85B28A0
-	.incbin "graphics/unknown/unknown_5B28A0.gbapal"
-
-	.align 2
-gUnknown_085B28B0:: @ 85B28B0
-	.incbin "graphics/unknown/unknown_5B28B0.bin.lz"
-
-	.align 2
-gUnknown_085B2A90:: @ 85B2A90
-	.incbin "graphics/unknown/unknown_5B2A90.4bpp.lz"
-
-gUnknown_085B2B44:: @ 85B2B44
-	.byte 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01
 
 	.align 2
 gUnknown_085B2B5C:: @ 85B2B5C
