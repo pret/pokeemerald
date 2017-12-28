@@ -1172,8 +1172,8 @@ _081D7082:
 	.pool
 	thumb_func_end sub_81D706C
 
-	thumb_func_start task_add_00_WIN0V_open_close_above_and_more
-task_add_00_WIN0V_open_close_above_and_more: @ 81D7134
+	thumb_func_start sub_81D7134
+sub_81D7134: @ 81D7134
 	push {r4-r7,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -1264,7 +1264,7 @@ _081D71EE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end task_add_00_WIN0V_open_close_above_and_more
+	thumb_func_end sub_81D7134
 
 	thumb_func_start sub_81D7228
 sub_81D7228: @ 81D7228

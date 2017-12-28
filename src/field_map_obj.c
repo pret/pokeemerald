@@ -3231,7 +3231,7 @@ bool8 mss_npc_reset_oampriv3_1_unk2_unk3(struct MapObject *mapObject, struct Spr
 
 bool8 sub_8091EC0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.running1 == 2)
+    if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.tileTransitionState == 2)
     {
         return FALSE;
     }
@@ -3410,7 +3410,7 @@ field_object_step(CopyPlayer2, gUnknown_0850DA90)
 
 bool8 mss_08062EA4(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.running1 == 2)
+    if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.tileTransitionState == 2)
     {
         return FALSE;
     }

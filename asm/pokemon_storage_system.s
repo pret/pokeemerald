@@ -1106,7 +1106,7 @@ sub_80C7958: @ 80C7958
 	ldrh r0, [r3]
 	adds r0, 0x1
 	strh r0, [r1]
-	ldr r0, =gUnknown_08571710
+	ldr r0, =sSpriteAnimTable_8571710
 	str r0, [sp, 0xC]
 	movs r4, 0
 _080C7A10:
@@ -9124,7 +9124,7 @@ _080CBF80:
 	adds r1, r3
 	ldr r0, [r1]
 	ldr r2, [r0]
-	ldr r0, =gUnknown_0857291C
+	ldr r0, =gSpriteAffineAnimTable_857291C
 	str r0, [r2, 0x10]
 	ldr r0, [r1]
 	ldr r0, [r0]

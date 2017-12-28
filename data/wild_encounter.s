@@ -1,9 +1,9 @@
 #include "constants/species.h"
-    .include "asm/macros.inc"
-    .include "constants/constants.inc"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
-    .section .rodata
-    .align 2, 0
+	.section .rodata
+	.align 2, 0
 
 @ 85507E4
 	.include "data/wild_mons.inc"

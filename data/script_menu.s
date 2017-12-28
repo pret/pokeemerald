@@ -728,7 +728,7 @@ gUnknown_0858BAF0:: @ 858BAF0
 gUnknown_0858BB68:: @ 858BB68
 	.byte 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F
 
-    .align 2
+	.align 2
 gUnknown_0858BB70:: @ 858BB70
 	.4byte gText_SomeonesPC
 	.4byte gText_LanettesPC

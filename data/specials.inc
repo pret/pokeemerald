@@ -1,11 +1,11 @@
 .macro def_special ptr
 .set SPECIAL_\ptr, __special__
 .set __special__, __special__ + 1
-    .4byte \ptr
-    .endm
+	.4byte \ptr
+	.endm
 
 .set __special__, 0
-        .align 2
+		.align 2
 gSpecials:: @ 81DBA64
 	def_special HealPlayerParty
 	def_special sub_809D2BC
@@ -163,7 +163,7 @@ gSpecials:: @ 81DBA64
 	def_special SetFlagInVar
 	def_special CableCarWarp
 	def_special sub_814FC9C
-	def_special sub_8085784
+	def_special Overworld_PlaySpecialMapMusic
 	def_special StartWallClock
 	def_special Special_ViewWallClock
 	def_special ChooseStarter
