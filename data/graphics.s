@@ -3875,11 +3875,33 @@ gRaySceneHushBg_Pal:: @ 8DAAFEC
 @ 8DB7AA0
 	.include "data/graphics/decorations/decoration_graphics.inc"
 
-@ 8DBA14C
-	.incbin "baserom.gba", 0xdba14c, 0x3cc
+	.align 2
+gBattleAnimSpritePalette_282:: @ 8E7E7D0
+	.incbin "graphics/battle_anims/sprites/282.gbapal.lz"
 
+	.align 2
+gBattleAnimSpriteSheet_282:: @ 8E7E7F8
+	.incbin "graphics/battle_anims/sprites/282.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_270:: @ 8E7E9E0
+	.incbin "graphics/battle_anims/sprites/270.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_270:: @ 8E7E9FC
+	.incbin "graphics/battle_anims/sprites/270.4bpp.lz"
+
+	.align 2
+gBattleAnimSpritePalette_271:: @ 8E7EB24
+	.incbin "graphics/battle_anims/sprites/271.gbapal.lz"
+
+	.align 2
+gBattleAnimSpriteSheet_271:: @ 8E7EB3C
+	.incbin "graphics/battle_anims/sprites/271.4bpp.lz"
+
+	.align 2
 gUnknown_08DBA518:: @ 8DBA518
-	.incbin "baserom.gba", 0xdba518, 0x80
+	.incbin "graphics/misc/cable_car_bg.gbapal"
 
 	.align 2
 gCableCar_Pal:: @ 8DBA598
@@ -3887,7 +3909,7 @@ gCableCar_Pal:: @ 8DBA598
 
 	.align 2
 gUnknown_08DBA5B8:: @ 8DBA5B8
-	.incbin "baserom.gba", 0xdba5b8, 0x19d8
+	.incbin "graphics/misc/cable_car_bg.4bpp.lz"
 
 	.align 2
 gCableCar_Gfx:: @ 8DBBF90
@@ -3902,203 +3924,303 @@ gCableCarCord_Gfx:: @ 8DBC2C0
 	.incbin "graphics/misc/cable_car_cord.4bpp.lz"
 
 	.align 2
-gUnknown_08DBC2E8:: @ 8DBC2E8
-	.incbin "baserom.gba", 0xdbc2e8, 0x72c
+gRouletteMenuTiles:: @ 8DBC2E8
+	.incbin "graphics/roulette/window.4bpp.lz"
 
-gUnknown_08DBCA14:: @ 0x08DBCA14
-	.incbin "baserom.gba", 0xdbca14, 0x1e04
+	.align 2
+gRouletteWheelTiles::
+	.incbin "graphics/roulette/wheel.8bpp.lz"
 
-gUnknown_08DBE818:: @ 0x08DBE818
-	.incbin "baserom.gba", 0xdbe818, 0x20
+	.align 2
+gRouletteCenter_Gfx::
+	.incbin "graphics/roulette/center.4bpp.lz"
 
-gUnknown_08DBE838:: @ 0x08DBE838
-	.incbin "baserom.gba", 0xdbe838, 0x20
+	.align 2
+gRouletteHeadersTiles:: @ 8E824BC
+	.incbin "graphics/roulette/headers.4bpp.lz"
 
-gUnknown_08DBE858:: @ 0x08DBE858
-	.incbin "baserom.gba", 0xdbe858, 0x20
+	.align 2
+gRouletteCreditTiles:: @ 8E82AE0
+	.incbin "graphics/roulette/credit.4bpp.lz"
 
-gUnknown_08DBE878:: @ 0x08DBE878
-	.incbin "baserom.gba", 0xdbe878, 0x20
+	.align 2
+gRouletteNumbersTiles:: @ 8E82C30
+	.incbin "graphics/roulette/numbers.4bpp.lz"
 
-gUnknown_08DBE898:: @ 0x08DBE898
-	.incbin "baserom.gba", 0xdbe898, 0x20
+	.align 2
+gRouletteMultiplierTiles:: @ 8E82D14
+	.incbin "graphics/roulette/multiplier.4bpp.lz"
 
-gUnknown_08DBE8B8:: @ 0x08DBE8B8
-	.incbin "baserom.gba", 0xdbe8b8, 0x20
+	.align 2
+gMailPalette_Orange:: @ 0x08DBE818
+	.incbin "graphics/mail/orange/palette.gbapal"
 
-gUnknown_08DBE8D8:: @ 0x08DBE8D8
-	.incbin "baserom.gba", 0xdbe8d8, 0x20
+	.align 2
+gMailPalette_Harbor:: @ 0x08DBE838
+	.incbin "graphics/mail/harbor/palette.gbapal"
 
-gUnknown_08DBE8F8:: @ 0x08DBE8F8
-	.incbin "baserom.gba", 0xdbe8f8, 0x20
+	.align 2
+gMailPalette_Glitter:: @ 0x08DBE858
+	.incbin "graphics/mail/glitter/palette.gbapal"
 
-gUnknown_08DBE918:: @ 0x08DBE918
-	.incbin "baserom.gba", 0xdbe918, 0x20
+	.align 2
+gMailPalette_Mech:: @ 0x08DBE878
+	.incbin "graphics/mail/mech/palette.gbapal"
 
-gUnknown_08DBE938:: @ 0x08DBE938
-	.incbin "baserom.gba", 0xdbe938, 0x20
+	.align 2
+gMailPalette_Wood:: @ 0x08DBE898
+	.incbin "graphics/mail/wood/palette.gbapal"
 
-gUnknown_08DBE958:: @ 0x08DBE958
-	.incbin "baserom.gba", 0xdbe958, 0x20
+	.align 2
+gMailPalette_Wave:: @ 0x08DBE8B8
+	.incbin "graphics/mail/wave/palette.gbapal"
 
-gUnknown_08DBE978:: @ 0x08DBE978
-	.incbin "baserom.gba", 0xdbe978, 0x20
+	.align 2
+gMailPalette_Bead:: @ 0x08DBE8D8
+	.incbin "graphics/mail/bead/palette.gbapal"
 
-gUnknown_08DBE998:: @ 0x08DBE998
-	.incbin "baserom.gba", 0xdbe998, 0x1a0
+	.align 2
+gMailPalette_Shadow:: @ 0x08DBE8F8
+	.incbin "graphics/mail/shadow/palette.gbapal"
 
-gUnknown_08DBEB38:: @ 0x08DBEB38
-	.incbin "baserom.gba", 0xdbeb38, 0x13c
+	.align 2
+gMailPalette_Tropic:: @ 0x08DBE918
+	.incbin "graphics/mail/tropic/palette.gbapal"
 
-gUnknown_08DBEC74:: @ 0x08DBEC74
-	.incbin "baserom.gba", 0xdbec74, 0x210
+	.align 2
+gMailPalette_Dream:: @ 0x08DBE938
+	.incbin "graphics/mail/dream/palette.gbapal"
 
-gUnknown_08DBEE84:: @ 0x08DBEE84
-	.incbin "baserom.gba", 0xdbee84, 0xd8
+	.align 2
+gMailPalette_Fab:: @ 0x08DBE958
+	.incbin "graphics/mail/fab/palette.gbapal"
 
-gUnknown_08DBEF5C:: @ 0x08DBEF5C
-	.incbin "baserom.gba", 0xdbef5c, 0x1f8
+	.align 2
+gMailPalette_Retro:: @ 0x08DBE978
+	.incbin "graphics/mail/retro/palette.gbapal"
 
-gUnknown_08DBF154:: @ 0x08DBF154
-	.incbin "baserom.gba", 0xdbf154, 0x180
+	.align 2
+gMailTiles_Orange:: @ 0x08DBE998
+	.incbin "graphics/mail/orange/tiles.4bpp.lz"
 
-gUnknown_08DBF2D4:: @ 0x08DBF2D4
-	.incbin "baserom.gba", 0xdbf2d4, 0xa8
+	.align 2
+gMailTiles_Harbor:: @ 0x08DBEB38
+	.incbin "graphics/mail/harbor/tiles.4bpp.lz"
 
-gUnknown_08DBF37C:: @ 0x08DBF37C
-	.incbin "baserom.gba", 0xdbf37c, 0x190
+	.align 2
+gMailTiles_Glitter:: @ 0x08DBEC74
+	.incbin "graphics/mail/glitter/tiles.4bpp.lz"
 
-gUnknown_08DBF50C:: @ 0x08DBF50C
-	.incbin "baserom.gba", 0xdbf50c, 0x140
+	.align 2
+gMailTiles_Mech:: @ 0x08DBEE84
+	.incbin "graphics/mail/mech/tiles.4bpp.lz"
 
-gUnknown_08DBF64C:: @ 0x08DBF64C
-	.incbin "baserom.gba", 0xdbf64c, 0x168
+	.align 2
+gMailTiles_Wood:: @ 0x08DBEF5C
+	.incbin "graphics/mail/wood/tiles.4bpp.lz"
 
-gUnknown_08DBF7B4:: @ 0x08DBF7B4
-	.incbin "baserom.gba", 0xdbf7b4, 0x150
+	.align 2
+gMailTiles_Wave:: @ 0x08DBF154
+	.incbin "graphics/mail/wave/tiles.4bpp.lz"
 
-gUnknown_08DBF904:: @ 0x08DBF904
-	.incbin "baserom.gba", 0xdbf904, 0x2a0
+	.align 2
+gMailTiles_Bead:: @ 0x08DBF2D4
+	.incbin "graphics/mail/bead/tiles.4bpp.lz"
 
-gUnknown_08DBFBA4:: @ 0x08DBFBA4
-	.incbin "baserom.gba", 0xdbfba4, 0xd8
+	.align 2
+gMailTiles_Shadow:: @ 0x08DBF37C
+	.incbin "graphics/mail/shadow/tiles.4bpp.lz"
 
-gUnknown_08DBFC7C:: @ 0x08DBFC7C
-	.incbin "baserom.gba", 0xdbfc7c, 0xe0
+	.align 2
+gMailTiles_Tropic:: @ 0x08DBF50C
+	.incbin "graphics/mail/tropic/tiles.4bpp.lz"
 
-gUnknown_08DBFD5C:: @ 0x08DBFD5C
-	.incbin "baserom.gba", 0xdbfd5c, 0x10c
+	.align 2
+gMailTiles_Dream:: @ 0x08DBF64C
+	.incbin "graphics/mail/dream/tiles.4bpp.lz"
 
-gUnknown_08DBFE68:: @ 0x08DBFE68
-	.incbin "baserom.gba", 0xdbfe68, 0xdc
+	.align 2
+gMailTiles_Fab:: @ 0x08DBF7B4
+	.incbin "graphics/mail/fab/tiles.4bpp.lz"
 
-gUnknown_08DBFF44:: @ 0x08DBFF44
-	.incbin "baserom.gba", 0xdbff44, 0xf0
+	.align 2
+gMailTiles_Retro:: @ 0x08DBF904
+	.incbin "graphics/mail/retro/tiles.4bpp.lz"
 
-gUnknown_08DC0034:: @ 0x08DC0034
-	.incbin "baserom.gba", 0xdc0034, 0xe0
+	.align 2
+gMailTilemap_Orange:: @ 0x08DBFBA4
+	.incbin "graphics/mail/orange/map.bin.lz"
 
-gUnknown_08DC0114:: @ 0x08DC0114
-	.incbin "baserom.gba", 0xdc0114, 0xe0
+	.align 2
+gMailTilemap_Harbor:: @ 0x08DBFC7C
+	.incbin "graphics/mail/harbor/map.bin.lz"
 
-gUnknown_08DC01F4:: @ 0x08DC01F4
-	.incbin "baserom.gba", 0xdc01f4, 0x10c
+	.align 2
+gMailTilemap_Glitter:: @ 0x08DBFD5C
+	.incbin "graphics/mail/glitter/map.bin.lz"
 
-gUnknown_08DC0300:: @ 0x08DC0300
-	.incbin "baserom.gba", 0xdc0300, 0xf0
+	.align 2
+gMailTilemap_Mech:: @ 0x08DBFE68
+	.incbin "graphics/mail/mech/map.bin.lz"
 
-gUnknown_08DC03F0:: @ 0x08DC03F0
-	.incbin "baserom.gba", 0xdc03f0, 0xf8
+	.align 2
+gMailTilemap_Wood:: @ 0x08DBFF44
+	.incbin "graphics/mail/wood/map.bin.lz"
 
-gUnknown_08DC04E8:: @ 0x08DC04E8
-	.incbin "baserom.gba", 0xdc04e8, 0x118
+	.align 2
+gMailTilemap_Wave:: @ 0x08DC0034
+	.incbin "graphics/mail/wave/map.bin.lz"
 
-gUnknown_08DC0600:: @ 0x08DC0600
-	.incbin "baserom.gba", 0xdc0600, 0x114
+	.align 2
+gMailTilemap_Bead:: @ 0x08DC0114
+	.incbin "graphics/mail/bead/map.bin.lz"
 
-gUnknown_08DC0714:: @ 8DC0714
-	.incbin "baserom.gba", 0xdc0714, 0x40
+	.align 2
+gMailTilemap_Shadow:: @ 0x08DC01F4
+	.incbin "graphics/mail/shadow/map.bin.lz"
 
-gUnknown_08DC0754:: @ 8DC0754
-	.incbin "baserom.gba", 0xdc0754, 0x440
+	.align 2
+gMailTilemap_Tropic:: @ 0x08DC0300
+	.incbin "graphics/mail/tropic/map.bin.lz"
 
-gUnknown_08DC0B94:: @ 8DC0B94
-	 .incbin "baserom.gba", 0xdc0b94, 0x800
+	.align 2
+gMailTilemap_Dream:: @ 0x08DC03F0
+	.incbin "graphics/mail/dream/map.bin.lz"
 
-gUnknown_08DC1394:: @ 8DC1394
-	 .incbin "baserom.gba", 0xdc1394, 0x2E0
+	.align 2
+gMailTilemap_Fab:: @ 0x08DC04E8
+	.incbin "graphics/mail/fab/map.bin.lz"
 
-gUnknown_08DC1674:: @ 8DC1674
-	 .incbin "baserom.gba", 0xdc1674, 0x20
+	.align 2
+gMailTilemap_Retro:: @ 0x08DC0600
+	.incbin "graphics/mail/retro/map.bin.lz"
 
-gUnknown_08DC1694:: @ 8DC1694
-	 .incbin "baserom.gba", 0xdc1694, 0x20
+	.align 2
+gFrontierFactorySelectMenu_Pal:: @ 8DC0714
+	.incbin "graphics/battle_frontier/factory_menu1.gbapal"
+	.incbin "graphics/battle_frontier/factory_menu2.gbapal"
 
-gUnknown_08DC16B4:: @ 8DC16B4
-	 .incbin "baserom.gba", 0xdc16b4, 0x20
+	.align 2
+gFrontierFactorySelectMenu_Gfx:: @ 8DC0754
+	.incbin "graphics/battle_frontier/factory_menu1.4bpp"
+	.incbin "graphics/battle_frontier/factory_menu2.4bpp"
 
-gUnknown_08DC16D4:: @ 8DC16D4
-	 .incbin "baserom.gba", 0xdc16d4, 0x20
+	.align 2
+gFrontierFactorySelectMenu_Tilemap:: @ 8DC0B94
+	.incbin "graphics/battle_frontier/factory_menu.bin"
 
-gUnknown_08DC16F4:: @ 8DC16F4
-	 .incbin "baserom.gba", 0xdc16f4, 0x62
+	.align 2
+gFrontierPassMedals_Gfx:: @ 8DC1394
+	.incbin "graphics/frontier_pass/medals.4bpp.lz" @ battle frontier medals
 
-gUnknown_08DC1756:: @ 8DC1756
-	.incbin "baserom.gba", 0xdc1756, 0x60
+	.align 2
+gFrontierPassCursor_Pal:: @ 8DC1674
+	.incbin "graphics/frontier_pass/cursor.gbapal" @ frontier pass cursor pal
 
-gUnknown_08DC17B6:: @ 8DC17B6
-	.incbin "baserom.gba", 0xdc17b6, 0xc0
+	.align 2
+gFrontierPassMapCursor_Pal:: @ 8DC1694
+	.incbin "graphics/frontier_pass/map_cursor.gbapal" @ frontier pass map cursor pal
 
-gUnknown_08DC1876:: @ 8DC1876
-	.incbin "baserom.gba", 0xdc1876, 0xbe
+	.align 2
+gFrontierPassMedalsSilver_Pal:: @ 8DC16B4
+	.incbin "graphics/frontier_pass/silver.gbapal"
 
-gUnknown_08DC1934:: @ 8DC1934
-	.incbin "baserom.gba", 0xdc1934, 0xA18
+	.align 2
+gFrontierPassMedalsGold_Pal:: @ 8DC16D4
+	.incbin "graphics/frontier_pass/gold.gbapal"
 
-gUnknown_08DC234C:: @ 8DC234C
-	.incbin "baserom.gba", 0xDC234C, 0x6BC
+	.align 2
+gPokedexText_Pal:: @ 8DC16F4
+	.incbin "graphics/pokedex/text.gbapal"
 
+	.align 2
+gPokedexCaughtScreenFade_Pal:: @ 8DC1756
+	.incbin "graphics/pokedex/fade.gbapal"
+
+	.align 2
+gPokedexHoennBg_Pal:: @ 8DC17B6
+	.incbin "graphics/pokedex/hoenn_bg.gbapal"
+
+	.align 2
+gPokedexNationalBg_Pal:: @ 8DC1876
+	.incbin "graphics/pokedex/national_bg.gbapal"
+
+	.align 2
+gPokedexMenu_Gfx:: @ 8DC1934
+	.incbin "graphics/pokedex/menu.4bpp.lz"
+
+	.align 2
+gPokedexMenu2_Gfx:: @ 8DC234C
+	.incbin "graphics/pokedex/menu2.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/pokedex/noball_unused.4bpp.lz" @ unused
+
+	@ these are a series of 9 tilemaps used for something pokedex related.
+
+	.align 2
 gUnknown_08DC2A08:: @ 8DC2A08
-	.incbin "baserom.gba", 0xdc2a08, 0x114
+	.incbin "graphics/pokedex/tilemap1.bin.lz"
 
+	.align 2
 gUnknown_08DC2B1C:: @ 8DC2B1C
-	.incbin "baserom.gba", 0xdc2b1c, 0x140
+	.incbin "graphics/pokedex/tilemap2.bin.lz"
 
+	.align 2
 gUnknown_08DC2C5C:: @ 8DC2C5C
-	.incbin "baserom.gba", 0xdc2c5c, 0x150
+	.incbin "graphics/pokedex/tilemap3.bin.lz"
 
+	.align 2
 gUnknown_08DC2DAC:: @ 8DC2DAC
-	.incbin "baserom.gba", 0xdc2dac, 0xc0
+	.incbin "graphics/pokedex/tilemap4.bin.lz"
 
+	.align 2
 gUnknown_08DC2E6C:: @ 8DC2E6C
-	.incbin "baserom.gba", 0xdc2e6c, 0xf0
+	.incbin "graphics/pokedex/tilemap5.bin.lz"
 
+	.align 2
 gUnknown_08DC2F5C:: @ 8DC2F5C
-	.incbin "baserom.gba", 0xdc2f5c, 0x90
+	.incbin "graphics/pokedex/tilemap6.bin.lz"
 
+	.align 2
 gUnknown_08DC2FEC:: @ 8DC2FEC
-	.incbin "baserom.gba", 0xdc2fec, 0x94
+	.incbin "graphics/pokedex/tilemap7.bin.lz"
 
+	.align 2
 gUnknown_08DC3080:: @ 8DC3080
-	.incbin "baserom.gba", 0xdc3080, 0x118
+	.incbin "graphics/pokedex/tilemap8.bin.lz"
 
+	.align 2
 gUnknown_08DC3198:: @ 8DC3198
-	.incbin "baserom.gba", 0xdc3198, 0xee
+	.incbin "graphics/pokedex/tilemap9.bin.lz" @ all tilemaps
 
-gUnknown_08DC3286:: @ 8DC3286
-	.incbin "baserom.gba", 0xdc3286, 0x7e
+	.align 2
+gPokedexSearchMenu_Pal:: @ 8DC3284
+	.incbin "graphics/pokedex/search_menu.gbapal"
 
-gUnknown_08DC3304:: @ 8DC3304
-	.incbin "baserom.gba", 0xdc3304, 0x56c
+	.align 2
+gPokedexSearchMenu_Gfx:: @ 8DC3304
+	.incbin "graphics/pokedex/search_menu.4bpp.lz"
 
-gUnknown_08DC3870:: @ 8DC3870
-	.incbin "baserom.gba", 0xdc3870, 0x19c
+	.align 2
+gPokedexSearch1_Tilemap:: @ 8DC3870
+	.incbin "graphics/pokedex/search1.bin.lz"
 
-gUnknown_08DC3A0C:: @ 8DC3A0C
-	.incbin "baserom.gba", 0xdc3a0c, 0x2c8
+	.align 2
+gPokedexSearch2_Tilemap:: @ 8DC3A0C
+	.incbin "graphics/pokedex/search2.bin.lz"
 
-gUnknown_08DC3CD4:: @ 8DC3CD4
-	.incbin "baserom.gba", 0xdc3cd4, 0x80
+	.align 2
+gSummaryScreenPowAcc_Tilemap:: @ 8DC3B94
+	.incbin "graphics/interface/powacc_tilemap.bin" @ pow/acc tilemap
+
+	.align 2
+gUnknown_08DC3C34:: @ 8DC3C34
+	.incbin "graphics/interface/unk_tilemap.bin" @ probably trade summary screen related? cant check
+
+	.align 2
+gSummaryScreenWindow_Tilemap:: @ 8DC3CD4
+	.incbin "graphics/interface/summary.bin"
 
 	.align 2
 gIntroCopyright_Pal:: @ 8DC3D54

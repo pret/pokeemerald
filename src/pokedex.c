@@ -481,13 +481,13 @@ const struct SpriteTemplate gUnknown_0855D254 =
 
 const struct CompressedSpriteSheet gSpriteSheets_0855D26C[] =
 {
-    {gUnknown_08DC234C, 0x2000, 4096},
+    {gPokedexMenu2_Gfx, 0x2000, 4096},
     {0}
 };
 
 const struct CompressedSpritePalette gSpritePalettes_0855D26C[] =
 {
-    {gUnknown_08DC16F4, 4096},
+    {gPokedexText_Pal, 4096},
     {0}
 };
 

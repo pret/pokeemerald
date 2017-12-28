@@ -18,12 +18,27 @@ gUnknown_0861CBEC:: @ 861CBEC
 gUnknown_0861CBF8:: @ 861CBF8
 	.incbin "baserom.gba", 0x61cbf8, 0xc
 
+	.align 2
 gUnknown_0861CC04:: @ 861CC04
-	.incbin "baserom.gba", 0x61cc04, 0xc
+	.4byte gSummaryScreenPowAcc_Tilemap
+	.byte 0x00
+	.byte 0x00
+	.byte 0x0A
+	.byte 0x07
+	.byte 0x00
+	.byte 0x2D
 
+	.align 2
 gUnknown_0861CC10:: @ 861CC10
-	.incbin "baserom.gba", 0x61cc10, 0xc
+	.4byte gUnknown_08DC3C34
+	.byte 0x00
+	.byte 0x00
+	.byte 0x0A
+	.byte 0x07
+	.byte 0x00
+	.byte 0x2D
 
+	.align 2
 gUnknown_0861CC1C:: @ 861CC1C
 	.incbin "baserom.gba", 0x61cc1c, 0x8
 

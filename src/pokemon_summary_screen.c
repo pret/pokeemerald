@@ -50,7 +50,7 @@ extern struct UnkStruct_61CC04 gUnknown_0861CC04;
 extern struct UnkStruct_61CC04 gUnknown_0861CC10;
 extern struct UnkStruct_61CC04 gUnknown_0861CBEC;
 extern struct UnkStruct_61CC04 gUnknown_0861CBF8;
-extern u16 gUnknown_08DC3CD4[];
+extern u16 gSummaryScreenWindow_Tilemap[];
 extern struct ContestMove gContestMoves[];
 extern struct ContestEffect gContestEffects[];
 extern struct WindowTemplate gUnknown_0861CC24;
@@ -2343,18 +2343,18 @@ void sub_81C2194(u16 *a, u16 b, u8 c)
     {
         for (i = 0; i < 20; i++)
         {
-            a[(i + var) << 1] = gUnknown_08DC3CD4[i] + b;
-            a[((i + var) << 1) + 0x40] = gUnknown_08DC3CD4[i] + b;
-            a[((i + var) << 1) + 0x80] = gUnknown_08DC3CD4[i + 20] + b;
+            a[(i + var) << 1] = gSummaryScreenWindow_Tilemap[i] + b;
+            a[((i + var) << 1) + 0x40] = gSummaryScreenWindow_Tilemap[i] + b;
+            a[((i + var) << 1) + 0x80] = gSummaryScreenWindow_Tilemap[i + 20] + b;
         }
     }
     else
     {
         for (i = 0; i < 20; i++)
         {
-            a[(i + var)] = gUnknown_08DC3CD4[i + 20] + b;
-            a[((i + var)) + 0x40] = gUnknown_08DC3CD4[i + 40] + b;
-            a[((i + var)) + 0x80] = gUnknown_08DC3CD4[i + 40] + b;
+            a[(i + var)] = gSummaryScreenWindow_Tilemap[i + 20] + b;
+            a[((i + var)) + 0x40] = gSummaryScreenWindow_Tilemap[i + 40] + b;
+            a[((i + var)) + 0x80] = gSummaryScreenWindow_Tilemap[i + 40] + b;
         }
     }
 }
@@ -2372,7 +2372,7 @@ void sub_81C2194(u16 *a, u16 b, u8 c)
 	cmp r2, 0\n\
 	bne _081C21E4\n\
 	movs r3, 0\n\
-	ldr r5, =gUnknown_08DC3CD4\n\
+	ldr r5, =gSummaryScreenWindow_Tilemap\n\
 _081C21A8:\n\
 	adds r2, r7, r3\n\
 	lsls r2, 1\n\
@@ -2402,7 +2402,7 @@ _081C21A8:\n\
 	.pool\n\
 _081C21E4:\n\
 	movs r3, 0\n\
-	ldr r5, =gUnknown_08DC3CD4\n\
+	ldr r5, =gSummaryScreenWindow_Tilemap\n\
 _081C21E8:\n\
 	adds r1, r7, r3\n\
 	lsls r1, 1\n\

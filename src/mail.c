@@ -20,42 +20,42 @@
 #include "malloc.h"
 #include "easy_chat.h"
 
-extern const u16 gUnknown_08DBE818[];
-extern const u16 gUnknown_08DBE838[];
-extern const u16 gUnknown_08DBE858[];
-extern const u16 gUnknown_08DBE878[];
-extern const u16 gUnknown_08DBE898[];
-extern const u16 gUnknown_08DBE8B8[];
-extern const u16 gUnknown_08DBE8D8[];
-extern const u16 gUnknown_08DBE8F8[];
-extern const u16 gUnknown_08DBE918[];
-extern const u16 gUnknown_08DBE938[];
-extern const u16 gUnknown_08DBE958[];
-extern const u16 gUnknown_08DBE978[];
-extern const u8 gUnknown_08DBE998[];
-extern const u8 gUnknown_08DBFBA4[];
-extern const u8 gUnknown_08DBEB38[];
-extern const u8 gUnknown_08DBFC7C[];
-extern const u8 gUnknown_08DBEC74[];
-extern const u8 gUnknown_08DBFD5C[];
-extern const u8 gUnknown_08DBEE84[];
-extern const u8 gUnknown_08DBFE68[];
-extern const u8 gUnknown_08DBEF5C[];
-extern const u8 gUnknown_08DBFF44[];
-extern const u8 gUnknown_08DBF154[];
-extern const u8 gUnknown_08DC0034[];
-extern const u8 gUnknown_08DBF2D4[];
-extern const u8 gUnknown_08DC0114[];
-extern const u8 gUnknown_08DBF37C[];
-extern const u8 gUnknown_08DC01F4[];
-extern const u8 gUnknown_08DBF50C[];
-extern const u8 gUnknown_08DC0300[];
-extern const u8 gUnknown_08DBF64C[];
-extern const u8 gUnknown_08DC03F0[];
-extern const u8 gUnknown_08DBF7B4[];
-extern const u8 gUnknown_08DC04E8[];
-extern const u8 gUnknown_08DBF904[];
-extern const u8 gUnknown_08DC0600[];
+extern const u16 gMailPalette_Orange[];
+extern const u16 gMailPalette_Harbor[];
+extern const u16 gMailPalette_Glitter[];
+extern const u16 gMailPalette_Mech[];
+extern const u16 gMailPalette_Wood[];
+extern const u16 gMailPalette_Wave[];
+extern const u16 gMailPalette_Bead[];
+extern const u16 gMailPalette_Shadow[];
+extern const u16 gMailPalette_Tropic[];
+extern const u16 gMailPalette_Dream[];
+extern const u16 gMailPalette_Fab[];
+extern const u16 gMailPalette_Retro[];
+extern const u8 gMailTiles_Orange[];
+extern const u8 gMailTilemap_Orange[];
+extern const u8 gMailTiles_Harbor[];
+extern const u8 gMailTilemap_Harbor[];
+extern const u8 gMailTiles_Glitter[];
+extern const u8 gMailTilemap_Glitter[];
+extern const u8 gMailTiles_Mech[];
+extern const u8 gMailTilemap_Mech[];
+extern const u8 gMailTiles_Wood[];
+extern const u8 gMailTilemap_Wood[];
+extern const u8 gMailTiles_Wave[];
+extern const u8 gMailTilemap_Wave[];
+extern const u8 gMailTiles_Bead[];
+extern const u8 gMailTilemap_Bead[];
+extern const u8 gMailTiles_Shadow[];
+extern const u8 gMailTilemap_Shadow[];
+extern const u8 gMailTiles_Tropic[];
+extern const u8 gMailTilemap_Tropic[];
+extern const u8 gMailTiles_Dream[];
+extern const u8 gMailTilemap_Dream[];
+extern const u8 gMailTiles_Fab[];
+extern const u8 gMailTilemap_Fab[];
+extern const u8 gMailTiles_Retro[];
+extern const u8 gMailTilemap_Retro[];
 
 // Static type declarations
 
@@ -170,29 +170,29 @@ static const u16 sUnknown_0859F2B0[][2] = {
 
 static const struct MailGraphics sUnknown_0859F2B8[] = {
     {
-        gUnknown_08DBE818, gUnknown_08DBE998, gUnknown_08DBFBA4, 0x02c0, 0x0000, 0x294a, 0x6739
+        gMailPalette_Orange, gMailTiles_Orange, gMailTilemap_Orange, 0x02c0, 0x0000, 0x294a, 0x6739
     }, {
-        gUnknown_08DBE838, gUnknown_08DBEB38, gUnknown_08DBFC7C, 0x02e0, 0x0000, 0x7fff, 0x4631
+        gMailPalette_Harbor, gMailTiles_Harbor, gMailTilemap_Harbor, 0x02e0, 0x0000, 0x7fff, 0x4631
     }, {
-        gUnknown_08DBE858, gUnknown_08DBEC74, gUnknown_08DBFD5C, 0x0400, 0x0000, 0x294a, 0x6739
+        gMailPalette_Glitter, gMailTiles_Glitter, gMailTilemap_Glitter, 0x0400, 0x0000, 0x294a, 0x6739
     }, {
-        gUnknown_08DBE878, gUnknown_08DBEE84, gUnknown_08DBFE68, 0x01e0, 0x0000, 0x7fff, 0x4631
+        gMailPalette_Mech, gMailTiles_Mech, gMailTilemap_Mech, 0x01e0, 0x0000, 0x7fff, 0x4631
     }, {
-        gUnknown_08DBE898, gUnknown_08DBEF5C, gUnknown_08DBFF44, 0x02e0, 0x0000, 0x7fff, 0x4631
+        gMailPalette_Wood, gMailTiles_Wood, gMailTilemap_Wood, 0x02e0, 0x0000, 0x7fff, 0x4631
     }, {
-        gUnknown_08DBE8B8, gUnknown_08DBF154, gUnknown_08DC0034, 0x0300, 0x0000, 0x294a, 0x6739
+        gMailPalette_Wave, gMailTiles_Wave, gMailTilemap_Wave, 0x0300, 0x0000, 0x294a, 0x6739
     }, {
-        gUnknown_08DBE8D8, gUnknown_08DBF2D4, gUnknown_08DC0114, 0x0140, 0x0000, 0x7fff, 0x4631
+        gMailPalette_Bead, gMailTiles_Bead, gMailTilemap_Bead, 0x0140, 0x0000, 0x7fff, 0x4631
     }, {
-        gUnknown_08DBE8F8, gUnknown_08DBF37C, gUnknown_08DC01F4, 0x0300, 0x0000, 0x7fff, 0x4631
+        gMailPalette_Shadow, gMailTiles_Shadow, gMailTilemap_Shadow, 0x0300, 0x0000, 0x7fff, 0x4631
     }, {
-        gUnknown_08DBE918, gUnknown_08DBF50C, gUnknown_08DC0300, 0x0220, 0x0000, 0x294a, 0x6739
+        gMailPalette_Tropic, gMailTiles_Tropic, gMailTilemap_Tropic, 0x0220, 0x0000, 0x294a, 0x6739
     }, {
-        gUnknown_08DBE938, gUnknown_08DBF64C, gUnknown_08DC03F0, 0x0340, 0x0000, 0x294a, 0x6739
+        gMailPalette_Dream, gMailTiles_Dream, gMailTilemap_Dream, 0x0340, 0x0000, 0x294a, 0x6739
     }, {
-        gUnknown_08DBE958, gUnknown_08DBF7B4, gUnknown_08DC04E8, 0x02a0, 0x0000, 0x294a, 0x6739
+        gMailPalette_Fab, gMailTiles_Fab, gMailTilemap_Fab, 0x02a0, 0x0000, 0x294a, 0x6739
     }, {
-        gUnknown_08DBE978, gUnknown_08DBF904, gUnknown_08DC0600, 0x0520, 0x0000, 0x294a, 0x6739
+        gMailPalette_Retro, gMailTiles_Retro, gMailTilemap_Retro, 0x0520, 0x0000, 0x294a, 0x6739
     }
 };
 

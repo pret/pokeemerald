@@ -2647,8 +2647,8 @@ extern const u8 gBattleTerrainPalette_StadiumGlacia[];
 extern const u8 gBattleTerrainPalette_StadiumDrake[];
 extern const u8 gBattleTerrainPalette_StadiumWallace[];
 
-extern const u8 gUnknown_08DC234C[];
-extern const u8 gUnknown_08DC16F4[];
+extern const u8 gPokedexMenu2_Gfx[];
+extern const u8 gPokedexText_Pal[];
 
 // rayquaza scene gfx
 extern const u8 gRaySceneGroudon_Gfx[];

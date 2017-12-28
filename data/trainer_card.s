@@ -161,14 +161,16 @@ gUnknown_0856FB9C:: @ 856FB9C
 gUnknown_0856FBBC:: @ 856FBBC
 	 .incbin "baserom.gba", 0x56fbbc, 0xFEC
 
-gUnknown_08570BA8:: @ 8570BA8
-	 .incbin "baserom.gba", 0x570ba8, 0x9C
+	 .align 2
+gFrontierPassCursor_Gfx:: @ 8570BA8
+	 .incbin "graphics/frontier_pass/cursor.4bpp.lz"
 
 gUnknown_08570C44:: @ 8570C44
 	 .incbin "baserom.gba", 0x570c44, 0xBC
 
-gUnknown_08570D00:: @ 8570D00
-	 .incbin "baserom.gba", 0x570d00, 0x100
+	 .align 2
+gFrontierPassMapCursor_Gfx:: @ 8570D00
+	 .incbin "graphics/frontier_pass/map_cursor.4bpp.lz"
 
 gUnknown_08570E00:: @ 8570E00
 	.incbin "baserom.gba", 0x570e00, 0x260
@@ -210,19 +212,19 @@ gUnknown_08571454:: @ 8571454
 	.incbin "baserom.gba", 0x571454, 0x68
 
 gUnknown_085714BC:: @ 85714BC
-	obj_tiles gUnknown_08570BA8, 0x100, 0
-	obj_tiles gUnknown_08570D00, 0x400, 1
-	obj_tiles gUnknown_08DC1394, 0x380, 2
+	obj_tiles gFrontierPassCursor_Gfx, 0x100, 0
+	obj_tiles gFrontierPassMapCursor_Gfx, 0x400, 1
+	obj_tiles gFrontierPassMedals_Gfx, 0x380, 2
 
 gUnknown_085714D4:: @ 85714D4
 	obj_tiles gUnknown_08570C44, 0x100, 4
 	obj_tiles NULL, 0, 0
 
 gUnknown_085714E4:: @ 85714E4
-	 obj_pal gUnknown_08DC1674, 0
-	 obj_pal gUnknown_08DC1694, 1
-	 obj_pal gUnknown_08DC16B4, 2
-	 obj_pal gUnknown_08DC16D4, 3
+	 obj_pal gFrontierPassCursor_Pal, 0
+	 obj_pal gFrontierPassMapCursor_Pal, 1
+	 obj_pal gFrontierPassMedalsSilver_Pal, 2
+	 obj_pal gFrontierPassMedalsGold_Pal, 3
 	 obj_pal gUnknown_0856FB7C, 4
 	 obj_pal gUnknown_0856FB9C, 5
 	 obj_pal NULL, 0

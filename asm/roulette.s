@@ -452,14 +452,14 @@ _08140662:
 	lsls r2, 1
 	movs r1, 0
 	bl LoadPalette
-	ldr r1, =gUnknown_08DBC2E8
+	ldr r1, =gRouletteMenuTiles
 	movs r4, 0
 	str r4, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_08DBCA14
+	ldr r1, =gRouletteWheelTiles
 	str r4, [sp]
 	movs r0, 0x2
 	movs r2, 0
