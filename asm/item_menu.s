@@ -1164,7 +1164,7 @@ _081AB570:
 	lsrs r0, 16
 	cmp r0, 0x7
 	bhi _081AB5BE
-	ldr r1, =gUnknown_08DC6378
+	ldr r1, =gBagMenuHMIcon_Gfx
 	subs r3, r7, 0x1
 	lsls r3, 16
 	lsrs r3, 16

@@ -5257,15 +5257,15 @@ sub_819A2BC: @ 819A2BC
 	cmp r1, 0x2
 	beq _0819A2E4
 _0819A2D2:
-	ldr r0, =gUnknown_08DC4318
+	ldr r0, =gFireRedMenuElements1_Pal
 	b _0819A2E6
 	.pool
 _0819A2DC:
-	ldr r0, =gUnknown_08DC4338
+	ldr r0, =gFireRedMenuElements2_Pal
 	b _0819A2E6
 	.pool
 _0819A2E4:
-	ldr r0, =gUnknown_08DC4358
+	ldr r0, =gFireRedMenuElements3_Pal
 _0819A2E6:
 	adds r1, r2, 0
 	movs r2, 0x20
@@ -5292,7 +5292,7 @@ blit_move_info_icon: @ 819A2F8
 	adds r1, r4
 	ldrh r5, [r1, 0x2]
 	lsls r5, 5
-	ldr r4, =gUnknown_08DC4378
+	ldr r4, =gFireRedMenuElements_Gfx
 	adds r5, r4
 	movs r4, 0x80
 	str r4, [sp]

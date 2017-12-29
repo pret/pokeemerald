@@ -14,6 +14,8 @@ bttransgfxdir := graphics/battle_transitions
 typesdir := graphics/types
 raydir := graphics/rayquaza_scene
 roulgfxdir := graphics/roulette
+pknvdir := graphics/pokenav/
+pknvoptionsdir := graphics/pokenav/options
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -420,3 +422,9 @@ $(bttransgfxdir)/frontier_square_3.4bpp: $(bttransgfxdir)/frontier_squares_blank
 
 $(bttransgfxdir)/frontier_square_4.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp $(bttransgfxdir)/frontier_squares_4.4bpp
 	@cat $^ >$@
+
+$(pknvoptionsdir)/options.4bpp: $(pknvoptionsdir)/hoenn_map.4bpp $(pknvoptionsdir)/condition.4bpp $(pknvoptionsdir)/match_call.4bpp $(pknvoptionsdir)/ribbons.4bpp $(pknvoptionsdir)/switch_off.4bpp $(pknvoptionsdir)/party.4bpp $(pknvoptionsdir)/search.4bpp $(pknvoptionsdir)/cool.4bpp $(pknvoptionsdir)/beauty.4bpp $(pknvoptionsdir)/cute.4bpp $(pknvoptionsdir)/smart.4bpp $(pknvoptionsdir)/tough.4bpp $(pknvoptionsdir)/cancel.4bpp
+	@cat $^ >$@
+
+$(pknvdir)/header.4bpp: $(pknvdir)/header.png
+	$(GFX) $< $@ -num_tiles 53

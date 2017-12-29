@@ -4236,149 +4236,218 @@ gIntroCopyright_Tilemap:: @ 8DC3FD4
 	.incbin "graphics/intro/copyright.bin.lz"
 
 	.align 2
-gUnknown_08DC4120:: @ 8DC4120
-	.incbin "baserom.gba", 0xdc4120, 0x20
+gPokedexAreaScreenAreaUnknown_Pal:: @ 8DC4120
+	.incbin "graphics/pokedex/area_unknown.gbapal"
 
-gUnknown_08DC4140:: @ 8DC4140
-	.incbin "baserom.gba", 0xdc4140, 0x1d8
+	.align 2
+gPokedexAreaScreenAreaUnknown_Gfx:: @ 8DC4140
+	.incbin "graphics/pokedex/area_unknown.4bpp.lz"
 
-gUnknown_08DC4318:: @ 8DC4318
-	.incbin "baserom.gba", 0xdc4318, 0x20
+	@ seems to be fire red leftovers, but the menu elements is reused in the item menu for TM descriptions.
 
-gUnknown_08DC4338:: @ 8DC4338
-	.incbin "baserom.gba", 0xdc4338, 0x20
+	.align 2
+gFireRedMenuElements1_Pal:: @ 8DC4318
+	.incbin "graphics/interface_fr/menu1.gbapal"
 
-gUnknown_08DC4358:: @ 8DC4358
-	.incbin "baserom.gba", 0xdc4358, 0x20
+	.align 2
+gFireRedMenuElements2_Pal:: @ 8DC4338
+	.incbin "graphics/interface_fr/menu2.gbapal"
 
-gUnknown_08DC4378:: @ 8DC4378
-	.incbin "baserom.gba", 0xdc4378, 0x2000
+	.align 2
+gFireRedMenuElements3_Pal:: @ 8DC4358
+	.incbin "graphics/interface_fr/menu3.gbapal"
 
-gUnknown_08DC6378:: @ 8DC6378
-	.incbin "baserom.gba", 0xdc6378, 0x80
+	.align 2
+gFireRedMenuElements_Gfx:: @ 8DC4378
+	.incbin "graphics/interface_fr/menu.4bpp" @ the types are reused for item menu
 
+	.align 2
+gBagMenuHMIcon_Gfx:: @ 8DC6378
+	.incbin "graphics/interface/hm.4bpp"
+
+	@ contest link stuff, appears to be a set of tilemaps
+
+	.align 2
 gUnknown_08DC63F8:: @ 8DC63F8
-	.incbin "baserom.gba", 0xdc63f8, 0x28
+	.incbin "graphics/contest/clink_tilemap1.bin"
 
+	.align 2
 gUnknown_08DC6420:: @ 8DC6420
-	.incbin "baserom.gba", 0xdc6420, 0x28
+	.incbin "graphics/contest/clink_tilemap2.bin"
 
+	.align 2
 gUnknown_08DC6448:: @ 8DC6448
-	.incbin "baserom.gba", 0xdc6448, 0x28
+	.incbin "graphics/contest/clink_tilemap3.bin"
 
+	.align 2
 gUnknown_08DC6470:: @ 8DC6470
-	.incbin "baserom.gba", 0xdc6470, 0x28
+	.incbin "graphics/contest/clink_tilemap4.bin"
 
+	.align 2
 gUnknown_08DC6498:: @ 8DC6498
-	.incbin "baserom.gba", 0xdc6498, 0x14
+	.incbin "graphics/contest/clink_tilemap5.bin"
 
+	.align 2
 gUnknown_08DC64AC:: @ 8DC64AC
-	.incbin "baserom.gba", 0xdc64ac, 0x14
+	.incbin "graphics/contest/clink_tilemap6.bin"
 
+	.align 2
 gUnknown_08DC64C0:: @ 8DC64C0
-	.incbin "baserom.gba", 0xdc64c0, 0x14
+	.incbin "graphics/contest/clink_tilemap7.bin"
 
+	.align 2
 gUnknown_08DC64D4:: @ 8DC64D4
-	.incbin "baserom.gba", 0xdc64d4, 0x14
+	.incbin "graphics/contest/clink_tilemap8.bin"
 
+	.align 2
 gUnknown_08DC64E8:: @ 8DC64E8
-	.incbin "baserom.gba", 0xdc64e8, 0x14
+	.incbin "graphics/contest/clink_tilemap9.bin"
 
+	.align 2
 gUnknown_08DC64FC:: @ 8DC64FC
-	.incbin "baserom.gba", 0xdc64fc, 0x14
+	.incbin "graphics/contest/clink_tilemap10.bin"
 
+	.align 2
 gUnknown_08DC6510:: @ 8DC6510
-	.incbin "baserom.gba", 0xdc6510, 0x18
+	.incbin "graphics/contest/clink_tilemap11.bin"
 
-gUnknown_08DC6528:: @ 8DC6528
-	.incbin "baserom.gba", 0xdc6528, 0x20
+	@ pokenav
 
-gUnknown_08DC6548:: @ 8DC6548
-	.incbin "baserom.gba", 0xdc6548, 0x8b4
+	.align 2
+gPokenavCondition_Pal:: @ 8DC6528
+	.incbin "graphics/pokenav/condition.gbapal"
 
-gUnknown_08DC6DFC:: @ 8DC6DFC
-	.incbin "baserom.gba", 0xdc6dfc, 0x274
+	.align 2
+gPokenavCondition_Gfx:: @ 8DC6548
+	.incbin "graphics/pokenav/condition.4bpp.lz"
 
-gUnknown_08DC7070:: @ 8DC7070
-	.incbin "baserom.gba", 0xdc7070, 0xaf0
+	.align 2
+gPokenavCondition_Tilemap:: @ 8DC6DFC
+	.incbin "graphics/pokenav/condition.bin.lz"
 
-gUnknown_08DC7B60:: @ 8DC7B60
-	.incbin "baserom.gba", 0xdc7b60, 0x20
+	.align 2
+gPokenavOptions_Tilemap:: @ 8DC7070
+	.incbin "graphics/pokenav/options/options.bin"
 
-gUnknown_08DC7B80:: @ 8DC7B80
-	.incbin "baserom.gba", 0xdc7b80, 0x204
+	.align 2
+gPokenavOptions_Gfx::
+	.incbin "graphics/pokenav/options/options.4bpp.lz"
 
-gUnknown_08DC7D84:: @ 8DC7D84
-	.incbin "baserom.gba", 0xdc7d84, 0x17c
+	.align 2
+gPokenavOptions_Pal::
+	.incbin "graphics/pokenav/options/options.gbapal"
 
-gUnknown_08DC7F00:: @ 8DC7F00
-	 .incbin "baserom.gba", 0xdc7f00, 0xA0
+	.align 2
+gPokenavHeader_Pal:: @ 8DC7B60
+	.incbin "graphics/pokenav/header.gbapal"
 
-gUnknown_08DC7FA0:: @ 8DC7FA0
-	 .incbin "baserom.gba", 0xdc7fa0, 0x13C
+	.align 2
+gPokenavHeader_Gfx:: @ 8DC7B80
+	.incbin "graphics/pokenav/header.4bpp.lz" @ TODO: use width 9 and makefile rule for cleanliness, make wasnt behaving, didnt want to apply num_tiles to this
 
-gUnknown_08DC80DC:: @ 8DC80DC
-	 .incbin "baserom.gba", 0xdc80dc, 0x12C
+	.align 2
+gPokenavHeader_Tilemap:: @ 8DC7D84
+	.incbin "graphics/pokenav/header.bin.lz"
 
-gUnknown_08DC8208:: @ 8DC8208
-	 .incbin "baserom.gba", 0xdc8208, 0x184
+	.align 2
+gPokenavLeftHeader_Pal:: @ 8DC7F00
+	.incbin "graphics/pokenav/left_headers/palette.gbapal"
 
-gUnknown_08DC838C:: @ 8DC838C
-	 .incbin "baserom.gba", 0xdc838c, 0x120
+	.align 2
+gPokenavLeftHeaderBeauty_Gfx:: @ 8DC7FA0
+	.incbin "graphics/pokenav/left_headers/beauty.4bpp.lz"
 
-gUnknown_08DC84AC:: @ 8DC84AC
-	 .incbin "baserom.gba", 0xdc84ac, 0x1A0
+	.align 2
+gPokenavLeftHeaderSmart_Gfx:: @ 8DC80DC
+	.incbin "graphics/pokenav/left_headers/smart.4bpp.lz"
 
-gUnknown_08DC864C:: @ 8DC864C
-	 .incbin "baserom.gba", 0xdc864c, 0x1AC
+	.align 2
+gPokenavLeftHeaderCondition_Gfx:: @ 8DC8208
+	.incbin "graphics/pokenav/left_headers/condition.4bpp.lz"
 
-gUnknown_08DC87F8:: @ 8DC87F8
-	 .incbin "baserom.gba", 0xdc87f8, 0x2AC
+	.align 2
+gPokenavLeftHeaderCute_Gfx:: @ 8DC838C
+	.incbin "graphics/pokenav/left_headers/cute.4bpp.lz"
 
-gUnknown_08DC8AA4:: @ 8DC8AA4
-	 .incbin "baserom.gba", 0xdc8aa4, 0x170
+	.align 2
+gPokenavLeftHeaderMatchCall_Gfx:: @ 8DC84AC
+	.incbin "graphics/pokenav/left_headers/match_call.4bpp.lz"
 
-gUnknown_08DC8C14:: @ 8DC8C14
-	 .incbin "baserom.gba", 0xdc8c14, 0x13C
+	.align 2
+gPokenavLeftHeaderMainMenu_Gfx:: @ 8DC864C
+	.incbin "graphics/pokenav/left_headers/main_menu.4bpp.lz"
 
-gUnknown_08DC8D50:: @ 8DC8D50
-	 .incbin "baserom.gba", 0xdc8d50, 0x114
+	.align 2
+gPokenavLeftHeaderHoennMap_Gfx:: @ 8DC87F8
+	.incbin "graphics/pokenav/left_headers/hoenn_map.4bpp.lz"
 
-gUnknown_08DC8E64:: @ 8DC8E64
-	 .incbin "baserom.gba", 0xdc8e64, 0x100
+	.align 2
+gPokenavLeftHeaderRibbons_Gfx:: @ 8DC8AA4
+	.incbin "graphics/pokenav/left_headers/ribbons.4bpp.lz"
 
-gUnknown_08DC8F64:: @ 8DC8F64
-	 .incbin "baserom.gba", 0xdc8f64, 0x15C
+	.align 2
+gPokenavLeftHeaderSearch_Gfx:: @ 8DC8C14
+	.incbin "graphics/pokenav/left_headers/search.4bpp.lz"
 
-gUnknown_08DC90C0:: @ 8DC90C0
-	.incbin "baserom.gba", 0xdc90c0, 0x20
+	.align 2
+gPokenavLeftHeaderTough_Gfx:: @ 8DC8D50
+	.incbin "graphics/pokenav/left_headers/tough.4bpp.lz"
 
-gUnknown_08DC90E0:: @ 8DC90E0
-	.incbin "baserom.gba", 0xdc90e0, 0x50
+	.align 2
+gPokenavLeftHeaderCool_Gfx:: @ 8DC8E64
+	.incbin "graphics/pokenav/left_headers/cool.4bpp.lz"
 
-gUnknown_08DC9130:: @ 8DC9130
-	.incbin "baserom.gba", 0xdc9130, 0xb8
+	.align 2
+gPokenavLeftHeaderParty_Gfx:: @ 8DC8F64
+	.incbin "graphics/pokenav/left_headers/party.4bpp.lz"
 
-gUnknown_08DC91E8:: @ 8DC91E8
-	 .incbin "baserom.gba", 0xdc91e8, 0x20
+	.align 2
+gPokenavMessageBox_Pal:: @ 8DC90C0
+	.incbin "graphics/pokenav/message.gbapal"
 
-gUnknown_08DC9208:: @ 8DC9208
-	 .incbin "baserom.gba", 0xdc9208, 0x400
+	.align 2
+gPokenavMessageBox_Gfx:: @ 8DC90E0
+	.incbin "graphics/pokenav/message.4bpp.lz"
 
-gUnknown_08DC9608:: @ 8DC9608
-	.incbin "baserom.gba", 0xdc9608, 0x20
+	.align 2
+gPokenavMessageBox_Tilemap:: @ 8DC9130
+	.incbin "graphics/pokenav/message.bin.lz"
 
-gUnknown_08DC9628:: @ 8DC9628
-	.incbin "baserom.gba", 0xdc9628, 0x320
+	.align 2
+gHoennMapZoomIcons_Pal:: @ 8DC91E8
+	.incbin "graphics/pokenav/zoom.gbapal"
 
+	.align 2
+gHoennMapZoomIcons_Gfx:: @ 8DC9208
+	.incbin "graphics/pokenav/zoom.4bpp.lz"
+
+	.align 2
+gPokenavConditionCancel_Pal::
+	.incbin "graphics/pokenav/cancel.gbapal"
+
+	.align 2
+gPokenavConditionCancel_Gfx::
+	.incbin "graphics/pokenav/cancel.4bpp"
+
+	.align 2
+gPokenavConditionMarker_Pal:: @ 8DC9608
+	.incbin "graphics/pokenav/marker.gbapal"
+
+	.align 2
+gPokenavConditionMarker_Gfx:: @ 8DC9628
+	.incbin "graphics/pokenav/marker.4bpp"
+
+	.align 2
 gBerryBlenderMiscPalette:: @ 8DCAB88
 	.incbin "graphics/berry_blender/misc.gbapal"
 
+	.align 2
 gBerryBlenderArrowPalette:: @ 8DC9948
 	.incbin "graphics/berry_blender/arrow.gbapal"
 
-gUnknown_8DC9988:: @ 8DC9988
-	.incbin "baserom.gba", 0xdc9988, 0x200
+	.align 2
+gBerryBlenderBetaArrow_Gfx:: @ 8DC9988
+	.incbin "graphics/berry_blender/arrow_old.4bpp" @ unused
 
 	.align 2
 gBerryBlenderMarubatsuTiles:: @ 8DC9B88

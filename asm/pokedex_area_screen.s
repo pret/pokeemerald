@@ -1781,7 +1781,7 @@ sub_813D8A8: @ 813D8A8
 	str r1, [sp]
 	ldr r0, =0x00030600
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_08DC4140
+	ldr r0, =gPokedexAreaScreenAreaUnknown_Gfx
 	bl LZ77UnCompWram
 	mov r0, sp
 	bl LoadSpriteSheet

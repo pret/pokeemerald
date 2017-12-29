@@ -79,7 +79,7 @@ AreaMarkerTiles:: @ 85B406C
 
 	.align 2
 gUnknown_085B40EC:: @ 85B40EC
-	obj_pal gUnknown_08DC4120, 0x0003
+	obj_pal gPokedexAreaScreenAreaUnknown_Pal, 0x0003
 
 	.align 2
 gOamData_85B40F4:: @ 85B40F4

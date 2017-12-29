@@ -147,24 +147,24 @@ gUnknown_0861FA54:: @ 861FA54
 	obj_pal NULL, 0
 
 gUnknown_0861FA64:: @ 861FA64
-	obj_tiles gUnknown_08DC87F8, 0xC00, 2
+	obj_tiles gPokenavLeftHeaderHoennMap_Gfx, 0xC00, 2
 
 gUnknown_0861FA6C:: @ 861FA6C
-	obj_tiles gUnknown_08DC864C, 0x20, 3
-	obj_tiles gUnknown_08DC8208, 0x20, 1
-	obj_tiles gUnknown_08DC8AA4, 0x20, 2
-	obj_tiles gUnknown_08DC84AC, 0x20, 4
-	obj_tiles gUnknown_08DC87F8, 0x20, 0
-	obj_tiles gUnknown_08DC87F8, 0x40, 0
+	obj_tiles gPokenavLeftHeaderMainMenu_Gfx, 0x20, 3
+	obj_tiles gPokenavLeftHeaderCondition_Gfx, 0x20, 1
+	obj_tiles gPokenavLeftHeaderRibbons_Gfx, 0x20, 2
+	obj_tiles gPokenavLeftHeaderMatchCall_Gfx, 0x20, 4
+	obj_tiles gPokenavLeftHeaderHoennMap_Gfx, 0x20, 0
+	obj_tiles gPokenavLeftHeaderHoennMap_Gfx, 0x40, 0
 
 gUnknown_0861FA9C:: @ 861FA9C
-	.4byte gUnknown_08DC8F64, 1
-	.4byte gUnknown_08DC8C14, 1
-	.4byte gUnknown_08DC8E64, 4
-	.4byte gUnknown_08DC7FA0, 1
-	.4byte gUnknown_08DC838C, 2
-	.4byte gUnknown_08DC80DC, 0
-	.4byte gUnknown_08DC8D50, 0
+	.4byte gPokenavLeftHeaderParty_Gfx, 1
+	.4byte gPokenavLeftHeaderSearch_Gfx, 1
+	.4byte gPokenavLeftHeaderCool_Gfx, 4
+	.4byte gPokenavLeftHeaderBeauty_Gfx, 1
+	.4byte gPokenavLeftHeaderCute_Gfx, 2
+	.4byte gPokenavLeftHeaderSmart_Gfx, 0
+	.4byte gPokenavLeftHeaderTough_Gfx, 0
 
 gUnknown_0861FAD4:: @ 861FAD4
 	.2byte 0x0
@@ -1511,10 +1511,10 @@ gUnknown_086230E4:: @ 86230E4
 	.4byte sub_81CC95C
 
 gUnknown_086230F8:: @ 86230F8
-	obj_tiles gUnknown_08DC9208, 0x800, 6
+	obj_tiles gHoennMapZoomIcons_Gfx, 0x800, 6
 
 gUnknown_08623100:: @ 8623100
-	obj_pal gUnknown_08DC91E8, 11
+	obj_pal gHoennMapZoomIcons_Pal, 11
 	obj_pal NULL, 0
 
 gUnknown_08623110:: @ 8623110
