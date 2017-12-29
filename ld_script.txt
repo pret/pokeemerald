@@ -475,7 +475,8 @@ SECTIONS {
         data/intro_credits_graphics.o(.rodata);
         src/evolution_graphics.o(.rodata);
         src/bard_music.o(.rodata);
-        data/data_860A4AC.o(.rodata);
+        data/battle_link_817C95C.o(.rodata);
+        data/pokemon_animation.o(.rodata);
         src/battle_controller_recorded_opponent.o(.rodata);
         src/battle_controller_recorded_player.o(.rodata);
         src/battle_dome_cards.o(.rodata);

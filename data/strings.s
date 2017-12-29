@@ -2906,112 +2906,112 @@ gUnknown_085EC04F:: @ 85EC04F
 gUnknown_085EC063:: @ 85EC063
 	.string "{SPECIAL_F7 0x00}/{LV}{SPECIAL_F7 0x01}{SPECIAL_F7 0x02}$"
 
-gUnknown_085EC06C:: @ 85EC06C
+gText_CombineFourWordsOrPhrases:: @ 85EC06C
 	.string "Combine four words or phrases$"
 
-gUnknown_085EC08A:: @ 85EC08A
+gText_AndMakeYourProfile:: @ 85EC08A
 	.string "and make your profile.$"
 
-gUnknown_085EC0A1:: @ 85EC0A1
+gText_CombineSixWordsOrPhrases:: @ 85EC0A1
 	.string "Combine six words or phrases$"
 
-gUnknown_085EC0BE:: @ 85EC0BE
+gText_AndMakeAMessage:: @ 85EC0BE
 	.string "and make a message.$"
 
-gUnknown_085EC0D2:: @ 85EC0D2
+gText_FindWordsThatDescribeYour:: @ 85EC0D2
 	.string "Find words that describe your$"
 
-gUnknown_085EC0F0:: @ 85EC0F0
+gText_FeelingsRightNow:: @ 85EC0F0
 	.string "feelings right now.$"
 
 gUnknown_085EC104:: @ 85EC104
 	.string "With four phrases,$"
 
-gUnknown_085EC117:: @ 85EC117
+gText_CombineNineWordsOrPhrases:: @ 85EC117
 	.string "Combine nine words or phrases$"
 
-gUnknown_085EC135:: @ 85EC135
+gText_AndMakeAMessage2:: @ 85EC135
 	.string "and make a message.$"
 
-gUnknown_085EC149:: @ 85EC149
+gText_ChangeJustOneWordOrPhrase:: @ 85EC149
 	.string "Change just one word or phrase$"
 
-gUnknown_085EC168:: @ 85EC168
+gText_AndImproveTheBardsSong:: @ 85EC168
 	.string "and improve the BARD’s song.$"
 
-gUnknown_085EC185:: @ 85EC185
+gText_YourProfile:: @ 85EC185
 	.string "Your profile$"
 
-gUnknown_085EC192:: @ 85EC192
+gText_YourFeelingAtTheBattlesStart:: @ 85EC192
 	.string "Your feeling at the battle’s start$"
 
-gUnknown_085EC1B5:: @ 85EC1B5
+gText_WhatYouSayIfYouWin:: @ 85EC1B5
 	.string "What you say if you win a battle$"
 
-gUnknown_085EC1D6:: @ 85EC1D6
+gText_WhatYouSayIfYouLose:: @ 85EC1D6
 	.string "What you say if you lose a battle$"
 
-gUnknown_085EC1F8:: @ 85EC1F8
+gText_TheAnswer:: @ 85EC1F8
 	.string "The answer$"
 
-gUnknown_085EC203:: @ 85EC203
+gText_TheMailMessage:: @ 85EC203
 	.string "The MAIL message$"
 
 gUnknown_085EC214:: @ 85EC214
 	.string "The MAIL salutation$"
 
-gUnknown_085EC228:: @ 85EC228
+gText_TheBardsSong2:: @ 85EC228
 	.string "The new song$"
 
-gUnknown_085EC235:: @ 85EC235
+gText_CombineTwoWordsOrPhrases:: @ 85EC235
 	.string "Combine two words or phrases$"
 
-gUnknown_085EC252:: @ 85EC252
+gText_AndMakeATrendySaying:: @ 85EC252
 	.string "and make a trendy saying.$"
 
-gUnknown_085EC26C:: @ 85EC26C
+gText_TheTrendySaying:: @ 85EC26C
 	.string "The trendy saying$"
 
-gUnknown_085EC27E:: @ 85EC27E
+gText_IsAsShownOkay:: @ 85EC27E
 	.string "is as shown. Okay?$"
 
-gUnknown_085EC291:: @ 85EC291
+gText_CombineTwoWordsOrPhrases2:: @ 85EC291
 	.string "Combine two words or phrases$"
 
-gUnknown_085EC2AE:: @ 85EC2AE
+gText_ToTeachHerAGoodSaying:: @ 85EC2AE
 	.string "to teach her a good saying.$"
 
-gUnknown_085EC2CA:: @ 85EC2CA
+gText_FindWordsWhichFit:: @ 85EC2CA
 	.string "Find words which fit$"
 
-gUnknown_085EC2DF:: @ 85EC2DF
+gText_TheTrainersImage:: @ 85EC2DF
 	.string "the TRAINER’s image.$"
 
-gUnknown_085EC2F4:: @ 85EC2F4
+gText_TheImage:: @ 85EC2F4
 	.string "The image:$"
 
-gUnknown_085EC2FF:: @ 85EC2FF
+gText_OutOfTheListedChoices:: @ 85EC2FF
 	.string "Out of the listed choices,$"
 
-gUnknown_085EC31A:: @ 85EC31A
+gText_SelectTheAnswerToTheQuiz:: @ 85EC31A
 	.string "select the answer to the quiz!$"
 
-gUnknown_085EC339:: @ 85EC339
+gText_AndCreateAQuiz:: @ 85EC339
 	.string "and create a quiz!$"
 
-gUnknown_085EC34C:: @ 85EC34C
+gText_PickAWordOrPhraseAnd:: @ 85EC34C
 	.string "Pick a word or phrase and$"
 
-gUnknown_085EC366:: @ 85EC366
+gText_SetTheQuizAnswer:: @ 85EC366
 	.string "set the quiz answer.$"
 
-gUnknown_085EC37B:: @ 85EC37B
+gText_TheAnswerColon:: @ 85EC37B
 	.string "The answer:$"
 
 gUnknown_085EC387:: @ 85EC387
 	.string "The quiz:$"
 
-gUnknown_085EC391:: @ 85EC391
+gText_ApprenticePhrase:: @ 85EC391
 	.string "Apprentice’s phrase:$"
 
 gText_QuitEditing:: @ 85EC3A6
@@ -3020,10 +3020,10 @@ gText_QuitEditing:: @ 85EC3A6
 gText_StopGivingPkmnMail:: @ 85EC3B4
 	.string "Stop giving the POKéMON MAIL?$"
 
-gUnknown_085EC3D2:: @ 85EC3D2
+gText_AndFillOutTheQuestionnaire:: @ 85EC3D2
 	.string "and fill out the questionnaire.$"
 
-gUnknown_085EC3F2:: @ 85EC3F2
+gText_LetsReplyToTheInterview:: @ 85EC3F2
 	.string "Let’s reply to the interview!$"
 
 gText_AllTextBeingEditedWill:: @ 85EC410
@@ -3056,7 +3056,7 @@ gText_OriginalSongWillBeUsed:: @ 85EC4E9
 gUnknown_085EC509:: @ 85EC509
 	.string "That’s trendy already!$"
 
-gText_CombineTwoWordsOrPhrases:: @ 85EC520
+gText_CombineTwoWordsOrPhrases3:: @ 85EC520
 	.string "Combine two words or phrases.$"
 
 gUnknown_085EC53E:: @ 85EC53E
@@ -3074,40 +3074,40 @@ gUnknown_085EC584:: @ 85EC584
 gUnknown_085EC594:: @ 85EC594
 	.string "Cancel the selection?$"
 
-gUnknown_085EC5AA:: @ 85EC5AA
+gText_Profile:: @ 85EC5AA
 	.string "PROFILE$"
 
-gUnknown_085EC5B2:: @ 85EC5B2
+gText_AtTheBattlesStart:: @ 85EC5B2
 	.string "At the battle’s start:$"
 
-gUnknown_085EC5C9:: @ 85EC5C9
+gText_UponWinningABattle:: @ 85EC5C9
 	.string "Upon winning a battle:$"
 
-gUnknown_085EC5E0:: @ 85EC5E0
+gText_UponLosingABattle:: @ 85EC5E0
 	.string "Upon losing a battle:$"
 
-gUnknown_085EC5F6:: @ 85EC5F6
+gText_TheBardsSong:: @ 85EC5F6
 	.string "The BARD’s Song$"
 
-gUnknown_085EC606:: @ 85EC606
+gText_WhatsHipAndHappening:: @ 85EC606
 	.string "What’s hip and happening?$"
 
-gUnknown_085EC620:: @ 85EC620
+gText_Interview:: @ 85EC620
 	.string "Interview$"
 
-gUnknown_085EC62A:: @ 85EC62A
+gText_GoodSaying:: @ 85EC62A
 	.string "Good saying$"
 
-gUnknown_085EC636:: @ 85EC636
+gText_FansQuestion:: @ 85EC636
 	.string "Fan’s question$"
 
 gUnknown_085EC645:: @ 85EC645
 	.string "クイズの こたえは？$" @ "kuizuno kotaeha?" ("The quiz's answer is?" in Japanese)
 
-gUnknown_085EC650:: @ 85EC650
+gText_ApprenticesPhrase:: @ 85EC650
 	.string "Apprentice’s phrase$"
 
-gUnknown_085EC664:: @ 85EC664
+gText_Questionnaire:: @ 85EC664
 	.string "QUESTIONNAIRE$"
 
 gText_YouCannotQuitHere:: @ 85EC672
@@ -3122,13 +3122,13 @@ gText_F700sQuiz:: @ 85EC6A8
 gText_Lady:: @ 85EC6B2
 	.string "Lady$"
 
-gUnknown_085EC6B7:: @ 85EC6B7
+gText_AfterYouHaveReadTheQuiz:: @ 85EC6B7
 	.string "After you have read the quiz$"
 
-gUnknown_085EC6D4:: @ 85EC6D4
+gText_QuestionPressTheAButton:: @ 85EC6D4
 	.string "question, press the A Button.$"
 
-gUnknown_085EC6F2:: @ 85EC6F2
+gText_TheQuizAnswerIs:: @ 85EC6F2
 	.string "The quiz answer is?$"
 
 gText_LikeToQuitQuiz:: @ 85EC706
@@ -3137,7 +3137,7 @@ gText_LikeToQuitQuiz:: @ 85EC706
 gText_ChallengeQuestionMark:: @ 85EC727
 	.string "challenge?$"
 
-gUnknown_085EC732:: @ 85EC732
+gText_IsThisQuizOK:: @ 85EC732
 	.string "Is this quiz OK?$"
 
 gText_CreateAQuiz:: @ 85EC743
@@ -5370,19 +5370,19 @@ gUnknown_085EFCA0:: @ 85EFCA0
 gUnknown_085EFCAB:: @ 85EFCAB
 	.string "SEAFLOOR2$"
 
-gUnknown_085EFCB5:: @ 85EFCB5
+gText_DelAll:: @ 85EFCB5
 	.string "DEL. ALL$"
 
-gUnknown_085EFCBE:: @ 85EFCBE
+gText_Cancel5:: @ 85EFCBE
 	.string "CANCEL$"
 
-gUnknown_085EFCC5:: @ 85EFCC5
+gText_Ok2:: @ 85EFCC5
 	.string "OK$"
 
-gUnknown_085EFCC8:: @ 85EFCC8
+gText_Quiz:: @ 85EFCC8
 	.string "QUIZ$"
 
-gUnknown_085EFCCD:: @ 85EFCCD
+gText_Answer:: @ 85EFCCD
 	.string "ANSWER$"
 
 gText_PokeBalls:: @ 85EFCD4

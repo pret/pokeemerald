@@ -6075,7 +6075,7 @@ _0811D19C:
 	b _0811D1BC
 	.pool
 _0811D1A8:
-	ldr r0, =gText_CombineTwoWordsOrPhrases
+	ldr r0, =gText_CombineTwoWordsOrPhrases3
 	str r0, [sp, 0xC]
 	b _0811D1BC
 	.pool
