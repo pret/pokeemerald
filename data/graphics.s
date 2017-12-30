@@ -4920,95 +4920,183 @@ gTilesetPalettes_General:: @ 8DD4E10
 gTilesetTiles_General:: @ 8DD5010
 	.incbin "data/tilesets/primary/general/tiles.4bpp.lz"
 
-@ 8DD72E0
-	.incbin "baserom.gba", 0xdd72e0, 0x20
+	@ trade/egg hatch
 
-gUnknown_08DD7300:: @ 8DD7300
-	.incbin "baserom.gba", 0xdd7300, 0x60
+	.align 2
+gTradeGba_Pal:: @ 8DD72E0
+	.incbin "graphics/link/gba.gbapal"
 
-gUnknown_08DD7360:: @ 8DD7360
-	.incbin "baserom.gba", 0xdd7360, 0x1420
+	.align 2
+gTradeGba2_Pal:: @ 8DD7300
+	.incbin "graphics/link/gba_pal2.gbapal" @ used for in-game trade GBA?
 
-gUnknown_08DD8780:: @ 8DD8780
-	.incbin "baserom.gba", 0xdd8780, 0x40
+	.align 2
+gTradeGba_Gfx:: @ 8DD7360
+	.incbin "graphics/link/gba.4bpp"
 
-gUnknown_08DD87C0:: @ 8DD87C0
-	.incbin "baserom.gba", 0xdd87c0, 0x720
+	@ 8DD8760
+	.space 0x20 @ blank palette??
 
-gUnknown_08DD8EE0:: @ 8DD8EE0
-	.incbin "baserom.gba", 0xdd8ee0, 0x1a0
+	@ berry fix program
 
-gUnknown_08DD9080:: @ 8DD9080
-	.incbin "baserom.gba", 0xdd9080, 0x60
+	.align 2
+gBerryFixGameboy_Pal:: @ 8DD8780
+	.incbin "graphics/berry_fix/gba_small.gbapal"
 
-gUnknown_08DD90E0:: @ 8DD90E0
-	.incbin "baserom.gba", 0xdd90e0, 0x638
+	.align 2
+gBerryFixGameboy_Gfx:: @ 8DD87C0
+	.incbin "graphics/berry_fix/gba_small.4bpp.lz"
 
-gUnknown_08DD9718:: @ 8DD9718
-	.incbin "baserom.gba", 0xdd9718, 0x15c
+	.align 2
+gBerryFixGameboy_Tilemap:: @ 8DD8EE0
+	.incbin "graphics/berry_fix/gba_small.bin.lz"
 
-gUnknown_08DD9874:: @ 8DD9874
-	.incbin "baserom.gba", 0xdd9874, 0x40
+	.align 2
+gBerryFixGameboyLogo_Pal:: @ 8DD9080
+	.incbin "graphics/berry_fix/logo.gbapal"
 
-gUnknown_08DD98B4:: @ 8DD98B4
-	.incbin "baserom.gba", 0xdd98b4, 0x5a4
+	.align 2
+gBerryFixGameboyLogo_Gfx:: @ 8DD90E0
+	.incbin "graphics/berry_fix/logo.4bpp.lz"
 
-gUnknown_08DD9E58:: @ 8DD9E58
-	.incbin "baserom.gba", 0xdd9e58, 0x194
+	.align 2
+gBerryFixGameboyLogo_Tilemap:: @ 8DD9718
+	.incbin "graphics/berry_fix/logo.bin.lz"
 
-gUnknown_08DD9FEC:: @ 8DD9FEC
-	.incbin "baserom.gba", 0xdd9fec, 0x40
+	.align 2
+gBerryFixGbaTransfer_Pal:: @ 8DD9874
+	.incbin "graphics/berry_fix/gba_transfer.gbapal"
 
-gUnknown_08DDA02C:: @ 8DDA02C
-	.incbin "baserom.gba", 0xdda02c, 0x610
+	.align 2
+gBerryFixGbaTransfer_Gfx:: @ 8DD98B4
+	.incbin "graphics/berry_fix/gba_transfer.4bpp.lz"
 
-gUnknown_08DDA63C:: @ 8DDA63C
-	.incbin "baserom.gba", 0xdda63c, 0x1c4
+	.align 2
+gBerryFixGbaTransfer_Tilemap:: @ 8DD9E58
+	.incbin "graphics/berry_fix/gba_transfer.bin.lz"
 
-gUnknown_08DDA800:: @ 8DDA800
-	.incbin "baserom.gba", 0xdda800, 0x40
+	.align 2
+gBerryFixGbaTransferHighlight_Pal:: @ 8DD9FEC
+	.incbin "graphics/berry_fix/gba_transfer_highlight.gbapal"
 
-gUnknown_08DDA840:: @ 8DDA840
-	.incbin "baserom.gba", 0xdda840, 0x600
+	.align 2
+gBerryFixGbaTransferHighlight_Gfx:: @ 8DDA02C
+	.incbin "graphics/berry_fix/gba_transfer_highlight.4bpp.lz"
 
-gUnknown_08DDAE40:: @ 8DDAE40
-	.incbin "baserom.gba", 0xddae40, 0x1a0
+	.align 2
+gBerryFixGbaTransferHighlight_Tilemap:: @ 8DDA63C
+	.incbin "graphics/berry_fix/gba_transfer_highlight.bin.lz"
 
-gUnknown_08DDAFE0:: @ 8DDAFE0
-	.incbin "baserom.gba", 0xddafe0, 0x40
+	.align 2
+gBerryFixGbaTransferError_Pal:: @ 8DDA800
+	.incbin "graphics/berry_fix/gba_transfer_error.gbapal"
 
-gUnknown_08DDB020:: @ 8DDB020
-	.incbin "baserom.gba", 0xddb020, 0x2a4
+	.align 2
+gBerryFixGbaTransferError_Gfx:: @ 8DDA840
+	.incbin "graphics/berry_fix/gba_transfer_error.4bpp.lz"
 
-gUnknown_08DDB2C4:: @ 8DDB2C4
-	.incbin "baserom.gba", 0xddb2c4, 0x120
+	.align 2
+gBerryFixGbaTransferError_Tilemap:: @ 8DDAE40
+	.incbin "graphics/berry_fix/gba_transfer_error.bin.lz"
 
+	.align 2
+gBerryFixWindow_Pal:: @ 8DDAFE0
+	.incbin "graphics/berry_fix/window.gbapal"
+
+	.align 2
+gBerryFixWindow_Gfx:: @ 8DDB020
+	.incbin "graphics/berry_fix/window.4bpp.lz" @ why the absurd length?
+
+	.align 2
+gBerryFixWindow_Tilemap:: @ 8DDB2C4
+	.incbin "graphics/berry_fix/window.bin.lz"
+
+	@ more trade stuff?
+
+	.align 2
 gUnknown_08DDB3E4:: @ 8DDB3E4
-	.incbin "baserom.gba", 0xddb3e4, 0x80
+	.incbin "graphics/trade/menu.gbapal"
 
+	.align 2
+gUnknown_08DDB444:: @ 8DDB444
+	.incbin "graphics/unknown/unknown_DDB444.gbapal"
+
+	.align 2
 gUnknown_08DDB464:: @ 8DDB464
-	.incbin "baserom.gba", 0xddb464, 0x1aa0
+	.incbin "graphics/trade/menu.4bpp"
 
+	.align 2
+gUnknown_08DDC6E4:: @ 8DDC6E4
+	.incbin "graphics/trade/buttons.4bpp"
+
+	.align 2
+	.incbin "graphics/unused/unused_DDCEE4.bin" @ unused
+
+	.align 2
 gUnknown_08DDCF04:: @ 8DDCF04
-	.incbin "baserom.gba", 0xddcf04, 0x800
+	.incbin "graphics/unknown/unknown_DDCF04.bin" @ tilemap
 
+	.align 2
 gUnknown_08DDD704:: @ 8DDD704
-	.incbin "baserom.gba", 0xddd704, 0x24
+	.incbin "graphics/unknown/unknown_DDD704.bin" @ textbox tilemap??
 
+	.align 2
 gUnknown_08DDD728:: @ 8DDD728
-	.incbin "baserom.gba", 0xddd728, 0x20
+	.incbin "graphics/interface/textbox.gbapal" @ textbox palette?
 
+	.align 2
 gUnknown_08DDD748:: @ 8DDD748
-	.incbin "baserom.gba", 0xddd748, 0x8c8
+	.incbin "graphics/interface/textbox.4bpp"
 
+	.align 2
+gUnknown_08DDD908::
+	.incbin "graphics/unknown/unknown_DDD908.bin.lz"
+
+	.align 2
+gUnknown_08DDD920::
+	.incbin "graphics/unknown/unknown_DDD920.bin.lz"
+
+	.align 2
+gUnknown_08DDD938::
+	.incbin "graphics/unknown/unknown_DDD938.bin.lz"
+
+	.align 2
+gUnknown_08DDD950::
+	.incbin "graphics/pokemon_storage/pss_window.gbapal"
+
+	.align 2
+gUnknown_08DDD990::
+	.incbin "graphics/pokemon_storage/pss_window.4bpp.lz"
+
+	.align 2
+gUnknown_08DDDB80:: @ 8DDDB80
+	.incbin "graphics/unknown/unknown_DDDB80.bin.lz"
+
+	.align 2
+gUnknown_08DDDC8C::
+	.incbin "graphics/pokemon_storage/pss_window2.gbapal"
+
+	.align 2
+gUnknown_08DDDCCC::
+	.incbin "graphics/pokemon_storage/pss_window2.4bpp.lz"
+
+	.align 2
+gUnknown_08DDDEDC::
+	.incbin "graphics/pokemon_storage/pss_window2.bin.lz"
+
+	@ pokenav
+
+	.align 2
 gUnknown_08DDE010:: @ 8DDE010
-	.incbin "baserom.gba", 0xdde010, 0x20
+	.incbin "graphics/pokenav/ribbons.gbapal"
 
+	.align 2
 gUnknown_08DDE030:: @ 8DDE030
-	.incbin "baserom.gba", 0xdde030, 0xfc
+	.incbin "graphics/pokenav/ribbons.4bpp.lz"
 
+	.align 2
 gUnknown_08DDE12C:: @ 8DDE12C
-	.incbin "baserom.gba", 0xdde12c, 0xcc
+	.incbin "graphics/pokenav/ribbons.bin.lz"
 
 	.align 2
 gMonIconPalettes:: @ 8DDE1F8
@@ -5027,7 +5115,7 @@ gTitleScreenEmeraldVersionPal:: @ 8DDE438
 
 	.align 2
 gUnknown_08DDE458:: @ 8DDE458
-	.incbin "baserom.gba", 0xdde458, 0x238
+	.incbin "graphics/title_screen/title_screen1.bin.lz"
 
 gTitleScreenPokemonLogoGfx:: @ 8DDE690
 	.incbin "graphics/title_screen/pokemon_logo.8bpp.lz"
@@ -5046,31 +5134,54 @@ gTitleScreenPressStartGfx:: @ 8DE03E8
 
 	.align 2
 gUnknown_08DE0644:: @ 8DE0644
-	.incbin "baserom.gba", 0xde0644, 0x184
+	.incbin "graphics/title_screen/title_screen2.bin.lz"
 
+	@ more trainer card stuff
+
+	.align 2
 gUnknown_08DE07C8:: @ 8DE07C8
-	.incbin "baserom.gba", 0xde07c8, 0x100
+	.incbin "graphics/frontier_pass/tiles.gbapal" @ size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but this is wrong? todo, investigate? (frontier pass pal)
 
+	.align 2
 gUnknown_08DE08C8:: @ 8DE08C8
-	.incbin "baserom.gba", 0xde08c8, 0x17bc
+	.incbin "graphics/frontier_pass/tiles.4bpp.lz"
 
+	.align 2
 gUnknown_08DE2084:: @ 8DE2084
-	.incbin "baserom.gba", 0xde2084, 0xfdc
+	.incbin "graphics/frontier_pass/tiles2.8bpp.lz"
 
+	.align 2
 gUnknown_08DE3060:: @ 8DE3060
-	.incbin "baserom.gba", 0xde3060, 0x2f0
+	.incbin "graphics/frontier_pass/tiles.bin.lz"
 
+	.align 2
 gUnknown_08DE3350:: @ 8DE3350
-	.incbin "baserom.gba", 0xde3350, 0x24
+	.incbin "graphics/frontier_pass/tilemap1.bin"
 
+	.align 2
 gUnknown_08DE3374:: @ 8DE3374
-	.incbin "baserom.gba", 0xde3374, 0x24
+	.incbin "graphics/frontier_pass/tilemap2.bin"
 
+	@ berry crusher
+
+	.align 2
 gUnknown_08DE3398:: @ 8DE3398
-	.incbin "baserom.gba", 0xde3398, 0x120
+	.incbin "graphics/berry_crusher/tiles.gbapal"
 
+	.align 2
 gUnknown_08DE34B8:: @ 8DE34B8
-	.incbin "baserom.gba", 0xde34b8, 0xb1c
+	.incbin "graphics/berry_crusher/tiles.4bpp.lz"
 
+	.align 2
 gUnknown_08DE3FD4:: @ 8DE3FD4
-	.incbin "baserom.gba", 0xde3fd4
+	.incbin "graphics/berry_crusher/tiles.bin.lz"
+
+	@ random garbage at the end. why, game freak?
+	.space 0x54BAC
+	.byte 0x0D, 0x00, 0x58, 0x02 @ why?
+	@ E38BC8
+	.space 0x1145
+	.byte 0x02 @ whyyyyy?
+	.space 0x3242
+	.byte 0x40 @ WHYYYYYYYY
+	.space 0x13

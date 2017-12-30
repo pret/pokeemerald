@@ -51,8 +51,8 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const u8 gBattleTextboxTiles[];
 extern const u8 gBattleTextboxTilemap[];
 extern const u8 gBattleTextboxPalette[];
-extern const u16 gUnknown_08DD7300[]; // palette, gameboy advance
-extern const u32 gUnknown_08DD7360[]; // tileset gameboy advance
+extern const u16 gTradeGba2_Pal[]; // palette, gameboy advance
+extern const u32 gTradeGba_Gfx[]; // tileset gameboy advance
 extern const u32 gUnknown_08331F60[]; // tilemap gameboy circle
 extern const u8 gText_HatchedFromEgg[];
 extern const u8 gText_NickHatchPrompt[];
@@ -548,8 +548,8 @@ static void CB2_EggHatch_0(void)
         break;
     case 7:
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-        LoadPalette(gUnknown_08DD7300, 0x10, 0xA0);
-        LoadBgTiles(1, gUnknown_08DD7360, 0x1420, 0);
+        LoadPalette(gTradeGba2_Pal, 0x10, 0xA0);
+        LoadBgTiles(1, gTradeGba_Gfx, 0x1420, 0);
         CopyToBgTilemapBuffer(1, gUnknown_08331F60, 0x1000, 0);
         CopyBgTilemapBufferToVram(1);
         gMain.state++;

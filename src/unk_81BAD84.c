@@ -7,29 +7,29 @@ const struct {
     const u16 *pltt;
 } gUnknown_08617128[] = {
     {
-        gUnknown_08DD87C0,
-        gUnknown_08DD8EE0,
-        gUnknown_08DD8780
+        gBerryFixGameboy_Gfx,
+        gBerryFixGameboy_Tilemap,
+        gBerryFixGameboy_Pal
     }, {
-        gUnknown_08DD90E0,
-        gUnknown_08DD9718,
-        gUnknown_08DD9080
+        gBerryFixGameboyLogo_Gfx,
+        gBerryFixGameboyLogo_Tilemap,
+        gBerryFixGameboyLogo_Pal
     }, {
-        gUnknown_08DD98B4,
-        gUnknown_08DD9E58,
-        gUnknown_08DD9874
+        gBerryFixGbaTransfer_Gfx,
+        gBerryFixGbaTransfer_Tilemap,
+        gBerryFixGbaTransfer_Pal
     }, {
-        gUnknown_08DDA02C,
-        gUnknown_08DDA63C,
-        gUnknown_08DD9FEC
+        gBerryFixGbaTransferHighlight_Gfx,
+        gBerryFixGbaTransferHighlight_Tilemap,
+        gBerryFixGbaTransferHighlight_Pal
     }, {
-        gUnknown_08DDA840,
-        gUnknown_08DDAE40,
-        gUnknown_08DDA800
+        gBerryFixGbaTransferError_Gfx,
+        gBerryFixGbaTransferError_Tilemap,
+        gBerryFixGbaTransferError_Pal
     }, {
-        gUnknown_08DDB020,
-        gUnknown_08DDB2C4,
-        gUnknown_08DDAFE0
+        gBerryFixWindow_Gfx,
+        gBerryFixWindow_Tilemap,
+        gBerryFixWindow_Pal
     }
 };
 
