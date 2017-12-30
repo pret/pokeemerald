@@ -148,7 +148,7 @@ Task_BattleTransitionMain: @ 8145FA8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8A98
+	ldr r5, =sMainTransitionPhases
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -180,7 +180,7 @@ sub_8145FE0: @ 8145FE0
 	ldr r1, =gPlttBufferUnfaded
 	ldr r2, =0x04000100
 	bl CpuSet
-	ldr r1, =gUnknown_085C8948
+	ldr r1, =sPhase1_Tasks
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -210,7 +210,7 @@ _0814602A:
 sub_8146030: @ 8146030
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r1, =gUnknown_085C8948
+	ldr r1, =sPhase1_Tasks
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -239,7 +239,7 @@ _0814605C:
 sub_8146064: @ 8146064
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r1, =gUnknown_085C89F0
+	ldr r1, =sPhase2_Tasks
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -263,7 +263,7 @@ sub_814608C: @ 814608C
 	adds r4, r0, 0
 	movs r0, 0
 	strh r0, [r4, 0x26]
-	ldr r1, =gUnknown_085C89F0
+	ldr r1, =sPhase2_Tasks
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	lsls r0, 2
@@ -331,7 +331,7 @@ sub_814610C: @ 814610C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8AA8
+	ldr r5, =sPhase2_Transition_Blur_Funcs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -458,7 +458,7 @@ sub_8146204: @ 8146204
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8AB4
+	ldr r5, =sPhase2_Transition_Swirl_Funcs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -629,7 +629,7 @@ sub_8146384: @ 8146384
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8ABC
+	ldr r5, =sPhase2_Transition_Shuffle_Funcs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1069,10 +1069,10 @@ sub_814670C: @ 814670C
 	ldr r1, [sp, 0x4]
 	ldr r2, =0x01000400
 	bl CpuSet
-	ldr r0, =gUnknown_085BAED0
+	ldr r0, =sTeamAqua_Tileset
 	ldr r1, [sp, 0x8]
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_085BAEB0
+	ldr r0, =sEvilTeam_Palette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -1105,10 +1105,10 @@ sub_8146760: @ 8146760
 	ldr r1, [sp, 0x4]
 	ldr r2, =0x01000400
 	bl CpuSet
-	ldr r0, =gUnknown_085BB4A4
+	ldr r0, =sTeamMagma_Tileset
 	ldr r1, [sp, 0x8]
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_085BAEB0
+	ldr r0, =sEvilTeam_Palette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -1173,7 +1173,7 @@ sub_8146800: @ 8146800
 	ldr r2, =0x01000400
 	mov r0, sp
 	bl CpuSet
-	ldr r0, =gUnknown_085B9330
+	ldr r0, =sBigPokeball_Tileset
 	ldr r1, [sp, 0x8]
 	movs r2, 0xB0
 	lsls r2, 2
@@ -1204,7 +1204,7 @@ sub_8146854: @ 8146854
 	add r1, sp, 0xC
 	add r0, sp, 0x8
 	bl sub_8149F58
-	ldr r5, =gUnknown_085C9020
+	ldr r5, =sBigPokeball_Tilemap
 	movs r1, 0
 	ldr r0, [sp, 0x8]
 	mov r9, r0
@@ -1274,7 +1274,7 @@ sub_81468E4: @ 81468E4
 	add r1, sp, 0xC
 	add r0, sp, 0x8
 	bl sub_8149F58
-	ldr r0, =gUnknown_085BB248
+	ldr r0, =sTeamAqua_Tilemap
 	ldr r1, [sp, 0x8]
 	bl LZ77UnCompVram
 	ldr r0, =gUnknown_02038C28
@@ -1307,7 +1307,7 @@ sub_814692C: @ 814692C
 	add r1, sp, 0xC
 	add r0, sp, 0x8
 	bl sub_8149F58
-	ldr r0, =gUnknown_085BB930
+	ldr r0, =sTeamMagma_Tilemap
 	ldr r1, [sp, 0x8]
 	bl LZ77UnCompVram
 	ldr r0, =gUnknown_02038C28
@@ -2074,7 +2074,7 @@ sub_8146F94: @ 8146F94
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8B7C
+	ldr r5, =sPhase2_Transition_PokeballsTrail_Funcs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2105,7 +2105,7 @@ sub_8146FCC: @ 8146FCC
 	add r0, sp, 0x4
 	add r1, sp, 0x8
 	bl sub_8149F58
-	ldr r0, =gUnknown_085B98B0
+	ldr r0, =sPokeballTrail_Tileset
 	ldr r1, [sp, 0x8]
 	movs r2, 0x20
 	bl CpuSet
@@ -2137,12 +2137,12 @@ sub_8147018: @ 8147018
 	push {r7}
 	sub sp, 0x10
 	adds r7, r0, 0
-	ldr r1, =gUnknown_085C8B88
+	ldr r1, =sUnknown_085C8B88
 	mov r0, sp
 	movs r2, 0x4
 	bl memcpy
 	add r4, sp, 0x4
-	ldr r1, =gUnknown_085C8B8C
+	ldr r1, =sUnknown_085C8B8C
 	adds r0, r4, 0
 	movs r2, 0xA
 	bl memcpy
@@ -2270,7 +2270,7 @@ sub_814713C: @ 814713C
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	ldr r1, =gUnknown_085C8B96
+	ldr r1, =sUnknown_085C8B96
 	mov r0, sp
 	movs r2, 0x4
 	bl memcpy
@@ -2370,7 +2370,7 @@ sub_8147204: @ 8147204
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8B9C
+	ldr r5, =sPhase2_Transition_Clockwise_BlackFade_Funcs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2997,7 +2997,7 @@ sub_8147718: @ 8147718
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8BB8
+	ldr r5, =sPhase2_Transition_Ripple_Funcs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -3214,7 +3214,7 @@ sub_81478EC: @ 81478EC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8BC0
+	ldr r5, =sPhase2_Transition_Wave_Funcs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -3532,7 +3532,7 @@ sub_8147B84: @ 8147B84
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8BCC
+	ldr r5, =sPhase2_Mugshot_Transition_Funcs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -3608,15 +3608,15 @@ sub_8147C24: @ 8147C24
 	push {r7}
 	sub sp, 0x8
 	mov r8, r0
-	ldr r6, =gUnknown_085C94D0
+	ldr r6, =sMugshotsTilemap
 	add r1, sp, 0x4
 	mov r0, sp
 	bl sub_8149F58
-	ldr r0, =gUnknown_085B9AF0
+	ldr r0, =sUnknown_085B9AF0
 	ldr r1, [sp, 0x4]
 	movs r2, 0xF0
 	bl CpuSet
-	ldr r1, =gUnknown_085C8FDC
+	ldr r1, =sOpponentMugshotsPals
 	mov r2, r8
 	movs r3, 0x26
 	ldrsh r0, [r2, r3]
@@ -3626,7 +3626,7 @@ sub_8147C24: @ 8147C24
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, =gUnknown_085C8FF0
+	ldr r1, =sPlayerMugshotsPals
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -4318,13 +4318,13 @@ sub_8148218: @ 8148218
 	push {r5,r6}
 	sub sp, 0x4
 	adds r4, r0, 0
-	ldr r0, =gUnknown_085C8BF4
+	ldr r0, =sMugshotsTrainerPicIDsTable
 	movs r2, 0x26
 	ldrsh r1, [r4, r2]
 	mov r8, r1
 	add r0, r8
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_085C8C0E
+	ldr r2, =sMugshotsOpponentCoords
 	lsls r1, 2
 	mov r8, r1
 	adds r1, r2
@@ -4439,7 +4439,7 @@ sub_8148218: @ 8148218
 	ldrb r0, [r5, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	ldr r2, =gUnknown_085C8BFA
+	ldr r2, =sMugshotsOpponentRotationScales
 	mov r3, r8
 	adds r1, r3, r2
 	movs r4, 0
@@ -4473,7 +4473,7 @@ sub_8148218: @ 8148218
 sub_8148380: @ 8148380
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, =gUnknown_085C8C24
+	ldr r5, =sUnknown_085C8C24
 _08148386:
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -4502,12 +4502,12 @@ sub_81483AC: @ 81483AC
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
-	ldr r1, =gUnknown_085C8C40
+	ldr r1, =sUnknown_085C8C40
 	mov r0, sp
 	movs r2, 0x4
 	bl memcpy
 	add r4, sp, 0x4
-	ldr r1, =gUnknown_085C8C44
+	ldr r1, =sUnknown_085C8C44
 	adds r0, r4, 0
 	movs r2, 0x4
 	bl memcpy
@@ -5855,7 +5855,7 @@ sub_8148E8C: @ 8148E8C
 	add r0, sp, 0x4
 	add r1, sp, 0x8
 	bl sub_8149F58
-	ldr r4, =gUnknown_085BACD0
+	ldr r4, =sShrinkingBoxTileset
 	ldr r1, [sp, 0x8]
 	adds r0, r4, 0
 	movs r2, 0x10
@@ -6401,7 +6401,7 @@ sub_81492B4: @ 81492B4
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
-	ldr r0, =gUnknown_085BF540
+	ldr r0, =gUnknown_085BF4A0+0xA0
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -6780,7 +6780,7 @@ sub_8149628: @ 8149628
 	push {r4-r6,lr}
 	sub sp, 0x10
 	adds r6, r0, 0
-	ldr r1, =gUnknown_085C8DA0
+	ldr r1, =sUnknown_085C8DA0
 	mov r0, sp
 	movs r2, 0x10
 	bl memcpy
@@ -7163,7 +7163,7 @@ sub_814995C: @ 814995C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8DB0
+	ldr r5, =sUnknown_085C8DB0
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -7194,7 +7194,7 @@ sub_8149994: @ 8149994
 	add r0, sp, 0x4
 	add r1, sp, 0x8
 	bl sub_8149F58
-	ldr r0, =gUnknown_085BACD0
+	ldr r0, =sShrinkingBoxTileset
 	ldr r1, [sp, 0x8]
 	movs r2, 0x10
 	bl CpuSet
@@ -7241,7 +7241,7 @@ sub_81499E8: @ 81499E8
 	movs r1, 0xC
 	ldrsh r0, [r4, r1]
 	lsls r0, 5
-	ldr r1, =gUnknown_085BACD0
+	ldr r1, =sShrinkingBoxTileset
 	adds r0, r1
 	ldr r1, [sp]
 	movs r2, 0x10
@@ -7294,7 +7294,7 @@ sub_8149A6C: @ 8149A6C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8DBC
+	ldr r5, =sPhase2_Transition_Shards_Funcs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -7372,7 +7372,7 @@ sub_8149B08: @ 8149B08
 	ldr r0, =sTransitionStructPtr
 	ldr r0, [r0]
 	adds r0, 0x24
-	ldr r6, =gUnknown_085C8DD0
+	ldr r6, =sUnknown_085C8DD0
 	mov r2, r8
 	movs r3, 0xA
 	ldrsh r1, [r2, r3]
@@ -7571,7 +7571,7 @@ _08149CAC:
 	ldrh r0, [r2, 0x8]
 	adds r0, 0x1
 	strh r0, [r2, 0x8]
-	ldr r1, =gUnknown_085C8E16
+	ldr r1, =sUnknown_085C8E16
 	movs r3, 0xA
 	ldrsh r0, [r2, r3]
 	subs r0, 0x1
@@ -7738,7 +7738,7 @@ sub_8149DFC: @ 8149DFC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_085C8E24
+	ldr r5, =sPhase1_TransitionAll_Funcs
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0

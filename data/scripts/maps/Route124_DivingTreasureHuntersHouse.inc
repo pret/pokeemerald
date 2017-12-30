@@ -3,7 +3,7 @@ Route124_DivingTreasureHuntersHouse_MapScripts:: @ 8270A28
 	.byte 0
 
 Route124_DivingTreasureHuntersHouse_MapScript1_270A2E: @ 8270A2E
-	setflag FLAG_0x8BB
+	setflag FLAG_LANDMARK_HUNTERS_HOUSE
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270A32:: @ 8270A32

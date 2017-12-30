@@ -3,7 +3,7 @@ ShoalCave_LowTideEntranceRoom_MapScripts:: @ 8236DBA
 	.byte 0
 
 ShoalCave_LowTideEntranceRoom_MapScript1_236DC0: @ 8236DC0
-	special sub_8137988
+	special UpdateShoalTideFlag
 	checkflag FLAG_SYS_SHOAL_TIDE
 	goto_eq ShoalCave_LowTideEntranceRoom_EventScript_236DD1
 	goto ShoalCave_LowTideEntranceRoom_EventScript_236DD5

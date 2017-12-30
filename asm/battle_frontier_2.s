@@ -11329,7 +11329,7 @@ _081A03E6:
 	bls _081A03E6
 	movs r5, 0
 	ldr r7, =gSaveBlock2Ptr
-	ldr r6, =gUnknown_086109A4
+	ldr r6, =gUnknown_08610970+0x34
 _081A0416:
 	ldr r0, [r7]
 	mov r12, r0
@@ -11490,7 +11490,7 @@ _081A0540:
 	mov r12, r1
 	adds r5, r3, 0
 	adds r5, 0xB0
-	ldr r0, =gUnknown_086109A4
+	ldr r0, =gUnknown_08610970+0x34
 	mov r8, r0
 _081A0560:
 	adds r0, r3, 0
@@ -17495,7 +17495,7 @@ _081A38A8:
 	lsrs r3, r0, 24
 	movs r0, 0x58
 	muls r0, r3
-	ldr r1, =gUnknown_086109BA
+	ldr r1, =gUnknown_08610970+0x4A
 _081A38C4:
 	adds r0, r1
 	bl ConvertBattleFrontierTrainerSpeechToString
@@ -17516,7 +17516,7 @@ _081A38D4:
 	lsrs r3, r0, 27
 	movs r0, 0x58
 	muls r0, r3
-	ldr r1, =gUnknown_086109BA
+	ldr r1, =gUnknown_08610970+0x4A
 	adds r0, r1
 	bl ConvertBattleFrontierTrainerSpeechToString
 _081A38F8:
@@ -31102,7 +31102,7 @@ sub_81AA96C: @ 81AA96C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r3, 0
-	ldr r2, =gUnknown_08613655
+	ldr r2, =gUnknown_08613650+0x5
 	mov r12, r2
 	movs r7, 0x7
 _081AA994:

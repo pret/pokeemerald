@@ -3,7 +3,7 @@ Route114_LanettesHouse_MapScripts:: @ 822B2C8
 	.byte 0
 
 Route114_LanettesHouse_MapScript1_22B2CE: @ 822B2CE
-	setflag FLAG_0x8A5
+	setflag FLAG_LANDMARK_LANETTES_HOUSE
 	end
 
 Route114_LanettesHouse_EventScript_22B2D2:: @ 822B2D2

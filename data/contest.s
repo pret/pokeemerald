@@ -10,55 +10,143 @@ gUnknown_08587A6C:: @ 8587A6C
 gUnknown_08587A70:: @ 8587A70
 	.byte 0x24, 0x4c, 0x74, 0x9c
 
+	.align 2
 gUnknown_08587A74:: @ 8587A74
-	.incbin "baserom.gba", 0x587a74, 0x5c
+	obj_tiles gUnknown_08C19450, 0x0020, 0x4e20
 
-gUnknown_08587AD0:: @ 8587AD0
-	.incbin "baserom.gba", 0x587ad0, 0x18
+	.align 2
+gOamData_8587A7C:: @ 8587A7C
+	.2byte 0x0000
+	.2byte 0x0000
+	.2byte 0x0000
 
+	.align 2
+gSpriteAffineAnim_8587A84:: @ 8587A84
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8587A94:: @ 8587A94
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0xFFF6, 0xFFF6, -20, 20
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8587AAC:: @ 8587AAC
+	obj_rot_scal_anim_frame 0x38, 0x38, 0, 0
+	obj_rot_scal_anim_frame 0xA, 0xA, 20, 20
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnimTable_8587AC4:: @ 8587AC4
+	.4byte gSpriteAffineAnim_8587A84
+	.4byte gSpriteAffineAnim_8587A94
+	.4byte gSpriteAffineAnim_8587AAC
+
+	.align 2
+gSpriteTemplate_8587AD0:: @ 8587AD0
+	spr_template 0x4e20, 0xabe0, gOamData_8587A7C, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8587AC4, SpriteCallbackDummy
+
+	.align 2
 gUnknown_08587AE8:: @ 8587AE8
-	.incbin "baserom.gba", 0x587ae8, 0x20
+	obj_tiles gContestNextTurnGfx, 0x0100, 0x4e22
+	obj_tiles gContestNextTurnGfx, 0x0100, 0x4e23
+	obj_tiles gContestNextTurnGfx, 0x0100, 0x4e24
+	obj_tiles gContestNextTurnGfx, 0x0100, 0x4e25
 
+	.align 2
 gUnknown_08587B08:: @ 8587B08
-	.incbin "baserom.gba", 0x587b08, 0x10
+	obj_pal gContestPal, 0x4e22
 
-gUnknown_08587B18:: @ 8587B18
-	.incbin "baserom.gba", 0x587b18, 0x68
+	.align 2
+gOamData_8587B10:: @ 8587B10
+	.2byte 0x4000
+	.2byte 0x4000
+	.2byte 0x0000
 
-gUnknown_08587B80:: @ 8587B80
-	.incbin "baserom.gba", 0x587b80, 0x30
+	.align 2
+gSpriteTemplate_8587B18:: @ 8587B18
+	spr_template 0x4e22, 0x4e22, gOamData_8587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x4e23, 0x4e22, gOamData_8587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x4e24, 0x4e22, gOamData_8587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0x4e25, 0x4e22, gOamData_8587B10, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
+gSubspriteTable_8587B78:: @ 8587B78
+	subsprite -28,  -4, 0,   0, 32x8
+	subsprite   4,  -4, 0,   4, 32x8
+
+	.align 2
+gSubspriteTables_8587B80:: @ 8587B80
+	.4byte 2, gSubspriteTable_8587B78
+
+	.align 2
+gUnknown_08587B88:: @ 8587B88
+	obj_tiles gUnknown_08C19168, 0x0180, 0xabe1
+
+	.align 2
+gOamData_8587B90:: @ 8587B90
+	.2byte 0x0000
+	.2byte 0x4000
+	.2byte 0x0000
+
+	.align 2
+gSpriteTemplate_8587B98:: @ 8587B98
+	spr_template 0xabe1, 0xabe0, gOamData_8587B90, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+	.align 2
 gUnknown_08587BB0:: @ 8587BB0
-	.incbin "baserom.gba", 0x587bb0, 0x8
+	obj_tiles gContestApplauseGfx, 0x0400, 0xabe2
 
+	.align 2
 gUnknown_08587BB8:: @ 8587BB8
-	.incbin "baserom.gba", 0x587bb8, 0x10
+	obj_pal gContestPal, 0xabe2
 
-gUnknown_08587BC8:: @ 8587BC8
-	.incbin "baserom.gba", 0x587bc8, 0x20
+	.align 2
+gOamData_8587BC0:: @ 8587BC0
+	.2byte 0x4000
+	.2byte 0xC000
+	.2byte 0x0000
 
-gUnknown_08587BE8:: @ 8587BE8
-	.incbin "baserom.gba", 0x587be8, 0x18
+	.align 2
+gSpriteTemplate_8587BC8:: @ 8587BC8
+	spr_template 0xabe2, 0xabe2, gOamData_8587BC0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
+gOamData_8587BE0:: @ 8587BE0
+	.2byte 0x0000
+	.2byte 0xC000
+	.2byte 0x2C00
+
+	.align 2
+gSpriteTemplate_8587BE8:: @ 8587BE8
+	spr_template 0x4e21, 0x4e21, gOamData_8587BE0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+	.align 2
 gUnknown_08587C00:: @ 8587C00
-	.incbin "baserom.gba", 0x587c00, 0x8
+	obj_tiles gContestJudgeGfx, 0x0800, 0x4e21
 
+	.align 2
 gUnknown_08587C08:: @ 8587C08
-	.incbin "baserom.gba", 0x587c08, 0x8
+	obj_tiles gContestJudgeSymbolsGfx, 0x0380, 0xabe0
 
+	.align 2
 gUnknown_08587C10:: @ 8587C10
-	.incbin "baserom.gba", 0x587c10, 0x8
+	obj_pal gContest3Pal, 0xabe0
 
-gUnknown_08587C18:: @ 8587C18
-	.incbin "baserom.gba", 0x587c18, 0x18
+	.align 2
+gSpriteTemplate_8587C18:: @ 8587C18
+	spr_template 0xabe0, 0xabe0, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_08587C30:: @ 8587C30
-	.incbin "baserom.gba", 0x587c30, 0x20
+	.incbin "graphics/unknown/unknown_587C30.gbapal"
 
 @ 8587C50
 	.include "data/text/contest_text_pointers.inc"
 
-@ 8587D5C
+	.align 2
+gUnknown_08587D5C:: @ 8587D5C
 	.4byte gText_0827D5C1
 	.4byte gText_0827D5DC
 	.4byte gText_0827D600
@@ -73,6 +161,7 @@ gUnknown_08587C30:: @ 8587C30
 	.4byte gText_0827D706
 	.4byte gText_0827D71D
 
+	.align 2
 gUnknown_08587D90:: @ 8587D90
 	.4byte gText_0827D743
 	.4byte gText_0827D764
@@ -107,6 +196,7 @@ gUnknown_08587D90:: @ 8587D90
 	.4byte gText_0827DB1F
 	.4byte gText_0827DB4E
 
+	.align 2
 gUnknown_08587E10:: @ 8587E10
 	.4byte gText_827DB75
 	.4byte gText_827DBB0
@@ -171,6 +261,7 @@ gUnknown_08587E10:: @ 8587E10
 	.4byte gText_0827E6C4
 	.4byte gText_0827E7BA
 
+	.align 2
 gUnknown_08587F08:: @ 8587F08
 	.4byte gText_0827E85F
 	.4byte gText_0827E868
@@ -178,6 +269,7 @@ gUnknown_08587F08:: @ 8587F08
 	.4byte gText_0827E878
 	.4byte gText_0827E882
 
+	.align 2
 gUnknown_08587F1C:: @ 8587F1C
 	.4byte gText_0827E894
 	.4byte gText_0827E89E
@@ -186,33 +278,89 @@ gUnknown_08587F1C:: @ 8587F1C
 	.4byte gText_0827E8BF
 	.4byte gText_0827E8CA
 
+	.align 2
 gUnknown_08587F34:: @ 8587F34
-	.incbin "baserom.gba", 0x587f34, 0x10
+	.4byte 0x00000580, 0x000015e9, 0x000005c2, 0x000031a3
 
+	.align 2
 gUnknown_08587F44:: @ 8587F44
-	.incbin "baserom.gba", 0x587f44, 0x60
+	window_template 0x00, 0x12, 0x00, 0x0c, 0x02, 0x0f, 0x0200
+	window_template 0x00, 0x12, 0x05, 0x0c, 0x02, 0x0f, 0x0218
+	window_template 0x00, 0x12, 0x0a, 0x0c, 0x02, 0x0f, 0x0230
+	window_template 0x00, 0x12, 0x0f, 0x0c, 0x02, 0x0f, 0x0248
+	window_template 0x00, 0x01, 0x0f, 0x11, 0x04, 0x0f, 0x0260
+	window_template 0x00, 0x01, 0x1f, 0x09, 0x02, 0x0f, 0x02a4
+	window_template 0x00, 0x01, 0x21, 0x09, 0x02, 0x0f, 0x02b6
+	window_template 0x00, 0x01, 0x23, 0x09, 0x02, 0x0f, 0x02c8
+	window_template 0x00, 0x01, 0x25, 0x09, 0x02, 0x0f, 0x02da
+	window_template 0x00, 0x10, 0x1f, 0x01, 0x02, 0x0f, 0x02ec
+	window_template 0x00, 0x0b, 0x23, 0x12, 0x04, 0x0f, 0x02ee
+	window_template_terminator
 
+	.align 2
 gUnknown_08587FA4:: @ 8587FA4
 	.incbin "baserom.gba", 0x587fa4, 0x100
 
+	.align 2
 gUnknown_085880A4:: @ 85880A4
 	.incbin "baserom.gba", 0x5880a4, 0x1740
 
+	.align 2
 gUnknown_085897E4:: @ 85897E4
-	.incbin "baserom.gba", 0x005897e4, 0xc0
+	.incbin "baserom.gba", 0x5897e4, 0xc0
 
 gUnknown_085898A4:: @ 85898A4
-	.incbin "baserom.gba", 0x5898a4, 0x60
+	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02
+	.byte 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02
 
+	.align 2
 gUnknown_08589904:: @ 8589904
-	.incbin "baserom.gba", 0x589904, 0x20
+	obj_tiles gBlankGfxCompressed, 0x1000, 0x80e8
+	obj_tiles gBlankGfxCompressed, 0x1000, 0x80e9
+	obj_tiles gBlankGfxCompressed, 0x1000, 0x80ea
+	obj_tiles gBlankGfxCompressed, 0x1000, 0x80eb
 
-gUnknown_08589924:: @ 8589924
-	.incbin "baserom.gba", 0x589924, 0x68
+	.align 2
+gUnknown_08589924:: @ 8589924 Yup this is super dangerous but that's how it is here
+	obj_pal gHeap + 0x1A0A4, 0x80e8
+	obj_pal gHeap + 0x1A0C4, 0x80e9
+	obj_pal gHeap + 0x1A0E4, 0x80ea
+	obj_pal gHeap + 0x1A104, 0x80eb
 
-gUnknown_0858998C:: @ 858998C
-	.incbin "baserom.gba", 0x58998c, 0x60
+	.align 2
+gOamData_8589944:: @ 8589944
+	.2byte 0x0700
+	.2byte 0xC000
+	.2byte 0x0000
 
+	.align 2
+gSpriteAffineAnim_858994C:: @ 858994C
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_858995C:: @ 858995C
+	obj_rot_scal_anim_frame 0x3, 0x3, 0, 15
+	obj_rot_scal_anim_frame 0xFFFD, 0xFFFD, 0, 15
+	obj_rot_scal_anim_frame 0x3, 0x3, 0, 15
+	obj_rot_scal_anim_frame 0xFFFD, 0xFFFD, 0, 15
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnimTable_8589984:: @ 8589984
+	.4byte gSpriteAffineAnim_858994C
+	.4byte gSpriteAffineAnim_858995C
+
+	.align 2
+gSpriteTemplate_858998C:: @ 858998C
+	spr_template 0x80e8, 0x80e8, gOamData_8589944, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8589984, SpriteCallbackDummy
+	spr_template 0x80e9, 0x80e9, gOamData_8589944, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8589984, SpriteCallbackDummy
+	spr_template 0x80ea, 0x80ea, gOamData_8589944, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8589984, SpriteCallbackDummy
+	spr_template 0x80eb, 0x80eb, gOamData_8589944, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_8589984, SpriteCallbackDummy
+
+	.align 2
 gUnknown_085899EC:: @ 85899EC
-	.incbin "baserom.gba", 0x5899ec, 0x1c
+	.2byte 0x0001, 0xffff, 0x0000, 0x0001, 0xffff, 0x00ff, 0x0001, 0xffff, 0x00ff, 0x0001, 0xff00, 0x00ff, 0x0001, 0x0000
+
 

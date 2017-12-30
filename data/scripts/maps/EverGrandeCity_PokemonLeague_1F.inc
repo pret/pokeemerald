@@ -5,7 +5,7 @@ EverGrandeCity_PokemonLeague_1F_MapScripts:: @ 82295D2
 
 EverGrandeCity_PokemonLeague_1F_MapScript1_2295DD: @ 82295DD
 	setrespawn 20
-	setflag FLAG_SYS_POKEMON_LEAGUE_FLY
+	setflag FLAG_LANDMARK_POKEMON_LEAGUE
 	checkflag FLAG_0x107
 	call_if 0, EverGrandeCity_PokemonLeague_1F_EventScript_2295ED
 	end

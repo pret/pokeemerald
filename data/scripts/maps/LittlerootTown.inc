@@ -246,7 +246,7 @@ LittlerootTown_EventScript_1E8034:: @ 81E8034
 	end
 
 LittlerootTown_EventScript_1E805D:: @ 81E805D
-	special sub_8138B10
+	special GetPlayerBigGuyGirlString
 	msgbox LittlerootTown_Text_1E8C3A, 4
 	closemessage
 	applymovement 1, LittlerootTown_Movement_2725A2
@@ -256,7 +256,7 @@ LittlerootTown_EventScript_1E805D:: @ 81E805D
 	end
 
 LittlerootTown_EventScript_1E807A:: @ 81E807A
-	special sub_8138B10
+	special GetPlayerBigGuyGirlString
 	msgbox LittlerootTown_Text_1E8CE3, 4
 	release
 	end
@@ -364,7 +364,7 @@ LittlerootTown_EventScript_1E811F:: @ 81E811F
 	waitmovement 0
 	applymovement 255, LittlerootTown_Movement_2725A4
 	waitmovement 0
-	special sub_8138B10
+	special GetPlayerBigGuyGirlString
 	msgbox LittlerootTown_Text_1E8C3A, 4
 	closemessage
 	applymovement 1, LittlerootTown_Movement_2725A2

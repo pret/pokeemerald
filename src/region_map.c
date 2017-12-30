@@ -21,6 +21,7 @@
 #include "m4a.h"
 #include "field_effect.h"
 #include "region_map.h"
+#include "constants/region_map_sections.h"
 
 #define MAP_WIDTH 28
 #define MAP_HEIGHT 15
@@ -306,7 +307,7 @@ static const struct {
 } gUnknown_085A1EDC[] = {
     gUnknown_085A1ED4,
     MAPSEC_EVER_GRANDE_CITY,
-    FLAG_SYS_POKEMON_LEAGUE_FLY
+    FLAG_LANDMARK_POKEMON_LEAGUE
 };
 
 static const struct BgTemplate gUnknown_085A1EE4[] = {
@@ -327,7 +328,7 @@ static const struct SpritePalette gUnknown_085A1F10 = {
 };
 
 static const u16 sUnknown_085A1F18[][2] = {
-    {FLAG_UNLOCK_BATTLE_FRONTIER, MAPSEC_BATTLE_FRONTIER},
+    {FLAG_LANDMARK_BATTLE_FRONTIER, MAPSEC_BATTLE_FRONTIER},
     {-1, MAPSEC_NONE}
 };
 
@@ -1126,9 +1127,9 @@ static u8 get_flagnr_blue_points(u16 mapSecId)
         case MAPSEC_EVER_GRANDE_CITY:
             return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         case MAPSEC_BATTLE_FRONTIER:
-            return FlagGet(FLAG_UNLOCK_BATTLE_FRONTIER) ? MAPSECTYPE_BATTLE_FRONTIER : MAPSECTYPE_NONE;
+            return FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER) ? MAPSECTYPE_BATTLE_FRONTIER : MAPSECTYPE_NONE;
         case MAPSEC_SOUTHERN_ISLAND:
-            return FlagGet(FLAG_UNLOCK_SOUTHERN_ISLAND) ? MAPSECTYPE_PLAIN : MAPSECTYPE_NONE;
+            return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? MAPSECTYPE_PLAIN : MAPSECTYPE_NONE;
         default:
             return MAPSECTYPE_PLAIN;
     }
@@ -1916,7 +1917,7 @@ static void sub_8124E0C(void)
                             sub_8084CCC(gSaveBlock2Ptr->playerGender == MALE ? 0x0C : 0x0D);
                             break;
                         case MAPSEC_EVER_GRANDE_CITY:
-                            sub_8084CCC(FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && gUnknown_0203A148->regionMap.posWithinMapSec == 0 ? 0x14 : 0x0B);
+                            sub_8084CCC(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && gUnknown_0203A148->regionMap.posWithinMapSec == 0 ? 0x14 : 0x0B);
                             break;
                         default:
                             if (sUnknown_085A1E3C[gUnknown_0203A148->regionMap.mapSecId][2] != 0)

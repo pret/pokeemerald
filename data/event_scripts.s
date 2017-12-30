@@ -1481,7 +1481,7 @@ OldaleTown_PokemonCenter_1F_EventScript_271A19:: @ 8271A19
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_271A43:: @ 8271A43
-	specialvar VAR_RESULT, sub_8139540
+	specialvar VAR_RESULT, IsPokerusInParty
 	compare VAR_RESULT, 1
 	goto_eq OldaleTown_PokemonCenter_1F_EventScript_271A5F
 	compare VAR_RESULT, 0
@@ -1724,7 +1724,7 @@ EventScript_271D2A:: @ 8271D2A
 	copyvar VAR_0x8004, VAR_0x8008
 	msgbox gUnknown_08272A9A, 4
 	special sub_80EDCE8
-	special sub_8138BC8
+	special SetFlagInVar
 	releaseall
 	end
 
@@ -1761,7 +1761,7 @@ EventScript_271D89:: @ 8271D89
 EventScript_271D92:: @ 8271D92
 	lockall
 	setvar VAR_0x8004, 0
-	special sp0D9_ComputerRelated
+	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox Text_27265A, 4
 	goto EventScript_271DAC
@@ -1815,7 +1815,7 @@ EventScript_271E3E:: @ 8271E3E
 EventScript_271E47:: @ 8271E47
 	setvar VAR_0x8004, 0
 	playse SE_PC_OFF
-	special sub_8138E20
+	special DoPCTurnOffEffect
 	releaseall
 	end
 
@@ -1823,7 +1823,7 @@ EventScript_271E54:: @ 8271E54
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if 0, EventScript_271E47
 	playse SE_PC_LOGIN
-	special sub_8137C28
+	special AccessHallOfFamePC
 	waitstate
 	goto EventScript_271DBC
 	end
@@ -2202,7 +2202,7 @@ EventScript_27208F:: @ 827208F
 	lockall
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1F8820, 4
 	fadescreen 1
-	special sub_8138C94
+	special FieldShowRegionMap
 	waitstate
 	releaseall
 	end
@@ -2292,7 +2292,7 @@ Route101_EventScript_27216F:: @ 827216F
 
 Route101_EventScript_272179:: @ 8272179
 	copyvar VAR_0x8004, VAR_0x8009
-	special sub_8137C10
+	special ShowPokedexRatingMessage
 	waitmessage
 	waitbuttonpress
 	return
@@ -2300,7 +2300,7 @@ Route101_EventScript_272179:: @ 8272179
 EverGrandeCity_ChampionsRoom_EventScript_272184:: @ 8272184
 Route101_EventScript_272184:: @ 8272184
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, sub_8137A4C
+	specialvar VAR_RESULT, ScriptGetPokedexInfo
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
 	copyvar VAR_0x800A, VAR_RESULT
@@ -2311,7 +2311,7 @@ Route101_EventScript_272184:: @ 8272184
 	compare VAR_0x800A, 0
 	goto_eq Route101_EventScript_27374E
 	setvar VAR_0x8004, 1
-	specialvar VAR_RESULT, sub_8137A4C
+	specialvar VAR_RESULT, ScriptGetPokedexInfo
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
 	buffernumberstring 0, VAR_0x8008
@@ -4594,7 +4594,7 @@ EventScript_275BE8:: @ 8275BE8
 	setfieldeffectargument 0, VAR_RESULT
 	setorcopyvar VAR_0x8004, VAR_RESULT
 	lockall
-	special sub_8139200
+	special GetSecretBaseNearbyMapName
 	msgbox Text_276A3D, 5
 	compare VAR_RESULT, 0
 	goto_eq EventScript_275CDE
@@ -10192,54 +10192,71 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	step_31
 	step_end
 
+gText_082B6EA5:: @ 82B6EA5
 	.string "Um, I’m {STR_VAR_1}’s no. {STR_VAR_2} apprentice.\n"
 	.string "Snivel… This tension is getting to me…$"
 
+gText_082B6EEC:: @ 82B6EEC
 	.string "I’m {STR_VAR_1}’s no. {STR_VAR_2} apprentice!\n"
 	.string "Here we come!$"
 
+gText_082B6F16:: @ 82B6F16
 	.string "I’m the no. {STR_VAR_2} apprentice of {STR_VAR_1}!\n"
 	.string "Accept my challenge!$"
 
+gText_082B6F4C:: @ 82B6F4C
 	.string "Um… I’m {STR_VAR_1}’s no. {STR_VAR_2} apprentice…\n"
 	.string "Do you think someone like me can win?$"
 
+gText_082B6F92:: @ 82B6F92
 	.string "I’m {STR_VAR_1}’s no. {STR_VAR_2} apprentice!\n"
 	.string "I’ll let you challenge me!$"
 
+gText_082B6FC9:: @ 82B6FC9
 	.string "I’m horribly busy, but I also happen\n"
 	.string "to be {STR_VAR_1}’s no. {STR_VAR_2} apprentice.$"
 
+gText_082B700C:: @ 82B700C
 	.string "I’m {STR_VAR_1}’s no. {STR_VAR_2} apprentice.\n"
 	.string "Glad to meet you!$"
 
+gText_082B703A:: @ 82B703A
 	.string "I serve as {STR_VAR_1}’s no. {STR_VAR_2} apprentice.\n"
 	.string "May I begin?$"
 
+gText_082B706A:: @ 82B706A
 	.string "Eek! I’m {STR_VAR_1}’s no. {STR_VAR_2} apprentice!\n"
 	.string "I’ll do my best!$"
 
+gText_082B709C:: @ 82B709C
 	.string "Yeehaw! I’m {STR_VAR_1}’s no. {STR_VAR_2} apprentice!\n"
 	.string "Put ’em up!$"
 
+gText_082B70CC:: @ 82B70CC
 	.string "I’m {STR_VAR_1}’s 1,000th apprentice!\n"
 	.string "Actually, I’m no. {STR_VAR_2}! Here goes!$"
 
+gText_082B710A:: @ 82B710A
 	.string "Yeah, I’m {STR_VAR_1}’s no. {STR_VAR_2} apprentice!\n"
 	.string "Let’s get rockin’ and a-rollin’!$"
 
+gText_082B714D:: @ 82B714D
 	.string "Yippee-yahoo! I’m what you call\n"
 	.string "{STR_VAR_1}’s no. {STR_VAR_2} apprentice!$"
 
+gText_082B7185:: @ 82B7185
 	.string "Cough! I’m {STR_VAR_1}’s no. {STR_VAR_2} apprentice.\n"
 	.string "Good to meet you! Cough!$"
 
+gText_082B71C1:: @ 82B71C1
 	.string "This is nerve-racking…\n"
 	.string "I’m the no. {STR_VAR_2} apprentice of {STR_VAR_1}.$"
 
+gText_082B71F9:: @ 82B71F9
 	.string "I am {STR_VAR_1}’s no. {STR_VAR_2} apprentice,\n"
 	.string "and that’s no lie.$"
 
+gText_082B7229:: @ 82B7229
 	.string "Are you… {PLAYER}?\n"
 	.string "Oh! Sniff…sob…\p"
 	.string "Oh! S-sorry…\n"
@@ -10251,11 +10268,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please, please, {PLAYER}!\n"
 	.string "Please teach me about POKéMON!$"
 
+gText_082B731C:: @ 82B731C
 	.string "Oh… B-but…\n"
 	.string "Snivel… Waaaaaaah!\p"
 	.string "Please!\n"
 	.string "I’m begging you, please!$"
 
+gText_082B735B:: @ 82B735B
 	.string "Oh, really? You will?\n"
 	.string "Awesome! Wicked! Awoooh!\p"
 	.string "Oh… I’m sorry…\n"
@@ -10265,6 +10284,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which would be better for me: Level 50\n"
 	.string "or the Open Level?$"
 
+gText_082B7423:: @ 82B7423
 	.string "{STR_VAR_1}?\n"
 	.string "Waaaaah!\p"
 	.string "Oh! I’m so sorry!\n"
@@ -10274,6 +10294,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thank you so much!\l"
 	.string "Please talk with me again!$"
 
+gText_082B74C1:: @ 82B74C1
 	.string "Wowee! You’re {PLAYER}, aren’t you?\n"
 	.string "You’re awesomely strong, aren’t you?\p"
 	.string "I’m {STR_VAR_1}!\n"
@@ -10282,21 +10303,25 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Can you be my teacher and tell me\l"
 	.string "lots about being a TRAINER?$"
 
+gText_082B756F:: @ 82B756F
 	.string "Aww, why?\n"
 	.string "Oh, please? Pretty please?\l"
 	.string "Please be my teacher, please!$"
 
+gText_082B75B2:: @ 82B75B2
 	.string "Yay! Great!\p"
 	.string "The first thing I wanted to ask you is\n"
 	.string "about the BATTLE TOWER!\p"
 	.string "The Level 50 and Open Level Rooms…\n"
 	.string "Which would be perfect for me?$"
 
+gText_082B763F:: @ 82B763F
 	.string "{STR_VAR_1}, huh? That’s true!\n"
 	.string "I’ll do my best there!\p"
 	.string "If we meet here again, please teach\n"
 	.string "me something else, teacher!$"
 
+gText_082B76AC:: @ 82B76AC
 	.string "Um… Are you {PLAYER}?\n"
 	.string "My name is {STR_VAR_1}.\p"
 	.string "I want to become a POKéMON TRAINER,\n"
@@ -10305,11 +10330,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "advice because you’re so famous.\p"
 	.string "{PLAYER}, could you give me advice?$"
 
+gText_082B7772:: @ 82B7772
 	.string "Oh, but…\p"
 	.string "I sincerely want to become a POKéMON\n"
 	.string "TRAINER!\p"
 	.string "Please, can you answer my questions?$"
 
+gText_082B77CE:: @ 82B77CE
 	.string "Thank you!\n"
 	.string "Here’s my first question right away!\p"
 	.string "The BATTLE TOWER has two levels,\n"
@@ -10317,11 +10344,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which level do you think is more\n"
 	.string "suitable for me?$"
 
+gText_082B7871:: @ 82B7871
 	.string "Oh, the {STR_VAR_1} challenge?\n"
 	.string "Understood!\p"
 	.string "If I have another question, I’ll come\n"
 	.string "back here for your advice!$"
 
+gText_082B78D4:: @ 82B78D4
 	.string "Oh? Huh? You’re…\n"
 	.string "No, that can’t be true.\p"
 	.string "There isn’t any way that someone\n"
@@ -10345,6 +10374,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "…Or will you be so kind as to give\n"
 	.string "me advice?$"
 
+gText_082B7B1A:: @ 82B7B1A
 	.string "I knew it…\p"
 	.string "It had to happen because I’m such\n"
 	.string "a really boring nobody…\p"
@@ -10355,6 +10385,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please, will you be so kind as to give\n"
 	.string "me advice?$"
 
+gText_082B7C13:: @ 82B7C13
 	.string "Really? I can’t believe it!\n"
 	.string "I can’t believe you’ll advise me!\l"
 	.string "I… I’m so happy…\p"
@@ -10365,6 +10396,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which course do you think even I may\n"
 	.string "have a chance at?$"
 
+gText_082B7D18:: @ 82B7D18
 	.string "{STR_VAR_1}? Okay!\n"
 	.string "But do you really think someone like\l"
 	.string "me would have a chance?\p"
@@ -10373,6 +10405,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thank you very much for spending\n"
 	.string "time with someone like me.$"
 
+gText_082B7DD4:: @ 82B7DD4
 	.string "Oh! You’re {PLAYER}{STRING 5}, aren’t you?\p"
 	.string "I’ve heard that you’re tough at\n"
 	.string "POKéMON!\p"
@@ -10385,10 +10418,12 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "I’m willing to listen to your advice.\n"
 	.string "You’ll agree, of course?$"
 
+gText_082B7EE5:: @ 82B7EE5
 	.string "Huh? Why are you refusing me?\n"
 	.string "It’s me who’s asking you!\l"
 	.string "You have to reconsider!$"
 
+gText_082B7F35:: @ 82B7F35
 	.string "Okay, so there is this something.\n"
 	.string "I want you to decide it for me.\p"
 	.string "You know that the BATTLE TOWER has\n"
@@ -10396,6 +10431,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which do you think would be good\n"
 	.string "for me, {PLAYER}{STRING 5}?$"
 
+gText_082B7FE8:: @ 82B7FE8
 	.string "Okay, {STR_VAR_1} is suitable for me?\n"
 	.string "Thank you!\p"
 	.string "Knowing that you made the decision,\n"
@@ -10404,6 +10440,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Okay, I’ll look to you for advice again.\n"
 	.string "Bye!$"
 
+gText_082B8087:: @ 82B8087
 	.string "Oh, hi, there! {PLAYER}{STRING 5}!\n"
 	.string "I know you because you’re famous!\l"
 	.string "Call me {STR_VAR_1}! Glad to meet you!\p"
@@ -10418,11 +10455,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "So, {PLAYER}{STRING 5}, how about sharing your\l"
 	.string "wisdom with me every so often?$"
 
+gText_082B822B:: @ 82B822B
 	.string "Oh, but, please?\n"
 	.string "A guy like me needs someone like\l"
 	.string "you, {PLAYER}{STRING 5}!\p"
 	.string "Honestly, I need your advice!$"
 
+gText_082B8286:: @ 82B8286
 	.string "Thank you! That’s more like it!\n"
 	.string "So, let’s start with an easy one!\p"
 	.string "You know about the BATTLE TOWER’s\n"
@@ -10431,11 +10470,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Me being a busy guy, which one should\n"
 	.string "I gear up for?$"
 
+gText_082B8356:: @ 82B8356
 	.string "{STR_VAR_1}, huh? Okay, gotcha.\n"
 	.string "I’ll find time somehow and give it a go!\p"
 	.string "…Whoops, I’d better go to work!\n"
 	.string "Thanks! See you around!$"
 
+gText_082B83CE:: @ 82B83CE
 	.string "No way! Uh-uh!\n"
 	.string "Are you maybe the real {PLAYER}?\p"
 	.string "A-hah! Awesome! I’m {STR_VAR_1},\n"
@@ -10449,10 +10490,12 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Isn’t it a great idea?\n"
 	.string "Please, I want your advice!$"
 
+gText_082B84FC:: @ 82B84FC
 	.string "Ahahaha, you can pretend to be mean,\n"
 	.string "but you can’t fool me!\l"
 	.string "You really mean okay, don’t you?$"
 
+gText_082B8559:: @ 82B8559
 	.string "Yay! I knew you’d have a big heart,\n"
 	.string "{PLAYER}!\p"
 	.string "What should I ask you first?\n"
@@ -10464,6 +10507,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Level 50 or Open Level?\n"
 	.string "Which suits me more?$"
 
+gText_082B8656:: @ 82B8656
 	.string "Oh-oh-oh!\n"
 	.string "{STR_VAR_1}, you say!\l"
 	.string "Thank you for a totally cool reply!\p"
@@ -10472,6 +10516,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Let’s meet here again, okay?\n"
 	.string "Thanks!$"
 
+gText_082B86EA:: @ 82B86EA
 	.string "I beg your pardon, but…\n"
 	.string "Are you {PLAYER}?\p"
 	.string "I’m {STR_VAR_1}, and I am delighted to\n"
@@ -10484,6 +10529,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "May I become your apprentice,\n"
 	.string "{PLAYER}?$"
 
+gText_082B87DA:: @ 82B87DA
 	.string "Oh…!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
@@ -10492,6 +10538,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please! Please say that you will\n"
 	.string "accept me as your apprentice!$"
 
+gText_082B887C:: @ 82B887C
 	.string "Oh… I’m delighted!\p"
 	.string "I don’t wish to waste your time,\n"
 	.string "so please advise me on this.\p"
@@ -10501,12 +10548,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which would be most suitable for me?\n"
 	.string "Level 50 or Open Level?$"
 
+gText_082B8957:: @ 82B8957
 	.string "{STR_VAR_1} is your choice!\n"
 	.string "I see. I will do my best!\p"
 	.string "Thank you, {PLAYER}.\n"
 	.string "I hope I can count on you again.\l"
 	.string "Please take care!$"
 
+gText_082B89C6:: @ 82B89C6
 	.string "Eek! Eek! {PLAYER}!\n"
 	.string "You spoke to me!\l"
 	.string "I… I’m overjoyed!\p"
@@ -10519,6 +10568,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please take me in as your apprentice!\n"
 	.string "I want to learn from you!$"
 
+gText_082B8ACF:: @ 82B8ACF
 	.string "Waaaah!\n"
 	.string "{PLAYER} turned me down…\l"
 	.string "It… It’s an invaluable experience!\p"
@@ -10526,6 +10576,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "an affirmative answer this time!\p"
 	.string "I beg you for your guidance!$"
 
+gText_082B8B66:: @ 82B8B66
 	.string "Hieeeeh! {PLAYER} said yes!\n"
 	.string "{PLAYER} said yes!\p"
 	.string "I won’t be able to sleep tonight…\n"
@@ -10534,12 +10585,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "At the BATTLE TOWER, what is right\n"
 	.string "for me, Level 50 or Open Level?$"
 
+gText_082B8C20:: @ 82B8C20
 	.string "{STR_VAR_1}! Perfectly understood!\n"
 	.string "I understand perfectly!\l"
 	.string "I’m deliriously delighted!\p"
 	.string "I hope you’ll be willing to teach me\n"
 	.string "some more another time.$"
 
+gText_082B8CAA:: @ 82B8CAA
 	.string "Whoa! Could you be…\n"
 	.string "Might you be… {PLAYER}{STRING 5}?!\l"
 	.string "That strong and famous TRAINER?\l"
@@ -10552,11 +10605,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "So, there you have it, {PLAYER}{STRING 5}!\n"
 	.string "Let me apprentice under you!$"
 
+gText_082B8DD3:: @ 82B8DD3
 	.string "Gwaaaah!\n"
 	.string "You’re quite cool and tough…\p"
 	.string "Don’t be that way, please.\n"
 	.string "I’m asking you!$"
 
+gText_082B8E24:: @ 82B8E24
 	.string "Oh, yeah! That’s a solid reply!\n"
 	.string "Excellent, I might add!\p"
 	.string "So how about a first piece of advice\n"
@@ -10564,12 +10619,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If I were to go, what would be better?\n"
 	.string "Level 50 or Open Level?$"
 
+gText_082B8ED5:: @ 82B8ED5
 	.string "Uh-huh, {STR_VAR_1} it is!\n"
 	.string "OK, A-OK!\l"
 	.string "I’ll go show my mettle, like, jam!\p"
 	.string "All right, I’ll look to you as my mentor!\n"
 	.string "Adios!$"
 
+gText_082B8F45:: @ 82B8F45
 	.string "Oh, hey, {PLAYER}{STRING 5}, right?\n"
 	.string "The police were looking for you!\p"
 	.string "… … …\n"
@@ -10582,6 +10639,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "So, how about you becoming my master\n"
 	.string "about all things POKéMON?$"
 
+gText_082B905F:: @ 82B905F
 	.string "If you’re going to act cold like that,\n"
 	.string "I’ll show you what I’ll do!\p"
 	.string "Waaah! Waaah! Waaah!\n"
@@ -10590,6 +10648,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Come on, will you please be\n"
 	.string "my POKéMON master?$"
 
+gText_082B910E:: @ 82B910E
 	.string "Yippee!\n"
 	.string "I’ll buy you a boat for that!\p"
 	.string "Of course I’m lying again!\n"
@@ -10600,6 +10659,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "level I should challenge…\p"
 	.string "Can you decide for me, master?$"
 
+gText_082B9204:: @ 82B9204
 	.string "Okay, so {STR_VAR_1} is better!\n"
 	.string "I’ll go to the other level, then!\p"
 	.string "Just kidding!\n"
@@ -10607,6 +10667,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thanks, master!\n"
 	.string "I hope you’ll keep teaching me!$"
 
+gText_082B929C:: @ 82B929C
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy, and it means hi!\p"
 	.string "I’m {STR_VAR_1}, the rappin’ SAILOR\n"
@@ -10624,11 +10685,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Let’s make that a celebration!\n"
 	.string "Become my mentor for commemoration!$"
 
+gText_082B9438:: @ 82B9438
 	.string "But!\n"
 	.string "You have to work with me!\p"
 	.string "Don’t be such a tease!\n"
 	.string "Become my mentor, please!$"
 
+gText_082B9488:: @ 82B9488
 	.string "That’s it!\n"
 	.string "{PLAYER}, you’ve got the spirit!\p"
 	.string "So here’s my first question\n"
@@ -10638,11 +10701,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Level 50 and Open Level there be,\n"
 	.string "which is the one that’s good for me?$"
 
+gText_082B9564:: @ 82B9564
 	.string "Okay, {STR_VAR_1} it is, you say!\n"
 	.string "I’ll go and take it on my way!\p"
 	.string "If it’s advice I ever need,\n"
 	.string "{PLAYER}, your word I’ll always heed!$"
 
+gText_082B95D8:: @ 82B95D8
 	.string "Say, hey, aren’t you {PLAYER}?\n"
 	.string "What should I do? Talk to you?\l"
 	.string "Why not? I’m already talking to you!\p"
@@ -10658,11 +10723,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{PLAYER}, let me be your underling!\n"
 	.string "I want you to teach me everything!$"
 
+gText_082B9763:: @ 82B9763
 	.string "You’re turning me down, then?\n"
 	.string "I’ll just have to ask you again!\p"
 	.string "{PLAYER}, I beg to be your underling!\n"
 	.string "I need you to teach me everything!$"
 
+gText_082B97E5:: @ 82B97E5
 	.string "Lucky, yeah, woohoo!\n"
 	.string "Should I pop a question to you?\p"
 	.string "Since we’re near the BATTLE TOWER,\n"
@@ -10670,12 +10737,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Of the choices you see,\n"
 	.string "which is the right one for me?$"
 
+gText_082B989A:: @ 82B989A
 	.string "If {STR_VAR_1} is what you suggest,\n"
 	.string "it must be the very best!\p"
 	.string "Well, {PLAYER}, I have to roam free,\n"
 	.string "but don’t you forget about me.\p"
 	.string "See you again, my smart friend!$"
 
+gText_082B992D:: @ 82B992D
 	.string "Oh, hi! You there!\n"
 	.string "Can I get you to massage my shoulder?\p"
 	.string "…Yes, there! That’s it!\n"
@@ -10690,10 +10759,12 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Listen, can I get you to give me\n"
 	.string "advice?$"
 
+gText_082B9A84:: @ 82B9A84
 	.string "Oh, why?\p"
 	.string "I won’t be a big bother, I promise!\n"
 	.string "Please?$"
 
+gText_082B9AB9:: @ 82B9AB9
 	.string "Thank you. Mighty good of you!\n"
 	.string "…Cough! Cough!\p"
 	.string "Oogh, I have to toughen up quick…\p"
@@ -10701,11 +10772,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "right away, but what would be better\l"
 	.string "for me? Level 50 or Open Level?$"
 
+gText_082B9B76:: @ 82B9B76
 	.string "Hm, all right. That’s {STR_VAR_1}.\n"
 	.string "I’ll go there right away.\p"
 	.string "I hope I can keep hitting you up for\n"
 	.string "help--after all, you’re my mentor!$"
 
+gText_082B9BF2:: @ 82B9BF2
 	.string "Er… Um…\n"
 	.string "{PLAYER}{STRING 5}…?\p"
 	.string "Please, don’t look at me that way.\n"
@@ -10722,11 +10795,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Could you become my teacher and\n"
 	.string "give me advice?$"
 
+gText_082B9D83:: @ 82B9D83
 	.string "Please don’t brush me off like this!\n"
 	.string "I can’t live with the humiliation.\p"
 	.string "Please become my teacher!\n"
 	.string "I need your advice!$"
 
+gText_082B9DF9:: @ 82B9DF9
 	.string "Th-thank you…\p"
 	.string "But please don’t look at me like that.\n"
 	.string "It makes me all flustered.\p"
@@ -10735,6 +10810,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "At the BATTLE TOWER…\n"
 	.string "Which level should I attempt?$"
 
+gText_082B9EAA:: @ 82B9EAA
 	.string "Oh… Okay!\n"
 	.string "I’ll try my hand at that.\p"
 	.string "I hope I can make a valiant challenge\n"
@@ -10743,6 +10819,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If we meet again, I hope you will be\l"
 	.string "as helpful.$"
 
+gText_082B9F55:: @ 82B9F55
 	.string "Hm? You appear to be {PLAYER}{STRING 5}…\n"
 	.string "But are you really real?\p"
 	.string "You may call me {STR_VAR_1}.\p"
@@ -10754,6 +10831,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "I merely want you to recognize me\l"
 	.string "as your apprentice.$"
 
+gText_082BA084:: @ 82BA084
 	.string "Oh?\n"
 	.string "But what would compel you to refuse?\p"
 	.string "I apologize for being skeptical about\n"
@@ -10761,6 +10839,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please accept my apology and\n"
 	.string "accept me as your apprentice.$"
 
+gText_082BA11D:: @ 82BA11D
 	.string "You really are accepting me?\n"
 	.string "I don’t wish to celebrate prematurely.\p"
 	.string "If it is true, I apologize.\n"
@@ -10769,6 +10848,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "what would be worthy of me?\l"
 	.string "Level 50 or Open Level?$"
 
+gText_082BA1F3:: @ 82BA1F3
 	.string "{STR_VAR_1}?\n"
 	.string "Are you certain?\p"
 	.string "I see. If that’s the case, that’s fine.\n"
@@ -10777,6 +10857,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "me that you have accepted me.\p"
 	.string "Let us meet again!$"
 
+gText_082BA2A3:: @ 82BA2A3
 	.string "Sigh… Sob…\n"
 	.string "Oh, {PLAYER}!\p"
 	.string "I’m all tangled up in a dilemma\n"
@@ -10786,25 +10867,30 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please tell me, {PLAYER}.\n"
 	.string "What item should I make it hold?$"
 
+gText_082BA34E:: @ 82BA34E
 	.string "Oh, really? I shouldn’t make\n"
 	.string "my {STR_VAR_1} hold anything?$"
 
+gText_082BA380:: @ 82BA380
 	.string "Oh, okay! I’m delighted it’s settled!\n"
 	.string "Awesome! Wicked! Awoooh!\p"
 	.string "Thank you so much!$"
 
+gText_082BA3D2:: @ 82BA3D2
 	.string "Oh, I’m so glad…\n"
 	.string "I think I have that {STR_VAR_1}, too.\p"
 	.string "I’m delighted it’s settled!\n"
 	.string "Awesome! Wicked! Awoooh!\p"
 	.string "Thank you so much!$"
 
+gText_082BA448:: @ 82BA448
 	.string "Waaaah! Please don’t be mean!\p"
 	.string "That item {STR_VAR_1} was already\n"
 	.string "recommended to me before, sob…\p"
 	.string "Or do you mean I shouldn’t make\n"
 	.string "my {STR_VAR_2} hold anything?$"
 
+gText_082BA4D3:: @ 82BA4D3
 	.string "Yay! It’s {PLAYER}!\n"
 	.string "Great! I wanted to ask you something!\p"
 	.string "Do you make your POKéMON hold items?\n"
@@ -10813,38 +10899,47 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{STR_VAR_1} to hold?\p"
 	.string "What do you think?$"
 
+gText_082BA58C:: @ 82BA58C
 	.string "Huh? You mean my {STR_VAR_1} doesn’t\n"
 	.string "have to hold anything?$"
 
+gText_082BA5BF:: @ 82BA5BF
 	.string "Oh, I get it! I’ll do that!\n"
 	.string "Thanks for teaching me!$"
 
+gText_082BA5F3:: @ 82BA5F3
 	.string "Oh, wow! One {STR_VAR_1}, huh?\n"
 	.string "Okay, I’ll do that!\p"
 	.string "Thanks for teaching me!$"
 
+gText_082BA635:: @ 82BA635
 	.string "Oh, uh, no, that’s not what I meant.\n"
 	.string "I want to know about a different item\l"
 	.string "than the ones I already know.\p"
 	.string "Or do you mean that my POKéMON doesn’t\n"
 	.string "have to hold anything this time?$"
 
+gText_082BA6E6:: @ 82BA6E6
 	.string "{PLAYER}, hello!\n"
 	.string "It’s about my {STR_VAR_1}…\p"
 	.string "I want to make it hold a good item.\n"
 	.string "What would be good for it?$"
 
+gText_082BA742:: @ 82BA742
 	.string "Oh, then my {STR_VAR_1} doesn’t have\n"
 	.string "to hold anything?$"
 
+gText_082BA770:: @ 82BA770
 	.string "Okay, I got it!\n"
 	.string "See you again!$"
 
+gText_082BA78F:: @ 82BA78F
 	.string "Oh, the item {STR_VAR_1}?\n"
 	.string "Understood!\p"
 	.string "I’ll do my best to find one!\n"
 	.string "See you again!$"
 
+gText_082BA7D8:: @ 82BA7D8
 	.string "Somebody taught me about\n"
 	.string "the {STR_VAR_1} already.\p"
 	.string "I want my POKéMON to hold a different\n"
@@ -10852,6 +10947,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Or do you think {STR_VAR_2} doesn’t\n"
 	.string "have to hold anything?$"
 
+gText_082BA867:: @ 82BA867
 	.string "Hello, {PLAYER}…\n"
 	.string "I’m sorry to disturb you, but I have\l"
 	.string "something else I wanted to ask you.\p"
@@ -10862,19 +10958,23 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{PLAYER}, please, could you decide\n"
 	.string "for me?$"
 
+gText_082BA96B:: @ 82BA96B
 	.string "A POKéMON belonging to someone like me\n"
 	.string "would be better off without an item?$"
 
+gText_082BA9B7:: @ 82BA9B7
 	.string "I understand…\n"
 	.string "You’re saying I shouldn’t rely on items.\l"
 	.string "I’ll do my best not to!\p"
 	.string "Thank you very much!$"
 
+gText_082BAA1B:: @ 82BAA1B
 	.string "The item {STR_VAR_1}, okay.\n"
 	.string "I’m not sure if I can get one…\l"
 	.string "No! I’ll do my best to get it.\p"
 	.string "Thank you very much!$"
 
+gText_082BAA81:: @ 82BAA81
 	.string "Oh, but…\n"
 	.string "I think I’ve heard about that before…\p"
 	.string "Is it maybe because I haven’t handled\n"
@@ -10882,6 +10982,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Or do you mean I shouldn’t make\n"
 	.string "my {STR_VAR_2} hold anything?$"
 
+gText_082BAB22:: @ 82BAB22
 	.string "Oh, {PLAYER}{STRING 5}.\n"
 	.string "There’s something I wanted to ask you.\p"
 	.string "You know how you decided which\n"
@@ -10893,9 +10994,11 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "What would be good? I want to make\n"
 	.string "my {STR_VAR_1} hold something.$"
 
+gText_082BAC43:: @ 82BAC43
 	.string "Oh! So my {STR_VAR_1} should do\n"
 	.string "the best it can empty-handed?$"
 
+gText_082BAC78:: @ 82BAC78
 	.string "If you think that’s best, I’ll do that.\p"
 	.string "Knowing that you made the decision,\n"
 	.string "{PLAYER}{STRING 5}, I won’t be so upset if\l"
@@ -10903,6 +11006,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Okay, I’ll look to you for advice again.\n"
 	.string "Bye!$"
 
+gText_082BAD17:: @ 82BAD17
 	.string "The item {STR_VAR_1}, huh?\n"
 	.string "Not bad. I’ll use it!\p"
 	.string "Knowing that you made the decision,\n"
@@ -10911,12 +11015,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Okay, I’ll look to you for advice again.\n"
 	.string "Bye!$"
 
+gText_082BADB6:: @ 82BADB6
 	.string "Huh? What are you saying?\n"
 	.string "You told me about the {STR_VAR_1}\l"
 	.string "already before.\p"
 	.string "Or do you mean my {STR_VAR_2} should\n"
 	.string "do the best it can empty-handed?$"
 
+gText_082BAE36:: @ 82BAE36
 	.string "Yo, {PLAYER}{STRING 5}!\p"
 	.string "We’re both busy, but we seem to run\n"
 	.string "into each other often anyway!\p"
@@ -10928,26 +11034,31 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "giving me advice on what I should make\l"
 	.string "my {STR_VAR_1} hold?$"
 
+gText_082BAF4E:: @ 82BAF4E
 	.string "Oh, so me being a busy guy, you say\n"
 	.string "my {STR_VAR_1} doesn’t need anything?$"
 
+gText_082BAF8F:: @ 82BAF8F
 	.string "Okay, gotcha.\n"
 	.string "I won’t need any time for that.\p"
 	.string "Thanks today!\n"
 	.string "See you around!$"
 
+gText_082BAFDB:: @ 82BAFDB
 	.string "Okay, gotcha.\n"
 	.string "I’ll find time somehow and find\l"
 	.string "that {STR_VAR_1} you recommended.\p"
 	.string "I’m glad I met a good mentor in you.\n"
 	.string "Thanks! See you around!$"
 
+gText_082BB05F:: @ 82BB05F
 	.string "Huh? I already know about\n"
 	.string "that {STR_VAR_1}.\p"
 	.string "Oh, right, I get it.\n"
 	.string "So me being a busy guy, you say\l"
 	.string "my {STR_VAR_2} doesn’t need anything?$"
 
+gText_082BB0D4:: @ 82BB0D4
 	.string "Hiya, {PLAYER}! It’s me!\n"
 	.string "I need to tap your mind again today.\l"
 	.string "Please, I need your advice!\p"
@@ -10956,15 +11067,18 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If I want to make my {STR_VAR_1} hold\n"
 	.string "an item, what should it be?$"
 
+gText_082BB18C:: @ 82BB18C
 	.string "Is that right? My {STR_VAR_1} doesn’t\n"
 	.string "need to hold an item, you’re saying.$"
 
+gText_082BB1CE:: @ 82BB1CE
 	.string "Okay, that’s what I’ll do!\p"
 	.string "I guess that’s about all I wanted\n"
 	.string "to ask you today.\p"
 	.string "Let’s meet here again, okay?\n"
 	.string "Thanks!$"
 
+gText_082BB242:: @ 82BB242
 	.string "Uh-huh! One {STR_VAR_1}.\n"
 	.string "What a cool choice!\l"
 	.string "I’ll definitely try that!\p"
@@ -10973,6 +11087,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Let’s meet here again, okay?\n"
 	.string "Thanks!$"
 
+gText_082BB2D9:: @ 82BB2D9
 	.string "Ahahah! That’s silly!\n"
 	.string "You already told me about that\l"
 	.string "{STR_VAR_1} before!\p"
@@ -10980,6 +11095,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Oh, wait! My {STR_VAR_2} doesn’t\n"
 	.string "need to hold an item, you’re saying.$"
 
+gText_082BB370:: @ 82BB370
 	.string "Hello, {PLAYER}. I hope you’ve been\n"
 	.string "keeping well.\p"
 	.string "May I approach you for advice?\p"
@@ -10993,26 +11109,31 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "It would please me if you could decide\n"
 	.string "what would be right for my POKéMON…$"
 
+gText_082BB4C3:: @ 82BB4C3
 	.string "In other words… My POKéMON has\n"
 	.string "no need to hold an item?$"
 
+gText_082BB4FB:: @ 82BB4FB
 	.string "I understand clearly now!\n"
 	.string "I will keep trying like this.\p"
 	.string "Thank you, {PLAYER}.\n"
 	.string "I hope I can count on you again.\l"
 	.string "Please take care!$"
 
+gText_082BB575:: @ 82BB575
 	.string "One {STR_VAR_1} it is!\n"
 	.string "I will order it right away.\p"
 	.string "Thank you, {PLAYER}.\n"
 	.string "I hope I can count on you again.\l"
 	.string "Please take care!$"
 
+gText_082BB5E1:: @ 82BB5E1
 	.string "You’ve already told me about that,\n"
 	.string "and I already have it.\p"
 	.string "Or are you saying… My POKéMON has\n"
 	.string "no need to hold an item?$"
 
+gText_082BB656:: @ 82BB656
 	.string "Eek! {PLAYER}!\n"
 	.string "I… I’m overjoyed to see you again!\p"
 	.string "Oh-oh-oh! There’s something I just\n"
@@ -11020,14 +11141,17 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please decide what my {STR_VAR_1}\n"
 	.string "should be holding!$"
 
+gText_082BB6E5:: @ 82BB6E5
 	.string "Oh, wow! I didn’t expect that answer!\n"
 	.string "So, a hold item isn’t necessary?$"
 
+gText_082BB72C:: @ 82BB72C
 	.string "Perfectly understood!\n"
 	.string "I’ll keep at this without an item!\p"
 	.string "I hope you’ll be willing to teach me\n"
 	.string "some more another time.$"
 
+gText_082BB7A2:: @ 82BB7A2
 	.string "{STR_VAR_1}! I’ll use that!\p"
 	.string "Um… Could it be, {PLAYER}, you also\n"
 	.string "make your POKéMON hold that item?\p"
@@ -11035,12 +11159,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "I hope you’ll be willing to teach me\l"
 	.string "some more another time.$"
 
+gText_082BB84A:: @ 82BB84A
 	.string "Oh? You recommended that\n"
 	.string "{STR_VAR_1} before, too.\p"
 	.string "Or is it the best thing to hold?\n"
 	.string "Or do you mean that my {STR_VAR_2}\l"
 	.string "doesn’t need anything to hold?$"
 
+gText_082BB8CD:: @ 82BB8CD
 	.string "Hola!\n"
 	.string "My maestro, {PLAYER}{STRING 5}!\p"
 	.string "I want to hit you up for advice on\n"
@@ -11050,26 +11176,31 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Don’t be shy now.\n"
 	.string "Let’s blurt it out!$"
 
+gText_082BB970:: @ 82BB970
 	.string "Oh? So, you’re saying my {STR_VAR_1}\n"
 	.string "can win without holding any item?$"
 
+gText_082BB9AE:: @ 82BB9AE
 	.string "Si, bueno!\n"
 	.string "I’ll give it my best shot, like, slam!\p"
 	.string "All right, thanks, as always!\n"
 	.string "Adios!$"
 
+gText_082BBA05:: @ 82BBA05
 	.string "Uh-huh, that’s one {STR_VAR_1}?\n"
 	.string "Si, bueno!\l"
 	.string "I’ll go find me one, like, bam!\p"
 	.string "All right, thanks, as always!\n"
 	.string "Adios!$"
 
+gText_082BBA6C:: @ 82BBA6C
 	.string "No, no! You already told me about\n"
 	.string "that {STR_VAR_1} thing before.\p"
 	.string "Oh, now wait just one minute here…\n"
 	.string "So, you’re saying my {STR_VAR_2}\l"
 	.string "can win without holding any item?$"
 
+gText_082BBB01:: @ 82BBB01
 	.string "{PLAYER}{STRING 5}, something unbelievable\n"
 	.string "has happened!\p"
 	.string "I woke up this morning, and my POKéMON\n"
@@ -11082,9 +11213,11 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "So, how about deciding for me what\n"
 	.string "my {STR_VAR_1} should hold, master?$"
 
+gText_082BBC1C:: @ 82BBC1C
 	.string "What’s that mean?\n"
 	.string "Don’t make it hold anything?$"
 
+gText_082BBC4B:: @ 82BBC4B
 	.string "Okay, so it shouldn’t hold anything.\n"
 	.string "Then, I’d better get something for it!\p"
 	.string "Just kidding!\n"
@@ -11092,6 +11225,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thanks, master!\n"
 	.string "I hope you’ll keep teaching me!$"
 
+gText_082BBCF6:: @ 82BBCF6
 	.string "Okay, so it’s one {STR_VAR_1}!\n"
 	.string "I’ll make it hold anything but that!\p"
 	.string "Just kidding!\n"
@@ -11099,12 +11233,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thanks, master!\n"
 	.string "I hope you’ll keep teaching me!$"
 
+gText_082BBD90:: @ 82BBD90
 	.string "Um, you told me about that before,\n"
 	.string "didn’t you?\p"
 	.string "Isn’t there something else?\p"
 	.string "Or do you mean, don’t make\n"
 	.string "my {STR_VAR_2} hold anything?$"
 
+gText_082BBE0B:: @ 82BBE0B
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy!\p"
 	.string "The rappin’ SAILOR am I!\n"
@@ -11115,21 +11251,25 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "My {STR_VAR_1} needs an item to hold,\n"
 	.string "What should it be, if I may be bold?$"
 
+gText_082BBEE5:: @ 82BBEE5
 	.string "Is that right?\n"
 	.string "My {STR_VAR_1} doesn’t need to be\l"
 	.string "holding anything tight?$"
 
+gText_082BBF25:: @ 82BBF25
 	.string "Okay, I hear you, sure I do!\n"
 	.string "My POKéMON will go empty-handed, too!\p"
 	.string "If it’s advice I ever need,\n"
 	.string "{PLAYER}, your word I’ll always heed!$"
 
+gText_082BBFA4:: @ 82BBFA4
 	.string "Okay, one {STR_VAR_1},\n"
 	.string "that’s what I’ll use.\l"
 	.string "I was right to make you choose!\p"
 	.string "If it’s advice I ever need,\n"
 	.string "{PLAYER}, your word I’ll always heed!$"
 
+gText_082BC024:: @ 82BC024
 	.string "Okay, one {STR_VAR_1}, you say?\n"
 	.string "You told me that the other day.\l"
 	.string "I need a new idea, a brand new way.\p"
@@ -11137,6 +11277,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "My POKéMON doesn’t need to hold\l"
 	.string "anything tight?$"
 
+gText_082BC0C8:: @ 82BC0C8
 	.string "Say, hey, {PLAYER}!\n"
 	.string "I found you again today!\p"
 	.string "What should I do? Get your advice?\n"
@@ -11150,21 +11291,25 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "my {STR_VAR_1} that’d be good.\l"
 	.string "My indecision is making me brood.$"
 
+gText_082BC213:: @ 82BC213
 	.string "My {STR_VAR_1} needs nothing?\n"
 	.string "Doesn’t need to hold anything?$"
 
+gText_082BC247:: @ 82BC247
 	.string "If holding nothing is the best,\n"
 	.string "I’ll do as you suggest!\p"
 	.string "Well, {PLAYER}, I have to roam free,\n"
 	.string "but don’t you forget about me.\p"
 	.string "See you again, my smart friend!$"
 
+gText_082BC2DD:: @ 82BC2DD
 	.string "If holding that {STR_VAR_1} is\n"
 	.string "the best, I’ll do as you suggest!\p"
 	.string "Well, {PLAYER}, I have to roam free,\n"
 	.string "but don’t you forget about me.\p"
 	.string "See you again, my smart friend!$"
 
+gText_082BC373:: @ 82BC373
 	.string "Haven’t I heard about that\n"
 	.string "{STR_VAR_1} before?\l"
 	.string "I’m certain I have, that’s for sure!\p"
@@ -11172,6 +11317,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Or, my {STR_VAR_2} needs nothing?\l"
 	.string "Doesn’t need to hold anything?$"
 
+gText_082BC40E:: @ 82BC40E
 	.string "Gwah! Ouch! {PLAYER}{STRING 5}, my arm’s broken!\n"
 	.string "Don’t touch it, please!\p"
 	.string "I must’ve broken it while I was trying\n"
@@ -11182,21 +11328,25 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{PLAYER}{STRING 5}, what do you think would be\n"
 	.string "good for my {STR_VAR_1} to hold?$"
 
+gText_082BC514:: @ 82BC514
 	.string "Ouch…\p"
 	.string "So your suggestion is my {STR_VAR_1}\n"
 	.string "doesn’t have to hold anything?$"
 
+gText_082BC555:: @ 82BC555
 	.string "Hm, all right. That would be easier\n"
 	.string "for me, the way things are now.\p"
 	.string "I hope I can keep hitting you up\n"
 	.string "for help like this.$"
 
+gText_082BC5CE:: @ 82BC5CE
 	.string "Hm, all right. That’s one {STR_VAR_1}.\n"
 	.string "My POKéMON’s arm is fine, so I’ll make\l"
 	.string "it hold that item right away.\p"
 	.string "I hope I can keep hitting you up\n"
 	.string "for help like this.$"
 
+gText_082BC666:: @ 82BC666
 	.string "No, no, you told me about that\n"
 	.string "{STR_VAR_1} before, remember?\p"
 	.string "How about telling me something\n"
@@ -11205,6 +11355,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "So your suggestion is my {STR_VAR_2}\l"
 	.string "doesn’t have to hold anything?$"
 
+gText_082BC714:: @ 82BC714
 	.string "Er… Um…\n"
 	.string "{PLAYER}{STRING 5}…\p"
 	.string "Please, don’t look at me that way.\n"
@@ -11216,9 +11367,11 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{PLAYER}{STRING 5}, what do you think would\n"
 	.string "be good?$"
 
+gText_082BC808:: @ 82BC808
 	.string "Oh… Then, you think it would be better\n"
 	.string "if my {STR_VAR_1} didn’t have an item?$"
 
+gText_082BC84D:: @ 82BC84D
 	.string "Oh… Okay!\n"
 	.string "I’ll go without an item.\p"
 	.string "This is nerve-racking, though.\n"
@@ -11227,6 +11380,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If we meet again, I hope you will be\l"
 	.string "as helpful.$"
 
+gText_082BC8EA:: @ 82BC8EA
 	.string "Oh… Okay!\n"
 	.string "I’ll go with that {STR_VAR_1}.\p"
 	.string "This is nerve-racking, though.\n"
@@ -11235,6 +11389,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If we meet again, I hope you will be\l"
 	.string "as helpful.$"
 
+gText_082BC984:: @ 82BC984
 	.string "B-but I already heard about that.\p"
 	.string "Please don’t brush me off like this!\n"
 	.string "I can’t live with the humiliation.\p"
@@ -11242,6 +11397,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Do you think it would be better if\l"
 	.string "my {STR_VAR_2} didn’t have an item?$"
 
+gText_082BCA4D:: @ 82BCA4D
 	.string "Hm? You appear to be {PLAYER}{STRING 5}…\n"
 	.string "But are you really?\l"
 	.string "Perhaps you’re a twin?\p"
@@ -11254,13 +11410,16 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "to make hold a convenient item.\p"
 	.string "What would be worthy of it?$"
 
+gText_082BCB75:: @ 82BCB75
 	.string "It’s better if it held nothing?\n"
 	.string "Are you certain?$"
 
+gText_082BCBA6:: @ 82BCBA6
 	.string "I see. If that’s the case, that’s fine.\n"
 	.string "I thank you for your time.\p"
 	.string "Let us meet again!$"
 
+gText_082BCBFC:: @ 82BCBFC
 	.string "One {STR_VAR_1}?\n"
 	.string "Are you certain?\p"
 	.string "I see. If that’s the case, that’s fine.\n"
@@ -11269,6 +11428,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "put it to good use.\p"
 	.string "Let us meet again!$"
 
+gText_082BCCA4:: @ 82BCCA4
 	.string "No, no, wait a minute.\n"
 	.string "I believe you taught me that before.\p"
 	.string "I would like you to recommend\n"
@@ -11277,6 +11437,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "my {STR_VAR_2} should hold nothing?\l"
 	.string "Are you certain?$"
 
+gText_082BCD68:: @ 82BCD68
 	.string "Waah, {PLAYER}!\n"
 	.string "I have a dilemma, sob…\p"
 	.string "I want to begin battling other people,\n"
@@ -11287,6 +11448,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If you were me, which of these POKéMON\l"
 	.string "would you send out first?$"
 
+gText_082BCE64:: @ 82BCE64
 	.string "My {STR_VAR_1} should go first?\n"
 	.string "Waaaaah!\p"
 	.string "Oh! I’m so sorry!\n"
@@ -11294,25 +11456,30 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "my first POKéMON, and it’s made me cry…\p"
 	.string "Thank you so much!$"
 
+gText_082BCEF2:: @ 82BCEF2
 	.string "Yay! It’s {PLAYER}!\n"
 	.string "Great! I wanted to ask you something!\p"
 	.string "Um, of my POKéMON, which do you\n"
 	.string "think should go out first?$"
 
+gText_082BCF61:: @ 82BCF61
 	.string "My {STR_VAR_1}? That’s true.\n"
 	.string "Okay, I’ll do that!\p"
 	.string "Thanks for teaching me!$"
 
+gText_082BCFA1:: @ 82BCFA1
 	.string "{PLAYER}, hello!\p"
 	.string "I think, in a battle, it’s very important\n"
 	.string "which POKéMON comes out first.\p"
 	.string "Out of the POKéMON that I have,\n"
 	.string "which would be good to send out first?$"
 
+gText_082BD03C:: @ 82BD03C
 	.string "My {STR_VAR_1} goes first?\n"
 	.string "Okay, I got it!\p"
 	.string "See you again!$"
 
+gText_082BD06D:: @ 82BD06D
 	.string "Hello, {PLAYER}…\n"
 	.string "I’m sorry to disturb you again with\l"
 	.string "another question.\p"
@@ -11324,6 +11491,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which of my POKéMON should I send\n"
 	.string "out first in a battle?$"
 
+gText_082BD18A:: @ 82BD18A
 	.string "My {STR_VAR_1}?\n"
 	.string "Understood!\p"
 	.string "I can’t believe that you would bother\n"
@@ -11331,6 +11499,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "I’m so grateful that you would even\n"
 	.string "speak with me… Thank you!$"
 
+gText_082BD222:: @ 82BD222
 	.string "Oh, {PLAYER}{STRING 5}! It’s me!\n"
 	.string "I’m so glad to see you because I have\l"
 	.string "this little problem.\p"
@@ -11341,6 +11510,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "How about deciding just the first\n"
 	.string "POKéMON for me?$"
 
+gText_082BD325:: @ 82BD325
 	.string "My {STR_VAR_1}? That’s great!\p"
 	.string "Knowing that you made the decision,\n"
 	.string "{PLAYER}{STRING 5}, I won’t be so upset if\l"
@@ -11348,6 +11518,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Okay, I’ll look to you for advice again.\n"
 	.string "Bye!$"
 
+gText_082BD3B1:: @ 82BD3B1
 	.string "Hi, my teacher {PLAYER}{STRING 5}!\n"
 	.string "I’m busy again today!\p"
 	.string "I have to do some cycling, shopping,\n"
@@ -11357,12 +11528,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "So, how about checking out my team?\n"
 	.string "Which one should go first?$"
 
+gText_082BD493:: @ 82BD493
 	.string "Okay, gotcha.\n"
 	.string "I have enough time at least to put\l"
 	.string "my {STR_VAR_1} at the head of the line!\p"
 	.string "Whoops, my girlfriend’s waiting!\n"
 	.string "Thanks! See you around!$"
 
+gText_082BD51C:: @ 82BD51C
 	.string "Yoohoo! Hiya, {PLAYER}!\n"
 	.string "You always walk around looking tough!\p"
 	.string "Listen, I need something from you\n"
@@ -11372,6 +11545,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which POKéMON of mine should be first\n"
 	.string "to go out in a battle?$"
 
+gText_082BD609:: @ 82BD609
 	.string "Hmhm!\n"
 	.string "My {STR_VAR_1}, you say!\l"
 	.string "Thanks for a most cool answer!\p"
@@ -11380,6 +11554,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Let’s meet here again, okay?\n"
 	.string "Thanks!$"
 
+gText_082BD697:: @ 82BD697
 	.string "Thank you so much for stopping to\n"
 	.string "chat with me, {PLAYER}.\p"
 	.string "I know I’m taking advantage of your\n"
@@ -11389,12 +11564,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "It would please me if you could decide\n"
 	.string "which POKéMON should come first.$"
 
+gText_082BD797:: @ 82BD797
 	.string "My {STR_VAR_1} it is!\n"
 	.string "I will put it first right away!\p"
 	.string "Thank you, {PLAYER}.\n"
 	.string "I hope I can count on you again.\l"
 	.string "Please take care!$"
 
+gText_082BD806:: @ 82BD806
 	.string "Eek! {PLAYER}!\n"
 	.string "I… I’m overjoyed to see you again!\p"
 	.string "My POKéMON have become much\n"
@@ -11405,6 +11582,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please decide which of my POKéMON\n"
 	.string "should go out first!$"
 
+gText_082BD8F5:: @ 82BD8F5
 	.string "Sigh… I’m overwhelmed with happiness…\p"
 	.string "It’s like a dream having you decide\n"
 	.string "for me, {PLAYER}.\p"
@@ -11413,6 +11591,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "I hope you’ll be willing to teach me\n"
 	.string "some more another time.$"
 
+gText_082BD9BE:: @ 82BD9BE
 	.string "Hello, hello!\n"
 	.string "My mentor, {PLAYER}{STRING 5}!\l"
 	.string "Hit me with your sage advice today!\p"
@@ -11425,12 +11604,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Don’t be shy now.\n"
 	.string "Let’s blurt it out!$"
 
+gText_082BDAE1:: @ 82BDAE1
 	.string "Uh-huh, my {STR_VAR_1} leads off!\n"
 	.string "OK, A-OK!\l"
 	.string "I’ll reorder the lineup, like, wham!\p"
 	.string "All right, thanks, as always!\n"
 	.string "Adios!$"
 
+gText_082BDB4E:: @ 82BDB4E
 	.string "{PLAYER}{STRING 5}, listen!\n"
 	.string "It’s a crisis!\p"
 	.string "My POKéMON, all three of them, go into\n"
@@ -11443,6 +11624,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "So, how about deciding for me which\n"
 	.string "POKéMON should go first, master?$"
 
+gText_082BDC6B:: @ 82BDC6B
 	.string "Okay, so it’s my {STR_VAR_1} you chose?\n"
 	.string "I’ll let any but that one go first!\p"
 	.string "Just kidding!\n"
@@ -11450,6 +11632,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thanks, master!\n"
 	.string "I hope you’ll keep teaching me!$"
 
+gText_082BDD0D:: @ 82BDD0D
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy!\p"
 	.string "The rappin’ SAILOR am I!\n"
@@ -11460,11 +11643,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Out of this lot, which should go first\n"
 	.string "as the first on the spot?$"
 
+gText_082BDDEC:: @ 82BDDEC
 	.string "Okay, I hear you, sure I do!\n"
 	.string "I’ll switch them up, that I’ll do!\p"
 	.string "If it’s advice I ever need,\n"
 	.string "{PLAYER}, your word I’ll always heed!$"
 
+gText_082BDE68:: @ 82BDE68
 	.string "Yahoo, {PLAYER}!\n"
 	.string "How do you do?\p"
 	.string "What should I do? Go ahead and ask?\n"
@@ -11475,12 +11660,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "POKéMON is the first to ride!\l"
 	.string "Into battle, I mean to say.$"
 
+gText_082BDF4D:: @ 82BDF4D
 	.string "My {STR_VAR_1}? Yes!\n"
 	.string "That’ll do, there’s no distress!\p"
 	.string "Well, {PLAYER}, I have to roam free,\n"
 	.string "but don’t you forget about me.\p"
 	.string "See you again, my smart friend!$"
 
+gText_082BDFD8:: @ 82BDFD8
 	.string "…Oof…ooch… {PLAYER}{STRING 5}…\n"
 	.string "My stomach’s hurting all of a sudden…\p"
 	.string "…It’s getting better now…\p"
@@ -11492,6 +11679,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{PLAYER}{STRING 5}, which of my POKéMON should\n"
 	.string "go first? So I’d win, I mean.$"
 
+gText_082BE0FD:: @ 82BE0FD
 	.string "Hm, all right.\n"
 	.string "My {STR_VAR_1} goes first.\p"
 	.string "I’ll fix the lineup like that after\n"
@@ -11499,6 +11687,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "I hope I can keep hitting you up\n"
 	.string "for help like this.$"
 
+gText_082BE189:: @ 82BE189
 	.string "Er… Um…\n"
 	.string "{PLAYER}{STRING 5}?\p"
 	.string "Please, don’t look at me that way.\n"
@@ -11511,6 +11700,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which POKéMON should I send out first\n"
 	.string "so I at least look capable?$"
 
+gText_082BE2A5:: @ 82BE2A5
 	.string "Oh… Okay!\n"
 	.string "I’ll lead with my {STR_VAR_1}.\p"
 	.string "I hope I can do my best without\n"
@@ -11519,6 +11709,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If we meet again, I hope you will be\l"
 	.string "as helpful.$"
 
+gText_082BE33E:: @ 82BE33E
 	.string "Hm? You appear to be {PLAYER}{STRING 5}…\n"
 	.string "But are you really?\l"
 	.string "Perhaps you’re a clever look-alike?\p"
@@ -11530,6 +11721,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "I would like you to tell me which one\l"
 	.string "should go first in a battle.$"
 
+gText_082BE46C:: @ 82BE46C
 	.string "My {STR_VAR_1}…\n"
 	.string "You aren’t pulling my leg?\p"
 	.string "I see. If that’s the case, that’s fine.\n"
@@ -11538,6 +11730,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "my best.\p"
 	.string "Let us meet again!$"
 
+gText_082BE50D:: @ 82BE50D
 	.string "Snivel…\n"
 	.string "Oh, {PLAYER}!\p"
 	.string "What perfect timing!\n"
@@ -11549,6 +11742,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{PLAYER}, which do you think will give\n"
 	.string "even me a chance at winning?$"
 
+gText_082BE5F5:: @ 82BE5F5
 	.string "Snivel… I… I understand!\n"
 	.string "Oh! I’m so sorry!\l"
 	.string "You’ve made me so happy, I’m crying…\p"
@@ -11556,6 +11750,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{STR_VAR_1}!\p"
 	.string "Thank you so much!$"
 
+gText_082BE679:: @ 82BE679
 	.string "Yay! It’s {PLAYER}!\n"
 	.string "Yay, you came at the right time, too!\l"
 	.string "I need your advice again!\p"
@@ -11564,10 +11759,12 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which do you think I should raise,\n"
 	.string "{PLAYER}?$"
 
+gText_082BE71E:: @ 82BE71E
 	.string "Oh, so my {STR_VAR_1} is better!\n"
 	.string "Okay, I’ll do that!\p"
 	.string "Thanks for teaching me!$"
 
+gText_082BE762:: @ 82BE762
 	.string "{PLAYER}, hello!\n"
 	.string "I have a question I wanted to ask.\p"
 	.string "I’m in a dilemma over whether I should\n"
@@ -11575,12 +11772,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which POKéMON do you think will\n"
 	.string "be stronger?$"
 
+gText_082BE7F8:: @ 82BE7F8
 	.string "{STR_VAR_1} is your choice?\n"
 	.string "Okay, I got it!\p"
 	.string "I’ll go catch a strong {STR_VAR_1}\n"
 	.string "right away!\p"
 	.string "See you again!$"
 
+gText_082BE850:: @ 82BE850
 	.string "Hello, {PLAYER}…\p"
 	.string "Um, you’ve probably already forgotten\n"
 	.string "about someone like me…\p"
@@ -11594,6 +11793,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{PLAYER}, you probably don’t want to\n"
 	.string "bother, but please decide for me.$"
 
+gText_082BE99C:: @ 82BE99C
 	.string "But will a wild {STR_VAR_1} even pay\n"
 	.string "attention to me?\p"
 	.string "I will try!\p"
@@ -11601,6 +11801,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "No! I’ll do my best!\p"
 	.string "Thank you!$"
 
+gText_082BEA1B:: @ 82BEA1B
 	.string "Oh, {PLAYER}{STRING 5}! I’m so glad to see you!\n"
 	.string "I was about to go looking for you!\p"
 	.string "Can you decide what kind of POKéMON\n"
@@ -11611,6 +11812,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which one do you think would be\n"
 	.string "better?$"
 
+gText_082BEAE9:: @ 82BEAE9
 	.string "{STR_VAR_1}? That’s great!\p"
 	.string "Knowing that you made the decision,\n"
 	.string "{PLAYER}{STRING 5}, I won’t be so upset if\l"
@@ -11618,6 +11820,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Okay, I’ll look to you for advice again.\n"
 	.string "Bye!$"
 
+gText_082BEB72:: @ 82BEB72
 	.string "If it isn’t {PLAYER}{STRING 5}! How’s it going?\n"
 	.string "I’m busy again as always!\p"
 	.string "I want to do good with POKéMON, too,\n"
@@ -11628,12 +11831,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{PLAYER}{STRING 5}, give me some of your good\n"
 	.string "advice! Which one’d be good for me?$"
 
+gText_082BEC8E:: @ 82BEC8E
 	.string "Okay, gotcha.\n"
 	.string "I’ll find time somehow and catch me\l"
 	.string "that {STR_VAR_1} you recommended.\p"
 	.string "I’m glad I met a good mentor in you.\n"
 	.string "Thanks! See you around!$"
 
+gText_082BED16:: @ 82BED16
 	.string "Oh!\n"
 	.string "Yay, it’s {PLAYER}!\p"
 	.string "I didn’t waste any time boasting to\n"
@@ -11646,6 +11851,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "and the choices were one {STR_VAR_1}\l"
 	.string "or {STR_VAR_2}, which should it be?$"
 
+gText_082BEE29:: @ 82BEE29
 	.string "Ahhh!\n"
 	.string "{STR_VAR_1}, you say!\l"
 	.string "Thanks for a most cool answer!\p"
@@ -11654,6 +11860,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Let’s meet here again, okay?\n"
 	.string "Thanks!$"
 
+gText_082BEEB4:: @ 82BEEB4
 	.string "Oh, is it you, {PLAYER}?\n"
 	.string "I’m delighted to see you again!\p"
 	.string "Ever since I became your apprentice,\n"
@@ -11666,12 +11873,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{STR_VAR_1} or {STR_VAR_2}…\l"
 	.string "Which POKéMON is right for me?$"
 
+gText_082BEFE2:: @ 82BEFE2
 	.string "One {STR_VAR_1} it is!\n"
 	.string "I will find one right away!\p"
 	.string "Thank you, {PLAYER}.\n"
 	.string "I hope I can count on you again.\l"
 	.string "Please take care!$"
 
+gText_082BF04E:: @ 82BF04E
 	.string "Eek! {PLAYER}! I met you again!\n"
 	.string "I… I’m overjoyed!\p"
 	.string "Oh-oh-oh, I know!\n"
@@ -11681,12 +11890,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please decide which would be better,\n"
 	.string "{STR_VAR_1} or {STR_VAR_2}!$"
 
+gText_082BF11D:: @ 82BF11D
 	.string "Wow! You decided for me!\n"
 	.string "One {STR_VAR_1} is what I’ll raise to\l"
 	.string "the best of my ability.\p"
 	.string "I hope you’ll be willing to teach me\n"
 	.string "some more another time.$"
 
+gText_082BF1A8:: @ 82BF1A8
 	.string "Hey, hey!\n"
 	.string "My mentor, {PLAYER}{STRING 5}!\p"
 	.string "Hello, I’ve been looking for you\n"
@@ -11696,12 +11907,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Don’t be shy now.\n"
 	.string "Let’s blurt it out!$"
 
+gText_082BF268:: @ 82BF268
 	.string "Uh-huh, one {STR_VAR_1} it is!\n"
 	.string "OK, A-OK!\l"
 	.string "I’ll get one in a BALL, like, cram!\p"
 	.string "All right, thanks, as always!\n"
 	.string "Adios!$"
 
+gText_082BF2D1:: @ 82BF2D1
 	.string "{PLAYER}{STRING 5}, listen! Big news!\n"
 	.string "I caught a mirage POKéMON!\p"
 	.string "Of course I’m lying!\n"
@@ -11715,6 +11928,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which would be better?\n"
 	.string "{STR_VAR_1} or {STR_VAR_2}?$"
 
+gText_082BF3CF:: @ 82BF3CF
 	.string "Okay, so it’s {STR_VAR_1} you chose?\n"
 	.string "I’ll grab the other kind, then!\p"
 	.string "Just kidding!\n"
@@ -11722,6 +11936,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thanks, master!\n"
 	.string "I hope you’ll keep teaching me!$"
 
+gText_082BF46A:: @ 82BF46A
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy!\p"
 	.string "The rappin’ SAILOR am I!\n"
@@ -11732,11 +11947,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{STR_VAR_1} and {STR_VAR_2}, you see.\l"
 	.string "Which is the one to catch for me?$"
 
+gText_082BF551:: @ 82BF551
 	.string "{STR_VAR_1}, you say, hey, hey!\n"
 	.string "I’ll go get me one right away!\p"
 	.string "If it’s advice I ever need,\n"
 	.string "{PLAYER}, your word I’ll always heed!$"
 
+gText_082BF5C3:: @ 82BF5C3
 	.string "Oh, wow, if it isn’t {PLAYER}!\p"
 	.string "What should I do? Get your advice?\n"
 	.string "Why not? I’m already talking to you!\p"
@@ -11748,12 +11965,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "It’s either {STR_VAR_1} or {STR_VAR_2}.\l"
 	.string "Which do you choose?$"
 
+gText_082BF6E5:: @ 82BF6E5
 	.string "If that {STR_VAR_1} is the best,\n"
 	.string "I’ll do as you suggest!\p"
 	.string "Well, {PLAYER}, I have to roam free,\n"
 	.string "but don’t you forget about me.\p"
 	.string "See you again, my smart friend!$"
 
+gText_082BF773:: @ 82BF773
 	.string "Oh, hi, {PLAYER}{STRING 5}…\n"
 	.string "I have this horrible headache…\p"
 	.string "I must’ve worried too much about\n"
@@ -11764,11 +11983,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "the POKéMON {STR_VAR_1} and\l"
 	.string "{STR_VAR_2}, which should it be?$"
 
+gText_082BF869:: @ 82BF869
 	.string "Hm, one {STR_VAR_1}, all right.\n"
 	.string "I’ll go look for one when I get better.\p"
 	.string "I hope I can keep hitting you up\n"
 	.string "for help like this.$"
 
+gText_082BF8DD:: @ 82BF8DD
 	.string "Er… Um…\n"
 	.string "{PLAYER}{STRING 5}…?\p"
 	.string "Please, don’t look at me that way.\n"
@@ -11779,6 +12000,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If the choices were {STR_VAR_1} or\n"
 	.string "{STR_VAR_2}, which would be better?$"
 
+gText_082BF9BA:: @ 82BF9BA
 	.string "Oh… Okay!\n"
 	.string "I’ll do my best with one {STR_VAR_1}.\p"
 	.string "I hope I can do my best without\n"
@@ -11787,6 +12009,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If we meet again, I hope you will be\l"
 	.string "as helpful.$"
 
+gText_082BFA5A:: @ 82BFA5A
 	.string "Hm? You appear to be {PLAYER}{STRING 5}…\n"
 	.string "But are you really real?\p"
 	.string "No, no, if you are real, it’s fine.\n"
@@ -11797,6 +12020,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{STR_VAR_1} and {STR_VAR_2}, which is\l"
 	.string "more worthy of me?$"
 
+gText_082BFB4E:: @ 82BFB4E
 	.string "{STR_VAR_1}?\n"
 	.string "Are you certain?\p"
 	.string "I see. If that’s the case, that’s fine.\n"
@@ -11805,6 +12029,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "handle with aplomb.\p"
 	.string "Let us meet again!$"
 
+gText_082BFBF2:: @ 82BFBF2
 	.string "Waaah! Oh, {PLAYER}!\n"
 	.string "Snivel… Hiccup…\p"
 	.string "I have a dilemma!\n"
@@ -11816,6 +12041,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "be the better choice: {STR_VAR_2}\l"
 	.string "or {STR_VAR_3}?$"
 
+gText_082BFCAE:: @ 82BFCAE
 	.string "{STR_VAR_1}?\n"
 	.string "Waaaaah!\p"
 	.string "Oh! I’m so sorry, {PLAYER}!\n"
@@ -11824,6 +12050,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Snivel…\n"
 	.string "Thank you so much!$"
 
+gText_082BFD26:: @ 82BFD26
 	.string "Yay! Hi, {PLAYER}!\n"
 	.string "I need your advice again!\p"
 	.string "I want to teach my {STR_VAR_1}\n"
@@ -11832,11 +12059,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{STR_VAR_2} or {STR_VAR_3}.\l"
 	.string "What’s your recommendation?$"
 
+gText_082BFDB1:: @ 82BFDB1
 	.string "{STR_VAR_1} is better? I guess so!\n"
 	.string "Okay, I’ll go with that!\p"
 	.string "If we meet here again, please teach\n"
 	.string "me something else, teacher!$"
 
+gText_082BFE24:: @ 82BFE24
 	.string "{PLAYER}, hello!\n"
 	.string "It’s about my {STR_VAR_1}, but I’m\l"
 	.string "worried about its moves.\p"
@@ -11845,12 +12074,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which is stronger and better for\n"
 	.string "my {STR_VAR_1}?$"
 
+gText_082BFEAD:: @ 82BFEAD
 	.string "{STR_VAR_1} is your choice?\n"
 	.string "Okay, I got it!\p"
 	.string "I’ll go teach {STR_VAR_1} to\n"
 	.string "my POKéMON right away!\p"
 	.string "See you again!$"
 
+gText_082BFF0A:: @ 82BFF0A
 	.string "Ohhh, {PLAYER}…\n"
 	.string "I’m hopeless, no, really!\p"
 	.string "I’ve decided to raise a POKéMON,\n"
@@ -11864,12 +12095,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If you could even choose between\n"
 	.string "{STR_VAR_2} and {STR_VAR_3}…$"
 
+gText_082C0032:: @ 82C0032
 	.string "I understand!\p"
 	.string "But will it even be willing to learn\n"
 	.string "{STR_VAR_1} for me…\l"
 	.string "No! I’ll do my best!\p"
 	.string "Thank you!$"
 
+gText_082C0090:: @ 82C0090
 	.string "Oh, {PLAYER}{STRING 5}!\n"
 	.string "I was just hoping to see you, too!\p"
 	.string "I was wondering what move would\n"
@@ -11880,6 +12113,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{STR_VAR_2} and {STR_VAR_3}?\l"
 	.string "Which one would be better?$"
 
+gText_082C016E:: @ 82C016E
 	.string "{STR_VAR_1}? That’s great!\p"
 	.string "Knowing that you made the decision,\n"
 	.string "{PLAYER}{STRING 5}, I won’t be so upset if\l"
@@ -11887,6 +12121,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Okay, I’ll look to you for advice again.\n"
 	.string "Bye!$"
 
+gText_082C01F7:: @ 82C01F7
 	.string "How could things be this busy?\n"
 	.string "Hey, if it isn’t {PLAYER}{STRING 5}!\l"
 	.string "How’s it going?\p"
@@ -11900,12 +12135,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{PLAYER}{STRING 5}, give me some of your good\n"
 	.string "advice! Which move’d be good for me?$"
 
+gText_082C034C:: @ 82C034C
 	.string "Okay, gotcha.\n"
 	.string "I’ll make room in my schedule and\l"
 	.string "teach that move.\p"
 	.string "I’m glad I met a good mentor in you.\n"
 	.string "Thanks! See you around!$"
 
+gText_082C03CA:: @ 82C03CA
 	.string "Oh! Lucky!\n"
 	.string "I met you again, {PLAYER}!\l"
 	.string "I need to tap your mind again today.\p"
@@ -11915,6 +12152,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "best suited, {STR_VAR_2} or\l"
 	.string "{STR_VAR_3}?$"
 
+gText_082C046E:: @ 82C046E
 	.string "Ahhh!\n"
 	.string "{STR_VAR_1}, you say!\l"
 	.string "Thanks for a most cool answer!\p"
@@ -11923,6 +12161,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Let’s meet here again, okay?\n"
 	.string "Thanks!$"
 
+gText_082C04F9:: @ 82C04F9
 	.string "Oh, hello, {PLAYER}.\n"
 	.string "I trust you’ve been well?\p"
 	.string "I have to seek your advice again.\n"
@@ -11931,12 +12170,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "my lovable {STR_VAR_1}?\l"
 	.string "{STR_VAR_2} or {STR_VAR_3}?$"
 
+gText_082C0598:: @ 82C0598
 	.string "{STR_VAR_1} it is!\n"
 	.string "I will teach that right away!\p"
 	.string "Thank you, {PLAYER}.\n"
 	.string "I hope I can count on you again.\l"
 	.string "Please take care!$"
 
+gText_082C0602:: @ 82C0602
 	.string "Eek! {PLAYER}! I met you again!\n"
 	.string "I… I’m overjoyed!\p"
 	.string "Whenever I’m in need, you’re always\n"
@@ -11948,12 +12189,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which move would be better,\n"
 	.string "{STR_VAR_2} or {STR_VAR_3}?$"
 
+gText_082C06D8:: @ 82C06D8
 	.string "Oh-oh-oh! Thank you!\n"
 	.string "{STR_VAR_1} is it!\l"
 	.string "Perfectly understood!\p"
 	.string "I hope you’ll be willing to teach me\n"
 	.string "some more another time.$"
 
+gText_082C074A:: @ 82C074A
 	.string "Hola, {PLAYER}{STRING 5}, bueno!\n"
 	.string "I’m hoping for some more of\l"
 	.string "your sage advice today!\p"
@@ -11964,12 +12207,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Would it be {STR_VAR_2}?\n"
 	.string "Or {STR_VAR_3}?$"
 
+gText_082C0809:: @ 82C0809
 	.string "Uh-huh, {STR_VAR_1} it is!\n"
 	.string "Si, bueno!\l"
 	.string "I’ll get it taught, like, ka-blam!\p"
 	.string "All right, thanks, as always!\n"
 	.string "Adios!$"
 
+gText_082C086E:: @ 82C086E
 	.string "{PLAYER}{STRING 5}, it’s completely wild!\p"
 	.string "My POKéMON!\n"
 	.string "It learned six moves!\p"
@@ -11983,6 +12228,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{STR_VAR_2} or {STR_VAR_3}--which\n"
 	.string "would go with my {STR_VAR_1} best?$"
 
+gText_082C0982:: @ 82C0982
 	.string "Okay, so it’s {STR_VAR_1} you chose?\n"
 	.string "I’ll choose another move, then!\p"
 	.string "Just kidding!\n"
@@ -11990,6 +12236,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thanks, master!\n"
 	.string "I hope you’ll keep teaching me!$"
 
+gText_082C0A1D:: @ 82C0A1D
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy!\p"
 	.string "The rappin’ SAILOR am I!\n"
@@ -12000,11 +12247,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "the moves. What would be the best\l"
 	.string "for my {STR_VAR_1} so it grooves?$"
 
+gText_082C0AFD:: @ 82C0AFD
 	.string "{STR_VAR_1}, you say, hey, hey!\n"
 	.string "I’ll go teach that right away!\p"
 	.string "If it’s advice I ever need,\n"
 	.string "{PLAYER}, your word I’ll always heed!$"
 
+gText_082C0B6F:: @ 82C0B6F
 	.string "Oh, yeahah, if it isn’t {PLAYER}!\p"
 	.string "What should I do? Get your advice?\n"
 	.string "Why not? I’m already talking to you!\p"
@@ -12016,12 +12265,14 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "It’s {STR_VAR_2} or {STR_VAR_3},\l"
 	.string "what do you choose?$"
 
+gText_082C0C7D:: @ 82C0C7D
 	.string "If that {STR_VAR_1} is the best,\n"
 	.string "I’ll do as you suggest!\p"
 	.string "Well, {PLAYER}, I have to roam free,\n"
 	.string "but don’t you forget about me.\p"
 	.string "See you again, my smart friend!$"
 
+gText_082C0D0B:: @ 82C0D0B
 	.string "Gahack! Gaah! Oh, {PLAYER}{STRING 5}…\n"
 	.string "I have this lousy cold, I do…\p"
 	.string "I want to pick a move for my POKéMON,\n"
@@ -12032,11 +12283,13 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{STR_VAR_2} and {STR_VAR_3} for\l"
 	.string "my {STR_VAR_1}, which would it be?$"
 
+gText_082C0DFE:: @ 82C0DFE
 	.string "Hm, {STR_VAR_1}, all right. Cough!\n"
 	.string "I’ll go teach it when I get better.\p"
 	.string "I hope I can keep hitting you up\n"
 	.string "for help like this.$"
 
+gText_082C0E71:: @ 82C0E71
 	.string "Er… Um…\n"
 	.string "{PLAYER}{STRING 5}…?\p"
 	.string "Please, don’t look at me that way.\n"
@@ -12049,6 +12302,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If the choices were {STR_VAR_2} or\l"
 	.string "{STR_VAR_3}, which would be better?$"
 
+gText_082C0F6D:: @ 82C0F6D
 	.string "Oh… Okay!\n"
 	.string "I’ll try that {STR_VAR_1}.\p"
 	.string "I hope I can teach that move…\n"
@@ -12057,6 +12311,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If we meet again, I hope you will be\l"
 	.string "as helpful.$"
 
+gText_082C1003:: @ 82C1003
 	.string "Hm? You appear to be {PLAYER}{STRING 5}…\n"
 	.string "But are you really real?\p"
 	.string "Perhaps you’re one of those popular\n"
@@ -12069,6 +12324,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Which move would be better for it to\n"
 	.string "use, {STR_VAR_2} or {STR_VAR_3}?$"
 
+gText_082C1122:: @ 82C1122
 	.string "{STR_VAR_1}?\n"
 	.string "There’s no question about that?\p"
 	.string "I see. If that’s the case, that’s fine.\n"
@@ -12077,6 +12333,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "my POKéMON can learn.\p"
 	.string "Let us meet again!$"
 
+gText_082C11D1:: @ 82C11D1
 	.string "Oh… {PLAYER}?\n"
 	.string "It is {PLAYER}!\l"
 	.string "Oh! Sniff…sob… Please, listen!\p"
@@ -12088,6 +12345,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Could you maybe teach me something\l"
 	.string "cool to say when I win so I don’t cry?$"
 
+gText_082C12D5:: @ 82C12D5
 	.string "{STR_VAR_1}\p"
 	.string "Awesome! Wicked! Awoooh!\n"
 	.string "It’s really cool!\p"
@@ -12100,6 +12358,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "{PLAYER}…\n"
 	.string "Next time… We should battle!$"
 
+gText_082C13AB:: @ 82C13AB
 	.string "Yay! It’s {PLAYER}! Hello!\n"
 	.string "I wanted to ask you something!\p"
 	.string "I want to say something cool when\n"
@@ -12107,6 +12366,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Do you have a cool saying that\n"
 	.string "you could recommend?$"
 
+gText_082C1444:: @ 82C1444
 	.string "{STR_VAR_1}\p"
 	.string "Oh, wow! That is so cool!\n"
 	.string "Okay, I’ll say that!\p"
@@ -12116,6 +12376,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "When we meet again, it’ll be for\n"
 	.string "a battle!$"
 
+gText_082C1501:: @ 82C1501
 	.string "{PLAYER}, hello!\p"
 	.string "My POKéMON and I are ready for\n"
 	.string "anything, except for one thing.\p"
@@ -12124,6 +12385,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Could you think up something good\n"
 	.string "to say?$"
 
+gText_082C15B6:: @ 82C15B6
 	.string "{STR_VAR_1}\p"
 	.string "…Cool!\n"
 	.string "I will use that!\p"
@@ -12134,6 +12396,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Next time, let’s meet at a place\n"
 	.string "of battle!$"
 
+gText_082C165E:: @ 82C165E
 	.string "Hello, {PLAYER}…\n"
 	.string "I’m sorry to bug you, but I’m hopeless…\p"
 	.string "Even when…\n"
@@ -12145,6 +12408,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please, {PLAYER}, what should I say\n"
 	.string "if I win a battle?$"
 
+gText_082C174F:: @ 82C174F
 	.string "{STR_VAR_1}\p"
 	.string "That’s inspired…\p"
 	.string "Uh… Is it okay for someone like me\n"
@@ -12157,6 +12421,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "someone like me, but let’s meet\l"
 	.string "somewhere again!$"
 
+gText_082C1862:: @ 82C1862
 	.string "Oh, {PLAYER}{STRING 5}.\n"
 	.string "There’s something I want you to hear.\p"
 	.string "I know that I don’t always sound\n"
@@ -12169,6 +12434,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "But I can’t think of anything good!\n"
 	.string "Could you think something up for me?$"
 
+gText_082C19A0:: @ 82C19A0
 	.string "{STR_VAR_1}\p"
 	.string "Not bad!\n"
 	.string "Yup, that’s what I’ll go with!\p"
@@ -12180,6 +12446,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Next time, we battle, okay?\n"
 	.string "See you!$"
 
+gText_082C1A76:: @ 82C1A76
 	.string "Oh, I can’t get over how busy I am!\n"
 	.string "Oh, hey, I was looking for you, {PLAYER}{STRING 5}.\p"
 	.string "Are you well as usual?\n"
@@ -12193,6 +12460,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "underline my coolness when I’m done\l"
 	.string "and walking away? {PLAYER}{STRING 5}, help me!$"
 
+gText_082C1C16:: @ 82C1C16
 	.string "{STR_VAR_1}\p"
 	.string "Okay, gotcha.\n"
 	.string "I can find time to say that!\p"
@@ -12203,6 +12471,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Thanks for everything, {PLAYER}{STRING 5}!\n"
 	.string "We have to battle, you and me, one day!$"
 
+gText_082C1CF5:: @ 82C1CF5
 	.string "I lucked out again!\n"
 	.string "{PLAYER}! Am I glad to see you!\l"
 	.string "Like usual, I need your advice!\p"
@@ -12212,6 +12481,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "it with a cool flourish, what\l"
 	.string "should I say?$"
 
+gText_082C1DC1:: @ 82C1DC1
 	.string "{STR_VAR_1}\p"
 	.string "That… That’s fabulous!\n"
 	.string "It’s dignified and cool! I claim it!\p"
@@ -12224,6 +12494,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "we battle!\p"
 	.string "Thank you for everything!$"
 
+gText_082C1EDC:: @ 82C1EDC
 	.string "Oh, {PLAYER}.\n"
 	.string "I’m so glad I met you!\p"
 	.string "I no longer have any concerns with\n"
@@ -12236,6 +12507,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Please, what should I say when\n"
 	.string "I win a battle?$"
 
+gText_082C1FEC:: @ 82C1FEC
 	.string "{STR_VAR_1}\p"
 	.string "Ah! That saying! It refreshes me\n"
 	.string "and makes me feel reborn!\p"
@@ -12247,6 +12519,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Perhaps one day…\n"
 	.string "Farewell!$"
 
+gText_082C20D1:: @ 82C20D1
 	.string "Eek! I spotted {PLAYER}!\n"
 	.string "I… I’m overjoyed to see you!\p"
 	.string "Oh-oh-oh! There’s something I just\n"
@@ -12258,6 +12531,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "So now, {PLAYER}, please, I want you to\n"
 	.string "think up an exit line for when I win!$"
 
+gText_082C21FF:: @ 82C21FF
 	.string "{STR_VAR_1}\p"
 	.string "Waaaaah!\n"
 	.string "I’m going to say that?!\l"
@@ -12271,6 +12545,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "I’ve got to go now, but let’s meet\n"
 	.string "in battle one day!$"
 
+gText_082C231C:: @ 82C231C
 	.string "Hola, bueno!\n"
 	.string "{PLAYER}{STRING 5}!\p"
 	.string "You know, I’m getting the itch to roam\n"
@@ -12281,6 +12556,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "be a good boast I could say to my\l"
 	.string "fallen TRAINER opponent?$"
 
+gText_082C2407:: @ 82C2407
 	.string "{STR_VAR_1}\p"
 	.string "Uh-huh, that’s sweet!\n"
 	.string "Si, bueno!\l"
@@ -12290,6 +12566,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Give me a battle one day, OK?\n"
 	.string "Adios!$"
 
+gText_082C24B5:: @ 82C24B5
 	.string "{PLAYER}{STRING 5}, there’s big trouble!\p"
 	.string "When I win a battle, I brag about it\n"
 	.string "for an hour at least!\p"
@@ -12301,6 +12578,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "I should say after winning a battle,\l"
 	.string "master?$"
 
+gText_082C25B1:: @ 82C25B1
 	.string "{STR_VAR_1}\p"
 	.string "That’s what I should say, huh?\n"
 	.string "Then, I’ll stay away from that!\p"
@@ -12316,6 +12594,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "That’s all!\n"
 	.string "Farewell, my master!$"
 
+gText_082C2707:: @ 82C2707
 	.string "A-H-O-Y!\n"
 	.string "And that spells ahoy!\p"
 	.string "The rappin’ SAILOR am I!\n"
@@ -12326,6 +12605,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "If I win a match, what can I say\n"
 	.string "in a real cool way?$"
 
+gText_082C27D4:: @ 82C27D4
 	.string "{STR_VAR_1}\p"
 	.string "Perfect! That’s what I’ll use.\n"
 	.string "I was right to make you choose!\p"
@@ -12337,6 +12617,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "And that spells bon voyage,\l"
 	.string "to you this is my homage!$"
 
+gText_082C28D6:: @ 82C28D6
 	.string "Oh, yeah, {PLAYER}!\n"
 	.string "I found you again today!\p"
 	.string "What should I do? Ask you again?\n"
@@ -12350,6 +12631,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "a battle ends well.\p"
 	.string "Come on, I wanna hear you say it!$"
 
+gText_082C2A0B:: @ 82C2A0B
 	.string "{STR_VAR_1}\p"
 	.string "All right, all right!\n"
 	.string "I’ll use that because it’s so tight!\p"
@@ -12363,6 +12645,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "Take care, {PLAYER}!\n"
 	.string "Love ya!$"
 
+gText_082C2B50:: @ 82C2B50
 	.string "{PLAYER}{STRING 5}, I’m finished…\n"
 	.string "My nose won’t stop dripping…\p"
 	.string "I was trying to think up something\n"
@@ -12374,6 +12657,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "When I win a battle,\n"
 	.string "what should I say?$"
 
+gText_082C2C77:: @ 82C2C77
 	.string "{STR_VAR_1}\p"
 	.string "… … …That’s good.\n"
 	.string "No, it’s awe inspiring!\l"
@@ -12385,6 +12669,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "From now on, we’re rivals!\n"
 	.string "Thanks for everything!$"
 
+gText_082C2D67:: @ 82C2D67
 	.string "Er… Um…\n"
 	.string "{PLAYER}{STRING 5}…\p"
 	.string "Please, don’t look at me that way.\n"
@@ -12395,6 +12680,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "but what if I win a battle?\l"
 	.string "What should I say?$"
 
+gText_082C2E41:: @ 82C2E41
 	.string "{STR_VAR_1}\p"
 	.string "Oh… Okay!\n"
 	.string "I’ll try to say that!\l"
@@ -12404,6 +12690,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "I’ll obey all that you’ve taught me,\n"
 	.string "{PLAYER}{STRING 5}, and do the best I can.$"
 
+gText_082C2EF5:: @ 82C2EF5
 	.string "Hm? You appear to be {PLAYER}{STRING 5}…\n"
 	.string "But are you really?\l"
 	.string "Perhaps a clever {PLAYER} DOLL?\p"
@@ -12416,6 +12703,7 @@ BattleFrontier_BattleTowerLobby_Movement_2B6E95: @ 82B6E95
 	.string "More precisely, what should I say\n"
 	.string "if I win a battle?$"
 
+gText_082C3023:: @ 82C3023
 	.string "{STR_VAR_1}\p"
 	.string "… … … … … …\n"
 	.string "When I win a match…\p"
@@ -14325,77 +14613,105 @@ EventScript_TestSignpostMsg:: @ 82C8436
 	msgbox Text_ThisIsATestSignpostMsg, 3
 	end
 
+gText_082C843F:: @ 82C843F
 	.string "It’s very disappointing…$"
 
+gText_082C8458:: @ 82C8458
 	.string "Okay, I understand…$"
 
+gText_082C846C:: @ 82C846C
 	.string "I’m terribly sorry…$"
 
+gText_082C8480:: @ 82C8480
 	.string "Thank you…$"
 
+gText_082C848B:: @ 82C848B
 	.string "Ahahaha! Aren’t you embarrassed?\n"
 	.string "Everyone’s watching!$"
 
+gText_082C84C1:: @ 82C84C1
 	.string "Grr…\n"
 	.string "What the…$"
 
+gText_082C84D0:: @ 82C84D0
 	.string "My DOME ACE title isn’t just for show!$"
 
+gText_082C84F7:: @ 82C84F7
 	.string "Ahahaha!\n"
 	.string "You’re inspiring!$"
 
+gText_082C8512:: @ 82C8512
 	.string "Way to work!\n"
 	.string "That was a good lesson, eh?$"
 
+gText_082C853B:: @ 82C853B
 	.string "Good job!\n"
 	.string "You know what you’re doing!$"
 
+gText_082C8561:: @ 82C8561
 	.string "Hey, hey, hey!\n"
 	.string "You’re finished already?$"
 
+gText_082C8589:: @ 82C8589
 	.string "What happened here?$"
 
+gText_082C859D:: @ 82C859D
 	.string "Humph…$"
 
+gText_082C85A4:: @ 82C85A4
 	.string "Urk…$"
 
+gText_082C85A9:: @ 82C85A9
 	.string "Hah!$"
 
+gText_082C85AE:: @ 82C85AE
 	.string "Darn!$"
 
+gText_082C85B4:: @ 82C85B4
 	.string "Oh, come on!\n"
 	.string "You have to try harder than that!$"
 
+gText_082C85E3:: @ 82C85E3
 	.string "No way!\n"
 	.string "Good job!$"
 
+gText_082C85F5:: @ 82C85F5
 	.string "Heheh!\n"
 	.string "What did you expect?$"
 
+gText_082C8611:: @ 82C8611
 	.string "Huh?\n"
 	.string "Are you serious?!$"
 
+gText_082C8628:: @ 82C8628
 	.string "Your POKéMON are wimpy because\n"
 	.string "you’re wimpy as a TRAINER!$"
 
+gText_082C8662:: @ 82C8662
 	.string "Ah…\n"
 	.string "Now this is something else…$"
 
+gText_082C8682:: @ 82C8682
 	.string "Gwahahaha!\n"
 	.string "My brethren, we have nothing to fear!$"
 
+gText_082C86B3:: @ 82C86B3
 	.string "Gwah!\n"
 	.string "Hahahaha!$"
 
+gText_082C86C3:: @ 82C86C3
 	.string "Hey! What’s wrong with you!\n"
 	.string "Let’s see some effort! Get up!$"
 
+gText_082C86FE:: @ 82C86FE
 	.string "That’s it! You’ve done great!\n"
 	.string "You’ve worked hard for this!$"
 
+gText_082C8739:: @ 82C8739
 	.string "Hey! Don’t you give up now!\n"
 	.string "Get up! Don’t lose faith in yourself!$"
 
+gText_082C877B:: @ 82C877B
 	.string "That’s it! You’ve done it!\n"
 	.string "You kept working for this!$"
 

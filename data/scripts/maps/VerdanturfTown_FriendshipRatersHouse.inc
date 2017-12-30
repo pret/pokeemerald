@@ -5,7 +5,7 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_203031:: @ 8203031
 	lock
 	faceplayer
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_2030ED, 4
-	specialvar VAR_RESULT, sub_8138C04
+	specialvar VAR_RESULT, GetLeadMonFriendshipScore
 	switch VAR_RESULT
 	case 0, VerdanturfTown_FriendshipRatersHouse_EventScript_203094
 	case 1, VerdanturfTown_FriendshipRatersHouse_EventScript_20309E

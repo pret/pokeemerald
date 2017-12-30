@@ -11813,7 +11813,7 @@ _081CCE34:
 	mov r1, r8
 	lsrs r0, r1, 24
 	lsrs r1, r7, 24
-	bl sub_8145CF4
+	bl GetLandmarkName
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _081CCE08

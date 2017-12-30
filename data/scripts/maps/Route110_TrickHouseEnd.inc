@@ -13,7 +13,7 @@ Route110_TrickHouseEnd_MapScript1_26ACC4: @ 826ACC4
 Route110_TrickHouseEnd_MapScript1_26ACD0: @ 826ACD0
 	setvar VAR_0x4001, 0
 	setvar VAR_0x4002, 0
-	special sub_8138FD4
+	special SetTrickHouseEndRoomFlag
 	end
 
 Route110_TrickHouseEnd_MapScript2_26ACDE: @ 826ACDE
@@ -171,7 +171,7 @@ Route110_TrickHouseEnd_EventScript_26AF28:: @ 826AF28
 	call_if 1, Route110_TrickHouseEnd_EventScript_26B002
 	msgbox Route110_TrickHouseEnd_Text_26B69A, 4
 	call Route110_TrickHouseEnd_EventScript_26AFCF
-	special sub_8138FEC
+	special ResetTrickHouseEndRoomFlag
 	release
 	end
 

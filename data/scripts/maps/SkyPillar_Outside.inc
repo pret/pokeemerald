@@ -76,7 +76,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	setflag FLAG_SYS_WEATHER_CTRL
 	setweather 15
 	doweather
-	special sub_81379F8
+	special WaitWeather
 	waitstate
 	delay 30
 	msgbox SkyPillar_Outside_Text_23953A, 4

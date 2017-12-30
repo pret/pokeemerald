@@ -816,7 +816,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_29034B:: @ 829034B
 
 MauvilleCity_PokemonCenter_1F_EventScript_290359:: @ 8290359
 	special sub_81203FC
-	special sub_8138AC0
+	special ShowFieldMessageStringVar4
 	waitmessage
 	yesnobox 20, 8
 	compare VAR_RESULT, 1

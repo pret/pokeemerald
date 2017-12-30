@@ -222,7 +222,7 @@ PetalburgCity_Gym_EventScript_204AAC:: @ 8204AAC
 	clearflag FLAG_0x2D6
 	clearflag FLAG_0x362
 	setflag FLAG_0x379
-	special sub_8137A0C
+	special InitBirchState
 	warp PETALBURG_CITY, 255, 15, 8
 	waitstate
 	release
@@ -1204,12 +1204,12 @@ PetalburgCity_Gym_EventScript_205733:: @ 8205733
 	return
 
 PetalburgCity_Gym_EventScript_205746:: @ 8205746
-	special sub_81388E4
+	special PetalburgGymSpecial1
 	waitstate
 	return
 
 PetalburgCity_Gym_EventScript_20574B:: @ 820574B
-	special sub_8138AA4
+	special PetalburgGymSpecial2
 	return
 
 PetalburgCity_Gym_EventScript_20574F:: @ 820574F

@@ -110,7 +110,7 @@ Route120_EventScript_1F5527:: @ 81F5527
 	call_if 1, Route120_EventScript_1F562F
 	compare VAR_RESULT, 0
 	call_if 1, Route120_EventScript_1F5638
-	specialvar VAR_RESULT, sub_8138AF0
+	specialvar VAR_RESULT, GetPlayerTrainerIdOnesDigit
 	switch VAR_RESULT
 	case 0, Route120_EventScript_1F55CA
 	case 5, Route120_EventScript_1F55CA

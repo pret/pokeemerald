@@ -53,7 +53,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_222FD8:: @ 8222FD8
 	compare VAR_0x405D, 2
 	goto_eq MossdeepCity_SpaceCenter_1F_EventScript_223024
 	dodailyevents
-	specialvar VAR_RESULT, sub_8138BDC
+	specialvar VAR_RESULT, GetWeekCount
 	buffernumberstring 0, VAR_RESULT
 	compare VAR_RESULT, 0
 	call_if 1, MossdeepCity_SpaceCenter_1F_EventScript_223012
@@ -75,7 +75,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_22301B:: @ 822301B
 
 MossdeepCity_SpaceCenter_1F_EventScript_223024:: @ 8223024
 	dodailyevents
-	specialvar VAR_RESULT, sub_8138BDC
+	specialvar VAR_RESULT, GetWeekCount
 	buffernumberstring 0, VAR_RESULT
 	compare VAR_RESULT, 0
 	call_if 1, MossdeepCity_SpaceCenter_1F_EventScript_223051

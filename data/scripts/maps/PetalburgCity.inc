@@ -31,7 +31,7 @@ PetalburgCity_MapScript2_1DC31C: @ 81DC31C
 PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	lockall
 	special copy_player_party_to_sav1
-	special sub_813946C
+	special PutZigzagoonInPlayerParty
 	applymovement 2, PetalburgCity_Movement_1DC451
 	applymovement 255, PetalburgCity_Movement_1DC430
 	waitmovement 0

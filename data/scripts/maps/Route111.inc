@@ -170,7 +170,7 @@ Route111_EventScript_1F0EB9:: @ 81F0EB9
 	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_272054
 	setflag FLAG_0x92C
-	special sub_8138B10
+	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_2A6F3D, 4
 	release
 	end
@@ -278,7 +278,7 @@ Route111_EventScript_1F0FBD:: @ 81F0FBD
 Route111_EventScript_1F0FC5:: @ 81F0FC5
 	lock
 	faceplayer
-	setflag FLAG_0x8A3
+	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
 	msgbox Route111_Text_1F1475, 5
 	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_1F0FE7

@@ -46,14 +46,14 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227ECF:: @ 8227ECF
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EDD:: @ 8227EDD
 	setvar VAR_0x40C0, 1
-	special sub_8138AC0
+	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EE8:: @ 8227EE8
 	setvar VAR_0x40C0, 2
-	special sub_8138AC0
+	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return

@@ -21,7 +21,7 @@ MossdeepCity_House4_EventScript_222DF7:: @ 8222DF7
 	special sub_80E8BC8
 	compare VAR_RESULT, 0
 	goto_eq MossdeepCity_House4_EventScript_222E14
-	special sub_8139200
+	special GetSecretBaseNearbyMapName
 	msgbox MossdeepCity_House4_Text_222ECC, 4
 	release
 	end

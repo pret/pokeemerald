@@ -30,7 +30,7 @@ BattleFrontier_Lounge1_EventScript_25E7B6:: @ 825E7B6
 	return
 
 BattleFrontier_Lounge1_EventScript_25E7BF:: @ 825E7BF
-	specialvar VAR_RESULT, sub_81396E0
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, 412
 	goto_eq BattleFrontier_Lounge1_EventScript_25E7FF
 	special sub_8139D98

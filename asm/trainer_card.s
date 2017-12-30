@@ -3082,7 +3082,7 @@ _080C4214:
 	movs r1, 0x60
 	movs r2, 0
 	movs r3, 0
-	bl sub_80A2BAC
+	bl TintPalette_CustomTone
 	b _080C424A
 _080C422A:
 	adds r0, r4, r5
@@ -3094,7 +3094,7 @@ _080C422A:
 	lsls r1, 1
 	str r1, [sp]
 	movs r1, 0x60
-	bl sub_80A2BAC
+	bl TintPalette_CustomTone
 	b _080C424A
 _080C4242:
 	adds r0, r4, r5

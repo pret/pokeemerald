@@ -3,7 +3,7 @@ DesertUnderpass_MapScripts:: @ 823AF37
 	.byte 0
 
 DesertUnderpass_MapScript1_23AF3D: @ 823AF3D
-	setflag FLAG_0x8DE
+	setflag FLAG_LANDMARK_DESERT_UNDERPASS
 	end
 
 DesertUnderpass_EventScript_23AF41:: @ 823AF41

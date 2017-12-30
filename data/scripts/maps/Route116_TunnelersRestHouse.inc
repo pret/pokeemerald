@@ -3,7 +3,7 @@ Route116_TunnelersRestHouse_MapScripts:: @ 822B850
 	.byte 0
 
 Route116_TunnelersRestHouse_MapScript1_22B856: @ 822B856
-	setflag FLAG_0x8BA
+	setflag FLAG_LANDMARK_TUNNELERS_REST_HOUSE
 	end
 
 Route116_TunnelersRestHouse_EventScript_22B85A:: @ 822B85A
