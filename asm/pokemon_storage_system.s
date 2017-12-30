@@ -5343,7 +5343,7 @@ sub_80CA044: @ 80CA044
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
-	ldr r1, =gUnknown_08DD2FE8
+	ldr r1, =gPSSMenu_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -6104,7 +6104,7 @@ sub_80CA704: @ 80CA704
 	ldr r1, [r4]
 	adds r1, 0xB0
 	bl LZ77UnCompWram
-	ldr r0, =gUnknown_08DD36A8
+	ldr r0, =gPSSMenu_Pal
 	movs r1, 0x10
 	movs r2, 0x20
 	bl LoadPalette

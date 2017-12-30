@@ -4469,159 +4469,429 @@ gBerryBlenderStartTiles:: @ 8DCA588
 
 	.space 0x200
 
-   .align 2
+	.align 2
 gBerryBlenderArrowTiles:: @ 8DCAB88
 	.incbin "graphics/berry_blender/arrow.4bpp"
 
-gUnknown_08DCB388:: @ 8DCB388
-	.incbin "baserom.gba", 0xdcb388, 0xA28
+	.space 0x2C0
 
-gUnknown_08DCBDB0:: @ 8DCBDB0
-	.incbin "baserom.gba", 0xdcbdb0, 0x20
+	.align 2
+gEasyChatCursor_Pal::
+	.incbin "graphics/easy_chat/cursor.gbapal"
 
-gUnknown_08DCBDD0:: @ 8DCBDD0
-	.incbin "baserom.gba", 0xdcbdd0, 0x140
+	.align 2
+gEasyChatCursor_Gfx:: @ 8DCB668
+	.incbin "graphics/easy_chat/cursor.4bpp.lz"
 
-gUnknown_08DCBF10:: @ 8DCBF10
-	.incbin "baserom.gba", 0xdcbf10, 0x10c
+	.align 2
+gEasyChatRightWindow_Pal::
+	.incbin "graphics/easy_chat/rwindow.gbapal"
 
-gUnknown_08DCC01C:: @ 8DCC01C
-	.incbin "baserom.gba", 0xdcc01c, 0x20
+	.align 2
+gEasyChatRightWindow_Gfx::
+	.incbin "graphics/easy_chat/rwindow.4bpp.lz"
 
-gUnknown_08DCC03C:: @ 8DCC03C
-	.incbin "baserom.gba", 0xdcc03c, 0x20
+	.align 2
+gEasyChatMode_Gfx:: @ 8DCBAB0
+	.incbin "graphics/easy_chat/mode.4bpp.lz"
 
-gUnknown_08DCC05C:: @ 8DCC05C
-	.incbin "baserom.gba", 0xdcc05c, 0x5ec
+	.align 2
+gEasyChatMode_Pal:: @ 8DCBDB0
+	.incbin "graphics/easy_chat/mode.gbapal"
 
+	.align 2
+gEasyChatWindow_Gfx:: @ 8DCBDD0
+	.incbin "graphics/easy_chat/window.4bpp.lz" @ uses mode pal
+
+	.align 2
+gEasyChatWindow_Tilemap:: @ 8DCBF10
+	.incbin "graphics/easy_chat/window.bin.lz"
+
+	.align 2
+gWallclockMale_Pal:: @ 8DCC01C
+	.incbin "graphics/interface/wallclock_male.gbapal"
+
+	.align 2
+gWallclockFemale_Pal:: @ 8DCC03C
+	.incbin "graphics/interface/wallclock_female.gbapal"
+
+	.align 2
+gWallclock_Gfx:: @ 8DCC05C
+	.incbin "graphics/interface/wallclock.4bpp.lz"
+
+	.align 2
 gUnknown_08DCC648:: @ 8DCC648
-	.incbin "baserom.gba", 0xdcc648, 0x2c0
+	.incbin "graphics/interface/wallclock1.bin.lz"
 
+	.align 2
 gUnknown_08DCC908:: @ 8DCC908
-	 .incbin "baserom.gba", 0xdcc908, 0x290
+	.incbin "graphics/interface/wallclock2.bin.lz"
 
-gUnknown_08DCCB98:: @ 8DCCB98
-	 .incbin "baserom.gba", 0xdccb98, 0x20
+	.align 2
+gUsePokeblockCondition_Pal:: @ 8DCCB98
+	.incbin "graphics/pokeblock/use_screen/condition.gbapal"
 
-gUnknown_08DCCBB8:: @ 8DCCBB8
-	 .incbin "baserom.gba", 0xdccbb8, 0x184
+	.align 2
+gUsePokeblockCondition_Gfx:: @ 8DCCBB8
+	.incbin "graphics/pokeblock/use_screen/condition.4bpp.lz"
 
-gUnknown_08DCCD3C:: @ 8DCCD3C
-	 .incbin "baserom.gba", 0xdccd3c, 0x20
+	.align 2
+gUsePokeblockUpDown_Pal:: @ 8DCCD3C
+	.incbin "graphics/pokeblock/use_screen/updown.gbapal"
 
-gUnknown_08DCCD5C:: @ 8DCCD5C
-	 .incbin "baserom.gba", 0xdccd5c, 0x200
+	.align 2
+gUsePokeblockUpDown_Gfx:: @ 8DCCD5C
+	.incbin "graphics/pokeblock/use_screen/updown.4bpp"
 
-gUnknown_08DCCF5C:: @ 8DCCF5C
-	.incbin "baserom.gba", 0xdccf5c, 0x20
+	.align 2
+gUsePokeblockGraph_Pal:: @ 8DCCF5C
+	.incbin "graphics/pokeblock/use_screen/graph.gbapal"
 
-gUnknown_08DCCF7C:: @ 8DCCF7C
-	.incbin "baserom.gba", 0xdccf7c, 0x8a0
+	.align 2
+gUsePokeblockGraph_Gfx:: @ 8DCCF7C
+	.incbin "graphics/pokeblock/use_screen/graph.4bpp.lz"
 
-gUnknown_08DCD81C:: @ 8DCD81C
-	.incbin "baserom.gba", 0xdcd81c, 0x214
+	.align 2
+gUsePokeblockGraph_Tilemap:: @ 8DCD81C
+	.incbin "graphics/pokeblock/use_screen/graph.bin.lz"
 
-gUnknown_08DCDA30:: @ 8DCDA30
-	.incbin "baserom.gba", 0xdcda30, 0x60
+	.align 2
+gUsePokeblockNatureWin_Pal:: @ 8DCDA30
+	.incbin "graphics/pokeblock/use_screen/nature.gbapal"
 
-gUnknown_08DCDA90:: @ 8DCDA90
-	.incbin "baserom.gba", 0xdcda90, 0xa0
+	@ slot machine
 
-gUnknown_08DCDB30:: @ 8DCDB30
-	.incbin "baserom.gba", 0xdcdb30, 0xc40
+	.align 2
+gSlotMachineMenu_Pal:: @ 8DCDA90
+	.incbin "graphics/slot_machine/menu.gbapal"
 
-gUnknown_08DCE770:: @ 8DCE770
-	.incbin "baserom.gba", 0xdce770, 0x500
+	.align 2
+gSlotMachineMenu_Gfx:: @ 8DCDB30
+	.incbin "graphics/slot_machine/menu.4bpp.lz"
 
+	.align 2
+gSlotMachineMenu_Tilemap:: @ 8DCE770
+	.incbin "graphics/slot_machine/menu.bin"
+
+	.align 2
 gUnknown_08DCEC70:: @ 8DCEC70
-	.incbin "baserom.gba", 0xdcec70, 0x13e0
+	.incbin "graphics/slot_machine/slots_layout.bin"
 
-gUnknown_08DD0050:: @ 8DD0050
-	 .incbin "baserom.gba", 0xdd0050, 0x1A08
+	.align 2
+gUnknown_08DCF170::
+	.incbin "graphics/slot_machine/reel_symbols/1.gbapal"
 
-gUnknown_08DD1A58:: @ 8DD1A58
-	 .incbin "baserom.gba", 0xdd1a58, 0x60
+	.align 2
+gUnknown_08DCF190::
+	.incbin "graphics/slot_machine/reel_pikachu.gbapal"
 
-gUnknown_08DD1AB8:: @ 8DD1AB8
-	 .incbin "baserom.gba", 0xdd1ab8, 0x4C0
+	.align 2
+gUnknown_08DCF1B0::
+	.incbin "graphics/slot_machine/shadow.gbapal"
 
+	.align 2
+gSlotMachineReelTime_Pal::
+	.incbin "graphics/slot_machine/reel_time.gbapal"
+
+	.align 2
+gUnknown_08DCF1F0::
+	.incbin "graphics/slot_machine/smoke.gbapal" @ also duck and pika aura
+
+	.align 2
+gUnknown_08DCF210::
+	.incbin "graphics/slot_machine/reel_time_explosion/0.gbapal"
+
+	.align 2
+gUnknown_08DCF230::
+	.incbin "graphics/slot_machine/spr6.gbapal" @ huh?
+
+	.align 2
+gSlotMachineReelSymbol1Tiles:: @ 8DCF250
+	.incbin "graphics/slot_machine/reel_symbols/1.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol2Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/2.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol3Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/3.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol4Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/4.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol5Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/5.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol6Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/6.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol7Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/7.4bpp"
+
+	.align 2
+gSlotMachineReelTime_Gfx:: @ 8DD0050
+	.incbin "graphics/slot_machine/reel_time.4bpp.lz"
+
+	.align 2
+gSlotMachineNumber0Tiles::
+	.incbin "graphics/slot_machine/numbers/0.4bpp"
+
+	.align 2
+gSlotMachineNumber1Tiles::
+	.incbin "graphics/slot_machine/numbers/1.4bpp"
+
+	.align 2
+gSlotMachineNumber2Tiles::
+	.incbin "graphics/slot_machine/numbers/2.4bpp"
+
+	.align 2
+gSlotMachineNumber3Tiles::
+	.incbin "graphics/slot_machine/numbers/3.4bpp"
+
+	.align 2
+gSlotMachineNumber4Tiles::
+	.incbin "graphics/slot_machine/numbers/4.4bpp"
+
+	.align 2
+gSlotMachineNumber5Tiles::
+	.incbin "graphics/slot_machine/numbers/5.4bpp"
+
+	.align 2
+gSlotMachineNumber6Tiles::
+	.incbin "graphics/slot_machine/numbers/6.4bpp"
+
+	.align 2
+gSlotMachineNumber7Tiles::
+	.incbin "graphics/slot_machine/numbers/7.4bpp"
+
+	.align 2
+gSlotMachineNumber8Tiles::
+	.incbin "graphics/slot_machine/numbers/8.4bpp"
+
+	.align 2
+gSlotMachineNumber9Tiles::
+	.incbin "graphics/slot_machine/numbers/9.4bpp"
+
+	.align 2
+gSlotMachineReelTimeBolt::
+	.incbin "graphics/slot_machine/bolt.4bpp"
+
+	.align 2
+gSlotMachineReelTimeDuck::
+	.incbin "graphics/slot_machine/duck.4bpp"
+
+	.align 2
+gSlotMachineReelTimeSmoke::
+	.incbin "graphics/slot_machine/smoke.4bpp"
+
+	.align 2
+gSlotMachineReelTimeNumber0::
+	.incbin "graphics/slot_machine/reel_time_numbers/0.4bpp"
+
+	.align 2
+gSlotMachineReelTimeNumber1::
+	.incbin "graphics/slot_machine/reel_time_numbers/1.4bpp"
+
+	.align 2
+gSlotMachineReelTimeNumber2::
+	.incbin "graphics/slot_machine/reel_time_numbers/2.4bpp"
+
+	.align 2
+gSlotMachineReelTimeNumber3::
+	.incbin "graphics/slot_machine/reel_time_numbers/3.4bpp"
+
+	.align 2
+gSlotMachineReelTimeNumber4::
+	.incbin "graphics/slot_machine/reel_time_numbers/4.4bpp"
+
+	.align 2
+gSlotMachineReelTimeNumber5::
+	.incbin "graphics/slot_machine/reel_time_numbers/5.4bpp"
+
+	.align 2
+gSlotMachineReelTimeLargeBolt0::
+	.incbin "graphics/slot_machine/large_bolt/0.4bpp"
+
+	.align 2
+gSlotMachineReelTimeLargeBolt1::
+	.incbin "graphics/slot_machine/large_bolt/1.4bpp"
+
+	.align 2
+gSlotMachineReelTimeExplosion0::
+	.incbin "graphics/slot_machine/reel_time_explosion/0.4bpp"
+
+	.align 2
+gSlotMachineReelTimeExplosion1::
+	.incbin "graphics/slot_machine/reel_time_explosion/1.4bpp"
+
+	.align 2
+gSlotMachineReelTimeShadow::
+	.incbin "graphics/slot_machine/shadow.4bpp"
+
+	.align 2
+gSlotMachineReelTimePikaAura::
+	.incbin "graphics/slot_machine/pika_aura.4bpp"
+
+	.align 2
+gUnknown_08DD19F8::
+	.incbin "graphics/unknown/unknown_DD19F8.bin" @ might be a palette?
+
+	.align 2
+gUnknown_08DD1A18::
+	.incbin "graphics/unknown/unknown_DD1A18.4bpp"
+
+	@ trainer card
+
+	.align 2
+gEmeraldTrainerCard0Star_Pal:: @ 8DD1A58
+	.incbin "graphics/trainer_card/0star.gbapal"
+
+	.align 2
+gEmeraldTrainerCard_Gfx:: @ 8DD1AB8
+	.incbin "graphics/trainer_card/card.4bpp.lz"
+
+	@ what are these? lz compressed files used for something, cant tell if tilemaps
+
+	.align 2
 gUnknown_08DD1F78:: @ 8DD1F78
-	 .incbin "baserom.gba", 0xdd1f78, 0x98
+	.incbin "graphics/unknown/unknown_DD1F78.bin.lz"
 
+	.align 2
 gUnknown_08DD2010:: @ 8DD2010
-	 .incbin "baserom.gba", 0xdd2010, 0x1A0
+	.incbin "graphics/unknown/unknown_DD2010.bin.lz"
 
+	.align 2
 gUnknown_08DD21B0:: @ 8DD21B0
-	 .incbin "baserom.gba", 0xdd21b0, 0xDC
+	.incbin "graphics/unknown/unknown_DD21B0.bin.lz"
 
+	.align 2
 gUnknown_08DD228C:: @ 8DD228C
-	 .incbin "baserom.gba", 0xdd228c, 0x180
+	.incbin "graphics/unknown/unknown_DD228C.bin.lz"
 
-gUnknown_08DD240C:: @ 8DD240C
-	 .incbin "baserom.gba", 0xdd240c, 0x60
+	.align 2
+gFireRedTrainerCard0Star_Pal:: @ 8DD240C
+	.incbin "graphics/trainer_card/0star_fr.gbapal"
 
-gUnknown_08DD246C:: @ 8DD246C
-	.incbin "baserom.gba", 0xdd246c, 0x674
+	.align 2
+gFireRedTrainerCard_Gfx:: @ 8DD246C
+	.incbin "graphics/trainer_card/card_fr.4bpp.lz"
 
+	@ more of these weird compressed files, probably for the FR trainer card
+
+	.align 2
 gUnknown_08DD2AE0:: @ 8DD2AE0
-	.incbin "baserom.gba", 0xdd2ae0, 0x98
+	.incbin "graphics/unknown/unknown_DD2AE0.bin.lz"
 
+	.align 2
 gUnknown_08DD2B78:: @ 8DD2B78
-	.incbin "baserom.gba", 0xdd2b78, 0x1b8
+	.incbin "graphics/unknown/unknown_DD2B78.bin.lz"
 
+	.align 2
 gUnknown_08DD2D30:: @ 8DD2D30
-	.incbin "baserom.gba", 0xdd2d30, 0x12c
+	.incbin "graphics/unknown/unknown_DD2D30.bin.lz"
 
+	.align 2
 gUnknown_08DD2E5C:: @ 8DD2E5C
-	.incbin "baserom.gba", 0xdd2e5c, 0x18c
+	.incbin "graphics/unknown/unknown_DD2E5C.bin.lz"
 
-gUnknown_08DD2FE8:: @ 8DD2FE8
-	.incbin "baserom.gba", 0xdd2fe8, 0x6c0
+	@ pokemon storage system
 
-gUnknown_08DD36A8:: @ 8DD36A8
-	.incbin "baserom.gba", 0xdd36a8, 0x20
+	.align 2
+gPSSMenu_Gfx:: @ 8DD2FE8
+	.incbin "graphics/pokemon_storage/menu.4bpp.lz"
 
+	.align 2
+gPSSMenu_Pal:: @ 8DD36A8
+	.incbin "graphics/pokemon_storage/menu.gbapal" @ pal for the options in the gfx
+
+	.align 2
 gUnknown_08DD36C8:: @ 8DD36C8
-	.incbin "baserom.gba", 0xdd36c8, 0xb0
+	.incbin "graphics/unknown/unknown_DD36C8.bin.lz"
 
-gUnknown_08DD3778:: @ 8DD3778
-	.incbin "baserom.gba", 0xdd3778, 0xc0
+	@ naming screen
 
-gUnknown_08DD3838:: @ 8DD3838
-	.incbin "baserom.gba", 0xdd3838, 0xd0c
+	.align 2
+gNamingScreenMenu_Pal:: @ 8DD3778
+	.incbin "graphics/naming_screen/menu.gbapal"
 
+	.align 2
+gNamingScreenMenu_Gfx:: @ 8DD3838
+	.incbin "graphics/naming_screen/menu.4bpp.lz"
+
+	.align 2
+gNamingScreenRWindow_Gfx::
+	.incbin "graphics/naming_screen/rwindow.4bpp"
+
+	.align 2
+gNamingScreenROptions_Gfx::
+	.incbin "graphics/naming_screen/roptions.4bpp"
+
+	.align 2
+gNamingScreenCursor_Gfx::
+	.incbin "graphics/naming_screen/cursor.4bpp"
+
+	.align 2
+gNamingScreenKeyboardButton_Gfx::
+	.incbin "graphics/naming_screen/keyboard_button.4bpp"
+
+	.align 2
+gNamingScreenRightPointingTriangleTiles::
+	.incbin "graphics/naming_screen/right_pointing_triangle.4bpp"
+
+	.align 2
+gNamingScreenUnderscoreTiles::
+	.incbin "graphics/naming_screen/underscore.4bpp"
+
+	.align 2
 gUnknown_08DD4544:: @ 8DD4544
-	.incbin "baserom.gba", 0xdd4544, 0xdc
+	.incbin "graphics/unknown/unknown_DD4544.bin.lz"
 
+	.align 2
 gUnknown_08DD4620:: @ 8DD4620
-	.incbin "baserom.gba", 0xdd4620, 0xc0
+	.incbin "graphics/unknown/unknown_DD4620.bin.lz"
 
+	.align 2
 gUnknown_08DD46E0:: @ 8DD46E0
-	.incbin "baserom.gba", 0xdd46e0, 0xc0
+	.incbin "graphics/unknown/unknown_DD46E0.bin.lz"
 
+	.align 2
 gUnknown_08DD47A0:: @ 8DD47A0
-	.incbin "baserom.gba", 0xdd47a0, 0xc0
+	.incbin "graphics/unknown/unknown_DD47A0.bin.lz"
 
-gUnknown_08DD4860:: @ 8DD4860
-	.incbin "baserom.gba", 0xdd4860, 0x20
+	@ link
 
-gUnknown_08DD4880:: @ 8DD4880
-	.incbin "baserom.gba", 0xdd4880, 0x238
+	.align 2
+gLinkMiscMenu_Pal:: @ 8DD4860
+	.incbin "graphics/link/misc.gbapal"
 
-gUnknown_08DD4AB8:: @ 8DD4AB8
-	.incbin "baserom.gba", 0xdd4ab8, 0xf8
+	.align 2
+gLinkMiscMenu_Gfx:: @ 8DD4880
+	.incbin "graphics/link/misc.4bpp.lz" @ dont know where this is used
 
+	.align 2
+gLinkMiscMenu_Tilemap:: @ 8DD4AB8
+	.incbin "graphics/link/misc.bin.lz"
+
+	.align 2
 gUnknown_08DD4BB0:: @ 8DD4BB0
-	.incbin "baserom.gba", 0xdd4bb0, 0x20
+	.incbin "graphics/link/link1.gbapal"
 
+	.align 2
 gUnknown_08DD4BD0:: @ 8DD4BD0
-	.incbin "baserom.gba", 0xdd4bd0, 0x20
+	.incbin "graphics/link/link2.gbapal"
 
+	.align 2
 gUnknown_08DD4BF0:: @ 8DD4BF0
-	.incbin "baserom.gba", 0xdd4bf0, 0x5c
+	.incbin "graphics/link/link_winedge.4bpp.lz"
 
+	.align 2
 gUnknown_08DD4C4C:: @ 8DD4C4C
-	.incbin "baserom.gba", 0xdd4c4c, 0xac
+	.incbin "graphics/link/link_winedge.bin.lz"
 
 	.align 2
 gUnknown_08DD4CF8:: @ 8DD4CF8

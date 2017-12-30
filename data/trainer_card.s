@@ -16,28 +16,28 @@
 gUnknown_0856F018:: @ 856F018
 	 .incbin "baserom.gba", 0x56f018, 0x194
 
-gUnknown_0856F1AC:: @ 856F1AC
+gEmeraldTrainerCard1Star_Pal:: @ 856F1AC
 	 .incbin "baserom.gba", 0x56f1ac, 0x60
 
-gUnknown_0856F20C:: @ 856F20C
+gFireRedTrainerCard1Star_Pal:: @ 856F20C
 	 .incbin "baserom.gba", 0x56f20c, 0x60
 
-gUnknown_0856F26C:: @ 856F26C
+gEmeraldTrainerCard2Star_Pal:: @ 856F26C
 	 .incbin "baserom.gba", 0x56f26c, 0x60
 
-gUnknown_0856F2CC:: @ 856F2CC
+gFireRedTrainerCard2Star_Pal:: @ 856F2CC
 	 .incbin "baserom.gba", 0x56f2cc, 0x60
 
-gUnknown_0856F32C:: @ 856F32C
+gEmeraldTrainerCard3Star_Pal:: @ 856F32C
 	 .incbin "baserom.gba", 0x56f32c, 0x60
 
-gUnknown_0856F38C:: @ 856F38C
+gFireRedTrainerCard3Star_Pal:: @ 856F38C
 	 .incbin "baserom.gba", 0x56f38c, 0x60
 
-gUnknown_0856F3EC:: @ 856F3EC
+gEmeraldTrainerCard4Star_Pal:: @ 856F3EC
 	 .incbin "baserom.gba", 0x56f3ec, 0x60
 
-gUnknown_0856F44C:: @ 856F44C
+gFireRedTrainerCard4Star_Pal:: @ 856F44C
 	 .incbin "baserom.gba", 0x56f44c, 0x60
 
 gUnknown_0856F4AC:: @ 856F4AC
@@ -79,19 +79,21 @@ gUnknown_0856FAB4:: @ 856FAB4
 gUnknown_0856FAC4:: @ 856FAC4
 	.incbin "baserom.gba", 0x56fac4, 0x20
 
-gUnknown_0856FAE4:: @ 856FAE4
-	.4byte gUnknown_08DD1A58
-	.4byte gUnknown_0856F1AC
-	.4byte gUnknown_0856F26C
-	.4byte gUnknown_0856F32C
-	.4byte gUnknown_0856F3EC
+	.align 2
+gEmeraldTrainerCardStarPals:: @ 856FAE4
+	.4byte gEmeraldTrainerCard0Star_Pal
+	.4byte gEmeraldTrainerCard1Star_Pal
+	.4byte gEmeraldTrainerCard2Star_Pal
+	.4byte gEmeraldTrainerCard3Star_Pal
+	.4byte gEmeraldTrainerCard4Star_Pal
 
-gUnknown_0856FAF8:: @ 856FAF8
-	.4byte gUnknown_08DD240C
-	.4byte gUnknown_0856F20C
-	.4byte gUnknown_0856F2CC
-	.4byte gUnknown_0856F38C
-	.4byte gUnknown_0856F44C
+	.align 2
+gFireRedTrainerCardStarPals:: @ 856FAF8
+	.4byte gFireRedTrainerCard0Star_Pal
+	.4byte gFireRedTrainerCard1Star_Pal
+	.4byte gFireRedTrainerCard2Star_Pal
+	.4byte gFireRedTrainerCard3Star_Pal
+	.4byte gFireRedTrainerCard4Star_Pal
 
 gUnknown_0856FB0C:: @ 856FB0C
 	.incbin "baserom.gba", 0x56fb0c, 0x3

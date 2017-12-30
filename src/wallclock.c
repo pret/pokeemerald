@@ -92,8 +92,8 @@ static const struct CompressedSpriteSheet gUnknown_085B2208 = {
 };
 static const u32 filler_85B2210[2] = {};
 static const struct SpritePalette gUnknown_085B2218[] = {
-    { gUnknown_08DCC01C, TAG_PAL_WALL_CLOCK_HAND },
-    { gUnknown_08DCC03C, 0x1001 },
+    { gWallclockMale_Pal, TAG_PAL_WALL_CLOCK_HAND },
+    { gWallclockFemale_Pal, 0x1001 },
     {}
 };
 static const struct OamData Unknown_085B2230 = {
@@ -561,14 +561,14 @@ static void LoadWallClockGraphics(void)
     DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
     DmaClear32(3, (void *)OAM, OAM_SIZE);
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);
-    LZ77UnCompVram(gUnknown_08DCC05C, (void *)VRAM);
+    LZ77UnCompVram(gWallclock_Gfx, (void *)VRAM);
     if (gSpecialVar_0x8004 == 0)
     {
-        LoadPalette(gUnknown_08DCC01C, 0x00, 0x20);
+        LoadPalette(gWallclockMale_Pal, 0x00, 0x20);
     }
     else
     {
-        LoadPalette(gUnknown_08DCC03C, 0x00, 0x20);
+        LoadPalette(gWallclockFemale_Pal, 0x00, 0x20);
     }
     LoadPalette(GetOverworldTextboxPalettePtr(), 0xe0, 0x20);
     LoadPalette(sUnknown_085B21D4, 0xc0, 0x08);

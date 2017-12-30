@@ -2397,7 +2397,7 @@ _08167A74:
 	b _08167B7E
 	.pool
 _08167A9C:
-	ldr r0, =gUnknown_08DCCF7C
+	ldr r0, =gUsePokeblockGraph_Gfx
 	ldr r1, =gUnknown_0203BCA4
 _08167AA0:
 	ldr r1, [r1]
@@ -2405,11 +2405,11 @@ _08167AA0:
 	b _08167B7E
 	.pool
 _08167AB0:
-	ldr r0, =gUnknown_08DCD81C
+	ldr r0, =gUsePokeblockGraph_Tilemap
 	ldr r1, =gUnknown_0203BCA0
 	ldr r1, [r1]
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_08DCCF5C
+	ldr r0, =gUsePokeblockGraph_Pal
 	movs r1, 0x20
 	movs r2, 0x20
 	bl LoadPalette
@@ -2431,7 +2431,7 @@ _08167AEC:
 	ldr r1, [r0]
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
-	ldr r1, =gUnknown_08DCDA30
+	ldr r1, =gUsePokeblockNatureWin_Pal
 	movs r0, 0xC
 	str r0, [sp]
 	movs r0, 0x4
@@ -3259,7 +3259,7 @@ sub_8168248: @ 8168248
 	ldr r0, [r0]
 	str r0, [sp, 0x8]
 	str r1, [sp, 0xC]
-	ldr r0, =gUnknown_08DCCBB8
+	ldr r0, =gUsePokeblockCondition_Gfx
 	str r0, [sp]
 	ldr r1, =0xffff0000
 	ldr r0, [sp, 0x4]

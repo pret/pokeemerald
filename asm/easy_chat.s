@@ -3966,14 +3966,14 @@ _0811BFE0:
 	b _0811C124
 	.pool
 _0811C044:
-	ldr r1, =gUnknown_08DCBDD0
+	ldr r1, =gEasyChatWindow_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r1, =gUnknown_08DCBF10
+	ldr r1, =gEasyChatWindow_Tilemap
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
@@ -5810,7 +5810,7 @@ sub_811CF04: @ 811CF04
 sub_811CF64: @ 811CF64
 	push {r4,lr}
 	bl ResetPaletteFade
-	ldr r0, =gUnknown_08DCBDB0
+	ldr r0, =gEasyChatMode_Pal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette

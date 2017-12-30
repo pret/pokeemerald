@@ -44695,11 +44695,11 @@ sub_80205B4: @ 80205B4
 task_tutorial_story_unknown: @ 8020604
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_08DD4860
+	ldr r0, =gLinkMiscMenu_Pal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, =gUnknown_08DD4880
+	ldr r1, =gLinkMiscMenu_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -44727,7 +44727,7 @@ task_tutorial_story_unknown: @ 8020604
 	movs r2, 0x8
 	bl CpuFastSet
 _0802064E:
-	ldr r1, =gUnknown_08DD4AB8
+	ldr r1, =gLinkMiscMenu_Tilemap
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0

@@ -47,10 +47,10 @@ sContestStatNames:: @ 85DFD04
 	.4byte gText_Beauty3
 
 gUnknown_085DFD18:: @ 85DFD18
-	obj_tiles gUnknown_08DCCD5C, 0x200, 0
+	obj_tiles gUsePokeblockUpDown_Gfx, 0x200, 0
 
 gUnknown_085DFD20:: @ 85DFD20
-	obj_pal gUnknown_08DCCD3C, 0
+	obj_pal gUsePokeblockUpDown_Pal, 0
 
 gUnknown_085DFD28:: @ 85DFD28
 	.incbin "baserom.gba", 0x5dfd28, 0x34
@@ -62,5 +62,5 @@ gUnknown_085DFDA0:: @ 85DFDA0
 	.incbin "baserom.gba", 0x5dfda0, 0x18
 
 gUnknown_085DFDB8:: @ 85DFDB8
-	.4byte gUnknown_08DCCB98
+	.4byte gUsePokeblockCondition_Pal
 	.4byte 1
