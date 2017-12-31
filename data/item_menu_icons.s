@@ -1,4 +1,4 @@
-#include "constants/items.h"
+	#include "constants/items.h"
     .include "asm/macros.inc"
     .include "constants/constants.inc"
 
@@ -54,7 +54,22 @@ gUnknown_0857FDF4:: @ 857FDF4
 	.incbin "baserom.gba", 0x57fdf4, 0x1c
 
 gUnknown_0857FE10:: @ 857FE10
-	.incbin "baserom.gba", 0x57fe10, 0x90
+     .incbin "baserom.gba", 0x57fe10, 0x18
+
+gUnknown_0857FE28:: @ 857FE28
+     .incbin "baserom.gba", 0x57fe28, 0x18
+
+gUnknown_0857FE40:: @ 857FE40
+     .incbin "baserom.gba", 0x57fe40, 0x18
+
+gUnknown_0857FE58:: @ 857FE58
+     .incbin "baserom.gba", 0x57fe58, 0x18
+
+gUnknown_0857FE70:: @ 857FE70
+     .incbin "baserom.gba", 0x57fe70, 0x18
+
+gUnknown_0857FE88:: @ 857FE88
+     .incbin "baserom.gba", 0x57fe88, 0x18
 
 @ 857FEA0
 	.include "data/text/item_descriptions.inc"

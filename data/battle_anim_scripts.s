@@ -422,7 +422,7 @@ Move_POUND:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W003, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -444,83 +444,83 @@ AnimScript_82C93DA:
 	end
 
 AnimScript_82C93F4:
-	createsprite 0x8597358, 0x2, -8, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, -8, 0, 1, 2
 	goto AnimScript_82C93DA
 
 AnimScript_82C9408:
-	createsprite 0x8597358, 0x2, 8, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 8, 0, 1, 2
 	goto AnimScript_82C93DA
 
 Move_POISON_POWDER:
 	loadspritegfx 0x2751
 	loadspritegfx 0x27A6
 	loopsewithpan SE_W077, +63, 0xA, 0x6
-	createsprite 0x8592148, 0x82, -30, -22, 117, 80, 5, 1
-	createsprite 0x8592148, 0x82, 10, -22, 117, 80, -5, 1
-	createsprite 0x8592148, 0x82, -25, -22, 117, 112, 5, 3
+	createsprite gUnknown_08592148, 0x82, -30, -22, 117, 80, 5, 1
+	createsprite gUnknown_08592148, 0x82, 10, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592148, 0x82, -25, -22, 117, 112, 5, 3
 	delay 0xF
-	createsprite 0x8592148, 0x82, -5, -22, 117, 80, -5, 1
-	createsprite 0x8592148, 0x82, 5, -22, 117, 96, 5, 1
-	createsprite 0x8592148, 0x82, 0, -22, 117, 69, -5, 1
-	createsprite 0x8592148, 0x82, -15, -22, 117, 112, 5, 2
+	createsprite gUnknown_08592148, 0x82, -5, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592148, 0x82, 5, -22, 117, 96, 5, 1
+	createsprite gUnknown_08592148, 0x82, 0, -22, 117, 69, -5, 1
+	createsprite gUnknown_08592148, 0x82, -15, -22, 117, 112, 5, 2
 	delay 0x1E
-	createsprite 0x8592148, 0x82, -15, -22, 117, 112, 5, 2
-	createsprite 0x8592148, 0x82, 15, -22, 117, 80, -5, 1
-	createsprite 0x8592148, 0x82, -10, -22, 117, 96, 7, 2
-	createsprite 0x8592148, 0x82, -5, -22, 117, 90, -8, 0
+	createsprite gUnknown_08592148, 0x82, -15, -22, 117, 112, 5, 2
+	createsprite gUnknown_08592148, 0x82, 15, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592148, 0x82, -10, -22, 117, 96, 7, 2
+	createsprite gUnknown_08592148, 0x82, -5, -22, 117, 90, -8, 0
 	delay 0x14
-	createsprite 0x8592148, 0x82, -10, -22, 117, 80, -5, 1
-	createsprite 0x8592148, 0x82, 0, -22, 117, 89, 5, 2
-	createsprite 0x8592148, 0x82, 20, -22, 117, 112, -8, 2
-	createsprite 0x8592148, 0x82, 5, -22, 117, 80, 5, 1
+	createsprite gUnknown_08592148, 0x82, -10, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592148, 0x82, 0, -22, 117, 89, 5, 2
+	createsprite gUnknown_08592148, 0x82, 20, -22, 117, 112, -8, 2
+	createsprite gUnknown_08592148, 0x82, 5, -22, 117, 80, 5, 1
 	waitforvisualfinish
 	end
 
 Move_STUN_SPORE:
 	loadspritegfx 0x2754
 	loopsewithpan SE_W077, +63, 0xA, 0x6
-	createsprite 0x8592130, 0x82, -30, -22, 117, 80, 5, 1
-	createsprite 0x8592130, 0x82, 10, -22, 117, 80, -5, 1
-	createsprite 0x8592130, 0x82, -25, -22, 117, 112, 5, 3
+	createsprite gUnknown_08592130, 0x82, -30, -22, 117, 80, 5, 1
+	createsprite gUnknown_08592130, 0x82, 10, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592130, 0x82, -25, -22, 117, 112, 5, 3
 	delay 0xF
-	createsprite 0x8592130, 0x82, -5, -22, 117, 80, -5, 1
-	createsprite 0x8592130, 0x82, 5, -22, 117, 96, 5, 1
-	createsprite 0x8592130, 0x82, 0, -22, 117, 69, -5, 1
-	createsprite 0x8592130, 0x82, -15, -22, 117, 112, 5, 2
+	createsprite gUnknown_08592130, 0x82, -5, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592130, 0x82, 5, -22, 117, 96, 5, 1
+	createsprite gUnknown_08592130, 0x82, 0, -22, 117, 69, -5, 1
+	createsprite gUnknown_08592130, 0x82, -15, -22, 117, 112, 5, 2
 	delay 0x1E
-	createsprite 0x8592130, 0x82, -15, -22, 117, 112, 5, 2
-	createsprite 0x8592130, 0x82, 15, -22, 117, 80, -5, 1
-	createsprite 0x8592130, 0x82, -10, -22, 117, 96, 7, 2
-	createsprite 0x8592130, 0x82, -5, -22, 117, 90, -8, 0
+	createsprite gUnknown_08592130, 0x82, -15, -22, 117, 112, 5, 2
+	createsprite gUnknown_08592130, 0x82, 15, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592130, 0x82, -10, -22, 117, 96, 7, 2
+	createsprite gUnknown_08592130, 0x82, -5, -22, 117, 90, -8, 0
 	delay 0x14
-	createsprite 0x8592130, 0x82, -10, -22, 117, 80, -5, 1
-	createsprite 0x8592130, 0x82, 0, -22, 117, 89, 5, 2
-	createsprite 0x8592130, 0x82, 20, -22, 117, 112, -8, 2
-	createsprite 0x8592130, 0x82, 5, -22, 117, 80, 5, 1
+	createsprite gUnknown_08592130, 0x82, -10, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592130, 0x82, 0, -22, 117, 89, 5, 2
+	createsprite gUnknown_08592130, 0x82, 20, -22, 117, 112, -8, 2
+	createsprite gUnknown_08592130, 0x82, 5, -22, 117, 80, 5, 1
 	waitforvisualfinish
 	end
 
 Move_SLEEP_POWDER:
 	loadspritegfx 0x2753
 	loopsewithpan SE_W077, +63, 0xA, 0x6
-	createsprite 0x8592118, 0x82, -30, -22, 117, 80, 5, 1
-	createsprite 0x8592118, 0x82, 10, -22, 117, 80, -5, 1
-	createsprite 0x8592118, 0x82, -25, -22, 117, 112, 5, 3
+	createsprite gUnknown_08592118, 0x82, -30, -22, 117, 80, 5, 1
+	createsprite gUnknown_08592118, 0x82, 10, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592118, 0x82, -25, -22, 117, 112, 5, 3
 	delay 0xF
-	createsprite 0x8592118, 0x82, -5, -22, 117, 80, -5, 1
-	createsprite 0x8592118, 0x82, 5, -22, 117, 96, 5, 1
-	createsprite 0x8592118, 0x82, 0, -22, 117, 69, -5, 1
-	createsprite 0x8592118, 0x82, -15, -22, 117, 112, 5, 2
+	createsprite gUnknown_08592118, 0x82, -5, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592118, 0x82, 5, -22, 117, 96, 5, 1
+	createsprite gUnknown_08592118, 0x82, 0, -22, 117, 69, -5, 1
+	createsprite gUnknown_08592118, 0x82, -15, -22, 117, 112, 5, 2
 	delay 0x1E
-	createsprite 0x8592118, 0x82, -15, -22, 117, 112, 5, 2
-	createsprite 0x8592118, 0x82, 15, -22, 117, 80, -5, 1
-	createsprite 0x8592118, 0x82, -10, -22, 117, 96, 7, 2
-	createsprite 0x8592118, 0x82, -5, -22, 117, 90, -8, 0
+	createsprite gUnknown_08592118, 0x82, -15, -22, 117, 112, 5, 2
+	createsprite gUnknown_08592118, 0x82, 15, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592118, 0x82, -10, -22, 117, 96, 7, 2
+	createsprite gUnknown_08592118, 0x82, -5, -22, 117, 90, -8, 0
 	delay 0x14
-	createsprite 0x8592118, 0x82, -10, -22, 117, 80, -5, 1
-	createsprite 0x8592118, 0x82, 0, -22, 117, 89, 5, 2
-	createsprite 0x8592118, 0x82, 20, -22, 117, 112, -8, 2
-	createsprite 0x8592118, 0x82, 5, -22, 117, 80, 5, 1
+	createsprite gUnknown_08592118, 0x82, -10, -22, 117, 80, -5, 1
+	createsprite gUnknown_08592118, 0x82, 0, -22, 117, 89, 5, 2
+	createsprite gUnknown_08592118, 0x82, 20, -22, 117, 112, -8, 2
+	createsprite gUnknown_08592118, 0x82, 5, -22, 117, 80, 5, 1
 	waitforvisualfinish
 	end
 
@@ -530,21 +530,21 @@ Move_SWIFT:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W129, -64
-	createsprite 0x8592404, 0x83, 20, -10, 20, 0, 22, 20, 1
+	createsprite gUnknown_08592404, 0x83, 20, -10, 20, 0, 22, 20, 1
 	delay 0x5
 	playsewithpan SE_W129, -64
-	createsprite 0x8592404, 0x83, 20, -10, 20, 5, 22, -18, 1
+	createsprite gUnknown_08592404, 0x83, 20, -10, 20, 5, 22, -18, 1
 	delay 0x5
 	playsewithpan SE_W129, -64
-	createsprite 0x8592404, 0x83, 20, -10, 20, -10, 22, 15, 1
+	createsprite gUnknown_08592404, 0x83, 20, -10, 20, -10, 22, 15, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 18, 1
 	createvisualtask sub_80D52D0, 0x2, 3, 2, 0, 18, 1
 	delay 0x5
 	playsewithpan SE_W129, -64
-	createsprite 0x8592404, 0x83, 20, -10, 20, 0, 22, -20, 1
+	createsprite gUnknown_08592404, 0x83, 20, -10, 20, 0, 22, -20, 1
 	delay 0x5
 	playsewithpan SE_W129, -64
-	createsprite 0x8592404, 0x83, 20, -10, 20, 0, 22, 12, 1
+	createsprite gUnknown_08592404, 0x83, 20, -10, 20, 0, 22, 12, 1
 	delay 0x5
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -559,17 +559,17 @@ Move_STRENGTH:
 	createvisualtask sub_80D5644, 0x5, 0, 2, 0, 96, 30
 	waitforvisualfinish
 	delay 0xA
-	createsprite 0x857FE58, 0x2, 0, 0, 4
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 4
 	createvisualtask sub_80D5830, 0x2, 1, 18, 6, 2, 4
 	delay 0x4
 	playsewithpan SE_W025B, +63
-	createsprite 0x8597358, 0x3, 16, 12, 1, 1
+	createsprite gUnknown_08597358, 0x3, 16, 12, 1, 1
 	delay 0x4
 	playsewithpan SE_W025B, +63
-	createsprite 0x8597358, 0x3, -16, -12, 1, 1
+	createsprite gUnknown_08597358, 0x3, -16, -12, 1, 1
 	delay 0x4
 	playsewithpan SE_W025B, +63
-	createsprite 0x8597358, 0x3, 3, 4, 1, 1
+	createsprite gUnknown_08597358, 0x3, 3, 4, 1, 1
 	waitforvisualfinish
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 8, 1
 	waitforvisualfinish
@@ -581,9 +581,9 @@ Move_TACKLE:
 	loadspritegfx 0x2797
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x857FE28, 0x2, 4, 4
+	createsprite gUnknown_0857FE28, 0x2, 4, 4
 	delay 0x6
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W004, +63
 	waitforvisualfinish
@@ -596,22 +596,22 @@ Move_BODY_SLAM:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W036, -64
-	createsprite 0x857FE40, 0x2, 6, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 6, 1, 0
 	waitforvisualfinish
 	delay 0xB
-	createsprite 0x857FE70, 0x2, 0, 26, 0, 0, 5
+	createsprite gUnknown_0857FE70, 0x2, 0, 26, 0, 0, 5
 	delay 0x6
-	createsprite 0x8597358, 0x4, -10, 0, 1, 0
+	createsprite gUnknown_08597358, 0x4, -10, 0, 1, 0
 	loopsewithpan SE_W025B, +63, 0xA, 0x2
 	delay 0x1
-	createsprite 0x857FE70, 0x2, 1, -28, 0, 0, 3
+	createsprite gUnknown_0857FE70, 0x2, 1, -28, 0, 0, 3
 	waitforvisualfinish
 	createvisualtask sub_80D5484, 0x2, 1, 4, 0, 12, 1
 	waitforvisualfinish
 	delay 0xA
-	createsprite 0x857FE58, 0x2, 0, 0, 6
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 6
 	delay 0x5
-	createsprite 0x857FE58, 0x2, 1, 0, 6
+	createsprite gUnknown_0857FE58, 0x2, 1, 0, 6
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -636,7 +636,7 @@ Move_SUPERSONIC:
 
 AnimScript_82C99FF:
 	playsewithpan SE_W048, -64
-	createsprite 0x8593428, 0x82, 16, 0, 0, 0, 30, 0
+	createsprite gUnknown_08593428, 0x82, 16, 0, 0, 0, 30, 0
 	delay 0x2
 	return
 
@@ -652,7 +652,7 @@ Move_SCREECH:
 
 AnimScript_82C9A4C:
 	playsewithpan SE_W103, -64
-	createsprite 0x8593440, 0x82, 16, 0, 0, 0, 30, 0
+	createsprite gUnknown_08593440, 0x82, 16, 0, 0, 0, 30, 0
 	delay 0x2
 	return
 
@@ -660,41 +660,41 @@ Move_FLAME_WHEEL:
 	loadspritegfx 0x272D
 	monbg ANIM_DEF_PARTNER
 	monbgprio_2A ANIM_TARGET
-	createsprite 0x8595584, 0x3, 0, 0, 56, 0
+	createsprite gUnknown_08595584, 0x3, 0, 0, 56, 0
 	playsewithpan SE_W172, -64
 	delay 0x2
-	createsprite 0x8595584, 0x3, 0, 0, 56, 4
+	createsprite gUnknown_08595584, 0x3, 0, 0, 56, 4
 	playsewithpan SE_W172, -64
 	delay 0x2
-	createsprite 0x8595584, 0x3, 0, 0, 56, 8
+	createsprite gUnknown_08595584, 0x3, 0, 0, 56, 8
 	playsewithpan SE_W172, -64
 	delay 0x2
-	createsprite 0x8595584, 0x3, 0, 0, 56, 12
+	createsprite gUnknown_08595584, 0x3, 0, 0, 56, 12
 	playsewithpan SE_W172, -64
 	delay 0x2
-	createsprite 0x8595584, 0x3, 0, 0, 56, 16
+	createsprite gUnknown_08595584, 0x3, 0, 0, 56, 16
 	playsewithpan SE_W172, -64
 	delay 0x2
-	createsprite 0x8595584, 0x3, 0, 0, 56, 20
+	createsprite gUnknown_08595584, 0x3, 0, 0, 56, 20
 	playsewithpan SE_W172, -64
 	delay 0x2
-	createsprite 0x8595584, 0x3, 0, 0, 56, 24
+	createsprite gUnknown_08595584, 0x3, 0, 0, 56, 24
 	playsewithpan SE_W172, -64
 	waitforvisualfinish
-	createsprite 0x857FE70, 0x2, 0, 24, 0, 0, 6
+	createsprite gUnknown_0857FE70, 0x2, 0, 24, 0, 0, 6
 	delay 0x4
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 8, 1
 	createvisualtask sub_80A7B98, 0x3, 1, 31, 12, 1, 1
 	playsewithpan SE_W172B, +63
 	call AnimScript_82D2D18
 	delay 0x7
-	createsprite 0x857FE58, 0x2, 0, 0, 9
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 9
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
 AnimScript_82C9B50:
-	createsprite 0x8595584, 0x3, 0, 0, 50
+	createsprite gUnknown_08595584, 0x3, 0, 0, 50
 	delay 0x4
 	return
 
@@ -705,22 +705,22 @@ Move_PIN_MISSILE:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W026, -64
-	createsprite 0x8596A5C, 0x2, 20, -8, -8, -8, 20, -32
+	createsprite gUnknown_08596A5C, 0x2, 20, -8, -8, -8, 20, -32
 	delay 0xF
-	createsprite 0x8596A5C, 0x2, 20, -8, 8, 8, 20, -40
+	createsprite gUnknown_08596A5C, 0x2, 20, -8, 8, 8, 20, -40
 	delay 0x4
 	playsewithpan SE_W030, +63
-	createsprite 0x8597358, 0x3, -8, -8, 1, 2
+	createsprite gUnknown_08597358, 0x3, -8, -8, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 2, 1
 	delay 0x9
-	createsprite 0x8596A5C, 0x2, 20, -8, 0, 0, 20, -32
+	createsprite gUnknown_08596A5C, 0x2, 20, -8, 0, 0, 20, -32
 	delay 0x4
 	playsewithpan SE_W030, +63
-	createsprite 0x8597358, 0x3, 8, 8, 1, 2
+	createsprite gUnknown_08597358, 0x3, 8, 8, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 2, 1
 	delay 0xE
 	playsewithpan SE_W030, +63
-	createsprite 0x8597358, 0x3, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 2, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -734,22 +734,22 @@ Move_ICICLE_SPEAR:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W196, -64
-	createsprite 0x8596A74, 0x2, 20, -8, -8, -8, 20, -32
+	createsprite gUnknown_08596A74, 0x2, 20, -8, -8, -8, 20, -32
 	delay 0xF
-	createsprite 0x8596A74, 0x2, 20, -8, 8, 8, 20, -40
+	createsprite gUnknown_08596A74, 0x2, 20, -8, 8, 8, 20, -40
 	delay 0x4
 	playsewithpan SE_W030, +63
-	createsprite 0x8597358, 0x3, -8, -8, 1, 2
+	createsprite gUnknown_08597358, 0x3, -8, -8, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 2, 1
 	delay 0x9
-	createsprite 0x8596A74, 0x2, 20, -8, 0, 0, 20, -32
+	createsprite gUnknown_08596A74, 0x2, 20, -8, 0, 0, 20, -32
 	delay 0x4
 	playsewithpan SE_W030, +63
-	createsprite 0x8597358, 0x3, 8, 8, 1, 2
+	createsprite gUnknown_08597358, 0x3, 8, 8, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 2, 1
 	delay 0xE
 	playsewithpan SE_W030, +63
-	createsprite 0x8597358, 0x3, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 2, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -762,18 +762,18 @@ Move_TAKE_DOWN:
 	setalpha 0x80C
 	createvisualtask sub_80D5C50, 0x5, 0, -24, 8, 23, 10, 40, 10
 	delay 0x23
-	createsprite 0x859728C, 0x2, 31, 3, 1, 0, 10, 0, 0
-	createsprite 0x8597358, 0x4, -10, 0, 1, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0, 10, 0, 0
+	createsprite gUnknown_08597358, 0x4, -10, 0, 1, 0
 	playsewithpan SE_W025B, +63
 	delay 0x1
-	createsprite 0x857FE70, 0x2, 1, -16, 0, 0, 4
+	createsprite gUnknown_0857FE70, 0x2, 1, -16, 0, 0, 4
 	waitforvisualfinish
 	createvisualtask sub_80D5484, 0x2, 1, 4, 0, 12, 1
 	waitforvisualfinish
 	delay 0x2
-	createsprite 0x857FE58, 0x2, 0, 0, 5
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 5
 	delay 0x3
-	createsprite 0x857FE58, 0x2, 1, 0, 7
+	createsprite gUnknown_0857FE58, 0x2, 1, 0, 7
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -782,33 +782,33 @@ Move_TAKE_DOWN:
 Move_DOUBLE_EDGE:
 	loadspritegfx 0x2797
 	playsewithpan SE_W129, -64
-	createsprite 0x859728C, 0x2, 2, 4, 2, 0x7FFF, 10, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 2, 4, 2, 0x7FFF, 10, 0, 0
 	waitforvisualfinish
 	delay 0xA
 	playsewithpan SE_W207, -64
 	waitplaysewithpan SE_W207, -64, 0x8
 	createvisualtask sub_80D5830, 0x2, 0, 18, 6, 2, 4
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 0, 16, 16, 0x7FFF
-	createsprite 0x857FE70, 0x2, 0, 20, 0, 0, 4
+	createsprite gUnknown_08597274, 0x2, 1, 0, 16, 16, 0x7FFF
+	createsprite gUnknown_0857FE70, 0x2, 0, 20, 0, 0, 4
 	delay 0x3
 	waitforvisualfinish
 	playsewithpan SE_W025B, +63
-	createsprite 0x8597358, 0x84, -10, 0, 1, 0
-	createsprite 0x857FE70, 0x2, 1, -32, 0, 0, 3
+	createsprite gUnknown_08597358, 0x84, -10, 0, 1, 0
+	createsprite gUnknown_0857FE70, 0x2, 1, -32, 0, 0, 3
 	waitforvisualfinish
 	createvisualtask sub_80D6134, 0x2, 8, -256, 0, 0
 	createvisualtask sub_80D6134, 0x2, 8, -256, 1, 0
 	createvisualtask sub_80D5484, 0x2, 0, 4, 0, 12, 1
 	createvisualtask sub_80D5484, 0x2, 1, 4, 0, 12, 1
-	createsprite 0x8597274, 0x2, 1, 2, 16, 0, 0x7FFF
+	createsprite gUnknown_08597274, 0x2, 1, 2, 16, 0, 0x7FFF
 	waitforvisualfinish
 	createvisualtask sub_80D6134, 0x2, 8, -256, 0, 1
 	createvisualtask sub_80D6134, 0x2, 8, -256, 1, 1
 	waitforvisualfinish
-	createsprite 0x857FE58, 0x2, 0, 0, 5
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 5
 	delay 0x3
-	createsprite 0x857FE58, 0x2, 1, 0, 7
+	createsprite gUnknown_0857FE58, 0x2, 1, 0, 7
 	waitforvisualfinish
 	end
 
@@ -820,9 +820,9 @@ Move_POISON_STING:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W013B, -64
-	createsprite 0x8596A44, 0x82, 20, 0, -8, 0, 20
+	createsprite gUnknown_08596A44, 0x82, 20, 0, -8, 0, 20
 	waitforvisualfinish
-	createsprite 0x8597358, 0x3, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 5, 1
 	playsewithpan SE_W030, +63
 	waitforvisualfinish
@@ -839,14 +839,14 @@ Move_TWINEEDLE:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	loopsewithpan SE_W013B, -64, 0x6, 0x2
-	createsprite 0x8596A44, 0x82, 10, -4, 0, -4, 20
-	createsprite 0x8596A44, 0x82, 20, 12, 10, 12, 20
+	createsprite gUnknown_08596A44, 0x82, 10, -4, 0, -4, 20
+	createsprite gUnknown_08596A44, 0x82, 20, 12, 10, 12, 20
 	delay 0x14
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 5, 1
-	createsprite 0x8597370, 0x3, 0, -4, 1, 3
+	createsprite gUnknown_08597370, 0x3, 0, -4, 1, 3
 	loopsewithpan SE_W030, +63, 0x5, 0x2
 	delay 0x1
-	createsprite 0x8597370, 0x3, 10, 12, 1, 3
+	createsprite gUnknown_08597370, 0x3, 10, 12, 1, 3
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
@@ -886,32 +886,32 @@ Move_FIRE_BLAST:
 	end
 
 AnimScript_82C9FE9:
-	createsprite 0x859551C, 0x82, 0, 0, 0
-	createsprite 0x859551C, 0x82, 0, 0, 51
-	createsprite 0x859551C, 0x82, 0, 0, 102
-	createsprite 0x859551C, 0x82, 0, 0, 153
-	createsprite 0x859551C, 0x82, 0, 0, 204
+	createsprite gUnknown_0859551C, 0x82, 0, 0, 0
+	createsprite gUnknown_0859551C, 0x82, 0, 0, 51
+	createsprite gUnknown_0859551C, 0x82, 0, 0, 102
+	createsprite gUnknown_0859551C, 0x82, 0, 0, 153
+	createsprite gUnknown_0859551C, 0x82, 0, 0, 204
 	delay 0x5
 	return
 
 AnimScript_82CA02D:
-	createsprite 0x859556C, 0x82, 0, 0, 10, 0, -2
-	createsprite 0x859556C, 0x82, 0, 0, 13, -2, 0
-	createsprite 0x859556C, 0x82, 0, 0, 13, 2, 0
-	createsprite 0x859556C, 0x82, 0, 0, 15, -2, 2
-	createsprite 0x859556C, 0x82, 0, 0, 15, 2, 2
+	createsprite gUnknown_0859556C, 0x82, 0, 0, 10, 0, -2
+	createsprite gUnknown_0859556C, 0x82, 0, 0, 13, -2, 0
+	createsprite gUnknown_0859556C, 0x82, 0, 0, 13, 2, 0
+	createsprite gUnknown_0859556C, 0x82, 0, 0, 15, -2, 2
+	createsprite gUnknown_0859556C, 0x82, 0, 0, 15, 2, 2
 	return
 
 Move_LEECH_SEED:
 	loadspritegfx 0x2716
 	playsewithpan SE_W077, -64
-	createsprite 0x85922BC, 0x82, 15, 0, 0, 24, 35, -32
+	createsprite gUnknown_085922BC, 0x82, 15, 0, 0, 24, 35, -32
 	delay 0x8
 	playsewithpan SE_W077, -64
-	createsprite 0x85922BC, 0x82, 15, 0, -16, 24, 35, -40
+	createsprite gUnknown_085922BC, 0x82, 15, 0, -16, 24, 35, -40
 	delay 0x8
 	playsewithpan SE_W077, -64
-	createsprite 0x85922BC, 0x82, 15, 0, 16, 24, 35, -37
+	createsprite gUnknown_085922BC, 0x82, 15, 0, 16, 24, 35, -37
 	delay 0xC
 	loopsewithpan SE_W039, +63, 0xA, 0x8
 	waitforvisualfinish
@@ -920,11 +920,11 @@ Move_LEECH_SEED:
 Move_EMBER:
 	loadspritegfx 0x272D
 	loopsewithpan SE_W052, -64, 0x5, 0x2
-	createsprite 0x85954D4, 0x82, 20, 0, -16, 24, 20, 1
+	createsprite gUnknown_085954D4, 0x82, 20, 0, -16, 24, 20, 1
 	delay 0x4
-	createsprite 0x85954D4, 0x82, 20, 0, 0, 24, 20, 1
+	createsprite gUnknown_085954D4, 0x82, 20, 0, 0, 24, 20, 1
 	delay 0x4
-	createsprite 0x85954D4, 0x82, 20, 0, 16, 24, 20, 1
+	createsprite gUnknown_085954D4, 0x82, 20, 0, 16, 24, 20, 1
 	delay 0x10
 	playsewithpan SE_W172, +63
 	call AnimScript_82CA135
@@ -933,7 +933,7 @@ Move_EMBER:
 	end
 
 AnimScript_82CA135:
-	createsprite 0x85954EC, 0x82, -24, 24, 24, 24, 20, 1, 1
+	createsprite gUnknown_085954EC, 0x82, -24, 24, 24, 24, 20, 1, 1
 	delay 0x4
 	return
 
@@ -942,17 +942,17 @@ Move_MEGA_PUNCH:
 	loadspritegfx 0x279F
 	monbg ANIM_TARGET
 	delay 0x2
-	createsprite 0x8597274, 0x2, 1, 0, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 1, 0, 0, 16, 0
 	setalpha 0x80C
 	playsewithpan SE_W025, +63
-	createsprite 0x8595F48, 0x3, 0, 0, 0, 50
+	createsprite gUnknown_08595F48, 0x3, 0, 0, 0, 50
 	createvisualtask sub_8116620, 0xA, 4, 2, 0, 7, 0x7FFF
 	delay 0x32
 	call AnimScript_82CA1E9
-	createsprite 0x8597358, 0x2, 0, 0, 1, 0
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 0
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 22, 1
 	createvisualtask sub_8116620, 0xA, 4, 2, 0, 0, 0x7FFF
-	createsprite 0x859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -990,18 +990,18 @@ Move_MEGA_KICK:
 	loadspritegfx 0x279F
 	monbg ANIM_TARGET
 	delay 0x2
-	createsprite 0x8597274, 0x2, 1, 0, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 1, 0, 0, 16, 0
 	setalpha 0x80C
 	playsewithpan SE_W025, +63
-	createsprite 0x8595F48, 0x3, 0, 0, 1, 50
+	createsprite gUnknown_08595F48, 0x3, 0, 0, 1, 50
 	createvisualtask sub_8116620, 0xA, 4, 2, 0, 7, 0x7FFF
 	delay 0x32
 	playsewithpan SE_W025B, +63
 	call AnimScript_82CA1E9
-	createsprite 0x8597358, 0x2, 0, 0, 1, 0
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 0
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 22, 1
 	createvisualtask sub_8116620, 0xA, 4, 2, 0, 0, 0x7FFF
-	createsprite 0x859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
@@ -1026,13 +1026,13 @@ AnimScript_82CA2D7:
 	end
 
 AnimScript_82CA2F1:
-	createsprite 0x8597358, 0x2, -8, -8, 1, 2
-	createsprite 0x8595E98, 0x3, -8, 0, 8, 1, 0
+	createsprite gUnknown_08597358, 0x2, -8, -8, 1, 2
+	createsprite gUnknown_08595E98, 0x3, -8, 0, 8, 1, 0
 	goto AnimScript_82CA2D7
 
 AnimScript_82CA316:
-	createsprite 0x8597358, 0x2, 8, -8, 1, 2
-	createsprite 0x8595E98, 0x3, 8, 0, 8, 1, 0
+	createsprite gUnknown_08597358, 0x2, 8, -8, 1, 2
+	createsprite gUnknown_08595E98, 0x3, 8, 0, 8, 1, 0
 	goto AnimScript_82CA2D7
 
 Move_SONIC_BOOM:
@@ -1053,12 +1053,12 @@ Move_SONIC_BOOM:
 
 AnimScript_82CA372:
 	playsewithpan SE_W013B, -64
-	createsprite 0x8593398, 0x82, 16, 0, 0, 0, 15
+	createsprite gUnknown_08593398, 0x82, 16, 0, 0, 0, 15
 	delay 0x4
 	return
 
 AnimScript_82CA38A:
-	createsprite 0x8597358, 0x83, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 2
 	delay 0x4
 	return
 
@@ -1104,15 +1104,15 @@ Move_THUNDERBOLT:
 	createvisualtask sub_8116620, 0xA, 4, 0, 13, 0, 0
 	waitforvisualfinish
 	delay 0x14
-	createsprite 0x85957E0, 0x83, 44, 0, 0, 3
-	createsprite 0x85957F8, 0x84, 0, 0, 32, 44, 0, 40, 0, -32765
-	createsprite 0x85957F8, 0x84, 0, 0, 32, 44, 64, 40, 1, -32765
-	createsprite 0x85957F8, 0x84, 0, 0, 32, 44, 128, 40, 0, -32765
-	createsprite 0x85957F8, 0x84, 0, 0, 32, 44, 192, 40, 2, -32765
-	createsprite 0x85957F8, 0x84, 0, 0, 16, 44, 32, 40, 0, -32765
-	createsprite 0x85957F8, 0x84, 0, 0, 16, 44, 96, 40, 1, -32765
-	createsprite 0x85957F8, 0x84, 0, 0, 16, 44, 160, 40, 0, -32765
-	createsprite 0x85957F8, 0x84, 0, 0, 16, 44, 224, 40, 2, -32765
+	createsprite gUnknown_085957E0, 0x83, 44, 0, 0, 3
+	createsprite gUnknown_085957F8, 0x84, 0, 0, 32, 44, 0, 40, 0, -32765
+	createsprite gUnknown_085957F8, 0x84, 0, 0, 32, 44, 64, 40, 1, -32765
+	createsprite gUnknown_085957F8, 0x84, 0, 0, 32, 44, 128, 40, 0, -32765
+	createsprite gUnknown_085957F8, 0x84, 0, 0, 32, 44, 192, 40, 2, -32765
+	createsprite gUnknown_085957F8, 0x84, 0, 0, 16, 44, 32, 40, 0, -32765
+	createsprite gUnknown_085957F8, 0x84, 0, 0, 16, 44, 96, 40, 1, -32765
+	createsprite gUnknown_085957F8, 0x84, 0, 0, 16, 44, 160, 40, 0, -32765
+	createsprite gUnknown_085957F8, 0x84, 0, 0, 16, 44, 224, 40, 2, -32765
 	playsewithpan SE_W063, +63
 	delay 0x0
 	createvisualtask sub_8116620, 0xA, 1, 0, 2, 2, 0
@@ -1143,11 +1143,11 @@ Move_THUNDER_WAVE:
 	playsewithpan SE_W086, +63
 	delay 0x14
 	loopsewithpan SE_W085B, +63, 0xA, 0x4
-	createsprite 0x8595840, 0x82, -16, -16
+	createsprite gUnknown_08595840, 0x82, -16, -16
 	delay 0x4
-	createsprite 0x8595840, 0x82, -16, 0
+	createsprite gUnknown_08595840, 0x82, -16, 0
 	delay 0x4
-	createsprite 0x8595840, 0x82, -16, 16
+	createsprite gUnknown_08595840, 0x82, -16, 16
 	waitforvisualfinish
 	createvisualtask sub_8116620, 0xA, 1, 0, 6, 0, 0
 	waitforvisualfinish
@@ -1167,25 +1167,25 @@ AnimScript_82CA643:
 	end
 
 AnimScript_82CA648:
-	createsprite 0x8597358, 0x82, -20, -20, 1, 2
-	createsprite 0x8595E98, 0x83, -20, -12, 8, 1, 0
+	createsprite gUnknown_08597358, 0x82, -20, -20, 1, 2
+	createsprite gUnknown_08595E98, 0x83, -20, -12, 8, 1, 0
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, +63
 	delay 0x8
-	createsprite 0x8597358, 0x82, 8, 0, 1, 2
-	createsprite 0x8595E98, 0x83, 8, 8, 8, 1, 0
+	createsprite gUnknown_08597358, 0x82, 8, 0, 1, 2
+	createsprite gUnknown_08595E98, 0x83, 8, 8, 8, 1, 0
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, +63
 	goto AnimScript_82CA643
 
 AnimScript_82CA6B9:
-	createsprite 0x8597358, 0x82, 12, -20, 1, 2
-	createsprite 0x8595E98, 0x83, 12, -12, 8, 1, 0
+	createsprite gUnknown_08597358, 0x82, 12, -20, 1, 2
+	createsprite gUnknown_08595E98, 0x83, 12, -12, 8, 1, 0
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, +63
 	delay 0x8
-	createsprite 0x8597358, 0x82, -12, 0, 1, 2
-	createsprite 0x8595E98, 0x83, -12, 8, 8, 1, 0
+	createsprite gUnknown_08597358, 0x82, -12, 0, 1, 2
+	createsprite gUnknown_08595E98, 0x83, -12, 8, 8, 1, 0
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, +63
 	goto AnimScript_82CA643
@@ -1196,9 +1196,9 @@ Move_STOMP:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W104, +63
-	createsprite 0x8595F60, 0x3, 0, -32, 15
+	createsprite gUnknown_08595F60, 0x3, 0, -32, 15
 	delay 0x13
-	createsprite 0x8597358, 0x2, 0, -8, 1, 1
+	createsprite gUnknown_08597358, 0x2, 0, -8, 1, 1
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 4, 9, 1
 	playsewithpan SE_W025B, +63
 	waitforvisualfinish
@@ -1217,7 +1217,7 @@ Move_CUT:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W015, +63
-	createsprite 0x8592A1C, 0x2, 40, -32, 0
+	createsprite gUnknown_08592A1C, 0x2, 40, -32, 0
 	delay 0x5
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 10, 1
 	waitforvisualfinish
@@ -1236,24 +1236,24 @@ Move_HIDDEN_POWER:
 	delay 0x4
 	createvisualtask sub_80D6064, 0x5, -7, -7, 11, 0, 0
 	playsewithpan SE_W179, -64
-	createsprite 0x8593A04, 0x2, 26, 0
-	createsprite 0x8593A04, 0x2, 26, 42
-	createsprite 0x8593A04, 0x2, 26, 84
-	createsprite 0x8593A04, 0x2, 26, 126
-	createsprite 0x8593A04, 0x2, 26, 168
-	createsprite 0x8593A04, 0x2, 26, 210
+	createsprite gUnknown_08593A04, 0x2, 26, 0
+	createsprite gUnknown_08593A04, 0x2, 26, 42
+	createsprite gUnknown_08593A04, 0x2, 26, 84
+	createsprite gUnknown_08593A04, 0x2, 26, 126
+	createsprite gUnknown_08593A04, 0x2, 26, 168
+	createsprite gUnknown_08593A04, 0x2, 26, 210
 	delay 0x34
 	setarg 0x7, 0xFFFF
 	playsewithpan SE_W115, -64
 	createvisualtask sub_80D6064, 0x5, -7, -7, 11, 0, 0
-	createsprite 0x8593A1C, 0x82, 0
-	createsprite 0x8593A1C, 0x82, 32
-	createsprite 0x8593A1C, 0x82, 64
-	createsprite 0x8593A1C, 0x82, 96
-	createsprite 0x8593A1C, 0x82, 128
-	createsprite 0x8593A1C, 0x82, 160
-	createsprite 0x8593A1C, 0x82, 192
-	createsprite 0x8593A1C, 0x82, 224
+	createsprite gUnknown_08593A1C, 0x82, 0
+	createsprite gUnknown_08593A1C, 0x82, 32
+	createsprite gUnknown_08593A1C, 0x82, 64
+	createsprite gUnknown_08593A1C, 0x82, 96
+	createsprite gUnknown_08593A1C, 0x82, 128
+	createsprite gUnknown_08593A1C, 0x82, 160
+	createsprite gUnknown_08593A1C, 0x82, 192
+	createsprite gUnknown_08593A1C, 0x82, 224
 	end
 
 Move_REVERSAL:
@@ -1261,26 +1261,26 @@ Move_REVERSAL:
 	loadspritegfx 0x279F
 	loadspritegfx 0x2797
 	playsewithpan SE_W197, -64
-	createsprite 0x859728C, 0x2, 31, 3, 3, 0x7FFF, 8, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 3, 0x7FFF, 8, 0, 0
 	waitforvisualfinish
 	delay 0x1E
 	createvisualtask sub_8115A04, 0x2, 31, 3, 2, 0, 10, 0x7FFF
 	delay 0xA
 	playsewithpan SE_W179, -64
-	createsprite 0x85CE5D8, 0x2, 26, 0
-	createsprite 0x85CE5D8, 0x2, 26, 42
-	createsprite 0x85CE5D8, 0x2, 26, 84
-	createsprite 0x85CE5D8, 0x2, 26, 126
-	createsprite 0x85CE5D8, 0x2, 26, 168
-	createsprite 0x85CE5D8, 0x2, 26, 210
+	createsprite gUnknown_085CE5D8, 0x2, 26, 0
+	createsprite gUnknown_085CE5D8, 0x2, 26, 42
+	createsprite gUnknown_085CE5D8, 0x2, 26, 84
+	createsprite gUnknown_085CE5D8, 0x2, 26, 126
+	createsprite gUnknown_085CE5D8, 0x2, 26, 168
+	createsprite gUnknown_085CE5D8, 0x2, 26, 210
 	waitforvisualfinish
 	delay 0x14
-	createsprite 0x857FE28, 0x2, 6, 4
+	createsprite gUnknown_0857FE28, 0x2, 6, 4
 	delay 0x8
 	playsewithpan SE_W233B, +63
-	createsprite 0x859728C, 0x2, 31, 3, 1, 0x7FFF, 8, 0, 0
-	createsprite 0x8595E98, 0x84, 0, 0, 10, 1, 0
-	createsprite 0x8597358, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0x7FFF, 8, 0, 0
+	createsprite gUnknown_08595E98, 0x84, 0, 0, 10, 1, 0
+	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 1
 	createvisualtask sub_80D6388, 0x5, 0, 1, 8, 1, 0
 	end
 
@@ -1304,13 +1304,13 @@ AnimScript_82CA996:
 
 AnimScript_82CA99F:
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x3, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 2
 	createvisualtask sub_80D6388, 0x5, 0, 1, 6, 1, 0
 	goto AnimScript_82CA996
 
 AnimScript_82CA9C8:
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x3, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 1
 	createvisualtask sub_80D6388, 0x5, 0, 1, 6, 1, 0
 	goto AnimScript_82CA996
 
@@ -1323,14 +1323,14 @@ Move_SPIKE_CANNON:
 	createvisualtask sub_80D5C50, 0x5, 0, -4, 0, 4, 6, 8, 4
 	waitforvisualfinish
 	loopsewithpan SE_W013B, -64, 0x5, 0x3
-	createsprite 0x857FE58, 0x2, 0, 0, 5
-	createsprite 0x8596A44, 0x2, 10, -8, -8, -8, 20
-	createsprite 0x8596A44, 0x2, 18, 0, 0, 0, 20
-	createsprite 0x8596A44, 0x2, 26, 8, 8, 8, 20
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 5
+	createsprite gUnknown_08596A44, 0x2, 10, -8, -8, -8, 20
+	createsprite gUnknown_08596A44, 0x2, 18, 0, 0, 0, 20
+	createsprite gUnknown_08596A44, 0x2, 26, 8, 8, 8, 20
 	waitforvisualfinish
-	createsprite 0x8597370, 0x3, -8, -8, 1, 2
-	createsprite 0x8597370, 0x3, 0, 0, 1, 2
-	createsprite 0x8597370, 0x3, 8, 8, 1, 2
+	createsprite gUnknown_08597370, 0x3, -8, -8, 1, 2
+	createsprite gUnknown_08597370, 0x3, 0, 0, 1, 2
+	createsprite gUnknown_08597370, 0x3, 8, 8, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 7, 1
 	loopsewithpan SE_W030, +63, 0x5, 0x3
 	waitforvisualfinish
@@ -1344,7 +1344,7 @@ Move_SWORDS_DANCE:
 	setalpha 0x80C
 	playsewithpan SE_W014, -64
 	createvisualtask sub_80D5830, 0x2, 0, 16, 6, 1, 4
-	createsprite 0x8593380, 0x2, 0, 0
+	createsprite gUnknown_08593380, 0x2, 0, 0
 	delay 0x16
 	createvisualtask sub_8115D94, 0x2, 10005, 2, 2, 32754, 16, 0, 0
 	waitforvisualfinish
@@ -1359,7 +1359,7 @@ Move_PSYCH_UP:
 	createvisualtask sub_8115B0C, 0x2, 1, 2, 6, 1, 11, 0
 	setalpha 0x80C
 	loopsewithpan SE_W060B, -64, 0x5, 0xA
-	createsprite 0x8596548, 0x2, 0, 0, 0, 0
+	createsprite gUnknown_08596548, 0x2, 0, 0, 0, 0
 	createvisualtask sub_80D5EB8, 0x5, 0, 5, 2560, 8, 0
 	delay 0x7F
 	delay 0x4
@@ -1379,33 +1379,33 @@ Move_DIZZY_PUNCH:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	call AnimScript_82CAC77
-	createsprite 0x8595E98, 0x85, 16, 8, 20, 1, 0
-	createsprite 0x8597358, 0x84, 16, 0, 1, 1
+	createsprite gUnknown_08595E98, 0x85, 16, 8, 20, 1, 0
+	createsprite gUnknown_08597358, 0x84, 16, 0, 1, 1
 	playsewithpan SE_W004, +63
-	createsprite 0x8595F78, 0x83, 16, 8, 160, -32
-	createsprite 0x8595F78, 0x83, 16, 8, -256, -40
-	createsprite 0x8595F78, 0x83, 16, 8, 128, -16
-	createsprite 0x8595F78, 0x83, 16, 8, 416, -38
-	createsprite 0x8595F78, 0x83, 16, 8, -128, -22
-	createsprite 0x8595F78, 0x83, 16, 8, -384, -31
+	createsprite gUnknown_08595F78, 0x83, 16, 8, 160, -32
+	createsprite gUnknown_08595F78, 0x83, 16, 8, -256, -40
+	createsprite gUnknown_08595F78, 0x83, 16, 8, 128, -16
+	createsprite gUnknown_08595F78, 0x83, 16, 8, 416, -38
+	createsprite gUnknown_08595F78, 0x83, 16, 8, -128, -22
+	createsprite gUnknown_08595F78, 0x83, 16, 8, -384, -31
 	delay 0xA
 	call AnimScript_82CAC77
-	createsprite 0x8595E98, 0x85, -16, -8, 20, 1, 0
-	createsprite 0x8597358, 0x84, -16, -16, 1, 1
+	createsprite gUnknown_08595E98, 0x85, -16, -8, 20, 1, 0
+	createsprite gUnknown_08597358, 0x84, -16, -16, 1, 1
 	playsewithpan SE_W233B, +63
-	createsprite 0x8595F78, 0x83, -16, -8, 160, -32
-	createsprite 0x8595F78, 0x83, -16, -8, -256, -40
-	createsprite 0x8595F78, 0x83, -16, -8, 128, -16
-	createsprite 0x8595F78, 0x83, -16, -8, 416, -38
-	createsprite 0x8595F78, 0x83, -16, -8, -128, -22
-	createsprite 0x8595F78, 0x83, -16, -8, -384, -31
+	createsprite gUnknown_08595F78, 0x83, -16, -8, 160, -32
+	createsprite gUnknown_08595F78, 0x83, -16, -8, -256, -40
+	createsprite gUnknown_08595F78, 0x83, -16, -8, 128, -16
+	createsprite gUnknown_08595F78, 0x83, -16, -8, 416, -38
+	createsprite gUnknown_08595F78, 0x83, -16, -8, -128, -22
+	createsprite gUnknown_08595F78, 0x83, -16, -8, -384, -31
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
 
 AnimScript_82CAC77:
-	createsprite 0x857FE28, 0x2, 6, 4
+	createsprite gUnknown_0857FE28, 0x2, 6, 4
 	delay 0x6
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 7, 1
 	return
@@ -1421,17 +1421,17 @@ Move_FIRE_SPIN:
 	end
 
 AnimScript_82CACBF:
-	createsprite 0x8596B88, 0x82, 0, 28, 528, 30, 13, 50, 1
+	createsprite gUnknown_08596B88, 0x82, 0, 28, 528, 30, 13, 50, 1
 	delay 0x2
-	createsprite 0x8596B88, 0x82, 0, 32, 480, 20, 16, -46, 1
+	createsprite gUnknown_08596B88, 0x82, 0, 32, 480, 20, 16, -46, 1
 	delay 0x2
-	createsprite 0x8596B88, 0x82, 0, 33, 576, 20, 8, 42, 1
+	createsprite gUnknown_08596B88, 0x82, 0, 33, 576, 20, 8, 42, 1
 	delay 0x2
-	createsprite 0x8596B88, 0x82, 0, 31, 400, 25, 11, -42, 1
+	createsprite gUnknown_08596B88, 0x82, 0, 31, 400, 25, 11, -42, 1
 	delay 0x2
-	createsprite 0x8596B88, 0x82, 0, 28, 512, 25, 16, 46, 1
+	createsprite gUnknown_08596B88, 0x82, 0, 28, 512, 25, 16, 46, 1
 	delay 0x2
-	createsprite 0x8596B88, 0x82, 0, 33, 464, 30, 15, -50, 1
+	createsprite gUnknown_08596B88, 0x82, 0, 33, 464, 30, 15, -50, 1
 	delay 0x2
 	return
 
@@ -1461,23 +1461,23 @@ AnimScript_82CAD8E:
 	end
 
 AnimScript_82CADA7:
-	createsprite 0x8592A1C, 0x2, 40, -32, 0
+	createsprite gUnknown_08592A1C, 0x2, 40, -32, 0
 	goto AnimScript_82CAD6A
 
 AnimScript_82CADB9:
-	createsprite 0x8592A1C, 0x2, 40, -32, 1
+	createsprite gUnknown_08592A1C, 0x2, 40, -32, 1
 	goto AnimScript_82CAD6A
 
 AnimScript_82CADCB:
-	createsprite 0x859728C, 0x2, 31, 3, 1, 10505, 4, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 10505, 4, 0, 0
 	goto AnimScript_82CAD8E
 
 AnimScript_82CADE5:
-	createsprite 0x859728C, 0x2, 31, 3, 3, 10505, 4, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 3, 10505, 4, 0, 0
 	goto AnimScript_82CAD8E
 
 AnimScript_82CADFF:
-	createsprite 0x859728C, 0x2, 31, 3, 3, 10505, 4, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 3, 10505, 4, 0, 0
 	goto AnimScript_82CAD8E
 
 Move_SELF_DESTRUCT:
@@ -1496,19 +1496,19 @@ Move_SELF_DESTRUCT:
 
 AnimScript_82CAE9F:
 	playsewithpan SE_W120, -64
-	createsprite 0x859371C, 0x3, 0, 0, 0, 1
+	createsprite gUnknown_0859371C, 0x3, 0, 0, 0, 1
 	delay 0x6
 	playsewithpan SE_W120, -64
-	createsprite 0x859371C, 0x3, 24, -24, 0, 1
+	createsprite gUnknown_0859371C, 0x3, 24, -24, 0, 1
 	delay 0x6
 	playsewithpan SE_W120, -64
-	createsprite 0x859371C, 0x3, -16, 16, 0, 1
+	createsprite gUnknown_0859371C, 0x3, -16, 16, 0, 1
 	delay 0x6
 	playsewithpan SE_W120, -64
-	createsprite 0x859371C, 0x3, -24, -12, 0, 1
+	createsprite gUnknown_0859371C, 0x3, -24, -12, 0, 1
 	delay 0x6
 	playsewithpan SE_W120, -64
-	createsprite 0x859371C, 0x3, 16, 16, 0, 1
+	createsprite gUnknown_0859371C, 0x3, 16, 16, 0, 1
 	delay 0x6
 	return
 
@@ -1518,19 +1518,19 @@ Move_SLAM:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W004, -64
-	createsprite 0x857FE70, 0x2, 0, 20, 3, 0, 4
+	createsprite gUnknown_0857FE70, 0x2, 0, 20, 3, 0, 4
 	delay 0x1
-	createsprite 0x85928D0, 0x2, 0, 0
+	createsprite gUnknown_085928D0, 0x2, 0, 0
 	delay 0x3
 	playsewithpan SE_W025B, +63
-	createsprite 0x8597358, 0x3, 0, 0, 1, 1
-	createsprite 0x857FE70, 0x2, 1, -12, 10, 0, 3
-	createsprite 0x857FE58, 0x2, 0, 0, 5
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 1
+	createsprite gUnknown_0857FE70, 0x2, 1, -12, 10, 0, 3
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 5
 	delay 0x3
 	createvisualtask sub_80D5484, 0x2, 1, 0, 3, 6, 1
 	waitforvisualfinish
 	delay 0x5
-	createsprite 0x857FE58, 0x2, 1, 0, 6
+	createsprite gUnknown_0857FE58, 0x2, 1, 0, 6
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
@@ -1539,10 +1539,10 @@ Move_SLAM:
 Move_VINE_WHIP:
 	loadspritegfx 0x282F
 	playsewithpan SE_W026, -64
-	createsprite 0x857FE28, 0x2, 4, 6
+	createsprite gUnknown_0857FE28, 0x2, 4, 6
 	delay 0x6
 	playsewithpan SE_W010, +63
-	createsprite 0x85928E8, 0x82, 0, 0
+	createsprite gUnknown_085928E8, 0x82, 0, 0
 	delay 0x6
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 6, 1
 	end
@@ -1550,19 +1550,19 @@ Move_VINE_WHIP:
 Move_DRILL_PECK:
 	loadspritegfx 0x2797
 	loadspritegfx 0x27B2
-	createsprite 0x8592CD8, 0x2, 0
+	createsprite gUnknown_08592CD8, 0x2, 0
 	playsewithpan SE_W029, -64
 	waitforvisualfinish
 	delay 0x2
-	createsprite 0x8592CD8, 0x2, 1
+	createsprite gUnknown_08592CD8, 0x2, 1
 	delay 0x2
 	loopsewithpan SE_W030, +63, 0x4, 0x8
 	createvisualtask sub_810EB88, 0x5
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 18, 1
 	waitforvisualfinish
-	createsprite 0x8592CD8, 0x2, 2
+	createsprite gUnknown_08592CD8, 0x2, 2
 	waitforvisualfinish
-	createsprite 0x857FE58, 0x2, 0, 0, 6
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 6
 	waitforvisualfinish
 	end
 
@@ -1575,31 +1575,31 @@ Move_WATERFALL:
 	createvisualtask sub_80D51AC, 0x5, 0, 0, 2, 23, 1
 	delay 0x5
 	playsewithpan SE_W152, -64
-	createsprite 0x8595238, 0x2, 10, 10, 25, 0
+	createsprite gUnknown_08595238, 0x2, 10, 10, 25, 0
 	delay 0x4
 	playsewithpan SE_W152, -64
-	createsprite 0x8595238, 0x2, -15, 0, 25, 0
+	createsprite gUnknown_08595238, 0x2, -15, 0, 25, 0
 	delay 0x4
 	playsewithpan SE_W152, -64
-	createsprite 0x8595238, 0x2, 20, 10, 25, 0
+	createsprite gUnknown_08595238, 0x2, 20, 10, 25, 0
 	delay 0x4
 	playsewithpan SE_W152, -64
-	createsprite 0x8595238, 0x2, 0, -10, 25, 0
+	createsprite gUnknown_08595238, 0x2, 0, -10, 25, 0
 	delay 0x4
 	playsewithpan SE_W152, -64
-	createsprite 0x8595238, 0x2, -10, 15, 25, 0
+	createsprite gUnknown_08595238, 0x2, -10, 15, 25, 0
 	delay 0x4
 	playsewithpan SE_W152, -64
-	createsprite 0x8595238, 0x2, 25, 20, 25, 0
+	createsprite gUnknown_08595238, 0x2, 25, 20, 25, 0
 	delay 0x4
 	playsewithpan SE_W152, -64
-	createsprite 0x8595238, 0x2, -20, 20, 25, 0
+	createsprite gUnknown_08595238, 0x2, -20, 20, 25, 0
 	delay 0x4
 	playsewithpan SE_W152, -64
-	createsprite 0x8595238, 0x2, 12, 0, 25, 0
+	createsprite gUnknown_08595238, 0x2, 12, 0, 25, 0
 	waitforvisualfinish
 	delay 0xA
-	createsprite 0x857FE28, 0x2, 6, 5
+	createsprite gUnknown_0857FE28, 0x2, 6, 5
 	delay 0x6
 	call AnimScript_82CB102
 	waitforvisualfinish
@@ -1610,46 +1610,46 @@ Move_WATERFALL:
 AnimScript_82CB102:
 	playsewithpan SE_W127, +63
 	createvisualtask sub_80D52D0, 0x5, 1, 4, 0, 17, 1
-	createsprite 0x8597388, 0x3, 0, 20, 1, 1
-	createsprite 0x8595250, 0x4, 0, 20
-	createsprite 0x8595250, 0x4, 0, 20
+	createsprite gUnknown_08597388, 0x3, 0, 20, 1, 1
+	createsprite gUnknown_08595250, 0x4, 0, 20
+	createsprite gUnknown_08595250, 0x4, 0, 20
 	delay 0x2
-	createsprite 0x8597388, 0x3, 0, 15, 1, 1
-	createsprite 0x8595250, 0x4, 0, 15
-	createsprite 0x8595250, 0x4, 0, 15
+	createsprite gUnknown_08597388, 0x3, 0, 15, 1, 1
+	createsprite gUnknown_08595250, 0x4, 0, 15
+	createsprite gUnknown_08595250, 0x4, 0, 15
 	delay 0x2
-	createsprite 0x8597388, 0x3, 0, 10, 1, 1
-	createsprite 0x8595250, 0x4, 0, 10
-	createsprite 0x8595250, 0x4, 0, 10
+	createsprite gUnknown_08597388, 0x3, 0, 10, 1, 1
+	createsprite gUnknown_08595250, 0x4, 0, 10
+	createsprite gUnknown_08595250, 0x4, 0, 10
 	delay 0x2
-	createsprite 0x8597388, 0x3, 0, 5, 1, 1
-	createsprite 0x8595250, 0x4, 0, 5
-	createsprite 0x8595250, 0x4, 0, 5
+	createsprite gUnknown_08597388, 0x3, 0, 5, 1, 1
+	createsprite gUnknown_08595250, 0x4, 0, 5
+	createsprite gUnknown_08595250, 0x4, 0, 5
 	delay 0x2
-	createsprite 0x8597388, 0x3, 0, 0, 1, 1
-	createsprite 0x8595250, 0x4, 0, 0
-	createsprite 0x8595250, 0x4, 0, 0
+	createsprite gUnknown_08597388, 0x3, 0, 0, 1, 1
+	createsprite gUnknown_08595250, 0x4, 0, 0
+	createsprite gUnknown_08595250, 0x4, 0, 0
 	delay 0x2
-	createsprite 0x8597388, 0x3, 0, -5, 1, 1
-	createsprite 0x8595250, 0x4, 0, -5
-	createsprite 0x8595250, 0x4, 0, -5
+	createsprite gUnknown_08597388, 0x3, 0, -5, 1, 1
+	createsprite gUnknown_08595250, 0x4, 0, -5
+	createsprite gUnknown_08595250, 0x4, 0, -5
 	delay 0x2
-	createsprite 0x8597388, 0x3, 0, -10, 1, 1
-	createsprite 0x8595250, 0x4, 0, -10
-	createsprite 0x8595250, 0x4, 0, -10
+	createsprite gUnknown_08597388, 0x3, 0, -10, 1, 1
+	createsprite gUnknown_08595250, 0x4, 0, -10
+	createsprite gUnknown_08595250, 0x4, 0, -10
 	delay 0x2
-	createsprite 0x8597388, 0x3, 0, -15, 1, 1
-	createsprite 0x8595250, 0x4, 0, -15
-	createsprite 0x8595250, 0x4, 0, -15
+	createsprite gUnknown_08597388, 0x3, 0, -15, 1, 1
+	createsprite gUnknown_08595250, 0x4, 0, -15
+	createsprite gUnknown_08595250, 0x4, 0, -15
 	delay 0x2
-	createsprite 0x8597388, 0x3, 0, -20, 1, 1
-	createsprite 0x8595250, 0x4, 0, -20
-	createsprite 0x8595250, 0x4, 0, -20
+	createsprite gUnknown_08597388, 0x3, 0, -20, 1, 1
+	createsprite gUnknown_08595250, 0x4, 0, -20
+	createsprite gUnknown_08595250, 0x4, 0, -20
 	return
 
 Move_EXPLOSION:
 	loadspritegfx 0x27D6
-	createsprite 0x859728C, 0x2, 1, 8, 9, 8474, 8, 0, 8
+	createsprite gUnknown_0859728C, 0x2, 1, 8, 9, 8474, 8, 0, 8
 	createvisualtask sub_80D52D0, 0x5, 4, 8, 0, 40, 1
 	createvisualtask sub_80D52D0, 0x5, 5, 8, 0, 40, 1
 	createvisualtask sub_80D52D0, 0x5, 6, 8, 0, 40, 1
@@ -1665,19 +1665,19 @@ Move_EXPLOSION:
 
 AnimScript_82CB312:
 	playsewithpan SE_W153, -64
-	createsprite 0x859371C, 0x3, 0, 0, 0, 1
+	createsprite gUnknown_0859371C, 0x3, 0, 0, 0, 1
 	delay 0x6
 	playsewithpan SE_W153, -64
-	createsprite 0x859371C, 0x3, 24, -24, 0, 1
+	createsprite gUnknown_0859371C, 0x3, 24, -24, 0, 1
 	delay 0x6
 	playsewithpan SE_W153, -64
-	createsprite 0x859371C, 0x3, -16, 16, 0, 1
+	createsprite gUnknown_0859371C, 0x3, -16, 16, 0, 1
 	delay 0x6
 	playsewithpan SE_W153, -64
-	createsprite 0x859371C, 0x3, -24, -12, 0, 1
+	createsprite gUnknown_0859371C, 0x3, -24, -12, 0, 1
 	delay 0x6
 	playsewithpan SE_W153, -64
-	createsprite 0x859371C, 0x3, 16, 16, 0, 1
+	createsprite gUnknown_0859371C, 0x3, 16, 16, 0, 1
 	delay 0x6
 	return
 
@@ -1687,7 +1687,7 @@ Move_DEFENSE_CURL:
 	createvisualtask sub_811489C, 0x5, 0, 0
 	createvisualtask sub_815B338, 0x5
 	waitforvisualfinish
-	createsprite 0x85CE338, 0x2, 0, 6, 0, 1
+	createsprite gUnknown_085CE338, 0x2, 0, 6, 0, 1
 	waitforvisualfinish
 	createvisualtask sub_811489C, 0x5, 0, 1
 	waitforvisualfinish
@@ -1698,22 +1698,22 @@ Move_PROTECT:
 	monbg ANIM_ATK_PARTNER
 	monbgprio_28 ANIM_ATTACKER
 	waitplaysewithpan SE_W115, -64, 0x10
-	createsprite 0x8592ADC, 0x2, 24, 0, 90
+	createsprite gUnknown_08592ADC, 0x2, 24, 0, 90
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	end
 
 Move_DETECT:
 	loadspritegfx 0x2757
-	createsprite 0x8597274, 0x2, 1, 2, 0, 9, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 9, 0
 	waitforvisualfinish
 	createvisualtask sub_8116620, 0xA, 2, 1, 0, 9, 0x7FFF
 	delay 0x12
 	playsewithpan SE_W197, -64
-	createsprite 0x853EE84, 0xD, 20, -20
+	createsprite gUnknown_0853EE84, 0xD, 20, -20
 	waitforvisualfinish
 	delay 0xA
-	createsprite 0x8597274, 0x2, 1, 2, 9, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 9, 0, 0
 	createvisualtask sub_8116620, 0xA, 2, 2, 9, 0, 0x7FFF
 	waitforvisualfinish
 	end
@@ -1742,31 +1742,31 @@ AnimScript_82CB464:
 	waitforvisualfinish
 	delay 0x14
 	playsewithpan SE_W207B, -64
-	createsprite 0x859368C, 0x2, 0, 20, -28
+	createsprite gUnknown_0859368C, 0x2, 0, 20, -28
 	waitforvisualfinish
 	playsewithpan SE_W207B, -64
-	createsprite 0x859368C, 0x2, 0, 20, -28
+	createsprite gUnknown_0859368C, 0x2, 0, 20, -28
 	waitforvisualfinish
 	delay 0xA
 	createvisualtask sub_80D5EB8, 0x5, 0, 16, 6144, 8, 0
 	delay 0x5
 	createvisualtask sub_80D52D0, 0x5, 1, 4, 0, 30, 1
-	createsprite 0x8597358, 0x3, 0, 0, 1, 0
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 0
 	playsewithpan SE_W004, +63
 	delay 0x5
-	createsprite 0x8597358, 0x3, 24, 8, 1, 0
+	createsprite gUnknown_08597358, 0x3, 24, 8, 1, 0
 	playsewithpan SE_W004, +63
 	delay 0x5
-	createsprite 0x8597358, 0x3, -24, -16, 1, 0
+	createsprite gUnknown_08597358, 0x3, -24, -16, 1, 0
 	playsewithpan SE_W004, +63
 	delay 0x5
-	createsprite 0x8597358, 0x3, 8, 4, 1, 0
+	createsprite gUnknown_08597358, 0x3, 8, 4, 1, 0
 	playsewithpan SE_W004, +63
 	delay 0x5
-	createsprite 0x8597358, 0x3, -16, 19, 1, 0
+	createsprite gUnknown_08597358, 0x3, -16, 19, 1, 0
 	playsewithpan SE_W004, +63
 	delay 0x5
-	createsprite 0x8597358, 0x3, 18, -18, 1, 0
+	createsprite gUnknown_08597358, 0x3, 18, -18, 1, 0
 	playsewithpan SE_W004, +63
 	waitforvisualfinish
 	createvisualtask sub_8116620, 0xA, 2, 3, 9, 0, 31
@@ -1779,21 +1779,21 @@ AnimScript_82CB56A:
 	waitforvisualfinish
 	delay 0x14
 	playsewithpan SE_W207B, -64
-	createsprite 0x859368C, 0x2, 0, 20, -28
+	createsprite gUnknown_0859368C, 0x2, 0, 20, -28
 	waitforvisualfinish
 	delay 0x5
 	createvisualtask sub_815C3A8, 0x5
 	delay 0x7
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x3, 0, 8, 1, 1
+	createsprite gUnknown_08597358, 0x3, 0, 8, 1, 1
 	createvisualtask sub_80D52D0, 0x5, 1, 4, 0, 6, 1
 	delay 0xE
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x3, 12, -6, 1, 1
+	createsprite gUnknown_08597358, 0x3, 12, -6, 1, 1
 	createvisualtask sub_80D52D0, 0x5, 1, 4, 0, 6, 1
 	delay 0xE
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x3, -12, -6, 1, 1
+	createsprite gUnknown_08597358, 0x3, -12, -6, 1, 1
 	createvisualtask sub_80D52D0, 0x5, 1, 4, 0, 6, 1
 	waitforvisualfinish
 	createvisualtask sub_8116620, 0xA, 2, 3, 9, 0, 31
@@ -1801,30 +1801,30 @@ AnimScript_82CB56A:
 
 AnimScript_82CB637:
 	playsewithpan SE_W207B, -64
-	createsprite 0x859368C, 0x2, 0, 20, -28
+	createsprite gUnknown_0859368C, 0x2, 0, 20, -28
 	waitforvisualfinish
 	delay 0x5
-	createsprite 0x857FE28, 0x2, 4, 4
+	createsprite gUnknown_0857FE28, 0x2, 4, 4
 	delay 0x6
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x2, 10, 4, 1, 1
+	createsprite gUnknown_08597358, 0x2, 10, 4, 1, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 6, 1
 	waitforvisualfinish
-	createsprite 0x857FE28, 0x2, 4, 4
+	createsprite gUnknown_0857FE28, 0x2, 4, 4
 	delay 0x6
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x2, -10, -4, 1, 2
+	createsprite gUnknown_08597358, 0x2, -10, -4, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 6, 1
 	goto AnimScript_82CB45F
 
 AnimScript_82CB6B3:
-	createsprite 0x85CE4D0, 0x2, 20, -28
+	createsprite gUnknown_085CE4D0, 0x2, 20, -28
 	waitforvisualfinish
 	delay 0xA
-	createsprite 0x857FE28, 0x2, 10, 2
+	createsprite gUnknown_0857FE28, 0x2, 10, 2
 	delay 0xC
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 1, 0, 6, 1
 	goto AnimScript_82CB45F
 
@@ -1833,11 +1833,11 @@ Move_SAFEGUARD:
 	monbg ANIM_ATK_PARTNER
 	setalpha 0x808
 	playsewithpan SE_W208, -64
-	createsprite 0x8593C64, 0x2
+	createsprite gUnknown_08593C64, 0x2
 	delay 0x4
-	createsprite 0x8593C64, 0x2
+	createsprite gUnknown_08593C64, 0x2
 	delay 0x4
-	createsprite 0x8593C64, 0x2
+	createsprite gUnknown_08593C64, 0x2
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, -64
 	createvisualtask sub_8115A04, 0x2, 10, 0, 2, 0, 10, 0x7FFF
@@ -1848,22 +1848,22 @@ Move_SAFEGUARD:
 
 Move_PAIN_SPLIT:
 	loadspritegfx 0x27FF
-	createsprite 0x85CE590, 0x2, -8, -42, 0
-	createsprite 0x85CE590, 0x82, -8, -42, 1
+	createsprite gUnknown_085CE590, 0x2, -8, -42, 0
+	createsprite gUnknown_085CE590, 0x82, -8, -42, 1
 	delay 0xA
 	playsewithpan SE_W207B, 0
 	createvisualtask sub_815CA20, 0x2, 0, 0
 	createvisualtask sub_815CA20, 0x2, 1, 0
 	waitforvisualfinish
-	createsprite 0x85CE590, 0x2, -24, -42, 0
-	createsprite 0x85CE590, 0x82, -24, -42, 1
+	createsprite gUnknown_085CE590, 0x2, -24, -42, 0
+	createsprite gUnknown_085CE590, 0x82, -24, -42, 1
 	delay 0xA
 	playsewithpan SE_W207B, 0
 	createvisualtask sub_815CA20, 0x2, 0, 1
 	createvisualtask sub_815CA20, 0x2, 1, 1
 	waitforvisualfinish
-	createsprite 0x85CE590, 0x2, 8, -42, 0
-	createsprite 0x85CE590, 0x82, 8, -42, 1
+	createsprite gUnknown_085CE590, 0x2, 8, -42, 0
+	createsprite gUnknown_085CE590, 0x82, 8, -42, 1
 	delay 0xA
 	playsewithpan SE_W207B, 0
 	createvisualtask sub_815CA20, 0x2, 0, 2
@@ -1876,10 +1876,10 @@ Move_VICE_GRIP:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W011, +63
-	createsprite 0x8593590, 0x2, 0
-	createsprite 0x8593590, 0x2, 1
+	createsprite gUnknown_08593590, 0x2, 0
+	createsprite gUnknown_08593590, 0x2, 1
 	delay 0x9
-	createsprite 0x8597358, 0x1, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x1, 0, 0, 1, 2
 	createvisualtask sub_80D52D0, 0x5, 1, 2, 0, 5, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -1894,15 +1894,15 @@ Move_GUILLOTINE:
 	fadetobgfromset BG_GUILLOTINE_OPPONENT, BG_GUILLOTINE_PLAYER, BG_GUILLOTINE_CONTESTS
 	waitbgfadein
 	playsewithpan SE_W011, +63
-	createsprite 0x85935D0, 0x2, 0
-	createsprite 0x85935D0, 0x2, 1
+	createsprite gUnknown_085935D0, 0x2, 0
+	createsprite gUnknown_085935D0, 0x2, 1
 	createvisualtask sub_8116620, 0xA, 4, 2, 0, 16, 0
 	delay 0x9
 	createvisualtask sub_80D52D0, 0x5, 1, 2, 0, 23, 1
 	delay 0x2E
 	createvisualtask sub_80D52D0, 0x5, 1, 4, 0, 8, 1
-	createsprite 0x8597358, 0x3, 0, 0, 1, 0
-	createsprite 0x859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
 	playsewithpan SE_W013, +63
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -1918,11 +1918,11 @@ Move_PAY_DAY:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W013B, -64
-	createsprite 0x85934D8, 0x2, 20, 0, 0, 0, 1152
+	createsprite gUnknown_085934D8, 0x2, 20, 0, 0, 0, 1152
 	waitforvisualfinish
 	playsewithpan SE_W006, +63
-	createsprite 0x8597358, 0x1, 0, 0, 1, 2
-	createsprite 0x85934F0, 0x2
+	createsprite gUnknown_08597358, 0x1, 0, 0, 1, 2
+	createsprite gUnknown_085934F0, 0x2
 	createvisualtask sub_80D52D0, 0x2, 1, 1, 0, 6, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -1935,24 +1935,24 @@ Move_OUTRAGE:
 	createvisualtask sub_8115A04, 0x2, 7, 2, 5, 3, 8, 430
 	createvisualtask sub_80D5830, 0x2, 0, 12, 6, 5, 4
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, 1280, 0, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 1280, 0, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, -1280, 0, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, -1280, 0, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, 0, 1280, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 0, 1280, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, 0, -1280, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 0, -1280, 3
 	delay 0x0
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 40, 1
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, 1280, 768, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 1280, 768, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, -1280, 768, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, -1280, 768, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, 1280, -768, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 1280, -768, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, -1280, -768, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, -1280, -768, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, 1280, 0, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 1280, 0, 3
 	call AnimScript_82CBA0F
 	call AnimScript_82CBA0F
 	waitforvisualfinish
@@ -1960,19 +1960,19 @@ Move_OUTRAGE:
 
 AnimScript_82CBA0F:
 	delay 0x3
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, -1280, 0, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, -1280, 0, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, 0, 1280, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 0, 1280, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, 0, -1280, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 0, -1280, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, 1280, 768, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 1280, 768, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, -1280, 768, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, -1280, 768, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, 1280, -768, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, 1280, -768, 3
 	delay 0x0
-	createsprite 0x8596E7C, 0x82, 0, 0, 30, -1280, -768, 3
+	createsprite gUnknown_08596E7C, 0x82, 0, 0, 30, -1280, -768, 3
 	return
 
 Move_SPARK:
@@ -1981,39 +1981,39 @@ Move_SPARK:
 	delay 0x0
 	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 5, 5, 23551
 	playsewithpan SE_W085B, -64
-	createsprite 0x859574C, 0x0, 32, 24, 190, 12, 0, 1, 0
+	createsprite gUnknown_0859574C, 0x0, 32, 24, 190, 12, 0, 1, 0
 	delay 0x0
-	createsprite 0x859574C, 0x0, 80, 24, 22, 12, 0, 1, 0
-	createsprite 0x859574C, 0x0, 156, 24, 121, 13, 0, 1, 1
+	createsprite gUnknown_0859574C, 0x0, 80, 24, 22, 12, 0, 1, 0
+	createsprite gUnknown_0859574C, 0x0, 156, 24, 121, 13, 0, 1, 1
 	delay 0x0
 	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 0, 0, 23551
 	delay 0xA
 	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 5, 5, 23551
 	playsewithpan SE_W085B, -64
-	createsprite 0x859574C, 0x0, 100, 24, 60, 10, 0, 1, 0
-	createsprite 0x859574C, 0x0, 170, 24, 42, 11, 0, 1, 1
+	createsprite gUnknown_0859574C, 0x0, 100, 24, 60, 10, 0, 1, 0
+	createsprite gUnknown_0859574C, 0x0, 170, 24, 42, 11, 0, 1, 1
 	delay 0x0
-	createsprite 0x859574C, 0x0, 238, 24, 165, 10, 0, 1, 1
+	createsprite gUnknown_0859574C, 0x0, 238, 24, 165, 10, 0, 1, 1
 	delay 0x0
 	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 0, 0, 23551
 	delay 0x14
 	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 7, 7, 23551
 	playsewithpan SE_W085B, -64
-	createsprite 0x85957F8, 0x4, 0, 0, 32, 12, 0, 20, 0, 0
-	createsprite 0x85957F8, 0x4, 0, 0, 32, 12, 64, 20, 1, 0
-	createsprite 0x85957F8, 0x4, 0, 0, 32, 12, 128, 20, 0, 0
-	createsprite 0x85957F8, 0x4, 0, 0, 32, 12, 192, 20, 2, 0
-	createsprite 0x85957F8, 0x4, 0, 0, 16, 12, 32, 20, 0, 0
-	createsprite 0x85957F8, 0x4, 0, 0, 16, 12, 96, 20, 1, 0
-	createsprite 0x85957F8, 0x4, 0, 0, 16, 12, 160, 20, 0, 0
-	createsprite 0x85957F8, 0x4, 0, 0, 16, 12, 224, 20, 2, 0
+	createsprite gUnknown_085957F8, 0x4, 0, 0, 32, 12, 0, 20, 0, 0
+	createsprite gUnknown_085957F8, 0x4, 0, 0, 32, 12, 64, 20, 1, 0
+	createsprite gUnknown_085957F8, 0x4, 0, 0, 32, 12, 128, 20, 0, 0
+	createsprite gUnknown_085957F8, 0x4, 0, 0, 32, 12, 192, 20, 2, 0
+	createsprite gUnknown_085957F8, 0x4, 0, 0, 16, 12, 32, 20, 0, 0
+	createsprite gUnknown_085957F8, 0x4, 0, 0, 16, 12, 96, 20, 1, 0
+	createsprite gUnknown_085957F8, 0x4, 0, 0, 16, 12, 160, 20, 0, 0
+	createsprite gUnknown_085957F8, 0x4, 0, 0, 16, 12, 224, 20, 2, 0
 	delay 0x4
 	waitforvisualfinish
 	createvisualtask sub_8115A04, 0x2, 3, -31, 1, 0, 0, 23551
-	createsprite 0x857FE28, 0x2, 4, 4
+	createsprite gUnknown_0857FE28, 0x2, 4, 4
 	delay 0x4
 	playsewithpan SE_W063, +63
-	createsprite 0x8597358, 0x82, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	waitforvisualfinish
 	createvisualtask sub_8115A04, 0x2, 4, -31, 2, 0, 6, 23551
@@ -2026,26 +2026,26 @@ Move_ATTRACT:
 	loopsewithpan SE_W204, -64, 0xC, 0x3
 	createvisualtask sub_80D5EB8, 0x5, 0, 12, 4096, 4, 0
 	delay 0xF
-	createsprite 0x85939A0, 0x83, 20, -8
+	createsprite gUnknown_085939A0, 0x83, 20, -8
 	waitforvisualfinish
 	playsewithpan SE_W213, +63
-	createsprite 0x85939B8, 0x83, 160, -32
-	createsprite 0x85939B8, 0x83, -256, -40
-	createsprite 0x85939B8, 0x83, 128, -16
-	createsprite 0x85939B8, 0x83, 416, -38
-	createsprite 0x85939B8, 0x83, -128, -22
-	createsprite 0x85939B8, 0x83, -384, -31
+	createsprite gUnknown_085939B8, 0x83, 160, -32
+	createsprite gUnknown_085939B8, 0x83, -256, -40
+	createsprite gUnknown_085939B8, 0x83, 128, -16
+	createsprite gUnknown_085939B8, 0x83, 416, -38
+	createsprite gUnknown_085939B8, 0x83, -128, -22
+	createsprite gUnknown_085939B8, 0x83, -384, -31
 	waitforvisualfinish
 	waitplaysewithpan SE_W213B, 0, 0xF
 	createvisualtask sub_81062E8, 0x5
-	createsprite 0x85939D0, 0x28, 16, 256, 0
-	createsprite 0x85939D0, 0x28, 224, 240, 15
-	createsprite 0x85939D0, 0x28, 126, 272, 30
-	createsprite 0x85939D0, 0x28, 80, 224, 45
-	createsprite 0x85939D0, 0x28, 170, 272, 60
-	createsprite 0x85939D0, 0x28, 40, 256, 75
-	createsprite 0x85939D0, 0x28, 112, 256, 90
-	createsprite 0x85939D0, 0x28, 200, 272, 90
+	createsprite gUnknown_085939D0, 0x28, 16, 256, 0
+	createsprite gUnknown_085939D0, 0x28, 224, 240, 15
+	createsprite gUnknown_085939D0, 0x28, 126, 272, 30
+	createsprite gUnknown_085939D0, 0x28, 80, 224, 45
+	createsprite gUnknown_085939D0, 0x28, 170, 272, 60
+	createsprite gUnknown_085939D0, 0x28, 40, 256, 75
+	createsprite gUnknown_085939D0, 0x28, 112, 256, 90
+	createsprite gUnknown_085939D0, 0x28, 200, 272, 90
 	delay 0x4B
 	createvisualtask sub_8115A04, 0x2, 4, 4, 4, 0, 10, 28479
 	end
@@ -2065,12 +2065,12 @@ AnimScript_82CBDC0:
 
 Move_WHIRLWIND:
 	loadspritegfx 0x27B2
-	createsprite 0x85963D4, 0x2, 0, -8, 1, 60, 0
-	createsprite 0x85963D4, 0x2, 0, 0, 1, 60, 1
-	createsprite 0x85963D4, 0x2, 0, 8, 1, 60, 2
-	createsprite 0x85963D4, 0x2, 0, 16, 1, 60, 3
-	createsprite 0x85963D4, 0x2, 0, 24, 1, 60, 4
-	createsprite 0x85963D4, 0x2, 0, 32, 1, 60, 0
+	createsprite gUnknown_085963D4, 0x2, 0, -8, 1, 60, 0
+	createsprite gUnknown_085963D4, 0x2, 0, 0, 1, 60, 1
+	createsprite gUnknown_085963D4, 0x2, 0, 8, 1, 60, 2
+	createsprite gUnknown_085963D4, 0x2, 0, 16, 1, 60, 3
+	createsprite gUnknown_085963D4, 0x2, 0, 24, 1, 60, 4
+	createsprite gUnknown_085963D4, 0x2, 0, 32, 1, 60, 0
 	delay 0x5
 	loopsewithpan SE_W104, +63, 0xA, 0x4
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 15, 1
@@ -2089,11 +2089,11 @@ Move_CONFUSE_RAY:
 	waitbgfadein
 	createvisualtask sub_8159278, 0x2, -64, 63, 2, 0
 	createvisualtask sub_8115C80, 0x2, 10013, 0, 6, 0, 14, 351
-	createsprite 0x8596D14, 0x82, 28, 0, 288
+	createsprite gUnknown_08596D14, 0x82, 28, 0, 288
 	waitforvisualfinish
 	setalpha 0x808
 	playsewithpan SE_W081B, +63
-	createsprite 0x8596D2C, 0x82, 0, -16
+	createsprite gUnknown_08596D2C, 0x82, 0, -16
 	waitforvisualfinish
 	delay 0x0
 	blendoff
@@ -2104,11 +2104,11 @@ Move_CONFUSE_RAY:
 
 Move_LOCK_ON:
 	loadspritegfx 0x271E
-	createsprite 0x8592CA0, 0x28
-	createsprite 0x8592CB8, 0x28, 1
-	createsprite 0x8592CB8, 0x28, 2
-	createsprite 0x8592CB8, 0x28, 3
-	createsprite 0x8592CB8, 0x28, 4
+	createsprite gUnknown_08592CA0, 0x28
+	createsprite gUnknown_08592CB8, 0x28, 1
+	createsprite gUnknown_08592CB8, 0x28, 2
+	createsprite gUnknown_08592CB8, 0x28, 3
+	createsprite gUnknown_08592CB8, 0x28, 4
 	delay 0x78
 	setarg 0x7, 0xFFFF
 	waitforvisualfinish
@@ -2118,12 +2118,12 @@ Move_MEAN_LOOK:
 	loadspritegfx 0x27CB
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_W060, -64
-	createsprite 0x8597274, 0x2, 1, 1, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 16, 0
 	loopsewithpan SE_W109, +63, 0xF, 0x4
 	waitplaysewithpan SE_W043, +63, 0x55
-	createsprite 0x85CE104, 0x2
+	createsprite gUnknown_085CE104, 0x2
 	delay 0x78
-	createsprite 0x8597274, 0x2, 1, 2, 16, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 16, 0, 0
 	delay 0x1E
 	clearmonbg ANIM_DEF_PARTNER
 	waitforvisualfinish
@@ -2131,21 +2131,21 @@ Move_MEAN_LOOK:
 
 Move_ROCK_THROW:
 	loadspritegfx 0x274A
-	createsprite 0x85972D8, 0x82, 6, 1, 15, 1
-	createsprite 0x8596B04, 0x82, 0, 1, 0, 0
+	createsprite gUnknown_085972D8, 0x82, 6, 1, 15, 1
+	createsprite gUnknown_08596B04, 0x82, 0, 1, 0, 0
 	playsewithpan SE_W088, +63
 	delay 0x6
-	createsprite 0x8596B04, 0x82, 19, 1, 10, 0
+	createsprite gUnknown_08596B04, 0x82, 19, 1, 10, 0
 	playsewithpan SE_W088, +63
 	delay 0x6
-	createsprite 0x8596B04, 0x82, -23, 2, -10, 0
+	createsprite gUnknown_08596B04, 0x82, -23, 2, -10, 0
 	playsewithpan SE_W088, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 5, 20, 1
 	delay 0x6
-	createsprite 0x8596B04, 0x82, -15, 1, -10, 0
+	createsprite gUnknown_08596B04, 0x82, -15, 1, -10, 0
 	playsewithpan SE_W088, +63
 	delay 0x6
-	createsprite 0x8596B04, 0x82, 23, 2, 10, 0
+	createsprite gUnknown_08596B04, 0x82, 23, 2, 10, 0
 	playsewithpan SE_W088, +63
 	waitforvisualfinish
 	end
@@ -2153,17 +2153,17 @@ Move_ROCK_THROW:
 Move_ROCK_SLIDE:
 	loadspritegfx 0x274A
 	monbg ANIM_DEF_PARTNER
-	createsprite 0x85972D8, 0x2, 7, 1, 11, 1
-	createsprite 0x8596B04, 0x82, -5, 1, -5, 1
+	createsprite gUnknown_085972D8, 0x2, 7, 1, 11, 1
+	createsprite gUnknown_08596B04, 0x82, -5, 1, -5, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
-	createsprite 0x8596B04, 0x82, 5, 0, 6, 1
+	createsprite gUnknown_08596B04, 0x82, 5, 0, 6, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
-	createsprite 0x8596B04, 0x82, 19, 1, 10, 1
+	createsprite gUnknown_08596B04, 0x82, 19, 1, 10, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
-	createsprite 0x8596B04, 0x82, -23, 2, -10, 1
+	createsprite gUnknown_08596B04, 0x82, -23, 2, -10, 1
 	playsewithpan SE_W088, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 5, 50, 1
 	createvisualtask sub_80D51AC, 0x2, 3, 0, 5, 50, 1
@@ -2175,28 +2175,28 @@ Move_ROCK_SLIDE:
 	end
 
 AnimScript_82CC083:
-	createsprite 0x8596B04, 0x82, -20, 0, -10, 1
+	createsprite gUnknown_08596B04, 0x82, -20, 0, -10, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
-	createsprite 0x8596B04, 0x82, 28, 1, 10, 1
+	createsprite gUnknown_08596B04, 0x82, 28, 1, 10, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
-	createsprite 0x8596B04, 0x82, -10, 1, -5, 1
+	createsprite gUnknown_08596B04, 0x82, -10, 1, -5, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
-	createsprite 0x8596B04, 0x82, 10, 0, 6, 1
+	createsprite gUnknown_08596B04, 0x82, 10, 0, 6, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
-	createsprite 0x8596B04, 0x82, 24, 1, 10, 1
+	createsprite gUnknown_08596B04, 0x82, 24, 1, 10, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
-	createsprite 0x8596B04, 0x82, -32, 2, -10, 1
+	createsprite gUnknown_08596B04, 0x82, -32, 2, -10, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
-	createsprite 0x8596B04, 0x82, -20, 0, -10, 1
+	createsprite gUnknown_08596B04, 0x82, -20, 0, -10, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
-	createsprite 0x8596B04, 0x82, 30, 2, 10, 1
+	createsprite gUnknown_08596B04, 0x82, 30, 2, 10, 1
 	playsewithpan SE_W088, +63
 	delay 0x2
 	return
@@ -2208,10 +2208,10 @@ Move_THIEF:
 	fadetobg BG_DARK
 	waitbgfadein
 	setalpha 0x80C
-	createsprite 0x857FE28, 0x2, 6, 4
+	createsprite gUnknown_0857FE28, 0x2, 6, 4
 	delay 0x6
 	playsewithpan SE_W233, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 1, 0, 8, 1
 	waitforvisualfinish
 	delay 0x14
@@ -2240,22 +2240,22 @@ Move_BUBBLE_BEAM:
 	end
 
 AnimScript_82CC1AD:
-	createsprite 0x8595068, 0x2, 18, 0, 35, 70, 0, 256, 50
+	createsprite gUnknown_08595068, 0x2, 18, 0, 35, 70, 0, 256, 50
 	playsewithpan SE_W145, -64
 	delay 0x3
-	createsprite 0x8595068, 0x2, 18, 0, 20, 40, -10, 256, 50
+	createsprite gUnknown_08595068, 0x2, 18, 0, 20, 40, -10, 256, 50
 	playsewithpan SE_W145, -64
 	delay 0x3
-	createsprite 0x8595068, 0x2, 18, 0, 10, -60, 0, 256, 50
+	createsprite gUnknown_08595068, 0x2, 18, 0, 10, -60, 0, 256, 50
 	playsewithpan SE_W145, -64
 	delay 0x3
-	createsprite 0x8595068, 0x2, 18, 0, 15, -15, 10, 256, 50
+	createsprite gUnknown_08595068, 0x2, 18, 0, 15, -15, 10, 256, 50
 	playsewithpan SE_W145, -64
 	delay 0x3
-	createsprite 0x8595068, 0x2, 18, 0, 30, 10, -10, 256, 50
+	createsprite gUnknown_08595068, 0x2, 18, 0, 30, 10, -10, 256, 50
 	playsewithpan SE_W145, -64
 	delay 0x3
-	createsprite 0x8595068, 0x2, 18, 0, 25, -30, 10, 256, 50
+	createsprite gUnknown_08595068, 0x2, 18, 0, 25, -30, 10, 256, 50
 	playsewithpan SE_W145, -64
 	delay 0x3
 	return
@@ -2286,38 +2286,38 @@ Move_ICY_WIND:
 	end
 
 AnimScript_82CC2A8:
-	createsprite 0x8595B98, 0xA8, 0, 0, 0, 0, 72, 1
+	createsprite gUnknown_08595B98, 0xA8, 0, 0, 0, 0, 72, 1
 	delay 0x5
-	createsprite 0x8595B98, 0xA8, 0, 10, 0, 10, 72, 1
+	createsprite gUnknown_08595B98, 0xA8, 0, 10, 0, 10, 72, 1
 	delay 0x5
-	createsprite 0x8595B98, 0xA8, 0, -10, 0, -10, 72, 1
+	createsprite gUnknown_08595B98, 0xA8, 0, -10, 0, -10, 72, 1
 	delay 0x5
-	createsprite 0x8595B98, 0xA8, 0, 15, 0, 15, 72, 1
+	createsprite gUnknown_08595B98, 0xA8, 0, 15, 0, 15, 72, 1
 	delay 0x5
-	createsprite 0x8595B98, 0xA8, 0, -5, 0, -5, 72, 1
+	createsprite gUnknown_08595B98, 0xA8, 0, -5, 0, -5, 72, 1
 	return
 
 Move_SMOKESCREEN:
 	loadspritegfx 0x2720
 	loadspritegfx 0x2721
 	playsewithpan SE_W104, -64
-	createsprite 0x85CE050, 0x82, 20, 0, 0, 0, 35, -25
+	createsprite gUnknown_085CE050, 0x82, 20, 0, 0, 0, 35, -25
 	waitforvisualfinish
 	createvisualtask sub_815A160, 0x2
 	delay 0x2
 	playsewithpan SE_W028, +63
-	createsprite 0x85CE038, 0x84, 0, -12, 104, 0, 75
-	createsprite 0x85CE038, 0x84, 0, -12, 72, 1, 75
-	createsprite 0x85CE038, 0x84, 0, -6, 56, 1, 75
-	createsprite 0x85CE038, 0x84, 0, -6, 88, 0, 75
-	createsprite 0x85CE038, 0x84, 0, 0, 56, 0, 75
-	createsprite 0x85CE038, 0x84, 0, 0, 88, 1, 75
-	createsprite 0x85CE038, 0x84, 0, 6, 72, 0, 75
-	createsprite 0x85CE038, 0x84, 0, 6, 104, 1, 75
-	createsprite 0x85CE038, 0x84, 0, 12, 72, 0, 75
-	createsprite 0x85CE038, 0x84, 0, 12, 56, 1, 75
-	createsprite 0x85CE038, 0x84, 0, 18, 80, 0, 75
-	createsprite 0x85CE038, 0x84, 0, 18, 72, 1, 75
+	createsprite gUnknown_085CE038, 0x84, 0, -12, 104, 0, 75
+	createsprite gUnknown_085CE038, 0x84, 0, -12, 72, 1, 75
+	createsprite gUnknown_085CE038, 0x84, 0, -6, 56, 1, 75
+	createsprite gUnknown_085CE038, 0x84, 0, -6, 88, 0, 75
+	createsprite gUnknown_085CE038, 0x84, 0, 0, 56, 0, 75
+	createsprite gUnknown_085CE038, 0x84, 0, 0, 88, 1, 75
+	createsprite gUnknown_085CE038, 0x84, 0, 6, 72, 0, 75
+	createsprite gUnknown_085CE038, 0x84, 0, 6, 104, 1, 75
+	createsprite gUnknown_085CE038, 0x84, 0, 12, 72, 0, 75
+	createsprite gUnknown_085CE038, 0x84, 0, 12, 56, 1, 75
+	createsprite gUnknown_085CE038, 0x84, 0, 18, 80, 0, 75
+	createsprite gUnknown_085CE038, 0x84, 0, 18, 72, 1, 75
 	waitforvisualfinish
 	end
 
@@ -2328,40 +2328,40 @@ Move_CONVERSION:
 	setalpha 0x10
 	delay 0x0
 	playsewithpan SE_W129, -64
-	createsprite 0x8592E74, 0x2, -24, -24
+	createsprite gUnknown_08592E74, 0x2, -24, -24
 	delay 0x3
-	createsprite 0x8592E74, 0x2, -8, -24
+	createsprite gUnknown_08592E74, 0x2, -8, -24
 	delay 0x3
-	createsprite 0x8592E74, 0x2, 8, -24
+	createsprite gUnknown_08592E74, 0x2, 8, -24
 	delay 0x3
-	createsprite 0x8592E74, 0x2, 24, -24
-	delay 0x3
-	playsewithpan SE_W129, -64
-	createsprite 0x8592E74, 0x2, -24, -8
-	delay 0x3
-	createsprite 0x8592E74, 0x2, -8, -8
-	delay 0x3
-	createsprite 0x8592E74, 0x2, 8, -8
-	delay 0x3
-	createsprite 0x8592E74, 0x2, 24, -8
+	createsprite gUnknown_08592E74, 0x2, 24, -24
 	delay 0x3
 	playsewithpan SE_W129, -64
-	createsprite 0x8592E74, 0x2, -24, 8
+	createsprite gUnknown_08592E74, 0x2, -24, -8
 	delay 0x3
-	createsprite 0x8592E74, 0x2, -8, 8
+	createsprite gUnknown_08592E74, 0x2, -8, -8
 	delay 0x3
-	createsprite 0x8592E74, 0x2, 8, 8
+	createsprite gUnknown_08592E74, 0x2, 8, -8
 	delay 0x3
-	createsprite 0x8592E74, 0x2, 24, 8
+	createsprite gUnknown_08592E74, 0x2, 24, -8
 	delay 0x3
 	playsewithpan SE_W129, -64
-	createsprite 0x8592E74, 0x2, -24, 24
+	createsprite gUnknown_08592E74, 0x2, -24, 8
 	delay 0x3
-	createsprite 0x8592E74, 0x2, -8, 24
+	createsprite gUnknown_08592E74, 0x2, -8, 8
 	delay 0x3
-	createsprite 0x8592E74, 0x2, 8, 24
+	createsprite gUnknown_08592E74, 0x2, 8, 8
 	delay 0x3
-	createsprite 0x8592E74, 0x2, 24, 24
+	createsprite gUnknown_08592E74, 0x2, 24, 8
+	delay 0x3
+	playsewithpan SE_W129, -64
+	createsprite gUnknown_08592E74, 0x2, -24, 24
+	delay 0x3
+	createsprite gUnknown_08592E74, 0x2, -8, 24
+	delay 0x3
+	createsprite gUnknown_08592E74, 0x2, 8, 24
+	delay 0x3
+	createsprite gUnknown_08592E74, 0x2, 24, 24
 	delay 0x14
 	playsewithpan SE_W112, -64
 	createvisualtask sub_8115D94, 0x2, 10018, 1, 1, 14335, 12, 0, 0
@@ -2380,22 +2380,22 @@ Move_CONVERSION_2:
 	setalpha 0x1000
 	delay 0x0
 	playsewithpan SE_W112, +63
-	createsprite 0x8592EA4, 0x2, -24, -24, 60
-	createsprite 0x8592EA4, 0x2, -8, -24, 65
-	createsprite 0x8592EA4, 0x2, 8, -24, 70
-	createsprite 0x8592EA4, 0x2, 24, -24, 75
-	createsprite 0x8592EA4, 0x2, -24, -8, 80
-	createsprite 0x8592EA4, 0x2, -8, -8, 85
-	createsprite 0x8592EA4, 0x2, 8, -8, 90
-	createsprite 0x8592EA4, 0x2, 24, -8, 95
-	createsprite 0x8592EA4, 0x2, -24, 8, 100
-	createsprite 0x8592EA4, 0x2, -8, 8, 105
-	createsprite 0x8592EA4, 0x2, 8, 8, 110
-	createsprite 0x8592EA4, 0x2, 24, 8, 115
-	createsprite 0x8592EA4, 0x2, -24, 24, 120
-	createsprite 0x8592EA4, 0x2, -8, 24, 125
-	createsprite 0x8592EA4, 0x2, 8, 24, 130
-	createsprite 0x8592EA4, 0x2, 24, 24, 135
+	createsprite gUnknown_08592EA4, 0x2, -24, -24, 60
+	createsprite gUnknown_08592EA4, 0x2, -8, -24, 65
+	createsprite gUnknown_08592EA4, 0x2, 8, -24, 70
+	createsprite gUnknown_08592EA4, 0x2, 24, -24, 75
+	createsprite gUnknown_08592EA4, 0x2, -24, -8, 80
+	createsprite gUnknown_08592EA4, 0x2, -8, -8, 85
+	createsprite gUnknown_08592EA4, 0x2, 8, -8, 90
+	createsprite gUnknown_08592EA4, 0x2, 24, -8, 95
+	createsprite gUnknown_08592EA4, 0x2, -24, 8, 100
+	createsprite gUnknown_08592EA4, 0x2, -8, 8, 105
+	createsprite gUnknown_08592EA4, 0x2, 8, 8, 110
+	createsprite gUnknown_08592EA4, 0x2, 24, 8, 115
+	createsprite gUnknown_08592EA4, 0x2, -24, 24, 120
+	createsprite gUnknown_08592EA4, 0x2, -8, 24, 125
+	createsprite gUnknown_08592EA4, 0x2, 8, 24, 130
+	createsprite gUnknown_08592EA4, 0x2, 24, 24, 135
 	createvisualtask sub_81023E0, 0x5
 	delay 0x3C
 	playsewithpan SE_W129, +63
@@ -2428,30 +2428,30 @@ Move_ROLLING_KICK:
 	delay 0x6
 	playsewithpan SE_W104, -64
 	waitforvisualfinish
-	createsprite 0x857FE70, 0x2, 0, 20, 0, 0, 4
-	createsprite 0x8595EE0, 0x2, -24, 0, 48, 10, 160, 0
+	createsprite gUnknown_0857FE70, 0x2, 0, 20, 0, 0, 4
+	createsprite gUnknown_08595EE0, 0x2, -24, 0, 48, 10, 160, 0
 	delay 0x5
 	playsewithpan SE_W233B, +63
-	createsprite 0x8597358, 0x2, -8, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, -8, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 6, 1
 	waitforvisualfinish
-	createsprite 0x857FE58, 0x2, 0, 1, 8
+	createsprite gUnknown_0857FE58, 0x2, 0, 1, 8
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
 
 Move_HEADBUTT:
 	loadspritegfx 0x2797
-	createsprite 0x8592CD8, 0x2, 0
+	createsprite gUnknown_08592CD8, 0x2, 0
 	playsewithpan SE_W029, -64
 	waitforvisualfinish
 	delay 0x2
-	createsprite 0x8592CD8, 0x2, 1
+	createsprite gUnknown_08592CD8, 0x2, 1
 	waitforvisualfinish
 	createvisualtask sub_80D5484, 0x2, 0, 2, 0, 4, 1
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 6, 1
-	createsprite 0x8592CD8, 0x2, 2
-	createsprite 0x85973E8, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_08592CD8, 0x2, 2
+	createsprite gUnknown_085973E8, 0x83, 0, 0, 1, 1
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
 	end
@@ -2459,17 +2459,17 @@ Move_HEADBUTT:
 Move_HORN_ATTACK:
 	loadspritegfx 0x2797
 	loadspritegfx 0x2724
-	createsprite 0x8592CD8, 0x2, 0
+	createsprite gUnknown_08592CD8, 0x2, 0
 	playsewithpan SE_W029, -64
 	waitforvisualfinish
 	delay 0x2
-	createsprite 0x8592CD8, 0x2, 1
-	createsprite 0x8592F44, 0x84, 0, 0, 10
+	createsprite gUnknown_08592CD8, 0x2, 1
+	createsprite gUnknown_08592F44, 0x84, 0, 0, 10
 	waitforvisualfinish
 	createvisualtask sub_80D5484, 0x2, 0, 2, 0, 4, 1
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 6, 1
-	createsprite 0x8592CD8, 0x2, 2
-	createsprite 0x85973E8, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_08592CD8, 0x2, 2
+	createsprite gUnknown_085973E8, 0x83, 0, 0, 1, 1
 	playsewithpan SE_W030, +63
 	waitforvisualfinish
 	end
@@ -2486,16 +2486,16 @@ AnimScript_82CC7A5:
 	end
 
 AnimScript_82CC7B8:
-	createsprite 0x8592F44, 0x84, 8, 8, 10
+	createsprite gUnknown_08592F44, 0x84, 8, 8, 10
 	waitforvisualfinish
-	createsprite 0x85973E8, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_085973E8, 0x83, 0, 0, 1, 1
 	playsewithpan SE_W030, +63
 	goto AnimScript_82CC7A5
 
 AnimScript_82CC7DE:
-	createsprite 0x8592F44, 0x84, -8, -8, 10
+	createsprite gUnknown_08592F44, 0x84, -8, -8, 10
 	waitforvisualfinish
-	createsprite 0x85973E8, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_085973E8, 0x83, 0, 0, 1, 1
 	playsewithpan SE_W030, +63
 	goto AnimScript_82CC7A5
 
@@ -2510,50 +2510,50 @@ Move_HORN_DRILL:
 AnimScript_82CC821:
 	waitbgfadein
 	setalpha 0x80C
-	createsprite 0x8592CD8, 0x2, 0
+	createsprite gUnknown_08592CD8, 0x2, 0
 	playsewithpan SE_W029, -64
 	waitforvisualfinish
 	delay 0x2
-	createsprite 0x8592CD8, 0x2, 1
-	createsprite 0x8592F44, 0x84, 0, 0, 12
+	createsprite gUnknown_08592CD8, 0x2, 1
+	createsprite gUnknown_08592F44, 0x84, 0, 0, 12
 	waitforvisualfinish
 	playse SE_BAN
 	createvisualtask sub_80D5484, 0x2, 0, 2, 0, 40, 1
 	createvisualtask sub_80D5484, 0x2, 1, 10, 0, 40, 1
-	createsprite 0x85973E8, 0x83, 0, 0, 1, 3
+	createsprite gUnknown_085973E8, 0x83, 0, 0, 1, 3
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x85973E8, 0x83, 0, 2, 1, 3
+	createsprite gUnknown_085973E8, 0x83, 0, 2, 1, 3
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x85973E8, 0x83, -4, 3, 1, 3
+	createsprite gUnknown_085973E8, 0x83, -4, 3, 1, 3
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x85973E8, 0x83, -8, -5, 1, 3
+	createsprite gUnknown_085973E8, 0x83, -8, -5, 1, 3
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x85973E8, 0x83, 4, -12, 1, 3
+	createsprite gUnknown_085973E8, 0x83, 4, -12, 1, 3
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x85973E8, 0x83, 16, 0, 1, 3
+	createsprite gUnknown_085973E8, 0x83, 16, 0, 1, 3
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x85973E8, 0x83, 5, 18, 1, 3
+	createsprite gUnknown_085973E8, 0x83, 5, 18, 1, 3
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x85973E8, 0x83, -17, 12, 1, 2
+	createsprite gUnknown_085973E8, 0x83, -17, 12, 1, 2
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x85973E8, 0x83, -21, -15, 1, 2
+	createsprite gUnknown_085973E8, 0x83, -21, -15, 1, 2
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x85973E8, 0x83, 8, -27, 1, 2
+	createsprite gUnknown_085973E8, 0x83, 8, -27, 1, 2
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x85973E8, 0x83, 32, 0, 1, 2
+	createsprite gUnknown_085973E8, 0x83, 32, 0, 1, 2
 	playsewithpan SE_W030, +63
 	delay 0x4
-	createsprite 0x8592CD8, 0x2, 2
+	createsprite gUnknown_08592CD8, 0x2, 2
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
@@ -2572,15 +2572,15 @@ Move_THRASH:
 	loadspritegfx 0x279F
 	createvisualtask sub_8104C38, 0x2
 	createvisualtask sub_8104CA4, 0x2
-	createsprite 0x8595EB0, 0x83, 1, 10, 0
+	createsprite gUnknown_08595EB0, 0x83, 1, 10, 0
 	createvisualtask sub_80D5484, 0x2, 1, 4, 0, 7, 1
 	playsewithpan SE_W004, +63
 	delay 0x1C
-	createsprite 0x8595EB0, 0x83, 1, 10, 1
+	createsprite gUnknown_08595EB0, 0x83, 1, 10, 1
 	createvisualtask sub_80D5484, 0x2, 1, 4, 0, 7, 1
 	playsewithpan SE_W233B, +63
 	delay 0x1C
-	createsprite 0x8595EB0, 0x83, 1, 10, 3
+	createsprite gUnknown_08595EB0, 0x83, 1, 10, 3
 	createvisualtask sub_80D5484, 0x2, 1, 8, 0, 16, 1
 	playsewithpan SE_W025B, +63
 	end
@@ -2591,29 +2591,29 @@ Move_SING:
 	createvisualtask sub_8102BE8, 0x2
 	waitforvisualfinish
 	panse_1B SE_W047, -64, +63, +2, 0x0
-	createsprite 0x8593008, 0x82, 7, 0, 12
+	createsprite gUnknown_08593008, 0x82, 7, 0, 12
 	delay 0x5
-	createsprite 0x8593008, 0x82, 6, 1, 12
+	createsprite gUnknown_08593008, 0x82, 6, 1, 12
 	delay 0x5
-	createsprite 0x8593008, 0x82, 1, 2, 12
+	createsprite gUnknown_08593008, 0x82, 1, 2, 12
 	delay 0x5
-	createsprite 0x8593008, 0x82, 2, 3, 12
+	createsprite gUnknown_08593008, 0x82, 2, 3, 12
 	delay 0x5
-	createsprite 0x8593008, 0x82, 3, 0, 12
+	createsprite gUnknown_08593008, 0x82, 3, 0, 12
 	delay 0x4
-	createsprite 0x8593008, 0x82, 2, 1, 12
+	createsprite gUnknown_08593008, 0x82, 2, 1, 12
 	delay 0x4
-	createsprite 0x8593008, 0x82, 5, 2, 12
+	createsprite gUnknown_08593008, 0x82, 5, 2, 12
 	delay 0x4
-	createsprite 0x8593008, 0x82, 6, 3, 12
+	createsprite gUnknown_08593008, 0x82, 6, 3, 12
 	delay 0x4
-	createsprite 0x8593008, 0x82, 2, 0, 12
+	createsprite gUnknown_08593008, 0x82, 2, 0, 12
 	delay 0x4
-	createsprite 0x8593008, 0x82, 2, 1, 12
+	createsprite gUnknown_08593008, 0x82, 2, 1, 12
 	delay 0x4
-	createsprite 0x8593008, 0x82, 1, 2, 12
+	createsprite gUnknown_08593008, 0x82, 1, 2, 12
 	delay 0x4
-	createsprite 0x8593008, 0x82, 5, 3, 12
+	createsprite gUnknown_08593008, 0x82, 5, 3, 12
 	delay 0x4
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -2624,14 +2624,14 @@ Move_SING:
 Move_LOW_KICK:
 	loadspritegfx 0x279F
 	loadspritegfx 0x2797
-	createsprite 0x857FE70, 0x2, 0, 20, 0, 0, 4
-	createsprite 0x8595EE0, 0x82, -24, 28, 40, 8, 160, 0
+	createsprite gUnknown_0857FE70, 0x2, 0, 20, 0, 0, 4
+	createsprite gUnknown_08595EE0, 0x82, -24, 28, 40, 8, 160, 0
 	delay 0x4
-	createsprite 0x8597358, 0x82, -8, 8, 1, 2
+	createsprite gUnknown_08597358, 0x82, -8, 8, 1, 2
 	createvisualtask sub_80D6134, 0x2, 6, 384, 1, 2
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
-	createsprite 0x857FE58, 0x2, 0, 1, 4
+	createsprite gUnknown_0857FE58, 0x2, 0, 1, 4
 	end
 
 Move_EARTHQUAKE:
@@ -2639,9 +2639,9 @@ Move_EARTHQUAKE:
 	createvisualtask sub_81152DC, 0x5, 4, 10, 50
 	playsewithpan SE_W089, 0
 	delay 0xA
-	createsprite 0x859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
+	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
 	delay 0x10
-	createsprite 0x859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
+	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
 	end
 
 Move_FISSURE:
@@ -2652,11 +2652,11 @@ Move_FISSURE:
 	delay 0x8
 	call AnimScript_82CCBFF
 	delay 0xF
-	createsprite 0x859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
+	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
 	delay 0xF
 	call AnimScript_82CCC50
 	delay 0xF
-	createsprite 0x859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
+	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
 	delay 0xF
 	call AnimScript_82CCBFF
 	delay 0x32
@@ -2672,18 +2672,18 @@ Move_FISSURE:
 	end
 
 AnimScript_82CCBFF:
-	createsprite 0x85971FC, 0x82, 1, 0, 12, -48, -16, 24
-	createsprite 0x85971FC, 0x82, 1, 0, 16, -16, -10, 24
-	createsprite 0x85971FC, 0x82, 1, 1, 14, -52, -18, 24
-	createsprite 0x85971FC, 0x82, 1, 1, 12, -32, -16, 24
+	createsprite gUnknown_085971FC, 0x82, 1, 0, 12, -48, -16, 24
+	createsprite gUnknown_085971FC, 0x82, 1, 0, 16, -16, -10, 24
+	createsprite gUnknown_085971FC, 0x82, 1, 1, 14, -52, -18, 24
+	createsprite gUnknown_085971FC, 0x82, 1, 1, 12, -32, -16, 24
 	playsewithpan SE_W091, +63
 	return
 
 AnimScript_82CCC50:
-	createsprite 0x85971FC, 0x82, 1, 0, 12, -24, -16, 24
-	createsprite 0x85971FC, 0x82, 1, 0, 16, -38, -10, 24
-	createsprite 0x85971FC, 0x82, 1, 1, 14, -20, -18, 24
-	createsprite 0x85971FC, 0x82, 1, 1, 12, -36, -16, 24
+	createsprite gUnknown_085971FC, 0x82, 1, 0, 12, -24, -16, 24
+	createsprite gUnknown_085971FC, 0x82, 1, 0, 16, -38, -10, 24
+	createsprite gUnknown_085971FC, 0x82, 1, 1, 14, -20, -18, 24
+	createsprite gUnknown_085971FC, 0x82, 1, 1, 12, -36, -16, 24
 	playsewithpan SE_W091, +63
 	return
 
@@ -2696,8 +2696,8 @@ AnimScript_82CCCAA:
 AnimScript_82CCCAB:
 	loadspritegfx 0x275A
 	loadspritegfx 0x2829
-	createsprite 0x8597214, 0x1, 0, 0, 180
-	createsprite 0x8597214, 0x1, 0, 1, 180
+	createsprite gUnknown_08597214, 0x1, 0, 0, 180
+	createsprite gUnknown_08597214, 0x1, 0, 1, 180
 	monbg_22 ANIM_ATTACKER
 	delay 0x1
 	createvisualtask sub_8114CBC, 0x2, 0
@@ -2719,22 +2719,22 @@ AnimScript_82CCD06:
 	createvisualtask sub_8114F14, 0x2, 0
 	waitforvisualfinish
 	monbg ANIM_ATTACKER
-	createsprite 0x8597214, 0x1, 0, 0, 48
-	createsprite 0x8597214, 0x1, 0, 1, 48
+	createsprite gUnknown_08597214, 0x1, 0, 0, 48
+	createsprite gUnknown_08597214, 0x1, 0, 1, 48
 	delay 0x1
 	createvisualtask sub_8114F14, 0x2, 1
 	delay 0x10
-	createsprite 0x8597358, 0x2, -8, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, -8, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 6, 1
 	playsewithpan SE_W025B, -64
 	clearmonbg ANIM_ATTACKER
 	goto AnimScript_82CCCAA
 
 AnimScript_82CCD6A:
-	createsprite 0x85971FC, 0x2, 0, 0, 12, 4, -16, 18
-	createsprite 0x85971FC, 0x2, 0, 0, 16, 4, -10, 18
-	createsprite 0x85971FC, 0x2, 0, 1, 14, 4, -18, 18
-	createsprite 0x85971FC, 0x2, 0, 1, 12, 4, -16, 18
+	createsprite gUnknown_085971FC, 0x2, 0, 0, 12, 4, -16, 18
+	createsprite gUnknown_085971FC, 0x2, 0, 0, 16, 4, -10, 18
+	createsprite gUnknown_085971FC, 0x2, 0, 1, 14, 4, -18, 18
+	createsprite gUnknown_085971FC, 0x2, 0, 1, 12, 4, -16, 18
 	playsewithpan SE_W091, -64
 	delay 0x20
 	return
@@ -2779,7 +2779,7 @@ Move_QUICK_ATTACK:
 	playsewithpan SE_W026, -64
 	delay 0x4
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 6, 1
-	createsprite 0x8597358, 0x84, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x84, 0, 0, 1, 1
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
@@ -2793,15 +2793,15 @@ Move_RAGE:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	createvisualtask sub_80A7B98, 0x3, 0, 31, 10, 0, 2
-	createsprite 0x859368C, 0x2, 0, -20, -28
+	createsprite gUnknown_0859368C, 0x2, 0, -20, -28
 	playsewithpan SE_W207B, -64
 	delay 0x14
-	createsprite 0x859368C, 0x2, 0, 20, -28
+	createsprite gUnknown_0859368C, 0x2, 0, 20, -28
 	playsewithpan SE_W207B, -64
 	waitforvisualfinish
-	createsprite 0x857FE28, 0x2, 4, 6
+	createsprite gUnknown_0857FE28, 0x2, 4, 6
 	delay 0x4
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D6388, 0x2, 1, 1, 10, 1, 0
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
@@ -2855,10 +2855,10 @@ Move_MINIMIZE:
 Move_METRONOME:
 	loadspritegfx 0x2750
 	loadspritegfx 0x27E1
-	createsprite 0x8593114, 0xB, 0, 100
+	createsprite gUnknown_08593114, 0xB, 0, 100
 	playsewithpan SE_W118, -64
 	delay 0x6
-	createsprite 0x85931BC, 0xC, 0
+	createsprite gUnknown_085931BC, 0xC, 0
 	delay 0x18
 	loopsewithpan SE_W039, -64, 0x16, 0x3
 	waitforvisualfinish
@@ -2877,12 +2877,12 @@ AnimScript_82CCF99:
 	goto AnimScript_82CCF98
 
 AnimScript_82CCFA9:
-	createsprite 0x857FE88, 0x2, 0, -24, 0, 0, 10, 0
+	createsprite gUnknown_0857FE88, 0x2, 0, -24, 0, 0, 10, 0
 	playsewithpan SE_W036, -64
 	waitforvisualfinish
 	createvisualtask sub_80D6134, 0x2, 16, 96, 0, 2
 	waitforvisualfinish
-	createsprite 0x857FE88, 0x2, 0, 24, 0, 0, 10, 1
+	createsprite gUnknown_0857FE88, 0x2, 0, 24, 0, 0, 10, 1
 	waitforvisualfinish
 	return
 
@@ -2892,10 +2892,10 @@ AnimScript_82CCFE6:
 	playsewithpan SE_W036, -64
 	waitforvisualfinish
 	playse SE_BAN
-	createsprite 0x859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
+	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
 	createvisualtask sub_80D5484, 0x2, 0, 2, 0, 40, 1
 	createvisualtask sub_80D5484, 0x2, 1, 10, 0, 40, 1
-	createsprite 0x85973E8, 0x84, 0, 0, 1, 0
+	createsprite gUnknown_085973E8, 0x84, 0, 0, 1, 0
 	loopsewithpan SE_W025B, +63, 0x8, 0x3
 	waitforvisualfinish
 	createvisualtask sub_8101C94, 0x2, 1
@@ -2905,7 +2905,7 @@ Move_AMNESIA:
 	loadspritegfx 0x276D
 	call AnimScript_82D7CD1
 	delay 0x8
-	createsprite 0x8596744, 0x14
+	createsprite gUnknown_08596744, 0x14
 	playsewithpan SE_W118, -64
 	delay 0x36
 	loopsewithpan SE_W118, -64, 0x10, 0x3
@@ -2918,9 +2918,9 @@ Move_KINESIS:
 	loadspritegfx 0x2771
 	playsewithpan SE_W060, -64
 	call AnimScript_82D7CD1
-	createsprite 0x85966DC, 0x14
-	createsprite 0x8593344, 0x13, 32, -8, 0
-	createsprite 0x8593344, 0x13, 32, 16, 1
+	createsprite gUnknown_085966DC, 0x14
+	createsprite gUnknown_08593344, 0x13, 32, -8, 0
+	createsprite gUnknown_08593344, 0x13, 32, 16, 1
 	loopsewithpan SE_W109, -64, 0x15, 0x2
 	delay 0x3C
 	playsewithpan SE_W146, -64
@@ -2940,8 +2940,8 @@ Move_GLARE:
 	waitforvisualfinish
 	createvisualtask sub_8116620, 0x5, 1, 0, 0, 16, 0
 	waitforvisualfinish
-	createsprite 0x8593A84, 0x0, -16, -8
-	createsprite 0x8593A84, 0x0, 16, -8
+	createsprite gUnknown_08593A84, 0x0, -16, -8
+	createsprite gUnknown_08593A84, 0x0, 16, -8
 	createvisualtask sub_81064F8, 0x5
 	playsewithpan SE_W043, -64
 	delay 0x2
@@ -2955,7 +2955,7 @@ Move_BARRAGE:
 	createvisualtask sub_815E47C, 0x3
 	playsewithpan SE_W207, -64
 	delay 0x18
-	createsprite 0x85972D8, 0x2, 8, 1, 40, 1
+	createsprite gUnknown_085972D8, 0x2, 8, 1, 40, 1
 	createvisualtask sub_80D51AC, 0x3, 1, 0, 4, 20, 1
 	createvisualtask sub_80D51AC, 0x3, 3, 0, 4, 20, 1
 	loopsewithpan SE_W070, +63, 0x8, 0x2
@@ -3019,7 +3019,7 @@ AnimScript_82CD28E:
 	createvisualtask sub_81136E8, 0x5, 0
 	waitforvisualfinish
 	createvisualtask sub_8159244, 0x5, 238, -64
-	createsprite 0x8596514, 0x82
+	createsprite gUnknown_08596514, 0x82
 	delay 0xE
 	createvisualtask sub_80D52D0, 0x2, 1, 10, 0, 18, 1
 	createvisualtask sub_8159210, 0x5, 141, 63
@@ -3058,7 +3058,7 @@ Move_ACID_ARMOR:
 
 Move_SHARPEN:
 	loadspritegfx 0x27C9
-	createsprite 0x8592DE4, 0x2
+	createsprite gUnknown_08592DE4, 0x2
 	waitforvisualfinish
 	end
 
@@ -3071,12 +3071,12 @@ Move_SUPER_FANG:
 	createvisualtask sub_80A7B98, 0x2, 0, 1247, 12, 4, 1
 	waitforvisualfinish
 	delay 0x14
-	createsprite 0x857FE28, 0x2, 4, 4
+	createsprite gUnknown_0857FE28, 0x2, 4, 4
 	delay 0x4
-	createsprite 0x8592F74, 0x82
+	createsprite gUnknown_08592F74, 0x82
 	playsewithpan SE_W044, +63
 	delay 0x8
-	createsprite 0x859728C, 0x2, 1, 3, 1, 2143, 14, 0x7FFF, 14
+	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 2143, 14, 0x7FFF, 14
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 7, 12, 1
 	waitforvisualfinish
 	blendoff
@@ -3084,10 +3084,10 @@ Move_SUPER_FANG:
 
 Move_SLASH:
 	loadspritegfx 0x27C7
-	createsprite 0x8592D2C, 0x82, 1, -8, 0
+	createsprite gUnknown_08592D2C, 0x82, 1, -8, 0
 	playsewithpan SE_W013, +63
 	delay 0x4
-	createsprite 0x8592D2C, 0x82, 1, 8, 0
+	createsprite gUnknown_08592D2C, 0x82, 1, 8, 0
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 18, 1
 	playsewithpan SE_W013, +63
 	waitforvisualfinish
@@ -3099,11 +3099,11 @@ Move_STRUGGLE:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	createvisualtask sub_80D5484, 0x2, 0, 3, 0, 12, 4
-	createsprite 0x8593B80, 0x2, 0, 0, 2
-	createsprite 0x8593B80, 0x2, 0, 1, 2
+	createsprite gUnknown_08593B80, 0x2, 0, 0, 2
+	createsprite gUnknown_08593B80, 0x2, 0, 1, 2
 	loopsewithpan SE_W029, -64, 0xC, 0x4
 	waitforvisualfinish
-	createsprite 0x8597358, 0x3, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 2
 	createvisualtask sub_80D5484, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W025B, +63
 	waitforvisualfinish
@@ -3115,7 +3115,7 @@ Move_SKETCH:
 	loadspritegfx 0x2712
 	monbg ANIM_TARGET
 	createvisualtask sub_8104E74, 0x2
-	createsprite 0x85936D4, 0x82
+	createsprite gUnknown_085936D4, 0x82
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	createvisualtask sub_8104938, 0x2, 0, 2
@@ -3152,7 +3152,7 @@ Move_FLAIL:
 	createvisualtask sub_815C770, 0x2, 0
 	loopsewithpan SE_W029, -64, 0x8, 0x2
 	waitforvisualfinish
-	createsprite 0x85973A0, 0x83, 1, 3
+	createsprite gUnknown_085973A0, 0x83, 1, 3
 	createvisualtask sub_80D6388, 0x2, 0, 1, 30, 1, 0
 	playsewithpan SE_W025B, +63
 	waitforvisualfinish
@@ -3191,8 +3191,8 @@ AnimScript_82CD57E:
 	createvisualtask sub_80A8BC4, 0x2, 28968, 10
 	playsewithpan SE_W026, -64
 	delay 0x6
-	createsprite 0x8597358, 0x83, 0, 0, 1, 1
-	createsprite 0x8595E98, 0x84, 0, 0, 8, 1, 0
+	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_08595E98, 0x84, 0, 0, 8, 1, 0
 	playsewithpan SE_W004, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	waitforvisualfinish
@@ -3213,7 +3213,7 @@ Move_FORESIGHT:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x10
-	createsprite 0x85CE8C4, 0x82, 1
+	createsprite gUnknown_085CE8C4, 0x82, 1
 	delay 0x11
 	loopsewithpan SE_W166, +63, 0x10, 0x4
 	delay 0x30
@@ -3261,27 +3261,27 @@ Move_ENDURE:
 	end
 
 AnimScript_82CD6C7:
-	createsprite 0x8592D8C, 0x2, 0, -24, 26, 2
+	createsprite gUnknown_08592D8C, 0x2, 0, -24, 26, 2
 	delay 0x4
-	createsprite 0x8592D8C, 0x2, 0, 14, 28, 1
+	createsprite gUnknown_08592D8C, 0x2, 0, 14, 28, 1
 	delay 0x4
-	createsprite 0x8592D8C, 0x2, 0, -5, 10, 2
+	createsprite gUnknown_08592D8C, 0x2, 0, -5, 10, 2
 	delay 0x4
-	createsprite 0x8592D8C, 0x2, 0, 28, 26, 3
+	createsprite gUnknown_08592D8C, 0x2, 0, 28, 26, 3
 	delay 0x4
-	createsprite 0x8592D8C, 0x2, 0, -12, 0, 1
+	createsprite gUnknown_08592D8C, 0x2, 0, -12, 0, 1
 	return
 
 Move_CHARM:
 	loadspritegfx 0x27E2
 	createvisualtask sub_815C478, 0x5, 0, 2, 0
-	createsprite 0x8593970, 0x3, 0, 20
+	createsprite gUnknown_08593970, 0x3, 0, 20
 	playsewithpan SE_W204, -64
 	delay 0xF
-	createsprite 0x8593970, 0x3, -20, 20
+	createsprite gUnknown_08593970, 0x3, -20, 20
 	playsewithpan SE_W204, -64
 	delay 0xF
-	createsprite 0x8593970, 0x3, 20, 20
+	createsprite gUnknown_08593970, 0x3, 20, 20
 	playsewithpan SE_W204, -64
 	waitforvisualfinish
 	end
@@ -3296,7 +3296,7 @@ Move_ROLLOUT:
 	createvisualtask sub_8110F74, 0x2
 	waitforvisualfinish
 	createvisualtask sub_80D6388, 0x2, 0, 1, 30, 1, 0
-	createsprite 0x8597358, 0x4, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x4, 0, 0, 1, 2
 	playsewithpan SE_W025B, +63
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -3306,27 +3306,27 @@ Move_ROLLOUT:
 Move_FALSE_SWIPE:
 	loadspritegfx 0x282E
 	loadspritegfx 0x2797
-	createsprite 0x8592D44, 0x82
+	createsprite gUnknown_08592D44, 0x82
 	playsewithpan SE_W233, +63
 	delay 0x10
-	createsprite 0x8592D5C, 0x82, 0
+	createsprite gUnknown_08592D5C, 0x82, 0
 	playsewithpan SE_W104, +63
 	delay 0x2
-	createsprite 0x8592D5C, 0x82, 16
+	createsprite gUnknown_08592D5C, 0x82, 16
 	delay 0x2
-	createsprite 0x8592D5C, 0x82, 32
+	createsprite gUnknown_08592D5C, 0x82, 32
 	playsewithpan SE_W104, +63
 	delay 0x2
-	createsprite 0x8592D5C, 0x82, 48
+	createsprite gUnknown_08592D5C, 0x82, 48
 	delay 0x2
-	createsprite 0x8592D5C, 0x82, 64
+	createsprite gUnknown_08592D5C, 0x82, 64
 	playsewithpan SE_W104, +63
 	delay 0x2
-	createsprite 0x8592D5C, 0x82, 80
+	createsprite gUnknown_08592D5C, 0x82, 80
 	delay 0x2
 	waitforvisualfinish
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 6, 1
-	createsprite 0x8597358, 0x84, 0, 0, 1, 3
+	createsprite gUnknown_08597358, 0x84, 0, 0, 1, 3
 	playsewithpan SE_W004, +63
 	end
 
@@ -3336,14 +3336,14 @@ Move_SWAGGER:
 	createvisualtask sub_8104AB4, 0x2
 	playsewithpan SE_W207, -64
 	waitforvisualfinish
-	createsprite 0x8593658, 0x2
+	createsprite gUnknown_08593658, 0x2
 	loopsewithpan SE_W207, -64, 0x4, 0x2
 	waitforvisualfinish
 	delay 0x18
-	createsprite 0x859368C, 0x82, 1, -20, -28
+	createsprite gUnknown_0859368C, 0x82, 1, -20, -28
 	playsewithpan SE_W207B, +63
 	delay 0xC
-	createsprite 0x859368C, 0x82, 1, 20, -28
+	createsprite gUnknown_0859368C, 0x82, 1, 20, -28
 	playsewithpan SE_W207B, +63
 	waitforvisualfinish
 	end
@@ -3353,7 +3353,7 @@ Move_MILK_DRINK:
 	loadspritegfx 0x27DB
 	loadspritegfx 0x272F
 	monbg ANIM_TARGET
-	createsprite 0x8592B3C, 0x2
+	createsprite gUnknown_08592B3C, 0x2
 	delay 0x28
 	playsewithpan SE_W152, -64
 	delay 0xC
@@ -3361,7 +3361,7 @@ Move_MILK_DRINK:
 	delay 0x14
 	playsewithpan SE_W152, -64
 	waitforvisualfinish
-	createsprite 0x859381C, 0x3, 0, 0, 1, 0
+	createsprite gUnknown_0859381C, 0x3, 0, 0, 1, 0
 	playsewithpan SE_W208, -64
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -3389,20 +3389,20 @@ AnimScript_82CD8EE:
 	createvisualtask sub_81152DC, 0x5, 4, 0, 50
 	loopsewithpan SE_W070, +63, 0x8, 0xA
 	delay 0xA
-	createsprite 0x859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
+	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
 	delay 0x10
-	createsprite 0x859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
+	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, 0, 14, 0x7FFF, 14
 	goto AnimScript_82CD8C8
 
 Move_RAPID_SPIN:
 	loadspritegfx 0x2797
 	loadspritegfx 0x27F5
 	monbg ANIM_ATTACKER
-	createsprite 0x85CE288, 0x2, 0, 0, 32, -32, 40, -2
+	createsprite gUnknown_085CE288, 0x2, 0, 0, 32, -32, 40, -2
 	createvisualtask sub_815ADB0, 0x2, 0, 2, 0
 	loopsewithpan SE_W013B, -64, 0x8, 0x4
 	waitforvisualfinish
-	createsprite 0x8597358, 0x82, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 2
 	createvisualtask sub_80D6388, 0x2, 0, 1, 10, 1, 0
 	playsewithpan SE_W003, +63
 	waitforvisualfinish
@@ -3418,21 +3418,21 @@ Move_MOONLIGHT:
 	loadspritegfx 0x27D3
 	loadspritegfx 0x272F
 	setalpha 0x1000
-	createsprite 0x8597274, 0x2, 1, 1, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 16, 0
 	waitforvisualfinish
-	createsprite 0x8592EBC, 0x2, 120, 56
+	createsprite gUnknown_08592EBC, 0x2, 120, 56
 	createvisualtask sub_80A7A74, 0x3, 0, 16, 16, 0, 1
 	playsewithpan SE_W236, 0
 	delay 0x1E
-	createsprite 0x8592EEC, 0x28, -12, 0
+	createsprite gUnknown_08592EEC, 0x28, -12, 0
 	delay 0x1E
-	createsprite 0x8592EEC, 0x28, -24, 0
+	createsprite gUnknown_08592EEC, 0x28, -24, 0
 	delay 0x1E
-	createsprite 0x8592EEC, 0x28, 21, 0
+	createsprite gUnknown_08592EEC, 0x28, 21, 0
 	delay 0x1E
-	createsprite 0x8592EEC, 0x28, 0, 0
+	createsprite gUnknown_08592EEC, 0x28, 0, 0
 	delay 0x1E
-	createsprite 0x8592EEC, 0x28, 10, 0
+	createsprite gUnknown_08592EEC, 0x28, 10, 0
 	delay 0x14
 	createvisualtask sub_81025C0, 0x2
 	waitforvisualfinish
@@ -3462,13 +3462,13 @@ AnimScript_82CDA55:
 	createvisualtask sub_8105810, 0x2
 	delay 0x2
 	playsewithpan SE_W004, +63
-	createsprite 0x85973B8, 0x82, 1, 0, -12, 3
+	createsprite gUnknown_085973B8, 0x82, 1, 0, -12, 3
 	delay 0xA
 	playsewithpan SE_W004, +63
-	createsprite 0x85973B8, 0x82, 1, 0, 12, 3
+	createsprite gUnknown_085973B8, 0x82, 1, 0, 12, 3
 	delay 0xA
 	playsewithpan SE_W233B, +63
-	createsprite 0x85973B8, 0x82, 1, 0, 0, 3
+	createsprite gUnknown_085973B8, 0x82, 1, 0, 0, 3
 	waitforvisualfinish
 	createvisualtask sub_8105AAC, 0x2
 	delay 0xA
@@ -3495,22 +3495,22 @@ Move_UPROAR:
 	loadspritegfx 0x27DB
 	monbg ANIM_DEF_PARTNER
 	createvisualtask sub_8106D90, 0x2, 0
-	createsprite 0x8593898, 0x3, 0, 0, 0, 0, 31, 8
+	createsprite gUnknown_08593898, 0x3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, -64
-	createsprite 0x8593BB8, 0x2, 0, 29, -12, 0
-	createsprite 0x8593BB8, 0x2, 0, -12, -29, 1
+	createsprite gUnknown_08593BB8, 0x2, 0, 29, -12, 0
+	createsprite gUnknown_08593BB8, 0x2, 0, -12, -29, 1
 	delay 0x10
 	createvisualtask sub_8106D90, 0x2, 0
-	createsprite 0x8593898, 0x3, 0, 0, 0, 0, 31, 8
+	createsprite gUnknown_08593898, 0x3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, -64
-	createsprite 0x8593BB8, 0x2, 0, 12, -29, 1
-	createsprite 0x8593BB8, 0x2, 0, -29, -12, 0
+	createsprite gUnknown_08593BB8, 0x2, 0, 12, -29, 1
+	createsprite gUnknown_08593BB8, 0x2, 0, -29, -12, 0
 	delay 0x10
 	createvisualtask sub_8106D90, 0x2, 0
-	createsprite 0x8593898, 0x3, 0, 0, 0, 0, 31, 8
+	createsprite gUnknown_08593898, 0x3, 0, 0, 0, 0, 31, 8
 	playsewithpan SE_W253, -64
-	createsprite 0x8593BB8, 0x2, 0, 24, -24, 1
-	createsprite 0x8593BB8, 0x2, 0, -24, -24, 0
+	createsprite gUnknown_08593BB8, 0x2, 0, 24, -24, 1
+	createsprite gUnknown_08593BB8, 0x2, 0, -24, -24, 0
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
@@ -3524,19 +3524,19 @@ Move_HEAT_WAVE:
 	delay 0x4
 	createvisualtask sub_8109DBC, 0x5
 	delay 0xC
-	createsprite 0x8596BA0, 0x28, 10, 2304, 96, 1
+	createsprite gUnknown_08596BA0, 0x28, 10, 2304, 96, 1
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 90, 2048, 96, 1
+	createsprite gUnknown_08596BA0, 0x28, 90, 2048, 96, 1
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 50, 2560, 96, 1
+	createsprite gUnknown_08596BA0, 0x28, 50, 2560, 96, 1
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 20, 2304, 96, 1
+	createsprite gUnknown_08596BA0, 0x28, 20, 2304, 96, 1
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 70, 1984, 96, 1
+	createsprite gUnknown_08596BA0, 0x28, 70, 1984, 96, 1
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 0, 2816, 96, 1
+	createsprite gUnknown_08596BA0, 0x28, 0, 2816, 96, 1
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 60, 2560, 96, 1
+	createsprite gUnknown_08596BA0, 0x28, 60, 2560, 96, 1
 	end
 
 Move_HAIL:
@@ -3556,10 +3556,10 @@ Move_TORMENT:
 	createvisualtask sub_815AFF0, 0x2
 	waitforvisualfinish
 	createvisualtask sub_80A7B98, 0x2, 1, 31, 10, 1, 1
-	createsprite 0x859368C, 0x82, 1, -20, -28
+	createsprite gUnknown_0859368C, 0x82, 1, -20, -28
 	playsewithpan SE_W207B, +63
 	delay 0x14
-	createsprite 0x859368C, 0x82, 1, 20, -28
+	createsprite gUnknown_0859368C, 0x82, 1, 20, -28
 	playsewithpan SE_W207B, +63
 	end
 
@@ -3597,21 +3597,21 @@ Move_FACADE:
 Move_SMELLING_SALT:
 	loadspritegfx 0x2807
 	loadspritegfx 0x280F
-	createsprite 0x85CE864, 0x82, 1, 0, 2
-	createsprite 0x85CE864, 0x82, 1, 1, 2
+	createsprite gUnknown_085CE864, 0x82, 1, 0, 2
+	createsprite gUnknown_085CE864, 0x82, 1, 1, 2
 	delay 0x20
 	createvisualtask sub_815E840, 0x3, 1, 2
 	loopsewithpan SE_W003, +63, 0xC, 0x2
 	waitforvisualfinish
 	delay 0x4
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 6, 2
-	createsprite 0x85CE894, 0x82, 1, 8, 3
+	createsprite gUnknown_085CE894, 0x82, 1, 8, 3
 	loopsewithpan SE_W207B, +63, 0x10, 0x3
 	end
 
 Move_FOLLOW_ME:
 	loadspritegfx 0x2750
-	createsprite 0x85931D4, 0x2, 0
+	createsprite gUnknown_085931D4, 0x2, 0
 	playsewithpan SE_W039, -64
 	delay 0x12
 	playsewithpan SE_W213, -64
@@ -3625,7 +3625,7 @@ Move_CHARGE:
 	loadspritegfx 0x27E5
 	monbg ANIM_ATTACKER
 	setalpha 0x80C
-	createsprite 0x8597274, 0x2, 1, 2, 0, 4, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 4, 0
 	waitforvisualfinish
 	createvisualtask sub_810AAFC, 0x2, 0, 60, 2, 12
 	playsewithpan SE_W268, -64
@@ -3633,7 +3633,7 @@ Move_CHARGE:
 	playsewithpan SE_W268, -64
 	delay 0x1E
 	playsewithpan SE_W268, -64
-	createsprite 0x859595C, 0x2, 0
+	createsprite gUnknown_0859595C, 0x2, 0
 	delay 0x19
 	playsewithpan SE_W268, -64
 	delay 0x14
@@ -3644,12 +3644,12 @@ Move_CHARGE:
 	delay 0x6
 	loopsewithpan SE_W268, -64, 0x6, 0x5
 	waitforvisualfinish
-	createsprite 0x859598C, 0x2, 0, 16, 16
+	createsprite gUnknown_0859598C, 0x2, 0, 16, 16
 	delay 0x2
-	createsprite 0x859598C, 0x2, 0, -16, -16
+	createsprite gUnknown_0859598C, 0x2, 0, -16, -16
 	playsewithpan SE_W085B, -64
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 4, 4, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 4, 4, 0, 0
 	clearmonbg ANIM_ATTACKER
 	blendoff
 	end
@@ -3658,27 +3658,27 @@ Move_TAUNT:
 	loadspritegfx 0x27E6
 	loadspritegfx 0x27E1
 	loadspritegfx 0x2767
-	createsprite 0x8593114, 0xB, 0, 45
+	createsprite gUnknown_08593114, 0xB, 0, 45
 	playsewithpan SE_W118, -64
 	delay 0x6
-	createsprite 0x859324C, 0xC, 0
+	createsprite gUnknown_0859324C, 0xC, 0
 	delay 0x4
 	loopsewithpan SE_W039, -64, 0x10, 0x2
 	waitforvisualfinish
 	delay 0x8
-	createsprite 0x859368C, 0x82, 1, -20, -28
+	createsprite gUnknown_0859368C, 0x82, 1, -20, -28
 	playsewithpan SE_W207B, +63
 	waitforvisualfinish
 	delay 0xC
-	createsprite 0x859368C, 0x82, 1, 20, -28
+	createsprite gUnknown_0859368C, 0x82, 1, 20, -28
 	playsewithpan SE_W207B, +63
 	end
 
 Move_HELPING_HAND:
 	loadspritegfx 0x2807
 	createvisualtask sub_815EC48, 0x5
-	createsprite 0x85CE8AC, 0x28, 0
-	createsprite 0x85CE8AC, 0x28, 1
+	createsprite gUnknown_085CE8AC, 0x28, 0
+	createsprite gUnknown_085CE8AC, 0x28, 1
 	delay 0x13
 	playsewithpan SE_W227, 0
 	createvisualtask sub_80D52D0, 0x2, 2, 2, 0, 5, 1
@@ -3693,18 +3693,18 @@ Move_HELPING_HAND:
 
 Move_ASSIST:
 	loadspritegfx 0x280C
-	createsprite 0x85CE804, 0x32, 112, -16, 140, 128, 36
+	createsprite gUnknown_085CE804, 0x32, 112, -16, 140, 128, 36
 	delay 0x2
-	createsprite 0x85CE804, 0x32, 208, 128, -16, 48, 36
+	createsprite gUnknown_085CE804, 0x32, 208, 128, -16, 48, 36
 	playsewithpan SE_W010, 0
 	delay 0x2
-	createsprite 0x85CE804, 0x32, -16, 112, 256, -16, 36
+	createsprite gUnknown_085CE804, 0x32, -16, 112, 256, -16, 36
 	playsewithpan SE_W010, 0
 	delay 0x2
-	createsprite 0x85CE804, 0x32, 108, 128, 84, -16, 36
+	createsprite gUnknown_085CE804, 0x32, 108, 128, 84, -16, 36
 	playsewithpan SE_W010, 0
 	delay 0x2
-	createsprite 0x85CE804, 0x32, -16, 56, 256, 56, 36
+	createsprite gUnknown_085CE804, 0x32, -16, 56, 256, 56, 36
 	playsewithpan SE_W010, 0
 	end
 
@@ -3715,23 +3715,23 @@ Move_SUPERPOWER:
 	monbg ANIM_ATK_PARTNER
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 0x80C
-	createsprite 0x8595FEC, 0x82, 0
+	createsprite gUnknown_08595FEC, 0x82, 0
 	playsewithpan SE_W025, -64
 	delay 0x14
-	createsprite 0x85972D8, 0x2, 4, 1, 180, 1
+	createsprite gUnknown_085972D8, 0x2, 4, 1, 180, 1
 	createvisualtask sub_8159244, 0x5, 234, 0
 	delay 0x28
-	createsprite 0x8596004, 0x29, 200, 96, 1, 120
+	createsprite gUnknown_08596004, 0x29, 200, 96, 1, 120
 	delay 0x8
-	createsprite 0x8596004, 0x29, 20, 248, 4, 112
+	createsprite gUnknown_08596004, 0x29, 20, 248, 4, 112
 	delay 0x8
-	createsprite 0x8596004, 0x29, 130, 160, 2, 104
+	createsprite gUnknown_08596004, 0x29, 130, 160, 2, 104
 	delay 0x8
-	createsprite 0x8596004, 0x29, 160, 192, 0, 96
+	createsprite gUnknown_08596004, 0x29, 160, 192, 0, 96
 	delay 0x8
-	createsprite 0x8596004, 0x29, 60, 288, 3, 88
+	createsprite gUnknown_08596004, 0x29, 60, 288, 3, 88
 	delay 0x4A
-	createsprite 0x859601C, 0x83, 0
+	createsprite gUnknown_0859601C, 0x83, 0
 	playsewithpan SE_W207, -64
 	delay 0x10
 	createvisualtask sub_80D52D0, 0x2, 1, 8, 0, 16, 1
@@ -3747,7 +3747,7 @@ Move_RECYCLE:
 	monbg ANIM_ATTACKER
 	setalpha 0x1000
 	delay 0x1
-	createsprite 0x85CE9B0, 0x2
+	createsprite gUnknown_085CE9B0, 0x2
 	loopsewithpan SE_W036, -64, 0x18, 0x3
 	waitforvisualfinish
 	createvisualtask sub_80A7B98, 0x5, 0, 0x7FFF, 12, 2, 1
@@ -3768,25 +3768,25 @@ Move_BRICK_BREAK:
 AnimScript_82CE0A7:
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x857FE28, 0x2, 3, 8
+	createsprite gUnknown_0857FE28, 0x2, 3, 8
 	delay 0x4
 	delay 0x1
-	createsprite 0x8597358, 0x3, -18, -18, 1, 1
+	createsprite gUnknown_08597358, 0x3, -18, -18, 1, 1
 	playsewithpan SE_W233, +63
 	delay 0x14
-	createsprite 0x857FE28, 0x2, 3, 8
+	createsprite gUnknown_0857FE28, 0x2, 3, 8
 	delay 0x5
-	createsprite 0x8597358, 0x3, 18, 18, 1, 1
+	createsprite gUnknown_08597358, 0x3, 18, 18, 1, 1
 	playsewithpan SE_W233, +63
 	delay 0x14
 	createvisualtask sub_80D5C50, 0x2, 0, -24, 0, 24, 10, 24, 3
-	createsprite 0x8597274, 0x2, 1, 2, 0, 6, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 6, 0
 	delay 0x25
-	createsprite 0x8597358, 0x3, 0, 0, 1, 1
-	createsprite 0x8595E98, 0x4, 0, 0, 10, 1, 0
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 1
+	createsprite gUnknown_08595E98, 0x4, 0, 0, 10, 1, 0
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 2, 6, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 6, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	end
@@ -3794,32 +3794,32 @@ AnimScript_82CE0A7:
 AnimScript_82CE154:
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x857FE28, 0x2, 3, 8
+	createsprite gUnknown_0857FE28, 0x2, 3, 8
 	delay 0x4
-	createsprite 0x8595F90, 0x3, 1, 0, 0, 90, 10
+	createsprite gUnknown_08595F90, 0x3, 1, 0, 0, 90, 10
 	delay 0x1
-	createsprite 0x8597358, 0x3, -18, -18, 1, 1
+	createsprite gUnknown_08597358, 0x3, -18, -18, 1, 1
 	playsewithpan SE_W233, +63
 	delay 0x14
-	createsprite 0x857FE28, 0x2, 3, 8
+	createsprite gUnknown_0857FE28, 0x2, 3, 8
 	delay 0x5
-	createsprite 0x8597358, 0x3, 18, 18, 1, 1
+	createsprite gUnknown_08597358, 0x3, 18, 18, 1, 1
 	playsewithpan SE_W233, +63
 	delay 0x14
 	createvisualtask sub_80D5C50, 0x2, 0, -24, 0, 24, 10, 24, 3
-	createsprite 0x8597274, 0x2, 1, 2, 0, 6, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 6, 0
 	delay 0x25
-	createsprite 0x8597358, 0x3, 0, 0, 1, 1
-	createsprite 0x8595E98, 0x4, 0, 0, 10, 1, 0
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 1
+	createsprite gUnknown_08595E98, 0x4, 0, 0, 10, 1, 0
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
-	createsprite 0x8595FA8, 0x2, 1, 0, -8, -12
-	createsprite 0x8595FA8, 0x2, 1, 1, 8, -12
-	createsprite 0x8595FA8, 0x2, 1, 2, -8, 12
-	createsprite 0x8595FA8, 0x2, 1, 3, 8, 12
+	createsprite gUnknown_08595FA8, 0x2, 1, 0, -8, -12
+	createsprite gUnknown_08595FA8, 0x2, 1, 1, 8, -12
+	createsprite gUnknown_08595FA8, 0x2, 1, 2, -8, 12
+	createsprite gUnknown_08595FA8, 0x2, 1, 3, 8, 12
 	playsewithpan SE_W280, +63
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 2, 6, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 6, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	end
@@ -3829,12 +3829,12 @@ Move_YAWN:
 	createvisualtask sub_815D64C, 0x2, 0
 	playsewithpan SE_W281, -64
 	waitforvisualfinish
-	createsprite 0x85CE68C, 0x85, 2
+	createsprite gUnknown_085CE68C, 0x85, 2
 	playsewithpan SE_W255, -64
 	delay 0x4
-	createsprite 0x85CE68C, 0x85, 1
+	createsprite gUnknown_085CE68C, 0x85, 1
 	delay 0x4
-	createsprite 0x85CE68C, 0x85, 0
+	createsprite gUnknown_085CE68C, 0x85, 0
 	waitforvisualfinish
 	createvisualtask sub_815D64C, 0x2, 1
 	playsewithpan SE_W281, +63
@@ -3848,17 +3848,17 @@ Move_ENDEAVOR:
 	createvisualtask sub_80A7B98, 0x5, 0, 703, 12, 1, 2
 	delay 0x6
 	createvisualtask sub_80D6388, 0x5, 0, 1, 8, 1, 0
-	createsprite 0x8597358, 0x82, 12, -12, 1, 2
+	createsprite gUnknown_08597358, 0x82, 12, -12, 1, 2
 	playsewithpan SE_W003, +63
 	delay 0x18
 	createvisualtask sub_80D6388, 0x5, 0, 1, 8, 1, 0
-	createsprite 0x8597358, 0x82, -12, 12, 1, 2
+	createsprite gUnknown_08597358, 0x82, -12, 12, 1, 2
 	playsewithpan SE_W004, +63
 	end
 
 Move_ERUPTION:
 	loadspritegfx 0x27D9
-	createsprite 0x8597274, 0x2, 31, 2, 0, 4, 31
+	createsprite gUnknown_08597274, 0x2, 31, 2, 0, 4, 31
 	waitforvisualfinish
 	createvisualtask sub_8109460, 0x2
 	waitplaysewithpan SE_W153, -64, 0x3C
@@ -3867,18 +3867,18 @@ Move_ERUPTION:
 	waitplaysewithpan SE_W153, -64, 0x3C
 	waitforvisualfinish
 	delay 0x1E
-	createsprite 0x85955E8, 0x28, 200, -32, 0, 100, 0
-	createsprite 0x85955E8, 0x28, 30, -32, 16, 90, 1
-	createsprite 0x85955E8, 0x28, 150, -32, 32, 60, 2
-	createsprite 0x85955E8, 0x28, 90, -32, 48, 80, 3
-	createsprite 0x85955E8, 0x28, 110, -32, 64, 50, 0
-	createsprite 0x85955E8, 0x28, 60, -32, 80, 70, 1
+	createsprite gUnknown_085955E8, 0x28, 200, -32, 0, 100, 0
+	createsprite gUnknown_085955E8, 0x28, 30, -32, 16, 90, 1
+	createsprite gUnknown_085955E8, 0x28, 150, -32, 32, 60, 2
+	createsprite gUnknown_085955E8, 0x28, 90, -32, 48, 80, 3
+	createsprite gUnknown_085955E8, 0x28, 110, -32, 64, 50, 0
+	createsprite gUnknown_085955E8, 0x28, 60, -32, 80, 70, 1
 	delay 0x16
 	createvisualtask sub_81152DC, 0x5, 5, 8, 60
 	createvisualtask sub_81152DC, 0x5, 4, 8, 60
 	loopsewithpan SE_W088, +63, 0x10, 0xC
 	delay 0x50
-	createsprite 0x8597274, 0x28, 31, 4, 4, 0, 31
+	createsprite gUnknown_08597274, 0x28, 31, 4, 4, 0, 31
 	end
 
 Move_SKILL_SWAP:
@@ -3904,7 +3904,7 @@ Move_IMPRISON:
 	loopsewithpan SE_W030, -64, 0x8, 0x5
 	waitforvisualfinish
 	delay 0x4
-	createsprite 0x85967AC, 0x5, 0, 40
+	createsprite gUnknown_085967AC, 0x5, 0, 40
 	createvisualtask sub_81152DC, 0x5, 4, 1, 10
 	playsewithpan SE_W063, -64
 	clearmonbg ANIM_DEF_PARTNER
@@ -3951,13 +3951,13 @@ Move_TAIL_GLOW:
 	loadspritegfx 0x27E4
 	monbg ANIM_ATTACKER
 	setalpha 0x80C
-	createsprite 0x8597274, 0x2, 1, 2, 0, 4, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 4, 0
 	waitforvisualfinish
-	createsprite 0x8596AC8, 0x42, 0
+	createsprite gUnknown_08596AC8, 0x42, 0
 	delay 0x12
 	loopsewithpan SE_W234, -64, 0x10, 0x6
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 4, 4, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 4, 4, 0, 0
 	clearmonbg ANIM_ATTACKER
 	blendoff
 	delay 0x1
@@ -3973,29 +3973,29 @@ Move_LUSTER_PURGE:
 	monbg ANIM_ATTACKER
 	setalpha 0x80C
 	playsewithpan SE_W076, -64
-	createsprite 0x8596898, 0x29, 0, 0, 0, 0
+	createsprite gUnknown_08596898, 0x29, 0, 0, 0, 0
 	delay 0x14
 	createvisualtask sub_8116664, 0x5, 5, 2, 0, 16, -1
 	createvisualtask sub_8116848, 0x5, 10267, 2, 0, 16, -1
 	waitforvisualfinish
 	createvisualtask sub_8116848, 0x5, 10135, 0, 12, 12, 23552
 	waitforvisualfinish
-	createsprite 0x85973A0, 0x83, 1, 2
+	createsprite gUnknown_085973A0, 0x83, 1, 2
 	createvisualtask sub_8159210, 0x5, 215, 63
 	delay 0x3
-	createsprite 0x85973A0, 0x83, 1, 2
+	createsprite gUnknown_085973A0, 0x83, 1, 2
 	createvisualtask sub_8159210, 0x5, 215, 63
 	delay 0x3
-	createsprite 0x85973A0, 0x83, 1, 2
+	createsprite gUnknown_085973A0, 0x83, 1, 2
 	createvisualtask sub_8159210, 0x5, 215, 63
 	delay 0x3
-	createsprite 0x85973A0, 0x83, 1, 2
+	createsprite gUnknown_085973A0, 0x83, 1, 2
 	createvisualtask sub_8159210, 0x5, 215, 63
 	delay 0x3
-	createsprite 0x85973A0, 0x83, 1, 2
+	createsprite gUnknown_085973A0, 0x83, 1, 2
 	createvisualtask sub_8159210, 0x5, 215, 63
 	delay 0x3
-	createsprite 0x85973A0, 0x83, 1, 2
+	createsprite gUnknown_085973A0, 0x83, 1, 2
 	createvisualtask sub_8159210, 0x5, 215, 63
 	waitforvisualfinish
 	createvisualtask sub_8116664, 0x5, 5, 2, 16, 0, -1
@@ -4011,11 +4011,11 @@ Move_MIST_BALL:
 	loadspritegfx 0x281E
 	delay 0x0
 	playsewithpan SE_W081, -64
-	createsprite 0x8595C70, 0x80, 0, 0, 0, 0, 30, 0
+	createsprite gUnknown_08595C70, 0x80, 0, 0, 0, 0, 30, 0
 	waitforvisualfinish
 	playsewithpan SE_W028, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 10, 0
-	createsprite 0x859728C, 0x0, 1, 1, 1, 32279, 16, 0x7FFF, 16
+	createsprite gUnknown_0859728C, 0x0, 1, 1, 1, 32279, 16, 0x7FFF, 16
 	delay 0x0
 	playsewithpan SE_W114, 0
 	createvisualtask sub_810C324, 0x5
@@ -4032,18 +4032,18 @@ Move_FEATHER_DANCE:
 	monbgprio_29
 	playsewithpan SE_W080, +63
 	delay 0x0
-	createsprite 0x8596388, 0x80, 0, -16, 64, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, 0x80, 0, -16, 64, 2, 104, 11304, 32, 1
 	delay 0x6
-	createsprite 0x8596388, 0x80, 0, -16, 32, 2, 104, 11304, 32, 1
-	createsprite 0x8596388, 0x80, 0, -16, 0, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, 0x80, 0, -16, 32, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, 0x80, 0, -16, 0, 2, 104, 11304, 32, 1
 	delay 0x6
-	createsprite 0x8596388, 0x80, 0, -16, 224, 2, 104, 11304, 32, 1
-	createsprite 0x8596388, 0x80, 0, -16, 128, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, 0x80, 0, -16, 224, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, 0x80, 0, -16, 128, 2, 104, 11304, 32, 1
 	delay 0x6
-	createsprite 0x8596388, 0x80, 0, -16, 192, 2, 104, 11304, 32, 1
-	createsprite 0x8596388, 0x80, 0, -16, 160, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, 0x80, 0, -16, 192, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, 0x80, 0, -16, 160, 2, 104, 11304, 32, 1
 	delay 0x6
-	createsprite 0x8596388, 0x80, 0, -16, 96, 2, 104, 11304, 32, 1
+	createsprite gUnknown_08596388, 0x80, 0, -16, 96, 2, 104, 11304, 32, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
@@ -4052,19 +4052,19 @@ Move_TEETER_DANCE:
 	loadspritegfx 0x2758
 	loadspritegfx 0x2759
 	createvisualtask sub_8160164, 0x5
-	createsprite 0x8593050, 0x2, 0, 16, -2
+	createsprite gUnknown_08593050, 0x2, 0, 16, -2
 	playsewithpan SE_W298, -64
 	delay 0x18
-	createsprite 0x8593050, 0x2, 0, 0, -2
+	createsprite gUnknown_08593050, 0x2, 0, 0, -2
 	playsewithpan SE_W298, -64
 	delay 0x18
-	createsprite 0x8593050, 0x2, 0, -16, -2
+	createsprite gUnknown_08593050, 0x2, 0, -16, -2
 	playsewithpan SE_W298, -64
 	delay 0x18
-	createsprite 0x8593050, 0x2, 1, -8, -2
+	createsprite gUnknown_08593050, 0x2, 1, -8, -2
 	playsewithpan SE_W298, -64
 	delay 0x18
-	createsprite 0x8593050, 0x2, 2, 8, -2
+	createsprite gUnknown_08593050, 0x2, 2, 8, -2
 	playsewithpan SE_W298, -64
 	end
 
@@ -4072,46 +4072,46 @@ Move_MUD_SPORT:
 	loadspritegfx 0x275A
 	createvisualtask sub_8104938, 0x2, 0, 6
 	delay 0x18
-	createsprite 0x85971E4, 0x82, 0, -4, -16
-	createsprite 0x85971E4, 0x82, 0, 4, -12
+	createsprite gUnknown_085971E4, 0x82, 0, -4, -16
+	createsprite gUnknown_085971E4, 0x82, 0, 4, -12
 	playsewithpan SE_W091, -64
 	delay 0x20
-	createsprite 0x85971E4, 0x82, 0, -3, -12
-	createsprite 0x85971E4, 0x82, 0, 5, -14
+	createsprite gUnknown_085971E4, 0x82, 0, -3, -12
+	createsprite gUnknown_085971E4, 0x82, 0, 5, -14
 	playsewithpan SE_W091, -64
 	delay 0x20
-	createsprite 0x85971E4, 0x82, 0, -5, -18
-	createsprite 0x85971E4, 0x82, 0, 3, -14
+	createsprite gUnknown_085971E4, 0x82, 0, -5, -18
+	createsprite gUnknown_085971E4, 0x82, 0, 3, -14
 	playsewithpan SE_W091, -64
 	delay 0x10
-	createsprite 0x85971E4, 0x82, 1, 220, 60
+	createsprite gUnknown_085971E4, 0x82, 1, 220, 60
 	waitplaysewithpan SE_W145B, 0, 0xF
 	delay 0x2
-	createsprite 0x85971E4, 0x82, 1, 60, 100
+	createsprite gUnknown_085971E4, 0x82, 1, 60, 100
 	waitplaysewithpan SE_W145B, 0, 0x19
 	delay 0x2
-	createsprite 0x85971E4, 0x82, 1, 140, 55
+	createsprite gUnknown_085971E4, 0x82, 1, 140, 55
 	waitplaysewithpan SE_W145B, 0, 0xE
 	delay 0x2
-	createsprite 0x85971E4, 0x82, 1, 180, 50
+	createsprite gUnknown_085971E4, 0x82, 1, 180, 50
 	waitplaysewithpan SE_W145B, 0, 0xA
 	delay 0x2
-	createsprite 0x85971E4, 0x82, 1, 20, 90
+	createsprite gUnknown_085971E4, 0x82, 1, 20, 90
 	waitplaysewithpan SE_W145B, 0, 0x16
 	delay 0x2
-	createsprite 0x85971E4, 0x82, 1, 90, 90
+	createsprite gUnknown_085971E4, 0x82, 1, 90, 90
 	waitplaysewithpan SE_W145B, 0, 0x16
 	delay 0x2
-	createsprite 0x85971E4, 0x82, 1, 160, 60
+	createsprite gUnknown_085971E4, 0x82, 1, 160, 60
 	waitplaysewithpan SE_W145B, 0, 0xF
 	delay 0x2
-	createsprite 0x85971E4, 0x82, 1, 30, 90
+	createsprite gUnknown_085971E4, 0x82, 1, 30, 90
 	waitplaysewithpan SE_W145B, 0, 0x16
 	delay 0x2
-	createsprite 0x85971E4, 0x82, 1, 120, 60
+	createsprite gUnknown_085971E4, 0x82, 1, 120, 60
 	waitplaysewithpan SE_W145B, 0, 0xF
 	delay 0x2
-	createsprite 0x85971E4, 0x82, 1, 200, 40
+	createsprite gUnknown_085971E4, 0x82, 1, 200, 40
 	waitplaysewithpan SE_W145B, 0, 0xA
 	end
 
@@ -4120,42 +4120,42 @@ Move_NEEDLE_ARM:
 	loadspritegfx 0x2797
 	loadspritegfx 0x279F
 	loopsewithpan SE_W030, +63, 0x2, 0x10
-	createsprite 0x8592888, 0x82, 1, 0, 0, -32, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, 0, -32, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, 22, -22, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, 22, -22, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, 30, 0, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, 30, 0, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, 20, 20, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, 20, 20, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, 0, 28, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, 0, 28, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, -19, 19, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, -19, 19, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, -27, 0, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, -27, 0, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, -18, -18, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, -18, -18, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, 0, -25, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, 0, -25, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, 17, -17, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, 17, -17, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, 23, 0, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, 23, 0, 16
 	delay 0x2
-	createsprite 0x8592888, 0x82, 1, 0, 16, 16, 16
+	createsprite gUnknown_08592888, 0x82, 1, 0, 16, 16, 16
 	waitforvisualfinish
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 18, 1
-	createsprite 0x8597358, 0x83, 0, 0, 1, 1
-	createsprite 0x8595E98, 0x84, 0, 0, 8, 1, 0
+	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_08595E98, 0x84, 0, 0, 8, 1, 0
 	playsewithpan SE_W233B, +63
-	createsprite 0x8592888, 0x82, 1, 1, 0, -24, 10
-	createsprite 0x8592888, 0x82, 1, 1, 17, -17, 10
-	createsprite 0x8592888, 0x82, 1, 1, 24, 0, 10
-	createsprite 0x8592888, 0x82, 1, 1, 17, 17, 10
-	createsprite 0x8592888, 0x82, 1, 1, 0, 24, 10
-	createsprite 0x8592888, 0x82, 1, 1, -17, 17, 10
-	createsprite 0x8592888, 0x82, 1, 1, -24, 0, 10
-	createsprite 0x8592888, 0x82, 1, 1, -17, -17, 10
+	createsprite gUnknown_08592888, 0x82, 1, 1, 0, -24, 10
+	createsprite gUnknown_08592888, 0x82, 1, 1, 17, -17, 10
+	createsprite gUnknown_08592888, 0x82, 1, 1, 24, 0, 10
+	createsprite gUnknown_08592888, 0x82, 1, 1, 17, 17, 10
+	createsprite gUnknown_08592888, 0x82, 1, 1, 0, 24, 10
+	createsprite gUnknown_08592888, 0x82, 1, 1, -17, 17, 10
+	createsprite gUnknown_08592888, 0x82, 1, 1, -24, 0, 10
+	createsprite gUnknown_08592888, 0x82, 1, 1, -17, -17, 10
 	end
 
 Move_SLACK_OFF:
@@ -4173,15 +4173,15 @@ Move_CRUSH_CLAW:
 	loadspritegfx 0x27E0
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x857FE28, 0x2, 6, 4
+	createsprite gUnknown_0857FE28, 0x2, 6, 4
 	delay 0x4
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 18, 1
-	createsprite 0x8597138, 0x82, -10, -10, 0
-	createsprite 0x8597138, 0x82, -10, 10, 0
+	createsprite gUnknown_08597138, 0x82, -10, -10, 0
+	createsprite gUnknown_08597138, 0x82, -10, 10, 0
 	playsewithpan SE_W013, +63
 	delay 0xC
-	createsprite 0x8597138, 0x82, 10, -10, 1
-	createsprite 0x8597138, 0x82, 10, 10, 1
+	createsprite gUnknown_08597138, 0x82, 10, -10, 1
+	createsprite gUnknown_08597138, 0x82, 10, 10, 1
 	playsewithpan SE_W013, +63
 	waitforvisualfinish
 	blendoff
@@ -4193,37 +4193,37 @@ Move_AROMATHERAPY:
 	loadspritegfx 0x27AF
 	loadspritegfx 0x27DB
 	loadspritegfx 0x2741
-	createsprite 0x8597274, 0x0, 1, 0, 0, 7, 13293
+	createsprite gUnknown_08597274, 0x0, 1, 0, 0, 7, 13293
 	delay 0x1
 	monbg ANIM_ATTACKER
 	delay 0x1
-	createsprite 0x85927AC, 0x0, 24, 16, 0, 2, 2, 0, 0
-	createsprite 0x85927AC, 0x42, 64, 24, 0, 3, 1, 1, 0
-	createsprite 0x85927C4, 0x0, 16, 24, 0, 2, 1, 0, 0
+	createsprite gUnknown_085927AC, 0x0, 24, 16, 0, 2, 2, 0, 0
+	createsprite gUnknown_085927AC, 0x42, 64, 24, 0, 3, 1, 1, 0
+	createsprite gUnknown_085927C4, 0x0, 16, 24, 0, 2, 1, 0, 0
 	delay 0x14
-	createsprite 0x85927AC, 0x42, 48, 12, 0, 4, 3, 1, 0
-	createsprite 0x85927AC, 0x0, 100, 16, 0, 3, 2, 0, 0
-	createsprite 0x85927AC, 0x0, 74, 24, 180, 3, 2, 0, 0
+	createsprite gUnknown_085927AC, 0x42, 48, 12, 0, 4, 3, 1, 0
+	createsprite gUnknown_085927AC, 0x0, 100, 16, 0, 3, 2, 0, 0
+	createsprite gUnknown_085927AC, 0x0, 74, 24, 180, 3, 2, 0, 0
 	delay 0xA
-	createsprite 0x85927AC, 0x42, 80, 30, 0, 4, 1, 1, 0
-	createsprite 0x85927AC, 0x0, 128, 12, 0, 3, 3, 0, 0
-	createsprite 0x85927C4, 0x0, 90, 16, 0, 2, 1, 0, 0
+	createsprite gUnknown_085927AC, 0x42, 80, 30, 0, 4, 1, 1, 0
+	createsprite gUnknown_085927AC, 0x0, 128, 12, 0, 3, 3, 0, 0
+	createsprite gUnknown_085927C4, 0x0, 90, 16, 0, 2, 1, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	delay 0x1
-	createsprite 0x8597274, 0x0, 1, 0, 7, 0, 13293
+	createsprite gUnknown_08597274, 0x0, 1, 0, 7, 0, 13293
 	delay 0x1
 	playsewithpan SE_W287, -64
 	createvisualtask sub_815DFCC, 0x2, 1
 	waitforvisualfinish
 	playsewithpan SE_W234, -64
-	createsprite 0x8592B94, 0x10, -15, 0, 0, 0, 32, 60, 1
+	createsprite gUnknown_08592B94, 0x10, -15, 0, 0, 0, 32, 60, 1
 	delay 0x8
-	createsprite 0x8592B94, 0x10, 12, -5, 0, 0, 32, 60, 1
+	createsprite gUnknown_08592B94, 0x10, 12, -5, 0, 0, 32, 60, 1
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, -64
-	createsprite 0x8597274, 0x0, 43, 3, 10, 0, 13293
-	createsprite 0x8593868, 0x10, 0, 0, 0, 1
+	createsprite gUnknown_08597274, 0x0, 43, 3, 10, 0, 13293
+	createsprite gUnknown_08593868, 0x10, 0, 0, 0, 1
 	waitforvisualfinish
 	end
 
@@ -4236,17 +4236,17 @@ Move_FAKE_TEARS:
 	createvisualtask sub_815C478, 0x5, 0, 2, 1
 	loopsewithpan SE_W039, -64, 0xC, 0x4
 	delay 0x8
-	createsprite 0x85970E8, 0x2, 0, 0
-	createsprite 0x85970E8, 0x2, 0, 1
+	createsprite gUnknown_085970E8, 0x2, 0, 0
+	createsprite gUnknown_085970E8, 0x2, 0, 1
 	delay 0x8
-	createsprite 0x85970E8, 0x2, 0, 2
-	createsprite 0x85970E8, 0x2, 0, 3
+	createsprite gUnknown_085970E8, 0x2, 0, 2
+	createsprite gUnknown_085970E8, 0x2, 0, 3
 	delay 0x8
-	createsprite 0x85970E8, 0x2, 0, 0
-	createsprite 0x85970E8, 0x2, 0, 1
+	createsprite gUnknown_085970E8, 0x2, 0, 0
+	createsprite gUnknown_085970E8, 0x2, 0, 1
 	delay 0x8
-	createsprite 0x85970E8, 0x2, 0, 2
-	createsprite 0x85970E8, 0x2, 0, 3
+	createsprite gUnknown_085970E8, 0x2, 0, 2
+	createsprite gUnknown_085970E8, 0x2, 0, 3
 	waitforvisualfinish
 	end
 
@@ -4261,7 +4261,7 @@ Move_AIR_CUTTER:
 	createvisualtask sub_8103CF0, 0x2, 32, -24, 1536, 2, 128
 	waitforvisualfinish
 	playsewithpan SE_W015, +63
-	createsprite 0x8592A34, 0x2, 40, -32, 0, 2
+	createsprite gUnknown_08592A34, 0x2, 40, -32, 0, 2
 	delay 0x5
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 8, 1
 	createvisualtask sub_80D52D0, 0x2, 3, 2, 0, 8, 1
@@ -4275,64 +4275,64 @@ Move_ODOR_SLEUTH:
 	monbg ANIM_TARGET
 	createvisualtask sub_815F620, 0x5
 	delay 0x18
-	createsprite 0x857FE28, 0x2, 3, 4
+	createsprite gUnknown_0857FE28, 0x2, 3, 4
 	playsewithpan SE_W207, -64
 	delay 0x6
-	createsprite 0x857FE28, 0x2, 3, 4
+	createsprite gUnknown_0857FE28, 0x2, 3, 4
 	playsewithpan SE_W207, -64
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	delay 0x1
-	createsprite 0x859728C, 0x2, 1, 3, 1, -1, 16, -1, 0
+	createsprite gUnknown_0859728C, 0x2, 1, 3, 1, -1, 16, -1, 0
 	playsewithpan SE_W043, -64
 	end
 
 Move_GRASS_WHISTLE:
 	loadspritegfx 0x2758
-	createsprite 0x8597274, 0x2, 1, 2, 0, 4, 13298
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 4, 13298
 	waitforvisualfinish
 	createvisualtask sub_8102BE8, 0x2
 	waitforvisualfinish
 	panse_1B SE_W320, -64, +63, +2, 0x0
-	createsprite 0x8593008, 0x82, 7, 1, 0
+	createsprite gUnknown_08593008, 0x82, 7, 1, 0
 	delay 0x5
-	createsprite 0x8593008, 0x82, 6, 1, 0
+	createsprite gUnknown_08593008, 0x82, 6, 1, 0
 	delay 0x5
-	createsprite 0x8593008, 0x82, 1, 1, 0
+	createsprite gUnknown_08593008, 0x82, 1, 1, 0
 	delay 0x5
-	createsprite 0x8593008, 0x82, 2, 1, 0
+	createsprite gUnknown_08593008, 0x82, 2, 1, 0
 	delay 0x5
-	createsprite 0x8593008, 0x82, 3, 1, 0
+	createsprite gUnknown_08593008, 0x82, 3, 1, 0
 	delay 0x4
-	createsprite 0x8593008, 0x82, 2, 1, 0
+	createsprite gUnknown_08593008, 0x82, 2, 1, 0
 	delay 0x4
-	createsprite 0x8593008, 0x82, 5, 1, 0
+	createsprite gUnknown_08593008, 0x82, 5, 1, 0
 	delay 0x4
-	createsprite 0x8593008, 0x82, 6, 1, 0
+	createsprite gUnknown_08593008, 0x82, 6, 1, 0
 	delay 0x4
-	createsprite 0x8593008, 0x82, 2, 1, 0
+	createsprite gUnknown_08593008, 0x82, 2, 1, 0
 	delay 0x4
-	createsprite 0x8593008, 0x82, 2, 1, 0
+	createsprite gUnknown_08593008, 0x82, 2, 1, 0
 	delay 0x4
-	createsprite 0x8593008, 0x82, 1, 1, 0
+	createsprite gUnknown_08593008, 0x82, 1, 1, 0
 	delay 0x4
-	createsprite 0x8593008, 0x82, 5, 1, 0
+	createsprite gUnknown_08593008, 0x82, 5, 1, 0
 	delay 0x4
 	waitforvisualfinish
 	createvisualtask sub_8102CA0, 0x2
-	createsprite 0x8597274, 0x2, 1, 4, 4, 0, 13298
+	createsprite gUnknown_08597274, 0x2, 1, 4, 4, 0, 13298
 	waitforvisualfinish
 	end
 
 Move_TICKLE:
 	loadspritegfx 0x27EA
-	createsprite 0x8597274, 0x2, 2, 0, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 2, 0, 0, 16, 0
 	waitforvisualfinish
-	createsprite 0x8593A84, 0x0, -16, -8
-	createsprite 0x8593A84, 0x0, 16, -8
+	createsprite gUnknown_08593A84, 0x0, -16, -8
+	createsprite gUnknown_08593A84, 0x0, 16, -8
 	playsewithpan SE_W197, -64
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 2, 0, 16, 0, 0
+	createsprite gUnknown_08597274, 0x2, 2, 0, 16, 0, 0
 	waitforvisualfinish
 	delay 0x14
 	createvisualtask sub_80D5EB8, 0x3, 0, 6, 1280, 3, 0
@@ -4369,8 +4369,8 @@ Move_SHADOW_PUNCH:
 	createvisualtask sub_80A8BC4, 0x2, 0, 13
 	playsewithpan SE_W026, -64
 	delay 0x6
-	createsprite 0x8597358, 0x83, 0, 0, 1, 1
-	createsprite 0x8595E98, 0x84, 0, 0, 8, 1, 0
+	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_08595E98, 0x84, 0, 0, 8, 1, 0
 	playsewithpan SE_W004, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	waitforvisualfinish
@@ -4407,11 +4407,11 @@ Move_AERIAL_ACE:
 	setalpha 0x80C
 	createvisualtask sub_80D5830, 0x2, 0, 24, 6, 1, 5
 	createvisualtask sub_81169C0, 0x2, 0, 4, 7, 3
-	createsprite 0x8592A1C, 0x2, 40, -32, 0
+	createsprite gUnknown_08592A1C, 0x2, 40, -32, 0
 	playsewithpan SE_W013B, -64
 	delay 0x5
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 10, 1
-	createsprite 0x859728C, 0x2, 31, 3, 1, 0, 10, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0, 10, 0, 0
 	playsewithpan SE_W013, +63
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -4421,13 +4421,13 @@ Move_AERIAL_ACE:
 Move_IRON_DEFENSE:
 	loopsewithpan SE_REAPOKE, -64, 0x1C, 0x2
 	createvisualtask sub_81144F8, 0x5, 0, 0, 0
-	createsprite 0x859728C, 0x2, 1, 8, 2, -1, 14, -1, 0
+	createsprite gUnknown_0859728C, 0x2, 1, 8, 2, -1, 14, -1, 0
 	waitforvisualfinish
 	end
 
 Move_BLOCK:
 	loadspritegfx 0x280A
-	createsprite 0x85CE90C, 0xC2
+	createsprite gUnknown_085CE90C, 0xC2
 	playsewithpan SE_W207, +63
 	end
 
@@ -4446,7 +4446,7 @@ Move_BULK_UP:
 	createvisualtask sub_8104AB4, 0x2
 	playsewithpan SE_W207, -64
 	waitforvisualfinish
-	createsprite 0x8593658, 0x2
+	createsprite gUnknown_08593658, 0x2
 	loopsewithpan SE_W207, -64, 0x4, 0x2
 	waitforvisualfinish
 	end
@@ -4455,13 +4455,13 @@ Move_COVET:
 	loadspritegfx 0x27E2
 	loadspritegfx 0x27F0
 	createvisualtask sub_815C478, 0x5, 0, 2, 0
-	createsprite 0x8593970, 0x3, 0, 20
+	createsprite gUnknown_08593970, 0x3, 0, 20
 	playsewithpan SE_W204, -64
 	delay 0xF
-	createsprite 0x8593970, 0x3, -20, 20
+	createsprite gUnknown_08593970, 0x3, -20, 20
 	playsewithpan SE_W204, -64
 	delay 0xF
-	createsprite 0x8593970, 0x3, 20, 20
+	createsprite gUnknown_08593970, 0x3, 20, 20
 	playsewithpan SE_W204, -64
 	waitforvisualfinish
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 8, 1
@@ -4476,7 +4476,7 @@ Move_VOLT_TACKLE:
 	setalpha 0x80C
 	createvisualtask sub_8116620, 0xA, 1, 0, 0, 8, 0
 	waitforvisualfinish
-	createsprite 0x85959A4, 0x1
+	createsprite gUnknown_085959A4, 0x1
 	playsewithpan SE_W268, -64
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
@@ -4499,17 +4499,17 @@ Move_VOLT_TACKLE:
 	delay 0x8
 	createvisualtask sub_80D52D0, 0x2, 1, 10, 0, 18, 1
 	playsewithpan SE_W120, +63
-	createsprite 0x859598C, 0x2, 1, 16, 16
+	createsprite gUnknown_0859598C, 0x2, 1, 16, 16
 	delay 0x2
-	createsprite 0x859598C, 0x2, 1, -16, -16
+	createsprite gUnknown_0859598C, 0x2, 1, -16, -16
 	delay 0x8
 	createvisualtask sub_810AE5C, 0x5
 	waitforvisualfinish
 	createvisualtask sub_80D52D0, 0x2, 0, 3, 0, 9, 1
 	playsewithpan SE_W085B, -64
-	createsprite 0x859598C, 0x2, 0, 16, 16
+	createsprite gUnknown_0859598C, 0x2, 0, 16, 16
 	delay 0x2
-	createsprite 0x859598C, 0x2, 0, -16, -16
+	createsprite gUnknown_0859598C, 0x2, 0, -16, -16
 	waitforvisualfinish
 	createvisualtask sub_8116620, 0xA, 1, 0, 8, 0, 0
 	waitforvisualfinish
@@ -4535,13 +4535,13 @@ Move_CALM_MIND:
 	waitforvisualfinish
 	createvisualtask sub_81177E4, 0x5, 1
 	waitforvisualfinish
-	createsprite 0x8593850, 0x28, 0, 0, 0, 0
+	createsprite gUnknown_08593850, 0x28, 0, 0, 0, 0
 	playsewithpan SE_W048, -64
 	delay 0xE
-	createsprite 0x8593850, 0x28, 0, 0, 0, 0
+	createsprite gUnknown_08593850, 0x28, 0, 0, 0, 0
 	playsewithpan SE_W048, -64
 	delay 0xE
-	createsprite 0x8593850, 0x28, 0, 0, 0, 0
+	createsprite gUnknown_08593850, 0x28, 0, 0, 0, 0
 	playsewithpan SE_W048, -64
 	waitforvisualfinish
 	createvisualtask sub_81177E4, 0x5, 0
@@ -4569,7 +4569,7 @@ Move_LEAF_BLADE:
 	setalpha 0x80C
 	delay 0xC
 	createvisualtask sub_80D52D0, 0x2, 1, 8, 0, 18, 1
-	createsprite 0x85973D0, 0x82, 0, 0, 1, 36
+	createsprite gUnknown_085973D0, 0x82, 0, 0, 1, 36
 	playsewithpan SE_W043, +63
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -4585,12 +4585,12 @@ Move_DRAGON_DANCE:
 	playsewithpan SE_W100, -64
 	delay 0x8
 	createvisualtask sub_80A7CB4, 0x5, 10249, 19456, 14, 0, 3
-	createsprite 0x8596F98, 0x2, 0
-	createsprite 0x8596F98, 0x2, 43
-	createsprite 0x8596F98, 0x2, 85
-	createsprite 0x8596F98, 0x2, 128
-	createsprite 0x8596F98, 0x2, 170
-	createsprite 0x8596F98, 0x2, 213
+	createsprite gUnknown_08596F98, 0x2, 0
+	createsprite gUnknown_08596F98, 0x2, 43
+	createsprite gUnknown_08596F98, 0x2, 85
+	createsprite gUnknown_08596F98, 0x2, 128
+	createsprite gUnknown_08596F98, 0x2, 170
+	createsprite gUnknown_08596F98, 0x2, 213
 	delay 0x1E
 	playsewithpan SE_W100, -64
 	delay 0x1E
@@ -4607,12 +4607,12 @@ Move_SHOCK_WAVE:
 	loadspritegfx 0x2735
 	monbg ANIM_ATTACKER
 	setalpha 0x80C
-	createsprite 0x8597274, 0x2, 1, 2, 0, 4, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 4, 0
 	waitforvisualfinish
 	createvisualtask sub_810AAFC, 0x2, 0, 20, 0, 2
 	playsewithpan SE_W268, -64
 	delay 0xC
-	createsprite 0x8595A18, 0x2
+	createsprite gUnknown_08595A18, 0x2
 	delay 0x1E
 	createvisualtask sub_810B29C, 0x5
 	delay 0xC
@@ -4642,27 +4642,27 @@ Move_BELLY_DRUM:
 	createvisualtask sub_8102BE8, 0x2
 	waitforvisualfinish
 	call AnimScript_82CF5A6
-	createsprite 0x859309C, 0x2, 0, 0, 0, 0
+	createsprite gUnknown_0859309C, 0x2, 0, 0, 0, 0
 	playsewithpan SE_W187, -64
 	delay 0xF
 	call AnimScript_82CF58B
-	createsprite 0x859309C, 0x2, 1, 1, 1, 0
+	createsprite gUnknown_0859309C, 0x2, 1, 1, 1, 0
 	playsewithpan SE_W187, -64
 	delay 0xF
 	call AnimScript_82CF5A6
-	createsprite 0x859309C, 0x2, 0, 3, 3, 128
+	createsprite gUnknown_0859309C, 0x2, 0, 3, 3, 128
 	playsewithpan SE_W187, -64
 	delay 0x7
 	call AnimScript_82CF58B
-	createsprite 0x859309C, 0x2, 1, 2, 0, 128
+	createsprite gUnknown_0859309C, 0x2, 1, 2, 0, 128
 	playsewithpan SE_W187, -64
 	delay 0x7
 	call AnimScript_82CF5A6
-	createsprite 0x859309C, 0x2, 0, 1, 1, 0
+	createsprite gUnknown_0859309C, 0x2, 0, 1, 1, 0
 	playsewithpan SE_W187, -64
 	delay 0x7
 	call AnimScript_82CF58B
-	createsprite 0x859309C, 0x2, 1, 0, 3, 0
+	createsprite gUnknown_0859309C, 0x2, 1, 0, 3, 0
 	playsewithpan SE_W187, -64
 	waitforvisualfinish
 	createvisualtask sub_8102CA0, 0x2
@@ -4670,12 +4670,12 @@ Move_BELLY_DRUM:
 	end
 
 AnimScript_82CF58B:
-	createsprite 0x8593068, 0x3, 0
+	createsprite gUnknown_08593068, 0x3, 0
 	createvisualtask sub_80D51AC, 0x2, 0, 0, 8, 2, 1
 	return
 
 AnimScript_82CF5A6:
-	createsprite 0x8593068, 0x3, 1
+	createsprite gUnknown_08593068, 0x3, 1
 	createvisualtask sub_80D51AC, 0x2, 0, 0, 8, 2, 1
 	return
 
@@ -4685,8 +4685,8 @@ Move_MIND_READER:
 	loadspritegfx 0x27CF
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_W109, +63
-	createsprite 0x85CE07C, 0x5, 0, 0, 1, 0
-	createsprite 0x85CE094, 0x5
+	createsprite gUnknown_085CE07C, 0x5, 0, 0, 1, 0
+	createsprite gUnknown_085CE094, 0x5
 	delay 0x28
 	playsewithpan SE_W043, +63
 	createvisualtask sub_8115A04, 0x2, 1, 1, 2, 0, 10, 0
@@ -4696,26 +4696,26 @@ Move_MIND_READER:
 	end
 
 AnimScript_82CF608:
-	createsprite 0x85CE0AC, 0x4, 70, 0, 6
-	createsprite 0x85CE0AC, 0x4, 40, 40, 6
-	createsprite 0x85CE0AC, 0x4, 10, -60, 6
-	createsprite 0x85CE0AC, 0x4, -50, -40, 6
-	createsprite 0x85CE0AC, 0x4, -40, 40, 6
-	createsprite 0x85CE0AC, 0x4, 50, -50, 6
+	createsprite gUnknown_085CE0AC, 0x4, 70, 0, 6
+	createsprite gUnknown_085CE0AC, 0x4, 40, 40, 6
+	createsprite gUnknown_085CE0AC, 0x4, 10, -60, 6
+	createsprite gUnknown_085CE0AC, 0x4, -50, -40, 6
+	createsprite gUnknown_085CE0AC, 0x4, -40, 40, 6
+	createsprite gUnknown_085CE0AC, 0x4, 50, -50, 6
 	delay 0x2
-	createsprite 0x85CE0AC, 0x4, 50, -30, 6
-	createsprite 0x85CE0AC, 0x4, 60, 10, 6
-	createsprite 0x85CE0AC, 0x4, 0, 60, 6
-	createsprite 0x85CE0AC, 0x4, 0, -40, 6
-	createsprite 0x85CE0AC, 0x4, -60, 20, 6
-	createsprite 0x85CE0AC, 0x4, -60, -30, 6
+	createsprite gUnknown_085CE0AC, 0x4, 50, -30, 6
+	createsprite gUnknown_085CE0AC, 0x4, 60, 10, 6
+	createsprite gUnknown_085CE0AC, 0x4, 0, 60, 6
+	createsprite gUnknown_085CE0AC, 0x4, 0, -40, 6
+	createsprite gUnknown_085CE0AC, 0x4, -60, 20, 6
+	createsprite gUnknown_085CE0AC, 0x4, -60, -30, 6
 	delay 0x2
-	createsprite 0x85CE0AC, 0x4, -50, 50, 6
-	createsprite 0x85CE0AC, 0x4, -60, 20, 6
-	createsprite 0x85CE0AC, 0x4, -40, -40, 6
-	createsprite 0x85CE0AC, 0x4, 20, -60, 6
-	createsprite 0x85CE0AC, 0x4, 50, -50, 6
-	createsprite 0x85CE0AC, 0x4, 35, 40, 6
+	createsprite gUnknown_085CE0AC, 0x4, -50, 50, 6
+	createsprite gUnknown_085CE0AC, 0x4, -60, 20, 6
+	createsprite gUnknown_085CE0AC, 0x4, -40, -40, 6
+	createsprite gUnknown_085CE0AC, 0x4, 20, -60, 6
+	createsprite gUnknown_085CE0AC, 0x4, 50, -50, 6
+	createsprite gUnknown_085CE0AC, 0x4, 35, 40, 6
 	delay 0x2
 	return
 
@@ -4725,22 +4725,22 @@ Move_ICE_PUNCH:
 	loadspritegfx 0x279D
 	loadspritegfx 0x2797
 	loadspritegfx 0x279F
-	createsprite 0x8597274, 0x2, 1, 1, 0, 7, 0
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 7, 0
 	createvisualtask sub_8116620, 0xA, 4, 2, 0, 9, 32588
 	delay 0x14
 	playsewithpan SE_W081, +63
-	createsprite 0x8595AE8, 0x2, 0
-	createsprite 0x8595AE8, 0x2, 64
-	createsprite 0x8595AE8, 0x2, 128
-	createsprite 0x8595AE8, 0x2, 192
+	createsprite gUnknown_08595AE8, 0x2, 0
+	createsprite gUnknown_08595AE8, 0x2, 64
+	createsprite gUnknown_08595AE8, 0x2, 128
+	createsprite gUnknown_08595AE8, 0x2, 192
 	delay 0x5
-	createsprite 0x8595AD0, 0x2, 32
-	createsprite 0x8595AD0, 0x2, 96
-	createsprite 0x8595AD0, 0x2, 160
-	createsprite 0x8595AD0, 0x2, 224
+	createsprite gUnknown_08595AD0, 0x2, 32
+	createsprite gUnknown_08595AD0, 0x2, 96
+	createsprite gUnknown_08595AD0, 0x2, 160
+	createsprite gUnknown_08595AD0, 0x2, 224
 	delay 0x11
-	createsprite 0x8595E98, 0x4, 0, -10, 8, 1, 0
-	createsprite 0x8597358, 0x3, 0, -10, 1, 1
+	createsprite gUnknown_08595E98, 0x4, 0, -10, 8, 1, 0
+	createsprite gUnknown_08597358, 0x3, 0, -10, 1, 1
 	playsewithpan SE_W004, +63
 	delay 0x2
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 3, 1
@@ -4750,7 +4750,7 @@ Move_ICE_PUNCH:
 	delay 0x5
 	createvisualtask sub_8116620, 0xA, 4, 2, 9, 0, 32588
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 0, 7, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 0, 7, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -4759,11 +4759,11 @@ Move_ICE_PUNCH:
 Move_REST:
 	playsewithpan SE_W173, -64
 	loadspritegfx 0x27F4
-	createsprite 0x8592C88, 0x2, 4, -10, 16, 0, 0
+	createsprite gUnknown_08592C88, 0x2, 4, -10, 16, 0, 0
 	delay 0x14
-	createsprite 0x8592C88, 0x2, 4, -10, 16, 0, 0
+	createsprite gUnknown_08592C88, 0x2, 4, -10, 16, 0, 0
 	delay 0x14
-	createsprite 0x8592C88, 0x2, 4, -10, 16, 0, 0
+	createsprite gUnknown_08592C88, 0x2, 4, -10, 16, 0, 0
 	waitforvisualfinish
 	end
 
@@ -4829,43 +4829,43 @@ Move_THUNDER:
 	waitbgfadeout
 	createvisualtask sub_8117660, 0x5, -256, 0, 1, -1
 	waitbgfadein
-	createsprite 0x8597274, 0x2, 1, 2, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 16, 0
 	delay 0x10
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	playsewithpan SE_W086, +63
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 16, -36
+	createsprite gUnknown_085956C0, 0x82, 16, -36
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 16, -20
+	createsprite gUnknown_085956C0, 0x82, 16, -20
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 16, 12
+	createsprite gUnknown_085956C0, 0x82, 16, 12
 	delay 0x14
-	createsprite 0x85956C0, 0x86, -16, -32
+	createsprite gUnknown_085956C0, 0x86, -16, -32
 	playsewithpan SE_W086, +63
 	delay 0x1
-	createsprite 0x85956C0, 0x86, -16, -16
+	createsprite gUnknown_085956C0, 0x86, -16, -16
 	delay 0x1
-	createsprite 0x85956C0, 0x86, -16, 16
+	createsprite gUnknown_085956C0, 0x86, -16, 16
 	playsewithpan SE_W086, +63
 	delay 0x5
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 24, -32
+	createsprite gUnknown_085956C0, 0x82, 24, -32
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 24, -16
+	createsprite gUnknown_085956C0, 0x82, 24, -16
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 24, 16
+	createsprite gUnknown_085956C0, 0x82, 24, 16
 	delay 0x1E
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x5
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 0, -32
+	createsprite gUnknown_085956C0, 0x82, 0, -32
 	playsewithpan SE_W161B, +63
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 0, -16
+	createsprite gUnknown_085956C0, 0x82, 0, -16
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 0, 16
+	createsprite gUnknown_085956C0, 0x82, 0, 16
 	delay 0xA
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1
@@ -4873,7 +4873,7 @@ Move_THUNDER:
 	delay 0x2
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1
-	createsprite 0x8597274, 0x82, 1, 2, 16, 0, 0
+	createsprite gUnknown_08597274, 0x82, 1, 2, 16, 0, 0
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
@@ -4887,27 +4887,27 @@ Move_THUNDER_PUNCH:
 	loadspritegfx 0x2735
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x8597274, 0x2, 1, 2, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 16, 0
 	waitforvisualfinish
 	playsewithpan SE_W004, +63
-	createsprite 0x8595E98, 0x84, 0, 0, 8, 1, 0
-	createsprite 0x8597358, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_08595E98, 0x84, 0, 0, 8, 1, 0
+	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 1
 	delay 0x1
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 0, -48
+	createsprite gUnknown_085956C0, 0x82, 0, -48
 	delay 0x1
-	createsprite 0x85956C0, 0x2, 0, -16
+	createsprite gUnknown_085956C0, 0x2, 0, -16
 	delay 0x1
-	createsprite 0x85956C0, 0x2, 0, 16
+	createsprite gUnknown_085956C0, 0x2, 0, 16
 	delay 0x1
 	playsewithpan SE_W161B, +63
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x2
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 15, 1
-	createsprite 0x8597358, 0x3, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 2
 	delay 0x1
-	createsprite 0x8597274, 0x2, 1, 2, 16, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 16, 0, 0
 	delay 0x14
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -4918,34 +4918,34 @@ Move_SACRED_FIRE:
 	loadspritegfx 0x2731
 	loadspritegfx 0x2733
 	loopsewithpan SE_W221, -64, 0x7, 0x5
-	createsprite 0x8595428, 0x2, -32, 0, 50, 5, -2, 0
+	createsprite gUnknown_08595428, 0x2, -32, 0, 50, 5, -2, 0
 	delay 0x1
-	createsprite 0x8595428, 0x42, -20, -10, 50, 5, -1, -1
+	createsprite gUnknown_08595428, 0x42, -20, -10, 50, 5, -1, -1
 	delay 0x1
-	createsprite 0x8595428, 0x42, 0, -16, 50, 5, 0, -1
+	createsprite gUnknown_08595428, 0x42, 0, -16, 50, 5, 0, -1
 	delay 0x1
-	createsprite 0x8595428, 0x42, 20, -10, 50, 5, 1, -1
+	createsprite gUnknown_08595428, 0x42, 20, -10, 50, 5, 1, -1
 	delay 0x1
-	createsprite 0x8595428, 0x2, 32, 0, 50, 5, 2, 0
+	createsprite gUnknown_08595428, 0x2, 32, 0, 50, 5, 2, 0
 	delay 0x1
-	createsprite 0x8595428, 0x2, 20, 10, 50, 5, 1, 1
+	createsprite gUnknown_08595428, 0x2, 20, 10, 50, 5, 1, 1
 	delay 0x1
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1
-	createsprite 0x8595428, 0x2, 0, 16, 50, 5, 0, 1
+	createsprite gUnknown_08595428, 0x2, 0, 16, 50, 5, 0, 1
 	delay 0x1
-	createsprite 0x8595428, 0x2, -20, 10, 50, 5, -1, 1
+	createsprite gUnknown_08595428, 0x2, -20, 10, 50, 5, -1, 1
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1
 	waitforvisualfinish
 	playsewithpan SE_W221B, +63
-	createsprite 0x85953F8, 0x82, -16, 0, 70, 16, 0, 1
+	createsprite gUnknown_085953F8, 0x82, -16, 0, 70, 16, 0, 1
 	delay 0xA
 	playsewithpan SE_W221B, +63
-	createsprite 0x85953F8, 0x82, 0, 0, 70, 16, 0, 1
+	createsprite gUnknown_085953F8, 0x82, 0, 0, 70, 16, 0, 1
 	delay 0xA
 	playsewithpan SE_W221B, +63
-	createsprite 0x85953F8, 0x82, 16, 0, 80, 16, 0, 1
+	createsprite gUnknown_085953F8, 0x82, 16, 0, 80, 16, 0, 1
 	delay 0x1
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1
@@ -4953,21 +4953,21 @@ Move_SACRED_FIRE:
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1
 	playsewithpan SE_W172B, +63
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, -1, 0
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, -1, 0
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, 0, 1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, 0, 1
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, -1, -1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, -1, -1
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, 2, 1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, 2, 1
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, 1, -1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, 1, -1
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, -1, 1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, -1, 1
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, 1, -2
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, 1, -2
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, 3, 1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, 3, 1
 	waitforvisualfinish
 	end
 
@@ -4976,7 +4976,7 @@ Move_SCRATCH:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W010, +63
-	createsprite 0x85CE020, 0x2, 0, 0, 1, 0
+	createsprite gUnknown_085CE020, 0x2, 0, 0, 1, 0
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -4989,29 +4989,29 @@ Move_DRAGON_BREATH:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	loopsewithpan SE_W172, -64, 0x7, 0x7
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
 	createvisualtask sub_8116620, 0xA, 4, 1, 0, 9, 31
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 21, 1
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	delay 0x2
-	createsprite 0x8596EF4, 0x82, 0, 0, 0, 0, 20
+	createsprite gUnknown_08596EF4, 0x82, 0, 0, 0, 0, 20
 	waitforvisualfinish
 	createvisualtask sub_8116620, 0xA, 4, 1, 9, 0, 31
 	waitforvisualfinish
@@ -5037,13 +5037,13 @@ Move_ROAR:
 	end
 
 AnimScript_82CFECB:
-	createsprite 0x85CE7D4, 0x2, 24, -8, 0
-	createsprite 0x85CE7D4, 0x2, 24, 0, 2
-	createsprite 0x85CE7D4, 0x2, 24, 8, 1
+	createsprite gUnknown_085CE7D4, 0x2, 24, -8, 0
+	createsprite gUnknown_085CE7D4, 0x2, 24, 0, 2
+	createsprite gUnknown_085CE7D4, 0x2, 24, 8, 1
 	delay 0xF
-	createsprite 0x85CE7D4, 0x2, 24, -8, 0
-	createsprite 0x85CE7D4, 0x2, 24, 0, 2
-	createsprite 0x85CE7D4, 0x2, 24, 8, 1
+	createsprite gUnknown_085CE7D4, 0x2, 24, -8, 0
+	createsprite gUnknown_085CE7D4, 0x2, 24, 0, 2
+	createsprite gUnknown_085CE7D4, 0x2, 24, 8, 1
 	return
 
 Move_GROWL:
@@ -5074,10 +5074,10 @@ AnimScript_82CFF76:
 	playsewithpan SE_W173, -64
 	createvisualtask sub_80D6064, 0x5, -7, -7, 7, 0, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 7, 1
-	createsprite 0x85972D8, 0x2, 6, 1, 14, 0, 0
-	createsprite 0x85936EC, 0x2, 0, 0, -42, -38, 24, 0, 0
-	createsprite 0x85936EC, 0x2, 0, 0, 0, -42, 24, 0, 0
-	createsprite 0x85936EC, 0x2, 0, 0, 42, -38, 24, 0, 0
+	createsprite gUnknown_085972D8, 0x2, 6, 1, 14, 0, 0
+	createsprite gUnknown_085936EC, 0x2, 0, 0, -42, -38, 24, 0, 0
+	createsprite gUnknown_085936EC, 0x2, 0, 0, 0, -42, 24, 0, 0
+	createsprite gUnknown_085936EC, 0x2, 0, 0, 42, -38, 24, 0, 0
 	return
 
 Move_LIGHT_SCREEN:
@@ -5085,7 +5085,7 @@ Move_LIGHT_SCREEN:
 	loadspritegfx 0x27B6
 	setalpha 0x1000
 	waitplaysewithpan SE_W115, -64, 0xF
-	createsprite 0x8596560, 0x1, 40, 0, 10166
+	createsprite gUnknown_08596560, 0x1, 40, 0, 10166
 	delay 0xA
 	call AnimScript_82D0014
 	waitforvisualfinish
@@ -5094,24 +5094,24 @@ Move_LIGHT_SCREEN:
 	end
 
 AnimScript_82D0014:
-	createsprite 0x8596624, 0x2, 23, 0, 0, 1
+	createsprite gUnknown_08596624, 0x2, 23, 0, 0, 1
 	delay 0x6
-	createsprite 0x8596624, 0x2, 31, -8, 0, 1
+	createsprite gUnknown_08596624, 0x2, 31, -8, 0, 1
 	delay 0x5
-	createsprite 0x8596624, 0x2, 30, 20, 0, 1
+	createsprite gUnknown_08596624, 0x2, 30, 20, 0, 1
 	delay 0x7
-	createsprite 0x8596624, 0x2, 10, -15, 0, 1
+	createsprite gUnknown_08596624, 0x2, 10, -15, 0, 1
 	delay 0x6
-	createsprite 0x8596624, 0x2, 20, 10, 0, 1
+	createsprite gUnknown_08596624, 0x2, 20, 10, 0, 1
 	delay 0x6
-	createsprite 0x8596624, 0x2, 10, 18, 0, 1
+	createsprite gUnknown_08596624, 0x2, 10, 18, 0, 1
 	return
 
 Move_MIRROR_COAT:
 	loadspritegfx 0x2756
 	loadspritegfx 0x27B8
 	setalpha 0x1000
-	createsprite 0x8596590, 0x1, 40, 0, 10168
+	createsprite gUnknown_08596590, 0x1, 40, 0, 10168
 	delay 0xA
 	playsewithpan SE_W115, -64
 	call AnimScript_82D0014
@@ -5125,13 +5125,13 @@ Move_REFLECT:
 	loadspritegfx 0x27B7
 	setalpha 0x1000
 	waitplaysewithpan SE_W115, -64, 0xF
-	createsprite 0x8596578, 0x1, 40, 0, 10167
+	createsprite gUnknown_08596578, 0x1, 40, 0, 10167
 	delay 0x14
-	createsprite 0x85965F4, 0x2, 30, 0, 0, 1
+	createsprite gUnknown_085965F4, 0x2, 30, 0, 0, 1
 	delay 0x7
-	createsprite 0x85965F4, 0x2, 19, -12, 0, 1
+	createsprite gUnknown_085965F4, 0x2, 19, -12, 0, 1
 	delay 0x7
-	createsprite 0x85965F4, 0x2, 10, 20, 0, 1
+	createsprite gUnknown_085965F4, 0x2, 10, 20, 0, 1
 	waitforvisualfinish
 	delay 0x1
 	blendoff
@@ -5141,7 +5141,7 @@ Move_BARRIER:
 	loadspritegfx 0x27B9
 	setalpha 0x1000
 	waitplaysewithpan SE_W112, -64, 0xF
-	createsprite 0x85965A8, 0x3, 40, 0, 10169
+	createsprite gUnknown_085965A8, 0x3, 40, 0, 10169
 	waitforvisualfinish
 	delay 0x1
 	blendoff
@@ -5153,27 +5153,27 @@ Move_BUBBLE:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	delay 0x1
-	createsprite 0x8595068, 0x2, 18, 0, 15, -15, 10, 128, 100
+	createsprite gUnknown_08595068, 0x2, 18, 0, 15, -15, 10, 128, 100
 	playsewithpan SE_W145, -64
 	waitplaysewithpan SE_W145B, +63, 0x64
 	delay 0x6
-	createsprite 0x8595068, 0x2, 18, 0, 35, 37, 40, 128, 100
+	createsprite gUnknown_08595068, 0x2, 18, 0, 35, 37, 40, 128, 100
 	playsewithpan SE_W145, -64
 	waitplaysewithpan SE_W145B, +63, 0x64
 	delay 0x6
-	createsprite 0x8595068, 0x2, 18, 0, 10, -37, 30, 128, 100
+	createsprite gUnknown_08595068, 0x2, 18, 0, 10, -37, 30, 128, 100
 	playsewithpan SE_W145, -64
 	waitplaysewithpan SE_W145B, +63, 0x64
 	delay 0x6
-	createsprite 0x8595068, 0x2, 18, 0, 30, 10, 15, 128, 100
+	createsprite gUnknown_08595068, 0x2, 18, 0, 30, 10, 15, 128, 100
 	playsewithpan SE_W145, -64
 	waitplaysewithpan SE_W145B, +63, 0x64
 	delay 0x6
-	createsprite 0x8595068, 0x2, 18, 0, 20, 33, 20, 128, 100
+	createsprite gUnknown_08595068, 0x2, 18, 0, 20, 33, 20, 128, 100
 	playsewithpan SE_W145, -64
 	waitplaysewithpan SE_W145B, +63, 0x64
 	delay 0x6
-	createsprite 0x8595068, 0x2, 18, 0, 25, -30, 10, 128, 100
+	createsprite gUnknown_08595068, 0x2, 18, 0, 25, -30, 10, 128, 100
 	playsewithpan SE_W145, -64
 	waitplaysewithpan SE_W145B, +63, 0x64
 	waitforvisualfinish
@@ -5207,7 +5207,7 @@ Move_SMOG:
 	end
 
 AnimScript_82D024A:
-	createsprite 0x8595C44, 0x2, 0, -24, 48, 240, 1, 0
+	createsprite gUnknown_08595C44, 0x2, 0, -24, 48, 240, 1, 0
 	delay 0x7
 	return
 
@@ -5229,7 +5229,7 @@ Move_FAINT_ATTACK:
 	monbg ANIM_TARGET
 	delay 0x1
 	playsewithpan SE_W233B, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 9, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -5253,9 +5253,9 @@ Move_SAND_ATTACK:
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 0x80C
 	playsewithpan SE_W028, -64
-	createsprite 0x857FE70, 0x2, 0, -10, 0, 0, 3
+	createsprite gUnknown_0857FE70, 0x2, 0, -10, 0, 0, 3
 	waitforvisualfinish
-	createsprite 0x857FE58, 0x2, 0, 0, 2
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 2
 	call AnimScript_82D0337
 	call AnimScript_82D0337
 	call AnimScript_82D0337
@@ -5268,20 +5268,20 @@ Move_SAND_ATTACK:
 	end
 
 AnimScript_82D0337:
-	createsprite 0x85971A8, 0x82, 15, 15, 20, 0, 0
-	createsprite 0x85971A8, 0x82, 15, 15, 20, 10, 10
-	createsprite 0x85971A8, 0x82, 15, 15, 20, -10, -10
-	createsprite 0x85971A8, 0x82, 15, 15, 20, 20, 5
-	createsprite 0x85971A8, 0x82, 15, 15, 20, -20, -5
+	createsprite gUnknown_085971A8, 0x82, 15, 15, 20, 0, 0
+	createsprite gUnknown_085971A8, 0x82, 15, 15, 20, 10, 10
+	createsprite gUnknown_085971A8, 0x82, 15, 15, 20, -10, -10
+	createsprite gUnknown_085971A8, 0x82, 15, 15, 20, 20, 5
+	createsprite gUnknown_085971A8, 0x82, 15, 15, 20, -20, -5
 	delay 0x2
 	return
 
 Move_MUD_SLAP:
 	loadspritegfx 0x275A
 	playsewithpan SE_W028, -64
-	createsprite 0x857FE70, 0x2, 0, -10, 0, 0, 3
+	createsprite gUnknown_0857FE70, 0x2, 0, -10, 0, 0, 3
 	waitforvisualfinish
-	createsprite 0x857FE58, 0x2, 0, 0, 2
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 2
 	call AnimScript_82D03D5
 	call AnimScript_82D03D5
 	call AnimScript_82D03D5
@@ -5292,11 +5292,11 @@ Move_MUD_SLAP:
 	end
 
 AnimScript_82D03D5:
-	createsprite 0x85971CC, 0x82, 15, 15, 20, 0, 0
-	createsprite 0x85971CC, 0x82, 15, 15, 20, 10, 5
-	createsprite 0x85971CC, 0x82, 15, 15, 20, -10, -5
-	createsprite 0x85971CC, 0x82, 15, 15, 20, 20, 10
-	createsprite 0x85971CC, 0x82, 15, 15, 20, -20, -10
+	createsprite gUnknown_085971CC, 0x82, 15, 15, 20, 0, 0
+	createsprite gUnknown_085971CC, 0x82, 15, 15, 20, 10, 5
+	createsprite gUnknown_085971CC, 0x82, 15, 15, 20, -10, -5
+	createsprite gUnknown_085971CC, 0x82, 15, 15, 20, 20, 10
+	createsprite gUnknown_085971CC, 0x82, 15, 15, 20, -20, -10
 	delay 0x2
 	return
 
@@ -5306,29 +5306,29 @@ Move_DRAGON_RAGE:
 	playsewithpan SE_W082, -64
 	createvisualtask sub_80D51AC, 0x5, 0, 0, 2, 40, 1
 	waitforvisualfinish
-	createsprite 0x857FE70, 0x82, 0, 15, 0, 0, 4
+	createsprite gUnknown_0857FE70, 0x82, 0, 15, 0, 0, 4
 	waitforvisualfinish
-	createsprite 0x8596F80, 0x82, 30, 15, 0, 10, 10
+	createsprite gUnknown_08596F80, 0x82, 30, 15, 0, 10, 10
 	waitforvisualfinish
 	loopsewithpan SE_W172B, +63, 0xB, 0x3
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 3, 25, 1
-	createsprite 0x8596F28, 0xC2, 1, 5, 0
+	createsprite gUnknown_08596F28, 0xC2, 1, 5, 0
 	delay 0x1
-	createsprite 0x8596F28, 0xC2, 1, -10, -15
+	createsprite gUnknown_08596F28, 0xC2, 1, -10, -15
 	delay 0x1
-	createsprite 0x8596F28, 0x82, 1, 0, 25
+	createsprite gUnknown_08596F28, 0x82, 1, 0, 25
 	delay 0x1
-	createsprite 0x8596F28, 0xC2, 1, 15, 5
+	createsprite gUnknown_08596F28, 0xC2, 1, 15, 5
 	delay 0x1
-	createsprite 0x8596F28, 0xC2, 1, -25, 0
+	createsprite gUnknown_08596F28, 0xC2, 1, -25, 0
 	delay 0x1
-	createsprite 0x8596F28, 0x82, 1, 30, 30
+	createsprite gUnknown_08596F28, 0x82, 1, 30, 30
 	delay 0x1
-	createsprite 0x8596F28, 0x82, 1, -27, 25
+	createsprite gUnknown_08596F28, 0x82, 1, -27, 25
 	delay 0x1
-	createsprite 0x8596F28, 0xC2, 1, 0, 8
+	createsprite gUnknown_08596F28, 0xC2, 1, 0, 8
 	waitforvisualfinish
-	createsprite 0x857FE58, 0xC2, 0, 0, 4
+	createsprite gUnknown_0857FE58, 0xC2, 0, 0, 4
 	waitforvisualfinish
 	end
 
@@ -5352,10 +5352,10 @@ Move_BITE:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W044, +63
-	createsprite 0x8597080, 0x2, 0, -32, 0, 0, 819, 10
-	createsprite 0x8597080, 0x2, 0, 32, 4, 0, -819, 10
+	createsprite gUnknown_08597080, 0x2, 0, -32, 0, 0, 819, 10
+	createsprite gUnknown_08597080, 0x2, 0, 32, 4, 0, -819, 10
 	delay 0xA
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 4, 7, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -5371,17 +5371,17 @@ Move_CRUNCH:
 	waitbgfadein
 	setalpha 0x80C
 	playsewithpan SE_W044, +63
-	createsprite 0x8597080, 0x2, -32, -32, 1, 819, 819, 10
-	createsprite 0x8597080, 0x2, 32, 32, 5, -819, -819, 10
+	createsprite gUnknown_08597080, 0x2, -32, -32, 1, 819, 819, 10
+	createsprite gUnknown_08597080, 0x2, 32, 32, 5, -819, -819, 10
 	delay 0xA
-	createsprite 0x8597358, 0x2, -8, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, -8, 0, 1, 1
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 7, 5, 2
 	waitforvisualfinish
 	playsewithpan SE_W044, +63
-	createsprite 0x8597080, 0x2, 32, -32, 7, -819, 819, 10
-	createsprite 0x8597080, 0x2, -32, 32, 3, 819, -819, 10
+	createsprite gUnknown_08597080, 0x2, 32, -32, 7, -819, 819, 10
+	createsprite gUnknown_08597080, 0x2, -32, 32, 3, 819, -819, 10
 	delay 0xA
-	createsprite 0x8597358, 0x2, 8, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, 8, 0, 1, 1
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 8, 4, 2
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -5397,10 +5397,10 @@ Move_CLAMP:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W011, +63
-	createsprite 0x8597098, 0x2, -32, 0, 2, 819, 0, 10
-	createsprite 0x8597098, 0x2, 32, 0, 6, -819, 0, 10
+	createsprite gUnknown_08597098, 0x2, -32, 0, 2, 819, 0, 10
+	createsprite gUnknown_08597098, 0x2, 32, 0, 6, -819, 0, 10
 	delay 0xA
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x5, 1, 3, 0, 5, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -5413,16 +5413,16 @@ Move_ICE_BEAM:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	loadspritegfx 0x279D
-	createsprite 0x8597274, 0x2, 1, 1, 0, 7, 0
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 7, 0
 	waitforvisualfinish
 	createsoundtask sub_8158C58, 183, -64, 63, 4, 4, 0, 10
-	createsprite 0x8595B2C, 0x2, 20, 12, 0, 12, 20
-	createsprite 0x8595B2C, 0x2, 20, -12, 0, -12, 20
+	createsprite gUnknown_08595B2C, 0x2, 20, 12, 0, 12, 20
+	createsprite gUnknown_08595B2C, 0x2, 20, -12, 0, -12, 20
 	delay 0x1
 	call AnimScript_82D07C1
 	call AnimScript_82D07C1
 	call AnimScript_82D07C1
-	createsprite 0x8597274, 0x2, 4, -31, 0, 7, 32384
+	createsprite gUnknown_08597274, 0x2, 4, -31, 0, 7, 32384
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 25, 1
 	call AnimScript_82D07C1
 	call AnimScript_82D07C1
@@ -5432,24 +5432,24 @@ Move_ICE_BEAM:
 	call AnimScript_82D07C1
 	call AnimScript_82D07C1
 	call AnimScript_82D07C1
-	createsprite 0x8595B14, 0x2, 20, 0, 0, 0, 11
+	createsprite gUnknown_08595B14, 0x2, 20, 0, 0, 0, 11
 	delay 0x1
-	createsprite 0x8595B14, 0x2, 20, 0, 0, 0, 11
+	createsprite gUnknown_08595B14, 0x2, 20, 0, 0, 0, 11
 	waitforvisualfinish
 	delay 0x14
 	call AnimScript_82D7720
-	createsprite 0x8597274, 0x2, 4, 5, 7, 0, 32384
+	createsprite gUnknown_08597274, 0x2, 4, 5, 7, 0, 32384
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 0, 7, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 0, 7, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
 
 AnimScript_82D07C1:
-	createsprite 0x8595B2C, 0x2, 20, 12, 0, 12, 20
-	createsprite 0x8595B2C, 0x2, 20, -12, 0, -12, 20
-	createsprite 0x8595B14, 0x2, 20, 0, 0, 0, 11
+	createsprite gUnknown_08595B2C, 0x2, 20, 12, 0, 12, 20
+	createsprite gUnknown_08595B2C, 0x2, 20, -12, 0, -12, 20
+	createsprite gUnknown_08595B14, 0x2, 20, 0, 0, 0, 11
 	delay 0x1
 	return
 
@@ -5486,13 +5486,13 @@ Move_AURORA_BEAM:
 	end
 
 AnimScript_82D088B:
-	createsprite 0x85950B4, 0x82, 20, 0, 0, 0, 17
+	createsprite gUnknown_085950B4, 0x82, 20, 0, 0, 0, 17
 	delay 0x1
-	createsprite 0x85950B4, 0x82, 20, 0, 0, 0, 17
+	createsprite gUnknown_085950B4, 0x82, 20, 0, 0, 0, 17
 	delay 0x1
-	createsprite 0x85950B4, 0x82, 20, 0, 0, 0, 17
+	createsprite gUnknown_085950B4, 0x82, 20, 0, 0, 0, 17
 	delay 0x1
-	createsprite 0x85950B4, 0x82, 20, 0, 0, 0, 17
+	createsprite gUnknown_085950B4, 0x82, 20, 0, 0, 0, 17
 	delay 0x1
 	return
 
@@ -5516,33 +5516,33 @@ AnimScript_82D08E6:
 	goto AnimScript_82D08E4
 
 AnimScript_82D0910:
-	createsprite 0x85921E0, 0x2, 40, 40, 16
+	createsprite gUnknown_085921E0, 0x2, 40, 40, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, -40, -40, 16
+	createsprite gUnknown_085921E0, 0x2, -40, -40, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, 0, 40, 16
+	createsprite gUnknown_085921E0, 0x2, 0, 40, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, 0, -40, 16
+	createsprite gUnknown_085921E0, 0x2, 0, -40, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, 40, -20, 16
+	createsprite gUnknown_085921E0, 0x2, 40, -20, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, 40, 20, 16
+	createsprite gUnknown_085921E0, 0x2, 40, 20, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, -40, -20, 16
+	createsprite gUnknown_085921E0, 0x2, -40, -20, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, -40, 20, 16
+	createsprite gUnknown_085921E0, 0x2, -40, 20, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, -20, 30, 16
+	createsprite gUnknown_085921E0, 0x2, -20, 30, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, 20, -30, 16
+	createsprite gUnknown_085921E0, 0x2, 20, -30, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, -20, -30, 16
+	createsprite gUnknown_085921E0, 0x2, -20, -30, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, 20, 30, 16
+	createsprite gUnknown_085921E0, 0x2, 20, 30, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, -40, 0, 16
+	createsprite gUnknown_085921E0, 0x2, -40, 0, 16
 	delay 0x2
-	createsprite 0x85921E0, 0x2, 40, 0, 16
+	createsprite gUnknown_085921E0, 0x2, 40, 0, 16
 	delay 0x2
 	return
 
@@ -5550,21 +5550,21 @@ AnimScript_82D09E3:
 	call AnimScript_82D7D1D
 	panse_1B SE_W076, -64, +63, +2, 0x0
 	createvisualtask sub_80FEA58, 0x5
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 0
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 0
 	delay 0x4
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 1
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 1
 	delay 0x4
 	createvisualtask sub_8116620, 0xA, 4, 1, 0, 10, 1017
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 2
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 2
 	delay 0x4
 	createvisualtask sub_80D52D0, 0x5, 1, 2, 0, 65, 1
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 3
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 3
 	delay 0x4
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 4
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 4
 	delay 0x4
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 5
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 5
 	delay 0x4
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 6
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 6
 	delay 0x4
 	call AnimScript_82D0AB5
 	call AnimScript_82D0AB5
@@ -5574,19 +5574,19 @@ AnimScript_82D09E3:
 	goto AnimScript_82D08E4
 
 AnimScript_82D0AB5:
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 0
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 0
 	delay 0x4
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 1
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 1
 	delay 0x4
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 2
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 2
 	delay 0x4
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 3
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 3
 	delay 0x4
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 4
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 4
 	delay 0x4
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 5
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 5
 	delay 0x4
-	createsprite 0x85921F8, 0x83, 15, 0, 20, 6
+	createsprite gUnknown_085921F8, 0x83, 15, 0, 20, 6
 	delay 0x4
 	return
 
@@ -5618,26 +5618,26 @@ AnimScript_82D0B43:
 	end
 
 AnimScript_82D0B7D:
-	createsprite 0x8595B98, 0x28, 0, -10, 0, -10, 72, 1
-	createsprite 0x8595BB0, 0x28, 0, 0, 0, 0, 80, 0, 0, 1
+	createsprite gUnknown_08595B98, 0x28, 0, -10, 0, -10, 72, 1
+	createsprite gUnknown_08595BB0, 0x28, 0, 0, 0, 0, 80, 0, 0, 1
 	delay 0x3
-	createsprite 0x8595B98, 0x28, 0, -15, 0, -15, 72, 1
-	createsprite 0x8595BB0, 0x28, 0, -10, 0, -10, 80, 0, 0, 1
+	createsprite gUnknown_08595B98, 0x28, 0, -15, 0, -15, 72, 1
+	createsprite gUnknown_08595BB0, 0x28, 0, -10, 0, -10, 80, 0, 0, 1
 	delay 0x3
-	createsprite 0x8595B98, 0x28, 0, -5, 0, -5, 72, 1
-	createsprite 0x8595BB0, 0x28, 0, 10, 0, 10, 80, 0, 0, 1
+	createsprite gUnknown_08595B98, 0x28, 0, -5, 0, -5, 72, 1
+	createsprite gUnknown_08595BB0, 0x28, 0, 10, 0, 10, 80, 0, 0, 1
 	delay 0x3
-	createsprite 0x8595B98, 0x28, 0, -10, 0, -10, 72, 1
-	createsprite 0x8595BB0, 0x28, 0, -20, 0, -20, 80, 0, 0, 1
+	createsprite gUnknown_08595B98, 0x28, 0, -10, 0, -10, 72, 1
+	createsprite gUnknown_08595BB0, 0x28, 0, -20, 0, -20, 80, 0, 0, 1
 	delay 0x3
-	createsprite 0x8595B98, 0x28, 0, -20, 0, -20, 72, 1
-	createsprite 0x8595BB0, 0x28, 0, 15, 0, 15, 80, 0, 0, 1
+	createsprite gUnknown_08595B98, 0x28, 0, -20, 0, -20, 72, 1
+	createsprite gUnknown_08595BB0, 0x28, 0, 15, 0, 15, 80, 0, 0, 1
 	delay 0x3
-	createsprite 0x8595B98, 0x28, 0, -15, 0, -15, 72, 1
-	createsprite 0x8595BB0, 0x28, 0, -20, 0, -20, 80, 0, 0, 1
+	createsprite gUnknown_08595B98, 0x28, 0, -15, 0, -15, 72, 1
+	createsprite gUnknown_08595BB0, 0x28, 0, -20, 0, -20, 80, 0, 0, 1
 	delay 0x3
-	createsprite 0x8595B98, 0x28, 0, -25, 0, -25, 72, 1
-	createsprite 0x8595BB0, 0x28, 0, 20, 0, 20, 80, 0, 0, 1
+	createsprite gUnknown_08595B98, 0x28, 0, -25, 0, -25, 72, 1
+	createsprite gUnknown_08595BB0, 0x28, 0, 20, 0, 20, 80, 0, 0, 1
 	delay 0x3
 	return
 
@@ -5648,7 +5648,7 @@ AnimScript_82D0CB2:
 Move_POWDER_SNOW:
 	loadspritegfx 0x279D
 	monbg ANIM_DEF_PARTNER
-	createsprite 0x8597274, 0x2, 31, 1, 0, 3, 0
+	createsprite gUnknown_08597274, 0x2, 31, 1, 0, 3, 0
 	waitforvisualfinish
 	panse_1B SE_W016, -64, +63, +2, 0x0
 	call AnimScript_82D0D03
@@ -5660,23 +5660,23 @@ Move_POWDER_SNOW:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	delay 0x14
-	createsprite 0x8597274, 0x2, 31, 1, 3, 0, 0
+	createsprite gUnknown_08597274, 0x2, 31, 1, 3, 0, 0
 	end
 
 AnimScript_82D0D03:
-	createsprite 0x8595BC8, 0x28, 0, 0, 0, 0, 56, 4, 4, 1
+	createsprite gUnknown_08595BC8, 0x28, 0, 0, 0, 0, 56, 4, 4, 1
 	delay 0x3
-	createsprite 0x8595BC8, 0x28, 0, -10, 0, -10, 56, 4, 4, 1
+	createsprite gUnknown_08595BC8, 0x28, 0, -10, 0, -10, 56, 4, 4, 1
 	delay 0x3
-	createsprite 0x8595BC8, 0x28, 0, 10, 0, 10, 56, -4, 3, 1
+	createsprite gUnknown_08595BC8, 0x28, 0, 10, 0, 10, 56, -4, 3, 1
 	delay 0x3
-	createsprite 0x8595BC8, 0x28, 0, -20, 0, -20, 56, -4, 5, 1
+	createsprite gUnknown_08595BC8, 0x28, 0, -20, 0, -20, 56, -4, 5, 1
 	delay 0x3
-	createsprite 0x8595BC8, 0x28, 0, 15, 0, 15, 56, 4, 4, 1
+	createsprite gUnknown_08595BC8, 0x28, 0, 15, 0, 15, 56, 4, 4, 1
 	delay 0x3
-	createsprite 0x8595BC8, 0x28, 0, -20, 0, -20, 56, 4, 4, 1
+	createsprite gUnknown_08595BC8, 0x28, 0, -20, 0, -20, 56, 4, 4, 1
 	delay 0x3
-	createsprite 0x8595BC8, 0x28, 0, 20, 0, 20, 56, 4, 4, 1
+	createsprite gUnknown_08595BC8, 0x28, 0, 20, 0, 20, 56, 4, 4, 1
 	delay 0x3
 	return
 
@@ -5716,17 +5716,17 @@ Move_HYDRO_PUMP:
 	end
 
 AnimScript_82D0E52:
-	createsprite 0x85950E4, 0x3, 10, 10, 0, 16
-	createsprite 0x85950E4, 0x3, 10, 10, 0, -16
+	createsprite gUnknown_085950E4, 0x3, 10, 10, 0, 16
+	createsprite gUnknown_085950E4, 0x3, 10, 10, 0, -16
 	delay 0x1
-	createsprite 0x85950E4, 0x3, 10, 10, 0, 16
-	createsprite 0x85950E4, 0x3, 10, 10, 0, -16
+	createsprite gUnknown_085950E4, 0x3, 10, 10, 0, 16
+	createsprite gUnknown_085950E4, 0x3, 10, 10, 0, -16
 	delay 0x1
 	return
 
 AnimScript_82D0E93:
-	createsprite 0x8597388, 0x4, 0, 15, 1, 1
-	createsprite 0x8597388, 0x4, 0, -15, 1, 1
+	createsprite gUnknown_08597388, 0x4, 0, 15, 1, 1
+	createsprite gUnknown_08597388, 0x4, 0, -15, 1, 1
 	return
 
 Move_SIGNAL_BEAM:
@@ -5744,7 +5744,7 @@ Move_SIGNAL_BEAM:
 	call AnimScript_82D0F79
 	call AnimScript_82D0F79
 	createvisualtask sub_80D51AC, 0x5, 1, 3, 0, 25, 1
-	createsprite 0x859728C, 0x2, 4, 8, 5, 31, 8, 961, 8
+	createsprite gUnknown_0859728C, 0x2, 4, 8, 5, 31, 8, 961, 8
 	call AnimScript_82D0F79
 	call AnimScript_82D0F79
 	call AnimScript_82D0F79
@@ -5766,8 +5766,8 @@ Move_SIGNAL_BEAM:
 	end
 
 AnimScript_82D0F79:
-	createsprite 0x8595114, 0x83, 10, 10, 0, 16
-	createsprite 0x859512C, 0x83, 10, 10, 0, -16
+	createsprite gUnknown_08595114, 0x83, 10, 10, 0, 16
+	createsprite gUnknown_0859512C, 0x83, 10, 10, 0, -16
 	delay 0x1
 	return
 
@@ -5778,10 +5778,10 @@ Move_ABSORB:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_2A ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x8597274, 0x2, 1, 1, 0, 4, 13293
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 4, 13293
 	waitforvisualfinish
 	playsewithpan SE_W071, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	delay 0x2
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 5, 1
 	waitforvisualfinish
@@ -5791,7 +5791,7 @@ Move_ABSORB:
 	delay 0xF
 	call AnimScript_82D79DF
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 1, 4, 0, 13293
+	createsprite gUnknown_08597274, 0x2, 1, 1, 4, 0, 13293
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -5799,28 +5799,28 @@ Move_ABSORB:
 
 AnimScript_82D1009:
 	playsewithpan SE_W152, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
 	delay 0x4
 	playsewithpan SE_W152, +63
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
 	delay 0x4
 	playsewithpan SE_W152, +63
-	createsprite 0x8592270, 0x3, -5, 15, 16, 33
+	createsprite gUnknown_08592270, 0x3, -5, 15, 16, 33
 	delay 0x4
 	playsewithpan SE_W152, +63
-	createsprite 0x8592270, 0x3, 0, -15, -16, 36
+	createsprite gUnknown_08592270, 0x3, 0, -15, -16, 36
 	delay 0x4
 	playsewithpan SE_W152, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
 	delay 0x4
 	playsewithpan SE_W152, +63
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
 	delay 0x4
 	playsewithpan SE_W152, +63
-	createsprite 0x8592270, 0x3, -10, 20, 20, 39
+	createsprite gUnknown_08592270, 0x3, -10, 20, 20, 39
 	delay 0x4
 	playsewithpan SE_W152, +63
-	createsprite 0x8592270, 0x3, 5, -18, -20, 35
+	createsprite gUnknown_08592270, 0x3, 5, -18, -20, 35
 	delay 0x4
 	return
 
@@ -5831,10 +5831,10 @@ Move_MEGA_DRAIN:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_2A ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x8597274, 0x2, 1, 1, 0, 8, 13293
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 8, 13293
 	waitforvisualfinish
 	playsewithpan SE_W071, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 1
 	delay 0x2
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 5, 1
 	waitforvisualfinish
@@ -5844,7 +5844,7 @@ Move_MEGA_DRAIN:
 	delay 0xF
 	call AnimScript_82D79DF
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 1, 8, 0, 13293
+	createsprite gUnknown_08597274, 0x2, 1, 1, 8, 0, 13293
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -5852,36 +5852,36 @@ Move_MEGA_DRAIN:
 
 AnimScript_82D1121:
 	playsewithpan SE_W145C, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 5, -18, -20, 35
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 5, -18, -20, 35
 	delay 0x4
 	playsewithpan SE_W145C, +63
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
-	createsprite 0x8592270, 0x3, -10, 20, 20, 39
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, -10, 20, 20, 39
 	delay 0x4
 	playsewithpan SE_W145C, +63
-	createsprite 0x8592270, 0x3, -5, 15, 16, 33
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, -5, 15, 16, 33
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
 	delay 0x4
 	playsewithpan SE_W145C, +63
-	createsprite 0x8592270, 0x3, 0, -15, -16, 36
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 0, -15, -16, 36
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
 	delay 0x4
 	playsewithpan SE_W145C, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 0, -15, -16, 36
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 0, -15, -16, 36
 	delay 0x4
 	playsewithpan SE_W145C, +63
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
-	createsprite 0x8592270, 0x3, -5, 15, 16, 33
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, -5, 15, 16, 33
 	delay 0x4
 	playsewithpan SE_W145C, +63
-	createsprite 0x8592270, 0x3, -10, 20, 20, 39
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, -10, 20, 20, 39
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
 	delay 0x4
 	playsewithpan SE_W145C, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 5, -18, -20, 35
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 5, -18, -20, 35
 	delay 0x4
 	return
 
@@ -5892,10 +5892,10 @@ Move_GIGA_DRAIN:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_2A ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x8597274, 0x2, 1, 1, 0, 12, 13293
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 12, 13293
 	waitforvisualfinish
 	playsewithpan SE_W071, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 0
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 0
 	delay 0x2
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 5, 1
 	waitforvisualfinish
@@ -5905,7 +5905,7 @@ Move_GIGA_DRAIN:
 	delay 0xF
 	call AnimScript_82D79DF
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 1, 12, 0, 13293
+	createsprite gUnknown_08597274, 0x2, 1, 1, 12, 0, 13293
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -5913,44 +5913,44 @@ Move_GIGA_DRAIN:
 
 AnimScript_82D12B1:
 	playsewithpan SE_W202, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 5, -18, -40, 35
-	createsprite 0x8592270, 0x3, -10, 20, 20, 39
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 5, -18, -40, 35
+	createsprite gUnknown_08592270, 0x3, -10, 20, 20, 39
 	delay 0x4
 	playsewithpan SE_W202, +63
-	createsprite 0x8592270, 0x3, 0, 5, 28, 26
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
-	createsprite 0x8592270, 0x3, -10, 20, 40, 39
+	createsprite gUnknown_08592270, 0x3, 0, 5, 28, 26
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, -10, 20, 40, 39
 	delay 0x4
 	playsewithpan SE_W202, +63
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
-	createsprite 0x8592270, 0x3, -5, 15, 16, 33
-	createsprite 0x8592270, 0x3, 10, -5, -32, 26
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, -5, 15, 16, 33
+	createsprite gUnknown_08592270, 0x3, 10, -5, -32, 26
 	delay 0x4
 	playsewithpan SE_W202, +63
-	createsprite 0x8592270, 0x3, 0, -15, -16, 36
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, 0, -15, -16, 36
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
 	delay 0x4
 	playsewithpan SE_W202, +63
-	createsprite 0x8592270, 0x3, -5, 15, 16, 33
-	createsprite 0x8592270, 0x3, 0, -15, -16, 36
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, -5, 15, 16, 33
+	createsprite gUnknown_08592270, 0x3, 0, -15, -16, 36
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
 	delay 0x4
 	playsewithpan SE_W202, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, -5, 15, 16, 33
-	createsprite 0x8592270, 0x3, 10, -5, -40, 26
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, -5, 15, 16, 33
+	createsprite gUnknown_08592270, 0x3, 10, -5, -40, 26
 	delay 0x4
 	playsewithpan SE_W202, +63
-	createsprite 0x8592270, 0x3, -5, 15, 36, 33
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
-	createsprite 0x8592270, 0x3, -10, 20, 20, 39
+	createsprite gUnknown_08592270, 0x3, -5, 15, 36, 33
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, -10, 20, 20, 39
 	delay 0x4
 	playsewithpan SE_W202, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 5, -18, -20, 35
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 5, -18, -20, 35
 	delay 0x4
 	return
 
@@ -5964,21 +5964,21 @@ Move_LEECH_LIFE:
 	monbgprio_2A ANIM_TARGET
 	setalpha 0x80C
 	delay 0x1
-	createsprite 0x85969C8, 0x2, -20, 15, 12
+	createsprite gUnknown_085969C8, 0x2, -20, 15, 12
 	waitforvisualfinish
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	playsewithpan SE_W071, +63
 	delay 0x2
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 5, 1
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 1, 0, 7, 0
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 7, 0
 	waitforvisualfinish
 	call AnimScript_82D1009
 	waitforvisualfinish
 	delay 0xF
 	call AnimScript_82D79DF
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 1, 7, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 1, 7, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6009,16 +6009,16 @@ Move_TOXIC:
 	end
 
 AnimScript_82D1515:
-	createsprite 0x8596134, 0x82, -24, 16, 1, 1
+	createsprite gUnknown_08596134, 0x82, -24, 16, 1, 1
 	playsewithpan SE_W092, +63
 	delay 0xF
-	createsprite 0x8596134, 0x82, 8, 16, 1, 1
+	createsprite gUnknown_08596134, 0x82, 8, 16, 1, 1
 	playsewithpan SE_W092, +63
 	delay 0xF
-	createsprite 0x8596134, 0x82, -8, 16, 1, 1
+	createsprite gUnknown_08596134, 0x82, -8, 16, 1, 1
 	playsewithpan SE_W092, +63
 	delay 0xF
-	createsprite 0x8596134, 0x82, 24, 16, 1, 1
+	createsprite gUnknown_08596134, 0x82, 24, 16, 1, 1
 	playsewithpan SE_W092, +63
 	delay 0xF
 	return
@@ -6026,7 +6026,7 @@ AnimScript_82D1515:
 Move_SLUDGE:
 	loadspritegfx 0x27A6
 	playsewithpan SE_W145C, -64
-	createsprite 0x85961A8, 0x82, 20, 0, 40, 0
+	createsprite gUnknown_085961A8, 0x82, 20, 0, 40, 0
 	waitforvisualfinish
 	createvisualtask sub_80D51AC, 0x5, 1, 3, 0, 5, 1
 	createvisualtask sub_8115A04, 0x2, 4, 1, 2, 0, 12, 31774
@@ -6048,22 +6048,22 @@ Move_SLUDGE_BOMB:
 	call AnimScript_82D16BC
 	createvisualtask sub_80D52D0, 0x5, 1, 3, 0, 15, 1
 	createvisualtask sub_8115A04, 0x2, 4, 1, 2, 0, 12, 31774
-	createsprite 0x85961D8, 0x82, 42, 27, 20
-	createsprite 0x85961D8, 0x82, -27, 44, 20
-	createsprite 0x85961D8, 0x82, 39, -28, 20
-	createsprite 0x85961D8, 0x82, -42, -42, 20
+	createsprite gUnknown_085961D8, 0x82, 42, 27, 20
+	createsprite gUnknown_085961D8, 0x82, -27, 44, 20
+	createsprite gUnknown_085961D8, 0x82, 39, -28, 20
+	createsprite gUnknown_085961D8, 0x82, -42, -42, 20
 	playsewithpan SE_W091, +63
 	delay 0x5
-	createsprite 0x85961D8, 0x82, 0, 40, 20
-	createsprite 0x85961D8, 0x82, -8, -44, 20
-	createsprite 0x85961D8, 0x82, -46, -28, 20
-	createsprite 0x85961D8, 0x82, 46, 9, 20
+	createsprite gUnknown_085961D8, 0x82, 0, 40, 20
+	createsprite gUnknown_085961D8, 0x82, -8, -44, 20
+	createsprite gUnknown_085961D8, 0x82, -46, -28, 20
+	createsprite gUnknown_085961D8, 0x82, 46, 9, 20
 	playsewithpan SE_W091, +63
 	delay 0x5
-	createsprite 0x85961D8, 0x82, 42, 0, 20
-	createsprite 0x85961D8, 0x82, -43, -12, 20
-	createsprite 0x85961D8, 0x82, 16, -46, 20
-	createsprite 0x85961D8, 0x82, -16, 44, 20
+	createsprite gUnknown_085961D8, 0x82, 42, 0, 20
+	createsprite gUnknown_085961D8, 0x82, -43, -12, 20
+	createsprite gUnknown_085961D8, 0x82, 16, -46, 20
+	createsprite gUnknown_085961D8, 0x82, -16, 44, 20
 	playsewithpan SE_W091, +63
 	delay 0x0
 	waitsound
@@ -6074,38 +6074,38 @@ Move_SLUDGE_BOMB:
 
 AnimScript_82D16BC:
 	playsewithpan SE_W145C, -64
-	createsprite 0x85961A8, 0x82, 20, 0, 40, 0
+	createsprite gUnknown_085961A8, 0x82, 20, 0, 40, 0
 	delay 0x3
 	return
 
 Move_ACID:
 	loadspritegfx 0x27A6
 	monbg ANIM_DEF_PARTNER
-	createsprite 0x85961C0, 0x82, 20, 0, 40, 1, 0, 0
+	createsprite gUnknown_085961C0, 0x82, 20, 0, 40, 1, 0, 0
 	playsewithpan SE_W145C, -64
 	delay 0x5
-	createsprite 0x85961C0, 0x82, 20, 0, 40, 1, 24, 0
+	createsprite gUnknown_085961C0, 0x82, 20, 0, 40, 1, 24, 0
 	playsewithpan SE_W145C, -64
 	delay 0x5
-	createsprite 0x85961C0, 0x82, 20, 0, 40, 1, -24, 0
+	createsprite gUnknown_085961C0, 0x82, 20, 0, 40, 1, -24, 0
 	playsewithpan SE_W145C, -64
 	delay 0xF
 	createvisualtask sub_80D52D0, 0x5, 1, 2, 0, 10, 1
 	createvisualtask sub_80D52D0, 0x5, 3, 2, 0, 10, 1
 	createvisualtask sub_8115A04, 0x2, 20, 2, 2, 0, 12, 31774
-	createsprite 0x859620C, 0x82, 0, -22, 0, 15, 55
+	createsprite gUnknown_0859620C, 0x82, 0, -22, 0, 15, 55
 	playsewithpan SE_W145, +63
 	delay 0xA
-	createsprite 0x859620C, 0x82, -26, -24, 0, 15, 55
+	createsprite gUnknown_0859620C, 0x82, -26, -24, 0, 15, 55
 	playsewithpan SE_W145, +63
 	delay 0xA
-	createsprite 0x859620C, 0x82, 15, -27, 0, 15, 50
+	createsprite gUnknown_0859620C, 0x82, 15, -27, 0, 15, 50
 	playsewithpan SE_W145, +63
 	delay 0xA
-	createsprite 0x859620C, 0x82, -15, -17, 0, 10, 45
+	createsprite gUnknown_0859620C, 0x82, -15, -17, 0, 10, 45
 	playsewithpan SE_W145, +63
 	delay 0xA
-	createsprite 0x859620C, 0x82, 27, -22, 0, 15, 50
+	createsprite gUnknown_0859620C, 0x82, 27, -22, 0, 15, 50
 	playsewithpan SE_W145, +63
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -6118,14 +6118,14 @@ Move_BONEMERANG:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W155, -64
-	createsprite 0x8597178, 0x2
+	createsprite gUnknown_08597178, 0x2
 	delay 0x14
 	playsewithpan SE_W030, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 1
 	createvisualtask sub_80D51AC, 0x5, 1, 5, 0, 5, 1
 	delay 0x11
 	playsewithpan SE_W233, -64
-	createsprite 0x857FE28, 0x2, 6, -4
+	createsprite gUnknown_0857FE28, 0x2, 6, -4
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6138,11 +6138,11 @@ Move_BONE_CLUB:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W155, +63
-	createsprite 0x8597190, 0x2, -42, -25, 0, 0, 15
+	createsprite gUnknown_08597190, 0x2, -42, -25, 0, 0, 15
 	delay 0xC
-	createsprite 0x8597358, 0x2, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 1
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 5, 1
-	createsprite 0x859728C, 0x2, 7, 5, 1, 0, 10, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 7, 5, 1, 0, 10, 0, 0
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -6155,9 +6155,9 @@ Move_BONE_RUSH:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W155, +63
-	createsprite 0x8597190, 0x2, -42, -25, 0, 0, 15
+	createsprite gUnknown_08597190, 0x2, -42, -25, 0, 0, 15
 	delay 0xC
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 3, 5, 1
 	playsewithpan SE_W030, +63
 	waitforvisualfinish
@@ -6170,14 +6170,14 @@ Move_SPIKES:
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_W026, -64
 	waitplaysewithpan SE_W030, +63, 0x1C
-	createsprite 0x85CE11C, 0x82, 20, 0, 0, 24, 30
+	createsprite gUnknown_085CE11C, 0x82, 20, 0, 0, 24, 30
 	delay 0xA
 	playsewithpan SE_W026, -64
 	waitplaysewithpan SE_W030, +63, 0x1C
-	createsprite 0x85CE11C, 0x82, 20, 0, -24, 24, 30
+	createsprite gUnknown_085CE11C, 0x82, 20, 0, -24, 24, 30
 	delay 0xA
 	waitplaysewithpan SE_W030, +63, 0x1C
-	createsprite 0x85CE11C, 0x82, 20, 0, 24, 24, 30
+	createsprite gUnknown_085CE11C, 0x82, 20, 0, 24, 24, 30
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
@@ -6198,20 +6198,20 @@ AnimScript_82D1947:
 	createvisualtask sub_80D51AC, 0x5, 0, 2, 0, 15, 1
 	waitforvisualfinish
 	delay 0xA
-	createsprite 0x857FE70, 0x2, 0, 24, 0, 0, 6
+	createsprite gUnknown_0857FE70, 0x2, 0, 24, 0, 0, 6
 	delay 0x3
-	createsprite 0x8596974, 0x3, -42, 25, 0, 0, 6
+	createsprite gUnknown_08596974, 0x3, -42, 25, 0, 0, 6
 	delay 0x4
 	playsewithpan SE_W011, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 0
-	createsprite 0x857FE70, 0x2, 1, -16, 4, 1, 4
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 0
+	createsprite gUnknown_0857FE70, 0x2, 1, -16, 4, 1, 4
 	waitforvisualfinish
 	createvisualtask sub_80D5484, 0x2, 1, -4, 1, 12, 1
-	createsprite 0x859728C, 0x2, 7, 5, 1, 0x7FFF, 10, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 7, 5, 1, 0x7FFF, 10, 0, 0
 	delay 0xA
-	createsprite 0x857FE58, 0x2, 0, 0, 11
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 11
 	delay 0x3
-	createsprite 0x857FE58, 0x2, 1, 0, 7
+	createsprite gUnknown_0857FE58, 0x2, 1, 0, 7
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6234,11 +6234,11 @@ Move_GUST:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W016, +63
-	createsprite 0x8596270, 0x2, 0, -16
+	createsprite gUnknown_08596270, 0x2, 0, -16
 	createvisualtask sub_810DED8, 0x5, 1, 70
 	waitforvisualfinish
 	createvisualtask sub_80D52D0, 0x5, 1, 1, 0, 7, 1
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	playsewithpan SE_W016B, +63
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -6254,16 +6254,16 @@ Move_WING_ATTACK:
 	loopsewithpan SE_W017, -64, 0x14, 0x2
 	createvisualtask sub_80D5738, 0x2, 0, 12, 4, 1, 4
 	createvisualtask sub_810DED8, 0x5, 1, 70
-	createsprite 0x85962A4, 0x2, -25, 0, 0, 0, 20
-	createsprite 0x85962A4, 0x2, 25, 0, 0, 0, 20
+	createsprite gUnknown_085962A4, 0x2, -25, 0, 0, 0, 20
+	createsprite gUnknown_085962A4, 0x2, 25, 0, 0, 0, 20
 	delay 0x18
-	createsprite 0x857FE70, 0x2, 0, 24, 0, 0, 9
+	createsprite gUnknown_0857FE70, 0x2, 0, 24, 0, 0, 9
 	delay 0x11
-	createsprite 0x8597358, 0x2, 16, 0, 1, 1
-	createsprite 0x8597358, 0x2, -16, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, 16, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, -16, 0, 1, 1
 	loopsewithpan SE_W003, +63, 0x5, 0x2
 	waitforvisualfinish
-	createsprite 0x857FE58, 0x2, 0, 0, 11
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 11
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6273,7 +6273,7 @@ Move_PECK:
 	loadspritegfx 0x2797
 	playsewithpan SE_W030, +63
 	createvisualtask sub_80D622C, 0x2, 3, -768, 1, 2
-	createsprite 0x85973E8, 0x83, -12, 0, 1, 3
+	createsprite gUnknown_085973E8, 0x83, -12, 0, 1, 3
 	waitforvisualfinish
 	end
 
@@ -6291,7 +6291,7 @@ Move_AEROBLAST:
 	call AnimScript_82D1B82
 	call AnimScript_82D1B82
 	waitforvisualfinish
-	createsprite 0x8597358, 0x2, 0, 0, 1, 0
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 0
 	playsewithpan SE_W013, +63
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -6302,20 +6302,20 @@ Move_AEROBLAST:
 
 AnimScript_82D1B82:
 	playsewithpan SE_W026, -64
-	createsprite 0x85962D4, 0x2, 14, -12, 0, -12, 15, 0, 0
-	createsprite 0x85962D4, 0x2, 26, 8, 12, 8, 15, 0, 0
+	createsprite gUnknown_085962D4, 0x2, 14, -12, 0, -12, 15, 0, 0
+	createsprite gUnknown_085962D4, 0x2, 26, 8, 12, 8, 15, 0, 0
 	delay 0x3
 	playsewithpan SE_W026, -64
-	createsprite 0x85962D4, 0x2, 14, -12, 0, -12, 15, 1, 0
-	createsprite 0x85962D4, 0x2, 26, 8, 12, 8, 15, 1, 0
+	createsprite gUnknown_085962D4, 0x2, 14, -12, 0, -12, 15, 1, 0
+	createsprite gUnknown_085962D4, 0x2, 26, 8, 12, 8, 15, 1, 0
 	delay 0x3
 	playsewithpan SE_W026, -64
-	createsprite 0x85962D4, 0x2, 14, -12, 0, -12, 15, 2, 0
-	createsprite 0x85962D4, 0x2, 26, 8, 12, 8, 15, 2, 0
+	createsprite gUnknown_085962D4, 0x2, 14, -12, 0, -12, 15, 2, 0
+	createsprite gUnknown_085962D4, 0x2, 26, 8, 12, 8, 15, 2, 0
 	delay 0x3
 	playsewithpan SE_W026, -64
-	createsprite 0x85962D4, 0x2, 14, -12, 0, -12, 15, 3, 0
-	createsprite 0x85962D4, 0x2, 26, 8, 12, 8, 15, 3, 0
+	createsprite gUnknown_085962D4, 0x2, 14, -12, 0, -12, 15, 3, 0
+	createsprite gUnknown_085962D4, 0x2, 26, 8, 12, 8, 15, 3, 0
 	delay 0x3
 	return
 
@@ -6325,18 +6325,18 @@ Move_WATER_GUN:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x8595208, 0x2, 20, 0, 0, 0, 40, -25
+	createsprite gUnknown_08595208, 0x2, 20, 0, 0, 0, 40, -25
 	playsewithpan SE_W145, -64
 	waitforvisualfinish
 	createvisualtask sub_80D52D0, 0x5, 1, 1, 0, 8, 1
-	createsprite 0x8597388, 0x4, 0, 0, 1, 2
-	createsprite 0x8595220, 0x2, 0, -15, 0, 15, 55
+	createsprite gUnknown_08597388, 0x4, 0, 0, 1, 2
+	createsprite gUnknown_08595220, 0x2, 0, -15, 0, 15, 55
 	playsewithpan SE_W152, +63
 	delay 0xA
-	createsprite 0x8595220, 0x2, 15, -20, 0, 15, 50
+	createsprite gUnknown_08595220, 0x2, 15, -20, 0, 15, 50
 	playsewithpan SE_W152, +63
 	delay 0xA
-	createsprite 0x8595220, 0x2, -15, -10, 0, 10, 45
+	createsprite gUnknown_08595220, 0x2, -15, -10, 0, 10, 45
 	playsewithpan SE_W152, +63
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -6348,33 +6348,33 @@ Move_CRABHAMMER:
 	loadspritegfx 0x27A4
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
-	createsprite 0x8597388, 0x4, 0, 0, 1, 0
+	createsprite gUnknown_08597388, 0x4, 0, 0, 1, 0
 	playsewithpan SE_W233B, +63
 	delay 0x1
-	createsprite 0x859728C, 0x2, 31, 3, 1, 32429, 10, 0, 0
-	createsprite 0x857FE70, 0x2, 1, -24, 0, 0, 4
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 32429, 10, 0, 0
+	createsprite gUnknown_0857FE70, 0x2, 1, -24, 0, 0, 4
 	waitforvisualfinish
 	delay 0x8
 	waitforvisualfinish
-	createsprite 0x857FE58, 0x2, 1, 0, 4
+	createsprite gUnknown_0857FE58, 0x2, 1, 0, 4
 	waitforvisualfinish
 	loopsewithpan SE_W152, +63, 0x14, 0x3
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 4, 8, 1
-	createsprite 0x8595238, 0x2, 10, 10, 20, 1
+	createsprite gUnknown_08595238, 0x2, 10, 10, 20, 1
 	delay 0x4
-	createsprite 0x8595238, 0x2, 20, -20, 20, 1
+	createsprite gUnknown_08595238, 0x2, 20, -20, 20, 1
 	delay 0x4
-	createsprite 0x8595238, 0x2, -15, 15, 20, 1
+	createsprite gUnknown_08595238, 0x2, -15, 15, 20, 1
 	delay 0x4
-	createsprite 0x8595238, 0x2, 0, 0, 20, 1
+	createsprite gUnknown_08595238, 0x2, 0, 0, 20, 1
 	delay 0x4
-	createsprite 0x8595238, 0x2, -10, -20, 20, 1
+	createsprite gUnknown_08595238, 0x2, -10, -20, 20, 1
 	delay 0x4
-	createsprite 0x8595238, 0x2, 16, -8, 20, 1
+	createsprite gUnknown_08595238, 0x2, 16, -8, 20, 1
 	delay 0x4
-	createsprite 0x8595238, 0x2, 5, 8, 20, 1
+	createsprite gUnknown_08595238, 0x2, 5, 8, 20, 1
 	delay 0x4
-	createsprite 0x8595238, 0x2, -16, 0, 20, 1
+	createsprite gUnknown_08595238, 0x2, -16, 0, 20, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6414,9 +6414,9 @@ Move_FLAMETHROWER:
 	end
 
 AnimScript_82D1E58:
-	createsprite 0x8595158, 0x3, 10, 10, 0, 16
+	createsprite gUnknown_08595158, 0x3, 10, 10, 0, 16
 	delay 0x2
-	createsprite 0x8595158, 0x3, 10, 10, 0, 16
+	createsprite gUnknown_08595158, 0x3, 10, 10, 0, 16
 	delay 0x2
 	return
 
@@ -6425,19 +6425,19 @@ Move_SANDSTORM:
 	playsewithpan SE_W201, 0
 	createvisualtask sub_8110BCC, 0x5, 0
 	delay 0x10
-	createsprite 0x8596BA0, 0x28, 10, 2304, 96, 0
+	createsprite gUnknown_08596BA0, 0x28, 10, 2304, 96, 0
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 90, 2048, 96, 0
+	createsprite gUnknown_08596BA0, 0x28, 90, 2048, 96, 0
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 50, 2560, 96, 0
+	createsprite gUnknown_08596BA0, 0x28, 50, 2560, 96, 0
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 20, 2304, 96, 0
+	createsprite gUnknown_08596BA0, 0x28, 20, 2304, 96, 0
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 70, 1984, 96, 0
+	createsprite gUnknown_08596BA0, 0x28, 70, 1984, 96, 0
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 0, 2816, 96, 0
+	createsprite gUnknown_08596BA0, 0x28, 0, 2816, 96, 0
 	delay 0xA
-	createsprite 0x8596BA0, 0x28, 60, 2560, 96, 0
+	createsprite gUnknown_08596BA0, 0x28, 60, 2560, 96, 0
 	end
 
 Move_WHIRLPOOL:
@@ -6446,30 +6446,30 @@ Move_WHIRLPOOL:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	delay 0x0
-	createsprite 0x8597274, 0x0, 4, 2, 0, 7, 23968
+	createsprite gUnknown_08597274, 0x0, 4, 2, 0, 7, 23968
 	playsewithpan SE_W250, +63
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 2, 50, 1
 	call AnimScript_82D1F5B
 	call AnimScript_82D1F5B
 	call AnimScript_82D1F5B
 	delay 0xC
-	createsprite 0x8597274, 0x0, 4, 2, 7, 0, 23968
+	createsprite gUnknown_08597274, 0x0, 4, 2, 7, 0, 23968
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
 AnimScript_82D1F5B:
-	createsprite 0x8596B70, 0x82, 0, 28, 384, 50, 8, 50, 1
+	createsprite gUnknown_08596B70, 0x82, 0, 28, 384, 50, 8, 50, 1
 	delay 0x2
-	createsprite 0x8596B70, 0x82, 0, 32, 240, 40, 11, -46, 1
+	createsprite gUnknown_08596B70, 0x82, 0, 32, 240, 40, 11, -46, 1
 	delay 0x2
-	createsprite 0x8596B70, 0x82, 0, 33, 416, 40, 4, 42, 1
+	createsprite gUnknown_08596B70, 0x82, 0, 33, 416, 40, 4, 42, 1
 	delay 0x2
-	createsprite 0x8596B70, 0x82, 0, 31, 288, 45, 6, -42, 1
+	createsprite gUnknown_08596B70, 0x82, 0, 31, 288, 45, 6, -42, 1
 	delay 0x2
-	createsprite 0x8596B70, 0x82, 0, 28, 448, 45, 11, 46, 1
+	createsprite gUnknown_08596B70, 0x82, 0, 28, 448, 45, 11, 46, 1
 	delay 0x2
-	createsprite 0x8596B70, 0x82, 0, 33, 464, 50, 10, -50, 1
+	createsprite gUnknown_08596B70, 0x82, 0, 33, 464, 50, 10, -50, 1
 	delay 0x2
 	return
 
@@ -6484,16 +6484,16 @@ AnimScript_82D1FF5:
 
 AnimScript_82D1FF7:
 	playsewithpan SE_W019, -64
-	createsprite 0x8596340, 0x2, 0, 0, 13, 336
+	createsprite gUnknown_08596340, 0x2, 0, 0, 13, 336
 	goto AnimScript_82D1FF5
 
 AnimScript_82D200F:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W104, -64
-	createsprite 0x8596358, 0x2, 20
+	createsprite gUnknown_08596358, 0x2, 20
 	delay 0x14
-	createsprite 0x8597358, 0x2, 0, 0, 1, 0
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 0
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	playsewithpan SE_W013, +63
 	waitforvisualfinish
@@ -6511,17 +6511,17 @@ AnimScript_82D205F:
 
 AnimScript_82D2060:
 	playsewithpan SE_W100, -64
-	createsprite 0x8596420, 0x2, 0, 0
+	createsprite gUnknown_08596420, 0x2, 0, 0
 	goto AnimScript_82D205F
 
 AnimScript_82D2074:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W207, +63
-	createsprite 0x859644C, 0x83
+	createsprite gUnknown_0859644C, 0x83
 	delay 0x7
 	playsewithpan SE_W025B, +63
-	createsprite 0x8597358, 0x82, 0, 0, 1, 0
+	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 0
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 5, 11, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -6535,10 +6535,10 @@ Move_KARATE_CHOP:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W104, +63
-	createsprite 0x8595E68, 0x2, -16, 0, 0, 0, 10, 1, 3, 0
+	createsprite gUnknown_08595E68, 0x2, -16, 0, 0, 0, 10, 1, 3, 0
 	waitforvisualfinish
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x3, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x5, 1, 4, 0, 6, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -6551,12 +6551,12 @@ Move_CROSS_CHOP:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W025, +63
-	createsprite 0x8595EC8, 0x2, 0, 0, 0
-	createsprite 0x8595EC8, 0x2, 0, 0, 1
+	createsprite gUnknown_08595EC8, 0x2, 0, 0, 0
+	createsprite gUnknown_08595EC8, 0x2, 0, 0, 1
 	delay 0x28
 	playsewithpan SE_W013, +63
-	createsprite 0x859728C, 0x2, 31, 3, 1, 0x7FFF, 10, 0, 10
-	createsprite 0x85973D0, 0x3, 0, 0, 1, 20
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0x7FFF, 10, 0, 10
+	createsprite gUnknown_085973D0, 0x3, 0, 0, 1, 20
 	createvisualtask sub_80D51AC, 0x5, 1, 7, 0, 9, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -6568,12 +6568,12 @@ Move_JUMP_KICK:
 	loadspritegfx 0x2797
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
-	createsprite 0x857FE28, 0x2, 4, 4
+	createsprite gUnknown_0857FE28, 0x2, 4, 4
 	delay 0x3
-	createsprite 0x8595E80, 0x2, -16, 8, 0, 0, 10, 1, 1, 1
+	createsprite gUnknown_08595E80, 0x2, -16, 8, 0, 0, 10, 1, 1, 1
 	playsewithpan SE_W026, +63
 	waitforvisualfinish
-	createsprite 0x8597358, 0x1, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x1, 0, 0, 1, 1
 	createvisualtask sub_80D51AC, 0x5, 1, 5, 0, 7, 1
 	playsewithpan SE_W004, +63
 	waitforvisualfinish
@@ -6586,22 +6586,22 @@ Move_HI_JUMP_KICK:
 	loadspritegfx 0x2797
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
-	createsprite 0x857FE70, 0x2, 0, -24, 0, 0, 8
+	createsprite gUnknown_0857FE70, 0x2, 0, -24, 0, 0, 8
 	waitforvisualfinish
 	delay 0xA
-	createsprite 0x857FE58, 0x2, 0, 0, 3
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 3
 	delay 0x2
-	createsprite 0x8595E80, 0x2, -16, 8, 0, 0, 10, 1, 1, 1
+	createsprite gUnknown_08595E80, 0x2, -16, 8, 0, 0, 10, 1, 1, 1
 	playsewithpan SE_W026, +63
 	waitforvisualfinish
-	createsprite 0x8597358, 0x2, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 1
 	playsewithpan SE_W233B, +63
-	createsprite 0x857FE70, 0x2, 1, -28, 0, 0, 3
+	createsprite gUnknown_0857FE70, 0x2, 1, -28, 0, 0, 3
 	delay 0x3
 	createvisualtask sub_80D5484, 0x2, 1, 3, 0, 11, 1
 	waitforvisualfinish
 	delay 0x5
-	createsprite 0x857FE58, 0x2, 1, 0, 6
+	createsprite gUnknown_0857FE58, 0x2, 1, 0, 6
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6612,7 +6612,7 @@ Move_DOUBLE_KICK:
 	loadspritegfx 0x2797
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
-	createsprite 0x8595EB0, 0x3, 1, 20, 1
+	createsprite gUnknown_08595EB0, 0x3, 1, 20, 1
 	createvisualtask sub_80D51AC, 0x5, 1, 4, 0, 6, 1
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
@@ -6637,20 +6637,20 @@ AnimScript_82D22B3:
 	end
 
 AnimScript_82D22B8:
-	createsprite 0x8595E98, 0x84, -16, -8, 20, 1, 1
-	createsprite 0x8597358, 0x83, -16, -16, 1, 2
+	createsprite gUnknown_08595E98, 0x84, -16, -8, 20, 1, 1
+	createsprite gUnknown_08597358, 0x83, -16, -16, 1, 2
 	createvisualtask sub_80D51AC, 0x5, 1, 4, 0, 6, 1
 	goto AnimScript_82D22B3
 
 AnimScript_82D22EE:
-	createsprite 0x8595E98, 0x84, 8, 8, 20, 1, 1
-	createsprite 0x8597358, 0x83, 8, 0, 1, 2
+	createsprite gUnknown_08595E98, 0x84, 8, 8, 20, 1, 1
+	createsprite gUnknown_08597358, 0x83, 8, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x5, 1, 4, 0, 6, 1
 	goto AnimScript_82D22B3
 
 AnimScript_82D2324:
-	createsprite 0x8595E98, 0x84, 0, 0, 20, 1, 1
-	createsprite 0x8597358, 0x83, 0, -8, 1, 1
+	createsprite gUnknown_08595E98, 0x84, 0, 0, 20, 1, 1
+	createsprite gUnknown_08597358, 0x83, 0, -8, 1, 1
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	goto AnimScript_82D22B3
 
@@ -6663,26 +6663,26 @@ Move_DYNAMIC_PUNCH:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W233B, +63
-	createsprite 0x8595E98, 0x83, 0, 0, 20, 1, 0
-	createsprite 0x8597358, 0x82, 0, 0, 1, 0
+	createsprite gUnknown_08595E98, 0x83, 0, 0, 20, 1, 0
+	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 0
 	createvisualtask sub_80D51AC, 0x5, 1, 5, 0, 7, 1
 	delay 0x1
 	waitsound
 	playsewithpan SE_W120, +63
 	createvisualtask sub_80D52D0, 0x5, 1, 5, 0, 28, 1
-	createsprite 0x859371C, 0x3, 0, 0, 1, 1
+	createsprite gUnknown_0859371C, 0x3, 0, 0, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x3, 24, -24, 1, 1
+	createsprite gUnknown_0859371C, 0x3, 24, -24, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x3, -16, 16, 1, 1
+	createsprite gUnknown_0859371C, 0x3, -16, 16, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x3, -24, -12, 1, 1
+	createsprite gUnknown_0859371C, 0x3, -24, -12, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x3, 16, 16, 1, 1
+	createsprite gUnknown_0859371C, 0x3, 16, 16, 1, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6696,25 +6696,25 @@ Move_COUNTER:
 	createvisualtask sub_80D5830, 0x2, 0, 18, 6, 1, 4
 	playsewithpan SE_W233, -64
 	waitforvisualfinish
-	createsprite 0x857FE70, 0x2, 0, 20, 0, 0, 4
+	createsprite gUnknown_0857FE70, 0x2, 0, 20, 0, 0, 4
 	delay 0x4
-	createsprite 0x8597358, 0x2, -15, 18, 1, 0
+	createsprite gUnknown_08597358, 0x2, -15, 18, 1, 0
 	playsewithpan SE_W233B, +63
 	delay 0x1
 	createvisualtask sub_80D51AC, 0x2, 1, 5, 0, 25, 1
-	createsprite 0x8595E98, 0x3, -15, 18, 8, 1, 0
+	createsprite gUnknown_08595E98, 0x3, -15, 18, 8, 1, 0
 	delay 0x3
-	createsprite 0x8597358, 0x2, 0, -4, 1, 0
+	createsprite gUnknown_08597358, 0x2, 0, -4, 1, 0
 	playsewithpan SE_W233B, +63
 	delay 0x1
-	createsprite 0x8595E98, 0x3, 0, -4, 8, 1, 0
+	createsprite gUnknown_08595E98, 0x3, 0, -4, 8, 1, 0
 	delay 0x3
-	createsprite 0x8597358, 0x2, 15, 9, 1, 0
+	createsprite gUnknown_08597358, 0x2, 15, 9, 1, 0
 	playsewithpan SE_W233B, +63
 	delay 0x1
-	createsprite 0x8595E98, 0x3, 15, 9, 8, 1, 0
+	createsprite gUnknown_08595E98, 0x3, 15, 9, 8, 1, 0
 	delay 0x5
-	createsprite 0x857FE58, 0x2, 0, 0, 5
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 5
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6727,17 +6727,17 @@ Move_VITAL_THROW:
 	playsewithpan SE_W233, -64
 	createvisualtask sub_80D5830, 0x2, 0, 12, 4, 1, 2
 	waitforvisualfinish
-	createsprite 0x857FE70, 0x2, 0, 20, 0, 0, 4
+	createsprite gUnknown_0857FE70, 0x2, 0, 20, 0, 0, 4
 	delay 0x2
-	createsprite 0x8597358, 0x3, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 1
 	playsewithpan SE_W233B, +63
 	delay 0x1
-	createsprite 0x857FE70, 0x2, 1, -24, 0, 0, 4
+	createsprite gUnknown_0857FE70, 0x2, 1, -24, 0, 0, 4
 	waitforvisualfinish
 	delay 0x3
-	createsprite 0x857FE58, 0x2, 0, 0, 7
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 7
 	delay 0xB
-	createsprite 0x857FE58, 0x2, 1, 0, 10
+	createsprite gUnknown_0857FE58, 0x2, 1, 0, 10
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6750,20 +6750,20 @@ Move_ROCK_SMASH:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	delay 0x1
-	createsprite 0x8597358, 0x3, 0, 0, 1, 1
-	createsprite 0x8595E98, 0x2, 0, 0, 8, 1, 0
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 1
+	createsprite gUnknown_08595E98, 0x2, 0, 0, 8, 1, 0
 	playsewithpan SE_W233B, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 5, 1
 	waitforvisualfinish
 	playsewithpan SE_W088, +63
-	createsprite 0x8596B1C, 0x2, 0, 0, 20, 24, 14, 2
-	createsprite 0x8596B1C, 0x2, 5, 0, -20, 24, 14, 1
-	createsprite 0x8596B1C, 0x2, 0, 5, 20, -24, 14, 2
-	createsprite 0x8596B1C, 0x2, -5, 0, -20, -24, 14, 2
-	createsprite 0x8596B1C, 0x2, 0, -5, 30, 18, 8, 2
-	createsprite 0x8596B1C, 0x2, 0, 0, 30, -18, 8, 2
-	createsprite 0x8596B1C, 0x2, 0, 0, -30, 18, 8, 2
-	createsprite 0x8596B1C, 0x2, 0, 0, -30, -18, 8, 2
+	createsprite gUnknown_08596B1C, 0x2, 0, 0, 20, 24, 14, 2
+	createsprite gUnknown_08596B1C, 0x2, 5, 0, -20, 24, 14, 1
+	createsprite gUnknown_08596B1C, 0x2, 0, 5, 20, -24, 14, 2
+	createsprite gUnknown_08596B1C, 0x2, -5, 0, -20, -24, 14, 2
+	createsprite gUnknown_08596B1C, 0x2, 0, -5, 30, 18, 8, 2
+	createsprite gUnknown_08596B1C, 0x2, 0, 0, 30, -18, 8, 2
+	createsprite gUnknown_08596B1C, 0x2, 0, 0, -30, 18, 8, 2
+	createsprite gUnknown_08596B1C, 0x2, 0, 0, -30, -18, 8, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 7, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -6795,11 +6795,11 @@ Move_SUBMISSION:
 	end
 
 AnimScript_82D26D3:
-	createsprite 0x8597358, 0x3, 0, -12, 1, 1
+	createsprite gUnknown_08597358, 0x3, 0, -12, 1, 1
 	delay 0x8
-	createsprite 0x8597358, 0x3, -12, 8, 1, 1
+	createsprite gUnknown_08597358, 0x3, -12, 8, 1, 1
 	delay 0x8
-	createsprite 0x8597358, 0x3, 12, 0, 1, 1
+	createsprite gUnknown_08597358, 0x3, 12, 0, 1, 1
 	delay 0x8
 	return
 
@@ -6822,7 +6822,7 @@ Move_SUNNY_DAY:
 	end
 
 AnimScript_82D2753:
-	createsprite 0x85954A0, 0x28
+	createsprite gUnknown_085954A0, 0x28
 	delay 0x6
 	return
 
@@ -6839,11 +6839,11 @@ Move_COTTON_SPORE:
 	end
 
 AnimScript_82D277D:
-	createsprite 0x85922EC, 0x2, 0, -20, 85, 80, 0
+	createsprite gUnknown_085922EC, 0x2, 0, -20, 85, 80, 0
 	delay 0xC
-	createsprite 0x85922EC, 0x2, 0, -10, 170, 80, 0
+	createsprite gUnknown_085922EC, 0x2, 0, -10, 170, 80, 0
 	delay 0xC
-	createsprite 0x85922EC, 0x2, 0, -15, 0, 80, 0
+	createsprite gUnknown_085922EC, 0x2, 0, -15, 0, 80, 0
 	delay 0xC
 	return
 
@@ -6863,11 +6863,11 @@ Move_SPORE:
 	end
 
 AnimScript_82D27E2:
-	createsprite 0x85922EC, 0x82, 0, -20, 85, 80, 1
+	createsprite gUnknown_085922EC, 0x82, 0, -20, 85, 80, 1
 	delay 0xC
-	createsprite 0x85922EC, 0x82, 0, -10, 170, 80, 1
+	createsprite gUnknown_085922EC, 0x82, 0, -10, 170, 80, 1
 	delay 0xC
-	createsprite 0x85922EC, 0x82, 0, -15, 0, 80, 1
+	createsprite gUnknown_085922EC, 0x82, 0, -15, 0, 80, 1
 	delay 0xC
 	return
 
@@ -6878,32 +6878,32 @@ Move_PETAL_DANCE:
 	setalpha 0x80C
 	playsewithpan SE_W080, -64
 	createvisualtask sub_80D5830, 0x2, 0, 12, 6, 6, 3
-	createsprite 0x859231C, 0x2, 0, -24, 8, 140
-	createsprite 0x8592334, 0x2, 16, -24, 8, 100
-	createsprite 0x8592334, 0x2, -16, -24, 8, 100
+	createsprite gUnknown_0859231C, 0x2, 0, -24, 8, 140
+	createsprite gUnknown_08592334, 0x2, 16, -24, 8, 100
+	createsprite gUnknown_08592334, 0x2, -16, -24, 8, 100
 	delay 0xF
-	createsprite 0x859231C, 0x2, 0, -24, 8, 140
-	createsprite 0x8592334, 0x2, 32, -24, 8, 100
-	createsprite 0x8592334, 0x2, -32, -24, 8, 100
+	createsprite gUnknown_0859231C, 0x2, 0, -24, 8, 140
+	createsprite gUnknown_08592334, 0x2, 32, -24, 8, 100
+	createsprite gUnknown_08592334, 0x2, -32, -24, 8, 100
 	delay 0xF
-	createsprite 0x859231C, 0x2, 0, -24, 8, 140
-	createsprite 0x8592334, 0x2, 24, -24, 8, 100
-	createsprite 0x8592334, 0x2, -24, -24, 8, 100
+	createsprite gUnknown_0859231C, 0x2, 0, -24, 8, 140
+	createsprite gUnknown_08592334, 0x2, 24, -24, 8, 100
+	createsprite gUnknown_08592334, 0x2, -24, -24, 8, 100
 	delay 0x1E
-	createsprite 0x8592334, 0x2, 16, -24, 0, 100
-	createsprite 0x8592334, 0x2, -16, -24, 0, 100
+	createsprite gUnknown_08592334, 0x2, 16, -24, 0, 100
+	createsprite gUnknown_08592334, 0x2, -16, -24, 0, 100
 	delay 0x1E
-	createsprite 0x8592334, 0x2, 20, -16, 14, 80
-	createsprite 0x8592334, 0x2, -20, -14, 16, 80
+	createsprite gUnknown_08592334, 0x2, 20, -16, 14, 80
+	createsprite gUnknown_08592334, 0x2, -20, -14, 16, 80
 	waitforvisualfinish
-	createsprite 0x857FE70, 0x2, 0, 24, 0, 0, 5
+	createsprite gUnknown_0857FE70, 0x2, 0, 24, 0, 0, 5
 	delay 0x3
 	playsewithpan SE_W025B, +63
-	createsprite 0x8597358, 0x3, 0, 0, 1, 0
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 0
 	createvisualtask sub_80D51AC, 0x2, 1, 6, 0, 8, 1
 	waitforvisualfinish
 	delay 0x8
-	createsprite 0x857FE58, 0x2, 0, 0, 7
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 7
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6917,29 +6917,29 @@ Move_RAZOR_LEAF:
 	setalpha 0x80C
 	delay 0x1
 	loopsewithpan SE_W077, -64, 0xA, 0x5
-	createsprite 0x8592390, 0x2, -3, -2, 10
+	createsprite gUnknown_08592390, 0x2, -3, -2, 10
 	delay 0x2
-	createsprite 0x8592390, 0x2, -1, -1, 15
+	createsprite gUnknown_08592390, 0x2, -1, -1, 15
 	delay 0x2
-	createsprite 0x8592390, 0x2, -4, -4, 7
+	createsprite gUnknown_08592390, 0x2, -4, -4, 7
 	delay 0x2
-	createsprite 0x8592390, 0x2, 3, -3, 11
+	createsprite gUnknown_08592390, 0x2, 3, -3, 11
 	delay 0x2
-	createsprite 0x8592390, 0x2, -1, -6, 8
+	createsprite gUnknown_08592390, 0x2, -1, -6, 8
 	delay 0x2
-	createsprite 0x8592390, 0x2, 2, -1, 12
+	createsprite gUnknown_08592390, 0x2, 2, -1, 12
 	delay 0x2
-	createsprite 0x8592390, 0x2, -3, -4, 13
+	createsprite gUnknown_08592390, 0x2, -3, -4, 13
 	delay 0x2
-	createsprite 0x8592390, 0x2, 4, -5, 7
+	createsprite gUnknown_08592390, 0x2, 4, -5, 7
 	delay 0x2
-	createsprite 0x8592390, 0x2, 2, -6, 11
+	createsprite gUnknown_08592390, 0x2, 2, -6, 11
 	delay 0x2
-	createsprite 0x8592390, 0x2, -3, -5, 8
+	createsprite gUnknown_08592390, 0x2, -3, -5, 8
 	delay 0x3C
 	playsewithpan SE_W013B, -64
-	createsprite 0x85923D8, 0x83, 20, -10, 20, 0, 22, 20, 1
-	createsprite 0x85923D8, 0x83, 20, -10, 20, 0, 22, -20, 1
+	createsprite gUnknown_085923D8, 0x83, 20, -10, 20, 0, 22, 20, 1
+	createsprite gUnknown_085923D8, 0x83, 20, -10, 20, 0, 22, -20, 1
 	delay 0x14
 	playsewithpan SE_W013, +63
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 8, 1
@@ -6955,29 +6955,29 @@ Move_ANCIENT_POWER:
 	loadspritegfx 0x2797
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
-	createsprite 0x85972D8, 0x2, 4, 1, 10, 1
-	createsprite 0x8596C10, 0x2, 20, 32, -48, 50, 2
-	createsprite 0x8596C10, 0x2, 0, 32, -38, 25, 5
-	createsprite 0x8596C10, 0x2, 32, 32, -28, 40, 3
-	createsprite 0x8596C10, 0x2, -20, 32, -48, 50, 2
-	createsprite 0x8596C10, 0x2, 20, 32, -28, 60, 1
-	createsprite 0x8596C10, 0x2, 0, 32, -28, 30, 4
+	createsprite gUnknown_085972D8, 0x2, 4, 1, 10, 1
+	createsprite gUnknown_08596C10, 0x2, 20, 32, -48, 50, 2
+	createsprite gUnknown_08596C10, 0x2, 0, 32, -38, 25, 5
+	createsprite gUnknown_08596C10, 0x2, 32, 32, -28, 40, 3
+	createsprite gUnknown_08596C10, 0x2, -20, 32, -48, 50, 2
+	createsprite gUnknown_08596C10, 0x2, 20, 32, -28, 60, 1
+	createsprite gUnknown_08596C10, 0x2, 0, 32, -28, 30, 4
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 30, 1
 	playsewithpan SE_W082, -64
 	delay 0xA
-	createsprite 0x8596C10, 0x2, 15, 32, -48, 25, 5
-	createsprite 0x8596C10, 0x2, -10, 32, -42, 30, 4
+	createsprite gUnknown_08596C10, 0x2, 15, 32, -48, 25, 5
+	createsprite gUnknown_08596C10, 0x2, -10, 32, -42, 30, 4
 	delay 0xA
-	createsprite 0x8596C10, 0x2, 0, 32, -42, 25, 5
-	createsprite 0x8596C10, 0x2, -25, 32, -48, 30, 4
+	createsprite gUnknown_08596C10, 0x2, 0, 32, -42, 25, 5
+	createsprite gUnknown_08596C10, 0x2, -25, 32, -48, 30, 4
 	waitforvisualfinish
-	createsprite 0x857FE70, 0x2, 0, 16, 0, 0, 4
+	createsprite gUnknown_0857FE70, 0x2, 0, 16, 0, 0, 4
 	delay 0x3
 	playsewithpan SE_W120, +63
-	createsprite 0x8597358, 0x3, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 6, 1
 	waitforvisualfinish
-	createsprite 0x857FE58, 0x2, 0, 0, 7
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 7
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -6987,16 +6987,16 @@ Move_OCTAZOOKA:
 	loadspritegfx 0x272E
 	loadspritegfx 0x2721
 	playsewithpan SE_W025B, -64
-	createsprite 0x8592DFC, 0x82, 20, 0, 0, 0, 20, 0
+	createsprite gUnknown_08592DFC, 0x82, 20, 0, 0, 0, 20, 0
 	waitforvisualfinish
 	playsewithpan SE_W120, +63
-	createsprite 0x8592E30, 0x82, 8, 8, 1, 0
+	createsprite gUnknown_08592E30, 0x82, 8, 8, 1, 0
 	delay 0x2
-	createsprite 0x8592E30, 0x82, -8, -8, 1, 0
+	createsprite gUnknown_08592E30, 0x82, -8, -8, 1, 0
 	delay 0x2
-	createsprite 0x8592E30, 0x82, 8, -8, 1, 0
+	createsprite gUnknown_08592E30, 0x82, 8, -8, 1, 0
 	delay 0x2
-	createsprite 0x8592E30, 0x82, -8, 8, 1, 0
+	createsprite gUnknown_08592E30, 0x82, -8, 8, 1, 0
 	waitforvisualfinish
 	end
 
@@ -7020,7 +7020,7 @@ Move_MIST:
 	end
 
 AnimScript_82D2C34:
-	createsprite 0x8595C2C, 0x2, 0, -24, 48, 240, 0, 1
+	createsprite gUnknown_08595C2C, 0x2, 0, -24, 48, 240, 0, 1
 	delay 0x7
 	return
 
@@ -7041,14 +7041,14 @@ Move_FIRE_PUNCH:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	createvisualtask sub_8116620, 0xA, 4, 2, 0, 9, 31
-	createsprite 0x8595368, 0x81, 0
-	createsprite 0x8595368, 0x81, 64
-	createsprite 0x8595368, 0x81, 128
-	createsprite 0x8595368, 0x81, 196
+	createsprite gUnknown_08595368, 0x81, 0
+	createsprite gUnknown_08595368, 0x81, 64
+	createsprite gUnknown_08595368, 0x81, 128
+	createsprite gUnknown_08595368, 0x81, 196
 	playsewithpan SE_W172, +63
 	waitforvisualfinish
-	createsprite 0x8595E98, 0x83, 0, 0, 8, 1, 0
-	createsprite 0x8597358, 0x82, 0, 0, 1, 1
+	createsprite gUnknown_08595E98, 0x83, 0, 0, 8, 1, 0
+	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 1
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 15, 1
 	call AnimScript_82D2D18
 	delay 0x4
@@ -7061,13 +7061,13 @@ Move_FIRE_PUNCH:
 	end
 
 AnimScript_82D2D18:
-	createsprite 0x8595380, 0x81, 0, 10, 192, 176, 40
-	createsprite 0x8595380, 0x81, 0, 10, -192, 240, 40
-	createsprite 0x8595380, 0x81, 0, 10, 192, -160, 40
-	createsprite 0x8595380, 0x81, 0, 10, -192, -112, 40
-	createsprite 0x8595380, 0x81, 0, 10, 160, 48, 40
-	createsprite 0x8595380, 0x81, 0, 10, -224, -32, 40
-	createsprite 0x8595380, 0x81, 0, 10, 112, -128, 40
+	createsprite gUnknown_08595380, 0x81, 0, 10, 192, 176, 40
+	createsprite gUnknown_08595380, 0x81, 0, 10, -192, 240, 40
+	createsprite gUnknown_08595380, 0x81, 0, 10, 192, -160, 40
+	createsprite gUnknown_08595380, 0x81, 0, 10, -192, -112, 40
+	createsprite gUnknown_08595380, 0x81, 0, 10, 160, 48, 40
+	createsprite gUnknown_08595380, 0x81, 0, 10, -224, -32, 40
+	createsprite gUnknown_08595380, 0x81, 0, 10, 112, -128, 40
 	return
 
 Move_LEER:
@@ -7076,7 +7076,7 @@ Move_LEER:
 	monbgprio_28 ANIM_ATTACKER
 	setalpha 0x808
 	playsewithpan SE_W043, -64
-	createsprite 0x85CE150, 0x2, 24, -12
+	createsprite gUnknown_085CE150, 0x2, 24, -12
 	createvisualtask sub_80D6064, 0x5, -5, -5, 10, 0, 1
 	waitforvisualfinish
 	delay 0xA
@@ -7116,44 +7116,44 @@ Move_DREAM_EATER:
 
 AnimScript_82D2E51:
 	playsewithpan SE_W207, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 5, -18, -40, 35
-	createsprite 0x8592270, 0x3, -10, 20, 20, 39
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 5, -18, -40, 35
+	createsprite gUnknown_08592270, 0x3, -10, 20, 20, 39
 	delay 0x4
 	playsewithpan SE_W207, +63
-	createsprite 0x8592270, 0x3, 0, 5, 28, 26
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
-	createsprite 0x8592270, 0x3, -10, 20, 40, 39
+	createsprite gUnknown_08592270, 0x3, 0, 5, 28, 26
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, -10, 20, 40, 39
 	delay 0x4
 	playsewithpan SE_W207, +63
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
-	createsprite 0x8592270, 0x3, -5, 15, 16, 33
-	createsprite 0x8592270, 0x3, 10, -5, -32, 26
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, -5, 15, 16, 33
+	createsprite gUnknown_08592270, 0x3, 10, -5, -32, 26
 	delay 0x4
 	playsewithpan SE_W207, +63
-	createsprite 0x8592270, 0x3, 0, -15, -16, 36
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, 0, -15, -16, 36
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
 	delay 0x4
 	playsewithpan SE_W207, +63
-	createsprite 0x8592270, 0x3, -5, 15, 16, 33
-	createsprite 0x8592270, 0x3, 0, -15, -16, 36
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, -5, 15, 16, 33
+	createsprite gUnknown_08592270, 0x3, 0, -15, -16, 36
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
 	delay 0x4
 	playsewithpan SE_W207, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, -5, 15, 16, 33
-	createsprite 0x8592270, 0x3, 10, -5, -40, 26
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, -5, 15, 16, 33
+	createsprite gUnknown_08592270, 0x3, 10, -5, -40, 26
 	delay 0x4
 	playsewithpan SE_W207, +63
-	createsprite 0x8592270, 0x3, -5, 15, 36, 33
-	createsprite 0x8592270, 0x3, 10, -5, -8, 26
-	createsprite 0x8592270, 0x3, -10, 20, 20, 39
+	createsprite gUnknown_08592270, 0x3, -5, 15, 36, 33
+	createsprite gUnknown_08592270, 0x3, 10, -5, -8, 26
+	createsprite gUnknown_08592270, 0x3, -10, 20, 20, 39
 	delay 0x4
 	playsewithpan SE_W207, +63
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 0, 5, 8, 26
-	createsprite 0x8592270, 0x3, 5, -18, -20, 35
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 0, 5, 8, 26
+	createsprite gUnknown_08592270, 0x3, 5, -18, -20, 35
 	delay 0x4
 	return
 
@@ -7166,22 +7166,22 @@ Move_POISON_GAS:
 	setalpha 0x80C
 	delay 0x0
 	playsewithpan SE_W054, -64
-	createsprite 0x8595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gUnknown_08595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 0x4
 	playsewithpan SE_W054, -64
-	createsprite 0x8595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gUnknown_08595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 0x4
 	playsewithpan SE_W054, -64
-	createsprite 0x8595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gUnknown_08595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 0x4
 	playsewithpan SE_W054, -64
-	createsprite 0x8595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gUnknown_08595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 0x4
 	playsewithpan SE_W054, -64
-	createsprite 0x8595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gUnknown_08595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 0x4
 	playsewithpan SE_W054, -64
-	createsprite 0x8595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gUnknown_08595C9C, 0x80, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 0x28
 	loopsewithpan SE_W054, +63, 0x1C, 0x6
 	createvisualtask sub_8115A04, 0x2, 4, 6, 2, 0, 12, 26650
@@ -7235,7 +7235,7 @@ Move_PSYBEAM:
 	end
 
 AnimScript_82D319C:
-	createsprite 0x859663C, 0x82, 16, 0, 0, 0, 13, 0
+	createsprite gUnknown_0859663C, 0x82, 16, 0, 0, 0, 13, 0
 	delay 0x4
 	return
 
@@ -7253,8 +7253,8 @@ Move_HYPNOSIS:
 
 AnimScript_82D31E5:
 	playsewithpan SE_W048, -64
-	createsprite 0x859663C, 0x82, 0, 8, 0, 8, 27, 0
-	createsprite 0x859663C, 0x82, 16, -8, 0, -8, 27, 0
+	createsprite gUnknown_0859663C, 0x82, 0, 8, 0, 8, 27, 0
+	createsprite gUnknown_0859663C, 0x82, 16, -8, 0, -8, 27, 0
 	delay 0x6
 	return
 
@@ -7277,9 +7277,9 @@ Move_PSYWAVE:
 	end
 
 AnimScript_82D3275:
-	createsprite 0x8595170, 0x83, 10, 10, 0, 16
+	createsprite gUnknown_08595170, 0x83, 10, 10, 0, 16
 	delay 0x4
-	createsprite 0x8595170, 0x83, 10, 10, 0, 16
+	createsprite gUnknown_08595170, 0x83, 10, 10, 0, 16
 	delay 0x4
 	return
 
@@ -7287,15 +7287,15 @@ Move_ZAP_CANNON:
 	loadspritegfx 0x27BB
 	loadspritegfx 0x271B
 	playsewithpan SE_W086, -64
-	createsprite 0x8595764, 0x83, 10, 0, 0, 0, 30, 0
-	createsprite 0x8595790, 0x84, 10, 0, 16, 30, 0, 40, 0
-	createsprite 0x8595790, 0x84, 10, 0, 16, 30, 64, 40, 1
-	createsprite 0x8595790, 0x84, 10, 0, 16, 30, 128, 40, 0
-	createsprite 0x8595790, 0x84, 10, 0, 16, 30, 192, 40, 2
-	createsprite 0x8595790, 0x84, 10, 0, 8, 30, 32, 40, 0
-	createsprite 0x8595790, 0x84, 10, 0, 8, 30, 96, 40, 1
-	createsprite 0x8595790, 0x84, 10, 0, 8, 30, 160, 40, 0
-	createsprite 0x8595790, 0x84, 10, 0, 8, 30, 224, 40, 2
+	createsprite gUnknown_08595764, 0x83, 10, 0, 0, 0, 30, 0
+	createsprite gUnknown_08595790, 0x84, 10, 0, 16, 30, 0, 40, 0
+	createsprite gUnknown_08595790, 0x84, 10, 0, 16, 30, 64, 40, 1
+	createsprite gUnknown_08595790, 0x84, 10, 0, 16, 30, 128, 40, 0
+	createsprite gUnknown_08595790, 0x84, 10, 0, 16, 30, 192, 40, 2
+	createsprite gUnknown_08595790, 0x84, 10, 0, 8, 30, 32, 40, 0
+	createsprite gUnknown_08595790, 0x84, 10, 0, 8, 30, 96, 40, 1
+	createsprite gUnknown_08595790, 0x84, 10, 0, 8, 30, 160, 40, 0
+	createsprite gUnknown_08595790, 0x84, 10, 0, 8, 30, 224, 40, 2
 	waitforvisualfinish
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 5, 1
 	delay 0xF
@@ -7316,16 +7316,16 @@ Move_STEEL_WING:
 	loopsewithpan SE_W017, -64, 0x14, 0x2
 	createvisualtask sub_80D5738, 0x2, 0, 12, 4, 1, 4
 	createvisualtask sub_810DED8, 0x5, 1, 70
-	createsprite 0x85962A4, 0x2, -25, 0, 0, 0, 20
-	createsprite 0x85962A4, 0x2, 25, 0, 0, 0, 20
+	createsprite gUnknown_085962A4, 0x2, -25, 0, 0, 0, 20
+	createsprite gUnknown_085962A4, 0x2, 25, 0, 0, 0, 20
 	delay 0x18
-	createsprite 0x857FE70, 0x2, 0, 24, 0, 0, 9
+	createsprite gUnknown_0857FE70, 0x2, 0, 24, 0, 0, 9
 	delay 0x11
-	createsprite 0x8597358, 0x2, 16, 0, 1, 1
-	createsprite 0x8597358, 0x2, -16, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, 16, 0, 1, 1
+	createsprite gUnknown_08597358, 0x2, -16, 0, 1, 1
 	playsewithpan SE_W013, +63
 	waitforvisualfinish
-	createsprite 0x857FE58, 0x2, 0, 0, 11
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 11
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -7338,9 +7338,9 @@ Move_IRON_TAIL:
 	waitforvisualfinish
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x857FE28, 0x2, 4, 4
+	createsprite gUnknown_0857FE28, 0x2, 4, 4
 	delay 0x6
-	createsprite 0x8597358, 0x82, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
@@ -7358,9 +7358,9 @@ Move_POISON_TAIL:
 	waitforvisualfinish
 	monbg ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x857FE28, 0x2, 4, 4
+	createsprite gUnknown_0857FE28, 0x2, 4, 4
 	delay 0x6
-	createsprite 0x8597358, 0x82, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	playsewithpan SE_W233B, +63
 	waitforvisualfinish
@@ -7376,19 +7376,19 @@ Move_METAL_CLAW:
 	loopsewithpan SE_W231, -64, 0x1C, 0x2
 	createvisualtask sub_81144F8, 0x5, 0, 0, 0
 	waitforvisualfinish
-	createsprite 0x857FE28, 0x2, 6, 4
+	createsprite gUnknown_0857FE28, 0x2, 6, 4
 	delay 0x2
 	playsewithpan SE_W013, +63
-	createsprite 0x8597138, 0x82, -10, -10, 0
-	createsprite 0x8597138, 0x82, -10, 10, 0
-	createsprite 0x85972D8, 0x2, -4, 1, 10, 3, 1
+	createsprite gUnknown_08597138, 0x82, -10, -10, 0
+	createsprite gUnknown_08597138, 0x82, -10, 10, 0
+	createsprite gUnknown_085972D8, 0x2, -4, 1, 10, 3, 1
 	delay 0x8
-	createsprite 0x857FE28, 0x2, 6, 4
+	createsprite gUnknown_0857FE28, 0x2, 6, 4
 	delay 0x2
 	playsewithpan SE_W013, +63
-	createsprite 0x8597138, 0x82, 10, -10, 1
-	createsprite 0x8597138, 0x82, 10, 10, 1
-	createsprite 0x85972D8, 0x2, -4, 1, 10, 3, 1
+	createsprite gUnknown_08597138, 0x82, 10, -10, 1
+	createsprite gUnknown_08597138, 0x82, 10, 10, 1
+	createsprite gUnknown_085972D8, 0x2, -4, 1, 10, 3, 1
 	waitforvisualfinish
 	end
 
@@ -7415,22 +7415,22 @@ Move_EGG_BOMB:
 	loadspritegfx 0x27D6
 	loadspritegfx 0x27BF
 	playsewithpan SE_W039, -64
-	createsprite 0x8593488, 0x82, 10, 0, 0, 0, 25, -32
+	createsprite gUnknown_08593488, 0x82, 10, 0, 0, 0, 25, -32
 	waitforvisualfinish
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 16, 1
-	createsprite 0x859371C, 0x84, 6, 5, 1, 0
+	createsprite gUnknown_0859371C, 0x84, 6, 5, 1, 0
 	playsewithpan SE_W120, +63
 	delay 0x3
-	createsprite 0x859371C, 0x84, -16, -15, 1, 0
+	createsprite gUnknown_0859371C, 0x84, -16, -15, 1, 0
 	playsewithpan SE_W120, +63
 	delay 0x3
-	createsprite 0x859371C, 0x84, 16, -5, 1, 0
+	createsprite gUnknown_0859371C, 0x84, 16, -5, 1, 0
 	playsewithpan SE_W120, +63
 	delay 0x3
-	createsprite 0x859371C, 0x84, -12, 18, 1, 0
+	createsprite gUnknown_0859371C, 0x84, -12, 18, 1, 0
 	playsewithpan SE_W120, +63
 	delay 0x3
-	createsprite 0x859371C, 0x84, 0, 5, 1, 0
+	createsprite gUnknown_0859371C, 0x84, 0, 5, 1, 0
 	playsewithpan SE_W120, +63
 	delay 0x3
 	waitforvisualfinish
@@ -7442,7 +7442,7 @@ Move_SHADOW_BALL:
 	waitbgfadein
 	delay 0xF
 	createsoundtask sub_8158C58, 168, -64, 63, 5, 5, 0, 5
-	createsprite 0x8596D58, 0x82, 16, 16, 8
+	createsprite gUnknown_08596D58, 0x82, 16, 16, 8
 	waitforvisualfinish
 	playsewithpan SE_W028, +63
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 8, 1
@@ -7455,7 +7455,7 @@ Move_LICK:
 	loadspritegfx 0x27C1
 	delay 0xF
 	playsewithpan SE_W122, +63
-	createsprite 0x8596D8C, 0x82, 0, 0
+	createsprite gUnknown_08596D8C, 0x82, 0, 0
 	createvisualtask sub_80D52D0, 0x2, 1, 1, 0, 16, 1
 	waitforvisualfinish
 	end
@@ -7492,21 +7492,21 @@ AnimScript_82D3745:
 	createvisualtask sub_8116620, 0xA, 2, 2, 0, 11, 31
 	createvisualtask sub_80D52D0, 0x2, 0, 1, 0, 32, 1
 	waitforvisualfinish
-	createsprite 0x857FE70, 0x2, 0, 24, 0, 0, 4
+	createsprite gUnknown_0857FE70, 0x2, 0, 24, 0, 0, 4
 	waitforvisualfinish
 	createvisualtask sub_80D5484, 0x2, 0, 2, 0, 12, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 16, 1
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x1, 18, -8, 1, 1
+	createsprite gUnknown_08597358, 0x1, 18, -8, 1, 1
 	delay 0x5
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x1, -18, 8, 1, 1
+	createsprite gUnknown_08597358, 0x1, -18, 8, 1, 1
 	delay 0x5
 	playsewithpan SE_W004, +63
-	createsprite 0x8597358, 0x1, -8, -5, 1, 1
+	createsprite gUnknown_08597358, 0x1, -8, -5, 1, 1
 	waitforvisualfinish
 	delay 0x5
-	createsprite 0x857FE58, 0x2, 0, 0, 7
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 7
 	waitforvisualfinish
 	createvisualtask sub_8116620, 0xA, 2, 2, 11, 0, 31
 	waitforvisualfinish
@@ -7519,7 +7519,7 @@ Move_STRING_SHOT:
 	loadspritegfx 0x27C4
 	monbg ANIM_DEF_PARTNER
 	delay 0x0
-	createsprite 0x8597274, 0x5, 1, 2, 0, 9, 0
+	createsprite gUnknown_08597274, 0x5, 1, 2, 0, 9, 0
 	waitforvisualfinish
 	loopsewithpan SE_W081, -64, 0x9, 0x6
 	call AnimScript_82D38CC
@@ -7542,20 +7542,20 @@ Move_STRING_SHOT:
 	call AnimScript_82D38CC
 	waitforvisualfinish
 	playsewithpan SE_W081B, +63
-	createsprite 0x85969F8, 0x82, 0, 10
+	createsprite gUnknown_085969F8, 0x82, 0, 10
 	delay 0x4
-	createsprite 0x85969F8, 0x82, 0, -2
+	createsprite gUnknown_085969F8, 0x82, 0, -2
 	delay 0x4
-	createsprite 0x85969F8, 0x82, 0, 22
+	createsprite gUnknown_085969F8, 0x82, 0, 22
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	delay 0x1
 	waitforvisualfinish
-	createsprite 0x8597274, 0x5, 1, 2, 9, 0, 0
+	createsprite gUnknown_08597274, 0x5, 1, 2, 9, 0, 0
 	end
 
 AnimScript_82D38CC:
-	createsprite 0x85969E0, 0x82, 20, 0, 512, 20, 1
+	createsprite gUnknown_085969E0, 0x82, 20, 0, 512, 20, 1
 	delay 0x1
 	return
 
@@ -7564,7 +7564,7 @@ Move_SPIDER_WEB:
 	loadspritegfx 0x27C4
 	monbg ANIM_DEF_PARTNER
 	delay 0x0
-	createsprite 0x8597274, 0x5, 1, 2, 0, 9, 0
+	createsprite gUnknown_08597274, 0x5, 1, 2, 0, 9, 0
 	waitforvisualfinish
 	monbgprio_28 ANIM_TARGET
 	loopsewithpan SE_W081, -64, 0x9, 0x6
@@ -7584,15 +7584,15 @@ Move_SPIDER_WEB:
 	call AnimScript_82D396D
 	waitforvisualfinish
 	playsewithpan SE_W081B, +63
-	createsprite 0x8596A2C, 0x2
+	createsprite gUnknown_08596A2C, 0x2
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	delay 0x1
-	createsprite 0x8597274, 0x5, 1, 2, 9, 0, 0
+	createsprite gUnknown_08597274, 0x5, 1, 2, 9, 0, 0
 	end
 
 AnimScript_82D396D:
-	createsprite 0x85969E0, 0x82, 20, 0, 512, 20, 0
+	createsprite gUnknown_085969E0, 0x82, 20, 0, 512, 20, 0
 	delay 0x1
 	return
 
@@ -7606,9 +7606,9 @@ AnimScript_82D398A:
 AnimScript_82D398C:
 	loadspritegfx 0x2719
 	playsewithpan SE_W016, -64
-	createsprite 0x8593550, 0x2, 32, 0, 16, 16, 0, 7, 40
-	createsprite 0x8593550, 0x2, 32, 0, 16, 16, 85, 7, 40
-	createsprite 0x8593550, 0x2, 32, 0, 16, 16, 170, 7, 40
+	createsprite gUnknown_08593550, 0x2, 32, 0, 16, 16, 0, 7, 40
+	createsprite gUnknown_08593550, 0x2, 32, 0, 16, 16, 85, 7, 40
+	createsprite gUnknown_08593550, 0x2, 32, 0, 16, 16, 170, 7, 40
 	waitforvisualfinish
 	playsewithpan SE_W016B, -64
 	goto AnimScript_82D398A
@@ -7619,13 +7619,13 @@ AnimScript_82D39DC:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W013B, -64
-	createsprite 0x85962D4, 0x2, 14, 8, 0, 0, 22, 2, 1
+	createsprite gUnknown_085962D4, 0x2, 14, 8, 0, 0, 22, 2, 1
 	delay 0x2
 	playsewithpan SE_W013B, -64
-	createsprite 0x85962D4, 0x2, 14, -8, 16, 14, 22, 1, 1
+	createsprite gUnknown_085962D4, 0x2, 14, -8, 16, 14, 22, 1, 1
 	delay 0x2
 	playsewithpan SE_W013B, -64
-	createsprite 0x85962D4, 0x2, 14, 12, -16, -14, 22, 0, 1
+	createsprite gUnknown_085962D4, 0x2, 14, 12, -16, -14, 22, 0, 1
 	delay 0x11
 	playsewithpan SE_W013, +63
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 10, 1
@@ -7641,7 +7641,7 @@ Move_DISABLE:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x808
 	playsewithpan SE_W197, -64
-	createsprite 0x853EE84, 0xD, 24, -16
+	createsprite gUnknown_0853EE84, 0xD, 24, -16
 	waitforvisualfinish
 	createvisualtask sub_81045B0, 0x5
 	loopsewithpan SE_W020, +63, 0xF, 0x4
@@ -7670,19 +7670,19 @@ Move_RECOVER:
 	end
 
 AnimScript_82D3AD5:
-	createsprite 0x85921E0, 0x2, 40, -10, 13
+	createsprite gUnknown_085921E0, 0x2, 40, -10, 13
 	delay 0x3
-	createsprite 0x85921E0, 0x2, -35, -10, 13
+	createsprite gUnknown_085921E0, 0x2, -35, -10, 13
 	delay 0x3
-	createsprite 0x85921E0, 0x2, 15, -40, 13
+	createsprite gUnknown_085921E0, 0x2, 15, -40, 13
 	delay 0x3
-	createsprite 0x85921E0, 0x2, -10, -32, 13
+	createsprite gUnknown_085921E0, 0x2, -10, -32, 13
 	delay 0x3
-	createsprite 0x85921E0, 0x2, 25, -20, 13
+	createsprite gUnknown_085921E0, 0x2, 25, -20, 13
 	delay 0x3
-	createsprite 0x85921E0, 0x2, -40, -20, 13
+	createsprite gUnknown_085921E0, 0x2, -40, -20, 13
 	delay 0x3
-	createsprite 0x85921E0, 0x2, 5, -40, 13
+	createsprite gUnknown_085921E0, 0x2, 5, -40, 13
 	delay 0x3
 	return
 
@@ -7694,7 +7694,7 @@ Move_MIMIC:
 	panse_1B SE_W107, +63, -64, -3, 0x0
 	createvisualtask sub_80FF458, 0x5, 128, 24
 	delay 0xF
-	createsprite 0x85924DC, 0x82, -12, 24
+	createsprite gUnknown_085924DC, 0x82, -12, 24
 	delay 0xA
 	setarg 0x7, 0xFFFF
 	waitforvisualfinish
@@ -7708,12 +7708,12 @@ Move_MIMIC:
 Move_CONSTRICT:
 	loadspritegfx 0x27CA
 	loopsewithpan SE_W010, +63, 0x6, 0x4
-	createsprite 0x8592494, 0x84, 0, 16, 0, 2
+	createsprite gUnknown_08592494, 0x84, 0, 16, 0, 2
 	delay 0x7
-	createsprite 0x8592494, 0x83, 0, 0, 0, 2
-	createsprite 0x8592494, 0x82, 0, 8, 1, 2
+	createsprite gUnknown_08592494, 0x83, 0, 0, 0, 2
+	createsprite gUnknown_08592494, 0x82, 0, 8, 1, 2
 	delay 0x7
-	createsprite 0x8592494, 0x83, 0, -8, 1, 2
+	createsprite gUnknown_08592494, 0x83, 0, -8, 1, 2
 	delay 0x8
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 6, 1
 	delay 0x14
@@ -7732,7 +7732,7 @@ AnimScript_82D3BFB:
 	createvisualtask sub_8112758, 0x5
 	waitforvisualfinish
 	delay 0x14
-	createsprite 0x8596DD0, 0x2
+	createsprite gUnknown_08596DD0, 0x2
 	delay 0x3C
 	call AnimScript_82D3C62
 	delay 0x29
@@ -7744,10 +7744,10 @@ AnimScript_82D3BFB:
 	delay 0x1
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_W171, +63
-	createsprite 0x8596DE8, 0x82
+	createsprite gUnknown_08596DE8, 0x82
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 14, 1
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 1, 16, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 1, 16, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
@@ -7778,15 +7778,15 @@ Move_SOFT_BOILED:
 	monbg ANIM_ATK_PARTNER
 	playsewithpan SE_W039, -64
 	createvisualtask sub_80D51AC, 0x2, 0, 0, 2, 6, 1
-	createsprite 0x85937B0, 0x4, 0, 16, 0
-	createsprite 0x85937B0, 0x4, 0, 16, 1
+	createsprite gUnknown_085937B0, 0x4, 0, 16, 0
+	createsprite gUnknown_085937B0, 0x4, 0, 16, 1
 	delay 0x78
 	delay 0x7
 	playsewithpan SE_W030, -64
-	createsprite 0x8597274, 0x2, 31, 3, 10, 0, 31500
-	createsprite 0x859381C, 0x3, 31, 16, 0, 1
+	createsprite gUnknown_08597274, 0x2, 31, 3, 10, 0, 31500
+	createsprite gUnknown_0859381C, 0x3, 31, 16, 0, 1
 	delay 0x8
-	createsprite 0x859381C, 0x3, 31, 16, 0, 1
+	createsprite gUnknown_0859381C, 0x3, 31, 16, 0, 1
 	delay 0x3C
 	setarg 0x7, 0xFFFF
 	waitforvisualfinish
@@ -7801,24 +7801,24 @@ Move_HEAL_BELL:
 	createvisualtask sub_8116620, 0xA, 10, 0, 0, 10, 0x7FFF
 	waitforvisualfinish
 	createvisualtask sub_8105CB4, 0x5
-	createsprite 0x8593938, 0x2, 0, -24, 0, 1
+	createsprite gUnknown_08593938, 0x2, 0, -24, 0, 1
 	delay 0xC
-	createsprite 0x8593958, 0x28, 0, -24, 48, -18, 35, 0, 0
-	createsprite 0x8593958, 0x28, 0, -24, -48, 20, 30, 1, 1
-	createsprite 0x8593958, 0x28, 0, -24, -38, -29, 30, 2, 2
-	createsprite 0x8593958, 0x28, 0, -24, 36, 18, 30, 3, 3
+	createsprite gUnknown_08593958, 0x28, 0, -24, 48, -18, 35, 0, 0
+	createsprite gUnknown_08593958, 0x28, 0, -24, -48, 20, 30, 1, 1
+	createsprite gUnknown_08593958, 0x28, 0, -24, -38, -29, 30, 2, 2
+	createsprite gUnknown_08593958, 0x28, 0, -24, 36, 18, 30, 3, 3
 	call AnimScript_82D3EF8
 	delay 0x21
-	createsprite 0x8593958, 0x28, 0, -24, 19, 26, 35, 4, 4
-	createsprite 0x8593958, 0x28, 0, -24, -34, -12, 30, 5, 5
-	createsprite 0x8593958, 0x28, 0, -24, 41, -20, 34, 6, 2
-	createsprite 0x8593958, 0x28, 0, -24, -15, 26, 32, 7, 0
+	createsprite gUnknown_08593958, 0x28, 0, -24, 19, 26, 35, 4, 4
+	createsprite gUnknown_08593958, 0x28, 0, -24, -34, -12, 30, 5, 5
+	createsprite gUnknown_08593958, 0x28, 0, -24, 41, -20, 34, 6, 2
+	createsprite gUnknown_08593958, 0x28, 0, -24, -15, 26, 32, 7, 0
 	call AnimScript_82D3EF8
 	delay 0x21
-	createsprite 0x8593958, 0x28, 0, -24, -48, 18, 31, 0, 2
-	createsprite 0x8593958, 0x28, 0, -24, 48, -20, 30, 2, 5
-	createsprite 0x8593958, 0x28, 0, -24, 38, 29, 33, 4, 3
-	createsprite 0x8593958, 0x28, 0, -24, -36, -18, 30, 6, 1
+	createsprite gUnknown_08593958, 0x28, 0, -24, -48, 18, 31, 0, 2
+	createsprite gUnknown_08593958, 0x28, 0, -24, 48, -20, 30, 2, 5
+	createsprite gUnknown_08593958, 0x28, 0, -24, 38, 29, 33, 4, 3
+	createsprite gUnknown_08593958, 0x28, 0, -24, -36, -18, 30, 6, 1
 	call AnimScript_82D3EF8
 	waitforvisualfinish
 	createvisualtask sub_8105D60, 0x5
@@ -7828,22 +7828,22 @@ Move_HEAL_BELL:
 	unloadspritegfx 0x27DB
 	loadspritegfx 0x2741
 	playsewithpan SE_W234, -64
-	createsprite 0x8592B94, 0x10, -15, 0, 0, 0, 32, 60, 1
+	createsprite gUnknown_08592B94, 0x10, -15, 0, 0, 0, 32, 60, 1
 	delay 0x8
-	createsprite 0x8592B94, 0x10, 12, -5, 0, 0, 32, 60, 1
+	createsprite gUnknown_08592B94, 0x10, 12, -5, 0, 0, 32, 60, 1
 	waitforvisualfinish
 	unloadspritegfx 0x2741
 	loadspritegfx 0x27DB
 	playsewithpan SE_REAPOKE, -64
 	createvisualtask sub_8116664, 0xA, 4, 3, 10, 0, 31500
 	createvisualtask sub_8116620, 0xA, 10, 3, 10, 0, 0x7FFF
-	createsprite 0x8593868, 0x10, 0, 0, 0, 1
+	createsprite gUnknown_08593868, 0x10, 0, 0, 0, 1
 	end
 
 AnimScript_82D3EF8:
 	createvisualtask sub_8116664, 0xA, 4, 3, 8, 0, 31500
 	createvisualtask sub_8116620, 0xA, 10, 3, 2, 10, 0x7FFF
-	createsprite 0x859381C, 0x28, 0, -24, 0, 1
+	createsprite gUnknown_0859381C, 0x28, 0, -24, 0, 1
 	playsewithpan SE_W215, -64
 	return
 
@@ -7855,99 +7855,99 @@ Move_FAKE_OUT:
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 5, 1
 	createvisualtask sub_8106020, 0x3
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 3, 16, 0, 0x7FFF
+	createsprite gUnknown_08597274, 0x2, 1, 3, 16, 0, 0x7FFF
 	end
 
 Move_SCARY_FACE:
 	loadspritegfx 0x27EA
-	createsprite 0x8597274, 0x2, 27, 3, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 27, 3, 0, 16, 0
 	playsewithpan SE_W060, -64
 	waitforvisualfinish
 	delay 0xA
 	playsewithpan SE_W043, -64
 	createvisualtask sub_81064F8, 0x5
 	delay 0xD
-	createsprite 0x8593A84, 0x0, -16, -8
-	createsprite 0x8593A84, 0x0, 16, -8
+	createsprite gUnknown_08593A84, 0x0, -16, -8
+	createsprite gUnknown_08593A84, 0x0, 16, -8
 	waitforvisualfinish
 	createvisualtask sub_810A094, 0x3, 20, 1, 0
 	playsewithpan SE_W081B, +63
-	createsprite 0x8597274, 0x2, 27, 3, 16, 0, 0
+	createsprite gUnknown_08597274, 0x2, 27, 3, 16, 0, 0
 	waitforvisualfinish
 	end
 
 Move_SWEET_KISS:
 	loadspritegfx 0x27E8
 	loadspritegfx 0x27EC
-	createsprite 0x8593AA8, 0x82, 16, -48
+	createsprite gUnknown_08593AA8, 0x82, 16, -48
 	playsewithpan SE_W215, +63
 	delay 0x17
 	playsewithpan SE_W215, +63
 	delay 0x17
 	playsewithpan SE_W215, +63
 	waitforvisualfinish
-	createsprite 0x85939B8, 0x83, 160, -30
+	createsprite gUnknown_085939B8, 0x83, 160, -30
 	playsewithpan SE_W213, +63
-	createsprite 0x85939B8, 0x83, -256, -42
-	createsprite 0x85939B8, 0x83, 128, -14
-	createsprite 0x85939B8, 0x83, 416, -38
-	createsprite 0x85939B8, 0x83, -128, -22
-	createsprite 0x85939B8, 0x83, -384, -31
+	createsprite gUnknown_085939B8, 0x83, -256, -42
+	createsprite gUnknown_085939B8, 0x83, 128, -14
+	createsprite gUnknown_085939B8, 0x83, 416, -38
+	createsprite gUnknown_085939B8, 0x83, -128, -22
+	createsprite gUnknown_085939B8, 0x83, -384, -31
 	end
 
 Move_LOVELY_KISS:
 	loadspritegfx 0x27EB
 	loadspritegfx 0x27ED
-	createsprite 0x8593AF0, 0x82, 0, -24
+	createsprite gUnknown_08593AF0, 0x82, 0, -24
 	playsewithpan SE_W060B, +63
 	waitforvisualfinish
 	playsewithpan SE_W213, +63
-	createsprite 0x8593AC0, 0x83, -256, -42
-	createsprite 0x8593AC0, 0x83, 128, -14
-	createsprite 0x8593AC0, 0x83, 416, -38
-	createsprite 0x8593AC0, 0x83, -128, -22
+	createsprite gUnknown_08593AC0, 0x83, -256, -42
+	createsprite gUnknown_08593AC0, 0x83, 128, -14
+	createsprite gUnknown_08593AC0, 0x83, 416, -38
+	createsprite gUnknown_08593AC0, 0x83, -128, -22
 	end
 
 Move_FURY_SWIPES:
 	loadspritegfx 0x27EE
-	createsprite 0x857FE28, 0x2, 5, 5
+	createsprite gUnknown_0857FE28, 0x2, 5, 5
 	delay 0x4
 	playsewithpan SE_W010, +63
-	createsprite 0x8593B38, 0x82, 16, 0, 1
+	createsprite gUnknown_08593B38, 0x82, 16, 0, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 5, 1
 	delay 0xA
-	createsprite 0x857FE28, 0x82, 5, 5
+	createsprite gUnknown_0857FE28, 0x82, 5, 5
 	delay 0x4
 	playsewithpan SE_W010, +63
-	createsprite 0x8593B38, 0x82, -16, 0, 0
+	createsprite gUnknown_08593B38, 0x82, -16, 0, 0
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 7, 1
 	end
 
 Move_INGRAIN:
 	loadspritegfx 0x27EF
 	loadspritegfx 0x27A3
-	createsprite 0x859254C, 0x2, 16, 26, -1, 2, 150
+	createsprite gUnknown_0859254C, 0x2, 16, 26, -1, 2, 150
 	playsewithpan SE_W010, -64
 	delay 0xA
-	createsprite 0x859254C, 0x2, -32, 20, 1, 1, 140
+	createsprite gUnknown_0859254C, 0x2, -32, 20, 1, 1, 140
 	playsewithpan SE_W010, -64
 	delay 0xA
-	createsprite 0x859254C, 0x2, 32, 22, 1, 0, 130
+	createsprite gUnknown_0859254C, 0x2, 32, 22, 1, 0, 130
 	playsewithpan SE_W010, -64
 	delay 0xA
-	createsprite 0x859254C, 0x2, -16, 25, -1, 3, 120
+	createsprite gUnknown_0859254C, 0x2, -16, 25, -1, 3, 120
 	playsewithpan SE_W010, -64
 	delay 0x28
-	createsprite 0x859258C, 0x3, 32, 26, -1, 3, 30
+	createsprite gUnknown_0859258C, 0x3, 32, 26, -1, 3, 30
 	delay 0x5
 	playsewithpan SE_W145C, -64
 	delay 0x5
-	createsprite 0x859258C, 0x3, -48, 20, 1, 2, 30
+	createsprite gUnknown_0859258C, 0x3, -48, 20, 1, 2, 30
 	playsewithpan SE_W145C, -64
 	delay 0x5
 	playsewithpan SE_W145C, -64
 	delay 0x5
-	createsprite 0x859258C, 0x3, 48, 26, -2, 3, 18
+	createsprite gUnknown_0859258C, 0x3, 48, 26, -2, 3, 18
 	playsewithpan SE_W145C, -64
 	delay 0xA
 	waitforvisualfinish
@@ -7956,7 +7956,7 @@ Move_INGRAIN:
 Move_PRESENT:
 	loadspritegfx 0x27F0
 	createvisualtask sub_815A904, 0x2
-	createsprite 0x8592610, 0x82, 0, -5, 10, 2, -1
+	createsprite gUnknown_08592610, 0x82, 0, -5, 10, 2, -1
 	playsewithpan SE_W039, -64
 	delay 0xE
 	playsewithpan SE_W145B, -64
@@ -7972,42 +7972,42 @@ Move_PRESENT:
 AnimScript_82D41D4:
 	loadspritegfx 0x27D6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_0859371C, 0x83, 0, 0, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x83, 24, -24, 1, 1
+	createsprite gUnknown_0859371C, 0x83, 24, -24, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x83, -16, 16, 1, 1
+	createsprite gUnknown_0859371C, 0x83, -16, 16, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x83, -24, -12, 1, 1
+	createsprite gUnknown_0859371C, 0x83, -24, -12, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x83, 16, 16, 1, 1
+	createsprite gUnknown_0859371C, 0x83, 16, 16, 1, 1
 	end
 
 AnimScript_82D423F:
 	loadspritegfx 0x27D3
 	loadspritegfx 0x272F
 	playsewithpan SE_W234, +63
-	createsprite 0x8592658, 0x84, -16, 32, -3, 1
+	createsprite gUnknown_08592658, 0x84, -16, 32, -3, 1
 	delay 0x3
-	createsprite 0x8592658, 0x84, 16, 32, -3, -1
+	createsprite gUnknown_08592658, 0x84, 16, 32, -3, -1
 	delay 0x3
-	createsprite 0x8592658, 0x84, 32, 32, -3, 1
+	createsprite gUnknown_08592658, 0x84, 32, 32, -3, 1
 	delay 0x3
-	createsprite 0x8592658, 0x84, -32, 32, -3, 1
+	createsprite gUnknown_08592658, 0x84, -32, 32, -3, 1
 	delay 0x3
-	createsprite 0x8592658, 0x84, 0, 32, -3, 1
+	createsprite gUnknown_08592658, 0x84, 0, 32, -3, 1
 	delay 0x3
-	createsprite 0x8592658, 0x84, -8, 32, -3, 1
+	createsprite gUnknown_08592658, 0x84, -8, 32, -3, 1
 	delay 0x3
-	createsprite 0x8592658, 0x84, -8, 32, -3, 1
+	createsprite gUnknown_08592658, 0x84, -8, 32, -3, 1
 	delay 0x3
-	createsprite 0x8592658, 0x84, 24, 32, -3, 1
+	createsprite gUnknown_08592658, 0x84, 24, 32, -3, 1
 	delay 0x3
-	createsprite 0x8592658, 0x84, -24, 32, -3, 1
+	createsprite gUnknown_08592658, 0x84, -24, 32, -3, 1
 	waitforvisualfinish
 	waitsound
 	call AnimScript_82D7A28
@@ -8017,38 +8017,38 @@ Move_BATON_PASS:
 	loadspritegfx 0x27F2
 	playsewithpan SE_W226, -64
 	createvisualtask sub_8115A04, 0x2, 31, 1, 2, 0, 11, 31455
-	createsprite 0x85CE370, 0x2
+	createsprite gUnknown_085CE370, 0x2
 	end
 
 Move_PERISH_SONG:
 	loadspritegfx 0x27DE
-	createsprite 0x8593C0C, 0x4, 0, 0, 0
-	createsprite 0x8593C0C, 0x4, 1, 1, 16
-	createsprite 0x8593C0C, 0x4, 2, 1, 32
-	createsprite 0x8593C0C, 0x4, 3, 2, 48
-	createsprite 0x8593C0C, 0x4, 4, 2, 64
-	createsprite 0x8593C0C, 0x4, 5, 0, 80
-	createsprite 0x8593C0C, 0x4, 6, 0, 96
-	createsprite 0x8593C0C, 0x4, 7, 1, 112
-	createsprite 0x8593C0C, 0x4, 8, 2, 128
-	createsprite 0x8593C0C, 0x4, 9, 0, 144
-	createsprite 0x8593C0C, 0x4, 10, 2, 160
-	createsprite 0x8593C0C, 0x4, 11, 0, 176
-	createsprite 0x8593C0C, 0x4, 12, 1, 192
-	createsprite 0x8593C0C, 0x4, 13, 3, 208
-	createsprite 0x8593C0C, 0x4, 14, 3, 224
-	createsprite 0x8593C0C, 0x4, 15, 0, 240
-	createsprite 0x8593C24, 0x4, 15, 0, 0
+	createsprite gUnknown_08593C0C, 0x4, 0, 0, 0
+	createsprite gUnknown_08593C0C, 0x4, 1, 1, 16
+	createsprite gUnknown_08593C0C, 0x4, 2, 1, 32
+	createsprite gUnknown_08593C0C, 0x4, 3, 2, 48
+	createsprite gUnknown_08593C0C, 0x4, 4, 2, 64
+	createsprite gUnknown_08593C0C, 0x4, 5, 0, 80
+	createsprite gUnknown_08593C0C, 0x4, 6, 0, 96
+	createsprite gUnknown_08593C0C, 0x4, 7, 1, 112
+	createsprite gUnknown_08593C0C, 0x4, 8, 2, 128
+	createsprite gUnknown_08593C0C, 0x4, 9, 0, 144
+	createsprite gUnknown_08593C0C, 0x4, 10, 2, 160
+	createsprite gUnknown_08593C0C, 0x4, 11, 0, 176
+	createsprite gUnknown_08593C0C, 0x4, 12, 1, 192
+	createsprite gUnknown_08593C0C, 0x4, 13, 3, 208
+	createsprite gUnknown_08593C0C, 0x4, 14, 3, 224
+	createsprite gUnknown_08593C0C, 0x4, 15, 0, 240
+	createsprite gUnknown_08593C24, 0x4, 15, 0, 0
 	delay 0x14
 	panse_1B SE_W195, -64, +63, +2, 0x0
 	delay 0x50
-	createsprite 0x8597274, 0x2, 1, 3, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 1, 3, 0, 16, 0
 	createvisualtask sub_811489C, 0x5, 4, 0
 	createvisualtask sub_811489C, 0x5, 5, 0
 	createvisualtask sub_811489C, 0x5, 6, 0
 	createvisualtask sub_811489C, 0x5, 7, 0
 	delay 0x64
-	createsprite 0x8597274, 0x2, 1, 3, 16, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 3, 16, 0, 0
 	createvisualtask sub_811489C, 0x5, 4, 1
 	createvisualtask sub_811489C, 0x5, 5, 1
 	createvisualtask sub_811489C, 0x5, 6, 1
@@ -8060,26 +8060,26 @@ Move_SLEEP_TALK:
 	loadspritegfx 0x27F4
 	createvisualtask sub_80D5EB8, 0x5, 0, 4, 4096, 2, 0
 	delay 0x14
-	createsprite 0x85CE190, 0x82, 0, 20, 5, -1
+	createsprite gUnknown_085CE190, 0x82, 0, 20, 5, -1
 	playsewithpan SE_W173, -64
 	delay 0x6
-	createsprite 0x85CE190, 0x82, 0, 20, 5, -1
+	createsprite gUnknown_085CE190, 0x82, 0, 20, 5, -1
 	delay 0x6
-	createsprite 0x85CE190, 0x82, 0, 20, 5, -1
+	createsprite gUnknown_085CE190, 0x82, 0, 20, 5, -1
 	delay 0x14
-	createsprite 0x85CE190, 0x82, 0, 20, 5, -5
+	createsprite gUnknown_085CE190, 0x82, 0, 20, 5, -5
 	playsewithpan SE_W173, -64
 	delay 0x6
-	createsprite 0x85CE190, 0x82, 0, 20, 5, -5
+	createsprite gUnknown_085CE190, 0x82, 0, 20, 5, -5
 	delay 0x6
-	createsprite 0x85CE190, 0x82, 0, 20, 5, -5
+	createsprite gUnknown_085CE190, 0x82, 0, 20, 5, -5
 	delay 0x14
-	createsprite 0x85CE190, 0x82, 0, 20, 5, -3
+	createsprite gUnknown_085CE190, 0x82, 0, 20, 5, -3
 	playsewithpan SE_W173, -64
 	delay 0x6
-	createsprite 0x85CE190, 0x82, 0, 20, 5, -3
+	createsprite gUnknown_085CE190, 0x82, 0, 20, 5, -3
 	delay 0x6
-	createsprite 0x85CE190, 0x82, 0, 20, 5, -3
+	createsprite gUnknown_085CE190, 0x82, 0, 20, 5, -3
 	waitforvisualfinish
 	end
 
@@ -8096,7 +8096,7 @@ Move_HYPER_FANG:
 
 AnimScript_82D455C:
 	waitbgfadeout
-	createsprite 0x85CE1DC, 0x82
+	createsprite gUnknown_085CE1DC, 0x82
 	waitbgfadein
 	createvisualtask sub_80D51AC, 0x3, 1, 0, 10, 10, 1
 	playsewithpan SE_W043, +63
@@ -8120,42 +8120,42 @@ AnimScript_82D458E:
 
 Move_TRI_ATTACK:
 	loadspritegfx 0x27F6
-	createsprite 0x85CE2F8, 0x82, 16, 0
+	createsprite gUnknown_085CE2F8, 0x82, 16, 0
 	playsewithpan SE_W161, -64
 	delay 0x14
 	playsewithpan SE_W161, -64
 	delay 0x14
 	createsoundtask sub_8158C58, 220, -64, 63, 5, 6, 0, 7
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 2, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 16, 0
 	delay 0x10
 	loadspritegfx 0x2731
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, -1, 0
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, -1, 0
 	playsewithpan SE_W172B, +63
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, 0, 1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, 0, 1
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, -1, -1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, -1, -1
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, 2, 1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, 2, 1
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, 1, -1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, 1, -1
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, -1, 1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, -1, 1
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, 1, -2
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, 1, -2
 	delay 0x1
-	createsprite 0x8595410, 0x82, 0, 0, 30, 30, 3, 1
+	createsprite gUnknown_08595410, 0x82, 0, 0, 30, 30, 3, 1
 	delay 0x2
 	createvisualtask sub_810A094, 0x2, 20, 3, 1, 1
 	waitforvisualfinish
 	loadspritegfx 0x2735
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	playsewithpan SE_W161B, +63
-	createsprite 0x85956C0, 0x82, 0, -48
+	createsprite gUnknown_085956C0, 0x82, 0, -48
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 0, -16
+	createsprite gUnknown_085956C0, 0x82, 0, -16
 	delay 0x1
-	createsprite 0x85956C0, 0x82, 0, 16
+	createsprite gUnknown_085956C0, 0x82, 0, 16
 	delay 0x14
 	createvisualtask sub_810A094, 0x2, 20, 3, 1, 0
 	delay 0x2
@@ -8163,7 +8163,7 @@ Move_TRI_ATTACK:
 	waitforvisualfinish
 	loadspritegfx 0x279D
 	call AnimScript_82D7720
-	createsprite 0x8597274, 0x2, 1, 2, 16, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 16, 0, 0
 	waitforvisualfinish
 	end
 
@@ -8175,25 +8175,25 @@ Move_WILL_O_WISP:
 	playsewithpan SE_W052, -64
 	waitplaysewithpan SE_W052, -64, 0xA
 	createvisualtask sub_8159278, 0x2, -64, -64, 1, 0
-	createsprite 0x859563C, 0x2, 0, 0, 0
+	createsprite gUnknown_0859563C, 0x2, 0, 0, 0
 	delay 0x3
-	createsprite 0x859563C, 0x3, 0, 0, 1
+	createsprite gUnknown_0859563C, 0x3, 0, 0, 1
 	delay 0x3
-	createsprite 0x859563C, 0x4, 0, 0, 2
+	createsprite gUnknown_0859563C, 0x4, 0, 0, 2
 	delay 0x3
-	createsprite 0x859563C, 0x4, 0, 0, 3
+	createsprite gUnknown_0859563C, 0x4, 0, 0, 3
 	delay 0x28
 	createvisualtask sub_8159278, 0x2, -64, 63, 2, 0
 	waitforvisualfinish
 	monbgprio_29
 	playsewithpan SE_W172B, +63
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 13, 1
-	createsprite 0x859566C, 0x2, 0
-	createsprite 0x859566C, 0x2, 42
-	createsprite 0x859566C, 0x2, 84
-	createsprite 0x859566C, 0x2, 126
-	createsprite 0x859566C, 0x2, 168
-	createsprite 0x859566C, 0x2, 210
+	createsprite gUnknown_0859566C, 0x2, 0
+	createsprite gUnknown_0859566C, 0x2, 42
+	createsprite gUnknown_0859566C, 0x2, 84
+	createsprite gUnknown_0859566C, 0x2, 126
+	createsprite gUnknown_0859566C, 0x2, 168
+	createsprite gUnknown_0859566C, 0x2, 210
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
@@ -8204,11 +8204,11 @@ Move_ENCORE:
 	createvisualtask sub_815ABEC, 0x2
 	createvisualtask sub_8116960, 0x2, 248, 3, 0, 10, 0
 	waitforvisualfinish
-	createsprite 0x85CE22C, 0x82, 0, -8
-	createsprite 0x85CE244, 0x2, -2, 0, 0, 0, 9
-	createsprite 0x85CE244, 0x2, 2, 0, 1, 0, 9
-	createsprite 0x85CE25C, 0x3, -2, 0, 0, 0, 9
-	createsprite 0x85CE25C, 0x3, 2, 0, 1, 0, 9
+	createsprite gUnknown_085CE22C, 0x82, 0, -8
+	createsprite gUnknown_085CE244, 0x2, -2, 0, 0, 0, 9
+	createsprite gUnknown_085CE244, 0x2, 2, 0, 1, 0, 9
+	createsprite gUnknown_085CE25C, 0x3, -2, 0, 0, 0, 9
+	createsprite gUnknown_085CE25C, 0x3, 2, 0, 1, 0, 9
 	delay 0x10
 	createvisualtask sub_8159244, 0x5, 223, 63
 	createvisualtask sub_80D5EB8, 0x5, 1, 8, 1536, 5, 1
@@ -8221,8 +8221,8 @@ Move_ENCORE:
 Move_TRICK:
 	loadspritegfx 0x27F0
 	loadspritegfx 0x27DF
-	createsprite 0x85926E8, 0x2, -40, 80
-	createsprite 0x85926E8, 0x2, -40, 208
+	createsprite gUnknown_085926E8, 0x2, -40, 80
+	createsprite gUnknown_085926E8, 0x2, -40, 208
 	delay 0x10
 	playsewithpan SE_W166, 0
 	createvisualtask sub_8106020, 0x3
@@ -8249,16 +8249,16 @@ Move_TRICK:
 Move_WISH:
 	loadspritegfx 0x27F9
 	loadspritegfx 0x2741
-	createsprite 0x8597274, 0x2, 1, 3, 0, 10, 0
+	createsprite gUnknown_08597274, 0x2, 1, 3, 0, 10, 0
 	waitforvisualfinish
 	panse_27 SE_W115, +63, -64, -3, 0x0
-	createsprite 0x85CE388, 0x28
+	createsprite gUnknown_085CE388, 0x28
 	waitforvisualfinish
 	delay 0x3C
 	loopsewithpan SE_W215, -64, 0x10, 0x3
 	call AnimScript_82D79B4
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 3, 10, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 3, 10, 0, 0
 	waitforvisualfinish
 	end
 
@@ -8270,25 +8270,25 @@ Move_STOCKPILE:
 	call AnimScript_82D4972
 	call AnimScript_82D4972
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 2, 0, 12, 0, 0x7FFF
+	createsprite gUnknown_08597274, 0x2, 2, 0, 12, 0, 0x7FFF
 	end
 
 AnimScript_82D4972:
-	createsprite 0x8592244, 0x2, 55, 55, 13
+	createsprite gUnknown_08592244, 0x2, 55, 55, 13
 	delay 0x1
-	createsprite 0x8592244, 0x2, -55, -55, 13
+	createsprite gUnknown_08592244, 0x2, -55, -55, 13
 	delay 0x1
-	createsprite 0x8592244, 0x2, 0, 55, 13
+	createsprite gUnknown_08592244, 0x2, 0, 55, 13
 	delay 0x1
-	createsprite 0x8592244, 0x2, 0, -55, 13
+	createsprite gUnknown_08592244, 0x2, 0, -55, 13
 	delay 0x1
-	createsprite 0x8592244, 0x2, 55, -34, 13
+	createsprite gUnknown_08592244, 0x2, 55, -34, 13
 	delay 0x1
-	createsprite 0x8592244, 0x2, 55, 34, 13
+	createsprite gUnknown_08592244, 0x2, 55, 34, 13
 	delay 0x1
-	createsprite 0x8592244, 0x2, -55, -34, 13
+	createsprite gUnknown_08592244, 0x2, -55, -34, 13
 	delay 0x1
-	createsprite 0x8592244, 0x2, -55, 34, 13
+	createsprite gUnknown_08592244, 0x2, -55, 34, 13
 	delay 0x1
 	return
 
@@ -8301,14 +8301,14 @@ Move_SPIT_UP:
 	delay 0x2D
 	playsewithpan SE_W255, -64
 	delay 0x3
-	createsprite 0x8593A50, 0x2, 0, 12
-	createsprite 0x8593A50, 0x2, 32, 12
-	createsprite 0x8593A50, 0x2, 64, 12
-	createsprite 0x8593A50, 0x2, 96, 12
-	createsprite 0x8593A50, 0x2, 128, 12
-	createsprite 0x8593A50, 0x2, 160, 12
-	createsprite 0x8593A50, 0x2, 192, 12
-	createsprite 0x8593A50, 0x2, 224, 12
+	createsprite gUnknown_08593A50, 0x2, 0, 12
+	createsprite gUnknown_08593A50, 0x2, 32, 12
+	createsprite gUnknown_08593A50, 0x2, 64, 12
+	createsprite gUnknown_08593A50, 0x2, 96, 12
+	createsprite gUnknown_08593A50, 0x2, 128, 12
+	createsprite gUnknown_08593A50, 0x2, 160, 12
+	createsprite gUnknown_08593A50, 0x2, 192, 12
+	createsprite gUnknown_08593A50, 0x2, 224, 12
 	delay 0x5
 	jumpifmoveturn 0x2, AnimScript_82D4AB8
 	jumpifmoveturn 0x3, AnimScript_82D4AE1
@@ -8317,29 +8317,29 @@ AnimScript_82D4A7B:
 	delay 0x5
 	createvisualtask sub_80D6388, 0x2, 0, 1, 8, 1, 0
 	playsewithpan SE_W003, +63
-	createsprite 0x85973E8, 0x83, -12, 10, 1, 1
+	createsprite gUnknown_085973E8, 0x83, -12, 10, 1, 1
 	delay 0x5
 	playsewithpan SE_W003, +63
-	createsprite 0x85973E8, 0x83, 12, -10, 1, 1
+	createsprite gUnknown_085973E8, 0x83, 12, -10, 1, 1
 	waitforvisualfinish
 	end
 
 AnimScript_82D4AB8:
-	createsprite 0x8593A50, 0x2, 16
-	createsprite 0x8593A50, 0x2, 80
-	createsprite 0x8593A50, 0x2, 144
-	createsprite 0x8593A50, 0x2, 208
+	createsprite gUnknown_08593A50, 0x2, 16
+	createsprite gUnknown_08593A50, 0x2, 80
+	createsprite gUnknown_08593A50, 0x2, 144
+	createsprite gUnknown_08593A50, 0x2, 208
 	goto AnimScript_82D4A7B
 
 AnimScript_82D4AE1:
-	createsprite 0x8593A50, 0x2, 16
-	createsprite 0x8593A50, 0x2, 48
-	createsprite 0x8593A50, 0x2, 80
-	createsprite 0x8593A50, 0x2, 112
-	createsprite 0x8593A50, 0x2, 144
-	createsprite 0x8593A50, 0x2, 176
-	createsprite 0x8593A50, 0x2, 208
-	createsprite 0x8593A50, 0x2, 240
+	createsprite gUnknown_08593A50, 0x2, 16
+	createsprite gUnknown_08593A50, 0x2, 48
+	createsprite gUnknown_08593A50, 0x2, 80
+	createsprite gUnknown_08593A50, 0x2, 112
+	createsprite gUnknown_08593A50, 0x2, 144
+	createsprite gUnknown_08593A50, 0x2, 176
+	createsprite gUnknown_08593A50, 0x2, 208
+	createsprite gUnknown_08593A50, 0x2, 240
 	goto AnimScript_82D4A7B
 
 Move_SWALLOW:
@@ -8361,15 +8361,15 @@ AnimScript_82D4B78:
 	end
 
 AnimScript_82D4B7F:
-	createsprite 0x85CE418, 0x2, 0, -8
+	createsprite gUnknown_085CE418, 0x2, 0, -8
 	delay 0x1
-	createsprite 0x85CE418, 0x2, -24, -8
+	createsprite gUnknown_085CE418, 0x2, -24, -8
 	delay 0x1
-	createsprite 0x85CE418, 0x2, 16, -8
+	createsprite gUnknown_085CE418, 0x2, 16, -8
 	delay 0x1
-	createsprite 0x85CE418, 0x2, -16, -8
+	createsprite gUnknown_085CE418, 0x2, -16, -8
 	delay 0x1
-	createsprite 0x85CE418, 0x2, 24, -8
+	createsprite gUnknown_085CE418, 0x2, 24, -8
 	delay 0x1
 	return
 
@@ -8420,18 +8420,18 @@ Move_MORNING_SUN:
 	end
 
 AnimScript_82D4C78:
-	createsprite 0x85CE48C, 0x2, 30, 640
+	createsprite gUnknown_085CE48C, 0x2, 30, 640
 	delay 0x5
 	return
 
 Move_SWEET_SCENT:
 	loadspritegfx 0x27FE
 	playsewithpan SE_W230, -64
-	createsprite 0x85CE544, 0x2, 100, 0, 100
+	createsprite gUnknown_085CE544, 0x2, 100, 0, 100
 	delay 0x19
 	setpan 0
 	call AnimScript_82D4CCA
-	createsprite 0x85CE544, 0x2, 55, 0
+	createsprite gUnknown_085CE544, 0x2, 55, 0
 	setpan +63
 	createvisualtask sub_8115A04, 0x2, 20, 1, 5, 5, 13, 22207
 	call AnimScript_82D4CCA
@@ -8439,33 +8439,33 @@ Move_SWEET_SCENT:
 	end
 
 AnimScript_82D4CCA:
-	createsprite 0x85CE544, 0x2, 70, 1, 64
+	createsprite gUnknown_085CE544, 0x2, 70, 1, 64
 	delay 0x2
-	createsprite 0x85CE544, 0x2, 60, 0, 64
+	createsprite gUnknown_085CE544, 0x2, 60, 0, 64
 	delay 0x5
-	createsprite 0x85CE544, 0x2, 80, 1, 64
+	createsprite gUnknown_085CE544, 0x2, 80, 1, 64
 	delay 0x2
-	createsprite 0x85CE544, 0x2, 58, 0, 120
+	createsprite gUnknown_085CE544, 0x2, 58, 0, 120
 	delay 0x2
-	createsprite 0x85CE544, 0x2, 100, 0, 120
+	createsprite gUnknown_085CE544, 0x2, 100, 0, 120
 	delay 0x2
-	createsprite 0x85CE544, 0x2, 90, 0, 64
+	createsprite gUnknown_085CE544, 0x2, 90, 0, 64
 	delay 0x2
-	createsprite 0x85CE544, 0x2, 48, 0, 64
+	createsprite gUnknown_085CE544, 0x2, 48, 0, 64
 	delay 0x2
-	createsprite 0x85CE544, 0x2, 95, 1, 80
+	createsprite gUnknown_085CE544, 0x2, 95, 1, 80
 	delay 0x2
-	createsprite 0x85CE544, 0x2, 100, 0, 120
+	createsprite gUnknown_085CE544, 0x2, 100, 0, 120
 	delay 0x2
-	createsprite 0x85CE544, 0x2, 75, 1, 64
+	createsprite gUnknown_085CE544, 0x2, 75, 1, 64
 	delay 0x2
-	createsprite 0x85CE544, 0x2, 85, 0, 120
+	createsprite gUnknown_085CE544, 0x2, 85, 0, 120
 	delay 0x2
 	return
 
 Move_HYPER_BEAM:
 	loadspritegfx 0x27A3
-	createsprite 0x8597274, 0x2, 1, 4, 0, 16, 0
+	createsprite gUnknown_08597274, 0x2, 1, 4, 0, 16, 0
 	waitforvisualfinish
 	delay 0xA
 	playsewithpan SE_W063, -64
@@ -8505,12 +8505,12 @@ Move_HYPER_BEAM:
 	call AnimScript_82D4EA1
 	createvisualtask sub_8116620, 0xA, 4, 2, 11, 0, 26425
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 4, 16, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 4, 16, 0, 0
 	end
 
 AnimScript_82D4EA1:
-	createsprite 0x8592288, 0x82
-	createsprite 0x8592288, 0x82
+	createsprite gUnknown_08592288, 0x82
+	createsprite gUnknown_08592288, 0x82
 	delay 0x1
 	return
 
@@ -8521,11 +8521,11 @@ Move_FLATTER:
 	createvisualtask sub_815ABEC, 0x2
 	createvisualtask sub_8116960, 0x2, 248, 3, 0, 10, 0
 	waitforvisualfinish
-	createsprite 0x85CE5C0, 0x82, 0, -8, 80
+	createsprite gUnknown_085CE5C0, 0x82, 0, -8, 80
 	delay 0x0
-	createsprite 0x857FE40, 0x2, 5, 2, 1
+	createsprite gUnknown_0857FE40, 0x2, 5, 2, 1
 	delay 0xA
-	createsprite 0x857FE40, 0x2, 5, 2, 1
+	createsprite gUnknown_0857FE40, 0x2, 5, 2, 1
 	delay 0x0
 	createvisualtask sub_8159210, 0x5, 229, -64
 	call AnimScript_82D4F9B
@@ -8556,14 +8556,14 @@ Move_FLATTER:
 	end
 
 AnimScript_82D4F9B:
-	createsprite 0x85CE5A8, 0x28, 0
-	createsprite 0x85CE5A8, 0x28, 1
+	createsprite gUnknown_085CE5A8, 0x28, 0
+	createsprite gUnknown_085CE5A8, 0x28, 1
 	return
 
 Move_ROLE_PLAY:
 	monbg ANIM_ATK_PARTNER
 	createvisualtask sub_8116620, 0xA, 4, 2, 0, 16, 0x7FFF
-	createsprite 0x8597274, 0x2, 1, 2, 0, 10, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 0, 10, 0
 	waitforvisualfinish
 	playsewithpan SE_W161, -64
 	waitplaysewithpan SE_W197, -64, 0x1E
@@ -8572,7 +8572,7 @@ Move_ROLE_PLAY:
 	clearmonbg ANIM_ATK_PARTNER
 	createvisualtask sub_8116620, 0xA, 4, 2, 16, 0, 0x7FFF
 	delay 0x8
-	createsprite 0x8597274, 0x2, 1, 2, 10, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 2, 10, 0, 0
 	end
 
 Move_REFRESH:
@@ -8585,8 +8585,8 @@ Move_REFRESH:
 	call AnimScript_82D79B4
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, -64
-	createsprite 0x8597274, 0x2, 31, 3, 10, 0, 31500
-	createsprite 0x859381C, 0x3, 0, 0, 0, 0
+	createsprite gUnknown_08597274, 0x2, 31, 3, 10, 0, 31500
+	createsprite gUnknown_0859381C, 0x3, 0, 0, 0, 0
 	end
 
 Move_BLAZE_KICK:
@@ -8596,14 +8596,14 @@ Move_BLAZE_KICK:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W172, +63
-	createsprite 0x8595F14, 0x83, 0, 0, 1, 30
+	createsprite gUnknown_08595F14, 0x83, 0, 0, 1, 30
 	createvisualtask sub_8116620, 0xA, 4, 2, 0, 7, 0x7FFF
 	delay 0x1E
 	playsewithpan SE_W007, +63
-	createsprite 0x8597358, 0x82, 0, 0, 1, 0
+	createsprite gUnknown_08597358, 0x82, 0, 0, 1, 0
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 14, 1
 	createvisualtask sub_8116620, 0xA, 4, 2, 0, 0, 0x7FFF
-	createsprite 0x859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 3, 1, 0, 8, 0, 0
 	call AnimScript_82D2D18
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -8622,9 +8622,9 @@ Move_HYPER_VOICE:
 	end
 
 AnimScript_82D50FA:
-	createsprite 0x8597274, 0x2, 31, 3, 8, 0, 1023
+	createsprite gUnknown_08597274, 0x2, 31, 3, 8, 0, 1023
 	createvisualtask sub_80D6064, 0x5, -5, -5, 5, 0, 0
-	createsprite 0x8593880, 0x0, 45, 0, 0, 0, 0, 0, 1
+	createsprite gUnknown_08593880, 0x0, 45, 0, 0, 0, 0, 0, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 1, 0, 6, 1
 	createvisualtask sub_80D52D0, 0x2, 3, 1, 0, 6, 1
 	createvisualtask sub_81162A4, 0x2, 1, 0, 6, 1
@@ -8633,29 +8633,29 @@ AnimScript_82D50FA:
 
 Move_SAND_TOMB:
 	loadspritegfx 0x275A
-	createsprite 0x8597274, 0x0, 4, 2, 0, 7, 563
+	createsprite gUnknown_08597274, 0x0, 4, 2, 0, 7, 563
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 2, 43, 1
 	playsewithpan SE_W328, +63
 	call AnimScript_82D51B7
 	call AnimScript_82D51B7
 	call AnimScript_82D51B7
 	delay 0x16
-	createsprite 0x8597274, 0x0, 4, 2, 7, 0, 563
+	createsprite gUnknown_08597274, 0x0, 4, 2, 7, 0, 563
 	waitforvisualfinish
 	end
 
 AnimScript_82D51B7:
-	createsprite 0x8596B34, 0x82, 0, 32, 528, 30, 10, 50, 1
+	createsprite gUnknown_08596B34, 0x82, 0, 32, 528, 30, 10, 50, 1
 	delay 0x2
-	createsprite 0x8596B34, 0x82, 0, 36, 480, 20, 13, -46, 1
+	createsprite gUnknown_08596B34, 0x82, 0, 36, 480, 20, 13, -46, 1
 	delay 0x2
-	createsprite 0x8596B34, 0x82, 0, 37, 576, 20, 5, 42, 1
+	createsprite gUnknown_08596B34, 0x82, 0, 37, 576, 20, 5, 42, 1
 	delay 0x2
-	createsprite 0x8596B34, 0x82, 0, 35, 400, 25, 8, -42, 1
+	createsprite gUnknown_08596B34, 0x82, 0, 35, 400, 25, 8, -42, 1
 	delay 0x2
-	createsprite 0x8596B34, 0x82, 0, 32, 512, 25, 13, 46, 1
+	createsprite gUnknown_08596B34, 0x82, 0, 32, 512, 25, 13, 46, 1
 	delay 0x2
-	createsprite 0x8596B34, 0x82, 0, 37, 464, 30, 12, -50, 1
+	createsprite gUnknown_08596B34, 0x82, 0, 37, 464, 30, 12, -50, 1
 	delay 0x2
 	return
 
@@ -8684,10 +8684,10 @@ Move_ARM_THRUST:
 	setalpha 0x80C
 	createvisualtask sub_80D6134, 0x5, 8, 5, 0, 0
 	delay 0x6
-	createsprite 0x857FE28, 0x2, 4, 3
+	createsprite gUnknown_0857FE28, 0x2, 4, 3
 	delay 0x4
 	playsewithpan SE_W207, +63
-	createsprite 0x8596034, 0x82, 10, -8, 14, 3
+	createsprite gUnknown_08596034, 0x82, 10, -8, 14, 3
 	waitforvisualfinish
 	createvisualtask sub_80D6134, 0x5, 8, 5, 0, 1
 	playsewithpan SE_W003, +63
@@ -8700,11 +8700,11 @@ AnimScript_82D52C0:
 	end
 
 AnimScript_82D52D4:
-	createsprite 0x8597358, 0x82, 8, 0, 1, 2
+	createsprite gUnknown_08597358, 0x82, 8, 0, 1, 2
 	goto AnimScript_82D52C0
 
 AnimScript_82D52E8:
-	createsprite 0x8597358, 0x82, -8, 0, 1, 2
+	createsprite gUnknown_08597358, 0x82, -8, 0, 1, 2
 	goto AnimScript_82D52C0
 
 Move_MUDDY_WATER:
@@ -8715,26 +8715,26 @@ Move_MUDDY_WATER:
 
 Move_BULLET_SEED:
 	loadspritegfx 0x2716
-	createsprite 0x859351C, 0x82, 20, 0
+	createsprite gUnknown_0859351C, 0x82, 20, 0
 	delay 0x5
-	createsprite 0x859351C, 0x82, 20, 0
+	createsprite gUnknown_0859351C, 0x82, 20, 0
 	delay 0x5
-	createsprite 0x859351C, 0x82, 20, 0
+	createsprite gUnknown_0859351C, 0x82, 20, 0
 	delay 0x5
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 30, 1
-	createsprite 0x859351C, 0x82, 20, 0
+	createsprite gUnknown_0859351C, 0x82, 20, 0
 	delay 0x5
-	createsprite 0x859351C, 0x82, 20, 0
+	createsprite gUnknown_0859351C, 0x82, 20, 0
 	delay 0x5
-	createsprite 0x859351C, 0x82, 20, 0
+	createsprite gUnknown_0859351C, 0x82, 20, 0
 	delay 0x5
-	createsprite 0x859351C, 0x82, 20, 0
+	createsprite gUnknown_0859351C, 0x82, 20, 0
 	delay 0x5
-	createsprite 0x859351C, 0x82, 20, 0
+	createsprite gUnknown_0859351C, 0x82, 20, 0
 	delay 0x5
-	createsprite 0x859351C, 0x82, 20, 0
+	createsprite gUnknown_0859351C, 0x82, 20, 0
 	delay 0x5
-	createsprite 0x859351C, 0x82, 20, 0
+	createsprite gUnknown_0859351C, 0x82, 20, 0
 	waitforvisualfinish
 	end
 
@@ -8746,55 +8746,55 @@ Move_DRAGON_CLAW:
 	createvisualtask sub_80D51AC, 0x5, 0, 0, 2, 15, 1
 	call AnimScript_82D5581
 	call AnimScript_82D5581
-	createsprite 0x857FE28, 0x2, 6, 4
-	createsprite 0x8596B88, 0x2, 0, 28, 528, 30, 13, 50, 0
+	createsprite gUnknown_0857FE28, 0x2, 6, 4
+	createsprite gUnknown_08596B88, 0x2, 0, 28, 528, 30, 13, 50, 0
 	delay 0x2
 	createvisualtask sub_8159210, 0x5, 136, 63
-	createsprite 0x8597138, 0x82, -10, -10, 0
-	createsprite 0x8597138, 0x82, -10, 10, 0
-	createsprite 0x85972D8, 0x2, -4, 1, 10, 3, 1
-	createsprite 0x8596B88, 0x2, 0, 32, 480, 20, 16, -46, 0
+	createsprite gUnknown_08597138, 0x82, -10, -10, 0
+	createsprite gUnknown_08597138, 0x82, -10, 10, 0
+	createsprite gUnknown_085972D8, 0x2, -4, 1, 10, 3, 1
+	createsprite gUnknown_08596B88, 0x2, 0, 32, 480, 20, 16, -46, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 33, 576, 20, 8, 42, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 33, 576, 20, 8, 42, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 31, 400, 25, 11, -42, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 31, 400, 25, 11, -42, 0
 	delay 0x2
-	createsprite 0x857FE28, 0x2, 6, 4
-	createsprite 0x8596B88, 0x2, 0, 28, 512, 25, 16, 46, 0
+	createsprite gUnknown_0857FE28, 0x2, 6, 4
+	createsprite gUnknown_08596B88, 0x2, 0, 28, 512, 25, 16, 46, 0
 	delay 0x2
 	createvisualtask sub_8159210, 0x5, 136, 63
-	createsprite 0x8597138, 0x82, 10, -10, 1
-	createsprite 0x8597138, 0x82, 10, 10, 1
-	createsprite 0x85972D8, 0x2, -4, 1, 10, 3, 1
-	createsprite 0x8596B88, 0x2, 0, 33, 464, 30, 15, -50, 0
+	createsprite gUnknown_08597138, 0x82, 10, -10, 1
+	createsprite gUnknown_08597138, 0x82, 10, 10, 1
+	createsprite gUnknown_085972D8, 0x2, -4, 1, 10, 3, 1
+	createsprite gUnknown_08596B88, 0x2, 0, 33, 464, 30, 15, -50, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 28, 528, 30, 13, 50, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 28, 528, 30, 13, 50, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 32, 480, 20, 16, -46, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 32, 480, 20, 16, -46, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 33, 576, 20, 8, 42, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 33, 576, 20, 8, 42, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 31, 400, 25, 11, -42, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 31, 400, 25, 11, -42, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 28, 512, 25, 16, 46, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 28, 512, 25, 16, 46, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 33, 464, 30, 15, -50, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 33, 464, 30, 15, -50, 0
 	createvisualtask sub_8116620, 0xA, 2, 4, 8, 0, 639
 	waitforvisualfinish
 	end
 
 AnimScript_82D5581:
-	createsprite 0x8596B88, 0x2, 0, 28, 528, 30, 13, 50, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 28, 528, 30, 13, 50, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 32, 480, 20, 16, -46, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 32, 480, 20, 16, -46, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 33, 576, 20, 8, 42, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 33, 576, 20, 8, 42, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 31, 400, 25, 11, -42, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 31, 400, 25, 11, -42, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 28, 512, 25, 16, 46, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 28, 512, 25, 16, 46, 0
 	delay 0x2
-	createsprite 0x8596B88, 0x2, 0, 33, 464, 30, 15, -50, 0
+	createsprite gUnknown_08596B88, 0x2, 0, 33, 464, 30, 15, -50, 0
 	delay 0x2
 	return
 
@@ -8828,9 +8828,9 @@ Move_MUD_SHOT:
 	end
 
 AnimScript_82D5687:
-	createsprite 0x85950FC, 0x3, 10, 10, 0, 16
+	createsprite gUnknown_085950FC, 0x3, 10, 10, 0, 16
 	delay 0x2
-	createsprite 0x85950FC, 0x3, 10, 10, 0, 16
+	createsprite gUnknown_085950FC, 0x3, 10, 10, 0, 16
 	delay 0x2
 	return
 
@@ -8842,15 +8842,15 @@ Move_METEOR_MASH:
 	fadetobg BG_COSMIC
 	waitbgfadein
 	waitforvisualfinish
-	createsprite 0x85CE8DC, 0x83, -48, -64, 72, 32, 30
+	createsprite gUnknown_085CE8DC, 0x83, -48, -64, 72, 32, 30
 	delay 0xA
-	createsprite 0x85CE8DC, 0x83, -112, -64, 8, 32, 30
+	createsprite gUnknown_085CE8DC, 0x83, -112, -64, 8, 32, 30
 	delay 0x28
-	createsprite 0x8595F14, 0x83, 0, 0, 0, 30
-	createsprite 0x85CE8DC, 0x83, -80, -64, 40, 32, 30
+	createsprite gUnknown_08595F14, 0x83, 0, 0, 0, 30
+	createsprite gUnknown_085CE8DC, 0x83, -80, -64, 40, 32, 30
 	delay 0x14
 	playsewithpan SE_W233B, +63
-	createsprite 0x8597358, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 5, 0, 20, 1
 	waitforvisualfinish
 	delay 0xA
@@ -8864,24 +8864,24 @@ Move_REVENGE:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W036, -64
-	createsprite 0x8596088, 0x2, 10, -10
+	createsprite gUnknown_08596088, 0x2, 10, -10
 	waitforvisualfinish
 	createvisualtask sub_8115A04, 0x2, 2, 0, 4, 2, 8, 31
 	waitforvisualfinish
 	unloadspritegfx 0x2805
 	loadspritegfx 0x2806
-	createsprite 0x857FE28, 0x2, 6, 4
+	createsprite gUnknown_0857FE28, 0x2, 6, 4
 	delay 0x4
 	playsewithpan SE_W207, +63
-	createsprite 0x85960D0, 0x82, 10, -10
+	createsprite gUnknown_085960D0, 0x82, 10, -10
 	waitforvisualfinish
 	unloadspritegfx 0x2806
 	loadspritegfx 0x2797
 	createvisualtask sub_80D52D0, 0x2, 1, 3, 0, 10, 1
-	createsprite 0x8597400, 0x83, -10, -8, 1, 1, 8
+	createsprite gUnknown_08597400, 0x83, -10, -8, 1, 1, 8
 	playsewithpan SE_W233B, +63
 	delay 0x8
-	createsprite 0x8597400, 0x83, 10, 8, 1, 1, 8
+	createsprite gUnknown_08597400, 0x83, 10, 8, 1, 1, 8
 	playsewithpan SE_W025B, +63
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -8892,7 +8892,7 @@ Move_POISON_FANG:
 	loadspritegfx 0x27D0
 	loadspritegfx 0x27A6
 	playsewithpan SE_W044, +63
-	createsprite 0x85CE1DC, 0x82
+	createsprite gUnknown_085CE1DC, 0x82
 	delay 0xA
 	createvisualtask sub_80D51AC, 0x3, 1, 3, 0, 10, 1
 	waitforvisualfinish
@@ -8912,55 +8912,55 @@ Move_FRENZY_PLANT:
 	monbg ANIM_TARGET
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
-	createsprite 0x8597274, 0x0, 1, 2, 0, 5, 0
+	createsprite gUnknown_08597274, 0x0, 1, 2, 0, 5, 0
 	waitforvisualfinish
-	createsprite 0x8592564, 0x2, 10, 8, 2, 0, 0, 100
+	createsprite gUnknown_08592564, 0x2, 10, 8, 2, 0, 0, 100
 	playsewithpan SE_W010, -64
 	delay 0x5
-	createsprite 0x8592564, 0x2, 20, -8, -2, 0, 1, 95
+	createsprite gUnknown_08592564, 0x2, 20, -8, -2, 0, 1, 95
 	playsewithpan SE_W010, -43
 	delay 0x5
-	createsprite 0x8592564, 0x2, 30, 8, -4, 0, 0, 90
+	createsprite gUnknown_08592564, 0x2, 30, 8, -4, 0, 0, 90
 	playsewithpan SE_W010, -22
 	delay 0x5
-	createsprite 0x8592564, 0x2, 40, -8, 4, 0, 1, 85
+	createsprite gUnknown_08592564, 0x2, 40, -8, 4, 0, 1, 85
 	playsewithpan SE_W010, 0
 	delay 0x5
-	createsprite 0x8592564, 0x2, 50, 8, 0, 0, 0, 85
+	createsprite gUnknown_08592564, 0x2, 50, 8, 0, 0, 0, 85
 	playsewithpan SE_W010, +21
 	delay 0x5
-	createsprite 0x8592564, 0x2, 60, -8, -2, 0, 1, 85
+	createsprite gUnknown_08592564, 0x2, 60, -8, -2, 0, 1, 85
 	playsewithpan SE_W010, +42
 	delay 0x5
-	createsprite 0x8592564, 0x2, 75, 8, 0, 0, 0, 85
+	createsprite gUnknown_08592564, 0x2, 75, 8, 0, 0, 0, 85
 	playsewithpan SE_W010, +63
 	delay 0x5
-	createsprite 0x8592564, 0x2, 85, 16, 6, 0, 3, 80
+	createsprite gUnknown_08592564, 0x2, 85, 16, 6, 0, 3, 80
 	playsewithpan SE_W010, +63
 	delay 0x5
-	createsprite 0x8592564, 0x2, 85, -16, -6, 0, 2, 75
+	createsprite gUnknown_08592564, 0x2, 85, -16, -6, 0, 2, 75
 	playsewithpan SE_W010, +63
 	delay 0x5
-	createsprite 0x8597358, 0x2, -10, -10, 1, 3
+	createsprite gUnknown_08597358, 0x2, -10, -10, 1, 3
 	playsewithpan SE_W003, +63
 	createvisualtask sub_80D51AC, 0x3, 1, 8, 0, 20, 1
 	delay 0x3
-	createsprite 0x8597358, 0x2, 10, 8, 1, 3
+	createsprite gUnknown_08597358, 0x2, 10, 8, 1, 3
 	playsewithpan SE_W003, +63
 	delay 0x3
-	createsprite 0x8597358, 0x2, 10, -3, 1, 2
+	createsprite gUnknown_08597358, 0x2, 10, -3, 1, 2
 	playsewithpan SE_W003, +63
 	delay 0x3
-	createsprite 0x8597358, 0x2, -3, 1, 1, 2
+	createsprite gUnknown_08597358, 0x2, -3, 1, 1, 2
 	playsewithpan SE_W003, +63
 	delay 0x2
-	createsprite 0x8597358, 0x2, -10, 1, 1, 1
+	createsprite gUnknown_08597358, 0x2, -10, 1, 1, 1
 	playsewithpan SE_W003, +63
 	delay 0x2
-	createsprite 0x8597358, 0x2, 0, 10, 1, 1
+	createsprite gUnknown_08597358, 0x2, 0, 10, 1, 1
 	playsewithpan SE_W003, +63
 	waitforvisualfinish
-	createsprite 0x8597274, 0x0, 1, 2, 5, 0, 0
+	createsprite gUnknown_08597274, 0x0, 1, 2, 5, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
@@ -8983,7 +8983,7 @@ Move_METAL_SOUND:
 
 AnimScript_82D59EA:
 	panse_1B SE_W103, -64, +63, +2, 0x0
-	createsprite 0x8593458, 0x82, 16, 0, 0, 0, 30, 0
+	createsprite gUnknown_08593458, 0x82, 16, 0, 0, 0, 30, 0
 	delay 0x2
 	return
 
@@ -9009,18 +9009,18 @@ AnimScript_82D5A3C:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W207, +63
-	createsprite 0x8596104, 0x82
+	createsprite gUnknown_08596104, 0x82
 	delay 0xA
-	createsprite 0x8597358, 0x2, -10, -8, 1, 0
+	createsprite gUnknown_08597358, 0x2, -10, -8, 1, 0
 	createvisualtask sub_80D51AC, 0x5, 1, 8, 0, 24, 1
 	delay 0x8
-	createsprite 0x8597358, 0x2, 10, 2, 1, 0
+	createsprite gUnknown_08597358, 0x2, 10, 2, 1, 0
 	playsewithpan SE_W233B, +63
 	delay 0x8
-	createsprite 0x8597358, 0x2, 10, -6, 1, 0
+	createsprite gUnknown_08597358, 0x2, 10, -6, 1, 0
 	playsewithpan SE_W233B, +63
 	delay 0x8
-	createsprite 0x8597358, 0x2, 0, 8, 1, 0
+	createsprite gUnknown_08597358, 0x2, 0, 8, 1, 0
 	playsewithpan SE_W025B, +63
 	waitforvisualfinish
 	restorebg
@@ -9059,97 +9059,97 @@ AnimScript_82D5AFF:
 	end
 
 AnimScript_82D5B04:
-	createsprite 0x857FE40, 0x2, 16, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 16, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	waitforvisualfinish
-	createsprite 0x857FE40, 0x2, 16, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 16, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	delay 0x5
-	createsprite 0x8597358, 0x2, -10, -8, 1, 2
+	createsprite gUnknown_08597358, 0x2, -10, -8, 1, 2
 	createvisualtask sub_8159210, 0x5, 139, 63
 	goto AnimScript_82D5AFF
 
 AnimScript_82D5B56:
-	createsprite 0x857FE40, 0x2, 6, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 6, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	waitforvisualfinish
-	createsprite 0x857FE40, 0x2, 6, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 6, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	waitforvisualfinish
 	delay 0xB
-	createsprite 0x857FE28, 0x2, 5, 4
+	createsprite gUnknown_0857FE28, 0x2, 5, 4
 	delay 0x6
-	createsprite 0x8597358, 0x3, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x3, 0, 0, 1, 2
 	createvisualtask sub_8159210, 0x5, 141, 63
 	goto AnimScript_82D5AFF
 
 AnimScript_82D5BB6:
-	createsprite 0x857FE40, 0x2, 6, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 6, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	waitforvisualfinish
-	createsprite 0x857FE40, 0x2, 6, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 6, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	waitforvisualfinish
-	createsprite 0x857FE40, 0x2, 6, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 6, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	waitforvisualfinish
-	createsprite 0x857FE40, 0x2, 6, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 6, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	waitforvisualfinish
-	createsprite 0x8597358, 0x2, -10, -8, 1, 2
+	createsprite gUnknown_08597358, 0x2, -10, -8, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	delay 0x8
-	createsprite 0x8597358, 0x2, 10, 10, 1, 2
+	createsprite gUnknown_08597358, 0x2, 10, 10, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	delay 0x8
-	createsprite 0x8597358, 0x2, 3, -5, 1, 2
+	createsprite gUnknown_08597358, 0x2, 3, -5, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	delay 0x8
-	createsprite 0x8597358, 0x2, -5, 3, 1, 2
+	createsprite gUnknown_08597358, 0x2, -5, 3, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	goto AnimScript_82D5AFF
 
 AnimScript_82D5CD1:
-	createsprite 0x8597274, 0x2, 1, 0, 0, 6, 0
+	createsprite gUnknown_08597274, 0x2, 1, 0, 0, 6, 0
 	waitforvisualfinish
-	createsprite 0x857FE40, 0x2, 16, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 16, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	delay 0x8
-	createsprite 0x8597358, 0x2, 3, -5, 1, 2
+	createsprite gUnknown_08597358, 0x2, 3, -5, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	waitforvisualfinish
-	createsprite 0x857FE40, 0x2, 12, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 12, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	delay 0x5
-	createsprite 0x8597358, 0x2, -10, -8, 1, 2
+	createsprite gUnknown_08597358, 0x2, -10, -8, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	waitforvisualfinish
 	delay 0x4
-	createsprite 0x857FE40, 0x2, 8, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 8, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	delay 0x5
-	createsprite 0x8597358, 0x2, -10, -8, 1, 2
+	createsprite gUnknown_08597358, 0x2, -10, -8, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	waitforvisualfinish
 	delay 0x2
 	createvisualtask sub_81169C0, 0x2, 0, 4, 5, 1
-	createsprite 0x857FE40, 0x2, 4, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 4, 1, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
-	createsprite 0x8597358, 0x2, -10, -8, 1, 2
+	createsprite gUnknown_08597358, 0x2, -10, -8, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	createvisualtask sub_81169C0, 0x2, 0, 4, 5, 1
 	waitforvisualfinish
-	createsprite 0x857FE40, 0x2, 4, 2, 0
+	createsprite gUnknown_0857FE40, 0x2, 4, 2, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
 	delay 0x5
-	createsprite 0x8597358, 0x2, -10, -8, 1, 2
+	createsprite gUnknown_08597358, 0x2, -10, -8, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	createvisualtask sub_81169C0, 0x2, 0, 4, 5, 1
@@ -9158,26 +9158,26 @@ AnimScript_82D5CD1:
 	call AnimScript_82D5F09
 	call AnimScript_82D5F09
 	call AnimScript_82D5F09
-	createsprite 0x8597358, 0x2, -10, -8, 1, 0
+	createsprite gUnknown_08597358, 0x2, -10, -8, 1, 0
 	createvisualtask sub_8159210, 0x5, 141, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 8, 0, 24, 1
 	delay 0x6
-	createsprite 0x8597358, 0x2, 10, 10, 1, 0
+	createsprite gUnknown_08597358, 0x2, 10, 10, 1, 0
 	createvisualtask sub_8159210, 0x5, 141, 63
 	delay 0x6
-	createsprite 0x8597358, 0x2, 3, -5, 1, 0
+	createsprite gUnknown_08597358, 0x2, 3, -5, 1, 0
 	createvisualtask sub_8159210, 0x5, 141, 63
 	delay 0x6
-	createsprite 0x8597358, 0x2, -5, 3, 1, 0
+	createsprite gUnknown_08597358, 0x2, -5, 3, 1, 0
 	createvisualtask sub_8159210, 0x5, 141, 63
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 0, 6, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 0, 6, 0, 0
 	goto AnimScript_82D5AFF
 
 AnimScript_82D5F09:
-	createsprite 0x857FE40, 0x2, 4, 3, 0
+	createsprite gUnknown_0857FE40, 0x2, 4, 3, 0
 	createvisualtask sub_8159244, 0x5, 167, -64
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_8159210, 0x5, 123, 63
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
 	createvisualtask sub_81169C0, 0x2, 0, 4, 5, 1
@@ -9196,9 +9196,9 @@ Move_COSMIC_POWER:
 	waitbgfadein
 	delay 0x46
 	createvisualtask sub_8159210, 0x5, 228, -64
-	createsprite 0x8592B7C, 0x2, -15, 0, 0, 0, 32, 60
+	createsprite gUnknown_08592B7C, 0x2, -15, 0, 0, 0, 32, 60
 	delay 0x8
-	createsprite 0x8592B7C, 0x2, 12, -5, 0, 0, 32, 60
+	createsprite gUnknown_08592B7C, 0x2, 12, -5, 0, 0, 32, 60
 	delay 0x28
 	createvisualtask sub_8117610, 0x2, 0, 15, 0, 0
 	waitforvisualfinish
@@ -9215,39 +9215,39 @@ Move_BLAST_BURN:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W221, -64
-	createsprite 0x8595428, 0x2, -32, 0, 24, 0, 0, 0
-	createsprite 0x8595428, 0x2, -20, -10, 24, 0, 0, 0
-	createsprite 0x8595428, 0x42, 0, -16, 24, 0, 0, 0
-	createsprite 0x8595428, 0x42, 20, -10, 24, 0, 0, 0
-	createsprite 0x8595428, 0x42, 32, 0, 24, 0, 0, 0
-	createsprite 0x8595428, 0x42, 20, 10, 24, 0, 0, 0
-	createsprite 0x8595428, 0x2, 0, 16, 24, 0, 0, 0
-	createsprite 0x8595428, 0x2, -20, 10, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x2, -32, 0, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x2, -20, -10, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x42, 0, -16, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x42, 20, -10, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x42, 32, 0, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x42, 20, 10, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x2, 0, 16, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x2, -20, 10, 24, 0, 0, 0
 	delay 0x19
 	playsewithpan SE_W172B, -64
-	createsprite 0x8595428, 0x2, -64, 0, 24, 0, 0, 0
-	createsprite 0x8595428, 0x6, -40, -20, 24, 0, 0, 0
-	createsprite 0x8595428, 0x46, 0, -32, 24, 0, 0, 0
-	createsprite 0x8595428, 0x46, 40, -20, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x2, -64, 0, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x6, -40, -20, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x46, 0, -32, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x46, 40, -20, 24, 0, 0, 0
 	createvisualtask sub_80D51AC, 0x5, 1, 6, 0, 8, 1
-	createsprite 0x8595428, 0x42, 64, 0, 24, 0, 0, 0
-	createsprite 0x8595428, 0x42, 40, 20, 24, 0, 0, 0
-	createsprite 0x8595428, 0x2, 0, 32, 24, 0, 0, 0
-	createsprite 0x8595428, 0x2, -40, 20, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x42, 64, 0, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x42, 40, 20, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x2, 0, 32, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x2, -40, 20, 24, 0, 0, 0
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x19
 	playsewithpan SE_W172B, -64
-	createsprite 0x8595428, 0x2, -96, 0, 24, 0, 0, 0
-	createsprite 0x8595428, 0x6, -60, -30, 24, 0, 0, 0
-	createsprite 0x8595428, 0x46, 0, -48, 24, 0, 0, 0
-	createsprite 0x8595428, 0x46, 60, -30, 24, 0, 0, 0
-	createsprite 0x8597358, 0x82, -4, 3, 1, 0
+	createsprite gUnknown_08595428, 0x2, -96, 0, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x6, -60, -30, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x46, 0, -48, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x46, 60, -30, 24, 0, 0, 0
+	createsprite gUnknown_08597358, 0x82, -4, 3, 1, 0
 	createvisualtask sub_80D51AC, 0x5, 1, 12, 0, 20, 1
 	createvisualtask sub_81162A4, 0x2, 2, 0, 10, 1
-	createsprite 0x8595428, 0x42, 96, 0, 24, 0, 0, 0
-	createsprite 0x8595428, 0x42, 60, 30, 24, 0, 0, 0
-	createsprite 0x8595428, 0x2, 0, 48, 24, 0, 0, 0
-	createsprite 0x8595428, 0x2, -60, 30, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x42, 96, 0, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x42, 60, 30, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x2, 0, 48, 24, 0, 0, 0
+	createsprite gUnknown_08595428, 0x2, -60, 30, 24, 0, 0, 0
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -9259,28 +9259,28 @@ Move_ROCK_TOMB:
 	loadspritegfx 0x274A
 	createvisualtask sub_81162A4, 0x2, 2, 0, 10, 1
 	waitforvisualfinish
-	createsprite 0x8596C58, 0x82, 20, 12, 64, 114, 0
+	createsprite gUnknown_08596C58, 0x82, 20, 12, 64, 114, 0
 	delay 0x8
 	createvisualtask sub_81162A4, 0x2, 0, 2, 3, 1
 	playsewithpan SE_W070, +63
 	delay 0x8
-	createsprite 0x8596C58, 0x82, -20, 12, 64, 98, 0
+	createsprite gUnknown_08596C58, 0x82, -20, 12, 64, 98, 0
 	delay 0x8
 	createvisualtask sub_81162A4, 0x2, 0, 2, 3, 1
 	playsewithpan SE_W070, +63
 	delay 0x8
-	createsprite 0x8596C58, 0xC2, 3, 6, 64, 82, 0
+	createsprite gUnknown_08596C58, 0xC2, 3, 6, 64, 82, 0
 	delay 0x8
 	createvisualtask sub_81162A4, 0x2, 0, 2, 3, 1
 	playsewithpan SE_W070, +63
 	delay 0x8
-	createsprite 0x8596C58, 0x82, -3, 13, 64, 66, 0
+	createsprite gUnknown_08596C58, 0x82, -3, 13, 64, 66, 0
 	delay 0x8
 	createvisualtask sub_81162A4, 0x2, 0, 2, 3, 1
 	playsewithpan SE_W070, +63
 	delay 0x18
 	playsewithpan SE_W063, +63
-	createsprite 0x85967AC, 0x85, 1, 50
+	createsprite gUnknown_085967AC, 0x85, 1, 50
 	createvisualtask sub_80D51AC, 0x5, 1, 3, 0, 20, 1
 	createvisualtask sub_81162A4, 0x2, 2, 0, 10, 1
 	waitforvisualfinish
@@ -9305,29 +9305,29 @@ AnimScript_82D6352:
 	delay 0x0
 	createvisualtask sub_8116620, 0xA, 1, 0, 4, 4, 0
 	waitbgfadein
-	createsprite 0x8592830, 0xC2, -32, 16, 0, 6, 2, 3, 1
-	createsprite 0x8592830, 0xC2, -8, 18, 64, 3, 2, 2, 1
-	createsprite 0x8592830, 0x78, -24, 18, 90, 5, 1, 2, 1
-	createsprite 0x8592830, 0x78, -40, 14, 128, 4, 1, 2, 1
+	createsprite gUnknown_08592830, 0xC2, -32, 16, 0, 6, 2, 3, 1
+	createsprite gUnknown_08592830, 0xC2, -8, 18, 64, 3, 2, 2, 1
+	createsprite gUnknown_08592830, 0x78, -24, 18, 90, 5, 1, 2, 1
+	createsprite gUnknown_08592830, 0x78, -40, 14, 128, 4, 1, 2, 1
 	delay 0x0
-	createsprite 0x8592848, 0xC2, -32, 16, 0, 6, 2, 3, 1
-	createsprite 0x8592848, 0xC2, -8, 18, 64, 3, 2, 2, 1
-	createsprite 0x8592848, 0x78, -24, 18, 90, 5, 1, 2, 1
-	createsprite 0x8592848, 0x78, -40, 14, 128, 4, 1, 2, 1
+	createsprite gUnknown_08592848, 0xC2, -32, 16, 0, 6, 2, 3, 1
+	createsprite gUnknown_08592848, 0xC2, -8, 18, 64, 3, 2, 2, 1
+	createsprite gUnknown_08592848, 0x78, -24, 18, 90, 5, 1, 2, 1
+	createsprite gUnknown_08592848, 0x78, -40, 14, 128, 4, 1, 2, 1
 	delay 0x0
-	createsprite 0x8592860, 0xC2, -32, 16, 0, 6, 2, 3, 1
-	createsprite 0x8592860, 0xC2, -8, 18, 64, 3, 2, 2, 1
-	createsprite 0x8592860, 0x78, -24, 18, 90, 5, 1, 2, 1
-	createsprite 0x8592860, 0x78, -40, 14, 128, 4, 1, 2, 1
+	createsprite gUnknown_08592860, 0xC2, -32, 16, 0, 6, 2, 3, 1
+	createsprite gUnknown_08592860, 0xC2, -8, 18, 64, 3, 2, 2, 1
+	createsprite gUnknown_08592860, 0x78, -24, 18, 90, 5, 1, 2, 1
+	createsprite gUnknown_08592860, 0x78, -40, 14, 128, 4, 1, 2, 1
 	delay 0x6
-	createsprite 0x8592830, 0xC2, -4, 16, 0, 6, 1, 2, 1
-	createsprite 0x8592830, 0xC2, -16, 12, 192, 5, 2, 3, 1
+	createsprite gUnknown_08592830, 0xC2, -4, 16, 0, 6, 1, 2, 1
+	createsprite gUnknown_08592830, 0xC2, -16, 12, 192, 5, 2, 3, 1
 	delay 0x0
-	createsprite 0x8592848, 0xC2, -4, 16, 0, 6, 1, 2, 1
-	createsprite 0x8592848, 0xC2, -16, 12, 192, 5, 2, 3, 1
+	createsprite gUnknown_08592848, 0xC2, -4, 16, 0, 6, 1, 2, 1
+	createsprite gUnknown_08592848, 0xC2, -16, 12, 192, 5, 2, 3, 1
 	delay 0x0
-	createsprite 0x8592860, 0xC2, -4, 16, 0, 6, 1, 2, 1
-	createsprite 0x8592860, 0xC2, -16, 12, 192, 5, 2, 3, 1
+	createsprite gUnknown_08592860, 0xC2, -4, 16, 0, 6, 1, 2, 1
+	createsprite gUnknown_08592860, 0xC2, -16, 12, 192, 5, 2, 3, 1
 	waitforvisualfinish
 	playsewithpan SE_W016B, +63
 	clearmonbg ANIM_DEF_PARTNER
@@ -9358,10 +9358,10 @@ Move_DIVE:
 AnimScript_82D654C:
 	loadspritegfx 0x27AC
 	playsewithpan SE_W029, -64
-	createsprite 0x8596490, 0x2, 0, 0, 13, 336
+	createsprite gUnknown_08596490, 0x2, 0, 0, 13, 336
 	waitforvisualfinish
 	playsewithpan SE_W291, -64
-	createsprite 0x85964CC, 0x3, 0
+	createsprite gUnknown_085964CC, 0x3, 0
 	call AnimScript_82D658A
 	call AnimScript_82D658A
 	call AnimScript_82D658A
@@ -9370,8 +9370,8 @@ AnimScript_82D654C:
 	end
 
 AnimScript_82D658A:
-	createsprite 0x85964E4, 0x5, 0, 0
-	createsprite 0x85964E4, 0x5, 1, 0
+	createsprite gUnknown_085964E4, 0x5, 0, 0
+	createsprite gUnknown_085964E4, 0x5, 1, 0
 	return
 
 AnimScript_82D65A1:
@@ -9380,7 +9380,7 @@ AnimScript_82D65A1:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W153, +63
-	createsprite 0x85964CC, 0x83, 1
+	createsprite gUnknown_085964CC, 0x83, 1
 	call AnimScript_82D65E0
 	call AnimScript_82D65E0
 	call AnimScript_82D65E0
@@ -9395,25 +9395,25 @@ AnimScript_82D65A1:
 	end
 
 AnimScript_82D65E0:
-	createsprite 0x85964E4, 0x85, 0, 1
-	createsprite 0x85964E4, 0x85, 1, 1
+	createsprite gUnknown_085964E4, 0x85, 0, 1
+	createsprite gUnknown_085964E4, 0x85, 1, 1
 	return
 
 Move_ROCK_BLAST:
 	loadspritegfx 0x274A
 	loadspritegfx 0x2797
-	createsprite 0x857FE28, 0x2, 4, 6
+	createsprite gUnknown_0857FE28, 0x2, 4, 6
 	delay 0x3
 	playsewithpan SE_W207, -64
-	createsprite 0x8596C98, 0x82, 16, 0, 0, 0, 25, 257
+	createsprite gUnknown_08596C98, 0x82, 16, 0, 0, 0, 25, 257
 	waitforvisualfinish
-	createsprite 0x8597358, 0x83, 0, 0, 1, 1
+	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 1
 	playsewithpan SE_W088, +63
-	createsprite 0x8596B1C, 0x82, 0, 0, 20, 24, 14, 2
+	createsprite gUnknown_08596B1C, 0x82, 0, 0, 20, 24, 14, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 5, 1
-	createsprite 0x8596B1C, 0x82, 5, 0, -20, 24, 14, 1
-	createsprite 0x8596B1C, 0x82, 0, 5, 20, -24, 14, 2
-	createsprite 0x8596B1C, 0x82, -5, 0, -20, -24, 14, 2
+	createsprite gUnknown_08596B1C, 0x82, 5, 0, -20, 24, 14, 1
+	createsprite gUnknown_08596B1C, 0x82, 0, 5, 20, -24, 14, 2
+	createsprite gUnknown_08596B1C, 0x82, -5, 0, -20, -24, 14, 2
 	waitforvisualfinish
 	end
 
@@ -9422,7 +9422,7 @@ Move_OVERHEAT:
 	loadspritegfx 0x2797
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x120C
-	createsprite 0x8597274, 0x2, 1, 1, 0, 5, 28
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 5, 28
 	waitforvisualfinish
 	createvisualtask sub_8117C44, 0x5
 	waitforvisualfinish
@@ -9433,58 +9433,58 @@ Move_OVERHEAT:
 	playsewithpan SE_W082, -64
 	createvisualtask sub_8117CA0, 0x5, 1, 0
 	delay 0x1
-	createsprite 0x8597274, 0x2, 2, 1, 0, 13, 28
+	createsprite gUnknown_08597274, 0x2, 2, 1, 0, 13, 28
 	createvisualtask sub_80D51AC, 0x5, 0, 2, 0, 15, 1
 	waitforvisualfinish
 	playsewithpan SE_W172B, -64
-	createsprite 0x8596FB0, 0x2, 1, 0, 30, 25, -20
-	createsprite 0x8596FB0, 0x2, 1, 32, 30, 25, -20
-	createsprite 0x8596FB0, 0x2, 1, 64, 30, 25, -20
-	createsprite 0x8596FB0, 0x2, 1, 96, 30, 25, -20
-	createsprite 0x8596FB0, 0x2, 1, 128, 30, 25, -20
-	createsprite 0x8596FB0, 0x42, 1, 160, 30, 25, -20
-	createsprite 0x8596FB0, 0x42, 1, 192, 30, 25, -20
-	createsprite 0x8596FB0, 0x42, 1, 224, 30, 25, -20
+	createsprite gUnknown_08596FB0, 0x2, 1, 0, 30, 25, -20
+	createsprite gUnknown_08596FB0, 0x2, 1, 32, 30, 25, -20
+	createsprite gUnknown_08596FB0, 0x2, 1, 64, 30, 25, -20
+	createsprite gUnknown_08596FB0, 0x2, 1, 96, 30, 25, -20
+	createsprite gUnknown_08596FB0, 0x2, 1, 128, 30, 25, -20
+	createsprite gUnknown_08596FB0, 0x42, 1, 160, 30, 25, -20
+	createsprite gUnknown_08596FB0, 0x42, 1, 192, 30, 25, -20
+	createsprite gUnknown_08596FB0, 0x42, 1, 224, 30, 25, -20
 	delay 0x5
-	createsprite 0x8596FB0, 0x2, 1, 0, 30, 25, 0
-	createsprite 0x8596FB0, 0x2, 1, 32, 30, 25, 0
-	createsprite 0x8596FB0, 0x2, 1, 64, 30, 25, 0
-	createsprite 0x8596FB0, 0x2, 1, 96, 30, 25, 0
-	createsprite 0x8596FB0, 0x2, 1, 128, 30, 25, 0
-	createsprite 0x8596FB0, 0x42, 1, 160, 30, 25, 0
-	createsprite 0x8596FB0, 0x42, 1, 192, 30, 25, 0
-	createsprite 0x8596FB0, 0x42, 1, 224, 30, 25, 0
+	createsprite gUnknown_08596FB0, 0x2, 1, 0, 30, 25, 0
+	createsprite gUnknown_08596FB0, 0x2, 1, 32, 30, 25, 0
+	createsprite gUnknown_08596FB0, 0x2, 1, 64, 30, 25, 0
+	createsprite gUnknown_08596FB0, 0x2, 1, 96, 30, 25, 0
+	createsprite gUnknown_08596FB0, 0x2, 1, 128, 30, 25, 0
+	createsprite gUnknown_08596FB0, 0x42, 1, 160, 30, 25, 0
+	createsprite gUnknown_08596FB0, 0x42, 1, 192, 30, 25, 0
+	createsprite gUnknown_08596FB0, 0x42, 1, 224, 30, 25, 0
 	delay 0x5
-	createsprite 0x8596FB0, 0x2, 1, 0, 30, 25, 10
-	createsprite 0x8596FB0, 0x2, 1, 32, 30, 25, 10
-	createsprite 0x8596FB0, 0x2, 1, 64, 30, 25, 10
-	createsprite 0x8596FB0, 0x2, 1, 96, 30, 25, 10
-	createsprite 0x8596FB0, 0x2, 1, 128, 30, 25, 10
-	createsprite 0x8596FB0, 0x42, 1, 160, 30, 25, 10
-	createsprite 0x8596FB0, 0x42, 1, 192, 30, 25, 10
-	createsprite 0x8596FB0, 0x42, 1, 224, 30, 25, 10
+	createsprite gUnknown_08596FB0, 0x2, 1, 0, 30, 25, 10
+	createsprite gUnknown_08596FB0, 0x2, 1, 32, 30, 25, 10
+	createsprite gUnknown_08596FB0, 0x2, 1, 64, 30, 25, 10
+	createsprite gUnknown_08596FB0, 0x2, 1, 96, 30, 25, 10
+	createsprite gUnknown_08596FB0, 0x2, 1, 128, 30, 25, 10
+	createsprite gUnknown_08596FB0, 0x42, 1, 160, 30, 25, 10
+	createsprite gUnknown_08596FB0, 0x42, 1, 192, 30, 25, 10
+	createsprite gUnknown_08596FB0, 0x42, 1, 224, 30, 25, 10
 	delay 0x5
 	waitforvisualfinish
-	createsprite 0x8597358, 0x83, -5, 3, 1, 0
+	createsprite gUnknown_08597358, 0x83, -5, 3, 1, 0
 	playsewithpan SE_W007, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 10, 0, 25, 1
 	delay 0x6
-	createsprite 0x8597358, 0x83, 8, -5, 1, 0
+	createsprite gUnknown_08597358, 0x83, 8, -5, 1, 0
 	playsewithpan SE_W007, +63
 	delay 0x8
-	createsprite 0x8597358, 0x83, 10, 10, 1, 0
+	createsprite gUnknown_08597358, 0x83, 10, 10, 1, 0
 	playsewithpan SE_W007, +63
 	delay 0x8
-	createsprite 0x8597358, 0x83, 0, 0, 1, 0
+	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 0
 	playsewithpan SE_W007, +63
 	createvisualtask sub_8117DD8, 0x5, 1
 	delay 0x1
-	createsprite 0x8597274, 0x2, 2, -1, 0, 13, 19026
+	createsprite gUnknown_08597274, 0x2, 2, -1, 0, 13, 19026
 	createvisualtask sub_80D51AC, 0x5, 0, 3, 0, 15, 1
 	waitforvisualfinish
 	createvisualtask sub_8117D3C, 0x5, 0, 1
 	delay 0x1
-	createsprite 0x8597274, 0x2, 1, 1, 5, 0, 28
+	createsprite gUnknown_08597274, 0x2, 1, 1, 5, 0, 28
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -9492,7 +9492,7 @@ Move_OVERHEAT:
 	delay 0xF
 	createvisualtask sub_8117D3C, 0x5, 1, 0
 	delay 0x1
-	createsprite 0x8597274, 0x2, 2, 0, 13, 0, 19026
+	createsprite gUnknown_08597274, 0x2, 2, 0, 13, 0, 19026
 	waitforvisualfinish
 	createvisualtask sub_8117C70, 0x5
 	waitforvisualfinish
@@ -9504,24 +9504,24 @@ Move_HYDRO_CANNON:
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
 	playsewithpan SE_W057, -64
-	createsprite 0x85951C0, 0x82
+	createsprite gUnknown_085951C0, 0x82
 	delay 0xA
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	delay 0x1E
 	panse_1B SE_W056, -64, +63, +2, 0x0
 	call AnimScript_82D6A50
 	createvisualtask sub_80D51AC, 0x5, 1, 10, 0, 40, 1
-	createsprite 0x8597388, 0x82, 0, 0, 1, 0
+	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
 	call AnimScript_82D6A50
-	createsprite 0x8597388, 0x82, 0, 0, 1, 0
+	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
 	call AnimScript_82D6A50
-	createsprite 0x8597388, 0x82, 0, 0, 1, 0
+	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
 	call AnimScript_82D6A50
-	createsprite 0x8597388, 0x82, 0, 0, 1, 0
+	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
 	call AnimScript_82D6A50
-	createsprite 0x8597388, 0x82, 0, 0, 1, 0
+	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
 	call AnimScript_82D6A50
-	createsprite 0x8597388, 0x82, 0, 0, 1, 0
+	createsprite gUnknown_08597388, 0x82, 0, 0, 1, 0
 	waitforvisualfinish
 	createvisualtask sub_8115F10, 0x2, 257, 257, 257
 	waitforvisualfinish
@@ -9530,25 +9530,25 @@ Move_HYDRO_CANNON:
 	end
 
 AnimScript_82D6A50:
-	createsprite 0x85951D8, 0x82, 10, -10, 0, 0, 15, 257
+	createsprite gUnknown_085951D8, 0x82, 10, -10, 0, 0, 15, 257
 	delay 0x1
-	createsprite 0x85951D8, 0x82, 10, -10, 0, 0, 15, 257
+	createsprite gUnknown_085951D8, 0x82, 10, -10, 0, 0, 15, 257
 	delay 0x1
-	createsprite 0x85951D8, 0x82, 10, -10, 0, 0, 15, 257
+	createsprite gUnknown_085951D8, 0x82, 10, -10, 0, 0, 15, 257
 	delay 0x1
-	createsprite 0x85951D8, 0x82, 10, -10, 0, 0, 15, 257
+	createsprite gUnknown_085951D8, 0x82, 10, -10, 0, 0, 15, 257
 	delay 0x1
-	createsprite 0x85951D8, 0x82, 10, -10, 0, 0, 15, 257
+	createsprite gUnknown_085951D8, 0x82, 10, -10, 0, 0, 15, 257
 	return
 
 Move_ASTONISH:
 	loadspritegfx 0x2821
 	playsewithpan SE_W227, -64
-	createsprite 0x857FE28, 0x2, 4, 6
+	createsprite gUnknown_0857FE28, 0x2, 4, 6
 	delay 0x19
-	createsprite 0x85964E4, 0x85, 0, 1
+	createsprite gUnknown_085964E4, 0x85, 0, 1
 	playsewithpan SE_W166, +63
-	createsprite 0x85964E4, 0x85, 1, 1
+	createsprite gUnknown_085964E4, 0x85, 1, 1
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 5, 1
 	createvisualtask sub_8106020, 0x3
 	waitforvisualfinish
@@ -9608,30 +9608,30 @@ AnimScript_82D6B7C:
 	goto AnimScript_82D6B48
 
 AnimScript_82D6B9B:
-	createsprite 0x8597358, 0x83, -10, -8, 1, 1
+	createsprite gUnknown_08597358, 0x83, -10, -8, 1, 1
 	playsewithpan SE_W070, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 5, 1
-	createsprite 0x8596CB0, 0x82, -12, 27, 2, 3
-	createsprite 0x8596CB0, 0x82, 8, 28, 3, 4
-	createsprite 0x8596CB0, 0x82, -4, 30, 2, 3
-	createsprite 0x8596CB0, 0x82, 12, 25, 4, 4
+	createsprite gUnknown_08596CB0, 0x82, -12, 27, 2, 3
+	createsprite gUnknown_08596CB0, 0x82, 8, 28, 3, 4
+	createsprite gUnknown_08596CB0, 0x82, -4, 30, 2, 3
+	createsprite gUnknown_08596CB0, 0x82, 12, 25, 4, 4
 	return
 
 AnimScript_82D6BFC:
-	createsprite 0x8597358, 0x83, 10, -8, 1, 1
+	createsprite gUnknown_08597358, 0x83, 10, -8, 1, 1
 	playsewithpan SE_W088, +63
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 5, 1
-	createsprite 0x8596CB0, 0x82, -12, 32, 3, 4
-	createsprite 0x8596CB0, 0x82, 8, 31, 2, 2
-	createsprite 0x8596CB0, 0x82, -4, 28, 2, 3
-	createsprite 0x8596CB0, 0x82, 12, 30, 4, 3
+	createsprite gUnknown_08596CB0, 0x82, -12, 32, 3, 4
+	createsprite gUnknown_08596CB0, 0x82, 8, 31, 2, 2
+	createsprite gUnknown_08596CB0, 0x82, -4, 28, 2, 3
+	createsprite gUnknown_08596CB0, 0x82, 12, 30, 4, 3
 	return
 
 Move_MAGIC_COAT:
 	loadspritegfx 0x27BA
 	setalpha 0x1000
 	waitplaysewithpan SE_W112, -64, 0xF
-	createsprite 0x85965C0, 0x3, 40, 0, 10170
+	createsprite gUnknown_085965C0, 0x3, 40, 0, 10170
 	waitforvisualfinish
 	delay 0x1
 	blendoff
@@ -9643,27 +9643,27 @@ Move_WATER_PULSE:
 	monbg ANIM_TARGET
 	monbgprio_28 ANIM_TARGET
 	playsewithpan SE_W145C, -64
-	createsprite 0x8597274, 0x2, 1, 0, 0, 7, 29472
+	createsprite gUnknown_08597274, 0x2, 1, 0, 0, 7, 29472
 	delay 0xA
-	createsprite 0x85952F8, 0x42, 100, 100, 8, 1, 20, 40, 0
-	createsprite 0x85952F8, 0x42, 20, 100, 16, 2, 10, 35, 1
-	createsprite 0x85952F8, 0x42, 200, 80, 8, 1, 40, 20, 0
-	createsprite 0x85952F8, 0x42, 80, 60, 10, 3, 20, 50, 0
-	createsprite 0x85952F8, 0x42, 140, 100, 16, 1, 20, 30, 1
+	createsprite gUnknown_085952F8, 0x42, 100, 100, 8, 1, 20, 40, 0
+	createsprite gUnknown_085952F8, 0x42, 20, 100, 16, 2, 10, 35, 1
+	createsprite gUnknown_085952F8, 0x42, 200, 80, 8, 1, 40, 20, 0
+	createsprite gUnknown_085952F8, 0x42, 80, 60, 10, 3, 20, 50, 0
+	createsprite gUnknown_085952F8, 0x42, 140, 100, 16, 1, 20, 30, 1
 	playsewithpan SE_W145C, +63
 	waitforvisualfinish
 	playsewithpan SE_W202, -64
-	createsprite 0x8593470, 0x82, 0, 0, 40, 15
+	createsprite gUnknown_08593470, 0x82, 0, 0, 40, 15
 	delay 0x5
 	playsewithpan SE_W202, -64
-	createsprite 0x8593470, 0x82, 0, 0, 40, 15
+	createsprite gUnknown_08593470, 0x82, 0, 0, 40, 15
 	delay 0x5
 	playsewithpan SE_W202, -64
-	createsprite 0x8593470, 0x82, 0, 0, 40, 15
+	createsprite gUnknown_08593470, 0x82, 0, 0, 40, 15
 	delay 0xD
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 8, 18, 1
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 1, 7, 0, 29472
+	createsprite gUnknown_08597274, 0x2, 1, 1, 7, 0, 29472
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
@@ -9683,7 +9683,7 @@ Move_PSYCHO_BOOST:
 	delay 0xA
 	createvisualtask sub_80D51AC, 0x2, 0, 3, 0, 240, 0
 	loopsewithpan SE_W060B, -64, 0xE, 0xA
-	createsprite 0x8596920, 0x2
+	createsprite gUnknown_08596920, 0x2
 	delay 0x6E
 	loopsewithpan SE_W060B, -64, 0x7, 0xA
 	waitforvisualfinish
@@ -9698,20 +9698,20 @@ Move_PSYCHO_BOOST:
 Move_KNOCK_OFF:
 	loadspritegfx 0x2825
 	loadspritegfx 0x2797
-	createsprite 0x857FE28, 0x2, 4, 6
+	createsprite gUnknown_0857FE28, 0x2, 4, 6
 	delay 0x4
 	playsewithpan SE_W233, +63
-	createsprite 0x85CE984, 0x82, -16, -16
+	createsprite gUnknown_085CE984, 0x82, -16, -16
 	delay 0x8
-	createsprite 0x859728C, 0x2, 31, 5, 1, 0x7FFF, 10, 0, 0
-	createsprite 0x8597358, 0x83, 0, 0, 1, 2
+	createsprite gUnknown_0859728C, 0x2, 31, 5, 1, 0x7FFF, 10, 0, 0
+	createsprite gUnknown_08597358, 0x83, 0, 0, 1, 2
 	playsewithpan SE_W004, +63
-	createsprite 0x857FE70, 0x2, 1, -12, 10, 0, 3
-	createsprite 0x857FE58, 0x2, 0, 0, 5
+	createsprite gUnknown_0857FE70, 0x2, 1, -12, 10, 0, 3
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 5
 	delay 0x3
 	createvisualtask sub_80D5484, 0x2, 1, 0, 3, 6, 1
 	delay 0x5
-	createsprite 0x857FE58, 0x2, 1, 0, 6
+	createsprite gUnknown_0857FE58, 0x2, 1, 0, 6
 	delay 0xA
 	waitforvisualfinish
 	end
@@ -9721,7 +9721,7 @@ Move_DOOM_DESIRE:
 	delay 0x1
 	monbg ANIM_ATK_PARTNER
 	createvisualtask sub_811489C, 0x5, 1, 0
-	createsprite 0x8597274, 0x2, 1, 1, 0, 4, 0
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 4, 0
 	waitforvisualfinish
 	setalpha 0x808
 	playsewithpan SE_W060, -64
@@ -9729,7 +9729,7 @@ Move_DOOM_DESIRE:
 	waitforvisualfinish
 	delay 0x14
 	createvisualtask sub_811489C, 0x5, 1, 1
-	createsprite 0x8597274, 0x2, 1, 1, 4, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 1, 4, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
@@ -9746,31 +9746,31 @@ Move_SKY_UPPERCUT:
 	waitbgfadein
 	setalpha 0x80C
 	delay 0x26
-	createsprite 0x857FE70, 0x2, 0, 28, 0, 0, 5
+	createsprite gUnknown_0857FE70, 0x2, 0, 28, 0, 0, 5
 	delay 0x4
 	createvisualtask sub_80D52D0, 0x2, 1, 4, 0, 6, 1
 	playsewithpan SE_W233B, +63
-	createsprite 0x8597358, 0x83, -28, 28, 1, 1
+	createsprite gUnknown_08597358, 0x83, -28, 28, 1, 1
 	delay 0x1
 	playsewithpan SE_W233B, +63
-	createsprite 0x8597358, 0x83, -15, 8, 1, 1
+	createsprite gUnknown_08597358, 0x83, -15, 8, 1, 1
 	playsewithpan SE_W233B, +63
 	delay 0x1
 	playsewithpan SE_W233B, +63
-	createsprite 0x8597358, 0x83, -5, -12, 1, 1
+	createsprite gUnknown_08597358, 0x83, -5, -12, 1, 1
 	delay 0x1
 	playsewithpan SE_W233B, +63
-	createsprite 0x8597358, 0x83, 0, -32, 1, 1
+	createsprite gUnknown_08597358, 0x83, 0, -32, 1, 1
 	delay 0x1
 	playsewithpan SE_W233B, +63
-	createsprite 0x8597358, 0x83, 5, -52, 1, 1
-	createsprite 0x857FE70, 0x2, 1, -26, 16, 1, 4
+	createsprite gUnknown_08597358, 0x83, 5, -52, 1, 1
+	createsprite gUnknown_0857FE70, 0x2, 1, -26, 16, 1, 4
 	delay 0x4
 	createvisualtask sub_80D5484, 0x2, 1, 0, 3, 6, 1
 	delay 0x1E
-	createsprite 0x857FE58, 0x2, 0, 0, 6
+	createsprite gUnknown_0857FE58, 0x2, 0, 0, 6
 	delay 0x4
-	createsprite 0x857FE58, 0x2, 1, 0, 6
+	createsprite gUnknown_0857FE58, 0x2, 1, 0, 6
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	restorebg
@@ -9799,39 +9799,39 @@ Move_TWISTER:
 	monbg ANIM_DEF_PARTNER
 	monbgprio_28 ANIM_TARGET
 	playsewithpan SE_W239, +63
-	createsprite 0x85923A8, 0x82, 120, 70, 5, 70, 30
+	createsprite gUnknown_085923A8, 0x82, 120, 70, 5, 70, 30
 	delay 0x1
-	createsprite 0x85923A8, 0x82, 115, 55, 6, 60, 25
+	createsprite gUnknown_085923A8, 0x82, 115, 55, 6, 60, 25
 	delay 0x1
-	createsprite 0x85923A8, 0x82, 115, 60, 7, 60, 30
-	createsprite 0x85923A8, 0x82, 115, 55, 10, 60, 30
+	createsprite gUnknown_085923A8, 0x82, 115, 60, 7, 60, 30
+	createsprite gUnknown_085923A8, 0x82, 115, 55, 10, 60, 30
 	delay 0x3
-	createsprite 0x8596CC8, 0x82, 100, 50, 4, 50, 26
+	createsprite gUnknown_08596CC8, 0x82, 100, 50, 4, 50, 26
 	delay 0x1
-	createsprite 0x85923A8, 0x82, 105, 25, 8, 60, 20
+	createsprite gUnknown_085923A8, 0x82, 105, 25, 8, 60, 20
 	delay 0x1
-	createsprite 0x85923A8, 0x82, 115, 40, 10, 48, 30
+	createsprite gUnknown_085923A8, 0x82, 115, 40, 10, 48, 30
 	delay 0x3
-	createsprite 0x8596CC8, 0x82, 120, 30, 6, 45, 25
-	createsprite 0x85923A8, 0x82, 115, 35, 10, 60, 30
+	createsprite gUnknown_08596CC8, 0x82, 120, 30, 6, 45, 25
+	createsprite gUnknown_085923A8, 0x82, 115, 35, 10, 60, 30
 	delay 0x3
-	createsprite 0x8596CC8, 0x82, 105, 20, 8, 40, 0
+	createsprite gUnknown_08596CC8, 0x82, 105, 20, 8, 40, 0
 	delay 0x3
-	createsprite 0x85923A8, 0x82, 20, 255, 15, 32, 0
-	createsprite 0x85923A8, 0x82, 110, 10, 8, 32, 20
+	createsprite gUnknown_085923A8, 0x82, 20, 255, 15, 32, 0
+	createsprite gUnknown_085923A8, 0x82, 110, 10, 8, 32, 20
 	waitforvisualfinish
-	createsprite 0x8597358, 0x83, -32, -16, 1, 3
+	createsprite gUnknown_08597358, 0x83, -32, -16, 1, 3
 	playsewithpan SE_W004, +63
 	createvisualtask sub_80D5484, 0x2, 1, 3, 0, 12, 1
 	createvisualtask sub_80D5484, 0x2, 3, 3, 0, 12, 1
 	delay 0x4
-	createsprite 0x85973A0, 0x83, 1, 3
+	createsprite gUnknown_085973A0, 0x83, 1, 3
 	playsewithpan SE_W004, +63
 	delay 0x4
-	createsprite 0x85973A0, 0x83, 1, 3
+	createsprite gUnknown_085973A0, 0x83, 1, 3
 	playsewithpan SE_W004, +63
 	delay 0x4
-	createsprite 0x8597358, 0x83, 32, 20, 1, 3
+	createsprite gUnknown_08597358, 0x83, 32, 20, 1, 3
 	playsewithpan SE_W004, +63
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -9847,33 +9847,33 @@ Move_MAGICAL_LEAF:
 	delay 0x1
 	loopsewithpan SE_W077, -64, 0xA, 0x5
 	createvisualtask sub_81007C4, 0x5
-	createsprite 0x8592390, 0x2, -3, -2, 10
+	createsprite gUnknown_08592390, 0x2, -3, -2, 10
 	delay 0x2
-	createsprite 0x8592390, 0x2, -1, -1, 15
+	createsprite gUnknown_08592390, 0x2, -1, -1, 15
 	delay 0x2
-	createsprite 0x8592390, 0x2, -4, -4, 7
+	createsprite gUnknown_08592390, 0x2, -4, -4, 7
 	delay 0x2
-	createsprite 0x8592390, 0x2, 3, -3, 11
+	createsprite gUnknown_08592390, 0x2, 3, -3, 11
 	delay 0x2
-	createsprite 0x8592390, 0x2, -1, -6, 8
+	createsprite gUnknown_08592390, 0x2, -1, -6, 8
 	delay 0x2
-	createsprite 0x8592390, 0x2, 2, -1, 12
+	createsprite gUnknown_08592390, 0x2, 2, -1, 12
 	delay 0x2
-	createsprite 0x8592390, 0x2, -3, -4, 13
+	createsprite gUnknown_08592390, 0x2, -3, -4, 13
 	delay 0x2
-	createsprite 0x8592390, 0x2, 4, -5, 7
+	createsprite gUnknown_08592390, 0x2, 4, -5, 7
 	delay 0x2
-	createsprite 0x8592390, 0x2, 2, -6, 11
+	createsprite gUnknown_08592390, 0x2, 2, -6, 11
 	delay 0x2
-	createsprite 0x8592390, 0x2, -3, -5, 8
+	createsprite gUnknown_08592390, 0x2, -3, -5, 8
 	delay 0x3C
 	playsewithpan SE_W013B, -64
-	createsprite 0x85923D8, 0x83, 20, -10, 20, 0, 32, 20, 0
-	createsprite 0x85923D8, 0x83, 20, -10, 20, 0, 32, -20, 0
+	createsprite gUnknown_085923D8, 0x83, 20, -10, 20, 0, 32, 20, 0
+	createsprite gUnknown_085923D8, 0x83, 20, -10, 20, 0, 32, -20, 0
 	delay 0x1E
 	playsewithpan SE_W013, +63
-	createsprite 0x8597358, 0x84, -10, -4, 1, 2
-	createsprite 0x8597358, 0x84, 10, 4, 1, 2
+	createsprite gUnknown_08597358, 0x84, -10, -4, 1, 2
+	createsprite gUnknown_08597358, 0x84, 10, 4, 1, 2
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 8, 1
 	delay 0x14
 	setarg 0x7, 0xFFFF
@@ -9890,7 +9890,7 @@ Move_ICE_BALL:
 
 AnimScript_82D72BB:
 	playsewithpan SE_W196, -64
-	createsprite 0x8595DE4, 0x82, 15, 0, -12, -16, 30, -40
+	createsprite gUnknown_08595DE4, 0x82, 15, 0, -12, -16, 30, -40
 	delay 0x1C
 	playsewithpan SE_W280, +63
 	createvisualtask sub_810CDFC, 0x5, 0
@@ -9980,19 +9980,19 @@ AnimScript_82D741F:
 	goto AnimScript_82D7309
 
 AnimScript_82D7467:
-	createsprite 0x8595DFC, 0x84, -12, -16
+	createsprite gUnknown_08595DFC, 0x84, -12, -16
 	return
 
 Move_WEATHER_BALL:
 	loadspritegfx 0x282B
-	createsprite 0x857FE40, 0x2, 8, 1, 0
+	createsprite gUnknown_0857FE40, 0x2, 8, 1, 0
 	delay 0x8
 	playsewithpan SE_W207, -64
-	createsprite 0x853EE38, 0x2
+	createsprite gUnknown_0853EE38, 0x2
 	waitforvisualfinish
 	delay 0xF
 	playsewithpan SE_W197, 0
-	createsprite 0x859728C, 0x2, 31, 5, 1, 0x7FFF, 10, 0, 0
+	createsprite gUnknown_0859728C, 0x2, 31, 5, 1, 0x7FFF, 10, 0, 0
 	waitforvisualfinish
 	createvisualtask sub_81604F0, 0x2
 	delay 0x1
@@ -10004,23 +10004,23 @@ Move_WEATHER_BALL:
 
 AnimScript_82D74DE:
 	loadspritegfx 0x2797
-	createsprite 0x853EE50, 0x82, -30, -100, 25, 1, 0, 0
+	createsprite gUnknown_0853EE50, 0x82, -30, -100, 25, 1, 0, 0
 	waitforvisualfinish
 	playsewithpan SE_W025B, +63
-	createsprite 0x8597358, 0x84, -10, 0, 1, 2
+	createsprite gUnknown_08597358, 0x84, -10, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 8, 1
 	waitforvisualfinish
 	end
 
 AnimScript_82D751B:
 	loadspritegfx 0x272D
-	createsprite 0x859559C, 0x82, -30, -100, 25, 1, 40, 10
+	createsprite gUnknown_0859559C, 0x82, -30, -100, 25, 1, 40, 10
 	playsewithpan SE_W172, +63
 	delay 0xA
-	createsprite 0x859559C, 0x82, -30, -100, 25, 1, -40, 20
+	createsprite gUnknown_0859559C, 0x82, -30, -100, 25, 1, -40, 20
 	playsewithpan SE_W172, +63
 	delay 0xA
-	createsprite 0x859559C, 0x82, -30, -100, 25, 1, 0, 0
+	createsprite gUnknown_0859559C, 0x82, -30, -100, 25, 1, 0, 0
 	playsewithpan SE_W172, +63
 	waitforvisualfinish
 	playsewithpan SE_W172B, +63
@@ -10030,13 +10030,13 @@ AnimScript_82D751B:
 
 AnimScript_82D757F:
 	loadspritegfx 0x27AB
-	createsprite 0x8595328, 0x82, -30, -100, 25, 1, 50, 10
+	createsprite gUnknown_08595328, 0x82, -30, -100, 25, 1, 50, 10
 	playsewithpan SE_W152, +63
 	delay 0x8
-	createsprite 0x8595328, 0x82, -30, -100, 25, 1, -20, 20
+	createsprite gUnknown_08595328, 0x82, -30, -100, 25, 1, -20, 20
 	playsewithpan SE_W152, +63
 	delay 0xD
-	createsprite 0x8595328, 0x82, -30, -100, 25, 1, 0, 0
+	createsprite gUnknown_08595328, 0x82, -30, -100, 25, 1, 0, 0
 	playsewithpan SE_W152, +63
 	waitforvisualfinish
 	createvisualtask sub_80D51AC, 0x2, 1, 0, 3, 8, 1
@@ -10046,20 +10046,20 @@ AnimScript_82D757F:
 
 AnimScript_82D75E3:
 	loadspritegfx 0x274A
-	createsprite 0x8596CE0, 0x82, -30, -100, 25, 1, 30, 0
+	createsprite gUnknown_08596CE0, 0x82, -30, -100, 25, 1, 30, 0
 	playsewithpan SE_W088, +63
 	delay 0x5
-	createsprite 0x8596CE0, 0x82, -30, -100, 25, 1, -40, 20
+	createsprite gUnknown_08596CE0, 0x82, -30, -100, 25, 1, -40, 20
 	playsewithpan SE_W088, +63
 	delay 0xE
-	createsprite 0x8596CE0, 0x82, -30, -100, 25, 1, 0, 0
+	createsprite gUnknown_08596CE0, 0x82, -30, -100, 25, 1, 0, 0
 	playsewithpan SE_W088, +63
 	waitforvisualfinish
 	playsewithpan SE_W070, +63
-	createsprite 0x8596CB0, 0x82, -12, 27, 2, 3
-	createsprite 0x8596CB0, 0x82, 8, 28, 3, 4
-	createsprite 0x8596CB0, 0x82, -4, 30, 2, 3
-	createsprite 0x8596CB0, 0x82, 12, 25, 4, 4
+	createsprite gUnknown_08596CB0, 0x82, -12, 27, 2, 3
+	createsprite gUnknown_08596CB0, 0x82, 8, 28, 3, 4
+	createsprite gUnknown_08596CB0, 0x82, -4, 30, 2, 3
+	createsprite gUnknown_08596CB0, 0x82, 12, 25, 4, 4
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 8, 1
 	waitforvisualfinish
 	end
@@ -10067,13 +10067,13 @@ AnimScript_82D75E3:
 AnimScript_82D7683:
 	loadspritegfx 0x2817
 	loadspritegfx 0x279D
-	createsprite 0x8595D44, 0x82, -30, -100, 25, 25, -40, 20
+	createsprite gUnknown_08595D44, 0x82, -30, -100, 25, 25, -40, 20
 	playsewithpan SE_W258, +63
 	delay 0xA
-	createsprite 0x8595D44, 0x82, -30, -100, 25, 25, 40, 0
+	createsprite gUnknown_08595D44, 0x82, -30, -100, 25, 25, 40, 0
 	playsewithpan SE_W258, +63
 	delay 0xA
-	createsprite 0x8595D44, 0x82, -30, -100, 25, 25, 0, 0
+	createsprite gUnknown_08595D44, 0x82, -30, -100, 25, 25, 0, 0
 	playsewithpan SE_W258, +63
 	waitforvisualfinish
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 8, 1
@@ -10087,7 +10087,7 @@ Move_COUNT:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W003, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -10095,226 +10095,226 @@ Move_COUNT:
 	end
 
 AnimScript_82D7720:
-	createsprite 0x8595B68, 0x82, -10, -10, 0
+	createsprite gUnknown_08595B68, 0x82, -10, -10, 0
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B80, 0x82, 10, 20, 0
+	createsprite gUnknown_08595B80, 0x82, 10, 20, 0
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B68, 0x82, -5, 10, 0
+	createsprite gUnknown_08595B68, 0x82, -5, 10, 0
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B80, 0x82, 17, -12, 0
+	createsprite gUnknown_08595B80, 0x82, 17, -12, 0
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B80, 0x82, -15, 15, 0
+	createsprite gUnknown_08595B80, 0x82, -15, 15, 0
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B80, 0x82, 0, 0, 0
+	createsprite gUnknown_08595B80, 0x82, 0, 0, 0
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B68, 0x82, 20, 2, 0
+	createsprite gUnknown_08595B68, 0x82, 20, 2, 0
 	playsewithpan SE_W196, +63
 	return
 
 AnimScript_82D77A4:
-	createsprite 0x8595B68, 0x82, -10, -10, 1
+	createsprite gUnknown_08595B68, 0x82, -10, -10, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B80, 0x82, 10, 20, 1
+	createsprite gUnknown_08595B80, 0x82, 10, 20, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B68, 0x82, -29, 0, 1
+	createsprite gUnknown_08595B68, 0x82, -29, 0, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B80, 0x82, 29, -20, 1
+	createsprite gUnknown_08595B80, 0x82, 29, -20, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B68, 0x82, -5, 10, 1
+	createsprite gUnknown_08595B68, 0x82, -5, 10, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B80, 0x82, 17, -12, 1
+	createsprite gUnknown_08595B80, 0x82, 17, -12, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B68, 0x82, -20, 0, 1
+	createsprite gUnknown_08595B68, 0x82, -20, 0, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B80, 0x82, -15, 15, 1
+	createsprite gUnknown_08595B80, 0x82, -15, 15, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B80, 0x82, 26, -5, 1
+	createsprite gUnknown_08595B80, 0x82, 26, -5, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B80, 0x82, 0, 0, 1
+	createsprite gUnknown_08595B80, 0x82, 0, 0, 1
 	playsewithpan SE_W196, +63
 	delay 0x4
-	createsprite 0x8595B68, 0x82, 20, 2, 1
+	createsprite gUnknown_08595B68, 0x82, 20, 2, 1
 	playsewithpan SE_W196, +63
 	return
 
 AnimScript_82D7874:
 	loopsewithpan SE_W196, +63, 0x6, 0x4
-	createsprite 0x8595C04, 0x82, 0, 24, 0
+	createsprite gUnknown_08595C04, 0x82, 0, 24, 0
 	delay 0x4
-	createsprite 0x8595C04, 0x82, 8, 24, 0
-	createsprite 0x8595C04, 0x82, -8, 24, 0
+	createsprite gUnknown_08595C04, 0x82, 8, 24, 0
+	createsprite gUnknown_08595C04, 0x82, -8, 24, 0
 	delay 0x4
-	createsprite 0x8595C04, 0x82, 16, 24, 0
-	createsprite 0x8595C04, 0x82, -16, 24, 0
+	createsprite gUnknown_08595C04, 0x82, 16, 24, 0
+	createsprite gUnknown_08595C04, 0x82, -16, 24, 0
 	delay 0x4
-	createsprite 0x8595C04, 0x82, 24, 24, 0
-	createsprite 0x8595C04, 0x82, -24, 24, 0
+	createsprite gUnknown_08595C04, 0x82, 24, 24, 0
+	createsprite gUnknown_08595C04, 0x82, -24, 24, 0
 	delay 0x4
-	createsprite 0x8595C04, 0x82, 32, 24, 0
-	createsprite 0x8595C04, 0x82, -32, 24, 0
+	createsprite gUnknown_08595C04, 0x82, 32, 24, 0
+	createsprite gUnknown_08595C04, 0x82, -32, 24, 0
 	return
 
 AnimScript_82D78F8:
 	loopsewithpan SE_W196, +63, 0x6, 0x4
-	createsprite 0x8595C04, 0x82, 0, 24, 1
+	createsprite gUnknown_08595C04, 0x82, 0, 24, 1
 	delay 0x4
-	createsprite 0x8595C04, 0x82, 8, 24, 1
-	createsprite 0x8595C04, 0x82, -8, 24, 1
+	createsprite gUnknown_08595C04, 0x82, 8, 24, 1
+	createsprite gUnknown_08595C04, 0x82, -8, 24, 1
 	delay 0x4
-	createsprite 0x8595C04, 0x82, 16, 24, 1
-	createsprite 0x8595C04, 0x82, -16, 24, 1
+	createsprite gUnknown_08595C04, 0x82, 16, 24, 1
+	createsprite gUnknown_08595C04, 0x82, -16, 24, 1
 	delay 0x4
-	createsprite 0x8595C04, 0x82, 24, 24, 1
-	createsprite 0x8595C04, 0x82, -24, 24, 1
+	createsprite gUnknown_08595C04, 0x82, 24, 24, 1
+	createsprite gUnknown_08595C04, 0x82, -24, 24, 1
 	delay 0x4
-	createsprite 0x8595C04, 0x82, 32, 24, 1
-	createsprite 0x8595C04, 0x82, -32, 24, 1
+	createsprite gUnknown_08595C04, 0x82, 32, 24, 1
+	createsprite gUnknown_08595C04, 0x82, -32, 24, 1
 	delay 0x4
-	createsprite 0x8595C04, 0x82, 40, 24, 1
-	createsprite 0x8595C04, 0x82, -40, 24, 1
+	createsprite gUnknown_08595C04, 0x82, 40, 24, 1
+	createsprite gUnknown_08595C04, 0x82, -40, 24, 1
 	delay 0x4
-	createsprite 0x8595C04, 0x82, 48, 24, 1
-	createsprite 0x8595C04, 0x82, -48, 24, 1
+	createsprite gUnknown_08595C04, 0x82, 48, 24, 1
+	createsprite gUnknown_08595C04, 0x82, -48, 24, 1
 	return
 
 AnimScript_82D79B4:
-	createsprite 0x8592B7C, 0x2, -15, 0, 0, 0, 32, 60
+	createsprite gUnknown_08592B7C, 0x2, -15, 0, 0, 0, 32, 60
 	delay 0x8
-	createsprite 0x8592B7C, 0x2, 12, -5, 0, 0, 32, 60
+	createsprite gUnknown_08592B7C, 0x2, 12, -5, 0, 0, 32, 60
 	delay 0x8
 	return
 
 AnimScript_82D79DF:
 	playsewithpan SE_W071B, -64
-	createsprite 0x8592F2C, 0x2, 0, -5, 0, 0
+	createsprite gUnknown_08592F2C, 0x2, 0, -5, 0, 0
 	delay 0x7
-	createsprite 0x8592F2C, 0x2, -15, 10, 0, 0
+	createsprite gUnknown_08592F2C, 0x2, -15, 10, 0, 0
 	delay 0x7
-	createsprite 0x8592F2C, 0x2, -15, -15, 0, 0
+	createsprite gUnknown_08592F2C, 0x2, -15, -15, 0, 0
 	delay 0x7
-	createsprite 0x8592F2C, 0x2, 10, -5, 0, 0
+	createsprite gUnknown_08592F2C, 0x2, 10, -5, 0, 0
 	delay 0x7
 	return
 
 AnimScript_82D7A28:
 	playsewithpan SE_W071B, +63
-	createsprite 0x8592F2C, 0x82, 0, -5, 1, 0
+	createsprite gUnknown_08592F2C, 0x82, 0, -5, 1, 0
 	delay 0x7
-	createsprite 0x8592F2C, 0x82, -15, 10, 1, 0
+	createsprite gUnknown_08592F2C, 0x82, -15, 10, 1, 0
 	delay 0x7
-	createsprite 0x8592F2C, 0x82, -15, -15, 1, 0
+	createsprite gUnknown_08592F2C, 0x82, -15, -15, 1, 0
 	delay 0x7
-	createsprite 0x8592F2C, 0x82, 10, -5, 1, 0
+	createsprite gUnknown_08592F2C, 0x82, 10, -5, 1, 0
 	delay 0x7
 	return
 
 AnimScript_82D7A71:
-	createsprite 0x8596240, 0x82, 10, 10, 0
+	createsprite gUnknown_08596240, 0x82, 10, 10, 0
 	playsewithpan SE_W092, +63
 	delay 0x6
-	createsprite 0x8596240, 0x82, 20, -20, 0
+	createsprite gUnknown_08596240, 0x82, 20, -20, 0
 	playsewithpan SE_W092, +63
 	delay 0x6
-	createsprite 0x8596240, 0x82, -20, 15, 0
+	createsprite gUnknown_08596240, 0x82, -20, 15, 0
 	playsewithpan SE_W092, +63
 	delay 0x6
-	createsprite 0x8596240, 0x82, 0, 0, 0
+	createsprite gUnknown_08596240, 0x82, 0, 0, 0
 	playsewithpan SE_W092, +63
 	delay 0x6
-	createsprite 0x8596240, 0x82, -20, -20, 0
+	createsprite gUnknown_08596240, 0x82, -20, -20, 0
 	playsewithpan SE_W092, +63
 	delay 0x6
-	createsprite 0x8596240, 0x82, 16, -8, 0
+	createsprite gUnknown_08596240, 0x82, 16, -8, 0
 	playsewithpan SE_W092, +63
 	return
 
 AnimScript_82D7AE2:
-	createsprite 0x8596258, 0x2, 10, 10, 0
+	createsprite gUnknown_08596258, 0x2, 10, 10, 0
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, 20, -20, 0
+	createsprite gUnknown_08596258, 0x2, 20, -20, 0
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, -20, 15, 0
+	createsprite gUnknown_08596258, 0x2, -20, 15, 0
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, 0, 0, 0
+	createsprite gUnknown_08596258, 0x2, 0, 0, 0
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, -20, -20, 0
+	createsprite gUnknown_08596258, 0x2, -20, -20, 0
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, 16, -8, 0
+	createsprite gUnknown_08596258, 0x2, 16, -8, 0
 	playsewithpan SE_W145C, +63
 	return
 
 AnimScript_82D7B53:
-	createsprite 0x8596258, 0x2, 10, 10, 1
+	createsprite gUnknown_08596258, 0x2, 10, 10, 1
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, -28, -10, 1
+	createsprite gUnknown_08596258, 0x2, -28, -10, 1
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, 20, -20, 1
+	createsprite gUnknown_08596258, 0x2, 20, -20, 1
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, -20, 15, 1
+	createsprite gUnknown_08596258, 0x2, -20, 15, 1
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, 0, 0, 1
+	createsprite gUnknown_08596258, 0x2, 0, 0, 1
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, 27, 8, 1
+	createsprite gUnknown_08596258, 0x2, 27, 8, 1
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, -20, -20, 1
+	createsprite gUnknown_08596258, 0x2, -20, -20, 1
 	playsewithpan SE_W145C, +63
 	delay 0x6
-	createsprite 0x8596258, 0x2, 16, -8, 1
+	createsprite gUnknown_08596258, 0x2, 16, -8, 1
 	playsewithpan SE_W145C, +63
 	return
 
 AnimScript_82D7BEA:
 	playsewithpan SE_W085B, +63
-	createsprite 0x8595810, 0x82, 5, 0, 5, 0
+	createsprite gUnknown_08595810, 0x82, 5, 0, 5, 0
 	delay 0x2
-	createsprite 0x8595810, 0x82, -5, 10, 5, 1
+	createsprite gUnknown_08595810, 0x82, -5, 10, 5, 1
 	delay 0x2
-	createsprite 0x8595810, 0x82, 15, 20, 5, 2
+	createsprite gUnknown_08595810, 0x82, 15, 20, 5, 2
 	delay 0x2
-	createsprite 0x8595810, 0x82, -15, -10, 5, 0
+	createsprite gUnknown_08595810, 0x82, -15, -10, 5, 0
 	delay 0x2
-	createsprite 0x8595810, 0x82, 25, 0, 5, 1
+	createsprite gUnknown_08595810, 0x82, 25, 0, 5, 1
 	delay 0x2
-	createsprite 0x8595810, 0x82, -8, 8, 5, 2
+	createsprite gUnknown_08595810, 0x82, -8, 8, 5, 2
 	delay 0x2
-	createsprite 0x8595810, 0x82, 2, -8, 5, 0
+	createsprite gUnknown_08595810, 0x82, 2, -8, 5, 0
 	delay 0x2
-	createsprite 0x8595810, 0x82, -20, 15, 5, 1
+	createsprite gUnknown_08595810, 0x82, -20, 15, 5, 1
 	return
 
 AnimScript_82D7C75:
 	loopsewithpan SE_W146, +63, 0xD, 0x6
-	createsprite 0x859725C, 0x82, 0, -15, 0, 3, 90
-	createsprite 0x859725C, 0x82, 0, -15, 51, 3, 90
-	createsprite 0x859725C, 0x82, 0, -15, 102, 3, 90
-	createsprite 0x859725C, 0x82, 0, -15, 153, 3, 90
-	createsprite 0x859725C, 0x82, 0, -15, 204, 3, 90
+	createsprite gUnknown_0859725C, 0x82, 0, -15, 0, 3, 90
+	createsprite gUnknown_0859725C, 0x82, 0, -15, 51, 3, 90
+	createsprite gUnknown_0859725C, 0x82, 0, -15, 102, 3, 90
+	createsprite gUnknown_0859725C, 0x82, 0, -15, 153, 3, 90
+	createsprite gUnknown_0859725C, 0x82, 0, -15, 204, 3, 90
 	return
 
 AnimScript_82D7CD1:
@@ -10403,28 +10403,28 @@ Status_Burn:
 	end
 
 AnimScript_82D7DA6:
-	createsprite 0x8595504, 0x82, -24, 24, 24, 24, 20, 1, 1
+	createsprite gUnknown_08595504, 0x82, -24, 24, 24, 24, 20, 1, 1
 	delay 0x4
 	return
 
 Status_Infatuation:
 	loadspritegfx 0x27E2
 	playsewithpan SE_W204, -64
-	createsprite 0x8593970, 0x3, 0, 20
+	createsprite gUnknown_08593970, 0x3, 0, 20
 	delay 0xF
 	playsewithpan SE_W204, -64
-	createsprite 0x8593970, 0x3, -20, 20
+	createsprite gUnknown_08593970, 0x3, -20, 20
 	delay 0xF
 	playsewithpan SE_W204, -64
-	createsprite 0x8593970, 0x3, 20, 20
+	createsprite gUnknown_08593970, 0x3, 20, 20
 	end
 
 Status_Sleep:
 	loadspritegfx 0x27F4
 	playsewithpan SE_W173, -64
-	createsprite 0x8592C88, 0x2, 4, -10, 16, 0, 0
+	createsprite gUnknown_08592C88, 0x2, 4, -10, 16, 0, 0
 	delay 0x1E
-	createsprite 0x8592C88, 0x2, 4, -10, 16, 0, 0
+	createsprite gUnknown_08592C88, 0x2, 4, -10, 16, 0, 0
 	end
 
 Status_Paralysis:
@@ -10448,7 +10448,7 @@ Status_Curse:
 	loadspritegfx 0x27D8
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_W171, +63
-	createsprite 0x8596DE8, 0x82
+	createsprite gUnknown_08596DE8, 0x82
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 14, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -10458,7 +10458,7 @@ Status_Nightmare:
 	loadspritegfx 0x27ED
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_W171, +63
-	createsprite 0x8596E00, 0x82
+	createsprite gUnknown_08596E00, 0x82
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 14, 1
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
@@ -10509,7 +10509,7 @@ Anim_Table_4:
 	createvisualtask sub_81732B0, 0x2
 	delay 0x0
 	waitplaysewithpan SE_W026, -64, 0x16
-	createsprite 0x85E5338, 0x83, -18, 12, 0, 32
+	createsprite gUnknown_085E5338, 0x83, -18, 12, 0, 32
 	delay 0x32
 	loopsewithpan SE_W039, +63, 0x13, 0x2
 	createvisualtask sub_80D5EB8, 0x5, 1, 8, 1536, 2, 1
@@ -10519,7 +10519,7 @@ Anim_Table_4:
 
 Anim_ItemKnockOff:
 	loadspritegfx 0x27F0
-	createsprite 0x8592628, 0x82
+	createsprite gUnknown_08592628, 0x82
 	end
 
 Status_Wrap:
@@ -10533,9 +10533,9 @@ Status_Wrap:
 AnimScript_82D7FA1:
 	loadspritegfx 0x27CA
 	loopsewithpan SE_W010, +63, 0x6, 0x2
-	createsprite 0x8592494, 0x84, 0, 16, 0, 1
+	createsprite gUnknown_08592494, 0x84, 0, 16, 0, 1
 	delay 0x7
-	createsprite 0x8592494, 0x82, 0, 8, 1, 1
+	createsprite gUnknown_08592494, 0x82, 0, 8, 1, 1
 	delay 0x3
 	createvisualtask sub_80D52D0, 0x2, 1, 2, 0, 8, 1
 	delay 0x14
@@ -10560,13 +10560,13 @@ AnimScript_82D800E:
 	monbgprio_28 ANIM_TARGET
 	setalpha 0x80C
 	delay 0x0
-	createsprite 0x8597274, 0x0, 4, 2, 0, 7, 23968
+	createsprite gUnknown_08597274, 0x0, 4, 2, 0, 7, 23968
 	playsewithpan SE_W250, +63
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 2, 30, 1
 	call AnimScript_82D1F5B
 	call AnimScript_82D1F5B
 	delay 0xC
-	createsprite 0x8597274, 0x0, 4, 2, 7, 0, 23968
+	createsprite gUnknown_08597274, 0x0, 4, 2, 7, 0, 23968
 	waitforvisualfinish
 	stopsound
 	clearmonbg ANIM_DEF_PARTNER
@@ -10578,10 +10578,10 @@ AnimScript_82D8062:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W011, +63
-	createsprite 0x8597098, 0x2, -32, 0, 2, 819, 0, 10
-	createsprite 0x8597098, 0x2, 32, 0, 6, -819, 0, 10
+	createsprite gUnknown_08597098, 0x2, -32, 0, 2, 819, 0, 10
+	createsprite gUnknown_08597098, 0x2, 32, 0, 6, -819, 0, 10
 	delay 0xA
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x5, 1, 3, 0, 5, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -10591,13 +10591,13 @@ AnimScript_82D8062:
 
 AnimScript_82D80BF:
 	loadspritegfx 0x275A
-	createsprite 0x8597274, 0x0, 4, 2, 0, 7, 563
+	createsprite gUnknown_08597274, 0x0, 4, 2, 0, 7, 563
 	createvisualtask sub_80D51AC, 0x5, 1, 0, 2, 30, 1
 	playsewithpan SE_W328, +63
 	call AnimScript_82D51B7
 	call AnimScript_82D51B7
 	delay 0x16
-	createsprite 0x8597274, 0x0, 4, 2, 7, 0, 563
+	createsprite gUnknown_08597274, 0x0, 4, 2, 7, 0, 563
 	waitforvisualfinish
 	stopsound
 	end
@@ -10619,8 +10619,8 @@ Anim_ItemEffect:
 	call AnimScript_82D79B4
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, -64
-	createsprite 0x8597274, 0x2, 2, 3, 7, 0, 26609
-	createsprite 0x859381C, 0x3, 0, 0, 0, 0
+	createsprite gUnknown_08597274, 0x2, 2, 3, 7, 0, 26609
+	createsprite gUnknown_0859381C, 0x3, 0, 0, 0, 0
 	waitforvisualfinish
 	end
 
@@ -10630,31 +10630,31 @@ Anim_SmokeBallEscape:
 	setalpha 0x40C
 	delay 0x0
 	playsewithpan SE_BOWA2, +63
-	createsprite 0x85CE734, 0x80, 0, 32, 28, 30
+	createsprite gUnknown_085CE734, 0x80, 0, 32, 28, 30
 	delay 0x4
 	playsewithpan SE_BOWA2, +63
-	createsprite 0x85CE734, 0x7F, 2, 12, 20, 30
+	createsprite gUnknown_085CE734, 0x7F, 2, 12, 20, 30
 	delay 0xC
 	playsewithpan SE_BOWA2, +63
-	createsprite 0x85CE734, 0x7E, 2, -28, 4, 30
+	createsprite gUnknown_085CE734, 0x7E, 2, -28, 4, 30
 	delay 0xC
 	playsewithpan SE_BOWA2, +63
-	createsprite 0x85CE734, 0x7C, 2, 14, -20, 30
+	createsprite gUnknown_085CE734, 0x7C, 2, 14, -20, 30
 	delay 0x4
 	playsewithpan SE_BOWA2, +63
 	createvisualtask sub_81136E8, 0x2, 2
-	createsprite 0x85CE734, 0x7B, 3, 4, 4, 30
+	createsprite gUnknown_085CE734, 0x7B, 3, 4, 4, 30
 	delay 0xE
 	playsewithpan SE_BOWA2, +63
-	createsprite 0x85CE734, 0x7A, 3, -14, 18, 46
+	createsprite gUnknown_085CE734, 0x7A, 3, -14, 18, 46
 	delay 0x0
-	createsprite 0x85CE734, 0x79, 3, 14, -14, 46
+	createsprite gUnknown_085CE734, 0x79, 3, 14, -14, 46
 	delay 0x0
-	createsprite 0x85CE734, 0x78, 3, -12, -10, 46
+	createsprite gUnknown_085CE734, 0x78, 3, -12, -10, 46
 	delay 0x0
-	createsprite 0x85CE734, 0x77, 3, 14, 14, 46
+	createsprite gUnknown_085CE734, 0x77, 3, 14, 14, 46
 	delay 0x0
-	createsprite 0x85CE734, 0x76, 3, 0, 0, 46
+	createsprite gUnknown_085CE734, 0x76, 3, 0, 0, 46
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	invisible ANIM_ATTACKER
@@ -10663,14 +10663,14 @@ Anim_SmokeBallEscape:
 	end
 
 Anim_HangedOn:
-	createsprite 0x8597274, 0x0, 2, 7, 0, 9, 31
+	createsprite gUnknown_08597274, 0x0, 2, 7, 0, 9, 31
 	playsewithpan SE_W082, -64
 	createvisualtask sub_815DB90, 0x5, 30, 128, 0, 1, 2, 0, 1
 	waitforvisualfinish
-	createsprite 0x8597274, 0x0, 2, 4, 9, 0, 31
+	createsprite gUnknown_08597274, 0x0, 2, 4, 9, 0, 31
 	waitforvisualfinish
 	delay 0x6
-	createsprite 0x857FE58, 0x0, 0, 0, 15
+	createsprite gUnknown_0857FE58, 0x0, 0, 0, 15
 	end
 
 Anim_Rain:
@@ -10705,7 +10705,7 @@ Anim_Hit:
 	monbg ANIM_TARGET
 	setalpha 0x80C
 	playsewithpan SE_W003, +63
-	createsprite 0x8597358, 0x2, 0, 0, 1, 2
+	createsprite gUnknown_08597358, 0x2, 0, 0, 1, 2
 	createvisualtask sub_80D51AC, 0x2, 1, 3, 0, 6, 1
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
@@ -10717,7 +10717,7 @@ Anim_ItemSteal:
 	createvisualtask sub_8117F30, 0x2
 	createvisualtask sub_8172ED0, 0x2
 	delay 0x1
-	createsprite 0x8592670, 0x2, 0, -5, 10, 2, -1
+	createsprite gUnknown_08592670, 0x2, 0, -5, 10, 2, -1
 	end
 
 Anim_SnatchMove:
@@ -10769,7 +10769,7 @@ Anim_FutureSightHit:
 Anim_DoomDesireHit:
 	createvisualtask sub_8117F10, 0x2
 	loadspritegfx 0x27D6
-	createsprite 0x8597274, 0x2, 1, 3, 0, 16, 0x7FFF
+	createsprite gUnknown_08597274, 0x2, 1, 3, 0, 16, 0x7FFF
 	waitforvisualfinish
 	delay 0xA
 	createvisualtask sub_815C0A4, 0x5
@@ -10782,21 +10782,21 @@ Anim_DoomDesireHit:
 	delay 0x19
 	createvisualtask sub_80D5484, 0x2, 1, 10, 0, 20, 1
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x3, 0, 0, 1, 1
+	createsprite gUnknown_0859371C, 0x3, 0, 0, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x3, 24, -24, 1, 1
+	createsprite gUnknown_0859371C, 0x3, 24, -24, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x3, -16, 16, 1, 1
+	createsprite gUnknown_0859371C, 0x3, -16, 16, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x3, -24, -12, 1, 1
+	createsprite gUnknown_0859371C, 0x3, -24, -12, 1, 1
 	delay 0x6
 	playsewithpan SE_W120, +63
-	createsprite 0x859371C, 0x3, 16, 16, 1, 1
+	createsprite gUnknown_0859371C, 0x3, 16, 16, 1, 1
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 3, 16, 0, 0x7FFF
+	createsprite gUnknown_08597274, 0x2, 1, 3, 16, 0, 0x7FFF
 	waitforvisualfinish
 	end
 
@@ -10818,7 +10818,7 @@ Status_Ingrain:
 	loadspritegfx 0x272F
 	monbg ANIM_DEF_PARTNER
 	setalpha 0x80C
-	createsprite 0x8597274, 0x2, 1, 1, 0, 4, 13293
+	createsprite gUnknown_08597274, 0x2, 1, 1, 0, 4, 13293
 	waitforvisualfinish
 	delay 0x3
 	call AnimScript_82D1009
@@ -10826,7 +10826,7 @@ Status_Ingrain:
 	delay 0xF
 	call AnimScript_82D79DF
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 1, 4, 0, 13293
+	createsprite gUnknown_08597274, 0x2, 1, 1, 4, 0, 13293
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
@@ -10834,7 +10834,7 @@ Status_Ingrain:
 
 Anim_WishHeal:
 	loadspritegfx 0x2741
-	createsprite 0x8597274, 0x2, 1, 3, 0, 10, 0
+	createsprite gUnknown_08597274, 0x2, 1, 3, 0, 10, 0
 	waitforvisualfinish
 	playsewithpan SE_W025, -64
 	call AnimScript_82D79B4
@@ -10843,7 +10843,7 @@ Anim_WishHeal:
 	loadspritegfx 0x272F
 	call AnimScript_82D79DF
 	waitforvisualfinish
-	createsprite 0x8597274, 0x2, 1, 3, 10, 0, 0
+	createsprite gUnknown_08597274, 0x2, 1, 3, 10, 0, 0
 	end
 
 AnimScript_82D85A3:
@@ -10913,7 +10913,7 @@ AnimScript_82D8652:
 	setalpha 0x80C
 	delay 0x0
 	playsewithpan SE_W003, +63
-	createsprite 0x8597358, 0x82, -4, -20, 1, 2
+	createsprite gUnknown_08597358, 0x82, -4, -20, 1, 2
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
