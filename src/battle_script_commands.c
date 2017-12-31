@@ -18,6 +18,7 @@
 #include "constants/species.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "constants/battle_anim.h"
 #include "text.h"
 #include "sound.h"
 #include "pokedex.h"
