@@ -144,7 +144,7 @@ gUnknown_0861FA4C:: @ 861FA4C
 
 gUnknown_0861FA54:: @ 861FA54
 	obj_pal gUnknown_0861F590, 0
-	obj_pal NULL, 0
+	null_obj_pal
 
 gUnknown_0861FA64:: @ 861FA64
 	obj_tiles gPokenavLeftHeaderHoennMap_Gfx, 0xC00, 2
@@ -1408,7 +1408,7 @@ gUnknown_08622810:: @ 8622810
 
 gUnknown_08622818:: @ 8622818
 	obj_pal gUnknown_08622698, 12
-	obj_pal NULL, 0
+	null_obj_pal
 
 gUnknown_08622828:: @ 8622828
 	.2byte 0x8000
@@ -1515,7 +1515,7 @@ gUnknown_086230F8:: @ 86230F8
 
 gUnknown_08623100:: @ 8623100
 	obj_pal gHoennMapZoomIcons_Pal, 11
-	obj_pal NULL, 0
+	null_obj_pal
 
 gUnknown_08623110:: @ 8623110
 	.incbin "baserom.gba", 0x623110, 0x8
@@ -1761,7 +1761,7 @@ gUnknown_08624C80:: @ 8624C80
 	obj_pal gUnknown_08624038, 17
 	obj_pal gUnknown_08624058, 18
 	obj_pal gUnknown_08624078, 19
-	obj_pal NULL, 0
+	null_obj_pal
 
 gUnknown_08624CB0:: @ 8624CB0
 	.incbin "baserom.gba", 0x624cb0, 0x54

@@ -220,7 +220,7 @@ gUnknown_085714BC:: @ 85714BC
 
 gUnknown_085714D4:: @ 85714D4
 	obj_tiles gUnknown_08570C44, 0x100, 4
-	obj_tiles NULL, 0, 0
+	null_obj_tiles
 
 gUnknown_085714E4:: @ 85714E4
 	 obj_pal gFrontierPassCursor_Pal, 0
@@ -229,8 +229,10 @@ gUnknown_085714E4:: @ 85714E4
 	 obj_pal gFrontierPassMedalsGold_Pal, 3
 	 obj_pal gUnknown_0856FB7C, 4
 	 obj_pal gUnknown_0856FB9C, 5
-	 obj_pal NULL, 0
-	 obj_pal NULL, 0xFFFF
+	 null_obj_pal
+
+	 @ this doesnt look like its part of the same table.
+	 .4byte 0x0, 0xFFFF
 
 gUnknown_08571524:: @ 8571524
 	 .incbin "baserom.gba", 0x571524, 0x8

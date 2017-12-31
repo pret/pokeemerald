@@ -241,60 +241,25 @@ gUnknown_085A8264:: @ 85A8264
 gUnknown_085A82CC:: @ 85A82CC
 	.incbin "baserom.gba", 0x5a82cc, 0x68
 
-	@ 50 F2 DC 08 00 02 00 00
-	@ 50 F4 DC 08 00 02 01 00
-	@ 50 F6 DC 08 00 02 02 00
-	@ 50 F8 DC 08 00 02 03 00
-	@ 50 FA DC 08 00 02 04 00
-	@ 50 FC DC 08 00 02 05 00
-	@ 50 FE DC 08 00 02 06 00
-	@ B8 07 DD 08 40 00 07 00
-	@ F8 07 DD 08 40 00 08 00
-	@ 38 08 DD 08 40 00 09 00
-	@ 78 08 DD 08 40 00 0A 00
-	@ B8 08 DD 08 40 00 0B 00
-	@ F8 08 DD 08 40 00 0C 00
-	@ 38 09 DD 08 40 00 0D 00
-	@ 78 09 DD 08 40 00 0E 00
-	@ B8 09 DD 08 40 00 0F 00
-	@ F8 09 DD 08 40 00 10 00
-
 	.align 2
 gUnknown_085A8334:: @ 85A8334
-	.4byte gSlotMachineReelSymbol1Tiles
-	.2byte 0x0200, 0x0000
-	.4byte gSlotMachineReelSymbol2Tiles
-	.2byte 0x0200, 0x0001
-	.4byte gSlotMachineReelSymbol3Tiles
-	.2byte 0x0200, 0x0002
-	.4byte gSlotMachineReelSymbol4Tiles
-	.2byte 0x0200, 0x0003
-	.4byte gSlotMachineReelSymbol5Tiles
-	.2byte 0x0200, 0x0004
-	.4byte gSlotMachineReelSymbol6Tiles
-	.2byte 0x0200, 0x0005
-	.4byte gSlotMachineReelSymbol7Tiles
-	.2byte 0x0200, 0x0006
-	.4byte gSlotMachineNumber0Tiles
-	.2byte 0x0040, 0x0007
-	.4byte gSlotMachineNumber1Tiles
-	.2byte 0x0040, 0x0008
-	.4byte gSlotMachineNumber2Tiles
-	.2byte 0x0040, 0x0009
-	.4byte gSlotMachineNumber3Tiles
-	.2byte 0x0040, 0x000A
-	.4byte gSlotMachineNumber4Tiles
-	.2byte 0x0040, 0x000B
-	.4byte gSlotMachineNumber5Tiles
-	.2byte 0x0040, 0x000C
-	.4byte gSlotMachineNumber6Tiles
-	.2byte 0x0040, 0x000D
-	.4byte gSlotMachineNumber7Tiles
-	.2byte 0x0040, 0x000E
-	.4byte gSlotMachineNumber8Tiles
-	.2byte 0x0040, 0x000F
-	.4byte gSlotMachineNumber9Tiles
-	.2byte 0x0040, 0x0010
+	obj_tiles gSlotMachineReelSymbol1Tiles, 0x0200, 0x0000
+	obj_tiles gSlotMachineReelSymbol2Tiles, 0x0200, 0x0001
+	obj_tiles gSlotMachineReelSymbol3Tiles, 0x0200, 0x0002
+	obj_tiles gSlotMachineReelSymbol4Tiles, 0x0200, 0x0003
+	obj_tiles gSlotMachineReelSymbol5Tiles, 0x0200, 0x0004
+	obj_tiles gSlotMachineReelSymbol6Tiles, 0x0200, 0x0005
+	obj_tiles gSlotMachineReelSymbol7Tiles, 0x0200, 0x0006
+	obj_tiles gSlotMachineNumber0Tiles, 0x0040, 0x0007
+	obj_tiles gSlotMachineNumber1Tiles, 0x0040, 0x0008
+	obj_tiles gSlotMachineNumber2Tiles, 0x0040, 0x0009
+	obj_tiles gSlotMachineNumber3Tiles, 0x0040, 0x000A
+	obj_tiles gSlotMachineNumber4Tiles, 0x0040, 0x000B
+	obj_tiles gSlotMachineNumber5Tiles, 0x0040, 0x000C
+	obj_tiles gSlotMachineNumber6Tiles, 0x0040, 0x000D
+	obj_tiles gSlotMachineNumber7Tiles, 0x0040, 0x000E
+	obj_tiles gSlotMachineNumber8Tiles, 0x0040, 0x000F
+	obj_tiles gSlotMachineNumber9Tiles, 0x0040, 0x0010
 
 	.align 2
 	.incbin "baserom.gba", 0x5a83bc, 0x28
@@ -334,15 +299,15 @@ gUnknown_085A8524:: @ 85A8524
 
 	.align 2
 gUnknown_085A8544:: @ 85A8544
-	.4byte gUnknown_08DCF170, 0
-	.4byte gUnknown_08DCF190, 1
-	.4byte gUnknown_08DCF1B0, 2
-	.4byte gSlotMachineReelTime_Pal, 3
-	.4byte gUnknown_08DCF1F0, 4
-	.4byte gUnknown_08DCF210, 5
-	.4byte gUnknown_08DCF230, 6
-	.4byte gUnknown_08DCF1F0, 7
-	.4byte 0, 0
+	obj_pal gUnknown_08DCF170, 0
+	obj_pal gUnknown_08DCF190, 1
+	obj_pal gUnknown_08DCF1B0, 2
+	obj_pal gSlotMachineReelTime_Pal, 3
+	obj_pal gUnknown_08DCF1F0, 4
+	obj_pal gUnknown_08DCF210, 5
+	obj_pal gUnknown_08DCF230, 6
+	obj_pal gUnknown_08DCF1F0, 7
+	null_obj_pal
 
 gUnknown_085A858C:: @ 85A858C
 	.incbin "baserom.gba", 0x5a858c, 0x1154
