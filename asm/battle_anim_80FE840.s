@@ -17067,8 +17067,8 @@ sub_8107144: @ 8107144
 	.pool
 	thumb_func_end sub_8107144
 
-	thumb_func_start update_fury_cutter_counter_copy
-update_fury_cutter_counter_copy: @ 8107168
+	thumb_func_start sub_8107168
+sub_8107168: @ 8107168
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -17081,7 +17081,7 @@ update_fury_cutter_counter_copy: @ 8107168
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end update_fury_cutter_counter_copy
+	thumb_func_end sub_8107168
 
 	thumb_func_start sub_8107188
 sub_8107188: @ 8107188

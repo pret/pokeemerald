@@ -18,9 +18,11 @@ gUnknown_085CE020:: @ 85CE020
 	spr_template 0x2799, 0x2799, gUnknown_08524A34, gUnknown_085CE01C, NULL, gDummySpriteAffineAnimTable, sub_80A77C8
 
 	.align 2
+gUnknown_085CE038:: @ 85CE038
 	spr_template 0x2720, 0x2720, gUnknown_08524934, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815A0D4
 
 	.align 2
+gUnknown_085CE050:: @ 85CE050
 	spr_template 0x2721, 0x2721, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A78AC
 
 	.align 2
@@ -37,9 +39,11 @@ gUnknown_085CE07C:: @ 85CE07C
 	spr_template 0x27ce, 0x27ce, gUnknown_08524914, gUnknown_085CE078, NULL, gDummySpriteAffineAnimTable, sub_80A77C8
 
 	.align 2
+gUnknown_085CE094::
 	spr_template 0x27cf, 0x27cf, gUnknown_08524A3C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815A1B0
 
 	.align 2
+gUnknown_085CE0AC::
 	spr_template 0x27cd, 0x27cd, gUnknown_08524974, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815A254
 
 	.align 2
@@ -65,6 +69,7 @@ gUnknown_085CE104:: @ 85CE104
 	spr_template 0x27cb, 0x27cb, gUnknown_08524AFC, gDummySpriteAnimTable, NULL, gUnknown_085CE0FC, sub_815A2F0
 
 	.align 2
+gUnknown_085CE11C:: @ 85CE11C
 	spr_template 0x27a8, 0x27a8, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815A6C4
 
 	.align 2
@@ -147,9 +152,11 @@ gUnknown_085CE22C:: @ 85CE22C
 	spr_template 0x27f3, 0x27f3, gUnknown_085249DC, gDummySpriteAnimTable, NULL, gUnknown_085CE224, sub_815A934
 
 	.align 2
+gUnknown_085CE244::
 	spr_template 0x2807, 0x2807, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815AAA4
 
 	.align 2
+gUnknown_085CE25C::
 	spr_template 0x2807, 0x2807, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815ABD0
 
 	.align 2
@@ -319,8 +326,11 @@ gUnknown_085CE58C:: @ 85CE58C
 	.align 2
 gUnknown_085CE590:: @ 85CE590
 	spr_template 0x27ff, 0x27ff, gUnknown_0852490C, gUnknown_085CE58C, NULL, gDummySpriteAffineAnimTable, sub_815C95C
+gUnknown_085CE5A8::
 	spr_template 0x2800, 0x2800, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815CB88
+gUnknown_085CE5C0::
 	spr_template 0x27f3, 0x27f3, gUnknown_085249DC, gDummySpriteAnimTable, NULL, gUnknown_085CE224, sub_815CC94
+gUnknown_085CE5D8::
 	spr_template 0x27fc, 0x27fc, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815CDB4
 
 	.align 2
@@ -410,6 +420,7 @@ gUnknown_085CE7D4:: @ 85CE7D4
 	.align 2
 gUnknown_085CE7EC:: @ 85CE7EC
 	spr_template 0x2808, 0x2808, gUnknown_08524904, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815E404
+gUnknown_085CE804::
 	spr_template 0x280c, 0x280c, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815E444
 
 	.align 2
@@ -429,6 +440,9 @@ gUnknown_085CE844:: @ 85CE844
 	.align 2
 gUnknown_085CE84C:: @ 85CE84C
 	spr_template 0x280e, 0x280e, gUnknown_08524974, gDummySpriteAnimTable, NULL, gUnknown_085CE844, SpriteCallbackDummy
+
+	.align 2
+gUnknown_085CE864::
 	spr_template 0x2807, 0x2807, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815E6D8
 
 	.align 2
@@ -438,11 +452,17 @@ gUnknown_085CE87C:: @ 85CE87C
 	.align 2
 gUnknown_085CE894:: @ 85CE894
 	spr_template 0x280f, 0x280f, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815E954
+gUnknown_085CE8AC::
 	spr_template 0x2807, 0x2807, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815EA14
+gUnknown_085CE8C4::
 	spr_template 0x2812, 0x2812, gUnknown_08524A34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815EE84
+gUnknown_085CE8DC::
 	spr_template 0x27f9, 0x27f9, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815F18C
+gUnknown_085CE8F4::
 	spr_template 0x27f9, 0x27f9, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81061C4
+gUnknown_085CE90C::
 	spr_template 0x280a, 0x280a, gUnknown_0852491C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815F48C
+gUnknown_085CE924::
 	spr_template 0x27f0, 0x27f0, gUnknown_08524914, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_815FE80
 
 	.align 2

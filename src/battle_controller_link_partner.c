@@ -4,6 +4,7 @@
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "battle_anim.h"
+#include "constants/battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_link_817C95C.h"
 #include "pokemon.h"

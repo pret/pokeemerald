@@ -140,6 +140,7 @@ gUnknown_085E5310:: @ 85E5310
 	.2byte 0x0100, 0x0503, 0x0506, 0x0004
 
 	.align 2
+gUnknown_085E5338:: @ 85E5338
 	spr_template 0x281d, 0x281d, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_817330C
 
 	.align 2
