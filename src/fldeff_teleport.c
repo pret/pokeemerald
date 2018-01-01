@@ -4,17 +4,18 @@
 
 extern bool8 is_light_level_1_2_3_or_6(u8 mapType);
 extern void* hm_add_c3_launch_phase_2(void);
-extern void hm_teleport_run_dp02scr(void);
-extern void* gUnknown_0203CEEC;
-extern void* gUnknown_03005DB0;
 extern void sub_808469C(void);
 extern u8 GetCursorSelectionMonId(void);
-extern void sub_817C94C(void);
 extern u8 oei_task_add(void);
 extern void FieldEffectActiveListRemove(u8 id);
 extern void sub_80B7FC8(void);
 extern void SetPlayerAvatarTransitionFlags(u8);
 
+extern void* gUnknown_0203CEEC;
+extern void* gUnknown_03005DB0;
+
+void hm_teleport_run_dp02scr(void);
+void sub_817C94C(void);
 
 // 817C8BC
 bool8 SetUpFieldMove_Teleport(void)
