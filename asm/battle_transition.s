@@ -4,210 +4,9 @@
 	.syntax unified
 
 	.text
-    
-   thumb_func_start CB2_TestBattleTransition
-CB2_TestBattleTransition: @ 8145E84
-	push {r4,lr}
-	ldr r4, =sTestingTransitionState
-	ldrb r0, [r4]
-	cmp r0, 0
-	beq _08145E98
-	cmp r0, 0x1
-	beq _08145EAC
-	b _08145EC0
-	.pool
-_08145E98:
-	ldr r0, =sTestingTransitionId
-	ldrb r0, [r0]
-	bl LaunchBattleTransitionTask
-	ldrb r0, [r4]
-	adds r0, 0x1
-	strb r0, [r4]
-	b _08145EC0
-	.pool
-_08145EAC:
-	bl IsBattleTransitionDone
-	lsls r0, 24
-	cmp r0, 0
-	beq _08145EC0
-	movs r0, 0
-	strb r0, [r4]
-	ldr r0, =c2_exit_to_overworld_2_switch
-	bl SetMainCallback2
-_08145EC0:
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end CB2_TestBattleTransition
 
-	thumb_func_start TestBattleTransition
-TestBattleTransition: @ 8145EDC
-	push {lr}
-	ldr r1, =sTestingTransitionId
-	strb r0, [r1]
-	ldr r0, =CB2_TestBattleTransition
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end TestBattleTransition
-
-	thumb_func_start BattleTransition_StartOnField
-BattleTransition_StartOnField: @ 8145EF4
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gMain
-	ldr r1, =sub_8085E50
-	str r1, [r2, 0x4]
-	bl LaunchBattleTransitionTask
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end BattleTransition_StartOnField
-
-	thumb_func_start BattleTransition_Start
-BattleTransition_Start: @ 8145F10
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl LaunchBattleTransitionTask
-	pop {r0}
-	bx r0
-	thumb_func_end BattleTransition_Start
-
-	thumb_func_start IsBattleTransitionDone
-IsBattleTransitionDone: @ 8145F20
-	push {r4,lr}
-	ldr r0, =Task_BattleTransitionMain
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r1, =gTasks
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r0, r1
-	movs r1, 0x26
-	ldrsh r0, [r0, r1]
-	cmp r0, 0
-	bne _08145F4C
-	movs r0, 0
-	b _08145F60
-	.pool
-_08145F4C:
-	adds r0, r2, 0
-	bl DestroyTask
-	ldr r4, =sTransitionStructPtr
-	ldr r0, [r4]
-	bl Free
-	movs r0, 0
-	str r0, [r4]
-	movs r0, 0x1
-_08145F60:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end IsBattleTransitionDone
-
-	thumb_func_start LaunchBattleTransitionTask
-LaunchBattleTransitionTask: @ 8145F6C
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, =Task_BattleTransitionMain
-	movs r1, 0x2
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	strh r4, [r1, 0xA]
-	ldr r4, =sTransitionStructPtr
-	movs r0, 0x3C
-	bl AllocZeroed
-	str r0, [r4]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end LaunchBattleTransitionTask
-
-	thumb_func_start Task_BattleTransitionMain
-Task_BattleTransitionMain: @ 8145FA8
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, =sMainTransitionPhases
-	ldr r2, =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-_08145FBA:
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _08145FBA
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Task_BattleTransitionMain
-
-	thumb_func_start sub_8145FE0
-sub_8145FE0: @ 8145FE0
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_80AC3D0
-	ldr r0, =gPlttBufferFaded
-	ldr r1, =gPlttBufferUnfaded
-	ldr r2, =0x04000100
-	bl CpuSet
-	ldr r1, =sPhase1_Tasks
-	movs r2, 0xA
-	ldrsh r0, [r4, r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	cmp r0, 0
-	bne _0814601C
-	movs r0, 0x2
-	strh r0, [r4, 0x8]
-	movs r0, 0x1
-	b _0814602A
-	.pool
-_0814601C:
-	movs r1, 0x4
-	bl CreateTask
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	movs r0, 0
-_0814602A:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8145FE0
-
-	thumb_func_start sub_8146030
-sub_8146030: @ 8146030
+	thumb_func_start Transition_WaitForPhase1
+Transition_WaitForPhase1: @ 8146030
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, =sPhase1_Tasks
@@ -233,10 +32,10 @@ _0814605C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8146030
+	thumb_func_end Transition_WaitForPhase1
 
-	thumb_func_start sub_8146064
-sub_8146064: @ 8146064
+	thumb_func_start Transition_Phase2
+Transition_Phase2: @ 8146064
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, =sPhase2_Tasks
@@ -255,10 +54,10 @@ sub_8146064: @ 8146064
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8146064
+	thumb_func_end Transition_Phase2
 
-	thumb_func_start sub_814608C
-sub_814608C: @ 814608C
+	thumb_func_start Transition_WaitForPhase2
+Transition_WaitForPhase2: @ 814608C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0
@@ -282,10 +81,10 @@ _081460B0:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_814608C
+	thumb_func_end Transition_WaitForPhase2
 
-	thumb_func_start sub_81460BC
-sub_81460BC: @ 81460BC
+	thumb_func_start Phase1Task_TransitionAll
+Phase1Task_TransitionAll: @ 81460BC
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -324,10 +123,10 @@ _08146104:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81460BC
+	thumb_func_end Phase1Task_TransitionAll
 
-	thumb_func_start sub_814610C
-sub_814610C: @ 814610C
+	thumb_func_start Phase2Task_Transition_Blur
+Phase2Task_Transition_Blur: @ 814610C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -352,7 +151,7 @@ _0814611E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814610C
+	thumb_func_end Phase2Task_Transition_Blur
 
 	thumb_func_start sub_8146144
 sub_8146144: @ 8146144
@@ -441,7 +240,7 @@ sub_81461D8: @ 81461D8
 	ands r0, r1
 	cmp r0, 0
 	bne _081461F4
-	ldr r0, =sub_814610C
+	ldr r0, =Phase2Task_Transition_Blur
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -453,8 +252,8 @@ _081461F4:
 	.pool
 	thumb_func_end sub_81461D8
 
-	thumb_func_start sub_8146204
-sub_8146204: @ 8146204
+	thumb_func_start Phase2Task_Transition_Swirl
+Phase2Task_Transition_Swirl: @ 8146204
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -479,7 +278,7 @@ _08146216:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8146204
+	thumb_func_end Phase2Task_Transition_Swirl
 
 	thumb_func_start sub_814623C
 sub_814623C: @ 814623C
@@ -559,7 +358,7 @@ sub_81462A8: @ 81462A8
 	ands r0, r1
 	cmp r0, 0
 	bne _081462FA
-	ldr r0, =sub_8146204
+	ldr r0, =Phase2Task_Transition_Swirl
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -624,8 +423,8 @@ sub_8146358: @ 8146358
 	.pool
 	thumb_func_end sub_8146358
 
-	thumb_func_start sub_8146384
-sub_8146384: @ 8146384
+	thumb_func_start Phase2Task_Transition_Shuffle
+Phase2Task_Transition_Shuffle: @ 8146384
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -650,7 +449,7 @@ _08146396:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8146384
+	thumb_func_end Phase2Task_Transition_Shuffle
 
 	thumb_func_start sub_81463BC
 sub_81463BC: @ 81463BC
@@ -742,7 +541,7 @@ _08146448:
 	ands r0, r1
 	cmp r0, 0
 	bne _0814648E
-	ldr r0, =sub_8146384
+	ldr r0, =Phase2Task_Transition_Shuffle
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -806,8 +605,8 @@ sub_81464E8: @ 81464E8
 	.pool
 	thumb_func_end sub_81464E8
 
-	thumb_func_start sub_8146514
-sub_8146514: @ 8146514
+	thumb_func_start Phase2Task_Transition_BigPokeball
+Phase2Task_Transition_BigPokeball: @ 8146514
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -832,10 +631,10 @@ _08146526:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8146514
+	thumb_func_end Phase2Task_Transition_BigPokeball
 
-	thumb_func_start sub_814654C
-sub_814654C: @ 814654C
+	thumb_func_start Phase2Task_Transition_Aqua
+Phase2Task_Transition_Aqua: @ 814654C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -860,10 +659,10 @@ _0814655E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814654C
+	thumb_func_end Phase2Task_Transition_Aqua
 
-	thumb_func_start sub_8146584
-sub_8146584: @ 8146584
+	thumb_func_start Phase2Task_Transition_Magma
+Phase2Task_Transition_Magma: @ 8146584
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -888,10 +687,10 @@ _08146596:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8146584
+	thumb_func_end Phase2Task_Transition_Magma
 
-	thumb_func_start sub_81465BC
-sub_81465BC: @ 81465BC
+	thumb_func_start Phase2Task_Transition_Regice
+Phase2Task_Transition_Regice: @ 81465BC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -916,10 +715,10 @@ _081465CE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81465BC
+	thumb_func_end Phase2Task_Transition_Regice
 
-	thumb_func_start sub_81465F4
-sub_81465F4: @ 81465F4
+	thumb_func_start Phase2Task_Transition_Registeel
+Phase2Task_Transition_Registeel: @ 81465F4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -944,10 +743,10 @@ _08146606:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81465F4
+	thumb_func_end Phase2Task_Transition_Registeel
 
-	thumb_func_start sub_814662C
-sub_814662C: @ 814662C
+	thumb_func_start Phase2Task_Transition_Regirock
+Phase2Task_Transition_Regirock: @ 814662C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -972,10 +771,10 @@ _0814663E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814662C
+	thumb_func_end Phase2Task_Transition_Regirock
 
-	thumb_func_start sub_8146664
-sub_8146664: @ 8146664
+	thumb_func_start Phase2Task_Transition_Kyogre
+Phase2Task_Transition_Kyogre: @ 8146664
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1000,7 +799,7 @@ _08146676:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8146664
+	thumb_func_end Phase2Task_Transition_Kyogre
 
 	thumb_func_start sub_814669C
 sub_814669C: @ 814669C
@@ -2069,8 +1868,8 @@ sub_8146F68: @ 8146F68
 	.pool
 	thumb_func_end sub_8146F68
 
-	thumb_func_start sub_8146F94
-sub_8146F94: @ 8146F94
+	thumb_func_start Phase2Task_Transition_PokeballsTrail
+Phase2Task_Transition_PokeballsTrail: @ 8146F94
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2095,7 +1894,7 @@ _08146FA6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8146F94
+	thumb_func_end Phase2Task_Transition_PokeballsTrail
 
 	thumb_func_start sub_8146FCC
 sub_8146FCC: @ 8146FCC
@@ -2205,7 +2004,7 @@ sub_81470A4: @ 81470A4
 	cmp r0, 0
 	bne _081470C4
 	bl sub_8149F84
-	ldr r0, =sub_8146F94
+	ldr r0, =Phase2Task_Transition_PokeballsTrail
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2365,8 +2164,8 @@ _081471F2:
 	.pool
 	thumb_func_end sub_814713C
 
-	thumb_func_start sub_8147204
-sub_8147204: @ 8147204
+	thumb_func_start Phase2Task_Transition_Clockwise_BlackFade
+Phase2Task_Transition_Clockwise_BlackFade: @ 8147204
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2391,7 +2190,7 @@ _08147216:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8147204
+	thumb_func_end Phase2Task_Transition_Clockwise_BlackFade
 
 	thumb_func_start sub_814723C
 sub_814723C: @ 814723C
@@ -2923,7 +2722,7 @@ sub_8147648: @ 8147648
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	bl sub_8149F84
-	ldr r0, =sub_8147204
+	ldr r0, =Phase2Task_Transition_Clockwise_BlackFade
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2992,8 +2791,8 @@ _081476C0:
 	.pool
 	thumb_func_end sub_8147688
 
-	thumb_func_start sub_8147718
-sub_8147718: @ 8147718
+	thumb_func_start Phase2Task_Transition_Ripple
+Phase2Task_Transition_Ripple: @ 8147718
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3018,7 +2817,7 @@ _0814772A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8147718
+	thumb_func_end Phase2Task_Transition_Ripple
 
 	thumb_func_start sub_8147750
 sub_8147750: @ 8147750
@@ -3141,7 +2940,7 @@ _08147838:
 	ands r0, r1
 	cmp r0, 0
 	bne _0814785A
-	ldr r0, =sub_8147718
+	ldr r0, =Phase2Task_Transition_Ripple
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3209,8 +3008,8 @@ sub_81478C0: @ 81478C0
 	.pool
 	thumb_func_end sub_81478C0
 
-	thumb_func_start sub_81478EC
-sub_81478EC: @ 81478EC
+	thumb_func_start Phase2Task_Transition_Wave
+Phase2Task_Transition_Wave: @ 81478EC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3235,7 +3034,7 @@ _081478FE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81478EC
+	thumb_func_end Phase2Task_Transition_Wave
 
 	thumb_func_start sub_8147924
 sub_8147924: @ 8147924
@@ -3373,7 +3172,7 @@ sub_8147A18: @ 8147A18
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	bl sub_8149F84
-	ldr r0, =sub_81478EC
+	ldr r0, =Phase2Task_Transition_Wave
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3437,8 +3236,8 @@ _08147A90:
 	.pool
 	thumb_func_end sub_8147A58
 
-	thumb_func_start sub_8147AE4
-sub_8147AE4: @ 8147AE4
+	thumb_func_start Phase2Task_Transition_Sydney
+Phase2Task_Transition_Sydney: @ 8147AE4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3453,10 +3252,10 @@ sub_8147AE4: @ 8147AE4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8147AE4
+	thumb_func_end Phase2Task_Transition_Sydney
 
-	thumb_func_start sub_8147B04
-sub_8147B04: @ 8147B04
+	thumb_func_start Phase2Task_Transition_Phoebe
+Phase2Task_Transition_Phoebe: @ 8147B04
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3471,10 +3270,10 @@ sub_8147B04: @ 8147B04
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8147B04
+	thumb_func_end Phase2Task_Transition_Phoebe
 
-	thumb_func_start sub_8147B24
-sub_8147B24: @ 8147B24
+	thumb_func_start Phase2Task_Transition_Glacia
+Phase2Task_Transition_Glacia: @ 8147B24
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3489,10 +3288,10 @@ sub_8147B24: @ 8147B24
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8147B24
+	thumb_func_end Phase2Task_Transition_Glacia
 
-	thumb_func_start sub_8147B44
-sub_8147B44: @ 8147B44
+	thumb_func_start Phase2Task_Transition_Drake
+Phase2Task_Transition_Drake: @ 8147B44
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3507,10 +3306,10 @@ sub_8147B44: @ 8147B44
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8147B44
+	thumb_func_end Phase2Task_Transition_Drake
 
-	thumb_func_start sub_8147B64
-sub_8147B64: @ 8147B64
+	thumb_func_start Phase2Task_Transition_Wallace
+Phase2Task_Transition_Wallace: @ 8147B64
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3525,7 +3324,7 @@ sub_8147B64: @ 8147B64
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8147B64
+	thumb_func_end Phase2Task_Transition_Wallace
 
 	thumb_func_start sub_8147B84
 sub_8147B84: @ 8147B84
@@ -4664,8 +4463,8 @@ sub_81484B8: @ 81484B8
 	.pool
 	thumb_func_end sub_81484B8
 
-	thumb_func_start sub_81484D0
-sub_81484D0: @ 81484D0
+	thumb_func_start Phase2Task_Transition_Slice
+Phase2Task_Transition_Slice: @ 81484D0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4690,7 +4489,7 @@ _081484E2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81484D0
+	thumb_func_end Phase2Task_Transition_Slice
 
 	thumb_func_start sub_8148508
 sub_8148508: @ 8148508
@@ -4873,7 +4672,7 @@ sub_814865C: @ 814865C
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	bl sub_8149F84
-	ldr r0, =sub_81484D0
+	ldr r0, =Phase2Task_Transition_Slice
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -4963,8 +4762,8 @@ _0814874E:
 	.pool
 	thumb_func_end sub_8148728
 
-	thumb_func_start sub_8148760
-sub_8148760: @ 8148760
+	thumb_func_start Phase2Task_Transition_25
+Phase2Task_Transition_25: @ 8148760
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4989,7 +4788,7 @@ _08148772:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8148760
+	thumb_func_end Phase2Task_Transition_25
 
 	thumb_func_start sub_8148798
 sub_8148798: @ 8148798
@@ -5442,7 +5241,7 @@ sub_8148B14: @ 8148B14
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	bl sub_8149F84
-	ldr r0, =sub_8148760
+	ldr r0, =Phase2Task_Transition_25
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -5453,8 +5252,8 @@ sub_8148B14: @ 8148B14
 	.pool
 	thumb_func_end sub_8148B14
 
-	thumb_func_start sub_8148B54
-sub_8148B54: @ 8148B54
+	thumb_func_start Phase2Task_Transition_26
+Phase2Task_Transition_26: @ 8148B54
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -5479,10 +5278,10 @@ _08148B66:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8148B54
+	thumb_func_end Phase2Task_Transition_26
 
-	thumb_func_start sub_8148B8C
-sub_8148B8C: @ 8148B8C
+	thumb_func_start Phase2Task_Transition_27
+Phase2Task_Transition_27: @ 8148B8C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -5507,7 +5306,7 @@ _08148B9E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8148B8C
+	thumb_func_end Phase2Task_Transition_27
 
 	thumb_func_start sub_8148BC4
 sub_8148BC4: @ 8148BC4
@@ -5819,8 +5618,8 @@ _08148E3C:
 	.pool
 	thumb_func_end sub_8148D6C
 
-	thumb_func_start sub_8148E54
-sub_8148E54: @ 8148E54
+	thumb_func_start Phase2Task_Transition_28
+Phase2Task_Transition_28: @ 8148E54
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -5845,7 +5644,7 @@ _08148E66:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8148E54
+	thumb_func_end Phase2Task_Transition_28
 
 	thumb_func_start sub_8148E8C
 sub_8148E8C: @ 8148E8C
@@ -6187,8 +5986,8 @@ _08149138:
 	bx r1
 	thumb_func_end sub_8149048
 
-	thumb_func_start sub_8149140
-sub_8149140: @ 8149140
+	thumb_func_start Phase2Task_Transition_Groudon
+Phase2Task_Transition_Groudon: @ 8149140
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -6213,7 +6012,7 @@ _08149152:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8149140
+	thumb_func_end Phase2Task_Transition_Groudon
 
 	thumb_func_start sub_8149178
 sub_8149178: @ 8149178
@@ -6341,8 +6140,8 @@ _0814926E:
 	.pool
 	thumb_func_end sub_8149224
 
-	thumb_func_start sub_814927C
-sub_814927C: @ 814927C
+	thumb_func_start Phase2Task_Transition_Rayquaza
+Phase2Task_Transition_Rayquaza: @ 814927C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -6367,7 +6166,7 @@ _0814928E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814927C
+	thumb_func_end Phase2Task_Transition_Rayquaza
 
 	thumb_func_start sub_81492B4
 sub_81492B4: @ 81492B4
@@ -6695,8 +6494,8 @@ _08149554:
 	.pool
 	thumb_func_end sub_8149508
 
-	thumb_func_start sub_8149578
-sub_8149578: @ 8149578
+	thumb_func_start Phase2Task_Transition_WhiteFade
+Phase2Task_Transition_WhiteFade: @ 8149578
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -6721,7 +6520,7 @@ _0814958A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8149578
+	thumb_func_end Phase2Task_Transition_WhiteFade
 
 	thumb_func_start sub_81495B0
 sub_81495B0: @ 81495B0
@@ -6916,7 +6715,7 @@ sub_8149740: @ 8149740
 	cmp r0, 0x10
 	bls _08149766
 	bl sub_8149F84
-	ldr r0, =sub_8149578
+	ldr r0, =Phase2Task_Transition_WhiteFade
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -7158,8 +6957,8 @@ _0814994C:
 	.pool
 	thumb_func_end sub_8149864
 
-	thumb_func_start sub_814995C
-sub_814995C: @ 814995C
+	thumb_func_start Phase2Task_Transition_GridSquares
+Phase2Task_Transition_GridSquares: @ 814995C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -7184,7 +6983,7 @@ _0814996E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814995C
+	thumb_func_end Phase2Task_Transition_GridSquares
 
 	thumb_func_start sub_8149994
 sub_8149994: @ 8149994
@@ -7277,7 +7076,7 @@ sub_8149A40: @ 8149A40
 	cmp r1, 0
 	bne _08149A60
 	bl sub_8149F84
-	ldr r0, =sub_814995C
+	ldr r0, =Phase2Task_Transition_GridSquares
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -7289,8 +7088,8 @@ _08149A60:
 	.pool
 	thumb_func_end sub_8149A40
 
-	thumb_func_start sub_8149A6C
-sub_8149A6C: @ 8149A6C
+	thumb_func_start Phase2Task_Transition_Shards
+Phase2Task_Transition_Shards: @ 8149A6C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -7315,7 +7114,7 @@ _08149A7E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8149A6C
+	thumb_func_end Phase2Task_Transition_Shards
 
 	thumb_func_start sub_8149AA4
 sub_8149AA4: @ 8149AA4
@@ -7559,7 +7358,7 @@ sub_8149C60: @ 8149C60
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
 	bl sub_8149F84
-	ldr r0, =sub_8149A6C
+	ldr r0, =Phase2Task_Transition_Shards
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -8511,8 +8310,8 @@ sub_814A374: @ 814A374
 	.pool
 	thumb_func_end sub_814A374
 
-	thumb_func_start sub_814A3BC
-sub_814A3BC: @ 814A3BC
+	thumb_func_start Phase2Task_Transition_29
+Phase2Task_Transition_29: @ 814A3BC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -8537,10 +8336,10 @@ _0814A3CE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814A3BC
+	thumb_func_end Phase2Task_Transition_29
 
-	thumb_func_start sub_814A3F4
-sub_814A3F4: @ 814A3F4
+	thumb_func_start Phase2Task_Transition_30
+Phase2Task_Transition_30: @ 814A3F4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -8565,7 +8364,7 @@ _0814A406:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814A3F4
+	thumb_func_end Phase2Task_Transition_30
 
 	thumb_func_start sub_814A42C
 sub_814A42C: @ 814A42C
@@ -8815,7 +8614,7 @@ _0814A632:
 	ands r0, r1
 	cmp r0, 0
 	bne _0814A654
-	ldr r0, =sub_814A3F4
+	ldr r0, =Phase2Task_Transition_30
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -8888,8 +8687,8 @@ sub_814A6CC: @ 814A6CC
 	.pool
 	thumb_func_end sub_814A6CC
 
-	thumb_func_start sub_814A6F0
-sub_814A6F0: @ 814A6F0
+	thumb_func_start Phase2Task_Transition_31
+Phase2Task_Transition_31: @ 814A6F0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -8914,10 +8713,10 @@ _0814A702:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814A6F0
+	thumb_func_end Phase2Task_Transition_31
 
-	thumb_func_start sub_814A728
-sub_814A728: @ 814A728
+	thumb_func_start Phase2Task_Transition_33
+Phase2Task_Transition_33: @ 814A728
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -8942,10 +8741,10 @@ _0814A73A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814A728
+	thumb_func_end Phase2Task_Transition_33
 
-	thumb_func_start sub_814A760
-sub_814A760: @ 814A760
+	thumb_func_start Phase2Task_Transition_32
+Phase2Task_Transition_32: @ 814A760
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -8970,7 +8769,7 @@ _0814A772:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_814A760
+	thumb_func_end Phase2Task_Transition_32
 
 	thumb_func_start sub_814A798
 sub_814A798: @ 814A798

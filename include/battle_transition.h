@@ -1,6 +1,7 @@
 #ifndef GUARD_BATTLE_TRANSITION_H
 #define GUARD_BATTLE_TRANSITION_H
 
+void TestBattleTransition(u8 transitionId);
 void sub_8149DFC(u8 a1);
 void BattleTransition_StartOnField(u8 transitionID);
 void BattleTransition_Start(u8 transitionID);
@@ -52,5 +53,6 @@ bool8 IsBattleTransitionDone(void);
 #define B_TRANSITION_39                     39
 #define B_TRANSITION_40                     40
 #define B_TRANSITION_41                     41
+#define B_TRANSITION_COUNT                  42
 
 #endif // GUARD_BATTLE_TRANSITION_H
