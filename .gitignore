@@ -15,8 +15,7 @@
 *.latfont
 *.hwjpnfont
 *.fwjpnfont
-src/*.s
-tools/*
+tools/agbcc
 *.map
 *.ld
 *.bat
