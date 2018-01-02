@@ -7,6 +7,16 @@ void BattleTransition_StartOnField(u8 transitionID);
 void BattleTransition_Start(u8 transitionID);
 bool8 IsBattleTransitionDone(void);
 
+enum // TRANSITION_MUGSHOT
+{
+    MUGSHOT_SYDNEY,
+    MUGSHOT_PHOEBE,
+    MUGSHOT_GLACIA,
+    MUGSHOT_DRAKE,
+    MUGSHOT_CHAMPION,
+    MUGSHOTS_COUNT
+};
+
 // credits for the names go to Dyskinesia and Tetrable
 // names are naturally subject to change
 

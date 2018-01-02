@@ -75,5 +75,6 @@ u32 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);
 void sub_80B69DC(void);
 void FieldEffectStop(struct Sprite *sprite, u8 id);
+u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
 
 #endif //GUARD_FIELD_EFFECTS_H

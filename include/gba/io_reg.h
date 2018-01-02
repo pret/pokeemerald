@@ -137,8 +137,6 @@
 #define REG_OFFSET_DMA3CNT_H   0xde
 
 #define REG_OFFSET_TMCNT       0x100
-#define REG_OFFSET_TMCNT_L     0x100
-#define REG_OFFSET_TMCNT_H     0x102
 #define REG_OFFSET_TM0CNT      0x100
 #define REG_OFFSET_TM0CNT_L    0x100
 #define REG_OFFSET_TM0CNT_H    0x102
@@ -300,8 +298,6 @@
 #define REG_ADDR_DMA3CNT_H   (REG_BASE + REG_OFFSET_DMA3CNT_H)
 
 #define REG_ADDR_TMCNT       (REG_BASE + REG_OFFSET_TMCNT)
-#define REG_ADDR_TMCNT_L     (REG_BASE + REG_OFFSET_TMCNT_L)
-#define REG_ADDR_TMCNT_H     (REG_BASE + REG_OFFSET_TMCNT_H)
 #define REG_ADDR_TM0CNT      (REG_BASE + REG_OFFSET_TM0CNT)
 #define REG_ADDR_TM0CNT_L    (REG_BASE + REG_OFFSET_TM0CNT_L)
 #define REG_ADDR_TM0CNT_H    (REG_BASE + REG_OFFSET_TM0CNT_H)
@@ -462,8 +458,6 @@
 #define REG_DMA3CNT_H   (*(vu16 *)REG_ADDR_DMA3CNT_H)
 
 #define REG_TMCNT(n)    (*(vu16 *)(REG_ADDR_TMCNT + ((n) * 4)))
-#define REG_TMCNT_L(n)  (*(vu16 *)(REG_ADDR_TMCNT_L + ((n) * 4)))
-#define REG_TMCNT_H(n)  (*(vu16 *)(REG_ADDR_TMCNT_H + ((n) * 4)))
 #define REG_TM0CNT      (*(vu32 *)REG_ADDR_TM0CNT)
 #define REG_TM0CNT_L    (*(vu16 *)REG_ADDR_TM0CNT_L)
 #define REG_TM0CNT_H    (*(vu16 *)REG_ADDR_TM0CNT_H)
@@ -501,12 +495,12 @@
 // I/O register fields
 
 // DISPCNT
-#define DISPCNT_MODE_0       0x0000
-#define DISPCNT_MODE_1       0x0001
-#define DISPCNT_MODE_2       0x0002
-#define DISPCNT_MODE_3       0x0003
-#define DISPCNT_MODE_4       0x0004
-#define DISPCNT_MODE_5       0x0005
+#define DISPCNT_MODE_0       0x0000 // BG0: text, BG1: text, BG2: text,   BG3: text
+#define DISPCNT_MODE_1       0x0001 // BG0: text, BG1: text, BG2: affine, BG3: off
+#define DISPCNT_MODE_2       0x0002 // BG0: off,  BG1: off,  BG2: affine, BG3: affine
+#define DISPCNT_MODE_3       0x0003 // Bitmap mode, 240x160, BGR555 color
+#define DISPCNT_MODE_4       0x0004 // Bitmap mode, 240x160, 256 color palette
+#define DISPCNT_MODE_5       0x0005 // Bitmap mode, 160x128, BGR555 color
 #define DISPCNT_OBJ_1D_MAP   0x0040
 #define DISPCNT_FORCED_BLANK 0x0080
 #define DISPCNT_BG0_ON       0x0100
@@ -527,7 +521,46 @@
 #define DISPSTAT_HBLANK_INTR 0x0010 // H-Blank interrupt enabled
 #define DISPSTAT_VCOUNT_INTR 0x0020 // V-Count interrupt enabled
 
+// BGCNT
+#define BGCNT_PRIORITY(n)          (n) // Values 0 - 3. Lower priority BGs will be drawn on top of higher priority BGs.
+#define BGCNT_CHARBASE(n)   ((n) << 2) // Values 0 - 3. Base block for tile pixel data.
+#define BGCNT_MOSAIC            0x0040
+#define BGCNT_16COLOR           0x0000 // 4 bits per pixel
+#define BGCNT_256COLOR          0x0080 // 8 bits per pixel
+#define BGCNT_SCREENBASE(n) ((n) << 8) // Values 0 - 31. Base block for tile map.
+#define BGCNT_WRAP              0x2000 // Only affects affine BGs. Text BGs wrap by default.
+#define BGCNT_TXT256x256        0x0000 // Internal screen size size of text mode BG in pixels.
+#define BGCNT_TXT512x256        0x4000
+#define BGCNT_TXT256x512        0x8000
+#define BGCNT_TXT512x512        0xC000
+#define BGCNT_AFF128x128        0x0000 // Internal screen size size of affine mode BG in pixels.
+#define BGCNT_AFF256x256        0x4000
+#define BGCNT_AFF512x512        0x8000
+#define BGCNT_AFF1024x1024      0xC000
+
 // BLDCNT
+// Bits 0-5 select layers for the 1st target
+#define BLDCNT_TGT1_BG0      (1 << 0)
+#define BLDCNT_TGT1_BG1      (1 << 1)
+#define BLDCNT_TGT1_BG2      (1 << 2)
+#define BLDCNT_TGT1_BG3      (1 << 3)
+#define BLDCNT_TGT1_OBJ      (1 << 4)
+#define BLDCNT_TGT1_BD       (1 << 5)
+// Bits 6-7 select the special effect
+#define BLDCNT_EFFECT_NONE      (0 << 6)   // no special effect
+#define BLDCNT_EFFECT_BLEND     (1 << 6)   // 1st+2nd targets mixed (controlled by BLDALPHA)
+#define BLDCNT_EFFECT_LIGHTEN   (2 << 6)   // 1st target becomes whiter (controlled by BLDY)
+#define BLDCNT_EFFECT_DARKEN    (3 << 6)   // 1st target becomes blacker (controlled by BLDY)
+// Bits 8-13 select layers for the 2nd target
+#define BLDCNT_TGT2_BG0      (1 << 8)
+#define BLDCNT_TGT2_BG1      (1 << 9)
+#define BLDCNT_TGT2_BG2      (1 << 10)
+#define BLDCNT_TGT2_BG3      (1 << 11)
+#define BLDCNT_TGT2_OBJ      (1 << 12)
+#define BLDCNT_TGT2_BD       (1 << 13)
+
+// BLDALPHA
+#define BLDALPHA_BLEND(target1, target2) (((target2) << 8) | (target1))
 
 // SOUNDCNT_H
 #define SOUND_CGB_MIX_QUARTER 0x0000
@@ -627,8 +660,8 @@
 #define KEY_INTR_ENABLE 0x0400
 #define KEY_OR_INTR     0x0000
 #define KEY_AND_INTR    0x8000
-
-#define DPAD_ANY ((DPAD_RIGHT | DPAD_LEFT | DPAD_UP | DPAD_DOWN))
+#define DPAD_ANY        0x00F0
+#define JOY_EXCL_DPAD   0x030F
 
 // interrupt flags
 #define INTR_FLAG_VBLANK  (1 <<  0)

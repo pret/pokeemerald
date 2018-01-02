@@ -4,175 +4,6 @@
 
 	.section .rodata
 
-	.align 2
-sPhase2_Transition_Blur_Funcs:: @ 85C8AA8
-	.4byte sub_8146144
-	.4byte sub_8146178
-	.4byte sub_81461D8
-
-	.align 2
-sPhase2_Transition_Swirl_Funcs:: @ 85C8AB4
-	.4byte sub_814623C
-	.4byte sub_81462A8
-
-	.align 2
-sPhase2_Transition_Shuffle_Funcs:: @ 85C8ABC
-	.4byte sub_81463BC
-	.4byte sub_8146420
-
-	.align 2
-gUnknown_085C8AC4:: @ 85C8AC4
-	.4byte sub_814670C
-	.4byte sub_81468E4
-	.4byte sub_8146BF8
-	.4byte sub_8146C8C
-	.4byte sub_8146D20
-	.4byte sub_8146D90
-	.4byte sub_8146DF8
-
-	.align 2
-gUnknown_085C8AE0:: @ 85C8AE0
-	.4byte sub_8146760
-	.4byte sub_814692C
-	.4byte sub_8146BF8
-	.4byte sub_8146C8C
-	.4byte sub_8146D20
-	.4byte sub_8146D90
-	.4byte sub_8146DF8
-
-	.align 2
-gUnknown_085C8AFC:: @ 85C8AFC
-	.4byte sub_8146800
-	.4byte sub_8146854
-	.4byte sub_8146BF8
-	.4byte sub_8146C8C
-	.4byte sub_8146D20
-	.4byte sub_8146DF8
-
-	.align 2
-gUnknown_085C8B14:: @ 85C8B14
-	.4byte sub_81467B4
-	.4byte sub_8146974
-	.4byte sub_8146BF8
-	.4byte sub_8146C8C
-	.4byte sub_8146D20
-	.4byte sub_8146DF8
-
-	.align 2
-gUnknown_085C8B2C:: @ 85C8B2C
-	.4byte sub_81467B4
-	.4byte sub_81469CC
-	.4byte sub_8146BF8
-	.4byte sub_8146C8C
-	.4byte sub_8146D20
-	.4byte sub_8146DF8
-
-	.align 2
-gUnknown_085C8B44:: @ 85C8B44
-	.4byte sub_81467B4
-	.4byte sub_8146A24
-	.4byte sub_8146BF8
-	.4byte sub_8146C8C
-	.4byte sub_8146D20
-	.4byte sub_8146DF8
-
-	.align 2
-gUnknown_085C8B5C:: @ 85C8B5C
-	.4byte sub_8146DAC
-	.4byte sub_8146DD8
-	.4byte sub_8146A7C
-	.4byte sub_8146AC8
-	.4byte sub_8146B24
-	.4byte sub_8146D90
-	.4byte sub_8146B7C
-	.4byte sub_8146BA8
-
-	.align 2
-sPhase2_Transition_PokeballsTrail_Funcs:: @ 85C8B7C
-	.4byte sub_8146FCC
-	.4byte sub_8147018
-	.4byte sub_81470A4
-
-	.align 1
-sUnknown_085C8B88:: @ 85C8B88
-	.2byte 0xfff0, 0x0100
-
-	.align 1
-sUnknown_085C8B8C:: @ 85C8B8C
-	.2byte 0x0000, 0x0020, 0x0040, 0x0012, 0x0030
-
-	.align 1
-sUnknown_085C8B96:: @ 85C8B96
-	.2byte 0x0008, 0xfff8, 0x0000
-
-	.align 2
-sPhase2_Transition_Clockwise_BlackFade_Funcs:: @ 85C8B9C
-	.4byte sub_814723C
-	.4byte sub_81472A4
-	.4byte sub_8147334
-	.4byte sub_8147428
-	.4byte sub_81474B0
-	.4byte sub_81475B0
-	.4byte sub_8147648
-
-	.align 2
-sPhase2_Transition_Ripple_Funcs:: @ 85C8BB8
-	.4byte sub_8147750
-	.4byte sub_81477A8
-
-	.align 2
-sPhase2_Transition_Wave_Funcs:: @ 85C8BC0
-	.4byte sub_8147924
-	.4byte sub_814797C
-	.4byte sub_8147A18
-
-	.align 2
-sPhase2_Mugshot_Transition_Funcs:: @ 85C8BCC
-	.4byte sub_8147BBC
-	.4byte sub_8147C24
-	.4byte sub_8147CE4
-	.4byte sub_8147DD0
-	.4byte sub_8147E4C
-	.4byte sub_8147E88
-	.4byte sub_8147F40
-	.4byte sub_8148008
-	.4byte sub_8148040
-	.4byte sub_814808C
-
-sMugshotsTrainerPicIDsTable:: @ 85C8BF4
-	.byte 0x24, 0x25, 0x26, 0x27, 0x36, 0x00
-
-	.align 1
-sMugshotsOpponentRotationScales:: @ 85C8BFA
-	.2byte 0x0200, 0x0200, 0x0200, 0x0200, 0x01b0, 0x01b0, 0x01a0, 0x01a0, 0x0188, 0x0188
-
-	.align 1
-sMugshotsOpponentCoords:: @ 85C8C0E
-	.2byte 0x0000, 0x0000, 0x0000, 0x0000, 0xfffc, 0x0004, 0x0000, 0x0005, 0xfff8, 0x0007, 0x0000
-
-	.align 2
-sUnknown_085C8C24:: @ 85C8C24
-	.4byte sub_81483A8
-	.4byte sub_81483AC
-	.4byte sub_81483F8
-	.4byte sub_814842C
-	.4byte sub_81483A8
-	.4byte sub_8148458
-	.4byte sub_81483A8
-
-	.align 1
-sUnknown_085C8C40:: @ 85C8C40
-	.2byte 0x000c, 0xfff4
-
-	.align 1
-sUnknown_085C8C44:: @ 85C8C44
-	.2byte 0xffff, 0x0001
-
-	.align 2
-gUnknown_085C8C48:: @ 85C8C48
-	.4byte sub_8148508
-	.4byte sub_8148590
-	.4byte sub_814865C
 
 	.align 2
 gUnknown_085C8C54:: @ 85C8C54
@@ -286,20 +117,20 @@ gUnknown_085C8D38:: @ 85C8D38
 	.4byte gUnknown_085C8D18
 
 	.align 2
-gUnknown_085C8D40:: @ 85C8D40
-	.4byte sub_8146DAC
-	.4byte sub_8146DD8
+sPhase2_Groudon_Funcs:: @ 85C8D40
+	.4byte Phase2_WeatherTrio_Func1
+	.4byte Phase2_WaitPaletteFade
 	.4byte sub_8149178
 	.4byte sub_81491C8
 	.4byte sub_8149224
-	.4byte sub_8146D90
-	.4byte sub_8146B7C
-	.4byte sub_8146BA8
+	.4byte Phase2_FramesCountdown
+	.4byte Phase2_WeatherDuo_Func6
+	.4byte Phase2_WeatherDuo_Func7
 
 	.align 2
-gUnknown_085C8D60:: @ 85C8D60
-	.4byte sub_8146DAC
-	.4byte sub_8146DD8
+sPhase2_Rayquaza_Funcs:: @ 85C8D60
+	.4byte Phase2_WeatherTrio_Func1
+	.4byte Phase2_WaitPaletteFade
 	.4byte sub_81492B4
 	.4byte sub_8149358
 	.4byte sub_8149388
@@ -329,7 +160,7 @@ sUnknown_085C8DB0:: @ 85C8DB0
 	.4byte sub_8149A40
 
 	.align 2
-sPhase2_Transition_Shards_Funcs:: @ 85C8DBC
+sPhase2_Shards_Funcs:: @ 85C8DBC
 	.4byte sub_8149AA4
 	.4byte sub_8149B08
 	.4byte sub_8149B84
@@ -481,10 +312,10 @@ sMugshotsTilemap:: @ 85C94D0
 gUnknown_085C99D0:: @ 85C99D0
 	.4byte sub_814A324
 	.4byte sub_814A374
-	.4byte sub_8146BF8
-	.4byte sub_8146C8C
-	.4byte sub_8146D20
-	.4byte sub_8146DF8
+	.4byte Phase2_BigPokeball_Func3
+	.4byte Phase2_BigPokeball_Func4
+	.4byte Phase2_BigPokeball_Func5
+	.4byte Phase2_BigPokeball_Func6
 
 	.align 2
 gUnknown_085C99E8:: @ 85C99E8

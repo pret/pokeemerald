@@ -24,8 +24,8 @@ _081DABD2:
 	bx r1
 	thumb_func_end sub_81DABBC
 
-	thumb_func_start Phase2Task_Transition_34
-Phase2Task_Transition_34: @ 81DABDC
+	thumb_func_start Phase2Task_34
+Phase2Task_34: @ 81DABDC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -50,7 +50,7 @@ _081DABEE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Phase2Task_Transition_34
+	thumb_func_end Phase2Task_34
 
 	thumb_func_start sub_81DAC14
 sub_81DAC14: @ 81DAC14
@@ -119,7 +119,7 @@ sub_81DAC80: @ 81DAC80
 	bne _081DACA4
 	adds r0, r2, 0
 	bl sub_81DAA20
-	ldr r0, =Phase2Task_Transition_34
+	ldr r0, =Phase2Task_34
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -131,8 +131,8 @@ _081DACA4:
 	.pool
 	thumb_func_end sub_81DAC80
 
-	thumb_func_start Phase2Task_Transition_35
-Phase2Task_Transition_35: @ 81DACB4
+	thumb_func_start Phase2Task_35
+Phase2Task_35: @ 81DACB4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -157,7 +157,7 @@ _081DACC6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Phase2Task_Transition_35
+	thumb_func_end Phase2Task_35
 
 	thumb_func_start sub_81DACEC
 sub_81DACEC: @ 81DACEC
@@ -226,7 +226,7 @@ sub_81DAD58: @ 81DAD58
 	bne _081DAD7C
 	adds r0, r2, 0
 	bl sub_81DAA20
-	ldr r0, =Phase2Task_Transition_35
+	ldr r0, =Phase2Task_35
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -238,8 +238,8 @@ _081DAD7C:
 	.pool
 	thumb_func_end sub_81DAD58
 
-	thumb_func_start Phase2Task_Transition_36
-Phase2Task_Transition_36: @ 81DAD8C
+	thumb_func_start Phase2Task_36
+Phase2Task_36: @ 81DAD8C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -264,7 +264,7 @@ _081DAD9E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Phase2Task_Transition_36
+	thumb_func_end Phase2Task_36
 
 	thumb_func_start sub_81DADC4
 sub_81DADC4: @ 81DADC4
@@ -342,7 +342,7 @@ sub_81DAE44: @ 81DAE44
 	bne _081DAE68
 	adds r0, r2, 0
 	bl sub_81DAA20
-	ldr r0, =Phase2Task_Transition_36
+	ldr r0, =Phase2Task_36
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -354,8 +354,8 @@ _081DAE68:
 	.pool
 	thumb_func_end sub_81DAE44
 
-	thumb_func_start Phase2Task_Transition_37
-Phase2Task_Transition_37: @ 81DAE78
+	thumb_func_start Phase2Task_37
+Phase2Task_37: @ 81DAE78
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -380,7 +380,7 @@ _081DAE8A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Phase2Task_Transition_37
+	thumb_func_end Phase2Task_37
 
 	thumb_func_start sub_81DAEB0
 sub_81DAEB0: @ 81DAEB0
@@ -460,7 +460,7 @@ sub_81DAF34: @ 81DAF34
 	bne _081DAF58
 	adds r0, r2, 0
 	bl sub_81DAA20
-	ldr r0, =Phase2Task_Transition_37
+	ldr r0, =Phase2Task_37
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -472,8 +472,8 @@ _081DAF58:
 	.pool
 	thumb_func_end sub_81DAF34
 
-	thumb_func_start Phase2Task_Transition_38
-Phase2Task_Transition_38: @ 81DAF68
+	thumb_func_start Phase2Task_38
+Phase2Task_38: @ 81DAF68
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -498,7 +498,7 @@ _081DAF7A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Phase2Task_Transition_38
+	thumb_func_end Phase2Task_38
 
 	thumb_func_start sub_81DAFA0
 sub_81DAFA0: @ 81DAFA0
@@ -585,7 +585,7 @@ sub_81DB02C: @ 81DB02C
 	bne _081DB050
 	adds r0, r2, 0
 	bl sub_81DAA20
-	ldr r0, =Phase2Task_Transition_38
+	ldr r0, =Phase2Task_38
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -597,8 +597,8 @@ _081DB050:
 	.pool
 	thumb_func_end sub_81DB02C
 
-	thumb_func_start Phase2Task_Transition_39
-Phase2Task_Transition_39: @ 81DB060
+	thumb_func_start Phase2Task_39
+Phase2Task_39: @ 81DB060
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -623,7 +623,7 @@ _081DB072:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Phase2Task_Transition_39
+	thumb_func_end Phase2Task_39
 
 	thumb_func_start sub_81DB098
 sub_81DB098: @ 81DB098
@@ -710,7 +710,7 @@ sub_81DB124: @ 81DB124
 	bne _081DB148
 	adds r0, r2, 0
 	bl sub_81DAA20
-	ldr r0, =Phase2Task_Transition_39
+	ldr r0, =Phase2Task_39
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -722,8 +722,8 @@ _081DB148:
 	.pool
 	thumb_func_end sub_81DB124
 
-	thumb_func_start Phase2Task_Transition_40
-Phase2Task_Transition_40: @ 81DB158
+	thumb_func_start Phase2Task_40
+Phase2Task_40: @ 81DB158
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -748,7 +748,7 @@ _081DB16A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Phase2Task_Transition_40
+	thumb_func_end Phase2Task_40
 
 	thumb_func_start sub_81DB190
 sub_81DB190: @ 81DB190
@@ -839,7 +839,7 @@ sub_81DB224: @ 81DB224
 	bne _081DB248
 	adds r0, r2, 0
 	bl sub_81DAA20
-	ldr r0, =Phase2Task_Transition_40
+	ldr r0, =Phase2Task_40
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -851,8 +851,8 @@ _081DB248:
 	.pool
 	thumb_func_end sub_81DB224
 
-	thumb_func_start Phase2Task_Transition_41
-Phase2Task_Transition_41: @ 81DB258
+	thumb_func_start Phase2Task_41
+Phase2Task_41: @ 81DB258
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -877,7 +877,7 @@ _081DB26A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Phase2Task_Transition_41
+	thumb_func_end Phase2Task_41
 
 	thumb_func_start sub_81DB290
 sub_81DB290: @ 81DB290
@@ -970,7 +970,7 @@ sub_81DB328: @ 81DB328
 	bne _081DB34C
 	adds r0, r2, 0
 	bl sub_81DAA20
-	ldr r0, =Phase2Task_Transition_41
+	ldr r0, =Phase2Task_41
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
