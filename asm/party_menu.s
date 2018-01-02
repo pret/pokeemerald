@@ -10027,8 +10027,8 @@ _081B572A:
 	.pool
 	thumb_func_end sub_81B56D8
 
-	thumb_func_start hm_add_c3_launch_phase_2
-hm_add_c3_launch_phase_2: @ 81B5738
+	thumb_func_start FieldCallback_Teleport
+FieldCallback_Teleport: @ 81B5738
 	push {lr}
 	bl pal_fill_black
 	ldr r0, =task_launch_hm_phase_2
@@ -10038,7 +10038,7 @@ hm_add_c3_launch_phase_2: @ 81B5738
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end hm_add_c3_launch_phase_2
+	thumb_func_end FieldCallback_Teleport
 
 	thumb_func_start task_launch_hm_phase_2
 task_launch_hm_phase_2: @ 81B5750
@@ -10160,7 +10160,7 @@ sub_81B5820: @ 81B5820
 	cmp r0, 0x1
 	bne _081B585C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =hm_surf_run_dp02scr
@@ -10199,7 +10199,7 @@ sub_81B5884: @ 81B5884
 	push {lr}
 	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
-	bl is_light_level_1_2_3_or_6
+	bl Overworld_MapTypeAllowsTeleportAndFly
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -10278,7 +10278,7 @@ hm_prepare_waterfall: @ 81B58F0
 	cmp r0, 0x1
 	bne _081B594C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =hm2_waterfall
@@ -10325,7 +10325,7 @@ sub_81B5974: @ 81B5974
 	.pool
 _081B5990:
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_81B5958

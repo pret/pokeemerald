@@ -1,55 +1,45 @@
 #include "global.h"
+#include "fldeff_teleport.h"
 #include "field_effect.h"
+#include "field_player_avatar.h"
+#include "party_menu.h"
+#include "overworld.h"
+#include "rom6.h"
 #include "task.h"
 
-extern bool8 is_light_level_1_2_3_or_6(u8 mapType);
-extern void* hm_add_c3_launch_phase_2(void);
-extern void sub_808469C(void);
-extern u8 GetCursorSelectionMonId(void);
-extern u8 oei_task_add(void);
-extern void FieldEffectActiveListRemove(u8 id);
-extern void sub_80B7FC8(void);
-extern void SetPlayerAvatarTransitionFlags(u8);
+extern bool8 (*gUnknown_03005DB0)(void);
+extern void (*gUnknown_0203CEEC)(void);
 
-extern void* gUnknown_0203CEEC;
-extern void* gUnknown_03005DB0;
-
-void hm_teleport_run_dp02scr(void);
-void sub_817C94C(void);
-
-// 817C8BC
 bool8 SetUpFieldMove_Teleport(void)
 {
-    if (is_light_level_1_2_3_or_6(gMapHeader.mapType) == TRUE)
+    if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
-        gUnknown_03005DB0 = hm_add_c3_launch_phase_2;
+        gUnknown_03005DB0 = FieldCallback_Teleport;
         gUnknown_0203CEEC = hm_teleport_run_dp02scr;   
         return TRUE;
     } 
     return FALSE;
 }
 
-// 817C8FC
 void hm_teleport_run_dp02scr(void)
 {
-    sub_808469C();
-    FieldEffectStart(0x3F);
+    Overworld_ResetStateAfterTeleport();
+    FieldEffectStart(FLDEFF_USE_TELEPORT);
     gFieldEffectArguments[0] = (u32)GetCursorSelectionMonId();
 }
 
-// 817C91C
-u8 FldEff_UseTeleport(void)
+bool8 FldEff_UseTeleport(void)
 {
-    u8 taskID = oei_task_add();
-    gTasks[taskID].data[8] = (u32)sub_817C94C >> 16;
-    gTasks[taskID].data[9] = (u32)sub_817C94C;
+    u8 taskId = oei_task_add();
+    gTasks[taskId].data[8] = (u32)sub_817C94C >> 16;
+    gTasks[taskId].data[9] = (u32)sub_817C94C;
     SetPlayerAvatarTransitionFlags(1);
-    return 0;
+    return FALSE;
 }
 
 void sub_817C94C(void)
 {
-    FieldEffectActiveListRemove(0x3F);
+    FieldEffectActiveListRemove(FLDEFF_USE_TELEPORT);
     sub_80B7FC8();
 }
 

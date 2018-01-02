@@ -7924,7 +7924,7 @@ sub_81CAF78: @ 81CAF78
 	strb r0, [r6]
 	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
-	bl is_light_level_1_2_3_or_6
+	bl Overworld_MapTypeAllowsTeleportAndFly
 	lsls r0, 24
 	cmp r0, 0
 	bne _081CAFA4
