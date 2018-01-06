@@ -115,12 +115,12 @@ void MoveSaveBlocks_ResetHeap(void)
       saveBlock2Copy->playerTrainerId[3]);
 
     // restore saveblock data since the pointers changed
-    memcpy(gSaveBlock2Ptr, saveBlock2Copy, sizeof(*gSaveBlock2Ptr));
-    memcpy(gSaveBlock1Ptr, saveBlock1Copy, sizeof(*gSaveBlock1Ptr));
-    memcpy(gPokemonStoragePtr, pokemonStorageCopy, sizeof(*gPokemonStoragePtr));
+    *gSaveBlock2Ptr = *saveBlock2Copy;
+    *gSaveBlock1Ptr = *saveBlock1Copy;
+    *gPokemonStoragePtr = *pokemonStorageCopy;
 
     // heap was destroyed in the copying process, so reset it
-    InitHeap(gHeap, 0x1C000);
+    InitHeap(gHeap, HEAP_SIZE);
 
     // restore interrupt functions
     gMain.hblankCallback = hblankCB;

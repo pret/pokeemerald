@@ -31,6 +31,8 @@ char* strcpy(char *dst0, const char *src0);
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
+#define HEAP_SIZE 0x1C000
+
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
