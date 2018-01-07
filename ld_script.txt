@@ -363,7 +363,6 @@ SECTIONS {
         data/maps.o(.rodata);
         data/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
-        data/rom_8486FEC.o(.rodata);
         data/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
         data/field_map_obj.o(.rodata);
