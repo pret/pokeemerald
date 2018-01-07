@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "gba/gba.h"
 #include "config.h"
-#include "assert.h"
 
 #define AGB_PRINT_FLUSH_ADDR 0x9FE209D
 #define AGB_PRINT_STRUCT_ADDR 0x9FE20F8
@@ -25,7 +24,7 @@ struct AGBPrintStruct
 
 typedef void (*LPFN_PRINT_FLUSH)(void);
 
-#ifndef NOAGBPRN
+#ifndef NDEBUG
 void AGBPrintFlush1Block(void);
 
 void AGBPrintInit(void)
