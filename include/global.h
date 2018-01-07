@@ -3,6 +3,7 @@
 
 #include "gba/gba.h"
 #include "config.h"
+#include "assert.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
