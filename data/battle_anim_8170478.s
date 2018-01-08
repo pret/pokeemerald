@@ -10,33 +10,33 @@ gUnknown_085E5088:: @ 85E5088
 
     .align 2
 gUnknown_085E5094:: @ 85E5094
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6ec0100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6ed0100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6ee0100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6ef0100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6f00100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6f10100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6f20100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6f30100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6f40100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6f50100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6f60100
-	.4byte gBattleAnimSpriteSheet_Particles, 0xd6f70100
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6ec
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6ed
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6ee
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6ef
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f0
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f1
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f2
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f3
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f4
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f5
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f6
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f7
 
 	.align 2
 gUnknown_085E50F4:: @ 85E50F4
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6ec
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6ed
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6ee
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6ef
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6f0
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6f1
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6f2
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6f3
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6f4
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6f5
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6f6
-	.4byte gBattleAnimSpritePalette_136, 0x0000d6f7
+	obj_pal gBattleAnimSpritePalette_136, 0xd6ec
+	obj_pal gBattleAnimSpritePalette_136, 0xd6ed
+	obj_pal gBattleAnimSpritePalette_136, 0xd6ee
+	obj_pal gBattleAnimSpritePalette_136, 0xd6ef
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f0
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f1
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f2
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f3
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f4
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f5
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f6
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f7
 
 	.align 2
 gUnknown_085E5154:: @ 85E5154

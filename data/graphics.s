@@ -4476,7 +4476,7 @@ gBerryBlenderArrowTiles:: @ 8DCAB88
 	.space 0x2C0
 
 	.align 2
-gEasyChatCursor_Pal::
+gEasyChatCursor_Pal:: @ 8DCB648
 	.incbin "graphics/easy_chat/cursor.gbapal"
 
 	.align 2
@@ -4484,11 +4484,11 @@ gEasyChatCursor_Gfx:: @ 8DCB668
 	.incbin "graphics/easy_chat/cursor.4bpp.lz"
 
 	.align 2
-gEasyChatRightWindow_Pal::
+gEasyChatRightWindow_Pal:: @ 8DCB86C
 	.incbin "graphics/easy_chat/rwindow.gbapal"
 
 	.align 2
-gEasyChatRightWindow_Gfx::
+gEasyChatRightWindow_Gfx:: @ 8DCB88C
 	.incbin "graphics/easy_chat/rwindow.4bpp.lz"
 
 	.align 2

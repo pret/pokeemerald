@@ -333,7 +333,7 @@ sub_817F670: @ 817F670
 	movs r1, 0x3
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	ldr r0, =gUnknown_0860AD68
+	ldr r0, =gSpriteAffineAnimTable_860AD68
 	str r0, [r4, 0x10]
 	ldr r0, =gUnknown_03001274
 	ldr r0, [r0]
