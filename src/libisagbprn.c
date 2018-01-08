@@ -155,12 +155,12 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
     }
 }
 
-// TODO: Find a way to seamlessly support no$gba without shit hack defines
-// nogba print function
+// nogba print function, uncomment to use
 /*
 void NOGBAPrint(const char *pBuf)
 {
     *(volatile u32*)NOGBAPRINTADDR = (u32)pBuf;
-}*/
+}
+*/
 
 #endif
