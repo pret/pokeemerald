@@ -12,8 +12,8 @@ btintgfxdir := graphics/battle_interface
 masksgfxdir := graphics/battle_anims/masks
 bttransgfxdir := graphics/battle_transitions
 typesdir := graphics/types
-raydir := graphics/rayquaza_scene
-roulgfxdir := graphics/roulette
+rayquazadir := graphics/rayquaza_scene
+roulettegfxdir := graphics/roulette
 pknvdir := graphics/pokenav/
 pknvoptionsdir := graphics/pokenav/options
 
@@ -308,101 +308,138 @@ graphics/pokenav/region_map.8bpp: %.8bpp: %.png
 graphics/misc/japanese_hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
 
-$(menudir)/menu.gbapal: $(menudir)/menu_0.gbapal $(menudir)/menu_1.gbapal
-	@cat $(menudir)/menu_0.gbapal $(menudir)/menu_1.gbapal >$@
+$(menudir)/menu.gbapal: $(menudir)/menu_0.gbapal \
+                        $(menudir)/menu_1.gbapal
+	@cat $^ >$@
 
-$(btanimgfxdir)/010.4bpp: $(btanimgfxdir)/010_0.4bpp $(btanimgfxdir)/010_1.4bpp $(btanimgfxdir)/010_2.4bpp $(btanimgfxdir)/010_3.4bpp
-	@cat $(btanimgfxdir)/010_0.4bpp $(btanimgfxdir)/010_1.4bpp $(btanimgfxdir)/010_2.4bpp $(btanimgfxdir)/010_3.4bpp >$@
+$(btanimgfxdir)/010.4bpp: $(btanimgfxdir)/010_0.4bpp \
+                          $(btanimgfxdir)/010_1.4bpp \
+                          $(btanimgfxdir)/010_2.4bpp \
+                          $(btanimgfxdir)/010_3.4bpp
+	@cat $^ >$@
 
-$(unusedgfxdir)/obi_palpak1.gbapal: $(unusedgfxdir)/old_pal1.gbapal $(unusedgfxdir)/old_pal2.gbapal $(unusedgfxdir)/old_pal3.gbapal
-	@cat $(unusedgfxdir)/old_pal1.gbapal $(unusedgfxdir)/old_pal2.gbapal $(unusedgfxdir)/old_pal3.gbapal >$@
+$(unusedgfxdir)/obi_palpak1.gbapal: $(unusedgfxdir)/old_pal1.gbapal \
+                                    $(unusedgfxdir)/old_pal2.gbapal \
+                                    $(unusedgfxdir)/old_pal3.gbapal
+	@cat $^ >$@
 
-$(unusedgfxdir)/obi_palpak3.gbapal: $(unusedgfxdir)/old_pal5.gbapal $(unusedgfxdir)/old_pal6.gbapal $(unusedgfxdir)/old_pal7.gbapal
-	@cat $(unusedgfxdir)/old_pal5.gbapal $(unusedgfxdir)/old_pal6.gbapal $(unusedgfxdir)/old_pal7.gbapal >$@
+$(unusedgfxdir)/obi_palpak3.gbapal: $(unusedgfxdir)/old_pal5.gbapal \
+                                    $(unusedgfxdir)/old_pal6.gbapal \
+                                    $(unusedgfxdir)/old_pal7.gbapal
+	@cat $^ >$@
 
-$(unusedgfxdir)/obi1.4bpp: $(unusedgfxdir)/old_bulbasaur.4bpp $(unusedgfxdir)/old_charizard.4bpp
-	@cat $(unusedgfxdir)/old_bulbasaur.4bpp $(unusedgfxdir)/old_charizard.4bpp >$@
+$(unusedgfxdir)/obi1.4bpp: $(unusedgfxdir)/old_bulbasaur.4bpp \
+                           $(unusedgfxdir)/old_charizard.4bpp
+	@cat $^ >$@
 
-$(unusedgfxdir)/obi2.4bpp: $(unusedgfxdir)/old_bulbasaur2.4bpp $(unusedgfxdir)/old_battle_interface_1.4bpp $(unusedgfxdir)/old_battle_interface_2.4bpp $(unusedgfxdir)/old_battle_interface_3.4bpp
-	@cat $(unusedgfxdir)/old_bulbasaur2.4bpp $(unusedgfxdir)/old_battle_interface_1.4bpp $(unusedgfxdir)/old_battle_interface_2.4bpp $(unusedgfxdir)/old_battle_interface_3.4bpp >$@
+$(unusedgfxdir)/obi2.4bpp: $(unusedgfxdir)/old_bulbasaur2.4bpp \
+                           $(unusedgfxdir)/old_battle_interface_1.4bpp \
+                           $(unusedgfxdir)/old_battle_interface_2.4bpp \
+                           $(unusedgfxdir)/old_battle_interface_3.4bpp
+	@cat $^ >$@
 
-$(menudir)/hp_numbers.4bpp: $(menudir)/hpbar_anim.4bpp $(menudir)/numbers1.4bpp $(menudir)/numbers2.4bpp
-	@cat $(menudir)/hpbar_anim.4bpp $(menudir)/numbers1.4bpp $(menudir)/numbers2.4bpp >$@
+$(menudir)/hp_numbers.4bpp: $(menudir)/hpbar_anim.4bpp \
+                            $(menudir)/numbers1.4bpp \
+                            $(menudir)/numbers2.4bpp
+	@cat $^ >$@
 
-$(unusedgfxdir)/redyellowgreen_frame.bin: $(unusedgfxdir)/red_frame.bin $(unusedgfxdir)/yellow_frame.bin $(unusedgfxdir)/green_frame.bin $(unusedgfxdir)/blank_frame.bin
-	@cat $(unusedgfxdir)/red_frame.bin $(unusedgfxdir)/yellow_frame.bin $(unusedgfxdir)/green_frame.bin $(unusedgfxdir)/blank_frame.bin >$@
+$(unusedgfxdir)/redyellowgreen_frame.bin: $(unusedgfxdir)/red_frame.bin \
+                                          $(unusedgfxdir)/yellow_frame.bin \
+                                          $(unusedgfxdir)/green_frame.bin \
+                                          $(unusedgfxdir)/blank_frame.bin
+	@cat $^ >$@
 
-$(unusedgfxdir)/color_frames.4bpp: $(unusedgfxdir)/color_frames.png
+$(unusedgfxdir)/color_frames.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 353
 
-$(btintgfxdir)/unused_window2bar.4bpp: $(btintgfxdir)/unused_window2bar.png
+$(btintgfxdir)/unused_window2bar.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 5
 
-$(unusedgfxdir)/old_contest.4bpp: $(unusedgfxdir)/old_contest_frame_1.4bpp $(unusedgfxdir)/old_contest_floor.4bpp $(unusedgfxdir)/old_contest_frame_2.4bpp $(unusedgfxdir)/old_contest_symbols.4bpp $(unusedgfxdir)/old_contest_meter.4bpp $(unusedgfxdir)/old_contest_classes.4bpp $(unusedgfxdir)/old_contest_numbers.4bpp
-	@cat $(unusedgfxdir)/old_contest_frame_1.4bpp $(unusedgfxdir)/old_contest_floor.4bpp $(unusedgfxdir)/old_contest_frame_2.4bpp $(unusedgfxdir)/old_contest_symbols.4bpp $(unusedgfxdir)/old_contest_meter.4bpp $(unusedgfxdir)/old_contest_classes.4bpp $(unusedgfxdir)/old_contest_numbers.4bpp >$@
+$(unusedgfxdir)/old_contest.4bpp: $(unusedgfxdir)/old_contest_frame_1.4bpp \
+                                  $(unusedgfxdir)/old_contest_floor.4bpp \
+                                  $(unusedgfxdir)/old_contest_frame_2.4bpp \
+                                  $(unusedgfxdir)/old_contest_symbols.4bpp \
+                                  $(unusedgfxdir)/old_contest_meter.4bpp \
+                                  $(unusedgfxdir)/old_contest_classes.4bpp \
+                                  $(unusedgfxdir)/old_contest_numbers.4bpp
+	@cat $^ >$@
 
-$(unusedgfxdir)/old_contest_2.4bpp: $(unusedgfxdir)/old_contest_2_1.4bpp $(unusedgfxdir)/old_contest_2_2.4bpp
-	@cat $(unusedgfxdir)/old_contest_2_1.4bpp $(unusedgfxdir)/old_contest_2_2.4bpp >$@
+$(unusedgfxdir)/old_contest_2.4bpp: $(unusedgfxdir)/old_contest_2_1.4bpp \
+                                    $(unusedgfxdir)/old_contest_2_2.4bpp
+	@cat $^ >$@
 
-$(unknowngfxdir)/unknown_C19470.4bpp: $(unknowngfxdir)/unknown_C19470.png
+$(unknowngfxdir)/unknown_C19470.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36
 
-$(btanimgfxdir)/141.4bpp: $(btanimgfxdir)/141_0.4bpp $(btanimgfxdir)/141_1.4bpp $(btanimgfxdir)/141_2.4bpp $(btanimgfxdir)/141_3.4bpp $(btanimgfxdir)/141_4.4bpp
-	@cat $(btanimgfxdir)/141_0.4bpp $(btanimgfxdir)/141_1.4bpp $(btanimgfxdir)/141_2.4bpp $(btanimgfxdir)/141_3.4bpp $(btanimgfxdir)/141_4.4bpp >$@
+$(btanimgfxdir)/141.4bpp: $(btanimgfxdir)/141_0.4bpp \
+                          $(btanimgfxdir)/141_1.4bpp \
+                          $(btanimgfxdir)/141_2.4bpp \
+                          $(btanimgfxdir)/141_3.4bpp \
+                          $(btanimgfxdir)/141_4.4bpp
+	@cat $^ >$@
 
-$(btanimgfxdir)/074.4bpp: $(btanimgfxdir)/074_0.4bpp $(btanimgfxdir)/074_1.4bpp
-	@cat $(btanimgfxdir)/074_0.4bpp $(btanimgfxdir)/074_1.4bpp >$@
+$(btanimgfxdir)/074.4bpp: $(btanimgfxdir)/074_0.4bpp \
+                          $(btanimgfxdir)/074_1.4bpp
+	@cat $^ >$@
 
-$(btanimgfxdir)/159.4bpp: $(btanimgfxdir)/159_0.4bpp $(btanimgfxdir)/159_1.4bpp
-	@cat $(btanimgfxdir)/159_0.4bpp $(btanimgfxdir)/159_1.4bpp >$@
+$(btanimgfxdir)/159.4bpp: $(btanimgfxdir)/159_0.4bpp \
+                          $(btanimgfxdir)/159_1.4bpp
+	@cat $^ >$@
 
-$(btanimgfxdir)/001.4bpp: $(btanimgfxdir)/001_0.4bpp $(btanimgfxdir)/001_1.4bpp
-	@cat $(btanimgfxdir)/001_0.4bpp $(btanimgfxdir)/001_1.4bpp >$@
+$(btanimgfxdir)/001.4bpp: $(btanimgfxdir)/001_0.4bpp \
+                          $(btanimgfxdir)/001_1.4bpp
+	@cat $^ >$@
 
-$(masksgfxdir)/unknown_C2EA50.4bpp: $(masksgfxdir)/unknown_C2EA50.png
+$(masksgfxdir)/unknown_C2EA50.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 14
 
-$(bttransgfxdir)/vs_frame.4bpp: $(bttransgfxdir)/vs_frame.png
+$(bttransgfxdir)/vs_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 16
 
-$(menudir)/party_menu_misc.4bpp: $(menudir)/party_menu_misc.png
+$(menudir)/party_menu_misc.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 62
 
 $(typesdir)/move_types.4bpp: $(types:%=$(typesdir)/%.4bpp) $(contest_types:%=$(typesdir)/contest_%.4bpp)
 	@cat $^ >$@
 
-$(typesdir)/move_types.gbapal: $(typesdir)/move_types_1.gbapal $(typesdir)/move_types_2.gbapal $(typesdir)/move_types_3.gbapal
-	@cat $(typesdir)/move_types_1.gbapal $(typesdir)/move_types_2.gbapal $(typesdir)/move_types_3.gbapal >$@
+$(typesdir)/move_types.gbapal: $(typesdir)/move_types_1.gbapal \
+                               $(typesdir)/move_types_2.gbapal \
+                               $(typesdir)/move_types_3.gbapal
+	@cat $^ >$@
 
-$(menudir)/bag_screen.4bpp: $(menudir)/bag_screen.png
+$(menudir)/bag_screen.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
 
-$(raydir)/rayquaza.8bpp: $(raydir)/rayquaza.png
+$(rayquazadir)/rayquaza.8bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 227
 
-$(raydir)/overcast.4bpp: $(raydir)/overcast.png
+$(rayquazadir)/overcast.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 313
 
-$(raydir)/rayquaza_fly1.4bpp: $(raydir)/rayquaza_fly1.png
+$(rayquazadir)/rayquaza_fly1.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 124
 
-$(raydir)/rayquaza_tail_fix.4bpp: $(raydir)/rayquaza_tail.4bpp
+$(rayquazadir)/rayquaza_tail_fix.4bpp: $(rayquazadir)/rayquaza_tail.4bpp
 	cp $< $@
 	head -c 12 /dev/zero >> $@
 
-$(raydir)/chase_streaks.4bpp: $(raydir)/chase_streaks.png
+$(rayquazadir)/chase_streaks.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 19
 
-$(raydir)/rayquaza_chase.4bpp: $(raydir)/rayquaza_chase.png
+$(rayquazadir)/rayquaza_chase.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 155
 
 graphics/picture_frame/frame5.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 86
 
-$(roulgfxdir)/roulette_tilt.4bpp: $(roulgfxdir)/shroomish.4bpp $(roulgfxdir)/tailow.4bpp
-	@cat $(roulgfxdir)/shroomish.4bpp $(roulgfxdir)/tailow.4bpp >$@
+$(roulettegfxdir)/roulette_tilt.4bpp: $(roulettegfxdir)/shroomish.4bpp \
+                                      $(roulettegfxdir)/tailow.4bpp
+	@cat $^ >$@
 
-$(roulgfxdir)/poke_icons2.4bpp: $(roulgfxdir)/wynaut.4bpp $(roulgfxdir)/azurill.4bpp $(roulgfxdir)/skitty.4bpp $(roulgfxdir)/makuhita.4bpp
+$(roulettegfxdir)/poke_icons2.4bpp: $(roulettegfxdir)/wynaut.4bpp \
+                                    $(roulettegfxdir)/azurill.4bpp \
+                                    $(roulettegfxdir)/skitty.4bpp \
+                                    $(roulettegfxdir)/makuhita.4bpp
 	@cat $^ >$@
 
 $(bttransgfxdir)/85BBC14.4bpp: %.4bpp: %.png
@@ -411,20 +448,36 @@ $(bttransgfxdir)/85BBC14.4bpp: %.4bpp: %.png
 $(bttransgfxdir)/rayquaza.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 938
 
-$(bttransgfxdir)/frontier_square_1.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp $(bttransgfxdir)/frontier_squares_1.4bpp
+$(bttransgfxdir)/frontier_square_1.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp \
+                                         $(bttransgfxdir)/frontier_squares_1.4bpp
 	@cat $^ >$@
 
-$(bttransgfxdir)/frontier_square_2.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp $(bttransgfxdir)/frontier_squares_2.4bpp
+$(bttransgfxdir)/frontier_square_2.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp \
+                                         $(bttransgfxdir)/frontier_squares_2.4bpp
 	@cat $^ >$@
  
-$(bttransgfxdir)/frontier_square_3.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp $(bttransgfxdir)/frontier_squares_3.4bpp
+$(bttransgfxdir)/frontier_square_3.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp \
+                                         $(bttransgfxdir)/frontier_squares_3.4bpp
 	@cat $^ >$@
 
-$(bttransgfxdir)/frontier_square_4.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp $(bttransgfxdir)/frontier_squares_4.4bpp
+$(bttransgfxdir)/frontier_square_4.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp \
+                                         $(bttransgfxdir)/frontier_squares_4.4bpp
 	@cat $^ >$@
 
-$(pknvoptionsdir)/options.4bpp: $(pknvoptionsdir)/hoenn_map.4bpp $(pknvoptionsdir)/condition.4bpp $(pknvoptionsdir)/match_call.4bpp $(pknvoptionsdir)/ribbons.4bpp $(pknvoptionsdir)/switch_off.4bpp $(pknvoptionsdir)/party.4bpp $(pknvoptionsdir)/search.4bpp $(pknvoptionsdir)/cool.4bpp $(pknvoptionsdir)/beauty.4bpp $(pknvoptionsdir)/cute.4bpp $(pknvoptionsdir)/smart.4bpp $(pknvoptionsdir)/tough.4bpp $(pknvoptionsdir)/cancel.4bpp
+$(pknvoptionsdir)/options.4bpp: $(pknvoptionsdir)/hoenn_map.4bpp \
+                                $(pknvoptionsdir)/condition.4bpp \
+                                $(pknvoptionsdir)/match_call.4bpp \
+                                $(pknvoptionsdir)/ribbons.4bpp \
+                                $(pknvoptionsdir)/switch_off.4bpp \
+                                $(pknvoptionsdir)/party.4bpp \
+                                $(pknvoptionsdir)/search.4bpp \
+                                $(pknvoptionsdir)/cool.4bpp \
+                                $(pknvoptionsdir)/beauty.4bpp \
+                                $(pknvoptionsdir)/cute.4bpp \
+                                $(pknvoptionsdir)/smart.4bpp \
+                                $(pknvoptionsdir)/tough.4bpp \
+                                $(pknvoptionsdir)/cancel.4bpp
 	@cat $^ >$@
 
-$(pknvdir)/header.4bpp: $(pknvdir)/header.png
+$(pknvdir)/header.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
