@@ -410,7 +410,7 @@ $(typesdir)/move_types.gbapal: $(typesdir)/move_types_1.gbapal \
 $(menudir)/bag_screen.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
 
-$(rayquazadir)/rayquaza.8bpp: %.4bpp: %.png
+$(rayquazadir)/rayquaza.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 227
 
 $(rayquazadir)/overcast.4bpp: %.4bpp: %.png
