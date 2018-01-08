@@ -9,6 +9,8 @@
 #include "constants/maps.h"
 #include "task.h"
 
+bool8 sub_808A964(void);
+
 const u8 DoorAnimTiles_04[][0x100] =
 {
     INCBIN_U8("graphics/door_anims/04/0.4bpp"),
