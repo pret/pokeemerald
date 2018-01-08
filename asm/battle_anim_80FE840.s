@@ -14567,7 +14567,7 @@ _08105CCC:
 	lsls r2, 1
 	adds r0, r2
 	str r1, [r0]
-	ldr r0, =gUnknown_08C22610
+	ldr r0, =gBattleAnimSpritePalette_206
 	bl LZDecompressWram
 	movs r4, 0
 _08105D00:
@@ -15557,7 +15557,7 @@ _0810653A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08106578
-	ldr r1, =gUnknown_08D93960
+	ldr r1, =gBattleAnimBackgroundTilemap_ScaryFaceContest
 	b _0810658A
 	.pool
 _08106578:
@@ -15568,7 +15568,7 @@ _08106578:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0810659C
-	ldr r1, =gUnknown_08D93598
+	ldr r1, =gBattleAnimBackgroundTilemap_ScaryFacePlayer
 _0810658A:
 	mov r0, sp
 	movs r2, 0
@@ -15576,7 +15576,7 @@ _0810658A:
 	b _081065A6
 	.pool
 _0810659C:
-	ldr r1, =gUnknown_08D9377C
+	ldr r1, =gBattleAnimBackgroundTilemap_ScaryFaceOpponent
 	mov r0, sp
 	movs r2, 0
 	bl sub_80A6D60
@@ -17067,8 +17067,8 @@ sub_8107144: @ 8107144
 	.pool
 	thumb_func_end sub_8107144
 
-	thumb_func_start update_fury_cutter_counter_copy
-update_fury_cutter_counter_copy: @ 8107168
+	thumb_func_start sub_8107168
+sub_8107168: @ 8107168
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -17081,7 +17081,7 @@ update_fury_cutter_counter_copy: @ 8107168
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end update_fury_cutter_counter_copy
+	thumb_func_end sub_8107168
 
 	thumb_func_start sub_8107188
 sub_8107188: @ 8107188
@@ -18097,7 +18097,7 @@ _081079E0:
 _081079EA:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, =gUnknown_08D94AB8
+	ldr r1, =gBattleAnimBackgroundImage_Surf
 	mov r2, sp
 	ldrh r2, [r2, 0xA]
 	bl sub_80A6CC0
@@ -18106,7 +18106,7 @@ _081079EA:
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08107A24
-	ldr r0, =gUnknown_08D95DD8
+	ldr r0, =gBattleAnimBackgroundPalette_Surf
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -18115,7 +18115,7 @@ _081079EA:
 	b _08107A32
 	.pool
 _08107A24:
-	ldr r0, =gUnknown_08D8FB9C
+	ldr r0, =gBattleAnimBackgroundImageMuddyWater_Pal
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
@@ -26969,7 +26969,7 @@ _0810C0E2:
 	mov r3, sp
 	ldrh r3, [r3, 0xA]
 	bl LoadBgTiles
-	ldr r1, =gUnknown_08D932E0
+	ldr r1, =gBattleAnimFogTilemap
 	mov r0, sp
 	movs r2, 0
 	bl sub_80A6D60
@@ -27251,7 +27251,7 @@ _0810C366:
 	mov r3, sp
 	ldrh r3, [r3, 0xA]
 	bl LoadBgTiles
-	ldr r1, =gUnknown_08D932E0
+	ldr r1, =gBattleAnimFogTilemap
 	mov r0, sp
 	movs r2, 0
 	bl sub_80A6D60

@@ -137,4 +137,37 @@ extern const u8 gMenuText_Give2[];
 
 extern const u8 gText_Cancel2[];
 
+extern const u8 gText_WithdrawPokemon[];
+extern const u8 gText_WithdrawMonDescription[];
+extern const u8 gText_DepositPokemon[];
+extern const u8 gText_DepositMonDescription[];
+extern const u8 gText_MovePokemon[];
+extern const u8 gText_MoveMonDescription[];
+extern const u8 gText_MoveItems[];
+extern const u8 gText_MoveItemsDescription[];
+extern const u8 gText_SeeYa[];
+extern const u8 gText_SeeYaDescription[];
+
+// menu texts
+extern const u8 gText_MenuPokedex[];
+extern const u8 gText_MenuPokemon[];
+extern const u8 gText_MenuBag[];
+extern const u8 gText_MenuPokenav[];
+extern const u8 gText_MenuPlayer[];
+extern const u8 gText_MenuSave[];
+extern const u8 gText_MenuOption[];
+extern const u8 gText_MenuExit[];
+extern const u8 gText_MenuRetire[];
+extern const u8 gText_MenuRest[];
+extern const u8 gText_Floor1[];
+extern const u8 gText_Floor2[];
+extern const u8 gText_Floor3[];
+extern const u8 gText_Floor4[];
+extern const u8 gText_Floor5[];
+extern const u8 gText_Floor6[];
+extern const u8 gText_Floor7[];
+extern const u8 gText_Peak[];
+extern const u8 gText_SafariBallStock[];
+extern const u8 gText_BattlePyramidFloor[];
+
 #endif //GUARD_STRINGS_H

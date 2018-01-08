@@ -272,7 +272,7 @@ gUnknown_0860CF44:: @ 860CF44
 
     .align 2
 gUnknown_0860CF50:: @ 860CF50
-	obj_tiles gUnknown_08D85058, 0x0600, 0x0000
+	obj_tiles gBattleFrontierGfx_DomeOptions, 0x0600, 0x0000
 	null_obj_tiles
 
     .align 2

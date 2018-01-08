@@ -683,7 +683,7 @@ _081C77B0:
 	movs r0, 0
 	bl sub_81C763C
 	adds r4, r0, 0
-	ldr r1, =gUnknown_08DC7B80
+	ldr r1, =gPokenavHeader_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r2, 0
@@ -693,12 +693,12 @@ _081C77B0:
 	movs r0, 0
 	adds r1, r4, 0
 	bl SetBgTilemapBuffer
-	ldr r1, =gUnknown_08DC7D84
+	ldr r1, =gPokenavHeader_Tilemap
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r0, =gUnknown_08DC7B60
+	ldr r0, =gPokenavHeader_Pal
 	movs r1, 0
 	movs r2, 0x20
 	bl sub_81C7944
@@ -1571,7 +1571,7 @@ sub_81C7E58: @ 81C7E58
 	bl sub_8034974
 	adds r5, r0, 0
 	lsls r4, 5
-	ldr r0, =gUnknown_08DC7F00
+	ldr r0, =gPokenavLeftHeader_Pal
 	adds r4, r0
 	movs r0, 0x1
 	bl IndexOfSpritePaletteTag
@@ -1653,7 +1653,7 @@ sub_81C7F24: @ 81C7F24
 	bl sub_8034974
 	adds r5, r0, 0
 	lsls r4, 5
-	ldr r0, =gUnknown_08DC7F00
+	ldr r0, =gPokenavLeftHeader_Pal
 	adds r4, r0
 	movs r0, 0x2
 	bl IndexOfSpritePaletteTag
@@ -5198,7 +5198,7 @@ _081C9A5C:
 	ldr r0, =gUnknown_08620194
 	movs r1, 0x3
 	bl sub_81C7B54
-	ldr r1, =gUnknown_08DC90E0
+	ldr r1, =gPokenavMessageBox_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -5209,14 +5209,14 @@ _081C9A5C:
 	adds r1, 0x8C
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
-	ldr r1, =gUnknown_08DC9130
+	ldr r1, =gPokenavMessageBox_Tilemap
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gUnknown_08DC90C0
+	ldr r0, =gPokenavMessageBox_Pal
 	movs r1, 0x10
 	movs r2, 0x20
 	bl sub_81C7944
@@ -7924,7 +7924,7 @@ sub_81CAF78: @ 81CAF78
 	strb r0, [r6]
 	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
-	bl is_light_level_1_2_3_or_6
+	bl Overworld_MapTypeAllowsTeleportAndFly
 	lsls r0, 24
 	cmp r0, 0
 	bne _081CAFA4
@@ -11374,7 +11374,7 @@ sub_81CCA1C: @ 81CCA1C
 	movs r1, 0x10
 	movs r2, 0x20
 	bl sub_81C7944
-	ldr r0, =gUnknown_08DC91E8
+	ldr r0, =gHoennMapZoomIcons_Pal
 	movs r1, 0x30
 	movs r2, 0x20
 	bl sub_81C7944
@@ -13941,7 +13941,7 @@ _081CDF18:
 	ldr r1, =0x0000040b
 	movs r0, 0x52
 	bl SetGpuReg
-	ldr r1, =gUnknown_08DC6548
+	ldr r1, =gPokenavCondition_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x3
@@ -13973,7 +13973,7 @@ _081CDFB8:
 	beq _081CDFC4
 	b _081CE2C0
 _081CDFC4:
-	ldr r0, =gUnknown_08DC6DFC
+	ldr r0, =gPokenavCondition_Tilemap
 	adds r4, r5, 0x4
 	adds r1, r4, 0
 	bl LZ77UnCompVram
@@ -13983,7 +13983,7 @@ _081CDFC4:
 	bl sub_81CDD5C
 	cmp r0, 0x1
 	bne _081CDFF2
-	ldr r1, =gUnknown_08DC7070
+	ldr r1, =gPokenavOptions_Tilemap
 	movs r0, 0x9
 	str r0, [sp]
 	movs r0, 0x4
@@ -13995,7 +13995,7 @@ _081CDFC4:
 _081CDFF2:
 	movs r0, 0x3
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gUnknown_08DC6528
+	ldr r0, =gPokenavCondition_Pal
 	movs r1, 0x10
 	movs r2, 0x20
 	bl sub_81C7944

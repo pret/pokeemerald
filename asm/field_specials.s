@@ -32,10 +32,10 @@ Special_ViewWallClock: @ 8137CC8
 
 	thumb_func_start ResetCyclingRoadChallengeData
 ResetCyclingRoadChallengeData: @ 8137CEC
-	ldr r0, =gUnknown_0203AB54
+	ldr r0, =gBikeCyclingChallenge
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, =gUnknown_0203AB55
+	ldr r0, =0x0203ab55
 	strb r1, [r0]
 	ldr r1, =gUnknown_0203AB58
 	movs r0, 0
@@ -46,10 +46,10 @@ ResetCyclingRoadChallengeData: @ 8137CEC
 
 	thumb_func_start Special_BeginCyclingRoadChallenge
 Special_BeginCyclingRoadChallenge: @ 8137D0C
-	ldr r1, =gUnknown_0203AB54
+	ldr r1, =gBikeCyclingChallenge
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gUnknown_0203AB55
+	ldr r1, =0x0203ab55
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, =gUnknown_0203AB58
@@ -218,7 +218,7 @@ FinishCyclingRoadChallenge: @ 8137E6C
 	ldr r4, [r0, 0x20]
 	ldr r0, [r1]
 	subs r4, r0
-	ldr r5, =gUnknown_0203AB55
+	ldr r5, =0x0203ab55
 	ldrb r1, [r5]
 	adds r0, r4, 0
 	bl DetermineCyclingRoadResults

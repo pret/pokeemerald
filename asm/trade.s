@@ -8105,11 +8105,11 @@ _0807B668:
 	ldr r1, =0x00005206
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, =gUnknown_08DD7300
+	ldr r0, =gTradeGba2_Pal
 	movs r1, 0x10
 	movs r2, 0x60
 	bl LoadPalette
-	ldr r3, =gUnknown_08DD7360
+	ldr r3, =gTradeGba_Gfx
 	ldr r4, =0x06004000
 	movs r5, 0xA1
 	lsls r5, 5
@@ -8168,7 +8168,7 @@ _0807B726:
 	ldr r1, =0x80000800
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	ldr r3, =gUnknown_08DD7360
+	ldr r3, =gTradeGba_Gfx
 	movs r4, 0xC0
 	lsls r4, 19
 	movs r5, 0xA1
@@ -8446,11 +8446,11 @@ _0807B9FC:
 	ldr r1, =0x00005206
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, =gUnknown_08DD7300
+	ldr r0, =gTradeGba2_Pal
 	movs r1, 0x10
 	movs r2, 0x60
 	bl LoadPalette
-	ldr r3, =gUnknown_08DD7360
+	ldr r3, =gTradeGba_Gfx
 	ldr r4, =0x06004000
 	movs r5, 0xA1
 	lsls r5, 5

@@ -150,8 +150,8 @@ _08158C4C:
 	.pool
 	thumb_func_end sub_8158C04
 
-	thumb_func_start mas_80DCF38
-mas_80DCF38: @ 8158C58
+	thumb_func_start sub_8158C58
+sub_8158C58: @ 8158C58
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -230,7 +230,7 @@ mas_80DCF38: @ 8158C58
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end mas_80DCF38
+	thumb_func_end sub_8158C58
 
 	thumb_func_start sub_8158D08
 sub_8158D08: @ 8158D08

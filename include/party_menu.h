@@ -16,5 +16,7 @@ void sub_81B58A8(void);
 void DoWallyTutorialBagMenu(void);
 u8 pokemon_ailments_get_primary(u32 status);
 u8 *GetMonNickname(struct Pokemon *mon, u8 *dst);
+u8 GetCursorSelectionMonId(void);
+bool8 FieldCallback_Teleport(void);
 
 #endif // GUARD_PARTY_MENU_H

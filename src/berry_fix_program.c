@@ -81,50 +81,50 @@ static const u8 *const gUnknown_08618160[] = {
     Unknown_08617EA3
 };
 
-extern const u8 gUnknown_08DD87C0[];
-extern const u8 gUnknown_08DD8EE0[];
-extern const u8 gUnknown_08DD8780[];
-extern const u8 gUnknown_08DD90E0[];
-extern const u8 gUnknown_08DD9718[];
-extern const u8 gUnknown_08DD9080[];
-extern const u8 gUnknown_08DD98B4[];
-extern const u8 gUnknown_08DD9E58[];
-extern const u8 gUnknown_08DD9874[];
-extern const u8 gUnknown_08DDA02C[];
-extern const u8 gUnknown_08DDA63C[];
-extern const u8 gUnknown_08DD9FEC[];
-extern const u8 gUnknown_08DDA840[];
-extern const u8 gUnknown_08DDAE40[];
-extern const u8 gUnknown_08DDA800[];
-extern const u8 gUnknown_08DDB020[];
-extern const u8 gUnknown_08DDB2C4[];
-extern const u8 gUnknown_08DDAFE0[];
+extern const u8 gBerryFixGameboy_Gfx[];
+extern const u8 gBerryFixGameboy_Tilemap[];
+extern const u8 gBerryFixGameboy_Pal[];
+extern const u8 gBerryFixGameboyLogo_Gfx[];
+extern const u8 gBerryFixGameboyLogo_Tilemap[];
+extern const u8 gBerryFixGameboyLogo_Pal[];
+extern const u8 gBerryFixGbaTransfer_Gfx[];
+extern const u8 gBerryFixGbaTransfer_Tilemap[];
+extern const u8 gBerryFixGbaTransfer_Pal[];
+extern const u8 gBerryFixGbaTransferHighlight_Gfx[];
+extern const u8 gBerryFixGbaTransferHighlight_Tilemap[];
+extern const u8 gBerryFixGbaTransferHighlight_Pal[];
+extern const u8 gBerryFixGbaTransferError_Gfx[];
+extern const u8 gBerryFixGbaTransferError_Tilemap[];
+extern const u8 gBerryFixGbaTransferError_Pal[];
+extern const u8 gBerryFixWindow_Gfx[];
+extern const u8 gBerryFixWindow_Tilemap[];
+extern const u8 gBerryFixWindow_Pal[];
 
 static const u8 *const gUnknown_08618178[][3] = {
     {
-        gUnknown_08DD87C0,
-        gUnknown_08DD8EE0,
-        gUnknown_08DD8780
+        gBerryFixGameboy_Gfx,
+        gBerryFixGameboy_Tilemap,
+        gBerryFixGameboy_Pal
     }, {
-        gUnknown_08DD90E0,
-        gUnknown_08DD9718,
-        gUnknown_08DD9080
+        gBerryFixGameboyLogo_Gfx,
+        gBerryFixGameboyLogo_Tilemap,
+        gBerryFixGameboyLogo_Pal
     }, {
-        gUnknown_08DD98B4,
-        gUnknown_08DD9E58,
-        gUnknown_08DD9874
+        gBerryFixGbaTransfer_Gfx,
+        gBerryFixGbaTransfer_Tilemap,
+        gBerryFixGbaTransfer_Pal
     }, {
-        gUnknown_08DDA02C,
-        gUnknown_08DDA63C,
-        gUnknown_08DD9FEC
+        gBerryFixGbaTransferHighlight_Gfx,
+        gBerryFixGbaTransferHighlight_Tilemap,
+        gBerryFixGbaTransferHighlight_Pal
     }, {
-        gUnknown_08DDA840,
-        gUnknown_08DDAE40,
-        gUnknown_08DDA800
+        gBerryFixGbaTransferError_Gfx,
+        gBerryFixGbaTransferError_Tilemap,
+        gBerryFixGbaTransferError_Pal
     }, {
-        gUnknown_08DDB020,
-        gUnknown_08DDB2C4,
-        gUnknown_08DDAFE0
+        gBerryFixWindow_Gfx,
+        gBerryFixWindow_Tilemap,
+        gBerryFixWindow_Pal
     },
 };
 

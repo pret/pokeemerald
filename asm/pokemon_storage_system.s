@@ -1106,7 +1106,7 @@ sub_80C7958: @ 80C7958
 	ldrh r0, [r3]
 	adds r0, 0x1
 	strh r0, [r1]
-	ldr r0, =gUnknown_08571710
+	ldr r0, =sSpriteAnimTable_8571710
 	str r0, [sp, 0xC]
 	movs r4, 0
 _080C7A10:
@@ -5343,7 +5343,7 @@ sub_80CA044: @ 80CA044
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
-	ldr r1, =gUnknown_08DD2FE8
+	ldr r1, =gPSSMenu_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -6104,7 +6104,7 @@ sub_80CA704: @ 80CA704
 	ldr r1, [r4]
 	adds r1, 0xB0
 	bl LZ77UnCompWram
-	ldr r0, =gUnknown_08DD36A8
+	ldr r0, =gPSSMenu_Pal
 	movs r1, 0x10
 	movs r2, 0x20
 	bl LoadPalette
@@ -9124,7 +9124,7 @@ _080CBF80:
 	adds r1, r3
 	ldr r0, [r1]
 	ldr r2, [r0]
-	ldr r0, =gUnknown_0857291C
+	ldr r0, =gSpriteAffineAnimTable_857291C
 	str r0, [r2, 0x10]
 	ldr r0, [r1]
 	ldr r0, [r0]

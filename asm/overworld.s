@@ -50,8 +50,8 @@ flag_var_implications_of_teleport_: @ 8084660
 	.pool
 	thumb_func_end flag_var_implications_of_teleport_
 
-	thumb_func_start sub_808469C
-sub_808469C: @ 808469C
+	thumb_func_start Overworld_ResetStateAfterTeleport
+Overworld_ResetStateAfterTeleport: @ 808469C
 	push {lr}
 	bl player_avatar_init_params_reset
 	ldr r0, =0x0000088b
@@ -69,7 +69,7 @@ sub_808469C: @ 808469C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_808469C
+	thumb_func_end Overworld_ResetStateAfterTeleport
 
 	thumb_func_start flagmods_08054D70
 flagmods_08054D70: @ 80846E4
@@ -2212,8 +2212,8 @@ call_ResetMapMusic: @ 8085778
 	bx r0
 	thumb_func_end call_ResetMapMusic
 
-	thumb_func_start sub_8085784
-sub_8085784: @ 8085784
+	thumb_func_start Overworld_PlaySpecialMapMusic
+Overworld_PlaySpecialMapMusic: @ 8085784
 	push {r4,lr}
 	bl sav1_map_get_music
 	lsls r0, 16
@@ -2261,7 +2261,7 @@ _080857E8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8085784
+	thumb_func_end Overworld_PlaySpecialMapMusic
 
 	thumb_func_start Overworld_SetSavedMusic
 Overworld_SetSavedMusic: @ 80857F4
@@ -2772,8 +2772,8 @@ _08085BF0:
 	bx r1
 	thumb_func_end is_light_level_1_2_3_5_or_6
 
-	thumb_func_start is_light_level_1_2_3_or_6
-is_light_level_1_2_3_or_6: @ 8085BF4
+	thumb_func_start Overworld_MapTypeAllowsTeleportAndFly
+Overworld_MapTypeAllowsTeleportAndFly: @ 8085BF4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2793,7 +2793,7 @@ _08085C0E:
 _08085C10:
 	pop {r1}
 	bx r1
-	thumb_func_end is_light_level_1_2_3_or_6
+	thumb_func_end Overworld_MapTypeAllowsTeleportAndFly
 
 	thumb_func_start is_light_level_8_or_9
 is_light_level_8_or_9: @ 8085C14

@@ -12,7 +12,7 @@ gUnknown_08587A70:: @ 8587A70
 
 	.align 2
 gUnknown_08587A74:: @ 8587A74
-	obj_tiles gUnknown_08C19450, 0x0020, 0x4e20
+	obj_tiles gTiles_8C19450, 0x0020, 0x4e20
 
 	.align 2
 gOamData_8587A7C:: @ 8587A7C

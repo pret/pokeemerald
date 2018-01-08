@@ -639,8 +639,8 @@ _0815A5AC:
 	.pool
 	thumb_func_end sub_815A52C
 
-	thumb_func_start c3_80DE6F0
-c3_80DE6F0: @ 815A5C8
+	thumb_func_start sub_815A5C8
+sub_815A5C8: @ 815A5C8
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gTasks
@@ -656,7 +656,7 @@ c3_80DE6F0: @ 815A5C8
 	strb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end c3_80DE6F0
+	thumb_func_end sub_815A5C8
 
 	thumb_func_start sub_815A5F0
 sub_815A5F0: @ 815A5F0
@@ -3271,8 +3271,8 @@ _0815BAFC:
 	.pool
 	thumb_func_end sub_815B7D0
 
-	thumb_func_start c3_80DFBE4
-c3_80DFBE4: @ 815BB18
+	thumb_func_start sub_815BB18
+sub_815BB18: @ 815BB18
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3297,7 +3297,7 @@ c3_80DFBE4: @ 815BB18
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end c3_80DFBE4
+	thumb_func_end sub_815BB18
 
 	thumb_func_start sub_815BB58
 sub_815BB58: @ 815BB58

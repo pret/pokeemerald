@@ -18,7 +18,7 @@ SetUpFieldMove_Flash: @ 81370FC
 	lsrs r0, 24
 	strh r0, [r4]
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_8179918
@@ -35,7 +35,7 @@ _08137134:
 	cmp r0, 0
 	bne _08137170
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =hm2_flash

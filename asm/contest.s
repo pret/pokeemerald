@@ -6652,7 +6652,7 @@ sub_80DB0C4: @ 80DB0C4
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_08587C00
 	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_08C1C6B8
+	ldr r0, =gContest2Pal
 	movs r1, 0x88
 	lsls r1, 1
 	movs r2, 0x20
@@ -11731,7 +11731,7 @@ _080DD956:
 	ldr r1, [r0]
 	movs r0, 0x13
 	ldrsb r0, [r1, r0]
-	ldr r4, =gUnknown_08D8EC24
+	ldr r4, =gContestApplauseMeterGfx
 	cmp r5, r0
 	bge _080DD966
 	adds r4, 0x40

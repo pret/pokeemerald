@@ -299,17 +299,17 @@ gUnknown_08597CA0:: @ 8597CA0
 	.align 2
 gUnknown_08597CC0:: @ 8597CC0
 	obj_pal gUnknown_08597780, 0x0000
-	obj_pal gUnknown_08DCB648, 0x0001
-	obj_pal gUnknown_08DCB86C, 0x0002
+	obj_pal gEasyChatCursor_Pal, 0x0001
+	obj_pal gEasyChatRightWindow_Pal, 0x0002
 	obj_pal gUnknown_085979C0, 0x0003
 	null_obj_pal
 
 	.align 2
 gUnknown_08597CE8:: @ 8597CE8
 	obj_tiles gUnknown_085979E0, 0x0800, 0x0005
-	obj_tiles gUnknown_08DCB668, 0x1000, 0x0001
-	obj_tiles gUnknown_08DCB88C, 0x0800, 0x0006
-	obj_tiles gUnknown_08DCBAB0, 0x1000, 0x0004
+	obj_tiles gEasyChatCursor_Gfx, 0x1000, 0x0001
+	obj_tiles gEasyChatRightWindow_Gfx, 0x0800, 0x0006
+	obj_tiles gEasyChatMode_Gfx, 0x1000, 0x0004
 
 gUnknown_08597D08:: @ 8597D08
 	.byte 0x00, 0x0c, 0x18, 0x38, 0x44, 0x50, 0x5c, 0x00

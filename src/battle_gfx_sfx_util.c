@@ -3,6 +3,7 @@
 #include "battle_controllers.h"
 #include "battle_ai_script_commands.h"
 #include "battle_anim.h"
+#include "constants/battle_anim.h"
 #include "battle_interface.h"
 #include "main.h"
 #include "malloc.h"
@@ -39,8 +40,8 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 
 extern const struct BattleMove gBattleMoves[];
 extern const u8 gUnknown_0831C604[];
-extern const u8 * const gUnknown_082C9320[];
-extern const u8 * const gUnknown_082C937C[];
+extern const u8 * const gBattleAnims_VariousTable[];
+extern const u8 * const gBattleAnims_Special[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
@@ -414,7 +415,7 @@ void InitAndLaunchChosenStatusAnimation(bool8 isStatus2, u32 status)
         else if (status & STATUS2_NIGHTMARE)
             LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_NIGHTMARE);
         else if (status & STATUS2_WRAPPED)
-            LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_WRAPPED);
+            LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_WRAPPED); // this animation doesn't actually exist
         else // no animation
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].statusAnimActive = 0;
     }
@@ -448,7 +449,7 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBank, u8 atkBank, u8 defBank,
     gAnimBankAttacker = atkBank;
     gAnimBankTarget = defBank;
     gBattleSpritesDataPtr->animationData->animArg = argument;
-    LaunchBattleAnimation(gUnknown_082C9320, tableId, FALSE);
+    LaunchBattleAnimation(gBattleAnims_VariousTable, tableId, FALSE);
     taskId = CreateTask(Task_ClearBitWhenBattleTableAnimDone, 10);
     gTasks[taskId].tBank = activeBank;
     gBattleSpritesDataPtr->healthBoxesData[gTasks[taskId].tBank].animFromTableActive = 1;
@@ -492,7 +493,7 @@ void InitAndLaunchSpecialAnimation(u8 activeBank, u8 atkBank, u8 defBank, u8 tab
 
     gAnimBankAttacker = atkBank;
     gAnimBankTarget = defBank;
-    LaunchBattleAnimation(gUnknown_082C937C, tableId, FALSE);
+    LaunchBattleAnimation(gBattleAnims_Special, tableId, FALSE);
     taskId = CreateTask(Task_ClearBitWhenSpecialAnimDone, 10);
     gTasks[taskId].tBank = activeBank;
     gBattleSpritesDataPtr->healthBoxesData[gTasks[taskId].tBank].specialAnimActive = 1;

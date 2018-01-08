@@ -2028,7 +2028,7 @@ _080BC56E:
 	bl SetGpuReg
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, =gUnknown_0855D298
+	ldr r1, =gBgTemplates_0855D298
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
@@ -2054,7 +2054,7 @@ _080BC56E:
 	adds r1, r0, 0
 	movs r0, 0
 	bl SetBgTilemapBuffer
-	ldr r1, =gUnknown_08DC1934
+	ldr r1, =gPokedexMenu_Gfx
 	movs r2, 0x80
 	lsls r2, 6
 	str r6, [sp]
@@ -2119,7 +2119,7 @@ _080BC682:
 	lsls r0, 31
 	lsrs r0, 31
 	bl sub_80BC844
-	ldr r0, =gUnknown_0855D2A8
+	ldr r0, =sWindowTemplates_0855D2A8
 	bl InitWindows
 	bl DeactivateAllTextPrinters
 	movs r0, 0
@@ -2141,9 +2141,9 @@ _080BC6CC:
 	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
-	ldr r0, =gUnknown_0855D26C
+	ldr r0, =gSpriteSheets_0855D26C
 	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_0855D27C
+	ldr r0, =gSpritePalettes_0855D26C
 	bl LoadSpritePalettes
 	adds r0, r5, 0
 	bl sub_80BDB7C
@@ -2291,14 +2291,14 @@ sub_80BC844: @ 80BC844
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080BC858
-	ldr r0, =gUnknown_08DC17B6
+	ldr r0, =gPokedexHoennBg_Pal + 0x2
 	b _080BC862
 	.pool
 _080BC858:
 	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _080BC870
-	ldr r0, =gUnknown_08DC16F6
+	ldr r0, =gPokedexText_Pal + 2
 _080BC862:
 	movs r1, 0x1
 	movs r2, 0xBE
@@ -2306,7 +2306,7 @@ _080BC862:
 	b _080BC87A
 	.pool
 _080BC870:
-	ldr r0, =gUnknown_08DC1876
+	ldr r0, =gPokedexNationalBg_Pal + 0x2
 	movs r1, 0x1
 	movs r2, 0xBE
 	bl LoadPalette
@@ -2609,7 +2609,7 @@ _080BCACC:
 	movs r7, 0x1
 	mov r9, r7
 _080BCADA:
-	ldr r1, =gUnknown_0855C6A4
+	ldr r1, =gPokedexOrder_Alphabetical
 	lsls r4, 16
 	asrs r0, r4, 15
 	adds r0, r1
@@ -2687,7 +2687,7 @@ _080BCB78:
 	ldr r7, =gUnknown_02039B4C
 	ldr r6, =0x0000060c
 _080BCB82:
-	ldr r1, =gUnknown_0855C9DA
+	ldr r1, =gPokedexOrder_Weight
 	asrs r0, 15
 	adds r0, r1
 	ldrh r0, [r0]
@@ -2752,7 +2752,7 @@ _080BCC08:
 	ldr r0, =0x00000181
 	mov r9, r0
 _080BCC16:
-	ldr r1, =gUnknown_0855C9DA
+	ldr r1, =gPokedexOrder_Weight
 	lsls r4, 16
 	asrs r0, r4, 15
 	adds r0, r1
@@ -2819,7 +2819,7 @@ _080BCCA0:
 	ldr r7, =gUnknown_02039B4C
 	ldr r6, =0x0000060c
 _080BCCAA:
-	ldr r1, =gUnknown_0855CCDE
+	ldr r1, =gPokedexOrder_Height
 	asrs r0, 15
 	adds r0, r1
 	ldrh r0, [r0]
@@ -2884,7 +2884,7 @@ _080BCD30:
 	ldr r0, =0x00000181
 	mov r9, r0
 _080BCD3E:
-	ldr r1, =gUnknown_0855CCDE
+	ldr r1, =gPokedexOrder_Height
 	lsls r4, 16
 	asrs r0, r4, 15
 	adds r0, r1
@@ -3517,7 +3517,7 @@ sub_80BD23C: @ 80BD23C
 	b _080BD266
 	.pool
 _080BD264:
-	ldr r4, =gUnknown_0855D2FE
+	ldr r4, =sText_TenDashes
 _080BD266:
 	str r5, [sp]
 	movs r0, 0
@@ -6369,7 +6369,7 @@ _080BEACA:
 	b _080BEDA0
 	.pool
 _080BEAF0:
-	ldr r1, =gUnknown_08DC1934
+	ldr r1, =gPokedexMenu_Gfx
 	movs r2, 0x80
 	lsls r2, 6
 	movs r0, 0
@@ -7257,7 +7257,7 @@ _080BF2B6:
 	b _080BF5B2
 	.pool
 _080BF310:
-	ldr r1, =gUnknown_08DC1934
+	ldr r1, =gPokedexMenu_Gfx
 	movs r2, 0x80
 	lsls r2, 6
 	movs r0, 0
@@ -7856,7 +7856,7 @@ _080BF88E:
 	b _080BFB94
 	.pool
 _080BF8D8:
-	ldr r1, =gUnknown_08DC1934
+	ldr r1, =gPokedexMenu_Gfx
 	movs r2, 0x80
 	lsls r2, 6
 	movs r0, 0
@@ -8543,7 +8543,7 @@ _080BFE92:
 	b _080C0074
 	.pool
 _080BFF0C:
-	ldr r1, =gUnknown_08DC1934
+	ldr r1, =gPokedexMenu_Gfx
 	movs r2, 0x80
 	lsls r2, 6
 	movs r0, 0
@@ -8751,14 +8751,14 @@ _080C00E8:
 	ands r1, r0
 	cmp r1, 0
 	beq _080C0114
-	ldr r0, =gUnknown_08DC16F6
+	ldr r0, =gPokedexText_Pal + 2
 	movs r1, 0x31
 	movs r2, 0xE
 	bl LoadPalette
 	b _080C011E
 	.pool
 _080C0114:
-	ldr r0, =gUnknown_08DC1756
+	ldr r0, =gPokedexCaughtScreenFade_Pal + 0x2
 	movs r1, 0x31
 	movs r2, 0xE
 	bl LoadPalette
@@ -11135,7 +11135,7 @@ _080C1332:
 	bl DeactivateAllTextPrinters
 	movs r0, 0
 	bl PutWindowTilemap
-	ldr r1, =gUnknown_08DC3304
+	ldr r1, =gPokedexSearchMenu_Gfx
 	movs r2, 0x80
 	lsls r2, 6
 	str r5, [sp]
@@ -11145,7 +11145,7 @@ _080C1332:
 	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _080C13E4
-	ldr r1, =gUnknown_08DC3A0C
+	ldr r1, =gPokedexSearch2_Tilemap
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
@@ -11153,13 +11153,13 @@ _080C1332:
 	b _080C13F0
 	.pool
 _080C13E4:
-	ldr r1, =gUnknown_08DC3870
+	ldr r1, =gPokedexSearch1_Tilemap
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
 _080C13F0:
-	ldr r0, =gUnknown_08DC3286
+	ldr r0, =gPokedexSearchMenu_Pal + 0x2
 	movs r1, 0x1
 	movs r2, 0x7E
 	bl LoadPalette
@@ -11172,9 +11172,9 @@ _080C13F0:
 	b _080C1516
 	.pool
 _080C1414:
-	ldr r0, =gUnknown_0855D26C
+	ldr r0, =gSpriteSheets_0855D26C
 	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_0855D27C
+	ldr r0, =gSpritePalettes_0855D26C
 	bl LoadSpritePalettes
 	adds r0, r4, 0
 	bl sub_80C2594

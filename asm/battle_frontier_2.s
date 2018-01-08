@@ -189,7 +189,7 @@ _0819A69C:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl FreeAllSpritePalettes
-	ldr r0, =gUnknown_08DC0754
+	ldr r0, =gFrontierFactorySelectMenu_Gfx
 	ldr r5, =gUnknown_0203CE2C
 	ldr r1, [r5]
 	movs r2, 0x88
@@ -211,7 +211,7 @@ _0819A69C:
 	movs r2, 0x60
 	movs r3, 0
 	bl LoadBgTiles
-	ldr r0, =gUnknown_08DC0B94
+	ldr r0, =gFrontierFactorySelectMenu_Tilemap
 	ldr r4, =gUnknown_0203CE34
 	ldr r1, [r4]
 	movs r2, 0x80
@@ -223,7 +223,7 @@ _0819A69C:
 	movs r0, 0x1
 	movs r3, 0
 	bl LoadBgTilemap
-	ldr r0, =gUnknown_08DC0714
+	ldr r0, =gFrontierFactorySelectMenu_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadPalette
@@ -6646,7 +6646,7 @@ _0819DDA8:
 	bl ResetTasks
 	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
-	ldr r0, =gUnknown_08DC0754
+	ldr r0, =gFrontierFactorySelectMenu_Gfx
 	ldr r5, =gUnknown_0203CE40
 	ldr r1, [r5]
 	movs r2, 0x88
@@ -6668,7 +6668,7 @@ _0819DDA8:
 	movs r2, 0x60
 	movs r3, 0
 	bl LoadBgTiles
-	ldr r0, =gUnknown_08DC0B94
+	ldr r0, =gFrontierFactorySelectMenu_Tilemap
 	ldr r4, =gUnknown_0203CE48
 	ldr r1, [r4]
 	movs r2, 0x80
@@ -6680,7 +6680,7 @@ _0819DDA8:
 	movs r0, 0x1
 	movs r3, 0
 	bl LoadBgTilemap
-	ldr r0, =gUnknown_08DC0714
+	ldr r0, =gFrontierFactorySelectMenu_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadPalette

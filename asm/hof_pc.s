@@ -34,7 +34,7 @@ ReshowPCMenuAfterHallOfFamePC: @ 8137C5C
 	push {lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	bl sp109_CreatePCMenu
 	bl sub_80E2514
 	movs r0, 0x1

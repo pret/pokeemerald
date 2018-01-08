@@ -10,33 +10,33 @@ gUnknown_085E5088:: @ 85E5088
 
     .align 2
 gUnknown_085E5094:: @ 85E5094
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6ec
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6ed
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6ee
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6ef
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6f0
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6f1
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6f2
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6f3
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6f4
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6f5
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6f6
-	obj_tiles gUnknown_08C1A490, 0x0100, 0xd6f7
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6ec
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6ed
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6ee
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6ef
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f0
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f1
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f2
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f3
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f4
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f5
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f6
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x0100, 0xd6f7
 
 	.align 2
 gUnknown_085E50F4:: @ 85E50F4
-	obj_pal gUnknown_08C1A564, 0xd6ec
-	obj_pal gUnknown_08C1A564, 0xd6ed
-	obj_pal gUnknown_08C1A564, 0xd6ee
-	obj_pal gUnknown_08C1A564, 0xd6ef
-	obj_pal gUnknown_08C1A564, 0xd6f0
-	obj_pal gUnknown_08C1A564, 0xd6f1
-	obj_pal gUnknown_08C1A564, 0xd6f2
-	obj_pal gUnknown_08C1A564, 0xd6f3
-	obj_pal gUnknown_08C1A564, 0xd6f4
-	obj_pal gUnknown_08C1A564, 0xd6f5
-	obj_pal gUnknown_08C1A564, 0xd6f6
-	obj_pal gUnknown_08C1A564, 0xd6f7
+	obj_pal gBattleAnimSpritePalette_136, 0xd6ec
+	obj_pal gBattleAnimSpritePalette_136, 0xd6ed
+	obj_pal gBattleAnimSpritePalette_136, 0xd6ee
+	obj_pal gBattleAnimSpritePalette_136, 0xd6ef
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f0
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f1
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f2
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f3
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f4
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f5
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f6
+	obj_pal gBattleAnimSpritePalette_136, 0xd6f7
 
 	.align 2
 gUnknown_085E5154:: @ 85E5154
@@ -140,6 +140,7 @@ gUnknown_085E5310:: @ 85E5310
 	.2byte 0x0100, 0x0503, 0x0506, 0x0004
 
 	.align 2
+gUnknown_085E5338:: @ 85E5338
 	spr_template 0x281d, 0x281d, gUnknown_0852490C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_817330C
 
 	.align 2
