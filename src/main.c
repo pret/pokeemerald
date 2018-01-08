@@ -332,7 +332,6 @@ void SetSerialCallback(IntrCallback callback)
 }
 
 extern void CopyBufferedValuesToGpuRegs(void);
-extern void ProcessDma3Requests(void);
 
 static void VBlankIntr(void)
 {
