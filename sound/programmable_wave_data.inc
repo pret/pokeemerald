@@ -1,0 +1,1 @@
+.incbin "baserom.gba", 0x6b4830, 0x190
