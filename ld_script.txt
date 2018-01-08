@@ -132,7 +132,7 @@ SECTIONS {
         asm/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
         asm/field_camera.o(.text);
-        asm/field_door.o(.text);
+        src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
         src/field_map_obj.o(.text);
         asm/field_ground_effect.o(.text);
@@ -441,8 +441,7 @@ SECTIONS {
         data/maps.o(.rodata);
         data/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
-        data/rom_8486FEC.o(.rodata);
-        data/field_door.o(.rodata);
+        src/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
         data/field_map_obj.o(.rodata);
         data/field_ground_effect.o(.rodata);
@@ -555,7 +554,8 @@ SECTIONS {
         data/intro_credits_graphics.o(.rodata);
         src/evolution_graphics.o(.rodata);
         src/bard_music.o(.rodata);
-        data/data_860A4AC.o(.rodata);
+        data/battle_link_817C95C.o(.rodata);
+        data/pokemon_animation.o(.rodata);
         src/battle_controller_recorded_opponent.o(.rodata);
         src/battle_controller_recorded_player.o(.rodata);
         src/battle_dome_cards.o(.rodata);
