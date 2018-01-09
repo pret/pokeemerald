@@ -7,6 +7,14 @@
 // to define NDEBUG before release, however this has been changed as
 // Ruby's actual debug build does not use the AGBPrint features.
 #define NDEBUG
+
+// To enable print debugging, comment out "#define NDEBUG". This allows
+// the various AGBPrint functions to be used. (See include/gba/isagbprint.h).
+// Some emulators support a debug console window: uncomment NoCashGBAPrint()
+// and NoCashGBAPrintf() in libisagbprn.c to use no$gba's own proprietary
+// printing system. Use NoCashGBAPrint() and NoCashGBAPrintf() like you
+// would normally use AGBPrint() and AGBPrintf().
+
 // NOTE: Don't try to enable assert right now as many pointers
 // still exist in defines and WILL likely result in a broken ROM.
 

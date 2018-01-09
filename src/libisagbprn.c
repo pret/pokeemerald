@@ -155,11 +155,21 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
     }
 }
 
-// no$gba print function, uncomment to use
+// no$gba print functions, uncomment to use
 /*
 void NoCashGBAPrint(const char *pBuf)
 {
     *(volatile u32*)NOCASHGBAPRINTADDR = (u32)pBuf;
+}
+
+void NoCashGBAPrintf(const char *pBuf, ...)
+{
+    char bufPrint[0x100];
+    va_list vArgv;
+    va_start(vArgv, pBuf);
+    vsprintf(bufPrint, pBuf, vArgv);
+    va_end(vArgv);
+    NoCashGBAPrint(bufPrint);
 }
 */
 
