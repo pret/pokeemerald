@@ -15,44 +15,6 @@ SECTIONS {
 
 <EWRAM>
 
-        tools/agbcc/lib/libc.a:memcpy.o(.data);
-        tools/agbcc/lib/libc.a:memset.o(.data);
-        tools/agbcc/lib/libc.a:strcmp.o(.data);
-        tools/agbcc/lib/libc.a:strcpy.o(.data);
-        tools/agbcc/lib/libc.a:impure.o(.data);
-        tools/agbcc/lib/libc.a:vsprintf.o(.data);
-        tools/agbcc/lib/libc.a:vfprintf.o(.data);
-        tools/agbcc/lib/libc.a:wsetup.o(.data);
-        tools/agbcc/lib/libc.a:dtoa.o(.data);
-        tools/agbcc/lib/libc.a:fflush.o(.data);
-        tools/agbcc/lib/libc.a:findfp.o(.data);
-        tools/agbcc/lib/libc.a:freer.o(.data);
-        tools/agbcc/lib/libc.a:mtrim.o(.data);
-        tools/agbcc/lib/libc.a:fvwrite.o(.data);
-        tools/agbcc/lib/libc.a:fwalk.o(.data);
-        tools/agbcc/lib/libc.a:locale.o(.data);
-        tools/agbcc/lib/libc.a:makebuf.o(.data);
-        tools/agbcc/lib/libc.a:mallocr.o(.data);
-        tools/agbcc/lib/libc.a:mbtowc_r.o(.data);
-        tools/agbcc/lib/libc.a:memchr.o(.data);
-        tools/agbcc/lib/libc.a:memmove.o(.data);
-        tools/agbcc/lib/libc.a:mlock.o(.data);
-        tools/agbcc/lib/libc.a:mprec.o(.data);
-        tools/agbcc/lib/libc.a:s_isinf.o(.data);
-        tools/agbcc/lib/libc.a:s_isnan.o(.data);
-        tools/agbcc/lib/libc.a:sbrkr.o(.data);
-        tools/agbcc/lib/libc.a:stdio.o(.data);
-        tools/agbcc/lib/libc.a:strlen.o(.data);
-        tools/agbcc/lib/libc.a:syscalls.o(.data);
-        tools/agbcc/lib/libc.a:writer.o(.data);
-        tools/agbcc/lib/libc.a:callocr.o(.data);
-        tools/agbcc/lib/libc.a:closer.o(.data);
-        tools/agbcc/lib/libc.a:errno.o(.data);
-        tools/agbcc/lib/libc.a:fstatr.o(.data);
-        tools/agbcc/lib/libc.a:libcfunc.o(.data);
-        tools/agbcc/lib/libc.a:lseekr.o(.data);
-        tools/agbcc/lib/libc.a:readr.o(.data);
-
         . = 0x40000;
 }
 
@@ -66,7 +28,6 @@ SECTIONS {
 
         /* .bss.code starts at 0x3001AA8 */
         src/m4a_2.o(.bss.code);
-        tools/agbcc/lib/libc.a:syscalls.o(.bss);
 
         /* COMMON starts at 0x30022A8 */
 <COMMON>
