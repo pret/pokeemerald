@@ -325,7 +325,10 @@ SECTIONS {
         tools/agbcc/lib/libgcc.a:fp-bit.o(.text);
         tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
         tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
-        src/libc.o(.text);
+        tools/agbcc/lib/libc.a:memcpy.o(.text);
+        tools/agbcc/lib/libc.a:memset.o(.text);
+        tools/agbcc/lib/libc.a:strcmp.o(.text);
+        tools/agbcc/lib/libc.a:strcpy.o(.text);
     } =0
 
     .rodata :
