@@ -10,8 +10,8 @@
 
 // for auto no$gba support, the string "no$gba" should be at this address.
 // except it's not, blame Martin, hence I'm letting the user deal with this nonsense.
-#define NOGBAIDADDR 0x4FFFA00
-#define NOGBAPRINTADDR 0x4FFFA14
+#define NOCASHGBAIDADDR 0x4FFFA00
+#define NOCASHGBAPRINTADDR 0x4FFFA14
 
 struct AGBPrintStruct
 {
@@ -155,11 +155,11 @@ void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopP
     }
 }
 
-// nogba print function, uncomment to use
+// no$gba print function, uncomment to use
 /*
-void NOGBAPrint(const char *pBuf)
+void NoCashGBAPrint(const char *pBuf)
 {
-    *(volatile u32*)NOGBAPRINTADDR = (u32)pBuf;
+    *(volatile u32*)NOCASHGBAPRINTADDR = (u32)pBuf;
 }
 */
 
