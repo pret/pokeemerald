@@ -47,7 +47,7 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl
+.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin sound/direct_sound_samples/cry_%.bin
 
 .PHONY: rom clean compare tidy
 
