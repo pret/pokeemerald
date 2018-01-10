@@ -75,6 +75,8 @@ compare: $(ROM)
 	@$(SHA1) rom.sha1
 
 clean: tidy
+	rm -f sound/direct_sound_samples/*.bin
+	rm -f $(SONG_OBJS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 
 tidy:
@@ -95,6 +97,10 @@ include graphics_file_rules.mk
 %.gbapal: %.png ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
+sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(AIF) $< $@ --compress
+%.bin: %.aif ; $(AIF) $< $@
+sound/songs/%.s: sound/songs/%.mid
+	cd $(@D) && ../../$(MID) $(<F)
 
 $(C_BUILDDIR)/libc.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/libc.o: CFLAGS := -O2
