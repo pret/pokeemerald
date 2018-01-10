@@ -50,7 +50,7 @@ struct PokeblockFeedStruct
 };
 
 extern u16 gSpecialVar_ItemId;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct SpriteTemplate gUnknown_0202499C;
 
 extern const u8 gBattleTerrainPalette_Frontier[];
@@ -802,7 +802,7 @@ static void Task_ReturnAfterPaletteFade(u8 taskId)
     {
         ResetSpriteData();
         FreeAllSpritePalettes();
-        m4aMPlayVolumeControl(&gMPlay_BGM, -1, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, -1, 0x100);
         SetMainCallback2(gMain.savedCallback);
         DestroyTask(taskId);
         FreeAllWindowBuffers();

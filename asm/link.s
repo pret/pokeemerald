@@ -3342,11 +3342,11 @@ c2_800ACD4: @ 800AF30
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =gMPlay_SE1
+	ldr r0, =gMPlayInfo_SE1
 	bl m4aMPlayStop
-	ldr r0, =gMPlay_SE2
+	ldr r0, =gMPlayInfo_SE2
 	bl m4aMPlayStop
-	ldr r0, =gMPlay_SE3
+	ldr r0, =gMPlayInfo_SE3
 	bl m4aMPlayStop
 	ldr r0, =0x02000000
 	movs r1, 0xE0

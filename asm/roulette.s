@@ -6841,14 +6841,14 @@ _08143BEA:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08143C74
-	ldr r0, _08143C84  @ =gMPlay_SE1
+	ldr r0, _08143C84  @ =gMPlayInfo_SE1
 	ldr r4, _08143C88  @ =0x0000FFFF
 	ldrh r2, [r7, 0x24]
 	lsls r2, 24
 	asrs r2, 24
 	adds r1, r4, 0
 	bl m4aMPlayPanpotControl
-	ldr r0, _08143C8C  @ =gMPlay_SE2
+	ldr r0, _08143C8C  @ =gMPlayInfo_SE2
 	ldrh r2, [r7, 0x24]
 	lsls r2, 24
 	asrs r2, 24
@@ -6864,11 +6864,11 @@ _08143C74:
 _08143C80:
 	.4byte 0x00000000
 _08143C84:
-	.4byte gMPlay_SE1
+	.4byte gMPlayInfo_SE1
 _08143C88:
 	.4byte 0x0000FFFF
 _08143C8C:
-	.4byte gMPlay_SE2
+	.4byte gMPlayInfo_SE2
 	thumb_func_end sub_8143B84
 
 	thumb_func_start sub_8143C90
@@ -9385,14 +9385,14 @@ sub_81450D8: @ 81450D8
 	adds r4, r0
 	asrs r4, 1
 	negs r4, r4
-	ldr r0, =gMPlay_SE1
+	ldr r0, =gMPlayInfo_SE1
 	ldr r5, =0x0000ffff
 	lsls r4, 24
 	asrs r4, 24
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl m4aMPlayPanpotControl
-	ldr r0, =gMPlay_SE2
+	ldr r0, =gMPlayInfo_SE2
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl m4aMPlayPanpotControl

@@ -20736,7 +20736,7 @@ _081A54D4:
 	bl HandleBattleWindow
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gMPlay_BGM
+	ldr r0, =gMPlayInfo_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1

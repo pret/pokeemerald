@@ -11,10 +11,10 @@ void *gMPlayJumpTable[36];
 struct CgbChannel gCgbChans[4];
 struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES * 2];
 struct PokemonCrySong gPokemonCrySong;
-struct MusicPlayerInfo gMPlay_BGM;
-struct MusicPlayerInfo gMPlay_SE1;
-struct MusicPlayerInfo gMPlay_SE2;
-struct MusicPlayerInfo gMPlay_SE3;
+struct MusicPlayerInfo gMPlayInfo_BGM;
+struct MusicPlayerInfo gMPlayInfo_SE1;
+struct MusicPlayerInfo gMPlayInfo_SE2;
+struct MusicPlayerInfo gMPlayInfo_SE3;
 u8 gMPlayMemAccArea[0x10];
 
 u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)

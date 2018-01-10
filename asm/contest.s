@@ -8891,7 +8891,7 @@ _080DC226:
 	ble _080DC284
 	movs r0, 0x60
 	bl PlaySE
-	ldr r4, =gMPlay_SE1
+	ldr r4, =gMPlayInfo_SE1
 	adds r0, r4, 0
 	bl m4aMPlayImmInit
 	ldr r1, =0x0000ffff

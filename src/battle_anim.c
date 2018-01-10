@@ -37,9 +37,9 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
-extern struct MusicPlayerInfo gMPlay_BGM;
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gDecompressionBuffer[];
 
 extern const u16 gUnknown_082C8D64[];
@@ -272,7 +272,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         {
             if (tableId == gUnknown_082C8D64[i])
             {
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
                 break;
             }
         }
@@ -514,8 +514,8 @@ static void ScriptCmd_end(void)
         }
         else
         {
-            m4aMPlayStop(&gMPlay_SE1);
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE1);
+            m4aMPlayStop(&gMPlayInfo_SE2);
         }
     }
 
@@ -534,7 +534,7 @@ static void ScriptCmd_end(void)
 
     if (!continuousAnim) // may have been used for debug?
     {
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
         if (!IsContest())
         {
             sub_80A8278();
@@ -1650,8 +1650,8 @@ static void ScriptCmd_waitsound(void)
     {
         if (++sSoundAnimFramesToWait > 90)
         {
-            m4aMPlayStop(&gMPlay_SE1);
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE1);
+            m4aMPlayStop(&gMPlayInfo_SE2);
             sSoundAnimFramesToWait = 0;
         }
         else
@@ -1833,7 +1833,7 @@ static void ScriptCmd_doublebattle_2E(void)
 
 static void ScriptCmd_stopsound(void)
 {
-    m4aMPlayStop(&gMPlay_SE1);
-    m4aMPlayStop(&gMPlay_SE2);
+    m4aMPlayStop(&gMPlayInfo_SE1);
+    m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
 }
