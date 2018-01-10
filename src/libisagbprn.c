@@ -8,8 +8,8 @@
 #define AGB_PRINT_PROTECT_ADDR 0x9FE2FFE
 #define WSCNT_DATA (WAITCNT_PHI_OUT_16MHZ | WAITCNT_WS0_S_2 | WAITCNT_WS0_N_4)
 
-// for auto no$gba support, the string "no$gba" should be at this address.
-// except it's not, blame Martin, hence I'm letting the user deal with this nonsense.
+// originally for auto no$gba support, the string "no$gba" should be at this address,
+// the user needs to read this string out as the memory viewer won't show it.
 #define NOCASHGBAIDADDR 0x4FFFA00
 #define NOCASHGBAPRINTADDR 0x4FFFA14
 
