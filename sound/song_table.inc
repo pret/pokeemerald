@@ -20,8 +20,8 @@ gSongTable:: @ 86B49F0
 	song se_nigeru, 1, 1            @ Flee from Wild Battle
 	song se_jido_doa, 1, 1          @ Pokémon Center Door
 	song se_naminori, 1, 1          @ Briney's Ship
-	song se_ban, 1, 1
-	song se_pin, 1, 1
+	song se_ban, 1, 1               @ Bang
+	song se_pin, 1, 1               @ Exclamation Bubble
 	song se_boo, 1, 1               @ Contest Jam
 	song se_bowa, 1, 1              @ Giving Poké Ball to Nurse, Poké Ball wiggle
 	song se_jyuni, 2, 2             @ Places in Contest Appearing
@@ -36,13 +36,13 @@ gSongTable:: @ 86B49F0
 	song se_exp, 1, 1               @ Exp. Bar
 	song se_jite_pyoko, 1, 1        @ Bunny Hop
 	song se_mu_pachi, 1, 1
-	song se_tk_kasya, 1, 1
+	song se_tk_kasya, 1, 1          @ Mossdeep Gym/Trick House Switch
 	song se_fu_zaku, 1, 1
 	song se_fu_zaku2, 1, 1
-	song se_fu_zuzuzu, 1, 1         @ Sootopolis Gym - Stairs Appear
-	song se_ru_gashin, 1, 1         @ Sootopolis Gym - Ice Breaking
-	song se_ru_gasyan, 1, 1         @ Sootopolis Gym - Walking on Ice
-	song se_ru_bari, 1, 1
+	song se_fu_zuzuzu, 1, 1         @ Lavaridge Gym Warp
+	song se_ru_gashin, 1, 1         @ Sootopolis Gym - Stairs Appear
+	song se_ru_gasyan, 1, 1         @ Sootopolis Gym - Ice Breaking
+	song se_ru_bari, 1, 1           @ Sootopolis Gym - Walking on Ice
 	song se_ru_hyuu, 1, 1           @ Falling Down
 	song se_ki_gasyan, 2, 2
 	song se_tk_warpin, 1, 1         @ Warp In
@@ -113,7 +113,7 @@ gSongTable:: @ 86B49F0
 	song se_pn_on, 1, 1             @ PokéNav On
 	song se_pn_off, 1, 1            @ PokéNav Off
 	song se_z_search, 1, 1          @ Pokédex Search
-	song se_tamago, 1, 1
+	song se_tamago, 1, 1            @ Egg hatch
 	song se_tb_start, 1, 1          @ Battle - Poké Ball Tray slide in
 	song se_tb_kon, 1, 1            @ Battle - Poké Ball Tray ball sound
 	song se_tb_kara, 2, 2           @ Battle - Poké Ball Tray slide out
@@ -264,13 +264,13 @@ gSongTable:: @ 86B49F0
 	song se_rg_deomov, 1, 1         @ Deoxys Moves
 	song se_rg_excellent, 1, 1
 	song se_rg_nawamiss, 1, 1
-	song se_toreeye, 1, 1
-	song se_toreoff, 1, 1
-	song se_hantei1, 1, 1
-	song se_hantei2, 1, 1
-	song se_curtain, 1, 1
-	song se_curtain1, 1, 1
-	song se_ussoki, 1, 1
+	song se_toreeye, 1, 1           @ Trainer's Eye Call
+	song se_toreoff, 1, 1           @ Trainer's Eye Hang Up
+	song se_hantei1, 1, 1           @ Battle Arena Time's Up 1
+	song se_hantei2, 1, 1           @ Battle Arena Time's Up 2
+	song se_curtain, 1, 1           @ Battle Pike Curtain Open
+	song se_curtain1, 1, 1          @ Battle Pike Curtain Close
+	song se_ussoki, 1, 1            @ Sudowoodo
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
