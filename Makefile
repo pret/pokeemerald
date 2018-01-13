@@ -43,8 +43,10 @@ SCANINC := tools/scaninc/scaninc
 PREPROC := tools/preproc/preproc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 
-# Clear the default suffixes.
+# Clear the default suffixes
 .SUFFIXES:
+# Delete files that weren't built properly
+.DELETE_ON_ERROR:
 
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
