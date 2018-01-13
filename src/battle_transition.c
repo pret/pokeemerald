@@ -41,6 +41,15 @@ struct TransitionData
     s16 data[11];
 };
 
+struct StructRectangularSpiral
+{
+    u8 field_0;
+    s16 field_2;
+    u8 field_4;
+    s16 field_6;
+    u8 field_8;
+};
+
 typedef bool8 (*TransitionStateFunc)(struct Task *task);
 typedef bool8 (*TransitionSpriteCallback)(struct Sprite *sprite);
 
@@ -81,9 +90,9 @@ void Phase2Task_Kyogre(u8 taskId);
 void Phase2Task_Groudon(u8 taskId);
 void Phase2Task_Rayquaza(u8 taskId);
 void Phase2Task_25(u8 taskId);
-void Phase2Task_26(u8 taskId);
-void Phase2Task_27(u8 taskId);
-void Phase2Task_28(u8 taskId);
+void Phase2Task_Blackhole1(u8 taskId);
+void Phase2Task_Blackhole2(u8 taskId);
+void Phase2Task_RectangularSpiral(u8 taskId);
 void Phase2Task_29(u8 taskId);
 void Phase2Task_30(u8 taskId);
 void Phase2Task_31(u8 taskId);
@@ -127,6 +136,9 @@ bool8 Phase2_WaitPaletteFade(struct Task *task);
 bool8 Phase2_Kyogre_Func3(struct Task *task);
 bool8 Phase2_Kyogre_Func4(struct Task *task);
 bool8 Phase2_Kyogre_Func5(struct Task *task);
+bool8 Phase2_Groudon_Func3(struct Task *task);
+bool8 Phase2_Groudon_Func4(struct Task *task);
+bool8 Phase2_Groudon_Func5(struct Task *task);
 bool8 Phase2_WeatherDuo_Func6(struct Task *task);
 bool8 Phase2_WeatherDuo_Func7(struct Task *task);
 bool8 Phase2_BigPokeball_Func1(struct Task *task);
@@ -166,6 +178,17 @@ bool8 Phase2_Shards_Func2(struct Task *task);
 bool8 Phase2_Shards_Func3(struct Task *task);
 bool8 Phase2_Shards_Func4(struct Task *task);
 bool8 Phase2_Shards_Func5(struct Task *task);
+bool8 Phase2_25_Func1(struct Task *task);
+bool8 Phase2_25_Func2(struct Task *task);
+bool8 Phase2_25_Func3(struct Task *task);
+bool8 Phase2_25_Func4(struct Task *task);
+bool8 Phase2_Blackhole_Func1(struct Task *task);
+bool8 Phase2_Blackhole1_Func2(struct Task *task);
+bool8 Phase2_Blackhole1_Func3(struct Task *task);
+bool8 Phase2_Blackhole2_Func2(struct Task *task);
+bool8 Phase2_RectangularSpiral_Func1(struct Task *task);
+bool8 Phase2_RectangularSpiral_Func2(struct Task *task);
+bool8 Phase2_RectangularSpiral_Func3(struct Task *task);
 bool8 Phase2_Mugshot_Func1(struct Task *task);
 bool8 Phase2_Mugshot_Func2(struct Task *task);
 bool8 Phase2_Mugshot_Func3(struct Task *task);
@@ -197,6 +220,7 @@ void sub_8148484(s16 spriteId, s16 value);
 void sub_814849C(s16 spriteId);
 s16 sub_81484B8(s16 spriteId);
 bool8 IsPhase1Done(void);
+bool16 sub_8149048(const s16 * const *arg0, struct StructRectangularSpiral *arg1);
 void sub_814713C(struct Sprite *sprite);
 void sub_8148380(struct Sprite *sprite);
 bool8 sub_81483A8(struct Sprite *sprite);
@@ -206,9 +230,10 @@ bool8 sub_814842C(struct Sprite *sprite);
 bool8 sub_8148458(struct Sprite *sprite);
 
 // iwram bss vars
-IWRAM_DATA u16 gUnknown_03001208;
+IWRAM_DATA static s16 sUnusedRectangularSpiralVar;
 IWRAM_DATA static u8 sTestingTransitionId;
 IWRAM_DATA static u8 sTestingTransitionState;
+IWRAM_DATA static struct StructRectangularSpiral sRectangularSpiralTransition[4];
 
 // ewram vars
 EWRAM_DATA struct TransitionData *sTransitionStructPtr = NULL;
@@ -288,9 +313,9 @@ const TaskFunc sPhase2_Tasks[B_TRANSITION_COUNT] =
     Phase2Task_Groudon,                     // 23
     Phase2Task_Rayquaza,                    // 24
     Phase2Task_25,                          // 25
-    Phase2Task_26,                          // 26
-    Phase2Task_27,                          // 27
-    Phase2Task_28,                          // 28
+    Phase2Task_Blackhole1,                  // 26
+    Phase2Task_Blackhole2,                  // 27
+    Phase2Task_RectangularSpiral,           // 28
     Phase2Task_29,                          // 29
     Phase2Task_30,                          // 30
     Phase2Task_31,                          // 31
@@ -500,6 +525,98 @@ const TransitionStateFunc sPhase2_Slice_Funcs[] =
     Phase2_Slice_Func1,
     Phase2_Slice_Func2,
     Phase2_Slice_Func3
+};
+
+const TransitionStateFunc sPhase2_25_Funcs[] =
+{
+    Phase2_25_Func1,
+    Phase2_25_Func2,
+    Phase2_25_Func3,
+    Phase2_25_Func4
+};
+
+const u8 gUnknown_085C8C64[] = {39, 119};
+const s16 gUnknown_085C8C66[] = {1, -1};
+
+const TransitionStateFunc sPhase2_Blackhole1_Funcs[] =
+{
+    Phase2_Blackhole_Func1,
+    Phase2_Blackhole1_Func2,
+    Phase2_Blackhole1_Func3
+};
+
+const TransitionStateFunc sPhase2_Blackhole2_Funcs[] =
+{
+    Phase2_Blackhole_Func1,
+    Phase2_Blackhole2_Func2
+};
+
+const s16 gUnknown_085C8C80[] = {-6, 4};
+
+const TransitionStateFunc sPhase2_RectangularSpiral_Funcs[] =
+{
+    Phase2_RectangularSpiral_Func1,
+    Phase2_RectangularSpiral_Func2,
+    Phase2_RectangularSpiral_Func3
+};
+
+const s16 gUnknown_085C8C90[] = {1, 27, 275, -1};
+const s16 gUnknown_085C8C98[] = {2, 486, -1};
+const s16 gUnknown_085C8C9E[] = {3, 262, -1};
+const s16 gUnknown_085C8CA4[] = {4, 507, -2};
+const s16 gUnknown_085C8CAA[] = {1, 213, -1};
+const s16 gUnknown_085C8CB0[] = {2, 548, -2};
+const s16 gUnknown_085C8CB6[] = {3, 196, -1};
+const s16 gUnknown_085C8CBC[] = {4, 573, 309, -1};
+const s16 gUnknown_085C8CC4[] = {1, 474, -1};
+const s16 gUnknown_085C8CCA[] = {2, 295, 32, -1};
+const s16 gUnknown_085C8CD2[] = {3, 58, -1};
+const s16 gUnknown_085C8CD8[] = {4, 455, -1};
+const s16 gUnknown_085C8CDE[] = {1, 540, -1};
+const s16 gUnknown_085C8CE4[] = {2, 229, -1};
+const s16 gUnknown_085C8CEA[] = {3, 244, 28, -1};
+const s16 gUnknown_085C8CF2[] = {4, 517, -1};
+
+const s16 *const gUnknown_085C8CF8[] =
+{
+	gUnknown_085C8C90,
+	gUnknown_085C8CA4,
+	gUnknown_085C8C98,
+	gUnknown_085C8C9E,
+	gUnknown_085C8CEA,
+	gUnknown_085C8CE4,
+	gUnknown_085C8CF2,
+	gUnknown_085C8CDE
+};
+
+const s16 *const gUnknown_085C8D18[] =
+{
+	gUnknown_085C8CBC,
+	gUnknown_085C8CB0,
+	gUnknown_085C8CB6,
+	gUnknown_085C8CAA,
+	gUnknown_085C8CCA,
+	gUnknown_085C8CD8,
+	gUnknown_085C8CC4,
+	gUnknown_085C8CD2
+};
+
+const s16 *const *const gUnknown_085C8D38[] =
+{
+	gUnknown_085C8CF8,
+	gUnknown_085C8D18
+};
+
+const TransitionStateFunc sPhase2_Groudon_Funcs[] =
+{
+    Phase2_WeatherTrio_Func1,
+    Phase2_WaitPaletteFade,
+    Phase2_Groudon_Func3,
+    Phase2_Groudon_Func4,
+    Phase2_Groudon_Func5,
+    Phase2_FramesCountdown,
+    Phase2_WeatherDuo_Func6,
+    Phase2_WeatherDuo_Func7
 };
 
 extern const u16 gFieldEffectObjectPalette10[];
@@ -722,7 +839,7 @@ bool8 Phase2_Swirl_Func1(struct Task *task)
 
 bool8 Phase2_Swirl_Func2(struct Task *task)
 {
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
     task->data[1] += 4;
     task->data[2] += 8;
 
@@ -780,7 +897,7 @@ bool8 Phase2_Shuffle_Func2(struct Task *task)
     u8 i;
     u16 r3, r4;
 
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
     r4 = task->data[1];
     r3 = task->data[2] >> 8;
     task->data[1] += 4224;
@@ -1084,7 +1201,7 @@ bool8 Phase2_WeatherDuo_Func7(struct Task *task)
 
 bool8 Phase2_BigPokeball_Func3(struct Task *task)
 {
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
     if (task->data[3] == 0 || --task->data[3] == 0)
     {
         task->data[2]++;
@@ -1104,7 +1221,7 @@ bool8 Phase2_BigPokeball_Func3(struct Task *task)
 
 bool8 Phase2_BigPokeball_Func4(struct Task *task)
 {
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
     if (task->data[3] == 0 || --task->data[3] == 0)
     {
         task->data[1]--;
@@ -1124,7 +1241,7 @@ bool8 Phase2_BigPokeball_Func4(struct Task *task)
 
 bool8 Phase2_BigPokeball_Func5(struct Task *task)
 {
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
     task->data[4] += 8;
     task->data[5] -= 256;
 
@@ -1165,7 +1282,7 @@ bool8 Phase2_WaitPaletteFade(struct Task *task)
 
 bool8 Phase2_BigPokeball_Func6(struct Task *task)
 {
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
     if (task->data[2] < 1024)
         task->data[2] += 128;
     if (task->data[1] != 0)
@@ -1359,7 +1476,7 @@ bool8 Phase2_Clockwise_BlackFade_Func1(struct Task *task)
 
 bool8 Phase2_Clockwise_BlackFade_Func2(struct Task *task)
 {
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     sub_814A1AC(sTransitionStructPtr->data, 120, 80, sTransitionStructPtr->data[4], -1, 1, 1);
     do
@@ -1383,7 +1500,7 @@ bool8 Phase2_Clockwise_BlackFade_Func3(struct Task *task)
     s16 r1, r3;
     vu8 var = 0;
 
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     sub_814A1AC(sTransitionStructPtr->data, 120, 80, 240, sTransitionStructPtr->data[5], 1, 1);
 
@@ -1418,7 +1535,7 @@ bool8 Phase2_Clockwise_BlackFade_Func3(struct Task *task)
 
 bool8 Phase2_Clockwise_BlackFade_Func4(struct Task *task)
 {
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     sub_814A1AC(sTransitionStructPtr->data, 120, 80, sTransitionStructPtr->data[4], 160, 1, 1);
     do
@@ -1442,7 +1559,7 @@ bool8 Phase2_Clockwise_BlackFade_Func5(struct Task *task)
     s16 r1, r2, var4;
     vu8 var = 0;
 
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     sub_814A1AC(sTransitionStructPtr->data, 120, 80, 0, sTransitionStructPtr->data[5], 1, 1);
 
@@ -1479,7 +1596,7 @@ bool8 Phase2_Clockwise_BlackFade_Func5(struct Task *task)
 
 bool8 Phase2_Clockwise_BlackFade_Func6(struct Task *task)
 {
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     sub_814A1AC(sTransitionStructPtr->data, 120, 80, sTransitionStructPtr->data[4], 0, 1, 1);
     do
@@ -1554,7 +1671,7 @@ bool8 Phase2_Ripple_Func2(struct Task *task)
     s16 r3;
     u16 r4, r8;
 
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     r3 = task->data[2] >> 8;
     r4 = task->data[1];
@@ -1633,7 +1750,7 @@ bool8 Phase2_Wave_Func2(struct Task *task)
     u16* toStore;
     bool8 nextFunc;
 
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
     toStore = gUnknown_02038C28[0];
     r5 = task->data[2];
     task->data[2] += 16;
@@ -1772,7 +1889,7 @@ bool8 Phase2_Mugshot_Func3(struct Task *task)
     s16 value;
     s32 mergedValue;
 
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     toStore = gUnknown_02038C28[0];
     r5 = task->data[1];
@@ -1818,7 +1935,7 @@ bool8 Phase2_Mugshot_Func4(struct Task *task)
     u8 i;
     u16* toStore;
 
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     for (i = 0, toStore = gUnknown_02038C28[0]; i < 160; i++, toStore++)
     {
@@ -1860,7 +1977,7 @@ bool8 Phase2_Mugshot_Func6(struct Task *task)
     sTransitionStructPtr->field_1A += 8;
     if (sub_81484B8(task->tPlayerSpriteId))
     {
-        sTransitionStructPtr->VBlank_DMA = 0;
+        sTransitionStructPtr->VBlank_DMA = FALSE;
         SetVBlankCallback(NULL);
         DmaStop(0);
         memset(gUnknown_02038C28[0], 0, 0x140);
@@ -1880,7 +1997,7 @@ bool8 Phase2_Mugshot_Func7(struct Task *task)
 {
     bool32 r6;
 
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
     r6 = TRUE;
     sTransitionStructPtr->field_18 -= 8;
     sTransitionStructPtr->field_1A += 8;
@@ -1919,7 +2036,7 @@ bool8 Phase2_Mugshot_Func7(struct Task *task)
 
 bool8 Phase2_Mugshot_Func8(struct Task *task)
 {
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
     BlendPalettes(-1, 0x10, 0x7FFF);
     sTransitionStructPtr->BLDCNT = 0xFF;
     task->data[3] = 0;
@@ -1930,7 +2047,7 @@ bool8 Phase2_Mugshot_Func8(struct Task *task)
 
 bool8 Phase2_Mugshot_Func9(struct Task *task)
 {
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     task->data[3]++;
     memset(gUnknown_02038C28[0], task->data[3], 0x140);
@@ -2104,7 +2221,7 @@ bool8 Phase2_Slice_Func1(struct Task *task)
     sTransitionStructPtr->WININ = 63;
     sTransitionStructPtr->WINOUT = 0;
     sTransitionStructPtr->WIN0V = 160;
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     for (i = 0; i < 160; i++)
     {
@@ -2126,7 +2243,7 @@ bool8 Phase2_Slice_Func2(struct Task *task)
 {
     u16 i;
 
-    sTransitionStructPtr->VBlank_DMA = 0;
+    sTransitionStructPtr->VBlank_DMA = FALSE;
 
     task->data[1] += (task->data[2] >> 8);
     if (task->data[1] > 0xF0)
@@ -2189,3 +2306,509 @@ void HBlankCB_Phase2_Slice(void)
         REG_BG3HOFS = var;
     }
 }
+
+void Phase2Task_25(u8 taskId)
+{
+    while (sPhase2_25_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 Phase2_25_Func1(struct Task *task)
+{
+    u16 i;
+
+    sub_8149F08();
+    dp12_8087EA4();
+
+    sTransitionStructPtr->WININ = 63;
+    sTransitionStructPtr->WINOUT = 0;
+    sTransitionStructPtr->WIN0V = 160;
+
+    for (i = 0; i < 0xA0; i++)
+    {
+        gUnknown_02038C28[1][i] = sTransitionStructPtr->field_14;
+        gUnknown_02038C28[1][0xA0 + i] = 0xF0;
+        gUnknown_02038C28[0][i] = sTransitionStructPtr->field_14;
+        gUnknown_02038C28[0][0xA0 + i] = 0xF0;
+        gUnknown_02038C28[0][0x140 + i] = 0;
+        gUnknown_02038C28[0][0x1E0 + i] = 0x100;
+        gUnknown_02038C28[0][0x280 + i] = 1;
+    }
+
+    task->data[4] = 0;
+    task->data[5] = 0;
+    task->data[6] = 7;
+
+    EnableInterrupts(INTR_FLAG_HBLANK);
+
+    SetVBlankCallback(VBlankCB_Phase2_Slice);
+    SetHBlankCallback(HBlankCB_Phase2_Slice);
+
+    task->tState++;
+    return TRUE;
+}
+
+bool8 Phase2_25_Func2(struct Task *task)
+{
+    u16 i, j, k;
+    u8 arr1[ARRAY_COUNT(gUnknown_085C8C64)];
+    s16 arr2[ARRAY_COUNT(gUnknown_085C8C66)];
+    u8 var;
+    u16 *ptr4, *ptr3, *ptr1, *ptr2;
+    s16 unkVar;
+
+    memcpy(arr1, gUnknown_085C8C64, sizeof(arr1));
+    memcpy(arr2, gUnknown_085C8C66, sizeof(arr2));
+
+    sTransitionStructPtr->VBlank_DMA = FALSE;
+    var = 0;
+
+    for (i = 0; i <= task->data[5]; i++)
+    {
+        for (j = 0; j < 2; j++)
+        {
+            for (k = 0; k < 2; k++)
+            {
+                unkVar = (arr1[j]) + (arr2[k] * -(i) * 2);
+                if (unkVar >= 0 && (unkVar != 79 || j != 1))
+                {
+                    ptr4 = &gUnknown_02038C28[0][unkVar + 320];
+                    ptr3 = &gUnknown_02038C28[0][unkVar + 480];
+                    ptr1 = &gUnknown_02038C28[0][unkVar + 640];
+                    if (*ptr4 > 0xEF)
+                    {
+                        *ptr4 = 0xF0;
+                        var++;
+                    }
+                    else
+                    {
+                        *ptr4 += (*ptr3 >> 8);
+                        if (*ptr1 <= 0x7F)
+                            *ptr1 *= 2;
+                        if (*ptr3 <= 0xFFF)
+                            *ptr3 += *ptr1;
+                    }
+                    ptr2 = &gUnknown_02038C28[0][unkVar];
+                    ptr3 = &gUnknown_02038C28[0][unkVar + 160];
+                    *ptr2 = sTransitionStructPtr->field_14 + *ptr4;
+                    *ptr3 = 0xF0 - *ptr4;
+
+                    if (i == 0)
+                        break;
+                }
+            }
+        }
+
+        for (j = 0; j < 2; j++)
+        {
+            for (k = 0; k < 2; k++)
+            {
+                unkVar = (arr1[j] + 1) + (arr2[k] * -(i) * 2);
+                if (unkVar <= 160 && (unkVar != 80 || j != 1))
+                {
+                    ptr4 = &gUnknown_02038C28[0][unkVar + 320];
+                    ptr3 = &gUnknown_02038C28[0][unkVar + 480];
+                    ptr1 = &gUnknown_02038C28[0][unkVar + 640];
+                    if (*ptr4 > 0xEF)
+                    {
+                        *ptr4 = 0xF0;
+                        var++;
+                    }
+                    else
+                    {
+                        *ptr4 += (*ptr3 >> 8);
+                        if (*ptr1 <= 0x7F)
+                            *ptr1 *= 2;
+                        if (*ptr3 <= 0xFFF)
+                            *ptr3 += *ptr1;
+                    }
+                    ptr2 = &gUnknown_02038C28[0][unkVar];
+                    ptr3 = &gUnknown_02038C28[0][unkVar + 160];
+                    *ptr2 = sTransitionStructPtr->field_14 - *ptr4;
+                    *ptr3 = (*ptr4 << 8) | (0xF1);
+
+                    if (i == 0)
+                        break;
+                }
+            }
+        }
+    }
+
+    if (--task->data[4] < 0)
+        task->data[4] = 0;
+    if (task->data[4] <= 0 && task->data[5] + 1 <= 20)
+        task->data[4] = task->data[6], task->data[5]++;
+    if (var > 0x9F)
+        task->tState++;
+
+    sTransitionStructPtr->VBlank_DMA++;
+    return FALSE;
+}
+
+bool8 Phase2_25_Func3(struct Task *task)
+{
+    u16 i;
+    bool32 done = TRUE;
+    u16 checkVar2 = 0xFF10;
+
+    for (i = 0; i < 0xA0; i++)
+    {
+        if (gUnknown_02038C28[1][i] != 0xF0 && gUnknown_02038C28[1][i] != checkVar2)
+            done = FALSE; // a break statement should be put here
+    }
+
+    if (done == TRUE)
+        task->tState++;
+
+    return FALSE;
+}
+
+bool8 Phase2_25_Func4(struct Task *task)
+{
+    DmaStop(0);
+    sub_8149F84();
+    DestroyTask(FindTaskIdByFunc(Phase2Task_25));
+    return FALSE;
+}
+
+void Phase2Task_Blackhole1(u8 taskId)
+{
+    while (sPhase2_Blackhole1_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+void Phase2Task_Blackhole2(u8 taskId)
+{
+    while (sPhase2_Blackhole2_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 Phase2_Blackhole_Func1(struct Task *task)
+{
+    s32 i;
+
+    sub_8149F08();
+    dp12_8087EA4();
+
+    sTransitionStructPtr->WININ = 0;
+    sTransitionStructPtr->WINOUT = 63;
+    sTransitionStructPtr->field_6 = 240;
+    sTransitionStructPtr->WIN0V = 160;
+
+    for (i = 0; i < 0xA0; i++)
+    {
+        gUnknown_02038C28[1][i] = 0;
+    }
+
+    SetVBlankCallback(VBlankCB1_Phase2_BigPokeball);
+
+    task->tState++;
+    task->data[1] = 1;
+    task->data[2] = 0x100;
+    task->data[7] = 0;
+
+    return FALSE;
+}
+
+bool8 Phase2_Blackhole1_Func3(struct Task *task)
+{
+    if (task->data[7] == 1)
+    {
+        DmaStop(0);
+        SetVBlankCallback(NULL);
+        DestroyTask(FindTaskIdByFunc(task->func));
+    }
+    else
+    {
+        sTransitionStructPtr->VBlank_DMA = FALSE;
+        if (task->data[2] < 0x400)
+            task->data[2] += 0x80;
+        if (task->data[1] < 0xA0)
+            task->data[1] += (task->data[2] >> 8);
+        if (task->data[1] > 0xA0)
+            task->data[1] = 0xA0;
+        sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->data[1]);
+        if (task->data[1] == 0xA0)
+        {
+            task->data[7] = 1;
+            sub_8149F84();
+        }
+        else
+        {
+            sTransitionStructPtr->VBlank_DMA++;
+        }
+    }
+
+    return FALSE;
+}
+
+bool8 Phase2_Blackhole1_Func2(struct Task *task)
+{
+    sTransitionStructPtr->VBlank_DMA = FALSE;
+    if (task->data[7] == 0)
+    {
+        task->data[7]++;
+        task->data[1] = 0x30;
+        task->data[6] = 0;
+    }
+    task->data[1] += gUnknown_085C8C80[task->data[6]];
+    task->data[6] = (task->data[6] + 1) % 2;
+    sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->data[1]);
+    if (task->data[1] < 9)
+    {
+        task->tState++;
+        task->data[7] = 0;
+    }
+
+    sTransitionStructPtr->VBlank_DMA++;
+    return FALSE;
+}
+
+bool8 Phase2_Blackhole2_Func2(struct Task *task)
+{
+    u16 index; // should be s16 I think
+    s16 amplitude;
+
+    sTransitionStructPtr->VBlank_DMA = FALSE;
+    if (task->data[7] == 0)
+    {
+        task->data[7]++;
+        task->data[5] = 2;
+        task->data[6] = 2;
+    }
+    if (task->data[1] > 0xA0)
+        task->data[1] = 0xA0;
+
+    sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->data[1]);
+    if (task->data[1] == 0xA0)
+    {
+        DmaStop(0);
+        sub_8149F84();
+        DestroyTask(FindTaskIdByFunc(task->func));
+    }
+
+    index = task->data[5];
+    if ((task->data[5] & 0xFF) <= 128)
+    {
+        amplitude = task->data[6];
+        task->data[5] += 8;
+    }
+    else
+    {
+        amplitude = task->data[6] - 1;
+        task->data[5] += 16;
+    }
+    task->data[1] += Sin(index & 0xFF, amplitude);
+
+    if (task->data[1] <= 0)
+        task->data[1] = 1;
+    if (task->data[5] > 0xFE)
+        task->data[5] >>= 8, task->data[6]++;
+
+    sTransitionStructPtr->VBlank_DMA++;
+    return FALSE;
+}
+
+void Phase2Task_RectangularSpiral(u8 taskId)
+{
+    while (sPhase2_RectangularSpiral_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 Phase2_RectangularSpiral_Func1(struct Task *task)
+{
+    u16 *dst1, *dst2;
+
+    sub_8149F58(&dst1, &dst2);
+    CpuCopy16(sShrinkingBoxTileset, dst2, 0x20);
+    CpuCopy16(sShrinkingBoxTileset + 0x70, dst2 + 0x20, 0x20);
+    CpuFill16(0xF000, dst1, 0x800);
+    LoadPalette(gFieldEffectObjectPalette10, 0xF0, 0x20);
+
+    task->data[3] = 1;
+    task->tState++;
+
+    sRectangularSpiralTransition[0].field_0 = 0;
+    sRectangularSpiralTransition[0].field_2 = -1;
+    sRectangularSpiralTransition[0].field_4 = 1;
+    sRectangularSpiralTransition[0].field_6 = 308;
+    sRectangularSpiralTransition[0].field_8 = 0;
+
+    sRectangularSpiralTransition[1].field_0 = 0;
+    sRectangularSpiralTransition[1].field_2 = -1;
+    sRectangularSpiralTransition[1].field_4 = 1;
+    sRectangularSpiralTransition[1].field_6 = 308;
+    sRectangularSpiralTransition[1].field_8 = 0;
+
+    sRectangularSpiralTransition[2].field_0 = 0;
+    sRectangularSpiralTransition[2].field_2 = -3;
+    sRectangularSpiralTransition[2].field_4 = 1;
+    sRectangularSpiralTransition[2].field_6 = 307;
+    sRectangularSpiralTransition[2].field_8 = 0;
+
+    sRectangularSpiralTransition[3].field_0 = 0;
+    sRectangularSpiralTransition[3].field_2 = -3;
+    sRectangularSpiralTransition[3].field_4 = 1;
+    sRectangularSpiralTransition[3].field_6 = 307;
+    sRectangularSpiralTransition[3].field_8 = 0;
+
+    return FALSE;
+}
+
+bool8 Phase2_RectangularSpiral_Func2(struct Task *task)
+{
+    u16 *dst1, *dst2;
+    u8 i;
+    u16 j;
+    bool32 done = TRUE;
+
+    sub_8149F58(&dst1, &dst2);
+
+    for (i = 0; i < 2; i++)
+    {
+        for (j = 0; j < ARRAY_COUNT(sRectangularSpiralTransition); j++)
+        {
+            s16 var = 0, var2 = 0;
+            s32 var3 = 0;
+
+            if (sub_8149048(gUnknown_085C8D38[j / 2], &sRectangularSpiralTransition[j]))
+            {
+                u32 one;
+                done = FALSE;
+                var = sRectangularSpiralTransition[j].field_2;
+                one = 1;
+                if ((j & 1) == one)
+                    var = 0x27D - var;
+
+                var2 = var % 32;
+                var3 = var / 32 * 32;
+
+                dst1[var3 + var2] = 0xF002;
+            }
+        }
+    }
+
+    if (done == TRUE)
+        task->tState++;
+    return FALSE;
+}
+
+bool8 Phase2_RectangularSpiral_Func3(struct Task *task)
+{
+    DmaStop(0);
+    sub_8149F84();
+    DestroyTask(FindTaskIdByFunc(task->func));
+    return FALSE;
+}
+
+bool16 sub_8149048(const s16 * const *arg0, struct StructRectangularSpiral *arg1)
+{
+    const s16 *array = arg0[arg1->field_0];
+    if (array[arg1->field_4] == -1)
+        return FALSE;
+
+    // ??
+    sUnusedRectangularSpiralVar = array[0];
+    sUnusedRectangularSpiralVar = array[1];
+    sUnusedRectangularSpiralVar = array[2];
+    sUnusedRectangularSpiralVar = array[3];
+
+    switch (array[0])
+    {
+    case 1:
+        arg1->field_2 += 0x1;
+        break;
+    case 2:
+        arg1->field_2 -= 0x1;
+        break;
+    case 3:
+        arg1->field_2 -= 0x20;
+        break;
+    case 4:
+        arg1->field_2 += 0x20;
+        break;
+    }
+
+    if (arg1->field_2 > 0x27F || array[arg1->field_4] == -1)
+        return FALSE;
+
+    if (arg1->field_8 == 0 && array[arg1->field_4] == -2)
+    {
+        arg1->field_8 = 1;
+        arg1->field_4 = 1;
+        arg1->field_2 = arg1->field_6;
+        arg1->field_0 = 4;
+    }
+
+    if (arg1->field_2 == array[arg1->field_4])
+    {
+        (arg1->field_0)++;
+        if (arg1->field_8 == 1)
+        {
+            if (arg1->field_0 > 7)
+            {
+                (arg1->field_4)++;
+                (arg1->field_0) = 4;
+            }
+        }
+        else
+        {
+            if (arg1->field_0 > 3)
+            {
+                (arg1->field_4)++;
+                (arg1->field_0) = 0;
+            }
+        }
+    }
+
+    return TRUE;
+}
+
+void Phase2Task_Groudon(u8 taskId)
+{
+    while (sPhase2_Groudon_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 Phase2_Groudon_Func3(struct Task *task)
+{
+    u16 *dst1, *dst2;
+
+    sub_8149F58(&dst1, &dst2);
+    CpuFill16(0, dst1, 0x800);
+    LZ77UnCompVram(gUnknown_085BE51C, dst2);
+    LZ77UnCompVram(gUnknown_085BEA88, dst1);
+
+    task->tState++;
+    task->data[1] = 0;
+    return FALSE;
+}
+
+bool8 Phase2_Groudon_Func4(struct Task *task)
+{
+    if (task->data[1] % 3 == 0)
+    {
+        u16 var = (task->data[1] % 30) / 3;
+        LoadPalette(gUnknown_085BF0A0 + (var * 16), 0xF0, 0x20);
+    }
+    if (++task->data[1] > 58)
+    {
+        task->tState++;
+        task->data[1] = 0;
+    }
+
+    return FALSE;
+}
+
+bool8 Phase2_Groudon_Func5(struct Task *task)
+{
+    if (task->data[1] % 5 == 0)
+    {
+        s16 var = task->data[1] / 5;
+        LoadPalette(gUnknown_085BF2A0 + (var * 16), 0xF0, 0x20);
+    }
+    if (++task->data[1] > 68)
+    {
+        task->tState++;
+        task->data[1] = 0;
+        task->tFrames = 30;
+    }
+
+    return FALSE;
+}
+

@@ -74,11 +74,6 @@ gUnknown_03001204: @ 3001204
 	.space 0x4
 
 	.include "src/battle_transition.o"
-	
-	.align 4
-
-gUnknown_03001210: @ 3001210
-	.space 0x30
 
 gUnknown_03001240: @ 3001240
 	.space 0x30

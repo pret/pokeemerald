@@ -4,129 +4,6 @@
 
 	.section .rodata
 
-
-	.align 2
-gUnknown_085C8C54:: @ 85C8C54
-	.4byte sub_8148798
-	.4byte sub_8148864
-	.4byte sub_8148AD4
-	.4byte sub_8148B14
-
-	.align 1
-gUnknown_085C8C64:: @ 85C8C64
-	.2byte 0x7727
-
-	.align 1
-gUnknown_085C8C66:: @ 85C8C66
-	.2byte 0x0001, 0xffff, 0x0000
-
-	.align 2
-gUnknown_085C8C6C:: @ 85C8C6C
-	.4byte sub_8148BC4
-	.4byte sub_8148CE8
-	.4byte sub_8148C28
-
-	.align 2
-gUnknown_085C8C78:: @ 85C8C78
-	.4byte sub_8148BC4
-	.4byte sub_8148D6C
-
-	.align 1
-gUnknown_085C8C80:: @ 85C8C80
-	.2byte 0xfffa, 0x0004
-
-	.align 2
-gUnknown_085C8C84:: @ 85C8C84
-	.4byte sub_8148E8C
-	.4byte sub_8148F4C
-	.4byte sub_8149008
-
-gUnknown_085C8C90:: @ 85C8C90
-	.2byte 0x0001, 0x001b, 0x0113, 0xffff
-
-gUnknown_085C8C98:: @ 85C8C98
-	.2byte 0x0002, 0x01e6, 0xffff
-
-gUnknown_085C8C9E:: @ 85C8C9E
-	.2byte 0x0003, 0x0106, 0xffff
-
-gUnknown_085C8CA4:: @ 85C8CA4
-	.2byte 0x0004, 0x01fb, 0xfffe
-
-gUnknown_085C8CAA:: @ 85C8CAA
-	.2byte 0x0001, 0x00d5, 0xffff
-
-gUnknown_085C8CB0:: @ 85C8CB0
-	.2byte 0x0002, 0x0224, 0xfffe
-
-gUnknown_085C8CB6:: @ 85C8CB6
-	.2byte 0x0003, 0x00c4, 0xffff
-
-gUnknown_085C8CBC:: @ 85C8CBC
-	.2byte 0x0004, 0x023d, 0x0135, 0xffff
-
-gUnknown_085C8CC4:: @ 85C8CC4
-	.2byte 0x0001, 0x01da, 0xffff
-
-gUnknown_085C8CCA:: @ 85C8CCA
-	.2byte 0x0002, 0x0127, 0x0020, 0xffff
-
-gUnknown_085C8CD2:: @ 85C8CD2
-	.2byte 0x0003, 0x003a, 0xffff
-
-gUnknown_085C8CD8:: @ 85C8CD8
-	.2byte 0x0004, 0x01c7, 0xffff
-
-gUnknown_085C8CDE:: @ 85C8CDE
-	.2byte 0x0001, 0x021c, 0xffff
-
-gUnknown_085C8CE4:: @ 85C8CE4
-	.2byte 0x0002, 0x00e5, 0xffff
-
-gUnknown_085C8CEA:: @ 85C8CEA
-	.2byte 0x0003, 0x00f4, 0x001c, 0xffff
-
-gUnknown_085C8CF2:: @ 85C8CF2
-	.2byte 0x0004, 0x0205, 0xffff
-
-	.align 2
-gUnknown_085C8CF8:: @ 85C8CF8
-	.4byte gUnknown_085C8C90
-	.4byte gUnknown_085C8CA4
-	.4byte gUnknown_085C8C98
-	.4byte gUnknown_085C8C9E
-	.4byte gUnknown_085C8CEA
-	.4byte gUnknown_085C8CE4
-	.4byte gUnknown_085C8CF2
-	.4byte gUnknown_085C8CDE
-
-	.align 2
-gUnknown_085C8D18:: @ 85C8D18
-	.4byte gUnknown_085C8CBC
-	.4byte gUnknown_085C8CB0
-	.4byte gUnknown_085C8CB6
-	.4byte gUnknown_085C8CAA
-	.4byte gUnknown_085C8CCA
-	.4byte gUnknown_085C8CD8
-	.4byte gUnknown_085C8CC4
-	.4byte gUnknown_085C8CD2
-
-	.align 2
-gUnknown_085C8D38:: @ 85C8D38
-	.4byte gUnknown_085C8CF8
-	.4byte gUnknown_085C8D18
-
-	.align 2
-sPhase2_Groudon_Funcs:: @ 85C8D40
-	.4byte Phase2_WeatherTrio_Func1
-	.4byte Phase2_WaitPaletteFade
-	.4byte sub_8149178
-	.4byte sub_81491C8
-	.4byte sub_8149224
-	.4byte Phase2_FramesCountdown
-	.4byte Phase2_WeatherDuo_Func6
-	.4byte Phase2_WeatherDuo_Func7
-
 	.align 2
 sPhase2_Rayquaza_Funcs:: @ 85C8D60
 	.4byte Phase2_WeatherTrio_Func1
@@ -138,8 +15,8 @@ sPhase2_Rayquaza_Funcs:: @ 85C8D60
 	.4byte sub_8149410
 	.4byte sub_814943C
 	.4byte sub_814946C
-	.4byte sub_8148CE8
-	.4byte sub_8148C28
+	.4byte Phase2_Blackhole1_Func2
+	.4byte Phase2_Blackhole1_Func3
 
 	.align 2
 gUnknown_085C8D8C:: @ 85C8D8C

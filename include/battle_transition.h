@@ -17,7 +17,7 @@ enum // TRANSITION_MUGSHOT
     MUGSHOTS_COUNT
 };
 
-// credits for the names go to Dyskinesia and Tetrable
+// credits for the names go to Dyskinesia, Tetrable and Farore
 // names are naturally subject to change
 
 #define B_TRANSITION_BLUR                   0
@@ -47,9 +47,9 @@ enum // TRANSITION_MUGSHOT
 #define B_TRANSITION_GROUDON                23
 #define B_TRANSITION_RAYQUAZA               24
 #define B_TRANSITION_25                     25
-#define B_TRANSITION_26                     26
-#define B_TRANSITION_27                     27
-#define B_TRANSITION_28                     28
+#define B_TRANSITION_BLACKHOLE1             26
+#define B_TRANSITION_BLACKHOLE2             27
+#define B_TRANSITION_RECTANGULAR_SPIRAL     28
 #define B_TRANSITION_29                     29
 #define B_TRANSITION_30                     30
 #define B_TRANSITION_31                     31
