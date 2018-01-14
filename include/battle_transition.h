@@ -6,6 +6,7 @@ void sub_8149DFC(u8 a1);
 void BattleTransition_StartOnField(u8 transitionID);
 void BattleTransition_Start(u8 transitionID);
 bool8 IsBattleTransitionDone(void);
+void Phase1_Task_RunFuncs(u8 taskId);
 
 enum // TRANSITION_MUGSHOT
 {
@@ -46,7 +47,7 @@ enum // TRANSITION_MUGSHOT
 #define B_TRANSITION_KYOGRE                 22
 #define B_TRANSITION_GROUDON                23
 #define B_TRANSITION_RAYQUAZA               24
-#define B_TRANSITION_25                     25
+#define B_TRANSITION_SHRED_SPLIT            25
 #define B_TRANSITION_BLACKHOLE1             26
 #define B_TRANSITION_BLACKHOLE2             27
 #define B_TRANSITION_RECTANGULAR_SPIRAL     28

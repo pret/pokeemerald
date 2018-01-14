@@ -7,6 +7,7 @@
 #include "palette.h"
 #include "trig.h"
 #include "field_effect.h"
+#include "field_camera.h"
 #include "random.h"
 #include "sprite.h"
 #include "sound.h"
@@ -56,6 +57,8 @@ typedef bool8 (*TransitionSpriteCallback)(struct Sprite *sprite);
 extern u16 gUnknown_020393A8[];
 extern u16 gUnknown_02038C28[][0x3C0];
 
+extern const struct OamData gFieldObjectBaseOam_32x32;
+
 extern void c2_exit_to_overworld_2_switch(void);
 extern void sub_80AC3D0(void);
 extern void dp12_8087EA4(void);
@@ -89,7 +92,7 @@ void Phase2Task_Regirock(u8 taskId);
 void Phase2Task_Kyogre(u8 taskId);
 void Phase2Task_Groudon(u8 taskId);
 void Phase2Task_Rayquaza(u8 taskId);
-void Phase2Task_25(u8 taskId);
+void Phase2Task_ShredSplit(u8 taskId);
 void Phase2Task_Blackhole1(u8 taskId);
 void Phase2Task_Blackhole2(u8 taskId);
 void Phase2Task_RectangularSpiral(u8 taskId);
@@ -108,6 +111,8 @@ void VBlankCB1_Phase2_BigPokeball(void);
 void VBlankCB_Phase2_Clockwise_BlackFade(void);
 void VBlankCB_Phase2_Ripple(void);
 void HBlankCB_Phase2_Ripple(void);
+void VBlankCB_Phase2_30(void);
+void HBlankCB_Phase2_30(void);
 void VBlankCB_Phase2_Wave(void);
 void VBlankCB_Phase2_Slice(void);
 void HBlankCB_Phase2_Slice(void);
@@ -115,6 +120,7 @@ void VBlankCB0_Phase2_WhiteFade(void);
 void VBlankCB1_Phase2_WhiteFade(void);
 void HBlankCB_Phase2_WhiteFade(void);
 void VBlankCB_Phase2_Shards(void);
+void VBlankCB_Phase2_Rayquaza(void);
 bool8 Phase2_Blur_Func1(struct Task *task);
 bool8 Phase2_Blur_Func2(struct Task *task);
 bool8 Phase2_Blur_Func3(struct Task *task);
@@ -178,10 +184,10 @@ bool8 Phase2_Shards_Func2(struct Task *task);
 bool8 Phase2_Shards_Func3(struct Task *task);
 bool8 Phase2_Shards_Func4(struct Task *task);
 bool8 Phase2_Shards_Func5(struct Task *task);
-bool8 Phase2_25_Func1(struct Task *task);
-bool8 Phase2_25_Func2(struct Task *task);
-bool8 Phase2_25_Func3(struct Task *task);
-bool8 Phase2_25_Func4(struct Task *task);
+bool8 Phase2_ShredSplit_Func1(struct Task *task);
+bool8 Phase2_ShredSplit_Func2(struct Task *task);
+bool8 Phase2_ShredSplit_Func3(struct Task *task);
+bool8 Phase2_ShredSplit_Func4(struct Task *task);
 bool8 Phase2_Blackhole_Func1(struct Task *task);
 bool8 Phase2_Blackhole1_Func2(struct Task *task);
 bool8 Phase2_Blackhole1_Func3(struct Task *task);
@@ -189,6 +195,32 @@ bool8 Phase2_Blackhole2_Func2(struct Task *task);
 bool8 Phase2_RectangularSpiral_Func1(struct Task *task);
 bool8 Phase2_RectangularSpiral_Func2(struct Task *task);
 bool8 Phase2_RectangularSpiral_Func3(struct Task *task);
+bool8 Phase2_29_Func1(struct Task *task);
+bool8 Phase2_29_Func2(struct Task *task);
+bool8 Phase2_30_Func1(struct Task *task);
+bool8 Phase2_30_Func2(struct Task *task);
+bool8 Phase2_30_Func3(struct Task *task);
+bool8 Phase2_30_Func4(struct Task *task);
+bool8 Phase2_Rayquaza_Func3(struct Task *task);
+bool8 Phase2_Rayquaza_Func4(struct Task *task);
+bool8 Phase2_Rayquaza_Func5(struct Task *task);
+bool8 Phase2_Rayquaza_Func6(struct Task *task);
+bool8 Phase2_Rayquaza_Func7(struct Task *task);
+bool8 Phase2_Rayquaza_Func8(struct Task *task);
+bool8 Phase2_Rayquaza_Func9(struct Task *task);
+bool8 Phase2_31_Func1(struct Task *task);
+bool8 Phase2_31_Func2(struct Task *task);
+bool8 Phase2_31_Func3(struct Task *task);
+bool8 Phase2_31_33_Func5(struct Task *task);
+bool8 Phase2_33_Func1(struct Task *task);
+bool8 Phase2_33_Func2(struct Task *task);
+bool8 Phase2_33_Func3(struct Task *task);
+bool8 Phase2_33_Func4(struct Task *task);
+bool8 Phase2_32_Func1(struct Task *task);
+bool8 Phase2_32_Func2(struct Task *task);
+bool8 Phase2_32_Func3(struct Task *task);
+bool8 Phase2_32_Func4(struct Task *task);
+bool8 Phase2_32_Func5(struct Task *task);
 bool8 Phase2_Mugshot_Func1(struct Task *task);
 bool8 Phase2_Mugshot_Func2(struct Task *task);
 bool8 Phase2_Mugshot_Func3(struct Task *task);
@@ -214,15 +246,19 @@ void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4);
 void sub_814A014(u16 *a0, s16 a1, s16 a2, s16 a3);
 void sub_8149F98(s16 *array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 amplitude, s16 arrSize);
 void sub_8149F58(u16 **a0, u16 **a1);
+void sub_8149F40(u16 **a0);
 void sub_814A1AC(s16 *a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6);
 bool8 sub_814A228(s16 *a0, bool8 a1, bool8 a2);
 void sub_8148484(s16 spriteId, s16 value);
 void sub_814849C(s16 spriteId);
 s16 sub_81484B8(s16 spriteId);
+bool8 Phase1_TransitionAll_Func1(struct Task *task);
+bool8 Phase1_TransitionAll_Func2(struct Task *task);
 bool8 IsPhase1Done(void);
 bool16 sub_8149048(const s16 * const *arg0, struct StructRectangularSpiral *arg1);
 void sub_814713C(struct Sprite *sprite);
 void sub_8148380(struct Sprite *sprite);
+void sub_8149864(struct Sprite *sprite);
 bool8 sub_81483A8(struct Sprite *sprite);
 bool8 sub_81483AC(struct Sprite *sprite);
 bool8 sub_81483F8(struct Sprite *sprite);
@@ -236,15 +272,15 @@ IWRAM_DATA static u8 sTestingTransitionState;
 IWRAM_DATA static struct StructRectangularSpiral sRectangularSpiralTransition[4];
 
 // ewram vars
-EWRAM_DATA struct TransitionData *sTransitionStructPtr = NULL;
+EWRAM_DATA static struct TransitionData *sTransitionStructPtr = NULL;
 
 // const rom data
 const u32 sBigPokeball_Tileset[] = INCBIN_U32("graphics/battle_transitions/big_pokeball.4bpp");
 const u32 sPokeballTrail_Tileset[] = INCBIN_U32("graphics/battle_transitions/pokeball_trail.4bpp");
-const u32 sSpriteImage_85B98F0[] = INCBIN_U32("graphics/battle_transitions/pokeball.4bpp");
+const u8 sSpriteImage_85B98F0[] = INCBIN_U8("graphics/battle_transitions/pokeball.4bpp");
 const u32 sUnknown_085B9AF0[] = INCBIN_U32("graphics/battle_transitions/elite_four_bg.4bpp");
-const u32 sSpriteImage_85B9CD0[] = INCBIN_U32("graphics/battle_transitions/unused_brendan.4bpp");
-const u32 sSpriteImage_85BA4D0[] = INCBIN_U32("graphics/battle_transitions/unused_lass.4bpp");
+const u8 sSpriteImage_85B9CD0[] = INCBIN_U8("graphics/battle_transitions/unused_brendan.4bpp");
+const u8 sSpriteImage_85BA4D0[] = INCBIN_U8("graphics/battle_transitions/unused_lass.4bpp");
 const u32 sShrinkingBoxTileset[] = INCBIN_U32("graphics/battle_transitions/shrinking_box.4bpp");
 const u32 sEvilTeam_Palette[] = INCBIN_U32("graphics/battle_transitions/evil_team.gbapal");
 const u32 sTeamAqua_Tileset[] = INCBIN_U32("graphics/battle_transitions/team_aqua.4bpp.lz");
@@ -312,7 +348,7 @@ const TaskFunc sPhase2_Tasks[B_TRANSITION_COUNT] =
     Phase2Task_Kyogre,                      // 22
     Phase2Task_Groudon,                     // 23
     Phase2Task_Rayquaza,                    // 24
-    Phase2Task_25,                          // 25
+    Phase2Task_ShredSplit,                  // 25
     Phase2Task_Blackhole1,                  // 26
     Phase2Task_Blackhole2,                  // 27
     Phase2Task_RectangularSpiral,           // 28
@@ -527,12 +563,12 @@ const TransitionStateFunc sPhase2_Slice_Funcs[] =
     Phase2_Slice_Func3
 };
 
-const TransitionStateFunc sPhase2_25_Funcs[] =
+const TransitionStateFunc sPhase2_ShredSplit_Funcs[] =
 {
-    Phase2_25_Func1,
-    Phase2_25_Func2,
-    Phase2_25_Func3,
-    Phase2_25_Func4
+    Phase2_ShredSplit_Func1,
+    Phase2_ShredSplit_Func2,
+    Phase2_ShredSplit_Func3,
+    Phase2_ShredSplit_Func4
 };
 
 const u8 gUnknown_085C8C64[] = {39, 119};
@@ -619,12 +655,257 @@ const TransitionStateFunc sPhase2_Groudon_Funcs[] =
     Phase2_WeatherDuo_Func7
 };
 
-extern const u16 gFieldEffectObjectPalette10[];
-extern const u16 sBigPokeball_Tilemap[];
-extern const u16 sMugshotsTilemap[];
-extern const struct SpriteTemplate gUnknown_085C8E68;
-extern const u16 *const sOpponentMugshotsPals[MUGSHOTS_COUNT];
-extern const u16 *const sPlayerMugshotsPals[2];
+const TransitionStateFunc sPhase2_Rayquaza_Funcs[] =
+{
+    Phase2_WeatherTrio_Func1,
+    Phase2_WaitPaletteFade,
+    Phase2_Rayquaza_Func3,
+    Phase2_Rayquaza_Func4,
+    Phase2_Rayquaza_Func5,
+    Phase2_Rayquaza_Func6,
+    Phase2_Rayquaza_Func7,
+    Phase2_Rayquaza_Func8,
+    Phase2_Rayquaza_Func9,
+    Phase2_Blackhole1_Func2,
+    Phase2_Blackhole1_Func3
+};
+
+const TransitionStateFunc sPhase2_WhiteFade_Funcs[] =
+{
+    Phase2_WhiteFade_Func1,
+    Phase2_WhiteFade_Func2,
+    Phase2_WhiteFade_Func3,
+    Phase2_WhiteFade_Func4,
+    Phase2_WhiteFade_Func5
+};
+
+const s16 sUnknown_085C8DA0[] = {0, 20, 15, 40, 10, 25, 35, 5};
+
+const TransitionStateFunc sPhase2_GridSquares_Funcs[] =
+{
+    Phase2_GridSquares_Func1,
+    Phase2_GridSquares_Func2,
+    Phase2_GridSquares_Func3
+};
+
+const TransitionStateFunc sPhase2_Shards_Funcs[] =
+{
+    Phase2_Shards_Func1,
+    Phase2_Shards_Func2,
+    Phase2_Shards_Func3,
+    Phase2_Shards_Func4,
+    Phase2_Shards_Func5
+};
+
+const s16 sUnknown_085C8DD0[][5] =
+{
+    {56,    0,      0,      160,    0},
+    {104,   160,    240,    88,     1},
+    {240,   72,     56,     0,      1},
+    {0,     32,     144,    160,    0},
+    {144,   160,    184,    0,      1},
+    {56,    0,      168,    160,    0},
+    {168,   160,    48,     0,      1},
+};
+
+const s16 sUnknown_085C8E16[] = {8, 4, 2, 1, 1, 1, 0};
+
+const TransitionStateFunc sPhase1_TransitionAll_Funcs[] =
+{
+    Phase1_TransitionAll_Func1,
+    Phase1_TransitionAll_Func2
+};
+
+const struct SpriteFrameImage sSpriteImageTable_85C8E2C[] =
+{
+    sSpriteImage_85B98F0, 0x200
+};
+
+const union AnimCmd sSpriteAnim_85C8E34[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const sSpriteAnimTable_85C8E3C[] =
+{
+    sSpriteAnim_85C8E34
+};
+
+const union AffineAnimCmd sSpriteAffineAnim_85C8E40[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, -4, 1),
+    AFFINEANIMCMD_JUMP(0)
+};
+
+const union AffineAnimCmd sSpriteAffineAnim_85C8E50[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 4, 1),
+    AFFINEANIMCMD_JUMP(0)
+};
+
+const union AffineAnimCmd *const sSpriteAffineAnimTable_85C8E60[] =
+{
+    sSpriteAffineAnim_85C8E40,
+    sSpriteAffineAnim_85C8E50
+};
+
+const struct SpriteTemplate gUnknown_085C8E68 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 4105,
+    .oam = &gFieldObjectBaseOam_32x32,
+    .anims = sSpriteAnimTable_85C8E3C,
+    .images = sSpriteImageTable_85C8E2C,
+    .affineAnims = sSpriteAffineAnimTable_85C8E60,
+    .callback = sub_814713C
+};
+
+const struct OamData gOamData_85C8E80 =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 0,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const struct SpriteFrameImage sSpriteImageTable_85C8E88[] =
+{
+    sSpriteImage_85B9CD0, 0x800
+};
+
+const struct SpriteFrameImage sSpriteImageTable_85C8E90[] =
+{
+    sSpriteImage_85BA4D0, 0x800
+};
+
+const union AnimCmd sSpriteAnim_85C8E98[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const sSpriteAnimTable_85C8EA0[] =
+{
+    sSpriteAnim_85C8E98
+};
+
+const struct SpriteTemplate sSpriteTemplate_85C8EA4 =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 4106,
+    .oam = &gOamData_85C8E80,
+    .anims = sSpriteAnimTable_85C8EA0,
+    .images = sSpriteImageTable_85C8E88,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8148380
+};
+
+const struct SpriteTemplate sSpriteTemplate_85C8EBC =
+{
+    .tileTag = 0xFFFF,
+    .paletteTag = 4106,
+    .oam = &gOamData_85C8E80,
+    .anims = sSpriteAnimTable_85C8EA0,
+    .images = sSpriteImageTable_85C8E90,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8148380
+};
+
+const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/map_objects/palettes/field_effect_object_palette_10.gbapal");
+
+const struct SpritePalette gFieldEffectObjectPaletteInfo10 =
+{
+    gFieldEffectObjectPalette10, 0x1009
+};
+
+const u16 sMugshotPal_Sydney[] = INCBIN_U16("graphics/battle_transitions/sidney_bg.gbapal");
+const u16 sMugshotPal_Phoebe[] = INCBIN_U16("graphics/battle_transitions/phoebe_bg.gbapal");
+const u16 sMugshotPal_Glacia[] = INCBIN_U16("graphics/battle_transitions/glacia_bg.gbapal");
+const u16 sMugshotPal_Drake[] = INCBIN_U16("graphics/battle_transitions/drake_bg.gbapal");
+const u16 sMugshotPal_Champion[] = INCBIN_U16("graphics/battle_transitions/wallace_bg.gbapal");
+const u16 sMugshotPal_Brendan[] = INCBIN_U16("graphics/battle_transitions/brendan_bg.gbapal");
+const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may_bg.gbapal");
+
+const u16 *const sOpponentMugshotsPals[MUGSHOTS_COUNT] =
+{
+    sMugshotPal_Sydney,
+    sMugshotPal_Phoebe,
+    sMugshotPal_Glacia,
+    sMugshotPal_Drake,
+    sMugshotPal_Champion
+};
+
+const u16 *const sPlayerMugshotsPals[2] =
+{
+    sMugshotPal_Brendan,
+    sMugshotPal_May
+};
+
+const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
+const struct SpritePalette sSpritePalette_UnusedTrainer =
+{
+    sUnusedTrainerPalette, 0x100A
+};
+
+const u16 sBigPokeball_Tilemap[] = INCBIN_U16("graphics/battle_transitions/big_pokeball_map.bin");
+const u16 sMugshotsTilemap[] = INCBIN_U16("graphics/battle_transitions/elite_four_bg_map.bin");
+
+const TransitionStateFunc sPhase2_29_Funcs[] =
+{
+    Phase2_29_Func1,
+    Phase2_29_Func2,
+    Phase2_BigPokeball_Func3,
+    Phase2_BigPokeball_Func4,
+    Phase2_BigPokeball_Func5,
+    Phase2_BigPokeball_Func6
+};
+
+const TransitionStateFunc sPhase2_30_Funcs[] =
+{
+    Phase2_30_Func1,
+    Phase2_30_Func2,
+    Phase2_30_Func3,
+    Phase2_30_Func4
+};
+
+const TransitionStateFunc sPhase2_31_Funcs[] =
+{
+    Phase2_31_Func1,
+    Phase2_31_Func2,
+    Phase2_31_Func3,
+    Phase2_31_33_Func5
+};
+
+const TransitionStateFunc sPhase2_33_Funcs[] =
+{
+    Phase2_33_Func1,
+    Phase2_33_Func2,
+    Phase2_33_Func3,
+    Phase2_33_Func4,
+    Phase2_31_33_Func5
+};
+
+const TransitionStateFunc sPhase2_32_Funcs[] =
+{
+    Phase2_32_Func1,
+    Phase2_32_Func2,
+    Phase2_32_Func3,
+    Phase2_32_Func4,
+    Phase2_32_Func5
+};
+
+const u8 gUnknown_085C9A30[] = {0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x1b, 0x14, 0x0d, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00, 0x07, 0x0e, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x13, 0x0c, 0x0b, 0x0a, 0x09, 0x08, 0x0f, 0x10, 0x11, 0x12};
+const u8 gUnknown_085C9A53[] = {0x00, 0x10, 0x29, 0x16, 0x2c, 0x02, 0x2b, 0x15, 0x2e, 0x1b, 0x09, 0x30, 0x26, 0x05, 0x39, 0x3b, 0x0c, 0x3f, 0x23, 0x1c, 0x0a, 0x35, 0x07, 0x31, 0x27, 0x17, 0x37, 0x01, 0x3e, 0x11, 0x3d, 0x1e, 0x06, 0x22, 0x0f, 0x33, 0x20, 0x3a, 0x0d, 0x2d, 0x25, 0x34, 0x0b, 0x18, 0x3c, 0x13, 0x38, 0x21, 0x1d, 0x32, 0x28, 0x36, 0x0e, 0x03, 0x2f, 0x14, 0x12, 0x19, 0x04, 0x24, 0x1a, 0x2a, 0x1f, 0x08, 0x00};
 
 // code
 static void CB2_TestBattleTransition(void)
@@ -667,9 +948,11 @@ void BattleTransition_Start(u8 transitionId)
     LaunchBattleTransitionTask(transitionId);
 }
 
-// main task that launches sub-tasks for phase1 and phase2
+// in all tasks data[0] is reserved for the state
 #define tState          data[0]
-#define tTransitionID   data[1]
+
+// main task that launches sub-tasks for phase1 and phase2
+#define tTransitionId   data[1]
 #define tTransitionDone data[15]
 
 bool8 IsBattleTransitionDone(void)
@@ -690,7 +973,7 @@ bool8 IsBattleTransitionDone(void)
 void LaunchBattleTransitionTask(u8 transitionId)
 {
     u8 taskId = CreateTask(Task_BattleTransitionMain, 2);
-    gTasks[taskId].tTransitionID = transitionId;
+    gTasks[taskId].tTransitionId = transitionId;
     sTransitionStructPtr = AllocZeroed(sizeof(*sTransitionStructPtr));
 }
 
@@ -703,9 +986,9 @@ bool8 Transition_Phase1(struct Task *task)
 {
     sub_80AC3D0();
     CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
-    if (sPhase1_Tasks[task->tTransitionID] != NULL)
+    if (sPhase1_Tasks[task->tTransitionId] != NULL)
     {
-        CreateTask(sPhase1_Tasks[task->tTransitionID], 4);
+        CreateTask(sPhase1_Tasks[task->tTransitionId], 4);
         task->tState++;
         return FALSE;
     }
@@ -718,7 +1001,7 @@ bool8 Transition_Phase1(struct Task *task)
 
 bool8 Transition_WaitForPhase1(struct Task *task)
 {
-    if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionID]) == 0xFF)
+    if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionId]) == 0xFF)
     {
         task->tState++;
         return TRUE;
@@ -731,7 +1014,7 @@ bool8 Transition_WaitForPhase1(struct Task *task)
 
 bool8 Transition_Phase2(struct Task *task)
 {
-    CreateTask(sPhase2_Tasks[task->tTransitionID], 0);
+    CreateTask(sPhase2_Tasks[task->tTransitionId], 0);
     task->tState++;
     return FALSE;
 }
@@ -739,17 +1022,13 @@ bool8 Transition_Phase2(struct Task *task)
 bool8 Transition_WaitForPhase2(struct Task *task)
 {
     task->tTransitionDone = FALSE;
-    if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionID]) == 0xFF)
+    if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionId]) == 0xFF)
         task->tTransitionDone = TRUE;
     return FALSE;
 }
 
-#undef tState
-#undef tTransitionID
+#undef tTransitionId
 #undef tTransitionDone
-
-// sub-task for phase1
-#define tState          data[0]
 
 void Phase1Task_TransitionAll(u8 taskId)
 {
@@ -764,10 +1043,14 @@ void Phase1Task_TransitionAll(u8 taskId)
     }
 }
 
-#undef tState
-
 // sub-task for phase2
-#define tState              data[0]
+#define tData1              data[1]
+#define tData2              data[2]
+#define tData3              data[3]
+#define tData4              data[4]
+#define tData5              data[5]
+#define tData6              data[6]
+#define tFuncState          data[7]
 #define tFrames             data[8]
 #define tOpponentSpriteId   data[13]
 #define tPlayerSpriteId     data[14]
@@ -790,17 +1073,17 @@ bool8 Phase2_Blur_Func1(struct Task *task)
 
 bool8 Phase2_Blur_Func2(struct Task *task)
 {
-    if (task->data[1] != 0)
+    if (task->tData1 != 0)
     {
-        task->data[1]--;
+        task->tData1--;
     }
     else
     {
-        task->data[1] = 4;
-        if (++task->data[2] == 10)
+        task->tData1 = 4;
+        if (++task->tData2 == 10)
             BeginNormalPaletteFade(-1, -1, 0, 0x10, 0);
-        SetGpuReg(REG_OFFSET_MOSAIC, (task->data[2] & 15) * 17);
-        if (task->data[2] > 14)
+        SetGpuReg(REG_OFFSET_MOSAIC, (task->tData2 & 15) * 17);
+        if (task->tData2 > 14)
             task->tState++;
     }
     return FALSE;
@@ -840,10 +1123,10 @@ bool8 Phase2_Swirl_Func1(struct Task *task)
 bool8 Phase2_Swirl_Func2(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
-    task->data[1] += 4;
-    task->data[2] += 8;
+    task->tData1 += 4;
+    task->tData2 += 8;
 
-    sub_8149F98(gUnknown_02038C28[0], sTransitionStructPtr->field_14, task->data[1], 2, task->data[2], 160);
+    sub_8149F98(gUnknown_02038C28[0], sTransitionStructPtr->field_14, task->tData1, 2, task->tData2, 160);
 
     if (!gPaletteFade.active)
     {
@@ -898,10 +1181,10 @@ bool8 Phase2_Shuffle_Func2(struct Task *task)
     u16 r3, r4;
 
     sTransitionStructPtr->VBlank_DMA = FALSE;
-    r4 = task->data[1];
-    r3 = task->data[2] >> 8;
-    task->data[1] += 4224;
-    task->data[2] += 384;
+    r4 = task->tData1;
+    r3 = task->tData2 >> 8;
+    task->tData1 += 4224;
+    task->tData2 += 384;
 
     for (i = 0; i < 160; i++, r4 += 4224)
     {
@@ -973,16 +1256,16 @@ void sub_814669C(struct Task *task)
     sub_8149F08();
     dp12_8087EA4();
 
-    task->data[1] = 16;
-    task->data[2] = 0;
-    task->data[4] = 0;
-    task->data[5] = 0x4000;
+    task->tData1 = 16;
+    task->tData2 = 0;
+    task->tData4 = 0;
+    task->tData5 = 0x4000;
     sTransitionStructPtr->WININ = 63;
     sTransitionStructPtr->WINOUT = 0;
     sTransitionStructPtr->field_6 = 240;
     sTransitionStructPtr->WIN0V = 160;
     sTransitionStructPtr->BLDCNT = 0x3F41;
-    sTransitionStructPtr->BLDALPHA = (task->data[1] << 8) | (task->data[2]);
+    sTransitionStructPtr->BLDALPHA = (task->tData1 << 8) | (task->tData2);
 
     for (i = 0; i < 160; i++)
     {
@@ -1065,7 +1348,7 @@ bool8 Phase2_BigPokeball_Func2(struct Task *task)
             dst1[i * 32 + j] = *BigPokeballMap | 0xF000;
         }
     }
-    sub_8149F98(gUnknown_02038C28[0], 0, task->data[4], 132, task->data[5], 160);
+    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return TRUE;
@@ -1077,7 +1360,7 @@ bool8 Phase2_Aqua_Func2(struct Task *task)
 
     sub_8149F58(&dst1, &dst2);
     LZ77UnCompVram(sTeamAqua_Tilemap, dst1);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->data[4], 132, task->data[5], 160);
+    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return FALSE;
@@ -1089,7 +1372,7 @@ bool8 Phase2_Magma_Func2(struct Task *task)
 
     sub_8149F58(&dst1, &dst2);
     LZ77UnCompVram(sTeamMagma_Tilemap, dst1);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->data[4], 132, task->data[5], 160);
+    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return FALSE;
@@ -1102,7 +1385,7 @@ bool8 Phase2_Regice_Func2(struct Task *task)
     sub_8149F58(&dst1, &dst2);
     LoadPalette(gUnknown_085BC2B4, 0xF0, 0x20);
     CpuCopy16(gUnknown_085BC314, dst1, 0x500);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->data[4], 132, task->data[5], 160);
+    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return FALSE;
@@ -1115,7 +1398,7 @@ bool8 Phase2_Registeel_Func2(struct Task *task)
     sub_8149F58(&dst1, &dst2);
     LoadPalette(gUnknown_085BC2D4, 0xF0, 0x20);
     CpuCopy16(gUnknown_085BCB14, dst1, 0x500);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->data[4], 132, task->data[5], 160);
+    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return FALSE;
@@ -1128,7 +1411,7 @@ bool8 Phase2_Regirock_Func2(struct Task *task)
     sub_8149F58(&dst1, &dst2);
     LoadPalette(gUnknown_085BC2F4, 0xF0, 0x20);
     CpuCopy16(gUnknown_085BD314, dst1, 0x500);
-    sub_8149F98(gUnknown_02038C28[0], 0, task->data[4], 132, task->data[5], 160);
+    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5, 160);
 
     task->tState++;
     return FALSE;
@@ -1149,16 +1432,16 @@ bool8 Phase2_Kyogre_Func3(struct Task *task)
 
 bool8 Phase2_Kyogre_Func4(struct Task *task)
 {
-    if (task->data[1] % 3 == 0)
+    if (task->tData1 % 3 == 0)
     {
-        u16 var = task->data[1] % 30;
+        u16 var = task->tData1 % 30;
         var /= 3;
         LoadPalette(gUnknown_085BEDA0 + (var * 16), 0xF0, 0x20);
     }
-    if (++task->data[1] > 58)
+    if (++task->tData1 > 58)
     {
         task->tState++;
-        task->data[1] = 0;
+        task->tData1 = 0;
     }
 
     return FALSE;
@@ -1166,15 +1449,15 @@ bool8 Phase2_Kyogre_Func4(struct Task *task)
 
 bool8 Phase2_Kyogre_Func5(struct Task *task)
 {
-    if (task->data[1] % 5 == 0)
+    if (task->tData1 % 5 == 0)
     {
-        s16 var = task->data[1] / 5;
+        s16 var = task->tData1 / 5;
         LoadPalette(gUnknown_085BEEE0 + (var * 16), 0xF0, 0x20);
     }
-    if (++task->data[1] > 68)
+    if (++task->tData1 > 68)
     {
         task->tState++;
-        task->data[1] = 0;
+        task->tData1 = 0;
         task->tFrames = 30;
     }
 
@@ -1202,18 +1485,18 @@ bool8 Phase2_WeatherDuo_Func7(struct Task *task)
 bool8 Phase2_BigPokeball_Func3(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
-    if (task->data[3] == 0 || --task->data[3] == 0)
+    if (task->tData3 == 0 || --task->tData3 == 0)
     {
-        task->data[2]++;
-        task->data[3] = 2;
+        task->tData2++;
+        task->tData3 = 2;
     }
-    sTransitionStructPtr->BLDALPHA = (task->data[1] << 8) | task->data[2];
-    if (task->data[2] > 15)
+    sTransitionStructPtr->BLDALPHA = (task->tData1 << 8) | task->tData2;
+    if (task->tData2 > 15)
         task->tState++;
-    task->data[4] += 8;
-    task->data[5] -= 256;
+    task->tData4 += 8;
+    task->tData5 -= 256;
 
-    sub_8149F98(gUnknown_02038C28[0], 0, task->data[4], 132, task->data[5] >> 8, 160);
+    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5 >> 8, 160);
 
     sTransitionStructPtr->VBlank_DMA++;
     return FALSE;
@@ -1222,18 +1505,18 @@ bool8 Phase2_BigPokeball_Func3(struct Task *task)
 bool8 Phase2_BigPokeball_Func4(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
-    if (task->data[3] == 0 || --task->data[3] == 0)
+    if (task->tData3 == 0 || --task->tData3 == 0)
     {
-        task->data[1]--;
-        task->data[3] = 2;
+        task->tData1--;
+        task->tData3 = 2;
     }
-    sTransitionStructPtr->BLDALPHA = (task->data[1] << 8) | task->data[2];
-    if (task->data[1] == 0)
+    sTransitionStructPtr->BLDALPHA = (task->tData1 << 8) | task->tData2;
+    if (task->tData1 == 0)
         task->tState++;
-    task->data[4] += 8;
-    task->data[5] -= 256;
+    task->tData4 += 8;
+    task->tData5 -= 256;
 
-    sub_8149F98(gUnknown_02038C28[0], 0, task->data[4], 132, task->data[5] >> 8, 160);
+    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5 >> 8, 160);
 
     sTransitionStructPtr->VBlank_DMA++;
     return FALSE;
@@ -1242,17 +1525,17 @@ bool8 Phase2_BigPokeball_Func4(struct Task *task)
 bool8 Phase2_BigPokeball_Func5(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
-    task->data[4] += 8;
-    task->data[5] -= 256;
+    task->tData4 += 8;
+    task->tData5 -= 256;
 
-    sub_8149F98(gUnknown_02038C28[0], 0, task->data[4], 132, task->data[5] >> 8, 160);
+    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 132, task->tData5 >> 8, 160);
 
-    if (task->data[5] <= 0)
+    if (task->tData5 <= 0)
     {
         task->tState++;
-        task->data[1] = 160;
-        task->data[2] = 256;
-        task->data[3] = 0;
+        task->tData1 = 160;
+        task->tData2 = 256;
+        task->tData3 = 0;
     }
 
     sTransitionStructPtr->VBlank_DMA++;
@@ -1283,16 +1566,16 @@ bool8 Phase2_WaitPaletteFade(struct Task *task)
 bool8 Phase2_BigPokeball_Func6(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
-    if (task->data[2] < 1024)
-        task->data[2] += 128;
-    if (task->data[1] != 0)
+    if (task->tData2 < 1024)
+        task->tData2 += 128;
+    if (task->tData1 != 0)
     {
-        task->data[1] -= (task->data[2] >> 8);
-        if (task->data[1] < 0)
-            task->data[1] = 0;
+        task->tData1 -= (task->tData2 >> 8);
+        if (task->tData1 < 0)
+            task->tData1 = 0;
     }
-    sub_814A014(gUnknown_02038C28[0], 120, 80, task->data[1]);
-    if (task->data[1] == 0)
+    sub_814A014(gUnknown_02038C28[0], 120, 80, task->tData1);
+    if (task->tData1 == 0)
     {
         SetVBlankCallback(NULL);
         DmaStop(0);
@@ -1301,9 +1584,9 @@ bool8 Phase2_BigPokeball_Func6(struct Task *task)
     }
     else
     {
-        if (task->data[3] == 0)
+        if (task->tData3 == 0)
         {
-            task->data[3]++;
+            task->tData3++;
             SetVBlankCallback(VBlankCB1_Phase2_BigPokeball);
         }
 
@@ -1673,12 +1956,12 @@ bool8 Phase2_Ripple_Func2(struct Task *task)
 
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
-    r3 = task->data[2] >> 8;
-    r4 = task->data[1];
+    r3 = task->tData2 >> 8;
+    r4 = task->tData1;
     r8 = 384;
-    task->data[1] += 0x400;
-    if (task->data[2] <= 0x1FFF)
-        task->data[2] += 0x180;
+    task->tData1 += 0x400;
+    if (task->tData2 <= 0x1FFF)
+        task->tData2 += 0x180;
 
     for (i = 0; i < 160; i++, r4 += r8)
     {
@@ -1688,13 +1971,13 @@ bool8 Phase2_Ripple_Func2(struct Task *task)
         gUnknown_02038C28[0][i] = sTransitionStructPtr->field_16 + Sin(var, r3);
     }
 
-    if (++task->data[3] == 81)
+    if (++task->tData3 == 81)
     {
-        task->data[4]++;
+        task->tData4++;
         BeginNormalPaletteFade(-1, -2, 0, 0x10, 0);
     }
 
-    if (task->data[4] != 0 && !gPaletteFade.active)
+    if (task->tData4 != 0 && !gPaletteFade.active)
         DestroyTask(FindTaskIdByFunc(Phase2Task_Ripple));
 
     sTransitionStructPtr->VBlank_DMA++;
@@ -1752,13 +2035,13 @@ bool8 Phase2_Wave_Func2(struct Task *task)
 
     sTransitionStructPtr->VBlank_DMA = FALSE;
     toStore = gUnknown_02038C28[0];
-    r5 = task->data[2];
-    task->data[2] += 16;
-    task->data[1] += 8;
+    r5 = task->tData2;
+    task->tData2 += 16;
+    task->tData1 += 8;
 
     for (i = 0, nextFunc = TRUE; i < 160; i++, r5 += 4, toStore++)
     {
-        s16 value = task->data[1] + Sin(r5, 40);
+        s16 value = task->tData1 + Sin(r5, 40);
         if (value < 0)
             value = 0;
         if (value > 240)
@@ -1837,9 +2120,9 @@ bool8 Phase2_Mugshot_Func1(struct Task *task)
     dp12_8087EA4();
     Mugshots_CreateOpponentPlayerSprites(task);
 
-    task->data[1] = 0;
-    task->data[2] = 1;
-    task->data[3] = 239;
+    task->tData1 = 0;
+    task->tData2 = 1;
+    task->tData3 = 239;
     sTransitionStructPtr->WININ = 63;
     sTransitionStructPtr->WINOUT = 62;
     sTransitionStructPtr->WIN0V = 160;
@@ -1892,12 +2175,12 @@ bool8 Phase2_Mugshot_Func3(struct Task *task)
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
     toStore = gUnknown_02038C28[0];
-    r5 = task->data[1];
-    task->data[1] += 0x10;
+    r5 = task->tData1;
+    task->tData1 += 0x10;
 
     for (i = 0; i < 80; i++, toStore++, r5 += 0x10)
     {
-        value = task->data[2] + Sin(r5, 0x10);
+        value = task->tData2 + Sin(r5, 0x10);
         if (value < 0)
             value = 1;
         if (value > 0xF0)
@@ -1906,7 +2189,7 @@ bool8 Phase2_Mugshot_Func3(struct Task *task)
     }
     for (; i < 160; i++, toStore++, r5 += 0x10)
     {
-        value = task->data[3] - Sin(r5, 0x10);
+        value = task->tData3 - Sin(r5, 0x10);
         if (value < 0)
             value = 0;
         if (value > 0xEF)
@@ -1914,13 +2197,13 @@ bool8 Phase2_Mugshot_Func3(struct Task *task)
         *toStore = (value << 8) | (0xF0);
     }
 
-    task->data[2] += 8;
-    task->data[3] -= 8;
-    if (task->data[2] > 0xF0)
-        task->data[2] = 0xF0;
-    if (task->data[3] < 0)
-        task->data[3] = 0;
-    mergedValue = *(s32*)(&task->data[2]);
+    task->tData2 += 8;
+    task->tData3 -= 8;
+    if (task->tData2 > 0xF0)
+        task->tData2 = 0xF0;
+    if (task->tData3 < 0)
+        task->tData3 = 0;
+    mergedValue = *(s32*)(&task->tData2);
     if (mergedValue == 0xF0)
         task->tState++;
 
@@ -1943,9 +2226,9 @@ bool8 Phase2_Mugshot_Func4(struct Task *task)
     }
 
     task->tState++;
-    task->data[1] = 0;
-    task->data[2] = 0;
-    task->data[3] = 0;
+    task->tData1 = 0;
+    task->tData2 = 0;
+    task->tData3 = 0;
     sTransitionStructPtr->field_18 -= 8;
     sTransitionStructPtr->field_1A += 8;
 
@@ -1985,8 +2268,8 @@ bool8 Phase2_Mugshot_Func6(struct Task *task)
         SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         task->tState++;
-        task->data[3] = 0;
-        task->data[4] = 0;
+        task->tData3 = 0;
+        task->tData4 = 0;
         sTransitionStructPtr->BLDCNT = 0xBF;
         SetVBlankCallback(VBlankCB1_Phase2_Mugshots);
     }
@@ -2002,15 +2285,15 @@ bool8 Phase2_Mugshot_Func7(struct Task *task)
     sTransitionStructPtr->field_18 -= 8;
     sTransitionStructPtr->field_1A += 8;
 
-    if (task->data[4] < 0x50)
-        task->data[4] += 2;
-    if (task->data[4] > 0x50)
-        task->data[4] = 0x50;
+    if (task->tData4 < 0x50)
+        task->tData4 += 2;
+    if (task->tData4 > 0x50)
+        task->tData4 = 0x50;
 
-    if (++task->data[3] & 1)
+    if (++task->tData3 & 1)
     {
         s16 i;
-        for (i = 0, r6 = FALSE; i <= task->data[4]; i++)
+        for (i = 0, r6 = FALSE; i <= task->tData4; i++)
         {
             s16 index1 = 0x50 - i;
             s16 index2 = 0x50 + i;
@@ -2027,7 +2310,7 @@ bool8 Phase2_Mugshot_Func7(struct Task *task)
         }
     }
 
-    if (task->data[4] == 0x50 && !r6)
+    if (task->tData4 == 0x50 && !r6)
         task->tState++;
 
     sTransitionStructPtr->VBlank_DMA++;
@@ -2039,7 +2322,7 @@ bool8 Phase2_Mugshot_Func8(struct Task *task)
     sTransitionStructPtr->VBlank_DMA = FALSE;
     BlendPalettes(-1, 0x10, 0x7FFF);
     sTransitionStructPtr->BLDCNT = 0xFF;
-    task->data[3] = 0;
+    task->tData3 = 0;
 
     task->tState++;
     return TRUE;
@@ -2049,9 +2332,9 @@ bool8 Phase2_Mugshot_Func9(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
-    task->data[3]++;
-    memset(gUnknown_02038C28[0], task->data[3], 0x140);
-    if (task->data[3] > 15)
+    task->tData3++;
+    memset(gUnknown_02038C28[0], task->tData3, 0x140);
+    if (task->tData3 > 15)
         task->tState++;
 
     sTransitionStructPtr->VBlank_DMA++;
@@ -2216,8 +2499,8 @@ bool8 Phase2_Slice_Func1(struct Task *task)
     sub_8149F08();
     dp12_8087EA4();
 
-    task->data[2] = 256;
-    task->data[3] = 1;
+    task->tData2 = 256;
+    task->tData3 = 1;
     sTransitionStructPtr->WININ = 63;
     sTransitionStructPtr->WINOUT = 0;
     sTransitionStructPtr->WIN0V = 160;
@@ -2245,13 +2528,13 @@ bool8 Phase2_Slice_Func2(struct Task *task)
 
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
-    task->data[1] += (task->data[2] >> 8);
-    if (task->data[1] > 0xF0)
-        task->data[1] = 0xF0;
-    if (task->data[2] <= 0xFFF)
-        task->data[2] += task->data[3];
-    if (task->data[3] < 128)
-        task->data[3] <<= 1; // multiplying by two
+    task->tData1 += (task->tData2 >> 8);
+    if (task->tData1 > 0xF0)
+        task->tData1 = 0xF0;
+    if (task->tData2 <= 0xFFF)
+        task->tData2 += task->tData3;
+    if (task->tData3 < 128)
+        task->tData3 <<= 1; // multiplying by two
 
     for (i = 0; i < 160; i++)
     {
@@ -2259,17 +2542,17 @@ bool8 Phase2_Slice_Func2(struct Task *task)
         u16* storeLoc2 = &gUnknown_02038C28[0][i + 160];
         if (1 & i)
         {
-            *storeLoc1 = sTransitionStructPtr->field_14 + task->data[1];
-            *storeLoc2 = 0xF0 - task->data[1];
+            *storeLoc1 = sTransitionStructPtr->field_14 + task->tData1;
+            *storeLoc2 = 0xF0 - task->tData1;
         }
         else
         {
-            *storeLoc1 = sTransitionStructPtr->field_14 - task->data[1];
-            *storeLoc2 = (task->data[1] << 8) | (0xF1);
+            *storeLoc1 = sTransitionStructPtr->field_14 - task->tData1;
+            *storeLoc2 = (task->tData1 << 8) | (0xF1);
         }
     }
 
-    if (task->data[1] > 0xEF)
+    if (task->tData1 > 0xEF)
         task->tState++;
 
     sTransitionStructPtr->VBlank_DMA++;
@@ -2307,12 +2590,12 @@ void HBlankCB_Phase2_Slice(void)
     }
 }
 
-void Phase2Task_25(u8 taskId)
+void Phase2Task_ShredSplit(u8 taskId)
 {
-    while (sPhase2_25_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+    while (sPhase2_ShredSplit_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_25_Func1(struct Task *task)
+bool8 Phase2_ShredSplit_Func1(struct Task *task)
 {
     u16 i;
 
@@ -2334,9 +2617,9 @@ bool8 Phase2_25_Func1(struct Task *task)
         gUnknown_02038C28[0][0x280 + i] = 1;
     }
 
-    task->data[4] = 0;
-    task->data[5] = 0;
-    task->data[6] = 7;
+    task->tData4 = 0;
+    task->tData5 = 0;
+    task->tData6 = 7;
 
     EnableInterrupts(INTR_FLAG_HBLANK);
 
@@ -2347,7 +2630,7 @@ bool8 Phase2_25_Func1(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_25_Func2(struct Task *task)
+bool8 Phase2_ShredSplit_Func2(struct Task *task)
 {
     u16 i, j, k;
     u8 arr1[ARRAY_COUNT(gUnknown_085C8C64)];
@@ -2362,7 +2645,7 @@ bool8 Phase2_25_Func2(struct Task *task)
     sTransitionStructPtr->VBlank_DMA = FALSE;
     var = 0;
 
-    for (i = 0; i <= task->data[5]; i++)
+    for (i = 0; i <= task->tData5; i++)
     {
         for (j = 0; j < 2; j++)
         {
@@ -2433,10 +2716,10 @@ bool8 Phase2_25_Func2(struct Task *task)
         }
     }
 
-    if (--task->data[4] < 0)
-        task->data[4] = 0;
-    if (task->data[4] <= 0 && task->data[5] + 1 <= 20)
-        task->data[4] = task->data[6], task->data[5]++;
+    if (--task->tData4 < 0)
+        task->tData4 = 0;
+    if (task->tData4 <= 0 && task->tData5 + 1 <= 20)
+        task->tData4 = task->tData6, task->tData5++;
     if (var > 0x9F)
         task->tState++;
 
@@ -2444,7 +2727,7 @@ bool8 Phase2_25_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_25_Func3(struct Task *task)
+bool8 Phase2_ShredSplit_Func3(struct Task *task)
 {
     u16 i;
     bool32 done = TRUE;
@@ -2462,11 +2745,11 @@ bool8 Phase2_25_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_25_Func4(struct Task *task)
+bool8 Phase2_ShredSplit_Func4(struct Task *task)
 {
     DmaStop(0);
     sub_8149F84();
-    DestroyTask(FindTaskIdByFunc(Phase2Task_25));
+    DestroyTask(FindTaskIdByFunc(Phase2Task_ShredSplit));
     return FALSE;
 }
 
@@ -2500,16 +2783,16 @@ bool8 Phase2_Blackhole_Func1(struct Task *task)
     SetVBlankCallback(VBlankCB1_Phase2_BigPokeball);
 
     task->tState++;
-    task->data[1] = 1;
-    task->data[2] = 0x100;
-    task->data[7] = 0;
+    task->tData1 = 1;
+    task->tData2 = 0x100;
+    task->tFuncState = 0;
 
     return FALSE;
 }
 
 bool8 Phase2_Blackhole1_Func3(struct Task *task)
 {
-    if (task->data[7] == 1)
+    if (task->tFuncState == 1)
     {
         DmaStop(0);
         SetVBlankCallback(NULL);
@@ -2518,16 +2801,16 @@ bool8 Phase2_Blackhole1_Func3(struct Task *task)
     else
     {
         sTransitionStructPtr->VBlank_DMA = FALSE;
-        if (task->data[2] < 0x400)
-            task->data[2] += 0x80;
-        if (task->data[1] < 0xA0)
-            task->data[1] += (task->data[2] >> 8);
-        if (task->data[1] > 0xA0)
-            task->data[1] = 0xA0;
-        sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->data[1]);
-        if (task->data[1] == 0xA0)
+        if (task->tData2 < 0x400)
+            task->tData2 += 0x80;
+        if (task->tData1 < 0xA0)
+            task->tData1 += (task->tData2 >> 8);
+        if (task->tData1 > 0xA0)
+            task->tData1 = 0xA0;
+        sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->tData1);
+        if (task->tData1 == 0xA0)
         {
-            task->data[7] = 1;
+            task->tFuncState = 1;
             sub_8149F84();
         }
         else
@@ -2542,19 +2825,19 @@ bool8 Phase2_Blackhole1_Func3(struct Task *task)
 bool8 Phase2_Blackhole1_Func2(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
-    if (task->data[7] == 0)
+    if (task->tFuncState == 0)
     {
-        task->data[7]++;
-        task->data[1] = 0x30;
-        task->data[6] = 0;
+        task->tFuncState++;
+        task->tData1 = 0x30;
+        task->tData6 = 0;
     }
-    task->data[1] += gUnknown_085C8C80[task->data[6]];
-    task->data[6] = (task->data[6] + 1) % 2;
-    sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->data[1]);
-    if (task->data[1] < 9)
+    task->tData1 += gUnknown_085C8C80[task->tData6];
+    task->tData6 = (task->tData6 + 1) % 2;
+    sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->tData1);
+    if (task->tData1 < 9)
     {
         task->tState++;
-        task->data[7] = 0;
+        task->tFuncState = 0;
     }
 
     sTransitionStructPtr->VBlank_DMA++;
@@ -2567,40 +2850,40 @@ bool8 Phase2_Blackhole2_Func2(struct Task *task)
     s16 amplitude;
 
     sTransitionStructPtr->VBlank_DMA = FALSE;
-    if (task->data[7] == 0)
+    if (task->tFuncState == 0)
     {
-        task->data[7]++;
-        task->data[5] = 2;
-        task->data[6] = 2;
+        task->tFuncState++;
+        task->tData5 = 2;
+        task->tData6 = 2;
     }
-    if (task->data[1] > 0xA0)
-        task->data[1] = 0xA0;
+    if (task->tData1 > 0xA0)
+        task->tData1 = 0xA0;
 
-    sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->data[1]);
-    if (task->data[1] == 0xA0)
+    sub_814A014(gUnknown_02038C28[0], 0x78, 0x50, task->tData1);
+    if (task->tData1 == 0xA0)
     {
         DmaStop(0);
         sub_8149F84();
         DestroyTask(FindTaskIdByFunc(task->func));
     }
 
-    index = task->data[5];
-    if ((task->data[5] & 0xFF) <= 128)
+    index = task->tData5;
+    if ((task->tData5 & 0xFF) <= 128)
     {
-        amplitude = task->data[6];
-        task->data[5] += 8;
+        amplitude = task->tData6;
+        task->tData5 += 8;
     }
     else
     {
-        amplitude = task->data[6] - 1;
-        task->data[5] += 16;
+        amplitude = task->tData6 - 1;
+        task->tData5 += 16;
     }
-    task->data[1] += Sin(index & 0xFF, amplitude);
+    task->tData1 += Sin(index & 0xFF, amplitude);
 
-    if (task->data[1] <= 0)
-        task->data[1] = 1;
-    if (task->data[5] > 0xFE)
-        task->data[5] >>= 8, task->data[6]++;
+    if (task->tData1 <= 0)
+        task->tData1 = 1;
+    if (task->tData5 > 0xFE)
+        task->tData5 >>= 8, task->tData6++;
 
     sTransitionStructPtr->VBlank_DMA++;
     return FALSE;
@@ -2621,7 +2904,7 @@ bool8 Phase2_RectangularSpiral_Func1(struct Task *task)
     CpuFill16(0xF000, dst1, 0x800);
     LoadPalette(gFieldEffectObjectPalette10, 0xF0, 0x20);
 
-    task->data[3] = 1;
+    task->tData3 = 1;
     task->tState++;
 
     sRectangularSpiralTransition[0].field_0 = 0;
@@ -2775,21 +3058,21 @@ bool8 Phase2_Groudon_Func3(struct Task *task)
     LZ77UnCompVram(gUnknown_085BEA88, dst1);
 
     task->tState++;
-    task->data[1] = 0;
+    task->tData1 = 0;
     return FALSE;
 }
 
 bool8 Phase2_Groudon_Func4(struct Task *task)
 {
-    if (task->data[1] % 3 == 0)
+    if (task->tData1 % 3 == 0)
     {
-        u16 var = (task->data[1] % 30) / 3;
+        u16 var = (task->tData1 % 30) / 3;
         LoadPalette(gUnknown_085BF0A0 + (var * 16), 0xF0, 0x20);
     }
-    if (++task->data[1] > 58)
+    if (++task->tData1 > 58)
     {
         task->tState++;
-        task->data[1] = 0;
+        task->tData1 = 0;
     }
 
     return FALSE;
@@ -2797,18 +3080,951 @@ bool8 Phase2_Groudon_Func4(struct Task *task)
 
 bool8 Phase2_Groudon_Func5(struct Task *task)
 {
-    if (task->data[1] % 5 == 0)
+    if (task->tData1 % 5 == 0)
     {
-        s16 var = task->data[1] / 5;
+        s16 var = task->tData1 / 5;
         LoadPalette(gUnknown_085BF2A0 + (var * 16), 0xF0, 0x20);
     }
-    if (++task->data[1] > 68)
+    if (++task->tData1 > 68)
     {
         task->tState++;
-        task->data[1] = 0;
+        task->tData1 = 0;
         task->tFrames = 30;
     }
 
     return FALSE;
 }
 
+void Phase2Task_Rayquaza(u8 taskId)
+{
+    while (sPhase2_Rayquaza_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 Phase2_Rayquaza_Func3(struct Task *task)
+{
+    u16 *dst1, *dst2;
+    u16 i;
+
+    sub_8149F08();
+    dp12_8087EA4();
+
+    SetGpuReg(REG_OFFSET_BG0CNT, 0x9A08);
+    sub_8149F58(&dst1, &dst2);
+    CpuFill16(0, dst1, 0x800);
+    CpuCopy16(gUnknown_085BF6A0, dst2, 0x2000);
+
+    sTransitionStructPtr->field_20 = 0;
+    task->tState++;
+    LoadPalette(gUnknown_085BF4A0 + 0x50, 0xF0, 0x20);
+
+    for (i = 0; i < 160; i++)
+    {
+        gUnknown_02038C28[0][i] = 0;
+        gUnknown_02038C28[1][i] = 0x100;
+    }
+
+    SetVBlankCallback(VBlankCB_Phase2_Rayquaza);
+    return FALSE;
+}
+
+bool8 Phase2_Rayquaza_Func4(struct Task *task)
+{
+    u16 *dst1, *dst2;
+
+    sub_8149F58(&dst1, &dst2);
+    CpuCopy16(gUnknown_085C6BE0, dst1, 0x1000);
+    task->tState++;
+    return FALSE;
+}
+
+bool8 Phase2_Rayquaza_Func5(struct Task *task)
+{
+    if ((task->tData1 % 4) == 0)
+    {
+        u16 value = task->tData1 / 4;
+        const u16 *palPtr = &gUnknown_085BF4A0[(value + 5) * 16];
+        LoadPalette(palPtr, 0xF0, 0x20);
+    }
+    if (++task->tData1 > 40)
+    {
+        task->tState++;
+        task->tData1 = 0;
+    }
+
+    return FALSE;
+}
+
+bool8 Phase2_Rayquaza_Func6(struct Task *task)
+{
+    if (++task->tData1 > 20)
+    {
+        task->tState++;
+        task->tData1 = 0;
+        BeginNormalPaletteFade(0xFFFF8000, 2, 0, 0x10, 0);
+    }
+
+    return FALSE;
+}
+
+bool8 Phase2_Rayquaza_Func7(struct Task *task)
+{
+    if (!gPaletteFade.active)
+    {
+        sTransitionStructPtr->field_20 = 1;
+        task->tState++;
+    }
+
+    return FALSE;
+}
+
+bool8 Phase2_Rayquaza_Func8(struct Task *task)
+{
+    BlendPalettes(0x00007FFF, 8, 0);
+    BlendPalettes(0xFFFF8000, 0, 0);
+
+    task->tState++;
+    return FALSE;
+}
+
+bool8 Phase2_Rayquaza_Func9(struct Task *task)
+{
+    if ((task->tData1 % 3) == 0)
+    {
+        u16 value = task->tData1 / 3;
+        const u16 *palPtr = &gUnknown_085BF4A0[(value + 0) * 16];
+        LoadPalette(palPtr, 0xF0, 0x20);
+    }
+    if (++task->tData1 >= 40)
+    {
+        u16 i;
+
+        sTransitionStructPtr->WININ = 0;
+        sTransitionStructPtr->WINOUT = 63;
+        sTransitionStructPtr->field_6 = 240;
+        sTransitionStructPtr->WIN0V = 160;
+
+        for (i = 0; i < 160; i++)
+        {
+            gUnknown_02038C28[1][i] = 0;
+        }
+
+        SetVBlankCallback(VBlankCB1_Phase2_BigPokeball);
+        task->tState++;
+        task->tData2 = 0x100;
+        task->tFuncState = 0;
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON);
+    }
+
+    return FALSE;
+}
+
+void VBlankCB_Phase2_Rayquaza(void)
+{
+    void *dmaSrc;
+
+    DmaStop(0);
+    VBlankCB_BattleTransition();
+
+    if (sTransitionStructPtr->field_20 == 0)
+        dmaSrc = gUnknown_02038C28[0];
+    else if (sTransitionStructPtr->field_20 == 1)
+        dmaSrc = gUnknown_02038C28[1];
+    else
+        dmaSrc = gUnknown_02038C28[0];
+
+    DmaSet(0, dmaSrc, &REG_BG0VOFS, 0xA2400001);
+}
+
+void Phase2Task_WhiteFade(u8 taskId)
+{
+    while (sPhase2_WhiteFade_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 Phase2_WhiteFade_Func1(struct Task *task)
+{
+    u16 i;
+
+    sub_8149F08();
+    dp12_8087EA4();
+
+    sTransitionStructPtr->BLDCNT = 0xBF;
+    sTransitionStructPtr->BLDY = 0;
+    sTransitionStructPtr->WININ = 0x1E;
+    sTransitionStructPtr->WINOUT = 0x3F;
+    sTransitionStructPtr->WIN0V = 0xA0;
+
+    for (i = 0; i < 160; i++)
+    {
+        gUnknown_02038C28[1][i] = 0;
+        gUnknown_02038C28[1][i + 160] = 0xF0;
+    }
+
+    EnableInterrupts(INTR_FLAG_HBLANK);
+    SetHBlankCallback(HBlankCB_Phase2_WhiteFade);
+    SetVBlankCallback(VBlankCB0_Phase2_WhiteFade);
+
+    task->tState++;
+    return FALSE;
+}
+
+bool8 Phase2_WhiteFade_Func2(struct Task *task)
+{
+    s16 i, posY;
+    s16 arr1[ARRAY_COUNT(sUnknown_085C8DA0)];
+    struct Sprite *sprite;
+
+    memcpy(arr1, sUnknown_085C8DA0, sizeof(sUnknown_085C8DA0));
+    for (i = 0, posY = 0; i < 8; i++, posY += 0x14)
+    {
+        sprite = &gSprites[CreateInvisibleSprite(sub_8149864)];
+        sprite->pos1.x = 0xF0;
+        sprite->pos1.y = posY;
+        sprite->data[5] = arr1[i];
+    }
+    sprite->data[6]++;
+
+    task->tState++;
+    return FALSE;
+}
+
+bool8 Phase2_WhiteFade_Func3(struct Task *task)
+{
+    sTransitionStructPtr->VBlank_DMA = 0;
+    if (sTransitionStructPtr->field_20 > 7)
+    {
+        BlendPalettes(-1, 0x10, 0x7FFF);
+        task->tState++;
+    }
+    return FALSE;
+}
+
+bool8 Phase2_WhiteFade_Func4(struct Task *task)
+{
+    sTransitionStructPtr->VBlank_DMA = 0;
+
+    DmaStop(0);
+    SetVBlankCallback(0);
+    SetHBlankCallback(0);
+
+    sTransitionStructPtr->field_6 = 0xF0;
+    sTransitionStructPtr->BLDY = 0;
+    sTransitionStructPtr->BLDCNT = 0xFF;
+    sTransitionStructPtr->WININ = 0x3F;
+
+    SetVBlankCallback(VBlankCB1_Phase2_WhiteFade);
+
+    task->tState++;
+    return FALSE;
+}
+
+bool8 Phase2_WhiteFade_Func5(struct Task *task)
+{
+   if (++sTransitionStructPtr->BLDY > 16)
+   {
+       sub_8149F84();
+       DestroyTask(FindTaskIdByFunc(Phase2Task_WhiteFade));
+   }
+   return FALSE;
+}
+
+void VBlankCB0_Phase2_WhiteFade(void)
+{
+    DmaStop(0);
+    VBlankCB_BattleTransition();
+    REG_BLDCNT = sTransitionStructPtr->BLDCNT;
+    REG_WININ = sTransitionStructPtr->WININ;
+    REG_WINOUT = sTransitionStructPtr->WINOUT;
+    REG_WIN0V = sTransitionStructPtr->WIN0V;
+    if (sTransitionStructPtr->VBlank_DMA)
+        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 640);
+    DmaSet(0, &gUnknown_02038C28[1][160], &REG_WIN0H, 0xA2400001);
+}
+
+void VBlankCB1_Phase2_WhiteFade(void)
+{
+    VBlankCB_BattleTransition();
+    REG_BLDY = sTransitionStructPtr->BLDY;
+    REG_BLDCNT = sTransitionStructPtr->BLDCNT;
+    REG_WININ = sTransitionStructPtr->WININ;
+    REG_WINOUT = sTransitionStructPtr->WINOUT;
+    REG_WIN0H = sTransitionStructPtr->field_6;
+    REG_WIN0V = sTransitionStructPtr->WIN0V;
+}
+
+void HBlankCB_Phase2_WhiteFade(void)
+{
+    REG_BLDY = gUnknown_02038C28[1][REG_VCOUNT];
+}
+
+void sub_8149864(struct Sprite *sprite)
+{
+    if (sprite->data[5])
+    {
+        sprite->data[5]--;
+        if (sprite->data[6])
+            sTransitionStructPtr->VBlank_DMA = 1;
+    }
+    else
+    {
+        u16 i;
+        u16* ptr1 = &gUnknown_02038C28[0][sprite->pos1.y];
+        u16* ptr2 = &gUnknown_02038C28[0][sprite->pos1.y + 160];
+        for (i = 0; i < 20; i++)
+        {
+            ptr1[i] = sprite->data[0] >> 8;
+            ptr2[i] = (u8)(sprite->pos1.x);
+        }
+        if (sprite->pos1.x == 0 && sprite->data[0] == 0x1000)
+            sprite->data[1] = 1;
+
+        sprite->pos1.x -= 16;
+        sprite->data[0] += 0x80;
+
+        if (sprite->pos1.x < 0)
+            sprite->pos1.x = 0;
+        if (sprite->data[0] > 0x1000)
+            sprite->data[0] = 0x1000;
+
+        if (sprite->data[6])
+            sTransitionStructPtr->VBlank_DMA = 1;
+
+        if (sprite->data[1])
+        {
+            if (sprite->data[6] == 0 || (sTransitionStructPtr->field_20 > 6 && sprite->data[2]++ > 7))
+            {
+                sTransitionStructPtr->field_20++;
+                DestroySprite(sprite);
+            }
+        }
+    }
+}
+
+void Phase2Task_GridSquares(u8 taskId)
+{
+    while (sPhase2_GridSquares_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 Phase2_GridSquares_Func1(struct Task *task)
+{
+    u16 *dst1, *dst2;
+
+    sub_8149F58(&dst1, &dst2);
+    CpuSet(sShrinkingBoxTileset, dst2, 0x10);
+    CpuFill16(0xF000, dst1, 0x800);
+    LoadPalette(gFieldEffectObjectPalette10, 0xF0, 0x20);
+
+    task->tState++;
+    return FALSE;
+}
+
+bool8 Phase2_GridSquares_Func2(struct Task *task)
+{
+    u16* dst1;
+
+    if (task->tData1 == 0)
+    {
+        sub_8149F40(&dst1);
+        task->tData1 = 3;
+        task->tData2++;
+        CpuSet(sShrinkingBoxTileset + (task->tData2 * 8), dst1, 0x10);
+        if (task->tData2 > 0xD)
+        {
+            task->tState++;
+            task->tData1 = 16;
+        }
+    }
+
+    task->tData1--;
+    return FALSE;
+}
+
+bool8 Phase2_GridSquares_Func3(struct Task *task)
+{
+    if (--task->tData1 == 0)
+    {
+        sub_8149F84();
+        DestroyTask(FindTaskIdByFunc(Phase2Task_GridSquares));
+    }
+    return FALSE;
+}
+
+void Phase2Task_Shards(u8 taskId)
+{
+    while (sPhase2_Shards_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 Phase2_Shards_Func1(struct Task *task)
+{
+    u16 i;
+
+    sub_8149F08();
+    dp12_8087EA4();
+
+    sTransitionStructPtr->WININ = 0x3F;
+    sTransitionStructPtr->WINOUT = 0;
+    sTransitionStructPtr->WIN0V = 0xA0;
+
+    for (i = 0; i < 160; i++)
+    {
+        gUnknown_02038C28[0][i] = 0xF0;
+    }
+
+    CpuSet(gUnknown_02038C28[0], gUnknown_02038C28[1], 0xA0);
+    SetVBlankCallback(VBlankCB_Phase2_Shards);
+
+    task->tState++;
+    return TRUE;
+}
+
+bool8 Phase2_Shards_Func2(struct Task *task)
+{
+    sub_814A1AC(sTransitionStructPtr->data,
+                sUnknown_085C8DD0[task->tData1][0],
+                sUnknown_085C8DD0[task->tData1][1],
+                sUnknown_085C8DD0[task->tData1][2],
+                sUnknown_085C8DD0[task->tData1][3],
+                1, 1);
+    task->tData2 = sUnknown_085C8DD0[task->tData1][4];
+    task->tState++;
+    return TRUE;
+}
+
+bool8 Phase2_Shards_Func3(struct Task *task)
+{
+    s16 i;
+    bool8 nextFunc;
+
+    sTransitionStructPtr->VBlank_DMA = 0;
+
+    for (i = 0, nextFunc = FALSE; i < 16; i++)
+    {
+        s16 r3 = gUnknown_02038C28[0][sTransitionStructPtr->data[3]] >> 8;
+        s16 r4 = gUnknown_02038C28[0][sTransitionStructPtr->data[3]] & 0xFF;
+        if (task->tData2 == 0)
+        {
+            if (r3 < sTransitionStructPtr->data[2])
+                r3 = sTransitionStructPtr->data[2];
+            if (r3 > r4)
+                r3 = r4;
+        }
+        else
+        {
+            if (r4 > sTransitionStructPtr->data[2])
+                r4 = sTransitionStructPtr->data[2];
+            if (r4 <= r3)
+                r4 = r3;
+        }
+        gUnknown_02038C28[0][sTransitionStructPtr->data[3]] = (r4) | (r3 << 8);
+        if (nextFunc)
+        {
+            task->tState++;
+            break;
+        }
+        else
+            nextFunc = sub_814A228(sTransitionStructPtr->data, 1, 1);
+    }
+
+    sTransitionStructPtr->VBlank_DMA++;
+    return FALSE;
+}
+
+bool8 Phase2_Shards_Func4(struct Task *task)
+{
+    if (++task->tData1 < 7)
+    {
+        task->tState++;
+        task->tData3 = sUnknown_085C8E16[task->tData1 - 1];
+        return TRUE;
+    }
+    else
+    {
+        DmaStop(0);
+        sub_8149F84();
+        DestroyTask(FindTaskIdByFunc(Phase2Task_Shards));
+        return FALSE;
+    }
+}
+
+bool8 Phase2_Shards_Func5(struct Task *task)
+{
+    if (--task->tData3 == 0)
+    {
+        task->tState = 1;
+        return TRUE;
+    }
+    else
+        return FALSE;
+}
+
+void VBlankCB_Phase2_Shards(void)
+{
+    DmaStop(0);
+    VBlankCB_BattleTransition();
+    if (sTransitionStructPtr->VBlank_DMA)
+        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+    REG_WININ = sTransitionStructPtr->WININ;
+    REG_WINOUT = sTransitionStructPtr->WINOUT;
+    REG_WIN0V = sTransitionStructPtr->WIN0V;
+    REG_WIN0H = gUnknown_02038C28[1][0];
+    DmaSet(0, gUnknown_02038C28[1], &REG_WIN0H, 0xA2400001);
+}
+
+// sub-task for phase2
+#undef tData1
+#undef tData2
+#undef tData3
+#undef tData4
+#undef tData5
+#undef tData6
+#undef tFuncState
+#undef tFrames
+#undef tOpponentSpriteId
+#undef tPlayerSpriteId
+#undef tMugshotId
+
+// sub-task for sub-task phase
+#define tData1      data[1]
+#define tData2      data[2]
+#define tData3      data[3]
+#define tData4      data[4]
+#define tData5      data[5]
+#define tData6      data[6]
+#define tData7      data[7]
+
+void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
+{
+    u8 taskId = CreateTask(Phase1_Task_RunFuncs, 3);
+    gTasks[taskId].tData1 = a0;
+    gTasks[taskId].tData2 = a1;
+    gTasks[taskId].tData3 = a2;
+    gTasks[taskId].tData4 = a3;
+    gTasks[taskId].tData5 = a4;
+    gTasks[taskId].tData6 = a0;
+}
+
+bool8 IsPhase1Done(void)
+{
+    if (FindTaskIdByFunc(Phase1_Task_RunFuncs) == 0xFF)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void Phase1_Task_RunFuncs(u8 taskId)
+{
+    while (sPhase1_TransitionAll_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 Phase1_TransitionAll_Func1(struct Task *task)
+{
+    if (task->tData6 == 0 || --task->tData6 == 0)
+    {
+        task->tData6 = task->tData1;
+        task->tData7 += task->tData4;
+        if (task->tData7 > 16)
+            task->tData7 = 16;
+        BlendPalettes(-1, task->tData7, 0x2D6B);
+    }
+    if (task->tData7 > 15)
+    {
+        task->tState++;
+        task->tData6 = task->tData2;
+    }
+    return FALSE;
+}
+
+bool8 Phase1_TransitionAll_Func2(struct Task *task)
+{
+    if (task->tData6 == 0 || --task->tData6 == 0)
+    {
+        task->tData6 = task->tData2;
+        task->tData7 -= task->tData5;
+        if (task->tData7 < 0)
+            task->tData7 = 0;
+        BlendPalettes(-1, task->tData7, 0x2D6B);
+    }
+    if (task->tData7 == 0)
+    {
+        if (--task->tData3 == 0)
+            DestroyTask(FindTaskIdByFunc(Phase1_Task_RunFuncs));
+        else
+        {
+            task->tData6 = task->tData1;
+            task->tState = 0;
+        }
+    }
+    return FALSE;
+}
+
+#undef tData1
+#undef tData2
+#undef tData3
+#undef tData4
+#undef tData5
+#undef tData6
+#undef tData7
+
+void sub_8149F08(void)
+{
+    memset(sTransitionStructPtr, 0, sizeof(*sTransitionStructPtr));
+    sub_8089C08(&sTransitionStructPtr->field_14, &sTransitionStructPtr->field_16);
+}
+
+void VBlankCB_BattleTransition(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_8149F40(u16 **a0)
+{
+    u16 reg, *vram;
+
+    reg = REG_BG0CNT >> 2;
+    reg <<= 0xE;
+    vram = (u16*)(VRAM + reg);
+
+    *a0 = vram;
+}
+
+void sub_8149F58(u16 **a0, u16 **a1)
+{
+    u16 reg0, reg1, *vram0, *vram1;
+
+    reg0 = REG_BG0CNT >> 8;
+    reg1 = REG_BG0CNT >> 2;
+
+    reg0 <<= 0xB;
+    reg1 <<= 0xE;
+
+    vram0 = (u16*)(VRAM + reg0);
+    *a0 = vram0;
+
+    vram1 = (u16*)(VRAM + reg1);
+    *a1 = vram1;
+}
+
+void sub_8149F84(void)
+{
+    BlendPalettes(-1, 0x10, 0);
+}
+
+void sub_8149F98(s16 *array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 amplitude, s16 arrSize)
+{
+    u8 i;
+    for (i = 0; arrSize > 0; arrSize--, i++, index += indexIncrementer)
+    {
+        array[i] = sinAdd + Sin(0xFF & index, amplitude);
+    }
+}
+
+void sub_814A014(u16 *array, s16 a1, s16 a2, s16 a3)
+{
+    s16 i;
+
+    memset(array, 0xA, 160 * sizeof(s16));
+    for (i = 0; i < 64; i++)
+    {
+        s16 sinResult, cosResult;
+        s16 toStoreOrr, r2, r3, toStore, r7, r8;
+
+        sinResult = Sin(i, a3);
+        cosResult = Cos(i, a3);
+
+        toStoreOrr = a1 - sinResult;
+        toStore = a1 + sinResult;
+        r7 = a2 - cosResult;
+        r8 = a2 + cosResult;
+
+        if (toStoreOrr < 0)
+            toStoreOrr = 0;
+        if (toStore > 0xF0)
+            toStore = 0xF0;
+        if (r7 < 0)
+            r7 = 0;
+        if (r8 > 0x9F)
+            r8 = 0x9F;
+
+        toStore |= (toStoreOrr << 8);
+        array[r7] = toStore;
+        array[r8] = toStore;
+
+        cosResult = Cos(i + 1, a3);
+        r3 = a2 - cosResult;
+        r2 = a2 + cosResult;
+
+        if (r3 < 0)
+            r3 = 0;
+        if (r2 > 0x9F)
+            r2 = 0x9F;
+
+        while (r7 > r3)
+            array[--r7] = toStore;
+        while (r7 < r3)
+            array[++r7] = toStore;
+
+        while (r8 > r2)
+            array[--r8] = toStore;
+        while (r8 < r2)
+            array[++r8] = toStore;
+    }
+}
+
+void sub_814A1AC(s16 *data, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
+{
+    data[0] = a1;
+    data[1] = a2;
+    data[2] = a1;
+    data[3] = a2;
+    data[4] = a3;
+    data[5] = a4;
+    data[6] = a5;
+    data[7] = a6;
+    data[8] = a3 - a1;
+    if (data[8] < 0)
+    {
+        data[8] = -data[8];
+        data[6] = -a5;
+    }
+    data[9] = a4 - a2;
+    if (data[9] < 0)
+    {
+        data[9] = -data[9];
+        data[7] = -a6;
+    }
+    data[10] = 0;
+}
+
+bool8 sub_814A228(s16 *data, bool8 a1, bool8 a2)
+{
+    u8 var;
+    if (data[8] > data[9])
+    {
+        data[2] += data[6];
+        data[10] += data[9];
+        if (data[10] > data[8])
+        {
+            data[3] += data[7];
+            data[10] -= data[8];
+        }
+    }
+    else
+    {
+        data[3] += data[7];
+        data[10] += data[8];
+        if (data[10] > data[9])
+        {
+            data[2] += data[6];
+            data[10] -= data[9];
+        }
+    }
+    var = 0;
+    if ((data[6] > 0 && data[2] >= data[4]) || (data[6] < 0 && data[2] <= data[4]))
+    {
+        var++;
+        if (a1)
+            data[2] = data[4];
+    }
+    if ((data[7] > 0 && data[3] >= data[5]) || (data[7] < 0 && data[3] <= data[5]))
+    {
+        var++;
+        if (a2)
+            data[3] = data[5];
+    }
+
+    if (var == 2)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+// sub-task for phase2 of a couple of new transitions
+#define tData1      data[1]
+#define tData2      data[2]
+#define tData3      data[3]
+#define tData4      data[4]
+#define tData5      data[5]
+#define tData6      data[6]
+#define tData7      data[7]
+
+bool8 Phase2_29_Func1(struct Task *task)
+{
+    u16 *dst1, *dst2;
+
+    sub_814669C(task);
+    sub_8149F58(&dst1, &dst2);
+    CpuFill16(0, dst1, 0x800);
+    LZ77UnCompVram(gUnknown_085C7C00, dst2);
+    LoadPalette(gUnknown_085C7BE0, 0xF0, 0x20);
+
+    task->tState++;
+    return FALSE;
+}
+
+bool8 Phase2_29_Func2(struct Task *task)
+{
+    u16 *dst1, *dst2;
+
+    sub_8149F58(&dst1, &dst2);
+    LZ77UnCompVram(gUnknown_085C828C, dst1);
+    sub_8149F98(gUnknown_02038C28[0], 0, task->tData4, 0x84, task->tData5, 160);
+
+    task->tState++;
+    return TRUE;
+}
+
+void Phase2Task_29(u8 taskId)
+{
+    while (sPhase2_29_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+void Phase2Task_30(u8 taskId)
+{
+    while (sPhase2_30_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+bool8 Phase2_30_Func1(struct Task *task)
+{
+    u16 *dst1, *dst2;
+
+    sub_8149F08();
+    dp12_8087EA4();
+    ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
+    task->data[2] = 0x2000;
+    task->data[1] = 0x7FFF;
+    task->data[5] = 0;
+    task->data[6] = 16;
+    task->data[7] = 2560;
+    sTransitionStructPtr->BLDCNT = 0x3F41;
+    sTransitionStructPtr->BLDALPHA = (task->tData6 << 8) | (task->tData5);
+    REG_BLDCNT = sTransitionStructPtr->BLDCNT;
+    REG_BLDALPHA = sTransitionStructPtr->BLDALPHA;
+    sub_8149F58(&dst1, &dst2);
+    CpuFill16(0, dst1, 0x800);
+    LZ77UnCompVram(gUnknown_085C7C00, dst2);
+    LoadPalette(gUnknown_085C7BE0, 0xF0, 0x20);
+    sTransitionStructPtr->field_16 = 0;
+
+    task->tState++;
+    return FALSE;
+}
+
+bool8 Phase2_30_Func2(struct Task *task)
+{
+    u16 *dst1, *dst2;
+
+    sub_8149F58(&dst1, &dst2);
+    LZ77UnCompVram(gUnknown_085C828C, dst1);
+
+    task->tState++;
+    return TRUE;
+}
+
+bool8 Phase2_30_Func3(struct Task *task)
+{
+    u8 i;
+
+    for (i = 0; i < 160; i++)
+    {
+        gUnknown_02038C28[1][i] = sTransitionStructPtr->field_16;
+    }
+
+    SetVBlankCallback(VBlankCB_Phase2_30);
+    SetHBlankCallback(HBlankCB_Phase2_30);
+    EnableInterrupts(INTR_FLAG_HBLANK);
+
+    task->tState++;
+    return TRUE;
+}
+
+bool8 Phase2_30_Func4(struct Task *task)
+{
+    u8 i;
+    u16 var6, amplitude, var8;
+
+    sTransitionStructPtr->VBlank_DMA = FALSE;
+
+    amplitude = task->tData2 >> 8;
+    var6 = task->tData1;
+    var8 = 384;
+
+    task->tData1 = var6 - task->tData7;
+
+    if (task->tData3 >= 70)
+    {
+        if (task->tData2 - 384 >= 0)
+            task->tData2 -= 384;
+        else
+            task->tData2 = 0;
+    }
+
+    if (task->tData3 >= 0 && task->tData3 % 3 == 0)
+    {
+        if (task->tData5 < 16)
+            task->tData5++;
+        else if (task->tData6 > 0)
+            task->tData6--;
+
+        sTransitionStructPtr->BLDALPHA = (task->tData6 << 8) | (task->tData5);
+    }
+
+    for (i = 0; i < 160; i++, var6 += var8)
+    {
+        s16 index = var6 / 256;
+        asm("");
+        gUnknown_02038C28[0][i] = sTransitionStructPtr->field_16 + Sin(index, amplitude);
+    }
+
+    if (++task->tData3 == 101)
+    {
+        task->tData4++;
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    }
+
+    if (task->tData4 != 0 && !gPaletteFade.active)
+        DestroyTask(FindTaskIdByFunc(Phase2Task_30));
+
+    task->tData7 -= 17;
+    sTransitionStructPtr->VBlank_DMA++;
+    return FALSE;
+}
+
+void VBlankCB_Phase2_30(void)
+{
+    VBlankCB_BattleTransition();
+    REG_BLDCNT = sTransitionStructPtr->BLDCNT;
+    REG_BLDALPHA = sTransitionStructPtr->BLDALPHA;
+
+    if (sTransitionStructPtr->VBlank_DMA)
+        DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
+}
+
+void HBlankCB_Phase2_30(void)
+{
+    u16 var = gUnknown_02038C28[1][REG_VCOUNT];
+    REG_BG0VOFS = var;
+}
+
+void Phase2Task_31(u8 taskId)
+{
+    while (sPhase2_31_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+void Phase2Task_33(u8 taskId)
+{
+    while (sPhase2_33_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+void Phase2Task_32(u8 taskId)
+{
+    while (sPhase2_32_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+#undef tData1
+#undef tData2
+#undef tData3
+#undef tData4
+#undef tData5
+#undef tData6
+#undef tData7
