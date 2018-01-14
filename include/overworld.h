@@ -42,6 +42,9 @@ void sub_8084EBC(s16, s16);
 
 void player_avatar_init_params_reset(void);
 
+bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType);
+void Overworld_ResetStateAfterTeleport(void);
+
 void Overworld_SetFlashLevel(s32 a1);
 //u8 Overworld_GetFlashLevel(void);
 void sub_8085524(u16);

@@ -122,7 +122,7 @@ void AgbMain()
     ClearDma3Requests();
     ResetBgs();
     SetDefaultFontsPointer();
-    InitHeap(gHeap, 0x1C000);
+    InitHeap(gHeap, HEAP_SIZE);
 
     gSoftResetDisabled = FALSE;
 
@@ -332,7 +332,6 @@ void SetSerialCallback(IntrCallback callback)
 }
 
 extern void CopyBufferedValuesToGpuRegs(void);
-extern void ProcessDma3Requests(void);
 
 static void VBlankIntr(void)
 {

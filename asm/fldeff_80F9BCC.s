@@ -591,7 +591,7 @@ sub_80FA004: @ 80FA004
 	bne _080FA070
 	bl sub_80F9F5C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_80FA0DC
@@ -606,7 +606,7 @@ _080FA070:
 	bne _080FA0A0
 	bl sub_80F9F5C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_80FA1E8
@@ -625,7 +625,7 @@ _080FA0AE:
 _080FA0B2:
 	bl sub_80F9F5C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_80FA34C

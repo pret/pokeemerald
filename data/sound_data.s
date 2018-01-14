@@ -1,14 +1,13 @@
 	.section .rodata
 
 	.include "asm/macros/m4a.inc"
+	.include "asm/macros/music_voice.inc"
 
 	.include "sound/voice_groups.inc"
-
-	@ keysplit tables, programmable wave data
-	.incbin "baserom.gba", 0x6b4698, 0x328
-
+	.include "sound/keysplit_tables.inc"
+	.include "sound/programmable_wave_data.inc"
 	.include "sound/music_player_table.inc"
 	.include "sound/song_table.inc"
+	.include "sound/direct_sound_data.inc"
 
-	@ direct sound data
-	.incbin "baserom.gba", 0x6b5d04, 0x246338
+	.align 2

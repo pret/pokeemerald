@@ -1,8 +1,8 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
+#include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
-#include "config.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -30,6 +30,8 @@ char* strcpy(char *dst0, const char *src0);
 
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
+
+#define HEAP_SIZE 0x1C000
 
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];

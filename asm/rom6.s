@@ -268,7 +268,7 @@ sub_8135654: @ 8135654
 	lsrs r0, 24
 	strh r0, [r4]
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_8179834
@@ -285,7 +285,7 @@ _0813568C:
 	b _081356AC
 _0813569E:
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_81356C4
@@ -361,7 +361,7 @@ sub_813572C: @ 813572C
 	b _0813574C
 _0813573E:
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =hm2_dig

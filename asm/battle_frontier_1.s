@@ -13641,7 +13641,7 @@ sub_8195ED8: @ 8195ED8
 	push {r4,lr}
 	ldr r4, =gMapHeader
 	ldrb r0, [r4, 0x17]
-	bl is_light_level_1_2_3_or_6
+	bl Overworld_MapTypeAllowsTeleportAndFly
 	lsls r0, 24
 	cmp r0, 0
 	beq _08195F30

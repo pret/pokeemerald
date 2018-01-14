@@ -31,7 +31,8 @@ SECTIONS {
 
         /* COMMON starts at 0x30022A8 */
 <COMMON>
-
+        tools/agbcc/lib/libc.a:sbrkr.o(COMMON);
+        end = .;
         . = 0x8000;
     }
 
@@ -92,7 +93,7 @@ SECTIONS {
         asm/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
         asm/field_camera.o(.text);
-        asm/field_door.o(.text);
+        src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
         src/field_map_obj.o(.text);
         asm/field_ground_effect.o(.text);
@@ -237,7 +238,7 @@ SECTIONS {
         asm/intro_credits_graphics.o(.text);
         src/evolution_graphics.o(.text);
         src/bard_music.o(.text);
-        asm/fldeff_teleport.o(.text);
+        src/fldeff_teleport.o(.text);
         asm/battle_link_817C95C.o(.text);
         asm/pokemon_animation.o(.text);
         src/recorded_battle.o(.text);
@@ -324,7 +325,42 @@ SECTIONS {
         tools/agbcc/lib/libgcc.a:fp-bit.o(.text);
         tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
         tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
-        src/libc.o(.text);
+        tools/agbcc/lib/libc.a:memcpy.o(.text);
+        tools/agbcc/lib/libc.a:memset.o(.text);
+        tools/agbcc/lib/libc.a:strcmp.o(.text);
+        tools/agbcc/lib/libc.a:strcpy.o(.text);
+        tools/agbcc/lib/libc.a:vfprintf.o(.text);
+        tools/agbcc/lib/libc.a:vsprintf.o(.text);
+        tools/agbcc/lib/libc.a:fvwrite.o(.text);
+        tools/agbcc/lib/libc.a:locale.o(.text);
+        tools/agbcc/lib/libc.a:findfp.o(.text);
+        tools/agbcc/lib/libc.a:fflush.o(.text);
+        tools/agbcc/lib/libc.a:wsetup.o(.text);
+        tools/agbcc/lib/libc.a:mbtowc_r.o(.text);
+        tools/agbcc/lib/libc.a:s_isinf.o(.text);
+        tools/agbcc/lib/libc.a:s_isnan.o(.text);
+        tools/agbcc/lib/libc.a:memchr.o(.text);
+        tools/agbcc/lib/libc.a:strlen.o(.text);
+        tools/agbcc/lib/libc.a:dtoa.o(.text);
+        tools/agbcc/lib/libc.a:memmove.o(.text);
+        tools/agbcc/lib/libc.a:stdio.o(.text);
+        tools/agbcc/lib/libc.a:mprec.o(.text);
+        tools/agbcc/lib/libc.a:mallocr.o(.text);
+        tools/agbcc/lib/libc.a:fwalk.o(.text);
+        tools/agbcc/lib/libc.a:freer.o(.text);
+        tools/agbcc/lib/libc.a:makebuf.o(.text);
+        tools/agbcc/lib/libc.a:readr.o(.text);
+        tools/agbcc/lib/libc.a:writer.o(.text);
+        tools/agbcc/lib/libc.a:lseekr.o(.text);
+        tools/agbcc/lib/libc.a:closer.o(.text);
+        tools/agbcc/lib/libc.a:callocr.o(.text);
+        tools/agbcc/lib/libc.a:sbrkr.o(.text);
+        tools/agbcc/lib/libc.a:mlock.o(.text);
+        tools/agbcc/lib/libc.a:fstatr.o(.text);
+        tools/agbcc/lib/libc.a:libcfunc.o(.text);
+        tools/agbcc/lib/libc.a:syscalls.o(.text);
+        tools/agbcc/lib/libc.a:errno.o(.text);
+        src/libisagbprn.o(.text);
     } =0
 
     .rodata :
@@ -365,8 +401,7 @@ SECTIONS {
         data/maps.o(.rodata);
         data/fieldmap.o(.rodata);
         src/metatile_behavior.o(.rodata);
-        data/rom_8486FEC.o(.rodata);
-        data/field_door.o(.rodata);
+        src/field_door.o(.rodata);
         data/field_player_avatar.o(.rodata);
         data/field_map_obj.o(.rodata);
         data/field_ground_effect.o(.rodata);
@@ -479,7 +514,8 @@ SECTIONS {
         data/intro_credits_graphics.o(.rodata);
         src/evolution_graphics.o(.rodata);
         src/bard_music.o(.rodata);
-        data/data_860A4AC.o(.rodata);
+        data/battle_link_817C95C.o(.rodata);
+        data/pokemon_animation.o(.rodata);
         src/battle_controller_recorded_opponent.o(.rodata);
         src/battle_controller_recorded_player.o(.rodata);
         src/battle_dome_cards.o(.rodata);
@@ -1058,6 +1094,10 @@ SECTIONS {
         data/librfu_rodata.o(.rodata);
         tools/agbcc/lib/libgcc.a:_divdi3.o(.rodata);
         tools/agbcc/lib/libgcc.a:_udivdi3.o(.rodata);
+        tools/agbcc/lib/libc.a(.rodata);
+        tools/agbcc/lib/libc.a(.data);
+        tools/agbcc/lib/libc.a:syscalls.o(.rodata);
+        src/libisagbprn.o(.rodata);
     } =0
 
     other_data :

@@ -1,5 +1,3 @@
-@ the second big chunk of data
-
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/species.h"

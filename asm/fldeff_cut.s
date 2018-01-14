@@ -20,7 +20,7 @@ sub_80D3718: @ 80D3718
 	cmp r0, 0x1
 	bne _080D3754
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_80D3A9C
@@ -322,7 +322,7 @@ _080D395A:
 	bne _080D39F8
 _080D39BC:
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =hm2_ruin_valley
@@ -360,7 +360,7 @@ _080D3A18:
 	bne _080D3A2A
 _080D3A1E:
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =hm2_ruin_valley
