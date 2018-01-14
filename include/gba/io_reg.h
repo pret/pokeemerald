@@ -137,6 +137,8 @@
 #define REG_OFFSET_DMA3CNT_H   0xde
 
 #define REG_OFFSET_TMCNT       0x100
+#define REG_OFFSET_TMCNT_L     0x100
+#define REG_OFFSET_TMCNT_H     0x102
 #define REG_OFFSET_TM0CNT      0x100
 #define REG_OFFSET_TM0CNT_L    0x100
 #define REG_OFFSET_TM0CNT_H    0x102
@@ -298,6 +300,8 @@
 #define REG_ADDR_DMA3CNT_H   (REG_BASE + REG_OFFSET_DMA3CNT_H)
 
 #define REG_ADDR_TMCNT       (REG_BASE + REG_OFFSET_TMCNT)
+#define REG_ADDR_TMCNT_L     (REG_BASE + REG_OFFSET_TMCNT_L)
+#define REG_ADDR_TMCNT_H     (REG_BASE + REG_OFFSET_TMCNT_H)
 #define REG_ADDR_TM0CNT      (REG_BASE + REG_OFFSET_TM0CNT)
 #define REG_ADDR_TM0CNT_L    (REG_BASE + REG_OFFSET_TM0CNT_L)
 #define REG_ADDR_TM0CNT_H    (REG_BASE + REG_OFFSET_TM0CNT_H)
@@ -458,6 +462,8 @@
 #define REG_DMA3CNT_H   (*(vu16 *)REG_ADDR_DMA3CNT_H)
 
 #define REG_TMCNT(n)    (*(vu16 *)(REG_ADDR_TMCNT + ((n) * 4)))
+#define REG_TMCNT_L(n)  (*(vu16 *)(REG_ADDR_TMCNT_L + ((n) * 4)))
+#define REG_TMCNT_H(n)  (*(vu16 *)(REG_ADDR_TMCNT_H + ((n) * 4)))
 #define REG_TM0CNT      (*(vu32 *)REG_ADDR_TM0CNT)
 #define REG_TM0CNT_L    (*(vu16 *)REG_ADDR_TM0CNT_L)
 #define REG_TM0CNT_H    (*(vu16 *)REG_ADDR_TM0CNT_H)
@@ -660,7 +666,7 @@
 #define KEY_INTR_ENABLE 0x0400
 #define KEY_OR_INTR     0x0000
 #define KEY_AND_INTR    0x8000
-#define DPAD_ANY        0x00F0
+#define DPAD_ANY        ((DPAD_RIGHT | DPAD_LEFT | DPAD_UP | DPAD_DOWN))
 #define JOY_EXCL_DPAD   0x030F
 
 // interrupt flags
