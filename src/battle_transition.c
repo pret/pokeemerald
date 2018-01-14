@@ -18,6 +18,8 @@
 #include "malloc.h"
 #include "gpu_regs.h"
 #include "decompress.h"
+#include "bg.h"
+#include "blend_palette.h"
 
 struct TransitionData
 {
@@ -56,6 +58,8 @@ typedef bool8 (*TransitionSpriteCallback)(struct Sprite *sprite);
 
 extern u16 gUnknown_020393A8[];
 extern u16 gUnknown_02038C28[][0x3C0];
+extern u16 gBattle_BG0_X;
+extern u16 gBattle_BG0_Y;
 
 extern const struct OamData gFieldObjectBaseOam_32x32;
 
@@ -64,206 +68,205 @@ extern void sub_80AC3D0(void);
 extern void dp12_8087EA4(void);
 
 // this file's functions
-void LaunchBattleTransitionTask(u8 transitionId);
-void Task_BattleTransitionMain(u8 taskId);
-void Phase1Task_TransitionAll(u8 taskId);
-void Phase2Task_Blur(u8 taskId);
-void Phase2Task_Swirl(u8 taskId);
-void Phase2Task_Shuffle(u8 taskId);
-void Phase2Task_BigPokeball(u8 taskId);
-void Phase2Task_PokeballsTrail(u8 taskId);
-void Phase2Task_Clockwise_BlackFade(u8 taskId);
-void Phase2Task_Ripple(u8 taskId);
-void Phase2Task_Wave(u8 taskId);
-void Phase2Task_Slice(u8 taskId);
-void Phase2Task_WhiteFade(u8 taskId);
-void Phase2Task_GridSquares(u8 taskId);
-void Phase2Task_Shards(u8 taskId);
-void Phase2Task_Sydney(u8 taskId);
-void Phase2Task_Phoebe(u8 taskId);
-void Phase2Task_Glacia(u8 taskId);
-void Phase2Task_Drake(u8 taskId);
-void Phase2Task_Champion(u8 taskId);
-void Phase2Task_Aqua(u8 taskId);
-void Phase2Task_Magma(u8 taskId);
-void Phase2Task_Regice(u8 taskId);
-void Phase2Task_Registeel(u8 taskId);
-void Phase2Task_Regirock(u8 taskId);
-void Phase2Task_Kyogre(u8 taskId);
-void Phase2Task_Groudon(u8 taskId);
-void Phase2Task_Rayquaza(u8 taskId);
-void Phase2Task_ShredSplit(u8 taskId);
-void Phase2Task_Blackhole1(u8 taskId);
-void Phase2Task_Blackhole2(u8 taskId);
-void Phase2Task_RectangularSpiral(u8 taskId);
-void Phase2Task_29(u8 taskId);
-void Phase2Task_30(u8 taskId);
-void Phase2Task_31(u8 taskId);
-void Phase2Task_32(u8 taskId);
-void Phase2Task_33(u8 taskId);
-void VBlankCB_BattleTransition(void);
-void VBlankCB_Phase2_Swirl(void);
-void HBlankCB_Phase2_Swirl(void);
-void VBlankCB_Phase2_Shuffle(void);
-void HBlankCB_Phase2_Shuffle(void);
-void VBlankCB0_Phase2_BigPokeball(void);
-void VBlankCB1_Phase2_BigPokeball(void);
-void VBlankCB_Phase2_Clockwise_BlackFade(void);
-void VBlankCB_Phase2_Ripple(void);
-void HBlankCB_Phase2_Ripple(void);
-void VBlankCB_Phase2_30(void);
-void HBlankCB_Phase2_30(void);
-void VBlankCB_Phase2_Wave(void);
-void VBlankCB_Phase2_Slice(void);
-void HBlankCB_Phase2_Slice(void);
-void VBlankCB0_Phase2_WhiteFade(void);
-void VBlankCB1_Phase2_WhiteFade(void);
-void HBlankCB_Phase2_WhiteFade(void);
-void VBlankCB_Phase2_Shards(void);
-void VBlankCB_Phase2_Rayquaza(void);
-bool8 Phase2_Blur_Func1(struct Task *task);
-bool8 Phase2_Blur_Func2(struct Task *task);
-bool8 Phase2_Blur_Func3(struct Task *task);
-bool8 Phase2_Swirl_Func1(struct Task *task);
-bool8 Phase2_Swirl_Func2(struct Task *task);
-bool8 Phase2_Shuffle_Func1(struct Task *task);
-bool8 Phase2_Shuffle_Func2(struct Task *task);
-bool8 Phase2_Aqua_Func1(struct Task *task);
-bool8 Phase2_Aqua_Func2(struct Task *task);
-bool8 Phase2_Magma_Func1(struct Task *task);
-bool8 Phase2_Magma_Func2(struct Task *task);
-bool8 Phase2_FramesCountdown(struct Task *task);
-bool8 Phase2_Regi_Func1(struct Task *task);
-bool8 Phase2_Regice_Func2(struct Task *task);
-bool8 Phase2_Registeel_Func2(struct Task *task);
-bool8 Phase2_Regirock_Func2(struct Task *task);
-bool8 Phase2_WeatherTrio_Func1(struct Task *task);
-bool8 Phase2_WaitPaletteFade(struct Task *task);
-bool8 Phase2_Kyogre_Func3(struct Task *task);
-bool8 Phase2_Kyogre_Func4(struct Task *task);
-bool8 Phase2_Kyogre_Func5(struct Task *task);
-bool8 Phase2_Groudon_Func3(struct Task *task);
-bool8 Phase2_Groudon_Func4(struct Task *task);
-bool8 Phase2_Groudon_Func5(struct Task *task);
-bool8 Phase2_WeatherDuo_Func6(struct Task *task);
-bool8 Phase2_WeatherDuo_Func7(struct Task *task);
-bool8 Phase2_BigPokeball_Func1(struct Task *task);
-bool8 Phase2_BigPokeball_Func2(struct Task *task);
-bool8 Phase2_BigPokeball_Func3(struct Task *task);
-bool8 Phase2_BigPokeball_Func4(struct Task *task);
-bool8 Phase2_BigPokeball_Func5(struct Task *task);
-bool8 Phase2_BigPokeball_Func6(struct Task *task);
-bool8 Phase2_PokeballsTrail_Func1(struct Task *task);
-bool8 Phase2_PokeballsTrail_Func2(struct Task *task);
-bool8 Phase2_PokeballsTrail_Func3(struct Task *task);
-bool8 Phase2_Clockwise_BlackFade_Func1(struct Task *task);
-bool8 Phase2_Clockwise_BlackFade_Func2(struct Task *task);
-bool8 Phase2_Clockwise_BlackFade_Func3(struct Task *task);
-bool8 Phase2_Clockwise_BlackFade_Func4(struct Task *task);
-bool8 Phase2_Clockwise_BlackFade_Func5(struct Task *task);
-bool8 Phase2_Clockwise_BlackFade_Func6(struct Task *task);
-bool8 Phase2_Clockwise_BlackFade_Func7(struct Task *task);
-bool8 Phase2_Ripple_Func1(struct Task *task);
-bool8 Phase2_Ripple_Func2(struct Task *task);
-bool8 Phase2_Wave_Func1(struct Task *task);
-bool8 Phase2_Wave_Func2(struct Task *task);
-bool8 Phase2_Wave_Func3(struct Task *task);
-bool8 Phase2_Slice_Func1(struct Task *task);
-bool8 Phase2_Slice_Func2(struct Task *task);
-bool8 Phase2_Slice_Func3(struct Task *task);
-bool8 Phase2_WhiteFade_Func1(struct Task *task);
-bool8 Phase2_WhiteFade_Func2(struct Task *task);
-bool8 Phase2_WhiteFade_Func3(struct Task *task);
-bool8 Phase2_WhiteFade_Func4(struct Task *task);
-bool8 Phase2_WhiteFade_Func5(struct Task *task);
-bool8 Phase2_GridSquares_Func1(struct Task *task);
-bool8 Phase2_GridSquares_Func2(struct Task *task);
-bool8 Phase2_GridSquares_Func3(struct Task *task);
-bool8 Phase2_Shards_Func1(struct Task *task);
-bool8 Phase2_Shards_Func2(struct Task *task);
-bool8 Phase2_Shards_Func3(struct Task *task);
-bool8 Phase2_Shards_Func4(struct Task *task);
-bool8 Phase2_Shards_Func5(struct Task *task);
-bool8 Phase2_ShredSplit_Func1(struct Task *task);
-bool8 Phase2_ShredSplit_Func2(struct Task *task);
-bool8 Phase2_ShredSplit_Func3(struct Task *task);
-bool8 Phase2_ShredSplit_Func4(struct Task *task);
-bool8 Phase2_Blackhole_Func1(struct Task *task);
-bool8 Phase2_Blackhole1_Func2(struct Task *task);
-bool8 Phase2_Blackhole1_Func3(struct Task *task);
-bool8 Phase2_Blackhole2_Func2(struct Task *task);
-bool8 Phase2_RectangularSpiral_Func1(struct Task *task);
-bool8 Phase2_RectangularSpiral_Func2(struct Task *task);
-bool8 Phase2_RectangularSpiral_Func3(struct Task *task);
-bool8 Phase2_29_Func1(struct Task *task);
-bool8 Phase2_29_Func2(struct Task *task);
-bool8 Phase2_30_Func1(struct Task *task);
-bool8 Phase2_30_Func2(struct Task *task);
-bool8 Phase2_30_Func3(struct Task *task);
-bool8 Phase2_30_Func4(struct Task *task);
-bool8 Phase2_Rayquaza_Func3(struct Task *task);
-bool8 Phase2_Rayquaza_Func4(struct Task *task);
-bool8 Phase2_Rayquaza_Func5(struct Task *task);
-bool8 Phase2_Rayquaza_Func6(struct Task *task);
-bool8 Phase2_Rayquaza_Func7(struct Task *task);
-bool8 Phase2_Rayquaza_Func8(struct Task *task);
-bool8 Phase2_Rayquaza_Func9(struct Task *task);
-bool8 Phase2_31_Func1(struct Task *task);
-bool8 Phase2_31_Func2(struct Task *task);
-bool8 Phase2_31_Func3(struct Task *task);
-bool8 Phase2_31_33_Func5(struct Task *task);
-bool8 Phase2_33_Func1(struct Task *task);
-bool8 Phase2_33_Func2(struct Task *task);
-bool8 Phase2_33_Func3(struct Task *task);
-bool8 Phase2_33_Func4(struct Task *task);
-bool8 Phase2_32_Func1(struct Task *task);
-bool8 Phase2_32_Func2(struct Task *task);
-bool8 Phase2_32_Func3(struct Task *task);
-bool8 Phase2_32_Func4(struct Task *task);
-bool8 Phase2_32_Func5(struct Task *task);
-bool8 Phase2_Mugshot_Func1(struct Task *task);
-bool8 Phase2_Mugshot_Func2(struct Task *task);
-bool8 Phase2_Mugshot_Func3(struct Task *task);
-bool8 Phase2_Mugshot_Func4(struct Task *task);
-bool8 Phase2_Mugshot_Func5(struct Task *task);
-bool8 Phase2_Mugshot_Func6(struct Task *task);
-bool8 Phase2_Mugshot_Func7(struct Task *task);
-bool8 Phase2_Mugshot_Func8(struct Task *task);
-bool8 Phase2_Mugshot_Func9(struct Task *task);
-bool8 Phase2_Mugshot_Func10(struct Task *task);
-void Phase2Task_MugShotTransition(u8 taskId);
-void Mugshots_CreateOpponentPlayerSprites(struct Task *task);
-void VBlankCB0_Phase2_Mugshots(void);
-void VBlankCB1_Phase2_Mugshots(void);
-void HBlankCB_Phase2_Mugshots(void);
-bool8 Transition_Phase1(struct Task *task);
-bool8 Transition_WaitForPhase1(struct Task *task);
-bool8 Transition_Phase2(struct Task *task);
-bool8 Transition_WaitForPhase2(struct Task *task);
-void sub_8149F08(void);
-void sub_8149F84(void);
-void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4);
-void sub_814A014(u16 *a0, s16 a1, s16 a2, s16 a3);
-void sub_8149F98(s16 *array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 amplitude, s16 arrSize);
-void sub_8149F58(u16 **a0, u16 **a1);
-void sub_8149F40(u16 **a0);
-void sub_814A1AC(s16 *a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6);
-bool8 sub_814A228(s16 *a0, bool8 a1, bool8 a2);
-void sub_8148484(s16 spriteId, s16 value);
-void sub_814849C(s16 spriteId);
-s16 sub_81484B8(s16 spriteId);
-bool8 Phase1_TransitionAll_Func1(struct Task *task);
-bool8 Phase1_TransitionAll_Func2(struct Task *task);
-bool8 IsPhase1Done(void);
-bool16 sub_8149048(const s16 * const *arg0, struct StructRectangularSpiral *arg1);
-void sub_814713C(struct Sprite *sprite);
-void sub_8148380(struct Sprite *sprite);
-void sub_8149864(struct Sprite *sprite);
-bool8 sub_81483A8(struct Sprite *sprite);
-bool8 sub_81483AC(struct Sprite *sprite);
-bool8 sub_81483F8(struct Sprite *sprite);
-bool8 sub_814842C(struct Sprite *sprite);
-bool8 sub_8148458(struct Sprite *sprite);
+static void LaunchBattleTransitionTask(u8 transitionId);
+static void Task_BattleTransitionMain(u8 taskId);
+static void Phase1Task_TransitionAll(u8 taskId);
+static void Phase2Task_Blur(u8 taskId);
+static void Phase2Task_Swirl(u8 taskId);
+static void Phase2Task_Shuffle(u8 taskId);
+static void Phase2Task_BigPokeball(u8 taskId);
+static void Phase2Task_PokeballsTrail(u8 taskId);
+static void Phase2Task_Clockwise_BlackFade(u8 taskId);
+static void Phase2Task_Ripple(u8 taskId);
+static void Phase2Task_Wave(u8 taskId);
+static void Phase2Task_Slice(u8 taskId);
+static void Phase2Task_WhiteFade(u8 taskId);
+static void Phase2Task_GridSquares(u8 taskId);
+static void Phase2Task_Shards(u8 taskId);
+static void Phase2Task_Sydney(u8 taskId);
+static void Phase2Task_Phoebe(u8 taskId);
+static void Phase2Task_Glacia(u8 taskId);
+static void Phase2Task_Drake(u8 taskId);
+static void Phase2Task_Champion(u8 taskId);
+static void Phase2Task_Aqua(u8 taskId);
+static void Phase2Task_Magma(u8 taskId);
+static void Phase2Task_Regice(u8 taskId);
+static void Phase2Task_Registeel(u8 taskId);
+static void Phase2Task_Regirock(u8 taskId);
+static void Phase2Task_Kyogre(u8 taskId);
+static void Phase2Task_Groudon(u8 taskId);
+static void Phase2Task_Rayquaza(u8 taskId);
+static void Phase2Task_ShredSplit(u8 taskId);
+static void Phase2Task_Blackhole1(u8 taskId);
+static void Phase2Task_Blackhole2(u8 taskId);
+static void Phase2Task_RectangularSpiral(u8 taskId);
+static void Phase2Task_29(u8 taskId);
+static void Phase2Task_30(u8 taskId);
+static void Phase2Task_31(u8 taskId);
+static void Phase2Task_32(u8 taskId);
+static void Phase2Task_33(u8 taskId);
+static void VBlankCB_BattleTransition(void);
+static void VBlankCB_Phase2_Swirl(void);
+static void HBlankCB_Phase2_Swirl(void);
+static void VBlankCB_Phase2_Shuffle(void);
+static void HBlankCB_Phase2_Shuffle(void);
+static void VBlankCB0_Phase2_BigPokeball(void);
+static void VBlankCB1_Phase2_BigPokeball(void);
+static void VBlankCB_Phase2_Clockwise_BlackFade(void);
+static void VBlankCB_Phase2_Ripple(void);
+static void HBlankCB_Phase2_Ripple(void);
+static void VBlankCB_Phase2_30(void);
+static void HBlankCB_Phase2_30(void);
+static void VBlankCB_Phase2_Wave(void);
+static void VBlankCB_Phase2_Slice(void);
+static void HBlankCB_Phase2_Slice(void);
+static void VBlankCB0_Phase2_WhiteFade(void);
+static void VBlankCB1_Phase2_WhiteFade(void);
+static void HBlankCB_Phase2_WhiteFade(void);
+static void VBlankCB_Phase2_Shards(void);
+static void VBlankCB_Phase2_Rayquaza(void);
+static bool8 Phase2_Blur_Func1(struct Task *task);
+static bool8 Phase2_Blur_Func2(struct Task *task);
+static bool8 Phase2_Blur_Func3(struct Task *task);
+static bool8 Phase2_Swirl_Func1(struct Task *task);
+static bool8 Phase2_Swirl_Func2(struct Task *task);
+static bool8 Phase2_Shuffle_Func1(struct Task *task);
+static bool8 Phase2_Shuffle_Func2(struct Task *task);
+static bool8 Phase2_Aqua_Func1(struct Task *task);
+static bool8 Phase2_Aqua_Func2(struct Task *task);
+static bool8 Phase2_Magma_Func1(struct Task *task);
+static bool8 Phase2_Magma_Func2(struct Task *task);
+static bool8 Phase2_FramesCountdown(struct Task *task);
+static bool8 Phase2_Regi_Func1(struct Task *task);
+static bool8 Phase2_Regice_Func2(struct Task *task);
+static bool8 Phase2_Registeel_Func2(struct Task *task);
+static bool8 Phase2_Regirock_Func2(struct Task *task);
+static bool8 Phase2_WeatherTrio_Func1(struct Task *task);
+static bool8 Phase2_WaitPaletteFade(struct Task *task);
+static bool8 Phase2_Kyogre_Func3(struct Task *task);
+static bool8 Phase2_Kyogre_Func4(struct Task *task);
+static bool8 Phase2_Kyogre_Func5(struct Task *task);
+static bool8 Phase2_Groudon_Func3(struct Task *task);
+static bool8 Phase2_Groudon_Func4(struct Task *task);
+static bool8 Phase2_Groudon_Func5(struct Task *task);
+static bool8 Phase2_WeatherDuo_Func6(struct Task *task);
+static bool8 Phase2_WeatherDuo_Func7(struct Task *task);
+static bool8 Phase2_BigPokeball_Func1(struct Task *task);
+static bool8 Phase2_BigPokeball_Func2(struct Task *task);
+static bool8 Phase2_BigPokeball_Func3(struct Task *task);
+static bool8 Phase2_BigPokeball_Func4(struct Task *task);
+static bool8 Phase2_BigPokeball_Func5(struct Task *task);
+static bool8 Phase2_BigPokeball_Func6(struct Task *task);
+static bool8 Phase2_PokeballsTrail_Func1(struct Task *task);
+static bool8 Phase2_PokeballsTrail_Func2(struct Task *task);
+static bool8 Phase2_PokeballsTrail_Func3(struct Task *task);
+static bool8 Phase2_Clockwise_BlackFade_Func1(struct Task *task);
+static bool8 Phase2_Clockwise_BlackFade_Func2(struct Task *task);
+static bool8 Phase2_Clockwise_BlackFade_Func3(struct Task *task);
+static bool8 Phase2_Clockwise_BlackFade_Func4(struct Task *task);
+static bool8 Phase2_Clockwise_BlackFade_Func5(struct Task *task);
+static bool8 Phase2_Clockwise_BlackFade_Func6(struct Task *task);
+static bool8 Phase2_Clockwise_BlackFade_Func7(struct Task *task);
+static bool8 Phase2_Ripple_Func1(struct Task *task);
+static bool8 Phase2_Ripple_Func2(struct Task *task);
+static bool8 Phase2_Wave_Func1(struct Task *task);
+static bool8 Phase2_Wave_Func2(struct Task *task);
+static bool8 Phase2_Wave_Func3(struct Task *task);
+static bool8 Phase2_Slice_Func1(struct Task *task);
+static bool8 Phase2_Slice_Func2(struct Task *task);
+static bool8 Phase2_Slice_Func3(struct Task *task);
+static bool8 Phase2_WhiteFade_Func1(struct Task *task);
+static bool8 Phase2_WhiteFade_Func2(struct Task *task);
+static bool8 Phase2_WhiteFade_Func3(struct Task *task);
+static bool8 Phase2_WhiteFade_Func4(struct Task *task);
+static bool8 Phase2_WhiteFade_Func5(struct Task *task);
+static bool8 Phase2_GridSquares_Func1(struct Task *task);
+static bool8 Phase2_GridSquares_Func2(struct Task *task);
+static bool8 Phase2_GridSquares_Func3(struct Task *task);
+static bool8 Phase2_Shards_Func1(struct Task *task);
+static bool8 Phase2_Shards_Func2(struct Task *task);
+static bool8 Phase2_Shards_Func3(struct Task *task);
+static bool8 Phase2_Shards_Func4(struct Task *task);
+static bool8 Phase2_Shards_Func5(struct Task *task);
+static bool8 Phase2_ShredSplit_Func1(struct Task *task);
+static bool8 Phase2_ShredSplit_Func2(struct Task *task);
+static bool8 Phase2_ShredSplit_Func3(struct Task *task);
+static bool8 Phase2_ShredSplit_Func4(struct Task *task);
+static bool8 Phase2_Blackhole_Func1(struct Task *task);
+static bool8 Phase2_Blackhole1_Func2(struct Task *task);
+static bool8 Phase2_Blackhole1_Func3(struct Task *task);
+static bool8 Phase2_Blackhole2_Func2(struct Task *task);
+static bool8 Phase2_RectangularSpiral_Func1(struct Task *task);
+static bool8 Phase2_RectangularSpiral_Func2(struct Task *task);
+static bool8 Phase2_RectangularSpiral_Func3(struct Task *task);
+static bool8 Phase2_29_Func1(struct Task *task);
+static bool8 Phase2_29_Func2(struct Task *task);
+static bool8 Phase2_30_Func1(struct Task *task);
+static bool8 Phase2_30_Func2(struct Task *task);
+static bool8 Phase2_30_Func3(struct Task *task);
+static bool8 Phase2_30_Func4(struct Task *task);
+static bool8 Phase2_Rayquaza_Func3(struct Task *task);
+static bool8 Phase2_Rayquaza_Func4(struct Task *task);
+static bool8 Phase2_Rayquaza_Func5(struct Task *task);
+static bool8 Phase2_Rayquaza_Func6(struct Task *task);
+static bool8 Phase2_Rayquaza_Func7(struct Task *task);
+static bool8 Phase2_Rayquaza_Func8(struct Task *task);
+static bool8 Phase2_Rayquaza_Func9(struct Task *task);
+static bool8 Phase2_31_Func1(struct Task *task);
+static bool8 Phase2_31_Func2(struct Task *task);
+static bool8 Phase2_31_Func3(struct Task *task);
+static bool8 Phase2_31_33_Func5(struct Task *task);
+static bool8 Phase2_33_Func1(struct Task *task);
+static bool8 Phase2_33_Func2(struct Task *task);
+static bool8 Phase2_33_Func3(struct Task *task);
+static bool8 Phase2_33_Func4(struct Task *task);
+static bool8 Phase2_32_Func1(struct Task *task);
+static bool8 Phase2_32_Func2(struct Task *task);
+static bool8 Phase2_32_Func3(struct Task *task);
+static bool8 Phase2_32_Func4(struct Task *task);
+static bool8 Phase2_32_Func5(struct Task *task);
+static bool8 Phase2_Mugshot_Func1(struct Task *task);
+static bool8 Phase2_Mugshot_Func2(struct Task *task);
+static bool8 Phase2_Mugshot_Func3(struct Task *task);
+static bool8 Phase2_Mugshot_Func4(struct Task *task);
+static bool8 Phase2_Mugshot_Func5(struct Task *task);
+static bool8 Phase2_Mugshot_Func6(struct Task *task);
+static bool8 Phase2_Mugshot_Func7(struct Task *task);
+static bool8 Phase2_Mugshot_Func8(struct Task *task);
+static bool8 Phase2_Mugshot_Func9(struct Task *task);
+static bool8 Phase2_Mugshot_Func10(struct Task *task);
+static void Phase2Task_MugShotTransition(u8 taskId);
+static void Mugshots_CreateOpponentPlayerSprites(struct Task *task);
+static void VBlankCB0_Phase2_Mugshots(void);
+static void VBlankCB1_Phase2_Mugshots(void);
+static void HBlankCB_Phase2_Mugshots(void);
+static bool8 Transition_Phase1(struct Task *task);
+static bool8 Transition_WaitForPhase1(struct Task *task);
+static bool8 Transition_Phase2(struct Task *task);
+static bool8 Transition_WaitForPhase2(struct Task *task);
+static void sub_8149F08(void);
+static void sub_8149F84(void);
+static void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4);
+static void sub_814A014(u16 *a0, s16 a1, s16 a2, s16 a3);
+static void sub_8149F98(s16 *array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 amplitude, s16 arrSize);
+static void sub_8149F40(u16 **a0);
+static void sub_814A1AC(s16 *a0, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6);
+static bool8 sub_814A228(s16 *a0, bool8 a1, bool8 a2);
+static void sub_8148484(s16 spriteId, s16 value);
+static void sub_814849C(s16 spriteId);
+static s16 sub_81484B8(s16 spriteId);
+static bool8 Phase1_TransitionAll_Func1(struct Task *task);
+static bool8 Phase1_TransitionAll_Func2(struct Task *task);
+static bool8 IsPhase1Done(void);
+static bool16 sub_8149048(const s16 * const *arg0, struct StructRectangularSpiral *arg1);
+static void sub_814713C(struct Sprite *sprite);
+static void sub_8148380(struct Sprite *sprite);
+static void sub_8149864(struct Sprite *sprite);
+static bool8 sub_81483A8(struct Sprite *sprite);
+static bool8 sub_81483AC(struct Sprite *sprite);
+static bool8 sub_81483F8(struct Sprite *sprite);
+static bool8 sub_814842C(struct Sprite *sprite);
+static bool8 sub_8148458(struct Sprite *sprite);
 
 // iwram bss vars
 IWRAM_DATA static s16 sUnusedRectangularSpiralVar;
@@ -275,53 +278,53 @@ IWRAM_DATA static struct StructRectangularSpiral sRectangularSpiralTransition[4]
 EWRAM_DATA static struct TransitionData *sTransitionStructPtr = NULL;
 
 // const rom data
-const u32 sBigPokeball_Tileset[] = INCBIN_U32("graphics/battle_transitions/big_pokeball.4bpp");
-const u32 sPokeballTrail_Tileset[] = INCBIN_U32("graphics/battle_transitions/pokeball_trail.4bpp");
-const u8 sSpriteImage_85B98F0[] = INCBIN_U8("graphics/battle_transitions/pokeball.4bpp");
-const u32 sUnknown_085B9AF0[] = INCBIN_U32("graphics/battle_transitions/elite_four_bg.4bpp");
-const u8 sSpriteImage_85B9CD0[] = INCBIN_U8("graphics/battle_transitions/unused_brendan.4bpp");
-const u8 sSpriteImage_85BA4D0[] = INCBIN_U8("graphics/battle_transitions/unused_lass.4bpp");
-const u32 sShrinkingBoxTileset[] = INCBIN_U32("graphics/battle_transitions/shrinking_box.4bpp");
-const u32 sEvilTeam_Palette[] = INCBIN_U32("graphics/battle_transitions/evil_team.gbapal");
-const u32 sTeamAqua_Tileset[] = INCBIN_U32("graphics/battle_transitions/team_aqua.4bpp.lz");
-const u32 sTeamAqua_Tilemap[] = INCBIN_U32("graphics/battle_transitions/team_aqua.bin.lz");
-const u32 sTeamMagma_Tileset[] = INCBIN_U32("graphics/battle_transitions/team_magma.4bpp.lz");
-const u32 sTeamMagma_Tilemap[] = INCBIN_U32("graphics/battle_transitions/team_magma.bin.lz");
-const u32 gUnknown_085BBC14[] = INCBIN_U32("graphics/battle_transitions/85BBC14.4bpp");
-const u32 gUnknown_085BC2B4[] = INCBIN_U32("graphics/battle_transitions/85BC2B4.gbapal");
-const u32 gUnknown_085BC2D4[] = INCBIN_U32("graphics/battle_transitions/85BC2D4.gbapal");
-const u32 gUnknown_085BC2F4[] = INCBIN_U32("graphics/battle_transitions/85BC2F4.gbapal");
-const u32 gUnknown_085BC314[] = INCBIN_U32("graphics/battle_transitions/85BC314.bin");
-const u32 gUnknown_085BCB14[] = INCBIN_U32("graphics/battle_transitions/85BCB14.bin");
-const u32 gUnknown_085BD314[] = INCBIN_U32("graphics/battle_transitions/85BD314.bin");
-const u16 gUnknown_085BDB14[] = INCBIN_U16("graphics/battle_transitions/85BDB14.gbapal");
-const u32 gUnknown_085BDB34[] = INCBIN_U32("graphics/battle_transitions/kyogre.4bpp.lz");
-const u32 gUnknown_085BE1E8[] = INCBIN_U32("graphics/battle_transitions/kyogre.bin.lz");
-const u32 gUnknown_085BE51C[] = INCBIN_U32("graphics/battle_transitions/groudon.4bpp.lz");
-const u32 gUnknown_085BEA88[] = INCBIN_U32("graphics/battle_transitions/groudon.bin.lz");
-const u16 gUnknown_085BEDA0[] = INCBIN_U16("graphics/battle_transitions/kyogre_pt1.gbapal");
-const u16 gUnknown_085BEEE0[] = INCBIN_U16("graphics/battle_transitions/kyogre_pt2.gbapal");
-const u16 gUnknown_085BF0A0[] = INCBIN_U16("graphics/battle_transitions/groudon_pt1.gbapal");
-const u16 gUnknown_085BF2A0[] = INCBIN_U16("graphics/battle_transitions/groudon_pt2.gbapal");
-const u16 gUnknown_085BF4A0[] = INCBIN_U16("graphics/battle_transitions/rayquaza.gbapal");
-const u32 gUnknown_085BF6A0[] = INCBIN_U32("graphics/battle_transitions/rayquaza.4bpp");
-const u32 gUnknown_085C6BE0[] = INCBIN_U32("graphics/battle_transitions/rayquaza.bin");
-const u32 gUnknown_085C7BE0[] = INCBIN_U32("graphics/battle_transitions/frontier_brain.gbapal");
-const u32 gUnknown_085C7C00[] = INCBIN_U32("graphics/battle_transitions/frontier_brain.4bpp.lz");
-const u32 gUnknown_085C828C[] = INCBIN_U32("graphics/battle_transitions/frontier_brain.bin.lz");
-const u32 gUnknown_085C8578[] = INCBIN_U32("graphics/battle_transitions/frontier_squares_blanktiles.gbapal");
-const u32 gUnknown_085C8598[] = INCBIN_U32("graphics/battle_transitions/frontier_square_1.4bpp.lz");
-const u32 gUnknown_085C86F4[] = INCBIN_U32("graphics/battle_transitions/frontier_square_2.4bpp.lz");
-const u32 gUnknown_085C87F4[] = INCBIN_U32("graphics/battle_transitions/frontier_square_3.4bpp.lz");
-const u32 gUnknown_085C88A4[] = INCBIN_U32("graphics/battle_transitions/frontier_square_4.4bpp.lz");
-const u32 gUnknown_085C8928[] = INCBIN_U32("graphics/battle_transitions/frontier_squares.bin");
+static const u32 sBigPokeball_Tileset[] = INCBIN_U32("graphics/battle_transitions/big_pokeball.4bpp");
+static const u32 sPokeballTrail_Tileset[] = INCBIN_U32("graphics/battle_transitions/pokeball_trail.4bpp");
+static const u8 sSpriteImage_85B98F0[] = INCBIN_U8("graphics/battle_transitions/pokeball.4bpp");
+static const u32 sUnknown_085B9AF0[] = INCBIN_U32("graphics/battle_transitions/elite_four_bg.4bpp");
+static const u8 sSpriteImage_85B9CD0[] = INCBIN_U8("graphics/battle_transitions/unused_brendan.4bpp");
+static const u8 sSpriteImage_85BA4D0[] = INCBIN_U8("graphics/battle_transitions/unused_lass.4bpp");
+static const u32 sShrinkingBoxTileset[] = INCBIN_U32("graphics/battle_transitions/shrinking_box.4bpp");
+static const u32 sEvilTeam_Palette[] = INCBIN_U32("graphics/battle_transitions/evil_team.gbapal");
+static const u32 sTeamAqua_Tileset[] = INCBIN_U32("graphics/battle_transitions/team_aqua.4bpp.lz");
+static const u32 sTeamAqua_Tilemap[] = INCBIN_U32("graphics/battle_transitions/team_aqua.bin.lz");
+static const u32 sTeamMagma_Tileset[] = INCBIN_U32("graphics/battle_transitions/team_magma.4bpp.lz");
+static const u32 sTeamMagma_Tilemap[] = INCBIN_U32("graphics/battle_transitions/team_magma.bin.lz");
+static const u32 gUnknown_085BBC14[] = INCBIN_U32("graphics/battle_transitions/85BBC14.4bpp");
+static const u32 gUnknown_085BC2B4[] = INCBIN_U32("graphics/battle_transitions/85BC2B4.gbapal");
+static const u32 gUnknown_085BC2D4[] = INCBIN_U32("graphics/battle_transitions/85BC2D4.gbapal");
+static const u32 gUnknown_085BC2F4[] = INCBIN_U32("graphics/battle_transitions/85BC2F4.gbapal");
+static const u32 gUnknown_085BC314[] = INCBIN_U32("graphics/battle_transitions/85BC314.bin");
+static const u32 gUnknown_085BCB14[] = INCBIN_U32("graphics/battle_transitions/85BCB14.bin");
+static const u32 gUnknown_085BD314[] = INCBIN_U32("graphics/battle_transitions/85BD314.bin");
+static const u16 gUnknown_085BDB14[] = INCBIN_U16("graphics/battle_transitions/85BDB14.gbapal");
+static const u32 gUnknown_085BDB34[] = INCBIN_U32("graphics/battle_transitions/kyogre.4bpp.lz");
+static const u32 gUnknown_085BE1E8[] = INCBIN_U32("graphics/battle_transitions/kyogre.bin.lz");
+static const u32 gUnknown_085BE51C[] = INCBIN_U32("graphics/battle_transitions/groudon.4bpp.lz");
+static const u32 gUnknown_085BEA88[] = INCBIN_U32("graphics/battle_transitions/groudon.bin.lz");
+static const u16 gUnknown_085BEDA0[] = INCBIN_U16("graphics/battle_transitions/kyogre_pt1.gbapal");
+static const u16 gUnknown_085BEEE0[] = INCBIN_U16("graphics/battle_transitions/kyogre_pt2.gbapal");
+static const u16 gUnknown_085BF0A0[] = INCBIN_U16("graphics/battle_transitions/groudon_pt1.gbapal");
+static const u16 gUnknown_085BF2A0[] = INCBIN_U16("graphics/battle_transitions/groudon_pt2.gbapal");
+static const u16 gUnknown_085BF4A0[] = INCBIN_U16("graphics/battle_transitions/rayquaza.gbapal");
+static const u32 gUnknown_085BF6A0[] = INCBIN_U32("graphics/battle_transitions/rayquaza.4bpp");
+static const u32 gUnknown_085C6BE0[] = INCBIN_U32("graphics/battle_transitions/rayquaza.bin");
+static const u32 gUnknown_085C7BE0[] = INCBIN_U32("graphics/battle_transitions/frontier_brain.gbapal");
+static const u32 gUnknown_085C7C00[] = INCBIN_U32("graphics/battle_transitions/frontier_brain.4bpp.lz");
+static const u32 gUnknown_085C828C[] = INCBIN_U32("graphics/battle_transitions/frontier_brain.bin.lz");
+static const u32 gUnknown_085C8578[] = INCBIN_U32("graphics/battle_transitions/frontier_squares_blanktiles.gbapal");
+static const u32 gUnknown_085C8598[] = INCBIN_U32("graphics/battle_transitions/frontier_square_1.4bpp.lz");
+static const u32 gUnknown_085C86F4[] = INCBIN_U32("graphics/battle_transitions/frontier_square_2.4bpp.lz");
+static const u32 gUnknown_085C87F4[] = INCBIN_U32("graphics/battle_transitions/frontier_square_3.4bpp.lz");
+static const u32 gUnknown_085C88A4[] = INCBIN_U32("graphics/battle_transitions/frontier_square_4.4bpp.lz");
+static const u32 gUnknown_085C8928[] = INCBIN_U32("graphics/battle_transitions/frontier_squares.bin");
 
-const TaskFunc sPhase1_Tasks[B_TRANSITION_COUNT] =
+static const TaskFunc sPhase1_Tasks[B_TRANSITION_COUNT] =
 {
     [0 ... B_TRANSITION_COUNT - 1] = &Phase1Task_TransitionAll
 };
 
-const TaskFunc sPhase2_Tasks[B_TRANSITION_COUNT] =
+static const TaskFunc sPhase2_Tasks[B_TRANSITION_COUNT] =
 {
     Phase2Task_Blur,                        // 0
     Phase2Task_Swirl,                       // 1
@@ -367,7 +370,7 @@ const TaskFunc sPhase2_Tasks[B_TRANSITION_COUNT] =
     Phase2Task_41,                          // 41
 };
 
-const TransitionStateFunc sMainTransitionPhases[] =
+static const TransitionStateFunc sMainTransitionPhases[] =
 {
     &Transition_Phase1,
     &Transition_WaitForPhase1,
@@ -375,26 +378,26 @@ const TransitionStateFunc sMainTransitionPhases[] =
     &Transition_WaitForPhase2
 };
 
-const TransitionStateFunc sPhase2_Blur_Funcs[] =
+static const TransitionStateFunc sPhase2_Blur_Funcs[] =
 {
     Phase2_Blur_Func1,
     Phase2_Blur_Func2,
     Phase2_Blur_Func3
 };
 
-const TransitionStateFunc sPhase2_Swirl_Funcs[] =
+static const TransitionStateFunc sPhase2_Swirl_Funcs[] =
 {
     Phase2_Swirl_Func1,
     Phase2_Swirl_Func2,
 };
 
-const TransitionStateFunc sPhase2_Shuffle_Funcs[] =
+static const TransitionStateFunc sPhase2_Shuffle_Funcs[] =
 {
     Phase2_Shuffle_Func1,
     Phase2_Shuffle_Func2,
 };
 
-const TransitionStateFunc sPhase2_Aqua_Funcs[] =
+static const TransitionStateFunc sPhase2_Aqua_Funcs[] =
 {
     Phase2_Aqua_Func1,
     Phase2_Aqua_Func2,
@@ -405,7 +408,7 @@ const TransitionStateFunc sPhase2_Aqua_Funcs[] =
     Phase2_BigPokeball_Func6
 };
 
-const TransitionStateFunc sPhase2_Magma_Funcs[] =
+static const TransitionStateFunc sPhase2_Magma_Funcs[] =
 {
     Phase2_Magma_Func1,
     Phase2_Magma_Func2,
@@ -416,7 +419,7 @@ const TransitionStateFunc sPhase2_Magma_Funcs[] =
     Phase2_BigPokeball_Func6
 };
 
-const TransitionStateFunc sPhase2_BigPokeball_Funcs[] =
+static const TransitionStateFunc sPhase2_BigPokeball_Funcs[] =
 {
     Phase2_BigPokeball_Func1,
     Phase2_BigPokeball_Func2,
@@ -426,7 +429,7 @@ const TransitionStateFunc sPhase2_BigPokeball_Funcs[] =
     Phase2_BigPokeball_Func6
 };
 
-const TransitionStateFunc sPhase2_Regice_Funcs[] =
+static const TransitionStateFunc sPhase2_Regice_Funcs[] =
 {
     Phase2_Regi_Func1,
     Phase2_Regice_Func2,
@@ -436,7 +439,7 @@ const TransitionStateFunc sPhase2_Regice_Funcs[] =
     Phase2_BigPokeball_Func6
 };
 
-const TransitionStateFunc sPhase2_Registeel_Funcs[] =
+static const TransitionStateFunc sPhase2_Registeel_Funcs[] =
 {
     Phase2_Regi_Func1,
     Phase2_Registeel_Func2,
@@ -446,7 +449,7 @@ const TransitionStateFunc sPhase2_Registeel_Funcs[] =
     Phase2_BigPokeball_Func6
 };
 
-const TransitionStateFunc sPhase2_Regirock_Funcs[] =
+static const TransitionStateFunc sPhase2_Regirock_Funcs[] =
 {
     Phase2_Regi_Func1,
     Phase2_Regirock_Func2,
@@ -456,7 +459,7 @@ const TransitionStateFunc sPhase2_Regirock_Funcs[] =
     Phase2_BigPokeball_Func6
 };
 
-const TransitionStateFunc sPhase2_Kyogre_Funcs[] =
+static const TransitionStateFunc sPhase2_Kyogre_Funcs[] =
 {
     Phase2_WeatherTrio_Func1,
     Phase2_WaitPaletteFade,
@@ -468,18 +471,18 @@ const TransitionStateFunc sPhase2_Kyogre_Funcs[] =
     Phase2_WeatherDuo_Func7
 };
 
-const TransitionStateFunc sPhase2_PokeballsTrail_Funcs[] =
+static const TransitionStateFunc sPhase2_PokeballsTrail_Funcs[] =
 {
     Phase2_PokeballsTrail_Func1,
     Phase2_PokeballsTrail_Func2,
     Phase2_PokeballsTrail_Func3
 };
 
-const s16 sUnknown_085C8B88[2] = {-16, 256};
-const s16 sUnknown_085C8B8C[5] = {0, 32, 64, 18, 48};
-const s16 sUnknown_085C8B96[2] = {8, -8};
+static const s16 sUnknown_085C8B88[2] = {-16, 256};
+static const s16 sUnknown_085C8B8C[5] = {0, 32, 64, 18, 48};
+static const s16 sUnknown_085C8B96[2] = {8, -8};
 
-const TransitionStateFunc sPhase2_Clockwise_BlackFade_Funcs[] =
+static const TransitionStateFunc sPhase2_Clockwise_BlackFade_Funcs[] =
 {
     Phase2_Clockwise_BlackFade_Func1,
     Phase2_Clockwise_BlackFade_Func2,
@@ -490,20 +493,20 @@ const TransitionStateFunc sPhase2_Clockwise_BlackFade_Funcs[] =
     Phase2_Clockwise_BlackFade_Func7
 };
 
-const TransitionStateFunc sPhase2_Ripple_Funcs[] =
+static const TransitionStateFunc sPhase2_Ripple_Funcs[] =
 {
     Phase2_Ripple_Func1,
     Phase2_Ripple_Func2
 };
 
-const TransitionStateFunc sPhase2_Wave_Funcs[] =
+static const TransitionStateFunc sPhase2_Wave_Funcs[] =
 {
     Phase2_Wave_Func1,
     Phase2_Wave_Func2,
     Phase2_Wave_Func3
 };
 
-const TransitionStateFunc sPhase2_Mugshot_Funcs[] =
+static const TransitionStateFunc sPhase2_Mugshot_Funcs[] =
 {
     Phase2_Mugshot_Func1,
     Phase2_Mugshot_Func2,
@@ -517,7 +520,7 @@ const TransitionStateFunc sPhase2_Mugshot_Funcs[] =
     Phase2_Mugshot_Func10
 };
 
-const u8 sMugshotsTrainerPicIDsTable[MUGSHOTS_COUNT] =
+static const u8 sMugshotsTrainerPicIDsTable[MUGSHOTS_COUNT] =
 {
     TRAINER_PIC_ELITE_FOUR_SIDNEY,
     TRAINER_PIC_ELITE_FOUR_PHOEBE,
@@ -525,7 +528,7 @@ const u8 sMugshotsTrainerPicIDsTable[MUGSHOTS_COUNT] =
     TRAINER_PIC_ELITE_FOUR_DRAKE,
     TRAINER_PIC_CHAMPION_WALLACE
 };
-const s16 sMugshotsOpponentRotationScales[MUGSHOTS_COUNT][2] =
+static const s16 sMugshotsOpponentRotationScales[MUGSHOTS_COUNT][2] =
 {
     {0x200, 0x200},
     {0x200, 0x200},
@@ -533,7 +536,7 @@ const s16 sMugshotsOpponentRotationScales[MUGSHOTS_COUNT][2] =
     {0x1A0, 0x1A0},
     {0x188, 0x188},
 };
-const s16 sMugshotsOpponentCoords[MUGSHOTS_COUNT][2] =
+static const s16 sMugshotsOpponentCoords[MUGSHOTS_COUNT][2] =
 {
     {0,     0},
     {0,     0},
@@ -542,7 +545,7 @@ const s16 sMugshotsOpponentCoords[MUGSHOTS_COUNT][2] =
     {-8,    7},
 };
 
-const TransitionSpriteCallback sUnknown_085C8C24[] =
+static const TransitionSpriteCallback sUnknown_085C8C24[] =
 {
     sub_81483A8,
     sub_81483AC,
@@ -553,17 +556,17 @@ const TransitionSpriteCallback sUnknown_085C8C24[] =
     sub_81483A8
 };
 
-const s16 sUnknown_085C8C40[2] = {12, -12};
-const s16 sUnknown_085C8C44[2] = {-1, 1};
+static const s16 sUnknown_085C8C40[2] = {12, -12};
+static const s16 sUnknown_085C8C44[2] = {-1, 1};
 
-const TransitionStateFunc sPhase2_Slice_Funcs[] =
+static const TransitionStateFunc sPhase2_Slice_Funcs[] =
 {
     Phase2_Slice_Func1,
     Phase2_Slice_Func2,
     Phase2_Slice_Func3
 };
 
-const TransitionStateFunc sPhase2_ShredSplit_Funcs[] =
+static const TransitionStateFunc sPhase2_ShredSplit_Funcs[] =
 {
     Phase2_ShredSplit_Func1,
     Phase2_ShredSplit_Func2,
@@ -571,49 +574,49 @@ const TransitionStateFunc sPhase2_ShredSplit_Funcs[] =
     Phase2_ShredSplit_Func4
 };
 
-const u8 gUnknown_085C8C64[] = {39, 119};
-const s16 gUnknown_085C8C66[] = {1, -1};
+static const u8 gUnknown_085C8C64[] = {39, 119};
+static const s16 gUnknown_085C8C66[] = {1, -1};
 
-const TransitionStateFunc sPhase2_Blackhole1_Funcs[] =
+static const TransitionStateFunc sPhase2_Blackhole1_Funcs[] =
 {
     Phase2_Blackhole_Func1,
     Phase2_Blackhole1_Func2,
     Phase2_Blackhole1_Func3
 };
 
-const TransitionStateFunc sPhase2_Blackhole2_Funcs[] =
+static const TransitionStateFunc sPhase2_Blackhole2_Funcs[] =
 {
     Phase2_Blackhole_Func1,
     Phase2_Blackhole2_Func2
 };
 
-const s16 gUnknown_085C8C80[] = {-6, 4};
+static const s16 gUnknown_085C8C80[] = {-6, 4};
 
-const TransitionStateFunc sPhase2_RectangularSpiral_Funcs[] =
+static const TransitionStateFunc sPhase2_RectangularSpiral_Funcs[] =
 {
     Phase2_RectangularSpiral_Func1,
     Phase2_RectangularSpiral_Func2,
     Phase2_RectangularSpiral_Func3
 };
 
-const s16 gUnknown_085C8C90[] = {1, 27, 275, -1};
-const s16 gUnknown_085C8C98[] = {2, 486, -1};
-const s16 gUnknown_085C8C9E[] = {3, 262, -1};
-const s16 gUnknown_085C8CA4[] = {4, 507, -2};
-const s16 gUnknown_085C8CAA[] = {1, 213, -1};
-const s16 gUnknown_085C8CB0[] = {2, 548, -2};
-const s16 gUnknown_085C8CB6[] = {3, 196, -1};
-const s16 gUnknown_085C8CBC[] = {4, 573, 309, -1};
-const s16 gUnknown_085C8CC4[] = {1, 474, -1};
-const s16 gUnknown_085C8CCA[] = {2, 295, 32, -1};
-const s16 gUnknown_085C8CD2[] = {3, 58, -1};
-const s16 gUnknown_085C8CD8[] = {4, 455, -1};
-const s16 gUnknown_085C8CDE[] = {1, 540, -1};
-const s16 gUnknown_085C8CE4[] = {2, 229, -1};
-const s16 gUnknown_085C8CEA[] = {3, 244, 28, -1};
-const s16 gUnknown_085C8CF2[] = {4, 517, -1};
+static const s16 gUnknown_085C8C90[] = {1, 27, 275, -1};
+static const s16 gUnknown_085C8C98[] = {2, 486, -1};
+static const s16 gUnknown_085C8C9E[] = {3, 262, -1};
+static const s16 gUnknown_085C8CA4[] = {4, 507, -2};
+static const s16 gUnknown_085C8CAA[] = {1, 213, -1};
+static const s16 gUnknown_085C8CB0[] = {2, 548, -2};
+static const s16 gUnknown_085C8CB6[] = {3, 196, -1};
+static const s16 gUnknown_085C8CBC[] = {4, 573, 309, -1};
+static const s16 gUnknown_085C8CC4[] = {1, 474, -1};
+static const s16 gUnknown_085C8CCA[] = {2, 295, 32, -1};
+static const s16 gUnknown_085C8CD2[] = {3, 58, -1};
+static const s16 gUnknown_085C8CD8[] = {4, 455, -1};
+static const s16 gUnknown_085C8CDE[] = {1, 540, -1};
+static const s16 gUnknown_085C8CE4[] = {2, 229, -1};
+static const s16 gUnknown_085C8CEA[] = {3, 244, 28, -1};
+static const s16 gUnknown_085C8CF2[] = {4, 517, -1};
 
-const s16 *const gUnknown_085C8CF8[] =
+static const s16 *const gUnknown_085C8CF8[] =
 {
 	gUnknown_085C8C90,
 	gUnknown_085C8CA4,
@@ -625,7 +628,7 @@ const s16 *const gUnknown_085C8CF8[] =
 	gUnknown_085C8CDE
 };
 
-const s16 *const gUnknown_085C8D18[] =
+static const s16 *const gUnknown_085C8D18[] =
 {
 	gUnknown_085C8CBC,
 	gUnknown_085C8CB0,
@@ -637,13 +640,13 @@ const s16 *const gUnknown_085C8D18[] =
 	gUnknown_085C8CD2
 };
 
-const s16 *const *const gUnknown_085C8D38[] =
+static const s16 *const *const gUnknown_085C8D38[] =
 {
 	gUnknown_085C8CF8,
 	gUnknown_085C8D18
 };
 
-const TransitionStateFunc sPhase2_Groudon_Funcs[] =
+static const TransitionStateFunc sPhase2_Groudon_Funcs[] =
 {
     Phase2_WeatherTrio_Func1,
     Phase2_WaitPaletteFade,
@@ -655,7 +658,7 @@ const TransitionStateFunc sPhase2_Groudon_Funcs[] =
     Phase2_WeatherDuo_Func7
 };
 
-const TransitionStateFunc sPhase2_Rayquaza_Funcs[] =
+static const TransitionStateFunc sPhase2_Rayquaza_Funcs[] =
 {
     Phase2_WeatherTrio_Func1,
     Phase2_WaitPaletteFade,
@@ -670,7 +673,7 @@ const TransitionStateFunc sPhase2_Rayquaza_Funcs[] =
     Phase2_Blackhole1_Func3
 };
 
-const TransitionStateFunc sPhase2_WhiteFade_Funcs[] =
+static const TransitionStateFunc sPhase2_WhiteFade_Funcs[] =
 {
     Phase2_WhiteFade_Func1,
     Phase2_WhiteFade_Func2,
@@ -679,16 +682,16 @@ const TransitionStateFunc sPhase2_WhiteFade_Funcs[] =
     Phase2_WhiteFade_Func5
 };
 
-const s16 sUnknown_085C8DA0[] = {0, 20, 15, 40, 10, 25, 35, 5};
+static const s16 sUnknown_085C8DA0[] = {0, 20, 15, 40, 10, 25, 35, 5};
 
-const TransitionStateFunc sPhase2_GridSquares_Funcs[] =
+static const TransitionStateFunc sPhase2_GridSquares_Funcs[] =
 {
     Phase2_GridSquares_Func1,
     Phase2_GridSquares_Func2,
     Phase2_GridSquares_Func3
 };
 
-const TransitionStateFunc sPhase2_Shards_Funcs[] =
+static const TransitionStateFunc sPhase2_Shards_Funcs[] =
 {
     Phase2_Shards_Func1,
     Phase2_Shards_Func2,
@@ -697,7 +700,7 @@ const TransitionStateFunc sPhase2_Shards_Funcs[] =
     Phase2_Shards_Func5
 };
 
-const s16 sUnknown_085C8DD0[][5] =
+static const s16 sUnknown_085C8DD0[][5] =
 {
     {56,    0,      0,      160,    0},
     {104,   160,    240,    88,     1},
@@ -708,49 +711,49 @@ const s16 sUnknown_085C8DD0[][5] =
     {168,   160,    48,     0,      1},
 };
 
-const s16 sUnknown_085C8E16[] = {8, 4, 2, 1, 1, 1, 0};
+static const s16 sUnknown_085C8E16[] = {8, 4, 2, 1, 1, 1, 0};
 
-const TransitionStateFunc sPhase1_TransitionAll_Funcs[] =
+static const TransitionStateFunc sPhase1_TransitionAll_Funcs[] =
 {
     Phase1_TransitionAll_Func1,
     Phase1_TransitionAll_Func2
 };
 
-const struct SpriteFrameImage sSpriteImageTable_85C8E2C[] =
+static const struct SpriteFrameImage sSpriteImageTable_85C8E2C[] =
 {
     sSpriteImage_85B98F0, 0x200
 };
 
-const union AnimCmd sSpriteAnim_85C8E34[] =
+static const union AnimCmd sSpriteAnim_85C8E34[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd *const sSpriteAnimTable_85C8E3C[] =
+static const union AnimCmd *const sSpriteAnimTable_85C8E3C[] =
 {
     sSpriteAnim_85C8E34
 };
 
-const union AffineAnimCmd sSpriteAffineAnim_85C8E40[] =
+static const union AffineAnimCmd sSpriteAffineAnim_85C8E40[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, -4, 1),
     AFFINEANIMCMD_JUMP(0)
 };
 
-const union AffineAnimCmd sSpriteAffineAnim_85C8E50[] =
+static const union AffineAnimCmd sSpriteAffineAnim_85C8E50[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, 4, 1),
     AFFINEANIMCMD_JUMP(0)
 };
 
-const union AffineAnimCmd *const sSpriteAffineAnimTable_85C8E60[] =
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_85C8E60[] =
 {
     sSpriteAffineAnim_85C8E40,
     sSpriteAffineAnim_85C8E50
 };
 
-const struct SpriteTemplate gUnknown_085C8E68 =
+static const struct SpriteTemplate gUnknown_085C8E68 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4105,
@@ -761,7 +764,7 @@ const struct SpriteTemplate gUnknown_085C8E68 =
     .callback = sub_814713C
 };
 
-const struct OamData gOamData_85C8E80 =
+static const struct OamData gOamData_85C8E80 =
 {
     .y = 0,
     .affineMode = 0,
@@ -778,28 +781,28 @@ const struct OamData gOamData_85C8E80 =
     .affineParam = 0,
 };
 
-const struct SpriteFrameImage sSpriteImageTable_85C8E88[] =
+static const struct SpriteFrameImage sSpriteImageTable_85C8E88[] =
 {
     sSpriteImage_85B9CD0, 0x800
 };
 
-const struct SpriteFrameImage sSpriteImageTable_85C8E90[] =
+static const struct SpriteFrameImage sSpriteImageTable_85C8E90[] =
 {
     sSpriteImage_85BA4D0, 0x800
 };
 
-const union AnimCmd sSpriteAnim_85C8E98[] =
+static const union AnimCmd sSpriteAnim_85C8E98[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd *const sSpriteAnimTable_85C8EA0[] =
+static const union AnimCmd *const sSpriteAnimTable_85C8EA0[] =
 {
     sSpriteAnim_85C8E98
 };
 
-const struct SpriteTemplate sSpriteTemplate_85C8EA4 =
+static const struct SpriteTemplate sSpriteTemplate_85C8EA4 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4106,
@@ -810,7 +813,7 @@ const struct SpriteTemplate sSpriteTemplate_85C8EA4 =
     .callback = sub_8148380
 };
 
-const struct SpriteTemplate sSpriteTemplate_85C8EBC =
+static const struct SpriteTemplate sSpriteTemplate_85C8EBC =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4106,
@@ -821,22 +824,22 @@ const struct SpriteTemplate sSpriteTemplate_85C8EBC =
     .callback = sub_8148380
 };
 
-const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/map_objects/palettes/field_effect_object_palette_10.gbapal");
+static const u16 gFieldEffectObjectPalette10[] = INCBIN_U16("graphics/map_objects/palettes/field_effect_object_palette_10.gbapal");
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo10 =
 {
     gFieldEffectObjectPalette10, 0x1009
 };
 
-const u16 sMugshotPal_Sydney[] = INCBIN_U16("graphics/battle_transitions/sidney_bg.gbapal");
-const u16 sMugshotPal_Phoebe[] = INCBIN_U16("graphics/battle_transitions/phoebe_bg.gbapal");
-const u16 sMugshotPal_Glacia[] = INCBIN_U16("graphics/battle_transitions/glacia_bg.gbapal");
-const u16 sMugshotPal_Drake[] = INCBIN_U16("graphics/battle_transitions/drake_bg.gbapal");
-const u16 sMugshotPal_Champion[] = INCBIN_U16("graphics/battle_transitions/wallace_bg.gbapal");
-const u16 sMugshotPal_Brendan[] = INCBIN_U16("graphics/battle_transitions/brendan_bg.gbapal");
-const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may_bg.gbapal");
+static const u16 sMugshotPal_Sydney[] = INCBIN_U16("graphics/battle_transitions/sidney_bg.gbapal");
+static const u16 sMugshotPal_Phoebe[] = INCBIN_U16("graphics/battle_transitions/phoebe_bg.gbapal");
+static const u16 sMugshotPal_Glacia[] = INCBIN_U16("graphics/battle_transitions/glacia_bg.gbapal");
+static const u16 sMugshotPal_Drake[] = INCBIN_U16("graphics/battle_transitions/drake_bg.gbapal");
+static const u16 sMugshotPal_Champion[] = INCBIN_U16("graphics/battle_transitions/wallace_bg.gbapal");
+static const u16 sMugshotPal_Brendan[] = INCBIN_U16("graphics/battle_transitions/brendan_bg.gbapal");
+static const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may_bg.gbapal");
 
-const u16 *const sOpponentMugshotsPals[MUGSHOTS_COUNT] =
+static const u16 *const sOpponentMugshotsPals[MUGSHOTS_COUNT] =
 {
     sMugshotPal_Sydney,
     sMugshotPal_Phoebe,
@@ -845,22 +848,22 @@ const u16 *const sOpponentMugshotsPals[MUGSHOTS_COUNT] =
     sMugshotPal_Champion
 };
 
-const u16 *const sPlayerMugshotsPals[2] =
+static const u16 *const sPlayerMugshotsPals[2] =
 {
     sMugshotPal_Brendan,
     sMugshotPal_May
 };
 
-const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
-const struct SpritePalette sSpritePalette_UnusedTrainer =
+static const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
+static const struct SpritePalette sSpritePalette_UnusedTrainer =
 {
     sUnusedTrainerPalette, 0x100A
 };
 
-const u16 sBigPokeball_Tilemap[] = INCBIN_U16("graphics/battle_transitions/big_pokeball_map.bin");
-const u16 sMugshotsTilemap[] = INCBIN_U16("graphics/battle_transitions/elite_four_bg_map.bin");
+static const u16 sBigPokeball_Tilemap[] = INCBIN_U16("graphics/battle_transitions/big_pokeball_map.bin");
+static const u16 sMugshotsTilemap[] = INCBIN_U16("graphics/battle_transitions/elite_four_bg_map.bin");
 
-const TransitionStateFunc sPhase2_29_Funcs[] =
+static const TransitionStateFunc sPhase2_29_Funcs[] =
 {
     Phase2_29_Func1,
     Phase2_29_Func2,
@@ -870,7 +873,7 @@ const TransitionStateFunc sPhase2_29_Funcs[] =
     Phase2_BigPokeball_Func6
 };
 
-const TransitionStateFunc sPhase2_30_Funcs[] =
+static const TransitionStateFunc sPhase2_30_Funcs[] =
 {
     Phase2_30_Func1,
     Phase2_30_Func2,
@@ -878,7 +881,7 @@ const TransitionStateFunc sPhase2_30_Funcs[] =
     Phase2_30_Func4
 };
 
-const TransitionStateFunc sPhase2_31_Funcs[] =
+static const TransitionStateFunc sPhase2_31_Funcs[] =
 {
     Phase2_31_Func1,
     Phase2_31_Func2,
@@ -886,7 +889,7 @@ const TransitionStateFunc sPhase2_31_Funcs[] =
     Phase2_31_33_Func5
 };
 
-const TransitionStateFunc sPhase2_33_Funcs[] =
+static const TransitionStateFunc sPhase2_33_Funcs[] =
 {
     Phase2_33_Func1,
     Phase2_33_Func2,
@@ -895,7 +898,7 @@ const TransitionStateFunc sPhase2_33_Funcs[] =
     Phase2_31_33_Func5
 };
 
-const TransitionStateFunc sPhase2_32_Funcs[] =
+static const TransitionStateFunc sPhase2_32_Funcs[] =
 {
     Phase2_32_Func1,
     Phase2_32_Func2,
@@ -904,8 +907,8 @@ const TransitionStateFunc sPhase2_32_Funcs[] =
     Phase2_32_Func5
 };
 
-const u8 gUnknown_085C9A30[] = {0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x1b, 0x14, 0x0d, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00, 0x07, 0x0e, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x13, 0x0c, 0x0b, 0x0a, 0x09, 0x08, 0x0f, 0x10, 0x11, 0x12};
-const u8 gUnknown_085C9A53[] = {0x00, 0x10, 0x29, 0x16, 0x2c, 0x02, 0x2b, 0x15, 0x2e, 0x1b, 0x09, 0x30, 0x26, 0x05, 0x39, 0x3b, 0x0c, 0x3f, 0x23, 0x1c, 0x0a, 0x35, 0x07, 0x31, 0x27, 0x17, 0x37, 0x01, 0x3e, 0x11, 0x3d, 0x1e, 0x06, 0x22, 0x0f, 0x33, 0x20, 0x3a, 0x0d, 0x2d, 0x25, 0x34, 0x0b, 0x18, 0x3c, 0x13, 0x38, 0x21, 0x1d, 0x32, 0x28, 0x36, 0x0e, 0x03, 0x2f, 0x14, 0x12, 0x19, 0x04, 0x24, 0x1a, 0x2a, 0x1f, 0x08, 0x00};
+static const u8 gUnknown_085C9A30[] = {0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x1b, 0x14, 0x0d, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0x00, 0x07, 0x0e, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x13, 0x0c, 0x0b, 0x0a, 0x09, 0x08, 0x0f, 0x10, 0x11, 0x12};
+static const u8 gUnknown_085C9A53[] = {0x00, 0x10, 0x29, 0x16, 0x2c, 0x02, 0x2b, 0x15, 0x2e, 0x1b, 0x09, 0x30, 0x26, 0x05, 0x39, 0x3b, 0x0c, 0x3f, 0x23, 0x1c, 0x0a, 0x35, 0x07, 0x31, 0x27, 0x17, 0x37, 0x01, 0x3e, 0x11, 0x3d, 0x1e, 0x06, 0x22, 0x0f, 0x33, 0x20, 0x3a, 0x0d, 0x2d, 0x25, 0x34, 0x0b, 0x18, 0x3c, 0x13, 0x38, 0x21, 0x1d, 0x32, 0x28, 0x36, 0x0e, 0x03, 0x2f, 0x14, 0x12, 0x19, 0x04, 0x24, 0x1a, 0x2a, 0x1f, 0x08, 0x00};
 
 // code
 static void CB2_TestBattleTransition(void)
@@ -970,19 +973,19 @@ bool8 IsBattleTransitionDone(void)
     }
 }
 
-void LaunchBattleTransitionTask(u8 transitionId)
+static void LaunchBattleTransitionTask(u8 transitionId)
 {
     u8 taskId = CreateTask(Task_BattleTransitionMain, 2);
     gTasks[taskId].tTransitionId = transitionId;
     sTransitionStructPtr = AllocZeroed(sizeof(*sTransitionStructPtr));
 }
 
-void Task_BattleTransitionMain(u8 taskId)
+static void Task_BattleTransitionMain(u8 taskId)
 {
     while (sMainTransitionPhases[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Transition_Phase1(struct Task *task)
+static bool8 Transition_Phase1(struct Task *task)
 {
     sub_80AC3D0();
     CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
@@ -999,7 +1002,7 @@ bool8 Transition_Phase1(struct Task *task)
     }
 }
 
-bool8 Transition_WaitForPhase1(struct Task *task)
+static bool8 Transition_WaitForPhase1(struct Task *task)
 {
     if (FindTaskIdByFunc(sPhase1_Tasks[task->tTransitionId]) == 0xFF)
     {
@@ -1012,14 +1015,14 @@ bool8 Transition_WaitForPhase1(struct Task *task)
     }
 }
 
-bool8 Transition_Phase2(struct Task *task)
+static bool8 Transition_Phase2(struct Task *task)
 {
     CreateTask(sPhase2_Tasks[task->tTransitionId], 0);
     task->tState++;
     return FALSE;
 }
 
-bool8 Transition_WaitForPhase2(struct Task *task)
+static bool8 Transition_WaitForPhase2(struct Task *task)
 {
     task->tTransitionDone = FALSE;
     if (FindTaskIdByFunc(sPhase2_Tasks[task->tTransitionId]) == 0xFF)
@@ -1030,7 +1033,7 @@ bool8 Transition_WaitForPhase2(struct Task *task)
 #undef tTransitionId
 #undef tTransitionDone
 
-void Phase1Task_TransitionAll(u8 taskId)
+static void Phase1Task_TransitionAll(u8 taskId)
 {
     if (gTasks[taskId].tState == 0)
     {
@@ -1056,12 +1059,12 @@ void Phase1Task_TransitionAll(u8 taskId)
 #define tPlayerSpriteId     data[14]
 #define tMugshotId          data[15]
 
-void Phase2Task_Blur(u8 taskId)
+static void Phase2Task_Blur(u8 taskId)
 {
     while (sPhase2_Blur_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Blur_Func1(struct Task *task)
+static bool8 Phase2_Blur_Func1(struct Task *task)
 {
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
     SetGpuRegBits(REG_OFFSET_BG1CNT, BGCNT_MOSAIC);
@@ -1071,7 +1074,7 @@ bool8 Phase2_Blur_Func1(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_Blur_Func2(struct Task *task)
+static bool8 Phase2_Blur_Func2(struct Task *task)
 {
     if (task->tData1 != 0)
     {
@@ -1089,7 +1092,7 @@ bool8 Phase2_Blur_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Blur_Func3(struct Task *task)
+static bool8 Phase2_Blur_Func3(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -1099,12 +1102,12 @@ bool8 Phase2_Blur_Func3(struct Task *task)
     return FALSE;
 }
 
-void Phase2Task_Swirl(u8 taskId)
+static void Phase2Task_Swirl(u8 taskId)
 {
     while (sPhase2_Swirl_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Swirl_Func1(struct Task *task)
+static bool8 Phase2_Swirl_Func1(struct Task *task)
 {
     sub_8149F08();
     dp12_8087EA4();
@@ -1120,7 +1123,7 @@ bool8 Phase2_Swirl_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Swirl_Func2(struct Task *task)
+static bool8 Phase2_Swirl_Func2(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
     task->tData1 += 4;
@@ -1138,14 +1141,14 @@ bool8 Phase2_Swirl_Func2(struct Task *task)
     return FALSE;
 }
 
-void VBlankCB_Phase2_Swirl(void)
+static void VBlankCB_Phase2_Swirl(void)
 {
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA)
         DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
 }
 
-void HBlankCB_Phase2_Swirl(void)
+static void HBlankCB_Phase2_Swirl(void)
 {
     u16 var = gUnknown_02038C28[1][REG_VCOUNT];
     REG_BG1HOFS = var;
@@ -1153,12 +1156,12 @@ void HBlankCB_Phase2_Swirl(void)
     REG_BG3HOFS = var;
 }
 
-void Phase2Task_Shuffle(u8 taskId)
+static void Phase2Task_Shuffle(u8 taskId)
 {
     while (sPhase2_Shuffle_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Shuffle_Func1(struct Task *task)
+static bool8 Phase2_Shuffle_Func1(struct Task *task)
 {
     sub_8149F08();
     dp12_8087EA4();
@@ -1175,7 +1178,7 @@ bool8 Phase2_Shuffle_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Shuffle_Func2(struct Task *task)
+static bool8 Phase2_Shuffle_Func2(struct Task *task)
 {
     u8 i;
     u16 r3, r4;
@@ -1199,14 +1202,14 @@ bool8 Phase2_Shuffle_Func2(struct Task *task)
     return FALSE;
 }
 
-void VBlankCB_Phase2_Shuffle(void)
+static void VBlankCB_Phase2_Shuffle(void)
 {
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA)
         DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
 }
 
-void HBlankCB_Phase2_Shuffle(void)
+static void HBlankCB_Phase2_Shuffle(void)
 {
     u16 var = gUnknown_02038C28[1][REG_VCOUNT];
     REG_BG1VOFS = var;
@@ -1214,42 +1217,42 @@ void HBlankCB_Phase2_Shuffle(void)
     REG_BG3VOFS = var;
 }
 
-void Phase2Task_BigPokeball(u8 taskId)
+static void Phase2Task_BigPokeball(u8 taskId)
 {
     while (sPhase2_BigPokeball_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void Phase2Task_Aqua(u8 taskId)
+static void Phase2Task_Aqua(u8 taskId)
 {
     while (sPhase2_Aqua_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void Phase2Task_Magma(u8 taskId)
+static void Phase2Task_Magma(u8 taskId)
 {
     while (sPhase2_Magma_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void Phase2Task_Regice(u8 taskId)
+static void Phase2Task_Regice(u8 taskId)
 {
     while (sPhase2_Regice_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void Phase2Task_Registeel(u8 taskId)
+static void Phase2Task_Registeel(u8 taskId)
 {
     while (sPhase2_Registeel_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void Phase2Task_Regirock(u8 taskId)
+static void Phase2Task_Regirock(u8 taskId)
 {
     while (sPhase2_Regirock_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void Phase2Task_Kyogre(u8 taskId)
+static void Phase2Task_Kyogre(u8 taskId)
 {
     while (sPhase2_Kyogre_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void sub_814669C(struct Task *task)
+static void sub_814669C(struct Task *task)
 {
     s32 i;
 
@@ -1275,7 +1278,7 @@ void sub_814669C(struct Task *task)
     SetVBlankCallback(VBlankCB0_Phase2_BigPokeball);
 }
 
-bool8 Phase2_Aqua_Func1(struct Task *task)
+static bool8 Phase2_Aqua_Func1(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1290,7 +1293,7 @@ bool8 Phase2_Aqua_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Magma_Func1(struct Task *task)
+static bool8 Phase2_Magma_Func1(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1305,7 +1308,7 @@ bool8 Phase2_Magma_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Regi_Func1(struct Task *task)
+static bool8 Phase2_Regi_Func1(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1319,7 +1322,7 @@ bool8 Phase2_Regi_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_BigPokeball_Func1(struct Task *task)
+static bool8 Phase2_BigPokeball_Func1(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1333,7 +1336,7 @@ bool8 Phase2_BigPokeball_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_BigPokeball_Func2(struct Task *task)
+static bool8 Phase2_BigPokeball_Func2(struct Task *task)
 {
     s16 i, j;
     u16 *dst1, *dst2;
@@ -1354,7 +1357,7 @@ bool8 Phase2_BigPokeball_Func2(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_Aqua_Func2(struct Task *task)
+static bool8 Phase2_Aqua_Func2(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1366,7 +1369,7 @@ bool8 Phase2_Aqua_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Magma_Func2(struct Task *task)
+static bool8 Phase2_Magma_Func2(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1378,7 +1381,7 @@ bool8 Phase2_Magma_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Regice_Func2(struct Task *task)
+static bool8 Phase2_Regice_Func2(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1391,7 +1394,7 @@ bool8 Phase2_Regice_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Registeel_Func2(struct Task *task)
+static bool8 Phase2_Registeel_Func2(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1404,7 +1407,7 @@ bool8 Phase2_Registeel_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Regirock_Func2(struct Task *task)
+static bool8 Phase2_Regirock_Func2(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1417,7 +1420,7 @@ bool8 Phase2_Regirock_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Kyogre_Func3(struct Task *task)
+static bool8 Phase2_Kyogre_Func3(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1430,7 +1433,7 @@ bool8 Phase2_Kyogre_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Kyogre_Func4(struct Task *task)
+static bool8 Phase2_Kyogre_Func4(struct Task *task)
 {
     if (task->tData1 % 3 == 0)
     {
@@ -1447,7 +1450,7 @@ bool8 Phase2_Kyogre_Func4(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Kyogre_Func5(struct Task *task)
+static bool8 Phase2_Kyogre_Func5(struct Task *task)
 {
     if (task->tData1 % 5 == 0)
     {
@@ -1464,14 +1467,14 @@ bool8 Phase2_Kyogre_Func5(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_WeatherDuo_Func6(struct Task *task)
+static bool8 Phase2_WeatherDuo_Func6(struct Task *task)
 {
     BeginNormalPaletteFade(0xFFFF8000, 1, 0, 0x10, 0);
     task->tState++;
     return FALSE;
 }
 
-bool8 Phase2_WeatherDuo_Func7(struct Task *task)
+static bool8 Phase2_WeatherDuo_Func7(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -1482,7 +1485,7 @@ bool8 Phase2_WeatherDuo_Func7(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_BigPokeball_Func3(struct Task *task)
+static bool8 Phase2_BigPokeball_Func3(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
     if (task->tData3 == 0 || --task->tData3 == 0)
@@ -1502,7 +1505,7 @@ bool8 Phase2_BigPokeball_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_BigPokeball_Func4(struct Task *task)
+static bool8 Phase2_BigPokeball_Func4(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
     if (task->tData3 == 0 || --task->tData3 == 0)
@@ -1522,7 +1525,7 @@ bool8 Phase2_BigPokeball_Func4(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_BigPokeball_Func5(struct Task *task)
+static bool8 Phase2_BigPokeball_Func5(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
     task->tData4 += 8;
@@ -1542,28 +1545,28 @@ bool8 Phase2_BigPokeball_Func5(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_FramesCountdown(struct Task *task)
+static bool8 Phase2_FramesCountdown(struct Task *task)
 {
     if (--task->tFrames == 0)
         task->tState++;
     return FALSE;
 }
 
-bool8 Phase2_WeatherTrio_Func1(struct Task *task)
+static bool8 Phase2_WeatherTrio_Func1(struct Task *task)
 {
     BeginNormalPaletteFade(0x0000FFFF, 1, 0, 0x10, 0);
     task->tState++;
     return FALSE;
 }
 
-bool8 Phase2_WaitPaletteFade(struct Task *task)
+static bool8 Phase2_WaitPaletteFade(struct Task *task)
 {
     if (!gPaletteFade.active)
         task->tState++;
     return FALSE;
 }
 
-bool8 Phase2_BigPokeball_Func6(struct Task *task)
+static bool8 Phase2_BigPokeball_Func6(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
     if (task->tData2 < 1024)
@@ -1596,7 +1599,7 @@ bool8 Phase2_BigPokeball_Func6(struct Task *task)
     return FALSE;
 }
 
-void Transition_BigPokeball_Vblank(void)
+static void Transition_BigPokeball_Vblank(void)
 {
     DmaStop(0);
     VBlankCB_BattleTransition();
@@ -1609,24 +1612,24 @@ void Transition_BigPokeball_Vblank(void)
     REG_BLDALPHA = sTransitionStructPtr->BLDALPHA;
 }
 
-void VBlankCB0_Phase2_BigPokeball(void)
+static void VBlankCB0_Phase2_BigPokeball(void)
 {
     Transition_BigPokeball_Vblank();
     DmaSet(0, gUnknown_020393A8, &REG_BG0HOFS, 0xA2400001);
 }
 
-void VBlankCB1_Phase2_BigPokeball(void)
+static void VBlankCB1_Phase2_BigPokeball(void)
 {
     Transition_BigPokeball_Vblank();
     DmaSet(0, gUnknown_020393A8, &REG_WIN0H, 0xA2400001);
 }
 
-void Phase2Task_PokeballsTrail(u8 taskId)
+static void Phase2Task_PokeballsTrail(u8 taskId)
 {
     while (sPhase2_PokeballsTrail_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_PokeballsTrail_Func1(struct Task *task)
+static bool8 Phase2_PokeballsTrail_Func1(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -1639,7 +1642,7 @@ bool8 Phase2_PokeballsTrail_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_PokeballsTrail_Func2(struct Task *task)
+static bool8 Phase2_PokeballsTrail_Func2(struct Task *task)
 {
     s16 i;
     s16 rand;
@@ -1662,7 +1665,7 @@ bool8 Phase2_PokeballsTrail_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_PokeballsTrail_Func3(struct Task *task)
+static bool8 Phase2_PokeballsTrail_Func3(struct Task *task)
 {
     if (!FieldEffectActiveListContains(FLDEFF_POKEBALL))
     {
@@ -1691,7 +1694,7 @@ bool8 FldEff_Pokeball(void)
     ptr[index] = toStore;                                               \
 }
 
-void sub_814713C(struct Sprite *sprite)
+static void sub_814713C(struct Sprite *sprite)
 {
     s16 arr0[ARRAY_COUNT(sUnknown_085C8B96)];
 
@@ -1728,12 +1731,12 @@ void sub_814713C(struct Sprite *sprite)
     }
 }
 
-void Phase2Task_Clockwise_BlackFade(u8 taskId)
+static void Phase2Task_Clockwise_BlackFade(u8 taskId)
 {
     while (sPhase2_Clockwise_BlackFade_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Clockwise_BlackFade_Func1(struct Task *task)
+static bool8 Phase2_Clockwise_BlackFade_Func1(struct Task *task)
 {
     u16 i;
 
@@ -1757,7 +1760,7 @@ bool8 Phase2_Clockwise_BlackFade_Func1(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_Clockwise_BlackFade_Func2(struct Task *task)
+static bool8 Phase2_Clockwise_BlackFade_Func2(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
@@ -1778,7 +1781,7 @@ bool8 Phase2_Clockwise_BlackFade_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Clockwise_BlackFade_Func3(struct Task *task)
+static bool8 Phase2_Clockwise_BlackFade_Func3(struct Task *task)
 {
     s16 r1, r3;
     vu8 var = 0;
@@ -1816,7 +1819,7 @@ bool8 Phase2_Clockwise_BlackFade_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Clockwise_BlackFade_Func4(struct Task *task)
+static bool8 Phase2_Clockwise_BlackFade_Func4(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
@@ -1837,7 +1840,7 @@ bool8 Phase2_Clockwise_BlackFade_Func4(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Clockwise_BlackFade_Func5(struct Task *task)
+static bool8 Phase2_Clockwise_BlackFade_Func5(struct Task *task)
 {
     s16 r1, r2, var4;
     vu8 var = 0;
@@ -1877,7 +1880,7 @@ bool8 Phase2_Clockwise_BlackFade_Func5(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Clockwise_BlackFade_Func6(struct Task *task)
+static bool8 Phase2_Clockwise_BlackFade_Func6(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
@@ -1901,7 +1904,7 @@ bool8 Phase2_Clockwise_BlackFade_Func6(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Clockwise_BlackFade_Func7(struct Task *task)
+static bool8 Phase2_Clockwise_BlackFade_Func7(struct Task *task)
 {
     DmaStop(0);
     sub_8149F84();
@@ -1909,7 +1912,7 @@ bool8 Phase2_Clockwise_BlackFade_Func7(struct Task *task)
     return FALSE;
 }
 
-void VBlankCB_Phase2_Clockwise_BlackFade(void)
+static void VBlankCB_Phase2_Clockwise_BlackFade(void)
 {
     DmaStop(0);
     VBlankCB_BattleTransition();
@@ -1922,12 +1925,12 @@ void VBlankCB_Phase2_Clockwise_BlackFade(void)
     DmaSet(0, gUnknown_02038C28[1], &REG_WIN0H, 0xA2400001);
 }
 
-void Phase2Task_Ripple(u8 taskId)
+static void Phase2Task_Ripple(u8 taskId)
 {
     while (sPhase2_Ripple_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Ripple_Func1(struct Task *task)
+static bool8 Phase2_Ripple_Func1(struct Task *task)
 {
     u8 i;
 
@@ -1948,7 +1951,7 @@ bool8 Phase2_Ripple_Func1(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_Ripple_Func2(struct Task *task)
+static bool8 Phase2_Ripple_Func2(struct Task *task)
 {
     u8 i;
     s16 r3;
@@ -1984,14 +1987,14 @@ bool8 Phase2_Ripple_Func2(struct Task *task)
     return FALSE;
 }
 
-void VBlankCB_Phase2_Ripple(void)
+static void VBlankCB_Phase2_Ripple(void)
 {
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA)
         DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
 }
 
-void HBlankCB_Phase2_Ripple(void)
+static void HBlankCB_Phase2_Ripple(void)
 {
     u16 var = gUnknown_02038C28[1][REG_VCOUNT];
     REG_BG1VOFS = var;
@@ -1999,12 +2002,12 @@ void HBlankCB_Phase2_Ripple(void)
     REG_BG3VOFS = var;
 }
 
-void Phase2Task_Wave(u8 taskId)
+static void Phase2Task_Wave(u8 taskId)
 {
     while (sPhase2_Wave_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Wave_Func1(struct Task *task)
+static bool8 Phase2_Wave_Func1(struct Task *task)
 {
     u8 i;
 
@@ -2027,7 +2030,7 @@ bool8 Phase2_Wave_Func1(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_Wave_Func2(struct Task *task)
+static bool8 Phase2_Wave_Func2(struct Task *task)
 {
     u8 i, r5;
     u16* toStore;
@@ -2057,7 +2060,7 @@ bool8 Phase2_Wave_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Wave_Func3(struct Task *task)
+static bool8 Phase2_Wave_Func3(struct Task *task)
 {
     DmaStop(0);
     sub_8149F84();
@@ -2065,7 +2068,7 @@ bool8 Phase2_Wave_Func3(struct Task *task)
     return FALSE;
 }
 
-void VBlankCB_Phase2_Wave(void)
+static void VBlankCB_Phase2_Wave(void)
 {
     DmaStop(0);
     VBlankCB_BattleTransition();
@@ -2077,42 +2080,42 @@ void VBlankCB_Phase2_Wave(void)
     DmaSet(0, gUnknown_02038C28[1], &REG_WIN0H, 0xA2400001);
 }
 
-void Phase2Task_Sydney(u8 taskId)
+static void Phase2Task_Sydney(u8 taskId)
 {
     gTasks[taskId].tMugshotId = MUGSHOT_SYDNEY;
     Phase2Task_MugShotTransition(taskId);
 }
 
-void Phase2Task_Phoebe(u8 taskId)
+static void Phase2Task_Phoebe(u8 taskId)
 {
     gTasks[taskId].tMugshotId = MUGSHOT_PHOEBE;
     Phase2Task_MugShotTransition(taskId);
 }
 
-void Phase2Task_Glacia(u8 taskId)
+static void Phase2Task_Glacia(u8 taskId)
 {
     gTasks[taskId].tMugshotId = MUGSHOT_GLACIA;
     Phase2Task_MugShotTransition(taskId);
 }
 
-void Phase2Task_Drake(u8 taskId)
+static void Phase2Task_Drake(u8 taskId)
 {
     gTasks[taskId].tMugshotId = MUGSHOT_DRAKE;
     Phase2Task_MugShotTransition(taskId);
 }
 
-void Phase2Task_Champion(u8 taskId)
+static void Phase2Task_Champion(u8 taskId)
 {
     gTasks[taskId].tMugshotId = MUGSHOT_CHAMPION;
     Phase2Task_MugShotTransition(taskId);
 }
 
-void Phase2Task_MugShotTransition(u8 taskId)
+static void Phase2Task_MugShotTransition(u8 taskId)
 {
     while (sPhase2_Mugshot_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Mugshot_Func1(struct Task *task)
+static bool8 Phase2_Mugshot_Func1(struct Task *task)
 {
     u8 i;
 
@@ -2138,7 +2141,7 @@ bool8 Phase2_Mugshot_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Mugshot_Func2(struct Task *task)
+static bool8 Phase2_Mugshot_Func2(struct Task *task)
 {
     s16 i, j;
     u16 *dst1, *dst2;
@@ -2165,7 +2168,7 @@ bool8 Phase2_Mugshot_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Mugshot_Func3(struct Task *task)
+static bool8 Phase2_Mugshot_Func3(struct Task *task)
 {
     u8 i, r5;
     u16* toStore;
@@ -2213,7 +2216,7 @@ bool8 Phase2_Mugshot_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Mugshot_Func4(struct Task *task)
+static bool8 Phase2_Mugshot_Func4(struct Task *task)
 {
     u8 i;
     u16* toStore;
@@ -2242,7 +2245,7 @@ bool8 Phase2_Mugshot_Func4(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Mugshot_Func5(struct Task *task)
+static bool8 Phase2_Mugshot_Func5(struct Task *task)
 {
     sTransitionStructPtr->field_18 -= 8;
     sTransitionStructPtr->field_1A += 8;
@@ -2254,7 +2257,7 @@ bool8 Phase2_Mugshot_Func5(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Mugshot_Func6(struct Task *task)
+static bool8 Phase2_Mugshot_Func6(struct Task *task)
 {
     sTransitionStructPtr->field_18 -= 8;
     sTransitionStructPtr->field_1A += 8;
@@ -2276,7 +2279,7 @@ bool8 Phase2_Mugshot_Func6(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Mugshot_Func7(struct Task *task)
+static bool8 Phase2_Mugshot_Func7(struct Task *task)
 {
     bool32 r6;
 
@@ -2317,7 +2320,7 @@ bool8 Phase2_Mugshot_Func7(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Mugshot_Func8(struct Task *task)
+static bool8 Phase2_Mugshot_Func8(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
     BlendPalettes(-1, 0x10, 0x7FFF);
@@ -2328,7 +2331,7 @@ bool8 Phase2_Mugshot_Func8(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_Mugshot_Func9(struct Task *task)
+static bool8 Phase2_Mugshot_Func9(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
 
@@ -2341,7 +2344,7 @@ bool8 Phase2_Mugshot_Func9(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Mugshot_Func10(struct Task *task)
+static bool8 Phase2_Mugshot_Func10(struct Task *task)
 {
     DmaStop(0);
     sub_8149F84();
@@ -2349,7 +2352,7 @@ bool8 Phase2_Mugshot_Func10(struct Task *task)
     return FALSE;
 }
 
-void VBlankCB0_Phase2_Mugshots(void)
+static void VBlankCB0_Phase2_Mugshots(void)
 {
     DmaStop(0);
     VBlankCB_BattleTransition();
@@ -2362,7 +2365,7 @@ void VBlankCB0_Phase2_Mugshots(void)
     DmaSet(0, gUnknown_02038C28[1], &REG_WIN0H, 0xA2400001);
 }
 
-void VBlankCB1_Phase2_Mugshots(void)
+static void VBlankCB1_Phase2_Mugshots(void)
 {
     DmaStop(0);
     VBlankCB_BattleTransition();
@@ -2372,7 +2375,7 @@ void VBlankCB1_Phase2_Mugshots(void)
     DmaSet(0, gUnknown_02038C28[1], &REG_BLDY, 0xA2400001);
 }
 
-void HBlankCB_Phase2_Mugshots(void)
+static void HBlankCB_Phase2_Mugshots(void)
 {
     if (REG_VCOUNT < 80)
         REG_BG0HOFS = sTransitionStructPtr->field_18;
@@ -2380,7 +2383,7 @@ void HBlankCB_Phase2_Mugshots(void)
         REG_BG0HOFS = sTransitionStructPtr->field_1A;
 }
 
-void Mugshots_CreateOpponentPlayerSprites(struct Task *task)
+static void Mugshots_CreateOpponentPlayerSprites(struct Task *task)
 {
     struct Sprite *opponentSprite, *playerSprite;
 
@@ -2416,17 +2419,17 @@ void Mugshots_CreateOpponentPlayerSprites(struct Task *task)
     SetOamMatrixRotationScaling(playerSprite->oam.matrixNum, -512, 512, 0);
 }
 
-void sub_8148380(struct Sprite *sprite)
+static void sub_8148380(struct Sprite *sprite)
 {
     while (sUnknown_085C8C24[sprite->data[0]](sprite));
 }
 
-bool8 sub_81483A8(struct Sprite *sprite)
+static bool8 sub_81483A8(struct Sprite *sprite)
 {
     return FALSE;
 }
 
-bool8 sub_81483AC(struct Sprite *sprite)
+static bool8 sub_81483AC(struct Sprite *sprite)
 {
     s16 arr0[2];
     s16 arr1[2];
@@ -2440,7 +2443,7 @@ bool8 sub_81483AC(struct Sprite *sprite)
     return TRUE;
 }
 
-bool8 sub_81483F8(struct Sprite *sprite)
+static bool8 sub_81483F8(struct Sprite *sprite)
 {
     sprite->pos1.x += sprite->data[1];
     if (sprite->data[7] && sprite->pos1.x < 133)
@@ -2450,7 +2453,7 @@ bool8 sub_81483F8(struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_814842C(struct Sprite *sprite)
+static bool8 sub_814842C(struct Sprite *sprite)
 {
     sprite->data[1] += sprite->data[2];
     sprite->pos1.x += sprite->data[1];
@@ -2463,7 +2466,7 @@ bool8 sub_814842C(struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8148458(struct Sprite *sprite)
+static bool8 sub_8148458(struct Sprite *sprite)
 {
     sprite->data[1] += sprite->data[2];
     sprite->pos1.x += sprite->data[1];
@@ -2472,27 +2475,27 @@ bool8 sub_8148458(struct Sprite *sprite)
     return FALSE;
 }
 
-void sub_8148484(s16 spriteId, s16 value)
+static void sub_8148484(s16 spriteId, s16 value)
 {
     gSprites[spriteId].data[7] = value;
 }
 
-void sub_814849C(s16 spriteId)
+static void sub_814849C(s16 spriteId)
 {
     gSprites[spriteId].data[0]++;
 }
 
-s16 sub_81484B8(s16 spriteId)
+static s16 sub_81484B8(s16 spriteId)
 {
     return gSprites[spriteId].data[6];
 }
 
-void Phase2Task_Slice(u8 taskId)
+static void Phase2Task_Slice(u8 taskId)
 {
     while (sPhase2_Slice_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Slice_Func1(struct Task *task)
+static bool8 Phase2_Slice_Func1(struct Task *task)
 {
     u16 i;
 
@@ -2522,7 +2525,7 @@ bool8 Phase2_Slice_Func1(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_Slice_Func2(struct Task *task)
+static bool8 Phase2_Slice_Func2(struct Task *task)
 {
     u16 i;
 
@@ -2559,7 +2562,7 @@ bool8 Phase2_Slice_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Slice_Func3(struct Task *task)
+static bool8 Phase2_Slice_Func3(struct Task *task)
 {
     DmaStop(0);
     sub_8149F84();
@@ -2567,7 +2570,7 @@ bool8 Phase2_Slice_Func3(struct Task *task)
     return FALSE;
 }
 
-void VBlankCB_Phase2_Slice(void)
+static void VBlankCB_Phase2_Slice(void)
 {
     DmaStop(0);
     VBlankCB_BattleTransition();
@@ -2579,7 +2582,7 @@ void VBlankCB_Phase2_Slice(void)
     DmaSet(0, &gUnknown_02038C28[1][160], &REG_WIN0H, 0xA2400001);
 }
 
-void HBlankCB_Phase2_Slice(void)
+static void HBlankCB_Phase2_Slice(void)
 {
     if (REG_VCOUNT < 160)
     {
@@ -2590,12 +2593,12 @@ void HBlankCB_Phase2_Slice(void)
     }
 }
 
-void Phase2Task_ShredSplit(u8 taskId)
+static void Phase2Task_ShredSplit(u8 taskId)
 {
     while (sPhase2_ShredSplit_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_ShredSplit_Func1(struct Task *task)
+static bool8 Phase2_ShredSplit_Func1(struct Task *task)
 {
     u16 i;
 
@@ -2630,7 +2633,7 @@ bool8 Phase2_ShredSplit_Func1(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_ShredSplit_Func2(struct Task *task)
+static bool8 Phase2_ShredSplit_Func2(struct Task *task)
 {
     u16 i, j, k;
     u8 arr1[ARRAY_COUNT(gUnknown_085C8C64)];
@@ -2727,7 +2730,7 @@ bool8 Phase2_ShredSplit_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_ShredSplit_Func3(struct Task *task)
+static bool8 Phase2_ShredSplit_Func3(struct Task *task)
 {
     u16 i;
     bool32 done = TRUE;
@@ -2745,7 +2748,7 @@ bool8 Phase2_ShredSplit_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_ShredSplit_Func4(struct Task *task)
+static bool8 Phase2_ShredSplit_Func4(struct Task *task)
 {
     DmaStop(0);
     sub_8149F84();
@@ -2753,17 +2756,17 @@ bool8 Phase2_ShredSplit_Func4(struct Task *task)
     return FALSE;
 }
 
-void Phase2Task_Blackhole1(u8 taskId)
+static void Phase2Task_Blackhole1(u8 taskId)
 {
     while (sPhase2_Blackhole1_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void Phase2Task_Blackhole2(u8 taskId)
+static void Phase2Task_Blackhole2(u8 taskId)
 {
     while (sPhase2_Blackhole2_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Blackhole_Func1(struct Task *task)
+static bool8 Phase2_Blackhole_Func1(struct Task *task)
 {
     s32 i;
 
@@ -2790,7 +2793,7 @@ bool8 Phase2_Blackhole_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Blackhole1_Func3(struct Task *task)
+static bool8 Phase2_Blackhole1_Func3(struct Task *task)
 {
     if (task->tFuncState == 1)
     {
@@ -2822,7 +2825,7 @@ bool8 Phase2_Blackhole1_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Blackhole1_Func2(struct Task *task)
+static bool8 Phase2_Blackhole1_Func2(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = FALSE;
     if (task->tFuncState == 0)
@@ -2844,7 +2847,7 @@ bool8 Phase2_Blackhole1_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Blackhole2_Func2(struct Task *task)
+static bool8 Phase2_Blackhole2_Func2(struct Task *task)
 {
     u16 index; // should be s16 I think
     s16 amplitude;
@@ -2889,12 +2892,12 @@ bool8 Phase2_Blackhole2_Func2(struct Task *task)
     return FALSE;
 }
 
-void Phase2Task_RectangularSpiral(u8 taskId)
+static void Phase2Task_RectangularSpiral(u8 taskId)
 {
     while (sPhase2_RectangularSpiral_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_RectangularSpiral_Func1(struct Task *task)
+static bool8 Phase2_RectangularSpiral_Func1(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -2934,7 +2937,7 @@ bool8 Phase2_RectangularSpiral_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_RectangularSpiral_Func2(struct Task *task)
+static bool8 Phase2_RectangularSpiral_Func2(struct Task *task)
 {
     u16 *dst1, *dst2;
     u8 i;
@@ -2972,7 +2975,7 @@ bool8 Phase2_RectangularSpiral_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_RectangularSpiral_Func3(struct Task *task)
+static bool8 Phase2_RectangularSpiral_Func3(struct Task *task)
 {
     DmaStop(0);
     sub_8149F84();
@@ -2980,7 +2983,7 @@ bool8 Phase2_RectangularSpiral_Func3(struct Task *task)
     return FALSE;
 }
 
-bool16 sub_8149048(const s16 * const *arg0, struct StructRectangularSpiral *arg1)
+static bool16 sub_8149048(const s16 * const *arg0, struct StructRectangularSpiral *arg1)
 {
     const s16 *array = arg0[arg1->field_0];
     if (array[arg1->field_4] == -1)
@@ -3043,12 +3046,12 @@ bool16 sub_8149048(const s16 * const *arg0, struct StructRectangularSpiral *arg1
     return TRUE;
 }
 
-void Phase2Task_Groudon(u8 taskId)
+static void Phase2Task_Groudon(u8 taskId)
 {
     while (sPhase2_Groudon_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Groudon_Func3(struct Task *task)
+static bool8 Phase2_Groudon_Func3(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -3062,7 +3065,7 @@ bool8 Phase2_Groudon_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Groudon_Func4(struct Task *task)
+static bool8 Phase2_Groudon_Func4(struct Task *task)
 {
     if (task->tData1 % 3 == 0)
     {
@@ -3078,7 +3081,7 @@ bool8 Phase2_Groudon_Func4(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Groudon_Func5(struct Task *task)
+static bool8 Phase2_Groudon_Func5(struct Task *task)
 {
     if (task->tData1 % 5 == 0)
     {
@@ -3095,12 +3098,12 @@ bool8 Phase2_Groudon_Func5(struct Task *task)
     return FALSE;
 }
 
-void Phase2Task_Rayquaza(u8 taskId)
+static void Phase2Task_Rayquaza(u8 taskId)
 {
     while (sPhase2_Rayquaza_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Rayquaza_Func3(struct Task *task)
+static bool8 Phase2_Rayquaza_Func3(struct Task *task)
 {
     u16 *dst1, *dst2;
     u16 i;
@@ -3127,7 +3130,7 @@ bool8 Phase2_Rayquaza_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Rayquaza_Func4(struct Task *task)
+static bool8 Phase2_Rayquaza_Func4(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -3137,7 +3140,7 @@ bool8 Phase2_Rayquaza_Func4(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Rayquaza_Func5(struct Task *task)
+static bool8 Phase2_Rayquaza_Func5(struct Task *task)
 {
     if ((task->tData1 % 4) == 0)
     {
@@ -3154,7 +3157,7 @@ bool8 Phase2_Rayquaza_Func5(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Rayquaza_Func6(struct Task *task)
+static bool8 Phase2_Rayquaza_Func6(struct Task *task)
 {
     if (++task->tData1 > 20)
     {
@@ -3166,7 +3169,7 @@ bool8 Phase2_Rayquaza_Func6(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Rayquaza_Func7(struct Task *task)
+static bool8 Phase2_Rayquaza_Func7(struct Task *task)
 {
     if (!gPaletteFade.active)
     {
@@ -3177,7 +3180,7 @@ bool8 Phase2_Rayquaza_Func7(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Rayquaza_Func8(struct Task *task)
+static bool8 Phase2_Rayquaza_Func8(struct Task *task)
 {
     BlendPalettes(0x00007FFF, 8, 0);
     BlendPalettes(0xFFFF8000, 0, 0);
@@ -3186,7 +3189,7 @@ bool8 Phase2_Rayquaza_Func8(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Rayquaza_Func9(struct Task *task)
+static bool8 Phase2_Rayquaza_Func9(struct Task *task)
 {
     if ((task->tData1 % 3) == 0)
     {
@@ -3218,7 +3221,7 @@ bool8 Phase2_Rayquaza_Func9(struct Task *task)
     return FALSE;
 }
 
-void VBlankCB_Phase2_Rayquaza(void)
+static void VBlankCB_Phase2_Rayquaza(void)
 {
     void *dmaSrc;
 
@@ -3235,12 +3238,12 @@ void VBlankCB_Phase2_Rayquaza(void)
     DmaSet(0, dmaSrc, &REG_BG0VOFS, 0xA2400001);
 }
 
-void Phase2Task_WhiteFade(u8 taskId)
+static void Phase2Task_WhiteFade(u8 taskId)
 {
     while (sPhase2_WhiteFade_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_WhiteFade_Func1(struct Task *task)
+static bool8 Phase2_WhiteFade_Func1(struct Task *task)
 {
     u16 i;
 
@@ -3267,7 +3270,7 @@ bool8 Phase2_WhiteFade_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_WhiteFade_Func2(struct Task *task)
+static bool8 Phase2_WhiteFade_Func2(struct Task *task)
 {
     s16 i, posY;
     s16 arr1[ARRAY_COUNT(sUnknown_085C8DA0)];
@@ -3287,7 +3290,7 @@ bool8 Phase2_WhiteFade_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_WhiteFade_Func3(struct Task *task)
+static bool8 Phase2_WhiteFade_Func3(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = 0;
     if (sTransitionStructPtr->field_20 > 7)
@@ -3298,7 +3301,7 @@ bool8 Phase2_WhiteFade_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_WhiteFade_Func4(struct Task *task)
+static bool8 Phase2_WhiteFade_Func4(struct Task *task)
 {
     sTransitionStructPtr->VBlank_DMA = 0;
 
@@ -3317,7 +3320,7 @@ bool8 Phase2_WhiteFade_Func4(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_WhiteFade_Func5(struct Task *task)
+static bool8 Phase2_WhiteFade_Func5(struct Task *task)
 {
    if (++sTransitionStructPtr->BLDY > 16)
    {
@@ -3327,7 +3330,7 @@ bool8 Phase2_WhiteFade_Func5(struct Task *task)
    return FALSE;
 }
 
-void VBlankCB0_Phase2_WhiteFade(void)
+static void VBlankCB0_Phase2_WhiteFade(void)
 {
     DmaStop(0);
     VBlankCB_BattleTransition();
@@ -3340,7 +3343,7 @@ void VBlankCB0_Phase2_WhiteFade(void)
     DmaSet(0, &gUnknown_02038C28[1][160], &REG_WIN0H, 0xA2400001);
 }
 
-void VBlankCB1_Phase2_WhiteFade(void)
+static void VBlankCB1_Phase2_WhiteFade(void)
 {
     VBlankCB_BattleTransition();
     REG_BLDY = sTransitionStructPtr->BLDY;
@@ -3351,12 +3354,12 @@ void VBlankCB1_Phase2_WhiteFade(void)
     REG_WIN0V = sTransitionStructPtr->WIN0V;
 }
 
-void HBlankCB_Phase2_WhiteFade(void)
+static void HBlankCB_Phase2_WhiteFade(void)
 {
     REG_BLDY = gUnknown_02038C28[1][REG_VCOUNT];
 }
 
-void sub_8149864(struct Sprite *sprite)
+static void sub_8149864(struct Sprite *sprite)
 {
     if (sprite->data[5])
     {
@@ -3399,12 +3402,12 @@ void sub_8149864(struct Sprite *sprite)
     }
 }
 
-void Phase2Task_GridSquares(u8 taskId)
+static void Phase2Task_GridSquares(u8 taskId)
 {
     while (sPhase2_GridSquares_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_GridSquares_Func1(struct Task *task)
+static bool8 Phase2_GridSquares_Func1(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -3417,7 +3420,7 @@ bool8 Phase2_GridSquares_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_GridSquares_Func2(struct Task *task)
+static bool8 Phase2_GridSquares_Func2(struct Task *task)
 {
     u16* dst1;
 
@@ -3438,7 +3441,7 @@ bool8 Phase2_GridSquares_Func2(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_GridSquares_Func3(struct Task *task)
+static bool8 Phase2_GridSquares_Func3(struct Task *task)
 {
     if (--task->tData1 == 0)
     {
@@ -3448,12 +3451,12 @@ bool8 Phase2_GridSquares_Func3(struct Task *task)
     return FALSE;
 }
 
-void Phase2Task_Shards(u8 taskId)
+static void Phase2Task_Shards(u8 taskId)
 {
     while (sPhase2_Shards_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_Shards_Func1(struct Task *task)
+static bool8 Phase2_Shards_Func1(struct Task *task)
 {
     u16 i;
 
@@ -3476,7 +3479,7 @@ bool8 Phase2_Shards_Func1(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_Shards_Func2(struct Task *task)
+static bool8 Phase2_Shards_Func2(struct Task *task)
 {
     sub_814A1AC(sTransitionStructPtr->data,
                 sUnknown_085C8DD0[task->tData1][0],
@@ -3489,7 +3492,7 @@ bool8 Phase2_Shards_Func2(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_Shards_Func3(struct Task *task)
+static bool8 Phase2_Shards_Func3(struct Task *task)
 {
     s16 i;
     bool8 nextFunc;
@@ -3528,7 +3531,7 @@ bool8 Phase2_Shards_Func3(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_Shards_Func4(struct Task *task)
+static bool8 Phase2_Shards_Func4(struct Task *task)
 {
     if (++task->tData1 < 7)
     {
@@ -3545,7 +3548,7 @@ bool8 Phase2_Shards_Func4(struct Task *task)
     }
 }
 
-bool8 Phase2_Shards_Func5(struct Task *task)
+static bool8 Phase2_Shards_Func5(struct Task *task)
 {
     if (--task->tData3 == 0)
     {
@@ -3556,7 +3559,7 @@ bool8 Phase2_Shards_Func5(struct Task *task)
         return FALSE;
 }
 
-void VBlankCB_Phase2_Shards(void)
+static void VBlankCB_Phase2_Shards(void)
 {
     DmaStop(0);
     VBlankCB_BattleTransition();
@@ -3591,9 +3594,9 @@ void VBlankCB_Phase2_Shards(void)
 #define tData6      data[6]
 #define tData7      data[7]
 
-void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
+static void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
 {
-    u8 taskId = CreateTask(Phase1_Task_RunFuncs, 3);
+    u8 taskId = CreateTask(TransitionPhase1_Task_RunFuncs, 3);
     gTasks[taskId].tData1 = a0;
     gTasks[taskId].tData2 = a1;
     gTasks[taskId].tData3 = a2;
@@ -3602,20 +3605,20 @@ void CreatePhase1Task(s16 a0, s16 a1, s16 a2, s16 a3, s16 a4)
     gTasks[taskId].tData6 = a0;
 }
 
-bool8 IsPhase1Done(void)
+static bool8 IsPhase1Done(void)
 {
-    if (FindTaskIdByFunc(Phase1_Task_RunFuncs) == 0xFF)
+    if (FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) == 0xFF)
         return TRUE;
     else
         return FALSE;
 }
 
-void Phase1_Task_RunFuncs(u8 taskId)
+void TransitionPhase1_Task_RunFuncs(u8 taskId)
 {
     while (sPhase1_TransitionAll_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase1_TransitionAll_Func1(struct Task *task)
+static bool8 Phase1_TransitionAll_Func1(struct Task *task)
 {
     if (task->tData6 == 0 || --task->tData6 == 0)
     {
@@ -3633,7 +3636,7 @@ bool8 Phase1_TransitionAll_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase1_TransitionAll_Func2(struct Task *task)
+static bool8 Phase1_TransitionAll_Func2(struct Task *task)
 {
     if (task->tData6 == 0 || --task->tData6 == 0)
     {
@@ -3646,7 +3649,7 @@ bool8 Phase1_TransitionAll_Func2(struct Task *task)
     if (task->tData7 == 0)
     {
         if (--task->tData3 == 0)
-            DestroyTask(FindTaskIdByFunc(Phase1_Task_RunFuncs));
+            DestroyTask(FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs));
         else
         {
             task->tData6 = task->tData1;
@@ -3664,20 +3667,20 @@ bool8 Phase1_TransitionAll_Func2(struct Task *task)
 #undef tData6
 #undef tData7
 
-void sub_8149F08(void)
+static void sub_8149F08(void)
 {
     memset(sTransitionStructPtr, 0, sizeof(*sTransitionStructPtr));
     sub_8089C08(&sTransitionStructPtr->field_14, &sTransitionStructPtr->field_16);
 }
 
-void VBlankCB_BattleTransition(void)
+static void VBlankCB_BattleTransition(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_8149F40(u16 **a0)
+static void sub_8149F40(u16 **a0)
 {
     u16 reg, *vram;
 
@@ -3705,12 +3708,12 @@ void sub_8149F58(u16 **a0, u16 **a1)
     *a1 = vram1;
 }
 
-void sub_8149F84(void)
+static void sub_8149F84(void)
 {
     BlendPalettes(-1, 0x10, 0);
 }
 
-void sub_8149F98(s16 *array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 amplitude, s16 arrSize)
+static void sub_8149F98(s16 *array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 amplitude, s16 arrSize)
 {
     u8 i;
     for (i = 0; arrSize > 0; arrSize--, i++, index += indexIncrementer)
@@ -3719,7 +3722,7 @@ void sub_8149F98(s16 *array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 am
     }
 }
 
-void sub_814A014(u16 *array, s16 a1, s16 a2, s16 a3)
+static void sub_814A014(u16 *array, s16 a1, s16 a2, s16 a3)
 {
     s16 i;
 
@@ -3771,7 +3774,7 @@ void sub_814A014(u16 *array, s16 a1, s16 a2, s16 a3)
     }
 }
 
-void sub_814A1AC(s16 *data, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
+static void sub_814A1AC(s16 *data, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
 {
     data[0] = a1;
     data[1] = a2;
@@ -3796,7 +3799,7 @@ void sub_814A1AC(s16 *data, s16 a1, s16 a2, s16 a3, s16 a4, s16 a5, s16 a6)
     data[10] = 0;
 }
 
-bool8 sub_814A228(s16 *data, bool8 a1, bool8 a2)
+static bool8 sub_814A228(s16 *data, bool8 a1, bool8 a2)
 {
     u8 var;
     if (data[8] > data[9])
@@ -3848,7 +3851,7 @@ bool8 sub_814A228(s16 *data, bool8 a1, bool8 a2)
 #define tData6      data[6]
 #define tData7      data[7]
 
-bool8 Phase2_29_Func1(struct Task *task)
+static bool8 Phase2_29_Func1(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -3862,7 +3865,7 @@ bool8 Phase2_29_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_29_Func2(struct Task *task)
+static bool8 Phase2_29_Func2(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -3874,28 +3877,28 @@ bool8 Phase2_29_Func2(struct Task *task)
     return TRUE;
 }
 
-void Phase2Task_29(u8 taskId)
+static void Phase2Task_29(u8 taskId)
 {
     while (sPhase2_29_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void Phase2Task_30(u8 taskId)
+static void Phase2Task_30(u8 taskId)
 {
     while (sPhase2_30_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-bool8 Phase2_30_Func1(struct Task *task)
+static bool8 Phase2_30_Func1(struct Task *task)
 {
     u16 *dst1, *dst2;
 
     sub_8149F08();
     dp12_8087EA4();
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
-    task->data[2] = 0x2000;
-    task->data[1] = 0x7FFF;
-    task->data[5] = 0;
-    task->data[6] = 16;
-    task->data[7] = 2560;
+    task->tData2 = 0x2000;
+    task->tData1 = 0x7FFF;
+    task->tData5 = 0;
+    task->tData6 = 16;
+    task->tData7 = 2560;
     sTransitionStructPtr->BLDCNT = 0x3F41;
     sTransitionStructPtr->BLDALPHA = (task->tData6 << 8) | (task->tData5);
     REG_BLDCNT = sTransitionStructPtr->BLDCNT;
@@ -3910,7 +3913,7 @@ bool8 Phase2_30_Func1(struct Task *task)
     return FALSE;
 }
 
-bool8 Phase2_30_Func2(struct Task *task)
+static bool8 Phase2_30_Func2(struct Task *task)
 {
     u16 *dst1, *dst2;
 
@@ -3921,7 +3924,7 @@ bool8 Phase2_30_Func2(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_30_Func3(struct Task *task)
+static bool8 Phase2_30_Func3(struct Task *task)
 {
     u8 i;
 
@@ -3938,7 +3941,7 @@ bool8 Phase2_30_Func3(struct Task *task)
     return TRUE;
 }
 
-bool8 Phase2_30_Func4(struct Task *task)
+static bool8 Phase2_30_Func4(struct Task *task)
 {
     u8 i;
     u16 var6, amplitude, var8;
@@ -3990,7 +3993,7 @@ bool8 Phase2_30_Func4(struct Task *task)
     return FALSE;
 }
 
-void VBlankCB_Phase2_30(void)
+static void VBlankCB_Phase2_30(void)
 {
     VBlankCB_BattleTransition();
     REG_BLDCNT = sTransitionStructPtr->BLDCNT;
@@ -4000,25 +4003,338 @@ void VBlankCB_Phase2_30(void)
         DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
 }
 
-void HBlankCB_Phase2_30(void)
+static void HBlankCB_Phase2_30(void)
 {
     u16 var = gUnknown_02038C28[1][REG_VCOUNT];
     REG_BG0VOFS = var;
 }
 
-void Phase2Task_31(u8 taskId)
+static void Phase2Task_31(u8 taskId)
 {
     while (sPhase2_31_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void Phase2Task_33(u8 taskId)
+static void Phase2Task_33(u8 taskId)
 {
     while (sPhase2_33_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
 
-void Phase2Task_32(u8 taskId)
+static void Phase2Task_32(u8 taskId)
 {
     while (sPhase2_32_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+static bool8 Phase2_31_Func1(struct Task *task)
+{
+    u16 *dst1, *dst2;
+
+    sub_8149F58(&dst1, &dst2);
+    LZ77UnCompVram(gUnknown_085C8598, dst2);
+
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
+    FillBgTilemapBufferRect(0, 1, 0, 0, 1, 0x20, 0xF);
+    FillBgTilemapBufferRect(0, 1, 0x1D, 0, 1, 0x20, 0xF);
+    CopyBgTilemapBufferToVram(0);
+    LoadPalette(gUnknown_085C8578, 0xF0, 0x20);
+
+    task->tData2 = 1;
+    task->tData3 = 0;
+    task->tData4 = 0;
+    task->tData7 = 10;
+
+    task->tState++;
+    return FALSE;
+}
+
+static bool8 Phase2_31_Func2(struct Task *task)
+{
+    CopyRectToBgTilemapBufferRect(0, gUnknown_085C8928, 0, 0, 4, 4, task->tData2, task->tData3, 4, 4, 0xF, 0, 0);
+    CopyBgTilemapBufferToVram(0);
+
+    task->tData2 += 4;
+    if (++task->tData4 == 7)
+    {
+        task->tData2 = 1;
+        task->tData3 += 4;
+        task->tData4 = 0;
+        if (task->tData3 > 19)
+            task->tState++;
+    }
+
+    return FALSE;
+}
+
+static bool8 Phase2_31_Func3(struct Task *task)
+{
+    u8 i;
+    u16 *dst1, *dst2;
+
+    sub_8149F58(&dst1, &dst2);
+    if (task->tData6++ >= task->tData7)
+    {
+        switch (task->tData5)
+        {
+        case 0:
+            for (i = 250; i < 255; i++)
+            {
+                gPlttBufferUnfaded[i] = 0;
+                gPlttBufferFaded[i] = 0;
+            }
+            break;
+        case 1:
+            BlendPalettes(0xFFFF7FFF, 0x10, 0);
+            LZ77UnCompVram(gUnknown_085C86F4, dst2);
+            break;
+        case 2:
+            LZ77UnCompVram(gUnknown_085C87F4, dst2);
+            break;
+        case 3:
+            LZ77UnCompVram(gUnknown_085C88A4, dst2);
+            break;
+        default:
+            FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 0x20, 0x20);
+            CopyBgTilemapBufferToVram(0);
+            task->tState++;
+            return FALSE;
+        }
+
+        task->tData6 = 0;
+        task->tData5++;
+    }
+
+    return FALSE;
+}
+
+static bool8 Phase2_33_Func1(struct Task *task)
+{
+    u16 *dst1, *dst2;
+
+    sub_8149F58(&dst1, &dst2);
+    LZ77UnCompVram(gUnknown_085C8598, dst2);
+
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
+    FillBgTilemapBufferRect(0, 1, 0, 0, 1, 0x20, 0xF);
+    FillBgTilemapBufferRect(0, 1, 0x1D, 0, 1, 0x20, 0xF);
+    CopyBgTilemapBufferToVram(0);
+    LoadPalette(gUnknown_085C8578, 0xE0, 0x20);
+    LoadPalette(gUnknown_085C8578, 0xF0, 0x20);
+    BlendPalette(0xE0, 0x10, 8, 0);
+
+    task->tData2 = 34;
+    task->tData3 = 0;
+
+    task->tState++;
+    return FALSE;
+}
+
+static bool8 Phase2_33_Func2(struct Task *task)
+{
+    u8 var = gUnknown_085C9A30[task->tData2];
+    u8 varMod = var % 7;
+    u8 varDiv = var / 7;
+    CopyRectToBgTilemapBufferRect(0, &gUnknown_085C8928, 0, 0, 4, 4, 4 * varMod + 1, 4 * varDiv, 4, 4, 0xF, 0, 0);
+    CopyBgTilemapBufferToVram(0);
+
+    if (--task->tData2 < 0)
+        task->tState++;
+    return FALSE;
+}
+
+static bool8 Phase2_33_Func3(struct Task *task)
+{
+    BlendPalette(0xE0, 0x10, 3, 0);
+    BlendPalettes(0xFFFF3FFF, 0x10, 0);
+
+    task->tData2 = 0;
+    task->tData3 = 0;
+
+    task->tState++;
+    return FALSE;
+}
+
+static bool8 Phase2_33_Func4(struct Task *task)
+{
+    if ((task->tData3 ^= 1))
+    {
+        CopyRectToBgTilemapBufferRect(
+        0,
+        gUnknown_085C8928,
+        0,
+        0,
+        4,
+        4,
+        4 * (gUnknown_085C9A30[task->tData2] % 7) + 1,
+        4 * (gUnknown_085C9A30[task->tData2] / 7),
+        4,
+        4,
+        0xE,
+        0,
+        0);
+    }
+    else
+    {
+        if (task->tData2 > 0)
+        {
+            FillBgTilemapBufferRect(
+            0,
+            1,
+            4 * (gUnknown_085C9A30[task->tData2 - 1] % 7) + 1,
+            4 * (gUnknown_085C9A30[task->tData2 - 1] / 7),
+            4,
+            4,
+            0xF);
+        }
+
+        task->tData2++;
+    }
+
+    if (task->tData2 > 34)
+        task->tState++;
+
+    CopyBgTilemapBufferToVram(0);
+    return FALSE;
+}
+
+static bool8 Phase2_31_33_Func5(struct Task *task)
+{
+    FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 0x20, 0x20);
+    CopyBgTilemapBufferToVram(0);
+    BlendPalettes(0xFFFFFFFF, 0x10, 0);
+    DestroyTask(FindTaskIdByFunc(task->func));
+    return FALSE;
+}
+
+// sub task for phase2 32
+#define tSub32_X_delta  data[0]
+#define tSub32_Y_delta  data[1]
+#define tSub32_Bool     data[2]
+
+static void sub_814ABE4(u8 taskId)
+{
+    if (!(gTasks[taskId].tSub32_Bool ^= 1))
+    {
+        SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_X);
+        SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
+        gBattle_BG0_X += gTasks[taskId].tSub32_X_delta;
+        gBattle_BG0_Y += gTasks[taskId].tSub32_Y_delta;
+    }
+}
+
+static bool8 Phase2_32_Func1(struct Task *task)
+{
+    u8 taskId = 0;
+    u16 *dst1, *dst2;
+
+    sub_8149F58(&dst1, &dst2);
+    LZ77UnCompVram(gUnknown_085C8598, dst2);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
+    CopyBgTilemapBufferToVram(0);
+    LoadPalette(gUnknown_085C8578, 0xF0, 0x20);
+
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_X);
+    SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
+
+    task->tData2 = 0;
+    taskId = CreateTask(sub_814ABE4, 1);
+    switch (Random() % 4)
+    {
+    case 0:
+        gTasks[taskId].tSub32_X_delta = 1;
+        gTasks[taskId].tSub32_Y_delta = 1;
+        break;
+    case 1:
+        gTasks[taskId].tSub32_X_delta = -1;
+        gTasks[taskId].tSub32_Y_delta = -1;
+        break;
+    case 2:
+        gTasks[taskId].tSub32_X_delta = 1;
+        gTasks[taskId].tSub32_Y_delta = -1;
+        break;
+    default:
+        gTasks[taskId].tSub32_X_delta = -1;
+        gTasks[taskId].tSub32_Y_delta = 1;
+        break;
+    }
+
+    task->tState++;
+    return FALSE;
+}
+
+static bool8 Phase2_32_Func2(struct Task *task)
+{
+    u8 var = gUnknown_085C9A53[task->tData2];
+    u8 varDiv = var / 8;
+    u8 varAnd = var & 7;
+
+    CopyRectToBgTilemapBufferRect(
+    0,
+    &gUnknown_085C8928,
+    0,
+    0,
+    4,
+    4,
+    4 * varDiv + 1,
+    4 * varAnd,
+    4,
+    4,
+    0xF,
+    0,
+    0);
+    CopyBgTilemapBufferToVram(0);
+
+    if (++task->tData2 > 63)
+        task->tState++;
+    return 0;
+}
+
+static bool8 Phase2_32_Func3(struct Task *task)
+{
+    BlendPalettes(0xFFFF7FFF, 0x10, 0);
+
+    task->tData2 = 0;
+
+    task->tState++;
+    return FALSE;
+}
+
+static bool8 Phase2_32_Func4(struct Task *task)
+{
+    u8 var = gUnknown_085C9A53[task->tData2];
+    u8 varDiv = var / 8;
+    u8 varAnd = var & 7;
+
+    FillBgTilemapBufferRect(0, 1, 4 * varDiv + 1, 4 * varAnd, 4, 4, 0xF);
+    CopyBgTilemapBufferToVram(0);
+
+    if (++task->tData2 > 63)
+    {
+        DestroyTask(FindTaskIdByFunc(sub_814ABE4));
+        task->tState++;
+    }
+
+    return FALSE;
+}
+
+#undef tSub32_X_delta
+#undef tSub32_Y_delta
+#undef tSub32_Bool
+
+static bool8 Phase2_32_Func5(struct Task *task)
+{
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_Y);
+
+    FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 0x20, 0x20);
+    CopyBgTilemapBufferToVram(0);
+    BlendPalettes(0xFFFFFFFF, 0x10, 0);
+
+    DestroyTask(FindTaskIdByFunc(task->func));
+    task->tState++; // UB: changing value of a destroyed task
+    return FALSE;
 }
 
 #undef tData1

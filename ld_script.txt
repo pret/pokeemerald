@@ -197,7 +197,6 @@ SECTIONS {
         src/landmark.o(.text);
         asm/fldeff_strength.o(.text);
         src/battle_transition.o(.text);
-        asm/battle_transition.o(.text);
         src/battle_controller_link_partner.o(.text);
         src/battle_message.o(.text);
         asm/cable_car.o(.text);

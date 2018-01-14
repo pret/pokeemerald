@@ -2,11 +2,14 @@
 #define GUARD_BATTLE_TRANSITION_H
 
 void TestBattleTransition(u8 transitionId);
-void sub_8149DFC(u8 a1);
-void BattleTransition_StartOnField(u8 transitionID);
-void BattleTransition_Start(u8 transitionID);
+void BattleTransition_StartOnField(u8 transitionId);
+void BattleTransition_Start(u8 transitionId);
 bool8 IsBattleTransitionDone(void);
-void Phase1_Task_RunFuncs(u8 taskId);
+bool8 FldEff_Pokeball(void);
+void TransitionPhase1_Task_RunFuncs(u8 taskId);
+void sub_8149F58(u16 **a0, u16 **a1);
+
+extern const struct SpritePalette gFieldEffectObjectPaletteInfo10;
 
 enum // TRANSITION_MUGSHOT
 {
