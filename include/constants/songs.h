@@ -124,7 +124,7 @@
 #define SE_W231 120             // Harden
 #define SE_W171 121             // Nightmare
 #define SE_W233 122             // Vital Throw
-#define SE_W233B 123            // Vital Throw
+#define SE_W233B 123            // Vital Throw 2
 #define SE_W145 124             // Bubble
 #define SE_W145B 125            // Bubble 2
 #define SE_W145C 126            // Bubble 3
@@ -417,7 +417,7 @@
 #define MUS_RG_DEMO 489         // Opening Movie
 #define MUS_RG_TITLE 490        // Title Screen
 #define MUS_RG_GUREN 491        // Cinnabar Island
-#define MUS_RG_SHION 492        // Lavendar Town
+#define MUS_RG_SHION 492        // Lavender Town
 #define MUS_RG_KAIHUKU 493      // RBY Pokémon Center Healing
 #define MUS_RG_CYCLING 494      // Cycling
 #define MUS_RG_ROCKET 495       // Encounter! Team Rocket
