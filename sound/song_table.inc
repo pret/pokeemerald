@@ -1,4 +1,5 @@
 	.align 2
+
 gSongTable:: @ 86B49F0
 	song mus_dummy, 0, 0
 	song se_kaifuku, 1, 1           @ Healing Item
@@ -91,14 +92,14 @@ gSongTable:: @ 86B49F0
 	song se_t_kami2, 1, 1           @ Thunder 2
 	song se_elebeta, 1, 1           @ Elevator
 	song se_hinsi, 3, 3             @ Low Health
-	song se_expmax, 1, 1            @ Exp Max
+	song se_expmax, 1, 1            @ Exp. Max
 	song se_tamakoro, 2, 2          @ Roulette Ball
 	song se_tamakoro_e, 2, 2        @ Roulette Ball 2
 	song se_basabasa, 1, 1
 	song se_regi, 1, 1              @ Cash Register
 	song se_c_gaji, 1, 1            @ Contest Hearts
-	song se_c_maku_u, 1, 1          @ Interlude between Contest Rounds (in)
-	song se_c_maku_d, 1, 1          @ Interlude between Contest Rounds (out)
+	song se_c_maku_u, 1, 1          @ Contest Curtain rise
+	song se_c_maku_d, 1, 1          @ Contest Curtain fall
 	song se_c_pasi, 1, 1
 	song se_c_syu, 1, 1
 	song se_c_pikon, 1, 1           @ Pokémon Appears in Contest
@@ -264,6 +265,7 @@ gSongTable:: @ 86B49F0
 	song se_rg_deomov, 1, 1         @ Deoxys Moves
 	song se_rg_excellent, 1, 1
 	song se_rg_nawamiss, 1, 1
+	@ end FRLG SFX
 	song se_toreeye, 1, 1           @ Trainer's Eye Call
 	song se_toreoff, 1, 1           @ Trainer's Eye Hang Up
 	song se_hantei1, 1, 1           @ Battle Arena Time's Up 1
@@ -271,6 +273,7 @@ gSongTable:: @ 86B49F0
 	song se_curtain, 1, 1           @ Battle Pike Curtain Open
 	song se_curtain1, 1, 1          @ Battle Pike Curtain Close
 	song se_ussoki, 1, 1            @ Sudowoodo
+
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
@@ -352,7 +355,7 @@ gSongTable:: @ 86B49F0
 	song dummy_song_header, 0, 0
 	song dummy_song_header, 0, 0
 	song mus_tetsuji, 0, 0          @ Littleroot Town Test 'TETSUJI'
-	song mus_field13, 0, 0          @ GS - Route 38
+	song mus_field13, 0, 0          @ GSC - Route 38
 	song mus_kachi22, 0, 0          @ Wild Pokémon Defeated
 	song mus_kachi2, 0, 0           @ Wild Pokémon Defeated with Intro
 	song mus_kachi3, 0, 0           @ Gym Leader Defeated
@@ -372,7 +375,7 @@ gSongTable:: @ 86B49F0
 	song mus_me_asa, 2, 2           @ Pokémon Healed
 	song mus_me_bachi, 2, 2         @ Obtained a Badge!
 	song mus_fanfa4, 2, 2           @ Obtained an Item!
-	song mus_fanfa5, 2, 2           @ Pokémon Caught!
+	song mus_fanfa5, 2, 2           @ Your Pokémon Just Evolved!
 	song mus_me_waza, 2, 2          @ Obtained a TM/HM!
 	song mus_bijyutu, 0, 0          @ Lilycove Museum
 	song mus_dooro_x4, 0, 0         @ Route 122/Intro
@@ -391,7 +394,7 @@ gSongTable:: @ 86B49F0
 	song mus_me_kinomi, 2, 2        @ Obtained a Berry!
 	song mus_me_tama, 2, 2          @ Awakening the Super-Ancient Pokémon
 	song mus_me_b_big, 2, 2         @ Slots Jackpot!
-	song mus_me_b_small, 2,         @ Slots Victory!
+	song mus_me_b_small, 2, 2       @ Slots Victory!
 	song mus_me_zannen, 2, 2        @ Too bad!
 	song mus_bd_time, 0, 0          @ Roulette!
 	song mus_test1, 0, 0            @ Contest Test 1
@@ -406,10 +409,10 @@ gSongTable:: @ 86B49F0
 	song mus_granroad, 0, 0         @ Route 119
 	song mus_cycling, 0, 0          @ Cycling
 	song mus_friendly, 0, 0         @ Pokémart
-	song mus_mishiro, 0, 0          @ Littleroot
+	song mus_mishiro, 0, 0          @ Littleroot Town
 	song mus_tozan, 0, 0            @ Sky Pillar
 	song mus_girleye, 0, 0          @ Encounter! Girl
-	song mus_minamo, 0, 0           @ Lilycove
+	song mus_minamo, 0, 0           @ Lilycove City
 	song mus_ashroad, 0, 0          @ Route 111
 	song mus_event0, 0, 0           @ Help me!
 	song mus_deepdeep, 0, 0         @ Underwater
@@ -418,7 +421,7 @@ gSongTable:: @ 86B49F0
 	song mus_demo1, 0, 0            @ Opening Movie
 	song mus_girl_sup, 0, 0         @ Encounter! May
 	song mus_hageshii, 0, 0         @ Encounter! Biker
-	song mus_kakkoii, 0, 0          @ Encounter! Electric
+	song mus_kakkoii, 0, 0          @ Encounter! Electric Trainer
 	song mus_kazanbai, 0, 0         @ Route 113
 	song mus_aqa_0, 0, 0            @ Encounter! Team Aqua
 	song mus_tsuretek, 0, 0         @ Follow Me!
@@ -446,12 +449,12 @@ gSongTable:: @ 86B49F0
 	song mus_t_battle, 0, 0         @ Opening Battle
 	song mus_ooame, 0, 0            @ The Flood
 	song mus_hideri, 0, 0           @ The Drought
-	song mus_runecity, 0, 0         @ Sootopolis
+	song mus_runecity, 0, 0         @ Sootopolis City
 	song mus_con_k, 0, 0            @ Berry Blending Results
 	song mus_eikou_r, 0, 0          @ Hall of Fame
 	song mus_karakuri, 0, 0         @ Trick House
 	song mus_hutago, 0, 0           @ Encounter! Kid
-	song mus_sitennou, 0, 0         @ Encounter! Psychic
+	song mus_sitennou, 0, 0         @ Encounter! Elite Four
 	song mus_yama_eye, 0, 0         @ Encounter! Hiker
 	song mus_conlobby, 0, 0         @ Contest Lobby
 	song mus_inter_v, 0, 0          @ Encounter! Gabby and Ty
@@ -481,7 +484,7 @@ gSongTable:: @ 86B49F0
 	song mus_battle32, 0, 0         @ Battle! Gym Leader
 	song mus_battle33, 0, 0         @ Battle! Champion
 	song mus_battle36, 0, 0         @ Battle! Regi Trio
-	song mus_battle34, 0, 0         @ Battle! Legendary Pokémon
+	song mus_battle34, 0, 0         @ Battle! Legendary Pokémon (dupe)
 	song mus_battle35, 0, 0         @ Battle! Rival
 	song mus_battle38, 0, 0         @ Battle! Elite Four
 	song mus_battle30, 0, 0         @ Battle! Archie/Maxie
@@ -496,7 +499,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_guren, 0, 0         @ Cinnabar Island
 	song mus_rg_shion, 0, 0         @ Lavender Town
 	song mus_rg_kaihuku, 0, 0       @ RBY Pokémon Center Healing
-	song mus_rg_cycling, 0, 0       @ Bicycle
+	song mus_rg_cycling, 0, 0       @ Cycling
 	song mus_rg_rocket, 0, 0        @ Encounter! Team Rocket
 	song mus_rg_shoujo, 0, 0        @ Encounter! Girl
 	song mus_rg_shounen, 0, 0       @ Encounter! Boy
@@ -510,7 +513,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_load02, 0, 0        @ Route 2
 	song mus_rg_load03, 0, 0        @ Route 11
 	song mus_rg_champ_r, 0, 0       @ Victory Road
-	song mus_rg_vs_gym, 0, 0        @ Battle! Gym Leader
+	song mus_rg_vs_gym, 0, 0        @ Battle! Gym Leader/Elite Four
 	song mus_rg_vs_tore, 0, 0       @ Battle! Trainer
 	song mus_rg_vs_yasei, 0, 0      @ Battle! Wild Pokémon
 	song mus_rg_vs_last, 0, 0       @ Battle! Champion
@@ -529,7 +532,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_win_gym, 0, 0       @ Victory! Gym Leader
 	song mus_rg_kuchiba, 0, 0       @ Vermillion City
 	song mus_rg_nibi, 0, 0          @ Viridian/Saffron/Pewter City
-	song mus_rg_rival1, 0, 0        @ Rival's Theme
+	song mus_rg_rival1, 0, 0        @ Encounter! Rival
 	song mus_rg_rival2, 0, 0        @ Rival's Exit
 	song mus_rg_fan2, 2, 2          @ Fanfare 2
 	song mus_rg_fan5, 2, 2          @ Obtained a Starter!
@@ -545,10 +548,10 @@ gSongTable:: @ 86B49F0
 	song mus_rg_network, 0, 0       @ Network Center
 	song mus_rg_okurimono, 0, 0     @ Mystery Gift
 	song mus_rg_kinomikui, 0, 0
-	song mus_rg_nanadungeon, 0,     @ Sevii Islands Cave (Mt. Moon)
+	song mus_rg_nanadungeon, 0, 0   @ Sevii Islands Cave (Mt. Moon)
 	song mus_rg_oshie_tv, 0, 0      @ Follow Me!
 	song mus_rg_nanashima, 0, 0     @ Sevii Islands Routes (Lake of Rage)
-	song mus_rg_nanaiseki, 0, 0     @ Sevii Islands Forest (Viridian Forest)
+	song mus_rg_nanaiseki, 0, 0     @ Sevii Islands Forests (Viridian Forest)
 	song mus_rg_nana123, 0, 0       @ Sevii Islands 1-3 (Viridian/Saffron/Pewter)
 	song mus_rg_nana45, 0, 0        @ Sevii Islands 4-5 (Azalea Town)
 	song mus_rg_nana67, 0, 0        @ Sevii Islands 6-7 (Violet City)
@@ -560,7 +563,7 @@ gSongTable:: @ 86B49F0
 	song mus_rg_deoeye, 0, 0        @ Encounter! Deoxys!
 	song mus_rg_t_tower, 0, 0       @ Trainer Tower (Gym)
 	song mus_rg_slowmasara, 0, 0    @ Pallet Town (Hall of Fame remix)
-	song mus_rg_tvnoize, 0, 0	    @ Teachy TV
+	song mus_rg_tvnoize, 0, 0       @ Teachy TV
 	song ph_trap_blend, 2, 2
 	song ph_trap_held, 2, 2
 	song ph_trap_solo, 2, 2
