@@ -481,3 +481,6 @@ $(pknvoptionsdir)/options.4bpp: $(pknvoptionsdir)/hoenn_map.4bpp \
 
 $(pknvdir)/header.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
+
+$(unusedgfxdir)/intro_birch_beauty.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 374
