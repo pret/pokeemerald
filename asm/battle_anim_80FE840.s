@@ -36243,7 +36243,7 @@ _08110C10:
 	mov r0, sp
 	movs r2, 0
 	bl sub_80A6D60
-	ldr r0, =gUnknown_08D8DAB8
+	ldr r0, =gBattleAnimSpritePalette_261
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4

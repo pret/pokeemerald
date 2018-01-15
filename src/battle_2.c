@@ -92,8 +92,8 @@ extern struct UnknownPokemonStruct2 gUnknown_02022FF8[3]; // what is it used for
 extern struct UnknownPokemonStruct2* gUnknown_02023058; // what is it used for?
 extern u8 gUnknown_02039B28[]; // possibly a struct?
 extern struct UnknownStruct6 gUnknown_02038C28; // todo: identify & document
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gDecompressionBuffer[];
 extern u16 gUnknown_020243FC;
 extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
@@ -1610,8 +1610,8 @@ void CB2_QuitRecordedBattle(void)
     UpdatePaletteFade();
     if (!gPaletteFade.active)
     {
-        m4aMPlayStop(&gMPlay_SE1);
-        m4aMPlayStop(&gMPlay_SE2);
+        m4aMPlayStop(&gMPlayInfo_SE1);
+        m4aMPlayStop(&gMPlayInfo_SE2);
         FreeRestoreBattleData();
         FreeAllWindowBuffers();
         SetMainCallback2(gMain.savedCallback);

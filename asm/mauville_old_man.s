@@ -965,7 +965,7 @@ _08120850:
 	lsls r1, 1
 	adds r0, r1
 	strh r0, [r6, 0x6]
-	ldr r4, =gMPlay_SE2
+	ldr r4, =gMPlayInfo_SE2
 	ldr r5, =0x0000ffff
 	ldrh r2, [r6, 0x6]
 	adds r0, r4, 0
@@ -1008,7 +1008,7 @@ _081208BC:
 	subs r0, 0x40
 _081208C0:
 	strh r0, [r6, 0x8]
-	ldr r4, =gMPlay_SE2
+	ldr r4, =gMPlayInfo_SE2
 	ldr r5, =0x0000ffff
 	ldrh r2, [r6, 0x6]
 	adds r0, r4, 0
@@ -1059,7 +1059,7 @@ _08120922:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08120938
-	ldr r0, =gMPlay_SE2
+	ldr r0, =gMPlayInfo_SE2
 	bl m4aMPlayStop
 	movs r0, 0x4
 _08120936:
@@ -1228,7 +1228,7 @@ _08120A7E:
 	bne _08120AB0
 	movs r0, 0x6
 	bl FadeInBGM
-	ldr r0, =gMPlay_SE2
+	ldr r0, =gMPlayInfo_SE2
 	movs r1, 0x2
 	bl m4aMPlayFadeOutTemporarily
 	bl EnableBothScriptContexts

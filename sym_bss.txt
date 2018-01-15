@@ -192,7 +192,19 @@ gUnknown_030012FC: @ 30012FC
 	.space 0x4
 
 gUnknown_03001300: @ 3001300
-	.space 0x770
+	.space 0x40
+
+gMPlayTrack_BGM: @ 3001340
+	.space 0x320
+
+gMPlayTrack_SE1: @ 3001660
+	.space 0xF0
+
+gMPlayTrack_SE2: @ 3001750
+	.space 0x2D0
+
+gMPlayTrack_SE3: @ 3001A20
+	.space 0x50
 
 	.include "src/agb_flash.o"
 	.include "src/siirtc.o"
