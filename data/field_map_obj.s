@@ -8,9 +8,7 @@ gUnknown_084975C4:: @ 84975C4
 	.byte 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x06, 0x07, 0x08, 0x09, 0x0b, 0x0b, 0x00, 0x00, 0x00, 0x00
 
 gUnknown_084975D4:: @ 84975D4
-	.2byte 0, 65535
-
-	sprite_template gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject
+	spr_template 0x0000, 0xFFFF, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject
 
 gUnknown_084975EC:: @ 84975EC
 	.4byte CameraObject_0

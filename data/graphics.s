@@ -2329,11 +2329,11 @@ gSubstituteDollTilemap:: @ 8C2D120
 	.incbin "graphics/battle_anims/sprites/substitute.bin.lz"
 
 	.align 2
-gUnknown_08C2D348:: @ 8C2D348
+gBattleAnimSpriteSheet_241:: @ 8C2D348
 	.incbin "graphics/battle_anims/sprites/241.4bpp.lz"
 
 	.align 2
-gUnknown_08C2D40C:: @ 8C2D40C
+gBattleAnimSpritePalette_241:: @ 8C2D40C
 	.incbin "graphics/battle_anims/sprites/241.gbapal.lz"
 
 	.align 2
@@ -2345,19 +2345,19 @@ gContestConfetti_Pal:: @ 8C2D548
 	.incbin "graphics/misc/confetti.gbapal.lz"
 
 	.align 2
-gUnknown_08C2D570:: @ 8C2D570
+gBattleAnimSpriteSheet_242:: @ 8C2D570
 	.incbin "graphics/battle_anims/sprites/242.4bpp.lz"
 
 	.align 2
-gUnknown_08C2D6AC:: @ 8C2D6AC
+gBattleAnimSpritePalette_242:: @ 8C2D6AC
 	.incbin "graphics/battle_anims/sprites/242.gbapal.lz"
 
 	.align 2
-gUnknown_08C2D6D0:: @ 8C2D6D0
+gBattleAnimSpriteSheet_243:: @ 8C2D6D0
 	.incbin "graphics/battle_anims/sprites/243.4bpp.lz"
 
 	.align 2
-gUnknown_08C2D6F8:: @ 8C2D6F8
+gBattleAnimSpritePalette_243:: @ 8C2D6F8
 	.incbin "graphics/battle_anims/sprites/243.gbapal.lz"
 
 	.align 2
@@ -3081,7 +3081,7 @@ gUnknown_08D8D58C:: @ 8D8D58C
 	.incbin "graphics/battle_anims/backgrounds/sandstorm_brew.4bpp.lz"
 
 	.align 2
-gUnknown_08D8DAB8:: @ 8E68580
+gBattleAnimSpritePalette_261:: @ 8E68580
 	.incbin "graphics/battle_anims/sprites/261.gbapal.lz"
 
 	.align 2
