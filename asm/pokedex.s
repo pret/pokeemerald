@@ -379,7 +379,7 @@ _080BB582:
 	b _080BB74C
 	.pool
 _080BB5FC:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade

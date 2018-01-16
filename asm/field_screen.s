@@ -9621,7 +9621,7 @@ _080AFE64:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x1
 	bne _080AFEB4
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0x2
 	strh r0, [r4]
 	b _080AFEC6
@@ -9714,7 +9714,7 @@ _080AFF28:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x1
 	bne _080AFF78
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0x2
 	strh r0, [r4]
 	b _080AFF8A

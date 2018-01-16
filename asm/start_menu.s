@@ -653,7 +653,7 @@ _0809FD38:
 	bl play_some_sound
 	bl RemoveExtraStartMenuWindows
 	bl overworld_free_bg_tilemaps
-	ldr r0, =CB2_OptionsMenu
+	ldr r0, =CB2_InitOptionMenu
 	bl SetMainCallback2
 	ldr r1, =gMain
 	ldr r0, =sub_8086194
@@ -1510,7 +1510,7 @@ _080A0418:
 	bl SetGpuReg
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r2, 0xA0
 	lsls r2, 19
 	mov r1, sp

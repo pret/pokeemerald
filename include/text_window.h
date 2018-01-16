@@ -7,7 +7,7 @@ struct TilesPal
     u16 *pal;
 };
 
-const struct TilesPal* sub_8098758(u8 id);
+const struct TilesPal* GetWindowFrameTilesPal(u8 id);
 void copy_textbox_border_tile_patterns_to_vram(u8 windowId, u16 destOffset, u8 palOffset);
 void sub_809882C(u8 windowId, u16 destOffset, u8 palOffset);
 void sub_80987D4(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset);

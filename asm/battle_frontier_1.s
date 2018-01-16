@@ -9449,7 +9449,7 @@ _08193AA8:
 	b _08193BC2
 _08193ABA:
 	bl FreeAllWindowBuffers
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r4, =gUnknown_0203CD7C
 	ldr r0, [r4]
 	bl Free
@@ -9494,7 +9494,7 @@ _08193B20:
 	cmp r6, 0
 	bne _08193BC2
 	bl FreeAllWindowBuffers
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r4, =gUnknown_0203CD7C
 	ldr r0, [r4]
 	bl Free
@@ -9534,7 +9534,7 @@ _08193B84:
 	cmp r6, 0
 	bne _08193BC2
 	bl FreeAllWindowBuffers
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r4, =gUnknown_0203CD7C
 	ldr r0, [r4]
 	bl Free

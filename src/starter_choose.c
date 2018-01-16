@@ -53,7 +53,7 @@ extern const u8 gUnknown_085B1E0C[];
 extern const u8 gUnknown_085B1E28[][2];
 
 extern void sub_809882C(u8, u16, u8);
-extern void remove_some_task(void);
+extern void ScanlineEffect_Stop(void);
 extern void clear_scheduled_bg_copies_to_vram(void);
 extern void dp13_810BB8C(void);
 extern void do_scheduled_bg_tilemap_copies_to_vram(void);
@@ -134,7 +134,7 @@ void CB2_ChooseStarter(void)
     DeactivateAllTextPrinters();
     sub_809882C(0, 0x2A8, 0xD0);
     clear_scheduled_bg_copies_to_vram();
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();

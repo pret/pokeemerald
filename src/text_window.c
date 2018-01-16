@@ -7,14 +7,14 @@
 extern u8 LoadBgTiles(u8 bg, const void *src, u16 size, u16 destOffset);
 extern void FillBgTilemapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette);
 
-extern const struct TilesPal gUnknown_0851021C[];
+extern const struct TilesPal gUnknown_0851021C[20];
 extern const u32 gUnknown_08DDD748[];
 extern const u16 gUnknown_0851017C[];
 extern const u16 gUnknown_08DDD728[];
 
-const struct TilesPal* sub_8098758(u8 id)
+const struct TilesPal* GetWindowFrameTilesPal(u8 id)
 {
-    if (id > 19)
+    if (id >= ARRAY_COUNT(gUnknown_0851021C))
         return &gUnknown_0851021C[0];
     else
         return &gUnknown_0851021C[id];
@@ -121,5 +121,5 @@ const u16* GetOverworldTextboxPalettePtr(void)
 void sub_8098C6C(u8 bg, u16 destOffset, u8 palOffset)
 {
     LoadBgTiles(bg, gUnknown_0851021C[gSaveBlock2Ptr->optionsWindowFrameType].tiles, 0x120, destOffset);
-    LoadPalette(sub_8098758(gSaveBlock2Ptr->optionsWindowFrameType)->pal, palOffset, 0x20);
+    LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, palOffset, 0x20);
 }

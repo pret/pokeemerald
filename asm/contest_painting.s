@@ -107,7 +107,7 @@ _0812FE80:
 	.4byte _0812FF2A
 	.4byte _0812FF54
 _0812FE94:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0
 	bl SetVBlankCallback
 	bl AllocateMonSpritesGfx

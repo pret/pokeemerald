@@ -119,7 +119,7 @@ _08177D18:
 	bl clear_scheduled_bg_copies_to_vram
 	b _08177DDC
 _08177D26:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _08177DDC
 _08177D2C:
 	bl ResetPaletteFade

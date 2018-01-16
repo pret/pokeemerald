@@ -141,7 +141,7 @@ void InitBerryFixProgram(void)
     SetVBlankCallback(NULL);
     ResetSpriteData();
     ResetTasks();
-    remove_some_task();
+    ScanlineEffect_Stop();
     SetGpuReg(REG_OFFSET_DISPCNT, 0x0000);
     berry_fix_mb_manager = AllocZeroed(0x50);
     berry_fix_mb_manager->state = 0;
