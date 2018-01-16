@@ -23,21 +23,21 @@
 
 struct TransitionData
 {
-    vs8 VBlank_DMA;
+    vu8 VBlank_DMA;
     u16 WININ;
     u16 WINOUT;
-    u16 field_6;
+    u16 WIN0H;
     u16 WIN0V;
-    u16 field_A;
-    u16 field_C;
+    u16 field_A; // unused
+    u16 field_C; // unused
     u16 BLDCNT;
     u16 BLDALPHA;
     u16 BLDY;
     s16 field_14;
     s16 field_16;
-    s16 field_18;
-    s16 field_1A;
-    s16 field_1C;
+    s16 BG0HOFS_1;
+    s16 BG0HOFS_2;
+    s16 BG0VOFS; // used but not set
     s16 field_1E; // unused
     s16 field_20;
     s16 field_22; // unused
@@ -1265,7 +1265,7 @@ static void sub_814669C(struct Task *task)
     task->tData5 = 0x4000;
     sTransitionStructPtr->WININ = 63;
     sTransitionStructPtr->WINOUT = 0;
-    sTransitionStructPtr->field_6 = 240;
+    sTransitionStructPtr->WIN0H = 240;
     sTransitionStructPtr->WIN0V = 160;
     sTransitionStructPtr->BLDCNT = 0x3F41;
     sTransitionStructPtr->BLDALPHA = (task->tData1 << 8) | (task->tData2);
@@ -1745,7 +1745,7 @@ static bool8 Phase2_Clockwise_BlackFade_Func1(struct Task *task)
 
     sTransitionStructPtr->WININ = 0;
     sTransitionStructPtr->WINOUT = 63;
-    sTransitionStructPtr->field_6 = -3855;
+    sTransitionStructPtr->WIN0H = -3855;
     sTransitionStructPtr->WIN0V = 160;
 
     for (i = 0; i < 160; i++)
@@ -2016,7 +2016,7 @@ static bool8 Phase2_Wave_Func1(struct Task *task)
 
     sTransitionStructPtr->WININ = 63;
     sTransitionStructPtr->WINOUT = 0;
-    sTransitionStructPtr->field_6 = 240;
+    sTransitionStructPtr->WIN0H = 240;
     sTransitionStructPtr->WIN0V = 160;
 
     for (i = 0; i < 160; i++)
@@ -2210,8 +2210,8 @@ static bool8 Phase2_Mugshot_Func3(struct Task *task)
     if (mergedValue == 0xF0)
         task->tState++;
 
-    sTransitionStructPtr->field_18 -= 8;
-    sTransitionStructPtr->field_1A += 8;
+    sTransitionStructPtr->BG0HOFS_1 -= 8;
+    sTransitionStructPtr->BG0HOFS_2 += 8;
     sTransitionStructPtr->VBlank_DMA++;
     return FALSE;
 }
@@ -2232,8 +2232,8 @@ static bool8 Phase2_Mugshot_Func4(struct Task *task)
     task->tData1 = 0;
     task->tData2 = 0;
     task->tData3 = 0;
-    sTransitionStructPtr->field_18 -= 8;
-    sTransitionStructPtr->field_1A += 8;
+    sTransitionStructPtr->BG0HOFS_1 -= 8;
+    sTransitionStructPtr->BG0HOFS_2 += 8;
 
     sub_8148484(task->tOpponentSpriteId, 0);
     sub_8148484(task->tPlayerSpriteId, 1);
@@ -2247,8 +2247,8 @@ static bool8 Phase2_Mugshot_Func4(struct Task *task)
 
 static bool8 Phase2_Mugshot_Func5(struct Task *task)
 {
-    sTransitionStructPtr->field_18 -= 8;
-    sTransitionStructPtr->field_1A += 8;
+    sTransitionStructPtr->BG0HOFS_1 -= 8;
+    sTransitionStructPtr->BG0HOFS_2 += 8;
     if (sub_81484B8(task->tOpponentSpriteId))
     {
         task->tState++;
@@ -2259,8 +2259,8 @@ static bool8 Phase2_Mugshot_Func5(struct Task *task)
 
 static bool8 Phase2_Mugshot_Func6(struct Task *task)
 {
-    sTransitionStructPtr->field_18 -= 8;
-    sTransitionStructPtr->field_1A += 8;
+    sTransitionStructPtr->BG0HOFS_1 -= 8;
+    sTransitionStructPtr->BG0HOFS_2 += 8;
     if (sub_81484B8(task->tPlayerSpriteId))
     {
         sTransitionStructPtr->VBlank_DMA = FALSE;
@@ -2285,8 +2285,8 @@ static bool8 Phase2_Mugshot_Func7(struct Task *task)
 
     sTransitionStructPtr->VBlank_DMA = FALSE;
     r6 = TRUE;
-    sTransitionStructPtr->field_18 -= 8;
-    sTransitionStructPtr->field_1A += 8;
+    sTransitionStructPtr->BG0HOFS_1 -= 8;
+    sTransitionStructPtr->BG0HOFS_2 += 8;
 
     if (task->tData4 < 0x50)
         task->tData4 += 2;
@@ -2358,7 +2358,7 @@ static void VBlankCB0_Phase2_Mugshots(void)
     VBlankCB_BattleTransition();
     if (sTransitionStructPtr->VBlank_DMA != 0)
         DmaCopy16(3, gUnknown_02038C28[0], gUnknown_02038C28[1], 320);
-    REG_BG0VOFS = sTransitionStructPtr->field_1C;
+    REG_BG0VOFS = sTransitionStructPtr->BG0VOFS;
     REG_WININ = sTransitionStructPtr->WININ;
     REG_WINOUT = sTransitionStructPtr->WINOUT;
     REG_WIN0V = sTransitionStructPtr->WIN0V;
@@ -2378,9 +2378,9 @@ static void VBlankCB1_Phase2_Mugshots(void)
 static void HBlankCB_Phase2_Mugshots(void)
 {
     if (REG_VCOUNT < 80)
-        REG_BG0HOFS = sTransitionStructPtr->field_18;
+        REG_BG0HOFS = sTransitionStructPtr->BG0HOFS_1;
     else
-        REG_BG0HOFS = sTransitionStructPtr->field_1A;
+        REG_BG0HOFS = sTransitionStructPtr->BG0HOFS_2;
 }
 
 static void Mugshots_CreateOpponentPlayerSprites(struct Task *task)
@@ -2541,9 +2541,9 @@ static bool8 Phase2_Slice_Func2(struct Task *task)
 
     for (i = 0; i < 160; i++)
     {
-        u16* storeLoc1 = &gUnknown_02038C28[0][i];
-        u16* storeLoc2 = &gUnknown_02038C28[0][i + 160];
-        if (1 & i)
+        u16 *storeLoc1 = &gUnknown_02038C28[0][i];
+        u16 *storeLoc2 = &gUnknown_02038C28[0][i + 160];
+        if (i & 1)
         {
             *storeLoc1 = sTransitionStructPtr->field_14 + task->tData1;
             *storeLoc2 = 0xF0 - task->tData1;
@@ -2775,7 +2775,7 @@ static bool8 Phase2_Blackhole_Func1(struct Task *task)
 
     sTransitionStructPtr->WININ = 0;
     sTransitionStructPtr->WINOUT = 63;
-    sTransitionStructPtr->field_6 = 240;
+    sTransitionStructPtr->WIN0H = 240;
     sTransitionStructPtr->WIN0V = 160;
 
     for (i = 0; i < 0xA0; i++)
@@ -3203,7 +3203,7 @@ static bool8 Phase2_Rayquaza_Func9(struct Task *task)
 
         sTransitionStructPtr->WININ = 0;
         sTransitionStructPtr->WINOUT = 63;
-        sTransitionStructPtr->field_6 = 240;
+        sTransitionStructPtr->WIN0H = 240;
         sTransitionStructPtr->WIN0V = 160;
 
         for (i = 0; i < 160; i++)
@@ -3309,7 +3309,7 @@ static bool8 Phase2_WhiteFade_Func4(struct Task *task)
     SetVBlankCallback(0);
     SetHBlankCallback(0);
 
-    sTransitionStructPtr->field_6 = 0xF0;
+    sTransitionStructPtr->WIN0H = 0xF0;
     sTransitionStructPtr->BLDY = 0;
     sTransitionStructPtr->BLDCNT = 0xFF;
     sTransitionStructPtr->WININ = 0x3F;
@@ -3350,7 +3350,7 @@ static void VBlankCB1_Phase2_WhiteFade(void)
     REG_BLDCNT = sTransitionStructPtr->BLDCNT;
     REG_WININ = sTransitionStructPtr->WININ;
     REG_WINOUT = sTransitionStructPtr->WINOUT;
-    REG_WIN0H = sTransitionStructPtr->field_6;
+    REG_WIN0H = sTransitionStructPtr->WIN0H;
     REG_WIN0V = sTransitionStructPtr->WIN0V;
 }
 
