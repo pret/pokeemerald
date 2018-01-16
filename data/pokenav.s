@@ -126,20 +126,8 @@ gUnknown_0861FA04:: @ 861FA04
 	.byte 0x0
 
 gUnknown_0861FA08:: @ 861FA08
-	.byte 0x0
-	.byte 0x1
-	.byte 0x16
-	.byte 0x10
-	.byte 0x2
-	.byte 0x0
-	.2byte 0x36
-	.byte 0xFF
-	.byte 0x0
-	.byte 0x0
-	.byte 0x0
-	.byte 0x0
-	.byte 0x0
-	.2byte 0x0
+    window_template 0, 1, 0x16, 0x10, 0x2, 0x0, 0x36
+	window_template_terminator
 
 gUnknown_0861FA18:: @ 861FA18
 	.4byte gUnknown_085EBED5
@@ -425,13 +413,7 @@ gUnknown_08620244:: @ 8620244
     .4byte gUnknown_0862023C
 
 gUnknown_086202CC:: @ 86202CC
-	.byte 1
-    .byte 3
-    .byte 0x11
-    .byte 0x18
-    .byte 2
-    .byte 1
-    .2byte 8
+    window_template 1, 3, 17, 0x18, 2, 1, 8
 
 gUnknown_086202D4:: @ 86202D4
 	.4byte gUnknown_085EBCC5
@@ -1563,22 +1545,10 @@ gUnknown_08622798:: @ 8622798
 	.4byte sub_81CBB74
 
 gUnknown_086227D8:: @ 86227D8
-	.byte 2
-    .byte 0
-    .byte 5
-    .byte 11
-    .byte 2
-    .byte 2
-    .2byte 16
+    window_template 2, 0, 5, 11, 2, 2, 16
 
 gUnknown_086227E0:: @ 86227E0
-	.byte 2
-    .byte 0
-    .byte 9
-    .byte 11
-    .byte 8
-    .byte 2
-    .2byte 0x26
+    window_template 2, 0, 9, 11, 8, 2, 0x26
 
 gUnknown_086227E8:: @ 86227E8
 	.4byte gUnknown_085EC017
@@ -1591,13 +1561,7 @@ gUnknown_086227F4:: @ 86227F4
     .align 2
 
 gUnknown_08622808:: @ 8622808
-    .byte 1
-    .byte 1
-    .byte 12
-    .byte 0x1C
-    .byte 4
-    .byte 1
-    .2byte 10
+    window_template 1, 1, 12, 0x1C, 4, 1, 10
 
 gUnknown_08622810:: @ 8622810
 	obj_tiles gUnknown_086226B8, 0x40, 7
@@ -1778,40 +1742,16 @@ gUnknown_08623358:: @ 8623358
     .4byte 0x31EB
 
 gUnknown_08623364:: @ 8623364
-	.byte 1
-    .byte 13
-    .byte 1
-    .byte 13
-    .byte 4
-    .byte 15
-    .2byte 2
+    window_template 1, 13, 1, 13, 4, 15, 2
 
 gUnknown_0862336C:: @ 862336C
-	.byte 1
-    .byte 1
-    .byte 6
-    .byte 7
-    .byte 2
-    .byte 15
-    .2byte 0x36
+    window_template 1, 1, 6, 7, 2, 15, 0x36
 
 gUnknown_08623374:: @ 8623374
-	.byte 1
-    .byte 1
-    .byte 0x1C
-    .byte 5
-    .byte 2
-    .byte 15
-    .2byte 0x44
+    window_template 1, 1, 0x1C, 5, 2, 15, 0x44
 
 gUnknown_0862337C:: @ 862337C
-	.byte 1
-    .byte 13
-    .byte 0x1C
-    .byte 3
-    .byte 2
-    .byte 15
-    .2byte 0x44
+    window_template 1, 13, 0x1C, 3, 2, 15, 0x44
 
 gUnknown_08623384:: @ 8623384
 	.4byte NULL
@@ -1859,13 +1799,7 @@ gUnknown_08623598:: @ 8623598
 	.4byte sub_81CF798
 
 gUnknown_086235B4:: @ 86235B4
-	.byte 1
-    .byte 1
-    .byte 6
-    .byte 7
-    .byte 2
-    .byte 1
-    .2byte 20
+    window_template 1, 1, 6, 7, 2, 1, 20
 
 gUnknown_086235BC:: @ 86235BC
 	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
@@ -1912,13 +1846,7 @@ gUnknown_086237B8:: @ 86237B8
 	.4byte sub_81D021C
 
 gUnknown_086237D4:: @ 86237D4
-	.byte 1
-    .byte 1
-    .byte 6
-    .byte 7
-    .byte 2
-    .byte 1
-    .2byte 20
+    window_template 1, 1, 6, 7, 2, 1, 20
 
 gUnknown_086237DC:: @ 86237DC
 	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
@@ -1994,25 +1922,13 @@ gUnknown_08624BA0:: @ 8624BA0
 	.4byte sub_81D0C54
 
 gUnknown_08624BB8:: @ 8624BB8
-	.byte 2
-    .byte 12
-    .byte 13
-    .byte 16
-    .byte 4
-    .byte 1
-    .2byte 20
+    window_template 2, 12, 13, 16, 4, 1, 20
 
 gUnknown_08624BC0:: @ 8624BC0
 	.byte 4, 2, 3, 0
 
 gUnknown_08624BC4:: @ 8624BC4
-	.byte 2
-    .byte 14
-    .byte 1
-    .byte 13
-    .byte 2
-    .byte 10
-    .2byte 0x54
+    window_template 2, 14, 1, 13, 2, 10, 0x54
 
 gUnknown_08624BCC:: @ 8624BCC
 	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
@@ -2027,13 +1943,7 @@ gUnknown_08624BE4:: @ 8624BE4
     .align 2
 
 gUnknown_08624BE8:: @ 8624BE8
-	.byte 2
-    .byte 1
-    .byte 5
-    .byte 7
-    .byte 2
-    .byte 1
-    .2byte 0x6E
+    window_template 2, 1, 5, 7, 2, 1, 0x6E
     .4byte NULL
     .4byte NULL
 
