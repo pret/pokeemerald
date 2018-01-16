@@ -2950,7 +2950,7 @@ BattleScript_LocalBattleWonLoseTexts::
 	waitstate
 	printstring STRINGID_TRAINER1LOSETEXT
 	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalBattleWonReward
-	trainerslideout IDENTITY_OPPONENT_MON1
+	trainerslideout B_POSITION_OPPONENT_LEFT
 	waitstate
 	trainerslidein GBANK_1
 	waitstate
@@ -2991,7 +2991,7 @@ BattleScript_LocalBattleLostPrintTrainersWinText::
 	jumpifbattletype BATTLE_TYPE_x800000, BattleScript_LocalBattleLostDoTrainer2WinText
 	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalBattleLostEnd_
 BattleScript_LocalBattleLostDoTrainer2WinText::
-	trainerslideout IDENTITY_OPPONENT_MON1
+	trainerslideout B_POSITION_OPPONENT_LEFT
 	waitstate
 	trainerslidein GBANK_1
 	waitstate
@@ -3007,7 +3007,7 @@ BattleScript_82DAA0B::
 	trainerslidein ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1WINTEXT
-	trainerslideout IDENTITY_OPPONENT_MON1
+	trainerslideout B_POSITION_OPPONENT_LEFT
 	waitstate
 	trainerslidein GBANK_1
 	waitstate
@@ -3035,7 +3035,7 @@ BattleScript_82DAA5C::
 	trainerslidein ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1LOSETEXT
-	trainerslideout IDENTITY_OPPONENT_MON1
+	trainerslideout B_POSITION_OPPONENT_LEFT
 	waitstate
 	trainerslidein GBANK_1
 	waitstate
@@ -3058,7 +3058,7 @@ BattleScript_82DAAAE::
 	waitstate
 	printstring STRINGID_TRAINER1LOSETEXT
 	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_82DAACB
-	trainerslideout IDENTITY_OPPONENT_MON1
+	trainerslideout B_POSITION_OPPONENT_LEFT
 	waitstate
 	trainerslidein GBANK_1
 	waitstate

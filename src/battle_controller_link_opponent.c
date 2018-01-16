@@ -295,7 +295,7 @@ static void sub_8064520(void)
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].flag_x80 = 0;
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x1 = 0;
 
-            if (GetBankIdentity(gActiveBank) == IDENTITY_OPPONENT_MON2)
+            if (GetBankPosition(gActiveBank) == B_POSITION_OPPONENT_RIGHT)
             {
                 FreeSpriteTilesByTag(0x27F9);
                 FreeSpritePaletteByTag(0x27F9);
@@ -352,7 +352,7 @@ static void sub_8064734(void)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
-                if (GetBankIdentity(gActiveBank) == IDENTITY_OPPONENT_MON1)
+                if (GetBankPosition(gActiveBank) == B_POSITION_OPPONENT_LEFT)
                     m4aMPlayContinue(&gMPlayInfo_BGM);
             }
             else
@@ -370,7 +370,7 @@ static void sub_8064734(void)
         if (gSprites[gUnknown_03005D7C[gActiveBank]].callback == SpriteCallbackDummy
             && gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_MULTI && GetBankIdentity(gActiveBank) == IDENTITY_OPPONENT_MON2)
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI && GetBankPosition(gActiveBank) == B_POSITION_OPPONENT_RIGHT)
             {
                 if (++gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_9 == 1)
                     return;
@@ -1161,10 +1161,10 @@ static void LinkOpponentHandleLoadMonSprite(void)
     u16 species = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
 
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlePartyID[gActiveBank]], gActiveBank);
-    sub_806A068(species, GetBankIdentity(gActiveBank));
+    sub_806A068(species, GetBankPosition(gActiveBank));
 
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
-                                               GetBankPosition(gActiveBank, 2),
+                                               GetBankCoord(gActiveBank, 2),
                                                GetBankSpriteDefault_Y(gActiveBank),
                                                sub_80A82E4(gActiveBank));
 
@@ -1194,11 +1194,11 @@ static void sub_8066494(u8 bank, bool8 dontClearSubstituteBit)
     species = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
     gUnknown_03005D7C[bank] = CreateInvisibleSpriteWithCallback(sub_805D714);
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlePartyID[bank]], bank);
-    sub_806A068(species, GetBankIdentity(bank));
+    sub_806A068(species, GetBankPosition(bank));
 
     gBankSpriteIds[bank] = CreateSprite(
       &gUnknown_0202499C,
-      GetBankPosition(bank, 2),
+      GetBankCoord(bank, 2),
       GetBankSpriteDefault_Y(bank),
       sub_80A82E4(bank));
 
@@ -1262,7 +1262,7 @@ static void LinkOpponentHandleDrawTrainerPic(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if ((GetBankIdentity(gActiveBank) & BIT_MON) != 0) // second mon
+        if ((GetBankPosition(gActiveBank) & BIT_MON) != 0) // second mon
             xPos = 152;
         else // first mon
             xPos = 200;
@@ -1328,7 +1328,7 @@ static void LinkOpponentHandleDrawTrainerPic(void)
     }
 
     DecompressTrainerFrontPic(trainerPicId, gActiveBank);
-    sub_806A12C(trainerPicId, GetBankIdentity(gActiveBank));
+    sub_806A12C(trainerPicId, GetBankPosition(gActiveBank));
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
                                                xPos,
                                                (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40,
@@ -1353,7 +1353,7 @@ static void LinkOpponentHandleTrainerSlide(void)
         trainerPicId = GetFrontierTrainerFrontSpriteId(gTrainerBattleOpponent_B);
 
     DecompressTrainerFrontPic(trainerPicId, gActiveBank);
-    sub_806A12C(trainerPicId, GetBankIdentity(gActiveBank));
+    sub_806A12C(trainerPicId, GetBankPosition(gActiveBank));
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C, 176, (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40, 0x1E);
 
     gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 96;

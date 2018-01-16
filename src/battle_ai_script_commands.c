@@ -1316,7 +1316,7 @@ static void BattleAICmd_count_usable_party_mons(void)
     {
         u32 identity;
         bankOnField1 = gBattlePartyID[bank];
-        identity = GetBankIdentity(bank) ^ BIT_MON;
+        identity = GetBankPosition(bank) ^ BIT_MON;
         bankOnField2 = gBattlePartyID[GetBankByIdentity(identity)];
     }
     else // in singles there's only one bank by side

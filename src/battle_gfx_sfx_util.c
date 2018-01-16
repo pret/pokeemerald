@@ -29,7 +29,7 @@ extern u8 gNoOfAllBanks;
 extern u16 gUnknown_020243FC;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
-extern u8 gBanksByIdentity[BATTLE_BANKS_COUNT];
+extern u8 gBankPositions[BATTLE_BANKS_COUNT];
 extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
 extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
@@ -262,7 +262,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     else if (var1 == MOVE_TARGET_SELECTED)
         chosenMoveId |= (BattlePalaceGetTargetRetValue());
     else
-        chosenMoveId |= (GetBankByIdentity((GetBankIdentity(gActiveBank) & BIT_SIDE) ^ BIT_SIDE) << 8);
+        chosenMoveId |= (GetBankByIdentity((GetBankPosition(gActiveBank) & BIT_SIDE) ^ BIT_SIDE) << 8);
 
     return chosenMoveId;
 }
@@ -299,13 +299,13 @@ static u16 BattlePalaceGetTargetRetValue(void)
 
         if (GetBankSide(gActiveBank) == SIDE_PLAYER)
         {
-            opposing1 = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
-            opposing2 = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+            opposing1 = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+            opposing2 = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
         }
         else
         {
-            opposing1 = GetBankByIdentity(IDENTITY_PLAYER_MON1);
-            opposing2 = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+            opposing1 = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
+            opposing2 = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
         }
 
         if (gBattleMons[opposing1].hp == gBattleMons[opposing2].hp)
@@ -561,7 +561,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank)
     }
 
     otId = GetMonData(mon, MON_DATA_OT_ID);
-    identity = GetBankIdentity(bank);
+    identity = GetBankPosition(bank);
     HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
                                               gMonSpritesGfxPtr->sprites[identity],
                                               species, currentPersonality);
@@ -614,7 +614,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 bank)
     }
 
     otId = GetMonData(mon, MON_DATA_OT_ID);
-    identity = GetBankIdentity(bank);
+    identity = GetBankPosition(bank);
 
     if (sub_80688F8(1, bank) == 1 || gBattleSpritesDataPtr->bankData[bank].transformSpecies != SPECIES_NONE)
     {
@@ -665,7 +665,7 @@ void nullsub_24(u16 species)
 
 void DecompressTrainerFrontPic(u16 frontPicId, u8 bank)
 {
-    u8 identity = GetBankIdentity(bank);
+    u8 identity = GetBankPosition(bank);
     DecompressPicFromTable_2(&gTrainerFrontPicTable[frontPicId],
                              gMonSpritesGfxPtr->sprites[identity],
                              SPECIES_NONE);
@@ -674,7 +674,7 @@ void DecompressTrainerFrontPic(u16 frontPicId, u8 bank)
 
 void DecompressTrainerBackPic(u16 backPicId, u8 bank)
 {
-    u8 identity = GetBankIdentity(bank);
+    u8 identity = GetBankPosition(bank);
     DecompressPicFromTable_2(&gTrainerBackPicTable[backPicId],
                              gMonSpritesGfxPtr->sprites[identity],
                              SPECIES_NONE);
@@ -713,7 +713,7 @@ void sub_805DFFC(void)
         numberOfBanks = 4;
     }
     for (i = 0; i < numberOfBanks; i++)
-        LoadCompressedObjectPic(&gUnknown_0832C108[gBanksByIdentity[i]]);
+        LoadCompressedObjectPic(&gUnknown_0832C108[gBankPositions[i]]);
 }
 
 bool8 BattleLoadAllHealthBoxesGfx(u8 state)
@@ -739,9 +739,9 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
             else if (state == 3)
                 LoadCompressedObjectPic(&gUnknown_0832C0D8);
             else if (state == 4)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBanksByIdentity[0]]);
+                LoadCompressedObjectPic(&gUnknown_0832C108[gBankPositions[0]]);
             else if (state == 5)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBanksByIdentity[1]]);
+                LoadCompressedObjectPic(&gUnknown_0832C108[gBankPositions[1]]);
             else
                 retVal = TRUE;
         }
@@ -756,13 +756,13 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
             else if (state == 5)
                 LoadCompressedObjectPic(&gUnknown_0832C0F0[1]);
             else if (state == 6)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBanksByIdentity[0]]);
+                LoadCompressedObjectPic(&gUnknown_0832C108[gBankPositions[0]]);
             else if (state == 7)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBanksByIdentity[1]]);
+                LoadCompressedObjectPic(&gUnknown_0832C108[gBankPositions[1]]);
             else if (state == 8)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBanksByIdentity[2]]);
+                LoadCompressedObjectPic(&gUnknown_0832C108[gBankPositions[2]]);
             else if (state == 9)
-                LoadCompressedObjectPic(&gUnknown_0832C108[gBanksByIdentity[3]]);
+                LoadCompressedObjectPic(&gUnknown_0832C108[gBankPositions[3]]);
             else
                 retVal = TRUE;
         }
@@ -815,7 +815,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *bank)
         break;
     case 4:
         SetBankHealthboxSpritePos(*bank);
-        if (gBanksByIdentity[*bank] <= 1)
+        if (gBankPositions[*bank] <= 1)
             DummyBattleInterfaceFunc(gHealthBoxesIds[*bank], FALSE);
         else
             DummyBattleInterfaceFunc(gHealthBoxesIds[*bank], TRUE);
@@ -921,7 +921,7 @@ void HandleSpeciesGfxDataChange(u8 bankAtk, u8 bankDef, bool8 notTransform)
         }
         else
         {
-            identity = GetBankIdentity(bankAtk);
+            identity = GetBankPosition(bankAtk);
 
             if (GetBankSide(bankDef) == SIDE_OPPONENT)
                 targetSpecies = GetMonData(&gEnemyParty[gBattlePartyID[bankDef]], MON_DATA_SPECIES);
@@ -991,7 +991,7 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 bank, bool8 loadMonSprite)
         if (IsContest())
             identity = 0;
         else
-            identity = GetBankIdentity(bank);
+            identity = GetBankPosition(bank);
 
         if (IsContest())
             LZDecompressVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->sprites[identity]);
@@ -1080,7 +1080,7 @@ void HandleLowHpMusicChange(struct Pokemon *mon, u8 bank)
 
 void BattleStopLowHpSound(void)
 {
-    u8 playerBank = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+    u8 playerBank = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
 
     gBattleSpritesDataPtr->bankData[playerBank].lowHpSong = 0;
     if (IsDoubleBattle())
@@ -1101,8 +1101,8 @@ void sub_805EAE8(void)
 {
     if (gMain.inBattle)
     {
-        u8 playerBank1 = GetBankByIdentity(IDENTITY_PLAYER_MON1);
-        u8 playerBank2 = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+        u8 playerBank1 = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
+        u8 playerBank2 = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
         u8 bank1PartyId = pokemon_order_func(gBattlePartyID[playerBank1]);
         u8 bank2PartyId = pokemon_order_func(gBattlePartyID[playerBank2]);
 
@@ -1143,14 +1143,14 @@ void LoadAndCreateEnemyShadowSprites(void)
 
     LoadCompressedObjectPic(&gSpriteSheet_EnemyShadow);
 
-    bank = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
-    gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBankPosition(bank, 0), GetBankPosition(bank, 1) + 29, 0xC8);
+    bank = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+    gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBankCoord(bank, 0), GetBankCoord(bank, 1) + 29, 0xC8);
     gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].data[0] = bank;
 
     if (IsDoubleBattle())
     {
-        bank = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
-        gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBankPosition(bank, 0), GetBankPosition(bank, 1) + 29, 0xC8);
+        bank = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
+        gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBankCoord(bank, 0), GetBankCoord(bank, 1) + 29, 0xC8);
         gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].data[0] = bank;
     }
 }

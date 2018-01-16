@@ -232,7 +232,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     nullsub_22
 };
 
-static const u8 sTargetIdentities[] = {IDENTITY_PLAYER_MON1, IDENTITY_PLAYER_MON2, IDENTITY_OPPONENT_MON2, IDENTITY_OPPONENT_MON1};
+static const u8 sTargetIdentities[] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT, B_POSITION_OPPONENT_RIGHT, B_POSITION_OPPONENT_LEFT};
 
 // unknown unused data
 static const u8 sUnknown_0831C5FC[] = {0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58};
@@ -357,8 +357,8 @@ static void HandleInputChooseAction(void)
     else if (gMain.newKeys & B_BUTTON || gPlayerDpadHoldFrames > 59)
     {
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-         && GetBankIdentity(gActiveBank) == IDENTITY_PLAYER_MON2
-         && !(gAbsentBankFlags & gBitTable[GetBankByIdentity(IDENTITY_PLAYER_MON1)])
+         && GetBankPosition(gActiveBank) == B_POSITION_PLAYER_RIGHT
+         && !(gAbsentBankFlags & gBitTable[GetBankByIdentity(B_POSITION_PLAYER_LEFT)])
          && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         {
             if (gBattleBufferA[gActiveBank][1] == ACTION_USE_ITEM)
@@ -436,7 +436,7 @@ static void HandleInputChooseTarget(void)
 
         do
         {
-            u8 currSelIdentity = GetBankIdentity(gMultiUsePlayerCursor);
+            u8 currSelIdentity = GetBankPosition(gMultiUsePlayerCursor);
 
             for (i = 0; i < BATTLE_BANKS_COUNT; i++)
             {
@@ -451,17 +451,17 @@ static void HandleInputChooseTarget(void)
             } while (gMultiUsePlayerCursor == gNoOfAllBanks);
 
             i = 0;
-            switch (GetBankIdentity(gMultiUsePlayerCursor))
+            switch (GetBankPosition(gMultiUsePlayerCursor))
             {
-            case IDENTITY_PLAYER_MON1:
-            case IDENTITY_PLAYER_MON2:
+            case B_POSITION_PLAYER_LEFT:
+            case B_POSITION_PLAYER_RIGHT:
                 if (gActiveBank != gMultiUsePlayerCursor)
                     i++;
                 else if (gBattleMoves[GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBank])].target & MOVE_TARGET_USER)
                     i++;
                 break;
-            case IDENTITY_OPPONENT_MON1:
-            case IDENTITY_OPPONENT_MON2:
+            case B_POSITION_OPPONENT_LEFT:
+            case B_POSITION_OPPONENT_RIGHT:
                 i++;
                 break;
             }
@@ -478,7 +478,7 @@ static void HandleInputChooseTarget(void)
 
         do
         {
-            u8 currSelIdentity = GetBankIdentity(gMultiUsePlayerCursor);
+            u8 currSelIdentity = GetBankPosition(gMultiUsePlayerCursor);
 
             for (i = 0; i < BATTLE_BANKS_COUNT; i++)
             {
@@ -493,17 +493,17 @@ static void HandleInputChooseTarget(void)
             } while (gMultiUsePlayerCursor == gNoOfAllBanks);
 
             i = 0;
-            switch (GetBankIdentity(gMultiUsePlayerCursor))
+            switch (GetBankPosition(gMultiUsePlayerCursor))
             {
-            case IDENTITY_PLAYER_MON1:
-            case IDENTITY_PLAYER_MON2:
+            case B_POSITION_PLAYER_LEFT:
+            case B_POSITION_PLAYER_RIGHT:
                 if (gActiveBank != gMultiUsePlayerCursor)
                     i++;
                 else if (gBattleMoves[GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBank])].target & MOVE_TARGET_USER)
                     i++;
                 break;
-            case IDENTITY_OPPONENT_MON1:
-            case IDENTITY_OPPONENT_MON2:
+            case B_POSITION_OPPONENT_LEFT:
+            case B_POSITION_OPPONENT_RIGHT:
                 i++;
                 break;
             }
@@ -545,7 +545,7 @@ static void HandleInputChooseMove(void)
         if (moveTarget & MOVE_TARGET_x10)
             gMultiUsePlayerCursor = gActiveBank;
         else
-            gMultiUsePlayerCursor = GetBankByIdentity((GetBankIdentity(gActiveBank) & BIT_SIDE) ^ BIT_SIDE);
+            gMultiUsePlayerCursor = GetBankByIdentity((GetBankPosition(gActiveBank) & BIT_SIDE) ^ BIT_SIDE);
 
         if (!gBattleBufferA[gActiveBank][1]) // not a double battle
         {
@@ -579,10 +579,10 @@ static void HandleInputChooseMove(void)
 
             if (moveTarget & (MOVE_TARGET_x10 | MOVE_TARGET_USER))
                 gMultiUsePlayerCursor = gActiveBank;
-            else if (gAbsentBankFlags & gBitTable[GetBankByIdentity(IDENTITY_OPPONENT_MON1)])
-                gMultiUsePlayerCursor = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+            else if (gAbsentBankFlags & gBitTable[GetBankByIdentity(B_POSITION_OPPONENT_LEFT)])
+                gMultiUsePlayerCursor = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
             else
-                gMultiUsePlayerCursor = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+                gMultiUsePlayerCursor = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
 
             gSprites[gBankSpriteIds[gMultiUsePlayerCursor]].callback = sub_8039AD8;
         }
@@ -2234,11 +2234,11 @@ static void sub_805B258(u8 bank, bool8 dontClearSubstituteBit)
     gBattlePartyID[bank] = gBattleBufferA[bank][1];
     species = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
     gUnknown_03005D7C[bank] = CreateInvisibleSpriteWithCallback(sub_805D714);
-    sub_806A068(species, GetBankIdentity(bank));
+    sub_806A068(species, GetBankPosition(bank));
 
     gBankSpriteIds[bank] = CreateSprite(
       &gUnknown_0202499C,
-      GetBankPosition(bank, 2),
+      GetBankCoord(bank, 2),
       GetBankSpriteDefault_Y(bank),
       sub_80A82E4(bank));
 
@@ -2326,7 +2326,7 @@ static void PlayerHandleDrawTrainerPic(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if ((GetBankIdentity(gActiveBank) & BIT_MON) != 0) // second mon
+        if ((GetBankPosition(gActiveBank) & BIT_MON) != 0) // second mon
             xPos = 90;
         else // first mon
             xPos = 32;
@@ -2353,7 +2353,7 @@ static void PlayerHandleDrawTrainerPic(void)
     {
         trainerPicId = PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender);
         DecompressTrainerFrontPic(trainerPicId, gActiveBank);
-        sub_806A1C0(trainerPicId, GetBankIdentity(gActiveBank));
+        sub_806A1C0(trainerPicId, GetBankPosition(gActiveBank));
         gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C, xPos, yPos, sub_80A82E4(gActiveBank));
 
         gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
@@ -2368,7 +2368,7 @@ static void PlayerHandleDrawTrainerPic(void)
     else
     {
         DecompressTrainerBackPic(trainerPicId, gActiveBank);
-        sub_806A12C(trainerPicId, GetBankIdentity(gActiveBank));
+        sub_806A12C(trainerPicId, GetBankPosition(gActiveBank));
         gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C, xPos, yPos, sub_80A82E4(gActiveBank));
 
         gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
@@ -2407,7 +2407,7 @@ static void PlayerHandleTrainerSlide(void)
     }
 
     DecompressTrainerBackPic(trainerPicId, gActiveBank);
-    sub_806A12C(trainerPicId, GetBankIdentity(gActiveBank));
+    sub_806A12C(trainerPicId, GetBankPosition(gActiveBank));
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C, 80, (8 - gTrainerBackPicCoords[trainerPicId].coords) * 4 + 80, 30);
 
     gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
@@ -2463,7 +2463,7 @@ static void PlayerHandleSuccessBallThrowAnim(void)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnSpecialAnimDone;
 }
 
@@ -2473,7 +2473,7 @@ static void PlayerHandleBallThrowAnim(void)
 
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnSpecialAnimDone;
 }
 

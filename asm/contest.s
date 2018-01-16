@@ -1048,7 +1048,7 @@ _080D8004:
 	bl sub_80DC594
 	bl sub_80DC5E8
 	bl sub_80DC7EC
-	ldr r1, =gBanksByIdentity
+	ldr r1, =gBankPositions
 	strb r4, [r1]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
@@ -13829,13 +13829,13 @@ sub_80DEA5C: @ 80DEA5C
 	strh r0, [r4, 0x26]
 	movs r0, 0x3
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	movs r0, 0x3
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]

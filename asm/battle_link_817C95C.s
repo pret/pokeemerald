@@ -136,18 +136,18 @@ _0817CA4C:
 _0817CA9C:
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 25
 	mov r8, r0
 	ldr r0, =gBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r5, r0, 25
 	ldr r0, =gEffectBank
 	ldrb r0, [r0]
-	bl GetBankIdentity
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r3, r0, 25
 	ldr r1, [sp]
@@ -2593,7 +2593,7 @@ _0817E122:
 _0817E184:
 	mov r2, r10
 	ldrb r0, [r2]
-	bl GetBankIdentity
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 25
 	lsls r0, 3
@@ -2617,7 +2617,7 @@ _0817E184:
 	strb r1, [r0]
 	mov r1, r10
 	ldrb r0, [r1]
-	bl GetBankIdentity
+	bl GetBankPosition
 	lsls r0, 24
 	lsrs r0, 25
 	lsls r0, 3
@@ -4414,7 +4414,7 @@ _0817EFC2:
 	ldr r4, =gSideAffecting
 	mov r1, r9
 	ldrb r0, [r1]
-	bl GetBankIdentity
+	bl GetBankPosition
 	movs r1, 0x1
 	ands r1, r0
 	lsls r1, 1

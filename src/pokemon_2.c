@@ -36,7 +36,7 @@ extern const u8 gText_EggNickname[];
 
 extern u8 GetBankSide(u8 bank);
 extern u8 GetBankByIdentity(u8 bank);
-extern u8 GetBankIdentity(u8 bank);
+extern u8 GetBankPosition(u8 bank);
 
 u8 CountAliveMonsInBattle(u8 caseId)
 {
@@ -86,7 +86,7 @@ bool8 ShouldGetStatBadgeBoost(u16 badgeFlag, u8 bank)
 
 u8 GetDefaultMoveTarget(u8 bank)
 {
-    u8 status = GetBankIdentity(bank) & 1;
+    u8 status = GetBankPosition(bank) & 1;
 
     status ^= 1;
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))

@@ -60,7 +60,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         return FALSE;
 
-    opposingIdentity = GetBankIdentity(gActiveBank) ^ BIT_SIDE;
+    opposingIdentity = GetBankPosition(gActiveBank) ^ BIT_SIDE;
 
     if (gBattleMons[GetBankByIdentity(opposingIdentity)].ability != ABILITY_WONDER_GUARD)
         return FALSE;
@@ -151,10 +151,10 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         bankIn1 = gActiveBank;
-        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON)])
+        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)])
             bankIn2 = gActiveBank;
         else
-            bankIn2 = GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON);
+            bankIn2 = GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON);
     }
     else
     {
@@ -273,7 +273,7 @@ static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
     u8 moveFlags;
     u16 move;
 
-    opposingIdentity = GetBankIdentity(gActiveBank) ^ BIT_SIDE;
+    opposingIdentity = GetBankPosition(gActiveBank) ^ BIT_SIDE;
     opposingBank = GetBankByIdentity(opposingIdentity);
 
     if (!(gAbsentBankFlags & gBitTable[opposingBank]))
@@ -357,10 +357,10 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         bankIn1 = gActiveBank;
-        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON)])
+        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)])
             bankIn2 = gActiveBank;
         else
-            bankIn2 = GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON);
+            bankIn2 = GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON);
     }
     else
     {
@@ -468,10 +468,10 @@ static bool8 ShouldSwitch(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         bankIn1 = *activeBankPtr;
-        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankIdentity(*activeBankPtr) ^ BIT_MON)])
+        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankPosition(*activeBankPtr) ^ BIT_MON)])
             bankIn2 = *activeBankPtr;
         else
-            bankIn2 = GetBankByIdentity(GetBankIdentity(*activeBankPtr) ^ BIT_MON);
+            bankIn2 = GetBankByIdentity(GetBankPosition(*activeBankPtr) ^ BIT_MON);
     }
     else
     {
@@ -543,7 +543,7 @@ void AI_TrySwitchOrUseItem(void)
     u8 bankIn1, bankIn2;
     s32 firstId;
     s32 lastId; // + 1
-    u8 bankIdentity = GetBankIdentity(gActiveBank);
+    u8 bankIdentity = GetBankPosition(gActiveBank);
 
     if (GetBankSide(gActiveBank) == SIDE_PLAYER)
         party = gPlayerParty;
@@ -659,10 +659,10 @@ u8 GetMostSuitableMonToSwitchInto(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         bankIn1 = gActiveBank;
-        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON)])
+        if (gAbsentBankFlags & gBitTable[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)])
             bankIn2 = gActiveBank;
         else
-            bankIn2 = GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_MON);
+            bankIn2 = GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON);
 
         // UB: It considers the opponent only player's side even though it can battle alongside player;
         opposingBank = Random() & BIT_MON;
@@ -671,7 +671,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     }
     else
     {
-        opposingBank = GetBankByIdentity(GetBankIdentity(gActiveBank) ^ BIT_SIDE);
+        opposingBank = GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_SIDE);
         bankIn1 = gActiveBank;
         bankIn2 = gActiveBank;
     }
@@ -817,7 +817,7 @@ static bool8 ShouldUseItem(void)
     u8 validMons = 0;
     bool8 shouldUse = FALSE;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBankIdentity(gActiveBank) == IDENTITY_PLAYER_MON2)
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBankPosition(gActiveBank) == B_POSITION_PLAYER_RIGHT)
         return FALSE;
 
     if (GetBankSide(gActiveBank) == SIDE_PLAYER)

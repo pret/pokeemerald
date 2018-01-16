@@ -87,15 +87,15 @@ void AdjustFriendshipOnBattleFaint(u8 bank)
     {
         u8 opposingBank2;
 
-        opposingBank = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
-        opposingBank2 = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+        opposingBank = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+        opposingBank2 = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
 
         if (gBattleMons[opposingBank2].level > gBattleMons[opposingBank].level)
             opposingBank = opposingBank2;
     }
     else
     {
-        opposingBank = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+        opposingBank = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
     }
 
     if (gBattleMons[opposingBank].level > gBattleMons[bank].level)

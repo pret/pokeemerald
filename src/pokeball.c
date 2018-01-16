@@ -384,14 +384,14 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
         gSprites[ballSpriteId].callback = SpriteCB_PlayerMonSendOut_1;
         break;
     case POKEBALL_OPPONENT_SENDOUT:
-        gSprites[ballSpriteId].pos1.x = GetBankPosition(bank, BANK_X_POS);
-        gSprites[ballSpriteId].pos1.y = GetBankPosition(bank, BANK_Y_POS) + 24;
+        gSprites[ballSpriteId].pos1.x = GetBankCoord(bank, BANK_X_POS);
+        gSprites[ballSpriteId].pos1.y = GetBankCoord(bank, BANK_Y_POS) + 24;
         gBankTarget = bank;
         gSprites[ballSpriteId].data[0] = 0;
         gSprites[ballSpriteId].callback = SpriteCB_OpponentMonSendOut;
         break;
     default:
-        gBankTarget = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+        gBankTarget = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
         notSendOut = TRUE;
         break;
     }
@@ -405,8 +405,8 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
     // this will perform an unused ball throw animation
     gSprites[ballSpriteId].data[0] = 0x22;
-    gSprites[ballSpriteId].data[2] = GetBankPosition(gBankTarget, BANK_X_POS);
-    gSprites[ballSpriteId].data[4] = GetBankPosition(gBankTarget, BANK_Y_POS) - 16;
+    gSprites[ballSpriteId].data[2] = GetBankCoord(gBankTarget, BANK_X_POS);
+    gSprites[ballSpriteId].data[4] = GetBankCoord(gBankTarget, BANK_Y_POS) - 16;
     gSprites[ballSpriteId].data[5] = -40;
     sub_80A68D4(&gSprites[ballSpriteId]);
     gSprites[ballSpriteId].oam.affineParam = taskId;
@@ -767,7 +767,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
         }
 
         species = GetMonData(mon, MON_DATA_SPECIES);
-        if ((bank == GetBankByIdentity(IDENTITY_PLAYER_MON1) || bank == GetBankByIdentity(IDENTITY_OPPONENT_MON1))
+        if ((bank == GetBankByIdentity(B_POSITION_PLAYER_LEFT) || bank == GetBankByIdentity(B_POSITION_OPPONENT_LEFT))
          && IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -783,7 +783,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 
         if (!IsDoubleBattle() || !gBattleSpritesDataPtr->animationData->field_9_x1)
             wantedCryCase = 0;
-        else if (bank == GetBankByIdentity(IDENTITY_PLAYER_MON1) || bank == GetBankByIdentity(IDENTITY_OPPONENT_MON1))
+        else if (bank == GetBankByIdentity(B_POSITION_PLAYER_LEFT) || bank == GetBankByIdentity(B_POSITION_OPPONENT_LEFT))
             wantedCryCase = 1;
         else
             wantedCryCase = 2;
@@ -900,8 +900,8 @@ static void sub_80760F8(struct Sprite *sprite)
 static void SpriteCB_PlayerMonSendOut_1(struct Sprite *sprite)
 {
     sprite->data[0] = 25;
-    sprite->data[2] = GetBankPosition(sprite->sBank, 2);
-    sprite->data[4] = GetBankPosition(sprite->sBank, 3) + 24;
+    sprite->data[2] = GetBankCoord(sprite->sBank, 2);
+    sprite->data[4] = GetBankCoord(sprite->sBank, 3) + 24;
     sprite->data[5] = -30;
     sprite->oam.affineParam = sprite->sBank;
     sub_80A68D4(sprite);
@@ -956,7 +956,7 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
             sprite->data[0] = 0;
 
             if (IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1
-             && sprite->sBank == GetBankByIdentity(IDENTITY_PLAYER_MON2))
+             && sprite->sBank == GetBankByIdentity(B_POSITION_PLAYER_RIGHT))
                 sprite->callback = SpriteCB_ReleaseMon2FromBall;
             else
                 sprite->callback = SpriteCB_ReleaseMonFromBall;
@@ -982,7 +982,7 @@ static void SpriteCB_OpponentMonSendOut(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
         if (IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1
-         && sprite->sBank == GetBankByIdentity(IDENTITY_OPPONENT_MON2))
+         && sprite->sBank == GetBankByIdentity(B_POSITION_OPPONENT_RIGHT))
             sprite->callback = SpriteCB_ReleaseMon2FromBall;
         else
             sprite->callback = SpriteCB_ReleaseMonFromBall;
@@ -1198,7 +1198,7 @@ void sub_8076918(u8 bank)
         healthboxSprite->pos2.y = -healthboxSprite->pos2.y;
     }
     gSprites[healthboxSprite->data[5]].callback(&gSprites[healthboxSprite->data[5]]);
-    if (GetBankIdentity(bank) == IDENTITY_PLAYER_MON2)
+    if (GetBankPosition(bank) == B_POSITION_PLAYER_RIGHT)
         healthboxSprite->callback = sub_80769A8;
 }
 

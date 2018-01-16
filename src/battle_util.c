@@ -104,16 +104,16 @@ u8 GetBattleBank(u8 caseId)
     case 8:
     case 9:
     case BS_GET_PLAYER1:
-        ret = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+        ret = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
         break;
     case BS_GET_OPPONENT1:
-        ret = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+        ret = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
         break;
     case BS_GET_PLAYER2:
-        ret = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+        ret = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
         break;
     case BS_GET_OPPONENT2:
-        ret = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+        ret = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
         break;
     }
     return ret;
@@ -1667,14 +1667,14 @@ bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
     {
         if (GetBankSide(bank) == SIDE_OPPONENT)
         {
-            r7 = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
-            r6 = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+            r7 = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+            r6 = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
             party = gEnemyParty;
         }
         else
         {
-            r7 = GetBankByIdentity(IDENTITY_PLAYER_MON1);
-            r6 = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+            r7 = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
+            r6 = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
             party = gPlayerParty;
         }
         if (r1 == 6)
@@ -2335,7 +2335,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 if (gBattleMons[i].ability == ABILITY_TRACE && (gStatuses3[i] & STATUS3_TRACE))
                 {
                     u8 target2;
-                    side = (GetBankIdentity(i) ^ BIT_SIDE) & BIT_SIDE; // side of the opposing pokemon
+                    side = (GetBankPosition(i) ^ BIT_SIDE) & BIT_SIDE; // side of the opposing pokemon
                     target1 = GetBankByIdentity(side);
                     target2 = GetBankByIdentity(side + BIT_MON);
                     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -3268,7 +3268,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
     case MOVE_TARGET_BOTH:
     case MOVE_TARGET_FOES_AND_ALLY:
     case MOVE_TARGET_OPPONENTS_FIELD:
-        targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & BIT_SIDE) ^ BIT_SIDE);
+        targetBank = GetBankByIdentity((GetBankPosition(gBankAttacker) & BIT_SIDE) ^ BIT_SIDE);
         if (gAbsentBankFlags & gBitTable[targetBank])
             targetBank ^= BIT_MON;
         break;
@@ -3281,22 +3281,22 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
             if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
             {
                 if (Random() & 1)
-                    targetBank = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+                    targetBank = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
                 else
-                    targetBank = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+                    targetBank = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
             }
             else
             {
                 if (Random() & 1)
-                    targetBank = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+                    targetBank = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
                 else
-                    targetBank = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+                    targetBank = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
             }
             if (gAbsentBankFlags & gBitTable[targetBank])
                 targetBank ^= BIT_MON;
         }
         else
-            targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & BIT_SIDE) ^ BIT_SIDE);
+            targetBank = GetBankByIdentity((GetBankPosition(gBankAttacker) & BIT_SIDE) ^ BIT_SIDE);
         break;
     case MOVE_TARGET_USER:
     case MOVE_TARGET_x10:
@@ -3332,7 +3332,7 @@ u8 IsMonDisobedient(void)
 
     if (HasObedientBitSet(gBankAttacker)) // only if species is Mew or Deoxys
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBankIdentity(gBankAttacker) == 2)
+        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBankPosition(gBankAttacker) == 2)
             return 0;
         if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
             return 0;

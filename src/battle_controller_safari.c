@@ -378,7 +378,7 @@ static void SafariHandleReturnMonToBall(void)
 static void SafariHandleDrawTrainerPic(void)
 {
     DecompressTrainerBackPic(gSaveBlock2Ptr->playerGender, gActiveBank);
-    sub_806A12C(gSaveBlock2Ptr->playerGender, GetBankIdentity(gActiveBank));
+    sub_806A12C(gSaveBlock2Ptr->playerGender, GetBankPosition(gActiveBank));
     gBankSpriteIds[gActiveBank] = CreateSprite(
       &gUnknown_0202499C,
       80,
@@ -415,7 +415,7 @@ static void SafariHandleSuccessBallThrowAnim(void)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnSpecialAnimDone;
 }
 
@@ -425,7 +425,7 @@ static void SafariHandleBallThrowAnim(void)
 
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnSpecialAnimDone;
 }
 

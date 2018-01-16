@@ -1047,10 +1047,10 @@ static void LinkPartnerHandleLoadMonSprite(void)
 
     BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
     species = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
-    sub_806A068(species, GetBankIdentity(gActiveBank));
+    sub_806A068(species, GetBankPosition(gActiveBank));
 
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
-                                               GetBankPosition(gActiveBank, 2),
+                                               GetBankCoord(gActiveBank, 2),
                                                GetBankSpriteDefault_Y(gActiveBank),
                                                sub_80A82E4(gActiveBank));
     gSprites[gBankSpriteIds[gActiveBank]].pos2.x = -240;
@@ -1077,11 +1077,11 @@ static void sub_814CC98(u8 bank, bool8 dontClearSubstituteBit)
     gBattlePartyID[bank] = gBattleBufferA[bank][1];
     species = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
     gUnknown_03005D7C[bank] = CreateInvisibleSpriteWithCallback(sub_805D714);
-    sub_806A068(species, GetBankIdentity(bank));
+    sub_806A068(species, GetBankPosition(bank));
 
     gBankSpriteIds[bank] = CreateSprite(
       &gUnknown_0202499C,
-      GetBankPosition(bank, 2),
+      GetBankCoord(bank, 2),
       GetBankSpriteDefault_Y(bank),
       sub_80A82E4(bank));
 
@@ -1144,7 +1144,7 @@ static void LinkPartnerHandleDrawTrainerPic(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if ((GetBankIdentity(gActiveBank) & BIT_MON) != 0) // second mon
+        if ((GetBankPosition(gActiveBank) & BIT_MON) != 0) // second mon
             xPos = 90;
         else // first mon
             xPos = 32;
@@ -1170,7 +1170,7 @@ static void LinkPartnerHandleDrawTrainerPic(void)
     }
 
     DecompressTrainerBackPic(trainerPicId, gActiveBank);
-    sub_806A12C(trainerPicId, GetBankIdentity(gActiveBank));
+    sub_806A12C(trainerPicId, GetBankPosition(gActiveBank));
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C, xPos, (8 - gTrainerBackPicCoords[trainerPicId].coords) * 4 + 80, sub_80A82E4(gActiveBank));
 
     gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;

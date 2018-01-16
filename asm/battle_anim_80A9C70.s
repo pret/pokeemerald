@@ -334,7 +334,7 @@ sub_80A9EF4: @ 80A9EF4
 	ldr r4, =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r0, 8
 	ldr r1, =0xffe00000
@@ -342,7 +342,7 @@ sub_80A9EF4: @ 80A9EF4
 	lsrs r5, r0, 16
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r0, 8
 	ldr r1, =0xffdc0000

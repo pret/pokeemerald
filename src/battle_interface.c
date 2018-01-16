@@ -152,7 +152,7 @@ enum
     HEALTHBOX_GFX_117,
 };
 
-extern u8 gBanksByIdentity[BATTLE_BANKS_COUNT];
+extern u8 gBankPositions[BATTLE_BANKS_COUNT];
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern u8 gNoOfAllBanks;
 extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
@@ -933,8 +933,8 @@ u8 CreateBankHealthboxSprites(u8 bank)
     {
         if (GetBankSide(bank) == SIDE_PLAYER)
         {
-            healthboxSpriteId_1 = CreateSprite(&sHealthboxPlayerSpriteTemplates[GetBankIdentity(bank) / 2], 240, 160, 1);
-            healthboxSpriteId_2 = CreateSpriteAtEnd(&sHealthboxPlayerSpriteTemplates[GetBankIdentity(bank) / 2], 240, 160, 1);
+            healthboxSpriteId_1 = CreateSprite(&sHealthboxPlayerSpriteTemplates[GetBankPosition(bank) / 2], 240, 160, 1);
+            healthboxSpriteId_2 = CreateSpriteAtEnd(&sHealthboxPlayerSpriteTemplates[GetBankPosition(bank) / 2], 240, 160, 1);
 
             gSprites[healthboxSpriteId_1].oam.affineParam = healthboxSpriteId_2;
 
@@ -946,8 +946,8 @@ u8 CreateBankHealthboxSprites(u8 bank)
         }
         else
         {
-            healthboxSpriteId_1 = CreateSprite(&sHealthboxOpponentSpriteTemplates[GetBankIdentity(bank) / 2], 240, 160, 1);
-            healthboxSpriteId_2 = CreateSpriteAtEnd(&sHealthboxOpponentSpriteTemplates[GetBankIdentity(bank) / 2], 240, 160, 1);
+            healthboxSpriteId_1 = CreateSprite(&sHealthboxOpponentSpriteTemplates[GetBankPosition(bank) / 2], 240, 160, 1);
+            healthboxSpriteId_2 = CreateSpriteAtEnd(&sHealthboxOpponentSpriteTemplates[GetBankPosition(bank) / 2], 240, 160, 1);
 
             gSprites[healthboxSpriteId_1].oam.affineParam = healthboxSpriteId_2;
 
@@ -959,7 +959,7 @@ u8 CreateBankHealthboxSprites(u8 bank)
         }
     }
 
-    unkSpriteId = CreateSpriteAtEnd(&sUnknown_0832C1C0[gBanksByIdentity[bank]], 140, 60, 0);
+    unkSpriteId = CreateSpriteAtEnd(&sUnknown_0832C1C0[gBankPositions[bank]], 140, 60, 0);
     unkSpritePtr = &gSprites[unkSpriteId];
     SetSubspriteTables(unkSpritePtr, &sUnknown_0832C28C[GetBankSide(bank)]);
     unkSpritePtr->subspriteMode = 2;
@@ -1111,18 +1111,18 @@ void SetBankHealthboxSpritePos(u8 bank)
     }
     else
     {
-        switch (GetBankIdentity(bank))
+        switch (GetBankPosition(bank))
         {
-        case IDENTITY_PLAYER_MON1:
+        case B_POSITION_PLAYER_LEFT:
             x = 159, y = 76;
             break;
-        case IDENTITY_PLAYER_MON2:
+        case B_POSITION_PLAYER_RIGHT:
             x = 171, y = 101;
             break;
-        case IDENTITY_OPPONENT_MON1:
+        case B_POSITION_OPPONENT_LEFT:
             x = 44, y = 19;
             break;
-        case IDENTITY_OPPONENT_MON2:
+        case B_POSITION_OPPONENT_RIGHT:
             x = 32, y = 44;
             break;
         }
@@ -1353,7 +1353,7 @@ static void sub_80730D4(u8 healthboxSpriteId, struct Pokemon *mon)
     u8 i, var, nature, healthboxSpriteId_2;
 
     memcpy(text, sUnknown_0832C3C4, sizeof(sUnknown_0832C3C4));
-    barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBankIdentity(gSprites[healthboxSpriteId].data[6]) * 384)];
+    barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBankPosition(gSprites[healthboxSpriteId].data[6]) * 384)];
     var = 5;
     nature = GetNature(mon);
     StringCopy(text + 6, gNatureNamePointers[nature]);
@@ -1485,7 +1485,7 @@ u8 CreatePartyStatusSummarySprites(u8 bank, struct HpAndStatus *partyInfo, u8 ar
     u8 ballIconSpritesIds[6];
     u8 taskId;
 
-    if (!arg2 || GetBankIdentity(bank) != IDENTITY_OPPONENT_MON2)
+    if (!arg2 || GetBankPosition(bank) != B_POSITION_OPPONENT_RIGHT)
     {
         if (GetBankSide(bank) == SIDE_PLAYER)
         {

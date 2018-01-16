@@ -4661,7 +4661,7 @@ _0804BA58:\n\
 	ldr r6, =gActiveBank\n\
 	ldrb r0, [r6]\n\
 	str r3, [sp]\n\
-	bl GetBankIdentity\n\
+	bl GetBankPosition\n\
 	mov r1, r10\n\
 	ands r1, r0\n\
 	lsls r0, r1, 1\n\
@@ -5103,7 +5103,7 @@ static void atk49_moveend(void)
                 && !gProtectStructs[gBankAttacker].chargingTurn && gBattleMoves[gCurrentMove].target == MOVE_TARGET_BOTH
                 && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
             {
-                u8 bank = GetBankByIdentity(GetBankIdentity(gBankTarget) ^ BIT_MON);
+                u8 bank = GetBankByIdentity(GetBankPosition(gBankTarget) ^ BIT_MON);
                 if (gBattleMons[bank].hp != 0)
                 {
                     gBankTarget = bank;
@@ -5454,10 +5454,10 @@ static void atk4F_jumpifcantswitch(void)
     {
         if (GetBankSide(gActiveBank) == SIDE_OPPONENT)
         {
-            r7 = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+            r7 = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
 
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                compareVar = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+                compareVar = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
             else
                 compareVar = r7;
 
@@ -5465,10 +5465,10 @@ static void atk4F_jumpifcantswitch(void)
         }
         else
         {
-            r7 = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+            r7 = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
 
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                compareVar = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+                compareVar = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
             else
                 compareVar = r7;
 
@@ -5763,7 +5763,7 @@ static void atk50_openpartyscreen(void)
 
             gBattlescriptCurrInstr += 6;
 
-            if (GetBankIdentity(gActiveBank) == 0 && gBattleResults.playerSwitchesCounter < 0xFF)
+            if (GetBankPosition(gActiveBank) == 0 && gBattleResults.playerSwitchesCounter < 0xFF)
                 gBattleResults.playerSwitchesCounter++;
 
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
@@ -5779,7 +5779,7 @@ static void atk50_openpartyscreen(void)
             }
             else
             {
-                gActiveBank = GetBankByIdentity(GetBankIdentity(bank) ^ BIT_SIDE);
+                gActiveBank = GetBankByIdentity(GetBankPosition(bank) ^ BIT_SIDE);
                 if (gAbsentBankFlags & gBitTable[gActiveBank])
                     gActiveBank ^= BIT_MON;
 
@@ -5976,7 +5976,7 @@ static void atk56_playfaintcry(void)
 
 static void atk57(void)
 {
-    gActiveBank = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+    gActiveBank = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
     EmitCmd55(0, gBattleOutcome);
     MarkBufferBankForExecution(gActiveBank);
 
@@ -6011,7 +6011,7 @@ static void atk59_handlelearnnewmove(void)
     }
     else
     {
-        gActiveBank = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+        gActiveBank = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
 
         if (gBattlePartyID[gActiveBank] == gBattleStruct->expGetterId
             && !(gBattleMons[gActiveBank].status2 & STATUS2_TRANSFORMED))
@@ -6020,7 +6020,7 @@ static void atk59_handlelearnnewmove(void)
         }
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {
-            gActiveBank = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+            gActiveBank = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
             if (gBattlePartyID[gActiveBank] == gBattleStruct->expGetterId
                 && !(gBattleMons[gActiveBank].status2 & STATUS2_TRANSFORMED))
             {
@@ -6851,7 +6851,7 @@ static void atk6D_resetsentmonsvalue(void)
 
 static void atk6E_setatktoplayer0(void)
 {
-    gBankAttacker = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+    gBankAttacker = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
     gBattlescriptCurrInstr++;
 }
 
@@ -8309,7 +8309,7 @@ static void atk98_updatestatusicon(void)
         }
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
         {
-            gActiveBank = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ BIT_MON);
+            gActiveBank = GetBankByIdentity(GetBankPosition(gBankAttacker) ^ BIT_MON);
             if (!(gAbsentBankFlags & gBitTable[gActiveBank]))
             {
                 EmitStatusIconUpdate(0, gBattleMons[gActiveBank].status1, gBattleMons[gActiveBank].status2);
@@ -8978,7 +8978,7 @@ static void atkAE_healpartystatus(void)
             gBattleCommunication[MULTISTRING_CHOOSER] |= 1;
         }
 
-        gActiveBank = gBattleScripting.bank = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ BIT_MON);
+        gActiveBank = gBattleScripting.bank = GetBankByIdentity(GetBankPosition(gBankAttacker) ^ BIT_MON);
 
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
             && !(gAbsentBankFlags & gBitTable[gActiveBank]))
@@ -9026,7 +9026,7 @@ static void atkAE_healpartystatus(void)
         gBattleMons[gBankAttacker].status1 = 0;
         gBattleMons[gBankAttacker].status2 &= ~(STATUS2_NIGHTMARE);
 
-        gActiveBank = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ BIT_MON);
+        gActiveBank = GetBankByIdentity(GetBankPosition(gBankAttacker) ^ BIT_MON);
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
             && !(gAbsentBankFlags & gBitTable[gActiveBank]))
         {
@@ -9296,16 +9296,16 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
     if (gMultiHitCounter == 1)
     {
         if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
-            gBankTarget = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+            gBankTarget = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
         else
-            gBankTarget = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+            gBankTarget = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
     }
     else
     {
         if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
-            gBankTarget = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+            gBankTarget = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
         else
-            gBankTarget = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+            gBankTarget = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
     }
 
     if (gActionForBanks[gBankTarget] == ACTION_USE_MOVE
@@ -9875,7 +9875,7 @@ static void atkD0_settaunt(void)
 
 static void atkD1_trysethelpinghand(void)
 {
-    gBankTarget = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ BIT_MON);
+    gBankTarget = GetBankByIdentity(GetBankPosition(gBankAttacker) ^ BIT_MON);
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
         && !(gAbsentBankFlags & gBitTable[gBankTarget])
@@ -10544,7 +10544,7 @@ static void atkEB_settypetoterrain(void)
 
 static void atkEC_pursuitrelated(void)
 {
-    gActiveBank = GetBankByIdentity(GetBankIdentity(gBankAttacker) ^ BIT_MON);
+    gActiveBank = GetBankByIdentity(GetBankPosition(gBankAttacker) ^ BIT_MON);
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
         && !(gAbsentBankFlags & gBitTable[gActiveBank])

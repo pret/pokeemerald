@@ -274,7 +274,7 @@ static void sub_8186678(void)
 
     if (var)
     {
-        if (GetBankIdentity(gActiveBank) == IDENTITY_OPPONENT_MON1)
+        if (GetBankPosition(gActiveBank) == B_POSITION_OPPONENT_LEFT)
         {
             if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x1)
                 return;
@@ -330,7 +330,7 @@ static void sub_818686C(void)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
-                if (GetBankIdentity(gActiveBank) == IDENTITY_OPPONENT_MON1)
+                if (GetBankPosition(gActiveBank) == B_POSITION_OPPONENT_LEFT)
                     m4aMPlayContinue(&gMPlayInfo_BGM);
             }
             else
@@ -1146,10 +1146,10 @@ static void RecordedOpponentHandleLoadMonSprite(void)
     u16 species = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
 
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlePartyID[gActiveBank]], gActiveBank);
-    sub_806A068(species, GetBankIdentity(gActiveBank));
+    sub_806A068(species, GetBankPosition(gActiveBank));
 
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
-                                               GetBankPosition(gActiveBank, 2),
+                                               GetBankCoord(gActiveBank, 2),
                                                GetBankSpriteDefault_Y(gActiveBank),
                                                sub_80A82E4(gActiveBank));
 
@@ -1181,10 +1181,10 @@ static void sub_81885D8(u8 bank, bool8 dontClearSubstituteBit)
     species = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
     gUnknown_03005D7C[bank] = CreateInvisibleSpriteWithCallback(sub_805D714);
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlePartyID[bank]], bank);
-    sub_806A068(species, GetBankIdentity(bank));
+    sub_806A068(species, GetBankPosition(bank));
 
     gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C,
-                                        GetBankPosition(bank, 2),
+                                        GetBankCoord(bank, 2),
                                         GetBankSpriteDefault_Y(bank),
                                         sub_80A82E4(bank));
 
@@ -1248,7 +1248,7 @@ static void RecordedOpponentHandleDrawTrainerPic(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if ((GetBankIdentity(gActiveBank) & BIT_MON) != 0) // second mon
+        if ((GetBankPosition(gActiveBank) & BIT_MON) != 0) // second mon
             xPos = 152;
         else // first mon
             xPos = 200;
@@ -1279,7 +1279,7 @@ static void RecordedOpponentHandleDrawTrainerPic(void)
     }
 
     DecompressTrainerFrontPic(trainerPicId, gActiveBank);
-    sub_806A12C(trainerPicId, GetBankIdentity(gActiveBank));
+    sub_806A12C(trainerPicId, GetBankPosition(gActiveBank));
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
                                                xPos,
                                                (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40,

@@ -424,7 +424,7 @@ static void ScriptCmd_createsprite(void)
     if (subpriority < 3)
         subpriority = 3;
 
-    CreateSpriteAndAnimate(template, GetBankPosition(gAnimBankTarget, 2), GetBankPosition(gAnimBankTarget, 3), subpriority);
+    CreateSpriteAndAnimate(template, GetBankCoord(gAnimBankTarget, 2), GetBankCoord(gAnimBankTarget, 3), subpriority);
     gAnimVisualTaskCount++;
 }
 
@@ -613,8 +613,8 @@ static void ScriptCmd_monbg(void)
 
     if (IsAnimBankSpriteVisible(bank))
     {
-        u8 identity = GetBankIdentity(bank);
-        if (identity == IDENTITY_OPPONENT_MON1 || identity == IDENTITY_PLAYER_MON2 || IsContest())
+        u8 identity = GetBankPosition(bank);
+        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -632,8 +632,8 @@ static void ScriptCmd_monbg(void)
     bank ^= BIT_MON;
     if (IsAnimBankSpriteVisible(bank))
     {
-        u8 identity = GetBankIdentity(bank);
-        if (identity == IDENTITY_OPPONENT_MON1 || identity == IDENTITY_PLAYER_MON2 || IsContest())
+        u8 identity = GetBankPosition(bank);
+        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -718,7 +718,7 @@ void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible)
         if (IsContest())
             bankIdentity = 0;
         else
-            bankIdentity = GetBankIdentity(bank);
+            bankIdentity = GetBankPosition(bank);
 
         sub_8118FBC(1, 0, 0, bankIdentity, unknownStruct.unk8, unknownStruct.unk0, unknownStruct.unk4, unknownStruct.unkA);
 
@@ -750,7 +750,7 @@ void sub_80A438C(u8 bank, bool8 toBG_2, bool8 setSpriteInvisible)
         LoadPalette(&gPlttBufferUnfaded[0x100 + bank * 16], 0x90, 0x20);
         CpuCopy32(&gPlttBufferUnfaded[0x100 + bank * 16], (void*)(BG_PLTT + 0x120), 0x20);
 
-        sub_8118FBC(2, 0, 0, GetBankIdentity(bank), unknownStruct.unk8, unknownStruct.unk0 + 0x1000, unknownStruct.unk4 + 0x400, unknownStruct.unkA);
+        sub_8118FBC(2, 0, 0, GetBankPosition(bank), unknownStruct.unk8, unknownStruct.unk0 + 0x1000, unknownStruct.unk4 + 0x400, unknownStruct.unkA);
     }
 }
 
@@ -893,8 +893,8 @@ static void sub_80A4980(u8 taskId)
     if (gTasks[taskId].data[1] != 1)
     {
         u8 to_BG2;
-        u8 identity = GetBankIdentity(gTasks[taskId].data[2]);
-        if (identity == IDENTITY_OPPONENT_MON1 || identity == IDENTITY_PLAYER_MON2 || IsContest())
+        u8 identity = GetBankPosition(gTasks[taskId].data[2]);
+        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
             to_BG2 = FALSE;
         else
             to_BG2 = TRUE;
@@ -937,8 +937,8 @@ static void ScriptCmd_monbg_22(void)
 
     if (IsAnimBankSpriteVisible(bank))
     {
-        u8 identity = GetBankIdentity(bank);
-        if (identity == IDENTITY_OPPONENT_MON1 || identity == IDENTITY_PLAYER_MON2 || IsContest())
+        u8 identity = GetBankPosition(bank);
+        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -949,8 +949,8 @@ static void ScriptCmd_monbg_22(void)
     bank ^= BIT_MON;
     if (animBankId > 1 && IsAnimBankSpriteVisible(bank))
     {
-        u8 identity = GetBankIdentity(bank);
-        if (identity == IDENTITY_OPPONENT_MON1 || identity == IDENTITY_PLAYER_MON2 || IsContest())
+        u8 identity = GetBankPosition(bank);
+        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -1001,8 +1001,8 @@ static void sub_80A4BB0(u8 taskId)
     {
         bool8 toBG_2;
         u8 bank = gTasks[taskId].data[2];
-        u8 identity = GetBankIdentity(bank);
-        if (identity == IDENTITY_OPPONENT_MON1 || identity == IDENTITY_PLAYER_MON2 || IsContest())
+        u8 identity = GetBankPosition(bank);
+        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -1705,8 +1705,8 @@ static void ScriptCmd_monbgprio_28(void)
     else
         bank = gAnimBankAttacker;
 
-    bankIdentity = GetBankIdentity(bank);
-    if (!IsContest() && (bankIdentity == IDENTITY_PLAYER_MON1 || bankIdentity == IDENTITY_OPPONENT_MON2))
+    bankIdentity = GetBankPosition(bank);
+    if (!IsContest() && (bankIdentity == B_POSITION_PLAYER_LEFT || bankIdentity == B_POSITION_OPPONENT_RIGHT))
     {
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
         SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
@@ -1738,8 +1738,8 @@ static void ScriptCmd_monbgprio_2A(void)
         else
             bank = gAnimBankAttacker;
 
-        bankIdentity = GetBankIdentity(bank);
-        if (!IsContest() && (bankIdentity == IDENTITY_PLAYER_MON1 || bankIdentity == IDENTITY_OPPONENT_MON2))
+        bankIdentity = GetBankPosition(bank);
+        if (!IsContest() && (bankIdentity == B_POSITION_PLAYER_LEFT || bankIdentity == B_POSITION_OPPONENT_RIGHT))
         {
             SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
             SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);

@@ -1834,25 +1834,25 @@ u32 BattleStringExpandPlaceholders(const u8* src, u8* dst)
                 toCpy = gStringVar3;
                 break;
             case B_TXT_PLAYER_MON1_NAME: // first player poke name
-                GetMonData(&gPlayerParty[gBattlePartyID[GetBankByIdentity(IDENTITY_PLAYER_MON1)]],
+                GetMonData(&gPlayerParty[gBattlePartyID[GetBankByIdentity(B_POSITION_PLAYER_LEFT)]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_OPPONENT_MON1_NAME: // first enemy poke name
-                GetMonData(&gEnemyParty[gBattlePartyID[GetBankByIdentity(IDENTITY_OPPONENT_MON1)]],
+                GetMonData(&gEnemyParty[gBattlePartyID[GetBankByIdentity(B_POSITION_OPPONENT_LEFT)]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_PLAYER_MON2_NAME: // second player poke name
-                GetMonData(&gPlayerParty[gBattlePartyID[GetBankByIdentity(IDENTITY_PLAYER_MON2)]],
+                GetMonData(&gPlayerParty[gBattlePartyID[GetBankByIdentity(B_POSITION_PLAYER_RIGHT)]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;
                 break;
             case B_TXT_OPPONENT_MON2_NAME: // second enemy poke name
-                GetMonData(&gEnemyParty[gBattlePartyID[GetBankByIdentity(IDENTITY_OPPONENT_MON2)]],
+                GetMonData(&gEnemyParty[gBattlePartyID[GetBankByIdentity(B_POSITION_OPPONENT_RIGHT)]],
                            MON_DATA_NICKNAME, text);
                 StringGetEnd10(text);
                 toCpy = text;

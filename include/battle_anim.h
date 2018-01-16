@@ -85,7 +85,7 @@ enum
     BANK_Y_POS,
 };
 
-u8 GetBankPosition(u8 bank, u8 attributeId);
+u8 GetBankCoord(u8 bank, u8 attributeId);
 
 bool8 IsBankSpritePresent(u8 bank);
 void sub_80A6C68(u8 arg0);

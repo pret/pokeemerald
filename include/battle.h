@@ -11,18 +11,33 @@
 #include "battle_bg.h"
 
 /*
-    Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
-    Each bank has a value consisting of two bits.
-    0x1 bit is responsible for the side, 0 = player's side, 1 = opponent's side.
-    0x2 bit is responsible for the id of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
-*/
+ * Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
+ * A battler may be in one of four positions on the field. The first bit determines
+ * what side the battler is on, either the player's side or the opponent's side.
+ * The second bit determines whether the pokemon is on the left or right of the
+ * given side. Note that the opponent's mons are drawn opposite because the position
+ * numbers correspond to their perspective. The bank number is usually the same
+ * as the position, except in the case of link battles.
+ *
+ *   +---------------------- +
+ *   |       Opponent's side:|
+ *   |          3       1    |
+ *   |                       |
+ *   |                       |
+ *   |Player's side:         |
+ *   |    0       2          |
+ *   ------------------------+
+ *   |                       |
+ *   |                       |
+ *   +-----------------------+
+ */
 
 #define BATTLE_BANKS_COUNT  4
 
-#define IDENTITY_PLAYER_MON1        0
-#define IDENTITY_OPPONENT_MON1      1
-#define IDENTITY_PLAYER_MON2        2
-#define IDENTITY_OPPONENT_MON2      3
+#define B_POSITION_PLAYER_LEFT        0
+#define B_POSITION_OPPONENT_LEFT      1
+#define B_POSITION_PLAYER_RIGHT       2
+#define B_POSITION_OPPONENT_RIGHT     3
 
 #define SIDE_PLAYER     0x0
 #define SIDE_OPPONENT   0x1
@@ -30,9 +45,9 @@
 #define BIT_SIDE        0x1
 #define BIT_MON         0x2
 
-#define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
-#define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
-#define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
+#define GET_BANK_POSITION(bank)((gBankPositions[bank]))
+#define GET_BANK_SIDE(bank)((GetBankPosition(bank) & BIT_SIDE))
+#define GET_BANK_SIDE2(bank)((GET_BANK_POSITION(bank) & BIT_SIDE))
 
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
@@ -66,15 +81,14 @@
 #define BATTLE_TYPE_KYOGRE          0x20000000
 #define BATTLE_TYPE_RAYQUAZA        0x40000000
 #define BATTLE_TYPE_x80000000       0x80000000
+#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
+#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
 
 #define TRAINER_OPPONENT_3FE        0x3FE
 #define TRAINER_OPPONENT_C00        0xC00
 #define TRAINER_OPPONENT_800        0x800
 #define STEVEN_PARTNER_ID           0xC03
 #define SECRET_BASE_OPPONENT        0x400
-
-#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
-#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
 
 #define BATTLE_WON                  0x1
 #define BATTLE_LOST                 0x2
@@ -832,7 +846,7 @@ enum
 
 // rom_80A5C6C
 u8 GetBankSide(u8 bank);
-u8 GetBankIdentity(u8 bank);
+u8 GetBankPosition(u8 bank);
 u8 GetBankByIdentity(u8 bank);
 
 struct BattleSpriteInfo

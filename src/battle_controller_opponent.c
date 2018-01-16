@@ -293,7 +293,7 @@ static void sub_805F2F0(void)
         }
         else if (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x1)
         {
-            if (GetBankIdentity(gActiveBank) == 3)
+            if (GetBankPosition(gActiveBank) == 3)
             {
                 if (gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].flag_x80 == 0 && gBattleSpritesDataPtr->healthBoxesData[gActiveBank ^ BIT_MON].field_1_x1 == 0)
                 {
@@ -349,7 +349,7 @@ static void sub_805F560(void)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
-                if (GetBankIdentity(gActiveBank) == 1)
+                if (GetBankPosition(gActiveBank) == 1)
                     m4aMPlayContinue(&gMPlayInfo_BGM);
             }
             else
@@ -1149,10 +1149,10 @@ static void OpponentHandleLoadMonSprite(void)
     u16 species = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
 
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlePartyID[gActiveBank]], gActiveBank);
-    sub_806A068(species, GetBankIdentity(gActiveBank));
+    sub_806A068(species, GetBankPosition(gActiveBank));
 
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
-                                               GetBankPosition(gActiveBank, 2),
+                                               GetBankCoord(gActiveBank, 2),
                                                GetBankSpriteDefault_Y(gActiveBank),
                                                sub_80A82E4(gActiveBank));
 
@@ -1184,10 +1184,10 @@ static void sub_80613DC(u8 bank, bool8 dontClearSubstituteBit)
     species = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
     gUnknown_03005D7C[bank] = CreateInvisibleSpriteWithCallback(sub_805D714);
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlePartyID[bank]], bank);
-    sub_806A068(species, GetBankIdentity(bank));
+    sub_806A068(species, GetBankPosition(bank));
 
     gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C,
-                                        GetBankPosition(bank, 2),
+                                        GetBankCoord(bank, 2),
                                         GetBankSpriteDefault_Y(bank),
                                         sub_80A82E4(bank));
 
@@ -1304,7 +1304,7 @@ static void OpponentHandleDrawTrainerPic(void)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS))
     {
-        if ((GetBankIdentity(gActiveBank) & BIT_MON) != 0) // second mon
+        if ((GetBankPosition(gActiveBank) & BIT_MON) != 0) // second mon
             xPos = 152;
         else // first mon
             xPos = 200;
@@ -1315,7 +1315,7 @@ static void OpponentHandleDrawTrainerPic(void)
     }
 
     DecompressTrainerFrontPic(trainerPicId, gActiveBank);
-    sub_806A12C(trainerPicId, GetBankIdentity(gActiveBank));
+    sub_806A12C(trainerPicId, GetBankPosition(gActiveBank));
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
                                                xPos,
                                                (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40,
@@ -1387,7 +1387,7 @@ static void OpponentHandleTrainerSlide(void)
     }
 
     DecompressTrainerFrontPic(trainerPicId, gActiveBank);
-    sub_806A12C(trainerPicId, GetBankIdentity(gActiveBank));
+    sub_806A12C(trainerPicId, GetBankPosition(gActiveBank));
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C, 176, (8 - gTrainerFrontPicCoords[trainerPicId].coords) * 4 + 40, 0x1E);
 
     gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 96;
@@ -1588,9 +1588,9 @@ static void OpponentHandleChooseMove(void)
                     gBankTarget = gActiveBank;
                 if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
                 {
-                    gBankTarget = GetBankByIdentity(IDENTITY_PLAYER_MON1);
+                    gBankTarget = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
                     if (gAbsentBankFlags & gBitTable[gBankTarget])
-                        gBankTarget = GetBankByIdentity(IDENTITY_PLAYER_MON2);
+                        gBankTarget = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
                 }
                 EmitTwoReturnValues(1, 10, (chosenMoveId) | (gBankTarget << 8));
                 break;
@@ -1611,7 +1611,7 @@ static void OpponentHandleChooseMove(void)
             else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBankByIdentity(Random() & 2) << 8));
             else
-                EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBankByIdentity(IDENTITY_PLAYER_MON1) << 8));
+                EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBankByIdentity(B_POSITION_PLAYER_LEFT) << 8));
 
             OpponentBufferExecCompleted();
         }
@@ -1638,12 +1638,12 @@ static void OpponentHandleChoosePokemon(void)
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
             {
-                bank2 = bank1 = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
+                bank2 = bank1 = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
             }
             else
             {
-                bank1 = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
-                bank2 = GetBankByIdentity(IDENTITY_OPPONENT_MON2);
+                bank1 = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+                bank2 = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
             }
 
             if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_x800000))

@@ -1067,7 +1067,7 @@ static void WallyHandleReturnMonToBall(void)
 static void WallyHandleDrawTrainerPic(void)
 {
     DecompressTrainerBackPic(BACK_PIC_WALLY, gActiveBank);
-    sub_806A12C(BACK_PIC_WALLY, GetBankIdentity(gActiveBank));
+    sub_806A12C(BACK_PIC_WALLY, GetBankPosition(gActiveBank));
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
                                                80,
                                                80 + 4 * (8 - gTrainerBackPicCoords[BACK_PIC_WALLY].coords),
@@ -1082,7 +1082,7 @@ static void WallyHandleDrawTrainerPic(void)
 static void WallyHandleTrainerSlide(void)
 {
     DecompressTrainerBackPic(BACK_PIC_WALLY, gActiveBank);
-    sub_806A12C(BACK_PIC_WALLY, GetBankIdentity(gActiveBank));
+    sub_806A12C(BACK_PIC_WALLY, GetBankPosition(gActiveBank));
     gBankSpriteIds[gActiveBank] = CreateSprite(&gUnknown_0202499C,
                                                80,
                                                80 + 4 * (8 - gTrainerBackPicCoords[BACK_PIC_WALLY].coords),
@@ -1113,7 +1113,7 @@ static void WallyHandleSuccessBallThrowAnim(void)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnFinishedAnimation;
 }
 
@@ -1123,7 +1123,7 @@ static void WallyHandleBallThrowAnim(void)
 
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(IDENTITY_OPPONENT_MON1), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnFinishedAnimation;
 }
 
@@ -1494,9 +1494,9 @@ static void sub_816AA80(u8 bank)
     gBattlePartyID[bank] = gBattleBufferA[bank][1];
     species = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
     gUnknown_03005D7C[bank] = CreateInvisibleSpriteWithCallback(sub_805D714);
-    sub_806A068(species, GetBankIdentity(bank));
+    sub_806A068(species, GetBankPosition(bank));
     gBankSpriteIds[bank] = CreateSprite(&gUnknown_0202499C,
-                                        GetBankPosition(bank, 2),
+                                        GetBankCoord(bank, 2),
                                         GetBankSpriteDefault_Y(bank),
                                         sub_80A82E4(bank));
 

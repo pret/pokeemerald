@@ -907,13 +907,13 @@ _08170C44:
 	ldr r5, =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBankCoord
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBankCoord
 	adds r1, r0, 0
 	lsls r1, 24
 	ldr r2, =gSprites
@@ -1166,14 +1166,14 @@ sub_8170E04: @ 8170E04
 	mov r8, r2
 	ldrb r0, [r2]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x30]
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -1317,14 +1317,14 @@ _08170F54:
 	mov r8, r1
 	ldrb r0, [r1]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x30]
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -5234,12 +5234,12 @@ _0817303A:
 	ldrb r0, [r4, 0x8]
 	mov r8, r0
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r0, r8
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0x1E
@@ -5579,7 +5579,7 @@ sub_817330C: @ 817330C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	ldr r5, =gBattleAnimArgs
 	lsrs r0, 24
@@ -5591,7 +5591,7 @@ sub_817330C: @ 817330C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBankCoord
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x6]

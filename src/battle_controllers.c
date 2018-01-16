@@ -16,7 +16,7 @@ extern u32 gBattleTypeFlags;
 extern u32 gBattleExecBuffer;
 extern void (*gBattleMainFunc)(void);
 extern void (*gBattleBankFunc[BATTLE_BANKS_COUNT])(void);
-extern u8 gBanksByIdentity[BATTLE_BANKS_COUNT];
+extern u8 gBankPositions[BATTLE_BANKS_COUNT];
 extern u8 gActionSelectionCursor[BATTLE_BANKS_COUNT];
 extern u8 gMoveSelectionCursor[BATTLE_BANKS_COUNT];
 extern u8 gNoOfAllBanks;
@@ -79,7 +79,7 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     for (i = 0; i < BATTLE_BANKS_COUNT; i++)
     {
         gBattleBankFunc[i] = nullsub_21;
-        gBanksByIdentity[i] = 0xFF;
+        gBankPositions[i] = 0xFF;
         gActionSelectionCursor[i] = 0;
         gMoveSelectionCursor[i] = 0;
     }
@@ -146,30 +146,30 @@ static void SetControllersVariables(void)
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
             gBattleBankFunc[0] = SetControllerToRecordedPlayer;
-            gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+            gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
             gBattleBankFunc[1] = SetControllerToOpponent;
-            gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+            gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
             gBattleBankFunc[2] = SetControllerToPlayerPartner;
-            gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
+            gBankPositions[2] = B_POSITION_PLAYER_RIGHT;
 
             gBattleBankFunc[3] = SetControllerToOpponent;
-            gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
+            gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
         }
         else
         {
             gBattleBankFunc[0] = SetControllerToPlayer;
-            gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+            gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
             gBattleBankFunc[1] = SetControllerToOpponent;
-            gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+            gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
             gBattleBankFunc[2] = SetControllerToPlayerPartner;
-            gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
+            gBankPositions[2] = B_POSITION_PLAYER_RIGHT;
 
             gBattleBankFunc[3] = SetControllerToOpponent;
-            gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
+            gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
         }
 
         gNoOfAllBanks = 4;
@@ -195,10 +195,10 @@ static void SetControllersVariables(void)
         else
             gBattleBankFunc[0] = SetControllerToPlayer;
 
-        gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+        gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
         gBattleBankFunc[1] = SetControllerToOpponent;
-        gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+        gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
         gNoOfAllBanks = 2;
 
@@ -211,20 +211,20 @@ static void SetControllersVariables(void)
                     gBattleMainFunc = BeginBattleIntro;
 
                     gBattleBankFunc[0] = SetControllerToRecordedPlayer;
-                    gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+                    gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
                     gBattleBankFunc[1] = SetControllerToRecordedOpponent;
-                    gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+                    gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
                     gNoOfAllBanks = 2;
                 }
                 else // see how the banks are switched
                 {
                     gBattleBankFunc[1] = SetControllerToRecordedPlayer;
-                    gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
+                    gBankPositions[1] = B_POSITION_PLAYER_LEFT;
 
                     gBattleBankFunc[0] = SetControllerToRecordedOpponent;
-                    gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
+                    gBankPositions[0] = B_POSITION_OPPONENT_LEFT;
 
                     gNoOfAllBanks = 2;
                 }
@@ -232,10 +232,10 @@ static void SetControllersVariables(void)
             else
             {
                 gBattleBankFunc[0] = SetControllerToRecordedPlayer;
-                gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+                gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
                 gBattleBankFunc[1] = SetControllerToOpponent;
-                gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+                gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
             }
         }
     }
@@ -244,16 +244,16 @@ static void SetControllersVariables(void)
         gBattleMainFunc = BeginBattleIntro;
 
         gBattleBankFunc[0] = SetControllerToPlayer;
-        gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+        gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
         gBattleBankFunc[1] = SetControllerToOpponent;
-        gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+        gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
         gBattleBankFunc[2] = SetControllerToPlayer;
-        gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
+        gBankPositions[2] = B_POSITION_PLAYER_RIGHT;
 
         gBattleBankFunc[3] = SetControllerToOpponent;
-        gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
+        gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
         gNoOfAllBanks = 4;
 
@@ -264,16 +264,16 @@ static void SetControllersVariables(void)
                 gBattleMainFunc = BeginBattleIntro;
 
                 gBattleBankFunc[0] = SetControllerToRecordedPlayer;
-                gBanksByIdentity[0] = 0;
+                gBankPositions[0] = 0;
 
                 gBattleBankFunc[1] = SetControllerToOpponent;
-                gBanksByIdentity[1] = 1;
+                gBankPositions[1] = 1;
 
                 gBattleBankFunc[2] = SetControllerToRecordedPlayer;
-                gBanksByIdentity[2] = 2;
+                gBankPositions[2] = 2;
 
                 gBattleBankFunc[3] = SetControllerToOpponent;
-                gBanksByIdentity[3] = 3;
+                gBankPositions[3] = 3;
 
                 gNoOfAllBanks = 4;
 
@@ -312,12 +312,12 @@ static void SetControllersVariables(void)
                         {
                         case 0:
                         case 3:
-                            gBanksByIdentity[gLinkPlayers[i].lp_field_18] = IDENTITY_PLAYER_MON1;
+                            gBankPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_PLAYER_LEFT;
                             gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
                             break;
                         case 1:
                         case 2:
-                            gBanksByIdentity[gLinkPlayers[i].lp_field_18] = IDENTITY_PLAYER_MON2;
+                            gBankPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_PLAYER_RIGHT;
                             gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
                             break;
                         }
@@ -330,12 +330,12 @@ static void SetControllersVariables(void)
                         {
                         case 0:
                         case 3:
-                            gBanksByIdentity[gLinkPlayers[i].lp_field_18] = IDENTITY_PLAYER_MON1;
+                            gBankPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_PLAYER_LEFT;
                             gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
                             break;
                         case 1:
                         case 2:
-                            gBanksByIdentity[gLinkPlayers[i].lp_field_18] = IDENTITY_PLAYER_MON2;
+                            gBankPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_PLAYER_RIGHT;
                             gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
                             break;
                         }
@@ -347,12 +347,12 @@ static void SetControllersVariables(void)
                         {
                         case 0:
                         case 3:
-                            gBanksByIdentity[gLinkPlayers[i].lp_field_18] = IDENTITY_OPPONENT_MON1;
+                            gBankPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_OPPONENT_LEFT;
                             gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
                             break;
                         case 1:
                         case 2:
-                            gBanksByIdentity[gLinkPlayers[i].lp_field_18] = IDENTITY_OPPONENT_MON2;
+                            gBankPositions[gLinkPlayers[i].lp_field_18] = B_POSITION_OPPONENT_RIGHT;
                             gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
                             break;
                         }
@@ -362,51 +362,51 @@ static void SetControllersVariables(void)
             else if (gBattleTypeFlags & BATTLE_TYPE_WILD)
             {
                 gBattleBankFunc[0] = SetControllerToRecordedPlayer;
-                gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+                gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
                 gBattleBankFunc[2] = SetControllerToRecordedPlayer;
-                gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
+                gBankPositions[2] = B_POSITION_PLAYER_RIGHT;
 
                 if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
                 {
                   gBattleBankFunc[1] = SetControllerToRecordedOpponent;
-                  gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+                  gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
                   gBattleBankFunc[3] = SetControllerToRecordedOpponent;
-                  gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
+                  gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
                 }
                 else
                 {
                   gBattleBankFunc[1] = SetControllerToOpponent;
-                  gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+                  gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
                   gBattleBankFunc[3] = SetControllerToOpponent;
-                  gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
+                  gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
                 }
             }
             else
             {
                 gBattleBankFunc[1] = SetControllerToRecordedPlayer;
-                gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
+                gBankPositions[1] = B_POSITION_PLAYER_LEFT;
 
                 gBattleBankFunc[3] = SetControllerToRecordedPlayer;
-                gBanksByIdentity[3] = IDENTITY_PLAYER_MON2;
+                gBankPositions[3] = B_POSITION_PLAYER_RIGHT;
 
                 if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
                 {
                     gBattleBankFunc[0] = SetControllerToRecordedOpponent;
-                    gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
+                    gBankPositions[0] = B_POSITION_OPPONENT_LEFT;
 
                     gBattleBankFunc[2] = SetControllerToRecordedOpponent;
-                    gBanksByIdentity[2] = IDENTITY_OPPONENT_MON2;
+                    gBankPositions[2] = B_POSITION_OPPONENT_RIGHT;
                 }
                 else
                 {
                     gBattleBankFunc[0] = SetControllerToOpponent;
-                    gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
+                    gBankPositions[0] = B_POSITION_OPPONENT_LEFT;
 
                     gBattleBankFunc[2] = SetControllerToOpponent;
-                    gBanksByIdentity[2] = IDENTITY_OPPONENT_MON2;
+                    gBankPositions[2] = B_POSITION_OPPONENT_RIGHT;
                 }
             }
         }
@@ -425,20 +425,20 @@ static void SetControllersVariablesInLinkBattle(void)
             gBattleMainFunc = BeginBattleIntro;
 
             gBattleBankFunc[0] = SetControllerToPlayer;
-            gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+            gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
             gBattleBankFunc[1] = SetControllerToLinkOpponent;
-            gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+            gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
             gNoOfAllBanks = 2;
         }
         else
         {
             gBattleBankFunc[1] = SetControllerToPlayer;
-            gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
+            gBankPositions[1] = B_POSITION_PLAYER_LEFT;
 
             gBattleBankFunc[0] = SetControllerToLinkOpponent;
-            gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
+            gBankPositions[0] = B_POSITION_OPPONENT_LEFT;
 
             gNoOfAllBanks = 2;
         }
@@ -450,32 +450,32 @@ static void SetControllersVariablesInLinkBattle(void)
             gBattleMainFunc = BeginBattleIntro;
 
             gBattleBankFunc[0] = SetControllerToPlayer;
-            gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+            gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
             gBattleBankFunc[1] = SetControllerToLinkOpponent;
-            gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+            gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
             gBattleBankFunc[2] = SetControllerToPlayer;
-            gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
+            gBankPositions[2] = B_POSITION_PLAYER_RIGHT;
 
             gBattleBankFunc[3] = SetControllerToLinkOpponent;
-            gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
+            gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
             gNoOfAllBanks = 4;
         }
         else
         {
             gBattleBankFunc[1] = SetControllerToPlayer;
-            gBanksByIdentity[1] = IDENTITY_PLAYER_MON1;
+            gBankPositions[1] = B_POSITION_PLAYER_LEFT;
 
             gBattleBankFunc[0] = SetControllerToLinkOpponent;
-            gBanksByIdentity[0] = IDENTITY_OPPONENT_MON1;
+            gBankPositions[0] = B_POSITION_OPPONENT_LEFT;
 
             gBattleBankFunc[3] = SetControllerToPlayer;
-            gBanksByIdentity[3] = IDENTITY_PLAYER_MON2;
+            gBankPositions[3] = B_POSITION_PLAYER_RIGHT;
 
             gBattleBankFunc[2] = SetControllerToLinkOpponent;
-            gBanksByIdentity[2] = IDENTITY_OPPONENT_MON2;
+            gBankPositions[2] = B_POSITION_OPPONENT_RIGHT;
 
             gNoOfAllBanks = 4;
         }
@@ -487,32 +487,32 @@ static void SetControllersVariablesInLinkBattle(void)
             gBattleMainFunc = BeginBattleIntro;
 
             gBattleBankFunc[0] = SetControllerToPlayer;
-            gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+            gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
             gBattleBankFunc[1] = SetControllerToOpponent;
-            gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+            gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
             gBattleBankFunc[2] = SetControllerToLinkPartner;
-            gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
+            gBankPositions[2] = B_POSITION_PLAYER_RIGHT;
 
             gBattleBankFunc[3] = SetControllerToOpponent;
-            gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
+            gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
             gNoOfAllBanks = 4;
         }
         else
         {
             gBattleBankFunc[0] = SetControllerToLinkPartner;
-            gBanksByIdentity[0] = IDENTITY_PLAYER_MON1;
+            gBankPositions[0] = B_POSITION_PLAYER_LEFT;
 
             gBattleBankFunc[1] = SetControllerToLinkOpponent;
-            gBanksByIdentity[1] = IDENTITY_OPPONENT_MON1;
+            gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
             gBattleBankFunc[2] = SetControllerToPlayer;
-            gBanksByIdentity[2] = IDENTITY_PLAYER_MON2;
+            gBankPositions[2] = B_POSITION_PLAYER_RIGHT;
 
             gBattleBankFunc[3] = SetControllerToLinkOpponent;
-            gBanksByIdentity[3] = IDENTITY_OPPONENT_MON2;
+            gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
             gNoOfAllBanks = 4;
         }
@@ -554,12 +554,12 @@ static void SetControllersVariablesInLinkBattle(void)
                 {
                 case 0:
                 case 3:
-                    gBanksByIdentity[gLinkPlayers[i].lp_field_18] = 0;
+                    gBankPositions[gLinkPlayers[i].lp_field_18] = 0;
                     gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
                     break;
                 case 1:
                 case 2:
-                    gBanksByIdentity[gLinkPlayers[i].lp_field_18] = 2;
+                    gBankPositions[gLinkPlayers[i].lp_field_18] = 2;
                     gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
                     break;
                 }
@@ -574,12 +574,12 @@ static void SetControllersVariablesInLinkBattle(void)
                     {
                     case 0:
                     case 3:
-                        gBanksByIdentity[gLinkPlayers[i].lp_field_18] = 0;
+                        gBankPositions[gLinkPlayers[i].lp_field_18] = 0;
                         gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
                         break;
                     case 1:
                     case 2:
-                        gBanksByIdentity[gLinkPlayers[i].lp_field_18] = 2;
+                        gBankPositions[gLinkPlayers[i].lp_field_18] = 2;
                         gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
                         break;
                     }
@@ -591,12 +591,12 @@ static void SetControllersVariablesInLinkBattle(void)
                     {
                     case 0:
                     case 3:
-                        gBanksByIdentity[gLinkPlayers[i].lp_field_18] = 1;
+                        gBankPositions[gLinkPlayers[i].lp_field_18] = 1;
                         gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
                         break;
                     case 1:
                     case 2:
-                        gBanksByIdentity[gLinkPlayers[i].lp_field_18] = 3;
+                        gBankPositions[gLinkPlayers[i].lp_field_18] = 3;
                         gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
                         break;
                     }
