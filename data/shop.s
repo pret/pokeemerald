@@ -24,10 +24,14 @@ gUnknown_08589A28:: @ 8589A28
 	.4byte HandleShopMenuQuit
 
 gUnknown_08589A38:: @ 8589A38
-	.byte 0, 2, 1, 9, 6, 15, 8, 0, 0, 2, 1, 9, 4, 15, 8, 0
+	window_template 0, 2, 1, 9, 6, 15, 8
+    window_template 0, 2, 1, 9, 4, 15, 8
 
 gUnknown_08589A48:: @ 8589A48
-	.byte 0, 0, 0, 0, 0x3D, 0, 14, 8, 21, 1, 14, 8, 0, 0, 0, 0, 1, 0, 8, 0, 33, 48, 0, 7
+	.byte 0, 0, 0, 0
+    .4byte BuyMenuPrintItemDescriptionAndShowItemIcon
+    .4byte BuyMenuPrintPriceInList 
+    .byte 0, 0, 0, 0, 1, 0, 8, 0, 33, 48, 0, 7
 
 gUnknown_08589A60:: @ 8589A60
 	.4byte 0x1F8
@@ -36,64 +40,16 @@ gUnknown_08589A60:: @ 8589A60
     .4byte 0x31C3
 
 gUnknown_08589A70:: @ 8589A70
-	.byte 0
-    .byte 1
-    .byte 1
-    .byte 10
-    .byte 2
-    .byte 15
-    .2byte 30
-    .byte 0
-    .byte 14
-    .byte 2
-    .byte 15
-    .byte 16
-    .byte 15
-    .2byte 50
-    .byte 0
-    .byte 0
-    .byte 13
-    .byte 14
-    .byte 6
-    .byte 15
-    .2byte 0x122
-    .byte 0
-    .byte 1
-    .byte 11
-    .byte 12
-    .byte 2
-    .byte 15
-    .2byte 0x176
-    .byte 0
-    .byte 18
-    .byte 11
-    .byte 10
-    .byte 2
-    .byte 15
-    .2byte 0x18E
-    .byte 0
-    .byte 2
-    .byte 15
-    .byte 27
-    .byte 4
-    .byte 15
-    .2byte 0x1A2
-    .byte 0xFF
-    .byte 0
-    .byte 0
-    .byte 0
-    .byte 0
-    .byte 0
-    .2byte 0
+	window_template 0, 1, 1, 10, 2, 15, 30
+    window_template 0, 14, 2, 15, 16, 15, 50
+    window_template 0, 0, 13, 14, 6, 15, 0x122
+    window_template 0, 1, 11, 12, 2, 15, 0x176
+    window_template 0, 18, 11, 10, 2, 15, 0x18E
+    window_template 0, 2, 15, 27, 4, 15, 0x1A2
+    window_template_terminator
 
 gUnknown_08589AA8:: @ 8589AA8
-	.byte 0
-    .byte 21
-    .byte 9
-    .byte 5
-    .byte 4
-    .byte 15
-    .2byte 0x20E
+    window_template 0, 21, 9, 5, 4, 15, 0x20E
 
 gUnknown_08589AB0:: @ 8589AB0
 	.byte 1, 2, 3
