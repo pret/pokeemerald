@@ -543,7 +543,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank)
 {
     u32 monsPersonality, currentPersonality, otId;
     u16 species;
-    u8 identity;
+    u8 position;
     u16 paletteOffset;
     const void *lzPaletteData;
 
@@ -561,9 +561,9 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 bank)
     }
 
     otId = GetMonData(mon, MON_DATA_OT_ID);
-    identity = GetBankPosition(bank);
+    position = GetBankPosition(bank);
     HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
-                                              gMonSpritesGfxPtr->sprites[identity],
+                                              gMonSpritesGfxPtr->sprites[position],
                                               species, currentPersonality);
 
     paletteOffset = 0x100 + bank * 16;
@@ -596,7 +596,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 bank)
 {
     u32 monsPersonality, currentPersonality, otId;
     u16 species;
-    u8 identity;
+    u8 position;
     u16 paletteOffset;
     const void *lzPaletteData;
 
@@ -614,18 +614,18 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 bank)
     }
 
     otId = GetMonData(mon, MON_DATA_OT_ID);
-    identity = GetBankPosition(bank);
+    position = GetBankPosition(bank);
 
     if (sub_80688F8(1, bank) == 1 || gBattleSpritesDataPtr->bankData[bank].transformSpecies != SPECIES_NONE)
     {
         HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species],
-                                                  gMonSpritesGfxPtr->sprites[identity],
+                                                  gMonSpritesGfxPtr->sprites[position],
                                                   species, currentPersonality);
     }
     else
     {
         HandleLoadSpecialPokePic(&gMonBackPicTable[species],
-                                gMonSpritesGfxPtr->sprites[identity],
+                                gMonSpritesGfxPtr->sprites[position],
                                 species, currentPersonality);
     }
 
@@ -665,18 +665,18 @@ void nullsub_24(u16 species)
 
 void DecompressTrainerFrontPic(u16 frontPicId, u8 bank)
 {
-    u8 identity = GetBankPosition(bank);
+    u8 position = GetBankPosition(bank);
     DecompressPicFromTable_2(&gTrainerFrontPicTable[frontPicId],
-                             gMonSpritesGfxPtr->sprites[identity],
+                             gMonSpritesGfxPtr->sprites[position],
                              SPECIES_NONE);
     LoadCompressedObjectPalette(&gTrainerFrontPicPaletteTable[frontPicId]);
 }
 
 void DecompressTrainerBackPic(u16 backPicId, u8 bank)
 {
-    u8 identity = GetBankPosition(bank);
+    u8 position = GetBankPosition(bank);
     DecompressPicFromTable_2(&gTrainerBackPicTable[backPicId],
-                             gMonSpritesGfxPtr->sprites[identity],
+                             gMonSpritesGfxPtr->sprites[position],
                              SPECIES_NONE);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[backPicId].data,
                           0x100 + 16 * bank, 0x20);
@@ -885,7 +885,7 @@ void HandleSpeciesGfxDataChange(u8 bankAtk, u8 bankDef, bool8 notTransform)
     u16 paletteOffset;
     u32 personalityValue;
     u32 otId;
-    u8 identity;
+    u8 position;
     const u8 *lzPaletteData;
 
     if (notTransform)
@@ -909,7 +909,7 @@ void HandleSpeciesGfxDataChange(u8 bankAtk, u8 bankDef, bool8 notTransform)
 
         if (IsContest())
         {
-            identity = 0;
+            position = 0;
             targetSpecies = gContestResources->field_18->field_2;
             personalityValue = gContestResources->field_18->field_8;
             otId = gContestResources->field_18->field_C;
@@ -921,7 +921,7 @@ void HandleSpeciesGfxDataChange(u8 bankAtk, u8 bankDef, bool8 notTransform)
         }
         else
         {
-            identity = GetBankPosition(bankAtk);
+            position = GetBankPosition(bankAtk);
 
             if (GetBankSide(bankDef) == SIDE_OPPONENT)
                 targetSpecies = GetMonData(&gEnemyParty[gBattlePartyID[bankDef]], MON_DATA_SPECIES);
@@ -934,7 +934,7 @@ void HandleSpeciesGfxDataChange(u8 bankAtk, u8 bankDef, bool8 notTransform)
                 otId = GetMonData(&gPlayerParty[gBattlePartyID[bankAtk]], MON_DATA_OT_ID);
 
                 HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[targetSpecies],
-                                                          gMonSpritesGfxPtr->sprites[identity],
+                                                          gMonSpritesGfxPtr->sprites[position],
                                                           targetSpecies,
                                                           gTransformedPersonalities[bankAtk]);
             }
@@ -944,13 +944,13 @@ void HandleSpeciesGfxDataChange(u8 bankAtk, u8 bankDef, bool8 notTransform)
                 otId = GetMonData(&gEnemyParty[gBattlePartyID[bankAtk]], MON_DATA_OT_ID);
 
                 HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[targetSpecies],
-                                                          gMonSpritesGfxPtr->sprites[identity],
+                                                          gMonSpritesGfxPtr->sprites[position],
                                                           targetSpecies,
                                                           gTransformedPersonalities[bankAtk]);
             }
         }
 
-        src = gMonSpritesGfxPtr->sprites[identity];
+        src = gMonSpritesGfxPtr->sprites[position];
         dst = (void *)(VRAM + 0x10000 + gSprites[gBankSpriteIds[bankAtk]].oam.tileNum * 32);
         DmaCopy32(3, src, dst, 0x800);
         paletteOffset = 0x100 + bankAtk * 16;
@@ -981,7 +981,7 @@ void HandleSpeciesGfxDataChange(u8 bankAtk, u8 bankDef, bool8 notTransform)
 
 void BattleLoadSubstituteOrMonSpriteGfx(u8 bank, bool8 loadMonSprite)
 {
-    u8 identity;
+    u8 position;
     s32 i;
     u32 var;
     const void *substitutePal;
@@ -989,23 +989,23 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 bank, bool8 loadMonSprite)
     if (!loadMonSprite)
     {
         if (IsContest())
-            identity = 0;
+            position = 0;
         else
-            identity = GetBankPosition(bank);
+            position = GetBankPosition(bank);
 
         if (IsContest())
-            LZDecompressVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->sprites[identity]);
+            LZDecompressVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->sprites[position]);
         else if (GetBankSide(bank) != SIDE_PLAYER)
-            LZDecompressVram(gSubstituteDollGfx, gMonSpritesGfxPtr->sprites[identity]);
+            LZDecompressVram(gSubstituteDollGfx, gMonSpritesGfxPtr->sprites[position]);
         else
-            LZDecompressVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->sprites[identity]);
+            LZDecompressVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->sprites[position]);
 
         i = 1;
         var = bank * 16;
         substitutePal = gSubstituteDollPal;
         for (; i < 4; i++)
         {
-            register void *dmaSrc asm("r0") = gMonSpritesGfxPtr->sprites[identity];
+            register void *dmaSrc asm("r0") = gMonSpritesGfxPtr->sprites[position];
             void *dmaDst = (i * 0x800) + dmaSrc;
             u32 dmaSize = 0x800;
             DmaCopy32(3, dmaSrc, dmaDst, dmaSize);

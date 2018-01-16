@@ -3274,46 +3274,46 @@ static void BattleIntroPrintWildMonAttacked(void)
 
 static void BattleIntroPrintOpponentSendsOut(void)
 {
-    u32 identity;
+    u32 position;
 
     if (gBattleExecBuffer)
         return;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        identity = B_POSITION_OPPONENT_LEFT;
+        position = B_POSITION_OPPONENT_LEFT;
     else if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
-            identity = B_POSITION_OPPONENT_LEFT;
+            position = B_POSITION_OPPONENT_LEFT;
         else
-            identity = B_POSITION_PLAYER_LEFT;
+            position = B_POSITION_PLAYER_LEFT;
     }
     else
-        identity = B_POSITION_OPPONENT_LEFT;
+        position = B_POSITION_OPPONENT_LEFT;
 
-    PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByPosition(identity));
+    PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByPosition(position));
     gBattleMainFunc = BattleIntroOpponent1SendsOutMonAnimation;
 }
 
 static void BattleIntroOpponent2SendsOutMonAnimation(void)
 {
-    u32 identity;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        identity = B_POSITION_OPPONENT_RIGHT;
+        position = B_POSITION_OPPONENT_RIGHT;
     else if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
-            identity = B_POSITION_OPPONENT_RIGHT;
+            position = B_POSITION_OPPONENT_RIGHT;
         else
-            identity = B_POSITION_PLAYER_RIGHT;
+            position = B_POSITION_PLAYER_RIGHT;
     }
     else
-        identity = B_POSITION_OPPONENT_RIGHT;
+        position = B_POSITION_OPPONENT_RIGHT;
 
     for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
-        if (GetBankPosition(gActiveBank) == identity)
+        if (GetBankPosition(gActiveBank) == position)
         {
             EmitIntroTrainerBallThrow(0);
             MarkBufferBankForExecution(gActiveBank);
@@ -3326,26 +3326,26 @@ static void BattleIntroOpponent2SendsOutMonAnimation(void)
 #ifdef NONMATCHING
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
-    u32 identity;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        identity = B_POSITION_OPPONENT_LEFT;
+        position = B_POSITION_OPPONENT_LEFT;
     else if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
-            identity = B_POSITION_OPPONENT_LEFT;
+            position = B_POSITION_OPPONENT_LEFT;
         else
-            identity = B_POSITION_PLAYER_LEFT;
+            position = B_POSITION_PLAYER_LEFT;
     }
     else
-        identity = B_POSITION_OPPONENT_LEFT;
+        position = B_POSITION_OPPONENT_LEFT;
 
     if (gBattleExecBuffer)
         return;
 
     for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
-        if (GetBankPosition(gActiveBank) == identity)
+        if (GetBankPosition(gActiveBank) == position)
         {
             EmitIntroTrainerBallThrow(0);
             MarkBufferBankForExecution(gActiveBank);
@@ -3479,22 +3479,22 @@ static void BattleIntroPrintPlayerSendsOut(void)
 {
     if (gBattleExecBuffer == 0)
     {
-        u8 identity;
+        u8 position;
 
         if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-            identity = B_POSITION_PLAYER_LEFT;
+            position = B_POSITION_PLAYER_LEFT;
         else if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
-                identity = B_POSITION_PLAYER_LEFT;
+                position = B_POSITION_PLAYER_LEFT;
             else
-                identity = B_POSITION_OPPONENT_LEFT;
+                position = B_POSITION_OPPONENT_LEFT;
         }
         else
-            identity = B_POSITION_PLAYER_LEFT;
+            position = B_POSITION_PLAYER_LEFT;
 
         if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
-            PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByPosition(identity));
+            PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByPosition(position));
 
         gBattleMainFunc = BattleIntroPlayer1SendsOutMonAnimation;
     }
@@ -3502,23 +3502,23 @@ static void BattleIntroPrintPlayerSendsOut(void)
 
 static void BattleIntroPlayer2SendsOutMonAnimation(void)
 {
-    u32 identity;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        identity = B_POSITION_PLAYER_RIGHT;
+        position = B_POSITION_PLAYER_RIGHT;
     else if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
-            identity = B_POSITION_PLAYER_RIGHT;
+            position = B_POSITION_PLAYER_RIGHT;
         else
-            identity = B_POSITION_OPPONENT_RIGHT;
+            position = B_POSITION_OPPONENT_RIGHT;
     }
     else
-        identity = B_POSITION_PLAYER_RIGHT;
+        position = B_POSITION_PLAYER_RIGHT;
 
     for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
-        if (GetBankPosition(gActiveBank) == identity)
+        if (GetBankPosition(gActiveBank) == position)
         {
             EmitIntroTrainerBallThrow(0);
             MarkBufferBankForExecution(gActiveBank);
@@ -3534,26 +3534,26 @@ static void BattleIntroPlayer2SendsOutMonAnimation(void)
 
 static void BattleIntroPlayer1SendsOutMonAnimation(void)
 {
-    u32 identity;
+    u32 position;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
-        identity = B_POSITION_PLAYER_LEFT;
+        position = B_POSITION_PLAYER_LEFT;
     else if (gBattleTypeFlags & BATTLE_TYPE_x2000000)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_x80000000)
-            identity = B_POSITION_PLAYER_LEFT;
+            position = B_POSITION_PLAYER_LEFT;
         else
-            identity = B_POSITION_OPPONENT_LEFT;
+            position = B_POSITION_OPPONENT_LEFT;
     }
     else
-        identity = B_POSITION_PLAYER_LEFT;
+        position = B_POSITION_PLAYER_LEFT;
 
     if (gBattleExecBuffer)
         return;
 
     for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
-        if (GetBankPosition(gActiveBank) == identity)
+        if (GetBankPosition(gActiveBank) == position)
         {
             EmitIntroTrainerBallThrow(0);
             MarkBufferBankForExecution(gActiveBank);
@@ -3891,7 +3891,7 @@ static void HandleTurnActionSelectionState(void)
     gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
     for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
-        u8 identity = GetBankPosition(gActiveBank);
+        u8 position = GetBankPosition(gActiveBank);
         switch (gBattleCommunication[gActiveBank])
         {
         case STATE_TURN_START_RECORD: // recorded battle related on start of every turn
@@ -3901,9 +3901,9 @@ static void HandleTurnActionSelectionState(void)
         case STATE_BEFORE_ACTION_CHOSEN: // choose an action
             *(gBattleStruct->monToSwitchIntoId + gActiveBank) = 6;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI
-                || !(identity & BIT_MON)
-                || gBattleStruct->field_91 & gBitTable[GetBankByPosition(identity ^ BIT_MON)]
-                || gBattleCommunication[GetBankByPosition(identity ^ BIT_MON)] == 5)
+                || !(position & BIT_MON)
+                || gBattleStruct->field_91 & gBitTable[GetBankByPosition(position ^ BIT_MON)]
+                || gBattleCommunication[GetBankByPosition(position ^ BIT_MON)] == 5)
             {
                 if (gBattleStruct->field_91 & gBitTable[gActiveBank])
                 {
@@ -4225,8 +4225,8 @@ static void HandleTurnActionSelectionState(void)
                 i = (sub_803CDB8() != 0);
 
                 if (((gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE)) != BATTLE_TYPE_DOUBLE)
-                    || (identity & BIT_MON)
-                    || (*(&gBattleStruct->field_91) & gBitTable[GetBankByPosition(identity ^ BIT_MON)]))
+                    || (position & BIT_MON)
+                    || (*(&gBattleStruct->field_91) & gBitTable[GetBankByPosition(position ^ BIT_MON)]))
                 {
                     EmitLinkStandbyMsg(0, 0, i);
                 }

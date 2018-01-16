@@ -613,8 +613,8 @@ static void ScriptCmd_monbg(void)
 
     if (IsAnimBankSpriteVisible(bank))
     {
-        u8 identity = GetBankPosition(bank);
-        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
+        u8 position = GetBankPosition(bank);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -632,8 +632,8 @@ static void ScriptCmd_monbg(void)
     bank ^= BIT_MON;
     if (IsAnimBankSpriteVisible(bank))
     {
-        u8 identity = GetBankPosition(bank);
-        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
+        u8 position = GetBankPosition(bank);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -893,8 +893,8 @@ static void sub_80A4980(u8 taskId)
     if (gTasks[taskId].data[1] != 1)
     {
         u8 to_BG2;
-        u8 identity = GetBankPosition(gTasks[taskId].data[2]);
-        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
+        u8 position = GetBankPosition(gTasks[taskId].data[2]);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             to_BG2 = FALSE;
         else
             to_BG2 = TRUE;
@@ -937,8 +937,8 @@ static void ScriptCmd_monbg_22(void)
 
     if (IsAnimBankSpriteVisible(bank))
     {
-        u8 identity = GetBankPosition(bank);
-        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
+        u8 position = GetBankPosition(bank);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -949,8 +949,8 @@ static void ScriptCmd_monbg_22(void)
     bank ^= BIT_MON;
     if (animBankId > 1 && IsAnimBankSpriteVisible(bank))
     {
-        u8 identity = GetBankPosition(bank);
-        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
+        u8 position = GetBankPosition(bank);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -1001,8 +1001,8 @@ static void sub_80A4BB0(u8 taskId)
     {
         bool8 toBG_2;
         u8 bank = gTasks[taskId].data[2];
-        u8 identity = GetBankPosition(bank);
-        if (identity == B_POSITION_OPPONENT_LEFT || identity == B_POSITION_PLAYER_RIGHT || IsContest())
+        u8 position = GetBankPosition(bank);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
