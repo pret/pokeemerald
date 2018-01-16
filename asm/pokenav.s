@@ -6948,7 +6948,7 @@ sub_81CA818: @ 81CA818
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_0861FC7A
+	ldr r5, =gUnknown_0861FC78 + 2
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r5, 0
@@ -6967,7 +6967,7 @@ sub_81CA818: @ 81CA818
 	thumb_func_start sub_81CA850
 sub_81CA850: @ 81CA850
 	push {lr}
-	ldr r0, =gUnknown_0861FC86
+	ldr r0, =gUnknown_0861FC78 + 0xE
 	movs r1, 0x31
 	movs r2, 0x4
 	bl sub_81C7944
@@ -6985,7 +6985,7 @@ sub_81CA864: @ 81CA864
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_0861FC86
+	ldr r5, =gUnknown_0861FC78 + 0xE
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r5, 0

@@ -14,7 +14,7 @@ bttransgfxdir := graphics/battle_transitions
 typesdir := graphics/types
 rayquazadir := graphics/rayquaza_scene
 roulettegfxdir := graphics/roulette
-pknvdir := graphics/pokenav/
+pknvdir := graphics/pokenav
 pknvoptionsdir := graphics/pokenav/options
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
@@ -481,3 +481,11 @@ $(pknvoptionsdir)/options.4bpp: $(pknvoptionsdir)/hoenn_map.4bpp \
 
 $(pknvdir)/header.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
+    
+$(pknvdir)/outline.4bpp: $(pknvdir)/outline.png
+	$(GFX) $< $@ -num_tiles 53
+    
+$(pknvdir)/ui_matchcall.4bpp: $(pknvdir)/ui_matchcall.png
+	$(GFX) $< $@ -num_tiles 13
+    
+    
