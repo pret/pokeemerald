@@ -1,5 +1,5 @@
-#ifndef GUARD_BATTLE_2_H
-#define GUARD_BATTLE_2_H
+#ifndef GUARD_BATTLE_MAIN_H
+#define GUARD_BATTLE_MAIN_H
 
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
@@ -52,4 +52,4 @@ extern const u8 gStatusConditionString_LoveJpn[8];
 
 extern const u8 * const gStatusConditionStringsTable[7][2];
 
-#endif // GUARD_BATTLE_2_H
+#endif // GUARD_BATTLE_MAIN_H
