@@ -239,7 +239,7 @@ sub_8145534: @ 8145534
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r5, r4, 0
-	ldr r0, =gMPlay_BGM
+	ldr r0, =gMPlayInfo_BGM
 	ldr r0, [r0, 0x4]
 	cmp r0, 0
 	bge _08145582

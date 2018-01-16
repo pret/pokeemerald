@@ -43,7 +43,7 @@ extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
 extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
 extern u8 gMultiUsePlayerCursor;
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gPartnerTrainerId;
 extern struct SpriteTemplate gUnknown_0202499C;
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
@@ -1054,9 +1054,9 @@ static void sub_8058B40(void)
         if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x20)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
-                m4aMPlayContinue(&gMPlay_BGM);
+                m4aMPlayContinue(&gMPlayInfo_BGM);
             else
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         }
         gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x20 = 1;
         r9 = TRUE;
@@ -1119,7 +1119,7 @@ static void sub_8058FC0(void)
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBank].specialAnimActive
         && !IsCryPlayingOrClearCrySongs())
     {
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         PlayerBufferExecCompleted();
     }
@@ -1148,7 +1148,7 @@ void c3_0802FDF4(u8 taskId)
 {
     if (!IsCryPlayingOrClearCrySongs())
     {
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         DestroyTask(taskId);
     }
 }

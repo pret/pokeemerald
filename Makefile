@@ -33,6 +33,8 @@ OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 LIBGCC := tools/agbcc/lib/libgcc.a
 LIBC   := tools/agbcc/lib/libc.a
 
+LIBC := tools/agbcc/lib/libc.a
+
 SHA1 := sha1sum -c
 
 GFX := tools/gbagfx/gbagfx
@@ -48,7 +50,7 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl
+.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin sound/direct_sound_samples/cry_%.bin
 
 .PHONY: rom clean compare tidy
 
@@ -76,6 +78,8 @@ compare: $(ROM)
 	@$(SHA1) rom.sha1
 
 clean: tidy
+	rm -f sound/direct_sound_samples/*.bin
+	rm -f $(SONG_OBJS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 
 tidy:
@@ -96,6 +100,10 @@ include graphics_file_rules.mk
 %.gbapal: %.png ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
+sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(AIF) $< $@ --compress
+%.bin: %.aif ; $(AIF) $< $@
+sound/songs/%.s: sound/songs/%.mid
+	cd $(@D) && ../../$(MID) $(<F)
 
 $(C_BUILDDIR)/libc.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_BUILDDIR)/libc.o: CFLAGS := -O2

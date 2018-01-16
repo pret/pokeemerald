@@ -497,7 +497,7 @@ _080BB71C:
 	adds r1, r2
 	ldrb r1, [r1]
 	bl sub_80BC8D4
-	ldr r0, =gMPlay_BGM
+	ldr r0, =gMPlayInfo_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
@@ -1246,7 +1246,7 @@ _080BBE18:
 	bl DestroyTask
 	ldr r0, =sub_8086194
 	bl SetMainCallback2
-	ldr r0, =gMPlay_BGM
+	ldr r0, =gMPlayInfo_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
@@ -7228,7 +7228,7 @@ _080BF2A8:
 	beq _080BF2B6
 	b _080BF5B2
 _080BF2B6:
-	ldr r0, =gMPlay_BGM
+	ldr r0, =gMPlayInfo_BGM
 	bl m4aMPlayStop
 	ldr r5, =gUnknown_02039B4C
 	ldr r0, [r5]
@@ -7592,7 +7592,7 @@ _080BF636:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, =gMPlay_BGM
+	ldr r0, =gMPlayInfo_BGM
 	bl m4aMPlayContinue
 	ldr r0, =gUnknown_02039B4C
 	ldr r0, [r0]
@@ -7634,7 +7634,7 @@ _080BF6B0:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, =gMPlay_BGM
+	ldr r0, =gMPlayInfo_BGM
 	bl m4aMPlayContinue
 	ldr r0, =gUnknown_02039B4C
 	ldr r0, [r0]
@@ -7689,7 +7689,7 @@ _080BF73C:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, =gMPlay_BGM
+	ldr r0, =gMPlayInfo_BGM
 	bl m4aMPlayContinue
 	ldr r0, =gUnknown_02039B4C
 	ldr r0, [r0]

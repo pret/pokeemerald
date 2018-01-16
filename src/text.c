@@ -2418,12 +2418,12 @@ _08005ABA:\n\
 	strb r0, [r6, #0x9]\n\
 	b _08005A0A\n\
 _08005ABE:\n\
-	ldr r0, =gMPlay_BGM\n\
+	ldr r0, =gMPlayInfo_BGM\n\
 	bl m4aMPlayStop\n\
 	b _08005A0A\n\
 	.pool\n\
 _08005ACC:\n\
-	ldr r0, =gMPlay_BGM\n\
+	ldr r0, =gMPlayInfo_BGM\n\
 	bl m4aMPlayContinue\n\
 	b _08005A0A\n\
 	.pool\n\

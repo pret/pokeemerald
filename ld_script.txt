@@ -31,7 +31,8 @@ SECTIONS {
 
         /* COMMON starts at 0x30022A8 */
 <COMMON>
-
+        tools/agbcc/lib/libc.a:sbrkr.o(COMMON);
+        end = .;
         . = 0x8000;
     }
 
@@ -196,7 +197,7 @@ SECTIONS {
         src/coins.o(.text);
         src/landmark.o(.text);
         asm/fldeff_strength.o(.text);
-        asm/battle_transition.o(.text);
+        src/battle_transition.o(.text);
         src/battle_controller_link_partner.o(.text);
         src/battle_message.o(.text);
         asm/cable_car.o(.text);
@@ -274,7 +275,6 @@ SECTIONS {
         asm/trainer_rematch.o(.text);
         asm/unk_sprite_file.o(.text);
         asm/unk_transition.o(.text);
-        asm/unk_transition_2.o(.text);
         src/international_string_util.o(.text);
         asm/international_string_util.o(.text);
     } =0
@@ -329,6 +329,38 @@ SECTIONS {
         tools/agbcc/lib/libc.a:memset.o(.text);
         tools/agbcc/lib/libc.a:strcmp.o(.text);
         tools/agbcc/lib/libc.a:strcpy.o(.text);
+        tools/agbcc/lib/libc.a:vfprintf.o(.text);
+        tools/agbcc/lib/libc.a:vsprintf.o(.text);
+        tools/agbcc/lib/libc.a:fvwrite.o(.text);
+        tools/agbcc/lib/libc.a:locale.o(.text);
+        tools/agbcc/lib/libc.a:findfp.o(.text);
+        tools/agbcc/lib/libc.a:fflush.o(.text);
+        tools/agbcc/lib/libc.a:wsetup.o(.text);
+        tools/agbcc/lib/libc.a:mbtowc_r.o(.text);
+        tools/agbcc/lib/libc.a:s_isinf.o(.text);
+        tools/agbcc/lib/libc.a:s_isnan.o(.text);
+        tools/agbcc/lib/libc.a:memchr.o(.text);
+        tools/agbcc/lib/libc.a:strlen.o(.text);
+        tools/agbcc/lib/libc.a:dtoa.o(.text);
+        tools/agbcc/lib/libc.a:memmove.o(.text);
+        tools/agbcc/lib/libc.a:stdio.o(.text);
+        tools/agbcc/lib/libc.a:mprec.o(.text);
+        tools/agbcc/lib/libc.a:mallocr.o(.text);
+        tools/agbcc/lib/libc.a:fwalk.o(.text);
+        tools/agbcc/lib/libc.a:freer.o(.text);
+        tools/agbcc/lib/libc.a:makebuf.o(.text);
+        tools/agbcc/lib/libc.a:readr.o(.text);
+        tools/agbcc/lib/libc.a:writer.o(.text);
+        tools/agbcc/lib/libc.a:lseekr.o(.text);
+        tools/agbcc/lib/libc.a:closer.o(.text);
+        tools/agbcc/lib/libc.a:callocr.o(.text);
+        tools/agbcc/lib/libc.a:sbrkr.o(.text);
+        tools/agbcc/lib/libc.a:mlock.o(.text);
+        tools/agbcc/lib/libc.a:fstatr.o(.text);
+        tools/agbcc/lib/libc.a:libcfunc.o(.text);
+        tools/agbcc/lib/libc.a:syscalls.o(.text);
+        tools/agbcc/lib/libc.a:errno.o(.text);
+        src/libisagbprn.o(.text);
     } =0
 
     .rodata :
@@ -449,7 +481,7 @@ SECTIONS {
         data/roulette.o(.rodata);
         data/pokedex_cry_screen.o(.rodata);
         src/landmark.o(.rodata);
-        data/battle_transition.o(.rodata);
+        src/battle_transition.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
@@ -1062,6 +1094,10 @@ SECTIONS {
         data/librfu_rodata.o(.rodata);
         tools/agbcc/lib/libgcc.a:_divdi3.o(.rodata);
         tools/agbcc/lib/libgcc.a:_udivdi3.o(.rodata);
+        tools/agbcc/lib/libc.a(.rodata);
+        tools/agbcc/lib/libc.a(.data);
+        tools/agbcc/lib/libc.a:syscalls.o(.rodata);
+        src/libisagbprn.o(.rodata);
     } =0
 
     other_data :

@@ -1,12 +1,27 @@
 #ifndef GUARD_BATTLE_TRANSITION_H
 #define GUARD_BATTLE_TRANSITION_H
 
-void sub_8149DFC(u8 a1);
-void BattleTransition_StartOnField(u8 transitionID);
-void BattleTransition_Start(u8 transitionID);
+void TestBattleTransition(u8 transitionId);
+void BattleTransition_StartOnField(u8 transitionId);
+void BattleTransition_Start(u8 transitionId);
 bool8 IsBattleTransitionDone(void);
+bool8 FldEff_Pokeball(void);
+void TransitionPhase1_Task_RunFuncs(u8 taskId);
+void sub_8149F58(u16 **a0, u16 **a1);
 
-// credits for the names go to Dyskinesia and Tetrable
+extern const struct SpritePalette gFieldEffectObjectPaletteInfo10;
+
+enum // TRANSITION_MUGSHOT
+{
+    MUGSHOT_SYDNEY,
+    MUGSHOT_PHOEBE,
+    MUGSHOT_GLACIA,
+    MUGSHOT_DRAKE,
+    MUGSHOT_CHAMPION,
+    MUGSHOTS_COUNT
+};
+
+// credits for the names go to Dyskinesia, Tetrable and Farore
 // names are naturally subject to change
 
 #define B_TRANSITION_BLUR                   0
@@ -35,10 +50,10 @@ bool8 IsBattleTransitionDone(void);
 #define B_TRANSITION_KYOGRE                 22
 #define B_TRANSITION_GROUDON                23
 #define B_TRANSITION_RAYQUAZA               24
-#define B_TRANSITION_25                     25
-#define B_TRANSITION_26                     26
-#define B_TRANSITION_27                     27
-#define B_TRANSITION_28                     28
+#define B_TRANSITION_SHRED_SPLIT            25
+#define B_TRANSITION_BLACKHOLE1             26
+#define B_TRANSITION_BLACKHOLE2             27
+#define B_TRANSITION_RECTANGULAR_SPIRAL     28
 #define B_TRANSITION_29                     29
 #define B_TRANSITION_30                     30
 #define B_TRANSITION_31                     31
@@ -52,5 +67,6 @@ bool8 IsBattleTransitionDone(void);
 #define B_TRANSITION_39                     39
 #define B_TRANSITION_40                     40
 #define B_TRANSITION_41                     41
+#define B_TRANSITION_COUNT                  42
 
 #endif // GUARD_BATTLE_TRANSITION_H

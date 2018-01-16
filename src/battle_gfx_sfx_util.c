@@ -34,9 +34,9 @@ extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
 extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
 extern u32 gTransformedPersonalities[BATTLE_BANKS_COUNT];
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const struct BattleMove gBattleMoves[];
 extern const u8 gUnknown_0831C604[];
@@ -527,8 +527,8 @@ bool8 mplay_80342A4(u8 bank)
         if (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_8 < 30)
             return TRUE;
 
-        m4aMPlayStop(&gMPlay_SE1);
-        m4aMPlayStop(&gMPlay_SE2);
+        m4aMPlayStop(&gMPlayInfo_SE1);
+        m4aMPlayStop(&gMPlayInfo_SE2);
     }
     if (zero == 0)
     {
