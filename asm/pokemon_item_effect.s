@@ -124,7 +124,7 @@ _0806BDC4:
 	orrs r1, r0
 	lsrs r1, 31
 	str r1, [sp, 0x1C]
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattleBanksCount
 	ldr r4, [sp, 0xC]
 	subs r4, 0xD
 	ldrb r0, [r0]
@@ -148,7 +148,7 @@ _0806BE3C:
 	ldr r1, [sp, 0x1C]
 	adds r1, 0x2
 	str r1, [sp, 0x1C]
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattleBanksCount
 	ldrb r0, [r0]
 	cmp r1, r0
 	bge _0806BE70

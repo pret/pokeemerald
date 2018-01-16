@@ -39,15 +39,20 @@
 #define B_POSITION_PLAYER_RIGHT       2
 #define B_POSITION_OPPONENT_RIGHT     3
 
+#define B_POSITION_PARTNER(position) ((position) ^ 2)
+#define B_POSITION_OPPOSITE(position) ((position) ^ 1)
+
 #define SIDE_PLAYER     0x0
 #define SIDE_OPPONENT   0x1
 
 #define BIT_SIDE        0x1
 #define BIT_MON         0x2
 
-#define GET_BANK_POSITION(bank)((gBankPositions[bank]))
-#define GET_BANK_SIDE(bank)((GetBankPosition(bank) & BIT_SIDE))
-#define GET_BANK_SIDE2(bank)((GET_BANK_POSITION(bank) & BIT_SIDE))
+#define GET_BANK_POSITION(bank)     (gBankPositions[bank])
+#define GET_BANK_SIDE(bank)         (GetBankPosition(bank) & BIT_SIDE)
+#define GET_BANK_SIDE2(bank)        (GET_BANK_POSITION(bank) & BIT_SIDE)
+
+// Battle Type Flags
 
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
@@ -84,59 +89,66 @@
 #define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
 #define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
 
+extern u32 gBattleTypeFlags;
+
 #define TRAINER_OPPONENT_3FE        0x3FE
 #define TRAINER_OPPONENT_C00        0xC00
 #define TRAINER_OPPONENT_800        0x800
 #define STEVEN_PARTNER_ID           0xC03
 #define SECRET_BASE_OPPONENT        0x400
 
-#define BATTLE_WON                  0x1
-#define BATTLE_LOST                 0x2
-#define BATTLE_DREW                 0x3
-#define BATTLE_RAN                  0x4
-#define BATTLE_PLAYER_TELEPORTED    0x5
-#define BATTLE_POKE_FLED            0x6
-#define BATTLE_CAUGHT               0x7
-#define BATTLE_SAFARI_OUT_OF_BALLS  0x8
-#define BATTLE_FORFEITED            0x9
-#define BATTLE_OPPONENT_TELEPORTED  0xA
+#define B_OUTCOME_WON                  0x1
+#define B_OUTCOME_LOST                 0x2
+#define B_OUTCOME_DREW                 0x3
+#define B_OUTCOME_RAN                  0x4
+#define B_OUTCOME_PLAYER_TELEPORTED    0x5
+#define B_OUTCOME_POKE_FLED            0x6
+#define B_OUTCOME_CAUGHT_POKE          0x7
+#define B_OUTCOME_NO_SAFARI_BALLS      0x8
+#define B_OUTCOME_FORFEITED            0x9
+#define B_OUTCOME_POKE_TELEPORTED      0xA
+#define B_OUTCOME_LINK_BATTLE_RAN      0x80
 
-#define OUTCOME_LINK_BATTLE_RUN      0x80
+extern u8 gBattleOutcome;
 
-#define STATUS_NONE             0x0
-#define STATUS_SLEEP            0x7
-#define STATUS_POISON           0x8
-#define STATUS_BURN             0x10
-#define STATUS_FREEZE           0x20
-#define STATUS_PARALYSIS        0x40
-#define STATUS_TOXIC_POISON     0x80
-#define STATUS_TOXIC_COUNTER    0xF00
+// Non-volatile status conditions
+// These persist remain outside of battle and after switching out
+#define STATUS1_NONE             0x0
+#define STATUS1_SLEEP            0x7
+#define STATUS1_POISON           0x8
+#define STATUS1_BURN             0x10
+#define STATUS1_FREEZE           0x20
+#define STATUS1_PARALYSIS        0x40
+#define STATUS1_TOXIC_POISON     0x80
+#define STATUS1_TOXIC_COUNTER    0xF00
+#define STATUS1_PSN_ANY          (STATUS1_POISON | STATUS1_TOXIC_POISON)
+#define STATUS1_ANY              (STATUS1_SLEEP | STATUS1_POISON | STATUS1_BURN | STATUS1_FREEZE | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON)
 
-#define STATUS_PSN_ANY          ((STATUS_POISON | STATUS_TOXIC_POISON))
-#define STATUS_ANY              ((STATUS_SLEEP | STATUS_POISON | STATUS_BURN | STATUS_FREEZE | STATUS_PARALYSIS | STATUS_TOXIC_POISON))
+// Volatile status ailments
+// These are removed after exiting the battle or switching out
+#define STATUS2_CONFUSION             0x00000007
+#define STATUS2_FLINCHED              0x00000008
+#define STATUS2_UPROAR                0x00000070
+#define STATUS2_BIDE                  0x00000300  // two bits 0x100, 0x200
+#define STATUS2_LOCK_CONFUSE          0x00000C00
+#define STATUS2_MULTIPLETURNS         0x00001000
+#define STATUS2_WRAPPED               0x0000E000
+#define STATUS2_INFATUATION           0x000F0000  // 4 bits, one for every bank
+#define STATUS2_INFATUATED_WITH(bank) (gBitTable[bank] << 16)
+#define STATUS2_FOCUS_ENERGY          0x00100000
+#define STATUS2_TRANSFORMED           0x00200000
+#define STATUS2_RECHARGE              0x00400000
+#define STATUS2_RAGE                  0x00800000
+#define STATUS2_SUBSTITUTE            0x01000000
+#define STATUS2_DESTINY_BOND          0x02000000
+#define STATUS2_ESCAPE_PREVENTION     0x04000000
+#define STATUS2_NIGHTMARE             0x08000000
+#define STATUS2_CURSED                0x10000000
+#define STATUS2_FORESIGHT             0x20000000
+#define STATUS2_DEFENSE_CURL          0x40000000
+#define STATUS2_TORMENT               0x80000000
 
-#define STATUS2_CONFUSION           0x00000007
-#define STATUS2_FLINCHED            0x00000008
-#define STATUS2_UPROAR              0x00000070
-#define STATUS2_BIDE                0x00000300  // two bits 0x100, 0x200
-#define STATUS2_LOCK_CONFUSE        0x00000C00
-#define STATUS2_MULTIPLETURNS       0x00001000
-#define STATUS2_WRAPPED             0x0000E000
-#define STATUS2_INFATUATION         0x000F0000  // 4 bits, one for every bank
-#define STATUS2_INFATUATED_WITH(bank)((gBitTable[bank] << 16))
-#define STATUS2_FOCUS_ENERGY        0x00100000
-#define STATUS2_TRANSFORMED         0x00200000
-#define STATUS2_RECHARGE            0x00400000
-#define STATUS2_RAGE                0x00800000
-#define STATUS2_SUBSTITUTE          0x01000000
-#define STATUS2_DESTINY_BOND        0x02000000
-#define STATUS2_ESCAPE_PREVENTION   0x04000000
-#define STATUS2_NIGHTMARE           0x08000000
-#define STATUS2_CURSED              0x10000000
-#define STATUS2_FORESIGHT           0x20000000
-#define STATUS2_DEFENSE_CURL        0x40000000
-#define STATUS2_TORMENT             0x80000000
-
+// Seems like per-bank statuses. Not quite sure how to categorize these
 #define STATUS3_LEECHSEED_BANK          0x3
 #define STATUS3_LEECHSEED               0x4
 #define STATUS3_ALWAYS_HITS             0x18    // two bits
@@ -155,8 +167,11 @@
 #define STATUS3_UNDERWATER              0x40000
 #define STATUS3_INTIMIDATE_POKES        0x80000
 #define STATUS3_TRACE                   0x100000
+#define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
-#define STATUS3_SEMI_INVULNERABLE       ((STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER))
+extern u32 gStatuses3[BATTLE_BANKS_COUNT];
+
+//
 
 #define HITMARKER_x10                   0x00000010
 #define HITMARKER_x20                   0x00000020
@@ -182,8 +197,12 @@
 #define HITMARKER_OBEYS                 0x02000000
 #define HITMARKER_x4000000              0x04000000
 #define HITMARKER_x8000000              0x08000000
-#define HITMARKER_FAINTED(bank)         ((gBitTable[bank] << 0x1C))
-#define HITMARKER_UNK(bank)             ((0x10000000 << bank))
+#define HITMARKER_FAINTED(bank)         (gBitTable[bank] << 0x1C)
+#define HITMARKER_UNK(bank)             (0x10000000 << bank)
+
+extern u32 gHitMarker;
+
+// Per-side statuses that affect an entire party
 
 #define SIDE_STATUS_REFLECT          (1 << 0)
 #define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
@@ -193,6 +212,8 @@
 #define SIDE_STATUS_FUTUREATTACK     (1 << 6)
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
+
+extern u16 gSideStatuses[2];
 
 #define ACTION_USE_MOVE             0
 #define ACTION_USE_ITEM             1
@@ -210,33 +231,36 @@
 #define ACTION_NOTHING_FAINTED      13 // when choosing an action
 #define ACTION_INIT_VALUE           0xFF
 
-#define MOVESTATUS_MISSED             (1 << 0)
-#define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
-#define MOVESTATUS_NOTVERYEFFECTIVE   (1 << 2)
-#define MOVESTATUS_NOTAFFECTED        (1 << 3)
-#define MOVESTATUS_ONEHITKO           (1 << 4)
-#define MOVESTATUS_FAILED             (1 << 5)
-#define MOVESTATUS_ENDURED            (1 << 6)
-#define MOVESTATUS_HUNGON             (1 << 7)
-
-#define MOVESTATUS_NOEFFECT ((MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED))
+#define MOVE_RESULT_MISSED             (1 << 0)
+#define MOVE_RESULT_SUPER_EFFECTIVE    (1 << 1)
+#define MOVE_RESULT_NOT_VERY_EFFECTIVE (1 << 2)
+#define MOVE_RESULT_DOESNT_AFFECT_FOE  (1 << 3)
+#define MOVE_RESULT_ONE_HIT_KO         (1 << 4)
+#define MOVE_RESULT_FAILED             (1 << 5)
+#define MOVE_RESULT_FOE_ENDURED        (1 << 6)
+#define MOVE_RESULT_FOE_HUNG_ON        (1 << 7)
+#define MOVE_RESULT_NO_EFFECT          (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
 
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
 
+// Battle Weather flags
+
 #define WEATHER_RAIN_TEMPORARY      (1 << 0)
-#define WEATHER_RAIN_DOWNPOUR       (1 << 1)
+#define WEATHER_RAIN_DOWNPOUR       (1 << 1)  // unused
 #define WEATHER_RAIN_PERMANENT      (1 << 2)
-#define WEATHER_RAIN_ANY ((WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT))
+#define WEATHER_RAIN_ANY            (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT)
 #define WEATHER_SANDSTORM_TEMPORARY (1 << 3)
 #define WEATHER_SANDSTORM_PERMANENT (1 << 4)
-#define WEATHER_SANDSTORM_ANY ((WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT))
+#define WEATHER_SANDSTORM_ANY       (WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT)
 #define WEATHER_SUN_TEMPORARY       (1 << 5)
 #define WEATHER_SUN_PERMANENT       (1 << 6)
-#define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
+#define WEATHER_SUN_ANY             (WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT)
 #define WEATHER_HAIL                (1 << 7)
-#define WEATHER_HAIL_ANY ((WEATHER_HAIL))
-#define WEATHER_ANY ((WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY))
+#define WEATHER_HAIL_ANY            (WEATHER_HAIL)
+#define WEATHER_ANY                 (WEATHER_RAIN_ANY | WEATHER_SANDSTORM_ANY | WEATHER_SUN_ANY | WEATHER_HAIL_ANY)
+
+extern u16 gBattleWeather;
 
 #define BATTLE_TERRAIN_GRASS        0
 #define BATTLE_TERRAIN_LONG_GRASS   1
@@ -248,6 +272,8 @@
 #define BATTLE_TERRAIN_CAVE         7
 #define BATTLE_TERRAIN_BUILDING     8
 #define BATTLE_TERRAIN_PLAIN        9
+
+extern u8 gBattleTerrain;
 
 // array entries for battle communication
 #define MULTIUSE_STATE          0x0
@@ -847,7 +873,7 @@ enum
 // rom_80A5C6C
 u8 GetBankSide(u8 bank);
 u8 GetBankPosition(u8 bank);
-u8 GetBankByIdentity(u8 bank);
+u8 GetBankByPosition(u8 bank);
 
 struct BattleSpriteInfo
 {

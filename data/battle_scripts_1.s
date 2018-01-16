@@ -286,7 +286,7 @@ BattleScript_MoveEnd::
 	end
 
 BattleScript_MakeMoveMissed::
-	orbyte gBattleMoveFlags, MOVESTATUS_MISSED
+	orbyte gMoveResultFlags, MOVE_RESULT_MISSED
 BattleScript_PrintMoveMissed::
 	attackstring
 	ppreduce
@@ -303,9 +303,9 @@ BattleScript_EffectSleep::
 	attackstring
 	ppreduce
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
-	jumpifstatus TARGET, STATUS_SLEEP, BattleScript_AlreadyAsleep
+	jumpifstatus TARGET, STATUS1_SLEEP, BattleScript_AlreadyAsleep
 	jumpifcantmakeasleep BattleScript_CantMakeAsleep
-	jumpifstatus TARGET, STATUS_ANY, BattleScript_ButItFailed
+	jumpifstatus TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	attackanimation
@@ -397,7 +397,7 @@ BattleScript_EffectExplosion::
 	faintifabilitynotdamp
 	setatkhptozero
 	waitstate
-	jumpifbyte NO_COMMON_BITS, gBattleMoveFlags, MOVESTATUS_MISSED, BattleScript_82D8B94
+	jumpifbyte NO_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_MISSED, BattleScript_82D8B94
 	call BattleScript_82D8BEA
 	goto BattleScript_82D8B96
 BattleScript_82D8B94::
@@ -436,16 +436,16 @@ BattleScript_82D8BCF::
 	end
 
 BattleScript_82D8BEA::
-	bicbyte gBattleMoveFlags, MOVESTATUS_MISSED
+	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED
 	attackanimation
 	waitanimation
-	orbyte gBattleMoveFlags, MOVESTATUS_MISSED
+	orbyte gMoveResultFlags, MOVE_RESULT_MISSED
 	return
 
 BattleScript_EffectDreamEater::
 	attackcanceler
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_82D8C0E
-	jumpifstatus TARGET, STATUS_SLEEP, BattleScript_82D8C18
+	jumpifstatus TARGET, STATUS1_SLEEP, BattleScript_82D8C18
 BattleScript_82D8C0E::
 	attackstring
 	ppreduce
@@ -487,7 +487,7 @@ BattleScript_EffectMirrorMove::
 	pause 0x40
 	trymirrormove
 	ppreduce
-	orbyte gBattleMoveFlags, MOVESTATUS_FAILED
+	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
 	printstring STRINGID_MIRRORMOVEFAILED
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
@@ -633,7 +633,7 @@ BattleScript_MultiHitLoop::
 	jumpifhasnohp ATTACKER, BattleScript_MultiHitEnd
 	jumpifhasnohp TARGET, BattleScript_MultiHitPrintStrings
 	jumpifhalfword EQUAL, gChosenMove, MOVE_SLEEP_TALK, BattleScript_DoMultiHit
-	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_MultiHitPrintStrings
+	jumpifstatus ATTACKER, STATUS1_SLEEP, BattleScript_MultiHitPrintStrings
 BattleScript_DoMultiHit::
 	movevaluescleanup
 	copybyte cEFFECT_CHOOSER, sMULTIHIT_EFFECT
@@ -656,7 +656,7 @@ BattleScript_DoMultiHit::
 	addbyte sMULTIHIT_STRING + 4, 0x1
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
-	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_ENDURED, BattleScript_MultiHitPrintStrings
+	jumpifbyte COMMON_BITS, gMoveResultFlags, MOVE_RESULT_FOE_ENDURED, BattleScript_MultiHitPrintStrings
 	decrementmultihit BattleScript_MultiHitLoop
 	goto BattleScript_MultiHitPrintStrings
 BattleScript_MultiHitNoMoreHits::
@@ -712,9 +712,9 @@ BattleScript_EffectToxic::
 	ppreduce
 	jumpifability TARGET, ABILITY_IMMUNITY, BattleScript_ImmunityProtected
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
-	jumpifstatus TARGET, STATUS_POISON, BattleScript_AlreadyPoisoned
-	jumpifstatus TARGET, STATUS_TOXIC_POISON, BattleScript_AlreadyPoisoned
-	jumpifstatus TARGET, STATUS_ANY, BattleScript_ButItFailed
+	jumpifstatus TARGET, STATUS1_POISON, BattleScript_AlreadyPoisoned
+	jumpifstatus TARGET, STATUS1_TOXIC_POISON, BattleScript_AlreadyPoisoned
+	jumpifstatus TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	jumpiftype TARGET, TYPE_POISON, BattleScript_NotAffected
 	jumpiftype TARGET, TYPE_STEEL, BattleScript_NotAffected
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
@@ -735,7 +735,7 @@ BattleScript_AlreadyPoisoned::
 	goto BattleScript_MoveEnd
 
 BattleScript_ImmunityProtected::
-	copybyte gEffectBank, gBankTarget
+	copybyte gEffectBank, gBankDefender
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_PSNPrevention
 	goto BattleScript_MoveEnd
@@ -759,7 +759,7 @@ BattleScript_EffectRest::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_RestIsAlreadyAsleep
+	jumpifstatus ATTACKER, STATUS1_SLEEP, BattleScript_RestIsAlreadyAsleep
 	jumpifcantmakeasleep BattleScript_RestCantSleep
 	trysetrest BattleScript_AlreadyAtFullHp
 	pause 0x20
@@ -835,7 +835,7 @@ BattleScript_EffectSuperFang::
 	attackstring
 	ppreduce
 	typecalc
-	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
+	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	damagetohalftargethp
 	goto BattleScript_HitFromAtkAnimation
 
@@ -845,7 +845,7 @@ BattleScript_EffectDragonRage::
 	attackstring
 	ppreduce
 	typecalc
-	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
+	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	setword gBattleMoveDamage, 40
 	adjustsetdamage
 	goto BattleScript_HitFromAtkAnimation
@@ -879,19 +879,19 @@ BattleScript_MoveMissedDoDamage::
 	pause 0x40
 	resultmessage
 	waitmessage 0x40
-	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_NOTAFFECTED, BattleScript_MoveEnd
+	jumpifbyte COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveEnd
 	printstring STRINGID_PKMNCRASHED
 	waitmessage 0x40
 	damagecalc
 	typecalc
 	adjustnormaldamage
 	manipulatedamage ATK80_DMG_HALF_BY_TWO_NOT_MORE_THAN_HALF_MAX_HP
-	bicbyte gBattleMoveFlags, MOVESTATUS_MISSED
+	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate ATTACKER
 	datahpupdate ATTACKER
 	tryfaintmon ATTACKER, FALSE, NULL
-	orbyte gBattleMoveFlags, MOVESTATUS_MISSED
+	orbyte gMoveResultFlags, MOVE_RESULT_MISSED
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectMist::
@@ -1012,11 +1012,11 @@ BattleScript_EffectPoison::
 	ppreduce
 	jumpifability TARGET, ABILITY_IMMUNITY, BattleScript_ImmunityProtected
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
-	jumpifstatus TARGET, STATUS_POISON, BattleScript_AlreadyPoisoned
-	jumpifstatus TARGET, STATUS_TOXIC_POISON, BattleScript_AlreadyPoisoned
+	jumpifstatus TARGET, STATUS1_POISON, BattleScript_AlreadyPoisoned
+	jumpifstatus TARGET, STATUS1_TOXIC_POISON, BattleScript_AlreadyPoisoned
 	jumpiftype TARGET, TYPE_POISON, BattleScript_NotAffected
 	jumpiftype TARGET, TYPE_STEEL, BattleScript_NotAffected
-	jumpifstatus TARGET, STATUS_ANY, BattleScript_ButItFailed
+	jumpifstatus TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	attackanimation
@@ -1035,8 +1035,8 @@ BattleScript_EffectParalyze::
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
 	typecalc
 	jumpifmovehadnoeffect BattleScript_ButItFailed
-	jumpifstatus TARGET, STATUS_PARALYSIS, BattleScript_AlreadyParalyzed
-	jumpifstatus TARGET, STATUS_ANY, BattleScript_ButItFailed
+	jumpifstatus TARGET, STATUS1_PARALYSIS, BattleScript_AlreadyParalyzed
+	jumpifstatus TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	attackanimation
@@ -1055,7 +1055,7 @@ BattleScript_AlreadyParalyzed::
 	goto BattleScript_MoveEnd
 
 BattleScript_LimberProtected::
-	copybyte gEffectBank, gBankTarget
+	copybyte gEffectBank, gBankDefender
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_PRLZPrevention
 	goto BattleScript_MoveEnd
@@ -1221,7 +1221,7 @@ BattleScript_EffectLevelDamage::
 	attackstring
 	ppreduce
 	typecalc
-	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
+	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	dmgtolevel
 	adjustsetdamage
 	goto BattleScript_HitFromAtkAnimation
@@ -1232,7 +1232,7 @@ BattleScript_EffectPsywave::
 	attackstring
 	ppreduce
 	typecalc
-	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
+	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	psywavedamageeffect
 	adjustsetdamage
 	goto BattleScript_HitFromAtkAnimation
@@ -1279,7 +1279,7 @@ BattleScript_EffectPainSplit::
 
 BattleScript_EffectSnore::
 	attackcanceler
-	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_SnoreIsAsleep
+	jumpifstatus ATTACKER, STATUS1_SLEEP, BattleScript_SnoreIsAsleep
 	attackstring
 	ppreduce
 	goto BattleScript_ButItFailed
@@ -1333,7 +1333,7 @@ BattleScript_EffectSketch::
 
 BattleScript_EffectSleepTalk::
 	attackcanceler
-	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_SleepTalkIsAsleep
+	jumpifstatus ATTACKER, STATUS1_SLEEP, BattleScript_SleepTalkIsAsleep
 	attackstring
 	ppreduce
 	goto BattleScript_ButItFailed
@@ -1415,7 +1415,7 @@ BattleScript_TripleKickLoop::
 	jumpifhasnohp ATTACKER, BattleScript_TripleKickEnd
 	jumpifhasnohp TARGET, BattleScript_TripleKickNoMoreHits
 	jumpifhalfword EQUAL, gChosenMove, MOVE_SLEEP_TALK, BattleScript_DoTripleKickAttack
-	jumpifstatus ATTACKER, STATUS_SLEEP, BattleScript_TripleKickNoMoreHits
+	jumpifstatus ATTACKER, STATUS1_SLEEP, BattleScript_TripleKickNoMoreHits
 BattleScript_DoTripleKickAttack::
 	accuracycheck BattleScript_TripleKickNoMoreHits, ACC_CURR_MOVE
 	movevaluescleanup
@@ -1440,18 +1440,18 @@ BattleScript_DoTripleKickAttack::
 	waitmessage 0x1
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
-	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_ENDURED, BattleScript_TripleKickPrintStrings
+	jumpifbyte COMMON_BITS, gMoveResultFlags, MOVE_RESULT_FOE_ENDURED, BattleScript_TripleKickPrintStrings
 	decrementmultihit BattleScript_TripleKickLoop
 	goto BattleScript_TripleKickPrintStrings
 BattleScript_TripleKickNoMoreHits::
 	pause 0x20
 	jumpifbyte EQUAL, sMULTIHIT_STRING + 4, 0x0, BattleScript_TripleKickPrintStrings
-	bicbyte gBattleMoveFlags, MOVESTATUS_MISSED
+	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED
 BattleScript_TripleKickPrintStrings::
 	resultmessage
 	waitmessage 0x40
 	jumpifbyte EQUAL, sMULTIHIT_STRING + 4, 0x0, BattleScript_TripleKickEnd
-	jumpifbyte COMMON_BITS, gBattleMoveFlags, MOVESTATUS_NOTAFFECTED, BattleScript_TripleKickEnd
+	jumpifbyte COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_TripleKickEnd
 	copyarray gBattleTextBuff1, sMULTIHIT_STRING, 0x6
 	printstring STRINGID_HITXTIMES
 	waitmessage 0x40
@@ -1487,7 +1487,7 @@ BattleScript_EffectNightmare::
 	ppreduce
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
 	jumpifstatus2 TARGET, STATUS2_NIGHTMARE, BattleScript_ButItFailed
-	jumpifstatus TARGET, STATUS_SLEEP, BattleScript_NightmareWorked
+	jumpifstatus TARGET, STATUS1_SLEEP, BattleScript_NightmareWorked
 	goto BattleScript_ButItFailed
 BattleScript_NightmareWorked::
 	attackanimation
@@ -1513,7 +1513,7 @@ BattleScript_EffectCurse::
 	jumpifstat ATTACKER, NOT_EQUAL, ATK, 0xC, BattleScript_CurseTrySpeed
 	jumpifstat ATTACKER, EQUAL, DEF, 0xC, BattleScript_ButItFailed
 BattleScript_CurseTrySpeed::
-	copybyte gBankTarget, gBankAttacker
+	copybyte gBankDefender, gBankAttacker
 	setbyte sANIM_TURN, 0x1
 	attackanimation
 	waitanimation
@@ -1534,7 +1534,7 @@ BattleScript_CurseTryDefence::
 BattleScript_CurseEnd::
 	goto BattleScript_MoveEnd
 BattleScript_GhostCurse::
-	jumpifbytenotequal gBankAttacker, gBankTarget, BattleScript_DoGhostCurse
+	jumpifbytenotequal gBankAttacker, gBankDefender, BattleScript_DoGhostCurse
 	getmovetarget ATTACKER
 BattleScript_DoGhostCurse::
 	attackcanceler
@@ -1603,7 +1603,7 @@ BattleScript_PerishSongLoop::
 	jumpifability SCRIPTING_BANK, ABILITY_SOUNDPROOF, BattleScript_PerishSongNotAffected
 BattleScript_PerishSongLoopIncrement::
 	addbyte sBANK, 0x1
-	jumpifbytenotequal sBANK, gNoOfAllBanks, BattleScript_PerishSongLoop
+	jumpifbytenotequal sBANK, gBattleBanksCount, BattleScript_PerishSongLoop
 	goto BattleScript_MoveEnd
 
 BattleScript_PerishSongNotAffected::
@@ -1748,7 +1748,7 @@ BattleScript_EffectSonicboom::
 	attackstring
 	ppreduce
 	typecalc
-	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
+	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	setword gBattleMoveDamage, 20
 	adjustsetdamage
 	goto BattleScript_HitFromAtkAnimation
@@ -2085,14 +2085,14 @@ BattleScript_ButItFailedPpReduce::
 	ppreduce
 BattleScript_ButItFailed::
 	pause 0x20
-	orbyte gBattleMoveFlags, MOVESTATUS_FAILED
+	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
 	resultmessage
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
 
 BattleScript_NotAffected::
 	pause 0x20
-	orbyte gBattleMoveFlags, MOVESTATUS_NOTAFFECTED
+	orbyte gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
 	resultmessage
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
@@ -2204,10 +2204,10 @@ BattleScript_EffectWillOWisp::
 	attackstring
 	ppreduce
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
-	jumpifstatus TARGET, STATUS_BURN, BattleScript_AlreadyBurned
+	jumpifstatus TARGET, STATUS1_BURN, BattleScript_AlreadyBurned
 	jumpiftype TARGET, TYPE_FIRE, BattleScript_NotAffected
 	jumpifability TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
-	jumpifstatus TARGET, STATUS_ANY, BattleScript_ButItFailed
+	jumpifstatus TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
 	attackanimation
@@ -2217,7 +2217,7 @@ BattleScript_EffectWillOWisp::
 	goto BattleScript_MoveEnd
 
 BattleScript_WaterVeilPrevents::
-	copybyte gEffectBank, gBankTarget
+	copybyte gEffectBank, gBankDefender
 	setbyte cMULTISTRING_CHOOSER, 0x0
 	call BattleScript_BRNPrevention
 	goto BattleScript_MoveEnd
@@ -2275,7 +2275,7 @@ BattleScript_82DA15A::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectFacade::
-	jumpifstatus ATTACKER, STATUS_POISON | STATUS_BURN | STATUS_PARALYSIS | STATUS_TOXIC_POISON, BattleScript_FacadeDoubleDmg
+	jumpifstatus ATTACKER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, BattleScript_FacadeDoubleDmg
 	goto BattleScript_EffectHit
 
 BattleScript_FacadeDoubleDmg::
@@ -2293,7 +2293,7 @@ BattleScript_EffectFocusPunch::
 BattleScript_EffectSmellingsalt::
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_EffectHit
 	setmoveeffect EFFECT_REMOVE_PARALYSIS | CERTAIN
-	jumpifstatus TARGET, STATUS_PARALYSIS, BattleScript_SmellingsaltDoubleDmg
+	jumpifstatus TARGET, STATUS1_PARALYSIS, BattleScript_SmellingsaltDoubleDmg
 	goto BattleScript_EffectHit
 
 BattleScript_SmellingsaltDoubleDmg::
@@ -2452,7 +2452,7 @@ BattleScript_EffectBrickBreak::
 	typecalc
 	adjustnormaldamage
 	jumpifbyte EQUAL, sANIM_TURN, 0x0, BattleScript_BrickBreakAnim
-	bicbyte gBattleMoveFlags, MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED
+	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
 BattleScript_BrickBreakAnim::
 	attackanimation
 	waitanimation
@@ -2511,7 +2511,7 @@ BattleScript_EffectEndeavor::
 	accuracycheck BattleScript_MoveMissedPause, ACC_CURR_MOVE
 	typecalc
 	jumpifmovehadnoeffect BattleScript_HitFromAtkAnimation
-	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
+	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	copyword gBattleMoveDamage, gHpDealt
 	adjustsetdamage
 	goto BattleScript_HitFromAtkAnimation
@@ -2598,11 +2598,11 @@ BattleScript_EffectTeeterDance::
 	attackcanceler
 	attackstring
 	ppreduce
-	setbyte gBankTarget, 0x0
+	setbyte gBankDefender, 0x0
 BattleScript_TeeterDanceLoop::
 	movevaluescleanup
 	setmoveeffect EFFECT_CONFUSION
-	jumpifbyteequal gBankAttacker, gBankTarget, BattleScript_TeeterDanceLoopIncrement
+	jumpifbyteequal gBankAttacker, gBankDefender, BattleScript_TeeterDanceLoopIncrement
 	jumpifability TARGET, ABILITY_OWN_TEMPO, BattleScript_TeeterDanceOwnTempoPrevents
 	jumpifstatus2 TARGET, STATUS2_SUBSTITUTE, BattleScript_TeeterDanceSubstitutePrevents
 	jumpifstatus2 TARGET, STATUS2_CONFUSION, BattleScript_TeeterDanceAlreadyConfused
@@ -2618,8 +2618,8 @@ BattleScript_TeeterDanceDoMoveEndIncrement::
 	setbyte sMOVEEND_STATE, 0x0
 	moveend 0x2, 0x10
 BattleScript_TeeterDanceLoopIncrement::
-	addbyte gBankTarget, 0x1
-	jumpifbytenotequal gBankTarget, gNoOfAllBanks, BattleScript_TeeterDanceLoop
+	addbyte gBankDefender, 0x1
+	jumpifbytenotequal gBankDefender, gBattleBanksCount, BattleScript_TeeterDanceLoop
 	end
 
 BattleScript_TeeterDanceOwnTempoPrevents::
@@ -2706,7 +2706,7 @@ BattleScript_TickleEnd::
 
 BattleScript_CantLowerMultipleStats::
 	pause 0x20
-	orbyte gBattleMoveFlags, MOVESTATUS_FAILED
+	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
 	printstring STRINGID_STATSWONTDECREASE2
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
@@ -2792,7 +2792,7 @@ BattleScript_CalmMindEnd::
 
 BattleScript_CantRaiseMultipleStats::
 	pause 0x20
-	orbyte gBattleMoveFlags, MOVESTATUS_FAILED
+	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
 	printstring STRINGID_STATSWONTINCREASE2
 	waitmessage 0x40
 	goto BattleScript_MoveEnd
@@ -2935,7 +2935,7 @@ BattleScript_82DA908::
 	switchinanim GBANK_1, FALSE
 	waitstate
 	switchineffects 5
-	jumpifbytenotequal gBank1, gNoOfAllBanks, BattleScript_82DA908
+	jumpifbytenotequal gBank1, gBattleBanksCount, BattleScript_82DA908
 BattleScript_82DA92C::
 	end2
 
@@ -3243,7 +3243,7 @@ BattleScript_DamagingWeatherLoop::
 BattleScript_DamagingWeatherLoopIncrement::
 	jumpifbyte NOT_EQUAL, gBattleOutcome, 0, BattleScript_DamagingWeatherContinuesEnd
 	addbyte gBattleCommunication, 0x1
-	jumpifbytenotequal gBattleCommunication, gNoOfAllBanks, BattleScript_DamagingWeatherLoop
+	jumpifbytenotequal gBattleCommunication, gBattleBanksCount, BattleScript_DamagingWeatherLoop
 BattleScript_DamagingWeatherContinuesEnd::
 	bicword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
 	end2
@@ -3322,7 +3322,7 @@ BattleScript_BideAttack::
 	waitmessage 0x40
 	accuracycheck BattleScript_MoveMissed, ACC_CURR_MOVE
 	typecalc
-	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
+	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	copyword gBattleMoveDamage, sBIDE_DMG
 	adjustsetdamage
 	setbyte sANIM_TURN, 0x1
@@ -3521,7 +3521,7 @@ BattleScript_RapidSpinAway::
 BattleScript_WrapFree::
 	printstring STRINGID_PKMNGOTFREE
 	waitmessage 0x40
-	copybyte gBankTarget, sBANK
+	copybyte gBankDefender, sBANK
 	return
 
 BattleScript_LeechSeedFree::
@@ -3564,16 +3564,16 @@ BattleScript_FutureAttackEnd::
 	moveend 0x1, 0x0
 	setbyte sMOVEEND_STATE, 0xB
 	moveend 0x2, 0xE
-	setbyte gBattleMoveFlags, 0
+	setbyte gMoveResultFlags, 0
 	end2
 
 BattleScript_FutureAttackMiss::
 	pause 0x20
-	setbyte gBattleMoveFlags, 0
-	orbyte gBattleMoveFlags, MOVESTATUS_FAILED
+	setbyte gMoveResultFlags, 0
+	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
 	resultmessage
 	waitmessage 0x40
-	setbyte gBattleMoveFlags, 0
+	setbyte gMoveResultFlags, 0
 	end2
 
 BattleScript_NoMovesLeft::
@@ -4032,7 +4032,7 @@ BattleScript_WeatherFormChanges::
 BattleScript_WeatherFormChangesLoop::
 	trycastformdatachange
 	addbyte sBANK, 0x1
-	jumpifbytenotequal sBANK, gNoOfAllBanks, BattleScript_WeatherFormChangesLoop
+	jumpifbytenotequal sBANK, gBattleBanksCount, BattleScript_WeatherFormChangesLoop
 	return
 
 BattleScript_CastformChange::
@@ -4053,7 +4053,7 @@ BattleScript_82DB4B8::
 BattleScript_82DB4BE::
 	pause 0x20
 BattleScript_82DB4C1::
-	setbyte gBankTarget, 0x0
+	setbyte gBankDefender, 0x0
 	setstatchanger ATK, 1, TRUE
 BattleScript_82DB4CD::
 	trygetintimidatetarget BattleScript_82DB51B
@@ -4068,7 +4068,7 @@ BattleScript_82DB4CD::
 	printstring STRINGID_PKMNCUTSATTACKWITH
 	waitmessage 0x40
 BattleScript_82DB510::
-	addbyte gBankTarget, 0x1
+	addbyte gBankDefender, 0x1
 	goto BattleScript_82DB4CD
 BattleScript_82DB51B::
 	return
@@ -4117,7 +4117,7 @@ BattleScript_MoveHPDrain::
 	datahpupdate TARGET
 	printstring STRINGID_PKMNRESTOREDHPUSING
 	waitmessage 0x40
-	orbyte gBattleMoveFlags, MOVESTATUS_NOTAFFECTED
+	orbyte gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
 	goto BattleScript_MoveEnd
 
 BattleScript_MonMadeMoveUseless_PPLoss::
@@ -4127,7 +4127,7 @@ BattleScript_MonMadeMoveUseless::
 	pause 0x20
 	printstring STRINGID_PKMNSXMADEYUSELESS
 	waitmessage 0x40
-	orbyte gBattleMoveFlags, MOVESTATUS_NOTAFFECTED
+	orbyte gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
 	goto BattleScript_MoveEnd
 
 BattleScript_FlashFireBoost_PPLoss::
@@ -4474,7 +4474,7 @@ BattleScript_82DB887::
 	waitmessage 0x40
 BattleScript_82DB89D::
 	addbyte gBattleCommunication + 1, 0x1
-	jumpifbytenotequal gBattleCommunication + 1, gNoOfAllBanks, BattleScript_82DB887
+	jumpifbytenotequal gBattleCommunication + 1, gBattleBanksCount, BattleScript_82DB887
 	setbyte gBattleCommunication, 0x0
 	setbyte gBattleCommunication + 1, 0x0
 	end2

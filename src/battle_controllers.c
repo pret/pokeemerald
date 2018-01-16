@@ -19,7 +19,7 @@ extern void (*gBattleBankFunc[BATTLE_BANKS_COUNT])(void);
 extern u8 gBankPositions[BATTLE_BANKS_COUNT];
 extern u8 gActionSelectionCursor[BATTLE_BANKS_COUNT];
 extern u8 gMoveSelectionCursor[BATTLE_BANKS_COUNT];
-extern u8 gNoOfAllBanks;
+extern u8 gBattleBanksCount;
 extern u8 gActiveBank;
 extern u8 gUnknown_0202428C;
 extern u32 gUnknown_02022FF4;
@@ -32,7 +32,7 @@ extern u8 gUnknown_02022D08;
 extern u8 gUnknown_02022D09;
 extern u8 gUnknown_02022D0A;
 extern u8 gBankAttacker;
-extern u8 gBankTarget;
+extern u8 gBankDefender;
 extern u8 gAbsentBankFlags;
 extern u8 gEffectBank;
 extern u16 gBattleWeather;
@@ -124,7 +124,7 @@ void sub_8032768(void)
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattleBanksCount; i++)
             sub_81B8D64(i, 0);
     }
 
@@ -172,7 +172,7 @@ static void SetControllersVariables(void)
             gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
         }
 
-        gNoOfAllBanks = 4;
+        gBattleBanksCount = 4;
 
         sub_81B8D64(0, 0);
         sub_81B8D64(1, 0);
@@ -200,7 +200,7 @@ static void SetControllersVariables(void)
         gBattleBankFunc[1] = SetControllerToOpponent;
         gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
-        gNoOfAllBanks = 2;
+        gBattleBanksCount = 2;
 
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
@@ -216,7 +216,7 @@ static void SetControllersVariables(void)
                     gBattleBankFunc[1] = SetControllerToRecordedOpponent;
                     gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
-                    gNoOfAllBanks = 2;
+                    gBattleBanksCount = 2;
                 }
                 else // see how the banks are switched
                 {
@@ -226,7 +226,7 @@ static void SetControllersVariables(void)
                     gBattleBankFunc[0] = SetControllerToRecordedOpponent;
                     gBankPositions[0] = B_POSITION_OPPONENT_LEFT;
 
-                    gNoOfAllBanks = 2;
+                    gBattleBanksCount = 2;
                 }
             }
             else
@@ -255,7 +255,7 @@ static void SetControllersVariables(void)
         gBattleBankFunc[3] = SetControllerToOpponent;
         gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
-        gNoOfAllBanks = 4;
+        gBattleBanksCount = 4;
 
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
@@ -275,7 +275,7 @@ static void SetControllersVariables(void)
                 gBattleBankFunc[3] = SetControllerToOpponent;
                 gBankPositions[3] = 3;
 
-                gNoOfAllBanks = 4;
+                gBattleBanksCount = 4;
 
                 sub_81B8D64(0, 0);
                 sub_81B8D64(1, 0);
@@ -430,7 +430,7 @@ static void SetControllersVariablesInLinkBattle(void)
             gBattleBankFunc[1] = SetControllerToLinkOpponent;
             gBankPositions[1] = B_POSITION_OPPONENT_LEFT;
 
-            gNoOfAllBanks = 2;
+            gBattleBanksCount = 2;
         }
         else
         {
@@ -440,7 +440,7 @@ static void SetControllersVariablesInLinkBattle(void)
             gBattleBankFunc[0] = SetControllerToLinkOpponent;
             gBankPositions[0] = B_POSITION_OPPONENT_LEFT;
 
-            gNoOfAllBanks = 2;
+            gBattleBanksCount = 2;
         }
     }
     else if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -461,7 +461,7 @@ static void SetControllersVariablesInLinkBattle(void)
             gBattleBankFunc[3] = SetControllerToLinkOpponent;
             gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
-            gNoOfAllBanks = 4;
+            gBattleBanksCount = 4;
         }
         else
         {
@@ -477,7 +477,7 @@ static void SetControllersVariablesInLinkBattle(void)
             gBattleBankFunc[2] = SetControllerToLinkOpponent;
             gBankPositions[2] = B_POSITION_OPPONENT_RIGHT;
 
-            gNoOfAllBanks = 4;
+            gBattleBanksCount = 4;
         }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
@@ -498,7 +498,7 @@ static void SetControllersVariablesInLinkBattle(void)
             gBattleBankFunc[3] = SetControllerToOpponent;
             gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
-            gNoOfAllBanks = 4;
+            gBattleBanksCount = 4;
         }
         else
         {
@@ -514,7 +514,7 @@ static void SetControllersVariablesInLinkBattle(void)
             gBattleBankFunc[3] = SetControllerToLinkOpponent;
             gBankPositions[3] = B_POSITION_OPPONENT_RIGHT;
 
-            gNoOfAllBanks = 4;
+            gBattleBanksCount = 4;
         }
 
         sub_81B8D64(0, 0);
@@ -604,7 +604,7 @@ static void SetControllersVariablesInLinkBattle(void)
             }
         }
 
-        gNoOfAllBanks = 4;
+        gBattleBanksCount = 4;
     }
 }
 
@@ -614,7 +614,7 @@ static void SetBattlePartyIds(void)
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattleBanksCount; i++)
         {
             for (j = 0; j < 6; j++)
             {
@@ -753,7 +753,7 @@ void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data)
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_BUFFER_ID] = bufferId;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ACTIVE_BANK] = gActiveBank;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ATTACKER] = gBankAttacker;
-    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_TARGET] = gBankTarget;
+    gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_TARGET] = gBankDefender;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_LO] = alignedSize;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_SIZE_HI] = (alignedSize & 0x0000FF00) >> 8;
     gLinkBattleSendBuffer[gTasks[gUnknown_02022D08].data[14] + LINK_BUFF_ABSENT_BANK_FLAGS] = gAbsentBankFlags;
@@ -921,7 +921,7 @@ static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId)
             if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
             {
                 gBankAttacker = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 2];
-                gBankTarget = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 3];
+                gBankDefender = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 3];
                 gAbsentBankFlags = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 6];
                 gEffectBank = gLinkBattleRecvBuffer[gTasks[taskId].data[15] + 7];
             }

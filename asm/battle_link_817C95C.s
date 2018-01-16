@@ -39,7 +39,7 @@ _0817C988:
 	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gBankTarget
+	ldr r0, =gBankDefender
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -83,7 +83,7 @@ _0817CA10:
 	str r1, [sp, 0x8]
 	cmp r6, 0
 	bne _0817CA3C
-	ldr r0, =gBankTarget
+	ldr r0, =gBankDefender
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r2
@@ -94,7 +94,7 @@ _0817CA10:
 	b _0817CA4C
 	.pool
 _0817CA3C:
-	ldr r0, =gBankTarget
+	ldr r0, =gBankDefender
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r2
@@ -140,7 +140,7 @@ _0817CA9C:
 	lsls r0, 24
 	lsrs r0, 25
 	mov r8, r0
-	ldr r0, =gBankTarget
+	ldr r0, =gBankDefender
 	ldrb r0, [r0]
 	bl GetBankPosition
 	lsls r0, 24
@@ -941,7 +941,7 @@ _0817D3F2:
 	bl _0817E0A6
 _0817D3FE:
 	ldr r0, =gBankAttacker
-	ldr r1, =gBankTarget
+	ldr r1, =gBankDefender
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -2564,7 +2564,7 @@ _0817E122:
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, =gBankTarget
+	ldr r0, =gBankDefender
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -3249,7 +3249,7 @@ sub_817E684: @ 817E684
 	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gBankTarget
+	ldr r0, =gBankDefender
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -3714,7 +3714,7 @@ sub_817EA80: @ 817EA80
 	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gBankTarget
+	ldr r0, =gBankDefender
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -4291,7 +4291,7 @@ _0817EEF8:
 	bgt _0817EF10
 	b _0817F1FA
 _0817EF10:
-	ldr r0, =gBankTarget
+	ldr r0, =gBankDefender
 	ldrb r0, [r0]
 	muls r0, r1
 	adds r0, r5
@@ -4386,7 +4386,7 @@ _0817EF98:
 	mov r10, r3
 	mov r8, r0
 	add r7, sp, 0x10
-	ldr r4, =gBankTarget
+	ldr r4, =gBankDefender
 	mov r9, r4
 _0817EFC2:
 	lsls r1, r5, 1
@@ -4411,7 +4411,7 @@ _0817EFC2:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0817F0B4
-	ldr r4, =gSideAffecting
+	ldr r4, =gSideStatuses
 	mov r1, r9
 	ldrb r0, [r1]
 	bl GetBankPosition
@@ -4545,7 +4545,7 @@ _0817F0D8:
 	movs r7, 0
 _0817F0F6:
 	movs r5, 0
-	ldr r4, =gBankTarget
+	ldr r4, =gBankDefender
 	ldr r6, =gEnemyParty
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]

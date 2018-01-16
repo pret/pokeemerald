@@ -1830,13 +1830,13 @@ GetBankPosition: @ 80A6A44
 	.pool
 	thumb_func_end GetBankPosition
 
-	thumb_func_start GetBankByIdentity
-GetBankByIdentity: @ 80A6A54
+	thumb_func_start GetBankByPosition
+GetBankByPosition: @ 80A6A54
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r1, 0
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattleBanksCount
 	ldrb r2, [r0]
 	cmp r1, r2
 	bcs _080A6A7E
@@ -1860,7 +1860,7 @@ _080A6A7E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end GetBankByIdentity
+	thumb_func_end GetBankByPosition
 
 	thumb_func_start IsBankSpritePresent
 IsBankSpritePresent: @ 80A6A90
@@ -3496,7 +3496,7 @@ _080A76F2:
 	cmp r5, 0
 	beq _080A771A
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsAnimBankSpriteVisible
@@ -3504,7 +3504,7 @@ _080A76F2:
 	cmp r0, 0
 	beq _080A771A
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x10
@@ -3514,7 +3514,7 @@ _080A771A:
 	cmp r6, 0
 	beq _080A7746
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsAnimBankSpriteVisible
@@ -3522,7 +3522,7 @@ _080A771A:
 	cmp r0, 0
 	beq _080A7746
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -3534,7 +3534,7 @@ _080A7746:
 	cmp r7, 0
 	beq _080A7772
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsAnimBankSpriteVisible
@@ -3542,7 +3542,7 @@ _080A7746:
 	cmp r0, 0
 	beq _080A7772
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -3555,7 +3555,7 @@ _080A7772:
 	cmp r0, 0
 	beq _080A77A0
 	movs r0, 0x3
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsAnimBankSpriteVisible
@@ -3563,7 +3563,7 @@ _080A7772:
 	cmp r0, 0
 	beq _080A77A0
 	movs r0, 0x3
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -3592,7 +3592,7 @@ sub_80A77B4: @ 80A77B4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -4959,7 +4959,7 @@ _080A825C:
 sub_80A8278: @ 80A8278
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattleBanksCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	bge _080A82D2
@@ -4998,7 +4998,7 @@ _080A8286:
 	strb r2, [r0, 0x5]
 _080A82C8:
 	adds r5, 0x1
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattleBanksCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _080A8286

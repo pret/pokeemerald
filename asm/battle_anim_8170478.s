@@ -1283,7 +1283,7 @@ _08170F54:
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A82E4
@@ -1335,7 +1335,7 @@ _08170F54:
 	ldr r0, =SpriteCallbackDummy
 	str r0, [r4]
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	ldr r1, =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
@@ -1371,7 +1371,7 @@ sub_8171030: @ 8171030
 	lsrs r5, r0, 24
 	ldr r6, =gSprites
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	ldr r1, =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
@@ -1422,7 +1422,7 @@ sub_81710A8: @ 81710A8
 	lsrs r5, r0, 24
 	ldr r6, =gSprites
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	ldr r4, =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
@@ -1438,7 +1438,7 @@ sub_81710A8: @ 81710A8
 	cmp r0, 0
 	bge _081710F4
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -5575,7 +5575,7 @@ sub_817330C: @ 817330C
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -5587,7 +5587,7 @@ sub_817330C: @ 817330C
 	adds r0, r1
 	strh r0, [r4, 0x32]
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -5732,7 +5732,7 @@ sub_817345C: @ 817345C
 	.pool
 _08173478:
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	ldr r1, =gAnimBankAttacker
 	strb r0, [r1]
 	movs r0, 0x1
@@ -5740,12 +5740,12 @@ _08173478:
 	.pool
 _0817348C:
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	ldr r1, =gAnimBankAttacker
 	strb r0, [r1]
 	movs r0, 0
 _08173498:
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	ldr r1, =gAnimBankTarget
 	strb r0, [r1]
 _081734A0:

@@ -273,13 +273,13 @@ static void sub_8035AE4(u8 taskId, u8 bank, u8 bgId, u8 destX, u8 destY)
 
 static void sub_8035C4C(void)
 {
-    if (gBattleOutcome == BATTLE_DREW)
+    if (gBattleOutcome == B_OUTCOME_DREW)
     {
         BattleHandleAddTextPrinter(gText_Draw, 0x15);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if (gBattleOutcome == BATTLE_WON)
+        if (gBattleOutcome == B_OUTCOME_WON)
         {
             switch (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18)
             {
@@ -324,7 +324,7 @@ static void sub_8035C4C(void)
             }
         }
     }
-    else if (gBattleOutcome == BATTLE_WON)
+    else if (gBattleOutcome == B_OUTCOME_WON)
     {
         if (gLinkPlayers[gBattleScripting.multiplayerId].lp_field_18 != 0)
         {

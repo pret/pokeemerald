@@ -25,7 +25,7 @@
 
 extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
 extern u8 gActiveBank;
-extern u8 gNoOfAllBanks;
+extern u8 gBattleBanksCount;
 extern u16 gUnknown_020243FC;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
@@ -262,7 +262,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     else if (var1 == MOVE_TARGET_SELECTED)
         chosenMoveId |= (BattlePalaceGetTargetRetValue());
     else
-        chosenMoveId |= (GetBankByIdentity((GetBankPosition(gActiveBank) & BIT_SIDE) ^ BIT_SIDE) << 8);
+        chosenMoveId |= (GetBankByPosition((GetBankPosition(gActiveBank) & BIT_SIDE) ^ BIT_SIDE) << 8);
 
     return chosenMoveId;
 }
@@ -299,13 +299,13 @@ static u16 BattlePalaceGetTargetRetValue(void)
 
         if (GetBankSide(gActiveBank) == SIDE_PLAYER)
         {
-            opposing1 = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
-            opposing2 = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
+            opposing1 = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
+            opposing2 = GetBankByPosition(B_POSITION_OPPONENT_RIGHT);
         }
         else
         {
-            opposing1 = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
-            opposing2 = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
+            opposing1 = GetBankByPosition(B_POSITION_PLAYER_LEFT);
+            opposing2 = GetBankByPosition(B_POSITION_PLAYER_RIGHT);
         }
 
         if (gBattleMons[opposing1].hp == gBattleMons[opposing2].hp)
@@ -391,15 +391,15 @@ void InitAndLaunchChosenStatusAnimation(bool8 isStatus2, u32 status)
     gBattleSpritesDataPtr->healthBoxesData[gActiveBank].statusAnimActive = 1;
     if (!isStatus2)
     {
-        if (status == STATUS_FREEZE)
+        if (status == STATUS1_FREEZE)
             LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_FRZ);
-        else if (status == STATUS_POISON || status & STATUS_TOXIC_POISON)
+        else if (status == STATUS1_POISON || status & STATUS1_TOXIC_POISON)
             LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_PSN);
-        else if (status == STATUS_BURN)
+        else if (status == STATUS1_BURN)
             LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_BRN);
-        else if (status & STATUS_SLEEP)
+        else if (status & STATUS1_SLEEP)
             LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_SLP);
-        else if (status == STATUS_PARALYSIS)
+        else if (status == STATUS1_PARALYSIS)
             LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_PRZ);
         else // no animation
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].statusAnimActive = 0;
@@ -807,7 +807,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *bank)
             gHealthBoxesIds[*bank] = CreateBankHealthboxSprites(*bank);
 
         (*bank)++;
-        if (*bank == gNoOfAllBanks)
+        if (*bank == gBattleBanksCount)
         {
             *bank = 0;
             (*state1)++;
@@ -821,7 +821,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *bank)
             DummyBattleInterfaceFunc(gHealthBoxesIds[*bank], TRUE);
 
         (*bank)++;
-        if (*bank == gNoOfAllBanks)
+        if (*bank == gBattleBanksCount)
         {
             *bank = 0;
             (*state1)++;
@@ -839,7 +839,7 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *bank)
         }
         SetHealthboxSpriteInvisible(gHealthBoxesIds[*bank]);
         (*bank)++;
-        if (*bank == gNoOfAllBanks)
+        if (*bank == gBattleBanksCount)
         {
             *bank = 0;
             (*state1)++;
@@ -871,7 +871,7 @@ void CopyAllBattleSpritesInvisibilities(void)
 {
     s32 i;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
         gBattleSpritesDataPtr->bankData[i].invisible = gSprites[gBankSpriteIds[i]].invisible;
 }
 
@@ -1080,7 +1080,7 @@ void HandleLowHpMusicChange(struct Pokemon *mon, u8 bank)
 
 void BattleStopLowHpSound(void)
 {
-    u8 playerBank = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
+    u8 playerBank = GetBankByPosition(B_POSITION_PLAYER_LEFT);
 
     gBattleSpritesDataPtr->bankData[playerBank].lowHpSong = 0;
     if (IsDoubleBattle())
@@ -1101,8 +1101,8 @@ void sub_805EAE8(void)
 {
     if (gMain.inBattle)
     {
-        u8 playerBank1 = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
-        u8 playerBank2 = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
+        u8 playerBank1 = GetBankByPosition(B_POSITION_PLAYER_LEFT);
+        u8 playerBank2 = GetBankByPosition(B_POSITION_PLAYER_RIGHT);
         u8 bank1PartyId = pokemon_order_func(gBattlePartyID[playerBank1]);
         u8 bank2PartyId = pokemon_order_func(gBattlePartyID[playerBank2]);
 
@@ -1117,7 +1117,7 @@ void sub_805EB9C(u8 affineMode)
 {
     s32 i;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
     {
         if (IsBankSpritePresent(i))
         {
@@ -1143,13 +1143,13 @@ void LoadAndCreateEnemyShadowSprites(void)
 
     LoadCompressedObjectPic(&gSpriteSheet_EnemyShadow);
 
-    bank = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+    bank = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
     gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBankCoord(bank, 0), GetBankCoord(bank, 1) + 29, 0xC8);
     gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].data[0] = bank;
 
     if (IsDoubleBattle())
     {
-        bank = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
+        bank = GetBankByPosition(B_POSITION_OPPONENT_RIGHT);
         gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBankCoord(bank, 0), GetBankCoord(bank, 1) + 29, 0xC8);
         gSprites[gBattleSpritesDataPtr->healthBoxesData[bank].shadowSpriteId].data[0] = bank;
     }
@@ -1286,7 +1286,7 @@ bool32 ShouldPlayNormalPokeCry(struct Pokemon *mon)
     s16 hp, maxHP;
     s32 barLevel;
 
-    if (GetMonData(mon, MON_DATA_STATUS) & (STATUS_ANY | STATUS_TOXIC_COUNTER))
+    if (GetMonData(mon, MON_DATA_STATUS) & (STATUS1_ANY | STATUS1_TOXIC_COUNTER))
         return FALSE;
 
     hp = GetMonData(mon, MON_DATA_HP);

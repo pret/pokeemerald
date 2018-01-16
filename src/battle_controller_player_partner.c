@@ -27,7 +27,7 @@ extern u32 gBattleExecBuffer;
 extern u8 gActiveBank;
 extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
 extern u8 gActionSelectionCursor[BATTLE_BANKS_COUNT];
-extern u8 gNoOfAllBanks;
+extern u8 gBattleBanksCount;
 extern bool8 gDoingBattleAnim;
 extern void (*gBattleBankFunc[BATTLE_BANKS_COUNT])(void);
 extern void (*gPreBattleCallback1)(void);
@@ -47,7 +47,7 @@ extern u8 gUnknown_03005D7C[BATTLE_BANKS_COUNT];
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
 extern u16 gPartnerTrainerId;
 extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
-extern u8 gBankTarget;
+extern u8 gBankDefender;
 extern u8 gAbsentBankFlags;
 extern u8 gUnknown_020244B4[];
 extern u32 gTransformedPersonalities[BATTLE_BANKS_COUNT];
@@ -1545,15 +1545,15 @@ static void PlayerPartnerHandleChooseMove(void)
     chosenMoveId = BattleAI_ChooseMoveOrAction();
 
     if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_x10 | MOVE_TARGET_USER))
-        gBankTarget = gActiveBank;
+        gBankDefender = gActiveBank;
     if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
     {
-        gBankTarget = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
-        if (gAbsentBankFlags & gBitTable[gBankTarget])
-            gBankTarget = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
+        gBankDefender = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
+        if (gAbsentBankFlags & gBitTable[gBankDefender])
+            gBankDefender = GetBankByPosition(B_POSITION_OPPONENT_RIGHT);
     }
 
-    EmitTwoReturnValues(1, 10, chosenMoveId | (gBankTarget << 8));
+    EmitTwoReturnValues(1, 10, chosenMoveId | (gBankDefender << 8));
     PlayerPartnerBufferExecCompleted();
 }
 
@@ -1568,8 +1568,8 @@ static void PlayerPartnerHandleChoosePokemon(void)
 
     if (chosenMonId == 6) // just switch to the next mon
     {
-        u8 playerMonIdentity = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
-        u8 selfIdentity = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
+        u8 playerMonIdentity = GetBankByPosition(B_POSITION_PLAYER_LEFT);
+        u8 selfIdentity = GetBankByPosition(B_POSITION_PLAYER_RIGHT);
 
         for (chosenMonId = 3; chosenMonId < 6; chosenMonId++)
         {

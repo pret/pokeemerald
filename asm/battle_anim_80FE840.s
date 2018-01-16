@@ -7539,7 +7539,7 @@ sub_8102434: @ 8102434
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r4, 0
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattleBanksCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _08102490
@@ -7576,7 +7576,7 @@ _08102482:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattleBanksCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _08102448
@@ -7605,7 +7605,7 @@ _081024B2:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _081024C2:
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattleBanksCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _081024B2
@@ -21049,14 +21049,14 @@ sub_8109198: @ 8109198
 	cmp r4, r0
 	bne _081091DE
 	movs r0, 0x2
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	ldrb r1, [r5]
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r1, r0
 	beq _081091D6
 	movs r0, 0x3
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	ldrb r1, [r5]
 	lsls r0, 24
 	lsrs r0, 24
@@ -28050,7 +28050,7 @@ sub_810C9E4: @ 810C9E4
 	ldrh r0, [r4, 0x2]
 	lsls r0, 20
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0
@@ -33064,7 +33064,7 @@ _0810F212:
 	bne _0810F2B8
 _0810F22E:
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r7, r4, 0
@@ -33193,7 +33193,7 @@ sub_810F340: @ 810F340
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r1, 0x3C
@@ -33370,7 +33370,7 @@ sub_810F46C: @ 810F46C
 	cmp r0, 0
 	bne _0810F502
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
@@ -33441,7 +33441,7 @@ sub_810F524: @ 810F524
 	cmp r0, 0
 	bne _0810F57C
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
@@ -43586,7 +43586,7 @@ _08114902:
 	beq _0811492E
 _08114908:
 	adds r0, r4, 0
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
@@ -45846,7 +45846,7 @@ sub_8115B0C: @ 8115B0C
 	strh r1, [r0, 0x12]
 	strh r5, [r0, 0x18]
 	movs r4, 0
-	ldr r0, =gNoOfAllBanks
+	ldr r0, =gBattleBanksCount
 	ldrb r1, [r0]
 	mov r9, r3
 	mov r8, r2
@@ -46650,7 +46650,7 @@ _0811618A:
 	cmp r0, 0x1
 	bhi _081161DC
 	movs r4, 0
-	ldr r5, =gNoOfAllBanks
+	ldr r5, =gBattleBanksCount
 	ldrb r0, [r5]
 	cmp r4, r0
 	bcs _081161DC
@@ -50065,7 +50065,7 @@ sub_8117E94: @ 8117E94
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gAnimBankAttacker
-	ldr r1, =gBankTarget
+	ldr r1, =gBankDefender
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, =gAnimBankTarget
@@ -50117,7 +50117,7 @@ sub_8117F10: @ 8117F10
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gAnimBankTarget
-	ldr r1, =gBankTarget
+	ldr r1, =gBankDefender
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl DestroyAnimVisualTask
@@ -52078,7 +52078,7 @@ sub_8118FBC: @ 8118FBC
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
-	bl GetBankByIdentity
+	bl GetBankByPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gMonSpritesGfxPtr

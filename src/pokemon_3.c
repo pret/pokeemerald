@@ -27,7 +27,7 @@ extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
 extern u8 gActiveBank;
 extern u8 gBankInMenu;
-extern u8 gBankTarget;
+extern u8 gBankDefender;
 extern u8 gBankAttacker;
 extern u8 gStringBank;
 extern u16 gTrainerBattleOpponent_A;
@@ -212,7 +212,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
 void sub_806CF24(s32 stat)
 {
-    gBankTarget = gBankInMenu;
+    gBankDefender = gBankInMenu;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[stat]]);
     StringCopy(gBattleTextBuff2, gText_StatRose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);

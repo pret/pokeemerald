@@ -1060,7 +1060,7 @@ _080D8004:
 	str r4, [r0]
 	ldr r4, =gBankAttacker
 	strb r2, [r4]
-	ldr r0, =gBankTarget
+	ldr r0, =gBankDefender
 	strb r3, [r0]
 	bl sub_80DB0C4
 	ldr r2, =gBankSpriteIds
@@ -13798,7 +13798,7 @@ sub_80DEA20: @ 80DEA20
 	bl CreateInvisibleSpriteWithCallback
 	ldr r1, =gBankSpriteIds
 	strb r0, [r1, 0x3]
-	ldr r0, =gBankTarget
+	ldr r0, =gBankDefender
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -13905,12 +13905,12 @@ _080DEAD0:
 	.4byte _080DEB60
 	.4byte _080DEB60
 _080DEB54:
-	ldr r1, =gBankTarget
+	ldr r1, =gBankDefender
 	movs r0, 0x2
 	b _080DEB64
 	.pool
 _080DEB60:
-	ldr r1, =gBankTarget
+	ldr r1, =gBankDefender
 	movs r0, 0x3
 _080DEB64:
 	strb r0, [r1]

@@ -17,7 +17,7 @@ struct Unknown_020249B4
 extern u8 gAbsentBankFlags;
 extern u8 gActiveBank;
 extern u8 gBankAttacker;
-extern u8 gBankTarget;
+extern u8 gBankDefender;
 extern u8 gLastUsedAbility;
 extern u16 gTrainerBattleOpponent_A;
 extern u32 gBattleTypeFlags;
@@ -35,7 +35,7 @@ extern const u8 gText_BadEgg[];
 extern const u8 gText_EggNickname[];
 
 extern u8 GetBankSide(u8 bank);
-extern u8 GetBankByIdentity(u8 bank);
+extern u8 GetBankByPosition(u8 bank);
 extern u8 GetBankPosition(u8 bank);
 
 u8 CountAliveMonsInBattle(u8 caseId)
@@ -62,7 +62,7 @@ u8 CountAliveMonsInBattle(u8 caseId)
     case BATTLE_ALIVE_DEF_SIDE:
         for (i = 0; i < 4; i++)
         {
-            if (GetBankSide(i) == GetBankSide(gBankTarget) && !(gAbsentBankFlags & gBitTable[i]))
+            if (GetBankSide(i) == GetBankSide(gBankDefender) && !(gAbsentBankFlags & gBitTable[i]))
                 retVal++;
         }
         break;
@@ -90,7 +90,7 @@ u8 GetDefaultMoveTarget(u8 bank)
 
     status ^= 1;
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBankByIdentity(status);
+        return GetBankByPosition(status);
     if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) > 1)
     {
         u8 val;
@@ -99,14 +99,14 @@ u8 GetDefaultMoveTarget(u8 bank)
             val = status ^ 2;
         else
             val = status;
-        return GetBankByIdentity(val);
+        return GetBankByPosition(val);
     }
     else
     {
         if ((gAbsentBankFlags & gBitTable[status]))
-            return GetBankByIdentity(status ^ 2);
+            return GetBankByPosition(status ^ 2);
         else
-            return GetBankByIdentity(status);
+            return GetBankByPosition(status);
     }
 }
 

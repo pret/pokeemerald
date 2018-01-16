@@ -30,7 +30,7 @@
 
 extern u32 gBattleExecBuffer;
 extern u8 gActiveBank;
-extern u8 gBankTarget;
+extern u8 gBankDefender;
 extern u8 gAbsentBankFlags;
 extern bool8 gDoingBattleAnim;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
@@ -1581,18 +1581,18 @@ static void OpponentHandleChooseMove(void)
                 EmitTwoReturnValues(1, ACTION_RUN, 0);
                 break;
             case 6:
-                EmitTwoReturnValues(1, 15, gBankTarget);
+                EmitTwoReturnValues(1, 15, gBankDefender);
                 break;
             default:
                 if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_x10))
-                    gBankTarget = gActiveBank;
+                    gBankDefender = gActiveBank;
                 if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
                 {
-                    gBankTarget = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
-                    if (gAbsentBankFlags & gBitTable[gBankTarget])
-                        gBankTarget = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
+                    gBankDefender = GetBankByPosition(B_POSITION_PLAYER_LEFT);
+                    if (gAbsentBankFlags & gBitTable[gBankDefender])
+                        gBankDefender = GetBankByPosition(B_POSITION_PLAYER_RIGHT);
                 }
-                EmitTwoReturnValues(1, 10, (chosenMoveId) | (gBankTarget << 8));
+                EmitTwoReturnValues(1, 10, (chosenMoveId) | (gBankDefender << 8));
                 break;
             }
             OpponentBufferExecCompleted();
@@ -1609,9 +1609,9 @@ static void OpponentHandleChooseMove(void)
             if (gBattleMoves[move].target & (MOVE_TARGET_USER | MOVE_TARGET_x10))
                 EmitTwoReturnValues(1, 10, (chosenMoveId) | (gActiveBank << 8));
             else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBankByIdentity(Random() & 2) << 8));
+                EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBankByPosition(Random() & 2) << 8));
             else
-                EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBankByIdentity(B_POSITION_PLAYER_LEFT) << 8));
+                EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBankByPosition(B_POSITION_PLAYER_LEFT) << 8));
 
             OpponentBufferExecCompleted();
         }
@@ -1638,12 +1638,12 @@ static void OpponentHandleChoosePokemon(void)
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
             {
-                bank2 = bank1 = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+                bank2 = bank1 = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
             }
             else
             {
-                bank1 = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
-                bank2 = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
+                bank1 = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
+                bank2 = GetBankByPosition(B_POSITION_OPPONENT_RIGHT);
             }
 
             if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_x800000))

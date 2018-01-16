@@ -26,7 +26,7 @@
 #define ANIM_SPRITE_INDEX_COUNT 8
 
 extern u8 gBankAttacker;
-extern u8 gBankTarget;
+extern u8 gBankDefender;
 extern u16 gBattle_WIN0H;
 extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1H;
@@ -222,7 +222,7 @@ void ClearBattleAnimationVars(void)
 void DoMoveAnim(u16 move)
 {
     gAnimBankAttacker = gBankAttacker;
-    gAnimBankTarget = gBankTarget;
+    gAnimBankTarget = gBankDefender;
     LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
 }
 

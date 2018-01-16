@@ -111,14 +111,14 @@ extern u16 gBattleWeather;
 extern u16 gPauseCounterBattle;
 extern u16 gRandomTurnNumber;
 extern u8 gActiveBank;
-extern u8 gNoOfAllBanks;
+extern u8 gBattleBanksCount;
 extern u8 gBankAttacker;
-extern u8 gBankTarget;
+extern u8 gBankDefender;
 extern u8 gLeveledUpInBattle;
 extern u8 gAbsentBankFlags;
 extern u32 gBattleExecBuffer;
 extern u8 gMultiHitCounter;
-extern u8 gBattleMoveFlags;
+extern u8 gMoveResultFlags;
 extern s32 gBattleMoveDamage;
 extern const u8* gPalaceSelectionBattleScripts[BATTLE_BANKS_COUNT];
 extern u16 gLastPrintedMoves[BATTLE_BANKS_COUNT];
@@ -130,7 +130,7 @@ extern u16 gLockedMoves[BATTLE_BANKS_COUNT];
 extern u8 gLastHitBy[BATTLE_BANKS_COUNT];
 extern u8 gUnknown_02024284[BATTLE_BANKS_COUNT];
 extern u32 gStatuses3[BATTLE_BANKS_COUNT];
-extern u16 gSideAffecting[2];
+extern u16 gSideStatuses[2];
 extern u16 gCurrentMove;
 extern u8 gActionSelectionCursor[BATTLE_BANKS_COUNT];
 extern u8 gMoveSelectionCursor[BATTLE_BANKS_COUNT];
@@ -291,16 +291,16 @@ static void (* const sTurnActionsFuncsTable[])(void) =
 static void (* const sEndTurnFuncsTable[])(void) =
 {
     HandleEndTurn_ContinueBattle,       // battle outcome 0
-    HandleEndTurn_BattleWon,            // BATTLE_WON
-    HandleEndTurn_BattleLost,           // BATTLE_LOST
-    HandleEndTurn_BattleLost,           // BATTLE_DREW
-    HandleEndTurn_RanFromBattle,        // BATTLE_RAN
-    HandleEndTurn_FinishBattle,         // BATTLE_PLAYER_TELEPORTED
-    HandleEndTurn_MonFled,              // BATTLE_POKE_FLED
-    HandleEndTurn_FinishBattle,         // BATTLE_CAUGHT
+    HandleEndTurn_BattleWon,            // B_OUTCOME_WON
+    HandleEndTurn_BattleLost,           // B_OUTCOME_LOST
+    HandleEndTurn_BattleLost,           // B_OUTCOME_DREW
+    HandleEndTurn_RanFromBattle,        // B_OUTCOME_RAN
+    HandleEndTurn_FinishBattle,         // B_OUTCOME_PLAYER_TELEPORTED
+    HandleEndTurn_MonFled,              // B_OUTCOME_POKE_FLED
+    HandleEndTurn_FinishBattle,         // B_OUTCOME_CAUGHT_POKE
     HandleEndTurn_FinishBattle,         // battle outcome 8
-    HandleEndTurn_FinishBattle,         // BATTLE_FORFEITED
-    HandleEndTurn_FinishBattle,         // BATTLE_OPPONENT_TELEPORTED
+    HandleEndTurn_FinishBattle,         // B_OUTCOME_FORFEITED
+    HandleEndTurn_FinishBattle,         // B_OUTCOME_POKE_TELEPORTED
 };
 
 const u8 gStatusConditionString_PoisonJpn[8] = _("どく$$$$$");
@@ -1586,7 +1586,7 @@ void BattleMainCB2(void)
 
     if (gMain.heldKeys & B_BUTTON && gBattleTypeFlags & BATTLE_TYPE_RECORDED && sub_8186450())
     {
-        gSpecialVar_Result = gBattleOutcome = BATTLE_PLAYER_TELEPORTED;
+        gSpecialVar_Result = gBattleOutcome = B_OUTCOME_PLAYER_TELEPORTED;
         ResetPaletteFadeControl();
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         SetMainCallback2(CB2_QuitRecordedBattle);
@@ -2720,7 +2720,7 @@ static void BattleMainCB1(void)
 {
     gBattleMainFunc();
 
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+    for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
         gBattleBankFunc[gActiveBank]();
 }
 
@@ -2756,7 +2756,7 @@ static void BattleStartClearSetData(void)
 
     for (i = 0; i < 2; i++)
     {
-        gSideAffecting[i] = 0;
+        gSideStatuses[i] = 0;
 
         dataPtr = (u8 *)&gSideTimers[i];
         for (j = 0; j < sizeof(struct SideTimer); j++)
@@ -2764,7 +2764,7 @@ static void BattleStartClearSetData(void)
     }
 
     gBankAttacker = 0;
-    gBankTarget = 0;
+    gBankDefender = 0;
     gBattleWeather = 0;
 
     dataPtr = (u8 *)&gWishFutureKnock;
@@ -2850,7 +2850,7 @@ void SwitchInClearSetData(void)
     {
         for (i = 0; i < BATTLE_STATS_NO; i++)
             gBattleMons[gActiveBank].statStages[i] = 6;
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattleBanksCount; i++)
         {
             if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].bankPreventingEscape == gActiveBank)
                 gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
@@ -2866,7 +2866,7 @@ void SwitchInClearSetData(void)
         gBattleMons[gActiveBank].status2 &= (STATUS2_CONFUSION | STATUS2_FOCUS_ENERGY | STATUS2_SUBSTITUTE | STATUS2_ESCAPE_PREVENTION | STATUS2_CURSED);
         gStatuses3[gActiveBank] &= (STATUS3_LEECHSEED_BANK | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED | STATUS3_MUDSPORT | STATUS3_WATERSPORT);
 
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattleBanksCount; i++)
         {
             if (GetBankSide(gActiveBank) != GetBankSide(i)
              && (gStatuses3[i] & STATUS3_ALWAYS_HITS) != 0
@@ -2883,7 +2883,7 @@ void SwitchInClearSetData(void)
         gStatuses3[gActiveBank] = 0;
     }
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
     {
         if (gBattleMons[i].status2 & STATUS2_INFATUATED_WITH(gActiveBank))
             gBattleMons[i].status2 &= ~(STATUS2_INFATUATED_WITH(gActiveBank));
@@ -2907,7 +2907,7 @@ void SwitchInClearSetData(void)
         gDisableStructs[gActiveBank].bankPreventingEscape = disableStructCopy.bankPreventingEscape;
     }
 
-    gBattleMoveFlags = 0;
+    gMoveResultFlags = 0;
     gDisableStructs[gActiveBank].isFirstTurn = 2;
     gDisableStructs[gActiveBank].truantUnknownBit = disableStructCopy.truantUnknownBit;
     gLastMoves[gActiveBank] = 0;
@@ -2930,7 +2930,7 @@ void SwitchInClearSetData(void)
 
     gBattleStruct->field_92 &= ~(gBitTable[gActiveBank]);
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
     {
         if (i != gActiveBank && GetBankSide(i) != GetBankSide(gActiveBank))
         {
@@ -2963,7 +2963,7 @@ void FaintClearSetData(void)
     gBattleMons[gActiveBank].status2 = 0;
     gStatuses3[gActiveBank] = 0;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
     {
         if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].bankPreventingEscape == gActiveBank)
             gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
@@ -3025,7 +3025,7 @@ void FaintClearSetData(void)
 
     gBattleStruct->field_92 &= ~(gBitTable[gActiveBank]);
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
     {
         if (i != gActiveBank && GetBankSide(i) != GetBankSide(gActiveBank))
         {
@@ -3059,7 +3059,7 @@ static void BattleIntroGetMonsData(void)
         if (gBattleExecBuffer == 0)
         {
             gBattleCommunication[1]++;
-            if (gBattleCommunication[1] == gNoOfAllBanks)
+            if (gBattleCommunication[1] == gBattleBanksCount)
                 gBattleMainFunc = BattleIntroPrepareBackgroundSlide;
             else
                 gBattleCommunication[MULTIUSE_STATE] = 0;
@@ -3072,7 +3072,7 @@ static void BattleIntroPrepareBackgroundSlide(void)
 {
     if (gBattleExecBuffer == 0)
     {
-        gActiveBank = GetBankByIdentity(0);
+        gActiveBank = GetBankByPosition(0);
         EmitIntroSlide(0, gBattleTerrain);
         MarkBufferBankForExecution(gActiveBank);
         gBattleMainFunc = BattleIntroDrawTrainersOrMonsSprites;
@@ -3089,7 +3089,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
     if (gBattleExecBuffer)
         return;
 
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+    for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
         if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI)
          && GetBankSide(gActiveBank) == SIDE_PLAYER)
@@ -3203,7 +3203,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
                 hpStatus[i].status = GetMonData(&gEnemyParty[i], MON_DATA_STATUS);
             }
         }
-        gActiveBank = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+        gActiveBank = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
         EmitDrawPartyStatusSummary(0, hpStatus, 0x80);
         MarkBufferBankForExecution(gActiveBank);
 
@@ -3221,7 +3221,7 @@ static void BattleIntroDrawPartySummaryScreens(void)
                 hpStatus[i].status = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
             }
         }
-        gActiveBank = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
+        gActiveBank = GetBankByPosition(B_POSITION_PLAYER_LEFT);
         EmitDrawPartyStatusSummary(0, hpStatus, 0x80);
         MarkBufferBankForExecution(gActiveBank);
 
@@ -3257,7 +3257,7 @@ static void BattleIntroPrintTrainerWantsToBattle(void)
 {
     if (gBattleExecBuffer == 0)
     {
-        gActiveBank = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+        gActiveBank = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
         PrepareStringBattle(STRINGID_INTROMSG, gActiveBank);
         gBattleMainFunc = BattleIntroPrintOpponentSendsOut;
     }
@@ -3291,7 +3291,7 @@ static void BattleIntroPrintOpponentSendsOut(void)
     else
         identity = B_POSITION_OPPONENT_LEFT;
 
-    PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByIdentity(identity));
+    PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByPosition(identity));
     gBattleMainFunc = BattleIntroOpponent1SendsOutMonAnimation;
 }
 
@@ -3311,7 +3311,7 @@ static void BattleIntroOpponent2SendsOutMonAnimation(void)
     else
         identity = B_POSITION_OPPONENT_RIGHT;
 
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+    for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
         if (GetBankPosition(gActiveBank) == identity)
         {
@@ -3343,7 +3343,7 @@ static void BattleIntroOpponent1SendsOutMonAnimation(void)
     if (gBattleExecBuffer)
         return;
 
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+    for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
         if (GetBankPosition(gActiveBank) == identity)
         {
@@ -3400,7 +3400,7 @@ _0803B29A:\n\
 	bne _0803B2F2\n\
 	ldr r0, =gActiveBank\n\
 	strb r2, [r0]\n\
-	ldr r1, =gNoOfAllBanks\n\
+	ldr r1, =gBattleBanksCount\n\
 	adds r4, r0, 0\n\
 	ldrb r1, [r1]\n\
 	cmp r2, r1\n\
@@ -3427,7 +3427,7 @@ _0803B2D8:\n\
 	ldrb r0, [r6]\n\
 	adds r0, 0x1\n\
 	strb r0, [r6]\n\
-	ldr r1, =gNoOfAllBanks\n\
+	ldr r1, =gBattleBanksCount\n\
 	lsls r0, 24\n\
 	lsrs r0, 24\n\
 	ldr r4, =gActiveBank\n\
@@ -3453,7 +3453,7 @@ static void BattleIntroRecordMonsToDex(void)
 {
     if (gBattleExecBuffer == 0)
     {
-        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+        for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
         {
             if (GetBankSide(gActiveBank) == SIDE_OPPONENT
              && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
@@ -3494,7 +3494,7 @@ static void BattleIntroPrintPlayerSendsOut(void)
             identity = B_POSITION_PLAYER_LEFT;
 
         if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
-            PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByIdentity(identity));
+            PrepareStringBattle(STRINGID_INTROSENDOUT, GetBankByPosition(identity));
 
         gBattleMainFunc = BattleIntroPlayer1SendsOutMonAnimation;
     }
@@ -3516,7 +3516,7 @@ static void BattleIntroPlayer2SendsOutMonAnimation(void)
     else
         identity = B_POSITION_PLAYER_RIGHT;
 
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+    for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
         if (GetBankPosition(gActiveBank) == identity)
         {
@@ -3551,7 +3551,7 @@ static void BattleIntroPlayer1SendsOutMonAnimation(void)
     if (gBattleExecBuffer)
         return;
 
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+    for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
         if (GetBankPosition(gActiveBank) == identity)
         {
@@ -3576,7 +3576,7 @@ void sub_803B598(void) // unused
 {
     if (gBattleExecBuffer == 0)
     {
-        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+        for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
         {
             if (GetBankSide(gActiveBank) == SIDE_PLAYER)
             {
@@ -3604,11 +3604,11 @@ static void TryDoEventsBeforeFirstTurn(void)
 
     if (gBattleStruct->switchInAbilitiesCounter == 0)
     {
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattleBanksCount; i++)
             gBanksByTurnOrder[i] = i;
-        for (i = 0; i < gNoOfAllBanks - 1; i++)
+        for (i = 0; i < gBattleBanksCount - 1; i++)
         {
-            for (j = i + 1; j < gNoOfAllBanks; j++)
+            for (j = i + 1; j < gBattleBanksCount; j++)
             {
                 if (GetWhoStrikesFirst(gBanksByTurnOrder[i], gBanksByTurnOrder[j], TRUE) != 0)
                     SwapTurnOrder(i, j);
@@ -3622,7 +3622,7 @@ static void TryDoEventsBeforeFirstTurn(void)
         return;
     }
     // check all switch in abilities happening from the fastest mon to slowest
-    while (gBattleStruct->switchInAbilitiesCounter < gNoOfAllBanks)
+    while (gBattleStruct->switchInAbilitiesCounter < gBattleBanksCount)
     {
         if (AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gBanksByTurnOrder[gBattleStruct->switchInAbilitiesCounter], 0, 0, 0) != 0)
             effect++;
@@ -3637,7 +3637,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     if (AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0) != 0)
         return;
     // check all switch in items having effect from the fastest mon to slowest
-    while (gBattleStruct->switchInItemsCounter < gNoOfAllBanks)
+    while (gBattleStruct->switchInItemsCounter < gBattleBanksCount)
     {
         if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gBanksByTurnOrder[gBattleStruct->switchInItemsCounter], 0) != 0)
             effect++;
@@ -3663,7 +3663,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     for (i = 0; i < BATTLE_COMMUNICATION_ENTRIES_COUNT; i++)
         gBattleCommunication[i] = 0;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
         gBattleMons[i].status2 &= ~(STATUS2_FLINCHED);
 
     *(&gBattleStruct->turnEffectsTracker) = 0;
@@ -3673,7 +3673,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     gBattleScripting.atk49_state = 0;
     gBattleStruct->faintedActionsState = 0;
     gBattleStruct->turncountersTracker = 0;
-    gBattleMoveFlags = 0;
+    gMoveResultFlags = 0;
 
     gRandomTurnNumber = Random();
 
@@ -3693,10 +3693,10 @@ static void HandleEndTurn_ContinueBattle(void)
         gBattleMainFunc = BattleTurnPassed;
         for (i = 0; i < BATTLE_COMMUNICATION_ENTRIES_COUNT; i++)
             gBattleCommunication[i] = 0;
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattleBanksCount; i++)
         {
             gBattleMons[i].status2 &= ~(STATUS2_FLINCHED);
-            if ((gBattleMons[i].status1 & STATUS_SLEEP) && (gBattleMons[i].status2 & STATUS2_MULTIPLETURNS))
+            if ((gBattleMons[i].status1 & STATUS1_SLEEP) && (gBattleMons[i].status2 & STATUS2_MULTIPLETURNS))
                 CancelMultiTurnMoves(i);
         }
         gBattleStruct->turnEffectsTracker = 0;
@@ -3704,7 +3704,7 @@ static void HandleEndTurn_ContinueBattle(void)
         gBattleStruct->wishPerishSongState = 0;
         gBattleStruct->wishPerishSongBank = 0;
         gBattleStruct->turncountersTracker = 0;
-        gBattleMoveFlags = 0;
+        gMoveResultFlags = 0;
     }
 }
 
@@ -3735,7 +3735,7 @@ void BattleTurnPassed(void)
     gBattleScripting.animTargetsHit = 0;
     gBattleScripting.atk49_state = 0;
     gBattleMoveDamage = 0;
-    gBattleMoveFlags = 0;
+    gMoveResultFlags = 0;
 
     for (i = 0; i < 5; i++)
         gBattleCommunication[i] = 0;
@@ -3753,7 +3753,7 @@ void BattleTurnPassed(void)
         gBattleStruct->field_DA++;
     }
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
     {
         gActionForBanks[i] = ACTION_INIT_VALUE;
         gChosenMovesByBanks[i] = MOVE_NONE;
@@ -3795,7 +3795,7 @@ u8 IsRunningFromBattleImpossible(void)
 
     side = GetBankSide(gActiveBank);
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
     {
         if (side != GetBankSide(i)
          && gBattleMons[i].ability == ABILITY_SHADOW_TAG)
@@ -3889,7 +3889,7 @@ static void HandleTurnActionSelectionState(void)
     s32 i;
 
     gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+    for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
         u8 identity = GetBankPosition(gActiveBank);
         switch (gBattleCommunication[gActiveBank])
@@ -3902,8 +3902,8 @@ static void HandleTurnActionSelectionState(void)
             *(gBattleStruct->monToSwitchIntoId + gActiveBank) = 6;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI
                 || !(identity & BIT_MON)
-                || gBattleStruct->field_91 & gBitTable[GetBankByIdentity(identity ^ BIT_MON)]
-                || gBattleCommunication[GetBankByIdentity(identity ^ BIT_MON)] == 5)
+                || gBattleStruct->field_91 & gBitTable[GetBankByPosition(identity ^ BIT_MON)]
+                || gBattleCommunication[GetBankByPosition(identity ^ BIT_MON)] == 5)
             {
                 if (gBattleStruct->field_91 & gBitTable[gActiveBank])
                 {
@@ -4041,38 +4041,38 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case ACTION_CANCEL_PARTNER:
                     gBattleCommunication[gActiveBank] = 7;
-                    gBattleCommunication[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)] = 1;
+                    gBattleCommunication[GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON)] = 1;
                     RecordedBattle_ClearBankAction(gActiveBank, 1);
-                    if (gBattleMons[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)].status2 & STATUS2_MULTIPLETURNS
-                        || gBattleMons[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)].status2 & STATUS2_RECHARGE)
+                    if (gBattleMons[GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON)].status2 & STATUS2_MULTIPLETURNS
+                        || gBattleMons[GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON)].status2 & STATUS2_RECHARGE)
                     {
                         EmitCmd50(0);
                         MarkBufferBankForExecution(gActiveBank);
                         return;
                     }
-                    else if (gActionForBanks[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)] == ACTION_SWITCH)
+                    else if (gActionForBanks[GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON)] == ACTION_SWITCH)
                     {
-                        RecordedBattle_ClearBankAction(GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON), 2);
+                        RecordedBattle_ClearBankAction(GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON), 2);
                     }
-                    else if (gActionForBanks[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)] == ACTION_RUN)
+                    else if (gActionForBanks[GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON)] == ACTION_RUN)
                     {
-                        RecordedBattle_ClearBankAction(GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON), 1);
+                        RecordedBattle_ClearBankAction(GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON), 1);
                     }
-                    else if (gActionForBanks[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)] == ACTION_USE_MOVE
-                             && (gProtectStructs[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)].onlyStruggle
-                                || gDisableStructs[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)].encoredMove))
+                    else if (gActionForBanks[GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON)] == ACTION_USE_MOVE
+                             && (gProtectStructs[GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON)].onlyStruggle
+                                || gDisableStructs[GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON)].encoredMove))
                     {
-                        RecordedBattle_ClearBankAction(GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON), 1);
+                        RecordedBattle_ClearBankAction(GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON), 1);
                     }
                     else if (gBattleTypeFlags & BATTLE_TYPE_PALACE
-                             && gActionForBanks[GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON)] == ACTION_USE_MOVE)
+                             && gActionForBanks[GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON)] == ACTION_USE_MOVE)
                     {
                         gRngValue = gBattlePalaceMoveSelectionRngValue;
-                        RecordedBattle_ClearBankAction(GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON), 1);
+                        RecordedBattle_ClearBankAction(GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON), 1);
                     }
                     else
                     {
-                        RecordedBattle_ClearBankAction(GetBankByIdentity(GetBankPosition(gActiveBank) ^ BIT_MON), 3);
+                        RecordedBattle_ClearBankAction(GetBankByPosition(GetBankPosition(gActiveBank) ^ BIT_MON), 3);
                     }
                     EmitCmd50(0);
                     MarkBufferBankForExecution(gActiveBank);
@@ -4226,7 +4226,7 @@ static void HandleTurnActionSelectionState(void)
 
                 if (((gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE)) != BATTLE_TYPE_DOUBLE)
                     || (identity & BIT_MON)
-                    || (*(&gBattleStruct->field_91) & gBitTable[GetBankByIdentity(identity ^ BIT_MON)]))
+                    || (*(&gBattleStruct->field_91) & gBitTable[GetBankByPosition(identity ^ BIT_MON)]))
                 {
                     EmitLinkStandbyMsg(0, 0, i);
                 }
@@ -4296,14 +4296,14 @@ static void HandleTurnActionSelectionState(void)
     }
 
     // check if everyone chose actions
-    if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gNoOfAllBanks)
+    if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattleBanksCount)
     {
         sub_818603C(1);
         gBattleMainFunc = SetActionsAndBanksTurnOrder;
 
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattleBanksCount; i++)
             {
                 if (gActionForBanks[i] == ACTION_SWITCH)
                     sub_80571DC(i, *(gBattleStruct->monToSwitchIntoId + i));
@@ -4316,13 +4316,13 @@ static bool8 sub_803CDB8(void)
 {
     s32 i, var;
 
-    for (var = 0, i = 0; i < gNoOfAllBanks; i++)
+    for (var = 0, i = 0; i < gBattleBanksCount; i++)
     {
         if (gBattleCommunication[i] == 5)
             var++;
     }
 
-    if (var + 1 == gNoOfAllBanks)
+    if (var + 1 == gBattleBanksCount)
         return TRUE;
     else
         return FALSE;
@@ -4411,7 +4411,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves)
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
         speedBank1 /= 2;
 
-    if (gBattleMons[bank1].status1 & STATUS_PARALYSIS)
+    if (gBattleMons[bank1].status1 & STATUS1_PARALYSIS)
         speedBank1 /= 4;
 
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
@@ -4445,7 +4445,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreChosenMoves)
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
         speedBank2 /= 2;
 
-    if (gBattleMons[bank2].status1 & STATUS_PARALYSIS)
+    if (gBattleMons[bank2].status1 & STATUS1_PARALYSIS)
         speedBank2 /= 4;
 
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
@@ -4518,7 +4518,7 @@ static void SetActionsAndBanksTurnOrder(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
     {
-        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+        for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
         {
             gActionsByTurnOrder[var] = gActionForBanks[gActiveBank];
             gBanksByTurnOrder[var] = gActiveBank;
@@ -4529,7 +4529,7 @@ static void SetActionsAndBanksTurnOrder(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+            for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
             {
                 if (gActionForBanks[gActiveBank] == ACTION_RUN)
                 {
@@ -4557,7 +4557,7 @@ static void SetActionsAndBanksTurnOrder(void)
             gActionsByTurnOrder[0] = gActionForBanks[gActiveBank];
             gBanksByTurnOrder[0] = gActiveBank;
             var = 1;
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattleBanksCount; i++)
             {
                 if (i != gActiveBank)
                 {
@@ -4572,7 +4572,7 @@ static void SetActionsAndBanksTurnOrder(void)
         }
         else
         {
-            for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+            for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
             {
                 if (gActionForBanks[gActiveBank] == ACTION_USE_ITEM || gActionForBanks[gActiveBank] == ACTION_SWITCH)
                 {
@@ -4581,7 +4581,7 @@ static void SetActionsAndBanksTurnOrder(void)
                     var++;
                 }
             }
-            for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+            for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
             {
                 if (gActionForBanks[gActiveBank] != ACTION_USE_ITEM && gActionForBanks[gActiveBank] != ACTION_SWITCH)
                 {
@@ -4590,9 +4590,9 @@ static void SetActionsAndBanksTurnOrder(void)
                     var++;
                 }
             }
-            for (i = 0; i < gNoOfAllBanks - 1; i++)
+            for (i = 0; i < gBattleBanksCount - 1; i++)
             {
-                for (j = i + 1; j < gNoOfAllBanks; j++)
+                for (j = i + 1; j < gBattleBanksCount; j++)
                 {
                     u8 bank1 = gBanksByTurnOrder[i];
                     u8 bank2 = gBanksByTurnOrder[j];
@@ -4617,7 +4617,7 @@ static void TurnValuesCleanUp(bool8 var0)
     s32 i;
     u8 *dataPtr;
 
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+    for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
         if (var0)
         {
@@ -4651,7 +4651,7 @@ static void TurnValuesCleanUp(bool8 var0)
 
 static void SpecialStatusesClear(void)
 {
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+    for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
     {
         s32 i;
         u8 *dataPtr = (u8*)(&gSpecialStatuses[gActiveBank]);
@@ -4665,12 +4665,12 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 {
     if (!(gHitMarker & HITMARKER_RUN))
     {
-        while (gBattleStruct->focusPunchBank < gNoOfAllBanks)
+        while (gBattleStruct->focusPunchBank < gBattleBanksCount)
         {
             gActiveBank = gBankAttacker = gBattleStruct->focusPunchBank;
             gBattleStruct->focusPunchBank++;
             if (gChosenMovesByBanks[gActiveBank] == MOVE_FOCUS_PUNCH
-                && !(gBattleMons[gActiveBank].status1 & STATUS_SLEEP)
+                && !(gBattleMons[gActiveBank].status1 & STATUS1_SLEEP)
                 && !(gDisableStructs[gBankAttacker].truantCounter)
                 && !(gProtectStructs[gActiveBank].onlyStruggle))
             {
@@ -4704,7 +4704,7 @@ static void RunTurnActionsFunctions(void)
     *(&gBattleStruct->savedTurnActionNumber) = gCurrentTurnActionNumber;
     sTurnActionsFuncsTable[gCurrentActionFuncId]();
 
-    if (gCurrentTurnActionNumber >= gNoOfAllBanks) // everyone did their actions, turn finished
+    if (gCurrentTurnActionNumber >= gBattleBanksCount) // everyone did their actions, turn finished
     {
         gHitMarker &= ~(HITMARKER_x100000);
         gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
@@ -4727,9 +4727,9 @@ static void HandleEndTurn_BattleWon(void)
     {
         gSpecialVar_Result = gBattleOutcome;
         gBattleTextBuff1[0] = gBattleOutcome;
-        gBankAttacker = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
+        gBankAttacker = GetBankByPosition(B_POSITION_PLAYER_LEFT);
         gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-        gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
+        gBattleOutcome &= ~(B_OUTCOME_LINK_BATTLE_RAN);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
             && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_x4000000 | BATTLE_TYPE_EREADER_TRAINER))
@@ -4785,24 +4785,24 @@ static void HandleEndTurn_BattleLost(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
         {
-            if (gBattleOutcome & OUTCOME_LINK_BATTLE_RUN)
+            if (gBattleOutcome & B_OUTCOME_LINK_BATTLE_RAN)
             {
                 gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeitedLinkBattle;
-                gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
+                gBattleOutcome &= ~(B_OUTCOME_LINK_BATTLE_RAN);
                 gSaveBlock2Ptr->field_CA9_b = 1;
             }
             else
             {
                 gBattlescriptCurrInstr = BattleScript_82DAA0B;
-                gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
+                gBattleOutcome &= ~(B_OUTCOME_LINK_BATTLE_RAN);
             }
         }
         else
         {
             gBattleTextBuff1[0] = gBattleOutcome;
-            gBankAttacker = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
+            gBankAttacker = GetBankByPosition(B_POSITION_PLAYER_LEFT);
             gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-            gBattleOutcome &= ~(OUTCOME_LINK_BATTLE_RUN);
+            gBattleOutcome &= ~(B_OUTCOME_LINK_BATTLE_RAN);
         }
     }
     else
@@ -4820,13 +4820,13 @@ static void HandleEndTurn_RanFromBattle(void)
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
-        gBattleOutcome = BATTLE_FORFEITED;
+        gBattleOutcome = B_OUTCOME_FORFEITED;
         gSaveBlock2Ptr->field_CA9_b = 1;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
     {
         gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
-        gBattleOutcome = BATTLE_FORFEITED;
+        gBattleOutcome = B_OUTCOME_FORFEITED;
     }
     else
     {
@@ -4869,7 +4869,7 @@ static void HandleEndTurn_FinishBattle(void)
                                   | BATTLE_TYPE_WALLY_TUTORIAL
                                   | BATTLE_TYPE_FRONTIER)))
         {
-            for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+            for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
             {
                 if (GetBankSide(gActiveBank) == SIDE_PLAYER)
                 {
@@ -4919,7 +4919,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
     if (!gPaletteFade.active)
     {
         ResetSpriteData();
-        if (gLeveledUpInBattle == 0 || gBattleOutcome != BATTLE_WON)
+        if (gLeveledUpInBattle == 0 || gBattleOutcome != B_OUTCOME_WON)
         {
             gBattleMainFunc = ReturnFromBattleToOverworld;
             return;
@@ -4994,7 +4994,7 @@ static void ReturnFromBattleToOverworld(void)
     if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
     {
         UpdateRoamerHPStatus(&gEnemyParty[0]);
-        if ((gBattleOutcome & BATTLE_WON) || gBattleOutcome == BATTLE_CAUGHT)
+        if ((gBattleOutcome & B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT_POKE)
             SetRoamerInactive();
     }
 
@@ -5039,7 +5039,7 @@ static void HandleAction_UseMove(void)
     gCritMultiplier = 1;
     gBattleScripting.dmgMultiplier = 1;
     gBattleStruct->atkCancellerTracker = 0;
-    gBattleMoveFlags = 0;
+    gMoveResultFlags = 0;
     gMultiHitCounter = 0;
     gBattleCommunication[6] = 0;
     gCurrMovePos = gUnknown_020241E9 = *(gBattleStruct->chosenMovePositions + gBankAttacker);
@@ -5100,7 +5100,7 @@ static void HandleAction_UseMove(void)
         && GetBankSide(gBankAttacker) != GetBankSide(gSideTimers[side].followmeTarget)
         && gBattleMons[gSideTimers[side].followmeTarget].hp != 0)
     {
-        gBankTarget = gSideTimers[side].followmeTarget;
+        gBankDefender = gSideTimers[side].followmeTarget;
     }
     else if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
              && gSideTimers[side].followmeTimer == 0
@@ -5110,7 +5110,7 @@ static void HandleAction_UseMove(void)
              && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
     {
         side = GetBankSide(gBankAttacker);
-        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+        for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
         {
             if (side != GetBankSide(gActiveBank)
                 && *(gBattleStruct->moveTarget + gBankAttacker) != gActiveBank
@@ -5127,34 +5127,34 @@ static void HandleAction_UseMove(void)
                 if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
                 {
                     if (Random() & 1)
-                        gBankTarget = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+                        gBankDefender = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
                     else
-                        gBankTarget = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
+                        gBankDefender = GetBankByPosition(B_POSITION_OPPONENT_RIGHT);
                 }
                 else
                 {
                     if (Random() & 1)
-                        gBankTarget = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
+                        gBankDefender = GetBankByPosition(B_POSITION_PLAYER_LEFT);
                     else
-                        gBankTarget = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
+                        gBankDefender = GetBankByPosition(B_POSITION_PLAYER_RIGHT);
                 }
             }
             else
             {
-                gBankTarget = *(gBattleStruct->moveTarget + gBankAttacker);
+                gBankDefender = *(gBattleStruct->moveTarget + gBankAttacker);
             }
 
-            if (gAbsentBankFlags & gBitTable[gBankTarget])
+            if (gAbsentBankFlags & gBitTable[gBankDefender])
             {
-                if (GetBankSide(gBankAttacker) != GetBankSide(gBankTarget))
+                if (GetBankSide(gBankAttacker) != GetBankSide(gBankDefender))
                 {
-                    gBankTarget = GetBankByIdentity(GetBankPosition(gBankTarget) ^ BIT_MON);
+                    gBankDefender = GetBankByPosition(GetBankPosition(gBankDefender) ^ BIT_MON);
                 }
                 else
                 {
-                    gBankTarget = GetBankByIdentity(GetBankPosition(gBankAttacker) ^ BIT_SIDE);
-                    if (gAbsentBankFlags & gBitTable[gBankTarget])
-                        gBankTarget = GetBankByIdentity(GetBankPosition(gBankTarget) ^ BIT_MON);
+                    gBankDefender = GetBankByPosition(GetBankPosition(gBankAttacker) ^ BIT_SIDE);
+                    if (gAbsentBankFlags & gBitTable[gBankDefender])
+                        gBankDefender = GetBankByPosition(GetBankPosition(gBankDefender) ^ BIT_MON);
                 }
             }
         }
@@ -5163,7 +5163,7 @@ static void HandleAction_UseMove(void)
             gActiveBank = gBanksByTurnOrder[var];
             RecordAbilityBattle(gActiveBank, gBattleMons[gActiveBank].ability);
             gSpecialStatuses[gActiveBank].lightningRodRedirected = 1;
-            gBankTarget = gActiveBank;
+            gBankDefender = gActiveBank;
         }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
@@ -5172,38 +5172,38 @@ static void HandleAction_UseMove(void)
         if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
         {
             if (Random() & 1)
-                gBankTarget = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+                gBankDefender = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
             else
-                gBankTarget = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
+                gBankDefender = GetBankByPosition(B_POSITION_OPPONENT_RIGHT);
         }
         else
         {
             if (Random() & 1)
-                gBankTarget = GetBankByIdentity(B_POSITION_PLAYER_LEFT);
+                gBankDefender = GetBankByPosition(B_POSITION_PLAYER_LEFT);
             else
-                gBankTarget = GetBankByIdentity(B_POSITION_PLAYER_RIGHT);
+                gBankDefender = GetBankByPosition(B_POSITION_PLAYER_RIGHT);
         }
 
-        if (gAbsentBankFlags & gBitTable[gBankTarget]
-            && GetBankSide(gBankAttacker) != GetBankSide(gBankTarget))
+        if (gAbsentBankFlags & gBitTable[gBankDefender]
+            && GetBankSide(gBankAttacker) != GetBankSide(gBankDefender))
         {
-            gBankTarget = GetBankByIdentity(GetBankPosition(gBankTarget) ^ BIT_MON);
+            gBankDefender = GetBankByPosition(GetBankPosition(gBankDefender) ^ BIT_MON);
         }
     }
     else
     {
-        gBankTarget = *(gBattleStruct->moveTarget + gBankAttacker);
-        if (gAbsentBankFlags & gBitTable[gBankTarget])
+        gBankDefender = *(gBattleStruct->moveTarget + gBankAttacker);
+        if (gAbsentBankFlags & gBitTable[gBankDefender])
         {
-            if (GetBankSide(gBankAttacker) != GetBankSide(gBankTarget))
+            if (GetBankSide(gBankAttacker) != GetBankSide(gBankDefender))
             {
-                gBankTarget = GetBankByIdentity(GetBankPosition(gBankTarget) ^ BIT_MON);
+                gBankDefender = GetBankByPosition(GetBankPosition(gBankDefender) ^ BIT_MON);
             }
             else
             {
-                gBankTarget = GetBankByIdentity(GetBankPosition(gBankAttacker) ^ BIT_SIDE);
-                if (gAbsentBankFlags & gBitTable[gBankTarget])
-                    gBankTarget = GetBankByIdentity(GetBankPosition(gBankTarget) ^ BIT_MON);
+                gBankDefender = GetBankByPosition(GetBankPosition(gBankAttacker) ^ BIT_SIDE);
+                if (gAbsentBankFlags & gBitTable[gBankDefender])
+                    gBankDefender = GetBankByPosition(GetBankPosition(gBankDefender) ^ BIT_MON);
             }
         }
     }
@@ -5260,7 +5260,7 @@ static void HandleAction_Switch(void)
 
 static void HandleAction_UseItem(void)
 {
-    gBankAttacker = gBankTarget = gBanksByTurnOrder[gCurrentTurnActionNumber];
+    gBankAttacker = gBankDefender = gBanksByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     ClearFuryCutterDestinyBondGrudge(gBankAttacker);
@@ -5410,8 +5410,8 @@ bool8 TryRunFromBattle(u8 bank)
 
     if (effect)
     {
-        gCurrentTurnActionNumber = gNoOfAllBanks;
-        gBattleOutcome = BATTLE_RAN;
+        gCurrentTurnActionNumber = gBattleBanksCount;
+        gBattleOutcome = B_OUTCOME_RAN;
     }
 
     return effect;
@@ -5423,23 +5423,23 @@ static void HandleAction_Run(void)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
     {
-        gCurrentTurnActionNumber = gNoOfAllBanks;
+        gCurrentTurnActionNumber = gBattleBanksCount;
 
-        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+        for (gActiveBank = 0; gActiveBank < gBattleBanksCount; gActiveBank++)
         {
             if (GetBankSide(gActiveBank) == SIDE_PLAYER)
             {
                 if (gActionForBanks[gActiveBank] == ACTION_RUN)
-                    gBattleOutcome |= BATTLE_LOST;
+                    gBattleOutcome |= B_OUTCOME_LOST;
             }
             else
             {
                 if (gActionForBanks[gActiveBank] == ACTION_RUN)
-                    gBattleOutcome |= BATTLE_WON;
+                    gBattleOutcome |= B_OUTCOME_WON;
             }
         }
 
-        gBattleOutcome |= OUTCOME_LINK_BATTLE_RUN;
+        gBattleOutcome |= B_OUTCOME_LINK_BATTLE_RAN;
         gSaveBlock2Ptr->field_CA9_b = 1;
     }
     else
@@ -5464,8 +5464,8 @@ static void HandleAction_Run(void)
             }
             else
             {
-                gCurrentTurnActionNumber = gNoOfAllBanks;
-                gBattleOutcome = BATTLE_POKE_FLED;
+                gCurrentTurnActionNumber = gBattleBanksCount;
+                gBattleOutcome = B_OUTCOME_POKE_FLED;
             }
         }
     }
@@ -5546,8 +5546,8 @@ static void HandleAction_SafriZoneRun(void)
 {
     gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
     PlaySE(SE_NIGERU);
-    gCurrentTurnActionNumber = gNoOfAllBanks;
-    gBattleOutcome = BATTLE_RAN;
+    gCurrentTurnActionNumber = gBattleBanksCount;
+    gBattleOutcome = B_OUTCOME_RAN;
 }
 
 static void HandleAction_Action9(void)
@@ -5597,7 +5597,7 @@ static void HandleAction_ActionFinished(void)
 
     gCurrentMove = 0;
     gBattleMoveDamage = 0;
-    gBattleMoveFlags = 0;
+    gMoveResultFlags = 0;
     gBattleScripting.animTurn = 0;
     gBattleScripting.animTargetsHit = 0;
     gLastLandedMoves[gBankAttacker] = 0;

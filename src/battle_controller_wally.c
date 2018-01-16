@@ -34,7 +34,7 @@ extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
 extern u8 gActionSelectionCursor[BATTLE_BANKS_COUNT];
 extern u8 gMoveSelectionCursor[BATTLE_BANKS_COUNT];
 extern u8 gAbsentBankFlags;
-extern u8 gNoOfAllBanks;
+extern u8 gBattleBanksCount;
 extern bool8 gDoingBattleAnim;
 extern void (*gBattleBankFunc[BATTLE_BANKS_COUNT])(void);
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
@@ -1113,7 +1113,7 @@ static void WallyHandleSuccessBallThrowAnim(void)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnFinishedAnimation;
 }
 
@@ -1123,7 +1123,7 @@ static void WallyHandleBallThrowAnim(void)
 
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = ballThrowCaseId;
     gDoingBattleAnim = TRUE;
-    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByIdentity(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
+    InitAndLaunchSpecialAnimation(gActiveBank, gActiveBank, GetBankByPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_SAFARI_BALL_THROW);
     gBattleBankFunc[gActiveBank] = CompleteOnFinishedAnimation;
 }
 

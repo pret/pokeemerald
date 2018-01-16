@@ -154,7 +154,7 @@ enum
 
 extern u8 gBankPositions[BATTLE_BANKS_COUNT];
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
-extern u8 gNoOfAllBanks;
+extern u8 gBattleBanksCount;
 extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
 
 extern const u8 * const gNatureNamePointers[];
@@ -1086,7 +1086,7 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
 {
     s32 i;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
     {
         u8 healthboxSpriteId_1 = gHealthBoxesIds[i];
         u8 healthboxSpriteId_2 = gSprites[gHealthBoxesIds[i]].oam.affineParam;
@@ -1414,7 +1414,7 @@ void SwapHpBarsWithHpText(void)
     s32 i;
     u8 spriteId;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattleBanksCount; i++)
     {
         if (gSprites[gHealthBoxesIds[i]].callback == SpriteCallbackDummy
          && GetBankSide(i) != SIDE_OPPONENT
@@ -2029,27 +2029,27 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
         tileNumAdder = 0x11;
     }
 
-    if (status & STATUS_SLEEP)
+    if (status & STATUS1_SLEEP)
     {
         statusGfxPtr = GetHealthboxElementGfxPtr(GetStatusIconForBankId(HEALTHBOX_GFX_STATUS_SLP_BANK0, bank));
         statusPalId = PAL_STATUS_SLP;
     }
-    else if (status & STATUS_PSN_ANY)
+    else if (status & STATUS1_PSN_ANY)
     {
         statusGfxPtr = GetHealthboxElementGfxPtr(GetStatusIconForBankId(HEALTHBOX_GFX_STATUS_PSN_BANK0, bank));
         statusPalId = PAL_STATUS_PSN;
     }
-    else if (status & STATUS_BURN)
+    else if (status & STATUS1_BURN)
     {
         statusGfxPtr = GetHealthboxElementGfxPtr(GetStatusIconForBankId(HEALTHBOX_GFX_STATUS_BRN_BANK0, bank));
         statusPalId = PAL_STATUS_BRN;
     }
-    else if (status & STATUS_FREEZE)
+    else if (status & STATUS1_FREEZE)
     {
         statusGfxPtr = GetHealthboxElementGfxPtr(GetStatusIconForBankId(HEALTHBOX_GFX_STATUS_FRZ_BANK0, bank));
         statusPalId = PAL_STATUS_FRZ;
     }
-    else if (status & STATUS_PARALYSIS)
+    else if (status & STATUS1_PARALYSIS)
     {
         statusGfxPtr = GetHealthboxElementGfxPtr(GetStatusIconForBankId(HEALTHBOX_GFX_STATUS_PRZ_BANK0, bank));
         statusPalId = PAL_STATUS_PAR;

@@ -87,15 +87,15 @@ void AdjustFriendshipOnBattleFaint(u8 bank)
     {
         u8 opposingBank2;
 
-        opposingBank = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
-        opposingBank2 = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
+        opposingBank = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
+        opposingBank2 = GetBankByPosition(B_POSITION_OPPONENT_RIGHT);
 
         if (gBattleMons[opposingBank2].level > gBattleMons[opposingBank].level)
             opposingBank = opposingBank2;
     }
     else
     {
-        opposingBank = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+        opposingBank = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
     }
 
     if (gBattleMons[opposingBank].level > gBattleMons[bank].level)
@@ -138,11 +138,11 @@ u32 sub_805725C(u8 bank)
         switch (gBattleCommunication[MULTIUSE_STATE])
         {
         case 0:
-            if (gBattleMons[bank].status1 & STATUS_SLEEP)
+            if (gBattleMons[bank].status1 & STATUS1_SLEEP)
             {
                 if (UproarWakeUpCheck(bank))
                 {
-                    gBattleMons[bank].status1 &= ~(STATUS_SLEEP);
+                    gBattleMons[bank].status1 &= ~(STATUS1_SLEEP);
                     gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE);
                     BattleScriptPushCursor();
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
@@ -158,12 +158,12 @@ u32 sub_805725C(u8 bank)
                     else
                         toSub = 1;
 
-                    if ((gBattleMons[bank].status1 & STATUS_SLEEP) < toSub)
-                        gBattleMons[bank].status1 &= ~(STATUS_SLEEP);
+                    if ((gBattleMons[bank].status1 & STATUS1_SLEEP) < toSub)
+                        gBattleMons[bank].status1 &= ~(STATUS1_SLEEP);
                     else
                         gBattleMons[bank].status1 -= toSub;
 
-                    if (gBattleMons[bank].status1 & STATUS_SLEEP)
+                    if (gBattleMons[bank].status1 & STATUS1_SLEEP)
                     {
                         gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
                         effect = 2;
@@ -181,7 +181,7 @@ u32 sub_805725C(u8 bank)
             gBattleCommunication[MULTIUSE_STATE]++;
             break;
         case 1:
-            if (gBattleMons[bank].status1 & STATUS_FREEZE)
+            if (gBattleMons[bank].status1 & STATUS1_FREEZE)
             {
                 if (Random() % 5 != 0)
                 {
@@ -189,7 +189,7 @@ u32 sub_805725C(u8 bank)
                 }
                 else
                 {
-                    gBattleMons[bank].status1 &= ~(STATUS_FREEZE);
+                    gBattleMons[bank].status1 &= ~(STATUS1_FREEZE);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;

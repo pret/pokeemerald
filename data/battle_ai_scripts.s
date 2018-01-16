@@ -218,7 +218,7 @@ BattleAIScript_82DC2D4:
 	get_ability AI_TARGET
 	if_equal ABILITY_INSOMNIA, Score_Minus10
 	if_equal ABILITY_VITAL_SPIRIT, Score_Minus10
-	if_status AI_TARGET, STATUS_ANY, Score_Minus10
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
 
@@ -237,11 +237,11 @@ BattleAIScript_82DC31A:
 
 BattleAIScript_82DC31B:
 	if_status2 AI_TARGET, STATUS2_NIGHTMARE, Score_Minus10
-	if_not_status AI_TARGET, STATUS_SLEEP, Score_Minus8
+	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus8
 	end
 
 BattleAIScript_82DC330:
-	if_not_status AI_TARGET, STATUS_SLEEP, Score_Minus8
+	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus8
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	end
 
@@ -350,7 +350,7 @@ BattleAIScript_82DC48C:
 	if_equal TYPE_POISON, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_IMMUNITY, Score_Minus10
-	if_status AI_TARGET, STATUS_ANY, Score_Minus10
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
 
@@ -402,7 +402,7 @@ BattleAIScript_82DC545:
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	get_ability AI_TARGET
 	if_equal ABILITY_LIMBER, Score_Minus10
-	if_status AI_TARGET, STATUS_ANY, Score_Minus10
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
 	end
 
@@ -428,7 +428,7 @@ BattleAIScript_82DC59D:
 	end
 
 BattleAIScript_82DC5A5:
-	if_not_status AI_USER, STATUS_SLEEP, Score_Minus8
+	if_not_status AI_USER, STATUS1_SLEEP, Score_Minus8
 	end
 
 BattleAIScript_82DC5B0:
@@ -536,7 +536,7 @@ BattleAIScript_82DC6A9:
 BattleAIScript_82DC6B4:
 	get_ability AI_TARGET
 	if_equal ABILITY_WATER_VEIL, Score_Minus10
-	if_status AI_TARGET, STATUS_ANY, Score_Minus10
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus10
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus10
@@ -566,7 +566,7 @@ BattleAIScript_82DC708:
 	end
 
 BattleAIScript_82DC713:
-	if_not_status AI_USER, STATUS_POISON | STATUS_BURN | STATUS_PARALYSIS | STATUS_TOXIC_POISON, Score_Minus10
+	if_not_status AI_USER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, Score_Minus10
 	end
 
 BattleAIScript_82DC71E:
@@ -1076,7 +1076,7 @@ BattleAIScript_82DCD3D:
 	score -1
 
 BattleAIScript_82DCD4D:
-	if_not_status AI_TARGET, STATUS_TOXIC_POISON, BattleAIScript_82DCD6C
+	if_not_status AI_TARGET, STATUS1_TOXIC_POISON, BattleAIScript_82DCD6C
 	if_hp_more_than AI_USER, 50, BattleAIScript_82DCD64
 	if_random_less_than 80, BattleAIScript_82DCD6C
 
@@ -1263,7 +1263,7 @@ BattleAIScript_82DCF22:
 	score -2
 
 BattleAIScript_82DCF32:
-	if_not_status AI_TARGET, STATUS_TOXIC_POISON, BattleAIScript_82DCF44
+	if_not_status AI_TARGET, STATUS1_TOXIC_POISON, BattleAIScript_82DCF44
 	if_random_less_than 70, BattleAIScript_82DCF44
 	score +2
 
@@ -1520,7 +1520,7 @@ BattleAIScript_82DD228:
 	end
 
 BattleAIScript_82DD229:
-	if_status AI_TARGET, STATUS_TOXIC_POISON, BattleAIScript_82DD256
+	if_status AI_TARGET, STATUS1_TOXIC_POISON, BattleAIScript_82DD256
 	if_status2 AI_TARGET, STATUS2_CURSED, BattleAIScript_82DD256
 	if_status3 AI_TARGET, STATUS3_PERISH_SONG, BattleAIScript_82DD256
 	if_status2 AI_TARGET, STATUS2_INFATUATION, BattleAIScript_82DD256
@@ -1673,7 +1673,7 @@ BattleAIScript_82DD381:
 	goto BattleAIScript_82DD3E9
 
 BattleAIScript_82DD3B9:
-	if_not_status AI_TARGET, STATUS_ANY, BattleAIScript_82DD3E1
+	if_not_status AI_TARGET, STATUS1_ANY, BattleAIScript_82DD3E1
 	goto BattleAIScript_82DD3E9
 
 BattleAIScript_82DD3C8:
@@ -1722,7 +1722,7 @@ BattleAIScript_82DD430:
 	end
 
 BattleAIScript_82DD431:
-	if_status AI_TARGET, STATUS_SLEEP, BattleAIScript_82DD4D6
+	if_status AI_TARGET, STATUS1_SLEEP, BattleAIScript_82DD4D6
 	if_status2 AI_TARGET, STATUS2_INFATUATION, BattleAIScript_82DD4D6
 	if_status2 AI_TARGET, STATUS2_CONFUSION, BattleAIScript_82DD4D6
 	if_hp_more_than AI_USER, 30, BattleAIScript_82DD45E
@@ -1901,7 +1901,7 @@ BattleAIScript_82DD582:
 	end
 
 BattleAIScript_82DD583:
-	if_status AI_USER, STATUS_SLEEP, Score_Plus10
+	if_status AI_USER, STATUS1_SLEEP, Score_Plus10
 	score -5
 	end
 
@@ -1952,8 +1952,8 @@ BattleAIScript_82DD60A:
 	end
 
 BattleAIScript_82DD60B:
-	if_status AI_TARGET, STATUS_ANY, BattleAIScript_82DD621
-	if_status_in_party AI_TARGET, STATUS_ANY, BattleAIScript_82DD621
+	if_status AI_TARGET, STATUS1_ANY, BattleAIScript_82DD621
+	if_status_in_party AI_TARGET, STATUS1_ANY, BattleAIScript_82DD621
 	score -5
 
 BattleAIScript_82DD621:
@@ -2012,7 +2012,7 @@ BattleAIScript_82DD693:
 BattleAIScript_82DD694:
 	get_protect_count AI_USER
 	if_more_than 1, BattleAIScript_82DD75A
-	if_status AI_USER, STATUS_TOXIC_POISON, BattleAIScript_82DD751
+	if_status AI_USER, STATUS1_TOXIC_POISON, BattleAIScript_82DD751
 	if_status2 AI_USER, STATUS2_CURSED, BattleAIScript_82DD751
 	if_status3 AI_USER, STATUS3_PERISH_SONG, BattleAIScript_82DD751
 	if_status2 AI_USER, STATUS2_INFATUATION, BattleAIScript_82DD751
@@ -2020,7 +2020,7 @@ BattleAIScript_82DD694:
 	if_status3 AI_USER, STATUS3_YAWN, BattleAIScript_82DD751
 	if_has_move_with_effect AI_TARGET, EFFECT_RESTORE_HP, BattleAIScript_82DD751
 	if_has_move_with_effect AI_TARGET, EFFECT_DEFENSE_CURL, BattleAIScript_82DD751
-	if_status AI_TARGET, STATUS_TOXIC_POISON, BattleAIScript_82DD730
+	if_status AI_TARGET, STATUS1_TOXIC_POISON, BattleAIScript_82DD730
 	if_status2 AI_TARGET, STATUS2_CURSED, BattleAIScript_82DD730
 	if_status3 AI_TARGET, STATUS3_PERISH_SONG, BattleAIScript_82DD730
 	if_status2 AI_TARGET, STATUS2_INFATUATION, BattleAIScript_82DD730
@@ -2238,7 +2238,7 @@ BattleAIScript_82DD959:
 	end
 
 BattleAIScript_82DD95A:
-	if_status AI_TARGET, STATUS_SLEEP, BattleAIScript_82DD9FF
+	if_status AI_TARGET, STATUS1_SLEEP, BattleAIScript_82DD9FF
 	if_status2 AI_TARGET, STATUS2_INFATUATION, BattleAIScript_82DD9FF
 	if_status2 AI_TARGET, STATUS2_CONFUSION, BattleAIScript_82DD9FF
 	if_hp_more_than AI_USER, 30, BattleAIScript_82DD987
@@ -2323,7 +2323,7 @@ BattleAIScript_82DDA2F:
 	goto BattleAIScript_82DDAB4
 
 BattleAIScript_82DDA3D:
-	if_status AI_TARGET, STATUS_TOXIC_POISON, BattleAIScript_82DDAAC
+	if_status AI_TARGET, STATUS1_TOXIC_POISON, BattleAIScript_82DDAAC
 	if_status2 AI_TARGET, STATUS2_CURSED, BattleAIScript_82DDAAC
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, BattleAIScript_82DDAAC
 	get_weather
@@ -2396,7 +2396,7 @@ BattleAIScript_82DDAF5:
 	end
 
 BattleAIScript_82DDAF6:
-	if_not_status AI_TARGET, STATUS_POISON | STATUS_BURN | STATUS_PARALYSIS | STATUS_TOXIC_POISON, BattleAIScript_82DDB02
+	if_not_status AI_TARGET, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, BattleAIScript_82DDB02
 	score +1
 
 BattleAIScript_82DDB02:
@@ -2405,7 +2405,7 @@ BattleAIScript_82DDB02:
 BattleAIScript_82DDB03:
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, BattleAIScript_82DDB42
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, BattleAIScript_82DDB42
-	if_status AI_TARGET, STATUS_SLEEP, BattleAIScript_82DDB59
+	if_status AI_TARGET, STATUS1_SLEEP, BattleAIScript_82DDB59
 	if_status2 AI_TARGET, STATUS2_INFATUATION, BattleAIScript_82DDB49
 	if_status2 AI_TARGET, STATUS2_CONFUSION, BattleAIScript_82DDB49
 	is_first_turn_for AI_USER
@@ -2429,7 +2429,7 @@ BattleAIScript_82DDB5B:
 	end
 
 BattleAIScript_82DDB5C:
-	if_status AI_TARGET, STATUS_PARALYSIS, BattleAIScript_82DDB6B
+	if_status AI_TARGET, STATUS1_PARALYSIS, BattleAIScript_82DDB6B
 	goto BattleAIScript_82DDB6D
 
 BattleAIScript_82DDB6B:
@@ -2571,7 +2571,7 @@ sItemsTable_82DDC6E:
     .byte -1
 
 BattleAIScript_82DDC72:
-	if_status AI_TARGET, STATUS_SLEEP, BattleAIScript_82DDC9D
+	if_status AI_TARGET, STATUS1_SLEEP, BattleAIScript_82DDC9D
 	if_status2 AI_TARGET, STATUS2_INFATUATION, BattleAIScript_82DDC9D
 	if_status2 AI_TARGET, STATUS2_CONFUSION, BattleAIScript_82DDC9D
 	if_random_less_than 180, BattleAIScript_82DDC9D
@@ -2960,7 +2960,7 @@ BattleAIScript_82DDFED:
 	end
 
 BattleAIScript_82DDFF5:
-	if_status AI_USER, STATUS_ANY, BattleAIScript_82DE000
+	if_status AI_USER, STATUS1_ANY, BattleAIScript_82DE000
 	end
 
 BattleAIScript_82DE000:
@@ -3060,7 +3060,7 @@ BattleAIScript_82DE14A:
 BattleAIScript_82DE14F:
 	get_ability AI_TARGET
 	if_not_equal ABILITY_GUTS, Score_Minus30_
-	if_status AI_TARGET, STATUS_ANY, Score_Minus30_
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus30_
 	if_hp_less_than AI_USER, 91, Score_Minus30_
 	goto Score_Plus5
 

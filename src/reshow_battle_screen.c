@@ -25,7 +25,7 @@ extern u8 gReservedSpritePaletteCount;
 extern u8 gActionSelectionCursor[BATTLE_BANKS_COUNT];
 extern u8 gBankInMenu;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
-extern u8 gNoOfAllBanks;
+extern u8 gBattleBanksCount;
 extern u32 gBattleTypeFlags;
 extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
@@ -164,13 +164,13 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
 
             LoadAndCreateEnemyShadowSprites();
 
-            opponentBank = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+            opponentBank = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
             species = GetMonData(&gEnemyParty[gBattlePartyID[opponentBank]], MON_DATA_SPECIES);
             SetBankEnemyShadowSpriteCallback(opponentBank, species);
 
             if (IsDoubleBattle())
             {
-                opponentBank = GetBankByIdentity(B_POSITION_OPPONENT_RIGHT);
+                opponentBank = GetBankByPosition(B_POSITION_OPPONENT_RIGHT);
                 species = GetMonData(&gEnemyParty[gBattlePartyID[opponentBank]], MON_DATA_SPECIES);
                 SetBankEnemyShadowSpriteCallback(opponentBank, species);
             }
@@ -210,7 +210,7 @@ static void sub_80A95F4(void)
 
 static bool8 LoadBankSpriteGfx(u8 bank)
 {
-    if (bank < gNoOfAllBanks)
+    if (bank < gBattleBanksCount)
     {
         if (GetBankSide(bank) != SIDE_PLAYER)
         {
@@ -245,7 +245,7 @@ extern const struct MonCoords gTrainerBackPicCoords[];
 
 static void CreateBankSprite(u8 bank)
 {
-    if (bank < gNoOfAllBanks)
+    if (bank < gBattleBanksCount)
     {
         u8 posY;
 
@@ -313,7 +313,7 @@ static void CreateBankSprite(u8 bank)
 
 static void CreateHealthboxSprite(u8 bank)
 {
-    if (bank < gNoOfAllBanks)
+    if (bank < gBattleBanksCount)
     {
         u8 healthboxSpriteId;
 

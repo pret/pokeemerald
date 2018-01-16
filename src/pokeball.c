@@ -17,7 +17,7 @@
 
 extern bool8 gDoingBattleAnim;
 extern u8 gActiveBank;
-extern u8 gBankTarget;
+extern u8 gBankDefender;
 extern u16 gBattlePartyID[];
 extern u8 gBankSpriteIds[];
 extern u8 gHealthBoxesIds[];
@@ -378,7 +378,7 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     switch (throwCaseId)
     {
     case POKEBALL_PLAYER_SENDOUT:
-        gBankTarget = bank;
+        gBankDefender = bank;
         gSprites[ballSpriteId].pos1.x = 24;
         gSprites[ballSpriteId].pos1.y = 68;
         gSprites[ballSpriteId].callback = SpriteCB_PlayerMonSendOut_1;
@@ -386,17 +386,17 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     case POKEBALL_OPPONENT_SENDOUT:
         gSprites[ballSpriteId].pos1.x = GetBankCoord(bank, BANK_X_POS);
         gSprites[ballSpriteId].pos1.y = GetBankCoord(bank, BANK_Y_POS) + 24;
-        gBankTarget = bank;
+        gBankDefender = bank;
         gSprites[ballSpriteId].data[0] = 0;
         gSprites[ballSpriteId].callback = SpriteCB_OpponentMonSendOut;
         break;
     default:
-        gBankTarget = GetBankByIdentity(B_POSITION_OPPONENT_LEFT);
+        gBankDefender = GetBankByPosition(B_POSITION_OPPONENT_LEFT);
         notSendOut = TRUE;
         break;
     }
 
-    gSprites[ballSpriteId].sBank = gBankTarget;
+    gSprites[ballSpriteId].sBank = gBankDefender;
     if (!notSendOut)
     {
         DestroyTask(taskId);
@@ -405,12 +405,12 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
     // this will perform an unused ball throw animation
     gSprites[ballSpriteId].data[0] = 0x22;
-    gSprites[ballSpriteId].data[2] = GetBankCoord(gBankTarget, BANK_X_POS);
-    gSprites[ballSpriteId].data[4] = GetBankCoord(gBankTarget, BANK_Y_POS) - 16;
+    gSprites[ballSpriteId].data[2] = GetBankCoord(gBankDefender, BANK_X_POS);
+    gSprites[ballSpriteId].data[4] = GetBankCoord(gBankDefender, BANK_Y_POS) - 16;
     gSprites[ballSpriteId].data[5] = -40;
     sub_80A68D4(&gSprites[ballSpriteId]);
     gSprites[ballSpriteId].oam.affineParam = taskId;
-    gTasks[taskId].tOpponentBank = gBankTarget;
+    gTasks[taskId].tOpponentBank = gBankDefender;
     gTasks[taskId].func = TaskDummy;
     PlaySE(SE_NAGERU);
 }
@@ -767,7 +767,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
         }
 
         species = GetMonData(mon, MON_DATA_SPECIES);
-        if ((bank == GetBankByIdentity(B_POSITION_PLAYER_LEFT) || bank == GetBankByIdentity(B_POSITION_OPPONENT_LEFT))
+        if ((bank == GetBankByPosition(B_POSITION_PLAYER_LEFT) || bank == GetBankByPosition(B_POSITION_OPPONENT_LEFT))
          && IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -783,7 +783,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 
         if (!IsDoubleBattle() || !gBattleSpritesDataPtr->animationData->field_9_x1)
             wantedCryCase = 0;
-        else if (bank == GetBankByIdentity(B_POSITION_PLAYER_LEFT) || bank == GetBankByIdentity(B_POSITION_OPPONENT_LEFT))
+        else if (bank == GetBankByPosition(B_POSITION_PLAYER_LEFT) || bank == GetBankByPosition(B_POSITION_OPPONENT_LEFT))
             wantedCryCase = 1;
         else
             wantedCryCase = 2;
@@ -956,7 +956,7 @@ static void SpriteCB_PlayerMonSendOut_2(struct Sprite *sprite)
             sprite->data[0] = 0;
 
             if (IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1
-             && sprite->sBank == GetBankByIdentity(B_POSITION_PLAYER_RIGHT))
+             && sprite->sBank == GetBankByPosition(B_POSITION_PLAYER_RIGHT))
                 sprite->callback = SpriteCB_ReleaseMon2FromBall;
             else
                 sprite->callback = SpriteCB_ReleaseMonFromBall;
@@ -982,7 +982,7 @@ static void SpriteCB_OpponentMonSendOut(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
         if (IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1
-         && sprite->sBank == GetBankByIdentity(B_POSITION_OPPONENT_RIGHT))
+         && sprite->sBank == GetBankByPosition(B_POSITION_OPPONENT_RIGHT))
             sprite->callback = SpriteCB_ReleaseMon2FromBall;
         else
             sprite->callback = SpriteCB_ReleaseMonFromBall;

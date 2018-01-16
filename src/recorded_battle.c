@@ -26,7 +26,7 @@ extern u16 gTrainerBattleOpponent_A;
 extern u16 gTrainerBattleOpponent_B;
 extern u16 gPartnerTrainerId;
 extern u8 gActiveBank;
-extern u8 gNoOfAllBanks;
+extern u8 gBattleBanksCount;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
 extern u16 gChosenMovesByBanks[BATTLE_BANKS_COUNT];
@@ -226,7 +226,7 @@ u8 RecordedBattle_ReadBankAction(u8 bank)
     // trying to read past array or invalid action byte, battle is over
     if (sRecordedBytesNo[bank] >= BANK_RECORD_SIZE || sBattleRecords[bank][sRecordedBytesNo[bank]] == 0xFF)
     {
-        gSpecialVar_Result = gBattleOutcome = BATTLE_PLAYER_TELEPORTED; // hah
+        gSpecialVar_Result = gBattleOutcome = B_OUTCOME_PLAYER_TELEPORTED; // hah
         ResetPaletteFadeControl();
         BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
         SetMainCallback2(CB2_QuitRecordedBattle);
@@ -1523,7 +1523,7 @@ void sub_818603C(u8 arg0)
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
         return;
 
-    for (bank = 0; bank < gNoOfAllBanks; bank++)
+    for (bank = 0; bank < gBattleBanksCount; bank++)
     {
         if (GetBankSide(bank) != SIDE_OPPONENT) // player's side only
         {

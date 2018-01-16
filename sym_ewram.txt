@@ -276,7 +276,7 @@ gActiveBank: @ 2024064
 gBattleExecBuffer: @ 2024068
 	.space 0x4
 
-gNoOfAllBanks: @ 202406C
+gBattleBanksCount: @ 202406C
 	.space 0x2
 
 gBattlePartyID: @ 202406E
@@ -336,7 +336,7 @@ gLastUsedAbility: @ 202420A
 gBankAttacker: @ 202420B
 	.space 0x1
 
-gBankTarget: @ 202420C
+gBankDefender: @ 202420C
 	.space 0x1
 
 gBank1: @ 202420D
@@ -393,7 +393,7 @@ gLastHitBy: @ 2024270
 gChosenMovesByBanks: @ 2024274
 	.space 0x8
 
-gBattleMoveFlags: @ 202427C
+gMoveResultFlags: @ 202427C
 	.space 0x4
 
 gHitMarker: @ 2024280
@@ -408,7 +408,7 @@ gTakenDmgBanks: @ 2024288
 gUnknown_0202428C: @ 202428C
 	.space 0x2
 
-gSideAffecting: @ 202428E
+gSideStatuses: @ 202428E
 	.space 0x6
 
 gSideTimers: @ 2024294

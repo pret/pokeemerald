@@ -28,7 +28,7 @@ extern u32 gBattleExecBuffer;
 extern u8 gActiveBank;
 extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
 extern u8 gActionSelectionCursor[BATTLE_BANKS_COUNT];
-extern u8 gNoOfAllBanks;
+extern u8 gBattleBanksCount;
 extern bool8 gDoingBattleAnim;
 extern void (*gBattleBankFunc[BATTLE_BANKS_COUNT])(void);
 extern void (*gPreBattleCallback1)(void);
@@ -47,7 +47,7 @@ extern u8 gUnknown_03005D7C[BATTLE_BANKS_COUNT];
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
 extern u16 gPartnerTrainerId;
 extern u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
-extern u8 gBankTarget;
+extern u8 gBankDefender;
 extern u8 gAbsentBankFlags;
 extern u8 gUnknown_020244B4[];
 extern u32 gTransformedPersonalities[BATTLE_BANKS_COUNT];
@@ -1875,10 +1875,10 @@ static void LinkOpponentHandleCmd55(void)
 {
     sub_81851A8(&gBattleBufferA[gActiveBank][4]);
 
-    if (gBattleBufferA[gActiveBank][1] == BATTLE_DREW)
+    if (gBattleBufferA[gActiveBank][1] == B_OUTCOME_DREW)
         gBattleOutcome = gBattleBufferA[gActiveBank][1];
     else
-        gBattleOutcome = gBattleBufferA[gActiveBank][1] ^ BATTLE_DREW;
+        gBattleOutcome = gBattleBufferA[gActiveBank][1] ^ B_OUTCOME_DREW;
 
     gSaveBlock2Ptr->field_CA9_b = gBattleBufferA[gActiveBank][2];
     FadeOutMapMusic(5);
