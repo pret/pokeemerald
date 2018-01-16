@@ -429,7 +429,6 @@ SECTIONS {
         data/wild_encounter.o(.rodata);
         data/field_effect.o(.rodata);
         src/option_menu.o(.rodata);
-        data/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
         data/pokedex.o(.rodata);
         data/trainer_card.o(.rodata);

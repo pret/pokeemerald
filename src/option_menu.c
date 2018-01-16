@@ -74,16 +74,51 @@ static void sub_80BB154(void);
 EWRAM_DATA static bool8 sArrowPressed = FALSE;
 
 // const rom data
-/*
-const u16 gUnknown_0839F5FC[] = INCBIN_U16("graphics/misc/option_menu_text.gbapal");
+static const u16 sUnknown_0855C604[] = INCBIN_U16("graphics/misc/option_menu_text.gbapal");
 // note: this is only used in the Japanese release
-const static u8 gUnknown_0839F63C[] = INCBIN_U8("graphics/misc/option_menu_equals_sign.4bpp");
-*/
-extern const struct BgTemplate gUnknown_0855C698[2];
-extern const struct WindowTemplate gUnknown_0855C680[];
-extern const u16 gUnknown_0855C6A0[1];
-extern const u16 gUnknown_0855C604[16];
-extern const u8 *const gUnknown_0855C664[MENUITEM_COUNT];
+static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/misc/option_menu_equals_sign.4bpp");
+
+static const u8 *const OptionMenuItemsNames[MENUITEM_COUNT] =
+{
+    gText_TextSpeed,
+    gText_BattleScene,
+    gText_BattleStyle,
+    gText_Sound,
+    gText_ButtonMode,
+    gText_Frame,
+    gText_OptionMenuCancel,
+};
+
+static const struct WindowTemplate sOptionMenuWinTemplates[] =
+{
+    {1, 2, 1, 0x1A, 2, 1, 2},
+    {0, 2, 5, 0x1A, 0xE, 1, 0x36},
+    DUMMY_WIN_TEMPLATE
+};
+
+static const struct BgTemplate sOptionMenuBgTemplates[] =
+{
+   {
+       .bg = 1,
+       .charBaseIndex = 1,
+       .mapBaseIndex = 30,
+       .screenSize = 0,
+       .paletteMode = 0,
+       .priority = 0,
+       .baseTile = 0
+   },
+   {
+       .bg = 0,
+       .charBaseIndex = 1,
+       .mapBaseIndex = 31,
+       .screenSize = 0,
+       .paletteMode = 0,
+       .priority = 1,
+       .baseTile = 0
+   }
+};
+
+static const u16 sUnknown_0855C6A0[] = {0x7E51};
 
 // code
 static void MainCB2(void)
@@ -132,7 +167,7 @@ void CB2_InitOptionMenu(void)
         DmaClear16(3, PLTT, PLTT_SIZE);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_0855C698, ARRAY_COUNT(gUnknown_0855C698));
+        InitBgsFromTemplates(0, sOptionMenuBgTemplates, ARRAY_COUNT(sOptionMenuBgTemplates));
         ChangeBgX(0, 0, 0);
         ChangeBgY(0, 0, 0);
         ChangeBgX(1, 0, 0);
@@ -141,7 +176,7 @@ void CB2_InitOptionMenu(void)
         ChangeBgY(2, 0, 0);
         ChangeBgX(3, 0, 0);
         ChangeBgY(3, 0, 0);
-        InitWindows(gUnknown_0855C680);
+        InitWindows(sOptionMenuWinTemplates);
         DeactivateAllTextPrinters();
         SetGpuReg(REG_OFFSET_WIN0H, 0);
         SetGpuReg(REG_OFFSET_WIN0V, 0);
@@ -168,12 +203,12 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 4:
-        LoadPalette(gUnknown_0855C6A0, 0, sizeof(gUnknown_0855C6A0));
+        LoadPalette(sUnknown_0855C6A0, 0, sizeof(sUnknown_0855C6A0));
         LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, 0x70, 0x20);
         gMain.state++;
         break;
     case 5:
-        LoadPalette(gUnknown_0855C604, 0x10, sizeof(gUnknown_0855C604));
+        LoadPalette(sUnknown_0855C604, 0x10, sizeof(sUnknown_0855C604));
         gMain.state++;
         break;
     case 6:
@@ -601,7 +636,7 @@ static void DrawOptionMenuTexts(void)
     FillWindowPixelBuffer(WIN_OPTIONS, 0x11);
     for (i = 0; i < MENUITEM_COUNT; i++)
     {
-        PrintTextOnWindow(WIN_OPTIONS, 1, gUnknown_0855C664[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
+        PrintTextOnWindow(WIN_OPTIONS, 1, OptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
     }
     CopyWindowToVram(WIN_OPTIONS, 3);
 }
