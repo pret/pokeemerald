@@ -273,8 +273,7 @@ SECTIONS {
         src/walda_phrase.o(.text);
         asm/contest_link_81D9DE4.o(.text);
         asm/trainer_rematch.o(.text);
-        asm/unk_sprite_file.o(.text);
-        asm/unk_transition.o(.text);
+        src/unk_transition.o(.text);
         src/international_string_util.o(.text);
         asm/international_string_util.o(.text);
     } =0
@@ -539,8 +538,8 @@ SECTIONS {
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         data/trainer_rematch.o(.rodata);
-        data/unk_sprite_file.o(.rodata);
         data/unk_transition.o(.rodata);
+        src/unk_transition.o(.rodata);
         data/link_strings.o(.rodata);
         data/fonts.o(.rodata);
         data/mystery_event_msg.o(.rodata);
