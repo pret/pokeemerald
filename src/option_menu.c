@@ -78,7 +78,7 @@ static const u16 sUnknown_0855C604[] = INCBIN_U16("graphics/misc/option_menu_tex
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/misc/option_menu_equals_sign.4bpp");
 
-static const u8 *const OptionMenuItemsNames[MENUITEM_COUNT] =
+static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
     gText_TextSpeed,
     gText_BattleScene,
@@ -636,7 +636,7 @@ static void DrawOptionMenuTexts(void)
     FillWindowPixelBuffer(WIN_OPTIONS, 0x11);
     for (i = 0; i < MENUITEM_COUNT; i++)
     {
-        PrintTextOnWindow(WIN_OPTIONS, 1, OptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
+        PrintTextOnWindow(WIN_OPTIONS, 1, sOptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SPEED_FF, NULL);
     }
     CopyWindowToVram(WIN_OPTIONS, 3);
 }
