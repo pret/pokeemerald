@@ -43,13 +43,15 @@ SCANINC := tools/scaninc/scaninc
 PREPROC := tools/preproc/preproc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 
-# Clear the default suffixes.
+# Clear the default suffixes
 .SUFFIXES:
+# Don't delete intermediate files
+.SECONDARY:
+# Delete files that weren't built properly
+.DELETE_ON_ERROR:
 
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
-
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin sound/direct_sound_samples/cry_%.bin
 
 .PHONY: rom clean compare tidy
 
@@ -166,3 +168,6 @@ $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+
+baserom.gba: ;
+	$(error baserom.gba is required to build)
