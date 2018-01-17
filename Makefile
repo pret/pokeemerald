@@ -33,8 +33,6 @@ OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 LIBGCC := tools/agbcc/lib/libgcc.a
 LIBC   := tools/agbcc/lib/libc.a
 
-LIBC := tools/agbcc/lib/libc.a
-
 SHA1 := sha1sum -c
 
 GFX := tools/gbagfx/gbagfx
