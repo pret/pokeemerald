@@ -127,8 +127,8 @@ struct BerryBlenderData
     struct BlenderGameBlock gameBlock;
 };
 
-extern struct MusicPlayerInfo gMPlay_SE2;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gSpecialVar_ItemId;
 extern u8 gInGameOpponentsNo;
 extern u8 gUnknown_020322D5;
@@ -801,7 +801,7 @@ static const struct WindowTemplate sBlenderRecordWindowTemplate = {0, 6, 4, 0x12
 
 static void Blender_ControlHitPitch(void)
 {
-    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, 2 * (sBerryBlenderData->field_4C - 128));
+    m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, 2 * (sBerryBlenderData->field_4C - 128));
 }
 
 static void VBlankCB0_BerryBlender(void)
@@ -1938,9 +1938,9 @@ static void sub_80814F4(void)
             if (gRecvCmds[i][2] == 0x2345 || gRecvCmds[2][i] == 0x4523 || gRecvCmds[2][i] == 0x5432) // could be a bug, 2 and i are reversed
             {
                 if (sBerryBlenderData->field_4C > 1500)
-                    m4aMPlayTempoControl(&gMPlay_BGM, ((sBerryBlenderData->field_4C - 750) / 20) + 256);
+                    m4aMPlayTempoControl(&gMPlayInfo_BGM, ((sBerryBlenderData->field_4C - 750) / 20) + 256);
                 else
-                    m4aMPlayTempoControl(&gMPlay_BGM, 0x100);
+                    m4aMPlayTempoControl(&gMPlayInfo_BGM, 0x100);
             }
         }
     }
@@ -2335,7 +2335,7 @@ static void CB2_HandleBlenderEndGame(void)
     switch (sBerryBlenderData->gameEndState)
     {
     case 1:
-        m4aMPlayTempoControl(&gMPlay_BGM, 256);
+        m4aMPlayTempoControl(&gMPlayInfo_BGM, 256);
         for (i = 0; i < gSpecialVar_0x8004; i++)
         {
             DestroyTask(sBerryBlenderData->field_120[i]);
@@ -2355,7 +2355,7 @@ static void CB2_HandleBlenderEndGame(void)
                 sBerryBlenderData->gameEndState = 5;
 
             sBerryBlenderData->mainState = 0;
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE2);
         }
         Blender_ControlHitPitch();
         break;

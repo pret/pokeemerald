@@ -73,17 +73,7 @@ gUnknown_03001202: @ 3001202
 gUnknown_03001204: @ 3001204
 	.space 0x4
 
-gUnknown_03001208: @ 3001208
-	.space 0x2
-
-sTestingTransitionId: @ 300120A
-	.space 0x1
-
-sTestingTransitionState: @ 300120B
-	.space 0x5
-
-gUnknown_03001210: @ 3001210
-	.space 0x30
+	.include "src/battle_transition.o"
 
 gUnknown_03001240: @ 3001240
 	.space 0x30
@@ -192,7 +182,19 @@ gUnknown_030012FC: @ 30012FC
 	.space 0x4
 
 gUnknown_03001300: @ 3001300
-	.space 0x770
+	.space 0x40
+
+gMPlayTrack_BGM: @ 3001340
+	.space 0x320
+
+gMPlayTrack_SE1: @ 3001660
+	.space 0xF0
+
+gMPlayTrack_SE2: @ 3001750
+	.space 0x2D0
+
+gMPlayTrack_SE3: @ 3001A20
+	.space 0x50
 
 	.include "src/agb_flash.o"
 	.include "src/siirtc.o"

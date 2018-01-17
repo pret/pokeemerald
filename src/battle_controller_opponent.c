@@ -38,7 +38,7 @@ extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
 extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
 extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
 extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u8 gUnknown_03005D7C[BATTLE_BANKS_COUNT];
 extern void (*gBattleBankFunc[BATTLE_BANKS_COUNT])(void);
 extern void *gUnknown_020244D8;
@@ -350,10 +350,10 @@ static void sub_805F560(void)
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 if (GetBankIdentity(gActiveBank) == 1)
-                    m4aMPlayContinue(&gMPlay_BGM);
+                    m4aMPlayContinue(&gMPlayInfo_BGM);
             }
             else
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         }
         gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_1_x20 = 1;
         sp = TRUE;
@@ -485,7 +485,7 @@ static void sub_805FC80(void)
     {
         if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy || gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy_2)
         {
-            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
             OpponentBufferExecCompleted();
         }
     }

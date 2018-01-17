@@ -112,7 +112,7 @@ extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 struct TrainerMoney
 {
@@ -7103,10 +7103,10 @@ static void atk76_various(void)
         }
         break;
     case 21:
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x55);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x55);
         break;
     case 22:
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         break;
     case 23:
         gBattleStruct->field_2A2 |= gBitTable[gActiveBank];

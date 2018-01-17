@@ -1,6 +1,6 @@
 	.align 2
 gMPlayTable:: @ 86B49C0
-	music_player gMPlay_BGM, 0x3001340, 10, 0
-	music_player gMPlay_SE1, 0x3001660,  3, 1
-	music_player gMPlay_SE2, 0x3001750,  9, 1
-	music_player gMPlay_SE3, 0x3001A20,  1, 0
+	music_player gMPlayInfo_BGM, gMPlayTrack_BGM, 10, 0
+	music_player gMPlayInfo_SE1, gMPlayTrack_SE1,  3, 1
+	music_player gMPlayInfo_SE2, gMPlayTrack_SE2,  9, 1
+	music_player gMPlayInfo_SE3, gMPlayTrack_SE3,  1, 0

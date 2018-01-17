@@ -42,7 +42,7 @@ extern u8 gBattleBufferA[BATTLE_BANKS_COUNT][0x200];
 extern u8 gBattleBufferB[BATTLE_BANKS_COUNT][0x200];
 extern u8 gMultiUsePlayerCursor;
 extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gPartnerTrainerId;
 extern struct SpriteTemplate gUnknown_0202499C;
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];

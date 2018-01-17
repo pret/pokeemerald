@@ -5,6 +5,7 @@
 #include "blend_palette.h"
 #include "battle_transition.h"
 #include "task.h"
+#include "battle_transition.h"
 
 // Static type declarations
 
@@ -1392,7 +1393,7 @@ static void sub_80A1818(u16 a1)
 {
     CpuCopy16(gTilesetAnims_BattleDomePals0[a1 & 0x3], gPlttBufferUnfaded + 0x80, 32);
     BlendPalette(0x80, 0x10, gPaletteFade.y, gPaletteFade.blendColor & 0x7FFF);
-    if ((u8)FindTaskIdByFunc(sub_8149DFC) != 0xFF )
+    if ((u8)FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) != 0xFF )
     {
         sSecondaryTilesetCB = sub_80A1670;
         sSecondaryTilesetCBBufferSize = 0x20;
@@ -1402,7 +1403,7 @@ static void sub_80A1818(u16 a1)
 static void sub_80A1884(u16 a1)
 {
     CpuCopy16(gTilesetAnims_BattleDomePals0[a1 & 0x3], gPlttBufferUnfaded + 0x80, 32);
-    if ((u8)FindTaskIdByFunc(sub_8149DFC) == 0xFF )
+    if ((u8)FindTaskIdByFunc(TransitionPhase1_Task_RunFuncs) == 0xFF )
     {
         BlendPalette(0x80, 0x10, gPaletteFade.y, gPaletteFade.blendColor & 0x7FFF);
         if (!--sSecondaryTilesetCBBufferSize)

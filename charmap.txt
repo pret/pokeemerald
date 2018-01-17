@@ -73,6 +73,7 @@ RIGHT_ARROW = 7C
 '?'         = AC
 '.'         = AD
 '-'         = AE
+'·'         = AF
 '…'         = B0
 '“'         = B1
 '”'         = B2
@@ -317,8 +318,7 @@ TALL_PLUS   = FC 0C FB
 '？' = AC
 '。' = AD
 'ー' = AE
-'·' = AF
-'‥' = B0
+'⋯' = B0
 
 STRING = FD
 
