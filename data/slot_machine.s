@@ -6,9 +6,9 @@
 
 gUnknown_085A7424:: @ 85A7424
 	.4byte 0x1F8
-    .4byte 0x11C5
-    .4byte 0x21D6
-    .4byte 0x11E7
+	.4byte 0x11C5
+	.4byte 0x21D6
+	.4byte 0x11E7
 
 gUnknown_085A7434:: @ 85A7434
 	window_template 0, 2, 15, 0x1B, 4, 15, 0x194
@@ -324,502 +324,502 @@ gUnknown_085A783A:: @ 85A783A
 
 gUnknown_085A78C8:: @ 85A78C8
 	.4byte sub_812F078
-    .4byte sub_812F36C
-    .4byte sub_812F36C
-    .4byte sub_812F36C
-    .4byte sub_812F36C
-    .4byte sub_812F3B4
-    .4byte sub_812F2CC
-    .4byte sub_812F078
-    .4byte sub_812F078
-    .4byte sub_812F080
-    .4byte sub_812F104
-    .4byte sub_812F11C
-    .4byte sub_812F134
-    .4byte sub_812F150
-    .4byte sub_812F1B8
-    .4byte sub_812F21C
-    .4byte sub_812F078
-    .4byte sub_812F470
-    .4byte sub_812F514
-    .4byte sub_812F514
-    .4byte sub_812F514
-    .4byte sub_812F514
-    .4byte sub_812F514
-    .4byte sub_812F514
-    .4byte sub_812F514
-    .4byte sub_812F514
-    .4byte sub_812F5E0
-    .4byte sub_812F5E0
-    .4byte sub_812F5E0
-    .4byte sub_812F5E0
-    .4byte sub_812F5E0
-    .4byte sub_812F5E0
-    .4byte sub_812F5E0
-    .4byte sub_812F5E0
-    .4byte sub_812F648
+	.4byte sub_812F36C
+	.4byte sub_812F36C
+	.4byte sub_812F36C
+	.4byte sub_812F36C
+	.4byte sub_812F3B4
+	.4byte sub_812F2CC
+	.4byte sub_812F078
+	.4byte sub_812F078
+	.4byte sub_812F080
+	.4byte sub_812F104
+	.4byte sub_812F11C
+	.4byte sub_812F134
+	.4byte sub_812F150
+	.4byte sub_812F1B8
+	.4byte sub_812F21C
+	.4byte sub_812F078
+	.4byte sub_812F470
+	.4byte sub_812F514
+	.4byte sub_812F514
+	.4byte sub_812F514
+	.4byte sub_812F514
+	.4byte sub_812F514
+	.4byte sub_812F514
+	.4byte sub_812F514
+	.4byte sub_812F514
+	.4byte sub_812F5E0
+	.4byte sub_812F5E0
+	.4byte sub_812F5E0
+	.4byte sub_812F5E0
+	.4byte sub_812F5E0
+	.4byte sub_812F5E0
+	.4byte sub_812F5E0
+	.4byte sub_812F5E0
+	.4byte sub_812F648
 
 gUnknown_085A7954:: @ 85A7954
-    .byte 0x19
-    .byte 0x22
-    .2byte 0
-    .byte 0x2
-    .byte 0
-    .2byte 0
-    .byte 0x9
-    .byte 0x10
-    .2byte 0
-    .byte 0xFF
-    .byte 0
-    .2byte 0
+	.byte 0x19
+	.byte 0x22
+	.2byte 0
+	.byte 0x2
+	.byte 0
+	.2byte 0
+	.byte 0x9
+	.byte 0x10
+	.2byte 0
+	.byte 0xFF
+	.byte 0
+	.2byte 0
 
 gUnknown_085A7964:: @ 85A7964
-    .byte 0xA
-    .byte 0x1
-    .2byte 0
-    .byte 0xB
-    .byte 2
-    .2byte 0
-    .byte 0xC
-    .byte 0x3
-    .2byte 0
-    .byte 0xD
-    .byte 4
-    .2byte 0
-    .byte 0x5
-    .byte 5
-    .2byte 0
-    .byte 0x8
-    .byte 0x6
-    .2byte 0
-    .byte 0xFF
-    .byte 0
-    .2byte 0
+	.byte 0xA
+	.byte 0x1
+	.2byte 0
+	.byte 0xB
+	.byte 2
+	.2byte 0
+	.byte 0xC
+	.byte 0x3
+	.2byte 0
+	.byte 0xD
+	.byte 4
+	.2byte 0
+	.byte 0x5
+	.byte 5
+	.2byte 0
+	.byte 0x8
+	.byte 0x6
+	.2byte 0
+	.byte 0xFF
+	.byte 0
+	.2byte 0
 
 gUnknown_085A7980:: @ 85A7980
-    .byte 0x3
-    .byte 0x7
-    .2byte 0
-    .byte 0x8
-    .byte 0x11
-    .2byte 0
-    .byte 0xFF
-    .byte 0
-    .2byte 0
+	.byte 0x3
+	.byte 0x7
+	.2byte 0
+	.byte 0x8
+	.byte 0x11
+	.2byte 0
+	.byte 0xFF
+	.byte 0
+	.2byte 0
 
 gUnknown_085A798C:: @ 85A798C
-    .byte 0x4
-    .byte 0x8
-    .2byte 0
-    .byte 0x6
-    .byte 0x9
-    .2byte 0
-    .byte 0x6
-    .byte 0xA
-    .2byte 1
-    .byte 0x6
-    .byte 0xB
-    .2byte 2
-    .byte 0x6
-    .byte 0xC
-    .2byte 3
-    .byte 0xFF
-    .byte 0
-    .2byte 0
+	.byte 0x4
+	.byte 0x8
+	.2byte 0
+	.byte 0x6
+	.byte 0x9
+	.2byte 0
+	.byte 0x6
+	.byte 0xA
+	.2byte 1
+	.byte 0x6
+	.byte 0xB
+	.2byte 2
+	.byte 0x6
+	.byte 0xC
+	.2byte 3
+	.byte 0xFF
+	.byte 0
+	.2byte 0
 
 gUnknown_085A79A4:: @ 85A79A4
-    .byte 0
-    .byte 0xD
-    .2byte 0
-    .byte 1
-    .byte 0xE
-    .2byte 0
-    .byte 0x7
-    .byte 0xF
-    .2byte 0
-    .byte 0xFF
-    .byte 0
-    .2byte 0
+	.byte 0
+	.byte 0xD
+	.2byte 0
+	.byte 1
+	.byte 0xE
+	.2byte 0
+	.byte 0x7
+	.byte 0xF
+	.2byte 0
+	.byte 0xFF
+	.byte 0
+	.2byte 0
 
-gUnknown_085A79B4:: @ 85A79B4    
-    .byte 0x13
-    .byte 0x1A
-    .2byte 0
-    .byte 0x14
-    .byte 0x1B
-    .2byte 1
-    .byte 0x15
-    .byte 0x1C
-    .2byte 2
-    .byte 0xE
-    .byte 0x1D
-    .2byte 3
-    .byte 0xF
-    .byte 0x1E
-    .2byte 4
-    .byte 0x10
-    .byte 0x1F
-    .2byte 5
-    .byte 0x11
-    .byte 0x20
-    .2byte 6
-    .byte 0x12
-    .byte 0x21
-    .2byte 7
-    .byte 0x8
-    .byte 0x11
-    .2byte 0
-    .byte 0xFF
-    .byte 0
-    .2byte 0
+gUnknown_085A79B4:: @ 85A79B4	
+	.byte 0x13
+	.byte 0x1A
+	.2byte 0
+	.byte 0x14
+	.byte 0x1B
+	.2byte 1
+	.byte 0x15
+	.byte 0x1C
+	.2byte 2
+	.byte 0xE
+	.byte 0x1D
+	.2byte 3
+	.byte 0xF
+	.byte 0x1E
+	.2byte 4
+	.byte 0x10
+	.byte 0x1F
+	.2byte 5
+	.byte 0x11
+	.byte 0x20
+	.2byte 6
+	.byte 0x12
+	.byte 0x21
+	.2byte 7
+	.byte 0x8
+	.byte 0x11
+	.2byte 0
+	.byte 0xFF
+	.byte 0
+	.2byte 0
 
 gUnknown_085A79DC:: @ 85A79DC
-    .byte 0x16
-    .byte 0x12
-    .2byte 0
-    .byte 0x17
-    .byte 0x13
-    .2byte 1
-    .byte 0x18
-    .byte 0x14
-    .2byte 2
-    .byte 0xE
-    .byte 0x15
-    .2byte 3
-    .byte 0xF
-    .byte 0x16
-    .2byte 4
-    .byte 0x10
-    .byte 0x17
-    .2byte 5
-    .byte 0x11
-    .byte 0x18
-    .2byte 6
-    .byte 0x12
-    .byte 0x19
-    .2byte 7
-    .byte 0x8
-    .byte 0x11
-    .2byte 0
-    .byte 0xFF
-    .byte 0
-    .2byte 0
+	.byte 0x16
+	.byte 0x12
+	.2byte 0
+	.byte 0x17
+	.byte 0x13
+	.2byte 1
+	.byte 0x18
+	.byte 0x14
+	.2byte 2
+	.byte 0xE
+	.byte 0x15
+	.2byte 3
+	.byte 0xF
+	.byte 0x16
+	.2byte 4
+	.byte 0x10
+	.byte 0x17
+	.2byte 5
+	.byte 0x11
+	.byte 0x18
+	.2byte 6
+	.byte 0x12
+	.byte 0x19
+	.2byte 7
+	.byte 0x8
+	.byte 0x11
+	.2byte 0
+	.byte 0xFF
+	.byte 0
+	.2byte 0
 
 gUnknown_085A7A04:: @ 85A7A04
 	.4byte gUnknown_085A7954
-    .4byte gUnknown_085A7964
-    .4byte gUnknown_085A7980
-    .4byte gUnknown_085A798C
-    .4byte gUnknown_085A79A4
-    .4byte gUnknown_085A79DC
-    .4byte gUnknown_085A79B4
+	.4byte gUnknown_085A7964
+	.4byte gUnknown_085A7980
+	.4byte gUnknown_085A798C
+	.4byte gUnknown_085A79A4
+	.4byte gUnknown_085A79DC
+	.4byte gUnknown_085A79B4
 
 gUnknown_085A7A20:: @ 85A7A20
 	.4byte sub_812F7C0
-    .4byte sub_812F784
-    .4byte sub_812F794
-    .4byte nullsub_101
-    .4byte nullsub_101
-    .4byte sub_812F794
-    .4byte sub_812F794
+	.4byte sub_812F784
+	.4byte sub_812F794
+	.4byte nullsub_101
+	.4byte nullsub_101
+	.4byte sub_812F794
+	.4byte sub_812F794
 
 gUnknown_085A7A3C:: @ 85A7A3C
-    .2byte 0
-    .2byte 0
-    .2byte 0
-    .2byte 0
-    
+	.2byte 0
+	.2byte 0
+	.2byte 0
+	.2byte 0
+	
 gUnknown_085A7A44:: @ 85A7A44
-    .2byte 0x8000
-    .2byte 0
-    .2byte 0
-    .2byte 0
+	.2byte 0x8000
+	.2byte 0
+	.2byte 0
+	.2byte 0
 
 gUnknown_085A7A4C:: @ 85A7A4C
-    .2byte 0
-    .2byte 0x4000
-    .2byte 0
-    .2byte 0
-    
+	.2byte 0
+	.2byte 0x4000
+	.2byte 0
+	.2byte 0
+	
 gUnknown_085A7A54:: @ 85A7A54
-    .2byte 0x8000
-    .2byte 0x8000
-    .2byte 0
-    .2byte 0
-    
+	.2byte 0x8000
+	.2byte 0x8000
+	.2byte 0
+	.2byte 0
+	
 gUnknown_085A7A5C:: @ 85A7A5C
-    .2byte 0
-    .2byte 0x8000
-    .2byte 0
-    .2byte 0
+	.2byte 0
+	.2byte 0x8000
+	.2byte 0
+	.2byte 0
 
 gUnknown_085A7A64:: @ 85A7A64
-    .2byte 0x8000
-    .2byte 0xC000
-    .2byte 0
-    .2byte 0
-    
+	.2byte 0x8000
+	.2byte 0xC000
+	.2byte 0
+	.2byte 0
+	
 gUnknown_085A7A6C:: @ 85A7A6C
-    .2byte 0x4000
-    .2byte 0xC000
-    .2byte 0
-    .2byte 0
+	.2byte 0x4000
+	.2byte 0xC000
+	.2byte 0
+	.2byte 0
 
 gUnknown_085A7A74:: @ 85A7A74
-    .2byte 0
-    .2byte 0xC000
-    .2byte 0
-    .2byte 0
+	.2byte 0
+	.2byte 0xC000
+	.2byte 0
+	.2byte 0
 
 gUnknown_085A7A7C:: @ 85A7A7C
-    .4byte gSlotMachineReelTimeNumber0
-    .2byte 0x80
-    .2byte 0
-    .4byte gSlotMachineReelTimeNumber1
-    .2byte 0x80
-    .2byte 0
-    .4byte gSlotMachineReelTimeNumber2
-    .2byte 0x80
-    .2byte 0
-    .4byte gSlotMachineReelTimeNumber3
-    .2byte 0x80
-    .2byte 0
-    .4byte gSlotMachineReelTimeNumber4
-    .2byte 0x80
-    .2byte 0
-    .4byte gSlotMachineReelTimeNumber5
-    .2byte 0x80
-    .2byte 0
+	.4byte gSlotMachineReelTimeNumber0
+	.2byte 0x80
+	.2byte 0
+	.4byte gSlotMachineReelTimeNumber1
+	.2byte 0x80
+	.2byte 0
+	.4byte gSlotMachineReelTimeNumber2
+	.2byte 0x80
+	.2byte 0
+	.4byte gSlotMachineReelTimeNumber3
+	.2byte 0x80
+	.2byte 0
+	.4byte gSlotMachineReelTimeNumber4
+	.2byte 0x80
+	.2byte 0
+	.4byte gSlotMachineReelTimeNumber5
+	.2byte 0x80
+	.2byte 0
 
 gUnknown_085A7AAC:: @ 85A7AAC
-    .4byte gSlotMachineReelTimeShadow
-    .2byte 0x200
-    .2byte 0
+	.4byte gSlotMachineReelTimeShadow
+	.2byte 0x200
+	.2byte 0
 
 gUnknown_085A7AB4:: @ 85A7AB4
-    .4byte gUnknown_08DD1A18
-    .2byte 0x40
-    .2byte 0
+	.4byte gUnknown_08DD1A18
+	.2byte 0x40
+	.2byte 0
 
 gUnknown_085A7ABC:: @ 85A7ABC
-    .4byte gSlotMachineReelTimeLargeBolt0
-    .2byte 0x100
-    .2byte 0
-    .4byte gSlotMachineReelTimeLargeBolt1
-    .2byte 0x100
-    .2byte 0
+	.4byte gSlotMachineReelTimeLargeBolt0
+	.2byte 0x100
+	.2byte 0
+	.4byte gSlotMachineReelTimeLargeBolt1
+	.2byte 0x100
+	.2byte 0
 
 gUnknown_085A7ACC:: @ 85A7ACC
-    .4byte gSlotMachineReelTimePikaAura
-    .2byte 0x400
-    .2byte 0
-    
+	.4byte gSlotMachineReelTimePikaAura
+	.2byte 0x400
+	.2byte 0
+	
 gUnknown_085A7AD4:: @ 85A7CD4
-    .4byte gSlotMachineReelTimeExplosion0
-    .2byte 0x200
-    .2byte 0
-    .4byte gSlotMachineReelTimeExplosion1
-    .2byte 0x200
-    .2byte 0
+	.4byte gSlotMachineReelTimeExplosion0
+	.2byte 0x200
+	.2byte 0
+	.4byte gSlotMachineReelTimeExplosion1
+	.2byte 0x200
+	.2byte 0
 
 gUnknown_085A7AE4:: @ 85A7AE4
-    .4byte gSlotMachineReelTimeDuck
-    .4byte 32
+	.4byte gSlotMachineReelTimeDuck
+	.4byte 32
 
 gUnknown_085A7AEC:: @ 85A7AEC
-    .4byte gSlotMachineReelTimeSmoke
-    .4byte 0x80
-    
+	.4byte gSlotMachineReelTimeSmoke
+	.4byte 0x80
+	
 gUnknown_085A7AF4:: @ 85A7AF4
-    .4byte gSlotMachineReelTimeBolt
-    .4byte 32
+	.4byte gSlotMachineReelTimeBolt
+	.4byte 32
 
 gUnknown_085A7AFC:: @ 85A7AFC
-    obj_image_anim_frame 0, 1
-    obj_image_anim_end
+	obj_image_anim_frame 0, 1
+	obj_image_anim_end
 
 gUnknown_085A7B04:: @ 85A7B04
-    obj_image_anim_frame 0, 1
-    obj_image_anim_jump 0
-    
+	obj_image_anim_frame 0, 1
+	obj_image_anim_jump 0
+	
 gUnknown_085A7B0C:: @ 85A7B0C
-    obj_image_anim_frame 0, 16
-    obj_image_anim_end
+	obj_image_anim_frame 0, 16
+	obj_image_anim_end
 
 gUnknown_085A7B14:: @ 85A7B14
-    obj_image_anim_frame 1, 16
-    obj_image_anim_frame 0, 16
-    obj_image_anim_jump 0
+	obj_image_anim_frame 1, 16
+	obj_image_anim_frame 0, 16
+	obj_image_anim_jump 0
 
 gUnknown_085A7B20:: @ 85A7B20
-    obj_image_anim_frame 1, 8
-    obj_image_anim_frame 0, 8
-    obj_image_anim_jump 0
+	obj_image_anim_frame 1, 8
+	obj_image_anim_frame 0, 8
+	obj_image_anim_jump 0
 
 gUnknown_085A7B2C:: @ 85A7B2C
-    obj_image_anim_frame 1, 4
-    obj_image_anim_frame 0, 4
-    obj_image_anim_jump 0
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 0, 4
+	obj_image_anim_jump 0
 
 gUnknown_085A7B38:: @ 85A7B38
-    obj_image_anim_frame 2, 32
-    obj_image_anim_frame 3, 32
-    obj_image_anim_jump 0
+	obj_image_anim_frame 2, 32
+	obj_image_anim_frame 3, 32
+	obj_image_anim_jump 0
 
 gUnknown_085A7B44:: @ 85A7B44
-    obj_image_anim_frame 4, 1
-    obj_image_anim_end
+	obj_image_anim_frame 4, 1
+	obj_image_anim_end
 
 gUnknown_085A7B4C:: @ 85A7B4C
-    obj_image_anim_frame 0, 1
-    obj_image_anim_end
+	obj_image_anim_frame 0, 1
+	obj_image_anim_end
 
 gUnknown_085A7B54:: @ 85A7B54
-    obj_image_anim_frame 1, 1
-    obj_image_anim_end
+	obj_image_anim_frame 1, 1
+	obj_image_anim_end
 
 gUnknown_085A7B5C:: @ 85A7B5C
-    obj_image_anim_frame 2, 1
-    obj_image_anim_end
+	obj_image_anim_frame 2, 1
+	obj_image_anim_end
 
 gUnknown_085A7B64:: @ 85A7B64
-    obj_image_anim_frame 3, 1
-    obj_image_anim_end
+	obj_image_anim_frame 3, 1
+	obj_image_anim_end
 
 gUnknown_085A7B6C:: @ 85A7B6C
-    obj_image_anim_frame 4, 1
-    obj_image_anim_end
+	obj_image_anim_frame 4, 1
+	obj_image_anim_end
 
 gUnknown_085A7B74:: @ 85A7B74
-    obj_image_anim_frame 5, 1
-    obj_image_anim_end
+	obj_image_anim_frame 5, 1
+	obj_image_anim_end
 
 gUnknown_085A7B7C:: @ 85A7B7C
-    obj_image_anim_frame 0, 4
-    obj_image_anim_frame 1, 4
-    obj_image_anim_jump 0
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_jump 0
 
 gUnknown_085A7B88:: @ 85A7B88
-    obj_image_anim_frame 0, 16
-    obj_image_anim_frame 1, 16
-    obj_image_anim_jump 0
+	obj_image_anim_frame 0, 16
+	obj_image_anim_frame 1, 16
+	obj_image_anim_jump 0
 
 gUnknown_085A7B94:: @ 85A7B94
-    obj_image_anim_frame 0, 30
-    obj_image_anim_frame 1, 30
-    obj_image_anim_jump 0
+	obj_image_anim_frame 0, 30
+	obj_image_anim_frame 1, 30
+	obj_image_anim_jump 0
 
 gUnknown_085A7BA0:: @ 85A7BA0
-    obj_image_anim_frame 1, 1
-    obj_image_anim_end
+	obj_image_anim_frame 1, 1
+	obj_image_anim_end
 
 gUnknown_085A7BA8:: @ 85A7BA8
-    obj_image_anim_frame 0, 30
-    obj_image_anim_frame 1, 30
-    obj_image_anim_jump 0
+	obj_image_anim_frame 0, 30
+	obj_image_anim_frame 1, 30
+	obj_image_anim_jump 0
 
 gUnknown_085A7BB4:: @ 85A7BB4
-    obj_image_anim_frame 0, 16
-    obj_image_anim_frame 1, 16
-    obj_image_anim_frame 0, 16
-    obj_image_anim_frame 1, 80
-    obj_image_anim_jump 0
+	obj_image_anim_frame 0, 16
+	obj_image_anim_frame 1, 16
+	obj_image_anim_frame 0, 16
+	obj_image_anim_frame 1, 80
+	obj_image_anim_jump 0
 
 gUnknown_085A7BC8:: @ 85A7BC8
-    obj_image_anim_frame 0, 1
-    obj_image_anim_end
+	obj_image_anim_frame 0, 1
+	obj_image_anim_end
 
 gUnknown_085A7BD0:: @ 85A7BD0
-    obj_image_anim_frame 0, 1
-    obj_image_anim_end
+	obj_image_anim_frame 0, 1
+	obj_image_anim_end
 
 gUnknown_085A7BD8:: @ 85A7BD8
-    obj_image_anim_frame 1, 1
-    obj_image_anim_end
+	obj_image_anim_frame 1, 1
+	obj_image_anim_end
 
 gUnknown_085A7BE0:: @ 85A7BE0
-    obj_image_anim_frame 2, 1
-    obj_image_anim_end
+	obj_image_anim_frame 2, 1
+	obj_image_anim_end
 
 gUnknown_085A7BE8:: @ 85A7BE8
-    obj_image_anim_frame 3, 1
-    obj_image_anim_end
+	obj_image_anim_frame 3, 1
+	obj_image_anim_end
 
 gUnknown_085A7BF0:: @ 85A7BF0
-    obj_image_anim_frame 4, 1
-    obj_image_anim_end
+	obj_image_anim_frame 4, 1
+	obj_image_anim_end
 
 gUnknown_085A7BF8:: @ 85A7BF8
-    .4byte gUnknown_085A7AFC
+	.4byte gUnknown_085A7AFC
 
 gUnknown_085A7BFC:: @ 85A7BFC
-    .4byte gUnknown_085A7B04
+	.4byte gUnknown_085A7B04
 
 gUnknown_085A7C00:: @ 85A7C00
-    .4byte gUnknown_085A7B0C
-    .4byte gUnknown_085A7B14
-    .4byte gUnknown_085A7B20
-    .4byte gUnknown_085A7B2C
-    .4byte gUnknown_085A7B38
-    .4byte gUnknown_085A7B44
+	.4byte gUnknown_085A7B0C
+	.4byte gUnknown_085A7B14
+	.4byte gUnknown_085A7B20
+	.4byte gUnknown_085A7B2C
+	.4byte gUnknown_085A7B38
+	.4byte gUnknown_085A7B44
 
 gUnknown_085A7C18:: @ 85A7C18
-    .4byte gUnknown_085A7B4C
-    .4byte gUnknown_085A7B54
-    .4byte gUnknown_085A7B5C
-    .4byte gUnknown_085A7B64
-    .4byte gUnknown_085A7B6C
-    .4byte gUnknown_085A7B74
+	.4byte gUnknown_085A7B4C
+	.4byte gUnknown_085A7B54
+	.4byte gUnknown_085A7B5C
+	.4byte gUnknown_085A7B64
+	.4byte gUnknown_085A7B6C
+	.4byte gUnknown_085A7B74
 
 gUnknown_085A7C30:: @ 85A7C30
-    .4byte gUnknown_085A7B7C
+	.4byte gUnknown_085A7B7C
 
 gUnknown_085A7C34:: @ 85A7C34
-    .4byte gUnknown_085A7B88
-    
+	.4byte gUnknown_085A7B88
+	
 gUnknown_085A7C38:: @ 85A7C38
-    .4byte gUnknown_085A7B94
-    .4byte gUnknown_085A7BA0
-    
+	.4byte gUnknown_085A7B94
+	.4byte gUnknown_085A7BA0
+	
 gUnknown_085A7C40:: @ 85A7C40
-    .4byte gUnknown_085A7BA8
-    
+	.4byte gUnknown_085A7BA8
+	
 gUnknown_085A7C44:: @ 85A7C44
-    .4byte gUnknown_085A7BB4
-    .4byte gUnknown_085A7BC8
-    
+	.4byte gUnknown_085A7BB4
+	.4byte gUnknown_085A7BC8
+	
 gUnknown_085A7C4C:: @ 85A7C4C
-    .4byte gUnknown_085A7BD0
-    .4byte gUnknown_085A7BD8
-    .4byte gUnknown_085A7BE0
-    .4byte gUnknown_085A7BE8
-    .4byte gUnknown_085A7BF0
+	.4byte gUnknown_085A7BD0
+	.4byte gUnknown_085A7BD8
+	.4byte gUnknown_085A7BE0
+	.4byte gUnknown_085A7BE8
+	.4byte gUnknown_085A7BF0
 
 gUnknown_085A7C60:: @ 85A7C60
-    obj_rot_scal_anim_frame 16, 16, 0, 0
-    obj_rot_scal_anim_loop 0
-    obj_rot_scal_anim_frame 1, 1, 0, 1
-    obj_rot_scal_anim_loop 0xFF
-    obj_rot_scal_anim_end
-    
+	obj_rot_scal_anim_frame 16, 16, 0, 0
+	obj_rot_scal_anim_loop 0
+	obj_rot_scal_anim_frame 1, 1, 0, 1
+	obj_rot_scal_anim_loop 0xFF
+	obj_rot_scal_anim_end
+	
 gUnknown_085A7C88:: @ 85A7C88
-    .4byte gUnknown_085A7C60
+	.4byte gUnknown_085A7C60
 
 gUnknown_085A7C8C:: @ 85A7C8C
-    obj_rot_scal_anim_frame 0, 0, 8, 32
-    obj_rot_scal_anim_frame 0, 0, 6, 32
-    obj_rot_scal_anim_frame 0, 0, 4, 16
-    obj_rot_scal_anim_frame 0, 0, 12, 2
-    obj_rot_scal_anim_frame 0, 0, -12, 4
-    obj_rot_scal_anim_frame 0, 0, 12, 2
-    obj_rot_scal_anim_frame 0, 0, 12, 2
-    obj_rot_scal_anim_frame 0, 0, -12, 4
-    obj_rot_scal_anim_frame 0, 0, 12, 2
-    obj_rot_scal_anim_end
+	obj_rot_scal_anim_frame 0, 0, 8, 32
+	obj_rot_scal_anim_frame 0, 0, 6, 32
+	obj_rot_scal_anim_frame 0, 0, 4, 16
+	obj_rot_scal_anim_frame 0, 0, 12, 2
+	obj_rot_scal_anim_frame 0, 0, -12, 4
+	obj_rot_scal_anim_frame 0, 0, 12, 2
+	obj_rot_scal_anim_frame 0, 0, 12, 2
+	obj_rot_scal_anim_frame 0, 0, -12, 4
+	obj_rot_scal_anim_frame 0, 0, 12, 2
+	obj_rot_scal_anim_end
 
 gUnknown_085A7CDC:: @ 85A7CDC
-    .4byte gUnknown_085A7C8C
-    
+	.4byte gUnknown_085A7C8C
+	
 gUnknown_085A7CE0:: @ 85A7CE0
 	spr_template 0, 0, gUnknown_085A7A5C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, sub_812E154
 
@@ -864,106 +864,106 @@ gUnknown_085A7E18:: @ 85A7E18
 
 gUnknown_085A7E30:: @ 85A7E30
 	spr_template 0xFFFF, 4, gUnknown_085A7A4C, gUnknown_085A7BF8, gUnknown_085A7AEC, gUnknown_085A7C88, sub_812EE14
-    
+	
 gUnknown_085A7E48:: @ 85A7E48
 	spr_template 0xFFFF, 6, gUnknown_085A7A3C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7E60:: @ 85A7E60
 	spr_template 0xFFFF, 6, gUnknown_085A7A3C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7E78:: @ 85A7E78
 	spr_template 0xFFFF, 6, gUnknown_085A7A3C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7E90:: @ 85A7E90
 	spr_template 18, 6, gUnknown_085A7A3C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7EA8:: @ 85A7EA8
 	spr_template 0xFFFF, 6, gUnknown_085A7A6C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7EC0:: @ 85A7EC0
 	spr_template 0xFFFF, 6, gUnknown_085A7A6C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_085A7ED8:: @ 85A7ED8
 	spr_template 19, 6, gUnknown_085A7A3C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7EF0:: @ 85A7EF0
 	spr_template 20, 6, gUnknown_085A7A3C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7F08:: @ 85A7F08
 	spr_template 21, 6, gUnknown_085A7A3C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7F20:: @ 85A7F20
 	spr_template 0xFFFF, 6, gUnknown_085A7A5C, gUnknown_085A7C38, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7F38:: @ 85A7F38
 	spr_template 0xFFFF, 6, gUnknown_085A7A3C, gUnknown_085A7BF8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7F50:: @ 85A7F50
 	spr_template 0xFFFF, 6, gUnknown_085A7A4C, gUnknown_085A7C4C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7F68:: @ 85A7F68
 	spr_template 0xFFFF, 6, gUnknown_085A7A3C, gUnknown_085A7C44, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7F80:: @ 85A7F80
 	spr_template 0xFFFF, 6, gUnknown_085A7A3C, gUnknown_085A7C40, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-    
+	
 gUnknown_085A7F98:: @ 85A7F98
 	spr_template 0xFFFF, 4, gUnknown_085A7A3C, gUnknown_085A7BF8, gUnknown_085A7AF4, gUnknown_085A7CDC, sub_812EF54
-    
+	
 gUnknown_085A7FB0:: @ 85A7FB0
-    subsprite -64, -64, 3, 0, 64x64
-    subsprite 0, -64, 3, 0, 64x64
-    subsprite -64, 0, 3, 0, 64x64
-    subsprite 0, 0, 3, 0, 64x64
+	subsprite -64, -64, 3, 0, 64x64
+	subsprite 0, -64, 3, 0, 64x64
+	subsprite -64, 0, 3, 0, 64x64
+	subsprite 0, 0, 3, 0, 64x64
 
 gUnknown_085A7FC0:: @ 85A7FC0
 	.4byte 4, gUnknown_085A7FB0
-    
+	
 gUnknown_085A7FC8:: @ 85A7FC8
-    subsprite -32, -12, 1, 0, 32x8
-    subsprite 0, -12, 1, 4, 32x8
-    subsprite -32, -4, 1, 8, 32x8
-    subsprite 0, -4, 1, 12, 32x8
-    subsprite -32, 4, 1, 16, 32x8
-    subsprite 0, 4, 1, 20, 32x8
+	subsprite -32, -12, 1, 0, 32x8
+	subsprite 0, -12, 1, 4, 32x8
+	subsprite -32, -4, 1, 8, 32x8
+	subsprite 0, -4, 1, 12, 32x8
+	subsprite -32, 4, 1, 16, 32x8
+	subsprite 0, 4, 1, 20, 32x8
 
 gUnknown_085A7FE0:: @ 85A7FE0
 	.4byte 6, gUnknown_085A7FC8
 
 gUnknown_085A7FE8:: @ 85A7FE8
-    subsprite -32, -20, 1, 0, 64x32
-    subsprite -32, 12, 1, 32, 32x8
-    subsprite 0, 12, 1, 36, 32x8
-    
+	subsprite -32, -20, 1, 0, 64x32
+	subsprite -32, 12, 1, 32, 32x8
+	subsprite 0, 12, 1, 36, 32x8
+	
 gUnknown_085A7FF4:: @ 85A7FF4
 	.4byte 3, gUnknown_085A7FE8
 
 gUnknown_085A7FFC:: @ 85A7FFC
-    subsprite -32, -24, 1, 0, 64x32
-    subsprite -32, 8, 1, 32, 32x8
-    subsprite 0, 8, 1, 36, 32x8
-    subsprite -32, 16, 1, 40, 32x8
-    subsprite 0, 16, 1, 44, 32x8
-    
+	subsprite -32, -24, 1, 0, 64x32
+	subsprite -32, 8, 1, 32, 32x8
+	subsprite 0, 8, 1, 36, 32x8
+	subsprite -32, 16, 1, 40, 32x8
+	subsprite 0, 16, 1, 44, 32x8
+	
 gUnknown_085A8010:: @ 85A8010
 	.4byte 5, gUnknown_085A7FFC
-    
+	
 gUnknown_085A8018:: @ 85A8018
-    subsprite -32, -8, 1, 0, 32x8
-    subsprite 0, -8, 1, 4, 32x8
-    subsprite -32, 0, 1, 8, 32x8
-    subsprite 0, 0, 1, 12, 32x8
+	subsprite -32, -8, 1, 0, 32x8
+	subsprite 0, -8, 1, 4, 32x8
+	subsprite -32, 0, 1, 8, 32x8
+	subsprite 0, 0, 1, 12, 32x8
 
 gUnknown_085A8028:: @ 85A8028
 	.4byte 4, gUnknown_085A8018
-    
+	
 gUnknown_085A8030:: @ 85A8030
-    subsprite -8, -12, 1, 0, 16x8
-    subsprite -8, -4, 1, 0, 16x8
-    subsprite -8, 4, 1, 0, 16x8
+	subsprite -8, -12, 1, 0, 16x8
+	subsprite -8, -4, 1, 0, 16x8
+	subsprite -8, 4, 1, 0, 16x8
 
 gUnknown_085A803C:: @ 85A803C
-    .4byte 3, gUnknown_085A8030
+	.4byte 3, gUnknown_085A8030
 
 gUnknown_085A8044:: @ 85A8044
 	subsprite -32, -24, 3, 0, 64x32
@@ -1175,59 +1175,59 @@ gUnknown_085A825C:: @ 85A825C
 
 gUnknown_085A8264:: @ 85A8264
 	.4byte gUnknown_085A7E48
-    .4byte gUnknown_085A7E60
-    .4byte gUnknown_085A7E78
-    .4byte gUnknown_085A7EA8
-    .4byte gUnknown_085A7EC0
-    .4byte gUnknown_085A7F20
-    .4byte gUnknown_085A7F38
-    .4byte gUnknown_085A7F50
-    .4byte gUnknown_085A7F68
-    .4byte gUnknown_085A7F80
-    .4byte gUnknown_085A7E90
-    .4byte gUnknown_085A7E90
-    .4byte gUnknown_085A7E90
-    .4byte gUnknown_085A7E90
-    .4byte gUnknown_085A7ED8
-    .4byte gUnknown_085A7ED8
-    .4byte gUnknown_085A7ED8
-    .4byte gUnknown_085A7ED8
-    .4byte gUnknown_085A7ED8
-    .4byte gUnknown_085A7EF0
-    .4byte gUnknown_085A7EF0
-    .4byte gUnknown_085A7EF0
-    .4byte gUnknown_085A7F08
-    .4byte gUnknown_085A7F08
-    .4byte gUnknown_085A7F08
-    .4byte gDummySpriteTemplate
+	.4byte gUnknown_085A7E60
+	.4byte gUnknown_085A7E78
+	.4byte gUnknown_085A7EA8
+	.4byte gUnknown_085A7EC0
+	.4byte gUnknown_085A7F20
+	.4byte gUnknown_085A7F38
+	.4byte gUnknown_085A7F50
+	.4byte gUnknown_085A7F68
+	.4byte gUnknown_085A7F80
+	.4byte gUnknown_085A7E90
+	.4byte gUnknown_085A7E90
+	.4byte gUnknown_085A7E90
+	.4byte gUnknown_085A7E90
+	.4byte gUnknown_085A7ED8
+	.4byte gUnknown_085A7ED8
+	.4byte gUnknown_085A7ED8
+	.4byte gUnknown_085A7ED8
+	.4byte gUnknown_085A7ED8
+	.4byte gUnknown_085A7EF0
+	.4byte gUnknown_085A7EF0
+	.4byte gUnknown_085A7EF0
+	.4byte gUnknown_085A7F08
+	.4byte gUnknown_085A7F08
+	.4byte gUnknown_085A7F08
+	.4byte gDummySpriteTemplate
 
 gUnknown_085A82CC:: @ 85A82CC
 	.4byte gUnknown_085A8058
-    .4byte gUnknown_085A8070
-    .4byte gUnknown_085A8088
-    .4byte gUnknown_085A80C0
-    .4byte NULL
-    .4byte NULL
-    .4byte gUnknown_085A80D0
-    .4byte NULL
-    .4byte gUnknown_085A8110
-    .4byte gUnknown_085A8124
-    .4byte gUnknown_085A8134
-    .4byte gUnknown_085A8144
-    .4byte gUnknown_085A8154
-    .4byte gUnknown_085A8164
-    .4byte gUnknown_085A8174
-    .4byte gUnknown_085A8184
-    .4byte gUnknown_085A8194
-    .4byte gUnknown_085A81A4
-    .4byte gUnknown_085A81B4
-    .4byte gUnknown_085A81D4
-    .4byte gUnknown_085A81E8
-    .4byte gUnknown_085A8208
-    .4byte gUnknown_085A8228
-    .4byte gUnknown_085A823C
-    .4byte gUnknown_085A825C
-    .4byte NULL
+	.4byte gUnknown_085A8070
+	.4byte gUnknown_085A8088
+	.4byte gUnknown_085A80C0
+	.4byte NULL
+	.4byte NULL
+	.4byte gUnknown_085A80D0
+	.4byte NULL
+	.4byte gUnknown_085A8110
+	.4byte gUnknown_085A8124
+	.4byte gUnknown_085A8134
+	.4byte gUnknown_085A8144
+	.4byte gUnknown_085A8154
+	.4byte gUnknown_085A8164
+	.4byte gUnknown_085A8174
+	.4byte gUnknown_085A8184
+	.4byte gUnknown_085A8194
+	.4byte gUnknown_085A81A4
+	.4byte gUnknown_085A81B4
+	.4byte gUnknown_085A81D4
+	.4byte gUnknown_085A81E8
+	.4byte gUnknown_085A8208
+	.4byte gUnknown_085A8228
+	.4byte gUnknown_085A823C
+	.4byte gUnknown_085A825C
+	.4byte NULL
 
 	.align 2
 gUnknown_085A8334:: @ 85A8334
