@@ -16,7 +16,7 @@
 #define SE_KOUKA_L 12           // Not Very Effective
 #define SE_KOUKA_M 13           // Normal Effectiveness
 #define SE_KOUKA_H 14           // Super Effective
-#define SE_BOWA2 15             // Pokémon Withdrawl
+#define SE_BOWA2 15             // Pokémon Withdrawal
 #define SE_POKE_DEAD 16         // Pokémon Fainted
 #define SE_NIGERU 17            // Flee from Wild Battle
 #define SE_JIDO_DOA 18          // Pokémon Center Door
@@ -43,7 +43,7 @@
 #define SE_FU_ZUZUZU 39         // Lavaridge Gym Warp
 #define SE_RU_GASHIN 40         // Sootopolis Gym - Stairs Appear
 #define SE_RU_GASYAN 41         // Sootopolis Gym - Ice Breaking
-#define SE_RU_BARI 42           // Sootopolis Gym - Stepping on Ice
+#define SE_RU_BARI 42           // Sootopolis Gym - Walking on Ice
 #define SE_RU_HYUU 43           // Falling Down
 #define SE_KI_GASYAN 44
 #define SE_TK_WARPIN 45         // Warp In
@@ -78,12 +78,12 @@
 #define SE_FUUSEN1 74           // Red Balloon
 #define SE_FUUSEN2 75           // Blue Balloon
 #define SE_FUUSEN3 76           // Yellow Balloon
-#define SE_TOY_KABE 77          // Brealable Door
+#define SE_TOY_KABE 77          // Breakable Door
 #define SE_TOY_DANGO 78         // Mud Ball
 #define SE_DOKU 79              // Overworld Poison Damage
 #define SE_ESUKA 80             // Escalator
 #define SE_T_AME 81             // Rain
-#define SE_T_AME_E 82           // Rain stop
+#define SE_T_AME_E 82           // Rain Stop
 #define SE_T_OOAME 83           // Heavy Rain
 #define SE_T_OOAME_E 84         // Heavy Rain Stop
 #define SE_T_KOAME 85           // Light Rain
@@ -261,7 +261,7 @@
 #define SE_RG_KITEKI 256        // S.S. Anne Horn
 #define SE_RG_HELP_OP 257       // Help Menu Open
 #define SE_RG_HELP_CL 258       // Help Menu Close
-#define SE_RG_HELP_NG 259       // Help Menu Error?
+#define SE_RG_HELP_NG 259       // Help Menu Error
 #define SE_RG_DEOMOV 260        // Deoxys Moves
 #define SE_RG_EXCELLENT 261
 #define SE_RG_NAWAMISS 262
@@ -287,7 +287,7 @@
 #define MUS_DOORO_X1 360        // Route 110
 #define MUS_DOORO_X3 361        // Route 120
 #define MUS_MACHI_S2 362        // Petalburg City
-#define MUS_MACHI_S4 363        // Oldale Town
+#define MUS_MACHI_S4 363        // Oldale/Lavaridge Town
 #define MUS_GIM 364             // Gym
 #define MUS_NAMINORI 365        // Surfing
 #define MUS_DAN01 366           // Caves and Darkness
@@ -297,20 +297,20 @@
 #define MUS_FANFA4 370          // Obtained an Item!
 #define MUS_FANFA5 371          // Your Pokémon Just Evolved!
 #define MUS_ME_WAZA 372         // Obtained a TM/HM!
-#define MUS_BIJYUTU 373         // Lilycove Musseum
+#define MUS_BIJYUTU 373         // Lilycove Museum
 #define MUS_DOORO_X4 374        // Route 122/Intro
 #define MUS_FUNE_KAN 375        // Slateport Museum
 #define MUS_ME_SHINKA 376       // Evolution Intro
 #define MUS_SHINKA 377          // Evolution
-#define MUS_ME_WASURE 378       // Move Deleted
+#define MUS_ME_WASURE 378       // Move Deleted/Messed Up Appeal
 #define MUS_SYOUJOEYE 379       // Encounter! Tuber
 #define MUS_BOYEYE 380          // Encounter! Boy
-#define MUS_DAN02 381           // Abandoned Ship
-#define MUS_MACHI_S3 382        // Fortree City
+#define MUS_DAN02 381           // Abandoned Ship/Southern Island
+#define MUS_MACHI_S3 382        // Fortree City/Pacifidlog Town
 #define MUS_ODAMAKI 383         // Professor Birch's Lab
 #define MUS_B_TOWER 384         // Battle Tower (RS)
 #define MUS_SWIMEYE 385         // Encounter! Swimmer
-#define MUS_DAN03 386           // Meteor Falls
+#define MUS_DAN03 386           // Meteor Falls/Cave of Origin
 #define MUS_ME_KINOMI 387       // Obtained a Berry!
 #define MUS_ME_TAMA 388         // Awakening the Super-Ancient Pokémon
 #define MUS_ME_B_BIG 389        // Slots Jackpot!
@@ -321,9 +321,9 @@
 #define MUS_TEST2 394           // Contest Test 2
 #define MUS_TEST3 395           // Contest Test 3
 #define MUS_TEST4 396           // Contest Test 4
-#define MUS_TEST 397            // Encounter! Gentleman (Test?)
+#define MUS_TEST 397            // Encounter! Gentleman
 #define MUS_GOMACHI0 398        // Verdanturf Town
-#define MUS_GOTOWN 399          // Rustboro City
+#define MUS_GOTOWN 399          // Rustboro/Mauville/Mossdeep City
 #define MUS_POKECEN 400         // Pokémon Center
 #define MUS_NEXTROAD 401        // Route 104
 #define MUS_GRANROAD 402        // Route 119
@@ -353,24 +353,24 @@
 #define MUS_CASINO 426          // Game Corner
 #define MUS_HIGHTOWN 427        // Dewford Town
 #define MUS_SAFARI 428          // Safari Zone
-#define MUS_C_ROAD 429          // Victory Toad
+#define MUS_C_ROAD 429          // Victory Road
 #define MUS_AJITO 430           // Aqua/Magma Hideout
 #define MUS_M_BOAT 431          // Sailing
 #define MUS_M_DUNGON 432        // Mt. Pyre (Inside)
 #define MUS_FINECITY 433        // Slateport City
 #define MUS_MACHUPI 434         // Mt. Pyre (Outside)
 #define MUS_P_SCHOOL 435        // Pokémon Trainer's School
-#define MUS_DENDOU 436          // Hall of Fame
-#define MUS_TONEKUSA 437        // Lavaridge Town
+#define MUS_DENDOU 436          // You're the Champion!
+#define MUS_TONEKUSA 437        // Fallarbor Town
 #define MUS_MABOROSI 438        // Sealed Chamber
-#define MUS_CON_FAN 439         // You are the Champion!
+#define MUS_CON_FAN 439         // Obtained a Contest Ribbon!
 #define MUS_CONTEST0 440        // Pokémon Contest
 #define MUS_MGM0 441            // Encounter! Team Magma
 #define MUS_T_BATTLE 442        // Opening Battle
 #define MUS_OOAME 443           // The Flood
 #define MUS_HIDERI 444          // The Drought
 #define MUS_RUNECITY 445        // Sootopolis City
-#define MUS_CON_K 446           // Berry Blending Results
+#define MUS_CON_K 446           // Contest/Berry Blending Results
 #define MUS_EIKOU_R 447         // Hall of Fame
 #define MUS_KARAKURI 448        // Trick House
 #define MUS_HUTAGO 449          // Encounter! Kid
@@ -409,7 +409,7 @@
 #define MUS_BATTLE38 482        // Battle! Elite Four
 #define MUS_BATTLE30 483        // Battle! Archie/Maxie
 // FRLG Music Below
-#define MUS_RG_ANNAI 484        // Follow Me
+#define MUS_RG_ANNAI 484        // Follow Me!
 #define MUS_RG_SLOT 485         // Game Corner
 #define MUS_RG_AJITO 486        // Rocket Hideout
 #define MUS_RG_GYM 487          // Gym
@@ -430,9 +430,9 @@
 #define MUS_RG_ENDING 502       // Credits
 #define MUS_RG_LOAD01 503       // Route 1
 #define MUS_RG_OPENING 504      // Route 24/Intro
-#define MUS_RG_LOAD02 505       // Route 2
+#define MUS_RG_LOAD02 505       // Route 3
 #define MUS_RG_LOAD03 506       // Route 11
-#define MUS_RG_CHAMP_R 507      // Victory Road
+#define MUS_RG_CHAMP_R 507      // Victory Road/Indigo Plateau
 #define MUS_RG_VS_GYM 508       // Battle! Gym Leader/Elite Four
 #define MUS_RG_VS_TORE 509      // Battle! Trainer
 #define MUS_RG_VS_YASEI 510     // Battle! Wild Pokémon
@@ -445,7 +445,7 @@
 #define MUS_RG_NAMINORI 517     // Surfing
 #define MUS_RG_P_TOWER 518      // Pokémon Tower
 #define MUS_RG_SHIRUHU 519      // Silph Co.
-#define MUS_RG_HANADA 520       // Cerulean City
+#define MUS_RG_HANADA 520       // Cerulean/Fuschia City
 #define MUS_RG_TAMAMUSI 521     // Celadon City
 #define MUS_RG_WIN_TRE 522      // Victory! Trainer
 #define MUS_RG_WIN_YASEI 523    // Victory! Wild Pokémon
@@ -468,14 +468,14 @@
 #define MUS_RG_NETWORK 540      // Network Center
 #define MUS_RG_OKURIMONO 541    // Mystery Gift
 #define MUS_RG_KINOMIKUI 542
-#define MUS_RG_NANADUNGEON 543  // Sevii Islands Cave (Mt. Moon)
-#define MUS_RG_OSHIE_TV 544     // Follow Me
+#define MUS_RG_NANADUNGEON 543  // Sevii Caves/Altering Cave (Mt. Moon)
+#define MUS_RG_OSHIE_TV 544     // Follow Me!
 #define MUS_RG_NANASHIMA 545    // Sevii Islands Routes (Lake of Rage)
-#define MUS_RG_NANAISEKI 546    // Sevii Islands Forests (Viridian Forest)
+#define MUS_RG_NANAISEKI 546    // Sevii Forests (Viridian Forest)
 #define MUS_RG_NANA123 547      // Sevii Islands 1-3 (Viridian/Saffron/Pewter)
 #define MUS_RG_NANA45 548       // Sevii Islands 4-5 (Azalea Town)
 #define MUS_RG_NANA67 549       // Sevii Islands 6-7 (Violet City)
-#define MUS_RG_POKEFUE 550      // PokéFlute
+#define MUS_RG_POKEFUE 550      // Poké Flute
 #define MUS_RG_VS_DEO 551       // Battle! Deoxys
 #define MUS_RG_VS_MYU2 552      // Battle! Mewtwo
 #define MUS_RG_VS_DEN 553       // Battle! Legendary Birds
