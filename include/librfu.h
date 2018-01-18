@@ -208,6 +208,7 @@ void rfu_getRFUStatus(u8 *status);
 u8 *rfu_getSTWIRecvBuffer(void);
 u8 rfu_NI_CHILD_setSendGameName(u8 a0, u8 a1);
 void rfu_clearSlot(u8 a0, u8 a1);
+void rfu_clearAllSlot(void);
 bool16 rfu_CHILD_getConnectRecoveryStatus(u8 *status);
 bool16 rfu_getConnectParentStatus(u8 *status, u8 *a1);
 bool16 rfu_UNI_PARENT_getDRAC_ACK(u8 *a0);

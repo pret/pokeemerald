@@ -3144,3 +3144,50 @@ void sub_800F498(u16 *a0, u8 *a1)
             a1[i] = 0;
     }
 }
+
+bool32 sub_800F4F0(void)
+{
+    u8 i;
+    u8 j;
+    u8 sp00[MAX_RFU_PLAYERS * (2 * (CMD_LENGTH - 1))];
+    u8 sp48[2 * (CMD_LENGTH - 1)];
+    u8 switchval;
+
+    sub_800D934(&gUnknown_03005000.unk_124, sp00);
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
+    {
+        for (j = 0; j < CMD_LENGTH - 1; j++)
+        {
+            gRecvCmds[i][j] = (sp00[i * 14 + (j << 1) + 1] << 8) | sp00[i * 14 + (j << 1) + 0];
+        }
+    }
+    sub_800F86C(0);
+    if (gUnknown_03004140.unk_02 == 0 && gUnknown_03005000.unk_ce4)
+    {
+        rfu_REQ_disconnect(gUnknown_03007890->unk_02 | gUnknown_03007890->unk_03);
+        rfu_waitREQComplete();
+        switchval = sub_8011A74();
+        if (switchval != 1 && switchval != 6 && switchval != 9)
+            sub_8011A64(2, 0x9000);
+        rfu_clearAllSlot();
+        gReceivedRemoteLinkPlayers = FALSE;
+        gUnknown_03005000.unk_00 = 0;
+        if (gUnknown_03005000.unk_ce4 == 1)
+        {
+            sub_8011A64(2, 0x9000);
+            sub_8011170(0x9000);
+        }
+        gUnknown_03004140.unk_04 = gUnknown_03004140.unk_05 = 0;
+        gUnknown_03005000.unk_ce4 = 0;
+    }
+    if (gUnknown_03005000.unk_cd0)
+    {
+        gUnknown_03005000.unk_cd0--;
+        sub_8010528();
+        sub_800F498(gSendCmd, sp48);
+        sub_800D888(&gUnknown_03005000.unk_9e8, sp48);
+        for (i = 0; i < CMD_LENGTH - 1; i++)
+            gSendCmd[i] = 0;
+    }
+    return sub_800F0B8();
+}

@@ -136,7 +136,7 @@ struct UnkRfuStruct_Sub_Unused {
 };
 
 struct UnkRfuStruct_2 {
-    /* 0x000 */ u8 filler_00[4];
+    /* 0x000 */ u32 unk_00;
     /* 0x004 */ u16 unk_04;
     /* 0x006 */ u8 filler_06[6];
     /* 0x00c */ u8 unk_0c;
