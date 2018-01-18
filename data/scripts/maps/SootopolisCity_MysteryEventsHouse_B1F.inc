@@ -22,14 +22,14 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227E68:: @ 8227E68
 	setvar VAR_0x8005, 0
 	special sub_8163AC4
 	waitstate
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	call_if 1, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227ECF
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EDD
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EE8
 	closemessage
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	applymovement 255, SootopolisCity_MysteryEventsHouse_B1F_Movement_227EF9
 	waitmovement 0
 	special copy_player_party_from_sav1
@@ -46,14 +46,14 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_227ECF:: @ 8227ECF
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EDD:: @ 8227EDD
 	setvar VAR_0x40C0, 1
-	special sub_8138AC0
+	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return
 
 SootopolisCity_MysteryEventsHouse_B1F_EventScript_227EE8:: @ 8227EE8
 	setvar VAR_0x40C0, 2
-	special sub_8138AC0
+	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return

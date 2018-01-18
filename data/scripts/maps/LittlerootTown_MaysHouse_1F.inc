@@ -5,7 +5,7 @@ LittlerootTown_MaysHouse_1F_MapScripts:: @ 81F88A5
 	.byte 0
 
 LittlerootTown_MaysHouse_1F_MapScript1_1F88B5: @ 81F88B5
-	compare_var_to_value VAR_0x4092, 6
+	compare VAR_0x4092, 6
 	call_if 0, LittlerootTown_MaysHouse_1F_EventScript_1F88CA
 	checkflag FLAG_0x112
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F88DD
@@ -18,7 +18,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F88CA:: @ 81F88CA
 
 LittlerootTown_MaysHouse_1F_EventScript_1F88DD:: @ 81F88DD
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LittlerootTown_MaysHouse_1F_EventScript_1F88EA
 	return
 
@@ -27,11 +27,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1F88EA:: @ 81F88EA
 	return
 
 LittlerootTown_MaysHouse_1F_MapScript1_1F88F4: @ 81F88F4
-	compare_var_to_value VAR_0x4092, 3
+	compare VAR_0x4092, 3
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F892E
-	compare_var_to_value VAR_0x4092, 5
+	compare VAR_0x4092, 5
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8916
-	compare_var_to_value VAR_0x4092, 6
+	compare VAR_0x4092, 6
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8922
 	end
 
@@ -98,7 +98,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F89AE:: @ 81F89AE
 	applymovement 255, LittlerootTown_MaysHouse_1F_Movement_2725A8
 	applymovement 4, LittlerootTown_MaysHouse_1F_Movement_1F89EC
 	waitmovement 0
-	special sub_8138B48
+	special GetRivalSonDaughterString
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F8BC5, 4
 	setflag FLAG_0x057
 	setvar VAR_0x408C, 2
@@ -122,9 +122,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1F89F3:: @ 81F89F3
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A33
 	checkflag FLAG_SYS_POKEMON_GET
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A29
-	compare_var_to_value VAR_0x408D, 3
+	compare VAR_0x408D, 3
 	goto_eq LittlerootTown_BrendansHouse_1F_EventScript_1F8A1F
-	special sub_8138B48
+	special GetRivalSonDaughterString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F8CA5, 4
 	release
 	end
@@ -148,7 +148,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1F8A3D:: @ 81F8A3D
 LittlerootTown_MaysHouse_1F_EventScript_1F8A3D:: @ 81F8A3D
 	lock
 	faceplayer
-	special sub_8138B10
+	special GetPlayerBigGuyGirlString
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1F9262, 4
 	release
 	end
@@ -190,22 +190,22 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	waitmovement 0
 	applymovement 7, LittlerootTown_MaysHouse_1F_Movement_27259A
 	waitmovement 0
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 5, LittlerootTown_MaysHouse_1F_EventScript_1F8B2A
-	playbgm BGM_GIRL_SUP, 1
-	compare_var_to_value VAR_0x8008, 0
+	playbgm MUS_GIRL_SUP, 1
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B35
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B40
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B4B
 	msgbox LittlerootTown_MaysHouse_1F_Text_1F8EC6, 4
 	closemessage
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B6A
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B7C
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, LittlerootTown_MaysHouse_1F_EventScript_1F8B8E
 	playse SE_KAIDAN
 	removeobject 7
@@ -215,7 +215,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1F8A8B:: @ 81F8A8B
 	delay 30
 	setvar VAR_0x408D, 3
 	setvar VAR_0x4050, 1
-	savebgm SE_STOP
+	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
 	end

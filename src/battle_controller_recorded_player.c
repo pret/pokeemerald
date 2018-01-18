@@ -4,6 +4,7 @@
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "battle_anim.h"
+#include "constants/battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "recorded_battle.h"
 #include "pokemon.h"
@@ -53,7 +54,7 @@ extern u8 gUnknown_020244B4[];
 extern u32 gTransformedPersonalities[BATTLE_BANKS_COUNT];
 extern u8 gBattleCommunication[];
 extern u8 gUnknown_0203C7B4;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
 
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
@@ -353,11 +354,11 @@ static void sub_8189D40(void)
             if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && (gBattleTypeFlags & BATTLE_TYPE_MULTI))
             {
                 if (GetBankIdentity(gActiveBank) == IDENTITY_PLAYER_MON1)
-                    m4aMPlayContinue(&gMPlay_BGM);
+                    m4aMPlayContinue(&gMPlayInfo_BGM);
             }
             else
             {
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
             }
 
         }

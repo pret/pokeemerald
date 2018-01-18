@@ -11,9 +11,9 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218CC2:: @ 8218CC2
 	message LilycoveCity_LilycoveMuseum_1F_Text_218EBC
 	waitmessage
 	multichoice 20, 8, 16, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218CF5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218CEC
 	end
 
@@ -23,9 +23,9 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_218CEC:: @ 8218CEC
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_218CF5:: @ 8218CF5
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_218F98, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218D14
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_LilycoveMuseum_1F_EventScript_218D1E
 	end
 

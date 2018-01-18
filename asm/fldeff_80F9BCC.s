@@ -591,7 +591,7 @@ sub_80FA004: @ 80FA004
 	bne _080FA070
 	bl sub_80F9F5C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_80FA0DC
@@ -606,7 +606,7 @@ _080FA070:
 	bne _080FA0A0
 	bl sub_80F9F5C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_80FA1E8
@@ -625,7 +625,7 @@ _080FA0AE:
 _080FA0B2:
 	bl sub_80F9F5C
 	ldr r1, =gUnknown_03005DB0
-	ldr r0, =hm_add_c3_launch_phase_2
+	ldr r0, =FieldCallback_Teleport
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_80FA34C
@@ -2275,8 +2275,8 @@ overworld_poison_effect: @ 80FAEA8
 	.pool
 	thumb_func_end overworld_poison_effect
 
-	thumb_func_start c3_80A0DD8_is_running
-c3_80A0DD8_is_running: @ 80FAEC0
+	thumb_func_start FieldPoisonEffectIsRunning
+FieldPoisonEffectIsRunning: @ 80FAEC0
 	push {lr}
 	ldr r0, =task50_overworld_poison_effect
 	bl FuncIsActiveTask
@@ -2285,7 +2285,7 @@ c3_80A0DD8_is_running: @ 80FAEC0
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end c3_80A0DD8_is_running
+	thumb_func_end FieldPoisonEffectIsRunning
 
 	thumb_func_start sub_80FAED4
 sub_80FAED4: @ 80FAED4

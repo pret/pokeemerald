@@ -1,7 +1,6 @@
-@ the fourth big chunk of data
-
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
+	.include "include/constants/species.h"
 
 	.section .rodata
 
@@ -15,7 +14,10 @@ gBirchGrassTilemap:: @ 85B0C0C
 	.incbin "baserom.gba", 0x5b0c0c, 0x1f8
 
 gBirchHelpGfx:: @ 85B0E04
-	.incbin "baserom.gba", 0x5b0e04, 0xfc8
+	.incbin "baserom.gba", 0x5b0e04, 0xaa8
+
+gUnknown_085B18AC:: @ 85B18AC
+	.incbin "baserom.gba", 0x5b18AC, 0x520
 
 gUnknown_085B1DCC:: @ 85B1DCC
 	.incbin "baserom.gba", 0x5b1dcc, 0x10
@@ -33,8 +35,11 @@ gStarterChoose_LabelCoords:: @ 85B1DF2
 	.incbin "baserom.gba", 0x5b1df2, 0x6
 
 sStarterMon:: @ 85B1DF8
-	.incbin "baserom.gba", 0x5b1df8, 0x8
+	.2byte SPECIES_TREECKO
+	.2byte SPECIES_TORCHIC
+	.2byte SPECIES_MUDKIP
 
+.align 2
 gUnknown_085B1E00:: @ 85B1E00
 	.incbin "baserom.gba", 0x5b1e00, 0xc
 
@@ -63,5 +68,4 @@ sSpriteTemplate_PokeBall:: @ 85B1F28
 	.incbin "baserom.gba", 0x5b1f28, 0x18
 
 gUnknown_085B1F40:: @ 85B1F40
-	.incbin "baserom.gba", 0x5b1f40, 0x294
-
+	.incbin "baserom.gba", 0x5b1f40, 0x18

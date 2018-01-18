@@ -4,8 +4,8 @@
 #include "text.h"
 #include "sound.h"
 
-static const u8 gUnknown_08616124[] = {1, 2, 4};
-static const u16 gFont6BrailleGlyphs[] = INCBIN_U16("data/graphics/fonts/font6.fwjpnfont");
+static const u8 sUnknown_08616124[] = {1, 2, 4};
+static const u16 sFont6BrailleGlyphs[] = INCBIN_U16("data/graphics/fonts/font6.fwjpnfont");
 
 static void DecompressGlyphFont6(u16);
 
@@ -13,7 +13,7 @@ u16 Font6Func(struct TextPrinter *textPrinter)
 {
     u16 char_;
     struct TextPrinterSubStruct *sub;
-    
+
     sub = &textPrinter->sub_union.sub;
     switch (textPrinter->state)
     {
@@ -163,15 +163,15 @@ u16 Font6Func(struct TextPrinter *textPrinter)
         case 4:
             if (textPrinter->scrollDistance)
             {
-                if (textPrinter->scrollDistance < gUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed])
+                if (textPrinter->scrollDistance < sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed])
                 {
                     ScrollWindow(textPrinter->subPrinter.windowId, 0, textPrinter->scrollDistance, textPrinter->subPrinter.bgColor | (textPrinter->subPrinter.bgColor << 4));
                     textPrinter->scrollDistance = 0;
                 }
                 else
                 {
-                    ScrollWindow(textPrinter->subPrinter.windowId, 0, gUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed], textPrinter->subPrinter.bgColor | (textPrinter->subPrinter.bgColor << 4));
-                    textPrinter->scrollDistance -= gUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed];
+                    ScrollWindow(textPrinter->subPrinter.windowId, 0, sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed], textPrinter->subPrinter.bgColor | (textPrinter->subPrinter.bgColor << 4));
+                    textPrinter->scrollDistance -= sUnknown_08616124[gSaveBlock2Ptr->optionsTextSpeed];
                 }
                 CopyWindowToVram(textPrinter->subPrinter.windowId, 2);
             }
@@ -204,7 +204,7 @@ static void DecompressGlyphFont6(u16 glyph)
 {
     const u16 *glyphs;
 
-    glyphs = gFont6BrailleGlyphs + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
+    glyphs = sFont6BrailleGlyphs + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
     DecompressGlyphTile(glyphs, (u16 *)gUnknown_03002F90);
     DecompressGlyphTile(glyphs + 0x8, (u16 *)(gUnknown_03002F90 + 0x20));
     DecompressGlyphTile(glyphs + 0x80, (u16 *)(gUnknown_03002F90 + 0x40));

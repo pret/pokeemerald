@@ -3696,7 +3696,7 @@ _0807920E:
 	thumb_func_start sub_8079218
 sub_8079218: @ 8079218
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3798,7 +3798,7 @@ _080792D8:
 	thumb_func_start sub_80792E4
 sub_80792E4: @ 80792E4
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -7602,7 +7602,7 @@ sub_807B170: @ 807B170
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
 	bl DeactivateAllTextPrinters
-	ldr r0, =gUnknown_08C00000
+	ldr r0, =gBattleTextboxTiles
 	mov r10, r0
 	movs r0, 0
 	mov r9, r0
@@ -7611,7 +7611,7 @@ sub_807B170: @ 807B170
 	movs r2, 0
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r0, =gUnknown_08C00524
+	ldr r0, =gBattleTextboxTilemap
 	mov r8, r0
 	ldr r4, =0x0201c000
 	adds r1, r4, 0
@@ -7621,7 +7621,7 @@ sub_807B170: @ 807B170
 	adds r2, r5, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r6, =gUnknown_08C004E0
+	ldr r6, =gBattleTextboxPalette
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0x20
@@ -8105,11 +8105,11 @@ _0807B668:
 	ldr r1, =0x00005206
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, =gUnknown_08DD7300
+	ldr r0, =gTradeGba2_Pal
 	movs r1, 0x10
 	movs r2, 0x60
 	bl LoadPalette
-	ldr r3, =gUnknown_08DD7360
+	ldr r3, =gTradeGba_Gfx
 	ldr r4, =0x06004000
 	movs r5, 0xA1
 	lsls r5, 5
@@ -8168,7 +8168,7 @@ _0807B726:
 	ldr r1, =0x80000800
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	ldr r3, =gUnknown_08DD7360
+	ldr r3, =gTradeGba_Gfx
 	movs r4, 0xC0
 	lsls r4, 19
 	movs r5, 0xA1
@@ -8446,11 +8446,11 @@ _0807B9FC:
 	ldr r1, =0x00005206
 	movs r0, 0xC
 	bl SetGpuReg
-	ldr r0, =gUnknown_08DD7300
+	ldr r0, =gTradeGba2_Pal
 	movs r1, 0x10
 	movs r2, 0x60
 	bl LoadPalette
-	ldr r3, =gUnknown_08DD7360
+	ldr r3, =gTradeGba_Gfx
 	ldr r4, =0x06004000
 	movs r5, 0xA1
 	lsls r5, 5
@@ -13369,7 +13369,7 @@ sub_807E7E8: @ 807E7E8
 	ldrh r0, [r5, 0x28]
 	cmp r0, 0
 	beq _0807E960
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807E954
@@ -13442,7 +13442,7 @@ _0807E98E:
 	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_81DB4DC
+	bl PadNameString
 	ldr r1, [r6, 0x18]
 	lsrs r0, r1, 24
 	strb r0, [r5, 0x1A]

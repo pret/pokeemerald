@@ -33,9 +33,9 @@ SlateportCity_PokemonFanClub_EventScript_209EE5:: @ 8209EE5
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_209FD0
 	checkflag FLAG_0x0C8
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_209FD0
-	compare_var_to_value VAR_0x4002, 5
+	compare VAR_0x4002, 5
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_209FCA
-	compare_var_to_value VAR_0x40B7, 2
+	compare VAR_0x40B7, 2
 	goto_eq SlateportCity_PokemonFanClub_EventScript_209F3B
 	msgbox SlateportCity_PokemonFanClub_Text_20A62A, 4
 	goto SlateportCity_PokemonFanClub_EventScript_209F45
@@ -85,7 +85,7 @@ SlateportCity_PokemonFanClub_EventScript_209FD6:: @ 8209FD6
 
 SlateportCity_PokemonFanClub_EventScript_209FE0:: @ 8209FE0
 	checkitemspace ITEM_RED_SCARF, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_20A0D5
 	msgbox SlateportCity_PokemonFanClub_Text_20A795, 4
 	setflag FLAG_0x0C8
@@ -96,7 +96,7 @@ SlateportCity_PokemonFanClub_EventScript_209FE0:: @ 8209FE0
 
 SlateportCity_PokemonFanClub_EventScript_20A011:: @ 820A011
 	checkitemspace ITEM_BLUE_SCARF, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_20A0D5
 	msgbox SlateportCity_PokemonFanClub_Text_20A795, 4
 	setflag FLAG_0x0C9
@@ -107,7 +107,7 @@ SlateportCity_PokemonFanClub_EventScript_20A011:: @ 820A011
 
 SlateportCity_PokemonFanClub_EventScript_20A042:: @ 820A042
 	checkitemspace ITEM_PINK_SCARF, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_20A0D5
 	msgbox SlateportCity_PokemonFanClub_Text_20A795, 4
 	setflag FLAG_0x0CA
@@ -118,7 +118,7 @@ SlateportCity_PokemonFanClub_EventScript_20A042:: @ 820A042
 
 SlateportCity_PokemonFanClub_EventScript_20A073:: @ 820A073
 	checkitemspace ITEM_GREEN_SCARF, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_20A0D5
 	msgbox SlateportCity_PokemonFanClub_Text_20A795, 4
 	setflag FLAG_0x0CB
@@ -129,7 +129,7 @@ SlateportCity_PokemonFanClub_EventScript_20A073:: @ 820A073
 
 SlateportCity_PokemonFanClub_EventScript_20A0A4:: @ 820A0A4
 	checkitemspace ITEM_YELLOW_SCARF, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_20A0D5
 	msgbox SlateportCity_PokemonFanClub_Text_20A795, 4
 	setflag FLAG_0x0CC
@@ -144,8 +144,8 @@ SlateportCity_PokemonFanClub_EventScript_20A0D5:: @ 820A0D5
 	end
 
 SlateportCity_PokemonFanClub_EventScript_20A0DF:: @ 820A0DF
-	specialvar VAR_RESULT, sub_8139004
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, CheckLeadMonCool
+	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_20A0F0
 	return
 
@@ -154,8 +154,8 @@ SlateportCity_PokemonFanClub_EventScript_20A0F0:: @ 820A0F0
 	return
 
 SlateportCity_PokemonFanClub_EventScript_20A0F6:: @ 820A0F6
-	specialvar VAR_RESULT, sub_8139030
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, CheckLeadMonBeauty
+	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_20A107
 	return
 
@@ -164,8 +164,8 @@ SlateportCity_PokemonFanClub_EventScript_20A107:: @ 820A107
 	return
 
 SlateportCity_PokemonFanClub_EventScript_20A10D:: @ 820A10D
-	specialvar VAR_RESULT, sub_813905C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, CheckLeadMonCute
+	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_20A11E
 	return
 
@@ -174,8 +174,8 @@ SlateportCity_PokemonFanClub_EventScript_20A11E:: @ 820A11E
 	return
 
 SlateportCity_PokemonFanClub_EventScript_20A124:: @ 820A124
-	specialvar VAR_RESULT, sub_8139088
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, CheckLeadMonSmart
+	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_20A135
 	return
 
@@ -184,8 +184,8 @@ SlateportCity_PokemonFanClub_EventScript_20A135:: @ 820A135
 	return
 
 SlateportCity_PokemonFanClub_EventScript_20A13B:: @ 820A13B
-	specialvar VAR_RESULT, sub_81390B4
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, CheckLeadMonTough
+	compare VAR_RESULT, 1
 	call_if 1, SlateportCity_PokemonFanClub_EventScript_20A14C
 	return
 
@@ -217,8 +217,8 @@ SlateportCity_PokemonFanClub_EventScript_20A17E:: @ 820A17E
 	checkflag FLAG_0x116
 	goto_eq SlateportCity_PokemonFanClub_EventScript_20A1DE
 	msgbox SlateportCity_PokemonFanClub_Text_20AA77, 4
-	specialvar VAR_RESULT, sub_8138C04
-	compare_var_to_value VAR_RESULT, 4
+	specialvar VAR_RESULT, GetLeadMonFriendshipScore
+	compare VAR_RESULT, 4
 	goto_if 4, SlateportCity_PokemonFanClub_EventScript_20A1A3
 	release
 	end
@@ -231,7 +231,7 @@ SlateportCity_PokemonFanClub_EventScript_20A1A3:: @ 820A1A3
 	waitmovement 0
 	msgbox SlateportCity_PokemonFanClub_Text_20AB63, 4
 	giveitem_std ITEM_SOOTHE_BELL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_PokemonFanClub_EventScript_272054
 	setflag FLAG_0x116
 	release

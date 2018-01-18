@@ -65,7 +65,7 @@
 	.byte 3, 4, \slot, \slot, \slot
 	.endm
 
-	.macro sprite_oam x, y, priority, tile_num_offset, size
+	.macro subsprite x, y, priority, tile_num_offset, size
 	.byte \x
 	.byte \y
 	.2byte ((\priority) << 14) | ((\tile_num_offset) << 4) | SPRITE_SIZE_\size
@@ -114,7 +114,22 @@
 	.4byte 0 @ padding
 	.endm
 
-	.macro obj_rot_scal_anim_end
+	.macro obj_rot_scal_anim_end unknown=0
 	.2byte 0x7fff
-	.fill 6 @ padding
+	.2byte \unknown
+	.fill 4 @ padding
+	.endm
+
+	.macro door_anim_frame unknown, offset
+	.byte \unknown
+	.byte 0 @ padding
+	.2byte \offset
+	.endm
+
+	.macro door_anim_gfx metatile_num, unknown, unknown2, tile_addr, palette_addr
+	.2byte \metatile_num
+	.byte \unknown
+	.byte \unknown2
+	.4byte \tile_addr
+	.4byte \palette_addr
 	.endm

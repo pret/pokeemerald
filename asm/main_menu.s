@@ -3025,7 +3025,7 @@ task_new_game_prof_birch_speech_part2_4: @ 8031188
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3948,7 +3948,7 @@ AddBirchSpeechObjects: @ 803192C
 	movs r1, 0x78
 	movs r2, 0x3C
 	movs r3, 0
-	bl sub_80B5E6C
+	bl CreateTrainerSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -3981,7 +3981,7 @@ AddBirchSpeechObjects: @ 803192C
 	movs r1, 0x78
 	movs r2, 0x3C
 	movs r3, 0
-	bl sub_80B5E6C
+	bl CreateTrainerSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4

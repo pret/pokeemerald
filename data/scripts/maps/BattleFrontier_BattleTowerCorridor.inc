@@ -4,7 +4,7 @@ BattleFrontier_BattleTowerCorridor_MapScripts:: @ 8241AAA
 	.byte 0
 
 BattleFrontier_BattleTowerCorridor_MapScript1_241AB5: @ 8241AB5
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	goto_eq BattleFrontier_BattleTowerCorridor_EventScript_241AD3
 	setmetatile 12, 0, 519, 0
 	setmetatile 12, 1, 527, 0
@@ -21,7 +21,7 @@ BattleFrontier_BattleTowerCorridor_MapScript2_241AE6: @ 8241AE6
 
 BattleFrontier_BattleTowerCorridor_EventScript_241AF0:: @ 8241AF0
 	setvar VAR_0x4000, 1
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	goto_eq BattleFrontier_BattleTowerCorridor_EventScript_241B16
 	applymovement 1, BattleFrontier_BattleTowerCorridor_Movement_241B3A
 	applymovement 255, BattleFrontier_BattleTowerCorridor_Movement_241B39

@@ -5,20 +5,20 @@ Route129_MapScripts:: @ 81F7284
 	.byte 0
 
 Route129_MapScript1_1F7294: @ 81F7294
-	compare_var_to_value VAR_0x4037, 15
+	compare VAR_0x4037, 15
 	call_if 1, Route129_EventScript_273C39
-	compare_var_to_value VAR_0x4037, 16
+	compare VAR_0x4037, 16
 	call_if 1, Route129_EventScript_273CA6
 	end
 
 Route129_MapScript1_1F72AB: @ 81F72AB
-	compare_var_to_value VAR_0x4039, 1
+	compare VAR_0x4039, 1
 	call_if 1, Route129_EventScript_273D13
-	compare_var_to_value VAR_0x405E, 4
+	compare VAR_0x405E, 4
 	call_if 4, Route129_EventScript_1F72D8
-	compare_var_to_value VAR_0x4037, 15
+	compare VAR_0x4037, 15
 	call_if 1, Route129_EventScript_273D17
-	compare_var_to_value VAR_0x4037, 16
+	compare VAR_0x4037, 16
 	call_if 1, Route129_EventScript_273D17
 	end
 

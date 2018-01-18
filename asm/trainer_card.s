@@ -601,12 +601,12 @@ _080C2C04:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C2C28
-	ldr r0, =gUnknown_08DD1AB8
+	ldr r0, =gEmeraldTrainerCard_Gfx
 	ldr r2, =0x000019a8
 	b _080C2C4A
 	.pool
 _080C2C28:
-	ldr r0, =gUnknown_08DD246C
+	ldr r0, =gFireRedTrainerCard_Gfx
 	ldr r2, =0x000019a8
 	b _080C2C4A
 	.pool
@@ -3082,7 +3082,7 @@ _080C4214:
 	movs r1, 0x60
 	movs r2, 0
 	movs r3, 0
-	bl sub_80A2BAC
+	bl TintPalette_CustomTone
 	b _080C424A
 _080C422A:
 	adds r0, r4, r5
@@ -3094,7 +3094,7 @@ _080C422A:
 	lsls r1, 1
 	str r1, [sp]
 	movs r1, 0x60
-	bl sub_80A2BAC
+	bl TintPalette_CustomTone
 	b _080C424A
 _080C4242:
 	adds r0, r4, r5
@@ -3317,7 +3317,7 @@ _080C4418:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C447C
-	ldr r1, =gUnknown_0856FAE4
+	ldr r1, =gEmeraldTrainerCardStarPals
 	ldr r3, =0x00000535
 	adds r0, r2, r3
 	ldrb r0, [r0]
@@ -3344,7 +3344,7 @@ _080C4418:
 	b _080C44B2
 	.pool
 _080C447C:
-	ldr r1, =gUnknown_0856FAF8
+	ldr r1, =gFireRedTrainerCardStarPals
 	ldr r3, =0x00000535
 	adds r0, r2, r3
 	ldrb r0, [r0]
@@ -5766,7 +5766,7 @@ sub_80C58D4: @ 80C58D4
 	beq _080C5914
 	cmp r0, 0x2
 	beq _080C591C
-	bl sub_8085784
+	bl Overworld_PlaySpecialMapMusic
 	b _080C5924
 	.pool
 _080C5914:

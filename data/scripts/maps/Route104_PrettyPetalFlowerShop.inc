@@ -3,7 +3,7 @@ Route104_PrettyPetalFlowerShop_MapScripts:: @ 822A34C
 	.byte 0
 
 Route104_PrettyPetalFlowerShop_MapScript1_22A352: @ 822A352
-	setflag FLAG_0x89C
+	setflag FLAG_LANDMARK_FLOWER_SHOP
 	checkflag FLAG_0x07F
 	goto_if 0, Route104_PrettyPetalFlowerShop_EventScript_22A36B
 	checkflag FLAG_BADGE03_GET
@@ -25,18 +25,18 @@ Route104_PrettyPetalFlowerShop_EventScript_22A373:: @ 822A373
 	goto_eq Route104_PrettyPetalFlowerShop_EventScript_22A3B2
 	setflag FLAG_0x07F
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A7706, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_22A3D2
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_22A3DB
 	release
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_22A3B2:: @ 822A3B2
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A76D9, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_22A3D2
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, Route104_PrettyPetalFlowerShop_EventScript_22A3DB
 	release
 	end
@@ -96,7 +96,7 @@ Route104_PrettyPetalFlowerShop_EventScript_22A442:: @ 822A442
 	random 8
 	addvar VAR_RESULT, 133
 	giveitem_std VAR_RESULT
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route104_PrettyPetalFlowerShop_EventScript_272054
 	setflag FLAG_0x930
 	msgbox Route104_PrettyPetalFlowerShop_Text_2A7AF3, 4

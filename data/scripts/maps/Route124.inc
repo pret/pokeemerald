@@ -23,8 +23,8 @@ Route124_EventScript_1F659C:: @ 81F659C
 
 Route124_EventScript_1F65B3:: @ 81F65B3
 	trainerbattle 2, TRAINER_JENNY_1, 0, Route124_Text_2A0B37, Route124_Text_2A0B7C, Route124_EventScript_1F65DF
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route124_EventScript_1F65FE
 	msgbox Route124_Text_2A0B9A, 4
 	release
@@ -58,8 +58,8 @@ Route124_EventScript_1F662C:: @ 81F662C
 
 Route124_EventScript_1F6643:: @ 81F6643
 	trainerbattle 6, TRAINER_LILA_AND_ROY_1, 0, Route124_Text_2A0E87, Route124_Text_2A0EFE, Route124_Text_2A0F8C, Route124_EventScript_1F6673
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route124_EventScript_1F668C
 	msgbox Route124_Text_2A0F3A, 4
 	release
@@ -81,8 +81,8 @@ Route124_EventScript_1F668C:: @ 81F668C
 
 Route124_EventScript_1F66A7:: @ 81F66A7
 	trainerbattle 6, TRAINER_LILA_AND_ROY_1, 0, Route124_Text_2A0FD1, Route124_Text_2A1012, Route124_Text_2A10E5, Route124_EventScript_1F66D7
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route124_EventScript_1F66F0
 	msgbox Route124_Text_2A103E, 4
 	release

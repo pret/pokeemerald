@@ -10,9 +10,9 @@ VerdanturfTown_BattleTentBattleRoom_MapScript1_20230A: @ 820230A
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_202310:: @ 8202310
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202328
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq VerdanturfTown_BattleTentBattleRoom_EventScript_202333
 	return
 
@@ -37,7 +37,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_202348:: @ 8202348
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, VerdanturfTown_BattleTentBattleRoom_EventScript_20243C
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20236F:: @ 820236F
@@ -86,17 +86,17 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_2023C8:: @ 82023C8
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_20243C:: @ 820243C
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, VerdanturfTown_BattleTentBattleRoom_EventScript_202565
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, VerdanturfTown_BattleTentBattleRoom_EventScript_20256C
 	multichoice 20, 6, 104, 1
 	switch VAR_RESULT

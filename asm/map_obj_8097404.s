@@ -82,9 +82,9 @@ _0809748E:
 	bx r1
 	thumb_func_end sub_8097404
 
-	thumb_func_start player_bitmagic
-@ void player_bitmagic()
-player_bitmagic: @ 8097494
+	thumb_func_start FreezeMapObjects
+@ void FreezeMapObjects()
+FreezeMapObjects: @ 8097494
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, =gMapObjects
@@ -113,7 +113,7 @@ _080974B8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end player_bitmagic
+	thumb_func_end FreezeMapObjects
 
 	thumb_func_start sub_80974D0
 sub_80974D0: @ 80974D0

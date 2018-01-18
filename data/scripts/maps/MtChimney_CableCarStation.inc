@@ -4,7 +4,7 @@ MtChimney_CableCarStation_MapScripts:: @ 822ABFA
 	.byte 0
 
 MtChimney_CableCarStation_MapScript1_22AC05: @ 822AC05
-	compare_var_to_value VAR_0x40A3, 1
+	compare VAR_0x40A3, 1
 	call_if 1, MtChimney_CableCarStation_EventScript_22AC11
 	end
 
@@ -32,9 +32,9 @@ MtChimney_CableCarStation_EventScript_22AC4B:: @ 822AC4B
 	lock
 	faceplayer
 	msgbox MtChimney_CableCarStation_Text_22ACB9, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq MtChimney_CableCarStation_EventScript_22AC6C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MtChimney_CableCarStation_EventScript_22AC9B
 	end
 
@@ -47,7 +47,7 @@ MtChimney_CableCarStation_EventScript_22AC6C:: @ 822AC6C
 	setvar VAR_0x8004, 1
 	setvar VAR_0x40A3, 2
 	incrementgamestat 48
-	special sub_8138B8C
+	special CableCarWarp
 	special sub_814FC9C
 	waitstate
 	release

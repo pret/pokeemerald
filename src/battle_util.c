@@ -3,6 +3,7 @@
 #include "constants/abilities.h"
 #include "constants/moves.h"
 #include "constants/hold_effects.h"
+#include "constants/battle_anim.h"
 #include "pokemon.h"
 #include "constants/species.h"
 #include "item.h"

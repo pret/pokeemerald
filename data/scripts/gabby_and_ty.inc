@@ -1,7 +1,7 @@
 EventScript_28CCAA:: @ 828CCAA
 	setvar VAR_0x8005, 8
 	special InterviewBefore
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EventScript_28CCC6
 	setvar VAR_0x8005, 8
 	special InterviewAfter
@@ -214,11 +214,11 @@ Route120_EventScript_28CF36:: @ 828CF36
 Route111_EventScript_28CF56:: @ 828CF56
 	special GabbyAndTyBeforeInterview
 	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, Route111_EventScript_28CF94
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, Route111_EventScript_28CF9F
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, Route111_EventScript_28CFB1
 	checkflag FLAG_0x001
 	goto_eq Route111_EventScript_28D0EE
@@ -248,16 +248,16 @@ Route118_EventScript_28CFC3:: @ 828CFC3
 Route120_EventScript_28CFC3:: @ 828CFC3
 	special GabbyAndTyBeforeInterview
 	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, Route111_EventScript_28CF94
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, Route111_EventScript_28CF9F
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, Route111_EventScript_28CFB1
 	checkflag FLAG_0x001
 	goto_eq Route111_EventScript_28D0EE
 	specialvar VAR_RESULT, GabbyAndTyGetLastQuote
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_28D053
 	msgbox Route111_Text_28B137, 4
 	specialvar VAR_RESULT, GabbyAndTyGetLastBattleTrivia
@@ -312,14 +312,14 @@ Route111_EventScript_28D099:: @ 828D099
 	end
 
 Route111_EventScript_28D0A7:: @ 828D0A7
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_28D0E1
 	msgbox Route111_Text_28B433, 4
 	setvar VAR_0x8004, 10
 	call Route111_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_28D0E1
 	msgbox Route111_Text_28B4AB, 4
 	special GabbyAndTyAfterInterview

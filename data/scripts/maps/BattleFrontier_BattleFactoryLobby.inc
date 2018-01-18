@@ -55,7 +55,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_25849B:: @ 825849B
 	lockall
 	setvar VAR_0x8004, 10
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryLobby_EventScript_2584BD
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258D93, 4
 	waitmessage
@@ -102,7 +102,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_258506:: @ 8258506
 
 BattleFrontier_BattleFactoryLobby_EventScript_25853B:: @ 825853B
 	call BattleFrontier_BattleFactoryLobby_EventScript_23E8E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattleFactoryLobby_EventScript_258582
 	message BattleFrontier_BattleFactoryLobby_Text_259388
 	waitmessage
@@ -155,15 +155,15 @@ BattleFrontier_BattleFactoryLobby_EventScript_2585DD:: @ 82585DD
 
 BattleFrontier_BattleFactoryLobby_EventScript_2585ED:: @ 82585ED
 	special copy_player_party_to_sav1
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587B1
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587BA
 
 BattleFrontier_BattleFactoryLobby_EventScript_258606:: @ 8258606
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587C3
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587C9
 	waitmessage
 	multichoice 17, 6, 23, 0
@@ -210,7 +210,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_2586B9:: @ 82586B9
 	delay 2
 	call BattleFrontier_BattleFactoryLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattleFactoryLobby_EventScript_258783
 	setvar VAR_0x8006, 0
 
@@ -218,9 +218,9 @@ BattleFrontier_BattleFactoryLobby_EventScript_25871A:: @ 825871A
 	special copy_player_party_to_sav1
 	msgbox BattleFrontier_BattleFactoryLobby_Text_258CB1, 4
 	closemessage
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_25875C
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_258762
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_2587A7
 	applymovement 255, BattleFrontier_BattleFactoryLobby_Movement_2587AC
@@ -239,9 +239,9 @@ BattleFrontier_BattleFactoryLobby_EventScript_258762:: @ 8258762
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_258768:: @ 8258768
-	compare_var_to_value VAR_0x40CE, 0
+	compare VAR_0x40CE, 0
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587CF
-	compare_var_to_value VAR_0x40CE, 1
+	compare VAR_0x40CE, 1
 	call_if 1, BattleFrontier_BattleFactoryLobby_EventScript_2587D8
 	goto BattleFrontier_BattleFactoryLobby_EventScript_258606
 

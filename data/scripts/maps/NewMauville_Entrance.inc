@@ -4,7 +4,7 @@ NewMauville_Entrance_MapScripts:: @ 82372AD
 	.byte 0
 
 NewMauville_Entrance_MapScript1_2372B8: @ 82372B8
-	compare_var_to_value VAR_0x40BA, 0
+	compare VAR_0x40BA, 0
 	call_if 1, NewMauville_Entrance_EventScript_2372C4
 	end
 
@@ -18,7 +18,7 @@ NewMauville_Entrance_EventScript_2372C4:: @ 82372C4
 	return
 
 NewMauville_Entrance_MapScript1_2372FB: @ 82372FB
-	setflag FLAG_0x8A0
+	setflag FLAG_LANDMARK_NEW_MAUVILLE
 	end
 
 NewMauville_Entrance_EventScript_2372FF:: @ 82372FF
@@ -27,10 +27,10 @@ NewMauville_Entrance_EventScript_2372FF:: @ 82372FF
 	waitmovement 0
 	msgbox NewMauville_Entrance_Text_237382, 4
 	checkitem ITEM_BASEMENT_KEY, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq NewMauville_Entrance_EventScript_237380
 	msgbox NewMauville_Entrance_Text_237396, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq NewMauville_Entrance_EventScript_237380
 	msgbox NewMauville_Entrance_Text_2373AC, 4
 	setmetatile 3, 0, 707, 0

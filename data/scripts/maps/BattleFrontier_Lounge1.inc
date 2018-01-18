@@ -15,9 +15,9 @@ BattleFrontier_Lounge1_EventScript_25E775:: @ 825E775
 BattleFrontier_Lounge1_EventScript_25E792:: @ 825E792
 	special sub_81B94B0
 	waitstate
-	compare_var_to_value VAR_0x8004, 255
+	compare VAR_0x8004, 255
 	goto_if 5, BattleFrontier_Lounge1_EventScript_25E7BF
-	compare_var_to_value VAR_0x8004, 255
+	compare VAR_0x8004, 255
 	goto_eq BattleFrontier_Lounge1_EventScript_25E943
 	end
 
@@ -30,17 +30,17 @@ BattleFrontier_Lounge1_EventScript_25E7B6:: @ 825E7B6
 	return
 
 BattleFrontier_Lounge1_EventScript_25E7BF:: @ 825E7BF
-	specialvar VAR_RESULT, sub_81396E0
-	compare_var_to_value VAR_RESULT, 412
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
+	compare VAR_RESULT, 412
 	goto_eq BattleFrontier_Lounge1_EventScript_25E7FF
 	special sub_8139D98
-	compare_var_to_value VAR_0x8005, 90
+	compare VAR_0x8005, 90
 	goto_if 3, BattleFrontier_Lounge1_EventScript_25E87F
-	compare_var_to_value VAR_0x8005, 120
+	compare VAR_0x8005, 120
 	goto_if 3, BattleFrontier_Lounge1_EventScript_25E88D
-	compare_var_to_value VAR_0x8005, 150
+	compare VAR_0x8005, 150
 	goto_if 3, BattleFrontier_Lounge1_EventScript_25E89B
-	compare_var_to_value VAR_0x8005, 151
+	compare VAR_0x8005, 151
 	goto_if 4, BattleFrontier_Lounge1_EventScript_25E8A9
 	end
 
@@ -50,28 +50,28 @@ BattleFrontier_Lounge1_EventScript_25E7FF:: @ 825E7FF
 	end
 
 BattleFrontier_Lounge1_EventScript_25E80D:: @ 825E80D
-	compare_var_to_value VAR_0x8006, 0
+	compare VAR_0x8006, 0
 	goto_eq BattleFrontier_Lounge1_EventScript_25E8B7
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	goto_eq BattleFrontier_Lounge1_EventScript_25E8C5
-	compare_var_to_value VAR_0x8006, 2
+	compare VAR_0x8006, 2
 	goto_eq BattleFrontier_Lounge1_EventScript_25E8D3
-	compare_var_to_value VAR_0x8006, 3
+	compare VAR_0x8006, 3
 	goto_eq BattleFrontier_Lounge1_EventScript_25E8E1
-	compare_var_to_value VAR_0x8006, 4
+	compare VAR_0x8006, 4
 	goto_eq BattleFrontier_Lounge1_EventScript_25E8EF
-	compare_var_to_value VAR_0x8006, 5
+	compare VAR_0x8006, 5
 	goto_eq BattleFrontier_Lounge1_EventScript_25E8FD
 	end
 
 BattleFrontier_Lounge1_EventScript_25E850:: @ 825E850
-	compare_var_to_value VAR_0x8007, 15
+	compare VAR_0x8007, 15
 	goto_if 3, BattleFrontier_Lounge1_EventScript_25E90B
-	compare_var_to_value VAR_0x8007, 25
+	compare VAR_0x8007, 25
 	goto_if 3, BattleFrontier_Lounge1_EventScript_25E919
-	compare_var_to_value VAR_0x8007, 30
+	compare VAR_0x8007, 30
 	goto_if 3, BattleFrontier_Lounge1_EventScript_25E927
-	compare_var_to_value VAR_0x8007, 31
+	compare VAR_0x8007, 31
 	goto_if 4, BattleFrontier_Lounge1_EventScript_25E935
 	end
 

@@ -19,7 +19,7 @@ SafariZone_South_EventScript_23D28E:: @ 823D28E
 	end
 
 SafariZone_South_MapScript1_23D2B1: @ 823D2B1
-	compare_var_to_value VAR_0x40A4, 2
+	compare VAR_0x40A4, 2
 	call_if 1, SafariZone_South_EventScript_23D2BD
 	end
 
@@ -54,7 +54,7 @@ SafariZone_South_EventScript_23D2E5:: @ 823D2E5
 	checkflag FLAG_0x05D
 	goto_if 0, SafariZone_South_EventScript_23D30D
 	msgbox SafariZone_South_Text_2A51D4, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SafariZone_South_EventScript_23D31A
 	msgbox SafariZone_South_Text_2A521A, 4
 	release

@@ -3,7 +3,7 @@ Route109_SeashoreHouse_MapScripts:: @ 82693F4
 	.byte 0
 
 Route109_SeashoreHouse_MapScript1_2693FA: @ 82693FA
-	setflag FLAG_0x89F
+	setflag FLAG_LANDMARK_SEASHORE_HOUSE
 	end
 
 Route109_SeashoreHouse_EventScript_2693FE:: @ 82693FE
@@ -28,7 +28,7 @@ Route109_SeashoreHouse_EventScript_269428:: @ 8269428
 Route109_SeashoreHouse_EventScript_269432:: @ 8269432
 	msgbox Route109_SeashoreHouse_Text_269685, 4
 	giveitem_std ITEM_SODA_POP, 6
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route109_SeashoreHouse_EventScript_269456
 	setflag FLAG_0x08C
 	release
@@ -42,7 +42,7 @@ Route109_SeashoreHouse_EventScript_269456:: @ 8269456
 Route109_SeashoreHouse_EventScript_269460:: @ 8269460
 	showmoneybox 0, 0, 0
 	msgbox Route109_SeashoreHouse_Text_26977E, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route109_SeashoreHouse_EventScript_269484
 	msgbox Route109_SeashoreHouse_Text_2697EF, 4
 	hidemoneybox
@@ -53,10 +53,10 @@ Route109_SeashoreHouse_EventScript_269460:: @ 8269460
 
 Route109_SeashoreHouse_EventScript_269484:: @ 8269484
 	checkmoney 0x12c, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route109_SeashoreHouse_EventScript_2694C8
 	checkitemspace ITEM_SODA_POP, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route109_SeashoreHouse_EventScript_2694D5
 	msgbox Route109_SeashoreHouse_Text_2697C8, 4
 	takemoney 0x12c, 0

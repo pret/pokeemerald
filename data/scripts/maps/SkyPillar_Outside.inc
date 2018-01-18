@@ -5,9 +5,9 @@ SkyPillar_Outside_MapScripts:: @ 82392A8
 	.byte 0
 
 SkyPillar_Outside_MapScript1_2392B8: @ 82392B8
-	compare_var_to_value VAR_0x405E, 3
+	compare VAR_0x405E, 3
 	call_if 1, SkyPillar_Outside_EventScript_2392CF
-	compare_var_to_value VAR_0x405E, 4
+	compare VAR_0x405E, 4
 	call_if 4, SkyPillar_Outside_EventScript_2392D3
 	end
 
@@ -76,7 +76,7 @@ SkyPillar_Outside_EventScript_239304:: @ 8239304
 	setflag FLAG_SYS_WEATHER_CTRL
 	setweather 15
 	doweather
-	special sub_81379F8
+	special WaitWeather
 	waitstate
 	delay 30
 	msgbox SkyPillar_Outside_Text_23953A, 4

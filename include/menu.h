@@ -4,6 +4,9 @@
 #include "text.h"
 #include "window.h"
 
+#define MENU_NOTHING_CHOSEN -2
+#define MENU_B_PRESSED -1
+
 struct MenuAction
 {
     const u8 *text;
@@ -29,11 +32,13 @@ int decompress_and_copy_tile_data_to_vram(u8 bg_id, const void *src, int size, u
 bool8 free_temp_tile_data_buffers_if_possible(void);
 u64 sub_8198A50(struct WindowTemplate*, u8, u8, u8, u8, u8, u8, u16); // returns something but it isn't used, fix when menu.s is decomp'd
 void CreateYesNoMenu(const struct WindowTemplate *windowTemplate, u16 borderFirstTileNum, u8 borderPalette, u8 initialCursorPos);
-s8 sub_8198C58(void);
 void copy_decompressed_tile_data_to_vram_autofree(u8 arg0, const void *arg1, bool32 arg2, u16 arg3, u8 arg4);
+s8 ProcessMenuInputNoWrap_(void);
 void do_scheduled_bg_tilemap_copies_to_vram(void);
 void clear_scheduled_bg_copies_to_vram(void);
-void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, struct TextColor *color, s8 speed, const u8 *str);
+void AddTextPrinterParametrized2(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const struct TextColor *color, s8 speed, const u8 *str);
 void sub_8197B1C(u8 windowId, bool8 copyToVram, u16 a2, u16 a3);
+void sub_81995E4(u8 windowId, u8 optionsNo, const struct MenuAction *actions, const u8 *actionIds);
+void sub_8197DF8(u8 windowId, bool8 copyToVram);
 
 #endif // GUARD_MENU_H

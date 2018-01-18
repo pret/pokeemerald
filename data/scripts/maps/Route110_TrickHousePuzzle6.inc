@@ -17,7 +17,7 @@ Route110_TrickHousePuzzle6_EventScript_26DDC0:: @ 826DDC0
 
 Route110_TrickHousePuzzle6_EventScript_26DDC4:: @ 826DDC4
 	lockall
-	compare_var_to_value VAR_0x40B0, 0
+	compare VAR_0x40B0, 0
 	goto_eq Route110_TrickHousePuzzle6_EventScript_26DDD6
 	goto Route110_TrickHousePuzzle6_EventScript_26A3DB
 	end

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "constants/battle_anim.h"
 #include "sprite.h"
 #include "contest.h"
 #include "m4a.h"
@@ -36,9 +37,9 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
 extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
-extern struct MusicPlayerInfo gMPlay_BGM;
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern u8 gDecompressionBuffer[];
 
 extern const u16 gUnknown_082C8D64[];
@@ -67,7 +68,7 @@ static void ScriptCmd_return(void);
 static void ScriptCmd_setarg(void);
 static void ScriptCmd_choosetwoturnanim(void);
 static void ScriptCmd_jumpifmoveturn(void);
-static void ScriptCmd_jump(void);
+static void ScriptCmd_goto(void);
 static void ScriptCmd_fadetobg(void);
 static void ScriptCmd_restorebg(void);
 static void ScriptCmd_waitbgfadeout(void);
@@ -156,7 +157,7 @@ static void (* const sScriptCmdTable[])(void) =
 	ScriptCmd_setarg,
 	ScriptCmd_choosetwoturnanim,
 	ScriptCmd_jumpifmoveturn,
-	ScriptCmd_jump,
+	ScriptCmd_goto,
 	ScriptCmd_fadetobg,
 	ScriptCmd_restorebg,
 	ScriptCmd_waitbgfadeout,
@@ -271,7 +272,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         {
             if (tableId == gUnknown_082C8D64[i])
             {
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
                 break;
             }
         }
@@ -513,8 +514,8 @@ static void ScriptCmd_end(void)
         }
         else
         {
-            m4aMPlayStop(&gMPlay_SE1);
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE1);
+            m4aMPlayStop(&gMPlayInfo_SE2);
         }
     }
 
@@ -533,7 +534,7 @@ static void ScriptCmd_end(void)
 
     if (!continuousAnim) // may have been used for debug?
     {
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
         if (!IsContest())
         {
             sub_80A8278();
@@ -605,7 +606,7 @@ static void ScriptCmd_monbg(void)
     sBattleAnimScriptPtr++;
 
     animBank = sBattleAnimScriptPtr[0];
-    if (animBank & ANIM_BANK_TARGET)
+    if (animBank & ANIM_TARGET)
         bank = gAnimBankTarget;
     else
         bank = gAnimBankAttacker;
@@ -862,12 +863,12 @@ static void ScriptCmd_clearmonbg(void)
     sBattleAnimScriptPtr++;
     animBankId = sBattleAnimScriptPtr[0];
 
-    if (animBankId == ANIM_BANK_ATTACKER)
-        animBankId = ANIM_BANK_ATK_PARTNER;
-    else if (animBankId == ANIM_BANK_TARGET)
-        animBankId = ANIM_BANK_DEF_PARTNER;
+    if (animBankId == ANIM_ATTACKER)
+        animBankId = ANIM_ATK_PARTNER;
+    else if (animBankId == ANIM_TARGET)
+        animBankId = ANIM_DEF_PARTNER;
 
-    if (animBankId == ANIM_BANK_ATTACKER || animBankId == ANIM_BANK_ATK_PARTNER)
+    if (animBankId == ANIM_ATTACKER || animBankId == ANIM_ATK_PARTNER)
         bank = gAnimBankAttacker;
     else
         bank = gAnimBankTarget;
@@ -924,12 +925,12 @@ static void ScriptCmd_monbg_22(void)
 
     animBankId = sBattleAnimScriptPtr[0];
 
-    if (animBankId == ANIM_BANK_ATTACKER)
-        animBankId = ANIM_BANK_ATK_PARTNER;
-    else if (animBankId == ANIM_BANK_TARGET)
-        animBankId = ANIM_BANK_DEF_PARTNER;
+    if (animBankId == ANIM_ATTACKER)
+        animBankId = ANIM_ATK_PARTNER;
+    else if (animBankId == ANIM_TARGET)
+        animBankId = ANIM_DEF_PARTNER;
 
-    if (animBankId == ANIM_BANK_ATTACKER || animBankId == ANIM_BANK_ATK_PARTNER)
+    if (animBankId == ANIM_ATTACKER || animBankId == ANIM_ATK_PARTNER)
         bank = gAnimBankAttacker;
     else
         bank = gAnimBankTarget;
@@ -969,12 +970,12 @@ static void ScriptCmd_clearmonbg_23(void)
     sBattleAnimScriptPtr++;
     animBankId = sBattleAnimScriptPtr[0];
 
-    if (animBankId == ANIM_BANK_ATTACKER)
-        animBankId = ANIM_BANK_ATK_PARTNER;
-    else if (animBankId == ANIM_BANK_TARGET)
-        animBankId = ANIM_BANK_DEF_PARTNER;
+    if (animBankId == ANIM_ATTACKER)
+        animBankId = ANIM_ATK_PARTNER;
+    else if (animBankId == ANIM_TARGET)
+        animBankId = ANIM_DEF_PARTNER;
 
-    if (animBankId == ANIM_BANK_ATTACKER || animBankId == ANIM_BANK_ATK_PARTNER)
+    if (animBankId == ANIM_ATTACKER || animBankId == ANIM_ATK_PARTNER)
         bank = gAnimBankAttacker;
     else
         bank = gAnimBankTarget;
@@ -1099,7 +1100,7 @@ static void ScriptCmd_jumpifmoveturn(void)
         sBattleAnimScriptPtr += 4;
 }
 
-static void ScriptCmd_jump(void)
+static void ScriptCmd_goto(void)
 {
     sBattleAnimScriptPtr++;
     sBattleAnimScriptPtr = SCRIPT_READ_PTR(sBattleAnimScriptPtr);
@@ -1649,8 +1650,8 @@ static void ScriptCmd_waitsound(void)
     {
         if (++sSoundAnimFramesToWait > 90)
         {
-            m4aMPlayStop(&gMPlay_SE1);
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE1);
+            m4aMPlayStop(&gMPlayInfo_SE2);
             sSoundAnimFramesToWait = 0;
         }
         else
@@ -1699,7 +1700,7 @@ static void ScriptCmd_monbgprio_28(void)
     wantedBank = sBattleAnimScriptPtr[1];
     sBattleAnimScriptPtr += 2;
 
-    if (wantedBank != ANIM_BANK_ATTACKER)
+    if (wantedBank != ANIM_ATTACKER)
         bank = gAnimBankTarget;
     else
         bank = gAnimBankAttacker;
@@ -1732,7 +1733,7 @@ static void ScriptCmd_monbgprio_2A(void)
     sBattleAnimScriptPtr += 2;
     if (GetBankSide(gAnimBankAttacker) != GetBankSide(gAnimBankTarget))
     {
-        if (wantedBank != ANIM_BANK_ATTACKER)
+        if (wantedBank != ANIM_ATTACKER)
             bank = gAnimBankTarget;
         else
             bank = gAnimBankAttacker;
@@ -1779,15 +1780,15 @@ static void ScriptCmd_doublebattle_2D(void)
     if (!IsContest() && IsDoubleBattle()
      && GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
     {
-        if (wantedBank == ANIM_BANK_ATTACKER)
+        if (wantedBank == ANIM_ATTACKER)
         {
             r4 = sub_80A8364(gAnimBankAttacker);
-            spriteId = GetAnimBankSpriteId(0);
+            spriteId = GetAnimBankSpriteId(ANIM_ATTACKER);
         }
         else
         {
             r4 = sub_80A8364(gAnimBankTarget);
-            spriteId = GetAnimBankSpriteId(1);
+            spriteId = GetAnimBankSpriteId(ANIM_TARGET);
         }
         if (spriteId != 0xFF)
         {
@@ -1814,15 +1815,15 @@ static void ScriptCmd_doublebattle_2E(void)
     if (!IsContest() && IsDoubleBattle()
      && GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
     {
-        if (wantedBank == ANIM_BANK_ATTACKER)
+        if (wantedBank == ANIM_ATTACKER)
         {
             r4 = sub_80A8364(gAnimBankAttacker);
-            spriteId = GetAnimBankSpriteId(0);
+            spriteId = GetAnimBankSpriteId(ANIM_ATTACKER);
         }
         else
         {
             r4 = sub_80A8364(gAnimBankTarget);
-            spriteId = GetAnimBankSpriteId(1);
+            spriteId = GetAnimBankSpriteId(ANIM_TARGET);
         }
 
         if (spriteId != 0xFF && r4 == 2)
@@ -1832,7 +1833,7 @@ static void ScriptCmd_doublebattle_2E(void)
 
 static void ScriptCmd_stopsound(void)
 {
-    m4aMPlayStop(&gMPlay_SE1);
-    m4aMPlayStop(&gMPlay_SE2);
+    m4aMPlayStop(&gMPlayInfo_SE1);
+    m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
 }

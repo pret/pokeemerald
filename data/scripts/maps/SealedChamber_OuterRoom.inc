@@ -10,7 +10,7 @@ SealedChamber_OuterRoom_MapScript1_239116: @ 8239116
 	end
 
 SealedChamber_OuterRoom_MapScript1_239127: @ 8239127
-	setflag FLAG_0x8BC
+	setflag FLAG_LANDMARK_SEALED_CHAMBER
 	end
 
 SealedChamber_OuterRoom_MapScript1_23912B: @ 823912B

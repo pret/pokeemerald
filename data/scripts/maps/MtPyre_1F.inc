@@ -8,7 +8,7 @@ MtPyre_1F_EventScript_230F3F:: @ 8230F3F
 	goto_eq MtPyre_1F_EventScript_230F6E
 	msgbox MtPyre_1F_Text_230F8A, 4
 	giveitem_std ITEM_CLEANSE_TAG
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MtPyre_1F_EventScript_272054
 	setflag FLAG_0x11A
 	release

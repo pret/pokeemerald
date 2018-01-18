@@ -4,7 +4,7 @@ BattleFrontier_ReceptionGate_MapScripts:: @ 82661DA
 	.byte 0
 
 BattleFrontier_ReceptionGate_MapScript1_2661E5: @ 82661E5
-	setflag FLAG_UNLOCK_BATTLE_FRONTIER
+	setflag FLAG_LANDMARK_BATTLE_FRONTIER
 	end
 
 BattleFrontier_ReceptionGate_MapScript2_2661E9: @ 82661E9
@@ -29,7 +29,7 @@ BattleFrontier_ReceptionGate_EventScript_2661F3:: @ 82661F3
 BattleFrontier_ReceptionGate_EventScript_266229:: @ 8266229
 	msgbox BattleFrontier_ReceptionGate_Text_2665B2, 4
 	msgbox BattleFrontier_ReceptionGate_Text_2665F7, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message BattleFrontier_ReceptionGate_Text_266676
 	waitfanfare
 	waitmessage

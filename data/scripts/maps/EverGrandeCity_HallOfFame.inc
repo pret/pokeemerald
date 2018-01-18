@@ -44,16 +44,16 @@ EverGrandeCity_HallOfFame_EventScript_229850:: @ 8229850
 	setvar VAR_0x4001, 1
 	call EverGrandeCity_HallOfFame_EventScript_2717C1
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EverGrandeCity_HallOfFame_EventScript_2298E9
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq EverGrandeCity_HallOfFame_EventScript_2298F5
 	end
 
 EverGrandeCity_HallOfFame_EventScript_2298E9:: @ 82298E9
 	setrespawn 1
 	fadescreenspeed 1, 24
-	special sub_8137734
+	special GameClear
 	waitstate
 	releaseall
 	end
@@ -61,7 +61,7 @@ EverGrandeCity_HallOfFame_EventScript_2298E9:: @ 82298E9
 EverGrandeCity_HallOfFame_EventScript_2298F5:: @ 82298F5
 	setrespawn 2
 	fadescreenspeed 1, 24
-	special sub_8137734
+	special GameClear
 	waitstate
 	releaseall
 	end

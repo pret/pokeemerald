@@ -5,9 +5,76 @@
 #include "event_data.h"
 #include "string_util.h"
 #include "text.h"
+#include "strings.h"
+#include "window.h"
 
 IWRAM_DATA u8 gUnknown_03000F78[0x188];
 
+struct OptionAndDescription
+{
+    const u8 *optionTxt;
+    const u8 *descriptionTxt;
+};
+
+// const rom data
+const struct OptionAndDescription gUnknown_085716C0[] =
+{
+    {gText_WithdrawPokemon, gText_WithdrawMonDescription},
+    {gText_DepositPokemon, gText_DepositMonDescription},
+    {gText_MovePokemon, gText_MoveMonDescription},
+    {gText_MoveItems, gText_MoveItemsDescription},
+    {gText_SeeYa, gText_SeeYaDescription}
+};
+
+const struct WindowTemplate gUnknown_085716E8 = {0, 1, 1, 0x11, 0xA, 0xF, 1};
+
+static const union AnimCmd sSpriteAnim_85716F0[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_85716F8[] =
+{
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8571700[] =
+{
+    ANIMCMD_FRAME(6, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_8571708[] =
+{
+    ANIMCMD_FRAME(10, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const sSpriteAnimTable_8571710[] =
+{
+    sSpriteAnim_85716F0,
+    sSpriteAnim_85716F8,
+    sSpriteAnim_8571700,
+    sSpriteAnim_8571708
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_8571720[] =
+{
+    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd *const sSpriteAffineAnimTable_8571730[] =
+{
+    sSpriteAffineAnim_8571720
+};
+
+const struct TextColor gUnknown_08571734[] = {4, 0xF, 0xE};
+const u8 gUnknown_08571737[] = _("/30");
+
+// code
 u8 CountMonsInBox(u8 boxId)
 {
     u16 i, count;

@@ -3,7 +3,7 @@ MtChimney: @ 8484010
 	.4byte MtChimney_MapEvents
 	.4byte MtChimney_MapScripts
 	.4byte 0x0
-	.2byte BGM_TOZAN
+	.2byte MUS_TOZAN
 	.2byte 136
 	.byte 56
 	.byte 0

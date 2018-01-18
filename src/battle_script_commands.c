@@ -17,6 +17,8 @@
 #include "battle_interface.h"
 #include "constants/species.h"
 #include "constants/songs.h"
+#include "constants/trainers.h"
+#include "constants/battle_anim.h"
 #include "text.h"
 #include "sound.h"
 #include "pokedex.h"
@@ -110,7 +112,7 @@ extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 struct TrainerMoney
 {
@@ -6236,19 +6238,19 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
                 lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
             }
             break;
-        case PARTY_FLAG_CUSTOM_MOVES:
+        case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
                 const struct TrainerMonNoItemCustomMoves *party = gTrainers[trainerId].party.NoItemCustomMoves;
                 lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
             }
             break;
-        case PARTY_FLAG_HAS_ITEM:
+        case F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemDefaultMoves *party = gTrainers[trainerId].party.ItemDefaultMoves;
                 lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
             }
             break;
-        case PARTY_FLAG_CUSTOM_MOVES | PARTY_FLAG_HAS_ITEM:
+        case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemCustomMoves *party = gTrainers[trainerId].party.ItemCustomMoves;
                 lastMonLevel = party[gTrainers[trainerId].partySize - 1].lvl;
@@ -7101,10 +7103,10 @@ static void atk76_various(void)
         }
         break;
     case 21:
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x55);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x55);
         break;
     case 22:
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         break;
     case 23:
         gBattleStruct->field_2A2 |= gBitTable[gActiveBank];
@@ -7120,7 +7122,7 @@ static void atk76_various(void)
             gBattleOutcome = BATTLE_OPPONENT_TELEPORTED;
         break;
     case VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC:
-        EmitPlayFanfareOrBGM(0, BGM_KACHI1, TRUE);
+        EmitPlayFanfareOrBGM(0, MUS_KACHI1, TRUE);
         MarkBufferBankForExecution(gActiveBank);
         break;
     }
@@ -10334,7 +10336,7 @@ static void atkE4_getsecretpowereffect(void)
     case BATTLE_TERRAIN_POND:
         gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_SPD_MINUS_1;
         break;
-    case BATTLE_TERRAIN_ROCK:
+    case BATTLE_TERRAIN_MOUNTAIN:
         gBattleCommunication[MOVE_EFFECT_BYTE] = MOVE_EFFECT_CONFUSION;
         break;
     case BATTLE_TERRAIN_CAVE:

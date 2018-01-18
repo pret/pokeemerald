@@ -409,7 +409,7 @@ _080DFDAC:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	movs r1, 0
 	movs r2, 0
 	bl ListMenuInit
@@ -601,7 +601,7 @@ _080DFF78:
 	movs r0, 0x2
 	negs r0, r0
 	str r0, [r1, 0x4]
-	ldr r3, =gUnknown_03006310
+	ldr r3, =gMultiuseListMenuTemplate
 	adds r1, r3, 0
 	ldr r0, =gUnknown_08589A48
 	ldm r0!, {r4-r6}
@@ -627,7 +627,7 @@ _080DFFDC:
 _080DFFDE:
 	ldr r0, =gUnknown_02039F70
 	ldr r0, [r0]
-	ldr r1, =gUnknown_03006310
+	ldr r1, =gMultiuseListMenuTemplate
 	ldrh r1, [r1, 0xE]
 	ldr r2, =0x00002004
 	adds r0, r2
@@ -1976,7 +1976,7 @@ Task_BuyMenu: @ 80E0AC8
 	b _080E0C8E
 _080E0AEA:
 	ldrb r0, [r4, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r5, r0, 0
 	ldrb r0, [r4, 0xE]
 	ldr r7, =gUnknown_02039F70
@@ -1985,7 +1985,7 @@ _080E0AEA:
 	adds r1, r2, r3
 	subs r3, 0x2
 	adds r2, r3
-	bl get_coro_args_x18_x1A
+	bl sub_81AE860
 	movs r0, 0x2
 	negs r0, r0
 	cmp r5, r0

@@ -22,7 +22,7 @@
 #include "new_menu_helpers.h"
 #include "text.h"
 #include "strings.h"
-#include "songs.h"
+#include "constants/songs.h"
 #include "sound.h"
 #include "trade.h"
 #include "battle.h"
@@ -1112,7 +1112,7 @@ static void SetBlockReceivedFlag(u8 who)
 void ResetBlockReceivedFlags(void)
 {
     int i;
-    
+
     if (gWirelessCommType == TRUE)
     {
         for (i = 0; i < MAX_RFU_PLAYERS; i++)
@@ -1628,9 +1628,9 @@ void CB2_LinkError(void)
     u8 *tilemapBuffer;
 
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    m4aMPlayStop(&gMPlay_SE1);
-    m4aMPlayStop(&gMPlay_SE2);
-    m4aMPlayStop(&gMPlay_SE3);
+    m4aMPlayStop(&gMPlayInfo_SE1);
+    m4aMPlayStop(&gMPlayInfo_SE2);
+    m4aMPlayStop(&gMPlayInfo_SE3);
     InitHeap(gHeap, HEAP_SIZE);
     ResetSpriteData();
     FreeAllSpritePalettes();

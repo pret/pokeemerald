@@ -189,7 +189,7 @@ _0819A69C:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl FreeAllSpritePalettes
-	ldr r0, =gUnknown_08DC0754
+	ldr r0, =gFrontierFactorySelectMenu_Gfx
 	ldr r5, =gUnknown_0203CE2C
 	ldr r1, [r5]
 	movs r2, 0x88
@@ -211,7 +211,7 @@ _0819A69C:
 	movs r2, 0x60
 	movs r3, 0
 	bl LoadBgTiles
-	ldr r0, =gUnknown_08DC0B94
+	ldr r0, =gFrontierFactorySelectMenu_Tilemap
 	ldr r4, =gUnknown_0203CE34
 	ldr r1, [r4]
 	movs r2, 0x80
@@ -223,7 +223,7 @@ _0819A69C:
 	movs r0, 0x1
 	movs r3, 0
 	bl LoadBgTilemap
-	ldr r0, =gUnknown_08DC0714
+	ldr r0, =gFrontierFactorySelectMenu_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadPalette
@@ -6646,7 +6646,7 @@ _0819DDA8:
 	bl ResetTasks
 	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
-	ldr r0, =gUnknown_08DC0754
+	ldr r0, =gFrontierFactorySelectMenu_Gfx
 	ldr r5, =gUnknown_0203CE40
 	ldr r1, [r5]
 	movs r2, 0x88
@@ -6668,7 +6668,7 @@ _0819DDA8:
 	movs r2, 0x60
 	movs r3, 0
 	bl LoadBgTiles
-	ldr r0, =gUnknown_08DC0B94
+	ldr r0, =gFrontierFactorySelectMenu_Tilemap
 	ldr r4, =gUnknown_0203CE48
 	ldr r1, [r4]
 	movs r2, 0x80
@@ -6680,7 +6680,7 @@ _0819DDA8:
 	movs r0, 0x1
 	movs r3, 0
 	bl LoadBgTilemap
-	ldr r0, =gUnknown_08DC0714
+	ldr r0, =gFrontierFactorySelectMenu_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadPalette
@@ -11329,7 +11329,7 @@ _081A03E6:
 	bls _081A03E6
 	movs r5, 0
 	ldr r7, =gSaveBlock2Ptr
-	ldr r6, =gUnknown_086109A4
+	ldr r6, =gUnknown_08610970+0x34
 _081A0416:
 	ldr r0, [r7]
 	mov r12, r0
@@ -11490,7 +11490,7 @@ _081A0540:
 	mov r12, r1
 	adds r5, r3, 0
 	adds r5, 0xB0
-	ldr r0, =gUnknown_086109A4
+	ldr r0, =gUnknown_08610970+0x34
 	mov r8, r0
 _081A0560:
 	adds r0, r3, 0
@@ -12380,7 +12380,7 @@ _081A0C8E:
 sub_81A0C9C: @ 81A0C9C
 	push {lr}
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
 	movs r0, 0
@@ -17495,7 +17495,7 @@ _081A38A8:
 	lsrs r3, r0, 24
 	movs r0, 0x58
 	muls r0, r3
-	ldr r1, =gUnknown_086109BA
+	ldr r1, =gUnknown_08610970+0x4A
 _081A38C4:
 	adds r0, r1
 	bl ConvertBattleFrontierTrainerSpeechToString
@@ -17516,7 +17516,7 @@ _081A38D4:
 	lsrs r3, r0, 27
 	movs r0, 0x58
 	muls r0, r3
-	ldr r1, =gUnknown_086109BA
+	ldr r1, =gUnknown_08610970+0x4A
 	adds r0, r1
 	bl ConvertBattleFrontierTrainerSpeechToString
 _081A38F8:
@@ -20736,7 +20736,7 @@ _081A54D4:
 	bl HandleBattleWindow
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gMPlay_BGM
+	ldr r0, =gMPlayInfo_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
@@ -29290,7 +29290,7 @@ sub_81A9B04: @ 81A9B04
 	cmp r0, 0
 	beq _081A9B2E
 	movs r0, 0x1
-	bl sub_80B47E0
+	bl GetChosenApproachingTrainerMapObjectId
 	ldr r1, =gSelectedMapObject
 	strb r0, [r1]
 	ldr r0, =gTrainerBattleOpponent_B
@@ -31102,7 +31102,7 @@ sub_81AA96C: @ 81AA96C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r3, 0
-	ldr r2, =gUnknown_08613655
+	ldr r2, =gUnknown_08613650+0x5
 	mov r12, r2
 	movs r7, 0x7
 _081AA994:

@@ -50,11 +50,13 @@
 #define VAR_RESET_RTC_ENABLE       0x402C
 #define VAR_0x402D                 0x402D
 #define VAR_0x402E                 0x402E
-#define VAR_0x402F                 0x402F
-#define VAR_0x4030                 0x4030
-#define VAR_0x4031                 0x4031
-#define VAR_0x4032                 0x4032
-#define VAR_0x4033                 0x4033
+
+#define VAR_FRONTIER_MANIAC_FACILITY        0x402F
+#define VAR_FRONTIER_GAMBLER_FACILITY       0x4030
+#define VAR_FRONTIER_GAMBLER_SET_FACILITY_F 0x4031
+#define VAR_FRONTIER_GAMBLER_AMOUNT_BET     0x4032
+#define VAR_FRONTIER_GAMBLER_PLACED_BET_F   0x4033
+
 #define VAR_0x4034                 0x4034
 #define VAR_0x4035                 0x4035
 #define VAR_STORAGE_UNKNOWN        0x4036

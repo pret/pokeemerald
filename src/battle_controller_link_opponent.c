@@ -4,6 +4,7 @@
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "battle_anim.h"
+#include "constants/battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_link_817C95C.h"
 #include "pokemon.h"
@@ -50,7 +51,7 @@ extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
 extern u8 gUnknown_020244B4[];
 extern u32 gTransformedPersonalities[BATTLE_BANKS_COUNT];
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern struct UnusedControllerStruct gUnknown_02022D0C;
 extern u16 gTrainerBattleOpponent_A;
 extern u16 gTrainerBattleOpponent_B;
@@ -352,11 +353,11 @@ static void sub_8064734(void)
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 if (GetBankIdentity(gActiveBank) == IDENTITY_OPPONENT_MON1)
-                    m4aMPlayContinue(&gMPlay_BGM);
+                    m4aMPlayContinue(&gMPlayInfo_BGM);
             }
             else
             {
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
             }
         }
 
@@ -498,7 +499,7 @@ static void sub_8064DD0(void)
         if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy
             || gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy_2)
         {
-            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
             LinkOpponentBufferExecCompleted();
         }
     }

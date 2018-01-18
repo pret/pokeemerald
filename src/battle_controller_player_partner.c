@@ -4,6 +4,7 @@
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "battle_anim.h"
+#include "constants/battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "pokemon.h"
 #include "link.h"
@@ -198,7 +199,7 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 };
 
 // unknown unused data
-static const u8 gUnknown_08617254[] =
+static const u8 sUnknown_08617254[] =
 {
     0x83, 0x4d, 0xf3, 0x5f, 0x6f, 0x4f, 0xeb, 0x3e,
     0x67, 0x2e, 0x10, 0x46, 0x8c, 0x3d, 0x28, 0x35,

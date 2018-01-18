@@ -3,7 +3,7 @@ Route112: @ 84827AC
 	.4byte Route112_MapEvents
 	.4byte Route112_MapScripts
 	.4byte Route112_MapConnections
-	.2byte BGM_DOORO_X1
+	.2byte MUS_DOORO_X1
 	.2byte 28
 	.byte 27
 	.byte 0

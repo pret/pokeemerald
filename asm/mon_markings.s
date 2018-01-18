@@ -480,7 +480,7 @@ sub_811FC80: @ 811FC80
 	adds r0, 0x1E
 	strh r5, [r0]
 	add r1, sp, 0x20
-	ldr r0, =gUnknown_08DC9628
+	ldr r0, =gPokenavConditionMarker_Gfx
 	str r0, [sp, 0x20]
 	movs r0, 0xC8
 	lsls r0, 2
@@ -503,7 +503,7 @@ sub_811FC80: @ 811FC80
 	add r0, sp, 0x34
 	strh r6, [r0]
 	add r1, sp, 0x38
-	ldr r0, =gUnknown_08DC9608
+	ldr r0, =gPokenavConditionMarker_Pal
 	str r0, [sp, 0x38]
 	adds r0, r6, 0x1
 	strh r0, [r1, 0x4]

@@ -1781,7 +1781,7 @@ sub_813D8A8: @ 813D8A8
 	str r1, [sp]
 	ldr r0, =0x00030600
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_08DC4140
+	ldr r0, =gPokedexAreaScreenAreaUnknown_Gfx
 	bl LZ77UnCompWram
 	mov r0, sp
 	bl LoadSpriteSheet
@@ -1831,7 +1831,7 @@ _0813D924:
 	lsls r6, 16
 	adds r1, r6
 	asrs r1, 16
-	ldr r0, =gUnknown_085B40FC
+	ldr r0, =gSpriteTemplate_85B40FC
 	movs r2, 0x8C
 	movs r3, 0
 	bl CreateSprite

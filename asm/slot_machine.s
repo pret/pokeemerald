@@ -1581,7 +1581,7 @@ sub_812B158: @ 812B158
 	thumb_func_start sub_812B1B0
 sub_812B1B0: @ 812B1B0
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -10588,7 +10588,7 @@ sub_812F7E4: @ 812F7E4
 	bl Alloc
 	adds r1, r0, 0
 	str r1, [r4]
-	ldr r0, =gUnknown_08DD0050
+	ldr r0, =gSlotMachineReelTime_Gfx
 	bl LZDecompressWram
 	ldr r4, =gUnknown_0203AAD8
 	movs r0, 0xD8
@@ -10715,14 +10715,14 @@ sub_812F908: @ 812F908
 	bl Alloc
 	adds r1, r0, 0
 	str r1, [r4]
-	ldr r0, =gUnknown_08DCDB30
+	ldr r0, =gSlotMachineMenu_Gfx
 	bl LZDecompressWram
 	ldr r1, [r4]
 	movs r0, 0x2
 	adds r2, r5, 0
 	movs r3, 0
 	bl LoadBgTiles
-	ldr r0, =gUnknown_08DCDA90
+	ldr r0, =gSlotMachineMenu_Pal
 	movs r1, 0
 	movs r2, 0xA0
 	bl LoadPalette
@@ -10748,7 +10748,7 @@ sub_812F958: @ 812F958
 	thumb_func_start sub_812F968
 sub_812F968: @ 812F968
 	push {lr}
-	ldr r1, =gUnknown_08DCE770
+	ldr r1, =gSlotMachineMenu_Tilemap
 	movs r2, 0xA0
 	lsls r2, 3
 	movs r0, 0x2

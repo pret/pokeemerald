@@ -3,7 +3,7 @@ Route114_FossilManiacsHouse_MapScripts:: @ 822AD30
 	.byte 0
 
 Route114_FossilManiacsHouse_MapScript1_22AD36: @ 822AD36
-	setflag FLAG_0x8B7
+	setflag FLAG_LANDMARK_FOSSIL_MANIACS_HOUSE
 	end
 
 Route114_FossilManiacsHouse_EventScript_22AD3A:: @ 822AD3A
@@ -13,7 +13,7 @@ Route114_FossilManiacsHouse_EventScript_22AD3A:: @ 822AD3A
 	goto_eq Route114_FossilManiacsHouse_EventScript_22AD69
 	msgbox Route114_FossilManiacsHouse_Text_22AD85, 4
 	giveitem_std ITEM_TM28
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route114_FossilManiacsHouse_EventScript_272054
 	setflag FLAG_0x105
 	release

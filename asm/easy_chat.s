@@ -1635,7 +1635,7 @@ _0811AF86:
 	thumb_func_start sub_811AF8C
 sub_811AF8C: @ 811AF8C
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1684,7 +1684,7 @@ _0811AFE6:
 	thumb_func_start sub_811AFEC
 sub_811AFEC: @ 811AFEC
 	push {r4,lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1727,7 +1727,7 @@ _0811B03A:
 	thumb_func_start sub_811B040
 sub_811B040: @ 811B040
 	push {lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -1832,7 +1832,7 @@ sub_811B0E8: @ 811B0E8
 	thumb_func_start sub_811B0F8
 sub_811B0F8: @ 811B0F8
 	push {r4,lr}
-	bl sub_8198C58
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -3966,14 +3966,14 @@ _0811BFE0:
 	b _0811C124
 	.pool
 _0811C044:
-	ldr r1, =gUnknown_08DCBDD0
+	ldr r1, =gEasyChatWindow_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r1, =gUnknown_08DCBF10
+	ldr r1, =gEasyChatWindow_Tilemap
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
@@ -5810,7 +5810,7 @@ sub_811CF04: @ 811CF04
 sub_811CF64: @ 811CF64
 	push {r4,lr}
 	bl ResetPaletteFade
-	ldr r0, =gUnknown_08DCBDB0
+	ldr r0, =gEasyChatMode_Pal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
@@ -6075,7 +6075,7 @@ _0811D19C:
 	b _0811D1BC
 	.pool
 _0811D1A8:
-	ldr r0, =gText_CombineTwoWordsOrPhrases
+	ldr r0, =gText_CombineTwoWordsOrPhrases3
 	str r0, [sp, 0xC]
 	b _0811D1BC
 	.pool

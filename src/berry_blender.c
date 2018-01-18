@@ -127,14 +127,12 @@ struct BerryBlenderData
     struct BlenderGameBlock gameBlock;
 };
 
-extern struct MusicPlayerInfo gMPlay_SE2;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern u16 gSpecialVar_ItemId;
 extern u8 gInGameOpponentsNo;
 extern u8 gUnknown_020322D5;
 extern u8 gResultsWindowId;
-
-extern const u8 * const gPokeblockNames[];
 
 // graphics
 extern const u8 gBerryBlenderArrowTiles[];
@@ -803,7 +801,7 @@ static const struct WindowTemplate sBlenderRecordWindowTemplate = {0, 6, 4, 0x12
 
 static void Blender_ControlHitPitch(void)
 {
-    m4aMPlayPitchControl(&gMPlay_SE2, 0xFFFF, 2 * (sBerryBlenderData->field_4C - 128));
+    m4aMPlayPitchControl(&gMPlayInfo_SE2, 0xFFFF, 2 * (sBerryBlenderData->field_4C - 128));
 }
 
 static void VBlankCB0_BerryBlender(void)
@@ -1305,11 +1303,11 @@ static void sub_8080018(void)
         sBerryBlenderData->field_4C = 128;
         sBerryBlenderData->gameFrameTime = 0;
         SetMainCallback2(sub_8081898);
-        if (GetCurrentMapMusic() != BGM_CYCLING)
+        if (GetCurrentMapMusic() != MUS_CYCLING)
         {
             sBerryBlenderData->field_154 = GetCurrentMapMusic();
         }
-        PlayBGM(BGM_CYCLING);
+        PlayBGM(MUS_CYCLING);
         break;
     }
 
@@ -1604,10 +1602,10 @@ static void sub_80808D4(void)
                 sBerryBlenderData->field_120[i] = CreateTask(sUnknown_083399EC[i], 10 + i);
         }
 
-        if (GetCurrentMapMusic() != BGM_CYCLING)
+        if (GetCurrentMapMusic() != MUS_CYCLING)
             sBerryBlenderData->field_154 = GetCurrentMapMusic();
 
-        PlayBGM(BGM_CYCLING);
+        PlayBGM(MUS_CYCLING);
         PlaySE(SE_MOTER);
         Blender_ControlHitPitch();
         break;
@@ -1940,9 +1938,9 @@ static void sub_80814F4(void)
             if (gRecvCmds[i][2] == 0x2345 || gRecvCmds[2][i] == 0x4523 || gRecvCmds[2][i] == 0x5432) // could be a bug, 2 and i are reversed
             {
                 if (sBerryBlenderData->field_4C > 1500)
-                    m4aMPlayTempoControl(&gMPlay_BGM, ((sBerryBlenderData->field_4C - 750) / 20) + 256);
+                    m4aMPlayTempoControl(&gMPlayInfo_BGM, ((sBerryBlenderData->field_4C - 750) / 20) + 256);
                 else
-                    m4aMPlayTempoControl(&gMPlay_BGM, 0x100);
+                    m4aMPlayTempoControl(&gMPlayInfo_BGM, 0x100);
             }
         }
     }
@@ -2337,7 +2335,7 @@ static void CB2_HandleBlenderEndGame(void)
     switch (sBerryBlenderData->gameEndState)
     {
     case 1:
-        m4aMPlayTempoControl(&gMPlay_BGM, 256);
+        m4aMPlayTempoControl(&gMPlayInfo_BGM, 256);
         for (i = 0; i < gSpecialVar_0x8004; i++)
         {
             DestroyTask(sBerryBlenderData->field_120[i]);
@@ -2357,7 +2355,7 @@ static void CB2_HandleBlenderEndGame(void)
                 sBerryBlenderData->gameEndState = 5;
 
             sBerryBlenderData->mainState = 0;
-            m4aMPlayStop(&gMPlay_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE2);
         }
         Blender_ControlHitPitch();
         break;
@@ -2444,7 +2442,7 @@ static void CB2_HandleBlenderEndGame(void)
         sBerryBlenderData->gameEndState++;
         break;
     case 10:
-        switch (sub_8198C58())
+        switch (ProcessMenuInputNoWrap_())
         {
         case 1:
         case -1:
@@ -3522,7 +3520,7 @@ static void sub_8083F3C(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        PlayFanfare(BGM_FANFA1);
+        PlayFanfare(MUS_FANFA1);
         gTasks[taskId].data[0]++;
     }
     if (IsFanfareTaskInactive())

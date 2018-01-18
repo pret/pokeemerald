@@ -3,6 +3,7 @@
 #include "battle_controllers.h"
 #include "battle_ai_script_commands.h"
 #include "battle_anim.h"
+#include "constants/battle_anim.h"
 #include "battle_interface.h"
 #include "main.h"
 #include "malloc.h"
@@ -33,14 +34,14 @@ extern u8 gBankSpriteIds[BATTLE_BANKS_COUNT];
 extern u8 gHealthBoxesIds[BATTLE_BANKS_COUNT];
 extern u8 gBattleMonForms[BATTLE_BANKS_COUNT];
 extern u32 gTransformedPersonalities[BATTLE_BANKS_COUNT];
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_SE1;
+extern struct MusicPlayerInfo gMPlayInfo_SE2;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 extern const struct BattleMove gBattleMoves[];
 extern const u8 gUnknown_0831C604[];
-extern const u8 * const gUnknown_082C9320[];
-extern const u8 * const gUnknown_082C937C[];
+extern const u8 * const gBattleAnims_VariousTable[];
+extern const u8 * const gBattleAnims_Special[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
@@ -63,7 +64,7 @@ extern const u8 gUnknown_08C1F46C[];
 extern const u8 gUnknown_08C1F5E8[];
 extern const u8 gUnknown_08C1F76C[];
 extern const u8 gUnknown_08C1F8E8[];
-extern const u8 gUnknown_08C0237C[];
+extern const u8 gBlankGfxCompressed[];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
 
@@ -110,10 +111,10 @@ static const struct CompressedSpriteSheet gUnknown_0832C100 =
 
 static const struct CompressedSpriteSheet gUnknown_0832C108[BATTLE_BANKS_COUNT] =
 {
-    {gUnknown_08C0237C, 0x0100, 0xd704},
-    {gUnknown_08C0237C, 0x0120, 0xd705},
-    {gUnknown_08C0237C, 0x0100, 0xd706},
-    {gUnknown_08C0237C, 0x0120, 0xd707}
+    {gBlankGfxCompressed, 0x0100, 0xd704},
+    {gBlankGfxCompressed, 0x0120, 0xd705},
+    {gBlankGfxCompressed, 0x0100, 0xd706},
+    {gBlankGfxCompressed, 0x0120, 0xd707}
 };
 
 static const struct SpritePalette gUnknown_0832C128[2] =
@@ -414,7 +415,7 @@ void InitAndLaunchChosenStatusAnimation(bool8 isStatus2, u32 status)
         else if (status & STATUS2_NIGHTMARE)
             LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_NIGHTMARE);
         else if (status & STATUS2_WRAPPED)
-            LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_WRAPPED);
+            LaunchStatusAnimation(gActiveBank, B_ANIM_STATUS_WRAPPED); // this animation doesn't actually exist
         else // no animation
             gBattleSpritesDataPtr->healthBoxesData[gActiveBank].statusAnimActive = 0;
     }
@@ -448,7 +449,7 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBank, u8 atkBank, u8 defBank,
     gAnimBankAttacker = atkBank;
     gAnimBankTarget = defBank;
     gBattleSpritesDataPtr->animationData->animArg = argument;
-    LaunchBattleAnimation(gUnknown_082C9320, tableId, FALSE);
+    LaunchBattleAnimation(gBattleAnims_VariousTable, tableId, FALSE);
     taskId = CreateTask(Task_ClearBitWhenBattleTableAnimDone, 10);
     gTasks[taskId].tBank = activeBank;
     gBattleSpritesDataPtr->healthBoxesData[gTasks[taskId].tBank].animFromTableActive = 1;
@@ -492,7 +493,7 @@ void InitAndLaunchSpecialAnimation(u8 activeBank, u8 atkBank, u8 defBank, u8 tab
 
     gAnimBankAttacker = atkBank;
     gAnimBankTarget = defBank;
-    LaunchBattleAnimation(gUnknown_082C937C, tableId, FALSE);
+    LaunchBattleAnimation(gBattleAnims_Special, tableId, FALSE);
     taskId = CreateTask(Task_ClearBitWhenSpecialAnimDone, 10);
     gTasks[taskId].tBank = activeBank;
     gBattleSpritesDataPtr->healthBoxesData[gTasks[taskId].tBank].specialAnimActive = 1;
@@ -526,8 +527,8 @@ bool8 mplay_80342A4(u8 bank)
         if (gBattleSpritesDataPtr->healthBoxesData[gActiveBank].field_8 < 30)
             return TRUE;
 
-        m4aMPlayStop(&gMPlay_SE1);
-        m4aMPlayStop(&gMPlay_SE2);
+        m4aMPlayStop(&gMPlayInfo_SE1);
+        m4aMPlayStop(&gMPlayInfo_SE2);
     }
     if (zero == 0)
     {

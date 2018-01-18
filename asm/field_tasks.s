@@ -1662,7 +1662,7 @@ _0809E572:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809E5D2
-	bl sub_811A138
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x4
