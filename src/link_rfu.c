@@ -3123,3 +3123,24 @@ bool32 sub_800F1E0(void)
     retval = gUnknown_03005000.unk_cdc;
     return gUnknown_03007890->unk_06 ? retval & 1 : FALSE;
 }
+
+void sub_800F498(u16 *a0, u8 *a1)
+{
+    int i;
+
+    if (a0[0])
+    {
+        a0[0] |= (gUnknown_03005000.unk_102 << 5);
+        gUnknown_03005000.unk_102 = (gUnknown_03005000.unk_102 + 1) & 7;
+        for (i = 0; i < 7; i++)
+        {
+            a1[2 * i + 1] = a0[i] >> 8;
+            a1[2 * i + 0] = a0[i];
+        }
+    }
+    else
+    {
+        for (i = 0; i < 14; i++)
+            a1[i] = 0;
+    }
+}

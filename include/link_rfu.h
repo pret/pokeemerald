@@ -152,7 +152,9 @@ struct UnkRfuStruct_2 {
     /* 0x080 */ struct UnkRfuStruct_2_Sub_6c unk_80[5];
     /* 0x0e4 */ u8 filler_e4[10];
     /* 0x0ee */ vu8 unk_ee;
-    /* 0x0ef */ u8 filler_ef[0x35];
+    /* 0x0ef */ u8 filler_ef[0x13];
+    /* 0x102 */ u8 unk_102;
+    /* 0x103 */ u8 filler_103[0x21];
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
     /* 0x9e8 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
     /* 0xc1c */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
