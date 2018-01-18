@@ -3055,9 +3055,9 @@ _08085E18:
 	.pool
 	thumb_func_end c1_overworld
 
-	thumb_func_start c2_overworld_basic
-@ void c2_overworld_basic()
-c2_overworld_basic: @ 8085E24
+	thumb_func_start OverworldBasic
+@ void OverworldBasic()
+OverworldBasic: @ 8085E24
 	push {lr}
 	bl ScriptContext2_RunScript
 	bl RunTasks
@@ -3070,15 +3070,15 @@ c2_overworld_basic: @ 8085E24
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	pop {r0}
 	bx r0
-	thumb_func_end c2_overworld_basic
+	thumb_func_end OverworldBasic
 
-	thumb_func_start sub_8085E50
-sub_8085E50: @ 8085E50
+	thumb_func_start CB2_OverworldBasic
+CB2_OverworldBasic: @ 8085E50
 	push {lr}
-	bl c2_overworld_basic
+	bl OverworldBasic
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8085E50
+	thumb_func_end CB2_OverworldBasic
 
 	thumb_func_start c2_overworld
 c2_overworld: @ 8085E5C
@@ -3092,7 +3092,7 @@ c2_overworld: @ 8085E5C
 	movs r0, 0
 	bl SetVBlankCallback
 _08085E70:
-	bl c2_overworld_basic
+	bl OverworldBasic
 	cmp r4, 0
 	beq _08085E7C
 	bl SetFieldVBlankCallback
