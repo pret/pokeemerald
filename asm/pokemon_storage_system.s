@@ -10135,7 +10135,7 @@ _080CC7E6:
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_085775B8
+	ldr r1, =gWallpaperTable
 	adds r6, r0, r1
 	ldr r0, [r6, 0x4]
 	ldr r1, [r7]
