@@ -16,6 +16,7 @@ rayquazadir := graphics/rayquaza_scene
 roulettegfxdir := graphics/roulette
 pknvdir := graphics/pokenav/
 pknvoptionsdir := graphics/pokenav/options
+slotmachinedir := graphics/slot_machine
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -462,6 +463,10 @@ $(bttransgfxdir)/frontier_square_3.4bpp: $(bttransgfxdir)/frontier_squares_blank
 
 $(bttransgfxdir)/frontier_square_4.4bpp: $(bttransgfxdir)/frontier_squares_blanktiles.4bpp \
                                          $(bttransgfxdir)/frontier_squares_4.4bpp
+	@cat $^ >$@
+
+$(slotmachinedir)/reel_time_gfx.4bpp: $(slotmachinedir)/reel_time_pikachu.4bpp \
+										 $(slotmachinedir)/reel_time_machine.4bpp
 	@cat $^ >$@
 
 $(pknvoptionsdir)/options.4bpp: $(pknvoptionsdir)/hoenn_map.4bpp \

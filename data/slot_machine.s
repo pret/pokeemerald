@@ -1349,7 +1349,7 @@ gUnknown_085A8544:: @ 85A8544
 	null_obj_pal
 
 gUnknown_085A858C:: @ 85A858C
-	.incbin "graphics/slot_machine/reel_pikachu_and_machine.4bpp.lz"
+	.incbin "graphics/slot_machine/reel_time_gfx.4bpp.lz"
 
 gUnknown_085A96E0:: @ 85A96E0
 	@if anyone knows what this tilemap is please do share
