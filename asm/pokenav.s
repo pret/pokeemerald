@@ -26754,7 +26754,7 @@ _081D4368:
 	b _081D449E
 _081D4394:
 	movs r3, 0
-	ldr r1, =gUnknown_0862608E
+	ldr r1, =gUnknown_0862608C + 2
 	adds r0, r7, r1
 	movs r2, 0x16
 	ldrsh r1, [r4, r2]
@@ -26887,7 +26887,7 @@ _081D449E:
 	mov r3, r10
 	adds r4, r0, r3
 	ldr r6, =gUnknown_0862608C
-	ldr r1, =gUnknown_0862608E
+	ldr r1, =gUnknown_0862608C + 2
 	adds r0, r7, r1
 	movs r3, 0x16
 	ldrsh r1, [r4, r3]

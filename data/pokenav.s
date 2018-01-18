@@ -126,7 +126,7 @@ gUnknown_0861FA04:: @ 861FA04
 	.byte 0x0
 
 gUnknown_0861FA08:: @ 861FA08
-    window_template 0, 1, 0x16, 0x10, 0x2, 0x0, 0x36
+	window_template 0, 1, 0x16, 0x10, 0x2, 0x0, 0x36
 	window_template_terminator
 
 gUnknown_0861FA18:: @ 861FA18
@@ -219,7 +219,7 @@ gUnknown_0861FB44:: @ 861FB44
 	
 gUnknown_0861FB5C:: @ 861FB5C
 	.incbin "graphics/pokenav/arrows_matchcall.gbapal"
-    
+	
 gUnknown_0861FB7C:: @ 861FB7C
 	.incbin "graphics/pokenav/arrows_matchcall.4bpp.lz"
 
@@ -241,42 +241,42 @@ gUnknown_0861FBF4:: @ 861FBF4
 
 gUnknown_0861FBF7:: @ 861FBF7
 	.byte 0x2
-    .byte 0x4
-    .byte 0x6
-    .byte 0x7
-    .byte 0x0
+	.byte 0x4
+	.byte 0x6
+	.byte 0x7
+	.byte 0x0
 
 gUnknown_0861FBFC:: @ 861FBFC
 	.4byte gUnknown_0861FB7C
-    .2byte 0xC0
-    .2byte 0xA
+	.2byte 0xC0
+	.2byte 0xA
 
 gUnknown_0861FC04:: @ 861FC04
 	.4byte gUnknown_0861FB5C
-    .4byte 0x14
-    .4byte 0x0
-    .4byte 0x0
-    
+	.4byte 0x14
+	.4byte 0x0
+	.4byte 0x0
+	
 gUnknown_0861FC14:: @ 861FC14
-    .4byte 0x8000
-    .4byte 0x800
+	.4byte 0x8000
+	.4byte 0x800
 
 gUnknown_0861FC1C:: @ 861FC1C
 	spr_template 10, 20, gUnknown_0861FC14, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81C9080
-    
+	
 gUnknown_0861FC34:: @ 861FC34
-    .4byte 0x4000
-    .4byte 0x800
+	.4byte 0x4000
+	.4byte 0x800
 
 gUnknown_0861FC3C:: @ 861FC3C
 	spr_template 10, 20, gUnknown_0861FC34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_0861FC54:: @ 861FC54
 	.byte 2
-    .byte 3
-    .byte 4
-    .byte 2
-    .byte 5
+	.byte 3
+	.byte 4
+	.byte 2
+	.byte 5
 
 gUnknown_0861FC59:: @ 861FC59
 	.byte 0, 1, 4, 4, 4, 4, 0, 1, 2, 4, 4, 4, 0, 1, 2, 3, 4, 4, 5, 6, 7, 4, 4, 4, 8, 9, 10, 11, 12, 13, 0
@@ -300,120 +300,120 @@ gUnknown_0861FFF4:: @ 861FFF4
 	.incbin "graphics/pokenav/outline_map.bin.lz"
 
 gUnknown_08620104:: @ 8620104
-    .incbin "graphics/pokenav/blue_light.gbapal"
-    
+	.incbin "graphics/pokenav/blue_light.gbapal"
+	
 gUnknown_08620124:: @ 8620124
-    .incbin "graphics/pokenav/blue_light.4bpp.lz"
+	.incbin "graphics/pokenav/blue_light.4bpp.lz"
 
 gUnknown_08620194:: @ 8620194
 	.byte 0xF5, 0x10, 0, 0, 0x7A, 0x21, 0, 0, 0xFF, 0x31, 0, 0
 
 gUnknown_086201A0:: @ 86201A0
 	.4byte NULL
-    .4byte sub_81C9C6C
-    .4byte sub_81C9CA8
-    .4byte sub_81C9D44
-    .4byte sub_81C9DD8
-    .4byte sub_81C9E58
-    .4byte sub_81C9EC8
-    .4byte sub_81C9EF8
-    .4byte sub_81C9F28
+	.4byte sub_81C9C6C
+	.4byte sub_81C9CA8
+	.4byte sub_81C9D44
+	.4byte sub_81C9DD8
+	.4byte sub_81C9E58
+	.4byte sub_81C9EC8
+	.4byte sub_81C9EF8
+	.4byte sub_81C9F28
 
 gUnknown_086201C4:: @ 86201C4
 	.4byte gPokenavOptions_Gfx
-    .byte 0, 0x34, 3, 0
-    .4byte gUnknown_08620124
-    .byte 0, 1, 1, 0
+	.byte 0, 0x34, 3, 0
+	.4byte gUnknown_08620124
+	.byte 0, 1, 1, 0
 
 gUnknown_086201D4:: @ 86201D4
-    .4byte gPokenavOptions_Pal + 0x0, 4
-    .4byte gPokenavOptions_Pal + 0x20, 5
-    .4byte gPokenavOptions_Pal + 0x40, 6
-    .4byte gPokenavOptions_Pal + 0x60, 7
-    .4byte gPokenavOptions_Pal + 0x80, 8
-    .4byte gUnknown_08620104, 3
-    .4byte 0, 0
-    
+	.4byte gPokenavOptions_Pal + 0x0, 4
+	.4byte gPokenavOptions_Pal + 0x20, 5
+	.4byte gPokenavOptions_Pal + 0x40, 6
+	.4byte gPokenavOptions_Pal + 0x60, 7
+	.4byte gPokenavOptions_Pal + 0x80, 8
+	.4byte gUnknown_08620104, 3
+	.4byte 0, 0
+	
 gUnknown_0862020C:: @ 862020C
 	.2byte 0, 0
 
 gUnknown_08620210:: @ 8620210
 	.2byte 0x20, 1
-    
+	
 gUnknown_08620214:: @ 8620214
-    .2byte 0x40, 4
-    
+	.2byte 0x40, 4
+	
 gUnknown_08620218:: @ 8620218
-    .2byte 0x60, 2
+	.2byte 0x60, 2
 
 gUnknown_0862021C:: @ 862021C
-    .2byte 0x80, 3
-    
+	.2byte 0x80, 3
+	
 gUnknown_08620220:: @ 8620220
-    .2byte 0xA0, 1
+	.2byte 0xA0, 1
 
 gUnknown_08620224:: @ 8620224
-    .2byte 0xC0, 1
+	.2byte 0xC0, 1
 
 gUnknown_08620228:: @ 8620228
-    .2byte 0xE0, 4
+	.2byte 0xE0, 4
 
 gUnknown_0862022C:: @ 862022C
-    .2byte 0x100, 1
+	.2byte 0x100, 1
 
 gUnknown_08620230:: @ 8620230
-    .2byte 0x120, 2
+	.2byte 0x120, 2
 
 gUnknown_08620234:: @ 8620234
-    .2byte 0x140, 0
+	.2byte 0x140, 0
 
 gUnknown_08620238:: @ 8620238
-    .2byte 0x160, 0
+	.2byte 0x160, 0
 
 gUnknown_0862023C:: @ 862023C
-    .2byte 0x180, 3
+	.2byte 0x180, 3
 
 gUnknown_08620240:: @ 8620240
 	.2byte 0x2A, 0x14
 
 gUnknown_08620244:: @ 8620244
-    .4byte gUnknown_0862020C
-    .4byte gUnknown_08620210
-    .4byte gUnknown_0862021C
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .2byte 0x2A, 0x14
-    .4byte gUnknown_0862020C
-    .4byte gUnknown_08620210
-    .4byte gUnknown_08620214
-    .4byte gUnknown_0862021C
-    .4byte NULL
-    .4byte NULL
-    .2byte 0x2A, 0x14
-    .4byte gUnknown_0862020C
-    .4byte gUnknown_08620210
-    .4byte gUnknown_08620214
-    .4byte gUnknown_08620218
-    .4byte gUnknown_0862021C
-    .4byte NULL
-    .2byte 0x38, 0x14
-    .4byte gUnknown_08620220
-    .4byte gUnknown_08620224
-    .4byte gUnknown_0862023C
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .2byte 0x28, 0x10
-    .4byte gUnknown_08620228
-    .4byte gUnknown_0862022C
-    .4byte gUnknown_08620230
-    .4byte gUnknown_08620234
-    .4byte gUnknown_08620238
-    .4byte gUnknown_0862023C
+	.4byte gUnknown_0862020C
+	.4byte gUnknown_08620210
+	.4byte gUnknown_0862021C
+	.4byte NULL
+	.4byte NULL
+	.4byte NULL
+	.2byte 0x2A, 0x14
+	.4byte gUnknown_0862020C
+	.4byte gUnknown_08620210
+	.4byte gUnknown_08620214
+	.4byte gUnknown_0862021C
+	.4byte NULL
+	.4byte NULL
+	.2byte 0x2A, 0x14
+	.4byte gUnknown_0862020C
+	.4byte gUnknown_08620210
+	.4byte gUnknown_08620214
+	.4byte gUnknown_08620218
+	.4byte gUnknown_0862021C
+	.4byte NULL
+	.2byte 0x38, 0x14
+	.4byte gUnknown_08620220
+	.4byte gUnknown_08620224
+	.4byte gUnknown_0862023C
+	.4byte NULL
+	.4byte NULL
+	.4byte NULL
+	.2byte 0x28, 0x10
+	.4byte gUnknown_08620228
+	.4byte gUnknown_0862022C
+	.4byte gUnknown_08620230
+	.4byte gUnknown_08620234
+	.4byte gUnknown_08620238
+	.4byte gUnknown_0862023C
 
 gUnknown_086202CC:: @ 86202CC
-    window_template 1, 3, 17, 0x18, 2, 1, 8
+	window_template 1, 3, 17, 0x18, 2, 1, 8
 
 gUnknown_086202D4:: @ 86202D4
 	.4byte gUnknown_085EBCC5
@@ -436,36 +436,39 @@ gUnknown_0862030C:: @ 862030C
 
 gUnknown_0862030F:: @ 862030F
 	.byte 6, 8, 7, 0, 0
-    
+	
 gUnknown_08620314:: @ 8620314
 	.byte 0, 0x40, 0, 0x80, 0, 8, 0, 0
-    
+	
 gUnknown_0862031C:: @ 862031C
-    .byte 0, 1, 0, 1, 0, 0, 0, 0, 0xFF, 0x7F, 0, 0, 0, 0, 0, 0
-    
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_end
+	
 gUnknown_0862032C:: @ 862032C
-    .byte 0, 1, 0, 1, 0, 0, 0, 0, 0x10, 0, 0x10, 0, 0, 0x12, 0, 0, 0xFF, 0x7F, 0, 0, 0, 0, 0, 0
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x10, 0x10, 0, 0x12
+	obj_rot_scal_anim_end
 
 gUnknown_08620344:: @ 8620344
-    .4byte gUnknown_0862031C
-    .4byte gUnknown_0862032C
+	.4byte gUnknown_0862031C
+	.4byte gUnknown_0862032C
 
 gUnknown_0862034C:: @ 862034C
-    spr_template 3, 4, gUnknown_08620314, gDummySpriteAnimTable, NULL, gUnknown_08620344, SpriteCallbackDummy
-    
+	spr_template 3, 4, gUnknown_08620314, gDummySpriteAnimTable, NULL, gUnknown_08620344, SpriteCallbackDummy
+	
 gUnknown_08620364:: @ 8620364
 	.2byte 0x4000
-    .2byte 0x8000
-    .2byte 0x800
-    .2byte 0
+	.2byte 0x8000
+	.2byte 0x800
+	.2byte 0
 
 gUnknown_0862036C:: @ 862036C
 	spr_template 1, 3, gUnknown_08620364, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_08620384:: @ 8620384
 	 .4byte 0x4000040
-     .4byte 0xa2600001
-     .byte 1, 0, 0, 0
+	 .4byte 0xa2600001
+	 .byte 1, 0, 0, 0
 	 
 gUnknown_08620390:: @ 8620390
 	.string "Becalm fighting emotions.$"
@@ -1503,7 +1506,7 @@ gUnknown_086225D4:: @ 86225D4
 
 gUnknown_08622698:: @ 8622698
 	.incbin "graphics/pokenav/arrow2.gbapal"
-    
+	
 gUnknown_086226B8:: @ 86226B8
 	.incbin "graphics/pokenav/arrow2.4bpp.lz"
 
@@ -1521,7 +1524,7 @@ gUnknown_08622760:: @ 8622760
 
 gUnknown_0862278C:: @ 862278C
 	.4byte 0x11FD
-    .4byte 0x20206A
+	.4byte 0x20206A
 
 gUnknown_08622794:: @ 8622794
 	.4byte 0x3077
@@ -1545,10 +1548,10 @@ gUnknown_08622798:: @ 8622798
 	.4byte sub_81CBB74
 
 gUnknown_086227D8:: @ 86227D8
-    window_template 2, 0, 5, 11, 2, 2, 16
+	window_template 2, 0, 5, 11, 2, 2, 16
 
 gUnknown_086227E0:: @ 86227E0
-    window_template 2, 0, 9, 11, 8, 2, 0x26
+	window_template 2, 0, 9, 11, 8, 2, 0x26
 
 gUnknown_086227E8:: @ 86227E8
 	.4byte gUnknown_085EC017
@@ -1556,12 +1559,12 @@ gUnknown_086227E8:: @ 86227E8
 	.4byte gUnknown_085EC022
 
 gUnknown_086227F4:: @ 86227F4
-    .string "·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p"
-    .string "$"
-    .align 2
+	.string "·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p"
+	.string "$"
+	.align 2
 
 gUnknown_08622808:: @ 8622808
-    window_template 1, 1, 12, 0x1C, 4, 1, 10
+	window_template 1, 1, 12, 0x1C, 4, 1, 10
 
 gUnknown_08622810:: @ 8622810
 	obj_tiles gUnknown_086226B8, 0x40, 7
@@ -1662,8 +1665,8 @@ gUnknown_0862307C:: @ 862307C
 
 gUnknown_086230D8:: @ 86230D8
 	.4byte 0x11F5
-    .4byte 0x206A
-    .4byte 0x3402
+	.4byte 0x206A
+	.4byte 0x3402
 
 gUnknown_086230E4:: @ 86230E4
 	.4byte NULL
@@ -1681,12 +1684,12 @@ gUnknown_08623100:: @ 8623100
 
 gUnknown_08623110:: @ 8623110
 	.byte 1
-    .byte 17
-    .byte 4
-    .byte 12
-    .byte 13
-    .byte 1
-    .2byte 0x4C
+	.byte 17
+	.byte 4
+	.byte 12
+	.byte 13
+	.byte 1
+	.2byte 0x4C
 
 gUnknown_08623118:: @ 8623118
 	.4byte 0, gUnknown_08622E6C 
@@ -1722,10 +1725,10 @@ gUnknown_086231D0:: @ 86231D0
 	spr_template 6, 11, gUnknown_086231C8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81CCEF4
 
 gUnknown_086231E8:: @ 86231E8
-	.incbin "baserom.gba", 0x6231e8, 0x20
+	.incbin "graphics/pokenav/86231E8.gbapal"
 
 gUnknown_08623208:: @ 8623208
-	.incbin "baserom.gba", 0x623208, 0x20
+	.incbin "graphics/pokenav/8623208.gbapal"
 
 gUnknown_08623228:: @ 8623228
 	.incbin "graphics/pokenav/8623228.4bpp.lz"
@@ -1734,24 +1737,24 @@ gUnknown_0862323C:: @ 862323C
 	.incbin "graphics/pokenav/862323C.bin.lz"
 
 gUnknown_08623338:: @ 8623338
-	.incbin "baserom.gba", 0x623338, 0x20
+	.incbin "graphics/pokenav/8623338.gbapal"
 
 gUnknown_08623358:: @ 8623358
 	.4byte 0x11F5
-    .4byte 0x21DE
-    .4byte 0x31EB
+	.4byte 0x21DE
+	.4byte 0x31EB
 
 gUnknown_08623364:: @ 8623364
-    window_template 1, 13, 1, 13, 4, 15, 2
+	window_template 1, 13, 1, 13, 4, 15, 2
 
 gUnknown_0862336C:: @ 862336C
-    window_template 1, 1, 6, 7, 2, 15, 0x36
+	window_template 1, 1, 6, 7, 2, 15, 0x36
 
 gUnknown_08623374:: @ 8623374
-    window_template 1, 1, 0x1C, 5, 2, 15, 0x44
+	window_template 1, 1, 0x1C, 5, 2, 15, 0x44
 
 gUnknown_0862337C:: @ 862337C
-    window_template 1, 13, 0x1C, 3, 2, 15, 0x44
+	window_template 1, 13, 0x1C, 3, 2, 15, 0x44
 
 gUnknown_08623384:: @ 8623384
 	.4byte NULL
@@ -1781,7 +1784,7 @@ gUnknown_086234AC:: @ 86234AC
 	.incbin "graphics/pokenav/condition_search2.bin.lz"
 
 gUnknown_08623570:: @ 8623570
-	.incbin "baserom.gba", 0x623570, 0x20
+	.incbin "graphics/pokenav/8623570.gbapal"
 
 gUnknown_08623590:: @ 8623590
 	.4byte 0x2065
@@ -1799,19 +1802,19 @@ gUnknown_08623598:: @ 8623598
 	.4byte sub_81CF798
 
 gUnknown_086235B4:: @ 86235B4
-    window_template 1, 1, 6, 7, 2, 1, 20
+	window_template 1, 1, 6, 7, 2, 1, 20
 
 gUnknown_086235BC:: @ 86235BC
 	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
-    .align 2
+	.align 2
 
 gUnknown_086235C8:: @ 86235C8
 	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
-    .align 2
+	.align 2
 
 gUnknown_086235D4:: @ 86235D4
 	.string "{0x77}$"
-    .align 2
+	.align 2
 
 gUnknown_086235D8:: @ 86235D8
 	.4byte sub_81CFB8C
@@ -1828,7 +1831,7 @@ gUnknown_086236CC:: @ 86236CC
 	.incbin "graphics/pokenav/ui_ribbons.bin.lz"
 
 gUnknown_08623790:: @ 8623790
-	.incbin "baserom.gba", 0x623790, 0x20
+	.incbin "graphics/pokenav/8623790.gbapal"
 
 gUnknown_086237B0:: @ 86237B0
 	.4byte 0x2065
@@ -1846,38 +1849,38 @@ gUnknown_086237B8:: @ 86237B8
 	.4byte sub_81D021C
 
 gUnknown_086237D4:: @ 86237D4
-    window_template 1, 1, 6, 7, 2, 1, 20
+	window_template 1, 1, 6, 7, 2, 1, 20
 
 gUnknown_086237DC:: @ 86237DC
 	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
-    .align 2
+	.align 2
 
 gUnknown_086237E8:: @ 86237E8
 	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
-    .align 2
+	.align 2
 
 gUnknown_086237F4:: @ 86237F4
 	.string "{0x77}$"
-    .align 2
+	.align 2
 
 gUnknown_086237F8:: @ 86237F8
 	.byte 1, 1, 0, 0
-    .byte 3, 4, 1, 0
-    .byte 3, 4, 5, 0
-    .byte 3, 4, 9, 0
-    .byte 3, 4, 13, 0
-    .byte 3, 4, 17, 0
-    .byte 1, 1, 21, 0
-    .byte 1, 1, 22, 0
-    .byte 1, 1, 23, 0
-    .byte 1, 1, 24, 0
-    .byte 1, 1, 25, 1
-    .byte 1, 1, 26, 1
-    .byte 1, 1, 27, 1
-    .byte 1, 1, 28, 1
-    .byte 1, 1, 29, 1
-    .byte 1, 1, 30, 1
-    .byte 1, 1, 31, 1
+	.byte 3, 4, 1, 0
+	.byte 3, 4, 5, 0
+	.byte 3, 4, 9, 0
+	.byte 3, 4, 13, 0
+	.byte 3, 4, 17, 0
+	.byte 1, 1, 21, 0
+	.byte 1, 1, 22, 0
+	.byte 1, 1, 23, 0
+	.byte 1, 1, 24, 0
+	.byte 1, 1, 25, 1
+	.byte 1, 1, 26, 1
+	.byte 1, 1, 27, 1
+	.byte 1, 1, 28, 1
+	.byte 1, 1, 29, 1
+	.byte 1, 1, 30, 1
+	.byte 1, 1, 31, 1
 
 @ 862383C
 	.include "data/text/ribbon_descriptions.inc"
@@ -1901,7 +1904,7 @@ gUnknown_08624078:: @ 8624078
 	 .incbin "graphics/pokenav/ribbons_icon5.gbapal"
 
 gUnknown_08624098:: @ 8624098
-	 .incbin "baserom.gba", 0x624098, 0x20
+	 .incbin "graphics/pokenav/8624098.gbapal"
 
 gUnknown_086240B8:: @ 86240B8
 	 .incbin "graphics/pokenav/ribbons_icon.4bpp.lz"
@@ -1911,7 +1914,7 @@ gUnknown_08624280:: @ 8624280
 
 gUnknown_08624B98:: @ 8624B98
 	.4byte 0x107D
-    .4byte 0x2066
+	.4byte 0x2066
 
 gUnknown_08624BA0:: @ 8624BA0
 	.4byte NULL
@@ -1922,48 +1925,48 @@ gUnknown_08624BA0:: @ 8624BA0
 	.4byte sub_81D0C54
 
 gUnknown_08624BB8:: @ 8624BB8
-    window_template 2, 12, 13, 16, 4, 1, 20
+	window_template 2, 12, 13, 16, 4, 1, 20
 
 gUnknown_08624BC0:: @ 8624BC0
 	.byte 4, 2, 3, 0
 
 gUnknown_08624BC4:: @ 8624BC4
-    window_template 2, 14, 1, 13, 2, 10, 0x54
+	window_template 2, 14, 1, 13, 2, 10, 0x54
 
 gUnknown_08624BCC:: @ 8624BCC
 	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
-    .align 2
+	.align 2
 
 gUnknown_08624BD8:: @ 8624BD8
 	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
-    .align 2
+	.align 2
 
 gUnknown_08624BE4:: @ 8624BE4
 	.string "{0x77}$"
-    .align 2
+	.align 2
 
 gUnknown_08624BE8:: @ 8624BE8
-    window_template 2, 1, 5, 7, 2, 1, 0x6E
-    .4byte NULL
-    .4byte NULL
+	window_template 2, 1, 5, 7, 2, 1, 0x6E
+	.4byte NULL
+	.4byte NULL
 
 gUnknown_08624BF8:: @ 8624BF8
 	.2byte 0, 0, 1, 0
-    .2byte 2, 0, 3, 0
-    .2byte 4, 0, 1, 1
-    .2byte 2, 1, 3, 1
-    .2byte 4, 1, 1, 2
-    .2byte 2, 2, 3, 2
-    .2byte 4, 2, 1, 3
-    .2byte 2, 3, 3, 3
-    .2byte 4, 3, 1, 4
-    .2byte 2, 4, 3, 4
-    .2byte 4, 4, 5, 0
-    .2byte 6, 0, 7, 1
-    .2byte 8, 2, 9, 1
-    .2byte 9, 3, 9, 4
-    .2byte 10, 3, 10, 4
-    .2byte 11, 0, 11, 1
+	.2byte 2, 0, 3, 0
+	.2byte 4, 0, 1, 1
+	.2byte 2, 1, 3, 1
+	.2byte 4, 1, 1, 2
+	.2byte 2, 2, 3, 2
+	.2byte 4, 2, 1, 3
+	.2byte 2, 3, 3, 3
+	.2byte 4, 3, 1, 4
+	.2byte 2, 4, 3, 4
+	.2byte 4, 4, 5, 0
+	.2byte 6, 0, 7, 1
+	.2byte 8, 2, 9, 1
+	.2byte 9, 3, 9, 4
+	.2byte 10, 3, 10, 4
+	.2byte 11, 0, 11, 1
 
 gUnknown_08624C78:: @ 8624C78
 	obj_tiles gUnknown_08624280, 0x1800, 9
@@ -1978,709 +1981,709 @@ gUnknown_08624C80:: @ 8624C80
 
 gUnknown_08624CB0:: @ 8624CB0
 	.2byte 0x100
-    .2byte 0x8000
-    .2byte 0x400
-    .2byte 0x0
+	.2byte 0x8000
+	.2byte 0x400
+	.2byte 0x0
 
 gUnknown_08624CB8:: @ 8624CB8
-    .2byte 0x80
-    .2byte 0x80
-    .2byte 0
-    .2byte 0
-    .2byte 0x7FFF
-    .2byte 0
-    .2byte 0
-    .2byte 0
-    
+	.2byte 0x80
+	.2byte 0x80
+	.2byte 0
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0
+	.2byte 0
+	.2byte 0
+	
 gUnknown_08624CC8:: @ 8624CC8
-    .2byte 0x80
-    .2byte 0x80
-    .2byte 0
-    .2byte 0
-    .2byte 0x20
-    .2byte 0x20
-    .2byte 0x400
-    .2byte 0
-    .2byte 0x7FFF
-    .2byte 0
-    .2byte 0
-    .2byte 0
-    
+	.2byte 0x80
+	.2byte 0x80
+	.2byte 0
+	.2byte 0
+	.2byte 0x20
+	.2byte 0x20
+	.2byte 0x400
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0
+	.2byte 0
+	.2byte 0
+	
 gUnknown_08624CE0:: @ 8624CE0
-    .2byte 0x100
-    .2byte 0x100
-    .2byte 0
-    .2byte 0
-    .2byte 0xFFE0
-    .2byte 0xFFE0
-    .2byte 0x400
-    .2byte 0
-    .2byte 0x7FFF
-    .2byte 0
-    .2byte 0
-    .2byte 0
-    
+	.2byte 0x100
+	.2byte 0x100
+	.2byte 0
+	.2byte 0
+	.2byte 0xFFE0
+	.2byte 0xFFE0
+	.2byte 0x400
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0
+	.2byte 0
+	.2byte 0
+	
 gUnknown_08624CF8:: @ 8624CF8
-    .4byte gUnknown_08624CB8
-    .4byte gUnknown_08624CC8
-    .4byte gUnknown_08624CE0
+	.4byte gUnknown_08624CB8
+	.4byte gUnknown_08624CC8
+	.4byte gUnknown_08624CE0
 
 gUnknown_08624D04:: @ 8624D04
-    spr_template 9, 15, gUnknown_08624CB0, gDummySpriteAnimTable, NULL, gUnknown_08624CF8, SpriteCallbackDummy
-    
+	spr_template 9, 15, gUnknown_08624CB0, gDummySpriteAnimTable, NULL, gUnknown_08624CF8, SpriteCallbackDummy
+	
 gUnknown_08624D1C:: @ 8624D1C
 	 .4byte gText_MrStone_Pokenav_2B60C0
-     .2byte 0xFFFF
-     .byte 0x58
-     .byte 1
-     .4byte gText_MrStone_Pokenav_2B61E6
-     .byte 0x58
-     .byte 1
-     .2byte 0xFFFF
-     .4byte gText_MrStone_Pokenav_2B6302
-     .byte 0xBD
-     .byte 0
-     .2byte 0xFFFF
-     .4byte gText_MrStone_Pokenav_2B63A0
-     .byte 16
-     .byte 1
-     .2byte 0xFFFF
-     .4byte gText_MrStone_Pokenav_2B64A2
-     .byte 0x6A
-     .byte 0
-     .2byte 0xFFFF
-     .4byte gText_MrStone_Pokenav_2B6526
-     .byte 0xF4
-     .byte 4
-     .2byte 0xFFFF
-     .4byte gText_MrStone_Pokenav_2B65BB
-     .byte 0x97
-     .byte 0
-     .2byte 0xFFFF
-     .4byte gText_MrStone_Pokenav_2B6664
-     .byte 0x6f
-     .byte 0
-     .2byte 0xFFFF
-     .4byte gText_MrStone_Pokenav_2B66B1
-     .byte 0x70
-     .byte 0
-     .2byte 0xFFFF
-     .4byte gText_MrStone_Pokenav_2B6703
-     .byte 0xf7
-     .byte 4
-     .2byte 0xFFFF
-     .4byte gText_MrStone_Pokenav_2B67ED
-     .byte 0x64
-     .byte 8
-     .2byte 0xFFFF
-     .4byte NULL
-     .4byte 0xFFFFFFFF
+	 .2byte 0xFFFF
+	 .byte 0x58
+	 .byte 1
+	 .4byte gText_MrStone_Pokenav_2B61E6
+	 .byte 0x58
+	 .byte 1
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B6302
+	 .byte 0xBD
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B63A0
+	 .byte 16
+	 .byte 1
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B64A2
+	 .byte 0x6A
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B6526
+	 .byte 0xF4
+	 .byte 4
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B65BB
+	 .byte 0x97
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B6664
+	 .byte 0x6f
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B66B1
+	 .byte 0x70
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B6703
+	 .byte 0xf7
+	 .byte 4
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B67ED
+	 .byte 0x64
+	 .byte 8
+	 .2byte 0xFFFF
+	 .4byte NULL
+	 .4byte 0xFFFFFFFF
 
 gUnknown_08624D7C:: @ 8624D7C
 	 .byte 0
-     .byte 10
-     .2byte 0xFFFF
-     .4byte gUnknown_085EFAEF
-     .4byte gUnknown_085EFAFA
-     .4byte gUnknown_08624D1C
+	 .byte 10
+	 .2byte 0xFFFF
+	 .4byte gUnknown_085EFAEF
+	 .4byte gUnknown_085EFAFA
+	 .4byte gUnknown_08624D1C
 
 gUnknown_08624D8C:: @ 8624D8C
-     .4byte gText_Norman_Pokenav_2B5719
-     .byte 0x32
-     .byte 1
-     .2byte 0xFFFF
-     .4byte gText_Norman_Pokenav_2B5795
-     .byte 0xF1
-     .byte 4
-     .2byte 0xFFFF
-     .4byte gText_Norman_Pokenav_2B584D
-     .byte 0xF3
-     .byte 4
-     .2byte 0xFFFF
-     .4byte gText_Norman_Pokenav_2B58E3
-     .byte 0xF4
-     .byte 4
-     .2byte 0xFFFF
-     .4byte gText_Norman_Pokenav_2B5979
-     .byte 0xD4
-     .byte 0
-     .2byte 0xFFFF
-     .4byte gText_Norman_Pokenav_2B5A07
-     .byte 0xFE
-     .byte 0xFF
-     .2byte 0xFFFF
-     .4byte gText_Norman_Pokenav_2B5A69
-     .byte 0x64
-     .byte 8
-     .2byte 0xFFFF
-     .4byte gText_Norman_Pokenav_2B5ACF
-     .byte 0x64
-     .byte 8
-     .2byte 0xFFFF
-     .4byte gText_Norman_Pokenav_2B5B5E
-     .byte 0x64
-     .byte 8
-     .2byte 0xFFFF
-     .4byte NULL
-     .4byte 0xFFFFFFFF
+	 .4byte gText_Norman_Pokenav_2B5719
+	 .byte 0x32
+	 .byte 1
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5795
+	 .byte 0xF1
+	 .byte 4
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B584D
+	 .byte 0xF3
+	 .byte 4
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B58E3
+	 .byte 0xF4
+	 .byte 4
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5979
+	 .byte 0xD4
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5A07
+	 .byte 0xFE
+	 .byte 0xFF
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5A69
+	 .byte 0x64
+	 .byte 8
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5ACF
+	 .byte 0x64
+	 .byte 8
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5B5E
+	 .byte 0x64
+	 .byte 8
+	 .2byte 0xFFFF
+	 .4byte NULL
+	 .4byte 0xFFFFFFFF
 
 gUnknown_08624DDC:: @ 8624DDC
 	 .byte 5, 7, 0x32, 1, 0x45, 0, 0, 0
-     .4byte gUnknown_085EFB25
-     .4byte gUnknown_085EFB47
-     .4byte gUnknown_08624D8C
+	 .4byte gUnknown_085EFB25
+	 .4byte gUnknown_085EFB47
+	 .4byte gUnknown_08624D8C
 
 gUnknown_08624DF0:: @ 8624DF0
 	 .byte 3, 0, 0x19, 1
-     .4byte gUnknown_085EFBC9
-     .4byte gUnknown_085E8270
-     
+	 .4byte gUnknown_085EFBC9
+	 .4byte gUnknown_085E8270
+	 
 gUnknown_08624DFC:: @ 8624DFC
-     .4byte gText_Mom_Pokenav_2B227B
-     .byte 0xFF
-     .byte 0xFF
-     .2byte 0xFFFF
-     .4byte gText_Mom_Pokenav_2B2310
-     .byte 0xF4
-     .byte 0x4
-     .2byte 0xFFFF
-     .4byte gText_Mom_Pokenav_2B23F3
-     .byte 0x64
-     .byte 8
-     .2byte 0xFFFF
-     .4byte NULL
-     .4byte 0xFFFFFFFF
+	 .4byte gText_Mom_Pokenav_2B227B
+	 .byte 0xFF
+	 .byte 0xFF
+	 .2byte 0xFFFF
+	 .4byte gText_Mom_Pokenav_2B2310
+	 .byte 0xF4
+	 .byte 0x4
+	 .2byte 0xFFFF
+	 .4byte gText_Mom_Pokenav_2B23F3
+	 .byte 0x64
+	 .byte 8
+	 .2byte 0xFFFF
+	 .4byte NULL
+	 .4byte 0xFFFFFFFF
 
 gUnknown_08624E1C:: @ 8624E1C
 	 .byte 0, 0, 0xD8, 0
-     .4byte gUnknown_085EFB32
-     .4byte gUnknown_085EFB4B
-     .4byte gUnknown_08624DFC
-     
+	 .4byte gUnknown_085EFB32
+	 .4byte gUnknown_085EFB4B
+	 .4byte gUnknown_08624DFC
+	 
 gUnknown_08624E2C:: @ 8624E2C
-    .4byte gText_Steven_Pokenav_2B5B95
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Steven_Pokenav_2B5C53
-    .byte 0xC7
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Steven_Pokenav_2B5CC9
-    .byte 0xD4
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Steven_Pokenav_2B5DB4
-    .byte 0x70
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Steven_Pokenav_2B5E26
-    .byte 0xF6
-    .byte 4
-    .2byte 0xFFFF
-    .4byte gText_Steven_Pokenav_2B5EA2
-    .byte 0x81
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Steven_Pokenav_2B5ED9
-    .byte 0x64
-    .byte 8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Steven_Pokenav_2B5B95
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5C53
+	.byte 0xC7
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5CC9
+	.byte 0xD4
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5DB4
+	.byte 0x70
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5E26
+	.byte 0xF6
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5EA2
+	.byte 0x81
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5ED9
+	.byte 0x64
+	.byte 8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08624E6C:: @ 8624E6C
 	 .byte 0, 0xD5, 0x31, 1
-     .4byte gUnknown_085EFB04
-     .4byte gUnknown_085EFB11
-     .4byte gUnknown_08624E2C
-     
+	 .4byte gUnknown_085EFB04
+	 .4byte gUnknown_085EFB11
+	 .4byte gUnknown_08624E2C
+	 
 gUnknown_08624E7C:: @ 8624E7C
-    .4byte gText_May_Pokenav_2B3AB3
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B3B3F
-    .byte 0xF1
-    .byte 0x4
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B3C13
-    .byte 0x95
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B3CF3
-    .byte 0x24
-    .byte 0x3
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B3D4B
-    .byte 0x6A
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B3DD1
-    .byte 0xF3
-    .byte 0x4
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B3E69
-    .byte 0xF4
-    .byte 4
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B3ECD
-    .byte 0x97
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B3F2B
-    .byte 0xD4
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B3FFB
-    .byte 0x6F
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B402B
-    .byte 0x61
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B414B
-    .byte 0x70
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B4228
-    .byte 0x81
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B42E0
-    .byte 0xF7
-    .byte 4
-    .2byte 0xFFFF
-    .4byte gText_May_Pokenav_2B4350
-    .byte 0x64
-    .byte 8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_May_Pokenav_2B3AB3
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3B3F
+	.byte 0xF1
+	.byte 0x4
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3C13
+	.byte 0x95
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3CF3
+	.byte 0x24
+	.byte 0x3
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3D4B
+	.byte 0x6A
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3DD1
+	.byte 0xF3
+	.byte 0x4
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3E69
+	.byte 0xF4
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3ECD
+	.byte 0x97
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3F2B
+	.byte 0xD4
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3FFB
+	.byte 0x6F
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B402B
+	.byte 0x61
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B414B
+	.byte 0x70
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B4228
+	.byte 0x81
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B42E0
+	.byte 0xF7
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B4350
+	.byte 0x64
+	.byte 8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08624EFC:: @ 8624EFC
 	 .byte 4, 0, 0xFD, 0
-     .4byte gUnknown_085EFB18
-     .4byte gExpandedPlaceholder_May
-     .4byte gUnknown_08624E7C
+	 .4byte gUnknown_085EFB18
+	 .4byte gExpandedPlaceholder_May
+	 .4byte gUnknown_08624E7C
 
 gUnknown_08624F0C:: @ 8624F0C
-    .4byte gText_Brendan_Pokenav_2B43EF
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B4486
-    .byte 0xF1
-    .byte 0x4
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B4560
-    .byte 0x95
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B463F
-    .byte 0x24
-    .byte 0x3
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B46B7
-    .byte 0x6A
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B4761
-    .byte 0xF3
-    .byte 0x4
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B47F4
-    .byte 0xF4
-    .byte 4
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B4882
-    .byte 0x97
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B4909
-    .byte 0xD4
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B49C4
-    .byte 0x6F
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B4A44
-    .byte 0x61
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B4B28
-    .byte 0x70
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B4C15
-    .byte 0x81
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B4CD8
-    .byte 0xF7
-    .byte 4
-    .2byte 0xFFFF
-    .4byte gText_Brendan_Pokenav_2B4D46
-    .byte 0x64
-    .byte 8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Brendan_Pokenav_2B43EF
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4486
+	.byte 0xF1
+	.byte 0x4
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4560
+	.byte 0x95
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B463F
+	.byte 0x24
+	.byte 0x3
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B46B7
+	.byte 0x6A
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4761
+	.byte 0xF3
+	.byte 0x4
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B47F4
+	.byte 0xF4
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4882
+	.byte 0x97
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4909
+	.byte 0xD4
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B49C4
+	.byte 0x6F
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4A44
+	.byte 0x61
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4B28
+	.byte 0x70
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4C15
+	.byte 0x81
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4CD8
+	.byte 0xF7
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4D46
+	.byte 0x64
+	.byte 8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08624F8C:: @ 8624F8C
 	 .byte 4, 1, 0xFD, 0
-     .4byte gUnknown_085EFB18
-     .4byte gExpandedPlaceholder_Brendan
-     .4byte gUnknown_08624F0C
-     
+	 .4byte gUnknown_085EFB18
+	 .4byte gExpandedPlaceholder_Brendan
+	 .4byte gUnknown_08624F0C
+	 
 gUnknown_08624F9C:: @ 8624F9C
-    .4byte gText_Wally_Pokenav_2B4DE2
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Wally_Pokenav_2B4E57
-    .byte 0xC7
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Wally_Pokenav_2B4EA5
-    .byte 0xF3
-    .byte 0x4
-    .2byte 0xFFFF
-    .4byte gText_Wally_Pokenav_2B4F41
-    .byte 0x97
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Wally_Pokenav_2B4FF3
-    .byte 0x6F
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Wally_Pokenav_2B50B1
-    .byte 0x81
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Wally_Pokenav_2B5100
-    .byte 0x7E
-    .byte 0
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Wally_Pokenav_2B4DE2
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B4E57
+	.byte 0xC7
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B4EA5
+	.byte 0xF3
+	.byte 0x4
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B4F41
+	.byte 0x97
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B4FF3
+	.byte 0x6F
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B50B1
+	.byte 0x81
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B5100
+	.byte 0x7E
+	.byte 0
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08624FDC:: @ 8624FDC
-    .byte 0x24, 3, 5, 0
-    .2byte 0x6F, 0xD5
-    .byte 0x5A, 3, 0x46, 0, 0xFF, 0xFF, 0xD5, 0
-    
+	.byte 0x24, 3, 5, 0
+	.2byte 0x6F, 0xD5
+	.byte 0x5A, 3, 0x46, 0, 0xFF, 0xFF, 0xD5, 0
+	
 gUnknown_08624FEC:: @ 8624FEC
 	 .byte 2, 0, 0xD6, 0
-     .4byte 0x40
-     .4byte gUnknown_085EFB3E
-     .4byte gUnknown_08624F9C
-     .4byte gUnknown_08624FDC
-     
+	 .4byte 0x40
+	 .4byte gUnknown_085EFB3E
+	 .4byte gUnknown_08624F9C
+	 .4byte gUnknown_08624FDC
+	 
 gUnknown_08624500:: @ 8624500
-    .4byte gText_Scott_Pokenav_2B5184
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Scott_Pokenav_2B5275
-    .byte 0x8B
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Scott_Pokenav_2B5323
-    .byte 0x97
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Scott_Pokenav_2B53DB
-    .byte 0xD4
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Scott_Pokenav_2B54A5
-    .byte 0x70
-    .byte 0
-    .2byte 0xFFFF
-    .4byte gText_Scott_Pokenav_2B5541
-    .byte 0xF7
-    .byte 4
-    .2byte 0xFFFF
-    .4byte gText_Scott_Pokenav_2B56CA
-    .byte 0x64
-    .byte 8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Scott_Pokenav_2B5184
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B5275
+	.byte 0x8B
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B5323
+	.byte 0x97
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B53DB
+	.byte 0xD4
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B54A5
+	.byte 0x70
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B5541
+	.byte 0xF7
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B56CA
+	.byte 0x64
+	.byte 8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 
 gUnknown_08625040:: @ 8625040
 	 .byte 0, 0xD5, 0xD7, 0
-     .4byte gUnknown_085EFB4F
-     .4byte gUnknown_085EFB5C
-     .4byte gUnknown_08624500
-     
+	 .4byte gUnknown_085EFB4F
+	 .4byte gUnknown_085EFB5C
+	 .4byte gUnknown_08624500
+	 
 gUnknown_08625050:: @ 8625050
-    .4byte gText_Roxanne_Pokenav_2B2456
-    .byte 0xFE
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Roxanne_Pokenav_2B250E
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Roxanne_Pokenav_2B25C1
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Roxanne_Pokenav_2B2607
-    .byte 0x64
-    .byte 0x8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Roxanne_Pokenav_2B2456
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Roxanne_Pokenav_2B250E
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Roxanne_Pokenav_2B25C1
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Roxanne_Pokenav_2B2607
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625078:: @ 8625078
 	 .byte 5, 10, 0xD3, 1
-     .4byte 0x41
-     .4byte gUnknown_085EFB62
-     .4byte NULL
-     .4byte gUnknown_08625050
-     
+	 .4byte 0x41
+	 .4byte gUnknown_085EFB62
+	 .4byte NULL
+	 .4byte gUnknown_08625050
+	 
 gUnknown_0862508C:: @ 862508C
-    .4byte gText_Brawly_Pokenav_2B2659
-    .byte 0xFE
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Brawly_Pokenav_2B275D
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Brawly_Pokenav_2B286F
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Brawly_Pokenav_2B28D1
-    .byte 0x64
-    .byte 0x8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Brawly_Pokenav_2B2659
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Brawly_Pokenav_2B275D
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Brawly_Pokenav_2B286F
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Brawly_Pokenav_2B28D1
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_086250B4:: @ 86250B4
 	 .byte 5, 2, 0xD4, 1
-     .4byte 0x42
-     .4byte gUnknown_085EFB6F
-     .4byte NULL
-     .4byte gUnknown_0862508C
-     
+	 .4byte 0x42
+	 .4byte gUnknown_085EFB6F
+	 .4byte NULL
+	 .4byte gUnknown_0862508C
+	 
 gUnknown_086250C8:: @ 86250C8
-    .4byte gText_Wattson_Pokenav_2B2912
-    .byte 0xFE
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Wattson_Pokenav_2B29CA
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Wattson_Pokenav_2B2AB6
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Wattson_Pokenav_2B2B01
-    .byte 0x64
-    .byte 0x8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Wattson_Pokenav_2B2912
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Wattson_Pokenav_2B29CA
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Wattson_Pokenav_2B2AB6
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Wattson_Pokenav_2B2B01
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_086250F0:: @ 86250F0
 	 .byte 5, 9, 0xD5, 1
-     .4byte 0x43
-     .4byte gUnknown_085EFB7B
-     .4byte NULL
-     .4byte gUnknown_086250C8
-     
+	 .4byte 0x43
+	 .4byte gUnknown_085EFB7B
+	 .4byte NULL
+	 .4byte gUnknown_086250C8
+	 
 gUnknown_08625104:: @ 8625104
-    .4byte gText_Flannery_Pokenav_2B2B4D
-    .byte 0xFE
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Flannery_Pokenav_2B2C0E
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Flannery_Pokenav_2B2CF1
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Flannery_Pokenav_2B2D54
-    .byte 0x64
-    .byte 0x8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Flannery_Pokenav_2B2B4D
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Flannery_Pokenav_2B2C0E
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Flannery_Pokenav_2B2CF1
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Flannery_Pokenav_2B2D54
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_0862512C:: @ 862512C
 	 .byte 5, 3, 0xD6, 1
-     .4byte 0x44
-     .4byte gUnknown_085EFB87
-     .4byte NULL
-     .4byte gUnknown_08625104
-     
+	 .4byte 0x44
+	 .4byte gUnknown_085EFB87
+	 .4byte NULL
+	 .4byte gUnknown_08625104
+	 
 gUnknown_08625140:: @ 8625140
-    .4byte gText_Winona_Pokenav_2B2DA4
-    .byte 0xFE
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Winona_Pokenav_2B2E2B
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Winona_Pokenav_2B2EC2
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Winona_Pokenav_2B2F16
-    .byte 0x64
-    .byte 0x8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Winona_Pokenav_2B2DA4
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Winona_Pokenav_2B2E2B
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Winona_Pokenav_2B2EC2
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Winona_Pokenav_2B2F16
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625168:: @ 8625168
 	 .byte 5, 11, 0xD7, 1
-     .4byte 0x46
-     .4byte gUnknown_085EFB94
-     .4byte NULL
-     .4byte gUnknown_08625140
+	 .4byte 0x46
+	 .4byte gUnknown_085EFB94
+	 .4byte NULL
+	 .4byte gUnknown_08625140
 
 gUnknown_0862517C:: @ 862517C
-    .4byte gText_TateLiza_Pokenav_2B2F97
-    .byte 0xFE
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_TateLiza_Pokenav_2B306E
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_TateLiza_Pokenav_2B3158
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_TateLiza_Pokenav_2B31CD
-    .byte 0x64
-    .byte 0x8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_TateLiza_Pokenav_2B2F97
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_TateLiza_Pokenav_2B306E
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_TateLiza_Pokenav_2B3158
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_TateLiza_Pokenav_2B31CD
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_086251A4:: @ 86251A4
 	 .byte 5, 13, 0xD8, 1
-     .4byte 0x47
-     .4byte gUnknown_085EFB9E
-     .4byte NULL
-     .4byte gUnknown_0862517C
-     
+	 .4byte 0x47
+	 .4byte gUnknown_085EFB9E
+	 .4byte NULL
+	 .4byte gUnknown_0862517C
+	 
 gUnknown_086251B8:: @ 86251B8
-    .4byte gText_Juan_Pokenav_2B3249
-    .byte 0xFE
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Juan_Pokenav_2B32EC
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Juan_Pokenav_2B33AA
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte gText_Juan_Pokenav_2B341E
-    .byte 0x64
-    .byte 0x8
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Juan_Pokenav_2B3249
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Juan_Pokenav_2B32EC
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Juan_Pokenav_2B33AA
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Juan_Pokenav_2B341E
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_086251E0:: @ 86251E0
 	 .byte 5, 14, 0xD9, 1
-     .4byte 0x48
-     .4byte gUnknown_085EFBA9
-     .4byte NULL
-     .4byte gUnknown_086251B8
-     
+	 .4byte 0x48
+	 .4byte gUnknown_085EFBA9
+	 .4byte NULL
+	 .4byte gUnknown_086251B8
+	 
 gUnknown_086251F4:: @ 86251F4
-    .4byte gText_Sidney_Pokenav_2B34CC
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Sidney_Pokenav_2B34CC
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625204:: @ 8625204
 	 .byte 5, 15, 0xA5, 1
-     .4byte 0x49
-     .4byte gUnknown_085EFBB5
-     .4byte NULL
-     .4byte gUnknown_086251F4
-     
+	 .4byte 0x49
+	 .4byte gUnknown_085EFBB5
+	 .4byte NULL
+	 .4byte gUnknown_086251F4
+	 
 gUnknown_08625218:: @ 8625218
-    .4byte gText_Phoebe_Pokenav_2B3561
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Phoebe_Pokenav_2B3561
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625228:: @ 8625228
 	 .byte 5, 15, 0xA6, 1
-     .4byte 0x4A
-     .4byte gUnknown_085EFBB5
-     .4byte NULL
-     .4byte gUnknown_08625218
-     
+	 .4byte 0x4A
+	 .4byte gUnknown_085EFBB5
+	 .4byte NULL
+	 .4byte gUnknown_08625218
+	 
 gUnknown_0862523C:: @ 862523C
-    .4byte gText_Glacia_Pokenav_2B35E4
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Glacia_Pokenav_2B35E4
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_0862524C:: @ 862524C
 	 .byte 5, 15, 0xA7, 1
-     .4byte 0x4B
-     .4byte gUnknown_085EFBB5
-     .4byte NULL
-     .4byte gUnknown_0862523C
-     
+	 .4byte 0x4B
+	 .4byte gUnknown_085EFBB5
+	 .4byte NULL
+	 .4byte gUnknown_0862523C
+	 
 gUnknown_08625260:: @ 8625260
-    .4byte gText_Drake_Pokenav_2B368B
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Drake_Pokenav_2B368B
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625270:: @ 8625270
 	 .byte 5, 15, 0xA8, 1
-     .4byte 0x4C
-     .4byte gUnknown_085EFBB5
-     .4byte NULL
-     .4byte gUnknown_08625260
-     
+	 .4byte 0x4C
+	 .4byte gUnknown_085EFBB5
+	 .4byte NULL
+	 .4byte gUnknown_08625260
+	 
 gUnknown_08625284:: @ 8625284
-    .4byte gText_Wallace_Pokenav_2B3790
-    .byte 0xFF
-    .byte 0xFF
-    .2byte 0xFFFF
-    .4byte NULL
-    .4byte 0xFFFFFFFF
+	.4byte gText_Wallace_Pokenav_2B3790
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625294:: @ 8625294
 	 .byte 5, 15, 0xA9, 1
-     .4byte 0x4D
-     .4byte gUnknown_085EFBC0
-     .4byte NULL
-     .4byte gUnknown_08625284
+	 .4byte 0x4D
+	 .4byte gUnknown_085EFBC0
+	 .4byte NULL
+	 .4byte gUnknown_08625284
 
 gUnknown_086252A8:: @ 86252A8
 	.4byte gUnknown_08624D7C
@@ -2756,33 +2759,33 @@ gUnknown_08625374:: @ 8625374
 
 gUnknown_08625388:: @ 8625388
 	.2byte 7, 0x4B, 0xFFFF, 0
-    .4byte gUnknown_085ED453
-    .4byte gUnknown_085ED46B
-    .4byte gUnknown_085ED483
-    .4byte gUnknown_085ED49D
-    .2byte 7, 0x4B, 0x4F6, 0
-    .4byte gUnknown_085ED453
-    .4byte gUnknown_085ED46B
-    .4byte gUnknown_085ED4B3
-    .4byte gUnknown_085ED4CE
-    .2byte 2, 0X3C, 0xFFFF, 0
-    .4byte gUnknown_085ED4E3
-    .4byte gUnknown_085ED4FA
-    .4byte gUnknown_085ED516
-    .4byte gUnknown_085ED52F
-    .2byte 3, 0x3F, 0xFFFF, 0
-    .4byte gUnknown_085ED547
-    .4byte gUnknown_085ED563
-    .4byte gUnknown_085ED579
-    .4byte gUnknown_085ED58F
+	.4byte gUnknown_085ED453
+	.4byte gUnknown_085ED46B
+	.4byte gUnknown_085ED483
+	.4byte gUnknown_085ED49D
+	.2byte 7, 0x4B, 0x4F6, 0
+	.4byte gUnknown_085ED453
+	.4byte gUnknown_085ED46B
+	.4byte gUnknown_085ED4B3
+	.4byte gUnknown_085ED4CE
+	.2byte 2, 0X3C, 0xFFFF, 0
+	.4byte gUnknown_085ED4E3
+	.4byte gUnknown_085ED4FA
+	.4byte gUnknown_085ED516
+	.4byte gUnknown_085ED52F
+	.2byte 3, 0x3F, 0xFFFF, 0
+	.4byte gUnknown_085ED547
+	.4byte gUnknown_085ED563
+	.4byte gUnknown_085ED579
+	.4byte gUnknown_085ED58F
 
 gUnknown_086253E8:: @ 86253E8
 	.4byte 0x8010100
-    .4byte 0x80F02
-    .4byte 0x8011500
-    .4byte 0x180F12
-    .4byte 0xB010100
-    .4byte 0x180F08
+	.4byte 0x80F02
+	.4byte 0x8011500
+	.4byte 0x180F12
+	.4byte 0xB010100
+	.4byte 0x180F08
 
 gUnknown_08625400:: @ 8625400
 	.byte 1, 2, 3
@@ -2798,169 +2801,169 @@ gUnknown_08625410:: @ 8625410
 
 gUnknown_08625510:: @ 8625510
 	.4byte 0x10010101
-    .4byte 0xA0F0C
-    .4byte 0x10010101
-    .4byte 0xCA0F0C
-    .4byte 0xA011301
-    .4byte 0x18A0F0C
-    .4byte 0x160F0401
-    .4byte 0x2020F04
-    .4byte 0x5081600
-    .4byte 0x25A0F04
-    .4byte 0xFF
-    .4byte NULL
+	.4byte 0xA0F0C
+	.4byte 0x10010101
+	.4byte 0xCA0F0C
+	.4byte 0xA011301
+	.4byte 0x18A0F0C
+	.4byte 0x160F0401
+	.4byte 0x2020F04
+	.4byte 0x5081600
+	.4byte 0x25A0F04
+	.4byte 0xFF
+	.4byte NULL
 
 gUnknown_08625540:: @ 8625540
 	.4byte 0x5081600
-    .4byte 0x25A0F04
+	.4byte 0x25A0F04
 
 gUnknown_08625548:: @ 8625548
-    .4byte NULL
-    .4byte sub_81D2BD0
-    .4byte NULL
-    .2byte 0
-    .2byte 0
-    .byte 2
-    .byte 0
-    .byte 8
-    .byte 0
-    .4byte 0x1003121
-    
+	.4byte NULL
+	.4byte sub_81D2BD0
+	.4byte NULL
+	.2byte 0
+	.2byte 0
+	.byte 2
+	.byte 0
+	.byte 8
+	.byte 0
+	.4byte 0x1003121
+	
 gUnknown_08625560:: @ 8625560
 	.incbin "graphics/pokenav/pokeball.4bpp"
 
 gUnknown_08625660:: @ 8625660
-    .incbin "graphics/pokenav/8625660.4bpp"
-    
+	.incbin "graphics/pokenav/8625660.4bpp"
+	
 gUnknown_08625680:: @ 8625680
-    .incbin "graphics/pokenav/sparkle.gbapal"
-    
+	.incbin "graphics/pokenav/sparkle.gbapal"
+	
 gUnknown_086256A0:: @ 86255A0
-    .incbin "graphics/pokenav/sparkle.4bpp"
-    
+	.incbin "graphics/pokenav/sparkle.4bpp"
+	
 gUnknown_08625A20:: @ 8625A20
-    .2byte 0
-    .2byte 0xC000
-    .2byte 0x400
-    .2byte 0
-    
+	.2byte 0
+	.2byte 0xC000
+	.2byte 0x400
+	.2byte 0
+	
 gUnknown_08625A28:: @ 8625A28
-    .2byte 0
-    .2byte 0x4000
-    .2byte 0x800
-    .2byte 0
-    
+	.2byte 0
+	.2byte 0x4000
+	.2byte 0x800
+	.2byte 0
+	
 gUnknown_08625A30:: @ 8625A30
-    .2byte 0
-    .2byte 5
-    .2byte 0xFFFF
-    .2byte 0
-    
+	.2byte 0
+	.2byte 5
+	.2byte 0xFFFF
+	.2byte 0
+	
 gUnknown_08625A38:: @ 8625A38
-    .2byte 4
-    .2byte 5
-    .2byte 0xFFFF
-    .2byte 0
-    
+	.2byte 4
+	.2byte 5
+	.2byte 0xFFFF
+	.2byte 0
+	
 gUnknown_08625A40:: @ 8625A40
-    .4byte gUnknown_08625A30
-    .4byte gUnknown_08625A38
+	.4byte gUnknown_08625A30
+	.4byte gUnknown_08625A38
 
 gUnknown_08625A48:: @ 8625A48
 	.4byte NULL
-    .4byte 0x640800
+	.4byte 0x640800
 
 gUnknown_08625A50:: @ 8625A50
 	spr_template 0x64, 0x64, gUnknown_08625A20, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_08625A68:: @ 8625A68
 	.4byte NULL
-    .4byte 0x64
+	.4byte 0x64
 
 gUnknown_08625A70:: @ 8625A70
 	.4byte gUnknown_08625560
-    .byte 0, 1, 0x65, 0
-    .4byte gUnknown_08625660
-    .2byte 0x20, 0x67
-    .4byte gPokenavConditionCancel_Gfx
-    .byte 0, 1, 0x66, 0
-    .4byte NULL, NULL
+	.byte 0, 1, 0x65, 0
+	.4byte gUnknown_08625660
+	.2byte 0x20, 0x67
+	.4byte gPokenavConditionCancel_Gfx
+	.byte 0, 1, 0x66, 0
+	.4byte NULL, NULL
 
 gUnknown_08625A90:: @ 8625A90
 	.4byte gPokenavConditionCancel_Pal + 0x0
-    .byte 0x65, 0, 0, 0
-    .4byte gPokenavConditionCancel_Pal + 0x20
-    .byte 0x66, 0, 0, 0
-    .4byte NULL, NULL
+	.byte 0x65, 0, 0, 0
+	.4byte gPokenavConditionCancel_Pal + 0x20
+	.byte 0x66, 0, 0, 0
+	.4byte NULL, NULL
 
 gUnknown_08625AA8:: @ 8625AA8
 	spr_template 0x65, 0x65, gUnknown_08625A28, gUnknown_08625A40, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_08625AC0:: @ 8625AC0
 	.4byte gUnknown_086256A0
-    .byte 0x80, 3, 0x68, 0
+	.byte 0x80, 3, 0x68, 0
 
 gUnknown_08625AC8:: @ 8625AC8
 	.4byte gUnknown_08625680
-    .byte 0x68, 0, 0, 0
-    
+	.byte 0x68, 0, 0, 0
+	
 gUnknown_08625AD0:: @ 8625AD0
 	.2byte 0
-    .2byte 0x4000
-    .2byte 0
-    .2byte 0
-    
+	.2byte 0x4000
+	.2byte 0
+	.2byte 0
+	
 gUnknown_08625AD8:: @ 8625AD8
-    .2byte 0
-    .2byte 5
-    .2byte 4
-    .2byte 5
-    
+	.2byte 0
+	.2byte 5
+	.2byte 4
+	.2byte 5
+	
 gUnknown_08625AE0:: @ 8625AE0
-    .2byte 8
-    .2byte 5
-    .2byte 12
-    .2byte 5
-    
+	.2byte 8
+	.2byte 5
+	.2byte 12
+	.2byte 5
+	
 gUnknown_08625AE8:: @ 8625AE8
-    .2byte 16
-    .2byte 5
-    .2byte 20
-    .2byte 5
-    
+	.2byte 16
+	.2byte 5
+	.2byte 20
+	.2byte 5
+	
 gUnknown_08625AF0:: @ 8625AF0
-    .2byte 24
-    .2byte 5
-    .2byte 0xFFFF
-    .2byte 0
-    
+	.2byte 24
+	.2byte 5
+	.2byte 0xFFFF
+	.2byte 0
+	
 gUnknown_08625AF8:: @ 8625AF8
 	.4byte gUnknown_08625AD8
-    .4byte gUnknown_08625AE0
-    
+	.4byte gUnknown_08625AE0
+	
 gUnknown_08625B00:: @ 8625B00
 	.4byte gUnknown_08625AE8
-    .4byte gUnknown_08625AF0
-    
+	.4byte gUnknown_08625AF0
+	
 gUnknown_08625B08:: @ 8625B08
-    .4byte gUnknown_08625AF8
-    .4byte gUnknown_08625B00
-    .4byte gUnknown_08625B08
+	.4byte gUnknown_08625AF8
+	.4byte gUnknown_08625B00
+	.4byte gUnknown_08625B08
 
 gUnknown_08625B14:: @ 8625B14
 	spr_template 0x68, 0x68, gUnknown_08625AD0, gUnknown_08625AF8, NULL gDummySpriteAffineAnimTable, sub_81D3564
 
 gUnknown_08625B2C:: @ 8625B2C
 	.2byte 0, 0xFFDD
-    .2byte 20, 0xFFE4
-    .2byte 33, 0xFFF6
-    .2byte 33, 10
-    .2byte 20, 28
-    .2byte 0, 35
-    .2byte 0xFFEC, 28
-    .2byte 0xFFDF, 10
-    .2byte 0xFFDF, 0xFFF6
-    .2byte 0xFFEC, 0xFFE4
+	.2byte 20, 0xFFE4
+	.2byte 33, 0xFFF6
+	.2byte 33, 10
+	.2byte 20, 28
+	.2byte 0, 35
+	.2byte 0xFFEC, 28
+	.2byte 0xFFDF, 10
+	.2byte 0xFFDF, 0xFFF6
+	.2byte 0xFFEC, 0xFFE4
 
 gUnknown_08625B54:: @ 8625B54
 	.4byte gUnknown_085EEA46
@@ -2971,7 +2974,7 @@ gUnknown_08625B54:: @ 8625B54
 	.4byte gUnknown_085EEA5D
 
 gUnknown_08625B6C:: @ 8625B6C
-@ someone dump as japanese text later
+@ apparently e-reader trainer data? idk
 .byte 0x6f, 0x57, 0x54, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x0c, 0x01, 0x00, 0x00, 0x00, 0x2e, 0x14, 0x0c, 0x0e, 0x23, 0x10, 0x47, 0x0a, 0x1f, 0x06, 0x24, 0x0e, 0x48, 0x0a, 0x0f, 0x06
 .byte 0x22, 0x27, 0x2c, 0x16, 0x07, 0x06, 0x01, 0x0c, 0x47, 0x0a, 0x06, 0x06, 0x24, 0x0e, 0x00, 0x1e, 0x19, 0x12, 0x05, 0x0c, 0x25, 0x16, 0x25, 0x10, 0x0d, 0x1c, 0x2a, 0x1c, 0x06, 0x0a, 0x06, 0x0c
 .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
@@ -3015,129 +3018,132 @@ gUnknown_08625B6C:: @ 8625B6C
 .byte 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x0a, 0x96, 0x00, 0x00, 0x00, 0x8d, 0x85, 0x9e, 0xa0, 0x60, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
 
 gUnknown_0862608C:: @ 862608C
-	.2byte 21
-
-gUnknown_0862608E:: @ 862608E
-	.incbin "baserom.gba", 0x62608e, 0x786
-    
+	.2byte 21, 16
+	.2byte 25, 16
+	.2byte 16, 17
+	.2byte 20, 20
+	
+gUnknown_0862609C:: @ 862609C
+	.incbin "data/unknown_jp_62609C.bin"
+	
 gUnknown_08626814:: @ 8626814
-	.incbin "baserom.gba", 0x626814, 0xEE8
+	.incbin "data/pokenav/unk_struct_1.bin"
 
 gUnknown_086276FC:: @ 86276FC
-	.incbin "baserom.gba", 0x6276FC, 0xEE8
+	.incbin "data/pokenav/unk_struct_2.bin"
 
 gUnknown_086285E4:: @ 86285E4
-	.incbin "baserom.gba", 0x6285E4, 0xEE8
+	.incbin "data/pokenav/unk_struct_3.bin"
 
 gUnknown_086294CC:: @ 86294CC
-	.incbin "baserom.gba", 0x6294CC, 0xEE8
+	.incbin "data/pokenav/unk_struct_4.bin"
 
 gUnknown_0862A3B4:: @ 862A3B4
 	.byte 0x03, 0x06, 0x00, 0x00, 0x0B, 0x06, 0x00, 0x00, 0x0D, 0x06, 0x00, 0x00, 0x0F, 0x01, 0x00, 0x00, 0x2B, 0x04, 0x00, 0x00, 0x2D, 0x01, 0x00, 0x00, 0x24, 0x09, 0x00, 0x00, 0x29, 0x04, 0x00, 0x00, 0x05, 0x05, 0x00, 0x00, 0x18, 0x04, 0x00, 0x00, 0x2F, 0x00, 0x00, 0x00, 0x2E, 0x09, 0x00, 0x00, 0x11, 0x0C, 0x00, 0x00, 0x10, 0x0B, 0x00, 0x00, 0x1E, 0x0D, 0x00, 0x00, 0x08, 0x01, 0x00, 0x00, 0x17, 0x03, 0x00, 0x00, 0x0C, 0x04, 0x00, 0x00, 0x38, 0x04, 0x00, 0x00, 0x1C, 0x03, 0x00, 0x00, 0x1A, 0x00, 0x00, 0x00, 0x19, 0x0B, 0x00, 0x00, 0x09, 0x07, 0x00, 0x00, 0x31, 0x07, 0x00, 0x00, 0x35, 0x07, 0x00, 0x00, 0x36, 0x01, 0x00, 0x00, 0x33, 0x00, 0x00, 0x00, 0x2A, 0x03, 0x00, 0x00, 0x16, 0x0D, 0x00, 0x00, 0x0E, 0x03, 0x00, 0x00, 0x15, 0x01, 0x00, 0x00, 0x14, 0x01, 0x00, 0x00, 0x2C, 0x01, 0x00, 0x00, 0x1B, 0x02, 0x00, 0x00, 0x04, 0x01, 0x00, 0x00, 0x07, 0x03, 0x00, 0x00, 0x34, 0x05, 0x00, 0x00, 0x32, 0x00, 0x00, 0x00, 0x37, 0x02, 0x00, 0x00, 0x1D, 0x04, 0x00, 0x00, 0x22, 0x09, 0x00, 0x00, 0x1F, 0x01, 0x00, 0x00, 0x25, 0x00, 0x00, 0x00, 0x0A, 0x04, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x06, 0x05, 0x00, 0x00, 0x27, 0x0B, 0x00, 0x00, 0x26, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x12, 0x02, 0x00, 0x00, 0x39, 0x08, 0x00, 0x00, 0x02, 0x0B, 0x00, 0x00, 0x20, 0x01, 0x00, 0x00, 0x21, 0x00, 0x00, 0x00
 
 gUnknown_0862A48C:: @ 862A48C
-    .2byte 0x44, 0x22, 0x14, 0x18, 0x51, 0x3
-    
+	.2byte 0x44, 0x22, 0x14, 0x18, 0x51, 0x3
+	
 gUnknown_0862A498:: @ 862A498
-    .2byte 0xB, 0x22, 0x14, 0x18, 0x51, 3
-    
+	.2byte 0xB, 0x22, 0x14, 0x18, 0x51, 3
+	
 gUnknown_0862A4A4:: @ 862A4A4
-    .2byte 0x19, 0x22, 0x14, 0x18, 0x51, 3
+	.2byte 0x19, 0x22, 0x14, 0x18, 0x51, 3
 
 gUnknown_0862A4B0:: @ 862A4B0
-    .2byte 0x23, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x23, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A4BC:: @ 862A4BC
-    .2byte 0x24, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x24, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A4C8:: @ 862A4C8
-    .2byte 0x125, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x125, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A4D4:: @ 862A4D4
-    .2byte 0x144, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x144, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A4E0:: @ 862A4E0  
-    .2byte 0x126, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x126, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A4EC:: @ 862A4EC
-    .2byte 0x12B, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x12B, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A4F8:: @ 862A4F8
-    .2byte 0x13A, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x13A, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A504:: @ 862A504
-    .2byte 0x44, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x44, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A510:: @ 862A510
-    .2byte 0xB, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0xB, 0x22, 0x14, 0x18, 0x51, 0x3
 
-gUnknown_0862A51C:: @ 862A51C     
-    .2byte 0x19, 0x22, 0x14, 0x18, 0x51, 0x3
+gUnknown_0862A51C:: @ 862A51C	 
+	.2byte 0x19, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A528:: @ 862A528
-    .2byte 0x23, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x23, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A534:: @ 862A534
-    .2byte 0x24, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x24, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A540:: @ 862A540
-    .2byte 0x13F, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x13F, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A54C:: @ 862A54C
-    .2byte 0x149, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x149, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A558:: @ 862A558
-    .2byte 0x150, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x150, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A564:: @ 862A564
-    .2byte 0x133, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x133, 0x22, 0x14, 0x18, 0x51, 0x3
 
 gUnknown_0862A570:: @ 862A570
-    .2byte 0x14D, 0x22, 0x14, 0x18, 0x51, 0x3
+	.2byte 0x14D, 0x22, 0x14, 0x18, 0x51, 0x3
 
-gUnknown_0862A57C:: @ 862A57C    
-    .4byte gUnknown_0862A48C
-    .4byte gUnknown_0862A498
-    .4byte gUnknown_0862A4A4
-    .4byte gUnknown_0862A4B0
-    .4byte gUnknown_0862A4BC
-    .4byte gUnknown_0862A4C8
-    .4byte gUnknown_0862A4D4
-    .4byte gUnknown_0862A4E0
-    .4byte gUnknown_0862A4EC
-    .4byte gUnknown_0862A4F8
+gUnknown_0862A57C:: @ 862A57C	
+	.4byte gUnknown_0862A48C
+	.4byte gUnknown_0862A498
+	.4byte gUnknown_0862A4A4
+	.4byte gUnknown_0862A4B0
+	.4byte gUnknown_0862A4BC
+	.4byte gUnknown_0862A4C8
+	.4byte gUnknown_0862A4D4
+	.4byte gUnknown_0862A4E0
+	.4byte gUnknown_0862A4EC
+	.4byte gUnknown_0862A4F8
 
 gUnknown_0862A5A4:: @ 862A5A4
-    .4byte gUnknown_0862A504
-    .4byte gUnknown_0862A510
-    .4byte gUnknown_0862A51C
-    .4byte gUnknown_0862A528
-    .4byte gUnknown_0862A534
-    .4byte gUnknown_0862A540
-    .4byte gUnknown_0862A54C
-    .4byte gUnknown_0862A558
-    .4byte gUnknown_0862A564
-    .4byte gUnknown_0862A570
-    
+	.4byte gUnknown_0862A504
+	.4byte gUnknown_0862A510
+	.4byte gUnknown_0862A51C
+	.4byte gUnknown_0862A528
+	.4byte gUnknown_0862A534
+	.4byte gUnknown_0862A540
+	.4byte gUnknown_0862A54C
+	.4byte gUnknown_0862A558
+	.4byte gUnknown_0862A564
+	.4byte gUnknown_0862A570
+	
 gUnknown_0862A5CC:: @ 862A5CC
 	.4byte gUnknown_0862A57C
-    .4byte gUnknown_0862A5A4
+	.4byte gUnknown_0862A5A4
 
 gUnknown_0862A5D4:: @ 862A5D4
-	.incbin "baserom.gba", 0x62a5d4, 0x20
+	.incbin "graphics/pokenav/862A5D4.gbapal"
 
 gUnknown_0862A5F4:: @ 862A5F4
 	.byte 0, 2, 3, 0
 
 gUnknown_0862A5F8:: @ 862A5F8
 	.4byte gUnknown_08626814
-    .4byte gUnknown_086276FC
-    .4byte gUnknown_086285E4
-    .4byte gUnknown_086294CC
-    .4byte gUnknown_085EF8B6
-    .4byte gUnknown_085EF8B9
-    .4byte gUnknown_085EF8BC
-    .4byte gUnknown_085EF8BF
+	.4byte gUnknown_086276FC
+	.4byte gUnknown_086285E4
+	.4byte gUnknown_086294CC
+	.4byte gUnknown_085EF8B6
+	.4byte gUnknown_085EF8B9
+	.4byte gUnknown_085EF8BC
+	.4byte gUnknown_085EF8BF
 
 gUnknown_0862A618:: @ 862A618
 	.4byte sub_81D581C
@@ -3166,10 +3172,12 @@ gUnknown_0862A660:: @ 862A660
 	.4byte gUnknown_085EB361
 
 gUnknown_0862A670:: @ 862A670
-	.incbin "baserom.gba", 0x62a670, 0x18
+	.byte 0, 0x64
+	.4byte NULL
+	.2byte 0, 0x103, 17, 1, 0, 0, 0, 0, 0
 
 gUnknown_0862A688:: @ 862A688
-	.incbin "baserom.gba", 0x62a688, 0x10
+	.2byte 0x3E, 0, 0x3F, 0, 0x40, 0, 0x41, 0
 
 gUnknown_0862A698:: @ 862A698
-	.incbin "baserom.gba", 0x62a698, 0x8
+	.byte 0, 1, 2, 3, 4, 5, 0, 0
