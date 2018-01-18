@@ -32,7 +32,7 @@ LavaridgeTown_HerbShop_EventScript_1FE505:: @ 81FE505
 	goto_eq LavaridgeTown_HerbShop_EventScript_1FE534
 	msgbox LavaridgeTown_HerbShop_Text_1FE584, 4
 	giveitem_std ITEM_CHARCOAL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LavaridgeTown_HerbShop_EventScript_272054
 	setflag FLAG_0x0FE
 	release

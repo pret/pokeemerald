@@ -12,13 +12,13 @@ FarawayIsland_Interior_MapScript1_267D0F: @ 8267D0F
 
 FarawayIsland_Interior_EventScript_267D19:: @ 8267D19
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq FarawayIsland_Interior_EventScript_267D4B
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq FarawayIsland_Interior_EventScript_267D4B
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq FarawayIsland_Interior_EventScript_267D4B
-	compare_var_to_value VAR_RESULT, 10
+	compare VAR_RESULT, 10
 	goto_eq FarawayIsland_Interior_EventScript_267D4B
 	return
 
@@ -34,7 +34,7 @@ FarawayIsland_Interior_MapScript1_267D54: @ 8267D54
 
 FarawayIsland_Interior_EventScript_267D5E:: @ 8267D5E
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, FarawayIsland_Interior_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
@@ -129,13 +129,13 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	message FarawayIsland_Interior_Text_2C6DFF
 	waitse
 	playmoncry SPECIES_MEW, 2
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, FarawayIsland_Interior_EventScript_267EAF
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, FarawayIsland_Interior_EventScript_267EBA
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, FarawayIsland_Interior_EventScript_267EC5
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, FarawayIsland_Interior_EventScript_267ED0
 	special sub_81D4BEC
 	delay 40
@@ -145,17 +145,17 @@ FarawayIsland_Interior_EventScript_267DF2:: @ 8267DF2
 	setvar VAR_0x8006, 0
 	special DoScriptedWildBattle
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0934
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq FarawayIsland_Interior_EventScript_267E96
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq FarawayIsland_Interior_EventScript_267EA4
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq FarawayIsland_Interior_EventScript_267EA4
-	compare_var_to_value VAR_RESULT, 10
+	compare VAR_RESULT, 10
 	goto_eq FarawayIsland_Interior_EventScript_267EA4
 	setflag FLAG_0x1CA
 	release

@@ -233,11 +233,11 @@ gUnknown_0858B040:: @ 58B040
 	.4byte gText_Exit, 0
 
 gUnknown_0858B050:: @ 58B050
-	.4byte gUnknown_085EB676, 0
-	.4byte gUnknown_085EB673, 0
-	.4byte gUnknown_085EB670, 0
-	.4byte gUnknown_085EB66D, 0
-	.4byte gUnknown_085EB66A, 0
+	.4byte gText_5F, 0
+	.4byte gText_4F, 0
+	.4byte gText_3F, 0
+	.4byte gText_2F, 0
+	.4byte gText_1F, 0
 	.4byte gText_Exit, 0
 
 gUnknown_0858B080:: @ 58B080
@@ -494,11 +494,11 @@ gUnknown_0858B578:: @ 58B578
 	.4byte gText_Exit, 0
 
 gUnknown_0858B5A8:: @ 58B5A8
-	.4byte gUnknown_085EB4EB, 0
-	.4byte gUnknown_085EB4F9, 0
-	.4byte gUnknown_085EB508, 0
-	.4byte gUnknown_085EB516, 0
-	.4byte gUnknown_085EB523, 0
+	.4byte gText_BattleBasics, 0
+	.4byte gText_PokemonNature, 0
+	.4byte gText_PokemonMoves, 0
+	.4byte gText_Underpowered, 0
+	.4byte gText_WhenInDanger, 0
 	.4byte gText_Exit, 0
 
 gUnknown_0858B5D8:: @ 58B5D8
@@ -559,7 +559,7 @@ gUnknown_0858B6D0:: @ 58B6D0
 	.4byte gText_Exit, 0
 
 gUnknown_0858B700:: @ 58B700
-	.4byte gUnknown_085EB5A6, 0
+	.4byte gText_BattleTrainers, 0
 	.4byte gUnknown_085EB45C, 0
 	.4byte gUnknown_085EB469, 0
 	.4byte gUnknown_085EB475, 0
@@ -728,7 +728,7 @@ gUnknown_0858BAF0:: @ 858BAF0
 gUnknown_0858BB68:: @ 858BB68
 	.byte 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F
 
-    .align 2
+	.align 2
 gUnknown_0858BB70:: @ 858BB70
 	.4byte gText_SomeonesPC
 	.4byte gText_LanettesPC

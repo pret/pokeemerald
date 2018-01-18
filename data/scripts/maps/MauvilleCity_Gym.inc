@@ -49,40 +49,40 @@ MauvilleCity_Gym_EventScript_20DDC4:: @ 820DDC4
 
 MauvilleCity_Gym_EventScript_20DEAF:: @ 820DEAF
 	setvar VAR_0x8004, 0
-	special sub_81384F0
+	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_20DDBA
 	end
 
 MauvilleCity_Gym_EventScript_20DEBD:: @ 820DEBD
 	setvar VAR_0x8004, 1
-	special sub_81384F0
+	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_20DDBA
 	end
 
 MauvilleCity_Gym_EventScript_20DECB:: @ 820DECB
 	setvar VAR_0x8004, 2
-	special sub_81384F0
+	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_20DDBA
 	end
 
 MauvilleCity_Gym_EventScript_20DED9:: @ 820DED9
 	setvar VAR_0x8004, 3
-	special sub_81384F0
+	special MauvilleGymSpecial1
 	goto MauvilleCity_Gym_EventScript_20DDBA
 	end
 
 MauvilleCity_Gym_EventScript_20DEE7:: @ 820DEE7
-	special sub_8138750
+	special MauvilleGymSpecial3
 	end
 
 MauvilleCity_Gym_EventScript_20DEEB:: @ 820DEEB
 	trainerbattle 1, TRAINER_WATTSON_1, 0, MauvilleCity_Gym_Text_20E602, MauvilleCity_Gym_Text_20E734, MauvilleCity_Gym_EventScript_20DF2B
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq MauvilleCity_Gym_EventScript_20DFDE
 	checkflag FLAG_0x0A7
 	goto_if 0, MauvilleCity_Gym_EventScript_20DF8D
-	compare_var_to_value VAR_0x40BA, 2
+	compare VAR_0x40BA, 2
 	goto_eq MauvilleCity_Gym_EventScript_20DFD4
 	msgbox MauvilleCity_Gym_Text_20E8E3, 4
 	release
@@ -98,17 +98,17 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 	setflag FLAG_0x4F2
 	setflag FLAG_BADGE03_GET
 	addvar VAR_0x4085, 1
-	compare_var_to_value VAR_0x4085, 6
+	compare VAR_0x4085, 6
 	call_if 1, MauvilleCity_Gym_EventScript_271E84
 	setvar VAR_0x8008, 3
 	call MauvilleCity_Gym_EventScript_271F43
-	special sub_8138750
+	special MauvilleGymSpecial3
 	special DrawWholeMapView
 	playse SE_KI_GASYAN
 	call MauvilleCity_Gym_EventScript_20DFB1
 	closemessage
 	delay 30
-	playfanfare BGM_ME_MATCH_CALL
+	playfanfare MUS_ME_TORE_EYE
 	msgbox MauvilleCity_Gym_Text_20E8B5, 4
 	waitfanfare
 	closemessage
@@ -119,7 +119,7 @@ MauvilleCity_Gym_EventScript_20DF2B:: @ 820DF2B
 
 MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 	giveitem_std ITEM_TM34
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_Gym_EventScript_272054
 	msgbox MauvilleCity_Gym_Text_20E844, 4
 	setflag FLAG_0x0A7
@@ -128,7 +128,7 @@ MauvilleCity_Gym_EventScript_20DF8D:: @ 820DF8D
 
 MauvilleCity_Gym_EventScript_20DFB1:: @ 820DFB1
 	giveitem_std ITEM_TM34
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq MauvilleCity_Gym_EventScript_27205E
 	msgbox MauvilleCity_Gym_Text_20E844, 4
 	setflag FLAG_0x0A7
@@ -148,7 +148,7 @@ MauvilleCity_Gym_EventScript_20DFF9:: @ 820DFF9
 	lockall
 	checkflag FLAG_0x4F2
 	goto_eq MauvilleCity_Gym_EventScript_20E0AD
-	compare_var_to_value VAR_0x4093, 1
+	compare VAR_0x4093, 1
 	goto_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 1
 	setvar VAR_0x8004, 0
@@ -159,7 +159,7 @@ MauvilleCity_Gym_EventScript_20E01E:: @ 820E01E
 	lockall
 	checkflag FLAG_0x4F2
 	goto_eq MauvilleCity_Gym_EventScript_20E0AD
-	compare_var_to_value VAR_0x4093, 2
+	compare VAR_0x4093, 2
 	goto_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 2
 	setvar VAR_0x8004, 1
@@ -170,7 +170,7 @@ MauvilleCity_Gym_EventScript_20E043:: @ 820E043
 	lockall
 	checkflag FLAG_0x4F2
 	goto_eq MauvilleCity_Gym_EventScript_20E0AD
-	compare_var_to_value VAR_0x4093, 3
+	compare VAR_0x4093, 3
 	goto_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 3
 	setvar VAR_0x8004, 2
@@ -181,7 +181,7 @@ MauvilleCity_Gym_EventScript_20E068:: @ 820E068
 	lockall
 	checkflag FLAG_0x4F2
 	goto_eq MauvilleCity_Gym_EventScript_20E0AD
-	compare_var_to_value VAR_0x4093, 4
+	compare VAR_0x4093, 4
 	goto_eq MauvilleCity_Gym_EventScript_20E0AD
 	setvar VAR_0x4093, 4
 	setvar VAR_0x8004, 3
@@ -189,8 +189,8 @@ MauvilleCity_Gym_EventScript_20E068:: @ 820E068
 	end
 
 MauvilleCity_Gym_EventScript_20E08D:: @ 820E08D
-	special sub_8138540
-	special sub_81384F0
+	special MauvilleGymSpecial2
+	special MauvilleGymSpecial1
 	special DrawWholeMapView
 	playse SE_KI_GASYAN
 	checkflag FLAG_0x063

@@ -482,7 +482,7 @@ _08012938:
 	ldrb r0, [r6, 0xF]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F015C
 	ldm r1!, {r3,r5,r7}
@@ -1963,7 +1963,7 @@ _0801360C:
 	ldrb r0, [r6, 0xB]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F0204
 	ldm r1!, {r3,r5,r7}
@@ -2008,7 +2008,7 @@ _080136EA:
 	b _08013A72
 _080136F2:
 	ldrb r0, [r6, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r4, r0, 0
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -3277,7 +3277,7 @@ sub_8014210: @ 8014210
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
 	ldr r5, =gLinkPlayers
@@ -3645,7 +3645,7 @@ _080145F4:
 	ldr r0, =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_80143E4
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
 	movs r0, 0x1
@@ -3658,7 +3658,7 @@ _080145F4:
 	.pool
 _08014620:
 	bl overworld_free_bg_tilemaps
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
 	ldr r0, =gBlockSendBuffer
@@ -3674,7 +3674,7 @@ _08014620:
 	.pool
 _0801464C:
 	bl overworld_free_bg_tilemaps
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
 	ldr r0, =gBlockSendBuffer
@@ -4208,7 +4208,7 @@ _08014AEC:
 	strb r0, [r5, 0xF]
 	ldrb r0, [r5, 0xF]
 	bl sub_8018784
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F015C
 	ldm r1!, {r3,r4,r6}
@@ -4740,7 +4740,7 @@ _08014FE8:
 	strb r0, [r7, 0xD]
 	ldrb r0, [r7, 0xB]
 	bl sub_8018784
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F0204
 	ldm r1!, {r3-r5}
@@ -4788,7 +4788,7 @@ _080150CE:
 	b _080152A0
 _080150D6:
 	ldrb r0, [r7, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r2, r0, 0
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -5113,7 +5113,7 @@ _08015398:
 	strb r0, [r5, 0xB]
 	ldrb r0, [r5, 0xB]
 	bl sub_8018784
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F0204
 	ldm r1!, {r3,r4,r6}
@@ -5159,7 +5159,7 @@ _08015446:
 	cmp r0, 0
 	beq _08015452
 	ldrb r0, [r5, 0xE]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 _08015452:
 	ldrb r0, [r5, 0x14]
 	cmp r0, 0x78
@@ -8509,7 +8509,7 @@ _080171DC:
 	ldrb r0, [r5]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp, 0x24]
 	ldm r1!, {r3,r4,r6}
@@ -8534,7 +8534,7 @@ _080171DC:
 _08017228:
 	mov r3, r9
 	ldrb r0, [r3]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	mov r8, r0
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
@@ -8622,7 +8622,7 @@ _080172C8:
 	ldrb r0, [r6]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =gUnknown_03006310
+	ldr r0, =gMultiuseListMenuTemplate
 	adds r2, r0, 0
 	ldr r1, [sp, 0x24]
 	ldm r1!, {r3,r4,r7}
@@ -8650,7 +8650,7 @@ _08017314:
 _0801731C:
 	mov r3, r10
 	ldrb r0, [r3]
-	bl ListMenuHandleInput
+	bl ListMenuHandleInputGetItemId
 	adds r1, r0, 0
 	ldr r0, =gMain
 	ldrh r2, [r0, 0x2E]
@@ -26934,11 +26934,11 @@ sub_80205B4: @ 80205B4
 task_tutorial_story_unknown: @ 8020604
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_08DD4860
+	ldr r0, =gLinkMiscMenu_Pal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, =gUnknown_08DD4880
+	ldr r1, =gLinkMiscMenu_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -26966,7 +26966,7 @@ task_tutorial_story_unknown: @ 8020604
 	movs r2, 0x8
 	bl CpuFastSet
 _0802064E:
-	ldr r1, =gUnknown_08DD4AB8
+	ldr r1, =gLinkMiscMenu_Tilemap
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0

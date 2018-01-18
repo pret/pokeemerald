@@ -10,9 +10,9 @@ FallarborTown_BattleTentBattleRoom_MapScript1_2008A9: @ 82008A9
 
 FallarborTown_BattleTentBattleRoom_EventScript_2008AF:: @ 82008AF
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FallarborTown_BattleTentBattleRoom_EventScript_2008C7
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq FallarborTown_BattleTentBattleRoom_EventScript_2008D2
 	return
 
@@ -38,7 +38,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_2008E7:: @ 82008E7
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, FallarborTown_BattleTentBattleRoom_EventScript_200B73
 
 FallarborTown_BattleTentBattleRoom_EventScript_20090F:: @ 820090F
@@ -108,17 +108,17 @@ FallarborTown_BattleTentBattleRoom_EventScript_2009B3:: @ 82009B3
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 3
 	special sub_81A1780
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 
 FallarborTown_BattleTentBattleRoom_EventScript_200A2A:: @ 8200A2A
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, FallarborTown_BattleTentBattleRoom_EventScript_200B43
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if 1, FallarborTown_BattleTentBattleRoom_EventScript_200B4A
 	multichoice 20, 6, 104, 1
 	switch VAR_RESULT
@@ -163,7 +163,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_200AF3:: @ 8200AF3
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_81A5238
-	compare_var_to_value VAR_RESULT, 9999
+	compare VAR_RESULT, 9999
 	goto_eq FallarborTown_BattleTentBattleRoom_EventScript_2009B3
 	addvar VAR_RESULT, 1
 	setvar VAR_0x8004, 2

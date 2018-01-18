@@ -38,7 +38,7 @@ BirthIsland_Exterior_MapScript1_267F65: @ 8267F65
 
 BirthIsland_Exterior_EventScript_267F6F:: @ 8267F6F
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, BirthIsland_Exterior_EventScript_27374E
 	removeobject 2
 	return
@@ -73,7 +73,7 @@ BirthIsland_Exterior_EventScript_267FC1:: @ 8267FC1
 	setfieldeffectargument 1, 58
 	setfieldeffectargument 2, 26
 	dofieldeffect 65
-	playbgm BGM_FRLG_DEOXYS_EYE, 0
+	playbgm MUS_RG_DEOEYE, 0
 	waitfieldeffect 65
 	addobject 2
 	applymovement 2, BirthIsland_Exterior_Movement_268054
@@ -88,15 +88,15 @@ BirthIsland_Exterior_EventScript_267FC1:: @ 8267FC1
 	setvar VAR_0x8006, 0
 	special DoScriptedWildBattle
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0934
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BirthIsland_Exterior_EventScript_26803B
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq BirthIsland_Exterior_EventScript_268049
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq BirthIsland_Exterior_EventScript_268049
 	setflag FLAG_0x1AD
 	release

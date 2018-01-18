@@ -35,9 +35,9 @@ static void berry_fix_bg_hide(void);
 
 // .rodata
 
-static const u8 gUnknown_08617E78[] = _("Berry Program Update");
-static const u8 gUnknown_08617E8D[] = _("Ruby/Sapphire");
-static const u8 gUnknown_08617E9B[] = _("Emerald");
+static const u8 sUnknown_08617E78[] = _("Berry Program Update");
+static const u8 sUnknown_08617E8D[] = _("Ruby/Sapphire");
+static const u8 sUnknown_08617E9B[] = _("Emerald");
 
 static const u8 Unknown_08617EA3[] = _("The Berry Program on your POKéMON\nRuby/Sapphire Game Pak will be updated.\n{COLOR RED}{SHADOW LIGHT_RED}Press the A Button.");
 static const u8 Unknown_08617F07[] = _("Please ensure the connection of your\nGame Boy Advance system matches this.\n{COLOR RED}{SHADOW LIGHT_RED}YES: Press the A Button.\nNO: Turn off the power and try again.");
@@ -62,15 +62,15 @@ static const struct WindowTemplate gUnknown_08618110[] = {
     {-1}
 };
 
-static const u16 gUnknown_08618138[] = {
+static const u16 sUnknown_08618138[] = {
     0x7fff, 0x7fff, 0x318c, 0x675a,
     0x043c, 0x3aff, 0x0664, 0x4bd2,
     0x6546, 0x7b14, 0x7fff, 0x318c,
     0x675a, 0x0000, 0x0000, 0x0000
 };
 
-static const u8 gUnknown_08618158[] = {10, 11, 12};
-static const u8 gUnknown_0861815B[] = { 0, 10, 13};
+static const u8 sUnknown_08618158[] = {10, 11, 12};
+static const u8 sUnknown_0861815B[] = { 0, 10, 13};
 
 static const u8 *const gUnknown_08618160[] = {
     Unknown_08617F07,
@@ -81,50 +81,50 @@ static const u8 *const gUnknown_08618160[] = {
     Unknown_08617EA3
 };
 
-extern const u8 gUnknown_08DD87C0[];
-extern const u8 gUnknown_08DD8EE0[];
-extern const u8 gUnknown_08DD8780[];
-extern const u8 gUnknown_08DD90E0[];
-extern const u8 gUnknown_08DD9718[];
-extern const u8 gUnknown_08DD9080[];
-extern const u8 gUnknown_08DD98B4[];
-extern const u8 gUnknown_08DD9E58[];
-extern const u8 gUnknown_08DD9874[];
-extern const u8 gUnknown_08DDA02C[];
-extern const u8 gUnknown_08DDA63C[];
-extern const u8 gUnknown_08DD9FEC[];
-extern const u8 gUnknown_08DDA840[];
-extern const u8 gUnknown_08DDAE40[];
-extern const u8 gUnknown_08DDA800[];
-extern const u8 gUnknown_08DDB020[];
-extern const u8 gUnknown_08DDB2C4[];
-extern const u8 gUnknown_08DDAFE0[];
+extern const u8 gBerryFixGameboy_Gfx[];
+extern const u8 gBerryFixGameboy_Tilemap[];
+extern const u8 gBerryFixGameboy_Pal[];
+extern const u8 gBerryFixGameboyLogo_Gfx[];
+extern const u8 gBerryFixGameboyLogo_Tilemap[];
+extern const u8 gBerryFixGameboyLogo_Pal[];
+extern const u8 gBerryFixGbaTransfer_Gfx[];
+extern const u8 gBerryFixGbaTransfer_Tilemap[];
+extern const u8 gBerryFixGbaTransfer_Pal[];
+extern const u8 gBerryFixGbaTransferHighlight_Gfx[];
+extern const u8 gBerryFixGbaTransferHighlight_Tilemap[];
+extern const u8 gBerryFixGbaTransferHighlight_Pal[];
+extern const u8 gBerryFixGbaTransferError_Gfx[];
+extern const u8 gBerryFixGbaTransferError_Tilemap[];
+extern const u8 gBerryFixGbaTransferError_Pal[];
+extern const u8 gBerryFixWindow_Gfx[];
+extern const u8 gBerryFixWindow_Tilemap[];
+extern const u8 gBerryFixWindow_Pal[];
 
 static const u8 *const gUnknown_08618178[][3] = {
     {
-        gUnknown_08DD87C0,
-        gUnknown_08DD8EE0,
-        gUnknown_08DD8780
+        gBerryFixGameboy_Gfx,
+        gBerryFixGameboy_Tilemap,
+        gBerryFixGameboy_Pal
     }, {
-        gUnknown_08DD90E0,
-        gUnknown_08DD9718,
-        gUnknown_08DD9080
+        gBerryFixGameboyLogo_Gfx,
+        gBerryFixGameboyLogo_Tilemap,
+        gBerryFixGameboyLogo_Pal
     }, {
-        gUnknown_08DD98B4,
-        gUnknown_08DD9E58,
-        gUnknown_08DD9874
+        gBerryFixGbaTransfer_Gfx,
+        gBerryFixGbaTransfer_Tilemap,
+        gBerryFixGbaTransfer_Pal
     }, {
-        gUnknown_08DDA02C,
-        gUnknown_08DDA63C,
-        gUnknown_08DD9FEC
+        gBerryFixGbaTransferHighlight_Gfx,
+        gBerryFixGbaTransferHighlight_Tilemap,
+        gBerryFixGbaTransferHighlight_Pal
     }, {
-        gUnknown_08DDA840,
-        gUnknown_08DDAE40,
-        gUnknown_08DDA800
+        gBerryFixGbaTransferError_Gfx,
+        gBerryFixGbaTransferError_Tilemap,
+        gBerryFixGbaTransferError_Pal
     }, {
-        gUnknown_08DDB020,
-        gUnknown_08DDB2C4,
-        gUnknown_08DDAFE0
+        gBerryFixWindow_Gfx,
+        gBerryFixWindow_Tilemap,
+        gBerryFixWindow_Pal
     },
 };
 
@@ -243,21 +243,21 @@ static void berry_fix_gpu_set(void)
     InitWindows(gUnknown_08618110);
     DeactivateAllTextPrinters();
 
-    DmaCopy32(3, gUnknown_08618138, BG_PLTT + 0x1E0, 0x20);
+    DmaCopy32(3, sUnknown_08618138, BG_PLTT + 0x1E0, 0x20);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
     FillWindowPixelBuffer(2, 0);
     FillWindowPixelBuffer(3, 0);
     FillWindowPixelBuffer(0, 0xAA);
 
 // This block is a meme among memes
-    width = (0x78 - GetStringWidth(0, gUnknown_08617E9B, 0)) / 2;
-    box_print(2, 0, width, 3, gUnknown_0861815B, -1, gUnknown_08617E9B);
-    width = (s32)(0x78 - GetStringWidth(0, gUnknown_08617E9B, 0)) / 2 + 0x78;
-    box_print(2, 0, width, 3, gUnknown_0861815B, -1, gUnknown_08617E8D);
-    width = (0x70 - GetStringWidth(0, gUnknown_08617E8D, 0)) / 2;
-    box_print(3, 0, width, 0, gUnknown_0861815B, -1, gUnknown_08617E8D);
-    width = (0xd0 - GetStringWidth(1, gUnknown_08617E78, 0)) / 2;
-    box_print(0, 1, width, 2, gUnknown_08618158, -1, gUnknown_08617E78);
+    width = (0x78 - GetStringWidth(0, sUnknown_08617E9B, 0)) / 2;
+    box_print(2, 0, width, 3, sUnknown_0861815B, -1, sUnknown_08617E9B);
+    width = (s32)(0x78 - GetStringWidth(0, sUnknown_08617E9B, 0)) / 2 + 0x78;
+    box_print(2, 0, width, 3, sUnknown_0861815B, -1, sUnknown_08617E8D);
+    width = (0x70 - GetStringWidth(0, sUnknown_08617E8D, 0)) / 2;
+    box_print(3, 0, width, 0, sUnknown_0861815B, -1, sUnknown_08617E8D);
+    width = (0xd0 - GetStringWidth(1, sUnknown_08617E78, 0)) / 2;
+    box_print(0, 1, width, 2, sUnknown_08618158, -1, sUnknown_08617E78);
 
     CopyWindowToVram(2, 2);
     CopyWindowToVram(3, 2);
@@ -346,7 +346,7 @@ __attribute__((naked)) static void berry_fix_gpu_set(void)
         "\tldr r0, =gUnknown_08618110\n"
         "\tbl InitWindows\n"
         "\tbl DeactivateAllTextPrinters\n"
-        "\tldr r0, =gUnknown_08618138\n"
+        "\tldr r0, =sUnknown_08618138\n"
         "\tstr r0, [r4]\n"
         "\tldr r0, =0x050001e0\n"
         "\tstr r0, [r4, 0x4]\n"
@@ -365,7 +365,7 @@ __attribute__((naked)) static void berry_fix_gpu_set(void)
         "\tmovs r0, 0\n"
         "\tmovs r1, 0xAA\n"
         "\tbl FillWindowPixelBuffer\n"
-        "\tldr r5, =gUnknown_08617E9B\n"
+        "\tldr r5, =sUnknown_08617E9B\n"
         "\tmovs r0, 0\n"
         "\tadds r1, r5, 0\n"
         "\tmovs r2, 0\n"
@@ -378,7 +378,7 @@ __attribute__((naked)) static void berry_fix_gpu_set(void)
         "\tasrs r0, 1\n"
         "\tlsls r2, r0, 24\n"
         "\tlsrs r2, 24\n"
-        "\tldr r6, =gUnknown_0861815B\n"
+        "\tldr r6, =sUnknown_0861815B\n"
         "\tstr r6, [sp]\n"
         "\tmovs r0, 0x1\n"
         "\tnegs r0, r0\n"
@@ -389,7 +389,7 @@ __attribute__((naked)) static void berry_fix_gpu_set(void)
         "\tmovs r1, 0\n"
         "\tmovs r3, 0x3\n"
         "\tbl box_print\n"
-        "\tldr r5, =gUnknown_08617E8D\n"
+        "\tldr r5, =sUnknown_08617E8D\n"
         "\tmovs r0, 0\n"
         "\tadds r1, r5, 0\n"
         "\tmovs r2, 0\n"
@@ -431,7 +431,7 @@ __attribute__((naked)) static void berry_fix_gpu_set(void)
         "\tmovs r1, 0\n"
         "\tmovs r3, 0\n"
         "\tbl box_print\n"
-        "\tldr r4, =gUnknown_08617E78\n"
+        "\tldr r4, =sUnknown_08617E78\n"
         "\tmovs r0, 0x1\n"
         "\tadds r1, r4, 0\n"
         "\tmovs r2, 0\n"
@@ -444,7 +444,7 @@ __attribute__((naked)) static void berry_fix_gpu_set(void)
         "\tasrs r0, 1\n"
         "\tlsls r2, r0, 24\n"
         "\tlsrs r2, 24\n"
-        "\tldr r0, =gUnknown_08618158\n"
+        "\tldr r0, =sUnknown_08618158\n"
         "\tstr r0, [sp]\n"
         "\tmov r0, r8\n"
         "\tstr r0, [sp, 0x4]\n"
@@ -496,7 +496,7 @@ static void berry_fix_text_print(int scene)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     FillWindowPixelBuffer(1, 0xAA);
-    box_print(1, 1, 0, 0, gUnknown_08618158, -1, gUnknown_08618160[scene]);
+    box_print(1, 1, 0, 0, sUnknown_08618158, -1, gUnknown_08618160[scene]);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);
     switch (scene)

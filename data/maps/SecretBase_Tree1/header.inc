@@ -3,7 +3,7 @@ SecretBase_Tree1: @ 8484B00
 	.4byte SecretBase_Tree1_MapEvents
 	.4byte SecretBase_Tree1_MapScripts
 	.4byte 0x0
-	.2byte BGM_MACHI_S3
+	.2byte MUS_MACHI_S3
 	.2byte 201
 	.byte 86
 	.byte 0

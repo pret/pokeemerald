@@ -2,7 +2,7 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-    .align 2, 0
+	.align 2, 0
 
 gUnknown_0858CF8C:: @ 858CF8C
 	.incbin "baserom.gba", 0x58cf8c, 0x2

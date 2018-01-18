@@ -239,7 +239,7 @@ LilycoveCity_ContestLobby_EventScript_293C3E:: @ 8293C3E
 	applymovement 16, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_292DEE, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293CEE
 	goto LilycoveCity_ContestLobby_EventScript_293C70
 	end
@@ -271,7 +271,7 @@ LilycoveCity_ContestLobby_EventScript_293C9C:: @ 8293C9C
 
 LilycoveCity_ContestLobby_EventScript_293CB9:: @ 8293CB9
 	msgbox LilycoveCity_ContestLobby_Text_292E57, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293CD2
 	goto LilycoveCity_ContestLobby_EventScript_293CE0
 	end
@@ -288,13 +288,13 @@ LilycoveCity_ContestLobby_EventScript_293CE0:: @ 8293CE0
 
 LilycoveCity_ContestLobby_EventScript_293CEE:: @ 8293CEE
 	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293D43
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_eq LilycoveCity_ContestLobby_EventScript_293D39
 	specialvar VAR_RESULT, PlayerHasBerries
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293C7A
 	msgbox LilycoveCity_ContestLobby_Text_292E28, 4
 	goto LilycoveCity_ContestLobby_EventScript_293CB9
@@ -325,7 +325,7 @@ LilycoveCity_ContestLobby_EventScript_293D4D:: @ 8293D4D
 	applymovement 3, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_293201, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293DC6
 	goto LilycoveCity_ContestLobby_EventScript_293D7D
 	end
@@ -342,7 +342,7 @@ LilycoveCity_ContestLobby_EventScript_293D87:: @ 8293D87
 
 LilycoveCity_ContestLobby_EventScript_293D91:: @ 8293D91
 	msgbox LilycoveCity_ContestLobby_Text_29328C, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293DAA
 	goto LilycoveCity_ContestLobby_EventScript_293DB8
 	end
@@ -359,16 +359,16 @@ LilycoveCity_ContestLobby_EventScript_293DB8:: @ 8293DB8
 
 LilycoveCity_ContestLobby_EventScript_293DC6:: @ 8293DC6
 	specialvar VAR_RESULT, PlayerHasBerries
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293D87
 	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293E14
 	msgbox LilycoveCity_ContestLobby_Text_293237, 4
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_293D91
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_eq LilycoveCity_ContestLobby_EventScript_293E0A
 	end
 
@@ -391,7 +391,7 @@ LilycoveCity_ContestLobby_EventScript_293E1E:: @ 8293E1E
 	applymovement VAR_0x8008, LilycoveCity_ContestLobby_Movement_294053
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_293842, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293EA3
 	goto LilycoveCity_ContestLobby_EventScript_293E5A
 	end
@@ -408,7 +408,7 @@ LilycoveCity_ContestLobby_EventScript_293E64:: @ 8293E64
 
 LilycoveCity_ContestLobby_EventScript_293E6E:: @ 8293E6E
 	msgbox LilycoveCity_ContestLobby_Text_29357E, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293E87
 	goto LilycoveCity_ContestLobby_EventScript_293E95
 	end
@@ -425,16 +425,16 @@ LilycoveCity_ContestLobby_EventScript_293E95:: @ 8293E95
 
 LilycoveCity_ContestLobby_EventScript_293EA3:: @ 8293EA3
 	specialvar VAR_RESULT, PlayerHasBerries
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293E64
 	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293EF1
 	msgbox LilycoveCity_ContestLobby_Text_29354E, 4
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_293E6E
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_eq LilycoveCity_ContestLobby_EventScript_293EE7
 	end
 
@@ -452,7 +452,7 @@ LilycoveCity_ContestLobby_EventScript_293EFB:: @ 8293EFB
 	lockall
 	setvar VAR_0x8009, 1
 	msgbox LilycoveCity_ContestLobby_Text_2C42F4, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293F28
 	msgbox LilycoveCity_ContestLobby_Text_2C4332, 4
 	releaseall
@@ -465,21 +465,21 @@ LilycoveCity_ContestLobby_EventScript_293F1E:: @ 8293F1E
 
 LilycoveCity_ContestLobby_EventScript_293F28:: @ 8293F28
 	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293F8E
 	specialvar VAR_RESULT, PlayerHasBerries
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293F1E
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_293F64
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_eq LilycoveCity_ContestLobby_EventScript_293F98
 	end
 
 LilycoveCity_ContestLobby_EventScript_293F64:: @ 8293F64
 	msgbox LilycoveCity_ContestLobby_Text_2C43FA, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_ContestLobby_EventScript_293F85
 	msgbox LilycoveCity_ContestLobby_Text_2C451B, 4
 	goto LilycoveCity_ContestLobby_EventScript_293D2C
@@ -521,9 +521,9 @@ LilycoveCity_ContestLobby_EventScript_293FC8:: @ 8293FC8
 	faceplayer
 	msgbox LilycoveCity_ContestLobby_Text_293A6B, 4
 	specialvar VAR_RESULT, PlayerHasBerries
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_293FEE
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_293FF8
 	end
 
@@ -534,10 +534,10 @@ LilycoveCity_ContestLobby_EventScript_293FEE:: @ 8293FEE
 
 LilycoveCity_ContestLobby_EventScript_293FF8:: @ 8293FF8
 	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_294028
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_eq LilycoveCity_ContestLobby_EventScript_294028
 	dodailyevents
 	checkflag FLAG_0x921
@@ -565,23 +565,23 @@ LilycoveCity_ContestLobby_Movement_294053: @ 8294053
 LilycoveCity_ContestLobby_EventScript_294055:: @ 8294055
 	lockall
 	specialvar VAR_RESULT, PlayerHasBerries
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_2940B1
 	checkitem ITEM_POKEBLOCK_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_29416C
 	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_if 5, LilycoveCity_ContestLobby_EventScript_294092
-	compare_var_to_value VAR_RESULT, 65535
+	compare VAR_RESULT, 65535
 	goto_eq LilycoveCity_ContestLobby_EventScript_294162
 	end
 
 LilycoveCity_ContestLobby_EventScript_294092:: @ 8294092
 	msgbox LilycoveCity_ContestLobby_Text_2938CD, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_2940BB
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_294160
 	end
 
@@ -592,24 +592,24 @@ LilycoveCity_ContestLobby_EventScript_2940B1:: @ 82940B1
 
 LilycoveCity_ContestLobby_EventScript_2940BB:: @ 82940BB
 	call LilycoveCity_ContestLobby_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_294160
 	specialvar VAR_RESULT, sub_80093CC
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_2941ED
 	message LilycoveCity_ContestLobby_Text_293955
 	waitmessage
 	special sub_80B2FD8
 	waitstate
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_2941AA
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq LilycoveCity_ContestLobby_EventScript_294176
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq LilycoveCity_ContestLobby_EventScript_294183
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq LilycoveCity_ContestLobby_EventScript_294190
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq LilycoveCity_ContestLobby_EventScript_29419D
 	end
 
@@ -680,7 +680,7 @@ LilycoveCity_ContestLobby_EventScript_29419D:: @ 829419D
 
 LilycoveCity_ContestLobby_EventScript_2941AA:: @ 82941AA
 	fadescreen 1
-	specialvar VAR_RESULT, sub_8138240
+	specialvar VAR_RESULT, GetLinkPartnerNames
 	copyvar VAR_0x8008, VAR_RESULT
 	copyvar VAR_0x8004, VAR_0x8008
 	special SpawnLinkPartnerFieldObject
@@ -713,22 +713,22 @@ LilycoveCity_ContestLobby_EventScript_2941F8:: @ 82941F8
 
 LilycoveCity_ContestLobby_EventScript_294235:: @ 8294235
 	call LilycoveCity_ContestLobby_EventScript_294285
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_29428F
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq LilycoveCity_ContestLobby_EventScript_2941F8
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_eq LilycoveCity_ContestLobby_EventScript_294235
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_29425D:: @ 829425D
 	call LilycoveCity_ContestLobby_EventScript_29428A
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_29428F
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq LilycoveCity_ContestLobby_EventScript_2941F8
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_eq LilycoveCity_ContestLobby_EventScript_29425D
 	release
 	end

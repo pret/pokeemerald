@@ -63,7 +63,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238A19:: @ 8238A19
 	checkflag FLAG_0x0F0
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
 	checkitem ITEM_ROOM_1_KEY, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238AF5
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, 4
 	playse SE_PIN
@@ -79,7 +79,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238A50:: @ 8238A50
 	checkflag FLAG_0x0F1
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
 	checkitem ITEM_ROOM_2_KEY, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238AFF
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, 4
 	playse SE_PIN
@@ -95,7 +95,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238A87:: @ 8238A87
 	checkflag FLAG_0x0F2
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
 	checkitem ITEM_ROOM_4_KEY, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238B09
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, 4
 	playse SE_PIN
@@ -111,7 +111,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_238ABE:: @ 8238ABE
 	checkflag FLAG_0x0F3
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238B1D
 	checkitem ITEM_ROOM_6_KEY, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq AbandonedShip_HiddenFloorCorridors_EventScript_238B13
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_238BF7, 4
 	playse SE_PIN

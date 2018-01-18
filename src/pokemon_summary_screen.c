@@ -41,7 +41,7 @@ struct ContestEffect
 extern struct UnkSummaryStruct* gUnknown_0203CF1C;
 extern struct BgTemplate gUnknown_0861CBB4;
 extern u8 gUnknown_0203CF20;
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 extern s8 gUnknown_0861CC1C[];
 extern u8 gUnknown_08329D22[];
 extern u8 gUnknown_0203CF21;
@@ -50,7 +50,7 @@ extern struct UnkStruct_61CC04 gUnknown_0861CC04;
 extern struct UnkStruct_61CC04 gUnknown_0861CC10;
 extern struct UnkStruct_61CC04 gUnknown_0861CBEC;
 extern struct UnkStruct_61CC04 gUnknown_0861CBF8;
-extern u16 gUnknown_08DC3CD4[];
+extern u16 gSummaryScreenWindow_Tilemap[];
 extern struct ContestMove gContestMoves[];
 extern struct ContestEffect gContestEffects[];
 extern struct WindowTemplate gUnknown_0861CC24;
@@ -73,7 +73,7 @@ extern void do_scheduled_bg_tilemap_copies_to_vram(void);
 extern u8 sub_81221EC();
 extern u8 sub_81221AC();
 extern void SetVBlankHBlankCallbacksToNull();
-extern void sub_8121DA0();
+extern void ResetVramOamAndBgCntRegs();
 extern void clear_scheduled_bg_copies_to_vram();
 extern void remove_some_task();
 extern void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable);
@@ -93,7 +93,7 @@ extern struct CompressedSpriteSheet gUnknown_0861D074;
 extern struct CompressedSpriteSheet gUnknown_0861D0F8;
 extern struct CompressedSpritePalette gUnknown_0861D100;
 extern struct CompressedSpritePalette gUnknown_0861D07C;
-extern u8 gUnknown_08D97B84;
+extern u8 gMoveTypes_Pal;
 extern u8 gUnknown_08D97D0C;
 extern void reset_temp_tile_data_buffers();
 extern void decompress_and_copy_tile_data_to_vram(u8 a, void* tiledata, u8 b, u8 c, u8 d);
@@ -193,7 +193,7 @@ void sub_81C4A88();
 void sub_81C4280();
 void sub_81C0510(u8 taskId);
 void sub_81C171C(u8 taskId);
-void sub_8121E10();
+void ResetAllBgsCoordinates();
 u8 sub_81B205C(struct Pokemon* a);
 void sub_81C1DA4(u16 a, s16 b);
 void sub_81C1EFC(u16 a, s16 b, u16 c);
@@ -450,7 +450,7 @@ bool8 sub_81BFB10(void)
     {
     case 0:
         SetVBlankHBlankCallbacksToNull();
-        sub_8121DA0();
+        ResetVramOamAndBgCntRegs();
         clear_scheduled_bg_copies_to_vram();
         gMain.state++;
         break;
@@ -578,7 +578,7 @@ void sub_81BFE24()
     SetBgTilemapBuffer(1, &gUnknown_0203CF1C->unkTilemap2);
     SetBgTilemapBuffer(2, &gUnknown_0203CF1C->unkTilemap1);
     SetBgTilemapBuffer(3, &gUnknown_0203CF1C->unkTilemap0);
-    sub_8121E10();
+    ResetAllBgsCoordinates();
     schedule_bg_copy_tilemap_to_vram(1);
     schedule_bg_copy_tilemap_to_vram(2);
     schedule_bg_copy_tilemap_to_vram(3);
@@ -648,7 +648,7 @@ u8 sub_81BFEB0()
         gUnknown_0203CF1C->unk40F0++;
         break;
     case 12:
-        LoadCompressedPalette(&gUnknown_08D97B84, 0x1D0, 0x60);
+        LoadCompressedPalette(&gMoveTypes_Pal, 0x1D0, 0x60);
         gUnknown_0203CF1C->unk40F0 = 0;
         return 1;
     }
@@ -793,7 +793,7 @@ void sub_81C0484(u8 taskId)
         ResetSpriteData();
         FreeAllSpritePalettes();
         StopCryAndClearCrySongs();
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
         if (gMonSpritesGfxPtr == 0)
             sub_806F47C(0);
         sub_81C0434();
@@ -2343,18 +2343,18 @@ void sub_81C2194(u16 *a, u16 b, u8 c)
     {
         for (i = 0; i < 20; i++)
         {
-            a[(i + var) << 1] = gUnknown_08DC3CD4[i] + b;
-            a[((i + var) << 1) + 0x40] = gUnknown_08DC3CD4[i] + b;
-            a[((i + var) << 1) + 0x80] = gUnknown_08DC3CD4[i + 20] + b;
+            a[(i + var) << 1] = gSummaryScreenWindow_Tilemap[i] + b;
+            a[((i + var) << 1) + 0x40] = gSummaryScreenWindow_Tilemap[i] + b;
+            a[((i + var) << 1) + 0x80] = gSummaryScreenWindow_Tilemap[i + 20] + b;
         }
     }
     else
     {
         for (i = 0; i < 20; i++)
         {
-            a[(i + var)] = gUnknown_08DC3CD4[i + 20] + b;
-            a[((i + var)) + 0x40] = gUnknown_08DC3CD4[i + 40] + b;
-            a[((i + var)) + 0x80] = gUnknown_08DC3CD4[i + 40] + b;
+            a[(i + var)] = gSummaryScreenWindow_Tilemap[i + 20] + b;
+            a[((i + var)) + 0x40] = gSummaryScreenWindow_Tilemap[i + 40] + b;
+            a[((i + var)) + 0x80] = gSummaryScreenWindow_Tilemap[i + 40] + b;
         }
     }
 }
@@ -2372,7 +2372,7 @@ void sub_81C2194(u16 *a, u16 b, u8 c)
 	cmp r2, 0\n\
 	bne _081C21E4\n\
 	movs r3, 0\n\
-	ldr r5, =gUnknown_08DC3CD4\n\
+	ldr r5, =gSummaryScreenWindow_Tilemap\n\
 _081C21A8:\n\
 	adds r2, r7, r3\n\
 	lsls r2, 1\n\
@@ -2402,7 +2402,7 @@ _081C21A8:\n\
 	.pool\n\
 _081C21E4:\n\
 	movs r3, 0\n\
-	ldr r5, =gUnknown_08DC3CD4\n\
+	ldr r5, =gSummaryScreenWindow_Tilemap\n\
 _081C21E8:\n\
 	adds r1, r7, r3\n\
 	lsls r1, 1\n\

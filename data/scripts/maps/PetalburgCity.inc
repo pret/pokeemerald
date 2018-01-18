@@ -1,12 +1,12 @@
 PetalburgCity_MapScript1_1DC2D7: @ 81DC2D7
 	setflag FLAG_VISITED_PETALBURG_CITY
-	compare_var_to_value VAR_0x4057, 0
+	compare VAR_0x4057, 0
 	call_if 1, PetalburgCity_EventScript_1DC307
-	compare_var_to_value VAR_0x4057, 2
+	compare VAR_0x4057, 2
 	call_if 1, PetalburgCity_EventScript_1DC30F
-	compare_var_to_value VAR_0x4057, 4
+	compare VAR_0x4057, 4
 	call_if 1, PetalburgCity_EventScript_1DC30F
-	compare_var_to_value VAR_0x4085, 8
+	compare VAR_0x4085, 8
 	call_if 1, PetalburgCity_EventScript_1DC316
 	end
 
@@ -16,7 +16,7 @@ PetalburgCity_EventScript_1DC307:: @ 81DC307
 
 PetalburgCity_EventScript_1DC30F:: @ 81DC30F
 	setflag FLAG_SPECIAL_FLAG_0x4000
-	savebgm BGM_TSURETEK
+	savebgm MUS_TSURETEK
 	return
 
 PetalburgCity_EventScript_1DC316:: @ 81DC316
@@ -31,16 +31,16 @@ PetalburgCity_MapScript2_1DC31C: @ 81DC31C
 PetalburgCity_EventScript_1DC32E:: @ 81DC32E
 	lockall
 	special copy_player_party_to_sav1
-	special sub_813946C
+	special PutZigzagoonInPlayerParty
 	applymovement 2, PetalburgCity_Movement_1DC451
 	applymovement 255, PetalburgCity_Movement_1DC430
 	waitmovement 0
 	msgbox PetalburgCity_Text_1EC1F8, 4
-	special sub_80B086C
+	special StartWallyTutorialBattle
 	waitstate
 	msgbox PetalburgCity_Text_1EC271, 4
-	applymovementat 2, PetalburgCity_Movement_2725A4, PETALBURG_CITY
-	waitmovementat 2, PETALBURG_CITY
+	applymovement 2, PetalburgCity_Movement_2725A4, PETALBURG_CITY
+	waitmovement 2, PETALBURG_CITY
 	msgbox PetalburgCity_Text_1EC297, 4
 	closemessage
 	clearflag FLAG_SPECIAL_FLAG_0x4000
@@ -260,29 +260,29 @@ PetalburgCity_EventScript_1DC4BE:: @ 81DC4BE
 PetalburgCity_EventScript_1DC4CA:: @ 81DC4CA
 	applymovement 8, PetalburgCity_Movement_27259E
 	waitmovement 0
-	playbgm BGM_TSURETEK, 0
+	playbgm MUS_TSURETEK, 0
 	playse SE_PIN
 	applymovement 8, PetalburgCity_Movement_272598
 	waitmovement 0
 	applymovement 8, PetalburgCity_Movement_27259A
 	waitmovement 0
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, PetalburgCity_EventScript_1DC57F
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, PetalburgCity_EventScript_1DC594
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, PetalburgCity_EventScript_1DC59F
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, PetalburgCity_EventScript_1DC5B4
 	msgbox PetalburgCity_Text_1DC881, 4
 	closemessage
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, PetalburgCity_EventScript_1DC5C9
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, PetalburgCity_EventScript_1DC5DB
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, PetalburgCity_EventScript_1DC5ED
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, PetalburgCity_EventScript_1DC5FF
 	msgbox PetalburgCity_Text_1DC91B, 4
 	applymovement 8, PetalburgCity_Movement_2725A8
@@ -559,13 +559,13 @@ PetalburgCity_EventScript_1DC6E9:: @ 81DC6E9
 	delay 30
 	msgbox PetalburgCity_Text_1DCC09, 4
 	closemessage
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if 1, PetalburgCity_EventScript_1DC78E
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if 1, PetalburgCity_EventScript_1DC7A0
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if 1, PetalburgCity_EventScript_1DC7B2
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if 1, PetalburgCity_EventScript_1DC7C4
 	setvar VAR_0x40C9, 1
 	removeobject 9

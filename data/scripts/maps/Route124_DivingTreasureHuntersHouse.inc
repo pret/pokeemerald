@@ -3,7 +3,7 @@ Route124_DivingTreasureHuntersHouse_MapScripts:: @ 8270A28
 	.byte 0
 
 Route124_DivingTreasureHuntersHouse_MapScript1_270A2E: @ 8270A2E
-	setflag FLAG_0x8BB
+	setflag FLAG_LANDMARK_HUNTERS_HOUSE
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_270A32:: @ 8270A32
@@ -23,7 +23,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_270A4E:: @ 8270A4E
 
 Route124_DivingTreasureHuntersHouse_EventScript_270A5C:: @ 8270A5C
 	call Route124_DivingTreasureHuntersHouse_EventScript_270A72
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F57
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270AD0
 	end
@@ -31,16 +31,16 @@ Route124_DivingTreasureHuntersHouse_EventScript_270A5C:: @ 8270A5C
 Route124_DivingTreasureHuntersHouse_EventScript_270A72:: @ 8270A72
 	setvar VAR_0x4001, 0
 	checkitem ITEM_RED_SHARD, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_270AB8
 	checkitem ITEM_YELLOW_SHARD, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_270ABE
 	checkitem ITEM_BLUE_SHARD, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_270AC4
 	checkitem ITEM_GREEN_SHARD, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_270ACA
 	return
 
@@ -247,13 +247,13 @@ Route124_DivingTreasureHuntersHouse_EventScript_270EC0:: @ 8270EC0
 	bufferitemname 0, VAR_0x8008
 	bufferitemname 1, VAR_0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_271132, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F4D
 	checkitemspace VAR_0x8009, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F01
 	checkitem VAR_0x8008, 2
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F01
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270F43
 	end
@@ -263,10 +263,10 @@ Route124_DivingTreasureHuntersHouse_EventScript_270F01:: @ 8270F01
 	giveitem_std VAR_0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_271158, 4
 	call Route124_DivingTreasureHuntersHouse_EventScript_270A72
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270F61
 	msgbox Route124_DivingTreasureHuntersHouse_Text_27117B, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route124_DivingTreasureHuntersHouse_EventScript_270ADE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_270F4D
 	end

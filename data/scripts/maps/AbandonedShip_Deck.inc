@@ -3,6 +3,6 @@ AbandonedShip_Deck_MapScripts:: @ 823799A
 	.byte 0
 
 AbandonedShip_Deck_MapScript1_2379A0: @ 82379A0
-	setflag FLAG_0x89E
+	setflag FLAG_LANDMARK_ABANDONED_SHIP
 	end
 

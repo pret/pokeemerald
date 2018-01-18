@@ -9,14 +9,14 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_22722B:: @ 822722B
 	special sub_81B94B0
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
-	compare_var_to_value VAR_RESULT, 255
+	compare VAR_RESULT, 255
 	goto_eq SootopolisCity_LotadAndSeedotHouse_EventScript_227272
 	special CompareSeedotSize
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SootopolisCity_LotadAndSeedotHouse_EventScript_22727C
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq SootopolisCity_LotadAndSeedotHouse_EventScript_227286
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq SootopolisCity_LotadAndSeedotHouse_EventScript_227290
 	release
 	end
@@ -39,7 +39,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_227286:: @ 8227286
 SootopolisCity_LotadAndSeedotHouse_EventScript_227290:: @ 8227290
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_227480, 4
 	giveitem_std ITEM_ELIXIR
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_LotadAndSeedotHouse_EventScript_2272B2
 	closemessage
 	release
@@ -58,14 +58,14 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_2272BC:: @ 82272BC
 	special sub_81B94B0
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
-	compare_var_to_value VAR_RESULT, 255
+	compare VAR_RESULT, 255
 	goto_eq SootopolisCity_LotadAndSeedotHouse_EventScript_227303
 	special CompareLotadSize
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SootopolisCity_LotadAndSeedotHouse_EventScript_22730D
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq SootopolisCity_LotadAndSeedotHouse_EventScript_227317
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq SootopolisCity_LotadAndSeedotHouse_EventScript_227321
 	release
 	end
@@ -88,7 +88,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_227317:: @ 8227317
 SootopolisCity_LotadAndSeedotHouse_EventScript_227321:: @ 8227321
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_22776C, 4
 	giveitem_std ITEM_ELIXIR
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SootopolisCity_LotadAndSeedotHouse_EventScript_227343
 	closemessage
 	release

@@ -3,7 +3,7 @@ Route114_LanettesHouse_MapScripts:: @ 822B2C8
 	.byte 0
 
 Route114_LanettesHouse_MapScript1_22B2CE: @ 822B2CE
-	setflag FLAG_0x8A5
+	setflag FLAG_LANDMARK_LANETTES_HOUSE
 	end
 
 Route114_LanettesHouse_EventScript_22B2D2:: @ 822B2D2
@@ -14,7 +14,7 @@ Route114_LanettesHouse_EventScript_22B2D2:: @ 822B2D2
 	setflag FLAG_SYS_PC_LANETTE
 	msgbox Route114_LanettesHouse_Text_22B34E, 4
 	givedecoration_std 99
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route114_LanettesHouse_EventScript_272067
 	setflag FLAG_0x083
 	release
@@ -28,7 +28,7 @@ Route114_LanettesHouse_EventScript_22B2FF:: @ 822B2FF
 Route114_LanettesHouse_EventScript_22B309:: @ 822B309
 	lockall
 	msgbox Route114_LanettesHouse_Text_22B485, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route114_LanettesHouse_EventScript_22B327
 	msgbox Route114_LanettesHouse_Text_22B6E4, 4
 	releaseall
@@ -36,7 +36,7 @@ Route114_LanettesHouse_EventScript_22B309:: @ 822B309
 
 Route114_LanettesHouse_EventScript_22B327:: @ 822B327
 	msgbox Route114_LanettesHouse_Text_22B53C, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, Route114_LanettesHouse_EventScript_22B33C
 	releaseall
 	end

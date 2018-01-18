@@ -178,14 +178,14 @@ sub_81DA6CC: @ 81DA6CC
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r6, =gUnknown_085500A4
+	ldr r6, =gRematchTable
 _081DA6D4:
 	lsls r0, r4, 1
 	lsls r1, r5, 4
 	adds r0, r1
 	adds r0, r6
 	ldrh r0, [r0]
-	bl HasTrainerAlreadyBeenFought
+	bl HasTrainerBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA6F0

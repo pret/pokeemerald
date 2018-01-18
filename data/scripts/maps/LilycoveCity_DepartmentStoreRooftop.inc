@@ -4,9 +4,9 @@ LilycoveCity_DepartmentStoreRooftop_MapScripts:: @ 8220207
 
 LilycoveCity_DepartmentStoreRooftop_MapScript1_22020D: @ 822020D
 	getpricereduction 3
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220227
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_22022B
 	end
 
@@ -52,7 +52,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220268:: @ 8220268
 	lock
 	faceplayer
 	getpricereduction 3
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220282
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_220463, 4
 	release
@@ -126,22 +126,22 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_220328:: @ 8220328
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220305
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_22030C
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220313
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220442
 	checkitemspace VAR_0x4000, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220450
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_22031A
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220321
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_220328
 	updatemoneybox 0, 0
 	nop
@@ -153,10 +153,10 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	bufferstdstring 2, 14
 	msgbox gUnknown_08272A9A, 4
 	random 64
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, LilycoveCity_DepartmentStoreRooftop_EventScript_220436
 	checkitemspace VAR_0x4000, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220450
 	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, 4
@@ -165,10 +165,10 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_22032F:: @ 822032F
 	bufferstdstring 2, 14
 	msgbox gUnknown_08272A9A, 4
 	random 64
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, LilycoveCity_DepartmentStoreRooftop_EventScript_220436
 	checkitemspace VAR_0x4000, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_DepartmentStoreRooftop_EventScript_220450
 	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_2205C2, 4

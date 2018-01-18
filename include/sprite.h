@@ -120,10 +120,6 @@ union AffineAnimCmd
     {.jump = {.type = AFFINEANIMCMDTYPE_JUMP, .target = _target}}
 #define AFFINEANIMCMD_END \
     {.type = AFFINEANIMCMDTYPE_END}
-#define AFFINEANIMCMD_LOOP(_count) \
-    {.loop = {.type = AFFINEANIMCMDTYPE_LOOP, .count = _count}}
-#define AFFINEANIMCMD_JUMP(_target) \
-    {.jump = {.type = AFFINEANIMCMDTYPE_JUMP, .target = _target}}
 
 struct AffineAnimState
 {

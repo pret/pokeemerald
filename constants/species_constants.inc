@@ -384,3 +384,4 @@
 	.set SPECIES_JIRACHI,    0x199
 	.set SPECIES_DEOXYS,     0x19a
 	.set SPECIES_CHIMECHO,   0x19b
+	.set SPECIES_EGG,        0x19c

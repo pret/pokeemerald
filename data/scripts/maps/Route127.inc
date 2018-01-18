@@ -7,18 +7,18 @@ Route127_MapScripts:: @ 81F69D9
 Route127_MapScript1_1F69E9: @ 81F69E9
 	checkflag FLAG_SYS_WEATHER_CTRL
 	call_if 1, Route127_EventScript_27207A
-	compare_var_to_value VAR_0x4039, 1
+	compare VAR_0x4039, 1
 	call_if 1, Route127_EventScript_273D13
-	compare_var_to_value VAR_0x4037, 13
+	compare VAR_0x4037, 13
 	call_if 1, Route127_EventScript_273D17
-	compare_var_to_value VAR_0x4037, 14
+	compare VAR_0x4037, 14
 	call_if 1, Route127_EventScript_273D17
 	end
 
 Route127_MapScript1_1F6A14: @ 81F6A14
-	compare_var_to_value VAR_0x4037, 13
+	compare VAR_0x4037, 13
 	call_if 1, Route127_EventScript_273B5F
-	compare_var_to_value VAR_0x4037, 14
+	compare VAR_0x4037, 14
 	call_if 1, Route127_EventScript_273BCC
 	end
 
@@ -63,8 +63,8 @@ Route127_EventScript_1F6ABF:: @ 81F6ABF
 
 Route127_EventScript_1F6AD6:: @ 81F6AD6
 	trainerbattle 2, TRAINER_KOJI_1, 0, Route127_Text_2A264D, Route127_Text_2A2685, Route127_EventScript_1F6B02
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route127_EventScript_1F6B21
 	msgbox Route127_Text_2A26AC, 4
 	release

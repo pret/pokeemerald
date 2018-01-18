@@ -14,11 +14,11 @@ gUnknown_0831C604:: @ 831C604
 
 	.align 2
 gUnknown_0831C620:: @ 831C620
-	obj_tiles gUnknown_08C01644, 0x0180, 0xd6eb
+	obj_tiles gSmokescreenImpactTiles, 0x0180, 0xd6eb
 
 	.align 2
 gUnknown_0831C628:: @ 831C628
-	obj_pal gUnknown_08C01724, 0xd6eb
+	obj_pal gSmokescreenImpactPalette, 0xd6eb
 
 	.align 2
 gUnknown_0831C630:: @ 831C630
@@ -53,7 +53,7 @@ gUnknown_0831C688:: @ 831C688
 
 	.align 2
 gSpriteSheet_EnemyShadow:: @ 831C6A0
-	obj_tiles gUnknown_08D8FBC0, 0x0080, 0xd759
+	obj_tiles gEnemyMonShadow_Gfx, 0x0080, 0xd759
 
 	.align 2
 gUnknown_0831C6A8:: @ 831C6A8

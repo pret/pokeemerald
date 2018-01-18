@@ -410,7 +410,7 @@ sub_80FBAE4: @ 80FBAE4
 	adds r0, r4, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_811A138
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x1
@@ -433,7 +433,7 @@ _080FBB2A:
 	adds r0, 0x8
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_811A138
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x1

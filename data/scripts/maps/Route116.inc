@@ -7,11 +7,11 @@ Route116_MapScripts:: @ 81F2C0C
 Route116_MapScript1_1F2C1C: @ 81F2C1C
 	checkflag FLAG_0x08F
 	call_if 1, Route116_EventScript_1F2C47
-	compare_var_to_value VAR_0x4039, 1
+	compare VAR_0x4039, 1
 	call_if 1, Route116_EventScript_273D13
-	compare_var_to_value VAR_0x4037, 5
+	compare VAR_0x4037, 5
 	call_if 1, Route116_EventScript_273D1B
-	compare_var_to_value VAR_0x4037, 6
+	compare VAR_0x4037, 6
 	call_if 1, Route116_EventScript_273D1B
 	end
 
@@ -20,9 +20,9 @@ Route116_EventScript_1F2C47:: @ 81F2C47
 	return
 
 Route116_MapScript1_1F2C4F: @ 81F2C4F
-	compare_var_to_value VAR_0x4037, 5
+	compare VAR_0x4037, 5
 	call_if 1, Route116_EventScript_27395F
-	compare_var_to_value VAR_0x4037, 6
+	compare VAR_0x4037, 6
 	call_if 1, Route116_EventScript_273972
 	end
 
@@ -63,17 +63,17 @@ Route116_EventScript_1F2CA2:: @ 81F2CA2
 Route116_EventScript_1F2CBB:: @ 81F2CBB
 	setflag FLAG_0x11F
 	giveitem_std ITEM_REPEAT_BALL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route116_EventScript_1F2D39
 	msgbox Route116_Text_1F3521, 4
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, Route116_EventScript_1F2D15
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, Route116_EventScript_1F2D15
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, Route116_EventScript_1F2D15
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, Route116_EventScript_1F2D20
 	removeobject VAR_LAST_TALKED
 	clearflag FLAG_0x3B5
@@ -167,10 +167,10 @@ Route116_EventScript_1F2DB6:: @ 81F2DB6
 	lock
 	faceplayer
 	checkitem ITEM_BLACK_GLASSES, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2DF1
 	specialvar VAR_RESULT, sub_8139634
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2DE2
 	msgbox Route116_Text_1F3657, 4
 	release
@@ -186,7 +186,7 @@ Route116_EventScript_1F2DF1:: @ 81F2DF1
 	msgbox Route116_Text_1F3657, 4
 	msgbox Route116_Text_1F3688, 4
 	specialvar VAR_RESULT, sub_8139634
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2E1B
 	msgbox Route116_Text_1F375E, 4
 	release
@@ -200,13 +200,13 @@ Route116_EventScript_1F2E1B:: @ 81F2E1B
 
 Route116_EventScript_1F2E2A:: @ 81F2E2A
 	delay 20
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, Route116_EventScript_1F2E5E
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if 1, Route116_EventScript_1F2E5E
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if 1, Route116_EventScript_1F2E5E
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, Route116_EventScript_1F2E69
 	removeobject VAR_LAST_TALKED
 	release
@@ -259,19 +259,19 @@ Route116_EventScript_1F2EA0:: @ 81F2EA0
 
 Route116_EventScript_1F2EB7:: @ 81F2EB7
 	trainerbattle 2, TRAINER_JERRY_1, 0, Route116_Text_29BD0C, Route116_Text_29BD66, Route116_EventScript_1F2EF8
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F2F4E
 	setvar VAR_0x8004, 273
 	specialvar VAR_RESULT, sub_813B4E0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route116_EventScript_1F2F22
 	msgbox Route116_Text_29BD92, 4
 	release
 	end
 
 Route116_EventScript_1F2EF8:: @ 81F2EF8
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F2F03
 	release
 	end
@@ -288,7 +288,7 @@ Route116_EventScript_1F2F03:: @ 81F2F03
 	end
 
 Route116_EventScript_1F2F22:: @ 81F2F22
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F2F35
 	msgbox Route116_Text_29BD92, 4
 	release
@@ -320,19 +320,19 @@ Route116_EventScript_1F2F7C:: @ 81F2F7C
 
 Route116_EventScript_1F2F93:: @ 81F2F93
 	trainerbattle 2, TRAINER_KAREN_1, 0, Route116_Text_29BFC5, Route116_Text_29BFFA, Route116_EventScript_1F2FD4
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route116_EventScript_1F302A
 	setvar VAR_0x8004, 280
 	specialvar VAR_RESULT, sub_813B4E0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route116_EventScript_1F2FFE
 	msgbox Route116_Text_29C010, 4
 	release
 	end
 
 Route116_EventScript_1F2FD4:: @ 81F2FD4
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F2FDF
 	release
 	end
@@ -349,7 +349,7 @@ Route116_EventScript_1F2FDF:: @ 81F2FDF
 	end
 
 Route116_EventScript_1F2FFE:: @ 81F2FFE
-	checkflag FLAG_0x12F
+	checkflag FLAG_HAS_MATCH_CALL
 	goto_eq Route116_EventScript_1F3011
 	msgbox Route116_Text_29C010, 4
 	release

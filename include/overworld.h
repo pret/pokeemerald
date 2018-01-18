@@ -40,6 +40,9 @@ void sub_8084EBC(s16, s16);
 
 void player_avatar_init_params_reset(void);
 
+bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType);
+void Overworld_ResetStateAfterTeleport(void);
+
 void Overworld_SetFlashLevel(s32 a1);
 //u8 Overworld_GetFlashLevel(void);
 void sub_8085524(u16);
@@ -72,5 +75,7 @@ bool32 sub_8087634(void);
 bool32 sub_808766C(void);
 void IncrementGameStat(u8);
 u32 GetGameStat(u8);
+
+void CB2_OverworldBasic(void);
 
 #endif //GUARD_ROM4_H

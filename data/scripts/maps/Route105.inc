@@ -7,9 +7,9 @@ Route105_MapScripts:: @ 81EE1DB
 Route105_MapScript1_1EE1EB: @ 81EE1EB
 	checkflag FLAG_0x0E4
 	call_if 0, Route105_EventScript_1EE20B
-	compare_var_to_value VAR_0x4037, 9
+	compare VAR_0x4037, 9
 	call_if 1, Route105_EventScript_2739AB
-	compare_var_to_value VAR_0x4037, 10
+	compare VAR_0x4037, 10
 	call_if 1, Route105_EventScript_273A18
 	end
 
@@ -19,11 +19,11 @@ Route105_EventScript_1EE20B:: @ 81EE20B
 	return
 
 Route105_MapScript1_1EE21E: @ 81EE21E
-	compare_var_to_value VAR_0x4039, 1
+	compare VAR_0x4039, 1
 	call_if 1, Route105_EventScript_273D13
-	compare_var_to_value VAR_0x4037, 9
+	compare VAR_0x4037, 9
 	call_if 1, Route105_EventScript_273D17
-	compare_var_to_value VAR_0x4037, 10
+	compare VAR_0x4037, 10
 	call_if 1, Route105_EventScript_273D17
 	end
 
@@ -63,8 +63,8 @@ Route105_EventScript_1EE2BD:: @ 81EE2BD
 
 Route105_EventScript_1EE2D4:: @ 81EE2D4
 	trainerbattle 2, TRAINER_ANDRES_1, 0, Route105_Text_2960A9, Route105_Text_2960DB, Route105_EventScript_1EE300
-	specialvar VAR_RESULT, sub_80B226C
-	compare_var_to_value VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldTryRematchBattle
+	compare VAR_RESULT, 1
 	goto_eq Route105_EventScript_1EE31F
 	msgbox Route105_Text_2960FA, 4
 	release

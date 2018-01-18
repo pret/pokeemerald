@@ -43,7 +43,7 @@ DewfordTown_EventScript_1E957A:: @ 81E957A
 
 DewfordTown_EventScript_1E9585:: @ 81E9585
 	msgbox DewfordTown_Text_1E9B24, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E95A2
 	msgbox DewfordTown_Text_1E9BD9, 4
 	release
@@ -77,9 +77,9 @@ DewfordTown_EventScript_1E95D5:: @ 81E95D5
 	checkflag FLAG_0x101
 	goto_eq DewfordTown_EventScript_1E962A
 	msgbox DewfordTown_Text_1E9DD1, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E95FF
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq DewfordTown_EventScript_1E9620
 	end
 
@@ -100,9 +100,9 @@ DewfordTown_EventScript_1E962A:: @ 81E962A
 	message DewfordTown_Text_1E9FB8
 	waitmessage
 	multichoice 20, 8, 50, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq DewfordTown_EventScript_1E964C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E9656
 	end
 
@@ -599,9 +599,9 @@ DewfordTown_EventScript_1E9922:: @ 81E9922
 	faceplayer
 	call DewfordTown_EventScript_271E8B
 	msgbox DewfordTown_Text_1EA136, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E9948
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq DewfordTown_EventScript_1E9952
 	end
 
@@ -616,15 +616,15 @@ DewfordTown_EventScript_1E9952:: @ 81E9952
 	call DewfordTown_EventScript_271E7C
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq DewfordTown_EventScript_1E997D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq DewfordTown_EventScript_1E9994
 	end
 
 DewfordTown_EventScript_1E997D:: @ 81E997D
 	incrementgamestat 2
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_eq DewfordTown_EventScript_1E999E
 	msgbox DewfordTown_Text_1EA2AA, 4
 	release

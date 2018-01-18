@@ -11,7 +11,7 @@ DesertRuins_MapScript1_22D96B: @ 822D96B
 
 DesertRuins_EventScript_22D975:: @ 822D975
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, DesertRuins_EventScript_27374E
 	removeobject VAR_LAST_TALKED
 	return
@@ -31,7 +31,7 @@ DesertRuins_EventScript_22D993:: @ 822D993
 	return
 
 DesertRuins_MapScript1_22D9CA: @ 822D9CA
-	setflag FLAG_0x8B6
+	setflag FLAG_LANDMARK_DESERT_RUINS
 	checkflag FLAG_0x1BB
 	call_if 0, DesertRuins_EventScript_22D9D7
 	end
@@ -72,15 +72,15 @@ DesertRuins_EventScript_22DA02:: @ 822DA02
 	waitmoncry
 	setwildbattle SPECIES_REGIROCK, 40, ITEM_NONE
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B0A74
+	special StartRegiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq DesertRuins_EventScript_22DA49
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq DesertRuins_EventScript_22DA52
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq DesertRuins_EventScript_22DA52
 	setflag FLAG_0x1BB
 	release

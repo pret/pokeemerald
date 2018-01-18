@@ -1066,7 +1066,7 @@ sub_81D6FD0: @ 81D6FD0
 	thumb_func_start sub_81D6FE0
 sub_81D6FE0: @ 81D6FE0
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0862A888
@@ -1088,7 +1088,7 @@ sub_81D6FE0: @ 81D6FE0
 	adds r1, r0
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -1119,7 +1119,7 @@ sub_81D706C: @ 81D706C
 	push {r4,lr}
 	sub sp, 0x4
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08DA33C0
+	ldr r1, =gRaySceneClouds_Gfx
 	movs r0, 0
 	str r0, [sp]
 	movs r2, 0
@@ -1130,22 +1130,22 @@ _081D7082:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081D7082
-	ldr r0, =gUnknown_08DA3988
+	ldr r0, =gRaySceneClouds2_Tilemap
 	ldr r4, =gUnknown_0203CF60
 	ldr r1, [r4]
 	adds r1, 0x4
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA3824
+	ldr r0, =gRaySceneClouds1_Tilemap
 	ldr r1, [r4]
 	ldr r2, =0x00000804
 	adds r1, r2
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA3A88
+	ldr r0, =gRaySceneClouds3_Tilemap
 	ldr r1, [r4]
 	ldr r2, =0x00001004
 	adds r1, r2
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA37E8
+	ldr r0, =gRaySceneClouds_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
@@ -1172,8 +1172,8 @@ _081D7082:
 	.pool
 	thumb_func_end sub_81D706C
 
-	thumb_func_start task_add_00_WIN0V_open_close_above_and_more
-task_add_00_WIN0V_open_close_above_and_more: @ 81D7134
+	thumb_func_start sub_81D7134
+sub_81D7134: @ 81D7134
 	push {r4-r7,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -1264,7 +1264,7 @@ _081D71EE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end task_add_00_WIN0V_open_close_above_and_more
+	thumb_func_end sub_81D7134
 
 	thumb_func_start sub_81D7228
 sub_81D7228: @ 81D7228
@@ -2758,7 +2758,7 @@ _081D7E08:
 	thumb_func_start sub_81D7E10
 sub_81D7E10: @ 81D7E10
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0862AA54
@@ -2780,7 +2780,7 @@ sub_81D7E10: @ 81D7E10
 	adds r1, r0
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -2811,20 +2811,20 @@ sub_81D7E9C: @ 81D7E9C
 	push {r4,lr}
 	sub sp, 0x4
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08DA33C0
+	ldr r1, =gRaySceneClouds_Gfx
 	movs r4, 0
 	str r4, [sp]
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_08DA4F70
+	ldr r1, =gRaySceneOvercast_Gfx
 	str r4, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_08DA3C94
+	ldr r1, =gRaySceneRayquaza_Gfx
 	str r4, [sp]
 	movs r0, 0x2
 	movs r2, 0
@@ -2835,22 +2835,22 @@ _081D7ED0:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081D7ED0
-	ldr r0, =gUnknown_08DA3988
+	ldr r0, =gRaySceneClouds2_Tilemap
 	ldr r4, =gUnknown_0203CF60
 	ldr r1, [r4]
 	adds r1, 0x4
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA60B8
+	ldr r0, =gRaySceneOvercast_Tilemap
 	ldr r1, [r4]
 	ldr r2, =0x00000804
 	adds r1, r2
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA4DEC
+	ldr r0, =gRaySceneRayquaza_Tilemap
 	ldr r1, [r4]
 	ldr r2, =0x00001004
 	adds r1, r2
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA4DA8
+	ldr r0, =gRaySceneRayquaza_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
@@ -3292,7 +3292,7 @@ _081D829A:
 	thumb_func_start sub_81D82B0
 sub_81D82B0: @ 81D82B0
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0862AACC
@@ -3319,7 +3319,7 @@ sub_81D82B0: @ 81D82B0
 	adds r1, r0
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -3354,14 +3354,14 @@ sub_81D8358: @ 81D8358
 	push {r4-r7,lr}
 	sub sp, 0xC
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08DA7528
+	ldr r1, =gRaySceneRayquazaLight_Gfx
 	movs r4, 0
 	str r4, [sp]
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_08DA69BC
+	ldr r1, =gRaySceneOvercast2_Gfx
 	str r4, [sp]
 	movs r0, 0x1
 	movs r2, 0
@@ -3374,12 +3374,12 @@ _081D8380:
 	lsrs r6, r0, 24
 	cmp r6, 0
 	bne _081D8380
-	ldr r0, =gUnknown_08DA7AAC
+	ldr r0, =gRaySceneRayquazaLight_Tilemap
 	ldr r5, =gUnknown_0203CF60
 	ldr r1, [r5]
 	adds r1, 0x4
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA7784
+	ldr r0, =gRaySceneOvercast2_Tilemap
 	ldr r1, [r5]
 	ldr r4, =0x00001804
 	adds r1, r4
@@ -3406,7 +3406,7 @@ _081D8380:
 	ldr r2, =0x010000d0
 	adds r0, r7, 0
 	bl CpuFastSet
-	ldr r0, =gUnknown_08DA7744
+	ldr r0, =gRaySceneOvercast2_Pal
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadCompressedPalette
@@ -3899,7 +3899,7 @@ _081D8818:
 	thumb_func_start sub_81D8828
 sub_81D8828: @ 81D8828
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0862AB44
@@ -3926,7 +3926,7 @@ sub_81D8828: @ 81D8828
 	adds r1, r0
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -3961,20 +3961,20 @@ sub_81D88D0: @ 81D88D0
 	push {r4,lr}
 	sub sp, 0x4
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08DA80BC
+	ldr r1, =gRaySceneRayquazaChase_Gfx
 	movs r4, 0
 	str r4, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_08DA7EAC
+	ldr r1, =gRaySceneChaseStreaks_Gfx
 	str r4, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_08DA7C30
+	ldr r1, =gRaySceneChaseBg_Gfx
 	str r4, [sp]
 	movs r0, 0x3
 	movs r2, 0
@@ -3985,27 +3985,27 @@ _081D8904:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081D8904
-	ldr r0, =gUnknown_08DA8D6C
+	ldr r0, =gRayChaseRayquazaChase2_Tilemap
 	ldr r4, =gUnknown_0203CF60
 	ldr r1, [r4]
 	adds r1, 0x4
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA8B40
+	ldr r0, =gRayChaseRayquazaChase_Tilemap
 	ldr r1, [r4]
 	ldr r2, =0x00000804
 	adds r1, r2
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA7FB4
+	ldr r0, =gRaySceneChaseStreaks_Tilemap
 	ldr r1, [r4]
 	ldr r2, =0x00001004
 	adds r1, r2
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA7D6C
+	ldr r0, =gRaySceneChaseBg_Tilemap
 	ldr r1, [r4]
 	ldr r2, =0x00001804
 	adds r1, r2
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DA8E84
+	ldr r0, =gRaySceneChase_Pal
 	movs r1, 0
 	movs r2, 0x80
 	bl LoadCompressedPalette
@@ -4354,7 +4354,7 @@ _081D8C26:
 	thumb_func_start sub_81D8C38
 sub_81D8C38: @ 81D8C38
 	push {r4,lr}
-	bl sub_8121DA0
+	bl ResetVramOamAndBgCntRegs
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0862AD08
@@ -4376,7 +4376,7 @@ sub_81D8C38: @ 81D8C38
 	adds r1, r0
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
-	bl sub_8121E10
+	bl ResetAllBgsCoordinates
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0x1
@@ -4407,14 +4407,14 @@ sub_81D8CC4: @ 81D8CC4
 	push {r4,lr}
 	sub sp, 0x4
 	bl reset_temp_tile_data_buffers
-	ldr r1, =gUnknown_08DAAB24
+	ldr r1, =gRaySceneHushRing_Gfx
 	movs r4, 0
 	str r4, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_08DAA8B4
+	ldr r1, =gRaySceneHushBg_Gfx
 	str r4, [sp]
 	movs r0, 0
 	movs r2, 0
@@ -4425,22 +4425,22 @@ _081D8CEA:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081D8CEA
-	ldr r0, =gUnknown_08DAAE54
+	ldr r0, =gRaySceneHushRing_Tilemap
 	ldr r4, =gUnknown_0203CF60
 	ldr r1, [r4]
 	ldr r2, =0x00000804
 	adds r1, r2
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DAAC1C
+	ldr r0, =gRaySceneHushBg_Tilemap
 	ldr r1, [r4]
 	adds r1, 0x4
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DAAF98
+	ldr r0, =gRaySceneHushRing_Map
 	ldr r1, [r4]
 	ldr r2, =0x00001004
 	adds r1, r2
 	bl LZDecompressWram
-	ldr r0, =gUnknown_08DAAFEC
+	ldr r0, =gRaySceneHushBg_Pal
 	movs r1, 0
 	movs r2, 0x60
 	bl LoadCompressedPalette

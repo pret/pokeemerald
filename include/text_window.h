@@ -3,8 +3,8 @@
 
 struct TilesPal
 {
-    u32* tiles;
-    u16* pal;
+    u32 *tiles;
+    u16 *pal;
 };
 
 const struct TilesPal* sub_8098758(u8 id);

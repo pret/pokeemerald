@@ -11,17 +11,17 @@ FortreeCity_House1_EventScript_2162BB:: @ 82162BB
 	specialvar VAR_RESULT, sub_807E73C
 	copyvar VAR_0x8009, VAR_RESULT
 	msgbox FortreeCity_House1_Text_21637B, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FortreeCity_House1_EventScript_21633D
 	special sub_81B94B0
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
-	compare_var_to_value VAR_0x8004, 255
+	compare VAR_0x8004, 255
 	goto_eq FortreeCity_House1_EventScript_21633D
 	copyvar VAR_0x8005, VAR_0x800A
 	specialvar VAR_RESULT, sub_807E9D4
 	copyvar VAR_0x800B, VAR_RESULT
-	compare_var_to_var VAR_RESULT, VAR_0x8009
+	compare VAR_RESULT, VAR_0x8009
 	goto_if 5, FortreeCity_House1_EventScript_216347
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A

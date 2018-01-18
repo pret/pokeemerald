@@ -3534,7 +3534,7 @@ _08163E10:
 	bl sub_80B100C
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8145EF4
+	bl BattleTransition_StartOnField
 	b _08163E68
 	.pool
 _08163E2C:
@@ -3544,7 +3544,7 @@ _08163E2C:
 	ldr r5, =0x00000c03
 	adds r0, r5, 0
 	bl sub_8165404
-	ldr r4, =gUnknown_02038BFC
+	ldr r4, =gApproachingTrainerId
 	movs r0, 0
 	strb r0, [r4]
 	ldr r0, =MossdeepCity_SpaceCenter_2F_EventScript_224157 + 1
@@ -3561,7 +3561,7 @@ _08163E2C:
 	movs r0, 0
 	bl PlayMapChosenOrBattleBGM
 	movs r0, 0x12
-	bl sub_8145EF4
+	bl BattleTransition_StartOnField
 _08163E68:
 	add sp, 0x4
 	pop {r4-r6}

@@ -52,7 +52,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507B1:: @ 82507B1
 	lockall
 	setvar VAR_0x8004, 10
 	special sub_81A1780
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_2507D2
 	msgbox BattleFrontier_BattlePyramidLobby_Text_2517B5, 4
 	goto BattleFrontier_BattlePyramidLobby_EventScript_2507DA
@@ -62,7 +62,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507D2:: @ 82507D2
 
 BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	special sub_81B95E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, BattleFrontier_BattlePyramidLobby_EventScript_250DDB
 	clearflag FLAG_SPECIAL_FLAG_0x4004
 	setvar VAR_0x8004, 8
@@ -70,7 +70,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2507DA:: @ 82507DA
 	special copy_player_party_from_sav1
 	setvar VAR_0x8004, 14
 	special sub_81A8E7C
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	message BattleFrontier_BattlePyramidLobby_Text_2519F8
 	waitmessage
 	playse SE_EXPMAX
@@ -100,7 +100,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250852:: @ 8250852
 	special copy_player_party_from_sav1
 	setvar VAR_0x8004, 14
 	special sub_81A8E7C
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	lockall
 	message BattleFrontier_BattlePyramidLobby_Text_251B5A
 	waitmessage
@@ -153,7 +153,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250904:: @ 8250904
 	case 127, BattleFrontier_BattlePyramidLobby_EventScript_250AC4
 	setvar VAR_0x8004, 15
 	special sub_81A1780
-	compare_var_to_value VAR_0x8004, 1
+	compare VAR_0x8004, 1
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250A75
 	setvar VAR_0x8004, 2
 	setvar VAR_0x8005, 1
@@ -166,7 +166,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250904:: @ 8250904
 	setvar VAR_0x8005, 3
 	special sub_80F9490
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250AC1
 	msgbox BattleFrontier_BattlePyramidLobby_Text_2514E6, 5
 	switch VAR_RESULT
@@ -202,7 +202,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_2509A5:: @ 82509A5
 	delay 2
 	call BattleFrontier_BattlePyramidLobby_EventScript_27134F
 	setvar VAR_0x4000, 255
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250AAA
 
 BattleFrontier_BattlePyramidLobby_EventScript_250A21:: @ 8250A21
@@ -218,7 +218,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250A21:: @ 8250A21
 	setvar VAR_0x8006, 0
 	special sub_81A1780
 	setvar VAR_RESULT, 0
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	warp BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE, 255, 1, 1
 	setvar VAR_0x4000, 0
 	waitstate
@@ -285,7 +285,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250B28:: @ 8250B28
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 5
 	special sub_81A8E7C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidLobby_EventScript_250B53
 	setvar VAR_RESULT, 0
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250BA4
@@ -303,7 +303,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250B66:: @ 8250B66
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 6
 	special sub_81A8E7C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if 5, BattleFrontier_BattlePyramidLobby_EventScript_250B91
 	setvar VAR_RESULT, 0
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250BA4
@@ -440,7 +440,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250D56:: @ 8250D56
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 1
 	special sub_81A8E7C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250D94
 	msgbox BattleFrontier_BattlePyramidLobby_Text_2515AD, 4
 	goto BattleFrontier_BattlePyramidLobby_EventScript_250D9C
@@ -496,7 +496,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250DDB:: @ 8250DDB
 	msgbox BattleFrontier_BattlePyramidLobby_Text_2517FC, 4
 	setflag FLAG_SPECIAL_FLAG_0x4004
 	special sub_81C6A94
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250E00
 	message BattleFrontier_BattlePyramidLobby_Text_2518C6
 	waitmessage
@@ -534,7 +534,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_250E50:: @ 8250E50
 
 BattleFrontier_BattlePyramidLobby_EventScript_250E60:: @ 8250E60
 	special sub_81B95E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq BattleFrontier_BattlePyramidLobby_EventScript_250E6F
 	return
 

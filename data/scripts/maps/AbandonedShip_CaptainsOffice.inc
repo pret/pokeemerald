@@ -7,7 +7,7 @@ AbandonedShip_CaptainsOffice_EventScript_2387E2:: @ 82387E2
 	checkflag FLAG_0x126
 	goto_eq AbandonedShip_CaptainsOffice_EventScript_23881A
 	checkitem ITEM_SCANNER, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq AbandonedShip_CaptainsOffice_EventScript_238810
 	checkflag FLAG_0x436
 	goto_eq AbandonedShip_CaptainsOffice_EventScript_23881A

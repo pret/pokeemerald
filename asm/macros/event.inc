@@ -1,20 +1,20 @@
 	@ Does nothing.
-	.macro nop 
+	.macro nop
 	.byte 0x00
 	.endm
 
 	@ Does nothing.
-	.macro nop1 
+	.macro nop1
 	.byte 0x01
 	.endm
 
 	@ Terminates script execution.
-	.macro end 
+	.macro end
 	.byte 0x02
 	.endm
 
 	@ Jumps back to after the last-executed call statement, and continues script execution from there.
-	.macro return 
+	.macro return
 	.byte 0x03
 	.endm
 
@@ -71,12 +71,12 @@
 	.endm
 
 	@ Executes a script stored in a default RAM location.
-	.macro gotoram 
+	.macro gotoram
 	.byte 0x0c
 	.endm
 
 	@ Terminates script execution and "resets the script RAM".
-	.macro killscript 
+	.macro killscript
 	.byte 0x0d
 	.endm
 
@@ -226,6 +226,18 @@
 	.2byte \var2
 	.endm
 
+	@ Generic compare macro which attempts to deduce argument types based on their values
+	@ Any values between 0x4000 to 0x4FFF and 0x8000 to 0x8FFF are considered event variable identifiers
+	.macro compare arg1, arg2
+		.if ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && ((\arg2 >> 12) == 4 || (\arg2 >> 12) == 8)
+			compare_var_to_var \arg1, \arg2
+		.elseif ((\arg1 >> 12) == 4 || (\arg1 >> 12) == 8) && (\arg2 >= 0 && \arg2 <= 0xFFFF)
+			compare_var_to_value \arg1, \arg2
+		.else
+			.error "Invalid arguments for 'compare'"
+		.endif
+	.endm
+
 	@ Calls the native C function stored at `func`.
 	.macro callnative func
 	.byte 0x23
@@ -252,7 +264,7 @@
 	.endm
 
 	@ Blocks script execution until a command or ASM code manually unblocks it. Generally used with specific commands and specials. If this command runs, and a subsequent command or piece of ASM does not unblock state, the script will remain blocked indefinitely (essentially a hang).
-	.macro waitstate 
+	.macro waitstate
 	.byte 0x27
 	.endm
 
@@ -288,12 +300,12 @@
 	.endm
 
 	@ Runs time based events. In FireRed, this command is a nop.
-	.macro dodailyevents 
+	.macro dodailyevents
 	.byte 0x2d
 	.endm
 
 	@ Sets the values of variables 0x8000, 0x8001, and 0x8002 to the current hour, minute, and second. In FRLG, this command sets those variables to zero.
-	.macro gettime 
+	.macro gettime
 	.byte 0x2e
 	.endm
 
@@ -304,7 +316,7 @@
 	.endm
 
 	@ Blocks script execution until the currently-playing sound (triggered by playse) finishes playing.
-	.macro waitse 
+	.macro waitse
 	.byte 0x30
 	.endm
 
@@ -315,7 +327,7 @@
 	.endm
 
 	@ Blocks script execution until all currently-playing fanfares finish.
-	.macro waitfanfare 
+	.macro waitfanfare
 	.byte 0x32
 	.endm
 
@@ -333,7 +345,7 @@
 	.endm
 
 	@ Crossfades the currently-playing song into the map's default song.
-	.macro fadedefaultbgm 
+	.macro fadedefaultbgm
 	.byte 0x35
 	.endm
 
@@ -441,7 +453,7 @@
 	.endm
 
 	@ Retrieves the number of Pokemon in the player's party, and stores that number in variable 0x800D (LASTRESULT).
-	.macro getpartysize 
+	.macro getpartysize
 	.byte 0x43
 	.endm
 
@@ -518,57 +530,58 @@
 	.endm
 
 	@ Applies the movement data at movements to the specified (index) Object. Also closes any standard message boxes that are still open.
-	.macro applymovement index, movements
-	.byte 0x4f
-	.2byte \index
-	.4byte \movements
-	.endm
-
-	@ Applies the movement data at movements to the specified (index) Object on the specified (map_group, map_num) map. Really only useful if the object has followed from one map to another (e.g. Wally during the catching event).
-	.macro applymovementat variable, movements, map
-	.byte 0x50
-	.2byte \variable
-	.4byte \movements
-	map \map
+	@ If no map is specified, then the current map is used.
+	.macro applymovement index, movements, map
+		.ifb \map
+			.byte 0x4f
+			.2byte \index
+			.4byte \movements
+		.else
+			@ Really only useful if the object has followed from one map to another (e.g. Wally during the catching event).
+			.byte 0x50
+			.2byte \index
+			.4byte \movements
+			map \map
+		.endif
 	.endm
 
 	@ Blocks script execution until the movements being applied to the specified (index) Object finish. If the specified Object is 0x0000, then the command will block script execution until all Objects affected by applymovement finish their movements. If the specified Object is not currently being manipulated with applymovement, then this command does nothing.
-	.macro waitmovement index
-	.byte 0x51
-	.2byte \index
-	.endm
-
-	@ Blocks script execution until the movements being applied to the specified (index) Object on the specified (map) map finish.
-	.macro waitmovementat index, map
-	.byte 0x52
-	.2byte \index
-	map \map
-	.endm
-
-	@ Attempts to hide the specified (index) Object on the current map, by setting its visibility flag if it has a valid one. If the Object does not have a valid visibility flag, this command does nothing.
-	.macro removeobject index
-	.byte 0x53
-	.2byte \index
+	@ If no map is specified, then the current map is used.
+	.macro waitmovement index, map
+		.ifb \map
+			.byte 0x51
+			.2byte \index
+		.else
+			.byte 0x52
+			.2byte \index
+			map \map
+		.endif
 	.endm
 
 	@ Attempts to hide the specified (index) Object on the specified (map_group, map_num) map, by setting its visibility flag if it has a valid one. If the Object does not have a valid visibility flag, this command does nothing.
-	.macro removeobjectat index, map
-	.byte 0x54
-	.2byte \index
-	map \map
-	.endm
-
-	@ Unsets the specified (index) Object's visibility flag on the current map if it has a valid one. If the Object does not have a valid visibility flag, this command does nothing.
-	.macro addobject index
-	.byte 0x55
-	.2byte \index
+	@ If no map is specified, then the current map is used.
+	.macro removeobject index, map
+		.ifb \map
+			.byte 0x53
+			.2byte \index
+		.else
+			.byte 0x54
+			.2byte \index
+			map \map
+		.endif
 	.endm
 
 	@ Unsets the specified (index) Object's visibility flag on the specified (map_group, map_num) map if it has a valid one. If the Object does not have a valid visibility flag, this command does nothing.
-	.macro addobjectat index, map
-	.byte 0x56
-	.2byte \index
-	map \map
+	@ If no map is specified, then the current map is used.
+	.macro addobject index, map
+		.ifb \map
+			.byte 0x55
+			.2byte \index
+		.else
+			.byte 0x56
+			.2byte \index
+			map \map
+		.endif
 	.endm
 
 	@ Sets the specified (index) Object's position on the current map.
@@ -592,7 +605,7 @@
 	.endm
 
 	@ If the script was called by an Object, then that Object will turn to face toward the metatile that the player is standing on.
-	.macro faceplayer 
+	.macro faceplayer
 	.byte 0x5a
 	.endm
 
@@ -659,15 +672,17 @@
 
 
 	@ Starts a trainer battle using the battle information stored in RAM (usually by trainerbattle, which actually calls this command behind-the-scenes), and blocks script execution until the battle finishes.
-	.macro trainerbattlebegin 
+	.macro trainerbattlebegin
 	.byte 0x5d
 	.endm
 
-	.macro ontrainerbattleend 
+	@ Goes to address after the trainerbattle command (called by the battle functions, see battle_setup.c)
+	.macro gotopostbattlescript
 	.byte 0x5e
 	.endm
 
-	.macro ontrainerbattleendgoto 
+	@ Goes to address specified in the trainerbattle command (called by the battle functions, see battle_setup.c)
+	.macro gotobeatenscript
 	.byte 0x5f
 	.endm
 
@@ -708,7 +723,7 @@
 	.endm
 
 	@ If a standard message box (or its text) is being drawn on-screen, this command blocks script execution until the box and its text have been fully drawn.
-	.macro waitmessage 
+	.macro waitmessage
 	.byte 0x66
 	.endm
 
@@ -719,32 +734,32 @@
 	.endm
 
 	@ Closes the current message box.
-	.macro closemessage 
+	.macro closemessage
 	.byte 0x68
 	.endm
 
 	@ Ceases movement for all Objects on-screen.
-	.macro lockall 
+	.macro lockall
 	.byte 0x69
 	.endm
 
 	@ If the script was called by an Object, then that Object's movement will cease.
-	.macro lock 
+	.macro lock
 	.byte 0x6a
 	.endm
 
 	@ Resumes normal movement for all Objects on-screen, and closes any standard message boxes that are still open.
-	.macro releaseall 
+	.macro releaseall
 	.byte 0x6b
 	.endm
 
 	@ If the script was called by an Object, then that Object's movement will resume. This command also closes any standard message boxes that are still open.
-	.macro release 
+	.macro release
 	.byte 0x6c
 	.endm
 
 	@ Blocks script execution until the player presses any key.
-	.macro waitbuttonpress 
+	.macro waitbuttonpress
 	.byte 0x6d
 	.endm
 
@@ -785,7 +800,7 @@
 	.endm
 
 	@ Nopped in Emerald.
-	.macro drawbox 
+	.macro drawbox
 	.byte 0x72
 	.endm
 
@@ -816,7 +831,7 @@
 	.endm
 
 	@ Hides all boxes displayed with drawmonpic.
-	.macro erasemonpic 
+	.macro erasemonpic
 	.byte 0x76
 	.endm
 
@@ -848,11 +863,11 @@
 	.2byte \species
 	.endm
 
-	.macro setmonmove byte1, byte2, word
+	.macro setmonmove index, slot, move
 	.byte 0x7b
-	.byte \byte1
-	.byte \byte2
-	.2byte \word
+	.byte \index
+	.byte \slot
+	.2byte \move
 	.endm
 
 	@ Checks if at least one Pokemon in the player's party knows the specified (index) attack. If so, variable 0x800D (LASTRESULT) is set to the (zero-indexed) slot number of the first Pokemon that knows the move. If not, LASTRESULT is set to 0x0006. Variable 0x8004 is also set to this Pokemon's species.
@@ -956,22 +971,22 @@
 	.endm
 
 	@ This allows you to choose a Pokemon to use in a contest. In FireRed, this command sets the byte at 0x03000EA8 to 0x01.
-	.macro choosecontestpkmn 
+	.macro choosecontestmon
 	.byte 0x8b
 	.endm
 
 	@ Starts a contest. In FireRed, this command is a nop.
-	.macro startcontest 
+	.macro startcontest
 	.byte 0x8c
 	.endm
 
 	@ Shows the results of a contest. In FireRed, this command is a nop.
-	.macro showcontestresults 
+	.macro showcontestresults
 	.byte 0x8d
 	.endm
 
 	@ Starts a contest over a link connection. In FireRed, this command is a nop.
-	.macro contestlinktransfer 
+	.macro contestlinktransfer
 	.byte 0x8e
 	.endm
 
@@ -1011,7 +1026,7 @@
 	.endm
 
 	@ Hides the secondary box spawned by showmoney.
-	.macro hidemoneybox 
+	.macro hidemoneybox
 	.byte 0x94
 	.endm
 
@@ -1022,10 +1037,10 @@
 	.byte \y
 	.endm
 
-	@ Gets the price reduction for the index (word) given. In FireRed, this command is a nop.
-	.macro getpricereduction word
+	@ Gets the price reduction for the index given. In FireRed, this command is a nop.
+	.macro getpricereduction index
 	.byte 0x96
-	.2byte \word
+	.2byte \index
 	.endm
 
 	@ Fades the screen to and from black and white. Mode 0x00 fades from black, mode 0x01 fades out to black, mode 0x2 fades in from white, and mode 0x3 fades out to white.
@@ -1076,13 +1091,13 @@
 	.endm
 
 	@ Sets which healing place the player will return to if all of the Pokemon in their party faint.
-	.macro setrespawn flightspot
+	.macro setrespawn heallocation
 	.byte 0x9f
-	.2byte \flightspot
+	.2byte \heallocation
 	.endm
 
 	@ Checks the player's gender. If male, then 0x0000 is stored in variable 0x800D (LASTRESULT). If female, then 0x0001 is stored in LASTRESULT.
-	.macro checkplayergender 
+	.macro checkplayergender
 	.byte 0xa0
 	.endm
 
@@ -1103,7 +1118,7 @@
 	.endm
 
 	@ Queues a weather change to the default weather for the map.
-	.macro resetweather 
+	.macro resetweather
 	.byte 0xa3
 	.endm
 
@@ -1114,7 +1129,7 @@
 	.endm
 
 	@ Executes the weather change queued with resetweather or setweather. The current weather will smoothly fade into the queued weather.
-	.macro doweather 
+	.macro doweather
 	.byte 0xa5
 	.endm
 
@@ -1173,7 +1188,7 @@
 	.endm
 
 	@ Waits for the door animation started with opendoor or closedoor to finish.
-	.macro waitdooranim 
+	.macro waitdooranim
 	.byte 0xae
 	.endm
 
@@ -1185,7 +1200,7 @@
 	.endm
 
 	@ Sets the door tile at (x, y) to be closed without an animation.
-	.macro setdoorclosed2 x, y
+	.macro setdoorclosed x, y
 	.byte 0xb0
 	.2byte \x
 	.2byte \y
@@ -1201,7 +1216,7 @@
 	.endm
 
 	@ In FireRed and Emerald, this command is a nop.
-	.macro showelevmenu 
+	.macro showelevmenu
 	.byte 0xb2
 	.endm
 
@@ -1215,9 +1230,9 @@
 	.2byte \count
 	.endm
 
-	.macro takecoins word
+	.macro takecoins count
 	.byte 0xb5
-	.2byte \word
+	.2byte \count
 	.endm
 
 	@ Prepares to start a wild battle against a species at Level level holding item. Running this command will not affect normal wild battles. You start the prepared battle with dowildbattle.
@@ -1229,14 +1244,13 @@
 	.endm
 
 	@ Starts a wild battle against the Pokemon generated by setwildbattle. Blocks script execution until the battle finishes.
-	.macro dowildbattle 
+	.macro dowildbattle
 	.byte 0xb7
 	.endm
 
-	.macro setvaddress long, word
+	.macro setvaddress pointer
 	.byte 0xb8
-	.4byte \long
-	.2byte \word
+	.4byte \pointer
 	.endm
 
 	.macro vgoto pointer
@@ -1314,7 +1328,7 @@
 	.endm
 
 	@ Blocks script execution until cry finishes.
-	.macro waitmoncry 
+	.macro waitmoncry
 	.byte 0xc5
 	.endm
 
@@ -1338,17 +1352,17 @@
 	.endm
 
 	@ The exact purpose of this command is unknown, but it is related to the blue help-text box that appears on the bottom of the screen when the Main Menu is opened.
-	.macro unloadhelp 
+	.macro unloadhelp
 	.byte 0xc9
 	.endm
 
 	@ After using this command, all standard message boxes will use the signpost frame.
-	.macro signmsg 
+	.macro signmsg
 	.byte 0xca
 	.endm
 
 	@ Ends the effects of signmsg, returning message box frames to normal.
-	.macro normalmsg 
+	.macro normalmsg
 	.byte 0xcb
 	.endm
 
@@ -1372,7 +1386,7 @@
 	.endm
 
 	@ Depending on factors I haven't managed to understand yet, this command may cause script execution to jump to the offset specified by the pointer at 0x020375C0.
-	.macro execram 
+	.macro execram
 	.byte 0xcf
 	.endm
 
@@ -1403,7 +1417,7 @@
 	.2byte \unknown
 	.endm
 
-	.macro mossdeepgym2 
+	.macro mossdeepgym2
 	.byte 0xd4
 	.endm
 
@@ -1413,7 +1427,7 @@
 	.2byte \var
 	.endm
 
-	.macro mossdeepgym4 
+	.macro mossdeepgym4
 	.byte 0xd6
 	.endm
 
@@ -1425,15 +1439,15 @@
 	.2byte \word2
 	.endm
 
-	.macro cmdD8 
+	.macro cmdD8
 	.byte 0xd8
 	.endm
 
-	.macro cmdD9 
+	.macro cmdD9
 	.byte 0xd9
 	.endm
 
-	.macro hidebox2 
+	.macro hidebox2
 	.byte 0xda
 	.endm
 
@@ -1498,7 +1512,7 @@
 	.endm
 
 	.macro case condition, dest
-	compare_var_to_value 0x8000, \condition
+	compare 0x8000, \condition
 	goto_eq \dest
 	.endm
 

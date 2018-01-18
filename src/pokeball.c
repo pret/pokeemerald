@@ -21,7 +21,7 @@ extern u8 gBankTarget;
 extern u16 gBattlePartyID[];
 extern u8 gBankSpriteIds[];
 extern u8 gHealthBoxesIds[];
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
 // this file's functions
 static void Task_DoPokeballSendOutAnim(u8 taskId);
@@ -773,11 +773,11 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 if (IsBGMPlaying())
-                    m4aMPlayStop(&gMPlay_BGM);
+                    m4aMPlayStop(&gMPlayInfo_BGM);
             }
             else
             {
-                m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
             }
         }
 
@@ -885,7 +885,7 @@ static void sub_80760F8(struct Sprite *sprite)
     {
         gDoingBattleAnim = FALSE;
         m4aMPlayAllStop();
-        PlaySE(BGM_FANFA5);
+        PlaySE(MUS_FANFA5);
     }
     else if (sprite->data[4] == 315)
     {

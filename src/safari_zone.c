@@ -5,6 +5,7 @@
 #include "main.h"
 #include "battle.h"
 #include "string_util.h"
+#include "pokeblock.h"
 
 struct PokeblockFeeder
 {
@@ -24,7 +25,6 @@ extern u8 EventScript_2A4B8A[];
 extern u8 EventScript_2A4B6F[];
 extern u8 EventScript_2A4B4C[];
 extern u8 EventScript_2A4B9B[];
-extern const u8* const gPokeblockNames[];
 
 extern void sub_80EE44C(u8, u8);
 extern void IncrementGameStat(u8 index);
@@ -105,7 +105,7 @@ void SafariZoneRetirePrompt(void)
     ScriptContext1_SetupScript(EventScript_2A4B6F);
 }
 
-void sub_80FC190(void)
+void CB2_EndSafariBattle(void)
 {
     sSafariZoneFleedMons += gBattleResults.field_1F;
     if (gBattleOutcome == BATTLE_CAUGHT)

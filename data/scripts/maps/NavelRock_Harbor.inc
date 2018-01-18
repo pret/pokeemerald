@@ -5,7 +5,7 @@ NavelRock_Harbor_EventScript_2690BD:: @ 82690BD
 	lock
 	faceplayer
 	msgbox NavelRock_Harbor_Text_2C6CE6, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq NavelRock_Harbor_EventScript_269102
 	msgbox NavelRock_Harbor_Text_2A6A5D, 4
 	closemessage

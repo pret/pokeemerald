@@ -3,7 +3,7 @@ RusturfTunnel: @ 8483F30
 	.4byte RusturfTunnel_MapEvents
 	.4byte RusturfTunnel_MapScripts
 	.4byte 0x0
-	.2byte BGM_DAN01
+	.2byte MUS_DAN01
 	.2byte 129
 	.byte 60
 	.byte 0

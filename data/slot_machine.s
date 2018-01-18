@@ -241,8 +241,28 @@ gUnknown_085A8264:: @ 85A8264
 gUnknown_085A82CC:: @ 85A82CC
 	.incbin "baserom.gba", 0x5a82cc, 0x68
 
+	.align 2
 gUnknown_085A8334:: @ 85A8334
-	.incbin "baserom.gba", 0x5a8334, 0xb0
+	obj_tiles gSlotMachineReelSymbol1Tiles, 0x0200, 0x0000
+	obj_tiles gSlotMachineReelSymbol2Tiles, 0x0200, 0x0001
+	obj_tiles gSlotMachineReelSymbol3Tiles, 0x0200, 0x0002
+	obj_tiles gSlotMachineReelSymbol4Tiles, 0x0200, 0x0003
+	obj_tiles gSlotMachineReelSymbol5Tiles, 0x0200, 0x0004
+	obj_tiles gSlotMachineReelSymbol6Tiles, 0x0200, 0x0005
+	obj_tiles gSlotMachineReelSymbol7Tiles, 0x0200, 0x0006
+	obj_tiles gSlotMachineNumber0Tiles, 0x0040, 0x0007
+	obj_tiles gSlotMachineNumber1Tiles, 0x0040, 0x0008
+	obj_tiles gSlotMachineNumber2Tiles, 0x0040, 0x0009
+	obj_tiles gSlotMachineNumber3Tiles, 0x0040, 0x000A
+	obj_tiles gSlotMachineNumber4Tiles, 0x0040, 0x000B
+	obj_tiles gSlotMachineNumber5Tiles, 0x0040, 0x000C
+	obj_tiles gSlotMachineNumber6Tiles, 0x0040, 0x000D
+	obj_tiles gSlotMachineNumber7Tiles, 0x0040, 0x000E
+	obj_tiles gSlotMachineNumber8Tiles, 0x0040, 0x000F
+	obj_tiles gSlotMachineNumber9Tiles, 0x0040, 0x0010
+
+	.align 2
+	.incbin "baserom.gba", 0x5a83bc, 0x28
 
 gUnknown_085A83E4:: @ 85A83E4
 	.incbin "baserom.gba", 0x5a83e4, 0x24
@@ -277,8 +297,17 @@ gUnknown_085A8520:: @ 85A8520
 gUnknown_085A8524:: @ 85A8524
 	.incbin "baserom.gba", 0x5a8524, 0x20
 
+	.align 2
 gUnknown_085A8544:: @ 85A8544
-	.incbin "baserom.gba", 0x5a8544, 0x48
+	obj_pal gUnknown_08DCF170, 0
+	obj_pal gUnknown_08DCF190, 1
+	obj_pal gUnknown_08DCF1B0, 2
+	obj_pal gSlotMachineReelTime_Pal, 3
+	obj_pal gUnknown_08DCF1F0, 4
+	obj_pal gUnknown_08DCF210, 5
+	obj_pal gUnknown_08DCF230, 6
+	obj_pal gUnknown_08DCF1F0, 7
+	null_obj_pal
 
 gUnknown_085A858C:: @ 85A858C
 	.incbin "baserom.gba", 0x5a858c, 0x1154

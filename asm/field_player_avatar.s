@@ -57,7 +57,7 @@ player_step: @ 808A9C0
 	bne _0808AA26
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_8119C3C
+	bl Bike_TryAcroBikeHistoryUpdate
 	adds r0, r5, 0
 	mov r1, r8
 	bl TryInterruptFieldObjectSpecialAnim
@@ -405,7 +405,7 @@ DoForcedMovementInCurrentDirection: @ 808AC58
 	thumb_func_start ForcedMovement_Slip
 ForcedMovement_Slip: @ 808AC8C
 	push {lr}
-	ldr r0, =PlayerGoSpeed1
+	ldr r0, =PlayerGoSpeed2
 	bl DoForcedMovementInCurrentDirection
 	lsls r0, 24
 	lsrs r0, 24
@@ -417,7 +417,7 @@ ForcedMovement_Slip: @ 808AC8C
 	thumb_func_start ForcedMovement_WalkSouth
 ForcedMovement_WalkSouth: @ 808ACA0
 	push {lr}
-	ldr r1, =PlayerGoSpeed0
+	ldr r1, =PlayerGoSpeed1
 	movs r0, 0x1
 	bl DoForcedMovement
 	lsls r0, 24
@@ -430,7 +430,7 @@ ForcedMovement_WalkSouth: @ 808ACA0
 	thumb_func_start ForcedMovement_WalkNorth
 ForcedMovement_WalkNorth: @ 808ACB8
 	push {lr}
-	ldr r1, =PlayerGoSpeed0
+	ldr r1, =PlayerGoSpeed1
 	movs r0, 0x2
 	bl DoForcedMovement
 	lsls r0, 24
@@ -443,7 +443,7 @@ ForcedMovement_WalkNorth: @ 808ACB8
 	thumb_func_start ForcedMovement_WalkWest
 ForcedMovement_WalkWest: @ 808ACD0
 	push {lr}
-	ldr r1, =PlayerGoSpeed0
+	ldr r1, =PlayerGoSpeed1
 	movs r0, 0x3
 	bl DoForcedMovement
 	lsls r0, 24
@@ -456,7 +456,7 @@ ForcedMovement_WalkWest: @ 808ACD0
 	thumb_func_start ForcedMovement_WalkEast
 ForcedMovement_WalkEast: @ 808ACE8
 	push {lr}
-	ldr r1, =PlayerGoSpeed0
+	ldr r1, =PlayerGoSpeed1
 	movs r0, 0x4
 	bl DoForcedMovement
 	lsls r0, 24
@@ -469,7 +469,7 @@ ForcedMovement_WalkEast: @ 808ACE8
 	thumb_func_start ForcedMovement_PushedSouthByCurrent
 ForcedMovement_PushedSouthByCurrent: @ 808AD00
 	push {lr}
-	ldr r1, =PlayerGoSpeed2
+	ldr r1, =PlayerGoSpeed3
 	movs r0, 0x1
 	bl DoForcedMovement
 	lsls r0, 24
@@ -482,7 +482,7 @@ ForcedMovement_PushedSouthByCurrent: @ 808AD00
 	thumb_func_start ForcedMovement_PushedNorthByCurrent
 ForcedMovement_PushedNorthByCurrent: @ 808AD18
 	push {lr}
-	ldr r1, =PlayerGoSpeed2
+	ldr r1, =PlayerGoSpeed3
 	movs r0, 0x2
 	bl DoForcedMovement
 	lsls r0, 24
@@ -495,7 +495,7 @@ ForcedMovement_PushedNorthByCurrent: @ 808AD18
 	thumb_func_start ForcedMovement_PushedWestByCurrent
 ForcedMovement_PushedWestByCurrent: @ 808AD30
 	push {lr}
-	ldr r1, =PlayerGoSpeed2
+	ldr r1, =PlayerGoSpeed3
 	movs r0, 0x3
 	bl DoForcedMovement
 	lsls r0, 24
@@ -508,7 +508,7 @@ ForcedMovement_PushedWestByCurrent: @ 808AD30
 	thumb_func_start ForcedMovement_PushedEastByCurrent
 ForcedMovement_PushedEastByCurrent: @ 808AD48
 	push {lr}
-	ldr r1, =PlayerGoSpeed2
+	ldr r1, =PlayerGoSpeed3
 	movs r0, 0x4
 	bl DoForcedMovement
 	lsls r0, 24
@@ -548,7 +548,7 @@ ForcedMovement_Slide: @ 808AD60
 	thumb_func_start ForcedMovement_SlideSouth
 ForcedMovement_SlideSouth: @ 808AD98
 	push {lr}
-	ldr r1, =PlayerGoSpeed1
+	ldr r1, =PlayerGoSpeed2
 	movs r0, 0x1
 	bl ForcedMovement_Slide
 	lsls r0, 24
@@ -561,7 +561,7 @@ ForcedMovement_SlideSouth: @ 808AD98
 	thumb_func_start ForcedMovement_SlideNorth
 ForcedMovement_SlideNorth: @ 808ADB0
 	push {lr}
-	ldr r1, =PlayerGoSpeed1
+	ldr r1, =PlayerGoSpeed2
 	movs r0, 0x2
 	bl ForcedMovement_Slide
 	lsls r0, 24
@@ -574,7 +574,7 @@ ForcedMovement_SlideNorth: @ 808ADB0
 	thumb_func_start ForcedMovement_SlideWest
 ForcedMovement_SlideWest: @ 808ADC8
 	push {lr}
-	ldr r1, =PlayerGoSpeed1
+	ldr r1, =PlayerGoSpeed2
 	movs r0, 0x3
 	bl ForcedMovement_Slide
 	lsls r0, 24
@@ -587,7 +587,7 @@ ForcedMovement_SlideWest: @ 808ADC8
 	thumb_func_start ForcedMovement_SlideEast
 ForcedMovement_SlideEast: @ 808ADE0
 	push {lr}
-	ldr r1, =PlayerGoSpeed1
+	ldr r1, =PlayerGoSpeed2
 	movs r0, 0x4
 	bl ForcedMovement_Slide
 	lsls r0, 24
@@ -630,19 +630,19 @@ ForcedMovement_MuddySlope: @ 808AE10
 	ands r0, r1
 	cmp r0, 0x20
 	bne _0808AE36
-	bl sub_811A138
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x3
 	bgt _0808AE60
 _0808AE36:
 	movs r0, 0
-	bl sub_811A114
+	bl Bike_UpdateBikeCounterSpeed
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x2
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	ldr r1, =PlayerGoSpeed1
+	ldr r1, =PlayerGoSpeed2
 	movs r0, 0x1
 	bl DoForcedMovement
 	lsls r0, 24
@@ -791,7 +791,7 @@ _0808AF4E:
 	cmp r0, 0
 	beq _0808AF68
 	adds r0, r5, 0
-	bl PlayerGoSpeed1
+	bl PlayerGoSpeed2
 	b _0808AFB6
 	.pool
 _0808AF68:
@@ -829,7 +829,7 @@ _0808AF68:
 	.pool
 _0808AFB0:
 	adds r0, r5, 0
-	bl PlayerGoSpeed0
+	bl PlayerGoSpeed1
 _0808AFB6:
 	pop {r4-r6}
 	pop {r0}
@@ -1471,7 +1471,7 @@ PlayerAvatarTransition_MachBike: @ 808B46C
 	bl SetPlayerAvatarStateMask
 	movs r0, 0
 	movs r1, 0
-	bl sub_811A0D0
+	bl BikeClearState
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1497,8 +1497,8 @@ PlayerAvatarTransition_AcroBike: @ 808B4A0
 	bl SetPlayerAvatarStateMask
 	movs r0, 0
 	movs r1, 0
-	bl sub_811A0D0
-	bl sub_811A188
+	bl BikeClearState
+	bl Bike_HandleBumpySlopeJump
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1774,9 +1774,9 @@ sub_808B6BC: @ 808B6BC
 	.pool
 	thumb_func_end sub_808B6BC
 
-	thumb_func_start player_npc_set_state_and_x22_etc
-@ void player_npc_set_state_and_x22_etc(u8 animState, u8 a2)
-player_npc_set_state_and_x22_etc: @ 808B6E4
+	thumb_func_start PlayerSetAnimId
+@ void PlayerSetAnimId(u8 animState, u8 a2)
+PlayerSetAnimId: @ 808B6E4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1802,11 +1802,11 @@ _0808B712:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end player_npc_set_state_and_x22_etc
+	thumb_func_end PlayerSetAnimId
 
-	thumb_func_start PlayerGoSpeed0
-@ void PlayerGoSpeed0(u8 direction)
-PlayerGoSpeed0: @ 808B720
+	thumb_func_start PlayerGoSpeed1
+@ void PlayerGoSpeed1(u8 direction)
+PlayerGoSpeed1: @ 808B720
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1814,14 +1814,14 @@ PlayerGoSpeed0: @ 808B720
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
-	thumb_func_end PlayerGoSpeed0
+	thumb_func_end PlayerGoSpeed1
 
-	thumb_func_start PlayerGoSpeed1
-@ void PlayerGoSpeed1(u8 direction)
-PlayerGoSpeed1: @ 808B738
+	thumb_func_start PlayerGoSpeed2
+@ void PlayerGoSpeed2(u8 direction)
+PlayerGoSpeed2: @ 808B738
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1829,14 +1829,14 @@ PlayerGoSpeed1: @ 808B738
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
-	thumb_func_end PlayerGoSpeed1
+	thumb_func_end PlayerGoSpeed2
 
-	thumb_func_start PlayerGoSpeed2
-@ void PlayerGoSpeed2(u8 direction)
-PlayerGoSpeed2: @ 808B750
+	thumb_func_start PlayerGoSpeed3
+@ void PlayerGoSpeed3(u8 direction)
+PlayerGoSpeed3: @ 808B750
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1844,14 +1844,14 @@ PlayerGoSpeed2: @ 808B750
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
-	thumb_func_end PlayerGoSpeed2
+	thumb_func_end PlayerGoSpeed3
 
-	thumb_func_start PlayerGoSpeed3
-@ void PlayerGoSpeed3(u8 direction)
-PlayerGoSpeed3: @ 808B768
+	thumb_func_start PlayerGoSpeed4
+@ void PlayerGoSpeed4(u8 direction)
+PlayerGoSpeed4: @ 808B768
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1859,10 +1859,10 @@ PlayerGoSpeed3: @ 808B768
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
-	thumb_func_end PlayerGoSpeed3
+	thumb_func_end PlayerGoSpeed4
 
 	thumb_func_start PlayerRun
 @ void PlayerRun(u8 direction)
@@ -1874,7 +1874,7 @@ PlayerRun: @ 808B780
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
 	thumb_func_end PlayerRun
@@ -1893,7 +1893,7 @@ PlayerOnBikeCollide: @ 808B798
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1909,7 +1909,7 @@ PlayerOnBikeCollideWithFarawayIslandMew: @ 808B7BC
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
 	thumb_func_end PlayerOnBikeCollideWithFarawayIslandMew
@@ -1928,7 +1928,7 @@ PlayerNotOnBikeCollide: @ 808B7D4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1944,7 +1944,7 @@ PlayerNotOnBikeCollideWithFarawayIslandMew: @ 808B7F8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
 	thumb_func_end PlayerNotOnBikeCollideWithFarawayIslandMew
@@ -1959,7 +1959,7 @@ PlayerFaceDirection: @ 808B810
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
 	thumb_func_end PlayerFaceDirection
@@ -1974,7 +1974,7 @@ PlayerTurnInPlace: @ 808B828
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
 	thumb_func_end PlayerTurnInPlace
@@ -1993,7 +1993,7 @@ PlayerJumpLedge: @ 808B840
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x8
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2033,8 +2033,8 @@ _0808B89A:
 	.pool
 	thumb_func_end sub_808B864
 
-	thumb_func_start sub_808B8A8
-sub_808B8A8: @ 808B8A8
+	thumb_func_start PlayerIdleWheelie
+PlayerIdleWheelie: @ 808B8A8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2042,13 +2042,13 @@ sub_808B8A8: @ 808B8A8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808B8A8
+	thumb_func_end PlayerIdleWheelie
 
-	thumb_func_start sub_808B8C0
-sub_808B8C0: @ 808B8C0
+	thumb_func_start PlayerStartWheelie
+PlayerStartWheelie: @ 808B8C0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2056,13 +2056,13 @@ sub_808B8C0: @ 808B8C0
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808B8C0
+	thumb_func_end PlayerStartWheelie
 
-	thumb_func_start sub_808B8D8
-sub_808B8D8: @ 808B8D8
+	thumb_func_start PlayerEndWheelie
+PlayerEndWheelie: @ 808B8D8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2070,13 +2070,13 @@ sub_808B8D8: @ 808B8D8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808B8D8
+	thumb_func_end PlayerEndWheelie
 
-	thumb_func_start sub_808B8F0
-sub_808B8F0: @ 808B8F0
+	thumb_func_start PlayerStandingHoppingWheelie
+PlayerStandingHoppingWheelie: @ 808B8F0
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2088,14 +2088,14 @@ sub_808B8F0: @ 808B8F0
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808B8F0
+	thumb_func_end PlayerStandingHoppingWheelie
 
-	thumb_func_start sub_808B914
-sub_808B914: @ 808B914
+	thumb_func_start PlayerMovingHoppingWheelie
+PlayerMovingHoppingWheelie: @ 808B914
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2107,14 +2107,14 @@ sub_808B914: @ 808B914
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808B914
+	thumb_func_end PlayerMovingHoppingWheelie
 
-	thumb_func_start sub_808B938
-sub_808B938: @ 808B938
+	thumb_func_start PlayerLedgeHoppingWheelie
+PlayerLedgeHoppingWheelie: @ 808B938
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2126,14 +2126,14 @@ sub_808B938: @ 808B938
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x8
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808B938
+	thumb_func_end PlayerLedgeHoppingWheelie
 
-	thumb_func_start sub_808B95C
-sub_808B95C: @ 808B95C
+	thumb_func_start PlayerAcroTurnJump
+PlayerAcroTurnJump: @ 808B95C
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2145,11 +2145,11 @@ sub_808B95C: @ 808B95C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808B95C
+	thumb_func_end PlayerAcroTurnJump
 
 	thumb_func_start sub_808B980
 sub_808B980: @ 808B980
@@ -2164,7 +2164,7 @@ sub_808B980: @ 808B980
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2179,7 +2179,7 @@ sub_808B9A4: @ 808B9A4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
 	thumb_func_end sub_808B9A4
@@ -2193,7 +2193,7 @@ sub_808B9BC: @ 808B9BC
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
 	thumb_func_end sub_808B9BC
@@ -2207,7 +2207,7 @@ npc_use_some_d2s: @ 808B9D4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl player_npc_set_state_and_x22_etc
+	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
 	thumb_func_end npc_use_some_d2s
@@ -2592,9 +2592,9 @@ sub_808BCF4: @ 808BCF4
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808BD2C
-	bl sub_811A188
+	bl Bike_HandleBumpySlopeJump
 	movs r0, 0
-	bl sub_811A114
+	bl Bike_UpdateBikeCounterSpeed
 _0808BD2C:
 	pop {r4}
 	pop {r0}
@@ -3896,7 +3896,7 @@ sub_808C750: @ 808C750
 	lsls r4, 24
 	lsrs r4, 24
 	bl ScriptContext2_Enable
-	bl sav1_reset_battle_music_maybe
+	bl Overworld_ClearSavedMusic
 	bl Overworld_ChangeMusicToDefault
 	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2]

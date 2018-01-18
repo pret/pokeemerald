@@ -3,7 +3,7 @@ BattleFrontier_BattleTowerBattleRoom: @ 848521C
 	.4byte BattleFrontier_BattleTowerBattleRoom_MapEvents
 	.4byte BattleFrontier_BattleTowerBattleRoom_MapScripts
 	.4byte 0x0
-	.2byte BGM_BATTLE_TOWER
+	.2byte MUS_SATTOWER
 	.2byte 268
 	.byte 58
 	.byte 0

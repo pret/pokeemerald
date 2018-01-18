@@ -266,7 +266,7 @@ sub_80FD254: @ 80FD254
 	ldr r1, =bag_menu_mail_related
 	mov r0, sp
 	movs r2, 0
-	bl sub_8121478
+	bl ReadMail
 	add sp, 0x24
 	pop {r0}
 	bx r0
@@ -354,7 +354,7 @@ _080FD320:
 	bl sav1_map_is_biking_allowed
 	cmp r0, 0x1
 	bne _080FD348
-	bl sub_8119FF8
+	bl IsBikingDisallowedByPlayer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FD348
@@ -1497,7 +1497,7 @@ sub_80FDBEC: @ 80FDBEC
 	push {lr}
 	ldr r1, =bag_menu_mail_related
 	movs r0, 0
-	bl sub_81357FC
+	bl OpenPokeblockCase
 	pop {r0}
 	bx r0
 	.pool
@@ -1517,7 +1517,7 @@ sub_80FDC00: @ 80FDC00
 	bl overworld_free_bg_tilemaps
 	ldr r1, =c2_exit_to_overworld_2_switch
 	movs r0, 0
-	bl sub_81357FC
+	bl OpenPokeblockCase
 	adds r0, r4, 0
 	bl DestroyTask
 _080FDC24:

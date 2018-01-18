@@ -17,23 +17,23 @@ LilycoveCity_Harbor_EventScript_21E00F:: @ 821E00F
 	call LilycoveCity_Harbor_EventScript_21E22A
 	call LilycoveCity_Harbor_EventScript_21E25C
 	call LilycoveCity_Harbor_EventScript_21E2A6
-	compare_var_to_value VAR_0x400C, 2
+	compare VAR_0x400C, 2
 	goto_eq LilycoveCity_Harbor_EventScript_21E350
-	compare_var_to_value VAR_0x400B, 1
+	compare VAR_0x400B, 1
 	goto_eq LilycoveCity_Harbor_EventScript_21E2F0
-	compare_var_to_value VAR_0x400B, 2
+	compare VAR_0x400B, 2
 	goto_eq LilycoveCity_Harbor_EventScript_21E320
-	compare_var_to_value VAR_0x400B, 4
+	compare VAR_0x400B, 4
 	goto_eq LilycoveCity_Harbor_EventScript_21E350
-	compare_var_to_value VAR_0x400B, 8
+	compare VAR_0x400B, 8
 	goto_eq LilycoveCity_Harbor_EventScript_21E41D
-	compare_var_to_value VAR_0x400B, 0
+	compare VAR_0x400B, 0
 	goto_if 5, LilycoveCity_Harbor_EventScript_21E44D
 	goto LilycoveCity_Harbor_EventScript_21E080
 	end
 
 LilycoveCity_Harbor_EventScript_21E080:: @ 821E080
-	compare_var_to_value VAR_0x400A, 0
+	compare VAR_0x400A, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E557
 	msgbox LilycoveCity_Harbor_Text_21E758, 4
 	message LilycoveCity_Harbor_Text_21E7ED
@@ -87,7 +87,7 @@ LilycoveCity_Harbor_EventScript_21E139:: @ 821E139
 
 LilycoveCity_Harbor_EventScript_21E149:: @ 821E149
 	msgbox LilycoveCity_Harbor_Text_21E864, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	setvar VAR_PORTHOLE, 5
 	call LilycoveCity_Harbor_EventScript_21E5CC
@@ -98,7 +98,7 @@ LilycoveCity_Harbor_EventScript_21E149:: @ 821E149
 
 LilycoveCity_Harbor_EventScript_21E171:: @ 821E171
 	msgbox LilycoveCity_Harbor_Text_21E880, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	call LilycoveCity_Harbor_EventScript_21E5CC
 	warp BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
@@ -111,7 +111,7 @@ LilycoveCity_Harbor_EventScript_21E194:: @ 821E194
 	checkflag FLAG_SYS_HAS_EON_TICKET
 	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_EON_TICKET, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_0x400E, 1
 	checkflag FLAG_0x1AE
@@ -124,7 +124,7 @@ LilycoveCity_Harbor_EventScript_21E1C6:: @ 821E1C6
 	checkflag FLAG_0x8D5
 	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_AURORA_TICKET, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_0x400D, 1
 	checkflag FLAG_0x1AF
@@ -137,7 +137,7 @@ LilycoveCity_Harbor_EventScript_21E1F8:: @ 821E1F8
 	checkflag FLAG_0x8D6
 	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_OLD_SEA_MAP, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_0x400C, 1
 	checkflag FLAG_0x1B0
@@ -150,7 +150,7 @@ LilycoveCity_Harbor_EventScript_21E22A:: @ 821E22A
 	checkflag FLAG_0x8E0
 	goto_if 0, LilycoveCity_Harbor_EventScript_27374E
 	checkitem ITEM_MYSTIC_TICKET, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_27374E
 	setvar VAR_0x4009, 1
 	checkflag FLAG_0x1DB
@@ -160,13 +160,13 @@ LilycoveCity_Harbor_EventScript_21E22A:: @ 821E22A
 
 LilycoveCity_Harbor_EventScript_21E25C:: @ 821E25C
 	setvar VAR_0x400B, 0
-	compare_var_to_value VAR_0x400E, 2
+	compare VAR_0x400E, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E28E
-	compare_var_to_value VAR_0x400D, 2
+	compare VAR_0x400D, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E294
-	compare_var_to_value VAR_0x400C, 2
+	compare VAR_0x400C, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E29A
-	compare_var_to_value VAR_0x4009, 2
+	compare VAR_0x4009, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E2A0
 	return
 
@@ -188,13 +188,13 @@ LilycoveCity_Harbor_EventScript_21E2A0:: @ 821E2A0
 
 LilycoveCity_Harbor_EventScript_21E2A6:: @ 821E2A6
 	setvar VAR_0x400A, 0
-	compare_var_to_value VAR_0x400E, 1
+	compare VAR_0x400E, 1
 	call_if 1, LilycoveCity_Harbor_EventScript_21E2D8
-	compare_var_to_value VAR_0x400D, 1
+	compare VAR_0x400D, 1
 	call_if 1, LilycoveCity_Harbor_EventScript_21E2DE
-	compare_var_to_value VAR_0x400C, 1
+	compare VAR_0x400C, 1
 	call_if 1, LilycoveCity_Harbor_EventScript_21E2E4
-	compare_var_to_value VAR_0x4009, 1
+	compare VAR_0x4009, 1
 	call_if 1, LilycoveCity_Harbor_EventScript_21E2EA
 	return
 
@@ -262,25 +262,25 @@ LilycoveCity_Harbor_EventScript_21E350:: @ 821E350
 	waitmovement 0
 	applymovement 4, LilycoveCity_Harbor_Movement_27259A
 	waitmovement 0
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E656
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_21E661
 	addobject 5
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E675
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_21E680
 	msgbox LilycoveCity_Harbor_Text_2C6951, 4
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E68B
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_21E696
 	msgbox LilycoveCity_Harbor_Text_2C69AA, 4
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E6A1
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_21E6BA
 	setvar VAR_0x8004, 2
 	call LilycoveCity_Harbor_EventScript_2721E2
@@ -367,9 +367,9 @@ LilycoveCity_Harbor_EventScript_21E514:: @ 821E514
 	waitmovement 0
 	delay 30
 	removeobject 4
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E61B
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_21E610
 	delay 30
 	hideobjectat 255, PETALBURG_CITY
@@ -396,7 +396,7 @@ LilycoveCity_Harbor_EventScript_21E56B:: @ 821E56B
 
 LilycoveCity_Harbor_EventScript_21E575:: @ 821E575
 	msgbox LilycoveCity_Harbor_Text_21E864, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	setvar VAR_PORTHOLE, 5
 	call LilycoveCity_Harbor_EventScript_21E5CC
@@ -407,7 +407,7 @@ LilycoveCity_Harbor_EventScript_21E575:: @ 821E575
 
 LilycoveCity_Harbor_EventScript_21E59D:: @ 821E59D
 	msgbox LilycoveCity_Harbor_Text_21E880, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_Harbor_EventScript_21E5C0
 	call LilycoveCity_Harbor_EventScript_21E5CC
 	warp BATTLE_FRONTIER_OUTSIDE_WEST, 255, 19, 67
@@ -428,9 +428,9 @@ LilycoveCity_Harbor_EventScript_21E5CC:: @ 821E5CC
 	waitmovement 0
 	delay 30
 	hideobjectat VAR_LAST_TALKED, LILYCOVE_CITY_HARBOR
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if 1, LilycoveCity_Harbor_EventScript_21E61B
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if 1, LilycoveCity_Harbor_EventScript_21E610
 	delay 30
 	hideobjectat 255, PETALBURG_CITY

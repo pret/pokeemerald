@@ -5,7 +5,7 @@ SootopolisCity_House3_EventScript_226B72:: @ 8226B72
 	lock
 	faceplayer
 	msgbox SootopolisCity_House3_Text_226BA4, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SootopolisCity_House3_EventScript_226B91
 	msgbox SootopolisCity_House3_Text_226C44, 4
 	release

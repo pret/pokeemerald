@@ -22,7 +22,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADB0:: @ 820ADB0
 SlateportCity_OceanicMuseum_1F_EventScript_20ADC1:: @ 820ADC1
 	showmoneybox 0, 0, 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20AFD5, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20ADE8
 	closemessage
 	hidemoneybox
@@ -35,7 +35,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_20ADC1:: @ 820ADC1
 
 SlateportCity_OceanicMuseum_1F_EventScript_20ADE8:: @ 820ADE8
 	checkmoney 0x32, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AE18
 	playse SE_REGI
 	takemoney 0x32, 0
@@ -162,18 +162,18 @@ SlateportCity_OceanicMuseum_1F_EventScript_20AEF8:: @ 820AEF8
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B3AB, 4
 	giveitem_std ITEM_TM46
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AFB5
 	setflag FLAG_0x10D
 	msgbox SlateportCity_OceanicMuseum_1F_Text_20B449, 4
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF6C
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF83
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF93
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	goto_eq SlateportCity_OceanicMuseum_1F_EventScript_20AF93
 	end
 

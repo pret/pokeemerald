@@ -6652,12 +6652,12 @@ sub_80DB0C4: @ 80DB0C4
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_08587C00
 	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_08C1C6B8
+	ldr r0, =gContest2Pal
 	movs r1, 0x88
 	lsls r1, 1
 	movs r2, 0x20
 	bl LoadCompressedPalette
-	ldr r0, =gUnknown_08587BE8
+	ldr r0, =gSpriteTemplate_8587BE8
 	movs r1, 0x70
 	movs r2, 0x24
 	movs r3, 0x1E
@@ -6692,7 +6692,7 @@ sub_80DB120: @ 80DB120
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_08587C10
 	bl LoadCompressedObjectPalette
-	ldr r0, =gUnknown_08587C18
+	ldr r0, =gSpriteTemplate_8587C18
 	movs r1, 0x60
 	movs r2, 0xA
 	movs r3, 0x1D
@@ -8891,7 +8891,7 @@ _080DC226:
 	ble _080DC284
 	movs r0, 0x60
 	bl PlaySE
-	ldr r4, =gMPlay_SE1
+	ldr r4, =gMPlayInfo_SE1
 	adds r0, r4, 0
 	bl m4aMPlayImmInit
 	ldr r1, =0x0000ffff
@@ -8946,7 +8946,7 @@ _080DC2C8:
 	ldrb r0, [r0]
 	adds r0, r5
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_08587AD0
+	ldr r0, =gSpriteTemplate_8587AD0
 	movs r1, 0xB4
 	movs r3, 0x1
 	bl CreateSprite
@@ -9240,7 +9240,7 @@ _080DC506:
 	ldr r1, =gUnknown_08587AE8
 	adds r0, r1
 	bl LoadCompressedObjectPic
-	ldr r0, =gUnknown_08587B18
+	ldr r0, =gSpriteTemplate_8587B18
 	adds r0, r6, r0
 	ldr r2, =gUnknown_08587A70
 	ldr r1, =gUnknown_02039F26
@@ -9264,7 +9264,7 @@ _080DC506:
 	adds r0, r1
 	lsls r0, 2
 	add r0, r8
-	ldr r1, =gUnknown_08587B80
+	ldr r1, =gSubspriteTables_8587B80
 	bl SetSubspriteTables
 	ldr r0, [r7]
 	ldr r0, [r0, 0x14]
@@ -9298,7 +9298,7 @@ sub_80DC594: @ 80DC594
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_08587BB8
 	bl LoadSpritePalette
-	ldr r0, =gUnknown_08587BC8
+	ldr r0, =gSpriteTemplate_8587BC8
 	movs r1, 0x1E
 	movs r2, 0x2C
 	movs r3, 0x1
@@ -9877,7 +9877,7 @@ sub_80DC9EC: @ 80DC9EC
 	lsls r4, r2, 1
 	adds r4, r2
 	lsls r4, 3
-	ldr r0, =gUnknown_0858998C
+	ldr r0, =gSpriteTemplate_858998C
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB8
@@ -11731,7 +11731,7 @@ _080DD956:
 	ldr r1, [r0]
 	movs r0, 0x13
 	ldrsb r0, [r1, r0]
-	ldr r4, =gUnknown_08D8EC24
+	ldr r4, =gContestApplauseMeterGfx
 	cmp r5, r0
 	bge _080DD966
 	adds r4, 0x40

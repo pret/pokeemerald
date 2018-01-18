@@ -62,7 +62,7 @@ _0809BF3C:
 	cmp r6, 0
 	bne _0809BFA2
 _0809BF40:
-	bl sub_811A138
+	bl GetPlayerSpeed
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0x4
@@ -721,7 +721,7 @@ TryGetInvisibleMapObjectScript: @ 809C458
 	ldr r2, [r0, 0x8]
 	cmp r2, 0
 	bne _0809C490
-	ldr r0, =EventScript_2C8436
+	ldr r0, =EventScript_TestSignpostMsg
 	b _0809C532
 	.pool
 _0809C490:
@@ -1365,7 +1365,7 @@ per_step_scripts: @ 809C9F4
 	bne _0809CA04
 	b _0809CB24
 _0809CA04:
-	bl sub_80B215C
+	bl IncrementRematchStepCounter
 	bl AdjustFriendship_step
 	bl sub_81D4998
 	ldr r0, =gPlayerAvatar
@@ -1531,8 +1531,8 @@ _0809CB72:
 	.pool
 	thumb_func_end AdjustFriendship_step
 
-	thumb_func_start overworld_poison_timer_set
-overworld_poison_timer_set: @ 809CB80
+	thumb_func_start ResetPoisonStepCounter
+ResetPoisonStepCounter: @ 809CB80
 	push {lr}
 	ldr r0, =0x0000402b
 	movs r1, 0
@@ -1540,7 +1540,7 @@ overworld_poison_timer_set: @ 809CB80
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end overworld_poison_timer_set
+	thumb_func_end ResetPoisonStepCounter
 
 	thumb_func_start overworld_poison_step
 overworld_poison_step: @ 809CB94

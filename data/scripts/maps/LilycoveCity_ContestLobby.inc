@@ -10,7 +10,7 @@ LilycoveCity_ContestLobby_MapScript1_21A21C: @ 821A21C
 
 LilycoveCity_ContestLobby_EventScript_21A227:: @ 821A227
 	getpricereduction 4
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A23C
 	clearflag FLAG_0x369
 	setflag FLAG_0x340
@@ -45,9 +45,9 @@ LilycoveCity_ContestLobby_EventScript_21A264:: @ 821A264
 	drawcontestwinner 0
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_21AE78, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A2AA
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A2E4
 	releaseall
 	end
@@ -58,7 +58,7 @@ LilycoveCity_ContestLobby_EventScript_21A2AA:: @ 821A2AA
 	special sub_80F88DC
 	setvar VAR_0x4099, 0
 	specialvar VAR_RESULT, sub_80F8C7C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21A314
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A40F
 	waitmovement 0
@@ -70,7 +70,7 @@ LilycoveCity_ContestLobby_EventScript_21A2AA:: @ 821A2AA
 
 LilycoveCity_ContestLobby_EventScript_21A2E4:: @ 821A2E4
 	msgbox LilycoveCity_ContestLobby_Text_21B0BC, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A2AA
 	msgbox LilycoveCity_ContestLobby_Text_21B132, 4
 	closemessage
@@ -92,7 +92,7 @@ LilycoveCity_ContestLobby_EventScript_21A314:: @ 821A314
 	applymovement 4, LilycoveCity_ContestLobby_Movement_21A41E
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_21B030, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	msgbox LilycoveCity_ContestLobby_Text_21B07E, 4
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_21B094, 4
@@ -219,9 +219,9 @@ LilycoveCity_ContestLobby_EventScript_21A436:: @ 821A436
 	fadescreen 1
 	drawcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_21AE78, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A47A
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A4B4
 	end
 
@@ -231,7 +231,7 @@ LilycoveCity_ContestLobby_EventScript_21A47A:: @ 821A47A
 	special sub_80F88DC
 	setvar VAR_0x4099, 0
 	specialvar VAR_RESULT, sub_80F8C7C
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21A4E4
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A53C
 	waitmovement 0
@@ -243,7 +243,7 @@ LilycoveCity_ContestLobby_EventScript_21A47A:: @ 821A47A
 
 LilycoveCity_ContestLobby_EventScript_21A4B4:: @ 821A4B4
 	msgbox LilycoveCity_ContestLobby_Text_21B0BC, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A47A
 	msgbox LilycoveCity_ContestLobby_Text_21B132, 4
 	closemessage
@@ -266,7 +266,7 @@ LilycoveCity_ContestLobby_EventScript_21A4E4:: @ 821A4E4
 	applymovement 11, LilycoveCity_ContestLobby_Movement_21A54B
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_21B030, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	msgbox LilycoveCity_ContestLobby_Text_21B07E, 4
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_21B094, 4
@@ -320,7 +320,7 @@ LilycoveCity_ContestLobby_Movement_21A54B: @ 821A54B
 LilycoveCity_ContestLobby_EventScript_21A554:: @ 821A554
 	special sub_80F9154
 	specialvar VAR_RESULT, sub_80F8D24
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A5CF
 	call LilycoveCity_ContestLobby_EventScript_279CC5
 	call LilycoveCity_ContestLobby_EventScript_21A670
@@ -642,10 +642,10 @@ LilycoveCity_ContestLobby_EventScript_21A819:: @ 821A819
 
 LilycoveCity_ContestLobby_EventScript_21A856:: @ 821A856
 	msgbox LilycoveCity_ContestLobby_Text_27BD17, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A97F
 	call LilycoveCity_ContestLobby_EventScript_27134F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A97F
 	message LilycoveCity_ContestLobby_Text_27C8FD
 	waitmessage
@@ -665,7 +665,7 @@ LilycoveCity_ContestLobby_EventScript_21A8BB:: @ 821A8BB
 
 LilycoveCity_ContestLobby_EventScript_21A8C6:: @ 821A8C6
 	setvar VAR_0x400C, 1
-	compare_var_to_value VAR_0x400D, 1
+	compare VAR_0x400D, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AAFC
 	goto LilycoveCity_ContestLobby_EventScript_21A8DC
 	end
@@ -717,19 +717,19 @@ LilycoveCity_ContestLobby_EventScript_21A97F:: @ 821A97F
 LilycoveCity_ContestLobby_EventScript_21A98C:: @ 821A98C
 	msgbox LilycoveCity_ContestLobby_Text_27C1C3, 4
 	setvar VAR_CONTEST_RANK, 0
-	choosecontestpkmn
-	compare_var_to_value VAR_0x8004, 255
+	choosecontestmon
+	compare VAR_0x8004, 255
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A97F
 	special sub_80F7F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A9E0
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AA0A
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AA0A
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A9EE
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A9FC
 	end
 
@@ -754,28 +754,28 @@ LilycoveCity_ContestLobby_EventScript_21AA0A:: @ 821AA0A
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AA15:: @ 821AA15
-	compare_var_to_value VAR_0x400D, 1
+	compare VAR_0x400D, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AB4B
-	compare_var_to_value VAR_0x400D, 2
+	compare VAR_0x400D, 2
 	goto_if 4, LilycoveCity_ContestLobby_EventScript_21A97F
 	message LilycoveCity_ContestLobby_Text_27BF85
 	waitmessage
 	copyvar VAR_0x8004, VAR_RESULT
-	compare_var_to_value VAR_0x400C, 0
+	compare VAR_0x400C, 0
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21AABB
-	compare_var_to_value VAR_0x400C, 1
+	compare VAR_0x400C, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21AAC0
-	compare_var_to_value VAR_0x400C, 2
+	compare VAR_0x400C, 2
 	goto_if 4, LilycoveCity_ContestLobby_EventScript_21A97F
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AAD3
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AAD3
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq LilycoveCity_ContestLobby_EventScript_21A97F
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AAEF
-	compare_var_to_value VAR_RESULT, 10
+	compare VAR_RESULT, 10
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AAE1
 	message3 LilycoveCity_ContestLobby_Text_27BEEC
 	contestlinktransfer
@@ -843,15 +843,15 @@ LilycoveCity_ContestLobby_EventScript_21AB17:: @ 821AB17
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AB4B:: @ 821AB4B
-	compare_var_to_value VAR_CONTEST_CATEGORY, 0
+	compare VAR_CONTEST_CATEGORY, 0
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21AB88
-	compare_var_to_value VAR_CONTEST_CATEGORY, 1
+	compare VAR_CONTEST_CATEGORY, 1
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21AB8E
-	compare_var_to_value VAR_CONTEST_CATEGORY, 2
+	compare VAR_CONTEST_CATEGORY, 2
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21AB94
-	compare_var_to_value VAR_CONTEST_CATEGORY, 3
+	compare VAR_CONTEST_CATEGORY, 3
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21AB9A
-	compare_var_to_value VAR_CONTEST_CATEGORY, 4
+	compare VAR_CONTEST_CATEGORY, 4
 	call_if 1, LilycoveCity_ContestLobby_EventScript_21ABA0
 	goto LilycoveCity_ContestLobby_EventScript_21ABA6
 	end
@@ -889,22 +889,22 @@ LilycoveCity_ContestLobby_EventScript_21ABA6:: @ 821ABA6
 
 LilycoveCity_ContestLobby_EventScript_21ABE3:: @ 821ABE3
 	call LilycoveCity_ContestLobby_EventScript_21AC33
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AC3D
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq LilycoveCity_ContestLobby_EventScript_21ABA6
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_eq LilycoveCity_ContestLobby_EventScript_21ABE3
 	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_21AC0B:: @ 821AC0B
 	call LilycoveCity_ContestLobby_EventScript_21AC38
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AC3D
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq LilycoveCity_ContestLobby_EventScript_21ABA6
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_eq LilycoveCity_ContestLobby_EventScript_21AC0B
 	release
 	end

@@ -13,13 +13,13 @@ Route123_EventScript_2906BB:: @ 82906BB
 	checkflag FLAG_BADGE01_GET
 	goto_if 0, Route103_EventScript_290721
 	checkpartymove MOVE_CUT
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq Route103_EventScript_290721
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_CUT
 	msgbox Route103_Text_29072E, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route103_EventScript_29072B
 	msgbox Route103_Text_290771, 4
 	closemessage
@@ -87,13 +87,13 @@ VictoryRoad_B1F_EventScript_2907A6:: @ 82907A6
 	checkflag FLAG_BADGE03_GET
 	goto_if 0, Route111_EventScript_29082D
 	checkpartymove MOVE_ROCK_SMASH
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq Route111_EventScript_29082D
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_ROCK_SMASH
 	msgbox Route111_Text_29083A, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_290837
 	msgbox Route111_Text_290771, 4
 	closemessage
@@ -114,10 +114,10 @@ Route111_EventScript_2907FB:: @ 82907FB
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	specialvar VAR_RESULT, sub_81393FC
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq Route111_EventScript_290829
 	special RockSmashWildEncounter
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq Route111_EventScript_290829
 	waitstate
 	releaseall
@@ -165,11 +165,11 @@ VictoryRoad_B1F_EventScript_2908BA:: @ 82908BA
 	checkflag FLAG_SYS_USE_STRENGTH
 	goto_eq FieryPath_EventScript_29091F
 	checkpartymove MOVE_STRENGTH
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq FieryPath_EventScript_290915
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox FieryPath_Text_29092C, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq FieryPath_EventScript_290929
 	closemessage
 	dofieldeffect 40
@@ -226,12 +226,12 @@ FieryPath_Text_290A16: @ 8290A16
 EventScript_290A49:: @ 8290A49
 	lockall
 	checkpartymove MOVE_WATERFALL
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq EventScript_290A84
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_290AC3, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_290A8C
 	msgbox Text_290AFC, 4
 	dofieldeffect 43
@@ -261,13 +261,13 @@ Text_290AFC: @ 8290AFC
 EventScript_290B0F:: @ 8290B0F
 	lockall
 	checkpartymove MOVE_DIVE
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq EventScript_290B4E
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox Text_290BE8, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_290B58
 	msgbox Text_290C1A, 4
 	dofieldeffect 44
@@ -286,13 +286,13 @@ EventScript_290B58:: @ 8290B58
 EventScript_290B5A:: @ 8290B5A
 	lockall
 	checkpartymove MOVE_DIVE
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_eq EventScript_290B99
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox Text_290C6E, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq EventScript_290BA8
 	msgbox Text_290C1A, 4
 	dofieldeffect 44

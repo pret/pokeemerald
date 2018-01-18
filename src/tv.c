@@ -1,5 +1,3 @@
-
-// Includes
 #include "global.h"
 #include "rtc.h"
 #include "overworld.h"
@@ -34,6 +32,7 @@
 #include "naming_screen.h"
 #include "malloc.h"
 #include "region_map.h"
+#include "constants/region_map_sections.h"
 #include "decoration.h"
 #include "secret_base.h"
 #include "tv.h"
@@ -6504,7 +6503,7 @@ void DoTVShowTodaysRivalTrainer(void)
             break;
         case 1:
             TV_PrintIntToStringVar(0, show->rivalTrainer.badgeCount);
-            if (FlagGet(CODE_FLAGS + 0x48))
+            if (FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER))
             {
                 if (show->rivalTrainer.nSilverSymbols || show->rivalTrainer.nGoldSymbols)
                 {
@@ -6521,7 +6520,7 @@ void DoTVShowTodaysRivalTrainer(void)
             }
             break;
         case 2:
-            if (FlagGet(CODE_FLAGS + 0x48))
+            if (FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER))
             {
                 if (show->rivalTrainer.nSilverSymbols || show->rivalTrainer.nGoldSymbols)
                 {

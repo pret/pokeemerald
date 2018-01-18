@@ -10,15 +10,15 @@ SouthernIsland_Interior_MapScript1_242A50: @ 8242A50
 
 SouthernIsland_Interior_EventScript_242A5A:: @ 8242A5A
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if 5, SouthernIsland_Interior_EventScript_27374E
 	removeobject 2
 	return
 
 SouthernIsland_Interior_MapScript1_242A6E: @ 8242A6E
-	compare_var_to_value VAR_0x40D5, 0
+	compare VAR_0x40D5, 0
 	call_if 1, SouthernIsland_Interior_EventScript_242A8A
-	compare_var_to_value VAR_0x40D5, 0
+	compare VAR_0x40D5, 0
 	call_if 5, SouthernIsland_Interior_EventScript_242A95
 	call SouthernIsland_Interior_EventScript_242AA0
 	end
@@ -35,9 +35,9 @@ SouthernIsland_Interior_EventScript_242A95:: @ 8242A95
 
 SouthernIsland_Interior_EventScript_242AA0:: @ 8242AA0
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_eq SouthernIsland_Interior_EventScript_242AB8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SouthernIsland_Interior_EventScript_242ABE
 	end
 
@@ -82,20 +82,20 @@ SouthernIsland_Interior_EventScript_242AD0:: @ 8242AD0
 	delay 50
 	special RemoveScriptFieldObject
 	setvar VAR_LAST_TALKED, 2
-	compare_var_to_value VAR_0x40D5, 0
+	compare VAR_0x40D5, 0
 	call_if 1, SouthernIsland_Interior_EventScript_242BA4
-	compare_var_to_value VAR_0x40D5, 0
+	compare VAR_0x40D5, 0
 	call_if 5, SouthernIsland_Interior_EventScript_242BB7
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special sub_80B08EC
+	special BattleSetup_StartLatiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, sub_8138B80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_eq SouthernIsland_Interior_EventScript_242B81
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_eq SouthernIsland_Interior_EventScript_242B8F
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_eq SouthernIsland_Interior_EventScript_242B8F
 	setflag FLAG_0x1C9
 	releaseall

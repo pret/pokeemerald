@@ -7383,12 +7383,12 @@ _08192932:
 	ldr r1, [sp, 0x24]
 	cmp r1, r0
 	bne _08192980
-	ldr r0, =gUnknown_0860D1D0
+	ldr r0, =gBattleDomePotentialPointers
 	ldr r0, [r0, 0x40]
 	b _0819298A
 	.pool
 _08192980:
-	ldr r0, =gUnknown_0860D1D0
+	ldr r0, =gBattleDomePotentialPointers
 	ldr r2, [sp, 0x20]
 	lsls r1, r2, 2
 	adds r1, r0
@@ -7503,7 +7503,7 @@ _08192A58:
 	cmp r7, 0x2
 	ble _081929AE
 	movs r7, 0
-	ldr r2, =gUnknown_0860D214
+	ldr r2, =gBattleDomeOpponentStylePointers
 	mov r9, r2
 	ldr r3, =gUnknown_0860C988
 	mov r10, r3
@@ -8071,7 +8071,7 @@ _08192ED0:
 	movs r7, 0x2A
 _08192ED2:
 	lsls r0, r7, 2
-	ldr r3, =gUnknown_0860D294
+	ldr r3, =gBattleDomeOpponentStatsPointers
 	adds r0, r3
 	ldr r0, [r0]
 	str r0, [sp, 0xC]
@@ -9029,7 +9029,7 @@ _081936A0:
 	movs r0, 0xD0
 	strb r0, [r1, 0xD]
 	ldr r4, =gStringVar4
-	ldr r0, =gUnknown_0860D38C
+	ldr r0, =gBattleDomeWinStringsPointers
 	ldr r7, [sp, 0x70]
 	adds r0, r7, r0
 	ldr r1, [r0]
@@ -9167,7 +9167,7 @@ _08193802:
 	bl AddTextPrinter
 	add r0, sp, 0xC
 	strb r6, [r0, 0xA]
-	ldr r0, =gUnknown_0860D350
+	ldr r0, =gBattleDomeMatchNumberPointers
 	ldr r1, [sp, 0x58]
 	adds r0, r1, r0
 	ldr r0, [r0]
@@ -13641,7 +13641,7 @@ sub_8195ED8: @ 8195ED8
 	push {r4,lr}
 	ldr r4, =gMapHeader
 	ldrb r0, [r4, 0x17]
-	bl is_light_level_1_2_3_or_6
+	bl Overworld_MapTypeAllowsTeleportAndFly
 	lsls r0, 24
 	cmp r0, 0
 	beq _08195F30
@@ -13791,7 +13791,7 @@ sub_8195FF8: @ 8195FF8
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r6, =gUnknown_085500A4
+	ldr r6, =gRematchTable
 _08196000:
 	movs r1, 0xAE
 	lsls r1, 1
@@ -13887,7 +13887,7 @@ task_prev_quest: @ 81960A8
 	cmp r0, 0
 	bne _081960C2
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_808B864
 	bl sub_808BCF4
 _081960C2:
@@ -14097,7 +14097,7 @@ sub_8196274: @ 8196274
 _08196298:
 	movs r1, 0x4
 	ldrsh r0, [r4, r1]
-	ldr r1, =gUnknown_0860EF70
+	ldr r1, =gText_PokenavCallEllipsis
 	bl sub_81965D8
 	movs r0, 0x1
 _081962A4:
@@ -14659,7 +14659,7 @@ sub_8196710: @ 8196710
 	thumb_func_start sub_819672C
 sub_819672C: @ 819672C
 	push {lr}
-	ldr r1, =gUnknown_085500A4
+	ldr r1, =gRematchTable
 	lsls r0, 4
 	adds r0, r1
 	ldrh r2, [r0, 0xA]
@@ -14677,10 +14677,10 @@ sub_8196748: @ 8196748
 	push {r4-r6,lr}
 	movs r5, 0
 	movs r6, 0
-	ldr r4, =gUnknown_085500A4
+	ldr r4, =gRematchTable
 _08196750:
 	ldrh r0, [r4]
-	bl HasTrainerAlreadyBeenFought
+	bl HasTrainerBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819675E
@@ -14703,10 +14703,10 @@ sub_8196774: @ 8196774
 	adds r7, r0, 0
 	movs r4, 0
 	movs r6, 0
-	ldr r5, =gUnknown_085500A4
+	ldr r5, =gRematchTable
 _0819677E:
 	ldrh r0, [r5]
-	bl HasTrainerAlreadyBeenFought
+	bl HasTrainerBeenFought
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819679A
@@ -14766,7 +14766,7 @@ _081967EC:
 	adds r4, r0, 0
 	movs r7, 0x1
 	adds r0, r5, 0
-	bl sub_80B1E94
+	bl UpdateRematchIfDefeated
 	b _08196832
 _0819680A:
 	bl Random
@@ -15270,7 +15270,7 @@ sub_8196B98: @ 8196B98
 	adds r7, r0, 0
 	cmp r1, 0xFF
 	beq _08196C5C
-	ldr r1, =gUnknown_085500A4
+	ldr r1, =gRematchTable
 	lsls r0, r2, 4
 	adds r2, r0, r1
 	ldrh r4, [r2, 0xA]
@@ -15373,7 +15373,7 @@ sub_8196C70: @ 8196C70
 	lsls r1, 2
 	adds r1, r2
 	ldrh r0, [r1]
-	bl sub_80B2250
+	bl GetLastBeatenRematchTrainerId
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r5, =gTrainers

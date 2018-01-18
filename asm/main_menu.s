@@ -3948,7 +3948,7 @@ AddBirchSpeechObjects: @ 803192C
 	movs r1, 0x78
 	movs r2, 0x3C
 	movs r3, 0
-	bl sub_80B5E6C
+	bl CreateTrainerSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -3981,7 +3981,7 @@ AddBirchSpeechObjects: @ 803192C
 	movs r1, 0x78
 	movs r2, 0x3C
 	movs r3, 0
-	bl sub_80B5E6C
+	bl CreateTrainerSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8121DA0
-sub_8121DA0: @ 8121DA0
+	thumb_func_start ResetVramOamAndBgCntRegs
+ResetVramOamAndBgCntRegs: @ 8121DA0
 	push {r4,lr}
 	sub sp, 0xC
 	movs r0, 0
@@ -50,10 +50,10 @@ sub_8121DA0: @ 8121DA0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8121DA0
+	thumb_func_end ResetVramOamAndBgCntRegs
 
-	thumb_func_start sub_8121E10
-sub_8121E10: @ 8121E10
+	thumb_func_start ResetAllBgsCoordinates
+ResetAllBgsCoordinates: @ 8121E10
 	push {lr}
 	movs r0, 0
 	movs r1, 0
@@ -89,7 +89,7 @@ sub_8121E10: @ 8121E10
 	bl ChangeBgY
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8121E10
+	thumb_func_end ResetAllBgsCoordinates
 
 	thumb_func_start SetVBlankHBlankCallbacksToNull
 @ void SetVBlankHBlankCallbacksToNull()
@@ -177,8 +177,8 @@ _08121EC0:
 	.pool
 	thumb_func_end DisplayMessageAndContinueTask
 
-	thumb_func_start sub_8121F20
-sub_8121F20: @ 8121F20
+	thumb_func_start RunTextPrintersRetIsActive
+RunTextPrintersRetIsActive: @ 8121F20
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -191,7 +191,7 @@ sub_8121F20: @ 8121F20
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8121F20
+	thumb_func_end RunTextPrintersRetIsActive
 
 	thumb_func_start Task_ContinueTaskAfterMessagePrints
 @ void Task_ContinueTaskAfterMessagePrints(u8 taskId)
@@ -201,7 +201,7 @@ Task_ContinueTaskAfterMessagePrints: @ 8121F3C
 	lsrs r4, r0, 24
 	ldr r0, =gUnknown_0203A140
 	ldrb r0, [r0]
-	bl sub_8121F20
+	bl RunTextPrintersRetIsActive
 	lsls r0, 16
 	cmp r0, 0
 	bne _08121F5A
@@ -512,7 +512,7 @@ itemid_80BF6D8_mail_related: @ 812217C
 	bne _081221A4
 _08122192:
 	adds r0, r4, 0
-	bl itemid_is_mail
+	bl ItemIsMail
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -752,8 +752,8 @@ _08122322:
 	bx r0
 	thumb_func_end sub_8122298
 
-	thumb_func_start sub_8122328
-sub_8122328: @ 8122328
+	thumb_func_start LoadListMenuArrowsGfx
+LoadListMenuArrowsGfx: @ 8122328
 	push {lr}
 	ldr r0, =gUnknown_0859F514
 	bl LoadCompressedObjectPic
@@ -762,7 +762,7 @@ sub_8122328: @ 8122328
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8122328
+	thumb_func_end LoadListMenuArrowsGfx
 
 	thumb_func_start sub_8122344
 sub_8122344: @ 8122344

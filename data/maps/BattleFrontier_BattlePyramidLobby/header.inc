@@ -3,7 +3,7 @@ BattleFrontier_BattlePyramidLobby: @ 84853F8
 	.4byte BattleFrontier_BattlePyramidLobby_MapEvents
 	.4byte BattleFrontier_BattlePyramidLobby_MapScripts
 	.4byte 0x0
-	.2byte BGM_BATTLE_PYRAMID
+	.2byte MUS_PYRAMID
 	.2byte 360
 	.byte 58
 	.byte 0
