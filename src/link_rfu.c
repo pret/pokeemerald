@@ -54,8 +54,10 @@ void sub_800ED34(u16 unused);
 static void sub_800EDBC(u16 unused);
 static void sub_800F048(void);
 struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void);
+void sub_800F86C(u8 a0);
 void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
 bool32 sub_8010454(u16 a0);
+void sub_8010528(void);
 void sub_8010750(void);
 int sub_80107A0(void);
 void sub_801084C(u8 taskId);
@@ -3032,4 +3034,92 @@ bool32 sub_800F0F8(void)
         }
     }
     return FALSE;
+}
+
+bool32 sub_800F1E0(void)
+{
+    u16 i;
+    u16 flags;
+    u8 r0;
+    u16 j;
+    u8 retval;
+
+    if (gUnknown_03005000.unk_04 >= 20 && gUnknown_03005000.unk_0e == 1)
+    {
+        rfu_waitREQComplete();
+        while (gUnknown_03005000.unk_cdb == 0)
+        {
+            if (gUnknown_03005000.unk_ee != 0)
+            {
+                return FALSE;
+            }
+        }
+        rfu_REQ_recvData();
+        rfu_waitREQComplete();
+        if ((gUnknown_03004140.unk_03 & gUnknown_03005000.unk_ce2) == gUnknown_03005000.unk_ce2)
+        {
+            gUnknown_03005000.unk_cdc = 0;
+            gUnknown_02022B44.unk_06++;
+            flags = gUnknown_03004140.unk_00;
+            for (i = 0; i < 4; i++)
+            {
+                if (flags & 1)
+                {
+                    if (gUnknown_03005000.unk_14[i][1])
+                    {
+                        if (gUnknown_03005000.unk_cee[i] != 0xff && (gUnknown_03005000.unk_14[i][0] >> 5) != ((gUnknown_03005000.unk_cee[i] + 1) & 7))
+                        {
+                            if (++gUnknown_03005000.unk_cea[i] > 4)
+                                sub_8011170(0x8100);
+                        }
+                        else
+                        {
+                            gUnknown_03005000.unk_cee[i] = gUnknown_03005000.unk_14[i][0] / 32;
+                            gUnknown_03005000.unk_cea[i] = 0;
+                            gUnknown_03005000.unk_14[i][0] &= 0x1f;
+                            r0 = gUnknown_03005000.unk_cde[i];
+                            for (j = 0; j < 7; j++)
+                            {
+                                gRecvCmds[r0][j] = (gUnknown_03005000.unk_14[i][(j << 1) + 1] << 8) | gUnknown_03005000.unk_14[i][(j << 1) + 0];
+                                gUnknown_03005000.unk_14[i][(j << 1) + 1] = 0;
+                                gUnknown_03005000.unk_14[i][(j << 1) + 0] = 0;
+                            }
+                        }
+                    }
+                    rfu_UNI_clearRecvNewDataFlag(i);
+                }
+                flags >>= 1;
+            }
+            sub_800F014();
+            sub_800F86C(0);
+            sub_8010528();
+            if (gUnknown_03005000.unk_ce5 && !gUnknown_03005000.unk_cd9)
+            {
+                gUnknown_02022B44.unk_0e = 0;
+                rfu_clearSlot(3, gUnknown_03005000.unk_cda);
+                for (i = 0; i < 4; i++)
+                {
+                    if ((gUnknown_03005000.unk_ce5 >> i) & 1)
+                    {
+                        rfu_setRecvBuffer(0x10, i, gUnknown_03005000.unk_14[i], 14);
+                    }
+                }
+                sub_800E88C(gUnknown_03005000.unk_ce2, gUnknown_03005000.unk_ce2 | gUnknown_03005000.unk_ce5);
+                gUnknown_03005000.unk_ce9 = gUnknown_03005000.unk_ce5;
+                gUnknown_03005000.unk_ce2 |= gUnknown_03005000.unk_ce5;
+                gUnknown_03005000.unk_ce5 = 0;
+                rfu_UNI_setSendData(gUnknown_03005000.unk_ce2, gUnknown_03005000.unk_c87, 70);
+                gUnknown_03005000.unk_cda = sub_800E87C(gUnknown_03005000.unk_ce2);
+                CreateTask(sub_8010AAC, 0);
+            }
+        }
+        else
+        {
+            gUnknown_03005000.unk_cdc = 1;
+            gUnknown_03005000.unk_0e = 0;
+        }
+        gUnknown_03005000.unk_0e = 0;
+    }
+    retval = gUnknown_03005000.unk_cdc;
+    return gUnknown_03007890->unk_06 ? retval & 1 : FALSE;
 }

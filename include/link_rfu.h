@@ -44,7 +44,8 @@ struct UnkLinkRfuStruct_02022B44
 {
     u8 fill_00[6];
     u16 unk_06;
-    u8 fill_08[7];
+    u8 fill_08[6];
+    vu8 unk_0e;
     u8 unk_0f;
     u8 fill_10[0xcc];
 };
@@ -164,7 +165,8 @@ struct UnkRfuStruct_2 {
     /* 0xccd */ u8 unk_ccd;
     /* 0xcce */ u8 filler_cce[2];
     /* 0xcd0 */ vu8 unk_cd0;
-    /* 0xcd1 */ u8 filler_cd1[9];
+    /* 0xcd1 */ u8 filler_cd1[8];
+    /* 0xcd9 */ u8 unk_cd9;
     /* 0xcda */ u8 unk_cda;
     /* 0xcdb */ vu8 unk_cdb;
     /* 0xcdc */ vu8 unk_cdc;
@@ -173,10 +175,13 @@ struct UnkRfuStruct_2 {
     /* 0xce2 */ u8 unk_ce2;
     /* 0xce2 */ u8 unk_ce3;
     /* 0xce4 */ u8 unk_ce4;
-    /* 0xce5 */ u8 filler_ce5[2];
+    /* 0xce5 */ u8 unk_ce5;
+    /* 0xce5 */ u8 unk_ce6;
     /* 0xce7 */ u8 unk_ce7;
     /* 0xce8 */ u8 unk_ce8;
-    /* 0xce9 */ u8 filler_ce9[11];
+    /* 0xce9 */ u8 unk_ce9;
+    /* 0xcea */ u8 unk_cea[4];
+    /* 0xcee */ u8 unk_cee[4];
 }; // size = 0xcf4
 
 // Exported RAM declarations
