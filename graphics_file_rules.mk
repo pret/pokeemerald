@@ -564,10 +564,10 @@ $(PSSGFXDIR)/sky_frame.4bpp: %.4bpp: %.png
 $(PSSGFXDIR)/sky.4bpp: $(PSSGFXDIR)/sky_frame.4bpp $(PSSGFXDIR)/sky_bg.4bpp
 	@cat $^ >$@
 
-$(PSSGFXDIR)/bubbles_frame.4bpp: %.4bpp: %.png
+$(PSSGFXDIR)/polkadot_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 54
 
-$(PSSGFXDIR)/bubbles.4bpp: $(PSSGFXDIR)/bubbles_frame.4bpp $(PSSGFXDIR)/bubbles_bg.4bpp
+$(PSSGFXDIR)/polkadot.4bpp: $(PSSGFXDIR)/polkadot_frame.4bpp $(PSSGFXDIR)/polkadot_bg.4bpp
 	@cat $^ >$@
 
 $(PSSGFXDIR)/pokecenter_frame.4bpp: %.4bpp: %.png

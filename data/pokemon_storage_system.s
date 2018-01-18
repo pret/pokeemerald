@@ -370,17 +370,17 @@ gWallpaperTilemap_Sky: @ 85765C0
 	.incbin "graphics/pokemon_storage/sky.bin.lz"
 
 	.align 2
-gWallpaperPalettes_Bubbles: @ 85766B0
-	.incbin "graphics/pokemon_storage/bubbles_frame.gbapal"
-	.incbin "graphics/pokemon_storage/bubbles_bg.gbapal"
+gWallpaperPalettes_PolkaDot: @ 85766B0
+	.incbin "graphics/pokemon_storage/polkadot_frame.gbapal"
+	.incbin "graphics/pokemon_storage/polkadot_bg.gbapal"
 
 	.align 2
-gWallpaperTiles_Bubbles: @ 85766F0
-	.incbin "graphics/pokemon_storage/bubbles.4bpp.lz"
+gWallpaperTiles_PolkaDot: @ 85766F0
+	.incbin "graphics/pokemon_storage/polkadot.4bpp.lz"
 
 	.align 2
-gWallpaperTilemap_Bubbles: @ 85769B8
-	.incbin "graphics/pokemon_storage/bubbles.bin.lz"
+gWallpaperTilemap_PolkaDot: @ 85769B8
+	.incbin "graphics/pokemon_storage/polkadot.bin.lz"
 
 	.align 2
 gWallpaperPalettes_Pokecenter: @ 8576AB8
@@ -506,10 +506,10 @@ gWallpaperTable:: @ 85775B8
 	.4byte gWallpaperTilemap_Sky
 	.4byte gWallpaperPalettes_Sky
 
-	@ Bubbles
-	.4byte gWallpaperTiles_Bubbles
-	.4byte gWallpaperTilemap_Bubbles
-	.4byte gWallpaperPalettes_Bubbles
+	@ PolkaDot
+	.4byte gWallpaperTiles_PolkaDot
+	.4byte gWallpaperTilemap_PolkaDot
+	.4byte gWallpaperPalettes_PolkaDot
 
 	@ Pokecenter
 	.4byte gWallpaperTiles_Pokecenter
@@ -583,16 +583,16 @@ gWallpaperTilemap_Block: @ 8578358
 	.incbin "graphics/pokemon_storage/block.bin.lz"
 
 	.align 2
-gWallpaperPalettes_PokeCenter2:: @ 8578450
+gWallpaperPalettes_Pokecenter2:: @ 8578450
 	.incbin "graphics/pokemon_storage/pokecenter2_bg.gbapal"
 	.incbin "graphics/pokemon_storage/pokecenter2_bg.gbapal"
 
 	.align 2
-gWallpaperTiles_PokeCenter2: @ 8578490
+gWallpaperTiles_Pokecenter2: @ 8578490
 	.incbin "graphics/pokemon_storage/pokecenter2.4bpp.lz"
 
 	.align 2
-gWallpaperTilemap_PokeCenter2: @ 85786D0
+gWallpaperTilemap_Pokecenter2: @ 85786D0
 	.incbin "graphics/pokemon_storage/pokecenter2.bin.lz"
 
 	.align 2
@@ -828,7 +828,7 @@ gUnknown_0857AF44:: @ 857AF44
 	.4byte gWallpaperTiles_Diagonal, gWallpaperTilemap_Diagonal, gWallpaperPalettes_Diagonal
 	.4byte gWallpaperTiles_Block, gWallpaperTilemap_Block, gWallpaperPalettes_Block
 	.4byte gWallpaperTiles_Ribbon, gWallpaperTilemap_Ribbon, gWallpaperPalettes_Ribbon
-	.4byte gWallpaperTiles_PokeCenter2, gWallpaperTilemap_PokeCenter2, gWallpaperPalettes_PokeCenter2
+	.4byte gWallpaperTiles_Pokecenter2, gWallpaperTilemap_Pokecenter2, gWallpaperPalettes_Pokecenter2
 	.4byte gWallpaperTiles_Frame, gWallpaperTilemap_Frame, gWallpaperPalettes_Frame
 	.4byte gWallpaperTiles_Blank, gWallpaperTilemap_Blank, gWallpaperPalettes_Blank
 	.4byte gWallpaperTiles_Circles, gWallpaperTilemap_Circles, gWallpaperPalettes_Circles
@@ -874,50 +874,257 @@ gUnknown_0857B004:: @ 857B004
 
 	.align 2
 gUnknown_0857B07C:: @ 857B07C
-	.incbin "baserom.gba", 0x57b07C, 0x4
+	.4byte 0x23BA
 
 	.align 2
 gUnknown_0857B080:: @ 857B080
-	.incbin "baserom.gba", 0x57b080, 0x28
+	obj_tiles PCGfx_Arrow, 128, 0x0006
 
-gUnknown_0857B0A8:: @ 857B0A8
-	.incbin "baserom.gba", 0x57b0a8, 0x38
+	.align 2
+gOamData_857B088:: @ 857B088
+	.2byte 0x4000
+	.2byte 0x8000
+	.2byte 0x0800
+
+	.align 2
+gSpriteAnim_857B090:: @ 857B090
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_857B098:: @ 857B098
+	obj_image_anim_frame 8, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_857B0A0:: @ 857B0A0
+	.4byte gSpriteAnim_857B090
+	.4byte gSpriteAnim_857B098
+
+	.align 2
+gSpriteTemplate_857B0A8:: @ 857B0A8
+	spr_template 0x0003, 0xDAC9, gOamData_857B088, gSpriteAnimTable_857B0A0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+	.align 2
+gOamData_857B0C0:: @ 857B0C0
+	.2byte 0x8000
+	.2byte 0x0000
+	.2byte 0x0800
+
+	.align 2
+gSpriteAnim_857B0C8:: @ 857B0C8
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_857B0D0:: @ 857B0D0
+	obj_image_anim_frame 2, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_857B0D8:: @ 857B0D8
+	.4byte gSpriteAnim_857B0C8
+	.4byte gSpriteAnim_857B0D0
 
 gUnknown_0857B0E0:: @ 857B0E0
-	.incbin "baserom.gba", 0x57b0e0, 0x8b8
+	spr_template 0x0006, 0xDACA, gOamData_857B0C0, gSpriteAnimTable_857B0D8, NULL, gDummySpriteAffineAnimTable, sub_80CD210
 
+	.align 2
+HandCursorPalette: @ 857B0F8
+	.incbin "graphics/pokemon_storage/hand_cursor.gbapal"
+
+	.align 2
+HandCursorTiles: @ 857B118
+	.incbin "graphics/pokemon_storage/hand_cursor.4bpp"
+
+	.align 2
+HandCursorShadowTiles: @ 857B918
+	.incbin "graphics/pokemon_storage/hand_cursor_shadow.4bpp"
+
+	.align 2
 gUnknown_0857B998:: @ 857B998
-	.incbin "baserom.gba", 0x57b998, 0xc
+	.4byte sub_80CDCCC
+	.4byte sub_80CDD5C
+	.4byte sub_80CDDD8
 
+	.align 2
 gUnknown_0857B9A4:: @ 857B9A4
-	.incbin "baserom.gba", 0x57b9a4, 0x18
+	.byte 0x22, 0x00
+	.2byte 0x0039
+	.byte 0x22, 0x00
+	.2byte 0x0123
+	.byte 0x10, 0x0a
+	.2byte 0x0046
+	.byte 0x10, 0x0a
+	.2byte 0x00f9
+	.byte 0x10, 0x0e
+	.2byte 0x0046
+	.byte 0x10, 0x0e
+	.2byte 0x00f9
 
+	.align 2
 gUnknown_0857B9BC:: @ 857B9BC
-	.incbin "baserom.gba", 0x57b9bc, 0x28
+	.4byte sub_80CF0CC, 0
+	.4byte sub_80CF5C4, 1
+	.4byte sub_80CF7E4, 2
+	.4byte sub_80CF8D8, 3
+	.4byte NULL, 0
 
-gUnknown_0857B9E4:: @ 857B9E4
-	.incbin "baserom.gba", 0x57b9e4, 0x18
+	.align 2
+gHandCursorSpriteSheets:: @ 857B9E4
+	obj_tiles HandCursorTiles, 0x0800, 0x0000
+	obj_tiles HandCursorShadowTiles, 0x0080, 0x0001
+	null_obj_tiles
 
-gUnknown_0857B9FC:: @ 857B9FC
-	.incbin "baserom.gba", 0x57b9fc, 0x54
+	.align 2
+gHandCursorSpritePalettes:: @ 857B9FC
+	obj_pal HandCursorPalette, 0xDAC7
+	null_obj_pal
 
-gUnknown_0857BA50:: @ 857BA50
-	.incbin "baserom.gba", 0x57ba50, 0x18
+	.align 2
+gOamData_857BA0C:: @ 857BA0C
+	.2byte 0x0000
+	.2byte 0x8000
+	.2byte 0x0400
 
-gUnknown_0857BA68:: @ 857BA68
-	.incbin "baserom.gba", 0x57ba68, 0x18
+	.align 2
+gOamData_857BA14:: @ 857BA14
+	.2byte 0x0000
+	.2byte 0x4000
+	.2byte 0x0400
 
+	.align 2
+gSpriteAnim_857BA1C:: @ 857BA1C
+	obj_image_anim_frame 0, 30
+	obj_image_anim_frame 16, 30
+	obj_image_anim_jump 0
+
+	.align 2
+gSpriteAnim_857BA28:: @ 857BA28
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_857BA30:: @ 857BA30
+	obj_image_anim_frame 32, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_857BA38:: @ 857BA38
+	obj_image_anim_frame 48, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_857BA40:: @ 857BA40
+	.4byte gSpriteAnim_857BA1C
+	.4byte gSpriteAnim_857BA28
+	.4byte gSpriteAnim_857BA30
+	.4byte gSpriteAnim_857BA38
+
+	.align 2
+gSpriteTemplate_857BA50:: @ 857BA50
+	spr_template 0, 0xDACA, gOamData_857BA0C, gSpriteAnimTable_857BA40, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+	.align 2
+gSpriteTemplate_857BA68:: @ 857BA68
+	spr_template 1, 0xDACA, gOamData_857BA14, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80CFBF4
+
+	.align 2
 gUnknown_0857BA80:: @ 857BA80
-	.incbin "baserom.gba", 0x57ba80, 0x9c
+	.4byte gPCText_Cancel
+	.4byte gPCText_Store
+	.4byte gPCText_Withdraw
+	.4byte gPCText_Move
+	.4byte gPCText_Shift
+	.4byte gPCText_Place
+	.4byte gPCText_Summary
+	.4byte gPCText_Release
+	.4byte gPCText_Mark
+	.4byte gPCText_Jump
+	.4byte gPCText_Wallpaper
+	.4byte gPCText_Name
+	.4byte gPCText_Take
+	.4byte gPCText_Give
+	.4byte gPCText_Give
+	.4byte gPCText_Switch
+	.4byte gPCText_Bag
+	.4byte gPCText_Info
+	.4byte gPCText_Scenery1
+	.4byte gPCText_Scenery2
+	.4byte gPCText_Scenery3
+	.4byte gPCText_Etcetera
+	.4byte gPCText_Friends
+	.4byte gPCText_Forest
+	.4byte gPCText_City
+	.4byte gPCText_Desert
+	.4byte gPCText_Savanna
+	.4byte gPCText_Crag
+	.4byte gPCText_Volcano
+	.4byte gPCText_Snow
+	.4byte gPCText_Cave
+	.4byte gPCText_Beach
+	.4byte gPCText_Seafloor
+	.4byte gPCText_River
+	.4byte gPCText_Sky
+	.4byte gPCText_PolkaDot
+	.4byte gPCText_Pokecenter
+	.4byte gPCText_Machine
+	.4byte gPCText_Simple
 
+	.align 2
 gUnknown_0857BB1C:: @ 857BB1C
-	.incbin "baserom.gba", 0x57bb1c, 0x8
+	window_template 0x00, 0x0a, 0x03, 0x14, 0x12, 0x09, 0x000a
 
+	.align 2
 gUnknown_0857BB24:: @ 857BB24
-	.incbin "baserom.gba", 0x57bb24, 0x14c
+	.incbin "graphics/pokemon_storage/unknown_frame.4bpp"
 
-gUnknown_0857BC70:: @ 857BC70
-	.incbin "baserom.gba", 0x57bc70, 0x18
+	.align 2
+gOamData_857BBA4:: @ 857BBA4
+	.2byte 0x0100, 0x8000, 0x0400, 0x0000
 
-gUnknown_0857BC88:: @ 857BC88
-	.incbin "baserom.gba", 0x57bc88, 0x20
+	.align 2
+gSpriteAffineAnim_857BBAC:: @ 857BBAC
+	.2byte 0x0080, 0x0080, 0x0000, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+
+	.align 2
+gSpriteAffineAnim_857BBBC:: @ 857BBBC
+	.2byte 0x0058, 0x0058, 0x0000, 0x0000, 0x0005, 0x0005, 0x0800, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+
+	.align 2
+gSpriteAffineAnim_857BBD4:: @ 857BBD4
+	.2byte 0x0080, 0x0080, 0x0000, 0x0000, 0xfffb, 0xfffb, 0x0800, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+
+	.align 2
+gSpriteAffineAnim_857BBEC:: @ 857BBEC
+	.2byte 0x0080, 0x0080, 0x0000, 0x0000, 0x000a, 0x000a, 0x0c00, 0x0000, 0x0100, 0x0100, 0x0000, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+
+	.align 2
+gSpriteAffineAnim_857BC0C:: @ 857BC0C
+	.2byte 0x0100, 0x0100, 0x0000, 0x0000, 0xfff6, 0xfff6, 0x0c00, 0x0000, 0x0080, 0x0080, 0x0000, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+
+	.align 2
+gSpriteAffineAnim_857BC2C:: @ 857BC2C
+	.2byte 0x0100, 0x0100, 0x0000, 0x0000, 0xfffb, 0xfffb, 0x1000, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+
+	.align 2
+gSpriteAffineAnim_857BC44:: @ 857BC44
+	.2byte 0x0100, 0x0100, 0x0000, 0x0000, 0x7fff, 0x0000, 0x0000, 0x0000
+
+	.align 2
+gSpriteAffineAnimTable_857BC54:: @ 857BC54
+	.4byte gSpriteAffineAnim_857BBAC
+	.4byte gSpriteAffineAnim_857BBBC
+	.4byte gSpriteAffineAnim_857BBD4
+	.4byte gSpriteAffineAnim_857BBEC
+	.4byte gSpriteAffineAnim_857BC0C
+	.4byte gSpriteAffineAnim_857BC2C
+	.4byte gSpriteAffineAnim_857BC44
+
+	.align 2
+gSpriteTemplate_857BC70:: @ 857BC70
+	spr_template 0x0007, 0xdacb, gOamData_857BBA4, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_857BC54, SpriteCallbackDummy
+
+gSpriteTemplate_857BC88:: @ 857BC88
+	.2byte 0x0100, 0x0100, 0x0200, 0x0100, 0x0100, 0x0200, 0x0200, 0x0200, 0x0080, 0x0080, 0x0100, 0x0100, 0x0200, 0x0200, 0x0400, 0x0400
+

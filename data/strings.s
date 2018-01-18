@@ -2588,118 +2588,118 @@ gText_ChangedToNewItem:: @ 85EBA29
 gText_MailCantBeStored:: @ 85EBA38
 	.string "MAIL can’t be stored!$"
 
-gUnknown_085EBA4E:: @ 85EBA4E
+gPCText_Cancel:: @ 85EBA4E
 	.string "CANCEL$"
 
-gUnknown_085EBA55:: @ 85EBA55
+gPCText_Store:: @ 85EBA55
 	.string "STORE$"
 
-gUnknown_085EBA5B:: @ 85EBA5B
+gPCText_Withdraw:: @ 85EBA5B
 	.string "WITHDRAW$"
 
-gUnknown_085EBA64:: @ 85EBA64
+gPCText_Shift:: @ 85EBA64
 	.string "SHIFT$"
 
-gUnknown_085EBA6A:: @ 85EBA6A
+gPCText_Move:: @ 85EBA6A
 	.string "MOVE$"
 
-gUnknown_085EBA6F:: @ 85EBA6F
+gPCText_Place:: @ 85EBA6F
 	.string "PLACE$"
 
-gUnknown_085EBA75:: @ 85EBA75
+gPCText_Summary:: @ 85EBA75
 	.string "SUMMARY$"
 
-gUnknown_085EBA7D:: @ 85EBA7D
+gPCText_Release:: @ 85EBA7D
 	.string "RELEASE$"
 
-gUnknown_085EBA85:: @ 85EBA85
+gPCText_Mark:: @ 85EBA85
 	.string "MARK$"
 
-gUnknown_085EBA8A:: @ 85EBA8A
+gPCText_Name:: @ 85EBA8A
 	.string "NAME$"
 
-gUnknown_085EBA8F:: @ 85EBA8F
+gPCText_Jump:: @ 85EBA8F
 	.string "JUMP$"
 
-gUnknown_085EBA94:: @ 85EBA94
+gPCText_Wallpaper:: @ 85EBA94
 	.string "WALLPAPER$"
 
-gUnknown_085EBA9E:: @ 85EBA9E
+gPCText_Take:: @ 85EBA9E
 	.string "TAKE$"
 
-gUnknown_085EBAA3:: @ 85EBAA3
+gPCText_Give:: @ 85EBAA3
 	.string "GIVE$"
 
-gUnknown_085EBAA8:: @ 85EBAA8
+gPCText_Switch:: @ 85EBAA8
 	.string "SWITCH$"
 
-gUnknown_085EBAAF:: @ 85EBAAF
+gPCText_Bag:: @ 85EBAAF
 	.string "BAG$"
 
-gUnknown_085EBAB3:: @ 85EBAB3
+gPCText_Info:: @ 85EBAB3
 	.string "INFO$"
 
-gUnknown_085EBAB8:: @ 85EBAB8
+gPCText_Scenery1:: @ 85EBAB8
 	.string "SCENERY 1$"
 
-gUnknown_085EBAC2:: @ 85EBAC2
+gPCText_Scenery2:: @ 85EBAC2
 	.string "SCENERY 2$"
 
-gUnknown_085EBACC:: @ 85EBACC
+gPCText_Scenery3:: @ 85EBACC
 	.string "SCENERY 3$"
 
-gUnknown_085EBAD6:: @ 85EBAD6
+gPCText_Etcetera:: @ 85EBAD6
 	.string "ETCETERA$"
 
-gUnknown_085EBADF:: @ 85EBADF
+gPCText_Friends:: @ 85EBADF
 	.string "FRIENDS$"
 
-gUnknown_085EBAE7:: @ 85EBAE7
+gPCText_Forest:: @ 85EBAE7
 	.string "FOREST$"
 
-gUnknown_085EBAEE:: @ 85EBAEE
+gPCText_City:: @ 85EBAEE
 	.string "CITY$"
 
-gUnknown_085EBAF3:: @ 85EBAF3
+gPCText_Desert:: @ 85EBAF3
 	.string "DESERT$"
 
-gUnknown_085EBAFA:: @ 85EBAFA
+gPCText_Savanna:: @ 85EBAFA
 	.string "SAVANNA$"
 
-gUnknown_085EBB02:: @ 85EBB02
+gPCText_Crag:: @ 85EBB02
 	.string "CRAG$"
 
-gUnknown_085EBB07:: @ 85EBB07
+gPCText_Volcano:: @ 85EBB07
 	.string "VOLCANO$"
 
-gUnknown_085EBB0F:: @ 85EBB0F
+gPCText_Snow:: @ 85EBB0F
 	.string "SNOW$"
 
-gUnknown_085EBB14:: @ 85EBB14
+gPCText_Cave:: @ 85EBB14
 	.string "CAVE$"
 
-gUnknown_085EBB19:: @ 85EBB19
+gPCText_Beach:: @ 85EBB19
 	.string "BEACH$"
 
-gUnknown_085EBB1F:: @ 85EBB1F
+gPCText_Seafloor:: @ 85EBB1F
 	.string "SEAFLOOR$"
 
-gUnknown_085EBB28:: @ 85EBB28
+gPCText_River:: @ 85EBB28
 	.string "RIVER$"
 
-gUnknown_085EBB2E:: @ 85EBB2E
+gPCText_Sky:: @ 85EBB2E
 	.string "SKY$"
 
-gUnknown_085EBB32:: @ 85EBB32
+gPCText_PolkaDot:: @ 85EBB32
 	.string "POLKA-DOT$"
 
-gUnknown_085EBB3C:: @ 85EBB3C
+gPCText_Pokecenter:: @ 85EBB3C
 	.string "POKéCENTER$"
 
-gUnknown_085EBB47:: @ 85EBB47
+gPCText_Machine:: @ 85EBB47
 	.string "MACHINE$"
 
-gUnknown_085EBB4F:: @ 85EBB4F
+gPCText_Simple:: @ 85EBB4F
 	.string "SIMPLE$"
 
 gUnknown_085EBB56:: @ 85EBB56
