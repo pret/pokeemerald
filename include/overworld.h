@@ -74,4 +74,6 @@ void mapldr_default(void);
 void IncrementGameStat(u8);
 u32 GetGameStat(u8);
 
+void CB2_OverworldBasic(void);
+
 #endif //GUARD_ROM4_H

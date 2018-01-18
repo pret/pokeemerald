@@ -73,17 +73,7 @@ gUnknown_03001202: @ 3001202
 gUnknown_03001204: @ 3001204
 	.space 0x4
 
-gUnknown_03001208: @ 3001208
-	.space 0x2
-
-sTestingTransitionId: @ 300120A
-	.space 0x1
-
-sTestingTransitionState: @ 300120B
-	.space 0x5
-
-gUnknown_03001210: @ 3001210
-	.space 0x30
+	.include "src/battle_transition.o"
 
 gUnknown_03001240: @ 3001240
 	.space 0x30
@@ -210,3 +200,4 @@ gMPlayTrack_SE3: @ 3001A20
 	.include "src/siirtc.o"
 	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
 	.include "tools/agbcc/lib/libgcc.a:fp-bit.o"
+	.include "tools/agbcc/lib/libc.a:syscalls.o"

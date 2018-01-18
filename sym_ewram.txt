@@ -1193,10 +1193,7 @@ gUnknown_0203AB98: @ 203AB98
 	.space 0x4
 
     .include "src/coins.o"
-    
-    .align 2
-sTransitionStructPtr: @ 203ABA0
-	.space 0x4
+    .include "src/battle_transition.o"
 
 gAbilitiesPerBank: @ 203ABA4
 	.space 0x4

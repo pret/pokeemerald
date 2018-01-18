@@ -1,8 +1,8 @@
 #!/bin/sh
-make -C tools/gbagfx
-make -C tools/scaninc
-make -C tools/preproc
-make -C tools/bin2c
-make -C tools/rsfont
-make -C tools/aif2pcm
-make -C tools/ramscrgen
+make -C tools/gbagfx CXX=${1:=g++}
+make -C tools/scaninc CXX=${1:=g++}
+make -C tools/preproc CXX=${1:=g++}
+make -C tools/bin2c CXX=${1:=g++}
+make -C tools/rsfont CXX=${1:=g++}
+make -C tools/aif2pcm CXX=${1:=g++}
+make -C tools/ramscrgen CXX=${1:=g++}

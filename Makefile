@@ -31,6 +31,7 @@ LDFLAGS = -Map ../../$(MAP)
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
 LIBGCC := tools/agbcc/lib/libgcc.a
+LIBC   := tools/agbcc/lib/libc.a
 
 SHA1 := sha1sum -c
 
@@ -41,13 +42,15 @@ SCANINC := tools/scaninc/scaninc
 PREPROC := tools/preproc/preproc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 
-# Clear the default suffixes.
+# Clear the default suffixes
 .SUFFIXES:
+# Don't delete intermediate files
+.SECONDARY:
+# Delete files that weren't built properly
+.DELETE_ON_ERROR:
 
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
-
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin sound/direct_sound_samples/cry_%.bin
 
 .PHONY: rom clean compare tidy
 
@@ -160,7 +163,10 @@ $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_comm
 	cd $(OBJ_DIR) && sed -f ../../ld_script.sed ../../$< | sed "s#tools/#../../tools/#g" > ld_script.ld
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
-	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) ../../$(LIBGCC)
+	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) ../../$(LIBGCC) ../../$(LIBC)
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+
+baserom.gba: ;
+	$(error baserom.gba is required to build)

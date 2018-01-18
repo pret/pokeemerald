@@ -256,7 +256,7 @@ gFieldEffectScript_Unknown44:: @ 82DBC45
 
 gFieldEffectScript_Unknown45:: @ 82DBC4B
 	field_eff_loadpal gFieldEffectObjectPaletteInfo10
-	field_eff_callnative sub_81470D0
+	field_eff_callnative FldEff_Pokeball
 	field_eff_end
 
 gFieldEffectScript_HeartIcon:: @ 82DBC56
