@@ -2498,94 +2498,94 @@ gText_DontRemember:: @ 85EB7DB
 gText_Exit:: @ 85EB7EA
 	.string "EXIT$"
 
-gUnknown_085EB7EF:: @ 85EB7EF
+gText_ExitFromBox:: @ 85EB7EF
 	.string "Exit from the BOX?$"
 
-gUnknown_085EB802:: @ 85EB802
+gText_WhatDoYouWantToDo:: @ 85EB802
 	.string "What do you want to do?$"
 
-gUnknown_085EB81A:: @ 85EB81A
+gText_PleasePickATheme:: @ 85EB81A
 	.string "Please pick a theme.$"
 
-gUnknown_085EB82F:: @ 85EB82F
+gText_PickTheWallpaper:: @ 85EB82F
 	.string "Pick the wallpaper.$"
 
-gUnknown_085EB843:: @ 85EB843
+gText_PkmnIsSelected:: @ 85EB843
 	.string "{SPECIAL_F7 0x00} is selected.$"
 
-gUnknown_085EB853:: @ 85EB853
+gText_JumpToWhichBox:: @ 85EB853
 	.string "Jump to which BOX?$"
 
-gUnknown_085EB866:: @ 85EB866
+gText_DepositInWhichBox:: @ 85EB866
 	.string "Deposit in which BOX?$"
 
-gUnknown_085EB87C:: @ 85EB87C
+gText_PkmnWasDeposited:: @ 85EB87C
 	.string "{SPECIAL_F7 0x00} was deposited.$"
 
-gUnknown_085EB88E:: @ 85EB88E
+gText_BoxIsFull2:: @ 85EB88E
 	.string "The BOX is full.$"
 
-gUnknown_085EB89F:: @ 85EB89F
+gText_ReleaseThisPokemon:: @ 85EB89F
 	.string "Release this POKéMON?$"
 
-gUnknown_085EB8B5:: @ 85EB8B5
+gText_PkmnWasReleased:: @ 85EB8B5
 	.string "{SPECIAL_F7 0x00} was released.$"
 
-gUnknown_085EB8C6:: @ 85EB8C6
+gText_ByeByePkmn:: @ 85EB8C6
 	.string "Bye-bye, {SPECIAL_F7 0x00}!$"
 
-gUnknown_085EB8D3:: @ 85EB8D3
+gText_MarkYourPkmn:: @ 85EB8D3
 	.string "Mark your POKéMON.$"
 
-gUnknown_085EB8E6:: @ 85EB8E6
+gText_ThatsYourLastPkmn:: @ 85EB8E6
 	.string "That’s your last POKéMON!$"
 
-gUnknown_085EB900:: @ 85EB900
+gText_YourPartysFull:: @ 85EB900
 	.string "Your party’s full!$"
 
-gUnknown_085EB913:: @ 85EB913
+gText_YoureHoldingAPkmn:: @ 85EB913
 	.string "You’re holding a POKéMON!$"
 
-gUnknown_085EB92D:: @ 85EB92D
+gText_WhichOneWillYouTake:: @ 85EB92D
 	.string "Which one will you take?$"
 
-gUnknown_085EB946:: @ 85EB946
+gText_YouCantReleaseAnEgg:: @ 85EB946
 	.string "You can’t release an EGG.$"
 
-gUnknown_085EB960:: @ 85EB960
+gText_ContinueBoxOperations:: @ 85EB960
 	.string "Continue BOX operations?$"
 
-gUnknown_085EB979:: @ 85EB979
+gText_PkmnCameBack:: @ 85EB979
 	.string "{SPECIAL_F7 0x00} came back!$"
 
-gUnknown_085EB987:: @ 85EB987
+gText_WasItWorriedAboutYou:: @ 85EB987
 	.string "Was it worried about you?$"
 
-gUnknown_085EB9A1:: @ 85EB9A1
+gText_FourEllipsesExclamation:: @ 85EB9A1
 	.string "… … … … !$"
 
-gUnknown_085EB9AB:: @ 85EB9AB
+gText_PleaseRemoveTheMail:: @ 85EB9AB
 	.string "Please remove the MAIL.$"
 
-gUnknown_085EB9C3:: @ 85EB9C3
+gText_GiveToAPkmn:: @ 85EB9C3
 	.string "GIVE to a POKéMON?$"
 
-gUnknown_085EB9D6:: @ 85EB9D6
+gText_PlacedItemInBag:: @ 85EB9D6
 	.string "Placed item in the BAG.$"
 
-gUnknown_085EB9EE:: @ 85EB9EE
+gText_BagIsFull2:: @ 85EB9EE
 	.string "The BAG is full.$"
 
-gUnknown_085EB9FF:: @ 85EB9FF
+gText_PutItemInBag:: @ 85EB9FF
 	.string "Put this item in the BAG?$"
 
-gUnknown_085EBA19:: @ 85EBA19
+gText_ItemIsNowHeld:: @ 85EBA19
 	.string "{SPECIAL_F7 0x00} is now held.$"
 
-gUnknown_085EBA29:: @ 85EBA29
+gText_ChangedToNewItem:: @ 85EBA29
 	.string "Changed to {SPECIAL_F7 0x00}.$"
 
-gUnknown_085EBA38:: @ 85EBA38
+gText_MailCantBeStored:: @ 85EBA38
 	.string "MAIL can’t be stored!$"
 
 gUnknown_085EBA4E:: @ 85EBA4E

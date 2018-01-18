@@ -67,11 +67,11 @@ gUnknown_085724BC:: @ 85724BC
 	.2byte 0x1143, 0x1144, 0x1144, 0x1145, 0x1153, 0x1154, 0x1154, 0x1155, 0x1163, 0x1164, 0x1164, 0x1165
 
 	.align 2
-gUnknown_085724D4:: @ 85724D4
+WaveformPalette:: @ 85724D4
 	.incbin "graphics/pokemon_storage/waveform.gbapal"
 
 	.align 2
-gUnknown_085724F4:: @ 85724F4
+WaveformTiles:: @ 85724F4
 	.incbin "graphics/pokemon_storage/waveform.4bpp"
 
 	.align 2
@@ -94,48 +94,48 @@ gUnknown_08572734:: @ 8572734
 	.4byte 0x000001d0, 0x004011e5, 0x000023ba, 0x000031ff
 
 	.align 2
-gUnknown_08572744:: @ 8572744
-	obj_pal gUnknown_085724D4, 0xDACA
+gWaveformSpritePalette:: @ 8572744
+	obj_pal WaveformPalette, 0xDACA
 
 	.align 2
-gUnknown_0857274C:: @ 857274C
-	obj_tiles gUnknown_085724F4, 0x1C0, 5
+gWaveformSpriteSheet:: @ 857274C
+	obj_tiles WaveformTiles, 0x1C0, 5
 
 gUnknown_08572754:: @ 8572754
 	spr_template 2, 0xDAC6, gOamData_857286C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_0857276C:: @ 857276C
-	.4byte gUnknown_085EB7EF, 0
-	.4byte gUnknown_085EB802, 0
-	.4byte gUnknown_085EB81A, 0
-	.4byte gUnknown_085EB82F, 0
-	.4byte gUnknown_085EB843, 1
-	.4byte gUnknown_085EB853, 0
-	.4byte gUnknown_085EB866, 0
-	.4byte gUnknown_085EB87C, 1
-	.4byte gUnknown_085EB88E, 0
-	.4byte gUnknown_085EB89F, 0
-	.4byte gUnknown_085EB8B5, 4
-	.4byte gUnknown_085EB8C6, 6
-	.4byte gUnknown_085EB8D3, 0
-	.4byte gUnknown_085EB8E6, 0
-	.4byte gUnknown_085EB900, 0
-	.4byte gUnknown_085EB913, 0
-	.4byte gUnknown_085EB92D, 0
-	.4byte gUnknown_085EB946, 0
-	.4byte gUnknown_085EB960, 0
-	.4byte gUnknown_085EB979, 1
-	.4byte gUnknown_085EB987, 0
-	.4byte gUnknown_085EB9A1, 0
-	.4byte gUnknown_085EB9AB, 0
-	.4byte gUnknown_085EB843, 7
-	.4byte gUnknown_085EB9C3, 0
-	.4byte gUnknown_085EB9D6, 7
-	.4byte gUnknown_085EB9EE, 0
-	.4byte gUnknown_085EB9FF, 0
-	.4byte gUnknown_085EBA19, 7
-	.4byte gUnknown_085EBA29, 7
-	.4byte gUnknown_085EBA38, 0
+	.4byte gText_ExitFromBox, 0
+	.4byte gText_WhatDoYouWantToDo, 0
+	.4byte gText_PleasePickATheme, 0
+	.4byte gText_PickTheWallpaper, 0
+	.4byte gText_PkmnIsSelected, 1
+	.4byte gText_JumpToWhichBox, 0
+	.4byte gText_DepositInWhichBox, 0
+	.4byte gText_PkmnWasDeposited, 1
+	.4byte gText_BoxIsFull2, 0
+	.4byte gText_ReleaseThisPokemon, 0
+	.4byte gText_PkmnWasReleased, 4
+	.4byte gText_ByeByePkmn, 6
+	.4byte gText_MarkYourPkmn, 0
+	.4byte gText_ThatsYourLastPkmn, 0
+	.4byte gText_YourPartysFull, 0
+	.4byte gText_YoureHoldingAPkmn, 0
+	.4byte gText_WhichOneWillYouTake, 0
+	.4byte gText_YouCantReleaseAnEgg, 0
+	.4byte gText_ContinueBoxOperations, 0
+	.4byte gText_PkmnCameBack, 1
+	.4byte gText_WasItWorriedAboutYou, 0
+	.4byte gText_FourEllipsesExclamation, 0
+	.4byte gText_PleaseRemoveTheMail, 0
+	.4byte gText_PkmnIsSelected, 7
+	.4byte gText_GiveToAPkmn, 0
+	.4byte gText_PlacedItemInBag, 7
+	.4byte gText_BagIsFull2, 0
+	.4byte gText_PutItemInBag, 0
+	.4byte gText_ItemIsNowHeld, 7
+	.4byte gText_ChangedToNewItem, 7
+	.4byte gText_MailCantBeStored, 0
 
 	.align 2
 gUnknown_08572864:: @ 8572864
@@ -531,15 +531,352 @@ PCGfx_Arrow: @ 8577678
 	.incbin "graphics/pokemon_storage/arrow.4bpp"
 
 	.align 2
-gUnknown_085776F8:: @ 85776F8
-	.incbin "baserom.gba", 0x5776F8, 0x384c
+gWallpaperPalettes_Zigzagoon:: @ 85776F8
+	.incbin "graphics/pokemon_storage/friends_frame1.gbapal"
+	.incbin "graphics/pokemon_storage/zigzagoon_bg.gbapal"
 
+	.align 2
+gWallpaperTiles_Zigzagoon: @ 8577738
+	.incbin "graphics/pokemon_storage/zigzagoon.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Zigzagoon: @ 857792C
+	.incbin "graphics/pokemon_storage/zigzagoon.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Screen:: @ 8577A44
+	.incbin "graphics/pokemon_storage/friends_frame1.gbapal"
+	.incbin "graphics/pokemon_storage/screen_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Screen: @ 8577A84
+	.incbin "graphics/pokemon_storage/screen.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Screen: @ 8577D00
+	.incbin "graphics/pokemon_storage/screen.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Diagonal:: @ 8577E2C
+	.incbin "graphics/pokemon_storage/friends_frame1.gbapal"
+	.incbin "graphics/pokemon_storage/diagonal_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Diagonal: @ 8577E6C
+	.incbin "graphics/pokemon_storage/diagonal.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Diagonal: @ 8578058
+	.incbin "graphics/pokemon_storage/diagonal.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Block:: @ 8578148
+	.incbin "graphics/pokemon_storage/block_bg.gbapal"
+	.incbin "graphics/pokemon_storage/block_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Block: @ 8578188
+	.incbin "graphics/pokemon_storage/block.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Block: @ 8578358
+	.incbin "graphics/pokemon_storage/block.bin.lz"
+
+	.align 2
+gWallpaperPalettes_PokeCenter2:: @ 8578450
+	.incbin "graphics/pokemon_storage/pokecenter2_bg.gbapal"
+	.incbin "graphics/pokemon_storage/pokecenter2_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_PokeCenter2: @ 8578490
+	.incbin "graphics/pokemon_storage/pokecenter2.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_PokeCenter2: @ 85786D0
+	.incbin "graphics/pokemon_storage/pokecenter2.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Frame:: @ 85787E4
+	.incbin "graphics/pokemon_storage/frame_bg.gbapal"
+	.incbin "graphics/pokemon_storage/frame_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Frame: @ 8578824
+	.incbin "graphics/pokemon_storage/frame.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Frame: @ 8578A34
+	.incbin "graphics/pokemon_storage/frame.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Blank:: @ 8578B48
+	.incbin "graphics/pokemon_storage/friends_frame1.gbapal"
+	.incbin "graphics/pokemon_storage/zigzagoon_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Blank: @ 8578B88
+	.incbin "graphics/pokemon_storage/blank.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Blank: @ 8578D34
+	.incbin "graphics/pokemon_storage/blank.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Circles:: @ 8578E10
+	.incbin "graphics/pokemon_storage/friends_frame2.gbapal"
+	.incbin "graphics/pokemon_storage/circles_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Circles: @ 8578E50
+	.incbin "graphics/pokemon_storage/circles.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Circles: @ 85790A4
+	.incbin "graphics/pokemon_storage/circles.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Azumarill:: @ 85791A0
+	.incbin "graphics/pokemon_storage/friends_frame2.gbapal"
+	.incbin "graphics/pokemon_storage/azumarill_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Azumarill: @ 85791E0
+	.incbin "graphics/pokemon_storage/azumarill.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Azumarill: @ 85793CC
+	.incbin "graphics/pokemon_storage/azumarill.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Pikachu:: @ 85794C4
+	.incbin "graphics/pokemon_storage/friends_frame2.gbapal"
+	.incbin "graphics/pokemon_storage/pikachu_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Pikachu: @ 8579504
+	.incbin "graphics/pokemon_storage/pikachu.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Pikachu: @ 8579738
+	.incbin "graphics/pokemon_storage/pikachu.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Legendary:: @ 8579860
+	.incbin "graphics/pokemon_storage/friends_frame2.gbapal"
+	.incbin "graphics/pokemon_storage/legendary_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Legendary: @ 85798A0
+	.incbin "graphics/pokemon_storage/legendary.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Legendary: @ 8579B80
+	.incbin "graphics/pokemon_storage/legendary.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Dusclops:: @ 8579CC4
+	.incbin "graphics/pokemon_storage/friends_frame2.gbapal"
+	.incbin "graphics/pokemon_storage/dusclops_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Dusclops: @ 8579D04
+	.incbin "graphics/pokemon_storage/dusclops.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Dusclops: @ 8579F50
+	.incbin "graphics/pokemon_storage/dusclops.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Ludicolo:: @ 857A048
+	.incbin "graphics/pokemon_storage/friends_frame2.gbapal"
+	.incbin "graphics/pokemon_storage/ludicolo_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Ludicolo: @ 857A088
+	.incbin "graphics/pokemon_storage/ludicolo.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Ludicolo: @ 857A348
+	.incbin "graphics/pokemon_storage/ludicolo.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Whiscash:: @ 857A468
+	.incbin "graphics/pokemon_storage/friends_frame2.gbapal"
+	.incbin "graphics/pokemon_storage/whiscash_bg.gbapal"
+
+	.align 2
+gWallpaperTiles_Whiscash: @ 857A4A8
+	.incbin "graphics/pokemon_storage/whiscash.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Whiscash: @ 857A6F0
+	.incbin "graphics/pokemon_storage/whiscash.bin.lz"
+
+	.align 2
+gWallpaperIcon_Aqua: @ 857A81C
+	.incbin "graphics/pokemon_storage/aqua_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Heart: @ 857A860
+	.incbin "graphics/pokemon_storage/heart_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_FiveStar: @ 857A89C
+	.incbin "graphics/pokemon_storage/five_star_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Brick: @ 857A8DC
+	.incbin "graphics/pokemon_storage/brick_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_FourStar: @ 857A904
+	.incbin "graphics/pokemon_storage/four_star_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Asterisk: @ 857A940
+	.incbin "graphics/pokemon_storage/asterisk_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Dot: @ 857A990
+	.incbin "graphics/pokemon_storage/dot_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_LineCircle: @ 857A9C0
+	.incbin "graphics/pokemon_storage/line_circle_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_PokeBall: @ 857A9EC
+	.incbin "graphics/pokemon_storage/pokeball_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Maze: @ 857AA38
+	.incbin "graphics/pokemon_storage/maze_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Footprint: @ 857AA7C
+	.incbin "graphics/pokemon_storage/footprint_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_BigAsterisk: @ 857AAC4
+	.incbin "graphics/pokemon_storage/big_asterisk_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Circle: @ 857AB08
+	.incbin "graphics/pokemon_storage/circle_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Koffing: @ 857AB48
+	.incbin "graphics/pokemon_storage/koffing_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Ribbon: @ 857AB98
+	.incbin "graphics/pokemon_storage/ribbon_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_FourCircles: @ 857AC00
+	.incbin "graphics/pokemon_storage/four_circles_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Lotad: @ 857AC30
+	.incbin "graphics/pokemon_storage/lotad_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Crystal: @ 857AC74
+	.incbin "graphics/pokemon_storage/crystal_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Pichu: @ 857ACBC
+	.incbin "graphics/pokemon_storage/pichu_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Diglett: @ 857ACF4
+	.incbin "graphics/pokemon_storage/diglett_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Luvdisc: @ 857AD44
+	.incbin "graphics/pokemon_storage/luvdisc_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_StarInCircle: @ 857AD88
+	.incbin "graphics/pokemon_storage/star_in_circle_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Spinda: @ 857ADCC
+	.incbin "graphics/pokemon_storage/spinda_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Latis: @ 857AE20
+	.incbin "graphics/pokemon_storage/latis_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Minun: @ 857AE64
+	.incbin "graphics/pokemon_storage/minun_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Togepi: @ 857AEAC
+	.incbin "graphics/pokemon_storage/togepi_icon.4bpp.lz"
+
+	.align 2
+gWallpaperIcon_Magma: @ 857AF08
+	.incbin "graphics/pokemon_storage/magma_icon.4bpp.lz"
+
+	.align 2
 gUnknown_0857AF44:: @ 857AF44
-	.incbin "baserom.gba", 0x57af44, 0xc0
+	.4byte gWallpaperTiles_Zigzagoon, gWallpaperTilemap_Zigzagoon, gWallpaperPalettes_Zigzagoon
+	.4byte gWallpaperTiles_Screen, gWallpaperTilemap_Screen, gWallpaperPalettes_Screen
+	.4byte gWallpaperTiles_Horizontal, gWallpaperTilemap_Horizontal, gWallpaperPalettes_Horizontal
+	.4byte gWallpaperTiles_Diagonal, gWallpaperTilemap_Diagonal, gWallpaperPalettes_Diagonal
+	.4byte gWallpaperTiles_Block, gWallpaperTilemap_Block, gWallpaperPalettes_Block
+	.4byte gWallpaperTiles_Ribbon, gWallpaperTilemap_Ribbon, gWallpaperPalettes_Ribbon
+	.4byte gWallpaperTiles_PokeCenter2, gWallpaperTilemap_PokeCenter2, gWallpaperPalettes_PokeCenter2
+	.4byte gWallpaperTiles_Frame, gWallpaperTilemap_Frame, gWallpaperPalettes_Frame
+	.4byte gWallpaperTiles_Blank, gWallpaperTilemap_Blank, gWallpaperPalettes_Blank
+	.4byte gWallpaperTiles_Circles, gWallpaperTilemap_Circles, gWallpaperPalettes_Circles
+	.4byte gWallpaperTiles_Azumarill, gWallpaperTilemap_Azumarill, gWallpaperPalettes_Azumarill
+	.4byte gWallpaperTiles_Pikachu, gWallpaperTilemap_Pikachu, gWallpaperPalettes_Pikachu
+	.4byte gWallpaperTiles_Legendary, gWallpaperTilemap_Legendary, gWallpaperPalettes_Legendary
+	.4byte gWallpaperTiles_Dusclops, gWallpaperTilemap_Dusclops, gWallpaperPalettes_Dusclops
+	.4byte gWallpaperTiles_Ludicolo, gWallpaperTilemap_Ludicolo, gWallpaperPalettes_Ludicolo
+	.4byte gWallpaperTiles_Whiscash, gWallpaperTilemap_Whiscash, gWallpaperPalettes_Whiscash
 
+	.align 2
 gUnknown_0857B004:: @ 857B004
-	.incbin "baserom.gba", 0x57b004, 0x7c
+    .4byte gWallpaperIcon_Aqua
+    .4byte gWallpaperIcon_Heart
+    .4byte gWallpaperIcon_FiveStar
+    .4byte gWallpaperIcon_Brick
+    .4byte gWallpaperIcon_FourStar
+    .4byte gWallpaperIcon_Asterisk
+    .4byte gWallpaperIcon_Dot
+    .4byte gWallpaperIcon_Cross
+    .4byte gWallpaperIcon_LineCircle
+    .4byte gWallpaperIcon_PokeBall
+    .4byte gWallpaperIcon_Maze
+    .4byte gWallpaperIcon_Footprint
+    .4byte gWallpaperIcon_BigAsterisk
+    .4byte gWallpaperIcon_Circle
+    .4byte gWallpaperIcon_Koffing
+    .4byte gWallpaperIcon_Ribbon
+    .4byte gWallpaperIcon_Bolt
+    .4byte gWallpaperIcon_FourCircles
+    .4byte gWallpaperIcon_Lotad
+    .4byte gWallpaperIcon_Crystal
+    .4byte gWallpaperIcon_Pichu
+    .4byte gWallpaperIcon_Diglett
+    .4byte gWallpaperIcon_Luvdisc
+    .4byte gWallpaperIcon_StarInCircle
+    .4byte gWallpaperIcon_Spinda
+    .4byte gWallpaperIcon_Latis
+    .4byte gWallpaperIcon_Plusle
+    .4byte gWallpaperIcon_Minun
+    .4byte gWallpaperIcon_Togepi
+    .4byte gWallpaperIcon_Magma
 
+	.align 2
+gUnknown_0857B07C:: @ 857B07C
+	.incbin "baserom.gba", 0x57b07C, 0x4
+
+	.align 2
 gUnknown_0857B080:: @ 857B080
 	.incbin "baserom.gba", 0x57b080, 0x28
 

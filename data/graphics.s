@@ -5049,40 +5049,42 @@ gUnknown_08DDD748:: @ 8DDD748
 	.incbin "graphics/interface/textbox.4bpp"
 
 	.align 2
-gUnknown_08DDD908::
-	.incbin "graphics/unknown/unknown_DDD908.bin.lz"
+gWallpaperIcon_Cross::
+	.incbin "graphics/pokemon_storage/cross_icon.4bpp.lz"
 
 	.align 2
-gUnknown_08DDD920::
-	.incbin "graphics/unknown/unknown_DDD920.bin.lz"
+gWallpaperIcon_Bolt::
+	.incbin "graphics/pokemon_storage/bolt_icon.4bpp.lz"
 
 	.align 2
-gUnknown_08DDD938::
-	.incbin "graphics/unknown/unknown_DDD938.bin.lz"
+gWallpaperIcon_Plusle::
+	.incbin "graphics/pokemon_storage/plusle_icon.4bpp.lz"
 
 	.align 2
-gUnknown_08DDD950::
-	.incbin "graphics/pokemon_storage/pss_window.gbapal"
+gWallpaperPalettes_Horizontal:: @ 8DDD950
+	.incbin "graphics/pokemon_storage/friends_frame2.gbapal"
+	.incbin "graphics/pokemon_storage/horizontal_bg.gbapal"
 
 	.align 2
-gUnknown_08DDD990::
-	.incbin "graphics/pokemon_storage/pss_window.4bpp.lz"
+gWallpaperTiles_Horizontal:: @ 8DDD990
+	.incbin "graphics/pokemon_storage/horizontal.4bpp.lz"
 
 	.align 2
-gUnknown_08DDDB80:: @ 8DDDB80
-	.incbin "graphics/unknown/unknown_DDDB80.bin.lz"
+gWallpaperTilemap_Horizontal:: @ 8DDDB80
+	.incbin "graphics/pokemon_storage/horizontal.bin.lz"
 
 	.align 2
-gUnknown_08DDDC8C::
-	.incbin "graphics/pokemon_storage/pss_window2.gbapal"
+gWallpaperPalettes_Ribbon:: @ 8DDDC8C
+	.incbin "graphics/pokemon_storage/ribbon_frame.gbapal"
+	.incbin "graphics/pokemon_storage/ribbon_bg.gbapal"
 
 	.align 2
-gUnknown_08DDDCCC::
-	.incbin "graphics/pokemon_storage/pss_window2.4bpp.lz"
+gWallpaperTiles_Ribbon:: @ 8DDDCCC
+	.incbin "graphics/pokemon_storage/ribbon.4bpp.lz"
 
 	.align 2
-gUnknown_08DDDEDC::
-	.incbin "graphics/pokemon_storage/pss_window2.bin.lz"
+gWallpaperTilemap_Ribbon:: @ 8DDDEDC
+	.incbin "graphics/pokemon_storage/ribbon.bin.lz"
 
 	@ pokenav
 

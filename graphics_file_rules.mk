@@ -490,16 +490,16 @@ $(PSSGFXDIR)/forest_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 55
 
 $(PSSGFXDIR)/forest.4bpp: $(PSSGFXDIR)/forest_frame.4bpp $(PSSGFXDIR)/forest_bg.4bpp
-	@cat $(PSSGFXDIR)/forest_frame.4bpp $(PSSGFXDIR)/forest_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/city_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 52
 
 $(PSSGFXDIR)/city.4bpp: $(PSSGFXDIR)/city_frame.4bpp $(PSSGFXDIR)/city_bg.4bpp
-	@cat $(PSSGFXDIR)/city_frame.4bpp $(PSSGFXDIR)/city_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/desert.4bpp: $(PSSGFXDIR)/desert_frame.4bpp $(PSSGFXDIR)/desert_bg.4bpp
-	@cat $(PSSGFXDIR)/desert_frame.4bpp $(PSSGFXDIR)/desert_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/savanna_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 45
@@ -508,31 +508,31 @@ $(PSSGFXDIR)/savanna_bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 23
 
 $(PSSGFXDIR)/savanna.4bpp: $(PSSGFXDIR)/savanna_frame.4bpp $(PSSGFXDIR)/savanna_bg.4bpp
-	@cat $(PSSGFXDIR)/savanna_frame.4bpp $(PSSGFXDIR)/savanna_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/crag_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 49
 
 $(PSSGFXDIR)/crag.4bpp: $(PSSGFXDIR)/crag_frame.4bpp $(PSSGFXDIR)/crag_bg.4bpp
-	@cat $(PSSGFXDIR)/crag_frame.4bpp $(PSSGFXDIR)/crag_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/volcano_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 56
 
 $(PSSGFXDIR)/volcano.4bpp: $(PSSGFXDIR)/volcano_frame.4bpp $(PSSGFXDIR)/volcano_bg.4bpp
-	@cat $(PSSGFXDIR)/volcano_frame.4bpp $(PSSGFXDIR)/volcano_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/snow_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 57
 
 $(PSSGFXDIR)/snow.4bpp: $(PSSGFXDIR)/snow_frame.4bpp $(PSSGFXDIR)/snow_bg.4bpp
-	@cat $(PSSGFXDIR)/snow_frame.4bpp $(PSSGFXDIR)/snow_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/cave_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 55
 
 $(PSSGFXDIR)/cave.4bpp: $(PSSGFXDIR)/cave_frame.4bpp $(PSSGFXDIR)/cave_bg.4bpp
-	@cat $(PSSGFXDIR)/cave_frame.4bpp $(PSSGFXDIR)/cave_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/beach_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 46
@@ -541,13 +541,13 @@ $(PSSGFXDIR)/beach_bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 23
 
 $(PSSGFXDIR)/beach.4bpp: $(PSSGFXDIR)/beach_frame.4bpp $(PSSGFXDIR)/beach_bg.4bpp
-	@cat $(PSSGFXDIR)/beach_frame.4bpp $(PSSGFXDIR)/beach_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/seafloor_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 54
 
 $(PSSGFXDIR)/seafloor.4bpp: $(PSSGFXDIR)/seafloor_frame.4bpp $(PSSGFXDIR)/seafloor_bg.4bpp
-	@cat $(PSSGFXDIR)/seafloor_frame.4bpp $(PSSGFXDIR)/seafloor_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/river_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 51
@@ -556,34 +556,88 @@ $(PSSGFXDIR)/river_bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 11
 
 $(PSSGFXDIR)/river.4bpp: $(PSSGFXDIR)/river_frame.4bpp $(PSSGFXDIR)/river_bg.4bpp
-	@cat $(PSSGFXDIR)/river_frame.4bpp $(PSSGFXDIR)/river_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/sky_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 45
 
 $(PSSGFXDIR)/sky.4bpp: $(PSSGFXDIR)/sky_frame.4bpp $(PSSGFXDIR)/sky_bg.4bpp
-	@cat $(PSSGFXDIR)/sky_frame.4bpp $(PSSGFXDIR)/sky_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/bubbles_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 54
 
 $(PSSGFXDIR)/bubbles.4bpp: $(PSSGFXDIR)/bubbles_frame.4bpp $(PSSGFXDIR)/bubbles_bg.4bpp
-	@cat $(PSSGFXDIR)/bubbles_frame.4bpp $(PSSGFXDIR)/bubbles_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/pokecenter_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 35
 
 $(PSSGFXDIR)/pokecenter.4bpp: $(PSSGFXDIR)/pokecenter_frame.4bpp $(PSSGFXDIR)/pokecenter_bg.4bpp
-	@cat $(PSSGFXDIR)/pokecenter_frame.4bpp $(PSSGFXDIR)/pokecenter_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/machine_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 33
 
 $(PSSGFXDIR)/machine.4bpp: $(PSSGFXDIR)/machine_frame.4bpp $(PSSGFXDIR)/machine_bg.4bpp
-	@cat $(PSSGFXDIR)/machine_frame.4bpp $(PSSGFXDIR)/machine_bg.4bpp >$@
+	@cat $^ >$@
 
 $(PSSGFXDIR)/plain_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 18
 
 $(PSSGFXDIR)/plain.4bpp: $(PSSGFXDIR)/plain_frame.4bpp $(PSSGFXDIR)/plain_bg.4bpp
-	@cat $(PSSGFXDIR)/plain_frame.4bpp $(PSSGFXDIR)/plain_bg.4bpp >$@
+	@cat $^ >$@
+
+$(PSSGFXDIR)/friends_frame1.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 57
+
+$(PSSGFXDIR)/friends_frame2.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 57
+
+$(PSSGFXDIR)/zigzagoon.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/zigzagoon_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/screen.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/screen_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/horizontal.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/horizontal_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/diagonal.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/diagonal_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/block.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/block_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/ribbon.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/ribbon_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/pokecenter2.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/pokecenter2_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/frame.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/frame_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/blank.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/blank_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/circles.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/circles_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/azumarill.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/azumarill_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/pikachu.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/pikachu_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/legendary.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/legendary_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/dusclops.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/dusclops_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/ludicolo.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/ludicolo_bg.4bpp
+	@cat $^ >$@
+
+$(PSSGFXDIR)/whiscash.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/whiscash_bg.4bpp
+	@cat $^ >$@

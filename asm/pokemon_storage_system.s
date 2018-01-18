@@ -5393,7 +5393,7 @@ _080CA0C2:
 	thumb_func_start sub_80CA0C8
 sub_80CA0C8: @ 80CA0C8
 	push {lr}
-	ldr r0, =gUnknown_08572744
+	ldr r0, =gWaveformSpritePalette
 	bl LoadSpritePalette
 	pop {r0}
 	bx r0
@@ -5498,7 +5498,7 @@ sub_80CA154: @ 80CA154
 sub_80CA1C4: @ 80CA1C4
 	push {r4,lr}
 	sub sp, 0x8
-	ldr r0, =gUnknown_0857274C
+	ldr r0, =gWaveformSpriteSheet
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [sp]
