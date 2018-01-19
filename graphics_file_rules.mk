@@ -301,7 +301,7 @@ graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
 graphics/intro/copyright.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 39
 	
-graphics/interface/pkmnjump_bg.4bpp: %.4bpp: %.png
+graphics/link_games/pkmnjump_bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 63
 
 graphics/pokenav/region_map.8bpp: %.8bpp: %.png
