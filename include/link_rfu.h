@@ -96,9 +96,9 @@ struct UnkRfuStruct_1 {
 struct UnkRfuStruct_2_Sub_6c {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ u16 unk_02;
-    /* 0x04 */ u32 unk_04;
+    /* 0x04 */ u8 *unk_04;
     /* 0x08 */ u32 unk_08;
-    /* 0x0c */ u8 filler_0c[4];
+    /* 0x0c */ u32 unk_0c;
     /* 0x10 */ u8 unk_10;
     /* 0x11 */ u8 unk_11;
     /* 0x12 */ u8 unk_12;

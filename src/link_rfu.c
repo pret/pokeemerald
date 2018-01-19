@@ -3191,3 +3191,128 @@ bool32 sub_800F4F0(void)
     }
     return sub_800F0B8();
 }
+
+#ifdef NONMATCHING
+void sub_800F638(u8 unused, u32 flags)
+{
+    int i;
+    int j;
+
+    u8 *r10 = gUnknown_03005000.unk_6c.unk_04;
+    for (i = 0; i < gUnknown_03005000.unk_6c.unk_02; i++)
+    {
+        if (!(flags & 1))
+        {
+            gUnknown_03000D90[0] = (~0x76ff) | i;
+            for (j = 0; j < 7; j++)
+            {
+                gUnknown_03000D90[j + 1] = (r10[12 * i + (j << 1) + 1] << 8) | r10[12 * i + (j << 1) + 0];
+            }
+            for (j = 0; j < 7; j++)
+            // This should be an ascending loop.
+            // GCC compiles this as descending.
+            {
+                gUnknown_03000D80[2 * j + 1] = gUnknown_03000D90[j] >> 8;
+                gUnknown_03000D80[2 * j + 0] = gUnknown_03000D90[j];
+            }
+            sub_800D888(&gUnknown_03005000.unk_9e8, gUnknown_03000D80);
+            gUnknown_03005000.unk_6c.unk_0c |= (1 << i);
+        }
+        flags >>= 1;
+    }
+}
+#else
+__attribute__((naked)) void sub_800F638(u8 unused, u32 flags)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r10\n"
+                    "\tmov r6, r9\n"
+                    "\tmov r5, r8\n"
+                    "\tpush {r5-r7}\n"
+                    "\tldr r0, =gUnknown_03005000\n"
+                    "\tldr r2, [r0, 0x70]\n"
+                    "\tmov r10, r2\n"
+                    "\tmovs r5, 0\n"
+                    "\tadds r2, r0, 0\n"
+                    "\tadds r2, 0x6E\n"
+                    "\tldrh r3, [r2]\n"
+                    "\tcmp r5, r3\n"
+                    "\tbge _0800F6D4\n"
+                    "\tmov r9, r0\n"
+                    "\tldr r0, =gUnknown_03000D90\n"
+                    "\tmov r8, r0\n"
+                    "_0800F65A:\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tands r0, r1\n"
+                    "\tlsrs r7, r1, 1\n"
+                    "\tadds r6, r5, 0x1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbne _0800F6C8\n"
+                    "\tldr r1, =0xffff8900\n"
+                    "\tadds r0, r1, 0\n"
+                    "\tadds r1, r5, 0\n"
+                    "\torrs r1, r0\n"
+                    "\tmov r2, r8\n"
+                    "\tstrh r1, [r2]\n"
+                    "\tmovs r4, 0\n"
+                    "\tlsls r0, r5, 1\n"
+                    "\tldr r3, =gUnknown_03000D80\n"
+                    "\tmov r12, r3\n"
+                    "\tadds r0, r5\n"
+                    "\tlsls r0, 2\n"
+                    "\tmov r1, r10\n"
+                    "\tadds r2, r0, r1\n"
+                    "\tmov r3, r8\n"
+                    "\tadds r3, 0x2\n"
+                    "_0800F686:\n"
+                    "\tldrb r1, [r2, 0x1]\n"
+                    "\tlsls r1, 8\n"
+                    "\tldrb r0, [r2]\n"
+                    "\torrs r0, r1\n"
+                    "\tstrh r0, [r3]\n"
+                    "\tadds r2, 0x2\n"
+                    "\tadds r3, 0x2\n"
+                    "\tadds r4, 0x1\n"
+                    "\tcmp r4, 0x6\n"
+                    "\tble _0800F686\n"
+                    "\tmovs r4, 0\n"
+                    "\tldr r2, =gUnknown_03000D90\n"
+                    "\tldr r1, =gUnknown_03000D80\n"
+                    "_0800F6A0:\n"
+                    "\tldrh r0, [r2]\n"
+                    "\tlsrs r0, 8\n"
+                    "\tstrb r0, [r1, 0x1]\n"
+                    "\tldrh r0, [r2]\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tadds r2, 0x2\n"
+                    "\tadds r1, 0x2\n"
+                    "\tadds r4, 0x1\n"
+                    "\tcmp r4, 0x6\n"
+                    "\tble _0800F6A0\n"
+                    "\tldr r0, =gUnknown_03005000+0x9E8\n"
+                    "\tmov r1, r12\n"
+                    "\tbl sub_800D888\n"
+                    "\tmovs r1, 0x1\n"
+                    "\tlsls r1, r5\n"
+                    "\tmov r2, r9\n"
+                    "\tldr r0, [r2, 0x78]\n"
+                    "\torrs r0, r1\n"
+                    "\tstr r0, [r2, 0x78]\n"
+                    "_0800F6C8:\n"
+                    "\tadds r1, r7, 0\n"
+                    "\tadds r5, r6, 0\n"
+                    "\tldr r3, =gUnknown_03005000+0x6E\n"
+                    "\tldrh r3, [r3]\n"
+                    "\tcmp r5, r3\n"
+                    "\tblt _0800F65A\n"
+                    "_0800F6D4:\n"
+                    "\tpop {r3-r5}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tmov r10, r5\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.pool");
+}
+#endif
