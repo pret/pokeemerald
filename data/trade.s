@@ -2,25 +2,31 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-	.align 2, 0
 
+	.align 2
 gUnknown_0832C6A8:: @ 832C6A8
-	.incbin "baserom.gba", 0x32C6A8, 0x18
+	.4byte 0x00000f2c, 0x00003d88, 0x0000001c, 0x00000024, 0x00000064, 0x00000528
 
-gUnknown_0832C6C0:: @ 832C6C0
-	.incbin "baserom.gba", 0x32c6c0, 0x1fe
+	.align 1
+gTradeMovesBoxTilemap:: @ 832C6C0
+	.incbin "graphics/trade/moves_box_map.bin"
 
-gUnknown_0832C8BE:: @ 832C8BE
-	.incbin "baserom.gba", 0x32c8be, 0x1fe
+	.align 1
+gTradePartyBoxTilemap:: @ 832C8BE
+	.incbin "graphics/trade/party_box_map.bin"
 
-gUnknown_0832CABC:: @ 832CABC
-	.incbin "baserom.gba", 0x32cabc, 0x800
+	.align 1
+gTradeStripesBG2Tilemap:: @ 832CABC
+	.incbin "graphics/trade/stripes_bg2_map.bin"
 
-gUnknown_0832D2BC:: @ 832D2BC
-	.incbin "baserom.gba", 0x32d2bc, 0x800
+	.align 1
+gTradeStripesBG3Tilemap:: @ 832D2BC
+	.incbin "graphics/trade/stripes_bg3_map.bin"
 
 gUnknown_0832DABC:: @ 832DABC
-	.incbin "baserom.gba", 0x32dabc, 0xb
+	.string "$"
+
+	.string "{COLOR WHITE}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}$"
 
 gText_MaleSymbol4:: @ 832DAC7
 	.string "♂$"
@@ -29,30 +35,128 @@ gText_FemaleSymbol4:: @ 832DAC9
 	.string "♀$"
 
 gText_GenderlessSymbol:: @ 832DACB
-	.incbin "baserom.gba", 0x32dacb, 0x7
+	.string "$"
+
+	.string " MOVE$"
 
 gUnknown_0832DAD2:: @ 832DAD2
-	.incbin "baserom.gba", 0x32dad2, 0xd
+	.string "\n$"
+
+	.string "/$"
+
+	.string "Lv. $"
+
+	.string "---$"
 
 gUnknown_0832DADF:: @ 832DADF
-	.incbin "baserom.gba", 0x32dadf, 0x6
+	.string "????$"
+
+	.string "$"
 
 gUnknown_0832DAE5:: @ 832DAE5
-	.incbin "baserom.gba", 0x32dae5, 0x157
+	.string "Is this trade okay?$"
 
+	.string "CANCEL$"
+
+	.string "Choose a POKéMON.$"
+
+	.string "SUMMARY$"
+
+	.string "TRADE$"
+
+	.string "Cancel trade?$"
+
+	.string "Bボタン　で　もどります$"
+
+	.string "SUMMARY$"
+
+	.string "TRADE$"
+
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Communication standby…\nPlease wait.$"
+
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.$"
+
+	.string "That’s your only\nPOKéMON for battle.$"
+
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Waiting for your friend\nto finish…$"
+
+	.string "Your friend wants\nto trade POKéMON.$"
+
+	.align 2
+gOamData_832DC14:: @ 832DC14
+	.2byte 0x4000, 0x8000, 0x0400, 0x0000
+
+	.align 2
+gOamData_832DC1C:: @ 832DC1C
+	.2byte 0x4000, 0xc000, 0x0400, 0x0000
+
+	.align 2
+gSpriteAnim_832DC24:: @ 832DC24
+	.2byte 0x0000, 0x0005, 0xffff, 0x0000
+
+	.align 2
+gSpriteAnim_832DC2C:: @ 832DC2C
+	.2byte 0x0020, 0x0005, 0xffff, 0x0000
+
+	.align 2
+gSpriteAnimTable_832DC34:: @ 832DC34
+	.4byte gSpriteAnim_832DC24
+	.4byte gSpriteAnim_832DC2C
+
+	.align 2
 gUnknown_0832DC3C:: @ 832DC3C
-	.incbin "baserom.gba", 0x32dc3c, 0x8
+	obj_tiles gUnknown_08DDC6E4, 0x0800, 0x012c
 
+	.align 2
 gUnknown_0832DC44:: @ 832DC44
-	.incbin "baserom.gba", 0x32dc44, 0x50
+	obj_pal gUnknown_08DDB444, 0x0929
 
-gUnknown_0832DC94:: @ 832DC94
-	.incbin "baserom.gba", 0x32dc94, 0x18
+	.align 2
+gSpriteAnim_832DC4C:: @ 832DC4C
+	.2byte 0x0000, 0x0005, 0xffff, 0x0000
 
-gUnknown_0832DCAC:: @ 832DCAC
-	.incbin "baserom.gba", 0x32dcac, 0x38
+	.align 2
+gSpriteAnim_832DC54:: @ 832DC54
+	.2byte 0x0008, 0x0005, 0xffff, 0x0000
 
-gUnknown_0832DCE4:: @ 832DCE4
+	.align 2
+gSpriteAnim_832DC5C:: @ 832DC5C
+	.2byte 0x0010, 0x0005, 0xffff, 0x0000
+
+	.align 2
+gSpriteAnim_832DC64:: @ 832DC64
+	.2byte 0x0018, 0x0005, 0xffff, 0x0000
+
+	.align 2
+gSpriteAnim_832DC6C:: @ 832DC6C
+	.2byte 0x0020, 0x0005, 0xffff, 0x0000
+
+	.align 2
+gSpriteAnim_832DC74:: @ 832DC74
+	.2byte 0x0028, 0x0005, 0xffff, 0x0000
+
+	.align 2
+gSpriteAnimTable_832DC7C:: @ 832DC7C
+	.4byte gSpriteAnim_832DC4C
+	.4byte gSpriteAnim_832DC54
+	.4byte gSpriteAnim_832DC5C
+	.4byte gSpriteAnim_832DC64
+	.4byte gSpriteAnim_832DC6C
+	.4byte gSpriteAnim_832DC74
+
+	.align 2
+gSpriteTemplate_832DC94:: @ 832DC94
+	spr_template 0x012c, 0x0929, gOamData_832DC1C, gSpriteAnimTable_832DC34, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
+	.align 2
+gSpriteTemplate_832DCAC:: @ 832DCAC
+	.incbin "baserom.gba", 0x32dcac, 0x18
+
+	.align 2
+TradeScreenTextPalette:: @ 832DCC4
+	.incbin "graphics/trade/text.gbapal"
+
+gSpritePalette_TradeScreenText:: @ 832DCE4
 	.incbin "baserom.gba", 0x32dce4, 0x8
 
 gUnknown_0832DCEC:: @ 832DCEC
@@ -67,6 +171,7 @@ gUnknown_0832DE3E:: @ 832DE3E
 gUnknown_0832DE56:: @ 832DE56
 	.incbin "baserom.gba", 0x32de56, 0x3e
 
+	.align 2
 gUnknown_0832DE94:: @ 832DE94
 	.incbin "baserom.gba", 0x32de94, 0x18
 
