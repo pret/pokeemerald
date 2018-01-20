@@ -203,6 +203,14 @@ struct UnkRfuStruct_2 {
     /* 0xcee */ u8 unk_cee[4];
 }; // size = 0xcf4
 
+struct UnkRfuStruct_8010A14 {
+    char unk_00[15];
+    u8 unk_0f;
+    u8 unk_10[4];
+    struct LinkPlayer unk_14[4];
+    u8 fill_84[0x78];
+};
+
 // Exported RAM declarations
 
 extern struct UnkRfuStruct_1 gUnknown_03004140;

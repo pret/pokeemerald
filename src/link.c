@@ -26,8 +26,8 @@
 #include "sound.h"
 #include "trade.h"
 #include "battle.h"
-#include "link_rfu.h"
 #include "link.h"
+#include "link_rfu.h"
 
 // Static type declarations
 

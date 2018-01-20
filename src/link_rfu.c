@@ -4280,3 +4280,37 @@ void sub_801084C(u8 taskId)
             break;
     }
 }
+
+void sub_80109E8(u16 a0)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if ((a0 >> i) & 1)
+            gUnknown_03005000.unk_cde[i] = 0;
+    }
+}
+
+void sub_8010A14(const struct UnkRfuStruct_8010A14 *a0)
+{
+    int i;
+    gUnknown_03005000.playerCount = a0->unk_0f;
+    for (i = 0; i < 4; i++)
+        gUnknown_03005000.unk_cde[i] = a0->unk_10[i];
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
+    {
+        gLinkPlayers[i] = a0->unk_14[i];
+        sub_800B524(gLinkPlayers + i);
+    }
+}
+
+void sub_8010A70(void *a0)
+{
+    if (strcmp(gUnknown_082ED7EC, a0) == 0)
+    {
+        sub_8010A14(a0);
+        CpuFill16(0, a0, sizeof(struct UnkRfuStruct_8010A14));
+        ResetBlockReceivedFlag(0);
+    }
+}
