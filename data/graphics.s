@@ -4824,27 +4824,27 @@ gNamingScreenMenu_Gfx:: @ 8DD3838
 	.incbin "graphics/naming_screen/menu.4bpp.lz"
 
 	.align 2
-gNamingScreenRWindow_Gfx::
+gNamingScreenRWindow_Gfx:: @ 8DD3A04
 	.incbin "graphics/naming_screen/rwindow.4bpp"
 
 	.align 2
-gNamingScreenROptions_Gfx::
+gNamingScreenROptions_Gfx:: @ 8DD4044
 	.incbin "graphics/naming_screen/roptions.4bpp"
 
 	.align 2
-gNamingScreenCursor_Gfx::
+gNamingScreenCursor_Gfx:: @ 8DD4224
 	.incbin "graphics/naming_screen/cursor.4bpp"
 
 	.align 2
-gNamingScreenKeyboardButton_Gfx::
+gNamingScreenKeyboardButton_Gfx:: @ 8DD43E4
 	.incbin "graphics/naming_screen/keyboard_button.4bpp"
 
 	.align 2
-gNamingScreenRightPointingTriangleTiles::
+gNamingScreenRightPointingTriangleTiles:: @ 8DD4504
 	.incbin "graphics/naming_screen/right_pointing_triangle.4bpp"
 
 	.align 2
-gNamingScreenUnderscoreTiles::
+gNamingScreenUnderscoreTiles:: @ 8DD4524
 	.incbin "graphics/naming_screen/underscore.4bpp"
 
 	.align 2
