@@ -62,7 +62,7 @@ void sub_800FD14(u16 command);
 void rfufunc_80F9F44(void);
 void sub_800FFB0(void);
 void rfufunc_80FA020(void);
-bool32 sub_8010454(u16 a0);
+bool32 sub_8010454(u32 a0);
 void sub_8010528(void);
 void sub_8010750(void);
 int sub_80107A0(void);
@@ -3924,7 +3924,7 @@ void sub_801022C(void)
 
 void sub_8010264(u8 taskId)
 {
-    if (gUnknown_03005000.unk_00 == 0)
+    if (gUnknown_03005000.unk_00 == NULL)
     {
         gUnknown_03005000.unk_cd9 = 1;
         gUnknown_03005000.unk_00 = sub_801022C;
@@ -3936,4 +3936,134 @@ void task_add_05_task_del_08FA224_when_no_RfuFunc(void)
 {
     if (!FuncIsActiveTask(sub_8010264))
         CreateTask(sub_8010264, 5);
+}
+
+void sub_80102B8(void)
+{
+    u8 playerCount;
+    u8 i;
+
+    if (GetMultiplayerId() != 0)
+    {
+        u8 r4 = gUnknown_03005000.unk_124.unk_8c2;
+        if (r4 == 0 && gUnknown_03005000.unk_fe > 0x3c)
+        {
+            sub_800FD14(0x6600);
+            gUnknown_03005000.unk_fe = r4;
+        }
+    }
+    playerCount = GetLinkPlayerCount();
+    for (i = 0; i < playerCount; i++)
+    {
+        if (gUnknown_03005000.unk_e9[i] == 0)
+            break;
+    }
+    if (i == playerCount)
+    {
+        for (i = 0; i < MAX_RFU_PLAYERS; i++)
+            gUnknown_03005000.unk_e9[i] = 0;
+        gUnknown_03005000.unk_100++;
+        gUnknown_03005000.unk_00 = NULL;
+    }
+    gUnknown_03005000.unk_fe++;
+}
+
+void sub_8010358(void)
+{
+    if (gUnknown_03005000.unk_124.unk_8c2 == 0 && gSendCmd[0] == 0)
+    {
+        sub_800FD14(0x6600);
+        gUnknown_03005000.unk_00 = sub_80102B8;
+    }
+}
+
+void sub_8010390(void)
+{
+    u8 i;
+    u8 playerCount;
+
+    if (GetMultiplayerId() != 0)
+    {
+        if (gUnknown_03005000.unk_124.unk_8c2 == 0 && gSendCmd[0] == 0)
+        {
+            sub_800FD14(0x6600);
+            gUnknown_03005000.unk_00 = sub_80102B8;
+        }
+    }
+    else
+    {
+        playerCount = GetLinkPlayerCount();
+        for (i = 1; i < playerCount; i++)
+        {
+            if (gUnknown_03005000.unk_e9[i] == 0)
+                break;
+        }
+        if (i == playerCount)
+        {
+            if (gUnknown_03005000.unk_124.unk_8c2 == 0 && gSendCmd[0] == 0)
+            {
+                sub_800FD14(0x6600);
+                gUnknown_03005000.unk_00 = sub_8010358;
+            }
+        }
+    }
+}
+
+void sub_8010434(void)
+{
+    if (gUnknown_03005000.unk_00 == NULL)
+    {
+        gUnknown_03005000.unk_00 = sub_8010390;
+        gUnknown_03005000.unk_fe = 0;
+    }
+}
+
+bool32 sub_8010454(u32 a0)
+{
+    int i;
+    for (i = 0; gUnknown_082ED6E0[i] != a0; i++)
+    {
+        if (gUnknown_082ED6E0[i] == 0xffff)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+u8 sub_801048C(bool32 a0)
+{
+    if (a0 == 0)
+        return sub_800D550(0, 0);
+    sub_800D550(1, 0x258);
+    return FALSE;
+}
+
+void sub_80104B0(void)
+{
+    gUnknown_03005000.unk_cd9 = 1;
+    sub_800C27C(FALSE);
+}
+
+u8 rfu_get_multiplayer_id(void)
+{
+    if (gUnknown_03005000.unk_0c == 1)
+        return 0;
+    return gUnknown_03005000.unk_cce;
+}
+
+u8 sub_80104F4(void)
+{
+    return gUnknown_03005000.playerCount;
+}
+
+bool8 sub_8010500(void)
+{
+    if (gUnknown_03005000.unk_f1 == 2)
+        return FALSE;
+    return gUnknown_03005000.unk_00 ? FALSE : TRUE;
+}
+
+void sub_8010528(void)
+{
+    if (gUnknown_03005000.unk_00)
+        gUnknown_03005000.unk_00();
 }
