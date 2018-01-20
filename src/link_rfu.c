@@ -2,12 +2,14 @@
 // Includes
 #include "global.h"
 #include "malloc.h"
+#include "berry_blender.h"
 #include "task.h"
 #include "random.h"
 #include "decompress.h"
 #include "text.h"
 #include "string_util.h"
 #include "event_data.h"
+#include "overworld.h"
 #include "link.h"
 #include "librfu.h"
 #include "link_rfu.h"
@@ -56,6 +58,7 @@ static void sub_800F048(void);
 struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void);
 void sub_800F86C(u8 a0);
 void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
+void sub_800FD14(u16 a0);
 bool32 sub_8010454(u16 a0);
 void sub_8010528(void);
 void sub_8010750(void);
@@ -3316,3 +3319,74 @@ __attribute__((naked)) void sub_800F638(u8 unused, u32 flags)
                     "\t.pool");
 }
 #endif
+
+void sub_800F6FC(u8 a0)
+{
+    if (gUnknown_03005000.unk_0c == 1 && a0)
+        gUnknown_03005000.unk_61[a0] = 1;
+    else
+        gUnknown_03005000.unk_5c[a0] = 1;
+}
+
+void sub_800F728(u8 a0)
+{
+    gUnknown_03005000.unk_5c[a0] = 0;
+    gUnknown_03005000.unk_80[a0].unk_12 = 0;
+}
+
+u8 sub_800F74C(const u8 *a0)
+{
+    u8 i;
+
+    if (gUnknown_03005000.unk_0c == 1)
+        return FALSE;
+    for (i = 0; i < 4; i++)
+    {
+        gUnknown_03005000.unk_cde[i] = a0[i];
+    }
+    return a0[gUnknown_03005000.unk_c3e];
+}
+
+void rfu_func_080F97B8(void)
+{
+    if (gReceivedRemoteLinkPlayers && gUnknown_03005DA8 && gLinkTransferringData != 1)
+    {
+        gUnknown_03000D78[0]++;
+        gUnknown_03005DA8 |= (gUnknown_03000D78[0] << 8);
+        sub_800FD14(0xbe00);
+    }
+}
+
+struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void)
+{
+    return &gUnknown_02022B14;
+}
+
+bool32 sub_800F7E4(void)
+{
+    return gUnknown_03005000.unk_00 == rfu_func_080F97B8;
+}
+
+void sub_800F804(void)
+{
+    gUnknown_03005000.unk_00 = rfu_func_080F97B8;
+}
+
+void Rfu_set_zero(void)
+{
+    gUnknown_03005000.unk_00 = NULL;
+}
+
+void sub_800F820(void)
+{
+    sub_800FD14(0x4400);
+    if (GetMultiplayerId() == 0)
+        gSendCmd[6] = GetBlenderArrowPosition();
+    gUnknown_020223C0++;
+}
+
+void sub_800F850(void)
+{
+    if (gUnknown_03005000.unk_00 == NULL)
+        gUnknown_03005000.unk_00 = sub_800F820;
+}

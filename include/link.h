@@ -195,6 +195,7 @@ extern struct LinkPlayer gLinkPlayers[5];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gWirelessCommType;
+extern u32 gUnknown_020223C0;
 
 void Task_DestroySelf(u8);
 void OpenLink(void);

@@ -136,7 +136,7 @@ struct UnkRfuStruct_Sub_Unused {
 };
 
 struct UnkRfuStruct_2 {
-    /* 0x000 */ u32 unk_00;
+    /* 0x000 */ void (*unk_00)(void);
     /* 0x004 */ u16 unk_04;
     /* 0x006 */ u8 filler_06[6];
     /* 0x00c */ u8 unk_0c;
@@ -145,7 +145,10 @@ struct UnkRfuStruct_2 {
     /* 0x00f */ u8 filler_0f[5];
     /* 0x014 */ u8 unk_14[4][14];
     /* 0x04c */ u8 unk_4c[14];
-    /* 0x05a */ u8 filler_5a[13];
+    /* 0x05a */ u8 filler_5a[2];
+    /* 0x05c */ u8 unk_5c[5];
+    /* 0x061 */ u8 unk_61[5];
+    /* 0x066 */ u8 unk_66;
     /* 0x067 */ u8 unk_67;
     /* 0x068 */ u8 filler_68[4];
     /* 0x06c */ struct UnkRfuStruct_2_Sub_6c unk_6c;
