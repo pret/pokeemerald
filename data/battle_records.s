@@ -23,7 +23,7 @@ gUnknown_085B3D64:: @ 85B3D64
 	.align 2
 gUnknown_085B3D6C:: @ 85B3D6C
 	window_template 0x00, 0x02, 0x01, 0x1a, 0x12, 0x0f, 0x0014
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_085B3D7C:: @ 85B3D7C
