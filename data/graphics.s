@@ -5042,11 +5042,11 @@ gUnknown_08DDD704:: @ 8DDD704
 
 	.align 2
 gUnknown_08DDD728:: @ 8DDD728
-	.incbin "graphics/interface/textbox.gbapal" @ textbox palette?
+	.incbin "graphics/text_window/message_box.gbapal"
 
 	.align 2
-gUnknown_08DDD748:: @ 8DDD748
-	.incbin "graphics/interface/textbox.4bpp"
+gMessageBox_Gfx:: @ 8DDD748
+	.incbin "graphics/text_window/message_box.4bpp"
 
 	.align 2
 gWallpaperIcon_Cross::
@@ -5142,7 +5142,7 @@ gUnknown_08DE0644:: @ 8DE0644
 
 	.align 2
 gUnknown_08DE07C8:: @ 8DE07C8
-	.incbin "graphics/frontier_pass/tiles.gbapal" @ size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but this is wrong? todo, investigate? (frontier pass pal)
+	.incbin "graphics/frontier_pass/tiles.gbapal" @ size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but palette is only 0x100 bytes long so it loads garbage as well
 
 	.align 2
 gUnknown_08DE08C8:: @ 8DE08C8
