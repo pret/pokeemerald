@@ -4645,16 +4645,16 @@ gText_MixingRecords:: @ 85EEA7E
 gText_RecordMixingComplete:: @ 85EEA8E
 	.string "Record mixing completed.\nThank you for waiting.$"
 
-gUnknown_085EEABE:: @ 85EEABE
+gText_YourName:: @ 85EEABE
 	.string "YOUR NAME?$"
 
-gUnknown_085EEAC9:: @ 85EEAC9
+gText_BoxName:: @ 85EEAC9
 	.string "BOX NAME?$"
 
-gUnknown_085EEAD3:: @ 85EEAD3
+gText_PkmnsNickname:: @ 85EEAD3
 	.string "{STR_VAR_1}’s nickname?$"
 
-gUnknown_085EEAE2:: @ 85EEAE2
+gText_TellHimTheWords:: @ 85EEAE2
 	.string "Tell him the words.$"
 
 gText_MoveOkBack:: @ 85EEAF6
