@@ -1,5 +1,15 @@
+#include "constants/flags.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
+#include "constants/species.h"
+#include "constants/vars.h"
 	.include "asm/macros.inc"
+	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
+
+	.include "data/specials.inc"
+
 
 	.section .rodata
 
@@ -34,8 +44,22 @@ gText_MysteryGiftNewTrainer:: @ 8674C31
 gText_MysteryGiftCantBeUsed:: @ 8674C86
 	.string "This data can’t be used in\nthis version.$"
 	
-gUnknown_08674CAF:: @ 8674CAF
-	.incbin "baserom.gba", 0x00674caf, 0x2e
+	.align 2
+gUnknown_08674CB0:: @ 8674CB0
+	setvaddress gUnknown_08674CB0
+	setorcopyvar 0x800D, 1
+	specialvar 0x8008, sub_813986C
+	setorcopyvar 0x800D, 0
+	specialvar 0x8009, sub_813986C
+	subvar 0x8008, 32777
+	buffernumberstring 0, 0x8008
+	lock
+	faceplayer
+	vmessage gText_MysteryGiftStampCard
+	waitmessage
+	waitbuttonpress
+	release
+	end
 
 gText_MysteryGiftStampCard::
 	.string "Thank you for using the STAMP CARD\nSystem.\pYou have {STR_VAR_1} more to collect to\nfill your STAMP CARD.$"

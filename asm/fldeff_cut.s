@@ -244,7 +244,7 @@ _080D38F8:
 	lsrs r4, r0, 16
 	movs r7, 0x1
 	movs r5, 0
-	ldr r3, =gUnknown_0857C60A
+	ldr r3, =gUnknown_0857C608 + 2
 	adds r0, r2, r3
 	ldrb r0, [r0]
 	adds r6, 0x1

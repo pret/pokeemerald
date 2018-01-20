@@ -4,14 +4,29 @@
     .section .rodata
     .align 2, 0
 
-gUnknown_0857C684:: @ 857C684
-	.incbin "baserom.gba", 0x57c684, 0x1680
+gMapPopUp_Table:: @ 857C684
+	.incbin "graphics/interface/map_popup/wood.4bpp"
+	.incbin "graphics/interface/map_popup/marble.4bpp"
+	.incbin "graphics/interface/map_popup/stone.4bpp"
+	.incbin "graphics/interface/map_popup/brick.4bpp"
+	.incbin "graphics/interface/map_popup/underwater.4bpp"
+	.incbin "graphics/interface/map_popup/stone2.4bpp"
 
-gUnknown_0857DD04:: @ 857DD04
-	.incbin "baserom.gba", 0x57dd04, 0x1680
+gMapPopUp_Outline_Table:: @ 857DD04
+	.incbin "graphics/interface/map_popup/wood_outline.4bpp"
+	.incbin "graphics/interface/map_popup/marble_outline.4bpp"
+	.incbin "graphics/interface/map_popup/stone_outline.4bpp"
+	.incbin "graphics/interface/map_popup/brick_outline.4bpp"
+	.incbin "graphics/interface/map_popup/underwater_outline.4bpp"
+	.incbin "graphics/interface/map_popup/stone2_outline.4bpp"
 
-gUnknown_0857F384:: @ 857F384
-	.incbin "baserom.gba", 0x57f384, 0xc0
+gMapPopUp_Palette_Table:: @ 857F384
+	.incbin "graphics/interface/map_popup/wood.gbapal"
+	.incbin "graphics/interface/map_popup/marble.gbapal"
+	.incbin "graphics/interface/map_popup/stone.gbapal"
+	.incbin "graphics/interface/map_popup/brick.gbapal"
+	.incbin "graphics/interface/map_popup/underwater.gbapal"
+	.incbin "graphics/interface/map_popup/stone2.gbapal"
 
 gUnknown_0857F444:: @ 857F444
-	.incbin "baserom.gba", 0x57f444, 0x20
+	.incbin "graphics/interface/map_popup/857F444.gbapal"
