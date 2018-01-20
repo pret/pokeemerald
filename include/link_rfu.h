@@ -176,13 +176,15 @@ struct UnkRfuStruct_2 {
     /* 0xc3d */ u8 unk_c3d;
     /* 0xc3e */ vu8 unk_c3e;
     /* 0xc3f */ u8 unk_c3f[70];
-    /* 0xc85 */ u8 filler_c85[2];
+    /* 0xc85 */ u8 unk_c85;
+    /* 0xc86 */ u8 unk_c86;
     /* 0xc87 */ u8 unk_c87[5][7][2];
     /* 0xccd */ u8 unk_ccd;
     /* 0xcce */ u8 unk_cce;
     /* 0xccf */ u8 unk_ccf;
     /* 0xcd0 */ vu8 unk_cd0;
-    /* 0xcd1 */ u8 filler_cd1[8];
+    /* 0xcd1 */ u8 unk_cd1[4];
+    /* 0xcd5 */ u8 unk_cd5[4];
     /* 0xcd9 */ u8 unk_cd9;
     /* 0xcda */ u8 unk_cda;
     /* 0xcdb */ vu8 unk_cdb;

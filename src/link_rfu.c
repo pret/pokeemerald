@@ -59,11 +59,11 @@ static void sub_800F048(void);
 static void sub_800F86C(u8 unused);
 static void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data);
 void sub_800FD14(u16 command);
-void rfufunc_80F9F44(void);
-void sub_800FFB0(void);
-void rfufunc_80FA020(void);
+static void rfufunc_80F9F44(void);
+static void sub_800FFB0(void);
+static void rfufunc_80FA020(void);
 bool32 sub_8010454(u32 a0);
-void sub_8010528(void);
+static void sub_8010528(void);
 void sub_8010750(void);
 int sub_80107A0(void);
 void sub_801084C(u8 taskId);
@@ -71,6 +71,7 @@ void sub_80109E8(u16 a0);
 void sub_8010A70(void *a0);
 void sub_8010AAC(u8 taskId);
 void sub_8010D0C(u8 taskId);
+u8 sub_8011CE4(const u8 *a0, u16 a1);
 void sub_8011D6C(u8 a0);
 u8 sub_8012224(void);
 void sub_801227C(void);
@@ -3790,7 +3791,7 @@ bool32 sub_800FE84(const u8 *src, size_t size)
     return TRUE;
 }
 
-void rfufunc_80F9F44(void)
+static void rfufunc_80F9F44(void)
 {
     if (gSendCmd[0] == 0)
     {
@@ -3808,7 +3809,7 @@ void rfufunc_80F9F44(void)
     }
 }
 
-void sub_800FFB0(void)
+static void sub_800FFB0(void)
 {
     int i;
     const u8 *src = gUnknown_03005000.unk_6c.unk_04;
@@ -3823,7 +3824,7 @@ void sub_800FFB0(void)
     }
 }
 
-void rfufunc_80FA020(void)
+static void rfufunc_80FA020(void)
 {
     const u8 *src = gUnknown_03005000.unk_6c.unk_04;
     u8 mpId = GetMultiplayerId();
@@ -4062,8 +4063,114 @@ bool8 sub_8010500(void)
     return gUnknown_03005000.unk_00 ? FALSE : TRUE;
 }
 
-void sub_8010528(void)
+static void sub_8010528(void)
 {
     if (gUnknown_03005000.unk_00)
         gUnknown_03005000.unk_00();
+}
+
+bool8 sub_8010540(void)
+{
+    int i;
+    bool8 retval = FALSE;
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_03005000.unk_cd1[i] < 5 || gUnknown_03005000.unk_cd1[i] > 6)
+        {
+            if (gUnknown_03007880[i]->unk_34 == 0x46 || gUnknown_03007880[i]->unk_34 == 0x48)
+            {
+                if (gUnknown_03005000.unk_cd5[i] == 8)
+                {
+                    gUnknown_03005000.unk_cd1[i] = 9;
+                    gUnknown_03005000.unk_cd5[i] = 10;
+                    rfu_clearSlot(8, i);
+                    rfu_NI_setSendData(1 << i, 8, gUnknown_03005000.unk_cd1 + i, 1);
+                    retval = TRUE;
+                }
+
+            }
+            else if (gUnknown_03007880[gUnknown_03005000.unk_c3e]->unk_34 == 0x47)
+                rfu_clearSlot(8, i);
+            {
+
+            }
+        }
+    }
+    return retval;
+}
+
+bool8 sub_80105EC(void)
+{
+    u8 flags = 0;
+    int i;
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_03005000.unk_cd5[i] == 11)
+        {
+            flags |= (1 << i);
+            gUnknown_03005000.unk_cd5[i] = 0;
+        }
+    }
+    if (flags)
+    {
+        rfu_REQ_disconnect(flags);
+        rfu_waitREQComplete();
+    }
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_03005000.unk_cd5[i] == 10 || gUnknown_03005000.unk_cd5[i] == 11)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_801064C(u16 a0, const u8 *a1)
+{
+    u8 r1 = sub_8011CE4(a1, a0);
+    if (r1 == 0xFF)
+        return TRUE;
+    if (gUnknown_03005000.unk_cd1[r1] == 9)
+        return TRUE;
+    return FALSE;
+}
+
+void sub_8010688(u8 a0, u16 a1, const u8 *a2)
+{
+    u8 r4 = sub_8011CE4(a2, a1);
+    gUnknown_03005000.unk_cd1[r4] = a0;
+    rfu_clearSlot(4, r4);
+    rfu_NI_setSendData(1 << r4, 8, gUnknown_03005000.unk_cd1 + r4, 1);
+}
+
+void sub_80106D4(void)
+{
+    gUnknown_03005000.unk_c85 = 8;
+    rfu_clearSlot(4, gUnknown_03005000.unk_c3e);
+    rfu_NI_setSendData(1 << gUnknown_03005000.unk_c3e, 8, &gUnknown_03005000.unk_c85, 1);
+}
+
+u8 sub_8010714(u16 a0, const u8 *a1)
+{
+    u8 r0 = sub_8011CE4(a1, a0);
+    if (r0 == 0xff)
+        return 2;
+    if (gUnknown_03007880[r0]->unk_0 == 0)
+        return TRUE;
+    return FALSE;
+}
+
+void sub_8010750(void)
+{
+    int i;
+
+    sub_8010540();
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_03007880[i]->unk_0 == 0x26 || gUnknown_03007880[i]->unk_0 == 0x27)
+        {
+            if (gUnknown_03005000.unk_cd5[i] == 10)
+                gUnknown_03005000.unk_cd5[i] = 11;
+            rfu_clearSlot(4, i);
+        }
+    }
 }
