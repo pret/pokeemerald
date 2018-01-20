@@ -3498,3 +3498,53 @@ void sub_800F86C(u8 unused)
         }
     }
 }
+
+bool8 sub_800FC60(void)
+{
+    int i;
+
+    for (i = 0; i < 5; i++)
+    {
+        if (gUnknown_03005000.unk_80[i].unk_12)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_800FC88(void)
+{
+    int i;
+
+    for (i = 0; i < gUnknown_03005000.playerCount; i++)
+    {
+        if (gUnknown_03005000.unk_80[i].unk_12 != 2 || gUnknown_03005000.unk_5c[i] != 1)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_800FCC4(struct UnkRfuStruct_2_Sub_6c *data)
+{
+    data->unk_00 = 0;
+    data->unk_02 = 0;
+    data->unk_04 = NULL;
+    data->unk_08 = 0;
+    data->unk_10 = 0;
+    data->unk_11 = 0;
+    data->unk_12 = 0;
+}
+
+u8 sub_800FCD8(void)
+{
+    u8 flags = 0;
+    int i;
+
+    for (i = 0; i < 5; i++)
+    {
+        if (gUnknown_03005000.unk_80[i].unk_12 == 2 && gUnknown_03005000.unk_5c[i] == 1)
+        {
+            flags |= (1 << i);
+        }
+    }
+    return flags;
+}
