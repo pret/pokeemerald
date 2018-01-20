@@ -2,6 +2,7 @@
 // Includes
 #include "global.h"
 #include "malloc.h"
+#include "battle.h"
 #include "berry_blender.h"
 #include "task.h"
 #include "random.h"
@@ -3886,4 +3887,53 @@ void sub_8010198(void)
     sub_800D630();
     gUnknown_03005000.unk_ce4 = 1;
     gUnknown_03005000.unk_ce3 = gUnknown_03007890->unk_02 | gUnknown_03007890->unk_03;
+}
+
+void sub_80101CC(void)
+{
+    int i;
+    u8 playerCount = gUnknown_03005000.playerCount;
+    int count = 0;
+
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
+    {
+        if (gUnknown_03005000.unk_e4[i])
+            count++;
+    }
+    if (count == playerCount)
+    {
+        gBattleTypeFlags &= ~BATTLE_TYPE_20;
+        if (gUnknown_03005000.unk_0c == 0)
+        {
+            gUnknown_03005000.unk_ee = 3;
+            sub_8010168();
+        }
+        else
+            gUnknown_03005000.unk_00 = sub_8010168;
+    }
+}
+
+void sub_801022C(void)
+{
+    if (gSendCmd[0] == 0 && gUnknown_03005000.unk_ce8 == 0)
+    {
+        sub_800FD14(0x5f00);
+        gUnknown_03005000.unk_00 = sub_80101CC;
+    }
+}
+
+void sub_8010264(u8 taskId)
+{
+    if (gUnknown_03005000.unk_00 == 0)
+    {
+        gUnknown_03005000.unk_cd9 = 1;
+        gUnknown_03005000.unk_00 = sub_801022C;
+        DestroyTask(taskId);
+    }
+}
+
+void task_add_05_task_del_08FA224_when_no_RfuFunc(void)
+{
+    if (!FuncIsActiveTask(sub_8010264))
+        CreateTask(sub_8010264, 5);
 }
