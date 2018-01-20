@@ -3548,3 +3548,204 @@ u8 sub_800FCD8(void)
     }
     return flags;
 }
+
+#ifdef NONMATCHING
+// The switch tree is incorrect
+void sub_800FD14(u16 command)
+{
+    u8 i;
+    u8 *buff;
+    u8 tmp;
+
+    gSendCmd[0] = command;
+    switch (command)
+    {
+        case 0x8800:
+            gSendCmd[1] = gUnknown_03005000.unk_6c.unk_02;
+            gSendCmd[2] = gUnknown_03005000.unk_6c.unk_11 + 0x80;
+            break;
+        case 0xa100:
+            if (sub_800FC60())
+                gSendCmd[1] = gUnknown_03005000.unk_5a;
+            break;
+        case 0x7800:
+        case 0x7700:
+            tmp = gUnknown_03005000.unk_ce2 ^ gUnknown_03005000.unk_ce3;
+            gUnknown_03005000.playerCount = gUnknown_082ED695[tmp] + 1;
+            gSendCmd[1] = gUnknown_03005000.playerCount;
+            buff = (u8 *)(gSendCmd + 2);
+            for (i = 0; i < 4; i++)
+                buff[i] = gUnknown_03005000.unk_cde[i];
+            break;
+        case 0x6600:
+        case 0x5f00:
+            gSendCmd[1] = gUnknown_03005000.unk_100;
+            break;
+        case 0x4400:
+            gSendCmd[0] = 0x4400;
+            gSendCmd[1] = gMain.heldKeys;
+            break;
+        case 0x2f00:
+            for (i = 0; i < 6; i++)
+                gSendCmd[1 + i] = gUnknown_03005000.unk_f2[i];
+            break;
+        case 0xbe00:
+            gSendCmd[1] = gUnknown_03005DA8;
+            break;
+    }
+}
+#else
+__attribute__((naked)) void sub_800FD14(u16 command)
+{
+    asm_unified("\tpush {r4,r5,lr}\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r1, r0, 16\n"
+                    "\tldr r5, =gSendCmd\n"
+                    "\tstrh r1, [r5]\n"
+                    "\tmovs r0, 0xF0\n"
+                    "\tlsls r0, 7\n"
+                    "\tadds r4, r5, 0\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _0800FDB0_case_7700_case_7800\n"
+                    "\tcmp r1, r0\n"
+                    "\tbgt _0800FD62\n"
+                    "\tmovs r0, 0xBE\n"
+                    "\tlsls r0, 7\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _0800FE00_case_5f00_case_6600\n"
+                    "\tcmp r1, r0\n"
+                    "\tbgt _0800FD50\n"
+                    "\tmovs r0, 0xBC\n"
+                    "\tlsls r0, 6\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _0800FE20_case_2f00\n"
+                    "\tmovs r0, 0x88\n"
+                    "\tlsls r0, 7\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _0800FE14_case_4400\n"
+                    "\tb _0800FE46_break\n"
+                    "\t.pool\n"
+                    "_0800FD50:\n"
+                    "\tmovs r0, 0xCC\n"
+                    "\tlsls r0, 7\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _0800FE00_case_5f00_case_6600\n"
+                    "\tmovs r0, 0xEE\n"
+                    "\tlsls r0, 7\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _0800FDB0_case_7700_case_7800\n"
+                    "\tb _0800FE46_break\n"
+                    "_0800FD62:\n"
+                    "\tmovs r0, 0xBE\n"
+                    "\tlsls r0, 8\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _0800FE40_case_be00\n"
+                    "\tcmp r1, r0\n"
+                    "\tbgt _0800FE46_break\n"
+                    "\tmovs r0, 0x88\n"
+                    "\tlsls r0, 8\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _0800FD80_case_8800\n"
+                    "\tmovs r0, 0xA1\n"
+                    "\tlsls r0, 8\n"
+                    "\tcmp r1, r0\n"
+                    "\tbeq _0800FD98_case_a100\n"
+                    "\tb _0800FE46_break\n"
+                    "_0800FD80_case_8800:\n"
+                    "\tldr r0, =gUnknown_03005000\n"
+                    "\tadds r1, r0, 0\n"
+                    "\tadds r1, 0x6E\n"
+                    "\tldrh r1, [r1]\n"
+                    "\tstrh r1, [r5, 0x2]\n"
+                    "\tadds r0, 0x7D\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tadds r0, 0x80\n"
+                    "\tstrh r0, [r5, 0x4]\n"
+                    "\tb _0800FE46_break\n"
+                    "\t.pool\n"
+                    "_0800FD98_case_a100:\n"
+                    "\tbl sub_800FC60\n"
+                    "\tlsls r0, 24\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0800FE46_break\n"
+                    "\tldr r0, =gUnknown_03005000\n"
+                    "\tadds r0, 0x5A\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tb _0800FE44_str_break\n"
+                    "\t.pool\n"
+                    "_0800FDB0_case_7700_case_7800:\n"
+                    "\tldr r3, =gUnknown_03005000\n"
+                    "\tldr r1, =0x00000ce2\n"
+                    "\tadds r0, r3, r1\n"
+                    "\tldr r2, =0x00000ce3\n"
+                    "\tadds r1, r3, r2\n"
+                    "\tldrb r2, [r0]\n"
+                    "\tldrb r0, [r1]\n"
+                    "\teors r0, r2\n"
+                    "\tldr r1, =gUnknown_082ED695\n"
+                    "\tadds r0, r1\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tadds r0, 0x1\n"
+                    "\tstrb r0, [r3, 0xD]\n"
+                    "\tldrb r0, [r3, 0xD]\n"
+                    "\tstrh r0, [r4, 0x2]\n"
+                    "\tadds r2, r4, 0x4\n"
+                    "\tmovs r4, 0\n"
+                    "\tldr r0, =0x00000cde\n"
+                    "\tadds r3, r0\n"
+                    "_0800FDD6:\n"
+                    "\tadds r1, r2, r4\n"
+                    "\tadds r0, r4, r3\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tstrb r0, [r1]\n"
+                    "\tadds r0, r4, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r4, r0, 24\n"
+                    "\tcmp r4, 0x3\n"
+                    "\tbls _0800FDD6\n"
+                    "\tb _0800FE46_break\n"
+                    "\t.pool\n"
+                    "_0800FE00_case_5f00_case_6600:\n"
+                    "\tldr r0, =gUnknown_03005000\n"
+                    "\tmovs r1, 0x80\n"
+                    "\tlsls r1, 1\n"
+                    "\tadds r0, r1\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tstrh r0, [r4, 0x2]\n"
+                    "\tb _0800FE46_break\n"
+                    "\t.pool\n"
+                    "_0800FE14_case_4400:\n"
+                    "\tstrh r1, [r5]\n"
+                    "\tldr r0, =gMain\n"
+                    "\tldrh r0, [r0, 0x2C]\n"
+                    "\tb _0800FE44_str_break\n"
+                    "\t.pool\n"
+                    "_0800FE20_case_2f00:\n"
+                    "\tmovs r4, 0\n"
+                    "\tldr r3, =gUnknown_03005000+0xF2\n"
+                    "_0800FE24:\n"
+                    "\tadds r2, r4, 0x1\n"
+                    "\tlsls r1, r2, 1\n"
+                    "\tadds r1, r5\n"
+                    "\tlsls r0, r4, 1\n"
+                    "\tadds r0, r3\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tstrh r0, [r1]\n"
+                    "\tlsls r2, 24\n"
+                    "\tlsrs r4, r2, 24\n"
+                    "\tcmp r4, 0x5\n"
+                    "\tbls _0800FE24\n"
+                    "\tb _0800FE46_break\n"
+                    "\t.pool\n"
+                    "_0800FE40_case_be00:\n"
+                    "\tldr r0, =gUnknown_03005DA8\n"
+                    "\tldrh r0, [r0]\n"
+                    "_0800FE44_str_break:\n"
+                    "\tstrh r0, [r5, 0x2]\n"
+                    "_0800FE46_break:\n"
+                    "\tpop {r4,r5}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.pool");
+}
+#endif
