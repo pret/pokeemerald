@@ -3846,3 +3846,44 @@ void rfufunc_80FA020(void)
     else
         gUnknown_03005000.unk_00 = NULL;
 }
+
+bool8 sub_8010100(u8 a0)
+{
+    gUnknown_03005000.unk_5a = a0;
+    sub_800FD14(0xa100);
+    return TRUE;
+}
+
+void sub_801011C(void)
+{
+    rfu_clearAllSlot();
+    sub_800C048();
+    gReceivedRemoteLinkPlayers = 0;
+    gUnknown_03005000.unk_ef = 1;
+    gUnknown_03005000.unk_00 = NULL;
+}
+
+void sub_8010148(void)
+{
+    rfu_REQ_disconnect(gUnknown_03007890->unk_02 | gUnknown_03007890->unk_03);
+    rfu_waitREQComplete();
+    sub_801011C();
+}
+
+void sub_8010168(void)
+{
+    if (gUnknown_03005000.unk_0c == 0)
+    {
+        sub_800D630();
+        gUnknown_03005000.unk_ce4 = 2;
+    }
+    else
+        gUnknown_03005000.unk_00 = sub_8010148;
+}
+
+void sub_8010198(void)
+{
+    sub_800D630();
+    gUnknown_03005000.unk_ce4 = 1;
+    gUnknown_03005000.unk_ce3 = gUnknown_03007890->unk_02 | gUnknown_03007890->unk_03;
+}
