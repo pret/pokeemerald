@@ -153,9 +153,11 @@ struct UnkRfuStruct_2 {
     /* 0x068 */ u8 filler_68[4];
     /* 0x06c */ struct UnkRfuStruct_2_Sub_6c unk_6c;
     /* 0x080 */ struct UnkRfuStruct_2_Sub_6c unk_80[5];
-    /* 0x0e4 */ u8 filler_e4[10];
+    /* 0x0e4 */ u8 unk_e4[5];
+    /* 0x0e9 */ u8 unk_e9[5];
     /* 0x0ee */ vu8 unk_ee;
-    /* 0x0ef */ u8 filler_ef[0x13];
+    /* 0x0ef */ u8 filler_ef[0x11];
+    /* 0x100 */ u16 unk_100;
     /* 0x102 */ u8 unk_102;
     /* 0x103 */ u8 filler_103[0x21];
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
@@ -168,7 +170,8 @@ struct UnkRfuStruct_2 {
     /* 0xc85 */ u8 filler_c85[2];
     /* 0xc87 */ u8 unk_c87[5][7][2];
     /* 0xccd */ u8 unk_ccd;
-    /* 0xcce */ u8 filler_cce[2];
+    /* 0xcce */ u8 unk_cce;
+    /* 0xccf */ u8 unk_ccf;
     /* 0xcd0 */ vu8 unk_cd0;
     /* 0xcd1 */ u8 filler_cd1[8];
     /* 0xcd9 */ u8 unk_cd9;

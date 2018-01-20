@@ -64,6 +64,8 @@ void sub_8010528(void);
 void sub_8010750(void);
 int sub_80107A0(void);
 void sub_801084C(u8 taskId);
+void sub_80109E8(u16 a0);
+void sub_8010A70(void *a0);
 void sub_8010AAC(u8 taskId);
 void sub_8010D0C(u8 taskId);
 void sub_8011068(u8 a0);
@@ -259,7 +261,7 @@ const u8 gUnknown_082ED6A5[] = {
 };
 const struct {
     u8 *buffer;
-    u16 size;
+    u32 size;
 } gUnknown_082ED6B8[] = {
     { gBlockSendBuffer, 200 },
     { gBlockSendBuffer, 200 },
@@ -3389,4 +3391,110 @@ void sub_800F850(void)
 {
     if (gUnknown_03005000.unk_00 == NULL)
         gUnknown_03005000.unk_00 = sub_800F820;
+}
+
+void sub_800F86C(u8 unused)
+{
+    u16 i;
+    u16 j;
+
+    for (i = 0; i < MAX_RFU_PLAYERS; i++)
+    {
+        switch (gRecvCmds[i][0] & 0xff00)
+        {
+            case 0x7800:
+                if (gUnknown_03005000.unk_0c == 0 && gReceivedRemoteLinkPlayers != 0)
+                    return;
+                // fallthrough
+            case 0x7700:
+                if (gUnknown_03007890->unk_00 == 0)
+                {
+                    gUnknown_03005000.playerCount = gRecvCmds[i][1];
+                    gUnknown_03005000.unk_cce = sub_800F74C((u8 *)(gRecvCmds[i] + 2));
+                }
+                break;
+            case 0x8800:
+                if (gUnknown_03005000.unk_80[i].unk_12 == 0)
+                {
+                    gUnknown_03005000.unk_80[i].unk_00 = 0;
+                    gUnknown_03005000.unk_80[i].unk_02 = gRecvCmds[i][1];
+                    gUnknown_03005000.unk_80[i].unk_11 = gRecvCmds[i][2];
+                    gUnknown_03005000.unk_80[i].unk_08 = 0;
+                    gUnknown_03005000.unk_80[i].unk_12 = 1;
+                    gUnknown_03005000.unk_5c[i] = 0;
+                }
+                break;
+            case 0x8900:
+                if (gUnknown_03005000.unk_80[i].unk_12 == 1)
+                {
+                    gUnknown_03005000.unk_80[i].unk_00 = gRecvCmds[i][0] & 0xff;
+                    gUnknown_03005000.unk_80[i].unk_08 |= (1 << gUnknown_03005000.unk_80[i].unk_00);
+                    for (j = 0; j < 6; j++)
+                        gBlockRecvBuffer[i][gUnknown_03005000.unk_80[i].unk_00 * 6 + j] = gRecvCmds[i][j + 1];
+                    if (gUnknown_03005000.unk_80[i].unk_08 == gUnknown_082ED628[gUnknown_03005000.unk_80[i].unk_02])
+                    {
+                        gUnknown_03005000.unk_80[i].unk_12 = 2;
+                        sub_800F6FC(i);
+                        if (sub_800F7DC()->unk_0a_0 == 0x45 && gReceivedRemoteLinkPlayers != 0 && gUnknown_03005000.unk_0c == 0)
+                            sub_8010A70(gBlockRecvBuffer);
+                    }
+                }
+                break;
+            case 0xa100:
+                sub_800FE84(gUnknown_082ED6B8[gRecvCmds[i][1]].buffer, (u16)gUnknown_082ED6B8[gRecvCmds[i][1]].size);
+                break;
+            case 0x5f00:
+                gUnknown_03005000.unk_e4[i] = 1;
+                break;
+            case 0x6600:
+                if (gUnknown_03005000.unk_100 == gRecvCmds[i][1])
+                    gUnknown_03005000.unk_e9[i] = 1;
+                break;
+            case 0xed00:
+                if (gUnknown_03005000.unk_0c == 0)
+                {
+                    if (gReceivedRemoteLinkPlayers != 0)
+                    {
+                        if (gRecvCmds[i][1] & gUnknown_03007890->unk_02)
+                        {
+                            gReceivedRemoteLinkPlayers = 0;
+                            sub_800D630();
+                            gUnknown_03005000.unk_ce4 = gRecvCmds[i][2];
+                        }
+                        gUnknown_03005000.playerCount = gRecvCmds[i][3];
+                        sub_80109E8(gRecvCmds[i][1]);
+                    }
+                }
+                else
+                {
+                    sub_800FD14(0xee00);
+                    gSendCmd[1] = gRecvCmds[i][1];
+                    gSendCmd[2] = gRecvCmds[i][2];
+                    gSendCmd[3] = gRecvCmds[i][3];
+                }
+                break;
+            case 0xee00:
+                if (gUnknown_03005000.unk_0c == 1)
+                {
+                    gUnknown_03005000.unk_ce3 |= gRecvCmds[i][1];
+                    gUnknown_03005000.unk_ce4 = gRecvCmds[i][2];
+                    sub_80109E8(gRecvCmds[i][1]);
+                }
+                break;
+            case 0x4400:
+            case 0xbe00:
+                gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
+                break;
+        }
+        if (gUnknown_03005000.unk_0c == 1 && gUnknown_03005000.unk_61[i])
+        {
+            if (gUnknown_03005000.unk_61[i] == 4)
+            {
+                gUnknown_03005000.unk_5c[i] = 1;
+                gUnknown_03005000.unk_61[i] = 0;
+            }
+            else
+                gUnknown_03005000.unk_61[i]++;
+        }
+    }
 }
