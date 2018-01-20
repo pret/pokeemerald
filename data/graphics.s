@@ -5042,11 +5042,11 @@ gUnknown_08DDD704:: @ 8DDD704
 
 	.align 2
 gUnknown_08DDD728:: @ 8DDD728
-	.incbin "graphics/interface/textbox.gbapal" @ textbox palette?
+	.incbin "graphics/text_window/message_box.gbapal"
 
 	.align 2
-gUnknown_08DDD748:: @ 8DDD748
-	.incbin "graphics/interface/textbox.4bpp"
+gMessageBox_Gfx:: @ 8DDD748
+	.incbin "graphics/text_window/message_box.4bpp"
 
 	.align 2
 gWallpaperIcon_Cross::

@@ -2,169 +2,195 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-	.align 2, 0
 
-gUnknown_0850E87C:: @ 850E87C
-	 .incbin "baserom.gba", 0x50e87c, 0x120
+	.align 2
+gTextWindowFrame1_Gfx:: @ 850E87C
+	.incbin "graphics/text_window/1.4bpp"
 
-gUnknown_0850E99C:: @ 850E99C
-	 .incbin "baserom.gba", 0x50e99c, 0x120
+	.align 2
+gTextWindowFrame2_Gfx:: @ 850E99C
+	.incbin "graphics/text_window/2.4bpp"
 
-gUnknown_0850EABC:: @ 850EABC
-	 .incbin "baserom.gba", 0x50eabc, 0x120
+	.align 2
+gTextWindowFrame3_Gfx:: @ 850EABC
+	.incbin "graphics/text_window/3.4bpp"
 
-gUnknown_0850EBDC:: @ 850EBDC
-	 .incbin "baserom.gba", 0x50ebdc, 0x120
+	.align 2
+gTextWindowFrame4_Gfx:: @ 850EBDC
+	.incbin "graphics/text_window/4.4bpp"
 
-gUnknown_0850ECFC:: @ 850ECFC
-	 .incbin "baserom.gba", 0x50ecfc, 0x120
+	.align 2
+gTextWindowFrame5_Gfx:: @ 850ECFC
+	.incbin "graphics/text_window/5.4bpp"
 
-gUnknown_0850EE1C:: @ 850EE1C
-	 .incbin "baserom.gba", 0x50ee1c, 0x120
+	.align 2
+gTextWindowFrame6_Gfx:: @ 850EE1C
+	.incbin "graphics/text_window/6.4bpp"
 
-gUnknown_0850EF3C:: @ 850EF3C
-	 .incbin "baserom.gba", 0x50ef3c, 0x120
+	.align 2
+gTextWindowFrame7_Gfx:: @ 850EF3C
+	.incbin "graphics/text_window/7.4bpp"
 
-gUnknown_0850F05C:: @ 850F05C
-	 .incbin "baserom.gba", 0x50f05c, 0x120
+	.align 2
+gTextWindowFrame8_Gfx:: @ 850F05C
+	.incbin "graphics/text_window/8.4bpp"
 
-gUnknown_0850F17C:: @ 850F17C
-	 .incbin "baserom.gba", 0x50f17c, 0x120
+	.align 2
+gTextWindowFrame9_Gfx:: @ 850F17C
+	.incbin "graphics/text_window/9.4bpp"
 
-gUnknown_0850F29C:: @ 850F29C
-	 .incbin "baserom.gba", 0x50f29c, 0x120
+	.align 2
+gTextWindowFrame10_Gfx:: @ 850F29C
+	.incbin "graphics/text_window/10.4bpp"
 
-gUnknown_0850F3BC:: @ 850F3BC
-	 .incbin "baserom.gba", 0x50f3bc, 0x120
+	.align 2
+gTextWindowFrame11_Gfx:: @ 850F3BC
+	.incbin "graphics/text_window/11.4bpp"
 
-gUnknown_0850F4DC:: @ 850F4DC
-	 .incbin "baserom.gba", 0x50f4dc, 0x120
+	.align 2
+gTextWindowFrame12_Gfx:: @ 850F4DC
+	.incbin "graphics/text_window/12.4bpp"
 
-gUnknown_0850F5FC:: @ 850F5FC
-	 .incbin "baserom.gba", 0x50f5fc, 0x120
+	.align 2
+gTextWindowFrame13_Gfx:: @ 850F5FC
+	.incbin "graphics/text_window/13.4bpp"
 
-gUnknown_0850F71C:: @ 850F71C
-	 .incbin "baserom.gba", 0x50f71c, 0x120
+	.align 2
+gTextWindowFrame14_Gfx:: @ 850F71C
+	.incbin "graphics/text_window/14.4bpp"
 
-gUnknown_0850F83C:: @ 850F83C
-	 .incbin "baserom.gba", 0x50f83c, 0x120
+	.align 2
+gTextWindowFrame15_Gfx:: @ 850F83C
+	.incbin "graphics/text_window/15.4bpp"
 
-gUnknown_0850F95C:: @ 850F95C
-	 .incbin "baserom.gba", 0x50f95c, 0x120
+	.align 2
+gTextWindowFrame16_Gfx:: @ 850F95C
+	.incbin "graphics/text_window/16.4bpp"
 
-gUnknown_0850FA7C:: @ 850FA7C
-	 .incbin "baserom.gba", 0x50fa7c, 0x120
+	.align 2
+gTextWindowFrame17_Gfx:: @ 850FA7C
+	.incbin "graphics/text_window/17.4bpp"
 
-gUnknown_0850FB9C:: @ 850FB9C
-	 .incbin "baserom.gba", 0x50fb9c, 0x120
+	.align 2
+gTextWindowFrame18_Gfx:: @ 850FB9C
+	.incbin "graphics/text_window/18.4bpp"
 
-gUnknown_0850FCBC:: @ 850FCBC
-	 .incbin "baserom.gba", 0x50fcbc, 0x120
+	.align 2
+gTextWindowFrame19_Gfx:: @ 850FCBC
+	.incbin "graphics/text_window/19.4bpp"
 
-gUnknown_0850FDDC:: @ 850FDDC
-	 .incbin "baserom.gba", 0x50fddc, 0x120
+	.align 2
+gTextWindowFrame20_Gfx:: @ 850FDDC
+	.incbin "graphics/text_window/20.4bpp"
 
-gUnknown_0850FEFC:: @ 850FEFC
-	 .incbin "baserom.gba", 0x50fefc, 0x20
+	.align 2
+gTextWindowFrame1_Pal:: @ 850FEFC
+	.incbin "graphics/text_window/1.gbapal"
 
-gUnknown_0850FF1C:: @ 850FF1C
-	 .incbin "baserom.gba", 0x50ff1c, 0x20
+	.align 2
+gTextWindowFrame2_Pal:: @ 850FF1C
+	.incbin "graphics/text_window/2.gbapal"
 
-gUnknown_0850FF3C:: @ 850FF3C
-	 .incbin "baserom.gba", 0x50ff3c, 0x20
+	.align 2
+gTextWindowFrame3_Pal:: @ 850FF3C
+	.incbin "graphics/text_window/3.gbapal"
 
-gUnknown_0850FF5C:: @ 850FF5C
-	 .incbin "baserom.gba", 0x50ff5c, 0x20
+	.align 2
+gTextWindowFrame4_Pal:: @ 850FF5C
+	.incbin "graphics/text_window/4.gbapal"
 
-gUnknown_0850FF7C:: @ 850FF7C
-	 .incbin "baserom.gba", 0x50ff7c, 0x20
+	.align 2
+gTextWindowFrame5_Pal:: @ 850FF7C
+	.incbin "graphics/text_window/5.gbapal"
 
-gUnknown_0850FF9C:: @ 850FF9C
-	 .incbin "baserom.gba", 0x50ff9c, 0x20
+	.align 2
+gTextWindowFrame6_Pal:: @ 850FF9C
+	.incbin "graphics/text_window/6.gbapal"
 
-gUnknown_0850FFBC:: @ 850FFBC
-	 .incbin "baserom.gba", 0x50ffbc, 0x20
+	.align 2
+gTextWindowFrame7_Pal:: @ 850FFBC
+	.incbin "graphics/text_window/7.gbapal"
 
-gUnknown_0850FFDC:: @ 850FFDC
-	 .incbin "baserom.gba", 0x50ffdc, 0x20
+	.align 2
+gTextWindowFrame8_Pal:: @ 850FFDC
+	.incbin "graphics/text_window/8.gbapal"
 
-gUnknown_0850FFFC:: @ 850FFFC
-	 .incbin "baserom.gba", 0x50fffc, 0x20
+	.align 2
+gTextWindowFrame9_Pal:: @ 850FFFC
+	.incbin "graphics/text_window/9.gbapal"
 
-gUnknown_0851001C:: @ 851001C
-	 .incbin "baserom.gba", 0x51001c, 0x20
+	.align 2
+gTextWindowFrame10_Pal:: @ 851001C
+	.incbin "graphics/text_window/10.gbapal"
 
-gUnknown_0851003C:: @ 851003C
-	 .incbin "baserom.gba", 0x51003c, 0x20
+	.align 2
+gTextWindowFrame11_Pal:: @ 851003C
+	.incbin "graphics/text_window/11.gbapal"
 
-gUnknown_0851005C:: @ 851005C
-	 .incbin "baserom.gba", 0x51005c, 0x20
+	.align 2
+gTextWindowFrame12_Pal:: @ 851005C
+	.incbin "graphics/text_window/12.gbapal"
 
-gUnknown_0851007C:: @ 851007C
-	 .incbin "baserom.gba", 0x51007c, 0x20
+	.align 2
+gTextWindowFrame13_Pal:: @ 851007C
+	.incbin "graphics/text_window/13.gbapal"
 
-gUnknown_0851009C:: @ 851009C
-	 .incbin "baserom.gba", 0x51009c, 0x20
+	.align 2
+gTextWindowFrame14_Pal:: @ 851009C
+	.incbin "graphics/text_window/14.gbapal"
 
-gUnknown_085100BC:: @ 85100BC
-	 .incbin "baserom.gba", 0x5100bc, 0x20
+	.align 2
+gTextWindowFrame15_Pal:: @ 85100BC
+	.incbin "graphics/text_window/15.gbapal"
 
-gUnknown_085100DC:: @ 85100DC
-	 .incbin "baserom.gba", 0x5100dc, 0x20
+	.align 2
+gTextWindowFrame16_Pal:: @ 85100DC
+	.incbin "graphics/text_window/16.gbapal"
 
-gUnknown_085100FC:: @ 85100FC
-	 .incbin "baserom.gba", 0x5100fc, 0x20
+	.align 2
+gTextWindowFrame17_Pal:: @ 85100FC
+	.incbin "graphics/text_window/17.gbapal"
 
-gUnknown_0851011C:: @ 851011C
-	 .incbin "baserom.gba", 0x51011c, 0x20
+	.align 2
+gTextWindowFrame18_Pal:: @ 851011C
+	.incbin "graphics/text_window/18.gbapal"
 
-gUnknown_0851013C:: @ 851013C
-	 .incbin "baserom.gba", 0x51013c, 0x20
+	.align 2
+gTextWindowFrame19_Pal:: @ 851013C
+	.incbin "graphics/text_window/19.gbapal"
 
-gUnknown_0851015C:: @ 851015C
-	 .incbin "baserom.gba", 0x51015c, 0x20
+	.align 2
+gTextWindowFrame20_Pal:: @ 851015C
+	.incbin "graphics/text_window/20.gbapal"
 
+	.align 2
 gUnknown_0851017C:: @ 851017C
-	 .incbin "baserom.gba", 0x51017c, 0xA0
+	.incbin "graphics/text_window/message_box.gbapal"
 
+	.incbin "graphics/text_window/text_pal1.gbapal"
+	.incbin "graphics/text_window/text_pal2.gbapal"
+	.incbin "graphics/text_window/text_pal3.gbapal"
+	.incbin "graphics/text_window/text_pal4.gbapal"
+
+	.align 2
 gUnknown_0851021C:: @ 851021C
-	.4byte gUnknown_0850E87C
-	.4byte gUnknown_0850FEFC
-	.4byte gUnknown_0850E99C
-	.4byte gUnknown_0850FF1C
-	.4byte gUnknown_0850EABC
-	.4byte gUnknown_0850FF3C
-	.4byte gUnknown_0850EBDC
-	.4byte gUnknown_0850FF5C
-	.4byte gUnknown_0850ECFC
-	.4byte gUnknown_0850FF7C
-	.4byte gUnknown_0850EE1C
-	.4byte gUnknown_0850FF9C
-	.4byte gUnknown_0850EF3C
-	.4byte gUnknown_0850FFBC
-	.4byte gUnknown_0850F05C
-	.4byte gUnknown_0850FFDC
-	.4byte gUnknown_0850F17C
-	.4byte gUnknown_0850FFFC
-	.4byte gUnknown_0850F29C
-	.4byte gUnknown_0851001C
-	.4byte gUnknown_0850F3BC
-	.4byte gUnknown_0851003C
-	.4byte gUnknown_0850F4DC
-	.4byte gUnknown_0851005C
-	.4byte gUnknown_0850F5FC
-	.4byte gUnknown_0851007C
-	.4byte gUnknown_0850F71C
-	.4byte gUnknown_0851009C
-	.4byte gUnknown_0850F83C
-	.4byte gUnknown_085100BC
-	.4byte gUnknown_0850F95C
-	.4byte gUnknown_085100DC
-	.4byte gUnknown_0850FA7C
-	.4byte gUnknown_085100FC
-	.4byte gUnknown_0850FB9C
-	.4byte gUnknown_0851011C
-	.4byte gUnknown_0850FCBC
-	.4byte gUnknown_0851013C
-	.4byte gUnknown_0850FDDC
-	.4byte gUnknown_0851015C
+	.4byte gTextWindowFrame1_Gfx, gTextWindowFrame1_Pal
+	.4byte gTextWindowFrame2_Gfx, gTextWindowFrame2_Pal
+	.4byte gTextWindowFrame3_Gfx, gTextWindowFrame3_Pal
+	.4byte gTextWindowFrame4_Gfx, gTextWindowFrame4_Pal
+	.4byte gTextWindowFrame5_Gfx, gTextWindowFrame5_Pal
+	.4byte gTextWindowFrame6_Gfx, gTextWindowFrame6_Pal
+	.4byte gTextWindowFrame7_Gfx, gTextWindowFrame7_Pal
+	.4byte gTextWindowFrame8_Gfx, gTextWindowFrame8_Pal
+	.4byte gTextWindowFrame9_Gfx, gTextWindowFrame9_Pal
+	.4byte gTextWindowFrame10_Gfx, gTextWindowFrame10_Pal
+	.4byte gTextWindowFrame11_Gfx, gTextWindowFrame11_Pal
+	.4byte gTextWindowFrame12_Gfx, gTextWindowFrame12_Pal
+	.4byte gTextWindowFrame13_Gfx, gTextWindowFrame13_Pal
+	.4byte gTextWindowFrame14_Gfx, gTextWindowFrame14_Pal
+	.4byte gTextWindowFrame15_Gfx, gTextWindowFrame15_Pal
+	.4byte gTextWindowFrame16_Gfx, gTextWindowFrame16_Pal
+	.4byte gTextWindowFrame17_Gfx, gTextWindowFrame17_Pal
+	.4byte gTextWindowFrame18_Gfx, gTextWindowFrame18_Pal
+	.4byte gTextWindowFrame19_Gfx, gTextWindowFrame19_Pal
+	.4byte gTextWindowFrame20_Gfx, gTextWindowFrame20_Pal
