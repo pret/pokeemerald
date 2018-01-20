@@ -127,7 +127,7 @@ gUnknown_0861FA04:: @ 861FA04
 
 gUnknown_0861FA08:: @ 861FA08
 	window_template 0, 1, 0x16, 0x10, 0x2, 0x0, 0x36
-	window_template_terminator
+	null_window_template
 
 gUnknown_0861FA18:: @ 861FA18
 	.4byte gUnknown_085EBED5

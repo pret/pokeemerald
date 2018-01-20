@@ -139,17 +139,14 @@ gUnknown_085E852C:: @ 85E852C
 	.string "CONTROLS$"
 
 	.align 2
-
 gUnknown_085E8538:: @ 85E8538
 	.string "{UNK_CTRL_F80A}PICK {UNK_CTRL_F800}OK$"
 
 	.align 2
-
 gUnknown_085E8544:: @ 85E8544
 	.string "{UNK_CTRL_F800}NEXT$"
 
 	.align 2
-
 gUnknown_085E854C:: @ 85E854C
 	.string "{UNK_CTRL_F800}NEXT {UNK_CTRL_F801}BACK$"
 
@@ -1340,27 +1337,22 @@ gText_EggCantBeTradedNow:: @ 85EA234
 	.string "An EGG can’t be traded now.$"
 
 	.align 2
-
-gUnknown_085EA250:: @ 85EA250
+gText_OtherTrainersPkmnCantBeTraded:: @ 85EA250
 	.string "The other TRAINER’s POKéMON\ncan’t be traded now.$"
 
 	.align 2
-
 gUnknown_085EA284:: @ 85EA284
 	.string "The other TRAINER can’t accept\nthat POKéMON now.$"
 
 	.align 2
-
 gUnknown_085EA2B8:: @ 85EA2B8
 	.string "You can’t trade with that\nTRAINER now.$"
 
 	.align 2
-
 gUnknown_085EA2E0:: @ 85EA2E0
 	.string "That isn’t the type of POKéMON\nthat the other TRAINER wants.$"
 
 	.align 2
-
 gUnknown_085EA320:: @ 85EA320
 	.string "That isn’t an EGG.$"
 
@@ -3585,27 +3577,22 @@ gText_BattlePyramid:: @ 85ED153
 	.string "BATTLE PYRAMID$"
 
 	.align 2
-
 gUnknown_085ED164:: @ 85ED164
 	.string "{STR_VAR_1} SINGLE$"
 
 	.align 2
-
 gUnknown_085ED170:: @ 85ED170
 	.string "{STR_VAR_1} DOUBLE$"
 
 	.align 2
-
 gUnknown_085ED17C:: @ 85ED17C
 	.string "{STR_VAR_1} MULTI$"
 
 	.align 2
-
 gUnknown_085ED188:: @ 85ED188
 	.string "{STR_VAR_1} LINK$"
 
 	.align 2
-
 gUnknown_085ED190:: @ 85ED190
 	.string "{STR_VAR_1}$"
 
@@ -4319,37 +4306,30 @@ gText_FloorsCleared:: @ 85EE39C
 	.string "Floors cleared: {STR_VAR_1}$"
 
 	.align 2
-
 gUnknown_085EE3B0:: @ 85EE3B0
 	.string "LV. 50$"
 
 	.align 2
-
 gUnknown_085EE3B8:: @ 85EE3B8
 	.string "OPEN LEVEL$"
 
 	.align 2
-
 gUnknown_085EE3C4:: @ 85EE3C4
 	.string "Win streak: {STR_VAR_2}$"
 
 	.align 2
-
 gUnknown_085EE3D4:: @ 85EE3D4
 	.string "Clear streak: {STR_VAR_2}$"
 
 	.align 2
-
 gUnknown_085EE3E8:: @ 85EE3E8
 	.string "Rooms cleared: {STR_VAR_2}$"
 
 	.align 2
-
 gUnknown_085EE3FC:: @ 85EE3FC
 	.string "KOs in a row: {STR_VAR_2}$"
 
 	.align 2
-
 gUnknown_085EE410:: @ 85EE410
 	.string "Floors cleared: {STR_VAR_2}$"
 
@@ -4931,7 +4911,6 @@ gText_WhereShouldNewsBeAccessed:: @ 85EEF94
 	.string "Where should the WONDER NEWS\nbe accessed?$"
 
 	.align 2
-
 gUnknown_085EEFC0:: @ 85EEFC0
 	.string "Communication standby…\nB Button: Cancel$"
 
