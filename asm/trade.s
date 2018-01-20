@@ -2394,7 +2394,7 @@ _08078726:
 	mov r2, sp
 	bl GetMonData
 	mov r0, sp
-	ldr r1, =gUnknown_0832DF94
+	ldr r1, =gJPText_Shedinja
 	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	bne _08078766
@@ -2444,7 +2444,7 @@ _080787AC:
 	thumb_func_start sub_80787B8
 sub_80787B8: @ 80787B8
 	push {lr}
-	ldr r0, =gUnknown_0832DAE5
+	ldr r0, =gText_IsThisTradeOkay
 	ldr r1, =gUnknown_0203229C
 	ldr r1, [r1]
 	adds r1, 0x72
@@ -4769,7 +4769,7 @@ _08079AFE:
 	lsrs r4, r0, 16
 	cmp r4, 0x3
 	bls _08079ADE
-	ldr r1, =gUnknown_0832DABC
+	ldr r1, =gText_EmptyString7
 	adds r0, r6, 0
 	bl StringCopy
 	movs r4, 0
@@ -4789,7 +4789,7 @@ _08079B20:
 	bl StringAppend
 _08079B3C:
 	adds r0, r6, 0
-	ldr r1, =gUnknown_0832DAD2
+	ldr r1, =gText_NewLine3
 	bl StringAppend
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -4799,10 +4799,10 @@ _08079B3C:
 	b _08079B6C
 	.pool
 _08079B5C:
-	ldr r1, =gUnknown_0832DABC
+	ldr r1, =gText_EmptyString7
 	adds r0, r6, 0
 	bl StringCopy
-	ldr r1, =gUnknown_0832DADF
+	ldr r1, =gText_FourQuestionMarks
 	adds r0, r6, 0
 	bl StringAppend
 _08079B6C:
@@ -8571,7 +8571,7 @@ _0807BB68:
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_08338ED0
+	ldr r0, =gIngameTrades
 	adds r4, r0
 	ldr r0, =gStringVar1
 	adds r1, r4, 0
@@ -9098,7 +9098,7 @@ _0807C1DC:
 	beq _0807C1FC
 	bl _0807CFB4
 _0807C1FC:
-	ldr r0, =gUnknown_08338D28
+	ldr r0, =gSpriteTemplate_8338D28
 	movs r1, 0x78
 	movs r2, 0x20
 	movs r3, 0
@@ -9228,7 +9228,7 @@ _0807C318:
 	bl _0807CFB4
 _0807C328:
 	bl sub_807AB28
-	ldr r0, =gUnknown_08338E74
+	ldr r0, =gSpriteTemplate_8338E74
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
@@ -9296,7 +9296,7 @@ _0807C3B0:
 	beq _0807C3C4
 	bl _0807CFB4
 _0807C3C4:
-	ldr r0, =gUnknown_08338DFC
+	ldr r0, =gSpriteTemplate_8338DFC
 	movs r1, 0x80
 	movs r2, 0x41
 	movs r3, 0
@@ -9316,7 +9316,7 @@ _0807C3E0:
 	ldr r1, [r4]
 	adds r1, 0x90
 	strb r0, [r1]
-	ldr r0, =gUnknown_08338DC8
+	ldr r0, =gSpriteTemplate_8338DC8
 	movs r1, 0x80
 	movs r2, 0x50
 	movs r3, 0
@@ -9455,7 +9455,7 @@ _0807C528:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r5, =gUnknown_08338DC8
+	ldr r5, =gSpriteTemplate_8338DC8
 	adds r0, r5, 0
 	movs r1, 0x6F
 	movs r2, 0xAA
@@ -9604,7 +9604,7 @@ _0807C66C:
 	adds r1, r4, 0
 	adds r1, 0x10
 	adds r0, r1
-	ldr r1, =gUnknown_08338ECC
+	ldr r1, =gSpriteAffineAnimTable_8338ECC
 	str r1, [r0]
 	ldrb r1, [r2]
 	lsls r0, r1, 4
@@ -9915,7 +9915,7 @@ _0807C8FA:
 	ldr r1, [r7]
 	adds r1, 0x90
 	strb r0, [r1]
-	ldr r0, =gUnknown_08338DC8
+	ldr r0, =gSpriteTemplate_8338DC8
 	movs r1, 0x80
 	adds r2, r4, 0
 	movs r3, 0
@@ -10091,7 +10091,7 @@ _0807CA86:
 	bne _0807CA92
 	b _0807CFB4
 _0807CA92:
-	ldr r0, =gUnknown_08338DFC
+	ldr r0, =gSpriteTemplate_8338DFC
 	movs r1, 0x80
 	movs r2, 0x41
 	movs r3, 0
@@ -10113,7 +10113,7 @@ _0807CA92:
 	b _0807CFB4
 	.pool
 _0807CAC8:
-	ldr r0, =gUnknown_08338E74
+	ldr r0, =gSpriteTemplate_8338E74
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
@@ -10255,7 +10255,7 @@ _0807CBEC:
 	b _0807CF48
 	.pool
 _0807CBF4:
-	ldr r0, =gUnknown_08338D28
+	ldr r0, =gSpriteTemplate_8338D28
 	movs r2, 0x8
 	negs r2, r2
 	movs r1, 0x78
@@ -11160,7 +11160,7 @@ _0807D5B8:
 	beq _0807D5D8
 	bl _0807E400
 _0807D5D8:
-	ldr r0, =gUnknown_08338D28
+	ldr r0, =gSpriteTemplate_8338D28
 	movs r1, 0x78
 	movs r2, 0x20
 	movs r3, 0
@@ -11290,7 +11290,7 @@ _0807D6F4:
 _0807D704:
 	movs r0, 0x3
 	bl sub_807B62C
-	ldr r0, =gUnknown_08338E8C
+	ldr r0, =gSpriteTemplate_8338E8C
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
@@ -11386,7 +11386,7 @@ _0807D7C4:
 	adds r0, r1
 	ldr r1, =sub_807AA4C
 	str r1, [r0]
-	ldr r0, =gUnknown_08338DC8
+	ldr r0, =gSpriteTemplate_8338DC8
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
@@ -11524,7 +11524,7 @@ _0807D924:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r5, =gUnknown_08338DC8
+	ldr r5, =gSpriteTemplate_8338DC8
 	adds r0, r5, 0
 	movs r1, 0x6F
 	movs r2, 0xAA
@@ -11678,7 +11678,7 @@ _0807DA74:
 	adds r1, r4, 0
 	adds r1, 0x10
 	adds r0, r1
-	ldr r1, =gUnknown_08338ECC
+	ldr r1, =gSpriteAffineAnimTable_8338ECC
 	str r1, [r0]
 	ldrb r1, [r2]
 	lsls r0, r1, 4
@@ -12008,7 +12008,7 @@ _0807DD02:
 	adds r0, r1
 	ldr r1, =sub_807AA4C
 	str r1, [r0]
-	ldr r0, =gUnknown_08338DC8
+	ldr r0, =gSpriteTemplate_8338DC8
 	movs r1, 0x78
 	adds r2, r4, 0
 	movs r3, 0
@@ -12218,7 +12218,7 @@ _0807DF12:
 	strh r6, [r5]
 	b _0807E398
 _0807DF16:
-	ldr r0, =gUnknown_08338E74
+	ldr r0, =gSpriteTemplate_8338E74
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
@@ -12360,7 +12360,7 @@ _0807E038:
 	b _0807E394
 	.pool
 _0807E040:
-	ldr r0, =gUnknown_08338D28
+	ldr r0, =gSpriteTemplate_8338D28
 	movs r2, 0x8
 	negs r2, r2
 	movs r1, 0x78
@@ -13184,7 +13184,7 @@ sub_807E73C: @ 807E73C
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_08338ED0
+	ldr r0, =gIngameTrades
 	adds r4, r0
 	ldr r0, =gStringVar1
 	ldrh r1, [r4, 0x38]
@@ -13214,7 +13214,7 @@ sub_807E784: @ 807E784
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_08338ED0
+	ldr r0, =gIngameTrades
 	adds r4, r0
 	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
@@ -13253,7 +13253,7 @@ sub_807E7E8: @ 807E7E8
 	lsls r2, r1, 4
 	subs r2, r1
 	lsls r2, 2
-	ldr r1, =gUnknown_08338ED0
+	ldr r1, =gIngameTrades
 	adds r5, r2, r1
 	movs r1, 0x64
 	muls r0, r1

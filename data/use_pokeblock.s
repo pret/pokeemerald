@@ -34,7 +34,7 @@ gUnknown_085DFCDC:: @ 85DFCDC
 	window_template 0, 0xD, 1, 0xD, 4, 0xF, 1
 	window_template 0, 0, 0xE, 0xB, 2, 0xF, 0x35
 	window_template 0, 1, 0x11, 0x1C, 2, 0xF, 0x4B
-	window_template_terminator
+	null_window_template
 
 sUsePokeblockYesNoWinTemplate:: @ 85DFCFC
 	window_template 0, 0x18, 0xB, 5, 4, 0xF, 0x83
