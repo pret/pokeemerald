@@ -266,7 +266,7 @@ gJPText_Shedinja:: @ 832DF94
 	.string "ヌケニン$"
 
 gUnknown_0832DF99:: @ 832DF99
-	.incbin "baserom.gba", 0x32df99, 0x7
+	.byte 0x04, 0x03, 0x13, 0x03, 0x00, 0x00, 0x00
 
 	.align 2
 gTradeBallPalette:: @ 832DFA0
