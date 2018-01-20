@@ -74,7 +74,7 @@ static void Task_MoveStarterChooseCursor(u8 taskId);
 static void sub_8134668(u8 taskId);
 static void CreateStarterPokemonLabel(u8 selection);
 static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y);
-static void StarterPokemonSpriteCallback(struct Sprite *sprite);
+void StarterPokemonSpriteCallback(struct Sprite *sprite);
 
 static IWRAM_DATA u16 sStarterChooseWindowId;
 
@@ -361,7 +361,7 @@ static u8 CreatePokemonFrontSprite(u16 species, u8 x, u8 y)
     return spriteId;
 }
 
-static void sub_81346DC(struct Sprite *sprite)
+void sub_81346DC(struct Sprite *sprite)
 {
     sprite->pos1.x = gUnknown_085B1E28[gTasks[sprite->data[0]].tStarterSelection][0];
     sprite->pos1.y = gUnknown_085B1E28[gTasks[sprite->data[0]].tStarterSelection][1];
@@ -369,7 +369,7 @@ static void sub_81346DC(struct Sprite *sprite)
     sprite->data[1] = (u8)(sprite->data[1]) + 4;
 }
 
-static void sub_813473C(struct Sprite *sprite)
+void sub_813473C(struct Sprite *sprite)
 {
     if (gTasks[sprite->data[0]].tStarterSelection == sprite->data[1])
         StartSpriteAnimIfDifferent(sprite, 1);
@@ -377,7 +377,7 @@ static void sub_813473C(struct Sprite *sprite)
         StartSpriteAnimIfDifferent(sprite, 0);
 }
 
-static void StarterPokemonSpriteCallback(struct Sprite *sprite)
+void StarterPokemonSpriteCallback(struct Sprite *sprite)
 {
     //Move sprite to upper center of screen
     if (sprite->pos1.x > STARTER_PKMN_POS_X)

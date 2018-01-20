@@ -18,6 +18,7 @@ SLOTMACHINEGFXDIR := graphics/slot_machine
 PKNAVGFXDIR := graphics/pokenav
 PKNAVOPTIONSGFXDIR := graphics/pokenav/options
 PSSGFXDIR := graphics/pokemon_storage
+MISCGFXDIR := graphics/misc
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -307,7 +308,7 @@ graphics/link_games/pkmnjump_bg.4bpp: %.4bpp: %.png
 graphics/pokenav/region_map.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 233
 
-graphics/misc/japanese_hof.4bpp: %.4bpp: %.png
+$(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
 
 $(INTERFACEGFXDIR)/menu.gbapal: $(INTERFACEGFXDIR)/menu_0.gbapal \
@@ -658,3 +659,6 @@ $(INTERFACEGFXDIR)/region_map.8bpp: %.8bpp: %.png
 
 $(INTERFACEGFXDIR)/region_map_affine.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 233
+
+$(MISCGFXDIR)/birch_help.4bpp: $(MISCGFXDIR)/birch_bag.4bpp $(MISCGFXDIR)/birch_grass.4bpp
+	@cat $^ >$@
