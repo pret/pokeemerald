@@ -47,7 +47,11 @@ struct UnkLinkRfuStruct_02022B44
     u8 fill_08[6];
     vu8 unk_0e;
     u8 unk_0f;
-    u8 fill_10[0xcc];
+    u8 fill_10[0x54];
+    u16 unk_64;
+    u8 fill_66[0x1d];
+    u8 unk_83;
+    u8 fill_84[0x58];
 };
 
 struct UnkRfuStruct_1 {
@@ -96,7 +100,7 @@ struct UnkRfuStruct_1 {
 struct UnkRfuStruct_2_Sub_6c {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ u16 unk_02;
-    /* 0x04 */ u8 *unk_04;
+    /* 0x04 */ const u8 *unk_04;
     /* 0x08 */ u32 unk_08;
     /* 0x0c */ u32 unk_0c;
     /* 0x10 */ u8 unk_10;
@@ -210,7 +214,7 @@ bool32 sub_800F7E4(void);
 void sub_800F804(void);
 void sub_800F850(void);
 u8 sub_800FCD8(void);
-bool32 sub_800FE84(const void *src, size_t size);
+bool32 sub_800FE84(const u8 *src, size_t size);
 void Rfu_set_zero(void);
 u8 sub_80104F4(void);
 u8 rfu_get_multiplayer_id(void);
@@ -224,10 +228,15 @@ void sub_800E174(void);
 void sub_800E6D0(void);
 bool32 sub_8010EC0(void);
 bool32 sub_8010F1C(void);
+bool32 sub_8011A80(void);
 bool32 sub_800F0B8(void);
 u32 sub_80124D4(void);
 void RfuVSync(void);
 void sub_80111B0(bool32 a0);
 u8 sub_8011A74(void);
+struct UnkLinkRfuStruct_02022B14 *sub_800F7DC(void);
+void sub_8011068(u8 a0);
+void sub_8011170(u32 a0);
+void sub_8011A64(u8 a0, u16 a1);
 
 #endif //GUARD_LINK_RFU_H
