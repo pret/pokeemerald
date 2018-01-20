@@ -567,16 +567,16 @@ gText_EmptyString2:: @ 85E8D03
 gUnknown_085E8D04:: @ 85E8D04
 	.string "CANCEL$"
 
-gUnknown_085E8D0B:: @ 85E8D0B
+gText_Item:: @ 85E8D0B
 	.string "ITEM$"
 
-gUnknown_085E8D10:: @ 85E8D10
+gText_Mail:: @ 85E8D10
 	.string "MAIL$"
 
-gUnknown_085E8D15:: @ 85E8D15
+gText_Take:: @ 85E8D15
 	.string "TAKE$"
 
-gUnknown_085E8D1A:: @ 85E8D1A
+gText_Store:: @ 85E8D1A
 	.string "STORE$"
 
 gMenuText_Check:: @ 85E8D20
@@ -985,34 +985,34 @@ gText_TurnedOverVar1ForVar2:: @ 85E9677
 gText_PokedollarVar1:: @ 85E969C
 	.string "¥{STR_VAR_1}$"
 
-gUnknown_085E96A0:: @ 85E96A0
+gText_Shift:: @ 85E96A0
 	.string "SHIFT$"
 
-gUnknown_085E96A6:: @ 85E96A6
+gText_SendOut:: @ 85E96A6
 	.string "SEND OUT$"
 
-gUnknown_085E96AF:: @ 85E96AF
+gText_Switch2:: @ 85E96AF
 	.string "SWITCH$"
 
-gUnknown_085E96B6:: @ 85E96B6
+gText_Summary5:: @ 85E96B6
 	.string "SUMMARY$"
 
 gUnknown_085E96BE:: @ 85E96BE
 	.string "MOVES$"
 
-gUnknown_085E96C4:: @ 85E96C4
+gText_Enter:: @ 85E96C4
 	.string "ENTER$"
 
-gUnknown_085E96CA:: @ 85E96CA
+gText_NoEntry:: @ 85E96CA
 	.string "NO ENTRY$"
 
-gUnknown_085E96D3:: @ 85E96D3
+gText_Take2:: @ 85E96D3
 	.string "TAKE$"
 
-gUnknown_085E96D8:: @ 85E96D8
+gText_Read2:: @ 85E96D8
 	.string "READ$"
 
-gUnknown_085E96DD:: @ 85E96DD
+gText_Trade4:: @ 85E96DD
 	.string "TRADE$"
 
 gText_HP3:: @ 85E96E3
@@ -1341,19 +1341,19 @@ gText_OtherTrainersPkmnCantBeTraded:: @ 85EA250
 	.string "The other TRAINER’s POKéMON\ncan’t be traded now.$"
 
 	.align 2
-gUnknown_085EA284:: @ 85EA284
+gText_OtherTrainerCantAcceptPkmn:: @ 85EA284
 	.string "The other TRAINER can’t accept\nthat POKéMON now.$"
 
 	.align 2
-gUnknown_085EA2B8:: @ 85EA2B8
+gText_CantTradeWithTrainer:: @ 85EA2B8
 	.string "You can’t trade with that\nTRAINER now.$"
 
 	.align 2
-gUnknown_085EA2E0:: @ 85EA2E0
+gText_NotPkmnOtherTrainerWants:: @ 85EA2E0
 	.string "That isn’t the type of POKéMON\nthat the other TRAINER wants.$"
 
 	.align 2
-gUnknown_085EA320:: @ 85EA320
+gText_ThatIsntAnEgg:: @ 85EA320
 	.string "That isn’t an EGG.$"
 
 gText_Register:: @ 85EA333
