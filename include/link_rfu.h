@@ -142,11 +142,14 @@ struct UnkRfuStruct_Sub_Unused {
 struct UnkRfuStruct_2 {
     /* 0x000 */ void (*unk_00)(void);
     /* 0x004 */ u16 unk_04;
-    /* 0x006 */ u8 filler_06[6];
+    /* 0x006 */ u8 filler_06[4];
+    /* 0x00a */ u16 unk_0a;
     /* 0x00c */ u8 unk_0c;
     /* 0x00d */ u8 playerCount;
     /* 0x00e */ u8 unk_0e;
-    /* 0x00f */ u8 filler_0f[5];
+    /* 0x00f */ u8 unk_0f;
+    /* 0x010 */ u16 unk_10;
+    /* 0x012 */ u16 unk_12;
     /* 0x014 */ u8 unk_14[4][14];
     /* 0x04c */ u8 unk_4c[14];
     /* 0x05a */ u8 unk_5a;
@@ -207,8 +210,8 @@ struct UnkRfuStruct_8010A14 {
     char unk_00[15];
     u8 unk_0f;
     u8 unk_10[4];
-    struct LinkPlayer unk_14[4];
-    u8 fill_84[0x78];
+    struct LinkPlayer unk_14[5];
+    u8 fill_a0[0x5c];
 };
 
 // Exported RAM declarations

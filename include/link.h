@@ -194,7 +194,6 @@ extern u16 gSendCmd[CMD_LENGTH];
 extern struct LinkPlayer gLinkPlayers[5];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
-extern bool8 gWirelessCommType;
 extern u32 gUnknown_020223C0;
 
 void Task_DestroySelf(u8);
@@ -249,6 +248,7 @@ void SetSuppressLinkErrorMessage(bool8 flag);
 void sub_800B524(struct LinkPlayer *linkPlayer);
 u8 GetSioMultiSI(void);
 void sub_800AAF4(void);
+void sub_800AF18(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
 void sub_800B348(void);
 void sub_800B3A4(u32 who);
 
@@ -267,7 +267,7 @@ extern u8 gUnknown_030030EC[MAX_LINK_PLAYERS];
 extern u8 gUnknown_030030F0[MAX_LINK_PLAYERS];
 extern u16 gUnknown_030030F4;
 extern u8 gSuppressLinkErrorMessage;
-extern bool8 gWirelessCommType;
+extern u8 gWirelessCommType;
 extern bool8 gSavedLinkPlayerCount;
 extern u8 gSavedMultiplayerId;
 extern struct LinkTestBGInfo gLinkTestBGInfo;

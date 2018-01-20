@@ -13,6 +13,7 @@
 #include "overworld.h"
 #include "link.h"
 #include "librfu.h"
+#include "rom_8011DC0.h"
 #include "link_rfu.h"
 
 // Static type declarations
@@ -4313,4 +4314,166 @@ void sub_8010A70(void *a0)
         CpuFill16(0, a0, sizeof(struct UnkRfuStruct_8010A14));
         ResetBlockReceivedFlag(0);
     }
+}
+
+void sub_8010AAC(u8 taskId)
+{
+    int i;
+    struct LinkPlayerBlock *r2;
+    struct UnkRfuStruct_8010A14 *r5;
+    u8 r4 = gUnknown_03005000.unk_cde[gUnknown_082ED68C[gUnknown_03005000.unk_ce9]];
+    if (gUnknown_03005000.unk_f1 == 1 || gUnknown_03005000.unk_f1 == 2)
+    {
+        gUnknown_03005000.unk_ce8 = 0;
+        DestroyTask(taskId);
+    }
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            if (gSendCmd[0] == 0)
+            {
+                ResetBlockReceivedFlag(r4);
+                sub_800FD14(0x7800);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (gSendCmd[0] == 0)
+                gTasks[taskId].data[0]++;
+            break;
+        case 2:
+            if ((GetBlockReceivedStatus() >> r4) & 1)
+            {
+                ResetBlockReceivedFlag(r4);
+                r2 = (struct LinkPlayerBlock *)gBlockRecvBuffer[r4];
+                gLinkPlayers[r4] = r2->linkPlayer;
+                sub_800B524(gLinkPlayers + r4);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 3:
+            r5 = (struct UnkRfuStruct_8010A14 *)gBlockSendBuffer;
+            memcpy(r5->unk_00, gUnknown_082ED7EC, sizeof gUnknown_082ED7EC);
+            r5->unk_0f = gUnknown_03005000.playerCount;
+            for (i = 0; i < 4; i++)
+                r5->unk_10[i] = gUnknown_03005000.unk_cde[i];
+            memcpy(r5->unk_14, gLinkPlayers, sizeof gLinkPlayers);
+            gTasks[taskId].data[0]++;
+            // fallthrough
+        case 4:
+            r5 = (struct UnkRfuStruct_8010A14 *)gBlockSendBuffer;
+            r5->unk_0f = gUnknown_03005000.playerCount;
+            for (i = 0; i < 4; i++)
+                r5->unk_10[i] = gUnknown_03005000.unk_cde[i];
+            memcpy(r5->unk_14, gLinkPlayers, sizeof gLinkPlayers);
+            if (SendBlock(0, gBlockSendBuffer, 0xa0))
+                gTasks[taskId].data[0]++;
+            break;
+        case 5:
+            if (sub_800A520() && GetBlockReceivedStatus() & 1)
+            {
+                CpuFill16(0, gBlockRecvBuffer, sizeof(struct UnkRfuStruct_8010A14));
+                ResetBlockReceivedFlag(0);
+                gUnknown_03005000.unk_ce8 = 0;
+                if (gUnknown_03005000.unk_ce6)
+                {
+                    for (i = 0; i < 4; i++)
+                    {
+                        if ((gUnknown_03005000.unk_ce6 >> i) & 1)
+                        {
+                            gUnknown_03005000.unk_ce5 = 1 << i;
+                            gUnknown_03005000.unk_ce6 ^= (1 << i);
+                            gUnknown_03005000.unk_ce8 = 1;
+                            break;
+                        }
+                    }
+                }
+                DestroyTask(taskId);
+            }
+            break;
+    }
+}
+
+void sub_8010D0C(u8 taskId)
+{
+    if (gUnknown_03005000.unk_f1 == 1 || gUnknown_03005000.unk_f1 == 2)
+        DestroyTask(taskId);
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            if (gUnknown_03005000.playerCount)
+            {
+                sub_800B348();
+                SendBlock(0, gBlockSendBuffer, sizeof(struct LinkPlayerBlock));
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (sub_800A520())
+                gTasks[taskId].data[0]++;
+            break;
+        case 2:
+            if (GetBlockReceivedStatus() & 1)
+            {
+                sub_8010A14((const struct UnkRfuStruct_8010A14 *)gBlockRecvBuffer);
+                ResetBlockReceivedFlag(0);
+                gReceivedRemoteLinkPlayers = 1;
+                DestroyTask(taskId);
+            }
+            break;
+    }
+}
+
+void sub_8010DB4(void)
+{
+    if (gUnknown_03005000.unk_ee == 1 && gUnknown_03004140.unk_02 == 0)
+    {
+        if (gMain.callback2 == sub_8018438 || gUnknown_03004140.unk_3c->unk_04)
+            gWirelessCommType = 2;
+        SetMainCallback2(CB2_LinkError);
+        gMain.savedCallback = CB2_LinkError;
+        sub_800AF18((gUnknown_03005000.unk_0a << 16) | (gUnknown_03005000.unk_10 << 8) | gUnknown_03005000.unk_12, gUnknown_03005000.unk_124.unk_8c2, gUnknown_03005000.unk_9e8.unk_232, sub_8011A74() == 2);
+        gUnknown_03005000.unk_ee = 2;
+        CloseLink();
+    }
+    else if (gUnknown_03005000.unk_9e8.unk_233 == 1 || gUnknown_03005000.unk_124.unk_8c3 == 1)
+    {
+        if (gUnknown_03004140.unk_02)
+            sub_800D630();
+        sub_8011A64(1, 0x7000);
+        sub_8011170(0x7000);
+    }
+}
+
+void rfu_REQ_recvData_then_sendData(void)
+{
+    if (gUnknown_03004140.unk_06 == 1)
+    {
+        rfu_REQ_recvData();
+        rfu_waitREQComplete();
+        rfu_REQ_sendData_wrapper(0);
+    }
+}
+
+bool32 sub_8010EC0(void)
+{
+    bool32 retval = FALSE;
+    gUnknown_03005000.unk_ccd = 0;
+    sub_800C54C(Random2());
+    if (gUnknown_03005000.unk_ef == 0)
+    {
+        switch (gUnknown_03005000.unk_0c)
+        {
+            case 1:
+                sub_800F0F8();
+                break;
+            case 0:
+                retval = sub_800F4F0();
+                break;
+            case 2:
+                rfu_REQ_recvData_then_sendData();
+                break;
+        }
+    }
+    return retval;
 }
