@@ -5142,7 +5142,7 @@ gUnknown_08DE0644:: @ 8DE0644
 
 	.align 2
 gUnknown_08DE07C8:: @ 8DE07C8
-	.incbin "graphics/frontier_pass/tiles.gbapal" @ size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but this is wrong? todo, investigate? (frontier pass pal)
+	.incbin "graphics/frontier_pass/tiles.gbapal" @ size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but palette is only 0x100 bytes long so it loads garbage as well
 
 	.align 2
 gUnknown_08DE08C8:: @ 8DE08C8
