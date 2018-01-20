@@ -4174,3 +4174,109 @@ void sub_8010750(void)
         }
     }
 }
+
+int sub_80107A0(void)
+{
+    int retval = 0;
+    if (gUnknown_03005000.unk_c85 == 8)
+    {
+        if (gUnknown_03007880[gUnknown_03005000.unk_c3e]->unk_0 == 0x26 || gUnknown_03007880[gUnknown_03005000.unk_c3e]->unk_0 == 0x27)
+            rfu_clearSlot(4, gUnknown_03005000.unk_c3e);
+    }
+    if (gUnknown_03007880[gUnknown_03005000.unk_c3e]->unk_34 == 0x46 || gUnknown_03007880[gUnknown_03005000.unk_c3e]->unk_34 == 0x48)
+    {
+        rfu_clearSlot(8, gUnknown_03005000.unk_c3e);
+        sub_8011A64(gUnknown_03005000.unk_c86, 0);
+        retval = gUnknown_03005000.unk_c86;
+    }
+    else if (gUnknown_03007880[gUnknown_03005000.unk_c3e]->unk_34 == 0x47)
+    {
+        rfu_clearSlot(8, gUnknown_03005000.unk_c3e);
+        retval = 6;
+    }
+    return retval;
+}
+
+void sub_801084C(u8 taskId)
+{
+    int i;
+
+    if (gUnknown_03005000.unk_f1 == 1 || gUnknown_03005000.unk_f1 == 2)
+    {
+        gUnknown_03005000.unk_ce8 = 0;
+        DestroyTask(taskId);
+    }
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            if (sub_800FC60())
+            {
+                ResetBlockReceivedFlags();
+                sub_800B348();
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (gUnknown_03005000.unk_0c == 1)
+            {
+                if (gReceivedRemoteLinkPlayers)
+                    sub_800FD14(0x7800);
+                else
+                    sub_800FD14(0x7700);
+                gTasks[taskId].data[0] = 101;
+            }
+            else
+                gTasks[taskId].data[0] = 2;
+            break;
+        case 101:
+            if (gSendCmd[0] == 0)
+                gTasks[taskId].data[0] = 2;
+            break;
+        case 2:
+            if (gUnknown_03005000.playerCount)
+                gTasks[taskId].data[0]++;
+            break;
+        case 3:
+            if (gUnknown_03005000.unk_0c == 1)
+            {
+                if (sub_800FC60())
+                {
+                    gUnknown_03005000.unk_5a = 0;
+                    sub_800FD14(0xa100);
+                    gTasks[taskId].data[0]++;
+                }
+            }
+            else
+                gTasks[taskId].data[0]++;
+            break;
+        case 4:
+            if (sub_800FC88())
+                gTasks[taskId].data[0]++;
+            break;
+        case 5:
+            for (i = 0; i < gUnknown_03005000.playerCount; i++)
+            {
+                sub_800B3A4(i);
+                sub_800F728(i);
+            }
+            gTasks[taskId].data[0]++;
+            break;
+        case 6:
+            DestroyTask(taskId);
+            gReceivedRemoteLinkPlayers = 1;
+            gUnknown_03005000.unk_ce8 = 0;
+            sub_800D550(1, 0x258);
+            if (gUnknown_03005000.unk_ce6)
+            {
+                for (i = 0; i < 4; i++)
+                {
+                    if ((gUnknown_03005000.unk_ce6 >> i) & 1)
+                    {
+                        gUnknown_03005000.unk_ce5 = 1 << i;
+                        gUnknown_03005000.unk_ce6 ^= (1 << i);
+                    }
+                }
+            }
+            break;
+    }
+}

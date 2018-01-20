@@ -249,6 +249,8 @@ void SetSuppressLinkErrorMessage(bool8 flag);
 void sub_800B524(struct LinkPlayer *linkPlayer);
 u8 GetSioMultiSI(void);
 void sub_800AAF4(void);
+void sub_800B348(void);
+void sub_800B3A4(u32 who);
 
 extern u16 gLinkPartnersHeldKeys[6];
 extern u32 gLinkDebugSeed;

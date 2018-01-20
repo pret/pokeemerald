@@ -1812,13 +1812,14 @@ void sub_800B348(void)
     memcpy(gBlockSendBuffer, block, sizeof(*block));
 }
 
-void sub_800B3A4(u8 who)
+void sub_800B3A4(u32 who)
 {
+    u8 who_ = who;
     struct LinkPlayerBlock *block;
     struct LinkPlayer *player;
 
-    block = (struct LinkPlayerBlock *)gBlockRecvBuffer[who];
-    player = &gLinkPlayers[who];
+    block = (struct LinkPlayerBlock *)gBlockRecvBuffer[who_];
+    player = &gLinkPlayers[who_];
     *player = block->linkPlayer;
     sub_800B524(player);
     if (strcmp(block->magic1, gASCIIGameFreakInc) != 0 || strcmp(block->magic2, gASCIIGameFreakInc) != 0)
