@@ -745,19 +745,36 @@ gUnknown_0858BB80:: @ 858BB80
 	.4byte gText_Exit
 
 gUnknown_0858BB9C:: @ 858BB9C
-	.incbin "baserom.gba", 0x58bb9c, 0x10
+	.4byte OldaleTown_PokemonCenter_2F_Text_277F1B
+	.4byte OldaleTown_PokemonCenter_2F_Text_277F5A
+	.4byte OldaleTown_PokemonCenter_2F_Text_277F96
+	.4byte OldaleTown_PokemonCenter_2F_Text_27889C
 
 gUnknown_0858BBAC:: @ 858BBAC
-	.incbin "baserom.gba", 0x58bbac, 0x10
+	.4byte OldaleTown_PokemonCenter_2F_Text_27879F
+	.4byte OldaleTown_PokemonCenter_2F_Text_2787D5
+	.4byte OldaleTown_PokemonCenter_2F_Text_278831
+	.4byte OldaleTown_PokemonCenter_2F_Text_27889C
 
 gUnknown_0858BBBC:: @ 858BBBC
-	.incbin "baserom.gba", 0x58bbbc, 0x10
+	.4byte OldaleTown_PokemonCenter_2F_Text_27879F
+	.4byte OldaleTown_PokemonCenter_2F_Text_2787D5
+	.4byte OldaleTown_PokemonCenter_2F_Text_2787FC
+	.4byte OldaleTown_PokemonCenter_2F_Text_27889C
 
 gUnknown_0858BBCC:: @ 858BBCC
-	.incbin "baserom.gba", 0x58bbcc, 0x14
+	.4byte OldaleTown_PokemonCenter_2F_Text_27879F
+	.4byte OldaleTown_PokemonCenter_2F_Text_2787D5
+	.4byte OldaleTown_PokemonCenter_2F_Text_278831
+	.4byte OldaleTown_PokemonCenter_2F_Text_2787FC
+	.4byte OldaleTown_PokemonCenter_2F_Text_27889C
 
 gUnknown_0858BBE0:: @ 858BBE0
-	.incbin "baserom.gba", 0x58bbe0, 0xc
+	.4byte OldaleTown_PokemonCenter_2F_Text_277F1B
+	.4byte OldaleTown_PokemonCenter_2F_Text_277F5A
+	.4byte OldaleTown_PokemonCenter_2F_Text_27889C
 
 gUnknown_0858BBEC:: @ 858BBEC
-	.incbin "baserom.gba", 0x58bbec, 0xc
+	.4byte OldaleTown_PokemonCenter_2F_Text_27879F
+	.4byte OldaleTown_PokemonCenter_2F_Text_2787D5
+	.4byte OldaleTown_PokemonCenter_2F_Text_27889C

@@ -5,16 +5,26 @@
     .align 2, 0
 
 gUnknown_0855C604:: @ 855C604
-	.incbin "baserom.gba", 0x55c604, 0x60
+	.incbin "graphics/interface/855C604.gbapal"
+	.incbin "graphics/interface/855C624.bin"
 
 gUnknown_0855C664:: @ 855C664
-	.incbin "baserom.gba", 0x55c664, 0x1c
+	.4byte gUnknown_085EE590
+	.4byte gUnknown_085EE59B
+	.4byte gUnknown_085EE5A8
+	.4byte gUnknown_085EE5B5
+	.4byte gUnknown_085EE5C8
+	.4byte gUnknown_085EE5BB
+	.4byte gUnknown_085EE5C1
 
 gUnknown_0855C680:: @ 855C680
-	.incbin "baserom.gba", 0x55c680, 0x18
+	window_template 1, 2, 1, 0x1A, 2, 1, 2
+	window_template 0, 2, 5, 0x1A, 14, 1, 0x36
+	null_window_template
 
 gUnknown_0855C698:: @ 855C698
-	.incbin "baserom.gba", 0x55c698, 0x8
+	.4byte 0x1E5
+	.4byte 0x11F4
 
 gUnknown_0855C6A0:: @ 855C6A0
-	.incbin "baserom.gba", 0x55c6a0, 0x4
+	.2byte 0x7E51, 0
