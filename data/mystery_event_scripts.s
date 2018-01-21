@@ -1,41 +1,17 @@
+#include "constants/flags.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
+#include "constants/species.h"
+#include "constants/vars.h"
 	.include "asm/macros.inc"
+	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
 
-gText_MysteryGiftBerry:: @ 8674AE4
-	.string "Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.$"
-
-gText_MysteryGiftBerryTransform:: @ 8674B16
-	.string "The {STR_VAR_1} BERRY transformed into\none {STR_VAR_2} BERRY.$"
-
-gText_MysteryGiftBerryObtained:: @ 8674B42
-	.string "The {STR_VAR_1} BERRY has already been\nobtained.$"
-
-gText_MysteryGiftSpecialRibbon:: @ 8674B6A
-	.string "A special RIBBON was awarded to\nyour party POKéMON.$"
-
-gText_MysteryGiftNationalDex:: @ 8674B9E
-	.string "The POKéDEX has been upgraded\nwith the NATIONAL MODE.$"
-
-gText_MysteryGiftRareWord:: @ 8674BD4
-	.string "A rare word has been added.$"
-
-gText_MysteryGiftSentOver:: @ 8674BF0
-	.string "{STR_VAR_1} was sent over!$"
-
-gText_MysteryGiftFullParty:: @ 8674C02
-	.string "Your party is full.\n{STR_VAR_1} could not be sent over.$"
-
-gText_MysteryGiftNewTrainer:: @ 8674C31
-	.string "A new TRAINER has arrived in\nHOENN.$"
-	.string "A new adversary has arrived in the\nBATTLE TOWER.$"
-
-gText_MysteryGiftCantBeUsed:: @ 8674C86
-	.string "This data can’t be used in\nthis version.$"
-	
-gUnknown_08674CAF:: @ 8674CAF
-	.incbin "baserom.gba", 0x00674caf, 0x2e
+gUnknown_08674CB0:: @ 8674CB0
+	.incbin "baserom.gba", 0x00674cb0, 0x2d
 
 gText_MysteryGiftStampCard::
 	.string "Thank you for using the STAMP CARD\nSystem.\pYou have {STR_VAR_1} more to collect to\nfill your STAMP CARD.$"

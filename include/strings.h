@@ -148,6 +148,10 @@ extern const u8 gText_MoveItemsDescription[];
 extern const u8 gText_SeeYa[];
 extern const u8 gText_SeeYaDescription[];
 
+extern const u8 gText_EggNickname[];
+extern const u8 gText_Pokemon[];
+extern const u8 gText_InGameClockUsable[];
+
 // menu texts
 extern const u8 gText_MenuPokedex[];
 extern const u8 gText_MenuPokemon[];

@@ -393,7 +393,7 @@ PetalburgCity_Gym_EventScript_204DCE:: @ 8204DCE
 	checkpcitem ITEM_ENIGMA_BERRY, 1
 	compare VAR_RESULT, 1
 	goto_eq PetalburgCity_Gym_EventScript_204E17
-	compare VAR_0x402D, 0
+	compare VAR_ENIGMA_BERRY_AVAILABLE, 0
 	goto_eq PetalburgCity_Gym_EventScript_204E17
 	msgbox PetalburgCity_Gym_Text_2A6D3D, 4
 	setvar VAR_RESULT, 1
@@ -407,7 +407,7 @@ PetalburgCity_Gym_EventScript_204E1D:: @ 8204E1D
 	giveitem_std ITEM_ENIGMA_BERRY
 	compare VAR_RESULT, 0
 	goto_eq PetalburgCity_Gym_EventScript_272054
-	setvar VAR_0x402D, 0
+	setvar VAR_ENIGMA_BERRY_AVAILABLE, 0
 	release
 	end
 

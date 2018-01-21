@@ -48,7 +48,7 @@
 #define VAR_HAPPINESS_STEP_COUNTER 0x402A
 #define VAR_POISON_STEP_COUNTER    0x402B
 #define VAR_RESET_RTC_ENABLE       0x402C
-#define VAR_0x402D                 0x402D
+#define VAR_ENIGMA_BERRY_AVAILABLE 0x402D
 #define VAR_0x402E                 0x402E
 
 #define VAR_FRONTIER_MANIAC_FACILITY        0x402F

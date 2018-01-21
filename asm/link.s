@@ -38868,7 +38868,7 @@ _0801D7D0:
 	ldr r1, [r4, 0x18]
 	movs r2, 0xBC
 	bl memcpy
-	bl sub_81652B4
+	bl ValidateEReaderTrainer
 	b _0801D804
 	.pool
 _0801D7F0:
