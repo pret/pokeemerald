@@ -657,7 +657,7 @@ _081BF0B4:
 	ldr r0, [r0]
 	ldr r1, [r0]
 	movs r5, 0
-	ldr r2, =gUnknown_08617C44
+	ldr r2, =gRootFossil_Gfx
 _081BF0BE:
 	adds r0, r5, r2
 	ldrb r0, [r0]
