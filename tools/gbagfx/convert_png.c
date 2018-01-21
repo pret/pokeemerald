@@ -45,6 +45,40 @@ static FILE *PngReadOpen(char *path, png_structp *pngStruct, png_infop *pngInfo)
     return fp;
 }
 
+static unsigned char *ConvertBitDepth(unsigned char *src, int srcBitDepth, int destBitDepth, int numPixels)
+{
+    // Round the number of bits up to the next 8 and divide by 8 to get the number of bytes.
+    int srcSize = ((numPixels * srcBitDepth + 7) & ~7) / 8;
+    int destSize = ((numPixels * destBitDepth + 7) & ~7) / 8;
+    unsigned char *output = calloc(destSize, 1);
+    unsigned char *dest = output;
+    int i;
+    int j;
+    int destBit = 8 - destBitDepth;
+
+    for (i = 0; i < srcSize; i++)
+    {
+        unsigned char srcByte = src[i];
+
+        for (j = 8 - srcBitDepth; j >= 0; j -= srcBitDepth)
+        {
+            unsigned char pixel = (srcByte >> j) % (1 << srcBitDepth);
+
+            if (pixel >= (1 << destBitDepth))
+                FATAL_ERROR("Image exceeds the maximum color value for a %ibpp image.\n", destBitDepth);
+            *dest |= pixel << destBit;
+            destBit -= destBitDepth;
+            if (destBit < 0)
+            {
+                dest++;
+                destBit = 8 - destBitDepth;
+            }
+        }
+    }
+
+    return output;
+}
+
 void ReadPng(char *path, struct Image *image)
 {
     png_structp png_ptr;
@@ -53,9 +87,6 @@ void ReadPng(char *path, struct Image *image)
     FILE *fp = PngReadOpen(path, &png_ptr, &info_ptr);
 
     int bit_depth = png_get_bit_depth(png_ptr, info_ptr);
-
-    if (bit_depth != image->bitDepth)
-        FATAL_ERROR("\"%s\" has a bit depth of %d, but the expected bit depth is %d.\n", path, bit_depth, image->bitDepth);
 
     int color_type = png_get_color_type(png_ptr, info_ptr);
 
@@ -93,6 +124,17 @@ void ReadPng(char *path, struct Image *image)
 
     free(row_pointers);
     fclose(fp);
+
+    if (bit_depth != image->bitDepth)
+    {
+        unsigned char *src = image->pixels;
+
+        if (bit_depth != 1 && bit_depth != 2 && bit_depth != 4 && bit_depth != 8)
+            FATAL_ERROR("Bit depth of image must be 1, 2, 4, or 8.\n");
+        image->pixels = ConvertBitDepth(image->pixels, bit_depth, image->bitDepth, image->width * image->height);
+        free(src);
+        image->bitDepth = bit_depth;
+    }
 }
 
 void ReadPngPalette(char *path, struct Palette *palette)

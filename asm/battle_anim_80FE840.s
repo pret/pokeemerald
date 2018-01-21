@@ -18852,7 +18852,7 @@ _0810800C:
 	negs r0, r0
 	cmp r1, r0
 	bne _08108022
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	adds r0, r7, 0
 	bl DestroyTask
 _08108022:
@@ -26963,7 +26963,7 @@ _0810C0E2:
 	bl sub_80A6B30
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, =gUnknown_0854CAD0
+	ldr r1, =gWeatherFog1Tiles
 	movs r2, 0x80
 	lsls r2, 4
 	mov r3, sp
@@ -27245,7 +27245,7 @@ _0810C366:
 	bl sub_80A6B30
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
-	ldr r1, =gUnknown_0854CAD0
+	ldr r1, =gWeatherFog1Tiles
 	movs r2, 0x80
 	lsls r2, 4
 	mov r3, sp

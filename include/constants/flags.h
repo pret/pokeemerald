@@ -484,7 +484,7 @@
 #define FLAG_0x1E1               0x1E1
 #define FLAG_0x1E2               0x1E2
 #define FLAG_0x1E3               0x1E3
-#define FLAG_0x1E4               0x1E4
+#define FLAG_MYSTERY_EVENT_DONE  0x1E4
 #define FLAG_0x1E5               0x1E5
 #define FLAG_0x1E6               0x1E6
 #define FLAG_0x1E7               0x1E7

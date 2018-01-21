@@ -1,5 +1,6 @@
 #include "global.h"
 #include "item.h"
+#include "berry.h"
 #include "constants/items.h"
 #include "string_util.h"
 #include "text.h"
@@ -11,7 +12,6 @@ extern bool8 InBattlePyramid(void);
 extern const u8 gText_PokeBalls[];
 extern const u8 gText_Berries[];
 extern const u8 gText_Berry[];
-extern const u8 gUnknown_085897E4[][28]; // not sure what this one is
 
 bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
@@ -96,8 +96,8 @@ void CopyItemNameHandlePlural(u16 itemId, u8 *string, u32 quantity)
     }
     else
     {
-        if (itemId >= 0x85 && itemId <= 0xAF)
-            GetBerryCountString(string, gUnknown_085897E4[itemId], quantity);
+        if (itemId >= ITEM_CHERI_BERRY && itemId <= ITEM_ENIGMA_BERRY)
+            GetBerryCountString(string, gBerries[itemId - ITEM_CHERI_BERRY].name, quantity);
         else
             StringCopy(string, ItemId_GetItem(itemId)->name);
     }

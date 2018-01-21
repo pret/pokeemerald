@@ -2725,13 +2725,13 @@ sub_80AC594: @ 80AC594
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080AC650
-	ldr r0, =gUnknown_0854FB5C
+	ldr r0, =sCloudSpriteSheet
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_0854C290
 	bl sub_80ABF4C
 	movs r5, 0
 _080AC5B2:
-	ldr r0, =gUnknown_0854FB78
+	ldr r0, =sCloudSpriteTemplate
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFF
@@ -3676,7 +3676,7 @@ sub_80ACD78: @ 80ACD78
 	b _080ACE98
 _080ACD92:
 	ldrb r7, [r2]
-	ldr r0, =gUnknown_0854FC2C
+	ldr r0, =gSpriteTemplate_854FC2C
 	ldr r2, =gUnknown_0854FB90
 	lsls r6, r7, 2
 	adds r2, r6, r2
@@ -5461,7 +5461,7 @@ sub_80ADCAC: @ 80ADCAC
 	bl LoadSpriteSheet
 	movs r5, 0
 _080ADCD0:
-	ldr r0, =gUnknown_0854FD18
+	ldr r0, =gSpriteTemplate_854FD18
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFF
@@ -5792,7 +5792,7 @@ sub_80ADF6C: @ 80ADF6C
 	bne _080AE008
 	movs r5, 0
 _080ADF80:
-	ldr r0, =gUnknown_0854FD58
+	ldr r0, =gSpriteTemplate_854FD58
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x4E
@@ -6240,7 +6240,7 @@ _080AE314:
 	adds r5, r0, 0
 	lsls r2, r5, 22
 	asrs r2, 16
-	ldr r0, =gUnknown_0854FD8C
+	ldr r0, =gSpriteTemplate_854FD8C
 	movs r1, 0
 	movs r3, 0xFF
 	bl CreateSpriteAtEnd
@@ -6753,7 +6753,7 @@ _080AE758:
 	adds r6, r0, 0
 	lsls r2, r6, 22
 	asrs r2, 16
-	ldr r0, =gUnknown_0854FDC4
+	ldr r0, =gSpriteTemplate_854FDC4
 	movs r1, 0
 	movs r3, 0x1
 	bl CreateSpriteAtEnd
@@ -6840,7 +6840,7 @@ _080AE818:
 	adds r1, 0x18
 	lsls r1, 16
 	asrs r1, 16
-	ldr r0, =gUnknown_0854FDC4
+	ldr r0, =gSpriteTemplate_854FDC4
 	movs r2, 0xD0
 	movs r3, 0x1
 	bl CreateSpriteAtEnd
@@ -7239,7 +7239,7 @@ sub_80AEB48: @ 80AEB48
 	ldrh r2, [r0]
 	ldrh r0, [r1]
 	subs r2, r0
-	ldr r0, =gUnknown_0854FE44
+	ldr r0, =gSpriteTemplate_854FE44
 	movs r4, 0
 	ldrsh r1, [r3, r4]
 	lsls r2, 16
@@ -7306,7 +7306,7 @@ _080AEBE4:
 	adds r0, 0x14
 	adds r0, r2, r0
 	ldr r1, [r0]
-	ldr r0, =gUnknown_0854FE44
+	ldr r0, =gSpriteTemplate_854FE44
 	cmp r1, r0
 	bne _080AEBFE
 	adds r0, r2, r5
@@ -7332,8 +7332,8 @@ _080AEC1A:
 	.pool
 	thumb_func_end sub_80AEBD0
 
-	thumb_func_start unc_0807DAB4
-unc_0807DAB4: @ 80AEC34
+	thumb_func_start sub_80AEC34
+sub_80AEC34: @ 80AEC34
 	push {lr}
 	adds r1, r0, 0
 	ldrh r0, [r1, 0x2E]
@@ -7383,7 +7383,7 @@ _080AEC74:
 _080AEC8E:
 	pop {r0}
 	bx r0
-	thumb_func_end unc_0807DAB4
+	thumb_func_end sub_80AEC34
 
 	thumb_func_start sub_80AEC94
 sub_80AEC94: @ 80AEC94
@@ -9621,7 +9621,7 @@ _080AFE64:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x1
 	bne _080AFEB4
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0x2
 	strh r0, [r4]
 	b _080AFEC6
@@ -9714,7 +9714,7 @@ _080AFF28:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x1
 	bne _080AFF78
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0x2
 	strh r0, [r4]
 	b _080AFF8A

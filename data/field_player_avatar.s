@@ -115,11 +115,12 @@ gUnknown_08497540:: @ 8497540
 	.4byte sub_808C6FC
 
 gUnknown_08497550:: @ 8497550
-	.incbin "baserom.gba", 0x497550, 0x4
+	.byte 3, 4, 2, 1
 
 gUnknown_08497554:: @ 8497554
-	.incbin "baserom.gba", 0x497554, 0x8
+	.byte 16, 16, 17, 18, 19
 
+	.align 2
 gUnknown_0849755C:: @ 849755C
 	.4byte fish0
 	.4byte fish1
@@ -139,19 +140,21 @@ gUnknown_0849755C:: @ 849755C
 	.4byte fishF
 
 gUnknown_0849759C:: @ 849759C
-	.incbin "baserom.gba", 0x49759c, 0x6
+	.2byte 1, 1, 1
 
 gUnknown_084975A2:: @ 84975A2
-	.incbin "baserom.gba", 0x4975a2, 0x6
+	.2byte 1, 3, 6
 
 gUnknown_084975A8:: @ 84975A8
-	.incbin "baserom.gba", 0x4975a8, 0x2
+	.string "·$"
 
 gUnknown_084975AA:: @ 84975AA
-	.incbin "baserom.gba", 0x4975aa, 0x6
+	.2byte 36, 33, 30
 
 gUnknown_084975B0:: @ 84975B0
-	.incbin "baserom.gba", 0x4975b0, 0xc
+	.2byte 0, 0
+	.2byte 0x28, 10
+	.2byte 0x46, 30
 
 gUnknown_084975BC:: @ 84975BC
 	.byte 0x01, 0x03, 0x04, 0x02, 0x01, 0x00, 0x00, 0x00

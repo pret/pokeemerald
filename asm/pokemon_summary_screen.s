@@ -2239,7 +2239,7 @@ _081C50E4:
 	bl clear_scheduled_bg_copies_to_vram
 	b _081C51A2
 _081C50EE:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _081C51A2
 _081C50F4:
 	bl FreeAllSpritePalettes

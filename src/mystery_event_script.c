@@ -26,7 +26,7 @@ extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
 #define LANGUAGE_MASK 0x1
 #define VERSION_MASK 0x200
 
-EWRAM_DATA struct ScriptContext sMysteryEventScriptContext = {0};
+EWRAM_DATA static struct ScriptContext sMysteryEventScriptContext = {0};
 
 static bool32 CheckCompatibility(u16 a1, u32 a2, u16 a3, u32 a4)
 {

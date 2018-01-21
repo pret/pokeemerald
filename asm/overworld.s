@@ -4122,7 +4122,7 @@ sub_80867D8: @ 80867D8
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r2, =0x05000002
 	mov r1, sp
 	movs r0, 0

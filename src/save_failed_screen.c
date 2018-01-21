@@ -9,6 +9,7 @@
 #include "menu.h"
 #include "save.h"
 #include "gba/flash_internal.h"
+#include "text_window.h"
 
 #define MSG_WIN_TOP 12
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
@@ -21,9 +22,7 @@ extern const u8 gBirchHelpGfx[];
 extern const u8 gBirchBagTilemap[];
 extern const u8 gBirchGrassTilemap[];
 extern const u16 gBirchBagGrassPal[];
-extern const u16 gUnknown_0850FEFC[];
 extern const u16 gUnknown_0860F074[];
-extern const u32 gUnknown_0850E87C[];
 extern struct SaveSection gSaveDataBuffer;
 
 extern u8 gText_SaveFailedCheckingBackup[];
@@ -226,7 +225,7 @@ static void CB2_SaveFailedScreen(void)
             InitBgsFromTemplates(0, gUnknown_085EFD88, 3);
             SetBgTilemapBuffer(0, (void *)&gDecompressionBuffer[0x2000]);
             CpuFill32(0, &gDecompressionBuffer[0x2000], 0x800);
-            LoadBgTiles(0, gUnknown_0850E87C, 0x120, 0x214);
+            LoadBgTiles(0, gTextWindowFrame1_Gfx, 0x120, 0x214);
             InitWindows(gUnknown_085EFD94);
             // AddWindowWithoutTileMap returns a u16/integer, but the info is clobbered into a u8 here resulting in lost info. Bug?
             gSaveFailedWindowIds[TEXT_WIN_ID] = AddWindowWithoutTileMap(gUnknown_085EFD9C);
@@ -239,7 +238,7 @@ static void CB2_SaveFailedScreen(void)
             ResetPaletteFade();
             LoadPalette(gBirchBagGrassPal, 0, 0x40);
             LoadPalette(sSaveFailedClockPal, 0x100, 0x20);
-            LoadPalette(gUnknown_0850FEFC, 0xE0, 0x20);
+            LoadPalette(gTextWindowFrame1_Pal, 0xE0, 0x20);
             LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
             SetWindowBorderStyle(gSaveFailedWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);
             SetWindowBorderStyle(gSaveFailedWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);

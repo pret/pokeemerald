@@ -240,30 +240,6 @@ static const struct MailLayout sUnknown_0859F458[] = {
     { 0x05, 0x09, 0x60, 0x05, 0x1e, Unknown_0859F444 }
 };
 
-// What the heck are these meant to be? Call them u16 for now.
-
-static const u16 Unknown_0859F4E8[] = {
-    0x00, 0x4000, 0x00, 0x00
-};
-
-static const u16 Unknown_0859F4F0[] = {
-    0x00, 0x00, -1, 0x00
-};
-
-static const u16 Unknown_0859F4F8[] = {
-    0x04, 0x00, -1, 0x00
-};
-
-static const u16 Unknown_0859F500[] = {
-    0x00, 0x40, -1, 0x00
-};
-
-static const u16 *const sUnknown_0859F508[] = {
-    Unknown_0859F4F0,
-    Unknown_0859F4F8,
-    Unknown_0859F500
-};
-
 // .text
 
 void ReadMail(struct MailStruct *mail, void (*callback)(void), bool8 flag)
@@ -329,7 +305,7 @@ static bool8 MailReadBuildGraphics(void)
     {
         case 0:
             SetVBlankCallback(NULL);
-            remove_some_task();
+            ScanlineEffect_Stop();
             SetGpuReg(REG_OFFSET_DISPCNT, 0x0000);
             break;
         case 1:

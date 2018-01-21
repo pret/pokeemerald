@@ -226,7 +226,7 @@
 #define VAR_0x40DA                 0x40DA
 #define VAR_0x40DB                 0x40DB
 #define VAR_0x40DC                 0x40DC
-#define VAR_0x40DD                 0x40DD
+#define VAR_EVENT_PICHU_SLOT       0x40DD
 #define VAR_0x40DE                 0x40DE
 #define VAR_0x40DF                 0x40DF
 #define VAR_0x40E0                 0x40E0
