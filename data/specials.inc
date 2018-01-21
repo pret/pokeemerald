@@ -1,5 +1,3 @@
-#ifndef GUARD_SPECIALS_H 
-#define GUARD_SPECIALS_H 
 .macro def_special ptr
 .global SPECIAL_\ptr
 .set SPECIAL_\ptr, __special__
@@ -537,4 +535,3 @@ gSpecials:: @ 81DBA64
 	def_special sub_813C5A0
 	def_special sub_8139C10
 	def_special sub_80B3BC4
-#endif
