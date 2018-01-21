@@ -74,6 +74,7 @@ void sub_8010AAC(u8 taskId);
 void sub_8010D0C(u8 taskId);
 u8 sub_8011CE4(const u8 *a0, u16 a1);
 void sub_8011D6C(u8 a0);
+void sub_8011E94(u8 a0, u8 a1);
 u8 sub_8012224(void);
 void sub_801227C(void);
 
@@ -4547,4 +4548,65 @@ void sub_8011090(u8 a0, u32 a1, u32 a2)
     if (a0)
         sub_8010F84(a0, a1, a2);
     rfu_REQ_configGameData(0, 2, &gUnknown_02022B14, gUnknown_02022B22);
+}
+
+void sub_80110B8(u32 a0)
+{
+    int i;
+    u32 r5;
+    u32 r7;
+    int r8;
+
+    if (sub_800F7DC()->unk_0a_0 == 0x45)
+    {
+        r5 = 0;
+        r7 = 0;
+        r8 = gUnknown_03005000.unk_ce2 ^ gUnknown_03005000.unk_ce3;
+        for (i = 0; i < 4; i++)
+        {
+            if ((r8 >> i) & 1)
+            {
+                r7 |= ((0x80 | ((gLinkPlayers[gUnknown_03005000.unk_cde[i]].gender & 1) << 3) | (gLinkPlayers[gUnknown_03005000.unk_cde[i]].trainerId & 7)) << (r5 << 3));
+                r5++;
+                if (r5 == a0 - 1)
+                    break;
+            }
+        }
+        sub_8011090(0x45, r7, 0);
+    }
+}
+
+void sub_8011170(u32 a0)
+{
+    if (gUnknown_03005000.unk_ee == 0)
+    {
+        gUnknown_03005000.unk_10 = gUnknown_03004140.unk_14;
+        gUnknown_03005000.unk_12 = gUnknown_03004140.unk_16;
+        gUnknown_03005000.unk_0a = a0;
+        gUnknown_03005000.unk_ee = 1;
+    }
+}
+
+void sub_80111A0(void)
+{
+    gUnknown_03005000.unk_ee = 0;
+}
+
+void sub_80111B0(bool32 a0)
+{
+    if (!a0)
+        gUnknown_03005000.unk_ee = 0;
+    else
+        gUnknown_03005000.unk_ee = 4;
+}
+
+void sub_80111DC(void)
+{
+    sub_8011E94(gUnknown_03004140.unk_00, 1);
+    gUnknown_03005000.unk_00 = NULL;
+}
+
+void sub_80111FC(void)
+{
+    gUnknown_03005000.unk_00 = sub_80111DC;
 }
