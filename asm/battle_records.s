@@ -1034,7 +1034,7 @@ _0813C6FA:
 	thumb_func_start sub_813C80C
 sub_813C80C: @ 813C80C
 	push {lr}
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade

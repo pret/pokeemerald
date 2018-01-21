@@ -45,7 +45,7 @@ sub_81D6774: @ 81D6774
 	push {lr}
 	bl SetVBlankHBlankCallbacksToNull
 	bl clear_scheduled_bg_copies_to_vram
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl ResetSpriteData
@@ -1522,7 +1522,7 @@ _081D73D8:
 	adds r0, r2
 	ldrh r1, [r4, 0x6]
 	strh r1, [r0, 0xE]
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 _081D7428:
 	ldrh r0, [r4]
 	adds r0, 0x1
@@ -1774,7 +1774,7 @@ sub_81D7600: @ 81D7600
 	bl ChangeBgY
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	strh r4, [r5]

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start remove_some_task
-remove_some_task: @ 80B9FB8
+	thumb_func_start ScanlineEffect_Stop
+ScanlineEffect_Stop: @ 80B9FB8
 	push {r4,lr}
 	ldr r4, =gUnknown_02039B28
 	movs r0, 0
@@ -32,7 +32,7 @@ _080B9FE2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end remove_some_task
+	thumb_func_end ScanlineEffect_Stop
 
 	thumb_func_start dp12_8087EA4
 dp12_8087EA4: @ 80B9FF8

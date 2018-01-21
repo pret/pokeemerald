@@ -305,7 +305,7 @@ static bool8 MailReadBuildGraphics(void)
     {
         case 0:
             SetVBlankCallback(NULL);
-            remove_some_task();
+            ScanlineEffect_Stop();
             SetGpuReg(REG_OFFSET_DISPCNT, 0x0000);
             break;
         case 1:

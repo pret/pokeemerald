@@ -578,7 +578,7 @@ static void LoadWallClockGraphics(void)
     DeactivateAllTextPrinters();
     sub_809882C(0, 0x250, 0xd0);
     clear_scheduled_bg_copies_to_vram();
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();

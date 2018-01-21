@@ -3360,7 +3360,7 @@ c2_800ACD4: @ 800AF30
 	movs r2, 0x2
 	bl FillPalette
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r1, =gLinkVSyncDisabled
 	ldrb r0, [r1]
 	cmp r0, 0
@@ -28637,7 +28637,7 @@ _08018482:
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_082F0598
@@ -32620,7 +32620,7 @@ sub_801A43C: @ 801A43C
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl m4aSoundVSyncOn
 	ldr r0, =sub_801A418
 	bl SetVBlankCallback
@@ -45999,7 +45999,7 @@ _080210A0:
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl reset_temp_tile_data_buffers
 	b _080212FC
 _080210BE:
@@ -61951,7 +61951,7 @@ sub_8028FF8: @ 8028FF8
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_8098758
+	bl GetWindowFrameTilesPal
 	ldr r1, [r0]
 	movs r2, 0x90
 	lsls r2, 1
@@ -61959,7 +61959,7 @@ sub_8028FF8: @ 8028FF8
 	movs r3, 0x1
 	bl LoadBgTiles
 	adds r0, r4, 0
-	bl sub_8098758
+	bl GetWindowFrameTilesPal
 	ldr r0, [r0, 0x4]
 	movs r1, 0xA0
 	movs r2, 0x20
