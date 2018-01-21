@@ -1,4 +1,4 @@
-First, you must put a Pokémon Emerald (US) ROM in the root directory of the repository and name it `baserom.gba`. It should have a SHA1 checksum of `f3ae088181bf583e55daf962a92bb46f4f1d07b7`. Then, follow the OS-specific instructions below.
+Follow the OS-specific instructions below.
 
 # Linux
 
