@@ -1537,7 +1537,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     CopyWindowToVram(gUnknown_03000F30, 3);
     return FALSE;
 }*/
-__attribute__((naked))
+ASM_DIRECT
 bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 {
     asm("push {r4-r7,lr}\n\

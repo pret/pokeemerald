@@ -1228,7 +1228,7 @@ void obj_update_pos2(struct Sprite* sprite, s32 a1, s32 a2)
     }
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void obj_update_pos2(struct Sprite* sprite, s32 a1, s32 a2)
 {
     asm(".syntax unified\n\

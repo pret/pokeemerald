@@ -72,6 +72,7 @@ void sub_80109E8(u16 a0);
 void sub_8010A70(void *a0);
 void sub_8010AAC(u8 taskId);
 void sub_8010D0C(u8 taskId);
+void sub_80115EC(u16 a0);
 u8 sub_8011CE4(const u8 *a0, u16 a1);
 void sub_8011D6C(u8 a0);
 void sub_8011E94(u8 a0, u8 a1);
@@ -2048,7 +2049,7 @@ u8 sub_800DD1C(u8 maxFlags)
     return 0;
 }
 #else
-__attribute__((naked)) u8 sub_800DD1C(u8 maxFlags)
+ASM_DIRECT u8 sub_800DD1C(u8 maxFlags)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tlsls r0, 24\n"
@@ -2143,7 +2144,7 @@ void sub_800DD94(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, int r
     data->unk_01_1 = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
 
-bool8 sub_800DE7C(void *buff1, void *buff2, u8 idx)
+bool8 sub_800DE7C(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx)
 {
     bool8 retVal;
 
@@ -2152,13 +2153,13 @@ bool8 sub_800DE7C(void *buff1, void *buff2, u8 idx)
         retVal = TRUE;
         if (sub_8010454(gUnknown_03007890->unk_14[idx].unk_04) && ((gUnknown_03007890->unk_07 >> idx) & 1))
         {
-            memcpy(buff1, gUnknown_03007890->unk_14[idx].unk_06, 13);
-            memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, 8);
+            memcpy(buff1, &gUnknown_03007890->unk_14[idx].unk_06, sizeof(gUnknown_03007890->unk_14[idx].unk_06));
+            memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
         }
         else
         {
-            memset(buff1, 0, 13);
-            memset(buff2, 0, 8);
+            memset(buff1, 0, sizeof(gUnknown_03007890->unk_14[idx].unk_06));
+            memset(buff2, 0, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
         }
     }
     else
@@ -2166,38 +2167,38 @@ bool8 sub_800DE7C(void *buff1, void *buff2, u8 idx)
         retVal = FALSE;
         if (sub_8010454(gUnknown_03007890->unk_14[idx].unk_04))
         {
-            memcpy(buff1, gUnknown_03007890->unk_14[idx].unk_06, 13);
-            memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, 8);
+            memcpy(buff1, &gUnknown_03007890->unk_14[idx].unk_06, sizeof(gUnknown_03007890->unk_14[idx].unk_06));
+            memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
         }
         else
         {
-            memset(buff1, 0, 13);
-            memset(buff2, 0, 8);
+            memset(buff1, 0, sizeof(gUnknown_03007890->unk_14[idx].unk_06));
+            memset(buff2, 0, sizeof(gUnknown_03007890->unk_14[idx].unk_15));
         }
     }
     return retVal;
 }
 
-bool8 sub_800DF34(void *buff1, void *buff2, u8 idx)
+bool8 sub_800DF34(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2, u8 idx)
 {
     bool8 retVal = FALSE;
     if (gUnknown_03007890->unk_14[idx].unk_04 == 0x7F7D)
     {
-        memcpy(buff1, gUnknown_03007890->unk_14[idx].unk_06, 13);
+        *buff1 = gUnknown_03007890->unk_14[idx].unk_06;
         memcpy(buff2, gUnknown_03007890->unk_14[idx].unk_15, 8);
         retVal = TRUE;
     }
     else
     {
-        memset(buff1, 0, 13);
+        *buff1 = (struct UnkLinkRfuStruct_02022B14){};
         memset(buff2, 0, 8);
     }
     return retVal;
 }
 
-void sub_800DF90(void *buff1, void *buff2)
+void sub_800DF90(struct UnkLinkRfuStruct_02022B14 *buff1, u8 *buff2)
 {
-    memcpy(buff1, &gUnknown_02022B14, 13);
+    *buff1 = gUnknown_02022B14;
     memcpy(buff2, gUnknown_02022B22, 8);
 }
 
@@ -2894,7 +2895,7 @@ void sub_800EFB0(void)
     CpuFill16(0, gRecvCmds, sizeof gRecvCmds);
 }
 #else
-__attribute__((naked)) void sub_800EFB0(void)
+ASM_DIRECT void sub_800EFB0(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tsub sp, 0x4\n"
@@ -3230,7 +3231,7 @@ void sub_800F638(u8 unused, u32 flags)
     }
 }
 #else
-__attribute__((naked)) void sub_800F638(u8 unused, u32 flags)
+ASM_DIRECT void sub_800F638(u8 unused, u32 flags)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"
@@ -3598,7 +3599,7 @@ void sub_800FD14(u16 command)
     }
 }
 #else
-__attribute__((naked)) void sub_800FD14(u16 command)
+ASM_DIRECT void sub_800FD14(u16 command)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                     "\tlsls r0, 16\n"
@@ -4610,3 +4611,330 @@ void sub_80111FC(void)
 {
     gUnknown_03005000.unk_00 = sub_80111DC;
 }
+
+#ifdef NONMATCHING
+void sub_801120C(u8 a0)
+{
+    u8 i;
+    u8 r6 = 0;
+    struct RfuUnk5Sub *unk5Sub;
+    switch (a0)
+    {
+        case 0x00:
+            gUnknown_03005000.unk_04 = 2;
+            break;
+        case 0x10:
+            break;
+        case 0x11:
+            sub_80115EC(gUnknown_03004140.unk_14);
+            for (i = 0; i < 4; i++)
+            {
+                if ((gUnknown_03004140.unk_14 >> i) & 1)
+                {
+                    unk5Sub = &gUnknown_03007890->unk_14[i];
+                    if (unk5Sub->unk_06.unk_0a_0 == sub_800F7DC()->unk_0a_0)
+                    {
+                        gUnknown_03005000.unk_cd1[i] = 0;
+                        gUnknown_03005000.unk_cd5[i] = 0;
+                        rfu_setRecvBuffer(0x20, i, gUnknown_03005000.unk_cd5 + i, 1);
+                    }
+                    else
+                    {
+                        r6 |= (1 << i);
+                    }
+                }
+            }
+            if (r6)
+            {
+                rfu_REQ_disconnect(r6);
+                rfu_waitREQComplete();
+            }
+            break;
+        case 0x12:
+            break;
+        case 0x13:
+            break;
+        case 0x14:
+            if (gUnknown_03005000.unk_ce7 != gUnknown_03004140.unk_00)
+            {
+                rfu_REQ_disconnect(gUnknown_03005000.unk_ce7 ^ gUnknown_03004140.unk_00);
+                rfu_waitREQComplete();
+            }
+            gUnknown_03005000.unk_04 = 0x11;
+            break;
+        case 0x31:
+            gUnknown_03005000.unk_f0 = 1;
+            break;
+        case 0x32:
+            gUnknown_03005000.unk_f0 = 3;
+            break;
+        case 0x30:
+        case 0x33:
+            gUnknown_03005000.unk_f0 = 4;
+            gUnknown_03005000.unk_ce2 &= ~gUnknown_03004140.unk_14;
+            if (gReceivedRemoteLinkPlayers == 1)
+            {
+                if (gUnknown_03005000.unk_ce2 == 0)
+                    sub_8011170(a0);
+                else
+                    sub_80111FC();
+            }
+            sub_8011A64(2, a0);
+            break;
+        case 0x42 ... 0x44:
+            break;
+        case 0xf3:
+            sub_8011A64(1, a0);
+            sub_8011170(a0);
+            gUnknown_03005000.unk_ef = 1;
+            break;
+        case 0xf0 ... 0xf2:
+        case 0xff:
+            sub_8011170(a0);
+            sub_8011A64(1, a0);
+            gUnknown_03005000.unk_cdb = 1;
+            break;
+    }
+}
+#else
+ASM_DIRECT void sub_801120C(u8 a0)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r10\n"
+                    "\tmov r6, r9\n"
+                    "\tmov r5, r8\n"
+                    "\tpush {r5-r7}\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r4, r0, 24\n"
+                    "\tmovs r6, 0\n"
+                    "\tcmp r4, 0x32\n"
+                    "\tbne _08011222\n"
+                    "\tb _08011360_case_32\n"
+                    "_08011222:\n"
+                    "\tcmp r4, 0x32\n"
+                    "\tbgt _08011252\n"
+                    "\tcmp r4, 0x13\n"
+                    "\tbgt _08011240\n"
+                    "\tcmp r4, 0x12\n"
+                    "\tblt _08011230\n"
+                    "\tb _080113EE_break\n"
+                    "_08011230:\n"
+                    "\tcmp r4, 0x10\n"
+                    "\tbne _08011236\n"
+                    "\tb _080113EE_break\n"
+                    "_08011236:\n"
+                    "\tcmp r4, 0x10\n"
+                    "\tbgt _0801128C_case_11\n"
+                    "\tcmp r4, 0\n"
+                    "\tbeq _0801127E_case_00\n"
+                    "\tb _080113EE_break\n"
+                    "_08011240:\n"
+                    "\tcmp r4, 0x30\n"
+                    "\tbne _08011246\n"
+                    "\tb _0801136C_case_30_case_33\n"
+                    "_08011246:\n"
+                    "\tcmp r4, 0x30\n"
+                    "\tble _0801124C\n"
+                    "\tb _08011354_case_31\n"
+                    "_0801124C:\n"
+                    "\tcmp r4, 0x14\n"
+                    "\tbeq _08011328_case_14\n"
+                    "\tb _080113EE_break\n"
+                    "_08011252:\n"
+                    "\tcmp r4, 0x44\n"
+                    "\tbgt _08011264\n"
+                    "\tcmp r4, 0x42\n"
+                    "\tblt _0801125C\n"
+                    "\tb _080113EE_break\n"
+                    "_0801125C:\n"
+                    "\tcmp r4, 0x33\n"
+                    "\tbne _08011262\n"
+                    "\tb _0801136C_case_30_case_33\n"
+                    "_08011262:\n"
+                    "\tb _080113EE_break\n"
+                    "_08011264:\n"
+                    "\tcmp r4, 0xF3\n"
+                    "\tbne _0801126A\n"
+                    "\tb _080113BA_case_f3\n"
+                    "_0801126A:\n"
+                    "\tcmp r4, 0xF3\n"
+                    "\tbgt _08011276\n"
+                    "\tcmp r4, 0xF0\n"
+                    "\tbge _08011274\n"
+                    "\tb _080113EE_break\n"
+                    "_08011274:\n"
+                    "\tb _080113D4_case_f0_f1_f2_ff\n"
+                    "_08011276:\n"
+                    "\tcmp r4, 0xFF\n"
+                    "\tbne _0801127C\n"
+                    "\tb _080113D4_case_f0_f1_f2_ff\n"
+                    "_0801127C:\n"
+                    "\tb _080113EE_break\n"
+                    "_0801127E_case_00:\n"
+                    "\tldr r1, =gUnknown_03005000\n"
+                    "\tmovs r0, 0x2\n"
+                    "\tstrh r0, [r1, 0x4]\n"
+                    "\tb _080113EE_break\n"
+                    "\t.pool\n"
+                    "_0801128C_case_11:\n"
+                    "\tldr r0, =gUnknown_03004140\n"
+                    "\tldrh r0, [r0, 0x14]\n"
+                    "\tbl sub_80115EC\n"
+                    "\tmovs r5, 0\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tmov r8, r0\n"
+                    "\tldr r1, =gUnknown_03005000\n"
+                    "\tmov r9, r1\n"
+                    "\tldr r3, =0x00000cd5\n"
+                    "\tadd r3, r9\n"
+                    "\tmov r10, r3\n"
+                    "\tmovs r7, 0x7F\n"
+                    "_080112A6:\n"
+                    "\tldr r0, =gUnknown_03004140\n"
+                    "\tldrh r0, [r0, 0x14]\n"
+                    "\tasrs r0, r5\n"
+                    "\tmov r1, r8\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r0, 0\n"
+                    "\tbeq _0801130E\n"
+                    "\tldr r0, =gUnknown_03007890\n"
+                    "\tlsls r1, r5, 5\n"
+                    "\tadds r1, 0x14\n"
+                    "\tldr r0, [r0]\n"
+                    "\tadds r0, r1\n"
+                    "\tldrb r0, [r0, 0x10]\n"
+                    "\tadds r4, r7, 0\n"
+                    "\tands r4, r0\n"
+                    "\tbl sub_800F7DC\n"
+                    "\tldrb r1, [r0, 0xA]\n"
+                    "\tadds r0, r7, 0\n"
+                    "\tands r0, r1\n"
+                    "\tcmp r4, r0\n"
+                    "\tbne _08011304\n"
+                    "\tldr r0, =0x00000cd1\n"
+                    "\tadd r0, r9\n"
+                    "\tadds r0, r5, r0\n"
+                    "\tmovs r1, 0\n"
+                    "\tstrb r1, [r0]\n"
+                    "\tmov r3, r10\n"
+                    "\tadds r2, r5, r3\n"
+                    "\tstrb r1, [r2]\n"
+                    "\tmovs r0, 0x20\n"
+                    "\tadds r1, r5, 0\n"
+                    "\tmovs r3, 0x1\n"
+                    "\tbl rfu_setRecvBuffer\n"
+                    "\tb _0801130E\n"
+                    "\t.pool\n"
+                    "_08011304:\n"
+                    "\tmov r0, r8\n"
+                    "\tlsls r0, r5\n"
+                    "\torrs r6, r0\n"
+                    "\tlsls r0, r6, 24\n"
+                    "\tlsrs r6, r0, 24\n"
+                    "_0801130E:\n"
+                    "\tadds r0, r5, 0x1\n"
+                    "\tlsls r0, 24\n"
+                    "\tlsrs r5, r0, 24\n"
+                    "\tcmp r5, 0x3\n"
+                    "\tbls _080112A6\n"
+                    "\tcmp r6, 0\n"
+                    "\tbeq _080113EE_break\n"
+                    "\tadds r0, r6, 0\n"
+                    "\tbl rfu_REQ_disconnect\n"
+                    "\tbl rfu_waitREQComplete\n"
+                    "\tb _080113EE_break\n"
+                    "_08011328_case_14:\n"
+                    "\tldr r4, =gUnknown_03005000\n"
+                    "\tldr r1, =0x00000ce7\n"
+                    "\tadds r0, r4, r1\n"
+                    "\tldr r1, =gUnknown_03004140\n"
+                    "\tldrb r2, [r0]\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tcmp r2, r0\n"
+                    "\tbeq _08011342\n"
+                    "\teors r0, r2\n"
+                    "\tbl rfu_REQ_disconnect\n"
+                    "\tbl rfu_waitREQComplete\n"
+                    "_08011342:\n"
+                    "\tmovs r0, 0x11\n"
+                    "\tstrh r0, [r4, 0x4]\n"
+                    "\tb _080113EE_break\n"
+                    "\t.pool\n"
+                    "_08011354_case_31:\n"
+                    "\tldr r0, =gUnknown_03005000\n"
+                    "\tadds r0, 0xF0\n"
+                    "\tb _080113EA\n"
+                    "\t.pool\n"
+                    "_08011360_case_32:\n"
+                    "\tldr r0, =gUnknown_03005000\n"
+                    "\tadds r0, 0xF0\n"
+                    "\tmovs r1, 0x3\n"
+                    "\tb _080113EC\n"
+                    "\t.pool\n"
+                    "_0801136C_case_30_case_33:\n"
+                    "\tldr r1, =gUnknown_03005000\n"
+                    "\tadds r2, r1, 0\n"
+                    "\tadds r2, 0xF0\n"
+                    "\tmovs r0, 0x4\n"
+                    "\tstrb r0, [r2]\n"
+                    "\tldr r3, =0x00000ce2\n"
+                    "\tadds r1, r3\n"
+                    "\tldr r0, =gUnknown_03004140\n"
+                    "\tldrb r2, [r0, 0x14]\n"
+                    "\tldrb r0, [r1]\n"
+                    "\tadds r3, r0, 0\n"
+                    "\tbics r3, r2\n"
+                    "\tadds r2, r3, 0\n"
+                    "\tstrb r2, [r1]\n"
+                    "\tldr r0, =gReceivedRemoteLinkPlayers\n"
+                    "\tldrb r0, [r0]\n"
+                    "\tcmp r0, 0x1\n"
+                    "\tbne _080113B0\n"
+                    "\tcmp r2, 0\n"
+                    "\tbne _080113AC\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tbl sub_8011170\n"
+                    "\tb _080113B0\n"
+                    "\t.pool\n"
+                    "_080113AC:\n"
+                    "\tbl sub_80111FC\n"
+                    "_080113B0:\n"
+                    "\tmovs r0, 0x2\n"
+                    "\tadds r1, r4, 0\n"
+                    "\tbl sub_8011A64\n"
+                    "\tb _080113EE_break\n"
+                    "_080113BA_case_f3:\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tmovs r1, 0xF3\n"
+                    "\tbl sub_8011A64\n"
+                    "\tmovs r0, 0xF3\n"
+                    "\tbl sub_8011170\n"
+                    "\tldr r0, =gUnknown_03005000\n"
+                    "\tadds r0, 0xEF\n"
+                    "\tb _080113EA\n"
+                    "\t.pool\n"
+                    "_080113D4_case_f0_f1_f2_ff:\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tbl sub_8011170\n"
+                    "\tmovs r0, 0x1\n"
+                    "\tadds r1, r4, 0\n"
+                    "\tbl sub_8011A64\n"
+                    "\tldr r0, =gUnknown_03005000\n"
+                    "\tldr r1, =0x00000cdb\n"
+                    "\tadds r0, r1\n"
+                    "\tldrb r1, [r0]\n"
+                    "_080113EA:\n"
+                    "\tmovs r1, 0x1\n"
+                    "_080113EC:\n"
+                    "\tstrb r1, [r0]\n"
+                    "_080113EE_break:\n"
+                    "\tpop {r3-r5}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tmov r10, r5\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.pool");
+}
+#endif

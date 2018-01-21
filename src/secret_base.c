@@ -765,7 +765,7 @@ void sub_80E9914(void)
     }
 }
 #else
-__attribute__((naked)) void sub_80E9914(void)
+ASM_DIRECT void sub_80E9914(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"

@@ -930,7 +930,7 @@ void TintPalette_SepiaTone(u16 *palette, u16 count)
     }
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void TintPalette_SepiaTone(u16 *palette, u16 count)
 {
     asm("push {r4-r7,lr}\n\
@@ -1036,7 +1036,7 @@ void TintPalette_CustomTone(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
     return;
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void TintPalette_CustomTone(u16 *palette, u16 count, u16 a3, u16 a4, u16 a5)
 {
     asm("push {r4-r7,lr}\n\

@@ -3,28 +3,6 @@
 
 // Exported type declarations
 
-struct __attribute__((packed)) UnkLinkRfuStruct_02022B14
-{
-    u16 unk_00_0:4;
-    u16 unk_00_4:1;
-    u16 unk_00_5:1;
-    u16 unk_00_6:1;
-    u16 unk_00_7:1;
-    u16 unk_01_0:1;
-    u16 unk_01_1:1;
-    u16 unk_01_2:4;
-    u16 unk_01_6:2;
-    u8 playerTrainerId[2];
-    u8 unk_04[4];
-    u16 unk_08_0:10;
-    u16 unk_09_2:6;
-    u8 unk_0a_0:7;
-    u8 unk_0a_7:1;
-    u8 playerGender:1;
-    u8 unk_0b_1:7;
-    u8 unk_0c;
-};
-
 struct UnkLinkRfuStruct_02022B2C
 {
     u8 unk_00;

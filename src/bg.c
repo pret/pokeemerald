@@ -463,7 +463,7 @@ bool8 IsDma3ManagerBusyWithBgCopy(void)
     return FALSE;
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 bool8 IsDma3ManagerBusyWithBgCopy(void)
 {
     asm("push {r4-r7,lr}\n\
@@ -1048,7 +1048,7 @@ void CopyRectToBgTilemapBufferRect(u8 bg, const void* src, u8 srcX, u8 srcY, u8 
         }
     }
 }*/
-__attribute__((naked))
+ASM_DIRECT
 void CopyRectToBgTilemapBufferRect(u8 bg, const void* src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2)
 {
     asm("push {r4-r7,lr}\n\
@@ -1495,7 +1495,7 @@ void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u32 tileOffset, u32 pal
     *dest = test;
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u32 tileOffset, u32 palette2)
 {
     asm("push {r4-r6,lr}\n\

@@ -1435,7 +1435,7 @@ void sub_81C14BC(struct Pokemon *mon, u8 swappingFromId, u8 swappingToId)
     *ppBonusesPtr = localPpBonuses;
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void sub_81C14BC(struct Pokemon *mon, u8 swappingFromId, u8 swappingToId)
 {
     asm(".syntax unified\n\
@@ -1646,7 +1646,7 @@ void sub_81C15EC(struct BoxPokemon *mon, u8 swappingFromId, u8 swappingToId)
     *ppBonusesPtr = localPpBonuses;
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void sub_81C15EC(struct BoxPokemon *mon, u8 swappingFromId, u8 swappingToId)
 {
     asm(".syntax unified\n\
@@ -2057,7 +2057,7 @@ void sub_81C1CB0(struct UnkStruct_61CC04 *a, u16 *b, u8 c, u8 d)
     Free(alloced);
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void sub_81C1CB0(struct UnkStruct_61CC04 *a, u16 *b, u8 c, u8 d)
 {
     asm(".syntax unified\n\
@@ -2359,7 +2359,7 @@ void sub_81C2194(u16 *a, u16 b, u8 c)
     }
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void sub_81C2194(u16 *a, u16 b, u8 c)
 {
     asm(".syntax unified\n\
@@ -2808,7 +2808,7 @@ u8 sub_81C2D2C(struct WindowTemplate *template, u8 a)
     return r4[a];
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 u8 sub_81C2D2C(struct WindowTemplate *template, u8 a)
 {
     asm(".syntax unified\n\
@@ -2853,7 +2853,7 @@ void sub_81C2D68(u8 a)
     }
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void sub_81C2D68(u8 a)
 {
     asm(".syntax unified\n\
@@ -3110,7 +3110,7 @@ void sub_81C335C()
     sub_81C25A4(r4, gText_FiveMarks, r5, 1, 0, 1);
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void sub_81C335C()
 {
     asm(".syntax unified\n\
@@ -3453,7 +3453,7 @@ void sub_81C3B08(u8 a)
     sub_81C25A4(sp, text, offset, (a<<4), 0, r5);
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 void sub_81C3B08(u8 a)
 {
     asm(".syntax unified\n\

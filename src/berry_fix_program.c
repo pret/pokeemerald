@@ -265,7 +265,7 @@ static void berry_fix_gpu_set(void)
 }
 
 #else
-__attribute__((naked)) static void berry_fix_gpu_set(void)
+ASM_DIRECT static void berry_fix_gpu_set(void)
 {
     asm(".syntax unified\n"
         "\tpush {r4-r6,lr}\n"

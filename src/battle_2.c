@@ -3362,7 +3362,7 @@ static void BattleIntroOpponent1SendsOutMonAnimation(void)
 }
 
 #else
-__attribute__((naked))
+ASM_DIRECT
 static void BattleIntroOpponent1SendsOutMonAnimation(void)
 {
     asm(".syntax unified\n\

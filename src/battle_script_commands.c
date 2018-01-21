@@ -3713,7 +3713,7 @@ static void atk24(void)
     }
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 static void atk24(void)
 {
     asm("\n\
@@ -4593,7 +4593,7 @@ static void atk48_playstatchangeanimation(void)
     }
 }
 #else
-__attribute__((naked))
+ASM_DIRECT
 static void atk48_playstatchangeanimation(void)
 {
     asm("\n\
@@ -9486,7 +9486,7 @@ static void atkC1_hiddenpowercalc(void)
 }
 
 #else
-__attribute__((naked))
+ASM_DIRECT
 static void atkC1_hiddenpowercalc(void)
 {
     asm(".syntax unified\n\

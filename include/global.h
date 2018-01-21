@@ -10,6 +10,7 @@
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
+#define ASM_DIRECT __attribute__((naked))
 
 #if defined (__APPLE__) || defined (__CYGWIN__)
 void *memset(void *, int, size_t);

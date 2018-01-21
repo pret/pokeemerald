@@ -67,6 +67,28 @@ union RfuPacket
     struct RfuPacket8 rfuPacket8;
 };
 
+struct __attribute__((packed)) UnkLinkRfuStruct_02022B14
+{
+    u16 unk_00_0:4;
+    u16 unk_00_4:1;
+    u16 unk_00_5:1;
+    u16 unk_00_6:1;
+    u16 unk_00_7:1;
+    u16 unk_01_0:1;
+    u16 unk_01_1:1;
+    u16 unk_01_2:4;
+    u16 unk_01_6:2;
+    u8 playerTrainerId[2];
+    u8 unk_04[4];
+    u16 unk_08_0:10;
+    u16 unk_09_2:6;
+    u8 unk_0a_0:7;
+    u8 unk_0a_7:1;
+    u8 playerGender:1;
+    u8 unk_0b_1:7;
+    u8 unk_0c;
+};
+
 struct RfuStruct
 {
     vs32 unk_0;
@@ -142,6 +164,15 @@ struct RfuUnk3
     u32 unk_dc;
 };
 
+struct RfuUnk5Sub {
+    u16 unk_00;
+    u8 unk_02;
+    u16 unk_04;
+    struct UnkLinkRfuStruct_02022B14 unk_06;
+    u8 fill_13[2];
+    u8 unk_15[8];
+};
+
 struct RfuUnk5
 {
     u8 unk_00;
@@ -156,13 +187,7 @@ struct RfuUnk5
     u8 filler_09[1];
     u8 unk_0a[4];
     u8 filler_0e[6];
-    struct RfuUnk5Sub {
-        u16 unk_00;
-        u8 unk_02;
-        u16 unk_04;
-        u8 unk_06[15];
-        u8 unk_15[11];
-    } unk_14[4];
+    struct RfuUnk5Sub unk_14[4];
 };
 
 extern struct RfuStruct *gRfuState;
