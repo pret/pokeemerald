@@ -273,7 +273,7 @@ gSpecials:: @ 81DBA64
 	def_special ShowBerryBlenderRecordWindow
 	def_special ResetTrickHouseEndRoomFlag
 	def_special SetTrickHouseEndRoomFlag
-	def_special sp109_CreatePCMenu
+	def_special ScrSpecial_CreatePCMenu
 	def_special AccessHallOfFamePC
 	def_special Special_ShowDiploma
 	def_special CheckLeadMonCool

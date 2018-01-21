@@ -187,7 +187,7 @@ SECTIONS {
         asm/post_battle_event_funcs.o(.text);
         asm/time_events.o(.text);
         asm/birch_pc.o(.text);
-        asm/hof_pc.o(.text);
+        src/hof_pc.o(.text);
         asm/field_specials.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
