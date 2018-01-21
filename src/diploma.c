@@ -72,7 +72,7 @@ void CB2_ShowDiploma(void)
     DmaFill16(3, 0, VRAM, VRAM_SIZE);
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();

@@ -12,7 +12,7 @@ gUnknown_085A7424:: @ 85A7424
 
 gUnknown_085A7434:: @ 85A7434
 	window_template 0, 2, 15, 0x1B, 4, 15, 0x194
-	window_template_terminator
+	null_window_template
 
 gUnknown_085A7444:: @ 85A7444
 	window_template 0, 1, 3, 20, 13, 13, 1

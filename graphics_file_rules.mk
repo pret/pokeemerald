@@ -4,7 +4,7 @@ MONFRONTGFXDIR := graphics/pokemon/anim_front_pics
 MONPALDIR := graphics/pokemon/palettes
 TILESETGFXDIR := data/tilesets
 FONTGFXDIR := data/graphics/fonts
-MENUGFXDIR := graphics/interface
+INTERFACEGFXDIR := graphics/interface
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 UNUSEDGFXDIR := graphics/unused
 UNKNOWNGFXDIR := graphics/unknown
@@ -18,6 +18,8 @@ SLOTMACHINEGFXDIR := graphics/slot_machine
 PKNAVGFXDIR := graphics/pokenav
 PKNAVOPTIONSGFXDIR := graphics/pokenav/options
 PSSGFXDIR := graphics/pokemon_storage
+MAPOBJGFXDIR := graphics/map_objects
+MISCGFXDIR := graphics/misc
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -307,11 +309,11 @@ graphics/link_games/pkmnjump_bg.4bpp: %.4bpp: %.png
 graphics/pokenav/region_map.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 233
 
-graphics/misc/japanese_hof.4bpp: %.4bpp: %.png
+$(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
 
-$(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal \
-						$(MENUGFXDIR)/menu_1.gbapal
+$(INTERFACEGFXDIR)/menu.gbapal: $(INTERFACEGFXDIR)/menu_0.gbapal \
+						$(INTERFACEGFXDIR)/menu_1.gbapal
 	@cat $^ >$@
 
 $(BTLANMSPRGFXDIR)/010.4bpp: $(BTLANMSPRGFXDIR)/010_0.4bpp \
@@ -340,9 +342,9 @@ $(UNUSEDGFXDIR)/obi2.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur2.4bpp \
 						   $(UNUSEDGFXDIR)/old_battle_interface_3.4bpp
 	@cat $^ >$@
 
-$(MENUGFXDIR)/hp_numbers.4bpp: $(MENUGFXDIR)/hpbar_anim.4bpp \
-							$(MENUGFXDIR)/numbers1.4bpp \
-							$(MENUGFXDIR)/numbers2.4bpp
+$(INTERFACEGFXDIR)/hp_numbers.4bpp: $(INTERFACEGFXDIR)/hpbar_anim.4bpp \
+							$(INTERFACEGFXDIR)/numbers1.4bpp \
+							$(INTERFACEGFXDIR)/numbers2.4bpp
 	@cat $^ >$@
 
 $(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin \
@@ -398,7 +400,7 @@ $(MASKSGFXDIR)/unknown_C2EA50.4bpp: %.4bpp: %.png
 $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 16
 
-$(MENUGFXDIR)/party_menu_misc.4bpp: %.4bpp: %.png
+$(INTERFACEGFXDIR)/party_menu_misc.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 62
 
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
@@ -409,7 +411,7 @@ $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
 							   $(TYPESGFXDIR)/move_types_3.gbapal
 	@cat $^ >$@
 
-$(MENUGFXDIR)/bag_screen.4bpp: %.4bpp: %.png
+$(INTERFACEGFXDIR)/bag_screen.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
 
 $(RAYQUAZAGFXDIR)/rayquaza.8bpp: %.8bpp: %.png
@@ -629,6 +631,15 @@ $(PSSGFXDIR)/ludicolo.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/ludico
 $(PSSGFXDIR)/whiscash.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/whiscash_bg.4bpp
 	@cat $^ >$@
 
+$(MAPOBJGFXDIR)/pics/effects/unknown_4F6D38/0.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 11
+
+$(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 8
+	
+$(BATTRANSGFXDIR)/frontier_transition.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 43
+	
 $(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
 								$(PKNAVOPTIONSGFXDIR)/condition.4bpp \
 								$(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
@@ -652,3 +663,12 @@ $(PKNAVGFXDIR)/outline.4bpp: %.4bpp: %.png
 	
 $(PKNAVGFXDIR)/ui_matchcall.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 13
+
+$(INTERFACEGFXDIR)/region_map.8bpp: %.8bpp: %.png
+	$(GFX) $< $@ -num_tiles 232
+
+$(INTERFACEGFXDIR)/region_map_affine.8bpp: %.8bpp: %.png
+	$(GFX) $< $@ -num_tiles 233
+
+$(MISCGFXDIR)/birch_help.4bpp: $(MISCGFXDIR)/birch_bag.4bpp $(MISCGFXDIR)/birch_grass.4bpp
+	@cat $^ >$@

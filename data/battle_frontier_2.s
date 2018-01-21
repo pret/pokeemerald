@@ -108,7 +108,7 @@ gUnknown_08610434:: @ 8610434
 	window_template 0x00, 0x16, 0x0e, 0x08, 0x06, 0x0f, 0x006b
 	window_template 0x00, 0x16, 0x0e, 0x08, 0x04, 0x0f, 0x009b
 	window_template 0x00, 0x0f, 0x00, 0x0f, 0x02, 0x0f, 0x00bb
-	window_template_terminator
+	null_window_template
 
 	.align 1
 gUnknown_0861046C:: @ 861046C
@@ -345,7 +345,7 @@ gUnknown_086108C8:: @ 86108C8
 	window_template 0x02, 0x0a, 0x02, 0x04, 0x02, 0x0e, 0x00c1
 	window_template 0x00, 0x13, 0x02, 0x0b, 0x02, 0x0f, 0x00c9
 	window_template 0x00, 0x0f, 0x00, 0x0f, 0x02, 0x0f, 0x00df
-	window_template_terminator
+	null_window_template
 
 gUnknown_08610918:: @ 8610918
 	.byte 0x00, 0x00, 0x00, 0x00, 0xff, 0x7f, 0x00, 0x00, 0x1f, 0x00
@@ -373,7 +373,166 @@ gUnknown_08610948:: @ 8610948
 
 	.align 2 @ struct, eight bytes x6 for names in different languages, then 0x28 more bytes of data
 gUnknown_08610970:: @ 8610970
-	.incbin "baserom.gba", 0x610970, 0x580
+	.string "サダヒロ$", 8
+	.string "ALANN$", 8
+	.string "ALAIN$", 8
+	.string "ADELFO$", 8
+	.string "CLAUS$", 8
+	.string "TEO$", 8
+	.byte 0xC9, 0xBD
+	.2byte 0x43
+	.2byte SPECIES_BEAUTIFLY, SPECIES_DUSTOX, SPECIES_ILLUMISE, SPECIES_SHIFTRY, SPECIES_BRELOOM, SPECIES_NINJASK, SPECIES_SHEDINJA, SPECIES_PINSIR, SPECIES_HERACROSS, SPECIES_VOLBEAT, 0
+	.byte 0x1D, 8, 0x3e, 20, 0, 12, 1, 10, 0x30, 6, 0x44, 20, 0, 0
+	.string "ヒロオ$", 8
+	.string "LIONEL$", 8
+	.string "LIONEL$", 8
+	.string "CAIO$", 8
+	.string "LUDWIG$", 8
+	.string "LEO$", 8
+	.byte 0x9, 0xCF
+	.2byte 0x2B
+	.2byte SPECIES_SWELLOW, SPECIES_SWALOT, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_TORKOAL, SPECIES_HARIYAMA, SPECIES_MIGHTYENA, SPECIES_LUDICOLO, SPECIES_CRAWDAUNT, SPECIES_WHISCASH, 1
+	.byte 0x38, 12, 1, 10, 0x30, 6, 6, 10, 0x20, 0x10, 0x13, 0x22, 0, 0
+	.string "ケイジ$", 8
+	.string "SONNY$", 8
+	.string "HERVE$", 8
+	.string "FEDRO$", 8
+	.string "WENZEL$", 8
+	.string "SANTI$", 8
+	.byte 0x34, 0x2E
+	.2byte 0x26
+	.2byte SPECIES_LINOONE, SPECIES_MIGHTYENA, SPECIES_WHISCASH, SPECIES_ZANGOOSE, SPECIES_SEVIPER, SPECIES_NINETALES, SPECIES_KECLEON, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_MACHAMP, 2
+	.byte 1, 10, 10, 0x16, 0x15, 14, 0x30, 6, 0x3b, 12, 0x4, 12, 0, 0
+	.string "ユラ$", 8
+	.string "LAYLA$", 8
+	.string "LAYLA$", 8
+	.string "ASTRID$", 8
+	.string "SONJA$", 8
+	.string "LOLA$", 8
+	.byte 0xEF, 0x84
+	.2byte 0x47
+	.2byte SPECIES_SWALOT, SPECIES_XATU, SPECIES_ALTARIA, SPECIES_GOLDUCK, SPECIES_FLYGON, SPECIES_ALAKAZAM, SPECIES_GARDEVOIR, SPECIES_WAILORD, SPECIES_GRUMPIG, SPECIES_MIGHTYENA, 3
+	.byte 11, 16, 15, 0x1e, 0x39, 16, 0x21, 0x14, 0x3, 12, 0xff, 0xff, 0, 0
+	.string "ヨウカ$", 8
+	.string "MACY$", 8
+	.string "AMELIE$", 8
+	.string "CLEO$", 8
+	.string "MARIA$", 8
+	.string "ELISA$", 8
+	.byte 0x43, 0x1E
+	.2byte 0x27
+	.2byte SPECIES_WIGGLYTUFF, SPECIES_LINOONE, SPECIES_KINGDRA, SPECIES_DELCATTY, SPECIES_RAICHU, SPECIES_FEAROW, SPECIES_STARMIE, SPECIES_MEDICHAM, SPECIES_SHIFTRY, SPECIES_BEAUTIFLY, 4
+	.byte 15, 0x1e, 0x14, 16, 6, 16, 15, 0x28, 0x1c, 0x1c, 0x13, 0x1c, 0, 0
+	.string "ヤスシ$", 8
+	.string "DONTE$", 8
+	.string "BRAHIM$", 8
+	.string "GLAUCO$", 8
+	.string "JOSEF$", 8
+	.string "ROQUE$", 8
+	.byte 0x9F, 0x37
+	.2byte 0x30
+	.2byte SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_AGGRON, SPECIES_MAGNETON, SPECIES_MACHAMP, SPECIES_ARMALDO, SPECIES_HERACROSS, SPECIES_NOSEPASS, SPECIES_EXPLOUD, SPECIES_MIGHTYENA, 5
+	.byte 0x29, 0x0A, 0x08, 0x14, 0x2F, 0x10, 0x38, 0x16, 0x20, 0x08, 0x00, 0x0C, 0x00, 0
+	.string "ミサオ$", 8
+	.string "AMIRA$", 8
+	.string "LAURE$", 8
+	.string "DAFNE$", 8
+	.string "AMELIE$", 8
+	.string "LARA$", 8
+	.byte 0x55, 0xF5
+	.2byte 0x31
+	.2byte SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_MAGNETON, SPECIES_MEDICHAM, SPECIES_MIGHTYENA, SPECIES_GLALIE, SPECIES_GOLEM, SPECIES_ELECTRODE, SPECIES_PELIPPER, SPECIES_SHARPEDO, 6
+	.byte 0x0B, 0x0C, 0x3E, 0x12, 0x00, 0x0C, 0x31, 0x0A, 0x30, 0x14, 0x00, 0x0C, 0x00, 0x00
+	.string "カズサ$", 8
+	.string "KALI$", 8
+	.string "JODIE$", 8
+	.string "ILENIA$", 8
+	.string "KARO$", 8
+	.string "ELSA$", 8
+	.byte 0x26, 0x8D
+	.2byte 0x14
+	.2byte SPECIES_NINETALES, SPECIES_ALAKAZAM, SPECIES_SCEPTILE, SPECIES_SALAMENCE, SPECIES_GOLDUCK, SPECIES_MAWILE, SPECIES_WEEZING, SPECIES_LANTURN, SPECIES_GARDEVOIR, SPECIES_MILOTIC, 7
+	.byte 0x06, 0x0A, 0x20, 0x06, 0x1F, 0x0A, 0x02, 0x0A, 0x03, 0x0C, 0xFF, 0xFF, 0x00, 0x00
+	.string "スミレ$", 8
+	.string "ANNIE$", 8
+	.string "ANNIE$", 8
+	.string "IMELDA$", 8
+	.string "INES$", 8
+	.string "ROSA$", 8
+	.byte 0xC, 0x80
+	.2byte 0xD
+	.2byte SPECIES_SCEPTILE, SPECIES_VILEPLUME, SPECIES_BELLOSSOM, SPECIES_ROSELIA, SPECIES_CORSOLA, SPECIES_FLYGON, SPECIES_BRELOOM, SPECIES_MILOTIC, SPECIES_ALTARIA, SPECIES_CRADILY, 8
+	.byte 0x22, 0x1E, 0x33, 0x04, 0x0E, 0x02, 0x02, 0x0A, 0x1E, 0x10, 0x00, 0x0C, 0x00, 0x00
+	.string "アキノリ$", 8
+	.string "DILLEN$", 8
+	.string "RENE$", 8
+	.string "INDRO$", 8
+	.string "DETLEF$", 8
+	.string "PEDRO$", 8
+	.byte 0x9f, 0x46
+	.2byte 0
+	.2byte SPECIES_SKARMORY, SPECIES_GOLEM, SPECIES_BLAZIKEN, SPECIES_CAMERUPT, SPECIES_DONPHAN, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_TROPIUS, SPECIES_SOLROCK, SPECIES_RHYDON, 9
+	.byte 0x3D, 0x0A, 0x11, 0x10, 0x1E, 0x0E, 0x1C, 0x20, 0x04, 0x0C, 0xFF, 0xFF, 0x00, 0x00
+	.string "トウゾウ$", 8
+	.string "DALLAS$", 8
+	.string "BRUNO$", 8
+	.string "LEARCO$", 8
+	.string "ANSGAR$", 8
+	.string "MANOLO$", 8
+	.byte 0xFC, 0x71
+	.2byte 0x2D 
+	.2byte SPECIES_SEAKING, SPECIES_STARMIE, SPECIES_GOLDUCK, SPECIES_TENTACRUEL, SPECIES_OCTILLERY, SPECIES_GOREBYSS, SPECIES_GLALIE, SPECIES_WAILORD, SPECIES_SHARPEDO, SPECIES_KINGDRA, 10
+	.byte 0x05, 0x0A, 0x06, 0x06, 0x0E, 0x16, 0x14, 0x0A, 0x00, 0x0C, 0xFF, 0xFF, 0x00, 0x00
+	.string "セイヤ$", 8
+	.string "FRANK$", 8
+	.string "FRANK$", 8
+	.string "OLINDO$", 8
+	.string "FRANK$", 8
+	.string "MAURO$", 8
+	.byte 0x9E, 0xA3
+	.2byte 0x3A
+	.2byte SPECIES_QUAGSIRE, SPECIES_STARMIE, SPECIES_PELIPPER, SPECIES_CRAWDAUNT, SPECIES_WAILORD, SPECIES_GYARADOS, SPECIES_SWAMPERT, SPECIES_LANTURN, SPECIES_WHISCASH, SPECIES_SHUCKLE, 11
+	.byte 0x0E, 0x28, 0x3D, 0x10, 0x0F, 0x24, 0x14, 0x0A, 0x23, 0x1E, 0x24, 0x10, 0x00, 0x00
+	.string "リュウジ$", 8
+	.string "LAMONT$", 8
+	.string "XAV$", 8
+	.string "ORFEO$", 8
+	.string "J{0xf3}RGEN$", 8 @accent?
+	.string "JORGE$", 8
+	.byte 0x90, 0xE5
+	.2byte 0x19
+	.2byte SPECIES_ABSOL, SPECIES_CROBAT, SPECIES_EXPLOUD, SPECIES_MAGNETON, SPECIES_SHARPEDO, SPECIES_MANECTRIC, SPECIES_METAGROSS, SPECIES_ELECTRODE, SPECIES_NOSEPASS, SPECIES_WEEZING, 12
+	.byte 0x20, 0x10, 0x2E, 0x06, 0x0B, 0x10, 0x22, 0x1E, 0x0F, 0x1E, 0x0B, 0x10, 0x00, 0x00
+	.string "カツアキ$", 8
+	.string "TYRESE$", 8
+	.string "ANDY$", 8
+	.string "PARIDE$", 8
+	.string "DAVID$", 8
+	.string "CHICHO$", 8
+	.byte 0x18, 0xD0
+	.2byte 10
+	.2byte SPECIES_BLAZIKEN, SPECIES_GOLEM, SPECIES_MACHAMP, SPECIES_RHYDON, SPECIES_HARIYAMA, SPECIES_AGGRON, SPECIES_MEDICHAM, SPECIES_ZANGOOSE, SPECIES_VIGOROTH, SPECIES_SLAKING, 13
+	.byte 0x29, 0x0A, 0x3A, 0x06, 0x15, 0x0E, 0x35, 0x14, 0x34, 0x10, 0x1E, 0x06, 0x00, 0x00
+	.string "トシミツ$", 8
+	.string "DANTE$", 8
+	.string "DANTE$", 8
+	.string "RAOUL$", 8
+	.string "LOTHAR$", 8
+	.string "PABLO$", 8
+	.byte 0x75, 0xBC
+	.2byte 14
+	.2byte SPECIES_SCEPTILE, SPECIES_SANDSLASH, SPECIES_FLYGON, SPECIES_CLAYDOL, SPECIES_ARMALDO, SPECIES_CROBAT, SPECIES_CRADILY, SPECIES_SOLROCK, SPECIES_LUNATONE, SPECIES_GOLEM, 14
+	.byte 0x01, 0x0A, 0x17, 0x10, 0x43, 0x12, 0x22, 0x1E, 0x0B, 0x10, 0x0F, 0x28, 0x00, 0x00
+	.string "ローウェン$", 8
+	.string "ARTURO$", 8
+	.string "ARTURO$", 8
+	.string "ROMOLO$", 8
+	.string "BRIAN$", 8
+	.string "ARTURO$", 8
+	.byte 0x2, 0xFA
+	.2byte 0x20
+	.2byte SPECIES_ABSOL, SPECIES_MIGHTYENA, SPECIES_ALAKAZAM, SPECIES_BANETTE, SPECIES_NINETALES, SPECIES_CLAYDOL, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_WALREIN, SPECIES_DUSCLOPS, 15
+	.byte 0x0F, 0x1E, 0x04, 0x14, 0x2F, 0x10, 0x06, 0x10, 0x20, 0x10, 0x03, 0x0E, 0x00, 0x00
 
 	.align 2
 gUnknown_08610EF0:: @ 8610EF0

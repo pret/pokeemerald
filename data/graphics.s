@@ -4824,27 +4824,27 @@ gNamingScreenMenu_Gfx:: @ 8DD3838
 	.incbin "graphics/naming_screen/menu.4bpp.lz"
 
 	.align 2
-gNamingScreenRWindow_Gfx::
+gNamingScreenRWindow_Gfx:: @ 8DD3A04
 	.incbin "graphics/naming_screen/rwindow.4bpp"
 
 	.align 2
-gNamingScreenROptions_Gfx::
+gNamingScreenROptions_Gfx:: @ 8DD4044
 	.incbin "graphics/naming_screen/roptions.4bpp"
 
 	.align 2
-gNamingScreenCursor_Gfx::
+gNamingScreenCursor_Gfx:: @ 8DD4224
 	.incbin "graphics/naming_screen/cursor.4bpp"
 
 	.align 2
-gNamingScreenKeyboardButton_Gfx::
+gNamingScreenKeyboardButton_Gfx:: @ 8DD43E4
 	.incbin "graphics/naming_screen/keyboard_button.4bpp"
 
 	.align 2
-gNamingScreenRightPointingTriangleTiles::
+gNamingScreenRightPointingTriangleTiles:: @ 8DD4504
 	.incbin "graphics/naming_screen/right_pointing_triangle.4bpp"
 
 	.align 2
-gNamingScreenUnderscoreTiles::
+gNamingScreenUnderscoreTiles:: @ 8DD4524
 	.incbin "graphics/naming_screen/underscore.4bpp"
 
 	.align 2
@@ -5041,12 +5041,12 @@ gUnknown_08DDD704:: @ 8DDD704
 	.incbin "graphics/unknown/unknown_DDD704.bin" @ textbox tilemap??
 
 	.align 2
-gUnknown_08DDD728:: @ 8DDD728
-	.incbin "graphics/interface/textbox.gbapal" @ textbox palette?
+gMessageBox_Pal:: @ 8DDD728
+	.incbin "graphics/text_window/message_box.gbapal"
 
 	.align 2
-gUnknown_08DDD748:: @ 8DDD748
-	.incbin "graphics/interface/textbox.4bpp"
+gMessageBox_Gfx:: @ 8DDD748
+	.incbin "graphics/text_window/message_box.4bpp"
 
 	.align 2
 gWallpaperIcon_Cross::
@@ -5142,7 +5142,7 @@ gUnknown_08DE0644:: @ 8DE0644
 
 	.align 2
 gUnknown_08DE07C8:: @ 8DE07C8
-	.incbin "graphics/frontier_pass/tiles.gbapal" @ size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but this is wrong? todo, investigate? (frontier pass pal)
+	.incbin "graphics/frontier_pass/tiles.gbapal" @ size in LoadPalette calls is reported as 0xD0 << 1, which is 0x1A0, but palette is only 0x100 bytes long so it loads garbage as well
 
 	.align 2
 gUnknown_08DE08C8:: @ 8DE08C8

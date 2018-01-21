@@ -11,7 +11,7 @@ gUnknown_08510404:: @ 8510404 struct BgTemplate
 gUnknown_08510408:: @ 8510408
 	window_template 0x00, 0x01, 0x01, 0x13, 0x09, 0x0f, 0x0155
 	window_template 0x00, 0x02, 0x0f, 0x1b, 0x04, 0x0f, 0x00e9
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_08510420:: @ 8510420

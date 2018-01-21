@@ -139,17 +139,14 @@ gUnknown_085E852C:: @ 85E852C
 	.string "CONTROLS$"
 
 	.align 2
-
 gUnknown_085E8538:: @ 85E8538
 	.string "{UNK_CTRL_F80A}PICK {UNK_CTRL_F800}OK$"
 
 	.align 2
-
 gUnknown_085E8544:: @ 85E8544
 	.string "{UNK_CTRL_F800}NEXT$"
 
 	.align 2
-
 gUnknown_085E854C:: @ 85E854C
 	.string "{UNK_CTRL_F800}NEXT {UNK_CTRL_F801}BACK$"
 
@@ -570,16 +567,16 @@ gText_EmptyString2:: @ 85E8D03
 gUnknown_085E8D04:: @ 85E8D04
 	.string "CANCEL$"
 
-gUnknown_085E8D0B:: @ 85E8D0B
+gText_Item:: @ 85E8D0B
 	.string "ITEM$"
 
-gUnknown_085E8D10:: @ 85E8D10
+gText_Mail:: @ 85E8D10
 	.string "MAIL$"
 
-gUnknown_085E8D15:: @ 85E8D15
+gText_Take:: @ 85E8D15
 	.string "TAKE$"
 
-gUnknown_085E8D1A:: @ 85E8D1A
+gText_Store:: @ 85E8D1A
 	.string "STORE$"
 
 gMenuText_Check:: @ 85E8D20
@@ -988,34 +985,34 @@ gText_TurnedOverVar1ForVar2:: @ 85E9677
 gText_PokedollarVar1:: @ 85E969C
 	.string "¥{STR_VAR_1}$"
 
-gUnknown_085E96A0:: @ 85E96A0
+gText_Shift:: @ 85E96A0
 	.string "SHIFT$"
 
-gUnknown_085E96A6:: @ 85E96A6
+gText_SendOut:: @ 85E96A6
 	.string "SEND OUT$"
 
-gUnknown_085E96AF:: @ 85E96AF
+gText_Switch2:: @ 85E96AF
 	.string "SWITCH$"
 
-gUnknown_085E96B6:: @ 85E96B6
+gText_Summary5:: @ 85E96B6
 	.string "SUMMARY$"
 
 gUnknown_085E96BE:: @ 85E96BE
 	.string "MOVES$"
 
-gUnknown_085E96C4:: @ 85E96C4
+gText_Enter:: @ 85E96C4
 	.string "ENTER$"
 
-gUnknown_085E96CA:: @ 85E96CA
+gText_NoEntry:: @ 85E96CA
 	.string "NO ENTRY$"
 
-gUnknown_085E96D3:: @ 85E96D3
+gText_Take2:: @ 85E96D3
 	.string "TAKE$"
 
-gUnknown_085E96D8:: @ 85E96D8
+gText_Read2:: @ 85E96D8
 	.string "READ$"
 
-gUnknown_085E96DD:: @ 85E96DD
+gText_Trade4:: @ 85E96DD
 	.string "TRADE$"
 
 gText_HP3:: @ 85E96E3
@@ -1340,28 +1337,23 @@ gText_EggCantBeTradedNow:: @ 85EA234
 	.string "An EGG can’t be traded now.$"
 
 	.align 2
-
-gUnknown_085EA250:: @ 85EA250
+gText_OtherTrainersPkmnCantBeTraded:: @ 85EA250
 	.string "The other TRAINER’s POKéMON\ncan’t be traded now.$"
 
 	.align 2
-
-gUnknown_085EA284:: @ 85EA284
+gText_OtherTrainerCantAcceptPkmn:: @ 85EA284
 	.string "The other TRAINER can’t accept\nthat POKéMON now.$"
 
 	.align 2
-
-gUnknown_085EA2B8:: @ 85EA2B8
+gText_CantTradeWithTrainer:: @ 85EA2B8
 	.string "You can’t trade with that\nTRAINER now.$"
 
 	.align 2
-
-gUnknown_085EA2E0:: @ 85EA2E0
+gText_NotPkmnOtherTrainerWants:: @ 85EA2E0
 	.string "That isn’t the type of POKéMON\nthat the other TRAINER wants.$"
 
 	.align 2
-
-gUnknown_085EA320:: @ 85EA320
+gText_ThatIsntAnEgg:: @ 85EA320
 	.string "That isn’t an EGG.$"
 
 gText_Register:: @ 85EA333
@@ -3585,27 +3577,22 @@ gText_BattlePyramid:: @ 85ED153
 	.string "BATTLE PYRAMID$"
 
 	.align 2
-
 gUnknown_085ED164:: @ 85ED164
 	.string "{STR_VAR_1} SINGLE$"
 
 	.align 2
-
 gUnknown_085ED170:: @ 85ED170
 	.string "{STR_VAR_1} DOUBLE$"
 
 	.align 2
-
 gUnknown_085ED17C:: @ 85ED17C
 	.string "{STR_VAR_1} MULTI$"
 
 	.align 2
-
 gUnknown_085ED188:: @ 85ED188
 	.string "{STR_VAR_1} LINK$"
 
 	.align 2
-
 gUnknown_085ED190:: @ 85ED190
 	.string "{STR_VAR_1}$"
 
@@ -4319,37 +4306,30 @@ gText_FloorsCleared:: @ 85EE39C
 	.string "Floors cleared: {STR_VAR_1}$"
 
 	.align 2
-
 gUnknown_085EE3B0:: @ 85EE3B0
 	.string "LV. 50$"
 
 	.align 2
-
 gUnknown_085EE3B8:: @ 85EE3B8
 	.string "OPEN LEVEL$"
 
 	.align 2
-
 gUnknown_085EE3C4:: @ 85EE3C4
 	.string "Win streak: {STR_VAR_2}$"
 
 	.align 2
-
 gUnknown_085EE3D4:: @ 85EE3D4
 	.string "Clear streak: {STR_VAR_2}$"
 
 	.align 2
-
 gUnknown_085EE3E8:: @ 85EE3E8
 	.string "Rooms cleared: {STR_VAR_2}$"
 
 	.align 2
-
 gUnknown_085EE3FC:: @ 85EE3FC
 	.string "KOs in a row: {STR_VAR_2}$"
 
 	.align 2
-
 gUnknown_085EE410:: @ 85EE410
 	.string "Floors cleared: {STR_VAR_2}$"
 
@@ -4399,25 +4379,25 @@ gText_ABtnTitleScreen:: @ 85EE572
 gText_Option:: @ 85EE589
 	.string "OPTION$"
 
-gUnknown_085EE590:: @ 85EE590
+gText_TextSpeed:: @ 85EE590
 	.string "TEXT SPEED$"
 
-gUnknown_085EE59B:: @ 85EE59B
+gText_BattleScene:: @ 85EE59B
 	.string "BATTLE SCENE$"
 
-gUnknown_085EE5A8:: @ 85EE5A8
+gText_BattleStyle:: @ 85EE5A8
 	.string "BATTLE STYLE$"
 
-gUnknown_085EE5B5:: @ 85EE5B5
+gText_Sound:: @ 85EE5B5
 	.string "SOUND$"
 
-gUnknown_085EE5BB:: @ 85EE5BB
+gText_Frame:: @ 85EE5BB
 	.string "FRAME$"
 
-gUnknown_085EE5C1:: @ 85EE5C1
+gText_OptionMenuCancel:: @ 85EE5C1
 	.string "CANCEL$"
 
-gUnknown_085EE5C8:: @ 85EE5C8
+gText_ButtonMode:: @ 85EE5C8
 	.string "BUTTON MODE$"
 
 gText_TextSpeedSlow:: @ 85EE5D4
@@ -4665,16 +4645,16 @@ gText_MixingRecords:: @ 85EEA7E
 gText_RecordMixingComplete:: @ 85EEA8E
 	.string "Record mixing completed.\nThank you for waiting.$"
 
-gUnknown_085EEABE:: @ 85EEABE
+gText_YourName:: @ 85EEABE
 	.string "YOUR NAME?$"
 
-gUnknown_085EEAC9:: @ 85EEAC9
+gText_BoxName:: @ 85EEAC9
 	.string "BOX NAME?$"
 
-gUnknown_085EEAD3:: @ 85EEAD3
+gText_PkmnsNickname:: @ 85EEAD3
 	.string "{STR_VAR_1}’s nickname?$"
 
-gUnknown_085EEAE2:: @ 85EEAE2
+gText_TellHimTheWords:: @ 85EEAE2
 	.string "Tell him the words.$"
 
 gText_MoveOkBack:: @ 85EEAF6
@@ -4931,7 +4911,6 @@ gText_WhereShouldNewsBeAccessed:: @ 85EEF94
 	.string "Where should the WONDER NEWS\nbe accessed?$"
 
 	.align 2
-
 gUnknown_085EEFC0:: @ 85EEFC0
 	.string "Communication standby…\nB Button: Cancel$"
 

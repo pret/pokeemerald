@@ -39,7 +39,8 @@ gUnknown_0850E654:: @ 850E654
 	.4byte DoTracksGroundEffect_BikeTireTracks
 
 gUnknown_0850E660:: @ 850E660
-	.incbin "baserom.gba", 0x50e660, 0x4
+	.byte 13, 0
+	.byte 24, 0
 
 gUnknown_0850E664:: @ 850E664
 	.byte 0x01, 0x02, 0x07, 0x08, 0x01, 0x02, 0x06, 0x05, 0x05, 0x08, 0x03, 0x04, 0x06, 0x07, 0x03, 0x04
@@ -65,40 +66,4 @@ gUnknown_0850E674:: @ 850E674
 	.4byte GroundEffect_ShortGrass
 	.4byte GroundEffect_HotSprings
 	.4byte GroundEffect_Seaweed
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte triple_little_steps
-	.4byte triple_little_steps
-	.4byte double_little_steps
-	.4byte triple_little_steps
-	.4byte triple_little_steps
-	.4byte quad_little_steps
-	.4byte quad_little_steps
-	.4byte quad_little_steps
-	.4byte quad_little_steps
-	.4byte oct_little_steps
-	.4byte oct_little_steps
 

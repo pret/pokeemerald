@@ -107,7 +107,7 @@ _081B0290:
 	b _081B048C
 	.pool
 _081B02AC:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _081B0484
 _081B02B2:
 	bl ResetPaletteFade
@@ -10645,7 +10645,7 @@ party_menu_held_item_object: @ 81B5C14
 	bl GetMonData
 	cmp r0, 0
 	beq _081B5C3C
-	ldr r0, =gUnknown_08615EC0
+	ldr r0, =gSpriteTemplate_8615EC0
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x2]
 	ldrb r2, [r2, 0x3]
@@ -10671,7 +10671,7 @@ party_menu_link_mon_held_item_object: @ 81B5C48
 	lsrs r5, r1, 16
 	cmp r0, 0
 	beq _081B5C84
-	ldr r0, =gUnknown_08615EC0
+	ldr r0, =gSpriteTemplate_8615EC0
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x2]
 	ldrb r2, [r2, 0x3]
@@ -10896,7 +10896,7 @@ sub_81B5DF0: @ 81B5DF0
 	add r0, r8
 	adds r0, 0x43
 	ldrb r3, [r0]
-	ldr r0, =gUnknown_08615EC0
+	ldr r0, =gSpriteTemplate_8615EC0
 	subs r3, 0x1
 	lsls r3, 24
 	lsrs r3, 24
@@ -10991,7 +10991,7 @@ party_menu_pokeball_object: @ 81B5ECC
 	bl GetMonData
 	cmp r0, 0
 	beq _081B5EEA
-	ldr r0, =gUnknown_08615F08
+	ldr r0, =gSpriteTemplate_8615F08
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x6]
 	ldrb r2, [r2, 0x7]
@@ -11012,7 +11012,7 @@ party_menu_link_mon_pokeball_object: @ 81B5EF4
 	lsls r0, 16
 	cmp r0, 0
 	beq _081B5F24
-	ldr r0, =gUnknown_08615F08
+	ldr r0, =gSpriteTemplate_8615F08
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x6]
 	ldrb r2, [r2, 0x7]
@@ -11046,7 +11046,7 @@ sub_81B5F34: @ 81B5F34
 	lsrs r3, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_08615F08
+	ldr r0, =gSpriteTemplate_8615F08
 	adds r1, r3, 0
 	movs r3, 0x8
 	bl CreateSprite
@@ -11078,7 +11078,7 @@ sub_81B5F74: @ 81B5F74
 	lsrs r3, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_08615F78
+	ldr r0, =gSpriteTemplate_8615F78
 	adds r1, r3, 0
 	movs r3, 0x8
 	bl CreateSprite
@@ -11194,7 +11194,7 @@ party_menu_status_condition_object: @ 81B6064
 	bl GetMonData
 	cmp r0, 0
 	beq _081B608C
-	ldr r0, =gUnknown_08616008
+	ldr r0, =gSpriteTemplate_8616008
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x4]
 	ldrb r2, [r2, 0x5]
@@ -11220,7 +11220,7 @@ party_menu_link_mon_status_condition_object: @ 81B6098
 	lsrs r5, r1, 24
 	cmp r0, 0
 	beq _081B60D4
-	ldr r0, =gUnknown_08616008
+	ldr r0, =gSpriteTemplate_8616008
 	ldr r2, [r4, 0x4]
 	ldrb r1, [r2, 0x4]
 	ldrb r2, [r2, 0x5]

@@ -3,9 +3,20 @@
 
 	.section .rodata
 
-gUnknown_0858BD78:: @ 858BD78
-	.incbin "baserom.gba", 0x58bd78, 0x40
+	.align 2
+gUnknown_0858BBF8:: @ 858BBF8
+	.incbin "graphics/naming_screen/pc_icon/0.4bpp"
 
+	.align 2
+gUnknown_0858BCB8:: @ 858BCB8
+	.incbin "graphics/naming_screen/pc_icon/1.4bpp"
+
+	.align 2
+gUnknown_0858BD78:: @ 858BD78
+	.incbin "graphics/naming_screen/0.gbapal"
+	.incbin "graphics/naming_screen/1.gbapal"
+
+	.align 2
 gUnknown_0858BDB8:: @ 858BDB8
 	.4byte gText_PkmnTransferredSomeonesPC
 	.4byte gText_PkmnTransferredLanettesPC
@@ -14,13 +25,19 @@ gUnknown_0858BDB8:: @ 858BDB8
 
 gUnknown_0858BDC8:: @ 858BDC8
 	.string "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!$"
+
 	.align 2
-
 gUnknown_0858BE00:: @ 858BE00
-	.incbin "baserom.gba", 0x58be00, 0x10
+	.4byte 0x000001e0, 0x000011d9, 0x000021ca, 0x000031ff
 
+	.align 2
 gUnknown_0858BE10:: @ 858BE10
-	.incbin "baserom.gba", 0x58be10, 0x30
+	window_template 0x01, 0x03, 0x0a, 0x13, 0x08, 0x0a, 0x0030
+	window_template 0x02, 0x03, 0x0a, 0x13, 0x08, 0x0a, 0x00c8
+	window_template 0x03, 0x08, 0x06, 0x11, 0x02, 0x0a, 0x0030
+	window_template 0x03, 0x08, 0x04, 0x11, 0x02, 0x0a, 0x0052
+	window_template 0x00, 0x00, 0x00, 0x1e, 0x02, 0x0b, 0x0074
+	null_window_template
 
 gUnknown_0858BE40:: @ 858BE40
 	.string "abcdef .ghijkl ,mnopqrs tuvwxyz ABCDEF .GHIJKL ,MNOPQRS TUVWXYZ 01234   56789   !?♂♀/-  …“”‘’   "
@@ -86,17 +103,18 @@ gUnknown_0858BF28:: @ 858BF28
 	.4byte sub_80E46E8
 
 gUnknown_0858BF34:: @ 858BF34
-	.incbin "baserom.gba", 0x58bf34, 0xa
+	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x01, 0x00
 
 gUnknown_0858BF3E:: @ 858BF3E
-	.incbin "baserom.gba", 0x58bf3e, 0xa
+	.byte 0x00, 0x00, 0xff, 0xff, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
 
 gUnknown_0858BF48:: @ 858BF48
-	.incbin "baserom.gba", 0x58bf48, 0x8
+	.byte 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x02, 0x00
 
 gUnknown_0858BF50:: @ 858BF50
-	.incbin "baserom.gba", 0x58bf50, 0x8
+	.byte 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00
 
+	.align 2
 gUnknown_0858BF58:: @ 858BF58
 	.4byte sub_80E4894
 	.4byte sub_80E4894
@@ -104,13 +122,15 @@ gUnknown_0858BF58:: @ 858BF58
 	.4byte sub_80E48E8
 	.4byte sub_80E4894
 
+	.align 2
 gUnknown_0858BF6C:: @ 858BF6C
 	.4byte TaskDummy3
 	.4byte sub_80E49BC
 
+	.align 2
 gUnknown_0858BF74:: @ 858BF74
-	.incbin "baserom.gba", 0x58bf74, 0x8
-	
+	window_template 0x00, 0x09, 0x08, 0x00, 0x05, 0x04, 0x0000
+
 gUnknown_0858BF7C:: @ 858BF7C
 	.4byte 0x0002010D
 	
@@ -134,20 +154,29 @@ gUnknown_0858BF98:: @ 858BF98
 	.4byte gUnknown_08DD47A0
 
 gUnknown_0858BFA4:: @ 858BFA4
-	.incbin "baserom.gba", 0x58bfa4, 0x4
-	
+	.byte 0x0f, 0x01, 0x02
+
+	.align 2
 gUnknown_0858BFA8:: @ 858BFA8
-	.incbin "baserom.gba", 0x58bfa8, 0xc
+	.byte 0x00, 0x07, 0x01, 0x00, 0x01, 0x23, 0x00, 0x00
+	.4byte gText_YourName
 
+	.align 2
 gUnknown_0858BFB4:: @ 858BFB4
-	.incbin "baserom.gba", 0x58bfb4, 0xc
-	
-gUnknown_0858BFC0:: @ 858BFC0
-	.incbin "baserom.gba", 0x58bfc0, 0xc
-	
-gUnknown_0858BFCC:: @ 858BFCC
-	.incbin "baserom.gba", 0x58bfcc, 0xc
+	.byte 0x00, 0x08, 0x02, 0x00, 0x01, 0x13, 0x00, 0x00
+	.4byte gText_BoxName
 
+	.align 2
+gUnknown_0858BFC0:: @ 858BFC0
+	.byte 0x00, 0x0a, 0x03, 0x01, 0x01, 0x23, 0x00, 0x00
+	.4byte gText_PkmnsNickname
+
+	.align 2
+gUnknown_0858BFCC:: @ 858BFCC
+	.byte 0x01, 0x0f, 0x04, 0x00, 0x01, 0x0b, 0x00, 0x00
+	.4byte gText_TellHimTheWords
+
+	.align 2
 gUnknown_0858BFD8:: @ 858BFD8
 	.4byte gUnknown_0858BFA8
 	.4byte gUnknown_0858BFB4
@@ -155,48 +184,125 @@ gUnknown_0858BFD8:: @ 858BFD8
 	.4byte gUnknown_0858BFC0
 	.4byte gUnknown_0858BFCC
 
-gUnknown_0858BFEC:: @ 858BFEC
-	.incbin "baserom.gba", 0x58bfec, 0x64
-	
+	.align 2
+gOamData_858BFEC:: @ 858BFEC
+	.2byte 0x0000, 0x0000, 0x0000, 0x0000
+
+	.align 2
+gOamData_858BFF4:: @ 858BFF4
+	.2byte 0x0000, 0x4000, 0x0000, 0x0000
+
+	.align 2
+gOamData_858BFFC:: @ 858BFFC
+	.2byte 0x4000, 0x8000, 0x0000, 0x0000
+
+	.align 2
+gUnknown_0858C004:: @ 858C004
+	.byte 0xec, 0xf0, 0x05, 0x40, 0x0c, 0xf0, 0x40, 0x40, 0xec, 0xf8, 0x55, 0x40, 0x0c, 0xf8, 0x90, 0x40, 0xec, 0x00, 0xa5, 0x40, 0x0c, 0x00, 0xe0, 0x40, 0xec, 0x08, 0xf5, 0x40, 0x0c, 0x08, 0x30, 0x41
+
+	.align 2
+gUnknown_0858C024:: @ 858C024
+	.byte 0xf4, 0xfc, 0x01, 0x40, 0x04, 0xfc, 0x20, 0x40
+
+	.align 2
+gUnknown_0858C02C:: @ 858C02C
+	.byte 0xec, 0xf4, 0x05, 0x40, 0x0c, 0xf4, 0x40, 0x40, 0xec, 0xfc, 0x55, 0x40, 0x0c, 0xfc, 0x90, 0x40, 0xec, 0x04, 0xa5, 0x40, 0x0c, 0x04, 0xe0, 0x40
+
+	.align 2
+gUnknown_0858C044:: @ 858C044
+	.byte 0xf8, 0xf4, 0x01, 0xc0, 0xf8, 0xfc, 0x21, 0xc0, 0xf8, 0x04, 0x41, 0xc0
+
+	.align 2
 gUnknown_0858C050:: @ 858C050
-	.incbin "baserom.gba", 0x58c050, 0x8
+	.byte 0x08, 0x00, 0x00, 0x00
+	.4byte gUnknown_0858C004
 
+	.align 2
 gUnknown_0858C058:: @ 858C058
-	.incbin "baserom.gba", 0x58c058, 0x18
+	.4byte 0x02
+	.4byte gUnknown_0858C024
+	.4byte 0x02
+	.4byte gUnknown_0858C024
+	.4byte 0x02
+	.4byte gUnknown_0858C024
 
+	.align 2
 gUnknown_0858C070:: @ 858C070
-	.incbin "baserom.gba", 0x58c070, 0x8
+	.4byte 0x06
+	.4byte gUnknown_0858C02C
 
+	.align 2
 gUnknown_0858C078:: @ 858C078
-	.incbin "baserom.gba", 0x58c078, 0x48
+	.4byte 0x03
+	.4byte gUnknown_0858C044
 
+	.align 2
+gUnknown_0858C080:: @ 858C080
+	obj_frame_tiles gUnknown_0858BBF8, 0x00c0
+	obj_frame_tiles gUnknown_0858BCB8, 0x00c0
+
+	.align 2
+gSpriteAnim_858C090:: @ 858C090
+	.2byte 0x0000, 0x0001, 0xfffe, 0x0000
+
+	.align 2
+gSpriteAnim_858C098:: @ 858C098
+	.2byte 0x0004, 0x0008, 0x0008, 0x0008, 0xffff, 0x0000
+
+	.align 2
+gSpriteAnim_858C0A4:: @ 858C0A4
+	.2byte 0x0000, 0x0002, 0x0001, 0x0002, 0xfffe, 0x0000
+
+	.align 2
+gSpriteAnimTable_858C0B0:: @ 858C0B0
+	.4byte gSpriteAnim_858C090
+
+	.align 2
+gSpriteAnimTable_858C0B4:: @ 858C0B4
+	.4byte gSpriteAnim_858C090
+	.4byte gSpriteAnim_858C098
+
+	.align 2
+gSpriteAnimTable_858C0BC:: @ 858C0BC
+	.4byte gSpriteAnim_858C0A4
+
+	.align 2
 gUnknown_0858C0C0:: @ 858C0C0
-	.incbin "baserom.gba", 0x58c0c0, 0x18
+	spr_template 0x0002, 0x0004, gOamData_858BFEC, gSpriteAnimTable_858C0B0, NULL, gDummySpriteAffineAnimTable, sub_80E4084
 
+	.align 2
 gUnknown_0858C0D8:: @ 858C0D8
-	.incbin "baserom.gba", 0x58c0d8, 0x18
+	spr_template 0x0003, 0x0001, gOamData_858BFFC, gSpriteAnimTable_858C0B0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_0858C0F0:: @ 858C0F0
-	.incbin "baserom.gba", 0x58c0f0, 0x18
+	spr_template 0x0004, 0x0004, gOamData_858BFEC, gSpriteAnimTable_858C0B0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_0858C108:: @ 858C108
-	.incbin "baserom.gba", 0x58c108, 0x18
+	spr_template 0x0000, 0x0006, gOamData_858BFEC, gSpriteAnimTable_858C0B0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_0858C120:: @ 858C120
-	.incbin "baserom.gba", 0x58c120, 0x18
+	spr_template 0x0001, 0x0007, gOamData_858BFEC, gSpriteAnimTable_858C0B0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_0858C138:: @ 858C138
-	.incbin "baserom.gba", 0x58c138, 0x18
+	spr_template 0x0007, 0x0005, gOamData_858BFF4, gSpriteAnimTable_858C0B4, NULL, gDummySpriteAffineAnimTable, sub_80E3B30
 
+	.align 2
 gUnknown_0858C150:: @ 858C150
-	.incbin "baserom.gba", 0x58c150, 0x18
+	spr_template 0x000a, 0x0003, gOamData_858BFEC, gSpriteAnimTable_858C0B0, NULL, gDummySpriteAffineAnimTable, sub_80E3C20
 
+	.align 2
 gUnknown_0858C168:: @ 858C168
-	.incbin "baserom.gba", 0x58c168, 0x18
+	spr_template 0x000b, 0x0003, gOamData_858BFEC, gSpriteAnimTable_858C0B0, NULL, gDummySpriteAffineAnimTable, sub_80E3C6C
 
+	.align 2
 gUnknown_0858C180:: @ 858C180
-	.incbin "baserom.gba", 0x58c180, 0x18
+	spr_template 0xffff, 0x0000, gOamData_858BFEC, gSpriteAnimTable_858C0BC, gUnknown_0858C080, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_0858C198:: @ 858C198
 	.4byte gUnknown_0862B88D
 	.4byte gUnknown_0862B8AE
@@ -211,8 +317,30 @@ gUnknown_0858C198:: @ 858C198
 	.4byte gUnknown_0862B9C7
 	.4byte gUnknown_0862B9E0
 
+	.align 2
 gUnknown_0858C1C8:: @ 858C1C8
-	.incbin "baserom.gba", 0x58c1c8, 0x68
+	obj_tiles gNamingScreenRWindow_Gfx+0x280, 0x01e0, 0x0000
+	obj_tiles gNamingScreenRWindow_Gfx+0x460, 0x01e0, 0x0001
+	obj_tiles gNamingScreenRWindow_Gfx, 0x0280, 0x0002
+	obj_tiles gNamingScreenKeyboardButton_Gfx+0x20, 0x0100, 0x0003
+	obj_tiles gNamingScreenROptions_Gfx, 0x0060, 0x0004
+	obj_tiles gNamingScreenROptions_Gfx+0xA0, 0x0060, 0x0005
+	obj_tiles gNamingScreenROptions_Gfx+0x140, 0x0060, 0x0006
+	obj_tiles gNamingScreenCursor_Gfx, 0x0080, 0x0007
+	obj_tiles gNamingScreenCursor_Gfx+0xA0, 0x0080, 0x0008
+	obj_tiles gNamingScreenCursor_Gfx+0x140, 0x0080, 0x0009
+	obj_tiles gNamingScreenRightPointingTriangleTiles, 0x0020, 0x000a
+	obj_tiles gNamingScreenUnderscoreTiles, 0x0020, 0x000b
+	null_obj_tiles
 
+	.align 2
 gUnknown_0858C230:: @ 858C230
-	.incbin "baserom.gba", 0x58c230, 0x48
+	obj_pal gNamingScreenMenu_Pal, 0x0000
+	obj_pal gNamingScreenMenu_Pal+0x20, 0x0001
+	obj_pal gNamingScreenMenu_Pal+0x40, 0x0002
+	obj_pal gNamingScreenMenu_Pal+0x60, 0x0003
+	obj_pal gNamingScreenMenu_Pal+0x80, 0x0004
+	obj_pal gNamingScreenMenu_Pal+0xA0, 0x0005
+	obj_pal gNamingScreenMenu_Pal+0x80, 0x0006
+	obj_pal gNamingScreenMenu_Pal+0x80, 0x0007
+	null_obj_pal

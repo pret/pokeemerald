@@ -1,4 +1,5 @@
 .macro def_special ptr
+.global SPECIAL_\ptr
 .set SPECIAL_\ptr, __special__
 .set __special__, __special__ + 1
 	.4byte \ptr

@@ -42,7 +42,7 @@ gUnknown_082FF048:: @ 82FF048
 	.align 2
 gUnknown_082FF070:: @ 82FF070
 	window_template 0x00, 0x02, 0x0f, 0x1a, 0x04, 0x0f, 0x016d
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_082FF080:: @ 82FF080
@@ -52,7 +52,7 @@ gUnknown_082FF080:: @ 82FF080
 gUnknown_082FF088:: @ 82FF088
 	window_template 0x00, 0x03, 0x05, 0x06, 0x04, 0x0f, 0x006d
 	window_template 0x00, 0x03, 0x02, 0x09, 0x0a, 0x0f, 0x0085
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gMainMenuBgPal:: @ 82FF0A0

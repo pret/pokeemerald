@@ -100,13 +100,28 @@ gUnknown_08614094:: @ 8614094
 	.4byte 0x6F
 
 gUnknown_086140A4:: @ 86140A4
-	.incbin "baserom.gba", 0x6140a4, 0xc0
+	.incbin "graphics/interface/select_button.4bpp"
 
 gUnknown_08614164:: @ 8614164
-	.incbin "baserom.gba", 0x614164, 0x10
+	.byte 0, 1, 3, 0, 1, 4, 0, 3, 6, 2, 1, 3, 0, 14, 10, 0
 
 gUnknown_08614174:: @ 8614174
-	.incbin "baserom.gba", 0x614174, 0x38
+	window_template 0, 14, 2, 15, 16, 1, 0x27
+	window_template 0, 0, 13, 14, 6, 1, 0x117
+	window_template 0, 4, 1, 8, 2, 1, 0x1A1
+	window_template 0, 1, 13, 5, 6, 12, 0x16B
+	window_template 0, 7, 13, 4, 6, 12, 0x189
+	window_template 1, 2, 15, 27, 4, 15, 0x1B1
+	null_window_template
 
 gUnknown_086141AC:: @ 86141AC
-	.incbin "baserom.gba", 0x6141ac, 0x50
+	window_template 1, 22, 17, 7, 2, 15, 0x21D
+	window_template 1, 22, 15, 7, 4, 15, 0x21D
+	window_template 1, 15, 15, 14, 4, 15, 0x21D
+	window_template 1, 15, 13, 14, 6, 15, 0x21D
+	window_template 1, 2, 15, 27, 4, 15, 0x1B1
+	window_template 1, 24, 15, 5, 4, 15, 0x21D
+	window_template 1, 21, 9, 5, 4, 15, 0x21D
+	window_template 1, 24, 17, 5, 2, 15, 0x21D
+	window_template 1, 18, 11, 10, 2, 15, 0x245
+	window_template 1, 1, 1, 10, 2, 15, 0x231

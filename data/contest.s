@@ -1,5 +1,7 @@
     .include "asm/macros.inc"
     .include "constants/constants.inc"
+	.include "constants/species_constants.inc"
+	.include "include/constants/moves.h"
 
     .section .rodata
     .align 2, 0
@@ -295,15 +297,63 @@ gUnknown_08587F44:: @ 8587F44
 	window_template 0x00, 0x01, 0x25, 0x09, 0x02, 0x0f, 0x02da
 	window_template 0x00, 0x10, 0x1f, 0x01, 0x02, 0x0f, 0x02ec
 	window_template 0x00, 0x0b, 0x23, 0x12, 0x04, 0x0f, 0x02ee
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_08587FA4:: @ 8587FA4
-	.incbin "baserom.gba", 0x587fa4, 0x100
+	.4byte NULL, 0xFFFF
+	.2byte SPECIES_ELECTRIKE
+	.byte 2
+	.string "ELECTER$", 11
+	.string "EZRA$", 8
+	.2byte 0
+	.4byte NULL, 0xFFFF
+	.2byte SPECIES_TROPIUS
+	.byte 0
+	.string "TROPO$", 11
+	.string "ALLAN$", 8
+	.2byte 2
+	.4byte NULL, 0xFFFF
+	.2byte SPECIES_XATU
+	.byte 1
+	.string "TUXA$", 11
+	.string "JULIET$", 8
+	.2byte 0
+	.4byte NULL, 0xFFFF
+	.2byte SPECIES_PLUSLE
+	.byte 4
+	.string "PULSE$", 11
+	.string "BAILY$", 8
+	.2byte 3
+	.4byte NULL, 0xFFFF
+	.2byte SPECIES_SHUPPET
+	.byte 3
+	.string "SHUPUP$", 11
+	.string "MELANY$", 8
+	.2byte 1
+	.4byte NULL, 0xFFFF
+	.2byte SPECIES_ZANGOOSE
+	.byte 0
+	.string "GOOZAN$", 11
+	.string "HANA$", 8
+	.2byte 2
+	.4byte NULL, 0xFFFF
+	.2byte SPECIES_LOUDRED
+	.byte 1
+	.string "LOUDED$", 11
+	.string "BRYANT$", 8
+	.2byte 2
+	.4byte NULL, 0xFFFF
+	.2byte SPECIES_DELCATTY
+	.byte 2
+	.string "KITSY$", 11
+	.string "OMAR$", 8
+	.2byte 3
+	
 
 	.align 2
 gUnknown_085880A4:: @ 85880A4
-	.incbin "baserom.gba", 0x5880a4, 0x1800
+	.include "data/contest_opponents.inc"
 
 gUnknown_085898A4:: @ 85898A4
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00

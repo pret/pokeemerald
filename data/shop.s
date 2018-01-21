@@ -46,7 +46,7 @@ gUnknown_08589A70:: @ 8589A70
 	window_template 0, 1, 11, 12, 2, 15, 0x176
 	window_template 0, 18, 11, 10, 2, 15, 0x18E
 	window_template 0, 2, 15, 27, 4, 15, 0x1A2
-	window_template_terminator
+	null_window_template
 
 gUnknown_08589AA8:: @ 8589AA8
 	window_template 0, 21, 9, 5, 4, 15, 0x20E

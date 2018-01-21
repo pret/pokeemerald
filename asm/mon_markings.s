@@ -21,7 +21,7 @@ sub_811F918: @ 811F918
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3
-	bl sub_8098758
+	bl GetWindowFrameTilesPal
 	ldr r3, =gUnknown_0203A124
 	ldr r2, [r3]
 	ldr r1, [r0]
