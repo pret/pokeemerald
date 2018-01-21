@@ -66,40 +66,4 @@ gUnknown_0850E674:: @ 850E674
 	.4byte GroundEffect_ShortGrass
 	.4byte GroundEffect_HotSprings
 	.4byte GroundEffect_Seaweed
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte double_little_steps
-	.4byte triple_little_steps
-	.4byte triple_little_steps
-	.4byte double_little_steps
-	.4byte triple_little_steps
-	.4byte triple_little_steps
-	.4byte quad_little_steps
-	.4byte quad_little_steps
-	.4byte quad_little_steps
-	.4byte quad_little_steps
-	.4byte oct_little_steps
-	.4byte oct_little_steps
 
