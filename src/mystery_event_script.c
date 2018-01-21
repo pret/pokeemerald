@@ -86,8 +86,8 @@ u32 RunMysteryEventScript(u8 *script)
 {
     struct ScriptContext *ctx = &sMysteryEventScriptContext;
     InitMysteryEventScript(ctx, script);
-    while (RunMysteryEventScriptCommand(ctx))
-        ;
+    while (RunMysteryEventScriptCommand(ctx));
+
     return ctx->data[2];
 }
 
@@ -208,7 +208,7 @@ bool8 MEScrCmd_setmsg(struct ScriptContext *ctx)
 {
     u8 value = ScriptReadByte(ctx);
     u8 *str = (u8 *)(ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0]);
-    if (value == 255 || value == ctx->data[2])
+    if (value == 0xFF || value == ctx->data[2])
         StringExpandPlaceholders(gStringVar4, str);
     return FALSE;
 }
