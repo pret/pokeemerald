@@ -29,4 +29,14 @@ gMapPopUp_Palette_Table:: @ 857F384
 	.incbin "graphics/interface/map_popup/stone2.gbapal"
 
 gUnknown_0857F444:: @ 857F444
+<<<<<<< HEAD
 	.incbin "graphics/interface/map_popup/857F444.gbapal"
+=======
+	.incbin "baserom.gba", 0x57f444, 0x20
+
+gUnknown_0857F464:: @ 857F464
+	.incbin "baserom.gba", 0x57f464, 0xe0
+
+gUnknown_0857F544:: @ 857F544
+	.incbin "baserom.gba", 0x57f544, 0x20
+>>>>>>> aca539d5dd97b55d149ca59c0561a721544d3298
