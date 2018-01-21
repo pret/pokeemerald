@@ -111,16 +111,23 @@ gUnknown_0861F3EC:: @ 861F3EC
 	.4byte sub_81CFE98
 
 gUnknown_0861F590:: @ 861F590
-	.incbin "baserom.gba", 0x61F590, 0x20
+	.incbin "graphics/pokenav/icon2.gbapal"
 
 gUnknown_0861F5B0:: @ 861F5B0
-	.incbin "baserom.gba", 0x61f5b0, 0x454
+	.incbin "graphics/pokenav/icon2.4bpp.lz"
+
+gUnknown_0861F994:: @ 861F994
+	.incbin "graphics/pokenav/icon2_unused.4bpp.lz"
 
 gUnknown_0861FA04:: @ 861FA04
-	.incbin "baserom.gba", 0x61fa04, 0x4
+	.byte 0x50
+	.byte 0x0
+	.byte 0x0
+	.byte 0x0
 
 gUnknown_0861FA08:: @ 861FA08
-	.incbin "baserom.gba", 0x61fa08, 0x10
+	window_template 0, 1, 0x16, 0x10, 0x2, 0x0, 0x36
+	null_window_template
 
 gUnknown_0861FA18:: @ 861FA18
 	.4byte gUnknown_085EBED5
@@ -137,7 +144,10 @@ gUnknown_0861FA18:: @ 861FA18
 	.4byte gUnknown_085EBF84
 
 gUnknown_0861FA48:: @ 861FA48
-	.incbin "baserom.gba", 0x61fa48, 0x4
+	.byte 0x4
+	.byte 0x1
+	.byte 0x2
+	.byte 0x0
 
 gUnknown_0861FA4C:: @ 861FA4C
 	obj_tiles gUnknown_0861F5B0, 0x1000, 0
@@ -205,82 +215,205 @@ gUnknown_0861FB2C:: @ 861FB2C
 	spr_template 2, 1, gUnknown_0861FB1C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_0861FB44:: @ 861FB44
-	.incbin "baserom.gba", 0x61fb44, 0xa0
+	spr_template 2, 2, gUnknown_0861FB24, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	
+gUnknown_0861FB5C:: @ 861FB5C
+	.incbin "graphics/pokenav/arrows_matchcall.gbapal"
+	
+gUnknown_0861FB7C:: @ 861FB7C
+	.incbin "graphics/pokenav/arrows_matchcall.4bpp.lz"
 
 gUnknown_0861FBE4:: @ 861FBE4
-	.incbin "baserom.gba", 0x61fbe4, 0x4
+	.byte 0x0
+	.byte 0x2
+	.byte 0x5
+	.byte 0x0
 
 gUnknown_0861FBE8:: @ 861FBE8
-	.incbin "baserom.gba", 0x61fbe8, 0xc
+	.4byte gUnknown_085EBEA8
+	.4byte gUnknown_085EBEB1
+	.4byte gUnknown_085EBEC3
 
 gUnknown_0861FBF4:: @ 861FBF4
-	.incbin "baserom.gba", 0x61fbf4, 0x3
+	.byte 0x1
+	.byte 0x4
+	.byte 0x5
 
 gUnknown_0861FBF7:: @ 861FBF7
-	.incbin "baserom.gba", 0x61fbf7, 0x5
+	.byte 0x2
+	.byte 0x4
+	.byte 0x6
+	.byte 0x7
+	.byte 0x0
 
 gUnknown_0861FBFC:: @ 861FBFC
-	.incbin "baserom.gba", 0x61fbfc, 0x8
+	.4byte gUnknown_0861FB7C
+	.2byte 0xC0
+	.2byte 0xA
 
 gUnknown_0861FC04:: @ 861FC04
-	.incbin "baserom.gba", 0x61fc04, 0x18
+	.4byte gUnknown_0861FB5C
+	.4byte 0x14
+	.4byte 0x0
+	.4byte 0x0
+	
+gUnknown_0861FC14:: @ 861FC14
+	.4byte 0x8000
+	.4byte 0x800
 
 gUnknown_0861FC1C:: @ 861FC1C
-	.incbin "baserom.gba", 0x61fc1c, 0x20
+	spr_template 10, 20, gUnknown_0861FC14, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81C9080
+	
+gUnknown_0861FC34:: @ 861FC34
+	.4byte 0x4000
+	.4byte 0x800
 
 gUnknown_0861FC3C:: @ 861FC3C
-	.incbin "baserom.gba", 0x61fc3c, 0x18
+	spr_template 10, 20, gUnknown_0861FC34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_0861FC54:: @ 861FC54
-	.incbin "baserom.gba", 0x61fc54, 0x5
+	.byte 2
+	.byte 3
+	.byte 4
+	.byte 2
+	.byte 5
 
 gUnknown_0861FC59:: @ 861FC59
-	.incbin "baserom.gba", 0x61fc59, 0x1f
+	.byte 0, 1, 4, 4, 4, 4, 0, 1, 2, 4, 4, 4, 0, 1, 2, 3, 4, 4, 5, 6, 7, 4, 4, 4, 8, 9, 10, 11, 12, 13, 0
 
 gUnknown_0861FC78:: @ 861FC78
-	.incbin "baserom.gba", 0x61fc78, 0x2
-
-gUnknown_0861FC7A:: @ 861FC7A
-	.incbin "baserom.gba", 0x61fc7a, 0xc
-
-gUnknown_0861FC86:: @ 861FC86
-	.incbin "baserom.gba", 0x61fc86, 0x12
+	.incbin "graphics/pokenav/bg.gbapal"
 
 gUnknown_0861FC98:: @ 861FC98
-	.incbin "baserom.gba", 0x61fc98, 0x14
+	.incbin "graphics/pokenav/bg.4bpp.lz"
 
 gUnknown_0861FCAC:: @ 861FCAC
-	.incbin "baserom.gba", 0x61fcac, 0xa0
+	.incbin "graphics/pokenav/bg.bin.lz"
 
 gUnknown_0861FD4C:: @ 861FD4C
-	.incbin "baserom.gba", 0x61fd4c, 0x20
+	.incbin "graphics/pokenav/outline.gbapal"
 
 gUnknown_0861FD6C:: @ 861FD6C
-	.incbin "baserom.gba", 0x61fd6c, 0x288
+	.incbin "graphics/pokenav/outline.4bpp.lz"
 
 gUnknown_0861FFF4:: @ 861FFF4
-	.incbin "baserom.gba", 0x61fff4, 0x1a0
+	.incbin "graphics/pokenav/outline_map.bin.lz"
+
+gUnknown_08620104:: @ 8620104
+	.incbin "graphics/pokenav/blue_light.gbapal"
+	
+gUnknown_08620124:: @ 8620124
+	.incbin "graphics/pokenav/blue_light.4bpp.lz"
 
 gUnknown_08620194:: @ 8620194
-	.incbin "baserom.gba", 0x620194, 0xc
+	.byte 0xF5, 0x10, 0, 0, 0x7A, 0x21, 0, 0, 0xFF, 0x31, 0, 0
 
 gUnknown_086201A0:: @ 86201A0
-	.incbin "baserom.gba", 0x6201a0, 0x24
+	.4byte NULL
+	.4byte sub_81C9C6C
+	.4byte sub_81C9CA8
+	.4byte sub_81C9D44
+	.4byte sub_81C9DD8
+	.4byte sub_81C9E58
+	.4byte sub_81C9EC8
+	.4byte sub_81C9EF8
+	.4byte sub_81C9F28
 
 gUnknown_086201C4:: @ 86201C4
-	.incbin "baserom.gba", 0x6201c4, 0x10
+	.4byte gPokenavOptions_Gfx
+	.byte 0, 0x34, 3, 0
+	.4byte gUnknown_08620124
+	.byte 0, 1, 1, 0
 
 gUnknown_086201D4:: @ 86201D4
-	.incbin "baserom.gba", 0x6201d4, 0x6c
+	.4byte gPokenavOptions_Pal + 0x0, 4
+	.4byte gPokenavOptions_Pal + 0x20, 5
+	.4byte gPokenavOptions_Pal + 0x40, 6
+	.4byte gPokenavOptions_Pal + 0x60, 7
+	.4byte gPokenavOptions_Pal + 0x80, 8
+	.4byte gUnknown_08620104, 3
+	.4byte 0, 0
+	
+gUnknown_0862020C:: @ 862020C
+	.2byte 0, 0
+
+gUnknown_08620210:: @ 8620210
+	.2byte 0x20, 1
+	
+gUnknown_08620214:: @ 8620214
+	.2byte 0x40, 4
+	
+gUnknown_08620218:: @ 8620218
+	.2byte 0x60, 2
+
+gUnknown_0862021C:: @ 862021C
+	.2byte 0x80, 3
+	
+gUnknown_08620220:: @ 8620220
+	.2byte 0xA0, 1
+
+gUnknown_08620224:: @ 8620224
+	.2byte 0xC0, 1
+
+gUnknown_08620228:: @ 8620228
+	.2byte 0xE0, 4
+
+gUnknown_0862022C:: @ 862022C
+	.2byte 0x100, 1
+
+gUnknown_08620230:: @ 8620230
+	.2byte 0x120, 2
+
+gUnknown_08620234:: @ 8620234
+	.2byte 0x140, 0
+
+gUnknown_08620238:: @ 8620238
+	.2byte 0x160, 0
+
+gUnknown_0862023C:: @ 862023C
+	.2byte 0x180, 3
 
 gUnknown_08620240:: @ 8620240
-	.incbin "baserom.gba", 0x620240, 0x4
+	.2byte 0x2A, 0x14
 
 gUnknown_08620244:: @ 8620244
-	.incbin "baserom.gba", 0x620244, 0x88
+	.4byte gUnknown_0862020C
+	.4byte gUnknown_08620210
+	.4byte gUnknown_0862021C
+	.4byte NULL
+	.4byte NULL
+	.4byte NULL
+	.2byte 0x2A, 0x14
+	.4byte gUnknown_0862020C
+	.4byte gUnknown_08620210
+	.4byte gUnknown_08620214
+	.4byte gUnknown_0862021C
+	.4byte NULL
+	.4byte NULL
+	.2byte 0x2A, 0x14
+	.4byte gUnknown_0862020C
+	.4byte gUnknown_08620210
+	.4byte gUnknown_08620214
+	.4byte gUnknown_08620218
+	.4byte gUnknown_0862021C
+	.4byte NULL
+	.2byte 0x38, 0x14
+	.4byte gUnknown_08620220
+	.4byte gUnknown_08620224
+	.4byte gUnknown_0862023C
+	.4byte NULL
+	.4byte NULL
+	.4byte NULL
+	.2byte 0x28, 0x10
+	.4byte gUnknown_08620228
+	.4byte gUnknown_0862022C
+	.4byte gUnknown_08620230
+	.4byte gUnknown_08620234
+	.4byte gUnknown_08620238
+	.4byte gUnknown_0862023C
 
 gUnknown_086202CC:: @ 86202CC
-	.incbin "baserom.gba", 0x6202cc, 0x8
+	window_template 1, 3, 17, 0x18, 2, 1, 8
 
 gUnknown_086202D4:: @ 86202D4
 	.4byte gUnknown_085EBCC5
@@ -299,19 +432,43 @@ gUnknown_086202D4:: @ 86202D4
 	.4byte gUnknown_085EBE41
 
 gUnknown_0862030C:: @ 862030C
-	.incbin "baserom.gba", 0x62030c, 0x3
+	.byte 6, 8, 7
 
 gUnknown_0862030F:: @ 862030F
-	.incbin "baserom.gba", 0x62030f, 0x3d
+	.byte 6, 8, 7, 0, 0
+	
+gUnknown_08620314:: @ 8620314
+	.byte 0, 0x40, 0, 0x80, 0, 8, 0, 0
+	
+gUnknown_0862031C:: @ 862031C
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_end
+	
+gUnknown_0862032C:: @ 862032C
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x10, 0x10, 0, 0x12
+	obj_rot_scal_anim_end
+
+gUnknown_08620344:: @ 8620344
+	.4byte gUnknown_0862031C
+	.4byte gUnknown_0862032C
 
 gUnknown_0862034C:: @ 862034C
-	.incbin "baserom.gba", 0x62034c, 0x20
+	spr_template 3, 4, gUnknown_08620314, gDummySpriteAnimTable, NULL, gUnknown_08620344, SpriteCallbackDummy
+	
+gUnknown_08620364:: @ 8620364
+	.2byte 0x4000
+	.2byte 0x8000
+	.2byte 0x800
+	.2byte 0
 
 gUnknown_0862036C:: @ 862036C
-	.incbin "baserom.gba", 0x62036c, 0x18
+	spr_template 1, 3, gUnknown_08620364, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_08620384:: @ 8620384
-	 .incbin "baserom.gba", 0x620384, 0xC
+	 .4byte 0x4000040
+	 .4byte 0xa2600001
+	 .byte 1, 0, 0, 0
 	 
 gUnknown_08620390:: @ 8620390
 	.string "Becalm fighting emotions.$"
@@ -1333,40 +1490,44 @@ gUnknown_08622028:: @ 8622028
 	.4byte gUnknown_08621FC9, gUnknown_08621FDE, gUnknown_08621FF9, gUnknown_0862200F
 
 gUnknown_08622508:: @ 8622508
-	.incbin "baserom.gba", 0x622508, 0x2
+	.byte 0, 2
 
 gUnknown_0862250A:: @ 862250A
-	.incbin "baserom.gba", 0x62250a, 0x6
+	.byte 0, 1, 2, 0, 0, 0
 
 gUnknown_08622510:: @ 8622510
-	.incbin "baserom.gba", 0x622510, 0x20
+	.incbin "graphics/pokenav/ui_matchcall.gbapal"
 
 gUnknown_08622530:: @ 8622530
-	.incbin "baserom.gba", 0x622530, 0xa4
+	.incbin "graphics/pokenav/ui_matchcall.4bpp.lz"
 
 gUnknown_086225D4:: @ 86225D4
-	 .incbin "baserom.gba", 0x6225d4, 0xC4
+	.incbin "graphics/pokenav/ui_matchcall.bin.lz"
 
 gUnknown_08622698:: @ 8622698
-	 .incbin "baserom.gba", 0x622698, 0x48
+	.incbin "graphics/pokenav/arrow2.gbapal"
+	
+gUnknown_086226B8:: @ 86226B8
+	.incbin "graphics/pokenav/arrow2.4bpp.lz"
 
 gUnknown_086226E0:: @ 86226E0
-	.incbin "baserom.gba", 0x6226e0, 0x20
+	.incbin "graphics/pokenav/86226E0.gbapal"
 
 gUnknown_08622700:: @ 8622700
-	.incbin "baserom.gba", 0x622700, 0x20
+	.incbin "graphics/pokenav/8622700.gbapal"
 
 gUnknown_08622720:: @ 8622720
-	.incbin "baserom.gba", 0x622720, 0x40
+	.incbin "graphics/pokenav/pokeball_matchcall.gbapal"
 
 gUnknown_08622760:: @ 8622760
-	.incbin "baserom.gba", 0x622760, 0x2c
+	.incbin "graphics/pokenav/pokeball_matchcall.4bpp.lz"
 
 gUnknown_0862278C:: @ 862278C
-	.incbin "baserom.gba", 0x62278c, 0x8
+	.4byte 0x11FD
+	.4byte 0x20206A
 
 gUnknown_08622794:: @ 8622794
-	.incbin "baserom.gba", 0x622794, 0x4
+	.4byte 0x3077
 
 gUnknown_08622798:: @ 8622798
 	.4byte NULL
@@ -1387,10 +1548,10 @@ gUnknown_08622798:: @ 8622798
 	.4byte sub_81CBB74
 
 gUnknown_086227D8:: @ 86227D8
-	.incbin "baserom.gba", 0x6227d8, 0x8
+	window_template 2, 0, 5, 11, 2, 2, 16
 
 gUnknown_086227E0:: @ 86227E0
-	.incbin "baserom.gba", 0x6227e0, 0x8
+	window_template 2, 0, 9, 11, 8, 2, 0x26
 
 gUnknown_086227E8:: @ 86227E8
 	.4byte gUnknown_085EC017
@@ -1398,13 +1559,15 @@ gUnknown_086227E8:: @ 86227E8
 	.4byte gUnknown_085EC022
 
 gUnknown_086227F4:: @ 86227F4
-	.incbin "baserom.gba", 0x6227f4, 0x14
+	.string "·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·{PAUSE 0x04}·\p"
+	.string "$"
+	.align 2
 
 gUnknown_08622808:: @ 8622808
-	.incbin "baserom.gba", 0x622808, 0x8
+	window_template 1, 1, 12, 0x1C, 4, 1, 10
 
 gUnknown_08622810:: @ 8622810
-	.incbin "baserom.gba", 0x622810, 0x8
+	obj_tiles gUnknown_086226B8, 0x40, 7
 
 gUnknown_08622818:: @ 8622818
 	obj_pal gUnknown_08622698, 12
@@ -1429,79 +1592,81 @@ gUnknown_08622850:: @ 8622850
 	spr_template 8, 13, gUnknown_08622848, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_08622868:: @ 8622868
-	.incbin "baserom.gba", 0x622868, 0x20
+	.incbin "graphics/pokenav/8622868.gbapal"
 
 gUnknown_08622888:: @ 8622888
-	 .incbin "baserom.gba", 0x622888, 0x1F4
+	.incbin "graphics/pokenav/zoom_tiles.4bpp.lz"
 
 gUnknown_08622A7C:: @ 8622A7C
-	 .incbin "baserom.gba", 0x622a7c, 0x44
+	 .incbin "graphics/pokenav/city_maps/lavaridge_0.bin.lz"
 
 gUnknown_08622AC0:: @ 8622AC0
-	 .incbin "baserom.gba", 0x622ac0, 0x48
+	 .incbin "graphics/pokenav/city_maps/fallarbor_0.bin.lz"
 
 gUnknown_08622B08:: @ 8622B08
-	 .incbin "baserom.gba", 0x622b08, 0x50
+	 .incbin "graphics/pokenav/city_maps/fortree_0.bin.lz"
 
 gUnknown_08622B58:: @ 8622B58
-	 .incbin "baserom.gba", 0x622b58, 0x60
+	 .incbin "graphics/pokenav/city_maps/slateport_0.bin.lz"
 
 gUnknown_08622BB8:: @ 8622BB8
-	 .incbin "baserom.gba", 0x622bb8, 0x4C
+	 .incbin "graphics/pokenav/city_maps/slateport_1.bin.lz"
 
 gUnknown_08622C04:: @ 8622C04
-	 .incbin "baserom.gba", 0x622c04, 0x54
+	 .incbin "graphics/pokenav/city_maps/rustboro_0.bin.lz"
 
 gUnknown_08622C58:: @ 8622C58
-	 .incbin "baserom.gba", 0x622c58, 0x54
+	 .incbin "graphics/pokenav/city_maps/rustboro_1.bin.lz"
 
 gUnknown_08622CAC:: @ 8622CAC
-	 .incbin "baserom.gba", 0x622cac, 0x40
+	 .incbin "graphics/pokenav/city_maps/pacifidlog_0.bin.lz"
 
 gUnknown_08622CEC:: @ 8622CEC
-	 .incbin "baserom.gba", 0x622cec, 0x58
+	 .incbin "graphics/pokenav/city_maps/mauville_0.bin.lz"
 
 gUnknown_08622D44:: @ 8622D44
-	 .incbin "baserom.gba", 0x622d44, 0x54
+	 .incbin "graphics/pokenav/city_maps/mauville_1.bin.lz"
 
 gUnknown_08622D98:: @ 8622D98
-	 .incbin "baserom.gba", 0x622d98, 0x30
+	 .incbin "graphics/pokenav/city_maps/oldale_0.bin.lz"
 
 gUnknown_08622DC8:: @ 8622DC8
-	 .incbin "baserom.gba", 0x622dc8, 0x4C
+	 .incbin "graphics/pokenav/city_maps/lilycove_0.bin.lz"
 
 gUnknown_08622E14:: @ 8622E14
-	 .incbin "baserom.gba", 0x622e14, 0x58
+	 .incbin "graphics/pokenav/city_maps/lilycove_1.bin.lz"
 
 gUnknown_08622E6C:: @ 8622E6C
-	 .incbin "baserom.gba", 0x622e6c, 0x30
+	 .incbin "graphics/pokenav/city_maps/littleroot_0.bin.lz"
 
 gUnknown_08622E9C:: @ 8622E9C
-	 .incbin "baserom.gba", 0x622e9c, 0x38
+	 .incbin "graphics/pokenav/city_maps/dewford_0.bin.lz"
 
 gUnknown_08622ED4:: @ 8622ED4
-	 .incbin "baserom.gba", 0x622ed4, 0x40
+	 .incbin "graphics/pokenav/city_maps/sootopolis_0.bin.lz"
 
 gUnknown_08622F14:: @ 8622F14
-	 .incbin "baserom.gba", 0x622f14, 0x48
+	 .incbin "graphics/pokenav/city_maps/ever_grande_0.bin.lz"
 
 gUnknown_08622F5C:: @ 8622F5C
-	 .incbin "baserom.gba", 0x622f5c, 0x44
+	 .incbin "graphics/pokenav/city_maps/ever_grande_1.bin.lz"
 
 gUnknown_08622FA0:: @ 8622FA0
-	 .incbin "baserom.gba", 0x622fa0, 0x38
+	 .incbin "graphics/pokenav/city_maps/verdanturf_0.bin.lz"
 
 gUnknown_08622FD8:: @ 8622FD8
-	 .incbin "baserom.gba", 0x622fd8, 0x48
+	 .incbin "graphics/pokenav/city_maps/mossdeep_0.bin.lz"
 
 gUnknown_08623020:: @ 8623020
-	 .incbin "baserom.gba", 0x623020, 0x5C
+	 .incbin "graphics/pokenav/city_maps/mossdeep_1.bin.lz"
 
 gUnknown_0862307C:: @ 862307C
-	 .incbin "baserom.gba", 0x62307c, 0x5C
+	 .incbin "graphics/pokenav/city_maps/petalburg_0.bin.lz"
 
 gUnknown_086230D8:: @ 86230D8
-	.incbin "baserom.gba", 0x6230d8, 0xc
+	.4byte 0x11F5
+	.4byte 0x206A
+	.4byte 0x3402
 
 gUnknown_086230E4:: @ 86230E4
 	.4byte NULL
@@ -1518,7 +1683,13 @@ gUnknown_08623100:: @ 8623100
 	null_obj_pal
 
 gUnknown_08623110:: @ 8623110
-	.incbin "baserom.gba", 0x623110, 0x8
+	.byte 1
+	.byte 17
+	.byte 4
+	.byte 12
+	.byte 13
+	.byte 1
+	.2byte 0x4C
 
 gUnknown_08623118:: @ 8623118
 	.4byte 0, gUnknown_08622E6C 
@@ -1554,34 +1725,36 @@ gUnknown_086231D0:: @ 86231D0
 	spr_template 6, 11, gUnknown_086231C8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_81CCEF4
 
 gUnknown_086231E8:: @ 86231E8
-	.incbin "baserom.gba", 0x6231e8, 0x20
+	.incbin "graphics/pokenav/86231E8.gbapal"
 
 gUnknown_08623208:: @ 8623208
-	.incbin "baserom.gba", 0x623208, 0x20
+	.incbin "graphics/pokenav/8623208.gbapal"
 
 gUnknown_08623228:: @ 8623228
-	.incbin "baserom.gba", 0x623228, 0x14
+	.incbin "graphics/pokenav/8623228.4bpp.lz"
 
 gUnknown_0862323C:: @ 862323C
-	.incbin "baserom.gba", 0x62323c, 0xfc
+	.incbin "graphics/pokenav/862323C.bin.lz"
 
 gUnknown_08623338:: @ 8623338
-	.incbin "baserom.gba", 0x623338, 0x20
+	.incbin "graphics/pokenav/8623338.gbapal"
 
 gUnknown_08623358:: @ 8623358
-	.incbin "baserom.gba", 0x623358, 0xc
+	.4byte 0x11F5
+	.4byte 0x21DE
+	.4byte 0x31EB
 
 gUnknown_08623364:: @ 8623364
-	.incbin "baserom.gba", 0x623364, 0x8
+	window_template 1, 13, 1, 13, 4, 15, 2
 
 gUnknown_0862336C:: @ 862336C
-	.incbin "baserom.gba", 0x62336c, 0x8
+	window_template 1, 1, 6, 7, 2, 15, 0x36
 
 gUnknown_08623374:: @ 8623374
-	.incbin "baserom.gba", 0x623374, 0x8
+	window_template 1, 1, 0x1C, 5, 2, 15, 0x44
 
 gUnknown_0862337C:: @ 862337C
-	.incbin "baserom.gba", 0x62337c, 0x8
+	window_template 1, 13, 0x1C, 3, 2, 15, 0x44
 
 gUnknown_08623384:: @ 8623384
 	.4byte NULL
@@ -1593,7 +1766,7 @@ gUnknown_08623384:: @ 8623384
 	.4byte sub_81CE700
 
 gUnknown_086233A0:: @ 86233A0
-	.incbin "baserom.gba", 0x6233a0, 0x14
+	.4byte 0x16, 0x17, 0x18, 0x21, 0x2F
 
 gUnknown_086233B4:: @ 86233B4
 	.4byte sub_81CF134
@@ -1602,22 +1775,22 @@ gUnknown_086233B4:: @ 86233B4
 	.4byte sub_81CF278
 
 gUnknown_086233C4:: @ 86233C4
-	.incbin "baserom.gba", 0x6233c4, 0x20
+	.incbin "graphics/pokenav/condition_search2.gbapal"
 
 gUnknown_086233E4:: @ 86233E4
-	.incbin "baserom.gba", 0x6233e4, 0xc8
+	.incbin "graphics/pokenav/condition_search2.4bpp.lz"
 
 gUnknown_086234AC:: @ 86234AC
-	.incbin "baserom.gba", 0x6234ac, 0xc4
+	.incbin "graphics/pokenav/condition_search2.bin.lz"
 
 gUnknown_08623570:: @ 8623570
-	.incbin "baserom.gba", 0x623570, 0x20
+	.incbin "graphics/pokenav/8623570.gbapal"
 
 gUnknown_08623590:: @ 8623590
-	.incbin "baserom.gba", 0x623590, 0x4
+	.4byte 0x2065
 
 gUnknown_08623594:: @ 8623594
-	.incbin "baserom.gba", 0x623594, 0x4
+	.4byte 0x307A
 
 gUnknown_08623598:: @ 8623598
 	.4byte NULL
@@ -1629,16 +1802,19 @@ gUnknown_08623598:: @ 8623598
 	.4byte sub_81CF798
 
 gUnknown_086235B4:: @ 86235B4
-	.incbin "baserom.gba", 0x6235b4, 0x8
+	window_template 1, 1, 6, 7, 2, 1, 20
 
 gUnknown_086235BC:: @ 86235BC
-	.incbin "baserom.gba", 0x6235bc, 0xc
+	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
+	.align 2
 
 gUnknown_086235C8:: @ 86235C8
-	.incbin "baserom.gba", 0x6235c8, 0xc
+	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
+	.align 2
 
 gUnknown_086235D4:: @ 86235D4
-	.incbin "baserom.gba", 0x6235d4, 0x4
+	.string "{0x77}$"
+	.align 2
 
 gUnknown_086235D8:: @ 86235D8
 	.4byte sub_81CFB8C
@@ -1646,22 +1822,22 @@ gUnknown_086235D8:: @ 86235D8
 	.4byte sub_81CFC40
 
 gUnknown_086235E4:: @ 86235E4
-	.incbin "baserom.gba", 0x6235e4, 0x20
+	.incbin "graphics/pokenav/ui_ribbons.gbapal"
 
 gUnknown_08623604:: @ 8623604
-	.incbin "baserom.gba", 0x623604, 0xc8
+	.incbin "graphics/pokenav/ui_ribbons.4bpp.lz"
 
 gUnknown_086236CC:: @ 86236CC
-	.incbin "baserom.gba", 0x6236cc, 0xc4
+	.incbin "graphics/pokenav/ui_ribbons.bin.lz"
 
 gUnknown_08623790:: @ 8623790
-	.incbin "baserom.gba", 0x623790, 0x20
+	.incbin "graphics/pokenav/8623790.gbapal"
 
 gUnknown_086237B0:: @ 86237B0
-	.incbin "baserom.gba", 0x6237b0, 0x4
+	.4byte 0x2065
 
 gUnknown_086237B4:: @ 86237B4
-	.incbin "baserom.gba", 0x6237b4, 0x4
+	.4byte 0x307A
 
 gUnknown_086237B8:: @ 86237B8
 	.4byte NULL
@@ -1673,19 +1849,38 @@ gUnknown_086237B8:: @ 86237B8
 	.4byte sub_81D021C
 
 gUnknown_086237D4:: @ 86237D4
-	.incbin "baserom.gba", 0x6237d4, 0x8
+	window_template 1, 1, 6, 7, 2, 1, 20
 
 gUnknown_086237DC:: @ 86237DC
-	.incbin "baserom.gba", 0x6237dc, 0xc
+	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
+	.align 2
 
 gUnknown_086237E8:: @ 86237E8
-	.incbin "baserom.gba", 0x6237e8, 0xc
+	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
+	.align 2
 
 gUnknown_086237F4:: @ 86237F4
-	.incbin "baserom.gba", 0x6237f4, 0x4
+	.string "{0x77}$"
+	.align 2
 
 gUnknown_086237F8:: @ 86237F8
-	.incbin "baserom.gba", 0x6237f8, 0x44
+	.byte 1, 1, 0, 0
+	.byte 3, 4, 1, 0
+	.byte 3, 4, 5, 0
+	.byte 3, 4, 9, 0
+	.byte 3, 4, 13, 0
+	.byte 3, 4, 17, 0
+	.byte 1, 1, 21, 0
+	.byte 1, 1, 22, 0
+	.byte 1, 1, 23, 0
+	.byte 1, 1, 24, 0
+	.byte 1, 1, 25, 1
+	.byte 1, 1, 26, 1
+	.byte 1, 1, 27, 1
+	.byte 1, 1, 28, 1
+	.byte 1, 1, 29, 1
+	.byte 1, 1, 30, 1
+	.byte 1, 1, 31, 1
 
 @ 862383C
 	.include "data/text/ribbon_descriptions.inc"
@@ -1694,31 +1889,32 @@ gUnknown_086237F8:: @ 86237F8
 	.include "data/text/gift_ribbon_descriptions.inc"
 
 gUnknown_08623FF8:: @ 8623FF8
-	 .incbin "baserom.gba", 0x623ff8, 0x20
+	 .incbin "graphics/pokenav/ribbons_icon1.gbapal"
 
 gUnknown_08624018:: @ 8624018
-	 .incbin "baserom.gba", 0x624018, 0x20
+	 .incbin "graphics/pokenav/ribbons_icon2.gbapal"
 
 gUnknown_08624038:: @ 8624038
-	 .incbin "baserom.gba", 0x624038, 0x20
+	 .incbin "graphics/pokenav/ribbons_icon3.gbapal"
 
 gUnknown_08624058:: @ 8624058
-	 .incbin "baserom.gba", 0x624058, 0x20
+	 .incbin "graphics/pokenav/ribbons_icon4.gbapal"
 
 gUnknown_08624078:: @ 8624078
-	 .incbin "baserom.gba", 0x624078, 0x20
+	 .incbin "graphics/pokenav/ribbons_icon5.gbapal"
 
 gUnknown_08624098:: @ 8624098
-	 .incbin "baserom.gba", 0x624098, 0x20
+	 .incbin "graphics/pokenav/8624098.gbapal"
 
 gUnknown_086240B8:: @ 86240B8
-	 .incbin "baserom.gba", 0x6240b8, 0x1C8
+	 .incbin "graphics/pokenav/ribbons_icon.4bpp.lz"
 
 gUnknown_08624280:: @ 8624280
-	 .incbin "baserom.gba", 0x624280, 0x918
+	 .incbin "graphics/pokenav/ribbons_icon_big.4bpp.lz"
 
 gUnknown_08624B98:: @ 8624B98
-	.incbin "baserom.gba", 0x624b98, 0x8
+	.4byte 0x107D
+	.4byte 0x2066
 
 gUnknown_08624BA0:: @ 8624BA0
 	.4byte NULL
@@ -1729,28 +1925,48 @@ gUnknown_08624BA0:: @ 8624BA0
 	.4byte sub_81D0C54
 
 gUnknown_08624BB8:: @ 8624BB8
-	.incbin "baserom.gba", 0x624bb8, 0x8
+	window_template 2, 12, 13, 16, 4, 1, 20
 
 gUnknown_08624BC0:: @ 8624BC0
-	.incbin "baserom.gba", 0x624bc0, 0x4
+	.byte 4, 2, 3, 0
 
 gUnknown_08624BC4:: @ 8624BC4
-	.incbin "baserom.gba", 0x624bc4, 0x8
+	window_template 2, 14, 1, 13, 2, 10, 0x54
 
 gUnknown_08624BCC:: @ 8624BCC
-	.incbin "baserom.gba", 0x624bcc, 0xc
+	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_RED}{WHITE}{GREEN}♂{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
+	.align 2
 
 gUnknown_08624BD8:: @ 8624BD8
-	.incbin "baserom.gba", 0x624bd8, 0xc
+	.string "{COLOR_HIGHLIGHT_SHADOW}{LIGHT_GREEN}{WHITE}{BLUE}♀{COLOR_HIGHLIGHT_SHADOW}{DARK_GREY}{WHITE}{LIGHT_GREY}$"
+	.align 2
 
 gUnknown_08624BE4:: @ 8624BE4
-	.incbin "baserom.gba", 0x624be4, 0x4
+	.string "{0x77}$"
+	.align 2
 
 gUnknown_08624BE8:: @ 8624BE8
-	.incbin "baserom.gba", 0x624be8, 0x10
+	window_template 2, 1, 5, 7, 2, 1, 0x6E
+	.4byte NULL
+	.4byte NULL
 
 gUnknown_08624BF8:: @ 8624BF8
-	.incbin "baserom.gba", 0x624bf8, 0x80
+	.2byte 0, 0, 1, 0
+	.2byte 2, 0, 3, 0
+	.2byte 4, 0, 1, 1
+	.2byte 2, 1, 3, 1
+	.2byte 4, 1, 1, 2
+	.2byte 2, 2, 3, 2
+	.2byte 4, 2, 1, 3
+	.2byte 2, 3, 3, 3
+	.2byte 4, 3, 1, 4
+	.2byte 2, 4, 3, 4
+	.2byte 4, 4, 5, 0
+	.2byte 6, 0, 7, 1
+	.2byte 8, 2, 9, 1
+	.2byte 9, 3, 9, 4
+	.2byte 10, 3, 10, 4
+	.2byte 11, 0, 11, 1
 
 gUnknown_08624C78:: @ 8624C78
 	obj_tiles gUnknown_08624280, 0x1800, 9
@@ -1764,73 +1980,710 @@ gUnknown_08624C80:: @ 8624C80
 	null_obj_pal
 
 gUnknown_08624CB0:: @ 8624CB0
-	.incbin "baserom.gba", 0x624cb0, 0x54
+	.2byte 0x100
+	.2byte 0x8000
+	.2byte 0x400
+	.2byte 0x0
+
+gUnknown_08624CB8:: @ 8624CB8
+	.2byte 0x80
+	.2byte 0x80
+	.2byte 0
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0
+	.2byte 0
+	.2byte 0
+	
+gUnknown_08624CC8:: @ 8624CC8
+	.2byte 0x80
+	.2byte 0x80
+	.2byte 0
+	.2byte 0
+	.2byte 0x20
+	.2byte 0x20
+	.2byte 0x400
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0
+	.2byte 0
+	.2byte 0
+	
+gUnknown_08624CE0:: @ 8624CE0
+	.2byte 0x100
+	.2byte 0x100
+	.2byte 0
+	.2byte 0
+	.2byte 0xFFE0
+	.2byte 0xFFE0
+	.2byte 0x400
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0
+	.2byte 0
+	.2byte 0
+	
+gUnknown_08624CF8:: @ 8624CF8
+	.4byte gUnknown_08624CB8
+	.4byte gUnknown_08624CC8
+	.4byte gUnknown_08624CE0
 
 gUnknown_08624D04:: @ 8624D04
-	 .incbin "baserom.gba", 0x624d04, 0x78
+	spr_template 9, 15, gUnknown_08624CB0, gDummySpriteAnimTable, NULL, gUnknown_08624CF8, SpriteCallbackDummy
+	
+gUnknown_08624D1C:: @ 8624D1C
+	 .4byte gText_MrStone_Pokenav_2B60C0
+	 .2byte 0xFFFF
+	 .byte 0x58
+	 .byte 1
+	 .4byte gText_MrStone_Pokenav_2B61E6
+	 .byte 0x58
+	 .byte 1
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B6302
+	 .byte 0xBD
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B63A0
+	 .byte 16
+	 .byte 1
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B64A2
+	 .byte 0x6A
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B6526
+	 .byte 0xF4
+	 .byte 4
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B65BB
+	 .byte 0x97
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B6664
+	 .byte 0x6f
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B66B1
+	 .byte 0x70
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B6703
+	 .byte 0xf7
+	 .byte 4
+	 .2byte 0xFFFF
+	 .4byte gText_MrStone_Pokenav_2B67ED
+	 .byte 0x64
+	 .byte 8
+	 .2byte 0xFFFF
+	 .4byte NULL
+	 .4byte 0xFFFFFFFF
 
 gUnknown_08624D7C:: @ 8624D7C
-	 .incbin "baserom.gba", 0x624d7c, 0x60
+	 .byte 0
+	 .byte 10
+	 .2byte 0xFFFF
+	 .4byte gUnknown_085EFAEF
+	 .4byte gUnknown_085EFAFA
+	 .4byte gUnknown_08624D1C
+
+gUnknown_08624D8C:: @ 8624D8C
+	 .4byte gText_Norman_Pokenav_2B5719
+	 .byte 0x32
+	 .byte 1
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5795
+	 .byte 0xF1
+	 .byte 4
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B584D
+	 .byte 0xF3
+	 .byte 4
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B58E3
+	 .byte 0xF4
+	 .byte 4
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5979
+	 .byte 0xD4
+	 .byte 0
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5A07
+	 .byte 0xFE
+	 .byte 0xFF
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5A69
+	 .byte 0x64
+	 .byte 8
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5ACF
+	 .byte 0x64
+	 .byte 8
+	 .2byte 0xFFFF
+	 .4byte gText_Norman_Pokenav_2B5B5E
+	 .byte 0x64
+	 .byte 8
+	 .2byte 0xFFFF
+	 .4byte NULL
+	 .4byte 0xFFFFFFFF
 
 gUnknown_08624DDC:: @ 8624DDC
-	 .incbin "baserom.gba", 0x624ddc, 0x14
+	 .byte 5, 7, 0x32, 1, 0x45, 0, 0, 0
+	 .4byte gUnknown_085EFB25
+	 .4byte gUnknown_085EFB47
+	 .4byte gUnknown_08624D8C
 
 gUnknown_08624DF0:: @ 8624DF0
-	 .incbin "baserom.gba", 0x624df0, 0x2C
+	 .byte 3, 0, 0x19, 1
+	 .4byte gUnknown_085EFBC9
+	 .4byte gUnknown_085E8270
+	 
+gUnknown_08624DFC:: @ 8624DFC
+	 .4byte gText_Mom_Pokenav_2B227B
+	 .byte 0xFF
+	 .byte 0xFF
+	 .2byte 0xFFFF
+	 .4byte gText_Mom_Pokenav_2B2310
+	 .byte 0xF4
+	 .byte 0x4
+	 .2byte 0xFFFF
+	 .4byte gText_Mom_Pokenav_2B23F3
+	 .byte 0x64
+	 .byte 8
+	 .2byte 0xFFFF
+	 .4byte NULL
+	 .4byte 0xFFFFFFFF
 
 gUnknown_08624E1C:: @ 8624E1C
-	 .incbin "baserom.gba", 0x624e1c, 0x50
+	 .byte 0, 0, 0xD8, 0
+	 .4byte gUnknown_085EFB32
+	 .4byte gUnknown_085EFB4B
+	 .4byte gUnknown_08624DFC
+	 
+gUnknown_08624E2C:: @ 8624E2C
+	.4byte gText_Steven_Pokenav_2B5B95
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5C53
+	.byte 0xC7
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5CC9
+	.byte 0xD4
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5DB4
+	.byte 0x70
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5E26
+	.byte 0xF6
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5EA2
+	.byte 0x81
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Steven_Pokenav_2B5ED9
+	.byte 0x64
+	.byte 8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08624E6C:: @ 8624E6C
-	 .incbin "baserom.gba", 0x624e6c, 0x90
+	 .byte 0, 0xD5, 0x31, 1
+	 .4byte gUnknown_085EFB04
+	 .4byte gUnknown_085EFB11
+	 .4byte gUnknown_08624E2C
+	 
+gUnknown_08624E7C:: @ 8624E7C
+	.4byte gText_May_Pokenav_2B3AB3
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3B3F
+	.byte 0xF1
+	.byte 0x4
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3C13
+	.byte 0x95
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3CF3
+	.byte 0x24
+	.byte 0x3
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3D4B
+	.byte 0x6A
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3DD1
+	.byte 0xF3
+	.byte 0x4
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3E69
+	.byte 0xF4
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3ECD
+	.byte 0x97
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3F2B
+	.byte 0xD4
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B3FFB
+	.byte 0x6F
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B402B
+	.byte 0x61
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B414B
+	.byte 0x70
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B4228
+	.byte 0x81
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B42E0
+	.byte 0xF7
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_May_Pokenav_2B4350
+	.byte 0x64
+	.byte 8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08624EFC:: @ 8624EFC
-	 .incbin "baserom.gba", 0x624efc, 0x90
+	 .byte 4, 0, 0xFD, 0
+	 .4byte gUnknown_085EFB18
+	 .4byte gExpandedPlaceholder_May
+	 .4byte gUnknown_08624E7C
+
+gUnknown_08624F0C:: @ 8624F0C
+	.4byte gText_Brendan_Pokenav_2B43EF
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4486
+	.byte 0xF1
+	.byte 0x4
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4560
+	.byte 0x95
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B463F
+	.byte 0x24
+	.byte 0x3
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B46B7
+	.byte 0x6A
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4761
+	.byte 0xF3
+	.byte 0x4
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B47F4
+	.byte 0xF4
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4882
+	.byte 0x97
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4909
+	.byte 0xD4
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B49C4
+	.byte 0x6F
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4A44
+	.byte 0x61
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4B28
+	.byte 0x70
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4C15
+	.byte 0x81
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4CD8
+	.byte 0xF7
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_Brendan_Pokenav_2B4D46
+	.byte 0x64
+	.byte 8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08624F8C:: @ 8624F8C
-	 .incbin "baserom.gba", 0x624f8c, 0x60
+	 .byte 4, 1, 0xFD, 0
+	 .4byte gUnknown_085EFB18
+	 .4byte gExpandedPlaceholder_Brendan
+	 .4byte gUnknown_08624F0C
+	 
+gUnknown_08624F9C:: @ 8624F9C
+	.4byte gText_Wally_Pokenav_2B4DE2
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B4E57
+	.byte 0xC7
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B4EA5
+	.byte 0xF3
+	.byte 0x4
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B4F41
+	.byte 0x97
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B4FF3
+	.byte 0x6F
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B50B1
+	.byte 0x81
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Wally_Pokenav_2B5100
+	.byte 0x7E
+	.byte 0
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
+gUnknown_08624FDC:: @ 8624FDC
+	.byte 0x24, 3, 5, 0
+	.2byte 0x6F, 0xD5
+	.byte 0x5A, 3, 0x46, 0, 0xFF, 0xFF, 0xD5, 0
+	
 gUnknown_08624FEC:: @ 8624FEC
-	 .incbin "baserom.gba", 0x624fec, 0x54
+	 .byte 2, 0, 0xD6, 0
+	 .4byte 0x40
+	 .4byte gUnknown_085EFB3E
+	 .4byte gUnknown_08624F9C
+	 .4byte gUnknown_08624FDC
+	 
+gUnknown_08624500:: @ 8624500
+	.4byte gText_Scott_Pokenav_2B5184
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B5275
+	.byte 0x8B
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B5323
+	.byte 0x97
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B53DB
+	.byte 0xD4
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B54A5
+	.byte 0x70
+	.byte 0
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B5541
+	.byte 0xF7
+	.byte 4
+	.2byte 0xFFFF
+	.4byte gText_Scott_Pokenav_2B56CA
+	.byte 0x64
+	.byte 8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
+
 
 gUnknown_08625040:: @ 8625040
-	 .incbin "baserom.gba", 0x625040, 0x38
+	 .byte 0, 0xD5, 0xD7, 0
+	 .4byte gUnknown_085EFB4F
+	 .4byte gUnknown_085EFB5C
+	 .4byte gUnknown_08624500
+	 
+gUnknown_08625050:: @ 8625050
+	.4byte gText_Roxanne_Pokenav_2B2456
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Roxanne_Pokenav_2B250E
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Roxanne_Pokenav_2B25C1
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Roxanne_Pokenav_2B2607
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625078:: @ 8625078
-	 .incbin "baserom.gba", 0x625078, 0x3C
+	 .byte 5, 10, 0xD3, 1
+	 .4byte 0x41
+	 .4byte gUnknown_085EFB62
+	 .4byte NULL
+	 .4byte gUnknown_08625050
+	 
+gUnknown_0862508C:: @ 862508C
+	.4byte gText_Brawly_Pokenav_2B2659
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Brawly_Pokenav_2B275D
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Brawly_Pokenav_2B286F
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Brawly_Pokenav_2B28D1
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_086250B4:: @ 86250B4
-	 .incbin "baserom.gba", 0x6250b4, 0x3C
+	 .byte 5, 2, 0xD4, 1
+	 .4byte 0x42
+	 .4byte gUnknown_085EFB6F
+	 .4byte NULL
+	 .4byte gUnknown_0862508C
+	 
+gUnknown_086250C8:: @ 86250C8
+	.4byte gText_Wattson_Pokenav_2B2912
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Wattson_Pokenav_2B29CA
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Wattson_Pokenav_2B2AB6
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Wattson_Pokenav_2B2B01
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_086250F0:: @ 86250F0
-	 .incbin "baserom.gba", 0x6250f0, 0x3C
+	 .byte 5, 9, 0xD5, 1
+	 .4byte 0x43
+	 .4byte gUnknown_085EFB7B
+	 .4byte NULL
+	 .4byte gUnknown_086250C8
+	 
+gUnknown_08625104:: @ 8625104
+	.4byte gText_Flannery_Pokenav_2B2B4D
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Flannery_Pokenav_2B2C0E
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Flannery_Pokenav_2B2CF1
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Flannery_Pokenav_2B2D54
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_0862512C:: @ 862512C
-	 .incbin "baserom.gba", 0x62512c, 0x3C
+	 .byte 5, 3, 0xD6, 1
+	 .4byte 0x44
+	 .4byte gUnknown_085EFB87
+	 .4byte NULL
+	 .4byte gUnknown_08625104
+	 
+gUnknown_08625140:: @ 8625140
+	.4byte gText_Winona_Pokenav_2B2DA4
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Winona_Pokenav_2B2E2B
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Winona_Pokenav_2B2EC2
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Winona_Pokenav_2B2F16
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625168:: @ 8625168
-	 .incbin "baserom.gba", 0x625168, 0x3C
+	 .byte 5, 11, 0xD7, 1
+	 .4byte 0x46
+	 .4byte gUnknown_085EFB94
+	 .4byte NULL
+	 .4byte gUnknown_08625140
+
+gUnknown_0862517C:: @ 862517C
+	.4byte gText_TateLiza_Pokenav_2B2F97
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_TateLiza_Pokenav_2B306E
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_TateLiza_Pokenav_2B3158
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_TateLiza_Pokenav_2B31CD
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_086251A4:: @ 86251A4
-	 .incbin "baserom.gba", 0x6251a4, 0x3C
+	 .byte 5, 13, 0xD8, 1
+	 .4byte 0x47
+	 .4byte gUnknown_085EFB9E
+	 .4byte NULL
+	 .4byte gUnknown_0862517C
+	 
+gUnknown_086251B8:: @ 86251B8
+	.4byte gText_Juan_Pokenav_2B3249
+	.byte 0xFE
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Juan_Pokenav_2B32EC
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Juan_Pokenav_2B33AA
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte gText_Juan_Pokenav_2B341E
+	.byte 0x64
+	.byte 0x8
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_086251E0:: @ 86251E0
-	 .incbin "baserom.gba", 0x6251e0, 0x24
+	 .byte 5, 14, 0xD9, 1
+	 .4byte 0x48
+	 .4byte gUnknown_085EFBA9
+	 .4byte NULL
+	 .4byte gUnknown_086251B8
+	 
+gUnknown_086251F4:: @ 86251F4
+	.4byte gText_Sidney_Pokenav_2B34CC
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625204:: @ 8625204
-	 .incbin "baserom.gba", 0x625204, 0x24
+	 .byte 5, 15, 0xA5, 1
+	 .4byte 0x49
+	 .4byte gUnknown_085EFBB5
+	 .4byte NULL
+	 .4byte gUnknown_086251F4
+	 
+gUnknown_08625218:: @ 8625218
+	.4byte gText_Phoebe_Pokenav_2B3561
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625228:: @ 8625228
-	 .incbin "baserom.gba", 0x625228, 0x24
+	 .byte 5, 15, 0xA6, 1
+	 .4byte 0x4A
+	 .4byte gUnknown_085EFBB5
+	 .4byte NULL
+	 .4byte gUnknown_08625218
+	 
+gUnknown_0862523C:: @ 862523C
+	.4byte gText_Glacia_Pokenav_2B35E4
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_0862524C:: @ 862524C
-	 .incbin "baserom.gba", 0x62524c, 0x24
+	 .byte 5, 15, 0xA7, 1
+	 .4byte 0x4B
+	 .4byte gUnknown_085EFBB5
+	 .4byte NULL
+	 .4byte gUnknown_0862523C
+	 
+gUnknown_08625260:: @ 8625260
+	.4byte gText_Drake_Pokenav_2B368B
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625270:: @ 8625270
-	 .incbin "baserom.gba", 0x625270, 0x24
+	 .byte 5, 15, 0xA8, 1
+	 .4byte 0x4C
+	 .4byte gUnknown_085EFBB5
+	 .4byte NULL
+	 .4byte gUnknown_08625260
+	 
+gUnknown_08625284:: @ 8625284
+	.4byte gText_Wallace_Pokenav_2B3790
+	.byte 0xFF
+	.byte 0xFF
+	.2byte 0xFFFF
+	.4byte NULL
+	.4byte 0xFFFFFFFF
 
 gUnknown_08625294:: @ 8625294
-	 .incbin "baserom.gba", 0x625294, 0x14
+	 .byte 5, 15, 0xA9, 1
+	 .4byte 0x4D
+	 .4byte gUnknown_085EFBC0
+	 .4byte NULL
+	 .4byte gUnknown_08625284
 
 gUnknown_086252A8:: @ 86252A8
 	.4byte gUnknown_08624D7C
@@ -1905,61 +2758,212 @@ gUnknown_08625374:: @ 8625374
 	.4byte sub_81D1B00
 
 gUnknown_08625388:: @ 8625388
-	.incbin "baserom.gba", 0x625388, 0x60
+	.2byte 7, 0x4B, 0xFFFF, 0
+	.4byte gUnknown_085ED453
+	.4byte gUnknown_085ED46B
+	.4byte gUnknown_085ED483
+	.4byte gUnknown_085ED49D
+	.2byte 7, 0x4B, 0x4F6, 0
+	.4byte gUnknown_085ED453
+	.4byte gUnknown_085ED46B
+	.4byte gUnknown_085ED4B3
+	.4byte gUnknown_085ED4CE
+	.2byte 2, 0X3C, 0xFFFF, 0
+	.4byte gUnknown_085ED4E3
+	.4byte gUnknown_085ED4FA
+	.4byte gUnknown_085ED516
+	.4byte gUnknown_085ED52F
+	.2byte 3, 0x3F, 0xFFFF, 0
+	.4byte gUnknown_085ED547
+	.4byte gUnknown_085ED563
+	.4byte gUnknown_085ED579
+	.4byte gUnknown_085ED58F
 
 gUnknown_086253E8:: @ 86253E8
-	.incbin "baserom.gba", 0x6253e8, 0x18
+	.4byte 0x8010100
+	.4byte 0x80F02
+	.4byte 0x8011500
+	.4byte 0x180F12
+	.4byte 0xB010100
+	.4byte 0x180F08
 
 gUnknown_08625400:: @ 8625400
-	.incbin "baserom.gba", 0x625400, 0x3
+	.byte 1, 2, 3
 
 gUnknown_08625403:: @ 8625403
-	.incbin "baserom.gba", 0x625403, 0x1
+	.byte 0xFF
 
 gUnknown_08625404:: @ 8625404
-	.incbin "baserom.gba", 0x625404, 0xc
+	.byte 0x40, 0, 0, 4, 1, 0, 0x60, 0xA6, 1, 0, 0, 0
 
 gUnknown_08625410:: @ 8625410
-	.incbin "baserom.gba", 0x625410, 0x100
+	.byte 4, 5, 6, 7, 8, 9, 9, 0xA, 0xA, 0xB, 0xB, 0xC, 0xC, 0xD, 0xD, 0xD, 0xD, 0xE, 0xE, 0xE, 0xE, 0xF, 0xF, 0xF, 0xF, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x12, 0x12, 0x12, 0x12, 0x12, 0x12, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x15, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x16, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x17, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x19, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1A, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1B, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1C, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1D, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1E, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x22, 0x23
 
 gUnknown_08625510:: @ 8625510
-	.incbin "baserom.gba", 0x625510, 0x30
+	.4byte 0x10010101
+	.4byte 0xA0F0C
+	.4byte 0x10010101
+	.4byte 0xCA0F0C
+	.4byte 0xA011301
+	.4byte 0x18A0F0C
+	.4byte 0x160F0401
+	.4byte 0x2020F04
+	.4byte 0x5081600
+	.4byte 0x25A0F04
+	.4byte 0xFF
+	.4byte NULL
 
 gUnknown_08625540:: @ 8625540
-	.incbin "baserom.gba", 0x625540, 0x8
+	.4byte 0x5081600
+	.4byte 0x25A0F04
 
 gUnknown_08625548:: @ 8625548
-	.incbin "baserom.gba", 0x625548, 0x500
+	.4byte NULL
+	.4byte sub_81D2BD0
+	.4byte NULL
+	.2byte 0
+	.2byte 0
+	.byte 2
+	.byte 0
+	.byte 8
+	.byte 0
+	.4byte 0x1003121
+	
+gUnknown_08625560:: @ 8625560
+	.incbin "graphics/pokenav/pokeball.4bpp"
+
+gUnknown_08625660:: @ 8625660
+	.incbin "graphics/pokenav/8625660.4bpp"
+	
+gUnknown_08625680:: @ 8625680
+	.incbin "graphics/pokenav/sparkle.gbapal"
+	
+gUnknown_086256A0:: @ 86255A0
+	.incbin "graphics/pokenav/sparkle.4bpp"
+	
+gUnknown_08625A20:: @ 8625A20
+	.2byte 0
+	.2byte 0xC000
+	.2byte 0x400
+	.2byte 0
+	
+gUnknown_08625A28:: @ 8625A28
+	.2byte 0
+	.2byte 0x4000
+	.2byte 0x800
+	.2byte 0
+	
+gUnknown_08625A30:: @ 8625A30
+	.2byte 0
+	.2byte 5
+	.2byte 0xFFFF
+	.2byte 0
+	
+gUnknown_08625A38:: @ 8625A38
+	.2byte 4
+	.2byte 5
+	.2byte 0xFFFF
+	.2byte 0
+	
+gUnknown_08625A40:: @ 8625A40
+	.4byte gUnknown_08625A30
+	.4byte gUnknown_08625A38
 
 gUnknown_08625A48:: @ 8625A48
-	.incbin "baserom.gba", 0x625a48, 0x8
+	.4byte NULL
+	.4byte 0x640800
 
 gUnknown_08625A50:: @ 8625A50
-	.incbin "baserom.gba", 0x625a50, 0x18
+	spr_template 0x64, 0x64, gUnknown_08625A20, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_08625A68:: @ 8625A68
-	.incbin "baserom.gba", 0x625a68, 0x8
+	.4byte NULL
+	.4byte 0x64
 
 gUnknown_08625A70:: @ 8625A70
-	.incbin "baserom.gba", 0x625a70, 0x20
+	.4byte gUnknown_08625560
+	.byte 0, 1, 0x65, 0
+	.4byte gUnknown_08625660
+	.2byte 0x20, 0x67
+	.4byte gPokenavConditionCancel_Gfx
+	.byte 0, 1, 0x66, 0
+	.4byte NULL, NULL
 
 gUnknown_08625A90:: @ 8625A90
-	.incbin "baserom.gba", 0x625a90, 0x18
+	.4byte gPokenavConditionCancel_Pal + 0x0
+	.byte 0x65, 0, 0, 0
+	.4byte gPokenavConditionCancel_Pal + 0x20
+	.byte 0x66, 0, 0, 0
+	.4byte NULL, NULL
 
 gUnknown_08625AA8:: @ 8625AA8
-	.incbin "baserom.gba", 0x625aa8, 0x18
+	spr_template 0x65, 0x65, gUnknown_08625A28, gUnknown_08625A40, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_08625AC0:: @ 8625AC0
-	.incbin "baserom.gba", 0x625ac0, 0x8
+	.4byte gUnknown_086256A0
+	.byte 0x80, 3, 0x68, 0
 
 gUnknown_08625AC8:: @ 8625AC8
-	.incbin "baserom.gba", 0x625ac8, 0x4c
+	.4byte gUnknown_08625680
+	.byte 0x68, 0, 0, 0
+	
+gUnknown_08625AD0:: @ 8625AD0
+	.2byte 0
+	.2byte 0x4000
+	.2byte 0
+	.2byte 0
+	
+gUnknown_08625AD8:: @ 8625AD8
+	.2byte 0
+	.2byte 5
+	.2byte 4
+	.2byte 5
+	
+gUnknown_08625AE0:: @ 8625AE0
+	.2byte 8
+	.2byte 5
+	.2byte 12
+	.2byte 5
+	
+gUnknown_08625AE8:: @ 8625AE8
+	.2byte 16
+	.2byte 5
+	.2byte 20
+	.2byte 5
+	
+gUnknown_08625AF0:: @ 8625AF0
+	.2byte 24
+	.2byte 5
+	.2byte 0xFFFF
+	.2byte 0
+	
+gUnknown_08625AF8:: @ 8625AF8
+	.4byte gUnknown_08625AD8
+	.4byte gUnknown_08625AE0
+	
+gUnknown_08625B00:: @ 8625B00
+	.4byte gUnknown_08625AE8
+	.4byte gUnknown_08625AF0
+	
+gUnknown_08625B08:: @ 8625B08
+	.4byte gUnknown_08625AF8
+	.4byte gUnknown_08625B00
+	.4byte gUnknown_08625B08
 
 gUnknown_08625B14:: @ 8625B14
-	.incbin "baserom.gba", 0x625b14, 0x18
+	spr_template 0x68, 0x68, gUnknown_08625AD0, gUnknown_08625AF8, NULL gDummySpriteAffineAnimTable, sub_81D3564
 
 gUnknown_08625B2C:: @ 8625B2C
-	.incbin "baserom.gba", 0x625b2c, 0x28
+	.2byte 0, 0xFFDD
+	.2byte 20, 0xFFE4
+	.2byte 33, 0xFFF6
+	.2byte 33, 10
+	.2byte 20, 28
+	.2byte 0, 35
+	.2byte 0xFFEC, 28
+	.2byte 0xFFDF, 10
+	.2byte 0xFFDF, 0xFFF6
+	.2byte 0xFFEC, 0xFFE4
 
 gUnknown_08625B54:: @ 8625B54
 	.4byte gUnknown_085EEA46
@@ -1970,28 +2974,176 @@ gUnknown_08625B54:: @ 8625B54
 	.4byte gUnknown_085EEA5D
 
 gUnknown_08625B6C:: @ 8625B6C
-	.incbin "baserom.gba", 0x625b6c, 0x520
+@ apparently e-reader trainer data? idk
+.byte 0x6f, 0x57, 0x54, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x0c, 0x01, 0x00, 0x00, 0x00, 0x2e, 0x14, 0x0c, 0x0e, 0x23, 0x10, 0x47, 0x0a, 0x1f, 0x06, 0x24, 0x0e, 0x48, 0x0a, 0x0f, 0x06
+.byte 0x22, 0x27, 0x2c, 0x16, 0x07, 0x06, 0x01, 0x0c, 0x47, 0x0a, 0x06, 0x06, 0x24, 0x0e, 0x00, 0x1e, 0x19, 0x12, 0x05, 0x0c, 0x25, 0x16, 0x25, 0x10, 0x0d, 0x1c, 0x2a, 0x1c, 0x06, 0x0a, 0x06, 0x0c
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+.byte 0xff, 0xff, 0xff, 0x00, 0x70, 0x01, 0xdb, 0x00, 0xbc, 0x00, 0xf7, 0x00, 0xdc, 0x00, 0x19, 0x01, 0x00, 0x00, 0x37, 0xff, 0x64, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x8a
+.byte 0x80, 0x00, 0x00, 0x00, 0x6f, 0x79, 0x69, 0xae, 0x71, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x26, 0x01, 0xb3, 0x00, 0x3e, 0x01, 0xbc, 0x00, 0xf7, 0x00, 0xca, 0x00, 0x00, 0x00, 0x00, 0xff
+.byte 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x0a, 0x06, 0x00, 0x00, 0x00, 0x95, 0x58, 0x59, 0x52, 0x79, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7d, 0x01, 0xb7, 0x00
+.byte 0xf6, 0x00, 0x39, 0x00, 0x59, 0x00, 0x85, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x9b, 0xff, 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x0a, 0x2f, 0x00, 0x00, 0x00, 0x8d, 0xae, 0x77, 0x7e
+.byte 0x5d, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x6a, 0x79, 0x6b, 0x64, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x1b, 0x01, 0x00, 0x00, 0x00, 0x54, 0x27, 0x2b, 0x0e, 0xff, 0xff, 0x3b, 0x0a
+.byte 0x20, 0x06, 0x00, 0x0c, 0x13, 0x24, 0x2b, 0x0e, 0xff, 0xff, 0x3b, 0x0a, 0x05, 0x12, 0x00, 0x0c, 0x6b, 0x26, 0x2b, 0x0e, 0xff, 0xff, 0x3b, 0x0a, 0x0e, 0x12, 0x00, 0x0c, 0x2c, 0x24, 0x2b, 0x0e
+.byte 0xff, 0xff, 0x3b, 0x0a, 0x17, 0x12, 0x00, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x59, 0x01, 0xb7, 0x00, 0xca, 0x00, 0xb9, 0x00, 0x09, 0x00, 0x4a, 0x00, 0x00, 0x00, 0x37, 0x00, 0x64, 0x00, 0xff, 0x64
+.byte 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x0a, 0x8c, 0x00, 0x00, 0x00, 0x69, 0x58, 0x60, 0x5d, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x31, 0x01, 0xb3, 0x00, 0x07, 0x01, 0x4c, 0x01
+.byte 0x62, 0x00, 0x68, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x0a, 0x80, 0x00, 0x00, 0x00, 0x55, 0x55, 0x5d, 0x96, 0x72, 0xff, 0xff, 0xff
+.byte 0xff, 0xff, 0xff, 0xff, 0x44, 0x01, 0x86, 0x00, 0x39, 0x00, 0x59, 0x00, 0x85, 0x00, 0x9c, 0x00, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x0a
+.byte 0x00, 0x00, 0x00, 0x00, 0x65, 0x6f, 0x8e, 0x7e, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x72, 0x52, 0x5a, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x27, 0x01, 0x00, 0x00, 0x00
+.byte 0x4a, 0x04, 0x0e, 0x02, 0x35, 0x16, 0x10, 0x10, 0xda, 0x26, 0x3e, 0x10, 0x4a, 0x04, 0x0e, 0x02, 0x47, 0x0a, 0xd9, 0x26, 0x21, 0x16, 0x3e, 0x10, 0x14, 0x1e, 0x07, 0x1e, 0x30, 0x06, 0x23, 0x16
+.byte 0x24, 0x0e, 0x06, 0x0c, 0x18, 0x14, 0x2f, 0x14, 0x1a, 0x08, 0x27, 0x1c, 0x00, 0x0c, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff
+.byte 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x3c, 0x01, 0x8d, 0x00, 0x2f, 0x00, 0x22, 0x00, 0xf7, 0x00, 0xe7, 0x00
+.byte 0x00, 0x00, 0x00, 0xff, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x0a, 0x03, 0x00, 0x00, 0x00, 0x54, 0x68, 0x5a, 0x7b, 0x7b, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+.byte 0x6b, 0x01, 0xc8, 0x00, 0xca, 0x00, 0x40, 0x01, 0x5c, 0x00, 0x49, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x8a, 0x06, 0x00, 0x00, 0x00
+.byte 0x7b, 0x8f, 0x78, 0x51, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x24, 0x01, 0xb3, 0x00, 0x3e, 0x01, 0x4c, 0x01, 0xd5, 0x00, 0x5e, 0x00, 0x00, 0x00, 0x64, 0xc8, 0x00, 0x00, 0xc8, 0x00
+.byte 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x0a, 0x06, 0x00, 0x00, 0x00, 0x51, 0x8a, 0x6a, 0x7e, 0x64, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x9c, 0x54, 0xae, 0x79, 0xff, 0xff, 0xff, 0xff
+.byte 0x00, 0x00, 0x00, 0x20, 0x01, 0x00, 0x00, 0x00, 0x46, 0x0a, 0x02, 0x06, 0x20, 0x06, 0x0a, 0x0a, 0x23, 0x10, 0x00, 0x0c, 0x28, 0x0c, 0x14, 0x18, 0x32, 0x14, 0x02, 0x16, 0x05, 0x10, 0xff, 0xff
+.byte 0x0c, 0x1e, 0x0a, 0x0a, 0x34, 0x12, 0x11, 0x1e, 0x1a, 0x08, 0x05, 0x0c, 0x1e, 0x0a, 0x02, 0x06, 0x20, 0x06, 0x22, 0x0a, 0x15, 0x10, 0x01, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
+.byte 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x63, 0x01, 0xb3, 0x00
+.byte 0xf2, 0x00, 0x35, 0x00, 0x09, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x64, 0x00, 0xff, 0x9b, 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x8a, 0x00, 0x00, 0x00, 0x00, 0x58, 0x61, 0xae, 0x64
+.byte 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x4b, 0x01, 0xc6, 0x00, 0x39, 0x00, 0xf2, 0x00, 0x26, 0x00, 0x59, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x10
+.byte 0xa5, 0x94, 0x52, 0x0a, 0x96, 0x00, 0x00, 0x00, 0x5b, 0x72, 0x6a, 0x91, 0xae, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x7a, 0x01, 0x8d, 0x00, 0x5e, 0x00, 0xf7, 0x00, 0x55, 0x00, 0x05, 0x01
+.byte 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 0x00, 0x10, 0xa5, 0x94, 0x52, 0x0a, 0x96, 0x00, 0x00, 0x00, 0x8d, 0x85, 0x9e, 0xa0, 0x60, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
 
 gUnknown_0862608C:: @ 862608C
-	.incbin "baserom.gba", 0x62608c, 0x2
+	.2byte 21, 16
+	.2byte 25, 16
+	.2byte 16, 17
+	.2byte 20, 20
+	
+gUnknown_0862609C:: @ 862609C
+	.incbin "data/unknown_jp_62609C.bin"
+	
+gUnknown_08626814:: @ 8626814
+	.incbin "data/pokenav/unk_struct_1.bin"
 
-gUnknown_0862608E:: @ 862608E
-	.incbin "baserom.gba", 0x62608e, 0x4326
+gUnknown_086276FC:: @ 86276FC
+	.incbin "data/pokenav/unk_struct_2.bin"
+
+gUnknown_086285E4:: @ 86285E4
+	.incbin "data/pokenav/unk_struct_3.bin"
+
+gUnknown_086294CC:: @ 86294CC
+	.incbin "data/pokenav/unk_struct_4.bin"
 
 gUnknown_0862A3B4:: @ 862A3B4
-	.incbin "baserom.gba", 0x62a3b4, 0x218
+	.byte 0x03, 0x06, 0x00, 0x00, 0x0B, 0x06, 0x00, 0x00, 0x0D, 0x06, 0x00, 0x00, 0x0F, 0x01, 0x00, 0x00, 0x2B, 0x04, 0x00, 0x00, 0x2D, 0x01, 0x00, 0x00, 0x24, 0x09, 0x00, 0x00, 0x29, 0x04, 0x00, 0x00, 0x05, 0x05, 0x00, 0x00, 0x18, 0x04, 0x00, 0x00, 0x2F, 0x00, 0x00, 0x00, 0x2E, 0x09, 0x00, 0x00, 0x11, 0x0C, 0x00, 0x00, 0x10, 0x0B, 0x00, 0x00, 0x1E, 0x0D, 0x00, 0x00, 0x08, 0x01, 0x00, 0x00, 0x17, 0x03, 0x00, 0x00, 0x0C, 0x04, 0x00, 0x00, 0x38, 0x04, 0x00, 0x00, 0x1C, 0x03, 0x00, 0x00, 0x1A, 0x00, 0x00, 0x00, 0x19, 0x0B, 0x00, 0x00, 0x09, 0x07, 0x00, 0x00, 0x31, 0x07, 0x00, 0x00, 0x35, 0x07, 0x00, 0x00, 0x36, 0x01, 0x00, 0x00, 0x33, 0x00, 0x00, 0x00, 0x2A, 0x03, 0x00, 0x00, 0x16, 0x0D, 0x00, 0x00, 0x0E, 0x03, 0x00, 0x00, 0x15, 0x01, 0x00, 0x00, 0x14, 0x01, 0x00, 0x00, 0x2C, 0x01, 0x00, 0x00, 0x1B, 0x02, 0x00, 0x00, 0x04, 0x01, 0x00, 0x00, 0x07, 0x03, 0x00, 0x00, 0x34, 0x05, 0x00, 0x00, 0x32, 0x00, 0x00, 0x00, 0x37, 0x02, 0x00, 0x00, 0x1D, 0x04, 0x00, 0x00, 0x22, 0x09, 0x00, 0x00, 0x1F, 0x01, 0x00, 0x00, 0x25, 0x00, 0x00, 0x00, 0x0A, 0x04, 0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x06, 0x05, 0x00, 0x00, 0x27, 0x0B, 0x00, 0x00, 0x26, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x12, 0x02, 0x00, 0x00, 0x39, 0x08, 0x00, 0x00, 0x02, 0x0B, 0x00, 0x00, 0x20, 0x01, 0x00, 0x00, 0x21, 0x00, 0x00, 0x00
 
+gUnknown_0862A48C:: @ 862A48C
+	.2byte 0x44, 0x22, 0x14, 0x18, 0x51, 0x3
+	
+gUnknown_0862A498:: @ 862A498
+	.2byte 0xB, 0x22, 0x14, 0x18, 0x51, 3
+	
+gUnknown_0862A4A4:: @ 862A4A4
+	.2byte 0x19, 0x22, 0x14, 0x18, 0x51, 3
+
+gUnknown_0862A4B0:: @ 862A4B0
+	.2byte 0x23, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A4BC:: @ 862A4BC
+	.2byte 0x24, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A4C8:: @ 862A4C8
+	.2byte 0x125, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A4D4:: @ 862A4D4
+	.2byte 0x144, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A4E0:: @ 862A4E0  
+	.2byte 0x126, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A4EC:: @ 862A4EC
+	.2byte 0x12B, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A4F8:: @ 862A4F8
+	.2byte 0x13A, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A504:: @ 862A504
+	.2byte 0x44, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A510:: @ 862A510
+	.2byte 0xB, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A51C:: @ 862A51C	 
+	.2byte 0x19, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A528:: @ 862A528
+	.2byte 0x23, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A534:: @ 862A534
+	.2byte 0x24, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A540:: @ 862A540
+	.2byte 0x13F, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A54C:: @ 862A54C
+	.2byte 0x149, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A558:: @ 862A558
+	.2byte 0x150, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A564:: @ 862A564
+	.2byte 0x133, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A570:: @ 862A570
+	.2byte 0x14D, 0x22, 0x14, 0x18, 0x51, 0x3
+
+gUnknown_0862A57C:: @ 862A57C	
+	.4byte gUnknown_0862A48C
+	.4byte gUnknown_0862A498
+	.4byte gUnknown_0862A4A4
+	.4byte gUnknown_0862A4B0
+	.4byte gUnknown_0862A4BC
+	.4byte gUnknown_0862A4C8
+	.4byte gUnknown_0862A4D4
+	.4byte gUnknown_0862A4E0
+	.4byte gUnknown_0862A4EC
+	.4byte gUnknown_0862A4F8
+
+gUnknown_0862A5A4:: @ 862A5A4
+	.4byte gUnknown_0862A504
+	.4byte gUnknown_0862A510
+	.4byte gUnknown_0862A51C
+	.4byte gUnknown_0862A528
+	.4byte gUnknown_0862A534
+	.4byte gUnknown_0862A540
+	.4byte gUnknown_0862A54C
+	.4byte gUnknown_0862A558
+	.4byte gUnknown_0862A564
+	.4byte gUnknown_0862A570
+	
 gUnknown_0862A5CC:: @ 862A5CC
-	.incbin "baserom.gba", 0x62a5cc, 0x8
+	.4byte gUnknown_0862A57C
+	.4byte gUnknown_0862A5A4
 
 gUnknown_0862A5D4:: @ 862A5D4
-	.incbin "baserom.gba", 0x62a5d4, 0x20
+	.incbin "graphics/pokenav/862A5D4.gbapal"
 
 gUnknown_0862A5F4:: @ 862A5F4
-	.incbin "baserom.gba", 0x62a5f4, 0x4
+	.byte 0, 2, 3, 0
 
 gUnknown_0862A5F8:: @ 862A5F8
-	.incbin "baserom.gba", 0x62a5f8, 0x20
+	.4byte gUnknown_08626814
+	.4byte gUnknown_086276FC
+	.4byte gUnknown_086285E4
+	.4byte gUnknown_086294CC
+	.4byte gUnknown_085EF8B6
+	.4byte gUnknown_085EF8B9
+	.4byte gUnknown_085EF8BC
+	.4byte gUnknown_085EF8BF
 
 gUnknown_0862A618:: @ 862A618
 	.4byte sub_81D581C
@@ -2020,10 +3172,12 @@ gUnknown_0862A660:: @ 862A660
 	.4byte gUnknown_085EB361
 
 gUnknown_0862A670:: @ 862A670
-	.incbin "baserom.gba", 0x62a670, 0x18
+	.byte 0, 0x64
+	.4byte NULL
+	.2byte 0, 0x103, 17, 1, 0, 0, 0, 0, 0
 
 gUnknown_0862A688:: @ 862A688
-	.incbin "baserom.gba", 0x62a688, 0x10
+	.2byte 0x3E, 0, 0x3F, 0, 0x40, 0, 0x41, 0
 
 gUnknown_0862A698:: @ 862A698
-	.incbin "baserom.gba", 0x62a698, 0x8
+	.byte 0, 1, 2, 3, 4, 5, 0, 0

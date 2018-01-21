@@ -518,7 +518,7 @@ _080D4C0A:
 	lsls r1, r4, 4
 	subs r1, r4
 	lsls r1, 6
-	ldr r2, =gUnknown_0857DD04
+	ldr r2, =gMapPopUp_Outline_Table
 	adds r1, r2
 	movs r2, 0x80
 	lsls r2, 3
@@ -541,7 +541,7 @@ _080D4C0A:
 	.pool
 _080D4C6C:
 	lsls r0, r4, 5
-	ldr r1, =gUnknown_0857F384
+	ldr r1, =gMapPopUp_Palette_Table
 	adds r0, r1
 	movs r1, 0xE0
 	movs r2, 0x20
@@ -550,7 +550,7 @@ _080D4C7A:
 	lsls r1, r4, 4
 	subs r1, r4
 	lsls r1, 6
-	ldr r0, =gUnknown_0857C684
+	ldr r0, =gMapPopUp_Table
 	adds r1, r0
 	movs r0, 0x50
 	str r0, [sp]

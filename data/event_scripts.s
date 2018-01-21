@@ -7,6 +7,7 @@
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
+	
 
 	.section script_data, "aw", %progbits
 
@@ -8912,6 +8913,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "You’re an inspiration!\n"
 	.string "See you again!$"
 
+gText_Mom_Pokenav_2B227B:: @ 82B227B
 	.string "MOM: Your father and you…\n"
 	.string "Everyone is captivated by POKéMON.\p"
 	.string "What is the charm of POKéMON?\p"
@@ -8919,6 +8921,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "I adore POKéMON that help me with\l"
 	.string "my everyday chores.$"
 
+gText_Mom_Pokenav_2B2310:: @ 82B2310
 	.string "MOM: Hi, {PLAYER}!\n"
 	.string "Your father keeps himself locked\l"
 	.string "away in the PETALBURG GYM.\p"
@@ -8928,11 +8931,13 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "I’m guessing that losing to you\n"
 	.string "was a big blow to his pride!$"
 
+gText_Mom_Pokenav_2B23F3:: @ 82B23F3
 	.string "MOM: {PLAYER}…\n"
 	.string "Don’t worry about me or the house.\p"
 	.string "Wear those RUNNING SHOES until\n"
 	.string "they fall apart, honey!$"
 
+gText_Roxanne_Pokenav_2B2456:: @ 82B2456
 	.string "ROXANNE: Oh, hello, {PLAYER}!\p"
 	.string "I’ve been hard at work retraining\n"
 	.string "since we met.\p"
@@ -8941,6 +8946,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "But when I do, please visit my GYM\n"
 	.string "for a rematch!$"
 
+gText_Roxanne_Pokenav_2B250E:: @ 82B250E
 	.string "ROXANNE: Is this {PLAYER}?\n"
 	.string "Congratulations!\l"
 	.string "I’ve been hearing about you!\p"
@@ -8949,15 +8955,18 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "But when I do, please visit my GYM\n"
 	.string "for a rematch!$"
 
+gText_Roxanne_Pokenav_2B25C1:: @ 82B25C1
 	.string "ROXANNE: {PLAYER}!\n"
 	.string "My GYM is ready!\p"
 	.string "Please visit RUSTBORO whenever\n"
 	.string "you can!$"
 
+gText_Roxanne_Pokenav_2B2607:: @ 82B2607
 	.string "ROXANNE: At the RUSTBORO GYM,\n"
 	.string "the fact that we battled, {PLAYER},\l"
 	.string "is a matter of pride.$"
 
+gText_Brawly_Pokenav_2B2659:: @ 82B2659
 	.string "BRAWLY: Hey, there, {PLAYER}{STRING 5}!\p"
 	.string "I learned a lot from the battle we\n"
 	.string "had together.\p"
@@ -8968,6 +8977,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "But if I can reopen the GYM,\n"
 	.string "I want you to challenge us again.$"
 
+gText_Brawly_Pokenav_2B275D:: @ 82B275D
 	.string "BRAWLY: Hey, {PLAYER}{STRING 5}!\n"
 	.string "Congratulations!\p"
 	.string "Word about your exploits arrived\n"
@@ -8979,14 +8989,17 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "But if I can reopen the GYM,\n"
 	.string "I want you to challenge us again.$"
 
+gText_Brawly_Pokenav_2B286F:: @ 82B286F
 	.string "BRAWLY: Hey, {PLAYER}{STRING 5}!\n"
 	.string "My GYM’s ready for action!\p"
 	.string "Come back to DEWFORD anytime\n"
 	.string "for another challenge!$"
 
+gText_Brawly_Pokenav_2B28D1:: @ 82B28D1
 	.string "BRAWLY: {PLAYER}{STRING 5}, I don’t think\n"
 	.string "I’ll ever get bored of battling you!$"
 
+gText_Wattson_Pokenav_2B2912:: @ 82B2912
 	.string "WATTSON: Oh, it’s you!\p"
 	.string "After you left, I’ve been redoing\n"
 	.string "my training from scratch.\p"
@@ -8995,6 +9008,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "You’ll have to wait till then!\n"
 	.string "Wahahahaha!$"
 
+gText_Wattson_Pokenav_2B29CA:: @ 82B29CA
 	.string "WATTSON: Wahahahaha!\p"
 	.string "You’ve really done it, haven’t you?\n"
 	.string "I’ve been getting word about you!\p"
@@ -9005,15 +9019,18 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "You’ll have to wait till then!\n"
 	.string "Wahahahaha!$"
 
+gText_Wattson_Pokenav_2B2AB6:: @ 82B2AB6
 	.string "WATTSON: Oh, it’s you!\n"
 	.string "My GYM’s ready!\p"
 	.string "Visit MAUVILLE anytime!\n"
 	.string "Wahahahaha!$"
 
+gText_Wattson_Pokenav_2B2B01:: @ 82B2B01
 	.string "WATTSON: Wahahaha!\p"
 	.string "A battle with you is always charged\n"
 	.string "with shocking power!$"
 
+gText_Flannery_Pokenav_2B2B4D:: @ 82B2B4D
 	.string "FLANNERY: {PLAYER}…\p"
 	.string "When we battled, I learned exactly\n"
 	.string "how immature I was.\p"
@@ -9023,6 +9040,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "When the time comes, {PLAYER},\n"
 	.string "please challenge us again.$"
 
+gText_Flannery_Pokenav_2B2C0E:: @ 82B2C0E
 	.string "FLANNERY: Hello, {PLAYER}?\n"
 	.string "Congratulations!\p"
 	.string "Word of your success has reached\n"
@@ -9033,37 +9051,44 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "appear beside my name in the\l"
 	.string "MATCH CALL list.$"
 
+gText_Flannery_Pokenav_2B2CF1:: @ 82B2CF1
 	.string "FLANNERY: Oh, {PLAYER}?\n"
 	.string "Our GYM’s ready!\p"
 	.string "Come to LAVARIDGE for a soak\n"
 	.string "in the hot spring and a challenge!$"
 
+gText_Flannery_Pokenav_2B2D54:: @ 82B2D54
 	.string "FLANNERY: {PLAYER}…\n"
 	.string "I’m positive that you keep getting\l"
 	.string "better at training every time.$"
 
+gText_Winona_Pokenav_2B2DA4:: @ 82B2DA4
 	.string "WINONA: Hello, {PLAYER}!\p"
 	.string "Thanks to our battle, I’ve come\n"
 	.string "to understand my weak points!\p"
 	.string "When I reopen the GYM, I won’t go\n"
 	.string "down in defeat again!$"
 
+gText_Winona_Pokenav_2B2E2B:: @ 82B2E2B
 	.string "WINONA: You’ve done it, {PLAYER}!\p"
 	.string "News about the new CHAMPION\n"
 	.string "has reached us in FORTREE!\p"
 	.string "But… The next time we battle,\n"
 	.string "it’s not going to end the same way.$"
 
+gText_Winona_Pokenav_2B2EC2:: @ 82B2EC2
 	.string "WINONA: Is this {PLAYER}?\n"
 	.string "Our GYM is back in operation!\p"
 	.string "We’re waiting for you in FORTREE!$"
 
+gText_Winona_Pokenav_2B2F16:: @ 82B2F16
 	.string "WINONA: {PLAYER}…\n"
 	.string "Though I have lost, my wings will\l"
 	.string "never break.\p"
 	.string "Yes, in exactly the same way that\n"
 	.string "you never lost sight of your dream.$"
 
+gText_TateLiza_Pokenav_2B2F97:: @ 82B2F97
 	.string "TATE: Oh! You’re…\n"
 	.string "LIZA: {PLAYER}!\p"
 	.string "TATE: We’re in training again…\n"
@@ -9073,6 +9098,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "TATE: A mark’ll appear by our name…\n"
 	.string "LIZA: On the MATCH CALL list.$"
 
+gText_TateLiza_Pokenav_2B306E:: @ 82B306E
 	.string "TATE: {PLAYER}, congratulations!\n"
 	.string "LIZA: {PLAYER}, congratulations!\p"
 	.string "TATE: The two of us are…\n"
@@ -9082,6 +9108,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "TATE: A mark’ll appear by our name…\n"
 	.string "LIZA: On the MATCH CALL list.$"
 
+gText_TateLiza_Pokenav_2B3158:: @ 82B3158
 	.string "TATE: {PLAYER}!\n"
 	.string "LIZA: {PLAYER}!\p"
 	.string "TATE: Our GYM is ready!\n"
@@ -9089,11 +9116,13 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "TATE: Please come visit…\n"
 	.string "LIZA: MOSSDEEP anytime!$"
 
+gText_TateLiza_Pokenav_2B31CD:: @ 82B31CD
 	.string "TATE: {PLAYER}, the battle we had…\n"
 	.string "LIZA: Is an invaluable experience.\p"
 	.string "TATE: It would be nice if…\n"
 	.string "LIZA: We could all battle again!$"
 
+gText_Juan_Pokenav_2B3249:: @ 82B3249
 	.string "JUAN: Hmm…\n"
 	.string "{PLAYER}{STRING 5}… Was it?\p"
 	.string "Our battle together--it brought\n"
@@ -9102,6 +9131,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "Perhaps you are a genius who may\n"
 	.string "yet surpass WALLACE!$"
 
+gText_Juan_Pokenav_2B32EC:: @ 82B32EC
 	.string "JUAN: Fufu… {PLAYER}{STRING 5}…\n"
 	.string "You’ve finally achieved your goal.\p"
 	.string "My eye for appraising talent wasn’t\n"
@@ -9110,12 +9140,14 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "you, for you have scaled the peak\l"
 	.string "of power and prestige.$"
 
+gText_Juan_Pokenav_2B33AA:: @ 82B33AA
 	.string "JUAN: Hoho… {PLAYER}{STRING 5}…\p"
 	.string "Our SOOTOPOLIS GYM has finally\n"
 	.string "reopened.\p"
 	.string "If you wish to see me, you are\n"
 	.string "welcome to visit anytime.$"
 
+gText_Juan_Pokenav_2B341E:: @ 82B341E
 	.string "JUAN: {PLAYER}{STRING 5}…\p"
 	.string "Like the finest music, the battles\n"
 	.string "we wage together strike chords\l"
@@ -9123,6 +9155,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "When I close my eyes, I see visions\n"
 	.string "of you soaring with the melody…$"
 
+gText_Sidney_Pokenav_2B34CC:: @ 82B34CC
 	.string "SIDNEY: Yo, {PLAYER}!\p"
 	.string "If you want to battle with me\n"
 	.string "again, you come on back whenever\l"
@@ -9130,6 +9163,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "I’ll always be here!\n"
 	.string "I’ll be waiting!$"
 
+gText_Phoebe_Pokenav_2B3561:: @ 82B3561
 	.string "PHOEBE: Hi, {PLAYER}!\p"
 	.string "How about coming back here again\n"
 	.string "sometime?\p"
@@ -9137,6 +9171,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "your bond has grown with your\l"
 	.string "POKéMON.$"
 
+gText_Glacia_Pokenav_2B35E4:: @ 82B35E4
 	.string "GLACIA: Hello, {PLAYER}.\p"
 	.string "I trust you haven’t become\n"
 	.string "complacent with your power?\p"
@@ -9144,6 +9179,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "hot emotions just a little, do come\l"
 	.string "to the POKéMON LEAGUE…$"
 
+gText_Drake_Pokenav_2B368B:: @ 82B368B
 	.string "DRAKE: That voice… {PLAYER}, is it?\n"
 	.string "You sound well…\p"
 	.string "I understand that there is now\n"
@@ -9155,6 +9191,7 @@ BattleFrontier_PokeNav_2B21FC:: @ 82B21FC
 	.string "the POKéMON LEAGUE!\p"
 	.string "Don’t you agree, {PLAYER}?$"
 
+gText_Wallace_Pokenav_2B3790:: @ 82B3790
 	.string "WALLACE: Hello, {PLAYER}{STRING 5}.\n"
 	.string "Have you met STEVEN?\p"
 	.string "He is…\n"
@@ -9197,12 +9234,14 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
 
+gText_May_Pokenav_2B3AB3:: @ 2B3AB3
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\p"
 	.string "MR. BRINEY retired as a SAILOR,\n"
 	.string "but I still see him out on the sea\l"
 	.string "with his pet PEEKO sometimes.\p"
 	.string "He must love the sea still.$"
 
+gText_May_Pokenav_2B3B3F:: @ 2B3B3F
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\p"
 	.string "You know how little towns like\n"
 	.string "PETALBURG and DEWFORD have GYMS?\p"
@@ -9211,6 +9250,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "When they finally build a GYM there,\n"
 	.string "I should apply to be the LEADER.$"
 
+gText_May_Pokenav_2B3C13:: @ 2B3C13
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\p"
 	.string "Do you remember a man named\n"
 	.string "the CUTTER in RUSTBORO?\l"
@@ -9222,11 +9262,13 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "… … … … … …\p"
 	.string "The ROCK SMASH GUY!$"
 
+gText_May_Pokenav_2B3CF3:: @ 2B3CF3
 	.string "MAY: {PLAYER}{STRING 5}?\p"
 	.string "RUSTURF TUNNEL…\n"
 	.string "They named it that because it\l"
 	.string "joins RUSTBORO and VERDANTURF.$"
 
+gText_May_Pokenav_2B3D4B:: @ 2B3D4B
 	.string "MAY: {PLAYER}{STRING 5}, how are you?\p"
 	.string "I’m out on ROUTE 111 now.\p"
 	.string "I’m going to get a rest at an old\n"
@@ -9234,6 +9276,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "She lives just north of\n"
 	.string "the desert.$"
 
+gText_May_Pokenav_2B3DD1:: @ 2B3DD1
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\p"
 	.string "Did you know about the MIRAGE\n"
 	.string "TOWER in the desert?\p"
@@ -9241,18 +9284,21 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "to mysteriously come and go.\p"
 	.string "I wish I could see it.$"
 
+gText_May_Pokenav_2B3E69:: @ 2B3E69
 	.string "MAY: {PLAYER}{STRING 5}, yahoo!\n"
 	.string "I’m on ROUTE 119 now.\p"
 	.string "There’s a big river here, and\n"
 	.string "it often rains.\p"
 	.string "I got soaked!$"
 
+gText_May_Pokenav_2B3ECD:: @ 2B3ECD
 	.string "MAY: {PLAYER}{STRING 5}, hi.\p"
 	.string "MT. PYRE is a memorial to POKéMON\n"
 	.string "whose lives have ended.\p"
 	.string "Maybe as a result, it’s infested\n"
 	.string "with many GHOST-type POKéMON!$"
 
+gText_May_Pokenav_2B3F2B:: @ 2B3F2B
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\p"
 	.string "I was thinking of going to the hot\n"
 	.string "spring in LAVARIDGE.\p"
@@ -9260,12 +9306,14 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "PASS, I ran into some bad-looking\l"
 	.string "characters. The mood was ugly!$"
 
+gText_May_Pokenav_2B3FFB:: @ 2B3FFB
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\n"
 	.string "Did you see the news?\p"
 	.string "They say CAPT. STERN discovered\n"
 	.string "the SEAFLOOR CAVERN while on his\l"
 	.string "submarine expedition.$"
 
+gText_May_Pokenav_2B402B:: @ 2B402B
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\n"
 	.string "Don’t you think it’s neat?\p"
 	.string "Even if you don’t have a boat,\n"
@@ -9275,6 +9323,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "There’s a POKéMON move that lets\n"
 	.string "you go to the bottom of the sea.$"
 
+gText_May_Pokenav_2B414B:: @ 2B414B
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\n"
 	.string "Hope things are okay!\p"
 	.string "Have you been on the sea and\n"
@@ -9285,6 +9334,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "When you get to the other side,\n"
 	.string "come up to the surface. Easy!$"
 
+gText_May_Pokenav_2B4228:: @ 2B4228
 	.string "MAY: Hi, {PLAYER}{STRING 5}!\p"
 	.string "How’s it going?\n"
 	.string "Are you filling your POKéDEX?\p"
@@ -9293,6 +9343,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "And there are three of them!\p"
 	.string "I would love to see even one…$"
 
+gText_May_Pokenav_2B42E0:: @ 2B42E0
 	.string "MAY: {PLAYER}{STRING 5}!\n"
 	.string "I heard the rumors!\p"
 	.string "You beat the SOOTOPOLIS GYM\n"
@@ -9300,6 +9351,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "That means you don’t have far\n"
 	.string "to go, do you?$"
 
+gText_May_Pokenav_2B4350:: @ 2B4350
 	.string "MAY: There isn’t a single TRAINER\n"
 	.string "left in HOENN who doesn’t know who\l"
 	.string "you are, {PLAYER}{STRING 5}!\p"
@@ -9307,6 +9359,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "with you, {PLAYER}{STRING 5}, they’re all\l"
 	.string "surprised!$"
 
+gText_Brendan_Pokenav_2B43EF:: @ 2B43EF
 	.string "BRENDAN: Hey, {PLAYER}!\p"
 	.string "MR. BRINEY retired as a SAILOR,\n"
 	.string "but I still see him out on the sea\l"
@@ -9314,6 +9367,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "I guess he must love\n"
 	.string "the sea still.$"
 
+gText_Brendan_Pokenav_2B4486:: @ 2B4486
 	.string "BRENDAN: Hey, {PLAYER}!\p"
 	.string "I don’t get how little towns like\n"
 	.string "PETALBURG and DEWFORD have GYMS.\p"
@@ -9322,6 +9376,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "When they finally build a GYM there,\n"
 	.string "I should apply to be the LEADER.$"
 
+gText_Brendan_Pokenav_2B4560:: @ 2B4560
 	.string "BRENDAN: Yo, {PLAYER}!\p"
 	.string "Do you remember a guy named\n"
 	.string "the CUTTER in RUSTBORO?\l"
@@ -9333,12 +9388,14 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "… … … … … …\p"
 	.string "The ROCK SMASH GUY!$"
 
+gText_Brendan_Pokenav_2B463F:: @ 2B463F
 	.string "BRENDAN: This voice… {PLAYER}?\p"
 	.string "They gave RUSTURF TUNNEL its name\n"
 	.string "because it joins RUSTBORO and\l"
 	.string "VERDANTURF.\p"
 	.string "Did you know that?$"
 
+gText_Brendan_Pokenav_2B46B7:: @ 2B46B7
 	.string "BRENDAN: {PLAYER}, what’s up?\p"
 	.string "Hey, I’m out on ROUTE 111 now.\p"
 	.string "I’m going to rest up at an old\n"
@@ -9346,6 +9403,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "If you’re in the area, you should\n"
 	.string "visit her, too.$"
 
+gText_Brendan_Pokenav_2B4761:: @ 2B4761
 	.string "BRENDAN: Hey, {PLAYER}!\p"
 	.string "Did you know about the MIRAGE\n"
 	.string "TOWER in the desert?\p"
@@ -9353,18 +9411,21 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "seen only sometimes.\p"
 	.string "I’d like to see that!$"
 
+gText_Brendan_Pokenav_2B47F4:: @ 2B47F4
 	.string "BRENDAN: Who’s this? Oh, {PLAYER}?\n"
 	.string "Guess what? I’m on ROUTE 119 now.\p"
 	.string "There’s a big river here, and\n"
 	.string "it rains all the time.\p"
 	.string "I got soaked to the bone!$"
 
+gText_Brendan_Pokenav_2B4882:: @ 2B4882
 	.string "BRENDAN: {PLAYER}!\p"
 	.string "MT. PYRE is a memorial to POKéMON\n"
 	.string "whose lives have ended.\p"
 	.string "That’s probably why it’s infested\n"
 	.string "with many GHOST-type POKéMON!$"
 
+gText_Brendan_Pokenav_2B4909:: @ 2B4909
 	.string "BRENDAN: Hey there, {PLAYER}.\p"
 	.string "I was on my way back to the hot\n"
 	.string "spring in LAVARIDGE.\p"
@@ -9373,12 +9434,14 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "Those creeps…\n"
 	.string "I think they were TEAM MAGMA.$"
 
+gText_Brendan_Pokenav_2B49C4:: @ 2B49C4
 	.string "BRENDAN: Hi, {PLAYER}!\n"
 	.string "Did you catch the news?\p"
 	.string "They say CAPT. STERN discovered\n"
 	.string "the SEAFLOOR CAVERN while on his\l"
 	.string "submarine expedition.$"
 
+gText_Brendan_Pokenav_2B4A44:: @ 2B4A44
 	.string "BRENDAN: Hey there, {PLAYER}!\n"
 	.string "Don’t you think it’s awesome?\p"
 	.string "Even if you don’t have a boat,\n"
@@ -9388,6 +9451,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "travel to the bottom of the sea.\p"
 	.string "Man, POKéMON can do anything!$"
 
+gText_Brendan_Pokenav_2B4B28:: @ 2B4B28
 	.string "BRENDAN: Howdy, {PLAYER}!\n"
 	.string "How are you holding up?\p"
 	.string "Ever found your way to the other\n"
@@ -9397,6 +9461,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "When you get to the other side,\n"
 	.string "come up to the surface. Simple!$"
 
+gText_Brendan_Pokenav_2B4C15:: @ 2B4C15
 	.string "BRENDAN: Hey there, {PLAYER}!\p"
 	.string "How’s it going? Filling up your\n"
 	.string "POKéDEX successfully?\p"
@@ -9405,12 +9470,14 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "And not just one--three!\p"
 	.string "I’d love to catch even one…$"
 
+gText_Brendan_Pokenav_2B4CD8:: @ 2B4CD8
 	.string "BRENDAN: {PLAYER}!\n"
 	.string "I heard the rumors!\p"
 	.string "You beat the SOOTOPOLIS GYM\n"
 	.string "LEADER? Awesome!\p"
 	.string "You’re getting awful close now!$"
 
+gText_Brendan_Pokenav_2B4D46:: @ 2B4D46
 	.string "BRENDAN: There isn’t a TRAINER in\n"
 	.string "all of HOENN who doesn’t know who\l"
 	.string "you are, {PLAYER}!\p"
@@ -9418,16 +9485,19 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "with you, {PLAYER}, they get pretty\l"
 	.string "envious!$"
 
+gText_Wally_Pokenav_2B4DE2:: @ 2B4DE2
 	.string "WALLY: Oh, {PLAYER}!\p"
 	.string "I’ve been getting healthier and\n"
 	.string "more physically fit.\p"
 	.string "I hope I can become a TRAINER like\n"
 	.string "you soon, {PLAYER}!$"
 
+gText_Wally_Pokenav_2B4E57:: @ 2B4E57
 	.string "WALLY: {PLAYER}, hello!\p"
 	.string "After RUSTURF TUNNEL went\n"
 	.string "through, WANDA’s been very happy!$"
 
+gText_Wally_Pokenav_2B4EA5:: @ 2B4EA5
 	.string "WALLY: Oh, {PLAYER}!\p"
 	.string "I… I left my uncle’s place in\n"
 	.string "VERDANTURF without telling anyone.\p"
@@ -9435,6 +9505,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "{PLAYER}, you understand how\n"
 	.string "I feel, don’t you?$"
 
+gText_Wally_Pokenav_2B4F41:: @ 2B4F41
 	.string "WALLY: {PLAYER}?\n"
 	.string "It’s me, WALLY!\p"
 	.string "The world of TRAINERS is amazing!\p"
@@ -9443,6 +9514,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "It’s as if everyone’s getting\n"
 	.string "connected through POKéMON!$"
 
+gText_Wally_Pokenav_2B4FF3:: @ 2B4FF3
 	.string "WALLY: {PLAYER}? It’s awesome!\n"
 	.string "That RALTS we caught together?\l"
 	.string "It evolved, {PLAYER}!\p"
@@ -9452,11 +9524,13 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "After all, it’s the POKéMON that\n"
 	.string "should be praised!$"
 
+gText_Wally_Pokenav_2B50B1:: @ 2B50B1
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
 	.string "WALLY appears to be out of\n"
 	.string "the POKéNAV’s service area…$"
 
+gText_Wally_Pokenav_2B5100:: @ 2B5100
 	.string "WALLY: Oh, {PLAYER}!\p"
 	.string "Before I met you, I hardly ever\n"
 	.string "left my house…\p"
@@ -9465,6 +9539,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "{PLAYER}…\n"
 	.string "Thank you…$"
 
+gText_Scott_Pokenav_2B5184:: @ 2B5184
 	.string "SCOTT: Howdy, {PLAYER}{STRING 5}!\p"
 	.string "You know how POKéMON can be found\n"
 	.string "everywhere?\p"
@@ -9475,6 +9550,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "As a result, I have to hurry\n"
 	.string "everywhere, too. Busy, busy!$"
 
+gText_Scott_Pokenav_2B5275:: @ 2B5275
 	.string "SCOTT: I’m on ROUTE 119 right now.\n"
 	.string "It’s teeming with TRAINERS!\p"
 	.string "It’s also overgrown with tall grass\n"
@@ -9482,6 +9558,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "Walking around in shorts here\n"
 	.string "makes me all ticklish!$"
 
+gText_Scott_Pokenav_2B5323:: @ 2B5323
 	.string "SCOTT: Hi, hi, {PLAYER}{STRING 5}!\p"
 	.string "Have you had the chance to climb\n"
 	.string "MT. PYRE?\p"
@@ -9490,6 +9567,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "It’s somewhere every TRAINER\n"
 	.string "should climb to the top of once.$"
 
+gText_Scott_Pokenav_2B53DB:: @ 2B53DB
 	.string "SCOTT: Hi, {PLAYER}{STRING 5}!\p"
 	.string "I’ve been hearing about these odd\n"
 	.string "gangs being a nuisance.\p"
@@ -9499,6 +9577,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "skilled TRAINERS among them.\p"
 	.string "…But if they’re thugs…$"
 
+gText_Scott_Pokenav_2B54A5:: @ 2B54A5
 	.string "SCOTT: Oh, hi, {PLAYER}{STRING 5}.\p"
 	.string "Might there be tough TRAINERS\n"
 	.string "at the bottom of the sea?\p"
@@ -9506,6 +9585,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "I can’t swim, for one.\l"
 	.string "And I don’t raise POKéMON…$"
 
+gText_Scott_Pokenav_2B5541:: @ 2B5541
 	.string "SCOTT: Hi, hi, {PLAYER}{STRING 5}!\p"
 	.string "You know that you can challenge\n"
 	.string "the POKéMON LEAGUE when you’ve\l"
@@ -9522,17 +9602,20 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "the POKéMON LEAGUE into the HALL\l"
 	.string "OF FAME!$"
 
+gText_Scott_Pokenav_2B56CA:: @ 2B56CA
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
 	.string "SCOTT appears to be out of\n"
 	.string "the POKéNAV’s service area…$"
 
+gText_Norman_Pokenav_2B5719:: @ 82B5719
 	.string "DAD: In RUSTBORO, there’s a man\n"
 	.string "that goes by the odd name of\l"
 	.string "the CUTTER.\p"
 	.string "If you’re in the area, you should\n"
 	.string "pay him a visit.$"
 
+gText_Norman_Pokenav_2B5795:: @ 82B5795
 	.string "DAD: Hm… Little by little, but also\n"
 	.string "very surely, you’re getting\l"
 	.string "tougher, {PLAYER}.\p"
@@ -9541,6 +9624,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "and me…\p"
 	.string "This feeling is hard to explain.$"
 
+gText_Norman_Pokenav_2B584D:: @ 82B584D
 	.string "DAD: I see…\n"
 	.string "You’ve collected four GYM BADGES…\p"
 	.string "There’s no avoiding it now.\n"
@@ -9548,6 +9632,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "Come anytime.\n"
 	.string "We’ll all be waiting for you!$"
 
+gText_Norman_Pokenav_2B58E3:: @ 82B58E3
 	.string "DAD: {PLAYER}! You’d better go visit\n"
 	.string "Mother every so often.\p"
 	.string "I’m going to remain here and\n"
@@ -9555,23 +9640,27 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "The way of battling is deep\n"
 	.string "and unforgiving!$"
 
+gText_Norman_Pokenav_2B5979:: @ 82B5979
 	.string "DAD: Oh, hi, {PLAYER}!\p"
 	.string "What’s that? MAGMA EMBLEM?\n"
 	.string "I don’t know what that’s about.\p"
 	.string "But with a name like that, it may\n"
 	.string "be somehow linked to a volcano!$"
 
+gText_Norman_Pokenav_2B5A07:: @ 82B5A07
 	.string "DAD: Hiyah! Haah! Dwah!\p"
 	.string "…Oh? {PLAYER}!\p"
 	.string "You caught me right in the middle\n"
 	.string "of a POKéMON training session!$"
 
+gText_Norman_Pokenav_2B5A69:: @ 82B5A69
 	.string "DAD: {PLAYER}!\p"
 	.string "Who would’ve thought you’d become\n"
 	.string "the POKéMON LEAGUE CHAMPION…\p"
 	.string "Okay!\n"
 	.string "I won’t be left behind!$"
 
+gText_Norman_Pokenav_2B5ACF:: @ 82B5ACF
 	.string "DAD: Hm? {PLAYER}?\n"
 	.string "What good timing!\p"
 	.string "This time, I’m going to challenge\n"
@@ -9579,9 +9668,11 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "I’m waiting in the PETALBURG GYM.\n"
 	.string "Accept my challenge anytime!$"
 
+gText_Norman_Pokenav_2B5B5E:: @ 82B5B5E
 	.string "DAD: …You amaze me, {PLAYER}.\n"
 	.string "How much higher will you soar?$"
 
+gText_Steven_Pokenav_2B5B95:: @ 82B5B95
 	.string "STEVEN: Hi, {PLAYER}{STRING 5}!\p"
 	.string "Have you been to MAUVILLE\n"
 	.string "already?\p"
@@ -9592,12 +9683,14 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "You may make a new discovery\n"
 	.string "there.$"
 
+gText_Steven_Pokenav_2B5C53:: @ 82B5C53
 	.string "STEVEN: Hi, {PLAYER}{STRING 5}!\p"
 	.string "I’ve met a lot of different\n"
 	.string "TRAINERS so far.\p"
 	.string "But you’re one of a kind.\n"
 	.string "You’re not like anyone else.$"
 
+gText_Steven_Pokenav_2B5CC9:: @ 82B5CC9
 	.string "STEVEN: Hi, {PLAYER}{STRING 5}!\p"
 	.string "When you’re on an adventure with\n"
 	.string "your POKéMON, what do you think?\p"
@@ -9608,6 +9701,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "Depending on how you think, your\n"
 	.string "adventure’s significance changes.$"
 
+gText_Steven_Pokenav_2B5DB4:: @ 82B5DB4
 	.string "STEVEN: Hello?\n"
 	.string "{PLAYER}{STRING 5}?\p"
 	.string "I’m involved in a spot of trouble\n"
@@ -9615,6 +9709,7 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "I’m sorry, but I can’t talk now.\n"
 	.string "Bye!$"
 
+gText_Steven_Pokenav_2B5E26:: @ 82B5E26
 	.string "STEVEN: Oh!\n"
 	.string "{PLAYER}{STRING 5}!\p"
 	.string "There’s no need to talk.\n"
@@ -9622,10 +9717,12 @@ MossdeepCity_SpaceCenter_2F_Text_2B39C6: @ 82B39C6
 	.string "You have to believe in yourself\n"
 	.string "and do what’s right.$"
 
+gText_Steven_Pokenav_2B5EA2:: @ 82B5EA2
 	.string "… … … … … …\p"
 	.string "STEVEN appears not to be getting\n"
 	.string "the call…$"
 
+gText_Steven_Pokenav_2B5ED9:: @ 82B5ED9
 	.string "STEVEN: {PLAYER}{STRING 5}… Congratulations\n"
 	.string "for entering the HALL OF FAME.\p"
 	.string "… … … … … …\n"
@@ -9652,6 +9749,7 @@ Route101_Text_2B603A: @ 82B603A
 	.string "the POKéDEX and POKéNAV, studying\l"
 	.string "POKéMON becomes more fun, eh?$"
 
+gText_MrStone_Pokenav_2B60C0:: @ 82B60C0
 	.string "MR. STONE: Oh? {PLAYER}{STRING 5}!\p"
 	.string "Since you called me, the POKéNAV\n"
 	.string "must be working properly!\p"
@@ -9666,6 +9764,7 @@ Route101_Text_2B603A: @ 82B603A
 	.string "Wahahaha!\n"
 	.string "See you again!$"
 
+gText_MrStone_Pokenav_2B61E6:: @ 82B61E6
 	.string "MR. STONE: Oh? {PLAYER}{STRING 5}!\p"
 	.string "What’s wrong? Have you forgotten\n"
 	.string "about that little errand of mine?\p"
@@ -9677,6 +9776,7 @@ Route101_Text_2B603A: @ 82B603A
 	.string "Now, since I am a busy PRESIDENT,\n"
 	.string "I have to go! Bye-bye!$"
 
+gText_MrStone_Pokenav_2B6302:: @ 82B6302
 	.string "MR. STONE: Oh! {PLAYER}{STRING 5}!\p"
 	.string "Ah, so you’ve met STEVEN!\n"
 	.string "I’d better reward you, then!\p"
@@ -9684,6 +9784,7 @@ Route101_Text_2B603A: @ 82B603A
 	.string "come see me at my office.\p"
 	.string "I’ll be waiting for you!$"
 
+gText_MrStone_Pokenav_2B63A0:: @ 82B63A0
 	.string "MR. STONE: Oh! {PLAYER}{STRING 5}!\p"
 	.string "Did you know that DEVON was\n"
 	.string "digging the RUSTURF TUNNEL?\p"
@@ -9694,12 +9795,14 @@ Route101_Text_2B603A: @ 82B603A
 	.string "live in peace than worry about our\l"
 	.string "own convenience.$"
 
+gText_MrStone_Pokenav_2B64A2:: @ 82B64A2
 	.string "MR. STONE: Hello, hello, {PLAYER}{STRING 5}!\p"
 	.string "I heard from someone in PETALBURG\n"
 	.string "that you’re NORMAN’s child!\p"
 	.string "No wonder you’re such a capable\n"
 	.string "being!$"
 
+gText_MrStone_Pokenav_2B6526:: @ 82B6526
 	.string "MR. STONE: What’s that?\p"
 	.string "You battled your own father and\n"
 	.string "defeated him?\p"
@@ -9707,6 +9810,7 @@ Route101_Text_2B603A: @ 82B603A
 	.string "I had no idea that I befriended\n"
 	.string "someone so special! Wahaha!$"
 
+gText_MrStone_Pokenav_2B65BB:: @ 82B65BB
 	.string "Hello!\n"
 	.string "This is DEVON CORPORATI…\l"
 	.string "Oh, hello, {PLAYER}!\p"
@@ -9715,18 +9819,21 @@ Route101_Text_2B603A: @ 82B603A
 	.string "Our PRESIDENT is busy, but you\n"
 	.string "seem to be just as busy, {PLAYER}.$"
 
+gText_MrStone_Pokenav_2B6664:: @ 82B6664
 	.string "…Huh? …What’s that?\p"
 	.string "GROU… Yes? …DON?\p"
 	.string "You’re breaking up…\n"
 	.string "…can’t hear…\p"
 	.string "BZZZZ…$"
 
+gText_MrStone_Pokenav_2B66B1:: @ 82B66B1
 	.string "…Huh? …What’s that?\p"
 	.string "Seaflo… Yes? …Caver…?\p"
 	.string "You’re breaking up…\n"
 	.string "…can’t hear…\p"
 	.string "BZZZZ…$"
 
+gText_MrStone_Pokenav_2B6703:: @ 82B6703
 	.string "MR. STONE: {PLAYER}{STRING 5}! It’s me!\p"
 	.string "You were apparently involved in all\n"
 	.string "sorts of things, but I, being busy,\l"
@@ -9736,6 +9843,7 @@ Route101_Text_2B603A: @ 82B603A
 	.string "I’ll always be in your corner!\n"
 	.string "Take care!$"
 
+gText_MrStone_Pokenav_2B67ED:: @ 82B67ED
 	.string "MR. STONE: … … … … … …\n"
 	.string "Is this maybe {PLAYER}{STRING 5}?\p"
 	.string "Your voice is so full of confidence,\n"
