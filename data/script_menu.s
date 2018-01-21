@@ -578,7 +578,7 @@ gUnknown_0858B758:: @ 58B758
 
 
 gUnknown_0858B760:: @ 858B760
-	.4byte 0x0858abd8, 3
+	.4byte gUnknown_0858ABD8, 3
 	.4byte gUnknown_0858B758, 1
 	.4byte gUnknown_0858ABF0, 3
 	.4byte gUnknown_0858AC08, 4
