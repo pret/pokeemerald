@@ -405,7 +405,7 @@ SECTIONS {
         data/field_map_obj.o(.rodata);
         data/field_ground_effect.o(.rodata);
         data/map_obj_8097404.o(.rodata);
-        data/text_window.o(.rodata);
+        src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
         data/coord_event_weather.o(.rodata);
         data/field_tasks.o(.rodata);

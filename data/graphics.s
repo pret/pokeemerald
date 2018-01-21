@@ -5041,7 +5041,7 @@ gUnknown_08DDD704:: @ 8DDD704
 	.incbin "graphics/unknown/unknown_DDD704.bin" @ textbox tilemap??
 
 	.align 2
-gUnknown_08DDD728:: @ 8DDD728
+gMessageBox_Pal:: @ 8DDD728
 	.incbin "graphics/text_window/message_box.gbapal"
 
 	.align 2

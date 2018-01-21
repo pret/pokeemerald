@@ -262,9 +262,7 @@ void CB2_InitOptionMenu(void)
 static void Task_OptionMenuFadeIn(u8 taskId)
 {
     if (!gPaletteFade.active)
-    {
         gTasks[taskId].func = Task_OptionMenuProcessInput;
-    }
 }
 
 static void Task_OptionMenuProcessInput(u8 taskId)
@@ -517,12 +515,11 @@ static void Sound_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_SoundStereo, GetStringRightAlignXOffset(1, gText_SoundStereo, 198), 48, styles[1]);
 }
 
-// TODO: 19 should be defined in text_window.h
 static u8 FrameType_ProcessInput(u8 selection)
 {
     if (gMain.newKeys & DPAD_RIGHT)
     {
-        if (selection < 19)
+        if (selection < WINDOW_FRAMES_COUNT - 1)
             selection++;
         else
             selection = 0;
@@ -536,7 +533,7 @@ static u8 FrameType_ProcessInput(u8 selection)
         if (selection != 0)
             selection--;
         else
-            selection = 19;
+            selection = WINDOW_FRAMES_COUNT - 1;
 
         LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
         LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
@@ -601,7 +598,7 @@ static u8 ButtonMode_ProcessInput(u8 selection)
 
 static void ButtonMode_DrawChoices(u8 selection)
 {
-    s32 widthNormal, widthLR, widthLA, yLR;
+    s32 widthNormal, widthLR, widthLA, xLR;
     u8 styles[3];
 
     styles[0] = 0;
@@ -616,8 +613,8 @@ static void ButtonMode_DrawChoices(u8 selection)
     widthLA = GetStringWidth(1, gText_ButtonTypeLEqualsA, 0);
 
     widthLR -= 94;
-    yLR = (widthNormal - widthLR - widthLA) / 2 + 104;
-    DrawOptionMenuChoice(gText_ButtonTypeLR, yLR, 64, styles[1]);
+    xLR = (widthNormal - widthLR - widthLA) / 2 + 104;
+    DrawOptionMenuChoice(gText_ButtonTypeLR, xLR, 64, styles[1]);
 
     DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(1, gText_ButtonTypeLEqualsA, 198), 64, styles[2]);
 }
