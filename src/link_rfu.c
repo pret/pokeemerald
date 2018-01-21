@@ -4477,3 +4477,74 @@ bool32 sub_8010EC0(void)
     }
     return retval;
 }
+
+bool32 sub_8010F1C(void)
+{
+    bool32 retval = FALSE;
+    if (gUnknown_03005000.unk_ef == 0)
+    {
+        if (gUnknown_03005000.unk_0c == 1)
+            retval = sub_800F1E0();
+        sub_8010DB4();
+    }
+    return retval;
+}
+
+void sub_8010F48(void)
+{
+    StringCopy(gUnknown_02022B22, gSaveBlock2Ptr->playerName);
+}
+
+void sub_8010F60(void)
+{
+    gUnknown_02022B14 = (struct UnkLinkRfuStruct_02022B14){};
+    sub_800DD94(&gUnknown_02022B14, 0, 0, 0);
+}
+
+void sub_8010F84(u8 a0, u32 a1, u32 a2)
+{
+    sub_800DD94(&gUnknown_02022B14, a0, a2, a1);
+}
+
+void sub_8010FA0(bool32 a0, bool32 a1)
+{
+    gUnknown_02022B14.unk_00_4 = a0;
+    gUnknown_02022B14.unk_00_5 = a1;
+}
+
+void sub_8010FCC(u32 a0, u32 a1, u32 a2)
+{
+    gUnknown_02022B14.unk_09_2 = a0;
+    gUnknown_02022B14.unk_08_0 = a1;
+    gUnknown_02022B14.unk_0b_1 = a2;
+}
+
+u8 sub_801100C(int a0)
+{
+    u8 retval = 0x80;
+    retval |= (gLinkPlayers[a0].gender << 3);
+    retval |= (gLinkPlayers[a0].trainerId & 7);
+    return retval;
+}
+
+void sub_801103C(void)
+{
+    struct UnkLinkRfuStruct_02022B14 *r5 = &gUnknown_02022B14;
+    int i;
+
+    for (i = 1; i < GetLinkPlayerCount(); i++)
+        r5->unk_04[i - 1] = sub_801100C(i);
+}
+
+void sub_8011068(u8 a0)
+{
+    gUnknown_02022B14.unk_0a_7 = a0;
+    rfu_REQ_configGameData(0, 2, &gUnknown_02022B14, gUnknown_02022B22);
+}
+
+void sub_8011090(u8 a0, u32 a1, u32 a2)
+{
+    if (a0)
+        sub_8010F84(a0, a1, a2);
+    rfu_REQ_configGameData(0, 2, &gUnknown_02022B14, gUnknown_02022B22);
+}
