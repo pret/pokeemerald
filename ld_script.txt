@@ -205,7 +205,7 @@ SECTIONS {
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
         src/save.o(.text);
-        asm/mystery_event_script.o(.text);
+        src/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/battle_anim_sound_tasks.o(.text);
@@ -288,7 +288,7 @@ SECTIONS {
         data/battle_scripts_2.o(script_data);
         data/battle_ai_scripts.o(script_data);
         data/contest_ai_scripts.o(script_data);
-        data/script_funcs.o(script_data);
+        data/mystery_event_script_cmd_table.o(script_data);
     } =0
 
     lib_text :
@@ -542,6 +542,7 @@ SECTIONS {
         src/unk_transition.o(.rodata);
         data/link_strings.o(.rodata);
         data/fonts.o(.rodata);
+        src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
