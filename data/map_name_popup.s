@@ -15,3 +15,9 @@ gUnknown_0857F384:: @ 857F384
 
 gUnknown_0857F444:: @ 857F444
 	.incbin "baserom.gba", 0x57f444, 0x20
+
+gUnknown_0857F464:: @ 857F464
+	.incbin "baserom.gba", 0x57f464, 0xe0
+
+gUnknown_0857F544:: @ 857F544
+	.incbin "baserom.gba", 0x57f544, 0x20

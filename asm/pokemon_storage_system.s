@@ -5393,7 +5393,7 @@ _080CA0C2:
 	thumb_func_start sub_80CA0C8
 sub_80CA0C8: @ 80CA0C8
 	push {lr}
-	ldr r0, =gUnknown_08572744
+	ldr r0, =gWaveformSpritePalette
 	bl LoadSpritePalette
 	pop {r0}
 	bx r0
@@ -5498,7 +5498,7 @@ sub_80CA154: @ 80CA154
 sub_80CA1C4: @ 80CA1C4
 	push {r4,lr}
 	sub sp, 0x8
-	ldr r0, =gUnknown_0857274C
+	ldr r0, =gWaveformSpriteSheet
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [sp]
@@ -10135,7 +10135,7 @@ _080CC7E6:
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_085775B8
+	ldr r1, =gWallpaperTable
 	adds r6, r0, r1
 	ldr r0, [r6, 0x4]
 	ldr r1, [r7]
@@ -10646,7 +10646,7 @@ _080CCC70:
 	adds r1, r6, r1
 	lsls r1, 16
 	asrs r1, 16
-	ldr r0, =gUnknown_0857B0A8
+	ldr r0, =gSpriteTemplate_857B0A8
 	movs r2, 0x1C
 	movs r3, 0x18
 	bl CreateSprite
@@ -10720,7 +10720,7 @@ sub_80CCCFC: @ 80CCCFC
 	ldr r0, =0x00030200
 	str r0, [r3, 0x4]
 	add r1, sp, 0x4
-	ldr r0, =gUnknown_0857B0A8
+	ldr r0, =gSpriteTemplate_857B0A8
 	ldm r0!, {r5-r7}
 	stm r1!, {r5-r7}
 	ldm r0!, {r5-r7}
@@ -16240,14 +16240,14 @@ sub_80CFC14: @ 80CFC14
 	push {r4-r6,lr}
 	sub sp, 0x2C
 	mov r1, sp
-	ldr r0, =gUnknown_0857B9E4
+	ldr r0, =gHandCursorSpriteSheets
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
 	add r4, sp, 0x18
 	adds r1, r4, 0
-	ldr r0, =gUnknown_0857B9FC
+	ldr r0, =gHandCursorSpritePalettes
 	ldm r0!, {r2,r3,r5}
 	stm r1!, {r2,r3,r5}
 	ldr r0, [r0]
@@ -16279,7 +16279,7 @@ sub_80CFC14: @ 80CFC14
 	adds r2, r4, 0
 	adds r3, r5, 0
 	bl sub_80CD444
-	ldr r0, =gUnknown_0857BA50
+	ldr r0, =gSpriteTemplate_857BA50
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	movs r3, 0
@@ -16353,7 +16353,7 @@ _080CFD3C:
 	movs r3, 0x15
 	movs r4, 0x2
 _080CFD40:
-	ldr r0, =gUnknown_0857BA68
+	ldr r0, =gSpriteTemplate_857BA68
 	movs r1, 0
 	movs r2, 0
 	bl CreateSprite
@@ -18324,7 +18324,7 @@ sub_80D0C60: @ 80D0C60
 	orrs r0, r1
 	str r0, [r2, 0x4]
 	mov r1, sp
-	ldr r0, =gUnknown_0857BC70
+	ldr r0, =gSpriteTemplate_857BC70
 	ldm r0!, {r4-r6}
 	stm r1!, {r4-r6}
 	ldm r0!, {r4-r6}
@@ -21660,7 +21660,7 @@ sub_80D2644: @ 80D2644
 	mov r2, r9
 	ldr r1, [r2]
 	adds r5, r1
-	ldr r2, =gUnknown_0857BC88
+	ldr r2, =gSpriteTemplate_857BC88
 	lsls r4, 2
 	lsls r1, r0, 4
 	adds r4, r1

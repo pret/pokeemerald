@@ -760,4 +760,4 @@ gUnknown_0858BBE0:: @ 858BBE0
 	.incbin "baserom.gba", 0x58bbe0, 0xc
 
 gUnknown_0858BBEC:: @ 858BBEC
-	.incbin "baserom.gba", 0x58bbec, 0x18c
+	.incbin "baserom.gba", 0x58bbec, 0xc
