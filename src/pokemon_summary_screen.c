@@ -75,7 +75,7 @@ extern u8 sub_81221AC();
 extern void SetVBlankHBlankCallbacksToNull();
 extern void ResetVramOamAndBgCntRegs();
 extern void clear_scheduled_bg_copies_to_vram();
-extern void remove_some_task();
+extern void ScanlineEffect_Stop();
 extern void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable);
 extern void ShowBg(u8 a);
 extern void SetGpuReg(u8 regOffset, u16 value);
@@ -455,7 +455,7 @@ bool8 sub_81BFB10(void)
         gMain.state++;
         break;
     case 1:
-        remove_some_task();
+        ScanlineEffect_Stop();
         gMain.state++;
         break;
     case 2:

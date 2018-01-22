@@ -266,7 +266,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     sub_80356D0();
     LoadBattleTextboxAndBackground();
     ResetSpriteData();
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     FreeAllSpritePalettes();
 

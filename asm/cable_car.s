@@ -88,7 +88,7 @@ _0814FD20:
 	bl SetVBlankCallback
 	movs r0, 0
 	bl sub_8150B6C
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	movs r3, 0xC0
 	lsls r3, 19
 	movs r4, 0xC0

@@ -263,7 +263,7 @@ gSpriteAnimTable_861CF60:: @ 861CF60
 
 	.align 2
 gUnknown_0861CFBC:: @ 861CFBC
-	obj_tiles 0x08d971b0, 0x1700, 0x7532
+	obj_tiles gMoveTypes_Gfx, 0x1700, 0x7532
 
 	.align 2
 gUnknown_0861CFC4:: @ 861CFC4

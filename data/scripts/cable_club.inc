@@ -1648,15 +1648,15 @@ OldaleTown_PokemonCenter_2F_Text_277EF1: @ 8277EF1
 	.string "Which of our services do you wish\n"
 	.string "to use?$"
 
-OldaleTown_PokemonCenter_2F_Text_277F1B: @ 8277F1B
+OldaleTown_PokemonCenter_2F_Text_277F1B:: @ 8277F1B
 	.string "Trade POKéMON with another player\n"
 	.string "using a GBA Game Link cable.$"
 
-OldaleTown_PokemonCenter_2F_Text_277F5A: @ 8277F5A
+OldaleTown_PokemonCenter_2F_Text_277F5A:: @ 8277F5A
 	.string "You may battle another TRAINER\n"
 	.string "using a GBA Game Link cable.$"
 
-OldaleTown_PokemonCenter_2F_Text_277F96: @ 8277F96
+OldaleTown_PokemonCenter_2F_Text_277F96:: @ 8277F96
 	.string "You can use the RECORD CORNER with\n"
 	.string "others using a GBA Game Link cable.$"
 
@@ -1826,19 +1826,19 @@ OldaleTown_PokemonCenter_2F_Text_27878B: @ 827878B
 OldaleTown_PokemonCenter_2F_Text_278792: @ 8278792
 	.string "Please wait.$"
 
-OldaleTown_PokemonCenter_2F_Text_27879F: @ 827879F
+OldaleTown_PokemonCenter_2F_Text_27879F:: @ 827879F
 	.string "You may trade your POKéMON here\n"
 	.string "with another TRAINER.$"
 
-OldaleTown_PokemonCenter_2F_Text_2787D5: @ 82787D5
+OldaleTown_PokemonCenter_2F_Text_2787D5:: @ 82787D5
 	.string "You may battle with your friends\n"
 	.string "here.$"
 
-OldaleTown_PokemonCenter_2F_Text_2787FC: @ 82787FC
+OldaleTown_PokemonCenter_2F_Text_2787FC:: @ 82787FC
 	.string "Two to five TRAINERS can make\n"
 	.string "BERRY POWDER together.$"
 
-OldaleTown_PokemonCenter_2F_Text_278831: @ 8278831
+OldaleTown_PokemonCenter_2F_Text_278831:: @ 8278831
 	.string "The records of two to four players\n"
 	.string "can be mixed together.$"
 
@@ -1846,7 +1846,7 @@ OldaleTown_PokemonCenter_2F_Text_27886B: @ 827886B
 	.string "A guide to the WIRELESS CLUB’s\n"
 	.string "various services.$"
 
-OldaleTown_PokemonCenter_2F_Text_27889C: @ 827889C
+OldaleTown_PokemonCenter_2F_Text_27889C:: @ 827889C
 	.string "Cancels the selected MENU item.$"
 
 OldaleTown_PokemonCenter_2F_Text_2788BC: @ 82788BC

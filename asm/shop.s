@@ -448,7 +448,7 @@ _080DFE20:
 	ldr r2, =0x01000100
 	add r0, sp, 0x8
 	bl CpuFastSet
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl reset_temp_tile_data_buffers
 	bl FreeAllSpritePalettes
 	bl ResetPaletteFade

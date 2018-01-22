@@ -63,7 +63,7 @@ extern void sub_806A068(u16, u8);
 extern void fade_screen(u8, u8);
 extern void overworld_free_bg_tilemaps(void);
 extern void sub_80AF168(void);
-extern void remove_some_task(void);
+extern void ScanlineEffect_Stop(void);
 extern void c2_exit_to_overworld_2_switch(void);
 extern void play_some_sound(void);
 extern void DoNamingScreen(u8, const u8*, u16, u8, u32, MainCallback);
@@ -506,7 +506,7 @@ static void CB2_EggHatch_0(void)
         FreeAllSpritePalettes();
         ResetSpriteData();
         ResetTasks();
-        remove_some_task();
+        ScanlineEffect_Stop();
         m4aSoundVSyncOn();
         gMain.state++;
         break;

@@ -1302,7 +1302,7 @@ static void ClearVramOamPltt_LoadHofPal(void)
 
 static void sub_8174F70(void)
 {
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     reset_temp_tile_data_buffers();

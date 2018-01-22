@@ -184,7 +184,7 @@ _0816CCF4:
 	movs r0, 0
 	movs r2, 0
 	bl load_copyright_graphics
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes

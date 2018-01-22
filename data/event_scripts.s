@@ -7,6 +7,7 @@
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
+	
 
 	.section script_data, "aw", %progbits
 
@@ -1770,7 +1771,7 @@ EventScript_271D92:: @ 8271D92
 EventScript_271DAC:: @ 8271DAC
 	message gUnknown_0827266F
 	waitmessage
-	special sp109_CreatePCMenu
+	special ScrSpecial_CreatePCMenu
 	waitstate
 	goto EventScript_271DBC
 	end

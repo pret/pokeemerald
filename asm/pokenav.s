@@ -7095,7 +7095,7 @@ titlescreen_0: @ 81CA92C
 	movs r0, 0x44
 	movs r1, 0xA0
 	bl SetGpuRegBits
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl sub_81CAA3C
 	ldr r2, =gUnknown_08620384
 	ldr r0, [r2]
@@ -7122,7 +7122,7 @@ sub_81CA994: @ 81CA994
 	lsls r1, 6
 	movs r0, 0
 	bl ClearGpuRegBits
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r0, =sub_81CA9EC
 	bl FindTaskIdByFunc
 	lsls r0, 24

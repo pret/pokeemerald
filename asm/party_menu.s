@@ -107,7 +107,7 @@ _081B0290:
 	b _081B048C
 	.pool
 _081B02AC:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	b _081B0484
 _081B02B2:
 	bl ResetPaletteFade

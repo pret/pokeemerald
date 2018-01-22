@@ -5898,8 +5898,8 @@ _08165294:
 	.pool
 	thumb_func_end GetEreaderTrainerName
 
-	thumb_func_start sub_81652B4
-sub_81652B4: @ 81652B4
+	thumb_func_start ValidateEReaderTrainer
+ValidateEReaderTrainer: @ 81652B4
 	push {r4-r6,lr}
 	ldr r2, =gSpecialVar_Result
 	movs r0, 0
@@ -5951,7 +5951,7 @@ _08165316:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81652B4
+	thumb_func_end ValidateEReaderTrainer
 
 	thumb_func_start sub_8165328
 sub_8165328: @ 8165328

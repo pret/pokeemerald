@@ -1556,7 +1556,7 @@ sub_80C3404: @ 80C3404
 sub_80C3414: @ 80C3414
 	push {lr}
 	bl ResetTasks
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r0, =sub_80C2760
 	movs r1, 0
 	bl CreateTask
@@ -3976,7 +3976,7 @@ sub_80C4998: @ 80C4998
 	bl HideBg
 	movs r0, 0x3
 	bl HideBg
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl dp12_8087EA4
 	movs r1, 0
 	ldr r0, =gUnknown_02038C28
@@ -5310,7 +5310,7 @@ _080C54AC:
 _080C54D8:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl SetVBlankHBlankCallbacksToNull
 	movs r0, 0x2
 	bl DisableInterrupts
@@ -5594,7 +5594,7 @@ _080C577C:
 	bl HideBg
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl SetVBlankHBlankCallbacksToNull
 	b _080C57E4
 _080C57A6:
@@ -7189,7 +7189,7 @@ _080C64F0:
 _080C6510:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl SetVBlankHBlankCallbacksToNull
 	b _080C6694
 _080C6520:
@@ -7400,7 +7400,7 @@ _080C66FC:
 _080C6722:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl SetVBlankHBlankCallbacksToNull
 	b _080C67A4
 _080C6732:

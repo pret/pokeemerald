@@ -9,6 +9,7 @@
 #include "menu.h"
 #include "save.h"
 #include "gba/flash_internal.h"
+#include "text_window.h"
 
 #define MSG_WIN_TOP 12
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
@@ -21,9 +22,7 @@ extern const u8 gBirchHelpGfx[];
 extern const u8 gBirchBagTilemap[];
 extern const u8 gBirchGrassTilemap[];
 extern const u16 gBirchBagGrassPal[];
-extern const u16 gTextWindowFrame1_Pal[];
 extern const u16 gUnknown_0860F074[];
-extern const u32 gTextWindowFrame1_Gfx[];
 extern struct SaveSection gSaveDataBuffer;
 
 extern u8 gText_SaveFailedCheckingBackup[];

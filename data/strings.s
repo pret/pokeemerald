@@ -4379,25 +4379,25 @@ gText_ABtnTitleScreen:: @ 85EE572
 gText_Option:: @ 85EE589
 	.string "OPTION$"
 
-gUnknown_085EE590:: @ 85EE590
+gText_TextSpeed:: @ 85EE590
 	.string "TEXT SPEED$"
 
-gUnknown_085EE59B:: @ 85EE59B
+gText_BattleScene:: @ 85EE59B
 	.string "BATTLE SCENE$"
 
-gUnknown_085EE5A8:: @ 85EE5A8
+gText_BattleStyle:: @ 85EE5A8
 	.string "BATTLE STYLE$"
 
-gUnknown_085EE5B5:: @ 85EE5B5
+gText_Sound:: @ 85EE5B5
 	.string "SOUND$"
 
-gUnknown_085EE5BB:: @ 85EE5BB
+gText_Frame:: @ 85EE5BB
 	.string "FRAME$"
 
-gUnknown_085EE5C1:: @ 85EE5C1
+gText_OptionMenuCancel:: @ 85EE5C1
 	.string "CANCEL$"
 
-gUnknown_085EE5C8:: @ 85EE5C8
+gText_ButtonMode:: @ 85EE5C8
 	.string "BUTTON MODE$"
 
 gText_TextSpeedSlow:: @ 85EE5D4

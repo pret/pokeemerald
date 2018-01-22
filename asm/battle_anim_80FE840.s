@@ -18852,7 +18852,7 @@ _0810800C:
 	negs r0, r0
 	cmp r1, r0
 	bne _08108022
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	adds r0, r7, 0
 	bl DestroyTask
 _08108022:

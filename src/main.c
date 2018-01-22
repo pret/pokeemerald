@@ -23,6 +23,8 @@
 #include "intro.h"
 #include "main.h"
 
+extern void sub_800B9B8(void);
+extern u8 gUnknown_03002748;
 extern u32 *gUnknown_0203CF5C;
 
 static void VBlankIntr(void);
@@ -405,7 +407,7 @@ void DoSoftReset(void)
 {
     REG_IME = 0;
     m4aSoundVSyncOff();
-    remove_some_task();
+    ScanlineEffect_Stop();
     DmaStop(1);
     DmaStop(2);
     DmaStop(3);

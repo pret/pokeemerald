@@ -682,8 +682,9 @@ gUnknown_02039B28: @ 2039B28
 gUnknown_02039B44: @ 2039B44
 	.space 0x4
 
-gUnknown_02039B48: @ 2039B48
-	.space 0x4
+    .include "src/option_menu.o"
+	
+	.align 2
 
 gUnknown_02039B4C: @ 2039B4C
 	.space 0x4
@@ -1168,8 +1169,7 @@ gUnknown_0203ABB8: @ 203ABB8
     
 .space 0x4 /*unused var?*/
 
-gUnknown_0203BBC0: @ 203BBC0
-	.space 0x74
+	.include "src/mystery_event_script.o"
 
 gUnknown_0203BC34: @ 203BC34
 	.space 0x4

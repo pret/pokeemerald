@@ -1637,7 +1637,7 @@ void CB2_LinkError(void)
     ResetPaletteFadeControl();
     FillPalette(0, 0, 2);
     ResetTasks();
-    remove_some_task();
+    ScanlineEffect_Stop();
     if (gWirelessCommType)
     {
         if (!sLinkErrorBuffer.unk_06)

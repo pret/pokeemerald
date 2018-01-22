@@ -2730,6 +2730,10 @@ static bool8 Phase2_ShredSplit_Func2(struct Task *task)
     return FALSE;
 }
 
+// This function never increments the state counter, because the loop condition
+// is always false, resulting in the game being stuck in an infinite loop.
+// It's possible this transition is only partially 
+// done and the second part was left out.
 static bool8 Phase2_ShredSplit_Func3(struct Task *task)
 {
     u16 i;

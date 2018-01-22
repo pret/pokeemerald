@@ -153,6 +153,10 @@ extern const u8 gText_MoveItemsDescription[];
 extern const u8 gText_SeeYa[];
 extern const u8 gText_SeeYaDescription[];
 
+extern const u8 gText_EggNickname[];
+extern const u8 gText_Pokemon[];
+extern const u8 gText_InGameClockUsable[];
+
 // menu texts
 extern const u8 gText_MenuPokedex[];
 extern const u8 gText_MenuPokemon[];
@@ -174,5 +178,30 @@ extern const u8 gText_Floor7[];
 extern const u8 gText_Peak[];
 extern const u8 gText_SafariBallStock[];
 extern const u8 gText_BattlePyramidFloor[];
+
+// option menu texts
+extern const u8 gText_TextSpeedSlow[];
+extern const u8 gText_TextSpeedMid[];
+extern const u8 gText_TextSpeedFast[];
+extern const u8 gText_BattleSceneOn[];
+extern const u8 gText_BattleSceneOff[];
+extern const u8 gText_BattleStyleShift[];
+extern const u8 gText_BattleStyleSet[];
+extern const u8 gText_SoundMono[];
+extern const u8 gText_SoundStereo[];
+extern const u8 gText_FrameTypeNumber[];
+extern const u8 gText_FrameType[];
+extern const u8 gText_ButtonTypeNormal[];
+extern const u8 gText_ButtonTypeLR[];
+extern const u8 gText_ButtonTypeLEqualsA[];
+extern const u8 gText_Option[];
+extern const u8 gText_OptionMenu[];
+extern const u8 gText_TextSpeed[];
+extern const u8 gText_BattleScene[];
+extern const u8 gText_BattleStyle[];
+extern const u8 gText_Sound[];
+extern const u8 gText_Frame[];
+extern const u8 gText_OptionMenuCancel[];
+extern const u8 gText_ButtonMode[];
 
 #endif //GUARD_STRINGS_H
