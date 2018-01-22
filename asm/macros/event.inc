@@ -262,6 +262,13 @@
 	.2byte \output
 	.2byte SPECIAL_\function
 	.endm
+	
+	@ temporary solution
+	.macro specialvar_ output, functionId
+	.byte 0x26
+	.2byte \output
+	.2byte \functionId
+	.endm
 
 	@ Blocks script execution until a command or ASM code manually unblocks it. Generally used with specific commands and specials. If this command runs, and a subsequent command or piece of ASM does not unblock state, the script will remain blocked indefinitely (essentially a hang).
 	.macro waitstate 

@@ -8,12 +8,12 @@ Make sure that there is an environment variable called DEVKITARM with the path o
 
 Then get the compiler from https://github.com/pret/agbcc and run the following commands.
 
-	build.sh
-	install.sh PATH_OF_POKEEMERALD_DIRECTORY
+	./build.sh
+	./install.sh PATH_OF_POKEEMERALD_DIRECTORY
 
 Then in the pokeemerald directory, build the tools.
 
-	build_tools.sh
+	./build_tools.sh
 
 Finally, build the rom.
 

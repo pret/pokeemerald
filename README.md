@@ -1,12 +1,14 @@
 # Pokémon Emerald
 
+[![Build Status][travis-badge]][travis]
+
 This is a disassembly of Pokémon Emerald.
 
 It builds the following rom:
 
 * pokeemerald.gba `sha1: f3ae088181bf583e55daf962a92bb46f4f1d07b7`
 
-To set up the repository, see [**INSTALL.md**](INSTALL.md).
+To set up the repository, see [INSTALL.md](INSTALL.md).
 
 
 ## See also
@@ -32,3 +34,5 @@ To set up the repository, see [**INSTALL.md**](INSTALL.md).
 [pokefirered]: https://github.com/pret/pokefirered
 [Discord]: https://discord.gg/cJxDDVP
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
+[travis]: https://travis-ci.org/pret/pokeemerald
+[travis-badge]: https://travis-ci.org/pret/pokeemerald.svg?branch=master

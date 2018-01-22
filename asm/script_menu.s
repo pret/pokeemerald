@@ -676,9 +676,9 @@ _080E2360:
 	.pool
 	thumb_func_end sub_80E2308
 
-	thumb_func_start sp109_CreatePCMenu
-@ bool sp109_CreatePCMenu()
-sp109_CreatePCMenu: @ 80E236C
+	thumb_func_start ScrSpecial_CreatePCMenu
+@ bool ScrSpecial_CreatePCMenu()
+ScrSpecial_CreatePCMenu: @ 80E236C
 	push {lr}
 	ldr r0, =sub_80E2058
 	bl FuncIsActiveTask
@@ -698,7 +698,7 @@ _080E2394:
 _080E2396:
 	pop {r1}
 	bx r1
-	thumb_func_end sp109_CreatePCMenu
+	thumb_func_end ScrSpecial_CreatePCMenu
 
 	thumb_func_start CreatePCMenu
 CreatePCMenu: @ 80E239C
@@ -858,8 +858,8 @@ _080E24C6:
 	.pool
 	thumb_func_end CreatePCMenu
 
-	thumb_func_start sub_80E2514
-sub_80E2514: @ 80E2514
+	thumb_func_start ScriptMenu_DisplayPCStartupPrompt
+ScriptMenu_DisplayPCStartupPrompt: @ 80E2514
 	push {lr}
 	sub sp, 0x10
 	movs r0, 0
@@ -882,7 +882,7 @@ sub_80E2514: @ 80E2514
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80E2514
+	thumb_func_end ScriptMenu_DisplayPCStartupPrompt
 
 	thumb_func_start sub_80E2548
 sub_80E2548: @ 80E2548
