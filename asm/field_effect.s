@@ -498,8 +498,8 @@ _080B5E68:
 	bx r1
 	thumb_func_end FieldEffectActiveListContains
 
-	thumb_func_start sub_80B5E6C
-sub_80B5E6C: @ 80B5E6C
+	thumb_func_start CreateTrainerSprite
+CreateTrainerSprite: @ 80B5E6C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -566,7 +566,7 @@ sub_80B5E6C: @ 80B5E6C
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80B5E6C
+	thumb_func_end CreateTrainerSprite
 
 	thumb_func_start sub_80B5F0C
 sub_80B5F0C: @ 80B5F0C

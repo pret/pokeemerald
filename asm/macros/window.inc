@@ -8,7 +8,7 @@
 	.2byte \vram_tile_offset
 	.endm
 
-	.macro window_template_terminator
+	.macro null_window_template
 	window_template 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0000
 	.endm
 

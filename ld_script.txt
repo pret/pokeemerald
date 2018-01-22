@@ -127,7 +127,7 @@ SECTIONS {
         src/wild_encounter.o(.text);
         asm/field_effect.o(.text);
         asm/unknown_task.o(.text);
-        asm/option_menu.o(.text);
+        src/option_menu.o(.text);
         src/pokedex.o(.text);
         asm/pokedex.o(.text);
         asm/trainer_card.o(.text);
@@ -187,7 +187,7 @@ SECTIONS {
         asm/post_battle_event_funcs.o(.text);
         asm/time_events.o(.text);
         asm/birch_pc.o(.text);
-        asm/hof_pc.o(.text);
+        src/hof_pc.o(.text);
         asm/field_specials.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
@@ -197,7 +197,7 @@ SECTIONS {
         src/coins.o(.text);
         src/landmark.o(.text);
         asm/fldeff_strength.o(.text);
-        asm/battle_transition.o(.text);
+        src/battle_transition.o(.text);
         src/battle_controller_link_partner.o(.text);
         src/battle_message.o(.text);
         asm/cable_car.o(.text);
@@ -205,7 +205,7 @@ SECTIONS {
         asm/roulette_util.o(.text);
         asm/cable_car_util.o(.text);
         src/save.o(.text);
-        asm/mystery_event_script.o(.text);
+        src/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/battle_anim_sound_tasks.o(.text);
@@ -273,9 +273,7 @@ SECTIONS {
         src/walda_phrase.o(.text);
         asm/contest_link_81D9DE4.o(.text);
         asm/trainer_rematch.o(.text);
-        asm/unk_sprite_file.o(.text);
-        asm/unk_transition.o(.text);
-        asm/unk_transition_2.o(.text);
+        src/unk_transition.o(.text);
         src/international_string_util.o(.text);
         asm/international_string_util.o(.text);
     } =0
@@ -290,7 +288,7 @@ SECTIONS {
         data/battle_scripts_2.o(script_data);
         data/battle_ai_scripts.o(script_data);
         data/contest_ai_scripts.o(script_data);
-        data/script_funcs.o(script_data);
+        data/mystery_event_script_cmd_table.o(script_data);
     } =0
 
     lib_text :
@@ -407,7 +405,7 @@ SECTIONS {
         data/field_map_obj.o(.rodata);
         data/field_ground_effect.o(.rodata);
         data/map_obj_8097404.o(.rodata);
-        data/text_window.o(.rodata);
+        src/text_window.o(.rodata);
         src/scrcmd.o(.rodata);
         data/coord_event_weather.o(.rodata);
         data/field_tasks.o(.rodata);
@@ -428,7 +426,7 @@ SECTIONS {
         src/trainer_see.o(.rodata);
         data/wild_encounter.o(.rodata);
         data/field_effect.o(.rodata);
-        data/option_menu.o(.rodata);
+        src/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
         data/pokedex.o(.rodata);
         data/trainer_card.o(.rodata);
@@ -482,7 +480,7 @@ SECTIONS {
         data/roulette.o(.rodata);
         data/pokedex_cry_screen.o(.rodata);
         src/landmark.o(.rodata);
-        data/battle_transition.o(.rodata);
+        src/battle_transition.o(.rodata);
         src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
@@ -540,10 +538,11 @@ SECTIONS {
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
         data/trainer_rematch.o(.rodata);
-        data/unk_sprite_file.o(.rodata);
         data/unk_transition.o(.rodata);
+        src/unk_transition.o(.rodata);
         data/link_strings.o(.rodata);
         data/fonts.o(.rodata);
+        src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

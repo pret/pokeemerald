@@ -114,7 +114,7 @@ sub_80E6CA0: @ 80E6CA0
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E6D1C
-	bl sub_81539D4
+	bl GetRecordMixingGift
 	ldr r2, =0x000011c8
 	adds r1, r5, r2
 	strh r0, [r1]
@@ -186,7 +186,7 @@ sub_80E6D54: @ 80E6D54
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E6DEE
-	bl sub_81539D4
+	bl GetRecordMixingGift
 	ldr r2, =0x000011c8
 	adds r1, r5, r2
 	strh r0, [r1]
@@ -282,7 +282,7 @@ _080E6E60:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E6EFA
-	bl sub_81539D4
+	bl GetRecordMixingGift
 	ldr r1, [r5]
 	ldr r2, =0x00001210
 	adds r1, r2

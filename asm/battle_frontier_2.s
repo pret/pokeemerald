@@ -18556,7 +18556,7 @@ _081A4202:
 	thumb_func_start sub_81A4224
 sub_81A4224: @ 81A4224
 	push {lr}
-	bl sub_81652B4
+	bl ValidateEReaderTrainer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81A4224

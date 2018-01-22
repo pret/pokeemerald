@@ -5386,7 +5386,8 @@ gFieldEffectObjectPic_ShadowLarge:: @ 84F68B8
 gFieldEffectObjectPic_ShadowExtraLarge:: @ 84F6938
 	.incbin "graphics/map_objects/pics/effects/shadow_extra_large.4bpp"
 
-	.incbin "baserom.gba", 0x4f6d38, 0x160
+gUnknown_084F6D38:: @ 84F6D38
+	.incbin "graphics/map_objects/pics/effects/unknown_4F6D38/0.4bpp"
 
 	.align 2
 gFieldEffectObjectPalette6:: @ 84F6E98
@@ -5500,7 +5501,17 @@ gFieldEffectObjectPic_BikeHopTallGrass_2:: @ 84F7938
 gFieldEffectObjectPic_BikeHopTallGrass_3:: @ 84F7978
 	.incbin "graphics/map_objects/pics/effects/bike_hop_tall_grass/3.4bpp"
 
-	.incbin "baserom.gba", 0x4f79b8, 0x200
+gUnusedGrass_0:: @4F79B8
+	.incbin "graphics/map_objects/pics/effects/unused_grass/0.4bpp"
+	
+gUnusedGrass_1:: @4F7A38
+	.incbin "graphics/map_objects/pics/effects/unused_grass/1.4bpp"
+	
+gUnusedGrass_2:: @4F7AB8
+	.incbin "graphics/map_objects/pics/effects/unused_grass/2.4bpp"
+	
+gUnusedGrass_3:: @4F7B38
+	.incbin "graphics/map_objects/pics/effects/unused_grass/3.4bpp"
 
 	.align 2
 gFieldEffectObjectPic_Unknown16_0:: @ 84F7BB8
@@ -5522,7 +5533,8 @@ gFieldEffectObjectPic_Unknown16_3:: @ 84F7D38
 gFieldEffectObjectPic_Unknown16_4:: @ 84F7DB8
 	.incbin "graphics/map_objects/pics/effects/unknown_16/4.4bpp"
 
-	.incbin "baserom.gba", 0x4f7e38, 0x80
+gUnknown_084F7E38:: @ 84F7E38
+	.incbin "graphics/map_objects/pics/effects/unknown_4F7E38/0.4bpp"
 
 	.align 2
 gFieldEffectObjectPic_Unknown16_5:: @ 84F7EB8

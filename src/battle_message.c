@@ -1324,6 +1324,8 @@ const u8 gText_BattleRecordedOnPass[] = _("{B_PLAYER_NAME}’s battle result was
 const u8 gText_LinkTrainerWantsToBattlePause[] = _("{B_20}\nwants to battle!{PAUSE 49}");
 const u8 gText_TwoLinkTrainersWantToBattlePause[] = _("{B_20} and {B_21}\nwant to battle!{PAUSE 49}");
 
+// This is four lists of moves which use a different attack string in Japanese
+// to the default. See the documentation for sub_814F950 for more detail.
 static const u16 sUnknownMoveTable[] =
 {
     MOVE_SWORDS_DANCE, MOVE_STRENGTH, MOVE_GROWTH,
@@ -1338,16 +1340,16 @@ static const u16 sUnknownMoveTable[] =
     MOVE_TRICK, MOVE_ASSIST, MOVE_INGRAIN, MOVE_KNOCK_OFF,
     MOVE_CAMOUFLAGE, MOVE_ASTONISH, MOVE_ODOR_SLEUTH,
     MOVE_GRASS_WHISTLE, MOVE_SHEER_COLD, MOVE_MUDDY_WATER,
-    MOVE_IRON_DEFENSE, MOVE_BOUNCE, MOVE_NONE,
+    MOVE_IRON_DEFENSE, MOVE_BOUNCE, 0,
 
     MOVE_TELEPORT, MOVE_RECOVER, MOVE_BIDE, MOVE_AMNESIA,
-    MOVE_FLAIL, MOVE_TAUNT, MOVE_BULK_UP, MOVE_NONE,
+    MOVE_FLAIL, MOVE_TAUNT, MOVE_BULK_UP, 0,
 
     MOVE_MEDITATE, MOVE_AGILITY, MOVE_MIMIC, MOVE_DOUBLE_TEAM,
     MOVE_BARRAGE, MOVE_TRANSFORM, MOVE_STRUGGLE, MOVE_SCARY_FACE,
     MOVE_CHARGE, MOVE_WISH, MOVE_BRICK_BREAK, MOVE_YAWN,
     MOVE_FEATHER_DANCE, MOVE_TEETER_DANCE, MOVE_MUD_SPORT,
-    MOVE_FAKE_TEARS, MOVE_WATER_SPORT, MOVE_CALM_MIND, MOVE_NONE,
+    MOVE_FAKE_TEARS, MOVE_WATER_SPORT, MOVE_CALM_MIND, 0,
 
     MOVE_POUND, MOVE_SCRATCH, MOVE_VICE_GRIP,
     MOVE_WING_ATTACK, MOVE_FLY, MOVE_BIND, MOVE_SLAM,
@@ -1361,7 +1363,7 @@ static const u16 sUnknownMoveTable[] =
     MOVE_FORESIGHT, MOVE_CHARM, MOVE_ATTRACT, MOVE_ROCK_SMASH,
     MOVE_UPROAR, MOVE_SPIT_UP, MOVE_SWALLOW, MOVE_TORMENT,
     MOVE_FLATTER, MOVE_ROLE_PLAY, MOVE_ENDEAVOR, MOVE_TICKLE,
-    MOVE_COVET, MOVE_NONE
+    MOVE_COVET, 0
 };
 
 static const u8 sDummyWeirdStatusString[] = {EOS, EOS, EOS, EOS, EOS, EOS, EOS, EOS, 0, 0};
@@ -2330,6 +2332,10 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
     }
 }
 
+// Loads one of two text strings into the provided buffer. This is functionally
+// unused, since the value loaded into the buffer is not read; it loaded one of
+// two particles (either "は" or "の") which works in tandem with sub_814F950
+// below to effect changes in the meaning of the line.
 static void sub_814F8F8(u8* textBuff)
 {
     s32 counter = 0;
@@ -2337,7 +2343,7 @@ static void sub_814F8F8(u8* textBuff)
 
     while (counter != 4)
     {
-        if (sUnknownMoveTable[i] == MOVE_NONE)
+        if (sUnknownMoveTable[i] == 0)
             counter++;
         if (sUnknownMoveTable[i++] == gStringInfo->currentMove)
             break;
@@ -2352,6 +2358,24 @@ static void sub_814F8F8(u8* textBuff)
     }
 }
 
+// Appends "!" to the text buffer `dst`. In the original Japanese this looked
+// into the table of moves at sUnknownMoveTable and varied the line accordingly.
+// 
+// gText_ExclamationMark was a plain "!", used for any attack not on the list.
+// It resulted in the translation "<NAME>'s <ATTACK>!".
+// 
+// gText_ExclamationMark2 was "を つかった！". This resulted in the translation
+// "<NAME> used <ATTACK>!", which was used for all attacks in English.
+// 
+// gText_ExclamationMark3 was "した！". This was used for those moves whose
+// names were verbs, such as Recover, and resulted in translations like "<NAME>
+// recovered itself!".
+// 
+// gText_ExclamationMark4 was "を した！" This resulted in a translation of
+// "<NAME> did an <ATTACK>!".
+// 
+// gText_ExclamationMark5 was " こうげき！" This resulted in a translation of
+// "<NAME>'s <ATTACK> attack!".
 static void sub_814F950(u8* dst)
 {
     s32 counter = 0;

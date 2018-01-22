@@ -614,7 +614,7 @@ _080AA8C4:
 	ldr r0, =gUnknown_08DDE458
 	ldr r1, =0x0600d800
 	bl LZ77UnCompVram
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl ResetTasks
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes

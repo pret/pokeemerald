@@ -343,7 +343,7 @@ _081AAE34:
 	bl clear_scheduled_bg_copies_to_vram
 	b _081AB012
 _081AAE3E:
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3

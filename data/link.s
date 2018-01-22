@@ -60,7 +60,7 @@ gUnknown_082ED204:: @ 82ED204
 	window_template 0x00, 0x00, 0x00, 0x1E, 0x05, 0x0F, 0x0002
 	window_template 0x00, 0x00, 0x06, 0x1E, 0x07, 0x0F, 0x0098
 	window_template 0x00, 0x00, 0x0D, 0x1E, 0x07, 0x0F, 0x016A
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_082ED224:: @ 82ED224
@@ -1887,7 +1887,7 @@ gUnknown_082F05A8:: @ 82F05A8
 	window_template 0x00, 0x00, 0x00, 0x1e, 0x02, 0x0c, 0x0013
 	window_template 0x00, 0x01, 0x0f, 0x1c, 0x04, 0x0c, 0x004f
 	window_template 0x00, 0x00, 0x0f, 0x1e, 0x05, 0x0d, 0x004f
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_082F05C8:: @ 82F05C8
@@ -2071,7 +2071,7 @@ gUnknown_082F0D3C:: @ 82F0D3C
 	window_template 0x00, 0x03, 0x00, 0x18, 0x03, 0x0f, 0x0001
 	window_template 0x00, 0x03, 0x04, 0x15, 0x0f, 0x0f, 0x0049
 	window_template 0x00, 0x18, 0x04, 0x03, 0x0f, 0x0f, 0x0184
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_082F0D5C:: @ 82F0D5C
@@ -2103,7 +2103,7 @@ gUnknown_082F0DD0:: @ 82F0DD0
 	.align 2
 gUnknown_082F0DD4:: @ 82F0DD4
 	window_template 0x00, 0x03, 0x0f, 0x18, 0x04, 0x0e, 0x0014
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_082F0DE4:: @ 82F0DE4
@@ -2132,111 +2132,111 @@ gUnknown_082F0E1C:: @ 82F0E1C
 
 	.align 2
 gWonderCardBgPal1:: @ 82F0E34
-	.incbin "graphics/interface/wonder_card_1.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_1.gbapal"
 
 	.align 2
 gWonderCardBgPal2:: @ 82F0E54
-	.incbin "graphics/interface/wonder_card_2.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_2.gbapal"
 
 	.align 2
 gWonderCardBgPal3:: @ 82F0E74
-	.incbin "graphics/interface/wonder_card_3.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_3.gbapal"
 
 	.align 2
 gWonderCardBgPal4:: @ 82F0E94
-	.incbin "graphics/interface/wonder_card_4.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_4.gbapal"
 
 	.align 2
 gWonderCardBgPal5:: @ 82F0EB4
-	.incbin "graphics/interface/wonder_card_5.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_5.gbapal"
 
 	.align 2
 gWonderCardBgPal6:: @ 82F0ED4
-	.incbin "graphics/interface/wonder_card_6.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_6.gbapal"
 
 	.align 2
 gWonderCardBgPal7:: @ 82F0EF4
-	.incbin "graphics/interface/wonder_card_7.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_7.gbapal"
 
 	.align 2
 gWonderCardBgPal8:: @ 82F0F14
-	.incbin "graphics/interface/wonder_card_8.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_8.gbapal"
 
 	.align 2
 gWonderCardBgGfx1:: @ 82F0F34
-	.incbin "graphics/interface/wonder_card_1.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_1.4bpp.lz"
 
 	.align 2
 gWonderCardBgTilemap1:: @ 82F1030
-	.incbin "graphics/interface/wonder_card_1.bin.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_1.bin.lz"
 
 	.align 2
 gWonderCardBgGfx2:: @ 82F1124
-	.incbin "graphics/interface/wonder_card_2.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_2.4bpp.lz"
 
 	.align 2
 gWonderCardBgTilemap2:: @ 82F1218
-	.incbin "graphics/interface/wonder_card_2.bin.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_2.bin.lz"
 
 	.align 2
 gWonderCardBgGfx3:: @ 82F1300
-	.incbin "graphics/interface/wonder_card_3.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_3.4bpp.lz"
 
 	.align 2
 gWonderCardBgTilemap3:: @ 82F13D4
-	.incbin "graphics/interface/wonder_card_3.bin.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_3.bin.lz"
 	
 	.align 2
 gWonderCardBgGfx7:: @ 82F14A8
-	.incbin "graphics/interface/wonder_card_7.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_7.4bpp.lz"
 
 	.align 2
 gWonderCardBgTilemap7:: @ 82F16DC
-	.incbin "graphics/interface/wonder_card_7.bin.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_7.bin.lz"
 	
 	.align 2
 gWonderCardBgGfx8:: @ 82F1824
-	.incbin "graphics/interface/wonder_card_8.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_8.4bpp.lz"
 
 	.align 2
 gWonderCardBgTilemap8:: @ 82F1A54
-	.incbin "graphics/interface/wonder_card_8.bin.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_8.bin.lz"
 
 	.align 2
 gWonderCardShadowPal1:: @ 82F1B9C
-	.incbin "graphics/interface/wonder_card_shadow_1.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_shadow_1.gbapal"
 
 	.align 2
 gWonderCardShadowPal2:: @ 82F1BBC
-	.incbin "graphics/interface/wonder_card_shadow_2.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_shadow_2.gbapal"
 
 	.align 2
 gWonderCardShadowPal3:: @ 82F1BDC
-	.incbin "graphics/interface/wonder_card_shadow_3.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_shadow_3.gbapal"
 
 	.align 2
 gWonderCardShadowPal4:: @ 82F1BFC
-	.incbin "graphics/interface/wonder_card_shadow_4.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_shadow_4.gbapal"
 
 	.align 2
 gWonderCardShadowPal5:: @ 82F1C1C
-	.incbin "graphics/interface/wonder_card_shadow_5.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_shadow_5.gbapal"
 
 	.align 2
 gWonderCardShadowPal6:: @ 82F1C3C
-	.incbin "graphics/interface/wonder_card_shadow_6.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_shadow_6.gbapal"
 
 	.align 2
 gWonderCardShadowPal7:: @ 82F1C5C
-	.incbin "graphics/interface/wonder_card_shadow_7.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_shadow_7.gbapal"
 
 	.align 2
 gWonderCardShadowPal8:: @ 82F1C7C
-	.incbin "graphics/interface/wonder_card_shadow_8.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_card_shadow_8.gbapal"
 	
 	.align 2
 gWonderCardShadowGfx:: @ 82F1C9C
-	.incbin "graphics/interface/wonder_card_shadow.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_card_shadow.4bpp.lz"
 
 	.align 2
 gUnknown_082F1D00:: @ 82F1D00 struct CompressedSpriteSheet
@@ -2304,55 +2304,55 @@ gUnknown_082F1DF8:: @ 82F1DF8
 
 	.align 2
 gWonderNewsPal1:: @ 82F1E08
-	.incbin "graphics/interface/wonder_news_1.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_news_1.gbapal"
 
 	.align 2
 gWonderNewsPal7:: @ 82F1E28
-	.incbin "graphics/interface/wonder_news_7.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_news_7.gbapal"
 
 	.align 2
 gWonderNewsPal8:: @ 82F1E48
-	.incbin "graphics/interface/wonder_news_8.gbapal"
+	.incbin "graphics/wonder_transfers/wonder_news_8.gbapal"
 
 	.align 2
 gWonderNewsGfx1:: @ 82F1E68
-	.incbin "graphics/interface/wonder_news_1.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_news_1.4bpp.lz"
 
 	.align 2
 gWonderNewsTilemap1:: @ 82F1EE8
-	.incbin "graphics/interface/wonder_news_1.bin.lz"
+	.incbin "graphics/wonder_transfers/wonder_news_1.bin.lz"
 
 	.align 2
 gWonderNewsGfx2:: @ 82F1FC4
-	.incbin "graphics/interface/wonder_news_2.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_news_2.4bpp.lz"
 
 	.align 2
 gWonderNewsTilemap2:: @ 82F1FF4
-	.incbin "graphics/interface/wonder_news_2.bin.lz"
+	.incbin "graphics/wonder_transfers/wonder_news_2.bin.lz"
 
 	.align 2
 gWonderNewsGfx3:: @ 82F20B4
-	.incbin "graphics/interface/wonder_news_3.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_news_3.4bpp.lz"
 
 	.align 2
 gWonderNewsTilemap3:: @ 82F2124
-	.incbin "graphics/interface/wonder_news_3.bin.lz"
+	.incbin "graphics/wonder_transfers/wonder_news_3.bin.lz"
 
 	.align 2
 gWonderNewsGfx7:: @ 82F21F0
-	.incbin "graphics/interface/wonder_news_7.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_news_7.4bpp.lz"
 
 	.align 2
 gWonderNewsTilemap7:: @ 82F2280
-	.incbin "graphics/interface/wonder_news_7.bin.lz"
+	.incbin "graphics/wonder_transfers/wonder_news_7.bin.lz"
 
 	.align 2
 gWonderNewsGfx8:: @ 82F235C
-	.incbin "graphics/interface/wonder_news_8.4bpp.lz"
+	.incbin "graphics/wonder_transfers/wonder_news_8.4bpp.lz"
 
 	.align 2
 gWonderNewsTilemap8:: @ 82F23EC
-	.incbin "graphics/interface/wonder_news_8.bin.lz"
+	.incbin "graphics/wonder_transfers/wonder_news_8.bin.lz"
 
 	.align 2
 gUnknown_082F24C8:: @ 82F24C8
@@ -2756,7 +2756,7 @@ gUnknown_082F2C70:: @ 82F2C70
 	window_template 0x01, 0x09, 0x12, 0x0f, 0x02, 0x0c, 0x007a
 	window_template 0x01, 0x00, 0x02, 0x06, 0x0f, 0x07, 0x0020
 	window_template 0x00, 0x01, 0x02, 0x07, 0x09, 0x0e, 0x0013
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_082F2C98:: @ 82F2C98
@@ -3023,12 +3023,12 @@ gUnknown_082F32F4:: @ 82F32F4
 	window_template 0x00, 0x00, 0x06, 0x09, 0x02, 0x08, 0x03c9
 	window_template 0x00, 0x15, 0x03, 0x09, 0x02, 0x08, 0x03b7
 	window_template 0x00, 0x15, 0x06, 0x09, 0x02, 0x08, 0x03a5
-	window_template_terminator
+	null_window_template
 
 	window_template 0x00, 0x05, 0x02, 0x14, 0x10, 0x0f, 0x0001
 	window_template 0x00, 0x05, 0x02, 0x14, 0x10, 0x0f, 0x0001
 	window_template 0x00, 0x04, 0x02, 0x16, 0x10, 0x0f, 0x0001
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_082F3344:: @ 82F3344
@@ -3043,43 +3043,43 @@ gUnknown_082F334C:: @ 82F334C
 
 	.align 2
 gBerryCrushGrinderBasePal:: @ 82F336C
-	.incbin "graphics/interface/berrycrush_grinder_base.gbapal"
+	.incbin "graphics/link_games/berrycrush_grinder_base.gbapal"
 
 	.align 2
 gBerryCrushMiscSpritesPal:: @ 82F338C
-	.incbin "graphics/interface/berrycrush_misc.gbapal"
+	.incbin "graphics/link_games/berrycrush_misc.gbapal"
 
 	.align 2
 gBerryCrushTimerDigitsPal:: @ 82F33AC
-	.incbin "graphics/interface/berrycrush_timerdigits.gbapal"
+	.incbin "graphics/link_games/berrycrush_timerdigits.gbapal"
 
 	.align 2
 gBerryCrushGrinderBaseGfx:: @ 82F33CC
-	.incbin "graphics/interface/berrycrush_grinder_base.4bpp.lz"
+	.incbin "graphics/link_games/berrycrush_grinder_base.4bpp.lz"
 
 	.align 2
 gBerryCrushBtnPressGfx:: @ 82F36F8
-	.incbin "graphics/interface/berrycrush_btnpress.4bpp.lz"
+	.incbin "graphics/link_games/berrycrush_btnpress.4bpp.lz"
 
 	.align 2
 gBerryCrushSparkleGfx:: @ 82F3A74
-	.incbin "graphics/interface/berrycrush_sparkle.4bpp.lz"
+	.incbin "graphics/link_games/berrycrush_sparkle.4bpp.lz"
 
 	.align 2
 gBerryCrushTimerDigitsGfx:: @ 82F3BC0
-	.incbin "graphics/interface/berrycrush_timerdigits.4bpp.lz"
+	.incbin "graphics/link_games/berrycrush_timerdigits.4bpp.lz"
 
 	.align 2
 gBerryCrushGrinderTopTilemap:: @ 82F3C8C
-	.incbin "graphics/interface/berrycrush_grinder_top.bin.lz"
+	.incbin "graphics/link_games/berrycrush_grinder_top.bin.lz"
 
 	.align 2
 gBerryCrushContainerCapTilemap:: @ 82F3DBC
-	.incbin "graphics/interface/berrycrush_container_cap.bin.lz"
+	.incbin "graphics/link_games/berrycrush_container_cap.bin.lz"
 
 	.align 2
 gBerryCrushBackgroundTilemap:: @ 82F3F54
-	.incbin "graphics/interface/berrycrush_background.bin.lz"
+	.incbin "graphics/link_games/berrycrush_background.bin.lz"
 
 	.align 2
 gUnknown_082F417C:: @ 82F417C
@@ -3399,66 +3399,66 @@ gUnknown_082F449C:: @ 82F449C
 
 	.align 2
 gUnknown_082F7DF0_UnrefDupe:: @ 82F4698
-	.incbin "graphics/interface/dodrioberry_bg1.gbapal"
+	.incbin "graphics/link_games/dodrioberry_bg1.gbapal"
 
 	.align 2
-	.incbin "graphics/interface/dodrioberry_bg2.gbapal"
+	.incbin "graphics/link_games/dodrioberry_bg2.gbapal"
 
 	.align 2
 gUnknown_082F7E30_UnrefDupe:: @ 82F46B8
-	.incbin "graphics/interface/dodrioberry_pkmn.gbapal"
+	.incbin "graphics/link_games/dodrioberry_pkmn.gbapal"
 
 	.align 2
 gUnknown_082F7E50_UnrefDupe:: @ 82F46D8
-	.incbin "graphics/interface/dodrioberry_shiny.gbapal"
+	.incbin "graphics/link_games/dodrioberry_shiny.gbapal"
 
 	.align 2
 gUnknown_082F7E70_UnrefDupe:: @ 82F46F8
-	.incbin "graphics/interface/dodrioberry_status.gbapal"
+	.incbin "graphics/link_games/dodrioberry_status.gbapal"
 
 	.align 2
 gUnknown_082F7E90_UnrefDupe:: @ 82F4718
-	.incbin "graphics/interface/dodrioberry_berrysprites.gbapal"
+	.incbin "graphics/link_games/dodrioberry_berrysprites.gbapal"
 
 	.align 2
 gUnknown_082F7EB0_UnrefDupe:: @ 82F4738
-	.incbin "graphics/interface/dodrioberry_berrysprites.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_berrysprites.4bpp.lz"
 
 	.align 2
 gUnknown_082F8064_UnrefDupe:: @ 82F490C
-	.incbin "graphics/interface/dodrioberry_platform.gbapal"
+	.incbin "graphics/link_games/dodrioberry_platform.gbapal"
 
 	.align 2
 gUnknown_082F8084_UnrefDupe:: @ 82F492C
-	.incbin "graphics/interface/dodrioberry_bg1.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_bg1.4bpp.lz"
 
 	.align 2
 gUnknown_082F8914_UnrefDupe:: @ 82F51BC
-	.incbin "graphics/interface/dodrioberry_bg2.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_bg2.4bpp.lz"
 
 	.align 2
 gUnknown_082F96E0_UnrefDupe:: @ 82F5F88
-	.incbin "graphics/interface/dodrioberry_status.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_status.4bpp.lz"
 
 	.align 2
 gUnknown_082F9774_UnrefDupe:: @ 82F601C
-	.incbin "graphics/interface/dodrioberry_platform.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_platform.4bpp.lz"
 
 	.align 2
 gUnknown_082F98BC_UnrefDupe:: @ 82F6164
-	.incbin "graphics/interface/dodrioberry_pkmn.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_pkmn.4bpp.lz"
 
 	.align 2
 gUnknown_082FAAD8_UnrefDupe:: @ 82F7380
-	.incbin "graphics/interface/dodrioberry_bg1.bin.lz"
+	.incbin "graphics/link_games/dodrioberry_bg1.bin.lz"
 
 	.align 2
 gUnknown_082FAD44_UnrefDupe:: @ 82F75EC
-	.incbin "graphics/interface/dodrioberry_bg2right.bin.lz"
+	.incbin "graphics/link_games/dodrioberry_bg2right.bin.lz"
 
 	.align 2
 gUnknown_082FAF94_UnrefDupe:: @ 82F783C
-	.incbin "graphics/interface/dodrioberry_bg2left.bin.lz"
+	.incbin "graphics/link_games/dodrioberry_bg2left.bin.lz"
 
 	.align 2
 gUnknown_082F7A88:: @ 82F7A88
@@ -3661,66 +3661,66 @@ gUnknown_082F449C_UnrefDupe:: @ 82F7BF4
 
 	.align 2
 gDodrioBerryBgPal1:: @ 82F7DF0
-	.incbin "graphics/interface/dodrioberry_bg1.gbapal"
+	.incbin "graphics/link_games/dodrioberry_bg1.gbapal"
 
 	.align 2
-	.incbin "graphics/interface/dodrioberry_bg2.gbapal"
+	.incbin "graphics/link_games/dodrioberry_bg2.gbapal"
 
 	.align 2
 gDodrioBerryPkmnPal:: @ 82F7E30
-	.incbin "graphics/interface/dodrioberry_pkmn.gbapal"
+	.incbin "graphics/link_games/dodrioberry_pkmn.gbapal"
 
 	.align 2
 gDodrioBerryShinyPal:: @ 82F7E50
-	.incbin "graphics/interface/dodrioberry_shiny.gbapal"
+	.incbin "graphics/link_games/dodrioberry_shiny.gbapal"
 
 	.align 2
 gDodrioBerryStatusPal:: @ 82F7E70
-	.incbin "graphics/interface/dodrioberry_status.gbapal"
+	.incbin "graphics/link_games/dodrioberry_status.gbapal"
 
 	.align 2
 gDodrioBerrySpritesPal:: @ 82F7E90
-	.incbin "graphics/interface/dodrioberry_berrysprites.gbapal"
+	.incbin "graphics/link_games/dodrioberry_berrysprites.gbapal"
 
 	.align 2
 gDodrioBerrySpritesGfx:: @ 82F7EB0
-	.incbin "graphics/interface/dodrioberry_berrysprites.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_berrysprites.4bpp.lz"
 
 	.align 2
 gDodrioBerryPlatformPal:: @ 82F8064
-	.incbin "graphics/interface/dodrioberry_platform.gbapal"
+	.incbin "graphics/link_games/dodrioberry_platform.gbapal"
 
 	.align 2
 gDodrioBerryBgGfx1:: @ 82F8084
-	.incbin "graphics/interface/dodrioberry_bg1.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_bg1.4bpp.lz"
 
 	.align 2
 gDodrioBerryBgGfx2:: @ 82F8914
-	.incbin "graphics/interface/dodrioberry_bg2.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_bg2.4bpp.lz"
 
 	.align 2
 gDodrioBerryStatusGfx:: @ 82F96E0
-	.incbin "graphics/interface/dodrioberry_status.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_status.4bpp.lz"
 
 	.align 2
 gDodrioBerryPlatformGfx:: @ 82F9774
-	.incbin "graphics/interface/dodrioberry_platform.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_platform.4bpp.lz"
 
 	.align 2
 gDodrioBerryPkmnGfx:: @ 82F98BC
-	.incbin "graphics/interface/dodrioberry_pkmn.4bpp.lz"
+	.incbin "graphics/link_games/dodrioberry_pkmn.4bpp.lz"
 
 	.align 2
 gDodrioBerryBgTilemap1:: @ 82FAAD8
-	.incbin "graphics/interface/dodrioberry_bg1.bin.lz"
+	.incbin "graphics/link_games/dodrioberry_bg1.bin.lz"
 
 	.align 2
 gDodrioBerryBgTilemap2Right:: @ 82FAD44
-	.incbin "graphics/interface/dodrioberry_bg2right.bin.lz"
+	.incbin "graphics/link_games/dodrioberry_bg2right.bin.lz"
 
 	.align 2
 gDodrioBerryBgTilemap2Left:: @ 82FAF94
-	.incbin "graphics/interface/dodrioberry_bg2left.bin.lz"
+	.incbin "graphics/link_games/dodrioberry_bg2left.bin.lz"
 
 	.align 2
 gUnknown_082FB1E0:: @ 82FB1E0
@@ -4166,31 +4166,31 @@ gUnknown_082FB714:: @ 82FB714
 
 	.align 2
 gPkmnJumpPal1:: @ 82FB73C
-	.incbin "graphics/interface/pkmnjump_pal1.gbapal"
+	.incbin "graphics/link_games/pkmnjump_pal1.gbapal"
 
 	.align 2
 gPkmnJumpPal2:: @ 82FB75C
-	.incbin "graphics/interface/pkmnjump_pal2.gbapal"
+	.incbin "graphics/link_games/pkmnjump_pal2.gbapal"
 
 	.align 2
 gPkmnJumpRopeGfx1:: @ 82FB77C
-	.incbin "graphics/interface/pkmnjump_rope1.4bpp.lz"
+	.incbin "graphics/link_games/pkmnjump_rope1.4bpp.lz"
 
 	.align 2
 gPkmnJumpRopeGfx2:: @ 82FB89C
-	.incbin "graphics/interface/pkmnjump_rope2.4bpp.lz"
+	.incbin "graphics/link_games/pkmnjump_rope2.4bpp.lz"
 
 	.align 2
 gPkmnJumpRopeGfx3:: @ 82FBA70
-	.incbin "graphics/interface/pkmnjump_rope3.4bpp.lz"
+	.incbin "graphics/link_games/pkmnjump_rope3.4bpp.lz"
 
 	.align 2
 gPkmnJumpRopeGfx4:: @ 82FBBA0
-	.incbin "graphics/interface/pkmnjump_rope4.4bpp.lz"
+	.incbin "graphics/link_games/pkmnjump_rope4.4bpp.lz"
 
 	.align 2
 gPkmnJumpStarGfx:: @ 82FBC9C
-	.incbin "graphics/interface/pkmnjump_star.4bpp.lz"
+	.incbin "graphics/link_games/pkmnjump_star.4bpp.lz"
 
 	.align 2
 gUnknown_082FBE08:: @ 82FBE08
@@ -4376,43 +4376,43 @@ gUnknown_082FC00C:: @ 82FC00C
 
 	.align 2
 gPkmnJumpPal3:: @ 82FC024
-	.incbin "graphics/interface/pkmnjump_pal3.gbapal"
+	.incbin "graphics/link_games/pkmnjump_pal3.gbapal"
 
 	.align 2
 gPkmnJumpBgPal:: @ 82FC044
-	.incbin "graphics/interface/pkmnjump_bg.gbapal"
+	.incbin "graphics/link_games/pkmnjump_bg.gbapal"
 
 	.align 2
 gPkmnJumpBgGfx:: @ 82FC064
-	.incbin "graphics/interface/pkmnjump_bg.4bpp.lz"
+	.incbin "graphics/link_games/pkmnjump_bg.4bpp.lz"
 
 	.align 2
 gPkmnJumpBgTilemap:: @ 82FC290
-	.incbin "graphics/interface/pkmnjump_bg.bin.lz"
+	.incbin "graphics/link_games/pkmnjump_bg.bin.lz"
 
 	.align 2
 gPkmnJumpVenusaurPal:: @ 82FC440
-	.incbin "graphics/interface/pkmnjump_venusaur.gbapal"
+	.incbin "graphics/link_games/pkmnjump_venusaur.gbapal"
 
 	.align 2
 gPkmnJumpVenusaurGfx:: @ 82FC460
-	.incbin "graphics/interface/pkmnjump_venusaur.4bpp.lz"
+	.incbin "graphics/link_games/pkmnjump_venusaur.4bpp.lz"
 
 	.align 2
 gPkmnJumpVenusaurTilemap:: @ 82FCDB0
-	.incbin "graphics/interface/pkmnjump_venusaur.bin.lz"
+	.incbin "graphics/link_games/pkmnjump_venusaur.bin.lz"
 
 	.align 2
 gPkmnJumpResultsPal:: @ 82FD168
-	.incbin "graphics/interface/pkmnjump_results.gbapal"
+	.incbin "graphics/link_games/pkmnjump_results.gbapal"
 
 	.align 2
 gPkmnJumpResultsGfx:: @ 82FD188
-	.incbin "graphics/interface/pkmnjump_results.4bpp.lz"
+	.incbin "graphics/link_games/pkmnjump_results.4bpp.lz"
 
 	.align 2
 gPkmnJumpResultsTilemap:: @ 82FDC38
-	.incbin "graphics/interface/pkmnjump_results.bin.lz"
+	.incbin "graphics/link_games/pkmnjump_results.bin.lz"
 
 	.align 2
 gUnknown_082FE164:: @ 82FE164 struct BgTemplate
@@ -4422,7 +4422,7 @@ gUnknown_082FE164:: @ 82FE164 struct BgTemplate
 gUnknown_082FE174:: @ 82FE174
 	window_template 0x00, 0x13, 0x00, 0x06, 0x02, 0x02, 0x0013
 	window_template 0x00, 0x08, 0x00, 0x06, 0x02, 0x02, 0x001f
-	window_template_terminator
+	null_window_template
 
 	.align 2
 gUnknown_082FE18C:: @ 82FE18C
@@ -4509,11 +4509,11 @@ gUnknown_082FE278:: @ 82FE278
 
 	.align 2
 gPkmnJump321StartPal1:: @ 82FE284
-	.incbin "graphics/interface/pkmnjump_321start1.gbapal"
+	.incbin "graphics/link_games/pkmnjump_321start1.gbapal"
 
 	.align 2
 gPkmnJump321StartGfx1:: @ 82FE2A4
-	.incbin "graphics/interface/pkmnjump_321start1.4bpp.lz"
+	.incbin "graphics/link_games/pkmnjump_321start1.4bpp.lz"
 
 	.align 2
 gUnknown_082FE6C8:: @ 82FE6C8
@@ -4577,11 +4577,11 @@ gUnknown_082FE748:: @ 82FE748
 
 	.align 2
 gPkmnJump321StartPal2:: @ 82FE758
-	.incbin "graphics/interface/pkmnjump_321start2.gbapal"
+	.incbin "graphics/link_games/pkmnjump_321start2.gbapal"
 
 	.align 2
 gPkmnJump321StartGfx2:: @ 82FE778
-	.incbin "graphics/interface/pkmnjump_321start2.4bpp.lz"
+	.incbin "graphics/link_games/pkmnjump_321start2.4bpp.lz"
 
 	.align 2
 gUnknown_082FEBCC:: @ 82FEBCC

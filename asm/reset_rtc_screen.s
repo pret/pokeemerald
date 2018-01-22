@@ -887,7 +887,7 @@ _0809EFCA:
 	movs r1, 0x80
 	bl ResetOamRange
 	bl LoadOam
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl dp12_8087EA4
 	bl ResetSpriteData
 	bl ResetTasks

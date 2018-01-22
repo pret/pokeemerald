@@ -6948,7 +6948,7 @@ sub_81CA818: @ 81CA818
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_0861FC7A
+	ldr r5, =gUnknown_0861FC78 + 2
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r5, 0
@@ -6967,7 +6967,7 @@ sub_81CA818: @ 81CA818
 	thumb_func_start sub_81CA850
 sub_81CA850: @ 81CA850
 	push {lr}
-	ldr r0, =gUnknown_0861FC86
+	ldr r0, =gUnknown_0861FC78 + 0xE
 	movs r1, 0x31
 	movs r2, 0x4
 	bl sub_81C7944
@@ -6985,7 +6985,7 @@ sub_81CA864: @ 81CA864
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_0861FC86
+	ldr r5, =gUnknown_0861FC78 + 0xE
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r5, 0
@@ -7095,7 +7095,7 @@ titlescreen_0: @ 81CA92C
 	movs r0, 0x44
 	movs r1, 0xA0
 	bl SetGpuRegBits
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl sub_81CAA3C
 	ldr r2, =gUnknown_08620384
 	ldr r0, [r2]
@@ -7122,7 +7122,7 @@ sub_81CA994: @ 81CA994
 	lsls r1, 6
 	movs r0, 0
 	bl ClearGpuRegBits
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	ldr r0, =sub_81CA9EC
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -26754,7 +26754,7 @@ _081D4368:
 	b _081D449E
 _081D4394:
 	movs r3, 0
-	ldr r1, =gUnknown_0862608E
+	ldr r1, =gUnknown_0862608C + 2
 	adds r0, r7, r1
 	movs r2, 0x16
 	ldrsh r1, [r4, r2]
@@ -26887,7 +26887,7 @@ _081D449E:
 	mov r3, r10
 	adds r4, r0, r3
 	ldr r6, =gUnknown_0862608C
-	ldr r1, =gUnknown_0862608E
+	ldr r1, =gUnknown_0862608C + 2
 	adds r0, r7, r1
 	movs r3, 0x16
 	ldrsh r1, [r4, r3]

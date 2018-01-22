@@ -423,7 +423,7 @@ _081405F4:
 _08140618:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	bl SetVBlankHBlankCallbacksToNull
 	bl ResetVramOamAndBgCntRegs
 	bl ResetAllBgsCoordinates

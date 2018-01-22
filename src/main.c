@@ -29,7 +29,7 @@ extern void MapMusicMain(void);
 extern void EnableInterrupts(u16);
 extern void sub_8033648(void);
 extern u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
-extern void remove_some_task(void);
+extern void ScanlineEffect_Stop(void);
 
 extern struct SoundInfo gSoundInfo;
 extern u32 gFlashMemoryPresent;
@@ -425,7 +425,7 @@ void DoSoftReset(void)
 {
     REG_IME = 0;
     m4aSoundVSyncOff();
-    remove_some_task();
+    ScanlineEffect_Stop();
     DmaStop(1);
     DmaStop(2);
     DmaStop(3);

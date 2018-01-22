@@ -468,7 +468,7 @@ _08178D74:
 	bne _08178E58
 	ldr r5, =0x0201c000
 	adds r0, r5, 0
-	bl sub_81538A0
+	bl RunMysteryEventScript
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
