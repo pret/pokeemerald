@@ -30,7 +30,11 @@ LDFLAGS = -Map ../../$(MAP)
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
-LIB    := -L ../../tools/agbcc/lib -lgcc -lc
+ifeq ($(OS),Windows_NT)
+  LIB := ../../tools/agbcc/lib/libgcc.a ../../tools/agbcc/lib/libc.a
+else
+  LIB := -L ../../tools/agbcc/lib -lgcc -lc
+endif
 
 SHA1 := sha1sum -c
 
