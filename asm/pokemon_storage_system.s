@@ -233,7 +233,7 @@ _080C72AC:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0xFF
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -339,7 +339,7 @@ _080C7392:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	b _080C756A
 	.pool
 _080C73D0:
@@ -509,7 +509,7 @@ _080C7532:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	strh r4, [r5, 0x8]
 	b _080C756A
 	.pool

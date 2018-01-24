@@ -532,7 +532,7 @@ static void DisplaySentToPCMessage(void)
     StringExpandPlaceholders(gStringVar4, gUnknown_0858BDB8[stringToDisplay]);
     sub_81973C4(0, 0);
     gTextFlags.flag_0 = TRUE;
-    AddTextPrinterParametrized(0, 1, gStringVar4, GetPlayerTextSpeed(), 0, 2, 1, 3);
+    AddTextPrinterParameterized(0, 1, gStringVar4, GetPlayerTextSpeed(), 0, 2, 1, 3);
     CopyWindowToVram(0, 3);
 }
 

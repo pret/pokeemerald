@@ -500,7 +500,7 @@ void sub_8126B80(u8 taskId)
 void sub_8126C08(void)
 {
     FillWindowPixelBuffer(0, 0x11);
-    AddTextPrinterParametrized(0, 1, sSecretBasePCMenuItemDescriptions[sSecretBasePCMenuCursorPos], 0, 0, 2, 1, 3);
+    AddTextPrinterParameterized(0, 1, sSecretBasePCMenuItemDescriptions[sSecretBasePCMenuCursorPos], 0, 0, 2, 1, 3);
 }
 
 void SecretBasePC_Decorate(u8 taskId)

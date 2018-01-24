@@ -4609,7 +4609,7 @@ _080798BC:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	adds r0, r5, 0
@@ -14296,7 +14296,7 @@ sub_807F1A8: @ 807F1A8
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x2
-	bl AddTextPrinterParametrized2
+	bl AddTextPrinterParameterized2
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

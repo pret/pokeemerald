@@ -877,7 +877,7 @@ ScriptMenu_DisplayPCStartupPrompt: @ 80E2514
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	add sp, 0x10
 	pop {r0}
 	bx r0
@@ -1606,7 +1606,7 @@ _080E2B12:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 	b _080E2B70
 	.pool
 _080E2B40:
@@ -1630,7 +1630,7 @@ _080E2B40:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl AddTextPrinterParametrized
+	bl AddTextPrinterParameterized
 _080E2B70:
 	add sp, 0x10
 	pop {r4}

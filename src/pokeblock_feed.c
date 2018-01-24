@@ -792,7 +792,7 @@ static void Task_HandleMonAtePokeblock(u8 taskId)
         StringExpandPlaceholders(gStringVar4, gText_Var1DisdainfullyAteVar2);
 
     gTextFlags.flag_0 = 1;
-    AddTextPrinterParametrized(0, 1, gStringVar4, GetPlayerTextSpeed(), NULL, 2, 1, 3);
+    AddTextPrinterParameterized(0, 1, gStringVar4, GetPlayerTextSpeed(), NULL, 2, 1, 3);
     gTasks[taskId].func = Task_WaitForAtePokeblockText;
 }
 
