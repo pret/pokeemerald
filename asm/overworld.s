@@ -6698,7 +6698,7 @@ _08087C38:
 	lsls r1, 30
 	lsrs r1, 31
 	movs r0, 0
-	bl sub_808BD3C
+	bl GetRivalAvatarGraphicsIdByStateIdAndGender
 _08087C44:
 	lsls r0, 24
 	lsrs r0, 24

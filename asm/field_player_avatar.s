@@ -2602,8 +2602,8 @@ _0808BD2C:
 	.pool
 	thumb_func_end sub_808BCF4
 
-	thumb_func_start sub_808BD3C
-sub_808BD3C: @ 808BD3C
+	thumb_func_start GetRivalAvatarGraphicsIdByStateIdAndGender
+GetRivalAvatarGraphicsIdByStateIdAndGender: @ 808BD3C
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
@@ -2614,7 +2614,7 @@ sub_808BD3C: @ 808BD3C
 	ldrb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_808BD3C
+	thumb_func_end GetRivalAvatarGraphicsIdByStateIdAndGender
 
 	thumb_func_start GetPlayerAvatarGraphicsIdByStateIdAndGender
 @ u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 stateId, u8 gender)

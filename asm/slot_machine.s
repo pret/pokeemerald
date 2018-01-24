@@ -8934,7 +8934,7 @@ sub_812EB48: @ 812EB48
 	ldrb r3, [r1]
 	adds r1, r3, 0
 	adds r2, r3, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r0, [r4, 0x38]
 	adds r0, 0x1
 	movs r1, 0x1
@@ -8979,7 +8979,7 @@ sub_812EBCC: @ 812EBCC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	movs r4, 0
 _0812EBEA:
 	ldr r0, =gUnknown_0203AB34
