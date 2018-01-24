@@ -27,14 +27,10 @@
 #include "text_window.h"
 #include "overworld.h"
 
-extern EWRAM_DATA struct NamingScreenData *gNamingScreenData;
+EWRAM_DATA static struct NamingScreenData *gNamingScreenData = NULL;
 extern u16 gKeyRepeatStartDelay;
 
-// graphics
-static const u8 gSpriteImage_858BBF8[] = INCBIN_U8("graphics/naming_screen/pc_icon/0.4bpp");
-static const u8 gSpriteImage_858BCB8[] = INCBIN_U8("graphics/naming_screen/pc_icon/1.4bpp");
-const u16 gUnknown_0858BD78[] = INCBIN_U16("graphics/naming_screen/0.gbapal");
-static const u16 gUnknown_0858BD98[] = INCBIN_U16("graphics/naming_screen/1.gbapal");
+// extern graphics
 extern const u16 gNamingScreenMenu_Pal[];
 extern const u8 gNamingScreenMenu_Gfx[];
 extern const u8 gUnknown_08DD4544[];
@@ -48,7 +44,7 @@ extern const u8 gNamingScreenCursor_Gfx[];
 extern const u8 gNamingScreenRightPointingTriangleTiles[];
 extern const u8 gNamingScreenUnderscoreTiles[];
 
-// text
+// extern text
 extern const u8 gExpandedPlaceholder_Empty[];
 extern const u8 gText_PkmnTransferredSomeonesPC[];
 extern const u8 gText_PkmnTransferredLanettesPC[];
@@ -61,6 +57,11 @@ extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
 
 // start of .rodata
+static const u8 gSpriteImage_858BBF8[] = INCBIN_U8("graphics/naming_screen/pc_icon/0.4bpp");
+static const u8 gSpriteImage_858BCB8[] = INCBIN_U8("graphics/naming_screen/pc_icon/1.4bpp");
+static const u16 gUnknown_0858BD78[] = INCBIN_U16("graphics/naming_screen/0.gbapal");
+static const u16 gUnknown_0858BD98[] = INCBIN_U16("graphics/naming_screen/1.gbapal");
+
 static const u8 *const gUnknown_0858BDB8[] = 
 {
     gText_PkmnTransferredSomeonesPC,
