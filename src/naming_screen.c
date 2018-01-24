@@ -292,13 +292,13 @@ static void NamingScreen_Init(void)
     gNamingScreenData->bgToReveal = 0;
     gNamingScreenData->bgToHide = 1;
     gNamingScreenData->template = sNamingScreenTemplates[gNamingScreenData->templateNum];
-    gNamingScreenData->currentPage = gNamingScreenData->template->unk4;
+    gNamingScreenData->currentPage = gNamingScreenData->template->initialPage;
     gNamingScreenData->inputCharBaseXPos = (240 - gNamingScreenData->template->maxChars * 8) / 2 + 6;
     if (gNamingScreenData->templateNum == 4)
         gNamingScreenData->inputCharBaseXPos += 11;
     gNamingScreenData->keyRepeatStartDelayCopy = gKeyRepeatStartDelay;
     memset(gNamingScreenData->textBuffer, 0xFF, sizeof(gNamingScreenData->textBuffer));
-    if (gNamingScreenData->template->unk0 != 0)
+    if (gNamingScreenData->template->copyExistingString != 0)
         StringCopy(gNamingScreenData->textBuffer, gNamingScreenData->destBuffer);
     gKeyRepeatStartDelay = 16;
 }
@@ -1488,7 +1488,7 @@ static void (*const gUnknown_0858BF6C[])(void) =
 
 static void sub_80E498C(void)
 {
-    gUnknown_0858BF6C[gNamingScreenData->template->unk3]();
+    gUnknown_0858BF6C[gNamingScreenData->template->addGenderIcon]();
 }
 
 static void TaskDummy3(void)
@@ -1824,53 +1824,45 @@ static void sub_80E50EC(void)
 
 static const struct NamingScreenTemplate playerNamingScreenTemplate =
 {
-    .unk0 = 0,
+    .copyExistingString = 0,
     .maxChars = 7,
     .iconFunction = 1,
-    .unk3 = 0,
-    .unk4 = 1,
-    .unk5 = 35,
-    .unk6 = 0,
-    .unk7 = 0,
+    .addGenderIcon = 0,
+    .initialPage = 1,
+    .unused = 35,
     .title = gText_YourName,
 };
 
 static const struct NamingScreenTemplate pcBoxNamingTemplate =
 {
-    .unk0 = 0,
+    .copyExistingString = 0,
     .maxChars = 8,
     .iconFunction = 2,
-    .unk3 = 0,
-    .unk4 = 1,
-    .unk5 = 19,
-    .unk6 = 0,
-    .unk7 = 0,
+    .addGenderIcon = 0,
+    .initialPage = 1,
+    .unused = 19,
     .title = gText_BoxName,
 };
 
 static const struct NamingScreenTemplate monNamingScreenTemplate =
 {
-    .unk0 = 0,
+    .copyExistingString = 0,
     .maxChars = 10,
     .iconFunction = 3,
-    .unk3 = 1,
-    .unk4 = 1,
-    .unk5 = 35,
-    .unk6 = 0,
-    .unk7 = 0,
+    .addGenderIcon = 1,
+    .initialPage = 1,
+    .unused = 35,
     .title = gText_PkmnsNickname,
 };
 
 static const struct NamingScreenTemplate wandaWordsScreenTemplate =
 {
-    .unk0 = 1,
+    .copyExistingString = 1,
     .maxChars = 15,
     .iconFunction = 4,
-    .unk3 = 0,
-    .unk4 = 1,
-    .unk5 = 11,
-    .unk6 = 0,
-    .unk7 = 0,
+    .addGenderIcon = 0,
+    .initialPage = 1,
+    .unused = 11,
     .title = gText_TellHimTheWords,
 };
 

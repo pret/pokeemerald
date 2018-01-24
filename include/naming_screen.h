@@ -20,14 +20,12 @@ enum
 
 struct NamingScreenTemplate
 {
-    u8 unk0;
+    u8 copyExistingString;
     u8 maxChars;
     u8 iconFunction;
-    u8 unk3;
-    u8 unk4;  //mode?
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
+    u8 addGenderIcon;
+    u8 initialPage;
+    u8 unused;
     const u8 *title;
 };
 
