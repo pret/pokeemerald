@@ -540,8 +540,7 @@ SECTIONS {
         data/trainer_rematch.o(.rodata);
         data/unk_transition.o(.rodata);
         src/unk_transition.o(.rodata);
-        data/naming_screen_strings.o(.rodata);
-        data/link_strings.o(.rodata);
+        data/text_input_strings.o(.rodata);
         data/fonts.o(.rodata);
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);

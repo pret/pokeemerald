@@ -1738,10 +1738,10 @@ static void sub_80E4E5C(void)
 
 static void sub_80E4EF0(void)
 {
-    const u8 arr[] = { 15, 1, 2 };
+    const struct TextColor color[] = { 15, 1, 2 };
     
     FillWindowPixelBuffer(gNamingScreenData->windows[4], 0xFF);
-    box_print(gNamingScreenData->windows[4], 0, 2, 1, arr, 0, gText_MoveOkBack);
+    box_print(gNamingScreenData->windows[4], 0, 2, 1, color, 0, gText_MoveOkBack);
     PutWindowTilemap(gNamingScreenData->windows[4]);
     CopyWindowToVram(gNamingScreenData->windows[4], 3);
 }
