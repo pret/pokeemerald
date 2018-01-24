@@ -646,7 +646,7 @@ _080776E2:
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -705,7 +705,7 @@ _08077756:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E
@@ -1264,7 +1264,7 @@ _08077CA8:
 	str r1, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x28
@@ -1323,7 +1323,7 @@ _08077D1E:
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
 	ldr r1, =sub_80D3014
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x2E

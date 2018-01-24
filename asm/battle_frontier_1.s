@@ -7096,7 +7096,7 @@ _081926B0:
 	movs r1, 0x1
 	str r1, [sp, 0x8]
 	ldr r1, =sub_8190938
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	ldr r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
@@ -8779,7 +8779,7 @@ _081934B0:
 	mov r1, r10
 	str r1, [sp, 0x8]
 	ldr r1, =sub_8190938
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	ldr r1, [r6]
 	adds r1, r4
 	strb r0, [r1]
@@ -8927,7 +8927,7 @@ _081935FA:
 	movs r1, 0x1
 	str r1, [sp, 0x8]
 	ldr r1, =sub_8190938
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	ldr r1, [r6]
 	adds r1, r4
 	strb r0, [r1]

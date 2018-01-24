@@ -764,8 +764,8 @@ _080B608E:
 	bx r0
 	thumb_func_end sub_80B6070
 
-	thumb_func_start sub_80B609C
-sub_80B609C: @ 80B609C
+	thumb_func_start MultiplyInvertedPaletteRGBComponents
+MultiplyInvertedPaletteRGBComponents: @ 80B609C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -832,7 +832,7 @@ sub_80B609C: @ 80B609C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80B609C
+	thumb_func_end MultiplyInvertedPaletteRGBComponents
 
 	thumb_func_start sub_80B6128
 sub_80B6128: @ 80B6128
@@ -1469,7 +1469,7 @@ _080B65D8:
 	mov r9, r3
 	add r4, r9
 	ldrb r3, [r4]
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r4, [r7, 0x32]
 	adds r4, 0x2
 	mov r0, r8
@@ -1488,7 +1488,7 @@ _080B65D8:
 	ldrb r2, [r2]
 	add r4, r9
 	ldrb r3, [r4]
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r4, [r7, 0x32]
 	adds r4, 0x1
 	mov r3, r8
@@ -1507,7 +1507,7 @@ _080B65D8:
 	ldrb r2, [r2]
 	add r4, r9
 	ldrb r3, [r4]
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r4, [r7, 0x32]
 	lsls r4, 24
 	lsrs r4, 24
@@ -1527,7 +1527,7 @@ _080B65D8:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	mov r0, r10
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1538,7 +1538,7 @@ _080B65D8:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	movs r3, 0x34
 	ldrsh r0, [r7, r3]
 	cmp r0, 0x2
@@ -1612,7 +1612,7 @@ _080B6718:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	mov r0, r8
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1624,7 +1624,7 @@ _080B6718:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	mov r0, r8
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1636,7 +1636,7 @@ _080B6718:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	mov r0, r8
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1647,7 +1647,7 @@ _080B6718:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	mov r0, r8
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1658,7 +1658,7 @@ _080B6718:
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_80B609C
+	bl MultiplyInvertedPaletteRGBComponents
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}

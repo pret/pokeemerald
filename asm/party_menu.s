@@ -10415,7 +10415,7 @@ party_menu_link_mon_icon_anim: @ 81B5A2C
 	ldr r0, [sp, 0x20]
 	str r0, [sp, 0x8]
 	adds r0, r5, 0
-	bl sub_80D2CC4
+	bl CreateMonIcon
 	strb r0, [r4, 0x9]
 	ldr r2, =gSprites
 	ldrb r0, [r4, 0x9]

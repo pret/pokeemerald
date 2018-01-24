@@ -5,9 +5,9 @@
 
 	.text
 
-	thumb_func_start sub_80D2CC4
-@ int sub_80D2CC4(u16 speciesId, int a2, u16 a3, u16 a4, u8 a5, u32 personality, int a7)
-sub_80D2CC4: @ 80D2CC4
+	thumb_func_start CreateMonIcon
+@ int CreateMonIcon(u16 speciesId, int a2, u16 a3, u16 a4, u8 a5, u32 personality, int a7)
+CreateMonIcon: @ 80D2CC4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -84,7 +84,7 @@ _080D2D2A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80D2CC4
+	thumb_func_end CreateMonIcon
 
 	thumb_func_start sub_80D2D78
 sub_80D2D78: @ 80D2D78

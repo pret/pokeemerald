@@ -147,7 +147,7 @@ SECTIONS {
         asm/shop.o(.text);
         src/berry.o(.text);
         asm/script_menu.o(.text);
-        asm/naming_screen.o(.text);
+        src/naming_screen.o(.text);
         src/money.o(.text);
         asm/contest_effect.o(.text);
         asm/record_mixing.o(.text);
@@ -440,7 +440,7 @@ SECTIONS {
         data/shop.o(.rodata);
         src/berry.o(.rodata);
         data/script_menu.o(.rodata);
-        data/naming_screen.o(.rodata);
+        src/naming_screen.o(.rodata);
         src/money.o(.rodata);
         data/contest_effect.o(.rodata);
         data/record_mixing.o(.rodata);
