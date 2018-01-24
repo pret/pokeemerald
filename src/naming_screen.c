@@ -26,6 +26,7 @@
 #include "menu.h"
 #include "text_window.h"
 #include "overworld.h"
+#include "constants/map_objects.h"
 
 EWRAM_DATA static struct NamingScreenData *gNamingScreenData = NULL;
 extern u16 gKeyRepeatStartDelay;
@@ -55,6 +56,19 @@ extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
+extern const u8 gUnknown_0862B88D[];
+extern const u8 gUnknown_0862B8AE[];
+extern const u8 gUnknown_0862B8CF[];
+extern const u8 gUnknown_0862B8F0[];
+extern const u8 gUnknown_0862B911[];
+extern const u8 gUnknown_0862B932[];
+extern const u8 gUnknown_0862B953[];
+extern const u8 gUnknown_0862B974[];
+extern const u8 gUnknown_0862B995[];
+extern const u8 gUnknown_0862B9AE[];
+extern const u8 gUnknown_0862B9C7[];
+extern const u8 gUnknown_0862B9E0[];
+
 
 // start of .rodata
 static const u8 gSpriteImage_858BBF8[] = INCBIN_U8("graphics/naming_screen/pc_icon/0.4bpp");
@@ -126,8 +140,8 @@ static const struct SpriteTemplate gUnknown_0858C0F0;
 static const struct SpriteTemplate gUnknown_0858C108;
 static const struct SpriteTemplate gUnknown_0858C120;
 static const struct SpriteTemplate gUnknown_0858C138;
-static const struct SpriteTemplate gUnknown_0858C150;
-static const struct SpriteTemplate gUnknown_0858C168;
+static const struct SpriteTemplate sSpriteTemplate_InputArrow;
+static const struct SpriteTemplate sSpriteTemplate_Underscore;
 static const struct SpriteTemplate gUnknown_0858C180;
 static const u8* const gUnknown_0858C198[][4];
 static const struct SpriteSheet gUnknown_0858C1C8[];
@@ -135,7 +149,7 @@ static const struct SpritePalette gUnknown_0858C230[];
 
 static void C2_NamingScreen(void);
 static void NamingScreen_Init(void);
-static void choose_name_or_words_screen_init_bgs(void);
+static void NamingScreen_InitBGs(void);
 static void sub_80E3194(void);
 static void sub_80E31B0(u8 taskId);
 static bool8 MainState_BeginFadeIn(void);
@@ -166,12 +180,12 @@ static void sub_80E3E3C(u8);
 static void sub_80E3E94(u8);
 static u8 IsCursorAnimFinished(void);
 static u8 GetCurrentPageColumnCount(void);
-static void sub_80E3F8C(void);
+static void CreatePageSwitcherSprites(void);
 static void sub_80E4050(void);
 static void sub_80E41B8(u8, struct Sprite *, struct Sprite *);
-static void sub_80E4218(void);
-static void sub_80E4290(void);
-static void sub_80E4354(void);
+static void CreateBackOkSprites(void);
+static void CreateUnderscoreSprites(void);
+static void CreateInputTargetIcon(void);
 static u8 HandleKeyboardEvent(void);
 static u8 sub_80E45E0(void);
 static u8 GetInputEvent(void);
@@ -208,9 +222,9 @@ void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGende
     else
     {
         gNamingScreenData->templateNum = templateNum;
-        gNamingScreenData->unk1E34 = monSpecies;
-        gNamingScreenData->unk1E36 = monGender;
-        gNamingScreenData->unk1E38 = monPersonality;
+        gNamingScreenData->monSpecies = monSpecies;
+        gNamingScreenData->monGender = monGender;
+        gNamingScreenData->monPersonality = monPersonality;
         gNamingScreenData->destBuffer = destBuffer;
         gNamingScreenData->returnCallback = returnCallback;
         
@@ -231,7 +245,7 @@ static void C2_NamingScreen(void)
         gMain.state++;
         break;
     case 1:
-        choose_name_or_words_screen_init_bgs();
+        NamingScreen_InitBGs();
         gMain.state++;
         break;
     case 2:
@@ -273,16 +287,16 @@ static void NamingScreen_Init(void)
     gNamingScreenData->state = 0;
     gNamingScreenData->bg1vOffset = 0;
     gNamingScreenData->bg2vOffset = 0;
-    gNamingScreenData->unk1E1C = 1;
-    gNamingScreenData->unk1E1E = 2;
-    gNamingScreenData->unk1E20 = 0;
-    gNamingScreenData->unk1E21 = 1;
+    gNamingScreenData->bg1Priority = BGCNT_PRIORITY(1);
+    gNamingScreenData->bg2Priority = BGCNT_PRIORITY(2);
+    gNamingScreenData->bgToReveal = 0;
+    gNamingScreenData->bgToHide = 1;
     gNamingScreenData->template = sNamingScreenTemplates[gNamingScreenData->templateNum];
     gNamingScreenData->currentPage = gNamingScreenData->template->unk4;
-    gNamingScreenData->unk1E16 = (240 - gNamingScreenData->template->maxChars * 8) / 2 + 6;
+    gNamingScreenData->inputCharBaseXPos = (240 - gNamingScreenData->template->maxChars * 8) / 2 + 6;
     if (gNamingScreenData->templateNum == 4)
-        gNamingScreenData->unk1E16 += 11;
-    gNamingScreenData->unk1E25 = gKeyRepeatStartDelay;
+        gNamingScreenData->inputCharBaseXPos += 11;
+    gNamingScreenData->keyRepeatStartDelayCopy = gKeyRepeatStartDelay;
     memset(gNamingScreenData->textBuffer, 0xFF, sizeof(gNamingScreenData->textBuffer));
     if (gNamingScreenData->template->unk0 != 0)
         StringCopy(gNamingScreenData->textBuffer, gNamingScreenData->destBuffer);
@@ -300,7 +314,7 @@ static void sub_80E2FA4(void)
     sub_80E3E3C(0);
 }
 
-static void choose_name_or_words_screen_init_bgs(void)
+static void NamingScreen_InitBGs(void)
 {
     u8 i;
     
@@ -636,14 +650,14 @@ static bool8 PageSwapAnimState_1(struct Task *task)
     };
 
     task->tFrameCount += 4;
-    *arr[gNamingScreenData->unk1E20] = Sin(task->tFrameCount, 40);
-    *arr[gNamingScreenData->unk1E21] = Sin((task->tFrameCount + 128) & 0xFF, 40);
+    *arr[gNamingScreenData->bgToReveal] = Sin(task->tFrameCount, 40);
+    *arr[gNamingScreenData->bgToHide] = Sin((task->tFrameCount + 128) & 0xFF, 40);
     if (task->tFrameCount >= 64)
     {
-        u8 temp = gNamingScreenData->unk1E1C;  //Why u8 and not u16?
+        u8 temp = gNamingScreenData->bg1Priority;  //Why u8 and not u16?
 
-        gNamingScreenData->unk1E1C = gNamingScreenData->unk1E1E;
-        gNamingScreenData->unk1E1E = temp;
+        gNamingScreenData->bg1Priority = gNamingScreenData->bg2Priority;
+        gNamingScreenData->bg2Priority = temp;
         task->tState++;
     }
     return 0;
@@ -651,17 +665,21 @@ static bool8 PageSwapAnimState_1(struct Task *task)
 
 static bool8 PageSwapAnimState_2(struct Task *task)
 {
-    u16 *const arr[] = {&gNamingScreenData->bg2vOffset, &gNamingScreenData->bg1vOffset};
+    u16 *const arr[] =
+    {
+        &gNamingScreenData->bg2vOffset,
+        &gNamingScreenData->bg1vOffset
+    };
 
     task->tFrameCount += 4;
-    *arr[gNamingScreenData->unk1E20] = Sin(task->tFrameCount, 40);
-    *arr[gNamingScreenData->unk1E21] = Sin((task->tFrameCount + 128) & 0xFF, 40);
+    *arr[gNamingScreenData->bgToReveal] = Sin(task->tFrameCount, 40);
+    *arr[gNamingScreenData->bgToHide] = Sin((task->tFrameCount + 128) & 0xFF, 40);
     if (task->tFrameCount >= 128)
     {
-        u8 temp = gNamingScreenData->unk1E20;
+        u8 temp = gNamingScreenData->bgToReveal;
 
-        gNamingScreenData->unk1E20 = gNamingScreenData->unk1E21;
-        gNamingScreenData->unk1E21 = temp;
+        gNamingScreenData->bgToReveal = gNamingScreenData->bgToHide;
+        gNamingScreenData->bgToHide = temp;
         task->tState++;
     }
     return 0;
@@ -856,10 +874,10 @@ static void sub_80E3C6C(struct Sprite *sprite)
 static void sub_80E3CC8(void)
 {
     CursorInit();
-    sub_80E3F8C();
-    sub_80E4218();
-    sub_80E4290();
-    sub_80E4354();
+    CreatePageSwitcherSprites();
+    CreateBackOkSprites();
+    CreateUnderscoreSprites();
+    CreateInputTargetIcon();
 }
 
 static void CursorInit(void)
@@ -952,14 +970,14 @@ static u8 GetCurrentPageColumnCount(void)
     return gUnknown_0858BEA0[sub_80E3274()];
 }
 
-static void sub_80E3F8C(void)
+static void CreatePageSwitcherSprites(void)
 {
     u8 spriteId1;
     u8 spriteId2;
     u8 spriteId3;
 
     spriteId1 = CreateSprite(&gUnknown_0858C0C0, 0xCC, 0x58, 0);
-    gNamingScreenData->unk1E24 = spriteId1;
+    gNamingScreenData->selectBtnFrameSpriteId = spriteId1;
     SetSubspriteTables(&gSprites[spriteId1], gUnknown_0858C050);
     gSprites[spriteId1].invisible = TRUE;
 
@@ -976,7 +994,7 @@ static void sub_80E3F8C(void)
 
 static void sub_80E4050(void)
 {
-    struct Sprite *sprite = &gSprites[gNamingScreenData->unk1E24];
+    struct Sprite *sprite = &gSprites[gNamingScreenData->selectBtnFrameSpriteId];
 
     sprite->data[0] = 2;
     sprite->data[1] = gNamingScreenData->currentPage;
@@ -1057,7 +1075,7 @@ static void sub_80E41B8(u8 a, struct Sprite *b, struct Sprite *c)
 
 //
 
-static void sub_80E4218(void)
+static void CreateBackOkSprites(void)
 {
     u8 spriteId;
 
@@ -1070,46 +1088,48 @@ static void sub_80E4218(void)
     gSprites[spriteId].invisible = TRUE;
 }
 
-static void sub_80E4290(void)
+static void CreateUnderscoreSprites(void)
 {
     u8 spriteId;
-    s16 r1;
+    s16 xPos;
     u8 i;
 
-    r1 = gNamingScreenData->unk1E16 - 5;
-    spriteId = CreateSprite(&gUnknown_0858C150, r1, 0x38, 0);
+    xPos = gNamingScreenData->inputCharBaseXPos - 5;
+    spriteId = CreateSprite(&sSpriteTemplate_InputArrow, xPos, 0x38, 0);
     gSprites[spriteId].oam.priority = 3;
     gSprites[spriteId].invisible = TRUE;
-    r1 = gNamingScreenData->unk1E16;
-    for (i = 0; i < gNamingScreenData->template->maxChars; i++, r1 += 8)
+    xPos = gNamingScreenData->inputCharBaseXPos;
+    for (i = 0; i < gNamingScreenData->template->maxChars; i++, xPos += 8)
     {
-        spriteId = CreateSprite(&gUnknown_0858C168, r1 + 3, 0x3C, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_Underscore, xPos + 3, 0x3C, 0);
         gSprites[spriteId].oam.priority = 3;
         gSprites[spriteId].data[0] = i;
         gSprites[spriteId].invisible = TRUE;
     }
 }
 
-//
+//--------------------------------------------------
+// Icon creation (the thing you're naming or giving input to)
+//--------------------------------------------------
 
 static void TaskDummy2(void);
-static void sub_80E4384(void);
-static void sub_80E43E0(void);
-static void sub_80E4420(void);
-static void sub_80E447C(void);
+static void NamingScreen_CreatePlayerIcon(void);
+static void NamingScreen_CreatePCIcon(void);
+static void NamingScreen_CreateMonIcon(void);
+static void NamingScreen_CreateWandaDadIcon(void);
 
-static void (*const gUnknown_0858BF04[])(void) =
+static void (*const sIconFunctions[])(void) =
 {
     TaskDummy2,
-    sub_80E4384,
-    sub_80E43E0,
-    sub_80E4420,
-    sub_80E447C,
+    NamingScreen_CreatePlayerIcon,
+    NamingScreen_CreatePCIcon,
+    NamingScreen_CreateMonIcon,
+    NamingScreen_CreateWandaDadIcon,
 };
 
-static void sub_80E4354(void)
+static void CreateInputTargetIcon(void)
 {
-    gUnknown_0858BF04[gNamingScreenData->template->unk2]();
+    sIconFunctions[gNamingScreenData->template->iconFunction]();
 }
 
 static void TaskDummy2(void)
@@ -1117,18 +1137,18 @@ static void TaskDummy2(void)
     
 }
 
-static void sub_80E4384(void)
+static void NamingScreen_CreatePlayerIcon(void)
 {
     u8 rivalGfxId;
     u8 spriteId;
 
-    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, gNamingScreenData->unk1E34);
+    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, gNamingScreenData->monSpecies);
     spriteId = AddPseudoFieldObject(rivalGfxId, SpriteCallbackDummy, 0x38, 0x25, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
 }
 
-static void sub_80E43E0(void)
+static void NamingScreen_CreatePCIcon(void)
 {
     u8 spriteId;
 
@@ -1137,20 +1157,20 @@ static void sub_80E43E0(void)
     gSprites[spriteId].oam.priority = 3;
 }
 
-static void sub_80E4420(void)
+static void NamingScreen_CreateMonIcon(void)
 {
     u8 spriteId;
 
     sub_80D2F04();
-    spriteId = CreateMonIcon(gNamingScreenData->unk1E34, SpriteCallbackDummy, 0x38, 0x28, 0, gNamingScreenData->unk1E38, 1);
+    spriteId = CreateMonIcon(gNamingScreenData->monSpecies, SpriteCallbackDummy, 0x38, 0x28, 0, gNamingScreenData->monPersonality, 1);
     gSprites[spriteId].oam.priority = 3;
 }
 
-static void sub_80E447C(void)
+static void NamingScreen_CreateWandaDadIcon(void)
 {
     u8 spriteId;
 
-    spriteId = AddPseudoFieldObject(0x13, SpriteCallbackDummy, 0x38, 0x25, 0);
+    spriteId = AddPseudoFieldObject(MAP_OBJ_GFX_MAN_1, SpriteCallbackDummy, 0x38, 0x25, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
 }
@@ -1436,7 +1456,7 @@ static void sub_80E48E8(void)
 {
     u8 buffer[0x20];
     
-    StringCopy(buffer, gSpeciesNames[gNamingScreenData->unk1E34]);
+    StringCopy(buffer, gSpeciesNames[gNamingScreenData->monSpecies]);
     StringAppendN(buffer, gNamingScreenData->template->title, 15);
     FillWindowPixelBuffer(gNamingScreenData->windows[3], 0x11);
     PrintTextOnWindow(gNamingScreenData->windows[3], 1, buffer, 8, 1, 0, 0);
@@ -1489,9 +1509,9 @@ static void sub_80E49BC(void)
     
     StringCopy(genderSymbol, gText_MaleSymbol);
 
-    if (gNamingScreenData->unk1E36 != MON_GENDERLESS)
+    if (gNamingScreenData->monGender != MON_GENDERLESS)
     {
-        if (gNamingScreenData->unk1E36 == MON_FEMALE)
+        if (gNamingScreenData->monGender == MON_FEMALE)
         {
             StringCopy(genderSymbol, gText_FemaleSymbol);
             isFemale = TRUE;
@@ -1623,7 +1643,7 @@ static void sub_80E4D10(void)
     u8 temp[2];
     u16 unk2;
     u8 maxChars = gNamingScreenData->template->maxChars;
-    u16 unk = gNamingScreenData->unk1E16 - 0x40;
+    u16 unk = gNamingScreenData->inputCharBaseXPos - 0x40;
     
     FillWindowPixelBuffer(gNamingScreenData->windows[2], 0x11);
     
@@ -1753,9 +1773,9 @@ static void VBlankCB_NamingScreen(void)
     SetGpuReg(REG_OFFSET_BG1VOFS, gNamingScreenData->bg1vOffset);
     SetGpuReg(REG_OFFSET_BG2VOFS, gNamingScreenData->bg2vOffset);
     SetGpuReg(REG_OFFSET_BG1CNT, GetGpuReg(REG_OFFSET_BG1CNT) & 0xFFFC);
-    SetGpuRegBits(REG_OFFSET_BG1CNT, gNamingScreenData->unk1E1C);
+    SetGpuRegBits(REG_OFFSET_BG1CNT, gNamingScreenData->bg1Priority);
     SetGpuReg(REG_OFFSET_BG2CNT, GetGpuReg(REG_OFFSET_BG2CNT) & 0xFFFC);
-    SetGpuRegBits(REG_OFFSET_BG2CNT, gNamingScreenData->unk1E1E);
+    SetGpuRegBits(REG_OFFSET_BG2CNT, gNamingScreenData->bg2Priority);
 }
 
 static void sub_80E501C(void)
@@ -1806,7 +1826,7 @@ static const struct NamingScreenTemplate playerNamingScreenTemplate =
 {
     .unk0 = 0,
     .maxChars = 7,
-    .unk2 = 1,
+    .iconFunction = 1,
     .unk3 = 0,
     .unk4 = 1,
     .unk5 = 35,
@@ -1819,7 +1839,7 @@ static const struct NamingScreenTemplate pcBoxNamingTemplate =
 {
     .unk0 = 0,
     .maxChars = 8,
-    .unk2 = 2,
+    .iconFunction = 2,
     .unk3 = 0,
     .unk4 = 1,
     .unk5 = 19,
@@ -1832,7 +1852,7 @@ static const struct NamingScreenTemplate monNamingScreenTemplate =
 {
     .unk0 = 0,
     .maxChars = 10,
-    .unk2 = 3,
+    .iconFunction = 3,
     .unk3 = 1,
     .unk4 = 1,
     .unk5 = 35,
@@ -1845,7 +1865,7 @@ static const struct NamingScreenTemplate wandaWordsScreenTemplate =
 {
     .unk0 = 1,
     .maxChars = 15,
-    .unk2 = 4,
+    .iconFunction = 4,
     .unk3 = 0,
     .unk4 = 1,
     .unk5 = 11,
@@ -2079,7 +2099,7 @@ static const struct SpriteTemplate gUnknown_0858C138 =
     .callback = sub_80E3B30
 };
 
-static const struct SpriteTemplate gUnknown_0858C150 = 
+static const struct SpriteTemplate sSpriteTemplate_InputArrow = 
 {
     .tileTag = 0x000A,
     .paletteTag = 0x0003,
@@ -2090,7 +2110,7 @@ static const struct SpriteTemplate gUnknown_0858C150 =
     .callback = sub_80E3C20
 };
 
-static const struct SpriteTemplate gUnknown_0858C168 = 
+static const struct SpriteTemplate sSpriteTemplate_Underscore = 
 {
     .tileTag = 0x000B,
     .paletteTag = 0x0003,
@@ -2111,19 +2131,6 @@ static const struct SpriteTemplate gUnknown_0858C180 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
-
-extern const u8 gUnknown_0862B88D[];
-extern const u8 gUnknown_0862B8AE[];
-extern const u8 gUnknown_0862B8CF[];
-extern const u8 gUnknown_0862B8F0[];
-extern const u8 gUnknown_0862B911[];
-extern const u8 gUnknown_0862B932[];
-extern const u8 gUnknown_0862B953[];
-extern const u8 gUnknown_0862B974[];
-extern const u8 gUnknown_0862B995[];
-extern const u8 gUnknown_0862B9AE[];
-extern const u8 gUnknown_0862B9C7[];
-extern const u8 gUnknown_0862B9E0[];
 
 static const u8* const gUnknown_0858C198[][4] = 
 {

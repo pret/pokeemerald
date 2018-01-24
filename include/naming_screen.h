@@ -22,7 +22,7 @@ struct NamingScreenTemplate
 {
     u8 unk0;
     u8 maxChars;
-    u8 unk2;
+    u8 iconFunction;
     u8 unk3;
     u8 unk4;  //mode?
     u8 unk5;
@@ -39,23 +39,23 @@ struct NamingScreenData {
  /*0x1810*/ u8 tileBuffer[0x600];
  /*0x1E10*/ u8 state;
  /*0x1E11*/ u8 windows[5];
- /*0x1E16*/ u16 unk1E16;
+ /*0x1E16*/ u16 inputCharBaseXPos;
  /*0x1E18*/ u16 bg1vOffset;
  /*0x1E1A*/ u16 bg2vOffset;
- /*0x1E1C*/ u16 unk1E1C;
- /*0x1E1E*/ u16 unk1E1E;
- /*0x1E20*/ u8 unk1E20;
- /*0x1E21*/ u8 unk1E21;
+ /*0x1E1C*/ u16 bg1Priority;
+ /*0x1E1E*/ u16 bg2Priority;
+ /*0x1E20*/ u8 bgToReveal;
+ /*0x1E21*/ u8 bgToHide;
  /*0x1E22*/ u8 currentPage;
  /*0x1E23*/ u8 cursorSpriteId;
- /*0x1E24*/ u8 unk1E24;
- /*0x1E25*/ u8 unk1E25;
+ /*0x1E24*/ u8 selectBtnFrameSpriteId;
+ /*0x1E25*/ u8 keyRepeatStartDelayCopy;
  /*0x1E28*/ const struct NamingScreenTemplate *template;
  /*0x1E2C*/ u8 templateNum;
  /*0x1E30*/ u8 *destBuffer;
- /*0x1E34*/ u16 unk1E34;
- /*0x1E36*/ u16 unk1E36;
- /*0x1E38*/ u32 unk1E38;
+ /*0x1E34*/ u16 monSpecies;
+ /*0x1E36*/ u16 monGender;
+ /*0x1E38*/ u32 monPersonality;
  /*0x1E3C*/ MainCallback returnCallback;
 };
 
